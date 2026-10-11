@@ -1,0 +1,19 @@
+6:03:09 PM - Projects in this build:
+    * tsconfig.app.json
+    * tsconfig.node.json
+    * tsconfig.test.json
+    * tsconfig.json
+
+6:03:09 PM - Project 'tsconfig.app.json' is out of date because output file 'node_modules/.tmp/tsconfig.app.tsbuildinfo' does not exist
+
+6:03:09 PM - Building project '<worktree>/editor/ui/tsconfig.app.json'...
+
+6:03:10 PM - Project 'tsconfig.node.json' is out of date because output file 'node_modules/.tmp/tsconfig.node.tsbuildinfo' does not exist
+
+6:03:10 PM - Building project '<worktree>/editor/ui/tsconfig.node.json'...
+
+6:03:11 PM - Project 'tsconfig.test.json' is out of date because output file 'node_modules/.tmp/tsconfig.test.tsbuildinfo' does not exist
+
+6:03:11 PM - Building project '<worktree>/editor/ui/tsconfig.test.json'...
+
+exit=0

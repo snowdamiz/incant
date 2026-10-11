@@ -1,0 +1,11 @@
+
+ RUN  v5.0.3 <worktree>/editor/ui
+
+ ✓ src/test/approval-history.review.test.tsx > exact integrated candidate approval readiness > observes an enabled Allow during the native Undo barrier and its rejected request 153ms
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  17:49:02
+   Duration  1.16s (environment 39%, transform 30%, tests 14%, setup 9%, import 8%)
+
+exit=0

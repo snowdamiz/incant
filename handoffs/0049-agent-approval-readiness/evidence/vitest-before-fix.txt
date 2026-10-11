@@ -1,0 +1,89 @@
+
+ RUN  v5.0.3 <worktree>/editor/ui
+
+ × src/components/agent/AgentApprovalReadiness.test.tsx > Approval readiness on the real native bridge (deferred IPC) > holds Allow and Deny through history.undo and the fresh session read, then sends the real decision 151ms
+   → expected null to be 'Waiting for the agent to update its s…' // Object.is equality
+ × src/components/agent/AgentApprovalReadiness.test.tsx > Approval readiness on the real native bridge (deferred IPC) > holds Allow and Deny through history.redo and the fresh session read, then sends the real decision 53ms
+   → expected null to be 'Waiting for the agent to update its s…' // Object.is equality
+ × src/components/agent/AgentApprovalReadiness.test.tsx > Approval readiness on the real native bridge (deferred IPC) > keeps Stop usable while decisions wait, and stops the turn by its ID 33ms
+   → expected null to be 'Waiting for the agent to update its s…' // Object.is equality
+ ✓ src/components/agent/AgentApprovalReadiness.test.tsx > Approval readiness on the real native bridge (deferred IPC) > keeps the more precise reason after the pane’s own allowance save 198ms
+ ✓ src/components/agent/AgentApprovalReadiness.test.tsx > Approval readiness on the real native bridge (deferred IPC) > keeps the more precise reason after a sign-out 83ms
+ ✓ src/components/agent/AgentApprovalReadiness.test.tsx > Approval readiness on the real native bridge (deferred IPC) > keeps the more precise reason after a failed session read 61ms
+ × src/components/agent/AgentApprovalReadiness.test.tsx > Approval readiness reported by the host (test double) > holds Allow and Deny while the host is not ready, even with matching allowances, until it is 33ms
+   → expected null to be 'Waiting for the agent to update its s…' // Object.is equality
+ ✓ src/components/agent/AgentApprovalReadiness.test.tsx > Approval readiness reported by the host (test double) > keeps decisions usable on an older host that does not report readiness 63ms
+ ✓ src/components/agent/AgentApprovalReadiness.test.tsx > Approval readiness reported by the host (test double) > keeps the more precise reason when the host is also not ready: signed out 56ms
+ ✓ src/components/agent/AgentApprovalReadiness.test.tsx > Approval readiness reported by the host (test double) > keeps the more precise reason when the host is also not ready: after a transport failure 53ms
+ ✓ src/components/agent/AgentApprovalReadiness.test.tsx > Approval readiness reported by the host (test double) > keeps the more precise reason when the host is also not ready: while the session’s allowance lags the project’s 41ms
+ ✓ src/components/agent/AgentApprovalReadiness.test.tsx > Approval readiness reported by the host (test double) > keeps naming a decision this host cannot make at all 16ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/components/agent/AgentApprovalReadiness.test.tsx > Approval readiness on the real native bridge (deferred IPC) > holds Allow and Deny through history.undo and the fresh session read, then sends the real decision
+ FAIL  src/components/agent/AgentApprovalReadiness.test.tsx > Approval readiness on the real native bridge (deferred IPC) > holds Allow and Deny through history.redo and the fresh session read, then sends the real decision
+AssertionError: expected null to be 'Waiting for the agent to update its s…' // Object.is equality
+
+- Expected:
+"Waiting for the agent to update its session. You can still stop the agent."
+
++ Received:
+null
+
+ ❯ expectHeld src/components/agent/AgentApprovalReadiness.test.tsx:187:18
+    185| function expectHeld(bridge: NativeBridge, reason: string) {
+    186|   expect(bridge.getSnapshot().agent).toMatchObject({ status: 'running'…
+    187|   expect(note()).toBe(reason);
+       |                  ^
+    188|   expect(decisions()).toEqual(['true', 'true']);
+    189|   expect(button('Stop').getAttribute('aria-disabled')).toBeNull();
+ ❯ src/components/agent/AgentApprovalReadiness.test.tsx:208:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  src/components/agent/AgentApprovalReadiness.test.tsx > Approval readiness on the real native bridge (deferred IPC) > keeps Stop usable while decisions wait, and stops the turn by its ID
+AssertionError: expected null to be 'Waiting for the agent to update its s…' // Object.is equality
+
+- Expected:
+"Waiting for the agent to update its session. You can still stop the agent."
+
++ Received:
+null
+
+ ❯ expectHeld src/components/agent/AgentApprovalReadiness.test.tsx:187:18
+    185| function expectHeld(bridge: NativeBridge, reason: string) {
+    186|   expect(bridge.getSnapshot().agent).toMatchObject({ status: 'running'…
+    187|   expect(note()).toBe(reason);
+       |                  ^
+    188|   expect(decisions()).toEqual(['true', 'true']);
+    189|   expect(button('Stop').getAttribute('aria-disabled')).toBeNull();
+ ❯ src/components/agent/AgentApprovalReadiness.test.tsx:240:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  src/components/agent/AgentApprovalReadiness.test.tsx > Approval readiness reported by the host (test double) > holds Allow and Deny while the host is not ready, even with matching allowances, until it is
+AssertionError: expected null to be 'Waiting for the agent to update its s…' // Object.is equality
+
+- Expected:
+"Waiting for the agent to update its session. You can still stop the agent."
+
++ Received:
+null
+
+ ❯ src/components/agent/AgentApprovalReadiness.test.tsx:326:20
+    324|     const host = testHost({ ...RUNNING, approvalReady: false });
+    325|     expect(header()).toBe('Needs approval');
+    326|     expect(note()).toBe(UPDATING);
+       |                    ^
+    327|     expect(decisions()).toEqual(['true', 'true']);
+    328|     expect(button('Stop').getAttribute('aria-disabled')).toBeNull();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 8 passed (12)
+   Start at  17:48:47
+   Duration  1.94s (tests 45%, environment 30%, transform 17%, setup 5%, import 3%)
+
+exit=1

@@ -1,0 +1,22 @@
+
+ RUN  v5.0.3 <worktree>/editor/ui
+
+ ✓ src/components/agent/AgentApprovalReadiness.test.tsx > Approval readiness on the real native bridge (deferred IPC) > holds Allow and Deny through history.undo and the fresh session read, then sends the real decision 189ms
+ ✓ src/components/agent/AgentApprovalReadiness.test.tsx > Approval readiness on the real native bridge (deferred IPC) > holds Allow and Deny through history.redo and the fresh session read, then sends the real decision 90ms
+ ✓ src/components/agent/AgentApprovalReadiness.test.tsx > Approval readiness on the real native bridge (deferred IPC) > keeps Stop usable while decisions wait, and stops the turn by its ID 35ms
+ ✓ src/components/agent/AgentApprovalReadiness.test.tsx > Approval readiness on the real native bridge (deferred IPC) > keeps the more precise reason after the pane’s own allowance save 58ms
+ ✓ src/components/agent/AgentApprovalReadiness.test.tsx > Approval readiness on the real native bridge (deferred IPC) > keeps the more precise reason after a sign-out 44ms
+ ✓ src/components/agent/AgentApprovalReadiness.test.tsx > Approval readiness on the real native bridge (deferred IPC) > keeps the more precise reason after a failed session read 39ms
+ ✓ src/components/agent/AgentApprovalReadiness.test.tsx > Approval readiness reported by the host (test double) > holds Allow and Deny while the host is not ready, even with matching allowances, until it is 54ms
+ ✓ src/components/agent/AgentApprovalReadiness.test.tsx > Approval readiness reported by the host (test double) > keeps decisions usable on an older host that does not report readiness 37ms
+ ✓ src/components/agent/AgentApprovalReadiness.test.tsx > Approval readiness reported by the host (test double) > keeps the more precise reason when the host is also not ready: signed out 31ms
+ ✓ src/components/agent/AgentApprovalReadiness.test.tsx > Approval readiness reported by the host (test double) > keeps the more precise reason when the host is also not ready: after a transport failure 30ms
+ ✓ src/components/agent/AgentApprovalReadiness.test.tsx > Approval readiness reported by the host (test double) > keeps the more precise reason when the host is also not ready: while the session’s allowance lags the project’s 31ms
+ ✓ src/components/agent/AgentApprovalReadiness.test.tsx > Approval readiness reported by the host (test double) > keeps naming a decision this host cannot make at all 13ms
+
+ Test Files  1 passed (1)
+      Tests  12 passed (12)
+   Start at  17:53:11
+   Duration  1.18s (tests 58%, environment 18%, transform 18%, import 3%, setup 3%)
+
+exit=0

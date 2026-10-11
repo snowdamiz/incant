@@ -348,10 +348,11 @@ small spinner in place of the dot; "Needs approval" is a steady amber dot. Files
 - **Updating.** After an allowance edit, Undo or Redo, or an account read, the host holds
   new requests until it re-reads the session. The pane keeps the composer (its action a
   quiet wait) and says Updating… instead of swapping in a note; decisions wait with a
-  reason while the session's cap lags the project's, and Stop stays usable. A refresh the
-  host never finishes says Unavailable after 4 s (counted from the end of the pane's own
-  save) and shows the host's reason and Refresh in the notice line above the same composer
-  and draft, as a transport failure does while a worker runs.
+  reason while the session's cap lags the project's or the host says it is not ready for
+  them ("Waiting for the agent to update its session."), and Stop stays usable. A refresh
+  the host never finishes says Unavailable after 4 s (counted from the end of the pane's
+  own save) and shows the host's reason and Refresh in the notice line above the same
+  composer and draft, as a transport failure does while a worker runs.
 - **Approvals.** A bordered card at the end of its turn: the request as a question read
   from the exact arguments ("Apply 4 changes to the project?"), the agent's own
   description in quotes, one row per operation marked like a diff (+ add, − remove,
