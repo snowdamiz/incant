@@ -3957,6 +3957,28 @@ dependencies = [
 ]
 
 [[package]]
+name = "incant_render_gpu_host"
+version = "0.0.1"
+dependencies = [
+ "incant_assets",
+ "incant_assets_runtime",
+ "incant_audio_runtime",
+ "incant_doc",
+ "incant_game_runtime",
+ "incant_input",
+ "incant_render",
+ "incant_render_data",
+ "incant_render_game",
+ "incant_render_native",
+ "incant_runtime",
+ "incant_script",
+ "incant_types",
+ "serde_json",
+ "tempfile",
+ "thiserror 2.0.21",
+]
+
+[[package]]
 name = "incant_render_native"
 version = "0.0.1"
 dependencies = [

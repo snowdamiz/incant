@@ -992,3 +992,7 @@ remain separate; no runtime saves, rendering/performance or phase gate is claime
 ## Mandatory native render-input host (2026-10-10)
 
 One checked retained native input now composes with mandatory generic consumer preparation/sync inside the native game lifecycle. Seven actual cook/QuickJS/physics/PCM integration regressions and release Clippy/normal dependency checks pass, including source/cache removal, reparent, retry and terminal consumer failure/unwind. Default observation is explicitly CPU-only; GPU hosting and the opt-in source-free player proof remain separate. [Evidence](docs/spikes/native-render-game.md).
+
+## Native game GPU host (2026-10-10)
+
+The real retained GPU consumer now runs inside the mandatory native game tick, with source-free input/physics/PCM/render agreement and terminal target/presentation/observed-device-loss cleanup. Combined release checks pass 102 ordinary tests/doctests and 61 native GPU tests, scoped Clippy and authoring-free dependency checks. This is numerical in-process evidence; standalone compiler-free GPU player execution, native surface ownership, 2D migration and device/performance gates remain open. [Evidence](docs/spikes/native-render-gpu-host.md).

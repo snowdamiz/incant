@@ -1,0 +1,26 @@
+[package]
+name = "incant_render_gpu_host"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+incant_render = { path = "../incant_render" }
+incant_render_data.workspace = true
+incant_render_native = { path = "../incant_render_native" }
+incant_render_game = { path = "../incant_render_game" }
+thiserror.workspace = true
+
+[dev-dependencies]
+incant_doc.workspace = true
+incant_audio_runtime = { workspace = true, features = ["scene"] }
+incant_game_runtime = { path = "../incant_game_runtime" }
+incant_runtime.workspace = true
+incant_types.workspace = true
+incant_script = { workspace = true, features = ["compiler"] }
+incant_input.workspace = true
+incant_assets = { path = "../incant_assets" }
+incant_assets_runtime = { workspace = true, features = ["visual"] }
+serde_json.workspace = true
+tempfile = "3"

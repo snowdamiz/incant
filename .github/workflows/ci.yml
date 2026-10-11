@@ -31,7 +31,7 @@ jobs:
       - run: npm run test:tools
       # Check the real binary-scene/native-world slice and its shared values.
       # The legacy PlaySession still requires migration and is not certified here.
-      - run: python3 tools/check_runtime_dependencies.py incant_types incant_physics_runtime incant_runtime incant_script incant_script_player incant_assets_runtime incant_audio_runtime incant_render incant_render_data incant_render_native --features incant_audio_runtime/scene
+      - run: python3 tools/check_runtime_dependencies.py incant_types incant_physics_runtime incant_runtime incant_script incant_script_player incant_assets_runtime incant_audio_runtime incant_render incant_render_data incant_render_native incant_render_game incant_render_gpu_host incant_game_runtime incant_game_player --features incant_audio_runtime/scene
       - run: node tools/build_bridge.mjs --check
       - run: npm run build --workspace editor/ui
       - run: npm run test --workspace editor/ui

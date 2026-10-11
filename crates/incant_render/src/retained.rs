@@ -44,6 +44,7 @@ fn environment(input: &SceneInput) -> Option<(AssetVersionId, f64, f64)> {
 }
 impl Renderer {
     pub fn prepare_retained(&self, input: &SceneInput, camera: &str) -> Result<RetainedScene> {
+        self.check_device()?;
         if input
             .nodes
             .iter()
