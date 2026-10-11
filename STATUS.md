@@ -499,3 +499,5 @@ are implemented with reviewed clip-only root validation; see
 is preserved. Current static asset/render/navigation consumers explicitly refuse
 animated models. Native scene/GPU/SDK playback, blend/state/IK/root-motion and
 rendered acceptance remain outstanding; this does not complete Phase 1 animation.
+
+Skeletal foundation main106 union passes 90 integrated CPU tests, Clippy, audio-only/wasm32 compilation and dependency checks, with reviewed source unchanged. [Integration evidence](docs/spikes/evidence/gltf-skeletal-main106.json).

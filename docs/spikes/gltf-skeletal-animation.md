@@ -148,3 +148,13 @@ player construction. The affected full asset/runtime suite and Clippy pass again
 
 Evidence: [original 89-test local checks](evidence/gltf-skeletal-animation.json),
 [scene-root correction and current source hashes](evidence/gltf-skeletal-scene-roots.json).
+
+## Main106 integration
+
+The corrected source `fd6afda` integrates into actual main106 without source
+changes. Only STATUS required conflict resolution. All 19 implementation/test
+files match the reviewed commit; all 957 prior lock records are preserved, with
+only the existing glam0.32.1 edge added to the visual asset runtime. The integrated
+90 tests, all-target Clippy, audio-only and wasm32 builds, dependency guard and
+formatting pass. [Exact integration receipt](evidence/gltf-skeletal-main106.json)
+and [independent root review](evidence/gltf-skeletal-root-review.json).
