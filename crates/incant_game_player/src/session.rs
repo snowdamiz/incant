@@ -148,6 +148,15 @@ impl Player {
             Self::Gpu(game) => game.inner.input()?,
         })
     }
+    pub fn logs(&self) -> Result<&incant_script::NativeLogs> {
+        Ok(match self {
+            Self::Plain(game) => game.logs()?,
+            #[cfg(feature = "render-input")]
+            Self::Spatial(game) => game.logs()?,
+            #[cfg(feature = "render-gpu")]
+            Self::Gpu(game) => game.inner.logs()?,
+        })
+    }
     /// One bounded final observation, never a per-tick world projection.
     pub fn render_report(&self) -> Result<Option<serde_json::Value>> {
         #[cfg(feature = "render-gpu")]

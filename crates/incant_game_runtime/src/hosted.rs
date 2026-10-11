@@ -80,6 +80,9 @@ where
     pub fn input(&self) -> Result<&InputFrame, H::Error> {
         self.core.input()
     }
+    pub fn logs(&self) -> Result<&incant_script::NativeLogs, H::Error> {
+        self.core.logs()
+    }
     pub fn source_state(&self, id: StableId) -> Result<SourceState, H::Error> {
         self.core.source_state(id)
     }
@@ -144,6 +147,9 @@ impl<H: SceneHost> HostedOfflineGameSession<H> {
     }
     pub fn input(&self) -> Result<&InputFrame, H::Error> {
         self.inner.core.input()
+    }
+    pub fn logs(&self) -> Result<&incant_script::NativeLogs, H::Error> {
+        self.inner.core.logs()
     }
     pub fn source_state(&self, id: StableId) -> Result<SourceState, H::Error> {
         self.inner.core.source_state(id)

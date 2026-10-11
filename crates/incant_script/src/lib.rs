@@ -10,6 +10,7 @@ mod compiler;
 mod diagnostics;
 mod input;
 mod loan;
+mod logging;
 mod queries;
 mod query_values;
 mod schedule;
@@ -20,6 +21,7 @@ mod timers;
 pub use artifact::{EmbeddedScript, ScriptMetadata};
 pub use compiled::CompiledScript;
 use incant_runtime::NativeWorld;
+pub use logging::{LogLevel, NativeLog, NativeLogs};
 use rquickjs::{Context, Function, Persistent, Runtime, Value};
 pub use session::{NativeSession, PendingNativeSession, SessionError};
 use std::{
@@ -57,6 +59,8 @@ pub enum ScriptError {
     QueryInput,
     #[error("invalid timer ID, tick delay or timer command arguments")]
     TimerInput,
+    #[error("invalid native log arguments or control characters")]
+    LogInput,
     #[error("native script clock or timer deadline exceeds its numeric range")]
     TimerRange,
     #[error(transparent)]
@@ -75,14 +79,15 @@ pub enum ScriptError {
 /// private, compiler-produced bytecode. Ticks borrow real numeric ECS columns;
 /// they neither parse code nor serialize project/component values.
 ///
-/// This native host exposes `update({chunks, dt, commands, input, physics})`. Each chunk has stable
+/// This native host exposes `update({chunks, dt, commands, input, physics, clock, timers, log})`. Each chunk has stable
 /// ID strings, Transform stride 10, and optional Velocity stride 3. Views are
 /// detached on every exit. A failed callback restores its component writes and
 /// permanently fails this host. Tick-local structural commands apply only after
 /// detachment and scope exit; rejection restores numeric writes too.
 /// Physics queries read committed solver state during the loan; retained capabilities
 /// expire before diagnostics. Fixed-tick timers publish bounded data events;
-/// callback code, persistent saves, logs and the legacy PlaySession are not migrated.
+/// callback code, persistent saves and the legacy PlaySession are not migrated.
+/// Bounded primitive logs publish only after a successful script transaction.
 pub struct ScriptHost {
     // Drop VM roots/context/runtime before bytecode: QuickJS's ROM-data module
     // loader may retain references to its input allocation.
@@ -93,6 +98,7 @@ pub struct ScriptHost {
     synchronous: synchronous::Synchronous,
     deadline: Arc<Mutex<budget::ExecutionBudget>>,
     schedule: schedule::Schedule,
+    logs: NativeLogs,
     failed: bool,
 }
 
@@ -127,8 +133,18 @@ impl ScriptHost {
             synchronous,
             deadline,
             schedule: schedule::Schedule::default(),
+            logs: NativeLogs::default(),
             failed: false,
         })
+    }
+
+    /// Borrow the bounded committed log prefix. Failed hosts expose no live state.
+    pub fn logs(&self) -> Result<&NativeLogs, ScriptError> {
+        if self.failed {
+            Err(ScriptError::FailedSession)
+        } else {
+            Ok(&self.logs)
+        }
     }
 
     /// Run only the script phase. Native simulation stepping remains explicitly
@@ -160,6 +176,10 @@ impl ScriptHost {
         self.synchronous.reset();
         let result = self.context.with(|ctx| {
             let (mut schedule, events) = self.schedule.advance(dt)?;
+            let logs = logging::TickLogs::default();
+            let log_api = logs.expose(&ctx).map_err(|error| {
+                diagnostics::javascript(&ctx, error, "log bindings", &self.deadline)
+            })?;
             let timers = timers::TickTimers::default();
             let timer_api = timers.expose(&ctx, events).map_err(|error| {
                 diagnostics::javascript(&ctx, error, "timer bindings", &self.deadline)
@@ -208,11 +228,16 @@ impl ScriptHost {
                     commands.activate();
                     queries.activate();
                     timers.activate();
-                    let result = function
-                        .call::<_, Value>((chunks, dt, api, input, physics, clock, timer_api));
+                    logs.activate();
+                    let result = function.call::<_, Value>((
+                        rquickjs::function::Flat((chunks, dt, api, input, physics, clock)),
+                        timer_api,
+                        log_api,
+                    ));
                     commands.revoke();
                     queries.revoke();
                     timers.revoke();
+                    logs.revoke();
                     // Revoke before diagnostics can execute a user-defined getter,
                     // and before Rust reads or restores any component bytes.
                     loan.revoke();
@@ -231,15 +256,17 @@ impl ScriptHost {
                     loan.validate_numeric()?;
                     let commands = commands.take()?;
                     schedule.apply(timers.take()?)?;
-                    Ok((loan.finish(), commands, schedule))
+                    let logs = logs.take()?;
+                    Ok((loan.finish(), commands, schedule, logs))
                 })
                 .map_err(ScriptError::Structural)?
         });
         // No JS value or raw column pointer crosses this sync point. Apply is
         // native host work, after the script CPU/deferred-work checks; its time
         // is separate from the JS execution budget, not a claimed phone budget.
-        let result = result.and_then(|(undo, mut commands, schedule)| {
+        let result = result.and_then(|(undo, mut commands, schedule, logs)| {
             undo.apply(world, &mut commands)?;
+            self.logs.commit(schedule.tick, logs);
             self.schedule = schedule;
             Ok(())
         });
@@ -307,5 +334,7 @@ mod query_tests;
 #[cfg(all(test, feature = "compiler"))]
 mod character_tests;
 
+#[cfg(all(test, feature = "compiler"))]
+mod log_tests;
 #[cfg(all(test, feature = "compiler"))]
 mod timer_tests;

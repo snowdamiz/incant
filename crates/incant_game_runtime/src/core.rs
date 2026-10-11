@@ -67,6 +67,9 @@ where
     pub fn input(&self) -> Result<&InputFrame, H::Error> {
         Ok(self.ready()?.native.input()?)
     }
+    pub fn logs(&self) -> Result<&incant_script::NativeLogs, H::Error> {
+        Ok(self.ready()?.native.logs()?)
+    }
     pub fn rebind(&mut self, actions: InputActions) -> Result<(), H::Error> {
         Ok(self.ready_mut()?.native.rebind(actions)?)
     }

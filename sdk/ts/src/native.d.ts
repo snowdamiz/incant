@@ -65,6 +65,7 @@ export interface NativePhysics {
    * Returns owned values; mutating a result cannot alter native state. */
   raycast(query: NativeRayQuery): NativeRayHit | null;
 }
+export type NativeLogLevel = 'debug' | 'info' | 'warn' | 'error';
 export interface NativeContext {
   readonly chunks: readonly NativeChunk[];
   readonly dt: number;
@@ -75,6 +76,12 @@ export interface NativeContext {
   /** Functions expire after this update. Invalid/caught commands reject numeric,
    * structural and scheduling changes together and permanently fail the host. */
   readonly timers: NativeTimers;
+  /** Primitive strings only; defaults to info. At most 1,024 UTF-8 bytes per
+   * message, 64 messages / 16 KiB per update. Invalid/caught calls reject the
+   * whole script transaction. The function expires when this update ends.
+   * A session retains the first 1,024 entries / 256 KiB and counts later drops.
+   * Logs publish after successful commit; failed sessions hide all outputs. */
+  readonly log: (message: string, level?: NativeLogLevel) => void;
 }
 export interface NativeBehavior {
   /** Synchronous only; no promises, deferred work or non-undefined return. */

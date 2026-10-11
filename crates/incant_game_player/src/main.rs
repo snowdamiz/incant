@@ -116,7 +116,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         serde_json::json!({"id":node.entity.0,"position":pose[3][..3],"physics":physics})
     }).collect();
     let bytes: Vec<_> = output.iter().flat_map(|v| v.to_le_bytes()).collect();
-    let mut report = serde_json::json!({"tick":world.tick(),"frames":frames as u64,"pcm_sha256":sha256(&bytes),"sources":sources});
+    let mut report = serde_json::json!({"tick":world.tick(),"frames":frames as u64,"pcm_sha256":sha256(&bytes),"sources":sources,"logs":game.logs()?});
     if let Some(input) = game.render_report()? {
         report["render_input"] = input;
     }
