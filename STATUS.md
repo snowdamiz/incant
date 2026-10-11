@@ -53,9 +53,10 @@ review; concurrent native reviews coordinate foreground ownership.
   [world saves](docs/spikes/native-world-saves.md),
   [input](docs/spikes/native-input-session.md),
   [physics](docs/spikes/native-physics-runtime.md). Native scripts now have bounded
-  committed-state raycasts with revocable capabilities and whole-update rejection;
-  124 scoped tests and a 34-process source-free proof pass.
-  [Query evidence](docs/spikes/native-script-queries.md).
+  committed-state raycasts, character sweeps and trigger events with revocable
+  capabilities and whole-update rejection. 131 scoped tests and a 45-process
+  source-free proof pass. [Queries](docs/spikes/native-script-queries.md),
+  [character/trigger evidence](docs/spikes/native-script-character.md).
 - **Native rendering.** Canonical typed renderer input and a separate authoring
   adapter; exact retained asset versions; binary v4 cameras/models/lights and
   binary v5 sprites; direct committed pose updates and mandatory GPU host sync.
@@ -88,7 +89,7 @@ review; concurrent native reviews coordinate foreground ownership.
   [Development host](docs/spikes/development-wasm-host.md),
   [static host](docs/spikes/shipping-wasm2c.md).
 
-Local integration checks: 553 ordinary Rust release tests/doctests; 138 scoped
+Local integration checks: 561 ordinary Rust release tests/doctests; 138 scoped
 static/development-Wasm/runtime/script tests; workspace and optional-host release
 Clippy; 529 UI tests, strict TypeScript and production build; 43 Python tool tests.
 The renderer's unchanged frozen implementation separately passed all 66 actual
