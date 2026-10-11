@@ -741,3 +741,97 @@ fn removing_one_source_rebuilds_its_old_tiles_and_retains_unrelated_tiles() {
         2
     );
 }
+
+#[test]
+fn mixed_audio_control_and_navigation_motion_refusal_preserve_the_whole_batch() {
+    for reverse in [false, true] {
+        let cooked = scene()
+            .with_audio(vec![CookedAudio {
+                entity: id(4),
+                bus: Some(NativeAudioBus {
+                    parent: None,
+                    gain_db: 0.,
+                }),
+                source: None,
+                listener: false,
+            }])
+            .unwrap();
+        let mut world = NativeWorld::new(cooked);
+        let snapshot = world.snapshot();
+        let audio: Vec<_> = world.audio_nodes().map(|(node, _)| node.clone()).collect();
+        let route = world.navigation_path(id(1), &path()).unwrap();
+        let grid_route = world.grid_path(id(1), &grid()).unwrap();
+        let tick = world.tick();
+        let mut submitted = vec![
+            StructuralCommand::ControlAudio {
+                entity: id(4),
+                control: AudioControl::BusGain(-12.),
+            },
+            StructuralCommand::SetVelocity {
+                entity: id(2),
+                velocity: Some(Velocity {
+                    linear: [1., 0., 0.],
+                }),
+            },
+        ];
+        if reverse {
+            submitted.reverse();
+        }
+        let mut commands = FrameCommands::default();
+        for command in submitted.clone() {
+            commands.push(command).unwrap();
+        }
+        assert_eq!(
+            world.apply(&mut commands),
+            Err(RuntimeError::Scene(SceneError::Invalid(
+                "navigation sources and ancestors must be stationary"
+            )))
+        );
+        assert_eq!(commands.iter().cloned().collect::<Vec<_>>(), submitted);
+        assert_eq!(
+            world
+                .audio_nodes()
+                .map(|(node, _)| node.clone())
+                .collect::<Vec<_>>(),
+            audio
+        );
+        assert_eq!(world.snapshot(), snapshot);
+        assert_eq!(world.tick(), tick);
+        assert_eq!(world.navigation_path(id(1), &path()).unwrap(), route);
+        assert_eq!(world.grid_path(id(1), &grid()).unwrap(), grid_route);
+
+        // A subsequently valid transaction still commits both controls.
+        let mut accepted = FrameCommands::default();
+        accepted
+            .push(StructuralCommand::ControlAudio {
+                entity: id(4),
+                control: AudioControl::BusGain(-12.),
+            })
+            .unwrap();
+        accepted
+            .push(StructuralCommand::SetVelocity {
+                entity: id(2),
+                velocity: Some(Velocity { linear: [0.; 3] }),
+            })
+            .unwrap();
+        world.apply(&mut accepted).unwrap();
+        assert!(accepted.is_empty());
+        assert_eq!(
+            world
+                .audio_nodes()
+                .next()
+                .unwrap()
+                .0
+                .bus
+                .as_ref()
+                .unwrap()
+                .gain_db,
+            -12.
+        );
+        assert_eq!(
+            world.inspect(id(2)).unwrap().velocity.unwrap().linear,
+            [0.; 3]
+        );
+        assert_eq!(world.navigation_path(id(1), &path()).unwrap(), route);
+    }
+}

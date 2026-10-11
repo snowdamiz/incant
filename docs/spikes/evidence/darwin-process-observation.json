@@ -1,0 +1,53 @@
+{
+  "recorded_at": "2026-10-11T17:28:51.691538+00:00",
+  "failed_checkpoint": {
+    "candidate": "c3ec3e84dae6bf957304471639e7fac34d2297d4",
+    "job": 114525385682,
+    "run": 38158170525,
+    "failure": "Python3.12 macOS omits os.waitid;14errors+1failure inprocess tests; no releasepromotion"
+  },
+  "compatibility": "Darwin kqueue NOTE_EXIT fallback only when os.waitid/WNOWAIT interface is unavailable; native waitid unchanged elsewhere",
+  "preserved_invariants": [
+    "Owned leader is never reaped before process-group termination",
+    "Leader PID reserves group identity through cleanup",
+    "Success, nonzero, timeout, decodefailure and callerinterruption clean descendants",
+    "Observer setupfailure kills/reaps directchild and closes streams",
+    "No shell or project-selected executable capability added"
+  ],
+  "tests": {
+    "python39": {
+      "version": "3.9.6",
+      "os_waitid_present": false,
+      "total": 39,
+      "passed": 35,
+      "windows_skipped": 4
+    },
+    "python314": {
+      "version": "3.14.8",
+      "normal_and_forced_fallback": true,
+      "total": 39,
+      "passed": 35,
+      "windows_skipped": 4
+    },
+    "full_python_suite": {
+      "total": 203,
+      "passed": 199,
+      "windows_skipped": 4
+    }
+  },
+  "source_hashes": {
+    "tools/native_process.py": "493c6e70e9045bf3b6e128b4392f47b7cac8a475969d715f26cd1eb7d9777ec3",
+    "tools/tests/test_native_process.py": "3f89975b47f1bf354afbc36637afc72242c07b377035926d4a173b9ef4778c1e"
+  },
+  "logs": {
+    "/tmp/incant-checkpoint2-general-failure.log": "c5d19ff818426c38ec6abca714b99762a6db8c0ae50a346b1ce185635fe6b5e8",
+    "/tmp/incant-darwin-kqueue-python39.log": "9010525ff9a5890ae672aadba4cc8538f0ccf2131d257b03ef3fab330b6936a7",
+    "/tmp/incant-darwin-kqueue-python314.log": "57e97b6124c015399f1a0b3b7b6c64b033981b9fe9c35420e102990b3158b636",
+    "/tmp/incant-checkpoint2-portability-tools.log": "1bee0f1f9d0f2387bd72a4da64e3b8827905cb55f357dab3fa89106deca5c2d4"
+  },
+  "references": [
+    "https://docs.python.org/3/library/os.html#os.waitid",
+    "https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man2/kevent.2.html"
+  ],
+  "limits": "Actual hosted Python3.12 check remains pending next corrected checkpoint; WindowsJobObject implementation unchanged."
+}

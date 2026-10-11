@@ -50,12 +50,11 @@ Agent checks use a local scripted provider and do not count as a live-model gate
 
 ## Remaining boundary
 
-This is an authoring foundation, not the planned `script.read`/`script.write`
-file-content API, a script editor or evidence of complete agent-authored game
-scripts. Bounded source-content editing with atomic recovery and provenance,
-typechecking, native Play integration and the complete gameplay SDK remain
-separate work. No runtime path, phase gate, device or performance result is
-claimed by these functional checks.
+This registration change did not include file-content editing. The subsequent
+[source transaction slice](script-source-transactions.md) adds bounded
+`script.read`/`script.write`, exact-preimage Undo/Redo and crash recovery through
+the shared bus. A script editor and complete agent-authored gameplay remain open.
+These functional checks do not satisfy a phase, device or performance gate.
 
 ## Combined authored-native integration
 
@@ -75,4 +74,5 @@ world. This used new engine-owned fixture files, with no direct mutation of an
 existing project. [Integration evidence](evidence/script-registration-native-play.json).
 
 The generated Rust SDK/color union and hosted checks remain separate integration
-work. Source-content transactions and complete script/game authoring remain open.
+work. The source-content followup is documented above; complete script/game
+authoring remains open.

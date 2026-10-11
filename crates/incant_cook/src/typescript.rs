@@ -1,26 +1,38 @@
-//! Developer-only fixed compiler invocation. Agent arguments cannot choose a
-//! program, flags, config, output path or environment. Gameplay gets no process API.
-use super::{Result, bounded, invalid, native};
-use incant_cook::{CookedProjectProgram, PreparedScriptScene};
+//! Authoring-only fixed TypeScript compiler shared by developer Play and trusted
+//! native builds. Project data never chooses the executable, flags or environment.
+use crate::{CookedProjectProgram, PreparedScriptScene, ProjectScriptError};
 use sha2::{Digest, Sha256};
 use std::{
     fs::{self, File},
+    io::Read,
     path::{Path, PathBuf},
     process::{Child, Command, Stdio},
     time::{Duration, Instant},
 };
 
+#[cfg(windows)]
+mod windows;
+
+const DRIVER: &str = "tools/build_native_script.mjs";
 const DEADLINE: Duration = Duration::from_secs(8);
 const MAX_LOG_BYTES: u64 = 2 * 1024 * 1024;
 
 /// The caller has already checked the document and bounded all attachments.
 /// A temporary private artifact is consumed only after a successful fixed cook.
-pub(super) fn compile(prepared: PreparedScriptScene, root: &Path) -> Result<CookedProjectProgram> {
+pub fn compile_project_sources(
+    prepared: PreparedScriptScene,
+    root: &Path,
+) -> Result<ProjectCompilation> {
     let root = root.canonicalize()?;
+    let source_epoch = incant_source::check_recovery(&root)?;
     let engine = Path::new(env!("CARGO_MANIFEST_DIR"))
         .join("../..")
         .canonicalize()?;
-    let driver = engine.join("tools/build_native_script.mjs");
+    #[cfg(windows)]
+    let launch_engine = windows::launch_directory(&engine)?;
+    #[cfg(not(windows))]
+    let launch_engine = &engine;
+    let driver = engine.join(DRIVER);
     if !driver.is_file()
         || !engine
             .join("node_modules/typescript/package.json")
@@ -34,7 +46,7 @@ pub(super) fn compile(prepared: PreparedScriptScene, root: &Path) -> Result<Cook
     let directory = tempfile::Builder::new()
         .prefix("incant-native-project-cook-")
         .tempdir()?;
-    let catalog = serde_json::to_vec(prepared.source_catalog()).map_err(native)?;
+    let catalog = serde_json::to_vec(prepared.source_catalog())?;
     if catalog.len() > 96 * 1024 {
         return Err(invalid("source catalog exceeds its byte limit"));
     }
@@ -46,11 +58,15 @@ pub(super) fn compile(prepared: PreparedScriptScene, root: &Path) -> Result<Cook
     let mut command = Command::new(&node);
     command
         .args(["--max-old-space-size=512", "--disable-proto=throw"])
-        .arg(&driver)
+        // Rust canonicalizes Windows paths to \?\ drive/UNC syntax. Pinned Node
+        // can fail in its CLI realpathSync before entering a namespaced script
+        // (nodejs/node#62446). Resolve only this fixed entry relative to the
+        // trusted engine cwd; retain canonical paths for checks and project data.
+        .arg(DRIVER)
         .arg("--project")
         .arg(&root)
         .arg(&output)
-        .current_dir(&engine)
+        .current_dir(launch_engine)
         .env_clear()
         .env("PATH", node.parent().expect("canonical executable parent"))
         .env("TMPDIR", directory.path())
@@ -96,17 +112,16 @@ pub(super) fn compile(prepared: PreparedScriptScene, root: &Path) -> Result<Cook
     if !status.success() {
         let diagnostic = bounded(&stderr_path, MAX_LOG_BYTES as usize)?;
         let message = String::from_utf8_lossy(&diagnostic);
-        return Err(native(CompileDiagnostic(
+        return Err(TypeScriptCookError::Diagnostic(
             message.chars().take(16_384).collect(),
-        )));
+        ));
     }
     let bytes = bounded(
         &output.join("behavior.cjs"),
         incant_script::artifact::MAX_SOURCE_BYTES,
     )?;
     let manifest: serde_json::Value =
-        serde_json::from_slice(&bounded(&output.join("manifest.json"), 128 * 1024)?)
-            .map_err(native)?;
+        serde_json::from_slice(&bounded(&output.join("manifest.json"), 128 * 1024)?)?;
     let map = bounded(&output.join("behavior.cjs.map"), 4 * 1024 * 1024)?;
     if manifest["format"] != "incant-native-typescript-project"
         || manifest["version"] != 1
@@ -117,13 +132,61 @@ pub(super) fn compile(prepared: PreparedScriptScene, root: &Path) -> Result<Cook
         return Err(invalid("fresh native compiler output/catalog mismatch"));
     }
     // Compile fresh text only. Never deserialize a supplied executable cache.
-    let source = std::str::from_utf8(&bytes).map_err(native)?;
-    prepared.compile(source).map_err(native)
+    let source = std::str::from_utf8(&bytes)?;
+    let compiled = ProjectCompilation {
+        program: prepared.compile(source)?,
+        source_map: String::from_utf8(map)?,
+        compiler_manifest: manifest,
+    };
+    if incant_source::check_recovery(&root)? != source_epoch {
+        return Err(TypeScriptCookError::SourcesChanged);
+    }
+    Ok(compiled)
+}
+
+/// Both outputs were produced in this invocation from one immutable source graph.
+/// Source maps are authoring symbols and must not be embedded in the player.
+pub struct ProjectCompilation {
+    pub program: CookedProjectProgram,
+    pub source_map: String,
+    pub compiler_manifest: serde_json::Value,
 }
 
 #[derive(Debug, thiserror::Error)]
-#[error("native TypeScript cook failed: {0}")]
-struct CompileDiagnostic(String);
+pub enum TypeScriptCookError {
+    #[error(transparent)]
+    Source(#[from] incant_source::SourceError),
+    #[error("script sources changed during compilation; retry from the current project")]
+    SourcesChanged,
+    #[error(transparent)]
+    Io(#[from] std::io::Error),
+    #[error(transparent)]
+    Json(#[from] serde_json::Error),
+    #[error(transparent)]
+    Utf8(#[from] std::str::Utf8Error),
+    #[error(transparent)]
+    Text(#[from] std::string::FromUtf8Error),
+    #[error(transparent)]
+    Project(#[from] ProjectScriptError),
+    #[error("native TypeScript cook: {0}")]
+    Invalid(&'static str),
+    #[error("native TypeScript cook failed: {0}")]
+    Diagnostic(String),
+}
+type Result<T> = std::result::Result<T, TypeScriptCookError>;
+fn invalid(message: &'static str) -> TypeScriptCookError {
+    TypeScriptCookError::Invalid(message)
+}
+fn bounded(path: &Path, limit: usize) -> Result<Vec<u8>> {
+    let mut bytes = Vec::new();
+    File::open(path)?
+        .take(limit as u64 + 1)
+        .read_to_end(&mut bytes)?;
+    if bytes.len() > limit {
+        return Err(invalid("compiler output exceeds its byte limit"));
+    }
+    Ok(bytes)
+}
 
 /// Always kill and reap on deadline/error before temporary inputs are removed.
 struct CookChild(Child);

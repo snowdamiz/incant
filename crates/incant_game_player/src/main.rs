@@ -5,6 +5,7 @@ use incant_assets_runtime::sha256;
 #[cfg(feature = "render-gpu")]
 mod gpu;
 mod observe;
+mod package;
 mod program;
 mod session;
 mod startup;
@@ -34,7 +35,7 @@ fn bounded(path: &str, limit: usize) -> Result<Vec<u8>, Box<dyn std::error::Erro
     Ok(bytes)
 }
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let args: Vec<_> = std::env::args().skip(1).collect();
+    let args = package::expand(std::env::args().skip(1).collect())?;
     if args.as_slice() == ["--build-info"] {
         let code = embedded::load()?;
         let m = code.metadata();

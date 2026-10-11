@@ -33,6 +33,7 @@ incant_runtime = { path = "crates/incant_runtime" }
 incant_doc = { path = "crates/incant_doc", default-features = false }
 incant_2d = { path = "crates/incant_2d" }
 incant_cmd = { path = "crates/incant_cmd" }
+incant_source = { path = "crates/incant_source" }
 incant_core = { path = "crates/incant_core" }
 incant_physics = { path = "crates/incant_physics" }
 incant_physics_runtime = { path = "crates/incant_physics_runtime" }

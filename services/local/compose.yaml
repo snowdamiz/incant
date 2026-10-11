@@ -22,8 +22,10 @@ services:
     cpus: "1"
     pids_limit: 128
     image: chrislusf/seaweedfs@sha256:4e61d15fd35994cb1e43e1e553dff106794841fd9a99ade2fc8c8bfce4d7872d
-    command: [server, -dir=/data, -ip=objects, -volume.max=16, -master.volumeSizeLimitMB=64, -s3, -s3.port=8333, -s3.config=/config/s3.json]
-    volumes: ["objects:/data", "${INCANT_LOCAL_STATE}/s3.json:/config/s3.json:ro"]
+    entrypoint: [/bin/sh, /incant/objects-entrypoint.sh]
+    command: [server, -dir=/data, -ip=objects, -volume.max=16, -master.volumeSizeLimitMB=64, -s3, -s3.port=8333, -s3.config=/run/incant-objects/s3.json]
+    volumes: ["objects:/data", "${INCANT_LOCAL_STATE}/s3.json:/config/s3.json:ro", "./objects-entrypoint.sh:/incant/objects-entrypoint.sh:ro"]
+    tmpfs: ["/run/incant-objects:rw,noexec,nosuid,nodev,size=1m,mode=0700"]
     networks: [local]
     healthcheck:
       test: [CMD-SHELL, "wget -qO- http://127.0.0.1:9333/dir/status | grep -q '\"Url\":\"objects:8080\"'"]

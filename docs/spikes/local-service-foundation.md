@@ -45,7 +45,7 @@ remains open.
 
 The dedicated Linux workflow runs only for a frozen release-candidate push or
 explicit dispatch. It adds no PR/main container matrix and does not alter an
-existing engine check. Its first hosted execution remains pending publication. No local
+existing engine check. Its first hosted execution exposed the Linux private-config ownership failure recorded below. No local
 protocol test substitutes for real WorkOS/AWS/store/device/region gates. Accounts
 service implementation, WAL-to-S3/PITR, the other PLAN §2.7 services and production
 operations remain separate work.
@@ -108,3 +108,34 @@ Review against PLAN revision 8 §2.7 confirms this is a bounded foundation:
 
 No new outside service was introduced. The existing explicit business-feature,
 license/SBOM, platform and hosted/device/production limitations remain in force.
+
+## Linux private bootstrap correction
+
+Frozen release checkpoint 2 at main88 `c3ec3e8` failed its local-service job
+before protocol testing. All sixteen boundary tests passed, but the pinned
+SeaweedFS entrypoint dropped to UID 1000 while the bind-mounted private S3 config
+belonged to runner UID 1001 with mode 0600. An isolated credential-free Linux
+volume reproduced exit 255 and the config permission refusal. The earlier
+macOS Docker bind-mount proof did not expose this Linux ownership behavior.
+
+The fixed startup wrapper copies the read-only host config into a private tmpfs
+directory with mode 0700, sets the copied file to mode 0600 and assigns both to
+the pinned image's `seaweed` user. The original image entrypoint still prepares
+its data volume and drops privileges before starting any server. Image digests,
+service flags, host file permissions and generated values are unchanged. Startup
+failures now report only allowlisted service/state/health/exit metadata; raw
+bootstrap output, container logs and arbitrary status strings are not printed.
+
+The exact Linux-volume red-to-green proof verifies the original file remains
+`1001:1001:0600`, the private copy is byte-identical and `1000:1000:0600`, and
+server PID 1 has all four UID fields equal to 1000. It reaches healthy status
+without exposing a host port. A separate complete fresh local stack passes all
+28 protocol checks and four restart/persistence controls in 43.94 seconds. All
+180 applicable Python tests pass (two Windows-only tests skipped), including
+eighteen service boundary tests; shell parsing, conventions and actionlint pass.
+Owned proof containers, volumes and private state were removed.
+
+These are local functional results on Docker Linux ARM64 hosted by macOS, not
+a hosted AMD64 success or a performance claim. The failed checkpoint is retained
+and remains unpromoted; the next corrected full checkpoint must establish hosted
+Linux success. [Exact sanitized evidence](evidence/local-s3-private-bootstrap.json).

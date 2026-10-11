@@ -287,16 +287,16 @@ fn auth_command(action: AuthCli) -> Result<()> {
 }
 fn rpc(project: PathBuf, journal: Option<PathBuf>) -> Result<()> {
     let initial = read_project(&project)?;
-    let mut bus = if let Some(path) = journal {
-        CommandBus::persistent(path, initial)?
-    } else {
-        CommandBus::new(initial)?
-    };
-    let mut play = native_rpc::Controller::default();
     let root = project
         .parent()
         .filter(|p| !p.as_os_str().is_empty())
         .unwrap_or(Path::new("."));
+    let mut bus = if let Some(path) = journal {
+        CommandBus::persistent_with_sources(path, initial, root)?
+    } else {
+        CommandBus::new(initial)?
+    };
+    let mut play = native_rpc::Controller::default();
     for line in io::stdin().lock().lines() {
         let line = line?;
         if line.len() > 16 * 1024 * 1024 {
@@ -309,15 +309,17 @@ fn rpc(project: PathBuf, journal: Option<PathBuf>) -> Result<()> {
             let params = request.get("params").unwrap_or(&empty);
             match request["method"].as_str().ok_or("missing RPC method")?{
   "project.read"=>Ok(json!({"project":bus.project(),"revision":bus.revision()})),
-  "project.save"=>{save(&project,&bus.project().canonical_text()?)?;Ok(json!({"saved":true}))},
+  "project.save"=>{bus.ensure_sources_ready()?;save(&project,&bus.project().canonical_text()?)?;Ok(json!({"saved":true}))},
   "schema.list"=>Ok(json!(schema_registry())),
   "command.execute"=>{let commands=serde_json::from_value(params["commands"].clone())?;let revision=params["expected_revision"].as_u64().ok_or("expected_revision required")?;let tx=bus.execute(commands,Actor::user("editor"),params["description"].as_str().unwrap_or("Editor edit"),Some(revision))?;let tid=tx.id.clone();Ok(json!({"transaction_id":tid,"revision":bus.revision(),"project":bus.project()}))},
+  "script.read"=>Ok(incant_agent::dispatch(&mut bus,&mut incant_agent::NoViewport,"script_read",params.clone(),Actor::user("editor"))?),
+  "script.write"=>Ok(incant_agent::dispatch(&mut bus,&mut incant_agent::NoViewport,"script_write",params.clone(),Actor::user("editor"))?),
   "history.read"=>Ok(json!(bus.history().iter().map(|t|json!({"id":t.id,"description":t.description,"actor":t.actor,"commands":t.commands.len()})).collect::<Vec<_>>())),
   "history.undo"=>{let tx=bus.undo()?;Ok(json!({"transaction_id":tx,"revision":bus.revision(),"project":bus.project()}))},
   "history.redo"=>{let tx=bus.redo()?;Ok(json!({"transaction_id":tx,"revision":bus.revision(),"project":bus.project()}))},
-  "play.run"=>Ok(play.run(bus.project(),bus.revision(),root,serde_json::from_value(params.clone())?,&AtomicBool::new(false))?),
+  "play.run"=>{bus.ensure_sources_ready()?;Ok(play.run(bus.project(),bus.revision(),root,serde_json::from_value(params.clone())?,&AtomicBool::new(false))?)},
   "play.state_query"=>{let request: incant_agent::play::StateQuery=serde_json::from_value(params.clone())?;Ok(play.state_query(&request.path)?)},
-  "play.start"=>Ok(play.start(&bus,root,params.clone())?),
+  "play.start"=>{bus.ensure_sources_ready()?;Ok(play.start(&bus,root,params.clone())?)},
   "play.step"=>Ok(play.step(params.clone())?),
   "play.state"=>Ok(play.state(params.clone())?),
   "play.stop"=>{play.stop(params.clone())?;Ok(json!({"playing":false,"project":bus.project(),"revision":bus.revision()}))},
@@ -473,6 +475,10 @@ fn run() -> Result<()> {
             registry.insert(
                 "Command".into(),
                 json!(schemars::schema_for!(incant_cmd::Command)),
+            );
+            registry.insert(
+                "ScriptRead".into(),
+                json!(schemars::schema_for!(incant_cmd::ScriptRead)),
             );
             registry.extend([
                 (
@@ -727,7 +733,11 @@ fn run() -> Result<()> {
             let mut provider = provider(model)?;
             let initial = read_project(&project)?;
             let journal = journal.unwrap_or_else(|| project.with_extension("journal.jsonl"));
-            let mut bus = CommandBus::persistent(&journal, initial)?;
+            let root = project
+                .parent()
+                .filter(|p| !p.as_os_str().is_empty())
+                .unwrap_or(Path::new("."));
+            let mut bus = CommandBus::persistent_with_sources(&journal, initial, root)?;
             let mut agent = Agent {
                 budget: Budget {
                     max_tokens,

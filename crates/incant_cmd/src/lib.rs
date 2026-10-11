@@ -1,15 +1,18 @@
 //! The only mutable owner of an editor document. GUI, scripts and AI share commands.
 mod journal;
 mod localization;
+mod sources;
 use incant_doc::{
     Asset, CollaborativeDocument, DocumentError, Entity, Id, Origin, Project, Provenance, Scene,
     ScriptSource, new_id,
 };
+pub use incant_source::{SourceError, SourceVersion};
 pub use journal::Journal;
 pub use localization::{PreparedTranslations, TranslationImportResult};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
+pub use sources::ScriptRead;
 use thiserror::Error;
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
@@ -64,6 +67,12 @@ pub enum Command {
     /// Remove script metadata; the final project must have no dangling references.
     RemoveScript {
         script_id: Id,
+    },
+    /// Write one registered source through the persistent, file-aware transaction.
+    WriteScript {
+        script_id: Id,
+        expected_source: SourceVersion,
+        source: String,
     },
     SetMemory {
         section: String,
@@ -145,9 +154,13 @@ pub struct Transaction {
     pub commands: Vec<Command>,
     pub before: Project,
     pub after: Project,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub source_edit: Option<incant_source::SourceEdit>,
 }
 #[derive(Debug, Error)]
 pub enum CommandError {
+    #[error(transparent)]
+    Source(#[from] SourceError),
     #[error(transparent)]
     Document(#[from] DocumentError),
     #[error("invalid command: {0}")]
@@ -169,6 +182,8 @@ pub struct CommandBus {
     history: Vec<Transaction>,
     redo: Vec<Transaction>,
     journal: Option<Journal>,
+    sources: Option<incant_source::SourceStore>,
+    replaying: bool,
 }
 impl CommandBus {
     pub fn new(project: Project) -> Result<Self, CommandError> {
@@ -179,6 +194,8 @@ impl CommandBus {
             history: vec![],
             redo: vec![],
             journal: None,
+            sources: None,
+            replaying: false,
         })
     }
     pub fn from_crdt(bytes: &[u8]) -> Result<Self, CommandError> {
@@ -190,6 +207,8 @@ impl CommandBus {
             history: vec![],
             redo: vec![],
             journal: None,
+            sources: None,
+            replaying: false,
         })
     }
     /// Play-state bus uses the same validation and atomic commands without
@@ -204,6 +223,8 @@ impl CommandBus {
             history: vec![],
             redo: vec![],
             journal: None,
+            sources: None,
+            replaying: false,
         })
     }
     fn stage(&self, project: &Project) -> Result<Option<CollaborativeDocument>, CommandError> {
@@ -219,7 +240,7 @@ impl CommandBus {
         path: impl AsRef<std::path::Path>,
         initial: Project,
     ) -> Result<Self, CommandError> {
-        Journal::open(path.as_ref(), initial)
+        Journal::open(path.as_ref(), initial, None)
     }
     pub fn project(&self) -> &Project {
         &self.project
@@ -252,6 +273,7 @@ impl CommandBus {
         description: impl Into<String>,
         expected_revision: Option<u64>,
     ) -> Result<&Transaction, CommandError> {
+        self.ensure_sources_ready()?;
         self.check_revision(expected_revision)?;
         if commands.is_empty() {
             return Err(CommandError::Invalid("empty transaction".into()));
@@ -268,7 +290,9 @@ impl CommandBus {
             apply(&mut after, command, &provenance)?;
         }
         after.validate()?;
+        let source_edit = self.prepare_source_edit(&commands, &after, expected_revision)?;
         let transaction = Transaction {
+            source_edit,
             id,
             description: description.into(),
             actor,
@@ -281,17 +305,13 @@ impl CommandBus {
     }
     fn commit_transaction(&mut self, transaction: Transaction) -> Result<(), CommandError> {
         let next = self.stage(&transaction.after)?;
-        if let Some(journal) = &mut self.journal {
-            journal.append(
-                journal::Action::Apply {
-                    transaction: Box::new(transaction.clone()),
-                },
-                &next
-                    .as_ref()
-                    .expect("persistent authoring document")
-                    .export()?,
-            )?;
-        }
+        self.record(
+            journal::Change::Apply {
+                transaction: Box::new(transaction.clone()),
+            },
+            transaction.source_edit.as_ref(),
+            next.as_ref(),
+        )?;
         self.project = transaction.after.clone();
         self.document = next;
         self.revision += 1;
@@ -300,52 +320,54 @@ impl CommandBus {
         }
         self.history.push(transaction);
         self.redo.clear();
+        self.ensure_sources_ready()?;
         Ok(())
     }
     pub fn undo(&mut self) -> Result<Id, CommandError> {
+        self.ensure_sources_ready()?;
         let tx = self.history.last().ok_or(CommandError::Empty("undo"))?;
         let id = tx.id.clone();
         let project = tx.before.clone();
         let next = self.stage(&project)?;
-        if let Some(journal) = &mut self.journal {
-            journal.append(
-                journal::Action::Undo {
-                    transaction_id: id.clone(),
-                },
-                &next
-                    .as_ref()
-                    .expect("persistent authoring document")
-                    .export()?,
-            )?;
-        }
+        let edit = tx
+            .source_edit
+            .as_ref()
+            .map(incant_source::SourceEdit::reversed);
+        self.record(
+            journal::Change::Undo {
+                transaction_id: id.clone(),
+            },
+            edit.as_ref(),
+            next.as_ref(),
+        )?;
         self.project = project;
         self.document = next;
         self.revision += 1;
         self.redo
             .push(self.history.pop().expect("history was checked"));
+        self.ensure_sources_ready()?;
         Ok(id)
     }
     pub fn redo(&mut self) -> Result<Id, CommandError> {
+        self.ensure_sources_ready()?;
         let tx = self.redo.last().ok_or(CommandError::Empty("redo"))?;
         let id = tx.id.clone();
         let project = tx.after.clone();
         let next = self.stage(&project)?;
-        if let Some(journal) = &mut self.journal {
-            journal.append(
-                journal::Action::Redo {
-                    transaction_id: id.clone(),
-                },
-                &next
-                    .as_ref()
-                    .expect("persistent authoring document")
-                    .export()?,
-            )?;
-        }
+        let edit = tx.source_edit.clone();
+        self.record(
+            journal::Change::Redo {
+                transaction_id: id.clone(),
+            },
+            edit.as_ref(),
+            next.as_ref(),
+        )?;
         self.project = project;
         self.document = next;
         self.revision += 1;
         self.history
             .push(self.redo.pop().expect("redo was checked"));
+        self.ensure_sources_ready()?;
         Ok(id)
     }
     /// Phase-0 revert deliberately refuses to overwrite edits made after a turn.
@@ -359,6 +381,7 @@ impl CommandBus {
     }
     /// Remote CRDT integration is itself an atomic, reversible, journaled transaction.
     pub fn merge(&mut self, bytes: &[u8], actor: Actor) -> Result<&Transaction, CommandError> {
+        self.ensure_sources_ready()?;
         let mut next = self
             .document
             .as_ref()
@@ -372,6 +395,7 @@ impl CommandBus {
         actor.provenance(&id)?;
         let transaction = Transaction {
             id,
+            source_edit: None,
             description: "Merge remote document".into(),
             actor,
             commands: vec![],
@@ -524,6 +548,7 @@ fn apply(
             }
             entity.provenance = Some(provenance.clone());
         }
+        Command::WriteScript { .. } => {}
         Command::SetMemory { section, text } => {
             if section.trim().is_empty() {
                 return Err(CommandError::Invalid(
@@ -551,3 +576,6 @@ fn apply(
     }
     Ok(())
 }
+
+#[cfg(test)]
+mod source_protocol_tests;

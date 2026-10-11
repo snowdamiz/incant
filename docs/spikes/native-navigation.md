@@ -72,8 +72,10 @@ Despawn removes owner declarations. Despawning a still-referenced source refuses
 unless its final configuration removes that reference in the same batch. A later
 plain spawn reusing the stable ID does not resurrect navigation. Reparenting,
 zero-Velocity archetype relocation and final-value command semantics use the same
-staged boundary. Save, in-place restore and nested-save loading explicitly refuse
-navigation; removal does not erase this world's unsupported-system history.
+staged boundary. The initial navigation slice refused navigation saves.
+[Retained world checkpoints](native-retained-saves.md) now preserve checked
+navigation in version 2; legacy version-1 restore still refuses to clear a
+world's navigation history. Physics/audio continuation remains unsupported.
 
 ## Binary v9 and limits
 
@@ -127,5 +129,4 @@ checks remain included. Logs/hashes are in
 
 Root SDK integration, standard host cache-provider wiring, steering/avoidance
 world integration, automatic tilemap-to-grid policy, debug draw, complete session
-saves and shipped reference-phone measurements remain open. This local slice is
-unpublished and makes no Phase 1 completion or performance-gate claim.
+saves and shipped reference-phone measurements remain open. This local evidence makes no Phase 1 completion or performance-gate claim.

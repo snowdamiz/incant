@@ -36,9 +36,13 @@ pub(super) fn import(project: &Path, input: &Path) -> Result<()> {
         return Err("XLIFF exceeds 32 MiB".into());
     }
     let document = String::from_utf8(bytes)?;
-    let mut bus = CommandBus::persistent(
+    let mut bus = CommandBus::persistent_with_sources(
         project.with_extension("journal.jsonl"),
         read_project(project)?,
+        project
+            .parent()
+            .filter(|p| !p.as_os_str().is_empty())
+            .unwrap_or(Path::new(".")),
     )?;
     let prepared = PreparedTranslations::prepare(&bus, &document)?;
     let result = prepared.commit(&mut bus, Actor::import("xliff"))?;

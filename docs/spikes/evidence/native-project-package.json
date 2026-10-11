@@ -1,0 +1,288 @@
+{
+  "fresh_runs": 3,
+  "ticks_each": 20,
+  "authoring_source_deleted": true,
+  "inputs_sha256": {
+    "project.json": "710f1dabd840ea6688a624e56acad1e1a27e65142fd281428f1c54742a6ab8aa",
+    "b.ts": "f013a587cc93b0631cf375d5fe8e155c043dd97866a24193b81b10a681f1725f",
+    "shared.ts": "80ebf5ef376dfde65a42784b622c18f2288e5a32f65b8d303764543a3b31d540",
+    "observe.json": "ed58af4ea8a87d5b03e5d024bde64e0b30bd0d2c956a8660e0f6f883b7c0bc64",
+    "a.ts": "f013a587cc93b0631cf375d5fe8e155c043dd97866a24193b81b10a681f1725f"
+  },
+  "export_receipt_sha256": "8c9b9a1113c2362349e37a6cc2c6dc41705dd351dbb048536e63c82498573d99",
+  "player_sha256": "7bc0765b3f894668d543611286831e4c6b0a016aefcf0168358e799fb9496f1a",
+  "runtime": {
+    "flipbooks": [],
+    "frames": 48000,
+    "logs": {
+      "dropped": 0,
+      "entries": []
+    },
+    "observations": {
+      "checks": [
+        {
+          "actual": [
+            2.0000000000000004,
+            0.0,
+            0.0
+          ],
+          "expect": {
+            "entity": "00000000000000000000000001",
+            "property": "translation",
+            "tolerance": 1e-09,
+            "type": "vector",
+            "value": [
+              2.0,
+              0.0,
+              0.0
+            ]
+          },
+          "name": "motion-0",
+          "passed": true,
+          "tick": 20
+        },
+        {
+          "actual": [
+            2.999999999999999,
+            0.0,
+            0.0
+          ],
+          "expect": {
+            "entity": "00000000000000000000000002",
+            "property": "translation",
+            "tolerance": 1e-09,
+            "type": "vector",
+            "value": [
+              3.0,
+              0.0,
+              0.0
+            ]
+          },
+          "name": "motion-1",
+          "passed": true,
+          "tick": 20
+        },
+        {
+          "actual": [
+            4.000000000000001,
+            0.0,
+            0.0
+          ],
+          "expect": {
+            "entity": "00000000000000000000000003",
+            "property": "translation",
+            "tolerance": 1e-09,
+            "type": "vector",
+            "value": [
+              4.0,
+              0.0,
+              0.0
+            ]
+          },
+          "name": "motion-2",
+          "passed": true,
+          "tick": 20
+        }
+      ],
+      "entities": {
+        "00000000000000000000000001": {
+          "parent": null,
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            2.0000000000000004,
+            0.0,
+            0.0
+          ],
+          "velocity": null,
+          "world_transform": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              2.0000000000000004,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "00000000000000000000000002": {
+          "parent": null,
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            2.999999999999999,
+            0.0,
+            0.0
+          ],
+          "velocity": null,
+          "world_transform": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              2.999999999999999,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "00000000000000000000000003": {
+          "parent": null,
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            4.000000000000001,
+            0.0,
+            0.0
+          ],
+          "velocity": null,
+          "world_transform": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              4.000000000000001,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      "passed": true,
+      "tick": 20,
+      "tick_rate": 20
+    },
+    "pcm_sha256": "fec9afb531a8e036eba1d81651896e1b2c1f78b0234dbadc8e7549563f09407b",
+    "sources": [],
+    "tick": 20
+  },
+  "startup_tampering_refused": true,
+  "frozen_inputs_verified": 771,
+  "target": "aarch64-apple-darwin",
+  "limits": [
+    "macOS ARM64 only",
+    "CPU render input; fixture has no spatial assets",
+    "No phone, GPU or performance claim"
+  ],
+  "passed": true,
+  "native_process_tests": {
+    "passed": 16,
+    "windows_only_skipped": 2,
+    "log_sha256": "7f58beac39ea21f0c0961630bfe2c14eb25f1a2fdad9e5b6f8f750cef4c84cfa"
+  },
+  "scoped_checks": {
+    "cook_game_tests": 23,
+    "headless_tests": 47,
+    "headless_gpu_ignored": 2,
+    "data_package_tests": 5,
+    "scoped_all_target_clippy": "passed",
+    "all_python_tools": {
+      "passed": 119,
+      "windows_only_skipped": 2,
+      "log_sha256": "c6d3e40bd6ed93d668e9907884b34165bb0fcab23094533f9b64bed562e3e11a"
+    }
+  },
+  "reviewed_sources": {
+    "base": "ae794917400c70cc45d4a2d411890422da01bd01",
+    "files": {
+      "Cargo.lock": "03290c2306095507874347230afd41ada7e63294c8cc455cf9ae32bd65a09fb5",
+      "crates/incant_cook/Cargo.toml": "ec8b8eebc0013e304ae1d1e686c6957790e2d5cc8dfed1bc271678dbea868fa3",
+      "crates/incant_cook/src/lib.rs": "890505dfcf0d57634f04896464b269907545d59399305bfb5cf36d6b044cd55f",
+      "crates/incant_cook/src/script.rs": "cee7491beb859a1b5816c200ca8672df5b658833f412676a97d203adff6abdc0",
+      "crates/incant_cook/src/project_build.rs": "1dfa95746a5c592a5f1c46b966eaa357a32fa48ca74c28ae3973638eff6f778e",
+      "crates/incant_cook/src/typescript.rs": "7ca8330c297530e2e820cc728db9ac8b5ce7d7e7af39f358bf33c6b9df28c74a",
+      "crates/incant_cook/tests/typescript.rs": "9b547e49f3265805330c8b1f9c7b125e1bc45282d80ade1dff842cdc547a015c",
+      "crates/incant_game_player/Cargo.toml": "d6b59b4c3fe12f5733f77f497b08dd2efd87a68e32e1642502b93918f732b87a",
+      "crates/incant_game_player/build.rs": "394e98899e701b8d00405111b78534276cf37abf5df9a962539d1206efbd4653",
+      "crates/incant_game_player/src/main.rs": "d820c7e33c68464f5cfe22d4a165f98c29f8d86f5a3eb57e503d8b47c0462e57",
+      "crates/incant_game_player/src/package.rs": "8bc986118821727285e7218cd53a12bdf243a59466312ae7edc5d865d7205d1a",
+      "crates/incant_headless/Cargo.toml": "c58a19104819805faca0316a99f5b9229efa97c9383b538c0ceb8a2311e00da3",
+      "crates/incant_headless/src/native_play.rs": "748488fe1ce2af34745c6c5ca6c0133007a357d4590f45e1b2343e4a9e9c6a5c",
+      "crates/incant_headless/src/native_play/session.rs": "ad965b27bd1bd1f55e08ee5f294016ec8d683f9d5e7ffab4869e5bf3433c0fe3",
+      "tools/export_native.py": "b8f18608b7d566a38b5dc1888db1704fc75a008bf35f451bc98998167c82d113",
+      "tools/native_package.py": "a6ce11f1eeb62edc39b74846aa0341ec7f17689018f31114075d720e693f24a5",
+      "tools/tests/test_native_package.py": "f23711c1bac53cc86456649f1f6a937b00f3b912a195a28ef480ecf2d4591736"
+    },
+    "excluded_from_independent_review": [
+      "tools/native_process.py",
+      "tools/tests/test_native_process.py"
+    ]
+  },
+  "fresh_build_input_manifest_sha256": "20c4b2dd28a2b1df45e11f658d0b7d02e06113371d80399343a464ebf6836785"
+}

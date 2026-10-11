@@ -1,22 +1,15 @@
 //! One startup boundary shared by the native CLI and retained RPC play.
 //! The session contains no authoring document, command bus or source text.
-use super::{PlayError, Result, embedded, id, invalid, native};
-use incant_audio_runtime::{ClipBinding, MAX_SCENE_CLIPS};
+use super::{Result, embedded, native};
+use incant_audio_runtime::ClipBinding;
 use incant_game_runtime::{HostedOfflineGameSession, OfflineGameSession};
 use incant_input::{InputActions, InputEvent, InputFrame};
 use incant_render_game::{NativeRenderHost, NativeRenderSettings};
 use incant_runtime::{CookedScene, NativeWorld};
 use incant_script::{CompiledScript, NativeLogs};
-use serde::Deserialize;
-use std::{collections::BTreeSet, path::Path};
+use std::path::Path;
 
-#[derive(Default, Deserialize)]
-#[serde(default, deny_unknown_fields)]
-pub(crate) struct StartOptions {
-    pub scene: Option<String>,
-    pub script_sha256: Option<String>,
-    pub camera: Option<String>,
-}
+pub(crate) use incant_play::StartOptions;
 
 pub(crate) struct Session {
     pub scene: String,
@@ -31,125 +24,21 @@ impl Session {
         options: &StartOptions,
         sample_rate: u32,
     ) -> Result<Self> {
-        if !(8000..=192000).contains(&sample_rate) {
-            return Err(invalid("invalid sample rate"));
-        }
-        let scene = match &options.scene {
-            Some(value) => value.clone(),
-            None if document.scenes.len() == 1 => {
-                document.scenes.keys().next().expect("one scene").clone()
-            }
-            None => {
-                return Err(invalid(
-                    "choose --scene when the project does not have exactly one scene",
-                ));
-            }
-        };
-        id(&scene)?;
-        let camera = options.camera.as_deref().map(id).transpose()?;
-        let authored_scripts = document.scenes.get(&scene).is_some_and(|scene| {
-            scene
-                .entities
-                .values()
-                .any(|entity| entity.components.contains_key("Script"))
-        });
-        let (cooked, code) = if authored_scripts {
-            let prepared = incant_cook::prepare_script_scene(document, &scene).map_err(native)?;
-            super::compiler::compile(prepared, root)?.into_parts()
-        } else {
-            let bytes = incant_cook::cook_scene(document, &scene).map_err(native)?;
-            (
-                CookedScene::from_bytes(&bytes).map_err(native)?,
-                embedded::load().map_err(native)?,
-            )
-        };
-        if camera.is_none() && (!cooked.spatial().is_empty() || !cooked.visual_assets().is_empty())
-        {
-            return Err(invalid(
-                "spatial content requires an explicit --camera and native render host",
-            ));
-        }
-        let clip_ids: BTreeSet<_> = cooked
-            .audio()
-            .iter()
-            .filter_map(|n| n.source.as_ref().map(|s| s.clip))
-            .collect();
-        if clip_ids.len() > MAX_SCENE_CLIPS {
-            return Err(invalid("too many scene clips"));
-        }
-        let settings = camera
-            .map(|camera| {
-                let path = |kind, asset_kind, suffix| {
-                    if cooked.visual_assets().iter().any(|a| a.kind == asset_kind) {
-                        incant_assets::project_cache_directory(root, kind).map_err(native)
-                    } else {
-                        Ok(root.join(suffix))
-                    }
-                };
-                Ok::<_, PlayError>(NativeRenderSettings {
-                    model_cache: path(
-                        incant_assets::CacheKind::Models,
-                        incant_runtime::VisualAssetKind::Model,
-                        ".incant/cache/models",
-                    )?,
-                    texture_cache: path(
-                        incant_assets::CacheKind::Textures,
-                        incant_runtime::VisualAssetKind::Texture,
-                        ".incant/cache/textures",
-                    )?,
-                    camera,
-                    consumer: (),
-                })
-            })
-            .transpose()?;
-        let audio_cache = if clip_ids.is_empty() {
-            None
-        } else {
-            Some(
-                incant_assets::project_cache_directory(root, incant_assets::CacheKind::Audio)
-                    .map_err(native)?,
-            )
-        };
-        let mut clips = Vec::with_capacity(clip_ids.len());
-        for clip in clip_ids {
-            let key = ulid::Ulid::from_bytes(clip.0).to_string();
-            let asset = document
-                .assets
-                .get(&key)
-                .ok_or_else(|| invalid("missing audio asset"))?;
-            if asset.kind != "audio" {
-                return Err(invalid("clip reference is not an audio asset"));
-            }
-            clips.push(
-                ClipBinding::load(
-                    clip,
-                    audio_cache.as_deref().expect("referenced clips"),
-                    &asset.sha256,
-                )
-                .map_err(native)?,
-            );
-        }
-        let script_source_sha256 = code
-            .metadata()
-            .source_sha256
-            .iter()
-            .map(|b| format!("{b:02x}"))
-            .collect();
-        if options
-            .script_sha256
-            .as_ref()
-            .is_some_and(|expected| expected != &script_source_sha256)
-        {
-            return Err(invalid(
-                "selected script does not match requested source hash",
-            ));
-        }
-        let actions = document.settings.input_actions.clone();
-        let game = Game::new(cooked, code, actions, clips, sample_rate, settings)?;
+        let prepared =
+            incant_play::PreparedPlay::load(document, root, options, sample_rate, embedded::load)
+                .map_err(native)?;
+        let game = Game::new(
+            prepared.cooked,
+            prepared.code,
+            prepared.actions,
+            prepared.clips,
+            prepared.sample_rate,
+            prepared.render,
+        )?;
         Ok(Self {
-            scene,
-            script_source_sha256,
-            authored_scripts,
+            scene: prepared.scene,
+            script_source_sha256: prepared.script_source_sha256,
+            authored_scripts: prepared.authored_scripts,
             game,
         })
     }

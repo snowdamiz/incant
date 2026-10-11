@@ -10,6 +10,18 @@ FULL = ('ci.yml', 'desktop.yml', 'credentials.yml', 'development-wasm.yml',
 
 
 class ReleasePolicyTests(unittest.TestCase):
+    def test_new_workflows_cannot_reintroduce_full_pr_or_main_push_suites(self):
+        for path in WORKFLOWS.glob('*.yml'):
+            if path.name in ('development.yml', 'website-publish.yml'):
+                continue
+            with self.subTest(workflow=path.name):
+                events = path.read_text().split('on:\n', 1)[1].split('permissions:', 1)[0]
+                self.assertNotIn('pull_request:', events)
+                self.assertNotIn('pull_request_target:', events)
+                if '  push:' in events:
+                    self.assertIn('  push:\n    branches: [codex/release-candidate]\n', events)
+                    self.assertNotIn('main', events)
+
     def test_full_suites_cover_all_candidate_changes_without_duplicate_pr_or_main_runs(self):
         for name in FULL:
             with self.subTest(workflow=name):

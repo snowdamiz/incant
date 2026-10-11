@@ -25,3 +25,13 @@ pub use project_script::{
 mod build_script;
 #[cfg(feature = "script")]
 pub use build_script::embed_script;
+
+#[cfg(feature = "typescript")]
+mod typescript;
+#[cfg(feature = "typescript")]
+pub use typescript::{ProjectCompilation, TypeScriptCookError, compile_project_sources};
+
+#[cfg(feature = "typescript")]
+mod project_build;
+#[cfg(feature = "typescript")]
+pub use project_build::{PROJECT_ENV, SCENE_ENV, embed_project};
