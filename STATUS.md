@@ -45,6 +45,13 @@ window package execution and complete UI/export/device gates remain open.
 
 ## Current integration and parallel work
 
+The closed retained-state / native SDK / shared Play-startup union passes 837
+ordinary and 75 serialized GPU tests, full Clippy, 536 UI tests and the fresh
+four-player shipping proof. Audio and navigation preparation now precede all
+publication, with a combined atomic-refusal regression. World-save v2 remains
+world-only; solver/audio/VM continuation and editor controls remain open.
+[Integrated evidence](docs/spikes/native-state-play-union.md).
+
 | Workstream | Current result | Next work / boundary |
 | --- | --- | --- |
 | Editor and sprite authoring | [PR #61](https://github.com/snowdamiz/incant/pull/61) combines the final plain UI, typed atlas/audio imports, focus fixes and the corrected sprite/atlas baseline. 524 UI tests, strict TypeScript, production and native builds pass. | Merged after exact-head hosted checks and isolated native Claude acceptance. [Evidence](docs/spikes/editor-release-union.md). |
