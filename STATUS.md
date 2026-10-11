@@ -17,7 +17,7 @@ visual work, and Astra owns correctness and integration.
 | Workstream | Current result | Next work / boundary |
 | --- | --- | --- |
 | Editor and sprite authoring | [PR #61](https://github.com/snowdamiz/incant/pull/61) combines the final plain UI, typed atlas/audio imports, focus fixes and the corrected sprite/atlas baseline. 524 UI tests, strict TypeScript, production and native builds pass. | Exact-head hosted checks and isolated native Claude acceptance are running. [Evidence](docs/spikes/editor-release-union.md). |
-| Native game and rendering | Input, embedded QuickJS, native physics, scene audio and retained GPU submission compose through one accepted-tick lifecycle. Binary v5 sprites share immutable geometry. | Root integration PR is being prepared. Native editor/legacy Play migration, complete SDK, shader pipeline work and device budgets remain. |
+| Native game and rendering | Input, embedded QuickJS, native physics, scene audio and retained GPU submission compose through one accepted-tick lifecycle. Binary v5 sprites share immutable geometry. | [PR #62](https://github.com/snowdamiz/incant/pull/62) is in hosted verification. Native editor/legacy Play migration, complete SDK, shader pipeline work and device budgets remain. |
 | Native window player | A separate implementation branch adds real surface presentation, keyboard/mouse input, suspension and device audio. Local source-free lifecycle tests pass. | Independent review/CI and Claude native acceptance precede integration. No phone or frame-budget claim. |
 | Native WebAssembly | Shared bounded capability ABI serves development Wasmtime and compiled wasm2c modules; local conformance and a source-free macOS executable pass. | Hosted verification, optimized Windows/MSVC support, full SDK/game composition and device execution continue separately. |
 | CI speed | Registry-only shared auxiliary caches are merged; the agent is measuring actual warm consumers and completed job timings. | Shared fresh-build storage and a lower-optimization CI test profile are experiments, not adopted speed claims. Independent shipping audits remain intact. |
@@ -68,12 +68,13 @@ review; concurrent native reviews coordinate foreground ownership.
 - **Native game and audio.** Retained cooked clips, buses, spatial playback and
   streaming compose with simulation, input, scripts and GPU publication. Invalid
   preflight input is retryable; failure after acceptance destroys the composite
-  state. A fresh 7,404,688-byte macOS shipping executable passes 28 process
+  state. A fresh 7,404,688-byte macOS shipping executable passes 40 process
   invocations after source/project/build removal, with exact repeated PCM/pose
-  and numerical GPU hashes. That fixture exercises v4 models; v5 sprite process
-  coverage is a separate follow-up. [Composition](docs/spikes/native-game-session.md),
+  and numerical GPU hashes. The fixtures exercise v4 models and v5 atlas sprites,
+  including mirrored nine-slice geometry and missing-cache/unknown-frame refusal. [Composition](docs/spikes/native-game-session.md),
   [audio host](docs/spikes/native-scene-audio-host.md),
-  [GPU proof](docs/spikes/native-game-gpu-player.md).
+  [GPU proof](docs/spikes/native-game-gpu-player.md),
+  [sprite executable proof](docs/spikes/native-sprite-player.md).
 - **WebAssembly.** Optional Wasmtime 49.0.2 development host and a statically
   compiled WABT 1.0.42/wasm2c path share copied numeric/structural capabilities.
   C traps remain in C, fuel/storage/imports are bounded, and accepted failures
@@ -86,10 +87,14 @@ review; concurrent native reviews coordinate foreground ownership.
 
 Local integration checks: 543 ordinary Rust release tests/doctests; 138 scoped
 static/development-Wasm/runtime/script tests; workspace and optional-host release
-Clippy; 524 UI tests, strict TypeScript and production build; 40 Python tool tests.
+Clippy; 524 UI tests, strict TypeScript and production build; 43 Python tool tests.
 The renderer's unchanged frozen implementation separately passed all 66 actual
 GPU tests. Exact sources, scopes and logs are retained in the linked reports;
 these local results do not replace pending hosted checks or device gates.
+The first hosted runtime run exposed stderr/JSON mixing in the Wasm audit and a
+stale isolated physics lockfile. Reviewed fixes pass real combined Wasm
+conformance, browser-target physics compilation and six native parity streams.
+[Correction evidence](docs/spikes/runtime-ci-corrections.md).
 
 ## Remaining engineering requirements
 

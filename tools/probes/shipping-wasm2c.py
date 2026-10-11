@@ -35,6 +35,14 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def cargo_metadata(command, *, cwd, env):
+    # Cargo can download target-specific packages while resolving the graph.
+    # Its progress/warnings are stderr, never part of the machine JSON document.
+    result = cargo_output(command, cwd=cwd, env=env)
+    require(result.returncode == 0, f'Cargo metadata failed: {result.stderr[-4000:]}')
+    return json.loads(result.stdout)
+
+
 def provision(path):
     key = (platform.system(), platform.machine())
     require(key in ASSETS, f'Unsupported pinned WABT host: {key}')
@@ -77,7 +85,7 @@ def main():
     cargo = ROOT / 'tools/cargo'
     run([cargo, 'build', '-j2', '-p', 'incant_wasm_cook', '--locked'])
     cook = ROOT / 'target/debug/incant_wasm_cook'
-    metadata = json.loads(run([cargo, 'metadata', '--locked', '--format-version=1', '--features', 'incant_wasm_dev/wasmtime-host,incant_wasm_runtime/embedded-fixture']))
+    metadata = cargo_metadata([str(cargo), 'metadata', '--locked', '--format-version=1', '--features', 'incant_wasm_dev/wasmtime-host,incant_wasm_runtime/embedded-fixture'], cwd=ROOT, env=environment)
     names = {p['id']: p['name'] for p in metadata['packages']}; nodes = {n['id']: n for n in metadata['resolve']['nodes']}
     roots = ['incant_wasm_runtime', 'incant_runtime', 'incant_script', 'incant_game_runtime', 'incant_script_player', 'incant_game_player']
     for root in roots:
