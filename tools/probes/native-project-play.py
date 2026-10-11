@@ -100,12 +100,15 @@ def main():
         if args.rpc:
             from native_rpc_controls import exercise
             rpc_result = exercise(run, project, digest, entity, rate, out)
+            from native_agent_controls import exercise as exercise_agent
+            agent_result = exercise_agent(run, project, digest, entity, rate, out)
         require(before=={p.name:sha(p) for p in (project,journal)},'authoring changed')
         require(player_hash==sha(player),'player modified itself')
         result={'passed':True,'typescript_modules':4 if args.typescript else 0,'successful_runs':3,'false_assertion_runs':1,'terminal_failure_runs':1,'mismatched_script_runs':1,'player_sha256':player_hash,'source_sha256':digest,'temporary_compile_input_deleted':True,'authoring_unchanged':True,'baseline':reports[0],'shipping_profile':False,'gpu_submitted':False,'reference_phone_gate':False}
         if rpc_result is not None:
             result['rpc_controls'] = rpc_result
+            result['agent_run_controls'] = agent_result
         (out/'result.json').write_text(json.dumps(result,indent=2)+'\n')
-    print(json.dumps({'passed':True,'runtime_processes':10 if args.rpc else 6}))
+    print(json.dumps({'passed':True,'runtime_processes':12 if args.rpc else 6}))
 
 if __name__=='__main__': main()

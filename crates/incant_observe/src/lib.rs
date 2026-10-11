@@ -16,13 +16,15 @@ impl From<&'static str> for ObservationError {
 pub type Result<T> = std::result::Result<T, ObservationError>;
 use incant_input::{ActionState, InputFrame};
 use incant_runtime::{NativeWorld, StableId};
+use schemars::JsonSchema;
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 use std::collections::{BTreeMap, BTreeSet, VecDeque};
 
 pub const MAX_PLAN_BYTES: usize = 256 * 1024;
 const MAX_ITEMS: usize = 256;
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, JsonSchema)]
+#[schemars(with = "String")]
 struct EntityId(StableId);
 impl<'de> Deserialize<'de> for EntityId {
     fn deserialize<D: Deserializer<'de>>(decoder: D) -> std::result::Result<Self, D::Error> {
@@ -44,9 +46,10 @@ impl Serialize for EntityId {
     }
 }
 
-#[derive(Deserialize)]
+/// Bounded native assertions and selected final entities; prepared once before play.
+#[derive(Deserialize, Serialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
-struct Request {
+pub struct Request {
     format: String,
     version: u32,
     #[serde(default)]
@@ -54,14 +57,14 @@ struct Request {
     #[serde(default)]
     entities: Vec<EntityId>,
 }
-#[derive(Deserialize, Serialize)]
+#[derive(Deserialize, Serialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
 struct Check {
     name: String,
     tick: u64,
     expect: Expect,
 }
-#[derive(Deserialize, Serialize)]
+#[derive(Deserialize, Serialize, JsonSchema)]
 #[serde(tag = "type", rename_all = "snake_case", deny_unknown_fields)]
 enum Expect {
     EntityCount {
@@ -91,7 +94,7 @@ enum Expect {
         tolerance: Option<f64>,
     },
 }
-#[derive(Deserialize, Serialize)]
+#[derive(Deserialize, Serialize, JsonSchema)]
 #[serde(rename_all = "snake_case")]
 enum VectorProperty {
     Translation,

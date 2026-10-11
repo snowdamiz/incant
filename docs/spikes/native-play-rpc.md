@@ -4,7 +4,7 @@ The headless `rpc` command's `play.start`, `play.step`, `play.state` and
 `play.stop` methods now use the same cooked native session as `native-play`.
 They no longer construct the legacy document-backed `incant_core::Engine`.
 This is the RPC simulation boundary; it does not yet add editor controls,
-agent play tools, project-attached Script routing, window presentation, runtime
+project-attached Script routing, window presentation, runtime
 inspector edits or session saves. The separate old `play`, `run` and `script`
 CLI commands remain legacy migration work.
 
@@ -93,3 +93,7 @@ hosted checks remain pending publication within the merge queue:
 
 No shipping-profile, hosted-platform, mobile performance, editor interaction or
 phase completion is inferred from these developer-process checks.
+
+A later [native agent integration](native-agent-play.md) adds bounded `play.run` and
+`play.state_query` through the same controller, with separate live-provider and
+source-deleted execution evidence.

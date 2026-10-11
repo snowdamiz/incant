@@ -3,6 +3,7 @@ use incant_render_authoring::RendererAuthoringExt as _;
 mod assets;
 mod eval;
 mod localization;
+mod native_agent_play;
 mod native_play;
 mod native_rpc;
 mod play;
@@ -314,6 +315,8 @@ fn rpc(project: PathBuf, journal: Option<PathBuf>) -> Result<()> {
   "history.read"=>Ok(json!(bus.history().iter().map(|t|json!({"id":t.id,"description":t.description,"actor":t.actor,"commands":t.commands.len()})).collect::<Vec<_>>())),
   "history.undo"=>{let tx=bus.undo()?;Ok(json!({"transaction_id":tx,"revision":bus.revision(),"project":bus.project()}))},
   "history.redo"=>{let tx=bus.redo()?;Ok(json!({"transaction_id":tx,"revision":bus.revision(),"project":bus.project()}))},
+  "play.run"=>Ok(play.run(bus.project(),bus.revision(),root,serde_json::from_value(params.clone())?,&AtomicBool::new(false))?),
+  "play.state_query"=>{let request: incant_agent::play::StateQuery=serde_json::from_value(params.clone())?;Ok(play.state_query(&request.path)?)},
   "play.start"=>Ok(play.start(&bus,root,params.clone())?),
   "play.step"=>Ok(play.step(params.clone())?),
   "play.state"=>Ok(play.state(params.clone())?),
@@ -724,7 +727,8 @@ fn run() -> Result<()> {
                 .parent()
                 .filter(|p| !p.as_os_str().is_empty())
                 .unwrap_or(Path::new("."));
-            let viewport = GpuPerception::new(Some(root.to_path_buf()))?;
+            let viewport = GpuPerception::new(Some(root.to_path_buf()));
+            let viewport = native_agent_play::Host::new(root.to_path_buf(), viewport);
             let mut host = incant_agent::ProjectHost::new(bus.project(), root, viewport)?;
             let report = agent.run(
                 &mut provider,
@@ -750,17 +754,17 @@ fn run() -> Result<()> {
 }
 
 struct GpuPerception {
-    renderer: incant_render::Renderer,
+    renderer: Option<incant_render::Renderer>,
     project_root: Option<PathBuf>,
     assets: incant_assets::AssetStore,
 }
 impl GpuPerception {
-    fn new(project_root: Option<PathBuf>) -> Result<Self> {
-        Ok(Self {
-            renderer: incant_render::Renderer::headless().map_err(|e| e.to_string())?,
+    fn new(project_root: Option<PathBuf>) -> Self {
+        Self {
+            renderer: None,
             project_root,
             assets: Default::default(),
-        })
+        }
     }
 }
 impl incant_agent::Perception for GpuPerception {
@@ -772,6 +776,13 @@ impl incant_agent::Perception for GpuPerception {
         height: u32,
     ) -> std::result::Result<Value, incant_agent::AgentError> {
         use base64::Engine;
+        if self.renderer.is_none() {
+            self.renderer =
+                Some(incant_render::Renderer::headless().map_err(|_| {
+                    incant_agent::AgentError::Tool("GPU renderer unavailable".into())
+                })?);
+        }
+        let renderer = self.renderer.as_mut().expect("initialized renderer");
         if let Some(root) = &self.project_root {
             self.assets.sync_project(project, root).map_err(|_| {
                 incant_agent::AgentError::Tool("Cooked assets could not be loaded".into())
@@ -781,12 +792,9 @@ impl incant_agent::Perception for GpuPerception {
                 "This viewport has no project asset access".into(),
             ));
         }
-        let scene = self
-            .renderer
-            .prepare_scene(project, &self.assets)
-            .map_err(|_| {
-                incant_agent::AgentError::Tool("Scene geometry could not be prepared".into())
-            })?;
+        let scene = renderer.prepare_scene(project, &self.assets).map_err(|_| {
+            incant_agent::AgentError::Tool("Scene geometry could not be prepared".into())
+        })?;
         let scene = if let Some(id) = camera {
             scene
                 .with_camera(id)
@@ -794,8 +802,7 @@ impl incant_agent::Perception for GpuPerception {
         } else {
             scene
         };
-        let bytes = self
-            .renderer
+        let bytes = renderer
             .screenshot_scene_png(&scene, width, height)
             .map_err(|_| incant_agent::AgentError::Tool("GPU capture failed".into()))?;
         Ok(

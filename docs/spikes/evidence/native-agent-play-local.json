@@ -1,0 +1,247 @@
+{
+  "recorded_at": "2026-10-11T13:39:51.819191+00:00",
+  "base_commit": "a73df4a44230703b2201cf0dabfca0e089ae82fc",
+  "plan_sha256": "296ea546a33a7fe8fa0b8c7ee795e1c34476cb087ab9deaa4ac84e8a5fda808e",
+  "implementation_files_sha256": {
+    ".github/workflows/credentials.yml": "7a263284fe674145e0ada9528892b45b4e9370f5a5912c3dcbdf649f21a4f153",
+    "Cargo.lock": "3608373db8ef43d79ce57c446852ff3414d8efc396da45ed900cb5c3f89996c7",
+    "crates/incant_agent/Cargo.toml": "f16e99e7396910c493d6d48415b40a63c46e70b4cce02a37c7d77fe0e04110ba",
+    "crates/incant_agent/src/assets.rs": "2824cb6157a20c5246e6f29385eaf8e0ef8e784ef14ba11c7a7021ac3ee6c420",
+    "crates/incant_agent/src/lib.rs": "a4eb629b7121e289957df3d53fd914e06bf6d0ca2910b36f6cd5470d60ab6898",
+    "crates/incant_agent/src/play.rs": "830a42a9a7fac84dafa325c7618312231f9dcf6700dcdc6a5a5ab11ec1349371",
+    "crates/incant_headless/src/eval.rs": "e1961923383699f7b1a6586baff367857ccdcef8ebd9926b3dcd4d9c73d89502",
+    "crates/incant_headless/src/main.rs": "c19f736ade7784e9ce7afa44e93b0a80caa70812472d4b54db0f47c355a272bd",
+    "crates/incant_headless/src/native_agent_play.rs": "0711f6017683e52d8d6a98b0823f88b3274eb75be67e74342c9082098a54ffb6",
+    "crates/incant_headless/src/native_agent_play/tests.rs": "efa2515030c6b00bc11c9e24dd25c82c6528a97851add0d687f2002148151a9c",
+    "crates/incant_headless/src/native_rpc.rs": "5f2302f2f0596f6c43253db0c8c5f72ad7dbafc5d62b1ed526abc25969ae4fac",
+    "crates/incant_headless/src/native_rpc/run.rs": "cf1a0a09f0e06c9de084f1f37b0f065f3e3c1037edf0a072e3c3400d25141d50",
+    "crates/incant_headless/tests/native_rpc.rs": "7ab22584ac60fafa0b7cd18c1f730b247953c4216529e55499e1b38e0a743b90",
+    "crates/incant_observe/Cargo.toml": "02f8f970a8f016148df8f32e60d7542a65112f51b507af359218e8526d5f37c2",
+    "crates/incant_observe/src/lib.rs": "3d87b82c98920b227cfc385cc23ecf0ddf9c1f6a2203dbc0f9c858a123cb2488",
+    "schemas/agent-tools.json": "8455e3bc7b8bd412ad515e9dd0c8ad14b45b61040f4724ea7b1aa1168e7cec9f",
+    "tools/probes/native-project-play.py": "40c18aa9c6ac2c9d0ae784dbcc74ebd957efe361b6dcbf81edd4d502f4006e4a",
+    "tools/probes/native_agent_controls.py": "f1cc24bd532afa14f5a795141fc52141c190c83622a68b01d980d1d556bbb03b"
+  },
+  "local_checks": {
+    "rust_profile": "release",
+    "rust_tests": 87,
+    "rust_result_groups": 23,
+    "ignored_gpu_tests": 2,
+    "all_target_clippy": true,
+    "python_tests": 92,
+    "node_tests": 12,
+    "schema_files_changed": [
+      "schemas/agent-tools.json"
+    ],
+    "sdk_bridge_conventions_fmt_actionlint": true
+  },
+  "logs_sha256": {
+    "/tmp/incant-native-agent-final-tests.log": "7706cc648e21068bbfa23da307234589accca00d8e65941db7e06662b6b09496",
+    "/tmp/incant-native-agent-final-clippy.log": "ca32baa689401b92edca40e9153575ff3824067acc161916bb8b184026c7934f",
+    "/tmp/incant-native-agent-tools-final.log": "d26515bd74d11f745d9c70d8da634c672069e92d771696bf851d07dab2110c34",
+    "/tmp/incant-native-agent-node-final.log": "6aaed821e09bc563ece723d59eabd172e13aeb90230cbeed50b66b764d19d46c",
+    "/tmp/incant-native-agent-source-free.log": "1686c2a3140851f64c68b5a6ed6571866ba150e19506cb9ec9993c0fa13193bf",
+    "/tmp/incant-native-agent-actionlint.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/tmp/incant-native-agent-play-review.md": "2e22befc9060364f0fbe0d835bb5af75d20dfa073df69c5a0ec86ccce0f2448e",
+    "/tmp/incant-native-agent-lazy-constructor-error.log": "310ae5fd977933c12c7432593718a2c349bcc7c2df25d9702af41d58328d3ce4",
+    "/tmp/incant-native-agent-tools.log": "3d75429370a722bdf12f42e8490729e17db8a8bc9b6a8ea5fda061d2de14c184"
+  },
+  "source_free": {
+    "report_sha256": "328eada06f657d2c2a4695845b1bbc3ad16d51b0514a078ace50db294aca90f3",
+    "report": {
+      "passed": true,
+      "typescript_modules": 4,
+      "successful_runs": 3,
+      "false_assertion_runs": 1,
+      "terminal_failure_runs": 1,
+      "mismatched_script_runs": 1,
+      "player_sha256": "bf8a12d7cd182101e99466ce7bccdb046264a93063c52ca24a59418a972ba924",
+      "source_sha256": "88763acdfbdcd42842f65c1f81e7e67cffd4b52243b6a14da5cf974ae3771b1b",
+      "temporary_compile_input_deleted": true,
+      "authoring_unchanged": true,
+      "baseline": {
+        "passed": true,
+        "runtime": "native",
+        "script_source_sha256": "88763acdfbdcd42842f65c1f81e7e67cffd4b52243b6a14da5cf974ae3771b1b",
+        "script_source_parsing": false,
+        "scene": "01M4MVG7YDF1TJNN80ZW0JDDYR",
+        "tick": 5,
+        "tick_rate": 60,
+        "entity_count": 1,
+        "frames": 4000,
+        "pcm_sha256": "0c92bddb4e96f3ea9ec9f0f64a668255a6c15527ac09f6f119cafde60c7c4a39",
+        "logs": {
+          "dropped": 0,
+          "entries": [
+            {
+              "level": "info",
+              "message": "accepted 1 \ud83d\ude80",
+              "tick": 1
+            },
+            {
+              "level": "info",
+              "message": "accepted 2 \ud83d\ude80",
+              "tick": 2
+            },
+            {
+              "level": "info",
+              "message": "accepted 3 \ud83d\ude80",
+              "tick": 3
+            },
+            {
+              "level": "info",
+              "message": "accepted 4 \ud83d\ude80",
+              "tick": 4
+            },
+            {
+              "level": "info",
+              "message": "accepted 5 \ud83d\ude80",
+              "tick": 5
+            }
+          ]
+        },
+        "observations": {
+          "passed": true,
+          "tick": 5,
+          "tick_rate": 60,
+          "checks": [
+            {
+              "name": "motion",
+              "tick": 5,
+              "expect": {
+                "type": "vector",
+                "entity": "00000000000000000000000001",
+                "property": "translation",
+                "value": [
+                  0.23333333333333334,
+                  0.0,
+                  0.0
+                ],
+                "tolerance": 1e-10
+              },
+              "passed": true,
+              "actual": [
+                0.23333333333333334,
+                0.0,
+                0.0
+              ]
+            }
+          ],
+          "entities": {
+            "00000000000000000000000001": {
+              "parent": null,
+              "translation": [
+                0.23333333333333334,
+                0.0,
+                0.0
+              ],
+              "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "velocity": [
+                3.0,
+                0.0,
+                0.0
+              ],
+              "world_transform": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                [
+                  0.23333333333333334,
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            }
+          }
+        },
+        "cpu_render_input": false,
+        "gpu_submitted": false,
+        "project_sha256": "9b55eebd4cb5777555f54ee14e6c819c675ddca430d5aeb27531f4f08084d702"
+      },
+      "shipping_profile": false,
+      "gpu_submitted": false,
+      "reference_phone_gate": false,
+      "rpc_controls": {
+        "successful_processes": 2,
+        "failed_session_processes": 1,
+        "mismatched_script_processes": 1,
+        "source_parsing": false,
+        "full_world_serialization": false,
+        "gpu_submitted": false
+      },
+      "agent_run_controls": {
+        "processes": 2,
+        "source_parsing": false,
+        "full_world_serialization": false,
+        "real_provider": false,
+        "candidate_failure_preserves_previous": true,
+        "false_assertion_inspectable": true
+      }
+    },
+    "actual_processes": 12,
+    "cache": "Warm private developer target seeded by an independent APFS clone; not a fresh shipping proof."
+  },
+  "live_provider": {
+    "account_type": "Saved ChatGPT OAuth; no API key",
+    "model": "gpt-6-astra",
+    "player_sha256": "5f7e9853907044545c4f4289c49f14d7763d39cc53c76adf16095e316e63055f",
+    "project_sha256": "af0e125df024f8e3d185e781776eb451e8b156052064fe91e2b74524335ca1a2",
+    "project_unchanged": true,
+    "report": {
+      "steps": 3,
+      "tool_calls": [
+        {
+          "name": "play_run",
+          "succeeded": true
+        },
+        {
+          "name": "play_state_query",
+          "succeeded": true
+        }
+      ],
+      "transaction_ids": [],
+      "usage": {
+        "input_tokens": 19502,
+        "output_tokens": 292
+      }
+    },
+    "stdout_sha256": "e75031b7c9ee8b5249f6af884c674056e68160a77d4b9a8bd5456151d616de54",
+    "model_summary_sha256": "47d51e874db3bcf88e6b384fd72c08a90b41118ca4ae513fd0b5b232b05c4257",
+    "numerical_claim": "Live TurnReport proves successful native tool dispatch. Model narrative is not the authoritative numeric/assertion oracle; direct native tests and source-free controls supply those oracles."
+  },
+  "resolved_findings": [
+    "Lazy renderer startup required removing the old Result operator in eval.rs; final compile/tests/Clippy pass.",
+    "Credential closure regression caught new local dependency triggers; added incant_observe/incant_runtime/incant_physics_2d_runtime paths without changing test or selection policy."
+  ],
+  "limits": [
+    "Cooperative 10-second host budget, not preemptive cancellation or a hard response deadline.",
+    "No native gameplay frame capture, editor Play migration, project Script routing, full SDK, native session saves or phone performance claim.",
+    "Hosted checks and final main integration remain pending."
+  ]
+}

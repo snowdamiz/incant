@@ -9,9 +9,14 @@ use incant_script::NativeLogs;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::{collections::BTreeMap, path::Path};
+mod run;
 
 #[derive(Debug, thiserror::Error)]
 pub(crate) enum Error {
+    #[error("native play interrupted")]
+    Interrupted,
+    #[error("native play exceeded its 10 second host execution budget")]
+    Deadline,
     #[error("native play RPC: {0}")]
     Invalid(&'static str),
     #[error(transparent)]

@@ -307,3 +307,46 @@ fn project_script_does_not_fall_back_to_legacy_play() {
     error(&response[0], "Script");
     error(&response[1], "no play session");
 }
+
+#[test]
+fn bounded_run_and_state_query_keep_completed_world_across_authoring_and_failed_candidates() {
+    let temp = tempfile::tempdir().unwrap();
+    let (sid, eid) = fixture(temp.path());
+    let selected = format!("/entities/{eid}/transform/translation");
+    let response = rpc(
+        temp.path(),
+        vec![
+            call("play.run", json!({"seconds":0.5})),
+            call("play.state_query", json!({"path":selected})),
+            call(
+                "command.execute",
+                json!({"expected_revision":0,"description":"Overflow next run","commands":[
+                    {"op":"set_component","scene_id":sid,"entity_id":eid,"component":"Transform","value":{
+                        "translation":[1.6e308,0.,0.],"rotation":[0.,0.,0.,1.],"scale":[1.,1.,1.]}},
+                    {"op":"set_component","scene_id":sid,"entity_id":eid,"component":"Velocity","value":{"linear":[1e308,0.,0.]}}
+                ]}),
+            ),
+            call("play.state_query", json!({"path":selected})),
+            call("play.run", json!({"seconds":0.5})),
+            call("play.state_query", json!({"path":selected})),
+            call("play.state_query", json!({"path":"/entities"})),
+            call("play.state_query", json!({"path":"/input"})),
+            call("play.stop", json!({})),
+            call("play.state_query", json!({"path":"/tick"})),
+        ],
+    );
+    assert_eq!(ok(&response[0])["state"]["tick"], 5);
+    assert_eq!(ok(&response[0])["passed"], true);
+    assert_eq!(
+        ok(&response[1])["untrusted_runtime_data"],
+        json!([1., 0., 0.])
+    );
+    ok(&response[2]);
+    assert_eq!(ok(&response[1]), ok(&response[3]));
+    assert!(response[4].get("error").is_some());
+    assert_eq!(ok(&response[1]), ok(&response[5]));
+    error(&response[6], "select one entity");
+    assert_eq!(ok(&response[7])["tick"], 5);
+    ok(&response[8]);
+    error(&response[9], "no play session");
+}
