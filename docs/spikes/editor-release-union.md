@@ -19,7 +19,10 @@ Claude Opus5.5 at explicitly verified Max completed the full browser review in
 account flows, shortcut notation, keyboard focus, paging, menus and narrow/minimum
 windows. All43 committed evidence hashes were independently verified. The plain
 layout survived the union; the review exposed the two behavior defects addressed
-below. The focused final presentation reconciliation is in progress.
+below. The final focused reconciliation is now complete at65e1717: atlas color-only
+controls, audio labels, real import paths and connected-account recovery were
+reviewed in26 additional captures. All60 evidence hashes were independently
+verified;14 Camera/SpriteRenderer baseline captures remained pixel-identical.
 
 The generic sprite Inspector still lacks explicit untagged Region presentation,
 semantic channel/border labels, schema field order and bounded atlas-frame
@@ -27,10 +30,12 @@ metadata. It reports unsupported values truthfully. Those items and the existing
 inactive-title contrast finding are separate presentation follow-up work; they do
 not imply a complete native 2D authoring or gameplay path.
 
-The director's running native0d14f4f preview remains untouched. No current-union
-native app was opened or visually accepted. Older captures and headless Chrome
-do not certify current native menus, dialogs, minimum size, paging or focus.
-The final native frontend build and exact-head hosted checks remain pending.
+The director's running native0d14f4f preview remains untouched. The final28e5491
+frontend passed524 UI tests, strict typecheck/build and a custom-protocol native
+build. Claude's final native review uses a separate app and project, with account
+store access and network denied by a verified per-process sandbox. Native review
+and exact-head hosted checks are pending; earlier captures and headless Chrome
+do not certify this native binary. [Final source/log evidence](evidence/editor-release-final-2026-10-11.json).
 The staffing key is now `initial_staffing_confirmed`; device/performance gates,
 phase approval and complete engine/game release requirements remain open.
 
@@ -48,9 +53,8 @@ A bridge regression verifies all three new source formats dispatch as one atomic
 
 Independent review, 46 focused tests, all 515 UI tests, strict typecheck, production
 build and bridge generation pass. No styling, layout, Rust or command contract
-changed. Claude's final presentation reconciliation remains pending, including
-atlas color-only controls and source labels. The native executable predates this
-frontend correction and must be rebuilt before claiming final native build evidence.
+changed. Claude completed atlas color-only controls and source labels at65e1717. The
+final native build includes these changes and the completion-focus correction below.
 [Exact logs and limits](evidence/editor-typed-import-2026-10-11.json).
 
 ## Connected account switch focus
@@ -63,5 +67,16 @@ a stale sign-out question. No credentials, styling or account requests changed.
 
 Both new observable regressions fail on the original source: focus lands on the
 body, and the old confirmation remains. With the fix all 27 account tests and
-strict typecheck pass. Final full UI validation and Claude's focused rendered
-recheck follow after the presentation reconciliation.
+strict typecheck pass. The focused rendered recheck passed in Claude's final reconciliation; final
+full UI validation passes524 tests.
+
+## Asset completion focus
+
+Native import completion replaces its initiating control. Recovery now returns
+keyboard focus to the reset import path or surviving asset heading only when that
+control disappeared and focus remains on the document body. Deliberate navigation
+and mounted-control focus remain unchanged. Four regressions cover successful
+import, successful/failed reimport and navigation; three fail before the fix.
+Root independently reviewed28e5491. Final524 UI tests, strict typecheck/build,
+bridge/conventions and40 tools tests pass. The native build completes in28.34s;
+that is an incremental local build measurement, not a clean/hosted latency claim.

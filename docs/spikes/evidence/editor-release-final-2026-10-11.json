@@ -1,0 +1,92 @@
+{
+  "source_head": "28e5491ab317019b050bf58b8819e580f796dd33",
+  "main_ancestor": "6a759c66a526c15869b07a7f585e8edfe8edfba0",
+  "included_sprite_head": "5b3071b4e31a27f8a6729506aefd33e10c9a3466",
+  "claude_presentation_head": "65e17177bb488374fc76e23567f558a3d91669e9",
+  "source_objects": {
+    "editor/ui": "fe3c1ceb534fd3d0a4704c7606c5df16d9dfd089",
+    "editor/app": "b9add18c28aa6b5718dd3ff84f46900ff2c503d3",
+    "editor/bridge": "4dca211275642510f0e03cf8e9774c857a953a95",
+    "crates": "e9e2c5fa4d61d44246c48df85a34d9cc990d1aec",
+    "sdk": "bfa5e87a5dc39d6680810c9265161f3a9b433617",
+    "schemas": "0c1743775c5cc4b20504d06715edd183fa891c1b",
+    "Cargo.toml": "d606b1a673950fb4be1c56a64328277befcaf5d6",
+    "Cargo.lock": "f6f3f870b307cfdf4e08ecaad77bf796b3dd90d2"
+  },
+  "logs": {
+    "ui_tests": {
+      "path": "/tmp/incant-ui-final-tests.log",
+      "sha256": "e0f15343de5e464367b920e4907057c3033f12586223a259a4d29d1a80cfa757"
+    },
+    "typecheck": {
+      "path": "/tmp/incant-ui-import-focus-typecheck.log",
+      "sha256": "5e05d0271a5a922a5b1639a75c386f68b84dc6f16fa9c31d0ca3992328a98dc3"
+    },
+    "ui_build": {
+      "path": "/tmp/incant-ui-final-build.log",
+      "sha256": "9d64fcefc4b2cfb9d135680f1fd386b0e33d6ed71b6191ea63090734137ab777"
+    },
+    "bridge": {
+      "path": "/tmp/incant-ui-final-bridge.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "conventions": {
+      "path": "/tmp/incant-ui-final-conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tools_tests": {
+      "path": "/tmp/incant-ui-final-tools.log",
+      "sha256": "2549905e9fa544e481814daac230cacffac5ad929a94d2d200e561d675c60a1a"
+    },
+    "native_build": {
+      "path": "/tmp/incant-ui-final-native.log",
+      "sha256": "b0515769a76559e4dad546f36047d421e91907d2ce87c466ed83bd8eb8f99ab3"
+    },
+    "claude_hash_verification": {
+      "path": "/tmp/incant-ui-final-claude-hashes.log",
+      "sha256": "16939532956f4eecf07145a7b1c7c28b097c394c9a586570c18599d637a8b0d2"
+    },
+    "focus_before": {
+      "path": "/tmp/incant-ui-import-focus-before.log",
+      "sha256": "4622aaff562055e7da9b8d0ada7548f402f28f1d76ba4395b463f4ab553a6dc3"
+    },
+    "focus_after": {
+      "path": "/tmp/incant-ui-import-focus-after.log",
+      "sha256": "f01398cc7855d79c788c2ac895f51f24923d1c7d2c00f26425492008d7bd572e"
+    }
+  },
+  "final_checks": {
+    "ui_tests": 524,
+    "ui_test_files": 30,
+    "tools_tests": 40,
+    "strict_typescript": "passed",
+    "production_build": "passed",
+    "generated_bridge": "passed",
+    "generated_conventions": "passed",
+    "native_custom_protocol_build": "passed",
+    "native_build_seconds": 28.34,
+    "independently_verified_claude_hashes": 60
+  },
+  "native_binary": {
+    "path": "target/release/incant_editor",
+    "bytes": 37032704,
+    "sha256": "51599f65f3e96458d706a81c81b71bc392e93812923f11549e4ae0bd3024b79e",
+    "visual_acceptance": "pending isolated Claude native review"
+  },
+  "rust_baseline": {
+    "head": "a20d258ba75fd00b2c8bea91cf71de8bead78370",
+    "ordinary_tests": 451,
+    "ignored_gpu_tests": 56,
+    "release_all_target_clippy": "passed",
+    "subsequent_rust_diff": [
+      "crates/incant_import/tests/sprite_references.rs"
+    ],
+    "subsequent_rust_diff_scope": "Reviewed Windows exclusive-journal portability regression only; all17 hosted sprite checks pass on included5b3071b."
+  },
+  "limitations": [
+    "Exact final union hosted checks pending.",
+    "Native binary built but final isolated native acceptance pending; running older0d14f4f preview is not evidence for this source.",
+    "Browser review uses account-free fixtures; sandboxed native review will not access production accounts.",
+    "No reference-device performance, phase gate or complete native2D/game claim."
+  ]
+}

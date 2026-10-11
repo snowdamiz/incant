@@ -1,5 +1,12 @@
 # Implementation status
 
+- Final plain editor + sprite/atlas union: reviewed presentation65e1717 and
+  completion-focus28e5491 pass524 UI tests, strict typecheck/build,40 tools tests
+  and the final native custom-protocol build. The inherited451 ordinary/56 GPU
+  Rust baseline and all17 corrected sprite hosted checks remain recorded with
+  exact source limits. Combined hosted checks and isolated native Claude review
+  are pending. [Release evidence](docs/spikes/editor-release-union.md).
+
 - The sprite/atlas publication union now includes the reviewed native runtime and
   Tauri stack. Local checks pass: 451 ordinary Rust tests, all 56 GPU tests,
   release Clippy, 420 UI tests, 38 tool tests, generated schemas/SDK, and the four
