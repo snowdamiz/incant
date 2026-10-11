@@ -4221,6 +4221,7 @@ dependencies = [
  "incant_input",
  "incant_runtime",
  "incant_types",
+ "incant_wasm_runtime",
  "rquickjs",
  "serde_json",
  "sha2 0.10.9",
@@ -4270,6 +4271,22 @@ dependencies = [
  "wasmparser",
  "wasmtime",
  "wat",
+]
+
+[[package]]
+name = "incant_wasm_player"
+version = "0.0.1"
+dependencies = [
+ "incant_assets_runtime",
+ "incant_audio_runtime",
+ "incant_game_runtime",
+ "incant_input",
+ "incant_runtime",
+ "incant_script",
+ "incant_types",
+ "incant_wasm_runtime",
+ "serde_json",
+ "tempfile",
 ]
 
 [[package]]

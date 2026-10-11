@@ -2,7 +2,7 @@ use crate::{Core, GameError, NoHost, Result, core::Hook};
 use incant_audio_runtime::{ClipBinding, OfflineBackend, SceneAudio, SourceState};
 use incant_input::{InputActions, InputEvent, InputFrame};
 use incant_runtime::{CookedScene, NativeWorld, StableId};
-use incant_script::CompiledScript;
+use incant_script::SessionProgram;
 
 pub(crate) fn validate_rate<E>(rate: u32) -> Result<(), E> {
     // Cooked tick rates are <=240: every supported rate emits nonzero frames.
@@ -68,7 +68,7 @@ pub struct OfflineGameSession {
 impl OfflineGameSession {
     pub fn new(
         scene: CookedScene,
-        script: CompiledScript,
+        program: impl Into<SessionProgram>,
         actions: InputActions,
         clips: Vec<ClipBinding>,
         sample_rate: u32,
@@ -79,7 +79,7 @@ impl OfflineGameSession {
             inner: OfflineCore {
                 core: Core::prepare(
                     scene,
-                    script,
+                    program,
                     actions,
                     |_| Ok(NoHost),
                     |world| SceneAudio::offline(world, clips, sample_rate),

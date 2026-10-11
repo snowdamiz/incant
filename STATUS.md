@@ -20,7 +20,7 @@ visual work, and Astra owns correctness and integration.
 | Native game and rendering | Input, embedded QuickJS, native physics, scene audio and retained GPU submission compose through one accepted-tick lifecycle. Binary v5 sprites share immutable geometry. | [PR #62](https://github.com/snowdamiz/incant/pull/62) is in hosted verification. Native editor/legacy Play migration, complete SDK, shader pipeline work and device budgets remain. |
 | Native window player | A separate implementation branch adds real surface presentation, keyboard/mouse input, suspension and device audio. Local source-free lifecycle tests pass. | Independent review/CI and Claude native acceptance precede integration. No phone or frame-budget claim. |
 | Static FBX import | Shared asset transactions accept a bounded static subset through pinned MIT ufbx; existing cooked model/texture formats and stable reimport IDs are preserved. 70 scoped Rust and 531 UI tests, Clippy and 11 CLI process controls pass. | Claude0040 rendered acceptance and hosted checks remain pending. Animation, skinning and full FBX compatibility remain unsupported. [Evidence](docs/spikes/static-fbx-import.md). |
-| Native WebAssembly | Shared bounded capability ABI serves development Wasmtime and compiled wasm2c modules; local conformance and a source-free macOS executable pass. | MSVC /Od and /O2 configurations are prepared for hosted conformance; actual Windows execution, full SDK/game composition and device evidence remain pending. |
+| Native WebAssembly | Shared bounded capability ABI serves Wasmtime and wasm2c. PR #64 passed actual Windows /Od + /O2, Linux and macOS static conformance and fresh packaging. The optional static-module native game session passes a fresh local composed proof. | Full guest input/SDK, static-module renderer/session saves, composed-player hosted coverage and device gates remain. [Composition evidence](docs/spikes/native-wasm-game-session.md). |
 | CI speed | Registry-only shared auxiliary caches are merged; the agent is measuring actual warm consumers and completed job timings. | Shared fresh-build storage and a lower-optimization CI test profile are experiments, not adopted speed claims. Independent shipping audits remain intact. |
 
 Three Astra extra-high subagents own implementation/integration work in isolated
@@ -83,7 +83,11 @@ review; concurrent native reviews coordinate foreground ownership.
   exact-motion processes and 18 refusals after temporary sources/build removal.
   Actual iOS C/Rust compilation is compile-only. Initial static memory/table
   growth remains unsupported. A native x64 MSVC /Od baseline and /O2 candidate
-  now have conformance/proof wiring, but actual Windows execution remains pending.
+  passed actual hosted conformance and a fresh optimized PE/PDB proof on PR #64.
+  Static modules also compose with native input acceptance, physics and offline
+  scene audio: 66 scoped cases and 32 fresh local process checks pass. The guest
+  input ABI and complete session/renderer/device evidence remain open.
+  [Static game session](docs/spikes/native-wasm-game-session.md).
   [Development host](docs/spikes/development-wasm-host.md),
   [static host](docs/spikes/shipping-wasm2c.md),
   [MSVC follow-up](docs/spikes/wasm2c-msvc.md).
