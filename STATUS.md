@@ -307,6 +307,13 @@ Further work remains local; this queue does not waive any phase or device gate. 
 
 ## Implemented boundaries and evidence
 
+The standalone native-window player now connects desktop gamepad events through
+a shared bounded input adapter. Stable session IDs, analog/stick/D-pad mapping,
+focus/suspend hotplug recovery and queue refusal have local synthetic tests;
+default/CPU/offscreen dependency boundaries remain intact. Physical-controller
+and Windows/Linux execution, haptics and touch remain unverified or unsupported.
+[Evidence](docs/spikes/native-window-player.md#native-desktop-gamepads).
+
 The native v1 save reader now rejects unsupported 2D solver state consistently
 with its writer and in-place restore. A rehashed-payload regression fails before
 the fix and passes afterward; full native session saves remain open.

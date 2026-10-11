@@ -1,4 +1,4 @@
-//! Explicit physical input mapping. Text/IME, gamepads, touch and haptics are
+//! Explicit physical input mapping. Text/IME, touch and haptics are
 //! not connected by this desktop host; unrecognized physical keys are ignored.
 use super::Error;
 use incant_input::{InputEvent, KeyCode, MAX_EVENTS_PER_TICK, MouseButton, WheelUnit};
@@ -246,6 +246,11 @@ pub fn validate_actions(actions: &incant_input::InputActions) -> Result<(), Erro
                         button: MouseButton::Left | MouseButton::Right | MouseButton::Middle,
                         ..
                     }
+            ) && !matches!(binding,
+                InputBinding::GamepadButton { id, .. }
+                    | InputBinding::GamepadAxis { id, .. }
+                    | InputBinding::GamepadStick { id, .. }
+                    if (*id as u64) < incant_input::MAX_GAMEPADS as u64
             ) {
                 return Err(Error::InputCapability);
             }
