@@ -1,3 +1,42 @@
+## Priority revision: final typed import reconciliation (2026-10-11)
+
+Finish the existing review first if this revision is read during resumption. Your
+first result remains valid for its recorded source; preserve its evidence and
+limits. Astra will integrate the reviewed current source into this handoff before
+resuming it. Do not repeat the entire 102-state capture sweep without a reason.
+
+The current reviewed source now includes Astra commit c131ed83975610861498f6993e52f04eebd3e35b:
+`paths.ts` recognizes exact case-insensitive `.atlas.json` plus WAV/OGG, while
+rejecting generic JSON, unsupported audio and unsafe traversal. `AssetsContext`
+exports a typed `reimportRequest`; draft/reimport requests include texture usage
+only for ordinary image sources, never atlas/audio/model. Existing ordinary-image
+saved settings remain. Root independently reviewed the five source/test files;
+515 full UI tests, strict typecheck and production build pass. This fixes the
+import blocker you observed. Do not undo or broaden the validated mutation logic.
+
+Please reconcile presentation for these supported types using the existing plain
+style: correct asset/import source labels/icons and atlas detail controls. A
+texture whose source is `.atlas.json` is a color atlas; do not present an editable
+normal/mask interpretation that native import does not support. Ordinary-image
+texture settings must remain editable. Audio presentation must accurately describe
+WAV/OGG, with no invented capability. Preserve layout and all five requirements.
+Any additional behavioral issue belongs to Astra; report it rather than changing
+Rust/schema/transport/credentials. Tests for your actual presentation changes are
+in scope. Run the full UI tests/typecheck/build after final code changes.
+
+Make a focused rendered check of successful atlas and WAV/OGG source selection,
+atlas details/reimport, ordinary-image interpretation/reimport, and refused generic
+JSON. Drive account-free browser doubles through the actual routes, and distinguish
+native-supported behavior from mocked responses. Preserve the prior comprehensive
+Camera/SpriteRenderer review; recapture affected states, not unrelated baseline
+screenshots. Keep exact source hashes and evidence. No Rust/Cargo and no interaction
+with the director's running native app. Native final-pixel acceptance stays pending.
+
+Commit final source/evidence with `Built-by: claude`, and update result.md to state
+both the earlier complete review and this final focused source revision. Do not
+publish, merge, or push. Astra will build the final native executable and publish
+the reviewed UI+sprite+PLAN union for a single final hosted matrix.
+
 # Final plain-editor and sprite/atlas union review
 
 Astra owns integration; you own rendered review and any narrowly justified visual
