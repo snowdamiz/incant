@@ -11,6 +11,7 @@ render-input = ["dep:incant_render_game", "dep:incant_render_native"]
 render-gpu = ["render-input", "dep:incant_render_gpu_host", "dep:incant_render", "dep:thiserror"]
 
 [dependencies]
+incant_observe = { path = "../incant_observe" }
 incant_render_gpu_host = { path = "../incant_render_gpu_host", optional = true }
 incant_render = { path = "../incant_render", optional = true }
 incant_render_native = { path = "../incant_render_native", optional = true }
