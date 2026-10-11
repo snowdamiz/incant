@@ -1,0 +1,17 @@
+# Durable native agent session admission
+
+This local foundation connects the reviewed per-project usage ledger to `Session`. It does not connect provider admission or budget controls to the editor, and does not claim the complete budget feature.
+
+`Session::start_durable(request, ledger, max_tokens, job)` accepts an already open, locked ledger selected by the trusted host. It chooses the restored budget and uncertainty under the same worker/state locks as single-flight admission, so an exhausted stale display cannot reject a newly raised valid cap. Metadata, Busy and thread-spawn refusals do not reserve tokens. Only an accepted worker reserves, before invoking the job. Cancellation observed before reservation invokes no job and charges no tokens; cancellation racing the disk write settles an exact zero-work receipt before publication.
+
+`Session::restore_budget_if_idle(snapshot)` performs no filesystem work. It refuses an active worker and does not advance the version for an identical idle snapshot. The host must retain the ledger lock during this call and fence its current project/cap identity; a detached snapshot is not a freshness token. `Ledger::open_in` supplies an explicitly trusted host-selected directory for isolated adapter tests; production `open()` retains the operating-system configuration directory. No agent/project path capability is introduced.
+
+Outcome preparation uses the same cumulative-counter and reported-usage minimum as ordinary Session completion. A job panic or inconsistent receipt leaves the complete pending reservation charged. Trusted completion is persisted before final state is published. Missing reservation/settlement persistence produces a static BudgetAccounting failure and conservative uncertainty. A settlement failure retains at least the full reservation and any bounded validated overrun in memory, without publishing a successful report. Unavailable storage may still retain only the earlier reservation, rather than the later exact overrun; that limitation is explicit.
+
+Historical uncertainty stays in the session and ledger. A newly measured exact turn is not labeled uncertain merely because an older reservation was recovered. Numeric saturation affects the new turn and remains uncertain. Ordinary `start` retains its existing behavior through the same admission and publication logic.
+
+## Verification
+
+On the frozen local macOS tree, all 106 incant_agent tests passed, with zero ignored cases, and all-target CI-profile Clippy passed. Twelve added cases cover persisted reservation-before-job and settlement-before-terminal publication, reopen, panic, wrong-cap/decreasing/underreported receipts, cancellation, rejected metadata/spawn/Busy, raised/exhausted caps, historical uncertainty, unsafe saturation, storage failures and sixteen restore/start races. Existing controller, provider-loop, approvals, conversation, shared-project and ledger subprocess tests remain in the full run.
+
+Independent review found two initial accounting errors. Real regression tests failed with the old code: prior uncertainty leaked into a measured new turn, and failed settlement reduced measured usage150 to reservation100. Both pass after the scoped corrections, including the saturated-u64 case. Spawn refusal is injected through the actual shared admission path; no OS exhaustion is claimed. No provider, GUI, Windows/Linux or power-cut validation was performed here. Source and retained log hashes are recorded in [durable-agent-session.json](evidence/durable-agent-session.json).

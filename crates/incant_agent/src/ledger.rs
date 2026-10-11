@@ -99,6 +99,14 @@ impl Ledger {
             .join("agent-usage");
         Self::open_at(&directory, project_id)
     }
+    /// Use a trusted host-selected state directory, never an agent/tool or
+    /// project-supplied path. The default application entry point is `open`.
+    /// This also supports isolated host integration tests without changing the
+    /// process-wide configuration environment. Call only on a worker.
+    pub fn open_in(directory: &Path, project_id: &str) -> Result<Self, LedgerError> {
+        Self::open_at(directory, project_id)
+    }
+
     fn open_at(directory: &Path, project_id: &str) -> Result<Self, LedgerError> {
         if !valid_id(project_id) {
             return Err(LedgerError::InvalidRequest);
