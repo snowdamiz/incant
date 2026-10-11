@@ -1,0 +1,174 @@
+
+ RUN  v5.0.3 <worktree>/editor/ui
+
+ × src/components/Splitter.test.tsx > Splitter pointer resizing > cancels the default action of a primary press and focuses the separator itself 60ms
+   → expected true to be false // Object.is equality
+ × src/components/Splitter.test.tsx > Splitter pointer resizing > does not drag on a secondary button and keeps its default action 7ms
+   → expected 360 to be 300 // Object.is equality
+ × src/components/Splitter.test.tsx > Splitter pointer resizing > does not drag on a middle button and keeps its default action 4ms
+   → expected 360 to be 300 // Object.is equality
+ × src/components/Splitter.test.tsx > Splitter pointer resizing > does not drag on a second touch and keeps its default action 3ms
+   → expected 360 to be 300 // Object.is equality
+ × src/components/Splitter.test.tsx > Splitter pointer resizing > does not drag on a Control-click, the macOS secondary click, nor select text 3ms
+   → expected true to be false // Object.is equality
+ ✓ src/components/Splitter.test.tsx > Splitter pointer resizing > drags a vertical separator (invert: false) along its own axis, within its bounds 5ms
+ ✓ src/components/Splitter.test.tsx > Splitter pointer resizing > drags a vertical separator (invert: true) along its own axis, within its bounds 3ms
+ ✓ src/components/Splitter.test.tsx > Splitter pointer resizing > drags a horizontal separator (invert: false) along its own axis, within its bounds 3ms
+ ✓ src/components/Splitter.test.tsx > Splitter pointer resizing > drags a horizontal separator (invert: true) along its own axis, within its bounds 3ms
+ × src/components/Splitter.test.tsx > Splitter pointer resizing > ends the drag on pointerUp from its own pointer 2ms
+   → expected 480 to be 320 // Object.is equality
+ × src/components/Splitter.test.tsx > Splitter pointer resizing > ends the drag on pointerCancel from its own pointer 2ms
+   → expected 480 to be 320 // Object.is equality
+ × src/components/Splitter.test.tsx > Splitter pointer resizing > ends the drag on lostPointerCapture from its own pointer 2ms
+   → expected 480 to be 320 // Object.is equality
+ × src/components/Splitter.test.tsx > Splitter after a lost release > ends the drag at the first move without the primary button 2ms
+   → expected 400 to be 320 // Object.is equality
+ × src/components/Splitter.test.tsx > Splitter in the editor shell > resizes the hierarchy by pointer, then by keyboard, ringed only for the keyboard 46ms
+   → expected true to be false // Object.is equality
+ × src/components/Splitter.test.tsx > Splitter in the editor shell > closes an open menu when a splitter is pressed, like any press outside it 88ms
+   → expected true to be false // Object.is equality
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 11 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/components/Splitter.test.tsx > Splitter pointer resizing > cancels the default action of a primary press and focuses the separator itself
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ src/components/Splitter.test.tsx:75:59
+     73|     const name = screen.getByRole<HTMLInputElement>('textbox', { name:…
+     74|     name.focus();
+     75|     expect(press(splitter, { ...primary, clientX: 100 })).toBe(false);
+       |                                                           ^
+     76|     expect(captured).toEqual([1]);
+     77|     expect(document.activeElement).toBe(splitter);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/11]⎯
+
+ FAIL  src/components/Splitter.test.tsx > Splitter pointer resizing > does not drag on a secondary button and keeps its default action
+ FAIL  src/components/Splitter.test.tsx > Splitter pointer resizing > does not drag on a middle button and keeps its default action
+ FAIL  src/components/Splitter.test.tsx > Splitter pointer resizing > does not drag on a second touch and keeps its default action
+AssertionError: expected 360 to be 300 // Object.is equality
+
+- Expected
++ Received
+
+- 300
++ 360
+
+ ❯ src/components/Splitter.test.tsx:93:20
+     91|     expect(press(splitter, { ...mouse, ...init, clientX: 100 })).toBe(…
+     92|     fireEvent.pointerMove(splitter, { ...mouse, ...init, clientX: 160 …
+     93|     expect(size()).toBe(300);
+       |                    ^
+     94|     expect(captured).toEqual([]);
+     95|     expect(document.activeElement).not.toBe(splitter);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/11]⎯
+
+ FAIL  src/components/Splitter.test.tsx > Splitter pointer resizing > does not drag on a Control-click, the macOS secondary click, nor select text
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ src/components/Splitter.test.tsx:100:74
+     98|   it('does not drag on a Control-click, the macOS secondary click, nor…
+     99|     const { splitter, captured, size } = setup('vertical');
+    100|     expect(press(splitter, { ...primary, ctrlKey: true, clientX: 100 }…
+       |                                                                          ^
+    101|     fireEvent.pointerMove(splitter, { ...mouse, buttons: 1, ctrlKey: t…
+    102|     expect(size()).toBe(300);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/11]⎯
+
+ FAIL  src/components/Splitter.test.tsx > Splitter pointer resizing > ends the drag on pointerUp from its own pointer
+ FAIL  src/components/Splitter.test.tsx > Splitter pointer resizing > ends the drag on pointerCancel from its own pointer
+ FAIL  src/components/Splitter.test.tsx > Splitter pointer resizing > ends the drag on lostPointerCapture from its own pointer
+AssertionError: expected 480 to be 320 // Object.is equality
+
+- Expected
++ Received
+
+- 320
++ 480
+
+ ❯ src/components/Splitter.test.tsx:135:20
+    133|     const other = { ...mouse, pointerId: 2, pointerType: 'pen' };
+    134|     fireEvent.pointerMove(splitter, { ...other, buttons: 1, clientX: 4…
+    135|     expect(size()).toBe(320);
+       |                    ^
+    136|     fireEvent[end](splitter, { ...other, clientX: 400 });
+    137|     fireEvent.pointerMove(splitter, { ...mouse, buttons: 1, clientX: 1…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/11]⎯
+
+ FAIL  src/components/Splitter.test.tsx > Splitter after a lost release > ends the drag at the first move without the primary button
+AssertionError: expected 400 to be 320 // Object.is equality
+
+- Expected
++ Received
+
+- 320
++ 400
+
+ ❯ src/components/Splitter.test.tsx:158:20
+    156|     fireEvent.pointerMove(splitter, { ...mouse, buttons: 0, clientX: 1…
+    157|     fireEvent.pointerMove(splitter, { ...mouse, buttons: 1, clientX: 2…
+    158|     expect(size()).toBe(320);
+       |                    ^
+    159|   });
+    160| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/11]⎯
+
+ FAIL  src/components/Splitter.test.tsx > Splitter in the editor shell > resizes the hierarchy by pointer, then by keyboard, ringed only for the keyboard
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ src/components/Splitter.test.tsx:170:59
+    168|     captureDouble(splitter);
+    169|     const start = Number(splitter.getAttribute('aria-valuenow'));
+    170|     expect(press(splitter, { ...primary, clientX: 300 })).toBe(false);
+       |                                                           ^
+    171|     fireEvent.pointerMove(splitter, { ...mouse, buttons: 1, clientX: 3…
+    172|     fireEvent.pointerUp(splitter, { ...mouse, button: 0, buttons: 0, c…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/11]⎯
+
+ FAIL  src/components/Splitter.test.tsx > Splitter in the editor shell > closes an open menu when a splitter is pressed, like any press outside it
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ src/components/Splitter.test.tsx:188:59
+    186|     const splitter = screen.getByRole('separator', { name: 'Resize ins…
+    187|     captureDouble(splitter);
+    188|     expect(press(splitter, { ...primary, clientX: 700 })).toBe(false);
+       |                                                           ^
+    189|     expect(screen.queryByRole('menu')).toBeNull();
+    190|     expect(document.activeElement).toBe(splitter);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/11]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  11 failed | 4 passed (15)
+   Start at  17:08:01
+   Duration  799ms (tests 31%, environment 31%, transform 28%, import 5%, setup 5%)

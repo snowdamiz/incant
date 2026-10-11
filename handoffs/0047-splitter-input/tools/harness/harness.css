@@ -1,0 +1,70 @@
+/* Harness layout only. The separator itself is styled by the editor's shell.css. */
+.harness {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  height: 100%;
+}
+
+.harness__caption {
+  padding: var(--space-3) var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+}
+
+.harness__split {
+  display: grid;
+  min-height: 0;
+}
+
+.harness__first {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 0;
+  min-height: 0;
+  padding: var(--space-5) var(--space-5) 0;
+  overflow: hidden;
+  background: var(--color-bg-panel);
+}
+
+.harness__first .harness__pane {
+  padding: 0;
+  background: none;
+}
+
+.harness__pane {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+  min-height: 0;
+  padding: var(--space-5);
+  overflow: hidden;
+  background: var(--color-bg-side);
+}
+
+.harness__pane h2 {
+  margin: 0;
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.harness__mono {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+
+.harness__field {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.harness__field input {
+  width: 160px;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-bg-raised);
+}

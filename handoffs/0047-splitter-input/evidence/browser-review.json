@@ -1,0 +1,2244 @@
+{
+  "label": "BROWSER EVIDENCE: headless Chromium driven by playwright-core with real mouse and keyboard input. Not the native WebKit window.",
+  "browser": "chromium 156.0.8078.4 (headless)",
+  "versions": {
+    "node": "v22.23.3",
+    "vite": "8.3.4",
+    "playwrightCore": "1.64.0",
+    "react": "19.3.0"
+  },
+  "viewport": {
+    "harness": {
+      "width": 1280,
+      "height": 800
+    },
+    "editor": {
+      "width": 1440,
+      "height": 900
+    },
+    "deviceScaleFactor": 1
+  },
+  "source": {
+    "base": "dc5e620",
+    "head": "dc5e620",
+    "splitterBeforeSha256": "d96979c2f2197beba54e2df3839c3719901974d7f406db02500f038b58f29153",
+    "splitterAfterSha256": "76d1fa85e08bca4867d07b836426b7aba180347727e702f4e0d623c282040a9c",
+    "afterIsWorkingTree": "uncommitted changes in Splitter.tsx"
+  },
+  "summary": {
+    "afterPassed": 34,
+    "afterFailed": [],
+    "beforeFailed": [
+      "harness vertical: a primary press starts no text selection (no selectstart)",
+      "harness vertical: a secondary-button drag does not resize or capture",
+      "harness vertical: a Control-click drag does not resize or capture, nor start a selection",
+      "harness vertical: losing capture ends the drag",
+      "harness vertical: no selection after capture is lost mid-drag",
+      "harness horizontal: a primary press starts no text selection (no selectstart)",
+      "harness horizontal: a secondary-button drag does not resize or capture",
+      "harness horizontal: a Control-click drag does not resize or capture, nor start a selection",
+      "harness horizontal: losing capture ends the drag",
+      "harness horizontal: no selection after capture is lost mid-drag",
+      "editor: pressing the Inspector separator starts no text selection (no selectstart)",
+      "editor: pressing the output dock separator starts no text selection (no selectstart)"
+    ]
+  },
+  "checks": {
+    "after": [
+      {
+        "name": "harness vertical: a primary press starts no text selection (no selectstart)",
+        "pass": true,
+        "detail": [
+          "gotpointercapture",
+          "lostpointercapture"
+        ]
+      },
+      {
+        "name": "harness vertical: no selection during or after a primary drag",
+        "pass": true,
+        "detail": [
+          0,
+          0
+        ]
+      },
+      {
+        "name": "harness vertical: the drag resizes and clamps at 560",
+        "pass": true,
+        "detail": [
+          390,
+          510,
+          560,
+          560
+        ]
+      },
+      {
+        "name": "harness vertical: the press focuses the separator without a focus ring",
+        "pass": true,
+        "detail": {
+          "value": 560,
+          "selectedText": "",
+          "collapsed": true,
+          "focus": "separator",
+          "focusVisible": false,
+          "keyboardRing": false,
+          "events": [
+            {
+              "type": "lostpointercapture",
+              "pointerId": 1
+            }
+          ]
+        }
+      },
+      {
+        "name": "harness vertical: after a keyboard-focused field, the press still focuses the separator without a ring",
+        "pass": true,
+        "detail": {
+          "value": 390,
+          "selectedText": "Mover",
+          "collapsed": true,
+          "focus": "separator",
+          "focusVisible": false,
+          "keyboardRing": false,
+          "events": [
+            {
+              "type": "lostpointercapture",
+              "pointerId": 1
+            }
+          ]
+        }
+      },
+      {
+        "name": "harness vertical: the pointer is captured and released",
+        "pass": true,
+        "detail": [
+          "gotpointercapture",
+          "lostpointercapture"
+        ]
+      },
+      {
+        "name": "harness vertical: hovering back without a button does not resize",
+        "pass": true,
+        "detail": 560
+      },
+      {
+        "name": "harness vertical: the keyboard continues from the separator, with a ring",
+        "pass": true,
+        "detail": {
+          "value": 544,
+          "selectedText": "",
+          "collapsed": true,
+          "focus": "separator",
+          "focusVisible": false,
+          "keyboardRing": true,
+          "events": []
+        }
+      },
+      {
+        "name": "harness vertical: a drag on text still selects it",
+        "pass": true,
+        "detail": "This paragraph is ordinary selectable text beside the splitter. Dragging the separator must resize the panes without selecting it, and a drag that starts on the text must still select"
+      },
+      {
+        "name": "harness vertical: a secondary-button drag does not resize or capture",
+        "pass": true,
+        "detail": [
+          "selectstart",
+          "contextmenu"
+        ]
+      },
+      {
+        "name": "harness vertical: a Control-click drag does not resize or capture, nor start a selection",
+        "pass": true,
+        "detail": [
+          "contextmenu"
+        ]
+      },
+      {
+        "name": "harness vertical: losing capture ends the drag",
+        "pass": true,
+        "detail": [
+          504,
+          504,
+          504,
+          504,
+          [
+            "lostpointercapture"
+          ]
+        ]
+      },
+      {
+        "name": "harness vertical: no selection after capture is lost mid-drag",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "harness horizontal: a primary press starts no text selection (no selectstart)",
+        "pass": true,
+        "detail": [
+          "gotpointercapture",
+          "lostpointercapture"
+        ]
+      },
+      {
+        "name": "harness horizontal: no selection during or after a primary drag",
+        "pass": true,
+        "detail": [
+          0,
+          0
+        ]
+      },
+      {
+        "name": "harness horizontal: the drag resizes and clamps at 420",
+        "pass": true,
+        "detail": [
+          290,
+          410,
+          420,
+          420
+        ]
+      },
+      {
+        "name": "harness horizontal: the press focuses the separator without a focus ring",
+        "pass": true,
+        "detail": {
+          "value": 420,
+          "selectedText": "",
+          "collapsed": true,
+          "focus": "separator",
+          "focusVisible": false,
+          "keyboardRing": false,
+          "events": [
+            {
+              "type": "lostpointercapture",
+              "pointerId": 1
+            }
+          ]
+        }
+      },
+      {
+        "name": "harness horizontal: after a keyboard-focused field, the press still focuses the separator without a ring",
+        "pass": true,
+        "detail": {
+          "value": 290,
+          "selectedText": "Mover",
+          "collapsed": true,
+          "focus": "separator",
+          "focusVisible": false,
+          "keyboardRing": false,
+          "events": [
+            {
+              "type": "lostpointercapture",
+              "pointerId": 1
+            }
+          ]
+        }
+      },
+      {
+        "name": "harness horizontal: the pointer is captured and released",
+        "pass": true,
+        "detail": [
+          "gotpointercapture",
+          "lostpointercapture"
+        ]
+      },
+      {
+        "name": "harness horizontal: hovering back without a button does not resize",
+        "pass": true,
+        "detail": 420
+      },
+      {
+        "name": "harness horizontal: the keyboard continues from the separator, with a ring",
+        "pass": true,
+        "detail": {
+          "value": 404,
+          "selectedText": "",
+          "collapsed": true,
+          "focus": "separator",
+          "focusVisible": false,
+          "keyboardRing": true,
+          "events": []
+        }
+      },
+      {
+        "name": "harness horizontal: a drag on text still selects it",
+        "pass": true,
+        "detail": "This paragraph is ordinary selectable text beside the splitter. Dragging the separator must resize the panes without selecti"
+      },
+      {
+        "name": "harness horizontal: a secondary-button drag does not resize or capture",
+        "pass": true,
+        "detail": [
+          "selectstart",
+          "contextmenu"
+        ]
+      },
+      {
+        "name": "harness horizontal: a Control-click drag does not resize or capture, nor start a selection",
+        "pass": true,
+        "detail": [
+          "contextmenu"
+        ]
+      },
+      {
+        "name": "harness horizontal: losing capture ends the drag",
+        "pass": true,
+        "detail": [
+          364,
+          364,
+          364,
+          364,
+          [
+            "lostpointercapture"
+          ]
+        ]
+      },
+      {
+        "name": "harness horizontal: no selection after capture is lost mid-drag",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "editor: pressing the Inspector separator starts no text selection (no selectstart)",
+        "pass": true,
+        "detail": [
+          "gotpointercapture",
+          "lostpointercapture"
+        ]
+      },
+      {
+        "name": "editor: no selection while dragging the Inspector separator",
+        "pass": true,
+        "detail": [
+          "",
+          ""
+        ]
+      },
+      {
+        "name": "editor: the Inspector separator resizes and takes focus without a ring",
+        "pass": true,
+        "detail": [
+          460,
+          280,
+          280
+        ]
+      },
+      {
+        "name": "editor: pressing the output dock separator starts no text selection (no selectstart)",
+        "pass": true,
+        "detail": [
+          "gotpointercapture",
+          "lostpointercapture"
+        ]
+      },
+      {
+        "name": "editor: no selection while dragging the output dock separator",
+        "pass": true,
+        "detail": [
+          "",
+          ""
+        ]
+      },
+      {
+        "name": "editor: the output dock separator resizes and takes focus without a ring",
+        "pass": true,
+        "detail": [
+          343,
+          120,
+          120
+        ]
+      },
+      {
+        "name": "editor: a separator press closes an open menu",
+        "pass": true,
+        "detail": {
+          "menuOpened": true,
+          "menuOpenAfterPress": false,
+          "state": {
+            "value": 280,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": [
+              {
+                "type": "contextmenu",
+                "pointerId": 1
+              },
+              {
+                "type": "gotpointercapture",
+                "pointerId": 1
+              },
+              {
+                "type": "lostpointercapture",
+                "pointerId": 1
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "editor: a drag on Inspector text still selects it",
+        "pass": true,
+        "detail": "Translation\nX\n\nY\n\nZ\n\nRotation\nUnit quaternion (x, y, z, w).\nX\n\nY\n\nZ\n\nW\n\nScale"
+      }
+    ],
+    "before": [
+      {
+        "name": "harness vertical: a primary press starts no text selection (no selectstart)",
+        "pass": false,
+        "detail": [
+          "selectstart",
+          "gotpointercapture",
+          "lostpointercapture"
+        ]
+      },
+      {
+        "name": "harness vertical: no selection during or after a primary drag",
+        "pass": true,
+        "detail": [
+          0,
+          0
+        ]
+      },
+      {
+        "name": "harness vertical: the drag resizes and clamps at 560",
+        "pass": true,
+        "detail": [
+          390,
+          510,
+          560,
+          560
+        ]
+      },
+      {
+        "name": "harness vertical: the press focuses the separator without a focus ring",
+        "pass": true,
+        "detail": {
+          "value": 560,
+          "selectedText": "",
+          "collapsed": true,
+          "focus": "separator",
+          "focusVisible": false,
+          "keyboardRing": false,
+          "events": [
+            {
+              "type": "lostpointercapture",
+              "pointerId": 1
+            }
+          ]
+        }
+      },
+      {
+        "name": "harness vertical: after a keyboard-focused field, the press still focuses the separator without a ring",
+        "pass": true,
+        "detail": {
+          "value": 390,
+          "selectedText": "",
+          "collapsed": true,
+          "focus": "separator",
+          "focusVisible": false,
+          "keyboardRing": false,
+          "events": [
+            {
+              "type": "lostpointercapture",
+              "pointerId": 1
+            }
+          ]
+        }
+      },
+      {
+        "name": "harness vertical: the pointer is captured and released",
+        "pass": true,
+        "detail": [
+          "selectstart",
+          "gotpointercapture",
+          "lostpointercapture"
+        ]
+      },
+      {
+        "name": "harness vertical: hovering back without a button does not resize",
+        "pass": true,
+        "detail": 560
+      },
+      {
+        "name": "harness vertical: the keyboard continues from the separator, with a ring",
+        "pass": true,
+        "detail": {
+          "value": 544,
+          "selectedText": "",
+          "collapsed": true,
+          "focus": "separator",
+          "focusVisible": true,
+          "keyboardRing": true,
+          "events": []
+        }
+      },
+      {
+        "name": "harness vertical: a drag on text still selects it",
+        "pass": true,
+        "detail": "This paragraph is ordinary selectable text beside the splitter. Dragging the separator must resize the panes without selecting it, and a drag that starts on the text must still select"
+      },
+      {
+        "name": "harness vertical: a secondary-button drag does not resize or capture",
+        "pass": false,
+        "detail": [
+          "selectstart",
+          "contextmenu",
+          "gotpointercapture",
+          "lostpointercapture"
+        ]
+      },
+      {
+        "name": "harness vertical: a Control-click drag does not resize or capture, nor start a selection",
+        "pass": false,
+        "detail": [
+          "selectstart",
+          "contextmenu",
+          "gotpointercapture",
+          "lostpointercapture"
+        ]
+      },
+      {
+        "name": "harness vertical: losing capture ends the drag",
+        "pass": false,
+        "detail": [
+          344,
+          344,
+          342,
+          342,
+          [
+            "lostpointercapture"
+          ]
+        ]
+      },
+      {
+        "name": "harness vertical: no selection after capture is lost mid-drag",
+        "pass": false,
+        "detail": " it, and a drag that starts on the text must still select it.\n\nA second paragraph gives a press room to start a normal selection and a drag past the clamp something to cross.\n\n"
+      },
+      {
+        "name": "harness horizontal: a primary press starts no text selection (no selectstart)",
+        "pass": false,
+        "detail": [
+          "selectstart",
+          "gotpointercapture",
+          "lostpointercapture"
+        ]
+      },
+      {
+        "name": "harness horizontal: no selection during or after a primary drag",
+        "pass": true,
+        "detail": [
+          0,
+          0
+        ]
+      },
+      {
+        "name": "harness horizontal: the drag resizes and clamps at 420",
+        "pass": true,
+        "detail": [
+          290,
+          410,
+          420,
+          420
+        ]
+      },
+      {
+        "name": "harness horizontal: the press focuses the separator without a focus ring",
+        "pass": true,
+        "detail": {
+          "value": 420,
+          "selectedText": "",
+          "collapsed": true,
+          "focus": "separator",
+          "focusVisible": false,
+          "keyboardRing": false,
+          "events": [
+            {
+              "type": "lostpointercapture",
+              "pointerId": 1
+            }
+          ]
+        }
+      },
+      {
+        "name": "harness horizontal: after a keyboard-focused field, the press still focuses the separator without a ring",
+        "pass": true,
+        "detail": {
+          "value": 290,
+          "selectedText": "",
+          "collapsed": true,
+          "focus": "separator",
+          "focusVisible": false,
+          "keyboardRing": false,
+          "events": [
+            {
+              "type": "lostpointercapture",
+              "pointerId": 1
+            }
+          ]
+        }
+      },
+      {
+        "name": "harness horizontal: the pointer is captured and released",
+        "pass": true,
+        "detail": [
+          "selectstart",
+          "gotpointercapture",
+          "lostpointercapture"
+        ]
+      },
+      {
+        "name": "harness horizontal: hovering back without a button does not resize",
+        "pass": true,
+        "detail": 420
+      },
+      {
+        "name": "harness horizontal: the keyboard continues from the separator, with a ring",
+        "pass": true,
+        "detail": {
+          "value": 404,
+          "selectedText": "",
+          "collapsed": true,
+          "focus": "separator",
+          "focusVisible": true,
+          "keyboardRing": true,
+          "events": []
+        }
+      },
+      {
+        "name": "harness horizontal: a drag on text still selects it",
+        "pass": true,
+        "detail": "This paragraph is ordinary selectable text beside the splitter. Dragging the separator must resize the panes without selecti"
+      },
+      {
+        "name": "harness horizontal: a secondary-button drag does not resize or capture",
+        "pass": false,
+        "detail": [
+          "selectstart",
+          "contextmenu",
+          "gotpointercapture",
+          "lostpointercapture"
+        ]
+      },
+      {
+        "name": "harness horizontal: a Control-click drag does not resize or capture, nor start a selection",
+        "pass": false,
+        "detail": [
+          "selectstart",
+          "contextmenu",
+          "gotpointercapture",
+          "lostpointercapture"
+        ]
+      },
+      {
+        "name": "harness horizontal: losing capture ends the drag",
+        "pass": false,
+        "detail": [
+          204,
+          204,
+          202,
+          202,
+          [
+            "lostpointercapture"
+          ]
+        ]
+      },
+      {
+        "name": "harness horizontal: no selection after capture is lost mid-drag",
+        "pass": false,
+        "detail": "\nBottom pane\nTranslation X 310 Y 0 Z 0\n\nRotation X 0 Y 0 Z 0 W 1\n\nScale X 1 Y 1 Z 1\n\nThis paragraph is ordinary selectable text beside the splitter. Dragging the separator must resize the panes without selecting it, and a drag that starts on the text must still select it.\n\nA second paragraph gives a press room to start a normal selection and a drag past the clamp somethi"
+      },
+      {
+        "name": "editor: pressing the Inspector separator starts no text selection (no selectstart)",
+        "pass": false,
+        "detail": [
+          "selectstart",
+          "gotpointercapture",
+          "lostpointercapture"
+        ]
+      },
+      {
+        "name": "editor: no selection while dragging the Inspector separator",
+        "pass": true,
+        "detail": [
+          "",
+          ""
+        ]
+      },
+      {
+        "name": "editor: the Inspector separator resizes and takes focus without a ring",
+        "pass": true,
+        "detail": [
+          460,
+          280,
+          280
+        ]
+      },
+      {
+        "name": "editor: pressing the output dock separator starts no text selection (no selectstart)",
+        "pass": false,
+        "detail": [
+          "selectstart",
+          "gotpointercapture",
+          "lostpointercapture"
+        ]
+      },
+      {
+        "name": "editor: no selection while dragging the output dock separator",
+        "pass": true,
+        "detail": [
+          "",
+          ""
+        ]
+      },
+      {
+        "name": "editor: the output dock separator resizes and takes focus without a ring",
+        "pass": true,
+        "detail": [
+          343,
+          120,
+          120
+        ]
+      },
+      {
+        "name": "editor: a separator press closes an open menu",
+        "pass": true,
+        "detail": {
+          "menuOpened": true,
+          "menuOpenAfterPress": false,
+          "state": {
+            "value": 280,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": [
+              {
+                "type": "contextmenu",
+                "pointerId": 1
+              },
+              {
+                "type": "selectstart",
+                "pointerId": null
+              },
+              {
+                "type": "gotpointercapture",
+                "pointerId": 1
+              },
+              {
+                "type": "lostpointercapture",
+                "pointerId": 1
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "editor: a drag on Inspector text still selects it",
+        "pass": true,
+        "detail": "Translation\nX\n\nY\n\nZ\n\nRotation\nUnit quaternion (x, y, z, w).\nX\n\nY\n\nZ\n\nW\n\nScale"
+      }
+    ]
+  },
+  "harness": {
+    "before": [
+      {
+        "variant": "before",
+        "layout": "vertical",
+        "keyboardThenPointer": {
+          "tabbed": {
+            "value": 360,
+            "selectedText": "Mover",
+            "collapsed": true,
+            "focus": "input",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": []
+          },
+          "samples": [
+            {
+              "value": 390,
+              "selectedText": "",
+              "collapsed": true,
+              "focus": "separator",
+              "focusVisible": false,
+              "keyboardRing": false,
+              "events": [
+                {
+                  "type": "selectstart",
+                  "pointerId": null
+                },
+                {
+                  "type": "gotpointercapture",
+                  "pointerId": 1
+                }
+              ]
+            }
+          ],
+          "after": {
+            "value": 390,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": [
+              {
+                "type": "lostpointercapture",
+                "pointerId": 1
+              }
+            ]
+          },
+          "events": [
+            "selectstart",
+            "gotpointercapture",
+            "lostpointercapture"
+          ]
+        },
+        "primaryDrag": {
+          "start": {
+            "value": 390,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "input",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": []
+          },
+          "samples": [
+            {
+              "value": 510,
+              "selectedText": "",
+              "collapsed": true,
+              "focus": "separator",
+              "focusVisible": false,
+              "keyboardRing": false,
+              "events": [
+                {
+                  "type": "selectstart",
+                  "pointerId": null
+                },
+                {
+                  "type": "gotpointercapture",
+                  "pointerId": 1
+                }
+              ]
+            },
+            {
+              "value": 560,
+              "selectedText": "",
+              "collapsed": true,
+              "focus": "separator",
+              "focusVisible": false,
+              "keyboardRing": false,
+              "events": []
+            }
+          ],
+          "after": {
+            "value": 560,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": [
+              {
+                "type": "lostpointercapture",
+                "pointerId": 1
+              }
+            ]
+          },
+          "events": [
+            "selectstart",
+            "gotpointercapture",
+            "lostpointercapture"
+          ],
+          "hoverAfterRelease": {
+            "value": 560,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": []
+          }
+        },
+        "keyboardAfterDrag": {
+          "value": 544,
+          "selectedText": "",
+          "collapsed": true,
+          "focus": "separator",
+          "focusVisible": true,
+          "keyboardRing": true,
+          "events": []
+        },
+        "textSelection": {
+          "samples": [
+            {
+              "value": 544,
+              "selectedText": "This paragraph is ordinary selectable text beside the splitter. Dragging the separator must resize the panes without selecting it, and a drag that starts on the text must still select",
+              "collapsed": false,
+              "focus": "body",
+              "focusVisible": false,
+              "keyboardRing": false,
+              "events": [
+                {
+                  "type": "selectstart",
+                  "pointerId": null
+                }
+              ]
+            }
+          ],
+          "after": {
+            "value": 544,
+            "selectedText": "This paragraph is ordinary selectable text beside the splitter. Dragging the separator must resize the panes without selecting it, and a drag that starts on the text must still select",
+            "collapsed": false,
+            "focus": "body",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": []
+          },
+          "events": [
+            "selectstart"
+          ]
+        },
+        "secondaryButton": {
+          "samples": [
+            {
+              "value": 464,
+              "selectedText": "",
+              "collapsed": true,
+              "focus": "separator",
+              "focusVisible": false,
+              "keyboardRing": false,
+              "events": [
+                {
+                  "type": "selectstart",
+                  "pointerId": null
+                },
+                {
+                  "type": "contextmenu",
+                  "pointerId": 1
+                },
+                {
+                  "type": "gotpointercapture",
+                  "pointerId": 1
+                }
+              ]
+            }
+          ],
+          "after": {
+            "value": 464,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": [
+              {
+                "type": "lostpointercapture",
+                "pointerId": 1
+              }
+            ]
+          },
+          "events": [
+            "selectstart",
+            "contextmenu",
+            "gotpointercapture",
+            "lostpointercapture"
+          ]
+        },
+        "controlClick": {
+          "samples": [
+            {
+              "value": 384,
+              "selectedText": "",
+              "collapsed": true,
+              "focus": "separator",
+              "focusVisible": true,
+              "keyboardRing": false,
+              "events": [
+                {
+                  "type": "selectstart",
+                  "pointerId": null
+                },
+                {
+                  "type": "contextmenu",
+                  "pointerId": 1
+                },
+                {
+                  "type": "gotpointercapture",
+                  "pointerId": 1
+                }
+              ]
+            }
+          ],
+          "after": {
+            "value": 384,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": true,
+            "keyboardRing": false,
+            "events": [
+              {
+                "type": "lostpointercapture",
+                "pointerId": 1
+              }
+            ]
+          },
+          "events": [
+            "selectstart",
+            "contextmenu",
+            "gotpointercapture",
+            "lostpointercapture"
+          ]
+        },
+        "lostCapture": {
+          "pointerId": 1,
+          "held": {
+            "value": 344,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": true,
+            "keyboardRing": false,
+            "events": [
+              {
+                "type": "selectstart",
+                "pointerId": null
+              },
+              {
+                "type": "gotpointercapture",
+                "pointerId": 1
+              }
+            ]
+          },
+          "released": {
+            "value": 344,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": true,
+            "keyboardRing": false,
+            "events": []
+          },
+          "nudged": {
+            "value": 342,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": true,
+            "keyboardRing": false,
+            "events": [
+              {
+                "type": "lostpointercapture",
+                "pointerId": 1
+              }
+            ]
+          },
+          "afterRelease": {
+            "value": 342,
+            "selectedText": " it, and a drag that starts on the text must still select it.\n\nA second paragraph gives a press room to start a normal selection and a drag past the clamp something to cross.\n\n",
+            "collapsed": false,
+            "focus": "separator",
+            "focusVisible": true,
+            "keyboardRing": false,
+            "events": []
+          },
+          "afterUp": {
+            "value": 342,
+            "selectedText": " it, and a drag that starts on the text must still select it.\n\nA second paragraph gives a press room to start a normal selection and a drag past the clamp something to cross.\n\n",
+            "collapsed": false,
+            "focus": "separator",
+            "focusVisible": true,
+            "keyboardRing": false,
+            "events": []
+          }
+        }
+      },
+      {
+        "variant": "before",
+        "layout": "horizontal",
+        "keyboardThenPointer": {
+          "tabbed": {
+            "value": 260,
+            "selectedText": "Mover",
+            "collapsed": true,
+            "focus": "input",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": []
+          },
+          "samples": [
+            {
+              "value": 290,
+              "selectedText": "",
+              "collapsed": true,
+              "focus": "separator",
+              "focusVisible": false,
+              "keyboardRing": false,
+              "events": [
+                {
+                  "type": "selectstart",
+                  "pointerId": null
+                },
+                {
+                  "type": "gotpointercapture",
+                  "pointerId": 1
+                }
+              ]
+            }
+          ],
+          "after": {
+            "value": 290,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": [
+              {
+                "type": "lostpointercapture",
+                "pointerId": 1
+              }
+            ]
+          },
+          "events": [
+            "selectstart",
+            "gotpointercapture",
+            "lostpointercapture"
+          ]
+        },
+        "primaryDrag": {
+          "start": {
+            "value": 290,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "input",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": []
+          },
+          "samples": [
+            {
+              "value": 410,
+              "selectedText": "",
+              "collapsed": true,
+              "focus": "separator",
+              "focusVisible": false,
+              "keyboardRing": false,
+              "events": [
+                {
+                  "type": "selectstart",
+                  "pointerId": null
+                },
+                {
+                  "type": "gotpointercapture",
+                  "pointerId": 1
+                }
+              ]
+            },
+            {
+              "value": 420,
+              "selectedText": "",
+              "collapsed": true,
+              "focus": "separator",
+              "focusVisible": false,
+              "keyboardRing": false,
+              "events": []
+            }
+          ],
+          "after": {
+            "value": 420,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": [
+              {
+                "type": "lostpointercapture",
+                "pointerId": 1
+              }
+            ]
+          },
+          "events": [
+            "selectstart",
+            "gotpointercapture",
+            "lostpointercapture"
+          ],
+          "hoverAfterRelease": {
+            "value": 420,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": []
+          }
+        },
+        "keyboardAfterDrag": {
+          "value": 404,
+          "selectedText": "",
+          "collapsed": true,
+          "focus": "separator",
+          "focusVisible": true,
+          "keyboardRing": true,
+          "events": []
+        },
+        "textSelection": {
+          "samples": [
+            {
+              "value": 404,
+              "selectedText": "This paragraph is ordinary selectable text beside the splitter. Dragging the separator must resize the panes without selecti",
+              "collapsed": false,
+              "focus": "body",
+              "focusVisible": false,
+              "keyboardRing": false,
+              "events": [
+                {
+                  "type": "selectstart",
+                  "pointerId": null
+                }
+              ]
+            }
+          ],
+          "after": {
+            "value": 404,
+            "selectedText": "This paragraph is ordinary selectable text beside the splitter. Dragging the separator must resize the panes without selecti",
+            "collapsed": false,
+            "focus": "body",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": []
+          },
+          "events": [
+            "selectstart"
+          ]
+        },
+        "secondaryButton": {
+          "samples": [
+            {
+              "value": 324,
+              "selectedText": "",
+              "collapsed": true,
+              "focus": "separator",
+              "focusVisible": false,
+              "keyboardRing": false,
+              "events": [
+                {
+                  "type": "selectstart",
+                  "pointerId": null
+                },
+                {
+                  "type": "contextmenu",
+                  "pointerId": 1
+                },
+                {
+                  "type": "gotpointercapture",
+                  "pointerId": 1
+                }
+              ]
+            }
+          ],
+          "after": {
+            "value": 324,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": [
+              {
+                "type": "lostpointercapture",
+                "pointerId": 1
+              }
+            ]
+          },
+          "events": [
+            "selectstart",
+            "contextmenu",
+            "gotpointercapture",
+            "lostpointercapture"
+          ]
+        },
+        "controlClick": {
+          "samples": [
+            {
+              "value": 244,
+              "selectedText": "",
+              "collapsed": true,
+              "focus": "separator",
+              "focusVisible": true,
+              "keyboardRing": false,
+              "events": [
+                {
+                  "type": "selectstart",
+                  "pointerId": null
+                },
+                {
+                  "type": "contextmenu",
+                  "pointerId": 1
+                },
+                {
+                  "type": "gotpointercapture",
+                  "pointerId": 1
+                }
+              ]
+            }
+          ],
+          "after": {
+            "value": 244,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": true,
+            "keyboardRing": false,
+            "events": [
+              {
+                "type": "lostpointercapture",
+                "pointerId": 1
+              }
+            ]
+          },
+          "events": [
+            "selectstart",
+            "contextmenu",
+            "gotpointercapture",
+            "lostpointercapture"
+          ]
+        },
+        "lostCapture": {
+          "pointerId": 1,
+          "held": {
+            "value": 204,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": true,
+            "keyboardRing": false,
+            "events": [
+              {
+                "type": "selectstart",
+                "pointerId": null
+              },
+              {
+                "type": "gotpointercapture",
+                "pointerId": 1
+              }
+            ]
+          },
+          "released": {
+            "value": 204,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": true,
+            "keyboardRing": false,
+            "events": []
+          },
+          "nudged": {
+            "value": 202,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": true,
+            "keyboardRing": false,
+            "events": [
+              {
+                "type": "lostpointercapture",
+                "pointerId": 1
+              }
+            ]
+          },
+          "afterRelease": {
+            "value": 202,
+            "selectedText": "\nBottom pane\nTranslation X 310 Y 0 Z 0\n\nRotation X 0 Y 0 Z 0 W 1\n\nScale X 1 Y 1 Z 1\n\nThis paragraph is ordinary selectable text beside the splitter. Dragging the separator must resize the panes without selecting it, and a drag that starts on the text must still select it.\n\nA second paragraph gives a press room to start a normal selection and a drag past the clamp somethi",
+            "collapsed": false,
+            "focus": "separator",
+            "focusVisible": true,
+            "keyboardRing": false,
+            "events": []
+          },
+          "afterUp": {
+            "value": 202,
+            "selectedText": "\nBottom pane\nTranslation X 310 Y 0 Z 0\n\nRotation X 0 Y 0 Z 0 W 1\n\nScale X 1 Y 1 Z 1\n\nThis paragraph is ordinary selectable text beside the splitter. Dragging the separator must resize the panes without selecting it, and a drag that starts on the text must still select it.\n\nA second paragraph gives a press room to start a normal selection and a drag past the clamp somethi",
+            "collapsed": false,
+            "focus": "separator",
+            "focusVisible": true,
+            "keyboardRing": false,
+            "events": []
+          }
+        }
+      }
+    ],
+    "after": [
+      {
+        "variant": "after",
+        "layout": "vertical",
+        "keyboardThenPointer": {
+          "tabbed": {
+            "value": 360,
+            "selectedText": "Mover",
+            "collapsed": true,
+            "focus": "input",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": []
+          },
+          "samples": [
+            {
+              "value": 390,
+              "selectedText": "Mover",
+              "collapsed": true,
+              "focus": "separator",
+              "focusVisible": false,
+              "keyboardRing": false,
+              "events": [
+                {
+                  "type": "gotpointercapture",
+                  "pointerId": 1
+                }
+              ]
+            }
+          ],
+          "after": {
+            "value": 390,
+            "selectedText": "Mover",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": [
+              {
+                "type": "lostpointercapture",
+                "pointerId": 1
+              }
+            ]
+          },
+          "events": [
+            "gotpointercapture",
+            "lostpointercapture"
+          ]
+        },
+        "primaryDrag": {
+          "start": {
+            "value": 390,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "input",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": []
+          },
+          "samples": [
+            {
+              "value": 510,
+              "selectedText": "",
+              "collapsed": true,
+              "focus": "separator",
+              "focusVisible": false,
+              "keyboardRing": false,
+              "events": [
+                {
+                  "type": "gotpointercapture",
+                  "pointerId": 1
+                }
+              ]
+            },
+            {
+              "value": 560,
+              "selectedText": "",
+              "collapsed": true,
+              "focus": "separator",
+              "focusVisible": false,
+              "keyboardRing": false,
+              "events": []
+            }
+          ],
+          "after": {
+            "value": 560,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": [
+              {
+                "type": "lostpointercapture",
+                "pointerId": 1
+              }
+            ]
+          },
+          "events": [
+            "gotpointercapture",
+            "lostpointercapture"
+          ],
+          "hoverAfterRelease": {
+            "value": 560,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": []
+          }
+        },
+        "keyboardAfterDrag": {
+          "value": 544,
+          "selectedText": "",
+          "collapsed": true,
+          "focus": "separator",
+          "focusVisible": false,
+          "keyboardRing": true,
+          "events": []
+        },
+        "textSelection": {
+          "samples": [
+            {
+              "value": 544,
+              "selectedText": "This paragraph is ordinary selectable text beside the splitter. Dragging the separator must resize the panes without selecting it, and a drag that starts on the text must still select",
+              "collapsed": false,
+              "focus": "body",
+              "focusVisible": false,
+              "keyboardRing": false,
+              "events": [
+                {
+                  "type": "selectstart",
+                  "pointerId": null
+                }
+              ]
+            }
+          ],
+          "after": {
+            "value": 544,
+            "selectedText": "This paragraph is ordinary selectable text beside the splitter. Dragging the separator must resize the panes without selecting it, and a drag that starts on the text must still select",
+            "collapsed": false,
+            "focus": "body",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": []
+          },
+          "events": [
+            "selectstart"
+          ]
+        },
+        "secondaryButton": {
+          "samples": [
+            {
+              "value": 544,
+              "selectedText": "",
+              "collapsed": true,
+              "focus": "separator",
+              "focusVisible": false,
+              "keyboardRing": false,
+              "events": [
+                {
+                  "type": "selectstart",
+                  "pointerId": null
+                },
+                {
+                  "type": "contextmenu",
+                  "pointerId": 1
+                }
+              ]
+            }
+          ],
+          "after": {
+            "value": 544,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": []
+          },
+          "events": [
+            "selectstart",
+            "contextmenu"
+          ]
+        },
+        "controlClick": {
+          "samples": [
+            {
+              "value": 544,
+              "selectedText": "",
+              "collapsed": true,
+              "focus": "separator",
+              "focusVisible": true,
+              "keyboardRing": false,
+              "events": [
+                {
+                  "type": "contextmenu",
+                  "pointerId": 1
+                }
+              ]
+            }
+          ],
+          "after": {
+            "value": 544,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": true,
+            "keyboardRing": false,
+            "events": []
+          },
+          "events": [
+            "contextmenu"
+          ]
+        },
+        "lostCapture": {
+          "pointerId": 1,
+          "held": {
+            "value": 504,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": true,
+            "keyboardRing": false,
+            "events": [
+              {
+                "type": "gotpointercapture",
+                "pointerId": 1
+              }
+            ]
+          },
+          "released": {
+            "value": 504,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": true,
+            "keyboardRing": false,
+            "events": []
+          },
+          "nudged": {
+            "value": 504,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": true,
+            "keyboardRing": false,
+            "events": [
+              {
+                "type": "lostpointercapture",
+                "pointerId": 1
+              }
+            ]
+          },
+          "afterRelease": {
+            "value": 504,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": true,
+            "keyboardRing": false,
+            "events": []
+          },
+          "afterUp": {
+            "value": 504,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": true,
+            "keyboardRing": false,
+            "events": []
+          }
+        }
+      },
+      {
+        "variant": "after",
+        "layout": "horizontal",
+        "keyboardThenPointer": {
+          "tabbed": {
+            "value": 260,
+            "selectedText": "Mover",
+            "collapsed": true,
+            "focus": "input",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": []
+          },
+          "samples": [
+            {
+              "value": 290,
+              "selectedText": "Mover",
+              "collapsed": true,
+              "focus": "separator",
+              "focusVisible": false,
+              "keyboardRing": false,
+              "events": [
+                {
+                  "type": "gotpointercapture",
+                  "pointerId": 1
+                }
+              ]
+            }
+          ],
+          "after": {
+            "value": 290,
+            "selectedText": "Mover",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": [
+              {
+                "type": "lostpointercapture",
+                "pointerId": 1
+              }
+            ]
+          },
+          "events": [
+            "gotpointercapture",
+            "lostpointercapture"
+          ]
+        },
+        "primaryDrag": {
+          "start": {
+            "value": 290,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "input",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": []
+          },
+          "samples": [
+            {
+              "value": 410,
+              "selectedText": "",
+              "collapsed": true,
+              "focus": "separator",
+              "focusVisible": false,
+              "keyboardRing": false,
+              "events": [
+                {
+                  "type": "gotpointercapture",
+                  "pointerId": 1
+                }
+              ]
+            },
+            {
+              "value": 420,
+              "selectedText": "",
+              "collapsed": true,
+              "focus": "separator",
+              "focusVisible": false,
+              "keyboardRing": false,
+              "events": []
+            }
+          ],
+          "after": {
+            "value": 420,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": [
+              {
+                "type": "lostpointercapture",
+                "pointerId": 1
+              }
+            ]
+          },
+          "events": [
+            "gotpointercapture",
+            "lostpointercapture"
+          ],
+          "hoverAfterRelease": {
+            "value": 420,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": []
+          }
+        },
+        "keyboardAfterDrag": {
+          "value": 404,
+          "selectedText": "",
+          "collapsed": true,
+          "focus": "separator",
+          "focusVisible": false,
+          "keyboardRing": true,
+          "events": []
+        },
+        "textSelection": {
+          "samples": [
+            {
+              "value": 404,
+              "selectedText": "This paragraph is ordinary selectable text beside the splitter. Dragging the separator must resize the panes without selecti",
+              "collapsed": false,
+              "focus": "body",
+              "focusVisible": false,
+              "keyboardRing": false,
+              "events": [
+                {
+                  "type": "selectstart",
+                  "pointerId": null
+                }
+              ]
+            }
+          ],
+          "after": {
+            "value": 404,
+            "selectedText": "This paragraph is ordinary selectable text beside the splitter. Dragging the separator must resize the panes without selecti",
+            "collapsed": false,
+            "focus": "body",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": []
+          },
+          "events": [
+            "selectstart"
+          ]
+        },
+        "secondaryButton": {
+          "samples": [
+            {
+              "value": 404,
+              "selectedText": "",
+              "collapsed": true,
+              "focus": "separator",
+              "focusVisible": false,
+              "keyboardRing": false,
+              "events": [
+                {
+                  "type": "selectstart",
+                  "pointerId": null
+                },
+                {
+                  "type": "contextmenu",
+                  "pointerId": 1
+                }
+              ]
+            }
+          ],
+          "after": {
+            "value": 404,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": []
+          },
+          "events": [
+            "selectstart",
+            "contextmenu"
+          ]
+        },
+        "controlClick": {
+          "samples": [
+            {
+              "value": 404,
+              "selectedText": "",
+              "collapsed": true,
+              "focus": "separator",
+              "focusVisible": true,
+              "keyboardRing": false,
+              "events": [
+                {
+                  "type": "contextmenu",
+                  "pointerId": 1
+                }
+              ]
+            }
+          ],
+          "after": {
+            "value": 404,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": true,
+            "keyboardRing": false,
+            "events": []
+          },
+          "events": [
+            "contextmenu"
+          ]
+        },
+        "lostCapture": {
+          "pointerId": 1,
+          "held": {
+            "value": 364,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": true,
+            "keyboardRing": false,
+            "events": [
+              {
+                "type": "gotpointercapture",
+                "pointerId": 1
+              }
+            ]
+          },
+          "released": {
+            "value": 364,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": true,
+            "keyboardRing": false,
+            "events": []
+          },
+          "nudged": {
+            "value": 364,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": true,
+            "keyboardRing": false,
+            "events": [
+              {
+                "type": "lostpointercapture",
+                "pointerId": 1
+              }
+            ]
+          },
+          "afterRelease": {
+            "value": 364,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": true,
+            "keyboardRing": false,
+            "events": []
+          },
+          "afterUp": {
+            "value": 364,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": true,
+            "keyboardRing": false,
+            "events": []
+          }
+        }
+      }
+    ]
+  },
+  "editor": {
+    "before": {
+      "variant": "before",
+      "inspectorDrag": {
+        "samples": [
+          {
+            "value": 460,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": [
+              {
+                "type": "selectstart",
+                "pointerId": null
+              },
+              {
+                "type": "gotpointercapture",
+                "pointerId": 1
+              }
+            ]
+          },
+          {
+            "value": 280,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": []
+          }
+        ],
+        "after": {
+          "value": 280,
+          "selectedText": "",
+          "collapsed": true,
+          "focus": "separator",
+          "focusVisible": false,
+          "keyboardRing": false,
+          "events": [
+            {
+              "type": "lostpointercapture",
+              "pointerId": 1
+            }
+          ]
+        },
+        "events": [
+          "selectstart",
+          "gotpointercapture",
+          "lostpointercapture"
+        ]
+      },
+      "dockDrag": {
+        "samples": [
+          {
+            "value": 343,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": [
+              {
+                "type": "selectstart",
+                "pointerId": null
+              },
+              {
+                "type": "gotpointercapture",
+                "pointerId": 1
+              }
+            ]
+          },
+          {
+            "value": 120,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": []
+          }
+        ],
+        "after": {
+          "value": 120,
+          "selectedText": "",
+          "collapsed": true,
+          "focus": "separator",
+          "focusVisible": false,
+          "keyboardRing": false,
+          "events": [
+            {
+              "type": "lostpointercapture",
+              "pointerId": 1
+            }
+          ]
+        },
+        "events": [
+          "selectstart",
+          "gotpointercapture",
+          "lostpointercapture"
+        ]
+      },
+      "menu": {
+        "menuOpened": true,
+        "menuOpenAfterPress": false,
+        "state": {
+          "value": 280,
+          "selectedText": "",
+          "collapsed": true,
+          "focus": "separator",
+          "focusVisible": false,
+          "keyboardRing": false,
+          "events": [
+            {
+              "type": "contextmenu",
+              "pointerId": 1
+            },
+            {
+              "type": "selectstart",
+              "pointerId": null
+            },
+            {
+              "type": "gotpointercapture",
+              "pointerId": 1
+            },
+            {
+              "type": "lostpointercapture",
+              "pointerId": 1
+            }
+          ]
+        }
+      },
+      "textSelection": {
+        "samples": [
+          {
+            "value": 280,
+            "selectedText": "Translation\nX\n\nY\n\nZ\n\nRotation\nUnit quaternion (x, y, z, w).\nX\n\nY\n\nZ\n\nW\n\nScale",
+            "collapsed": false,
+            "focus": "section",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": [
+              {
+                "type": "selectstart",
+                "pointerId": null
+              }
+            ]
+          }
+        ],
+        "after": {
+          "value": 280,
+          "selectedText": "Translation\nX\n\nY\n\nZ\n\nRotation\nUnit quaternion (x, y, z, w).\nX\n\nY\n\nZ\n\nW\n\nScale",
+          "collapsed": false,
+          "focus": "section",
+          "focusVisible": false,
+          "keyboardRing": false,
+          "events": []
+        },
+        "events": [
+          "selectstart"
+        ]
+      }
+    },
+    "after": {
+      "variant": "after",
+      "inspectorDrag": {
+        "samples": [
+          {
+            "value": 460,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": [
+              {
+                "type": "gotpointercapture",
+                "pointerId": 1
+              }
+            ]
+          },
+          {
+            "value": 280,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": []
+          }
+        ],
+        "after": {
+          "value": 280,
+          "selectedText": "",
+          "collapsed": true,
+          "focus": "separator",
+          "focusVisible": false,
+          "keyboardRing": false,
+          "events": [
+            {
+              "type": "lostpointercapture",
+              "pointerId": 1
+            }
+          ]
+        },
+        "events": [
+          "gotpointercapture",
+          "lostpointercapture"
+        ]
+      },
+      "dockDrag": {
+        "samples": [
+          {
+            "value": 343,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": [
+              {
+                "type": "gotpointercapture",
+                "pointerId": 1
+              }
+            ]
+          },
+          {
+            "value": 120,
+            "selectedText": "",
+            "collapsed": true,
+            "focus": "separator",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": []
+          }
+        ],
+        "after": {
+          "value": 120,
+          "selectedText": "",
+          "collapsed": true,
+          "focus": "separator",
+          "focusVisible": false,
+          "keyboardRing": false,
+          "events": [
+            {
+              "type": "lostpointercapture",
+              "pointerId": 1
+            }
+          ]
+        },
+        "events": [
+          "gotpointercapture",
+          "lostpointercapture"
+        ]
+      },
+      "menu": {
+        "menuOpened": true,
+        "menuOpenAfterPress": false,
+        "state": {
+          "value": 280,
+          "selectedText": "",
+          "collapsed": true,
+          "focus": "separator",
+          "focusVisible": false,
+          "keyboardRing": false,
+          "events": [
+            {
+              "type": "contextmenu",
+              "pointerId": 1
+            },
+            {
+              "type": "gotpointercapture",
+              "pointerId": 1
+            },
+            {
+              "type": "lostpointercapture",
+              "pointerId": 1
+            }
+          ]
+        }
+      },
+      "textSelection": {
+        "samples": [
+          {
+            "value": 280,
+            "selectedText": "Translation\nX\n\nY\n\nZ\n\nRotation\nUnit quaternion (x, y, z, w).\nX\n\nY\n\nZ\n\nW\n\nScale",
+            "collapsed": false,
+            "focus": "section",
+            "focusVisible": false,
+            "keyboardRing": false,
+            "events": [
+              {
+                "type": "selectstart",
+                "pointerId": null
+              }
+            ]
+          }
+        ],
+        "after": {
+          "value": 280,
+          "selectedText": "Translation\nX\n\nY\n\nZ\n\nRotation\nUnit quaternion (x, y, z, w).\nX\n\nY\n\nZ\n\nW\n\nScale",
+          "collapsed": false,
+          "focus": "section",
+          "focusVisible": false,
+          "keyboardRing": false,
+          "events": []
+        },
+        "events": [
+          "selectstart"
+        ]
+      }
+    }
+  }
+}

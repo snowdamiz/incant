@@ -1,0 +1,23 @@
+
+ RUN  v5.0.3 <worktree>/editor/ui
+
+ ✓ src/components/Splitter.test.tsx > Splitter pointer resizing > cancels the default action of a primary press and focuses the separator itself 86ms
+ ✓ src/components/Splitter.test.tsx > Splitter pointer resizing > does not drag on a secondary button and keeps its default action 6ms
+ ✓ src/components/Splitter.test.tsx > Splitter pointer resizing > does not drag on a middle button and keeps its default action 5ms
+ ✓ src/components/Splitter.test.tsx > Splitter pointer resizing > does not drag on a second touch and keeps its default action 4ms
+ ✓ src/components/Splitter.test.tsx > Splitter pointer resizing > does not drag on a Control-click, the macOS secondary click, nor select text 6ms
+ ✓ src/components/Splitter.test.tsx > Splitter pointer resizing > drags a vertical separator (invert: false) along its own axis, within its bounds 4ms
+ ✓ src/components/Splitter.test.tsx > Splitter pointer resizing > drags a vertical separator (invert: true) along its own axis, within its bounds 5ms
+ ✓ src/components/Splitter.test.tsx > Splitter pointer resizing > drags a horizontal separator (invert: false) along its own axis, within its bounds 4ms
+ ✓ src/components/Splitter.test.tsx > Splitter pointer resizing > drags a horizontal separator (invert: true) along its own axis, within its bounds 5ms
+ ✓ src/components/Splitter.test.tsx > Splitter pointer resizing > ends the drag on pointerUp from its own pointer 9ms
+ ✓ src/components/Splitter.test.tsx > Splitter pointer resizing > ends the drag on pointerCancel from its own pointer 7ms
+ ✓ src/components/Splitter.test.tsx > Splitter pointer resizing > ends the drag on lostPointerCapture from its own pointer 5ms
+ ✓ src/components/Splitter.test.tsx > Splitter after a lost release > ends the drag at the first move without the primary button 3ms
+ ✓ src/components/Splitter.test.tsx > Splitter in the editor shell > resizes the hierarchy by pointer, then by keyboard, ringed only for the keyboard 92ms
+ ✓ src/components/Splitter.test.tsx > Splitter in the editor shell > closes an open menu when a splitter is pressed, like any press outside it 133ms
+
+ Test Files  1 passed (1)
+      Tests  15 passed (15)
+   Start at  17:07:13
+   Duration  1.43s (environment 36%, tests 28%, transform 26%, setup 6%, import 4%)

@@ -1,0 +1,17 @@
+{
+  "browser": "chromium 156.0.8078.4 (headless)",
+  "afterKeyboardFocusedField": {
+    "default-focus": {
+      "focused": "target",
+      "focusVisible": false
+    },
+    "script-focus": {
+      "focused": "target",
+      "focusVisible": true
+    },
+    "script-focus-visible-false": {
+      "focused": "target",
+      "focusVisible": false
+    }
+  }
+}
