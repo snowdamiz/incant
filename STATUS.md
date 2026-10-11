@@ -993,3 +993,13 @@ The existing game player now has an explicit opt-in CPU render-input mode. A fre
 ## Native retained sprites (2026-10-10)
 
 Sprites and stable atlas frames now cook to binary v5, bind checked color textures once and update private retained GPU buffers from native poses. Eight source/cache-deleted numerical frames match fresh output across movement, reflection, nine-slice and an ordering rebuild; rejected targets preserve accepted CPU/GPU state. Scoped checks pass 123 ordinary release tests/doctests, 60 renderer GPU tests, Clippy and normal dependency guards. Sprite CPU staging allocates zero times across 64 measured calls. The current worst-case retained vertex storage is 576 MiB before textures/other overhead, so memory optimization and actual shipping device budgets remain required. Tilemaps, flipbooks, native 2D physics, camera-relative placement and standalone sprite-player/appearance/device gates remain open. [Evidence](docs/spikes/native-sprites.md).
+## Development Wasm module execution
+
+An opt-in desktop Wasmtime 49.0.2 host now executes bounded version-1 typed
+numeric/structural imports over the native world. Thirteen real Wasm regressions,
+123 scoped release tests/doctests, release Clippy and three fresh Rust-module
+processes pass. Shipping graphs exclude Wasmtime/Cranelift even with the
+development feature enabled; feature-disabled mobile/Wasm compilation passes.
+[Evidence](docs/spikes/development-wasm-host.md). The ABI deliberately copies
+columns and retains bounded numeric undo. Shipping wasm2c, browser/mobile
+execution, complete SDK conformance and device/performance gates remain open.

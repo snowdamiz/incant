@@ -1,0 +1,63 @@
+{
+  "base_commit": "3aed5e0a115da32ddc8ac16a1829886e3c33543a",
+  "scope": "development JIT conformance, no shipping/device gate",
+  "sources_sha256": {
+    "crates/incant_wasm_dev/Cargo.toml": "ba677cea5eded1fbdc8b7c73b6fa2805c323fbd4d1931f14a905fabdda0cef96",
+    "crates/incant_wasm_dev/examples/development_module.rs": "c9113820ed63baa450ed595fb1046b052b32100729aadb1abcac190500e6742b",
+    "crates/incant_wasm_dev/fixtures/bulk.rs": "29846cc4782229151d551c543713b671f164d962d20bed2e8a7fdd54a0404d15",
+    "crates/incant_wasm_dev/src/abi.rs": "9da5714d577e84cd75bcb88f0e62e84b9849e9bc7c914a648e03d1a3fb15e77e",
+    "crates/incant_wasm_dev/src/bounds.rs": "8ca86e4fd5f6b9799f937003e65419a178501eac35179097affa7a323ef814b1",
+    "crates/incant_wasm_dev/src/host.rs": "022897731e766ecb404b0c661331e805c7128ed970f8904c536589d607ba84b8",
+    "crates/incant_wasm_dev/src/lib.rs": "c554c33a609811a5d32e512eb95590cf1c9522d83ba863d75945b79c551a3da1",
+    "crates/incant_wasm_dev/src/transaction.rs": "0fb628b96dc09fb949c8278583310f7a0d33accdd80bdedcdfe913954e82ec79",
+    "crates/incant_wasm_dev/tests/conformance.rs": "30e47d606ded875f743d0f36fc41b0dc1803266bfdbe6f5cb3b0c5b0a0357cea",
+    "Cargo.lock": "130f29f68fc50d9278b39ab7fe1a957fd06f388141e3794a7c7d4a91525f65e1",
+    "tools/probes/development-wasm.py": "a18b8a6e57466350d7102d9ed65202c7396b5594807aab19a41b6e6ecb40cc76",
+    ".github/workflows/development-wasm.yml": "289be25473807e816b8f97ced6d1929d335156bea182b492228c493db5702f35"
+  },
+  "logs_sha256": {
+    "/tmp/incant-wasm-dev-release-tests.log": "9575e70fb2c9682804bf9bd519e23e2145321aaa2411befff500e591decd419b",
+    "/tmp/incant-wasm-dev-release-clippy.log": "d205e69fadf6ae21131e23012fe08b3a0bcf2ed6df9e590d1a489680c17849ab",
+    "/tmp/incant-wasm-dev-isolation.log": "0269898077431a5762164ce5b1c45e91d3d742ed37913ecf2ad4f63948843dca",
+    "/tmp/incant-wasm-dev-proof.log": "c52f75f762ea4ddf4662f74ae21894b21120ccf535343cc8bf1f27322cc8f9ff"
+  },
+  "fresh_process_report_sha256": "c52f75f762ea4ddf4662f74ae21894b21120ccf535343cc8bf1f27322cc8f9ff",
+  "fresh_process_report": {
+    "kind": "development-jit-conformance",
+    "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+    "shipping_roots_without_wasmtime_or_cranelift": [
+      "incant_runtime",
+      "incant_script",
+      "incant_game_runtime",
+      "incant_script_player",
+      "incant_game_player"
+    ],
+    "fixture_sha256": "29846cc4782229151d551c543713b671f164d962d20bed2e8a7fdd54a0404d15",
+    "fixture_deleted": true,
+    "wasm_sha256": "341b67884d51460c0ff056dca46f843dcfff58c1aa8fbe5402049c825e7b326e",
+    "runner_sha256": "a1ec268e2320223de3da4150fdc8020f33cb9242975cea64b3ba2ed34d875fc9",
+    "processes": 3,
+    "stdout": [
+      "1 0.25\n2 0.125\n3 0.25\n4 0.125\n",
+      "1 0.25\n2 0.125\n3 0.25\n4 0.125\n",
+      "1 0.25\n2 0.125\n3 0.25\n4 0.125\n"
+    ],
+    "limitations": [
+      "host build storage retained",
+      "development JIT, not shipping wasm2c",
+      "trusted fixture compile, no untrusted build service",
+      "typed transfer ABI copies columns",
+      "no device/performance gate"
+    ]
+  },
+  "release_tests_passed": 123,
+  "new_wasm_conformance_tests": 13,
+  "clippy": "passed",
+  "inactive_targets": [
+    "local host",
+    "wasm32-unknown-unknown",
+    "aarch64-apple-ios",
+    "aarch64-linux-android"
+  ],
+  "workflow": "actionlint passed; hosted execution pending"
+}
