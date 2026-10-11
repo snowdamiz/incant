@@ -67,6 +67,7 @@ fn failed(session: &mut OfflineGameSession) {
     assert!(session.is_failed());
     assert!(matches!(session.world(), Err(GameError::Failed)));
     assert!(matches!(session.input(), Err(GameError::Failed)));
+    assert!(matches!(session.logs(), Err(GameError::Failed)));
     assert!(matches!(session.rendered_frames(), Err(GameError::Failed)));
     assert!(matches!(
         session.next_output_frames(),

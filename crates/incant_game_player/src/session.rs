@@ -2,7 +2,7 @@
 //! builds and invocations retain the strict nonvisual boundary.
 use incant_audio_runtime::ClipBinding;
 use incant_game_runtime::OfflineGameSession;
-use incant_input::{InputActions, InputEvent};
+use incant_input::{InputActions, InputEvent, InputFrame};
 use incant_runtime::{CookedScene, NativeWorld};
 use incant_script::CompiledScript;
 pub(crate) type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
@@ -24,7 +24,7 @@ pub fn settings(args: &[String]) -> Result<Option<Settings>> {
         return Ok(None);
     }
     if args.len() != 12 || !matches!(args[8].as_str(), "--cpu-render-input" | "--gpu-offscreen") {
-        return Err("expected SCENE CACHE CLIPS RECORDING ACTIONS TICKS SAMPLE_RATE OUTPUT [--cpu-render-input|--gpu-offscreen MODEL_CACHE TEXTURE_CACHE CAMERA_HEX]; manual input/source paths are unsupported".into());
+        return Err("expected SCENE CACHE CLIPS RECORDING ACTIONS TICKS SAMPLE_RATE OUTPUT [--cpu-render-input|--gpu-offscreen MODEL_CACHE TEXTURE_CACHE CAMERA_HEX] [--observe PLAN.json]; manual input/source paths are unsupported".into());
     }
     #[cfg(not(feature = "render-gpu"))]
     if args[8] == "--gpu-offscreen" {
@@ -137,6 +137,24 @@ impl Player {
             Self::Spatial(game) => game.world()?,
             #[cfg(feature = "render-gpu")]
             Self::Gpu(game) => game.inner.world()?,
+        })
+    }
+    pub fn input(&self) -> Result<&InputFrame> {
+        Ok(match self {
+            Self::Plain(game) => game.input()?,
+            #[cfg(feature = "render-input")]
+            Self::Spatial(game) => game.input()?,
+            #[cfg(feature = "render-gpu")]
+            Self::Gpu(game) => game.inner.input()?,
+        })
+    }
+    pub fn logs(&self) -> Result<&incant_script::NativeLogs> {
+        Ok(match self {
+            Self::Plain(game) => game.logs()?,
+            #[cfg(feature = "render-input")]
+            Self::Spatial(game) => game.logs()?,
+            #[cfg(feature = "render-gpu")]
+            Self::Gpu(game) => game.inner.logs()?,
         })
     }
     /// One bounded final observation, never a per-tick world projection.

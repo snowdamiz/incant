@@ -49,6 +49,14 @@ pub(crate) enum SessionVm {
     Static(Box<incant_wasm_runtime::StaticModule>),
 }
 impl SessionVm {
+    pub fn logs(&self) -> Result<&crate::NativeLogs, SessionError> {
+        match self {
+            Self::Bytecode(host) => Ok(host.logs()?),
+            #[cfg(feature = "static-module")]
+            Self::Static(_) => Ok(&crate::logging::NO_MODULE_LOGS),
+        }
+    }
+
     pub fn tick(
         &mut self,
         world: &mut NativeWorld,

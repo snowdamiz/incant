@@ -109,6 +109,9 @@ impl OfflineGameSession {
     pub fn input(&self) -> Result<&InputFrame> {
         self.inner.core.input()
     }
+    pub fn logs(&self) -> Result<&incant_script::NativeLogs> {
+        self.inner.core.logs()
+    }
     pub fn source_state(&self, id: StableId) -> Result<SourceState> {
         self.inner.core.source_state(id)
     }

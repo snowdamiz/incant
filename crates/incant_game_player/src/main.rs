@@ -5,6 +5,7 @@ use incant_assets_runtime::sha256;
 use incant_audio_runtime::{ClipBinding, MAX_SCENE_CLIPS};
 #[cfg(feature = "render-gpu")]
 mod gpu;
+mod observe;
 mod session;
 use incant_input::InputReplay;
 use incant_runtime::{CookedScene, StableId};
@@ -39,12 +40,16 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         );
         return Ok(());
     }
-    let spatial = session::settings(&args)?;
+    let (args, observation_path) = observe::split_args(&args);
+    let spatial = session::settings(args)?;
     let ticks: u64 = args[5].parse()?;
     let rate: u32 = args[6].parse()?;
     if !(1..=3600).contains(&ticks) || !(8000..=192000).contains(&rate) {
         return Err("tick/sample-rate bounds".into());
     }
+    let mut observations = observation_path
+        .map(|path| observe::Plan::parse(&bounded(path, observe::MAX_PLAN_BYTES)?, ticks))
+        .transpose()?;
     let scene = CookedScene::from_bytes(&bounded(&args[0], 128 * 1024 * 1024)?)?;
     if spatial.is_none() && (!scene.spatial().is_empty() || !scene.visual_assets().is_empty()) {
         return Err("this game player has no spatial host".into());
@@ -88,11 +93,17 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         spatial,
         ticks,
     )?;
+    if let Some(plan) = &mut observations {
+        plan.observe(game.world()?, game.input()?)?;
+    }
     let mut output = vec![0.; frames as usize * 2];
     let mut offset = 0;
     for tick in 1..=ticks {
         let end = offset + game.next_output_frames()? * 2;
         game.tick(replay.events_at(tick)?, &mut output[offset..end])?;
+        if let Some(plan) = &mut observations {
+            plan.observe(game.world()?, game.input()?)?;
+        }
         offset = end;
     }
     if offset != output.len() || game.rendered_frames()? != frames {
@@ -105,9 +116,15 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         serde_json::json!({"id":node.entity.0,"position":pose[3][..3],"physics":physics})
     }).collect();
     let bytes: Vec<_> = output.iter().flat_map(|v| v.to_le_bytes()).collect();
-    let mut report = serde_json::json!({"tick":world.tick(),"frames":frames as u64,"pcm_sha256":sha256(&bytes),"sources":sources});
+    let mut report = serde_json::json!({"tick":world.tick(),"frames":frames as u64,"pcm_sha256":sha256(&bytes),"sources":sources,"logs":game.logs()?});
     if let Some(input) = game.render_report()? {
         report["render_input"] = input;
+    }
+    let mut passed = true;
+    if let Some(plan) = observations {
+        let observed = plan.finish(world)?;
+        passed = observed.passed;
+        report["observations"] = serde_json::to_value(observed)?;
     }
     OpenOptions::new()
         .write(true)
@@ -115,5 +132,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .open(&args[7])?
         .write_all(&bytes)?;
     println!("{report}");
+    if !passed {
+        return Err("native observation assertions failed (see completed report)".into());
+    }
     Ok(())
 }

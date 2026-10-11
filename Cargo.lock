@@ -3924,8 +3924,11 @@ dependencies = [
  "incant_render_native",
  "incant_runtime",
  "incant_script",
+ "incant_types",
+ "serde",
  "serde_json",
  "thiserror 2.0.21",
+ "ulid",
 ]
 
 [[package]]
@@ -4222,6 +4225,7 @@ dependencies = [
  "incant_types",
  "incant_wasm_runtime",
  "rquickjs",
+ "serde",
  "serde_json",
  "sha2 0.10.9",
  "thiserror 2.0.21",

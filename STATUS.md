@@ -16,7 +16,7 @@ visual work, and Astra owns correctness and integration.
 
 | Workstream | Current result | Next work / boundary |
 | --- | --- | --- |
-| Editor and sprite authoring | [PR #61](https://github.com/snowdamiz/incant/pull/61) combines the final plain UI, typed atlas/audio imports, focus fixes and the corrected sprite/atlas baseline. 524 UI tests, strict TypeScript, production and native builds pass. | Exact-head hosted checks and isolated native Claude acceptance are running. [Evidence](docs/spikes/editor-release-union.md). |
+| Editor and sprite authoring | [PR #61](https://github.com/snowdamiz/incant/pull/61) combines the final plain UI, typed atlas/audio imports, focus fixes and the corrected sprite/atlas baseline. Merged into main after all 17 hosted checks passed. | Claude native acceptance passed the five requested UI requirements; reimport no-op feedback is being corrected separately. [Evidence](docs/spikes/editor-release-union.md). |
 | Native game and rendering | Input, embedded QuickJS, native physics, scene audio and retained GPU submission compose through one accepted-tick lifecycle. Binary v5 sprites share immutable geometry. | [PR #62](https://github.com/snowdamiz/incant/pull/62) is in hosted verification. Native editor/legacy Play migration, complete SDK, shader pipeline work and device budgets remain. |
 | Native window player | A separate implementation branch adds real surface presentation, keyboard/mouse input, suspension and device audio. Local source-free lifecycle tests pass. | Independent review/CI and Claude native acceptance precede integration. No phone or frame-budget claim. |
 | Native WebAssembly | Shared bounded capability ABI serves Wasmtime and wasm2c. PR #64 passed actual Windows /Od + /O2, Linux and macOS static conformance and fresh packaging. The optional static-module native game session passes a fresh local composed proof. | Full guest input/SDK, static-module renderer/session saves, composed-player hosted coverage and device gates remain. [Composition evidence](docs/spikes/native-wasm-game-session.md). |
@@ -52,7 +52,19 @@ review; concurrent native reviews coordinate foreground ownership.
   [bytecode](docs/spikes/cooked-native-scripts.md),
   [world saves](docs/spikes/native-world-saves.md),
   [input](docs/spikes/native-input-session.md),
-  [physics](docs/spikes/native-physics-runtime.md).
+  [physics](docs/spikes/native-physics-runtime.md). Native scripts now have bounded
+  committed-state raycasts, character sweeps and trigger events with revocable
+  capabilities and whole-update rejection. 131 scoped tests and a 45-process
+  source-free proof pass. [Queries](docs/spikes/native-script-queries.md),
+  [character/trigger evidence](docs/spikes/native-script-character.md). Native fixed-tick
+  timers now stage schedules alongside numeric/structural changes, with 63 script
+  tests and a 48-process source-free proof. [Timer evidence](docs/spikes/native-script-timers.md). Native
+  headless observation plans now check selected typed state and input actions at
+  accepted ticks, return structured false-assertion reports/nonzero status, and
+  preserve terminal runtime refusal. Seven focused and 577 ordinary workspace
+  tests plus 54 fresh source-free process controls pass; existing project-oriented
+  legacy Play and full Core Sample/agent integration remain open.
+  [Observation evidence](docs/spikes/native-headless-observations.md).
 - **Native rendering.** Canonical typed renderer input and a separate authoring
   adapter; exact retained asset versions; binary v4 cameras/models/lights and
   binary v5 sprites; direct committed pose updates and mandatory GPU host sync.
@@ -91,7 +103,7 @@ review; concurrent native reviews coordinate foreground ownership.
   [static host](docs/spikes/shipping-wasm2c.md),
   [MSVC follow-up](docs/spikes/wasm2c-msvc.md).
 
-Local integration checks: 543 ordinary Rust release tests/doctests; 138 scoped
+Local integration checks: 570 ordinary Rust release tests/doctests; 138 scoped
 static/development-Wasm/runtime/script tests; workspace and optional-host release
 Clippy; 529 UI tests, strict TypeScript and production build; 43 Python tool tests.
 The renderer's unchanged frozen implementation separately passed all 66 actual
@@ -103,14 +115,23 @@ conformance, browser-target physics compilation and six native parity streams.
 [Correction evidence](docs/spikes/runtime-ci-corrections.md). A subsequent Linux
 C11 trap-link failure now has a reproduced POSIX declaration fix; the Windows
 Camera accessibility test is split into its six independent scans with unchanged
-coverage and bounded asynchronous cleanup. Both corrections pass local checks
-and await the next hosted run.
+coverage and bounded asynchronous cleanup. Both corrections pass local checks. Corrected hosted Linux and Windows physics
+and all three Wasm conformance jobs pass; the remaining PR #62 jobs are still
+running or queued.
+
+Native script logs now publish only after accepted numeric/structural updates,
+with primitive Unicode validation, fixed per-update limits, bounded retained
+history and dropped-message counts. Native/game observers hide logs after
+terminal failure; the source-free player reports them once at completion.
+585 ordinary workspace tests and 47 fresh CPU-mode process controls pass.
+[Evidence](docs/spikes/native-script-logs.md). This is the QuickJS path; Wasm logs,
+full native SDK, session saves and editor/headless Play migration remain open.
 
 ## Remaining engineering requirements
 
 - Complete migration of the editor, headless runner and full gameplay SDK from
   legacy document-backed Play into the native runtime. Persistent script state,
-  timers/coroutines, native physics/navigation/audio/UI access and full composite
+  timers/coroutines, remaining native physics/navigation/audio/UI access and full composite
   session restoration need production coverage. Do not extend the legacy tick
   path or add project cloning/JSON/authoring validation to native ticks.
 - Finish render features and their native path: offline backend shader cooking,
