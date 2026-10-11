@@ -17,6 +17,7 @@ render-gpu = ["render-input", "dep:incant_render_gpu_host", "dep:incant_render",
 native-window = ["render-gpu", "incant_game_runtime/device", "dep:tao", "dep:pollster", "dep:gilrs"]
 
 [dependencies]
+tempfile = "3"
 incant_wasm_runtime = { path = "../incant_wasm_runtime", optional = true }
 incant_observe = { path = "../incant_observe" }
 incant_render_gpu_host = { path = "../incant_render_gpu_host", optional = true }

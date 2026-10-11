@@ -1,6 +1,7 @@
 //! Ordinary game-load checkpoints for explicitly opted-in bytecode behaviors.
 //! Code is supplied by trusted startup; save bytes contain data only.
 mod codec;
+mod pending;
 use crate::{
     CompiledScript, NativeSession, ScriptError, ScriptHost, SessionProgram,
     persistence::Store,
@@ -8,8 +9,9 @@ use crate::{
     schedule::{Schedule, Scope},
 };
 pub use codec::MAX_CHECKPOINT_BYTES;
-use incant_input::{InputActions, InputError, InputRuntime, ValidatedActions};
+use incant_input::{InputActions, InputError};
 use incant_runtime::{CookedScene, NativeWorld, SaveError, StableId};
+pub use pending::PendingSessionCheckpoint;
 use sha2::{Digest, Sha256};
 use thiserror::Error;
 
@@ -205,44 +207,7 @@ impl NativeSession {
         program: impl Into<SessionProgram>,
         actions: InputActions,
     ) -> Result<Self> {
-        Self::load_checkpoint(bytes, bytecode(program.into())?, actions, |world| {
-            Ok(NativeWorld::from_save_bytes_for_scene(world, initial)?)
-        })
-    }
-
-    fn load_checkpoint(
-        bytes: &[u8],
-        code: CompiledScript,
-        actions: InputActions,
-        load_world: impl FnOnce(&[u8]) -> Result<NativeWorld>,
-    ) -> Result<Self> {
-        let sections = codec::sections(bytes, identity(&code))?;
-        let active = codec::active(sections.active)?;
-        let store = codec::store(sections.store)?;
-        let schedule = codec::schedule(sections.schedule)?;
-        let bindings = ValidatedActions::new(actions).map_err(InputError::from)?;
-        // This session format was introduced with complete bound world v3.
-        // Older world-only formats cannot erase session capabilities implicitly.
-        if sections.world.get(8..12) != Some(3u32.to_le_bytes().as_slice()) {
-            return Err(CheckpointError::Invalid("session requires world save v3"));
-        }
-        let world = load_world(sections.world)?;
-        if world.source_scene_fingerprint() != sections.origin {
-            return Err(CheckpointError::WorldMismatch);
-        }
-        let mut host = ScriptHost::for_checkpoint(code, &world, &active)?;
-        validate(&host, &active, &store, &schedule, &world)?;
-        *host.persistent.borrow_mut() = store;
-        host.schedule = schedule;
-        let mut input = InputRuntime::default();
-        input.map_validated(&bindings);
-        Ok(Self {
-            world,
-            host: SessionVm::Bytecode(Box::new(host)),
-            input,
-            bindings,
-            failed: false,
-        })
+        PendingSessionCheckpoint::new(bytes, initial, program, actions)?.start()
     }
 
     /// Replace this session only after a complete candidate validates. Failure
@@ -255,7 +220,7 @@ impl NativeSession {
         if sections.origin != self.world.source_scene_fingerprint() {
             return Err(CheckpointError::WorldMismatch);
         }
-        let candidate = Self::load_checkpoint(
+        let candidate = PendingSessionCheckpoint::decode(
             bytes,
             host._compiled.clone(),
             self.bindings.definitions().clone(),
@@ -264,7 +229,8 @@ impl NativeSession {
                 self.world.validate_save_compatibility(&candidate)?;
                 Ok(candidate)
             },
-        )?;
+        )?
+        .start()?;
         *self = candidate;
         Ok(())
     }
