@@ -1,0 +1,40 @@
+{
+  "scope": "Frozen source-free proof scene bytes copied before tilemap implementation; these data fixtures contain no code or external content. They verify historical v1-v5 load/byte re-encoding and numeric continuation.",
+  "fixtures": [
+    {
+      "version": 1,
+      "fixture": "v1.scene",
+      "source": "/tmp/incant-shipping-standalone-final-script/player/world.scene",
+      "bytes": 280,
+      "sha256": "a7049be6f2504e41ef032c58c0a38c78a6af2495743a108b907c05618a6f9738"
+    },
+    {
+      "version": 2,
+      "fixture": "v2.scene",
+      "source": "/tmp/incant-shipping-standalone-final-script/player/physics.scene",
+      "bytes": 716,
+      "sha256": "9d19069851a7dcd53e7aef07d1c526f20b04a5e7ad87789f3d5c9fbe46e74c52"
+    },
+    {
+      "version": 3,
+      "fixture": "v3.scene",
+      "source": "/tmp/incant-native-game-shipping-02/player/static.scene",
+      "bytes": 640,
+      "sha256": "9e9ebff3b967224910102f46be35125ecd03076e70069a2c9f8c92a803e39be8"
+    },
+    {
+      "version": 4,
+      "fixture": "v4.scene",
+      "source": "/tmp/incant-game-gpu-shipping/player/static.scene",
+      "bytes": 877,
+      "sha256": "39e14dce85d6985aca7ab3b0cd32388cb085192cddc6763d71a0b114e80ecda6"
+    },
+    {
+      "version": 5,
+      "fixture": "v5.scene",
+      "source": "/tmp/incant-native-sprite-player-shipping-final/player/static-sprite.scene",
+      "bytes": 966,
+      "sha256": "2e627d640c7df026c162a2b2bbfbf831c6a2abb9e3c81b2ffd1b6ccfd7105772"
+    }
+  ]
+}

@@ -1,8 +1,10 @@
 //! Bounded sprite geometry and document values. No GPU, filesystem or mutation path.
 pub mod atlas;
+pub mod tilemap;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use thiserror::Error;
+pub use tilemap::{Tilemap, TilemapError, TilemapLayer};
 
 #[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "snake_case")]

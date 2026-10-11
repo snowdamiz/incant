@@ -45,6 +45,9 @@ pub(crate) fn prepare(
         let Some(decl) = node.declaration else {
             continue;
         };
+        if decl.tilemap.is_some() {
+            return Err(NativeRenderError::TilemapUnsupported { entity: node.id });
+        }
         if let Some(env) = &decl.environment {
             let source = asset(&env.texture)?;
             if !matches!(source.data(), RuntimeAssetData::Texture(_)) {

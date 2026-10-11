@@ -363,6 +363,12 @@ export namespace StringTableSchema {
 }
 export type StringTable = StringTableSchema.Root;
 
+export namespace TilemapSchema {
+  export type TilemapLayer = { "cells": Array<string | null>; "id": string; "layer"?: number; "order"?: number; "solid"?: boolean };
+  export type Root = { "cell_size": [number, number]; "layers": Array<TilemapLayer>; "size": [number, number]; "tileset": string };
+}
+export type Tilemap = TilemapSchema.Root;
+
 export namespace TimerEventSchema {
   export type Root = { "id": string; "payload": unknown; "scheduled_tick": number };
 }

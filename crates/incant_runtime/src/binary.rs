@@ -1,4 +1,4 @@
-//! Versions 1/2/3/4/5, little-endian checked data (not executable code). SHA-256 detects
+//! Versions 1/2/3/4/5/6, little-endian checked data (not executable code). SHA-256 detects
 //! damage, not authorship. No casts, alignment assumptions or native-layout ABI.
 use crate::scene::MAX_ENTITIES;
 use crate::{CookedEntity, CookedScene, SceneError, StableId};
@@ -7,7 +7,7 @@ use sha2::{Digest, Sha256};
 use std::collections::BTreeMap;
 
 const MAGIC: &[u8; 8] = b"INCANTSC";
-const VERSION: u32 = 5;
+const VERSION: u32 = 6;
 const PREFIX: usize = 40;
 const HEADER: usize = 72;
 const MIN_RECORD: usize = 104;
@@ -24,8 +24,10 @@ impl CookedScene {
             .collect();
         let mut bytes = Vec::with_capacity(HEADER + self.entities.len() * MAX_RECORD);
         bytes.extend(MAGIC);
-        let version = if self.spatial.iter().any(|n| n.sprite.is_some()) {
+        let version = if self.spatial.iter().any(|n| n.tilemap.is_some()) {
             VERSION
+        } else if self.spatial.iter().any(|n| n.sprite.is_some()) {
+            5
         } else if !self.spatial.is_empty() || !self.visual_assets.is_empty() {
             4
         } else if !self.audio.is_empty() {
@@ -232,8 +234,9 @@ impl CookedScene {
                 return Err(SceneError::Invalid("spatial record count"));
             }
             spatial.reserve(spatial_count);
+            let mut tile_budget = crate::tilemap_binary::Budget::default();
             for _ in 0..spatial_count {
-                let node = crate::spatial_binary::read(&mut reader, version)?;
+                let node = crate::spatial_binary::read(&mut reader, version, &mut tile_budget)?;
                 if spatial
                     .last()
                     .is_some_and(|p: &crate::CookedSpatial| p.entity >= node.entity)
@@ -246,6 +249,11 @@ impl CookedScene {
         if version == 5 && !spatial.iter().any(|n| n.sprite.is_some()) {
             return Err(SceneError::Invalid(
                 "version 5 requires a sprite declaration",
+            ));
+        }
+        if version == 6 && !spatial.iter().any(|n| n.tilemap.is_some()) {
+            return Err(SceneError::Invalid(
+                "version 6 requires a tilemap declaration",
             ));
         }
         if !reader.0.is_empty() {
@@ -276,6 +284,9 @@ fn checksum(bytes: &[u8]) -> [u8; 32] {
 
 pub(crate) struct Reader<'a>(&'a [u8]);
 impl Reader<'_> {
+    pub(crate) fn remaining_len(&self) -> usize {
+        self.0.len()
+    }
     pub(crate) fn byte(&mut self) -> Result<u8, SceneError> {
         Ok(self.array::<1>()?[0])
     }

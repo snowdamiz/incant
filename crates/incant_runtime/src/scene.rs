@@ -164,6 +164,11 @@ impl CookedScene {
         assets.sort_unstable_by_key(|asset| asset.id);
         crate::spatial::validate(&nodes, &assets, |id| ids.contains(&id))?;
         nodes.sort_unstable_by_key(|node| node.entity);
+        for node in &mut nodes {
+            if let Some(map) = &mut node.tilemap {
+                map.layers.sort_unstable_by_key(|layer| layer.id);
+            }
+        }
         self.visual_assets = assets;
         self.spatial = nodes;
         let size = 72

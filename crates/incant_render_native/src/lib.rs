@@ -1,6 +1,8 @@
 //! Retained CPU input for the native renderer. Bind checked cooked versions once;
 //! ordinary frames only copy committed f64 poses into existing typed slots.
 mod binding;
+mod tilemap;
+pub use tilemap::TilemapAtlasBinding;
 mod update;
 use glam::DMat4;
 use incant_assets_runtime::RuntimeAsset;
@@ -23,6 +25,12 @@ pub struct VisualCaches<'a> {
 pub enum NativeRenderError {
     #[error("spatial input belongs to a different native world")]
     DifferentWorld,
+    #[error("native tilemap {entity:?} has no renderer consumer yet")]
+    TilemapUnsupported { entity: StableId },
+    #[error("tilemap requires a matching checked color atlas descriptor and cache")]
+    TilemapBinding,
+    #[error("tilemap frame {0:?} is absent from the checked atlas")]
+    TilemapFrame(StableId),
     #[error("retained spatial index layout is inconsistent")]
     Layout,
     #[error("visual asset {asset:?} failed to load: {source}")]
