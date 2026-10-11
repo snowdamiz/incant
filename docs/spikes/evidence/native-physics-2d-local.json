@@ -1,0 +1,730 @@
+{
+  "scope": "Native retained Rapier2D plus cooked v7/typed ECS integration; local evidence only",
+  "base": "409968110b7a3e88d2e2df9e958ba9e3ff65cf29",
+  "solver_checkpoint": "5ab263cc0a057dfae1736554bf4d7aad101036eb",
+  "host": {
+    "system": "Darwin",
+    "machine": "arm64"
+  },
+  "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+  "checks": [
+    {
+      "name": "workspace_tests",
+      "command": "./tools/cargo test --workspace --release --locked --features incant_audio_runtime/scene -j2",
+      "status": "passed",
+      "log": "/tmp/incant-physics2d-workspace-tests.log",
+      "sha256": "ab6ed5db324c48c7a043f66f02d9f6850dce9ae8baed2190867dc1e962a78df4",
+      "test_totals": {
+        "passed": 585,
+        "failed": 0,
+        "ignored": 66
+      }
+    },
+    {
+      "name": "workspace_clippy",
+      "command": "./tools/cargo clippy --workspace --all-targets --release --locked --features incant_audio_runtime/scene -j2 -- -D warnings",
+      "status": "passed",
+      "log": "/tmp/incant-physics2d-workspace-clippy.log",
+      "sha256": "1a1e0de56dff099daee556f99b725b6a78a0eabbbf4c2e37d43c8295b4599a2f"
+    },
+    {
+      "name": "workspace_gpu",
+      "command": "./tools/cargo test --workspace --release --locked --features incant_audio_runtime/scene -j2 -- --ignored --test-threads=1",
+      "status": "passed",
+      "log": "/tmp/incant-physics2d-workspace-gpu.log",
+      "sha256": "51084f10ef5d101c6ae9abde9cd141046c95bb3776475630cadc3d2f293907b7",
+      "test_totals": {
+        "passed": 66,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "name": "tools_build",
+      "command": "./tools/cargo build --workspace --bin incant_headless --example cook_scene --release --features incant_audio_runtime/scene --locked -j2",
+      "status": "passed",
+      "log": "/tmp/incant-physics2d-tools-build.log",
+      "sha256": "343c13e7f6f2d320993b573f830525e33b59b3c32656ef426e015b1e30f3fdc2"
+    },
+    {
+      "name": "schemas",
+      "command": "target/release/incant_headless schema schemas; node tools/generate_sdk.mjs; node tools/generate_sdk.mjs --check",
+      "status": "passed",
+      "log": "/tmp/incant-physics2d-schema.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "sdk",
+      "command": "npm --prefix sdk/ts run typecheck",
+      "status": "passed",
+      "log": "/tmp/incant-physics2d-sdk.log",
+      "sha256": "d99e730f3fa7ce96a929aee1bb21bf07f3ad6e45c94d7a985fe264a3af128aa1"
+    },
+    {
+      "name": "tools",
+      "command": "python3 -m unittest discover -s tools/tests -v",
+      "status": "passed",
+      "log": "/tmp/incant-physics2d-tools-final.log",
+      "sha256": "c362566e1a5ce964291df39c8105f17fafaf416d96faea1f9f5c1f8c345c1054",
+      "passed_tests": 51
+    },
+    {
+      "name": "ios_simulator_compile",
+      "command": "./tools/cargo check -j2 -p incant_runtime --release --locked --target aarch64-apple-ios-sim",
+      "status": "passed",
+      "log": "/tmp/incant-physics2d-ios-check.log",
+      "sha256": "b441c253c508b40bea998cfa9741f8cfa640764ef374f46bda548464e3d74468"
+    },
+    {
+      "name": "wasm_compile",
+      "command": "./tools/cargo check -j2 -p incant_runtime --release --locked --target wasm32-unknown-unknown",
+      "status": "passed",
+      "log": "/tmp/incant-physics2d-wasm-check.log",
+      "sha256": "6f44d0baf1bf7c1e9f9a9d999f50367daedba1e152787de483d93ee5d155dce3"
+    },
+    {
+      "name": "native_and_browser",
+      "command": "python3 tools/probes/native-physics/run.py --output /tmp/incant-physics2d-parity-final --trials 3 --browser --wasm-bindgen /tmp/incant-pinned-tool-live/wasm-bindgen/wasm-bindgen",
+      "status": "passed",
+      "log": "/tmp/incant-physics2d-parity-final.log",
+      "sha256": "12e354266d4725fc55c38c69f21aab7ded21af4002daff01af451f5ff178f050"
+    },
+    {
+      "name": "fresh_shipping",
+      "command": "python3 tools/probes/native-physics-2d.py /tmp/incant-physics2d-shipping",
+      "status": "passed",
+      "log": "/tmp/incant-physics2d-shipping.log",
+      "sha256": "366e88f3ca270f7126d41885c317e547308489aaedb9b897bea4ace66cc350c9"
+    },
+    {
+      "name": "resolved_dependencies",
+      "command": "python3 tools/check_runtime_dependencies.py incant_types incant_physics_2d_runtime incant_runtime incant_script_player --features incant_audio_runtime/scene",
+      "status": "passed",
+      "log": "/tmp/incant-physics2d-dependencies.log",
+      "sha256": "da48541797ab6ae7d9b53ffb0c37819754f7f32a6d6df2ad1ad960966274e6d5"
+    },
+    {
+      "name": "feature_policy",
+      "command": "python3 tools/probes/physics-parity/features.py --output /tmp/incant-physics2d-features.json",
+      "status": "passed",
+      "log": "/tmp/incant-physics2d-features.log",
+      "sha256": "a8276195d8af815b6a78db33fa11043ad1674f0b66c2ada5bdd7f6c9e36f4eb8"
+    },
+    {
+      "name": "probe_clippy",
+      "command": "./tools/cargo clippy -j2 --manifest-path tools/probes/native-physics/Cargo.toml --release --all-targets --locked -- -D warnings",
+      "status": "passed",
+      "log": "/tmp/incant-physics2d-probe-clippy.log",
+      "sha256": "4ff67ee6ec41c782925d57439decc223800d99c098b7593ba9f469290e618766"
+    }
+  ],
+  "final_non_cargo_checks": [
+    "cargo fmt --all -- --check",
+    "cargo fmt --manifest-path tools/probes/native-physics/Cargo.toml --check",
+    "python3 tools/generate_conventions.py --check",
+    "node tools/generate_sdk.mjs --check",
+    "actionlint .github/workflows/physics-candidates.yml",
+    "git diff --check"
+  ],
+  "feature_policy": {
+    "report_sha256": "d8539e5ad766608a970ff65c9160a6a9ab72fafa6a9acf3a2c3c703d24c56774",
+    "rows": 49,
+    "targets": [
+      "aarch64-apple-darwin",
+      "aarch64-apple-ios",
+      "aarch64-apple-ios-sim",
+      "aarch64-linux-android",
+      "wasm32-unknown-unknown",
+      "x86_64-pc-windows-msvc",
+      "x86_64-unknown-linux-gnu"
+    ],
+    "native_parallel": true,
+    "wasm_serial": true,
+    "scope": "Resolved graph only; actual compilation/execution separately recorded"
+  },
+  "parity": {
+    "report_sha256": "04f17f5bdfe115726fd8de7d34b5ac5db9d137cc3328e58f638729a682abb990",
+    "browser": [
+      {
+        "trial": 0,
+        "browser": "156.0.8078.4",
+        "streams": [
+          {
+            "scenario": "3d",
+            "file": "browser-3d-0.bin",
+            "bytes": 2714667
+          },
+          {
+            "scenario": "2d",
+            "file": "browser-2d-0.bin",
+            "bytes": 3791547
+          }
+        ]
+      },
+      {
+        "trial": 1,
+        "browser": "156.0.8078.4",
+        "streams": [
+          {
+            "scenario": "3d",
+            "file": "browser-3d-1.bin",
+            "bytes": 2714667
+          },
+          {
+            "scenario": "2d",
+            "file": "browser-2d-1.bin",
+            "bytes": 3791547
+          }
+        ]
+      },
+      {
+        "trial": 2,
+        "browser": "156.0.8078.4",
+        "streams": [
+          {
+            "scenario": "3d",
+            "file": "browser-3d-2.bin",
+            "bytes": 2714667
+          },
+          {
+            "scenario": "2d",
+            "file": "browser-2d-2.bin",
+            "bytes": 3791547
+          }
+        ]
+      }
+    ],
+    "records": [
+      {
+        "bodies": 35,
+        "frames": 641,
+        "record_bytes": 121,
+        "max_sleeping": 32,
+        "wake_transitions": 16,
+        "events": 4,
+        "bytes": 2714667,
+        "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+        "file": "native-3d-1-0.bin",
+        "scenario": "3d",
+        "trial": 0,
+        "workers": 1,
+        "mode": "native-parallel"
+      },
+      {
+        "bodies": 35,
+        "frames": 641,
+        "record_bytes": 121,
+        "max_sleeping": 32,
+        "wake_transitions": 16,
+        "events": 4,
+        "bytes": 2714667,
+        "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+        "file": "native-3d-4-0.bin",
+        "scenario": "3d",
+        "trial": 0,
+        "workers": 4,
+        "mode": "native-parallel"
+      },
+      {
+        "bodies": 35,
+        "frames": 641,
+        "record_bytes": 121,
+        "max_sleeping": 32,
+        "wake_transitions": 16,
+        "events": 4,
+        "bytes": 2714667,
+        "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+        "file": "native-3d-4-1.bin",
+        "scenario": "3d",
+        "trial": 1,
+        "workers": 4,
+        "mode": "native-parallel"
+      },
+      {
+        "bodies": 35,
+        "frames": 641,
+        "record_bytes": 121,
+        "max_sleeping": 32,
+        "wake_transitions": 16,
+        "events": 4,
+        "bytes": 2714667,
+        "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+        "file": "native-3d-1-1.bin",
+        "scenario": "3d",
+        "trial": 1,
+        "workers": 1,
+        "mode": "native-parallel"
+      },
+      {
+        "bodies": 35,
+        "frames": 641,
+        "record_bytes": 121,
+        "max_sleeping": 32,
+        "wake_transitions": 16,
+        "events": 4,
+        "bytes": 2714667,
+        "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+        "file": "native-3d-1-2.bin",
+        "scenario": "3d",
+        "trial": 2,
+        "workers": 1,
+        "mode": "native-parallel"
+      },
+      {
+        "bodies": 35,
+        "frames": 641,
+        "record_bytes": 121,
+        "max_sleeping": 32,
+        "wake_transitions": 16,
+        "events": 4,
+        "bytes": 2714667,
+        "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+        "file": "native-3d-4-2.bin",
+        "scenario": "3d",
+        "trial": 2,
+        "workers": 4,
+        "mode": "native-parallel"
+      },
+      {
+        "bodies": 35,
+        "frames": 641,
+        "record_bytes": 169,
+        "max_sleeping": 32,
+        "wake_transitions": 32,
+        "events": 40,
+        "bytes": 3791547,
+        "sha256": "66fa6554bc25162403d67a8dc88bcc16906ef9b5ce3a3e54c8fddfc828a28b63",
+        "file": "native-2d-1-0.bin",
+        "scenario": "2d",
+        "trial": 0,
+        "workers": 1,
+        "mode": "native-parallel"
+      },
+      {
+        "bodies": 35,
+        "frames": 641,
+        "record_bytes": 169,
+        "max_sleeping": 32,
+        "wake_transitions": 32,
+        "events": 40,
+        "bytes": 3791547,
+        "sha256": "66fa6554bc25162403d67a8dc88bcc16906ef9b5ce3a3e54c8fddfc828a28b63",
+        "file": "native-2d-4-0.bin",
+        "scenario": "2d",
+        "trial": 0,
+        "workers": 4,
+        "mode": "native-parallel"
+      },
+      {
+        "bodies": 35,
+        "frames": 641,
+        "record_bytes": 169,
+        "max_sleeping": 32,
+        "wake_transitions": 32,
+        "events": 40,
+        "bytes": 3791547,
+        "sha256": "66fa6554bc25162403d67a8dc88bcc16906ef9b5ce3a3e54c8fddfc828a28b63",
+        "file": "native-2d-4-1.bin",
+        "scenario": "2d",
+        "trial": 1,
+        "workers": 4,
+        "mode": "native-parallel"
+      },
+      {
+        "bodies": 35,
+        "frames": 641,
+        "record_bytes": 169,
+        "max_sleeping": 32,
+        "wake_transitions": 32,
+        "events": 40,
+        "bytes": 3791547,
+        "sha256": "66fa6554bc25162403d67a8dc88bcc16906ef9b5ce3a3e54c8fddfc828a28b63",
+        "file": "native-2d-1-1.bin",
+        "scenario": "2d",
+        "trial": 1,
+        "workers": 1,
+        "mode": "native-parallel"
+      },
+      {
+        "bodies": 35,
+        "frames": 641,
+        "record_bytes": 169,
+        "max_sleeping": 32,
+        "wake_transitions": 32,
+        "events": 40,
+        "bytes": 3791547,
+        "sha256": "66fa6554bc25162403d67a8dc88bcc16906ef9b5ce3a3e54c8fddfc828a28b63",
+        "file": "native-2d-1-2.bin",
+        "scenario": "2d",
+        "trial": 2,
+        "workers": 1,
+        "mode": "native-parallel"
+      },
+      {
+        "bodies": 35,
+        "frames": 641,
+        "record_bytes": 169,
+        "max_sleeping": 32,
+        "wake_transitions": 32,
+        "events": 40,
+        "bytes": 3791547,
+        "sha256": "66fa6554bc25162403d67a8dc88bcc16906ef9b5ce3a3e54c8fddfc828a28b63",
+        "file": "native-2d-4-2.bin",
+        "scenario": "2d",
+        "trial": 2,
+        "workers": 4,
+        "mode": "native-parallel"
+      },
+      {
+        "bodies": 35,
+        "frames": 641,
+        "record_bytes": 121,
+        "max_sleeping": 32,
+        "wake_transitions": 16,
+        "events": 4,
+        "bytes": 2714667,
+        "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+        "file": "browser-3d-0.bin",
+        "scenario": "3d",
+        "trial": 0,
+        "workers": 0,
+        "mode": "browser-wasm-serial"
+      },
+      {
+        "bodies": 35,
+        "frames": 641,
+        "record_bytes": 121,
+        "max_sleeping": 32,
+        "wake_transitions": 16,
+        "events": 4,
+        "bytes": 2714667,
+        "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+        "file": "browser-3d-1.bin",
+        "scenario": "3d",
+        "trial": 1,
+        "workers": 0,
+        "mode": "browser-wasm-serial"
+      },
+      {
+        "bodies": 35,
+        "frames": 641,
+        "record_bytes": 121,
+        "max_sleeping": 32,
+        "wake_transitions": 16,
+        "events": 4,
+        "bytes": 2714667,
+        "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+        "file": "browser-3d-2.bin",
+        "scenario": "3d",
+        "trial": 2,
+        "workers": 0,
+        "mode": "browser-wasm-serial"
+      },
+      {
+        "bodies": 35,
+        "frames": 641,
+        "record_bytes": 169,
+        "max_sleeping": 32,
+        "wake_transitions": 32,
+        "events": 40,
+        "bytes": 3791547,
+        "sha256": "66fa6554bc25162403d67a8dc88bcc16906ef9b5ce3a3e54c8fddfc828a28b63",
+        "file": "browser-2d-0.bin",
+        "scenario": "2d",
+        "trial": 0,
+        "workers": 0,
+        "mode": "browser-wasm-serial"
+      },
+      {
+        "bodies": 35,
+        "frames": 641,
+        "record_bytes": 169,
+        "max_sleeping": 32,
+        "wake_transitions": 32,
+        "events": 40,
+        "bytes": 3791547,
+        "sha256": "66fa6554bc25162403d67a8dc88bcc16906ef9b5ce3a3e54c8fddfc828a28b63",
+        "file": "browser-2d-1.bin",
+        "scenario": "2d",
+        "trial": 1,
+        "workers": 0,
+        "mode": "browser-wasm-serial"
+      },
+      {
+        "bodies": 35,
+        "frames": 641,
+        "record_bytes": 169,
+        "max_sleeping": 32,
+        "wake_transitions": 32,
+        "events": 40,
+        "bytes": 3791547,
+        "sha256": "66fa6554bc25162403d67a8dc88bcc16906ef9b5ce3a3e54c8fddfc828a28b63",
+        "file": "browser-2d-2.bin",
+        "scenario": "2d",
+        "trial": 2,
+        "workers": 0,
+        "mode": "browser-wasm-serial"
+      }
+    ],
+    "source_sha256": {
+      "crates/incant_runtime/src/scene.rs": "74608a97640c176f4bbe9b46cd6ebc3e30a8db01b129986b21f87ca1e3addbb2",
+      "crates/incant_runtime/src/world_identity.rs": "7ffc1f183c00110cc06f48f678b07f220d6bad73ed3e62690db142c0df23a809",
+      "crates/incant_runtime/src/hierarchy.rs": "242b534ad778bf4a2bb3aa67db0a0e1f620566a6a15650abbfda9e61a24224bc",
+      "crates/incant_runtime/src/spatial.rs": "87a6702b17858ddc571fe27dbd046d4fa79808f9587d4445187e00ac394d47ef",
+      "crates/incant_runtime/src/spatial_commands.rs": "c1a003b8460d3667cdfcad95a639bc7a5bea8887b11ceffee2b9ff4e0cafe087",
+      "crates/incant_runtime/src/audio_binary.rs": "1121b4cc9151d929bb112f40625bb7620ac12fd9dda52eabe529ac5ca80d36ce",
+      "crates/incant_runtime/src/lib.rs": "61682378ccd8cac093217428450b67f3df6c6401a9b19dd0e7880686807089b9",
+      "crates/incant_runtime/src/spatial_view.rs": "070259904adaca5b25010fc1967bcd002235e6107f11bc9d918bf3d587eed22a",
+      "crates/incant_runtime/src/tilemap.rs": "7768b07a216dfa7cd3bb7da8f028152361341d87f81e2579af9e208c3922f2bc",
+      "crates/incant_runtime/src/save.rs": "8a1bd0191fcb7803b789fefe9b70596fc93b4270fe705127281cfa0e8b63f3bf",
+      "crates/incant_runtime/src/binary.rs": "b696ace3cf70a7b5208cc6e8ec46b6624c41af93a2668146282b7d55716d352f",
+      "crates/incant_runtime/src/world.rs": "099f6a1f79f5c0c230614603473573129c342309a6f0210541b8a48d9cabbd55",
+      "crates/incant_runtime/src/commands.rs": "c66cf9b9ce2d1df034206214b217b62c187a684974babeedacc44c1b908e3c2d",
+      "crates/incant_runtime/src/physics_2d_binary.rs": "481bb0071e06690491d512c76cffde7efe85cc6bc4a87699fd0c4a155f865e2b",
+      "crates/incant_runtime/src/tilemap_binary.rs": "aa5dba50e3b7d34d58eab0726039162f15670e44a9c7ace8b05c3e1fad696f0b",
+      "crates/incant_runtime/src/physics_2d.rs": "3f3563e72e81d05a70d104291dddcc0d9e1355070ea8eb01f67581d319d8c3ac",
+      "crates/incant_runtime/src/audio.rs": "f0e4b40768a3b3aa4bef5e50d8e4dcb531225ff7937b0d9bc7b358a4ead9dc96",
+      "crates/incant_runtime/src/physics_binary.rs": "39b766313db1d0d0487e90e419cc777e18d7062a556b237608ed03c93c65e822",
+      "crates/incant_runtime/src/spatial_binary.rs": "bd998541bffd9c24032b42a5dab47c097fe579ac8da799320fbeeadf0ff52c9d",
+      "crates/incant_runtime/src/physics.rs": "ba1f98eddeef3becebe82831ea45cf6de4f7462e8e24ca422e4e68f7152a397f",
+      "crates/incant_runtime/src/sprite.rs": "f00cd559c6b538d904eae5d3551102da27711556b51f3b59b6e9b9b9169ac249",
+      "crates/incant_runtime/src/columns.rs": "80a615d853fea52e86cc58e634dfad7b2e371d944f840b91ebc888fa23718c66",
+      "crates/incant_runtime/src/sprite_binary.rs": "e211217db25b5f07223782cf722646bf474f23ac93b39809817d73af01bc5c65",
+      "crates/incant_physics_runtime/src/shapes.rs": "17fc238d7cbc9ab5ffc6eba0e6a59e55d8d29f1f1e29d587927a7f1ce2a3eb87",
+      "crates/incant_physics_runtime/src/lib.rs": "6f6195522e75587d678a9e73dc264802d88fd19f8bf02003425c8f5b0dcb506e",
+      "crates/incant_physics_runtime/src/character_queries.rs": "c7548822eede48b93ab6e822e1da563f2c319a606a491f06159c61a95dd7e3bd",
+      "crates/incant_physics_runtime/src/queries.rs": "94e7c8aa5d56977036e4161f8637b5e8221e95312c4df8fe3f9b81b382986668",
+      "crates/incant_physics_runtime/src/character.rs": "a46c7ece3103ce7c8ddbd80d60b1668782028e93c626b655d6f4bab175672a92",
+      "crates/incant_physics_2d_runtime/src/config.rs": "7872f6c540dec7af30b703daa442c0940e6340e31edd28fc708ec02f7a277494",
+      "crates/incant_physics_2d_runtime/src/lib.rs": "3acfbd7a2ac8340caa3a813d52fa34ea56b59bbaea6ab802c14ce6e744c1e91c",
+      "crates/incant_physics_2d_runtime/src/query.rs": "d9a077501928dcfa9096c3cc73f4edbaf999b754a3a9458adfb2321731d89f72",
+      "crates/incant_types/src/physics_2d.rs": "d96a77c53ca3cf06d2082034fcdcf39ec81f51286c31564d0254e6f2becc3ef4",
+      "crates/incant_types/src/physics_2d_validation.rs": "122b6ae481c8defdc188ac649f88ece4b047a8dc8a4b301931559cfc21c24881",
+      "Cargo.lock": "2f50be79da515bea5e44800531c9fc97095b3bde8b7cee80684964725e8b5de3",
+      "tools/probes/native-physics/Cargo.lock": "db620b837d3ada480e7f9c58e2069d36f98750d8abb9aa273e58aee8e6639ae6",
+      "tools/probes/native-physics/Cargo.toml": "2422cfe646cc18cb1b0df4cb1354f1a253f305ada22041b26cfc678aea4c6838",
+      "tools/probes/native-physics/src/lib.rs": "ccf2fa60ab3fca99229dc6c1b4862d67e8364abdbe3bf2b6cd350d1673664e72",
+      "tools/probes/native-physics/src/main.rs": "b82be86e14b478c7a10587e04529080e45b9a00c129c277c0d8b47526f660d50",
+      "tools/probes/native-physics/src/planar.rs": "1e7dbada20bd21cf72e211b40388b7ae89453c12f6c5578f5525f8c5f6dec108",
+      "tools/probes/native-physics/run.py": "f790f3b462d2dc2d18e845ab16739570827725dfa5c6527666be1e76fcdda956",
+      "tools/probes/native-physics/browser.mjs": "e92eb2ae6eae19ae2c0f5860593d2b2c23dca8ac17cb8be5df245f8dce58326a"
+    }
+  },
+  "original_3d_baseline": [
+    {
+      "report": "/tmp/incant-pr57-native-physics-artifacts/native-ecs-physics-macos-latest/report.json",
+      "report_sha256": "ac045d6c214fee46efcf8e87a6ed0ec193eb49a7d4ff0955f50869ea03d5f816",
+      "system": "Darwin",
+      "stream_sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+      "byte_identical": true
+    },
+    {
+      "report": "/tmp/incant-pr57-native-physics-artifacts/native-ecs-physics-ubuntu-latest/report.json",
+      "report_sha256": "6689404d7ee8d3f8c330afb4b143c303dff4eddc1d6af876c3ef9f1ecea70825",
+      "system": "Linux",
+      "stream_sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+      "byte_identical": true
+    },
+    {
+      "report": "/tmp/incant-pr57-native-physics-artifacts/native-ecs-physics-windows-latest/report.json",
+      "report_sha256": "7ed1b438baf1c40816cc0cad992f591a3b38d998be709787a1028a1405edde4b",
+      "system": "Windows",
+      "stream_sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+      "byte_identical": true
+    }
+  ],
+  "shipping": {
+    "report_sha256": "5b2c47b821b6f6f960300e33790df51ea397420771ab4bc4e86d475cbaf78d56",
+    "build_log_sha256": "aafd10bb566078f2cd4bd84dacd1284fd5d5091ffbe1bbaa7ae3754de065bf71",
+    "fresh_cargo_build_duration": "1m 55s; local build, not runtime performance",
+    "passed": true,
+    "target": "aarch64-apple-darwin",
+    "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+    "codegen": {
+      "incant_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort",
+        "debuginfo": "2",
+        "split-debuginfo": "packed"
+      },
+      "incant_physics_2d_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort",
+        "debuginfo": "2",
+        "split-debuginfo": "packed"
+      },
+      "rapier2d": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort",
+        "debuginfo": "2",
+        "split-debuginfo": "packed"
+      },
+      "native_physics_2d": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort",
+        "debuginfo": "2",
+        "split-debuginfo": "packed",
+        "lto": "fat"
+      }
+    },
+    "symbol_identity": {
+      "format": "Mach-O/dSYM",
+      "uuids": {
+        "arm64": "dedba3ad-13b3-3d79-8883-254aa2ce5d83"
+      }
+    },
+    "player_bytes": 3994224,
+    "player_sha256": "c6104759251293f9e172a9af180b382a652af22d7f45ca069606a11d26677ae1",
+    "fixture_tool_sha256": "a36fde1598e5a9358d6b8a144192961f465076c313c12075a157c8ca14391f95",
+    "cooked_scene_sha256": "1c66816e1f2cf55dd748bc797e7687adf1082d64d73b1eccc2e3c6a53910f0db",
+    "fixture_kind": "trusted typed checked v7 fixture; authoring/cook API tested separately",
+    "temporary_fixture_and_build_storage_deleted": true,
+    "successful_processes": 3,
+    "refusal_processes": 4,
+    "coverage": {
+      "bodies": 35,
+      "frames": 641,
+      "record_bytes": 169,
+      "max_sleeping": 32,
+      "wake_transitions": 32,
+      "events": 40,
+      "bytes": 3791547,
+      "sha256": "66fa6554bc25162403d67a8dc88bcc16906ef9b5ce3a3e54c8fddfc828a28b63"
+    },
+    "shipping_matches_release_reference": true,
+    "runtime_package_retained": [
+      "copied native executable",
+      "cooked v7 scene; no texture cache"
+    ],
+    "visual_or_full_game_session": false,
+    "physics_saves": false,
+    "reference_phone_gate": false,
+    "failure_semantics": "Simulation failure stops before output creation. Output I/O is not atomic and may leave a partial stream."
+  },
+  "shipping_source_sha256": {
+    "Cargo.toml": "09b7f32a87dc7e463ba708fbbefa67c061c70af789ab8a6e4ea8a98e06e67187",
+    "Cargo.lock": "2f50be79da515bea5e44800531c9fc97095b3bde8b7cee80684964725e8b5de3",
+    ".cargo/config.toml": "0d3b42ee7bc4ef237cb8af440c47e506dcc9cc8b24d49d3cd3d3fea76ae5caa1",
+    "tools/probes/native-physics-2d.py": "4e3fd48e5c40ded86ae4be333e5c66fb57c362ed8c40d002ebfa80df7d0312da",
+    "tools/probes/native-physics/src/planar.rs": "1e7dbada20bd21cf72e211b40388b7ae89453c12f6c5578f5525f8c5f6dec108",
+    "crates/incant_runtime/src/scene.rs": "74608a97640c176f4bbe9b46cd6ebc3e30a8db01b129986b21f87ca1e3addbb2",
+    "crates/incant_runtime/src/world_identity.rs": "7ffc1f183c00110cc06f48f678b07f220d6bad73ed3e62690db142c0df23a809",
+    "crates/incant_runtime/src/hierarchy.rs": "242b534ad778bf4a2bb3aa67db0a0e1f620566a6a15650abbfda9e61a24224bc",
+    "crates/incant_runtime/src/spatial.rs": "87a6702b17858ddc571fe27dbd046d4fa79808f9587d4445187e00ac394d47ef",
+    "crates/incant_runtime/src/spatial_commands.rs": "c1a003b8460d3667cdfcad95a639bc7a5bea8887b11ceffee2b9ff4e0cafe087",
+    "crates/incant_runtime/src/audio_binary.rs": "1121b4cc9151d929bb112f40625bb7620ac12fd9dda52eabe529ac5ca80d36ce",
+    "crates/incant_runtime/src/lib.rs": "61682378ccd8cac093217428450b67f3df6c6401a9b19dd0e7880686807089b9",
+    "crates/incant_runtime/src/spatial_view.rs": "070259904adaca5b25010fc1967bcd002235e6107f11bc9d918bf3d587eed22a",
+    "crates/incant_runtime/src/tilemap.rs": "7768b07a216dfa7cd3bb7da8f028152361341d87f81e2579af9e208c3922f2bc",
+    "crates/incant_runtime/src/save.rs": "8a1bd0191fcb7803b789fefe9b70596fc93b4270fe705127281cfa0e8b63f3bf",
+    "crates/incant_runtime/src/binary.rs": "b696ace3cf70a7b5208cc6e8ec46b6624c41af93a2668146282b7d55716d352f",
+    "crates/incant_runtime/src/world.rs": "099f6a1f79f5c0c230614603473573129c342309a6f0210541b8a48d9cabbd55",
+    "crates/incant_runtime/src/commands.rs": "c66cf9b9ce2d1df034206214b217b62c187a684974babeedacc44c1b908e3c2d",
+    "crates/incant_runtime/src/physics_2d_binary.rs": "481bb0071e06690491d512c76cffde7efe85cc6bc4a87699fd0c4a155f865e2b",
+    "crates/incant_runtime/src/tilemap_binary.rs": "aa5dba50e3b7d34d58eab0726039162f15670e44a9c7ace8b05c3e1fad696f0b",
+    "crates/incant_runtime/src/physics_2d.rs": "3f3563e72e81d05a70d104291dddcc0d9e1355070ea8eb01f67581d319d8c3ac",
+    "crates/incant_runtime/src/audio.rs": "f0e4b40768a3b3aa4bef5e50d8e4dcb531225ff7937b0d9bc7b358a4ead9dc96",
+    "crates/incant_runtime/src/physics_binary.rs": "39b766313db1d0d0487e90e419cc777e18d7062a556b237608ed03c93c65e822",
+    "crates/incant_runtime/src/spatial_binary.rs": "bd998541bffd9c24032b42a5dab47c097fe579ac8da799320fbeeadf0ff52c9d",
+    "crates/incant_runtime/src/physics.rs": "ba1f98eddeef3becebe82831ea45cf6de4f7462e8e24ca422e4e68f7152a397f",
+    "crates/incant_runtime/src/sprite.rs": "f00cd559c6b538d904eae5d3551102da27711556b51f3b59b6e9b9b9169ac249",
+    "crates/incant_runtime/src/columns.rs": "80a615d853fea52e86cc58e634dfad7b2e371d944f840b91ebc888fa23718c66",
+    "crates/incant_runtime/src/sprite_binary.rs": "e211217db25b5f07223782cf722646bf474f23ac93b39809817d73af01bc5c65",
+    "crates/incant_runtime/Cargo.toml": "f8f9254531bec0ccff9661a5243706227bd58b1310dd3dd05ef83001f14cd29b",
+    "crates/incant_physics_2d_runtime/src/config.rs": "7872f6c540dec7af30b703daa442c0940e6340e31edd28fc708ec02f7a277494",
+    "crates/incant_physics_2d_runtime/src/lib.rs": "3acfbd7a2ac8340caa3a813d52fa34ea56b59bbaea6ab802c14ce6e744c1e91c",
+    "crates/incant_physics_2d_runtime/src/query.rs": "d9a077501928dcfa9096c3cc73f4edbaf999b754a3a9458adfb2321731d89f72",
+    "crates/incant_physics_2d_runtime/Cargo.toml": "617c4ad200464eda1d54efa7ad2b8c9cd789291be424bffe4a355f8a22d431f1",
+    "crates/incant_types/src/physics_validation.rs": "c8a2e2e8b77020ea2ae39d047a9be13081003ef6cf236ca292a52aed4f4a3a98",
+    "crates/incant_types/src/visual_asset.rs": "6dae6f3e5a2f98dd208616f01b1a84dfcc5588cebda819b07c52421e24341791",
+    "crates/incant_types/src/render.rs": "e02d42ddcdbcdeb607c4ae307f30b02805adae2b68cd1fadee2eaed603f3d881",
+    "crates/incant_types/src/lib.rs": "35cc59a73f43d6a25af11cd933d1e733ec184d9c6c71fe1e21bd8db823bcf185",
+    "crates/incant_types/src/physics_2d.rs": "d96a77c53ca3cf06d2082034fcdcf39ec81f51286c31564d0254e6f2becc3ef4",
+    "crates/incant_types/src/audio.rs": "31a41005ed056423ce3c7d3882429550d6383a58a1ea5799e698c25d150a3feb",
+    "crates/incant_types/src/lights.rs": "c69e1a4f9b682f1f5bf267d57502387b9f8e6b4a42c32c752c0176f43c9ac935",
+    "crates/incant_types/src/transform.rs": "b22948c2013800b8b76d1d18693e7a406358e2d554aad01a1e6d1f87adccf08c",
+    "crates/incant_types/src/physics_2d_validation.rs": "122b6ae481c8defdc188ac649f88ece4b047a8dc8a4b301931559cfc21c24881",
+    "crates/incant_types/src/physics.rs": "ec1dd966a85676197f7283133be1b274666135a8cfe6403a477a130a6a43769d",
+    "crates/incant_types/src/collider_shapes.rs": "dc2efc4d76e8671b03bc38eb92e8db0161f4613417772644028e0b4ecb958979",
+    "crates/incant_types/src/camera.rs": "28eaace0a774685b9bc72962480520a8646fca4310b5eb1d3ac995444dfb0de2",
+    "crates/incant_types/Cargo.toml": "ae094bd227e3e585de808ad18da99b02cc7bc8282720cffeb6d3a8b3275c5e9c",
+    "crates/incant_2d/src/lib.rs": "eb7e30689f99494a37e8f44b2c9599735ee3e2b8523953dc84e398a3d638cd9f",
+    "crates/incant_2d/src/tilemap.rs": "a065ef79daf1d7939ac159e803a81a8a03fbd89fcfea6a6ee3e45360b14e147f",
+    "crates/incant_2d/Cargo.toml": "57378df7552b4ea8a12dbc876467d06bc067592b7c37a8a875bc670e84540a0f",
+    "crates/incant_runtime/examples/native_physics_2d.rs": "de5585f855c352b17b416ab52be21be11b7366d35c014a668af207848acdd469"
+  },
+  "source_sha256": {
+    ".github/workflows/physics-candidates.yml": "5bb083eda86512271dd093d1e34f613f7fec1c25fcc1000da41489ead941d1a3",
+    "Cargo.lock": "2f50be79da515bea5e44800531c9fc97095b3bde8b7cee80684964725e8b5de3",
+    "Cargo.toml": "09b7f32a87dc7e463ba708fbbefa67c061c70af789ab8a6e4ea8a98e06e67187",
+    "crates/incant_cook/src/scene.rs": "a258ef84f643f0867c41f3d5b004d08bf3dc6da39c4c87cac913a863e3699812",
+    "crates/incant_cook/tests/physics_2d.rs": "73bbecebbc2a60f348a9a5fdd86deb5bdefb69f0975987fb0157364cd302a9b5",
+    "crates/incant_cook/tests/spatial.rs": "2d46e938381d4967f7f191b441883d1cf1809a7e6863c9af7737636a25fc26c1",
+    "crates/incant_core/tests/scene_projection.rs": "3dbc8d4e01fb479cd6d7f2b710dc1a9973f1db4b60dc0c78e0274b3afa99e163",
+    "crates/incant_doc/src/lib.rs": "6440def53fdd5cf0b7cda9d6b19ede446ae95a6ed5b83bbebe226d8523f51555",
+    "crates/incant_doc/src/physics_2d.rs": "65bf3ee4df813498fcf7370e47495a91a11431be09b01e9ac2f779e3ccf9cb7f",
+    "crates/incant_physics_2d_runtime/Cargo.toml": "617c4ad200464eda1d54efa7ad2b8c9cd789291be424bffe4a355f8a22d431f1",
+    "crates/incant_physics_2d_runtime/src/config.rs": "7872f6c540dec7af30b703daa442c0940e6340e31edd28fc708ec02f7a277494",
+    "crates/incant_physics_2d_runtime/src/lib.rs": "3acfbd7a2ac8340caa3a813d52fa34ea56b59bbaea6ab802c14ce6e744c1e91c",
+    "crates/incant_physics_2d_runtime/src/query.rs": "d9a077501928dcfa9096c3cc73f4edbaf999b754a3a9458adfb2321731d89f72",
+    "crates/incant_physics_2d_runtime/tests/behavior.rs": "b9bc3c1672bd670b9674a76cd3d0ededfd6a3de09e6a79216b2ae9fe4ac5b0d8",
+    "crates/incant_runtime/Cargo.toml": "f8f9254531bec0ccff9661a5243706227bd58b1310dd3dd05ef83001f14cd29b",
+    "crates/incant_runtime/examples/native_physics_2d.rs": "de5585f855c352b17b416ab52be21be11b7366d35c014a668af207848acdd469",
+    "crates/incant_runtime/src/binary.rs": "b696ace3cf70a7b5208cc6e8ec46b6624c41af93a2668146282b7d55716d352f",
+    "crates/incant_runtime/src/commands.rs": "c66cf9b9ce2d1df034206214b217b62c187a684974babeedacc44c1b908e3c2d",
+    "crates/incant_runtime/src/lib.rs": "61682378ccd8cac093217428450b67f3df6c6401a9b19dd0e7880686807089b9",
+    "crates/incant_runtime/src/physics_2d.rs": "3f3563e72e81d05a70d104291dddcc0d9e1355070ea8eb01f67581d319d8c3ac",
+    "crates/incant_runtime/src/physics_2d_binary.rs": "481bb0071e06690491d512c76cffde7efe85cc6bc4a87699fd0c4a155f865e2b",
+    "crates/incant_runtime/src/save.rs": "8a1bd0191fcb7803b789fefe9b70596fc93b4270fe705127281cfa0e8b63f3bf",
+    "crates/incant_runtime/src/scene.rs": "74608a97640c176f4bbe9b46cd6ebc3e30a8db01b129986b21f87ca1e3addbb2",
+    "crates/incant_runtime/src/world.rs": "099f6a1f79f5c0c230614603473573129c342309a6f0210541b8a48d9cabbd55",
+    "crates/incant_runtime/tests/physics.rs": "648c3e849ada88d5531e96e9b5f4174ba4ab73eacdcfe01e69f4f453bfa2e197",
+    "crates/incant_runtime/tests/physics_2d.rs": "8d30aa29accf507c5b1c9e38c1525ba5da1a59d00dc90e4f9b354f7443d4fdc2",
+    "crates/incant_runtime/tests/scenes.rs": "4271b1e7c2f287f55e562cc0454b9785da3da27ad8dd0b80a3db79922e62a336",
+    "crates/incant_runtime/tests/tilemaps.rs": "4304200f675551bcf7cfaf39b0e8b2d329ed7b5b4a63dc41b97b0675548d1af5",
+    "crates/incant_script/src/structural_tests.rs": "4674fea64ac14ced822aa210e08f80ad928b915d7ba3a070595fa0b0691ffff5",
+    "crates/incant_types/src/lib.rs": "35cc59a73f43d6a25af11cd933d1e733ec184d9c6c71fe1e21bd8db823bcf185",
+    "crates/incant_types/src/physics_2d.rs": "d96a77c53ca3cf06d2082034fcdcf39ec81f51286c31564d0254e6f2becc3ef4",
+    "crates/incant_types/src/physics_2d_validation.rs": "122b6ae481c8defdc188ac649f88ece4b047a8dc8a4b301931559cfc21c24881",
+    "schemas/AngularVelocity2D.schema.json": "89041135cef82143d0862def980e183f070d90ee51b91ee450163ecee082ede0",
+    "schemas/Collider2D.schema.json": "eb29fd90526cbb2912e8a0c19a12e32683b8dd6c1769c849f0d36e9e1c5686a9",
+    "schemas/RigidBody2D.schema.json": "838eaae1ea5882a8b52db1cd033a18ad1df3eef8f1ab565c87041a1284dcd2ef",
+    "sdk/ts/src/generated.d.ts": "cbbcbd073374f88b4f0ce4616a184c4721876f410fff322c0d66f00e3c761065",
+    "tools/probes/native-physics-2d.py": "4e3fd48e5c40ded86ae4be333e5c66fb57c362ed8c40d002ebfa80df7d0312da",
+    "tools/probes/native-physics/Cargo.lock": "db620b837d3ada480e7f9c58e2069d36f98750d8abb9aa273e58aee8e6639ae6",
+    "tools/probes/native-physics/browser.mjs": "e92eb2ae6eae19ae2c0f5860593d2b2c23dca8ac17cb8be5df245f8dce58326a",
+    "tools/probes/native-physics/compare_hosts.py": "76def0cec9ab9640530e3427ec19861d7011f7a2b5b10f7a127307416f52bef8",
+    "tools/probes/native-physics/run.py": "f790f3b462d2dc2d18e845ab16739570827725dfa5c6527666be1e76fcdda956",
+    "tools/probes/native-physics/src/lib.rs": "ccf2fa60ab3fca99229dc6c1b4862d67e8364abdbe3bf2b6cd350d1673664e72",
+    "tools/probes/native-physics/src/main.rs": "b82be86e14b478c7a10587e04529080e45b9a00c129c277c0d8b47526f660d50",
+    "tools/probes/native-physics/src/planar.rs": "1e7dbada20bd21cf72e211b40388b7ae89453c12f6c5578f5525f8c5f6dec108",
+    "tools/probes/physics-parity/features.py": "0ca4860d120c918455e4b8915f7b47fc57deeb59e93b374d40d2bc0822093b9a",
+    "tools/tests/test_native_physics_parity.py": "b0582ee6409fd0b8539b98b343ab7c05987a99138a548517fb94bd97bcd53549"
+  },
+  "negative_evidence": [
+    {
+      "case": "No-op structural reinstall quaternion/angle regression",
+      "before_log": "/tmp/incant-physics2d-noop-before.log",
+      "sha256": "fc207f68eda6158413c53aabbcc38ef69d3ff2692609bedc3ee1dd8df7c16fb8",
+      "result": "Failed unchanged implementation at 0.04 radians; final 64-angle regression passes"
+    },
+    {
+      "case": "Legacy refusal fixture",
+      "log": "/tmp/incant-physics2d-workspace-tests-first.log",
+      "sha256": "558f35902b194b858c59f73ea52a56cba701505c4644289ee620277a6f1dea86",
+      "result": "Older fixture assigned nonzero velocity to a solid map; corrected to fixed motion, retaining refusal and unchanged-state assertions"
+    }
+  ],
+  "limitations": [
+    "New Linux/Windows 2D execution and symbol verification await hosted CI",
+    "iOS-simulator/Wasm compile and 49 feature rows are not mobile execution/performance evidence",
+    "Shipping example uses a trusted typed checked fixture; authoring/cook tested separately; not a renderer/full game player",
+    "No 2D character/joints/navigation/full script query SDK or physics save/rollback",
+    "Root/unit-scale planar and fixed solid-map constraints; exact cell union does not promise arbitrary f32 contact precision",
+    "No project fast-variant selector, phone gate, adoption gate or phase approval"
+  ]
+}

@@ -19,3 +19,6 @@ COPY(set_velocity,10)
 COPY(set_parent,11)
 void w2c_incant__v1_spawn(struct w2c_incant__v1* h,uint64_t e,uint32_t a,uint32_t b,uint32_t c,uint32_t d){invoke(h,8,e,a,b,c,d);}
 void w2c_incant__v1_despawn(struct w2c_incant__v1* h,uint64_t e,uint32_t a){invoke(h,9,e,a,0,0,0);}
+
+uint32_t w2c_incant__input__v1_snapshot_len(struct w2c_incant__input__v1* h,uint64_t e){return invoke(&h->core,12,e,0,0,0,0);}
+uint32_t w2c_incant__input__v1_read_snapshot(struct w2c_incant__input__v1* h,uint64_t e,uint32_t p,uint32_t capacity){return invoke(&h->core,13,e,p,capacity,0,0);}

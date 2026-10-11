@@ -2,7 +2,7 @@
 //! with each model version. All images and samplers preserve their cooked roles.
 use crate::{ResourceError, Result};
 use incant_assets_runtime::{AlphaMode, CookedModel, Material, ModelTexture, TextureFormat};
-use std::{collections::HashMap, sync::Mutex};
+use std::collections::HashMap;
 use wgpu::util::DeviceExt;
 
 #[repr(C)]
@@ -33,12 +33,10 @@ pub(crate) struct PipelineKey {
 }
 pub(crate) struct MaterialSystem {
     pub globals: wgpu::BindGroupLayout,
-    environment: wgpu::BindGroupLayout,
-    lighting: wgpu::BindGroupLayout,
     pub layout: wgpu::BindGroupLayout,
     fallback: wgpu::TextureView,
     sampler: wgpu::Sampler,
-    pipelines: Mutex<HashMap<PipelineKey, wgpu::RenderPipeline>>,
+    pipelines: HashMap<PipelineKey, wgpu::RenderPipeline>,
 }
 fn uniform_entry(binding: u32, visibility: wgpu::ShaderStages) -> wgpu::BindGroupLayoutEntry {
     wgpu::BindGroupLayoutEntry {
@@ -119,14 +117,38 @@ impl MaterialSystem {
                 depth_or_array_layers: 1,
             },
         );
+        let shader = crate::material_pipeline::shader(device);
+        let mut pipelines = HashMap::new();
+        for alpha in [AlphaMode::Opaque, AlphaMode::Mask, AlphaMode::Blend] {
+            for double_sided in [false, true] {
+                for mirrored in [false, true] {
+                    let key = PipelineKey {
+                        format: crate::frame::HDR_FORMAT,
+                        alpha,
+                        double_sided,
+                        mirrored,
+                    };
+                    pipelines.insert(
+                        key,
+                        crate::material_pipeline::build(
+                            device,
+                            &shader,
+                            key,
+                            &globals,
+                            &layout,
+                            environment,
+                            lighting,
+                        ),
+                    );
+                }
+            }
+        }
         Self {
             globals,
-            environment: environment.clone(),
-            lighting: lighting.clone(),
             layout,
             fallback: texture.create_view(&Default::default()),
             sampler: device.create_sampler(&Default::default()),
-            pipelines: Mutex::new(HashMap::new()),
+            pipelines,
         }
     }
 
@@ -287,28 +309,11 @@ impl MaterialSystem {
         })
     }
 
-    pub fn pipeline(
-        &self,
-        device: &wgpu::Device,
-        key: PipelineKey,
-    ) -> Result<wgpu::RenderPipeline> {
-        let mut cache = self
-            .pipelines
-            .lock()
-            .map_err(|_| ResourceError::CacheLock("material pipeline"))?;
-        Ok(cache
-            .entry(key)
-            .or_insert_with(|| {
-                crate::material_pipeline::build(
-                    device,
-                    key,
-                    &self.globals,
-                    &self.layout,
-                    &self.environment,
-                    &self.lighting,
-                )
-            })
-            .clone())
+    pub fn pipeline(&self, key: PipelineKey) -> Result<wgpu::RenderPipeline> {
+        self.pipelines
+            .get(&key)
+            .cloned()
+            .ok_or_else(|| ResourceError::UnpreparedPipeline("material").into())
     }
 }
 

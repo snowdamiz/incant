@@ -13,7 +13,9 @@ use std::{error::Error, fmt::Debug};
 /// Trusted native hosting implementation, not a project-supplied capability flag.
 /// `prepare` must check and retain compatible bindings for this exact world and
 /// reject unsupported declarations. `sync` must accept the committed frame or
-/// fail; successful CPU preparation does not imply GPU publication or rendering.
+/// fail. It may run repeatedly at the same tick for presentation-only refreshes;
+/// it must not advance gameplay or audio. Successful CPU preparation does not
+/// imply GPU publication or rendering.
 ///
 /// The session calls prepare before its VM/audio setup and retains the actual
 /// host. Caller-owned effects (including an already-created backend in Settings)
@@ -68,8 +70,18 @@ where
     pub fn host(&self) -> Result<&H, H::Error> {
         Ok(&self.core.ready()?.host.0)
     }
+    /// Re-present the committed world, including while suspended. No script,
+    /// physics, input application or audio advancement occurs. Error/unwind
+    /// destroys the complete session; submitted device effects cannot rewind.
+    pub fn refresh_host(&mut self) -> Result<(), H::Error> {
+        self.core.refresh_host()
+    }
     pub fn poll_audio(&mut self) -> Result<(), H::Error> {
         self.core.poll_audio()
+    }
+    /// Suspend transport and reject ticks until resumed; failure is terminal.
+    pub fn set_suspended(&mut self, suspended: bool) -> Result<(), H::Error> {
+        self.core.set_suspended(suspended)
     }
     pub fn is_failed(&self) -> bool {
         self.core.live.is_none()
@@ -79,6 +91,9 @@ where
     }
     pub fn input(&self) -> Result<&InputFrame, H::Error> {
         self.core.input()
+    }
+    pub fn logs(&self) -> Result<&incant_script::NativeLogs, H::Error> {
+        self.core.logs()
     }
     pub fn source_state(&self, id: StableId) -> Result<SourceState, H::Error> {
         self.core.source_state(id)
@@ -133,8 +148,17 @@ impl<H: SceneHost> HostedOfflineGameSession<H> {
     pub fn host(&self) -> Result<&H, H::Error> {
         Ok(&self.inner.core.ready()?.host.0)
     }
+    /// Re-present committed state without advancing the offline sample clock,
+    /// transport, input or simulation. Host error/unwind is terminal.
+    pub fn refresh_host(&mut self) -> Result<(), H::Error> {
+        self.inner.core.refresh_host()
+    }
     pub fn poll_audio(&mut self) -> Result<(), H::Error> {
         self.inner.core.poll_audio()
+    }
+    /// Suspend transport and reject ticks until resumed; failure is terminal.
+    pub fn set_suspended(&mut self, suspended: bool) -> Result<(), H::Error> {
+        self.inner.core.set_suspended(suspended)
     }
     pub fn is_failed(&self) -> bool {
         self.inner.core.live.is_none()
@@ -145,10 +169,21 @@ impl<H: SceneHost> HostedOfflineGameSession<H> {
     pub fn input(&self) -> Result<&InputFrame, H::Error> {
         self.inner.core.input()
     }
+    pub fn logs(&self) -> Result<&incant_script::NativeLogs, H::Error> {
+        self.inner.core.logs()
+    }
     pub fn source_state(&self, id: StableId) -> Result<SourceState, H::Error> {
         self.inner.core.source_state(id)
     }
     pub fn rebind(&mut self, actions: InputActions) -> Result<(), H::Error> {
         self.inner.core.rebind(actions)
+    }
+}
+
+#[cfg(all(feature = "device", not(target_arch = "wasm32")))]
+impl<H: SceneHost> HostedGameSession<incant_audio_runtime::DeviceBackend, H> {
+    /// Poll real device errors. Any reported or discarded error is terminal.
+    pub fn poll_device(&mut self) -> Result<(), H::Error> {
+        self.core.poll_device()
     }
 }

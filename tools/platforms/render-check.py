@@ -79,8 +79,9 @@ def model_probe(executable, output):
         validate_png(pixels, 640, 360)
         geometry = response['geometry']
         if geometry != {'diagnostic_entities': 0, 'model_entities': 2, 'primitive_instances': 2,
-                        'model_triangles': 2, 'model_draw_calls': 1, 'sprite_entities': 0}:
-            raise ValueError('Unexpected imported geometry projection')
+                        'model_triangles': 2, 'model_draw_calls': 1, 'sprite_entities': 0,
+                        'tilemap_entities': 0, 'tile_cells': 0}:
+            raise ValueError(f'Unexpected imported geometry projection: {geometry!r}')
         return pixels, response
     source(0)
     imported = import_model()
@@ -115,8 +116,11 @@ def model_probe(executable, output):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, default=ROOT / 'artifacts/render-smoke')
+    parser.add_argument('--binary', type=Path, default=ROOT / 'target/release' / ('incant_headless.exe' if sys.platform == 'win32' else 'incant_headless'))
     args = parser.parse_args()
-    executable = ROOT / 'target/release' / ('incant_headless.exe' if sys.platform == 'win32' else 'incant_headless')
+    executable = args.binary.resolve()
+    if not executable.is_file():
+        parser.error(f'headless binary is not a file: {executable}')
     output = args.output
     output.mkdir(parents=True, exist_ok=True)
     project, image = output / 'sample.incant.json', output / 'viewport.png'

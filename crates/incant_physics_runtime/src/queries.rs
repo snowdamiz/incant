@@ -25,28 +25,36 @@ pub struct RayHit<I = String> {
     pub point: [f64; 3],
     pub normal: [f64; 3],
 }
-impl<I: Ord + Clone> PhysicsRuntime<I> {
-    pub fn raycast(&self, request: &RayQuery<I>) -> Result<Option<RayHit<I>>, PhysicsError> {
-        if self.failed {
-            return Err(PhysicsError::NumericRange);
-        }
-        if !request
+impl<I> RayQuery<I> {
+    /// Validate bounded scalar input independently of whether a scene has bodies.
+    pub fn validate(&self) -> Result<(), PhysicsError> {
+        if !self
             .origin
             .iter()
             .all(|v| v.is_finite() && v.abs() <= 1_000_000.)
-            || !request
+            || !self
                 .direction
                 .iter()
                 .all(|v| v.is_finite() && v.abs() <= 1_000_000.)
-            || !(0. ..=1_000_000.).contains(&request.max_distance)
+            || !(0. ..=1_000_000.).contains(&self.max_distance)
         {
             return Err(PhysicsError::Query(
                 "ray values exceed supported range".into(),
             ));
         }
-        let Some(direction) = vector(request.direction).try_normalize() else {
+        let Some(_) = vector(self.direction).try_normalize() else {
             return Err(PhysicsError::Query("ray direction must be nonzero".into()));
         };
+        Ok(())
+    }
+}
+impl<I: Ord + Clone> PhysicsRuntime<I> {
+    pub fn raycast(&self, request: &RayQuery<I>) -> Result<Option<RayHit<I>>, PhysicsError> {
+        if self.failed {
+            return Err(PhysicsError::NumericRange);
+        }
+        request.validate()?;
+        let direction = vector(request.direction).normalize();
         let Some(scene) = self.scenes.get(&request.scene_id) else {
             return Err(PhysicsError::Query("scene does not exist".into()));
         };

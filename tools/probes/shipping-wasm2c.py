@@ -16,6 +16,8 @@ import shutil
 import subprocess
 import sys
 import tarfile
+import time
+import urllib.error
 import tempfile
 import urllib.request
 
@@ -53,17 +55,36 @@ def cargo_build(command, *, cwd, env, log):
     require(result.returncode == 0, f'Cargo build failed; see {log}: {result.stderr[-4000:]}')
 
 
+def transient_download_error(error):
+    if isinstance(error, urllib.error.HTTPError):
+        return error.code in (408, 429, 500, 502, 503, 504)
+    if isinstance(error, urllib.error.URLError):
+        error = error.reason
+    # Certificate errors, permanent HTTP responses, disk errors, integrity and
+    # archive validation failures are deliberately outside this narrow set.
+    return isinstance(error, (ConnectionError, TimeoutError))
+
+
 def provision(path):
     key = (platform.system(), platform.machine())
     require(key in ASSETS, f'Unsupported pinned WABT host: {key}')
     suffix, expected = ASSETS[key]
     archive_path = path / 'wabt.tar.gz'
     url = f'https://github.com/WebAssembly/wabt/releases/download/1.0.42/wabt-1.0.42-{suffix}.tar.gz'
-    with urllib.request.urlopen(url, timeout=30) as response, archive_path.open('wb') as output:
-        total = 0
-        while block := response.read(128*1024):
-            total += len(block); require(total <= 32*1024*1024, 'WABT download size limit')
-            output.write(block)
+    for attempt in range(1, 4):
+        try:
+            # Truncate a partial prior transfer. Never resume unknown bytes or
+            # switch URLs, versions, mirrors or expected integrity on retry.
+            with urllib.request.urlopen(url, timeout=30) as response, archive_path.open('wb') as output:
+                total = 0
+                while block := response.read(128*1024):
+                    total += len(block); require(total <= 32*1024*1024, 'WABT download size limit')
+                    output.write(block)
+            break
+        except Exception as error:
+            if attempt == 3 or not transient_download_error(error):
+                raise
+            time.sleep(0.5 * attempt)
     require(sha(archive_path) == expected, 'Pinned WABT archive checksum mismatch')
     # Extract only two exact regular executable members; never archive paths/links.
     root = path / 'wabt'; (root / 'bin').mkdir(parents=True)
@@ -76,7 +97,7 @@ def provision(path):
             with bundle.extractfile(entry) as source, dest.open('wb') as output:
                 shutil.copyfileobj(source, output)
             dest.chmod(0o755)
-    return root, {'release': '1.0.42', 'url': url, 'archive_sha256': expected}
+    return root, {'release': '1.0.42', 'url': url, 'archive_sha256': expected, 'download_attempts': attempt}
 
 
 def verify_c_flags(output, kind, msvc_opt_level):
@@ -144,20 +165,28 @@ def main():
         for source in sorted((ROOT / 'crates/incant_wasm_runtime/fixtures').glob('*.wat')):
             copied = inputs / source.name; shutil.copy2(source, copied); dest = copied.with_suffix('.wasm')
             run([wabt / f'bin/wat2wasm{suffix}', copied, '-o', dest]); modules.append((source.stem, dest))
+        if args.conformance_only:
+            game = inputs/'game.rs'; shutil.copy2(ROOT/'crates/incant_wasm_player/fixtures/game.rs', game)
+            game_module = inputs/'game.wasm'
+            run([rustc, game, '--crate-type=cdylib', '--edition=2024', '--target=wasm32-unknown-unknown', '-C', 'panic=abort', '-C', 'opt-level=2', '-o', game_module])
+            modules.append(('game', game_module))
+            for source in sorted((ROOT/'crates/incant_wasm_player/fixtures').glob('*.wat')):
+                copied = inputs/source.name; shutil.copy2(source, copied); dest = copied.with_suffix('.wasm')
+                run([wabt/f'bin/wat2wasm{suffix}', copied, '-o', dest]); modules.append((source.stem, dest))
         bundle = inputs / 'bundle'; manifest = wasm2c.prepare(bundle, modules, wabt, cook)
         (out / 'prepared-manifest.json').write_text(json.dumps(manifest, indent=2)+'\n')
         environment.update(INCANT_WASM_BUNDLE=str(bundle), CC_ENABLE_DEBUG_OUTPUT='1')
         if args.conformance_only:
             commands = [
-                [cargo, 'test', '-j2', '-p', 'incant_wasm_runtime', '-p', 'incant_wasm_cook', '-p', 'incant_wasm_dev', '--features', 'incant_wasm_dev/static-conformance', '--locked'],
-                [cargo, 'clippy', '-j2', '-p', 'incant_wasm_runtime', '-p', 'incant_wasm_cook', '-p', 'incant_wasm_dev', '--features', 'incant_wasm_dev/static-conformance', '--all-targets', '--locked', '--', '-D', 'warnings'],
+                [cargo, 'test', '-j2', '-p', 'incant_wasm_runtime', '-p', 'incant_wasm_cook', '-p', 'incant_wasm_dev', '-p', 'incant_wasm_player', '-p', 'incant_game_runtime', '-p', 'incant_script', '--features', 'incant_wasm_dev/static-conformance,incant_wasm_player/fixture,incant_script/compiler', '--locked'],
+                [cargo, 'clippy', '-j2', '-p', 'incant_wasm_runtime', '-p', 'incant_wasm_cook', '-p', 'incant_wasm_dev', '-p', 'incant_wasm_player', '-p', 'incant_game_runtime', '-p', 'incant_script', '--features', 'incant_wasm_dev/static-conformance,incant_wasm_player/fixture,incant_script/compiler', '--all-targets', '--locked', '--', '-D', 'warnings'],
                 [sys.executable, ROOT/'tools/probes/development-wasm.py', out/'development', '--rustup', args.rustup, '--static-conformance'],
             ]
             for index, command in enumerate(commands):
                 result = subprocess.run([str(x) for x in command], cwd=ROOT, env=environment, capture_output=True, text=True, encoding='utf-8')
                 (out/f'conformance-{index}.log').write_text(result.stdout+result.stderr, encoding='utf-8')
                 require(result.returncode == 0, f'Conformance command {index} failed; see its log')
-            print('Static/development conformance and actual Rust guest probe passed. No shipping/device gate claimed.')
+            print('Static/development/input/composed-game conformance and actual Rust guest probe passed. No shipping/device gate claimed.')
             return
 
         with tempfile.TemporaryDirectory(prefix='static-wasm-build-', dir=out) as storage:

@@ -1,6 +1,10 @@
 //! Resource preparation errors remain typed even at the renderer's boxed boundary.
 #[derive(Debug, thiserror::Error)]
 pub enum ResourceError {
+    #[error("renderer initialization failed: {0}")]
+    Preparation(#[source] wgpu::Error),
+    #[error("{0} pipeline variant was not prepared during renderer initialization")]
+    UnpreparedPipeline(&'static str),
     #[error("native GPU device was lost; the rendering host must stop")]
     DeviceLost,
     #[error(

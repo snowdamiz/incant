@@ -1,0 +1,675 @@
+{
+  "policy_pr": 59,
+  "verified_merge": {
+    "recorded_at": "2026-10-11T00:13:00.931245+00:00",
+    "merge": "4588d5a154aecaf99163c00df2eee9e892ebe0f0",
+    "head": "9bee4c9e16abd258d74fe619b8acb04a9d80d76e",
+    "base": "0cf37191f90e98c73829cc5857e58473d3e2ed47",
+    "parents": [
+      "0cf37191f90e98c73829cc5857e58473d3e2ed47",
+      "9bee4c9e16abd258d74fe619b8acb04a9d80d76e"
+    ],
+    "tree": "915c25896d4bf583684a69fcb42352e46b9cbf0e",
+    "tested_tree": "915c25896d4bf583684a69fcb42352e46b9cbf0e",
+    "message": "Merge pull request #59 from snowdamiz/impl/ci-auxiliary-registry-cache\n\nMove the eight auxiliary credential/platform jobs to three shared registry/git-only cache namespaces, preserving every command, matrix, target and required check. Keep compiled dependencies for the native engine and iOS jobs, default-branch-only writes and restore-only pull requests.\n\nAll ten checks passed on exact head 9bee4c9e16abd258d74fe619b8acb04a9d80d76e; the prospective actual-main merge tree matches the tested tree. Retire only the independently approved obsolete auxiliary cache tuples after affected producers finish, preserving native/iOS/npm/Gradle/tool/PR caches. Natural main saves and later consumers will establish actual retained sizes and warm restoration. No phase or device gate is claimed.\n\nBuilt-by: astra\n",
+    "pr": {
+      "headRefOid": "9bee4c9e16abd258d74fe619b8acb04a9d80d76e",
+      "mergeCommit": {
+        "oid": "4588d5a154aecaf99163c00df2eee9e892ebe0f0"
+      },
+      "mergedAt": "2026-10-11T00:12:48Z",
+      "state": "MERGED",
+      "statusCheckRollup": [
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-10T23:22:53Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38094692361/job/114338074924",
+          "name": "storage (macos-latest)",
+          "startedAt": "2026-10-10T23:21:01Z",
+          "status": "COMPLETED",
+          "workflowName": "Desktop credential persistence"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-10T23:48:03Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38094691946/job/114338132377",
+          "name": "checks",
+          "startedAt": "2026-10-10T23:27:57Z",
+          "status": "COMPLETED",
+          "workflowName": "Incant checks"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-10T23:35:10Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38094691970/job/114338190581",
+          "name": "desktop (macos, macos-latest, incant_platform_smoke)",
+          "startedAt": "2026-10-10T23:30:00Z",
+          "status": "COMPLETED",
+          "workflowName": "Six platform probes"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-10T23:25:11Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38094692361/job/114338074834",
+          "name": "storage (windows-latest)",
+          "startedAt": "2026-10-10T23:20:40Z",
+          "status": "COMPLETED",
+          "workflowName": "Desktop credential persistence"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-10T23:26:22Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38094691970/job/114338190562",
+          "name": "desktop (windows, windows-latest, incant_platform_smoke.exe)",
+          "startedAt": "2026-10-10T23:21:19Z",
+          "status": "COMPLETED",
+          "workflowName": "Six platform probes"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-10T23:22:28Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38094692361/job/114338075015",
+          "name": "storage (ubuntu-latest)",
+          "startedAt": "2026-10-10T23:20:40Z",
+          "status": "COMPLETED",
+          "workflowName": "Desktop credential persistence"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-10T23:24:45Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38094691970/job/114338190612",
+          "name": "desktop (linux, ubuntu-latest, incant_platform_smoke)",
+          "startedAt": "2026-10-10T23:21:19Z",
+          "status": "COMPLETED",
+          "workflowName": "Six platform probes"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-10T23:24:43Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38094691970/job/114338190408",
+          "name": "web",
+          "startedAt": "2026-10-10T23:21:19Z",
+          "status": "COMPLETED",
+          "workflowName": "Six platform probes"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-10T23:38:55Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38094691970/job/114338190564",
+          "name": "ios",
+          "startedAt": "2026-10-10T23:28:11Z",
+          "status": "COMPLETED",
+          "workflowName": "Six platform probes"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-10T23:28:52Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38094691970/job/114338190597",
+          "name": "android",
+          "startedAt": "2026-10-10T23:21:19Z",
+          "status": "COMPLETED",
+          "workflowName": "Six platform probes"
+        }
+      ]
+    },
+    "cache_retirement_report": "/tmp/incant-pr59-cache-retirement-resumed.json",
+    "prior_inventory_change_report": "/tmp/incant-pr59-cache-retirement.json"
+  },
+  "registry_producers": [
+    {
+      "label": "main59-Windows-credential",
+      "head": "4588d5a154aecaf99163c00df2eee9e892ebe0f0",
+      "job_id": 114346828253,
+      "run_id": 38097659535,
+      "execution_seconds": 305.0,
+      "queue_seconds": 2.0,
+      "requested_cache_key": "v0-rust-auxiliary-registry-v1-windows-latest-Windows_NT-x64-773408be-9fdba862",
+      "restored_cache_key": null,
+      "save_if": "true",
+      "cache": {
+        "id": 8782685741,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-auxiliary-registry-v1-windows-latest-Windows_NT-x64-773408be-9fdba862",
+        "version": "effa1b635e2251e9e6df490948666d13e101664fbd554445b9cf3f59ebada01a",
+        "last_accessed_at": "2026-10-11T00:17:56.432370Z",
+        "created_at": "2026-10-11T00:17:56.432370Z",
+        "size_in_bytes": 151304098
+      },
+      "full_upload_verified": true,
+      "log_sha256": "6956e9f6b2566f85fd58fb23363efb4a33ccbaa9a0d10095e490e0a79cfb41d3"
+    },
+    {
+      "label": "main59-Mac-credential",
+      "head": "4588d5a154aecaf99163c00df2eee9e892ebe0f0",
+      "job_id": 114346828309,
+      "run_id": 38097659535,
+      "execution_seconds": 195.0,
+      "queue_seconds": 8.0,
+      "requested_cache_key": "v0-rust-auxiliary-registry-v1-macos-latest-Darwin-arm64-791fe27b-9fdba862",
+      "restored_cache_key": null,
+      "save_if": "true",
+      "cache": {
+        "id": 8782652939,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-auxiliary-registry-v1-macos-latest-Darwin-arm64-791fe27b-9fdba862",
+        "version": "ad15a212ac8e047da6cc0acacc752804ce97f0f107cf07aaf2e4ccf0b6998518",
+        "last_accessed_at": "2026-10-11T00:16:10.209497Z",
+        "created_at": "2026-10-11T00:16:10.209497Z",
+        "size_in_bytes": 151575645
+      },
+      "full_upload_verified": true,
+      "log_sha256": "f485f8e8c7530ea1dc9520ec5a09573d1ae87f4556995d38bb9e5b659d0f602f"
+    },
+    {
+      "label": "main59-Linux-credential",
+      "head": "4588d5a154aecaf99163c00df2eee9e892ebe0f0",
+      "job_id": 114346828342,
+      "run_id": 38097659535,
+      "execution_seconds": 149.0,
+      "queue_seconds": 1.0,
+      "requested_cache_key": "v0-rust-auxiliary-registry-v1-ubuntu-latest-Linux-x64-b9e20461-9fdba862",
+      "restored_cache_key": null,
+      "save_if": "true",
+      "cache": {
+        "id": 8782638666,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-auxiliary-registry-v1-ubuntu-latest-Linux-x64-b9e20461-9fdba862",
+        "version": "5328310fed3fbcf4a5d63860117f259451587b32b8ee8db3d77c90a63d0e59b6",
+        "last_accessed_at": "2026-10-11T00:15:20.486564Z",
+        "created_at": "2026-10-11T00:15:20.486564Z",
+        "size_in_bytes": 151846679
+      },
+      "full_upload_verified": true,
+      "log_sha256": "5ba7a9e6489c261e675c9278c09b702c89d08f7bd188a10b2a5a89c799f0021d"
+    }
+  ],
+  "registry_total_bytes": 454726422,
+  "migration_retirement": {
+    "approved": [
+      {
+        "id": 8782205173,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Desktop credential persistence-macOS-ARM64-storage-Darwin-arm64-791fe27b-9fdba862",
+        "version": "f921a7b611ccc7239385e0204f1cf9d92bd7b7f5ec5e63fceff396df787af734",
+        "last_accessed_at": "2026-10-10T23:48:52.897282Z",
+        "created_at": "2026-10-10T23:48:52.897282Z",
+        "size_in_bytes": 417616847
+      },
+      {
+        "id": 8781559670,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Desktop credential persistence-macOS-ARM64-storage-Darwin-arm64-791fe27b-61680e07",
+        "version": "f921a7b611ccc7239385e0204f1cf9d92bd7b7f5ec5e63fceff396df787af734",
+        "last_accessed_at": "2026-10-10T23:48:09.946106Z",
+        "created_at": "2026-10-10T23:09:51.006312Z",
+        "size_in_bytes": 417610852
+      },
+      {
+        "id": 8782173496,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Desktop credential persistence-Windows-X64-storage-Windows_NT-x64-773408be-9fdba862",
+        "version": "b8c7260acabdf13b21a4d2afac75b9c957be9f3f26540be324aaa1b498062cd2",
+        "last_accessed_at": "2026-10-10T23:46:49.749566Z",
+        "created_at": "2026-10-10T23:46:49.749566Z",
+        "size_in_bytes": 475332323
+      },
+      {
+        "id": 8782150441,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Desktop credential persistence-Linux-X64-storage-Linux-x64-b9e20461-9fdba862",
+        "version": "bf82a304796dbcd8bcbc13e51f5ae6177649a3834092da345bcd281c649b401b",
+        "last_accessed_at": "2026-10-10T23:45:21.259914Z",
+        "created_at": "2026-10-10T23:45:21.259914Z",
+        "size_in_bytes": 566343704
+      },
+      {
+        "id": 8781548294,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Desktop credential persistence-Windows-X64-storage-Windows_NT-x64-773408be-61680e07",
+        "version": "b8c7260acabdf13b21a4d2afac75b9c957be9f3f26540be324aaa1b498062cd2",
+        "last_accessed_at": "2026-10-10T23:44:54.734742Z",
+        "created_at": "2026-10-10T23:09:08.626528Z",
+        "size_in_bytes": 475321365
+      },
+      {
+        "id": 8781542806,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Desktop credential persistence-Linux-X64-storage-Linux-x64-b9e20461-61680e07",
+        "version": "bf82a304796dbcd8bcbc13e51f5ae6177649a3834092da345bcd281c649b401b",
+        "last_accessed_at": "2026-10-10T23:44:35.340909Z",
+        "created_at": "2026-10-10T23:08:49.205631Z",
+        "size_in_bytes": 566433367
+      },
+      {
+        "id": 8780995675,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Six platform probes-macOS-ARM64-desktop-Darwin-arm64-791fe27b-1340c12d",
+        "version": "f921a7b611ccc7239385e0204f1cf9d92bd7b7f5ec5e63fceff396df787af734",
+        "last_accessed_at": "2026-10-10T23:26:19.672979Z",
+        "created_at": "2026-10-10T22:37:42.037888Z",
+        "size_in_bytes": 424888897
+      },
+      {
+        "id": 8780916771,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Six platform probes-Linux-X64-web-Linux-x64-b9e20461-1340c12d",
+        "version": "bf82a304796dbcd8bcbc13e51f5ae6177649a3834092da345bcd281c649b401b",
+        "last_accessed_at": "2026-10-10T23:17:40.064014Z",
+        "created_at": "2026-10-10T22:33:11.949838Z",
+        "size_in_bytes": 597699504
+      },
+      {
+        "id": 8780883154,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Six platform probes-Windows-X64-desktop-Windows_NT-x64-773408be-1340c12d",
+        "version": "b8c7260acabdf13b21a4d2afac75b9c957be9f3f26540be324aaa1b498062cd2",
+        "last_accessed_at": "2026-10-10T23:17:33.798854Z",
+        "created_at": "2026-10-10T22:31:11.276454Z",
+        "size_in_bytes": 444582320
+      }
+    ],
+    "deleted": [
+      {
+        "id": 8782205173,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Desktop credential persistence-macOS-ARM64-storage-Darwin-arm64-791fe27b-9fdba862",
+        "version": "f921a7b611ccc7239385e0204f1cf9d92bd7b7f5ec5e63fceff396df787af734",
+        "last_accessed_at": "2026-10-10T23:48:52.897282Z",
+        "created_at": "2026-10-10T23:48:52.897282Z",
+        "size_in_bytes": 417616847
+      },
+      {
+        "id": 8781559670,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Desktop credential persistence-macOS-ARM64-storage-Darwin-arm64-791fe27b-61680e07",
+        "version": "f921a7b611ccc7239385e0204f1cf9d92bd7b7f5ec5e63fceff396df787af734",
+        "last_accessed_at": "2026-10-10T23:48:09.946106Z",
+        "created_at": "2026-10-10T23:09:51.006312Z",
+        "size_in_bytes": 417610852
+      }
+    ],
+    "already_absent": [
+      {
+        "id": 8782173496,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Desktop credential persistence-Windows-X64-storage-Windows_NT-x64-773408be-9fdba862",
+        "version": "b8c7260acabdf13b21a4d2afac75b9c957be9f3f26540be324aaa1b498062cd2",
+        "last_accessed_at": "2026-10-10T23:46:49.749566Z",
+        "created_at": "2026-10-10T23:46:49.749566Z",
+        "size_in_bytes": 475332323
+      },
+      {
+        "id": 8782150441,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Desktop credential persistence-Linux-X64-storage-Linux-x64-b9e20461-9fdba862",
+        "version": "bf82a304796dbcd8bcbc13e51f5ae6177649a3834092da345bcd281c649b401b",
+        "last_accessed_at": "2026-10-10T23:45:21.259914Z",
+        "created_at": "2026-10-10T23:45:21.259914Z",
+        "size_in_bytes": 566343704
+      },
+      {
+        "id": 8781548294,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Desktop credential persistence-Windows-X64-storage-Windows_NT-x64-773408be-61680e07",
+        "version": "b8c7260acabdf13b21a4d2afac75b9c957be9f3f26540be324aaa1b498062cd2",
+        "last_accessed_at": "2026-10-10T23:44:54.734742Z",
+        "created_at": "2026-10-10T23:09:08.626528Z",
+        "size_in_bytes": 475321365
+      },
+      {
+        "id": 8781542806,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Desktop credential persistence-Linux-X64-storage-Linux-x64-b9e20461-61680e07",
+        "version": "bf82a304796dbcd8bcbc13e51f5ae6177649a3834092da345bcd281c649b401b",
+        "last_accessed_at": "2026-10-10T23:44:35.340909Z",
+        "created_at": "2026-10-10T23:08:49.205631Z",
+        "size_in_bytes": 566433367
+      },
+      {
+        "id": 8780995675,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Six platform probes-macOS-ARM64-desktop-Darwin-arm64-791fe27b-1340c12d",
+        "version": "f921a7b611ccc7239385e0204f1cf9d92bd7b7f5ec5e63fceff396df787af734",
+        "last_accessed_at": "2026-10-10T23:26:19.672979Z",
+        "created_at": "2026-10-10T22:37:42.037888Z",
+        "size_in_bytes": 424888897
+      },
+      {
+        "id": 8780916771,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Six platform probes-Linux-X64-web-Linux-x64-b9e20461-1340c12d",
+        "version": "bf82a304796dbcd8bcbc13e51f5ae6177649a3834092da345bcd281c649b401b",
+        "last_accessed_at": "2026-10-10T23:17:40.064014Z",
+        "created_at": "2026-10-10T22:33:11.949838Z",
+        "size_in_bytes": 597699504
+      },
+      {
+        "id": 8780883154,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Six platform probes-Windows-X64-desktop-Windows_NT-x64-773408be-1340c12d",
+        "version": "b8c7260acabdf13b21a4d2afac75b9c957be9f3f26540be324aaa1b498062cd2",
+        "last_accessed_at": "2026-10-10T23:17:33.798854Z",
+        "created_at": "2026-10-10T22:31:11.276454Z",
+        "size_in_bytes": 444582320
+      }
+    ],
+    "deleted_bytes": 835227699,
+    "retained_bytes": 9662551513,
+    "first_attempt_deleted": [],
+    "first_attempt_disappearances": {
+      "observed_at": "2026-10-11T00:12:08.935126+00:00",
+      "entries": [
+        {
+          "id": 8780883154,
+          "ref": "refs/heads/main",
+          "key": "v0-rust-Six platform probes-Windows-X64-desktop-Windows_NT-x64-773408be-1340c12d",
+          "version": "b8c7260acabdf13b21a4d2afac75b9c957be9f3f26540be324aaa1b498062cd2",
+          "last_accessed_at": "2026-10-10T23:17:33.798854Z",
+          "created_at": "2026-10-10T22:31:11.276454Z",
+          "size_in_bytes": 444582320
+        },
+        {
+          "id": 8780916771,
+          "ref": "refs/heads/main",
+          "key": "v0-rust-Six platform probes-Linux-X64-web-Linux-x64-b9e20461-1340c12d",
+          "version": "bf82a304796dbcd8bcbc13e51f5ae6177649a3834092da345bcd281c649b401b",
+          "last_accessed_at": "2026-10-10T23:17:40.064014Z",
+          "created_at": "2026-10-10T22:33:11.949838Z",
+          "size_in_bytes": 597699504
+        },
+        {
+          "id": 8780995675,
+          "ref": "refs/heads/main",
+          "key": "v0-rust-Six platform probes-macOS-ARM64-desktop-Darwin-arm64-791fe27b-1340c12d",
+          "version": "f921a7b611ccc7239385e0204f1cf9d92bd7b7f5ec5e63fceff396df787af734",
+          "last_accessed_at": "2026-10-10T23:26:19.672979Z",
+          "created_at": "2026-10-10T22:37:42.037888Z",
+          "size_in_bytes": 424888897
+        },
+        {
+          "id": 8781477143,
+          "ref": "refs/heads/main",
+          "key": "node-cache-Linux-x64-npm-ea4625f3384a19cd29d0602b694026271a2b6fff198d38313a33cb386dfacd8d",
+          "version": "04d00cc68e25ee34fd8b04095d0a46a28244d98af53e6925e47ed311d487b1d6",
+          "last_accessed_at": "2026-10-10T23:44:28.406423Z",
+          "created_at": "2026-10-10T23:05:01.796736Z",
+          "size_in_bytes": 53100613
+        },
+        {
+          "id": 8781542806,
+          "ref": "refs/heads/main",
+          "key": "v0-rust-Desktop credential persistence-Linux-X64-storage-Linux-x64-b9e20461-61680e07",
+          "version": "bf82a304796dbcd8bcbc13e51f5ae6177649a3834092da345bcd281c649b401b",
+          "last_accessed_at": "2026-10-10T23:44:35.340909Z",
+          "created_at": "2026-10-10T23:08:49.205631Z",
+          "size_in_bytes": 566433367
+        },
+        {
+          "id": 8781548294,
+          "ref": "refs/heads/main",
+          "key": "v0-rust-Desktop credential persistence-Windows-X64-storage-Windows_NT-x64-773408be-61680e07",
+          "version": "b8c7260acabdf13b21a4d2afac75b9c957be9f3f26540be324aaa1b498062cd2",
+          "last_accessed_at": "2026-10-10T23:44:54.734742Z",
+          "created_at": "2026-10-10T23:09:08.626528Z",
+          "size_in_bytes": 475321365
+        },
+        {
+          "id": 8782150441,
+          "ref": "refs/heads/main",
+          "key": "v0-rust-Desktop credential persistence-Linux-X64-storage-Linux-x64-b9e20461-9fdba862",
+          "version": "bf82a304796dbcd8bcbc13e51f5ae6177649a3834092da345bcd281c649b401b",
+          "last_accessed_at": "2026-10-10T23:45:21.259914Z",
+          "created_at": "2026-10-10T23:45:21.259914Z",
+          "size_in_bytes": 566343704
+        },
+        {
+          "id": 8782173496,
+          "ref": "refs/heads/main",
+          "key": "v0-rust-Desktop credential persistence-Windows-X64-storage-Windows_NT-x64-773408be-9fdba862",
+          "version": "b8c7260acabdf13b21a4d2afac75b9c957be9f3f26540be324aaa1b498062cd2",
+          "last_accessed_at": "2026-10-10T23:46:49.749566Z",
+          "created_at": "2026-10-10T23:46:49.749566Z",
+          "size_in_bytes": 475332323
+        }
+      ],
+      "current_inventory": [
+        {
+          "id": 8782574762,
+          "ref": "refs/heads/main",
+          "key": "v0-rust-Desktop editor and engine-Windows-X64-desktop-Windows_NT-x64-773408be-9fdba862",
+          "version": "b8c7260acabdf13b21a4d2afac75b9c957be9f3f26540be324aaa1b498062cd2",
+          "last_accessed_at": "2026-10-11T00:11:51.667104Z",
+          "created_at": "2026-10-11T00:11:51.667104Z",
+          "size_in_bytes": 1456743653
+        },
+        {
+          "id": 8782543784,
+          "ref": "refs/heads/main",
+          "key": "v0-rust-Incant checks-macOS-ARM64-checks-Darwin-arm64-791fe27b-9fdba862",
+          "version": "f921a7b611ccc7239385e0204f1cf9d92bd7b7f5ec5e63fceff396df787af734",
+          "last_accessed_at": "2026-10-11T00:10:16.584697Z",
+          "created_at": "2026-10-11T00:10:16.584697Z",
+          "size_in_bytes": 2104691741
+        },
+        {
+          "id": 8781825942,
+          "ref": "refs/heads/main",
+          "key": "v0-rust-Incant checks-macOS-ARM64-checks-Darwin-arm64-791fe27b-61680e07",
+          "version": "f921a7b611ccc7239385e0204f1cf9d92bd7b7f5ec5e63fceff396df787af734",
+          "last_accessed_at": "2026-10-10T23:57:20.365649Z",
+          "created_at": "2026-10-10T23:25:24.264166Z",
+          "size_in_bytes": 1877092505
+        },
+        {
+          "id": 8713169553,
+          "ref": "refs/heads/main",
+          "key": "node-cache-macOS-arm64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+          "version": "20746cfc6fd6e9aa134aef50a98d5dbdb408c67c38370705a515acf8273b8a5b",
+          "last_accessed_at": "2026-10-10T23:56:59.820873Z",
+          "created_at": "2026-10-09T04:39:23.513242Z",
+          "size_in_bytes": 254922613
+        },
+        {
+          "id": 8731693054,
+          "ref": "refs/heads/main",
+          "key": "node-cache-Linux-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+          "version": "04d00cc68e25ee34fd8b04095d0a46a28244d98af53e6925e47ed311d487b1d6",
+          "last_accessed_at": "2026-10-10T23:56:43.847360Z",
+          "created_at": "2026-10-09T13:36:42.342678Z",
+          "size_in_bytes": 523320636
+        },
+        {
+          "id": 8782327186,
+          "ref": "refs/heads/main",
+          "key": "v0-rust-Desktop editor and engine-Linux-X64-desktop-Linux-x64-b9e20461-9fdba862",
+          "version": "bf82a304796dbcd8bcbc13e51f5ae6177649a3834092da345bcd281c649b401b",
+          "last_accessed_at": "2026-10-10T23:56:35.464540Z",
+          "created_at": "2026-10-10T23:56:35.464540Z",
+          "size_in_bytes": 1836266248
+        },
+        {
+          "id": 8781898807,
+          "ref": "refs/heads/main",
+          "key": "v0-rust-Desktop editor and engine-Windows-X64-desktop-Windows_NT-x64-773408be-61680e07",
+          "version": "b8c7260acabdf13b21a4d2afac75b9c957be9f3f26540be324aaa1b498062cd2",
+          "last_accessed_at": "2026-10-10T23:53:52.764402Z",
+          "created_at": "2026-10-10T23:29:45.175780Z",
+          "size_in_bytes": 1325138906
+        },
+        {
+          "id": 8780914003,
+          "ref": "refs/heads/main",
+          "key": "incant-cli-v1-wasm-bindgen-0.2.126-Linux-x86_64-ubuntu-24.04-c6e63d9832830b85",
+          "version": "8bb7f1bd42254be3709a41042bb0ccc2cf3acf23c71b978a0bdd00c5a3ba6e2b",
+          "last_accessed_at": "2026-10-10T23:53:44.401726Z",
+          "created_at": "2026-10-10T22:33:00.932213Z",
+          "size_in_bytes": 2493513
+        },
+        {
+          "id": 8780947562,
+          "ref": "refs/heads/main",
+          "key": "incant-cli-v1-cargo-ndk-4.1.2-Linux-x86_64-ubuntu-24.04-c6e63d9832830b85",
+          "version": "3d736acf5f2c673ce8cec40709588010a024353fff1a14e8bb445fc02373a7f3",
+          "last_accessed_at": "2026-10-10T23:53:39.907374Z",
+          "created_at": "2026-10-10T22:34:58.072868Z",
+          "size_in_bytes": 813131
+        },
+        {
+          "id": 8780830150,
+          "ref": "refs/heads/main",
+          "key": "gradle-8.11.1",
+          "version": "83eaa400d9cf129ea414f6ee32ca6fb1746084d0f00a96974c3f5b6dd08a2300",
+          "last_accessed_at": "2026-10-10T23:53:24.029759Z",
+          "created_at": "2026-10-10T22:28:03.216419Z",
+          "size_in_bytes": 136562194
+        },
+        {
+          "id": 8768808403,
+          "ref": "refs/heads/main",
+          "key": "gradle-dependencies-v1-971edd663187e2e1bdfa06c8f2429587",
+          "version": "1c52a3a7b4256dbf4cb0b91ebdf0637b7fca6c8cf427ab687855671174f38301",
+          "last_accessed_at": "2026-10-10T23:53:17.818613Z",
+          "created_at": "2026-10-10T12:54:37.990127Z",
+          "size_in_bytes": 91013022
+        },
+        {
+          "id": 8731739839,
+          "ref": "refs/heads/main",
+          "key": "gradle-transforms-v1-e5b2d238eb9319069098ea8fbe05e3a9",
+          "version": "00fad2af547a30f915e8e6c098d917113dab5c377ae72e2251ec69f666d9cbcb",
+          "last_accessed_at": "2026-10-10T23:53:17.815994Z",
+          "created_at": "2026-10-09T13:37:44.788436Z",
+          "size_in_bytes": 53013371
+        },
+        {
+          "id": 8780955538,
+          "ref": "refs/heads/main",
+          "key": "gradle-instrumented-jars-v1-a72e26df984758e6226f931aca8fa8a5",
+          "version": "4ff68880fc166bea1723f6e820e283e0fd6763c7bca74475854693616d42f46a",
+          "last_accessed_at": "2026-10-10T23:53:17.814685Z",
+          "created_at": "2026-10-10T22:35:22.777952Z",
+          "size_in_bytes": 85979
+        },
+        {
+          "id": 8780955550,
+          "ref": "refs/heads/main",
+          "key": "gradle-groovy-dsl-v1-907f04364760a51b2e63ad1f7912b4bf",
+          "version": "442afb47616becd79896b18d86ee5a006ddc168b640702ea228a90bdb3f6ec81",
+          "last_accessed_at": "2026-10-10T23:53:17.802971Z",
+          "created_at": "2026-10-10T22:35:22.822247Z",
+          "size_in_bytes": 131873
+        },
+        {
+          "id": 8780955818,
+          "ref": "refs/heads/main",
+          "key": "gradle-home-v1|Linux-X64|android[b125204fec14f680c233e1dfefc7462e]-f0aa49503ac6fafcaf5be1d9ea10f5a171a59c39",
+          "version": "efbc4f98d90c3a37d4c88199cd0a027f9a903840cd0ec083c3af7c7fd4363155",
+          "last_accessed_at": "2026-10-10T23:53:16.609784Z",
+          "created_at": "2026-10-10T22:35:23.255921Z",
+          "size_in_bytes": 262128
+        },
+        {
+          "id": 8782205173,
+          "ref": "refs/heads/main",
+          "key": "v0-rust-Desktop credential persistence-macOS-ARM64-storage-Darwin-arm64-791fe27b-9fdba862",
+          "version": "f921a7b611ccc7239385e0204f1cf9d92bd7b7f5ec5e63fceff396df787af734",
+          "last_accessed_at": "2026-10-10T23:48:52.897282Z",
+          "created_at": "2026-10-10T23:48:52.897282Z",
+          "size_in_bytes": 417616847
+        },
+        {
+          "id": 8781559670,
+          "ref": "refs/heads/main",
+          "key": "v0-rust-Desktop credential persistence-macOS-ARM64-storage-Darwin-arm64-791fe27b-61680e07",
+          "version": "f921a7b611ccc7239385e0204f1cf9d92bd7b7f5ec5e63fceff396df787af734",
+          "last_accessed_at": "2026-10-10T23:48:09.946106Z",
+          "created_at": "2026-10-10T23:09:51.006312Z",
+          "size_in_bytes": 417610852
+        }
+      ],
+      "cause": "not established"
+    }
+  },
+  "native_replacement_retirement": {
+    "at": "2026-10-11T00:23:09.749242+00:00",
+    "verified": [
+      {
+        "old": {
+          "id": 8781825942,
+          "ref": "refs/heads/main",
+          "key": "v0-rust-Incant checks-macOS-ARM64-checks-Darwin-arm64-791fe27b-61680e07",
+          "version": "f921a7b611ccc7239385e0204f1cf9d92bd7b7f5ec5e63fceff396df787af734",
+          "last_accessed_at": "2026-10-10T23:57:20.365649Z",
+          "created_at": "2026-10-10T23:25:24.264166Z",
+          "size_in_bytes": 1877092505
+        },
+        "replacement": {
+          "id": 8782543784,
+          "ref": "refs/heads/main",
+          "key": "v0-rust-Incant checks-macOS-ARM64-checks-Darwin-arm64-791fe27b-9fdba862",
+          "version": "f921a7b611ccc7239385e0204f1cf9d92bd7b7f5ec5e63fceff396df787af734",
+          "last_accessed_at": "2026-10-11T00:14:33.727729Z",
+          "created_at": "2026-10-11T00:10:16.584697Z",
+          "size_in_bytes": 2104691741
+        },
+        "job": 114342065118,
+        "run": 38096053332,
+        "post_cache_step": "success",
+        "full_upload_bytes": 2104691741,
+        "log_sha256": "d9907ff80885b6bfe846e45e1066f963d6fe916085dd30fdfae29e7dcfa06bf9"
+      },
+      {
+        "old": {
+          "id": 8781898807,
+          "ref": "refs/heads/main",
+          "key": "v0-rust-Desktop editor and engine-Windows-X64-desktop-Windows_NT-x64-773408be-61680e07",
+          "version": "b8c7260acabdf13b21a4d2afac75b9c957be9f3f26540be324aaa1b498062cd2",
+          "last_accessed_at": "2026-10-10T23:53:52.764402Z",
+          "created_at": "2026-10-10T23:29:45.175780Z",
+          "size_in_bytes": 1325138906
+        },
+        "replacement": {
+          "id": 8782574762,
+          "ref": "refs/heads/main",
+          "key": "v0-rust-Desktop editor and engine-Windows-X64-desktop-Windows_NT-x64-773408be-9fdba862",
+          "version": "b8c7260acabdf13b21a4d2afac75b9c957be9f3f26540be324aaa1b498062cd2",
+          "last_accessed_at": "2026-10-11T00:11:51.667104Z",
+          "created_at": "2026-10-11T00:11:51.667104Z",
+          "size_in_bytes": 1456743653
+        },
+        "job": 114342065534,
+        "run": 38096053392,
+        "post_cache_step": "success",
+        "full_upload_bytes": 1456743653,
+        "log_sha256": "f07e2bfe560e475fa153c22109ec30fc0790290aba6b01b4b0b795791fdb197e"
+      }
+    ],
+    "deleted_bytes": 3202231411,
+    "before_bytes": 10170376619,
+    "after_bytes": 6968145208,
+    "concurrent_disappearances": []
+  },
+  "limitations": [
+    "No warm-consumer improvement is claimed; subsequent substantive UI workflow consumption remains pending.",
+    "iOS target cache is absent from the latest inventory; no extra seed was dispatched.",
+    "Concurrent disappearance before namespace retirement has an unestablished cause; those entries were not deleted by this cleanup.",
+    "Retained bytes are one time-bounded inventory, not a steady-state or all-family claim."
+  ],
+  "historical_merge_metadata": {
+    "commit": "6a759c66a526c15869b07a7f585e8edfe8edfba0",
+    "pr": 60,
+    "author": "Andrew",
+    "missing_trailer": "Built-by",
+    "action": "Preserved unchanged; no published history rewrite."
+  }
+}

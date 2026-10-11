@@ -50,6 +50,54 @@ pub(crate) fn cook(
             mode: s.mode,
         }));
     }
+    if let Some(f) = decode!("SpriteFlipbook", incant_doc::SpriteFlipbook) {
+        let frames = f
+            .frames
+            .into_iter()
+            .map(|r| match r {
+                incant_doc::SpriteRegion::Pixels(r) => {
+                    Ok(incant_runtime::NativeSpriteRegion::Pixels(r))
+                }
+                incant_doc::SpriteRegion::Atlas { frame } => {
+                    Ok(incant_runtime::NativeSpriteRegion::Atlas {
+                        frame: stable_id(&frame)?,
+                    })
+                }
+            })
+            .collect::<Result<Vec<_>, CookError>>()?;
+        node.flipbook = Some(std::sync::Arc::new(incant_runtime::NativeFlipbook {
+            frames: frames.into(),
+            rate: f.rate,
+            looping: f.looping,
+            playing: f.playing,
+        }));
+    }
+    if let Some(map) = decode!("Tilemap", incant_doc::Tilemap) {
+        let tileset = bind(project, &map.tileset, VisualAssetKind::Texture, assets)?;
+        let layers = map
+            .layers
+            .into_iter()
+            .map(|layer| {
+                Ok::<_, CookError>(incant_runtime::NativeTilemapLayer {
+                    id: stable_id(&layer.id)?,
+                    cells: layer
+                        .cells
+                        .into_iter()
+                        .map(|cell| cell.as_deref().map(stable_id).transpose())
+                        .collect::<Result<_, _>>()?,
+                    layer: layer.layer,
+                    order: layer.order,
+                    solid: layer.solid,
+                })
+            })
+            .collect::<Result<_, _>>()?;
+        node.tilemap = Some(Box::new(incant_runtime::NativeTilemap {
+            tileset,
+            size: map.size,
+            cell_size: map.cell_size,
+            layers,
+        }));
+    }
     if let Some(mesh) = decode!("MeshRenderer", incant_doc::MeshRenderer) {
         if !mesh.materials.is_empty() {
             return Err(CookError::MaterialOverrides(entity.id.clone()));

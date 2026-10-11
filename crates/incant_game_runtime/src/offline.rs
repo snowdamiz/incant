@@ -100,6 +100,10 @@ impl OfflineGameSession {
     pub fn poll_audio(&mut self) -> Result<()> {
         self.inner.core.poll_audio()
     }
+    /// Suspend transport and reject ticks until resumed; failure is terminal.
+    pub fn set_suspended(&mut self, suspended: bool) -> Result<()> {
+        self.inner.core.set_suspended(suspended)
+    }
     pub fn is_failed(&self) -> bool {
         self.inner.core.live.is_none()
     }
@@ -108,6 +112,9 @@ impl OfflineGameSession {
     }
     pub fn input(&self) -> Result<&InputFrame> {
         self.inner.core.input()
+    }
+    pub fn logs(&self) -> Result<&incant_script::NativeLogs> {
+        self.inner.core.logs()
     }
     pub fn source_state(&self, id: StableId) -> Result<SourceState> {
         self.inner.core.source_state(id)

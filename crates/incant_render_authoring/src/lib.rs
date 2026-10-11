@@ -36,6 +36,7 @@ pub fn project_input(project: &Project, assets: Option<&AssetStore>) -> Result<S
             }
             if entity.components.contains_key("Camera")
                 || entity.components.contains_key("SpriteRenderer")
+                || entity.components.contains_key("Tilemap")
             {
                 let mut current = Some(entity.id.as_str());
                 while let Some(id) = current {
@@ -66,6 +67,17 @@ pub fn project_input(project: &Project, assets: Option<&AssetStore>) -> Result<S
             let mut sprite: incant_doc::SpriteRenderer = serde_json::from_value(value.clone())?;
             let source = asset(project, assets, &sprite.texture, "texture")
                 .ok_or_else(|| SceneError::MissingSprite(sprite.texture.clone()))?;
+            let flipbook = components
+                .get("SpriteFlipbook")
+                .map(|v| serde_json::from_value::<incant_doc::SpriteFlipbook>(v.clone()))
+                .transpose()?;
+            if let Some(f) = &flipbook {
+                sprite.region = f
+                    .frames
+                    .first()
+                    .ok_or(SceneError::Input("flipbook frame count"))?
+                    .clone();
+            }
             if let incant_doc::SpriteRegion::Atlas { frame } = &sprite.region {
                 let region = match source.data() {
                     RuntimeAssetData::Texture(texture) => texture
@@ -82,12 +94,36 @@ pub fn project_input(project: &Project, assets: Option<&AssetStore>) -> Result<S
                 })?;
                 sprite.region = region.into();
             }
-            Some(SpriteInput { source, sprite })
+            let frames = flipbook
+                .as_ref()
+                .map(|f| {
+                    Ok::<_, Box<dyn std::error::Error + Send + Sync>>(Arc::new(
+                        SpriteFrames::resolve(&source, &sprite, &f.frames)?,
+                    ))
+                })
+                .transpose()?;
+            Some(SpriteInput {
+                source,
+                sprite,
+                frames,
+                frame: 0,
+            })
         } else {
             None
         };
+        let tilemap = components
+            .get("Tilemap")
+            .map(|value| {
+                let map: incant_doc::Tilemap = serde_json::from_value(value.clone())?;
+                let source = asset(project, assets, &map.tileset, "texture")
+                    .ok_or(SceneError::TilemapBinding)?;
+                Ok::<_, Box<dyn std::error::Error + Send + Sync>>(Arc::new(
+                    TilemapInput::from_string_ids(source, &map)?,
+                ))
+            })
+            .transpose()?;
         // Sprite precedence matches the existing authoring preview.
-        let mesh = if sprite.is_some() {
+        let mesh = if sprite.is_some() || tilemap.is_some() {
             None
         } else if let Some(binding) = &entity.mesh {
             if !binding.materials.is_empty() {
@@ -103,6 +139,7 @@ pub fn project_input(project: &Project, assets: Option<&AssetStore>) -> Result<S
             None
         };
         let diagnostic = sprite.is_none()
+            && tilemap.is_none()
             && mesh.is_none()
             && components.contains_key("Transform")
             && !render_frames.contains(&entity.id)
@@ -122,6 +159,7 @@ pub fn project_input(project: &Project, assets: Option<&AssetStore>) -> Result<S
             light,
             mesh,
             sprite,
+            tilemap,
             diagnostic,
         });
     }

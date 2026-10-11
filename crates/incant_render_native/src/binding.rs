@@ -1,6 +1,8 @@
 use super::*;
 use incant_assets_runtime::{RuntimeAssetData, TextureUsage};
-use incant_render_data::{EnvironmentInput, MeshInput, SceneLight, SceneNode, SpriteInput};
+use incant_render_data::{
+    EnvironmentInput, MeshInput, SceneLight, SceneNode, SpriteInput, TilemapInput,
+};
 use incant_runtime::{VisualAssetKind, VisualAssetRef};
 use std::fmt::Write;
 
@@ -29,7 +31,7 @@ pub(crate) fn load(
 pub(crate) struct Prepared {
     pub input: SceneInput,
     pub slots: Vec<Option<usize>>,
-    pub undo: Vec<DMat4>,
+    pub undo: Vec<super::NumericUndo>,
     pub camera_slot: usize,
 }
 pub(crate) fn prepare(
@@ -62,6 +64,7 @@ pub(crate) fn prepare(
         if decl.camera.is_none()
             && decl.mesh.is_none()
             && decl.sprite.is_none()
+            && decl.tilemap.is_none()
             && decl.directional.is_none()
             && decl.point.is_none()
             && decl.spot.is_none()
@@ -94,7 +97,16 @@ pub(crate) fn prepare(
                 if source.usage() != Some(TextureUsage::Color) {
                     return Err(invalid());
                 }
-                let region = match s.region {
+                // Animation replaces the static region. Validate and resolve
+                // every prepared frame, without requiring an unused base frame
+                // to still exist in the atlas.
+                let selected = decl
+                    .flipbook
+                    .as_ref()
+                    .and_then(|f| f.frames.first())
+                    .copied()
+                    .unwrap_or(s.region);
+                let region = match selected {
                     incant_runtime::NativeSpriteRegion::Pixels(r) => r,
                     incant_runtime::NativeSpriteRegion::Atlas { frame } => {
                         let frame = ulid::Ulid::from_bytes(frame.0).to_string();
@@ -116,10 +128,44 @@ pub(crate) fn prepare(
                 {
                     return Err(invalid());
                 }
+                let frames = decl
+                    .flipbook
+                    .as_ref()
+                    .map(|f| {
+                        let regions: Vec<_> = f
+                            .frames
+                            .iter()
+                            .map(|r| match r {
+                                incant_runtime::NativeSpriteRegion::Pixels(r) => {
+                                    incant_2d::SpriteRegion::Pixels(*r)
+                                }
+                                incant_runtime::NativeSpriteRegion::Atlas { frame } => {
+                                    incant_2d::SpriteRegion::Atlas {
+                                        frame: ulid::Ulid::from_bytes(frame.0).to_string(),
+                                    }
+                                }
+                            })
+                            .collect();
+                        incant_render_data::SpriteFrames::resolve(source, &sprite, &regions)
+                            .map(Arc::new)
+                            .map_err(|_| invalid())
+                    })
+                    .transpose()?;
                 Ok::<_, NativeRenderError>(SpriteInput {
                     source: Arc::clone(source),
                     sprite,
+                    frames,
+                    frame: node.flipbook.map_or(0, |p| p.frame()),
                 })
+            })
+            .transpose()?;
+        let tilemap = decl
+            .tilemap
+            .as_ref()
+            .map(|map| {
+                TilemapInput::new(Arc::clone(asset(&map.tileset)?), map)
+                    .map(Arc::new)
+                    .map_err(NativeRenderError::TilemapRender)
             })
             .transpose()?;
         let light = if let Some(light) = &decl.directional {
@@ -147,11 +193,18 @@ pub(crate) fn prepare(
             light,
             mesh,
             sprite,
+            tilemap,
             diagnostic: false,
         });
     }
     let camera_slot = camera_slot.ok_or(NativeRenderError::MissingCamera(camera))?;
-    let undo = vec![DMat4::IDENTITY; input.nodes.len()];
+    let undo = vec![
+        super::NumericUndo {
+            world: DMat4::IDENTITY,
+            frame: 0
+        };
+        input.nodes.len()
+    ];
     Ok(Prepared {
         input,
         slots,

@@ -49,9 +49,35 @@ pub(super) fn nearest(
     output
 }
 
+/// Exact preflight count using the same integer-source span rule, without
+/// allocating the potentially large expanded vertex buffer.
+pub(super) fn nearest_len(
+    geometry: &[SpriteVertex],
+    region: [u32; 4],
+    texture_size: [u32; 2],
+) -> usize {
+    geometry
+        .as_chunks::<6>()
+        .0
+        .iter()
+        .map(|quad| {
+            let count = |axis: usize| {
+                let source = |v: SpriteVertex| {
+                    (v.uv[axis] * f64::from(texture_size[axis]) - f64::from(region[axis])).round()
+                };
+                span_count(source(quad[0]), source(quad[2]))
+            };
+            count(0) * count(1) * 6
+        })
+        .sum()
+}
+fn span_count(start: f64, end: f64) -> usize {
+    ((end - start).abs() / 64.).ceil().max(1.) as usize
+}
+
 fn cuts(start: f64, end: f64) -> Vec<(f64, f64)> {
     let distance = (end - start).abs();
-    let count = (distance / 64.).ceil().max(1.) as usize;
+    let count = span_count(start, end);
     (0..=count)
         .map(|i| {
             if i == count {
@@ -100,6 +126,10 @@ mod tests {
                     let vertices =
                         nearest(&original, sprite.region.pixels().unwrap(), [8192, 8192]);
                     assert!(vertices.len() <= 101400);
+                    assert_eq!(
+                        vertices.len(),
+                        nearest_len(&original, sprite.region.pixels().unwrap(), [8192, 8192])
+                    );
                     assert_eq!(vertices.len() % 6, 0);
                     let mut area = 0.;
                     for triangle in vertices.as_chunks::<3>().0 {

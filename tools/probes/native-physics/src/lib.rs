@@ -9,13 +9,15 @@ use incant_types::{
     RigidBody, Transform, Velocity,
 };
 
+pub mod planar;
+
 const STEPS: u32 = 640;
 const BODIES: u32 = 35;
 fn id(n: u32) -> StableId {
     StableId(u128::from(n).to_be_bytes())
 }
 
-pub fn run(workers: usize) -> Result<Vec<u8>, String> {
+fn workers(workers: usize) -> Result<(), String> {
     #[cfg(not(target_family = "wasm"))]
     {
         if workers != 1 && workers != 4 {
@@ -33,6 +35,11 @@ pub fn run(workers: usize) -> Result<Vec<u8>, String> {
     if workers != 0 {
         return Err("WASM must be serial".into());
     }
+    Ok(())
+}
+
+pub fn run(workers_count: usize) -> Result<Vec<u8>, String> {
+    workers(workers_count)?;
     let mut entities = Vec::new();
     let mut physics = Vec::new();
     for n in 1..=BODIES {
@@ -186,7 +193,7 @@ pub fn run(workers: usize) -> Result<Vec<u8>, String> {
             "missing coverage: sleep={max_sleeping} wake={wake_transitions} events={events}"
         ));
     }
-    for (chunk, value) in bytes[..32].chunks_exact_mut(4).zip([
+    for (chunk, value) in bytes[..32].as_chunks_mut::<4>().0.iter_mut().zip([
         0x4e504831,
         1,
         BODIES,
@@ -205,4 +212,17 @@ pub fn run(workers: usize) -> Result<Vec<u8>, String> {
 #[wasm_bindgen::prelude::wasm_bindgen]
 pub fn state_stream() -> Result<Vec<u8>, wasm_bindgen::JsValue> {
     run(0).map_err(|e| wasm_bindgen::JsValue::from_str(&e))
+}
+
+/// Separate planar stream; no changes to the existing 3D recorder.
+pub fn run_2d(workers_count: usize) -> Result<Vec<u8>, String> {
+    workers(workers_count)?;
+    let world = NativeWorld::from_bytes(&planar::scene()?.to_bytes()).map_err(|e| e.to_string())?;
+    planar::run(world)
+}
+
+#[cfg(target_family = "wasm")]
+#[wasm_bindgen::prelude::wasm_bindgen]
+pub fn state_stream_2d() -> Result<Vec<u8>, wasm_bindgen::JsValue> {
+    run_2d(0).map_err(|e| wasm_bindgen::JsValue::from_str(&e))
 }

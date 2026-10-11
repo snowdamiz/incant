@@ -1,0 +1,5809 @@
+{
+ "baseline_vs_candidate": {
+  "diagnostic/lights-board": {
+   "a": "shots/diagnostic/lights-board-baseline.png",
+   "b": "shots/diagnostic/lights-board-candidate.png",
+   "bbox": null,
+   "byte_identical": true,
+   "differing_pixels": 0,
+   "dims": [
+    960,
+    540
+   ],
+   "max_channel_delta": 0,
+   "pixel_identical": true
+  },
+  "initial/lights-board": {
+   "a": "shots/initial/lights-board-baseline.png",
+   "b": "shots/initial/lights-board-candidate.png",
+   "bbox": null,
+   "byte_identical": true,
+   "differing_pixels": 0,
+   "dims": [
+    960,
+    540
+   ],
+   "max_channel_delta": 0,
+   "pixel_identical": true
+  },
+  "initial/materials-board": {
+   "a": "shots/initial/materials-board-baseline.png",
+   "b": "shots/initial/materials-board-candidate.png",
+   "bbox": null,
+   "byte_identical": true,
+   "differing_pixels": 0,
+   "dims": [
+    960,
+    540
+   ],
+   "max_channel_delta": 0,
+   "pixel_identical": true
+  },
+  "initial/materials-normals": {
+   "a": "shots/initial/materials-normals-baseline.png",
+   "b": "shots/initial/materials-normals-candidate.png",
+   "bbox": null,
+   "byte_identical": true,
+   "differing_pixels": 0,
+   "dims": [
+    960,
+    540
+   ],
+   "max_channel_delta": 0,
+   "pixel_identical": true
+  },
+  "initial/shadows-board": {
+   "a": "shots/initial/shadows-board-baseline.png",
+   "b": "shots/initial/shadows-board-candidate.png",
+   "bbox": null,
+   "byte_identical": true,
+   "differing_pixels": 0,
+   "dims": [
+    960,
+    540
+   ],
+   "max_channel_delta": 0,
+   "pixel_identical": true
+  },
+  "initial/shadows-top": {
+   "a": "shots/initial/shadows-top-baseline.png",
+   "b": "shots/initial/shadows-top-candidate.png",
+   "bbox": null,
+   "byte_identical": true,
+   "differing_pixels": 0,
+   "dims": [
+    960,
+    540
+   ],
+   "max_channel_delta": 0,
+   "pixel_identical": true
+  },
+  "initial/sprites-perspective": {
+   "a": "shots/initial/sprites-perspective-baseline.png",
+   "b": "shots/initial/sprites-perspective-candidate.png",
+   "bbox": null,
+   "byte_identical": true,
+   "differing_pixels": 0,
+   "dims": [
+    960,
+    540
+   ],
+   "max_channel_delta": 0,
+   "pixel_identical": true
+  },
+  "initial/sprites-pixel": {
+   "a": "shots/initial/sprites-pixel-baseline.png",
+   "b": "shots/initial/sprites-pixel-candidate.png",
+   "bbox": null,
+   "byte_identical": true,
+   "differing_pixels": 0,
+   "dims": [
+    960,
+    540
+   ],
+   "max_channel_delta": 0,
+   "pixel_identical": true
+  },
+  "reimport/materials-board": {
+   "a": "shots/reimport/materials-board-baseline.png",
+   "b": "shots/reimport/materials-board-candidate.png",
+   "bbox": null,
+   "byte_identical": true,
+   "differing_pixels": 0,
+   "dims": [
+    960,
+    540
+   ],
+   "max_channel_delta": 0,
+   "pixel_identical": true
+  },
+  "sourcefree/materials-board": {
+   "a": "shots/sourcefree/materials-board-baseline.png",
+   "b": "shots/sourcefree/materials-board-candidate.png",
+   "bbox": null,
+   "byte_identical": true,
+   "differing_pixels": 0,
+   "dims": [
+    960,
+    540
+   ],
+   "max_channel_delta": 0,
+   "pixel_identical": true
+  },
+  "sourcefree/sprites-pixel": {
+   "a": "shots/sourcefree/sprites-pixel-baseline.png",
+   "b": "shots/sourcefree/sprites-pixel-candidate.png",
+   "bbox": null,
+   "byte_identical": true,
+   "differing_pixels": 0,
+   "dims": [
+    960,
+    540
+   ],
+   "max_channel_delta": 0,
+   "pixel_identical": true
+  }
+ },
+ "diagnostic_cube_localisation": {
+  "a": "shots/initial/lights-board-candidate.png",
+  "b": "shots/diagnostic/lights-board-candidate.png",
+  "bbox": [
+   248,
+   326,
+   353,
+   447
+  ],
+  "byte_identical": false,
+  "differences_outside_expected_region": 0,
+  "differing_pixels": 10811,
+  "dims": [
+   960,
+   540
+  ],
+  "expected_region_box": [
+   246.0,
+   324.1,
+   356.1,
+   449.8
+  ],
+  "max_channel_delta": 152,
+  "pixel_identical": false
+ },
+ "fresh_process_repeats": {
+  "baseline": {
+   "a": "shots/initial/materials-board-baseline.png",
+   "b": "shots/initial/materials-board-baseline-repeat.png",
+   "bbox": null,
+   "byte_identical": true,
+   "differing_pixels": 0,
+   "dims": [
+    960,
+    540
+   ],
+   "max_channel_delta": 0,
+   "pixel_identical": true
+  },
+  "candidate": {
+   "a": "shots/initial/materials-board-candidate.png",
+   "b": "shots/initial/materials-board-candidate-repeat.png",
+   "bbox": null,
+   "byte_identical": true,
+   "differing_pixels": 0,
+   "dims": [
+    960,
+    540
+   ],
+   "max_channel_delta": 0,
+   "pixel_identical": true
+  }
+ },
+ "lights": {
+  "dim floor outside every light range": {
+   "screen": [
+    816.0,
+    303.2
+   ],
+   "srgb": [
+    39.0,
+    39.0,
+    39.0
+   ]
+  },
+  "magenta wall pool centre": {
+   "screen": [
+    255.1,
+    135.9
+   ],
+   "srgb": [
+    172.2,
+    112.0,
+    161.6
+   ]
+  },
+  "red cube top face": {
+   "screen": [
+    738.4,
+    280.1
+   ],
+   "srgb": [
+    253.6,
+    164.0,
+    159.8
+   ]
+  },
+  "white spot pool (floor, 10 deg off axis)": {
+   "screen": [
+    767.2,
+    383.1
+   ],
+   "srgb": [
+    251.0,
+    251.0,
+    252.0
+   ]
+  }
+ },
+ "material_cards": {
+  "initial": {
+   "BLEND double back": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "behind opaque bar",
+      "behind opaque bar",
+      "behind opaque bar",
+      "behind opaque bar"
+     ],
+     "triangle": "behind opaque bar"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "mixed",
+      "rgb": [
+       95.0,
+       125.0,
+       166.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       174.0,
+       180.0,
+       191.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "mixed",
+      "rgb": [
+       92.0,
+       136.0,
+       104.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "mixed",
+      "rgb": [
+       92.0,
+       136.0,
+       104.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "mixed",
+      "rgb": [
+       92.0,
+       136.0,
+       104.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "mixed",
+      "rgb": [
+       92.0,
+       136.0,
+       104.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       204.0,
+       188.0,
+       157.0
+      ]
+     },
+     "triangle": {
+      "class": "mixed",
+      "rgb": [
+       92.0,
+       136.0,
+       104.0
+      ]
+     }
+    }
+   },
+   "BLEND double front": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "behind opaque bar",
+      "behind opaque bar",
+      "behind opaque bar",
+      "behind opaque bar"
+     ],
+     "triangle": "behind opaque bar"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "mixed",
+      "rgb": [
+       96.0,
+       126.0,
+       166.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       174.0,
+       180.0,
+       191.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "mixed",
+      "rgb": [
+       92.0,
+       136.0,
+       104.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "mixed",
+      "rgb": [
+       92.0,
+       136.0,
+       104.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "mixed",
+      "rgb": [
+       92.0,
+       136.0,
+       104.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "mixed",
+      "rgb": [
+       92.0,
+       136.0,
+       104.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       204.0,
+       188.0,
+       157.0
+      ]
+     },
+     "triangle": {
+      "class": "mixed",
+      "rgb": [
+       92.0,
+       136.0,
+       104.0
+      ]
+     }
+    }
+   },
+   "BLEND double-mirrored back": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "behind opaque bar",
+      "behind opaque bar",
+      "behind opaque bar",
+      "behind opaque bar"
+     ],
+     "triangle": "behind opaque bar"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "mixed",
+      "rgb": [
+       95.0,
+       125.0,
+       166.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       174.0,
+       180.0,
+       191.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "mixed",
+      "rgb": [
+       91.0,
+       136.0,
+       103.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "mixed",
+      "rgb": [
+       91.0,
+       136.0,
+       103.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "mixed",
+      "rgb": [
+       91.0,
+       136.0,
+       103.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "mixed",
+      "rgb": [
+       91.0,
+       136.0,
+       103.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       205.0,
+       189.0,
+       157.0
+      ]
+     },
+     "triangle": {
+      "class": "mixed",
+      "rgb": [
+       91.0,
+       136.0,
+       103.0
+      ]
+     }
+    }
+   },
+   "BLEND double-mirrored front": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "behind opaque bar",
+      "behind opaque bar",
+      "behind opaque bar",
+      "behind opaque bar"
+     ],
+     "triangle": "behind opaque bar"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "mixed",
+      "rgb": [
+       95.0,
+       125.0,
+       166.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       174.0,
+       180.0,
+       191.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "mixed",
+      "rgb": [
+       92.0,
+       136.0,
+       103.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "mixed",
+      "rgb": [
+       92.0,
+       136.0,
+       103.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "mixed",
+      "rgb": [
+       92.0,
+       136.0,
+       103.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "mixed",
+      "rgb": [
+       92.0,
+       136.0,
+       103.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       204.0,
+       188.0,
+       157.0
+      ]
+     },
+     "triangle": {
+      "class": "mixed",
+      "rgb": [
+       91.0,
+       136.0,
+       103.0
+      ]
+     }
+    }
+   },
+   "BLEND single back": {
+    "expected": {
+     "present": false,
+     "stripes": [
+      "behind opaque bar",
+      "behind opaque bar",
+      "behind opaque bar",
+      "behind opaque bar"
+     ],
+     "triangle": "behind opaque bar"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "mixed",
+      "rgb": [
+       99.0,
+       128.0,
+       166.0
+      ]
+     },
+     "paper": {
+      "class": "mixed",
+      "rgb": [
+       107.0,
+       134.0,
+       171.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "mixed",
+      "rgb": [
+       94.0,
+       137.0,
+       106.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "mixed",
+      "rgb": [
+       94.0,
+       137.0,
+       106.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "mixed",
+      "rgb": [
+       94.0,
+       137.0,
+       106.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "mixed",
+      "rgb": [
+       94.0,
+       137.0,
+       106.0
+      ]
+     },
+     "top": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       92.0,
+       101.0
+      ]
+     },
+     "triangle": {
+      "class": "mixed",
+      "rgb": [
+       94.0,
+       137.0,
+       105.0
+      ]
+     }
+    }
+   },
+   "BLEND single front": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "behind opaque bar",
+      "behind opaque bar",
+      "behind opaque bar",
+      "behind opaque bar"
+     ],
+     "triangle": "behind opaque bar"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "mixed",
+      "rgb": [
+       97.0,
+       127.0,
+       167.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       175.0,
+       180.0,
+       191.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "mixed",
+      "rgb": [
+       94.0,
+       137.0,
+       106.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "mixed",
+      "rgb": [
+       94.0,
+       137.0,
+       106.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "mixed",
+      "rgb": [
+       94.0,
+       137.0,
+       106.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "mixed",
+      "rgb": [
+       94.0,
+       137.0,
+       106.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       205.0,
+       189.0,
+       158.0
+      ]
+     },
+     "triangle": {
+      "class": "mixed",
+      "rgb": [
+       94.0,
+       137.0,
+       106.0
+      ]
+     }
+    }
+   },
+   "BLEND single-mirrored back": {
+    "expected": {
+     "present": false,
+     "stripes": [
+      "behind opaque bar",
+      "behind opaque bar",
+      "behind opaque bar",
+      "behind opaque bar"
+     ],
+     "triangle": "behind opaque bar"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "mixed",
+      "rgb": [
+       99.0,
+       128.0,
+       166.0
+      ]
+     },
+     "paper": {
+      "class": "mixed",
+      "rgb": [
+       107.0,
+       134.0,
+       171.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "mixed",
+      "rgb": [
+       93.0,
+       137.0,
+       105.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "mixed",
+      "rgb": [
+       93.0,
+       137.0,
+       105.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "mixed",
+      "rgb": [
+       93.0,
+       136.0,
+       104.9
+      ]
+     },
+     "stripe0.8": {
+      "class": "mixed",
+      "rgb": [
+       93.0,
+       136.0,
+       104.0
+      ]
+     },
+     "top": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       92.0,
+       101.0
+      ]
+     },
+     "triangle": {
+      "class": "mixed",
+      "rgb": [
+       93.0,
+       137.0,
+       105.0
+      ]
+     }
+    }
+   },
+   "BLEND single-mirrored front": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "behind opaque bar",
+      "behind opaque bar",
+      "behind opaque bar",
+      "behind opaque bar"
+     ],
+     "triangle": "behind opaque bar"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "mixed",
+      "rgb": [
+       96.0,
+       126.0,
+       167.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       175.0,
+       180.0,
+       191.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "mixed",
+      "rgb": [
+       93.0,
+       137.0,
+       105.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "mixed",
+      "rgb": [
+       93.0,
+       137.0,
+       105.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "mixed",
+      "rgb": [
+       94.0,
+       137.0,
+       105.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "mixed",
+      "rgb": [
+       94.0,
+       137.0,
+       105.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       205.0,
+       189.0,
+       158.0
+      ]
+     },
+     "triangle": {
+      "class": "mixed",
+      "rgb": [
+       93.0,
+       137.0,
+       105.0
+      ]
+     }
+    }
+   },
+   "MASK double back": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "hole",
+      "hole",
+      "kept",
+      "kept"
+     ],
+     "triangle": "hole"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "backdrop",
+      "rgb": [
+       59.0,
+       65.0,
+       83.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       205.0,
+       189.0,
+       157.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       92.0,
+       101.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       92.0,
+       101.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       52.0,
+       58.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       52.0,
+       58.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       205.0,
+       189.0,
+       157.0
+      ]
+     },
+     "triangle": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       92.0,
+       101.0
+      ]
+     }
+    }
+   },
+   "MASK double front": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "hole",
+      "hole",
+      "kept",
+      "kept"
+     ],
+     "triangle": "hole"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "backdrop",
+      "rgb": [
+       61.0,
+       66.0,
+       84.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       204.0,
+       188.0,
+       157.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "backdrop",
+      "rgb": [
+       69.0,
+       74.0,
+       82.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       92.0,
+       101.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       52.0,
+       59.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       52.0,
+       58.6
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       204.0,
+       189.0,
+       157.0
+      ]
+     },
+     "triangle": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       92.0,
+       101.0
+      ]
+     }
+    }
+   },
+   "MASK double-mirrored back": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "hole",
+      "hole",
+      "kept",
+      "kept"
+     ],
+     "triangle": "hole"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "backdrop",
+      "rgb": [
+       58.0,
+       64.0,
+       82.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       205.0,
+       189.0,
+       157.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "backdrop",
+      "rgb": [
+       88.0,
+       92.0,
+       101.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "backdrop",
+      "rgb": [
+       88.0,
+       92.0,
+       101.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       50.0,
+       56.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       50.0,
+       56.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       205.0,
+       189.0,
+       157.0
+      ]
+     },
+     "triangle": {
+      "class": "backdrop",
+      "rgb": [
+       88.0,
+       92.0,
+       101.0
+      ]
+     }
+    }
+   },
+   "MASK double-mirrored front": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "hole",
+      "hole",
+      "kept",
+      "kept"
+     ],
+     "triangle": "hole"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "backdrop",
+      "rgb": [
+       58.0,
+       64.0,
+       82.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       204.0,
+       188.0,
+       157.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "backdrop",
+      "rgb": [
+       69.0,
+       74.0,
+       81.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "backdrop",
+      "rgb": [
+       69.0,
+       74.0,
+       81.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       51.0,
+       57.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       51.0,
+       57.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       204.0,
+       188.0,
+       157.0
+      ]
+     },
+     "triangle": {
+      "class": "backdrop",
+      "rgb": [
+       69.0,
+       74.0,
+       81.0
+      ]
+     }
+    }
+   },
+   "MASK single back": {
+    "expected": {
+     "present": false,
+     "stripes": [
+      "hole",
+      "hole",
+      "kept",
+      "kept"
+     ],
+     "triangle": "hole"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "backdrop",
+      "rgb": [
+       70.0,
+       74.0,
+       82.0
+      ]
+     },
+     "paper": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       92.0,
+       102.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "backdrop",
+      "rgb": [
+       70.0,
+       74.0,
+       82.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "backdrop",
+      "rgb": [
+       70.0,
+       74.0,
+       82.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "backdrop",
+      "rgb": [
+       82.7,
+       86.0,
+       95.3
+      ]
+     },
+     "stripe0.8": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       92.7,
+       102.0
+      ]
+     },
+     "top": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       93.0,
+       102.0
+      ]
+     },
+     "triangle": {
+      "class": "backdrop",
+      "rgb": [
+       82.7,
+       86.0,
+       94.7
+      ]
+     }
+    }
+   },
+   "MASK single front": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "hole",
+      "hole",
+      "kept",
+      "kept"
+     ],
+     "triangle": "hole"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "backdrop",
+      "rgb": [
+       67.0,
+       71.4,
+       88.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       206.0,
+       190.0,
+       159.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       93.0,
+       102.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       93.0,
+       102.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "red",
+      "rgb": [
+       174.0,
+       58.0,
+       64.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "red",
+      "rgb": [
+       174.0,
+       58.0,
+       64.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       206.0,
+       190.0,
+       159.0
+      ]
+     },
+     "triangle": {
+      "class": "backdrop",
+      "rgb": [
+       70.0,
+       75.0,
+       82.4
+      ]
+     }
+    }
+   },
+   "MASK single-mirrored back": {
+    "expected": {
+     "present": false,
+     "stripes": [
+      "hole",
+      "hole",
+      "kept",
+      "kept"
+     ],
+     "triangle": "hole"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "backdrop",
+      "rgb": [
+       70.0,
+       74.0,
+       82.0
+      ]
+     },
+     "paper": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       92.0,
+       101.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       92.0,
+       101.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "backdrop",
+      "rgb": [
+       70.0,
+       74.0,
+       82.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "backdrop",
+      "rgb": [
+       70.0,
+       74.0,
+       82.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "backdrop",
+      "rgb": [
+       76.3,
+       80.0,
+       88.3
+      ]
+     },
+     "top": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       92.0,
+       101.0
+      ]
+     },
+     "triangle": {
+      "class": "backdrop",
+      "rgb": [
+       70.0,
+       74.0,
+       82.0
+      ]
+     }
+    }
+   },
+   "MASK single-mirrored front": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "hole",
+      "hole",
+      "kept",
+      "kept"
+     ],
+     "triangle": "hole"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "backdrop",
+      "rgb": [
+       64.0,
+       69.0,
+       86.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       205.0,
+       190.0,
+       158.9
+      ]
+     },
+     "stripe0.2": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       92.0,
+       101.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       92.0,
+       101.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "red",
+      "rgb": [
+       174.0,
+       57.0,
+       63.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "red",
+      "rgb": [
+       174.0,
+       57.0,
+       63.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       206.0,
+       190.0,
+       159.0
+      ]
+     },
+     "triangle": {
+      "class": "backdrop",
+      "rgb": [
+       70.0,
+       74.0,
+       82.0
+      ]
+     }
+    }
+   },
+   "OPAQUE double back": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "kept",
+      "kept",
+      "kept",
+      "kept"
+     ],
+     "triangle": "teal"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "backdrop",
+      "rgb": [
+       60.0,
+       66.0,
+       84.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       205.0,
+       189.0,
+       157.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       53.0,
+       59.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       53.0,
+       59.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       53.0,
+       59.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       54.0,
+       60.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       205.0,
+       189.0,
+       158.0
+      ]
+     },
+     "triangle": {
+      "class": "teal",
+      "rgb": [
+       52.2,
+       156.0,
+       147.0
+      ]
+     }
+    }
+   },
+   "OPAQUE double front": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "kept",
+      "kept",
+      "kept",
+      "kept"
+     ],
+     "triangle": "teal"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "backdrop",
+      "rgb": [
+       63.0,
+       68.0,
+       85.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       205.0,
+       189.0,
+       158.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       54.0,
+       60.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       54.0,
+       60.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       54.0,
+       60.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       54.0,
+       60.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       205.0,
+       189.0,
+       158.0
+      ]
+     },
+     "triangle": {
+      "class": "teal",
+      "rgb": [
+       55.0,
+       156.0,
+       147.0
+      ]
+     }
+    }
+   },
+   "OPAQUE double-mirrored back": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "kept",
+      "kept",
+      "kept",
+      "kept"
+     ],
+     "triangle": "teal"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "backdrop",
+      "rgb": [
+       59.0,
+       64.0,
+       83.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       205.0,
+       189.0,
+       157.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       50.0,
+       57.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       50.0,
+       57.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       50.0,
+       57.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       50.0,
+       57.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       205.0,
+       189.0,
+       157.0
+      ]
+     },
+     "triangle": {
+      "class": "teal",
+      "rgb": [
+       51.0,
+       155.0,
+       147.0
+      ]
+     }
+    }
+   },
+   "OPAQUE double-mirrored front": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "kept",
+      "kept",
+      "kept",
+      "kept"
+     ],
+     "triangle": "teal"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "backdrop",
+      "rgb": [
+       59.0,
+       64.0,
+       83.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       204.0,
+       188.0,
+       157.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       51.0,
+       58.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       51.0,
+       58.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       52.0,
+       58.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       52.0,
+       58.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       204.0,
+       189.0,
+       157.0
+      ]
+     },
+     "triangle": {
+      "class": "teal",
+      "rgb": [
+       51.0,
+       155.0,
+       146.0
+      ]
+     }
+    }
+   },
+   "OPAQUE single back": {
+    "expected": {
+     "present": false,
+     "stripes": [
+      "kept",
+      "kept",
+      "kept",
+      "kept"
+     ],
+     "triangle": "teal"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "backdrop",
+      "rgb": [
+       70.0,
+       75.0,
+       83.0
+      ]
+     },
+     "paper": {
+      "class": "backdrop",
+      "rgb": [
+       90.0,
+       93.0,
+       102.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "backdrop",
+      "rgb": [
+       70.0,
+       75.0,
+       83.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "backdrop",
+      "rgb": [
+       70.0,
+       75.0,
+       83.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "backdrop",
+      "rgb": [
+       83.7,
+       87.0,
+       95.7
+      ]
+     },
+     "stripe0.8": {
+      "class": "backdrop",
+      "rgb": [
+       90.0,
+       93.0,
+       102.0
+      ]
+     },
+     "top": {
+      "class": "backdrop",
+      "rgb": [
+       90.0,
+       93.0,
+       102.0
+      ]
+     },
+     "triangle": {
+      "class": "backdrop",
+      "rgb": [
+       82.7,
+       87.0,
+       95.3
+      ]
+     }
+    }
+   },
+   "OPAQUE single front": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "kept",
+      "kept",
+      "kept",
+      "kept"
+     ],
+     "triangle": "teal"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "backdrop",
+      "rgb": [
+       71.0,
+       75.0,
+       91.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       206.0,
+       191.0,
+       160.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "red",
+      "rgb": [
+       175.0,
+       63.0,
+       68.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "red",
+      "rgb": [
+       175.0,
+       63.0,
+       68.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "red",
+      "rgb": [
+       175.0,
+       62.9,
+       68.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "red",
+      "rgb": [
+       175.0,
+       62.0,
+       68.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       207.0,
+       191.0,
+       161.0
+      ]
+     },
+     "triangle": {
+      "class": "teal",
+      "rgb": [
+       63.0,
+       158.0,
+       150.0
+      ]
+     }
+    }
+   },
+   "OPAQUE single-mirrored back": {
+    "expected": {
+     "present": false,
+     "stripes": [
+      "kept",
+      "kept",
+      "kept",
+      "kept"
+     ],
+     "triangle": "teal"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "backdrop",
+      "rgb": [
+       70.0,
+       74.0,
+       82.0
+      ]
+     },
+     "paper": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       92.0,
+       101.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       92.0,
+       101.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "backdrop",
+      "rgb": [
+       70.0,
+       74.0,
+       82.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "backdrop",
+      "rgb": [
+       70.0,
+       74.0,
+       82.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "backdrop",
+      "rgb": [
+       76.3,
+       80.0,
+       88.3
+      ]
+     },
+     "top": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       92.0,
+       101.0
+      ]
+     },
+     "triangle": {
+      "class": "backdrop",
+      "rgb": [
+       70.0,
+       74.0,
+       82.0
+      ]
+     }
+    }
+   },
+   "OPAQUE single-mirrored front": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "kept",
+      "kept",
+      "kept",
+      "kept"
+     ],
+     "triangle": "teal"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "backdrop",
+      "rgb": [
+       66.7,
+       71.0,
+       88.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       206.0,
+       190.0,
+       159.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "red",
+      "rgb": [
+       175.0,
+       60.0,
+       65.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "red",
+      "rgb": [
+       175.0,
+       60.0,
+       65.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "red",
+      "rgb": [
+       175.0,
+       60.0,
+       65.9
+      ]
+     },
+     "stripe0.8": {
+      "class": "red",
+      "rgb": [
+       175.0,
+       60.0,
+       66.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       206.0,
+       191.0,
+       160.0
+      ]
+     },
+     "triangle": {
+      "class": "teal",
+      "rgb": [
+       59.0,
+       157.0,
+       149.0
+      ]
+     }
+    }
+   }
+  },
+  "reimport": {
+   "BLEND double back": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "behind opaque bar",
+      "behind opaque bar",
+      "behind opaque bar",
+      "behind opaque bar"
+     ],
+     "triangle": "behind opaque bar"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "mixed",
+      "rgb": [
+       95.0,
+       125.0,
+       166.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       174.0,
+       180.0,
+       191.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "mixed",
+      "rgb": [
+       92.0,
+       136.0,
+       104.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "mixed",
+      "rgb": [
+       92.0,
+       136.0,
+       104.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "mixed",
+      "rgb": [
+       92.0,
+       136.0,
+       104.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "mixed",
+      "rgb": [
+       92.0,
+       136.0,
+       104.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       204.0,
+       188.0,
+       157.0
+      ]
+     },
+     "triangle": {
+      "class": "mixed",
+      "rgb": [
+       92.0,
+       136.0,
+       104.0
+      ]
+     }
+    }
+   },
+   "BLEND double front": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "behind opaque bar",
+      "behind opaque bar",
+      "behind opaque bar",
+      "behind opaque bar"
+     ],
+     "triangle": "behind opaque bar"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "mixed",
+      "rgb": [
+       96.0,
+       126.0,
+       166.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       174.0,
+       180.0,
+       191.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "mixed",
+      "rgb": [
+       92.0,
+       136.0,
+       104.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "mixed",
+      "rgb": [
+       92.0,
+       136.0,
+       104.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "mixed",
+      "rgb": [
+       92.0,
+       136.0,
+       104.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "mixed",
+      "rgb": [
+       92.0,
+       136.0,
+       104.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       204.0,
+       188.0,
+       157.0
+      ]
+     },
+     "triangle": {
+      "class": "mixed",
+      "rgb": [
+       92.0,
+       136.0,
+       104.0
+      ]
+     }
+    }
+   },
+   "BLEND double-mirrored back": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "behind opaque bar",
+      "behind opaque bar",
+      "behind opaque bar",
+      "behind opaque bar"
+     ],
+     "triangle": "behind opaque bar"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "mixed",
+      "rgb": [
+       95.0,
+       125.0,
+       166.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       174.0,
+       180.0,
+       191.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "mixed",
+      "rgb": [
+       91.0,
+       136.0,
+       103.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "mixed",
+      "rgb": [
+       91.0,
+       136.0,
+       103.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "mixed",
+      "rgb": [
+       91.0,
+       136.0,
+       103.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "mixed",
+      "rgb": [
+       91.0,
+       136.0,
+       103.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       205.0,
+       189.0,
+       157.0
+      ]
+     },
+     "triangle": {
+      "class": "mixed",
+      "rgb": [
+       91.0,
+       136.0,
+       103.0
+      ]
+     }
+    }
+   },
+   "BLEND double-mirrored front": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "behind opaque bar",
+      "behind opaque bar",
+      "behind opaque bar",
+      "behind opaque bar"
+     ],
+     "triangle": "behind opaque bar"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "mixed",
+      "rgb": [
+       95.0,
+       125.0,
+       166.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       174.0,
+       180.0,
+       191.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "mixed",
+      "rgb": [
+       92.0,
+       136.0,
+       103.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "mixed",
+      "rgb": [
+       92.0,
+       136.0,
+       103.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "mixed",
+      "rgb": [
+       92.0,
+       136.0,
+       103.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "mixed",
+      "rgb": [
+       92.0,
+       136.0,
+       103.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       204.0,
+       188.0,
+       157.0
+      ]
+     },
+     "triangle": {
+      "class": "mixed",
+      "rgb": [
+       91.0,
+       136.0,
+       103.0
+      ]
+     }
+    }
+   },
+   "BLEND single back": {
+    "expected": {
+     "present": false,
+     "stripes": [
+      "behind opaque bar",
+      "behind opaque bar",
+      "behind opaque bar",
+      "behind opaque bar"
+     ],
+     "triangle": "behind opaque bar"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "mixed",
+      "rgb": [
+       99.0,
+       128.0,
+       166.0
+      ]
+     },
+     "paper": {
+      "class": "mixed",
+      "rgb": [
+       107.0,
+       134.0,
+       171.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "mixed",
+      "rgb": [
+       94.0,
+       137.0,
+       106.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "mixed",
+      "rgb": [
+       94.0,
+       137.0,
+       106.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "mixed",
+      "rgb": [
+       94.0,
+       137.0,
+       106.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "mixed",
+      "rgb": [
+       94.0,
+       137.0,
+       106.0
+      ]
+     },
+     "top": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       92.0,
+       101.0
+      ]
+     },
+     "triangle": {
+      "class": "mixed",
+      "rgb": [
+       94.0,
+       137.0,
+       105.0
+      ]
+     }
+    }
+   },
+   "BLEND single front": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "behind opaque bar",
+      "behind opaque bar",
+      "behind opaque bar",
+      "behind opaque bar"
+     ],
+     "triangle": "behind opaque bar"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "mixed",
+      "rgb": [
+       97.0,
+       127.0,
+       167.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       175.0,
+       180.0,
+       191.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "mixed",
+      "rgb": [
+       94.0,
+       137.0,
+       106.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "mixed",
+      "rgb": [
+       94.0,
+       137.0,
+       106.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "mixed",
+      "rgb": [
+       94.0,
+       137.0,
+       106.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "mixed",
+      "rgb": [
+       94.0,
+       137.0,
+       106.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       205.0,
+       189.0,
+       158.0
+      ]
+     },
+     "triangle": {
+      "class": "mixed",
+      "rgb": [
+       94.0,
+       137.0,
+       106.0
+      ]
+     }
+    }
+   },
+   "BLEND single-mirrored back": {
+    "expected": {
+     "present": false,
+     "stripes": [
+      "behind opaque bar",
+      "behind opaque bar",
+      "behind opaque bar",
+      "behind opaque bar"
+     ],
+     "triangle": "behind opaque bar"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "mixed",
+      "rgb": [
+       99.0,
+       128.0,
+       166.0
+      ]
+     },
+     "paper": {
+      "class": "mixed",
+      "rgb": [
+       107.0,
+       134.0,
+       171.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "mixed",
+      "rgb": [
+       93.0,
+       137.0,
+       105.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "mixed",
+      "rgb": [
+       93.0,
+       137.0,
+       105.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "mixed",
+      "rgb": [
+       93.0,
+       136.0,
+       104.9
+      ]
+     },
+     "stripe0.8": {
+      "class": "mixed",
+      "rgb": [
+       93.0,
+       136.0,
+       104.0
+      ]
+     },
+     "top": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       92.0,
+       101.0
+      ]
+     },
+     "triangle": {
+      "class": "mixed",
+      "rgb": [
+       93.0,
+       137.0,
+       105.0
+      ]
+     }
+    }
+   },
+   "BLEND single-mirrored front": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "behind opaque bar",
+      "behind opaque bar",
+      "behind opaque bar",
+      "behind opaque bar"
+     ],
+     "triangle": "behind opaque bar"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "mixed",
+      "rgb": [
+       96.0,
+       126.0,
+       167.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       175.0,
+       180.0,
+       191.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "mixed",
+      "rgb": [
+       93.0,
+       137.0,
+       105.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "mixed",
+      "rgb": [
+       93.0,
+       137.0,
+       105.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "mixed",
+      "rgb": [
+       94.0,
+       137.0,
+       105.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "mixed",
+      "rgb": [
+       94.0,
+       137.0,
+       105.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       205.0,
+       189.0,
+       158.0
+      ]
+     },
+     "triangle": {
+      "class": "mixed",
+      "rgb": [
+       93.0,
+       137.0,
+       105.0
+      ]
+     }
+    }
+   },
+   "MASK double back": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "hole",
+      "hole",
+      "kept",
+      "kept"
+     ],
+     "triangle": "hole"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "backdrop",
+      "rgb": [
+       59.0,
+       65.0,
+       83.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       205.0,
+       189.0,
+       157.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       92.0,
+       101.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       92.0,
+       101.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       52.0,
+       58.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       52.0,
+       58.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       205.0,
+       189.0,
+       157.0
+      ]
+     },
+     "triangle": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       92.0,
+       101.0
+      ]
+     }
+    }
+   },
+   "MASK double front": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "hole",
+      "hole",
+      "kept",
+      "kept"
+     ],
+     "triangle": "hole"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "backdrop",
+      "rgb": [
+       61.0,
+       66.0,
+       84.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       204.0,
+       188.0,
+       157.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "backdrop",
+      "rgb": [
+       69.0,
+       74.0,
+       82.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       92.0,
+       101.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       52.0,
+       59.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       52.0,
+       58.6
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       204.0,
+       189.0,
+       157.0
+      ]
+     },
+     "triangle": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       92.0,
+       101.0
+      ]
+     }
+    }
+   },
+   "MASK double-mirrored back": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "hole",
+      "hole",
+      "kept",
+      "kept"
+     ],
+     "triangle": "hole"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "backdrop",
+      "rgb": [
+       58.0,
+       64.0,
+       82.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       205.0,
+       189.0,
+       157.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "backdrop",
+      "rgb": [
+       88.0,
+       92.0,
+       101.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "backdrop",
+      "rgb": [
+       88.0,
+       92.0,
+       101.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       50.0,
+       56.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       50.0,
+       56.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       205.0,
+       189.0,
+       157.0
+      ]
+     },
+     "triangle": {
+      "class": "backdrop",
+      "rgb": [
+       88.0,
+       92.0,
+       101.0
+      ]
+     }
+    }
+   },
+   "MASK double-mirrored front": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "hole",
+      "hole",
+      "kept",
+      "kept"
+     ],
+     "triangle": "hole"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "backdrop",
+      "rgb": [
+       58.0,
+       64.0,
+       82.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       204.0,
+       188.0,
+       157.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "backdrop",
+      "rgb": [
+       69.0,
+       74.0,
+       81.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "backdrop",
+      "rgb": [
+       69.0,
+       74.0,
+       81.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       51.0,
+       57.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       51.0,
+       57.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       204.0,
+       188.0,
+       157.0
+      ]
+     },
+     "triangle": {
+      "class": "backdrop",
+      "rgb": [
+       69.0,
+       74.0,
+       81.0
+      ]
+     }
+    }
+   },
+   "MASK single back": {
+    "expected": {
+     "present": false,
+     "stripes": [
+      "hole",
+      "hole",
+      "kept",
+      "kept"
+     ],
+     "triangle": "hole"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "backdrop",
+      "rgb": [
+       70.0,
+       74.0,
+       82.0
+      ]
+     },
+     "paper": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       92.0,
+       102.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "backdrop",
+      "rgb": [
+       70.0,
+       74.0,
+       82.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "backdrop",
+      "rgb": [
+       70.0,
+       74.0,
+       82.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "backdrop",
+      "rgb": [
+       82.7,
+       86.0,
+       95.3
+      ]
+     },
+     "stripe0.8": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       92.7,
+       102.0
+      ]
+     },
+     "top": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       93.0,
+       102.0
+      ]
+     },
+     "triangle": {
+      "class": "backdrop",
+      "rgb": [
+       82.7,
+       86.0,
+       94.7
+      ]
+     }
+    }
+   },
+   "MASK single front": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "hole",
+      "hole",
+      "kept",
+      "kept"
+     ],
+     "triangle": "hole"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "backdrop",
+      "rgb": [
+       67.0,
+       71.4,
+       88.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       206.0,
+       190.0,
+       159.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       93.0,
+       102.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       93.0,
+       102.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "red",
+      "rgb": [
+       174.0,
+       58.0,
+       64.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "red",
+      "rgb": [
+       174.0,
+       58.0,
+       64.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       206.0,
+       190.0,
+       159.0
+      ]
+     },
+     "triangle": {
+      "class": "backdrop",
+      "rgb": [
+       70.0,
+       75.0,
+       82.4
+      ]
+     }
+    }
+   },
+   "MASK single-mirrored back": {
+    "expected": {
+     "present": false,
+     "stripes": [
+      "hole",
+      "hole",
+      "kept",
+      "kept"
+     ],
+     "triangle": "hole"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "backdrop",
+      "rgb": [
+       70.0,
+       74.0,
+       82.0
+      ]
+     },
+     "paper": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       92.0,
+       101.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       92.0,
+       101.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "backdrop",
+      "rgb": [
+       70.0,
+       74.0,
+       82.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "backdrop",
+      "rgb": [
+       70.0,
+       74.0,
+       82.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "backdrop",
+      "rgb": [
+       76.3,
+       80.0,
+       88.3
+      ]
+     },
+     "top": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       92.0,
+       101.0
+      ]
+     },
+     "triangle": {
+      "class": "backdrop",
+      "rgb": [
+       70.0,
+       74.0,
+       82.0
+      ]
+     }
+    }
+   },
+   "MASK single-mirrored front": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "hole",
+      "hole",
+      "kept",
+      "kept"
+     ],
+     "triangle": "hole"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "backdrop",
+      "rgb": [
+       64.0,
+       69.0,
+       86.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       205.0,
+       190.0,
+       158.9
+      ]
+     },
+     "stripe0.2": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       92.0,
+       101.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       92.0,
+       101.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "red",
+      "rgb": [
+       174.0,
+       57.0,
+       63.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "red",
+      "rgb": [
+       174.0,
+       57.0,
+       63.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       206.0,
+       190.0,
+       159.0
+      ]
+     },
+     "triangle": {
+      "class": "backdrop",
+      "rgb": [
+       70.0,
+       74.0,
+       82.0
+      ]
+     }
+    }
+   },
+   "OPAQUE double back": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "kept",
+      "kept",
+      "kept",
+      "kept"
+     ],
+     "triangle": "teal"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "backdrop",
+      "rgb": [
+       60.0,
+       66.0,
+       84.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       205.0,
+       189.0,
+       157.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       53.0,
+       59.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       53.0,
+       59.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       53.0,
+       59.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       54.0,
+       60.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       205.0,
+       189.0,
+       158.0
+      ]
+     },
+     "triangle": {
+      "class": "teal",
+      "rgb": [
+       52.2,
+       156.0,
+       147.0
+      ]
+     }
+    }
+   },
+   "OPAQUE double front": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "kept",
+      "kept",
+      "kept",
+      "kept"
+     ],
+     "triangle": "teal"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "backdrop",
+      "rgb": [
+       63.0,
+       68.0,
+       85.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       205.0,
+       189.0,
+       158.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       54.0,
+       60.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       54.0,
+       60.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       54.0,
+       60.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       54.0,
+       60.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       205.0,
+       189.0,
+       158.0
+      ]
+     },
+     "triangle": {
+      "class": "teal",
+      "rgb": [
+       55.0,
+       156.0,
+       147.0
+      ]
+     }
+    }
+   },
+   "OPAQUE double-mirrored back": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "kept",
+      "kept",
+      "kept",
+      "kept"
+     ],
+     "triangle": "teal"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "backdrop",
+      "rgb": [
+       59.0,
+       64.0,
+       83.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       205.0,
+       189.0,
+       157.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       50.0,
+       57.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       50.0,
+       57.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       50.0,
+       57.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       50.0,
+       57.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       205.0,
+       189.0,
+       157.0
+      ]
+     },
+     "triangle": {
+      "class": "teal",
+      "rgb": [
+       51.0,
+       155.0,
+       147.0
+      ]
+     }
+    }
+   },
+   "OPAQUE double-mirrored front": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "kept",
+      "kept",
+      "kept",
+      "kept"
+     ],
+     "triangle": "teal"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "backdrop",
+      "rgb": [
+       59.0,
+       64.0,
+       83.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       204.0,
+       188.0,
+       157.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       51.0,
+       58.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       51.0,
+       58.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       52.0,
+       58.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "red",
+      "rgb": [
+       173.0,
+       52.0,
+       58.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       204.0,
+       189.0,
+       157.0
+      ]
+     },
+     "triangle": {
+      "class": "teal",
+      "rgb": [
+       51.0,
+       155.0,
+       146.0
+      ]
+     }
+    }
+   },
+   "OPAQUE single back": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "hole",
+      "kept",
+      "kept",
+      "kept"
+     ],
+     "triangle": "hole"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "backdrop",
+      "rgb": [
+       63.0,
+       70.0,
+       90.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       169.0,
+       176.0,
+       160.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "backdrop",
+      "rgb": [
+       70.0,
+       75.0,
+       83.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "red",
+      "rgb": [
+       144.0,
+       60.0,
+       67.8
+      ]
+     },
+     "stripe0.6": {
+      "class": "red",
+      "rgb": [
+       144.0,
+       60.1,
+       68.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "red",
+      "rgb": [
+       144.0,
+       61.0,
+       68.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       170.0,
+       176.0,
+       161.0
+      ]
+     },
+     "triangle": {
+      "class": "backdrop",
+      "rgb": [
+       82.7,
+       87.0,
+       95.3
+      ]
+     }
+    }
+   },
+   "OPAQUE single front": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "hole",
+      "kept",
+      "kept",
+      "kept"
+     ],
+     "triangle": "hole"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "backdrop",
+      "rgb": [
+       65.0,
+       72.0,
+       91.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       169.0,
+       176.0,
+       160.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "backdrop",
+      "rgb": [
+       90.0,
+       93.0,
+       102.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "red",
+      "rgb": [
+       144.0,
+       61.0,
+       68.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "red",
+      "rgb": [
+       144.0,
+       60.8,
+       68.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "red",
+      "rgb": [
+       144.0,
+       60.0,
+       68.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       170.0,
+       176.0,
+       161.0
+      ]
+     },
+     "triangle": {
+      "class": "backdrop",
+      "rgb": [
+       71.0,
+       75.0,
+       83.0
+      ]
+     }
+    }
+   },
+   "OPAQUE single-mirrored back": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "hole",
+      "kept",
+      "kept",
+      "kept"
+     ],
+     "triangle": "hole"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "backdrop",
+      "rgb": [
+       59.0,
+       67.0,
+       88.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       168.0,
+       175.0,
+       159.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       92.0,
+       101.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "red",
+      "rgb": [
+       143.0,
+       55.0,
+       63.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "red",
+      "rgb": [
+       143.0,
+       55.0,
+       63.0
+      ]
+     },
+     "stripe0.8": {
+      "class": "red",
+      "rgb": [
+       143.0,
+       55.0,
+       63.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       169.0,
+       175.0,
+       159.0
+      ]
+     },
+     "triangle": {
+      "class": "backdrop",
+      "rgb": [
+       70.0,
+       74.0,
+       82.0
+      ]
+     }
+    }
+   },
+   "OPAQUE single-mirrored front": {
+    "expected": {
+     "present": true,
+     "stripes": [
+      "hole",
+      "kept",
+      "kept",
+      "kept"
+     ],
+     "triangle": "hole"
+    },
+    "matches": true,
+    "samples": {
+     "glyph": {
+      "class": "backdrop",
+      "rgb": [
+       60.0,
+       68.0,
+       88.0
+      ]
+     },
+     "paper": {
+      "class": "paper",
+      "rgb": [
+       169.0,
+       175.0,
+       159.0
+      ]
+     },
+     "stripe0.2": {
+      "class": "backdrop",
+      "rgb": [
+       89.0,
+       92.0,
+       101.0
+      ]
+     },
+     "stripe0.4": {
+      "class": "red",
+      "rgb": [
+       143.0,
+       58.0,
+       65.0
+      ]
+     },
+     "stripe0.6": {
+      "class": "red",
+      "rgb": [
+       143.0,
+       58.0,
+       65.9
+      ]
+     },
+     "stripe0.8": {
+      "class": "red",
+      "rgb": [
+       143.0,
+       58.0,
+       66.0
+      ]
+     },
+     "top": {
+      "class": "paper",
+      "rgb": [
+       169.0,
+       175.3,
+       160.0
+      ]
+     },
+     "triangle": {
+      "class": "backdrop",
+      "rgb": [
+       70.0,
+       74.0,
+       82.0
+      ]
+     }
+    }
+   }
+  }
+ },
+ "nine_slices": {
+  "C atlas nine-slice": {
+   "corners": {
+    "BL": {
+     "nearest": "lime",
+     "srgb": [
+      150.0,
+      220.0,
+      60.0
+     ]
+    },
+    "BR": {
+     "nearest": "white",
+     "srgb": [
+      240.0,
+      240.0,
+      240.0
+     ]
+    },
+    "TL": {
+     "nearest": "magenta",
+     "srgb": [
+      215.0,
+      70.0,
+      200.0
+     ]
+    },
+    "TR": {
+     "nearest": "cyan",
+     "srgb": [
+      60.0,
+      210.0,
+      220.0
+     ]
+    }
+   },
+   "expected": {
+    "BL": "lime",
+    "BR": "white",
+    "TL": "magenta",
+    "TR": "cyan"
+   },
+   "matches": true
+  },
+  "C atlas nine-slice compressed": {
+   "corners": {
+    "BL": {
+     "nearest": "lime",
+     "srgb": [
+      150.0,
+      220.0,
+      60.0
+     ]
+    },
+    "BR": {
+     "nearest": "white",
+     "srgb": [
+      240.0,
+      240.0,
+      240.0
+     ]
+    },
+    "TL": {
+     "nearest": "magenta",
+     "srgb": [
+      215.0,
+      70.0,
+      200.0
+     ]
+    },
+    "TR": {
+     "nearest": "cyan",
+     "srgb": [
+      60.0,
+      210.0,
+      220.0
+     ]
+    }
+   },
+   "expected": {
+    "BL": "lime",
+    "BR": "white",
+    "TL": "magenta",
+    "TR": "cyan"
+   },
+   "matches": true
+  },
+  "C atlas nine-slice flip-xy": {
+   "corners": {
+    "BL": {
+     "nearest": "cyan",
+     "srgb": [
+      60.0,
+      210.0,
+      220.0
+     ]
+    },
+    "BR": {
+     "nearest": "magenta",
+     "srgb": [
+      215.0,
+      70.0,
+      200.0
+     ]
+    },
+    "TL": {
+     "nearest": "white",
+     "srgb": [
+      240.0,
+      240.0,
+      240.0
+     ]
+    },
+    "TR": {
+     "nearest": "lime",
+     "srgb": [
+      150.0,
+      220.0,
+      60.0
+     ]
+    }
+   },
+   "expected": {
+    "BL": "cyan",
+    "BR": "magenta",
+    "TL": "white",
+    "TR": "lime"
+   },
+   "matches": true
+  },
+  "C ordinary nine-slice": {
+   "corners": {
+    "BL": {
+     "nearest": "blue",
+     "srgb": [
+      70.0,
+      110.0,
+      230.0
+     ]
+    },
+    "BR": {
+     "nearest": "yellow",
+     "srgb": [
+      234.0,
+      200.0,
+      60.0
+     ]
+    },
+    "TL": {
+     "nearest": "red",
+     "srgb": [
+      220.0,
+      60.0,
+      60.0
+     ]
+    },
+    "TR": {
+     "nearest": "green",
+     "srgb": [
+      60.0,
+      190.0,
+      90.0
+     ]
+    }
+   },
+   "expected": {
+    "BL": "blue",
+    "BR": "yellow",
+    "TL": "red",
+    "TR": "green"
+   },
+   "matches": true
+  },
+  "C reflected nine-slice": {
+   "corners": {
+    "BL": {
+     "nearest": "yellow",
+     "srgb": [
+      234.0,
+      200.0,
+      60.0
+     ]
+    },
+    "BR": {
+     "nearest": "blue",
+     "srgb": [
+      70.0,
+      110.0,
+      230.0
+     ]
+    },
+    "TL": {
+     "nearest": "green",
+     "srgb": [
+      60.0,
+      190.0,
+      90.0
+     ]
+    },
+    "TR": {
+     "nearest": "red",
+     "srgb": [
+      220.0,
+      60.0,
+      60.0
+     ]
+    }
+   },
+   "expected": {
+    "BL": "yellow",
+    "BR": "blue",
+    "TL": "green",
+    "TR": "red"
+   },
+   "matches": true
+  }
+ },
+ "normal_relief_board": {
+  "cards": {
+   "MASK double back": {
+    "bright_quadrant": "upper-right",
+    "bright_side_angle_deg": 47.8,
+    "flat_luminance": 0.5181,
+    "samples": {
+     "image-down": {
+      "luminance": 0.1808,
+      "screen": [
+       627.7,
+       230.0
+      ]
+     },
+     "image-left": {
+      "luminance": 0.6316,
+      "screen": [
+       637.9,
+       219.8
+      ]
+     },
+     "image-right": {
+      "luminance": 0.1735,
+      "screen": [
+       617.5,
+       219.8
+      ]
+     },
+     "image-up": {
+      "luminance": 0.6858,
+      "screen": [
+       627.7,
+       209.5
+      ]
+     }
+    }
+   },
+   "MASK double front": {
+    "bright_quadrant": "lower-left",
+    "bright_side_angle_deg": 225.9,
+    "flat_luminance": 0.5124,
+    "samples": {
+     "image-down": {
+      "luminance": 0.6533,
+      "screen": [
+       569.8,
+       230.0
+      ]
+     },
+     "image-left": {
+      "luminance": 0.6706,
+      "screen": [
+       559.6,
+       219.8
+      ]
+     },
+     "image-right": {
+      "luminance": 0.2004,
+      "screen": [
+       580.0,
+       219.8
+      ]
+     },
+     "image-up": {
+      "luminance": 0.1676,
+      "screen": [
+       569.8,
+       209.5
+      ]
+     }
+    }
+   },
+   "MASK double-mirrored back": {
+    "bright_quadrant": "upper-right",
+    "bright_side_angle_deg": 47.5,
+    "flat_luminance": 0.5181,
+    "samples": {
+     "image-down": {
+      "luminance": 0.1781,
+      "screen": [
+       910.9,
+       230.0
+      ]
+     },
+     "image-left": {
+      "luminance": 0.1769,
+      "screen": [
+       900.7,
+       219.8
+      ]
+     },
+     "image-right": {
+      "luminance": 0.6351,
+      "screen": [
+       921.1,
+       219.8
+      ]
+     },
+     "image-up": {
+      "luminance": 0.6783,
+      "screen": [
+       910.9,
+       209.5
+      ]
+     }
+    }
+   },
+   "MASK double-mirrored front": {
+    "bright_quadrant": "lower-left",
+    "bright_side_angle_deg": 225.4,
+    "flat_luminance": 0.5124,
+    "samples": {
+     "image-down": {
+      "luminance": 0.6479,
+      "screen": [
+       761.7,
+       230.0
+      ]
+     },
+     "image-left": {
+      "luminance": 0.2005,
+      "screen": [
+       771.9,
+       219.8
+      ]
+     },
+     "image-right": {
+      "luminance": 0.6746,
+      "screen": [
+       751.5,
+       219.8
+      ]
+     },
+     "image-up": {
+      "luminance": 0.1668,
+      "screen": [
+       761.7,
+       209.5
+      ]
+     }
+    }
+   },
+   "MASK single front": {
+    "bright_quadrant": "lower-left",
+    "bright_side_angle_deg": 226.5,
+    "flat_luminance": 0.5245,
+    "samples": {
+     "image-down": {
+      "luminance": 0.6613,
+      "screen": [
+       94.8,
+       230.0
+      ]
+     },
+     "image-left": {
+      "luminance": 0.6676,
+      "screen": [
+       84.6,
+       219.8
+      ]
+     },
+     "image-right": {
+      "luminance": 0.1991,
+      "screen": [
+       105.0,
+       219.8
+      ]
+     },
+     "image-up": {
+      "luminance": 0.1673,
+      "screen": [
+       94.8,
+       209.5
+      ]
+     }
+    }
+   },
+   "MASK single-mirrored front": {
+    "bright_quadrant": "lower-left",
+    "bright_side_angle_deg": 226.3,
+    "flat_luminance": 0.5231,
+    "samples": {
+     "image-down": {
+      "luminance": 0.6532,
+      "screen": [
+       286.6,
+       230.0
+      ]
+     },
+     "image-left": {
+      "luminance": 0.1994,
+      "screen": [
+       296.8,
+       219.8
+      ]
+     },
+     "image-right": {
+      "luminance": 0.6652,
+      "screen": [
+       276.4,
+       219.8
+      ]
+     },
+     "image-up": {
+      "luminance": 0.1663,
+      "screen": [
+       286.6,
+       209.5
+      ]
+     }
+    }
+   },
+   "OPAQUE double back": {
+    "bright_quadrant": "upper-right",
+    "bright_side_angle_deg": 47.3,
+    "flat_luminance": 0.5181,
+    "samples": {
+     "image-down": {
+      "luminance": 0.1806,
+      "screen": [
+       627.7,
+       108.1
+      ]
+     },
+     "image-left": {
+      "luminance": 0.6405,
+      "screen": [
+       637.9,
+       97.9
+      ]
+     },
+     "image-right": {
+      "luminance": 0.1756,
+      "screen": [
+       617.5,
+       97.9
+      ]
+     },
+     "image-up": {
+      "luminance": 0.6849,
+      "screen": [
+       627.7,
+       87.7
+      ]
+     }
+    }
+   },
+   "OPAQUE double front": {
+    "bright_quadrant": "lower-left",
+    "bright_side_angle_deg": 225.7,
+    "flat_luminance": 0.5184,
+    "samples": {
+     "image-down": {
+      "luminance": 0.6521,
+      "screen": [
+       569.8,
+       108.1
+      ]
+     },
+     "image-left": {
+      "luminance": 0.6691,
+      "screen": [
+       559.6,
+       97.9
+      ]
+     },
+     "image-right": {
+      "luminance": 0.195,
+      "screen": [
+       580.0,
+       97.9
+      ]
+     },
+     "image-up": {
+      "luminance": 0.1671,
+      "screen": [
+       569.8,
+       87.7
+      ]
+     }
+    }
+   },
+   "OPAQUE double-mirrored back": {
+    "bright_quadrant": "upper-right",
+    "bright_side_angle_deg": 46.9,
+    "flat_luminance": 0.5181,
+    "samples": {
+     "image-down": {
+      "luminance": 0.1782,
+      "screen": [
+       910.9,
+       108.1
+      ]
+     },
+     "image-left": {
+      "luminance": 0.1799,
+      "screen": [
+       900.7,
+       97.9
+      ]
+     },
+     "image-right": {
+      "luminance": 0.6466,
+      "screen": [
+       921.1,
+       97.9
+      ]
+     },
+     "image-up": {
+      "luminance": 0.6776,
+      "screen": [
+       910.9,
+       87.7
+      ]
+     }
+    }
+   },
+   "OPAQUE double-mirrored front": {
+    "bright_quadrant": "lower-left",
+    "bright_side_angle_deg": 225.2,
+    "flat_luminance": 0.5124,
+    "samples": {
+     "image-down": {
+      "luminance": 0.6474,
+      "screen": [
+       761.7,
+       108.1
+      ]
+     },
+     "image-left": {
+      "luminance": 0.1965,
+      "screen": [
+       771.9,
+       97.9
+      ]
+     },
+     "image-right": {
+      "luminance": 0.6746,
+      "screen": [
+       751.5,
+       97.9
+      ]
+     },
+     "image-up": {
+      "luminance": 0.1663,
+      "screen": [
+       761.7,
+       87.7
+      ]
+     }
+    }
+   },
+   "OPAQUE single front": {
+    "bright_quadrant": "lower-left",
+    "bright_side_angle_deg": 226.4,
+    "flat_luminance": 0.5292,
+    "samples": {
+     "image-down": {
+      "luminance": 0.659,
+      "screen": [
+       94.8,
+       108.1
+      ]
+     },
+     "image-left": {
+      "luminance": 0.6636,
+      "screen": [
+       84.6,
+       97.9
+      ]
+     },
+     "image-right": {
+      "luminance": 0.195,
+      "screen": [
+       105.0,
+       97.9
+      ]
+     },
+     "image-up": {
+      "luminance": 0.1667,
+      "screen": [
+       94.8,
+       87.7
+      ]
+     }
+    }
+   },
+   "OPAQUE single-mirrored front": {
+    "bright_quadrant": "lower-left",
+    "bright_side_angle_deg": 226.0,
+    "flat_luminance": 0.5245,
+    "samples": {
+     "image-down": {
+      "luminance": 0.6512,
+      "screen": [
+       286.6,
+       108.1
+      ]
+     },
+     "image-left": {
+      "luminance": 0.1948,
+      "screen": [
+       296.8,
+       97.9
+      ]
+     },
+     "image-right": {
+      "luminance": 0.6634,
+      "screen": [
+       276.4,
+       97.9
+      ]
+     },
+     "image-up": {
+      "luminance": 0.1658,
+      "screen": [
+       286.6,
+       87.7
+      ]
+     }
+    }
+   }
+  },
+  "key_light_screen_angle_deg": 125.3
+ },
+ "normal_relief_normals_view": {
+  "cards": {
+   "Normals generated": {
+    "bright_quadrant": "lower-left",
+    "bright_side_angle_deg": 227.0,
+    "flat_luminance": 0.5231,
+    "samples": {
+     "image-down": {
+      "luminance": 0.6679,
+      "screen": [
+       307.1,
+       133.1
+      ]
+     },
+     "image-left": {
+      "luminance": 0.6584,
+      "screen": [
+       285.7,
+       111.8
+      ]
+     },
+     "image-right": {
+      "luminance": 0.1897,
+      "screen": [
+       328.4,
+       111.8
+      ]
+     },
+     "image-up": {
+      "luminance": 0.1648,
+      "screen": [
+       307.1,
+       90.4
+      ]
+     }
+    }
+   },
+   "Normals generated-double-back": {
+    "bright_quadrant": "upper-right",
+    "bright_side_angle_deg": 47.7,
+    "flat_luminance": 0.5181,
+    "samples": {
+     "image-down": {
+      "luminance": 0.1677,
+      "screen": [
+       432.2,
+       353.9
+      ]
+     },
+     "image-left": {
+      "luminance": 0.6354,
+      "screen": [
+       453.5,
+       332.6
+      ]
+     },
+     "image-right": {
+      "luminance": 0.1731,
+      "screen": [
+       410.8,
+       332.6
+      ]
+     },
+     "image-up": {
+      "luminance": 0.6763,
+      "screen": [
+       432.2,
+       311.2
+      ]
+     }
+    }
+   },
+   "Normals generated-mirrored": {
+    "bright_quadrant": "lower-left",
+    "bright_side_angle_deg": 227.7,
+    "flat_luminance": 0.5184,
+    "samples": {
+     "image-down": {
+      "luminance": 0.6794,
+      "screen": [
+       211.4,
+       353.9
+      ]
+     },
+     "image-left": {
+      "luminance": 0.1914,
+      "screen": [
+       232.8,
+       332.6
+      ]
+     },
+     "image-right": {
+      "luminance": 0.6583,
+      "screen": [
+       190.0,
+       332.6
+      ]
+     },
+     "image-up": {
+      "luminance": 0.1672,
+      "screen": [
+       211.4,
+       311.2
+      ]
+     }
+    }
+   },
+   "Normals tangent+1": {
+    "bright_quadrant": "upper-left",
+    "bright_side_angle_deg": 133.3,
+    "flat_luminance": 0.5184,
+    "samples": {
+     "image-down": {
+      "luminance": 0.1643,
+      "screen": [
+       527.8,
+       133.1
+      ]
+     },
+     "image-left": {
+      "luminance": 0.6421,
+      "screen": [
+       506.5,
+       111.8
+      ]
+     },
+     "image-right": {
+      "luminance": 0.1742,
+      "screen": [
+       549.2,
+       111.8
+      ]
+     },
+     "image-up": {
+      "luminance": 0.6613,
+      "screen": [
+       527.8,
+       90.4
+      ]
+     }
+    }
+   },
+   "Normals tangent+1-mirrored": {
+    "bright_quadrant": "upper-left",
+    "bright_side_angle_deg": 133.0,
+    "flat_luminance": 0.5181,
+    "samples": {
+     "image-down": {
+      "luminance": 0.1652,
+      "screen": [
+       652.9,
+       353.9
+      ]
+     },
+     "image-left": {
+      "luminance": 0.1728,
+      "screen": [
+       674.3,
+       332.6
+      ]
+     },
+     "image-right": {
+      "luminance": 0.6362,
+      "screen": [
+       631.6,
+       332.6
+      ]
+     },
+     "image-up": {
+      "luminance": 0.6622,
+      "screen": [
+       652.9,
+       311.2
+      ]
+     }
+    }
+   },
+   "Normals tangent-1": {
+    "bright_quadrant": "lower-left",
+    "bright_side_angle_deg": 225.9,
+    "flat_luminance": 0.5124,
+    "samples": {
+     "image-down": {
+      "luminance": 0.6573,
+      "screen": [
+       748.6,
+       133.1
+      ]
+     },
+     "image-left": {
+      "luminance": 0.6677,
+      "screen": [
+       727.2,
+       111.8
+      ]
+     },
+     "image-right": {
+      "luminance": 0.1904,
+      "screen": [
+       770.0,
+       111.8
+      ]
+     },
+     "image-up": {
+      "luminance": 0.1643,
+      "screen": [
+       748.6,
+       90.4
+      ]
+     }
+    }
+   }
+  },
+  "key_light_screen_angle_deg": 135.9
+ },
+ "reimport_change_localisation": {
+  "a": "shots/initial/materials-board-candidate.png",
+  "b": "shots/reimport/materials-board-candidate.png",
+  "bbox": [
+   26,
+   75,
+   458,
+   165
+  ],
+  "byte_identical": false,
+  "differences_outside_expected_region": 0,
+  "differing_pixels": 31827,
+  "dims": [
+   960,
+   540
+  ],
+  "expected_region_boxes": [
+   [
+    24.3,
+    73.1,
+    119.6,
+    168.5
+   ],
+   [
+    127.8,
+    73.1,
+    223.2,
+    168.5
+   ],
+   [
+    261.8,
+    73.1,
+    357.1,
+    168.5
+   ],
+   [
+    365.3,
+    73.1,
+    460.7,
+    168.5
+   ]
+  ],
+  "max_channel_delta": 134,
+  "pixel_identical": false
+ },
+ "shadows_top": {
+  "cards": {
+   "BLEND double up (non-caster)": {
+    "expected_shadowed": {
+     "paper": false,
+     "stripe0.2": false,
+     "stripe0.4": false,
+     "stripe0.6": false,
+     "stripe0.8": false,
+     "triangle": false
+    },
+    "matches": true,
+    "paper": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    },
+    "stripe0.2": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    },
+    "stripe0.4": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    },
+    "stripe0.6": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    },
+    "stripe0.8": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    },
+    "triangle": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    }
+   },
+   "BLEND single up (non-caster)": {
+    "expected_shadowed": {
+     "paper": false,
+     "stripe0.2": false,
+     "stripe0.4": false,
+     "stripe0.6": false,
+     "stripe0.8": false,
+     "triangle": false
+    },
+    "matches": true,
+    "paper": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    },
+    "stripe0.2": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    },
+    "stripe0.4": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    },
+    "stripe0.6": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    },
+    "stripe0.8": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    },
+    "triangle": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    }
+   },
+   "MASK down double": {
+    "expected_shadowed": {
+     "paper": true,
+     "stripe0.2": false,
+     "stripe0.4": false,
+     "stripe0.6": true,
+     "stripe0.8": true,
+     "triangle": false
+    },
+    "matches": true,
+    "paper": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    },
+    "stripe0.2": {
+     "floor_luminance": 0.4309,
+     "shadowed": false
+    },
+    "stripe0.4": {
+     "floor_luminance": 0.3722,
+     "shadowed": false
+    },
+    "stripe0.6": {
+     "floor_luminance": 0.1201,
+     "shadowed": true
+    },
+    "stripe0.8": {
+     "floor_luminance": 0.1326,
+     "shadowed": true
+    },
+    "triangle": {
+     "floor_luminance": 0.4211,
+     "shadowed": false
+    }
+   },
+   "MASK down double-mirrored": {
+    "expected_shadowed": {
+     "paper": true,
+     "stripe0.2": false,
+     "stripe0.4": false,
+     "stripe0.6": true,
+     "stripe0.8": true,
+     "triangle": false
+    },
+    "matches": true,
+    "paper": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    },
+    "stripe0.2": {
+     "floor_luminance": 0.3633,
+     "shadowed": false
+    },
+    "stripe0.4": {
+     "floor_luminance": 0.4353,
+     "shadowed": false
+    },
+    "stripe0.6": {
+     "floor_luminance": 0.1769,
+     "shadowed": true
+    },
+    "stripe0.8": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    },
+    "triangle": {
+     "floor_luminance": 0.4331,
+     "shadowed": false
+    }
+   },
+   "MASK down single": {
+    "expected_shadowed": {
+     "paper": false,
+     "stripe0.2": false,
+     "stripe0.4": false,
+     "stripe0.6": false,
+     "stripe0.8": false,
+     "triangle": false
+    },
+    "matches": true,
+    "paper": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    },
+    "stripe0.2": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    },
+    "stripe0.4": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    },
+    "stripe0.6": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    },
+    "stripe0.8": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    },
+    "triangle": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    }
+   },
+   "MASK down single-mirrored": {
+    "expected_shadowed": {
+     "paper": false,
+     "stripe0.2": false,
+     "stripe0.4": false,
+     "stripe0.6": false,
+     "stripe0.8": false,
+     "triangle": false
+    },
+    "matches": true,
+    "paper": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    },
+    "stripe0.2": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    },
+    "stripe0.4": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    },
+    "stripe0.6": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    },
+    "stripe0.8": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    },
+    "triangle": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    }
+   },
+   "MASK up double": {
+    "expected_shadowed": {
+     "paper": true,
+     "stripe0.2": false,
+     "stripe0.4": false,
+     "stripe0.6": true,
+     "stripe0.8": true,
+     "triangle": false
+    },
+    "matches": true,
+    "paper": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    },
+    "stripe0.2": {
+     "floor_luminance": 0.4336,
+     "shadowed": false
+    },
+    "stripe0.4": {
+     "floor_luminance": 0.3613,
+     "shadowed": false
+    },
+    "stripe0.6": {
+     "floor_luminance": 0.1198,
+     "shadowed": true
+    },
+    "stripe0.8": {
+     "floor_luminance": 0.1304,
+     "shadowed": true
+    },
+    "triangle": {
+     "floor_luminance": 0.4336,
+     "shadowed": false
+    }
+   },
+   "MASK up double-mirrored": {
+    "expected_shadowed": {
+     "paper": true,
+     "stripe0.2": false,
+     "stripe0.4": false,
+     "stripe0.6": true,
+     "stripe0.8": true,
+     "triangle": false
+    },
+    "matches": true,
+    "paper": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    },
+    "stripe0.2": {
+     "floor_luminance": 0.3564,
+     "shadowed": false
+    },
+    "stripe0.4": {
+     "floor_luminance": 0.4281,
+     "shadowed": false
+    },
+    "stripe0.6": {
+     "floor_luminance": 0.1686,
+     "shadowed": true
+    },
+    "stripe0.8": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    },
+    "triangle": {
+     "floor_luminance": 0.4397,
+     "shadowed": false
+    }
+   },
+   "MASK up single": {
+    "expected_shadowed": {
+     "paper": true,
+     "stripe0.2": false,
+     "stripe0.4": false,
+     "stripe0.6": true,
+     "stripe0.8": true,
+     "triangle": false
+    },
+    "matches": true,
+    "paper": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    },
+    "stripe0.2": {
+     "floor_luminance": 0.4298,
+     "shadowed": false
+    },
+    "stripe0.4": {
+     "floor_luminance": 0.3778,
+     "shadowed": false
+    },
+    "stripe0.6": {
+     "floor_luminance": 0.1221,
+     "shadowed": true
+    },
+    "stripe0.8": {
+     "floor_luminance": 0.119,
+     "shadowed": true
+    },
+    "triangle": {
+     "floor_luminance": 0.432,
+     "shadowed": false
+    }
+   },
+   "MASK up single-mirrored": {
+    "expected_shadowed": {
+     "paper": true,
+     "stripe0.2": false,
+     "stripe0.4": false,
+     "stripe0.6": true,
+     "stripe0.8": true,
+     "triangle": false
+    },
+    "matches": true,
+    "paper": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    },
+    "stripe0.2": {
+     "floor_luminance": 0.3793,
+     "shadowed": false
+    },
+    "stripe0.4": {
+     "floor_luminance": 0.4325,
+     "shadowed": false
+    },
+    "stripe0.6": {
+     "floor_luminance": 0.1711,
+     "shadowed": true
+    },
+    "stripe0.8": {
+     "floor_luminance": 0.1122,
+     "shadowed": true
+    },
+    "triangle": {
+     "floor_luminance": 0.4441,
+     "shadowed": false
+    }
+   },
+   "OPAQUE down double": {
+    "expected_shadowed": {
+     "paper": true,
+     "stripe0.2": true,
+     "stripe0.4": true,
+     "stripe0.6": true,
+     "stripe0.8": true,
+     "triangle": true
+    },
+    "matches": true,
+    "paper": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    },
+    "stripe0.2": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    },
+    "stripe0.4": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    },
+    "stripe0.6": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    },
+    "stripe0.8": {
+     "floor_luminance": 0.1365,
+     "shadowed": true
+    },
+    "triangle": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    }
+   },
+   "OPAQUE down double-mirrored": {
+    "expected_shadowed": {
+     "paper": true,
+     "stripe0.2": true,
+     "stripe0.4": true,
+     "stripe0.6": true,
+     "stripe0.8": true,
+     "triangle": true
+    },
+    "matches": true,
+    "paper": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    },
+    "stripe0.2": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    },
+    "stripe0.4": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    },
+    "stripe0.6": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    },
+    "stripe0.8": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    },
+    "triangle": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    }
+   },
+   "OPAQUE down single": {
+    "expected_shadowed": {
+     "paper": false,
+     "stripe0.2": false,
+     "stripe0.4": false,
+     "stripe0.6": false,
+     "stripe0.8": false,
+     "triangle": false
+    },
+    "matches": true,
+    "paper": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    },
+    "stripe0.2": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    },
+    "stripe0.4": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    },
+    "stripe0.6": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    },
+    "stripe0.8": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    },
+    "triangle": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    }
+   },
+   "OPAQUE down single-mirrored": {
+    "expected_shadowed": {
+     "paper": false,
+     "stripe0.2": false,
+     "stripe0.4": false,
+     "stripe0.6": false,
+     "stripe0.8": false,
+     "triangle": false
+    },
+    "matches": true,
+    "paper": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    },
+    "stripe0.2": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    },
+    "stripe0.4": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    },
+    "stripe0.6": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    },
+    "stripe0.8": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    },
+    "triangle": {
+     "floor_luminance": 0.4452,
+     "shadowed": false
+    }
+   },
+   "OPAQUE up double": {
+    "expected_shadowed": {
+     "paper": true,
+     "stripe0.2": true,
+     "stripe0.4": true,
+     "stripe0.6": true,
+     "stripe0.8": true,
+     "triangle": true
+    },
+    "matches": true,
+    "paper": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    },
+    "stripe0.2": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    },
+    "stripe0.4": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    },
+    "stripe0.6": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    },
+    "stripe0.8": {
+     "floor_luminance": 0.1272,
+     "shadowed": true
+    },
+    "triangle": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    }
+   },
+   "OPAQUE up double-mirrored": {
+    "expected_shadowed": {
+     "paper": true,
+     "stripe0.2": true,
+     "stripe0.4": true,
+     "stripe0.6": true,
+     "stripe0.8": true,
+     "triangle": true
+    },
+    "matches": true,
+    "paper": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    },
+    "stripe0.2": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    },
+    "stripe0.4": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    },
+    "stripe0.6": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    },
+    "stripe0.8": {
+     "floor_luminance": 0.1122,
+     "shadowed": true
+    },
+    "triangle": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    }
+   },
+   "OPAQUE up single": {
+    "expected_shadowed": {
+     "paper": true,
+     "stripe0.2": true,
+     "stripe0.4": true,
+     "stripe0.6": true,
+     "stripe0.8": true,
+     "triangle": true
+    },
+    "matches": true,
+    "paper": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    },
+    "stripe0.2": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    },
+    "stripe0.4": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    },
+    "stripe0.6": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    },
+    "stripe0.8": {
+     "floor_luminance": 0.1221,
+     "shadowed": true
+    },
+    "triangle": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    }
+   },
+   "OPAQUE up single-mirrored": {
+    "expected_shadowed": {
+     "paper": true,
+     "stripe0.2": true,
+     "stripe0.4": true,
+     "stripe0.6": true,
+     "stripe0.8": true,
+     "triangle": true
+    },
+    "matches": true,
+    "paper": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    },
+    "stripe0.2": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    },
+    "stripe0.4": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    },
+    "stripe0.6": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    },
+    "stripe0.8": {
+     "floor_luminance": 0.1127,
+     "shadowed": true
+    },
+    "triangle": {
+     "floor_luminance": 0.1119,
+     "shadowed": true
+    }
+   }
+  },
+  "open_floor_luminance": 0.4452
+ },
+ "source_free": {
+  "materials-board vs reimport": {
+   "a": "shots/reimport/materials-board-candidate.png",
+   "b": "shots/sourcefree/materials-board-candidate.png",
+   "bbox": null,
+   "byte_identical": true,
+   "differing_pixels": 0,
+   "dims": [
+    960,
+    540
+   ],
+   "max_channel_delta": 0,
+   "pixel_identical": true
+  },
+  "sprites-pixel vs initial": {
+   "a": "shots/initial/sprites-pixel-candidate.png",
+   "b": "shots/sourcefree/sprites-pixel-candidate.png",
+   "bbox": null,
+   "byte_identical": true,
+   "differing_pixels": 0,
+   "dims": [
+    960,
+    540
+   ],
+   "max_channel_delta": 0,
+   "pixel_identical": true
+  }
+ },
+ "summary": {
+  "diagnostic_differences_outside_cube": 0,
+  "material_cards_matching": {
+   "initial": "24/24",
+   "reimport": "24/24"
+  },
+  "nine_slices_matching": "5/5",
+  "pairs": 11,
+  "pairs_byte_identical": 11,
+  "pairs_pixel_identical": 11,
+  "reimport_differences_outside_cells": 0,
+  "repeats_identical": true,
+  "shadow_cards_matching": "18/18"
+ },
+ "tone_ramp": [
+  {
+   "emissive_linear": [
+    0.05,
+    0.05,
+    0.05
+   ],
+   "emissive_only_prediction_srgb": [
+    63.2,
+    63.2,
+    63.2
+   ],
+   "measured_minus_prediction": [
+    6.8,
+    6.8,
+    6.8
+   ],
+   "measured_srgb": [
+    70.0,
+    70.0,
+    70.0
+   ],
+   "swatch": "white-0.05"
+  },
+  {
+   "emissive_linear": [
+    0.2,
+    0.2,
+    0.2
+   ],
+   "emissive_only_prediction_srgb": [
+    123.6,
+    123.6,
+    123.6
+   ],
+   "measured_minus_prediction": [
+    3.4,
+    3.4,
+    3.4
+   ],
+   "measured_srgb": [
+    127.0,
+    127.0,
+    127.0
+   ],
+   "swatch": "white-0.2"
+  },
+  {
+   "emissive_linear": [
+    0.5,
+    0.5,
+    0.5
+   ],
+   "emissive_only_prediction_srgb": [
+    187.5,
+    187.5,
+    187.5
+   ],
+   "measured_minus_prediction": [
+    1.5,
+    1.5,
+    1.5
+   ],
+   "measured_srgb": [
+    189.0,
+    189.0,
+    189.0
+   ],
+   "swatch": "white-0.5"
+  },
+  {
+   "emissive_linear": [
+    0.8,
+    0.8,
+    0.8
+   ],
+   "emissive_only_prediction_srgb": [
+    231.1,
+    231.1,
+    231.1
+   ],
+   "measured_minus_prediction": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "measured_srgb": [
+    232.0,
+    232.0,
+    232.0
+   ],
+   "swatch": "white-0.8"
+  },
+  {
+   "emissive_linear": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "emissive_only_prediction_srgb": [
+    243.4,
+    243.4,
+    243.4
+   ],
+   "measured_minus_prediction": [
+    0.6,
+    0.6,
+    0.6
+   ],
+   "measured_srgb": [
+    244.0,
+    244.0,
+    244.0
+   ],
+   "swatch": "white-1.0"
+  },
+  {
+   "emissive_linear": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "emissive_only_prediction_srgb": [
+    243.4,
+    30.4,
+    30.4
+   ],
+   "measured_minus_prediction": [
+    0.6,
+    11.6,
+    11.6
+   ],
+   "measured_srgb": [
+    244.0,
+    42.0,
+    42.0
+   ],
+   "swatch": "red-1.0"
+  },
+  {
+   "emissive_linear": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "emissive_only_prediction_srgb": [
+    30.4,
+    243.4,
+    30.4
+   ],
+   "measured_minus_prediction": [
+    12.6,
+    0.6,
+    12.6
+   ],
+   "measured_srgb": [
+    43.0,
+    244.0,
+    43.0
+   ],
+   "swatch": "green-1.0"
+  },
+  {
+   "emissive_linear": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "emissive_only_prediction_srgb": [
+    30.4,
+    30.4,
+    243.4
+   ],
+   "measured_minus_prediction": [
+    12.6,
+    12.6,
+    0.6
+   ],
+   "measured_srgb": [
+    43.0,
+    43.0,
+    244.0
+   ],
+   "swatch": "blue-1.0"
+  }
+ ]
+}
