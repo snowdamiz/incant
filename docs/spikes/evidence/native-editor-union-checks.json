@@ -81,5 +81,40 @@
     ],
     "historical_command_error": "Initial bridge verification used nonexistent tools/generate_bridge.py; corrected to the actual Node build_bridge.mjs check, which passed. No repository source error.",
     "scope": "Additive reviewed Wasm logging integrated with editor/agent/script source. UI source unchanged. This is scoped CPU verification; native0048 remains on its separately bound immutable bb1b517 build."
+  },
+  "main102_integration": {
+    "recorded_at": "2026-10-11T22:55:16.110321+00:00",
+    "source_commit": "f5ddf12547603f412d8b46a7c653760d9dad1477",
+    "merged_main": "8bd9a96a0b88fda327c7ce5552d75c9a9a2fe461",
+    "reviewed_checkpoint_sources_unchanged": 22,
+    "tests": {
+      "command": "./tools/cargo test --locked --profile ci -j2 -p incant_script -p incant_agent_native -p incant_editor --features incant_editor/custom-protocol,incant_editor/play-probe,incant_editor/agent-probe",
+      "passed": 180,
+      "failed": 0,
+      "ignored": 1,
+      "groups": 11,
+      "exit_code": 0
+    },
+    "clippy": {
+      "command": "./tools/cargo clippy --locked --profile ci -j2 -p incant_script -p incant_agent_native -p incant_editor --features incant_editor/custom-protocol,incant_editor/play-probe,incant_editor/agent-probe --all-targets -- -D warnings",
+      "exit_code": 0
+    },
+    "logs": {
+      "tests": {
+        "path": "/tmp/incant-editor-main102-tests.log",
+        "sha256": "1052d7a079da53b616ed14845ae343ab2a6a19c5b7de7bb5db0a7d69ce1990e9"
+      },
+      "clippy": {
+        "path": "/tmp/incant-editor-main102-clippy.log",
+        "sha256": "384bcfd05790d8f3c6ca1e21ad76c642df9190415e076d485616040eae84cf85"
+      }
+    },
+    "generated_checks": [
+      "tools/generate_wasm_sdk.py --check",
+      "tools/build_bridge.mjs --check",
+      "tools/generate_conventions.py --check",
+      "git diff --check"
+    ],
+    "scope": "Reviewed session checkpoints integrated with editor/agent source; only STATUS.md had an additive merge conflict, with both sections retained. All22 checkpoint source files match the reviewed main101 integration. CPU verification only. Native0048 remains on separately bound immutable bb1b517 and is not evidence for new checkpoint behavior."
   }
 }

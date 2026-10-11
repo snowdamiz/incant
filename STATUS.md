@@ -16,6 +16,20 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Current milestone
+
+The project is still building the Phase 1 core engine. Native simulation,
+authored scripting, imports, physics, audio, input and source-free exports have
+working, tested paths, but the complete Core Sample and its device gates remain
+ahead. Editor and agent work overlaps later phases without completing their gates.
+
+Native Wasm logging, desktop gamepad input and opt-in session checkpoints are
+merged into main. Current parallel work connects checkpoints to the exported
+player, validates the native editor's Play/chat/budget controls, repairs browser
+renderer ownership, and cooks output shaders before runtime startup. Complete
+animation, game UI/text, remaining SDK/render features, and the required sample
+and reference-device measurements still prevent a Phase 1 completion claim.
+
 ## Native editor agent integration — in progress
 
 The native session/bridge now connect streamed turns, approval/cancel, bounded
@@ -26,8 +40,8 @@ Play host and conversation across same-account/project turns without moving its
 QuickJS state between threads. Actual cross-turn query, failed candidate and
 replacement controls pass alongside cancellation/shutdown/panic checks. The
 provider invalidation listener is integrated with its intervening-read race fixed.
-The current native slice passes 152 scoped Rust tests and four-package all-target
-Clippy after integrating main97. Claude’s chat UI is integrated with retained
+The current editor/script/native-agent union passes 180 scoped Rust tests and
+all-target Clippy after integrating main102 session checkpoints. Claude’s chat UI is integrated with retained
 conversation resizing, accurate denial/failure messages and cause-neutral uncertain
 usage. The current combined UI suite passes 902 tests; strict app/test types and the
 editor build pass. The corrected native cap-change and gameplay-focus fences pass 39 editor tests and Clippy. Four real native-handler turns used
