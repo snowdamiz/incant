@@ -1,0 +1,261 @@
+{
+  "scope": "Default wasm32 renderer library compile repair; CPU-only ownership/errors and one existing checkpoint step",
+  "model": "gpt-6.1-sol, xhigh (Sol 6.1 Extra High), repository Astra role",
+  "base": "39f5e40a793e57757af9ae79cb6a5a1ec27369d1",
+  "host": {
+    "architecture": "arm64",
+    "os": "macOS26.6",
+    "build": "25G72",
+    "rustc": "1.99.0 b940084d7eb6a299eb4bfeb8e34901bc051e7ac4",
+    "llvm": "23.1.1"
+  },
+  "dependency_versions": {
+    "bevy_ecs": "0.19.1",
+    "wgpu": "29.0.4"
+  },
+  "unchanged_inputs": [
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/Cargo.lock",
+      "sha256": "ca6a45ef10a0472b68498b37e12510ce923de5dcf4e35437af93d7cd3cb9d424",
+      "bytes": 244644
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/rust-toolchain.toml",
+      "sha256": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124",
+      "bytes": 100
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/crates/incant_render_data/src/lib.rs",
+      "sha256": "524da4b6f3fe059aa2839c8178d9624e48b2dd1a8f83d6c577d2a2fb51a09134",
+      "bytes": 4621
+    }
+  ],
+  "source_receipts": [
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.github/workflows/nightly.yml",
+      "sha256": "8756c2561de02546d7ab28e3baf8d68c417b36006281fe4bba29100036fb41a8",
+      "bytes": 8611
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/crates/incant_render/src/graph.rs",
+      "sha256": "7169d54f62361c0a8f6b47918b37575e172a8fc3e51779276125155bbca2326c",
+      "bytes": 6250
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/crates/incant_render/src/lib.rs",
+      "sha256": "959f30c94891fc62a235867bdbbb44098755525582224c83b0b5f11744df3b4b",
+      "bytes": 15392
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/crates/incant_render/src/resource_error.rs",
+      "sha256": "2d84db5a39b3aa6259b9379bf0003f34c10e33c7f4ee21427de79bbedd28406d",
+      "bytes": 2076
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/crates/incant_render/src/web_error.rs",
+      "sha256": "db7421e60b304e4fc97ec2ea076febb6b135a3a37f873ed5ea183ca68fe99581",
+      "bytes": 2479
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/crates/incant_render/tests/frame_graph/mod.rs",
+      "sha256": "5934368e1cbba74f1bef1b0fc10e33f81a97448b998add275bc9809898201d1b",
+      "bytes": 9501
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/crates/incant_render/tests/graph_ownership/mod.rs",
+      "sha256": "aec68fde9f5e3411d17e93b565a9dd292dc2b4e6f8c61334ec1e12c09c90144b",
+      "bytes": 3164
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/crates/incant_render/tests/web_error/mod.rs",
+      "sha256": "9ebb34798969531e02324e68b16df597bb9ec175ce39bd9f88f4153aeae06c73",
+      "bytes": 3047
+    }
+  ],
+  "baseline": {
+    "receipt": {
+      "path": "/tmp/incant-output-web-baseline.log",
+      "sha256": "b94c18620ad327972a3b9f9a4bf4ca2b1a50b70be425b7678e591c308e1c5065",
+      "bytes": 323795
+    },
+    "check_receipt": {
+      "path": "/tmp/incant-output-web-check.log",
+      "sha256": "937750d186011ed80f3b4277b21c123aa1090837ef2ffc2a0f42afec7af38228",
+      "bytes": 327172
+    },
+    "ordered_errors": 163,
+    "error_codes": {
+      "E0277": 145,
+      "E0599": 6,
+      "E0609": 12
+    }
+  },
+  "validation": [
+    {
+      "command": "CARGO_TARGET_DIR=/tmp/incant-agent-native-target ./tools/cargo check --offline --locked --profile ci -j2 -p incant_render --lib --target wasm32-unknown-unknown",
+      "log": "/tmp/incant-web-renderer-wasm-002.log",
+      "result": "pass",
+      "log_receipt": {
+        "path": "/tmp/incant-web-renderer-wasm-002.log",
+        "sha256": "0c3d90c8b3b13c5cda1b60c2de7c4d26aa122f9b3cbb1aace1b5aae259214623",
+        "bytes": 180
+      }
+    },
+    {
+      "command": "CARGO_TARGET_DIR=/tmp/incant-agent-native-target ./tools/cargo test --offline --locked --profile ci -j2 -p incant_render --lib",
+      "log": "/tmp/incant-web-renderer-native-tests-002.log",
+      "result": "36 passed, 18 GPU ignored",
+      "log_receipt": {
+        "path": "/tmp/incant-web-renderer-native-tests-002.log",
+        "sha256": "2231fe70ce65c8cc0e9cdf325dd0359ea5df3f9931260cf56984547ed63ac555",
+        "bytes": 6958
+      }
+    },
+    {
+      "command": "CARGO_TARGET_DIR=/tmp/incant-agent-native-target ./tools/cargo clippy --offline --locked --profile ci -j2 -p incant_render --all-targets -- -D warnings",
+      "log": "/tmp/incant-web-renderer-clippy-002.log",
+      "result": "pass",
+      "log_receipt": {
+        "path": "/tmp/incant-web-renderer-clippy-002.log",
+        "sha256": "a390844b556b541af0f1bf4f9b6faaac5911cbbd3ed876f0cdfeb46c0ab8b906",
+        "bytes": 180
+      }
+    },
+    {
+      "command": "./tools/cargo fmt --all --check",
+      "log": "/tmp/incant-web-renderer-fmt-002.log",
+      "result": "pass",
+      "log_receipt": {
+        "path": "/tmp/incant-web-renderer-fmt-002.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "command": "python3 -m unittest tools.tests.test_release_policy tools.tests.test_npm_cache",
+      "log": "/tmp/incant-web-renderer-policy-001.log",
+      "result": "12 passed",
+      "log_receipt": {
+        "path": "/tmp/incant-web-renderer-policy-001.log",
+        "sha256": "8dae5a844c9aab4174cceffa97f5dea2988c03b530703e6a4081ae6757bc13c8",
+        "bytes": 111
+      }
+    },
+    {
+      "command": "/tmp/incant-actionlint/actionlint .github/workflows/nightly.yml",
+      "log": "/tmp/incant-web-renderer-actionlint-001.log",
+      "result": "pass",
+      "log_receipt": {
+        "path": "/tmp/incant-web-renderer-actionlint-001.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    }
+  ],
+  "negative_thread_assertion": {
+    "command": [
+      "./tools/cargo",
+      "check",
+      "--offline",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_render",
+      "--lib",
+      "--target",
+      "wasm32-unknown-unknown"
+    ],
+    "cwd": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+    "target": "/tmp/incant-agent-native-target",
+    "input_sha256": "7169d54f62361c0a8f6b47918b37575e172a8fc3e51779276125155bbca2326c",
+    "mutated_sha256": "1349f493f79975896d201c28e79287457dde488731d9bec9b9b7f4d03f3e449c",
+    "mutation": "erase only wasm graph Rc thread-confinement marker; retain negative type assertions",
+    "exit_code": 101,
+    "error_codes": [
+      "E0283",
+      "E0283"
+    ],
+    "log_sha256": "3570f1d993cbc417e0503c08cd4cabbecbd960a0d183ad75bafd69d9ef1c1c0a",
+    "restored_sha256": "7169d54f62361c0a8f6b47918b37575e172a8fc3e51779276125155bbca2326c"
+  },
+  "negative_receipt": {
+    "path": "/tmp/incant-web-renderer-thread-assertion-002.json",
+    "sha256": "de3b8be15ff17cb48eae51409287860b4d78e7cfe78f52dee099e6b63efd6abc",
+    "bytes": 859
+  },
+  "historical_logs": [
+    {
+      "path": "/tmp/incant-web-renderer-wasm-001.log",
+      "sha256": "18d1721c825f3cbd8a75d74a6e16d7d399d7a31d60c70426f39c0c4b7c1a4c86",
+      "bytes": 2528
+    },
+    {
+      "path": "/tmp/incant-web-renderer-native-tests-001.log",
+      "sha256": "047e07b659a474f1cd98f2d14f62d6adcd4cb105af057bedcd2c05f2a5a75e38",
+      "bytes": 10451
+    },
+    {
+      "path": "/tmp/incant-web-renderer-thread-assertion-001.log",
+      "sha256": "3570f1d993cbc417e0503c08cd4cabbecbd960a0d183ad75bafd69d9ef1c1c0a",
+      "bytes": 1585
+    },
+    {
+      "path": "/tmp/incant-web-renderer-thread-assertion-001.json",
+      "sha256": "90fee191d3efe969ca03562f531596992833f862e66bbc6f5acc09e707fff6e4",
+      "bytes": 859
+    },
+    {
+      "path": "/tmp/incant-web-renderer-clippy-001.log",
+      "sha256": "e9e8e0655e167f42144ea286d1786f39368e49e7f6521d1fd8bf118fd634d538",
+      "bytes": 6727
+    }
+  ],
+  "historical_failure": "First all-target Clippy auto-discovered module test .rs files as independent integration crates. Relocated those unchanged tests into module directories, then all-target Clippy and final library tests passed.",
+  "primary_pinned_sources": [
+    {
+      "path": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_ecs-0.19.1/src/world/mod.rs",
+      "sha256": "34963c05abcc51517c1db6cf1a3e1f90ae365409f75a9ceb54d6a892505681b6",
+      "bytes": 187079
+    },
+    {
+      "path": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_ecs-0.19.1/src/change_detection/params.rs",
+      "sha256": "47dbdd5078700d7ed394bbbfda029fadcd11a101e71c07876247e8d51e3df065",
+      "bytes": 49307
+    },
+    {
+      "path": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wgpu-29.0.4/src/api/device.rs",
+      "sha256": "e79012fa7e520c9a87a25c3779e4d279d18090c8784a57d76673830a5d81e260",
+      "bytes": 32771
+    },
+    {
+      "path": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wgpu-29.0.4/src/backend/webgpu.rs",
+      "sha256": "9a8b7bbfd9208fde3b2a1d7ae4b5609f9d5de266e70b172516bb728566282fa3",
+      "bytes": 150527
+    }
+  ],
+  "actionlint": {
+    "version": "1.7.12",
+    "receipt": {
+      "path": "/tmp/incant-actionlint/actionlint",
+      "sha256": "8db11704dc296f096216db4db65d86cd7f0ebfdf4c38453a1da276b137b88388",
+      "bytes": 5829842
+    }
+  },
+  "preserved": [
+    "native Resource/Res/ResMut and typed wgpu error source",
+    "shared Send+Sync boxed error boundary",
+    "same pass ordering and serial encoder",
+    "frame-handle cleanup",
+    "pinned dependency resolutions",
+    "shader math and output appearance"
+  ],
+  "limitations": [
+    "No browser/GPU/window execution or screenshot",
+    "No rendering acceptance or device/performance claim",
+    "No unsafe Send/Sync or fragile wgpu threading feature",
+    "No editor/runtime-checkpoint changes",
+    "CookedOutput additive error arm belongs to a separate frozen change and must be preserved at integration"
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "recorded_at": "2026-10-11T22:54:15.964751+00:00",
+  "base": "8bd9a96a0b88fda327c7ce5552d75c9a9a2fe461",
+  "tested_head": "c8f6ce18501fd78cf2840b241d305a872c0c43eb",
+  "reviewed_source": "593d0a0dc089f0230aeabd658eb20e4d5172cbda",
+  "root_review_sha256": "5e5f6b03ff96b1b98def44f6217b3cfb55da31a32fba7b172289f8374dab42ed",
+  "source_and_original_evidence_unchanged": [
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.github/workflows/nightly.yml",
+      "relative_path": ".github/workflows/nightly.yml",
+      "sha256": "8756c2561de02546d7ab28e3baf8d68c417b36006281fe4bba29100036fb41a8"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/crates/incant_render/src/graph.rs",
+      "relative_path": "crates/incant_render/src/graph.rs",
+      "sha256": "7169d54f62361c0a8f6b47918b37575e172a8fc3e51779276125155bbca2326c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/crates/incant_render/src/lib.rs",
+      "relative_path": "crates/incant_render/src/lib.rs",
+      "sha256": "959f30c94891fc62a235867bdbbb44098755525582224c83b0b5f11744df3b4b"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/crates/incant_render/src/resource_error.rs",
+      "relative_path": "crates/incant_render/src/resource_error.rs",
+      "sha256": "2d84db5a39b3aa6259b9379bf0003f34c10e33c7f4ee21427de79bbedd28406d"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/crates/incant_render/src/web_error.rs",
+      "relative_path": "crates/incant_render/src/web_error.rs",
+      "sha256": "db7421e60b304e4fc97ec2ea076febb6b135a3a37f873ed5ea183ca68fe99581"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/crates/incant_render/tests/frame_graph/mod.rs",
+      "relative_path": "crates/incant_render/tests/frame_graph/mod.rs",
+      "sha256": "5934368e1cbba74f1bef1b0fc10e33f81a97448b998add275bc9809898201d1b"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/crates/incant_render/tests/graph_ownership/mod.rs",
+      "relative_path": "crates/incant_render/tests/graph_ownership/mod.rs",
+      "sha256": "aec68fde9f5e3411d17e93b565a9dd292dc2b4e6f8c61334ec1e12c09c90144b"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/crates/incant_render/tests/web_error/mod.rs",
+      "relative_path": "crates/incant_render/tests/web_error/mod.rs",
+      "sha256": "9ebb34798969531e02324e68b16df597bb9ec175ce39bd9f88f4153aeae06c73"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/docs/spikes/evidence/web-renderer-portability.json",
+      "relative_path": "docs/spikes/evidence/web-renderer-portability.json",
+      "sha256": "220642e840331b396c21274f997f8f8b8a21a7caa6f696ca153b4946d60c6028"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/docs/spikes/web-renderer-portability.md",
+      "relative_path": "docs/spikes/web-renderer-portability.md",
+      "sha256": "8a97e1091a9724344cc9262852887421d0188d253838aaa265b48c244abd25d1"
+    }
+  ],
+  "merge_conflicts": [],
+  "validation": {
+    "actual_default_wasm32_library": "pass",
+    "native_cpu_tests_passed": 36,
+    "native_gpu_tests_ignored": 18,
+    "native_all_target_clippy": "pass",
+    "policy_tests_passed": 12,
+    "fmt_actionlint_conventions": "pass",
+    "logs": {
+      "wasm": {
+        "path": "/tmp/incant-web-main102-wasm.log",
+        "sha256": "1ba3d25298f7f4713ca8894be27638242dc2404b80192c3a8136421400b4a045"
+      },
+      "tests": {
+        "path": "/tmp/incant-web-main102-tests.log",
+        "sha256": "b7eb7a98d2448d1ff92849ca292125afd0cafc3e290d436e0577b4a37b09be1f"
+      },
+      "clippy": {
+        "path": "/tmp/incant-web-main102-clippy.log",
+        "sha256": "23aee2908e58ffcbc6882bdc2e97c7c0a1a110327c777de633a97157d6f757eb"
+      },
+      "policy": {
+        "path": "/tmp/incant-web-main102-policy.log",
+        "sha256": "ba8356e020efaaac2b3c745912c4abaa73524c64e89bfacbffd67f6fcb756b1b"
+      },
+      "actionlint": {
+        "path": "/tmp/incant-web-main102-actionlint.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conventions": {
+        "path": "/tmp/incant-web-main102-conventions.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "fmt": {
+        "path": "/tmp/incant-web-main102-fmt.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "handles_reaped": [
+    39564,
+    84182
+  ],
+  "limits": [
+    "No browser/GPU/window or physical-device execution",
+    "No runtime shader/pixel/appearance change",
+    "No new required context; one library check in existing release-only web job",
+    "Separate optional cooked-output shader implementation is not part of this PR"
+  ]
+}
