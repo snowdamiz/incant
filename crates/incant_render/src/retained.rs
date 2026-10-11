@@ -20,6 +20,7 @@ struct NodeBinding {
     light: Option<SceneLight>,
     mesh: Option<(AssetVersionId, bool)>,
     sprite: Option<(AssetVersionId, incant_2d::SpriteRenderer)>,
+    tilemap: Option<Arc<incant_render_data::TilemapInput>>,
 }
 /// Private double staging prevents callers from keeping an unsubmitted command
 /// buffer or a scene snapshot that aliases mutable instance/light resources.
@@ -62,6 +63,7 @@ impl Renderer {
             .with_camera(camera)?;
         let mut staging_plan = crate::scene::resolve(input)?;
         staging_plan.sprites.clear();
+        staging_plan.tilemaps.clear();
         let mut staging = self.upload_scene(staging_plan, true)?.with_camera(camera)?;
         staging.sprites = live
             .sprites
@@ -90,6 +92,7 @@ impl Renderer {
                         .sprite
                         .as_ref()
                         .map(|s| (s.source.version_id(), s.sprite.clone())),
+                    tilemap: n.tilemap.clone(),
                     mesh: n
                         .mesh
                         .as_ref()
@@ -136,6 +139,11 @@ impl RetainedScene {
                     .as_ref()
                     .map(|s| (s.source.version_id(), &s.sprite))
                     != binding.sprite.as_ref().map(|(id, s)| (*id, s))
+                || match (&node.tilemap, &binding.tilemap) {
+                    (Some(a), Some(b)) => !Arc::ptr_eq(a, b),
+                    (None, None) => false,
+                    _ => true,
+                }
                 || node.diagnostic
             {
                 return Err(SceneError::Input(
@@ -269,3 +277,7 @@ mod native_tests;
 #[cfg(test)]
 #[path = "retained_sprite_tests.rs"]
 mod sprite_tests;
+
+#[cfg(test)]
+#[path = "retained_tilemap_tests.rs"]
+mod tilemap_tests;

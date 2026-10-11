@@ -6,6 +6,14 @@ rust-version.workspace = true
 publish.workspace = true
 
 [dependencies]
+incant_cook = { path = "../incant_cook", default-features = false, features = ["scene"] }
+incant_script.workspace = true
+incant_runtime.workspace = true
+incant_game_runtime = { path = "../incant_game_runtime" }
+incant_audio_runtime = { workspace = true, features = ["scene"] }
+incant_render_game = { path = "../incant_render_game" }
+ulid.workspace = true
+incant_observe = { path = "../incant_observe" }
 incant_render_authoring.workspace = true
 serde = { workspace = true }
 serde_json = { workspace = true }
@@ -28,3 +36,6 @@ incant_render = { path = "../incant_render" }
 base64 = "0.22"
 schemars = { workspace = true }
 thiserror = { workspace = true }
+
+[build-dependencies]
+incant_cook = { path = "../incant_cook", default-features = false, features = ["script"] }

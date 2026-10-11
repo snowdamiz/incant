@@ -1,0 +1,1415 @@
+{
+  "source_commit": "4e421f01d6a07c1c2d5adcca53ce20b0fbfe00b2",
+  "base_pr": 76,
+  "ordinary_tests": 601,
+  "ignored_gpu_tests_not_rerun_locally": 66,
+  "python_tests": 88,
+  "native_cli_tests": 8,
+  "coordinator_tests": 2,
+  "review": {
+    "reviewer": "Astra extra-high windowing_correctness",
+    "findings": [],
+    "reviewed_files_unchanged": [
+      "tools/native_play.py",
+      "crates/incant_headless/src/native_play.rs",
+      "crates/incant_cook/src/build_script.rs",
+      "crates/incant_observe/src/lib.rs",
+      "crates/incant_headless/tests/native_play.rs",
+      "tools/probes/native-project-play.py"
+    ],
+    "later_delta": "Exact reviewed PR76 ancestry automatically merged; two coordinator regression tests added."
+  },
+  "proofs": {
+    "native_project": {
+      "passed": true,
+      "successful_runs": 3,
+      "false_assertion_runs": 1,
+      "terminal_failure_runs": 1,
+      "mismatched_script_runs": 1,
+      "player_sha256": "f50f1420112ac0698efe2a940d58835d39816198012f041d8a3044e244a987fd",
+      "source_sha256": "6246d3118b54ab10f4804fc26b91db6f78f543cdffbd92d638bbb9e0c77ccc0f",
+      "temporary_compile_input_deleted": true,
+      "authoring_unchanged": true,
+      "baseline": {
+        "passed": true,
+        "runtime": "native",
+        "script_source_sha256": "6246d3118b54ab10f4804fc26b91db6f78f543cdffbd92d638bbb9e0c77ccc0f",
+        "script_source_parsing": false,
+        "scene": "01M4MHZNPKASKRPAPP2TN74GYJ",
+        "tick": 5,
+        "tick_rate": 60,
+        "entity_count": 1,
+        "frames": 4000,
+        "pcm_sha256": "0c92bddb4e96f3ea9ec9f0f64a668255a6c15527ac09f6f119cafde60c7c4a39",
+        "logs": {
+          "dropped": 0,
+          "entries": [
+            {
+              "level": "info",
+              "message": "accepted 1 \ud83d\ude80",
+              "tick": 1
+            },
+            {
+              "level": "info",
+              "message": "accepted 2 \ud83d\ude80",
+              "tick": 2
+            },
+            {
+              "level": "info",
+              "message": "accepted 3 \ud83d\ude80",
+              "tick": 3
+            },
+            {
+              "level": "info",
+              "message": "accepted 4 \ud83d\ude80",
+              "tick": 4
+            },
+            {
+              "level": "info",
+              "message": "accepted 5 \ud83d\ude80",
+              "tick": 5
+            }
+          ]
+        },
+        "observations": {
+          "passed": true,
+          "tick": 5,
+          "tick_rate": 60,
+          "checks": [
+            {
+              "name": "motion",
+              "tick": 5,
+              "expect": {
+                "type": "vector",
+                "entity": "00000000000000000000000001",
+                "property": "translation",
+                "value": [
+                  0.23333333333333334,
+                  0.0,
+                  0.0
+                ],
+                "tolerance": 1e-10
+              },
+              "passed": true,
+              "actual": [
+                0.23333333333333334,
+                0.0,
+                0.0
+              ]
+            }
+          ],
+          "entities": {
+            "00000000000000000000000001": {
+              "parent": null,
+              "translation": [
+                0.23333333333333334,
+                0.0,
+                0.0
+              ],
+              "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "velocity": [
+                3.0,
+                0.0,
+                0.0
+              ],
+              "world_transform": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                [
+                  0.23333333333333334,
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            }
+          }
+        },
+        "cpu_render_input": false,
+        "gpu_submitted": false,
+        "project_sha256": "b9d902c954f2996188f3cf6583a8a266573c8e0a1e988b20ca79e04f2b4c22db"
+      },
+      "shipping_profile": false,
+      "gpu_submitted": false,
+      "reference_phone_gate": false
+    },
+    "shipping_player": {
+      "passed": true,
+      "target": "aarch64-apple-darwin",
+      "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+      "codegen": {
+        "incant_render_game": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort"
+        },
+        "incant_render_native": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort"
+        },
+        "incant_render_data": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort"
+        },
+        "incant_input": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort"
+        },
+        "incant_script": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort"
+        },
+        "incant_runtime": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort"
+        },
+        "incant_physics_runtime": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort"
+        },
+        "rapier3d": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort"
+        },
+        "incant_assets_runtime": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort"
+        },
+        "incant_audio_runtime": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort"
+        },
+        "incant_game_runtime": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort"
+        },
+        "incant_game_player": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort",
+          "lto": "fat",
+          "debuginfo": "2",
+          "split-debuginfo": "packed"
+        }
+      },
+      "symbol_identity": {
+        "format": "Mach-O/dSYM",
+        "uuids": {
+          "arm64": "f609646a-4e5f-3912-a293-c59c6b7b930d"
+        }
+      },
+      "player_bytes": 4703536,
+      "player_sha256": "be767c2b0f61f16aea92165d5c38563bf777c14e7ac9ea5ce1d7c2b876eb2c36",
+      "script_metadata": {
+        "build_id": "367f4237753ac6efe4c1ffbb58e9d19e871176dbb1f37837d08c7f37d04a5553",
+        "bytecode_bytes": 3330,
+        "bytecode_sha256": "2e6aeb2ec0e038233aa014b704019c0db4630c47ae31db2fed6c5b5861009bdd",
+        "debug_line_tables": true,
+        "embedded_source": false,
+        "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+        "format": 1,
+        "hardening_sha256": "4a2d87348651fab15d47582cce2fba82058255ddb2a2a29386db7705bea1cb23",
+        "source_map_sha256": null,
+        "source_name": "embedded-game.js",
+        "source_sha256": "83f9d115a14c90e8f2258830dd06f3f95a86db7ef197910dc9a267312d8386fc",
+        "symbolication": "map CommonJS locations after subtracting wrapper_prefix_lines; automatic runtime stack remapping remains unsupported",
+        "target": "aarch64-apple-darwin",
+        "trust": "fresh compiler output embedded by trusted native build; hashes are not authentication",
+        "wrapper_prefix_lines": 3
+      },
+      "source_compiler_symbols_absent": true,
+      "dynamic_source_routes_rejected": true,
+      "headless_sha256": "53aa002cd11203beb893ca9c79c1aca348b871921be70348c7bebb0355a0e387",
+      "cook_sha256": "e90fb9bbce8c6411fbd643a9ce7d03ba544f74a73dcc137c8f9e445004934655",
+      "audio_example_sha256": "1d7373c81246c89f69cd158e44955d76cd54cb1f58a60c43e9b2de2133b104c3",
+      "fixture_tool_sha256": "8156ec68f793865130deb410fe1df360fdd6696270dc1a87bb512638775a5b44",
+      "public_import": {
+        "asset": {
+          "id": "01M4MJ1GJQBBJ86KHBMNQM6SNS",
+          "kind": "audio",
+          "name": "tone",
+          "path": "tone.wav",
+          "sha256": "4a24dd0240956f6ad00cd68d2f816e25f6662a170b6a0a92ae86a0a10aa5176e"
+        },
+        "cache_hit": false,
+        "changed": true,
+        "details": {
+          "channels": 2,
+          "dependencies": [
+            {
+              "path": "tone.wav",
+              "sha256": "59aca4ec1400bba63489f30c73a82fb29e82c83a923fcb468fa1ba0176dab6e3"
+            }
+          ],
+          "duration_seconds": 0.5,
+          "frames": 24000,
+          "sample_rate": 48000
+        },
+        "revision": 1
+      },
+      "public_model_import": {
+        "asset": {
+          "id": "01M4MJ1GKDGX1YJR0DX7V9WJM1",
+          "kind": "model",
+          "name": "tri",
+          "path": "tri.gltf",
+          "sha256": "eee5c6bca733d77735113773adbddd0eca28e08f96dd6c2d5a767be3321c00a4"
+        },
+        "cache_hit": false,
+        "changed": true,
+        "details": {
+          "dependencies": [
+            {
+              "path": "tri.bin",
+              "sha256": "d8b87038ed2ace74ed183166f6b0a541eab77f7184d50e65edc4bca5ccb5445a"
+            },
+            {
+              "path": "tri.gltf",
+              "sha256": "34ef92ca7a431a27baf00c0291a5d30027cdf03e4e5243adc0a38ea8c863d722"
+            }
+          ],
+          "meshes": 1,
+          "textures": 0,
+          "vertices": 3
+        },
+        "revision": 2
+      },
+      "public_atlas_import": null,
+      "cpu_render_input": true,
+      "gpu_submitted": false,
+      "on_screen_presentation": false,
+      "gpu_build_cpu_mode_preserved": false,
+      "sprite_cpu_mode_preserved": false,
+      "project_hash_before_delete": "58f89ff1d1e089669a8071747aaca904fcd10a86d8b2ce2cdf25da4ddca7954a",
+      "authoring_and_build_storage_deleted": true,
+      "removed_scope": "authoring project/WAV/glTF/bin/PNG/atlas/journal/script source and fresh Cargo storage",
+      "retained_runtime_inputs": [
+        "binary scenes",
+        "clips.bin",
+        "cooked PCM/manifests",
+        "startup input.json/actions.json",
+        "cooked model payloads/manifests"
+      ],
+      "native_logs": {
+        "passed": true,
+        "retention_controls": [
+          {
+            "mode": "log_count",
+            "retained": 1024,
+            "dropped": 6656,
+            "pcm_sha256": "3822063f9e3b291d4bc8ab543e16bd09900c3ea82082b0181e5369fdd781ef58"
+          },
+          {
+            "mode": "log_bytes",
+            "retained": 256,
+            "dropped": 1664,
+            "pcm_sha256": "3822063f9e3b291d4bc8ab543e16bd09900c3ea82082b0181e5369fdd781ef58"
+          }
+        ],
+        "invalid_update_controls": 4,
+        "json_serialization": "once at completed game report, never per tick"
+      },
+      "native_observations": {
+        "passed": true,
+        "success_processes": 2,
+        "completed_false_processes": 2,
+        "startup_refusals": 9,
+        "terminal_failure_processes": 1,
+        "report": {
+          "checks": [
+            {
+              "actual": 4,
+              "expect": {
+                "type": "entity_count",
+                "value": 4
+              },
+              "name": "startup count",
+              "passed": true,
+              "tick": 0
+            },
+            {
+              "actual": [
+                -3.0,
+                0.0,
+                0.0
+              ],
+              "expect": {
+                "entity": "00000000000000000000000001",
+                "property": "translation",
+                "tolerance": 0.001,
+                "type": "vector",
+                "value": [
+                  -3.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "name": "startup position",
+              "passed": true,
+              "tick": 0
+            },
+            {
+              "actual": [
+                3.0,
+                0.0,
+                0.0
+              ],
+              "expect": {
+                "entity": "00000000000000000000000001",
+                "property": "velocity",
+                "tolerance": 0.001,
+                "type": "vector",
+                "value": [
+                  3.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "name": "accepted script velocity",
+              "passed": true,
+              "tick": 1
+            },
+            {
+              "actual": [
+                -3.0,
+                0.0,
+                0.0
+              ],
+              "expect": {
+                "entity": "00000000000000000000000001",
+                "property": "translation",
+                "tolerance": 0.001,
+                "type": "vector",
+                "value": [
+                  -3.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "name": "first position precedes scripted velocity",
+              "passed": true,
+              "tick": 1
+            },
+            {
+              "actual": {
+                "active": true,
+                "kind": "button",
+                "pressed": true,
+                "released": false,
+                "value": [
+                  1.0,
+                  0.0
+                ]
+              },
+              "expect": {
+                "active": true,
+                "name": "right",
+                "pressed": true,
+                "type": "action"
+              },
+              "name": "press edge",
+              "passed": true,
+              "tick": 1
+            },
+            {
+              "actual": {
+                "active": true,
+                "kind": "button",
+                "pressed": false,
+                "released": false,
+                "value": [
+                  1.0,
+                  0.0
+                ]
+              },
+              "expect": {
+                "active": true,
+                "name": "right",
+                "pressed": false,
+                "type": "action"
+              },
+              "name": "held without repeated edge",
+              "passed": true,
+              "tick": 2
+            },
+            {
+              "actual": false,
+              "expect": {
+                "entity": "00000000000000000000000009",
+                "type": "exists",
+                "value": false
+              },
+              "name": "explicit missing entity",
+              "passed": true,
+              "tick": 120
+            },
+            {
+              "actual": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ],
+              "expect": {
+                "entity": "00000000000000000000000001",
+                "property": "world_translation",
+                "tolerance": 0.001,
+                "type": "vector",
+                "value": [
+                  2.95,
+                  0.0,
+                  0.0
+                ]
+              },
+              "name": "final committed world",
+              "passed": true,
+              "tick": 120
+            },
+            {
+              "actual": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ],
+              "expect": {
+                "entity": "00000000000000000000000001",
+                "property": "physics_translation",
+                "tolerance": 0.001,
+                "type": "vector",
+                "value": [
+                  2.95,
+                  0.0,
+                  0.0
+                ]
+              },
+              "name": "final solver position",
+              "passed": true,
+              "tick": 120
+            },
+            {
+              "actual": [
+                3.0,
+                0.0,
+                0.0
+              ],
+              "expect": {
+                "entity": "00000000000000000000000001",
+                "property": "physics_velocity",
+                "tolerance": 0.001,
+                "type": "vector",
+                "value": [
+                  3.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "name": "final solver velocity",
+              "passed": true,
+              "tick": 120
+            }
+          ],
+          "entities": {
+            "00000000000000000000000001": {
+              "parent": null,
+              "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "translation": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ],
+              "velocity": [
+                3.0,
+                0.0,
+                0.0
+              ],
+              "world_transform": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                [
+                  2.9500136375427246,
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            },
+            "00000000000000000000000009": null
+          },
+          "passed": true,
+          "tick": 120,
+          "tick_rate": 60
+        },
+        "count_failure": {
+          "checks": [
+            {
+              "actual": 4,
+              "expect": {
+                "type": "entity_count",
+                "value": 5
+              },
+              "name": "startup count",
+              "passed": false,
+              "tick": 0
+            },
+            {
+              "actual": [
+                -3.0,
+                0.0,
+                0.0
+              ],
+              "expect": {
+                "entity": "00000000000000000000000001",
+                "property": "translation",
+                "tolerance": 0.001,
+                "type": "vector",
+                "value": [
+                  -3.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "name": "startup position",
+              "passed": true,
+              "tick": 0
+            },
+            {
+              "actual": [
+                3.0,
+                0.0,
+                0.0
+              ],
+              "expect": {
+                "entity": "00000000000000000000000001",
+                "property": "velocity",
+                "tolerance": 0.001,
+                "type": "vector",
+                "value": [
+                  3.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "name": "accepted script velocity",
+              "passed": true,
+              "tick": 1
+            },
+            {
+              "actual": [
+                -3.0,
+                0.0,
+                0.0
+              ],
+              "expect": {
+                "entity": "00000000000000000000000001",
+                "property": "translation",
+                "tolerance": 0.001,
+                "type": "vector",
+                "value": [
+                  -3.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "name": "first position precedes scripted velocity",
+              "passed": true,
+              "tick": 1
+            },
+            {
+              "actual": {
+                "active": true,
+                "kind": "button",
+                "pressed": true,
+                "released": false,
+                "value": [
+                  1.0,
+                  0.0
+                ]
+              },
+              "expect": {
+                "active": true,
+                "name": "right",
+                "pressed": true,
+                "type": "action"
+              },
+              "name": "press edge",
+              "passed": true,
+              "tick": 1
+            },
+            {
+              "actual": {
+                "active": true,
+                "kind": "button",
+                "pressed": false,
+                "released": false,
+                "value": [
+                  1.0,
+                  0.0
+                ]
+              },
+              "expect": {
+                "active": true,
+                "name": "right",
+                "pressed": false,
+                "type": "action"
+              },
+              "name": "held without repeated edge",
+              "passed": true,
+              "tick": 2
+            },
+            {
+              "actual": false,
+              "expect": {
+                "entity": "00000000000000000000000009",
+                "type": "exists",
+                "value": false
+              },
+              "name": "explicit missing entity",
+              "passed": true,
+              "tick": 120
+            },
+            {
+              "actual": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ],
+              "expect": {
+                "entity": "00000000000000000000000001",
+                "property": "world_translation",
+                "tolerance": 0.001,
+                "type": "vector",
+                "value": [
+                  2.95,
+                  0.0,
+                  0.0
+                ]
+              },
+              "name": "final committed world",
+              "passed": true,
+              "tick": 120
+            },
+            {
+              "actual": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ],
+              "expect": {
+                "entity": "00000000000000000000000001",
+                "property": "physics_translation",
+                "tolerance": 0.001,
+                "type": "vector",
+                "value": [
+                  2.95,
+                  0.0,
+                  0.0
+                ]
+              },
+              "name": "final solver position",
+              "passed": true,
+              "tick": 120
+            },
+            {
+              "actual": [
+                3.0,
+                0.0,
+                0.0
+              ],
+              "expect": {
+                "entity": "00000000000000000000000001",
+                "property": "physics_velocity",
+                "tolerance": 0.001,
+                "type": "vector",
+                "value": [
+                  3.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "name": "final solver velocity",
+              "passed": true,
+              "tick": 120
+            }
+          ],
+          "entities": {
+            "00000000000000000000000001": {
+              "parent": null,
+              "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "translation": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ],
+              "velocity": [
+                3.0,
+                0.0,
+                0.0
+              ],
+              "world_transform": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                [
+                  2.9500136375427246,
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            },
+            "00000000000000000000000009": null
+          },
+          "passed": false,
+          "tick": 120,
+          "tick_rate": 60
+        },
+        "missing_failure": {
+          "checks": [
+            {
+              "actual": null,
+              "expect": {
+                "entity": "00000000000000000000000002",
+                "property": "physics_velocity",
+                "tolerance": 0.0,
+                "type": "vector",
+                "value": [
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "name": "missing component",
+              "passed": false,
+              "tick": 120
+            }
+          ],
+          "entities": {
+            "00000000000000000000000001": {
+              "parent": null,
+              "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "translation": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ],
+              "velocity": [
+                3.0,
+                0.0,
+                0.0
+              ],
+              "world_transform": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                [
+                  2.9500136375427246,
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            },
+            "00000000000000000000000009": null
+          },
+          "passed": false,
+          "tick": 120,
+          "tick_rate": 60
+        }
+      },
+      "repeat_exact": true,
+      "recorded_ticks_per_process": 120,
+      "audio_processes": 8,
+      "results": [
+        {
+          "fixture": "static",
+          "rate": 44117,
+          "report": {
+            "frames": 88234,
+            "logs": {
+              "dropped": 0,
+              "entries": [
+                {
+                  "level": "info",
+                  "message": "Ready \u96ea\ud83d\ude42",
+                  "tick": 1
+                },
+                {
+                  "level": "warn",
+                  "message": "Finished",
+                  "tick": 120
+                }
+              ]
+            },
+            "pcm_sha256": "a4722ea4c42fa7e629e2bc7bd99127d45e2616383113d71bec57379b771c99c8",
+            "render_input": {
+              "binding_generation": 0,
+              "camera": "00000000000000000000000000000004",
+              "camera_position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "decoded_payload_bytes": 156,
+              "first_model_position": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ],
+              "first_sprite_position": null,
+              "gpu_submitted": false,
+              "mode": "cpu-only",
+              "model_count": 1,
+              "sprite_count": 0,
+              "tick": 120,
+              "topology_generation": 0
+            },
+            "sources": [
+              {
+                "id": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "physics": {
+                  "position": [
+                    2.9500136375427246,
+                    0.0,
+                    0.0
+                  ],
+                  "sleeping": false,
+                  "velocity": [
+                    3.0,
+                    0.0,
+                    0.0
+                  ]
+                },
+                "position": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ]
+              }
+            ],
+            "tick": 120
+          },
+          "rms": 0.0553028731136091,
+          "early_balance": 109.52215792219184,
+          "late_balance": -115.71745094939368
+        },
+        {
+          "fixture": "static",
+          "rate": 48000,
+          "report": {
+            "frames": 96000,
+            "logs": {
+              "dropped": 0,
+              "entries": [
+                {
+                  "level": "info",
+                  "message": "Ready \u96ea\ud83d\ude42",
+                  "tick": 1
+                },
+                {
+                  "level": "warn",
+                  "message": "Finished",
+                  "tick": 120
+                }
+              ]
+            },
+            "pcm_sha256": "3822063f9e3b291d4bc8ab543e16bd09900c3ea82082b0181e5369fdd781ef58",
+            "render_input": {
+              "binding_generation": 0,
+              "camera": "00000000000000000000000000000004",
+              "camera_position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "decoded_payload_bytes": 156,
+              "first_model_position": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ],
+              "first_sprite_position": null,
+              "gpu_submitted": false,
+              "mode": "cpu-only",
+              "model_count": 1,
+              "sprite_count": 0,
+              "tick": 120,
+              "topology_generation": 0
+            },
+            "sources": [
+              {
+                "id": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "physics": {
+                  "position": [
+                    2.9500136375427246,
+                    0.0,
+                    0.0
+                  ],
+                  "sleeping": false,
+                  "velocity": [
+                    3.0,
+                    0.0,
+                    0.0
+                  ]
+                },
+                "position": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ]
+              }
+            ],
+            "tick": 120
+          },
+          "rms": 0.055305097447639784,
+          "early_balance": 108.70557752668313,
+          "late_balance": -114.8314969751412
+        },
+        {
+          "fixture": "stream",
+          "rate": 44117,
+          "report": {
+            "frames": 88234,
+            "logs": {
+              "dropped": 0,
+              "entries": [
+                {
+                  "level": "info",
+                  "message": "Ready \u96ea\ud83d\ude42",
+                  "tick": 1
+                },
+                {
+                  "level": "warn",
+                  "message": "Finished",
+                  "tick": 120
+                }
+              ]
+            },
+            "pcm_sha256": "5da6b39c9fac3c7dd96db9434a8e9879d101c7901398a23b90de5b5587a04e26",
+            "render_input": {
+              "binding_generation": 0,
+              "camera": "00000000000000000000000000000004",
+              "camera_position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "decoded_payload_bytes": 156,
+              "first_model_position": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ],
+              "first_sprite_position": null,
+              "gpu_submitted": false,
+              "mode": "cpu-only",
+              "model_count": 1,
+              "sprite_count": 0,
+              "tick": 120,
+              "topology_generation": 0
+            },
+            "sources": [
+              {
+                "id": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "physics": {
+                  "position": [
+                    2.9500136375427246,
+                    0.0,
+                    0.0
+                  ],
+                  "sleeping": false,
+                  "velocity": [
+                    3.0,
+                    0.0,
+                    0.0
+                  ]
+                },
+                "position": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ]
+              }
+            ],
+            "tick": 120
+          },
+          "rms": 0.05530287311397527,
+          "early_balance": 109.52215791799678,
+          "late_balance": -115.7174509755776
+        },
+        {
+          "fixture": "stream",
+          "rate": 48000,
+          "report": {
+            "frames": 96000,
+            "logs": {
+              "dropped": 0,
+              "entries": [
+                {
+                  "level": "info",
+                  "message": "Ready \u96ea\ud83d\ude42",
+                  "tick": 1
+                },
+                {
+                  "level": "warn",
+                  "message": "Finished",
+                  "tick": 120
+                }
+              ]
+            },
+            "pcm_sha256": "3822063f9e3b291d4bc8ab543e16bd09900c3ea82082b0181e5369fdd781ef58",
+            "render_input": {
+              "binding_generation": 0,
+              "camera": "00000000000000000000000000000004",
+              "camera_position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "decoded_payload_bytes": 156,
+              "first_model_position": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ],
+              "first_sprite_position": null,
+              "gpu_submitted": false,
+              "mode": "cpu-only",
+              "model_count": 1,
+              "sprite_count": 0,
+              "tick": 120,
+              "topology_generation": 0
+            },
+            "sources": [
+              {
+                "id": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "physics": {
+                  "position": [
+                    2.9500136375427246,
+                    0.0,
+                    0.0
+                  ],
+                  "sleeping": false,
+                  "velocity": [
+                    3.0,
+                    0.0,
+                    0.0
+                  ]
+                },
+                "position": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ]
+              }
+            ],
+            "tick": 120
+          },
+          "rms": 0.055305097447639784,
+          "early_balance": 108.70557752668313,
+          "late_balance": -114.8314969751412
+        }
+      ],
+      "rejected": [
+        "accepted-script-failure",
+        "wrong-recording-clock",
+        "invalid-input-packet",
+        "wrong-clip-fingerprint",
+        "unknown-cooked-version",
+        "oversized-startup-actions",
+        "manual-input-route",
+        "incant_game_player-camera-only",
+        "native_scene_audio-camera-only",
+        "incant_game_player-manifest-only",
+        "native_scene_audio-manifest-only",
+        "late-camera-removal",
+        "feature-default-stays-strict",
+        "missing-model-cache",
+        "missing-camera",
+        "malformed-camera",
+        "observation-format",
+        "observation-version",
+        "observation-extra",
+        "observation-duplicate-entities",
+        "observation-noncanonical-id",
+        "observation-beyond-end",
+        "observation-excess-checks",
+        "observation-oversized",
+        "observation-duplicate-option",
+        "observation-terminal-failure",
+        "log_invalid",
+        "log_message",
+        "log_calls",
+        "log_total"
+      ],
+      "spatial_refusals": [
+        {
+          "player": "incant_game_player",
+          "fixture": "camera-only"
+        },
+        {
+          "player": "native_scene_audio",
+          "fixture": "camera-only"
+        },
+        {
+          "player": "incant_game_player",
+          "fixture": "manifest-only"
+        },
+        {
+          "player": "native_scene_audio",
+          "fixture": "manifest-only"
+        }
+      ],
+      "plain_v1_controls": 2,
+      "existing_output_preserved": true,
+      "size_delta_from_audio_host_2885984": 1817552,
+      "size_delta_from_physics_script_player_3941816": 761720,
+      "size_comparison_scope": "whole executable graphs, not an isolated feature cost or performance gate",
+      "device_output": false,
+      "session_saves": false,
+      "phone_performance_gate": false,
+      "failure_semantics": "Invalid input/buffer retry is covered in host tests. Any failure after accepted simulation destroys composite state; device cursor is not rolled back. Simulation/host failure creates no output file; output I/O may leave a partial file."
+    }
+  },
+  "sources": {
+    "Cargo.lock": "8fdb6f4ceedabb70b2ed5cd5c1b6ceefa8083a53b3282ec3e0d9f25405392e56",
+    "crates/incant_cook/src/build_script.rs": "8a41075b7ada230a7bba3f27ca454203b80a390d425107af89d0d4b11b885d87",
+    "crates/incant_cook/src/lib.rs": "59e9c37fafd6521d4c58da3bb9f1cc9351440b5eb09515f15a9216e6033dae46",
+    "crates/incant_game_player/Cargo.toml": "633796e25a4c1c77df2b1c2305198092c80eb1a5794013fc0c102ceab90e47b8",
+    "crates/incant_game_player/build.rs": "6c210e2084bcd076b557af25a45f312fbdfe7cf25d05b4b193249739a3d04fc8",
+    "crates/incant_game_player/src/main.rs": "b008bca679d760e9152aea275f32d21bd2bb61b2e0dd89658dbfcb92b9611f17",
+    "crates/incant_game_player/src/observe.rs": "af01a29d072543e07025b14b8a0425b8af9e23a2f2dea5d30eb2ba2847145489",
+    "crates/incant_headless/Cargo.toml": "102e7cb45be95a1b14d3c6a798585593a9da66ed7bd1265e361928fa3f1193ac",
+    "crates/incant_headless/build.rs": "c17af258265178885b606966032ce8577f1173179d36ff0dbfce40486dba7aa3",
+    "crates/incant_headless/fixtures/native-play.js": "9c2a78df3c0ca8ff80cb58415e25faed5d82b74dd9e4e16b23e1020f18f3505c",
+    "crates/incant_headless/src/main.rs": "9ba373d298f83eeccca41ffc220bc30c7e784e13037380736add5d1ce46dbb3b",
+    "crates/incant_headless/src/native_play.rs": "4f234df1843049a645945936597e983e66efe8c4ee562f8e367e31485dccc3d2",
+    "crates/incant_headless/tests/native_play.rs": "df56d217196113e52000e9e84e9cf48f06ac8051be32c6edc85206f2f1f1f652",
+    "crates/incant_observe/Cargo.toml": "dfb130386d61bbd0edb8f8dd78fbc1a50b82ec7e7cc2dd83c458a79501ec74c3",
+    "crates/incant_observe/src/lib.rs": "621d82ce3524a9b4008dcb0654ed6aa9932cb2c0bc7e97581ea9bee539c12996",
+    "crates/incant_observe/src/tests.rs": "a3c05ea954a2f5576fb861aa47b69b6d2e9505b0be6e028412d53a52aa05cb81",
+    "tools/native_play.py": "46b41022441f26638b0f5d16f523b87d4d34e04a520f6c84f194d7a7fb38c3ad",
+    "tools/probes/native-project-play.py": "182675cdb0438e8a429357caf2daacc348d449d9dcface4545c6cfb771d1e954",
+    "tools/tests/test_native_play.py": "8a56bfa2b1cd351fca7ee77b4025a9e4eaf39fdbe5e40a507eab34b9d84a234e"
+  },
+  "logs": {
+    "tests": {
+      "path": "/tmp/incant-native-project-play-union-tests.log",
+      "sha256": "16e9b1eb317de3dd5af20889b44b1f171df2ab3b9b1eeca1b27f6d943266fdf5"
+    },
+    "clippy": {
+      "path": "/tmp/incant-native-project-play-union-clippy.log",
+      "sha256": "781a61210d5ebfd774ac8b0a26cbb94974a98d57cf1308655c122fe42c10f55c"
+    },
+    "gpu-clippy": {
+      "path": "/tmp/incant-native-project-play-union-gpu-clippy.log",
+      "sha256": "8a793f77b7cdd05b58446885f9770763eca4900438c3327a2edd03631be9a53b"
+    },
+    "tools": {
+      "path": "/tmp/incant-native-project-play-union-tools.log",
+      "sha256": "a2f9f7889e88ba38ddcfecdb5afc8516742ad9186965960a94adbbe4ac21b5ad"
+    },
+    "python": {
+      "path": "/tmp/incant-native-project-play-union-python.log",
+      "sha256": "377b74ad3ae3edafdda56ff82b2c9e29e9dd8c3a6a29d5f8ea80f49f28e403f9"
+    },
+    "graph": {
+      "path": "/tmp/incant-native-project-play-union-graph.log",
+      "sha256": "f9ef4382bc1df4971b24abd6a172a60b48f21b7967e0c4b4dc706bc710467454"
+    },
+    "proof": {
+      "path": "/tmp/incant-native-project-play-union-proof.log",
+      "sha256": "aaeb3f16af81180476b5c77312d009467ee63f5f41d4888ad67a1d5d06a68da5"
+    },
+    "shipping": {
+      "path": "/tmp/incant-native-project-play-union-shipping.log",
+      "sha256": "431609dcb53b22b20d9156c83dd86f8efc663a0cc0d4894c5147a3b9facba7f4"
+    }
+  },
+  "scope": {
+    "local_desktop": true,
+    "reference_phone_gate": false,
+    "editor_play": false,
+    "agent_play_tool": false,
+    "complete_native_sdk": false,
+    "phase_gate_approved": false
+  }
+}

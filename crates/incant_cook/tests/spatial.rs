@@ -237,3 +237,60 @@ fn native_cook_uses_binary_sprite_references_and_rejects_ambiguous_authored_bind
     assert_eq!(sprite.order, 17);
     assert!(sprite.flip_x);
 }
+
+#[test]
+fn tilemap_cook_preserves_binary_ids_local_cells_and_native_solid_collision() {
+    let (mut project, sid, entity, _, texture) = fixture();
+    let layer = "00000000000000000000000003";
+    let frame = "00000000000000000000000001";
+    let components = &mut project
+        .scenes
+        .get_mut(&sid)
+        .unwrap()
+        .entities
+        .get_mut(&entity)
+        .unwrap()
+        .components;
+    components.insert("Tilemap".into(), json!({"tileset":texture,"size":[2,1],"cell_size":[0.5,2],"layers":[{"id":layer,"cells":[frame,null],"layer":-4,"order":7,"solid":true}]}));
+    assert!(matches!(
+        cook_scene(&project, &sid),
+        Err(CookError::Document(_))
+    ));
+    let components = &mut project
+        .scenes
+        .get_mut(&sid)
+        .unwrap()
+        .entities
+        .get_mut(&entity)
+        .unwrap()
+        .components;
+    components.remove("MeshRenderer");
+    components.insert("Transform".into(), json!(incant_doc::Transform::default()));
+    let before = project.clone();
+    let bytes = cook_scene(&project, &sid).unwrap();
+    assert_eq!(project, before);
+    assert_eq!(u32::from_le_bytes(bytes[8..12].try_into().unwrap()), 6);
+    drop(project);
+    let mut world = NativeWorld::from_bytes(&bytes).unwrap();
+    let view = world.spatial_view().unwrap();
+    let node = view
+        .nodes()
+        .find(|node| node.id == stable_id(&entity).unwrap())
+        .unwrap();
+    let declared = node.declaration.unwrap().tilemap.as_ref().unwrap();
+    assert_eq!(declared.tileset, stable_id(&texture).unwrap());
+    assert_eq!(declared.layers[0].id, stable_id(layer).unwrap());
+    assert_eq!(
+        declared.layers[0].cells,
+        [Some(stable_id(frame).unwrap()), None]
+    );
+    assert_eq!(
+        (declared.layers[0].layer, declared.layers[0].order),
+        (-4, 7)
+    );
+    let prepared = node.tilemap.unwrap();
+    assert_eq!(prepared.cell_bounds([1, 0]), [[0.5, 0.], [1., 2.]]);
+    assert_eq!(prepared.collision()[0].size, [1, 1]);
+    world.step().unwrap();
+    assert_eq!(world.tick(), 1);
+}

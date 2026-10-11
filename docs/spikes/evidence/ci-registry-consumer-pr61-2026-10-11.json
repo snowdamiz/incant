@@ -1,0 +1,336 @@
+{
+  "head": "c620868755e3ea57e64c47879f345db8015e7cf6",
+  "pull_request": 61,
+  "credential_run": 38101258583,
+  "jobs": [
+    {
+      "name": "corrected-credential-Linux",
+      "head": "c620868755e3ea57e64c47879f345db8015e7cf6",
+      "run_id": 38101258583,
+      "job_id": 114357473337,
+      "conclusion": "success",
+      "created_at": "2026-10-11T01:16:05Z",
+      "started_at": "2026-10-11T01:16:07Z",
+      "completed_at": "2026-10-11T01:17:52Z",
+      "queue_seconds": 2.0,
+      "execution_seconds": 105.0,
+      "cache_lines": [
+        "2026-10-11T01:16:26.6296166Z Cache hit for restore-key: v0-rust-auxiliary-registry-v1-ubuntu-latest-Linux-x64-b9e20461-9fdba862",
+        "2026-10-11T01:16:28.0084532Z Cache Size: ~145 MB (151846679 B)"
+      ],
+      "finished_lines": [
+        "2026-10-11T01:17:32.9951695Z     Finished `test` profile [unoptimized + debuginfo] target(s) in 1m 04s",
+        "2026-10-11T01:17:47.7114658Z     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.68s",
+        "2026-10-11T01:17:48.6168673Z     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.66s",
+        "2026-10-11T01:17:49.4681857Z Finished uploading artifact content to blob storage!"
+      ],
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "seconds": 3.0
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success",
+          "seconds": 6.0
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "conclusion": "success",
+          "seconds": 0.0
+        },
+        {
+          "name": "Run rustup show",
+          "conclusion": "success",
+          "seconds": 9.0
+        },
+        {
+          "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+          "conclusion": "success",
+          "seconds": 3.0
+        },
+        {
+          "name": "Run cargo test -p incant_agent --locked",
+          "conclusion": "success",
+          "seconds": 66.0
+        },
+        {
+          "name": "Run sudo apt-get update && sudo apt-get install -y gnome-keyring dbus-x11",
+          "conclusion": "success",
+          "seconds": 12.0
+        },
+        {
+          "name": "Check Linux Secret Service with a disposable CI keyring",
+          "conclusion": "success",
+          "seconds": 2.0
+        },
+        {
+          "name": "Check native storage across changed builds",
+          "conclusion": "skipped",
+          "seconds": 0.0
+        },
+        {
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success",
+          "seconds": 1.0
+        },
+        {
+          "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+          "conclusion": "success",
+          "seconds": 0.0
+        },
+        {
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "conclusion": "success",
+          "seconds": 0.0
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success",
+          "seconds": 1.0
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "seconds": 0.0
+        }
+      ],
+      "logs": {
+        "path": "/tmp/incant-pr61-corrected-credential-Linux.log",
+        "sha256": "f4e7241e73fc3cf30c27b3c929393be6eb5c116e4fb7bdb3c68cfa5c062a993c"
+      }
+    },
+    {
+      "name": "corrected-credential-Windows",
+      "head": "c620868755e3ea57e64c47879f345db8015e7cf6",
+      "run_id": 38101258583,
+      "job_id": 114357473548,
+      "conclusion": "success",
+      "created_at": "2026-10-11T01:16:05Z",
+      "started_at": "2026-10-11T01:16:07Z",
+      "completed_at": "2026-10-11T01:19:02Z",
+      "queue_seconds": 2.0,
+      "execution_seconds": 175.0,
+      "cache_lines": [
+        "2026-10-11T01:16:36.3305153Z Cache hit for restore-key: v0-rust-auxiliary-registry-v1-windows-latest-Windows_NT-x64-773408be-9fdba862",
+        "2026-10-11T01:16:38.0298495Z Cache Size: ~144 MB (151304098 B)"
+      ],
+      "finished_lines": [
+        "2026-10-11T01:18:52.4628808Z     Finished `test` profile [unoptimized + debuginfo] target(s) in 2m 03s",
+        "2026-10-11T01:18:56.4028224Z     Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.86s",
+        "2026-10-11T01:18:58.3831259Z     Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.66s",
+        "2026-10-11T01:18:59.1675156Z Finished uploading artifact content to blob storage!"
+      ],
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "seconds": 1.0
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success",
+          "seconds": 8.0
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "conclusion": "success",
+          "seconds": 0.0
+        },
+        {
+          "name": "Run rustup show",
+          "conclusion": "success",
+          "seconds": 12.0
+        },
+        {
+          "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+          "conclusion": "success",
+          "seconds": 19.0
+        },
+        {
+          "name": "Run cargo test -p incant_agent --locked",
+          "conclusion": "success",
+          "seconds": 125.0
+        },
+        {
+          "name": "Run sudo apt-get update && sudo apt-get install -y gnome-keyring dbus-x11",
+          "conclusion": "skipped",
+          "seconds": 0.0
+        },
+        {
+          "name": "Check Linux Secret Service with a disposable CI keyring",
+          "conclusion": "skipped",
+          "seconds": 0.0
+        },
+        {
+          "name": "Check native storage across changed builds",
+          "conclusion": "success",
+          "seconds": 5.0
+        },
+        {
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success",
+          "seconds": 1.0
+        },
+        {
+          "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+          "conclusion": "success",
+          "seconds": 0.0
+        },
+        {
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "conclusion": "success",
+          "seconds": 0.0
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success",
+          "seconds": 2.0
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "seconds": 0.0
+        }
+      ],
+      "logs": {
+        "path": "/tmp/incant-pr61-corrected-credential-Windows.log",
+        "sha256": "56e394211b77f321b0035554a787dff3998da5208827a7ec9fe62617af26104a"
+      }
+    },
+    {
+      "name": "corrected-credential-Mac",
+      "head": "c620868755e3ea57e64c47879f345db8015e7cf6",
+      "run_id": 38101258583,
+      "job_id": 114357473565,
+      "conclusion": "success",
+      "created_at": "2026-10-11T01:16:05Z",
+      "started_at": "2026-10-11T01:16:15Z",
+      "completed_at": "2026-10-11T01:18:43Z",
+      "queue_seconds": 10.0,
+      "execution_seconds": 148.0,
+      "cache_lines": [
+        "2026-10-11T01:16:40.6863380Z Cache hit for restore-key: v0-rust-auxiliary-registry-v1-macos-latest-Darwin-arm64-791fe27b-9fdba862",
+        "2026-10-11T01:16:41.7969910Z Cache Size: ~145 MB (151575645 B)"
+      ],
+      "finished_lines": [
+        "2026-10-11T01:18:36.1042090Z     Finished `test` profile [unoptimized + debuginfo] target(s) in 1m 51s",
+        "2026-10-11T01:18:39.1979500Z     Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.96s",
+        "2026-10-11T01:18:40.1929640Z     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.87s",
+        "2026-10-11T01:18:41.1231250Z Finished uploading artifact content to blob storage!"
+      ],
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "seconds": 3.0
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success",
+          "seconds": 9.0
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "conclusion": "success",
+          "seconds": 0.0
+        },
+        {
+          "name": "Run rustup show",
+          "conclusion": "success",
+          "seconds": 10.0
+        },
+        {
+          "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+          "conclusion": "success",
+          "seconds": 6.0
+        },
+        {
+          "name": "Run cargo test -p incant_agent --locked",
+          "conclusion": "success",
+          "seconds": 112.0
+        },
+        {
+          "name": "Run sudo apt-get update && sudo apt-get install -y gnome-keyring dbus-x11",
+          "conclusion": "skipped",
+          "seconds": 0.0
+        },
+        {
+          "name": "Check Linux Secret Service with a disposable CI keyring",
+          "conclusion": "skipped",
+          "seconds": 0.0
+        },
+        {
+          "name": "Check native storage across changed builds",
+          "conclusion": "success",
+          "seconds": 4.0
+        },
+        {
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success",
+          "seconds": 1.0
+        },
+        {
+          "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+          "conclusion": "success",
+          "seconds": 0.0
+        },
+        {
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "conclusion": "success",
+          "seconds": 0.0
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success",
+          "seconds": 1.0
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "seconds": 0.0
+        }
+      ],
+      "logs": {
+        "path": "/tmp/incant-pr61-corrected-credential-Mac.log",
+        "sha256": "eba76935f65516e7bcca805299f391159eb84f6ea1eadbffc9d2f963839d6097"
+      }
+    }
+  ],
+  "registry_archives": [
+    {
+      "id": 8782652939,
+      "ref": "refs/heads/main",
+      "key": "v0-rust-auxiliary-registry-v1-macos-latest-Darwin-arm64-791fe27b-9fdba862",
+      "version": "ad15a212ac8e047da6cc0acacc752804ce97f0f107cf07aaf2e4ccf0b6998518",
+      "size_in_bytes": 151575645
+    },
+    {
+      "id": 8782685741,
+      "ref": "refs/heads/main",
+      "key": "v0-rust-auxiliary-registry-v1-windows-latest-Windows_NT-x64-773408be-9fdba862",
+      "version": "effa1b635e2251e9e6df490948666d13e101664fbd554445b9cf3f59ebada01a",
+      "size_in_bytes": 151304098
+    },
+    {
+      "id": 8782638666,
+      "ref": "refs/heads/main",
+      "key": "v0-rust-auxiliary-registry-v1-ubuntu-latest-Linux-x64-b9e20461-9fdba862",
+      "version": "5328310fed3fbcf4a5d63860117f259451587b32b8ee8db3d77c90a63d0e59b6",
+      "size_in_bytes": 151846679
+    }
+  ],
+  "inventory": {
+    "path": "/tmp/incant-pr61-registry-consumer-cache-inventory.json",
+    "sha256": "afbb7e1eec9b45a46c05dec5c19b46c27b7fa70bed81e21c619ff2460f94bf67",
+    "entries": 17,
+    "size_in_bytes": 6968145208
+  },
+  "limitations": [
+    "Natural restore-only PR consumers; no extra dispatch/cache write or compile-target caching in these auxiliary jobs.",
+    "Whole-job times also depend on runner/graph/setup; no attribution of every timing delta solely to registry restoration.",
+    "Native critical path is still pending on the corrected head; early initial desktop jobs stopped at a UI test deadline.",
+    "Not all compiled-cache families are present; no blanket all-caches-warm claim."
+  ]
+}

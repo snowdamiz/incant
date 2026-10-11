@@ -36,6 +36,7 @@ incant_cmd = { path = "crates/incant_cmd" }
 incant_core = { path = "crates/incant_core" }
 incant_physics = { path = "crates/incant_physics" }
 incant_physics_runtime = { path = "crates/incant_physics_runtime" }
+incant_physics_2d_runtime = { path = "crates/incant_physics_2d_runtime" }
 incant_input = { path = "crates/incant_input" }
 incant_localization = { path = "crates/incant_localization" }
 incant_nav = { path = "crates/incant_nav" }
@@ -48,6 +49,12 @@ debug = 1
 
 [profile.release]
 strip = false
+
+# Functional CI tests/tools trade compiler optimization time for execution time.
+# This profile is not a shipping, device, or frame-performance configuration.
+[profile.ci]
+inherits = "release"
+opt-level = 1
 
 # Runtime/device measurements use this profile through tools/shipping.py, which
 # separates and verifies platform crash symbols before packaging the player.

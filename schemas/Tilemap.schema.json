@@ -1,0 +1,86 @@
+{
+  "$defs": {
+    "TilemapLayer": {
+      "additionalProperties": false,
+      "properties": {
+        "cells": {
+          "description": "Exactly width*height cells in bottom-to-top row-major order. A nonempty\ncell references a stable atlas frame; no raw packed-page rectangles.",
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "type": "array"
+        },
+        "id": {
+          "type": "string"
+        },
+        "layer": {
+          "default": 0,
+          "format": "int16",
+          "maximum": 32767,
+          "minimum": -32768,
+          "type": "integer"
+        },
+        "order": {
+          "default": 0,
+          "format": "int32",
+          "type": "integer"
+        },
+        "solid": {
+          "default": false,
+          "description": "Every occupied cell in this layer contributes one full solid cell.\nOverlapping solid layers are unioned before collision preparation.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "cells"
+      ],
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "One atlas texture, uniform rectangular cells, and explicit render ordering.\nCell (0,0) starts at the local origin; +x is right and +y is up. Texture rows\nremain top-down as specified by the atlas; frame pivots are not tile offsets.",
+  "properties": {
+    "cell_size": {
+      "items": {
+        "format": "double",
+        "type": "number"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "type": "array",
+      "x-incant-unit": "m"
+    },
+    "layers": {
+      "items": {
+        "$ref": "#/$defs/TilemapLayer"
+      },
+      "type": "array"
+    },
+    "size": {
+      "items": {
+        "format": "uint32",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "type": "array"
+    },
+    "tileset": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "tileset",
+    "size",
+    "cell_size",
+    "layers"
+  ],
+  "title": "Tilemap",
+  "type": "object"
+}

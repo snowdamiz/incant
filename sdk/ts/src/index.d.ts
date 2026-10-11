@@ -1,5 +1,5 @@
 /** Sandbox API. Scripts cannot import host modules or access filesystem/network. */
-export type { NativeBehavior, NativeContext, NativeCommands, NativeChunk, NativeId, NativeTransform, NativeVector3, NativeInput } from './native';
+export type { NativeBehavior, NativeContext, NativePhysics, NativeRayQuery, NativeRayHit, NativeCharacterQuery, NativeCharacterMovement, NativeTriggerEvent, NativeCommands, NativeChunk, NativeId, NativeTransform, NativeVector3, NativeInput, NativeClock, NativeTimers, NativeTimerEvent } from './native';
 export type Id = string;
 export type Json = null | boolean | number | string | Json[] | { [key: string]: Json };
 export interface Entity {
@@ -9,7 +9,7 @@ export interface Entity {
   readonly parent: Id | null;
   readonly components: Readonly<Record<string, Json>>;
 }
-export type { Command, Transform, Camera, SpriteRenderer, SpriteAtlas } from './generated';
+export type { Command, Transform, Camera, SpriteRenderer, SpriteAtlas, Tilemap } from './generated';
 /** Host-managed save envelope; scripts do not receive filesystem access. */
 export type { GameSave, PlayAssertions } from './generated';
 import type { Command } from './generated';

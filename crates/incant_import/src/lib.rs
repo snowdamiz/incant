@@ -1,6 +1,7 @@
 //! Editor/tooling import coordination. Runtime cooked-asset loading stays in
 //! incant_assets, without a dependency on the authoring command bus.
 mod sprites;
+mod tilemaps;
 mod watch;
 use incant_assets::{
     AssetError, Dependency, TextureFormat, TextureUsage, cook_audio, cook_model, cook_texture,

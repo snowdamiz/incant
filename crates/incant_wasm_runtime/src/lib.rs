@@ -1,6 +1,8 @@
 //! Shared copied `incant_v1` capability and native transaction boundary.
 //! Contains no compiler, parser, JIT, OS or authoring capability.
 mod capability;
+mod input;
+pub use input::{MAGIC as INPUT_MAGIC, MAX_BYTES as MAX_INPUT_BYTES};
 mod compiled;
 pub use compiled::{Import, ModuleExports, StaticError, StaticModule};
 pub mod limits;

@@ -7,6 +7,11 @@ on:
       - 'tools/tests/test_physics_parity.py'
       - 'crates/incant_physics/**'
       - 'crates/incant_physics_runtime/**'
+      - 'crates/incant_physics_2d_runtime/**'
+      - 'crates/incant_2d/**'
+      - 'tools/tests/test_native_physics_parity.py'
+      - 'tools/probes/native-physics-2d.py'
+      - 'tools/shipping*.py'
       - 'crates/incant_runtime/**'
       - 'crates/incant_types/**'
       - 'tools/probes/native-physics/**'
@@ -82,12 +87,26 @@ jobs:
             artifacts/solver-parity/browser.json
             artifacts/solver-parity/*.bin
           if-no-files-found: error
+      - run: cargo fmt --manifest-path tools/probes/native-physics/Cargo.toml --check
+      - run: cargo clippy -j2 --manifest-path tools/probes/native-physics/Cargo.toml --release --all-targets --locked -- -D warnings
       - name: Compare cooked native ECS physics worker pools
         if: runner.os != 'Linux'
         run: python tools/probes/native-physics/run.py --output artifacts/native-physics-parity --trials 3
       - name: Compare cooked native ECS physics with serial browser WASM
         if: runner.os == 'Linux'
         run: python tools/probes/native-physics/run.py --output artifacts/native-physics-parity --trials 3 --browser
+      - name: Fresh standalone shipping planar collision proof
+        run: python tools/probes/native-physics-2d.py artifacts/native-physics-shipping
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: native-physics-shipping-${{ matrix.os }}
+          retention-days: 7
+          path: |
+            artifacts/native-physics-shipping/result.json
+            artifacts/native-physics-shipping/build.log
+            artifacts/native-physics-shipping/symbols/**
+          if-no-files-found: error
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
@@ -141,6 +160,9 @@ jobs:
       - run: python tools/probes/physics/portability.py --output artifacts/physics-portability
       - run: python tools/probes/physics-parity/features.py --output artifacts/physics-parallel-features.json
       - run: python -m unittest discover -s tools/tests -p test_physics_parity.py
+      - run: python -m unittest discover -s tools/tests -p test_native_physics_parity.py
+      - run: cargo check -j2 -p incant_runtime --release --locked --target aarch64-apple-ios-sim
+      - run: cargo check -j2 -p incant_runtime --release --locked --target wasm32-unknown-unknown
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:

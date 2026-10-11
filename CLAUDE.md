@@ -33,6 +33,9 @@ signing first gate Phase 5 uploads. Record the actual device model/OS and matche
 baseline for performance results; simulator builds do not satisfy those gates.
 Revision 7 removes calendar dates. Do not add target dates, phase durations or
 ship-date targets; exit gates alone measure progress.
+Revision 8 makes outside services local-first: develop and test against the
+local containers or in-process substitutes in PLAN.md section 2.7, use hosted
+services only where a gate needs the real one, and label local results as local.
 
 Astra owns nonvisual implementation and integration. Claude Opus 5.5 through ACP,
 with thinking explicitly set to Max for every new or resumed session, owns

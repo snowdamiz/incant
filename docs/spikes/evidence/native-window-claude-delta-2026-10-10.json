@@ -1,0 +1,37 @@
+{
+  "recorded_utc": "2026-10-11T02:30:18.773087+00:00",
+  "source_commit": "d11c7c4",
+  "review_commit": "0dd843e08f2a39abd5a67d4914cda8b0b5880ea8",
+  "model": "Claude Opus 5.5",
+  "effort": "max",
+  "acp_verification_log_sha256": "3aadefe1158473781cf12b349490c1676375e04135ee12345b27d9f62f0cf493",
+  "binary": {
+    "bytes": 8120976,
+    "sha256": "ec18e426c67584c4ac762cf72deda6dfc10d9044c4a5ff91a07fc4ad0648edf5"
+  },
+  "result_url": "https://github.com/snowdamiz/incant/blob/0dd843e08f2a39abd5a67d4914cda8b0b5880ea8/handoffs/0037-native-player-window/result-refresh.md",
+  "result_sha256": "183b5cc2807ab6308b82b91e201dc6c8a63948645437d3c951d4c0ba1e162344",
+  "manifest_sha256": "f878983a34ef6a3eb033367ad94446a55d027477feff3807f2f8d2b04b134b46",
+  "verified_delta_files": 49,
+  "verified_original_files": 180,
+  "original_review_commit": "4073f8fab8b3a377230513d7cfa0c35b9f1db178",
+  "results": {
+    "disabled_maximize_control": "accepted on this Mac",
+    "paused_background_resize_and_continuous_burst": "accepted on this Mac",
+    "review_process_exits": [
+      0,
+      0
+    ],
+    "second_run": {
+      "tick": 897,
+      "presentation_refreshes": 16,
+      "accepted_frames": 913
+    }
+  },
+  "limitations": [
+    "AXFullScreen remains settable; forced fullscreen not tested",
+    "Out-of-range OS sizes clamped, so suspension/recovery not reproduced live",
+    "One-tick refocus motion and macOS minimize-animation audio tail remain documented",
+    "No Linux/Windows interactive, mobile, scanout, performance or phase gate claim"
+  ]
+}

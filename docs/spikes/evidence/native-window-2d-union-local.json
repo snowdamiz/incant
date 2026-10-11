@@ -1,0 +1,3327 @@
+{
+  "scope": "One ancestry-preserving native-window, tilemap and native planar-physics integration on native project play; no new appearance contract",
+  "date": "2026-10-11",
+  "tested_source": "07c0d43316f7c374fb6989f313999fde12b74176",
+  "tested_tree": "36ff3c83c958bb02e2127a63b855779eeb4427d9",
+  "parents": {
+    "76": "ee2bc1e70acd02aadb5a470fb5d3610f7fe79901",
+    "63": "25b43bed870cadc80972509cb237ed2b7ddef14d",
+    "68": "409968110b7a3e88d2e2df9e958ba9e3ff65cf29",
+    "73": "3d5c4e4650d8db115ae43da305bfe28866aa176c",
+    "78": "bef6c1af191472180900cd44853eef69fe75a43e",
+    "79": "74238785fe92c50daea1d8dd056492359def61f2"
+  },
+  "source_tree_ids": {
+    ".github/workflows": "6089e9b4ab6737537a62512111d418b6ef89f585",
+    "crates/incant_game_runtime": "ee8544d83f1efd7982854eb7be4a036829d93ae3",
+    "crates/incant_game_player": "ea80d40553c7983e8d1efbc9ed0604d76f2d6a23",
+    "crates/incant_runtime": "c90de343914ac4e3fb90744614a0d46afda4c154",
+    "crates/incant_physics_2d_runtime": "793c4e8ed28c5a4ebe2c9b659fda9b5c5dd203de",
+    "crates/incant_render": "439df33ae46717d2baa14da5d4fdb5a6df4b6680",
+    "crates/incant_render_native": "cb94cd13dc22afeb7081fd938411277c8fca6d19",
+    "crates/incant_headless": "ab915113fecf9852201b6c7afb7feb59e099b560",
+    "crates/incant_observe": "b6a954859542cb53676f5a53637a468882c9751f",
+    "tools/probes": "1194211d26e1ad0acb9dbca0ee644654fcefa725"
+  },
+  "source_sha256": {
+    "Cargo.toml": "07b47541c2c403c8458eff6d110ce487cbaa1c5cb7ed625df32e2834676ae064",
+    "Cargo.lock": "93313ac756cfd859676f6b4bc646790b689adddc8e3085f637981a5ac99cf9e4",
+    ".cargo/config.toml": "0d3b42ee7bc4ef237cb8af440c47e506dcc9cc8b24d49d3cd3d3fea76ae5caa1",
+    "rust-toolchain.toml": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124",
+    "crates/incant_game_player/tests/routing.rs": "45bef3a51c50ac8d03236461ab4ce8cde92dbbccab0687fe99146a0906d9a50a"
+  },
+  "checks": {
+    "ordinary": {
+      "passed": 650,
+      "failed": 0,
+      "ignored": 69
+    },
+    "gpu_ignored": {
+      "passed": 69,
+      "failed": 0,
+      "ignored": 0
+    },
+    "window": {
+      "passed": 12,
+      "failed": 0,
+      "ignored": 0
+    },
+    "static_conformance": {
+      "passed": 101,
+      "failed": 0,
+      "ignored": 0
+    },
+    "workspace_clippy_profiles": [
+      "ci",
+      "dev"
+    ],
+    "window_clippy_profile": "ci",
+    "ui_tests": 534,
+    "ui_files": 30,
+    "strict_typescript": true,
+    "production_ui_build": true,
+    "tools_tests": 90,
+    "schemas_unchanged": true,
+    "format_conventions_actionlint_diff": true,
+    "runtime_dependency_guard_feature": "incant_game_player/native-window"
+  },
+  "logs": {
+    "tests": {
+      "local_path": "/tmp/incant-native-union79-tests.log",
+      "sha256": "462747583ea53b486db5872777081fbfa38b677244c789da49dca5f82f610b5e"
+    },
+    "clippy": {
+      "local_path": "/tmp/incant-native-union79-clippy.log",
+      "sha256": "b772776f13286b4d7a2d41d768e4ce54265d09b4e1232fa71b604d9163c34bef"
+    },
+    "dev-clippy": {
+      "local_path": "/tmp/incant-native-union79-dev-clippy.log",
+      "sha256": "f58936fa055cd6ea1aeddb218edbba1267730ed5c8906b12a3429ea72d0affff"
+    },
+    "window-tests": {
+      "local_path": "/tmp/incant-native-union79-window-tests.log",
+      "sha256": "d8e31b16bad2e4cfc909140af49f392c0d55f452efc151ba474284ab3878c6c4"
+    },
+    "window-clippy": {
+      "local_path": "/tmp/incant-native-union79-window-clippy.log",
+      "sha256": "370707ae1c10676c9fd0173121209af53d93244d10290544303e909088a5167b"
+    },
+    "tools": {
+      "local_path": "/tmp/incant-native-union79-tools.log",
+      "sha256": "fedf6e513f7aee426444dd257ff6a6efd052da50226ec9e6380bec3092309b4f"
+    },
+    "ui-tests": {
+      "local_path": "/tmp/incant-native-union79-ui-tests.log",
+      "sha256": "64a318ef22c392c96a46d4854de7e8278e35863ea48a495f7818041eab756d6a"
+    },
+    "ui-types": {
+      "local_path": "/tmp/incant-native-union79-ui-types.log",
+      "sha256": "5e05d0271a5a922a5b1639a75c386f68b84dc6f16fa9c31d0ca3992328a98dc3"
+    },
+    "ui-build": {
+      "local_path": "/tmp/incant-native-union79-ui-build.log",
+      "sha256": "6418275a5b63a9ec7f0c32ea3c8d5382117b2e1bf864f71a5375d06e284f998a"
+    },
+    "tool-build": {
+      "local_path": "/tmp/incant-native-union79-tool-build.log",
+      "sha256": "335ed2ea5e5479badcf3e1ac64cf064f189fcb7357e72fb10de293829bdf0a95"
+    },
+    "guard": {
+      "local_path": "/tmp/incant-native-union79-guard.log",
+      "sha256": "4f48074ee2d354b0c64a0006e406dce2619271b46fb1db423df731e6189bd1e2"
+    },
+    "schema": {
+      "local_path": "/tmp/incant-native-union79-schema.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "saves": {
+      "local_path": "/tmp/incant-native-union79-saves.log",
+      "sha256": "9a1c753d857e7b7f1d244ff22d0e88d4a7ca552e2e1a0c8544fa47aff128636f"
+    },
+    "static-conformance": {
+      "local_path": "/tmp/incant-native-union79-static-conformance.log",
+      "sha256": "2c754663e5bd64b30f6943896e0c15512a4ecb56e20c90a5bd9ddf5b686c860d"
+    },
+    "static-shipping": {
+      "local_path": "/tmp/incant-native-union79-static-shipping.log",
+      "sha256": "0ccb98fb3d753c4ec7069742b3719f8d7b9f5b11167d6dfe44576c031b2a1932"
+    },
+    "physics": {
+      "local_path": "/tmp/incant-native-union79-physics.log",
+      "sha256": "f4204c6d989489d20f151f059e830bb9e7b09a7f96b5203362b66b5f65112149"
+    },
+    "physics-shipping": {
+      "local_path": "/tmp/incant-native-union79-physics-shipping.log",
+      "sha256": "2743eff3f2b80c88b4cf4726d9e56bcfa92a27adca416a3849b1bedeef74f9ad"
+    },
+    "project-play": {
+      "local_path": "/tmp/incant-native-union79-project-play.log",
+      "sha256": "8bf48c00f7b1bda847ee587229fb0413389dd476d871602fdf454f040ddbf37f"
+    },
+    "gpu": {
+      "local_path": "/tmp/incant-native-union79-gpu.log",
+      "sha256": "5a4dbaad23e1f679c230d2dc7d4d46682c5892abfa2b6f2c83838947b5ea33cd"
+    },
+    "game-gpu": {
+      "local_path": "/tmp/incant-native-union79-game-gpu.log",
+      "sha256": "90623fa70af023b225f26428a96954de33b454499713bba77dc69620b93953d1"
+    }
+  },
+  "process_evidence": {
+    "saves": {
+      "local_path": "/tmp/incant-native-union79-saves/result.json",
+      "sha256": "32d229a28f15627542148524ca0cb597c37e6b6976afe927b0b4f24ab76ece17",
+      "result": {
+        "passed": true,
+        "binaries": {
+          "incant_headless": "2d3caa0116db02576fc5f6d19ddd087a14bc035fc0ac9f8a89121bcd92970f80",
+          "cook_scene": "17c560a8ab57ffa19ffd132b193e4236633b7cfd206e8c09ec3fc536229d1910",
+          "save_world": "48a7b5bd5c248e4be503271d25bcccd48ce299e3bc047dd7e8c5ac165617d324"
+        },
+        "authoring_hashes_preserved": {
+          "world.incant.json": "2a0a242ebb04218318564cfc3f1902639f4ab27e694d045be52020ebe1220390",
+          "history.jsonl": "591dd816cf574a5d457cc227442f33953dad857c812d553c6ee24e2040bd0a09"
+        },
+        "authoring_removed_before_execution": true,
+        "scene_removed_before_resume": true,
+        "fresh_process_continuation_equals_uninterrupted": true,
+        "repeated_and_zero_tick_restores_exact": true,
+        "corruption_rejected": true,
+        "existing_save_preserved": true,
+        "observations": [
+          {
+            "operation": "scene",
+            "additional_ticks": 60,
+            "output": "tick=60 rate=60 entities=2 bytes=368\n",
+            "save_sha256": "bd351ae71c0f2427139324e8fbb50e32d65805f0f0e3961e352ac9ff4e8b20ea"
+          },
+          {
+            "operation": "scene",
+            "additional_ticks": 25,
+            "output": "tick=25 rate=60 entities=2 bytes=368\n",
+            "save_sha256": "d9eca64c6c0b192bd0e30b3ad191bc5c6e0c6c6ad3e92ae1eb7780e32f2b9046"
+          },
+          {
+            "operation": "save",
+            "additional_ticks": 35,
+            "output": "tick=60 rate=60 entities=2 bytes=368\n",
+            "save_sha256": "bd351ae71c0f2427139324e8fbb50e32d65805f0f0e3961e352ac9ff4e8b20ea"
+          },
+          {
+            "operation": "save",
+            "additional_ticks": 35,
+            "output": "tick=60 rate=60 entities=2 bytes=368\n",
+            "save_sha256": "bd351ae71c0f2427139324e8fbb50e32d65805f0f0e3961e352ac9ff4e8b20ea"
+          },
+          {
+            "operation": "save",
+            "additional_ticks": 0,
+            "output": "tick=25 rate=60 entities=2 bytes=368\n",
+            "save_sha256": "d9eca64c6c0b192bd0e30b3ad191bc5c6e0c6c6ad3e92ae1eb7780e32f2b9046"
+          }
+        ],
+        "scope": "Native Transform/Velocity/hierarchy/clock only; no VM, timers, inputs, complete session, durability or device gate"
+      }
+    },
+    "static-shipping": {
+      "local_path": "/tmp/incant-native-union79-static-shipping/result.json",
+      "sha256": "0ccb98fb3d753c4ec7069742b3719f8d7b9f5b11167d6dfe44576c031b2a1932",
+      "result": {
+        "passed": true,
+        "target": "aarch64-apple-darwin",
+        "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+        "wabt": {
+          "release": "1.0.42",
+          "url": "https://github.com/WebAssembly/wabt/releases/download/1.0.42/wabt-1.0.42-macos-arm64.tar.gz",
+          "archive_sha256": "3f654779b436c628db3ca4323c51538815f5fbc887a6d5f3bb1c18d36281e240"
+        },
+        "codegen": {
+          "incant_wasm_runtime": {
+            "opt-level": "3",
+            "codegen-units": "1",
+            "panic": "abort"
+          },
+          "incant_script": {
+            "opt-level": "3",
+            "codegen-units": "1",
+            "panic": "abort"
+          },
+          "incant_game_runtime": {
+            "opt-level": "3",
+            "codegen-units": "1",
+            "panic": "abort"
+          },
+          "incant_runtime": {
+            "opt-level": "3",
+            "codegen-units": "1",
+            "panic": "abort"
+          },
+          "incant_physics_runtime": {
+            "opt-level": "3",
+            "codegen-units": "1",
+            "panic": "abort"
+          },
+          "incant_input": {
+            "opt-level": "3",
+            "codegen-units": "1",
+            "panic": "abort"
+          },
+          "incant_audio_runtime": {
+            "opt-level": "3",
+            "codegen-units": "1",
+            "panic": "abort"
+          },
+          "incant_assets_runtime": {
+            "opt-level": "3",
+            "codegen-units": "1",
+            "panic": "abort"
+          },
+          "incant_wasm_player": {
+            "opt-level": "3",
+            "codegen-units": "1",
+            "panic": "abort",
+            "lto": "fat",
+            "debuginfo": "2",
+            "split-debuginfo": "packed"
+          }
+        },
+        "c_flags": [
+          "-O3",
+          "-frounding-math",
+          "-fno-optimize-sibling-calls",
+          "-ffp-contract=off",
+          "-DWASM_RT_MEMCHECK_BOUNDS_CHECK=1",
+          "-DWASM_RT_MAX_CALL_STACK_DEPTH=64"
+        ],
+        "normal_dependencies": [
+          "allocator-api2",
+          "approx",
+          "arrayvec",
+          "assert_type_match",
+          "async-channel",
+          "async-executor",
+          "async-task",
+          "atomic-arena",
+          "atomic-waker",
+          "bevy_ecs",
+          "bevy_ecs_macro_logic",
+          "bevy_ecs_macros",
+          "bevy_macro_utils",
+          "bevy_platform",
+          "bevy_ptr",
+          "bevy_reflect",
+          "bevy_reflect_derive",
+          "bevy_tasks",
+          "bevy_utils",
+          "bitflags",
+          "block-buffer",
+          "bumpalo",
+          "bytemuck",
+          "bytemuck_derive",
+          "byteorder",
+          "cfg-if",
+          "concurrent-queue",
+          "const-oid",
+          "convert_case",
+          "convert_case",
+          "cpu-time",
+          "cpufeatures",
+          "critical-section",
+          "crossbeam-deque",
+          "crossbeam-epoch",
+          "crossbeam-queue",
+          "crossbeam-utils",
+          "crypto-common",
+          "derive_more",
+          "derive_more-impl",
+          "digest",
+          "disqualified",
+          "downcast-rs",
+          "dyn-clone",
+          "either",
+          "ena",
+          "equivalent",
+          "erased-serde",
+          "event-listener",
+          "event-listener-strategy",
+          "fastrand",
+          "fixedbitset",
+          "float-cmp",
+          "foldhash",
+          "futures-channel",
+          "futures-core",
+          "futures-io",
+          "futures-lite",
+          "futures-macro",
+          "futures-sink",
+          "futures-task",
+          "futures-util",
+          "generic-array",
+          "getrandom",
+          "getrandom",
+          "glam",
+          "glam",
+          "glam",
+          "glam",
+          "glamx",
+          "hash32",
+          "hashbrown",
+          "hashbrown",
+          "heapless",
+          "heapless",
+          "incant_2d",
+          "incant_assets_runtime",
+          "incant_audio_runtime",
+          "incant_game_runtime",
+          "incant_input",
+          "incant_physics_2d_runtime",
+          "incant_physics_runtime",
+          "incant_runtime",
+          "incant_script",
+          "incant_types",
+          "incant_wasm_player",
+          "incant_wasm_runtime",
+          "indexmap",
+          "itoa",
+          "js-sys",
+          "kira",
+          "ktx2",
+          "libc",
+          "libm",
+          "log",
+          "matrixmultiply",
+          "memchr",
+          "meshopt",
+          "mint",
+          "nalgebra",
+          "nalgebra-macros",
+          "nonmax",
+          "num-bigint",
+          "num-complex",
+          "num-derive",
+          "num-integer",
+          "num-rational",
+          "num-traits",
+          "once_cell",
+          "ordered-float",
+          "parking",
+          "parry2d",
+          "parry3d",
+          "pastey",
+          "pin-project-lite",
+          "portable-atomic",
+          "portable-atomic-util",
+          "ppv-lite86",
+          "proc-macro-crate",
+          "proc-macro2",
+          "profiling",
+          "profiling-procmacros",
+          "quote",
+          "r-efi",
+          "r-efi",
+          "rand",
+          "rand_chacha",
+          "rand_core",
+          "rand_core",
+          "rapier2d",
+          "rapier3d",
+          "raw-window-handle",
+          "rawpointer",
+          "rayon",
+          "rayon-core",
+          "ref-cast",
+          "ref-cast-impl",
+          "relative-path",
+          "robust",
+          "rquickjs",
+          "rquickjs-core",
+          "rquickjs-macro",
+          "rquickjs-sys",
+          "rstar",
+          "rtrb",
+          "safe_arch",
+          "schemars",
+          "schemars_derive",
+          "send_wrapper",
+          "serde",
+          "serde_core",
+          "serde_derive",
+          "serde_derive_internals",
+          "serde_json",
+          "sha2",
+          "simba",
+          "slab",
+          "slotmap",
+          "smallvec",
+          "smol_str",
+          "spade",
+          "spin",
+          "stable_deref_trait",
+          "static_assertions",
+          "subtle",
+          "syn",
+          "syn",
+          "thiserror",
+          "thiserror-impl",
+          "thread_local",
+          "toml_datetime",
+          "toml_edit",
+          "toml_parser",
+          "triple_buffer",
+          "typeid",
+          "typenum",
+          "ulid",
+          "unicode-ident",
+          "unicode-segmentation",
+          "unicode-xid",
+          "uuid",
+          "variadics_please",
+          "wasip2",
+          "wasm-bindgen",
+          "wasm-bindgen-futures",
+          "wasm-bindgen-macro",
+          "wasm-bindgen-macro-support",
+          "wasm-bindgen-shared",
+          "web-sys",
+          "web-task",
+          "web-time",
+          "wgpu-types",
+          "wide",
+          "winapi",
+          "winapi-i686-pc-windows-gnu",
+          "winapi-x86_64-pc-windows-gnu",
+          "windows-link",
+          "windows-sys",
+          "winnow",
+          "wit-bindgen",
+          "zerocopy",
+          "zerocopy-derive",
+          "zeroize",
+          "zeroize_derive",
+          "zmij"
+        ],
+        "player_bytes": 5290464,
+        "player_sha256": "740a0c064f604c44d47c58339799230152031f68785a6a3e5348e62e235fd599",
+        "symbols": {
+          "format": "Mach-O/dSYM",
+          "uuids": {
+            "arm64": "1eb75548-91dd-387e-9db7-2c6d15d46d88"
+          }
+        },
+        "source_sha256": "a341d5eb72f32ee0051b74bb15c46111bd5f8df9c4e2ab5d7f18e1081d778520",
+        "wasm_sha256": "a8e0b17c618192ad94762db7a58fd79ad1a0faf7feabd890e239f7624f44c51e",
+        "temporary_compile_sources_tools_generated_c_wasm_and_build_storage_deleted": true,
+        "successes": [
+          {
+            "streaming": false,
+            "stdout": "tick=64 frames=44117 source=[2.078125, 1.0, 0.0] spawned=1.96875 pressed=1 released=1",
+            "pcm_sha256": "ec6d6527e9e52908b54859266987da54476d22c05fd4e4b886ce6e4647ce35c7",
+            "energy": [
+              443.54126608464867,
+              7673.058791487943
+            ]
+          },
+          {
+            "streaming": false,
+            "stdout": "tick=64 frames=44117 source=[2.078125, 1.0, 0.0] spawned=1.96875 pressed=1 released=1",
+            "pcm_sha256": "ec6d6527e9e52908b54859266987da54476d22c05fd4e4b886ce6e4647ce35c7",
+            "energy": [
+              443.54126608464867,
+              7673.058791487943
+            ]
+          },
+          {
+            "streaming": false,
+            "stdout": "tick=64 frames=44117 source=[2.078125, 1.0, 0.0] spawned=1.96875 pressed=1 released=1",
+            "pcm_sha256": "ec6d6527e9e52908b54859266987da54476d22c05fd4e4b886ce6e4647ce35c7",
+            "energy": [
+              443.54126608464867,
+              7673.058791487943
+            ]
+          },
+          {
+            "streaming": false,
+            "delayed_action": true,
+            "stdout": "tick=64 frames=44117 source=[2.078125, 1.0, 0.0] spawned=1.84375 pressed=1 released=1",
+            "pcm_sha256": "106ef5c6ba84b8695e013f94fcb2afaa6f7c98bb58b2e333821576bd0b14ca81"
+          },
+          {
+            "streaming": true,
+            "stdout": "tick=64 frames=44117 source=[2.078125, 1.0, 0.0] spawned=1.96875 pressed=1 released=1",
+            "pcm_sha256": "ec6d6527e9e52908b54859266987da54476d22c05fd4e4b886ce6e4647ce35c7",
+            "energy": [
+              443.54126608464867,
+              7673.058791487943
+            ]
+          },
+          {
+            "streaming": true,
+            "stdout": "tick=64 frames=44117 source=[2.078125, 1.0, 0.0] spawned=1.96875 pressed=1 released=1",
+            "pcm_sha256": "ec6d6527e9e52908b54859266987da54476d22c05fd4e4b886ce6e4647ce35c7",
+            "energy": [
+              443.54126608464867,
+              7673.058791487943
+            ]
+          },
+          {
+            "streaming": true,
+            "stdout": "tick=64 frames=44117 source=[2.078125, 1.0, 0.0] spawned=1.96875 pressed=1 released=1",
+            "pcm_sha256": "ec6d6527e9e52908b54859266987da54476d22c05fd4e4b886ce6e4647ce35c7",
+            "energy": [
+              443.54126608464867,
+              7673.058791487943
+            ]
+          },
+          {
+            "streaming": true,
+            "delayed_action": true,
+            "stdout": "tick=64 frames=44117 source=[2.078125, 1.0, 0.0] spawned=1.84375 pressed=1 released=1",
+            "pcm_sha256": "106ef5c6ba84b8695e013f94fcb2afaa6f7c98bb58b2e333821576bd0b14ca81"
+          }
+        ],
+        "rejections": [
+          {
+            "streaming": false,
+            "name": "trap",
+            "stderr": "Error: Session(Module(Trap(1)))"
+          },
+          {
+            "streaming": false,
+            "name": "nan",
+            "stderr": "Error: Session(Module(Boundary(Runtime(Scene(Component(StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2])))))))"
+          },
+          {
+            "streaming": false,
+            "name": "cycle",
+            "stderr": "Error: Session(Module(Boundary(Runtime(Scene(Component(StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1])))))))"
+          },
+          {
+            "streaming": false,
+            "name": "loop",
+            "stderr": "Error: Session(Module(Fuel))"
+          },
+          {
+            "streaming": false,
+            "name": "remove-listener",
+            "stderr": "Error: Session(Module(Boundary(Runtime(Scene(Invalid(\"audio declarations, limits or references\"))))))"
+          },
+          {
+            "streaming": false,
+            "name": "audio-pose",
+            "stderr": "Error: Audio(Invalid(\"audio world position outside mixer bounds\"))"
+          },
+          {
+            "streaming": false,
+            "name": "not-linked",
+            "stderr": "Error: \"unknown linked module\""
+          },
+          {
+            "streaming": false,
+            "name": "camera",
+            "stderr": "Error: SpatialHost"
+          },
+          {
+            "streaming": false,
+            "name": "manifest",
+            "stderr": "Error: SpatialHost"
+          },
+          {
+            "streaming": false,
+            "name": "overflow",
+            "stderr": "Error: Session(Runtime(Scene(Component(StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1])))))"
+          },
+          {
+            "streaming": false,
+            "name": "recording-clock",
+            "stderr": "Error: Rate"
+          },
+          {
+            "streaming": false,
+            "name": "clip-fingerprint",
+            "stderr": "Error: Asset(Io(Os { code: 2, kind: NotFound, message: \"No such file or directory\" }))"
+          },
+          {
+            "streaming": true,
+            "name": "trap",
+            "stderr": "Error: Session(Module(Trap(1)))"
+          },
+          {
+            "streaming": true,
+            "name": "nan",
+            "stderr": "Error: Session(Module(Boundary(Runtime(Scene(Component(StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2])))))))"
+          },
+          {
+            "streaming": true,
+            "name": "cycle",
+            "stderr": "Error: Session(Module(Boundary(Runtime(Scene(Component(StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1])))))))"
+          },
+          {
+            "streaming": true,
+            "name": "loop",
+            "stderr": "Error: Session(Module(Fuel))"
+          },
+          {
+            "streaming": true,
+            "name": "remove-listener",
+            "stderr": "Error: Session(Module(Boundary(Runtime(Scene(Invalid(\"audio declarations, limits or references\"))))))"
+          },
+          {
+            "streaming": true,
+            "name": "audio-pose",
+            "stderr": "Error: Audio(Invalid(\"audio world position outside mixer bounds\"))"
+          },
+          {
+            "streaming": true,
+            "name": "not-linked",
+            "stderr": "Error: \"unknown linked module\""
+          },
+          {
+            "streaming": true,
+            "name": "camera",
+            "stderr": "Error: SpatialHost"
+          },
+          {
+            "streaming": true,
+            "name": "manifest",
+            "stderr": "Error: SpatialHost"
+          },
+          {
+            "streaming": true,
+            "name": "overflow",
+            "stderr": "Error: Session(Runtime(Scene(Component(StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1])))))"
+          },
+          {
+            "streaming": true,
+            "name": "recording-clock",
+            "stderr": "Error: Rate"
+          },
+          {
+            "streaming": true,
+            "name": "clip-fingerprint",
+            "stderr": "Error: Asset(Io(Os { code: 2, kind: NotFound, message: \"No such file or directory\" }))"
+          },
+          {
+            "name": "--wasm-file",
+            "stderr": "Error: \"expected LINKED_MODULE COOKED_SCENE PCM_CACHE CLIP_KEY INPUT_RECORDING OUTPUT; no source/module loading supported\""
+          },
+          {
+            "name": "--script-file",
+            "stderr": "Error: \"expected LINKED_MODULE COOKED_SCENE PCM_CACHE CLIP_KEY INPUT_RECORDING OUTPUT; no source/module loading supported\""
+          }
+        ],
+        "limitations": [
+          "versioned copied input snapshot, not a complete gameplay SDK",
+          "QuickJS remains in normal dependency graph; this is not a QuickJS-free architecture",
+          "retained PCM and recording JSON are runtime exchange files, not deleted compile inputs",
+          "repository and validator build storage retained",
+          "copied bounded numeric transfer, not zero-copy",
+          "no renderer, full session save, mobile/device or performance gate",
+          "simulation/module/audio failures publish no PCM; output I/O itself is not atomic",
+          "trusted build environment; C flag audit checks global presence, not every translation unit"
+        ]
+      }
+    },
+    "physics": {
+      "local_path": "/tmp/incant-native-union79-physics/report.json",
+      "sha256": "07395e4486cf63362639ecd0bdf68691527e97275c72503db985fdf962d59666",
+      "result": {
+        "status": "passed",
+        "host": {
+          "system": "Darwin",
+          "machine": "arm64"
+        },
+        "trials": 3,
+        "browser_executed": true,
+        "browser": [
+          {
+            "trial": 0,
+            "browser": "156.0.8078.4",
+            "streams": [
+              {
+                "scenario": "3d",
+                "file": "browser-3d-0.bin",
+                "bytes": 2714667
+              },
+              {
+                "scenario": "2d",
+                "file": "browser-2d-0.bin",
+                "bytes": 3791547
+              }
+            ]
+          },
+          {
+            "trial": 1,
+            "browser": "156.0.8078.4",
+            "streams": [
+              {
+                "scenario": "3d",
+                "file": "browser-3d-1.bin",
+                "bytes": 2714667
+              },
+              {
+                "scenario": "2d",
+                "file": "browser-2d-1.bin",
+                "bytes": 3791547
+              }
+            ]
+          },
+          {
+            "trial": 2,
+            "browser": "156.0.8078.4",
+            "streams": [
+              {
+                "scenario": "3d",
+                "file": "browser-3d-2.bin",
+                "bytes": 2714667
+              },
+              {
+                "scenario": "2d",
+                "file": "browser-2d-2.bin",
+                "bytes": 3791547
+              }
+            ]
+          }
+        ],
+        "records": [
+          {
+            "bodies": 35,
+            "frames": 641,
+            "record_bytes": 121,
+            "max_sleeping": 32,
+            "wake_transitions": 16,
+            "events": 4,
+            "bytes": 2714667,
+            "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+            "file": "native-3d-1-0.bin",
+            "scenario": "3d",
+            "trial": 0,
+            "workers": 1,
+            "mode": "native-parallel"
+          },
+          {
+            "bodies": 35,
+            "frames": 641,
+            "record_bytes": 121,
+            "max_sleeping": 32,
+            "wake_transitions": 16,
+            "events": 4,
+            "bytes": 2714667,
+            "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+            "file": "native-3d-4-0.bin",
+            "scenario": "3d",
+            "trial": 0,
+            "workers": 4,
+            "mode": "native-parallel"
+          },
+          {
+            "bodies": 35,
+            "frames": 641,
+            "record_bytes": 121,
+            "max_sleeping": 32,
+            "wake_transitions": 16,
+            "events": 4,
+            "bytes": 2714667,
+            "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+            "file": "native-3d-4-1.bin",
+            "scenario": "3d",
+            "trial": 1,
+            "workers": 4,
+            "mode": "native-parallel"
+          },
+          {
+            "bodies": 35,
+            "frames": 641,
+            "record_bytes": 121,
+            "max_sleeping": 32,
+            "wake_transitions": 16,
+            "events": 4,
+            "bytes": 2714667,
+            "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+            "file": "native-3d-1-1.bin",
+            "scenario": "3d",
+            "trial": 1,
+            "workers": 1,
+            "mode": "native-parallel"
+          },
+          {
+            "bodies": 35,
+            "frames": 641,
+            "record_bytes": 121,
+            "max_sleeping": 32,
+            "wake_transitions": 16,
+            "events": 4,
+            "bytes": 2714667,
+            "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+            "file": "native-3d-1-2.bin",
+            "scenario": "3d",
+            "trial": 2,
+            "workers": 1,
+            "mode": "native-parallel"
+          },
+          {
+            "bodies": 35,
+            "frames": 641,
+            "record_bytes": 121,
+            "max_sleeping": 32,
+            "wake_transitions": 16,
+            "events": 4,
+            "bytes": 2714667,
+            "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+            "file": "native-3d-4-2.bin",
+            "scenario": "3d",
+            "trial": 2,
+            "workers": 4,
+            "mode": "native-parallel"
+          },
+          {
+            "bodies": 35,
+            "frames": 641,
+            "record_bytes": 169,
+            "max_sleeping": 32,
+            "wake_transitions": 32,
+            "events": 40,
+            "bytes": 3791547,
+            "sha256": "66fa6554bc25162403d67a8dc88bcc16906ef9b5ce3a3e54c8fddfc828a28b63",
+            "file": "native-2d-1-0.bin",
+            "scenario": "2d",
+            "trial": 0,
+            "workers": 1,
+            "mode": "native-parallel"
+          },
+          {
+            "bodies": 35,
+            "frames": 641,
+            "record_bytes": 169,
+            "max_sleeping": 32,
+            "wake_transitions": 32,
+            "events": 40,
+            "bytes": 3791547,
+            "sha256": "66fa6554bc25162403d67a8dc88bcc16906ef9b5ce3a3e54c8fddfc828a28b63",
+            "file": "native-2d-4-0.bin",
+            "scenario": "2d",
+            "trial": 0,
+            "workers": 4,
+            "mode": "native-parallel"
+          },
+          {
+            "bodies": 35,
+            "frames": 641,
+            "record_bytes": 169,
+            "max_sleeping": 32,
+            "wake_transitions": 32,
+            "events": 40,
+            "bytes": 3791547,
+            "sha256": "66fa6554bc25162403d67a8dc88bcc16906ef9b5ce3a3e54c8fddfc828a28b63",
+            "file": "native-2d-4-1.bin",
+            "scenario": "2d",
+            "trial": 1,
+            "workers": 4,
+            "mode": "native-parallel"
+          },
+          {
+            "bodies": 35,
+            "frames": 641,
+            "record_bytes": 169,
+            "max_sleeping": 32,
+            "wake_transitions": 32,
+            "events": 40,
+            "bytes": 3791547,
+            "sha256": "66fa6554bc25162403d67a8dc88bcc16906ef9b5ce3a3e54c8fddfc828a28b63",
+            "file": "native-2d-1-1.bin",
+            "scenario": "2d",
+            "trial": 1,
+            "workers": 1,
+            "mode": "native-parallel"
+          },
+          {
+            "bodies": 35,
+            "frames": 641,
+            "record_bytes": 169,
+            "max_sleeping": 32,
+            "wake_transitions": 32,
+            "events": 40,
+            "bytes": 3791547,
+            "sha256": "66fa6554bc25162403d67a8dc88bcc16906ef9b5ce3a3e54c8fddfc828a28b63",
+            "file": "native-2d-1-2.bin",
+            "scenario": "2d",
+            "trial": 2,
+            "workers": 1,
+            "mode": "native-parallel"
+          },
+          {
+            "bodies": 35,
+            "frames": 641,
+            "record_bytes": 169,
+            "max_sleeping": 32,
+            "wake_transitions": 32,
+            "events": 40,
+            "bytes": 3791547,
+            "sha256": "66fa6554bc25162403d67a8dc88bcc16906ef9b5ce3a3e54c8fddfc828a28b63",
+            "file": "native-2d-4-2.bin",
+            "scenario": "2d",
+            "trial": 2,
+            "workers": 4,
+            "mode": "native-parallel"
+          },
+          {
+            "bodies": 35,
+            "frames": 641,
+            "record_bytes": 121,
+            "max_sleeping": 32,
+            "wake_transitions": 16,
+            "events": 4,
+            "bytes": 2714667,
+            "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+            "file": "browser-3d-0.bin",
+            "scenario": "3d",
+            "trial": 0,
+            "workers": 0,
+            "mode": "browser-wasm-serial"
+          },
+          {
+            "bodies": 35,
+            "frames": 641,
+            "record_bytes": 121,
+            "max_sleeping": 32,
+            "wake_transitions": 16,
+            "events": 4,
+            "bytes": 2714667,
+            "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+            "file": "browser-3d-1.bin",
+            "scenario": "3d",
+            "trial": 1,
+            "workers": 0,
+            "mode": "browser-wasm-serial"
+          },
+          {
+            "bodies": 35,
+            "frames": 641,
+            "record_bytes": 121,
+            "max_sleeping": 32,
+            "wake_transitions": 16,
+            "events": 4,
+            "bytes": 2714667,
+            "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+            "file": "browser-3d-2.bin",
+            "scenario": "3d",
+            "trial": 2,
+            "workers": 0,
+            "mode": "browser-wasm-serial"
+          },
+          {
+            "bodies": 35,
+            "frames": 641,
+            "record_bytes": 169,
+            "max_sleeping": 32,
+            "wake_transitions": 32,
+            "events": 40,
+            "bytes": 3791547,
+            "sha256": "66fa6554bc25162403d67a8dc88bcc16906ef9b5ce3a3e54c8fddfc828a28b63",
+            "file": "browser-2d-0.bin",
+            "scenario": "2d",
+            "trial": 0,
+            "workers": 0,
+            "mode": "browser-wasm-serial"
+          },
+          {
+            "bodies": 35,
+            "frames": 641,
+            "record_bytes": 169,
+            "max_sleeping": 32,
+            "wake_transitions": 32,
+            "events": 40,
+            "bytes": 3791547,
+            "sha256": "66fa6554bc25162403d67a8dc88bcc16906ef9b5ce3a3e54c8fddfc828a28b63",
+            "file": "browser-2d-1.bin",
+            "scenario": "2d",
+            "trial": 1,
+            "workers": 0,
+            "mode": "browser-wasm-serial"
+          },
+          {
+            "bodies": 35,
+            "frames": 641,
+            "record_bytes": 169,
+            "max_sleeping": 32,
+            "wake_transitions": 32,
+            "events": 40,
+            "bytes": 3791547,
+            "sha256": "66fa6554bc25162403d67a8dc88bcc16906ef9b5ce3a3e54c8fddfc828a28b63",
+            "file": "browser-2d-2.bin",
+            "scenario": "2d",
+            "trial": 2,
+            "workers": 0,
+            "mode": "browser-wasm-serial"
+          }
+        ],
+        "source_sha256": {
+          "crates/incant_runtime/src/scene.rs": "74608a97640c176f4bbe9b46cd6ebc3e30a8db01b129986b21f87ca1e3addbb2",
+          "crates/incant_runtime/src/world_identity.rs": "7ffc1f183c00110cc06f48f678b07f220d6bad73ed3e62690db142c0df23a809",
+          "crates/incant_runtime/src/hierarchy.rs": "242b534ad778bf4a2bb3aa67db0a0e1f620566a6a15650abbfda9e61a24224bc",
+          "crates/incant_runtime/src/spatial.rs": "87a6702b17858ddc571fe27dbd046d4fa79808f9587d4445187e00ac394d47ef",
+          "crates/incant_runtime/src/spatial_commands.rs": "c1a003b8460d3667cdfcad95a639bc7a5bea8887b11ceffee2b9ff4e0cafe087",
+          "crates/incant_runtime/src/audio_binary.rs": "1121b4cc9151d929bb112f40625bb7620ac12fd9dda52eabe529ac5ca80d36ce",
+          "crates/incant_runtime/src/lib.rs": "67ee0411837ea99a113bddec33f5538ff3bce4d7f4e5d3f1dea0cd84b59a7ab3",
+          "crates/incant_runtime/src/spatial_view.rs": "070259904adaca5b25010fc1967bcd002235e6107f11bc9d918bf3d587eed22a",
+          "crates/incant_runtime/src/tilemap.rs": "7768b07a216dfa7cd3bb7da8f028152361341d87f81e2579af9e208c3922f2bc",
+          "crates/incant_runtime/src/save.rs": "8a1bd0191fcb7803b789fefe9b70596fc93b4270fe705127281cfa0e8b63f3bf",
+          "crates/incant_runtime/src/binary.rs": "b696ace3cf70a7b5208cc6e8ec46b6624c41af93a2668146282b7d55716d352f",
+          "crates/incant_runtime/src/world.rs": "099f6a1f79f5c0c230614603473573129c342309a6f0210541b8a48d9cabbd55",
+          "crates/incant_runtime/src/commands.rs": "c66cf9b9ce2d1df034206214b217b62c187a684974babeedacc44c1b908e3c2d",
+          "crates/incant_runtime/src/physics_2d_binary.rs": "481bb0071e06690491d512c76cffde7efe85cc6bc4a87699fd0c4a155f865e2b",
+          "crates/incant_runtime/src/tilemap_binary.rs": "aa5dba50e3b7d34d58eab0726039162f15670e44a9c7ace8b05c3e1fad696f0b",
+          "crates/incant_runtime/src/physics_2d.rs": "3f3563e72e81d05a70d104291dddcc0d9e1355070ea8eb01f67581d319d8c3ac",
+          "crates/incant_runtime/src/audio.rs": "f0e4b40768a3b3aa4bef5e50d8e4dcb531225ff7937b0d9bc7b358a4ead9dc96",
+          "crates/incant_runtime/src/physics_binary.rs": "39b766313db1d0d0487e90e419cc777e18d7062a556b237608ed03c93c65e822",
+          "crates/incant_runtime/src/spatial_binary.rs": "bd998541bffd9c24032b42a5dab47c097fe579ac8da799320fbeeadf0ff52c9d",
+          "crates/incant_runtime/src/physics_queries.rs": "4ba2cc35b87102f13338a325ea8ec94d651fe71968a1fc9fae9f08e30523aba3",
+          "crates/incant_runtime/src/physics.rs": "ba1f98eddeef3becebe82831ea45cf6de4f7462e8e24ca422e4e68f7152a397f",
+          "crates/incant_runtime/src/sprite.rs": "f00cd559c6b538d904eae5d3551102da27711556b51f3b59b6e9b9b9169ac249",
+          "crates/incant_runtime/src/columns.rs": "80a615d853fea52e86cc58e634dfad7b2e371d944f840b91ebc888fa23718c66",
+          "crates/incant_runtime/src/sprite_binary.rs": "e211217db25b5f07223782cf722646bf474f23ac93b39809817d73af01bc5c65",
+          "crates/incant_physics_runtime/src/shapes.rs": "17fc238d7cbc9ab5ffc6eba0e6a59e55d8d29f1f1e29d587927a7f1ce2a3eb87",
+          "crates/incant_physics_runtime/src/lib.rs": "6f6195522e75587d678a9e73dc264802d88fd19f8bf02003425c8f5b0dcb506e",
+          "crates/incant_physics_runtime/src/character_queries.rs": "c7548822eede48b93ab6e822e1da563f2c319a606a491f06159c61a95dd7e3bd",
+          "crates/incant_physics_runtime/src/queries.rs": "675914573c124551692b043dca98902c4efef98eda602b1023c1da3d032eafe6",
+          "crates/incant_physics_runtime/src/character.rs": "a46c7ece3103ce7c8ddbd80d60b1668782028e93c626b655d6f4bab175672a92",
+          "crates/incant_physics_2d_runtime/src/config.rs": "7872f6c540dec7af30b703daa442c0940e6340e31edd28fc708ec02f7a277494",
+          "crates/incant_physics_2d_runtime/src/lib.rs": "3acfbd7a2ac8340caa3a813d52fa34ea56b59bbaea6ab802c14ce6e744c1e91c",
+          "crates/incant_physics_2d_runtime/src/query.rs": "d9a077501928dcfa9096c3cc73f4edbaf999b754a3a9458adfb2321731d89f72",
+          "crates/incant_types/src/physics_2d.rs": "d96a77c53ca3cf06d2082034fcdcf39ec81f51286c31564d0254e6f2becc3ef4",
+          "crates/incant_types/src/physics_2d_validation.rs": "122b6ae481c8defdc188ac649f88ece4b047a8dc8a4b301931559cfc21c24881",
+          "Cargo.lock": "93313ac756cfd859676f6b4bc646790b689adddc8e3085f637981a5ac99cf9e4",
+          "tools/probes/native-physics/Cargo.lock": "db620b837d3ada480e7f9c58e2069d36f98750d8abb9aa273e58aee8e6639ae6",
+          "tools/probes/native-physics/Cargo.toml": "2422cfe646cc18cb1b0df4cb1354f1a253f305ada22041b26cfc678aea4c6838",
+          "tools/probes/native-physics/src/lib.rs": "ccf2fa60ab3fca99229dc6c1b4862d67e8364abdbe3bf2b6cd350d1673664e72",
+          "tools/probes/native-physics/src/main.rs": "b82be86e14b478c7a10587e04529080e45b9a00c129c277c0d8b47526f660d50",
+          "tools/probes/native-physics/src/planar.rs": "1e7dbada20bd21cf72e211b40388b7ae89453c12f6c5578f5525f8c5f6dec108",
+          "tools/probes/native-physics/run.py": "f790f3b462d2dc2d18e845ab16739570827725dfa5c6527666be1e76fcdda956",
+          "tools/probes/native-physics/browser.mjs": "e92eb2ae6eae19ae2c0f5860593d2b2c23dca8ac17cb8be5df245f8dce58326a"
+        },
+        "scope": "native cooked ECS full public 3D/2D rigid-body state plus planar ECS transforms/velocity; original native serial/joint solver proof remains separate; no timings, phone, backend-adoption or hidden solver-state claim"
+      }
+    },
+    "physics-shipping": {
+      "local_path": "/tmp/incant-native-union79-physics-shipping/result.json",
+      "sha256": "11bcf2c6f560c9bc419b5d425056876cc8a4e65d409c692e85d52bcf4fda8c58",
+      "result": {
+        "passed": true,
+        "target": "aarch64-apple-darwin",
+        "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+        "codegen": {
+          "incant_runtime": {
+            "opt-level": "3",
+            "codegen-units": "1",
+            "panic": "abort",
+            "debuginfo": "2",
+            "split-debuginfo": "packed"
+          },
+          "incant_physics_2d_runtime": {
+            "opt-level": "3",
+            "codegen-units": "1",
+            "panic": "abort",
+            "debuginfo": "2",
+            "split-debuginfo": "packed"
+          },
+          "rapier2d": {
+            "opt-level": "3",
+            "codegen-units": "1",
+            "panic": "abort",
+            "debuginfo": "2",
+            "split-debuginfo": "packed"
+          },
+          "native_physics_2d": {
+            "opt-level": "3",
+            "codegen-units": "1",
+            "panic": "abort",
+            "debuginfo": "2",
+            "split-debuginfo": "packed",
+            "lto": "fat"
+          }
+        },
+        "symbol_identity": {
+          "format": "Mach-O/dSYM",
+          "uuids": {
+            "arm64": "6a23098c-baf5-36d5-b18c-3b2868fc2f75"
+          }
+        },
+        "player_bytes": 3994224,
+        "player_sha256": "8dc8e1dd4b23581efb9165dbd2ff5be50bac5acd442371d127607a9af3da4063",
+        "built_targets": [
+          "allocator_api2",
+          "approx",
+          "arrayvec",
+          "async_channel",
+          "async_executor",
+          "async_task",
+          "atomic_waker",
+          "autocfg",
+          "bevy_ecs",
+          "bevy_ecs_macro_logic",
+          "bevy_ecs_macros",
+          "bevy_macro_utils",
+          "bevy_platform",
+          "bevy_ptr",
+          "bevy_tasks",
+          "bevy_utils",
+          "bitflags",
+          "block_buffer",
+          "build-script-build",
+          "bumpalo",
+          "bytemuck",
+          "byteorder",
+          "cfg_if",
+          "concurrent_queue",
+          "convert_case",
+          "cpufeatures",
+          "crossbeam_deque",
+          "crossbeam_epoch",
+          "crossbeam_queue",
+          "crossbeam_utils",
+          "crypto_common",
+          "derive_more",
+          "derive_more_impl",
+          "digest",
+          "disqualified",
+          "downcast_rs",
+          "dyn_clone",
+          "either",
+          "ena",
+          "equivalent",
+          "event_listener",
+          "event_listener_strategy",
+          "fastrand",
+          "fixedbitset",
+          "foldhash",
+          "futures_core",
+          "futures_io",
+          "futures_lite",
+          "generic_array",
+          "glam",
+          "glamx",
+          "hash32",
+          "hashbrown",
+          "heapless",
+          "incant_2d",
+          "incant_physics_2d_runtime",
+          "incant_physics_runtime",
+          "incant_runtime",
+          "incant_types",
+          "indexmap",
+          "itoa",
+          "libc",
+          "libm",
+          "log",
+          "matrixmultiply",
+          "memchr",
+          "nalgebra",
+          "nalgebra_macros",
+          "native_physics_2d",
+          "nonmax",
+          "num_complex",
+          "num_derive",
+          "num_integer",
+          "num_rational",
+          "num_traits",
+          "ordered_float",
+          "parking",
+          "parry2d",
+          "parry3d",
+          "pin_project_lite",
+          "proc_macro2",
+          "profiling",
+          "profiling_procmacros",
+          "quote",
+          "rapier2d",
+          "rapier3d",
+          "rawpointer",
+          "rayon",
+          "rayon_core",
+          "ref_cast",
+          "ref_cast_impl",
+          "robust",
+          "rstar",
+          "schemars",
+          "schemars_derive",
+          "serde",
+          "serde_core",
+          "serde_derive",
+          "serde_derive_internals",
+          "serde_json",
+          "sha2",
+          "simba",
+          "slab",
+          "slotmap",
+          "smallvec",
+          "spade",
+          "spin",
+          "stable_deref_trait",
+          "static_assertions",
+          "syn",
+          "thiserror",
+          "thiserror_impl",
+          "thread_local",
+          "toml_datetime",
+          "toml_edit",
+          "toml_parser",
+          "typenum",
+          "ulid",
+          "unicode_ident",
+          "unicode_segmentation",
+          "unicode_xid",
+          "variadics_please",
+          "version_check",
+          "wide",
+          "winnow",
+          "zmij"
+        ],
+        "fixture_tool_sha256": "35ee93f0738f970c66b0bc80f34b38d68b1a73c3d4fbdeb3e43459517ed63954",
+        "cooked_scene_sha256": "1c66816e1f2cf55dd748bc797e7687adf1082d64d73b1eccc2e3c6a53910f0db",
+        "fixture_kind": "trusted typed checked v7 fixture; authoring/cook API tested separately",
+        "temporary_fixture_and_build_storage_deleted": true,
+        "successful_processes": 3,
+        "refusal_processes": 4,
+        "source_sha256": {
+          "Cargo.toml": "07b47541c2c403c8458eff6d110ce487cbaa1c5cb7ed625df32e2834676ae064",
+          "Cargo.lock": "93313ac756cfd859676f6b4bc646790b689adddc8e3085f637981a5ac99cf9e4",
+          ".cargo/config.toml": "0d3b42ee7bc4ef237cb8af440c47e506dcc9cc8b24d49d3cd3d3fea76ae5caa1",
+          "tools/probes/native-physics-2d.py": "4e3fd48e5c40ded86ae4be333e5c66fb57c362ed8c40d002ebfa80df7d0312da",
+          "tools/probes/native-physics/src/planar.rs": "1e7dbada20bd21cf72e211b40388b7ae89453c12f6c5578f5525f8c5f6dec108",
+          "crates/incant_runtime/src/scene.rs": "74608a97640c176f4bbe9b46cd6ebc3e30a8db01b129986b21f87ca1e3addbb2",
+          "crates/incant_runtime/src/world_identity.rs": "7ffc1f183c00110cc06f48f678b07f220d6bad73ed3e62690db142c0df23a809",
+          "crates/incant_runtime/src/hierarchy.rs": "242b534ad778bf4a2bb3aa67db0a0e1f620566a6a15650abbfda9e61a24224bc",
+          "crates/incant_runtime/src/spatial.rs": "87a6702b17858ddc571fe27dbd046d4fa79808f9587d4445187e00ac394d47ef",
+          "crates/incant_runtime/src/spatial_commands.rs": "c1a003b8460d3667cdfcad95a639bc7a5bea8887b11ceffee2b9ff4e0cafe087",
+          "crates/incant_runtime/src/audio_binary.rs": "1121b4cc9151d929bb112f40625bb7620ac12fd9dda52eabe529ac5ca80d36ce",
+          "crates/incant_runtime/src/lib.rs": "67ee0411837ea99a113bddec33f5538ff3bce4d7f4e5d3f1dea0cd84b59a7ab3",
+          "crates/incant_runtime/src/spatial_view.rs": "070259904adaca5b25010fc1967bcd002235e6107f11bc9d918bf3d587eed22a",
+          "crates/incant_runtime/src/tilemap.rs": "7768b07a216dfa7cd3bb7da8f028152361341d87f81e2579af9e208c3922f2bc",
+          "crates/incant_runtime/src/save.rs": "8a1bd0191fcb7803b789fefe9b70596fc93b4270fe705127281cfa0e8b63f3bf",
+          "crates/incant_runtime/src/binary.rs": "b696ace3cf70a7b5208cc6e8ec46b6624c41af93a2668146282b7d55716d352f",
+          "crates/incant_runtime/src/world.rs": "099f6a1f79f5c0c230614603473573129c342309a6f0210541b8a48d9cabbd55",
+          "crates/incant_runtime/src/commands.rs": "c66cf9b9ce2d1df034206214b217b62c187a684974babeedacc44c1b908e3c2d",
+          "crates/incant_runtime/src/physics_2d_binary.rs": "481bb0071e06690491d512c76cffde7efe85cc6bc4a87699fd0c4a155f865e2b",
+          "crates/incant_runtime/src/tilemap_binary.rs": "aa5dba50e3b7d34d58eab0726039162f15670e44a9c7ace8b05c3e1fad696f0b",
+          "crates/incant_runtime/src/physics_2d.rs": "3f3563e72e81d05a70d104291dddcc0d9e1355070ea8eb01f67581d319d8c3ac",
+          "crates/incant_runtime/src/audio.rs": "f0e4b40768a3b3aa4bef5e50d8e4dcb531225ff7937b0d9bc7b358a4ead9dc96",
+          "crates/incant_runtime/src/physics_binary.rs": "39b766313db1d0d0487e90e419cc777e18d7062a556b237608ed03c93c65e822",
+          "crates/incant_runtime/src/spatial_binary.rs": "bd998541bffd9c24032b42a5dab47c097fe579ac8da799320fbeeadf0ff52c9d",
+          "crates/incant_runtime/src/physics_queries.rs": "4ba2cc35b87102f13338a325ea8ec94d651fe71968a1fc9fae9f08e30523aba3",
+          "crates/incant_runtime/src/physics.rs": "ba1f98eddeef3becebe82831ea45cf6de4f7462e8e24ca422e4e68f7152a397f",
+          "crates/incant_runtime/src/sprite.rs": "f00cd559c6b538d904eae5d3551102da27711556b51f3b59b6e9b9b9169ac249",
+          "crates/incant_runtime/src/columns.rs": "80a615d853fea52e86cc58e634dfad7b2e371d944f840b91ebc888fa23718c66",
+          "crates/incant_runtime/src/sprite_binary.rs": "e211217db25b5f07223782cf722646bf474f23ac93b39809817d73af01bc5c65",
+          "crates/incant_runtime/Cargo.toml": "f8f9254531bec0ccff9661a5243706227bd58b1310dd3dd05ef83001f14cd29b",
+          "crates/incant_physics_2d_runtime/src/config.rs": "7872f6c540dec7af30b703daa442c0940e6340e31edd28fc708ec02f7a277494",
+          "crates/incant_physics_2d_runtime/src/lib.rs": "3acfbd7a2ac8340caa3a813d52fa34ea56b59bbaea6ab802c14ce6e744c1e91c",
+          "crates/incant_physics_2d_runtime/src/query.rs": "d9a077501928dcfa9096c3cc73f4edbaf999b754a3a9458adfb2321731d89f72",
+          "crates/incant_physics_2d_runtime/Cargo.toml": "617c4ad200464eda1d54efa7ad2b8c9cd789291be424bffe4a355f8a22d431f1",
+          "crates/incant_types/src/physics_validation.rs": "c8a2e2e8b77020ea2ae39d047a9be13081003ef6cf236ca292a52aed4f4a3a98",
+          "crates/incant_types/src/visual_asset.rs": "6dae6f3e5a2f98dd208616f01b1a84dfcc5588cebda819b07c52421e24341791",
+          "crates/incant_types/src/render.rs": "e02d42ddcdbcdeb607c4ae307f30b02805adae2b68cd1fadee2eaed603f3d881",
+          "crates/incant_types/src/lib.rs": "35cc59a73f43d6a25af11cd933d1e733ec184d9c6c71fe1e21bd8db823bcf185",
+          "crates/incant_types/src/physics_2d.rs": "d96a77c53ca3cf06d2082034fcdcf39ec81f51286c31564d0254e6f2becc3ef4",
+          "crates/incant_types/src/audio.rs": "31a41005ed056423ce3c7d3882429550d6383a58a1ea5799e698c25d150a3feb",
+          "crates/incant_types/src/lights.rs": "c69e1a4f9b682f1f5bf267d57502387b9f8e6b4a42c32c752c0176f43c9ac935",
+          "crates/incant_types/src/transform.rs": "b22948c2013800b8b76d1d18693e7a406358e2d554aad01a1e6d1f87adccf08c",
+          "crates/incant_types/src/physics_2d_validation.rs": "122b6ae481c8defdc188ac649f88ece4b047a8dc8a4b301931559cfc21c24881",
+          "crates/incant_types/src/physics.rs": "ec1dd966a85676197f7283133be1b274666135a8cfe6403a477a130a6a43769d",
+          "crates/incant_types/src/collider_shapes.rs": "dc2efc4d76e8671b03bc38eb92e8db0161f4613417772644028e0b4ecb958979",
+          "crates/incant_types/src/camera.rs": "28eaace0a774685b9bc72962480520a8646fca4310b5eb1d3ac995444dfb0de2",
+          "crates/incant_types/Cargo.toml": "ae094bd227e3e585de808ad18da99b02cc7bc8282720cffeb6d3a8b3275c5e9c",
+          "crates/incant_2d/src/lib.rs": "eb7e30689f99494a37e8f44b2c9599735ee3e2b8523953dc84e398a3d638cd9f",
+          "crates/incant_2d/src/tilemap.rs": "a065ef79daf1d7939ac159e803a81a8a03fbd89fcfea6a6ee3e45360b14e147f",
+          "crates/incant_2d/Cargo.toml": "57378df7552b4ea8a12dbc876467d06bc067592b7c37a8a875bc670e84540a0f",
+          "crates/incant_runtime/examples/native_physics_2d.rs": "de5585f855c352b17b416ab52be21be11b7366d35c014a668af207848acdd469"
+        },
+        "coverage": {
+          "bodies": 35,
+          "frames": 641,
+          "record_bytes": 169,
+          "max_sleeping": 32,
+          "wake_transitions": 32,
+          "events": 40,
+          "bytes": 3791547,
+          "sha256": "66fa6554bc25162403d67a8dc88bcc16906ef9b5ce3a3e54c8fddfc828a28b63"
+        },
+        "results": [
+          {
+            "output": "shipping-0.bin",
+            "bodies": 35,
+            "frames": 641,
+            "record_bytes": 169,
+            "max_sleeping": 32,
+            "wake_transitions": 32,
+            "events": 40,
+            "bytes": 3791547,
+            "sha256": "66fa6554bc25162403d67a8dc88bcc16906ef9b5ce3a3e54c8fddfc828a28b63"
+          },
+          {
+            "output": "shipping-1.bin",
+            "bodies": 35,
+            "frames": 641,
+            "record_bytes": 169,
+            "max_sleeping": 32,
+            "wake_transitions": 32,
+            "events": 40,
+            "bytes": 3791547,
+            "sha256": "66fa6554bc25162403d67a8dc88bcc16906ef9b5ce3a3e54c8fddfc828a28b63"
+          },
+          {
+            "output": "shipping-2.bin",
+            "bodies": 35,
+            "frames": 641,
+            "record_bytes": 169,
+            "max_sleeping": 32,
+            "wake_transitions": 32,
+            "events": 40,
+            "bytes": 3791547,
+            "sha256": "66fa6554bc25162403d67a8dc88bcc16906ef9b5ce3a3e54c8fddfc828a28b63"
+          }
+        ],
+        "shipping_matches_release_reference": true,
+        "runtime_package_retained": [
+          "copied native executable",
+          "cooked v7 scene; no texture cache"
+        ],
+        "visual_or_full_game_session": false,
+        "physics_saves": false,
+        "reference_phone_gate": false,
+        "failure_semantics": "Simulation failure stops before output creation. Output I/O is not atomic and may leave a partial stream."
+      }
+    },
+    "project-play": {
+      "local_path": "/tmp/incant-native-union79-project-play/result.json",
+      "sha256": "8fa299c582d1942a15dcb734aaaa04310d0ce6fdd8db18f1ade27d39d69e02c1",
+      "result": {
+        "passed": true,
+        "successful_runs": 3,
+        "false_assertion_runs": 1,
+        "terminal_failure_runs": 1,
+        "mismatched_script_runs": 1,
+        "player_sha256": "bc3832d3d11e555cd59c73a0c4a20115daf1b3cd42b6552f20063e8fcaf1cd26",
+        "source_sha256": "6246d3118b54ab10f4804fc26b91db6f78f543cdffbd92d638bbb9e0c77ccc0f",
+        "temporary_compile_input_deleted": true,
+        "authoring_unchanged": true,
+        "baseline": {
+          "passed": true,
+          "runtime": "native",
+          "script_source_sha256": "6246d3118b54ab10f4804fc26b91db6f78f543cdffbd92d638bbb9e0c77ccc0f",
+          "script_source_parsing": false,
+          "scene": "01M4MKWP4MCDHRZJNKNT37HBCR",
+          "tick": 5,
+          "tick_rate": 60,
+          "entity_count": 1,
+          "frames": 4000,
+          "pcm_sha256": "0c92bddb4e96f3ea9ec9f0f64a668255a6c15527ac09f6f119cafde60c7c4a39",
+          "logs": {
+            "dropped": 0,
+            "entries": [
+              {
+                "level": "info",
+                "message": "accepted 1 \ud83d\ude80",
+                "tick": 1
+              },
+              {
+                "level": "info",
+                "message": "accepted 2 \ud83d\ude80",
+                "tick": 2
+              },
+              {
+                "level": "info",
+                "message": "accepted 3 \ud83d\ude80",
+                "tick": 3
+              },
+              {
+                "level": "info",
+                "message": "accepted 4 \ud83d\ude80",
+                "tick": 4
+              },
+              {
+                "level": "info",
+                "message": "accepted 5 \ud83d\ude80",
+                "tick": 5
+              }
+            ]
+          },
+          "observations": {
+            "passed": true,
+            "tick": 5,
+            "tick_rate": 60,
+            "checks": [
+              {
+                "name": "motion",
+                "tick": 5,
+                "expect": {
+                  "type": "vector",
+                  "entity": "00000000000000000000000001",
+                  "property": "translation",
+                  "value": [
+                    0.23333333333333334,
+                    0.0,
+                    0.0
+                  ],
+                  "tolerance": 1e-10
+                },
+                "passed": true,
+                "actual": [
+                  0.23333333333333334,
+                  0.0,
+                  0.0
+                ]
+              }
+            ],
+            "entities": {
+              "00000000000000000000000001": {
+                "parent": null,
+                "translation": [
+                  0.23333333333333334,
+                  0.0,
+                  0.0
+                ],
+                "rotation": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ],
+                "velocity": [
+                  3.0,
+                  0.0,
+                  0.0
+                ],
+                "world_transform": [
+                  [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                  ],
+                  [
+                    0.23333333333333334,
+                    0.0,
+                    0.0,
+                    1.0
+                  ]
+                ]
+              }
+            }
+          },
+          "cpu_render_input": false,
+          "gpu_submitted": false,
+          "project_sha256": "6ccefeb381f5316dd59a6d7e3163eeac8412b378a1c5ef76730a9ea89f7f1f9c"
+        },
+        "shipping_profile": false,
+        "gpu_submitted": false,
+        "reference_phone_gate": false
+      }
+    },
+    "game-gpu": {
+      "local_path": "/tmp/incant-native-union79-game-gpu/result.json",
+      "sha256": "0c63fa79b3579d50c0ac4a3977ed2c04683042ea3b42c3b8a6012512f1072660",
+      "result": {
+        "passed": true,
+        "target": "aarch64-apple-darwin",
+        "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+        "codegen": {
+          "incant_render_game": {
+            "opt-level": "3",
+            "codegen-units": "1",
+            "panic": "abort"
+          },
+          "incant_render_native": {
+            "opt-level": "3",
+            "codegen-units": "1",
+            "panic": "abort"
+          },
+          "incant_render_data": {
+            "opt-level": "3",
+            "codegen-units": "1",
+            "panic": "abort"
+          },
+          "incant_render_gpu_host": {
+            "opt-level": "3",
+            "codegen-units": "1",
+            "panic": "abort"
+          },
+          "incant_render": {
+            "opt-level": "3",
+            "codegen-units": "1",
+            "panic": "abort"
+          },
+          "wgpu": {
+            "opt-level": "3",
+            "codegen-units": "1",
+            "panic": "abort"
+          },
+          "incant_input": {
+            "opt-level": "3",
+            "codegen-units": "1",
+            "panic": "abort"
+          },
+          "incant_script": {
+            "opt-level": "3",
+            "codegen-units": "1",
+            "panic": "abort"
+          },
+          "incant_runtime": {
+            "opt-level": "3",
+            "codegen-units": "1",
+            "panic": "abort"
+          },
+          "incant_physics_runtime": {
+            "opt-level": "3",
+            "codegen-units": "1",
+            "panic": "abort"
+          },
+          "rapier3d": {
+            "opt-level": "3",
+            "codegen-units": "1",
+            "panic": "abort"
+          },
+          "incant_assets_runtime": {
+            "opt-level": "3",
+            "codegen-units": "1",
+            "panic": "abort"
+          },
+          "incant_audio_runtime": {
+            "opt-level": "3",
+            "codegen-units": "1",
+            "panic": "abort"
+          },
+          "incant_game_runtime": {
+            "opt-level": "3",
+            "codegen-units": "1",
+            "panic": "abort"
+          },
+          "incant_game_player": {
+            "opt-level": "3",
+            "codegen-units": "1",
+            "panic": "abort",
+            "lto": "fat",
+            "debuginfo": "2",
+            "split-debuginfo": "packed"
+          }
+        },
+        "symbol_identity": {
+          "format": "Mach-O/dSYM",
+          "uuids": {
+            "arm64": "0be86ea7-2456-3032-9d85-b1bf32ead8f5"
+          }
+        },
+        "player_bytes": 8893968,
+        "player_sha256": "0d58c53815861ebcd354147b2dc9c4f75ad922f3105e62acc6c443ecedcf0da4",
+        "script_metadata": {
+          "build_id": "9e1c7061b466a167bf880a592a0b1e4fc7c7b1ffb638da029b67ce52df669033",
+          "bytecode_bytes": 3330,
+          "bytecode_sha256": "2e6aeb2ec0e038233aa014b704019c0db4630c47ae31db2fed6c5b5861009bdd",
+          "debug_line_tables": true,
+          "embedded_source": false,
+          "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+          "format": 1,
+          "hardening_sha256": "4a2d87348651fab15d47582cce2fba82058255ddb2a2a29386db7705bea1cb23",
+          "source_map_sha256": null,
+          "source_name": "embedded-game.js",
+          "source_sha256": "83f9d115a14c90e8f2258830dd06f3f95a86db7ef197910dc9a267312d8386fc",
+          "symbolication": "map CommonJS locations after subtracting wrapper_prefix_lines; automatic runtime stack remapping remains unsupported",
+          "target": "aarch64-apple-darwin",
+          "trust": "fresh compiler output embedded by trusted native build; hashes are not authentication",
+          "wrapper_prefix_lines": 3
+        },
+        "source_compiler_symbols_absent": true,
+        "dynamic_source_routes_rejected": true,
+        "headless_sha256": "2d3caa0116db02576fc5f6d19ddd087a14bc035fc0ac9f8a89121bcd92970f80",
+        "cook_sha256": "17c560a8ab57ffa19ffd132b193e4236633b7cfd206e8c09ec3fc536229d1910",
+        "audio_example_sha256": "366c68aadf081a6fb823b3ab3636d7eee6be5690da9cb0338dbdccf17f6007b7",
+        "fixture_tool_sha256": "c635d2ffb42001938e54e7fe4ea363a44915f1924b9e9a913893a15edf73712c",
+        "public_import": {
+          "asset": {
+            "id": "01M4MKWDK48E5RT5JKRW3959S8",
+            "kind": "audio",
+            "name": "tone",
+            "path": "tone.wav",
+            "sha256": "4a24dd0240956f6ad00cd68d2f816e25f6662a170b6a0a92ae86a0a10aa5176e"
+          },
+          "cache_hit": false,
+          "changed": true,
+          "details": {
+            "channels": 2,
+            "dependencies": [
+              {
+                "path": "tone.wav",
+                "sha256": "59aca4ec1400bba63489f30c73a82fb29e82c83a923fcb468fa1ba0176dab6e3"
+              }
+            ],
+            "duration_seconds": 0.5,
+            "frames": 24000,
+            "sample_rate": 48000
+          },
+          "revision": 1
+        },
+        "public_model_import": {
+          "asset": {
+            "id": "01M4MKWDKRWBGG69HPQ2PN6P31",
+            "kind": "model",
+            "name": "tri",
+            "path": "tri.gltf",
+            "sha256": "eee5c6bca733d77735113773adbddd0eca28e08f96dd6c2d5a767be3321c00a4"
+          },
+          "cache_hit": false,
+          "changed": true,
+          "details": {
+            "dependencies": [
+              {
+                "path": "tri.bin",
+                "sha256": "d8b87038ed2ace74ed183166f6b0a541eab77f7184d50e65edc4bca5ccb5445a"
+              },
+              {
+                "path": "tri.gltf",
+                "sha256": "34ef92ca7a431a27baf00c0291a5d30027cdf03e4e5243adc0a38ea8c863d722"
+              }
+            ],
+            "meshes": 1,
+            "textures": 0,
+            "vertices": 3
+          },
+          "revision": 2
+        },
+        "public_atlas_import": {
+          "asset": {
+            "id": "01M4MKWDMENHZ6JPH1GT55WJ18",
+            "import_settings": {
+              "type": "texture",
+              "usage": "color"
+            },
+            "kind": "texture",
+            "name": "numeric.atlas",
+            "path": "numeric.atlas.json",
+            "sha256": "0ccadbcac607c8b572828b741073d9f314f5d60eaee7dc6b23a6f4b5a4caa452"
+          },
+          "cache_hit": false,
+          "changed": true,
+          "details": {
+            "atlas": {
+              "frames": {
+                "00000000000000000000000041": {
+                  "name": "Numeric fixture",
+                  "region": [
+                    2,
+                    2,
+                    4,
+                    4
+                  ]
+                }
+              },
+              "id": "00000000000000000000000042",
+              "padding": 2,
+              "size": [
+                8,
+                8
+              ]
+            },
+            "dependencies": [
+              {
+                "path": "numeric.atlas.json",
+                "sha256": "ddd406f5539f0d5e9f000e170fa9650d226268c018cbe451eb15be400b8e0d25"
+              },
+              {
+                "path": "numeric.png",
+                "sha256": "eae41c0e5134130ebe12122371d90eb92d13e11b545fbe27316ec2c311a1c109"
+              }
+            ],
+            "format": "rgba8_srgb",
+            "height": 8,
+            "mip_levels": 4,
+            "usage": "color",
+            "width": 8
+          },
+          "revision": 3
+        },
+        "cpu_render_input": false,
+        "gpu_submitted": true,
+        "on_screen_presentation": false,
+        "gpu_build_cpu_mode_preserved": true,
+        "sprite_cpu_mode_preserved": true,
+        "project_hash_before_delete": "983d62c722f9b397986a96ab36c4f938f5c2217fb413831ff8be0b0b18831abb",
+        "authoring_and_build_storage_deleted": true,
+        "removed_scope": "authoring project/WAV/glTF/bin/PNG/atlas/journal/script source and fresh Cargo storage",
+        "retained_runtime_inputs": [
+          "binary scenes",
+          "clips.bin",
+          "cooked PCM/manifests",
+          "startup input.json/actions.json",
+          "cooked model payloads/manifests",
+          "cooked KTX2/atlas metadata"
+        ],
+        "native_logs": {
+          "passed": true,
+          "retention_controls": [
+            {
+              "mode": "log_count",
+              "retained": 1024,
+              "dropped": 6656,
+              "pcm_sha256": "3822063f9e3b291d4bc8ab543e16bd09900c3ea82082b0181e5369fdd781ef58"
+            },
+            {
+              "mode": "log_bytes",
+              "retained": 256,
+              "dropped": 1664,
+              "pcm_sha256": "3822063f9e3b291d4bc8ab543e16bd09900c3ea82082b0181e5369fdd781ef58"
+            }
+          ],
+          "invalid_update_controls": 4,
+          "json_serialization": "once at completed game report, never per tick"
+        },
+        "native_observations": {
+          "passed": true,
+          "success_processes": 2,
+          "completed_false_processes": 2,
+          "startup_refusals": 9,
+          "terminal_failure_processes": 1,
+          "report": {
+            "checks": [
+              {
+                "actual": 4,
+                "expect": {
+                  "type": "entity_count",
+                  "value": 4
+                },
+                "name": "startup count",
+                "passed": true,
+                "tick": 0
+              },
+              {
+                "actual": [
+                  -3.0,
+                  0.0,
+                  0.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000001",
+                  "property": "translation",
+                  "tolerance": 0.001,
+                  "type": "vector",
+                  "value": [
+                    -3.0,
+                    0.0,
+                    0.0
+                  ]
+                },
+                "name": "startup position",
+                "passed": true,
+                "tick": 0
+              },
+              {
+                "actual": [
+                  3.0,
+                  0.0,
+                  0.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000001",
+                  "property": "velocity",
+                  "tolerance": 0.001,
+                  "type": "vector",
+                  "value": [
+                    3.0,
+                    0.0,
+                    0.0
+                  ]
+                },
+                "name": "accepted script velocity",
+                "passed": true,
+                "tick": 1
+              },
+              {
+                "actual": [
+                  -3.0,
+                  0.0,
+                  0.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000001",
+                  "property": "translation",
+                  "tolerance": 0.001,
+                  "type": "vector",
+                  "value": [
+                    -3.0,
+                    0.0,
+                    0.0
+                  ]
+                },
+                "name": "first position precedes scripted velocity",
+                "passed": true,
+                "tick": 1
+              },
+              {
+                "actual": {
+                  "active": true,
+                  "kind": "button",
+                  "pressed": true,
+                  "released": false,
+                  "value": [
+                    1.0,
+                    0.0
+                  ]
+                },
+                "expect": {
+                  "active": true,
+                  "name": "right",
+                  "pressed": true,
+                  "type": "action"
+                },
+                "name": "press edge",
+                "passed": true,
+                "tick": 1
+              },
+              {
+                "actual": {
+                  "active": true,
+                  "kind": "button",
+                  "pressed": false,
+                  "released": false,
+                  "value": [
+                    1.0,
+                    0.0
+                  ]
+                },
+                "expect": {
+                  "active": true,
+                  "name": "right",
+                  "pressed": false,
+                  "type": "action"
+                },
+                "name": "held without repeated edge",
+                "passed": true,
+                "tick": 2
+              },
+              {
+                "actual": false,
+                "expect": {
+                  "entity": "00000000000000000000000009",
+                  "type": "exists",
+                  "value": false
+                },
+                "name": "explicit missing entity",
+                "passed": true,
+                "tick": 120
+              },
+              {
+                "actual": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000001",
+                  "property": "world_translation",
+                  "tolerance": 0.001,
+                  "type": "vector",
+                  "value": [
+                    2.95,
+                    0.0,
+                    0.0
+                  ]
+                },
+                "name": "final committed world",
+                "passed": true,
+                "tick": 120
+              },
+              {
+                "actual": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000001",
+                  "property": "physics_translation",
+                  "tolerance": 0.001,
+                  "type": "vector",
+                  "value": [
+                    2.95,
+                    0.0,
+                    0.0
+                  ]
+                },
+                "name": "final solver position",
+                "passed": true,
+                "tick": 120
+              },
+              {
+                "actual": [
+                  3.0,
+                  0.0,
+                  0.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000001",
+                  "property": "physics_velocity",
+                  "tolerance": 0.001,
+                  "type": "vector",
+                  "value": [
+                    3.0,
+                    0.0,
+                    0.0
+                  ]
+                },
+                "name": "final solver velocity",
+                "passed": true,
+                "tick": 120
+              }
+            ],
+            "entities": {
+              "00000000000000000000000001": {
+                "parent": null,
+                "rotation": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ],
+                "translation": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "velocity": [
+                  3.0,
+                  0.0,
+                  0.0
+                ],
+                "world_transform": [
+                  [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                  ],
+                  [
+                    2.9500136375427246,
+                    0.0,
+                    0.0,
+                    1.0
+                  ]
+                ]
+              },
+              "00000000000000000000000009": null
+            },
+            "passed": true,
+            "tick": 120,
+            "tick_rate": 60
+          },
+          "count_failure": {
+            "checks": [
+              {
+                "actual": 4,
+                "expect": {
+                  "type": "entity_count",
+                  "value": 5
+                },
+                "name": "startup count",
+                "passed": false,
+                "tick": 0
+              },
+              {
+                "actual": [
+                  -3.0,
+                  0.0,
+                  0.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000001",
+                  "property": "translation",
+                  "tolerance": 0.001,
+                  "type": "vector",
+                  "value": [
+                    -3.0,
+                    0.0,
+                    0.0
+                  ]
+                },
+                "name": "startup position",
+                "passed": true,
+                "tick": 0
+              },
+              {
+                "actual": [
+                  3.0,
+                  0.0,
+                  0.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000001",
+                  "property": "velocity",
+                  "tolerance": 0.001,
+                  "type": "vector",
+                  "value": [
+                    3.0,
+                    0.0,
+                    0.0
+                  ]
+                },
+                "name": "accepted script velocity",
+                "passed": true,
+                "tick": 1
+              },
+              {
+                "actual": [
+                  -3.0,
+                  0.0,
+                  0.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000001",
+                  "property": "translation",
+                  "tolerance": 0.001,
+                  "type": "vector",
+                  "value": [
+                    -3.0,
+                    0.0,
+                    0.0
+                  ]
+                },
+                "name": "first position precedes scripted velocity",
+                "passed": true,
+                "tick": 1
+              },
+              {
+                "actual": {
+                  "active": true,
+                  "kind": "button",
+                  "pressed": true,
+                  "released": false,
+                  "value": [
+                    1.0,
+                    0.0
+                  ]
+                },
+                "expect": {
+                  "active": true,
+                  "name": "right",
+                  "pressed": true,
+                  "type": "action"
+                },
+                "name": "press edge",
+                "passed": true,
+                "tick": 1
+              },
+              {
+                "actual": {
+                  "active": true,
+                  "kind": "button",
+                  "pressed": false,
+                  "released": false,
+                  "value": [
+                    1.0,
+                    0.0
+                  ]
+                },
+                "expect": {
+                  "active": true,
+                  "name": "right",
+                  "pressed": false,
+                  "type": "action"
+                },
+                "name": "held without repeated edge",
+                "passed": true,
+                "tick": 2
+              },
+              {
+                "actual": false,
+                "expect": {
+                  "entity": "00000000000000000000000009",
+                  "type": "exists",
+                  "value": false
+                },
+                "name": "explicit missing entity",
+                "passed": true,
+                "tick": 120
+              },
+              {
+                "actual": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000001",
+                  "property": "world_translation",
+                  "tolerance": 0.001,
+                  "type": "vector",
+                  "value": [
+                    2.95,
+                    0.0,
+                    0.0
+                  ]
+                },
+                "name": "final committed world",
+                "passed": true,
+                "tick": 120
+              },
+              {
+                "actual": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000001",
+                  "property": "physics_translation",
+                  "tolerance": 0.001,
+                  "type": "vector",
+                  "value": [
+                    2.95,
+                    0.0,
+                    0.0
+                  ]
+                },
+                "name": "final solver position",
+                "passed": true,
+                "tick": 120
+              },
+              {
+                "actual": [
+                  3.0,
+                  0.0,
+                  0.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000001",
+                  "property": "physics_velocity",
+                  "tolerance": 0.001,
+                  "type": "vector",
+                  "value": [
+                    3.0,
+                    0.0,
+                    0.0
+                  ]
+                },
+                "name": "final solver velocity",
+                "passed": true,
+                "tick": 120
+              }
+            ],
+            "entities": {
+              "00000000000000000000000001": {
+                "parent": null,
+                "rotation": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ],
+                "translation": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "velocity": [
+                  3.0,
+                  0.0,
+                  0.0
+                ],
+                "world_transform": [
+                  [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                  ],
+                  [
+                    2.9500136375427246,
+                    0.0,
+                    0.0,
+                    1.0
+                  ]
+                ]
+              },
+              "00000000000000000000000009": null
+            },
+            "passed": false,
+            "tick": 120,
+            "tick_rate": 60
+          },
+          "missing_failure": {
+            "checks": [
+              {
+                "actual": null,
+                "expect": {
+                  "entity": "00000000000000000000000002",
+                  "property": "physics_velocity",
+                  "tolerance": 0.0,
+                  "type": "vector",
+                  "value": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ]
+                },
+                "name": "missing component",
+                "passed": false,
+                "tick": 120
+              }
+            ],
+            "entities": {
+              "00000000000000000000000001": {
+                "parent": null,
+                "rotation": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ],
+                "translation": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "velocity": [
+                  3.0,
+                  0.0,
+                  0.0
+                ],
+                "world_transform": [
+                  [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                  ],
+                  [
+                    2.9500136375427246,
+                    0.0,
+                    0.0,
+                    1.0
+                  ]
+                ]
+              },
+              "00000000000000000000000009": null
+            },
+            "passed": false,
+            "tick": 120,
+            "tick_rate": 60
+          }
+        },
+        "repeat_exact": true,
+        "recorded_ticks_per_process": 120,
+        "audio_processes": 16,
+        "results": [
+          {
+            "fixture": "static",
+            "rate": 44117,
+            "report": {
+              "frames": 88234,
+              "logs": {
+                "dropped": 0,
+                "entries": [
+                  {
+                    "level": "info",
+                    "message": "Ready \u96ea\ud83d\ude42",
+                    "tick": 1
+                  },
+                  {
+                    "level": "warn",
+                    "message": "Finished",
+                    "tick": 120
+                  }
+                ]
+              },
+              "pcm_sha256": "a4722ea4c42fa7e629e2bc7bd99127d45e2616383113d71bec57379b771c99c8",
+              "render_input": {
+                "binding_generation": 0,
+                "camera": "00000000000000000000000000000004",
+                "camera_position": [
+                  0.0,
+                  0.0,
+                  8.0
+                ],
+                "decoded_payload_bytes": 156,
+                "first_model_position": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "first_sprite_position": null,
+                "gpu": {
+                  "accepted_frames": 120,
+                  "adapter": {
+                    "backend": "Metal",
+                    "device_type": "IntegratedGpu",
+                    "name": "Apple M5 Pro"
+                  },
+                  "captures": [
+                    {
+                      "frame": 1,
+                      "non_background_pixels": 55,
+                      "sha256": "f83486993de4f7ea04058053abd7af7e3aad7b7f6843300c292563a4d76593c3"
+                    },
+                    {
+                      "frame": 120,
+                      "non_background_pixels": 55,
+                      "sha256": "d7acf22c7808031e1ec5cd17987f68bdca40c324f2d531f89ac26d31c8863dda"
+                    }
+                  ],
+                  "height": 96,
+                  "on_screen": false,
+                  "width": 160
+                },
+                "gpu_submitted": true,
+                "mode": "gpu-offscreen",
+                "model_count": 1,
+                "sprite_count": 0,
+                "tick": 120,
+                "topology_generation": 0
+              },
+              "sources": [
+                {
+                  "id": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ],
+                  "physics": {
+                    "position": [
+                      2.9500136375427246,
+                      0.0,
+                      0.0
+                    ],
+                    "sleeping": false,
+                    "velocity": [
+                      3.0,
+                      0.0,
+                      0.0
+                    ]
+                  },
+                  "position": [
+                    2.9500136375427246,
+                    0.0,
+                    0.0
+                  ]
+                }
+              ],
+              "tick": 120
+            },
+            "rms": 0.0553028731136091,
+            "early_balance": 109.52215792219184,
+            "late_balance": -115.71745094939368
+          },
+          {
+            "fixture": "static",
+            "rate": 48000,
+            "report": {
+              "frames": 96000,
+              "logs": {
+                "dropped": 0,
+                "entries": [
+                  {
+                    "level": "info",
+                    "message": "Ready \u96ea\ud83d\ude42",
+                    "tick": 1
+                  },
+                  {
+                    "level": "warn",
+                    "message": "Finished",
+                    "tick": 120
+                  }
+                ]
+              },
+              "pcm_sha256": "3822063f9e3b291d4bc8ab543e16bd09900c3ea82082b0181e5369fdd781ef58",
+              "render_input": {
+                "binding_generation": 0,
+                "camera": "00000000000000000000000000000004",
+                "camera_position": [
+                  0.0,
+                  0.0,
+                  8.0
+                ],
+                "decoded_payload_bytes": 156,
+                "first_model_position": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "first_sprite_position": null,
+                "gpu": {
+                  "accepted_frames": 120,
+                  "adapter": {
+                    "backend": "Metal",
+                    "device_type": "IntegratedGpu",
+                    "name": "Apple M5 Pro"
+                  },
+                  "captures": [
+                    {
+                      "frame": 1,
+                      "non_background_pixels": 55,
+                      "sha256": "f83486993de4f7ea04058053abd7af7e3aad7b7f6843300c292563a4d76593c3"
+                    },
+                    {
+                      "frame": 120,
+                      "non_background_pixels": 55,
+                      "sha256": "d7acf22c7808031e1ec5cd17987f68bdca40c324f2d531f89ac26d31c8863dda"
+                    }
+                  ],
+                  "height": 96,
+                  "on_screen": false,
+                  "width": 160
+                },
+                "gpu_submitted": true,
+                "mode": "gpu-offscreen",
+                "model_count": 1,
+                "sprite_count": 0,
+                "tick": 120,
+                "topology_generation": 0
+              },
+              "sources": [
+                {
+                  "id": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ],
+                  "physics": {
+                    "position": [
+                      2.9500136375427246,
+                      0.0,
+                      0.0
+                    ],
+                    "sleeping": false,
+                    "velocity": [
+                      3.0,
+                      0.0,
+                      0.0
+                    ]
+                  },
+                  "position": [
+                    2.9500136375427246,
+                    0.0,
+                    0.0
+                  ]
+                }
+              ],
+              "tick": 120
+            },
+            "rms": 0.055305097447639784,
+            "early_balance": 108.70557752668313,
+            "late_balance": -114.8314969751412
+          },
+          {
+            "fixture": "stream",
+            "rate": 44117,
+            "report": {
+              "frames": 88234,
+              "logs": {
+                "dropped": 0,
+                "entries": [
+                  {
+                    "level": "info",
+                    "message": "Ready \u96ea\ud83d\ude42",
+                    "tick": 1
+                  },
+                  {
+                    "level": "warn",
+                    "message": "Finished",
+                    "tick": 120
+                  }
+                ]
+              },
+              "pcm_sha256": "5da6b39c9fac3c7dd96db9434a8e9879d101c7901398a23b90de5b5587a04e26",
+              "render_input": {
+                "binding_generation": 0,
+                "camera": "00000000000000000000000000000004",
+                "camera_position": [
+                  0.0,
+                  0.0,
+                  8.0
+                ],
+                "decoded_payload_bytes": 156,
+                "first_model_position": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "first_sprite_position": null,
+                "gpu": {
+                  "accepted_frames": 120,
+                  "adapter": {
+                    "backend": "Metal",
+                    "device_type": "IntegratedGpu",
+                    "name": "Apple M5 Pro"
+                  },
+                  "captures": [
+                    {
+                      "frame": 1,
+                      "non_background_pixels": 55,
+                      "sha256": "f83486993de4f7ea04058053abd7af7e3aad7b7f6843300c292563a4d76593c3"
+                    },
+                    {
+                      "frame": 120,
+                      "non_background_pixels": 55,
+                      "sha256": "d7acf22c7808031e1ec5cd17987f68bdca40c324f2d531f89ac26d31c8863dda"
+                    }
+                  ],
+                  "height": 96,
+                  "on_screen": false,
+                  "width": 160
+                },
+                "gpu_submitted": true,
+                "mode": "gpu-offscreen",
+                "model_count": 1,
+                "sprite_count": 0,
+                "tick": 120,
+                "topology_generation": 0
+              },
+              "sources": [
+                {
+                  "id": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ],
+                  "physics": {
+                    "position": [
+                      2.9500136375427246,
+                      0.0,
+                      0.0
+                    ],
+                    "sleeping": false,
+                    "velocity": [
+                      3.0,
+                      0.0,
+                      0.0
+                    ]
+                  },
+                  "position": [
+                    2.9500136375427246,
+                    0.0,
+                    0.0
+                  ]
+                }
+              ],
+              "tick": 120
+            },
+            "rms": 0.05530287311397527,
+            "early_balance": 109.52215791799678,
+            "late_balance": -115.7174509755776
+          },
+          {
+            "fixture": "stream",
+            "rate": 48000,
+            "report": {
+              "frames": 96000,
+              "logs": {
+                "dropped": 0,
+                "entries": [
+                  {
+                    "level": "info",
+                    "message": "Ready \u96ea\ud83d\ude42",
+                    "tick": 1
+                  },
+                  {
+                    "level": "warn",
+                    "message": "Finished",
+                    "tick": 120
+                  }
+                ]
+              },
+              "pcm_sha256": "3822063f9e3b291d4bc8ab543e16bd09900c3ea82082b0181e5369fdd781ef58",
+              "render_input": {
+                "binding_generation": 0,
+                "camera": "00000000000000000000000000000004",
+                "camera_position": [
+                  0.0,
+                  0.0,
+                  8.0
+                ],
+                "decoded_payload_bytes": 156,
+                "first_model_position": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "first_sprite_position": null,
+                "gpu": {
+                  "accepted_frames": 120,
+                  "adapter": {
+                    "backend": "Metal",
+                    "device_type": "IntegratedGpu",
+                    "name": "Apple M5 Pro"
+                  },
+                  "captures": [
+                    {
+                      "frame": 1,
+                      "non_background_pixels": 55,
+                      "sha256": "f83486993de4f7ea04058053abd7af7e3aad7b7f6843300c292563a4d76593c3"
+                    },
+                    {
+                      "frame": 120,
+                      "non_background_pixels": 55,
+                      "sha256": "d7acf22c7808031e1ec5cd17987f68bdca40c324f2d531f89ac26d31c8863dda"
+                    }
+                  ],
+                  "height": 96,
+                  "on_screen": false,
+                  "width": 160
+                },
+                "gpu_submitted": true,
+                "mode": "gpu-offscreen",
+                "model_count": 1,
+                "sprite_count": 0,
+                "tick": 120,
+                "topology_generation": 0
+              },
+              "sources": [
+                {
+                  "id": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ],
+                  "physics": {
+                    "position": [
+                      2.9500136375427246,
+                      0.0,
+                      0.0
+                    ],
+                    "sleeping": false,
+                    "velocity": [
+                      3.0,
+                      0.0,
+                      0.0
+                    ]
+                  },
+                  "position": [
+                    2.9500136375427246,
+                    0.0,
+                    0.0
+                  ]
+                }
+              ],
+              "tick": 120
+            },
+            "rms": 0.055305097447639784,
+            "early_balance": 108.70557752668313,
+            "late_balance": -114.8314969751412
+          },
+          {
+            "fixture": "static-sprite",
+            "rate": 44117,
+            "report": {
+              "frames": 88234,
+              "logs": {
+                "dropped": 0,
+                "entries": [
+                  {
+                    "level": "info",
+                    "message": "Ready \u96ea\ud83d\ude42",
+                    "tick": 1
+                  },
+                  {
+                    "level": "warn",
+                    "message": "Finished",
+                    "tick": 120
+                  }
+                ]
+              },
+              "pcm_sha256": "a4722ea4c42fa7e629e2bc7bd99127d45e2616383113d71bec57379b771c99c8",
+              "render_input": {
+                "binding_generation": 0,
+                "camera": "00000000000000000000000000000004",
+                "camera_position": [
+                  0.0,
+                  0.0,
+                  8.0
+                ],
+                "decoded_payload_bytes": 340,
+                "first_model_position": null,
+                "first_sprite_position": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "gpu": {
+                  "accepted_frames": 120,
+                  "adapter": {
+                    "backend": "Metal",
+                    "device_type": "IntegratedGpu",
+                    "name": "Apple M5 Pro"
+                  },
+                  "captures": [
+                    {
+                      "frame": 1,
+                      "non_background_pixels": 420,
+                      "sha256": "e57be536276c5d855799079587e16e0debf5b7e180b8ce3f7c758874ea8c9d30"
+                    },
+                    {
+                      "frame": 120,
+                      "non_background_pixels": 420,
+                      "sha256": "79a05fd14620d01ced198938e5904ed4a65c928a87430b8ee149b4e8ccf04f58"
+                    }
+                  ],
+                  "height": 96,
+                  "on_screen": false,
+                  "width": 160
+                },
+                "gpu_submitted": true,
+                "mode": "gpu-offscreen",
+                "model_count": 0,
+                "sprite_count": 1,
+                "tick": 120,
+                "topology_generation": 0
+              },
+              "sources": [
+                {
+                  "id": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ],
+                  "physics": {
+                    "position": [
+                      2.9500136375427246,
+                      0.0,
+                      0.0
+                    ],
+                    "sleeping": false,
+                    "velocity": [
+                      3.0,
+                      0.0,
+                      0.0
+                    ]
+                  },
+                  "position": [
+                    2.9500136375427246,
+                    0.0,
+                    0.0
+                  ]
+                }
+              ],
+              "tick": 120
+            },
+            "rms": 0.0553028731136091,
+            "early_balance": 109.52215792219184,
+            "late_balance": -115.71745094939368
+          },
+          {
+            "fixture": "static-sprite",
+            "rate": 48000,
+            "report": {
+              "frames": 96000,
+              "logs": {
+                "dropped": 0,
+                "entries": [
+                  {
+                    "level": "info",
+                    "message": "Ready \u96ea\ud83d\ude42",
+                    "tick": 1
+                  },
+                  {
+                    "level": "warn",
+                    "message": "Finished",
+                    "tick": 120
+                  }
+                ]
+              },
+              "pcm_sha256": "3822063f9e3b291d4bc8ab543e16bd09900c3ea82082b0181e5369fdd781ef58",
+              "render_input": {
+                "binding_generation": 0,
+                "camera": "00000000000000000000000000000004",
+                "camera_position": [
+                  0.0,
+                  0.0,
+                  8.0
+                ],
+                "decoded_payload_bytes": 340,
+                "first_model_position": null,
+                "first_sprite_position": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "gpu": {
+                  "accepted_frames": 120,
+                  "adapter": {
+                    "backend": "Metal",
+                    "device_type": "IntegratedGpu",
+                    "name": "Apple M5 Pro"
+                  },
+                  "captures": [
+                    {
+                      "frame": 1,
+                      "non_background_pixels": 420,
+                      "sha256": "e57be536276c5d855799079587e16e0debf5b7e180b8ce3f7c758874ea8c9d30"
+                    },
+                    {
+                      "frame": 120,
+                      "non_background_pixels": 420,
+                      "sha256": "79a05fd14620d01ced198938e5904ed4a65c928a87430b8ee149b4e8ccf04f58"
+                    }
+                  ],
+                  "height": 96,
+                  "on_screen": false,
+                  "width": 160
+                },
+                "gpu_submitted": true,
+                "mode": "gpu-offscreen",
+                "model_count": 0,
+                "sprite_count": 1,
+                "tick": 120,
+                "topology_generation": 0
+              },
+              "sources": [
+                {
+                  "id": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ],
+                  "physics": {
+                    "position": [
+                      2.9500136375427246,
+                      0.0,
+                      0.0
+                    ],
+                    "sleeping": false,
+                    "velocity": [
+                      3.0,
+                      0.0,
+                      0.0
+                    ]
+                  },
+                  "position": [
+                    2.9500136375427246,
+                    0.0,
+                    0.0
+                  ]
+                }
+              ],
+              "tick": 120
+            },
+            "rms": 0.055305097447639784,
+            "early_balance": 108.70557752668313,
+            "late_balance": -114.8314969751412
+          },
+          {
+            "fixture": "stream-sprite",
+            "rate": 44117,
+            "report": {
+              "frames": 88234,
+              "logs": {
+                "dropped": 0,
+                "entries": [
+                  {
+                    "level": "info",
+                    "message": "Ready \u96ea\ud83d\ude42",
+                    "tick": 1
+                  },
+                  {
+                    "level": "warn",
+                    "message": "Finished",
+                    "tick": 120
+                  }
+                ]
+              },
+              "pcm_sha256": "5da6b39c9fac3c7dd96db9434a8e9879d101c7901398a23b90de5b5587a04e26",
+              "render_input": {
+                "binding_generation": 0,
+                "camera": "00000000000000000000000000000004",
+                "camera_position": [
+                  0.0,
+                  0.0,
+                  8.0
+                ],
+                "decoded_payload_bytes": 340,
+                "first_model_position": null,
+                "first_sprite_position": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "gpu": {
+                  "accepted_frames": 120,
+                  "adapter": {
+                    "backend": "Metal",
+                    "device_type": "IntegratedGpu",
+                    "name": "Apple M5 Pro"
+                  },
+                  "captures": [
+                    {
+                      "frame": 1,
+                      "non_background_pixels": 420,
+                      "sha256": "729fbb6a59d71a214736bc78de5e44a2b6eed37ed5a6aac2bcb7b91cc924e39d"
+                    },
+                    {
+                      "frame": 120,
+                      "non_background_pixels": 420,
+                      "sha256": "55913d1ccfb8c3fc258fcce3ed1b4daba6dd17690bd7c11afc04ae6983e820b0"
+                    }
+                  ],
+                  "height": 96,
+                  "on_screen": false,
+                  "width": 160
+                },
+                "gpu_submitted": true,
+                "mode": "gpu-offscreen",
+                "model_count": 0,
+                "sprite_count": 1,
+                "tick": 120,
+                "topology_generation": 0
+              },
+              "sources": [
+                {
+                  "id": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ],
+                  "physics": {
+                    "position": [
+                      2.9500136375427246,
+                      0.0,
+                      0.0
+                    ],
+                    "sleeping": false,
+                    "velocity": [
+                      3.0,
+                      0.0,
+                      0.0
+                    ]
+                  },
+                  "position": [
+                    2.9500136375427246,
+                    0.0,
+                    0.0
+                  ]
+                }
+              ],
+              "tick": 120
+            },
+            "rms": 0.05530287311397527,
+            "early_balance": 109.52215791799678,
+            "late_balance": -115.7174509755776
+          },
+          {
+            "fixture": "stream-sprite",
+            "rate": 48000,
+            "report": {
+              "frames": 96000,
+              "logs": {
+                "dropped": 0,
+                "entries": [
+                  {
+                    "level": "info",
+                    "message": "Ready \u96ea\ud83d\ude42",
+                    "tick": 1
+                  },
+                  {
+                    "level": "warn",
+                    "message": "Finished",
+                    "tick": 120
+                  }
+                ]
+              },
+              "pcm_sha256": "3822063f9e3b291d4bc8ab543e16bd09900c3ea82082b0181e5369fdd781ef58",
+              "render_input": {
+                "binding_generation": 0,
+                "camera": "00000000000000000000000000000004",
+                "camera_position": [
+                  0.0,
+                  0.0,
+                  8.0
+                ],
+                "decoded_payload_bytes": 340,
+                "first_model_position": null,
+                "first_sprite_position": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "gpu": {
+                  "accepted_frames": 120,
+                  "adapter": {
+                    "backend": "Metal",
+                    "device_type": "IntegratedGpu",
+                    "name": "Apple M5 Pro"
+                  },
+                  "captures": [
+                    {
+                      "frame": 1,
+                      "non_background_pixels": 420,
+                      "sha256": "729fbb6a59d71a214736bc78de5e44a2b6eed37ed5a6aac2bcb7b91cc924e39d"
+                    },
+                    {
+                      "frame": 120,
+                      "non_background_pixels": 420,
+                      "sha256": "55913d1ccfb8c3fc258fcce3ed1b4daba6dd17690bd7c11afc04ae6983e820b0"
+                    }
+                  ],
+                  "height": 96,
+                  "on_screen": false,
+                  "width": 160
+                },
+                "gpu_submitted": true,
+                "mode": "gpu-offscreen",
+                "model_count": 0,
+                "sprite_count": 1,
+                "tick": 120,
+                "topology_generation": 0
+              },
+              "sources": [
+                {
+                  "id": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ],
+                  "physics": {
+                    "position": [
+                      2.9500136375427246,
+                      0.0,
+                      0.0
+                    ],
+                    "sleeping": false,
+                    "velocity": [
+                      3.0,
+                      0.0,
+                      0.0
+                    ]
+                  },
+                  "position": [
+                    2.9500136375427246,
+                    0.0,
+                    0.0
+                  ]
+                }
+              ],
+              "tick": 120
+            },
+            "rms": 0.055305097447639784,
+            "early_balance": 108.70557752668313,
+            "late_balance": -114.8314969751412
+          }
+        ],
+        "rejected": [
+          "accepted-script-failure",
+          "wrong-recording-clock",
+          "invalid-input-packet",
+          "wrong-clip-fingerprint",
+          "unknown-cooked-version",
+          "oversized-startup-actions",
+          "manual-input-route",
+          "incant_game_player-camera-only",
+          "native_scene_audio-camera-only",
+          "incant_game_player-manifest-only",
+          "native_scene_audio-manifest-only",
+          "late-camera-removal",
+          "feature-default-stays-strict",
+          "missing-model-cache",
+          "missing-camera",
+          "malformed-camera",
+          "sprite-default-stays-strict",
+          "missing-sprite-cache",
+          "unknown-sprite-frame",
+          "observation-format",
+          "observation-version",
+          "observation-extra",
+          "observation-duplicate-entities",
+          "observation-noncanonical-id",
+          "observation-beyond-end",
+          "observation-excess-checks",
+          "observation-oversized",
+          "observation-duplicate-option",
+          "observation-terminal-failure",
+          "log_invalid",
+          "log_message",
+          "log_calls",
+          "log_total"
+        ],
+        "spatial_refusals": [
+          {
+            "player": "incant_game_player",
+            "fixture": "camera-only"
+          },
+          {
+            "player": "native_scene_audio",
+            "fixture": "camera-only"
+          },
+          {
+            "player": "incant_game_player",
+            "fixture": "manifest-only"
+          },
+          {
+            "player": "native_scene_audio",
+            "fixture": "manifest-only"
+          }
+        ],
+        "plain_v1_controls": 2,
+        "existing_output_preserved": true,
+        "size_delta_from_audio_host_2885984": 6007984,
+        "size_delta_from_physics_script_player_3941816": 4952152,
+        "size_comparison_scope": "whole executable graphs, not an isolated feature cost or performance gate",
+        "device_output": false,
+        "session_saves": false,
+        "phone_performance_gate": false,
+        "failure_semantics": "Invalid input/buffer retry is covered in host tests. Any failure after accepted simulation destroys composite state; device cursor is not rolled back. Simulation/host failure creates no output file; output I/O may leave a partial file."
+      }
+    }
+  },
+  "limitations": [
+    "Actual local desktop integration checks; no hosted CI or reference-phone gate is claimed.",
+    "CPU and GPU evidence retain their existing individual scopes; no combined full-game/device budget claim.",
+    "Appearance acceptance remains the pinned Claude0037 and Claude0039 evidence; no Astra appearance review.",
+    "Prewarm, flipbook and FBX work are excluded.",
+    "The initial public-tool build failed solely because a fresh worktree lacked the UI dist directory; building the unchanged UI before the same Rust command passed."
+  ]
+}
