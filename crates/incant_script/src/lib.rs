@@ -15,7 +15,9 @@ mod diagnostics;
 mod flipbooks;
 mod input;
 mod loan;
+mod localization_values;
 mod logging;
+mod navigation_values;
 mod program;
 mod queries;
 mod query_values;
@@ -68,7 +70,7 @@ pub enum ScriptError {
     InputLimit,
     #[error("invalid or throwing native structural command arguments")]
     CommandInput,
-    #[error("invalid or throwing physics query arguments")]
+    #[error("invalid or throwing native query arguments")]
     QueryInput,
     #[error("invalid timer ID, tick delay or timer command arguments")]
     TimerInput,
@@ -92,7 +94,7 @@ pub enum ScriptError {
 /// private, compiler-produced bytecode. Ticks borrow real numeric ECS columns;
 /// they neither parse code nor serialize project/component values.
 ///
-/// This native host exposes `update({chunks, dt, commands, input, physics, clock, timers, log, flipbooks})`. Each chunk has stable
+/// This native host exposes `update({chunks, dt, commands, input, physics, navigation, clock, timers, log, flipbooks})`. Each chunk has stable
 /// ID strings, Transform stride 10, and optional Velocity stride 3. Views are
 /// detached on every exit. A failed callback restores its component writes and
 /// permanently fails this host. Tick-local structural commands apply only after
@@ -298,6 +300,17 @@ impl ScriptHost {
                     let physics = queries.expose(&ctx).map_err(|error| {
                         diagnostics::javascript(&ctx, error, "physics bindings", &self.deadline)
                     })?;
+                    let navigation = queries.expose_navigation(&ctx).map_err(|error| {
+                        diagnostics::javascript(&ctx, error, "navigation bindings", &self.deadline)
+                    })?;
+                    let localization = queries.expose_localization(&ctx).map_err(|error| {
+                        diagnostics::javascript(
+                            &ctx,
+                            error,
+                            "localization bindings",
+                            &self.deadline,
+                        )
+                    })?;
                     let mut loan = loan::Loan::new(columns)?;
                     let chunks = match loan.expose(&ctx) {
                         Ok(chunks) => chunks,
@@ -326,8 +339,10 @@ impl ScriptHost {
                                 api.clone(),
                                 input.clone(),
                                 physics.clone(),
-                                clock.clone(),
+                                navigation.clone(),
+                                localization.clone(),
                             )),
+                            clock.clone(),
                             timer_api,
                             log_api.clone(),
                             flipbooks.clone(),
@@ -457,6 +472,8 @@ mod tests;
 mod input_tests;
 
 #[cfg(all(test, feature = "compiler"))]
+mod navigation_tests;
+#[cfg(all(test, feature = "compiler"))]
 mod query_2d_tests;
 #[cfg(all(test, feature = "compiler"))]
 mod query_tests;
@@ -468,3 +485,6 @@ mod character_tests;
 mod log_tests;
 #[cfg(all(test, feature = "compiler"))]
 mod timer_tests;
+
+#[cfg(all(test, feature = "compiler"))]
+mod localization_tests;

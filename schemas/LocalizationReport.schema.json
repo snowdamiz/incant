@@ -1,0 +1,65 @@
+{
+  "$defs": {
+    "MissingKind": {
+      "enum": [
+        "translation",
+        "key"
+      ],
+      "type": "string"
+    },
+    "MissingString": {
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/$defs/MissingKind"
+        },
+        "requested_locale": {
+          "type": "string"
+        },
+        "resolved_locale": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "table_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "table_id",
+        "key",
+        "requested_locale",
+        "kind"
+      ],
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "A bounded page of deterministic missing-translation coverage.",
+  "properties": {
+    "entries": {
+      "items": {
+        "$ref": "#/$defs/MissingString"
+      },
+      "maxItems": 128,
+      "type": "array"
+    },
+    "total": {
+      "format": "uint32",
+      "maximum": 4096,
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "total",
+    "entries"
+  ],
+  "title": "LocalizationReport",
+  "type": "object"
+}

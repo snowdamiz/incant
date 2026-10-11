@@ -84,3 +84,19 @@ read or the fixed compiler process; it prevents subsequent command execution and
 candidate publication at the checked boundaries. The existing compiler's source
 epoch checks are retained; this is not a compare-and-swap guarantee against
 arbitrary external filesystem editors.
+
+## Actual main92 integration
+
+Merge `524ea5a` preserves original reviewed `d50fb0b` and actual main92
+`22f30bd`, including navigation queries and the Windows compiler-host repair.
+The merge is clean and all nine reviewed source hashes remain exact.
+
+Both affected package suites pass **95 tests**, including every shared-access
+case and the actual post-snapshot source-write regression. The two unchanged
+headless GPU cases remain ignored in this CPU integration run. All-target Clippy,
+a headless rebuild, all62 exact freshly generated contracts, SDK/bridge checks,
+formatting and conventions pass. The rebuilt public host also passes32 source
+transaction/Play RPC requests in two fresh processes, preserving native motion,
+Undo/Redo, journal recovery and authoring bytes. The ledger above records the
+source/proof/log hashes. Comprehensive platform validation remains assigned to
+the next frozen checkpoint; this does not connect the editor chat panel.

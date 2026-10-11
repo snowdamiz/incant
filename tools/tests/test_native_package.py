@@ -42,6 +42,34 @@ class NativePackageTests(unittest.TestCase):
                 path.read_text(encoding='locale')
             self.assertEqual(export_native.cargo_messages(path), [message])
 
+    def test_msvc_runtime_audit_requires_the_map_and_retains_its_exact_identity(self):
+        executable, link_map = self.root / 'player.exe', self.root / 'player-link.map'
+        executable.write_bytes(b'PE has no COFF symbol names')
+        with patch.object(export_native, 'execute', side_effect=AssertionError('PE must not use llvm-nm')):
+            with self.assertRaises(FileNotFoundError):
+                export_native.runtime_symbol_audit(executable, 'pdb', self.root, link_map)
+            payload = b' Publics by Value\n 0001:00000010 JS_ReadObject 0000000140001010 f quickjs.obj\n 0001:00000020 JS_EvalFunction 0000000140001020 f quickjs.obj\n'
+            link_map.write_bytes(payload)
+            audit = export_native.runtime_symbol_audit(executable, 'pdb', self.root, link_map)
+            self.assertEqual(audit, {'source': 'fresh MSVC linker map', 'file': link_map.name,
+                                     'sha256': package.sha256(payload)})
+            for missing in (b'JS_ReadObject', b'JS_EvalFunction'):
+                with self.subTest(missing=missing):
+                    link_map.write_bytes(payload.replace(missing, b'absent'))
+                    with self.assertRaisesRegex(ValueError, 'Missing bytecode runtime'):
+                        export_native.runtime_symbol_audit(executable, 'pdb', self.root, link_map)
+
+    def test_msvc_runtime_audit_rejects_each_parser_and_mangled_compiler(self):
+        link_map = self.root / 'player-link.map'
+        for forbidden in ('JS_AddIntrinsicEval', '__JS_EvalInternal', 'js_parse_program',
+                          'js_parse_function_decl', 'incant_script::compiler',
+                          '_ZN13incant_script8compiler7compile17h123E',
+                          '_RNvNtCs123_13incant_script8compiler7compile'):
+            with self.subTest(forbidden=forbidden):
+                link_map.write_text('JS_ReadObject JS_EvalFunction ' + forbidden, encoding='utf-8')
+                with self.assertRaisesRegex(ValueError, 'Source compiler linked'):
+                    export_native.runtime_symbol_audit(self.root / 'player.exe', 'pdb', self.root, link_map)
+
     def test_minimal_data_is_source_free_and_startup_hashes_are_exact(self):
         (self.root / 'source.ts').write_text('DO NOT EXPORT AUTHORING SOURCE')
         result = self.data()

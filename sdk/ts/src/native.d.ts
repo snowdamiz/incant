@@ -1,5 +1,5 @@
 /** Native QuickJS migration API. Separate from the document-backed ScriptApi. */
-import type { InputFrame, ScriptClock, TimerEvent, PhysicsRayQuery, PhysicsRayHit, PhysicsCharacterQuery, PhysicsCharacterMovement, PhysicsTriggerEvent, PhysicsRayQuery2D, PhysicsRayHit2D, PhysicsTriggerEvent2D } from './generated';
+import type { LocaleSettings, LocalizeRequest, LocalizedText, CalendarDate, DateLength, LocalizationReportRequest, LocalizationReport, InputFrame, ScriptClock, TimerEvent, PhysicsRayQuery, PhysicsRayHit, PhysicsCharacterQuery, PhysicsCharacterMovement, PhysicsTriggerEvent, PhysicsRayQuery2D, PhysicsRayHit2D, PhysicsTriggerEvent2D, NavigationQuery, NavigationPath, GridNavigationQuery, GridPath } from './generated';
 /** VM-owned bounded copy; no native pointers/handles or JSON conversion.
  * Retention cannot hold an ECS loan or alter the next input frame. */
 type InputReadonly<T> = T extends object ? { readonly [K in keyof T]: InputReadonly<T[K]> } : T;
@@ -44,6 +44,10 @@ export interface NativeChunk {
  * Functions belong to one tick only; retained functions never reactivate.
  * Vector/transform inputs are copied as fixed numeric fields, never JSON. */
 export interface NativeCommands {
+  /** Buffered runtime locale change; visible on the next accepted update. At
+   * most 64 per tick within the shared structural quota. The entire numeric,
+   * locale and structural batch rolls back on refusal. Catalog is immutable. */
+  setLocale(settings: LocaleSettings): void;
   /** Desired playing state for an existing source. False pauses its retained
    * cursor; true starts an unstarted source or resumes a paused one. Unchanged
    * true does not replay an ended voice. False then true needs separate sync
@@ -100,6 +104,34 @@ export interface NativePhysics {
    * Returns owned values; mutating a result cannot alter native state. */
   raycast(query: NativeRayQuery): NativeRayHit | null;
 }
+export type NativePathRequest = NavigationQuery['path'];
+export type NativeNavigationPath = NavigationPath;
+export type NativeGridPathRequest = GridNavigationQuery['path'];
+export type NativeGridPath = GridPath;
+/** Read-only committed navigation in the active native scene. All results are
+ * owned mutable values, safe to retain. Functions expire after this update and
+ * never reactivate. Active-call errors, even caught, reject the whole update.
+ * Up to 32 calls within the shared 1,024 physics/navigation query quota. The
+ * sum of requested max_visited/max_expansions is at most 65,536 per update,
+ * including misses. CPU deadline checked before/after bounded native searches;
+ * native search itself is synchronous. Queries do not clone caches or geometry. */
+export interface NativeNavigation {
+  /** World-space mesh path or null when disconnected/outside snap distance.
+   * Points follow the quantized surface; use physics for exact grounding.
+   * Each traversal identifies a consecutive point pair across an off-mesh link;
+   * gameplay must explicitly handle it, never treat it as a walkable segment.
+   * Search exhaustion throws. Generation changes invalidate retained paths.
+   * Generations are scoped to this native world and owner; never reuse paths
+   * across sessions/worlds. Save restore advances the retained generation.
+   * Pending numeric writes/commands are invisible until commit. */
+  findPath(entity: NativeId, request: NativePathRequest): NativeNavigationPath | null;
+  /** Adjacent grid cell indices or null for blocked/disconnected endpoints.
+   * Diagonal movement (default false) never cuts blocked corners. World mapping,
+   * clearance and movement belong to gameplay. Default max_expansions=65,536
+   * consumes the entire tick budget; set it explicitly to make multiple queries.
+   * An absent mesh/grid, invalid endpoint, or exhausted search throws. */
+  findGridPath(entity: NativeId, request: NativeGridPathRequest): NativeGridPath | null;
+}
 export type NativeLogLevel = 'debug' | 'info' | 'warn' | 'error';
 /** Bulk committed state captured after simulation, before script commands.
  * Entries with the same index belong together; order is unspecified. Flags:
@@ -110,6 +142,22 @@ export interface NativeFlipbooks {
   readonly ids: readonly NativeId[];
   readonly frames: Uint32Array;
   readonly flags: Uint32Array;
+}
+/** Read-only committed locale/catalog. Each call costs four of the shared
+ * 1,024 native query units, at most 64 localization calls per whole tick.
+ * Arguments together are bounded to 64 KiB and returned text/metadata to 256 KiB.
+ * Inputs/results are owned typed values. Active errors poison the whole tick,
+ * even when caught; retained methods never reactivate. ICU formatters use
+ * compiled data; this API neither reads source files nor renders fonts. */
+export interface NativeLocalization {
+  localize(request: LocalizeRequest): LocalizedText;
+  locale(): LocaleSettings;
+  formatNumber(value: number): string;
+  formatDate(value: CalendarDate, length?: DateLength): string;
+  /** Prepared coverage of declared keys, in canonical table/key order. Offset
+   * 0..4096; limit 1..128 (default 128). Unknown runtime keys are returned by
+   * localize().missing. No report accumulates mutable per-tick diagnostics. */
+  report(request?: LocalizationReportRequest): LocalizationReport;
 }
 export interface NativeContext {
   /** Authored attachments for this source, sorted by stable entity ID. The array
@@ -125,6 +173,8 @@ export interface NativeContext {
   readonly commands: NativeCommands;
   readonly input: NativeInput;
   readonly physics: NativePhysics;
+  readonly navigation: NativeNavigation;
+  readonly localization: NativeLocalization;
   readonly clock: NativeClock;
   /** Functions expire after this update. Invalid/caught commands reject numeric,
    * structural and scheduling changes together and permanently fail the host. */

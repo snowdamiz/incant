@@ -6,6 +6,7 @@ rust-version.workspace = true
 publish.workspace = true
 
 [dependencies]
+incant_localization.workspace = true
 incant_nav.workspace = true
 incant_types.workspace = true
 incant_2d.workspace = true

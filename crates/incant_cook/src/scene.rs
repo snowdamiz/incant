@@ -221,6 +221,10 @@ pub(crate) fn cook_validated_scene_with_navigation(
             .with_spatial(visual_assets.into_values().collect(), spatial)?
             .with_physics_2d(physics_2d)?
             .with_navigation(navigation)?
+            .with_localization(incant_runtime::NativeLocalization::new(
+                project.string_tables.clone(),
+                project.settings.localization.clone(),
+            )?)?
             .to_bytes(),
     )
 }

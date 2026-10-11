@@ -1,4 +1,4 @@
-//! Read-only solver access while foreign code holds exclusive numeric ECS views.
+//! Read-only solver and navigation access while foreign code holds exclusive numeric ECS views.
 use crate::{
     CharacterMovement, CharacterQuery, NativeWorld, NumericColumns, RayHit, RayHit2D, RayQuery,
     RayQuery2D, RuntimeError, StableId, TriggerEvent, TriggerEvent2D,
@@ -9,10 +9,12 @@ use thiserror::Error;
 
 #[derive(Debug, Error)]
 pub enum QueryError {
-    #[error("physics query capability has expired")]
+    #[error("native query capability has expired")]
     Expired,
     #[error("physics query belongs to a different scene")]
     Scene,
+    #[error(transparent)]
+    Navigation(#[from] crate::SceneError),
     #[error(transparent)]
     Physics(#[from] PhysicsError),
     #[error(transparent)]
@@ -20,17 +22,96 @@ pub enum QueryError {
 }
 
 /// A read-only capability for one numeric loan. Retention cannot retain the
-/// solver after the loan ends; later calls fail, including during a new loan.
-/// Queries see the last committed solver poses, not pending numeric writes or
+/// solvers or navigation cache after the loan ends; later calls fail, including during a new loan.
+/// Queries see the last committed solver poses/cache, not pending numeric writes or
 /// queued structural commands. No ECS pointer or live solver handle escapes.
 #[derive(Clone)]
 pub struct NativeQueries {
+    localization: Rc<RefCell<Option<crate::NativeLocalization>>>,
     solver: Rc<RefCell<Option<PhysicsRuntime<StableId>>>>,
     planar: Rc<RefCell<Option<incant_physics_2d_runtime::PhysicsWorld2D>>>,
+    navigation: Rc<RefCell<Option<crate::navigation_runtime::NavigationRuntime>>>,
     scene: StableId,
     used: bool,
 }
 impl NativeQueries {
+    pub fn localize(
+        &self,
+        request: &crate::LocalizeRequest,
+    ) -> Result<crate::LocalizedText, QueryError> {
+        Ok(self
+            .localization
+            .borrow()
+            .as_ref()
+            .ok_or(QueryError::Expired)?
+            .localize(request)?)
+    }
+    pub fn locale(&self) -> Result<crate::LocaleSettings, QueryError> {
+        Ok(self
+            .localization
+            .borrow()
+            .as_ref()
+            .ok_or(QueryError::Expired)?
+            .settings()
+            .clone())
+    }
+    pub fn localization_report(
+        &self,
+        request: crate::LocalizationReportRequest,
+    ) -> Result<crate::LocalizationReport, QueryError> {
+        Ok(self
+            .localization
+            .borrow()
+            .as_ref()
+            .ok_or(QueryError::Expired)?
+            .report(request)?)
+    }
+    pub fn format_number(&self, value: f64) -> Result<String, QueryError> {
+        let data = self.localization.borrow();
+        let locale = &data.as_ref().ok_or(QueryError::Expired)?.settings().locale;
+        Ok(
+            incant_localization::format_number(locale, value)
+                .map_err(crate::localization::error)?,
+        )
+    }
+    pub fn format_date(
+        &self,
+        value: &crate::CalendarDate,
+        length: crate::DateLength,
+    ) -> Result<String, QueryError> {
+        let data = self.localization.borrow();
+        let locale = &data.as_ref().ok_or(QueryError::Expired)?.settings().locale;
+        Ok(incant_localization::format_date(locale, value, length)
+            .map_err(crate::localization::error)?)
+    }
+
+    /// Owned world-space path from the committed mesh, including explicit
+    /// off-mesh traversal metadata. No movement or rebuild is performed.
+    pub fn navigation_path(
+        &self,
+        entity: StableId,
+        request: &crate::PathRequest,
+    ) -> Result<Option<crate::NavigationPath>, QueryError> {
+        let cache = self.navigation.borrow();
+        Ok(cache
+            .as_ref()
+            .ok_or(QueryError::Expired)?
+            .path(entity, request)?)
+    }
+    /// Owned adjacent grid cells from the committed grid. Grid coordinates
+    /// remain indices; mapping them to world positions belongs to gameplay.
+    pub fn grid_path(
+        &self,
+        entity: StableId,
+        request: &crate::GridPathRequest,
+    ) -> Result<Option<crate::GridPath>, QueryError> {
+        let cache = self.navigation.borrow();
+        Ok(cache
+            .as_ref()
+            .ok_or(QueryError::Expired)?
+            .grid_path(entity, request)?)
+    }
+
     /// Raycast the committed planar solver; pending numeric/structural writes
     /// are intentionally invisible until the next synchronization point.
     pub fn raycast_2d(&self, query: &RayQuery2D) -> Result<Option<RayHit2D>, QueryError> {
@@ -98,8 +179,12 @@ struct Restore<'a> {
 }
 impl Drop for Restore<'_> {
     fn drop(&mut self) {
-        // Only owned values leave raycast; no caller can retain a RefCell loan.
-        // This empties every retained capability before restoring solver ownership.
+        self.queries.localization.borrow_mut().take();
+        // Only owned values leave queries; no caller can retain a RefCell loan.
+        // Empty each retained capability before restoring its owned native state.
+        if let Some(cache) = self.queries.navigation.borrow_mut().take() {
+            self.world.navigation = cache;
+        }
         if let Some(solver) = self.queries.planar.borrow_mut().take() {
             self.world.physics_2d = solver;
         }
@@ -110,20 +195,22 @@ impl Drop for Restore<'_> {
 }
 
 impl NativeWorld {
-    /// Lend numeric ECS columns and read-only committed physics synchronously.
-    /// Moving ownership costs two bounded allocations, not a world/solver clone.
+    /// Lend numeric ECS columns and read-only committed physics/navigation synchronously.
+    /// Moving ownership costs four bounded allocations, not a world/solver/cache clone.
     /// The private guard exposes no world methods during the temporary move.
     /// NumericColumns validation and cleanup use only ECS data/hierarchy; they
-    /// must not access either temporarily detached solver. Solver ownership is
+    /// must not access the temporarily detached solvers/cache. Ownership is
     /// restored on success, error and unwinding, after numeric cleanup finishes.
     pub fn with_numeric_physics<R>(
         &mut self,
         operation: impl FnOnce(&mut NumericColumns<'_>, NativeQueries) -> R,
     ) -> Result<R, RuntimeError> {
-        self.ensure_usable()?;
+        self.ensure_navigation_current()?;
         let queries = NativeQueries {
+            localization: Rc::new(RefCell::new(Some(self.localization.clone()))),
             solver: Rc::new(RefCell::new(None)),
             planar: Rc::new(RefCell::new(None)),
+            navigation: Rc::new(RefCell::new(None)),
             scene: self.scene_id(),
             used: self.physics_used,
         };
@@ -133,6 +220,7 @@ impl NativeWorld {
         };
         *guard.queries.solver.borrow_mut() = Some(std::mem::take(&mut guard.world.physics));
         *guard.queries.planar.borrow_mut() = Some(std::mem::take(&mut guard.world.physics_2d));
+        *guard.queries.navigation.borrow_mut() = Some(std::mem::take(&mut guard.world.navigation));
         let queries = guard.queries.clone();
         Ok(guard
             .world

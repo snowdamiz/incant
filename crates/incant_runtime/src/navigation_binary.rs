@@ -136,9 +136,6 @@ fn boolean(r: &mut Reader<'_>) -> Result<bool, SceneError> {
 }
 pub(crate) fn read(r: &mut Reader<'_>) -> Result<Vec<CookedNavigation>, SceneError> {
     let n = count(r, 16, 17)?;
-    if n == 0 {
-        return Err(SceneError::Invalid("version 9 requires navigation"));
-    }
     let mut nodes = Vec::with_capacity(n);
     let mut budget = Budget::default();
     for _ in 0..n {
