@@ -4216,8 +4216,10 @@ dependencies = [
  "bevy_ecs",
  "glam 0.32.1",
  "incant_2d",
+ "incant_physics_2d_runtime",
  "incant_physics_runtime",
  "incant_types",
+ "libm",
  "sha2 0.10.9",
  "thiserror 2.0.21",
 ]

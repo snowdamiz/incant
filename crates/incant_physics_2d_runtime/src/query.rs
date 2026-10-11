@@ -19,21 +19,29 @@ pub struct RayHit {
     pub point: [f64; 2],
     pub normal: [f64; 2],
 }
-impl PhysicsWorld2D {
-    pub fn raycast(&self, query: &RayQuery) -> Result<Option<RayHit>, PhysicsError> {
-        self.check_live()?;
-        if !query
+impl RayQuery {
+    /// Pure bounded input check, available before an owner flushes numeric edits.
+    pub fn validate(&self) -> Result<(), PhysicsError> {
+        if !self
             .origin
             .into_iter()
-            .chain(query.direction)
+            .chain(self.direction)
             .all(|v| v.is_finite() && v.abs() <= 1_000_000.)
-            || !(0. ..=1_000_000.).contains(&query.max_distance)
+            || !(0. ..=1_000_000.).contains(&self.max_distance)
+            || vector(self.direction).try_normalize().is_none()
         {
             return Err(PhysicsError::Query);
         }
+        Ok(())
+    }
+}
+impl PhysicsWorld2D {
+    pub fn raycast(&self, query: &RayQuery) -> Result<Option<RayHit>, PhysicsError> {
+        self.check_live()?;
+        query.validate()?;
         let direction = vector(query.direction)
             .try_normalize()
-            .ok_or(PhysicsError::Query)?;
+            .expect("validated direction");
         let ray = Ray::new(vector(query.origin), direction);
         let filter = QueryFilter {
             exclude_collider: query

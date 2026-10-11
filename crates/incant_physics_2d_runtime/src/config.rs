@@ -100,25 +100,7 @@ impl PreparedBody {
 }
 
 pub fn validate_collider(collider: &Collider2D) -> Result<(), PhysicsError> {
-    let dimension = |v: f64| (0.001..=10000.).contains(&v);
-    let valid = match collider.shape {
-        ColliderShape2D::Box { half_extents } => half_extents.into_iter().all(dimension),
-        ColliderShape2D::Circle { radius } => dimension(radius),
-        ColliderShape2D::Capsule {
-            half_height,
-            radius,
-        } => dimension(radius) && (0. ..=10000.).contains(&half_height),
-    };
-    if !valid
-        || !(0.001..=100000.).contains(&collider.density)
-        || !(0. ..=10.).contains(&collider.friction)
-        || !(0. ..=1.).contains(&collider.restitution)
-    {
-        return Err(PhysicsError::Component(
-            "2D collider dimensions/material out of range".into(),
-        ));
-    }
-    Ok(())
+    incant_types::physics_2d_validation::collider(collider).map_err(PhysicsError::Component)
 }
 
 pub fn validate_state(body: Option<&RigidBody>, state: &BodyState) -> Result<(), PhysicsError> {

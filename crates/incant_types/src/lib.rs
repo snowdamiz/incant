@@ -7,6 +7,7 @@ mod collider_shapes;
 mod lights;
 mod physics;
 mod physics_2d;
+pub mod physics_2d_validation;
 pub mod physics_validation;
 mod render;
 mod transform;

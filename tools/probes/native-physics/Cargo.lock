@@ -693,6 +693,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "incant_physics_2d_runtime"
+version = "0.0.1"
+dependencies = [
+ "incant_2d",
+ "incant_types",
+ "rapier2d",
+ "thiserror",
+]
+
+[[package]]
 name = "incant_physics_runtime"
 version = "0.0.1"
 dependencies = [
@@ -710,8 +720,10 @@ dependencies = [
  "bevy_ecs",
  "glam 0.32.1",
  "incant_2d",
+ "incant_physics_2d_runtime",
  "incant_physics_runtime",
  "incant_types",
+ "libm",
  "sha2",
  "thiserror",
 ]
@@ -906,6 +918,34 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f38d5652c16fde515bb1ecef450ab0f6a219d619a7274976324d5e377f7dceba"
 
 [[package]]
+name = "parry2d"
+version = "0.31.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fe1ba500175e957aaa27ddc92290ec8ff503d73331365443660816d6302e2a31"
+dependencies = [
+ "approx",
+ "arrayvec",
+ "bitflags",
+ "downcast-rs",
+ "either",
+ "ena",
+ "foldhash",
+ "glamx",
+ "hashbrown 0.17.1",
+ "indexmap",
+ "log",
+ "num-derive",
+ "num-traits",
+ "ordered-float",
+ "rayon",
+ "simba",
+ "slab",
+ "smallvec",
+ "spade",
+ "thiserror",
+]
+
+[[package]]
 name = "parry3d"
 version = "0.31.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -998,6 +1038,29 @@ name = "r-efi"
 version = "6.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f8dcc9c7d52a811697d2151c701e0d08956f92b0e24136cf4cf27b57a6a0d9bf"
+
+[[package]]
+name = "rapier2d"
+version = "0.36.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e6708b492a19e936d66ba45fd0749ea8e20275f9a8e9891050944c35b8305349"
+dependencies = [
+ "approx",
+ "arrayvec",
+ "bitflags",
+ "glamx",
+ "log",
+ "nalgebra",
+ "num-traits",
+ "parry2d",
+ "profiling",
+ "rayon",
+ "serde",
+ "simba",
+ "static_assertions",
+ "thiserror",
+ "wide",
+]
 
 [[package]]
 name = "rapier3d"

@@ -26,6 +26,7 @@ fn map(solid: bool) -> NativeTilemap {
     }
 }
 fn scene(map: NativeTilemap) -> Result<CookedScene, SceneError> {
+    let solid = map.layers.iter().any(|layer| layer.solid);
     let mut node = CookedSpatial::empty(id(1));
     node.tilemap = Some(Box::new(map));
     CookedScene::new(
@@ -36,7 +37,7 @@ fn scene(map: NativeTilemap) -> Result<CookedScene, SceneError> {
             parent: None,
             transform: Transform::default(),
             velocity: Some(Velocity {
-                linear: [1., 0., 0.],
+                linear: [if solid { 0. } else { 1. }, 0., 0.],
             }),
         }],
     )?
@@ -85,7 +86,7 @@ fn v6_round_trip_preserves_binary_frames_and_retained_local_preparation() {
     assert!(world.save_bytes().is_err());
 }
 #[test]
-fn solid_maps_refuse_simulation_and_structural_removal_clears_the_capability() {
+fn solid_maps_step_in_retained_solver_and_structural_removal_clears_binding() {
     let mut world = NativeWorld::new(scene(map(true)).unwrap());
     let before = world.snapshot();
     let view = world.spatial_view().unwrap();
@@ -94,9 +95,9 @@ fn solid_maps_refuse_simulation_and_structural_removal_clears_the_capability() {
     assert_eq!(rects.len(), 1);
     assert_eq!(rects[0].origin, [0, 0]);
     assert_eq!(rects[0].size, [2, 2]);
-    assert_eq!(world.step(), Err(RuntimeError::TilemapPhysicsUnsupported));
+    world.step().unwrap();
     assert_eq!(world.snapshot(), before);
-    assert_eq!(world.tick(), 0);
+    assert_eq!(world.tick(), 1);
     let mut commands = FrameCommands::default();
     commands
         .push(StructuralCommand::SetSpatial {
@@ -383,5 +384,5 @@ fn noops_reparenting_and_archetype_relocation_preserve_local_prepared_buffers() 
         .unwrap();
     assert_eq!(map.placements().as_ptr(), pointer);
     assert!(map.collision().is_empty());
-    world.step().unwrap(); // Rejected solid configuration did not set refusal state.
+    world.step().unwrap(); // Rejected solid configuration did not install collision.
 }

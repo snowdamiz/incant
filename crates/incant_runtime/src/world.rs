@@ -1,4 +1,5 @@
 use crate::physics::{Binding, Spin};
+use crate::physics_2d::{Binding2D, Spin2D};
 use crate::scene::{matrix, validate_components};
 use crate::{CookedEntity, CookedScene, SceneError, StableId};
 use bevy_ecs::prelude::*;
@@ -45,6 +46,8 @@ pub enum RuntimeError {
     GenerationOverflow,
     #[error(transparent)]
     Physics(#[from] incant_physics_runtime::PhysicsError),
+    #[error(transparent)]
+    Physics2D(#[from] incant_physics_2d_runtime::PhysicsError),
     #[error("native physics world failed; construct a new session")]
     PhysicsFailed,
     #[error(
@@ -64,6 +67,8 @@ pub struct NativeWorld {
     pub(crate) world: World,
     schedule: Schedule,
     pub(crate) physics: incant_physics_runtime::PhysicsRuntime<StableId>,
+    pub(crate) physics_2d: incant_physics_2d_runtime::PhysicsWorld2D,
+    pub(crate) physics_2d_used: bool,
     pub(crate) physics_failed: bool,
     pub(crate) physics_used: bool,
     pub(crate) spatial_used: bool,
@@ -88,6 +93,7 @@ impl NativeWorld {
 
     pub fn new(scene: CookedScene) -> Self {
         let physics = scene.physics.clone();
+        let physics_2d = scene.physics_2d.clone();
         let audio = scene.audio.clone();
         let spatial = scene.spatial;
         let visual_assets = scene.visual_assets;
@@ -100,6 +106,10 @@ impl NativeWorld {
                 declaration.prepare(by_id[&declaration.entity]),
             );
         }
+        let mut planar_changes: Vec<_> = physics_2d
+            .iter()
+            .map(|p| (p.entity, Some(p.prepare(by_id[&p.entity]))))
+            .collect();
         let mut world = World::new();
         world.insert_resource(Step(1. / f64::from(scene.tick_rate)));
         let mut entities = BTreeMap::new();
@@ -133,6 +143,8 @@ impl NativeWorld {
             identity: crate::WorldIdentity::new(),
             world,
             physics: solver,
+            physics_2d: Default::default(),
+            physics_2d_used: false,
             physics_failed: false,
             physics_used: !physics.is_empty(),
             spatial_used: !spatial.is_empty() || !visual_assets.is_empty(),
@@ -159,6 +171,31 @@ impl NativeWorld {
         for declaration in physics {
             result.install_physics(declaration);
         }
+        for declaration in physics_2d {
+            result.install_physics_2d(declaration.entity, Some(declaration), false);
+        }
+        for id in result.tilemap_collision_ids.clone() {
+            let entity = result.world.entity(result.entities[&id]);
+            let map = entity.get::<crate::tilemap::Prepared>().unwrap();
+            let state = crate::physics_2d::state(
+                &entity.get::<Local>().unwrap().0,
+                entity.get::<Motion>().map(|m| &m.0),
+                None,
+                None,
+            );
+            planar_changes.push((
+                id,
+                Some(
+                    incant_physics_2d_runtime::PreparedBody::tilemap(&map.0, state)
+                        .expect("validated map"),
+                ),
+            ));
+            result.install_physics_2d(id, None, true);
+        }
+        result
+            .physics_2d
+            .apply(planar_changes)
+            .expect("validated planar scene");
         result
     }
 
@@ -256,15 +293,13 @@ impl NativeWorld {
 
     pub fn step(&mut self) -> Result<(), RuntimeError> {
         self.ensure_usable()?;
-        if !self.tilemap_collision_ids.is_empty() {
-            return Err(RuntimeError::TilemapPhysicsUnsupported);
-        }
         let next = self.tick.checked_add(1).ok_or(RuntimeError::TickOverflow)?;
         let dt = self.world.resource::<Step>().0;
         // Validate the whole numeric input set and ordinary integration before
         // the first solver write. No cloned configuration or document exists.
         self.prepare_globals(Some(dt))?;
-        if self.physics_used {
+        if self.physics_used || self.physics_2d_used {
+            self.sync_physics_2d()?;
             let mut query = self
                 .world
                 .query::<(&Identity, &Local, Option<&Motion>, Option<&Spin>, &Binding)>();
@@ -278,6 +313,11 @@ impl NativeWorld {
                     return Err(error.into());
                 }
             }
+            // Every post-advance error or caught unwind makes this world terminal.
+            self.physics_failed = true;
+            if let Err(error) = self.physics_2d.step(dt) {
+                return Err(error.into());
+            }
             if let Err(error) = self.physics.step(dt) {
                 self.physics_failed = true;
                 return Err(error.into());
@@ -288,6 +328,20 @@ impl NativeWorld {
             if let Err(error) = self.prepare_candidate_globals(Some(dt), true) {
                 self.physics_failed = true;
                 return Err(error.into());
+            }
+            for (id, state) in self.physics_2d.states() {
+                let mut entity = self.world.entity_mut(self.entities[&id]);
+                let rotation = crate::physics_2d::rotation(state.rotation);
+                let mut local = entity.get_mut::<Local>().expect("planar transform");
+                local.0.translation[..2].copy_from_slice(&state.translation);
+                local.0.rotation = rotation;
+                if let Some(mut velocity) = entity.get_mut::<Motion>() {
+                    velocity.0.linear[..2].copy_from_slice(&state.velocity);
+                }
+                if let Some(mut spin) = entity.get_mut::<Spin2D>() {
+                    spin.0.angular = state.angular_velocity;
+                }
+                entity.get_mut::<Binding2D>().unwrap().rotation = rotation;
             }
             for (id, state) in self.physics.state_iter() {
                 let mut entity = self.world.entity_mut(self.entities[id]);
@@ -304,6 +358,7 @@ impl NativeWorld {
         }
         self.schedule.run(&mut self.world);
         self.tick = next;
+        self.physics_failed = false;
         Ok(())
     }
 
@@ -358,6 +413,7 @@ impl NativeWorld {
         solved: bool,
     ) -> Result<(), SceneError> {
         let physics = &self.physics;
+        let physics_2d = &self.physics_2d;
         let scene_id = self.scene_id;
         self.world
             .resource_scope(|world, mut hierarchy: Mut<Hierarchy>| {
@@ -367,10 +423,12 @@ impl NativeWorld {
                     Option<&Motion>,
                     Option<&Spin>,
                     Option<&Binding>,
+                    Option<&Spin2D>,
+                    Option<&Binding2D>,
                 )>();
                 for index in 0..hierarchy.nodes.len() {
                     let (entity, parent) = hierarchy.nodes[index];
-                    let (id, local, motion, spin, binding) =
+                    let (id, local, motion, spin, binding, spin2d, binding2d) =
                         query.get(world, entity).expect("fixed topology");
                     let velocity = motion.map(|v| &v.0);
                     validate_components(id.0, &local.0, velocity)?;
@@ -384,14 +442,33 @@ impl NativeWorld {
                             binding.body.as_ref(),
                         )?;
                     }
-                    let local_matrix = if solved && binding.is_some() {
+                    if let Some(binding) = binding2d {
+                        crate::physics_2d::validate_motion(
+                            id.0,
+                            parent.is_some(),
+                            &local.0,
+                            velocity,
+                            spin2d.map(|s| &s.0),
+                            binding.body.as_ref(),
+                        )?;
+                    }
+                    let local_matrix = if solved && binding2d.is_some() {
+                        let state = physics_2d.state(id.0).expect("planar binding");
+                        let mut candidate = local.0.clone();
+                        candidate.translation[..2].copy_from_slice(&state.translation);
+                        candidate.rotation = crate::physics_2d::rotation(state.rotation);
+                        validate_components(id.0, &candidate, None)?;
+                        matrix(&candidate)
+                    } else if solved && binding.is_some() {
                         let state = physics.state(&scene_id, &id.0).expect("physics binding");
                         let mut candidate = local.0.clone();
                         candidate.translation = state.translation;
                         candidate.rotation = state.rotation;
                         validate_components(id.0, &candidate, None)?;
                         matrix(&candidate)
-                    } else if let (Some(step), Some(velocity), None) = (step, velocity, binding) {
+                    } else if let (Some(step), Some(velocity), None, None) =
+                        (step, velocity, binding, binding2d)
+                    {
                         let mut candidate = local.0.clone();
                         advance_translation(&mut candidate, velocity, step);
                         matrix(&candidate)
@@ -430,7 +507,9 @@ impl NativeWorld {
     }
 }
 
-fn integrate(step: Res<Step>, mut query: Query<(&mut Local, &Motion), Without<Binding>>) {
+type NonPhysics = (Without<Binding>, Without<Binding2D>);
+
+fn integrate(step: Res<Step>, mut query: Query<(&mut Local, &Motion), NonPhysics>) {
     let advance = |(mut local, motion): (Mut<Local>, &Motion)| {
         advance_translation(&mut local.0, &motion.0, step.0);
     };

@@ -402,3 +402,27 @@ fn physics_domains_and_structural_rejection_restore_all_loans_after_revocation()
         assert_eq!(world.physics_state(id(1)), physics);
     }
 }
+
+#[test]
+fn planar_domains_and_final_structural_failure_restore_detached_loans() {
+    use incant_runtime::{CookedEntity, CookedPhysics2D, CookedScene};
+    use incant_types::{BodyMotion, Collider2D, RigidBody, Transform};
+    for body in [
+        "for(const c of chunks) for(let i=0;i<c.ids.length;i++) c.transforms[i*10+7] = 2;".to_owned(),
+        "for(const c of chunks) if(c.velocities) c.velocities[2]=1;".to_owned(),
+        "for(const c of chunks) for(let i=0;i<c.ids.length;i++) {c.transforms[i*10+3]=0.6; c.transforms[i*10+6]=0.8;}".to_owned(),
+        format!("for(const c of chunks) for(let i=0;i<c.ids.length;i++) c.transforms[i*10]+=1; commands.setParent('{ONE}','{TWO}');"),
+        format!("for(const c of chunks) for(let i=0;i<c.ids.length;i++) c.transforms[i*10]+=1; commands.setVelocity('{ONE}',null);"),
+    ] {
+        let scene=CookedScene::new(id(999),64,(1..=2).map(|n|CookedEntity{id:id(n),parent:None,transform:Transform::default(),velocity:None}).collect()).unwrap()
+            .with_physics_2d(vec![CookedPhysics2D{entity:id(1),body:Some(RigidBody{motion:BodyMotion::Kinematic,..Default::default()}),collider:Collider2D::default(),angular_velocity:None}]).unwrap();
+        let mut world=NativeWorld::new(scene);
+        let before=world.snapshot();let physics=world.physics_2d_state(id(1));
+        let mut host=ScriptHost::new(code(&format!("globalThis.views=chunks.flatMap(c=>[c.transforms,new DataView(c.transforms.buffer)]);{body}"))).unwrap();
+        assert!(host.tick(&mut world,1./64.).is_err());
+        assert_eq!(world.snapshot(),before);assert_eq!(world.physics_2d_state(id(1)),physics);
+        check(&host,"for(const v of views) if(v.buffer.byteLength!==0) throw Error('live rejected planar loan');");
+        assert!(matches!(host.tick(&mut world,1./64.),Err(ScriptError::FailedSession)));
+        world.step().unwrap();assert_eq!(world.physics_2d_state(id(1)),physics);
+    }
+}
