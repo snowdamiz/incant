@@ -1,6 +1,7 @@
 //! Shared component values for authoring and the native runtime. No project,
 //! command, CRDT, filesystem or agent dependency. Authoring validation remains
 //! in incant_doc until the checked cook/runtime boundaries migrate separately.
+mod animation;
 mod audio;
 mod camera;
 mod collider_shapes;
@@ -33,6 +34,7 @@ pub type Id = String;
 )]
 pub struct StableId(pub [u8; 16]);
 
+pub use animation::AnimationSample;
 pub use audio::{AudioBus, AudioListener, AudioSource, AudioSpatial};
 pub use camera::{Camera, CameraProjection};
 pub use collider_shapes::{ColliderPart, ColliderShape, PrimitiveColliderShape};
