@@ -133,6 +133,11 @@ class FreshSession:
 
     def build(self, command, *, cwd, env):
         require(not self.deleted and Path(cwd).resolve() == self.root, 'Invalid shipping build boundary')
+        # The static SDK proof needs cc's diagnostic command output. Keep this
+        # setting identical across the session: changing it between players
+        # invalidates cc build-script fingerprints, including QuickJS's units.
+        # Copy the caller's environment; standalone probe behavior is unchanged.
+        env = dict(env, CC_ENABLE_DEBUG_OUTPUT='1')
         for name, expected in (('--profile', 'shipping'), ('--target', self.target),
                                ('--target-dir', str(self.path)),
                                ('--config', f'profile.shipping.split-debuginfo="{self.split}"')):
@@ -160,6 +165,7 @@ class FreshSession:
         require(build.returncode == 0, f'Shared shipping build failed:\n{build.stderr[-16000:]}')
         lines = self.record(build.stdout, build.stderr)
         self.builds.append({'command': list(map(str, command)), 'seconds': elapsed,
+                            'diagnostic_environment': {'CC_ENABLE_DEBUG_OUTPUT': '1'},
                             'stdout_sha256': hashlib.sha256(build.stdout.encode()).hexdigest(),
                             'stderr_sha256': hashlib.sha256(build.stderr.encode()).hexdigest(),
                             'compile_inputs': inputs, 'static_bundle': bundle,

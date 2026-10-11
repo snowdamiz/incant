@@ -75,6 +75,11 @@ class FreshShippingLedgerTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'Unproven'):
             self.record(fresh=True, command='')
 
+    def test_rebuilding_same_target_identity_remains_rejected(self):
+        self.record()
+        with self.assertRaisesRegex(ValueError, 'unexpectedly rebuilt'):
+            self.record()
+
     def test_changed_reused_bytes_are_rejected(self):
         self.record()
         self.library.write_bytes(b'another artifact')
@@ -152,6 +157,32 @@ class FreshShippingLedgerTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, 'compiler override'):
                     self.session.build(command, cwd=self.root, env={key: 'override'})
                 run.assert_not_called()
+
+    def test_shared_build_diagnostics_stay_constant_without_mutating_callers(self):
+        command = ['cargo', '--profile', 'shipping', '--target', self.target,
+                   '--target-dir', str(self.storage), '--config',
+                   'profile.shipping.split-debuginfo="packed"', '--locked',
+                   '--message-format=json', '-vv']
+        # Model a static SDK caller with C diagnostics and the following script
+        # caller without them. Neither caller nor compiler arguments may change.
+        environments = [{'CC_ENABLE_DEBUG_OUTPUT': '1', 'PATH': '/pinned', 'CFLAGS': '-O3'},
+                        {'PATH': '/pinned', 'CFLAGS': '-O3'}]
+        original = copy.deepcopy(environments)
+        original_command = command[:]
+        self.session.last_units = []
+        with patch.object(self.session, 'record', return_value=['fresh proof']), \
+                patch('shipping_session.subprocess.run', return_value=
+                      subprocess.CompletedProcess(command, 0, '{}', '')) as compile:
+            for environment in environments:
+                self.session.build(command, cwd=self.root, env=environment)
+        self.assertEqual(environments, original)
+        self.assertEqual(command, original_command)
+        self.assertEqual(len(compile.call_args_list), 2)
+        for call in compile.call_args_list:
+            self.assertEqual(call.args[0], original_command)
+            self.assertEqual(call.kwargs['env'], original[0])
+        self.assertEqual([b['diagnostic_environment'] for b in self.session.builds],
+                         [{'CC_ENABLE_DEBUG_OUTPUT': '1'}] * 2)
 
     def test_static_bundle_must_be_disposable_and_without_symlinks(self):
         bundle = self.root / 'authoring/bundle'

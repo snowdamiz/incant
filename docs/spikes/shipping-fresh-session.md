@@ -89,6 +89,17 @@ This integrated graph still needs its fresh player proof. The 16.8% sample above
 does not measure this newer graph; shared storage remains off CI. The inherited
 SDK CI command continues to run its full standalone proof.
 
+The first fresh SDK preparation correctly refused a repeated QuickJS target unit
+before any player launch. Cargo identified a change in `CC_ENABLE_DEBUG_OUTPUT`:
+the static SDK caller needs this C-command diagnostic, while the following script
+caller omitted it. The shared build wrapper now enables this diagnostic uniformly
+on a copy of each caller environment and records it. Compiler arguments, the
+standalone commands, the strict duplicate-unit refusal and the deletion barrier
+are unchanged. All 120 tooling tests pass, including diagnostic consistency and
+caller isolation. [Failed-run evidence](evidence/shipping-sdk-ledger-refusal.json)
+retains all raw build hashes; the fresh corrected proof remains pending. No
+performance claim is made for this coordinated correctness run.
+
 The original commands passed locally on the same runtime sources in 78.82 and
 121.71 seconds, respectively. This is a local baseline with concurrent unrelated
 development builds, not a hosted or device performance result. Shared-session
