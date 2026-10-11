@@ -1,0 +1,386 @@
+{
+  "entry_points": [
+    {
+      "entry": "vertex",
+      "family": "diagnostic",
+      "msl_bytes": 879,
+      "runtime_buffers": [],
+      "spv_bytes": 1216,
+      "stage": "Vertex",
+      "vertex_stage": true,
+      "workgroup_memory": [],
+      "workgroup_size": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "entry": "fragment",
+      "family": "diagnostic",
+      "msl_bytes": 590,
+      "runtime_buffers": [],
+      "spv_bytes": 700,
+      "stage": "Fragment",
+      "vertex_stage": false,
+      "workgroup_memory": [],
+      "workgroup_size": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "entry": "vertex",
+      "family": "material",
+      "msl_bytes": 2302,
+      "runtime_buffers": [],
+      "spv_bytes": 3148,
+      "stage": "Vertex",
+      "vertex_stage": true,
+      "workgroup_memory": [],
+      "workgroup_size": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "entry": "fragment",
+      "family": "material",
+      "msl_bytes": 20897,
+      "runtime_buffers": [
+        {
+          "binding": 1,
+          "group": 3,
+          "name": "punctual_lights"
+        },
+        {
+          "binding": 2,
+          "group": 3,
+          "name": "cluster_counts"
+        },
+        {
+          "binding": 3,
+          "group": 3,
+          "name": "cluster_masks"
+        }
+      ],
+      "spv_bytes": 23580,
+      "stage": "Fragment",
+      "vertex_stage": false,
+      "workgroup_memory": [],
+      "workgroup_size": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "entry": "vertex",
+      "family": "shadow",
+      "msl_bytes": 1210,
+      "runtime_buffers": [],
+      "spv_bytes": 1628,
+      "stage": "Vertex",
+      "vertex_stage": true,
+      "workgroup_memory": [],
+      "workgroup_size": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "entry": "fragment",
+      "family": "shadow",
+      "msl_bytes": 979,
+      "runtime_buffers": [],
+      "spv_bytes": 1560,
+      "stage": "Fragment",
+      "vertex_stage": false,
+      "workgroup_memory": [],
+      "workgroup_size": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "entry": "vertex",
+      "family": "sprite",
+      "msl_bytes": 1934,
+      "runtime_buffers": [],
+      "spv_bytes": 3052,
+      "stage": "Vertex",
+      "vertex_stage": true,
+      "workgroup_memory": [],
+      "workgroup_size": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "entry": "fragment",
+      "family": "sprite",
+      "msl_bytes": 2562,
+      "runtime_buffers": [],
+      "spv_bytes": 3172,
+      "stage": "Fragment",
+      "vertex_stage": false,
+      "workgroup_memory": [],
+      "workgroup_size": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "entry": "build",
+      "family": "grid",
+      "msl_bytes": 7844,
+      "runtime_buffers": [
+        {
+          "binding": 1,
+          "group": 0,
+          "name": "lights"
+        },
+        {
+          "binding": 2,
+          "group": 0,
+          "name": "counts"
+        },
+        {
+          "binding": 3,
+          "group": 0,
+          "name": "masks"
+        }
+      ],
+      "spv_bytes": 10124,
+      "stage": "Compute",
+      "vertex_stage": false,
+      "workgroup_memory": [
+        {
+          "bytes": 4,
+          "name": "hits"
+        },
+        {
+          "bytes": 512,
+          "name": "membership"
+        }
+      ],
+      "workgroup_size": [
+        64,
+        1,
+        1
+      ]
+    },
+    {
+      "entry": "vertex",
+      "family": "output",
+      "msl_bytes": 508,
+      "runtime_buffers": [],
+      "spv_bytes": 792,
+      "stage": "Vertex",
+      "vertex_stage": true,
+      "workgroup_memory": [],
+      "workgroup_size": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "entry": "fragment",
+      "family": "output",
+      "msl_bytes": 4275,
+      "runtime_buffers": [],
+      "spv_bytes": 5600,
+      "stage": "Fragment",
+      "vertex_stage": false,
+      "workgroup_memory": [],
+      "workgroup_size": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "naga": "29.0.4",
+  "scope": "CPU translation and metadata reflection only; compact probe bindings are not the engine pipeline ABI; vertex pulling omitted; no runtime, device, appearance or shipping claim",
+  "engine_source": "21a2aa2fb9afcd5903453ca4c1cca32ebf72c6fb",
+  "wgpu_hal_vcs": "e99f5305ded96ff7006f0714d043a7f735bd45c2",
+  "host": {
+    "system": "Darwin",
+    "release": "25.6.0",
+    "architecture": "arm64"
+  },
+  "metal_compiler": [
+    "Apple metal version 32023.921 (metalfe-32023.921.6)",
+    "Target: air64-apple-darwin25.6.0",
+    "Thread model: posix"
+  ],
+  "metal_compile": [
+    {
+      "source": "diagnostic-fragment.metal",
+      "source_sha256": "63927d714f873e30bbb5a8dd38816f29f77a2743efa603699c4503a13e94adca",
+      "exit": 0,
+      "air_sha256": "2fcd91444f4336d61c87e9e5b89bc961f68cf07e66af830d107a3c544228158c"
+    },
+    {
+      "source": "diagnostic-vertex.metal",
+      "source_sha256": "018b2e540636d28327a67094a75d12a0d15006f06c79f828bef7aa766a5073a3",
+      "exit": 0,
+      "air_sha256": "c656969e852120afa7eb4b635fbd2196dfdb5407f8ac78f161dfbc994aa7c228"
+    },
+    {
+      "source": "grid-build.metal",
+      "source_sha256": "da0386bcaf8a094fd02e4d8de61f8e0822d6b3bd7dbf820446b0113b99814cf3",
+      "exit": 0,
+      "air_sha256": "5308fb9690989f67062730cd0ef210c579460fdf7d1f966204d214ed5dcc97da"
+    },
+    {
+      "source": "material-fragment.metal",
+      "source_sha256": "98bfd23cb430029366407c0364b9a1abb0cc73f27a5c4fa41dfaa98b787dfba7",
+      "exit": 0,
+      "air_sha256": "d47579b43b4612c46b173dd47498c3d9c294f2046785f9aadb00144a5a424c48"
+    },
+    {
+      "source": "material-vertex.metal",
+      "source_sha256": "fde4b32300454a31f98c2ea27c6dfb02cf34ae14e7a8340db37dd55eff56fa4f",
+      "exit": 0,
+      "air_sha256": "9bd8f0796f16572e0e042d296fb0e812fe5c46c88b22280f88549707e5efed5a"
+    },
+    {
+      "source": "output-fragment.metal",
+      "source_sha256": "cc2a7197769ba09090757dc93a79ba67001b86ba6cd987545199450a2040410e",
+      "exit": 0,
+      "air_sha256": "b7808288bb2bb07e93ba1d9f869de143479c1a5fddd1314b93a7d3fa15a0e7ec"
+    },
+    {
+      "source": "output-vertex.metal",
+      "source_sha256": "f1cee22e81317613980bed8fc8fd22efee923f1c565ee91d7c106c2b9565fe3e",
+      "exit": 0,
+      "air_sha256": "e0265d3c2f0f736299c48a9ed5583d400218d9e6d79ea843c0a4d37cd8fd3af5"
+    },
+    {
+      "source": "shadow-fragment.metal",
+      "source_sha256": "6af72e99f6832fa300acddd5488297f28b3c3cdb87e5084f901651f3b65e2e3e",
+      "exit": 0,
+      "air_sha256": "2b3a35453998cf7acb9dfd7f4c21db32099fc146d0ea409cca90808f437bc096"
+    },
+    {
+      "source": "shadow-vertex.metal",
+      "source_sha256": "4a4b503fa86f893ea96e30ab66ee401bf208f6c7bfa00b959d558a211b95bbc7",
+      "exit": 0,
+      "air_sha256": "b862b531007a75b2d7b3215c7bd1dbb873e4535ee5dee27b6da20d5f72299469"
+    },
+    {
+      "source": "sprite-fragment.metal",
+      "source_sha256": "bd271ef6aaac933a5ab9715fff6a5babc0499c6eed0b4545c4a05a4c6b7f37d6",
+      "exit": 0,
+      "air_sha256": "bdf4ab5d4060c67d641f34a73600b3017a94938b37256e39d510431945870656"
+    },
+    {
+      "source": "sprite-vertex.metal",
+      "source_sha256": "7d13bb2a28f3f00cdde4b1eebdc55ccc2a2df0eb2b79e1a44860c03c0a6259f7",
+      "exit": 0,
+      "air_sha256": "5fb6c76a908c0dfa8e06fee70f7120f81ffe3081eeed610f339e03405469666a"
+    }
+  ],
+  "metal_library": [
+    {
+      "input": "diagnostic-fragment.air",
+      "exit": 0,
+      "sha256": "ad8d51b87e39d8caeb51803fa665ef8f252e906f616d713025a4f263b2c56482",
+      "bytes": 3343
+    },
+    {
+      "input": "diagnostic-vertex.air",
+      "exit": 0,
+      "sha256": "9d4f2e7052dfdfc05cd9a73d6801bbc1e00759f1a7def87c0e4aa3b6d4e0456d",
+      "bytes": 3635
+    },
+    {
+      "input": "grid-build.air",
+      "exit": 0,
+      "sha256": "92b711472211f58eaae527eae3b1c053493a77466d518634e385ed3c953a5e8c",
+      "bytes": 8539
+    },
+    {
+      "input": "material-fragment.air",
+      "exit": 0,
+      "sha256": "9334ea448fecb1f5caca3649419938b458984acc89edea569fed449ab77f4f31",
+      "bytes": 15807
+    },
+    {
+      "input": "material-vertex.air",
+      "exit": 0,
+      "sha256": "620333c8f20281aed7f886010ede6702b1abd18b709068d508c0f90274603780",
+      "bytes": 4549
+    },
+    {
+      "input": "output-fragment.air",
+      "exit": 0,
+      "sha256": "15568404c16525015e0684ddb93273726c4342850542284c8fd90e11c543a355",
+      "bytes": 6751
+    },
+    {
+      "input": "output-vertex.air",
+      "exit": 0,
+      "sha256": "6ed1d6f6b5a630f5a27175ad815febc553571d19eae2ad630f80c61e03391ab3",
+      "bytes": 3725
+    },
+    {
+      "input": "shadow-fragment.air",
+      "exit": 0,
+      "sha256": "fb09c22e4f274a0420565e21f94570c2cfe753fed272289810212ea1012322e0",
+      "bytes": 4319
+    },
+    {
+      "input": "shadow-vertex.air",
+      "exit": 0,
+      "sha256": "38cd7c783ffad3df539436df38f8bd690c8ae37089195803fb2b01cc58ecb9cb",
+      "bytes": 4155
+    },
+    {
+      "input": "sprite-fragment.air",
+      "exit": 0,
+      "sha256": "4a8bce758b0d057c784b2fc2c73c05b2e7a48e55c3de0bffb7c877bd2bdf9ead",
+      "bytes": 6271
+    },
+    {
+      "input": "sprite-vertex.air",
+      "exit": 0,
+      "sha256": "96ad2106eeab8aa4d6705fcd08e17b28a0234d746b5390500200e832bafd9b40",
+      "bytes": 4473
+    }
+  ],
+  "source_sha256": {
+    "crates/incant_render/src/fixture.wgsl": "4a2fd220107d0f0de77ec5df70786318e33d37f2730c8a5d346963ee79719387",
+    "crates/incant_render/src/lighting/grid.wgsl": "461606edf6d9cb4c89581ef30ccf3ae5570a1e1bc0142ffe4953e91dfc2c0439",
+    "crates/incant_render/src/lighting/shade.wgsl": "52757ae31c0e68c6480bec626ee81386b792fe06c803b0853f9c0a546667e2ad",
+    "crates/incant_render/src/model_material.wgsl": "45018e9c6029af03553aa933438277589835edac1fb75fddcba2833568c51c2b",
+    "crates/incant_render/src/output.wgsl": "6ceefe2e706624f4fff93fab83fffc8e2938af514e3b2ce4e92a1389f11f6a8a",
+    "crates/incant_render/src/shadows/caster.wgsl": "56d35a05cc78da000b7198eaa53d66e2febd929c36a6b3f3e8a53198f124de7f",
+    "crates/incant_render/src/shadows/shade.wgsl": "3f5d22bcef70b70fb7fe089c9940d5a29e6296984f65a718fe96c7f8d22dd8d4",
+    "crates/incant_render/src/sprites/sprite.wgsl": "1b8b9125541761ed6b54cbac79dd8abf312a1c0f1183a18ad8c94b4e818f774c",
+    "crates/incant_render/src/tone_map.wgsl": "c5479279c8ebe1334cb672e0f3d5638604ba0c0b7c415d13d30e08aa62b79307"
+  },
+  "probe_sha256": {
+    "tools/probes/shader-cook/Cargo.toml": "62acedbc2a0be7a21ebc20d832314298c7f8e26a34ae679ced6ed44bde372082",
+    "tools/probes/shader-cook/Cargo.lock": "466d5c495b79a3dec428d26f167239ec71174373e229fb57896ba341805df963",
+    "tools/probes/shader-cook/src/main.rs": "45cbeefa4bb34a0e35ddef561bb0ecfbaf6131e8f34d9e78641ddbf799969100"
+  },
+  "limitations": [
+    "Probe resource maps are compact translation fixtures, not the renderer pipeline ABI.",
+    "Vertex-pulling metadata omitted; no passthrough shader was sent to a GPU.",
+    "HLSL/DXIL cooking, SPIR-V driver validation, runtime integration, persistent cache and device hitch budgets remain unverified."
+  ],
+  "repeat_translation": {
+    "files": 22,
+    "identical": true,
+    "clippy": "passed with warnings denied"
+  }
+}
