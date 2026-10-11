@@ -39,3 +39,21 @@ results to the frozen reviewed source. Later script navigation, native editor
 wiring, exact solver snapshots and complete session persistence are excluded.
 Hosted platform checks remain a separate frozen release checkpoint; these local
 results do not satisfy reference-phone, appearance or phase gates.
+
+## Repaired-main integration
+
+Actual main89 (`f8955bec`) merged as `68b0944` with only a STATUS conflict. All
+76 changed runtime-union source hashes remain identical to the complete local
+freeze; the three portability repairs are byte-identical to reviewed main.
+Focused verification passes two explicitly enabled TypeScript compiler cases,
+51 Play/headless tests, all-target Clippy for cook/Play/headless and a rebuilt
+public headless executable. The real source transaction probe again passes 32
+requests in two processes. All 199 Python tests pass with four Windows-only
+skips; actual older macOS Python passes 35 lifecycle cases with four Windows
+skips. The initial compiler-only command selected no gated cases and is not
+counted; its explicit-feature repeat supplies the actual two-case evidence.
+
+Checkpoint 3 is independently frozen at main89, so this development integration
+does not move that candidate. Its repaired Linux AMD64 local-service job has
+already passed all 28 protocol checks and four restart/persistence controls;
+remaining platform confirmation is governed by all 23 release contexts.

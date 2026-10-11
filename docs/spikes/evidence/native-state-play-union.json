@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-11T17:42:20.885324+00:00",
+  "checked_at": "2026-10-11T17:50:31.763599+00:00",
   "frozen_source": "56eff03dda452ab5d8440efe6b6cc6b2cf3a63ed",
   "base_main": "c3ec3e84dae6bf957304471639e7fac34d2297d4",
   "preserved_ancestors": [
@@ -234,5 +234,69 @@
     "Shared incant_play is authoring-only preparation; editor Play controls are separate unfinished work.",
     "Later TypeScript navigation179d384 and solver snapshots are excluded.",
     "Local macOS numerical GPU checks are not appearance, hosted platform, phone-performance or phase-gate approval."
-  ]
+  ],
+  "main89_integration": {
+    "integrated_head": "68b0944f13ed13e185f3a264f28e2336d2e8ce94",
+    "base": "f8955bec6f0d7bcbd54f30fdbc5b08226e3c326e",
+    "conflict": "STATUS.md only; preserves current repaired-checkpoint state plus accepted union paragraph",
+    "changed_frozen_source_hashes": [],
+    "main89_paths": [
+      "crates/incant_cook/src/typescript.rs",
+      "crates/incant_cook/src/typescript/windows.rs",
+      "crates/incant_cook/tests/typescript.rs",
+      "services/local/compose.yaml",
+      "services/local/objects-entrypoint.sh",
+      "tools/local_services.py",
+      "tools/local_services_smoke.py",
+      "tools/native_process.py",
+      "tools/tests/test_local_services.py",
+      "tools/tests/test_native_process.py"
+    ],
+    "main89_sources_exact": true,
+    "prospective_tree": "2545e7a792067e23fb0521781fdbab0ef615d7bb",
+    "head_tree": "2545e7a792067e23fb0521781fdbab0ef615d7bb",
+    "checks": {
+      "compiler_with_typescript_feature": {
+        "passed": 2,
+        "initial_default_feature_invocation": "zero gated cases, not counted; repeated explicitly with typescript"
+      },
+      "play_and_headless": {
+        "passed": 51,
+        "ignored": 2,
+        "ignored_scope": "Both existing GPU cases passed in frozen75-case serialized GPU lane; no graphics behavior changed by main89 integration"
+      },
+      "python": {
+        "passed": 199,
+        "windows_only_skip": 4
+      },
+      "python39_process_lifecycle": {
+        "passed": 35,
+        "windows_only_skip": 4
+      },
+      "all_target_clippy": [
+        "incant_cook",
+        "incant_play",
+        "incant_headless"
+      ],
+      "public_headless_rebuilt": true,
+      "source_transaction_proof": {
+        "processes": 2,
+        "rpc_requests": 32,
+        "native_motion_undo_redo_recovery": true
+      },
+      "fmt_conventions_workflow_lint": true
+    },
+    "logs": {
+      "/tmp/incant-native-state-main89-build.log": "fb52ce8a98b13c52c7afa691c1995617f313b55a1c076982f1c5b4fe1f6c98f8",
+      "/tmp/incant-native-state-main89-clippy.log": "4c635e5646f10b876395a3f42e82aa62684e7cf4d2dd47d2049e39f5b70916a2",
+      "/tmp/incant-native-state-main89-compiler-enabled.log": "0ab4d3b216497d3c9f9d05a11735c33390e84048348d787f715f0a9d743f0faa",
+      "/tmp/incant-native-state-main89-compiler.log": "a99cec2cd8d2c2d4ec2255774bbd5ae45736503e6fe33a314e7cee6bee802bb5",
+      "/tmp/incant-native-state-main89-play.log": "8ab16c3c6eda8a0737edb6517d3cf403eb51b30349e2c380e44b3bcfcdaf05d0",
+      "/tmp/incant-native-state-main89-probe-help.log": "b2da4f3c9bc376739a076996b778d088e6360ea6240910a76dafc5ee6348ba48",
+      "/tmp/incant-native-state-main89-python39.log": "c27278eeb1c0495400034ceca6b99428edb459146d5b07ed84bf1b0267ab7cf1",
+      "/tmp/incant-native-state-main89-source-proof.log": "22c9c0f1f918e3d0e35472f87b6ad09a40b9b07b82bfeacc7575cdd18c19789c",
+      "/tmp/incant-native-state-main89-tools.log": "4e693c03b3f8b9b5db447648cf462f1e8536d3e65ee22ed7bbe1a697a02bb518"
+    },
+    "review": "Root accepted e36ec70 evidence/source closure; main89 production paths exactly equal independently reviewed merged repairs; STATUS-only resolution preserves both scopes"
+  }
 }
