@@ -22,8 +22,8 @@ visual work, and Astra owns correctness and integration.
 | --- | --- | --- |
 | Editor and sprite authoring | [PR #61](https://github.com/snowdamiz/incant/pull/61) combines the final plain UI, typed atlas/audio imports, focus fixes and the corrected sprite/atlas baseline. 524 UI tests, strict TypeScript, production and native builds pass. | Merged after exact-head hosted checks and isolated native Claude acceptance. [Evidence](docs/spikes/editor-release-union.md). |
 | Import completion and Undo | Native imports return an exact revision/transaction receipt; unchanged imports preserve history and redo without offering stale Undo. Claude 0038 accepted the browser completion copy on frozen source. | The original PLAN revision 8/import union is included in merged PR76 and PR80 after their full applicable checks passed; 534 UI tests and the scoped native receipt/Undo checks pass. [Evidence](docs/spikes/editor-import-receipts.md). |
-| Native TypeScript cooking | Strict bounded local module cooking, flat source maps and developer native playback pass 12 Node/90 Python tests and six real source-deleted process controls. | Local only; full editor/project Script routing, complete SDK and hosted/export/device gates remain. [Evidence](docs/spikes/native-typescript-cook.md). |
-| Native Play RPC and agent | Cooked-native retained RPC and bounded agent play/query now pass 87 scoped release tests, 92 Python/12 Node tests and twelve source-deleted developer processes. A real saved-OAuth Astra turn successfully ran and queried native gameplay without edits. | Local combined candidate integrated with verified main81; integrated verification and hosted checks/publication, editor controls, project Script routing, gameplay capture and complete session saves remain. [RPC](docs/spikes/native-play-rpc.md), [agent evidence](docs/spikes/native-agent-play.md). |
+| Native TypeScript cooking | Strict bounded local module cooking, flat source maps and developer native playback pass 12 Node/90 Python tests and six real source-deleted process controls. | Integrated with verified main81; 695 ordinary/73 GPU tests, 98 Python/12 Node tools and twelve source-deleted developer processes pass. Hosted checks, full editor/project Script routing, complete SDK and export/device gates remain. [Evidence](docs/spikes/native-typescript-cook.md). |
+| Native Play RPC and agent | Cooked-native retained RPC and bounded agent play/query now pass 87 scoped release tests, 92 Python/12 Node tests and twelve source-deleted developer processes. A real saved-OAuth Astra turn successfully ran and queried native gameplay without edits. | Combined candidate integrated with verified main81 and the planar save refusal; 695 ordinary/73 GPU regressions, 536 UI tests and twelve source-deleted developer processes pass. Hosted checks/publication, editor controls, project Script routing, gameplay capture and complete session saves remain. [Integrated evidence](docs/spikes/native-agent-integration.md). [RPC](docs/spikes/native-play-rpc.md), [agent evidence](docs/spikes/native-agent-play.md). |
 | Native game and rendering | Input, embedded QuickJS, native physics, scene audio and retained GPU submission compose through one accepted-tick lifecycle. Binary v5 sprites share immutable geometry. | [PR #62](https://github.com/snowdamiz/incant/pull/62) is merged after all 20 checks. Native editor/legacy Play migration, complete SDK, shader pipeline work and device budgets remain. |
 | Native window player | Optional cooked native game window has bounded recovery, keyboard/mouse input, suspension and device audio. Source-free lifecycle checks and Claude0037 corrected native acceptance pass. [Evidence](docs/spikes/native-window-player.md). | PR63 is included in merged [PR80](https://github.com/snowdamiz/incant/pull/80), whose 21 applicable checks passed. Paused refresh preserves gameplay/audio; fullscreen-route limitations remain explicit. No phone or frame-budget claim. |
 | Native tilemaps | Typed v6 data and exact solid-cell collision preparation preserve the reviewed [PR68](https://github.com/snowdamiz/incant/pull/68) ancestry in the consolidated union. Retained GPU tile rendering now shares checked atlas versions, painter ordering and combined sprite/tile resource caps; 45 ordinary and 62 GPU tests pass. | Claude0039 accepted scoped tile appearance; PR68/73 are included in merged PR80 with passing hosted checks. Native solid-map collision is included through the planar physics boundary below; legacy Play remains unsupported. [Data](docs/spikes/native-tilemaps.md), [rendering](docs/spikes/native-tilemap-rendering.md). |
@@ -57,9 +57,10 @@ main tree is verified against the tested source. Included source PRs close only
 after their exact authored commits are verified in main. This avoids dependent
 PR chains and repeated CI restarts for metadata-only updates.
 
-PR76, PR79 and PR80 are merged. PR80 includes the exact PR63/68/73/78 source
-history. The next publication is one reviewed union of corrected static-FBX
-import and the prewarming/flipbook change, preserving both original histories.
+PR76, PR79, PR80 and PR81 are merged. PR80 includes the exact PR63/68/73/78 source
+history; PR81 preserves the corrected PR77 history, pipeline preparation and
+flipbooks after all 21 checks passed. The next publication combines native
+TypeScript cooking, RPC/agent Play and the planar save refusal on actual main81.
 Further work remains local; this queue does not waive any phase or device gate. [Verified ancestry and queue evidence](docs/spikes/foundation-integration-queue.md).
 
 ## Implemented boundaries and evidence
@@ -73,17 +74,17 @@ The reviewed native-assets/rendering union now preserves corrected FBX, pipeline
 prewarming and flipbook source on actual main80. All 685 ordinary/73 GPU tests,
 536 UI tests, 96 final tools tests, both workspace Clippy profiles, optional-window
 checks, actual browser smoke and fresh source-free shipping controls pass. Final
-combined hosted checks remain pending. [Evidence](docs/spikes/native-assets-render-union.md).
+combined hosted checks passed and PR81 is merged. [Evidence](docs/spikes/native-assets-render-union.md).
 
-- **Pipeline preparation (local, publication held).** The current finite renderer
+- **Pipeline preparation (merged through PR81).** The current finite renderer
   catalog is prepared before the first frame. All 601 ordinary and 67 actual GPU
   tests pass; material reimports across all current variants and four output
   formats allocate no additional pipelines or shader modules during drawing.
   A fresh source-free shipping proof passes eight GPU cases and 33 refusals.
   Claude 0041 accepted the scoped appearance. Combined flipbook source passes
   666 ordinary tests, two helper tests, 90 tools tests, release Clippy, all
-  72 GPU cases and the fresh integrated shipping proof. Hosted checks remain
-  pending. Offline backend
+  72 GPU cases and the fresh integrated shipping proof. All 21 combined PR81
+  hosted checks passed. Offline backend
   shaders, persistent caches, recorded per-level permutations and phone hitch
   gates are still open. [Evidence](docs/spikes/prewarmed-render-pipelines.md).
   Claude also identified existing opaque-texture mip darkening; asset-cook

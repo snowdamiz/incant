@@ -1,0 +1,371 @@
+{
+  "scope": "Native TypeScript cook, retained RPC and native agent Play plus planar save refusal on verified main81",
+  "source_commit": "a407958e63d4473065452e17c03a532c019bccf9",
+  "base_main": "118a4178960bd3fddf7f0b12915015d06705182b",
+  "preserved_candidates": [
+    "fef07d982b1e3116ef6bcd4e1a4078ebf2929408",
+    "8369776b4582a030c7f4d6d26a25c2ad285241cb"
+  ],
+  "source_sha256": {
+    ".github/workflows/credentials.yml": "7a263284fe674145e0ada9528892b45b4e9370f5a5912c3dcbdf649f21a4f153",
+    "Cargo.lock": "de7cf3bbdb3103c31570b78cace37c4c62f1f5875546f631c327e2afe7524e20",
+    "crates/incant_agent/Cargo.toml": "f16e99e7396910c493d6d48415b40a63c46e70b4cce02a37c7d77fe0e04110ba",
+    "crates/incant_agent/src/assets.rs": "2824cb6157a20c5246e6f29385eaf8e0ef8e784ef14ba11c7a7021ac3ee6c420",
+    "crates/incant_agent/src/lib.rs": "a4eb629b7121e289957df3d53fd914e06bf6d0ca2910b36f6cd5470d60ab6898",
+    "crates/incant_agent/src/play.rs": "830a42a9a7fac84dafa325c7618312231f9dcf6700dcdc6a5a5ab11ec1349371",
+    "crates/incant_headless/src/eval.rs": "e1961923383699f7b1a6586baff367857ccdcef8ebd9926b3dcd4d9c73d89502",
+    "crates/incant_headless/src/main.rs": "c19f736ade7784e9ce7afa44e93b0a80caa70812472d4b54db0f47c355a272bd",
+    "crates/incant_headless/src/native_agent_play.rs": "0711f6017683e52d8d6a98b0823f88b3274eb75be67e74342c9082098a54ffb6",
+    "crates/incant_headless/src/native_agent_play/tests.rs": "efa2515030c6b00bc11c9e24dd25c82c6528a97851add0d687f2002148151a9c",
+    "crates/incant_headless/src/native_play.rs": "b77c068b25181c6674da09b272d0d15c601bfba8945e86620210a2015b6268d4",
+    "crates/incant_headless/src/native_play/session.rs": "e52251be2258f60e4435887bbe73820590cda6ba38f6daff6203c2bb856798be",
+    "crates/incant_headless/src/native_rpc.rs": "5f2302f2f0596f6c43253db0c8c5f72ad7dbafc5d62b1ed526abc25969ae4fac",
+    "crates/incant_headless/src/native_rpc/run.rs": "cf1a0a09f0e06c9de084f1f37b0f065f3e3c1037edf0a072e3c3400d25141d50",
+    "crates/incant_headless/tests/native_rpc.rs": "7ab22584ac60fafa0b7cd18c1f730b247953c4216529e55499e1b38e0a743b90",
+    "crates/incant_observe/Cargo.toml": "02f8f970a8f016148df8f32e60d7542a65112f51b507af359218e8526d5f37c2",
+    "crates/incant_observe/src/lib.rs": "3d87b82c98920b227cfc385cc23ecf0ddf9c1f6a2203dbc0f9c858a123cb2488",
+    "crates/incant_runtime/src/save.rs": "fe0f3ab1702ba5c67a22b85ec03eb837cc920d8b1b05ee8b20c581a558e52005",
+    "crates/incant_runtime/tests/saves.rs": "068e1dbb91f54cde26f63edae5a1b9e5b878c35cd72bbb0a6144a78e0d69ff20",
+    "package-lock.json": "cbea068b7d9182270271319a7a77d24805b9c9c66ed5e9eb3e188d60e5337c60",
+    "package.json": "5a62d3a987c88b5376dfa3b9931820650d7e630e132d778ab7bc19d2dd832df5",
+    "schemas/agent-tools.json": "8455e3bc7b8bd412ad515e9dd0c8ad14b45b61040f4724ea7b1aa1168e7cec9f",
+    "tools/build_native_script.mjs": "4c09e66fe398d3baeaf82b245615b7a09f0cd4a82bd0fae38a5e49f981715dfa",
+    "tools/native_play.py": "e25c9af846e70d7e6fe5d3ca167c91a2c85ffd072d3ba12c2d1fff6bcf615b95",
+    "tools/native_script/cook.mjs": "8ba8816a4c981896407387bc29d2159670f5d9343d1f7db2bfd481000cf87568",
+    "tools/native_script/graph.mjs": "009bae78d98aff92d30a812e69817241f32cc2b0a762565c7cb64f7316bd6719",
+    "tools/native_script/publish.mjs": "fa4efed989536b27e1e42e4c082533573e30f2999ef14ba813b9fc80ca5019a0",
+    "tools/probes/native-project-play.py": "40c18aa9c6ac2c9d0ae784dbcc74ebd957efe361b6dcbf81edd4d502f4006e4a",
+    "tools/probes/native_agent_controls.py": "f1cc24bd532afa14f5a795141fc52141c190c83622a68b01d980d1d556bbb03b",
+    "tools/probes/native_rpc_controls.py": "b00b6236ede5fe95433df368f31dbd795213ec6c62b45ed9f9ce38f9e98ec8fb",
+    "tools/probes/physics-runtime.py": "5f3f77ea4f675a6faafd2c1a2a25ff9c6445be5f2829a17d658647e06b7ac459",
+    "tools/tests/native_script.test.mjs": "587f23a78c269efe93e79c5288a18e6d171539b017c931d17ee6d869b464bcc7",
+    "tools/tests/test_native_play.py": "3dda73a09f104885f26d020a5ec29398114c357629f331c42b6cef5c88dedf21"
+  },
+  "host": "macOS-26.6-arm64-arm-64bit-Mach-O",
+  "rust_toolchain": "1.99.0",
+  "ordinary": {
+    "passed": 695,
+    "failed": 0,
+    "ignored": 73,
+    "groups": 201
+  },
+  "serialized_gpu": {
+    "passed": 73,
+    "failed": 0,
+    "ignored": 0,
+    "groups": 201
+  },
+  "gpu_test_names": [
+    "editor_publishes_complete_revisions_and_recovers_after_failed_replacements",
+    "camera_capture_tracks_simulated_camera_motion_and_rejects_unknown_selection",
+    "headless_play_records_current_simulation_frames_and_publishes_a_complete_report",
+    "graph::tests::queued_graph_frames_outlive_scene_versions_and_failed_preparation",
+    "graph::tests::queued_pixel_frames_retain_logical_targets_and_physical_chrome_after_resizing",
+    "hdr_output::hdr_values_survive_until_tone_mapping_and_transfer_runs_once",
+    "hdr_output::output_composes_display_colors_and_reuses_bounded_resize_targets",
+    "lighting::gpu_tests::clustered_viewport_offsets_and_queued_resize_commands_keep_their_own_light_data",
+    "lighting::gpu_tests::every_depth_slice_selects_its_light_and_reused_clusters_clear_old_membership",
+    "lighting::gpu_tests::masks_represent_every_light_and_clear_tail_bits_across_word_count_changes",
+    "models::retained::flipbook_tests::retained_flipbooks_match_static_frames_without_rebuilding_after_cache_deletion",
+    "models::retained::native_tests::binary_native_motion_and_structural_rebuilds_submit_without_source_or_document",
+    "models::retained::sprite_tests::source_free_native_atlas_sprites_match_fresh_frames_across_motion_reflection_and_rebuild",
+    "models::retained::tests::motion_staging_reuses_reserved_slots_and_rejects_unsupported_bindings",
+    "models::retained::tests::rejected_retained_frame_preserves_accepted_gpu_state_and_can_retry",
+    "models::retained::tests::retained_flipbook_selection_stages_without_allocation",
+    "models::retained::tests::retained_motion_matches_fresh_geometry_lights_camera_and_reflections_after_source_deletion",
+    "models::retained::tests::retained_sprite_cpu_staging_allocates_nothing_and_rejects_changed_bindings",
+    "models::retained::tests::retained_tile_cpu_staging_allocates_nothing_without_visiting_binding_cells",
+    "models::retained::tilemap_tests::cooked_source_free_tile_frames_match_raw_cell_sprite_oracle_and_survive_rejection",
+    "version_tests::live_gpu_versions_with_equal_recipe_keys_preserve_old_and_new_geometry",
+    "alpha_modes_and_back_faces_follow_material_semantics",
+    "cameras::authored_camera_changes_projection_clips_geometry_and_retains_its_selected_pose",
+    "cameras::inherited_cameras_and_custom_light_clusters_match_the_all_light_reference",
+    "cameras::orthographic::orthographic_light_clusters_match_all_lights_at_multiple_sizes_poses_and_aspects",
+    "cameras::orthographic::orthographic_parallel_view_rays_preserve_specular_lighting_when_camera_moves_back",
+    "cameras::orthographic::orthographic_size_clipping_and_retained_projection_match_authored_world_units",
+    "cameras::pixel_perfect::fixed_logical_pixels_replicate_exactly_with_integer_scaling_and_letterboxing",
+    "cameras::pixel_perfect::followed_grid_geometry_is_stable_at_half_pixel_ties_and_odd_resolutions",
+    "cameras::pixel_perfect::subpixel_camera_motion_is_stable_and_crossing_the_grid_moves_by_one_logical_pixel",
+    "cameras::rotated_camera_under_uneven_parent_scale_matches_an_orthonormal_flat_pose",
+    "cameras::transparency_depth_order_follows_the_selected_camera",
+    "color_maps_use_srgb_and_texture_reimport_keeps_retained_materials",
+    "dark_fill_lit_materials_remain_distinguishable",
+    "emissive_maps_and_samplers_retain_color_and_addressing",
+    "environments::authored_environments_preserve_color_space_versions_and_source_free_loading",
+    "environments::environment_intensity_rotation_and_roughness_change_real_reflections",
+    "environments::malformed_environment_cannot_replace_a_retained_scene",
+    "environments::studio_environment_renders_metal_and_dielectric_across_roughness",
+    "highlight_energy_survives_and_transparency_blends_before_tone_mapping",
+    "imported_geometry_survives_sources_and_retained_versions_survive_reimport",
+    "lights::clustered_masks_match_total_light_energy_and_retain_old_scenes",
+    "lights::coverage::distinct_colored_lights_preserve_energy_across_mask_words",
+    "lights::coverage::local_range_edges_and_hdr_specular_materials_render_repeatably",
+    "lights::coverage::visible_depth_boundary_patches_match_all_light_oracle",
+    "lights::directional_point_and_spot_lights_obey_authored_physical_parameters",
+    "lights::finite_range_light_eases_to_zero_without_a_linear_edge_crease",
+    "lights::masks::all_4096_local_bits_match_unculled_point_and_spot_lighting",
+    "lights::masks::last_mask_bit_alone_lights_visible_geometry_after_a_directional_prefix",
+    "lights::spatial_clusters_match_brute_force_lighting_across_tile_edges_and_resize",
+    "material_maps_preserve_numeric_channels_normal_scale_and_occlusion_strength",
+    "pipeline_warmup::all_current_variants_exist_before_first_draw_and_reimport_creates_no_pipelines",
+    "shadows::alpha_masked_and_reflected_casters_preserve_holes_and_blend_casters_fail_explicitly",
+    "shadows::coverage::cascade_transitions_preserve_occlusion_and_fade_at_the_declared_distance",
+    "shadows::coverage::orthographic_cascade_transitions_preserve_occlusion_and_fade_at_the_declared_distance",
+    "shadows::directional_shadow_occlusion_respects_flags_range_and_retained_scene_versions",
+    "shadows::lookdev::directional_shadow_lookdev_contact_slopes_and_curves",
+    "shadows::normal_offset::opposing_normal_maps_preserve_the_geometric_shadow_boundary",
+    "shadows::offscreen_casters_and_multiple_directional_shadow_slots_remain_visible",
+    "shadows::queued::queued_shadow_maps_retain_camera_light_data_and_resized_atlas_versions",
+    "sprites::atlas::atlas_frame_ids_survive_repacking_source_removal_and_failed_replacement",
+    "sprites::inherited_sprite_transforms_and_queued_reimports_survive_scene_drop",
+    "sprites::nine_slice_preserves_pixel_borders_and_linear_sampling_has_no_hidden_color_fringe",
+    "sprites::sprite_layers_order_and_alpha_follow_painter_semantics",
+    "sprites::sprite_subregions_flips_and_retained_reimports_preserve_exact_pixels",
+    "sprites::ties::magnified_nearest_texels_keep_uniform_widths_past_pixel_center_ties",
+    "sprites::ties::nearest_texel_ties_preserve_each_texel_through_orientation_and_sheet_resize",
+    "sprites::wide::wide_magnified_nearest_regions_preserve_their_leading_and_trailing_texels",
+    "tangents::generated_normal_map_basis_matches_explicit_frames_under_uv_and_instance_reflection",
+    "observed_device_loss_stops_the_host_before_another_target_is_acquired",
+    "paused_committed_refresh_submits_without_advancing_game_or_audio",
+    "script_physics_audio_and_submitted_frames_share_the_source_free_native_tick",
+    "target_errors_and_presentation_unwind_terminalize_game_and_silence_offline_pcm"
+  ],
+  "checks": {
+    "workspace_all_target_clippy": "ci profile, incant_audio_runtime/scene, passed",
+    "python_tools": 98,
+    "node_tools": 12,
+    "ui": 536,
+    "strict_ui_build": "passed",
+    "generated_schemas_identical": 58,
+    "generated_bridge_sdk_conventions_fmt_actionlint": "passed",
+    "normal_runtime_dependencies": "passed; exact root/features list retained in graph log"
+  },
+  "developer_process_proof": {
+    "path": "/tmp/incant-native-agent-main81-source-free/result.json",
+    "sha256": "8a91590a081f98a6458f6b53c0573d54cdf97b1c03854c383b27572ce9acb4ed",
+    "processes": 12,
+    "result": {
+      "passed": true,
+      "typescript_modules": 4,
+      "successful_runs": 3,
+      "false_assertion_runs": 1,
+      "terminal_failure_runs": 1,
+      "mismatched_script_runs": 1,
+      "player_sha256": "2ac4ca445e9a8adfb5e782c0b37a1c650bab8374c3c46604efa834bf162b5f54",
+      "source_sha256": "88763acdfbdcd42842f65c1f81e7e67cffd4b52243b6a14da5cf974ae3771b1b",
+      "temporary_compile_input_deleted": true,
+      "authoring_unchanged": true,
+      "baseline": {
+        "passed": true,
+        "runtime": "native",
+        "script_source_sha256": "88763acdfbdcd42842f65c1f81e7e67cffd4b52243b6a14da5cf974ae3771b1b",
+        "script_source_parsing": false,
+        "scene": "01M4NKXVQG3GZXZKGSP6EF05Y4",
+        "tick": 5,
+        "tick_rate": 60,
+        "entity_count": 1,
+        "frames": 4000,
+        "pcm_sha256": "0c92bddb4e96f3ea9ec9f0f64a668255a6c15527ac09f6f119cafde60c7c4a39",
+        "logs": {
+          "dropped": 0,
+          "entries": [
+            {
+              "level": "info",
+              "message": "accepted 1 \ud83d\ude80",
+              "tick": 1
+            },
+            {
+              "level": "info",
+              "message": "accepted 2 \ud83d\ude80",
+              "tick": 2
+            },
+            {
+              "level": "info",
+              "message": "accepted 3 \ud83d\ude80",
+              "tick": 3
+            },
+            {
+              "level": "info",
+              "message": "accepted 4 \ud83d\ude80",
+              "tick": 4
+            },
+            {
+              "level": "info",
+              "message": "accepted 5 \ud83d\ude80",
+              "tick": 5
+            }
+          ]
+        },
+        "observations": {
+          "passed": true,
+          "tick": 5,
+          "tick_rate": 60,
+          "checks": [
+            {
+              "name": "motion",
+              "tick": 5,
+              "expect": {
+                "type": "vector",
+                "entity": "00000000000000000000000001",
+                "property": "translation",
+                "value": [
+                  0.23333333333333334,
+                  0.0,
+                  0.0
+                ],
+                "tolerance": 1e-10
+              },
+              "passed": true,
+              "actual": [
+                0.23333333333333334,
+                0.0,
+                0.0
+              ]
+            }
+          ],
+          "entities": {
+            "00000000000000000000000001": {
+              "parent": null,
+              "translation": [
+                0.23333333333333334,
+                0.0,
+                0.0
+              ],
+              "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "velocity": [
+                3.0,
+                0.0,
+                0.0
+              ],
+              "world_transform": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                [
+                  0.23333333333333334,
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            }
+          }
+        },
+        "cpu_render_input": false,
+        "gpu_submitted": false,
+        "project_sha256": "739f65dd850f657ad84533b538ad069d87ffa70b1479667f031bc5723ff8f23e"
+      },
+      "shipping_profile": false,
+      "gpu_submitted": false,
+      "reference_phone_gate": false,
+      "rpc_controls": {
+        "successful_processes": 2,
+        "failed_session_processes": 1,
+        "mismatched_script_processes": 1,
+        "source_parsing": false,
+        "full_world_serialization": false,
+        "gpu_submitted": false
+      },
+      "agent_run_controls": {
+        "processes": 2,
+        "source_parsing": false,
+        "full_world_serialization": false,
+        "real_provider": false,
+        "candidate_failure_preserves_previous": true,
+        "false_assertion_inspectable": true
+      }
+    },
+    "fresh_shipping": false,
+    "note": "Warm private developer target cloned before this proof; no shipping, performance or phone-gate claim."
+  },
+  "gpu_coordination": "Temporary 0043 grants withdrawn before serialized tests. A second checkout temporarily held the Cargo target lock; this run rebuilt the frozen union and passed after release. Both sessions terminal; no timing claim. Subsequent targets isolated.",
+  "prior_live_provider": "Saved-OAuth gpt-6-astra play_run/play_state_query result belongs to unchanged frozen fef implementation; see native-agent-play-local.json. Not repeated in this union.",
+  "logs": {
+    "incant-native-agent-union-clippy.log": {
+      "path": "/tmp/incant-native-agent-union-clippy.log",
+      "sha256": "a8879eb8b80652678dacd9eef8cc9a55b182f549b6b469914c80401992d7eb98",
+      "bytes": 4048
+    },
+    "incant-native-agent-union-gpu.log": {
+      "path": "/tmp/incant-native-agent-union-gpu.log",
+      "sha256": "51c1c7730cc48fcfec26bfa25cff95a4ee6ec0f3bedf93148068325d0718521b",
+      "bytes": 45462
+    },
+    "incant-native-agent-union-graph.log": {
+      "path": "/tmp/incant-native-agent-union-graph.log",
+      "sha256": "da87c4b6027ca44b4d7cdbaccbb0e004ca05ac553d71a2d2b8332e280588f8e7",
+      "bytes": 387
+    },
+    "incant-native-agent-union-npm.log": {
+      "path": "/tmp/incant-native-agent-union-npm.log",
+      "sha256": "728604cffb29a67a119c11268933f567cc7ebee5163d954a24cecc681b2adb38",
+      "bytes": 143
+    },
+    "incant-native-agent-union-schemas.log": {
+      "path": "/tmp/incant-native-agent-union-schemas.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "incant-native-agent-union-source-free.log": {
+      "path": "/tmp/incant-native-agent-union-source-free.log",
+      "sha256": "b92e7c9fbb5c0eca65d7d7854d7881e52df211b6212415ea157c262684b616d4",
+      "bytes": 3095
+    },
+    "incant-native-agent-union-tool-tests.log": {
+      "path": "/tmp/incant-native-agent-union-tool-tests.log",
+      "sha256": "f123ddfe46e206fa040a1b7d619ab66d6aa00c724709e2a9afbd06aa61fe0ed6",
+      "bytes": 20274
+    },
+    "incant-native-agent-union-tools-build.log": {
+      "path": "/tmp/incant-native-agent-union-tools-build.log",
+      "sha256": "9a60302c2a449cdc31423d616cae42376c6320bd2e98cf65225f66de1f2c2d9f",
+      "bytes": 57
+    },
+    "incant-native-agent-union-ui-build.log": {
+      "path": "/tmp/incant-native-agent-union-ui-build.log",
+      "sha256": "3ed059b33f990c9579f8b9fc785d6623547551ea29e0349413e52537f35dd2d3",
+      "bytes": 1551
+    },
+    "incant-native-agent-union-ui.log": {
+      "path": "/tmp/incant-native-agent-union-ui.log",
+      "sha256": "caa00b12456930ce2062066fc3cf0035d2deebaaf1a12104fafc16c317ad2a8f",
+      "bytes": 2298
+    },
+    "incant-native-agent-union-workspace.log": {
+      "path": "/tmp/incant-native-agent-union-workspace.log",
+      "sha256": "a80eac3f563a5e23661d2686cc9810605f35ec1e48a6a5e1000b998932660616",
+      "bytes": 109719
+    }
+  },
+  "hosted_checks": "Pending direct-main union PR; local checks do not substitute.",
+  "limitations": [
+    "Editor native Play controls and project-attached Script routing remain separate.",
+    "Native gameplay capture, complete session/physics saves, reference phones and release gates remain open.",
+    "Source-free developer proof is local; existing independent hosted shipping workflows remain required."
+  ]
+}
