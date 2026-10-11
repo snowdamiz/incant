@@ -421,5 +421,46 @@
       }
     },
     "scope": "Only STATUS conflict; reviewed window/audio/game source unchanged. Historical source-free binary and Claude0037 remain pinned to f68d910, not represented as rebuilt from this integrated head."
+  },
+  "corrected_pr62_integration": {
+    "root_head": "9cf171275debfd0cc959a636abf3db4c93865bfb",
+    "affected_player_and_2d_release_tests": 17,
+    "tool_tests": 43,
+    "native_window_release_all_target_clippy": true,
+    "fmt": true,
+    "conventions": true,
+    "actionlint": true,
+    "normal_graph": true,
+    "logs": {
+      "tests": {
+        "path": "/tmp/incant-native-window-corrected-tests.log",
+        "sha256": "b6f599caaf08e23ed6ba7267a7e5fb5ccef4f63f6b8ac3f96b091492ea4237f0"
+      },
+      "clippy": {
+        "path": "/tmp/incant-native-window-corrected-clippy.log",
+        "sha256": "e003d12964e0b07cdccc1a03f5265029e094233cfca1a08771df13e5ec9181f5"
+      },
+      "tools": {
+        "path": "/tmp/incant-native-window-corrected-tools.log",
+        "sha256": "07a1638aaa51ecfdd665e0d1af2b04cf7d308638be51aac804fcfda2e1bd1b62"
+      },
+      "fmt": {
+        "path": "/tmp/incant-native-window-corrected-fmt.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conventions": {
+        "path": "/tmp/incant-native-window-corrected-conventions.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "actionlint": {
+        "path": "/tmp/incant-native-window-corrected-actionlint.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "graph": {
+        "path": "/tmp/incant-native-window-corrected-graph.log",
+        "sha256": "da87c4b6027ca44b4d7cdbaccbb0e004ca05ac553d71a2d2b8332e280588f8e7"
+      }
+    },
+    "scope": "Add reviewed v5 executable proof, stdout-only Cargo metadata handling, and parse-only ULID/isolated probe lock correction. Window/audio/game lifecycle sources remain unchanged; no fresh-window executable claim for this later integration."
   }
 }

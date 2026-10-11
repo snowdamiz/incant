@@ -117,6 +117,13 @@ The fresh window executable above and Claude0037 packet remain pinned to
 `f68d910f45b8d311e93cc84bcacf8714ad71e250`; they are historical artifact evidence,
 not a claim that the executable was rebuilt from the later integrated head.
 
+The corrected prerequisite `9cf171275debfd0cc959a636abf3db4c93865bfb` additionally carries
+v5 executable proof coverage, separated Cargo metadata channels and the
+parse-only ULID dependency/isolated physics lock fix. Seventeen affected player
+and 2D release tests, native-window all-target release Clippy, 43 tools tests,
+fmt, conventions, actionlint and the explicit normal graph pass after this
+second integration. The window/audio/game lifecycle sources remain unchanged.
+
 ## Running and remaining scope
 
 ```sh

@@ -68,15 +68,16 @@ review; concurrent native reviews coordinate foreground ownership.
 - **Native game and audio.** Retained cooked clips, buses, spatial playback and
   streaming compose with simulation, input, scripts and GPU publication. Invalid
   preflight input is retryable; failure after acceptance destroys the composite
-  state. A fresh 7,404,688-byte macOS shipping executable passes 28 process
+  state. A fresh 7,404,688-byte macOS shipping executable passes 40 process
   invocations after source/project/build removal, with exact repeated PCM/pose
-  and numerical GPU hashes. That fixture exercises v4 models; v5 sprite process
-  coverage is a separate follow-up. [Composition](docs/spikes/native-game-session.md),
+  and numerical GPU hashes. The fixtures exercise v4 models and v5 atlas sprites,
+  including mirrored nine-slice geometry and missing-cache/unknown-frame refusal. [Composition](docs/spikes/native-game-session.md),
   [audio host](docs/spikes/native-scene-audio-host.md),
-  [GPU proof](docs/spikes/native-game-gpu-player.md).
+  [GPU proof](docs/spikes/native-game-gpu-player.md),
+  [sprite executable proof](docs/spikes/native-sprite-player.md).
 - **Native window.** The optional player reuses the same embedded session and
   retained GPU host. 43 scoped release tests, ten legacy audio tests, optional/
-  default/CPU Clippy and 40 tools tests pass. A fresh 8,104,464-byte executable
+  default/CPU Clippy and 43 tools tests pass. A fresh 8,104,464-byte executable
   passes two actual macOS window lifecycle runs and two refusals after source/
   build deletion; matched prior offscreen GPU/PCM/pose output is unchanged.
   Static/streamed runs discarded five/zero wall ticks. Claude0037 visible
@@ -94,10 +95,14 @@ review; concurrent native reviews coordinate foreground ownership.
 
 Local integration checks: 543 ordinary Rust release tests/doctests; 138 scoped
 static/development-Wasm/runtime/script tests; workspace and optional-host release
-Clippy; 524 UI tests, strict TypeScript and production build; 40 Python tool tests.
+Clippy; 524 UI tests, strict TypeScript and production build; 43 Python tool tests.
 The renderer's unchanged frozen implementation separately passed all 66 actual
 GPU tests. Exact sources, scopes and logs are retained in the linked reports;
 these local results do not replace pending hosted checks or device gates.
+The first hosted runtime run exposed stderr/JSON mixing in the Wasm audit and a
+stale isolated physics lockfile. Reviewed fixes pass real combined Wasm
+conformance, browser-target physics compilation and six native parity streams.
+[Correction evidence](docs/spikes/runtime-ci-corrections.md).
 
 ## Remaining engineering requirements
 
