@@ -1,0 +1,94 @@
+[
+ {
+  "file": "screenshots/tangent-delta/engine/candidate-controls-colour-and-normal-ortho.png",
+  "sha256": "45f62126514ba5bdc23496dd89c6d7104ff95ceb467ed1a23508b5e570600405",
+  "source": "artifacts/0040-static-fbx-import/tangent-delta/runs/d1/textures/frames/controls_ortho.png",
+  "ledger_seq": 12,
+  "pid": 15482,
+  "camera": "01JA40TX0000000000000000W5",
+  "adapter": "Apple M5 Pro",
+  "width": 960,
+  "height": 540,
+  "binary_sha256": "b2aed48f61fc310737c05afd945475124f68680aac2021838a510c758ff47506"
+ },
+ {
+  "file": "screenshots/tangent-delta/engine/candidate-controls-ortho-source-free.png",
+  "sha256": "45f62126514ba5bdc23496dd89c6d7104ff95ceb467ed1a23508b5e570600405",
+  "source": "artifacts/0040-static-fbx-import/tangent-delta/runs/d1/textures/frames/controls_ortho-source-free.png",
+  "ledger_seq": 17,
+  "pid": 15496,
+  "camera": "01JA40TX0000000000000000W5",
+  "adapter": "Apple M5 Pro",
+  "width": 960,
+  "height": 540,
+  "binary_sha256": "b2aed48f61fc310737c05afd945475124f68680aac2021838a510c758ff47506"
+ },
+ {
+  "file": "screenshots/tangent-delta/engine/candidate-fbx-instances-ortho.png",
+  "sha256": "279cc4ca55f7a881c4e1bb77b2ccc91bf2e4d7a6c50487f8341c11607603c8b3",
+  "source": "artifacts/0040-static-fbx-import/tangent-delta/runs/d1/textures/frames/instances_ortho.png",
+  "ledger_seq": 13,
+  "pid": 15483,
+  "camera": "01JA40TX0000000000000000W6",
+  "adapter": "Apple M5 Pro",
+  "width": 960,
+  "height": 540,
+  "binary_sha256": "b2aed48f61fc310737c05afd945475124f68680aac2021838a510c758ff47506"
+ },
+ {
+  "file": "screenshots/tangent-delta/engine/candidate-fbx-instances-front-right-top.png",
+  "sha256": "bb16b5a26969058df4a9f67ec047bde42ebc051a869b2309594431bbfb2680b8",
+  "source": "artifacts/0040-static-fbx-import/tangent-delta/runs/d1/textures/frames/instances_front_right_top.png",
+  "ledger_seq": 14,
+  "pid": 15484,
+  "camera": "01JA40TX0000000000000000W7",
+  "adapter": "Apple M5 Pro",
+  "width": 960,
+  "height": 540,
+  "binary_sha256": "b2aed48f61fc310737c05afd945475124f68680aac2021838a510c758ff47506"
+ },
+ {
+  "file": "screenshots/tangent-delta/engine/candidate-fbx-instances-back-left-bottom.png",
+  "sha256": "65310cf48087ef611944e9cd6b7527cbb254c336096537d1e6bf054331621389",
+  "source": "artifacts/0040-static-fbx-import/tangent-delta/runs/d1/textures/frames/instances_back_left_bottom.png",
+  "ledger_seq": 15,
+  "pid": 15485,
+  "camera": "01JA40TX0000000000000000W8",
+  "adapter": "Apple M5 Pro",
+  "width": 960,
+  "height": 540,
+  "binary_sha256": "b2aed48f61fc310737c05afd945475124f68680aac2021838a510c758ff47506"
+ },
+ {
+  "file": "screenshots/tangent-delta/engine/candidate-twin-maya-tangents-instances-ortho.png",
+  "sha256": "279cc4ca55f7a881c4e1bb77b2ccc91bf2e4d7a6c50487f8341c11607603c8b3",
+  "source": "artifacts/0040-static-fbx-import/tangent-delta/runs/d1/textures-twin/frames/instances_ortho.png",
+  "ledger_seq": 31,
+  "pid": 15532,
+  "camera": "01JA40TX0000000000000000W6",
+  "adapter": "Apple M5 Pro",
+  "width": 960,
+  "height": 540,
+  "binary_sha256": "b2aed48f61fc310737c05afd945475124f68680aac2021838a510c758ff47506"
+ },
+ {
+  "file": "screenshots/tangent-delta/derived/DERIVED-diff-candidate-fbx-vs-twin-instances_front_right_top.png",
+  "sha256": "c7c0c6f569ac2ec5725790a2f7fb06173190c714f8bd07af3dc075098a04b25b",
+  "source": "artifacts/0040-static-fbx-import/tangent-delta/derived/DERIVED-diff-candidate-fbx-vs-twin-instances_front_right_top.png"
+ },
+ {
+  "file": "screenshots/tangent-delta/derived/DERIVED-diff-candidate-fbx-vs-twin-instances_back_left_bottom.png",
+  "sha256": "cd8c7b88eafd81dec4592477bac477e9aedea0b35f9eb43d43396781f617207a",
+  "source": "artifacts/0040-static-fbx-import/tangent-delta/derived/DERIVED-diff-candidate-fbx-vs-twin-instances_back_left_bottom.png"
+ },
+ {
+  "file": "screenshots/tangent-delta/derived/DERIVED-diff-candidate-vs-original-fbx-instances_front_right_top.png",
+  "sha256": "9e572bbd6d207860196f349e414a533d09193ed5b67a60f1a2d30d52314d66eb",
+  "source": "artifacts/0040-static-fbx-import/tangent-delta/derived/DERIVED-diff-candidate-vs-original-fbx-instances_front_right_top.png"
+ },
+ {
+  "file": "screenshots/tangent-delta/derived/DERIVED-diff-candidate-twin-vs-original-twin-controls_front_right_top.png",
+  "sha256": "104ef2a8166e05637c7269cd9be00da3b0390709e972fb501f4e96dcec2414bf",
+  "source": "artifacts/0040-static-fbx-import/tangent-delta/derived/DERIVED-diff-candidate-twin-vs-original-twin-controls_front_right_top.png"
+ }
+]
