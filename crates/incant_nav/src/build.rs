@@ -80,9 +80,20 @@ impl NavigationMesh {
                     .map(|tri| tri.map(|i| source.vertices[i as usize])),
             );
         }
-        let config_hash: [u8; 32] =
-            Sha256::digest(serde_json::to_vec(settings).map_err(|e| invalid(e.to_string()))?)
-                .into();
+        // Canonical numeric bytes: rebuilding native tiles never serializes JSON.
+        let mut config = Sha256::new();
+        for value in settings.min.into_iter().chain(settings.max).chain([
+            settings.cell_size,
+            settings.cell_height,
+            settings.agent_radius,
+            settings.agent_height,
+            settings.max_climb,
+            settings.max_slope_degrees,
+        ]) {
+            config.update((if value == 0. { 0. } else { value }).to_le_bytes());
+        }
+        config.update(settings.tile_cells.to_le_bytes());
+        let config_hash: [u8; 32] = config.finalize().into();
         let mut tiles = BTreeMap::new();
         let mut report = RebuildReport {
             rebuilt: vec![],

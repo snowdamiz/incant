@@ -66,6 +66,15 @@ fn cooked_world_runs_after_authoring_is_discarded_and_cook_is_read_only() {
 #[test]
 fn unsupported_component_is_a_named_error_not_silently_omitted() {
     let (mut project, scene, entity) = fixture();
+    let script = new_id();
+    project.scripts.insert(
+        script.clone(),
+        incant_doc::ScriptSource {
+            id: script.clone(),
+            name: "Unbound".into(),
+            path: "scripts/missing.ts".into(),
+        },
+    );
     project
         .scenes
         .get_mut(&scene)
@@ -74,13 +83,10 @@ fn unsupported_component_is_a_named_error_not_silently_omitted() {
         .get_mut(&entity)
         .unwrap()
         .components
-        .insert(
-            "NavigationGrid".into(),
-            json!({"dimensions":[1,1],"costs":[1]}),
-        );
+        .insert("Script".into(), json!({"source":script,"props":{}}));
     let error = cook_scene(&project, &scene).unwrap_err();
     assert!(
-        matches!(error, CookError::UnsupportedComponent { entity: id, component } if id == entity && component == "NavigationGrid")
+        matches!(error, CookError::UnsupportedComponent { entity: id, component } if id == entity && component == "Script")
     );
 }
 

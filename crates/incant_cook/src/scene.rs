@@ -21,6 +21,8 @@ pub enum CookError {
     MaterialOverrides(String),
     #[error("invalid visual asset binding {0}")]
     VisualAsset(String),
+    #[error("missing or stale cooked navigation geometry for model {0}")]
+    NavigationResource(String),
     #[error("invalid stable ID {0}")]
     InvalidId(String),
     #[error("component decoding failed: {0}")]
@@ -39,6 +41,29 @@ pub(crate) fn cook_validated_scene(
     scene_id: &str,
     attached_scripts: &std::collections::BTreeSet<String>,
 ) -> Result<Vec<u8>, CookError> {
+    cook_validated_scene_with_navigation(validated, scene_id, attached_scripts, &Default::default())
+}
+
+/// Explicit authoring cook with checked cooked-model navigation resources.
+/// Their recipe fingerprints must match the same validated project snapshot.
+pub fn cook_scene_with_navigation(
+    project: &Project,
+    scene_id: &str,
+    resources: &incant_nav::NavigationResources,
+) -> Result<Vec<u8>, CookError> {
+    cook_validated_scene_with_navigation(
+        project.validated()?,
+        scene_id,
+        &Default::default(),
+        resources,
+    )
+}
+pub(crate) fn cook_validated_scene_with_navigation(
+    validated: incant_doc::ValidatedProject<'_>,
+    scene_id: &str,
+    attached_scripts: &std::collections::BTreeSet<String>,
+    resources: &incant_nav::NavigationResources,
+) -> Result<Vec<u8>, CookError> {
     let project = validated.project();
     let scene = project
         .scenes
@@ -49,6 +74,7 @@ pub(crate) fn cook_validated_scene(
     let mut physics_2d = Vec::new();
     let mut audio = Vec::new();
     let mut spatial = Vec::new();
+    let mut navigation = Vec::new();
     let mut visual_assets = std::collections::BTreeMap::new();
     for entity in scene.entities.values() {
         for component in entity.components.keys() {
@@ -58,6 +84,8 @@ pub(crate) fn cook_validated_scene(
                 continue;
             }
             if ![
+                "NavigationMesh",
+                "NavigationGrid",
                 "Transform",
                 "Velocity",
                 "RigidBody",
@@ -86,6 +114,9 @@ pub(crate) fn cook_validated_scene(
                     component: component.clone(),
                 });
             }
+        }
+        if let Some(node) = crate::navigation::cook(project, scene, entity, resources)? {
+            navigation.push(node);
         }
         if let Some(node) = crate::spatial::cook(project, entity, &mut visual_assets)? {
             spatial.push(node);
@@ -189,6 +220,7 @@ pub(crate) fn cook_validated_scene(
             .with_audio(audio)?
             .with_spatial(visual_assets.into_values().collect(), spatial)?
             .with_physics_2d(physics_2d)?
+            .with_navigation(navigation)?
             .to_bytes(),
     )
 }

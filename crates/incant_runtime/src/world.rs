@@ -64,6 +64,8 @@ pub enum RuntimeError {
 /// A disposable Bevy world; no project, command bus, authoring validator or
 /// serialization in the tick path. Snapshot conversion is explicitly requested.
 pub struct NativeWorld {
+    pub(crate) navigation: crate::navigation_runtime::NavigationRuntime,
+    pub(crate) navigation_used: bool,
     pub(crate) identity: crate::WorldIdentity,
     source_scene_fingerprint: [u8; 32],
     pub(crate) world: World,
@@ -98,6 +100,7 @@ impl NativeWorld {
         // Startup pairing only. No document, scene serialization or hashing is
         // performed during simulation or native structural operations.
         let source_scene_fingerprint = Sha256::digest(scene.to_bytes()).into();
+        let navigation = scene.prepared_navigation;
         let physics = scene.physics.clone();
         let physics_2d = scene.physics_2d.clone();
         let audio = scene.audio.clone();
@@ -147,6 +150,8 @@ impl NativeWorld {
         schedule.add_systems((integrate, publish_globals, crate::flipbook::advance).chain());
         let flipbook_query = world.query::<(&Identity, &crate::flipbook::Playback)>();
         let mut result = Self {
+            navigation_used: !navigation.nodes.is_empty(),
+            navigation,
             identity: crate::WorldIdentity::new(),
             source_scene_fingerprint,
             world,
@@ -344,6 +349,7 @@ impl NativeWorld {
         // Validate the whole numeric input set and ordinary integration before
         // the first solver write. No cloned configuration or document exists.
         self.prepare_globals(Some(dt))?;
+        let navigation = self.navigation_motion()?;
         if self.physics_used || self.physics_2d_used {
             self.sync_physics_2d()?;
             let mut query = self
@@ -404,6 +410,9 @@ impl NativeWorld {
         }
         self.schedule.run(&mut self.world);
         self.tick = next;
+        if let Some(navigation) = navigation {
+            self.navigation = navigation;
+        }
         self.physics_failed = false;
         Ok(())
     }

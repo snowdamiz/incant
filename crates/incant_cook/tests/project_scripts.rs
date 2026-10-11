@@ -90,10 +90,7 @@ fn invalid_sources_unsupported_components_and_aliases_refuse_the_whole_cook() {
         .get_mut(&eid)
         .unwrap()
         .components
-        .insert(
-            "NavigationGrid".into(),
-            json!({"dimensions":[1,1],"costs":[1]}),
-        );
+        .insert("UnknownCapability".into(), json!({}));
     assert!(prepare_script_scene(&invalid, &sid).is_err());
     let mut invalid = original.clone();
     let duplicate = new_id();
