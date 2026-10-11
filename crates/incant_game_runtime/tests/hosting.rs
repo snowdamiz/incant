@@ -18,8 +18,10 @@ fn id() -> StableId {
     StableId(1u128.to_be_bytes())
 }
 fn script() -> CompiledScript {
-    CompiledScript::compile("exports.default={update({chunks}){chunks[0].transforms[0]+=2;}}")
-        .unwrap()
+    CompiledScript::compile(
+        "exports.default={update({chunks,log}){chunks[0].transforms[0]+=2;log('accepted');}}",
+    )
+    .unwrap()
 }
 fn invalid() -> InputEvent {
     InputEvent::GamepadAxis {
@@ -144,6 +146,7 @@ fn failed(session: &mut HostedOfflineGameSession<Host>) {
     assert!(matches!(session.host(), Err(GameError::Failed)));
     assert!(matches!(session.world(), Err(GameError::Failed)));
     assert!(matches!(session.input(), Err(GameError::Failed)));
+    assert!(matches!(session.logs(), Err(GameError::Failed)));
     assert!(matches!(session.source_state(id()), Err(GameError::Failed)));
     assert!(matches!(session.rendered_frames(), Err(GameError::Failed)));
     assert!(matches!(
@@ -290,7 +293,9 @@ fn successful_ticks_sync_the_stored_host_once_and_retryable_rejections_leave_it_
             assert!(output.iter().all(|sample| *sample == 0.7));
             assert_eq!(session.world().unwrap().tick(), tick - 1);
             assert_eq!(session.host().unwrap().observed.len(), tick as usize - 1);
+            assert_eq!(session.logs().unwrap().entries().len(), tick as usize - 1);
             session.tick(&[], &mut output).unwrap();
+            assert_eq!(session.logs().unwrap().entries().len(), tick as usize);
             assert_eq!(
                 session.host().unwrap().observed.last(),
                 Some(&(tick, tick as f64 * 2.))
@@ -354,6 +359,7 @@ fn host_error_and_unwind_terminalize_offline_session_and_silence_entire_output()
                 assert!(matches!(result, Ok(Ok(()))));
                 assert!(output.iter().any(|sample| sample.abs() > 0.01));
                 assert_eq!(session.host().unwrap().observed, [(1, 2.)]);
+                assert_eq!(session.logs().unwrap().entries()[0].message, "accepted");
                 continue;
             }
             Outcome::Reject => assert!(matches!(result, Ok(Err(GameError::Host(HostError))))),

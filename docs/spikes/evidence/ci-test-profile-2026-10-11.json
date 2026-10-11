@@ -1,0 +1,3486 @@
+{
+  "comparison": {
+    "head": "c620868755e3ea57e64c47879f345db8015e7cf6",
+    "runs": [
+      {
+        "profile": "release",
+        "phase": "cold",
+        "result_sha256": "deff8956808f0f41dcdace741397f338b83f233046367b346960167cdff83bf2",
+        "command_chain_seconds": 995.4755609169952,
+        "raw_elapsed_seconds": 995.4755609169952,
+        "excluded_pauses": [],
+        "ordinary_identities": 451,
+        "ignored_identities": 56,
+        "steps_seconds": {
+          "clippy": 135.57604374998482,
+          "audio-device": 23.24218437500531,
+          "ordinary": 529.8685503329907,
+          "ignored": 37.20263137499569,
+          "tools": 28.456911958986893,
+          "ktx": 0.2461898339970503,
+          "schemas": 0.7496473749924917,
+          "native-saves": 0.43043354200199246,
+          "shipping-runtime": 86.51275037499727,
+          "shipping-script": 124.83704866698827,
+          "physics-runtime": 0.38967966599739157,
+          "character-movement": 1.3614824170072097,
+          "compound-colliders": 1.1861042079981416,
+          "game-saves": 1.146957791002933,
+          "game-input": 1.2603426249988843,
+          "game-audio": 2.1733305840170942,
+          "game-timers": 1.0710526249895338,
+          "game-actions": 1.0915268750104588,
+          "game-localization": 1.158711083990056,
+          "localization-exchange": 1.1757211250078399,
+          "game-navigation": 1.358479292015545,
+          "navigation-grid": 1.4045221660053357,
+          "game-steering": 5.884952458000043,
+          "navigation-links": 1.462072124995757,
+          "orthographic-cameras": 1.2540586249961052,
+          "sprite-rendering": 1.5001098750217352,
+          "sprite-atlases": 1.4753102910181042,
+          "pixel-perfect": 1.29273062502034,
+          "sdk-check": 0.056486999994376674,
+          "typescript": 0.1899719999928493,
+          "eval-check": 0.00808187501388602,
+          "collaboration": 0.4310510419891216
+        },
+        "unchanged_fresh_shipping_seconds": 211.34979904198553,
+        "actual_rustc_opt_level_counts": {
+          "ordinary": {
+            "default": 347,
+            "3": 522
+          },
+          "ignored": {},
+          "tools": {
+            "default": 3,
+            "3": 2
+          }
+        },
+        "retained_dependencies": null
+      },
+      {
+        "profile": "release",
+        "phase": "warm",
+        "result_sha256": "e094b6150e7f03e3d3d30dcb7c69a676a36112de9812c5a352bf50c2ca3fcbca",
+        "command_chain_seconds": 539.2240356249968,
+        "raw_elapsed_seconds": 539.2240356249968,
+        "excluded_pauses": [],
+        "ordinary_identities": 451,
+        "ignored_identities": 56,
+        "steps_seconds": {
+          "clippy": 10.976888667006278,
+          "audio-device": 1.3880737500148825,
+          "ordinary": 250.8349178749777,
+          "ignored": 34.11774420799338,
+          "tools": 25.824938709003618,
+          "ktx": 0.2756670000089798,
+          "schemas": 0.7474684159969911,
+          "native-saves": 0.386220709013287,
+          "shipping-runtime": 71.9920876249962,
+          "shipping-script": 116.52227587497327,
+          "physics-runtime": 0.2544089159928262,
+          "character-movement": 1.2352901669801213,
+          "compound-colliders": 1.237792542000534,
+          "game-saves": 1.215714958991157,
+          "game-input": 1.213816625007894,
+          "game-audio": 2.2581342079793103,
+          "game-timers": 1.1028783750080038,
+          "game-actions": 1.1106256660132203,
+          "game-localization": 1.1399022500263527,
+          "localization-exchange": 1.192248292005388,
+          "game-navigation": 1.3873908329987898,
+          "navigation-grid": 1.263847458991222,
+          "game-steering": 4.779701708990615,
+          "navigation-links": 1.4363652499741875,
+          "orthographic-cameras": 1.209791667002719,
+          "sprite-rendering": 1.1959311660029925,
+          "sprite-atlases": 1.234153665980557,
+          "pixel-perfect": 1.1370102080109064,
+          "sdk-check": 0.03674650000175461,
+          "typescript": 0.19331020800746046,
+          "eval-check": 0.008572749997256324,
+          "collaboration": 0.29140433299471624
+        },
+        "unchanged_fresh_shipping_seconds": 188.51436349996948,
+        "actual_rustc_opt_level_counts": {
+          "ordinary": {
+            "3": 156,
+            "default": 10
+          },
+          "ignored": {},
+          "tools": {
+            "default": 1,
+            "3": 1
+          }
+        },
+        "retained_dependencies": {
+          "files": 15007,
+          "bytes": 4308765730,
+          "zstd3_tar_bytes": 1205186596,
+          "scope": "Local retained-target projection after cargo clean of every package within the checkout (including path patches), all profiles; not an actual hosted archive. Registry is separate/unchanged."
+        }
+      },
+      {
+        "profile": "ci",
+        "phase": "cold",
+        "result_sha256": "a3cde8c69bf9ae04cfb25a24ada102139aae6fde7f56cf80673c6d12e033c6fb",
+        "command_chain_seconds": 903.9071835840004,
+        "raw_elapsed_seconds": 1249.1839389170054,
+        "excluded_pauses": [
+          {
+            "reason": "serialized native visual acceptance; excluded from measured command chain",
+            "seconds": 345.276755333005
+          }
+        ],
+        "ordinary_identities": 451,
+        "ignored_identities": 56,
+        "steps_seconds": {
+          "clippy": 154.5780096249946,
+          "audio-device": 30.43267008298426,
+          "ordinary": 431.03480783401756,
+          "ignored": 48.376075665990356,
+          "tools": 20.363858249998884,
+          "ktx": 0.27030520798871294,
+          "schemas": 0.8206660420109984,
+          "native-saves": 0.4488723330141511,
+          "shipping-runtime": 79.41392141699907,
+          "shipping-script": 111.62997912499122,
+          "physics-runtime": 0.3342399170214776,
+          "character-movement": 1.320534291997319,
+          "compound-colliders": 1.2636847499816213,
+          "game-saves": 1.0914286249899305,
+          "game-input": 1.2363419170142151,
+          "game-audio": 2.1072482079907786,
+          "game-timers": 1.0961269999970682,
+          "game-actions": 1.0613844160106964,
+          "game-localization": 1.0906108750205021,
+          "localization-exchange": 1.2563222499738913,
+          "game-navigation": 1.3814172910060734,
+          "navigation-grid": 1.27334908299963,
+          "game-steering": 5.538521957991179,
+          "navigation-links": 1.2424598749785218,
+          "orthographic-cameras": 1.0895717499952298,
+          "sprite-rendering": 1.170552374998806,
+          "sprite-atlases": 1.2168142079899553,
+          "pixel-perfect": 1.17808129201876,
+          "sdk-check": 0.048754624993307516,
+          "typescript": 0.16900562497903593,
+          "eval-check": 0.008767791994614527,
+          "collaboration": 0.33511975000146776
+        },
+        "unchanged_fresh_shipping_seconds": 191.0439005419903,
+        "actual_rustc_opt_level_counts": {
+          "ordinary": {
+            "default": 347,
+            "1": 522
+          },
+          "ignored": {},
+          "tools": {
+            "default": 3,
+            "1": 2
+          }
+        },
+        "retained_dependencies": null
+      },
+      {
+        "profile": "ci",
+        "phase": "warm",
+        "result_sha256": "655302f5d1c9f1c82dfba4ef757cb39d286a619dd3bc114355d06032d9266844",
+        "command_chain_seconds": 454.0135888750083,
+        "raw_elapsed_seconds": 454.0135888750083,
+        "excluded_pauses": [],
+        "ordinary_identities": 451,
+        "ignored_identities": 56,
+        "steps_seconds": {
+          "clippy": 11.258981833001599,
+          "audio-device": 1.4489862079790328,
+          "ordinary": 149.82477412497974,
+          "ignored": 46.58648308398551,
+          "tools": 19.484811250003986,
+          "ktx": 0.2544853330182377,
+          "schemas": 0.7639139579841867,
+          "native-saves": 0.41855874998145737,
+          "shipping-runtime": 82.29955429199617,
+          "shipping-script": 114.7944084170158,
+          "physics-runtime": 0.19882550000329502,
+          "character-movement": 1.2860977499803994,
+          "compound-colliders": 1.220314000005601,
+          "game-saves": 1.1473382920084987,
+          "game-input": 1.2972904579946771,
+          "game-audio": 2.3697929160261992,
+          "game-timers": 1.204863541002851,
+          "game-actions": 1.2414885839971248,
+          "game-localization": 1.2122634159750305,
+          "localization-exchange": 1.2619084590114653,
+          "game-navigation": 1.5187336249800865,
+          "navigation-grid": 1.3403020830010064,
+          "game-steering": 5.093019624997396,
+          "navigation-links": 1.245283540978562,
+          "orthographic-cameras": 1.145364416996017,
+          "sprite-rendering": 1.2057867090043146,
+          "sprite-atlases": 1.21074954100186,
+          "pixel-perfect": 1.099850124999648,
+          "sdk-check": 0.03756425000028685,
+          "typescript": 0.1898836669861339,
+          "eval-check": 0.008272207982372493,
+          "collaboration": 0.32128416700288653
+        },
+        "unchanged_fresh_shipping_seconds": 197.09396270901198,
+        "actual_rustc_opt_level_counts": {
+          "ordinary": {
+            "1": 156,
+            "default": 10
+          },
+          "ignored": {},
+          "tools": {
+            "default": 1,
+            "1": 1
+          }
+        },
+        "retained_dependencies": {
+          "files": 15007,
+          "bytes": 4200737148,
+          "zstd3_tar_bytes": 1158758951,
+          "scope": "Local retained-target projection after cargo clean of every package within the checkout (including path patches), all profiles; not an actual hosted archive. Registry is separate/unchanged."
+        }
+      }
+    ],
+    "limitations": [
+      "One local Mac sample per condition, with concurrent engineering work and an explicit native-review pause; not randomized or a hosted Windows measurement.",
+      "Identical frozen PR61 source/commands and test identity multisets; later runtime/physics additions are outside this graph.",
+      "Frontend setup excluded equally; separate fresh shipping flags/proofs retained unchanged.",
+      "Warm preparation cleans all checkout packages while retaining third-party artifacts; local zstd target projection is not an actual hosted cache archive.",
+      "Unit timings are not link-only attribution, and this experiment makes no shipping/device/frame-performance claim."
+    ]
+  },
+  "context": {
+    "recorded_at": "2026-10-11T02:03:19.913394+00:00",
+    "host": "macOS-26.6-arm64-arm-64bit-Mach-O",
+    "hardware": "Apple M5 Pro",
+    "memory_bytes": 51539607552,
+    "parallelism": 2,
+    "unrelated_activity": [
+      "Baseline cold CPU stages overlapped root workspace validation and scoped no-op import host tests/Clippy.",
+      "Headless Claude0038 capture/build uses its own worktree and may overlap later baseline stages.",
+      "Native Claude0037 foreground/GPU interaction ended before the baseline ordinary stage completed; owner verified review/player process exit."
+    ],
+    "gpu_release_utc": "2026-10-11T02:02:53Z",
+    "limits": [
+      "Single local Mac sample per cold/warm/profile variant; not controlled exclusive-runner data or Windows latency evidence.",
+      "No production profile/cache/workflow adoption."
+    ],
+    "native_delta_slot": {
+      "granted_at": "2026-10-11T02:10:17.234158+00:00",
+      "reason": "Baseline GPU phase terminal; next candidate is gated before its ignored phase while0037 owner verifies concrete fullscreen/resize fixes."
+    },
+    "warm_setup_correction": {
+      "reason": "Cargo clean defaults to dev; first warm trial incorrectly retained release workspace artifacts and was stopped/rejected.",
+      "excluded_trial": "release/warm-invalid-default-clean/INVALID.json",
+      "corrected_method": "Clean every checkout package in explicit dev and tested profile; fail if owned fingerprints/build outputs remain; require owned editor/runtime recompilation in warm ordinary log.",
+      "driver_sha256": "da746d31b96fa9dd2505e6c879ee2aedf9ef076e7d0dbcee4c900ec6475b3e88"
+    }
+  },
+  "test_identities": {
+    "ordinary": [
+      "tests::malformed_and_out_of_bounds_regions_fail_before_geometry_allocation",
+      "tests::subregion_anchor_and_flips_preserve_geometry_and_source_coordinates",
+      "tests::nine_slice_preserves_border_density_and_compresses_small_targets",
+      "atlas::packing::tests::impossible_and_malformed_layouts_fail_explicitly",
+      "atlas::packing::tests::generated_sets_preserve_every_size_and_padding_without_overlap",
+      "malformed_bounds_have_specific_diagnostics",
+      "wide_row_and_column_fit_the_explicit_unrotated_layout",
+      "a_more_generous_bound_does_not_increase_the_occupied_area",
+      "maximum_frame_count_and_exact_page_limits_remain_bounded",
+      "auth::tests::local_signout_deletes_even_when_remote_revocation_fails",
+      "auth::tests::local_signout_cleans_missing_damaged_and_mismatched_records_without_network",
+      "auth::tests::cancelled_and_expired_attempts_stop_without_token_exchange",
+      "credentials::tests::interrupted_refresh_keeps_original_credential_for_every_failed_write",
+      "auth::tests::local_signout_never_reports_success_if_deletion_fails",
+      "auth::tests::returning_registration_cannot_swap_client",
+      "auth::tests::registration_and_pkce_callback_validation",
+      "credentials::tests::invalid_manifest_cannot_read_other_account_parts",
+      "auth::tests::rejects_invalid_host_and_generates_unique_attempt_parameters",
+      "credentials::tests::large_unicode_record_roundtrips_and_replacement_cleans_old_generation",
+      "provider::tests::lost_account_stops_before_sending_another_request",
+      "provider::tests::api_key_unauthorized_is_terminal_and_server_text_is_redacted",
+      "accounts::tests::damaged_metadata_is_not_silently_replaced",
+      "provider::tests::api_key_catalog_and_inference_use_the_same_explicit_credential",
+      "provider::tests::renewable_sessions_reload_tokens_and_retry_unauthorized_only_once",
+      "accounts::tests::invalid_spike_host_migrates_once_and_survives_new_store_instances",
+      "accounts::tests::registration_and_selection_persist_without_token_fields",
+      "accounts::tests::failed_local_signout_preserves_selected_account_for_retry",
+      "local_credentials::tests::refuses_symlinks_and_publicly_readable_credentials",
+      "accounts::tests::api_key_signout_deletes_locally_without_claiming_remote_revocation",
+      "local_credentials::tests::private_record_survives_reopen_and_is_replaced_atomically",
+      "accounts::tests::oauth_signout_stays_signed_out_after_reopen_with_an_older_api_key",
+      "auth::tests::callback_listener_ignores_stale_tabs_then_accepts_matching_attempt",
+      "response_stream_requires_terminal_success",
+      "direct_route_completed_items_are_retained_until_terminal_success",
+      "unknown_tools_and_fabricated_screenshots_fail",
+      "incomplete_output_never_edits_and_consumed_tokens_remain_charged",
+      "budget_blocks_before_network",
+      "unknown_failure_redacts_provider_content_and_reserves_unknown_usage",
+      "denial_precedes_mutation_and_cancel_precedes_request",
+      "tools_use_shared_bus_and_record_provenance",
+      "agent_approval_and_cancellation_precede_import_and_unscoped_hosts_do_not_advertise_it",
+      "imports_require_host_access_current_revision_and_confined_valid_batches",
+      "imported_assets_have_real_cooked_content_shared_history_and_paged_inspection",
+      "camera_selection_reaches_the_project_host_without_project_mutation",
+      "material::tests::defaults_and_material_roles_keep_color_spaces_and_sampler_identity",
+      "material::tests::malformed_or_unresolved_materials_fail_before_gpu_upload",
+      "invalid_atlas_sources_and_options_never_replace_a_valid_cache",
+      "atlases_extrude_preserve_ids_track_dependencies_and_load_without_sources",
+      "wav_channels_chunks_seek_and_source_free_cache_are_exact",
+      "vorbis_decodes_real_compressed_audio_with_gapless_duration",
+      "invalid_sources_and_corrupted_cache_fail_without_publishing_valid_metadata",
+      "default_scene_hierarchy_mirrors_and_primitive_instances_match_geometry",
+      "absent_normals_preserve_hard_edges_instead_of_smoothing_them",
+      "glb_and_embedded_buffers_produce_the_same_geometry",
+      "native_path_separators_become_portable_dependency_names",
+      "version_one_caches_remain_loadable_after_texture_support",
+      "uri_resolution_confines_files_but_allows_project_siblings",
+      "malformed_geometry_and_unsupported_features_fail_before_cooking",
+      "corrupt_cache_is_rejected_and_rebuilt_from_source",
+      "import_cook_runtime_load_and_dependency_reimport_are_reversible",
+      "failed_batches_keep_previous_versions_and_removals_atomic",
+      "retained_assets_are_not_reused_as_authorization_for_another_project_scope",
+      "unknown_runtime_kinds_and_corrupt_replacements_fail_explicitly",
+      "payload_budget_and_import_settings_are_enforced_before_publication",
+      "live_versions_survive_reimport_and_undo_without_source_files",
+      "project_runtime_rejects_redirected_cache_directories_and_retains_trusted_versions",
+      "normal_map_mips_renormalize_vectors",
+      "transparent_color_does_not_bleed_and_odd_edges_are_not_dropped",
+      "color_mips_average_linear_light_while_numeric_maps_preserve_values",
+      "jpeg_cooks_and_invalid_images_and_containers_fail",
+      "exr_and_sixteen_bit_png_keep_precision_and_hdr_range",
+      "data_uri_and_buffer_view_images_are_imported_and_missing_uv_is_rejected",
+      "model_textures_keep_bindings_variants_tangents_and_image_dependencies",
+      "standalone_texture_cache_survives_source_removal_and_repairs_corruption",
+      "untrusted_manifest_and_pcm_are_checked_before_a_handle_is_returned",
+      "cooked_only_reader_seeks_with_bounded_reads_and_no_source",
+      "retained_reader_detects_later_corruption_without_publishing_samples",
+      "streaming_decoder_seeks_exactly_and_keeps_independent_cursors",
+      "voice_limit_rejects_new_playback_without_disturbing_the_existing_mix",
+      "spatial_position_distance_and_listener_rotation_change_stereo_output",
+      "bus_gain_pause_resume_and_stop_change_real_samples",
+      "invalid_configuration_and_bad_commands_leave_existing_sound_intact",
+      "streaming_voice_outputs_real_samples_and_reports_cache_corruption",
+      "offline_stream_pause_end_and_errors_reach_the_host_without_waits",
+      "fast_streaming_export_is_repeatable_across_chunks_rates_and_loop_seams",
+      "finished_sources_stay_finished_until_a_play_edge_and_bad_sync_is_terminal",
+      "spatial_sources_use_composed_world_positions_and_listener_rotation",
+      "invalid_buses_and_playback_fail_without_interrupting_existing_mix",
+      "cooked_only_mixer_is_batch_invariant_across_seek_loop_and_resampling",
+      "invalid_import_metadata_cannot_partially_modify_a_project",
+      "texture_import_options_are_validated_and_undoable",
+      "asset_reimport_preserves_identity_and_undo_restores_previous_hash",
+      "import_with_references_is_one_reversible_transaction",
+      "environment_binding_and_reimport_are_atomic_and_reversible",
+      "audio_graph_is_one_reversible_transaction_and_rejects_broken_references_atomically",
+      "spatial_sources_require_one_listener_and_a_transform",
+      "projection_changes_share_atomic_history_and_legacy_cameras_keep_perspective",
+      "compound_part_edits_validate_atomically_and_survive_undo_redo_and_reopen",
+      "input_bindings_use_atomic_undoable_commands_and_preserve_legacy_empty_documents",
+      "invalid_translation_or_locale_cannot_commit_a_valid_prefix",
+      "xliff_rejects_invalid_batches_and_stale_preparations_without_losing_concurrent_edits",
+      "xliff_import_is_one_reversible_transaction_and_replays_after_restart",
+      "tables_and_locale_are_atomic_reversible_journaled_and_attributed",
+      "physics_components_are_atomic_reversible_and_validate_cross_component_constraints",
+      "sprites_share_atomic_commands_reference_validation_and_exact_history",
+      "stale_edits_and_spoofed_actor_rejected",
+      "transaction_failure_rolls_back_all_commands",
+      "simulation_commands_cannot_modify_or_merge_into_authoring_state",
+      "new_edit_clears_redo",
+      "journal_corruption_and_concurrent_writer_rejected",
+      "saved_checkpoint_preserves_crdt_ancestry_after_restart",
+      "journal_replays_undo_redo_and_recovers_partial_tail",
+      "ten_thousand_random_undo_sequences",
+      "unsupported_component_is_a_named_error_not_silently_omitted",
+      "invalid_authoring_and_missing_scene_do_not_produce_bytes",
+      "cooked_world_runs_after_authoring_is_discarded_and_cook_is_read_only",
+      "rigid_body_cook_preserves_full_angular_state_after_project_drop",
+      "cross_target_maps_and_oversized_source_fail_before_export",
+      "cook_never_executes_project_code_or_interprets_names_as_rust",
+      "cook_is_deterministic_and_retains_separate_symbol_metadata",
+      "tests::fixed_step_is_reproducible_and_does_not_edit_project",
+      "compound_navigation_preserves_rotated_child_openings_and_rebuilds_after_edits",
+      "cooked_model_geometry_uses_hierarchy_and_requires_matching_resources",
+      "navigation_rejects_dynamic_sensor_duplicate_and_cross_scene_sources",
+      "authored_sources_rebuild_changed_tiles_and_reject_partial_engine_updates",
+      "removing_and_readding_mesh_does_not_reuse_old_generation",
+      "portal_search_avoids_the_rendered_room_tile_boundary_detour",
+      "composed_transform_overflow_rejects_sync_without_changing_live_state",
+      "hierarchy_composes_rotation_scale_and_parent_local_motion_before_snapshot",
+      "sync_removes_deleted_entities_and_resets_components_while_moving_scenes",
+      "sync_reparents_and_replaces_bindings_atomically_without_rewinding_time",
+      "deep_hierarchy_is_iterative_and_has_initial_world_transforms",
+      "rejects_cross_platform_path_escapes",
+      "mesh_bindings_require_the_correct_asset_kinds",
+      "rejects_unknown_versions_fields_and_cycles",
+      "deterministic_roundtrip",
+      "environments_validate_bindings_limits_and_global_uniqueness",
+      "bad_merge_does_not_corrupt_live_document",
+      "concurrent_creation_of_component_merges_fields",
+      "semantic_invalid_merge_is_atomic",
+      "concurrent_fields_survive_and_converge",
+      "directional_shadow_configuration_is_optional_typed_and_bounded",
+      "punctual_lights_roundtrip_and_reject_invalid_units_angles_and_types",
+      "context_tests::build_context_preserves_configuration_assets_and_icon",
+      "project::tests::blocked_load_leaves_state_readable_and_commands_unavailable_until_ready",
+      "project::tests::timeout_discards_late_success_and_releases_its_journal",
+      "project::tests::open_validates_files_and_restores_shared_command_history",
+      "assets::tests::preparation_releases_the_bus_and_concurrent_edits_reject_its_late_commit",
+      "assets::tests::successful_import_uses_durable_shared_history_and_guard_releases_after_errors",
+      "source_watch::tests::editor_worker_keeps_undo_and_recovers_broken_sources_through_shared_history",
+      "eval::tests::partial_or_filtered_runs_cannot_pass_the_full_gate",
+      "eval::tests::corpus_has_twenty_valid_nontrivial_independent_cases",
+      "play_saves::tests::a_save_created_during_playback_is_not_overwritten",
+      "cli_reports_human_import_errors_and_structured_source_free_sprite_diagnostics",
+      "texture_settings_survive_restart_and_cache_rebuild",
+      "cli_import_is_idempotent_and_persists_reimport_history",
+      "localization_check_reports_missing_translations_and_requires_explicit_fallback",
+      "xliff_cli_publishes_new_exports_and_imports_through_durable_shared_history",
+      "play_advances_isolated_simulation_and_script_state_without_authoring_writes",
+      "play_rejects_unbounded_work_failed_scripts_and_existing_output_paths",
+      "json_numeric_equality_accepts_integral_floats_without_rounding_large_integers",
+      "failed_gameplay_exits_nonzero_with_all_diagnostics_and_never_publishes_a_save",
+      "checks_observe_initial_intermediate_and_final_ticks_without_authoring_writes",
+      "restored_checkpoint_assertions_use_absolute_ticks_and_reconstructed_input",
+      "invalid_assertion_plans_fail_before_creating_outputs_or_running_gameplay",
+      "nondivisible_sample_counts_and_failed_assertions_keep_completed_audio",
+      "invalid_output_conflicts_and_runtime_failures_publish_no_audio_or_game_save",
+      "scripts_mix_pause_and_attenuate_cached_audio_through_the_shared_command_bus",
+      "cli_failure_identifies_absolute_tick_after_save_restore_without_partial_publication",
+      "cli_distinguishes_invalid_initialization_from_tick_timeout",
+      "headless_input_replay_survives_process_restart_without_authoring_writes",
+      "invalid_future_events_ranges_and_oversized_files_fail_before_output_is_published",
+      "play_captures_ordered_script_logs_without_gpu_or_authored_writes",
+      "failed_play_keeps_committed_logs_and_excessive_logging_fails_boundedly",
+      "separate_processes_save_and_resume_with_continuous_state_time_and_logs",
+      "failed_runs_and_invalid_inputs_never_publish_or_replace_a_save",
+      "failed_timer_callback_withholds_report_and_save_but_preserves_prior_logs",
+      "bounded_watch_reports_unsettled_sources_and_exits_unsuccessfully",
+      "running_cli_reimports_recovers_reloads_and_preserves_external_edits_and_history",
+      "atlas_dependency_reimports_share_history_and_restore_without_sources",
+      "invalid_audio_batch_or_settings_cannot_partially_change_the_project",
+      "audio_import_reimport_watch_undo_and_retained_versions_share_command_history",
+      "preparation_rejects_stale_revisions_and_other_documents_even_for_noops",
+      "a_failed_batch_or_rejected_actor_never_partially_edits_the_document",
+      "malformed_or_ambiguous_requests_fail_before_cooking",
+      "default_cache_cannot_be_redirected_outside_the_project",
+      "cache_rebuild_and_reimport_preserve_identity_name_and_usage",
+      "batch_is_one_reversible_persistent_transaction_and_loads_without_sources",
+      "raw_atlas_rectangles_warn_in_both_import_outcomes_and_source_free_validation",
+      "cached_validation_identifies_ordinary_texture_frames_missing_frames_and_raw_rectangles",
+      "watcher_keeps_previous_asset_and_reports_then_clears_affected_entities",
+      "broken_shared_frames_and_shrunken_slices_reject_the_entire_import_batch",
+      "prepared_cycles_cannot_be_reordered_or_published_by_another_watcher",
+      "replacing_a_source_with_an_outside_symlink_cannot_import_outside_content",
+      "stale_preparation_keeps_edits_and_does_not_consume_watch_diagnostics",
+      "cache_repair_is_a_noop_and_unrelated_files_do_not_create_history",
+      "external_same_size_edits_and_new_dependencies_are_detected_and_repaired",
+      "broken_and_deleted_sources_preserve_last_good_assets_without_blocking_other_imports",
+      "burst_writes_form_one_transaction_and_undo_is_not_immediately_overwritten",
+      "projects_larger_than_a_batch_make_progress_past_a_broken_source",
+      "focus_loss_disconnects_and_analog_thresholds_have_explicit_release_edges",
+      "logical_button_edges_combine_alternatives_and_preserve_subtick_taps",
+      "touch_gesture_actions_are_one_tick_pulses_and_rebinding_does_not_fake_a_press",
+      "analog_axes_use_dead_zones_normalize_diagonals_and_cancel_opposites",
+      "replay_seek_reconstructs_held_action_without_replaying_its_press",
+      "immutable_validated_bindings_match_mapped_frames_through_releases_and_gestures",
+      "invalid_maps_or_event_suffixes_leave_all_action_and_physical_state_unchanged",
+      "focus_loss_releases_controls_cancels_touches_and_drops_unfocused_actions",
+      "controllers_preserve_analog_values_threshold_edges_and_hotplug_identity",
+      "keys_track_edges_without_repeat_and_keep_short_taps_within_one_tick",
+      "mouse_motion_and_wheel_units_accumulate_only_for_the_current_tick",
+      "connected_device_and_contact_counts_are_bounded_without_losing_existing_state",
+      "malformed_and_oversized_packets_are_atomic_and_unknown_tags_fail",
+      "pinch_uses_stable_contact_ids_and_does_not_turn_into_a_tap_or_swipe",
+      "taps_drags_swipes_and_cancellations_remain_distinct",
+      "rejected_packets_do_not_age_active_gestures",
+      "long_press_is_once_only_and_independent_of_supported_tick_rate",
+      "zero_duration_clips_can_describe_a_checkpoint_but_cannot_supply_another_tick",
+      "seeking_preserves_held_controls_and_gesture_age_without_replaying_the_game",
+      "the_entire_clip_is_validated_before_play_with_order_limits_and_compatibility",
+      "prefixes_groups_cdata_comments_and_character_references_preserve_text",
+      "stale_sources_unknown_identities_and_bad_patterns_reject_the_entire_document",
+      "exported_patterns_roundtrip_whitespace_unicode_empty_and_missing_targets",
+      "hostile_xml_duplicates_inline_codes_and_ambiguous_segments_fail_explicitly",
+      "exchange_limits_bound_size_depth_units_and_message_expansion",
+      "icu_numbers_and_calendar_dates_use_locale_data",
+      "quotes_unicode_nested_select_and_pseudo_preserve_arguments",
+      "translations_preserve_argument_contracts_across_every_branch",
+      "fallback_switching_missing_reports_and_empty_translations_are_explicit",
+      "plural_select_gender_offsets_and_ordinal_follow_locale_rules",
+      "malformed_patterns_limits_and_bad_values_fail_before_publication",
+      "catalog_and_parser_bounds_reject_excess_work",
+      "path::tests::centimetre_queries_choose_the_containing_skinny_triangle_in_both_directions",
+      "path::tests::astar_corridor_cost_matches_independent_dijkstra_search",
+      "path::tests::snapped_edge_rounding_does_not_break_short_paths",
+      "diagonal_moves_cannot_cut_blocked_corners_and_blocked_endpoints_return_none",
+      "invalid_inputs_and_exhausted_search_are_distinct_from_no_route",
+      "weighted_routes_choose_cheaper_detours_and_zero_length_paths_cost_nothing",
+      "overlong_corridor_fails_explicitly_instead_of_returning_a_truncated_route",
+      "weighted_astar_matches_exhaustive_costs_on_varied_grids",
+      "one_way_connections_return_explicit_traversals_without_smoothing_over_gaps",
+      "a_distance_penalty_selects_the_cheaper_connection_and_invalid_costs_reject",
+      "link_edits_are_atomic_reuse_tiles_and_do_not_depend_on_input_order",
+      "actual_recast_tiles_connect_and_funnel_a_flat_floor",
+      "invalid_rebuild_is_atomic_and_path_failure_is_explicit",
+      "low_ceiling_and_narrow_passages_cannot_produce_a_route",
+      "removed_bounds_drop_tiles_and_failed_work_limits_keep_prior_mesh",
+      "obstacle_rebuilds_only_affected_tiles_and_path_respects_radius",
+      "terrain_height_detail_survives_funnel_smoothing_and_steep_faces_are_excluded",
+      "climbable_steps_connect_across_tiles_but_tall_steps_and_stacked_floors_do_not",
+      "finer_voxels_recover_tight_doorways_without_weakening_corner_clearance",
+      "rotated_wall_corners_preserve_configured_radius_at_multiple_voxel_sizes",
+      "consumed_triangles_never_rasterize_outside_their_footprint",
+      "free_motion_is_speed_limited_and_unrelated_floors_do_not_interfere",
+      "invalid_or_unbounded_requests_fail_before_producing_any_batch",
+      "obstacles_stop_motion_at_radius_and_height_filtering_preserves_stacked_motion",
+      "overlapping_agents_have_repeatable_antisymmetric_escape_without_randomness",
+      "full_speed_goal_requests_settle_beside_parked_agents_without_orbiting",
+      "one_hundred_crossing_agents_keep_clearance_and_reach_opposite_goals",
+      "plaza_crossing_reaches_and_retains_all_goals_without_body_or_obstacle_overlap",
+      "character_queries_honor_masks_ignore_sensors_and_see_unsimulated_edits",
+      "character_sweeps_stop_at_walls_slide_ground_and_preserve_live_world",
+      "character_query_validation_is_explicit_and_does_not_consume_pending_solver_changes",
+      "character_steps_over_low_stairs_but_not_tall_obstacles",
+      "slope_limit_and_ground_snap_change_observable_traversal",
+      "compound_character_bodies_fail_explicitly_without_mutating_the_world",
+      "compound_queries_preserve_holes_local_rotations_and_parent_identity",
+      "overlapping_compound_sensor_parts_emit_one_entity_event_and_honor_query_masks",
+      "dynamic_compound_contacts_and_reordering_preserve_solver_state",
+      "extracted_query_and_event_schemas_preserve_the_published_contract",
+      "facade_preserves_distinct_textual_ids_and_lexical_ties",
+      "tessellated_shapes_enclose_analytic_curves_with_bounded_extra_clearance",
+      "queries_are_immediate_stable_filtered_and_removed_handles_do_not_alias",
+      "invalid_document_and_step_leave_live_state_unchanged",
+      "kinematics_rotation_shape_variants_and_ccd_are_executed",
+      "sensors_emit_one_entry_and_exit_and_do_not_stop_motion",
+      "scenes_do_not_collide_and_masks_disable_contacts",
+      "authored_friction_restitution_gravity_and_damping_change_motion",
+      "gravity_contact_sleep_and_document_echo_preserve_exact_solver_state",
+      "binary_ids_and_text_ids_have_identical_motion_and_keep_unchanged_bodies_asleep",
+      "budget::tests::clock_failure_and_thread_changes_fail_closed_and_reset_starts_a_new_execution",
+      "tests::zero_cpu_budget_rejects_even_short_initialization",
+      "tests::native_query_expiry_prevents_commit_even_when_the_script_catches_errors",
+      "tests::invalid_script_transaction_does_not_change_state_or_document",
+      "tests::sandbox_has_no_host_capabilities",
+      "tests::hot_reload_preserves_matching_types_and_old_program_on_error",
+      "tests::scripts_query_live_ecs_and_hot_reload_without_changing_authored_state",
+      "tests::command_limit_is_enforced_even_if_script_replaces_the_javascript_wrapper",
+      "tests::actual_native_cpu_exhaustion_rolls_back_even_if_script_catches_the_error",
+      "tests::cpu_budget_interrupts_runaway_initialization_and_updates",
+      "tests::suspended_native_callback_and_other_threads_do_not_consume_script_cpu_budget",
+      "action_queries_and_runtime_rebinding_resume_with_saved_state_and_ordered_input",
+      "walking_and_wall_sliding_keep_tangential_speed_on_every_tick",
+      "syntax_and_gameplay_exceptions_identify_phase_without_committing_failed_ticks",
+      "untrusted_exception_text_is_bounded_and_arbitrary_objects_are_not_stringified",
+      "hostile_error_getters_cannot_escape_the_deadline_or_poison_later_calls",
+      "project_caps_total_grid_storage_across_scenes",
+      "authored_grid_edits_share_validation_history_and_atomic_runtime_snapshots",
+      "script_grid_edits_are_visible_next_tick_and_survive_reload_and_save",
+      "invalid_or_over_budget_grid_queries_withhold_the_entire_failed_update",
+      "rejected_future_input_keeps_an_existing_replay_and_current_game_unchanged",
+      "live_packets_drive_commands_and_bad_input_does_not_advance_or_poison_play",
+      "replay_resumes_saved_game_and_input_history_with_exact_future_state_and_logs",
+      "localization_and_physics_share_the_same_native_query_allowance",
+      "bad_queries_and_locale_changes_roll_back_commands_state_logs_and_clock",
+      "catalog_rebuilds_after_commands_and_hot_reload_and_missing_keys_are_explicit",
+      "switching_locale_is_tick_scoped_and_saved_without_changing_authoring",
+      "committed_logs_preserve_order_and_survive_hot_reload_until_consumed",
+      "pending_log_limits_fail_before_state_commit_and_draining_allows_progress",
+      "failed_script_transactions_never_publish_their_logs_or_state",
+      "script_room_edits_rebuild_next_tick_and_paths_survive_reload_and_save",
+      "shared_query_limits_and_bad_inputs_reject_script_state_and_commands",
+      "invalid_enabled_endpoint_cannot_publish_commands_state_or_a_partial_rebuild",
+      "authored_links_toggle_through_shared_commands_and_saved_traversals_survive_reload",
+      "character_and_ray_queries_share_a_budget_and_require_play_capabilities",
+      "play_echoes_physics_queries_commands_and_hot_reload_without_editing_author",
+      "scripts_apply_character_movement_through_commands_and_keep_it_after_hot_reload",
+      "scripts_observe_sensor_transitions_once_and_queries_have_limits",
+      "a_failed_tick_cannot_be_saved_or_retried_as_committed_state",
+      "save_tracks_the_successfully_hot_reloaded_script_revision",
+      "save_keeps_runtime_spawns_deletions_hierarchy_and_custom_game_data",
+      "invalid_or_incompatible_saves_fail_without_mutating_a_running_session",
+      "restored_physics_keeps_pose_and_velocities_and_reinstalls_queries",
+      "save_restores_nested_state_scene_and_clock_then_continues_without_authoring_writes",
+      "overlap_recovery_uses_the_sessions_fixed_timestep",
+      "query_budget_bad_input_and_missing_play_session_fail_without_committing",
+      "proposed_velocities_use_shared_commands_and_survive_reload_and_save",
+      "timer_callback_failure_preserves_deadline_state_commands_logs_and_clock_for_retry",
+      "async_timer_callback_cannot_consume_pending_work_or_commit_its_prefix",
+      "malformed_schedules_and_handler_removal_are_rejected_without_losing_pending_work",
+      "timers_run_before_update_in_stable_order_with_repeat_replace_cancel_and_isolated_data",
+      "promises_and_generators_fail_explicitly_before_committing_synchronous_prefixes",
+      "timer_schedule_and_clock_survive_save_reload_with_exact_future_callbacks",
+      "invalid_timer_requests_and_limits_cannot_commit_prefix_state_or_project_changes",
+      "camera::tests::pixel_grid_preserves_logical_framing_and_snaps_only_rendered_camera_motion",
+      "camera::tests::orthographic_size_rejects_unrepresentable_gpu_extents",
+      "camera::tests::orthographic_extent_depth_and_view_direction_are_independent_of_distance",
+      "camera::tests::unrepresentable_cameras_fail_before_encoding_gpu_work",
+      "camera::tests::camera_world_basis_uses_inherited_pose_but_not_scale_for_clip_units",
+      "pixel_grid::tests::logical_pixels_fit_wholly_inside_integer_and_fractional_viewports",
+      "lighting::scene::tests::world_transform_affects_position_direction_but_not_light_range_or_intensity",
+      "lighting::scene::tests::unrepresentable_light_transforms_and_cones_fail_explicitly",
+      "lighting::scene::tests::enabled_shadow_slots_remain_aligned_and_capacity_fails_explicitly",
+      "shadows::cascade::tests::receiver_frustum_and_offscreen_caster_depth_are_covered",
+      "shadows::cascade::tests::subtexel_camera_motion_keeps_xy_projection_and_invalid_precision_fails",
+      "sprites::texture::tests::invisible_rgb_is_removed_before_linear_filtering_and_alpha_remains_linear",
+      "lighting::scene::tests::explicit_zero_lights_disable_preview_and_budgets_fail_without_dropping_lights",
+      "sprites::geometry::tests::bounded_spans_preserve_full_geometry_and_source_mapping_for_flips_and_slices",
+      "environment::tests::environment_sources_decode_linear_srgb_hdr_and_reject_invalid_radiance",
+      "environment::tests::large_environment_uses_cooked_low_pass_mips_before_cube_resampling",
+      "scene::tests::shadow_caster_flags_split_instances_without_dropping_geometry",
+      "scene::tests::model_nodes_use_default_scene_and_repeated_entities_share_one_draw",
+      "scene::tests::unloaded_or_stale_models_fail_instead_of_falling_back_to_cubes",
+      "scene::tests::camera_rig_frames_hide_diagnostic_cubes_but_preserve_explicit_meshes",
+      "environment::tests::cubemap_axes_edges_and_constant_radiance_are_preserved",
+      "environment::tests::brdf_lookup_matches_independent_hemisphere_integrals",
+      "environment::tests::prefilter_broadens_a_bright_direction_without_negative_radiance",
+      "columns::tests::slices_are_actual_component_allocations_and_shared_tables_are_visited_once",
+      "columns::tests::bevy_observers_see_touched_columns_and_derived_values_after_scope_exit",
+      "callback_error_stops_visits_and_publishes_partial_writes_without_advancing_time",
+      "outer_error_can_restore_bounded_undo_within_the_same_exclusive_scope",
+      "empty_world_and_unused_scope_are_valid",
+      "numeric_rows_cover_static_and_moving_entities_and_feed_the_native_schedule",
+      "early_return_and_unwinding_leave_hierarchy_consistent_and_loan_reusable",
+      "structural_growth_swap_removal_and_component_moves_get_fresh_aligned_views",
+      "numeric_hierarchy_overflow_is_checked_before_any_native_integration",
+      "numeric_overflow_cannot_partially_advance_components_or_clock",
+      "invalid_physics_records_tags_pairs_and_versions_fail_closed",
+      "physics_saves_fail_explicitly_even_after_removal",
+      "angular_reset_requires_a_body_and_rejects_the_whole_batch",
+      "solver_hierarchy_overflow_never_publishes_and_is_terminal",
+      "typed_motion_input_is_checked_as_a_whole_before_solver_changes",
+      "mixed_motion_commands_use_final_values_and_remain_atomic",
+      "structural_physics_changes_are_prevalidated_and_keep_other_bodies",
+      "sensor_events_preserve_exact_ids_and_despawn_exit_order",
+      "cooked_physics_round_trip_is_canonical_and_version_one_is_retained",
+      "native_physics_moves_once_falls_collides_and_stays_asleep",
+      "sensor_pair_overflow_is_bounded_and_cannot_publish_a_partial_tick",
+      "unknown_version_flags_and_rehashed_malformed_payloads_fail_closed",
+      "invalid_live_values_refuse_to_produce_a_save_without_mutation",
+      "save_order_does_not_depend_on_archetype_insertion_history",
+      "saved_clock_overflow_cannot_partially_step_the_restored_world",
+      "scene_and_legacy_json_are_not_silently_accepted_as_native_saves",
+      "every_truncation_and_single_byte_mutation_leaves_the_destination_intact",
+      "different_world_and_tick_rate_do_not_replace_an_existing_session",
+      "saves_include_committed_structural_and_direct_column_changes",
+      "save_round_trip_resumes_exactly_at_the_saved_clock_and_tick_rate",
+      "scene_identity_cannot_be_reused_by_an_entity_even_in_a_rehashed_image",
+      "invalid_numeric_ranges_and_missing_parents_fail_before_world_creation",
+      "duplicate_ids_noncanonical_order_and_cycles_are_rejected",
+      "rehashed_malformed_records_still_fail_semantic_checks",
+      "binary_round_trip_is_canonical_across_input_order_and_preserves_bits",
+      "every_truncation_and_unhashed_change_is_rejected",
+      "native_step_and_bulk_write_update_parent_local_and_global_values",
+      "deeply_nested_hierarchy_loads_iteratively_and_empty_scene_steps",
+      "ten_thousand_native_entities_repeat_and_discard_without_authoring_state",
+      "invalid_component_data_and_composed_overflow_are_rejected_atomically",
+      "missing_duplicate_and_recycled_in_batch_ids_fail_without_partial_effects",
+      "despawn_requires_explicit_child_removal_or_reparent_and_keeps_local_pose",
+      "queue_from_component_view_applies_only_after_borrow_and_changes_live_queries",
+      "velocity_components_can_be_added_removed_and_readded_after_schedule_initialization",
+      "cancelled_spawns_and_whole_hierarchy_deletion_have_no_dangling_handles",
+      "invalid_batch_preserves_every_entity_and_retains_queue_for_diagnostics",
+      "command_capacity_is_bounded_and_clearing_reuses_the_queue",
+      "ten_thousand_reverse_order_spawns_resolve_forward_parents_without_recursion",
+      "budget::tests::clock_failure_and_thread_changes_fail_closed_and_reset_starts_a_new_execution",
+      "artifact::tests::source_is_stripped_but_module_identity_remains_in_bytecode",
+      "artifact::tests::compatibility_and_corruption_fail_without_reading_quickjs_bytecode",
+      "input_tests::snapshot_construction_does_not_call_guest_prototype_accessors",
+      "input_tests::expired_snapshot_budget_never_publishes_component_views",
+      "structural_tests::diagnostics_cannot_reactivate_commands_or_observe_live_views",
+      "structural_tests::command_arguments_copy_active_views_and_support_later_spawned_parents",
+      "artifact::tests::embedded_module_executes_without_eval_and_keeps_transfer_hardening",
+      "session::tests::numeric_runtime_failure_is_terminal_after_input_acceptance",
+      "input_tests::direct_snapshot_matches_shared_schema_for_devices_actions_and_every_gesture",
+      "session::tests::rebind_validates_atomically_and_seeds_held_controls_without_press",
+      "session::tests::invalid_suffix_preserves_edges_gesture_clock_world_and_vm_then_retry_works",
+      "input_tests::maximum_validated_packet_exposes_bounded_raw_and_gesture_arrays",
+      "structural_tests::structural_changes_follow_numeric_writes_and_reacquire_rows_next_tick",
+      "structural_tests::reentrant_argument_getters_hold_no_queue_borrow_and_errors_are_sticky",
+      "tests::deferred_work_during_metadata_exposure_also_rolls_back",
+      "tests::failure_restores_numeric_columns_and_fails_the_host",
+      "tests::compilation_does_not_execute_and_constructor_has_no_os_capabilities",
+      "tests::bytecode_runs_direct_columns_across_tables_and_survives_source_token_drop",
+      "session::tests::accepted_packet_script_failure_revokes_loans_and_makes_entire_session_unusable",
+      "tests::finite_motion_signed_unit_quaternion_and_reflected_scale_remain_valid",
+      "structural_tests::script_growth_relocates_tables_after_every_foreign_view_is_revoked",
+      "tests::partial_exposure_revokes_views_before_hostile_exception_getters",
+      "structural_tests::strict_structural_inputs_cannot_silently_drop_unsupported_data",
+      "structural_tests::rejected_sync_restores_numeric_prefix_and_entire_structural_batch",
+      "tests::transferring_or_resizing_component_buffers_is_rejected",
+      "tests::numeric_finite_components_with_overflowing_hierarchy_restore_the_entire_loan",
+      "structural_tests::physics_domains_and_structural_rejection_restore_all_loans_after_revocation",
+      "tests::unsupported_behavior_and_async_are_explicit",
+      "session::tests::fixed_rate_native_step_precedes_script_and_retained_input_is_owned",
+      "tests::invalid_direct_components_roll_back_without_structural_commands",
+      "tests::ignored_deferred_work_is_rejected_during_initialization_and_ticks",
+      "tests::retained_views_are_detached_before_later_archetype_growth",
+      "structural_tests::reentrant_getter_cannot_bypass_the_command_limit",
+      "structural_tests::command_limit_is_bounded_and_catching_overflow_cannot_commit_a_prefix",
+      "tests::allocation_failure_and_cpu_budget_leave_no_component_prefix",
+      "artifact::tests::embedded_failure_and_deferred_work_still_roll_back",
+      "structural_tests::callback_failure_async_cpu_memory_and_late_returns_discard_commands",
+      "copied_player_runs_scene_and_structural_behavior_without_script_arguments",
+      "recording_boundary_rejects_incompatible_unbounded_or_conflicting_inputs_before_play",
+      "crates/incant_runtime/src/columns.rs - columns::NativeWorld::with_numeric_columns (line 80)",
+      "crates/incant_runtime/src/columns.rs - columns::NativeWorld::with_numeric_columns (line 93) - compile fail",
+      "crates/incant_runtime/src/columns.rs - columns::NativeWorld::with_numeric_columns (line 102) - compile fail",
+      "crates/incant_runtime/src/columns.rs - columns::NativeWorld::with_numeric_columns (line 108) - compile fail",
+      "crates/incant_runtime/src/columns.rs - columns::NativeWorld::with_numeric_columns (line 114) - compile fail",
+      "crates/incant_script/src/compiled.rs - compiled::CompiledScript::from_embedded (line 27) - compile fail"
+    ],
+    "ignored": [
+      "editor_publishes_complete_revisions_and_recovers_after_failed_replacements",
+      "camera_capture_tracks_simulated_camera_motion_and_rejects_unknown_selection",
+      "headless_play_records_current_simulation_frames_and_publishes_a_complete_report",
+      "graph::tests::queued_graph_frames_outlive_scene_versions_and_failed_preparation",
+      "graph::tests::queued_pixel_frames_retain_logical_targets_and_physical_chrome_after_resizing",
+      "hdr_output::hdr_values_survive_until_tone_mapping_and_transfer_runs_once",
+      "hdr_output::output_composes_display_colors_and_reuses_bounded_resize_targets",
+      "lighting::gpu_tests::clustered_viewport_offsets_and_queued_resize_commands_keep_their_own_light_data",
+      "lighting::gpu_tests::every_depth_slice_selects_its_light_and_reused_clusters_clear_old_membership",
+      "lighting::gpu_tests::masks_represent_every_light_and_clear_tail_bits_across_word_count_changes",
+      "alpha_modes_and_back_faces_follow_material_semantics",
+      "cameras::authored_camera_changes_projection_clips_geometry_and_retains_its_selected_pose",
+      "cameras::inherited_cameras_and_custom_light_clusters_match_the_all_light_reference",
+      "cameras::orthographic::orthographic_light_clusters_match_all_lights_at_multiple_sizes_poses_and_aspects",
+      "cameras::orthographic::orthographic_parallel_view_rays_preserve_specular_lighting_when_camera_moves_back",
+      "cameras::orthographic::orthographic_size_clipping_and_retained_projection_match_authored_world_units",
+      "cameras::pixel_perfect::fixed_logical_pixels_replicate_exactly_with_integer_scaling_and_letterboxing",
+      "cameras::pixel_perfect::followed_grid_geometry_is_stable_at_half_pixel_ties_and_odd_resolutions",
+      "cameras::pixel_perfect::subpixel_camera_motion_is_stable_and_crossing_the_grid_moves_by_one_logical_pixel",
+      "cameras::rotated_camera_under_uneven_parent_scale_matches_an_orthonormal_flat_pose",
+      "cameras::transparency_depth_order_follows_the_selected_camera",
+      "color_maps_use_srgb_and_texture_reimport_keeps_retained_materials",
+      "dark_fill_lit_materials_remain_distinguishable",
+      "emissive_maps_and_samplers_retain_color_and_addressing",
+      "environments::authored_environments_preserve_color_space_versions_and_source_free_loading",
+      "environments::environment_intensity_rotation_and_roughness_change_real_reflections",
+      "environments::malformed_environment_cannot_replace_a_retained_scene",
+      "environments::studio_environment_renders_metal_and_dielectric_across_roughness",
+      "highlight_energy_survives_and_transparency_blends_before_tone_mapping",
+      "imported_geometry_survives_sources_and_retained_versions_survive_reimport",
+      "lights::clustered_masks_match_total_light_energy_and_retain_old_scenes",
+      "lights::coverage::distinct_colored_lights_preserve_energy_across_mask_words",
+      "lights::coverage::local_range_edges_and_hdr_specular_materials_render_repeatably",
+      "lights::coverage::visible_depth_boundary_patches_match_all_light_oracle",
+      "lights::directional_point_and_spot_lights_obey_authored_physical_parameters",
+      "lights::finite_range_light_eases_to_zero_without_a_linear_edge_crease",
+      "lights::masks::all_4096_local_bits_match_unculled_point_and_spot_lighting",
+      "lights::masks::last_mask_bit_alone_lights_visible_geometry_after_a_directional_prefix",
+      "lights::spatial_clusters_match_brute_force_lighting_across_tile_edges_and_resize",
+      "material_maps_preserve_numeric_channels_normal_scale_and_occlusion_strength",
+      "shadows::alpha_masked_and_reflected_casters_preserve_holes_and_blend_casters_fail_explicitly",
+      "shadows::coverage::cascade_transitions_preserve_occlusion_and_fade_at_the_declared_distance",
+      "shadows::coverage::orthographic_cascade_transitions_preserve_occlusion_and_fade_at_the_declared_distance",
+      "shadows::directional_shadow_occlusion_respects_flags_range_and_retained_scene_versions",
+      "shadows::lookdev::directional_shadow_lookdev_contact_slopes_and_curves",
+      "shadows::normal_offset::opposing_normal_maps_preserve_the_geometric_shadow_boundary",
+      "shadows::offscreen_casters_and_multiple_directional_shadow_slots_remain_visible",
+      "shadows::queued::queued_shadow_maps_retain_camera_light_data_and_resized_atlas_versions",
+      "sprites::atlas::atlas_frame_ids_survive_repacking_source_removal_and_failed_replacement",
+      "sprites::inherited_sprite_transforms_and_queued_reimports_survive_scene_drop",
+      "sprites::nine_slice_preserves_pixel_borders_and_linear_sampling_has_no_hidden_color_fringe",
+      "sprites::sprite_layers_order_and_alpha_follow_painter_semantics",
+      "sprites::sprite_subregions_flips_and_retained_reimports_preserve_exact_pixels",
+      "sprites::ties::magnified_nearest_texels_keep_uniform_widths_past_pixel_center_ties",
+      "sprites::ties::nearest_texel_ties_preserve_each_texel_through_orientation_and_sheet_resize",
+      "sprites::wide::wide_magnified_nearest_regions_preserve_their_leading_and_trailing_texels"
+    ]
+  },
+  "retained_artifacts": {
+    "release/cold": {
+      "result_sha256": "deff8956808f0f41dcdace741397f338b83f233046367b346960167cdff83bf2",
+      "step_logs": {
+        "/private/tmp/incant-ci-profile-experiment/release/cold/clippy.log": "2afb4711fa29791cbfa4b3335ecaa1f77f3725027d0beb74d7f50abe1f1503a5",
+        "/private/tmp/incant-ci-profile-experiment/release/cold/audio-device.log": "fce6554af279af5b088f77272724b05c83f0849de09efa460a28671c9414a6da",
+        "/private/tmp/incant-ci-profile-experiment/release/cold/ordinary.log": "de41f4a5007a3cda5a6d1f742e2b3ec53743e574e28822f32783fbd016563a05",
+        "/private/tmp/incant-ci-profile-experiment/release/cold/ignored.log": "1b624f202cc5133872bb2a27a06111bb0133d767d5dc98617f0c893181edf1f7",
+        "/private/tmp/incant-ci-profile-experiment/release/cold/tools.log": "bc4fa44a9b991b2d249297437ce3fe02ba257de30ee0681810e4e9bd36a0f119",
+        "/private/tmp/incant-ci-profile-experiment/release/cold/ktx.log": "1e83dcee27a3aae9ed82dca4f10f20b5f4971b4ad92dc8cd3c0333bc583750cd",
+        "/private/tmp/incant-ci-profile-experiment/release/cold/schemas.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "/private/tmp/incant-ci-profile-experiment/release/cold/native-saves.log": "05fea96932bac31ffd526aac045582cc61fb2fa42d837f79083dc86998947cac",
+        "/private/tmp/incant-ci-profile-experiment/release/cold/shipping-runtime.log": "36f3b1dac2810bb895e334f64f2aed86daaf2a97aca359d90c67ad5eb11e4bea",
+        "/private/tmp/incant-ci-profile-experiment/release/cold/shipping-script.log": "eb377b65c93cd1e53ccc6c9ceb0e3c642442f35caf5699cb5904a11b6a9ab512",
+        "/private/tmp/incant-ci-profile-experiment/release/cold/physics-runtime.log": "104c05f7738e708db365dd1f7581b8b4b7f9afcd8f82c90f7bad81be5dee3a97",
+        "/private/tmp/incant-ci-profile-experiment/release/cold/character-movement.log": "358f5800781e45293613ad9bb559bba13ccc5b9a83ee01ecacd650f013f6327c",
+        "/private/tmp/incant-ci-profile-experiment/release/cold/compound-colliders.log": "f9a1bce0923669bef1de7059e94970469a8dfb2f6bac67bf16442e8e7a036b9c",
+        "/private/tmp/incant-ci-profile-experiment/release/cold/game-saves.log": "9267bc487682e5ee26df5141c8f25887292fb433376e18dabcc20ddfc9120530",
+        "/private/tmp/incant-ci-profile-experiment/release/cold/game-input.log": "8337cbbf3296af7ad7869dbcc26ed7fe97a8badda127fd43d05f78ba4e2c43bd",
+        "/private/tmp/incant-ci-profile-experiment/release/cold/game-audio.log": "4aea578923d90f1eea682a0006bd8bb5b6e90fde95b9bbbf57a6974dba0b5179",
+        "/private/tmp/incant-ci-profile-experiment/release/cold/game-timers.log": "33a60c0ba37681db7f1d97dca1d65c255a8970412564774c989068db171aa101",
+        "/private/tmp/incant-ci-profile-experiment/release/cold/game-actions.log": "16d6442d4c38dbfa278e47a132fed4a2712b109d975e95be262d9c76e2ef1323",
+        "/private/tmp/incant-ci-profile-experiment/release/cold/game-localization.log": "863ca94b6109a0a79be8d43d9b74110da591c0a84cd4d6f4ce3026afc1a9e41a",
+        "/private/tmp/incant-ci-profile-experiment/release/cold/localization-exchange.log": "24f91a61b43216a4ac06f2581b5919b488f3ce06d395d1a64b38a5bbd6ad6d0b",
+        "/private/tmp/incant-ci-profile-experiment/release/cold/game-navigation.log": "1695bb5e6d4de1fa79b587a5ccea89e4920fcc25e89fa3d77cdb73b246e1156a",
+        "/private/tmp/incant-ci-profile-experiment/release/cold/navigation-grid.log": "b32506a1f189745835c6de1295c2537492f340ec5a69aa4a7818c2cbc4529ba4",
+        "/private/tmp/incant-ci-profile-experiment/release/cold/game-steering.log": "bdaf0b5fdb7a41fedf73fc18d79418c9835e29e6b407cd87a5cc125046fa6187",
+        "/private/tmp/incant-ci-profile-experiment/release/cold/navigation-links.log": "0c8441b0c70fa9d9775f772b80f159d73a89a9813d6aa7dfd342621f5a1bbdbe",
+        "/private/tmp/incant-ci-profile-experiment/release/cold/orthographic-cameras.log": "a657bd2d3fdda9e7a681f657d2df7c3d8e0d9cb2823207cc2d72787a6b8bb114",
+        "/private/tmp/incant-ci-profile-experiment/release/cold/sprite-rendering.log": "e08fb5d7a0077ad64a9da0c504b4534d45017bfff56ad72c8579dc4cfd91e80e",
+        "/private/tmp/incant-ci-profile-experiment/release/cold/sprite-atlases.log": "8877472d80f358725a17d2966f79fd3428d13941d3a031571aee3d3c84e3a02f",
+        "/private/tmp/incant-ci-profile-experiment/release/cold/pixel-perfect.log": "d5c87f6f4530c5d98d44040c215beccc1c1ae39b24ae05fe499dc040a88f5794",
+        "/private/tmp/incant-ci-profile-experiment/release/cold/sdk-check.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "/private/tmp/incant-ci-profile-experiment/release/cold/typescript.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "/private/tmp/incant-ci-profile-experiment/release/cold/eval-check.log": "40c97b5aed1c53750637c467186a302cf86ab8fb9eb3bd4b0e1cc2b8638ed8c4",
+        "/private/tmp/incant-ci-profile-experiment/release/cold/collaboration.log": "9016d7d9df43641389434e1fbeb1a23e508b160103af3ebcf7eed116c872c1b1"
+      },
+      "shipping_proofs": {
+        "shipping-runtime": {
+          "path": "/tmp/incant-ci-profile-experiment/release/cold/shipping-runtime/manifest.json",
+          "sha256": "6b5a017aa7b3716e16f20676b3e85a0269602f3b59d5dd546139e4057fda1161"
+        },
+        "shipping-script": {
+          "path": "/tmp/incant-ci-profile-experiment/release/cold/shipping-script/result.json",
+          "sha256": "c133f3a0eb3bade57f33aea9d522a16083da1aa030c78198ce317a00d1eaa635"
+        }
+      }
+    },
+    "release/warm": {
+      "result_sha256": "e094b6150e7f03e3d3d30dcb7c69a676a36112de9812c5a352bf50c2ca3fcbca",
+      "step_logs": {
+        "/private/tmp/incant-ci-profile-experiment/release/warm/clippy.log": "fbcd190192b3c33d728c579c0cee5c185a85b5b00395c122aa699e74e6bef1e0",
+        "/private/tmp/incant-ci-profile-experiment/release/warm/audio-device.log": "8d3b84025614264d082b8e069cdc6aa599d3c56203c2861f3460327754aa6c6a",
+        "/private/tmp/incant-ci-profile-experiment/release/warm/ordinary.log": "359d1d01d974e096b2f9cbb658d0d8c35b3a03e7eb6b6ef24add9117bfa2d801",
+        "/private/tmp/incant-ci-profile-experiment/release/warm/ignored.log": "3be7f3ff81b77070dc55be6a0b2e2787106eb125667271972a41f8b77c8a91cc",
+        "/private/tmp/incant-ci-profile-experiment/release/warm/tools.log": "248bb1bcccf8920a58df213fc117fcddc62d912f0a248ba3676c1de24a39152f",
+        "/private/tmp/incant-ci-profile-experiment/release/warm/ktx.log": "1e83dcee27a3aae9ed82dca4f10f20b5f4971b4ad92dc8cd3c0333bc583750cd",
+        "/private/tmp/incant-ci-profile-experiment/release/warm/schemas.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "/private/tmp/incant-ci-profile-experiment/release/warm/native-saves.log": "fb46e3278ed62bbf002f2a82fe4ade0f8fe4f9d0be368c60df5d4617f10fb536",
+        "/private/tmp/incant-ci-profile-experiment/release/warm/shipping-runtime.log": "46f9dcbc123ee26bef515a1e748142350caf975e5dafce0fbc80021bf4eb568d",
+        "/private/tmp/incant-ci-profile-experiment/release/warm/shipping-script.log": "f8302459a8ad6659fb289bd7420157136f4e781643836c336f369be44e78f2cf",
+        "/private/tmp/incant-ci-profile-experiment/release/warm/physics-runtime.log": "6949c6269099c739afca4ccc916c3e520e6943e30078dcd89e16d16a367d5af6",
+        "/private/tmp/incant-ci-profile-experiment/release/warm/character-movement.log": "d5abae5efd643a47ea8ed3a244ee30278d105026b6d5073410c89a2a12400f70",
+        "/private/tmp/incant-ci-profile-experiment/release/warm/compound-colliders.log": "0ed05a04834c074585c98e63e9aed82e234eaee9e1db9686de65b18c04f9eef2",
+        "/private/tmp/incant-ci-profile-experiment/release/warm/game-saves.log": "20dafdfa1d9f8bec7e816d03cc2e8e083d1c6c06dd8e597c631a0e25d580ec48",
+        "/private/tmp/incant-ci-profile-experiment/release/warm/game-input.log": "9d45fa653d7fd35675a3e12eef839914b66a1f3cec19ceea93073761a16850b0",
+        "/private/tmp/incant-ci-profile-experiment/release/warm/game-audio.log": "042b4d98a34f259ef5fcf0b1a89eb8d2dce8e6ad7ede99482673fbbd0b6e6aab",
+        "/private/tmp/incant-ci-profile-experiment/release/warm/game-timers.log": "56124c68e75d528ca5e46dcc4b16201dd322163c389ea732aeb3552f9476d9d4",
+        "/private/tmp/incant-ci-profile-experiment/release/warm/game-actions.log": "79cf479a99e99df70e257e4537cde52599c7774a7cded917454de2acd9cc74cb",
+        "/private/tmp/incant-ci-profile-experiment/release/warm/game-localization.log": "e04f9f3302e57e73d1baa184512759a55ac1c2b95ff0876e4bcc546830cad374",
+        "/private/tmp/incant-ci-profile-experiment/release/warm/localization-exchange.log": "31e199b05673e98d3ec369ef16f036689fd9bb04d457c62667be117ac9573b1c",
+        "/private/tmp/incant-ci-profile-experiment/release/warm/game-navigation.log": "16356cd400c27625e3f9d8c1bfa20e7221e7acbc0e2ff084c2a295aa17452dc6",
+        "/private/tmp/incant-ci-profile-experiment/release/warm/navigation-grid.log": "992d0df3e9b3683cbf2b47a169f89aaab06258f768a607bfabc0a2c09f8a6cf1",
+        "/private/tmp/incant-ci-profile-experiment/release/warm/game-steering.log": "3f9b4889b82e8b354742cc5628c5e1ab77664ccd9ee90a84cd410a29988d2507",
+        "/private/tmp/incant-ci-profile-experiment/release/warm/navigation-links.log": "ae4264904f3ff5e2e83ec1d991dd44e685e8ac79500c734e1fe19c79ede9de6a",
+        "/private/tmp/incant-ci-profile-experiment/release/warm/orthographic-cameras.log": "b9a1a407368e846a4458a5358434c68427d078724231920214c968fb784760eb",
+        "/private/tmp/incant-ci-profile-experiment/release/warm/sprite-rendering.log": "c0026b4b981d99def8699272868b0fb5f4480767935e6336c59bd32a3f8e5aba",
+        "/private/tmp/incant-ci-profile-experiment/release/warm/sprite-atlases.log": "4c4ee354ee2c4c89ba3ed1dbae4c86e7d1d7ddf6b9de751b3626de1245b01074",
+        "/private/tmp/incant-ci-profile-experiment/release/warm/pixel-perfect.log": "4e181abbc9b31a9e8a96887c99b51ec9ce983657e9a13e2ec4d3f372cfd2fafa",
+        "/private/tmp/incant-ci-profile-experiment/release/warm/sdk-check.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "/private/tmp/incant-ci-profile-experiment/release/warm/typescript.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "/private/tmp/incant-ci-profile-experiment/release/warm/eval-check.log": "40c97b5aed1c53750637c467186a302cf86ab8fb9eb3bd4b0e1cc2b8638ed8c4",
+        "/private/tmp/incant-ci-profile-experiment/release/warm/collaboration.log": "9016d7d9df43641389434e1fbeb1a23e508b160103af3ebcf7eed116c872c1b1"
+      },
+      "shipping_proofs": {
+        "shipping-runtime": {
+          "path": "/tmp/incant-ci-profile-experiment/release/warm/shipping-runtime/manifest.json",
+          "sha256": "a9a2734405456f3f9510eaf90a4b1ba69b75b822f7a3fec3dc0ba23e1d44591f"
+        },
+        "shipping-script": {
+          "path": "/tmp/incant-ci-profile-experiment/release/warm/shipping-script/result.json",
+          "sha256": "d345e98602d2184ea3f290db58e49833590c8b95b7897308325fcd9714983634"
+        }
+      }
+    },
+    "ci/cold": {
+      "result_sha256": "a3cde8c69bf9ae04cfb25a24ada102139aae6fde7f56cf80673c6d12e033c6fb",
+      "step_logs": {
+        "/private/tmp/incant-ci-profile-experiment/ci/cold/clippy.log": "00d4d14f3712ba80be289170fb4b75b0a5c6c15ae5b397a55b10216c019fcc1c",
+        "/private/tmp/incant-ci-profile-experiment/ci/cold/audio-device.log": "89ec10252ada8cd31e7c761ee0dcfe0a29b8089321a539e86f5a70a7fc80a3fd",
+        "/private/tmp/incant-ci-profile-experiment/ci/cold/ordinary.log": "0a6924cc3bc03030389dd48e2119d88fb56321f28b44bf45267c7c89c33f0c02",
+        "/private/tmp/incant-ci-profile-experiment/ci/cold/ignored.log": "8afff6e0d68548b3ea5b78a0809495755328d837d0129b6cf99fab1a69952377",
+        "/private/tmp/incant-ci-profile-experiment/ci/cold/tools.log": "05e562cd6b9d82d8b023c546bac69e05fbbe9c55970e4641788b21dc2cbc3cca",
+        "/private/tmp/incant-ci-profile-experiment/ci/cold/ktx.log": "1e83dcee27a3aae9ed82dca4f10f20b5f4971b4ad92dc8cd3c0333bc583750cd",
+        "/private/tmp/incant-ci-profile-experiment/ci/cold/schemas.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "/private/tmp/incant-ci-profile-experiment/ci/cold/native-saves.log": "f3881f7d97b78168fccbadba9403d61dc0db6fe7038da9a05dbb76f0274c8cd6",
+        "/private/tmp/incant-ci-profile-experiment/ci/cold/shipping-runtime.log": "375bc8d62d079ce3daeb926a86e10ea84a5246945f207fd517a6d3a82da807c0",
+        "/private/tmp/incant-ci-profile-experiment/ci/cold/shipping-script.log": "bf22c1654b8a2511a0d713da3c4c92a7184ebd30014ce0eb618540645b688e7d",
+        "/private/tmp/incant-ci-profile-experiment/ci/cold/physics-runtime.log": "d770697af2d06e395c595df14a7193f0d3bc14d7935f3c1b4f6c9b7933bf9491",
+        "/private/tmp/incant-ci-profile-experiment/ci/cold/character-movement.log": "5100278c9ce5e2b8e66f632a754c503ab8e3f56e81c951f336e50ca5d6f7dd68",
+        "/private/tmp/incant-ci-profile-experiment/ci/cold/compound-colliders.log": "64cf67c56dfa46b97ad3d91da2b2bf394620c194663d85ca5e91e68e60c923d8",
+        "/private/tmp/incant-ci-profile-experiment/ci/cold/game-saves.log": "494d3e076028a62c67a6237f6a365d80b0ea7b3891c1437eb743bf396808c707",
+        "/private/tmp/incant-ci-profile-experiment/ci/cold/game-input.log": "6f39213092fb3bea6d66e6999a24b8974eb002521f3a5822326adb32402c8edf",
+        "/private/tmp/incant-ci-profile-experiment/ci/cold/game-audio.log": "a3efd8e14958b59caa0ff28a3ecdcead80aabf94b5d0b3c603b6e9e1e12f7767",
+        "/private/tmp/incant-ci-profile-experiment/ci/cold/game-timers.log": "7b2e53c39da3311661bcc7e496ea0ef1b9046387a6858c2c6d60dc1c3ee65f42",
+        "/private/tmp/incant-ci-profile-experiment/ci/cold/game-actions.log": "424bc0e41a8a46f8037db3d191327c17509c16ed74d1226769887829baaa822a",
+        "/private/tmp/incant-ci-profile-experiment/ci/cold/game-localization.log": "dfbbf2b480441468384e56df390a3048d51dc1576a3dfaf7984d2a83880f272c",
+        "/private/tmp/incant-ci-profile-experiment/ci/cold/localization-exchange.log": "c4052e04a3662e2c240cbbce4d8d5f2e5613a90f09d0c8ca575e16f62d6104aa",
+        "/private/tmp/incant-ci-profile-experiment/ci/cold/game-navigation.log": "98754b2e2a2c79331ec3da28765738c457fc247e81e899ca3aad28c3a13c8fc0",
+        "/private/tmp/incant-ci-profile-experiment/ci/cold/navigation-grid.log": "eee2ed196ae976b8210fc0c33688ee4bd6d1140bde3ee9c1277e4df18255768d",
+        "/private/tmp/incant-ci-profile-experiment/ci/cold/game-steering.log": "6e1e876e1d054a99d9052695f67e84174aa0b5dd1a082d929f7077deb45f31fa",
+        "/private/tmp/incant-ci-profile-experiment/ci/cold/navigation-links.log": "582eef634e69054a4f11093065e87b842d32845c64afa411da32aeeac507047f",
+        "/private/tmp/incant-ci-profile-experiment/ci/cold/orthographic-cameras.log": "9d682fbfea8bb8d2b6af5fa2ed429dc51310c2eaba40e5e62f89bfd590e283cf",
+        "/private/tmp/incant-ci-profile-experiment/ci/cold/sprite-rendering.log": "e63687fd3cd3c60f98dca875600878df66a9475dbbc9e6728055d986a1f34b9a",
+        "/private/tmp/incant-ci-profile-experiment/ci/cold/sprite-atlases.log": "e761111a1d555137efc21d2184a6fd0d85dcebb1d3c50a67fc914716a62a49f4",
+        "/private/tmp/incant-ci-profile-experiment/ci/cold/pixel-perfect.log": "32ea7643ee72f5167d1064b024b31c5eca9968747ccfaa1270e7d26685ffc4ea",
+        "/private/tmp/incant-ci-profile-experiment/ci/cold/sdk-check.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "/private/tmp/incant-ci-profile-experiment/ci/cold/typescript.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "/private/tmp/incant-ci-profile-experiment/ci/cold/eval-check.log": "40c97b5aed1c53750637c467186a302cf86ab8fb9eb3bd4b0e1cc2b8638ed8c4",
+        "/private/tmp/incant-ci-profile-experiment/ci/cold/collaboration.log": "9016d7d9df43641389434e1fbeb1a23e508b160103af3ebcf7eed116c872c1b1"
+      },
+      "shipping_proofs": {
+        "shipping-runtime": {
+          "path": "/tmp/incant-ci-profile-experiment/ci/cold/shipping-runtime/manifest.json",
+          "sha256": "32511c4964462b6a15c4b7580bb45b4b889a857f90941788559fa98d89cbd83f"
+        },
+        "shipping-script": {
+          "path": "/tmp/incant-ci-profile-experiment/ci/cold/shipping-script/result.json",
+          "sha256": "faa7a4fec42d9cef1806125eb34c3d7825cf7c5aca513239cec4fbf0bb6167db"
+        }
+      }
+    },
+    "ci/warm": {
+      "result_sha256": "655302f5d1c9f1c82dfba4ef757cb39d286a619dd3bc114355d06032d9266844",
+      "step_logs": {
+        "/private/tmp/incant-ci-profile-experiment/ci/warm/clippy.log": "02d10ba1dffc6301a36bc607763b9f2e5dd1f86d8edf0de793fe7cbcbce951d1",
+        "/private/tmp/incant-ci-profile-experiment/ci/warm/audio-device.log": "098f55a3c6b6c5bdfa9e59c250a87f64449fe3b38237b442fbe847bdcd78b139",
+        "/private/tmp/incant-ci-profile-experiment/ci/warm/ordinary.log": "618afa960d60856feaedd83649dfedc43c0f00efdc7161f93805df6761520553",
+        "/private/tmp/incant-ci-profile-experiment/ci/warm/ignored.log": "ae9ec2ce9faa9158d3d56f700bee3952fcee95966f91e997ac42ceb5a5472b34",
+        "/private/tmp/incant-ci-profile-experiment/ci/warm/tools.log": "6f3b79852732d6b2503bd5ef9626b2f50571775b25bbcc3caef3ea85f5adf120",
+        "/private/tmp/incant-ci-profile-experiment/ci/warm/ktx.log": "1e83dcee27a3aae9ed82dca4f10f20b5f4971b4ad92dc8cd3c0333bc583750cd",
+        "/private/tmp/incant-ci-profile-experiment/ci/warm/schemas.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "/private/tmp/incant-ci-profile-experiment/ci/warm/native-saves.log": "962b7fd90598616492d416db852bf572cf381c29cdf8d94671634d1114d0d1ec",
+        "/private/tmp/incant-ci-profile-experiment/ci/warm/shipping-runtime.log": "e99256e8f8eef4ed172f2b45f3c4a957eeff550fe5ba4e5fa9564ed7e6e12c93",
+        "/private/tmp/incant-ci-profile-experiment/ci/warm/shipping-script.log": "2dc3276113c66d8e448eb1fca3ad742dc4eed2267a9d0827af7edd8e48389a8d",
+        "/private/tmp/incant-ci-profile-experiment/ci/warm/physics-runtime.log": "e875f98b748770d87c93bc3d8a2d6d3c3a4c8db33406276abec5705bb73eacf2",
+        "/private/tmp/incant-ci-profile-experiment/ci/warm/character-movement.log": "dc2018a89885d97796a776b95cb8d2f16c99f032b4abe42c3277f134e7808449",
+        "/private/tmp/incant-ci-profile-experiment/ci/warm/compound-colliders.log": "e1f68561e3fee59a8a805dd8f48ceae25fffea6e5032afd45d14cb4c2b5e158d",
+        "/private/tmp/incant-ci-profile-experiment/ci/warm/game-saves.log": "a4cf38823d853863acd3611a7bda8fb88adad126e7b7a88c05f601c99ea77945",
+        "/private/tmp/incant-ci-profile-experiment/ci/warm/game-input.log": "9b4e1849d57a753d539fe150b48746a9a4442ae1fa8cf568d188e87f001ebb19",
+        "/private/tmp/incant-ci-profile-experiment/ci/warm/game-audio.log": "8dfef754d6ba7cf678e29505b8a9e499ec3fce9357b4ea8ebeb4f7f3de517959",
+        "/private/tmp/incant-ci-profile-experiment/ci/warm/game-timers.log": "46f9d3489ceedc9b3a1169b2e5844f7eb6067b2e92a9fe8357287ab065767023",
+        "/private/tmp/incant-ci-profile-experiment/ci/warm/game-actions.log": "0520453dba28339b6e48c9d257ce02f8a8c9b3ab7ed55584a786ac19b663a734",
+        "/private/tmp/incant-ci-profile-experiment/ci/warm/game-localization.log": "d627f602954d277534a77c0f6632f46e7cf15f6fbeab48e0ae804c79f8a688d9",
+        "/private/tmp/incant-ci-profile-experiment/ci/warm/localization-exchange.log": "0d3eb1b33403c55fc13b2c92f90a9e18aeda468a53bd5ced21eb628ff2372076",
+        "/private/tmp/incant-ci-profile-experiment/ci/warm/game-navigation.log": "9d8fab9b41fa54398d8d79daf3375e04984f3e8f69c9533c3bf0e7196ce5ff3d",
+        "/private/tmp/incant-ci-profile-experiment/ci/warm/navigation-grid.log": "bee4fe05960a0bb2229609cd17c24ead2995f1f4ee2f73fadd840ddede44e882",
+        "/private/tmp/incant-ci-profile-experiment/ci/warm/game-steering.log": "5dd794da0d93b85c7265fe499caedb702d429c1b83a10346c1f827c5d78754d3",
+        "/private/tmp/incant-ci-profile-experiment/ci/warm/navigation-links.log": "1dcb080d7884f35c3550f7795d36fb182be439124d6c807ab2e8b53a49a2d058",
+        "/private/tmp/incant-ci-profile-experiment/ci/warm/orthographic-cameras.log": "c99d502317e2817e4e1dba7f58e2f094ccf69efebc9c3b9b5cb4d71c297cbbe5",
+        "/private/tmp/incant-ci-profile-experiment/ci/warm/sprite-rendering.log": "f2b1bb6e868040e052185625ab99eab94a0b199b75e7eee4e4221a3db3fe6841",
+        "/private/tmp/incant-ci-profile-experiment/ci/warm/sprite-atlases.log": "829e8b91a37ec9b6d156236aed3525de6fc765aca004a3f85e6de068749ef35d",
+        "/private/tmp/incant-ci-profile-experiment/ci/warm/pixel-perfect.log": "fa4284160367b83cf94944521040a5453b8abd653332eea75661177474533c0a",
+        "/private/tmp/incant-ci-profile-experiment/ci/warm/sdk-check.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "/private/tmp/incant-ci-profile-experiment/ci/warm/typescript.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "/private/tmp/incant-ci-profile-experiment/ci/warm/eval-check.log": "40c97b5aed1c53750637c467186a302cf86ab8fb9eb3bd4b0e1cc2b8638ed8c4",
+        "/private/tmp/incant-ci-profile-experiment/ci/warm/collaboration.log": "9016d7d9df43641389434e1fbeb1a23e508b160103af3ebcf7eed116c872c1b1"
+      },
+      "shipping_proofs": {
+        "shipping-runtime": {
+          "path": "/tmp/incant-ci-profile-experiment/ci/warm/shipping-runtime/manifest.json",
+          "sha256": "1e696872b7dd90f1da3d6d533ee8c39c1457c56bbbe16b42e5f6b32703d5cfa2"
+        },
+        "shipping-script": {
+          "path": "/tmp/incant-ci-profile-experiment/ci/warm/shipping-script/result.json",
+          "sha256": "f921130cee15c00e0f0b09e2abb2119c92ee2ad844330d3d6b30f926c9285c4e"
+        }
+      }
+    }
+  },
+  "unit_summary": [
+    {
+      "file": "/tmp/incant-ci-profile-experiment/release/cold/cargo-timings/cargo-timing-20261011T015546663Z-2c6474b0ff4966ed.html",
+      "sha256": "e8d31bd1c841cb56e5c1eb7feaa804270b199b489b4136d64510cc9148b3d2ac",
+      "compiled_units": 1104,
+      "workspace_units": 169,
+      "other_units": 935,
+      "observed_unit_span_seconds": 481.64000000000004,
+      "units_exposing_compilation_sections": 737,
+      "summed_section_seconds_not_wall_time": {
+        "frontend": 179.8400000000004,
+        "codegen": 400.579999999998
+      }
+    },
+    {
+      "file": "/tmp/incant-ci-profile-experiment/release/cold/cargo-timings/cargo-timing-20261011T020436542Z-2c6474b0ff4966ed.html",
+      "sha256": "8d06129a2b41444762b6203247df2924686608dca67953da90838adc4d7ab788",
+      "compiled_units": 0,
+      "workspace_units": 0,
+      "other_units": 0,
+      "observed_unit_span_seconds": 0,
+      "units_exposing_compilation_sections": 0,
+      "summed_section_seconds_not_wall_time": {}
+    },
+    {
+      "file": "/tmp/incant-ci-profile-experiment/release/cold/cargo-timings/cargo-timing-20261011T020513738Z-2c6474b0ff4966ed.html",
+      "sha256": "0c6be9d0f36a617cda91e66a036b7c998a64d0eebca9f36baac4a7df91c3d34d",
+      "compiled_units": 7,
+      "workspace_units": 3,
+      "other_units": 4,
+      "observed_unit_span_seconds": 28.4,
+      "units_exposing_compilation_sections": 1,
+      "summed_section_seconds_not_wall_time": {
+        "frontend": 2.58,
+        "codegen": 2.3600000000000003
+      }
+    },
+    {
+      "file": "/tmp/incant-ci-profile-experiment/ci/cold/cargo-timings/cargo-timing-20261011T021346882Z-2c6474b0ff4966ed.html",
+      "sha256": "3f56aad2bc1407383ee43f5caf6f936df422e1a16e54dff9bd26fdee609fb1de",
+      "compiled_units": 1104,
+      "workspace_units": 169,
+      "other_units": 935,
+      "observed_unit_span_seconds": 382.90000000000003,
+      "units_exposing_compilation_sections": 737,
+      "summed_section_seconds_not_wall_time": {
+        "frontend": 182.04000000000036,
+        "codegen": 328.189999999999
+      }
+    },
+    {
+      "file": "/tmp/incant-ci-profile-experiment/ci/cold/cargo-timings/cargo-timing-20261011T022643194Z-2c6474b0ff4966ed.html",
+      "sha256": "9a63a95c4d444a446c60b9373a0f4af6f5a8163869167b7622fb135139df3b96",
+      "compiled_units": 0,
+      "workspace_units": 0,
+      "other_units": 0,
+      "observed_unit_span_seconds": 0,
+      "units_exposing_compilation_sections": 0,
+      "summed_section_seconds_not_wall_time": {}
+    },
+    {
+      "file": "/tmp/incant-ci-profile-experiment/ci/cold/cargo-timings/cargo-timing-20261011T022731566Z-2c6474b0ff4966ed.html",
+      "sha256": "1bdc1a741fbb740b9f87d6358df096c77bb2dfcec7727b41cfac63e38ce876e5",
+      "compiled_units": 7,
+      "workspace_units": 3,
+      "other_units": 4,
+      "observed_unit_span_seconds": 20.32,
+      "units_exposing_compilation_sections": 1,
+      "summed_section_seconds_not_wall_time": {
+        "frontend": 2.28,
+        "codegen": 1.8199999999999998
+      }
+    },
+    {
+      "file": "/tmp/incant-ci-profile-experiment/release/warm/cargo-timings/cargo-timing-20261011T023510671Z-2c6474b0ff4966ed.html",
+      "sha256": "c2fe2cb9813e6c306037b32e516fe92b4df3b67618e60066c63e76ef59384c1e",
+      "compiled_units": 170,
+      "workspace_units": 169,
+      "other_units": 1,
+      "observed_unit_span_seconds": 198.78,
+      "units_exposing_compilation_sections": 28,
+      "summed_section_seconds_not_wall_time": {
+        "frontend": 9.709999999999997,
+        "codegen": 87.5
+      }
+    },
+    {
+      "file": "/tmp/incant-ci-profile-experiment/release/warm/cargo-timings/cargo-timing-20261011T023921510Z-2c6474b0ff4966ed.html",
+      "sha256": "8438ee6d1d8d3c9f2dbdbcd50b2db7fb3d73613eff3687920fe5f0974d7f80d7",
+      "compiled_units": 0,
+      "workspace_units": 0,
+      "other_units": 0,
+      "observed_unit_span_seconds": 0,
+      "units_exposing_compilation_sections": 0,
+      "summed_section_seconds_not_wall_time": {}
+    },
+    {
+      "file": "/tmp/incant-ci-profile-experiment/release/warm/cargo-timings/cargo-timing-20261011T023955632Z-2c6474b0ff4966ed.html",
+      "sha256": "d16dcbfdcdd3dedada0913365218a50f90718a42c56cf2b044b90869197afa3b",
+      "compiled_units": 3,
+      "workspace_units": 3,
+      "other_units": 0,
+      "observed_unit_span_seconds": 25.77,
+      "units_exposing_compilation_sections": 0,
+      "summed_section_seconds_not_wall_time": {}
+    },
+    {
+      "file": "/tmp/incant-ci-profile-experiment/ci/warm/cargo-timings/cargo-timing-20261011T024450723Z-2c6474b0ff4966ed.html",
+      "sha256": "8d56ccda4a150f04722885482795cb95c678bfebe07ecb39a64ca9bc93cf6d55",
+      "compiled_units": 170,
+      "workspace_units": 169,
+      "other_units": 1,
+      "observed_unit_span_seconds": 91.1,
+      "units_exposing_compilation_sections": 28,
+      "summed_section_seconds_not_wall_time": {
+        "frontend": 7.360000000000001,
+        "codegen": 38.669999999999995
+      }
+    },
+    {
+      "file": "/tmp/incant-ci-profile-experiment/ci/warm/cargo-timings/cargo-timing-20261011T024720552Z-2c6474b0ff4966ed.html",
+      "sha256": "d4efb20a3333ccf02e0ec8e144d78482fbe833226c8bb1dd01fd1a6a6092b0f9",
+      "compiled_units": 0,
+      "workspace_units": 0,
+      "other_units": 0,
+      "observed_unit_span_seconds": 0,
+      "units_exposing_compilation_sections": 0,
+      "summed_section_seconds_not_wall_time": {}
+    },
+    {
+      "file": "/tmp/incant-ci-profile-experiment/ci/warm/cargo-timings/cargo-timing-20261011T024807142Z-2c6474b0ff4966ed.html",
+      "sha256": "616578e45a0d9b6298bb1bed57aaf05580b149d50cbb4d95f5e3177491f0332a",
+      "compiled_units": 3,
+      "workspace_units": 3,
+      "other_units": 0,
+      "observed_unit_span_seconds": 19.43,
+      "units_exposing_compilation_sections": 0,
+      "summed_section_seconds_not_wall_time": {}
+    }
+  ],
+  "method_files": {
+    "/tmp/incant-ci-profile-experiment.py": "da746d31b96fa9dd2505e6c879ee2aedf9ef076e7d0dbcee4c900ec6475b3e88",
+    "/tmp/incant-ci-profile-compare.py": "7c34995babfe9453b9e369263a648c6064636e8e3fb702d41954ae7623f1c909",
+    "/tmp/incant-cargo-timings-summary.py": "c71efc50034385ca284a888778284cd7db42c7e1733101812cbba9c1ffe85751"
+  },
+  "adoption_validation": {
+    "passed": true,
+    "scope": "Current-main64 functional validation; not a timing comparison. Later main67/import integration is recorded separately.",
+    "source_freeze": {
+      "head": "30e6dc776deebbcc918ee986a3d151304dad2ea7",
+      "file_count": 2631,
+      "sha256": "bc5c3f44ddbde0ab95d9eb6ff0b2bef3f2d15a5e691d89a1a872ba775f50f18f",
+      "all_files_unchanged": true
+    },
+    "ordinary": 543,
+    "ignored": 66,
+    "steps": [
+      {
+        "name": "ordinary",
+        "args": [
+          "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/tools/cargo",
+          "test",
+          "--workspace",
+          "--profile",
+          "ci",
+          "--locked",
+          "--features",
+          "incant_audio_runtime/scene",
+          "--timings",
+          "-j2"
+        ],
+        "seconds": 273.21100620899233,
+        "exit_code": 0,
+        "log": "/tmp/incant-ci-profile-adoption/ordinary.log",
+        "sha256": "7fd2a36e09d4127fa0187a623ca991c51d039152b2b8a22581a14cf2eff7ffce"
+      },
+      {
+        "name": "ignored",
+        "args": [
+          "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/tools/cargo",
+          "test",
+          "--workspace",
+          "--profile",
+          "ci",
+          "--locked",
+          "--features",
+          "incant_audio_runtime/scene",
+          "--timings",
+          "-j2",
+          "--",
+          "--ignored",
+          "--test-threads=1",
+          "--nocapture"
+        ],
+        "seconds": 51.22576612501871,
+        "exit_code": 0,
+        "log": "/tmp/incant-ci-profile-adoption/ignored.log",
+        "sha256": "4aae087612b16abd686f26001ba65d49409aa517cb607eca9727d897e709b68a"
+      },
+      {
+        "name": "gpu-player-clippy",
+        "args": [
+          "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/tools/cargo",
+          "clippy",
+          "-p",
+          "incant_game_player",
+          "--features",
+          "render-gpu",
+          "--all-targets",
+          "--profile",
+          "ci",
+          "--locked",
+          "-j2",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "seconds": 0.3059046249836683,
+        "exit_code": 0,
+        "log": "/tmp/incant-ci-profile-adoption/gpu-player-clippy.log",
+        "sha256": "96b1de51cc6cc6325572c6cbbef06f4ec2d108f77a4d8bf9917a1a64a1b5af85"
+      },
+      {
+        "name": "probe-0",
+        "args": [
+          "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/tools/cargo",
+          "build",
+          "--workspace",
+          "--bin",
+          "incant_editor",
+          "--bin",
+          "incant_headless",
+          "--example",
+          "cook_scene",
+          "--example",
+          "collaboration_spike",
+          "--example",
+          "texture_probe",
+          "--example",
+          "save_world",
+          "--example",
+          "native_scene_audio",
+          "--example",
+          "no_renderer_fixtures",
+          "--profile",
+          "ci",
+          "--features",
+          "incant_editor/custom-protocol,incant_audio_runtime/scene",
+          "--locked",
+          "--timings",
+          "-j2"
+        ],
+        "seconds": 0.3647479170176666,
+        "exit_code": 0,
+        "log": "/tmp/incant-ci-profile-adoption/probe-0.log",
+        "sha256": "ffe6d96b82e5a59fa859a660ad9c17faca9fe504cfa5d2153031d20487ea7e66"
+      },
+      {
+        "name": "probe-1",
+        "args": [
+          "python3",
+          "tools/validate_ktx.py",
+          "--probe-binary",
+          "/tmp/incant-ci-profile-adoption/cargo/ci/examples/texture_probe"
+        ],
+        "seconds": 0.9307915829995181,
+        "exit_code": 0,
+        "log": "/tmp/incant-ci-profile-adoption/probe-1.log",
+        "sha256": "1e83dcee27a3aae9ed82dca4f10f20b5f4971b4ad92dc8cd3c0333bc583750cd"
+      },
+      {
+        "name": "probe-2",
+        "args": [
+          "/tmp/incant-ci-profile-adoption/cargo/ci/incant_headless",
+          "schema",
+          "schemas"
+        ],
+        "seconds": 0.8057482079893816,
+        "exit_code": 0,
+        "log": "/tmp/incant-ci-profile-adoption/probe-2.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "probe-3",
+        "args": [
+          "python3",
+          "tools/probes/native-saves.py",
+          "/tmp/incant-ci-profile-adoption/artifacts/native-world-saves",
+          "--headless-binary",
+          "/tmp/incant-ci-profile-adoption/cargo/ci/incant_headless",
+          "--cook-binary",
+          "/tmp/incant-ci-profile-adoption/cargo/ci/examples/cook_scene",
+          "--runtime-binary",
+          "/tmp/incant-ci-profile-adoption/cargo/ci/examples/save_world"
+        ],
+        "seconds": 0.3952894580143038,
+        "exit_code": 0,
+        "log": "/tmp/incant-ci-profile-adoption/probe-3.log",
+        "sha256": "b1e7b75fa4c7f2e6eb5cf0ac1596d4189dda6e623b8371dc40fd6bc53d009d7a"
+      },
+      {
+        "name": "probe-4",
+        "args": [
+          "python3",
+          "tools/shipping.py",
+          "/tmp/incant-ci-profile-adoption/artifacts/shipping-runtime",
+          "--headless-binary",
+          "/tmp/incant-ci-profile-adoption/cargo/ci/incant_headless",
+          "--cook-binary",
+          "/tmp/incant-ci-profile-adoption/cargo/ci/examples/cook_scene"
+        ],
+        "seconds": 75.57285804202547,
+        "exit_code": 0,
+        "log": "/tmp/incant-ci-profile-adoption/probe-4.log",
+        "sha256": "ab9c40b20e5e67f2565cc545e24e20b56c9d7bb4b57286322ccd44958a2659ac"
+      },
+      {
+        "name": "probe-5",
+        "args": [
+          "python3",
+          "tools/probes/native-scene-audio.py",
+          "/tmp/incant-ci-profile-adoption/artifacts/native-scene-audio",
+          "--headless-binary",
+          "/tmp/incant-ci-profile-adoption/cargo/ci/incant_headless",
+          "--cook-binary",
+          "/tmp/incant-ci-profile-adoption/cargo/ci/examples/cook_scene"
+        ],
+        "seconds": 98.38516479099053,
+        "exit_code": 0,
+        "log": "/tmp/incant-ci-profile-adoption/probe-5.log",
+        "sha256": "039bc038f613e1ca549cd552294edbcb813798018ea417e28cd5787c8fa94f88"
+      },
+      {
+        "name": "probe-6",
+        "args": [
+          "python3",
+          "tools/probes/native-game.py",
+          "/tmp/incant-ci-profile-adoption/artifacts/native-game-gpu",
+          "--gpu",
+          "--headless-binary",
+          "/tmp/incant-ci-profile-adoption/cargo/ci/incant_headless",
+          "--cook-binary",
+          "/tmp/incant-ci-profile-adoption/cargo/ci/examples/cook_scene",
+          "--audio-binary",
+          "/tmp/incant-ci-profile-adoption/cargo/ci/examples/native_scene_audio",
+          "--fixture-binary",
+          "/tmp/incant-ci-profile-adoption/cargo/ci/examples/no_renderer_fixtures"
+        ],
+        "seconds": 177.4169989580114,
+        "exit_code": 0,
+        "log": "/tmp/incant-ci-profile-adoption/probe-6.log",
+        "sha256": "d98d98e0bef45acac68e46287e863b31dd483a18b3f60c77fc9033ed1206106b"
+      },
+      {
+        "name": "probe-7",
+        "args": [
+          "python3",
+          "tools/probes/cooked-script.py",
+          "/tmp/incant-ci-profile-adoption/artifacts/cooked-native-script",
+          "--physics",
+          "--headless-binary",
+          "/tmp/incant-ci-profile-adoption/cargo/ci/incant_headless",
+          "--cook-binary",
+          "/tmp/incant-ci-profile-adoption/cargo/ci/examples/cook_scene"
+        ],
+        "seconds": 115.99379941698862,
+        "exit_code": 0,
+        "log": "/tmp/incant-ci-profile-adoption/probe-7.log",
+        "sha256": "11a9478cda41207195cc0f16c2cd46ba5934a37d526c0388d8ef5da4e7767810"
+      },
+      {
+        "name": "probe-8",
+        "args": [
+          "python3",
+          "tools/probes/physics-runtime.py",
+          "/tmp/incant-ci-profile-adoption/artifacts/physics-runtime-cli",
+          "--binary",
+          "/tmp/incant-ci-profile-adoption/cargo/ci/incant_headless"
+        ],
+        "seconds": 0.24390004100860097,
+        "exit_code": 0,
+        "log": "/tmp/incant-ci-profile-adoption/probe-8.log",
+        "sha256": "baf8f7ed0cc91734406d953694e3cf24df4f832eed369a3908763e4ada6de7ba"
+      },
+      {
+        "name": "probe-9",
+        "args": [
+          "python3",
+          "tools/probes/character-movement.py",
+          "/tmp/incant-ci-profile-adoption/artifacts/character-movement-cli",
+          "--binary",
+          "/tmp/incant-ci-profile-adoption/cargo/ci/incant_headless"
+        ],
+        "seconds": 1.7683682089846116,
+        "exit_code": 0,
+        "log": "/tmp/incant-ci-profile-adoption/probe-9.log",
+        "sha256": "2568dde06363741821347f9ab737703f2d25aac62a6f4ec990ac247e57532da6"
+      },
+      {
+        "name": "probe-10",
+        "args": [
+          "python3",
+          "tools/probes/compound-colliders.py",
+          "/tmp/incant-ci-profile-adoption/artifacts/compound-colliders-cli",
+          "--binary",
+          "/tmp/incant-ci-profile-adoption/cargo/ci/incant_headless"
+        ],
+        "seconds": 1.7210439580085222,
+        "exit_code": 0,
+        "log": "/tmp/incant-ci-profile-adoption/probe-10.log",
+        "sha256": "ada8aa59ff5e63e7228a1c684eb7a5175a45f0db690328ac38563e7dbbc2e3fe"
+      },
+      {
+        "name": "probe-11",
+        "args": [
+          "python3",
+          "tools/probes/game-saves.py",
+          "/tmp/incant-ci-profile-adoption/artifacts/game-saves-cli",
+          "--binary",
+          "/tmp/incant-ci-profile-adoption/cargo/ci/incant_headless"
+        ],
+        "seconds": 1.5643154160061385,
+        "exit_code": 0,
+        "log": "/tmp/incant-ci-profile-adoption/probe-11.log",
+        "sha256": "832166989a41324952eb9255738a585ea3f0f7b933becd9bc56b249f96cc808b"
+      },
+      {
+        "name": "probe-12",
+        "args": [
+          "python3",
+          "tools/probes/game-input.py",
+          "/tmp/incant-ci-profile-adoption/artifacts/game-input-cli",
+          "--binary",
+          "/tmp/incant-ci-profile-adoption/cargo/ci/incant_headless"
+        ],
+        "seconds": 1.6123704590136185,
+        "exit_code": 0,
+        "log": "/tmp/incant-ci-profile-adoption/probe-12.log",
+        "sha256": "3970fad8504d67fb0a7e7af1936a97da959e45b9af3e2e70ed384fd7285dac93"
+      },
+      {
+        "name": "probe-13",
+        "args": [
+          "python3",
+          "tools/probes/game-audio.py",
+          "/tmp/incant-ci-profile-adoption/artifacts/game-audio-cli",
+          "--binary",
+          "/tmp/incant-ci-profile-adoption/cargo/ci/incant_headless"
+        ],
+        "seconds": 3.3154407080146484,
+        "exit_code": 0,
+        "log": "/tmp/incant-ci-profile-adoption/probe-13.log",
+        "sha256": "f8c84de819a20aa956a0031c6ad670cfe07da9a034476f8c955c6057c69fb377"
+      },
+      {
+        "name": "probe-14",
+        "args": [
+          "python3",
+          "tools/probes/game-timers.py",
+          "/tmp/incant-ci-profile-adoption/artifacts/game-timers-cli",
+          "--binary",
+          "/tmp/incant-ci-profile-adoption/cargo/ci/incant_headless"
+        ],
+        "seconds": 1.3951305829978082,
+        "exit_code": 0,
+        "log": "/tmp/incant-ci-profile-adoption/probe-14.log",
+        "sha256": "9ac49232fe6efb032ba8860c8acce6f2b965d0020769adfa4e3ff43e45dd8ef9"
+      },
+      {
+        "name": "probe-15",
+        "args": [
+          "python3",
+          "tools/probes/game-actions.py",
+          "/tmp/incant-ci-profile-adoption/artifacts/game-actions-cli",
+          "--binary",
+          "/tmp/incant-ci-profile-adoption/cargo/ci/incant_headless"
+        ],
+        "seconds": 1.4471636670059524,
+        "exit_code": 0,
+        "log": "/tmp/incant-ci-profile-adoption/probe-15.log",
+        "sha256": "47b2f8fa517fec109e3f8a939519c23b95fd95720da48c3b031f9c30f7322c3b"
+      },
+      {
+        "name": "probe-16",
+        "args": [
+          "python3",
+          "tools/probes/game-localization.py",
+          "/tmp/incant-ci-profile-adoption/artifacts/game-localization-cli",
+          "--binary",
+          "/tmp/incant-ci-profile-adoption/cargo/ci/incant_headless"
+        ],
+        "seconds": 1.3664073750260286,
+        "exit_code": 0,
+        "log": "/tmp/incant-ci-profile-adoption/probe-16.log",
+        "sha256": "a47142757f9323b1022a4de3306e07c33b1c8473e735916d9b0d49b0febe21e5"
+      },
+      {
+        "name": "probe-17",
+        "args": [
+          "python3",
+          "tools/probes/localization-exchange.py",
+          "/tmp/incant-ci-profile-adoption/artifacts/localization-exchange-cli",
+          "--binary",
+          "/tmp/incant-ci-profile-adoption/cargo/ci/incant_headless"
+        ],
+        "seconds": 1.3764572920044884,
+        "exit_code": 0,
+        "log": "/tmp/incant-ci-profile-adoption/probe-17.log",
+        "sha256": "ddd10da92d2234557d74db4564d235ac9b5c5100e0a9141a028029cc8b8b375d"
+      },
+      {
+        "name": "probe-18",
+        "args": [
+          "python3",
+          "tools/probes/game-navigation.py",
+          "/tmp/incant-ci-profile-adoption/artifacts/game-navigation-cli",
+          "--binary",
+          "/tmp/incant-ci-profile-adoption/cargo/ci/incant_headless"
+        ],
+        "seconds": 1.6873890410060994,
+        "exit_code": 0,
+        "log": "/tmp/incant-ci-profile-adoption/probe-18.log",
+        "sha256": "c01f54ee395aee9a911f1f1e69dea2c29eb900e26719bd9ce96a043a4080cb29"
+      },
+      {
+        "name": "probe-19",
+        "args": [
+          "python3",
+          "tools/probes/navigation-grid.py",
+          "/tmp/incant-ci-profile-adoption/artifacts/navigation-grid-cli",
+          "--binary",
+          "/tmp/incant-ci-profile-adoption/cargo/ci/incant_headless"
+        ],
+        "seconds": 1.4216259999957401,
+        "exit_code": 0,
+        "log": "/tmp/incant-ci-profile-adoption/probe-19.log",
+        "sha256": "31a4c949d50a9c5d670f8a333bf87e31f61143f34cc7d4343fd74b11ec4cb44b"
+      },
+      {
+        "name": "probe-20",
+        "args": [
+          "python3",
+          "tools/probes/game-steering.py",
+          "/tmp/incant-ci-profile-adoption/artifacts/game-steering-cli",
+          "--binary",
+          "/tmp/incant-ci-profile-adoption/cargo/ci/incant_headless"
+        ],
+        "seconds": 5.5754957089957315,
+        "exit_code": 0,
+        "log": "/tmp/incant-ci-profile-adoption/probe-20.log",
+        "sha256": "cbc1de34d9e697b9bafb50dd46238039025ca037ef1a1170d36e1721607486d4"
+      },
+      {
+        "name": "probe-21",
+        "args": [
+          "python3",
+          "tools/probes/navigation-links.py",
+          "/tmp/incant-ci-profile-adoption/artifacts/navigation-links-cli",
+          "--binary",
+          "/tmp/incant-ci-profile-adoption/cargo/ci/incant_headless"
+        ],
+        "seconds": 1.3805330409959424,
+        "exit_code": 0,
+        "log": "/tmp/incant-ci-profile-adoption/probe-21.log",
+        "sha256": "641413db79b7f58be0cddcc14e42678bd2707c5ea0b87a2202f9beb3000df9bb"
+      },
+      {
+        "name": "probe-22",
+        "args": [
+          "python3",
+          "tools/probes/orthographic-cameras.py",
+          "/tmp/incant-ci-profile-adoption/artifacts/orthographic-cameras-cli",
+          "--binary",
+          "/tmp/incant-ci-profile-adoption/cargo/ci/incant_headless"
+        ],
+        "seconds": 1.5015787089942023,
+        "exit_code": 0,
+        "log": "/tmp/incant-ci-profile-adoption/probe-22.log",
+        "sha256": "d978691070eecae42853ce969c806da66e58034ac34b10eae9a20986fed57fb3"
+      },
+      {
+        "name": "probe-23",
+        "args": [
+          "python3",
+          "tools/probes/orthographic-cameras.py",
+          "/tmp/incant-ci-profile-adoption/artifacts/pixel-perfect-cameras-cli",
+          "--pixel-perfect",
+          "--binary",
+          "/tmp/incant-ci-profile-adoption/cargo/ci/incant_headless"
+        ],
+        "seconds": 1.493793417001143,
+        "exit_code": 0,
+        "log": "/tmp/incant-ci-profile-adoption/probe-23.log",
+        "sha256": "86da5d25673bc926d2b9235210b6a3f3a6374a5e320c29940781614edc7ece97"
+      },
+      {
+        "name": "probe-24",
+        "args": [
+          "python3",
+          "tools/probes/sprite-rendering.py",
+          "/tmp/incant-ci-profile-adoption/artifacts/sprite-rendering-cli",
+          "--binary",
+          "/tmp/incant-ci-profile-adoption/cargo/ci/incant_headless"
+        ],
+        "seconds": 1.4378194999881089,
+        "exit_code": 0,
+        "log": "/tmp/incant-ci-profile-adoption/probe-24.log",
+        "sha256": "89181c3563ebc0f8ae8c1ce89ce13fea6eaf78370cd88dd3ae9f50ce0bce92e2"
+      },
+      {
+        "name": "probe-25",
+        "args": [
+          "python3",
+          "tools/probes/sprite-atlases.py",
+          "/tmp/incant-ci-profile-adoption/artifacts/sprite-atlases-cli",
+          "--binary",
+          "/tmp/incant-ci-profile-adoption/cargo/ci/incant_headless"
+        ],
+        "seconds": 1.4305672500049695,
+        "exit_code": 0,
+        "log": "/tmp/incant-ci-profile-adoption/probe-25.log",
+        "sha256": "15087f2d171bf21f57726f57a3f054717e09ed615ecddd32a41525a8fcb2ccac"
+      },
+      {
+        "name": "probe-26",
+        "args": [
+          "/tmp/incant-ci-profile-adoption/cargo/ci/incant_headless",
+          "eval-check"
+        ],
+        "seconds": 0.007262332976097241,
+        "exit_code": 0,
+        "log": "/tmp/incant-ci-profile-adoption/probe-26.log",
+        "sha256": "40c97b5aed1c53750637c467186a302cf86ab8fb9eb3bd4b0e1cc2b8638ed8c4"
+      },
+      {
+        "name": "probe-27",
+        "args": [
+          "/tmp/incant-ci-profile-adoption/cargo/ci/examples/collaboration_spike"
+        ],
+        "seconds": 0.35978158301441,
+        "exit_code": 0,
+        "log": "/tmp/incant-ci-profile-adoption/probe-27.log",
+        "sha256": "9016d7d9df43641389434e1fbeb1a23e508b160103af3ebcf7eed116c872c1b1"
+      },
+      {
+        "name": "render-check",
+        "args": [
+          "python3",
+          "tools/platforms/render-check.py",
+          "--binary",
+          "/tmp/incant-ci-profile-adoption/cargo/ci/incant_headless",
+          "--output",
+          "/tmp/incant-ci-profile-adoption/render-check"
+        ],
+        "seconds": 1.8754085840191692,
+        "exit_code": 0,
+        "log": "/tmp/incant-ci-profile-adoption/render-check.log",
+        "sha256": "b327eba662db168080a87a0864f356bf265057b465d062ec0737a2bc126cc737"
+      }
+    ],
+    "proofs": {
+      "artifacts/shipping-runtime/manifest.json": {
+        "sha256": "6548e7fb322cce601accfd58ab15b69be7eb474da7afe36aae587adb9b8d29f0",
+        "result": {
+          "format_version": 1,
+          "target": "aarch64-apple-darwin",
+          "profile": "shipping",
+          "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+          "host": "macOS-26.6-arm64-arm-64bit-Mach-O",
+          "source_commit": "30e6dc776deebbcc918ee986a3d151304dad2ea7",
+          "source_sha256": {
+            "Cargo.toml": "7dc3d425289ac2ed41b64576814c497e06e51e4c7da6b00e558b99d1eef1e9ac",
+            "Cargo.lock": "55c49fba7b5ea7e6b7a8aed2f26138a3fa365b69034ed8457bd94392c4479c5e",
+            ".cargo/config.toml": "0d3b42ee7bc4ef237cb8af440c47e506dcc9cc8b24d49d3cd3d3fea76ae5caa1",
+            "rust-toolchain.toml": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124",
+            "crates/incant_runtime/Cargo.toml": "8b2473f89f4005944c1cde18411610fcd50b6cc4eb9406a7d39c50fa3edc49c9",
+            "crates/incant_types/Cargo.toml": "ae094bd227e3e585de808ad18da99b02cc7bc8282720cffeb6d3a8b3275c5e9c",
+            "tools/cargo": "9aef98d613601b0c374c1d0499afb39d710cbf5002faba537f21be9c11ff72e3",
+            "tools/shipping.py": "4defaadd378754f028f1286d5685de68d2ab3ac81daa3e81eafa6ba216c49f9a",
+            "tools/shipping_symbols.py": "de7d4b0c5523a7b2d281ce8713acb899997726c1144199e7ea8d7bd8ea3dc856",
+            "tools/probes/cooked-runtime.py": "169b060462ba482683dfbe09d5ac82d553bf944e291a7ea823ac6127b43cacc6",
+            "crates/incant_runtime/examples/run_scene.rs": "ba5d462927f1b14d3e7dee114cf3f2b1a105e0cd33168369d3a16bce87843e5b",
+            "crates/incant_runtime/examples/save_world.rs": "7ffcbae5f2f92d9405d0f14512dbb42dd8dccb69f77820045c66726474a07ef3",
+            "crates/incant_runtime/src/audio.rs": "f0e4b40768a3b3aa4bef5e50d8e4dcb531225ff7937b0d9bc7b358a4ead9dc96",
+            "crates/incant_runtime/src/audio_binary.rs": "1121b4cc9151d929bb112f40625bb7620ac12fd9dda52eabe529ac5ca80d36ce",
+            "crates/incant_runtime/src/binary.rs": "33adf7822f29ecc2f447e219c883d6a4f56f03e5bb631fe8976895d2a73d926c",
+            "crates/incant_runtime/src/columns/tests.rs": "96e0caa0aace60e87095d3d22651aba5345db828d220b2dfc0bfb15f68405ad8",
+            "crates/incant_runtime/src/columns.rs": "80a615d853fea52e86cc58e634dfad7b2e371d944f840b91ebc888fa23718c66",
+            "crates/incant_runtime/src/commands.rs": "f573f62a0d91222fe90c76eba7918ab1c95009e34731f1f633fdad61529dd60d",
+            "crates/incant_runtime/src/hierarchy.rs": "242b534ad778bf4a2bb3aa67db0a0e1f620566a6a15650abbfda9e61a24224bc",
+            "crates/incant_runtime/src/lib.rs": "0e41de8c5fd522a0a08d6ab9edfb4a467f9c0b7519ddc70a6d986bb1210d6d70",
+            "crates/incant_runtime/src/physics.rs": "ba1f98eddeef3becebe82831ea45cf6de4f7462e8e24ca422e4e68f7152a397f",
+            "crates/incant_runtime/src/physics_binary.rs": "39b766313db1d0d0487e90e419cc777e18d7062a556b237608ed03c93c65e822",
+            "crates/incant_runtime/src/save.rs": "9bddffd92613385b11eb742c3e782511a45cb9b53c53e45907936f707530a003",
+            "crates/incant_runtime/src/scene.rs": "eb99228ef410492742b8e0a628a4527a3e825d0e20939e1456b48442cdd437b6",
+            "crates/incant_runtime/src/spatial.rs": "a0ce8093d13e2865421d84e9b0c6026e1e174590f90d7bf5b5af4b101ae605a4",
+            "crates/incant_runtime/src/spatial_binary.rs": "ae1ddaf70c6d46188b085614ba243f928766b66d6f3497d3dee849821fb0d192",
+            "crates/incant_runtime/src/spatial_commands.rs": "c1a003b8460d3667cdfcad95a639bc7a5bea8887b11ceffee2b9ff4e0cafe087",
+            "crates/incant_runtime/src/spatial_view.rs": "ea96a00681debf3cfbf8cdc02395f988223cff37902a48b7bfc65448299859d0",
+            "crates/incant_runtime/src/sprite.rs": "f00cd559c6b538d904eae5d3551102da27711556b51f3b59b6e9b9b9169ac249",
+            "crates/incant_runtime/src/sprite_binary.rs": "e211217db25b5f07223782cf722646bf474f23ac93b39809817d73af01bc5c65",
+            "crates/incant_runtime/src/world.rs": "36bd5ff51eb420cfcaa30299099f590dce2ef970c86ba2a10e693978eff3cdec",
+            "crates/incant_runtime/src/world_identity.rs": "7ffc1f183c00110cc06f48f678b07f220d6bad73ed3e62690db142c0df23a809",
+            "crates/incant_runtime/tests/audio.rs": "0de8804b3dab49a345b4dc20d9d7390dd4d9ce3e15072fe6baed600c0bc0f3be",
+            "crates/incant_runtime/tests/columns.rs": "8c86e7033b7b5c7ca9171a5a2587dfbff088d5b6bbd151d49bb03da7a3fc82c3",
+            "crates/incant_runtime/tests/numeric_boundaries.rs": "2d246f6b4bc3a0bb28e0dbeae072b2ad892235aa5f0a30ebb8b462c48d13741f",
+            "crates/incant_runtime/tests/physics.rs": "596f8ce664cfd30b16783281848283d0bf0e1afb62826b36e60874c5e6b7c27f",
+            "crates/incant_runtime/tests/saves.rs": "be5a4e056f90574837c83ee8a5fe812267b5ed02198480187dabd4729e5d6458",
+            "crates/incant_runtime/tests/scenes.rs": "124ec99f505f7a37b7b840ff353ad3cf0146e316b52601fd8b333efa2123665f",
+            "crates/incant_runtime/tests/spatial.rs": "beab2edc18b44feb02fbf766b97035227bf0df9404fa046a88735f3ae19d6a7d",
+            "crates/incant_runtime/tests/sprites.rs": "c98212457bd9be306161b6b2b9c71cb04d044ab1573675579973f573f777f066",
+            "crates/incant_runtime/tests/structural.rs": "ac002e67cbee6ea7523b30ec94959d5dc2a4e168853bbbe66aa697afcc03cd9b",
+            "crates/incant_types/src/audio.rs": "31a41005ed056423ce3c7d3882429550d6383a58a1ea5799e698c25d150a3feb",
+            "crates/incant_types/src/camera.rs": "28eaace0a774685b9bc72962480520a8646fca4310b5eb1d3ac995444dfb0de2",
+            "crates/incant_types/src/collider_shapes.rs": "dc2efc4d76e8671b03bc38eb92e8db0161f4613417772644028e0b4ecb958979",
+            "crates/incant_types/src/lib.rs": "4e460ff3803f1ef07682439da8a6c3bec87a044abd2bbfd0e1dc565e9b38dcba",
+            "crates/incant_types/src/lights.rs": "c69e1a4f9b682f1f5bf267d57502387b9f8e6b4a42c32c752c0176f43c9ac935",
+            "crates/incant_types/src/physics.rs": "ec1dd966a85676197f7283133be1b274666135a8cfe6403a477a130a6a43769d",
+            "crates/incant_types/src/physics_validation.rs": "c8a2e2e8b77020ea2ae39d047a9be13081003ef6cf236ca292a52aed4f4a3a98",
+            "crates/incant_types/src/render.rs": "e02d42ddcdbcdeb607c4ae307f30b02805adae2b68cd1fadee2eaed603f3d881",
+            "crates/incant_types/src/transform.rs": "b22948c2013800b8b76d1d18693e7a406358e2d554aad01a1e6d1f87adccf08c",
+            "crates/incant_types/src/visual_asset.rs": "6dae6f3e5a2f98dd208616f01b1a84dfcc5588cebda819b07c52421e24341791"
+          },
+          "codegen": {
+            "incant_runtime": {
+              "opt-level": "3",
+              "codegen-units": "1",
+              "panic": "abort",
+              "debuginfo": "2",
+              "split-debuginfo": "packed"
+            },
+            "run_scene": {
+              "opt-level": "3",
+              "codegen-units": "1",
+              "panic": "abort",
+              "debuginfo": "2",
+              "split-debuginfo": "packed",
+              "lto": "fat"
+            }
+          },
+          "symbols": {
+            "format": "Mach-O/dSYM",
+            "uuids": {
+              "arm64": "0b7318f3-f5cb-3f24-a4fb-7a2b7700996c"
+            }
+          },
+          "player_files": {
+            "run_scene": {
+              "sha256": "e23c878243d100dd39c24c05973d6a1387106e8411994a9d9dd9c97d117f6cc2",
+              "bytes": 2637320
+            }
+          },
+          "symbol_files": {
+            "run_scene.dSYM/Contents/Info.plist": {
+              "sha256": "591657138d3e3dd69d5e0daf31d1b8c722eb1fe9b526461173523a1f53bbbc90",
+              "bytes": 655
+            },
+            "run_scene.dSYM/Contents/Resources/DWARF/run_scene-5e96ec133febc70d": {
+              "sha256": "f99c285ec5295a59ea1402c69a8cd748095473e6e69928e5739ad73d616fe35a",
+              "bytes": 68525463
+            },
+            "run_scene.dSYM/Contents/Resources/Relocations/aarch64/run_scene-5e96ec133febc70d.yml": {
+              "sha256": "d2e3dd933a524b12ef89436628c927405f7b3e44642ef058da349e30c7a06183",
+              "bytes": 1044107
+            }
+          },
+          "executable_checks": {
+            "build_info": "panic=abort debug_assertions=false",
+            "panic_exit_code": -6,
+            "drop_guard_ran": false
+          },
+          "source_free_checks": {
+            "passed": true,
+            "authoring_via_commands": true,
+            "cook_preserves_authoring": {
+              "game.incant.json": "197137731fcdadf7e7ce073e272d49e99f331635cb9e66c8ff99503ecb2c6b94",
+              "history.jsonl": "9ad83dcbb414d0f2b219785ad5faf741f54b024471fbd779f60a0029e03bccb0"
+            },
+            "authoring_files_removed_before_runtime": true,
+            "process_restarts_equal": true,
+            "reset_discards_simulation": true,
+            "corruption_rejected": true,
+            "scene_bytes": 304,
+            "scene_sha256": "7b69f24a90a47bd4316a11308942c1afef48001bd903fba69cbf4fb05389e8c5",
+            "binaries": {
+              "incant_headless": "743e515e2f9e13b41e1e3f7a4e7394e841912a610d420bee4fe984e10f45b7fd",
+              "cook_scene": "85d06a0b02547378c99273fd353a365e85cca492e5b691769fdd30525da44be7",
+              "run_scene": "e23c878243d100dd39c24c05973d6a1387106e8411994a9d9dd9c97d117f6cc2"
+            },
+            "scope": "Transform/Velocity native-world foundation; no script, render, physics or device performance gate"
+          },
+          "scope": "Native Transform/Velocity runner; no phone, PGO, export-pipeline or phase-gate certification"
+        }
+      },
+      "artifacts/native-scene-audio/result.json": {
+        "sha256": "388600a8173004690563500fceed392c28cf8847651dd18023d3fb06c14c091b",
+        "result": {
+          "passed": true,
+          "target": "aarch64-apple-darwin",
+          "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+          "codegen": {
+            "incant_assets_runtime": {
+              "opt-level": "3",
+              "codegen-units": "1",
+              "panic": "abort",
+              "debuginfo": "2",
+              "split-debuginfo": "packed"
+            },
+            "incant_audio_runtime": {
+              "opt-level": "3",
+              "codegen-units": "1",
+              "panic": "abort",
+              "debuginfo": "2",
+              "split-debuginfo": "packed"
+            },
+            "incant_runtime": {
+              "opt-level": "3",
+              "codegen-units": "1",
+              "panic": "abort",
+              "debuginfo": "2",
+              "split-debuginfo": "packed"
+            },
+            "native_scene_audio": {
+              "opt-level": "3",
+              "codegen-units": "1",
+              "panic": "abort",
+              "debuginfo": "2",
+              "split-debuginfo": "packed",
+              "lto": "fat"
+            }
+          },
+          "symbol_identity": {
+            "format": "Mach-O/dSYM",
+            "uuids": {
+              "arm64": "e2f84ce4-0a2c-36b5-a392-6a254ca3c43b"
+            }
+          },
+          "player_bytes": 2919056,
+          "player_sha256": "10faf75178d1f38f77a639c7683d97dd2ff75258379bb8486fa1df04f7d6aad6",
+          "built_targets": [
+            "approx",
+            "arrayvec",
+            "async_channel",
+            "async_executor",
+            "async_task",
+            "atomic_arena",
+            "atomic_waker",
+            "autocfg",
+            "bevy_ecs",
+            "bevy_ecs_macro_logic",
+            "bevy_ecs_macros",
+            "bevy_macro_utils",
+            "bevy_platform",
+            "bevy_ptr",
+            "bevy_tasks",
+            "bevy_utils",
+            "bitflags",
+            "block_buffer",
+            "build-script-build",
+            "bumpalo",
+            "bytemuck",
+            "byteorder",
+            "cfg_if",
+            "concurrent_queue",
+            "convert_case",
+            "cpufeatures",
+            "crossbeam_deque",
+            "crossbeam_epoch",
+            "crossbeam_queue",
+            "crossbeam_utils",
+            "crypto_common",
+            "derive_more",
+            "derive_more_impl",
+            "digest",
+            "disqualified",
+            "downcast_rs",
+            "dyn_clone",
+            "either",
+            "ena",
+            "equivalent",
+            "errno",
+            "event_listener",
+            "event_listener_strategy",
+            "fastrand",
+            "fixedbitset",
+            "foldhash",
+            "futures_core",
+            "futures_io",
+            "futures_lite",
+            "generic_array",
+            "getrandom",
+            "glam",
+            "glamx",
+            "hash32",
+            "hashbrown",
+            "heapless",
+            "incant_2d",
+            "incant_assets_runtime",
+            "incant_audio_runtime",
+            "incant_physics_runtime",
+            "incant_runtime",
+            "incant_types",
+            "indexmap",
+            "itoa",
+            "kira",
+            "libc",
+            "libm",
+            "log",
+            "matrixmultiply",
+            "memchr",
+            "mint",
+            "nalgebra",
+            "nalgebra_macros",
+            "native_scene_audio",
+            "nonmax",
+            "num_complex",
+            "num_derive",
+            "num_integer",
+            "num_rational",
+            "num_traits",
+            "once_cell",
+            "ordered_float",
+            "parking",
+            "parry3d",
+            "pastey",
+            "pin_project_lite",
+            "proc_macro2",
+            "profiling",
+            "profiling_procmacros",
+            "quote",
+            "rapier3d",
+            "rawpointer",
+            "rayon",
+            "rayon_core",
+            "ref_cast",
+            "ref_cast_impl",
+            "rstar",
+            "rtrb",
+            "rustix",
+            "schemars",
+            "schemars_derive",
+            "serde",
+            "serde_core",
+            "serde_derive",
+            "serde_derive_internals",
+            "serde_json",
+            "sha2",
+            "simba",
+            "slab",
+            "slotmap",
+            "smallvec",
+            "spin",
+            "stable_deref_trait",
+            "static_assertions",
+            "syn",
+            "tempfile",
+            "thiserror",
+            "thiserror_impl",
+            "thread_local",
+            "toml_datetime",
+            "toml_edit",
+            "toml_parser",
+            "triple_buffer",
+            "typenum",
+            "ulid",
+            "unicode_ident",
+            "unicode_segmentation",
+            "unicode_xid",
+            "variadics_please",
+            "version_check",
+            "wide",
+            "winnow",
+            "zmij"
+          ],
+          "headless_sha256": "743e515e2f9e13b41e1e3f7a4e7394e841912a610d420bee4fe984e10f45b7fd",
+          "cook_sha256": "85d06a0b02547378c99273fd353a365e85cca492e5b691769fdd30525da44be7",
+          "public_import": {
+            "asset": {
+              "id": "01M4MG6PNA087ZW1BAB9S9R87Q",
+              "kind": "audio",
+              "name": "tone",
+              "path": "tone.wav",
+              "sha256": "4a24dd0240956f6ad00cd68d2f816e25f6662a170b6a0a92ae86a0a10aa5176e"
+            },
+            "cache_hit": false,
+            "changed": true,
+            "details": {
+              "channels": 2,
+              "dependencies": [
+                {
+                  "path": "tone.wav",
+                  "sha256": "59aca4ec1400bba63489f30c73a82fb29e82c83a923fcb468fa1ba0176dab6e3"
+                }
+              ],
+              "duration_seconds": 0.5,
+              "frames": 24000,
+              "sample_rate": 48000
+            },
+            "revision": 1
+          },
+          "project_hash_before_delete": "ac088ad18a46cc2892d02c08aed19c48be674107e072cf0cf6ef6fb40b89a31a",
+          "authoring_and_build_storage_deleted": true,
+          "runtime_package_retained": [
+            "binary scenes",
+            "clips.bin ID/fingerprint table",
+            "cooked manifests and PCM"
+          ],
+          "native_fixed_ticks_per_process": 120,
+          "runs": 16,
+          "results": [
+            {
+              "fixture": "static-0.5",
+              "batch": 97,
+              "pcm_sha256": "e1cdfaf792d5e4f240ed00d9d3d4ba0023db33d2f69c6f85808662da9dbdf540",
+              "rms": 0.055201065777595676,
+              "left_early_balance": 109.37785539384716,
+              "right_late_balance": -113.87727804215658
+            },
+            {
+              "fixture": "static-0.5",
+              "batch": 8192,
+              "pcm_sha256": "e91a0902a7ced66dbe1348c2052e74c02e760e72b2237835120ab03a0b956e1a",
+              "rms": 0.05519786964174115,
+              "left_early_balance": 109.36339810307852,
+              "right_late_balance": -113.89286911220825
+            },
+            {
+              "fixture": "static-1.7",
+              "batch": 97,
+              "pcm_sha256": "84e51bada946f4136ee013d0f6ffcb3797a7bdf2b0229bb3a4251e1ed5a8671b",
+              "rms": 0.05519924752036359,
+              "left_early_balance": 109.38758277808083,
+              "right_late_balance": -113.94347902183993
+            },
+            {
+              "fixture": "static-1.7",
+              "batch": 8192,
+              "pcm_sha256": "5f5d61bb5b24969124ef9cb4075cb3e1f5db6f5d472b950bc56f28b0ffe8e028",
+              "rms": 0.0552039275403174,
+              "left_early_balance": 109.37325925783125,
+              "right_late_balance": -113.9589216232869
+            },
+            {
+              "fixture": "stream-0.5",
+              "batch": 97,
+              "pcm_sha256": "1e2dae840903d9fdc9c6658962f28e46b349df24a01a880b257a3d905081e72c",
+              "rms": 0.055201065874033055,
+              "left_early_balance": 109.37785539384716,
+              "right_late_balance": -113.87727804215658
+            },
+            {
+              "fixture": "stream-0.5",
+              "batch": 8192,
+              "pcm_sha256": "88156dbb9ced8546077456c2c94fcf38a1bb5d4709d2470abe580af9ff9a240c",
+              "rms": 0.05519786973818235,
+              "left_early_balance": 109.36339810307852,
+              "right_late_balance": -113.89286911220825
+            },
+            {
+              "fixture": "stream-1.7",
+              "batch": 97,
+              "pcm_sha256": "27b7bc4c40756287492035b9fc2eeb02b10eb2ce9e17d23fc73f48492c48f9b9",
+              "rms": 0.05519924751637033,
+              "left_early_balance": 109.3875827721512,
+              "right_late_balance": -113.94347898640432
+            },
+            {
+              "fixture": "stream-1.7",
+              "batch": 8192,
+              "pcm_sha256": "b2b0e2c2c88ed0f1af43583375adeef7ffaf7730eaf5240b9152642482b5ceb3",
+              "rms": 0.05520392753624169,
+              "left_early_balance": 109.37325925188458,
+              "right_late_balance": -113.95892158587951
+            }
+          ],
+          "repeat_exact": true,
+          "moving_parameter_cross_batch_bit_equality_claimed": false,
+          "audio_device_opened": false,
+          "vm_input_audio_session_integration": false,
+          "audio_cursor_saves": false,
+          "reference_phone_gate": false,
+          "failure_semantics": "Simulation/sync/render failure stops before output creation; no world rollback. Output I/O is not atomic and may leave a partial PCM file."
+        }
+      },
+      "artifacts/native-game-gpu/result.json": {
+        "sha256": "0efcde27ba2174fbc65b071e1d270a75a9169527f5b63d7616703cfe2473dbd8",
+        "result": {
+          "passed": true,
+          "target": "aarch64-apple-darwin",
+          "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+          "codegen": {
+            "incant_render_game": {
+              "opt-level": "3",
+              "codegen-units": "1",
+              "panic": "abort"
+            },
+            "incant_render_native": {
+              "opt-level": "3",
+              "codegen-units": "1",
+              "panic": "abort"
+            },
+            "incant_render_data": {
+              "opt-level": "3",
+              "codegen-units": "1",
+              "panic": "abort"
+            },
+            "incant_render_gpu_host": {
+              "opt-level": "3",
+              "codegen-units": "1",
+              "panic": "abort"
+            },
+            "incant_render": {
+              "opt-level": "3",
+              "codegen-units": "1",
+              "panic": "abort"
+            },
+            "wgpu": {
+              "opt-level": "3",
+              "codegen-units": "1",
+              "panic": "abort"
+            },
+            "incant_input": {
+              "opt-level": "3",
+              "codegen-units": "1",
+              "panic": "abort"
+            },
+            "incant_script": {
+              "opt-level": "3",
+              "codegen-units": "1",
+              "panic": "abort"
+            },
+            "incant_runtime": {
+              "opt-level": "3",
+              "codegen-units": "1",
+              "panic": "abort"
+            },
+            "incant_physics_runtime": {
+              "opt-level": "3",
+              "codegen-units": "1",
+              "panic": "abort"
+            },
+            "rapier3d": {
+              "opt-level": "3",
+              "codegen-units": "1",
+              "panic": "abort"
+            },
+            "incant_assets_runtime": {
+              "opt-level": "3",
+              "codegen-units": "1",
+              "panic": "abort"
+            },
+            "incant_audio_runtime": {
+              "opt-level": "3",
+              "codegen-units": "1",
+              "panic": "abort"
+            },
+            "incant_game_runtime": {
+              "opt-level": "3",
+              "codegen-units": "1",
+              "panic": "abort"
+            },
+            "incant_game_player": {
+              "opt-level": "3",
+              "codegen-units": "1",
+              "panic": "abort",
+              "lto": "fat",
+              "debuginfo": "2",
+              "split-debuginfo": "packed"
+            }
+          },
+          "symbol_identity": {
+            "format": "Mach-O/dSYM",
+            "uuids": {
+              "arm64": "4e4fb5f4-d2a7-3d5f-a110-d3a7ae0c9c83"
+            }
+          },
+          "player_bytes": 7404688,
+          "player_sha256": "9bd295d3687ddb88ae725a838f2ea3fbb65589c1efc91876582530797d57cb04",
+          "script_metadata": {
+            "build_id": "726644ae0c97ed63b640b3acea16b1adc11fd60be83c06681c97c7908920d051",
+            "bytecode_bytes": 2390,
+            "bytecode_sha256": "9ee518bee91197aef63f159d764106f7e1a04b4f6075a7d38c2b60351663e9cd",
+            "debug_line_tables": true,
+            "embedded_source": false,
+            "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+            "format": 1,
+            "hardening_sha256": "4a2d87348651fab15d47582cce2fba82058255ddb2a2a29386db7705bea1cb23",
+            "source_map_sha256": null,
+            "source_name": "embedded-game.js",
+            "source_sha256": "0c6bc11c956ee002da8bb2ceb466895ac627787183d2735cc895d7c8530e29d1",
+            "symbolication": "map CommonJS locations after subtracting wrapper_prefix_lines; automatic runtime stack remapping remains unsupported",
+            "target": "aarch64-apple-darwin",
+            "trust": "fresh compiler output embedded by trusted native build; hashes are not authentication",
+            "wrapper_prefix_lines": 3
+          },
+          "source_compiler_symbols_absent": true,
+          "dynamic_source_routes_rejected": true,
+          "headless_sha256": "743e515e2f9e13b41e1e3f7a4e7394e841912a610d420bee4fe984e10f45b7fd",
+          "cook_sha256": "85d06a0b02547378c99273fd353a365e85cca492e5b691769fdd30525da44be7",
+          "audio_example_sha256": "509442b1a8c0ff326e561b1f4d91727ed9c65d72e323ac8db3e459906191e785",
+          "fixture_tool_sha256": "8eadd911abac3151881d9f0888eb9281e62c335754e426ab3b475765b4d8fe1c",
+          "public_import": {
+            "asset": {
+              "id": "01M4MG9PSM1Y7CTY8D8HHB12E8",
+              "kind": "audio",
+              "name": "tone",
+              "path": "tone.wav",
+              "sha256": "4a24dd0240956f6ad00cd68d2f816e25f6662a170b6a0a92ae86a0a10aa5176e"
+            },
+            "cache_hit": false,
+            "changed": true,
+            "details": {
+              "channels": 2,
+              "dependencies": [
+                {
+                  "path": "tone.wav",
+                  "sha256": "59aca4ec1400bba63489f30c73a82fb29e82c83a923fcb468fa1ba0176dab6e3"
+                }
+              ],
+              "duration_seconds": 0.5,
+              "frames": 24000,
+              "sample_rate": 48000
+            },
+            "revision": 1
+          },
+          "public_model_import": {
+            "asset": {
+              "id": "01M4MG9PT8THKMBZ2CFTZZGHYV",
+              "kind": "model",
+              "name": "tri",
+              "path": "tri.gltf",
+              "sha256": "eee5c6bca733d77735113773adbddd0eca28e08f96dd6c2d5a767be3321c00a4"
+            },
+            "cache_hit": false,
+            "changed": true,
+            "details": {
+              "dependencies": [
+                {
+                  "path": "tri.bin",
+                  "sha256": "d8b87038ed2ace74ed183166f6b0a541eab77f7184d50e65edc4bca5ccb5445a"
+                },
+                {
+                  "path": "tri.gltf",
+                  "sha256": "34ef92ca7a431a27baf00c0291a5d30027cdf03e4e5243adc0a38ea8c863d722"
+                }
+              ],
+              "meshes": 1,
+              "textures": 0,
+              "vertices": 3
+            },
+            "revision": 2
+          },
+          "public_atlas_import": {
+            "asset": {
+              "id": "01M4MG9PTZWX1HCJFM0HCM2B82",
+              "import_settings": {
+                "type": "texture",
+                "usage": "color"
+              },
+              "kind": "texture",
+              "name": "numeric.atlas",
+              "path": "numeric.atlas.json",
+              "sha256": "0ccadbcac607c8b572828b741073d9f314f5d60eaee7dc6b23a6f4b5a4caa452"
+            },
+            "cache_hit": false,
+            "changed": true,
+            "details": {
+              "atlas": {
+                "frames": {
+                  "00000000000000000000000041": {
+                    "name": "Numeric fixture",
+                    "region": [
+                      2,
+                      2,
+                      4,
+                      4
+                    ]
+                  }
+                },
+                "id": "00000000000000000000000042",
+                "padding": 2,
+                "size": [
+                  8,
+                  8
+                ]
+              },
+              "dependencies": [
+                {
+                  "path": "numeric.atlas.json",
+                  "sha256": "ddd406f5539f0d5e9f000e170fa9650d226268c018cbe451eb15be400b8e0d25"
+                },
+                {
+                  "path": "numeric.png",
+                  "sha256": "eae41c0e5134130ebe12122371d90eb92d13e11b545fbe27316ec2c311a1c109"
+                }
+              ],
+              "format": "rgba8_srgb",
+              "height": 8,
+              "mip_levels": 4,
+              "usage": "color",
+              "width": 8
+            },
+            "revision": 3
+          },
+          "cpu_render_input": false,
+          "gpu_submitted": true,
+          "on_screen_presentation": false,
+          "gpu_build_cpu_mode_preserved": true,
+          "sprite_cpu_mode_preserved": true,
+          "project_hash_before_delete": "bc62b4e2d7448b4eb2488bb7513dc8baeea51488798facc6ce70f280d48fd4a1",
+          "authoring_and_build_storage_deleted": true,
+          "removed_scope": "authoring project/WAV/glTF/bin/PNG/atlas/journal/script source and fresh Cargo storage",
+          "retained_runtime_inputs": [
+            "binary scenes",
+            "clips.bin",
+            "cooked PCM/manifests",
+            "startup input.json/actions.json",
+            "cooked model payloads/manifests",
+            "cooked KTX2/atlas metadata"
+          ],
+          "repeat_exact": true,
+          "recorded_ticks_per_process": 120,
+          "audio_processes": 16,
+          "results": [
+            {
+              "fixture": "static",
+              "rate": 44117,
+              "report": {
+                "frames": 88234,
+                "pcm_sha256": "a4722ea4c42fa7e629e2bc7bd99127d45e2616383113d71bec57379b771c99c8",
+                "render_input": {
+                  "binding_generation": 0,
+                  "camera": "00000000000000000000000000000004",
+                  "camera_position": [
+                    0.0,
+                    0.0,
+                    8.0
+                  ],
+                  "decoded_payload_bytes": 156,
+                  "first_model_position": [
+                    2.9500136375427246,
+                    0.0,
+                    0.0
+                  ],
+                  "first_sprite_position": null,
+                  "gpu": {
+                    "accepted_frames": 120,
+                    "adapter": {
+                      "backend": "Metal",
+                      "device_type": "IntegratedGpu",
+                      "name": "Apple M5 Pro"
+                    },
+                    "captures": [
+                      {
+                        "frame": 1,
+                        "non_background_pixels": 55,
+                        "sha256": "f83486993de4f7ea04058053abd7af7e3aad7b7f6843300c292563a4d76593c3"
+                      },
+                      {
+                        "frame": 120,
+                        "non_background_pixels": 55,
+                        "sha256": "d7acf22c7808031e1ec5cd17987f68bdca40c324f2d531f89ac26d31c8863dda"
+                      }
+                    ],
+                    "height": 96,
+                    "on_screen": false,
+                    "width": 160
+                  },
+                  "gpu_submitted": true,
+                  "mode": "gpu-offscreen",
+                  "model_count": 1,
+                  "sprite_count": 0,
+                  "tick": 120,
+                  "topology_generation": 0
+                },
+                "sources": [
+                  {
+                    "id": [
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1
+                    ],
+                    "physics": {
+                      "position": [
+                        2.9500136375427246,
+                        0.0,
+                        0.0
+                      ],
+                      "sleeping": false,
+                      "velocity": [
+                        3.0,
+                        0.0,
+                        0.0
+                      ]
+                    },
+                    "position": [
+                      2.9500136375427246,
+                      0.0,
+                      0.0
+                    ]
+                  }
+                ],
+                "tick": 120
+              },
+              "rms": 0.0553028731136091,
+              "early_balance": 109.52215792219184,
+              "late_balance": -115.71745094939368
+            },
+            {
+              "fixture": "static",
+              "rate": 48000,
+              "report": {
+                "frames": 96000,
+                "pcm_sha256": "3822063f9e3b291d4bc8ab543e16bd09900c3ea82082b0181e5369fdd781ef58",
+                "render_input": {
+                  "binding_generation": 0,
+                  "camera": "00000000000000000000000000000004",
+                  "camera_position": [
+                    0.0,
+                    0.0,
+                    8.0
+                  ],
+                  "decoded_payload_bytes": 156,
+                  "first_model_position": [
+                    2.9500136375427246,
+                    0.0,
+                    0.0
+                  ],
+                  "first_sprite_position": null,
+                  "gpu": {
+                    "accepted_frames": 120,
+                    "adapter": {
+                      "backend": "Metal",
+                      "device_type": "IntegratedGpu",
+                      "name": "Apple M5 Pro"
+                    },
+                    "captures": [
+                      {
+                        "frame": 1,
+                        "non_background_pixels": 55,
+                        "sha256": "f83486993de4f7ea04058053abd7af7e3aad7b7f6843300c292563a4d76593c3"
+                      },
+                      {
+                        "frame": 120,
+                        "non_background_pixels": 55,
+                        "sha256": "d7acf22c7808031e1ec5cd17987f68bdca40c324f2d531f89ac26d31c8863dda"
+                      }
+                    ],
+                    "height": 96,
+                    "on_screen": false,
+                    "width": 160
+                  },
+                  "gpu_submitted": true,
+                  "mode": "gpu-offscreen",
+                  "model_count": 1,
+                  "sprite_count": 0,
+                  "tick": 120,
+                  "topology_generation": 0
+                },
+                "sources": [
+                  {
+                    "id": [
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1
+                    ],
+                    "physics": {
+                      "position": [
+                        2.9500136375427246,
+                        0.0,
+                        0.0
+                      ],
+                      "sleeping": false,
+                      "velocity": [
+                        3.0,
+                        0.0,
+                        0.0
+                      ]
+                    },
+                    "position": [
+                      2.9500136375427246,
+                      0.0,
+                      0.0
+                    ]
+                  }
+                ],
+                "tick": 120
+              },
+              "rms": 0.055305097447639784,
+              "early_balance": 108.70557752668313,
+              "late_balance": -114.8314969751412
+            },
+            {
+              "fixture": "stream",
+              "rate": 44117,
+              "report": {
+                "frames": 88234,
+                "pcm_sha256": "5da6b39c9fac3c7dd96db9434a8e9879d101c7901398a23b90de5b5587a04e26",
+                "render_input": {
+                  "binding_generation": 0,
+                  "camera": "00000000000000000000000000000004",
+                  "camera_position": [
+                    0.0,
+                    0.0,
+                    8.0
+                  ],
+                  "decoded_payload_bytes": 156,
+                  "first_model_position": [
+                    2.9500136375427246,
+                    0.0,
+                    0.0
+                  ],
+                  "first_sprite_position": null,
+                  "gpu": {
+                    "accepted_frames": 120,
+                    "adapter": {
+                      "backend": "Metal",
+                      "device_type": "IntegratedGpu",
+                      "name": "Apple M5 Pro"
+                    },
+                    "captures": [
+                      {
+                        "frame": 1,
+                        "non_background_pixels": 55,
+                        "sha256": "f83486993de4f7ea04058053abd7af7e3aad7b7f6843300c292563a4d76593c3"
+                      },
+                      {
+                        "frame": 120,
+                        "non_background_pixels": 55,
+                        "sha256": "d7acf22c7808031e1ec5cd17987f68bdca40c324f2d531f89ac26d31c8863dda"
+                      }
+                    ],
+                    "height": 96,
+                    "on_screen": false,
+                    "width": 160
+                  },
+                  "gpu_submitted": true,
+                  "mode": "gpu-offscreen",
+                  "model_count": 1,
+                  "sprite_count": 0,
+                  "tick": 120,
+                  "topology_generation": 0
+                },
+                "sources": [
+                  {
+                    "id": [
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1
+                    ],
+                    "physics": {
+                      "position": [
+                        2.9500136375427246,
+                        0.0,
+                        0.0
+                      ],
+                      "sleeping": false,
+                      "velocity": [
+                        3.0,
+                        0.0,
+                        0.0
+                      ]
+                    },
+                    "position": [
+                      2.9500136375427246,
+                      0.0,
+                      0.0
+                    ]
+                  }
+                ],
+                "tick": 120
+              },
+              "rms": 0.05530287311397527,
+              "early_balance": 109.52215791799678,
+              "late_balance": -115.7174509755776
+            },
+            {
+              "fixture": "stream",
+              "rate": 48000,
+              "report": {
+                "frames": 96000,
+                "pcm_sha256": "3822063f9e3b291d4bc8ab543e16bd09900c3ea82082b0181e5369fdd781ef58",
+                "render_input": {
+                  "binding_generation": 0,
+                  "camera": "00000000000000000000000000000004",
+                  "camera_position": [
+                    0.0,
+                    0.0,
+                    8.0
+                  ],
+                  "decoded_payload_bytes": 156,
+                  "first_model_position": [
+                    2.9500136375427246,
+                    0.0,
+                    0.0
+                  ],
+                  "first_sprite_position": null,
+                  "gpu": {
+                    "accepted_frames": 120,
+                    "adapter": {
+                      "backend": "Metal",
+                      "device_type": "IntegratedGpu",
+                      "name": "Apple M5 Pro"
+                    },
+                    "captures": [
+                      {
+                        "frame": 1,
+                        "non_background_pixels": 55,
+                        "sha256": "f83486993de4f7ea04058053abd7af7e3aad7b7f6843300c292563a4d76593c3"
+                      },
+                      {
+                        "frame": 120,
+                        "non_background_pixels": 55,
+                        "sha256": "d7acf22c7808031e1ec5cd17987f68bdca40c324f2d531f89ac26d31c8863dda"
+                      }
+                    ],
+                    "height": 96,
+                    "on_screen": false,
+                    "width": 160
+                  },
+                  "gpu_submitted": true,
+                  "mode": "gpu-offscreen",
+                  "model_count": 1,
+                  "sprite_count": 0,
+                  "tick": 120,
+                  "topology_generation": 0
+                },
+                "sources": [
+                  {
+                    "id": [
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1
+                    ],
+                    "physics": {
+                      "position": [
+                        2.9500136375427246,
+                        0.0,
+                        0.0
+                      ],
+                      "sleeping": false,
+                      "velocity": [
+                        3.0,
+                        0.0,
+                        0.0
+                      ]
+                    },
+                    "position": [
+                      2.9500136375427246,
+                      0.0,
+                      0.0
+                    ]
+                  }
+                ],
+                "tick": 120
+              },
+              "rms": 0.055305097447639784,
+              "early_balance": 108.70557752668313,
+              "late_balance": -114.8314969751412
+            },
+            {
+              "fixture": "static-sprite",
+              "rate": 44117,
+              "report": {
+                "frames": 88234,
+                "pcm_sha256": "a4722ea4c42fa7e629e2bc7bd99127d45e2616383113d71bec57379b771c99c8",
+                "render_input": {
+                  "binding_generation": 0,
+                  "camera": "00000000000000000000000000000004",
+                  "camera_position": [
+                    0.0,
+                    0.0,
+                    8.0
+                  ],
+                  "decoded_payload_bytes": 340,
+                  "first_model_position": null,
+                  "first_sprite_position": [
+                    2.9500136375427246,
+                    0.0,
+                    0.0
+                  ],
+                  "gpu": {
+                    "accepted_frames": 120,
+                    "adapter": {
+                      "backend": "Metal",
+                      "device_type": "IntegratedGpu",
+                      "name": "Apple M5 Pro"
+                    },
+                    "captures": [
+                      {
+                        "frame": 1,
+                        "non_background_pixels": 420,
+                        "sha256": "e57be536276c5d855799079587e16e0debf5b7e180b8ce3f7c758874ea8c9d30"
+                      },
+                      {
+                        "frame": 120,
+                        "non_background_pixels": 420,
+                        "sha256": "79a05fd14620d01ced198938e5904ed4a65c928a87430b8ee149b4e8ccf04f58"
+                      }
+                    ],
+                    "height": 96,
+                    "on_screen": false,
+                    "width": 160
+                  },
+                  "gpu_submitted": true,
+                  "mode": "gpu-offscreen",
+                  "model_count": 0,
+                  "sprite_count": 1,
+                  "tick": 120,
+                  "topology_generation": 0
+                },
+                "sources": [
+                  {
+                    "id": [
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1
+                    ],
+                    "physics": {
+                      "position": [
+                        2.9500136375427246,
+                        0.0,
+                        0.0
+                      ],
+                      "sleeping": false,
+                      "velocity": [
+                        3.0,
+                        0.0,
+                        0.0
+                      ]
+                    },
+                    "position": [
+                      2.9500136375427246,
+                      0.0,
+                      0.0
+                    ]
+                  }
+                ],
+                "tick": 120
+              },
+              "rms": 0.0553028731136091,
+              "early_balance": 109.52215792219184,
+              "late_balance": -115.71745094939368
+            },
+            {
+              "fixture": "static-sprite",
+              "rate": 48000,
+              "report": {
+                "frames": 96000,
+                "pcm_sha256": "3822063f9e3b291d4bc8ab543e16bd09900c3ea82082b0181e5369fdd781ef58",
+                "render_input": {
+                  "binding_generation": 0,
+                  "camera": "00000000000000000000000000000004",
+                  "camera_position": [
+                    0.0,
+                    0.0,
+                    8.0
+                  ],
+                  "decoded_payload_bytes": 340,
+                  "first_model_position": null,
+                  "first_sprite_position": [
+                    2.9500136375427246,
+                    0.0,
+                    0.0
+                  ],
+                  "gpu": {
+                    "accepted_frames": 120,
+                    "adapter": {
+                      "backend": "Metal",
+                      "device_type": "IntegratedGpu",
+                      "name": "Apple M5 Pro"
+                    },
+                    "captures": [
+                      {
+                        "frame": 1,
+                        "non_background_pixels": 420,
+                        "sha256": "e57be536276c5d855799079587e16e0debf5b7e180b8ce3f7c758874ea8c9d30"
+                      },
+                      {
+                        "frame": 120,
+                        "non_background_pixels": 420,
+                        "sha256": "79a05fd14620d01ced198938e5904ed4a65c928a87430b8ee149b4e8ccf04f58"
+                      }
+                    ],
+                    "height": 96,
+                    "on_screen": false,
+                    "width": 160
+                  },
+                  "gpu_submitted": true,
+                  "mode": "gpu-offscreen",
+                  "model_count": 0,
+                  "sprite_count": 1,
+                  "tick": 120,
+                  "topology_generation": 0
+                },
+                "sources": [
+                  {
+                    "id": [
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1
+                    ],
+                    "physics": {
+                      "position": [
+                        2.9500136375427246,
+                        0.0,
+                        0.0
+                      ],
+                      "sleeping": false,
+                      "velocity": [
+                        3.0,
+                        0.0,
+                        0.0
+                      ]
+                    },
+                    "position": [
+                      2.9500136375427246,
+                      0.0,
+                      0.0
+                    ]
+                  }
+                ],
+                "tick": 120
+              },
+              "rms": 0.055305097447639784,
+              "early_balance": 108.70557752668313,
+              "late_balance": -114.8314969751412
+            },
+            {
+              "fixture": "stream-sprite",
+              "rate": 44117,
+              "report": {
+                "frames": 88234,
+                "pcm_sha256": "5da6b39c9fac3c7dd96db9434a8e9879d101c7901398a23b90de5b5587a04e26",
+                "render_input": {
+                  "binding_generation": 0,
+                  "camera": "00000000000000000000000000000004",
+                  "camera_position": [
+                    0.0,
+                    0.0,
+                    8.0
+                  ],
+                  "decoded_payload_bytes": 340,
+                  "first_model_position": null,
+                  "first_sprite_position": [
+                    2.9500136375427246,
+                    0.0,
+                    0.0
+                  ],
+                  "gpu": {
+                    "accepted_frames": 120,
+                    "adapter": {
+                      "backend": "Metal",
+                      "device_type": "IntegratedGpu",
+                      "name": "Apple M5 Pro"
+                    },
+                    "captures": [
+                      {
+                        "frame": 1,
+                        "non_background_pixels": 420,
+                        "sha256": "729fbb6a59d71a214736bc78de5e44a2b6eed37ed5a6aac2bcb7b91cc924e39d"
+                      },
+                      {
+                        "frame": 120,
+                        "non_background_pixels": 420,
+                        "sha256": "55913d1ccfb8c3fc258fcce3ed1b4daba6dd17690bd7c11afc04ae6983e820b0"
+                      }
+                    ],
+                    "height": 96,
+                    "on_screen": false,
+                    "width": 160
+                  },
+                  "gpu_submitted": true,
+                  "mode": "gpu-offscreen",
+                  "model_count": 0,
+                  "sprite_count": 1,
+                  "tick": 120,
+                  "topology_generation": 0
+                },
+                "sources": [
+                  {
+                    "id": [
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1
+                    ],
+                    "physics": {
+                      "position": [
+                        2.9500136375427246,
+                        0.0,
+                        0.0
+                      ],
+                      "sleeping": false,
+                      "velocity": [
+                        3.0,
+                        0.0,
+                        0.0
+                      ]
+                    },
+                    "position": [
+                      2.9500136375427246,
+                      0.0,
+                      0.0
+                    ]
+                  }
+                ],
+                "tick": 120
+              },
+              "rms": 0.05530287311397527,
+              "early_balance": 109.52215791799678,
+              "late_balance": -115.7174509755776
+            },
+            {
+              "fixture": "stream-sprite",
+              "rate": 48000,
+              "report": {
+                "frames": 96000,
+                "pcm_sha256": "3822063f9e3b291d4bc8ab543e16bd09900c3ea82082b0181e5369fdd781ef58",
+                "render_input": {
+                  "binding_generation": 0,
+                  "camera": "00000000000000000000000000000004",
+                  "camera_position": [
+                    0.0,
+                    0.0,
+                    8.0
+                  ],
+                  "decoded_payload_bytes": 340,
+                  "first_model_position": null,
+                  "first_sprite_position": [
+                    2.9500136375427246,
+                    0.0,
+                    0.0
+                  ],
+                  "gpu": {
+                    "accepted_frames": 120,
+                    "adapter": {
+                      "backend": "Metal",
+                      "device_type": "IntegratedGpu",
+                      "name": "Apple M5 Pro"
+                    },
+                    "captures": [
+                      {
+                        "frame": 1,
+                        "non_background_pixels": 420,
+                        "sha256": "729fbb6a59d71a214736bc78de5e44a2b6eed37ed5a6aac2bcb7b91cc924e39d"
+                      },
+                      {
+                        "frame": 120,
+                        "non_background_pixels": 420,
+                        "sha256": "55913d1ccfb8c3fc258fcce3ed1b4daba6dd17690bd7c11afc04ae6983e820b0"
+                      }
+                    ],
+                    "height": 96,
+                    "on_screen": false,
+                    "width": 160
+                  },
+                  "gpu_submitted": true,
+                  "mode": "gpu-offscreen",
+                  "model_count": 0,
+                  "sprite_count": 1,
+                  "tick": 120,
+                  "topology_generation": 0
+                },
+                "sources": [
+                  {
+                    "id": [
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1
+                    ],
+                    "physics": {
+                      "position": [
+                        2.9500136375427246,
+                        0.0,
+                        0.0
+                      ],
+                      "sleeping": false,
+                      "velocity": [
+                        3.0,
+                        0.0,
+                        0.0
+                      ]
+                    },
+                    "position": [
+                      2.9500136375427246,
+                      0.0,
+                      0.0
+                    ]
+                  }
+                ],
+                "tick": 120
+              },
+              "rms": 0.055305097447639784,
+              "early_balance": 108.70557752668313,
+              "late_balance": -114.8314969751412
+            }
+          ],
+          "rejected": [
+            "accepted-script-failure",
+            "wrong-recording-clock",
+            "invalid-input-packet",
+            "wrong-clip-fingerprint",
+            "unknown-cooked-version",
+            "oversized-startup-actions",
+            "manual-input-route",
+            "incant_game_player-camera-only",
+            "native_scene_audio-camera-only",
+            "incant_game_player-manifest-only",
+            "native_scene_audio-manifest-only",
+            "late-camera-removal",
+            "feature-default-stays-strict",
+            "missing-model-cache",
+            "missing-camera",
+            "malformed-camera",
+            "sprite-default-stays-strict",
+            "missing-sprite-cache",
+            "unknown-sprite-frame"
+          ],
+          "spatial_refusals": [
+            {
+              "player": "incant_game_player",
+              "fixture": "camera-only"
+            },
+            {
+              "player": "native_scene_audio",
+              "fixture": "camera-only"
+            },
+            {
+              "player": "incant_game_player",
+              "fixture": "manifest-only"
+            },
+            {
+              "player": "native_scene_audio",
+              "fixture": "manifest-only"
+            }
+          ],
+          "plain_v1_controls": 2,
+          "existing_output_preserved": true,
+          "size_delta_from_audio_host_2885984": 4518704,
+          "size_delta_from_physics_script_player_3941816": 3462872,
+          "size_comparison_scope": "whole executable graphs, not an isolated feature cost or performance gate",
+          "device_output": false,
+          "session_saves": false,
+          "phone_performance_gate": false,
+          "failure_semantics": "Invalid input/buffer retry is covered in host tests. Any failure after accepted simulation destroys composite state; device cursor is not rolled back. Simulation/host failure creates no output file; output I/O may leave a partial file."
+        }
+      },
+      "artifacts/cooked-native-script/result.json": {
+        "sha256": "0da9b6b683e15b94e6efb71ff114777c25bcc89282aacc2c573c13cbdeda6136",
+        "result": {
+          "passed": true,
+          "target": "aarch64-apple-darwin",
+          "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+          "codegen": {
+            "incant_input": {
+              "opt-level": "3",
+              "codegen-units": "1",
+              "panic": "abort"
+            },
+            "incant_runtime": {
+              "opt-level": "3",
+              "codegen-units": "1",
+              "panic": "abort"
+            },
+            "incant_script": {
+              "opt-level": "3",
+              "codegen-units": "1",
+              "panic": "abort"
+            },
+            "incant_script_player": {
+              "opt-level": "3",
+              "codegen-units": "1",
+              "panic": "abort",
+              "lto": "fat"
+            },
+            "incant_physics_runtime": {
+              "opt-level": "3",
+              "codegen-units": "1",
+              "panic": "abort"
+            },
+            "rapier3d": {
+              "opt-level": "3",
+              "codegen-units": "1",
+              "panic": "abort"
+            }
+          },
+          "player_sha256": "f10432effe91967f7e6a0dc52d4b91aab750176cededeae04bd7b29fff57447b",
+          "player_bytes": 4041048,
+          "symbols": {
+            "format": "Mach-O/dSYM",
+            "uuids": {
+              "arm64": "6edd7a2c-703e-35b4-8582-88f495d2f511"
+            }
+          },
+          "script_metadata": {
+            "build_id": "726644ae0c97ed63b640b3acea16b1adc11fd60be83c06681c97c7908920d051",
+            "bytecode_bytes": 4008,
+            "bytecode_sha256": "6c08e49d602e33f463973c7101aa866098ccd3be66882be0c11399bf07edd95a",
+            "debug_line_tables": true,
+            "embedded_source": false,
+            "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+            "format": 1,
+            "hardening_sha256": "4a2d87348651fab15d47582cce2fba82058255ddb2a2a29386db7705bea1cb23",
+            "source_map_sha256": "e0a027bff8fee49d839df754419c172c40842676f18c5edc69da6cc99f332c9b",
+            "source_name": "embedded-structural.js",
+            "source_sha256": "fe7d1e50e909399b8b455ee2c96023d47c9b4aaad1e28c395a354fb07d1a9243",
+            "symbolication": "map CommonJS locations after subtracting wrapper_prefix_lines; automatic runtime stack remapping remains unsupported",
+            "target": "aarch64-apple-darwin",
+            "trust": "fresh compiler output embedded by trusted native build; hashes are not authentication",
+            "wrapper_prefix_lines": 3
+          },
+          "authoring_preserved": {
+            "game.incant.json": "231873f73869659133d75433772e805c8dbd322814c5b6eb0ab8912c3ada6fcc",
+            "history.jsonl": "e63a6b376a48413b957b7a3bc29035ee03fe698ee2a72e42769a4fd2bc3905d3"
+          },
+          "inputs_and_build_storage_removed": true,
+          "removed_input_scope": "authoring/compile inputs and temporary Cargo storage; runtime exchange files retained",
+          "runtime_exchange_files": [
+            "input.json",
+            "actions.json"
+          ],
+          "runtime_source_compiler_symbols_absent": true,
+          "dynamic_source_routes_rejected": true,
+          "observations": [
+            {
+              "ticks": 0,
+              "entities": 2,
+              "output": "tick=0 entities=2\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 0.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 0.0, 0.0]\n"
+            },
+            {
+              "ticks": 1,
+              "entities": 3,
+              "output": "tick=1 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 1.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 1.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]) [1.0, 0.0, 0.0]\n"
+            },
+            {
+              "ticks": 2,
+              "entities": 3,
+              "output": "tick=2 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 2.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 2.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]) [1.0333333333333334, 1.0, 0.0]\n"
+            },
+            {
+              "ticks": 3,
+              "entities": 3,
+              "output": "tick=3 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 3.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 3.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]) [1.0666666666666669, 2.0, 0.0]\n"
+            },
+            {
+              "ticks": 4,
+              "entities": 2,
+              "output": "tick=4 entities=2\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 4.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 4.0, 0.0]\n"
+            },
+            {
+              "ticks": 60,
+              "entities": 2,
+              "output": "tick=60 entities=2\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 60.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 60.0, 0.0]\n"
+            }
+          ],
+          "recorded_input_observations": [
+            {
+              "ticks": 0,
+              "entities": 2,
+              "output": "tick=0 entities=2\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 0.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 0.0, 0.0]\n"
+            },
+            {
+              "ticks": 1,
+              "entities": 3,
+              "output": "tick=1 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0125, 1.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0125, 1.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]) [1.0, 0.0, 0.0]\n"
+            },
+            {
+              "ticks": 2,
+              "entities": 3,
+              "output": "tick=2 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.016666666666666666, 2.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.016666666666666666, 2.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]) [1.0375, 1.0, 0.0]\n"
+            },
+            {
+              "ticks": 3,
+              "entities": 3,
+              "output": "tick=3 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.016666666666666666, 3.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.016666666666666666, 3.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]) [1.0708333333333335, 2.0, 0.0]\n"
+            },
+            {
+              "ticks": 4,
+              "entities": 2,
+              "output": "tick=4 entities=2\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.016666666666666666, 4.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.016666666666666666, 4.0, 3.0]\n"
+            },
+            {
+              "ticks": 60,
+              "entities": 2,
+              "output": "tick=60 entities=2\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.016666666666666666, 60.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.016666666666666666, 60.0, 3.0]\n"
+            }
+          ],
+          "native_physics_observations": [
+            {
+              "ticks": 0,
+              "output": "tick=0 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1]) [0.0, -0.5, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1]) [0.0, -0.5, 0.0] [0.0, 0.0, 0.0, 1.0] [0.0, 0.0, 0.0] [0.0, 0.0, 0.0] false\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2]) [0.0, 3.0, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2]) [0.0, 3.0, 0.0] [0.0, 0.0, 0.0, 1.0] [0.0, 0.0, 0.0] [0.0, 0.0, 0.0] false\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3]) [5.0, 4.0, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3]) [5.0, 4.0, 0.0] [0.0, 0.0, 0.0, 1.0] [2.0, 0.0, 0.0] [0.0, 1.0, 0.0] false\n"
+            },
+            {
+              "ticks": 1,
+              "output": "tick=1 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1]) [0.0, -0.5, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1]) [0.0, -0.5, 0.0] [0.0, 0.0, 0.0, 1.0] [0.0, 0.0, 0.0] [0.0, 0.0, 0.0] false\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2]) [0.0, 2.9982969760894775, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2]) [0.0, 2.9982969760894775, 0.0] [0.0, 0.0, 0.0, 1.0] [0.0, -0.16350001096725464, 0.0] [0.0, 0.0, 0.0] false\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3]) [5.033332824707031, 4.0, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3]) [5.033332824707031, 4.0, 0.0] [0.0, 0.00833322573453188, 0.0, 0.999965250492096] [2.0, 0.0, 0.0] [0.0, 1.0, 0.0] false\n"
+            },
+            {
+              "ticks": 60,
+              "output": "tick=60 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1]) [0.0, -0.5, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1]) [0.0, -0.5, 0.0] [0.0, 0.0, 0.0, 1.0] [0.0, 0.0, 0.0] [0.0, 0.0, 0.0] false\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2]) [0.00595275592058897, 0.4997122585773468, 0.0025561037473380566]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2]) [0.00595275592058897, 0.4997122585773468, 0.0025561037473380566] [-0.00012970506213605404, 1.568111542837869e-6, 0.00012519564188551158, 1.0] [0.00020080046670045704, -0.0002750213607214391, 0.00047549817827530205] [0.0009513464756309986, -8.687531583007058e-9, -0.0004017487808596343] false\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3]) [6.999969482421875, 4.0, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3]) [6.999969482421875, 4.0, 0.0] [0.0, 0.47942492365837097, 0.0, 0.8775829672813416] [2.0, 0.0, 0.0] [0.0, 1.0, 0.0] false\n"
+            },
+            {
+              "ticks": 600,
+              "output": "tick=600 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1]) [0.0, -0.5, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1]) [0.0, -0.5, 0.0] [0.0, 0.0, 0.0, 1.0] [0.0, 0.0, 0.0] [0.0, 0.0, 0.0] false\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2]) [0.0059583005495369434, 0.4999309182167053, 0.0025801181327551603]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2]) [0.0059583005495369434, 0.4999309182167053, 0.0025801181327551603] [-7.640940111741656e-7, 1.5690386589994887e-6, 2.5463174324613647e-7, 1.0] [0.0, 0.0, 0.0] [0.0, 0.0, 0.0] true\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3]) [24.99969482421875, 4.0, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3]) [24.99969482421875, 4.0, 0.0] [0.0, -0.958926260471344, 0.0, 0.28365570306777954] [2.0, 0.0, 0.0] [0.0, 1.0, 0.0] false\n"
+            }
+          ],
+          "input_exchange_only_at_startup": true,
+          "scope": "Native host==target embedded script; no portable ABI, authenticated file loader, full export, mobile execution or phone gate"
+        }
+      }
+    },
+    "cleanup_boundary": {
+      "passed": true,
+      "cases": [
+        {
+          "tag_valid": false,
+          "exit_code": 101,
+          "release_removed": false,
+          "other_profiles_preserved": true,
+          "output": "error: cannot clean `/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-ci-profile-clean-5cpab1y6/False`: missing or invalid `CACHEDIR.TAG` file\n  |\n  = note: cleaning has been aborted to prevent accidental deletion of unrelated files\n"
+        },
+        {
+          "tag_valid": true,
+          "exit_code": 0,
+          "release_removed": true,
+          "other_profiles_preserved": true,
+          "output": "     Removed 1 file, 7B total\n"
+        },
+        {
+          "target_initially_absent": true,
+          "exit_code": 0,
+          "output": "     Removed 0 files\n"
+        }
+      ]
+    },
+    "tested_profile_inputs": {
+      "Cargo.toml": "7dc3d425289ac2ed41b64576814c497e06e51e4c7da6b00e558b99d1eef1e9ac",
+      ".github/workflows/ci.yml": "20555c7d5ea5ad3db8452b79098e6360ade46bb919bb227dee3dd268ed50df03",
+      ".github/workflows/desktop.yml": "3afd41cc6950d6f3bc9dc086efd8df9f5cece8b9902344c6179410063b63733e",
+      "tools/platforms/render-check.py": "1ca4ac2b4e429df7d0519ce4627dc4259fb09aa26d81d4efe0a3c77101656521",
+      "tools/tests/test_ci_profile.py": "2378565e5fb3a3bca5a5883497c8446e6b46b734d24e012bf7aa6160c054781a"
+    },
+    "subsequent_workflow_guard": "After this frozen command-chain validation, docs selection additionally requires a successful classifier job. Test/profile/probe commands unchanged; 21 focused selector tests and actionlint pass."
+  },
+  "final_integration": {
+    "source_head": "22c0e34",
+    "base_main": "aef98042ac42f2bed5cf7d89a2c34ff9d19cc5d5",
+    "included_import_head": "9e0976c8348dad5fe9b40f1366065b33e8e501a4",
+    "included_original_plan8": "638bf8f409c96842f07c6cb7f1434123aecfaee6",
+    "passed": true,
+    "ordinary_tests": 544,
+    "ui_tests": 534,
+    "python_tools_tests": 86,
+    "source_preservation": {
+      "editor": "Byte-identical to reviewed import head",
+      "crates_and_lock": "Byte-identical to verified main67"
+    },
+    "steps": [
+      {
+        "name": "ordinary",
+        "args": [
+          "./tools/cargo",
+          "test",
+          "--workspace",
+          "--profile",
+          "ci",
+          "--locked",
+          "--features",
+          "incant_audio_runtime/scene",
+          "-j2"
+        ],
+        "exit_code": 0,
+        "seconds": 92.53042183298385,
+        "sha256": "4f3f1c49d40ac158ffeb719dbe566e8f09c9dc24e5a9aea3a7d0fd91bcc6a9d7"
+      },
+      {
+        "name": "clippy",
+        "args": [
+          "./tools/cargo",
+          "clippy",
+          "--workspace",
+          "--all-targets",
+          "--profile",
+          "ci",
+          "--locked",
+          "--features",
+          "incant_audio_runtime/scene",
+          "-j2",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "exit_code": 0,
+        "seconds": 67.26139229198452,
+        "sha256": "43a3b4e4a91c200ee5c2f021dd6970b54309f7be3d26fb6179a31270ef3a691c"
+      },
+      {
+        "name": "ui",
+        "args": [
+          "npm",
+          "test",
+          "--workspace",
+          "editor/ui"
+        ],
+        "exit_code": 0,
+        "seconds": 10.98744529200485,
+        "sha256": "efb3ff144c3ee127b265621c6e04d9df4670d2d4c98fb48f8cb85a2daff5a3b8"
+      },
+      {
+        "name": "typecheck",
+        "args": [
+          "npm",
+          "exec",
+          "--workspace",
+          "editor/ui",
+          "--",
+          "tsc",
+          "--noEmit"
+        ],
+        "exit_code": 0,
+        "seconds": 0.4416217500111088,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "build",
+        "args": [
+          "npm",
+          "run",
+          "build",
+          "--workspace",
+          "editor/ui"
+        ],
+        "exit_code": 0,
+        "seconds": 4.6959652499936055,
+        "sha256": "f0cb1e40bb890270c7edbc0e0c09563cb770f48f6d0bbb99f0a4db9abf94a31f"
+      },
+      {
+        "name": "bridge",
+        "args": [
+          "node",
+          "tools/build_bridge.mjs",
+          "--check"
+        ],
+        "exit_code": 0,
+        "seconds": 0.07780462500522844,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "tools",
+        "args": [
+          "python3",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tools/tests",
+          "-v"
+        ],
+        "exit_code": 0,
+        "seconds": 3.779399042017758,
+        "sha256": "badff4da922574eb01efad7b7ed45727c70e5c5b5bb5465779f51b8252725b54"
+      },
+      {
+        "name": "conventions",
+        "args": [
+          "python3",
+          "tools/generate_conventions.py",
+          "--check"
+        ],
+        "exit_code": 0,
+        "seconds": 0.043795624980702996,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "workflow",
+        "args": [
+          "/tmp/incant-actionlint/actionlint"
+        ],
+        "exit_code": 0,
+        "seconds": 0.37165825002011843,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "diff",
+        "args": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exit_code": 0,
+        "seconds": 0.011674000008497387,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "scope": "CPU-only final integrated validation after the frozen main64 full profile chain; hosted final-head shipping/GPU checks remain required before merge."
+  }
+}

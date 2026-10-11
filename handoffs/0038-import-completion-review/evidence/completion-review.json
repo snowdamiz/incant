@@ -1,0 +1,5807 @@
+{
+  "handoff": "0038-import-completion-review",
+  "label": "Headless browser presentation review on a MOCKED live double. Not native command execution, native WebKit, screen-reader or device evidence.",
+  "model": {
+    "id": "claude-opus-5-5",
+    "name": "Claude Opus 5.5",
+    "thinking": "max (as reported to the session; ACP selection is verified by the runner)"
+  },
+  "source": {
+    "base": "a62d35ea2f7d6f9bdbf487b7d84d0555689d553f",
+    "baseMatchesAstraEvidence": "all 8 source_sha256 entries in docs/spikes/evidence/editor-import-receipts-2026-10-11.json matched before any change",
+    "files": {
+      "editor/ui/src/assets/AssetsContext.tsx": {
+        "before": "16aa82d09836fad275a746e8c2f16d8166a1290c23cbcbeb31dd7f64936e45d7",
+        "after": "d37f1699ab9cd6d050bd1cfb5c67356a9857ae15a8c45cf567cfc8d70a514e6a"
+      },
+      "editor/ui/src/components/assets/AssetInspector.tsx": {
+        "before": "84402ea4a6f80ce8f9d13bc777fd29eb1887b2bd320fe9a6f925f583a0e02de7",
+        "after": "84402ea4a6f80ce8f9d13bc777fd29eb1887b2bd320fe9a6f925f583a0e02de7"
+      },
+      "editor/ui/src/components/assets/Assets.test.tsx": {
+        "before": "077213603ed6f92d42863af47044438c8ebdf9c3e546032cd1069418d57c827a",
+        "after": "859758465e51c316013d2fcf4e5f6be97a84ba047b4cbdc35877833e8b3b89ba"
+      }
+    },
+    "changedFromBase": [
+      "M\teditor/ui/src/assets/AssetsContext.tsx",
+      "M\teditor/ui/src/components/assets/Assets.test.tsx"
+    ]
+  },
+  "build": {
+    "frozen": {
+      "dist/assets/index-D1eFgbiT.js": "f5dd10e0df6628fdf419cb5a0bd15d963e6d97f85c420c8f2438b3cf7fd9c360",
+      "dist/assets/index-DBrXeGP-.css": "c25654e94efd2b10a3e42421d05fdfd9723aa1d32b45b6d5813c24a660cbda82",
+      "dist/index.html": "467a139562598d462ec72ed26aba5562393ea14975c0edc3074d553d8f0b397c"
+    },
+    "final": {
+      "dist/assets/index-DBrXeGP-.css": "c25654e94efd2b10a3e42421d05fdfd9723aa1d32b45b6d5813c24a660cbda82",
+      "dist/assets/index-DZmcOg3H.js": "e566f74cc4c48d9b03294144f41fd4e849fd46d9be284eb1d540d7563e803946",
+      "dist/index.html": "f27b8eb1324609adcbfbeb2c25c6bc430426d5fb9768b019900e5fba0f1c187b"
+    }
+  },
+  "browser": {
+    "chrome": "155.0.8059.40",
+    "headless": true,
+    "playwrightCore": "1.64.0",
+    "node": "v22.23.3",
+    "deviceScaleFactor": 2,
+    "timezone": "UTC"
+  },
+  "tests": {
+    "baseline": "frozen source: 30 files, 529 tests passed; strict tsc clean; production build passed",
+    "updatedAssertionOnPreviousCopy": "Assets.test.tsx with the previous AssetsContext.tsx: 2 failed (the two no-op announcement cases), 37 passed",
+    "final": "commit tree: 30 files, 529 tests passed; strict tsc clean; production build passed, reproducing the bundles g1 and g2 captured"
+  },
+  "sets": {
+    "b1": {
+      "source": "frozen a62d35e",
+      "generated": "2026-10-11T02:39:31.192Z",
+      "totals": {
+        "captures": 28,
+        "steps": 55,
+        "axeViolations": 0,
+        "pageErrors": 0,
+        "remoteRequests": 0,
+        "stepErrors": 0,
+        "pageOverflow": 0,
+        "statusLineClipped": 0
+      }
+    },
+    "g1": {
+      "source": "final (this commit)",
+      "generated": "2026-10-11T02:42:05.803Z",
+      "totals": {
+        "captures": 28,
+        "steps": 55,
+        "axeViolations": 0,
+        "pageErrors": 0,
+        "remoteRequests": 0,
+        "stepErrors": 0,
+        "pageOverflow": 0,
+        "statusLineClipped": 0
+      }
+    },
+    "g2": {
+      "source": "final (this commit), repeat",
+      "generated": "2026-10-11T02:44:30.959Z",
+      "totals": {
+        "captures": 28,
+        "steps": 55,
+        "axeViolations": 0,
+        "pageErrors": 0,
+        "remoteRequests": 0,
+        "stepErrors": 0,
+        "pageOverflow": 0,
+        "statusLineClipped": 0
+      }
+    }
+  },
+  "observations": [
+    {
+      "state": "noop-reimport",
+      "size": "normal 1440x874",
+      "note": "Reimport crate_albedo; MOCKED unchanged receipt (transaction null), history unchanged with a redo tail",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "textures/props/crate_albedo.png"
+            }
+          ]
+        }
+      ],
+      "mockedResults": [
+        {
+          "ok": true,
+          "assetImport": {
+            "revision": 41,
+            "transaction": null
+          }
+        }
+      ],
+      "steps": [
+        {
+          "step": "before",
+          "inspectorWidth": 360,
+          "notice": null,
+          "statusLine": null,
+          "statusLineClipped": false,
+          "action": "Reimport",
+          "header": "crate_albedo",
+          "justImported": [],
+          "historyShown": {
+            "meta": "5 of 6 applied",
+            "nowAfter": "Rename entity to Lantern"
+          },
+          "host": {
+            "applied": 5,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Rename entity to Gate Spot"
+            ],
+            "head": "01M4K344EG00000000000006TW"
+          },
+          "focus": {
+            "tag": "div",
+            "role": "option",
+            "name": "crate_albedo Texture, Color",
+            "region": "hierarchy",
+            "outline": null
+          },
+          "axeViolations": 0
+        },
+        {
+          "step": "pending",
+          "inspectorWidth": 360,
+          "notice": null,
+          "statusLine": "Reimporting crate_albedo…",
+          "statusLineClipped": false,
+          "action": null,
+          "header": "crate_albedo",
+          "justImported": [],
+          "historyShown": {
+            "meta": "5 of 6 applied",
+            "nowAfter": "Rename entity to Lantern"
+          },
+          "host": {
+            "applied": 5,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Rename entity to Gate Spot"
+            ],
+            "head": "01M4K344EG00000000000006TW"
+          },
+          "focus": {
+            "element": "body"
+          },
+          "axeViolations": 0
+        },
+        {
+          "step": "done",
+          "inspectorWidth": 360,
+          "notice": {
+            "text": "Already up to date. Nothing changed.",
+            "role": "status",
+            "lines": [
+              1
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Already up to date: crate_albedo. Nothing changed.",
+          "statusLineClipped": false,
+          "action": "Reimport",
+          "header": "crate_albedo",
+          "justImported": [],
+          "historyShown": {
+            "meta": "5 of 6 applied",
+            "nowAfter": "Rename entity to Lantern"
+          },
+          "host": {
+            "applied": 5,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Rename entity to Gate Spot"
+            ],
+            "head": "01M4K344EG00000000000006TW"
+          },
+          "focus": {
+            "tag": "h3",
+            "role": null,
+            "name": "crate_albedo",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        }
+      ],
+      "liveRegionChanges": [
+        {
+          "step": "reimport",
+          "region": "div.asset-browser__status",
+          "change": "region inserted",
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "reimport",
+          "region": "pending",
+          "change": "region inserted",
+          "text": "Reimporting…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "reimport",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Reimporting crate_albedo…"
+          ],
+          "removed": [],
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "release unchanged",
+          "region": "div.asset-browser__status",
+          "change": "region removed",
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "release unchanged",
+          "region": "notice",
+          "change": "region inserted",
+          "text": "Already up to date. Nothing changed."
+        },
+        {
+          "step": "release unchanged",
+          "region": "pending",
+          "change": "region removed",
+          "text": "Reimporting…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "release unchanged",
+          "region": "status line",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            "Reimporting crate_albedo…"
+          ],
+          "text": ""
+        },
+        {
+          "step": "release unchanged",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Already up to date: crate_albedo. Nothing changed."
+          ],
+          "removed": [],
+          "text": "Already up to date: crate_albedo. Nothing changed."
+        }
+      ],
+      "pageErrors": 0,
+      "remoteRequests": 0,
+      "stepError": null
+    },
+    {
+      "state": "noop-reimport",
+      "size": "minimum 1000x650",
+      "note": "Reimport crate_albedo; MOCKED unchanged receipt (transaction null), history unchanged with a redo tail",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "textures/props/crate_albedo.png"
+            }
+          ]
+        }
+      ],
+      "mockedResults": [
+        {
+          "ok": true,
+          "assetImport": {
+            "revision": 41,
+            "transaction": null
+          }
+        }
+      ],
+      "steps": [
+        {
+          "step": "before",
+          "inspectorWidth": 280,
+          "notice": null,
+          "statusLine": null,
+          "statusLineClipped": false,
+          "action": "Reimport",
+          "header": "crate_albedo",
+          "justImported": [],
+          "historyShown": {
+            "meta": "5 of 6 applied",
+            "nowAfter": "Rename entity to Lantern"
+          },
+          "host": {
+            "applied": 5,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Rename entity to Gate Spot"
+            ],
+            "head": "01M4K344EG00000000000006TW"
+          },
+          "focus": {
+            "tag": "div",
+            "role": "option",
+            "name": "crate_albedo Texture, Color",
+            "region": "hierarchy",
+            "outline": null
+          },
+          "axeViolations": 0
+        },
+        {
+          "step": "pending",
+          "inspectorWidth": 280,
+          "notice": null,
+          "statusLine": "Reimporting crate_albedo…",
+          "statusLineClipped": false,
+          "action": null,
+          "header": "crate_albedo",
+          "justImported": [],
+          "historyShown": {
+            "meta": "5 of 6 applied",
+            "nowAfter": "Rename entity to Lantern"
+          },
+          "host": {
+            "applied": 5,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Rename entity to Gate Spot"
+            ],
+            "head": "01M4K344EG00000000000006TW"
+          },
+          "focus": {
+            "element": "body"
+          },
+          "axeViolations": 0
+        },
+        {
+          "step": "done",
+          "inspectorWidth": 280,
+          "notice": {
+            "text": "Already up to date. Nothing changed.",
+            "role": "status",
+            "lines": [
+              1
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Already up to date: crate_albedo. Nothing changed.",
+          "statusLineClipped": false,
+          "action": "Reimport",
+          "header": "crate_albedo",
+          "justImported": [],
+          "historyShown": {
+            "meta": "5 of 6 applied",
+            "nowAfter": "Rename entity to Lantern"
+          },
+          "host": {
+            "applied": 5,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Rename entity to Gate Spot"
+            ],
+            "head": "01M4K344EG00000000000006TW"
+          },
+          "focus": {
+            "tag": "h3",
+            "role": null,
+            "name": "crate_albedo",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        }
+      ],
+      "liveRegionChanges": [
+        {
+          "step": "reimport",
+          "region": "div.asset-browser__status",
+          "change": "region inserted",
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "reimport",
+          "region": "pending",
+          "change": "region inserted",
+          "text": "Reimporting…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "reimport",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Reimporting crate_albedo…"
+          ],
+          "removed": [],
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "release unchanged",
+          "region": "div.asset-browser__status",
+          "change": "region removed",
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "release unchanged",
+          "region": "notice",
+          "change": "region inserted",
+          "text": "Already up to date. Nothing changed."
+        },
+        {
+          "step": "release unchanged",
+          "region": "pending",
+          "change": "region removed",
+          "text": "Reimporting…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "release unchanged",
+          "region": "status line",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            "Reimporting crate_albedo…"
+          ],
+          "text": ""
+        },
+        {
+          "step": "release unchanged",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Already up to date: crate_albedo. Nothing changed."
+          ],
+          "removed": [],
+          "text": "Already up to date: crate_albedo. Nothing changed."
+        }
+      ],
+      "pageErrors": 0,
+      "remoteRequests": 0,
+      "stepError": null
+    },
+    {
+      "state": "noop-reimport",
+      "size": "narrow 1440x874",
+      "note": "Reimport crate_albedo; MOCKED unchanged receipt (transaction null), history unchanged with a redo tail",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "textures/props/crate_albedo.png"
+            }
+          ]
+        }
+      ],
+      "mockedResults": [
+        {
+          "ok": true,
+          "assetImport": {
+            "revision": 41,
+            "transaction": null
+          }
+        }
+      ],
+      "steps": [
+        {
+          "step": "before",
+          "inspectorWidth": 280,
+          "notice": null,
+          "statusLine": null,
+          "statusLineClipped": false,
+          "action": "Reimport",
+          "header": "crate_albedo",
+          "justImported": [],
+          "historyShown": {
+            "meta": "5 of 6 applied",
+            "nowAfter": "Rename entity to Lantern"
+          },
+          "host": {
+            "applied": 5,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Rename entity to Gate Spot"
+            ],
+            "head": "01M4K344EG00000000000006TW"
+          },
+          "focus": {
+            "tag": "div",
+            "role": "option",
+            "name": "crate_albedo Texture, Color",
+            "region": "hierarchy",
+            "outline": null
+          },
+          "axeViolations": 0
+        },
+        {
+          "step": "pending",
+          "inspectorWidth": 280,
+          "notice": null,
+          "statusLine": "Reimporting crate_albedo…",
+          "statusLineClipped": false,
+          "action": null,
+          "header": "crate_albedo",
+          "justImported": [],
+          "historyShown": {
+            "meta": "5 of 6 applied",
+            "nowAfter": "Rename entity to Lantern"
+          },
+          "host": {
+            "applied": 5,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Rename entity to Gate Spot"
+            ],
+            "head": "01M4K344EG00000000000006TW"
+          },
+          "focus": {
+            "element": "body"
+          },
+          "axeViolations": 0
+        },
+        {
+          "step": "done",
+          "inspectorWidth": 280,
+          "notice": {
+            "text": "Already up to date. Nothing changed.",
+            "role": "status",
+            "lines": [
+              1
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Already up to date: crate_albedo. Nothing changed.",
+          "statusLineClipped": false,
+          "action": "Reimport",
+          "header": "crate_albedo",
+          "justImported": [],
+          "historyShown": {
+            "meta": "5 of 6 applied",
+            "nowAfter": "Rename entity to Lantern"
+          },
+          "host": {
+            "applied": 5,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Rename entity to Gate Spot"
+            ],
+            "head": "01M4K344EG00000000000006TW"
+          },
+          "focus": {
+            "tag": "h3",
+            "role": null,
+            "name": "crate_albedo",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        }
+      ],
+      "liveRegionChanges": [
+        {
+          "step": "reimport",
+          "region": "div.asset-browser__status",
+          "change": "region inserted",
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "reimport",
+          "region": "pending",
+          "change": "region inserted",
+          "text": "Reimporting…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "reimport",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Reimporting crate_albedo…"
+          ],
+          "removed": [],
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "release unchanged",
+          "region": "div.asset-browser__status",
+          "change": "region removed",
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "release unchanged",
+          "region": "notice",
+          "change": "region inserted",
+          "text": "Already up to date. Nothing changed."
+        },
+        {
+          "step": "release unchanged",
+          "region": "pending",
+          "change": "region removed",
+          "text": "Reimporting…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "release unchanged",
+          "region": "status line",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            "Reimporting crate_albedo…"
+          ],
+          "text": ""
+        },
+        {
+          "step": "release unchanged",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Already up to date: crate_albedo. Nothing changed."
+          ],
+          "removed": [],
+          "text": "Already up to date: crate_albedo. Nothing changed."
+        }
+      ],
+      "pageErrors": 0,
+      "remoteRequests": 0,
+      "stepError": null
+    },
+    {
+      "state": "noop-import",
+      "size": "normal 1440x874",
+      "note": "Import form with two paths of existing assets; MOCKED unchanged receipt",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "models/props/crate_stack.glb"
+            },
+            {
+              "source": "textures/props/crate_albedo.png"
+            }
+          ]
+        }
+      ],
+      "mockedResults": [
+        {
+          "ok": true,
+          "assetImport": {
+            "revision": 41,
+            "transaction": null
+          }
+        }
+      ],
+      "steps": [
+        {
+          "step": "rows",
+          "inspectorWidth": 360,
+          "notice": null,
+          "statusLine": null,
+          "statusLineClipped": false,
+          "action": "Import 2 files",
+          "header": "Import assets",
+          "justImported": [],
+          "historyShown": {
+            "meta": "5 of 6 applied",
+            "nowAfter": "Rename entity to Lantern"
+          },
+          "host": {
+            "applied": 5,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Rename entity to Gate Spot"
+            ],
+            "head": "01M4K344EG00000000000006TW"
+          },
+          "focus": {
+            "tag": "input",
+            "role": null,
+            "name": "Path 2",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        },
+        {
+          "step": "pending",
+          "inspectorWidth": 360,
+          "notice": null,
+          "statusLine": "Importing 2 files…",
+          "statusLineClipped": false,
+          "action": null,
+          "header": "Import assets",
+          "justImported": [],
+          "historyShown": {
+            "meta": "5 of 6 applied",
+            "nowAfter": "Rename entity to Lantern"
+          },
+          "host": {
+            "applied": 5,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Rename entity to Gate Spot"
+            ],
+            "head": "01M4K344EG00000000000006TW"
+          },
+          "focus": {
+            "tag": "input",
+            "role": null,
+            "name": "Path 2",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        },
+        {
+          "step": "done",
+          "inspectorWidth": 360,
+          "notice": {
+            "text": "Already up to date. Nothing changed.",
+            "role": "status",
+            "lines": [
+              1
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Already up to date: 2 files. Nothing changed.",
+          "statusLineClipped": false,
+          "action": "Import",
+          "header": "Import assets",
+          "justImported": [],
+          "historyShown": {
+            "meta": "5 of 6 applied",
+            "nowAfter": "Rename entity to Lantern"
+          },
+          "host": {
+            "applied": 5,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Rename entity to Gate Spot"
+            ],
+            "head": "01M4K344EG00000000000006TW"
+          },
+          "focus": {
+            "tag": "input",
+            "role": null,
+            "name": "Path 1",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        }
+      ],
+      "liveRegionChanges": [
+        {
+          "step": "import",
+          "region": "div.asset-browser__status",
+          "change": "region inserted",
+          "text": "Importing 2 files…"
+        },
+        {
+          "step": "import",
+          "region": "pending",
+          "change": "region inserted",
+          "text": "Importing 2 files…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "import",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Importing 2 files…"
+          ],
+          "removed": [],
+          "text": "Importing 2 files…"
+        },
+        {
+          "step": "release unchanged",
+          "region": "div.asset-browser__status",
+          "change": "region removed",
+          "text": "Importing 2 files…"
+        },
+        {
+          "step": "release unchanged",
+          "region": "notice",
+          "change": "region inserted",
+          "text": "Already up to date. Nothing changed."
+        },
+        {
+          "step": "release unchanged",
+          "region": "pending",
+          "change": "region removed",
+          "text": "Importing 2 files…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "release unchanged",
+          "region": "status line",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            "Importing 2 files…"
+          ],
+          "text": ""
+        },
+        {
+          "step": "release unchanged",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Already up to date: 2 files. Nothing changed."
+          ],
+          "removed": [],
+          "text": "Already up to date: 2 files. Nothing changed."
+        }
+      ],
+      "pageErrors": 0,
+      "remoteRequests": 0,
+      "stepError": null
+    },
+    {
+      "state": "noop-import",
+      "size": "minimum 1000x650",
+      "note": "Import form with two paths of existing assets; MOCKED unchanged receipt",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "models/props/crate_stack.glb"
+            },
+            {
+              "source": "textures/props/crate_albedo.png"
+            }
+          ]
+        }
+      ],
+      "mockedResults": [
+        {
+          "ok": true,
+          "assetImport": {
+            "revision": 41,
+            "transaction": null
+          }
+        }
+      ],
+      "steps": [
+        {
+          "step": "rows",
+          "inspectorWidth": 280,
+          "notice": null,
+          "statusLine": null,
+          "statusLineClipped": false,
+          "action": "Import 2 files",
+          "header": "Import assets",
+          "justImported": [],
+          "historyShown": {
+            "meta": "5 of 6 applied",
+            "nowAfter": "Rename entity to Lantern"
+          },
+          "host": {
+            "applied": 5,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Rename entity to Gate Spot"
+            ],
+            "head": "01M4K344EG00000000000006TW"
+          },
+          "focus": {
+            "tag": "input",
+            "role": null,
+            "name": "Path 2",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        },
+        {
+          "step": "pending",
+          "inspectorWidth": 280,
+          "notice": null,
+          "statusLine": "Importing 2 files…",
+          "statusLineClipped": false,
+          "action": null,
+          "header": "Import assets",
+          "justImported": [],
+          "historyShown": {
+            "meta": "5 of 6 applied",
+            "nowAfter": "Rename entity to Lantern"
+          },
+          "host": {
+            "applied": 5,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Rename entity to Gate Spot"
+            ],
+            "head": "01M4K344EG00000000000006TW"
+          },
+          "focus": {
+            "tag": "input",
+            "role": null,
+            "name": "Path 2",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        },
+        {
+          "step": "done",
+          "inspectorWidth": 280,
+          "notice": {
+            "text": "Already up to date. Nothing changed.",
+            "role": "status",
+            "lines": [
+              1
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Already up to date: 2 files. Nothing changed.",
+          "statusLineClipped": false,
+          "action": "Import",
+          "header": "Import assets",
+          "justImported": [],
+          "historyShown": {
+            "meta": "5 of 6 applied",
+            "nowAfter": "Rename entity to Lantern"
+          },
+          "host": {
+            "applied": 5,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Rename entity to Gate Spot"
+            ],
+            "head": "01M4K344EG00000000000006TW"
+          },
+          "focus": {
+            "tag": "input",
+            "role": null,
+            "name": "Path 1",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        }
+      ],
+      "liveRegionChanges": [
+        {
+          "step": "import",
+          "region": "div.asset-browser__status",
+          "change": "region inserted",
+          "text": "Importing 2 files…"
+        },
+        {
+          "step": "import",
+          "region": "pending",
+          "change": "region inserted",
+          "text": "Importing 2 files…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "import",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Importing 2 files…"
+          ],
+          "removed": [],
+          "text": "Importing 2 files…"
+        },
+        {
+          "step": "release unchanged",
+          "region": "div.asset-browser__status",
+          "change": "region removed",
+          "text": "Importing 2 files…"
+        },
+        {
+          "step": "release unchanged",
+          "region": "notice",
+          "change": "region inserted",
+          "text": "Already up to date. Nothing changed."
+        },
+        {
+          "step": "release unchanged",
+          "region": "pending",
+          "change": "region removed",
+          "text": "Importing 2 files…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "release unchanged",
+          "region": "status line",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            "Importing 2 files…"
+          ],
+          "text": ""
+        },
+        {
+          "step": "release unchanged",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Already up to date: 2 files. Nothing changed."
+          ],
+          "removed": [],
+          "text": "Already up to date: 2 files. Nothing changed."
+        }
+      ],
+      "pageErrors": 0,
+      "remoteRequests": 0,
+      "stepError": null
+    },
+    {
+      "state": "noop-import",
+      "size": "narrow 1440x874",
+      "note": "Import form with two paths of existing assets; MOCKED unchanged receipt",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "models/props/crate_stack.glb"
+            },
+            {
+              "source": "textures/props/crate_albedo.png"
+            }
+          ]
+        }
+      ],
+      "mockedResults": [
+        {
+          "ok": true,
+          "assetImport": {
+            "revision": 41,
+            "transaction": null
+          }
+        }
+      ],
+      "steps": [
+        {
+          "step": "rows",
+          "inspectorWidth": 280,
+          "notice": null,
+          "statusLine": null,
+          "statusLineClipped": false,
+          "action": "Import 2 files",
+          "header": "Import assets",
+          "justImported": [],
+          "historyShown": {
+            "meta": "5 of 6 applied",
+            "nowAfter": "Rename entity to Lantern"
+          },
+          "host": {
+            "applied": 5,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Rename entity to Gate Spot"
+            ],
+            "head": "01M4K344EG00000000000006TW"
+          },
+          "focus": {
+            "tag": "input",
+            "role": null,
+            "name": "Path 2",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        },
+        {
+          "step": "pending",
+          "inspectorWidth": 280,
+          "notice": null,
+          "statusLine": "Importing 2 files…",
+          "statusLineClipped": false,
+          "action": null,
+          "header": "Import assets",
+          "justImported": [],
+          "historyShown": {
+            "meta": "5 of 6 applied",
+            "nowAfter": "Rename entity to Lantern"
+          },
+          "host": {
+            "applied": 5,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Rename entity to Gate Spot"
+            ],
+            "head": "01M4K344EG00000000000006TW"
+          },
+          "focus": {
+            "tag": "input",
+            "role": null,
+            "name": "Path 2",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        },
+        {
+          "step": "done",
+          "inspectorWidth": 280,
+          "notice": {
+            "text": "Already up to date. Nothing changed.",
+            "role": "status",
+            "lines": [
+              1
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Already up to date: 2 files. Nothing changed.",
+          "statusLineClipped": false,
+          "action": "Import",
+          "header": "Import assets",
+          "justImported": [],
+          "historyShown": {
+            "meta": "5 of 6 applied",
+            "nowAfter": "Rename entity to Lantern"
+          },
+          "host": {
+            "applied": 5,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Rename entity to Gate Spot"
+            ],
+            "head": "01M4K344EG00000000000006TW"
+          },
+          "focus": {
+            "tag": "input",
+            "role": null,
+            "name": "Path 1",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        }
+      ],
+      "liveRegionChanges": [
+        {
+          "step": "import",
+          "region": "div.asset-browser__status",
+          "change": "region inserted",
+          "text": "Importing 2 files…"
+        },
+        {
+          "step": "import",
+          "region": "pending",
+          "change": "region inserted",
+          "text": "Importing 2 files…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "import",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Importing 2 files…"
+          ],
+          "removed": [],
+          "text": "Importing 2 files…"
+        },
+        {
+          "step": "release unchanged",
+          "region": "div.asset-browser__status",
+          "change": "region removed",
+          "text": "Importing 2 files…"
+        },
+        {
+          "step": "release unchanged",
+          "region": "notice",
+          "change": "region inserted",
+          "text": "Already up to date. Nothing changed."
+        },
+        {
+          "step": "release unchanged",
+          "region": "pending",
+          "change": "region removed",
+          "text": "Importing 2 files…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "release unchanged",
+          "region": "status line",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            "Importing 2 files…"
+          ],
+          "text": ""
+        },
+        {
+          "step": "release unchanged",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Already up to date: 2 files. Nothing changed."
+          ],
+          "removed": [],
+          "text": "Already up to date: 2 files. Nothing changed."
+        }
+      ],
+      "pageErrors": 0,
+      "remoteRequests": 0,
+      "stepError": null
+    },
+    {
+      "state": "changed-reimport",
+      "size": "normal 1440x874",
+      "note": "Reimport crate_albedo; MOCKED changed receipt; then Undo (Cmd+Z), Redo (Shift+Cmd+Z) and a newer rename through the hierarchy",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "textures/props/crate_albedo.png"
+            }
+          ]
+        },
+        {
+          "type": "history.undo"
+        },
+        {
+          "type": "history.redo"
+        },
+        {
+          "type": "entity.rename",
+          "entity": "01JA33RV00000000000000003D",
+          "name": "Harbor Sun"
+        }
+      ],
+      "mockedResults": [
+        {
+          "ok": true,
+          "assetImport": {
+            "revision": 42,
+            "transaction": "01M4K3KEP00000000000000710"
+          }
+        }
+      ],
+      "steps": [
+        {
+          "step": "changed",
+          "inspectorWidth": 360,
+          "notice": {
+            "text": "Reimported. Undo reverts the whole reimport.",
+            "role": "status",
+            "lines": [
+              1
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Reimported crate_albedo.",
+          "statusLineClipped": false,
+          "action": "Reimport",
+          "header": "crate_albedo",
+          "justImported": [
+            "crate_albedo Texture, Color, just imported"
+          ],
+          "historyShown": {
+            "meta": "6 of 6 applied",
+            "nowAfter": "Import assets"
+          },
+          "host": {
+            "applied": 6,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Import assets"
+            ],
+            "head": "01M4K3KEP00000000000000710"
+          },
+          "focus": {
+            "tag": "h3",
+            "role": null,
+            "name": "crate_albedo",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        },
+        {
+          "step": "undone",
+          "inspectorWidth": 360,
+          "notice": {
+            "text": "Reimported.",
+            "role": "status",
+            "lines": [
+              1
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Reimported crate_albedo.",
+          "statusLineClipped": false,
+          "action": "Reimport",
+          "header": "crate_albedo",
+          "justImported": [
+            "crate_albedo Texture, Color, just imported"
+          ],
+          "historyShown": {
+            "meta": "5 of 6 applied",
+            "nowAfter": "Rename entity to Lantern"
+          },
+          "host": {
+            "applied": 5,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Import assets"
+            ],
+            "head": "01M4K344EG00000000000006TW"
+          },
+          "focus": {
+            "tag": "h3",
+            "role": null,
+            "name": "crate_albedo",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        },
+        {
+          "step": "redone",
+          "inspectorWidth": 360,
+          "notice": {
+            "text": "Reimported. Undo reverts the whole reimport.",
+            "role": "status",
+            "lines": [
+              1
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Reimported crate_albedo.",
+          "statusLineClipped": false,
+          "action": "Reimport",
+          "header": "crate_albedo",
+          "justImported": [
+            "crate_albedo Texture, Color, just imported"
+          ],
+          "historyShown": {
+            "meta": "6 of 6 applied",
+            "nowAfter": "Import assets"
+          },
+          "host": {
+            "applied": 6,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Import assets"
+            ],
+            "head": "01M4K3KEP00000000000000710"
+          },
+          "focus": {
+            "tag": "h3",
+            "role": null,
+            "name": "crate_albedo",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        },
+        {
+          "step": "newer",
+          "inspectorWidth": 360,
+          "notice": {
+            "text": "Reimported.",
+            "role": "status",
+            "lines": [
+              1
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Renamed to Harbor Sun",
+          "statusLineClipped": false,
+          "action": "Reimport",
+          "header": "crate_albedo",
+          "justImported": [
+            "crate_albedo Texture, Color, just imported"
+          ],
+          "historyShown": {
+            "meta": "7 of 7 applied",
+            "nowAfter": "Rename entity to Harbor Sun"
+          },
+          "host": {
+            "applied": 7,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Import assets",
+              "Rename entity to Harbor Sun"
+            ],
+            "head": "01M4K3PJ9G00000000000006XW"
+          },
+          "focus": {
+            "tag": "button",
+            "role": "tab",
+            "name": "Assets8 assets",
+            "region": "hierarchy",
+            "outline": null
+          },
+          "axeViolations": 0
+        }
+      ],
+      "liveRegionChanges": [
+        {
+          "step": "reimport",
+          "region": "div.asset-browser__status",
+          "change": "region inserted",
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "reimport",
+          "region": "pending",
+          "change": "region inserted",
+          "text": "Reimporting…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "reimport",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Reimporting crate_albedo…"
+          ],
+          "removed": [],
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "release changed",
+          "region": "div.asset-browser__status",
+          "change": "region removed",
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "release changed",
+          "region": "notice",
+          "change": "region inserted",
+          "text": "Reimported. Undo reverts the whole reimport."
+        },
+        {
+          "step": "release changed",
+          "region": "pending",
+          "change": "region removed",
+          "text": "Reimporting…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "release changed",
+          "region": "status line",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            "Reimporting crate_albedo…"
+          ],
+          "text": ""
+        },
+        {
+          "step": "release changed",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Reimported crate_albedo."
+          ],
+          "removed": [],
+          "text": "Reimported crate_albedo."
+        },
+        {
+          "step": "undo",
+          "region": "notice",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            " Undo reverts the whole reimport."
+          ],
+          "text": "Reimported."
+        },
+        {
+          "step": "redo",
+          "region": "notice",
+          "change": "added",
+          "added": [
+            " Undo reverts the whole reimport."
+          ],
+          "removed": [],
+          "text": "Reimported. Undo reverts the whole reimport."
+        },
+        {
+          "step": "newer edit",
+          "region": "notice",
+          "change": "region removed",
+          "text": "Reimported. Undo reverts the whole reimport."
+        },
+        {
+          "step": "newer edit",
+          "region": "status line",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            "Reimported crate_albedo."
+          ],
+          "text": ""
+        },
+        {
+          "step": "newer edit",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Renamed to Harbor Sun"
+          ],
+          "removed": [],
+          "text": "Renamed to Harbor Sun"
+        },
+        {
+          "step": "newer edit",
+          "region": "notice",
+          "change": "region inserted",
+          "text": "Reimported."
+        }
+      ],
+      "pageErrors": 0,
+      "remoteRequests": 0,
+      "stepError": null
+    },
+    {
+      "state": "changed-reimport",
+      "size": "minimum 1000x650",
+      "note": "Reimport crate_albedo; MOCKED changed receipt; then Undo (Cmd+Z), Redo (Shift+Cmd+Z) and a newer rename through the hierarchy",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "textures/props/crate_albedo.png"
+            }
+          ]
+        },
+        {
+          "type": "history.undo"
+        },
+        {
+          "type": "history.redo"
+        },
+        {
+          "type": "entity.rename",
+          "entity": "01JA33RV00000000000000003D",
+          "name": "Harbor Sun"
+        }
+      ],
+      "mockedResults": [
+        {
+          "ok": true,
+          "assetImport": {
+            "revision": 42,
+            "transaction": "01M4K3KEP00000000000000710"
+          }
+        }
+      ],
+      "steps": [
+        {
+          "step": "changed",
+          "inspectorWidth": 280,
+          "notice": {
+            "text": "Reimported. Undo reverts the whole reimport.",
+            "role": "status",
+            "lines": [
+              2
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Reimported crate_albedo.",
+          "statusLineClipped": false,
+          "action": "Reimport",
+          "header": "crate_albedo",
+          "justImported": [
+            "crate_albedo Texture, Color, just imported"
+          ],
+          "historyShown": {
+            "meta": "6 of 6 applied",
+            "nowAfter": "Import assets"
+          },
+          "host": {
+            "applied": 6,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Import assets"
+            ],
+            "head": "01M4K3KEP00000000000000710"
+          },
+          "focus": {
+            "tag": "h3",
+            "role": null,
+            "name": "crate_albedo",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        },
+        {
+          "step": "undone",
+          "inspectorWidth": 280,
+          "notice": {
+            "text": "Reimported.",
+            "role": "status",
+            "lines": [
+              1
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Reimported crate_albedo.",
+          "statusLineClipped": false,
+          "action": "Reimport",
+          "header": "crate_albedo",
+          "justImported": [
+            "crate_albedo Texture, Color, just imported"
+          ],
+          "historyShown": {
+            "meta": "5 of 6 applied",
+            "nowAfter": "Rename entity to Lantern"
+          },
+          "host": {
+            "applied": 5,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Import assets"
+            ],
+            "head": "01M4K344EG00000000000006TW"
+          },
+          "focus": {
+            "tag": "h3",
+            "role": null,
+            "name": "crate_albedo",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        },
+        {
+          "step": "redone",
+          "inspectorWidth": 280,
+          "notice": {
+            "text": "Reimported. Undo reverts the whole reimport.",
+            "role": "status",
+            "lines": [
+              2
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Reimported crate_albedo.",
+          "statusLineClipped": false,
+          "action": "Reimport",
+          "header": "crate_albedo",
+          "justImported": [
+            "crate_albedo Texture, Color, just imported"
+          ],
+          "historyShown": {
+            "meta": "6 of 6 applied",
+            "nowAfter": "Import assets"
+          },
+          "host": {
+            "applied": 6,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Import assets"
+            ],
+            "head": "01M4K3KEP00000000000000710"
+          },
+          "focus": {
+            "tag": "h3",
+            "role": null,
+            "name": "crate_albedo",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        },
+        {
+          "step": "newer",
+          "inspectorWidth": 280,
+          "notice": {
+            "text": "Reimported.",
+            "role": "status",
+            "lines": [
+              1
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Renamed to Harbor Sun",
+          "statusLineClipped": false,
+          "action": "Reimport",
+          "header": "crate_albedo",
+          "justImported": [
+            "crate_albedo Texture, Color, just imported"
+          ],
+          "historyShown": {
+            "meta": "7 of 7 applied",
+            "nowAfter": "Rename entity to Harbor Sun"
+          },
+          "host": {
+            "applied": 7,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Import assets",
+              "Rename entity to Harbor Sun"
+            ],
+            "head": "01M4K3PJ9G00000000000006XW"
+          },
+          "focus": {
+            "tag": "button",
+            "role": "tab",
+            "name": "Assets8 assets",
+            "region": "hierarchy",
+            "outline": null
+          },
+          "axeViolations": 0
+        }
+      ],
+      "liveRegionChanges": [
+        {
+          "step": "reimport",
+          "region": "div.asset-browser__status",
+          "change": "region inserted",
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "reimport",
+          "region": "pending",
+          "change": "region inserted",
+          "text": "Reimporting…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "reimport",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Reimporting crate_albedo…"
+          ],
+          "removed": [],
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "release changed",
+          "region": "div.asset-browser__status",
+          "change": "region removed",
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "release changed",
+          "region": "notice",
+          "change": "region inserted",
+          "text": "Reimported. Undo reverts the whole reimport."
+        },
+        {
+          "step": "release changed",
+          "region": "pending",
+          "change": "region removed",
+          "text": "Reimporting…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "release changed",
+          "region": "status line",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            "Reimporting crate_albedo…"
+          ],
+          "text": ""
+        },
+        {
+          "step": "release changed",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Reimported crate_albedo."
+          ],
+          "removed": [],
+          "text": "Reimported crate_albedo."
+        },
+        {
+          "step": "undo",
+          "region": "notice",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            " Undo reverts the whole reimport."
+          ],
+          "text": "Reimported."
+        },
+        {
+          "step": "redo",
+          "region": "notice",
+          "change": "added",
+          "added": [
+            " Undo reverts the whole reimport."
+          ],
+          "removed": [],
+          "text": "Reimported. Undo reverts the whole reimport."
+        },
+        {
+          "step": "newer edit",
+          "region": "notice",
+          "change": "region removed",
+          "text": "Reimported. Undo reverts the whole reimport."
+        },
+        {
+          "step": "newer edit",
+          "region": "status line",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            "Reimported crate_albedo."
+          ],
+          "text": ""
+        },
+        {
+          "step": "newer edit",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Renamed to Harbor Sun"
+          ],
+          "removed": [],
+          "text": "Renamed to Harbor Sun"
+        },
+        {
+          "step": "newer edit",
+          "region": "notice",
+          "change": "region inserted",
+          "text": "Reimported."
+        }
+      ],
+      "pageErrors": 0,
+      "remoteRequests": 0,
+      "stepError": null
+    },
+    {
+      "state": "changed-reimport",
+      "size": "narrow 1440x874",
+      "note": "Reimport crate_albedo; MOCKED changed receipt; then Undo (Cmd+Z), Redo (Shift+Cmd+Z) and a newer rename through the hierarchy",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "textures/props/crate_albedo.png"
+            }
+          ]
+        },
+        {
+          "type": "history.undo"
+        },
+        {
+          "type": "history.redo"
+        },
+        {
+          "type": "entity.rename",
+          "entity": "01JA33RV00000000000000003D",
+          "name": "Harbor Sun"
+        }
+      ],
+      "mockedResults": [
+        {
+          "ok": true,
+          "assetImport": {
+            "revision": 42,
+            "transaction": "01M4K3KEP00000000000000710"
+          }
+        }
+      ],
+      "steps": [
+        {
+          "step": "changed",
+          "inspectorWidth": 280,
+          "notice": {
+            "text": "Reimported. Undo reverts the whole reimport.",
+            "role": "status",
+            "lines": [
+              2
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Reimported crate_albedo.",
+          "statusLineClipped": false,
+          "action": "Reimport",
+          "header": "crate_albedo",
+          "justImported": [
+            "crate_albedo Texture, Color, just imported"
+          ],
+          "historyShown": {
+            "meta": "6 of 6 applied",
+            "nowAfter": "Import assets"
+          },
+          "host": {
+            "applied": 6,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Import assets"
+            ],
+            "head": "01M4K3KEP00000000000000710"
+          },
+          "focus": {
+            "tag": "h3",
+            "role": null,
+            "name": "crate_albedo",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        },
+        {
+          "step": "undone",
+          "inspectorWidth": 280,
+          "notice": {
+            "text": "Reimported.",
+            "role": "status",
+            "lines": [
+              1
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Reimported crate_albedo.",
+          "statusLineClipped": false,
+          "action": "Reimport",
+          "header": "crate_albedo",
+          "justImported": [
+            "crate_albedo Texture, Color, just imported"
+          ],
+          "historyShown": {
+            "meta": "5 of 6 applied",
+            "nowAfter": "Rename entity to Lantern"
+          },
+          "host": {
+            "applied": 5,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Import assets"
+            ],
+            "head": "01M4K344EG00000000000006TW"
+          },
+          "focus": {
+            "tag": "h3",
+            "role": null,
+            "name": "crate_albedo",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        },
+        {
+          "step": "redone",
+          "inspectorWidth": 280,
+          "notice": {
+            "text": "Reimported. Undo reverts the whole reimport.",
+            "role": "status",
+            "lines": [
+              2
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Reimported crate_albedo.",
+          "statusLineClipped": false,
+          "action": "Reimport",
+          "header": "crate_albedo",
+          "justImported": [
+            "crate_albedo Texture, Color, just imported"
+          ],
+          "historyShown": {
+            "meta": "6 of 6 applied",
+            "nowAfter": "Import assets"
+          },
+          "host": {
+            "applied": 6,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Import assets"
+            ],
+            "head": "01M4K3KEP00000000000000710"
+          },
+          "focus": {
+            "tag": "h3",
+            "role": null,
+            "name": "crate_albedo",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        },
+        {
+          "step": "newer",
+          "inspectorWidth": 280,
+          "notice": {
+            "text": "Reimported.",
+            "role": "status",
+            "lines": [
+              1
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Renamed to Harbor Sun",
+          "statusLineClipped": false,
+          "action": "Reimport",
+          "header": "crate_albedo",
+          "justImported": [
+            "crate_albedo Texture, Color, just imported"
+          ],
+          "historyShown": {
+            "meta": "7 of 7 applied",
+            "nowAfter": "Rename entity to Harbor Sun"
+          },
+          "host": {
+            "applied": 7,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Import assets",
+              "Rename entity to Harbor Sun"
+            ],
+            "head": "01M4K3PJ9G00000000000006XW"
+          },
+          "focus": {
+            "tag": "button",
+            "role": "tab",
+            "name": "Assets8 assets",
+            "region": "hierarchy",
+            "outline": null
+          },
+          "axeViolations": 0
+        }
+      ],
+      "liveRegionChanges": [
+        {
+          "step": "reimport",
+          "region": "div.asset-browser__status",
+          "change": "region inserted",
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "reimport",
+          "region": "pending",
+          "change": "region inserted",
+          "text": "Reimporting…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "reimport",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Reimporting crate_albedo…"
+          ],
+          "removed": [],
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "release changed",
+          "region": "div.asset-browser__status",
+          "change": "region removed",
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "release changed",
+          "region": "notice",
+          "change": "region inserted",
+          "text": "Reimported. Undo reverts the whole reimport."
+        },
+        {
+          "step": "release changed",
+          "region": "pending",
+          "change": "region removed",
+          "text": "Reimporting…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "release changed",
+          "region": "status line",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            "Reimporting crate_albedo…"
+          ],
+          "text": ""
+        },
+        {
+          "step": "release changed",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Reimported crate_albedo."
+          ],
+          "removed": [],
+          "text": "Reimported crate_albedo."
+        },
+        {
+          "step": "undo",
+          "region": "notice",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            " Undo reverts the whole reimport."
+          ],
+          "text": "Reimported."
+        },
+        {
+          "step": "redo",
+          "region": "notice",
+          "change": "added",
+          "added": [
+            " Undo reverts the whole reimport."
+          ],
+          "removed": [],
+          "text": "Reimported. Undo reverts the whole reimport."
+        },
+        {
+          "step": "newer edit",
+          "region": "notice",
+          "change": "region removed",
+          "text": "Reimported. Undo reverts the whole reimport."
+        },
+        {
+          "step": "newer edit",
+          "region": "status line",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            "Reimported crate_albedo."
+          ],
+          "text": ""
+        },
+        {
+          "step": "newer edit",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Renamed to Harbor Sun"
+          ],
+          "removed": [],
+          "text": "Renamed to Harbor Sun"
+        },
+        {
+          "step": "newer edit",
+          "region": "notice",
+          "change": "region inserted",
+          "text": "Reimported."
+        }
+      ],
+      "pageErrors": 0,
+      "remoteRequests": 0,
+      "stepError": null
+    },
+    {
+      "state": "changed-import",
+      "size": "normal 1440x874",
+      "note": "Import three new files; MOCKED changed receipt and asset list; then Cmd+Z from the reset path, then the titlebar Undo",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "models/dock/bollard.glb"
+            },
+            {
+              "source": "textures/dock/rope_coil.png"
+            },
+            {
+              "source": "audio/gull_cry.wav"
+            }
+          ]
+        },
+        {
+          "type": "history.undo"
+        }
+      ],
+      "mockedResults": [
+        {
+          "ok": true,
+          "assetImport": {
+            "revision": 42,
+            "transaction": "01M4K3KEP00000000000000710"
+          }
+        }
+      ],
+      "steps": [
+        {
+          "step": "changed",
+          "inspectorWidth": 360,
+          "notice": {
+            "text": "Imported 3 files. Undo reverts the whole batch.",
+            "role": "status",
+            "lines": [
+              1
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Imported 3 files.",
+          "statusLineClipped": false,
+          "action": "Import",
+          "header": "Import assets",
+          "justImported": [
+            "gull_cry Audio, just imported",
+            "bollard Model, just imported",
+            "rope_coil Texture, Color, just imported"
+          ],
+          "historyShown": {
+            "meta": "6 of 6 applied",
+            "nowAfter": "Import assets"
+          },
+          "host": {
+            "applied": 6,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Import assets"
+            ],
+            "head": "01M4K3KEP00000000000000710"
+          },
+          "focus": {
+            "tag": "input",
+            "role": null,
+            "name": "Path 1",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        },
+        {
+          "step": "text-undo",
+          "inspectorWidth": 360,
+          "notice": {
+            "text": "Imported 3 files. Undo reverts the whole batch.",
+            "role": "status",
+            "lines": [
+              1
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Imported 3 files.",
+          "statusLineClipped": false,
+          "action": "Import",
+          "header": "Import assets",
+          "justImported": [
+            "gull_cry Audio, just imported",
+            "bollard Model, just imported",
+            "rope_coil Texture, Color, just imported"
+          ],
+          "historyShown": {
+            "meta": "6 of 6 applied",
+            "nowAfter": "Import assets"
+          },
+          "host": {
+            "applied": 6,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Import assets"
+            ],
+            "head": "01M4K3KEP00000000000000710"
+          },
+          "focus": {
+            "tag": "input",
+            "role": null,
+            "name": "Path 1",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        },
+        {
+          "step": "undone",
+          "inspectorWidth": 360,
+          "notice": {
+            "text": "Imported 3 files.",
+            "role": "status",
+            "lines": [
+              1
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Imported 3 files.",
+          "statusLineClipped": false,
+          "action": "Import",
+          "header": "Import assets",
+          "justImported": [],
+          "historyShown": {
+            "meta": "5 of 6 applied",
+            "nowAfter": "Rename entity to Lantern"
+          },
+          "host": {
+            "applied": 5,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Import assets"
+            ],
+            "head": "01M4K344EG00000000000006TW"
+          },
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Undo",
+            "region": "titlebar",
+            "outline": null
+          },
+          "axeViolations": 0
+        }
+      ],
+      "liveRegionChanges": [
+        {
+          "step": "import",
+          "region": "div.asset-browser__status",
+          "change": "region inserted",
+          "text": "Importing 3 files…"
+        },
+        {
+          "step": "import",
+          "region": "pending",
+          "change": "region inserted",
+          "text": "Importing 3 files…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "import",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Importing 3 files…"
+          ],
+          "removed": [],
+          "text": "Importing 3 files…"
+        },
+        {
+          "step": "release changed",
+          "region": "div.asset-browser__status",
+          "change": "region removed",
+          "text": "Importing 3 files…"
+        },
+        {
+          "step": "release changed",
+          "region": "notice",
+          "change": "region inserted",
+          "text": "Imported 3 files. Undo reverts the whole batch."
+        },
+        {
+          "step": "release changed",
+          "region": "pending",
+          "change": "region removed",
+          "text": "Importing 3 files…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "release changed",
+          "region": "status line",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            "Importing 3 files…"
+          ],
+          "text": ""
+        },
+        {
+          "step": "release changed",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Imported 3 files."
+          ],
+          "removed": [],
+          "text": "Imported 3 files."
+        },
+        {
+          "step": "titlebar Undo",
+          "region": "notice",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            " Undo reverts the whole batch."
+          ],
+          "text": "Imported 3 files."
+        }
+      ],
+      "pageErrors": 0,
+      "remoteRequests": 0,
+      "stepError": null
+    },
+    {
+      "state": "changed-import",
+      "size": "minimum 1000x650",
+      "note": "Import three new files; MOCKED changed receipt and asset list; then Cmd+Z from the reset path, then the titlebar Undo",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "models/dock/bollard.glb"
+            },
+            {
+              "source": "textures/dock/rope_coil.png"
+            },
+            {
+              "source": "audio/gull_cry.wav"
+            }
+          ]
+        },
+        {
+          "type": "history.undo"
+        }
+      ],
+      "mockedResults": [
+        {
+          "ok": true,
+          "assetImport": {
+            "revision": 42,
+            "transaction": "01M4K3KEP00000000000000710"
+          }
+        }
+      ],
+      "steps": [
+        {
+          "step": "changed",
+          "inspectorWidth": 280,
+          "notice": {
+            "text": "Imported 3 files. Undo reverts the whole batch.",
+            "role": "status",
+            "lines": [
+              2
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Imported 3 files.",
+          "statusLineClipped": false,
+          "action": "Import",
+          "header": "Import assets",
+          "justImported": [
+            "gull_cry Audio, just imported",
+            "bollard Model, just imported",
+            "rope_coil Texture, Color, just imported"
+          ],
+          "historyShown": {
+            "meta": "6 of 6 applied",
+            "nowAfter": "Import assets"
+          },
+          "host": {
+            "applied": 6,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Import assets"
+            ],
+            "head": "01M4K3KEP00000000000000710"
+          },
+          "focus": {
+            "tag": "input",
+            "role": null,
+            "name": "Path 1",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        },
+        {
+          "step": "text-undo",
+          "inspectorWidth": 280,
+          "notice": {
+            "text": "Imported 3 files. Undo reverts the whole batch.",
+            "role": "status",
+            "lines": [
+              2
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Imported 3 files.",
+          "statusLineClipped": false,
+          "action": "Import",
+          "header": "Import assets",
+          "justImported": [
+            "gull_cry Audio, just imported",
+            "bollard Model, just imported",
+            "rope_coil Texture, Color, just imported"
+          ],
+          "historyShown": {
+            "meta": "6 of 6 applied",
+            "nowAfter": "Import assets"
+          },
+          "host": {
+            "applied": 6,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Import assets"
+            ],
+            "head": "01M4K3KEP00000000000000710"
+          },
+          "focus": {
+            "tag": "input",
+            "role": null,
+            "name": "Path 1",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        },
+        {
+          "step": "undone",
+          "inspectorWidth": 280,
+          "notice": {
+            "text": "Imported 3 files.",
+            "role": "status",
+            "lines": [
+              1
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Imported 3 files.",
+          "statusLineClipped": false,
+          "action": "Import",
+          "header": "Import assets",
+          "justImported": [],
+          "historyShown": {
+            "meta": "5 of 6 applied",
+            "nowAfter": "Rename entity to Lantern"
+          },
+          "host": {
+            "applied": 5,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Import assets"
+            ],
+            "head": "01M4K344EG00000000000006TW"
+          },
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Undo",
+            "region": "titlebar",
+            "outline": null
+          },
+          "axeViolations": 0
+        }
+      ],
+      "liveRegionChanges": [
+        {
+          "step": "import",
+          "region": "div.asset-browser__status",
+          "change": "region inserted",
+          "text": "Importing 3 files…"
+        },
+        {
+          "step": "import",
+          "region": "pending",
+          "change": "region inserted",
+          "text": "Importing 3 files…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "import",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Importing 3 files…"
+          ],
+          "removed": [],
+          "text": "Importing 3 files…"
+        },
+        {
+          "step": "release changed",
+          "region": "div.asset-browser__status",
+          "change": "region removed",
+          "text": "Importing 3 files…"
+        },
+        {
+          "step": "release changed",
+          "region": "notice",
+          "change": "region inserted",
+          "text": "Imported 3 files. Undo reverts the whole batch."
+        },
+        {
+          "step": "release changed",
+          "region": "pending",
+          "change": "region removed",
+          "text": "Importing 3 files…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "release changed",
+          "region": "status line",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            "Importing 3 files…"
+          ],
+          "text": ""
+        },
+        {
+          "step": "release changed",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Imported 3 files."
+          ],
+          "removed": [],
+          "text": "Imported 3 files."
+        },
+        {
+          "step": "titlebar Undo",
+          "region": "notice",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            " Undo reverts the whole batch."
+          ],
+          "text": "Imported 3 files."
+        }
+      ],
+      "pageErrors": 0,
+      "remoteRequests": 0,
+      "stepError": null
+    },
+    {
+      "state": "changed-import",
+      "size": "narrow 1440x874",
+      "note": "Import three new files; MOCKED changed receipt and asset list; then Cmd+Z from the reset path, then the titlebar Undo",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "models/dock/bollard.glb"
+            },
+            {
+              "source": "textures/dock/rope_coil.png"
+            },
+            {
+              "source": "audio/gull_cry.wav"
+            }
+          ]
+        },
+        {
+          "type": "history.undo"
+        }
+      ],
+      "mockedResults": [
+        {
+          "ok": true,
+          "assetImport": {
+            "revision": 42,
+            "transaction": "01M4K3KEP00000000000000710"
+          }
+        }
+      ],
+      "steps": [
+        {
+          "step": "changed",
+          "inspectorWidth": 280,
+          "notice": {
+            "text": "Imported 3 files. Undo reverts the whole batch.",
+            "role": "status",
+            "lines": [
+              2
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Imported 3 files.",
+          "statusLineClipped": false,
+          "action": "Import",
+          "header": "Import assets",
+          "justImported": [
+            "gull_cry Audio, just imported",
+            "bollard Model, just imported",
+            "rope_coil Texture, Color, just imported"
+          ],
+          "historyShown": {
+            "meta": "6 of 6 applied",
+            "nowAfter": "Import assets"
+          },
+          "host": {
+            "applied": 6,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Import assets"
+            ],
+            "head": "01M4K3KEP00000000000000710"
+          },
+          "focus": {
+            "tag": "input",
+            "role": null,
+            "name": "Path 1",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        },
+        {
+          "step": "text-undo",
+          "inspectorWidth": 280,
+          "notice": {
+            "text": "Imported 3 files. Undo reverts the whole batch.",
+            "role": "status",
+            "lines": [
+              2
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Imported 3 files.",
+          "statusLineClipped": false,
+          "action": "Import",
+          "header": "Import assets",
+          "justImported": [
+            "gull_cry Audio, just imported",
+            "bollard Model, just imported",
+            "rope_coil Texture, Color, just imported"
+          ],
+          "historyShown": {
+            "meta": "6 of 6 applied",
+            "nowAfter": "Import assets"
+          },
+          "host": {
+            "applied": 6,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Import assets"
+            ],
+            "head": "01M4K3KEP00000000000000710"
+          },
+          "focus": {
+            "tag": "input",
+            "role": null,
+            "name": "Path 1",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        },
+        {
+          "step": "undone",
+          "inspectorWidth": 280,
+          "notice": {
+            "text": "Imported 3 files.",
+            "role": "status",
+            "lines": [
+              1
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Imported 3 files.",
+          "statusLineClipped": false,
+          "action": "Import",
+          "header": "Import assets",
+          "justImported": [],
+          "historyShown": {
+            "meta": "5 of 6 applied",
+            "nowAfter": "Rename entity to Lantern"
+          },
+          "host": {
+            "applied": 5,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Import assets"
+            ],
+            "head": "01M4K344EG00000000000006TW"
+          },
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Undo",
+            "region": "titlebar",
+            "outline": null
+          },
+          "axeViolations": 0
+        }
+      ],
+      "liveRegionChanges": [
+        {
+          "step": "import",
+          "region": "div.asset-browser__status",
+          "change": "region inserted",
+          "text": "Importing 3 files…"
+        },
+        {
+          "step": "import",
+          "region": "pending",
+          "change": "region inserted",
+          "text": "Importing 3 files…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "import",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Importing 3 files…"
+          ],
+          "removed": [],
+          "text": "Importing 3 files…"
+        },
+        {
+          "step": "release changed",
+          "region": "div.asset-browser__status",
+          "change": "region removed",
+          "text": "Importing 3 files…"
+        },
+        {
+          "step": "release changed",
+          "region": "notice",
+          "change": "region inserted",
+          "text": "Imported 3 files. Undo reverts the whole batch."
+        },
+        {
+          "step": "release changed",
+          "region": "pending",
+          "change": "region removed",
+          "text": "Importing 3 files…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "release changed",
+          "region": "status line",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            "Importing 3 files…"
+          ],
+          "text": ""
+        },
+        {
+          "step": "release changed",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Imported 3 files."
+          ],
+          "removed": [],
+          "text": "Imported 3 files."
+        },
+        {
+          "step": "titlebar Undo",
+          "region": "notice",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            " Undo reverts the whole batch."
+          ],
+          "text": "Imported 3 files."
+        }
+      ],
+      "pageErrors": 0,
+      "remoteRequests": 0,
+      "stepError": null
+    },
+    {
+      "state": "unknown-reimport",
+      "size": "normal 1440x874",
+      "note": "Reimport crate_albedo; MOCKED host without receipts that appended \"Import assets\"",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "textures/props/crate_albedo.png"
+            }
+          ]
+        }
+      ],
+      "mockedResults": [
+        {
+          "ok": true
+        }
+      ],
+      "steps": [
+        {
+          "step": "done",
+          "inspectorWidth": 360,
+          "notice": {
+            "text": "Import completed.",
+            "role": "status",
+            "lines": [
+              1
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Import completed.",
+          "statusLineClipped": false,
+          "action": "Reimport",
+          "header": "crate_albedo",
+          "justImported": [],
+          "historyShown": {
+            "meta": "6 of 6 applied",
+            "nowAfter": "Import assets"
+          },
+          "host": {
+            "applied": 6,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Import assets"
+            ],
+            "head": "01M4K3KEP00000000000000710"
+          },
+          "focus": {
+            "tag": "h3",
+            "role": null,
+            "name": "crate_albedo",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        }
+      ],
+      "liveRegionChanges": [
+        {
+          "step": "reimport",
+          "region": "div.asset-browser__status",
+          "change": "region inserted",
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "reimport",
+          "region": "pending",
+          "change": "region inserted",
+          "text": "Reimporting…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "reimport",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Reimporting crate_albedo…"
+          ],
+          "removed": [],
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "release without receipt",
+          "region": "div.asset-browser__status",
+          "change": "region removed",
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "release without receipt",
+          "region": "notice",
+          "change": "region inserted",
+          "text": "Import completed."
+        },
+        {
+          "step": "release without receipt",
+          "region": "pending",
+          "change": "region removed",
+          "text": "Reimporting…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "release without receipt",
+          "region": "status line",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            "Reimporting crate_albedo…"
+          ],
+          "text": ""
+        },
+        {
+          "step": "release without receipt",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Import completed."
+          ],
+          "removed": [],
+          "text": "Import completed."
+        }
+      ],
+      "pageErrors": 0,
+      "remoteRequests": 0,
+      "stepError": null
+    },
+    {
+      "state": "unknown-reimport",
+      "size": "minimum 1000x650",
+      "note": "Reimport crate_albedo; MOCKED host without receipts that appended \"Import assets\"",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "textures/props/crate_albedo.png"
+            }
+          ]
+        }
+      ],
+      "mockedResults": [
+        {
+          "ok": true
+        }
+      ],
+      "steps": [
+        {
+          "step": "done",
+          "inspectorWidth": 280,
+          "notice": {
+            "text": "Import completed.",
+            "role": "status",
+            "lines": [
+              1
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Import completed.",
+          "statusLineClipped": false,
+          "action": "Reimport",
+          "header": "crate_albedo",
+          "justImported": [],
+          "historyShown": {
+            "meta": "6 of 6 applied",
+            "nowAfter": "Import assets"
+          },
+          "host": {
+            "applied": 6,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Import assets"
+            ],
+            "head": "01M4K3KEP00000000000000710"
+          },
+          "focus": {
+            "tag": "h3",
+            "role": null,
+            "name": "crate_albedo",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        }
+      ],
+      "liveRegionChanges": [
+        {
+          "step": "reimport",
+          "region": "div.asset-browser__status",
+          "change": "region inserted",
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "reimport",
+          "region": "pending",
+          "change": "region inserted",
+          "text": "Reimporting…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "reimport",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Reimporting crate_albedo…"
+          ],
+          "removed": [],
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "release without receipt",
+          "region": "div.asset-browser__status",
+          "change": "region removed",
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "release without receipt",
+          "region": "notice",
+          "change": "region inserted",
+          "text": "Import completed."
+        },
+        {
+          "step": "release without receipt",
+          "region": "pending",
+          "change": "region removed",
+          "text": "Reimporting…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "release without receipt",
+          "region": "status line",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            "Reimporting crate_albedo…"
+          ],
+          "text": ""
+        },
+        {
+          "step": "release without receipt",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Import completed."
+          ],
+          "removed": [],
+          "text": "Import completed."
+        }
+      ],
+      "pageErrors": 0,
+      "remoteRequests": 0,
+      "stepError": null
+    },
+    {
+      "state": "unknown-reimport",
+      "size": "narrow 1440x874",
+      "note": "Reimport crate_albedo; MOCKED host without receipts that appended \"Import assets\"",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "textures/props/crate_albedo.png"
+            }
+          ]
+        }
+      ],
+      "mockedResults": [
+        {
+          "ok": true
+        }
+      ],
+      "steps": [
+        {
+          "step": "done",
+          "inspectorWidth": 280,
+          "notice": {
+            "text": "Import completed.",
+            "role": "status",
+            "lines": [
+              1
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Import completed.",
+          "statusLineClipped": false,
+          "action": "Reimport",
+          "header": "crate_albedo",
+          "justImported": [],
+          "historyShown": {
+            "meta": "6 of 6 applied",
+            "nowAfter": "Import assets"
+          },
+          "host": {
+            "applied": 6,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Import assets"
+            ],
+            "head": "01M4K3KEP00000000000000710"
+          },
+          "focus": {
+            "tag": "h3",
+            "role": null,
+            "name": "crate_albedo",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        }
+      ],
+      "liveRegionChanges": [
+        {
+          "step": "reimport",
+          "region": "div.asset-browser__status",
+          "change": "region inserted",
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "reimport",
+          "region": "pending",
+          "change": "region inserted",
+          "text": "Reimporting…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "reimport",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Reimporting crate_albedo…"
+          ],
+          "removed": [],
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "release without receipt",
+          "region": "div.asset-browser__status",
+          "change": "region removed",
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "release without receipt",
+          "region": "notice",
+          "change": "region inserted",
+          "text": "Import completed."
+        },
+        {
+          "step": "release without receipt",
+          "region": "pending",
+          "change": "region removed",
+          "text": "Reimporting…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "release without receipt",
+          "region": "status line",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            "Reimporting crate_albedo…"
+          ],
+          "text": ""
+        },
+        {
+          "step": "release without receipt",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Import completed."
+          ],
+          "removed": [],
+          "text": "Import completed."
+        }
+      ],
+      "pageErrors": 0,
+      "remoteRequests": 0,
+      "stepError": null
+    },
+    {
+      "state": "unknown-import",
+      "size": "normal 1440x874",
+      "note": "Import form; MOCKED host without receipts that appended \"Import assets\"",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "models/dock/bollard.glb"
+            }
+          ]
+        }
+      ],
+      "mockedResults": [
+        {
+          "ok": true
+        }
+      ],
+      "steps": [
+        {
+          "step": "done",
+          "inspectorWidth": 360,
+          "notice": {
+            "text": "Import completed.",
+            "role": "status",
+            "lines": [
+              1
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Import completed.",
+          "statusLineClipped": false,
+          "action": "Import",
+          "header": "Import assets",
+          "justImported": [],
+          "historyShown": {
+            "meta": "6 of 6 applied",
+            "nowAfter": "Import assets"
+          },
+          "host": {
+            "applied": 6,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Import assets"
+            ],
+            "head": "01M4K3KEP00000000000000710"
+          },
+          "focus": {
+            "tag": "input",
+            "role": null,
+            "name": "Path 1",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        }
+      ],
+      "liveRegionChanges": [
+        {
+          "step": "import",
+          "region": "div.asset-browser__status",
+          "change": "region inserted",
+          "text": "Importing 1 file…"
+        },
+        {
+          "step": "import",
+          "region": "pending",
+          "change": "region inserted",
+          "text": "Importing 1 file…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "import",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Importing 1 file…"
+          ],
+          "removed": [],
+          "text": "Importing 1 file…"
+        },
+        {
+          "step": "release without receipt",
+          "region": "div.asset-browser__status",
+          "change": "region removed",
+          "text": "Importing 1 file…"
+        },
+        {
+          "step": "release without receipt",
+          "region": "notice",
+          "change": "region inserted",
+          "text": "Import completed."
+        },
+        {
+          "step": "release without receipt",
+          "region": "pending",
+          "change": "region removed",
+          "text": "Importing 1 file…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "release without receipt",
+          "region": "status line",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            "Importing 1 file…"
+          ],
+          "text": ""
+        },
+        {
+          "step": "release without receipt",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Import completed."
+          ],
+          "removed": [],
+          "text": "Import completed."
+        }
+      ],
+      "pageErrors": 0,
+      "remoteRequests": 0,
+      "stepError": null
+    },
+    {
+      "state": "failure-import",
+      "size": "normal 1440x874",
+      "note": "Import form with two new paths; MOCKED native cook failure (asset.import)",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "models/dock/bollard.glb"
+            },
+            {
+              "source": "textures/dock/rope_coil.png"
+            }
+          ]
+        }
+      ],
+      "mockedResults": [
+        {
+          "ok": false,
+          "error": {
+            "code": "asset.import",
+            "message": "could not cook textures/dock/rope_coil.png: asset IO: No such file or directory (os error 2)"
+          }
+        }
+      ],
+      "steps": [
+        {
+          "step": "done",
+          "inspectorWidth": 360,
+          "notice": {
+            "text": "Nothing was importedcould not cook textures/dock/rope_coil.png: asset IO: No such file or directory (os error 2)The asset list is unchanged. Your paths are kept below.",
+            "role": "alert",
+            "lines": [
+              1,
+              4,
+              2
+            ],
+            "contrast": [
+              13.8,
+              11.1,
+              7.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Import failed: could not cook textures/dock/rope_coil.png: asset IO: No such file or directory (os error 2)",
+          "statusLineClipped": false,
+          "action": "Try again",
+          "header": "Import assets",
+          "justImported": [],
+          "historyShown": {
+            "meta": "5 of 6 applied",
+            "nowAfter": "Rename entity to Lantern"
+          },
+          "host": {
+            "applied": 5,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Rename entity to Gate Spot"
+            ],
+            "head": "01M4K344EG00000000000006TW"
+          },
+          "focus": {
+            "tag": "input",
+            "role": null,
+            "name": "Path 2",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        }
+      ],
+      "liveRegionChanges": [
+        {
+          "step": "import",
+          "region": "div.asset-browser__status",
+          "change": "region inserted",
+          "text": "Importing 2 files…"
+        },
+        {
+          "step": "import",
+          "region": "pending",
+          "change": "region inserted",
+          "text": "Importing 2 files…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "import",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Importing 2 files…"
+          ],
+          "removed": [],
+          "text": "Importing 2 files…"
+        },
+        {
+          "step": "release failure",
+          "region": "notice",
+          "change": "region inserted",
+          "text": "Nothing was importedcould not cook textures/dock/rope_coil.png: asset IO: No such file or directory (os error 2)The asset list is unchanged. Your paths are kept below."
+        },
+        {
+          "step": "release failure",
+          "region": "pending",
+          "change": "region removed",
+          "text": "Importing 2 files…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "release failure",
+          "region": "status line",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            "Importing 2 files…"
+          ],
+          "text": ""
+        },
+        {
+          "step": "release failure",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Import failed: could not cook textures/dock/rope_coil.png: asset IO: No such file or directory (os error 2)"
+          ],
+          "removed": [],
+          "text": "Import failed: could not cook textures/dock/rope_coil.png: asset IO: No such file or directory (os error 2)"
+        }
+      ],
+      "pageErrors": 0,
+      "remoteRequests": 0,
+      "stepError": null
+    },
+    {
+      "state": "failure-import",
+      "size": "minimum 1000x650",
+      "note": "Import form with two new paths; MOCKED native cook failure (asset.import)",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "models/dock/bollard.glb"
+            },
+            {
+              "source": "textures/dock/rope_coil.png"
+            }
+          ]
+        }
+      ],
+      "mockedResults": [
+        {
+          "ok": false,
+          "error": {
+            "code": "asset.import",
+            "message": "could not cook textures/dock/rope_coil.png: asset IO: No such file or directory (os error 2)"
+          }
+        }
+      ],
+      "steps": [
+        {
+          "step": "done",
+          "inspectorWidth": 280,
+          "notice": {
+            "text": "Nothing was importedcould not cook textures/dock/rope_coil.png: asset IO: No such file or directory (os error 2)The asset list is unchanged. Your paths are kept below.",
+            "role": "alert",
+            "lines": [
+              1,
+              5,
+              2
+            ],
+            "contrast": [
+              13.8,
+              11.1,
+              7.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Import failed: could not cook textures/dock/rope_coil.png: asset IO: No such file or directory (os error 2)",
+          "statusLineClipped": false,
+          "action": "Try again",
+          "header": "Import assets",
+          "justImported": [],
+          "historyShown": {
+            "meta": "5 of 6 applied",
+            "nowAfter": "Rename entity to Lantern"
+          },
+          "host": {
+            "applied": 5,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Rename entity to Gate Spot"
+            ],
+            "head": "01M4K344EG00000000000006TW"
+          },
+          "focus": {
+            "tag": "input",
+            "role": null,
+            "name": "Path 2",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        }
+      ],
+      "liveRegionChanges": [
+        {
+          "step": "import",
+          "region": "div.asset-browser__status",
+          "change": "region inserted",
+          "text": "Importing 2 files…"
+        },
+        {
+          "step": "import",
+          "region": "pending",
+          "change": "region inserted",
+          "text": "Importing 2 files…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "import",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Importing 2 files…"
+          ],
+          "removed": [],
+          "text": "Importing 2 files…"
+        },
+        {
+          "step": "release failure",
+          "region": "notice",
+          "change": "region inserted",
+          "text": "Nothing was importedcould not cook textures/dock/rope_coil.png: asset IO: No such file or directory (os error 2)The asset list is unchanged. Your paths are kept below."
+        },
+        {
+          "step": "release failure",
+          "region": "pending",
+          "change": "region removed",
+          "text": "Importing 2 files…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "release failure",
+          "region": "status line",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            "Importing 2 files…"
+          ],
+          "text": ""
+        },
+        {
+          "step": "release failure",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Import failed: could not cook textures/dock/rope_coil.png: asset IO: No such file or directory (os error 2)"
+          ],
+          "removed": [],
+          "text": "Import failed: could not cook textures/dock/rope_coil.png: asset IO: No such file or directory (os error 2)"
+        }
+      ],
+      "pageErrors": 0,
+      "remoteRequests": 0,
+      "stepError": null
+    },
+    {
+      "state": "failure-import",
+      "size": "narrow 1440x874",
+      "note": "Import form with two new paths; MOCKED native cook failure (asset.import)",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "models/dock/bollard.glb"
+            },
+            {
+              "source": "textures/dock/rope_coil.png"
+            }
+          ]
+        }
+      ],
+      "mockedResults": [
+        {
+          "ok": false,
+          "error": {
+            "code": "asset.import",
+            "message": "could not cook textures/dock/rope_coil.png: asset IO: No such file or directory (os error 2)"
+          }
+        }
+      ],
+      "steps": [
+        {
+          "step": "done",
+          "inspectorWidth": 280,
+          "notice": {
+            "text": "Nothing was importedcould not cook textures/dock/rope_coil.png: asset IO: No such file or directory (os error 2)The asset list is unchanged. Your paths are kept below.",
+            "role": "alert",
+            "lines": [
+              1,
+              5,
+              2
+            ],
+            "contrast": [
+              13.8,
+              11.1,
+              7.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Import failed: could not cook textures/dock/rope_coil.png: asset IO: No such file or directory (os error 2)",
+          "statusLineClipped": false,
+          "action": "Try again",
+          "header": "Import assets",
+          "justImported": [],
+          "historyShown": {
+            "meta": "5 of 6 applied",
+            "nowAfter": "Rename entity to Lantern"
+          },
+          "host": {
+            "applied": 5,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Rename entity to Gate Spot"
+            ],
+            "head": "01M4K344EG00000000000006TW"
+          },
+          "focus": {
+            "tag": "input",
+            "role": null,
+            "name": "Path 2",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        }
+      ],
+      "liveRegionChanges": [
+        {
+          "step": "import",
+          "region": "div.asset-browser__status",
+          "change": "region inserted",
+          "text": "Importing 2 files…"
+        },
+        {
+          "step": "import",
+          "region": "pending",
+          "change": "region inserted",
+          "text": "Importing 2 files…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "import",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Importing 2 files…"
+          ],
+          "removed": [],
+          "text": "Importing 2 files…"
+        },
+        {
+          "step": "release failure",
+          "region": "notice",
+          "change": "region inserted",
+          "text": "Nothing was importedcould not cook textures/dock/rope_coil.png: asset IO: No such file or directory (os error 2)The asset list is unchanged. Your paths are kept below."
+        },
+        {
+          "step": "release failure",
+          "region": "pending",
+          "change": "region removed",
+          "text": "Importing 2 files…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "release failure",
+          "region": "status line",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            "Importing 2 files…"
+          ],
+          "text": ""
+        },
+        {
+          "step": "release failure",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Import failed: could not cook textures/dock/rope_coil.png: asset IO: No such file or directory (os error 2)"
+          ],
+          "removed": [],
+          "text": "Import failed: could not cook textures/dock/rope_coil.png: asset IO: No such file or directory (os error 2)"
+        }
+      ],
+      "pageErrors": 0,
+      "remoteRequests": 0,
+      "stepError": null
+    },
+    {
+      "state": "failure-reimport",
+      "size": "normal 1440x874",
+      "note": "Reimport crate_albedo; MOCKED native cook failure (asset.import) for a moved source",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "textures/props/crate_albedo.png"
+            }
+          ]
+        }
+      ],
+      "mockedResults": [
+        {
+          "ok": false,
+          "error": {
+            "code": "asset.import",
+            "message": "could not cook textures/props/crate_albedo.png: asset IO: No such file or directory (os error 2)"
+          }
+        }
+      ],
+      "steps": [
+        {
+          "step": "done",
+          "inspectorWidth": 360,
+          "notice": {
+            "text": "Nothing was importedcould not cook textures/props/crate_albedo.png: asset IO: No such file or directory (os error 2)The asset list is unchanged. Your paths are kept below.",
+            "role": "alert",
+            "lines": [
+              1,
+              4,
+              2
+            ],
+            "contrast": [
+              13.8,
+              11.1,
+              7.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Import failed: could not cook textures/props/crate_albedo.png: asset IO: No such file or directory (os error 2)",
+          "statusLineClipped": false,
+          "action": "Try again",
+          "header": "crate_albedo",
+          "justImported": [],
+          "historyShown": {
+            "meta": "5 of 6 applied",
+            "nowAfter": "Rename entity to Lantern"
+          },
+          "host": {
+            "applied": 5,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Rename entity to Gate Spot"
+            ],
+            "head": "01M4K344EG00000000000006TW"
+          },
+          "focus": {
+            "tag": "h3",
+            "role": null,
+            "name": "crate_albedo",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        }
+      ],
+      "liveRegionChanges": [
+        {
+          "step": "reimport",
+          "region": "div.asset-browser__status",
+          "change": "region inserted",
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "reimport",
+          "region": "pending",
+          "change": "region inserted",
+          "text": "Reimporting…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "reimport",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Reimporting crate_albedo…"
+          ],
+          "removed": [],
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "release failure",
+          "region": "notice",
+          "change": "region inserted",
+          "text": "Nothing was importedcould not cook textures/props/crate_albedo.png: asset IO: No such file or directory (os error 2)The asset list is unchanged. Your paths are kept below."
+        },
+        {
+          "step": "release failure",
+          "region": "pending",
+          "change": "region removed",
+          "text": "Reimporting…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "release failure",
+          "region": "status line",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            "Reimporting crate_albedo…"
+          ],
+          "text": ""
+        },
+        {
+          "step": "release failure",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Import failed: could not cook textures/props/crate_albedo.png: asset IO: No such file or directory (os error 2)"
+          ],
+          "removed": [],
+          "text": "Import failed: could not cook textures/props/crate_albedo.png: asset IO: No such file or directory (os error 2)"
+        }
+      ],
+      "pageErrors": 0,
+      "remoteRequests": 0,
+      "stepError": null
+    },
+    {
+      "state": "away-noop-reimport",
+      "size": "normal 1440x874",
+      "note": "Reimport crate_albedo, select gull_sheet while it runs; MOCKED unchanged receipt",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "textures/props/crate_albedo.png"
+            }
+          ]
+        }
+      ],
+      "mockedResults": [
+        {
+          "ok": true,
+          "assetImport": {
+            "revision": 41,
+            "transaction": null
+          }
+        }
+      ],
+      "steps": [
+        {
+          "step": "done",
+          "inspectorWidth": 360,
+          "notice": null,
+          "statusLine": "Already up to date: crate_albedo. Nothing changed.",
+          "statusLineClipped": false,
+          "action": "Reimport",
+          "header": "gull_sheet",
+          "justImported": [],
+          "historyShown": {
+            "meta": "5 of 6 applied",
+            "nowAfter": "Rename entity to Lantern"
+          },
+          "host": {
+            "applied": 5,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Rename entity to Gate Spot"
+            ],
+            "head": "01M4K344EG00000000000006TW"
+          },
+          "focus": {
+            "tag": "div",
+            "role": "option",
+            "name": "gull_sheet Texture, Color",
+            "region": "hierarchy",
+            "outline": null
+          },
+          "axeViolations": 0
+        }
+      ],
+      "liveRegionChanges": [
+        {
+          "step": "reimport",
+          "region": "div.asset-browser__status",
+          "change": "region inserted",
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "reimport",
+          "region": "pending",
+          "change": "region inserted",
+          "text": "Reimporting…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "reimport",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Reimporting crate_albedo…"
+          ],
+          "removed": [],
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "select another asset",
+          "region": "pending",
+          "change": "region removed",
+          "text": "Reimporting…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "release unchanged",
+          "region": "div.asset-browser__status",
+          "change": "region removed",
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "release unchanged",
+          "region": "status line",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            "Reimporting crate_albedo…"
+          ],
+          "text": ""
+        },
+        {
+          "step": "release unchanged",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Already up to date: crate_albedo. Nothing changed."
+          ],
+          "removed": [],
+          "text": "Already up to date: crate_albedo. Nothing changed."
+        }
+      ],
+      "pageErrors": 0,
+      "remoteRequests": 0,
+      "stepError": null
+    },
+    {
+      "state": "away-noop-reimport",
+      "size": "narrow 1440x874",
+      "note": "Reimport crate_albedo, select gull_sheet while it runs; MOCKED unchanged receipt",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "textures/props/crate_albedo.png"
+            }
+          ]
+        }
+      ],
+      "mockedResults": [
+        {
+          "ok": true,
+          "assetImport": {
+            "revision": 41,
+            "transaction": null
+          }
+        }
+      ],
+      "steps": [
+        {
+          "step": "done",
+          "inspectorWidth": 280,
+          "notice": null,
+          "statusLine": "Already up to date: crate_albedo. Nothing changed.",
+          "statusLineClipped": false,
+          "action": "Reimport",
+          "header": "gull_sheet",
+          "justImported": [],
+          "historyShown": {
+            "meta": "5 of 6 applied",
+            "nowAfter": "Rename entity to Lantern"
+          },
+          "host": {
+            "applied": 5,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Rename entity to Gate Spot"
+            ],
+            "head": "01M4K344EG00000000000006TW"
+          },
+          "focus": {
+            "tag": "div",
+            "role": "option",
+            "name": "gull_sheet Texture, Color",
+            "region": "hierarchy",
+            "outline": null
+          },
+          "axeViolations": 0
+        }
+      ],
+      "liveRegionChanges": [
+        {
+          "step": "reimport",
+          "region": "div.asset-browser__status",
+          "change": "region inserted",
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "reimport",
+          "region": "pending",
+          "change": "region inserted",
+          "text": "Reimporting…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "reimport",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Reimporting crate_albedo…"
+          ],
+          "removed": [],
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "select another asset",
+          "region": "pending",
+          "change": "region removed",
+          "text": "Reimporting…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "release unchanged",
+          "region": "div.asset-browser__status",
+          "change": "region removed",
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "release unchanged",
+          "region": "status line",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            "Reimporting crate_albedo…"
+          ],
+          "text": ""
+        },
+        {
+          "step": "release unchanged",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Already up to date: crate_albedo. Nothing changed."
+          ],
+          "removed": [],
+          "text": "Already up to date: crate_albedo. Nothing changed."
+        }
+      ],
+      "pageErrors": 0,
+      "remoteRequests": 0,
+      "stepError": null
+    },
+    {
+      "state": "away-changed-reimport",
+      "size": "normal 1440x874",
+      "note": "Reimport crate_albedo, select gull_sheet while it runs; MOCKED changed receipt (for comparison)",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "textures/props/crate_albedo.png"
+            }
+          ]
+        }
+      ],
+      "mockedResults": [
+        {
+          "ok": true,
+          "assetImport": {
+            "revision": 42,
+            "transaction": "01M4K3KEP00000000000000710"
+          }
+        }
+      ],
+      "steps": [
+        {
+          "step": "done",
+          "inspectorWidth": 360,
+          "notice": null,
+          "statusLine": "Reimported crate_albedo.",
+          "statusLineClipped": false,
+          "action": "Reimport",
+          "header": "gull_sheet",
+          "justImported": [
+            "crate_albedo Texture, Color, just imported"
+          ],
+          "historyShown": {
+            "meta": "6 of 6 applied",
+            "nowAfter": "Import assets"
+          },
+          "host": {
+            "applied": 6,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Import assets"
+            ],
+            "head": "01M4K3KEP00000000000000710"
+          },
+          "focus": {
+            "tag": "div",
+            "role": "option",
+            "name": "gull_sheet Texture, Color",
+            "region": "hierarchy",
+            "outline": null
+          },
+          "axeViolations": 0
+        }
+      ],
+      "liveRegionChanges": [
+        {
+          "step": "reimport",
+          "region": "div.asset-browser__status",
+          "change": "region inserted",
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "reimport",
+          "region": "pending",
+          "change": "region inserted",
+          "text": "Reimporting…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "reimport",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Reimporting crate_albedo…"
+          ],
+          "removed": [],
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "select another asset",
+          "region": "pending",
+          "change": "region removed",
+          "text": "Reimporting…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "release changed",
+          "region": "div.asset-browser__status",
+          "change": "region removed",
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "release changed",
+          "region": "status line",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            "Reimporting crate_albedo…"
+          ],
+          "text": ""
+        },
+        {
+          "step": "release changed",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Reimported crate_albedo."
+          ],
+          "removed": [],
+          "text": "Reimported crate_albedo."
+        }
+      ],
+      "pageErrors": 0,
+      "remoteRequests": 0,
+      "stepError": null
+    },
+    {
+      "state": "away-noop-import",
+      "size": "normal 1440x874",
+      "note": "Import two existing paths, select harbor_loop while it runs; MOCKED unchanged receipt",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "models/props/crate_stack.glb"
+            },
+            {
+              "source": "textures/props/crate_albedo.png"
+            }
+          ]
+        }
+      ],
+      "mockedResults": [
+        {
+          "ok": true,
+          "assetImport": {
+            "revision": 41,
+            "transaction": null
+          }
+        }
+      ],
+      "steps": [
+        {
+          "step": "done",
+          "inspectorWidth": 360,
+          "notice": null,
+          "statusLine": "Already up to date: 2 files. Nothing changed.",
+          "statusLineClipped": false,
+          "action": "Reimport",
+          "header": "harbor_loop",
+          "justImported": [],
+          "historyShown": {
+            "meta": "5 of 6 applied",
+            "nowAfter": "Rename entity to Lantern"
+          },
+          "host": {
+            "applied": 5,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Rename entity to Gate Spot"
+            ],
+            "head": "01M4K344EG00000000000006TW"
+          },
+          "focus": {
+            "tag": "div",
+            "role": "option",
+            "name": "harbor_loop Audio",
+            "region": "hierarchy",
+            "outline": null
+          },
+          "axeViolations": 0
+        }
+      ],
+      "liveRegionChanges": [
+        {
+          "step": "import",
+          "region": "div.asset-browser__status",
+          "change": "region inserted",
+          "text": "Importing 2 files…"
+        },
+        {
+          "step": "import",
+          "region": "pending",
+          "change": "region inserted",
+          "text": "Importing 2 files…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "import",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Importing 2 files…"
+          ],
+          "removed": [],
+          "text": "Importing 2 files…"
+        },
+        {
+          "step": "select an asset",
+          "region": "pending",
+          "change": "region removed",
+          "text": "Importing 2 files…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "release unchanged",
+          "region": "div.asset-browser__status",
+          "change": "region removed",
+          "text": "Importing 2 files…"
+        },
+        {
+          "step": "release unchanged",
+          "region": "status line",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            "Importing 2 files…"
+          ],
+          "text": ""
+        },
+        {
+          "step": "release unchanged",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Already up to date: 2 files. Nothing changed."
+          ],
+          "removed": [],
+          "text": "Already up to date: 2 files. Nothing changed."
+        }
+      ],
+      "pageErrors": 0,
+      "remoteRequests": 0,
+      "stepError": null
+    },
+    {
+      "state": "long-noop-reimport",
+      "size": "normal 1440x874",
+      "note": "Reimport the long-named atlas; MOCKED unchanged receipt",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "sprites/signage/harbor_master/notice_board_weathered_signage_atlas_variant_c.atlas.json"
+            }
+          ]
+        }
+      ],
+      "mockedResults": [
+        {
+          "ok": true,
+          "assetImport": {
+            "revision": 41,
+            "transaction": null
+          }
+        }
+      ],
+      "steps": [
+        {
+          "step": "done",
+          "inspectorWidth": 360,
+          "notice": {
+            "text": "Already up to date. Nothing changed.",
+            "role": "status",
+            "lines": [
+              1
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Already up to date: harbor_master_notice_board_weathered_signage_atlas_variant_c. Nothing changed.",
+          "statusLineClipped": false,
+          "action": "Reimport",
+          "header": "harbor_master_notice_board_weathered_signage_atlas_variant_c",
+          "justImported": [],
+          "historyShown": {
+            "meta": "5 of 6 applied",
+            "nowAfter": "Rename entity to Lantern"
+          },
+          "host": {
+            "applied": 5,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Rename entity to Gate Spot"
+            ],
+            "head": "01M4K344EG00000000000006TW"
+          },
+          "focus": {
+            "tag": "h3",
+            "role": null,
+            "name": "harbor_master_notice_board_weathered_signage_atlas_variant_c",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        }
+      ],
+      "liveRegionChanges": [
+        {
+          "step": "reimport",
+          "region": "div.asset-browser__status",
+          "change": "region inserted",
+          "text": "Reimporting harbor_master_notice_board_weathered_signage_atlas_variant_c…"
+        },
+        {
+          "step": "reimport",
+          "region": "pending",
+          "change": "region inserted",
+          "text": "Reimporting…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "reimport",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Reimporting harbor_master_notice_board_weathered_signage_atlas_variant_c…"
+          ],
+          "removed": [],
+          "text": "Reimporting harbor_master_notice_board_weathered_signage_atlas_variant_c…"
+        },
+        {
+          "step": "release unchanged",
+          "region": "div.asset-browser__status",
+          "change": "region removed",
+          "text": "Reimporting harbor_master_notice_board_weathered_signage_atlas_variant_c…"
+        },
+        {
+          "step": "release unchanged",
+          "region": "notice",
+          "change": "region inserted",
+          "text": "Already up to date. Nothing changed."
+        },
+        {
+          "step": "release unchanged",
+          "region": "pending",
+          "change": "region removed",
+          "text": "Reimporting…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "release unchanged",
+          "region": "status line",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            "Reimporting harbor_master_notice_board_weathered_signage_atlas_variant_c…"
+          ],
+          "text": ""
+        },
+        {
+          "step": "release unchanged",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Already up to date: harbor_master_notice_board_weathered_signage_atlas_variant_c. Nothing changed."
+          ],
+          "removed": [],
+          "text": "Already up to date: harbor_master_notice_board_weathered_signage_atlas_variant_c. Nothing changed."
+        }
+      ],
+      "pageErrors": 0,
+      "remoteRequests": 0,
+      "stepError": null
+    },
+    {
+      "state": "long-noop-reimport",
+      "size": "minimum 1000x650",
+      "note": "Reimport the long-named atlas; MOCKED unchanged receipt",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "sprites/signage/harbor_master/notice_board_weathered_signage_atlas_variant_c.atlas.json"
+            }
+          ]
+        }
+      ],
+      "mockedResults": [
+        {
+          "ok": true,
+          "assetImport": {
+            "revision": 41,
+            "transaction": null
+          }
+        }
+      ],
+      "steps": [
+        {
+          "step": "done",
+          "inspectorWidth": 280,
+          "notice": {
+            "text": "Already up to date. Nothing changed.",
+            "role": "status",
+            "lines": [
+              1
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Already up to date: harbor_master_notice_board_weathered_signage_atlas_variant_c. Nothing changed.",
+          "statusLineClipped": false,
+          "action": "Reimport",
+          "header": "harbor_master_notice_board_weathered_signage_atlas_variant_c",
+          "justImported": [],
+          "historyShown": {
+            "meta": "5 of 6 applied",
+            "nowAfter": "Rename entity to Lantern"
+          },
+          "host": {
+            "applied": 5,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Rename entity to Gate Spot"
+            ],
+            "head": "01M4K344EG00000000000006TW"
+          },
+          "focus": {
+            "tag": "h3",
+            "role": null,
+            "name": "harbor_master_notice_board_weathered_signage_atlas_variant_c",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        }
+      ],
+      "liveRegionChanges": [
+        {
+          "step": "reimport",
+          "region": "div.asset-browser__status",
+          "change": "region inserted",
+          "text": "Reimporting harbor_master_notice_board_weathered_signage_atlas_variant_c…"
+        },
+        {
+          "step": "reimport",
+          "region": "pending",
+          "change": "region inserted",
+          "text": "Reimporting…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "reimport",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Reimporting harbor_master_notice_board_weathered_signage_atlas_variant_c…"
+          ],
+          "removed": [],
+          "text": "Reimporting harbor_master_notice_board_weathered_signage_atlas_variant_c…"
+        },
+        {
+          "step": "release unchanged",
+          "region": "div.asset-browser__status",
+          "change": "region removed",
+          "text": "Reimporting harbor_master_notice_board_weathered_signage_atlas_variant_c…"
+        },
+        {
+          "step": "release unchanged",
+          "region": "notice",
+          "change": "region inserted",
+          "text": "Already up to date. Nothing changed."
+        },
+        {
+          "step": "release unchanged",
+          "region": "pending",
+          "change": "region removed",
+          "text": "Reimporting…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "release unchanged",
+          "region": "status line",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            "Reimporting harbor_master_notice_board_weathered_signage_atlas_variant_c…"
+          ],
+          "text": ""
+        },
+        {
+          "step": "release unchanged",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Already up to date: harbor_master_notice_board_weathered_signage_atlas_variant_c. Nothing changed."
+          ],
+          "removed": [],
+          "text": "Already up to date: harbor_master_notice_board_weathered_signage_atlas_variant_c. Nothing changed."
+        }
+      ],
+      "pageErrors": 0,
+      "remoteRequests": 0,
+      "stepError": null
+    },
+    {
+      "state": "long-changed-reimport",
+      "size": "minimum 1000x650",
+      "note": "Reimport the long-named atlas; MOCKED changed receipt (for comparison)",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "sprites/signage/harbor_master/notice_board_weathered_signage_atlas_variant_c.atlas.json"
+            }
+          ]
+        }
+      ],
+      "mockedResults": [
+        {
+          "ok": true,
+          "assetImport": {
+            "revision": 42,
+            "transaction": "01M4K3KEP00000000000000710"
+          }
+        }
+      ],
+      "steps": [
+        {
+          "step": "done",
+          "inspectorWidth": 280,
+          "notice": {
+            "text": "Reimported. Undo reverts the whole reimport.",
+            "role": "status",
+            "lines": [
+              2
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Reimported harbor_master_notice_board_weathered_signage_atlas_variant_c.",
+          "statusLineClipped": false,
+          "action": "Reimport",
+          "header": "harbor_master_notice_board_weathered_signage_atlas_variant_c",
+          "justImported": [
+            "harbor_master_notice_board_weathered_signage_atlas_variant_c Texture, Atlas, just imported"
+          ],
+          "historyShown": {
+            "meta": "6 of 6 applied",
+            "nowAfter": "Import assets"
+          },
+          "host": {
+            "applied": 6,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Import assets"
+            ],
+            "head": "01M4K3KEP00000000000000710"
+          },
+          "focus": {
+            "tag": "h3",
+            "role": null,
+            "name": "harbor_master_notice_board_weathered_signage_atlas_variant_c",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        }
+      ],
+      "liveRegionChanges": [
+        {
+          "step": "reimport",
+          "region": "div.asset-browser__status",
+          "change": "region inserted",
+          "text": "Reimporting harbor_master_notice_board_weathered_signage_atlas_variant_c…"
+        },
+        {
+          "step": "reimport",
+          "region": "pending",
+          "change": "region inserted",
+          "text": "Reimporting…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "reimport",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Reimporting harbor_master_notice_board_weathered_signage_atlas_variant_c…"
+          ],
+          "removed": [],
+          "text": "Reimporting harbor_master_notice_board_weathered_signage_atlas_variant_c…"
+        },
+        {
+          "step": "release changed",
+          "region": "div.asset-browser__status",
+          "change": "region removed",
+          "text": "Reimporting harbor_master_notice_board_weathered_signage_atlas_variant_c…"
+        },
+        {
+          "step": "release changed",
+          "region": "notice",
+          "change": "region inserted",
+          "text": "Reimported. Undo reverts the whole reimport."
+        },
+        {
+          "step": "release changed",
+          "region": "pending",
+          "change": "region removed",
+          "text": "Reimporting…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "release changed",
+          "region": "status line",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            "Reimporting harbor_master_notice_board_weathered_signage_atlas_variant_c…"
+          ],
+          "text": ""
+        },
+        {
+          "step": "release changed",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Reimported harbor_master_notice_board_weathered_signage_atlas_variant_c."
+          ],
+          "removed": [],
+          "text": "Reimported harbor_master_notice_board_weathered_signage_atlas_variant_c."
+        }
+      ],
+      "pageErrors": 0,
+      "remoteRequests": 0,
+      "stepError": null
+    },
+    {
+      "state": "noop-concurrent",
+      "size": "normal 1440x874",
+      "note": "Reimport crate_albedo; MOCKED unchanged receipt while the published read carries a later source-watch transaction",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "textures/props/crate_albedo.png"
+            }
+          ]
+        }
+      ],
+      "mockedResults": [
+        {
+          "ok": true,
+          "assetImport": {
+            "revision": 41,
+            "transaction": null
+          }
+        }
+      ],
+      "steps": [
+        {
+          "step": "done",
+          "inspectorWidth": 360,
+          "notice": {
+            "text": "Already up to date. Nothing changed.",
+            "role": "status",
+            "lines": [
+              1
+            ],
+            "contrast": [
+              10.3
+            ],
+            "inView": true
+          },
+          "statusLine": "Already up to date: crate_albedo. Nothing changed.",
+          "statusLineClipped": false,
+          "action": "Reimport",
+          "header": "crate_albedo",
+          "justImported": [],
+          "historyShown": {
+            "meta": "6 of 6 applied",
+            "nowAfter": "Reimport changed sources"
+          },
+          "host": {
+            "applied": 6,
+            "entries": [
+              "Import assets",
+              "Rename entity to Crate Stack",
+              "Reimport changed sources",
+              "Delete entity",
+              "Rename entity to Lantern",
+              "Reimport changed sources"
+            ],
+            "head": "01M4K3KFN80000000000000744"
+          },
+          "focus": {
+            "tag": "h3",
+            "role": null,
+            "name": "crate_albedo",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "axeViolations": 0
+        }
+      ],
+      "liveRegionChanges": [
+        {
+          "step": "reimport",
+          "region": "div.asset-browser__status",
+          "change": "region inserted",
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "reimport",
+          "region": "pending",
+          "change": "region inserted",
+          "text": "Reimporting…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "reimport",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Reimporting crate_albedo…"
+          ],
+          "removed": [],
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "release unchanged + concurrent",
+          "region": "div.asset-browser__status",
+          "change": "region removed",
+          "text": "Reimporting crate_albedo…"
+        },
+        {
+          "step": "release unchanged + concurrent",
+          "region": "notice",
+          "change": "region inserted",
+          "text": "Already up to date. Nothing changed."
+        },
+        {
+          "step": "release unchanged + concurrent",
+          "region": "pending",
+          "change": "region removed",
+          "text": "Reimporting…You can keep working. Editing now means retrying the import."
+        },
+        {
+          "step": "release unchanged + concurrent",
+          "region": "status line",
+          "change": "removed",
+          "added": [],
+          "removed": [
+            "Reimporting crate_albedo…"
+          ],
+          "text": ""
+        },
+        {
+          "step": "release unchanged + concurrent",
+          "region": "status line",
+          "change": "added",
+          "added": [
+            "Already up to date: crate_albedo. Nothing changed."
+          ],
+          "removed": [],
+          "text": "Already up to date: crate_albedo. Nothing changed."
+        }
+      ],
+      "pageErrors": 0,
+      "remoteRequests": 0,
+      "stepError": null
+    }
+  ],
+  "before": [
+    {
+      "state": "noop-reimport",
+      "size": "normal 1440x874",
+      "statusLine": "Already up to date. Nothing changed.",
+      "notice": "Already up to date. Nothing changed.",
+      "header": "crate_albedo"
+    },
+    {
+      "state": "noop-reimport",
+      "size": "minimum 1000x650",
+      "statusLine": "Already up to date. Nothing changed.",
+      "notice": "Already up to date. Nothing changed.",
+      "header": "crate_albedo"
+    },
+    {
+      "state": "noop-reimport",
+      "size": "narrow 1440x874",
+      "statusLine": "Already up to date. Nothing changed.",
+      "notice": "Already up to date. Nothing changed.",
+      "header": "crate_albedo"
+    },
+    {
+      "state": "noop-import",
+      "size": "normal 1440x874",
+      "statusLine": "Already up to date. Nothing changed.",
+      "notice": "Already up to date. Nothing changed.",
+      "header": "Import assets"
+    },
+    {
+      "state": "noop-import",
+      "size": "minimum 1000x650",
+      "statusLine": "Already up to date. Nothing changed.",
+      "notice": "Already up to date. Nothing changed.",
+      "header": "Import assets"
+    },
+    {
+      "state": "noop-import",
+      "size": "narrow 1440x874",
+      "statusLine": "Already up to date. Nothing changed.",
+      "notice": "Already up to date. Nothing changed.",
+      "header": "Import assets"
+    },
+    {
+      "state": "away-noop-reimport",
+      "size": "normal 1440x874",
+      "statusLine": "Already up to date. Nothing changed.",
+      "notice": null,
+      "header": "gull_sheet"
+    },
+    {
+      "state": "away-noop-reimport",
+      "size": "narrow 1440x874",
+      "statusLine": "Already up to date. Nothing changed.",
+      "notice": null,
+      "header": "gull_sheet"
+    },
+    {
+      "state": "away-changed-reimport",
+      "size": "normal 1440x874",
+      "statusLine": "Reimported crate_albedo.",
+      "notice": null,
+      "header": "gull_sheet"
+    },
+    {
+      "state": "away-noop-import",
+      "size": "normal 1440x874",
+      "statusLine": "Already up to date. Nothing changed.",
+      "notice": null,
+      "header": "harbor_loop"
+    },
+    {
+      "state": "noop-concurrent",
+      "size": "normal 1440x874",
+      "statusLine": "Already up to date. Nothing changed.",
+      "notice": "Already up to date. Nothing changed.",
+      "header": "crate_albedo"
+    }
+  ],
+  "pixel": {
+    "frozenToFinal": {
+      "compared": 220,
+      "identical": 186,
+      "differing": [
+        {
+          "name": "away-noop-import-normal-1440x874--done-statusbar.png",
+          "differing": 3165,
+          "box": [
+            838,
+            19,
+            1132,
+            43
+          ],
+          "class": "status line only"
+        },
+        {
+          "name": "away-noop-import-normal-1440x874--done.png",
+          "differing": 3165,
+          "box": [
+            838,
+            1711,
+            1132,
+            1735
+          ],
+          "class": "status line only"
+        },
+        {
+          "name": "away-noop-reimport-narrow-1440x874--done-statusbar.png",
+          "differing": 3715,
+          "box": [
+            838,
+            19,
+            1210,
+            43
+          ],
+          "class": "status line only"
+        },
+        {
+          "name": "away-noop-reimport-narrow-1440x874--done.png",
+          "differing": 3715,
+          "box": [
+            838,
+            1711,
+            1210,
+            1735
+          ],
+          "class": "status line only"
+        },
+        {
+          "name": "away-noop-reimport-normal-1440x874--done-statusbar.png",
+          "differing": 3715,
+          "box": [
+            838,
+            19,
+            1210,
+            43
+          ],
+          "class": "status line only"
+        },
+        {
+          "name": "away-noop-reimport-normal-1440x874--done.png",
+          "differing": 3715,
+          "box": [
+            838,
+            1711,
+            1210,
+            1735
+          ],
+          "class": "status line only"
+        },
+        {
+          "name": "changed-import-narrow-1440x874--changed.png",
+          "differing": 20,
+          "box": [
+            446,
+            312,
+            2696,
+            1592
+          ],
+          "class": "noise: also differs between two runs of the final build"
+        },
+        {
+          "name": "changed-reimport-minimum-1000x650--redone.png",
+          "differing": 66,
+          "box": [
+            1099,
+            66,
+            1971,
+            1213
+          ],
+          "class": "noise: also differs between two runs of the final build"
+        },
+        {
+          "name": "changed-reimport-normal-1440x874--changed.png",
+          "differing": 15,
+          "box": [
+            870,
+            522,
+            2696,
+            1592
+          ],
+          "class": "noise: also differs between two runs of the final build"
+        },
+        {
+          "name": "failure-import-minimum-1000x650--done.png",
+          "differing": 21,
+          "box": [
+            1099,
+            66,
+            1827,
+            1213
+          ],
+          "class": "noise: also differs between two runs of the final build"
+        },
+        {
+          "name": "long-noop-reimport-minimum-1000x650--done-statusbar.png",
+          "differing": 8274,
+          "box": [
+            838,
+            19,
+            1797,
+            43
+          ],
+          "class": "status line only"
+        },
+        {
+          "name": "long-noop-reimport-minimum-1000x650--done.png",
+          "differing": 8274,
+          "box": [
+            838,
+            1263,
+            1797,
+            1287
+          ],
+          "class": "status line only"
+        },
+        {
+          "name": "long-noop-reimport-normal-1440x874--done-statusbar.png",
+          "differing": 8274,
+          "box": [
+            838,
+            19,
+            1797,
+            43
+          ],
+          "class": "status line only"
+        },
+        {
+          "name": "long-noop-reimport-normal-1440x874--done.png",
+          "differing": 8274,
+          "box": [
+            838,
+            1711,
+            1797,
+            1735
+          ],
+          "class": "status line only"
+        },
+        {
+          "name": "noop-concurrent-normal-1440x874--done-statusbar.png",
+          "differing": 3715,
+          "box": [
+            838,
+            19,
+            1210,
+            43
+          ],
+          "class": "status line only"
+        },
+        {
+          "name": "noop-concurrent-normal-1440x874--done.png",
+          "differing": 3715,
+          "box": [
+            838,
+            1711,
+            1210,
+            1735
+          ],
+          "class": "status line only"
+        },
+        {
+          "name": "noop-import-minimum-1000x650--done-statusbar.png",
+          "differing": 3165,
+          "box": [
+            838,
+            19,
+            1132,
+            43
+          ],
+          "class": "status line only"
+        },
+        {
+          "name": "noop-import-minimum-1000x650--done.png",
+          "differing": 3165,
+          "box": [
+            838,
+            1263,
+            1132,
+            1287
+          ],
+          "class": "status line only"
+        },
+        {
+          "name": "noop-import-minimum-1000x650--rows.png",
+          "differing": 1892,
+          "box": [
+            1504,
+            408,
+            1919,
+            463
+          ],
+          "class": "noise: spinner, caret or hover transition before completion"
+        },
+        {
+          "name": "noop-import-narrow-1440x874--done-statusbar.png",
+          "differing": 3165,
+          "box": [
+            838,
+            19,
+            1132,
+            43
+          ],
+          "class": "status line only"
+        },
+        {
+          "name": "noop-import-narrow-1440x874--done.png",
+          "differing": 3165,
+          "box": [
+            838,
+            1711,
+            1132,
+            1735
+          ],
+          "class": "status line only"
+        },
+        {
+          "name": "noop-import-narrow-1440x874--rows.png",
+          "differing": 1892,
+          "box": [
+            2384,
+            408,
+            2799,
+            463
+          ],
+          "class": "noise: also differs between two runs of the final build"
+        },
+        {
+          "name": "noop-import-normal-1440x874--done-statusbar.png",
+          "differing": 3165,
+          "box": [
+            838,
+            19,
+            1132,
+            43
+          ],
+          "class": "status line only"
+        },
+        {
+          "name": "noop-import-normal-1440x874--done.png",
+          "differing": 3165,
+          "box": [
+            838,
+            1711,
+            1132,
+            1735
+          ],
+          "class": "status line only"
+        },
+        {
+          "name": "noop-import-normal-1440x874--rows.png",
+          "differing": 2532,
+          "box": [
+            2224,
+            408,
+            2799,
+            463
+          ],
+          "class": "noise: also differs between two runs of the final build"
+        },
+        {
+          "name": "noop-reimport-minimum-1000x650--done-statusbar.png",
+          "differing": 3715,
+          "box": [
+            838,
+            19,
+            1210,
+            43
+          ],
+          "class": "status line only"
+        },
+        {
+          "name": "noop-reimport-minimum-1000x650--done.png",
+          "differing": 3715,
+          "box": [
+            838,
+            1263,
+            1210,
+            1287
+          ],
+          "class": "status line only"
+        },
+        {
+          "name": "noop-reimport-narrow-1440x874--before-dock.png",
+          "differing": 2,
+          "box": [
+            378,
+            68,
+            378,
+            71
+          ],
+          "class": "noise: also differs between two runs of the final build"
+        },
+        {
+          "name": "noop-reimport-narrow-1440x874--done-statusbar.png",
+          "differing": 3715,
+          "box": [
+            838,
+            19,
+            1210,
+            43
+          ],
+          "class": "status line only"
+        },
+        {
+          "name": "noop-reimport-narrow-1440x874--done.png",
+          "differing": 3715,
+          "box": [
+            838,
+            1711,
+            1210,
+            1735
+          ],
+          "class": "status line only"
+        },
+        {
+          "name": "noop-reimport-narrow-1440x874--pending-side.png",
+          "differing": 218,
+          "box": [
+            23,
+            541,
+            44,
+            562
+          ],
+          "class": "noise: also differs between two runs of the final build"
+        },
+        {
+          "name": "noop-reimport-narrow-1440x874--pending.png",
+          "differing": 642,
+          "box": [
+            31,
+            105,
+            2364,
+            642
+          ],
+          "class": "noise: also differs between two runs of the final build"
+        },
+        {
+          "name": "noop-reimport-normal-1440x874--done-statusbar.png",
+          "differing": 3715,
+          "box": [
+            838,
+            19,
+            1210,
+            43
+          ],
+          "class": "status line only"
+        },
+        {
+          "name": "noop-reimport-normal-1440x874--done.png",
+          "differing": 3715,
+          "box": [
+            838,
+            1711,
+            1210,
+            1735
+          ],
+          "class": "status line only"
+        }
+      ]
+    },
+    "finalRepeat": {
+      "compared": 220,
+      "identical": 209,
+      "differing": [
+        {
+          "name": "changed-import-narrow-1440x874--changed.png",
+          "differing": 20,
+          "box": [
+            446,
+            312,
+            2696,
+            1592
+          ]
+        },
+        {
+          "name": "changed-reimport-minimum-1000x650--redone.png",
+          "differing": 66,
+          "box": [
+            1099,
+            66,
+            1971,
+            1213
+          ]
+        },
+        {
+          "name": "changed-reimport-normal-1440x874--changed.png",
+          "differing": 15,
+          "box": [
+            870,
+            522,
+            2696,
+            1592
+          ]
+        },
+        {
+          "name": "failure-import-minimum-1000x650--done.png",
+          "differing": 21,
+          "box": [
+            1099,
+            66,
+            1827,
+            1213
+          ]
+        },
+        {
+          "name": "noop-import-narrow-1440x874--pending-side.png",
+          "differing": 218,
+          "box": [
+            23,
+            1397,
+            44,
+            1418
+          ]
+        },
+        {
+          "name": "noop-import-narrow-1440x874--pending.png",
+          "differing": 642,
+          "box": [
+            31,
+            105,
+            2364,
+            1498
+          ]
+        },
+        {
+          "name": "noop-import-narrow-1440x874--rows.png",
+          "differing": 116,
+          "box": [
+            2829,
+            305,
+            2842,
+            318
+          ]
+        },
+        {
+          "name": "noop-import-normal-1440x874--rows.png",
+          "differing": 2488,
+          "box": [
+            2224,
+            408,
+            2799,
+            463
+          ]
+        },
+        {
+          "name": "noop-reimport-narrow-1440x874--before-dock.png",
+          "differing": 2,
+          "box": [
+            378,
+            68,
+            378,
+            71
+          ]
+        },
+        {
+          "name": "noop-reimport-narrow-1440x874--pending-side.png",
+          "differing": 220,
+          "box": [
+            23,
+            541,
+            44,
+            562
+          ]
+        },
+        {
+          "name": "noop-reimport-narrow-1440x874--pending.png",
+          "differing": 642,
+          "box": [
+            31,
+            105,
+            2364,
+            642
+          ]
+        }
+      ]
+    }
+  },
+  "logs": {
+    "artifacts/0038-import-completion-review/vitest-baseline.log": {
+      "sha256": "789680f9950cd4e752f83491e9e9c6b17f77a79f94b06a4ffb2a878dba34e244",
+      "bytes": 2293
+    },
+    "artifacts/0038-import-completion-review/tsc-baseline.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "artifacts/0038-import-completion-review/build-baseline.log": {
+      "sha256": "56d6d279e42c8e10746115bdc11f1a7ee42c4b444d3e80fb3ed639bbb52b7daf",
+      "bytes": 1551
+    },
+    "artifacts/0038-import-completion-review/vitest-final-on-old-copy.log": {
+      "sha256": "f9036cbc3b4e5a7cfd6b3625eaae67f0532b2bc3cf9dfdc549edf69c3650de0e",
+      "bytes": 17147
+    },
+    "artifacts/0038-import-completion-review/vitest-commit.log": {
+      "sha256": "feba98c78ee1a81f952ebfa9d57b485a106434743635423e74ae2c8e4145299b",
+      "bytes": 2293
+    },
+    "artifacts/0038-import-completion-review/tsc-commit.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "artifacts/0038-import-completion-review/build-commit.log": {
+      "sha256": "94e6a5c6d1ec2ced99215cd3ec0e390b2bbe81cd3e2d091929cdf7ef456f20c3",
+      "bytes": 1551
+    },
+    "artifacts/0038-import-completion-review/build-frozen-rebuild.log": {
+      "sha256": "41ce88f2add581c9688f7774c9de34664d734287bf7da2241eafe9fd309e469e",
+      "bytes": 1551
+    },
+    "artifacts/0038-import-completion-review/build-final-rebuild.log": {
+      "sha256": "e456c7e6359e6ab753721cc44194b9dd209a9bb6714670d92c32717c8623d026",
+      "bytes": 1551
+    },
+    "artifacts/0038-import-completion-review/b1.log": {
+      "sha256": "ed40e387fc4b519b2f0f501db89eb9d2d45292da9673e20cd6f3097d82c847cc",
+      "bytes": 1234
+    },
+    "artifacts/0038-import-completion-review/g1.log": {
+      "sha256": "72385310116737a8d2de368d6d9194e8e99231d938c67df7dfa26e1e761ed2d9",
+      "bytes": 1234
+    },
+    "artifacts/0038-import-completion-review/g2.log": {
+      "sha256": "6574818ab975362103b68778d3923baecf1e9005f120c96881c1d54626c8cecd",
+      "bytes": 1234
+    },
+    "artifacts/0038-import-completion-review/pixel-b1-g1.log": {
+      "sha256": "c941c9f2284cc32b7a3d8c6eebf1e687326deb94f3c34939e58cbb382d8e6108",
+      "bytes": 14064
+    },
+    "artifacts/0038-import-completion-review/pixel-g1-g2.log": {
+      "sha256": "f5abaecb74b06b20754b74680dc5a1ce2bcb70f3ad52d900c659aee2cad6922c",
+      "bytes": 13369
+    }
+  }
+}

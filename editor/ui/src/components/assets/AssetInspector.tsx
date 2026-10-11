@@ -165,14 +165,20 @@ export function AssetInspector() {
 }
 
 function OutcomeNotice({ outcome, onDismiss }: { outcome: ImportOutcome; onDismiss: () => void }) {
+  const { snapshot } = useShell();
   if (outcome.status === 'success') {
     const count = outcome.job.sources.length;
+    const transaction = outcome.commit?.transaction;
+    const history = snapshot?.history;
+    const canUndoImport = transaction != null && history?.entries[history.applied - 1]?.transaction === transaction;
     return (
       <div className="asset-note asset-note--success" role="status">
         <Icon name="check" size={14} />
         <p>
-          {outcome.job.kind === 'reimport' ? 'Reimported.' : `Imported ${countFiles(count)}.`} Undo reverts the whole{' '}
-          {outcome.job.kind === 'reimport' ? 'reimport' : 'batch'}.
+          {transaction === null ? 'Already up to date. Nothing changed.'
+            : transaction === undefined ? 'Import completed.'
+            : outcome.job.kind === 'reimport' ? 'Reimported.' : `Imported ${countFiles(count)}.`}
+          {canUndoImport ? ` Undo reverts the whole ${outcome.job.kind === 'reimport' ? 'reimport' : 'batch'}.` : null}
         </p>
       </div>
     );

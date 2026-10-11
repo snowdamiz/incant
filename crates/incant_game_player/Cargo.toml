@@ -23,6 +23,11 @@ incant_input.workspace = true
 incant_audio_runtime = { workspace = true, features = ["scene"] }
 incant_assets_runtime.workspace = true
 serde_json.workspace = true
+serde.workspace = true
+ulid = { version = "1.2", default-features = false }
 
 [build-dependencies]
 incant_cook = { path = "../incant_cook", default-features = false, features = ["script"] }
+
+[dev-dependencies]
+incant_types.workspace = true

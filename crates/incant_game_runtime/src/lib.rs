@@ -93,6 +93,9 @@ where
     pub fn input(&self) -> Result<&InputFrame> {
         self.core.input()
     }
+    pub fn logs(&self) -> Result<&incant_script::NativeLogs> {
+        self.core.logs()
+    }
     pub fn source_state(&self, id: StableId) -> Result<SourceState> {
         self.core.source_state(id)
     }

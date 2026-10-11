@@ -15,6 +15,10 @@ on:
       - 'crates/incant_input/**'
       - 'crates/incant_script/**'
       - 'crates/incant_game_runtime/**'
+      - 'crates/incant_wasm_player/**'
+      - 'crates/incant_audio_runtime/**'
+      - 'crates/incant_assets_runtime/**'
+      - 'tools/probes/static-game.py'
       - 'crates/incant_script_player/**'
       - 'crates/incant_game_player/**'
       - 'crates/incant_2d/**'
@@ -71,6 +75,8 @@ jobs:
       - name: Fresh MSVC optimized candidate executable and matched PDB
         if: runner.os == 'Windows'
         run: python tools/probes/shipping-wasm2c.py artifacts/static-wasm-shipping --msvc-opt-level 2
+      - name: Fresh composed input, physics, module and audio shipping proof
+        run: python tools/probes/static-game.py artifacts/static-game-shipping
       - run: python tools/check_runtime_dependencies.py incant_wasm_dev incant_game_player incant_script_player --features incant_wasm_dev/wasmtime-host
       - run: cargo check -p incant_wasm_dev --no-default-features --target wasm32-unknown-unknown --locked
       - name: Keep unsupported device targets free of the development host
@@ -101,5 +107,12 @@ jobs:
             artifacts/static-wasm-shipping/symbols.zip
             artifacts/static-wasm-shipping/shipping_module.map
             artifacts/static-wasm-shipping/msvc-compiler.txt
+            artifacts/static-game-shipping/result.json
+            artifacts/static-game-shipping/build.log
+            artifacts/static-game-shipping/cook-build.log
+            artifacts/static-game-shipping/prepared-manifest.json
+            artifacts/static-game-shipping/player.zip
+            artifacts/static-game-shipping/symbols.zip
+            artifacts/static-game-shipping/player.map
           if-no-files-found: error
           retention-days: 7

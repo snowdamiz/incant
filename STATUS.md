@@ -1,9 +1,13 @@
 # Implementation status
 
-[PLAN.md](PLAN.md) revision 7 is the source of truth. Phase 1 is in progress;
+[PLAN.md](PLAN.md) revision 8 is the source of truth. Phase 1 is in progress;
 the full engine and Driftwake release are not complete. Calendar targets and
 phase durations have been removed. Work proceeds continuously and in parallel
 where dependencies allow; exit gates still require their stated evidence.
+Service-backed features use local containers or in-process substitutes during
+development, behind production-shaped contracts. Real provider integrations,
+security/device evidence and release gates remain real; local substitutes do not
+satisfy those gates.
 
 The director authorized Phase 1 with remaining Phase 0 items deferred, sensible
 engineering progress without repeated advancement questions, and agent merges
@@ -16,11 +20,16 @@ visual work, and Astra owns correctness and integration.
 
 | Workstream | Current result | Next work / boundary |
 | --- | --- | --- |
-| Editor and sprite authoring | [PR #61](https://github.com/snowdamiz/incant/pull/61) combines the final plain UI, typed atlas/audio imports, focus fixes and the corrected sprite/atlas baseline. 524 UI tests, strict TypeScript, production and native builds pass. | Exact-head hosted checks and isolated native Claude acceptance are running. [Evidence](docs/spikes/editor-release-union.md). |
-| Native game and rendering | Input, embedded QuickJS, native physics, scene audio and retained GPU submission compose through one accepted-tick lifecycle. Binary v5 sprites share immutable geometry. | [PR #62](https://github.com/snowdamiz/incant/pull/62) is in hosted verification. Native editor/legacy Play migration, complete SDK, shader pipeline work and device budgets remain. |
+| Editor and sprite authoring | [PR #61](https://github.com/snowdamiz/incant/pull/61) combines the final plain UI, typed atlas/audio imports, focus fixes and the corrected sprite/atlas baseline. 524 UI tests, strict TypeScript, production and native builds pass. | Merged after exact-head hosted checks and isolated native Claude acceptance. [Evidence](docs/spikes/editor-release-union.md). |
+| Import completion and Undo | Native imports return an exact revision/transaction receipt; unchanged imports preserve history and redo without offering stale Undo. Claude 0038 accepted the browser completion copy on frozen source. | Union with runtime main and original PLAN revision 8 passes 534 UI tests, three native asset tests and scoped Clippy. Hosted verification pending. [Evidence](docs/spikes/editor-import-receipts.md). |
+| Native game and rendering | Input, embedded QuickJS, native physics, scene audio and retained GPU submission compose through one accepted-tick lifecycle. Binary v5 sprites share immutable geometry. | [PR #62](https://github.com/snowdamiz/incant/pull/62) is merged after all 20 checks. Native editor/legacy Play migration, complete SDK, shader pipeline work and device budgets remain. |
 | Native window player | A separate implementation branch adds real surface presentation, keyboard/mouse input, suspension and device audio. Local source-free lifecycle tests pass. | Independent review/CI and Claude native acceptance precede integration. No phone or frame-budget claim. |
-| Native WebAssembly | Shared bounded capability ABI serves Wasmtime and wasm2c. PR #64 passed actual Windows /Od + /O2, Linux and macOS static conformance and fresh packaging. The optional static-module native game session passes a fresh local composed proof. | Full guest input/SDK, static-module renderer/session saves, composed-player hosted coverage and device gates remain. [Composition evidence](docs/spikes/native-wasm-game-session.md). |
-| CI speed | Registry-only shared auxiliary caches are merged; the agent is measuring actual warm consumers and completed job timings. | Shared fresh-build storage and a lower-optimization CI test profile are experiments, not adopted speed claims. Independent shipping audits remain intact. |
+| Native WebAssembly | Shared bounded capability ABI serves Wasmtime and wasm2c. PR #64 passed actual Windows /Od + /O2, Linux and macOS static conformance and fresh packaging. PR #67 composes static modules with the native game session. The versioned input ABI now drives real guest motion/spawns in both hosts and a fresh local packaged game proof. | Complete SDK, static-module renderer/session saves, new input/composed-player hosted results and device gates remain. [Input ABI evidence](docs/spikes/native-wasm-input-abi.md). |
+| CI speed | Registry-only caches have actual three-host consumers. A strict documentation selector and measured opt1 functional profile are prepared and locally validated; unchanged main64 coverage passes 543 ordinary/66 ignored tests and all four fresh shipping proofs. | The main67/import union also passes 544 ordinary, 534 UI and 86 tools tests plus workspace Clippy; hosted union checks and Windows/cache-size measurements remain pending. [Profile scope](docs/spikes/ci-test-profile.md); shared fresh-build storage remains off CI. Shipping audits and device gates are unchanged. |
+
+Credential CI has a report-only locked dependency classifier and conservative
+local-crate trigger coverage. Actual tests remain enabled; any selection policy
+requires separate review. [Scope and limits](docs/spikes/credential-impact-reporting.md).
 
 Three Astra extra-high subagents own implementation/integration work in isolated
 checkouts. Root reviews and integrates completed slices rather than waiting for
@@ -52,7 +61,19 @@ review; concurrent native reviews coordinate foreground ownership.
   [bytecode](docs/spikes/cooked-native-scripts.md),
   [world saves](docs/spikes/native-world-saves.md),
   [input](docs/spikes/native-input-session.md),
-  [physics](docs/spikes/native-physics-runtime.md).
+  [physics](docs/spikes/native-physics-runtime.md). Native scripts now have bounded
+  committed-state raycasts, character sweeps and trigger events with revocable
+  capabilities and whole-update rejection. 131 scoped tests and a 45-process
+  source-free proof pass. [Queries](docs/spikes/native-script-queries.md),
+  [character/trigger evidence](docs/spikes/native-script-character.md). Native fixed-tick
+  timers now stage schedules alongside numeric/structural changes, with 63 script
+  tests and a 48-process source-free proof. [Timer evidence](docs/spikes/native-script-timers.md). Native
+  headless observation plans now check selected typed state and input actions at
+  accepted ticks, return structured false-assertion reports/nonzero status, and
+  preserve terminal runtime refusal. Seven focused and 577 ordinary workspace
+  tests plus 54 fresh source-free process controls pass; existing project-oriented
+  legacy Play and full Core Sample/agent integration remain open.
+  [Observation evidence](docs/spikes/native-headless-observations.md).
 - **Native rendering.** Canonical typed renderer input and a separate authoring
   adapter; exact retained asset versions; binary v4 cameras/models/lights and
   binary v5 sprites; direct committed pose updates and mandatory GPU host sync.
@@ -84,14 +105,18 @@ review; concurrent native reviews coordinate foreground ownership.
   growth remains unsupported. A native x64 MSVC /Od baseline and /O2 candidate
   passed actual hosted conformance and a fresh optimized PE/PDB proof on PR #64.
   Static modules also compose with native input acceptance, physics and offline
-  scene audio: 66 scoped cases and 32 fresh local process checks pass. The guest
-  input ABI and complete session/renderer/device evidence remain open.
+  scene audio. The new `incant_input_v1` bounded snapshot preserves raw controls,
+  gestures and named actions; 102 combined tests/doctests and 34 fresh local
+  process checks pass. The 3,933,488-byte packaged macOS player responds to delayed
+  accepted input with delayed native spawning and retains the exact audio clock.
+  Hosted input results, complete SDK and session/renderer/device evidence remain
+  open. [Input ABI](docs/spikes/native-wasm-input-abi.md).
   [Static game session](docs/spikes/native-wasm-game-session.md).
   [Development host](docs/spikes/development-wasm-host.md),
   [static host](docs/spikes/shipping-wasm2c.md),
   [MSVC follow-up](docs/spikes/wasm2c-msvc.md).
 
-Local integration checks: 543 ordinary Rust release tests/doctests; 138 scoped
+Local integration checks: 570 ordinary Rust release tests/doctests; 138 scoped
 static/development-Wasm/runtime/script tests; workspace and optional-host release
 Clippy; 529 UI tests, strict TypeScript and production build; 43 Python tool tests.
 The renderer's unchanged frozen implementation separately passed all 66 actual
@@ -103,14 +128,27 @@ conformance, browser-target physics compilation and six native parity streams.
 [Correction evidence](docs/spikes/runtime-ci-corrections.md). A subsequent Linux
 C11 trap-link failure now has a reproduced POSIX declaration fix; the Windows
 Camera accessibility test is split into its six independent scans with unchanged
-coverage and bounded asynchronous cleanup. Both corrections pass local checks
-and await the next hosted run.
+coverage and bounded asynchronous cleanup. Both corrections passed local and hosted checks before PR #62 merged.
+
+Native script logs now publish only after accepted numeric/structural updates,
+with primitive Unicode validation, fixed per-update limits, bounded retained
+history and dropped-message counts. Native/game observers hide logs after
+terminal failure; the source-free player reports them once at completion.
+585 ordinary workspace tests and 47 fresh CPU-mode process controls pass.
+[Evidence](docs/spikes/native-script-logs.md). This is the QuickJS path; Wasm logs,
+full native SDK, session saves and editor/headless Play migration remain open.
+
+
+The reviewed native script/input stack is now tested together with the static
+module lifecycle and CI/import union: 593 ordinary tests, 97 actual composed-module
+tests, all-target Clippy, 86 tooling tests and two fresh shipping proofs pass.
+Hosted integration checks remain pending. [Union evidence](docs/spikes/native-runtime-integration.md).
 
 ## Remaining engineering requirements
 
 - Complete migration of the editor, headless runner and full gameplay SDK from
   legacy document-backed Play into the native runtime. Persistent script state,
-  timers/coroutines, native physics/navigation/audio/UI access and full composite
+  timers/coroutines, remaining native physics/navigation/audio/UI access and full composite
   session restoration need production coverage. Do not extend the legacy tick
   path or add project cloning/JSON/authoring validation to native ticks.
 - Finish render features and their native path: offline backend shader cooking,
@@ -142,8 +180,9 @@ Do not revoke the director's working account for a test. Manual Windows/Linux
 account checks and the Windows viewport review were replaced by CI under the
 director's explicit decision; no extra desktop machine or live API key is requested.
 
-Hosted device/service accounts, payments and human staffing/legal commitments
-remain human-owned. Signing credentials and store/developer accounts first gate
+Hosted device/service accounts first gate real staging or device work, not
+local feature development. Payments and human staffing/legal commitments remain
+human-owned. Signing credentials and store/developer accounts first gate
 Phase 5 store uploads. No phone purchases, name clearance or package reservations
 are required. Unsigned packages and simulator/compile-only results do not satisfy
 store distribution or real-device gates.
@@ -152,3 +191,8 @@ Earlier implementation notes, superseded counts and publication chronology are
 preserved in the [historical ledger](docs/spikes/implementation-history-2026-10-10.md).
 Technical evidence remains under [docs/spikes](docs/spikes); `python3 tools/check_gate.py`
 reports the recorded gate state without granting approval.
+
+The reviewed general-check selector allows only nine audited plan/convention/ADR
+files onto a Linux documentation path, preserving full checks for every other
+change and all classification failures. Local82tool tests/actionlint pass; hosted
+latency remains pending. [Policy and evidence](docs/spikes/ci-document-selection.md).

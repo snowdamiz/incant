@@ -71,6 +71,10 @@ pub fn prepare(bytes: &[u8]) -> Result<Vec<u8>, CookError> {
                     };
                     let ty = &types[index as usize];
                     let (params, results): (&[V], &[V]) = match (i.module, i.name) {
+                        ("incant_input_v1", "snapshot_len") => (&[V::I64], &[V::I32]),
+                        ("incant_input_v1", "read_snapshot") => {
+                            (&[V::I64, V::I32, V::I32], &[V::I32])
+                        }
                         ("incant_v1", "chunk_count") => (&[V::I64], &[V::I32]),
                         ("incant_v1", "chunk_len" | "chunk_flags") => {
                             (&[V::I64, V::I32], &[V::I32])

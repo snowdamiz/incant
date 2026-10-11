@@ -80,16 +80,45 @@ fn capture(state: &Mutex<LoadState>, expected: u64) -> Result<ImportSnapshot, Im
     }
     Ok(ImportSnapshot::capture(bus))
 }
-fn commit(state: &Mutex<LoadState>, prepared: PreparedImports) -> Result<(), ImportTaskError> {
+#[derive(Debug, Serialize)]
+pub struct ImportCommit {
+    revision: u64,
+    /// None means preparation found no document changes and appended no history.
+    transaction: Option<incant_doc::Id>,
+}
+#[derive(Serialize)]
+pub struct ImportResponse {
+    snapshot: Value,
+    commit: ImportCommit,
+}
+
+fn commit(
+    state: &Mutex<LoadState>,
+    prepared: PreparedImports,
+) -> Result<ImportCommit, ImportTaskError> {
     let mut state = state
         .lock()
         .map_err(|_| ImportTaskError::Project("engine lock failed".into()))?;
-    prepared.commit(
-        state.bus_mut().map_err(ImportTaskError::Project)?,
-        Actor::user("editor"),
-        "Import assets",
-    )?;
-    Ok(())
+    let bus = state.bus_mut().map_err(ImportTaskError::Project)?;
+    let before = bus.revision();
+    let committed = prepared.commit(bus, Actor::user("editor"), "Import assets")?;
+    // Capture the receipt while still holding the bus, not from the later UI
+    // snapshot: another document edit may happen before engine_read completes.
+    let transaction = if committed.revision == before {
+        None
+    } else {
+        Some(
+            bus.history()
+                .last()
+                .expect("import appended a transaction")
+                .id
+                .clone(),
+        )
+    };
+    Ok(ImportCommit {
+        revision: committed.revision,
+        transaction,
+    })
 }
 
 #[tauri::command]
@@ -98,33 +127,35 @@ pub async fn engine_import(
     app: tauri::AppHandle,
     requests: Vec<ImportRequest>,
     expected_revision: u64,
-) -> Result<Value, ImportFailure> {
+) -> Result<ImportResponse, ImportFailure> {
     let editor = state.inner().clone();
-    tauri::async_runtime::spawn_blocking(move || -> Result<(), ImportTaskError> {
-        let _guard = ImportGuard::acquire(&editor.importing)?;
-        let root = editor.asset_root.as_ref().ok_or(ImportTaskError::Unsaved)?;
-        let snapshot = capture(&editor.bus, expected_revision)?;
-        let prepared = snapshot.prepare(root, None, &requests)?;
-        if !editor.alive.load(Ordering::Relaxed) {
-            return Err(ImportTaskError::Closed);
-        }
-        commit(&editor.bus, prepared)
-    })
-    .await
-    .map_err(|_| ImportFailure {
-        code: "asset.worker",
-        message: "Asset import worker stopped unexpectedly.".into(),
-    })?
-    .map_err(ImportFailure::from)?;
+    let commit =
+        tauri::async_runtime::spawn_blocking(move || -> Result<ImportCommit, ImportTaskError> {
+            let _guard = ImportGuard::acquire(&editor.importing)?;
+            let root = editor.asset_root.as_ref().ok_or(ImportTaskError::Unsaved)?;
+            let snapshot = capture(&editor.bus, expected_revision)?;
+            let prepared = snapshot.prepare(root, None, &requests)?;
+            if !editor.alive.load(Ordering::Relaxed) {
+                return Err(ImportTaskError::Closed);
+            }
+            commit(&editor.bus, prepared)
+        })
+        .await
+        .map_err(|_| ImportFailure {
+            code: "asset.worker",
+            message: "Asset import worker stopped unexpectedly.".into(),
+        })?
+        .map_err(ImportFailure::from)?;
     let _ = app.emit_to(
         tauri::EventTarget::webview("editor"),
         "incant:engine-changed",
         (),
     );
-    engine_read(state).map_err(|message| ImportFailure {
+    let snapshot = engine_read(state).map_err(|message| ImportFailure {
         code: "engine.read",
         message,
-    })
+    })?;
+    Ok(ImportResponse { snapshot, commit })
 }
 
 #[cfg(test)]
@@ -222,5 +253,138 @@ mod tests {
         recovered.undo().unwrap();
         assert!(recovered.project().assets.is_empty());
         assert!(capture(&Mutex::new(LoadState::Loading), 0).is_err());
+    }
+
+    #[test]
+    fn no_op_import_receipt_preserves_revision_journal_and_redo() {
+        fn journal_bytes(
+            state: &Mutex<LoadState>,
+            path: &std::path::Path,
+            project: &Project,
+        ) -> Vec<u8> {
+            let mut state = state.lock().unwrap();
+            // Windows owns an exclusive journal handle. Close it before reading
+            // bytes, then recover the exact durable state for the next operation.
+            drop(std::mem::replace(&mut *state, LoadState::Loading));
+            let bytes = std::fs::read(path).unwrap();
+            *state = LoadState::Ready(Box::new(
+                CommandBus::persistent(path, project.clone()).unwrap(),
+            ));
+            bytes
+        }
+        let temp = tempfile::tempdir().unwrap();
+        let request = fixture(temp.path());
+        let project = Project::empty("No-op receipt");
+        let journal = temp.path().join("journal");
+        let state = Mutex::new(LoadState::Ready(Box::new(
+            CommandBus::persistent(&journal, project.clone()).unwrap(),
+        )));
+        let first = commit(
+            &state,
+            capture(&state, 0)
+                .unwrap()
+                .prepare(temp.path(), None, std::slice::from_ref(&request))
+                .unwrap(),
+        )
+        .unwrap();
+        assert_eq!(first.revision, 1);
+        assert!(first.transaction.is_some());
+        {
+            let mut state = state.lock().unwrap();
+            let bus = state.bus_mut().unwrap();
+            assert_eq!(first.transaction.as_ref(), Some(&bus.history()[0].id));
+            bus.execute(
+                vec![Command::CreateScene {
+                    scene: Scene::new("Unrelated edit"),
+                }],
+                Actor::user("test"),
+                "Add scene",
+                None,
+            )
+            .unwrap();
+        }
+        // Both with an earlier unrelated edit and with a redo tail, identical
+        // sources must not invent a receipt, advance revision or append bytes.
+        for undo_first in [false, true] {
+            let (revision, before, history, redo) = {
+                let mut state = state.lock().unwrap();
+                let bus = state.bus_mut().unwrap();
+                if undo_first {
+                    bus.undo().unwrap();
+                }
+                (
+                    bus.revision(),
+                    bus.project().clone(),
+                    bus.history().to_vec(),
+                    bus.redo_history().cloned().collect::<Vec<_>>(),
+                )
+            };
+            let bytes = journal_bytes(&state, &journal, &project);
+            let receipt = commit(
+                &state,
+                capture(&state, revision)
+                    .unwrap()
+                    .prepare(temp.path(), None, std::slice::from_ref(&request))
+                    .unwrap(),
+            )
+            .unwrap();
+            assert_eq!(receipt.revision, revision);
+            assert!(receipt.transaction.is_none());
+            {
+                let mut state = state.lock().unwrap();
+                let bus = state.bus_mut().unwrap();
+                assert_eq!(bus.project(), &before);
+                assert_eq!(bus.revision(), revision);
+                assert_eq!(bus.history(), history);
+                assert_eq!(bus.redo_history().cloned().collect::<Vec<_>>(), redo);
+            }
+            assert_eq!(journal_bytes(&state, &journal, &project), bytes);
+        }
+        {
+            let mut state = state.lock().unwrap();
+            let bus = state.bus_mut().unwrap();
+            bus.redo().unwrap();
+            assert_eq!(bus.history().last().unwrap().description, "Add scene");
+            assert_eq!(bus.project().scenes.len(), 1);
+        }
+        // A real changed source still returns the exact new history ID and its
+        // ordinary Undo/Redo remains durable.
+        let mut bytes = std::fs::read(temp.path().join("mesh.bin")).unwrap();
+        bytes[..4].copy_from_slice(&0.25_f32.to_le_bytes());
+        std::fs::write(temp.path().join("mesh.bin"), bytes).unwrap();
+        let (revision, before) = {
+            let mut state = state.lock().unwrap();
+            let bus = state.bus_mut().unwrap();
+            (bus.revision(), bus.project().clone())
+        };
+        let changed = commit(
+            &state,
+            capture(&state, revision)
+                .unwrap()
+                .prepare(temp.path(), None, &[request])
+                .unwrap(),
+        )
+        .unwrap();
+        let after = {
+            let mut state = state.lock().unwrap();
+            let bus = state.bus_mut().unwrap();
+            assert_eq!(changed.revision, revision + 1);
+            assert_eq!(
+                changed.transaction.as_ref(),
+                Some(&bus.history().last().unwrap().id)
+            );
+            let after = bus.project().clone();
+            assert_ne!(after, before);
+            bus.undo().unwrap();
+            assert_eq!(bus.project(), &before);
+            bus.redo().unwrap();
+            assert_eq!(bus.project(), &after);
+            after
+        };
+        drop(state);
+        assert_eq!(
+            CommandBus::persistent(&journal, project).unwrap().project(),
+            &after
+        );
     }
 }

@@ -48,3 +48,16 @@ fn emitted_module_is_valid_and_meter_is_not_guest_addressable() {
     wasmparser::Validator::new().validate_all(&result).unwrap();
     assert!(result.len() > module("(loop $l (br $l))", "").len());
 }
+#[test]
+fn input_capability_is_versioned_with_exact_signatures_before_translation() {
+    let source = include_str!("../../incant_wasm_runtime/fixtures/input.wat");
+    assert!(incant_wasm_cook::prepare(&wat::parse_str(source).unwrap()).is_ok());
+    for invalid in [
+        source.replace("incant_input_v1", "incant_input_v2"),
+        source.replace("snapshot_len", "unknown_input"),
+    ] {
+        assert!(incant_wasm_cook::prepare(&wat::parse_str(&invalid).unwrap()).is_err());
+    }
+    let wrong=wat::parse_str("(module (import \"incant_input_v1\" \"snapshot_len\" (func (param i32) (result i32))) (memory (export \"memory\") 1) (func (export \"incant_abi\") (result i32) i32.const 1) (func (export \"update\") (param i64 f64)))").unwrap();
+    assert!(incant_wasm_cook::prepare(&wrong).is_err());
+}

@@ -23,8 +23,8 @@ impl CompiledScript {
              ; return exports.default;\n\
              }})({{}});\n\
              if (!behavior || typeof behavior.update !== 'function') throw new Error('default behavior.update required');\n\
-             if ('initialState' in behavior || 'onTimer' in behavior) throw new Error('state and timers are not migrated to the native bulk host');\n\
-             export function update(chunks, dt, commands, input) {{ return behavior.update({{chunks, dt, commands, input}}); }}\n"
+             if ('initialState' in behavior || 'onTimer' in behavior) throw new Error('legacy initialState/onTimer are unsupported; handle native timers.events in update');\n\
+             export function update(chunks, dt, commands, input, physics, clock, timers, log) {{ return behavior.update({{chunks, dt, commands, input, physics, clock, timers, log}}); }}\n"
         );
         let (bytes, hardening) = context.with(|ctx| {
             let compile = |name: &str, text: &str| {

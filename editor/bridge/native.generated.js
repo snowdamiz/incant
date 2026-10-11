@@ -529,15 +529,26 @@ class NativeBridge {
             // A pending background read cannot overwrite the mutation response.
             ++this.refreshId;
             let read;
+            let result = {
+                ok: true
+            };
             if (command.type === 'asset.import') {
                 if (!this.read.asset_import?.available) return failure(this.read.asset_import?.reason ?? 'Open a saved project to import assets.');
-                read = await this.invoke('engine_import', {
+                const imported = await this.invoke('engine_import', {
                     requests: command.sources.map((source)=>({
                             source: source.source,
                             texture_usage: source.textureUsage ?? null
                         })),
                     expectedRevision: this.read.revision
                 });
+                read = imported.snapshot;
+                result = {
+                    ok: true,
+                    assetImport: {
+                        revision: imported.commit.revision,
+                        transaction: imported.commit.transaction === null ? null : id(imported.commit.transaction)
+                    }
+                };
             } else if (command.type === "history.undo" || command.type === "history.redo") {
                 read = await this.invoke("engine_history", {
                     redo: command.type === "history.redo"
@@ -570,9 +581,7 @@ class NativeBridge {
                 });
             }
             this.publish(read);
-            return {
-                ok: true
-            };
+            return result;
         } catch (error) {
             await this.start();
             return failure(error);

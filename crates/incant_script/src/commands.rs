@@ -141,7 +141,7 @@ fn parse<'js>(
     })
 }
 
-fn id(ctx: &Ctx<'_>, value: &Value<'_>) -> rquickjs::Result<StableId> {
+pub(crate) fn id(ctx: &Ctx<'_>, value: &Value<'_>) -> rquickjs::Result<StableId> {
     let invalid = || Exception::throw_type(ctx, "expected a canonical uppercase ULID string");
     let text = value.as_string().ok_or_else(invalid)?.to_string()?;
     if text.len() != 26 {
@@ -154,7 +154,7 @@ fn id(ctx: &Ctx<'_>, value: &Value<'_>) -> rquickjs::Result<StableId> {
     Ok(StableId(id.to_bytes()))
 }
 
-fn optional_id(ctx: &Ctx<'_>, value: &Value<'_>) -> rquickjs::Result<Option<StableId>> {
+pub(crate) fn optional_id(ctx: &Ctx<'_>, value: &Value<'_>) -> rquickjs::Result<Option<StableId>> {
     if value.is_null() {
         Ok(None)
     } else {
@@ -172,7 +172,10 @@ fn motion<'js>(ctx: &Ctx<'js>, value: &Value<'js>) -> rquickjs::Result<Option<Ve
     }
 }
 
-fn numbers<'js, const N: usize>(ctx: &Ctx<'js>, value: &Value<'js>) -> rquickjs::Result<[f64; N]> {
+pub(crate) fn numbers<'js, const N: usize>(
+    ctx: &Ctx<'js>,
+    value: &Value<'js>,
+) -> rquickjs::Result<[f64; N]> {
     if !value.is_array() && TypedArray::<f64>::from_value(value.clone()).is_err() {
         return Err(Exception::throw_type(
             ctx,
