@@ -59,5 +59,54 @@
     "shared mutex belongs to one project session",
     "network reads and compiler work are not preempted by cancellation"
   ],
-  "reviewed_code_commit": "a582d95e48f5dd3f7402430a73d18fcab915250a"
+  "reviewed_code_commit": "a582d95e48f5dd3f7402430a73d18fcab915250a",
+  "main92_integration": {
+    "base": "22f30bd36fd744c7298787ea9a46681548b92b69",
+    "original_head": "d50fb0b3a91ca27982ddcf1ce05fc8e2192e8f04",
+    "tested_merge": "524ea5a80ede10e08796df24c036c5a72e17de02",
+    "conflicts": [],
+    "reviewed_source_hashes_unchanged": true,
+    "tests": {
+      "passed": 95,
+      "failed": 0,
+      "ignored": 2,
+      "groups": 23,
+      "scope": "incant_agent and incant_headless; unchanged GPU tests ignored, no new GPU claim"
+    },
+    "clippy": "all targets both packages passed",
+    "headless_build": "passed",
+    "contracts": {
+      "fresh_schema_files_equal": 62,
+      "sdk_bridge": true,
+      "fmt_conventions_diff": true
+    },
+    "public_source_play_proof": {
+      "passed": true,
+      "processes": 2,
+      "rpc_requests": 32,
+      "ticks_per_play": 20,
+      "translations_x": [
+        2.0000000000000004,
+        4.000000000000001,
+        2.0000000000000004,
+        4.000000000000001,
+        2.0000000000000004
+      ],
+      "content_authored_only_through_command_bus": true,
+      "registration_content_attachment_one_transaction": true,
+      "undo_redo_and_recovery": true,
+      "authoring_unchanged_by_play": true,
+      "gpu_submitted": false,
+      "reference_phone_gate": false,
+      "binary_sha256": "55e2bc25b16a6e8788db8ed566c257e4c902bd4223a903f96b16873de73c2603"
+    },
+    "public_proof_sha256": "0c860d3fa5ed0844742c0cb6e08685911343d1a4f1a04cfd64a88b310355a01e",
+    "logs": {
+      "incant-shared-agent-main92-clippy.log": "9a4f6af1683499cf69cb8de5ff90155e44e739d2a854c2dfb22b0fd11d307e9d",
+      "incant-shared-agent-main92-headless.log": "53c13877574de99869dedea3a2ab41e0324e33a3c049ee7961e3800d5c33031d",
+      "incant-shared-agent-main92-schema.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "incant-shared-agent-main92-source-proof.log": "34745772a893e690064bb54ac971850b940915e61ab5a238958eb34b2e49d44d",
+      "incant-shared-agent-main92-tests.log": "d113ff2fa5d886454747b7acb7050bf9c7b79c807bff40091196f452e7fab382"
+    }
+  }
 }

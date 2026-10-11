@@ -75,6 +75,12 @@ old workflow and duplicate tests. [Evidence](docs/spikes/native-project-package.
 Existing full checkpoint jobs now include the export probe; hosted execution,
 window package execution and complete UI/export/device gates remain open.
 
+The shared-agent backend's actual main92 integration preserves all nine reviewed
+source identities and passes95 Agent/headless tests, scoped Clippy,62 exact
+contracts and the public32-request/two-process source/Play proof. The stale
+source-cook regression rejects a mixed candidate and retains the previous run.
+Editor chat wiring remains separate. [Evidence](docs/spikes/shared-agent-project-access.md).
+
 ## Current integration and parallel work
 
 The closed retained-state / native SDK / shared Play-startup union passes 837
