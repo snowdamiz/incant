@@ -137,8 +137,8 @@ export class GameInput {
       this.buttons.clear();
       this.push({ type: 'focus', focused: false });
     } else if (!wasAccepting && !active) {
-      // The worker gives the game focus whenever it starts taking input (Play starting or
-      // resuming, the window coming back). Another panel has focus, so the game has not.
+      // Reconcile focus whenever input resumes, including older workers that inferred game
+      // focus from window focus. Another panel has focus, so the game must not.
       this.push({ type: 'focus', focused: false });
     }
     this.schedule();

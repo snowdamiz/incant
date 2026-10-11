@@ -155,8 +155,7 @@ impl Worker {
                 self.game = Some(game);
                 self.running = true;
                 self.held = true;
-                self.input.clear();
-                self.input.push(InputEvent::Focus { focused: false });
+                release_input(&mut self.input);
                 self.clock = Clock::new(Instant::now());
                 self.service.edit(|s| {
                     s.phase = "running";
@@ -208,8 +207,7 @@ impl Worker {
                         }
                         self.running = false;
                         self.held = true;
-                        self.input.clear();
-                        self.input.push(InputEvent::Focus { focused: false });
+                        release_input(&mut self.input);
                         self.reset_clock();
                     }
                     Action::Resume { .. } => {
@@ -294,8 +292,7 @@ impl Worker {
                 return;
             }
             if !self.held {
-                self.input.clear();
-                self.input.push(InputEvent::Focus { focused: false });
+                release_input(&mut self.input);
             }
             self.held = true;
             self.reset_clock();
@@ -335,13 +332,10 @@ impl Worker {
                         game.pause().map_err(|e| e.to_string())?;
                     }
                     self.held = true;
-                    self.input.clear();
-                    self.input.push(InputEvent::Focus { focused: false });
+                    release_input(&mut self.input);
                     self.clock.reset(now);
                 } else if self.held {
-                    self.input.clear();
-                    self.input.push(InputEvent::Focus { focused: false });
-                    self.input.push(InputEvent::Focus { focused: true });
+                    release_input(&mut self.input);
                     self.held = false;
                     self.clock.reset(now);
                 }
@@ -440,6 +434,13 @@ fn clear(renderer: &Renderer, frame: Frame) -> Result<(), String> {
     frame.texture.present();
     renderer.check_device().map_err(|e| e.to_string())
 }
+/// Native window focus permits simulation, but only the game view's explicit
+/// input stream may grant gameplay focus. Hold/start/resume also discard stale
+/// queued presses, so no frame briefly borrows another editor panel's focus.
+fn release_input(input: &mut Vec<InputEvent>) {
+    input.clear();
+    input.push(InputEvent::Focus { focused: false });
+}
 fn validate_events(events: &[InputEvent]) -> Result<(), String> {
     for event in events {
         match event {
@@ -464,6 +465,46 @@ fn validate_events(events: &[InputEvent]) -> Result<(), String> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn editor_resume_releases_game_input_until_the_view_explicitly_takes_focus() {
+        use incant_input::{InputRuntime, KeyCode};
+        let press = |code| InputEvent::Key { code, down: true };
+        let mut runtime = InputRuntime::default();
+        runtime
+            .advance(
+                &[
+                    press(KeyCode::KeyD),
+                    InputEvent::MouseButton {
+                        button: MouseButton::Left,
+                        down: true,
+                    },
+                ],
+                1. / 60.,
+            )
+            .unwrap();
+        let mut queued = vec![InputEvent::Focus { focused: true }, press(KeyCode::KeyW)];
+        release_input(&mut queued);
+        let frame = runtime.advance(&queued, 1. / 60.).unwrap();
+        assert!(!frame.focused);
+        assert!(frame.keyboard.held.is_empty());
+        assert!(frame.mouse.buttons.held.is_empty());
+        assert!(frame.keyboard.released.contains(&KeyCode::KeyD));
+        // Neither a subsequent frame nor a key packet grants the editor's focus.
+        assert!(!runtime.advance(&[], 1. / 60.).unwrap().focused);
+        let frame = runtime.advance(&[press(KeyCode::KeyW)], 1. / 60.).unwrap();
+        assert!(!frame.focused);
+        assert!(frame.keyboard.held.is_empty());
+        // Only the explicit game-view stream reopens input.
+        let frame = runtime
+            .advance(
+                &[InputEvent::Focus { focused: true }, press(KeyCode::KeyW)],
+                1. / 60.,
+            )
+            .unwrap();
+        assert!(frame.focused);
+        assert!(frame.keyboard.held.contains(&KeyCode::KeyW));
+    }
+
     #[test]
     fn unsupported_devices_and_nonfinite_pointer_values_refuse_whole_packets() {
         let valid = InputEvent::Focus { focused: true };

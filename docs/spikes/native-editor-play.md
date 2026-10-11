@@ -65,3 +65,19 @@ The exact compiled native binary is ready for Claude's actual-window visual
 acceptance; that review remains required before calling this feature done.
 Gamepad, touch, raw pointer motion, complete session persistence and cross-platform
 native-window verification are not supplied by this work.
+
+## Native window focus follow-up
+
+Claude0044's actual macOS window review covered controls, runtime rows, logical
+pointer coordinates and titlebar alignment. It found an unfocused game inheriting
+window focus after Resume and keyboard focus disappearing after Dismiss. Its UI
+corrections and regression tests are integrated. The native worker now resets
+game input to unfocused at start/hold/resume; only the game view's explicit input
+stream grants focus. A real InputRuntime regression verifies held controls are
+released, stale queued input discarded and keys ignored until that explicit focus.
+
+The current union passes 782 UI tests and39 editor tests (one existing GPU test
+ignored), plus scoped all-target Clippy. [Independent reviews and logs](evidence/native-play-focus-correction.json)
+bind the corrected source. The reviewed native binary predates these corrections;
+combined native acceptance after the pending budget and splitter controls remains
+required. The splitter selection defect is assigned separately to Claude0047.
