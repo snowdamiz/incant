@@ -1,5 +1,10 @@
 # Implementation status
 
+- Credential CI now has a report-only locked dependency classifier and complete
+  conservative local-crate trigger coverage. All actual tests remain enabled;
+  hosted reports and any later selection policy are pending.
+  [Scope and limits](docs/spikes/credential-impact-reporting.md).
+
 Source: [PLAN.md](PLAN.md), revision 7 (2026-10-10) with director decisions; every open decision is resolved in its section 12. Current phase:
 **1, in progress**. The complete engine/game release is not implemented.
 On 2026-10-08 the director authorized beginning Phase 1 while keeping the open
