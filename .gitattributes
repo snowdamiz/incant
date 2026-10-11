@@ -6,5 +6,6 @@
 # Preserve the pinned upstream header byte-for-byte, including three comment
 # lines ending in spaces. Local code keeps the normal whitespace checks.
 third_party/wabt/wasm-rt.h whitespace=-blank-at-eol
-# Preserve upstream FBX fixture bytes (including ASCII CRLF) for provenance hashes.
-crates/incant_assets/tests/fixtures/fbx/*.fbx -text whitespace=cr-at-eol
+# Preserve upstream FBX bytes, including ASCII CRLF and exporter trailing spaces.
+# The fixture hash test verifies these unmodified data files on every host.
+crates/incant_assets/tests/fixtures/fbx/*.fbx -text whitespace=-blank-at-eol,cr-at-eol

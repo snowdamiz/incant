@@ -22,7 +22,7 @@
     "crates/incant_import/tests/fbx.rs": "9d1ba66ebad7c909f54c42e3482fbca8ff0caa536e060f2f713e4f87e4ca4455",
     "editor/ui/src/assets/paths.ts": "7fb58eead6cca9de6e6d0c99df3d6ba781a0db7927f5e4148ef92ae9a753f653",
     "tools/check_runtime_dependencies.py": "7dbc258f01b3864af6f0bcf86431ef5906059853a1df0938218d3a049f71a67d",
-    ".gitattributes": "c934a44807dc76a2be4c4d84b6730b6301f0f11b8f94dfae5e0d08f22267cd8f"
+    ".gitattributes": "3baf9454212e30af5b86d61dd19dde9c4c83aa2a3a420f6a607c8e5d9934ce05"
   },
   "checks": {
     "scoped_release_tests": 71,
