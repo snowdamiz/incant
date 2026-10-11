@@ -3,6 +3,7 @@
 use incant_assets::AssetStore;
 use incant_doc::Project;
 use incant_render::{RenderScene, Renderer};
+use incant_render_authoring::RendererAuthoringExt as _;
 use std::{
     path::Path,
     time::{Duration, Instant},

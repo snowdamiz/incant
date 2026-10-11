@@ -1,925 +1,148 @@
 # Implementation status
 
-- Final plain editor + sprite/atlas union: reviewed presentation65e1717 and
-  completion-focus28e5491 pass524 UI tests, strict typecheck/build,40 tools tests
-  and the final native custom-protocol build. The inherited451 ordinary/56 GPU
-  Rust baseline and all17 corrected sprite hosted checks remain recorded with
-  exact source limits. Combined hosted checks and isolated native Claude review
-  are pending. [Release evidence](docs/spikes/editor-release-union.md).
-
-- The sprite/atlas publication union now includes the reviewed native runtime and
-  Tauri stack. Local checks pass: 451 ordinary Rust tests, all 56 GPU tests,
-  release Clippy, 420 UI tests, 38 tool tests, generated schemas/SDK, and the four
-  public atlas/sprite/camera probes. Those saved workflows are still legacy Play;
-  native 2D migration, known sampling/placement limits, native editor acceptance
-  and device/performance gates remain open. Hosted Linux/Windows check defects
-  now have scoped probe/test corrections; the replacement matrix is pending.
-  [Portability evidence](docs/spikes/sprite-atlases.md#hosted-probe-portability-corrections-2026-10-10).
-  [Exact union evidence](docs/spikes/evidence/sprite-atlas-publication-union-2026-10-10.json).
-
-Source: [PLAN.md](PLAN.md), revision 7 (2026-10-10) with director decisions; every open decision is resolved in its section 12. Current phase:
-**1, in progress**. The complete engine/game release is not implemented.
-On 2026-10-08 the director authorized beginning Phase 1 while keeping the open
-Phase 0 items deferred, and instructed agents to continue sensible work without
-repeated permission questions. Phase advancement does not mark those gates passed.
-On 2026-10-09 the director authorized agents to merge completed PRs into main
-after review and passing checks, without requesting separate merge approval.
-
-## Implemented and locally verified
-
-- Atlas review 0034 authoring follow-up: bounded skyline packing fixes the explicit
-  three-frame false failure and retains previous layouts as maximum bounds grow.
-  Shared import preparation rejects broken frame/nine-slice references atomically;
-  cached source-free validation reports typed entity/texture/frame diagnostics.
-  Raw atlas rectangles receive relocation warnings, and CLI import failures are
-  readable. New packed layouts still need Claude delta review after the shared
-  renderer update; no phone/performance or phase gate is claimed. See
-  [atlas authoring evidence](docs/spikes/sprite-atlases.md#authoring-follow-up-to-review-0034-2026-10-10).
-- Native physics hosted streams match across all three desktop hosts and actual
-  browser WASM (21 streams). Canonical source-report path keys fix the Windows
-  metadata comparison failure; the strict comparator is unchanged. See
-  [evidence](docs/spikes/native-physics-runtime.md#hosted-cross-host-report-paths).
-
-- Shipping Cargo capture explicitly decodes UTF-8 on all desktop hosts. A real
-  subprocess regression reproduces Windows cp1252 failure before the fix; 40
-  tool tests pass. Corrected hosted Windows packaging remains pending. See
-  [encoding evidence](docs/spikes/shipping-output-utf8.md).
-
-- Typed versioned project JSON, semantic validation, published derived schemas,
-  canonical formatting and stable ULIDs.
-- One command bus with atomic edits, provenance, revisions, undo/redo, CRDT merging,
-  durable recovery and exclusive journal ownership.
-- Phase 1 static textured glTF/GLB import, meshopt cooking and versioned binary
-  cache, with dependency invalidation and source-independent CPU loading. PNG,
-  JPEG and EXR cook to independently validated KTX2 with color/normal-aware mips.
-  CLI import preserves stable IDs and durable import settings through the shared
-  command bus. The CPU runtime store publishes asset replacements atomically and
-  keeps retained versions valid across reimport and undo. Headless runs load cooked
-  assets before simulation. Animation, compression tiers and production
-  material/ECS bindings remain open. The authoring CLI watches sources;
-  the native editor now watches sources and replaces imported GPU geometry.
-  See [asset pipeline evidence](docs/spikes/asset-pipeline.md).
-- Bevy fixed-step simulation; isolated play state; SWC/QuickJS scripting, sandbox,
-  live ECS queries and compatible hot reload.
-- Actual wgpu rendering and PNG readback on Apple M5 Pro.
-- Local OpenAI Responses loop, shared typed tools, approvals, token limits,
-  interruption checks and strict streamed-response handling; deterministic tests.
-  Saved-account providers reload credentials per request, refresh near expiry,
-  retry HTTP 401 once after refresh, and stop after disconnect/account switch.
-  Sign-out cannot reactivate an older API key; missing/damaged OAuth records can
-  be cleared locally without claiming remote revocation.
-- Shared editor/CLI OpenAI login and twenty-task live eval harness. Real macOS
-  OAuth sign-in, refresh, session restoration across rebuilt apps and a live
-  command-bus scene edit pass. The director-requested private-file store removes
-  repeated Keychain prompts; see [login evidence](docs/spikes/auth-login-repair.md).
-- Real execution of platform probes on macOS, browser/WASM and iOS simulator.
-- Completed Claude Opus 5.5 ACP handoff, redesigned UI with a custom titlebar,
-  retained before/after screenshots, and native integration.
-- Supplied wisp mascot integrated into the titlebar, favicon and native app icons;
-  [visual and packaging evidence](docs/spikes/wisp-mascot.md) records verification
-  and the remaining native Dock visual-review limitation.
-- Fourteen architecture records, generated TS structural bindings, developer docs,
-  gate ledger and GitHub workflow source.
-
-See [written evidence and limitations](docs/spikes/phase-0.md). The Phase 0 baseline of fifty-four Rust
-behavior tests, 223 UI/bridge tests and five Python tool tests pass after
-integration. The thousand-entity script benchmark meets the local frame budget
-within its documented workload.
-
-## Active work
-
-- The integrated editor now preserves live OAuth completion announcements and
-  recovers Close focus instead of reusing Cancel as Sign out. Shortcut cells keep
-  native table semantics with explicit group/action/key context; returning to the
-  same Problems page after filtering announces again with timer cleanup. All 504
-  UI tests, strict TypeScript and the production build pass. Styling is unchanged;
-  native packaging, live screen-reader and Claude rendered acceptance remain
-  separate. See [editor correctness evidence](docs/spikes/editor-windowing-correctness.md#account-shortcuts-and-repeated-page-announcements-2026-10-10).
-
-- Atlas-specific rendering and public import/repack behavior are accepted in
-  Claude's scoped follow-up on `4194240`: 201 new frames, stable frame IDs,
-  atomic rejected imports, source-free repeats and atlas/control equality.
-  Thirteen tooling tests and 55 screenshot hashes pass after integration.
-  Main53 is integrated; full union checks and hosted CI remain pending. Shared
-  magnification/two-axis ties, geometry capacity and phone gates remain open;
-  see [atlas follow-up](docs/spikes/sprite-atlases.md#follow-up-rendered-acceptance-2026-10-10).
-
-- Sprite high-zoom follow-up uses 64-source-texel retained spans. The old spans
-  fail 95/2,856 expanded GPU cases; the fix passes all 5,768 exact/near-tie cases
-  through tested 128× magnification. All 360 workspace and 55 GPU tests plus
-  Clippy pass. Large sprites use more vertices, still under explicit total caps;
-  the theoretical maximum nine-slice bound is 6.19 MiB. Claude confirms the
-  one-axis fix through 128× in 1,006 frames, with repeat/reimport/source-free parity.
-  Higher magnifications and pre-existing two-axis frame-edge/non-dyadic tie
-  errors remain open. The measured cap is 341 nearest 2048-square sprites;
-  342 fail explicitly. Pixel-camera near-tie follower work is separate. See
-  [sprite evidence](docs/spikes/sprite-rendering.md).
-
-- Native cooked 3D rigid bodies, colliders and angular velocity now run in the
-  disposable ECS world through a document-free solver backend, typed structural
-  commands and direct numeric updates that preserve sleeping bodies. Whole-batch
-  validation precedes solver edits; publication failures after solver advancement
-  make the world terminal. Legacy schemas/text IDs and v1 cooked scenes remain
-  compatible. Local union evidence includes 428 release workspace tests, both Clippy
-  modes, nine identical native/browser state streams and 32 fresh source-free
-  shipping processes. Physics saves fail explicitly, including after removal;
-  character/navigation, JS physics query/configuration bindings, cross-host CI
-  for this slice and device/performance gates remain open. See
-  [native physics evidence](docs/spikes/native-physics-runtime.md).
-
-- The editor context now generates icons/assets during Tauri build preparation,
-  before rustc records input timestamps. Both feature modes have locally verified
-  cold generated outputs and immediate warm no-op builds. PR56 merged with all 17
-  checks passing; all three hosted OSes run the exact 44 GPU tests with zero
-  recompilation. [Evidence](docs/spikes/tauri-build-context.md) separates this Unix
-  invalidation fix from [measured Windows compilation costs](docs/spikes/ci-cargo-unit-timings.md).
-
-- Cooked PCM loading and Kira mixing now live in authoring-free runtime crates;
-  legacy import/gameplay adapters retain their existing public behavior. All 412
-  release workspace tests and Clippy pass. A fresh 585,072-byte shipping audio
-  executable passes 64 source-free process checks across static/streaming modes,
-  playback rates and render batch sizes, with matching symbols and no authoring
-  code compiled into its dependency graph. Native ECS audio integration, device
-  playback, lifecycle, browser resources and phone gates remain open. See
-  [cooked audio boundary](docs/spikes/cooked-audio-boundary.md).
-
-- Native numeric publication now rejects finite-value integration/hierarchy
-  overflow before advancing live world state. Script loans revoke views before
-  the same hierarchy check and restore all numeric writes on failure. Four
-  regressions first failed on the old code; 407 release workspace tests and both
-  Clippy modes pass. A fresh 2,170,968-byte shipping player passes 24 source-free
-  checks. Local release timing is recorded as diagnostic only; controlled
-  shipping/phone performance, trusted native immediate-write responsibility and
-  remaining gameplay migration stay explicit. See
-  [numerical-boundary evidence](docs/spikes/native-numeric-boundaries.md).
-
-- A [cache layout/retention proposal](docs/spikes/ci-cache-layout-proposal.md) records
-  the main53 Linux credential-cache disappearance, final 11-family inventory and
-  separate local compressed registry/target measurements. The simpler auxiliary
-  registry-only alternative now includes exact old-archive totals, historical
-  cold execution/queue times and replacement-overlap limits. Actual PR56 consumers
-  restored and verified both pinned tool binaries with PR saves skipped. A separate
-  [inputs-only follow-up](docs/spikes/ci-auxiliary-registry-cache.md) makes eight
-  auxiliary families registry-only, retaining iOS/native targets and all commands.
-  Three initial hosted keys match the preflight; the corrected physics union preserves
-  all source and commands and passes 40 tool tests. Hosted archive measurements,
-  consumption and the bounded legacy-cache migration remain pending. No cache
-  deletion, new permission or shipping-seed change is included.
-
-- Native fixed-tick input now owns a fresh cooked world, script VM and bounded
-  input timeline. Action bindings validate once at construction/rebind; each
-  valid packet advances native simulation before the synchronous script. Raw
-  devices, gestures and named actions reach JS as direct bounded VM copies,
-  without tick-time JSON or project projection. Invalid packets preserve input
-  edges/clock and world/VM state; a later script failure makes the session
-  unusable. All 394 release workspace tests/doctests, workspace Clippy, 89 scoped
-  tests and strict SDK checks pass. A fresh compiler-free shipping player passes
-  twelve empty-input and twelve recorded-input processes after authoring/compile
-  source deletion; retained JSON files are startup-only runtime exchanges. Its
-  stripped size is 2,154,408 bytes (+364,272 vs the corrected cooked-script
-  baseline). Native input/VM save/seek, live platform adapters, remaining legacy
-  gameplay and device/performance gates stay open. The integrated cooked/save
-  union passes 98 scoped tests, 28 tool tests and the fresh 24-process proof;
-  hosted checks are pending. See [native input evidence](docs/spikes/native-input-session.md).
-
-- PR #51 is merged after nine passing checks and verified tested-tree identity.
-  Its real shared-cache Windows critical path was 21m19s plus 1s queue, 38%
-  below the cold PR #49 sample; feature/dependency changes remain explicit.
-  All native ordinary tests and 44 exact GPU names per host passed. All 12 Rust
-  cache families remain covered within the observed 9.134 GiB inventory.
-  Further Windows compilation/link attribution and conservative docs/UI path
-  selection remain open; see [warm evidence](docs/spikes/ci-build-performance.md#completed-warm-pr-51).
-
-- Pinned web/Android tool reuse is locally verified: isolated exact-version
-  executable caches, normal install fallback, and default-branch-only saves.
-  Hosted restoration/sizes remain pending; engine/GPU/credential/shipping
-  coverage stays intact. See [tool reuse evidence](docs/spikes/ci-pinned-platform-tools.md).
-
-- Main cache seeding is verified across all 12 Rust jobs after PR #49: the shared
-  set uses 7.807 GiB and the retained inventory 8.929 GiB after exact obsolete
-  cache cleanup. All checks remained enabled. Independent warm-PR latency and
-  retention after dependency changes remain to be measured. See
-  [cache rollout](docs/spikes/ci-cache-retention.md#completed-main-producer-rollout).
-
-- Native world binary save/restore now preserves Transform/Velocity/hierarchy,
-  scene identity and fixed-step clock, with atomic checked replacement. Nine new
-  runtime tests and focused Clippy pass. A copied process resumes after deleting
-  authoring and scene files, matching uninterrupted execution byte for byte.
-  All 382 workspace tests, 44 GPU tests, workspace Clippy and WASM/iOS/Android
-  compilation pass. Hosted checks, complete session state, other systems and
-  durable save-slot integration remain open. See
-  [native save evidence](docs/spikes/native-world-saves.md).
-
-- Native Rapier now selects its parallel solver while WASM stays serial, with
-  enhanced determinism preserved. Three repeated process trials of serial,
-  one-worker and four-worker builds plus three real Chromium/WASM processes
-  produce 24 identical full body-state streams across contact and joint scenes.
-  All 373 normal workspace tests, Clippy, seven target feature graphs and direct
-   iOS-simulator/Android/WASM physics compile checks pass locally. Hosted desktop
-   and browser parity passed in PR #50; old Jolt timings remain separate. No phone performance,
-  fast variant, native physics migration or backend-adoption gate is claimed.
-  See [parallel physics evidence](docs/spikes/physics-parallel.md).
-
-- Native QuickJS bulk callbacks now enqueue bounded Spawn/Despawn/SetParent/
-  SetVelocity commands with stable ULIDs. Sync runs after numeric views detach
-  and their exclusive scope ends; rejected batches restore the numeric undo
-  through verified layouts. Retained command functions never reactivate.
-  All 373 workspace tests (21 native host tests) and workspace Clippy pass, including relocation,
-  structural rejection after transform writes, deferred work and caught overflow.
-  Independent review found no actionable issue; twelve standalone development
-  runs passed with the original project/journal absent. Native SDK types and
-  a TypeScript example are included; the legacy gameplay migration and
-  authenticated shipping bytecode remain open. See the
-  [structural script audit](docs/spikes/native-script-structural.md).
-
-- The first authoring-free QuickJS host executes compiler-produced bytecode over
-  actual native numeric columns, with detached views and bounded rollback on
-  exceptions, memory/CPU failures and deferred work. All 363 workspace tests and
-  workspace Clippy pass; schemas/SDK remain unchanged and a repeated standalone
-  native-script probe passes. Hosted CI remains pending. Existing gameplay remains explicitly
-  in `incant_play_legacy` pending migration; SDK/state/timers/queries/saves and
-  authenticated export loading are still open. See the
-  [native script audit](docs/spikes/native-script-columns.md).
-
-  Direct iOS simulator and Android native-host compilation also pass after
-  enabling target-specific QuickJS binding generation. Existing desktop features
-  remain unchanged, and the platform workflow now checks the host separately
-  from its smoke apps. These are compile checks, not mobile script execution or
-  device performance evidence.
-
-- The macOS texture-format check now reuses the workspace-built `texture_probe`
-  alongside the existing tools, avoiding its separate package feature graph.
-  All three real fixtures pass the unchanged pinned Khronos validator; the build
-  retains 656/658 external artifacts from the test graph (only Tauri variants
-  differ). Hosted timing for this follow-up remains unmeasured. See
-  [CI evidence](docs/spikes/ci-build-performance.md#reuse-the-texture-fixture-generator).
-- CI build reuse now keeps the ignored GPU suite on the workspace feature graph,
-  combines macOS editor/headless builds and caches Rust dependencies. The measured
-  baseline is a 38m15s median PR check, dominated by compilation; repeated Windows
-  npm archives consumed 8.91 GiB. Local checks pass 339 Rust tests, all 44 exact
-  baseline GPU tests, 387 UI tests, 15 tool tests, combined packaging and public
-  gameplay probes. The final GPU pass compiles nothing. Hosted cold/warm timing
-  remains pending; all platform/test coverage and open device/license gates stay
-  in force. See [CI evidence](docs/spikes/ci-build-performance.md).
-  The next reuse change combines required binaries/examples, preserves fresh
-  shipping verification and gives cold desktop jobs a bounded 60-minute deadline.
-  At base `588b3ab`, 352 normal tests, the exact 44 GPU tests, 18 direct public
-  commands and a fresh shipping package pass locally. The combined build only
-  recompiles workspace crates. Authorized exact-ID cleanup removed 7.60 GiB of
-  merged-PR Windows npm caches while preserving all other existing entries;
-  [cache evidence](docs/spikes/ci-cache-cleanup-2026-10-10.json) records each result.
-  First cold macOS verification passed in 33m58s execution (2m30s queue), but
-  package-selected tools still shifted compilation after the GPU savings.
-  The follow-up keeps workspace selection with exact tool targets: local Cargo
-  artifacts match 656 test dependencies, leaving only two required Tauri feature
-  variants, versus 45 differences with package selection. All direct probes and
-  fresh shipping checks pass; hosted validation of this refinement remains open.
-  All 17 checks on the earlier PR #48 head pass: cold macOS 33m58s, Linux 17m56s,
-  Windows 40m21s; each preserves all 44 GPU cases. The final Rust cache set is
-  7.992 GiB. All Rust saves now target main, with filtered desktop/credential
-  producers; [retention evidence](docs/spikes/ci-cache-retention.md) records the
-  9.114 GiB shared footprint and narrow headroom. After verified merge, exact
-  cleanup freed PR #48's private 7.992 GiB while preserving every other entry.
-  Main cache seeding and subsequent warm PR measurements remain open.
-
-- Windows MSVC compilation and doctests now share Cargo's static CRT policy;
-  Tauri's package-local shim is disabled after it shadowed the real runtime in
-  an unrelated executable doctest. Full-workspace doc coverage remains enabled.
-  The shipping guard records the CRT policy and Windows CI checks distributed
-  executables for CRT DLL imports. Local workspace tests (including all five
-  runtime doctests), editor Clippy and tool tests pass. Native Windows verification
-  remains pending the updated hosted job. See [CRT policy evidence](docs/spikes/windows-crt-policy.md).
-
-- The native runtime now lends actual Transform/Velocity numeric table columns
-  through an exclusive synchronous scope with separate stable IDs. Direct writes,
-  table reallocation, hierarchy/changed-tick publication, caller-owned undo and
-  error/unwind cleanup pass focused tests; schemas/SDK remain unchanged and
-  WASM/Android/iOS simulator compilation passes. Foreign script hosts, gameplay
-  migration and performance/device gates remain open. See
-  [numeric column evidence](docs/spikes/runtime-numeric-columns.md).
-
-- The runtime has a reusable shipping-profile build/package command with fat LTO,
-  one codegen unit, abort-on-panic and separately archived crash symbols. A real
-  packaged macOS runner passed source-free cooked-scene execution, SIGABRT/no-unwind
-  verification and matching dSYM UUID checks. Tool tests, focused Clippy and
-  runtime/cook tests pass; the portable profile compiles for wasm, Android and
-  iOS simulator. Linux/PDB packaging and execution await the updated desktop CI.
-  PGO, export migration, mobile/web symbol packaging, Device Farm/performance
-  measurements and phase gates remain open. See
-  [shipping profile evidence](docs/spikes/shipping-runtime-profile.md).
-
-- The native runtime now stages bounded entity lifecycle batches between steps:
-  spawn/despawn, reparent and Velocity component additions/removals. A rejected
-  batch preserves world state and the submitted commands. Hierarchy checking is
-  iterative; component-only updates avoid scanning the scene. Workspace Clippy,
-  339 Rust tests, portable compilation and the source-free cooked-scene probe
-  pass. Independent Astra Extra High review found no blocking defects. Hosted CI
-  remains pending; foreign script bindings,
-  other component types and legacy play migration remain open. See
-  [structural-buffer evidence](docs/spikes/runtime-structural-buffer.md).
-
-- Checked binary scenes and a real native Bevy world now form the first runtime
-  migration slice. Authoring-side cooking supports Transform/Velocity/hierarchy
-  and rejects every unmigrated component explicitly. A standalone runtime runs
-  after project/journal deletion, with direct bulk mutation and on-demand typed
-  snapshots. Workspace Clippy, 329 Rust tests, 44 GPU checks, 15 tool tests,
-  portable WASM/iOS compilation and contracts pass. The dependency guard covers
-  the real native-world crate. Legacy PlaySession integration, the other systems,
-  script bindings, saves and performance gates remain open.
-  See [native-world evidence](docs/spikes/cooked-native-world.md).
-
-- The first runtime boundary extraction moves shared component values into
-  `incant_types`, retaining incant_doc re-exports and identical generated schemas
-  and SDK. Workspace Clippy, 318 Rust tests, 41 GPU checks, 12 tool tests and
-  WASM/iOS core compilation pass. A resolved Cargo graph guard rejects authoring
-  dependencies in this package. It does not certify the still-unimplemented
-  incant_runtime or remove the legacy per-tick document path; cooked scenes and
-  a real native world are next. See [component boundary evidence](docs/spikes/runtime-component-types.md).
-
-- The [final plan update review](docs/spikes/performance-plan-v6-review.md)
-  adopts hosted AWS Device Farm phones, removes name/package reservations and
-  moves distribution signing/store accounts to Phase 5 uploads. Phase 0's
-  executable gate no longer requires certificates; its unmet evidence, staffing
-  and director approval remain open. No hosted device run is claimed. The
-  temporary plan-update watcher was deleted at the director's request.
-
-- PLAN.md revision 5 retains revision 4's replacement of document-backed gameplay.
-  The [revision 5 review](docs/spikes/performance-plan-v5-review.md) records the
-  settled decisions: wasm2c exports, WorkOS Connect identity, AWS hosting,
-  explicit TypeScript/physics adoption thresholds and product/business choices.
-  Those decisions do not complete their implementations or human-owned actions.
-  The [review and migration order](docs/spikes/performance-plan-v4-review.md)
-  records concrete gaps and updates ADRs 0002, 0003, 0006 and 0008. The immediate
-  engineering priority is runtime-safe component types, checked cooked scenes,
-  a native ECS world and a real dependency guard, followed by moving the existing
-  systems/script bridge and saves off per-tick project cloning and JSON. Existing
-  feature tests remain valid for their old implementation, not proof of this
-  migration. Claude's editor redesign must also bound large collections.
-  Native/browser/Wasm script hosts, physics variants, shader pre-warming,
-  PGO/profiling, mobile symbol packaging, reference-phone PR gates and per-scene
-  CRDT scaling remain open. The new device/performance targets have not been passed
-  or waived.
-
-- Claude's third sprite review exposed large-region nearest precision loss.
-  Bounded source spans preserve the original mapping and now pass 864 edge/span
-  cases with unique source colors; removing the flat base fails 720 cases.
-  All 360 normal/55 GPU workspace tests and Clippy pass; seven focused GPU tests
-  pass after the test-oracle improvement. Independent rendered review of the
-  rebuilt candidate, native acceptance and hosted/device checks remain open.
-  See [wide-region evidence](docs/spikes/sprite-rendering.md#wide-nearest-regions-2026-10-10).
-
-- The sprite branch now integrates the native runtime/CRT/CI foundation with
-  unchanged camera schemas and SDK. Checks pass 359 Rust tests, 54 GPU tests,
-  420 UI tests, 25 tool tests, Clippy and combined packaging. The GPU pass builds
-  nothing; the three public sprite/camera saved workflows pass on the integrated
-  binary. Gameplay still uses the legacy path, and native visual review, the
-  near-tie camera defect and hosted/device gates remain open. See the
-  [integration evidence](docs/spikes/sprite-rendering.md#native-runtime-and-ci-integration-2026-10-10).
-
-- Cook-time sprite atlases are in implementation: typed source descriptors,
-  stable frame identities, deterministic packing, edge extrusion, cache metadata
-  and dependency-aware reimport. Integrated nearest sampling and resolved-frame
-  diagnostics now integrate the native runtime/CRT/CI foundation and bounded
-  nearest spans. All 365 normal/56 GPU tests, 420 UI tests, 25 tool tests, Clippy
-  and the combined release build pass. Atlas reimport Undo/Redo, source removal,
-  stable frame relocation and exact saved/repeated state pass on the rebuilt
-  executable. Atlas rendered/native review and hosted/device checks remain open;
-  the saved-workflow probe still uses legacy gameplay.
-  See [sprite atlas work](docs/spikes/sprite-atlases.md).
-
-- Sprite rendering is in implementation in an isolated checkout: typed texture
-  regions, pivots/flips, nine-slice geometry, deterministic sorting and retained
-  premultiplied texture resources. The foundation passes 325 Rust tests, 52 GPU
-  checks, Clippy, 420 UI tests, portable core compilation and the strict
-  source-free saved-gameplay probe. Claude's Max review exposed nearest-sampling
-  ties; the correction passes a reproduced GPU regression, all 325 Rust tests,
-  Clippy and 53 GPU checks. A follow-up typed diagnostic identifies the entity,
-  texture, region and dimensions after an undersized reimport; its GPU regression
-  and workspace Clippy pass. Claude's integrated round-two review accepts the
-  duplicated-texel fix but exposed a magnified-nearest regression. The GPU sweep
-  reproduces 15/70 failing cases before the derivative-scaled tolerance fix and
-  0/70 afterward; all six sprite GPU tests and scoped Clippy pass. A rebuilt
-  headless binary is ready for Claude's follow-up. That rendered verification
-  and the recommended optional exact display curve remain open;
-  Inspector work follows the full redesign, and native/CI evidence remain open;
-  atlas packing, tilemaps and 2D physics are separate unfinished work. See
-  [sprite rendering](docs/spikes/sprite-rendering.md).
-
-- Claude Opus 5.5 is performing a full editor redesign at explicitly verified
-  Max thinking in handoff 0033, prioritizing the Inspector header, hierarchy,
-  spacing and dense fields. The runner now pins and confirms both model and
-  effort for every new/resumed session; seven transport/tool tests pass.
-
-- Pixel-perfect camera support is in implementation: fixed logical targets,
-  integer replication/letterboxing, and render-only camera-plane snapping.
-  Local foundation checks pass 320 Rust tests, 47 GPU checks, Clippy, contracts
-  and both public saved-camera workflows. Claude supplied the Inspector with
-  420 passing UI tests and a repeated 341-frame engine comparison. Its exact
-  half-pixel follow defect is corrected and covered across odd/even dimensions
-  and camera roll; final rendered/native review and hosted CI remain open.
-  Sprite/tilemap rendering and 2D physics are separate unfinished work. See
-  [pixel-perfect cameras](docs/spikes/pixel-perfect-cameras.md).
-
-
-- Orthographic camera projection is implemented through shared component commands,
-  renderer geometry, parallel material view rays, light clusters and directional
-  cascade fitting. CPU/shared-command checks and all 41 renderer GPU tests pass.
-  Integrated checks pass 318 Rust and 387 UI tests, Clippy, contracts and native
-  packaging. Claude engine/browser/native review is accepted. PR #41 merged as
-  `af15941` after all twelve checks passed on `a88343e`; its tested tree is
-  unchanged by the merge. Pixel-perfect cameras, sprites, tilemaps and 2D physics
-  remain open. See
-  [orthographic cameras](docs/spikes/orthographic-cameras.md).
-
-- PR #39 merged as `72a53df` after all twelve required checks passed on
-  `12b6092`. Its merge tree exactly matches the tested tree. This incorporates
-  PRs #36–38: bounded steering, authored off-mesh routes, script diagnostics
-  and thread CPU budgets. GitHub records all three ancestor PRs as merged.
-  The older steering branch's failed generic-error check is not counted as
-  passed; the combined revision passed its own checks. No phase gate is approved.
-  PR #40 also merged as `9a9db3f` after all twelve checks passed on `533e0d6`,
-  preserving its tested tree.
-
-- The merged steering/links/script foundation passes 300 local Rust, 40 GPU,
-  315 UI and five tool tests, Clippy, contracts, packaging and public saved
-  workflows. Rendered repetitions match 803 steering frames and 593 off-mesh
-  frames; all 100 plaza walkers remain at goal from tick 2212 through 4990.
-  Native CPU budgets exclude host pauses/other threads; synchronous native calls
-  count but are not preemptible. Quantized navigation height and behavior-level
-  lateral sweeps remain documented. See [steering](docs/spikes/navigation-steering.md),
-  [links](docs/spikes/navigation-links.md) and [CPU budgets](docs/spikes/script-cpu-budget.md).
-
-- Compound colliders support 1–64 stable primitive children with parent body/hit
-  identity. Shared edits, recovery, rotated-child walking and the compact read-only
-  Inspector pass. Claude accepted the final native review at 1440×874 and 1000×650,
-  including End→Tab full IDs, the 64-part list and the compact unavailable Agent.
-  Integration with the complete navigation/script foundation passes 315 Rust,
-  334 UI and five tool tests, Clippy, contracts, native packaging, portable core
-  compilation and five public gameplay workflows. Unchanged renderer coverage
-  retains 40 passing GPU checks. Baking preserves
-  transformed child geometry and hollow openings, and re-bakes after edits.
-  All twelve hosted checks passed on `c740134`; PR #25 merged into main as
-  `2f32eb7` with its tested tree unchanged. The native draft blocker is resolved.
-  See [compound colliders](docs/spikes/compound-colliders.md).
-
-- PR #40 adds weighted rectangular-grid navigation through `api.findGridPath`,
-  shared edits, blocked-corner rules, bounded search and saved gameplay. Local
-  checks pass 309 Rust, 40 GPU, 315 UI and five tool tests, Clippy, contracts,
-  native packaging and WASM/iOS core compilation. Claude's scoped rendered
-  review passes 516 matching frames, exact saved-state restoration and independent
-  route-cost checks. Arrival is at tick 476 with 0.2 m minimum footprint clearance.
-  All twelve hosted checks passed; PR #40 merged as `9a9db3f` with its tested
-  tree unchanged. Sprite/tilemap rendering and 2D physics remain
-  open. See [grid navigation](docs/spikes/grid-navigation.md).
-
-
-- Tiled runtime navigation bakes selected static colliders and cooked model
-  geometry, reuses unchanged tiles and returns bounded portal-graph A* paths
-  with funnel smoothing and connected visibility repair. Claude's rendered
-  reviews exposed clearance, detour, phantom raster spans and short-query
-  precision bugs; all have regression fixes. Current source passes 276 Rust,
-  40 GPU, 315 UI and five tool tests, plus public saved-character gameplay,
-  Clippy, SDK/generation checks, native packaging and WASM/iOS compilation.
-  There are 7,056 local and 34,932 room-wide short-query regressions. See the
-  [navigation evidence](docs/spikes/navigation-runtime.md). PR #35's scoped implementation
-  and v9 rendered review are complete: both 600-tick runs match 726 frames/logs,
-  with no query exceptions and grounding on every tick. All twelve CI checks
-  passed at `1928138`; PR #35 merged as `302613c` with its tested tree unchanged. Quantized height
-  detail can undershoot true step discontinuities; physics owns grounding.
-  Steering is implemented and reviewed on its separate integration branch;
-  off-mesh links are in integration checks. Grid navigation, native Inspector/
-  debug draw and Core Sample/device gates remain open.
-
-
-- XLIFF translator exchange exports typed tables and imports matching targets
-  through one reversible shared-command transaction. Unknown/stale sources,
-  malformed XML and incompatible arguments reject the full batch. No-op imports
-  preserve history; empty targets and absent targets retain distinct meanings.
-  The public two-table/strict-TypeScript workflow, exact durable Undo/Redo and
-  rollback checks pass. Local verification passes 254 Rust tests, 40 GPU checks,
-  315 UI tests/build, five tool tests, Clippy, contracts and native packaging;
-  macOS executes the XLIFF smoke check, while WASM/iOS compile. All twelve hosted
-  checks passed at `3724633`; PR #34 merged as `106a4cc` with its tested tree
-  unchanged. The graphical localization panel remains open. See
-  [translator exchange](docs/spikes/localization-exchange.md).
-
-- Typed string tables, a bounded ICU MessageFormat subset, ICU4X plural/number/date
-  formatting, fallback, pseudo-localization, missing-string reports and saved
-  runtime locale switching are implemented. Shared commands preserve provenance,
-  journal history and Undo/Redo. Local checks pass 245 Rust tests, 40 GPU checks,
-  315 UI tests/build, five tool tests, Clippy, contracts and native packaging.
-  Six public gameplay probes pass; the macOS platform probe executes locale data,
-  while WASM/iOS target checks compile. A live saved-account Astra run authors and
-  verifies a Japanese table that produces the expected gameplay text, without
-  another login or Keychain prompt. An explicit UTF-8 subprocess fix resolves the Windows cp1252 probe failure.
-  All twelve hosted checks passed at `184a0fe`; PR #33 merged as `7052e01` with
-  its tested tree unchanged. Shaping/bidi/IME,
-  localization UI and Core Sample visual/device gates remain open.
-  See [localization runtime](docs/spikes/localization-runtime.md).
-
-- Named button/axis input actions and runtime rebinding now use validated project
-  settings and the shared command bus. Ordered physical transitions preserve
-  short taps, combine alternative bindings, apply dead zones and normalize
-  diagonal movement. Eight new tests, 212 total Rust tests, 315 UI tests/build,
-  five tool tests, Clippy, contracts and native build/package pass. The strict TS
-  public probe verifies Undo/Redo, invalid rollback, exact saved rebinding and
-  expected movement; existing save/input/timer probes pass. Local input-only p95
-  is 0.0025 ms for the typical workload and 2.8033 ms at the configured maximum.
-  Integration with audio and merged timers passes 232 Rust tests, the five public
-  gameplay probes, contracts, Clippy and native packaging. All twelve checks passed
-  at `f6ebc14`; PR #32 merged as `68f6004` with its tested tree unchanged.
-  Device adapters, haptics and the graphical binding editor remain open.
-  See [input actions](docs/spikes/input-actions.md).
-
-- Cooked WAV/OGG audio, typed sources/buses/listeners, Kira mixing/spatialization,
-  bounded native/offline streaming and script-driven WAV export are implemented.
-  The public import/RPC/strict-TypeScript probe works after deleting source files;
-  repeated PCM is exact, pause is silent and bus attenuation matches expected
-  levels. Twenty new tests bring the distinct passing Rust total to 215; Clippy,
-  315 UI tests/build, five tool tests, generated contracts and native packaging
-  pass. macOS/iOS device-backend and WASM compilation pass. All twelve hosted
-  checks passed at `246a380`, including the Windows retained-reader repair test.
-  Integration with merged timers passes 224 Rust tests, the combined public audio
-  and saved-timer probe, contracts, Clippy, UI checks and native packaging. All
-  twelve checks passed at `de83a4e`; PR #29 merged as `f96dca7` with its tested tree
-  unchanged. Native controls/playback, browser resources, hardware,
-  lifecycle/latency and mixer save cursors remain open. No device playback or local
-  capture occurred. See [audio runtime](docs/spikes/audio-runtime.md).
-
-- Fixed-tick script timers, repeat/cancel/replace, copied payloads and a saved
-  game clock are implemented. Version 2 game saves preserve pending deadlines
-  and read version 1 with an empty schedule. Seven script tests and a CLI failure
-  test pass; a strict TypeScript public-CLI probe preserves callbacks, command
-  effects and log continuity across process restarts. All 204 distinct Rust tests,
-  315 UI tests/build, five tool tests, Clippy, generated contracts and the native
-  build/package pass locally. All three hosted checks passed at `54f85a1`;
-  PR #31 merged as `93bc5ed` with the reviewed tree unchanged. Coroutines remain
-  open; Promise/generator behavior
-  callbacks now fail explicitly before commit. See [timers](docs/spikes/script-timers.md).
-
-- Headless `play --assertions FILE` evaluates bounded data-only checks over
-  runtime, behavior and input state at absolute ticks. Failed checks return
-  structured diagnostics, exit nonzero and suppress save publication. Five new
-  CLI tests and the strict TypeScript character probe cover checkpoint seeking,
-  movement/jumping/landing assertions, intentional failure, numeric equivalence,
-  missing/null data, invalid plans and bounded output. All 195 Rust, 315 UI and
-  five tool tests, Clippy, generated contracts and the native build/package pass.
-  All three hosted checks, including GPU diagnostic-report retention, passed at
-  `7379f9c`; PR #28 merged as `734d008` with the reviewed tree unchanged. Local
-  capture stays paused. See [gameplay assertions](docs/spikes/play-assertions.md).
-
-- Shared fixed-tick keyboard/mouse/gamepad/touch processing, sandbox `api.input()`
-  and bounded headless input replay are implemented. Atomic validation, focus
-  recovery, device lifetimes, gestures and saved-game input seeking pass eighteen
-  new tests. The strict TypeScript public-CLI character probe jumps, reaches a wall
-  and resumes a mid-jump save with exact final state/logs and unchanged authored
-  files. All 190 Rust, 315 UI and five tool tests pass, along with Clippy, generated
-  contracts and the native build/package. macOS normalized-input smoke execution
-  passes. All twelve hosted checks passed at `0021738`; PR #27 merged as `72fb2bd`
-  with the reviewed tree unchanged. Action mapping is implemented in the
-  increment above; live OS/browser adapters and physical-device verification
-  remain open. No computer use or local
-  captures occurred. See [game input](docs/spikes/game-input.md).
-
-- Versioned logical game saves preserve runtime scenes, hierarchy, spawned/deleted
-  entities, JSON behavior state and the simulation clock. The headless host loads
-  saves into isolated sessions and publishes new files atomically after success.
-  Exact float decoding fixes clock/rotation drift on JSON reload. Nine new tests
-  cover continuity, physical state, hot reload, invalid inputs and publication races;
-  172 Rust tests and workspace Clippy pass. The strict TypeScript public-CLI probe
-  matches uninterrupted state/logs across two process restarts with authored files
-  unchanged. The native release package, 315 UI tests/build and five tool tests pass.
-  All twelve hosted checks passed at `8cea975`; PR #26 merged as `39fed2d`
-  with an identical reviewed tree. The local main app was rebuilt without opening. Physics
-  warm starts, sleeping, VM globals and cross-revision migrations are outside this
-  logical save format. See [game saves](docs/spikes/game-saves.md).
-
-- Read-only character movement queries are implemented on the primitive runtime,
-  with script-owned gravity/jumping and Velocity commands. Real motion review
-  found walking stalls and a misleading slope flag; numerical face-normal handling
-  and final-support classification correct both. Twelve 300-tick capsule/sphere/
-  box walking cases pass, along with slope/stair/mask/isolation tests and the real
-  strict-TypeScript CLI jump/landing probe. The corrected tree passes 163 Rust,
-  40 GPU and 315 UI tests plus Clippy and the native release build. Actual macOS,
-  browser/WASM and iOS simulator queries pass. Claude accepted the corrected
-  course; 303 repeated frames match exactly. Stair speed/smoothing and moving
-  platform behavior remain game-feel work. All nine final hosted checks passed at
-  `54985fa`; PR #24 merged as `9f5906f`. See
-  [character movement](docs/spikes/character-movement.md).
-
-- Physics runtime integration is in progress on `impl/physics-runtime`. The
-  [candidate probe](docs/spikes/physics-candidates.md) passed all six checks and
-  merged as PR #22 (`a6fd91f`). The engine now takes PLAN.md's Rapier fallback
-  after measured Jolt binding portability gaps; see ADR 0003. Typed bodies,
-  primitive colliders, fixed stepping, sensors, masks and raycasts connect to
-  isolated play and the shared command bus. Ten new behavior tests, full workspace Clippy, 154 Rust tests and
-  315 UI tests/build pass locally. The earlier 40 GPU checks pass; all 26 final
-  engine look-dev PNGs match Claude’s reviewed originals byte for byte. Public CLI,
-  browser/WASM and iOS simulator physics execution pass. Shared validation and
-  fewer snapshots reduce paired local 512-body p95 from 9.99 to 8.80 ms, with
-  exact final-state equality. Claude handoff 0022 implemented and reviewed the new Inspector
-  in browser fixtures and the native app. Shared schemas supply field order and
-  units; WebKit field names and the compact Agent state are fixed. All twelve hosted
-  checks passed at `6d5fca0`; PR #23 merged as `eb77419`. Character controllers
-  are implemented in PR #24. Compound colliders in PR #25 have accepted native review and await updated
-  hosted checks. Mesh colliders, hierarchy/scale,
-  rollback snapshots and device performance remain open. See [runtime evidence](docs/spikes/physics-runtime.md).
-
-- Opt-in directional cascades are implemented with scoped Claude appearance
-  and native acceptance. The scheduled depth pass honors imported caster flags,
-  alpha masks, reflection and sidedness; retained queued frames and cascade
-  transitions pass real GPU checks. Public CLI edits, atomic invalid rejection,
-  Undo/Redo, durable reopening and source-free cached captures pass. Initial
-  checks pass 144 Rust, 40 GPU and 294 UI tests plus Clippy. Native enabled/Off
-  states, separated Assets workspace and sun-angle Undo/Redo pass. Final 1080p analytical timings
-  measure 1.389–3.096 ms across 0–4 suns; thin-caster contact/aliasing limits remain.
-  All twelve hosted checks pass at `5d31768`; PR #21 merged as `899cc2a`. local-light shadows and
-  adaptive quality remain open. See [directional shadows](docs/spikes/directional-shadows.md).
-
-- Real GPU passes now execute through a persistent Bevy ECS schedule with explicit
-  dependencies and owned frame resources. Reverse-order queued submission after
-  scene/source disposal passes. 139 Rust, 33 GPU and 283 UI tests, Clippy and the
-  native build pass; 120/124 baseline PNGs match exactly, four differ at one/two
-  pixels by one channel level. Those light fixtures now use deterministic IDs;
-  repeated captures are exact. Claude approved the final fixtures/native images.
-  Paired timings are stable; all twelve hosted checks pass at `50c950a` and PR #20
-  merged as `13edae6`. Production shadows and
-  post-effects remain open. See
-  [render-pass scheduling](docs/spikes/render-pass-graph.md).
-
-- Authored Camera selection is connected to renderer captures, public CLI,
-  isolated playback and the agent screenshot tool. Geometry, material view vectors,
-  transparent sorting and light clusters share the selected camera. Projection,
-  clipping, inheritance, retained views, public command history and moving-camera
-  playback pass. Empty camera-rig parents no longer create diagnostic cubes.
-  139 Rust, 32 GPU and 283 UI tests, Clippy and the native release build pass.
-  Claude approved all 36 captures, including independent skewed-basis checks.
-  A live saved-account agent captured the exact camera with no edits or login
-  prompts. Hosted desktop/credential checks pass; the source job found a stale
-  generated tool-schema snapshot, corrected at `d9ace60`. All six exact-head checks now pass at `d9ace60`; PR #19 merged as
-  `695f3b3`. No editor camera-selection control is claimed.
-  See [authored camera evidence](docs/spikes/authored-camera-capture.md).
-
-- Cluster membership masks replace overflow fallback in the next lighting
-  increment. Exact GPU readback covers every bit through 4096 lights, word-count
-  changes and stale clearing; full-capacity mixed point/spot output matches an
-  explicit all-light reference byte for byte. A final-bit-only visible capture
-  also matches the one-light reference. Claude approved appearance; 135 Rust,
-  27 GPU and 283 UI tests, Clippy and native release build pass. Three paired
-  trials measure 34.23 → 6.44 ms median at 4096 lights on M5 Pro, with identical
-  cooked projects. This is a synthetic fenced frame probe, not a game/device
-  gate. All three applicable hosted checks pass at `2c517ce`; PR #18 merged
-  into main as `1b35f02`. See [light mask evidence](docs/spikes/light-masks.md).
-
-- Authored directional, point and spot lights use real GPU clustered forward
-  shading with bounded lists and an exact overflow fallback. The shared command
-  bus, durable history, schemas and read-only Inspector remain the authoring
-  interface. Final validation passes 135 Rust tests, 24 GPU checks and 283 UI
-  tests. Claude approved the final headless/native captures after fixing the
-  range-edge rim, RGB labels and unit display. Public CLI edits, atomic rejection,
-  Undo/Redo and source-free rendering pass. The 1080p local frame probe measures
-  1.38–28.05 ms median across 0–4096 local lights on M5 Pro; the dense case needs
-  optimization and no game/device performance gate is claimed. All twelve hosted
-  checks pass at `788da07`, including the serialized Windows GPU rerun; PR #17
-  merged as `726a25d`. The dense case is improved by the mask increment above.
-  See [clustered lighting evidence](docs/spikes/clustered-lighting.md).
-
-- Distant environment lighting includes diffuse convolution, GGX roughness
-  filtering, a matching BRDF lookup and retained GPU versions. Authored
-  `EnvironmentLight` components bind imported equirectangular textures through
-  the shared command bus. Public CLI rotation, Undo/Redo and source-free loading
-  pass. 131 Rust tests, 15 GPU checks and 282 UI tests pass. Native reimport,
-  Undo/Redo, error retention/recovery and rebuilt account restoration pass.
-  Claude approved the headless and native captures and the final Inspector label
-  fix at wide/minimum sizes. All twelve hosted checks passed on `42a991d`; the
-  final revision `1db7c88` also passed all twelve checks. PR #16 merged as
-  `c259b5d` on 2026-10-09.
-  See [environment lighting evidence](docs/spikes/environment-lighting.md).
-
-- HDR geometry now renders to retained RGBA16Float attachments before the display
-  transform. Claude's derived preview curve preserves ordinary colors and rolls
-  off bright highlights. Eleven explicit GPU checks cover tone mapping, display
-  formats, dark materials, HDR transparency, resize lifetime, imports and playback.
-  The workspace passes 124 Rust tests, Clippy and 282 UI tests/build. Claude approved
-  the 24 final GPU captures and both native sizes. All three applicable hosted checks passed on `573fbc8`; PR #15 merged
-  as `5b8fcd3` on 2026-10-09. Full production lighting, render graph, IBL,
-  shadows, bloom and antialiasing
-  remain open. See [HDR output evidence](docs/spikes/hdr-output.md).
-
-- Structured script logging now uses the bounded sandbox API and preserves
-  messages from successful ticks. Both headless script/play commands return logs;
-  playback can additionally stream a new JSONL file without requiring a GPU.
-  Failure retains prior completed records, and output names/budgets are checked.
-  Five new behavior tests and the combined frame/log GPU case pass. The combined
-  material/log tree passes 124 Rust tests, seven explicit GPU tests and Clippy;
-  the unchanged UI passes 282 tests and its build. All three applicable hosted
-  checks passed on `b09a3e2`; PR #14 merged as `b36b76f` on 2026-10-09. See [runtime log evidence](docs/spikes/runtime-logs.md).
-
-- Imported glTF material previews now use typed metallic/roughness factors and
-  retained GPU base-color, metallic/roughness, normal, occlusion and emissive maps.
-  Color spaces, samplers/mips, alpha modes, sidedness and reflected instances are
-  implemented. 119 Rust behavior tests and seven explicit GPU tests pass locally.
-  Native texture reimport, Undo/Redo, retention on source error and repair
-  pass. Claude approved the final headless and native captures, including the
-  minimum-height Inspector scroll behavior. All twelve hosted checks passed on
-  `f7607ab`; PR #13 merged as `794c765` on 2026-10-09. Production lighting and
-  the full render graph remain open. See
-  [GPU material evidence](docs/spikes/gpu-materials.md).
-
-- Isolated headless playback now accepts ticks/seconds and an optional compiled
-  TypeScript behavior, with actual GPU captures at selected ticks. Authored
-  documents/journals remain unchanged; bounded output and failure handling pass.
-  117 Rust behavior tests, three explicit GPU tests and 282 UI tests pass after
-  integration with native source watching.
-  A source-free imported-model run and a compiled TypeScript run produce real
-  frame sequences. Claude approved the six captured frames. All twelve hosted checks passed on
-  `58118f1`; PR #12 merged into main as `1d9650b` on 2026-10-09. See
-  [headless playback evidence](docs/spikes/headless-playback.md).
-
-- Saved native projects now watch registered sources and dependencies on a worker,
-  prepare outside the command-bus lock and commit with revision checks. Imports
-  share durable history; source errors retain the last valid geometry and clear
-  on repair. Actual native external edits, Undo/Redo, error/recovery, journal
-  replay and reopening the rebuilt app pass. 115 Rust tests, two explicit GPU
-  tests and 282 UI/bridge tests pass locally. Claude approved the native sequence
-  and final wrapping fix at 1440×900 and 1000×650. All three applicable hosted
-  checks passed on `083bc8e`; PR #11 merged as `dd9c292` on 2026-10-09.
-  See [editor source watching](docs/spikes/editor-source-watch.md).
-
-- Imported model GPU geometry is implemented locally: indexed/instanced buffers,
-  default glTF scene/node hierarchy, version retention, revision-driven editor
-  replacement, and shared CLI/agent rendering. CPU checks, two real GPU tests and
-  public CLI import/reimport/readback pass. Native Undo and missing-cache recovery
-  pass without reopening. Claude approved the final native wide/minimum captures;
-  112 Rust behavior tests, two explicit GPU tests and 279 UI tests pass, including
-  render-error diagnostics and recovery. Default cache reads reject directory
-  symlinks and asset reuse is scoped to the project grant. All twelve hosted
-  checks passed on `277893d`; PR #10 merged as `faa86fa` on 2026-10-09.
-  Materials, lighting and the production render graph remain open.
-  See [imported GPU geometry](docs/spikes/imported-gpu-geometry.md).
-
-- Runtime scene projection now composes parent transforms, preserves mesh bindings,
-  and atomically synchronizes topology while reusing the ECS world. Five new core
-  behavior tests and asset-kind validation pass. The real GPU probe matches a
-  parented scene to equivalent flattened geometry. All twelve hosted checks passed
-  on `97cf521`; PR #9 merged into main as `331a3cb`. The imported-geometry increment
-  above builds on this projection; GPU materials remain open. Script benchmark results
-  and their host-load variability are recorded in
-  [runtime scene evidence](docs/spikes/runtime-scene-projection.md).
-
-
-- `incant_import` now prepares glTF/image import batches on an owned document
-  snapshot and commits all changed assets in one command-bus transaction. The CLI
-  uses this shared service. Five service behavior tests, the existing CLI tests, full workspace release
-  tests and Clippy passed locally and all twelve hosted checks passed before PR #6
-  merged into main as `130d249`. Editor/agent integration is the current increment.
-
-- Automatic source watching now debounces registered model/image sources and
-  dependencies, commits successful changes through shared history and reloads CPU
-  assets in `incant watch-assets`. Six service and two separate-process CLI tests
-  pass. Editor dispatch and GPU/ECS hot reload remain open.
-  See [source watching evidence](docs/spikes/asset-source-watch.md).
-  PR #7 merged as `0c8e1bc` after all three applicable hosted checks passed on
-  `79a821e`, including source checks and Windows/Linux desktop jobs.
-  [Exact checks and merge evidence](docs/spikes/evidence/asset-source-watch-2026-10-09.json).
-
-- Native editor imports now prepare outside the event thread/document lock and
-  commit with revision checks through the existing persistent history. Two new
-  Rust behavior tests and 276 integrated UI/bridge tests pass. Claude Opus 5.5 ACP
-  handoff 0010 supplies the integrated asset library and import/reimport interface.
-  Real native batch import, Undo/Redo, texture reimport, error recovery, concurrent
-  edits, stale-import rejection and text/project Undo separation pass. The director
-  rejected the bottom-dock asset layout. Claude's replacement moves Assets to the
-  left navigation and properties/import into the main Inspector. The dock now holds
-  only Problems, Console and History. All 276 UI tests pass; native batch, busy,
-  failure recovery, keyboard and hidden-Inspector checks pass in the replacement.
-  Claude approved the replacement's native captures at wide/minimum sizes and
-  supplied a final import-row separator polish. All twelve hosted checks passed
-  on `73b817b`; PR #8 merged into main as `cda5ef3`. Automatic editor
-  watching is implemented in the next increment.
-  Agent asset list/inspect/import now use the shared service and a project-bound
-  filesystem capability. Three new agent tests and a live saved-session import
-  pass, including journal recovery, Undo/Redo and source-independent CPU loading.
-  Default cache writes reject symlink redirection; this fix merged with PR #7.
-  See [editor/agent import evidence](docs/spikes/editor-agent-asset-imports.md).
-
-- Responsive project loading merged in PR #5 after all twelve hosted checks passed.
-  File reads and journal recovery
-  run off the native event thread, with a 15-second timeout and rejected late
-  results. Three Rust loader tests, 240 integrated UI/bridge tests, workspace release tests
-  and Clippy pass locally. Claude handoff 0009 supplies the loading/error
-  presentation and keyboard-dialog focus ring; the native app builds successfully.
-  Protected-folder access remains unproven. The rebuilt app opens both default
-  and saved disposable projects; native account focus behavior passes, with the
-  visible keyboard ring also approved by Claude.
-
-- The first eighteen PRs are merged into main after their required checks passed:
-  foundation #1, product site #2, asset imports #3, runtime assets/UI polish #4,
-  responsive loading/focus #5, shared import batches #6, source watching #7 and
-  editor/agent imports with the redesigned asset workspace #8, and runtime scene
-  projection #9, imported GPU geometry #10, native source watching #11 and headless
-  playback #12, material previews #13, structured runtime logs #14, HDR output #15
-  authored environments #16, clustered lights #17 and exact light masks #18. The site deployed at
-  https://snowdamiz.github.io/incant/. PR #4 passed all thirteen checks on c063a99
-  before merge. Shared import preparation passed all twelve checks on `4bddf52`
-  before merge. Current Phase 1 work is tracked above. Merging does not approve a phase gate.
-
-- Claude’s connected-panel redesign and neutral charcoal palette are integrated,
-  including the titlebar logo spacing and safer account-dialog focus. The landing
-  page has the matching palette, merged in PR #2. Its modeling expansion and lighter copy
-  each passed 23 hosted browser checks. Graphical explanations, authentic SVG
-  platform marks and the subsequent workflow correction are integrated in PR #2.
-  Each workflow icon has a short visible explanation and tighter spacing; all 23
-  hosted checks passed on bf99437. Visual review subsequently resumed, then was paused again on 2026-10-09. See
-  [integration evidence](docs/spikes/connected-editor.md). Native menu Undo routes by focus. Actual macOS CUA checks now confirm
-  project Cmd+Z/redo, isolated text-field Undo, safe account-dialog focus, divider
-  keyboard resizing and fullscreen transitions. Claude reviewed the native captures;
-  an unobscured native capture now confirms correct traffic-light/logo spacing. On 2026-10-09 the director explicitly permitted computer use
-  and screen capture again when needed. Claude’s handoff 0008 fixes tablet workflow layout, platform-mark balance, clipped
-  inspector paths and F2 name selection. Rebuilt native F2 rename and Undo pass. The transport now preserves schema field
-  order (223 tests passed); native Translation/Rotation/Scale order now also passes.
-  Claude confirmed settled fullscreen. The dialog ring fix, minimum-size tabs,
-  detail focus rings and visible traffic-light positioning now pass native review.
-  Per the director's 2026-10-08 decision, Windows/Linux manual
-  login and Windows viewport checks are replaced by CI editor/engine builds,
-  UI/bridge tests, GPU readback and credential-persistence checks. Those jobs are
-  now passing on both Windows and Linux; see
-  [desktop CI evidence](docs/spikes/evidence/desktop-editor-2026-10-08.json).
-  No additional desktop machines or interactive logins are needed.
-- The real twenty-task evaluation completed with the director's saved session:
-  **19/20 passed**, exceeding the 14/20 score threshold. The ten-step case reached
-  the expected state but returned an incomplete provider response and is counted
-  as failed. [Per-case results](docs/spikes/evidence/live-agent-2026-10-08.json).
-  Its [single-case follow-up](docs/spikes/evidence/ten-step-followup-2026-10-08.json)
-  passes all checks with the new output budget and diagnostic handling. The original
-  score remains 19/20; the old failure's cause was not retained.
-- Cross-build synthetic credential checks run on all three desktop CI hosts;
-  they verify the real storage backends without using provider accounts.
-  [All three hosted jobs passed](docs/spikes/evidence/desktop-credentials-2026-10-08.json),
-  including record cleanup.
-- Foundation [PR #1](https://github.com/snowdamiz/incant/pull/1) merged into main
-  on 2026-10-09 after all twelve checks passed on 575cc35. All six platform jobs
-  [passed on 640fbdd](docs/spikes/evidence/six-platform-2026-10-08.json), including
-  Android APK packaging. Both arm64/x86_64 native libraries, manifest and DEX are
-  present in the downloaded APK. [Android emulator execution also passed](docs/spikes/evidence/android-emulator-2026-10-08.json):
-  both activity launch and native instrumentation ran the document/120-tick probe.
-  Nightly history remains a distinct requirement. All source, desktop editor and
-  credential checks also passed on 1045f4f. The integrated UI/menu/sign-out revision
-  **d87436f** has now passed all four workflows: source checks, Windows/Linux
-  editor builds and renderer probes, three-desktop credential persistence, and all
-  six platform probes. The evidence files retain the exact revision and run links.
-
-## Current screen-work constraint
-
-Revision 3 is the current implementation baseline. Its additional Phase 1 work
-includes the implemented tiled navmesh/path-query and localization runtime above.
-Still open are navigation steering/local avoidance, off-mesh links and 2D grids;
-sprites/atlases/tilemaps and Rapier 2D; shaped text, font fallback and IME;
-localization UI and gamepad/mobile haptics. The expanded Core Sample gate includes navigation,
-RTL/CJK/localization coverage and a 2D sample on all four reference devices.
-This does not replace the remaining original renderer, animation, audio/device,
-input-adapter, SDK/coroutine and complete-game performance requirements. Later
-networking and service scope follows Revision 3 Sections 6.8/6.10; their open
-director decisions and human-owned production prerequisites remain explicit.
-
-The director reauthorized computer use and screen capture on 2026-10-10.
-Claude accepted the final rebuilt native Inspector at 1440×874 and 1000×650,
-including the compact unavailable Agent, valid 64-part list, End→Tab full IDs
-and primitive regression. PR #25 has passed local integration checks and awaits updated hosted
-checks before merge. All twelve checks passed on its earlier head `5b97ecd`;
-that is not evidence for the new integration. Native reorder/invalid-data
-presentation remains outside the read-only boundary, and the OS sharing pill
-obscures the traffic lights. No phase gate is approved.
-
-## External prerequisites still required
-
-- Hosted real-device coverage in AWS Device Farm (no phones are bought),
-  self-hosted graphics runners, and nightly artifact history.
-- Staffing and the director's phase gate approvals. Apple/Windows distribution
-  signing and store/developer accounts are first needed for Phase 5 store uploads.
-  These are human-only under PLAN.md.
-
-[Phase 0 review checklist](docs/gates/phase0-review.md) maps requirements to evidence
-and distinguishes the remaining director decisions.
-
-`python3 tools/check_gate.py` reports remaining evidence. No source-code scaffold,
-mock response, simulator build or unsigned package counts as a shipped product.
-
-- Native cooked-script startup: the canonical host now accepts only trusted
-  build-produced embedded bytecode through an explicit unsafe boundary, with
-  compiler-free normal player dependencies, precompiled hardening and disabled
-  dynamic source evaluation. The cook preserves bounded symbol/map metadata and
-  rejects cross-target exports. A fresh shipping player runs the structural TS
-  example after source/build-tree deletion. All 382 release workspace tests,
-  workspace and compiler-disabled Clippy, and iOS/Android compiler-disabled host
-  compilation passed locally on the original reviewed tree. A follow-up fixes
-  invalid direct numeric writes with no structural commands: 35 scoped tests,
-  both Clippy modes and a fresh twelve-process shipping proof pass. Component
-  domains are checked after view revocation; existing native simulation/derived
-  hierarchy overflow for huge finite values remains open. Main50 plus the
-  reviewed native-save integration passes 75 scoped tests, 28 tool tests, both
-  Clippy modes and fresh source-free shipping/save proofs; hosted exact-head
-  results remain pending. See
-  [evidence](docs/spikes/cooked-native-scripts.md). Full gameplay migration,
-  authenticated file exports, cross-target embedding, automatic source-map
-  diagnostics, MSVC symbol audit and device/performance gates remain open.
+[PLAN.md](PLAN.md) revision 7 is the source of truth. Phase 1 is in progress;
+the full engine and Driftwake release are not complete. Calendar targets and
+phase durations have been removed. Work proceeds continuously and in parallel
+where dependencies allow; exit gates still require their stated evidence.
+
+The director authorized Phase 1 with remaining Phase 0 items deferred, sensible
+engineering progress without repeated advancement questions, and agent merges
+after scoped review and passing checks. These authorizations do not approve a
+phase gate. Section 12 decisions are settled. Current computer use and screen
+capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
+visual work, and Astra owns correctness and integration.
+
+## Current integration and parallel work
+
+| Workstream | Current result | Next work / boundary |
+| --- | --- | --- |
+| Editor and sprite authoring | [PR #61](https://github.com/snowdamiz/incant/pull/61) combines the final plain UI, typed atlas/audio imports, focus fixes and the corrected sprite/atlas baseline. 524 UI tests, strict TypeScript, production and native builds pass. | Exact-head hosted checks and isolated native Claude acceptance are running. [Evidence](docs/spikes/editor-release-union.md). |
+| Native game and rendering | Input, embedded QuickJS, native physics, scene audio and retained GPU submission compose through one accepted-tick lifecycle. Binary v5 sprites share immutable geometry. | [PR #62](https://github.com/snowdamiz/incant/pull/62) is in hosted verification. Native editor/legacy Play migration, complete SDK, shader pipeline work and device budgets remain. |
+| Native window player | A separate implementation branch adds real surface presentation, keyboard/mouse input, suspension and device audio. Local source-free lifecycle tests pass. | Independent review/CI and Claude native acceptance precede integration. No phone or frame-budget claim. |
+| Native WebAssembly | Shared bounded capability ABI serves development Wasmtime and compiled wasm2c modules; local conformance and a source-free macOS executable pass. | Hosted verification, optimized Windows/MSVC support, full SDK/game composition and device execution continue separately. |
+| CI speed | Registry-only shared auxiliary caches are merged; the agent is measuring actual warm consumers and completed job timings. | Shared fresh-build storage and a lower-optimization CI test profile are experiments, not adopted speed claims. Independent shipping audits remain intact. |
+
+Three Astra extra-high subagents own implementation/integration work in isolated
+checkouts. Root reviews and integrates completed slices rather than waiting for
+all workstreams to finish together. Claude sessions own editor/native appearance
+review; concurrent native reviews coordinate foreground ownership.
+
+## Implemented boundaries and evidence
+
+- **Authoring and accounts.** Typed canonical JSON and stable ULIDs, atomic shared
+  commands, provenance, undo/redo and durable recovery; CRDT round-trip and scale
+  investigations; editor/CLI OpenAI tools and a 19/20 live evaluation. macOS OAuth,
+  refresh and persistence across rebuilt applications are verified. The director's
+  private-file credential-store choice avoids repeated Keychain prompts. The
+  editor remains usable offline. [Foundation](docs/spikes/phase-0.md),
+  [login evidence](docs/spikes/auth-login-repair.md).
+- **Assets.** glTF/GLB, PNG/JPEG/EXR and WAV/OGG import/cook with retained checked
+  caches, reimport and source-independent loading. Stable cooked atlas frame IDs,
+  packing, nine-slice and authoring validation are implemented. Native readers
+  are below the authoring boundary. [Asset pipeline](docs/spikes/asset-pipeline.md),
+  [atlas work](docs/spikes/sprite-atlases.md),
+  [reader boundary](docs/spikes/cooked-visual-assets-boundary.md).
+- **Native world and scripts.** Disposable cooked binary ECS scenes, typed bulk
+  Transform/Velocity access, bounded structural command buffers, native input and
+  physics, explicit observation, and versioned native world saves. Build-produced
+  QuickJS bytecode excludes the source compiler from the normal shipped graph.
+  Legacy document-backed Play still exists and is not the new runtime path.
+  [Native script columns](docs/spikes/native-script-columns.md),
+  [structural commands](docs/spikes/native-script-structural.md),
+  [bytecode](docs/spikes/cooked-native-scripts.md),
+  [world saves](docs/spikes/native-world-saves.md),
+  [input](docs/spikes/native-input-session.md),
+  [physics](docs/spikes/native-physics-runtime.md).
+- **Native rendering.** Canonical typed renderer input and a separate authoring
+  adapter; exact retained asset versions; binary v4 cameras/models/lights and
+  binary v5 sprites; direct committed pose updates and mandatory GPU host sync.
+  Numeric moving-frame regressions cover source/cache removal, reflection,
+  replacement and rejection/retry. Sprite CPU staging is allocation-free in the
+  measured test; complete encoding still allocates. Shared immutable sprite
+  streams reduce the calculated geometry cap from 576 MiB to 232 MiB and moving
+  uploads from 64 to 12 bytes/vertex, excluding textures/metadata/driver storage.
+  [Renderer boundary](docs/spikes/native-renderer-boundary.md),
+  [retained frames](docs/spikes/native-retained-render-frames.md),
+  [native sprites](docs/spikes/native-sprites.md),
+  [memory evidence](docs/spikes/retained-sprite-memory.md).
+- **Native game and audio.** Retained cooked clips, buses, spatial playback and
+  streaming compose with simulation, input, scripts and GPU publication. Invalid
+  preflight input is retryable; failure after acceptance destroys the composite
+  state. A fresh 7,404,688-byte macOS shipping executable passes 40 process
+  invocations after source/project/build removal, with exact repeated PCM/pose
+  and numerical GPU hashes. The fixtures exercise v4 models and v5 atlas sprites,
+  including mirrored nine-slice geometry and missing-cache/unknown-frame refusal. [Composition](docs/spikes/native-game-session.md),
+  [audio host](docs/spikes/native-scene-audio-host.md),
+  [GPU proof](docs/spikes/native-game-gpu-player.md),
+  [sprite executable proof](docs/spikes/native-sprite-player.md).
+- **WebAssembly.** Optional Wasmtime 49.0.2 development host and a statically
+  compiled WABT 1.0.42/wasm2c path share copied numeric/structural capabilities.
+  C traps remain in C, fuel/storage/imports are bounded, and accepted failures
+  terminate the module. A fresh 2,780,816-byte macOS executable passes three
+  exact-motion processes and 18 refusals after temporary sources/build removal.
+  Actual iOS C/Rust compilation is compile-only. Initial static memory/table
+  growth and MSVC are explicitly unsupported pending follow-up.
+  [Development host](docs/spikes/development-wasm-host.md),
+  [static host](docs/spikes/shipping-wasm2c.md).
+
+Local integration checks: 543 ordinary Rust release tests/doctests; 138 scoped
+static/development-Wasm/runtime/script tests; workspace and optional-host release
+Clippy; 529 UI tests, strict TypeScript and production build; 43 Python tool tests.
+The renderer's unchanged frozen implementation separately passed all 66 actual
+GPU tests. Exact sources, scopes and logs are retained in the linked reports;
+these local results do not replace pending hosted checks or device gates.
+The first hosted runtime run exposed stderr/JSON mixing in the Wasm audit and a
+stale isolated physics lockfile. Reviewed fixes pass real combined Wasm
+conformance, browser-target physics compilation and six native parity streams.
+[Correction evidence](docs/spikes/runtime-ci-corrections.md). A subsequent Linux
+C11 trap-link failure now has a reproduced POSIX declaration fix; the Windows
+Camera accessibility test is split into its six independent scans with unchanged
+coverage and bounded asynchronous cleanup. Both corrections pass local checks
+and await the next hosted run.
+
+## Remaining engineering requirements
+
+- Complete migration of the editor, headless runner and full gameplay SDK from
+  legacy document-backed Play into the native runtime. Persistent script state,
+  timers/coroutines, native physics/navigation/audio/UI access and full composite
+  session restoration need production coverage. Do not extend the legacy tick
+  path or add project cloning/JSON/authoring validation to native ticks.
+- Finish render features and their native path: offline backend shader cooking,
+  persistent pipeline caches, asynchronous fallback/prewarming, temporal upscaling,
+  dynamic resolution, backend interop and recorded device budgets. Runtime WGSL
+  compilation is still present; source-free script proofs do not certify shader
+  performance. Native pixel placement, tilemaps/flipbooks and Rapier 2D remain.
+- Complete animation, navigation, game UI/text/IME, localization and remaining
+  input/haptics/native SDK deliverables. Existing scoped/legacy implementations
+  are not evidence of full native feature parity.
+- Integrate Wasm gameplay modules into the complete runtime and export route;
+  generate the Rust SDK, establish platform/device conformance and measure the
+  settled TypeScript AOT/physics candidate adoption rules. Do not reopen Section
+  12 decisions or substitute desktop timings for reference-phone results.
+- Build and exercise Core Sample and the 2D sample on the required device classes,
+  including hosted real iPhone/Pixel devices through AWS Device Farm, with actual
+  device model/OS, shipping profile and matched baselines. Phone script p95,
+  shader-stall, frame-time and memory gates remain open.
+- Deliver the remaining editor/AI/content/export/network/services/game production
+  and release scope in PLAN.md. Phase 1 progress is not Engine 1.0 or Driftwake
+  release completion.
+
+## Deferred gates and human-owned actions
+
+The [Phase 0 ledger](docs/gates/phase0-review.md) remains unapproved: live
+revocation verification with a suitable disposable connection, scheduled nightly
+artifact history, staffing/reviewer/contracts and director approval remain open.
+Do not revoke the director's working account for a test. Manual Windows/Linux
+account checks and the Windows viewport review were replaced by CI under the
+director's explicit decision; no extra desktop machine or live API key is requested.
+
+Hosted device/service accounts, payments and human staffing/legal commitments
+remain human-owned. Signing credentials and store/developer accounts first gate
+Phase 5 store uploads. No phone purchases, name clearance or package reservations
+are required. Unsigned packages and simulator/compile-only results do not satisfy
+store distribution or real-device gates.
+
+Earlier implementation notes, superseded counts and publication chronology are
+preserved in the [historical ledger](docs/spikes/implementation-history-2026-10-10.md).
+Technical evidence remains under [docs/spikes](docs/spikes); `python3 tools/check_gate.py`
+reports the recorded gate state without granting approval.

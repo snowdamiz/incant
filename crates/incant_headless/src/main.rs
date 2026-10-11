@@ -1,4 +1,5 @@
 use clap::{Parser, Subcommand};
+use incant_render_authoring::RendererAuthoringExt as _;
 mod assets;
 mod eval;
 mod localization;

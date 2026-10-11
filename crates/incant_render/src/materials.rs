@@ -1,7 +1,7 @@
 //! GPU resources for typed glTF materials. Bindings are immutable and retained
 //! with each model version. All images and samplers preserve their cooked roles.
 use crate::{ResourceError, Result};
-use incant_assets::{AlphaMode, CookedModel, Material, ModelTexture, TextureFormat};
+use incant_assets_runtime::{AlphaMode, CookedModel, Material, ModelTexture, TextureFormat};
 use std::{collections::HashMap, sync::Mutex};
 use wgpu::util::DeviceExt;
 

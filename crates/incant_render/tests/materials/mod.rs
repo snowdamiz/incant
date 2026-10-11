@@ -2,6 +2,7 @@
 use incant_assets::{AssetStore, cook_gltf};
 use incant_doc::{Asset, Entity, MeshRenderer, Project, Scene, Transform, new_id};
 use incant_render::{RenderScene, Renderer};
+use incant_render_authoring::RendererAuthoringExt as _;
 use serde_json::{Value, json};
 use std::{fs, path::Path};
 

@@ -11,6 +11,8 @@ rust-version = "1.99"
 publish = false
 
 [workspace.dependencies]
+incant_render_data = { path = "crates/incant_render_data" }
+incant_render_authoring = { path = "crates/incant_render_authoring" }
 serde = { version = "1.0", features = ["derive"] }
 # Preserve serialized f64 values exactly across project/save reloads.
 serde_json = { version = "1.0", features = ["float_roundtrip"] }

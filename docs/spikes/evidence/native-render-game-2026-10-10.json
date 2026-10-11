@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "scope": "mandatory CPU render-input game hosting; no GPU/device claim",
+  "release_integration_tests": 7,
+  "clippy_all_targets_release": true,
+  "normal_dependency_guard": true,
+  "source_hashes": {
+    "crates/incant_render_game/src/lib.rs": "1662d845c57cb560a3689faf11996c8993106a2dd13f8fa196a6058f96cd9c6e",
+    "crates/incant_render_game/tests/hosted.rs": "a35e387d451fd93d9cc88a4f1185920886ed91d346fca7bc13e66c7b8d69ae6c"
+  },
+  "logs": {
+    "/tmp/incant-render-game-tests.log": "be172db0ea737b41bc604011edbd5a7718fe66234c5a3ff7ba310c738b38d0f7",
+    "/tmp/incant-render-game-clippy.log": "71544f13fd82b5d9a1fef5ed6901870fbf687f1a6cdf579dc08a2adcff317190",
+    "/tmp/incant-render-game-graph.log": "c3035f62ef00011abb4214b03683beefb96323c12dafbe61e94552bdc7c52070"
+  }
+}

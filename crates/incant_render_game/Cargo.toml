@@ -1,0 +1,24 @@
+[package]
+name = "incant_render_game"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+incant_game_runtime = { path = "../incant_game_runtime" }
+incant_render_native = { path = "../incant_render_native" }
+incant_render_data.workspace = true
+incant_runtime.workspace = true
+thiserror.workspace = true
+
+[dev-dependencies]
+incant_audio_runtime = { workspace = true, features = ["scene"] }
+incant_script = { workspace = true, features = ["compiler"] }
+incant_input.workspace = true
+incant_assets = { path = "../incant_assets" }
+incant_assets_runtime = { workspace = true, features = ["visual"] }
+incant_types.workspace = true
+kira = { version = "=0.12.5", default-features = false }
+serde_json.workspace = true
+tempfile = "3"

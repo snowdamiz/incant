@@ -13,7 +13,17 @@ import { isOrthographicCamera } from './presentation';
  * is covered by PixelCameraFields.test.tsx against the same generated schema.
  */
 
-afterEach(cleanup);
+let pendingCameraScans: Promise<void> | undefined;
+afterEach(async () => {
+  // A timeout does not stop async work. Drain both fixture mounting and its real
+  // scan before another case can replace the DOM; each test keeps its default 5s.
+  try {
+    await pendingCameraScans;
+  } finally {
+    pendingCameraScans = undefined;
+    cleanup();
+  }
+}, 20_000);
 
 const NATIVE = nativeCamera();
 const variantsOf = (schema: typeof NATIVE) =>
@@ -184,21 +194,23 @@ describe('Camera Inspector', () => {
     expect(screen.getByText('Read-only')).toBeTruthy();
   });
 
-  it('has no axe violations for legacy, perspective, orthographic and malformed cameras', async () => {
-    for (const value of [
-      LEGACY,
-      { ...LEGACY, projection: { kind: 'perspective' } },
-      { ...LEGACY, projection: { kind: 'orthographic', vertical_size: 8 } },
-      { ...LEGACY, projection: { kind: 'orthographic' } },
-      { ...LEGACY, projection: PIXEL },
-      { ...LEGACY, projection: { kind: 'isometric' } },
-    ]) {
+  // Each independent variant gets the normal per-test deadline and a useful
+  // failure identity, instead of putting all six real scans under one 5s budget.
+  it.each([
+    { name: 'legacy', value: LEGACY },
+    { name: 'perspective', value: { ...LEGACY, projection: { kind: 'perspective' } } },
+    { name: 'orthographic', value: { ...LEGACY, projection: { kind: 'orthographic', vertical_size: 8 } } },
+    { name: 'missing orthographic size', value: { ...LEGACY, projection: { kind: 'orthographic' } } },
+    { name: 'pixel-perfect', value: { ...LEGACY, projection: PIXEL } },
+    { name: 'unknown projection', value: { ...LEGACY, projection: { kind: 'isometric' } } },
+  ])('has no axe violations for a $name camera', async ({ value }) => {
+    pendingCameraScans = (async () => {
       await inspect(value);
       const panel = document.querySelector<HTMLElement>('[data-region="inspector"]')!;
       const results = await axe.run(panel, { rules: { 'color-contrast': { enabled: false } } });
       expect(results.violations.map((v) => v.id)).toEqual([]);
-      cleanup();
-    }
+    })();
+    await pendingCameraScans;
   });
 });
 

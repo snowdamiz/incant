@@ -1,67 +1,12 @@
-//! Bind immutable cooked versions to the ECS projection before publishing GPU state.
+//! Canonical GPU-independent resolution from typed, retained scene input.
 use glam::Mat4;
-use incant_assets::{AssetStore, RuntimeAsset, RuntimeAssetData};
-use incant_doc::Project;
+use incant_assets_runtime::{RuntimeAsset, RuntimeAssetData};
+use incant_render_data::{MAX_INSTANCES, SceneInput};
+pub use incant_render_data::{SceneError, SceneStats};
 use std::{
     collections::{BTreeMap, BTreeSet},
     sync::Arc,
 };
-use thiserror::Error;
-
-const MAX_INSTANCES: usize = 100_000;
-
-#[derive(Debug, Error)]
-pub enum SceneError {
-    #[error(transparent)]
-    Document(#[from] incant_doc::DocumentError),
-    #[error("model asset {0} is not loaded at the document's current fingerprint")]
-    MissingModel(String),
-    #[error("environment texture {0} is not loaded at the document's current fingerprint")]
-    MissingEnvironment(String),
-    #[error("sprite texture {0} is not loaded at the document's current fingerprint")]
-    MissingSprite(String),
-    #[error("sprite atlas frame {frame} is unavailable in texture {texture}")]
-    MissingSpriteFrame { texture: String, frame: String },
-    #[error(transparent)]
-    Sprite(#[from] incant_2d::SpriteError),
-    #[error("authored material asset overrides are not supported by the imported preview")]
-    MaterialOverrides,
-    #[error("model {0} has no scene to instantiate")]
-    NoScene(String),
-    #[error("model {0} contains repeated roots or nodes in its selected scene")]
-    RepeatedNode(String),
-    #[error("world transform exceeds renderer numeric range")]
-    TransformRange,
-    #[error("scene exceeds {MAX_INSTANCES} primitive instances")]
-    InstanceLimit,
-    #[error("world light transform exceeds renderer numeric range")]
-    LightTransform,
-    #[error("spot inner/outer angles cannot be distinguished at GPU precision")]
-    LightCone,
-    #[error("camera entity {0} was not found or has no Camera component")]
-    MissingCamera(String),
-    #[error("camera world transform cannot form a finite orthonormal view")]
-    CameraTransform,
-    #[error("camera projection exceeds GPU numeric precision")]
-    CameraProjection,
-    #[error("viewport is smaller than the pixel-perfect camera's {0}x{1} logical resolution")]
-    PixelPerfectViewport(u32, u32),
-    #[error("scene exceeds four enabled directional shadow lights")]
-    ShadowLightLimit,
-    #[error("scene exceeds 16 directional or 4096 local lights")]
-    LightLimit,
-}
-
-#[derive(Debug, Default, Clone, serde::Serialize)]
-pub struct SceneStats {
-    pub diagnostic_entities: usize,
-    pub model_entities: usize,
-    pub primitive_instances: usize,
-    pub model_triangles: u64,
-    pub model_draw_calls: usize,
-    pub sprite_entities: usize,
-}
-
 #[repr(C)]
 #[derive(Clone, Copy, bytemuck::Pod, bytemuck::Zeroable)]
 pub(crate) struct Instance {
@@ -69,7 +14,7 @@ pub(crate) struct Instance {
     pub normal: [[f32; 4]; 3],
 }
 impl Instance {
-    fn new(world: Mat4) -> Result<Self, SceneError> {
+    pub(crate) fn new(world: Mat4) -> Result<Self, SceneError> {
         let inverse = world.inverse();
         if !world.is_finite() || !inverse.is_finite() {
             return Err(SceneError::TransformRange);
@@ -87,13 +32,19 @@ impl Instance {
     }
 }
 
+#[derive(Clone, Copy)]
+pub(crate) struct Placement {
+    pub node: usize,
+    pub local: glam::DMat4,
+}
 pub(crate) struct ModelPlan {
     pub source: Arc<RuntimeAsset>,
     pub primitives: BTreeMap<(usize, bool), Vec<Instance>>,
+    pub placements: BTreeMap<(usize, bool), Vec<Placement>>,
 }
 pub(crate) struct ResolvedScene {
     pub diagnostics: Vec<Mat4>,
-    pub models: BTreeMap<String, ModelPlan>,
+    pub models: BTreeMap<(String, incant_assets_runtime::AssetVersionId), ModelPlan>,
     pub stats: SceneStats,
     pub environment: Option<crate::environment::EnvironmentPlan>,
     pub lights: crate::lighting::scene::LightPlan,
@@ -101,14 +52,12 @@ pub(crate) struct ResolvedScene {
     pub sprites: Vec<crate::sprites::SpritePlan>,
 }
 
-/// A model's default scene is used, falling back to its first declared scene.
-/// Unreferenced library meshes/nodes are not instantiated. Reused primitives are
-/// grouped by cooked fingerprint so one GPU draw can instance many entities.
-pub(crate) fn resolve(
-    project: &Project,
-    assets: Option<&AssetStore>,
-) -> Result<ResolvedScene, SceneError> {
-    let entities = incant_core::project_entities(project)?;
+/// Resolve startup/revision input. Native moving-frame extraction will use a
+/// retained topology/instance path; this entry point does not claim that migration.
+pub(crate) fn resolve(input: &SceneInput) -> Result<ResolvedScene, SceneError> {
+    if input.nodes.len() > 1_000_000 {
+        return Err(SceneError::Input("node limit"));
+    }
     let mut result = ResolvedScene {
         diagnostics: Vec::new(),
         models: BTreeMap::new(),
@@ -118,91 +67,58 @@ pub(crate) fn resolve(
         cameras: BTreeMap::new(),
         sprites: Vec::new(),
     };
-    for entity in project
-        .scenes
-        .values()
-        .flat_map(|scene| scene.entities.values())
-    {
-        if let Some(value) = entity.components.get("EnvironmentLight") {
-            let binding: incant_doc::EnvironmentLight =
-                serde_json::from_value(value.clone()).map_err(incant_doc::DocumentError::from)?;
-            let registered = &project.assets[&binding.texture];
-            let source = assets
-                .and_then(|assets| assets.get(&binding.texture))
-                .filter(|asset| {
-                    asset.info().fingerprint == registered.sha256 && asset.info().kind == "texture"
-                })
-                .ok_or_else(|| SceneError::MissingEnvironment(binding.texture.clone()))?;
-            result.environment = Some(crate::environment::EnvironmentPlan {
-                source,
-                intensity: binding.intensity as f32,
-                rotation: binding.rotation_degrees.to_radians() as f32,
-            });
+    if let Some(environment) = &input.environment {
+        if !(0.0..=100.).contains(&environment.intensity)
+            || !(-360.0..=360.).contains(&environment.rotation_degrees)
+        {
+            return Err(SceneError::Input("environment range"));
         }
-    }
-    // Empty camera/sprite rig ancestors are not drawable diagnostic geometry.
-    // Explicit MeshRenderer bindings on those entities still render normally.
-    let mut render_frames = BTreeSet::new();
-    for scene in project.scenes.values() {
-        for camera in scene.entities.values().filter(|e| {
-            e.components.contains_key("Camera") || e.components.contains_key("SpriteRenderer")
-        }) {
-            let mut current = Some(camera.id.as_str());
-            while let Some(id) = current {
-                if !render_frames.insert(id.to_owned()) {
-                    break;
-                }
-                current = scene.entities[id].parent.as_deref();
-            }
+        if !matches!(environment.source.data(), RuntimeAssetData::Texture(_))
+            || environment.source.usage() == Some(incant_assets_runtime::TextureUsage::Normal)
+        {
+            return Err(SceneError::MissingEnvironment(
+                environment.source.info().id.clone(),
+            ));
         }
+        result.environment = Some(crate::environment::EnvironmentPlan {
+            source: Arc::clone(&environment.source),
+            intensity: environment.intensity as f32,
+            rotation: environment.rotation_degrees.to_radians() as f32,
+        });
     }
-    for entity in entities.values() {
-        let world64 = glam::DMat4::from_cols_array_2d(&entity.world_transform);
-        let components = &project.scenes[&entity.scene_id].entities[&entity.id].components;
-        result.lights.add(components, world64)?;
-        if let Some(value) = components.get("Camera") {
-            let camera: incant_doc::Camera =
-                serde_json::from_value(value.clone()).map_err(incant_doc::DocumentError::from)?;
+    let mut ids = BTreeSet::new();
+    for (entity_index, entity) in input.nodes.iter().enumerate() {
+        if entity.id.is_empty() || entity.id.len() > 256 || !ids.insert(entity.id.as_str()) {
+            return Err(SceneError::Input("empty, oversized or duplicate node ID"));
+        }
+        if entity.mesh.is_some() && entity.sprite.is_some() {
+            return Err(SceneError::Input("ambiguous mesh and sprite binding"));
+        }
+        let world64 = entity.world;
+        if !world64.is_finite() || world64.row(3) != glam::DVec4::W {
+            return Err(SceneError::TransformRange);
+        }
+        if let Some(light) = &entity.light {
+            result.lights.add_typed(light, world64)?;
+        }
+        if let Some(camera) = &entity.camera {
             result.cameras.insert(
                 entity.id.clone(),
-                crate::camera::CameraView::authored(&camera, world64)?,
+                crate::camera::CameraView::authored(camera, world64)?,
             );
         }
         let world = world64.as_mat4();
-        // Sprite and mesh instances share finite, invertible world-transform rules.
         Instance::new(world)?;
-        if let Some(value) = components.get("SpriteRenderer") {
-            let mut sprite: incant_doc::SpriteRenderer =
-                serde_json::from_value(value.clone()).map_err(incant_doc::DocumentError::from)?;
-            let registered = &project.assets[&sprite.texture];
-            let source = assets
-                .and_then(|assets| assets.get(&sprite.texture))
-                .filter(|asset| {
-                    asset.info().fingerprint == registered.sha256 && asset.info().kind == "texture"
-                })
-                .ok_or_else(|| SceneError::MissingSprite(sprite.texture.clone()))?;
-            if let incant_doc::SpriteRegion::Atlas { frame } = &sprite.region {
-                let region = match source.data() {
-                    RuntimeAssetData::Texture(texture) => texture
-                        .metadata
-                        .atlas
-                        .as_ref()
-                        .and_then(|atlas| atlas.frames.get(frame))
-                        .map(|frame| frame.region),
-                    _ => None,
-                }
-                .ok_or_else(|| SceneError::MissingSpriteFrame {
-                    texture: sprite.texture.clone(),
-                    frame: frame.clone(),
-                })?;
-                sprite.region = region.into();
-                // Sprite upload validates this resolved rectangle before the
-                // affected GPU allocation and supplies the entity/texture IDs
-                // and cooked dimensions in its typed geometry diagnostic.
+        if let Some(sprite) = &entity.sprite {
+            if !matches!(sprite.source.data(), RuntimeAssetData::Texture(_))
+                || sprite.source.usage() != Some(incant_assets_runtime::TextureUsage::Color)
+            {
+                return Err(SceneError::MissingSprite(sprite.source.info().id.clone()));
             }
             result.sprites.push(crate::sprites::SpritePlan {
-                source,
-                sprite,
+                node: entity_index,
+                source: Arc::clone(&sprite.source),
+                sprite: sprite.sprite.clone(),
                 world: world64,
                 id: entity.id.clone(),
             });
@@ -210,61 +126,45 @@ pub(crate) fn resolve(
             continue;
         }
         let Some(binding) = &entity.mesh else {
-            let components = &project.scenes[&entity.scene_id].entities[&entity.id].components;
-            if components.contains_key("Transform")
-                && !render_frames.contains(&entity.id)
-                && ![
-                    "Camera",
-                    "EnvironmentLight",
-                    "DirectionalLight",
-                    "PointLight",
-                    "SpotLight",
-                ]
-                .iter()
-                .any(|kind| components.contains_key(*kind))
-            {
+            if entity.diagnostic {
                 result.diagnostics.push(world);
                 result.stats.diagnostic_entities += 1;
             }
             continue;
         };
-        if !binding.materials.is_empty() {
-            return Err(SceneError::MaterialOverrides);
-        }
-        let registered = &project.assets[&binding.mesh];
-        let source = assets
-            .and_then(|assets| assets.get(&binding.mesh))
-            .filter(|asset| {
-                asset.info().fingerprint == registered.sha256 && asset.info().kind == "model"
-            })
-            .ok_or_else(|| SceneError::MissingModel(binding.mesh.clone()))?;
+        let source = Arc::clone(&binding.source);
         let RuntimeAssetData::Model(model) = source.data() else {
-            return Err(SceneError::MissingModel(binding.mesh.clone()));
+            return Err(SceneError::MissingModel(binding.source.info().id.clone()));
         };
         let scene = model.metadata.default_scene.unwrap_or(0);
         let roots = model
             .metadata
             .scenes
             .get(scene)
-            .ok_or_else(|| SceneError::NoScene(binding.mesh.clone()))?;
-        let mut pending: Vec<_> = roots.iter().rev().map(|&index| (index, world64)).collect();
+            .ok_or_else(|| SceneError::NoScene(binding.source.info().id.clone()))?;
+        let mut pending: Vec<_> = roots
+            .iter()
+            .rev()
+            .map(|&index| (index, glam::DMat4::IDENTITY))
+            .collect();
         let mut visited = vec![false; model.metadata.nodes.len()];
-        let key = source.info().fingerprint.clone();
+        let key = (source.info().fingerprint.clone(), source.version_id());
         let plan = result.models.entry(key).or_insert_with(|| ModelPlan {
             source: Arc::clone(&source),
             primitives: BTreeMap::new(),
+            placements: BTreeMap::new(),
         });
         result.stats.model_entities += 1;
         while let Some((index, parent)) = pending.pop() {
             if std::mem::replace(&mut visited[index], true) {
-                return Err(SceneError::RepeatedNode(binding.mesh.clone()));
+                return Err(SceneError::RepeatedNode(binding.source.info().id.clone()));
             }
             let node = &model.metadata.nodes[index];
             let world = parent
                 * glam::DMat4::from_cols_array_2d(
                     &node.transform.map(|column| column.map(f64::from)),
                 );
-            let instance = Instance::new(world.as_mat4())?;
+            let instance = Instance::new((world64 * world).as_mat4())?;
             for &primitive in &node.meshes {
                 result.stats.primitive_instances += 1;
                 if result.stats.primitive_instances > MAX_INSTANCES {
@@ -275,6 +175,13 @@ pub(crate) fn resolve(
                     .entry((primitive, binding.cast_shadows))
                     .or_default()
                     .push(instance);
+                plan.placements
+                    .entry((primitive, binding.cast_shadows))
+                    .or_default()
+                    .push(Placement {
+                        node: entity_index,
+                        local: world,
+                    });
             }
             pending.extend(node.children.iter().rev().map(|&child| (child, world)));
         }
@@ -284,9 +191,24 @@ pub(crate) fn resolve(
 }
 
 #[cfg(test)]
+#[path = "typed_scene_tests.rs"]
+mod typed_tests;
+
+#[cfg(test)]
 mod tests {
     use super::*;
     use crate::test_support as support;
+    fn resolve(
+        project: &incant_doc::Project,
+        assets: Option<&incant_assets::AssetStore>,
+    ) -> Result<ResolvedScene, SceneError> {
+        let input = incant_render_authoring::project_input(project, assets).map_err(|error| {
+            *error
+                .downcast::<SceneError>()
+                .expect("typed scene binding error")
+        })?;
+        super::resolve(&input)
+    }
 
     #[test]
     fn model_nodes_use_default_scene_and_repeated_entities_share_one_draw() {

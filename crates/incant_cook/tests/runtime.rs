@@ -75,12 +75,12 @@ fn unsupported_component_is_a_named_error_not_silently_omitted() {
         .unwrap()
         .components
         .insert(
-            "Camera".into(),
-            json!({"fov_degrees":60.,"near":0.1,"far":100.}),
+            "NavigationGrid".into(),
+            json!({"dimensions":[1,1],"costs":[1]}),
         );
     let error = cook_scene(&project, &scene).unwrap_err();
     assert!(
-        matches!(error, CookError::UnsupportedComponent { entity: id, component } if id == entity && component == "Camera")
+        matches!(error, CookError::UnsupportedComponent { entity: id, component } if id == entity && component == "NavigationGrid")
     );
 }
 
@@ -135,4 +135,65 @@ fn rigid_body_cook_preserves_full_angular_state_after_project_drop() {
     assert_eq!(state.velocity, [3., 0., 0.]);
     assert_eq!(state.angular_velocity, [0., 1., 0.]);
     assert!((state.rotation[1] - (0.5_f64).sin()).abs() < 1e-5);
+}
+
+#[test]
+fn audio_cook_keeps_binary_asset_ids_and_rejects_cross_scene_bus_dependencies() {
+    let (mut project, scene, entity) = fixture();
+    let asset = incant_doc::Asset {
+        id: new_id(),
+        name: "Tone".into(),
+        path: "tone.wav".into(),
+        kind: "audio".into(),
+        sha256: "0".repeat(64),
+        import_settings: None,
+    };
+    let clip = asset.id.clone();
+    project.assets.insert(clip.clone(), asset);
+    let mut bus = Entity::new("Bus");
+    let bid = bus.id.clone();
+    bus.components
+        .insert("AudioBus".into(), json!({"parent":null,"gain_db":-6}));
+    project
+        .scenes
+        .get_mut(&scene)
+        .unwrap()
+        .entities
+        .insert(bid.clone(), bus);
+    let components = &mut project
+        .scenes
+        .get_mut(&scene)
+        .unwrap()
+        .entities
+        .get_mut(&entity)
+        .unwrap()
+        .components;
+    components.insert("AudioSource".into(), json!({"clip":clip,"bus":bid,"gain_db":0,"pan":0,"rate":1,"start_seconds":0,"playing":true,"looping":false,"streaming":true,"spatial":null}));
+    let original = serde_json::to_vec(&project).unwrap();
+    let bytes = cook_scene(&project, &scene).unwrap();
+    assert_eq!(serde_json::to_vec(&project).unwrap(), original);
+    let world = NativeWorld::from_bytes(&bytes).unwrap();
+    let source = world
+        .audio_nodes()
+        .find_map(|(n, _)| n.source.as_ref())
+        .unwrap();
+    assert_eq!(source.clip, stable_id(&clip).unwrap());
+    assert_eq!(source.bus, Some(stable_id(&bid).unwrap()));
+    // Authoring has a project-wide bus graph; a standalone scene cannot silently
+    // load a reference to an omitted scene. Fail during cooking instead.
+    let bus = project
+        .scenes
+        .get_mut(&scene)
+        .unwrap()
+        .entities
+        .remove(&bid)
+        .unwrap();
+    let mut other = Scene::new("Other");
+    other.entities.insert(bid, bus);
+    project.scenes.insert(other.id.clone(), other);
+    project.validate().unwrap();
+    assert!(matches!(
+        cook_scene(&project, &scene),
+        Err(CookError::Scene(_))
+    ));
 }

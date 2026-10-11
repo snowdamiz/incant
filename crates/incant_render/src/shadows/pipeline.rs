@@ -1,4 +1,4 @@
-use incant_assets::AlphaMode;
+use incant_assets_runtime::AlphaMode;
 #[derive(Clone, Copy, Hash, PartialEq, Eq)]
 pub(crate) struct PipelineKey {
     pub alpha: AlphaMode,
@@ -23,7 +23,7 @@ pub(super) fn build(
     device.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
         label:Some("Directional depth caster"),layout:Some(&layout),
         vertex:wgpu::VertexState {module:&shader,entry_point:Some("vertex"),compilation_options:Default::default(),buffers:&[
-            wgpu::VertexBufferLayout {array_stride:size_of::<incant_assets::Vertex>() as u64,step_mode:wgpu::VertexStepMode::Vertex,attributes:&wgpu::vertex_attr_array![0=>Float32x3,1=>Float32x3,9=>Float32x2,10=>Float32x4]},
+            wgpu::VertexBufferLayout {array_stride:size_of::<incant_assets_runtime::Vertex>() as u64,step_mode:wgpu::VertexStepMode::Vertex,attributes:&wgpu::vertex_attr_array![0=>Float32x3,1=>Float32x3,9=>Float32x2,10=>Float32x4]},
             wgpu::VertexBufferLayout {array_stride:size_of::<crate::scene::Instance>() as u64,step_mode:wgpu::VertexStepMode::Instance,attributes:&wgpu::vertex_attr_array![2=>Float32x4,3=>Float32x4,4=>Float32x4,5=>Float32x4,6=>Float32x4,7=>Float32x4,8=>Float32x4]},
         ]},
         primitive:wgpu::PrimitiveState {

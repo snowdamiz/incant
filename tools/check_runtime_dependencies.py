@@ -46,14 +46,17 @@ def violations(metadata, roots):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('roots', nargs='+', help='Packages whose runtime dependencies must stay lean')
+    parser.add_argument('--features', action='append', default=[],
+                        help='Cargo features to resolve, including optional shipping integrations')
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
     cargo = root / 'tools' / 'cargo'
     command = [str(cargo)] if sys.platform != 'win32' else ['cargo']
     try:
+        feature_args = [item for feature in args.features for item in ('--features', feature)]
         result = subprocess.run(
-            command + ['metadata', '--locked', '--format-version', '1'],
-            cwd=root, check=True, capture_output=True, text=True,
+            command + ['metadata', '--locked', '--format-version', '1'] + feature_args,
+            cwd=root, check=True, capture_output=True, text=True, encoding="utf-8",
         )
         problems = violations(json.loads(result.stdout), args.roots)
     except subprocess.CalledProcessError as error:
@@ -67,7 +70,8 @@ def main():
         for path in problems:
             print('Forbidden runtime dependency: ' + ' -> '.join(path), file=sys.stderr)
         return 1
-    print('Authoring-free resolved dependencies: ' + ', '.join(args.roots))
+    print('Authoring-free resolved dependencies: ' + ', '.join(args.roots)
+          + (' (features: ' + ', '.join(args.features) + ')' if args.features else ''))
     return 0
 
 

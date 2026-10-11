@@ -75,3 +75,13 @@ and memory limits remain denial-of-service safeguards, not a proof against VM
 vulnerabilities. See the [migration review](../spikes/performance-plan-v4-review.md).
 
 Source: [PLAN.md](../../PLAN.md), sections 2, 3, 5 and 6.
+
+A bounded [development Wasmtime implementation](../spikes/development-wasm-host.md)
+now executes actual modules through native typed transfers and structural commands.
+It establishes a tested first ABI and development-only dependency isolation, not
+zero-copy access or complete SDK conformance. The first
+[static wasm2c slice](../spikes/shipping-wasm2c.md) now shares that copied ABI and
+executes a trusted build-linked module in a compiler-free macOS shipping player.
+It has bounded fuel, C-contained traps and numeric/structural rejection tests;
+MSVC, other-platform execution, full exports/SDK coverage, deterministic
+arithmetic and the device gates remain open.

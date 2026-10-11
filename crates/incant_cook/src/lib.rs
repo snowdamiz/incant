@@ -3,6 +3,8 @@
 #[cfg(feature = "scene")]
 mod scene;
 #[cfg(feature = "scene")]
+mod spatial;
+#[cfg(feature = "scene")]
 pub use scene::{CookError, cook_scene, stable_id};
 #[cfg(feature = "script")]
 mod script;
