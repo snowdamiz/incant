@@ -17,9 +17,9 @@ visual work, and Astra owns correctness and integration.
 | Workstream | Current result | Next work / boundary |
 | --- | --- | --- |
 | Editor and sprite authoring | [PR #61](https://github.com/snowdamiz/incant/pull/61) combines the final plain UI, typed atlas/audio imports, focus fixes and the corrected sprite/atlas baseline. 524 UI tests, strict TypeScript, production and native builds pass. | Exact-head hosted checks and isolated native Claude acceptance are running. [Evidence](docs/spikes/editor-release-union.md). |
-| Native game and rendering | Input, embedded QuickJS, native physics, scene audio and retained GPU submission compose through one accepted-tick lifecycle. Binary v5 sprites share immutable geometry. | [PR #62](https://github.com/snowdamiz/incant/pull/62) is running hosted checks. Native editor/legacy Play migration, complete SDK, shader pipeline work and device budgets remain. |
-| Native window player | Optional cooked native game window has bounded surface recovery, keyboard/mouse input, suspension and device audio. Source-free lifecycle and scoped release checks pass. [Evidence](docs/spikes/native-window-player.md). | [PR #63](https://github.com/snowdamiz/incant/pull/63) is stacked on #62 with exact-head CI pending. Claude0037 original cases passed and found fullscreen/background-resize defects; corrected host refresh passes36 ordinary/4 GPU tests and a fresh source-free lifecycle proof. Corrected delta review remains pending; no phone or frame-budget claim. |
-| Native WebAssembly | Shared bounded capability ABI serves development Wasmtime and compiled wasm2c modules; local conformance and a source-free macOS executable pass. | Hosted verification, optimized Windows/MSVC support, full SDK/game composition and device execution continue separately. |
+| Native game and rendering | Input, embedded QuickJS, native physics, scene audio and retained GPU submission compose through one accepted-tick lifecycle. Binary v5 sprites share immutable geometry. | [PR #62](https://github.com/snowdamiz/incant/pull/62) is in hosted verification. Native editor/legacy Play migration, complete SDK, shader pipeline work and device budgets remain. |
+| Native window player | Optional cooked native game window has bounded recovery, keyboard/mouse input, suspension and device audio. Source-free lifecycle checks and Claude0037 corrected native acceptance pass. [Evidence](docs/spikes/native-window-player.md). | [PR #63](https://github.com/snowdamiz/incant/pull/63) targets main after #62; integrated exact-head CI remains pending. Paused refresh preserves gameplay/audio, and fullscreen-route/platform limitations remain explicit. No phone or frame-budget claim. |
+| Native WebAssembly | Shared bounded capability ABI serves development Wasmtime and compiled wasm2c modules; local conformance and a source-free macOS executable pass. | MSVC /Od and /O2 configurations are prepared for hosted conformance; actual Windows execution, full SDK/game composition and device evidence remain pending. |
 | CI speed | Registry-only shared auxiliary caches are merged; the agent is measuring actual warm consumers and completed job timings. | Shared fresh-build storage and a lower-optimization CI test profile are experiments, not adopted speed claims. Independent shipping audits remain intact. |
 
 Three Astra extra-high subagents own implementation/integration work in isolated
@@ -75,23 +75,17 @@ review; concurrent native reviews coordinate foreground ownership.
   [audio host](docs/spikes/native-scene-audio-host.md),
   [GPU proof](docs/spikes/native-game-gpu-player.md),
   [sprite executable proof](docs/spikes/native-sprite-player.md).
-- **Native window.** The optional player reuses the same embedded session and
-  retained GPU host. 43 scoped release tests, ten legacy audio tests, optional/
-  default/CPU Clippy and 43 tools tests pass. A fresh 8,104,464-byte executable
-  passes two actual macOS window lifecycle runs and two refusals after source/
-  build deletion; matched prior offscreen GPU/PCM/pose output is unchanged.
-  Static/streamed runs discarded five/zero wall ticks. Claude0037 visible
-  acceptance and hosted desktop compile checks remain pending.
-  [Window evidence](docs/spikes/native-window-player.md).
 - **WebAssembly.** Optional Wasmtime 49.0.2 development host and a statically
   compiled WABT 1.0.42/wasm2c path share copied numeric/structural capabilities.
   C traps remain in C, fuel/storage/imports are bounded, and accepted failures
   terminate the module. A fresh 2,780,816-byte macOS executable passes three
   exact-motion processes and 18 refusals after temporary sources/build removal.
   Actual iOS C/Rust compilation is compile-only. Initial static memory/table
-  growth and MSVC are explicitly unsupported pending follow-up.
+  growth remains unsupported. A native x64 MSVC /Od baseline and /O2 candidate
+  now have conformance/proof wiring, but actual Windows execution remains pending.
   [Development host](docs/spikes/development-wasm-host.md),
-  [static host](docs/spikes/shipping-wasm2c.md).
+  [static host](docs/spikes/shipping-wasm2c.md),
+  [MSVC follow-up](docs/spikes/wasm2c-msvc.md).
 
 Local integration checks: 543 ordinary Rust release tests/doctests; 138 scoped
 static/development-Wasm/runtime/script tests; workspace and optional-host release
