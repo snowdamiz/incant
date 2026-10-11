@@ -1,5 +1,5 @@
 /** Native QuickJS migration API. Separate from the document-backed ScriptApi. */
-import type { InputFrame } from './generated';
+import type { InputFrame, PhysicsRayQuery, PhysicsRayHit } from './generated';
 /** VM-owned bounded copy; no native pointers/handles or JSON conversion.
  * Retention cannot hold an ECS loan or alter the next input frame. */
 type InputReadonly<T> = T extends object ? { readonly [K in keyof T]: InputReadonly<T[K]> } : T;
@@ -29,11 +29,22 @@ export interface NativeCommands {
   /** Add, replace or remove the actual Velocity component. */
   setVelocity(id: NativeId, velocity: NativeVector3 | null): void;
 }
+/** Schema-derived query; the active native scene is implicit. */
+export type NativeRayQuery = Omit<PhysicsRayQuery, 'scene_id'>;
+export type NativeRayHit = PhysicsRayHit;
+export interface NativePhysics {
+  /** Up to 1,024 calls per update; invalid/caught queries reject the whole update.
+   * Reads the last committed solver, not pending column writes or commands.
+   * A retained function expires after update and never reactivates.
+   * Returns owned values; mutating a result cannot alter native state. */
+  raycast(query: NativeRayQuery): NativeRayHit | null;
+}
 export interface NativeContext {
   readonly chunks: readonly NativeChunk[];
   readonly dt: number;
   readonly commands: NativeCommands;
   readonly input: NativeInput;
+  readonly physics: NativePhysics;
 }
 export interface NativeBehavior {
   /** Synchronous only; no promises, deferred work or non-undefined return. */

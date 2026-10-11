@@ -117,11 +117,40 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
         controls = '\n'.join(line for line in controls.splitlines() if not line.startswith('import type'))
         combined = template.replace('export default {', 'const structural = {')
         combined += '\n' + controls.replace('export default {', 'const controls = {')
+        queries = (ROOT / 'sdk/templates/native-physics/raycast.ts').read_text()
+        queries = '\n'.join(line for line in queries.splitlines() if not line.startswith('import type'))
+        combined += '\n' + queries.replace('export function', 'function')
         combined += '''
 import type { NativeContext } from '../../ts/src/native';
 let inputTick = 0;
+let previousRay: NativeContext['physics']['raycast'] | undefined;
 export default {update(context: NativeContext) {
-    if (context.chunks.some(c => c.ids.includes('00000000000000000000000101'))) return;
+    const query = { origin: [-10,10,0], direction: [0,-1,0], max_distance: 100,
+        include_sensors: false, memberships: 0xffffffff, filter: 0xffffffff };
+    if (previousRay) {
+        let denied = false; try { previousRay(query); } catch { denied = true; }
+        if (!denied) throw Error('retained native query reactivated');
+    }
+    previousRay = context.physics.raycast;
+    if (context.input.keyboard.held.includes('KeyQ')) {
+        try { context.physics.raycast({...query, direction:[0,0,0]}); } catch {}
+        return undefined;
+    }
+    if (context.input.keyboard.held.includes('KeyB')) {
+        for (let i=0;i<1025;i++) { try { context.physics.raycast(query); } catch {} }
+        return undefined;
+    }
+    const hasPhysics = context.chunks.some(c => c.ids.includes('00000000000000000000000101'));
+    const ground = groundBelow(context.physics, [-10,10,0], null);
+    if (hasPhysics) {
+        if (!ground || ground.entity_id !== '00000000000000000000000101' ||
+            ground.distance !== 10 || ground.point[1] !== 0 || ground.normal[1] !== 1)
+            throw Error('native committed ground query');
+        if (groundBelow(context.physics, [-10,10,0], ground.entity_id) !== null)
+            throw Error('native query exclusion');
+        return undefined;
+    }
+    if (ground !== null) throw Error('nonphysical scene raycast');
     ++inputTick;
     const input = context.input;
     if ('move' in input.actions) {
@@ -275,15 +304,28 @@ export default {update(context: NativeContext) {
                 require(abs(arrays[1][0][1] - 0.5) < 0.02 and rows[1].endswith(' true'), 'Collision/sleep missing')
             physics_observations.append({'ticks': ticks, 'output': first})
         require((out / 'player/physics.scene').read_bytes() == physics_bytes, 'Runtime changed cooked physics')
+    query_refusals = []
+    for key in ('KeyQ', 'KeyB'):
+        rejected = dict(clip, frames=[{'tick': 1, 'events': [{'type':'key', 'code':key, 'down':True}]}])
+        rejection_clip = out/'player'/f'{key}.json'
+        rejection_clip.write_text(json.dumps(rejected)+'\n')
+        result = subprocess.run([player, 'world.scene', '1', '--input-recording', rejection_clip.name,
+                                 '--input-actions', 'actions.json'], cwd=out/'player', capture_output=True, text=True)
+        # A swallowed invalid/over-budget query must never publish world output.
+        require(result.returncode != 0 and not result.stdout, f'{key}: rejected query published output')
+        require(('PhysicsQuery' in result.stderr if key == 'KeyQ' else 'InputLimit' in result.stderr),
+                f'{key}: expected query refusal, got {result.stderr}')
+        query_refusals.append({'key':key, 'stderr':result.stderr.strip()})
     result = {'passed': True, 'target': target, 'compiler': compiler, 'codegen': flags,
               'player_sha256': sha(player), 'player_bytes': player.stat().st_size,
               'symbols': identity, 'script_metadata': metadata, 'authoring_preserved': before,
               'inputs_and_build_storage_removed': True,
               'removed_input_scope': 'authoring/compile inputs and temporary Cargo storage; runtime exchange files retained',
-              'runtime_exchange_files': ['input.json', 'actions.json'],
+              'runtime_exchange_files': ['input.json', 'actions.json', 'KeyQ.json', 'KeyB.json'],
               'runtime_source_compiler_symbols_absent': True,
               'dynamic_source_routes_rejected': True, 'observations': observations,
-              'recorded_input_observations': recorded, 'native_physics_observations': physics_observations, 'input_exchange_only_at_startup': True,
+              'recorded_input_observations': recorded, 'native_physics_observations': physics_observations,
+              'committed_raycast_and_expired_capabilities': True, 'query_refusals': query_refusals, 'input_exchange_only_at_startup': True,
               'scope': 'Native host==target embedded script; no portable ABI, authenticated file loader, full export, mobile execution or phone gate'}
     (out / 'result.json').write_text(json.dumps(result, indent=2) + '\n')
     print(json.dumps({'passed': True, 'target': target, 'player_bytes': result['player_bytes'], 'evidence': str(out / 'result.json')}))

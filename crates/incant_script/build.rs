@@ -21,6 +21,7 @@ fn main() {
         Path::new("src/compiled.rs").into(),
         Path::new("src/lib.rs").into(),
         Path::new("src/input.rs").into(),
+        Path::new("src/queries.rs").into(),
         Path::new("src/session.rs").into(),
         Path::new("src/artifact.rs").into(),
         Path::new("src/harden.js").into(),

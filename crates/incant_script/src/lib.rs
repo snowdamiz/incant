@@ -10,6 +10,7 @@ mod compiler;
 mod diagnostics;
 mod input;
 mod loan;
+mod queries;
 mod session;
 mod synchronous;
 
@@ -49,6 +50,10 @@ pub enum ScriptError {
     InputLimit,
     #[error("invalid or throwing native structural command arguments")]
     CommandInput,
+    #[error("invalid or throwing physics query arguments")]
+    QueryInput,
+    #[error(transparent)]
+    PhysicsQuery(#[from] incant_runtime::QueryError),
     #[error("native structural batch failed: {0}")]
     Structural(#[from] incant_runtime::RuntimeError),
     #[error("promises and deferred work are unsupported in synchronous native behaviors")]
@@ -63,12 +68,13 @@ pub enum ScriptError {
 /// private, compiler-produced bytecode. Ticks borrow real numeric ECS columns;
 /// they neither parse code nor serialize project/component values.
 ///
-/// This native host exposes `update({chunks, dt, commands, input})`. Each chunk has stable
+/// This native host exposes `update({chunks, dt, commands, input, physics})`. Each chunk has stable
 /// ID strings, Transform stride 10, and optional Velocity stride 3. Views are
 /// detached on every exit. A failed callback restores its component writes and
 /// permanently fails this host. Tick-local structural commands apply only after
 /// detachment and scope exit; rejection restores numeric writes too.
-/// Persistent state, timers, logs, queries and the legacy PlaySession are not
+/// Raycasts read committed solver state during the loan; retained capabilities
+/// expire before diagnostics. Persistent state, timers, logs and the legacy PlaySession are not
 /// migrated by this boundary.
 pub struct ScriptHost {
     // Drop VM roots/context/runtime before bytecode: QuickJS's ROM-data module
@@ -160,43 +166,52 @@ impl ScriptHost {
             // Input publication/command construction must fit the script budget
             // before any ECS table is borrowed or its numeric views are created.
             diagnostics::check_deadline(&self.deadline)?;
-            world.with_numeric_columns(|columns| {
-                let mut loan = loan::Loan::new(columns)?;
-                let chunks = match loan.expose(&ctx) {
-                    Ok(chunks) => chunks,
-                    Err(error) => {
-                        // Prototype setters can run while metadata is installed.
-                        // Revoke partial loans before inspecting their exception.
-                        loan.revoke();
-                        return Err(diagnostics::javascript(
-                            &ctx,
-                            error,
-                            "component views",
-                            &self.deadline,
-                        ));
+            world
+                .with_numeric_physics(|columns, capability| {
+                    let queries = queries::TickQueries::new(capability, Arc::clone(&self.deadline));
+                    let physics = queries.expose(&ctx).map_err(|error| {
+                        diagnostics::javascript(&ctx, error, "physics bindings", &self.deadline)
+                    })?;
+                    let mut loan = loan::Loan::new(columns)?;
+                    let chunks = match loan.expose(&ctx) {
+                        Ok(chunks) => chunks,
+                        Err(error) => {
+                            // Prototype setters can run while metadata is installed.
+                            // Revoke partial loans before inspecting their exception.
+                            loan.revoke();
+                            return Err(diagnostics::javascript(
+                                &ctx,
+                                error,
+                                "component views",
+                                &self.deadline,
+                            ));
+                        }
+                    };
+                    commands.activate();
+                    queries.activate();
+                    let result = function.call::<_, Value>((chunks, dt, api, input, physics));
+                    commands.revoke();
+                    queries.revoke();
+                    // Revoke before diagnostics can execute a user-defined getter,
+                    // and before Rust reads or restores any component bytes.
+                    loan.revoke();
+                    let returned = result.map_err(|error| {
+                        diagnostics::javascript(&ctx, error, "tick", &self.deadline)
+                    })?;
+                    diagnostics::check_deadline(&self.deadline)?;
+                    self.synchronous.check(&ctx, false)?;
+                    if returned.is_promise() {
+                        return Err(ScriptError::UnsupportedAsync);
                     }
-                };
-                commands.activate();
-                let result = function.call::<_, Value>((chunks, dt, api, input));
-                commands.revoke();
-                // Revoke before diagnostics can execute a user-defined getter,
-                // and before Rust reads or restores any component bytes.
-                loan.revoke();
-                let returned = result.map_err(|error| {
-                    diagnostics::javascript(&ctx, error, "tick", &self.deadline)
-                })?;
-                diagnostics::check_deadline(&self.deadline)?;
-                self.synchronous.check(&ctx, false)?;
-                if returned.is_promise() {
-                    return Err(ScriptError::UnsupportedAsync);
-                }
-                if !returned.is_undefined() {
-                    return Err(ScriptError::UnsupportedReturn);
-                }
-                loan.validate_numeric()?;
-                let commands = commands.take()?;
-                Ok((loan.finish(), commands))
-            })
+                    if !returned.is_undefined() {
+                        return Err(ScriptError::UnsupportedReturn);
+                    }
+                    queries.check()?;
+                    loan.validate_numeric()?;
+                    let commands = commands.take()?;
+                    Ok((loan.finish(), commands))
+                })
+                .map_err(ScriptError::Structural)?
         });
         // No JS value or raw column pointer crosses this sync point. Apply is
         // native host work, after the script CPU/deferred-work checks; its time
@@ -259,3 +274,6 @@ mod tests;
 
 #[cfg(all(test, feature = "compiler"))]
 mod input_tests;
+
+#[cfg(all(test, feature = "compiler"))]
+mod query_tests;

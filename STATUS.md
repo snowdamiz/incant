@@ -52,7 +52,10 @@ review; concurrent native reviews coordinate foreground ownership.
   [bytecode](docs/spikes/cooked-native-scripts.md),
   [world saves](docs/spikes/native-world-saves.md),
   [input](docs/spikes/native-input-session.md),
-  [physics](docs/spikes/native-physics-runtime.md).
+  [physics](docs/spikes/native-physics-runtime.md). Native scripts now have bounded
+  committed-state raycasts with revocable capabilities and whole-update rejection;
+  124 scoped tests and a 34-process source-free proof pass.
+  [Query evidence](docs/spikes/native-script-queries.md).
 - **Native rendering.** Canonical typed renderer input and a separate authoring
   adapter; exact retained asset versions; binary v4 cameras/models/lights and
   binary v5 sprites; direct committed pose updates and mandatory GPU host sync.
@@ -100,7 +103,7 @@ conformance, browser-target physics compilation and six native parity streams.
 
 - Complete migration of the editor, headless runner and full gameplay SDK from
   legacy document-backed Play into the native runtime. Persistent script state,
-  timers/coroutines, native physics/navigation/audio/UI access and full composite
+  timers/coroutines, remaining native physics/navigation/audio/UI access and full composite
   session restoration need production coverage. Do not extend the legacy tick
   path or add project cloning/JSON/authoring validation to native ticks.
 - Finish render features and their native path: offline backend shader cooking,
