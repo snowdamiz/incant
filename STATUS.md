@@ -25,6 +25,10 @@ the captured revision after immutable startup and before candidate ticks, so a
 concurrent script write cannot publish a mixed scene/source revision. All 47 agent
 tests, five native agent Play cases and scoped Clippy pass; independent review
 accepted the corrected source-race boundary. [Evidence](docs/spikes/shared-agent-project-access.md).
+The editor loading container now implements the same shared-access contract:
+loading/failed states refuse, and ready state uses its existing bus and journal.
+The adapter passes all 48 agent tests, three editor loading/recovery cases and
+scoped Clippy; independent review accepted it. No duplicate bus is created.
 This is backend work; chat-panel wiring, visual approval/history and budget UI
 remain outstanding. It does not complete Phase 3 or a live-provider gate.
 

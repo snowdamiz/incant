@@ -1,5 +1,6 @@
 //! Local provider loop and typed engine tools. There is no shell tool.
 mod access;
+pub use access::ProjectSlot;
 use access::{ProjectAccess, check_cancel};
 pub mod accounts;
 mod assets;
@@ -328,10 +329,10 @@ impl Agent {
     /// Each edit still uses the same command path and expected revision. Keep the
     /// mutex bound to one project session; a different project ID is refused.
     #[allow(clippy::too_many_arguments)]
-    pub fn run_shared(
+    pub fn run_shared<T: ProjectSlot>(
         &mut self,
         provider: &mut dyn Provider,
-        bus: &Mutex<CommandBus>,
+        bus: &Mutex<T>,
         perception: &mut dyn Perception,
         prompt: &str,
         conversation_id: &str,
