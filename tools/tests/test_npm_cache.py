@@ -37,6 +37,7 @@ class NpmMetadataTests(unittest.TestCase):
         env = dict(os.environ, PATH=str(self.bin) + os.pathsep + os.environ['PATH'],
                    NPM_LOCK_FILE=str(self.lock), NPM_LOCK_HASH=self.lock_hash,
                    GITHUB_OUTPUT=str(self.output), RUNNER_OS='macOS',
+                   NPM_CACHE_REF='refs/heads/main', NPM_CACHE_DEFAULT_BRANCH='main',
                    TEST_NODE_ARCH='arm64', TEST_NPM_PATH='/fixture with spaces/.npm')
         env.update(overrides)
         result = subprocess.run(['bash', str(ACTION / 'metadata.sh')], cwd=self.root,
@@ -46,7 +47,7 @@ class NpmMetadataTests(unittest.TestCase):
     def test_existing_setup_node_namespace_uses_node_arch_and_configured_path(self):
         result, output = self.invoke()
         self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertEqual(output, f'path=/fixture with spaces/.npm\nkey=node-cache-macOS-arm64-npm-{self.lock_hash}\n')
+        self.assertEqual(output, f'path=/fixture with spaces/.npm\nkey=node-cache-macOS-arm64-npm-{self.lock_hash}\nsave=true\n')
         self.output.unlink()
         result, output = self.invoke(RUNNER_OS='Linux', TEST_NODE_ARCH='x64')
         self.assertEqual(result.returncode, 0, result.stderr)
@@ -73,31 +74,42 @@ class NpmMetadataTests(unittest.TestCase):
                 self.assertNotEqual(result.returncode, 0)
                 self.assertEqual(output, '')
 
+    def test_only_case_exact_default_and_frozen_candidate_refs_may_save(self):
+        cases = [('refs/heads/main', 'main', True), ('refs/heads/trunk', 'trunk', True),
+                 ('refs/heads/main', 'trunk', False), ('refs/heads/feature', 'main', False),
+                 ('refs/heads/MAIN', 'main', False), ('refs/heads/main', 'MAIN', False),
+                 ('refs/heads/codex/release-candidate', 'main', True),
+                 ('refs/heads/codex/Release-Candidate', 'main', False),
+                 ('refs/heads/codex/release-candidate-extra', 'main', False),
+                 ('refs/pull/83/merge', 'main', False), ('refs/pull/83/head', 'main', False),
+                 ('refs/tags/main', 'main', False), ('', 'main', False),
+                 ('refs/heads/main', '', False), ('refs/heads/', '', False)]
+        for ref, default, may_save in cases:
+            with self.subTest(ref=ref, default=default):
+                self.output.unlink(missing_ok=True)
+                result, output = self.invoke(NPM_CACHE_REF=ref, NPM_CACHE_DEFAULT_BRANCH=default)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertEqual(output.splitlines()[-1], 'save=' + str(may_save).lower())
+
 
 class NpmCachePolicyTests(unittest.TestCase):
-    def test_actual_action_ref_conditions_never_register_a_pr_save(self):
+    def test_actual_action_conditions_use_only_the_exact_metadata_decision(self):
         text = (ACTION / 'action.yml').read_text()
         blocks = re.split(r'(?m)^    - ', text)[1:]
         cache_steps = [block for block in blocks if 'uses: actions/cache' in block]
         self.assertEqual(len(cache_steps), 2)
-        cases = [('refs/heads/main', 'main', True), ('refs/heads/trunk', 'trunk', True),
-                 ('refs/heads/main', 'trunk', False), ('refs/heads/feature', 'main', False),
-                 ('refs/pull/83/merge', 'main', False), ('refs/pull/83/head', 'main', False),
-                 ('refs/tags/main', 'main', False), ('', 'main', False),
-                 ('refs/heads/main', '', False)]
-        for ref, default, may_save in cases:
-            with self.subTest(ref=ref, default=default):
+        for value in ('true', 'false', ''):
+            with self.subTest(metadata=value):
                 selected = []
                 for block in cache_steps:
                     condition = next(line.strip()[4:] for line in block.splitlines()
                                      if line.strip().startswith('if: '))
-                    # Evaluate only the trusted repository's exact ref comparison.
-                    condition = condition.replace("format('refs/heads/{0}', github.event.repository.default_branch)", 'default_ref')
-                    condition = condition.replace('github.ref', 'ref')
-                    if eval(condition, {'__builtins__': {}}, {'ref': ref, 'default_ref': 'refs/heads/' + default}):
+                    # The shell emits only fixed true/false, never a branch name.
+                    condition = condition.replace('steps.metadata.outputs.save', 'value')
+                    if eval(condition, {'__builtins__': {}}, {'value': value}):
                         selected.append(next(line.strip()[6:].split()[0] for line in block.splitlines()
                                              if line.strip().startswith('uses: ')))
-                suffix = '' if may_save else '/restore'
+                suffix = '' if value == 'true' else '/restore'
                 self.assertEqual(selected, [f'actions/cache{suffix}@55cc8345863c7cc4c66a329aec7e433d2d1c52a9'])
         self.assertNotIn('restore-keys:', text)
         self.assertNotIn('save-always:', text)

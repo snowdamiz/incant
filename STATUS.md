@@ -36,7 +36,8 @@ visual work, and Astra owns correctness and integration.
 | Generated Rust module SDK | Local public no_std Rust SDK and generated v1 host/guest/C registry bindings preserve existing capabilities. 167 actual-host conformance tests, 692 workspace tests, Clippy and a fresh 8-success/26-refusal shipping proof pass. | Independent review and combined 167-test actual-host conformance, real guest execution and fresh GPU/SDK player proof pass; hosted platform checks remain pending. No complete gameplay SDK, module build sandbox, save, device or performance gate. [API guide](sdk/rust/README.md), [evidence](docs/spikes/native-rust-sdk.md). |
 
 The local npm cache follow-up preserves existing keys and download paths while
-restricting saves to successful default-branch jobs. All 130 tooling tests and
+restricting saves to successful exact default-branch or frozen release-candidate
+jobs. All 131 tooling tests and
 workflow lint pass; hosted restore/version compatibility and retained-size
 measurements remain pending. [Evidence](docs/spikes/npm-cache-producers.md).
 
