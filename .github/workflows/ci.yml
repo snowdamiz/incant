@@ -50,6 +50,9 @@ jobs:
         run: python3 -m unittest discover -s tools/tests -p test_ci_scope.py -v
       - run: rustup show
         if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
+      - name: Install the pinned Wasm guest target
+        if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
+        run: rustup target add --toolchain 1.99.0 wasm32-unknown-unknown
       - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
         if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
         with:
