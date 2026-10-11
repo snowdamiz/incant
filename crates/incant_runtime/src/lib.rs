@@ -8,6 +8,8 @@ mod columns;
 mod commands;
 mod hierarchy;
 mod physics;
+mod physics_2d;
+mod physics_2d_binary;
 mod physics_binary;
 mod physics_queries;
 mod save;
@@ -35,12 +37,17 @@ pub use audio::{
 };
 pub use columns::{NumericChunk, NumericColumns, TRANSFORM_STRIDE, VELOCITY_STRIDE};
 pub use commands::{FrameCommands, MAX_FRAME_COMMANDS, StructuralCommand};
+pub use incant_physics_2d_runtime::{
+    BodyState as BodyState2D, RayHit as RayHit2D, RayQuery as RayQuery2D,
+    TriggerEvent as TriggerEvent2D,
+};
 pub use incant_physics_runtime::{BodyState, MAX_TRIGGER_EVENTS, MAX_TRIGGER_PAIRS, TriggerEvent};
 pub use incant_physics_runtime::{
     CharacterMovement, CharacterOptions, CharacterQuery, CharacterStep,
 };
 pub use incant_physics_runtime::{RayHit, RayQuery};
 pub use physics::CookedPhysics;
+pub use physics_2d::CookedPhysics2D;
 pub use physics_queries::{NativeQueries, QueryError};
 pub use save::{MAX_SAVE_BYTES, SaveError};
 pub use scene::{CookedEntity, CookedScene, SceneError, StableId};

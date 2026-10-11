@@ -38,6 +38,7 @@ pub fn cook_scene(project: &Project, scene_id: &str) -> Result<Vec<u8>, CookErro
         .ok_or_else(|| CookError::MissingScene(scene_id.into()))?;
     let mut entities = Vec::with_capacity(scene.entities.len());
     let mut physics = Vec::new();
+    let mut physics_2d = Vec::new();
     let mut audio = Vec::new();
     let mut spatial = Vec::new();
     let mut visual_assets = std::collections::BTreeMap::new();
@@ -49,6 +50,9 @@ pub fn cook_scene(project: &Project, scene_id: &str) -> Result<Vec<u8>, CookErro
                 "RigidBody",
                 "Collider",
                 "AngularVelocity",
+                "RigidBody2D",
+                "Collider2D",
+                "AngularVelocity2D",
                 "AudioBus",
                 "AudioSource",
                 "AudioListener",
@@ -95,6 +99,22 @@ pub fn cook_scene(project: &Project, scene_id: &str) -> Result<Vec<u8>, CookErro
                 angular_velocity: entity
                     .components
                     .get("AngularVelocity")
+                    .map(|v| serde_json::from_value(v.clone()))
+                    .transpose()?,
+            });
+        }
+        if let Some(collider) = entity.components.get("Collider2D") {
+            physics_2d.push(incant_runtime::CookedPhysics2D {
+                entity: stable_id(&entity.id)?,
+                collider: serde_json::from_value(collider.clone())?,
+                body: entity
+                    .components
+                    .get("RigidBody2D")
+                    .map(|v| serde_json::from_value(v.clone()))
+                    .transpose()?,
+                angular_velocity: entity
+                    .components
+                    .get("AngularVelocity2D")
                     .map(|v| serde_json::from_value(v.clone()))
                     .transpose()?,
             });
@@ -154,6 +174,7 @@ pub fn cook_scene(project: &Project, scene_id: &str) -> Result<Vec<u8>, CookErro
             .with_physics(physics)?
             .with_audio(audio)?
             .with_spatial(visual_assets.into_values().collect(), spatial)?
+            .with_physics_2d(physics_2d)?
             .to_bytes(),
     )
 }

@@ -4,6 +4,11 @@ export namespace AngularVelocitySchema {
 }
 export type AngularVelocity = AngularVelocitySchema.Root;
 
+export namespace AngularVelocity2DSchema {
+  export type Root = { "angular": number };
+}
+export type AngularVelocity2D = AngularVelocity2DSchema.Root;
+
 export namespace AudioBusSchema {
   export type Root = { "gain_db": number; "parent"?: string | null };
 }
@@ -38,6 +43,12 @@ export namespace ColliderSchema {
   export type Root = { "density": number; "filter": number; "friction": number; "memberships": number; "restitution": number; "sensor": boolean; "shape": ColliderShape };
 }
 export type Collider = ColliderSchema.Root;
+
+export namespace Collider2DSchema {
+  export type ColliderShape2D = ({ "half_extents": [number, number]; "kind": "box" }) | ({ "kind": "circle"; "radius": number }) | ({ "half_height": number; "kind": "capsule"; "radius": number });
+  export type Root = { "density": number; "filter": number; "friction": number; "memberships": number; "restitution": number; "sensor": boolean; "shape": ColliderShape2D };
+}
+export type Collider2D = Collider2DSchema.Root;
 
 export namespace CommandSchema {
   export type ActionGesture = "tap" | "long_press" | "swipe";
@@ -306,6 +317,12 @@ export namespace RigidBodySchema {
   export type Root = { "angular_damping": number; "can_sleep": boolean; "ccd": boolean; "gravity_scale": number; "linear_damping": number; "motion": BodyMotion };
 }
 export type RigidBody = RigidBodySchema.Root;
+
+export namespace RigidBody2DSchema {
+  export type BodyMotion = "fixed" | "dynamic" | "kinematic";
+  export type Root = { "angular_damping": number; "can_sleep": boolean; "ccd": boolean; "gravity_scale": number; "linear_damping": number; "motion": BodyMotion };
+}
+export type RigidBody2D = RigidBody2DSchema.Root;
 
 export namespace ScriptSchema {
   export type Root = { "props": { [key: string]: unknown }; "source": string };

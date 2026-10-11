@@ -12,7 +12,7 @@ const uploads = new Set();
 const server = createServer(async (request, response) => {
   try {
     const path = new URL(request.url, 'http://localhost').pathname;
-    if (request.method === 'POST' && /^\/browser-\d+\.bin$/.test(path)) {
+    if (request.method === 'POST' && /^\/browser-(3d|2d)-\d+\.bin$/.test(path)) {
       const chunks = [];
       let size = 0;
       for await (const chunk of request) {
@@ -45,10 +45,10 @@ try {
         const module = await import('/pkg/incant_native_physics_parity.js');
         await module.default();
         const results = [];
-        for (const scenario of [0]) {
+        for (const scenario of ['3d', '2d']) {
           // state_stream constructs and actually steps the shared Rust world 640 times.
-          const bytes = module.state_stream();
-          const file = `/browser-${trial}.bin`;
+          const bytes = scenario === '2d' ? module.state_stream_2d() : module.state_stream();
+          const file = `/browser-${scenario}-${trial}.bin`;
           const response = await fetch(file, { method: 'POST', body: bytes });
           if (!response.ok) throw new Error(`stream upload: ${response.status}`);
           results.push({ scenario, file: file.slice(1), bytes: bytes.length });
@@ -58,7 +58,7 @@ try {
       records.push({ trial, browser: browser.version(), streams });
     } finally { await browser.close(); }
   }
-  if (uploads.size !== trials) throw new Error('missing browser execution stream');
+  if (uploads.size !== trials * 2) throw new Error('missing browser execution stream');
   await writeFile(resolve(root, 'browser.json'), JSON.stringify(records, null, 2) + '\n');
   console.log(JSON.stringify({ browserProcesses: trials, streams: uploads.size }));
 } finally { await new Promise((done) => server.close(done)); }

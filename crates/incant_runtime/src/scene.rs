@@ -21,6 +21,7 @@ pub struct CookedScene {
     pub(crate) tick_rate: u32,
     pub(crate) entities: Vec<CookedEntity>,
     pub(crate) physics: Vec<crate::CookedPhysics>,
+    pub(crate) physics_2d: Vec<crate::CookedPhysics2D>,
     pub(crate) audio: Vec<crate::CookedAudio>,
     pub(crate) spatial: Vec<crate::CookedSpatial>,
     pub(crate) visual_assets: Vec<crate::VisualAssetRef>,
@@ -76,6 +77,7 @@ impl CookedScene {
             entities,
             topology,
             physics: Vec::new(),
+            physics_2d: Vec::new(),
             audio: Vec::new(),
             spatial: Vec::new(),
             visual_assets: Vec::new(),
@@ -121,6 +123,7 @@ impl CookedScene {
             }
         }
         self.physics = physics;
+        self.validate_physics_2d()?;
         Ok(self)
     }
     /// Canonical checked audio nodes, separate from mixer/device state.
@@ -145,6 +148,7 @@ impl CookedScene {
             return Err(SceneError::Invalid("file size"));
         }
         self.audio = audio;
+        self.validate_physics_2d()?;
         Ok(self)
     }
     pub fn audio(&self) -> &[crate::CookedAudio] {
@@ -188,6 +192,7 @@ impl CookedScene {
         if size > crate::binary::MAX_SCENE_BYTES {
             return Err(SceneError::Invalid("file size"));
         }
+        self.validate_physics_2d()?;
         Ok(self)
     }
     pub fn spatial(&self) -> &[crate::CookedSpatial] {
@@ -203,6 +208,97 @@ impl CookedScene {
                 .iter()
                 .map(crate::spatial_binary::encoded_size)
                 .sum::<usize>()
+    }
+
+    /// Canonical planar declarations; v1–6 bytes remain unchanged when absent.
+    pub fn with_physics_2d(
+        mut self,
+        mut declarations: Vec<crate::CookedPhysics2D>,
+    ) -> Result<Self, SceneError> {
+        declarations.sort_unstable_by_key(|p| p.entity);
+        if declarations.len() > incant_physics_2d_runtime::MAX_BODIES
+            || declarations.windows(2).any(|p| p[0].entity == p[1].entity)
+        {
+            return Err(SceneError::Invalid("duplicate or excessive 2D records"));
+        }
+        self.physics_2d = declarations;
+        self.validate_physics_2d()?;
+        Ok(self)
+    }
+    pub fn physics_2d(&self) -> &[crate::CookedPhysics2D] {
+        &self.physics_2d
+    }
+    fn validate_physics_2d(&self) -> Result<(), SceneError> {
+        let entities: BTreeMap<_, _> = self.entities.iter().map(|e| (e.id, e)).collect();
+        let mut ids = std::collections::BTreeSet::new();
+        let mut shapes = 0usize;
+        for declaration in &self.physics_2d {
+            let entity = entities
+                .get(&declaration.entity)
+                .ok_or(SceneError::Invalid("2D entity reference"))?;
+            declaration.validate(entity)?;
+            ids.insert(declaration.entity);
+            shapes += 1;
+        }
+        for node in &self.spatial {
+            if let Some(map) = &node.tilemap {
+                // Checked load/cook boundary only; runtime retains this data.
+                let prepared = map
+                    .prepare()
+                    .map_err(|_| SceneError::Component(node.entity))?;
+                if prepared.collision().is_empty() {
+                    continue;
+                }
+                if !ids.insert(node.entity) {
+                    return Err(SceneError::Invalid(
+                        "solid tilemap and explicit 2D collider require separate entities",
+                    ));
+                }
+                let entity = entities[&node.entity];
+                crate::physics_2d::validate_motion(
+                    entity.id,
+                    entity.parent.is_some(),
+                    &entity.transform,
+                    entity.velocity.as_ref(),
+                    None,
+                    None,
+                )?;
+                shapes += prepared.collision().len();
+            }
+        }
+        if ids.len() > incant_physics_2d_runtime::MAX_BODIES
+            || shapes > incant_physics_2d_runtime::MAX_SHAPES
+        {
+            return Err(SceneError::Invalid("2D collision capacity"));
+        }
+        if self.physics.iter().any(|p| ids.contains(&p.entity)) {
+            return Err(SceneError::Invalid(
+                "2D and 3D colliders require separate entities",
+            ));
+        }
+        let size = 72
+            + self.entities.len() * 128
+            + 20
+            + self.spatial_bytes()
+            + self
+                .physics
+                .iter()
+                .map(crate::physics_binary::encoded_size)
+                .sum::<usize>()
+            + self
+                .physics_2d
+                .iter()
+                .map(crate::physics_2d_binary::encoded_size)
+                .sum::<usize>()
+            + self
+                .audio
+                .iter()
+                .map(crate::audio_binary::encoded_size)
+                .sum::<usize>();
+        if size > crate::binary::MAX_SCENE_BYTES {
+            return Err(SceneError::Invalid("file size"));
+        }
+        Ok(())
     }
 
     pub fn physics(&self) -> &[crate::CookedPhysics] {

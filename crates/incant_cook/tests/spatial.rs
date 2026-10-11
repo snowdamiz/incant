@@ -239,7 +239,7 @@ fn native_cook_uses_binary_sprite_references_and_rejects_ambiguous_authored_bind
 }
 
 #[test]
-fn tilemap_cook_preserves_binary_ids_local_cells_and_explicit_collision_refusal() {
+fn tilemap_cook_preserves_binary_ids_local_cells_and_native_solid_collision() {
     let (mut project, sid, entity, _, texture) = fixture();
     let layer = "00000000000000000000000003";
     let frame = "00000000000000000000000001";
@@ -291,9 +291,6 @@ fn tilemap_cook_preserves_binary_ids_local_cells_and_explicit_collision_refusal(
     let prepared = node.tilemap.unwrap();
     assert_eq!(prepared.cell_bounds([1, 0]), [[0.5, 0.], [1., 2.]]);
     assert_eq!(prepared.collision()[0].size, [1, 1]);
-    assert_eq!(
-        world.step(),
-        Err(incant_runtime::RuntimeError::TilemapPhysicsUnsupported)
-    );
-    assert_eq!(world.tick(), 0);
+    world.step().unwrap();
+    assert_eq!(world.tick(), 1);
 }

@@ -73,7 +73,9 @@ fn legacy_startup_and_sync_refuse_tilemaps_atomically_but_static_inspection_rema
     engine.run_ticks(4).unwrap();
     control.run_ticks(4).unwrap();
     let before = serde_json::to_value(engine.snapshot()).unwrap();
-    // A new Tilemap arrives with unrelated pose/velocity/tick-rate changes.
+    // A new fixed Tilemap arrives with unrelated pose/velocity/tick-rate changes.
+    // Its zero velocity differs from the running body while remaining valid
+    // under the shared native solid-collision contract.
     // Refusal must precede every write, including the existing world's dt.
     project.settings.tick_rate = 120;
     let entity = project
@@ -85,7 +87,7 @@ fn legacy_startup_and_sync_refuse_tilemaps_atomically_but_static_inspection_rema
         .unwrap();
     entity
         .components
-        .insert("Velocity".into(), json!({"linear":[99., 0., 0.]}));
+        .insert("Velocity".into(), json!({"linear":[0., 0., 0.]}));
     entity.components.insert(
         "Transform".into(),
         json!(Transform {

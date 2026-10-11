@@ -6,6 +6,7 @@ mod crdt;
 mod lights;
 mod navigation;
 mod physics;
+mod physics_2d;
 #[cfg(feature = "crdt")]
 pub use crdt::CollaborativeDocument;
 pub use incant_2d::atlas::{AtlasLayout, SpriteAtlas};
@@ -24,10 +25,10 @@ use thiserror::Error;
 
 pub const SCHEMA_VERSION: u32 = 1;
 pub use incant_types::{
-    AngularVelocity, AudioBus, AudioListener, AudioSource, AudioSpatial, BodyMotion, Camera,
-    CameraProjection, Collider, ColliderPart, ColliderShape, DirectionalLight, DirectionalShadows,
-    EnvironmentLight, Id, MeshRenderer, PointLight, PrimitiveColliderShape, RigidBody, SpotLight,
-    TextureUsage, Transform, Velocity,
+    AngularVelocity, AngularVelocity2D, AudioBus, AudioListener, AudioSource, AudioSpatial,
+    BodyMotion, Camera, CameraProjection, Collider, Collider2D, ColliderPart, ColliderShape,
+    ColliderShape2D, DirectionalLight, DirectionalShadows, EnvironmentLight, Id, MeshRenderer,
+    PointLight, PrimitiveColliderShape, RigidBody, SpotLight, TextureUsage, Transform, Velocity,
 };
 pub fn new_id() -> Id {
     ulid::Ulid::new().to_string()
@@ -378,6 +379,9 @@ impl Project {
                         );
                     }
                 }
+                if let Err(message) = physics_2d::validate_entity(entity) {
+                    issue(format!("{path}/components"), &message);
+                }
                 if let Err(message) = physics::validate_entity(entity) {
                     issue(format!("{path}/components"), &message);
                 }
@@ -442,6 +446,7 @@ fn validate_component(kind: &str, value: &Value, project: &Project) -> Result<()
             .map_err(|e| e.to_string())?,
         "AudioBus" | "AudioSource" | "AudioListener" => audio::validate(kind, value, project)?,
         "RigidBody" | "Collider" | "AngularVelocity" => physics::validate(kind, value)?,
+        "RigidBody2D" | "Collider2D" | "AngularVelocity2D" => physics_2d::validate(kind, value)?,
         "DirectionalLight" | "PointLight" | "SpotLight" => lights::validate(kind, value)?,
         "Transform" => {
             let t: Transform = decode(value)?;
@@ -597,6 +602,18 @@ pub fn schema_registry() -> BTreeMap<String, Value> {
             json!(schemars::schema_for!(AudioListener)),
         ),
         ("RigidBody".into(), json!(schemars::schema_for!(RigidBody))),
+        (
+            "RigidBody2D".into(),
+            json!(schemars::schema_for!(RigidBody)),
+        ),
+        (
+            "Collider2D".into(),
+            json!(schemars::schema_for!(Collider2D)),
+        ),
+        (
+            "AngularVelocity2D".into(),
+            json!(schemars::schema_for!(AngularVelocity2D)),
+        ),
         ("Collider".into(), json!(schemars::schema_for!(Collider))),
         (
             "AngularVelocity".into(),
