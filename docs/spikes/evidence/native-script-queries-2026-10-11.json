@@ -200,5 +200,37 @@
     "Only raycasts are migrated; shape casts, character controllers and trigger bindings remain separate work.",
     "Capability slots and guest arguments/results allocate; no allocation-free claim.",
     "World/solver is moved, never cloned, and no project representation is read during ticks."
-  ]
+  ],
+  "integration": {
+    "tested_commit": "fd349ed",
+    "ordinary_release_tests_doctests": 553,
+    "ignored_gpu_tests": 66,
+    "workspace_all_targets_release_clippy": true,
+    "gpu_player_all_targets_release_clippy": true,
+    "python_tools_tests": 43,
+    "normal_dependency_roots": 6,
+    "renderer_implementation_changed": false,
+    "logs": {
+      "/tmp/incant-native-query-workspace-tests.log": {
+        "sha256": "c432f01fd139a4abab36443d74c42caca0654dc39850b700855549605a851e25",
+        "bytes": 108537
+      },
+      "/tmp/incant-native-query-workspace-clippy.log": {
+        "sha256": "73d7c8365dbff564c05550ca23bba1410644499eb551d0ef074db2b11b28846a",
+        "bytes": 15432
+      },
+      "/tmp/incant-native-query-player-clippy.log": {
+        "sha256": "f2af4dc4d8998ed35b51e4a5a97c3a9bb684fe609c8a1c1bfc29640ce9281062",
+        "bytes": 1396
+      },
+      "/tmp/incant-native-query-normal-graph.log": {
+        "sha256": "519747b1373149c234dfaf044f0234541fefea32af284f33e0c05a4085b1999c",
+        "bytes": 194
+      },
+      "/tmp/incant-native-query-tools.log": {
+        "sha256": "9a29f340924e4b8127919d51d2d1016a736b3f888c20585a33981c7ae8726768",
+        "bytes": 7519
+      }
+    }
+  }
 }

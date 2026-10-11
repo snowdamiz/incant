@@ -63,3 +63,8 @@ Actual local player: **4,074,184 bytes**, aarch64 macOS, SHA-256
 arm64 dSYM UUID `9bae028c-2630-3e7d-a638-3a979eb84bd6`.
 Raw package, symbols and logs: `/tmp/incant-native-raycast-shipping/`.
 [Source identities, review and complete observations](evidence/native-script-queries-2026-10-11.json).
+
+The integrated branch also passes **553 ordinary workspace release tests and
+doctests**, workspace and GPU-player all-target Clippy, the six-root normal
+dependency guard, and 43 Python tool tests. The 66 ignored GPU tests were not
+rerun for this query-only change; the renderer implementation is unchanged.

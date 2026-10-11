@@ -16,7 +16,7 @@ visual work, and Astra owns correctness and integration.
 
 | Workstream | Current result | Next work / boundary |
 | --- | --- | --- |
-| Editor and sprite authoring | [PR #61](https://github.com/snowdamiz/incant/pull/61) combines the final plain UI, typed atlas/audio imports, focus fixes and the corrected sprite/atlas baseline. 524 UI tests, strict TypeScript, production and native builds pass. | Exact-head hosted checks and isolated native Claude acceptance are running. [Evidence](docs/spikes/editor-release-union.md). |
+| Editor and sprite authoring | [PR #61](https://github.com/snowdamiz/incant/pull/61) combines the final plain UI, typed atlas/audio imports, focus fixes and the corrected sprite/atlas baseline. Merged into main after all 17 hosted checks passed. | Claude native acceptance passed the five requested UI requirements; reimport no-op feedback is being corrected separately. [Evidence](docs/spikes/editor-release-union.md). |
 | Native game and rendering | Input, embedded QuickJS, native physics, scene audio and retained GPU submission compose through one accepted-tick lifecycle. Binary v5 sprites share immutable geometry. | [PR #62](https://github.com/snowdamiz/incant/pull/62) is in hosted verification. Native editor/legacy Play migration, complete SDK, shader pipeline work and device budgets remain. |
 | Native window player | A separate implementation branch adds real surface presentation, keyboard/mouse input, suspension and device audio. Local source-free lifecycle tests pass. | Independent review/CI and Claude native acceptance precede integration. No phone or frame-budget claim. |
 | Native WebAssembly | Shared bounded capability ABI serves development Wasmtime and compiled wasm2c modules; local conformance and a source-free macOS executable pass. | Hosted verification, optimized Windows/MSVC support, full SDK/game composition and device execution continue separately. |
@@ -88,7 +88,7 @@ review; concurrent native reviews coordinate foreground ownership.
   [Development host](docs/spikes/development-wasm-host.md),
   [static host](docs/spikes/shipping-wasm2c.md).
 
-Local integration checks: 543 ordinary Rust release tests/doctests; 138 scoped
+Local integration checks: 553 ordinary Rust release tests/doctests; 138 scoped
 static/development-Wasm/runtime/script tests; workspace and optional-host release
 Clippy; 529 UI tests, strict TypeScript and production build; 43 Python tool tests.
 The renderer's unchanged frozen implementation separately passed all 66 actual
@@ -100,8 +100,9 @@ conformance, browser-target physics compilation and six native parity streams.
 [Correction evidence](docs/spikes/runtime-ci-corrections.md). A subsequent Linux
 C11 trap-link failure now has a reproduced POSIX declaration fix; the Windows
 Camera accessibility test is split into its six independent scans with unchanged
-coverage and bounded asynchronous cleanup. Both corrections pass local checks
-and await the next hosted run.
+coverage and bounded asynchronous cleanup. Both corrections pass local checks. Corrected hosted Linux and Windows physics
+and all three Wasm conformance jobs pass; the remaining PR #62 jobs are still
+running or queued.
 
 ## Remaining engineering requirements
 
