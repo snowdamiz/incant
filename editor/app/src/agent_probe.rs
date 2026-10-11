@@ -45,7 +45,8 @@ fn require(ok: bool, error: &'static str) -> Result<(), &'static str> {
 }
 fn read(app: &tauri::AppHandle) -> Result<Value, &'static str> {
     serde_json::to_value(
-        agent::engine_agent_read(app.state(), None).map_err(|_| "agent read failed")?,
+        tauri::async_runtime::block_on(agent::engine_agent_read(app.state(), None))
+            .map_err(|_| "agent read failed")?,
     )
     .map_err(|_| "agent read serialization failed")
 }
@@ -105,14 +106,14 @@ fn turn(
     prompt: String,
     expected: &str,
 ) -> Result<Value, &'static str> {
-    let id = agent::engine_agent_start(
+    let id = tauri::async_runtime::block_on(agent::engine_agent_start(
         app.state(),
         TurnRequest {
             prompt,
             model: options.model.clone(),
             approval: ApprovalChoice::Always,
         },
-    )
+    ))
     .map_err(|_| "agent start failed")?;
     let result = (|| {
         let deadline = Instant::now() + Duration::from_secs(180);
@@ -213,11 +214,19 @@ fn run(app: &tauri::AppHandle, editor: &Editor, options: &Options) -> Result<Val
         "probe fixture is already modified",
     )?;
     if options.restore_only {
+        let restored = read(app)?;
+        require(
+            restored["session"]["worker_running"] == false,
+            "reopen unexpectedly started a worker",
+        )?;
         return Ok(
             json!({"passed":true,"saved_account_restored":true,"provider_turns":0,
-            "journal_after_undo":journal_state(editor)?}),
+            "journal_after_undo":journal_state(editor)?,
+            "budget_after_undo":restored["session"]["budget"],
+            "accounting_uncertain":restored["session"]["accounting_uncertain"]}),
         );
     }
+    let initial_budget = read(app)?["session"]["budget"].clone();
     let nonce = ulid::Ulid::new().to_string();
     let first = turn(
         app,
@@ -290,10 +299,24 @@ fn run(app: &tauri::AppHandle, editor: &Editor, options: &Options) -> Result<Val
             .any(|v| v["observed_stream_before_completion"] == true),
         "no live stream was observed",
     )?;
+    let after_undo = read(app)?;
+    let charged: u64 = [&first, &second, &third, &fourth]
+        .iter()
+        .map(|value| value["charged_tokens"].as_u64().unwrap_or(0))
+        .sum();
+    require(
+        after_undo["session"]["budget"]["used_tokens"].as_u64()
+            == initial_budget["used_tokens"]
+                .as_u64()
+                .and_then(|used| used.checked_add(charged)),
+        "Undo changed consumption accounting",
+    )?;
     Ok(
         json!({"passed":true,"platform":std::env::consts::OS,"turns":[first,second,third,fourth],
         "native_handler_calls":true,"saved_account_restored":true,"agent_provenance":true,"undo_restored_document":true,
         "native_play_retained_across_turns":true,"play_preserved_authoring":true,"journal_after_undo":journal_state(editor)?,
+        "budget_before":initial_budget,"budget_after_undo":after_undo["session"]["budget"],
+        "accounting_uncertain":after_undo["session"]["accounting_uncertain"],
         "limitations":["Local live account and numerical native handler acceptance; not rendered-pixel or WebView IPC dispatch evidence","Not a model quality evaluation, physical-device measurement or phase gate"]}),
     )
 }

@@ -1,5 +1,6 @@
 //! Native editor agent transport. Credentials and provider calls stay on the
 //! worker; authoring edits use the editor's existing bus and journal.
+mod budget;
 mod owner;
 #[cfg(test)]
 mod tests;
@@ -60,21 +61,41 @@ impl Service {
             closed: Mutex::new(false),
         }
     }
+    #[cfg(test)]
     fn start(
         &self,
         request: TurnRequest,
         ready: impl FnOnce() -> Result<Connection, Error>,
         job: impl FnOnce(TurnContext, Connection, owner::Client) -> TurnOutcome + Send + 'static,
     ) -> Result<TurnId, Error> {
+        self.start_with(
+            request,
+            None,
+            || ready().map(|connection| (connection, ())),
+            job,
+        )
+    }
+    fn start_with<Guard>(
+        &self,
+        request: TurnRequest,
+        durable: Option<(incant_agent::ledger::Ledger, u64)>,
+        ready: impl FnOnce() -> Result<(Connection, Guard), Error>,
+        job: impl FnOnce(TurnContext, Connection, owner::Client) -> TurnOutcome + Send + 'static,
+    ) -> Result<TurnId, Error> {
         let closed = self.closed.lock().map_err(|_| Error::unavailable())?;
         if *closed {
             return Err(Error::unavailable());
         }
-        let connection = ready()?;
+        let (connection, _scope_guard) = ready()?;
         let owner = self.owner.client();
-        self.session
-            .start(request, move |turn| job(turn, connection, owner))
-            .map_err(Into::into)
+        let work = move |turn| job(turn, connection, owner);
+        match durable {
+            Some((ledger, max_tokens)) => self
+                .session
+                .start_durable(request, ledger, max_tokens, work),
+            None => self.session.start(request, work),
+        }
+        .map_err(Into::into)
     }
     fn cancel_active(&self) {
         if let Ok(snapshot) = self.session.snapshot()
@@ -127,7 +148,7 @@ impl From<SessionError> for Error {
             ),
             SessionError::Budget => (
                 "agent.budget",
-                "The agent session token allowance is exhausted.",
+                "The project's agent token allowance is exhausted.",
             ),
             _ => return Self::unavailable(),
         };
@@ -156,34 +177,45 @@ fn read(
     })
 }
 #[tauri::command]
-pub(super) fn engine_agent_read(
+pub(super) async fn engine_agent_read(
     state: tauri::State<'_, Arc<super::Editor>>,
     after_version: Option<u64>,
 ) -> Result<Read, Error> {
-    read(&state.agent, &state.bus, after_version)
+    let state = state.inner().clone();
+    tauri::async_runtime::spawn_blocking(move || {
+        budget::restore(&state.agent, &state.bus, incant_agent::ledger::Ledger::open)?;
+        read(&state.agent, &state.bus, after_version)
+    })
+    .await
+    .map_err(|_| Error::unavailable())?
 }
 #[tauri::command]
-pub(super) fn engine_agent_start(
+pub(super) async fn engine_agent_start(
     state: tauri::State<'_, Arc<super::Editor>>,
     request: TurnRequest,
 ) -> Result<TurnId, Error> {
+    let state = state.inner().clone();
+    tauri::async_runtime::spawn_blocking(move || start_persistent(&state, request))
+        .await
+        .map_err(|_| Error::unavailable())?
+}
+fn start_persistent(state: &Arc<super::Editor>, request: TurnRequest) -> Result<TurnId, Error> {
+    let scope = budget::Scope::read(&state.bus)?;
+    let ledger = incant_agent::ledger::Ledger::open(&scope.project_id)?;
     let bus = state.bus.clone();
     let root = state.asset_root.clone();
-    state.agent.start(
+    let worker_scope = scope.clone();
+    state.agent.start_with(
         request,
+        Some((ledger, scope.max_tokens)),
         || {
             let connection = state.provider.connection().ok_or_else(Error::unavailable)?;
-            if !matches!(
-                &*state.bus.lock().map_err(|_| Error::unavailable())?,
-                super::project::LoadState::Ready(_)
-            ) {
-                return Err(Error::unavailable());
-            }
-            Ok(connection)
+            let guard = scope.guard(&state.bus)?;
+            Ok((connection, guard))
         },
         move |turn, connection, owner| {
             owner.run(turn, move |state, turn| {
-                worker::run(turn, connection, state, bus, root)
+                worker::run(turn, connection, state, bus, root, worker_scope)
             })
         },
     )

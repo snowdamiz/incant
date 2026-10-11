@@ -1,3 +1,5 @@
+#[cfg(test)]
+mod tests;
 use super::{Connection, Context, ContextKey};
 use incant_agent::{
     Agent, AgentError, EngineHost, ProjectHost,
@@ -16,6 +18,7 @@ pub(super) fn run(
     state: &mut State,
     bus: Arc<Mutex<crate::project::LoadState>>,
     root: Option<PathBuf>,
+    expected: super::budget::Scope,
 ) -> TurnOutcome {
     let result = (|| {
         if turn
@@ -24,6 +27,7 @@ pub(super) fn run(
         {
             return Err(AgentError::Interrupted);
         }
+        expected.check_agent(&bus)?;
         let store = AccountStore::open()?;
         if Connection::from_store(&store).as_ref() != Some(&connection) {
             return Err(AgentError::Provider("The active account changed".into()));
@@ -33,12 +37,13 @@ pub(super) fn run(
         Ok((selection, provider))
     })();
     match result {
-        Ok((selection, mut provider)) => state.run_with(
+        Ok((selection, mut provider)) => state.run_with_scope(
             turn,
             ContextKey::Account(selection),
             bus,
             root,
             &mut provider,
+            Some(expected),
         ),
         Err(error) => TurnOutcome {
             budget: turn.budget,
@@ -62,6 +67,7 @@ pub(super) struct State {
     context: Context,
 }
 impl State {
+    #[cfg(test)]
     pub(super) fn run_with(
         &mut self,
         turn: TurnContext,
@@ -69,6 +75,17 @@ impl State {
         bus: Arc<Mutex<crate::project::LoadState>>,
         root: Option<PathBuf>,
         provider: &mut dyn Provider,
+    ) -> TurnOutcome {
+        self.run_with_scope(turn, selection, bus, root, provider, None)
+    }
+    fn run_with_scope(
+        &mut self,
+        turn: TurnContext,
+        selection: ContextKey,
+        bus: Arc<Mutex<crate::project::LoadState>>,
+        root: Option<PathBuf>,
+        provider: &mut dyn Provider,
+        expected: Option<super::budget::Scope>,
     ) -> TurnOutcome {
         let mut agent = Agent {
             budget: turn.budget.clone(),
@@ -82,6 +99,9 @@ impl State {
                 .load(std::sync::atomic::Ordering::Acquire)
             {
                 return Err(AgentError::Interrupted);
+            }
+            if let Some(expected) = &expected {
+                expected.check_agent(&bus)?;
             }
             // Project identity is read without retaining the authoring lock.
             let project_id = match &*bus.lock().map_err(|_| AgentError::ProjectUnavailable)? {
@@ -112,6 +132,7 @@ impl State {
                 inner: provider,
                 bus: &bus,
                 project_id: &self.scope.as_ref().expect("prepared scope").project_id,
+                budget_scope: expected.as_ref(),
             };
             provider.check_active()?;
             execute(
@@ -136,6 +157,7 @@ struct BoundProvider<'a> {
     inner: &'a mut dyn Provider,
     bus: &'a Mutex<crate::project::LoadState>,
     project_id: &'a str,
+    budget_scope: Option<&'a super::budget::Scope>,
 }
 impl Provider for BoundProvider<'_> {
     fn check_active(&self) -> Result<(), AgentError> {
@@ -145,7 +167,17 @@ impl Provider for BoundProvider<'_> {
             .lock()
             .map_err(|_| AgentError::ProjectUnavailable)?
         {
-            crate::project::LoadState::Ready(bus) if bus.project().id == self.project_id => Ok(()),
+            crate::project::LoadState::Ready(bus) if bus.project().id == self.project_id => {
+                if let Some(scope) = self.budget_scope {
+                    if bus.project().id != scope.project_id {
+                        return Err(AgentError::ProjectChanged);
+                    }
+                    if bus.project().settings.agent_budget.max_tokens != scope.max_tokens {
+                        return Err(AgentError::Budget);
+                    }
+                }
+                Ok(())
+            }
             crate::project::LoadState::Ready(_) => Err(AgentError::ProjectChanged),
             _ => Err(AgentError::ProjectUnavailable),
         }

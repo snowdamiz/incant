@@ -37,11 +37,12 @@ remain underway. No completed Phase 3 gate is claimed.
 
 ## Per-project agent budget — in progress
 
-The separate per-project usage ledger foundation passes 94 agent tests and
-independent review, including real subprocess locking and interrupted-turn
-reservation recovery. It is not yet wired to native admission or budget controls;
-the current editor allowance still resets with its session. Typed project-cap
-commands, durable admission, UI and native reopen acceptance remain in progress.
+Typed user-authored caps, the durable usage ledger and Session accounting are
+now connected to native admission and reads. Usage survives new service instances,
+cap changes and account changes without being part of Undo. Independent reviews
+closed cancellation and cap-installation races. Bridge controls, Claude-owned UI
+and fresh native/live reopen acceptance remain in progress; the earlier live
+handler evidence predates this ledger integration.
 [Budget accounting evidence](docs/spikes/agent-project-budget.md).
 
 ## Agent conversation context — locally verified

@@ -55,6 +55,12 @@ def main():
     history = first.get('journal_after_undo')
     require(isinstance(history, dict) and history.get('redo') == 2, 'Expected agent Undo history is absent')
     require(reopened.get('journal_after_undo') == history, 'Fresh editor did not recover the same journal revision and transaction IDs')
+    usage = first.get('budget_after_undo')
+    require(isinstance(usage, dict) and usage.get('used_tokens', 0) > 0,
+            'Durable project usage was not measured')
+    require(reopened.get('budget_after_undo') == usage
+            and reopened.get('accounting_uncertain') is False,
+            'Fresh editor did not recover exact project usage')
     require(inputs == {name: digest(output / name) for name in inputs}, 'Reopen changed saved project or source bytes')
     evidence = {'passed': True, 'live': first, 'reopen': reopened, 'authored_sha256': inputs,
                 'editor_sha256': digest(editor), 'headless_sha256': digest(headless),
@@ -62,6 +68,7 @@ def main():
                 'fixture_authored_through_incant_cmd': True,
                 'saved_project_and_sources_unchanged': True,
                 'journal_revision_and_transaction_ids_recovered': True,
+                'project_usage_recovered_after_undo_and_reopen': True,
                 'scope': 'Local real provider/native handler acceptance, not WebView dispatch, rendered pixels or a phase gate'}
     (output / 'result.json').write_text(json.dumps(evidence, indent=2) + '\n')
     print(json.dumps({'passed': True, 'evidence': str(output / 'result.json')}))
