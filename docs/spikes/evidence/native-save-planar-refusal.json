@@ -1,0 +1,17 @@
+{
+  "base": "b1fd8f052b841302c602b7981e7a3b63efb3d54f",
+  "rust_profile": "release",
+  "runtime_tests": 102,
+  "groups": 16,
+  "all_target_clippy": true,
+  "reproduced_before_fix": true,
+  "logs_sha256": {
+    "/tmp/incant-native-save-2d-red.log": "1785ed833e368a9edc3a2b199e430ffd55e49c35220d6dd23d544628e75caac8",
+    "/tmp/incant-native-save-2d-green.log": "4657b5dee9100a31b7490bde62eb84507db311006a3a04c566be7c1b9f87724c",
+    "/tmp/incant-native-save-2d-clippy.log": "dd79b7468533682d2496c76676536d3948c2f3acdb88ad3518ba230953e1986b"
+  },
+  "source_sha256": {
+    "crates/incant_runtime/src/save.rs": "fe0f3ab1702ba5c67a22b85ec03eb837cc920d8b1b05ee8b20c581a558e52005",
+    "crates/incant_runtime/tests/saves.rs": "068e1dbb91f54cde26f63edae5a1b9e5b878c35cd72bbb0a6144a78e0d69ff20"
+  }
+}
