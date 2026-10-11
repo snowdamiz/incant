@@ -25,19 +25,21 @@ def wrapper(module, imports):
     # Parameter order comes from the pinned translator's actual declaration, not
     # import encounter order or an assumed module-name sort.
     if isinstance(imports, bool): imports = ['w2c_incant__v1'] if imports else []
-    fields = {'w2c_incant__v1': 'imports', 'w2c_incant__input__v1': 'input'}
+    fields = {'w2c_incant__v1': 'imports', 'w2c_incant__input__v1': 'input',
+              'w2c_incant__flipbook__v1': 'flipbook'}
     if any(name not in fields for name in imports): raise ValueError('Unsupported translated import namespace')
     instantiate = f'wasm2c_{module}_instantiate(&p->guest' + ''.join(', &p->'+fields[name] for name in imports) + ');'
     return f'''#include "{module}.h"
 #include "imports.h"
 #include <stdlib.h>
-typedef struct {{ w2c_{module} guest; struct w2c_incant__v1 imports; struct w2c_incant__input__v1 input; }} Instance;
+typedef struct {{ w2c_{module} guest; struct w2c_incant__v1 imports; struct w2c_incant__input__v1 input; struct w2c_incant__flipbook__v1 flipbook; }} Instance;
 int32_t incant_{module}_create(incant_import callback,void* context,void** output) {{
   *output=NULL;
   Instance* p=calloc(1,sizeof(Instance));
   if(!p) return -1;
   p->imports=(struct w2c_incant__v1){{callback,context,w2c_{module}_memory(&p->guest)}};
   p->input.core=p->imports;
+  p->flipbook.core=p->imports;
   wasm_rt_init();
   /* setjmp target and every potentially trapping guest frame stay in C. */
   int32_t status=0;
@@ -49,6 +51,7 @@ int32_t incant_{module}_create(incant_import callback,void* context,void** outpu
   g_wasm_rt_jmp_buf.initialized=false;
   p->imports.callback=NULL; p->imports.context=NULL;
   p->input.core.callback=NULL; p->input.core.context=NULL;
+  p->flipbook.core.callback=NULL; p->flipbook.core.context=NULL;
   if(status) {{ wasm2c_{module}_free(&p->guest); free(p); return status; }}
   *output=p; return 0;
 }}
@@ -56,6 +59,7 @@ int32_t incant_{module}_update(void* instance,incant_import callback,void* conte
   Instance* p=instance;
   p->imports.callback=callback; p->imports.context=context;
   p->input.core.callback=callback; p->input.core.context=context;
+  p->flipbook.core.callback=callback; p->flipbook.core.context=context;
   *w2c_{module}_incant_private_fuel(&p->guest)=10000000;
   int32_t status=0;
   incant_trap_prepare();
@@ -64,6 +68,7 @@ int32_t incant_{module}_update(void* instance,incant_import callback,void* conte
   g_wasm_rt_jmp_buf.initialized=false;
   p->imports.callback=NULL; p->imports.context=NULL;
   p->input.core.callback=NULL; p->input.core.context=NULL;
+  p->flipbook.core.callback=NULL; p->flipbook.core.context=NULL;
   return status;
 }}
 void incant_{module}_free(void* instance) {{ Instance* p=instance; wasm2c_{module}_free(&p->guest); free(p); }}

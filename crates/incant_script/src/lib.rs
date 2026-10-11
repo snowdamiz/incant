@@ -8,6 +8,7 @@ mod compiled;
 #[cfg(feature = "compiler")]
 mod compiler;
 mod diagnostics;
+mod flipbooks;
 mod input;
 mod loan;
 mod logging;
@@ -81,7 +82,7 @@ pub enum ScriptError {
 /// private, compiler-produced bytecode. Ticks borrow real numeric ECS columns;
 /// they neither parse code nor serialize project/component values.
 ///
-/// This native host exposes `update({chunks, dt, commands, input, physics, clock, timers, log})`. Each chunk has stable
+/// This native host exposes `update({chunks, dt, commands, input, physics, clock, timers, log, flipbooks})`. Each chunk has stable
 /// ID strings, Transform stride 10, and optional Velocity stride 3. Views are
 /// detached on every exit. A failed callback restores its component writes and
 /// permanently fails this host. Tick-local structural commands apply only after
@@ -101,6 +102,7 @@ pub struct ScriptHost {
     deadline: Arc<Mutex<budget::ExecutionBudget>>,
     schedule: schedule::Schedule,
     logs: NativeLogs,
+    flipbooks: flipbooks::Scratch,
     failed: bool,
 }
 
@@ -136,6 +138,7 @@ impl ScriptHost {
             deadline,
             schedule: schedule::Schedule::default(),
             logs: NativeLogs::default(),
+            flipbooks: flipbooks::Scratch::default(),
             failed: false,
         })
     }
@@ -177,6 +180,10 @@ impl ScriptHost {
             .reset()?;
         self.synchronous.reset();
         let result = self.context.with(|ctx| {
+            self.flipbooks.capture(world)?;
+            let flipbooks = self.flipbooks.expose(&ctx).map_err(|error| {
+                diagnostics::javascript(&ctx, error, "flipbook snapshot", &self.deadline)
+            })?;
             let (mut schedule, events) = self.schedule.advance(dt)?;
             let logs = logging::TickLogs::default();
             let log_api = logs.expose(&ctx).map_err(|error| {
@@ -235,6 +242,7 @@ impl ScriptHost {
                         rquickjs::function::Flat((chunks, dt, api, input, physics, clock)),
                         timer_api,
                         log_api,
+                        flipbooks,
                     ));
                     commands.revoke();
                     queries.revoke();

@@ -15,6 +15,25 @@ fn invoke(mut caller: Caller<'_, State>, epoch: i64, call: Call) -> Result<i32> 
 }
 pub fn install(linker: &mut Linker<State>) -> Result<()> {
     linker.func_wrap(
+        "incant_flipbook_v1",
+        "snapshot_len",
+        |c: Caller<'_, State>, e: i64| invoke(c, e, Call::FlipbookLen),
+    )?;
+    linker.func_wrap(
+        "incant_flipbook_v1",
+        "read_snapshot",
+        |c: Caller<'_, State>, e: i64, ptr: i32, capacity: i32| {
+            invoke(c, e, Call::ReadFlipbooks { ptr, capacity })
+        },
+    )?;
+    linker.func_wrap(
+        "incant_flipbook_v1",
+        "control",
+        |c: Caller<'_, State>, e: i64, id: i32, kind: i32, frame: i32| {
+            invoke(c, e, Call::ControlFlipbook { id, kind, frame }).map(|_| ())
+        },
+    )?;
+    linker.func_wrap(
         "incant_input_v1",
         "snapshot_len",
         |c: Caller<'_, State>, e: i64| invoke(c, e, Call::InputLen),
