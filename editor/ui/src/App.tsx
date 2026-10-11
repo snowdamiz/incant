@@ -5,7 +5,7 @@ import { PROVIDER_FIXTURE_NAMES } from './bridge/providerFixture';
 import { UI_PROTOCOL_VERSION } from './bridge/contract';
 import { AssetsProvider } from './assets/AssetsContext';
 import { AccountDialog } from './components/AccountDialog';
-import { AgentPanel, agentReady } from './components/AgentPanel';
+import { AgentPanel, agentPaneResizable } from './components/AgentPanel';
 import { BottomDock } from './components/BottomDock';
 import { HierarchyPanel } from './components/HierarchyPanel';
 import { InspectorPanel } from './components/inspector/InspectorPanel';
@@ -197,9 +197,9 @@ function Workbench() {
   const resize = (patch: Partial<Layout>) =>
     setLayout((current) => clampLayout({ ...current, ...patch }, window.innerWidth, window.innerHeight));
 
-  // Only an open, ready agent (transcript and composer) is a resizable pane. Otherwise the
-  // pane is as tall as its content: one status line, or a short note with its next step.
-  const agentResizable = agentOpen && agentReady(snapshot?.agent?.status);
+  // An open agent that is ready, or that holds turns from its session, is a resizable pane.
+  // Otherwise the pane is as tall as its content: one status line, or a short note.
+  const agentResizable = agentOpen && agentPaneResizable(snapshot);
 
   const columns = [
     panels.hierarchy ? `${layout.left}px var(--splitter-size)` : '',

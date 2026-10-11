@@ -302,14 +302,41 @@ count every entry, and a list that fits one page shows no pager at all.
 
 ## Agent pane
 
-The header is a disclosure: chevron, wisp mark, "Agent", and a status with a dot
-(Ready, Working…, Signing in…, Sign-in problem, Unavailable, Not signed in, No engine).
+The header is a disclosure: chevron, wisp mark, "Agent", and a status (Ready, Starting…,
+Working…, Needs approval, Stopping…, Finishing…, Signing in…, Sign-in problem,
+Unavailable, Not signed in, No engine). Work in progress shows the small spinner in place
+of the dot; "Needs approval" is a steady amber dot. Files: `components/AgentPanel.tsx`,
+`components/agent/`, `styles/agent.css`.
 
-- **Ready:** transcript (one line: "Describe a change. Every edit lands in History and
-  can be undone.") and composer, in a resizable pane.
-- **Cannot run:** one sentence (why, or the host's reason) and its single next step.
-  A reason that names an internal milestone is shown in plain words ("The agent is not
-  available in the editor yet.") without a sign-in invitation that would not help.
+- **Conversation.** The native session's turns (`snapshot.agentSession`), oldest first,
+  divided by hairlines. A turn is the prompt (the one filled block, so a conversation
+  scans by request; past 8 lines it clamps with Show all), the reply exactly as streamed
+  (plain text, never markup), one quiet line per decided approval, and how it ended: a
+  failure sentence after the error icon, then Stopped, the edits ("No edits" only when
+  the report says so), the allowance charged ("(estimated)" when the provider did not
+  confirm it, "Token use unknown" when nothing was charged) and Show in History. A send
+  adds nothing until the session lists its turn. The allowance used is the last line.
+  The conversation is a log but not a live region: approval requests and outcomes are
+  said once in the status line, streamed text never. It follows new output only while
+  the reader is at its end; otherwise a floating Latest returns there.
+- **Approvals.** A bordered card at the end of its turn: the request as a question read
+  from the exact arguments ("Apply 4 changes to the project?"), the agent's own
+  description in quotes, one row per operation marked like a diff (+ add, − remove,
+  ~ change, ! unreadable), the exact arguments on request (wrapped, 64 KB until Show
+  all) and Deny / Allow in a footer that sticks to the bottom of a short pane, where the
+  question is kept in view. Untrusted names are isolated; hidden direction characters
+  are shown as escapes. Nothing is focused or decided by itself; after a decision its
+  row takes focus.
+- **Composer.** One line that grows with the text; then the model (monospace, editable,
+  default gpt-6-astra; no model list is invented), the approval mode (Ask before edits,
+  Ask every time, Never ask in amber) and one action: Send, Stop while a turn can be
+  cancelled, or a spinner while sending, stopping or finishing. It is one element, so
+  focus stays on it, and the draft stays editable while the agent works.
+- **Cannot run:** one sentence (why, or the host's reason) and its single next step
+  (Continue with ChatGPT, the account dialog, or Retry after a transport failure). Turns
+  the session still holds stay readable above it. A reason that names an internal
+  milestone is shown in plain words ("The agent is not available in the editor yet.")
+  without a sign-in invitation that would not help.
 - **Collapsed:** the 36 px status line. A window shorter than 720 px starts collapsed.
 
 ## Dialogs

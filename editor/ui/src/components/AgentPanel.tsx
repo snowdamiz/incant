@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useSyncExternalStore } from 'react';
 import type { FocusEvent, MouseEvent } from 'react';
-import type { AgentApprovalMode, AgentPendingApproval, AgentTurnSnapshot } from '../bridge/contract';
+import type { AgentApprovalMode, AgentPendingApproval, AgentTurnSnapshot, BridgeSnapshot } from '../bridge/contract';
 import { unavailableMessage } from '../bridge/resolve';
 import { Icon } from '../icons/Icon';
 import { WispMark } from '../icons/WispMark';
@@ -32,6 +32,11 @@ import {
 /** True when the agent can take or is working on a request, so the composer is useful. */
 export function agentReady(status: string | undefined): boolean {
   return status === 'idle' || status === 'running';
+}
+
+/** The pane gets a separator when it has a conversation to read or the agent is ready. */
+export function agentPaneResizable(snapshot: BridgeSnapshot | null): boolean {
+  return agentReady(snapshot?.agent?.status) || (snapshot?.agentSession?.turns.length ?? 0) > 0;
 }
 
 /**
@@ -314,9 +319,9 @@ export function AgentPanel({ open, onToggle }: { open: boolean; onToggle: () => 
 
   const composerShown = phase !== 'unavailable';
   const transcriptShown = composerShown || turns.length > 0;
-  // Mirrors App: only an open, ready agent is a resizable pane. Otherwise the pane is as
-  // tall as its content, so held turns above a note scroll within a bounded height.
-  const capped = transcriptShown && !(open && agentReady(agent?.status));
+  // Mirrors App: a pane without a separator is as tall as its content, so held turns
+  // above a note scroll within a bounded height.
+  const capped = transcriptShown && !(open && agentPaneResizable(snapshot));
 
   const sendCombo = comboText(['Mod', 'Enter'], platform);
   const action: ComposerAction = (() => {
