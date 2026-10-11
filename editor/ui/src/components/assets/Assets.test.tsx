@@ -87,6 +87,47 @@ async function expectNoAxeViolations(container: HTMLElement) {
 }
 
 describe('asset library', () => {
+  it('recovers focus to the reset import path after a successful keyboard submission', async () => {
+    const host = controlledBridge();
+    renderWith(host.bridge);
+    openAssets();
+    openImport();
+    await waitFor(() => expect(document.activeElement).toBe(pathInput(1)));
+    fireEvent.change(pathInput(1), { target: { value: 'sprites/ui.atlas.json' } });
+    fireEvent.submit(pathInput(1).closest('form')!);
+    await host.resolve({ ok: true });
+    await waitFor(() => expect(document.activeElement).toBe(pathInput(1)));
+    expect(pathInput(1)).toHaveProperty('value', '');
+  });
+
+  it.each([true, false])('recovers reimport focus after completion (success=%s)', async (success) => {
+    const host = controlledBridge();
+    renderWith(host.bridge);
+    openAssets();
+    fireEvent.click(screen.getByRole('option', { name: /^crate Model/ }));
+    const button = screen.getByRole('button', { name: 'Reimport' });
+    button.focus();
+    fireEvent.click(button);
+    await host.resolve(success ? { ok: true } : { ok: false, error: { code: 'asset.import', message: 'Missing source' } });
+    await waitFor(() => expect(document.activeElement).toBe(screen.getByRole('heading', { name: 'crate' })));
+  });
+
+  it('does not steal focus when the user moves away during an import', async () => {
+    const host = controlledBridge();
+    renderWith(host.bridge);
+    openAssets();
+    openImport();
+    await waitFor(() => expect(document.activeElement).toBe(pathInput(1)));
+    fireEvent.change(pathInput(1), { target: { value: 'audio/theme.wav' } });
+    fireEvent.submit(pathInput(1).closest('form')!);
+    const history = screen.getByRole('tab', { name: /^History/ });
+    history.focus();
+    fireEvent.click(history);
+    await host.resolve({ ok: true });
+    await new Promise((resolve) => window.setTimeout(resolve, 10));
+    expect(document.activeElement).toBe(history);
+  });
+
   it('reveals a hidden Inspector when importing or opening an asset, and restores the list on Escape', async () => {
     renderWith(controlledBridge().bridge);
     openAssets();

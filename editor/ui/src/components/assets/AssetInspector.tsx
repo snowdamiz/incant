@@ -83,6 +83,18 @@ function scrollPaneTop() {
   document.getElementById('asset-inspector')?.closest('.panel__scroll')?.scrollTo?.({ top: 0 });
 }
 
+/** Recover a removed action/path only while its pane still owns the lost focus. */
+function recoverImportFocus(origin: Element | null, scope: Element | null, mode: 'details' | 'import') {
+  if (!origin || !scope?.contains(origin)) return () => {};
+  return () => window.setTimeout(() => {
+    if (!scope.isConnected || origin.isConnected || document.activeElement !== document.body) return;
+    const target = mode === 'import'
+      ? scope.querySelector<HTMLElement>('.import-row__input')
+      : document.getElementById(TITLE_ID);
+    target?.focus();
+  }, 0);
+}
+
 /** Escape anywhere in the Inspector (its header included) returns to the asset list row. */
 export function useAssetEscape() {
   const { showPanel } = useShell();
@@ -285,10 +297,11 @@ function AssetDetails({ asset, availability }: { asset: ProjectAsset; availabili
               className="button button--primary button--small"
               aria-disabled={blocked || undefined}
               aria-describedby={`reimport-note-${asset.id}`}
-              onClick={() => {
+              onClick={(event) => {
                 if (blocked) return;
+                const recover = recoverImportFocus(document.activeElement, event.currentTarget.closest('.asset-details'), 'details');
                 // The result note is at the top of the Inspector; bring it into view when done.
-                void reimport(asset).then(scrollPaneTop);
+                void reimport(asset).then(() => { scrollPaneTop(); recover(); });
               }}
             >
               <Icon name="reimport" size={14} />
@@ -348,6 +361,7 @@ function ImportForm({ assets }: { assets: readonly ProjectAsset[] }) {
       focusRow(first.key);
       return;
     }
+    const recover = recoverImportFocus(document.activeElement, event.currentTarget, 'import');
     const ok = await importDraft();
     // The result is shown at the top of the form; bring it into view.
     scrollPaneTop();
@@ -355,6 +369,7 @@ function ImportForm({ assets }: { assets: readonly ProjectAsset[] }) {
       setAttempted(false);
       setVisited(new Set());
     }
+    recover();
   };
 
   const onPaste = (row: DraftRow) => (event: ClipboardEvent<HTMLInputElement>) => {
