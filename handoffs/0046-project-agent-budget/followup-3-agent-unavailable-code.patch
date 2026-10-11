@@ -1,0 +1,164 @@
+diff --git a/editor/bridge/contract.ts b/editor/bridge/contract.ts
+index c92a65e..3aff66b 100644
+--- a/editor/bridge/contract.ts
++++ b/editor/bridge/contract.ts
+@@ -238,10 +238,17 @@ export type ProviderState = (
+ };
+
+ export type AgentState =
+-  | { readonly status: 'unavailable'; readonly reason: string }
++  | { readonly status: 'unavailable'; readonly reason: string; readonly code?: AgentUnavailableCode }
+   | { readonly status: 'idle' }
+   | { readonly status: 'running'; readonly conversation: string };
+
++/**
++ * Why the agent cannot take a request, for hosts that say. `refreshing` is a short hold
++ * while the session is re-read after an account, allowance or history change. Older and
++ * fixture hosts omit it; the UI then infers what it can.
++ */
++export type AgentUnavailableCode = 'loading' | 'signed-out' | 'refreshing' | 'transport' | 'unread' | 'exhausted';
++
+ /** Native session metadata. Provider credentials/configuration never cross this boundary. */
+ export type AgentApprovalMode = 'auto' | 'destructive' | 'always';
+ export type AgentTurnStatus = 'running' | 'awaiting_approval' | 'stopping' | 'completed' | 'cancelled' | 'failed';
+diff --git a/editor/bridge/native.budget.test.ts b/editor/bridge/native.budget.test.ts
+index 74d9b66..0c85944 100644
+--- a/editor/bridge/native.budget.test.ts
++++ b/editor/bridge/native.budget.test.ts
+@@ -392,6 +392,26 @@ describe('native project agent budget', () => {
+     expect(JSON.stringify(bridge.getSnapshot())).not.toContain('secret');
+   });
+
++  it('names why the agent is held: refreshing through a cap edit, exhausted after it, signed out', async () => {
++    let engine = project(100);
++    let current = session(100, 40);
++    const write = deferred<EngineRead>();
++    const bridge = await ready(async <T>(name: string) => {
++      if (name === 'engine_read') return engine as T;
++      if (name === 'engine_execute') return await write.promise as T;
++      return wire(current, engine.revision) as T;
++    });
++    expect(bridge.getSnapshot().agent).toEqual({ status: 'idle' });
++    const editing = bridge.dispatch({ type: 'agent.budget.set', maxTokens: 10 });
++    expect(bridge.getSnapshot().agent).toMatchObject({ status: 'unavailable', code: 'refreshing' });
++    engine = project(10, 8); current = session(10, 40, 2);
++    write.resolve(engine);
++    expect(await editing).toEqual({ ok: true });
++    expect(bridge.getSnapshot().agent).toEqual({ status: 'unavailable', code: 'exhausted', reason: 'The project’s agent token allowance is used up.' });
++    bridge.updateProvider({ status: 'not-connected', provider: 'openai' });
++    expect(bridge.getSnapshot().agent).toMatchObject({ status: 'unavailable', code: 'signed-out' });
++  });
++
+   it('preserves independently measured usage through account changes', async () => {
+     let current = session(100, 75);
+     const bridge = await ready(async <T>(name: string) => (name === 'engine_read' ? project() : wire(current)) as T);
+diff --git a/editor/bridge/native.generated.js b/editor/bridge/native.generated.js
+index 93f98cd..b1f5e35 100644
+--- a/editor/bridge/native.generated.js
++++ b/editor/bridge/native.generated.js
+@@ -928,27 +928,33 @@ class NativeBridge {
+         };
+         if (!this.read) return {
+             status: 'unavailable',
+-            reason: 'Wait for the project to load.'
++            reason: 'Wait for the project to load.',
++            code: 'loading'
+         };
+         if (this.providerIsPending() || this.provider.status !== 'connected') return {
+             status: 'unavailable',
+-            reason: 'Connect an OpenAI account to use the agent.'
++            reason: 'Connect an OpenAI account to use the agent.',
++            code: this.providerIsPending() ? 'refreshing' : 'signed-out'
+         };
+         if (this.agentError) return {
+             status: 'unavailable',
+-            reason: this.agentError.message
++            reason: this.agentError.message,
++            code: 'transport'
+         };
+         if (!this.agentSession) return {
+             status: 'unavailable',
+-            reason: 'The native agent session has not been read yet.'
++            reason: 'The native agent session has not been read yet.',
++            code: 'unread'
+         };
+         if (!this.agentVerified || !this.agentBudgetReady()) return {
+             status: 'unavailable',
+-            reason: 'The agent session has not caught up with a recent account or project change.'
++            reason: 'The agent session has not caught up with a recent account or project change.',
++            code: 'refreshing'
+         };
+         if (this.agentSession.budget.used_tokens >= this.agentSession.budget.max_tokens) return {
+             status: 'unavailable',
+-            reason: this.exhaustedReason()
++            reason: this.exhaustedReason(),
++            code: 'exhausted'
+         };
+         return {
+             status: 'idle'
+diff --git a/editor/bridge/native.ts b/editor/bridge/native.ts
+index 490f3e2..816f167 100644
+--- a/editor/bridge/native.ts
++++ b/editor/bridge/native.ts
+@@ -697,12 +697,12 @@ export class NativeBridge implements EditorBridge {
+   }
+   private agentState(): AgentState {
+     if (this.agentNeedsPoll()) return { status: 'running', conversation: String(this.agentReserved ?? this.agentSession?.turns.at(-1)?.id ?? 'starting') };
+-    if (!this.read) return { status: 'unavailable', reason: 'Wait for the project to load.' };
+-    if (this.providerIsPending() || this.provider.status !== 'connected') return { status: 'unavailable', reason: 'Connect an OpenAI account to use the agent.' };
+-    if (this.agentError) return { status: 'unavailable', reason: this.agentError.message };
+-    if (!this.agentSession) return { status: 'unavailable', reason: 'The native agent session has not been read yet.' };
+-    if (!this.agentVerified || !this.agentBudgetReady()) return { status: 'unavailable', reason: 'The agent session has not caught up with a recent account or project change.' };
+-    if (this.agentSession.budget.used_tokens >= this.agentSession.budget.max_tokens) return { status: 'unavailable', reason: this.exhaustedReason() };
++    if (!this.read) return { status: 'unavailable', reason: 'Wait for the project to load.', code: 'loading' };
++    if (this.providerIsPending() || this.provider.status !== 'connected') return { status: 'unavailable', reason: 'Connect an OpenAI account to use the agent.', code: this.providerIsPending() ? 'refreshing' : 'signed-out' };
++    if (this.agentError) return { status: 'unavailable', reason: this.agentError.message, code: 'transport' };
++    if (!this.agentSession) return { status: 'unavailable', reason: 'The native agent session has not been read yet.', code: 'unread' };
++    if (!this.agentVerified || !this.agentBudgetReady()) return { status: 'unavailable', reason: 'The agent session has not caught up with a recent account or project change.', code: 'refreshing' };
++    if (this.agentSession.budget.used_tokens >= this.agentSession.budget.max_tokens) return { status: 'unavailable', reason: this.exhaustedReason(), code: 'exhausted' };
+     return { status: 'idle' };
+   }
+   /** Scoped to where the allowance belongs: the project's authored cap, or an older host's session. */
+diff --git a/editor/ui/src/components/AgentPanel.tsx b/editor/ui/src/components/AgentPanel.tsx
+index 014056d..95af133 100644
+--- a/editor/ui/src/components/AgentPanel.tsx
++++ b/editor/ui/src/components/AgentPanel.tsx
+@@ -45,12 +45,13 @@ export function agentPaneResizable(snapshot: BridgeSnapshot | null): boolean {
+ /**
+  * The host holds new requests only while it re-reads the agent session after a change
+  * (an allowance edit, Undo or Redo, an account read): signed in, no transport error, a
+- * session to read and allowance left. The contract has no reason code for it, so it is
+- * recognised by what is absent. It normally lasts one read; the pane keeps the composer
+- * and says "Updating…" instead of swapping in a note and back.
++ * session to read and allowance left. A host that names why it is unavailable is
++ * believed; for older hosts it is recognised by what is absent. It normally lasts one
++ * read; the pane keeps the composer and says "Updating…" instead of swapping in a note.
+  */
+ export function agentRefreshing(snapshot: BridgeSnapshot | null): boolean {
+   if (!snapshot || snapshot.agent.status !== 'unavailable' || isNotInEditorReason(snapshot.agent.reason)) return false;
++  if (snapshot.agent.code !== undefined && snapshot.agent.code !== 'refreshing') return false;
+   if (snapshot.provider.status !== 'connected' || snapshot.agentError || !snapshot.agentSession) return false;
+   const allowance = allowanceOf(snapshot);
+   return allowance !== null && !allowance.exhausted;
+diff --git a/editor/ui/src/components/agent/AgentAllowance.test.tsx b/editor/ui/src/components/agent/AgentAllowance.test.tsx
+index 642c791..6ad1e5a 100644
+--- a/editor/ui/src/components/agent/AgentAllowance.test.tsx
++++ b/editor/ui/src/components/agent/AgentAllowance.test.tsx
+@@ -512,6 +512,17 @@ describe('While the agent applies a change', () => {
+     expect(host.commands).toEqual([{ type: 'agent.budget.set', maxTokens: 300_000 }]);
+   });
+
++  it('believes a host that names why the agent is unavailable', () => {
++    const reason = 'The native agent session has not been read yet.';
++    const host = allowanceHost({ budget: 250_000, session: session(6_532, 250_000), agent: { status: 'unavailable', reason, code: 'unread' } });
++    expect(header()).toBe('Unavailable');
++    expect(within(pane()).getByText(reason)).toBeTruthy();
++    expect(screen.queryByLabelText('Message to the agent')).toBeNull();
++    host.update({ agent: { status: 'unavailable', reason: REFRESH_REASON, code: 'refreshing' } });
++    expect(header()).toBe('Updating…');
++    expect(screen.getByLabelText('Message to the agent')).toBeTruthy();
++  });
++
+   it('keeps a successful save when the session refresh after it fails', async () => {
+     const refresh = vi.fn(() => Promise.resolve());
+     const reply = deferred<BridgeResult>();
