@@ -31,6 +31,8 @@ Revision 6 uses hosted real phones in AWS Device Farm; do not request phone
 purchases, name clearance or package reservations. Store accounts and distribution
 signing first gate Phase 5 uploads. Record the actual device model/OS and matched
 baseline for performance results; simulator builds do not satisfy those gates.
+Revision 7 removes calendar dates. Do not add target dates, phase durations or
+ship-date targets; exit gates alone measure progress.
 
 Astra owns nonvisual implementation and integration. Claude Opus 5.5 through ACP,
 with thinking explicitly set to Max for every new or resumed session, owns

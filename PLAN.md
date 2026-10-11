@@ -3,8 +3,8 @@
 Engine name: **Incant** (decided 2026-10-08; the shortlist it was chosen from is in Appendix D).
 Launch game: **Driftwake** (decided 2026-10-10).
 
-Plan author: Claude, for Andrey Yurlov. Date: 2026-10-08. Revision 2 (same day): renamed engine, added agent-first execution model and Claude ACP visual handoff. Revision 3 (2026-10-09): filled the networking and online-services gaps: transport and service rows in 2.1 and 2.2, Phase 6 rewritten, Sections 6.8 and 6.10, additions to Phases 5, 7, 8 and 9, risks, metrics, budget, open decisions 10 to 17, and network entries in Appendices A to C. The same revision filled engine gaps (navigation, 2D, text and localization, lighting for runtime-assembled content, gameplay analytics, Steam Deck and video playback, editor versioning, haptics), recorded the decided stack rows (Rapier, Loro, canonical JSON, React) and the dispositions of open decisions 1 to 9, and re-baselined the timeline at the top of Section 5. Revision 4 (2026-10-10): added script and shader performance requirements: a bulk query API for scripts, build-time script bytecode, a per-frame script budget enforced on the reference phones, and offline shader compilation with pipeline caching and pre-warming. The same revision adopted the performance architecture by director instruction: a native runtime data path separate from authoring (2.6), WebAssembly modules as a native-speed script tier, physics determinism as a per-project mode, temporal upscaling with dynamic resolution and native backend interop, a shipping build profile, per-PR performance gates, browser-native scripts on the web, per-scene CRDT documents at 100,000-entity scale, a Physics workstream (6.14), a competitive benchmark against Unity and Godot, and open decisions 18 and 19. ADRs 0002, 0003, 0006 and 0008 were updated to match in revision 5. Revision 5 (2026-10-10): resolved every open decision by director instruction, so Section 12 is now a decision record followed by the human-owned actions that remain; corrected the physics determinism description against Rapier 0.36's feature contract and the CRDT benchmark summary; chose wasm2c for shipped WebAssembly modules; and added the business model (1.4), Driftwake pricing, marketing and support (7.6), external reviews, license auditing and a community role. Revision 6 (2026-10-10): removed name clearance and package reservations, moved store accounts and signing certificates from Phase 0 to Phase 5 store uploads, and replaced reference-phone purchases with hosted real devices in AWS Device Farm.
-Planning horizon: 36 months, starting November 2026, ending with a shipped game in Q4 2029.
+Plan author: Claude, for Andrey Yurlov. Date: 2026-10-08. Revision 2 (same day): renamed engine, added agent-first execution model and Claude ACP visual handoff. Revision 3 (2026-10-09): filled the networking and online-services gaps: transport and service rows in 2.1 and 2.2, Phase 6 rewritten, Sections 6.8 and 6.10, additions to Phases 5, 7, 8 and 9, risks, metrics, budget, open decisions 10 to 17, and network entries in Appendices A to C. The same revision filled engine gaps (navigation, 2D, text and localization, lighting for runtime-assembled content, gameplay analytics, Steam Deck and video playback, editor versioning, haptics), recorded the decided stack rows (Rapier, Loro, canonical JSON, React) and the dispositions of open decisions 1 to 9, and re-baselined the timeline at the top of Section 5. Revision 4 (2026-10-10): added script and shader performance requirements: a bulk query API for scripts, build-time script bytecode, a per-frame script budget enforced on the reference phones, and offline shader compilation with pipeline caching and pre-warming. The same revision adopted the performance architecture by director instruction: a native runtime data path separate from authoring (2.6), WebAssembly modules as a native-speed script tier, physics determinism as a per-project mode, temporal upscaling with dynamic resolution and native backend interop, a shipping build profile, per-PR performance gates, browser-native scripts on the web, per-scene CRDT documents at 100,000-entity scale, a Physics workstream (6.14), a competitive benchmark against Unity and Godot, and open decisions 18 and 19. ADRs 0002, 0003, 0006 and 0008 were updated to match in revision 5. Revision 5 (2026-10-10): resolved every open decision by director instruction, so Section 12 is now a decision record followed by the human-owned actions that remain; corrected the physics determinism description against Rapier 0.36's feature contract and the CRDT benchmark summary; chose wasm2c for shipped WebAssembly modules; and added the business model (1.4), Driftwake pricing, marketing and support (7.6), external reviews, license auditing and a community role. Revision 6 (2026-10-10): removed name clearance and package reservations, moved store accounts and signing certificates from Phase 0 to Phase 5 store uploads, and replaced reference-phone purchases with hosted real devices in AWS Device Farm. Revision 7 (2026-10-10): removed calendar windows, phase durations, the timeline chart and the ship-date target by director instruction; phases advance only through their exit gates.
+Scope: from the engine foundation to Driftwake live on three stores and Engine 1.0 released. The plan sets no calendar dates; exit gates alone mark progress.
 
 ---
 
@@ -14,13 +14,13 @@ Planning horizon: 36 months, starting November 2026, ending with a shipped game 
 2. Section 2 is the technical architecture: stack, repo layout, and the data model everything hangs on.
 3. Section 3 covers accounts, login, and the OpenAI integration requirement in detail.
 4. Section 4 is the execution model and team: which AI agents build what, the hard rule that routes visual work to Claude 5.5 over ACP, and the small human team around them.
-5. Section 5 is the phase-by-phase timeline with deliverables and exit gates.
+5. Section 5 lists the phases with their deliverables and exit gates.
 6. Section 6 details each engineering workstream.
 7. Section 7 is the game production plan.
 8. Sections 8 through 12 cover QA, risks, metrics, budget, and the decision record.
 9. Appendices contain the agent tool surface spec, the document schema sketch, and a glossary.
 
-Every phase has an **exit gate**. Do not start the next phase until the gate passes. Gates are the only real schedule control in a project this size.
+Every phase has an **exit gate**. Do not start the next phase until the gate passes. Gates are the only progress control; the plan sets no calendar dates or durations.
 
 Director decision, 2026-10-08: begin Phase 1 while the remaining Phase 0 gate
 items stay explicitly open. The director also instructed: “next time dont ask,
@@ -59,6 +59,11 @@ certificates, so no Apple developer account is needed for them.
 Director decision, 2026-10-10: use Claude Opus 5.5 with thinking explicitly set
 to Max for all visual handoffs. Verify model and effort on every new or resumed
 ACP session; do not inherit Default or substitute another level.
+
+Director decision, 2026-10-10: remove calendar target dates, phase durations and
+the ship-date target. Agents build far faster than a human-paced calendar, so
+dates are neither forecasts nor limits. A phase is complete when its exit gate
+passes; human-owned actions are tied to the gates that need them.
 
 ---
 
@@ -358,10 +363,10 @@ Repository files that make this work:
 
 The agents do the building. Humans direct, review, and do what agents cannot.
 
-| Role | Year 1 | Year 2 | Year 3 | Notes |
+| Role | Phases 0–1 | Phases 2–6 | Phases 7–9 | Notes |
 |---|---|---|---|---|
 | Director, product, architecture approvals | 1 | 1 | 1 | Andrey |
-| Senior graphics reviewer | 0.5 | 1 | 1 | Reviews rendering PRs and Claude look-dev results; part-time in Year 1 |
+| Senior graphics reviewer | 0.5 | 1 | 1 | Reviews rendering PRs and Claude look-dev results; part-time through Phase 1 |
 | Platform and release engineer | 0 | 1 | 1 | Store accounts, signing, certification, device lab ownership |
 | Game designer | 0 | 1 | 2 | Owns Driftwake's design document and playtests |
 | QA and device lab | 0 | 1 | 2 | Physical devices, store-submission dry runs |
@@ -376,23 +381,21 @@ The agents do the building. Humans direct, review, and do what agents cannot.
 - Weekly the director reviews the handoff log, eval results, and friction logs, and resolves any routing disputes.
 - Agents never self-approve a routing exception. Ambiguity defaults to the split pattern.
 - Both agents dogfood the product. Astra and Claude build Driftwake content through the in-engine agent wherever possible, which is what the provenance metric measures.
-- Agent-first execution runs around the clock and parallelizes by crate, so the 36-month schedule in Section 5 is conservative. Phases 1 through 4 may compress. Phases 5 and 9 will not, because they are bound by physical device testing and store review times.
+- Agent-first execution runs around the clock and parallelizes by crate; phases advance as fast as their exit gates pass, not on a calendar. Hosted device testing, store review and human-owned actions are the external dependencies agents cannot shorten.
 
 ---
 
-## 5. Phases and timeline
+## 5. Phases
 
-Start: November 2026 in the original baseline; actual start 2026-10-08. Durations overlap deliberately. Each phase lists goals, deliverables, and the exit gate.
+Work began on 2026-10-08. Phases overlap where their dependencies allow. Each phase lists goals, deliverables, and the exit gate. The plan sets no calendar windows or durations: agents build continuously, a phase starts when the director authorizes it, and it is complete when its exit gate passes. [STATUS.md](STATUS.md) records current progress.
 
-Baseline (revision 3, 2026-10-09): the dates in the phase headings and in 5.1 are the original human-paced baseline and remain upper bounds. Under the agent-first model the Phase 0 spikes were completed within days of 2026-10-08, and the director authorized Phase 1 with the Phase 0 gate items still open. Phase windows are now driven by exit gates rather than calendar months: a phase starts when the previous gate review authorizes it, and each gate review re-baselines the next window from measured progress and records it in this table. The Q4 2029 shipped-game target stands until a gate review moves it.
+| Phase | Started | Status |
+|---|---|---|
+| 0 | 2026-10-08 | Spikes done; gate open: staffing, nightly history, live revocation, director approval |
+| 1 | 2026-10-08 | In progress |
+| 2 to 9 | — | Not started |
 
-| Phase | Baseline window | Actual start | Status on 2026-10-09 |
-|---|---|---|---|
-| 0 | Nov 2026 to Jan 2027 | 2026-10-08 | Spikes done; gate open: staffing, nightly history, live revocation, director approval |
-| 1 | Feb to Sep 2027 | 2026-10-08 | In progress: import and cook pipeline, physics, character movement, input, saves and headless assertions landed |
-| 2 to 9 | As listed below | Not started | Re-baseline at the Phase 1 gate review |
-
-### Phase 0: Foundation (Nov 2026 to Jan 2027, 3 months)
+### Phase 0: Foundation
 
 Goals: lock architecture, prove the riskiest assumptions, stand up infrastructure.
 
@@ -405,7 +408,7 @@ Deliverables:
 - Spike 5: OAuth loopback flow with OpenAI on all three desktop OSes, plus API-key fallback, with keychain storage.
 - Spike 6: Handoff tooling. Astra opens an ACP session to Claude Code using the director's logged-in account, hands off a mock visual task (design the hierarchy panel and return screenshots), and receives the result packet. `AGENTS.md`, `CLAUDE.md`, and `tools/handoff` exist and are used for every spike after this one.
 - Monorepo and CI on all six targets building a hello-world. Signing certificates and store developer accounts are not Phase 0 requirements (director decision, 2026-10-10); Phase 5 needs them for store uploads.
-- Director, part-time graphics reviewer, and contract arrangements in place for Year 1.
+- Director, part-time graphics reviewer, and contract arrangements in place for Phases 0 and 1.
 
 Exit gate:
 - All six spikes pass with written results.
@@ -422,7 +425,7 @@ interactive logins there. Retain the macOS live-account and native-review eviden
 CI results must state which behavior was exercised, without claiming manual or
 live-account validation. This change does not waive other phase gates.
 
-### Phase 1: Core engine (Feb 2027 to Sep 2027, 8 months)
+### Phase 1: Core engine
 
 Goals: a runtime that can run a real 3D game without an editor.
 
@@ -459,7 +462,7 @@ Exit gate:
 - Core Sample runs on the runtime data path: the shipped binary passes the dependency test, and its scripts never serialize world state per tick.
 - A WebAssembly gameplay module runs on all four devices, compiled ahead of time on the iPhone, and its per-frame cost on both phones is recorded against the same system written in TypeScript.
 
-### Phase 2: Editor and document model (May 2027 to Feb 2028, 10 months, overlaps Phase 1)
+### Phase 2: Editor and document model (overlaps Phase 1)
 
 Goals: a usable editor built entirely on the command bus.
 
@@ -485,7 +488,7 @@ Exit gate:
 - Undo/redo passes a fuzz test of ten thousand random command sequences with document equality checks.
 - The 2D platformer template is rebuilt from an empty project through the editor alone and plays with tilemap collision, sprite animation and a following camera.
 
-### Phase 3: AI layer (Sep 2027 to Jun 2028, 10 months, overlaps Phase 2)
+### Phase 3: AI layer (overlaps Phase 2)
 
 Goals: the agent is a genuine second user of the editor.
 
@@ -505,7 +508,7 @@ Exit gate:
 - A tester with an OpenAI account and no engine experience builds a playable prototype with one custom mechanic in under fifteen minutes, in five of five attempts.
 - No critical findings from the red-team pass remain open.
 
-### Phase 4: Content creation tools (Jan 2028 to Oct 2028, 10 months)
+### Phase 4: Content creation tools
 
 Goals: modeling and look-dev without leaving the engine.
 
@@ -528,7 +531,7 @@ Exit gate:
 - Agent eval extended with fifty content tasks, pass rate at or above 70%.
 - A room graph of ten templates assembled at runtime shows no visible lighting seams in Claude's review at mobile and desktop tiers.
 
-### Phase 5: Platforms and export (Jun 2028 to Jan 2029, 8 months)
+### Phase 5: Platforms and export
 
 Goals: one-click builds that pass store review.
 
@@ -552,11 +555,11 @@ Exit gate:
 - Core Sample ships to TestFlight, Google Play internal testing, and a private Steam app, from CI, with no manual steps beyond pressing a button.
 - Cold start under three seconds on an iPhone 13 and under five seconds on a Pixel 6.
 
-### Phase 6: Networking and online services (Sep 2028 to Mar 2029, 7 months)
+### Phase 6: Networking and online services
 
 Goals: multiplayer in the box, the services needed to run it, and Driftwake's co-op built on them.
 
-Scheduling note: Phase 7 needs two-player co-op by Dec 2028, so transport, replication and the relay come first and may start as early as Jun 2028 alongside Phase 5, which Section 4.6 allows. Service hardening and live-operations readiness continue into Phase 8 (Section 6.10).
+Ordering note: Phase 7 needs two-player co-op, so transport, replication and the relay come first and may start alongside Phase 5, which Section 4.6 allows. Service hardening and live-operations readiness continue into Phase 8 (Section 6.10).
 
 Deliverables, transport and sessions:
 - Transport: QUIC via quinn on native targets (encryption, congestion control, reliable streams, unreliable datagrams, connection migration across network changes); WebRTC data channels with a signaling endpoint in the sessions service for browser builds. A custom UDP reliability layer over a Noise handshake is the fallback. Every endpoint is dual-stack; IPv6-only networks are a test case because Apple requires them to work.
@@ -600,7 +603,7 @@ Exit gate:
 - Sessions, relay and player services pass a load test at twice the Phase 8 projected launch concurrency in one region, and a self-hosting run from the documentation on a clean machine works without any Incant credentials.
 - Determinism CI passes on all four reference device classes, or the plan records which architecture classes rollback cross-play is limited to.
 
-### Phase 7: Driftwake vertical slice (Oct 2028 to Mar 2029, 6 months, overlaps 5 and 6)
+### Phase 7: Driftwake vertical slice (overlaps 5 and 6)
 
 Goals: prove the engine can make the game and set the production bar.
 
@@ -619,7 +622,7 @@ Exit gate:
 - Agent provenance share at or above 50% of gameplay scripts and scene edits.
 - Engine friction log has no open blockers.
 
-### Phase 8: Engine 1.0 and Driftwake production (Apr 2029 to Sep 2029, 6 months)
+### Phase 8: Engine 1.0 and Driftwake production
 
 Goals: harden the engine, build the rest of the game.
 
@@ -640,13 +643,13 @@ Game deliverables:
 - Localization into six languages on the Phase 1 string tables (drafted through the localization skill, human reviewed).
 - Audio: full music and SFX pass.
 - Accessibility: remappable controls, colorblind modes, text scaling, subtitles, verified by an external accessibility audit before Phase 9.
-- Playable demo in the June 2029 Steam Next Fest.
+- Playable demo in a Steam Next Fest.
 
 Exit gate:
 - Content complete. Alpha milestone: all systems in, all content in rough form.
 - Engine 1.0 RC has no P0 or P1 bugs open.
 
-### Phase 9: Polish, certification, launch (Oct 2029 to Dec 2029, 3 months)
+### Phase 9: Polish, certification, launch
 
 Deliverables:
 - Beta: external playtest with five hundred players, balance and bug passes.
@@ -662,33 +665,9 @@ Exit gate (project done):
 - Engine 1.0 downloadable with signed installers.
 - Definition-of-done metrics in Section 1.3 all verified and published.
 
-### 5.1 Timeline summary
+### 5.1 Scope held for 1.0
 
-The chart shows the original baseline; the table at the top of Section 5 records actual starts.
-
-```
-2026  N D | 2027  J F M A M J J A S O N D | 2028  J F M A M J J A S O N D | 2029  J F M A M J J A S O N D
-P0    ███ |
-P1        |   ████████████████            |
-P2        |         ████████████████████  | ██
-P3        |                 ████████████  | ██████████
-P4        |                               | ████████████████████
-P5        |                               |           ████████████████  | ██
-P6        |                               |                 ██████████  | ██████
-P7        |                               |                   ████████  | ██████
-P8        |                               |                             |       ████████████
-P9        |                               |                             |                   ██████
-```
-
-### 5.2 Acceleration options
-
-- Doubling the Year 1 team cuts roughly six months, mostly from Phases 1 and 2, because they are parallelizable by subsystem.
-- Dropping the browser mode from 1.0 saves three months of editor and WASM work.
-- Dropping hardware ray tracing and screen-space GI saves two months of rendering work.
-- Dropping the 2D pipeline from 1.0 saves about two months and removes the 2D platformer and top-down templates.
-- Choosing a 2D game instead of 3D co-op would cut the game production by half but would fail to exercise most of the engine. Not recommended.
-
-Decision: none of these is adopted (decision 27). Browser mode, 2D, screen-space GI and hardware ray tracing stay in 1.0; the agent-first compression in Section 4.6 is the acceleration plan.
+Browser mode, the 2D pipeline, screen-space GI and hardware ray tracing all stay in 1.0 (decision 27). Driftwake stays a 3D co-op game, because a 2D game would leave most of the engine unexercised. Agent-first execution (Section 4.6), not scope reduction, is how the project moves fast.
 
 ---
 
@@ -740,7 +719,7 @@ Each workstream lists its human owner (the reviewer accountable for it), its fir
 
 ### 6.8 Networking
 - Owner: core engine engineer with netcode experience for the crate; the backend and live-operations engineer for the services (Section 6.10).
-- First milestone: transport, replication and relay working for two clients by Dec 2028 so Phase 7 co-op is not blocked; work may start in Jun 2028 alongside Phase 5.
+- First milestone: transport, replication and relay working for two clients before Phase 7 co-op needs them; work may start alongside Phase 5.
 - Choices: QUIC via quinn on native targets and WebRTC in browsers, custom UDP layer as fallback (decision 11). Authority with prediction and deterministic rollback share one replication layer; server-authoritative and host-authoritative are the same authority code in different places. Driftwake's recommended launch topology is host-authoritative over the relay (decision 10). Relay by default, direct connection opt-in. Deterministic physics step from Rapier's `enhanced-determinism` feature (ADR 0003) in projects that select rollback, or Jolt's deterministic mode if the backend changes; other projects keep the fast physics variant. Determinism toolkit in the TS SDK. Protocol versioning with a current-plus-previous compatibility window.
 - Tests: network simulation suite, desync detection on seeded bugs, determinism checksum CI across the four reference device classes, nightly soak with four bot clients for eight hours, protocol fuzzing, cross-version compatibility tests, mobile network-transition and backgrounding tests on the device farm, relay and sessions load tests, host migration and rejoin tests.
 
@@ -752,7 +731,7 @@ Each workstream lists its human owner (the reviewer accountable for it), its fir
 
 ### 6.10 Online services and live operations
 - Owner: backend and live-operations engineer (Section 4.5); the director is accountable until that role is staffed.
-- First milestone: sessions and relay deployed to one staging region before Phase 7 co-op testing begins (Dec 2028).
+- First milestone: sessions and relay deployed to one staging region before Phase 7 co-op testing begins.
 - Scope: the sessions, relay, player, analytics and allocator services from Phase 6, the accounts service from Section 3.2, and their production operation for Driftwake.
 
 Hosting and deployment:
@@ -832,14 +811,14 @@ A 3D co-op action roguelite exercises everything: 3D rendering on mobile and des
 
 ### 7.3 Production stages
 
-| Stage | Window | Team | Output |
+| Stage | Phase | Team | Output |
 |---|---|---|---|
-| Pre-production | Jun to Sep 2028 | 2 designers, 1 artist | GDD, paper prototypes, art bible, engine friction forecast |
-| Vertical slice | Oct 2028 to Mar 2029 | 4 | One biome, core loop, two characters, co-op for two |
-| Production | Apr to Sep 2029 | 8 | All content, all systems, alpha |
-| Polish and beta | Oct to Nov 2029 | 8 plus QA | Beta, balance, certification |
-| Launch | Dec 2029 | All | Live on three stores |
-| Post-launch | Q1 2030 | 4 | Two patches, engine 1.1 inputs |
+| Pre-production | Alongside Phases 5 and 6 | 2 designers, 1 artist | GDD, paper prototypes, art bible, engine friction forecast |
+| Vertical slice | Phase 7 | 4 | One biome, core loop, two characters, co-op for two |
+| Production | Phase 8 | 8 | All content, all systems, alpha |
+| Polish and beta | Phase 9 | 8 plus QA | Beta, balance, certification |
+| Launch | End of Phase 9 | All | Live on three stores |
+| Post-launch | After launch | 4 | Two patches, engine 1.1 inputs |
 
 ### 7.4 Dogfooding rules
 
@@ -860,7 +839,7 @@ A 3D co-op action roguelite exercises everything: 3D rendering on mobile and des
 
 - **Pricing (decision 21).** Desktop: premium at 19.99 USD on Steam, with a free demo. Mobile: free download with one non-consumable full-game unlock at 9.99 USD after the first biome. No ads, consumables, loot boxes or battle pass. Post-launch content patches are free. Purchases are per store; saves sync across stores through the player service, purchases do not.
 - **Repository.** Driftwake moves to its own private repository at the start of pre-production; Core Sample stays public in the engine repository.
-- **Marketing (decision 23).** Steam page with wishlists by the end of Phase 7; devlog and engine case-study posts from Phase 7; playable demo in the June 2029 Steam Next Fest; trailer, press kit and store art in Phase 9, with visual assets routed to Claude per Section 4.2. Wishlists are tracked weekly from the page launch.
+- **Marketing (decision 23).** Steam page with wishlists by the end of Phase 7; devlog and engine case-study posts from Phase 7; playable demo in a Steam Next Fest during Phase 8; trailer, press kit and store art in Phase 9, with visual assets routed to Claude per Section 4.2. Wishlists are tracked weekly from the page launch.
 - **Support and community (decision 24).** Engine: GitHub issues and Discussions plus a Discord server from the Phase 8 beta, triaged by agents with the community lead accountable. Driftwake: an in-game bug reporter that attaches logs only with consent and never personal data, a support address answered within two business days, and store review responses. The community lead moderates every channel.
 
 ---
@@ -882,7 +861,7 @@ A 3D co-op action roguelite exercises everything: 3D rendering on mobile and des
 | Risk | Likelihood | Impact | Mitigation |
 |---|---|---|---|
 | Scope explosion; "engine" is infinite | High | Fatal | Exit gates, explicit out-of-scope list (Nanite, full sculpting, visual scripting, skeletal 2D, isometric and hex tilemaps, crowd simulation, consoles, editor localization), game drives priorities |
-| Navigation, 2D and localization widen 1.0 scope | Medium | Medium | Each is bounded (no crowd simulation, no skeletal 2D, English-only editor); 2D is an acceleration-option drop; the Phase 1 and 2 gates measure them on Core Sample and the 2D template |
+| Navigation, 2D and localization widen 1.0 scope | Medium | Medium | Each is bounded (no crowd simulation, no skeletal 2D, English-only editor); 2D is separable if 1.0 scope must shrink; the Phase 1 and 2 gates measure them on Core Sample and the 2D template |
 | OpenAI OAuth not available to third parties when we need it | Medium | Medium | API key path is always available; abstraction supports other providers |
 | OpenAI changes pricing, models, or policy | High | Medium | Provider abstraction, model routing config updated with releases, evals across providers |
 | Tauri plus native viewport is flaky on some platform | Medium | High | Phase 0 spike; fallback to egui-native editor |
@@ -896,11 +875,11 @@ A 3D co-op action roguelite exercises everything: 3D rendering on mobile and des
 | Identity provider changes terms or pricing | Low | Medium | OpenID Connect-only integration; self-hosted Zitadel replacement with identity/session migration tests; game player identity never depends on it |
 | Open-sourcing invites forks or competing hosted services | Medium | Low | Forks are acceptable under the business model; the trademark policy protects the name; Incant Cloud competes on integration with the editor |
 | Shader and pipeline compilation causes gameplay stutter | High | Medium | Cook-time shader translation, persistent pipeline caches, per-level permutation pre-warming, hitch detector in CI |
-| Finding a senior graphics reviewer | Medium | Medium | Part-time or contract in Year 1; contribute to Bevy to build reputation |
+| Finding a senior graphics reviewer | Medium | Medium | Part-time or contract through Phase 1; contribute to Bevy to build reputation |
 | Bevy breaking changes | High | Medium | Pin versions, upgrade on a schedule, upstream fixes |
 | Store rejection for AI-generated content policies | Low | Medium | Track platform policies, attach provenance and licensing to all assets |
 | Prompt injection via shared projects or templates | Medium | High | Data labeling, sandboxed scripts, no shell access, red-team pass before each release |
-| Team burnout building engine and game simultaneously | High | High | Separate teams, honest scheduling, phase gates that allow slips without death marches |
+| Team burnout building engine and game simultaneously | High | High | Separate teams, gate-driven progress with no calendar deadlines, no death marches |
 | ACP adapter or Claude account limits stall visual work | Medium | Medium | Handoff packets are self-contained so the director can run Claude Code manually; batch non-urgent visual tasks per sprint |
 | Codex outages or task limits stall the primary builder | Medium | Medium | Codex CLI fallback on the director's machine; work queue lives in the repo so any agent session can resume it |
 | Two agents drift on conventions and style | High | Medium | Both instruction files generated from one conventions source; CI lint; Astra integrates every handoff and owns the final PR |
@@ -943,7 +922,7 @@ Tracked continuously from Phase 1 and reviewed at every phase review.
 
 Rough order of magnitude, for planning only. Reflects the agent-first execution model in Section 4.
 
-| Category | Year 1 | Year 2 | Year 3 | Total |
+| Category | Phases 0–1 | Phases 2–6 | Phases 7–9 | Total |
 |---|---|---|---|---|
 | Human salaries and contracts (1.5 / 6.5 / 10 heads) | 0.4M | 1.4M | 2.2M | 4.0M |
 | Build agents: Codex usage for Astra, Claude subscription for handoffs | 0.15M | 0.25M | 0.3M | 0.7M |
@@ -957,9 +936,9 @@ Rough order of magnitude, for planning only. Reflects the agent-first execution 
 | Contingency (15%) | 0.15M | 0.45M | 0.8M | 1.4M |
 | **Total** | **1.1M** | **3.4M** | **6.0M** | **10.5M** |
 
-Revision 3 added the live game services line and the backend and live-operations role, raising the total from 9.35M to 9.95M. Revision 5 added the community and developer relations role and the external reviews line, raising it to 10.5M. Post-launch service costs fall outside the 36-month horizon; the run-rate in Section 6.10 (fixed costs plus about a cent per relayed session-hour) is re-estimated from beta telemetry at the Phase 8 gate and funded from game revenue and Incant Cloud.
+Revision 3 added the live game services line and the backend and live-operations role, raising the total from 9.35M to 9.95M. Revision 5 added the community and developer relations role and the external reviews line, raising it to 10.5M. Post-launch service costs fall outside this estimate; the run-rate in Section 6.10 (fixed costs plus about a cent per relayed session-hour) is re-estimated from beta telemetry at the Phase 8 gate and funded from game revenue and Incant Cloud.
 
-Figures in USD. The build-agent line is the least certain; it depends on Codex and Claude pricing and limits over three years, and should be re-estimated at every phase gate from actual usage. For comparison, a fully human-staffed version of this plan (15, 29, and 36 heads) was estimated at roughly 23M.
+Figures in USD. Stage figures are upper bounds: spend scales with how long each stage actually takes and is re-estimated at every phase gate from actual usage. The build-agent line is the least certain; it depends on Codex and Claude pricing and limits. For comparison, a fully human-staffed version of this plan (15, 29, and 36 heads) was estimated at roughly 23M.
 
 ---
 
@@ -1000,17 +979,17 @@ Product, business and operations:
 
 21. **Driftwake pricing:** premium 19.99 USD on Steam with a free demo; free mobile download with one 9.99 USD full-game unlock after the first biome; no ads, consumables, loot boxes or battle pass (Section 7.6).
 22. **Asset generation providers:** images and texture sets through the user's OpenAI connection. For 3D, audio and animation, each phase ships the plugin with the highest output-validity pass rate in the eval harness whose terms allow commercial use of outputs and bring-your-own keys (ADR 0013).
-23. **Marketing timeline:** Steam page by the end of Phase 7, Next Fest demo in June 2029, launch campaign in Phase 9 (Section 7.6).
+23. **Marketing:** Steam page by the end of Phase 7, a Next Fest demo during Phase 8, launch campaign in Phase 9 (Section 7.6).
 24. **Support and community:** GitHub and Discord for the engine from the Phase 8 beta; in-game bug reporter and a two-business-day support address for Driftwake; one community lead accountable (Sections 4.5 and 7.6).
 25. **External reviews:** penetration tests before the Phase 8 beta and before launch, a netcode review at the Phase 6 gate, and an accessibility audit before Phase 9.
 26. **FBX conversion:** ufbx, MIT-licensed, so the Autodesk FBX SDK and its redistribution terms never enter the engine.
-27. **Acceleration options:** none adopted (Section 5.2).
+27. **Scope reductions:** none adopted (Section 5.1).
 
-Human-owned actions (tasks with deadlines, not decisions):
+Human-owned actions (tasks tied to the gates that need them, not decisions):
 
 - **Phase gate approvals:** the director, at each gate.
 - **Store accounts and signing, before Phase 5 store uploads:** Apple, Google and Steam developer accounts; Apple and Windows signing certificates.
-- **Staffing:** the Year 1 graphics reviewer and contracts, then the roles in Section 4.5 on their schedule.
+- **Staffing:** the graphics reviewer and contracts for Phases 0 and 1, then the roles in Section 4.5 as their phases begin.
 - **Cloud and identity accounts:** the AWS organization with billing before the first hosted device runs or Phase 2 cloud sync work, whichever comes first; the WorkOS account before Phase 2 cloud sync work.
 - **Vendor SDK licenses, before Phase 4 integration:** NVIDIA DLSS and Intel XeSS.
 - **External review contracts:** netcode review before the Phase 6 gate; penetration test and accessibility audit before the Phase 8 beta and Phase 9 respectively.
