@@ -1,0 +1,61 @@
+diff -ru a/editor/ui/src/App.tsx b/editor/ui/src/App.tsx
+--- a/editor/ui/src/App.tsx	2026-10-11 16:10:24
++++ b/editor/ui/src/App.tsx	2026-10-11 16:10:24
+@@ -5,7 +5,7 @@
+ import { UI_PROTOCOL_VERSION } from './bridge/contract';
+ import { AssetsProvider } from './assets/AssetsContext';
+ import { AccountDialog } from './components/AccountDialog';
+-import { AgentPanel, agentReady } from './components/AgentPanel';
++import { AgentPanel, agentPaneResizable } from './components/AgentPanel';
+ import { BottomDock } from './components/BottomDock';
+ import { HierarchyPanel } from './components/HierarchyPanel';
+ import { InspectorPanel } from './components/inspector/InspectorPanel';
+@@ -173,9 +173,9 @@
+   const resize = (patch: Partial<Layout>) =>
+     setLayout((current) => clampLayout({ ...current, ...patch }, window.innerWidth, window.innerHeight));
+ 
+-  // Only an open, ready agent (transcript and composer) is a resizable pane. Otherwise the
+-  // pane is as tall as its content: one status line, or a short note with its next step.
+-  const agentResizable = agentOpen && agentReady(snapshot?.agent?.status);
++  // An open agent that is ready, or that holds turns from its session, is a resizable pane.
++  // Otherwise the pane is as tall as its content: one status line, or a short note.
++  const agentResizable = agentOpen && agentPaneResizable(snapshot);
+ 
+   const columns = [
+     panels.hierarchy ? `${layout.left}px var(--splitter-size)` : '',
+diff -ru a/editor/ui/src/components/AgentPanel.tsx b/editor/ui/src/components/AgentPanel.tsx
+--- a/editor/ui/src/components/AgentPanel.tsx	2026-10-11 16:10:24
++++ b/editor/ui/src/components/AgentPanel.tsx	2026-10-11 16:10:24
+@@ -1,6 +1,6 @@
+ import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useSyncExternalStore } from 'react';
+ import type { FocusEvent, MouseEvent } from 'react';
+-import type { AgentApprovalMode, AgentPendingApproval, AgentTurnSnapshot } from '../bridge/contract';
++import type { AgentApprovalMode, AgentPendingApproval, AgentTurnSnapshot, BridgeSnapshot } from '../bridge/contract';
+ import { unavailableMessage } from '../bridge/resolve';
+ import { Icon } from '../icons/Icon';
+ import { WispMark } from '../icons/WispMark';
+@@ -34,6 +34,11 @@
+   return status === 'idle' || status === 'running';
+ }
+ 
++/** The pane gets a separator when it has a conversation to read or the agent is ready. */
++export function agentPaneResizable(snapshot: BridgeSnapshot | null): boolean {
++  return agentReady(snapshot?.agent?.status) || (snapshot?.agentSession?.turns.length ?? 0) > 0;
++}
++
+ /**
+  * The native bridge reports that the agent is not part of the editor yet: today in
+  * plain words, in earlier builds by naming an internal milestone (a headless command, a
+@@ -314,9 +319,9 @@
+ 
+   const composerShown = phase !== 'unavailable';
+   const transcriptShown = composerShown || turns.length > 0;
+-  // Mirrors App: only an open, ready agent is a resizable pane. Otherwise the pane is as
+-  // tall as its content, so held turns above a note scroll within a bounded height.
+-  const capped = transcriptShown && !(open && agentReady(agent?.status));
++  // Mirrors App: a pane without a separator is as tall as its content, so held turns
++  // above a note scroll within a bounded height.
++  const capped = transcriptShown && !(open && agentPaneResizable(snapshot));
+ 
+   const sendCombo = comboText(['Mod', 'Enter'], platform);
+   const action: ComposerAction = (() => {
