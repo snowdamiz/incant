@@ -106,4 +106,5 @@ acceptance; never claim the old binary proves the new code. Commit Built-by: cla
 
 ## Final immutable build and grants
 
-Pending Astra integration of0046 and0047. No native/process/provider grant yet.
+0046 and0047 are integrated. Pending0049 approval-readiness correction, final
+combined checks and immutable editor build. No native/process/provider grant yet.
