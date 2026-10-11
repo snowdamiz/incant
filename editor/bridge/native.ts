@@ -711,7 +711,7 @@ export class NativeBridge implements EditorBridge {
     return budget.status === 'unsupported' || budget.status === 'ready' && budget.maxTokens === this.agentSession?.budget.max_tokens;
   }
   private agentState(): AgentState {
-    if (this.agentNeedsPoll()) return { status: 'running', conversation: String(this.agentReserved ?? this.agentSession?.turns.at(-1)?.id ?? 'starting') };
+    if (this.agentNeedsPoll()) return { status: 'running', conversation: String(this.agentReserved ?? this.agentSession?.turns.at(-1)?.id ?? 'starting'), approvalReady: this.agentApprovalReady() };
     if (!this.read) return { status: 'unavailable', reason: 'Wait for the project to load.', code: 'loading' };
     if (this.providerIsPending() || this.provider.status !== 'connected') return { status: 'unavailable', reason: 'Connect an OpenAI account to use the agent.', code: this.providerIsPending() ? 'refreshing' : 'signed-out' };
     if (this.agentError) return { status: 'unavailable', reason: this.agentError.message, code: 'transport' };
@@ -719,6 +719,10 @@ export class NativeBridge implements EditorBridge {
     if (!this.agentVerified || !this.agentBudgetReady()) return { status: 'unavailable', reason: 'The agent session has not caught up with a recent account or project change.', code: 'refreshing' };
     if (this.agentSession.budget.used_tokens >= this.agentSession.budget.max_tokens) return { status: 'unavailable', reason: this.exhaustedReason(), code: 'exhausted' };
     return { status: 'idle' };
+  }
+  private agentApprovalReady(): boolean {
+    return Boolean(this.read && !this.providerIsPending() && this.provider.status === 'connected'
+      && !this.agentError && this.agentSession && this.agentVerified && this.agentBudgetReady());
   }
   /** Scoped to where the allowance belongs: the project's authored cap, or an older host's session. */
   private exhaustedReason(): string {
@@ -841,7 +845,7 @@ export class NativeBridge implements EditorBridge {
       if (current?.status === 'stopping' || this.agentCancelling.has(request.turnId)) return reject('agent.busy', 'This agent turn is already stopping.');
       this.agentCancelling.add(request.turnId);
     } else {
-      if (!this.read || this.providerIsPending() || this.provider.status !== 'connected' || this.agentError || !this.agentSession || !this.agentVerified || !this.agentBudgetReady())
+      if (!this.agentApprovalReady())
         return reject('agent.unavailable', 'Connect an OpenAI account and refresh the native session before deciding an approval.');
       if (!sequence(request.approvalId) || typeof request.approved !== 'boolean' || current?.status !== 'awaiting_approval'
         || current.pending?.turn !== request.turnId || current.pending.id !== request.approvalId

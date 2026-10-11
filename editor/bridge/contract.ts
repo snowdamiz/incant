@@ -240,7 +240,9 @@ export type ProviderState = (
 export type AgentState =
   | { readonly status: 'unavailable'; readonly reason: string; readonly code?: AgentUnavailableCode }
   | { readonly status: 'idle' }
-  | { readonly status: 'running'; readonly conversation: string };
+  | { readonly status: 'running'; readonly conversation: string;
+      /** Admission readiness is separate from worker activity; Stop stays available during refresh. */
+      readonly approvalReady?: boolean };
 
 /**
  * Why the agent cannot take a request, for hosts that say. `refreshing` is a short hold

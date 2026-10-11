@@ -205,7 +205,9 @@ describe('native project agent budget', () => {
       if (name === 'engine_execute') return await write.promise as T;
       return wire(current, engine.revision) as T;
     });
+    expect(bridge.getSnapshot().agent).toMatchObject({ status: 'running', approvalReady: true });
     const editing = bridge.dispatch({ type: 'agent.budget.set', maxTokens: 0 });
+    expect(bridge.getSnapshot().agent).toMatchObject({ status: 'running', approvalReady: false });
     await bridge.refreshAgent();
     calls.length = 0;
     expect(await bridge.request({ type: 'agent.approve', turnId: 1, approvalId: 5, approved: true })).toMatchObject({ ok: false, error: { code: 'agent.unavailable' } });
@@ -216,6 +218,7 @@ describe('native project agent budget', () => {
     expect(await editing).toEqual({ ok: true });
     expect(bridge.getSnapshot().projectAgentBudget?.maxTokens).toBe(0);
     expect(bridge.getSnapshot().agentSession?.budget).toEqual({ max_tokens: 100, used_tokens: 40 });
+    expect(bridge.getSnapshot().agent).toMatchObject({ status: 'running', approvalReady: false });
     expect(bridge.getSnapshot().agentSession?.turns[0]?.text).toBe('Review the edit.');
     calls.length = 0;
     expect(await bridge.request({ type: 'agent.approve', turnId: 1, approvalId: 5, approved: true })).toMatchObject({ ok: false, error: { code: 'agent.unavailable' } });
@@ -225,6 +228,47 @@ describe('native project agent budget', () => {
     await bridge.refreshAgent();
     expect(bridge.getSnapshot().agentSession?.budget).toEqual({ max_tokens: 0, used_tokens: 51 });
     expect(bridge.getSnapshot().agent.status).toBe('unavailable');
+  });
+
+  it.each(['history.undo', 'history.redo'] as const)('%s exposes approval admission through equal-cap history and session refresh barriers', async (type) => {
+    let engine = project();
+    const current = session(100, 40, 1, approval());
+    const history = deferred<EngineRead>();
+    const refresh = deferred<EngineAgentRead>();
+    const refreshing = deferred<void>();
+    let hold = false;
+    const calls: string[] = [];
+    const bridge = await ready(async <T>(name: string) => {
+      calls.push(name);
+      if (name === 'engine_read') return engine as T;
+      if (name === 'engine_history') return await history.promise as T;
+      if (name === 'engine_agent_decide' || name === 'engine_agent_cancel') return null as T;
+      if (hold) { refreshing.resolve(); return await refresh.promise as T; }
+      return wire(current, engine.revision) as T;
+    });
+    expect(bridge.getSnapshot().agent).toMatchObject({ status: 'running', approvalReady: true });
+    hold = true;
+    const editing = bridge.dispatch({ type });
+    expect(bridge.getSnapshot().agent).toMatchObject({ status: 'running', approvalReady: false });
+    expect(bridge.getSnapshot().projectAgentBudget?.maxTokens).toBe(current.budget.max_tokens);
+    const decision = { type: 'agent.approve', turnId: 1, approvalId: 5, approved: true } as const;
+    expect(await bridge.request(decision)).toMatchObject({ ok: false, error: { code: 'agent.unavailable' } });
+    expect(calls).not.toContain('engine_agent_decide');
+    engine = project(100, 8);
+    history.resolve(engine);
+    await refreshing.promise;
+    expect(bridge.getSnapshot().agent).toMatchObject({ status: 'running', approvalReady: false });
+    expect(await bridge.request(decision)).toMatchObject({ ok: false, error: { code: 'agent.unavailable' } });
+    hold = false;
+    refresh.resolve(wire(current, 8));
+    expect(await editing).toEqual({ ok: true });
+    expect(bridge.getSnapshot().agent).toMatchObject({ status: 'running', approvalReady: true });
+    expect(await bridge.request(decision)).toEqual({ ok: true });
+    expect(calls.filter(name => name === 'engine_agent_decide')).toHaveLength(1);
+    bridge.updateProvider({ status: 'not-connected', provider: 'openai' });
+    expect(bridge.getSnapshot().agent).toMatchObject({ status: 'running', approvalReady: false });
+    expect(await bridge.request({ type: 'agent.cancel', turnId: 1 })).toEqual({ ok: true });
+    expect(calls).toContain('engine_agent_cancel');
   });
 
   it.each(['history.undo', 'history.redo'] as const)('%s refreshes cap and session without restoring old consumption, fencing an old read', async (type) => {

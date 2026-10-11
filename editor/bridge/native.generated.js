@@ -944,7 +944,8 @@ class NativeBridge {
     agentState() {
         if (this.agentNeedsPoll()) return {
             status: 'running',
-            conversation: String(this.agentReserved ?? this.agentSession?.turns.at(-1)?.id ?? 'starting')
+            conversation: String(this.agentReserved ?? this.agentSession?.turns.at(-1)?.id ?? 'starting'),
+            approvalReady: this.agentApprovalReady()
         };
         if (!this.read) return {
             status: 'unavailable',
@@ -979,6 +980,9 @@ class NativeBridge {
         return {
             status: 'idle'
         };
+    }
+    agentApprovalReady() {
+        return Boolean(this.read && !this.providerIsPending() && this.provider.status === 'connected' && !this.agentError && this.agentSession && this.agentVerified && this.agentBudgetReady());
     }
     /** Scoped to where the allowance belongs: the project's authored cap, or an older host's session. */ exhaustedReason() {
         return this.read && projectAgentBudget(this.read).status === 'ready' ? 'The project’s agent token allowance is used up.' : 'This agent session’s token allowance is used up.';
@@ -1145,7 +1149,7 @@ class NativeBridge {
             if (current?.status === 'stopping' || this.agentCancelling.has(request.turnId)) return reject('agent.busy', 'This agent turn is already stopping.');
             this.agentCancelling.add(request.turnId);
         } else {
-            if (!this.read || this.providerIsPending() || this.provider.status !== 'connected' || this.agentError || !this.agentSession || !this.agentVerified || !this.agentBudgetReady()) return reject('agent.unavailable', 'Connect an OpenAI account and refresh the native session before deciding an approval.');
+            if (!this.agentApprovalReady()) return reject('agent.unavailable', 'Connect an OpenAI account and refresh the native session before deciding an approval.');
             if (!sequence(request.approvalId) || typeof request.approved !== 'boolean' || current?.status !== 'awaiting_approval' || current.pending?.turn !== request.turnId || current.pending.id !== request.approvalId || this.agentCancelling.has(request.turnId) || this.agentDecisions.has(`${request.turnId}:${request.approvalId}`)) return reject('agent.stale-approval', 'This agent approval is no longer pending.');
             this.agentDecisions.add(`${request.turnId}:${request.approvalId}`);
         }
