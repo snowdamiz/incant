@@ -18,8 +18,9 @@ bytes match a freshly compiled unit from this same session. Each player must
 compile freshly. Host compiler/build-script artifacts are not target-runtime
 proof. The existing per-player codegen and compiler-symbol checks remain.
 
-Tracked source hashes and pinned compiler identity are checked around builds and
-before execution. Explicit script compile inputs are hashed around their build.
+Tracked source revision/hashes and pinned compiler identity are checked around builds and
+before execution. Ambient compiler/flag/wrapper overrides are refused. Explicit
+script compile inputs are hashed around their build.
 Preexisting storage, missing or ambiguous evidence, changed features/bytes,
 retained authoring storage and changed packaged players fail before execution.
 
@@ -32,4 +33,16 @@ the actual source-deleted GPU proof; default workspace checks cannot certify it.
 The original commands passed locally on the same runtime sources in 78.82 and
 121.71 seconds, respectively. This is a local baseline with concurrent unrelated
 development builds, not a hosted or device performance result. Shared-session
-measurements and matched observable-output comparison are pending.
+measurements are now complete: the final standalone commands took80.59s and
+120.84s (201.43s total); the shared command took189.25s including its outer
+process. All27 observable/guard comparisons and38 player launches pass. The first
+build recorded93 fresh target units; the second recorded107 units,77 proven reused
+dependencies. Owned libraries compiled again as distinct dependency/feature units.
+Each player compiled freshly and independently passed its symbol identity/audit.
+
+The roughly12s difference in this sample and8s in an earlier sample are noisy local
+results, not a demonstrated material hosted improvement. CI adoption stays off.
+All55 tools tests pass, including wrong-source/revision/compiler, ambient override,
+ambiguous/missing unit, changed feature/bytes and deletion-barrier refusal cases.
+Standalone runtime and script/physics commands passed again after the refactor.
+[Exact final evidence](evidence/shipping-fresh-session-2026-10-11.json).
