@@ -29,6 +29,12 @@ pub enum StructuralCommand {
         entity: StableId,
         audio: Option<crate::CookedAudio>,
     },
+    /// Scalar controls use the final audio declaration in submitted order.
+    /// Publication is atomic with all other commands; mixer sync follows later.
+    ControlAudio {
+        entity: StableId,
+        control: crate::AudioControl,
+    },
     /// Controls use the final declaration of this batch, in submitted order.
     /// Pause/resume preserves phase; restart/seek resets it.
     ControlFlipbook {
@@ -149,14 +155,16 @@ impl NativeWorld {
             return Ok(());
         }
         // Audio-only changes inspect at most 161 audio nodes; no hierarchy copy.
-        if commands
-            .iter()
-            .all(|c| matches!(c, StructuralCommand::SetAudio { .. }))
-        {
+        if commands.iter().all(|c| {
+            matches!(
+                c,
+                StructuralCommand::SetAudio { .. } | StructuralCommand::ControlAudio { .. }
+            )
+        }) {
             let mut changes = BTreeMap::new();
             for command in commands.iter() {
                 let StructuralCommand::SetAudio { entity, audio } = command else {
-                    unreachable!()
+                    continue;
                 };
                 if !self.entities.contains_key(entity) {
                     return Err(RuntimeError::MissingEntity(*entity));
@@ -166,6 +174,8 @@ impl NativeWorld {
                 }
                 changes.insert(*entity, audio.clone());
             }
+            let changes = self
+                .prepare_audio_controls(commands, changes, |id| self.entities.contains_key(&id))?;
             self.validate_audio_changes(&changes, &self.parents)?;
             for (id, node) in changes {
                 self.install_audio(id, node);
@@ -182,6 +192,7 @@ impl NativeWorld {
                     | StructuralCommand::SetAngularVelocity { .. }
                     | StructuralCommand::SetAngularVelocity2D { .. }
                     | StructuralCommand::ControlFlipbook { .. }
+                    | StructuralCommand::ControlAudio { .. }
             )
         }) {
             let mut velocities = BTreeMap::new();
@@ -211,7 +222,8 @@ impl NativeWorld {
                         spins_2d.insert(*entity, velocity.clone());
                         *entity
                     }
-                    StructuralCommand::ControlFlipbook { .. } => continue,
+                    StructuralCommand::ControlFlipbook { .. }
+                    | StructuralCommand::ControlAudio { .. } => continue,
                     _ => unreachable!(),
                 };
                 if !self.entities.contains_key(&id) {
@@ -279,6 +291,15 @@ impl NativeWorld {
             let playback = self.prepare_flipbook_controls(commands, &BTreeMap::new(), |id| {
                 self.entities.contains_key(&id)
             })?;
+            let audio = self.prepare_audio_controls(commands, BTreeMap::new(), |id| {
+                self.entities.contains_key(&id)
+            })?;
+            if !audio.is_empty() {
+                self.validate_audio_changes(&audio, &self.parents)?;
+            }
+            for (id, node) in audio {
+                self.install_audio(id, node);
+            }
             self.install_flipbook_states(playback);
             self.install_velocities(velocities);
             for (id, spin) in spins_2d {
@@ -449,7 +470,8 @@ impl NativeWorld {
                     audio.remove(id);
                     spatial.remove(id);
                 }
-                StructuralCommand::ControlFlipbook { .. } => {}
+                StructuralCommand::ControlFlipbook { .. }
+                | StructuralCommand::ControlAudio { .. } => {}
                 StructuralCommand::SetParent { entity, parent } => {
                     *parents
                         .get_mut(entity)
@@ -539,6 +561,7 @@ impl NativeWorld {
         if parents.len() > MAX_ENTITIES {
             return Err(SceneError::Invalid("entity limit").into());
         }
+        let audio = self.prepare_audio_controls(commands, audio, |id| parents.contains_key(&id))?;
         self.validate_audio_changes(&audio, &parents)?;
         let binding_generation = self.validate_spatial_changes(&spatial, &parents)?;
         let flipbook_states =

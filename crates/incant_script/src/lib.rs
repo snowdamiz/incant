@@ -2,6 +2,7 @@
 //! command bus, JSON projection or filesystem/network capability is installed.
 //! The prior document-backed host lives temporarily in incant_play_legacy.
 pub mod artifact;
+mod audio_commands;
 mod bindings;
 #[cfg(feature = "compiler")]
 mod bindings_embed;

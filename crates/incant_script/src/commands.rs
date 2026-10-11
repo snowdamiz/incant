@@ -27,6 +27,9 @@ impl TickCommands {
             "setParent",
             "setVelocity",
             "controlFlipbook",
+            "setAudioPlaying",
+            "setAudioGain",
+            "setAudioBusGain",
         ] {
             let state = Rc::clone(&self.0);
             let function =
@@ -114,6 +117,9 @@ fn parse<'js>(
     name: &str,
     args: &[Value<'js>],
 ) -> rquickjs::Result<StructuralCommand> {
+    if matches!(name, "setAudioPlaying" | "setAudioGain" | "setAudioBusGain") {
+        return crate::audio_commands::parse(ctx, name, args);
+    }
     Ok(match (name, args) {
         ("controlFlipbook", [entity, action, rest @ ..]) => {
             let invalid = || Exception::throw_type(ctx, "expected flipbook control string");

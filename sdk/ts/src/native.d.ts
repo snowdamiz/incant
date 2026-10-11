@@ -44,6 +44,16 @@ export interface NativeChunk {
  * Functions belong to one tick only; retained functions never reactivate.
  * Vector/transform inputs are copied as fixed numeric fields, never JSON. */
 export interface NativeCommands {
+  /** Desired playing state for an existing source. False pauses its retained
+   * cursor; true starts an unstarted source or resumes a paused one. Unchanged
+   * true does not replay an ended voice. False then true needs separate sync
+   * points to create a new edge; this API does not expose stop/restart. */
+  setAudioPlaying(id: NativeId, playing: boolean): void;
+  /** Source gain in finite [-80,24] dB, preserving clip, cursor and routing. */
+  setAudioGain(id: NativeId, gainDb: number): void;
+  /** Gain for an existing bus in finite [-80,24] dB; preserves bus topology.
+   * These controls share the structural quota/lifetime and atomic rollback. */
+  setAudioBusGain(id: NativeId, gainDb: number): void;
   /** Ordered with this same structural buffer. Seek resets phase/completion;
    * play on a completed once sequence restarts it. Readback remains the committed
    * pre-command snapshot until the next update. Invalid controls reject the
