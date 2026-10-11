@@ -1,0 +1,50 @@
+{
+  "recorded_at": "2026-10-11T17:40:34.075965+00:00",
+  "integration_head": "9e6239bd14de27f4f4b2da6188af53089a584ec4",
+  "base": "c3ec3e84dae6bf957304471639e7fac34d2297d4",
+  "preserved_reviewed_commits": [
+    "3a7a6172123f73bb4b1973db16ecee36783a2289",
+    "05736d5b6dba7f39535f43a2a1ff3c7faa6369ca",
+    "fe954b73872ca54d737c453172760356fcc7765a"
+  ],
+  "checkpoint_2": {
+    "head": "c3ec3e84dae6bf957304471639e7fac34d2297d4",
+    "required_success": 20,
+    "required_failures": [
+      "local-service-protocols",
+      "checks",
+      "desktop (windows-latest, Windows, .exe)"
+    ],
+    "all_workflows_terminal": true,
+    "terminal_record_sha256": "0f48704a0d85701c70af56894bfc76de9380735a43bd4ad170841a4f64352295",
+    "promotion": "refused"
+  },
+  "local_checks": {
+    "python_pass": 199,
+    "windows_only_skip": 4,
+    "node_pass": 17,
+    "format_conventions_workflow_lint": true,
+    "windows_rust_source_identical_to_reviewed_commit": "fe954b73872ca54d737c453172760356fcc7765a",
+    "reused_rust_validation": "Nine actual authored compile/native-motion and headless cases plus scoped all-target Clippy; actual Windows execution remains pending"
+  },
+  "logs": {
+    "/tmp/incant-checkpoint2-portability-final-actionlint.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/tmp/incant-checkpoint2-portability-final-conventions.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/tmp/incant-checkpoint2-portability-final-fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/tmp/incant-checkpoint2-portability-final-node.log": "570243dfa10dbc9a030cdaeacf76b64f29c2cd2530a623716ed19d120c79b43a",
+    "/tmp/incant-checkpoint2-portability-final-tools.log": "734183f9ac3cc164dafe334f37ab4c8d4a7deac6cd092b9de47286c3d7e4c4e4"
+  },
+  "source_hashes": {
+    "crates/incant_cook/src/typescript.rs": "367b191390c936c3381748d6fbdab49028fa3cfeaf120f2f208ac49b90ebb30f",
+    "crates/incant_cook/src/typescript/windows.rs": "1cd3e9b8caed54b4a6e5680656e6564cfb4d34a005905cbb5320a73cc5156376",
+    "crates/incant_cook/tests/typescript.rs": "e34a6722808dda31534819aa08e0338fcf6a3968eeb73e8dbd5e934049c5e01c",
+    "services/local/compose.yaml": "3d81001c2d04e8b0a82aa45ba4d11dd98f8ee39aa1d14e16846c2fa08b0cb5cd",
+    "services/local/objects-entrypoint.sh": "893fe2992c6d6c7ed9dfbb00c799cf7a764988b09a5337d5c6f6c0c59652db7f",
+    "tools/local_services.py": "a95d331e40a81e23edf69cccbb2e446ef1e0d902b28be9337a2a72f14e064ba2",
+    "tools/local_services_smoke.py": "90038166917601df3f6298fbeaf259cfca0f281d0fdff1709bb0121ec63c8b9e",
+    "tools/native_process.py": "493c6e70e9045bf3b6e128b4392f47b7cac8a475969d715f26cd1eb7d9777ec3",
+    "tools/tests/test_local_services.py": "08c85e4e122f9eefdfd5a03cc343bacd21f476635d0110964da28c94c2cc8b16",
+    "tools/tests/test_native_process.py": "3f89975b47f1bf354afbc36637afc72242c07b377035926d4a173b9ef4778c1e"
+  },
+  "limits": "The next frozen checkpoint must verify hosted Linux AMD64 service startup, Python3.12 macOS lifecycle and Windows Node startup. Local Docker ARM64 and macOS tests do not replace those checks. No failed checkpoint is promoted."
+}
