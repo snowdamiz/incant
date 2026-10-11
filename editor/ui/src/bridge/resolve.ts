@@ -59,6 +59,8 @@ const CAPABILITY_LABELS: Record<Capability, string> = {
   'provider.disconnect': 'Sign out',
   'provider.switch': 'Switch account',
   'agent.send': 'Send to agent',
+  'agent.cancel': 'Stop agent',
+  'agent.approve': 'Decide agent approval',
   'viewport.bounds': 'Viewport placement',
   'play.control': 'Native Play',
   'play.inspect': 'Runtime inspection',
