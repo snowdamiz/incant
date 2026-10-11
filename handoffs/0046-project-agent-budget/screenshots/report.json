@@ -1,6 +1,6 @@
 {
-  "set": "release",
-  "generated": "2026-10-11T21:18:59.734Z",
+  "set": "final",
+  "generated": "2026-10-11T21:32:49.088Z",
   "browser": "155.0.8059.40",
   "data": "deterministic allowance fixture (tools/fake-host.js + real native.generated.js); not live, not native WebKit",
   "captures": [
@@ -4846,6 +4846,59 @@
         "notes": [
           "Connect an OpenAI account to use the agent."
         ]
+      }
+    },
+    {
+      "name": "latest-only-for-output",
+      "scenario": "ready",
+      "size": {
+        "width": 1000,
+        "height": 650,
+        "side": 280
+      },
+      "errors": [],
+      "requests": [],
+      "checks": {
+        "scrolledUp": {
+          "top": 0,
+          "end": 281,
+          "latest": false
+        },
+        "afterAllowanceChange": {
+          "top": 0,
+          "end": 281,
+          "latest": false
+        },
+        "afterNewOutput": {
+          "top": 0,
+          "end": 321,
+          "latest": true
+        }
+      },
+      "error": null,
+      "calls": [
+        {
+          "name": "engine_read",
+          "args": null
+        },
+        {
+          "name": "engine_read",
+          "args": null
+        },
+        {
+          "name": "engine_read",
+          "args": null
+        }
+      ],
+      "watched": {
+        "statuses": [
+          "Ready",
+          "Updating…",
+          "Ready",
+          "Updating…",
+          "Ready"
+        ],
+        "notes": []
       }
     },
     {

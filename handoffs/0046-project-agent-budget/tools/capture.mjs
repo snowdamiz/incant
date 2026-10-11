@@ -516,6 +516,26 @@ async function flows() {
     checks.header = await agent(page).locator('.agent__status').innerText();
   });
 
+  // Reading an earlier turn: an allowance change adds nothing to read and offers no Latest;
+  // new output below does.
+  await run('latest-only-for-output', 'ready', narrow, async (page, checks) => {
+    await status('Ready')(page);
+    const log = agent(page).locator('.agent__transcript');
+    const geometry = () => log.evaluate((el) => ({ top: el.scrollTop, end: el.scrollHeight - el.clientHeight, latest: document.querySelector('.agent-jump') !== null }));
+    await log.evaluate((el) => { el.scrollTop = 0; });
+    await page.waitForTimeout(150);
+    checks.scrolledUp = await geometry();
+    await page.evaluate(() => window.__ALLOWANCE_FIXTURE__.setCap(400000));
+    await agent(page).locator('.agent-usage', { hasText: 'of 400,000' }).waitFor();
+    await status('Ready')(page);
+    await page.waitForTimeout(300);
+    checks.afterAllowanceChange = await geometry();
+    await page.evaluate(() => window.__ALLOWANCE_FIXTURE__.change((session) => { session.turns.at(-1).text += ' Crate 02, Crate 03, Crate 04 and Crate 05 follow the same pattern.'; }));
+    await page.evaluate(() => window.__ALLOWANCE_FIXTURE__.setCap(400001));
+    await agent(page).locator('.agent-jump').waitFor();
+    checks.afterNewOutput = await geometry();
+  });
+
   // Another edit (Undo elsewhere, another window): the line follows, without flashing a note.
   await run('external-change', 'ready', size, async (page, checks) => {
     await status('Ready')(page);

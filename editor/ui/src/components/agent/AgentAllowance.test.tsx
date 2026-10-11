@@ -541,6 +541,40 @@ describe('While the agent applies a change', () => {
   });
 });
 
+describe('Conversation while the allowance changes', () => {
+  it('offers Latest for new output below the reader, not for an allowance change', () => {
+    // jsdom has no layout: the conversation is 300 px of content in a 100 px view.
+    let content = 300;
+    const scroll = vi.spyOn(HTMLElement.prototype, 'scrollHeight', 'get').mockImplementation(function (this: HTMLElement) {
+      return this.classList.contains('agent__transcript') ? content : 0;
+    });
+    const client = vi.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockImplementation(function (this: HTMLElement) {
+      return this.classList.contains('agent__transcript') ? 100 : 0;
+    });
+    try {
+      const done = turn(1, { text: 'Moved the crate.', charged_tokens: 6_532 });
+      const host = allowanceHost({ budget: 250_000, session: session(6_532, 250_000, { turns: [done] }) });
+      const log = within(pane()).getByRole('log', { name: 'Agent conversation' });
+      // The reader scrolls up to read.
+      act(() => {
+        log.scrollTop = 0;
+        fireEvent.scroll(log);
+      });
+      // A cap change bumps the session's version without adding anything to read.
+      host.update({ projectAgentBudget: { maxTokens: 400_000 }, agentSession: session(6_532, 400_000, { version: 2, turns: [done] }) });
+      expect(within(pane()).queryByRole('button', { name: 'Latest' })).toBeNull();
+      expect(log.scrollTop).toBe(0);
+      content = 360;
+      host.update({ agentSession: session(6_532, 400_000, { version: 3, turns: [{ ...done, text: 'Moved the crate. Then the lantern.' }] }) });
+      expect(within(pane()).getByRole('button', { name: 'Latest' })).toBeTruthy();
+      expect(log.scrollTop).toBe(0);
+    } finally {
+      scroll.mockRestore();
+      client.mockRestore();
+    }
+  });
+});
+
 /* ---- The real native bridge over mocked IPC ---- */
 
 function nativeProject(maxTokens: number, revision: number, applied: number): EngineRead {
