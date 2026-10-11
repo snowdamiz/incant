@@ -108,3 +108,21 @@ Reproduce CPU cooking without an adapter:
 ./tools/cargo test --locked -p incant_render --features cooked-output --profile ci --lib output::
 ./tools/cargo clippy --locked -p incant_shader_cook -p incant_render --features cooked-output --all-targets --profile ci -- -D warnings
 ```
+
+## Prepared numerical comparison (GPU still pending)
+
+The existing HDR tests now optionally write normalized raw RGBA readbacks with
+`INCANT_OUTPUT_NUMERICAL_EVIDENCE`. This is separate from PNG capture. The twelve
+HDR swatches run in all four output formats; the existing three-step resize test
+also runs all four formats. Sixteen case receipts identify the dimensions, format,
+actual adapter/backend/driver, shader source and raw-byte hashes. Fresh output
+directories and create-new files prevent stale cases from being overwritten.
+The original numerical assertions and tolerance remain unchanged.
+
+Both default and cooked test binaries were built with `--no-run`, then copied to
+separate immutable paths before the next integration; cooked all-target Clippy
+passed. No GPU or screenshot was produced. The later serial comparison must
+require complete case coverage, matching adapter/source identity and successful
+test exits, then compare the raw bytes exactly before diagnosing any differences.
+Claude retains rendered-pixel acceptance.
+[Build/source receipt](evidence/cooked-output-readback-preparation.json).

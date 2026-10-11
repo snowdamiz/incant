@@ -1,0 +1,42 @@
+{
+  "recorded_at": "2026-10-11T22:52:05.369134+00:00",
+  "base": "a8dd12e9612d20c412fbe5a4af05395047c665ea",
+  "scope": "Test-only normalized readback capture; no production shader change or GPU execution",
+  "patch_sha256": "24e1ee25c45f67d266b68afaa7876f45be94628a2b319591b2bf4a2461b334e8",
+  "source_sha256": "394c3ee6a9ee295fe48764b66417a7082933191540c979b390dbe1b700f04d52",
+  "binaries": {
+    "default": {
+      "path": "/tmp/incant-output-acceptance-binaries-v1/default-incant-render-tests",
+      "sha256": "7ab2bf2dd27b8c5b6ac734f4667877bbec6e5cf6b5e446cb8848a602847519cb"
+    },
+    "cooked": {
+      "path": "/tmp/incant-output-acceptance-binaries-v1/cooked-incant-render-tests",
+      "sha256": "5271c38c27b46f4850e3b2568e589ea2b936d67fbc298c05079c0f3baafe9d6a"
+    }
+  },
+  "logs": {
+    "default-build": {
+      "path": "/tmp/incant-output-acceptance-default-build.log",
+      "sha256": "841592ee5668e9a656b9671bf636874c042e12a557bbb46ff9b8d7bdc6c3d559"
+    },
+    "cooked-build": {
+      "path": "/tmp/incant-output-acceptance-cooked-build.log",
+      "sha256": "2ed2863b70f8a19eeee10d8d9c96efdbf4161d5838ddf6d2ab430514d5908862"
+    },
+    "clippy": {
+      "path": "/tmp/incant-output-acceptance-clippy.log",
+      "sha256": "92c7dba8395e1dcb56baa8273f1956be67cc524ccddbddc89f4425b9bcc69c7a"
+    }
+  },
+  "results": "Both native test binaries built with --no-run; cooked all-target Clippy passed; no renderer or GPU launched",
+  "expected_cases": {
+    "hdr_swatches": 4,
+    "resize": 12,
+    "total": 16
+  },
+  "limits": [
+    "Default disabled",
+    "Numerical GPU equivalence and Claude pixel acceptance still pending",
+    "Actual Vulkan/DX12 backend acceptance absent"
+  ]
+}
