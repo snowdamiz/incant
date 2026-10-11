@@ -69,6 +69,16 @@ fn public_rust_sample_runs_numeric_input_structural_and_bulk_playback_on_both_ho
         native.tick_with_input(&mut a, DT, &input).unwrap();
         dev.tick_with_input(&mut b, DT, &input).unwrap();
         assert_eq!(a.snapshot(), b.snapshot());
+        assert_eq!(
+            native.logs().unwrap().entries(),
+            dev.logs().unwrap().entries()
+        );
+        let logs = native.logs().unwrap();
+        assert_eq!(logs.entries().len(), tick as usize);
+        let log = logs.entries().last().unwrap();
+        assert_eq!(log.tick, u64::from(tick));
+        assert_eq!(log.level, incant_wasm_runtime::LogLevel::Info);
+        assert_eq!(log.message, "Ready 雪🙂\n\t");
         assert_eq!(states(&mut a), states(&mut b));
         let pose = a.inspect(id(1)).unwrap();
         assert_eq!(
@@ -93,7 +103,14 @@ fn public_rust_sample_runs_numeric_input_structural_and_bulk_playback_on_both_ho
 }
 #[test]
 fn callback_error_ignored_capacity_malformed_snapshot_and_old_epoch_cannot_leak_prefixes() {
-    for suffix in ["callback-error", "capacity", "malformed", "expired"] {
+    for suffix in [
+        "callback-error",
+        "capacity",
+        "malformed",
+        "expired",
+        "log-bounds",
+        "log-invalid",
+    ] {
         let name = format!("rust-sdk-{suffix}");
         let mut a = NativeWorld::new(scene(2));
         let mut b = NativeWorld::new(scene(2));
@@ -113,8 +130,18 @@ fn callback_error_ignored_capacity_malformed_snapshot_and_old_epoch_cannot_leak_
         assert_eq!(states(&mut a), playback);
         assert_eq!(states(&mut b), playback);
         assert!(native.is_failed() && dev.is_failed());
+        assert!(native.logs().is_err() && dev.logs().is_err());
+        // Successful reload reveals only the previously committed prefix.
+        dev.reload(&guest("rust-sdk")).unwrap();
+        assert_eq!(
+            dev.logs().unwrap().entries().len(),
+            usize::from(suffix == "expired")
+        );
+        if suffix == "expired" {
+            assert_eq!(dev.logs().unwrap().entries()[0].tick, 1);
+            assert_eq!(dev.logs().unwrap().entries()[0].message, "staged");
+        }
         assert!(native.tick(&mut a, DT).is_err());
-        assert!(dev.tick(&mut b, DT).is_err());
     }
 }
 

@@ -1,7 +1,7 @@
 //! Build with tools/rust_guest.py's trusted compile helper or a wasm32 cdylib
 //! depending on incant-module by path. The host grants only implemented v1 APIs.
 #![no_std]
-use incant_module::{EntityId, FLIPBOOK_MAX_BYTES, IDENTITY, INPUT_MAX_BYTES, Result, Tick};
+use incant_module::{EntityId, FLIPBOOK_MAX_BYTES, IDENTITY, INPUT_MAX_BYTES, LogLevel, Result, Tick};
 #[panic_handler]
 fn panic(_: &core::panic::PanicInfo<'_>) -> ! {
     core::arch::wasm32::unreachable()
@@ -14,6 +14,7 @@ fn simulate(tick: &mut Tick<'_>, dt: f64) -> Result<()> {
     // A module callback is single-threaded and non-reentrant. Native data is
     // copied into guest storage; these are never native addresses.
     let input = tick.input(unsafe { &mut *(&raw mut INPUT) })?;
+    tick.log("Ready 雪🙂\n\t", LogLevel::Info)?;
     let toggle = input.action("toggle").is_some_and(|a| a.pressed);
     let mut transforms = [IDENTITY; 32];
     let mut ids = [EntityId([0; 16]); 32];

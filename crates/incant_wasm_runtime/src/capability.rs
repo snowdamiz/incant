@@ -25,6 +25,11 @@ const _: () = {
 /// Trusted host adapter operation; all integer arguments are guest offsets/indices.
 #[derive(Clone, Copy)]
 pub enum Call {
+    Log {
+        level: i32,
+        ptr: i32,
+        len: i32,
+    },
     FlipbookLen,
     ReadFlipbooks {
         ptr: i32,
@@ -78,15 +83,28 @@ pub struct Capability {
     flipbooks: Vec<u8>,
     transferred: usize,
     calls: usize,
+    tick: u64,
+    logs: crate::NativeLogs,
+    tick_logs: crate::logging::TickLogs,
 }
 impl Capability {
     pub fn is_failed(&self) -> bool {
         self.failed
     }
-    pub fn replacement(&self) -> Self {
+    /// Successful trusted reload keeps committed history and its accepted clock.
+    pub fn replacement(&mut self) -> Self {
         Self {
             identity: self.identity.clone(),
+            tick: self.tick,
+            logs: std::mem::take(&mut self.logs),
             ..Self::default()
+        }
+    }
+    pub fn logs(&self) -> Result<&crate::NativeLogs, Error> {
+        if self.failed {
+            Err(Error::Failed)
+        } else {
+            Ok(&self.logs)
         }
     }
     pub fn begin(&mut self, world: &mut NativeWorld, dt: f64) -> Result<i64, Error> {
@@ -101,6 +119,10 @@ impl Capability {
             return Err(Error::Abi("module is bound to a different world"));
         }
         self.identity = Some(identity);
+        self.tick
+            .checked_add(1)
+            .filter(|&tick| tick <= incant_runtime::logging::MAX_LOG_TICK)
+            .ok_or(Error::Limit("log clock"))?;
         self.failed = true;
         self.input_available = false;
         self.input.clear();
@@ -115,6 +137,7 @@ impl Capability {
         self.commands.clear();
         self.transferred = 0;
         self.calls = 0;
+        self.tick_logs.clear();
         self.active = true;
         Ok(self.epoch)
     }
@@ -141,10 +164,15 @@ impl Capability {
         self.flipbooks.clear();
         self.chunks.clear();
         self.commands.clear();
+        self.tick_logs.clear();
     }
     pub fn finish(&mut self, world: &mut NativeWorld) -> Result<(), Error> {
         if !self.active {
             return Err(Error::Abi("inactive ECS transaction"));
+        }
+        if self.tick_logs.rejected {
+            self.abort();
+            return Err(Error::Abi("rejected log transaction"));
         }
         self.active = false;
         self.input_available = false;
@@ -167,7 +195,11 @@ impl Capability {
             Ok(())
         });
         if result.is_ok() {
+            self.tick += 1; // checked before entering guest code or publishing writes
+            self.logs.commit(self.tick, self.tick_logs.take());
             self.failed = false;
+        } else {
+            self.tick_logs.clear();
         }
         result
     }
@@ -232,6 +264,21 @@ impl Capability {
             return Err(Error::Limit("linear memory"));
         }
         match call {
+            Call::Log { level, ptr, len } => {
+                let result = (|| {
+                    let len = usize::try_from(len).map_err(|_| Error::Abi("log byte length"))?;
+                    if len > incant_wasm_abi::LOG_MAX_MESSAGE_BYTES {
+                        return Err(Error::Limit("log message"));
+                    }
+                    let region = range(ptr, len, memory.len())?;
+                    self.transfer(len)?;
+                    self.tick_logs.push(level, &memory[region])
+                })();
+                if result.is_err() {
+                    self.tick_logs.rejected = true;
+                }
+                result?;
+            }
             Call::FlipbookLen => return Ok(self.flipbooks.len() as i32),
             Call::ReadFlipbooks { ptr, capacity } => {
                 let len = self.flipbooks.len();
@@ -383,4 +430,47 @@ fn range(ptr: i32, len: usize, total: usize) -> Result<std::ops::Range<usize>, E
 }
 fn values<const N: usize>(bytes: &[u8]) -> [f64; N] {
     std::array::from_fn(|i| f64::from_le_bytes(bytes[i * 8..i * 8 + 8].try_into().unwrap()))
+}
+
+#[cfg(test)]
+mod log_clock_tests {
+    use super::*;
+    #[test]
+    fn last_exact_json_tick_accepts_then_overflow_refuses_before_publication() {
+        use incant_runtime::{CookedScene, logging::MAX_LOG_TICK};
+        let mut world = NativeWorld::new(CookedScene::new(StableId([0; 16]), 64, vec![]).unwrap());
+        let mut cap = Capability {
+            tick: MAX_LOG_TICK - 1,
+            ..Capability::default()
+        };
+        let epoch = cap.begin(&mut world, 0.25).unwrap();
+        cap.invoke(
+            &mut [],
+            epoch,
+            Call::Log {
+                level: 1,
+                ptr: 0,
+                len: 0,
+            },
+        )
+        .unwrap();
+        cap.finish(&mut world).unwrap();
+        assert_eq!(cap.logs().unwrap().entries()[0].tick, MAX_LOG_TICK);
+        let before = world.snapshot();
+        assert!(matches!(
+            cap.begin(&mut world, 0.25),
+            Err(Error::Limit("log clock"))
+        ));
+        assert!(!cap.active && !cap.is_failed());
+        assert_eq!(cap.logs().unwrap().entries().len(), 1);
+        assert_eq!(world.snapshot(), before);
+        assert_eq!(world.tick(), 0);
+        // Reload cannot reset the accepted diagnostic clock to bypass its limit.
+        let mut next = cap.replacement();
+        assert!(matches!(
+            next.begin(&mut world, 0.25),
+            Err(Error::Limit("log clock"))
+        ));
+        assert_eq!(next.logs().unwrap().entries()[0].tick, MAX_LOG_TICK);
+    }
 }
