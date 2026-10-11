@@ -105,6 +105,9 @@ jobs:
         run: python3 tools/validate_ktx.py --probe-binary target/ci/examples/texture_probe
       - run: target/ci/incant_headless schema schemas
         if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
+      - name: Verify public source edits, native Play and journal recovery
+        if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
+        run: python3 tools/probes/script-source-transactions.py artifacts/script-source-transactions --binary target/ci/incant_headless
       - name: Verify native binary world saves across process restarts
         if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
         run: python3 tools/probes/native-saves.py artifacts/native-world-saves --headless-binary target/ci/incant_headless --cook-binary target/ci/examples/cook_scene --runtime-binary target/ci/examples/save_world

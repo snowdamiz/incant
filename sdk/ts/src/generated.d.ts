@@ -66,10 +66,11 @@ export namespace CommandSchema {
   export type Provenance = { "actor": string; "conversation_id"?: string | null; "model"?: string | null; "origin": Origin; "transaction": string };
   export type Scene = { "entities": { [key: string]: Entity }; "id": string; "name": string };
   export type ScriptSource = { "id": string; "name": string; "path": string };
+  export type SourceVersion = ({ "state": "missing" }) | ({ "sha256": string; "state": "present" });
   export type Stick = "left" | "right";
   export type StringTable = { "id": string; "messages": { [key: string]: { [key: string]: string } }; "name": string; "source_locale": string };
   export type TextureUsage = "color" | "linear" | "normal";
-  export type Root = ({ "op": "create_scene"; "scene": Scene }) | ({ "op": "delete_scene"; "scene_id": string }) | ({ "entity": Entity; "op": "create_entity"; "scene_id": string }) | ({ "entity_id": string; "op": "delete_entity"; "scene_id": string }) | ({ "entity_id": string; "name": string; "op": "rename_entity"; "scene_id": string }) | ({ "entity_id": string; "op": "reparent_entity"; "parent"?: string | null; "scene_id": string }) | ({ "component": string; "entity_id": string; "op": "set_component"; "scene_id": string; "value": unknown }) | ({ "component": string; "entity_id": string; "op": "remove_component"; "scene_id": string }) | ({ "asset": Asset; "op": "upsert_asset" }) | ({ "asset_id": string; "op": "remove_asset" }) | ({ "op": "upsert_script"; "script": ScriptSource }) | ({ "op": "remove_script"; "script_id": string }) | ({ "op": "set_memory"; "section": string; "text": string }) | ({ "op": "upsert_string_table"; "table": StringTable }) | ({ "op": "remove_string_table"; "table_id": string }) | ({ "op": "set_locale"; "settings": LocaleSettings }) | ({ "actions": { [key: string]: InputAction }; "op": "set_input_actions" });
+  export type Root = ({ "op": "create_scene"; "scene": Scene }) | ({ "op": "delete_scene"; "scene_id": string }) | ({ "entity": Entity; "op": "create_entity"; "scene_id": string }) | ({ "entity_id": string; "op": "delete_entity"; "scene_id": string }) | ({ "entity_id": string; "name": string; "op": "rename_entity"; "scene_id": string }) | ({ "entity_id": string; "op": "reparent_entity"; "parent"?: string | null; "scene_id": string }) | ({ "component": string; "entity_id": string; "op": "set_component"; "scene_id": string; "value": unknown }) | ({ "component": string; "entity_id": string; "op": "remove_component"; "scene_id": string }) | ({ "asset": Asset; "op": "upsert_asset" }) | ({ "asset_id": string; "op": "remove_asset" }) | ({ "op": "upsert_script"; "script": ScriptSource }) | ({ "op": "remove_script"; "script_id": string }) | ({ "expected_source": SourceVersion; "op": "write_script"; "script_id": string; "source": string }) | ({ "op": "set_memory"; "section": string; "text": string }) | ({ "op": "upsert_string_table"; "table": StringTable }) | ({ "op": "remove_string_table"; "table_id": string }) | ({ "op": "set_locale"; "settings": LocaleSettings }) | ({ "actions": { [key: string]: InputAction }; "op": "set_input_actions" });
 }
 export type Command = CommandSchema.Root;
 
@@ -334,6 +335,12 @@ export namespace ScriptClockSchema {
   export type Root = { "elapsed_seconds": number; "tick": number };
 }
 export type ScriptClock = ScriptClockSchema.Root;
+
+export namespace ScriptReadSchema {
+  export type SourceVersion = ({ "state": "missing" }) | ({ "sha256": string; "state": "present" });
+  export type Root = { "matches_history"?: boolean | null; "path": string; "revision": number; "script_id": string; "source"?: string | null; "version": SourceVersion };
+}
+export type ScriptRead = ScriptReadSchema.Root;
 
 export namespace SpotLightSchema {
   export type Root = { "color": [number, number, number]; "inner_degrees": number; "intensity": number; "outer_degrees": number; "range": number };

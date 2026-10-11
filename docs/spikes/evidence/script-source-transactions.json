@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "processes": 2,
+  "rpc_requests": 32,
+  "ticks_per_play": 20,
+  "translations_x": [
+    2.0000000000000004,
+    4.000000000000001,
+    2.0000000000000004,
+    4.000000000000001,
+    2.0000000000000004
+  ],
+  "content_authored_only_through_command_bus": true,
+  "registration_content_attachment_one_transaction": true,
+  "undo_redo_and_recovery": true,
+  "authoring_unchanged_by_play": true,
+  "gpu_submitted": false,
+  "reference_phone_gate": false,
+  "binary_sha256": "f244717150f94523fc9de382ec1f981058532267bb45ab917647853931b21d93"
+}

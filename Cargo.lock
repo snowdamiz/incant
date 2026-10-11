@@ -3833,10 +3833,12 @@ dependencies = [
  "incant_core",
  "incant_doc",
  "incant_localization",
+ "incant_source",
  "schemars 1.2.2",
  "serde",
  "serde_json",
  "sha2 0.10.9",
+ "tempfile",
  "thiserror 2.0.21",
  "ulid",
 ]

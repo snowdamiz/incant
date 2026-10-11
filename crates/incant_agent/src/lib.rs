@@ -7,6 +7,7 @@ pub mod credentials;
 mod local_credentials;
 pub mod play;
 pub mod provider;
+mod scripts;
 pub use assets::{ProjectFiles, ProjectHost};
 use incant_cmd::{Actor, Command, CommandBus};
 use incant_doc::schema_registry;
@@ -170,6 +171,7 @@ pub fn tools() -> Vec<Value> {
     ];
     tools.extend(assets::tools());
     tools.extend(play::tools());
+    tools.extend(scripts::tools());
     tools
 }
 pub fn dispatch(
@@ -192,8 +194,16 @@ fn dispatch_cancellable(
     fn decode<T: serde::de::DeserializeOwned>(v: Value) -> Result<T, AgentError> {
         serde_json::from_value(v).map_err(|e| AgentError::Tool(e.to_string()))
     }
+    if cancel.load(Ordering::Relaxed) {
+        return Err(AgentError::Interrupted);
+    }
     match name {
-        "play_run" | "play_state_query" => play::dispatch(bus, perception, name, args, cancel),
+        "script_read" | "script_write" => scripts::dispatch(bus, name, args, actor, cancel),
+        "play_run" | "play_state_query" => {
+            bus.ensure_sources_ready()
+                .map_err(|e| AgentError::Tool(e.to_string()))?;
+            play::dispatch(bus, perception, name, args, cancel)
+        }
         "asset_list" | "asset_inspect" | "asset_import" => {
             assets::dispatch(bus, perception.project_files(), name, args, actor, cancel)
         }
@@ -273,6 +283,9 @@ impl Agent {
             json!({"role":"user","content":prompt}),
         ];
         let mut tools = tools();
+        if !bus.has_source_store() {
+            tools.retain(|tool| tool["name"] != "script_read" && tool["name"] != "script_write");
+        }
         if perception.project_files().is_none() {
             tools.retain(|tool| tool["name"] != "asset_import");
         }
@@ -361,7 +374,7 @@ impl Agent {
                     // including registered script replacement and removal.
                     let ask = matches!(self.approval, ApprovalMode::Always)
                         || (matches!(self.approval, ApprovalMode::Destructive)
-                            && matches!(name, "doc_patch" | "asset_import"));
+                            && matches!(name, "doc_patch" | "asset_import" | "script_write"));
                     if ask && !approve(name, &arguments) {
                         return Err(AgentError::Tool("user denied this operation".into()));
                     }

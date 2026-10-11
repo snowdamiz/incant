@@ -1,0 +1,77 @@
+{
+  "$defs": {
+    "SourceVersion": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "state": {
+              "const": "missing",
+              "type": "string"
+            }
+          },
+          "required": [
+            "state"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "state": {
+              "const": "present",
+              "type": "string"
+            }
+          },
+          "required": [
+            "state",
+            "sha256"
+          ],
+          "type": "object"
+        }
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "matches_history": {
+      "description": "None means no source transaction has tracked this path. False means an\nexternal edit is visible; reading never reconciles or overwrites it.",
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "path": {
+      "type": "string"
+    },
+    "revision": {
+      "format": "uint64",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "script_id": {
+      "type": "string"
+    },
+    "source": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "version": {
+      "$ref": "#/$defs/SourceVersion"
+    }
+  },
+  "required": [
+    "script_id",
+    "path",
+    "revision",
+    "version"
+  ],
+  "title": "ScriptRead",
+  "type": "object"
+}

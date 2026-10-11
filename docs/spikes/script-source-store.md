@@ -23,15 +23,23 @@ equivalent; these tests establish process-crash behavior, not a physical power-l
 certification across storage devices. The live pathname may briefly be absent
 between displacement and installation; engine consumers must use readiness checks.
 
-Local macOS validation: nine actual filesystem tests passed, including child
-process exit without Rust destructors after marker preparation and installation,
+Local macOS validation: ten actual filesystem tests passed, including child
+process exit without Rust destructors after staging, marker preparation, file
+displacement, installation, both receipt-publication steps and marker removal,
 retained external edits, create races, path/link refusal, exclusive root locking,
 and read-only epoch checks. `cargo clippy -p incant_source --all-targets --locked
 --profile ci -j2 -- -D warnings` passed. A read-only independent protocol review
-found no ordering blocker. The `Script source filesystem transactions` workflow
-runs these tests and Clippy on macOS, Linux and Windows, including a real Windows
-junction test. Linux/Windows execution remains CI evidence to collect, not a
+found no ordering blocker. Existing macOS CI and Windows/Linux desktop workspace test jobs execute these
+actual filesystem tests, including a real Windows junction test. macOS workspace
+Clippy and a scoped platform-adapter Clippy step in desktop CI cover the adapters
+without adding redundant cold-build job matrices. Linux/Windows execution remains CI evidence to collect, not a
 claim from local compilation or this source review.
 
-The bus/journal/tool integration and fuller crash-boundary tests are a following
-scoped change. This prerequisite alone does not expose script content authoring.
+`cargo check -p incant_source --lib --target wasm32-unknown-unknown --locked`
+also passes. Unsupported platforms use a typed `Unavailable` adapter with no
+filesystem fallback; ULID parsing requires no entropy dependency. The global
+runtime dependency guard forbids `incant_source` transitively.
+
+The prerequisite itself does not expose script content authoring. The following
+[bus/journal/tool integration](script-source-transactions.md) uses this store for
+the shared authoring command and registered-ID read/write tools.

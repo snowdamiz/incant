@@ -54,6 +54,8 @@ jobs:
       - run: node tools/build_bridge.mjs --check
       - run: npm run build --workspace editor/ui
       - run: npm test --workspace editor/ui
+      # Workspace tests exercise actual source confinement/crash recovery on each OS.
+      - run: cargo clippy -p incant_source --all-targets --profile ci --locked -j2 -- -D warnings
       - run: cargo test --workspace --profile ci --locked --features incant_audio_runtime/scene --timings
       - run: cargo check -p incant_audio --features device --locked
       # The workspace default deliberately omits this optional player module.
@@ -68,6 +70,8 @@ jobs:
       # Keep workspace feature unification from the release tests while building
       # only the editor, headless and cook tools used below.
       - run: cargo build --workspace --bin incant_editor --bin incant_headless --example cook_scene --profile ci --features incant_editor/custom-protocol,incant_audio_runtime/scene --locked --timings
+      - name: Verify public source edits, native Play and journal recovery
+        run: python tools/probes/script-source-transactions.py artifacts/script-source-transactions --binary target/ci/incant_headless${{ matrix.suffix }}
       - name: Build and execute the shipping runtime with matched crash symbols
         run: python tools/shipping.py artifacts/shipping-runtime --headless-binary target/ci/incant_headless${{ matrix.suffix }} --cook-binary target/ci/examples/cook_scene${{ matrix.suffix }}
       - name: Verify Windows executables do not require redistributable CRT DLLs
