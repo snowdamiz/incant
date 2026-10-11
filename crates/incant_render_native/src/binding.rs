@@ -1,6 +1,6 @@
 use super::*;
 use incant_assets_runtime::{RuntimeAssetData, TextureUsage};
-use incant_render_data::{EnvironmentInput, MeshInput, SceneLight, SceneNode};
+use incant_render_data::{EnvironmentInput, MeshInput, SceneLight, SceneNode, SpriteInput};
 use incant_runtime::{VisualAssetKind, VisualAssetRef};
 use std::fmt::Write;
 
@@ -61,6 +61,7 @@ pub(crate) fn prepare(
         }
         if decl.camera.is_none()
             && decl.mesh.is_none()
+            && decl.sprite.is_none()
             && decl.directional.is_none()
             && decl.point.is_none()
             && decl.spot.is_none()
@@ -78,6 +79,46 @@ pub(crate) fn prepare(
                 Ok::<_, NativeRenderError>(MeshInput {
                     source: Arc::clone(source),
                     cast_shadows: mesh.cast_shadows,
+                })
+            })
+            .transpose()?;
+        let sprite = decl
+            .sprite
+            .as_ref()
+            .map(|s| {
+                let invalid = || NativeRenderError::Sprite { entity: node.id };
+                let source = asset(&s.texture)?;
+                let RuntimeAssetData::Texture(texture) = source.data() else {
+                    return Err(invalid());
+                };
+                if source.usage() != Some(TextureUsage::Color) {
+                    return Err(invalid());
+                }
+                let region = match s.region {
+                    incant_runtime::NativeSpriteRegion::Pixels(r) => r,
+                    incant_runtime::NativeSpriteRegion::Atlas { frame } => {
+                        let frame = ulid::Ulid::from_bytes(frame.0).to_string();
+                        texture
+                            .metadata
+                            .atlas
+                            .as_ref()
+                            .and_then(|a| a.frames.get(&frame))
+                            .ok_or_else(invalid)?
+                            .region
+                    }
+                };
+                let mut sprite = s.resolved_values(region);
+                sprite.texture = source.info().id.clone();
+                sprite.validate().map_err(|_| invalid())?;
+                if u64::from(region[0]) + u64::from(region[2]) > u64::from(texture.texture.width)
+                    || u64::from(region[1]) + u64::from(region[3])
+                        > u64::from(texture.texture.height)
+                {
+                    return Err(invalid());
+                }
+                Ok::<_, NativeRenderError>(SpriteInput {
+                    source: Arc::clone(source),
+                    sprite,
                 })
             })
             .transpose()?;
@@ -105,7 +146,7 @@ pub(crate) fn prepare(
             camera: decl.camera.clone(),
             light,
             mesh,
-            sprite: None,
+            sprite,
             diagnostic: false,
         });
     }

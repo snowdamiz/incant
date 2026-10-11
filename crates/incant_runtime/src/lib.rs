@@ -12,6 +12,11 @@ mod physics_binary;
 mod save;
 mod scene;
 mod spatial;
+mod sprite;
+mod sprite_binary;
+pub use sprite::{
+    MAX_SPRITE_ENTITIES, NativeSpriteRegion, NativeSpriteRenderer, SpriteMode, SpriteSampling,
+};
 mod spatial_binary;
 mod spatial_commands;
 mod spatial_view;

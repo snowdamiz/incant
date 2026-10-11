@@ -24,6 +24,7 @@ struct Vertex {
     sampling: u32,
 }
 pub(crate) struct SpritePlan {
+    pub node: usize,
     pub source: Arc<RuntimeAsset>,
     pub sprite: SpriteRenderer,
     pub world: glam::DMat4,
@@ -43,6 +44,39 @@ struct Batch {
 pub(crate) struct SpriteScene {
     vertices: wgpu::Buffer,
     batches: Vec<Batch>,
+    updates: Vec<Vertex>,
+    placements: Vec<Placement>,
+}
+struct Placement {
+    node: usize,
+    start: usize,
+    local: Vec<[f64; 2]>,
+}
+impl SpriteScene {
+    pub(crate) fn stage(&mut self, input: &incant_render_data::SceneInput) -> Result<()> {
+        for placement in &self.placements {
+            let world = input.nodes[placement.node].world;
+            for (local, vertex) in placement
+                .local
+                .iter()
+                .zip(&mut self.updates[placement.start..])
+            {
+                let position = world
+                    .transform_point3(glam::DVec3::new(local[0], local[1], 0.))
+                    .as_vec3();
+                if !position.is_finite() {
+                    return Err(ResourceError::GeometryRange.into());
+                }
+                vertex.position = position.to_array();
+            }
+        }
+        Ok(())
+    }
+    pub(crate) fn write(&self, queue: &wgpu::Queue) {
+        if !self.updates.is_empty() {
+            queue.write_buffer(&self.vertices, 0, bytemuck::cast_slice(&self.updates));
+        }
+    }
 }
 pub(crate) struct SpriteSystem {
     globals: wgpu::BindGroupLayout,
@@ -120,6 +154,7 @@ impl SpriteSystem {
         device: &wgpu::Device,
         queue: &wgpu::Queue,
         mut plans: Vec<SpritePlan>,
+        retained: bool,
     ) -> Result<Option<Arc<SpriteScene>>> {
         if plans.is_empty() {
             return Ok(None);
@@ -150,6 +185,7 @@ impl SpriteSystem {
             }
         }
         let mut vertices = Vec::new();
+        let mut placements = Vec::new();
         let mut batches: Vec<Batch> = Vec::new();
         for plan in plans {
             let RuntimeAssetData::Texture(source) = plan.source.data() else {
@@ -221,6 +257,13 @@ impl SpriteSystem {
                 [f64::from(x), f64::from(y), f64::from(w), f64::from(h)]
             }
             .map(|v| v as f32);
+            if retained {
+                placements.push(Placement {
+                    node: plan.node,
+                    start: vertices.len(),
+                    local: geometry.iter().map(|v| v.position).collect(),
+                });
+            }
             for local in geometry {
                 let position = plan
                     .world
@@ -260,11 +303,21 @@ impl SpriteSystem {
         if bytes.len() as u64 > device.limits().max_buffer_size || bytes.len() > 128 * 1024 * 1024 {
             return Err(ResourceError::BufferSize("sprite geometry").into());
         }
-        let vertices = device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
+        let buffer = device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
             label: Some("Sorted sprite vertices"),
             contents: bytes,
-            usage: wgpu::BufferUsages::VERTEX,
+            usage: wgpu::BufferUsages::VERTEX
+                | if retained {
+                    wgpu::BufferUsages::COPY_DST
+                } else {
+                    wgpu::BufferUsages::empty()
+                },
         });
-        Ok(Some(Arc::new(SpriteScene { vertices, batches })))
+        Ok(Some(Arc::new(SpriteScene {
+            vertices: buffer,
+            batches,
+            updates: if retained { vertices } else { Vec::new() },
+            placements,
+        })))
     }
 }

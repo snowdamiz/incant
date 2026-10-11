@@ -26,6 +26,30 @@ pub(crate) fn cook(
     node.directional = decode!("DirectionalLight", incant_doc::DirectionalLight);
     node.point = decode!("PointLight", incant_doc::PointLight);
     node.spot = decode!("SpotLight", incant_doc::SpotLight);
+    if let Some(s) = decode!("SpriteRenderer", incant_doc::SpriteRenderer) {
+        let texture = bind(project, &s.texture, VisualAssetKind::Texture, assets)?;
+        let region = match s.region {
+            incant_doc::SpriteRegion::Pixels(r) => incant_runtime::NativeSpriteRegion::Pixels(r),
+            incant_doc::SpriteRegion::Atlas { frame } => {
+                incant_runtime::NativeSpriteRegion::Atlas {
+                    frame: stable_id(&frame)?,
+                }
+            }
+        };
+        node.sprite = Some(Box::new(incant_runtime::NativeSpriteRenderer {
+            texture,
+            region,
+            size: s.size,
+            pivot: s.pivot,
+            tint: s.tint,
+            flip_x: s.flip_x,
+            flip_y: s.flip_y,
+            layer: s.layer,
+            order: s.order,
+            sampling: s.sampling,
+            mode: s.mode,
+        }));
+    }
     if let Some(mesh) = decode!("MeshRenderer", incant_doc::MeshRenderer) {
         if !mesh.materials.is_empty() {
             return Err(CookError::MaterialOverrides(entity.id.clone()));

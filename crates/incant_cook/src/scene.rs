@@ -54,6 +54,7 @@ pub fn cook_scene(project: &Project, scene_id: &str) -> Result<Vec<u8>, CookErro
                 "AudioListener",
                 "Camera",
                 "MeshRenderer",
+                "SpriteRenderer",
                 "DirectionalLight",
                 "PointLight",
                 "SpotLight",

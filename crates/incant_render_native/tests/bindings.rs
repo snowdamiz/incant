@@ -330,3 +330,91 @@ fn authoring_cook_to_binary_world_to_input_needs_no_project_or_source_at_runtime
     fixture.directory.close().unwrap();
     assert!(input.input().nodes[0].camera.is_some());
 }
+
+#[test]
+fn native_sprite_binding_retains_color_texture_and_rejects_unavailable_geometry_atomically() {
+    use incant_runtime::{
+        FrameCommands, NativeSpriteRegion, NativeSpriteRenderer, SpriteMode, SpriteSampling,
+        StructuralCommand,
+    };
+    let fixture = Fixture::new(TextureUsage::Color);
+    let mut node = CookedSpatial::empty(id(3));
+    node.sprite = Some(Box::new(NativeSpriteRenderer {
+        texture: fixture.texture.id,
+        region: NativeSpriteRegion::Pixels([0, 0, 1, 1]),
+        size: [2., 2.],
+        pivot: [0.5; 2],
+        tint: [1.; 4],
+        flip_x: false,
+        flip_y: true,
+        layer: -2,
+        order: 9,
+        sampling: SpriteSampling::Nearest,
+        mode: SpriteMode::Simple,
+    }));
+    let mut world = NativeWorld::new(
+        scene()
+            .with_spatial(vec![fixture.texture], vec![declaration(2), node.clone()])
+            .unwrap(),
+    );
+    let mut input =
+        NativeRenderInput::load(&world.spatial_view().unwrap(), fixture.caches(), id(2)).unwrap();
+    let before = Arc::clone(
+        &input
+            .input()
+            .nodes
+            .iter()
+            .find_map(|n| n.sprite.as_ref())
+            .unwrap()
+            .source,
+    );
+    fs::remove_dir_all(&fixture.textures).unwrap();
+    for _ in 0..4 {
+        world.step().unwrap();
+        input
+            .try_sync(&world.spatial_view().unwrap(), |_, _, _| Ok::<_, ()>(()))
+            .unwrap();
+    }
+    let s = input
+        .input()
+        .nodes
+        .iter()
+        .find_map(|n| n.sprite.as_ref())
+        .unwrap();
+    assert!(Arc::ptr_eq(&before, &s.source));
+    assert!(s.sprite.flip_y);
+    assert_eq!(s.sprite.layer, -2);
+    for region in [
+        NativeSpriteRegion::Pixels([0, 0, 2, 2]),
+        NativeSpriteRegion::Atlas { frame: id(100) },
+    ] {
+        node.sprite.as_mut().unwrap().region = region;
+        let mut commands = FrameCommands::default();
+        commands
+            .push(StructuralCommand::SetSpatial {
+                entity: node.entity,
+                spatial: Some(node.clone()),
+            })
+            .unwrap();
+        world.apply(&mut commands).unwrap();
+        let generation = input.binding_generation();
+        assert!(
+            input
+                .try_sync(&world.spatial_view().unwrap(), |_, _, _| Ok::<_, ()>(()))
+                .is_err()
+        );
+        assert_eq!(input.binding_generation(), generation);
+        assert_eq!(
+            input
+                .input()
+                .nodes
+                .iter()
+                .find_map(|n| n.sprite.as_ref())
+                .unwrap()
+                .sprite
+                .region
+                .pixels(),
+            Some([0, 0, 1, 1])
+        );
+    }
+}

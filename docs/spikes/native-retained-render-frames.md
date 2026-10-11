@@ -54,9 +54,8 @@ This is a correctness and retention slice, not an engine performance gate.
 Encoding still creates bounded per-frame draw packets, camera/grid uniform buffers,
 and bind groups. Startup performs two resolutions and allocates private double
 frame storage, including both winding-sign capacities; worst-case memory must be
-measured and optimized against the plan's device budgets. Sprites and diagnostic
-cubes are explicitly unsupported by this native retained entry point; the existing
-ordinary authoring renderer still supports them. Native sprite/tilemap bindings,
+measured and optimized against the plan's device budgets. The later [native sprite slice](native-sprites.md) adds retained sprite/atlas
+bindings; diagnostic cubes remain unsupported by this retained entry point. Tilemap bindings,
 frame culling and the camera-relative pixel placement contract remain separate
 work. No rendered appearance approval or real-phone measurement is claimed.
 

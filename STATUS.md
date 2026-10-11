@@ -1,14 +1,6 @@
 # Implementation status
 
-- The sprite/atlas publication union now includes the reviewed native runtime and
-  Tauri stack. Local checks pass: 451 ordinary Rust tests, all 56 GPU tests,
-  release Clippy, 420 UI tests, 38 tool tests, generated schemas/SDK, and the four
-  public atlas/sprite/camera probes. Those saved workflows are still legacy Play;
-  native 2D migration, known sampling/placement limits, native editor acceptance
-  and device/performance gates remain open. Hosted checks are next.
-  [Exact union evidence](docs/spikes/evidence/sprite-atlas-publication-union-2026-10-10.json).
-
-Source: [PLAN.md](PLAN.md), revision 6 (2026-10-10) with director decisions; every open decision is resolved in its section 12. Current phase:
+Source: [PLAN.md](PLAN.md), revision 7 (2026-10-10) with director decisions; every open decision is resolved in its section 12. Current phase:
 **1, in progress**. The complete engine/game release is not implemented.
 On 2026-10-08 the director authorized beginning Phase 1 while keeping the open
 Phase 0 items deferred, and instructed agents to continue sensible work without
@@ -996,9 +988,21 @@ One checked retained native input now composes with mandatory generic consumer p
 ## Native game GPU host (2026-10-10)
 
 The real retained GPU consumer now runs inside the mandatory native game tick, with source-free input/physics/PCM/render agreement and terminal target/presentation/observed-device-loss cleanup. Combined release checks pass 102 ordinary tests/doctests and 61 native GPU tests, scoped Clippy and authoring-free dependency checks. This is numerical in-process evidence; standalone compiler-free GPU player execution, native surface ownership, 2D migration and device/performance gates remain open. [Evidence](docs/spikes/native-render-gpu-host.md).
-
 The existing game player now has an explicit opt-in CPU render-input mode. A fresh 4,521,424-byte shipping executable passes 27 source-free launches with real v4 model/camera/physics/audio, repeated retained pose/PCM agreement and late camera failure refusal. Default build/invocation remain nonvisual and strict; actual normal graphs and executable compiler/codegen audits pass. The union passes 75 scoped release tests/doctests, both player Clippy configurations and 40 tools tests. Actual GPU hosting, visible acceptance and phone/performance gates remain separate. [Proof](docs/spikes/native-render-game.md#source-free-existing-player-cpu-mode).
 
+## Native retained sprites (2026-10-10)
+
+Sprites and stable atlas frames now cook to binary v5, bind checked color textures once and update private retained GPU buffers from native poses. Eight source/cache-deleted numerical frames match fresh output across movement, reflection, nine-slice and an ordering rebuild; rejected targets preserve accepted CPU/GPU state. Scoped checks pass 123 ordinary release tests/doctests, 60 renderer GPU tests, Clippy and normal dependency guards. Sprite CPU staging allocates zero times across 64 measured calls. The current worst-case retained vertex storage is 576 MiB before textures/other overhead, so memory optimization and actual shipping device budgets remain required. Tilemaps, flipbooks, native 2D physics, camera-relative placement and standalone sprite-player/appearance/device gates remain open. [Evidence](docs/spikes/native-sprites.md).
+## Development Wasm module execution
+
+An opt-in desktop Wasmtime 49.0.2 host now executes bounded version-1 typed
+numeric/structural imports over the native world. Thirteen real Wasm regressions,
+123 scoped release tests/doctests, release Clippy and three fresh Rust-module
+processes pass. Shipping graphs exclude Wasmtime/Cranelift even with the
+development feature enabled; feature-disabled mobile/Wasm compilation passes.
+[Evidence](docs/spikes/development-wasm-host.md). The ABI deliberately copies
+columns and retains bounded numeric undo. Shipping wasm2c, browser/mobile
+execution, complete SDK conformance and device/performance gates remain open.
 ## Source-free native offscreen GPU player (2026-10-10)
 
 The existing game player now has an explicit optional GPU mode using the real retained GPU host, preserving default nonvisual and explicit CPU modes. A fresh 7,388,160-byte shipping executable passes 28 launches after project/script/source/build removal on Apple M5 Pro / Metal, macOS 26.6: 120 accepted frames per successful run, changed first/final numerical readbacks, exact replay and matching physics/PCM/CPU poses. Scoped 34 ordinary + 3 actual GPU regressions, all three player Clippy configurations, 40 tools tests and graph/flag/symbol audits pass. This does not approve appearance, native surfaces, v5 sprites, offline shaders, phone/performance or phase gates. [Evidence](docs/spikes/native-game-gpu-player.md).

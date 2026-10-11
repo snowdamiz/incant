@@ -79,7 +79,7 @@ def model_probe(executable, output):
         validate_png(pixels, 640, 360)
         geometry = response['geometry']
         if geometry != {'diagnostic_entities': 0, 'model_entities': 2, 'primitive_instances': 2,
-                        'model_triangles': 2, 'model_draw_calls': 1}:
+                        'model_triangles': 2, 'model_draw_calls': 1, 'sprite_entities': 0}:
             raise ValueError('Unexpected imported geometry projection')
         return pixels, response
     source(0)

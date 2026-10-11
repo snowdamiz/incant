@@ -1,4 +1,4 @@
-//! Versions 1/2/3/4, little-endian checked data (not executable code). SHA-256 detects
+//! Versions 1/2/3/4/5, little-endian checked data (not executable code). SHA-256 detects
 //! damage, not authorship. No casts, alignment assumptions or native-layout ABI.
 use crate::scene::MAX_ENTITIES;
 use crate::{CookedEntity, CookedScene, SceneError, StableId};
@@ -7,7 +7,7 @@ use sha2::{Digest, Sha256};
 use std::collections::BTreeMap;
 
 const MAGIC: &[u8; 8] = b"INCANTSC";
-const VERSION: u32 = 4;
+const VERSION: u32 = 5;
 const PREFIX: usize = 40;
 const HEADER: usize = 72;
 const MIN_RECORD: usize = 104;
@@ -24,8 +24,10 @@ impl CookedScene {
             .collect();
         let mut bytes = Vec::with_capacity(HEADER + self.entities.len() * MAX_RECORD);
         bytes.extend(MAGIC);
-        let version = if !self.spatial.is_empty() || !self.visual_assets.is_empty() {
+        let version = if self.spatial.iter().any(|n| n.sprite.is_some()) {
             VERSION
+        } else if !self.spatial.is_empty() || !self.visual_assets.is_empty() {
+            4
         } else if !self.audio.is_empty() {
             3
         } else if !self.physics.is_empty() {
@@ -231,7 +233,7 @@ impl CookedScene {
             }
             spatial.reserve(spatial_count);
             for _ in 0..spatial_count {
-                let node = crate::spatial_binary::read(&mut reader)?;
+                let node = crate::spatial_binary::read(&mut reader, version)?;
                 if spatial
                     .last()
                     .is_some_and(|p: &crate::CookedSpatial| p.entity >= node.entity)
@@ -240,6 +242,11 @@ impl CookedScene {
                 }
                 spatial.push(node);
             }
+        }
+        if version == 5 && !spatial.iter().any(|n| n.sprite.is_some()) {
+            return Err(SceneError::Invalid(
+                "version 5 requires a sprite declaration",
+            ));
         }
         if !reader.0.is_empty() {
             return Err(SceneError::Invalid("trailing payload"));

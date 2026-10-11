@@ -75,3 +75,8 @@ and memory limits remain denial-of-service safeguards, not a proof against VM
 vulnerabilities. See the [migration review](../spikes/performance-plan-v4-review.md).
 
 Source: [PLAN.md](../../PLAN.md), sections 2, 3, 5 and 6.
+
+A bounded [development Wasmtime implementation](../spikes/development-wasm-host.md)
+now executes actual modules through native typed transfers and structural commands.
+It establishes a tested first ABI and development-only dependency isolation, not
+zero-copy access, complete SDK conformance or the settled shipping wasm2c path.

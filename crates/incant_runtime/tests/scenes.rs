@@ -91,10 +91,10 @@ fn rehashed_malformed_records_still_fail_semantic_checks() {
         assert!(CookedScene::from_bytes(&bad).is_err(), "NaN at {offset}");
     }
     let mut unknown = bytes;
-    unknown[8..12].copy_from_slice(&5_u32.to_le_bytes());
+    unknown[8..12].copy_from_slice(&6_u32.to_le_bytes());
     assert_eq!(
         CookedScene::from_bytes(&unknown).unwrap_err(),
-        SceneError::Version(5)
+        SceneError::Version(6)
     );
 }
 

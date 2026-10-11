@@ -197,3 +197,43 @@ fn cooked_scene_binds_real_sealed_asset_after_sources_are_removed_and_rejects_st
     assert_eq!(model.meshes[0].indices.len(), 3);
     assert_eq!(view.binding_generation(), 0);
 }
+
+#[test]
+fn native_cook_uses_binary_sprite_references_and_rejects_ambiguous_authored_bindings() {
+    let (mut project, sid, entity, _, texture) = fixture();
+    let frame = "00000000000000000000000001";
+    project.scenes.get_mut(&sid).unwrap().entities.get_mut(&entity).unwrap().components.insert("SpriteRenderer".into(),json!({"texture":texture,"region":{"frame":frame},"size":[2,3],"pivot":[0.25,0.75],"tint":[1,0.5,0.25,0.75],"flip_x":true,"layer":-2,"order":17,"mode":{"kind":"nine_slice","border":[1,2,3,4],"pixels_per_unit":16}}));
+    assert!(matches!(
+        cook_scene(&project, &sid),
+        Err(CookError::Document(_))
+    ));
+    let components = &mut project
+        .scenes
+        .get_mut(&sid)
+        .unwrap()
+        .entities
+        .get_mut(&entity)
+        .unwrap()
+        .components;
+    components.remove("MeshRenderer");
+    components.insert("Transform".into(), json!(incant_doc::Transform::default()));
+    let bytes = cook_scene(&project, &sid).unwrap();
+    let scene = CookedScene::from_bytes(&bytes).unwrap();
+    let node = scene
+        .spatial()
+        .iter()
+        .find(|n| n.entity == stable_id(&entity).unwrap())
+        .unwrap();
+    assert!(node.mesh.is_none());
+    let sprite = node.sprite.as_ref().unwrap();
+    assert_eq!(sprite.texture, stable_id(&texture).unwrap());
+    assert_eq!(
+        sprite.region,
+        incant_runtime::NativeSpriteRegion::Atlas {
+            frame: stable_id(frame).unwrap()
+        }
+    );
+    assert_eq!(sprite.layer, -2);
+    assert_eq!(sprite.order, 17);
+    assert!(sprite.flip_x);
+}

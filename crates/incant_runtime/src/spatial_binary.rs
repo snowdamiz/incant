@@ -22,6 +22,9 @@ pub(crate) fn encoded_size(n: &CookedSpatial) -> usize {
         + n.point.as_ref().map_or(0, |_| 40)
         + n.spot.as_ref().map_or(0, |_| 56)
         + n.environment.as_ref().map_or(0, |_| 32)
+        + n.sprite
+            .as_deref()
+            .map_or(0, crate::sprite_binary::encoded_size)
 }
 pub(crate) fn write_asset(bytes: &mut Vec<u8>, asset: &VisualAssetRef) {
     bytes.extend(asset.id.0);
@@ -57,7 +60,8 @@ pub(crate) fn write(bytes: &mut Vec<u8>, n: &CookedSpatial) {
             | u8::from(n.directional.is_some()) << 2
             | u8::from(n.point.is_some()) << 3
             | u8::from(n.spot.is_some()) << 4
-            | u8::from(n.environment.is_some()) << 5,
+            | u8::from(n.environment.is_some()) << 5
+            | u8::from(n.sprite.is_some()) << 6,
     );
     if let Some(c) = &n.camera {
         floats(bytes, [c.fov_degrees, c.near, c.far]);
@@ -106,6 +110,9 @@ pub(crate) fn write(bytes: &mut Vec<u8>, n: &CookedSpatial) {
         bytes.extend(e.texture.0);
         floats(bytes, [e.intensity, e.rotation_degrees]);
     }
+    if let Some(s) = &n.sprite {
+        crate::sprite_binary::write(bytes, s);
+    }
 }
 fn flag(r: &mut Reader<'_>) -> Result<bool, SceneError> {
     match r.byte()? {
@@ -114,10 +121,10 @@ fn flag(r: &mut Reader<'_>) -> Result<bool, SceneError> {
         _ => Err(SceneError::Invalid("spatial boolean flag")),
     }
 }
-pub(crate) fn read(r: &mut Reader<'_>) -> Result<CookedSpatial, SceneError> {
+pub(crate) fn read(r: &mut Reader<'_>, version: u32) -> Result<CookedSpatial, SceneError> {
     let mut n = CookedSpatial::empty(StableId(r.array()?));
     let mask = r.byte()?;
-    if mask == 0 || mask > 63 {
+    if mask == 0 || mask > if version >= 5 { 127 } else { 63 } {
         return Err(SceneError::Invalid("spatial component mask"));
     }
     if mask & 1 != 0 {
@@ -190,6 +197,9 @@ pub(crate) fn read(r: &mut Reader<'_>) -> Result<CookedSpatial, SceneError> {
             intensity,
             rotation_degrees,
         });
+    }
+    if mask & 64 != 0 {
+        n.sprite = Some(Box::new(crate::sprite_binary::read(r)?));
     }
     Ok(n)
 }

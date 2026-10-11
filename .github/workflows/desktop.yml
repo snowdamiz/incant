@@ -53,6 +53,8 @@ jobs:
       - run: npm test --workspace editor/ui
       - run: cargo test --workspace --release --locked --features incant_audio_runtime/scene --timings
       - run: cargo check -p incant_audio --features device --locked
+      # The workspace default deliberately omits this optional player module.
+      - run: cargo clippy -p incant_game_player --features render-gpu --all-targets --release --locked -- -D warnings
       # Each GPU test owns a native device; serialize device lifetimes to avoid
       # hosted driver crashes when many renderer contexts initialize together.
       # Keep the same workspace feature graph as the preceding test run; scoped
