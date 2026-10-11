@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import type { ClipboardEvent, FormEvent, KeyboardEvent, ReactNode } from 'react';
 import type { BridgeError, ProjectAsset, TextureUsage } from '../../bridge/contract';
-import { defaultUsage, draftProblems, filledRows, useAssets } from '../../assets/AssetsContext';
+import { defaultUsage, draftProblems, filledRows, reimportRequest, useAssets } from '../../assets/AssetsContext';
 import type { DraftRow, ImportOutcome } from '../../assets/AssetsContext';
-import { ACCEPTED_FORMATS, MAX_BATCH, USAGE_HINT, USAGE_LABEL, isConflict, kindLabel, sourceKind, splitPaste } from '../../assets/paths';
+import { ACCEPTED_FORMATS, MAX_BATCH, USAGE_HINT, USAGE_LABEL, isConflict, kindLabel, sourceKind, sourceTypeLabel, splitPaste, textureTag } from '../../assets/paths';
+import type { SourceKind } from '../../assets/paths';
 import { Icon, iconForKind } from '../../icons/Icon';
+import type { IconName } from '../../icons/Icon';
 import { useShell } from '../../shell/ShellContext';
 import { StateView } from '../StateView';
 import { assetRowId, countFiles, importAvailability } from '../../assets/library';
@@ -32,6 +34,14 @@ export function PathText({ path }: { path: string }) {
 
 const USAGES: readonly TextureUsage[] = ['color', 'linear', 'normal'];
 const TITLE_ID = 'asset-inspector-title';
+
+/** The glyph and kind tint of an import source; a sprite atlas cooks to a texture. */
+const SOURCE_GLYPH: Readonly<Record<SourceKind, { readonly icon: IconName; readonly kind: string }>> = {
+  model: { icon: 'model', kind: 'model' },
+  image: { icon: 'texture', kind: 'texture' },
+  atlas: { icon: 'texture', kind: 'texture' },
+  audio: { icon: 'audio', kind: 'audio' },
+};
 
 /**
  * Moves focus into the Inspector after it renders: the asset name for details, the first
@@ -98,8 +108,8 @@ export function useAssetInspectorHeader(): ReactNode {
   if (pane === 'import') return <IdentityHeader icon="import" name="Import assets" titleId={TITLE_ID} focusable />;
   const asset = pane === 'details' ? assets.find((candidate) => candidate.id === selected) : undefined;
   if (!asset) return null;
-  // Kind and usage are spoken with the name; the Interpretation section shows the usage.
-  const description = [kindLabel(asset.kind), asset.textureUsage ? USAGE_LABEL[asset.textureUsage] : null].filter(Boolean).join(', ');
+  // Kind and usage (or "Atlas") are spoken with the name; the Interpretation section shows the usage.
+  const description = [kindLabel(asset.kind), textureTag(asset)].filter(Boolean).join(', ');
   return <IdentityHeader icon={iconForKind(asset.kind)} kind={asset.kind} name={asset.name} titleId={TITLE_ID} focusable description={description} />;
 }
 
@@ -210,7 +220,10 @@ function AssetDetails({ asset, availability }: { asset: ProjectAsset; availabili
   const { pending, outcome, dismissOutcome, reimport, reimportUsage, setReimportUsage } = useAssets();
   const saved = asset.textureUsage ?? 'color';
   const chosen = reimportUsage[asset.id] ?? saved;
-  const changed = asset.kind === 'texture' && chosen !== saved;
+  // Only an ordinary image can be read another way; the button names a change only when
+  // the reimport request actually carries one.
+  const source = asset.kind === 'texture' ? sourceKind(asset.path) : null;
+  const changed = reimportRequest(asset, reimportUsage[asset.id]).textureUsage !== undefined;
   const mine = pending?.asset === asset.id;
   const busy = pending !== null;
   const ownOutcome = outcome && outcome.job.kind === 'reimport' && outcome.job.asset === asset.id ? outcome : null;
@@ -237,18 +250,29 @@ function AssetDetails({ asset, availability }: { asset: ProjectAsset; availabili
           <h4 className="asset-section__title" id={`usage-${asset.id}`}>
             Interpretation
           </h4>
-          <UsageChoice
-            name={`reimport-usage-${asset.id}`}
-            legend={`Interpret ${asset.name} as`}
-            value={chosen}
-            saved={saved}
-            disabled={busy}
-            onChange={(usage) => setReimportUsage(asset.id, usage)}
-          />
-          <p className="asset-section__hint">
-            {USAGE_HINT[chosen]}
-            {changed ? <span className="asset-section__changed"> Saved as {USAGE_LABEL[saved]}; reimport to apply.</span> : null}
-          </p>
+          {source === 'image' ? (
+            <>
+              <UsageChoice
+                name={`reimport-usage-${asset.id}`}
+                legend={`Interpret ${asset.name} as`}
+                value={chosen}
+                saved={saved}
+                disabled={busy}
+                onChange={(usage) => setReimportUsage(asset.id, usage)}
+              />
+              <p className="asset-section__hint">
+                {USAGE_HINT[chosen]}
+                {changed ? <span className="asset-section__changed"> Saved as {USAGE_LABEL[saved]}; reimport to apply.</span> : null}
+              </p>
+            </>
+          ) : (
+            // A sprite atlas is one color page; no other reading exists, so the saved
+            // interpretation is shown as a value instead of being offered as a choice.
+            <>
+              <p className="asset-value">{USAGE_LABEL[saved]}</p>
+              <p className="asset-section__hint">{source === 'atlas' ? 'Sprite atlases are always color.' : USAGE_HINT[saved]}</p>
+            </>
+          )}
         </section>
       ) : null}
       <section className="asset-section" aria-label="Reimport">
@@ -360,6 +384,8 @@ function ImportForm({ assets }: { assets: readonly ProjectAsset[] }) {
       <ol className="import-rows" aria-label="Paths to import">
         {draft.map((row, index) => {
           const kind = row.source ? sourceKind(row.source) : null;
+          const glyph = kind ? SOURCE_GLYPH[kind] : null;
+          const type = kind ? sourceTypeLabel(kind, row.source) : null;
           const existing = assets.find((asset) => asset.path === row.source);
           const problem = problems.get(row.key);
           const show = problem !== undefined && (attempted || (visited.has(row.key) && row.source !== ''));
@@ -367,8 +393,8 @@ function ImportForm({ assets }: { assets: readonly ProjectAsset[] }) {
           return (
             <li key={row.key} className={`import-row${show ? ' is-invalid' : ''}`}>
               <div className="import-row__line">
-                <span className={`import-row__kind${kind ? ` kind--${kind === 'image' ? 'texture' : 'model'}` : ''}`} aria-hidden="true">
-                  <Icon name={kind === 'model' ? 'model' : kind === 'image' ? 'texture' : 'prefab'} size={14} />
+                <span className={`import-row__kind${glyph ? ` kind--${glyph.kind}` : ''}`} aria-hidden="true">
+                  <Icon name={glyph?.icon ?? 'prefab'} size={14} />
                 </span>
                 <input
                   id={`import-row-${row.key}`}
@@ -428,9 +454,9 @@ function ImportForm({ assets }: { assets: readonly ProjectAsset[] }) {
                   />
                   {existing ? <span className="import-row__existing">Updates “{existing.name}”</span> : null}
                 </div>
-              ) : kind === 'model' ? (
+              ) : type ? (
                 <div className="import-row__meta">
-                  <span className="import-row__type">Model</span>
+                  <span className="import-row__type">{type}</span>
                   {existing ? <span className="import-row__existing">Updates “{existing.name}”</span> : null}
                 </div>
               ) : null}

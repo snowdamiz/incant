@@ -228,6 +228,56 @@ export function unionInitScript(options = {}) {
   `;
 }
 
+/**
+ * A LIVE variant for the typed-import revision: the same snapshot, but the page can
+ * observe what the UI sends and the review can change host state.
+ *   - `window.__incantReview.commands` / `.requests` record every dispatch and request
+ *     exactly as the UI built it (the request shape is real UI logic);
+ *   - `options.results` maps a command type to a MOCKED result ({ ok: true } stands in
+ *     for a native host that cooked and committed; nothing is cooked here);
+ *   - `window.__incantReview.publish(patch)` replaces host-owned snapshot fields and
+ *     notifies subscribers, the way the native host publishes a new state;
+ *   - provider requests are simulated like providerFixture.ts (switch, sign out, cancel,
+ *     connect to the browser step) only when `options.capabilities` names them.
+ */
+export function unionLiveInitScript(options = {}) {
+  const snapshot = unionSnapshot(options);
+  const capabilities = options.capabilities ?? [];
+  return `
+    (() => {
+      let snapshot = ${JSON.stringify(snapshot)};
+      const listeners = new Set();
+      const results = ${JSON.stringify(options.results ?? {})};
+      const refused = { ok: false, error: { code: 'test-double', message: 'Evidence test double: read-only.' } };
+      const review = window.__incantReview = { commands: [], requests: [] };
+      review.publish = (patch) => { snapshot = { ...snapshot, ...patch }; listeners.forEach((listener) => listener()); };
+      const settled = (provider, active) => {
+        const account = (provider.accounts ?? []).find((a) => a.id === active);
+        const { activeAccount, accountLabel, method, phase, error, ...rest } = provider;
+        return account
+          ? { ...rest, status: 'connected', method: 'oauth', accountLabel: account.label, activeAccount: account.id }
+          : { ...rest, status: 'not-connected' };
+      };
+      window.__INCANT_BRIDGE__ = {
+        protocolVersion: 1, capabilities: ${JSON.stringify(capabilities)}, label: 'Evidence test double (not engine)', isFixture: false,
+        getSnapshot: () => snapshot,
+        subscribe: (listener) => { listeners.add(listener); return () => listeners.delete(listener); },
+        dispatch: (command) => { review.commands.push(command); return Promise.resolve(results[command.type] ?? refused); },
+        request: (request) => {
+          review.requests.push(request);
+          const provider = snapshot.provider;
+          if (request.type === 'provider.switch') review.publish({ provider: settled(provider, request.accountId) });
+          else if (request.type === 'provider.disconnect') review.publish({ provider: settled(provider, undefined) });
+          else if (request.type === 'provider.cancel') review.publish({ provider: settled(provider, provider.activeAccount) });
+          else if (request.type === 'provider.connect') review.publish({ provider: { ...provider, status: 'connecting', method: 'oauth', phase: 'browser' } });
+          else return Promise.resolve(refused);
+          return Promise.resolve({ ok: true });
+        },
+      };
+    })();
+  `;
+}
+
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const snapshot = unionSnapshot();
   const nodes = Object.values(snapshot.hierarchy.value.nodes);

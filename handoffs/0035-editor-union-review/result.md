@@ -1,6 +1,234 @@
 # 0035 release-union review: result
 
-## Status
+## Final focused revision: typed imports and account focus
+
+This answers the packet's priority revision "final typed import reconciliation
+(2026-10-11)", acknowledged and applied. The earlier complete review further down stays
+valid for its source (a20d258), and its evidence and limits are preserved.
+
+### Status
+
+- **Done, with one narrow presentation change and tests.** Atlas and audio sources now
+  read correctly in the asset list, the asset details and the import form, in the
+  existing plain style.
+  - **Atlas** (a texture whose source is `.atlas.json`):
+    - the list tags it "Atlas";
+    - its Interpretation shows the saved value, "Color", in a plain value box, with "Sprite
+      atlases are always color.";
+    - there is no Linear or Normal map choice, and the button only reads "Reimport".
+  - **Import rows** name their type: "Color atlas", "WAV audio", "OGG audio". Models keep
+    "Model", and images keep their interpretation choice.
+  - **Audio** is labelled "Audio" (it was the raw "audio") and has no texture settings.
+  - **Ordinary images are unchanged.** Their interpretation stays editable, and "Reimport as
+    …" still sends the change.
+- **Astra's two fixes, verified in the browser:**
+  - **Typed imports (c131ed8).** Atlas, WAV and OGG paths are accepted and sent in one
+    request without a texture usage. Generic JSON is refused before sending.
+  - **Account focus (aa8ed10).** Use moves focus to Close and Escape closes. A host account
+    change clears an open sign-out question and moves focus to Close.
+- **One new behaviour finding for Astra (finding 11).** Keyboard focus falls to `<body>`
+  after an import or reimport completes. It predates this revision but is now reachable for
+  atlas and audio sources.
+- **Preserved.** The 14 committed Camera and SpriteRenderer screenshots are pixel-identical
+  on the final source. Findings 3–10 involve unchanged code and remain open.
+- **Not changed:** Rust, Cargo, schemas, transport, credentials, account requests and path
+  validation. No phase gate is claimed. Native final-pixel acceptance stays pending.
+
+### Model and effort
+
+- Exact model: Claude Opus 5.5, model ID `claude-opus-5-5`.
+- Thinking effort: Max. The session reports reasoning effort "max" to the model. The runner
+  selects and verifies both through ACP, which I cannot inspect from inside the session.
+- No substitution.
+
+### Source
+
+| Item | Value |
+| --- | --- |
+| Base | `e52eef4`: Astra's integration of c131ed8 (typed imports), aa8ed10 (account focus) and my first-round commit |
+| This commit | Presentation and tests in `editor/ui`. The `editor/ui` tree is `5ad2744806a63f08d62bd0a82bfb53e48ba4f069` |
+| Unchanged from the base | `editor/bridge` `4dca2112…`, `schemas` `0c174377…`, `editor/app` `b9add18c…`, `crates` `e9e2c5fa…` |
+| Since my first-round source (3a6aacb) | <ul><li>Editor: Astra's import and account changes with their tests.</li><li>Crates: one Rust test, `crates/incant_import/tests/sprite_references.rs`.</li></ul> |
+
+### What changed
+
+| Surface | Before (e52eef4) | Now |
+| --- | --- | --- |
+| Import row with an atlas or audio source | A generic file glyph, the model tint class, no type line and no "Updates" note | The texture or speaker glyph with its kind class; the type line "Color atlas", "WAV audio" or "OGG audio"; "Updates “name”" when the path matches a project asset |
+| Asset list, atlas | Tag "Color" | Tag "Atlas", spoken "Texture, Atlas" |
+| Asset list and header, audio | Kind spoken as "audio" | "Audio" |
+| Atlas details | <ul><li>An editable Color / Linear / Normal map choice.</li><li>Choosing Linear relabelled the button "Reimport as Linear", although the request sends no usage for an atlas.</li></ul> | <ul><li>The saved value, "Color", in a plain value box, with "Sprite atlases are always color.".</li><li>The button names a change only when `reimportRequest` carries one.</li></ul> |
+| Ordinary image, model and audio details | — | Unchanged, apart from the audio label above |
+
+Changed files:
+- `src/assets/paths.ts`: labels only (`KIND_LABEL.audio`, `textureTag`, `sourceTypeLabel`).
+  Validation is untouched.
+- `src/components/assets/AssetBrowser.tsx` and `src/components/assets/AssetInspector.tsx`.
+- `src/styles/assets.css`: the new `.asset-value` rule.
+- `src/components/assets/Assets.test.tsx`: three tests.
+- `DESIGN.md`: one paragraph, "Assets by source type".
+
+### Tests
+
+- **New.** Three presentation tests: typed import rows, atlas details and reimport, and WAV
+  audio details. Against the previous presentation they fail (3 failed, 28 passed in the
+  file); with this change they pass.
+- **Existing.** With the presentation change and the previous test file, all 517 existing
+  tests pass, so no existing assertion changed.
+- **Full suite.** 30 files and 520 tests pass, the strict typecheck is clean, and the
+  production build passes.
+
+### Rendered check
+
+- **Captures.** Headless Chrome 155.0.8059.40 on the final build: 26 captures (sets `f1` and
+  `f2`).
+- **Results.** 0 axe violations, page errors, remote requests, step errors, window scroll or
+  clipped values; every dialog fits. Observations are in `evidence/typed-import-review.json`.
+
+What is real and what is mocked:
+- **Real UI logic:**
+  - path validation and row labels;
+  - the requests the UI builds, recorded exactly as dispatched;
+  - focus, and all presentation.
+- **Mocked:**
+  - every host result from the live double, where `{ ok: true }` stands in for a native cook
+    and commit;
+  - the asset list it publishes afterwards;
+  - the host-side account change.
+- **Supported natively but not observed here** (per `incant_import`, the importer):
+  - accepts `.atlas.json`, WAV and OGG, and refuses other JSON;
+  - cooks atlases as color only;
+  - registers audio as kind `audio`.
+
+| Check | Observed |
+| --- | --- |
+| Typed sources (normal, minimum) | <ul><li>Rows: "Color atlas" (texture glyph); "WAV audio" and "OGG audio" (speaker glyph); the PNG with its interpretation choice.</li><li>"Import 4 files" sent one request: `sprites/dock_props.atlas.json`, `audio/gulls.wav`, `audio/bell.OGG` and `textures/dock_sign.png`, none with a usage.</li><li>The mocked success reads "Imported 4 files. Undo reverts the whole batch."</li><li>The mocked list shows the new atlas ("Atlas"), audio and image rows with the just-imported mark.</li></ul> |
+| Generic JSON | <ul><li>`data/level.json`, `sprites/sheet.json` and `sprites/ui.atlas.json.bak` each read "Unsupported file type. Use glTF, GLB, PNG, JPEG, EXR, .atlas.json, WAV or OGG."</li><li>Nothing is sent; the status line says "Fix 3 highlighted paths before importing."; focus moves to Path 1.</li></ul> |
+| Atlas details and reimport (normal, minimum, narrow, long name) | <ul><li>Spoken "Texture, Atlas"; shows "Color" and "Sprite atlases are always color."; no radios.</li><li>Reimport sent `{ source: 'sprites/harbor_ui.atlas.json' }`; the mocked result reads "Reimported."</li></ul> |
+| Ordinary image (normal, narrow) | <ul><li>Three choices. Linear gives "Saved as Color; reimport to apply." and "Reimport as Linear".</li><li>That sent `{ source: 'textures/props/crate_albedo.png', textureUsage: 'linear' }`.</li><li>After the mocked success the double still reports Color, because it publishes no new usage.</li></ul> |
+| OGG audio (normal, minimum) | Spoken "Audio"; no Interpretation; Reimport sent `{ source: 'audio/harbor_loop.ogg' }` |
+| The earlier import reproduction | The atlas and OGG rows are now accepted. The request reaches the double, which refuses it as read-only (mocked) |
+| Account switch on the real fixture route (normal, minimum) | Enter on "Use ada@example.com" leaves focus on Close, ring visible. Escape closes and returns focus to the account button |
+| Host account change (live double) | <ul><li>The question "Sign out of studio@example.org…" opens with focus on Keep signed in.</li><li>The host then publishes ada as active: the question clears, focus moves to Close, and the dialog sends no request.</li><li>Escape closes.</li></ul> |
+| The earlier account probe | Use now leaves focus on Close; it used to drop to `<body>` |
+| Camera and SpriteRenderer | The 14 committed screenshots, recaptured as set `v2`, are pixel-identical: 7 of 7 and 7 of 7 (`evidence/pixel-final-camera.json`, `pixel-final-sprite.json`) |
+| Committed asset and account screenshots | The atlas details and the import reproduction differ as intended; the account question step is identical (`pixel-final-assets.json`, `pixel-final-account.json`) |
+
+### Finding 11: focus after an import or reimport
+
+New, behaviour, owned by Astra; not changed here.
+- **What.** Keyboard focus is lost when an import or reimport completes.
+- **Repro** (`tools/findings.mjs` §5, live double, mocked results):
+
+  | Action | Result | Focus afterwards |
+  | --- | --- | --- |
+  | Import, Enter in the path | Success | `<body>` |
+  | Reimport, Enter on the button | Success | `<body>` |
+  | Reimport | Failure | `<body>` |
+  | Import | Failure | Path 1 (kept) |
+- **Why.** While the request runs, the progress line replaces the submit or Reimport button.
+  A successful import also resets the rows. Either way, the focused element disappears.
+- **History.** The same code was in 3a6aacb. Atlas and audio sources can now reach it.
+- **Proposal.** Keep the button mounted, with `aria-disabled` and a busy label, or move focus
+  to the outcome notice when the request settles. Add a keyboard test.
+
+### Status of all findings
+
+| Finding | Status |
+| --- | --- |
+| 1, account switch focus | Fixed in aa8ed10; verified above |
+| 2, import refuses typed sources | Fixed in c131ed8, with this revision's presentation; verified above |
+| 3–10 | Code unchanged; still open, as recorded below |
+| 11, focus after an import | New; above |
+
+### Commands and results
+
+```sh
+cd editor/ui
+npx vitest run src/components/assets/Assets.test.tsx   # new tests on the previous presentation: 3 failed, 28 passed
+npx vitest run                                         # presentation change, previous test file: 517 passed
+npx tsc -b --noEmit                                    # strict: 0 errors
+npx vitest run                                         # 30 files, 520 tests passed
+npm run build                                          # built
+cd ../..
+node handoffs/0035-editor-union-review/tools/capture.mjs f1 --only=t-import-typed,t-import-json,t-atlas-details,t-atlas-long,t-image-reimport,t-audio-details,t-account-switch,t-account-host-change,u-assets,u-asset-atlas,u-asset-atlas-long,u-asset-sheet,u-import-mirror,probe-account   # 26 captures
+node handoffs/0035-editor-union-review/tools/capture.mjs f2 --only=t-account-host-change   # adds the "cleared" snapshot
+node handoffs/0035-editor-union-review/tools/capture.mjs v2 --only=u-pixel-camera,u-pixel-bad,u-broken-camera,camera-rig,map-camera,closeup-camera,u-sprite-sign,u-sprite-board,u-sprite-coil,u-sprite-lantern,u-sprite-broken,u-sprite-long --sizes=normal,minimum,narrow   # 30 captures
+node handoffs/0035-editor-union-review/tools/pixel-diff.mjs handoffs/0035-editor-union-review/screenshots/camera artifacts/0035-editor-union-review/v2 artifacts/0035-editor-union-review/pixel-v2-camera --json=artifacts/0035-editor-union-review/pixel-v2-camera.json   # 7 of 7 identical; sprite likewise
+node handoffs/0035-editor-union-review/tools/pixel-diff.mjs handoffs/0035-editor-union-review/screenshots/assets artifacts/0035-editor-union-review/f1 artifacts/0035-editor-union-review/pixel-f1-assets --json=artifacts/0035-editor-union-review/pixel-f1-assets.json   # 2 intended differences; account: 1 identical
+node handoffs/0035-editor-union-review/tools/findings.mjs artifacts/0035-editor-union-review/findings-edge-rev2   # §1 fixed; §5 is finding 11
+node handoffs/0035-editor-union-review/tools/summarize.mjs f1,f2 --out=artifacts/0035-editor-union-review/summary-typed.json
+node handoffs/0035-editor-union-review/tools/curate.mjs
+(cd handoffs/0035-editor-union-review && shasum -a 256 -c evidence/screenshots.sha256)   # 60 OK
+```
+
+- **The two runs on the previous presentation and test file** temporarily restored the
+  committed files, then put the edits back; `git diff` confirmed the restore.
+- **Not repeated:** the 102-state set and the 96-state sweep.
+- **Not run:**
+  - Cargo;
+  - the native app, WebKit and VoiceOver;
+  - phones.
+
+### Evidence for this revision
+
+`screenshots/final/` holds 12 account-free images; the crops were made with `sips`.
+
+| File | Shows |
+| --- | --- |
+| `t-import-typed-normal-1440x874--rows.png` | Typed rows before submitting, and the list tags |
+| `t-import-typed-minimum-1000x650.png` | The mocked success, the reset form and the new list rows |
+| `t-import-json-normal-1440x874-inspector.png` | Generic JSON refused |
+| `u-import-mirror-normal-1440x874-inspector.png` | The earlier reproduction, now accepted; it pairs with the file of the same name in `screenshots/assets/` |
+| `t-atlas-details-normal-1440x874--details.png` | Atlas details, with Color fixed |
+| `t-atlas-details-narrow-1440x874-inspector.png` | The same at 280 px, after the mocked reimport |
+| `t-atlas-long-narrow-1440x874-inspector.png` | A long atlas name and path |
+| `image-linear-narrow.png` (crop) | An ordinary image with Linear chosen |
+| `t-audio-details-minimum-1000x650--details.png` | OGG audio details |
+| `switch-close.png` (crop) | Focus on Close after Use |
+| `host-change-question.png`, `host-change-cleared.png` (crops) | The question before, and the dialog after, the host account change |
+
+- **Evidence JSON:** `typed-import-review.json` and
+  `pixel-final-{camera,sprite,assets,account}.json`.
+- **Hashes:** `evidence/screenshots.sha256` lists 60. The first-round entries are unchanged.
+- **Logs** (ignored):
+  - `final2-vitest.log`: `5086cbc9…`.
+  - `f1.log`: `19b78571…`.
+  - `v2.log`: `9be99630…`.
+  - `findings-rev2.log`: `df099e4c…`.
+
+### Native: still not observed
+
+The earlier checklist below still stands. On an isolated build of this source, also check:
+1. **Import into a saved project** of a real `.atlas.json`, a WAV and an OGG file, then:
+   - the cooked list: the Atlas tag and the audio rows;
+   - atlas details, with Color fixed;
+   - reimport.
+2. Generic JSON is refused.
+3. Focus after Use, and after a host account change.
+4. Focus after an import or reimport (finding 11).
+
+### Changed paths in this commit
+
+- **`editor/ui`:**
+  - `src/assets/paths.ts`;
+  - `src/components/assets/AssetBrowser.tsx` and `AssetInspector.tsx`;
+  - `src/styles/assets.css`;
+  - `src/components/assets/Assets.test.tsx`;
+  - `DESIGN.md`.
+- **`handoffs/0035-editor-union-review/`:**
+  - `result.md`;
+  - `tools/`: the `t-*` states in `capture.mjs`, the live double in `union-double.mjs`, §5 of
+    `findings.mjs`, and the `final` group in `curate.mjs`;
+  - `screenshots/final/`;
+  - five new evidence JSON files, and the updated manifest.
+
+## Earlier complete review: source a20d258 (commit 9fb82e6)
+
+Preserved as recorded. Its evidence and limits hold for that source. Findings 1 and 2 have
+since been fixed and verified (above).
+
+### Status
 
 The browser review of the code union a20d258 is complete. **No source change.** No phase
 gate is approved or claimed, and nothing here is native or device evidence.
@@ -33,7 +261,7 @@ gate is approved or claimed, and nothing here is native or device evidence.
 - **Native.** No native app was launched, focused or captured. The a20d258 binary is
   unobserved, and the native checklist below remains open.
 
-## Model and effort
+### Model and effort
 
 - Exact model: Claude Opus 5.5, model ID `claude-opus-5-5`.
 - Thinking effort: Max. The session reports reasoning effort "max" to the model. The runner
@@ -41,7 +269,7 @@ gate is approved or claimed, and nothing here is native or device evidence.
   from inside the session.
 - No model or effort substitution occurred.
 
-## Packet and boundaries
+### Packet and boundaries
 
 - I read `brief.md` (the only packet section, at 3a6aacb), CLAUDE.md and the union note
   `docs/spikes/editor-release-union.md`. I added no calendar target and approved no gate.
@@ -56,7 +284,7 @@ gate is approved or claimed, and nothing here is native or device evidence.
   - All rendering ran in headless Chrome against `vite preview` on 127.0.0.1, at the first
     free port from 4233; every server was closed.
 
-## Source identity
+### Source identity
 
 | Item | Value |
 | --- | --- |
@@ -66,7 +294,7 @@ gate is approved or claimed, and nothing here is native or device evidence.
 | What the native host sends | The whole `schema_registry()`: 20 schemas, including Project, SpriteAtlas and SpriteRenderer. SpriteRenderer has no shared `order` annotation, and its tint has no colour widget annotation. `snapshotFromEngine` turns `region`, an untagged `anyOf` of a rectangle or `{frame}`, into `unsupported`. No sprite-specific UI code exists. |
 | Browser | Headless Chrome 155.0.8059.40 at device scale 2, on an Apple M5 Pro with 48 GB and macOS 26.6 (the same Chrome as 0033) |
 
-## Method
+### Method
 
 1. **Regression sweep.**
    - I ran 0033's unchanged `capture.mjs` and evidence double on the union build: 96 captures
@@ -91,7 +319,7 @@ gate is approved or claimed, and nothing here is native or device evidence.
    - `findings.mjs` reproduces the findings. `summarize.mjs`, `compare-sweep.mjs`,
      `pixel-diff.mjs` and `curate.mjs` produce the committed evidence.
 
-## The union versus the plain design
+### The union versus the plain design
 
 | Check | Result |
 | --- | --- |
@@ -101,7 +329,7 @@ gate is approved or claimed, and nothing here is native or device evidence.
 | Sweep page checks | 0 axe violations, page errors, remote requests, step errors or window scroll; at most 102 dock rows mounted |
 | 0035 set page checks (`evidence/union-review.json`) | <ul><li>102 captures with 0 page errors, remote requests, step errors or window scroll.</li><li>Every dialog fits the window.</li><li>One axe violation, the inactive-window crumb (finding 9).</li><li>Clipped values are only reference IDs and asset paths in reference boxes. Each is ellipsized with the full value in the tooltip, after the resolved name where one exists: the same pattern 0033 recorded.</li></ul> |
 
-### The director's five requirements in the union
+#### The director's five requirements in the union
 
 | Requirement | Observed |
 | --- | --- |
@@ -111,7 +339,7 @@ gate is approved or claimed, and nothing here is native or device evidence.
 | 4. Avatar-only account control | <ul><li>30×28 px in all 102 captures, showing at most one initial.</li><li>The state lives in the accessible name and tooltip.</li><li>The corner dot is amber while signing in and red on a problem.</li><li>It fits beside the macOS inset and beside the Windows controls at 1000×650.</li></ul> |
 | 5. No ornament | <ul><li>Pixel-identical to the plain screenshots apart from the halo removal.</li><li>The union states use the same plain components: no tiles, glows, accent edges or pills.</li></ul> |
 
-## Camera: the three real projections
+### Camera: the three real projections
 
 | State | Observed (`screenshots/camera/`) |
 | --- | --- |
@@ -125,7 +353,7 @@ gate is approved or claimed, and nothing here is native or device evidence.
 The sample fixture declares `pixel_perfect` but has no pixel-perfect camera. The double covers
 it with the real schema.
 
-## SpriteRenderer and cooked atlases as the union shows them
+### SpriteRenderer and cooked atlases as the union shows them
 
 All of these come from the generic schema path, in `screenshots/sprite/` and
 `screenshots/assets/`:
@@ -155,7 +383,7 @@ All of these come from the generic schema path, in `screenshots/sprite/` and
   atlases. The snapshot carries no frame data, so no frames are shown.
 - **Sprite entities** use the generic entity glyph.
 
-## Interaction probes
+### Interaction probes
 
 All results are in `evidence/union-review.json` → `observations`.
 
@@ -197,12 +425,12 @@ All results are in `evidence/union-review.json` → `observations`.
   Focus stays in the dock, by design. The part-41 diagnostic opens Rubble Pile with Part 42
   in view.
 
-## Findings
+### Findings
 
 Ranked by user impact. "Pre-existing" means the code is identical at ce06c31 and on the
 sprite/atlas line.
 
-1. **Account switch drops keyboard focus.** Pre-existing. Behaviour owned by Astra.
+1. **Account switch drops keyboard focus.** Pre-existing. Behaviour owned by Astra. **Fixed by Astra in aa8ed10; verified in the final revision above.**
    - **Repro** (`tools/findings.mjs` §1):
      - In signed-in-multi, open the dialog with Enter, Tab to "Use ada@example.com" and press
        Enter. Focus moves to `<body>`.
@@ -213,7 +441,7 @@ sprite/atlas line.
    - **Fix.** Add the active account to `stateKey` in `AccountDialog.tsx`, so the existing
      recovery puts focus on Close. This also clears a stale sign-out question. Add a test:
      switch by keyboard, then focus is Close and Escape closes.
-2. **The import form refuses paths the union's importer accepts.** Behaviour owned by Astra.
+2. **The import form refuses paths the union's importer accepts.** Behaviour owned by Astra. **Fixed by Astra in c131ed8, with the presentation reconciled and verified in the final revision above.**
    - **What.** `assets/paths.ts` claims to mirror `incant_import` but accepts only glTF, GLB,
      PNG, JPEG and EXR. The importer also takes `.atlas.json`, new on the sprite/atlas line,
      and WAV or OGG, which predate the union.
@@ -278,7 +506,7 @@ sprite/atlas line.
   double advertised them in `title-windows-controls`.
 - The dock reveal keeps focus in the list, by design.
 
-## Native: not observed
+### Native: not observed
 
 The director's 0d14f4f preview was not touched, and the a20d258 union binary was not opened.
 No older capture is labelled as this union. Each item below is still to be checked on an
@@ -316,7 +544,7 @@ isolated a20d258 build, with account-free crops for anything committed:
    - the import form with a saved project (finding 2).
 10. **VoiceOver:** names of the account button and the Inspector header; pager announcements.
 
-## Commands and results
+### Commands and results
 
 ```sh
 npm ci --ignore-scripts --workspace editor/ui --no-audit --no-fund    # pinned lockfile, 101 packages
@@ -353,7 +581,7 @@ git diff --check                                                      # clean
   - phones;
   - live accounts.
 
-## Evidence
+### Evidence
 
 Committed under this handoff. The 39 screenshots are all account-free: invented example
 addresses, the sample fixture or the evidence double.
@@ -383,7 +611,7 @@ addresses, the sample fixture or the evidence double.
 | `evidence/union-review.json` | Per-capture rows, notices, account control, dialogs, live text and probe observations for all 102 captures |
 | `evidence/sweep-compare.json`, `pixel-plain.json`, `pixel-repeat.json` | The plain-design comparisons above |
 
-## Changed paths
+### Changed paths
 
 - `handoffs/0035-editor-union-review/result.md`: this file.
 - `handoffs/0035-editor-union-review/tools/`: the seven new tools listed in Method.
@@ -393,7 +621,7 @@ Nothing in `editor/`, `crates/`, `schemas/`, `docs/`, CI or PLAN changed. Not co
 raw sets (`u35-sweep`, `u35-repeat`, `r1`, `r2`, `s1`, `s2`, `smoke1`, `fix1`), the scratch
 experiments and the logs, all in the ignored `artifacts/`.
 
-## Requests for Astra
+### Requests for Astra
 
 1. Findings 1 and 2, behaviour fixes, each with a test. I can review their rendered result.
 2. Findings 4 and 5 (tint), Rust shared schema annotations. Finding 3, the bridge's untagged
@@ -407,7 +635,7 @@ experiments and the logs, all in the ignored `artifacts/`.
 5. `docs/spikes/editor-release-union.md` still says this review is pending. That doc is
    outside my allowed paths.
 
-## Open questions
+### Open questions
 
 - Should a sprite authored without `sampling` or flips show "nearest" and "Off" with a Default
   tag (finding 7)? That would apply to every component's boolean and enum defaults.

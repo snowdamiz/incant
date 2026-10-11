@@ -12,6 +12,17 @@ const ASSETS: ProjectAsset[] = [
   { id: '01J9ZF1XTR0000000000000003' as Ulid, name: 'crate_normal', path: 'textures/crate_normal.png', kind: 'texture', fingerprint: 'f3', textureUsage: 'normal' },
 ];
 
+/** The same project plus the typed sources the native importer registers: a sprite atlas (a color texture) and WAV audio. */
+const TYPED_ASSETS: ProjectAsset[] = [
+  ...ASSETS,
+  { id: '01J9ZF1XTR0000000000000004' as Ulid, name: 'ui', path: 'sprites/ui.atlas.json', kind: 'texture', fingerprint: 'f4', textureUsage: 'color' },
+  { id: '01J9ZF1XTR0000000000000005' as Ulid, name: 'theme', path: 'audio/theme.wav', kind: 'audio', fingerprint: 'f5' },
+];
+
+/** The text of an element's accessible description. */
+const describedBy = (element: Element) =>
+  (element.getAttribute('aria-describedby') ?? '').split(' ').filter(Boolean).map((id) => document.getElementById(id)?.textContent ?? '').join(' ');
+
 /**
  * TEST DOUBLE, not a bridge implementation. Records every dispatch and resolves it only
  * when the test says so, so busy, failed and successful states are driven explicitly.
@@ -253,6 +264,60 @@ describe('asset library', () => {
       sources: [{ source: 'sprites/ui.atlas.json' }, { source: 'audio/theme.wav' }, { source: 'audio/hit.OGG' }],
     }]);
     await host.resolve({ ok: true });
+  });
+
+  it('labels atlas and audio import rows by type and offers an interpretation only for images', () => {
+    const { container } = renderWith(controlledBridge({ assets: { status: 'ready', value: TYPED_ASSETS } }).bridge);
+    openAssets();
+    openImport();
+    fireEvent.paste(pathInput(1), { clipboardData: { getData: () => 'sprites/ui.atlas.json\naudio/theme.wav\naudio/hit.OGG\ntextures/sign.png' } });
+    const rows = [...container.querySelectorAll('.import-row')];
+    expect(rows.map((row) => row.querySelector('.import-row__type')?.textContent ?? null)).toEqual(['Color atlas', 'WAV audio', 'OGG audio', null]);
+    expect(rows.map((row) => row.querySelector('.import-row__existing')?.textContent ?? null)).toEqual(['Updates “ui”', 'Updates “theme”', null, null]);
+    expect(rows.map((row) => row.querySelector('.import-row__kind')?.classList.value)).toEqual([
+      'import-row__kind kind--texture',
+      'import-row__kind kind--audio',
+      'import-row__kind kind--audio',
+      'import-row__kind kind--texture',
+    ]);
+    expect([1, 2, 3].map((n) => screen.queryByRole('group', { name: `Interpret path ${n} as` }))).toEqual([null, null, null]);
+    expect(within(screen.getByRole('group', { name: 'Interpret path 4 as' })).getAllByRole('radio')).toHaveLength(3);
+  });
+
+  it('shows an atlas as a fixed color texture and reimports it without an interpretation', async () => {
+    const host = controlledBridge({ assets: { status: 'ready', value: TYPED_ASSETS } });
+    renderWith(host.bridge);
+    openAssets();
+    const row = screen.getByRole('option', { name: /^ui\s*Texture,\s*Atlas/ });
+    expect(row.querySelector('.asset-row__tag')?.lastChild?.textContent).toBe('Atlas');
+    fireEvent.click(row);
+    expect(describedBy(screen.getByRole('heading', { name: 'ui' }))).toBe('Texture, Atlas');
+    const interpretation = screen.getByRole('region', { name: 'Interpretation' });
+    expect(within(interpretation).queryAllByRole('radio')).toEqual([]);
+    expect(interpretation.querySelector('.asset-value')?.textContent).toBe('Color');
+    expect(interpretation.textContent).toContain('Sprite atlases are always color.');
+    fireEvent.click(screen.getByRole('button', { name: 'Reimport' }));
+    expect(host.commands.at(-1)).toEqual({ type: 'asset.import', sources: [{ source: 'sprites/ui.atlas.json' }] });
+    await host.resolve({ ok: true });
+
+    // An ordinary image in the same project keeps its editable interpretation.
+    fireEvent.click(screen.getByRole('option', { name: /^Crate albedo/ }));
+    expect(within(screen.getByRole('region', { name: 'Interpretation' })).getAllByRole('radio')).toHaveLength(3);
+    fireEvent.click(screen.getByRole('radio', { name: 'Normal map' }));
+    expect(screen.getByRole('button', { name: 'Reimport as Normal map' })).toBeTruthy();
+  });
+
+  it('describes WAV audio by kind, with no texture settings', async () => {
+    renderWith(controlledBridge({ assets: { status: 'ready', value: TYPED_ASSETS } }).bridge);
+    openAssets();
+    const row = screen.getByRole('option', { name: /^theme\s*Audio$/ });
+    expect(row.querySelector('.asset-row__tag')?.textContent).toBe('Audio');
+    expect(row.querySelector('.asset-row__tag .visually-hidden')?.textContent).toBe('Audio');
+    fireEvent.click(row);
+    expect(describedBy(screen.getByRole('heading', { name: 'theme' }))).toBe('Audio');
+    expect(screen.queryByRole('region', { name: 'Interpretation' })).toBeNull();
+    expect(screen.getByRole('button', { name: 'Reimport' })).toBeTruthy();
+    await expectNoAxeViolations(document.querySelector<HTMLElement>('[data-region="inspector"]')!);
   });
 
   it('imports a batch as one command, sending usage only for images that change it', async () => {

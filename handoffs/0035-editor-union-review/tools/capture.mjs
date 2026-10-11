@@ -12,7 +12,10 @@
  *   - states the 0033 set lacks: every account-dialog state, host window chrome,
  *     Windows/Linux key notation, the keyboard-opened menu;
  *   - probes that RECORD what happened (focus, reveal, paging, live announcements)
- *     in report.json as `observations`, with extra screenshots at named steps.
+ *     in report.json as `observations`, with extra screenshots at named steps;
+ *   - `t-*` states for the final typed-import revision on the live double
+ *     (union-double.mjs `unionLiveInitScript`): the requests the UI sends are recorded
+ *     as built, while every host result and published asset list is MOCKED.
  *
  * Output: a NEW ignored directory artifacts/0035-editor-union-review/<set>/ (an existing
  * one is refused). The server and browser are closed on exit.
@@ -28,7 +31,7 @@ import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright-core';
 import { preview } from 'vite';
 import { reviewInitScript } from '../../0033-editor-design-review/tools/review-double.mjs';
-import { unionInitScript } from './union-double.mjs';
+import { unionInitScript, unionLiveInitScript } from './union-double.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(here, '../../..');
@@ -213,6 +216,63 @@ function shortcutNames(actions) {
 
 const obsFocus = async (page, obs, step, extra = {}) => obs.push({ step, focus: await page.evaluate(focusInfo), ...extra });
 
+/* ---- Typed-import revision helpers (live double; results are MOCKED, request shapes are real) ---- */
+
+const STUDIO = { id: 'acct-fixture-2', label: 'studio@example.org' };
+const LONG = { id: 'acct-fixture-3', label: 'a.very.long.account.name.for.wrapping@example.net' };
+const MULTI = { status: 'connected', provider: 'openai', method: 'oauth', accountLabel: STUDIO.label, accounts: [ADA, STUDIO, LONG], activeAccount: STUDIO.id };
+const PROVIDER_CAPS = ['provider.connect', 'provider.cancel', 'provider.disconnect', 'provider.switch'];
+/** Import available; every asset.import dispatch gets a mocked { ok: true }. */
+const LIVE_IMPORT = { url: '/', init: unionLiveInitScript({ capabilities: ['asset.import'], assetImport: { available: true }, results: { 'asset.import': { ok: true } } }) };
+const sent = (page) => page.evaluate(() => window.__incantReview.commands);
+
+/** Each import row as shown: path, type line, glyph tint, interpretation legend, problem. */
+function importRows() {
+  return [...document.querySelectorAll('#asset-inspector .import-row')].map((row) => ({
+    path: row.querySelector('input')?.value,
+    type: row.querySelector('.import-row__type')?.textContent ?? null,
+    glyph: [...(row.querySelector('.import-row__kind')?.classList ?? [])].find((c) => c.startsWith('kind--')) ?? null,
+    interpretation: row.querySelector('fieldset legend')?.textContent ?? null,
+    updates: row.querySelector('.import-row__existing')?.textContent ?? null,
+    problem: row.querySelector('.import-row__problem')?.textContent ?? null,
+  }));
+}
+
+/** Each asset list row: accessible text, visible tag, glyph tint, just-imported marker. */
+function assetRows() {
+  return [...document.querySelectorAll('#asset-list [role="option"]')].map((row) => ({
+    name: row.textContent.replace(/\s+/g, ' ').trim(),
+    tag: [...(row.querySelector('.asset-row__tag')?.childNodes ?? [])].filter((n) => n.nodeType === Node.TEXT_NODE).map((n) => n.textContent).join('') || null,
+    glyph: [...(row.querySelector('.asset-row__kind')?.classList ?? [])].find((c) => c.startsWith('kind--')) ?? null,
+    recent: Boolean(row.querySelector('.asset-row__recent')),
+  }));
+}
+
+/** The asset details as shown: spoken header description, Interpretation text, radios, button. */
+function assetDetails() {
+  const heading = document.querySelector('#asset-inspector-title');
+  const describedBy = heading?.getAttribute('aria-describedby');
+  const usage = document.querySelector('#asset-inspector section[aria-labelledby^="usage-"]');
+  return {
+    name: heading?.textContent ?? null,
+    description: describedBy ? document.getElementById(describedBy)?.textContent ?? null : null,
+    interpretation: usage ? usage.innerText.replace(/\s+/g, ' ').trim() : null,
+    radios: document.querySelectorAll('#asset-inspector input[type="radio"]').length,
+    value: usage?.querySelector('.asset-value')?.textContent ?? null,
+    button: document.querySelector('#asset-inspector .asset-section__actions button')?.textContent?.trim() ?? null,
+    notice: document.querySelector('#asset-inspector .asset-note')?.textContent?.replace(/\s+/g, ' ').trim() ?? null,
+  };
+}
+
+/** Fills the import form's rows in order, adding each next row with Shift+Enter. */
+const fillPaths = async (page, paths) => {
+  for (const [i, path] of paths.entries()) {
+    const input = page.getByRole('textbox', { name: `Path ${i + 1}` });
+    await input.fill(path);
+    if (i < paths.length - 1) await input.press('Shift+Enter');
+  }
+};
+
 const STATES = [
   // ---- Camera: the three projections the real schema declares ----
   { key: 'camera-rig', ...fixture(), steps: [tree('Camera Rig')], sizes: ['normal', 'minimum', 'narrow'] },
@@ -299,6 +359,145 @@ const STATES = [
   { key: 'title-windows', ...union({ provider: SIGNED_IN, window: WINDOWS }), sizes: ['normal', 'minimum'] },
   // The UI draws minimize/maximize/close only for advertised window capabilities; the double still refuses them.
   { key: 'title-windows-controls', ...union({ provider: SIGNED_IN, window: WINDOWS, capabilities: ['window.drag', 'window.minimize', 'window.maximize', 'window.close'] }), sizes: ['normal', 'minimum'] },
+  // ---- Final typed-import revision: real UI logic, MOCKED host results (live double) ----
+  {
+    key: 't-import-typed',
+    ...LIVE_IMPORT,
+    steps: [async (page, obs, snap) => {
+      await openAssets(page);
+      await page.getByRole('button', { name: 'Import' }).click();
+      await fillPaths(page, ['sprites/dock_props.atlas.json', 'audio/gulls.wav', 'audio/bell.OGG', 'textures/dock_sign.png']);
+      obs.push({ step: 'four typed sources entered', rows: await page.evaluate(importRows) });
+      await snap('rows');
+      await page.getByRole('button', { name: 'Import 4 files' }).click();
+      await page.waitForTimeout(150);
+      obs.push({ step: 'Import 4 files: request the UI sent; result MOCKED { ok: true }', commands: await sent(page), details: await page.evaluate(assetDetails) });
+      // MOCKED host publication of what a native commit would register (kinds as incant_import writes them).
+      await page.evaluate(() => {
+        const current = window.__INCANT_BRIDGE__.getSnapshot().assets.value;
+        const add = (id, name, path, kind, usage) => ({ id, name, path, kind, fingerprint: `mocked-${name}`, ...(usage ? { textureUsage: usage } : {}) });
+        window.__incantReview.publish({ assets: { status: 'ready', value: [...current,
+          add('01JA35T0000000000000000001', 'dock_props', 'sprites/dock_props.atlas.json', 'texture', 'color'),
+          add('01JA35T0000000000000000002', 'gulls', 'audio/gulls.wav', 'audio'),
+          add('01JA35T0000000000000000003', 'bell', 'audio/bell.OGG', 'audio'),
+          add('01JA35T0000000000000000004', 'dock_sign', 'textures/dock_sign.png', 'texture', 'color'),
+        ] } });
+      });
+      await page.waitForTimeout(150);
+      obs.push({ step: 'MOCKED host publishes the four assets', list: await page.evaluate(assetRows) });
+    }],
+    sizes: ['normal', 'minimum'],
+  },
+  {
+    key: 't-import-json',
+    ...LIVE_IMPORT,
+    steps: [async (page, obs) => {
+      await openAssets(page);
+      await page.getByRole('button', { name: 'Import' }).click();
+      await fillPaths(page, ['data/level.json', 'sprites/sheet.json', 'sprites/ui.atlas.json.bak']);
+      await page.locator('form.import-form button[type="submit"]').click();
+      await page.waitForTimeout(150);
+      obs.push({
+        step: 'submit generic JSON paths: refused before sending',
+        rows: await page.evaluate(importRows),
+        commands: await sent(page),
+        live: await page.locator('.statusbar__message').textContent(),
+        focus: await page.evaluate(focusInfo),
+      });
+    }],
+    sizes: ['normal'],
+  },
+  {
+    key: 't-atlas-details',
+    ...LIVE_IMPORT,
+    steps: [asset('harbor_ui'), async (page, obs, snap) => {
+      obs.push({ step: 'atlas details', details: await page.evaluate(assetDetails) });
+      await snap('details');
+      await page.locator('#asset-inspector .asset-section__actions button').click();
+      await page.waitForTimeout(150);
+      obs.push({ step: 'Reimport: request the UI sent; result MOCKED { ok: true }', commands: await sent(page), details: await page.evaluate(assetDetails) });
+    }],
+    sizes: ['normal', 'minimum', 'narrow'],
+  },
+  {
+    key: 't-atlas-long',
+    ...LIVE_IMPORT,
+    steps: [asset('harbor_master_notice'), async (page, obs) => obs.push({ step: 'long atlas details', details: await page.evaluate(assetDetails) })],
+    sizes: ['normal', 'narrow'],
+  },
+  {
+    key: 't-image-reimport',
+    ...LIVE_IMPORT,
+    steps: [asset('crate_albedo'), async (page, obs, snap) => {
+      obs.push({ step: 'ordinary image details', details: await page.evaluate(assetDetails) });
+      await page.getByRole('radio', { name: 'Linear' }).check();
+      obs.push({ step: 'choose Linear', details: await page.evaluate(assetDetails) });
+      await snap('linear');
+      await page.getByRole('button', { name: 'Reimport as Linear' }).click();
+      await page.waitForTimeout(150);
+      obs.push({ step: 'Reimport as Linear: request the UI sent; result MOCKED { ok: true }', commands: await sent(page), details: await page.evaluate(assetDetails) });
+    }],
+    sizes: ['normal', 'narrow'],
+  },
+  {
+    key: 't-audio-details',
+    ...LIVE_IMPORT,
+    steps: [asset('harbor_loop'), async (page, obs, snap) => {
+      obs.push({ step: 'OGG audio details', details: await page.evaluate(assetDetails), list: await page.evaluate(assetRows) });
+      await snap('details');
+      await page.locator('#asset-inspector .asset-section__actions button').click();
+      await page.waitForTimeout(150);
+      obs.push({ step: 'Reimport: request the UI sent; result MOCKED { ok: true }', commands: await sent(page), details: await page.evaluate(assetDetails) });
+    }],
+    sizes: ['normal', 'minimum'],
+  },
+  {
+    key: 't-account-switch',
+    ...fixture('sample', 'signed-in-multi'),
+    steps: [async (page, obs, snap) => {
+      await accountButton(page).focus();
+      await page.keyboard.press('Enter');
+      await obsFocus(page, obs, 'open with Enter');
+      await page.keyboard.press('Tab');
+      await obsFocus(page, obs, 'Tab');
+      await page.keyboard.press('Enter');
+      await page.waitForTimeout(150);
+      await obsFocus(page, obs, 'Enter on Use ada@example.com', { button: await accountButton(page).getAttribute('aria-label') });
+      await snap('switched');
+      await page.keyboard.press('Escape');
+      await page.waitForTimeout(150);
+      await obsFocus(page, obs, 'Escape', { dialogOpen: await page.getByRole('dialog').count() });
+    }],
+    sizes: ['normal', 'minimum'],
+  },
+  {
+    key: 't-account-host-change',
+    url: '/',
+    init: unionLiveInitScript({ provider: MULTI, capabilities: PROVIDER_CAPS }),
+    steps: [async (page, obs, snap) => {
+      await openAccount(page);
+      await page.getByRole('button', { name: 'Sign out', exact: true }).click();
+      await page.waitForTimeout(100);
+      await obsFocus(page, obs, 'Sign out (question open)', { question: await page.locator('#signout-question').textContent() });
+      await snap('question');
+      // The host publishes another active account (for example, chosen elsewhere); no dialog request.
+      await page.evaluate(() => {
+        const provider = window.__INCANT_BRIDGE__.getSnapshot().provider;
+        window.__incantReview.publish({ provider: { ...provider, accountLabel: 'ada@example.com', activeAccount: 'acct-fixture-1' } });
+      });
+      await page.waitForTimeout(150);
+      await obsFocus(page, obs, 'host publishes another active account', {
+        questionOpen: await page.locator('#signout-question').count(),
+        button: await accountButton(page).getAttribute('aria-label'),
+        requests: await page.evaluate(() => window.__incantReview.requests),
+      });
+      await snap('cleared');
+      await page.keyboard.press('Escape');
+      await page.waitForTimeout(100);
+      await obsFocus(page, obs, 'Escape', { dialogOpen: await page.getByRole('dialog').count() });
+    }],
+    sizes: ['normal'],
+  },
   // ---- Shortcuts ----
   { key: 'keys-dialog', ...fixture(), steps: [openShortcuts], sizes: ['normal', 'minimum'] },
   { key: 'keys-windows', ...union({ window: WINDOWS }), steps: [openShortcuts], sizes: ['normal', 'minimum'] },

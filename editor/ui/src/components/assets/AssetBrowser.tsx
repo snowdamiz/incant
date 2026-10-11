@@ -4,7 +4,7 @@ import type { KeyboardEvent } from 'react';
 import type { ProjectAsset, Ulid } from '../../bridge/contract';
 import { useAssets } from '../../assets/AssetsContext';
 import { assetRowId, countFiles, folderLabel, groupByFolder, importAvailability, matchesFilter } from '../../assets/library';
-import { ACCEPTED_FORMATS, USAGE_LABEL, isConflict, kindLabel } from '../../assets/paths';
+import { ACCEPTED_FORMATS, isConflict, kindLabel, textureTag } from '../../assets/paths';
 import { Icon, iconForKind } from '../../icons/Icon';
 import { projectState, sameError } from '../../shell/projectState';
 import { useShell } from '../../shell/ShellContext';
@@ -344,7 +344,7 @@ function AssetList({
               {[...visible.get(g)!].sort((a, b) => a - b).map((r) => {
                 const asset = group.assets[r]!;
                 const isActive = asset.id === active;
-                const tag = asset.textureUsage ? USAGE_LABEL[asset.textureUsage] : kindLabel(asset.kind);
+                const tag = textureTag(asset);
                 return (
                   <div
                     key={asset.id}
@@ -366,9 +366,9 @@ function AssetList({
                     <span className="asset-row__tag">
                       <span className="visually-hidden">
                         {kindLabel(asset.kind)}
-                        {asset.textureUsage ? ', ' : ''}
+                        {tag ? ', ' : ''}
                       </span>
-                      {asset.textureUsage ? tag : null}
+                      {tag}
                     </span>
                     {recent.has(asset.path) ? (
                       <span className="asset-row__recent" title="Imported just now">

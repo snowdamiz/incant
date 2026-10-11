@@ -1,0 +1,1914 @@
+{
+  "generated": "2026-10-11T00:53:58.259Z",
+  "note": "Headless Chrome on the built union UI (a20d258 editor/ui) at device scale 2; sample fixture, synthetic provider fixtures and the 0035 evidence double (real schemas through the real compiled bridge). Not native WebKit, not the native app and not device evidence.",
+  "sets": [
+    {
+      "set": "f1",
+      "generated": "2026-10-11T00:43:48.904Z",
+      "browser": "155.0.8059.40",
+      "captures": 26
+    },
+    {
+      "set": "f2",
+      "generated": "2026-10-11T00:51:55.615Z",
+      "browser": "155.0.8059.40",
+      "captures": 1
+    }
+  ],
+  "totals": {
+    "captures": 26,
+    "axeViolations": [],
+    "axeNotRun": [],
+    "stepErrors": [],
+    "timeouts": [],
+    "pageErrors": 0,
+    "remoteRequests": 0,
+    "windowScroll": [],
+    "inspectorHorizontalOverflow": [],
+    "outOfBounds": [],
+    "clippedValues": [],
+    "mostDockRows": 25,
+    "dialogsNotFitting": []
+  },
+  "states": [
+    {
+      "capture": "u-assets-normal-1440x874",
+      "set": "f1",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 26,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 4,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 128
+      }
+    },
+    {
+      "capture": "u-assets-minimum-1000x650",
+      "set": "f1",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 26,
+        "viewport": 13,
+        "dock": 28,
+        "inspector": 4,
+        "agent": 2,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 86
+      }
+    },
+    {
+      "capture": "u-asset-atlas-normal-1440x874",
+      "set": "f1",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 26,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 27,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 151
+      }
+    },
+    {
+      "capture": "u-asset-atlas-minimum-1000x650",
+      "set": "f1",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 26,
+        "viewport": 13,
+        "dock": 28,
+        "inspector": 27,
+        "agent": 2,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 109
+      }
+    },
+    {
+      "capture": "u-asset-atlas-narrow-1440x874",
+      "set": "f1",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 26,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 27,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 151
+      }
+    },
+    {
+      "capture": "u-asset-atlas-long-normal-1440x874",
+      "set": "f1",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 26,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 31,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 155
+      }
+    },
+    {
+      "capture": "u-asset-atlas-long-narrow-1440x874",
+      "set": "f1",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 26,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 31,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 155
+      }
+    },
+    {
+      "capture": "u-asset-sheet-normal-1440x874",
+      "set": "f1",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 26,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 35,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 159
+      }
+    },
+    {
+      "capture": "u-import-mirror-normal-1440x874",
+      "set": "f1",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings Import failed: Evidence test double: read-only.",
+      "live": [
+        "Import failed: Evidence test double: read-only."
+      ],
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 28,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 71,
+        "agent": 11,
+        "statusbar": 13,
+        "dialog": null,
+        "menu": null,
+        "page": 203
+      },
+      "observations": [
+        {
+          "step": "submit",
+          "rows": [
+            {
+              "path": "sprites/dock_props.atlas.json",
+              "problem": null,
+              "kind": "Color atlas"
+            },
+            {
+              "path": "audio/gulls.ogg",
+              "problem": null,
+              "kind": "OGG audio"
+            },
+            {
+              "path": "textures/dock_sign.png",
+              "problem": null,
+              "kind": "image (usage choice)"
+            }
+          ],
+          "formats": "Accepts glTF, GLB, PNG, JPEG, EXR, .atlas.json, WAV or OGG. Paste several lines to add several paths.",
+          "live": [
+            "Import failed: Evidence test double: read-only."
+          ],
+          "focus": {
+            "element": "body"
+          }
+        }
+      ]
+    },
+    {
+      "capture": "t-import-typed-normal-1440x874",
+      "set": "f1",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings Imported 4 files.",
+      "live": [
+        "Imported 4 files. Undo reverts the whole batch.",
+        "Imported 4 files."
+      ],
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 33,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 54,
+        "agent": 11,
+        "statusbar": 10,
+        "dialog": null,
+        "menu": null,
+        "page": 188
+      },
+      "observations": [
+        {
+          "step": "four typed sources entered",
+          "rows": [
+            {
+              "path": "sprites/dock_props.atlas.json",
+              "type": "Color atlas",
+              "glyph": "kind--texture",
+              "interpretation": null,
+              "updates": null,
+              "problem": null
+            },
+            {
+              "path": "audio/gulls.wav",
+              "type": "WAV audio",
+              "glyph": "kind--audio",
+              "interpretation": null,
+              "updates": null,
+              "problem": null
+            },
+            {
+              "path": "audio/bell.OGG",
+              "type": "OGG audio",
+              "glyph": "kind--audio",
+              "interpretation": null,
+              "updates": null,
+              "problem": null
+            },
+            {
+              "path": "textures/dock_sign.png",
+              "type": null,
+              "glyph": "kind--texture",
+              "interpretation": "Interpret path 4 as",
+              "updates": null,
+              "problem": null
+            }
+          ]
+        },
+        {
+          "step": "Import 4 files: request the UI sent; result MOCKED { ok: true }",
+          "commands": [
+            {
+              "type": "asset.import",
+              "sources": [
+                {
+                  "source": "sprites/dock_props.atlas.json"
+                },
+                {
+                  "source": "audio/gulls.wav"
+                },
+                {
+                  "source": "audio/bell.OGG"
+                },
+                {
+                  "source": "textures/dock_sign.png"
+                }
+              ]
+            }
+          ],
+          "details": {
+            "name": "Import assets",
+            "description": null,
+            "interpretation": null,
+            "radios": 0,
+            "value": null,
+            "button": null,
+            "notice": "Imported 4 files. Undo reverts the whole batch."
+          }
+        },
+        {
+          "step": "MOCKED host publishes the four assets",
+          "list": [
+            {
+              "name": "bell Audio, just imported",
+              "tag": null,
+              "glyph": "kind--audio",
+              "recent": true
+            },
+            {
+              "name": "gulls Audio, just imported",
+              "tag": null,
+              "glyph": "kind--audio",
+              "recent": true
+            },
+            {
+              "name": "harbor_loop Audio",
+              "tag": null,
+              "glyph": "kind--audio",
+              "recent": false
+            },
+            {
+              "name": "mooring_post Model",
+              "tag": null,
+              "glyph": "kind--model",
+              "recent": false
+            },
+            {
+              "name": "crate_stack Model",
+              "tag": null,
+              "glyph": "kind--model",
+              "recent": false
+            },
+            {
+              "name": "gull_sheet Texture, Color",
+              "tag": "Color",
+              "glyph": "kind--texture",
+              "recent": false
+            },
+            {
+              "name": "dock_props Texture, Atlas, just imported",
+              "tag": "Atlas",
+              "glyph": "kind--texture",
+              "recent": true
+            },
+            {
+              "name": "harbor_ui Texture, Atlas",
+              "tag": "Atlas",
+              "glyph": "kind--texture",
+              "recent": false
+            },
+            {
+              "name": "harbor_master_notice_board_weathered_signage_atlas_variant_c Texture, Atlas",
+              "tag": "Atlas",
+              "glyph": "kind--texture",
+              "recent": false
+            },
+            {
+              "name": "dock_sign Texture, Color, just imported",
+              "tag": "Color",
+              "glyph": "kind--texture",
+              "recent": true
+            },
+            {
+              "name": "crate_albedo Texture, Color",
+              "tag": "Color",
+              "glyph": "kind--texture",
+              "recent": false
+            },
+            {
+              "name": "harbor_sky Texture, Linear",
+              "tag": "Linear",
+              "glyph": "kind--texture",
+              "recent": false
+            }
+          ]
+        }
+      ],
+      "steps": [
+        "t-import-typed-normal-1440x874--rows.png"
+      ]
+    },
+    {
+      "capture": "t-import-typed-minimum-1000x650",
+      "set": "f1",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings Imported 4 files.",
+      "live": [
+        "Imported 4 files. Undo reverts the whole batch.",
+        "Imported 4 files."
+      ],
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 27,
+        "viewport": 13,
+        "dock": 28,
+        "inspector": 54,
+        "agent": 2,
+        "statusbar": 10,
+        "dialog": null,
+        "menu": null,
+        "page": 140
+      },
+      "observations": [
+        {
+          "step": "four typed sources entered",
+          "rows": [
+            {
+              "path": "sprites/dock_props.atlas.json",
+              "type": "Color atlas",
+              "glyph": "kind--texture",
+              "interpretation": null,
+              "updates": null,
+              "problem": null
+            },
+            {
+              "path": "audio/gulls.wav",
+              "type": "WAV audio",
+              "glyph": "kind--audio",
+              "interpretation": null,
+              "updates": null,
+              "problem": null
+            },
+            {
+              "path": "audio/bell.OGG",
+              "type": "OGG audio",
+              "glyph": "kind--audio",
+              "interpretation": null,
+              "updates": null,
+              "problem": null
+            },
+            {
+              "path": "textures/dock_sign.png",
+              "type": null,
+              "glyph": "kind--texture",
+              "interpretation": "Interpret path 4 as",
+              "updates": null,
+              "problem": null
+            }
+          ]
+        },
+        {
+          "step": "Import 4 files: request the UI sent; result MOCKED { ok: true }",
+          "commands": [
+            {
+              "type": "asset.import",
+              "sources": [
+                {
+                  "source": "sprites/dock_props.atlas.json"
+                },
+                {
+                  "source": "audio/gulls.wav"
+                },
+                {
+                  "source": "audio/bell.OGG"
+                },
+                {
+                  "source": "textures/dock_sign.png"
+                }
+              ]
+            }
+          ],
+          "details": {
+            "name": "Import assets",
+            "description": null,
+            "interpretation": null,
+            "radios": 0,
+            "value": null,
+            "button": null,
+            "notice": "Imported 4 files. Undo reverts the whole batch."
+          }
+        },
+        {
+          "step": "MOCKED host publishes the four assets",
+          "list": [
+            {
+              "name": "bell Audio, just imported",
+              "tag": null,
+              "glyph": "kind--audio",
+              "recent": true
+            },
+            {
+              "name": "gulls Audio, just imported",
+              "tag": null,
+              "glyph": "kind--audio",
+              "recent": true
+            },
+            {
+              "name": "harbor_loop Audio",
+              "tag": null,
+              "glyph": "kind--audio",
+              "recent": false
+            },
+            {
+              "name": "mooring_post Model",
+              "tag": null,
+              "glyph": "kind--model",
+              "recent": false
+            },
+            {
+              "name": "crate_stack Model",
+              "tag": null,
+              "glyph": "kind--model",
+              "recent": false
+            },
+            {
+              "name": "gull_sheet Texture, Color",
+              "tag": "Color",
+              "glyph": "kind--texture",
+              "recent": false
+            },
+            {
+              "name": "dock_props Texture, Atlas, just imported",
+              "tag": "Atlas",
+              "glyph": "kind--texture",
+              "recent": true
+            },
+            {
+              "name": "harbor_ui Texture, Atlas",
+              "tag": "Atlas",
+              "glyph": "kind--texture",
+              "recent": false
+            },
+            {
+              "name": "harbor_master_notice_board_weathered_signage_atlas_variant_c Texture, Atlas",
+              "tag": "Atlas",
+              "glyph": "kind--texture",
+              "recent": false
+            },
+            {
+              "name": "dock_sign Texture, Color, just imported",
+              "tag": "Color",
+              "glyph": "kind--texture",
+              "recent": true
+            },
+            {
+              "name": "crate_albedo Texture, Color",
+              "tag": "Color",
+              "glyph": "kind--texture",
+              "recent": false
+            },
+            {
+              "name": "harbor_sky Texture, Linear",
+              "tag": "Linear",
+              "glyph": "kind--texture",
+              "recent": false
+            }
+          ]
+        }
+      ],
+      "steps": [
+        "t-import-typed-minimum-1000x650--rows.png"
+      ]
+    },
+    {
+      "capture": "t-import-json-normal-1440x874",
+      "set": "f1",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings Fix 3 highlighted paths before importing.",
+      "live": [
+        "Fix 3 highlighted paths before importing."
+      ],
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 26,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 86,
+        "agent": 11,
+        "statusbar": 13,
+        "dialog": null,
+        "menu": null,
+        "page": 216
+      },
+      "observations": [
+        {
+          "step": "submit generic JSON paths: refused before sending",
+          "rows": [
+            {
+              "path": "data/level.json",
+              "type": null,
+              "glyph": null,
+              "interpretation": null,
+              "updates": null,
+              "problem": "Unsupported file type. Use glTF, GLB, PNG, JPEG, EXR, .atlas.json, WAV or OGG."
+            },
+            {
+              "path": "sprites/sheet.json",
+              "type": null,
+              "glyph": null,
+              "interpretation": null,
+              "updates": null,
+              "problem": "Unsupported file type. Use glTF, GLB, PNG, JPEG, EXR, .atlas.json, WAV or OGG."
+            },
+            {
+              "path": "sprites/ui.atlas.json.bak",
+              "type": null,
+              "glyph": null,
+              "interpretation": null,
+              "updates": null,
+              "problem": "Unsupported file type. Use glTF, GLB, PNG, JPEG, EXR, .atlas.json, WAV or OGG."
+            }
+          ],
+          "commands": [],
+          "live": "Fix 3 highlighted paths before importing.",
+          "focus": {
+            "tag": "input",
+            "role": null,
+            "name": "Path 1",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          }
+        }
+      ]
+    },
+    {
+      "capture": "t-atlas-details-normal-1440x874",
+      "set": "f1",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings Reimported harbor_ui.",
+      "live": [
+        "Reimported. Undo reverts the whole reimport.",
+        "Reimported harbor_ui."
+      ],
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 26,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 37,
+        "agent": 11,
+        "statusbar": 9,
+        "dialog": null,
+        "menu": null,
+        "page": 163
+      },
+      "observations": [
+        {
+          "step": "atlas details",
+          "details": {
+            "name": "harbor_ui",
+            "description": "Texture, Atlas",
+            "interpretation": "Interpretation Color Sprite atlases are always color.",
+            "radios": 0,
+            "value": "Color",
+            "button": "Reimport",
+            "notice": null
+          }
+        },
+        {
+          "step": "Reimport: request the UI sent; result MOCKED { ok: true }",
+          "commands": [
+            {
+              "type": "asset.import",
+              "sources": [
+                {
+                  "source": "sprites/harbor_ui.atlas.json"
+                }
+              ]
+            }
+          ],
+          "details": {
+            "name": "harbor_ui",
+            "description": "Texture, Atlas",
+            "interpretation": "Interpretation Color Sprite atlases are always color.",
+            "radios": 0,
+            "value": "Color",
+            "button": "Reimport",
+            "notice": "Reimported. Undo reverts the whole reimport."
+          }
+        }
+      ],
+      "steps": [
+        "t-atlas-details-normal-1440x874--details.png"
+      ]
+    },
+    {
+      "capture": "t-atlas-details-minimum-1000x650",
+      "set": "f1",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings Reimported harbor_ui.",
+      "live": [
+        "Reimported. Undo reverts the whole reimport.",
+        "Reimported harbor_ui."
+      ],
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 26,
+        "viewport": 13,
+        "dock": 28,
+        "inspector": 37,
+        "agent": 2,
+        "statusbar": 9,
+        "dialog": null,
+        "menu": null,
+        "page": 121
+      },
+      "observations": [
+        {
+          "step": "atlas details",
+          "details": {
+            "name": "harbor_ui",
+            "description": "Texture, Atlas",
+            "interpretation": "Interpretation Color Sprite atlases are always color.",
+            "radios": 0,
+            "value": "Color",
+            "button": "Reimport",
+            "notice": null
+          }
+        },
+        {
+          "step": "Reimport: request the UI sent; result MOCKED { ok: true }",
+          "commands": [
+            {
+              "type": "asset.import",
+              "sources": [
+                {
+                  "source": "sprites/harbor_ui.atlas.json"
+                }
+              ]
+            }
+          ],
+          "details": {
+            "name": "harbor_ui",
+            "description": "Texture, Atlas",
+            "interpretation": "Interpretation Color Sprite atlases are always color.",
+            "radios": 0,
+            "value": "Color",
+            "button": "Reimport",
+            "notice": "Reimported. Undo reverts the whole reimport."
+          }
+        }
+      ],
+      "steps": [
+        "t-atlas-details-minimum-1000x650--details.png"
+      ]
+    },
+    {
+      "capture": "t-atlas-details-narrow-1440x874",
+      "set": "f1",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings Reimported harbor_ui.",
+      "live": [
+        "Reimported. Undo reverts the whole reimport.",
+        "Reimported harbor_ui."
+      ],
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 26,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 37,
+        "agent": 11,
+        "statusbar": 9,
+        "dialog": null,
+        "menu": null,
+        "page": 163
+      },
+      "observations": [
+        {
+          "step": "atlas details",
+          "details": {
+            "name": "harbor_ui",
+            "description": "Texture, Atlas",
+            "interpretation": "Interpretation Color Sprite atlases are always color.",
+            "radios": 0,
+            "value": "Color",
+            "button": "Reimport",
+            "notice": null
+          }
+        },
+        {
+          "step": "Reimport: request the UI sent; result MOCKED { ok: true }",
+          "commands": [
+            {
+              "type": "asset.import",
+              "sources": [
+                {
+                  "source": "sprites/harbor_ui.atlas.json"
+                }
+              ]
+            }
+          ],
+          "details": {
+            "name": "harbor_ui",
+            "description": "Texture, Atlas",
+            "interpretation": "Interpretation Color Sprite atlases are always color.",
+            "radios": 0,
+            "value": "Color",
+            "button": "Reimport",
+            "notice": "Reimported. Undo reverts the whole reimport."
+          }
+        }
+      ],
+      "steps": [
+        "t-atlas-details-narrow-1440x874--details.png"
+      ]
+    },
+    {
+      "capture": "t-atlas-long-normal-1440x874",
+      "set": "f1",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 26,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 34,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 158
+      },
+      "observations": [
+        {
+          "step": "long atlas details",
+          "details": {
+            "name": "harbor_master_notice_board_weathered_signage_atlas_variant_c",
+            "description": "Texture, Atlas",
+            "interpretation": "Interpretation Color Sprite atlases are always color.",
+            "radios": 0,
+            "value": "Color",
+            "button": "Reimport",
+            "notice": null
+          }
+        }
+      ]
+    },
+    {
+      "capture": "t-atlas-long-narrow-1440x874",
+      "set": "f1",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 26,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 34,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 158
+      },
+      "observations": [
+        {
+          "step": "long atlas details",
+          "details": {
+            "name": "harbor_master_notice_board_weathered_signage_atlas_variant_c",
+            "description": "Texture, Atlas",
+            "interpretation": "Interpretation Color Sprite atlases are always color.",
+            "radios": 0,
+            "value": "Color",
+            "button": "Reimport",
+            "notice": null
+          }
+        }
+      ]
+    },
+    {
+      "capture": "t-image-reimport-normal-1440x874",
+      "set": "f1",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings Reimported crate_albedo.",
+      "live": [
+        "Reimported. Undo reverts the whole reimport.",
+        "Reimported crate_albedo."
+      ],
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 26,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 45,
+        "agent": 11,
+        "statusbar": 9,
+        "dialog": null,
+        "menu": null,
+        "page": 171
+      },
+      "observations": [
+        {
+          "step": "ordinary image details",
+          "details": {
+            "name": "crate_albedo",
+            "description": "Texture, Color",
+            "interpretation": "Interpretation Interpret crate_albedo as Color Linear Normal map sRGB color, such as albedo or UI art.",
+            "radios": 3,
+            "value": null,
+            "button": "Reimport",
+            "notice": null
+          }
+        },
+        {
+          "step": "choose Linear",
+          "details": {
+            "name": "crate_albedo",
+            "description": "Texture, Color",
+            "interpretation": "Interpretation Interpret crate_albedo as Color (saved) Linear Normal map Non-color data, such as roughness or masks. Saved as Color; reimport to apply.",
+            "radios": 3,
+            "value": null,
+            "button": "Reimport as Linear",
+            "notice": null
+          }
+        },
+        {
+          "step": "Reimport as Linear: request the UI sent; result MOCKED { ok: true }",
+          "commands": [
+            {
+              "type": "asset.import",
+              "sources": [
+                {
+                  "source": "textures/props/crate_albedo.png",
+                  "textureUsage": "linear"
+                }
+              ]
+            }
+          ],
+          "details": {
+            "name": "crate_albedo",
+            "description": "Texture, Color",
+            "interpretation": "Interpretation Interpret crate_albedo as Color Linear Normal map sRGB color, such as albedo or UI art.",
+            "radios": 3,
+            "value": null,
+            "button": "Reimport",
+            "notice": "Reimported. Undo reverts the whole reimport."
+          }
+        }
+      ],
+      "steps": [
+        "t-image-reimport-normal-1440x874--linear.png"
+      ]
+    },
+    {
+      "capture": "t-image-reimport-narrow-1440x874",
+      "set": "f1",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings Reimported crate_albedo.",
+      "live": [
+        "Reimported. Undo reverts the whole reimport.",
+        "Reimported crate_albedo."
+      ],
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 26,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 45,
+        "agent": 11,
+        "statusbar": 9,
+        "dialog": null,
+        "menu": null,
+        "page": 171
+      },
+      "observations": [
+        {
+          "step": "ordinary image details",
+          "details": {
+            "name": "crate_albedo",
+            "description": "Texture, Color",
+            "interpretation": "Interpretation Interpret crate_albedo as Color Linear Normal map sRGB color, such as albedo or UI art.",
+            "radios": 3,
+            "value": null,
+            "button": "Reimport",
+            "notice": null
+          }
+        },
+        {
+          "step": "choose Linear",
+          "details": {
+            "name": "crate_albedo",
+            "description": "Texture, Color",
+            "interpretation": "Interpretation Interpret crate_albedo as Color (saved) Linear Normal map Non-color data, such as roughness or masks. Saved as Color; reimport to apply.",
+            "radios": 3,
+            "value": null,
+            "button": "Reimport as Linear",
+            "notice": null
+          }
+        },
+        {
+          "step": "Reimport as Linear: request the UI sent; result MOCKED { ok: true }",
+          "commands": [
+            {
+              "type": "asset.import",
+              "sources": [
+                {
+                  "source": "textures/props/crate_albedo.png",
+                  "textureUsage": "linear"
+                }
+              ]
+            }
+          ],
+          "details": {
+            "name": "crate_albedo",
+            "description": "Texture, Color",
+            "interpretation": "Interpretation Interpret crate_albedo as Color Linear Normal map sRGB color, such as albedo or UI art.",
+            "radios": 3,
+            "value": null,
+            "button": "Reimport",
+            "notice": "Reimported. Undo reverts the whole reimport."
+          }
+        }
+      ],
+      "steps": [
+        "t-image-reimport-narrow-1440x874--linear.png"
+      ]
+    },
+    {
+      "capture": "t-audio-details-normal-1440x874",
+      "set": "f1",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings Reimported harbor_loop.",
+      "live": [
+        "Reimported. Undo reverts the whole reimport.",
+        "Reimported harbor_loop."
+      ],
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 26,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 30,
+        "agent": 11,
+        "statusbar": 9,
+        "dialog": null,
+        "menu": null,
+        "page": 156
+      },
+      "observations": [
+        {
+          "step": "OGG audio details",
+          "details": {
+            "name": "harbor_loop",
+            "description": "Audio",
+            "interpretation": null,
+            "radios": 0,
+            "value": null,
+            "button": "Reimport",
+            "notice": null
+          },
+          "list": [
+            {
+              "name": "harbor_loop Audio",
+              "tag": null,
+              "glyph": "kind--audio",
+              "recent": false
+            },
+            {
+              "name": "mooring_post Model",
+              "tag": null,
+              "glyph": "kind--model",
+              "recent": false
+            },
+            {
+              "name": "crate_stack Model",
+              "tag": null,
+              "glyph": "kind--model",
+              "recent": false
+            },
+            {
+              "name": "gull_sheet Texture, Color",
+              "tag": "Color",
+              "glyph": "kind--texture",
+              "recent": false
+            },
+            {
+              "name": "harbor_ui Texture, Atlas",
+              "tag": "Atlas",
+              "glyph": "kind--texture",
+              "recent": false
+            },
+            {
+              "name": "harbor_master_notice_board_weathered_signage_atlas_variant_c Texture, Atlas",
+              "tag": "Atlas",
+              "glyph": "kind--texture",
+              "recent": false
+            },
+            {
+              "name": "crate_albedo Texture, Color",
+              "tag": "Color",
+              "glyph": "kind--texture",
+              "recent": false
+            },
+            {
+              "name": "harbor_sky Texture, Linear",
+              "tag": "Linear",
+              "glyph": "kind--texture",
+              "recent": false
+            }
+          ]
+        },
+        {
+          "step": "Reimport: request the UI sent; result MOCKED { ok: true }",
+          "commands": [
+            {
+              "type": "asset.import",
+              "sources": [
+                {
+                  "source": "audio/harbor_loop.ogg"
+                }
+              ]
+            }
+          ],
+          "details": {
+            "name": "harbor_loop",
+            "description": "Audio",
+            "interpretation": null,
+            "radios": 0,
+            "value": null,
+            "button": "Reimport",
+            "notice": "Reimported. Undo reverts the whole reimport."
+          }
+        }
+      ],
+      "steps": [
+        "t-audio-details-normal-1440x874--details.png"
+      ]
+    },
+    {
+      "capture": "t-audio-details-minimum-1000x650",
+      "set": "f1",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings Reimported harbor_loop.",
+      "live": [
+        "Reimported. Undo reverts the whole reimport.",
+        "Reimported harbor_loop."
+      ],
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 26,
+        "viewport": 13,
+        "dock": 28,
+        "inspector": 30,
+        "agent": 2,
+        "statusbar": 9,
+        "dialog": null,
+        "menu": null,
+        "page": 114
+      },
+      "observations": [
+        {
+          "step": "OGG audio details",
+          "details": {
+            "name": "harbor_loop",
+            "description": "Audio",
+            "interpretation": null,
+            "radios": 0,
+            "value": null,
+            "button": "Reimport",
+            "notice": null
+          },
+          "list": [
+            {
+              "name": "harbor_loop Audio",
+              "tag": null,
+              "glyph": "kind--audio",
+              "recent": false
+            },
+            {
+              "name": "mooring_post Model",
+              "tag": null,
+              "glyph": "kind--model",
+              "recent": false
+            },
+            {
+              "name": "crate_stack Model",
+              "tag": null,
+              "glyph": "kind--model",
+              "recent": false
+            },
+            {
+              "name": "gull_sheet Texture, Color",
+              "tag": "Color",
+              "glyph": "kind--texture",
+              "recent": false
+            },
+            {
+              "name": "harbor_ui Texture, Atlas",
+              "tag": "Atlas",
+              "glyph": "kind--texture",
+              "recent": false
+            },
+            {
+              "name": "harbor_master_notice_board_weathered_signage_atlas_variant_c Texture, Atlas",
+              "tag": "Atlas",
+              "glyph": "kind--texture",
+              "recent": false
+            },
+            {
+              "name": "crate_albedo Texture, Color",
+              "tag": "Color",
+              "glyph": "kind--texture",
+              "recent": false
+            },
+            {
+              "name": "harbor_sky Texture, Linear",
+              "tag": "Linear",
+              "glyph": "kind--texture",
+              "recent": false
+            }
+          ]
+        },
+        {
+          "step": "Reimport: request the UI sent; result MOCKED { ok: true }",
+          "commands": [
+            {
+              "type": "asset.import",
+              "sources": [
+                {
+                  "source": "audio/harbor_loop.ogg"
+                }
+              ]
+            }
+          ],
+          "details": {
+            "name": "harbor_loop",
+            "description": "Audio",
+            "interpretation": null,
+            "radios": 0,
+            "value": null,
+            "button": "Reimport",
+            "notice": "Reimported. Undo reverts the whole reimport."
+          }
+        }
+      ],
+      "steps": [
+        "t-audio-details-minimum-1000x650--details.png"
+      ]
+    },
+    {
+      "capture": "t-account-switch-normal-1440x874",
+      "set": "f1",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, signed in as ada@example.com",
+        "title": "ChatGPT account, signed in as ada@example.com",
+        "visibleText": "A"
+      },
+      "statusbar": "Sample fixture: sample, account signed-in-multi (simulated) 6 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 5,
+        "banner": null,
+        "hierarchy": 63,
+        "viewport": 24,
+        "dock": 65,
+        "inspector": 3,
+        "agent": 11,
+        "statusbar": 8,
+        "dialog": null,
+        "menu": null,
+        "page": 179
+      },
+      "observations": [
+        {
+          "step": "open with Enter",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Close",
+            "region": "dialog",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          }
+        },
+        {
+          "step": "Tab",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Use ada@example.com",
+            "region": "dialog",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          }
+        },
+        {
+          "step": "Enter on Use ada@example.com",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Close",
+            "region": "dialog",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "button": "ChatGPT account, signed in as ada@example.com"
+        },
+        {
+          "step": "Escape",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "ChatGPT account, signed in as ada@example.com",
+            "region": "titlebar",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "dialogOpen": 0
+        }
+      ],
+      "steps": [
+        "t-account-switch-normal-1440x874--switched.png"
+      ]
+    },
+    {
+      "capture": "t-account-switch-minimum-1000x650",
+      "set": "f1",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, signed in as ada@example.com",
+        "title": "ChatGPT account, signed in as ada@example.com",
+        "visibleText": "A"
+      },
+      "statusbar": "Sample fixture: sample, account signed-in-multi (simulated) 6 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 5,
+        "banner": null,
+        "hierarchy": 41,
+        "viewport": 24,
+        "dock": 35,
+        "inspector": 3,
+        "agent": 2,
+        "statusbar": 8,
+        "dialog": null,
+        "menu": null,
+        "page": 118
+      },
+      "observations": [
+        {
+          "step": "open with Enter",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Close",
+            "region": "dialog",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          }
+        },
+        {
+          "step": "Tab",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Use ada@example.com",
+            "region": "dialog",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          }
+        },
+        {
+          "step": "Enter on Use ada@example.com",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Close",
+            "region": "dialog",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "button": "ChatGPT account, signed in as ada@example.com"
+        },
+        {
+          "step": "Escape",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "ChatGPT account, signed in as ada@example.com",
+            "region": "titlebar",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "dialogOpen": 0
+        }
+      ],
+      "steps": [
+        "t-account-switch-minimum-1000x650--switched.png"
+      ]
+    },
+    {
+      "capture": "t-account-host-change-normal-1440x874",
+      "set": "f2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, signed in as ada@example.com",
+        "title": "ChatGPT account, signed in as ada@example.com",
+        "visibleText": "A"
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 7,
+        "banner": null,
+        "hierarchy": 68,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 3,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 170
+      },
+      "observations": [
+        {
+          "step": "Sign out (question open)",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Keep signed in",
+            "region": "dialog",
+            "outline": null
+          },
+          "question": "Sign out of studio@example.org on this computer? The agent stops working until you sign in again."
+        },
+        {
+          "step": "host publishes another active account",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Close",
+            "region": "dialog",
+            "outline": null
+          },
+          "questionOpen": 0,
+          "button": "ChatGPT account, signed in as ada@example.com",
+          "requests": []
+        },
+        {
+          "step": "Escape",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "ChatGPT account, signed in as ada@example.com",
+            "region": "titlebar",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "dialogOpen": 0
+        }
+      ],
+      "steps": [
+        "t-account-host-change-normal-1440x874--question.png",
+        "t-account-host-change-normal-1440x874--cleared.png"
+      ]
+    },
+    {
+      "capture": "probe-account-normal-1440x874",
+      "set": "f1",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Sample fixture: sample, account signed-in-multi (simulated) 6 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 63,
+        "viewport": 24,
+        "dock": 65,
+        "inspector": 3,
+        "agent": 15,
+        "statusbar": 8,
+        "dialog": null,
+        "menu": null,
+        "page": 182
+      },
+      "observations": [
+        {
+          "step": "opened (signed in, three accounts)",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Close",
+            "region": "dialog",
+            "outline": null
+          },
+          "button": "ChatGPT account, signed in as studio@example.org"
+        },
+        {
+          "step": "Use ada@example.com",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Close",
+            "region": "dialog",
+            "outline": null
+          },
+          "button": "ChatGPT account, signed in as ada@example.com",
+          "rows": [
+            "Aada@example.comSigned in",
+            "Sstudio@example.orgUse",
+            "Aa.very.long.account.name.for.wrapping@example.netUse"
+          ]
+        },
+        {
+          "step": "Add another account (browser step)",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Open browser again",
+            "region": "dialog",
+            "outline": null
+          },
+          "status": "Continue in your browserApprove access in ChatGPT; Incant finishes automatically.",
+          "button": "ChatGPT account, waiting for the browser"
+        },
+        {
+          "step": "Cancel sign-in",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Close",
+            "region": "dialog",
+            "outline": null
+          },
+          "button": "ChatGPT account, signed in as ada@example.com"
+        },
+        {
+          "step": "Sign out (question)",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Keep signed in",
+            "region": "dialog",
+            "outline": null
+          },
+          "question": "Sign out of ada@example.com on this computer? The agent stops working until you sign in again."
+        },
+        {
+          "step": "Escape (question dismissed, dialog stays)",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Close",
+            "region": "dialog",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "dialogOpen": 1
+        },
+        {
+          "step": "Confirm sign out",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Continue with ChatGPT",
+            "region": "dialog",
+            "outline": null
+          },
+          "status": "Sign in to a saved account, or continue in your browser.",
+          "button": "ChatGPT account, not signed in"
+        },
+        {
+          "step": "Escape (dialog closed, focus returns)",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "ChatGPT account, not signed in",
+            "region": "titlebar",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "dialogOpen": 0
+        }
+      ],
+      "steps": [
+        "probe-account-normal-1440x874--adding.png",
+        "probe-account-normal-1440x874--question.png",
+        "probe-account-normal-1440x874--signed-out.png"
+      ]
+    },
+    {
+      "capture": "probe-account-minimum-1000x650",
+      "set": "f1",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Sample fixture: sample, account signed-in-multi (simulated) 6 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 41,
+        "viewport": 24,
+        "dock": 35,
+        "inspector": 3,
+        "agent": 4,
+        "statusbar": 8,
+        "dialog": null,
+        "menu": null,
+        "page": 119
+      },
+      "observations": [
+        {
+          "step": "opened (signed in, three accounts)",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Close",
+            "region": "dialog",
+            "outline": null
+          },
+          "button": "ChatGPT account, signed in as studio@example.org"
+        },
+        {
+          "step": "Use ada@example.com",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Close",
+            "region": "dialog",
+            "outline": null
+          },
+          "button": "ChatGPT account, signed in as ada@example.com",
+          "rows": [
+            "Aada@example.comSigned in",
+            "Sstudio@example.orgUse",
+            "Aa.very.long.account.name.for.wrapping@example.netUse"
+          ]
+        },
+        {
+          "step": "Add another account (browser step)",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Open browser again",
+            "region": "dialog",
+            "outline": null
+          },
+          "status": "Continue in your browserApprove access in ChatGPT; Incant finishes automatically.",
+          "button": "ChatGPT account, waiting for the browser"
+        },
+        {
+          "step": "Cancel sign-in",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Close",
+            "region": "dialog",
+            "outline": null
+          },
+          "button": "ChatGPT account, signed in as ada@example.com"
+        },
+        {
+          "step": "Sign out (question)",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Keep signed in",
+            "region": "dialog",
+            "outline": null
+          },
+          "question": "Sign out of ada@example.com on this computer? The agent stops working until you sign in again."
+        },
+        {
+          "step": "Escape (question dismissed, dialog stays)",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Close",
+            "region": "dialog",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "dialogOpen": 1
+        },
+        {
+          "step": "Confirm sign out",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Continue with ChatGPT",
+            "region": "dialog",
+            "outline": null
+          },
+          "status": "Sign in to a saved account, or continue in your browser.",
+          "button": "ChatGPT account, not signed in"
+        },
+        {
+          "step": "Escape (dialog closed, focus returns)",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "ChatGPT account, not signed in",
+            "region": "titlebar",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "dialogOpen": 0
+        }
+      ],
+      "steps": [
+        "probe-account-minimum-1000x650--adding.png",
+        "probe-account-minimum-1000x650--question.png",
+        "probe-account-minimum-1000x650--signed-out.png"
+      ]
+    }
+  ]
+}
