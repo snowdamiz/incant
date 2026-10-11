@@ -1000,3 +1000,12 @@ wired but hosted results remain pending; Windows static/MSVC is refused while
 its full development coverage remains. iOS compile-only evidence is not a
 signed device run. Full SDK/export migration, deterministic arithmetic,
 browser/mobile execution and device/performance gates remain open.
+
+## MSVC static Wasm follow-up
+
+Native x64 cl.exe now has an explicit `/Od` conformance baseline and separately
+selected `/O2` candidate with strict floating-point behavior, unchanged C-only
+traps/fuel/bounds and verified-tool/PE-PDB packaging support. Local macOS checks
+pass; the new Windows job must execute both configurations and the fresh
+optimized candidate before support is claimed. Full development coverage and
+normal shipping dependency exclusions remain. [Scope and pending evidence](docs/spikes/wasm2c-msvc.md).

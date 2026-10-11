@@ -115,6 +115,11 @@ fn c_traps_import_errors_and_recursion_never_cross_rust_or_resume() {
         if name == "loop" || name == "indirect-loop" {
             assert!(matches!(error, incant_wasm_runtime::StaticError::Fuel));
         }
+        if name == "stack" {
+            // Recursion must hit the explicit call-depth check, not merely run
+            // until fuel runs out after an optimizer removes native recursion.
+            assert!(matches!(error, incant_wasm_runtime::StaticError::Trap(1)));
+        }
         if name == "calls" {
             assert!(error.to_string().contains("host call quota"));
         }
