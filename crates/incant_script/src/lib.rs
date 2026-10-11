@@ -11,6 +11,7 @@ mod diagnostics;
 mod input;
 mod loan;
 mod logging;
+mod program;
 mod queries;
 mod query_values;
 mod schedule;
@@ -22,6 +23,7 @@ pub use artifact::{EmbeddedScript, ScriptMetadata};
 pub use compiled::CompiledScript;
 use incant_runtime::NativeWorld;
 pub use logging::{LogLevel, NativeLog, NativeLogs};
+pub use program::SessionProgram;
 use rquickjs::{Context, Function, Persistent, Runtime, Value};
 pub use session::{NativeSession, PendingNativeSession, SessionError};
 use std::{

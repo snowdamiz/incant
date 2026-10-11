@@ -35,6 +35,13 @@ pub struct NativeLogs {
     #[serde(skip)]
     bytes: usize,
 }
+// Static modules currently have no logging ABI; their committed log is empty.
+#[cfg(feature = "static-module")]
+pub(crate) static NO_MODULE_LOGS: NativeLogs = NativeLogs {
+    entries: Vec::new(),
+    dropped: 0,
+    bytes: 0,
+};
 impl NativeLogs {
     pub fn entries(&self) -> &[NativeLog] {
         &self.entries

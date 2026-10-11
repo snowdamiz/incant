@@ -104,6 +104,22 @@ impl StaticModule {
     }
     pub fn tick(&mut self, world: &mut NativeWorld, dt: f64) -> Result<(), StaticError> {
         let epoch = self.capability.begin(world, dt)?;
+        self.run(world, dt, epoch)
+    }
+    /// Run against an engine-validated snapshot through `incant_input_v1`.
+    /// The owner must advance this input and native simulation on the same fixed
+    /// timeline. This method does not advance either clock. `tick` intentionally
+    /// supplies no input authority; imports there fail explicitly.
+    pub fn tick_with_input(
+        &mut self,
+        world: &mut NativeWorld,
+        dt: f64,
+        input: &incant_input::InputRuntime,
+    ) -> Result<(), StaticError> {
+        let epoch = self.capability.begin_with_input(world, dt, input)?;
+        self.run(world, dt, epoch)
+    }
+    fn run(&mut self, world: &mut NativeWorld, dt: f64, epoch: i64) -> Result<(), StaticError> {
         let mut context = Context {
             capability: &mut self.capability,
             error: None,
@@ -180,6 +196,11 @@ unsafe extern "C" fn dispatch(
             9 => Call::Despawn(a),
             10 => Call::SetVelocity(a, b),
             11 => Call::SetParent(a, b),
+            12 => Call::InputLen,
+            13 => Call::ReadInput {
+                ptr: a,
+                capacity: b,
+            },
             _ => return Err(StaticError::Facade),
         };
         // SAFETY: validated trusted descriptor contract guarantees initialized,

@@ -144,20 +144,28 @@ def main():
         for source in sorted((ROOT / 'crates/incant_wasm_runtime/fixtures').glob('*.wat')):
             copied = inputs / source.name; shutil.copy2(source, copied); dest = copied.with_suffix('.wasm')
             run([wabt / f'bin/wat2wasm{suffix}', copied, '-o', dest]); modules.append((source.stem, dest))
+        if args.conformance_only:
+            game = inputs/'game.rs'; shutil.copy2(ROOT/'crates/incant_wasm_player/fixtures/game.rs', game)
+            game_module = inputs/'game.wasm'
+            run([rustc, game, '--crate-type=cdylib', '--edition=2024', '--target=wasm32-unknown-unknown', '-C', 'panic=abort', '-C', 'opt-level=2', '-o', game_module])
+            modules.append(('game', game_module))
+            for source in sorted((ROOT/'crates/incant_wasm_player/fixtures').glob('*.wat')):
+                copied = inputs/source.name; shutil.copy2(source, copied); dest = copied.with_suffix('.wasm')
+                run([wabt/f'bin/wat2wasm{suffix}', copied, '-o', dest]); modules.append((source.stem, dest))
         bundle = inputs / 'bundle'; manifest = wasm2c.prepare(bundle, modules, wabt, cook)
         (out / 'prepared-manifest.json').write_text(json.dumps(manifest, indent=2)+'\n')
         environment.update(INCANT_WASM_BUNDLE=str(bundle), CC_ENABLE_DEBUG_OUTPUT='1')
         if args.conformance_only:
             commands = [
-                [cargo, 'test', '-j2', '-p', 'incant_wasm_runtime', '-p', 'incant_wasm_cook', '-p', 'incant_wasm_dev', '--features', 'incant_wasm_dev/static-conformance', '--locked'],
-                [cargo, 'clippy', '-j2', '-p', 'incant_wasm_runtime', '-p', 'incant_wasm_cook', '-p', 'incant_wasm_dev', '--features', 'incant_wasm_dev/static-conformance', '--all-targets', '--locked', '--', '-D', 'warnings'],
+                [cargo, 'test', '-j2', '-p', 'incant_wasm_runtime', '-p', 'incant_wasm_cook', '-p', 'incant_wasm_dev', '-p', 'incant_wasm_player', '-p', 'incant_game_runtime', '-p', 'incant_script', '--features', 'incant_wasm_dev/static-conformance,incant_wasm_player/fixture,incant_script/compiler', '--locked'],
+                [cargo, 'clippy', '-j2', '-p', 'incant_wasm_runtime', '-p', 'incant_wasm_cook', '-p', 'incant_wasm_dev', '-p', 'incant_wasm_player', '-p', 'incant_game_runtime', '-p', 'incant_script', '--features', 'incant_wasm_dev/static-conformance,incant_wasm_player/fixture,incant_script/compiler', '--all-targets', '--locked', '--', '-D', 'warnings'],
                 [sys.executable, ROOT/'tools/probes/development-wasm.py', out/'development', '--rustup', args.rustup, '--static-conformance'],
             ]
             for index, command in enumerate(commands):
                 result = subprocess.run([str(x) for x in command], cwd=ROOT, env=environment, capture_output=True, text=True, encoding='utf-8')
                 (out/f'conformance-{index}.log').write_text(result.stdout+result.stderr, encoding='utf-8')
                 require(result.returncode == 0, f'Conformance command {index} failed; see its log')
-            print('Static/development conformance and actual Rust guest probe passed. No shipping/device gate claimed.')
+            print('Static/development/input/composed-game conformance and actual Rust guest probe passed. No shipping/device gate claimed.')
             return
 
         with tempfile.TemporaryDirectory(prefix='static-wasm-build-', dir=out) as storage:

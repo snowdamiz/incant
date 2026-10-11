@@ -2,7 +2,7 @@ use crate::{GameError, Result, SceneHost};
 use incant_audio_runtime::{SceneAudio, SourceState};
 use incant_input::{InputActions, InputEvent, InputFrame};
 use incant_runtime::{CookedScene, NativeWorld, StableId};
-use incant_script::{CompiledScript, NativeSession, PendingNativeSession};
+use incant_script::{NativeSession, PendingNativeSession, SessionProgram};
 use kira::backend::Backend;
 use std::{convert::Infallible, error::Error, fmt::Debug};
 
@@ -38,14 +38,14 @@ where
 {
     pub fn prepare(
         scene: CookedScene,
-        script: CompiledScript,
+        program: impl Into<SessionProgram>,
         actions: InputActions,
         prepare: impl FnOnce(&NativeWorld) -> Result<H, H::Error>,
         audio: impl FnOnce(&NativeWorld) -> incant_audio_runtime::Result<SceneAudio<B>>,
     ) -> Result<Self, H::Error> {
         let pending = PendingNativeSession::new(scene, actions)?;
         let host = prepare(pending.world())?;
-        let native = pending.start(script)?;
+        let native = pending.start(program)?;
         let audio = audio(native.world()?)?;
         Ok(Self {
             live: Some(Live {

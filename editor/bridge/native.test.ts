@@ -205,12 +205,24 @@ describe("native bridge", () => {
     const updated = read(); updated.revision = 8; updated.asset_import = { available: true };
     const assetId = '00000000000000000000000011';
     updated.project.assets = { [assetId]: { id: assetId, name: 'Surface', path: 'textures/surface.png', kind: 'texture', sha256: 'a'.repeat(64), import_settings: { type: 'texture', usage: 'normal' } } };
-    const invoke = vi.fn(async (command: string) => command === 'engine_import' ? updated : initial) as unknown as Invoke;
+    const receipt = { revision: 8, transaction: '00000000000000000000000012' as Ulid };
+    const invoke = vi.fn(async (command: string) => command === 'engine_import' ? { snapshot: updated, commit: receipt } : initial) as unknown as Invoke;
     const bridge = new NativeBridge(invoke); await bridge.start();
-    expect(await bridge.dispatch({ type: 'asset.import', sources: [{ source: 'textures/surface.png', textureUsage: 'normal' }, { source: 'model.glb' }] })).toEqual({ ok: true });
+    expect(await bridge.dispatch({ type: 'asset.import', sources: [{ source: 'textures/surface.png', textureUsage: 'normal' }, { source: 'model.glb' }] })).toEqual({ ok: true, assetImport: receipt });
     expect(invoke).toHaveBeenCalledWith('engine_import', { requests: [{ source: 'textures/surface.png', texture_usage: 'normal' }, { source: 'model.glb', texture_usage: null }], expectedRevision: 7 });
     expect(bridge.getSnapshot().assets).toEqual({ status: 'ready', value: [{ id: assetId, name: 'Surface', path: 'textures/surface.png', kind: 'texture', fingerprint: 'a'.repeat(64), textureUsage: 'normal' }] });
     expect(bridge.getSnapshot().assetImport?.available).toBe(true);
+  });
+  it('preserves an explicit no-op receipt even when the later snapshot includes another edit', async () => {
+    const initial = read(); initial.asset_import = { available: true };
+    const later = read(); later.asset_import = { available: true }; later.revision = 8;
+    later.project.scenes[scene]!.entities[entity]!.name = 'Later edit';
+    const receipt = { revision: 7, transaction: null };
+    const invoke = vi.fn(async (name: string) => name === 'engine_import' ? { snapshot: later, commit: receipt } : initial) as unknown as Invoke;
+    const bridge = new NativeBridge(invoke); await bridge.start();
+    expect(await bridge.dispatch({ type: 'asset.import', sources: [{ source: 'unchanged.glb' }] }))
+      .toEqual({ ok: true, assetImport: receipt });
+    expect(bridge.getSnapshot().entities[entity]?.name).toBe('Later edit');
   });
   it("rejects unavailable imports and preserves the last asset list after a failed import", async () => {
     const state = read();

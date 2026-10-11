@@ -115,8 +115,11 @@ def model_probe(executable, output):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, default=ROOT / 'artifacts/render-smoke')
+    parser.add_argument('--binary', type=Path, default=ROOT / 'target/release' / ('incant_headless.exe' if sys.platform == 'win32' else 'incant_headless'))
     args = parser.parse_args()
-    executable = ROOT / 'target/release' / ('incant_headless.exe' if sys.platform == 'win32' else 'incant_headless')
+    executable = args.binary.resolve()
+    if not executable.is_file():
+        parser.error(f'headless binary is not a file: {executable}')
     output = args.output
     output.mkdir(parents=True, exist_ok=True)
     project, image = output / 'sample.incant.json', output / 'viewport.png'

@@ -4245,6 +4245,7 @@ dependencies = [
  "incant_input",
  "incant_runtime",
  "incant_types",
+ "incant_wasm_runtime",
  "rquickjs",
  "serde",
  "serde_json",
@@ -4287,6 +4288,7 @@ dependencies = [
 name = "incant_wasm_dev"
 version = "0.0.1"
 dependencies = [
+ "incant_input",
  "incant_runtime",
  "incant_script",
  "incant_types",
@@ -4298,10 +4300,27 @@ dependencies = [
 ]
 
 [[package]]
+name = "incant_wasm_player"
+version = "0.0.1"
+dependencies = [
+ "incant_assets_runtime",
+ "incant_audio_runtime",
+ "incant_game_runtime",
+ "incant_input",
+ "incant_runtime",
+ "incant_script",
+ "incant_types",
+ "incant_wasm_runtime",
+ "serde_json",
+ "tempfile",
+]
+
+[[package]]
 name = "incant_wasm_runtime"
 version = "0.0.1"
 dependencies = [
  "cc",
+ "incant_input",
  "incant_runtime",
  "incant_types",
  "thiserror 2.0.21",

@@ -27,6 +27,7 @@ fn main() {
         Path::new("src/timers.rs").into(),
         Path::new("src/logging.rs").into(),
         Path::new("src/session.rs").into(),
+        Path::new("src/program.rs").into(),
         Path::new("src/artifact.rs").into(),
         Path::new("src/harden.js").into(),
     ] {

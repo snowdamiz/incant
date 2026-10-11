@@ -6,6 +6,7 @@ rust-version.workspace = true
 publish.workspace = true
 
 [dependencies]
+incant_input.workspace = true
 incant_runtime.workspace = true
 incant_types.workspace = true
 thiserror.workspace = true

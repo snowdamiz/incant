@@ -1,0 +1,29 @@
+[package]
+name = "incant_wasm_player"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+default = []
+# Trusted repository fixture only; the caller prepares the reviewed static bundle.
+fixture = ["incant_wasm_runtime/embedded-fixture"]
+
+[dependencies]
+incant_wasm_runtime = { path = "../incant_wasm_runtime" }
+incant_game_runtime = { path = "../incant_game_runtime", features = ["static-module"] }
+incant_script = { workspace = true, features = ["static-module"] }
+incant_runtime.workspace = true
+incant_input.workspace = true
+incant_types.workspace = true
+incant_audio_runtime = { workspace = true, features = ["scene"] }
+incant_assets_runtime.workspace = true
+serde_json.workspace = true
+
+[dev-dependencies]
+tempfile = "3"
+
+[[bin]]
+name = "incant_wasm_player"
+required-features = ["fixture"]
