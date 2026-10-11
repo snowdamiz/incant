@@ -1,0 +1,35 @@
+{
+  "recorded_at": "2026-10-11T19:32:40.616055+00:00",
+  "actual_main_base": "d22465f69aec1a1e7af9a978bc69bf1a9458a6ad",
+  "accepted_source_commit": "2a4be3a98c416927dd9679fc0fa14668d1cc15ef",
+  "integrated_source_commit": "16c2eec916a887d211043ae4cf52213018686e1c",
+  "integration": "Cherry-picked only the accepted four-file correction; no unpublished agent/bridge parent ancestry included. All three reviewed source hashes remain identical.",
+  "review": {
+    "accepted": true,
+    "commit": "2a4be3a98c416927dd9679fc0fa14668d1cc15ef",
+    "findings": [],
+    "source_sha256": {
+      "crates/incant_game_player/src/window/input.rs": "3e2bc519f839907b1b4841dc96fc494ddfec60024aad79065ca90b68237b11cf",
+      "crates/incant_game_player/src/window/mod.rs": "3b2d3495383df56050d74d78599b93b3e4c0f4a9caeb9cfe2f31bd193721af34",
+      "crates/incant_game_player/src/window/input/coordinate_tests.rs": "682bed941e66aef61bb057fabe1e08111a0f9a065a2abff06dcc2b0e1b8b7aa3"
+    },
+    "scope": "Nonvisual native input coordinate correction; independently reviewed current-window scale conversion, typed pre-mutation rejection, logical-range validation, untouched line units/signs/discrete ordering, and actual InputRuntime regressions.",
+    "validation": "19 scoped tests and all-targetClippy logs checked by owner; pinned Tao/DPI source audit preserved; no native-window/device/performance claim."
+  },
+  "verification": {
+    "ordinary_tests": 19,
+    "gpu_or_window_launched": false,
+    "native_window_all_target_clippy": "pass",
+    "fmt": "pass",
+    "generated_conventions": "pass",
+    "diff_check": "pass"
+  },
+  "log_sha256": {
+    "/tmp/incant-native-player-input-main96-tests.log": "464db75dfa2b32fa328f54f08b065ef6765064caa63a05691745e8ddf51b1764",
+    "/tmp/incant-native-player-input-main96-clippy.log": "b6f5cc321627c295ab5cca4c35c17142f4c0ce59625a2d3cd0265c1fd308521d"
+  },
+  "limitations": [
+    "No native window or GPU launched during this integrated check.",
+    "No actual Linux/Windows/display-transition, appearance, phone or performance gate claim."
+  ]
+}
