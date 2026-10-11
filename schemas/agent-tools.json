@@ -20,7 +20,7 @@
     "type": "function"
   },
   {
-    "description": "Apply an atomic, undoable transaction through the shared command bus. Use the last observed revision.",
+    "description": "Apply an atomic, undoable transaction through the shared command bus. Use the last observed revision. Script upsert/removal changes registered metadata only, not source files. Requires approval under destructive/always modes.",
     "name": "doc_patch",
     "parameters": {
       "$defs": {
@@ -305,6 +305,42 @@
               "required": [
                 "op",
                 "asset_id"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "description": "Register or update script metadata; source files are not read or written.",
+              "properties": {
+                "op": {
+                  "const": "upsert_script",
+                  "type": "string"
+                },
+                "script": {
+                  "$ref": "#/$defs/ScriptSource"
+                }
+              },
+              "required": [
+                "op",
+                "script"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "description": "Remove script metadata; the final project must have no dangling references.",
+              "properties": {
+                "op": {
+                  "const": "remove_script",
+                  "type": "string"
+                },
+                "script_id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "op",
+                "script_id"
               ],
               "type": "object"
             },
@@ -951,6 +987,26 @@
             "id",
             "name",
             "entities"
+          ],
+          "type": "object"
+        },
+        "ScriptSource": {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "name",
+            "path"
           ],
           "type": "object"
         },
