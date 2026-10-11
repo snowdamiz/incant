@@ -11,6 +11,7 @@ import os
 from pathlib import Path
 import re
 import subprocess
+from wasm_abi import ABI_VERSION, NAMESPACES
 
 
 def run(args):
@@ -25,50 +26,46 @@ def wrapper(module, imports):
     # Parameter order comes from the pinned translator's actual declaration, not
     # import encounter order or an assumed module-name sort.
     if isinstance(imports, bool): imports = ['w2c_incant__v1'] if imports else []
-    fields = {'w2c_incant__v1': 'imports', 'w2c_incant__input__v1': 'input',
-              'w2c_incant__flipbook__v1': 'flipbook'}
+    fields = NAMESPACES
     if any(name not in fields for name in imports): raise ValueError('Unsupported translated import namespace')
     instantiate = f'wasm2c_{module}_instantiate(&p->guest' + ''.join(', &p->'+fields[name] for name in imports) + ');'
+    contexts = ' '.join(f'struct {namespace} {field};' for namespace,field in fields.items())
+    copies = '\n'.join(f'  p->{field}.core=p->imports;' for field in fields.values() if field!='imports')
+    clear = '\n'.join(f'  p->{field}'+('' if field=='imports' else '.core')+'.callback=NULL; p->'+field+('' if field=='imports' else '.core')+'.context=NULL;' for field in fields.values())
+    bind = '\n'.join(f'  p->{field}'+('' if field=='imports' else '.core')+'.callback=callback; p->'+field+('' if field=='imports' else '.core')+'.context=context;' for field in fields.values())
     return f'''#include "{module}.h"
 #include "imports.h"
 #include <stdlib.h>
-typedef struct {{ w2c_{module} guest; struct w2c_incant__v1 imports; struct w2c_incant__input__v1 input; struct w2c_incant__flipbook__v1 flipbook; }} Instance;
+typedef struct {{ w2c_{module} guest; {contexts} }} Instance;
 int32_t incant_{module}_create(incant_import callback,void* context,void** output) {{
   *output=NULL;
   Instance* p=calloc(1,sizeof(Instance));
   if(!p) return -1;
   p->imports=(struct w2c_incant__v1){{callback,context,w2c_{module}_memory(&p->guest)}};
-  p->input.core=p->imports;
-  p->flipbook.core=p->imports;
+{copies}
   wasm_rt_init();
   /* setjmp target and every potentially trapping guest frame stay in C. */
   int32_t status=0;
   incant_trap_prepare();
   if(incant_try()==0) {{
     {instantiate}
-    if(w2c_{module}_incant_abi(&p->guest)!=1) status=-2;
+    if(w2c_{module}_incant_abi(&p->guest)!= {ABI_VERSION}) status=-2;
   }} else {{ status=*w2c_{module}_incant_private_fuel(&p->guest)==0 ? -3 : 1; }}
   g_wasm_rt_jmp_buf.initialized=false;
-  p->imports.callback=NULL; p->imports.context=NULL;
-  p->input.core.callback=NULL; p->input.core.context=NULL;
-  p->flipbook.core.callback=NULL; p->flipbook.core.context=NULL;
+{clear}
   if(status) {{ wasm2c_{module}_free(&p->guest); free(p); return status; }}
   *output=p; return 0;
 }}
 int32_t incant_{module}_update(void* instance,incant_import callback,void* context,int64_t epoch,double dt) {{
   Instance* p=instance;
-  p->imports.callback=callback; p->imports.context=context;
-  p->input.core.callback=callback; p->input.core.context=context;
-  p->flipbook.core.callback=callback; p->flipbook.core.context=context;
+{bind}
   *w2c_{module}_incant_private_fuel(&p->guest)=10000000;
   int32_t status=0;
   incant_trap_prepare();
   if(incant_try()==0) w2c_{module}_update(&p->guest,(uint64_t)epoch,dt);
   else status=*w2c_{module}_incant_private_fuel(&p->guest)==0 ? -3 : 1;
   g_wasm_rt_jmp_buf.initialized=false;
-  p->imports.callback=NULL; p->imports.context=NULL;
-  p->input.core.callback=NULL; p->input.core.context=NULL;
-  p->flipbook.core.callback=NULL; p->flipbook.core.context=NULL;
+{clear}
   return status;
 }}
 void incant_{module}_free(void* instance) {{ Instance* p=instance; wasm2c_{module}_free(&p->guest); free(p); }}

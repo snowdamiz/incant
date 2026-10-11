@@ -6,6 +6,7 @@ rust-version.workspace = true
 publish.workspace = true
 
 [dependencies]
+incant_wasm_abi = { path = "../incant_wasm_abi" }
 wasmparser = { version = "=0.258.3", default-features = false, features = ["std", "validate", "features"] }
 wasm-encoder = { version = "=0.258.3", features = ["wasmparser"] }
 thiserror.workspace = true

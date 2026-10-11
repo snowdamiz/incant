@@ -8,6 +8,20 @@ use incant_runtime::{
 };
 use incant_types::{Transform, Velocity};
 
+// The native component representation and generated wire record must agree on
+// every numeric field. These compile on each target, not only the test host.
+const _: () = {
+    use incant_wasm_abi as abi;
+    assert!(incant_runtime::TRANSFORM_STRIDE == abi::TRANSFORM_STRIDE);
+    assert!(incant_runtime::VELOCITY_STRIDE == abi::VELOCITY_STRIDE);
+    assert!(std::mem::size_of::<Transform>() == abi::TransformRow::SIZE);
+    assert!(std::mem::offset_of!(Transform, translation) == abi::TransformRow::TRANSLATION_OFFSET);
+    assert!(std::mem::offset_of!(Transform, rotation) == abi::TransformRow::ROTATION_OFFSET);
+    assert!(std::mem::offset_of!(Transform, scale) == abi::TransformRow::SCALE_OFFSET);
+    assert!(std::mem::size_of::<Velocity>() == abi::VelocityRow::SIZE);
+    assert!(std::mem::offset_of!(Velocity, linear) == abi::VelocityRow::LINEAR_OFFSET);
+};
+
 /// Trusted host adapter operation; all integer arguments are guest offsets/indices.
 #[derive(Clone, Copy)]
 pub enum Call {

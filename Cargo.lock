@@ -3715,6 +3715,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "incant-module"
+version = "0.0.1"
+dependencies = [
+ "incant_wasm_abi",
+]
+
+[[package]]
 name = "incant_2d"
 version = "0.0.1"
 dependencies = [
@@ -4291,9 +4298,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "incant_wasm_abi"
+version = "0.0.1"
+
+[[package]]
 name = "incant_wasm_cook"
 version = "0.0.1"
 dependencies = [
+ "incant_wasm_abi",
  "thiserror 2.0.21",
  "wasm-encoder",
  "wasmparser",
@@ -4308,6 +4320,8 @@ dependencies = [
  "incant_runtime",
  "incant_script",
  "incant_types",
+ "incant_wasm_abi",
+ "incant_wasm_cook",
  "incant_wasm_runtime",
  "thiserror 2.0.21",
  "wasmparser",
@@ -4336,9 +4350,11 @@ name = "incant_wasm_runtime"
 version = "0.0.1"
 dependencies = [
  "cc",
+ "incant-module",
  "incant_input",
  "incant_runtime",
  "incant_types",
+ "incant_wasm_abi",
  "thiserror 2.0.21",
 ]
 

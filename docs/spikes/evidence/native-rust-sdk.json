@@ -1,0 +1,638 @@
+{
+  "base_commit": "2ee26d510a6bfa6ea2bcb381b9f3bd0296d9680f",
+  "source_sha256": {
+    "crates/incant_wasm_abi/Cargo.toml": "c821e714ebc5e14c782656595d9ebe14044edddfcd746d94f70c7f6127c3a1f2",
+    "crates/incant_wasm_abi/src/lib.rs": "edc78b17f923b04af7ecfcc32ea360e55858a62163e4b248ee5bc2acdeb5e686",
+    "crates/incant_wasm_dev/src/generated.rs": "c385ae158a5f5de36f582295cb562e7b4fedd05ba39be1a495f7c41a93915bd5",
+    "crates/incant_wasm_dev/tests/registry.rs": "78b0b22021da654a1b11800b243a66ffa27d8cd17a33054ef62d9e9f1e18bb9c",
+    "crates/incant_wasm_dev/tests/rust_sdk.rs": "2b90e2badd17bf39ec2a89815e95e7868ac02f6ff5d79752d7a92f2e6a20085e",
+    "crates/incant_wasm_runtime/c/generated.h": "7277bf42d8cfd152b73d36055306e57774ad5c5f549b9e00364e28a7ba70e47b",
+    "crates/incant_wasm_runtime/c/generated.inc": "10153fc1c976df25611d7a1034b62d6bd46a7a88c61b7518759e20f9c661bbf0",
+    "crates/incant_wasm_runtime/fixtures/sdk-overflow.wat": "5a5df3d03bcb2337292313fd0582d17af5b6cc5e7a562746e4d44e51af7969ba",
+    "crates/incant_wasm_runtime/fixtures/sdk-unaligned.wat": "95fc09c8e80f5022fa61bd409f350ddb5ced24be4a85a53aaf3cedaf0535d1de",
+    "crates/incant_wasm_runtime/src/generated.rs": "15c9b43dab73b77a4f858b6681a282f66e27c08cb62281afaf6267c7948bde6c",
+    "crates/incant_wasm_runtime/src/input_tags.rs": "1f6443d48b6c459c8242a4f849f9051caf9af77da1efd75e541ea132dc735485",
+    "sdk/abi/native-v1.json": "9a601d8e0b45fbf544ae9d8e76e5bbedf14db7a699fd44e52cbc54e82f621da5",
+    "sdk/rust/Cargo.toml": "aa2f29272f049a2e37fa993102356eae5f0947c5bcbb2ef11068d28c9695ed1c",
+    "sdk/rust/fixtures/failure.rs": "4d7afebce77f17f95f7c633e87846be04a8b001cc8664e0d89a432390d42b892",
+    "sdk/rust/samples/gameplay.rs": "e9522a504123fa7777fd4569c9d20f960556247a6fc1c4c8f99c2bea9036df4f",
+    "sdk/rust/src/flipbook.rs": "4432747e8707e044aa63f6d22d679d1b88aec720805219d8d1f891c0e9969e65",
+    "sdk/rust/src/input.rs": "b088d9f4fe099abcf0247167e026193531bac854551103fff41b628be8bdbb63",
+    "sdk/rust/src/lib.rs": "9e5192477f0435dd480ba3cbb8ddef414e9b0cd6fd85b6fa86a8d66fb96e65b1",
+    "sdk/rust/src/raw.rs": "76085fd98239e39fbacfecfb8e85ee05023b116048ff6f2c1d181552203b62b2",
+    "sdk/rust/src/tick.rs": "66818a1ccba66b3910293e3d80647a31e63d1b42adfcb88922a4dfbbedbf9d9a",
+    "sdk/rust/tests/snapshots.rs": "0c2106da4ba03c929ec54b15e670fb8c3adba786d965494709c9d31abb6f8cd1",
+    "tools/generate_wasm_sdk.py": "ce27889ca9ebc4dfa9caf6d751f77b956c7fab71bd763a4d90be2a4160eb8800",
+    "tools/rust_guest.py": "d439016fc399725244b85488871a09536416ba6a6ba53496d6c623ecc68e0296",
+    "tools/tests/test_wasm_sdk.py": "06b738cf35df052a41403325d71c1e3a0d66e6c980823f1f2eb9cf889ecfb3a6",
+    "tools/wasm_abi.py": "2895b62cf7f46a4be0be4a934dbf9585087e34d8c46fec6e048ac3377e4f1f68",
+    ".github/workflows/development-wasm.yml": "cecbc6f29b4703ac4f1e81b357ceb89028dcdc7688f1fb16447b13b3a9e6eb06",
+    "Cargo.lock": "c3543f8fdc5cee34c18e9d5a100278c3593326b1d6ccfeb4fc3f09ebd9adacd8",
+    "Cargo.toml": "b02e59facb807084a710daeddbe5d889027502a489fa698e531ca34c7083ca13",
+    "crates/incant_game_player/fixtures/flipbook.rs": "8986dd2c4e9e3d28fa65b1fd205a3df3ce8e3d910d6da9b6de023f2c7cb22081",
+    "crates/incant_wasm_cook/Cargo.toml": "a4d195ad338f55a3d6ee67bc0cad3b9773322029c1fb9d80992ad9c5c20e0edf",
+    "crates/incant_wasm_cook/src/lib.rs": "d34af0618c0a189f819d8a4e054e21bc2624f48cd244181a7d5e1ca07486b812",
+    "crates/incant_wasm_dev/Cargo.toml": "acc2c1ef374b0596f1b4cbf897f488f67a47e6e416eceede29736d118cf5d7c5",
+    "crates/incant_wasm_dev/fixtures/bulk.rs": "8d7a82a9f6a6b7453549cad13d163cef3355d727359b9fb1705adf9ef2ef9204",
+    "crates/incant_wasm_dev/src/abi.rs": "ebe2a82c13e217bd3734cd6a789a1227277ed3bbee46cbbf606820d8aa25e88b",
+    "crates/incant_wasm_dev/src/host.rs": "17bc7388f2b768c72aad7839b62b2936241ead5b9be7d305dbac4cf80292ab5c",
+    "crates/incant_wasm_player/fixtures/game.rs": "9f825c5d156cadb9bbb64f9a119302776128c2209ac1de21844e84b264c5f204",
+    "crates/incant_wasm_runtime/Cargo.toml": "bf51511397985af5cf51650eafe6768e1e05ddf37143e498578ffc91a478ab22",
+    "crates/incant_wasm_runtime/c/imports.c": "e3fdf8608642b14fcc06a27ae65d3a7f07a129a9f52efe9755c7e7819f38d72b",
+    "crates/incant_wasm_runtime/c/imports.h": "41984a56524aaa7e5b86ce17eb69663e2ef5a282726bee9e3beec1d3c013ec2d",
+    "crates/incant_wasm_runtime/src/capability.rs": "ad74301f06ccf0f64c2d15036f515d6034b0bfc5df72d342fe0a8385124c468d",
+    "crates/incant_wasm_runtime/src/compiled.rs": "5dc10298478339ac039e085ea4747f2fc922e4960260d8116f7f369153c56a3e",
+    "crates/incant_wasm_runtime/src/flipbooks.rs": "d08ec7d95d1d485d60062e6cf5402c4e06febfc265d793d4d8727830d4d7abc2",
+    "crates/incant_wasm_runtime/src/input.rs": "836c0f94f17511e90f8fc041ab86fadaf3b7f80e32c60596d9527387405cbaa0",
+    "crates/incant_wasm_runtime/src/lib.rs": "90997e25ae5c6ca0cf32356fee44126eec038e9c9e0083e3467d60903335ac99",
+    "crates/incant_wasm_runtime/src/limits.rs": "060f52f87fb5303b41c7bd2127e24727fe6068b4781b1b280da12b58d2cd642a",
+    "crates/incant_wasm_runtime/tests/input.rs": "4eaa662d1da5fbf405daee6b2f987700f1faa297f38865eaf791eb171a58242b",
+    "tools/native_flipbook_sdk.py": "01a180975e75bc90dbb2ac575f18ff046f6bc4cbf885fabf24923d522d5d9231",
+    "tools/probes/development-wasm.py": "ba254e4a0fa004ec35c3e968edc94c3b190336d49425b2c676751d3fc710a729",
+    "tools/probes/shipping-wasm2c.py": "c71196a9a2a907dfd11696dbdb63a8e042cd7c34540a92679fe151a6afeb7bde",
+    "tools/probes/static-game.py": "1bbe2fbf3ae70ae012b225084e1863b98087f98cf688943086fd9a55f56dc29d",
+    "tools/wasm2c.py": "a79e15b4316174f3964797d4275e05949f44a31975a4b6700f30fe9ef1eae975"
+  },
+  "checks": [
+    {
+      "name": "workspace tests",
+      "command": "./tools/cargo test -j2 --workspace --profile ci --features incant_audio_runtime/scene --locked",
+      "local_log": "/tmp/incant-rust-sdk-workspace.log",
+      "sha256": "f2f4891cf4fa612b321dcacef4aa0196d4e56c6e88d5e4b0680b5fa7a59142a8"
+    },
+    {
+      "name": "workspace Clippy",
+      "command": "./tools/cargo clippy -j2 --workspace --profile ci --features incant_audio_runtime/scene --all-targets --locked -- -D warnings",
+      "local_log": "/tmp/incant-rust-sdk-workspace-clippy.log",
+      "sha256": "0e31a172e966dab648139a2cc956f31cc149c92b907e5118139dd314ad6a48cc"
+    },
+    {
+      "name": "combined actual hosts",
+      "command": "python3 tools/probes/shipping-wasm2c.py OUTPUT --conformance-only",
+      "local_log": "/tmp/incant-rust-sdk-conformance-final/conformance-0.log",
+      "sha256": "4507e549e8c016321954c6a2d3fa78bd9df1d0e9eff112ca285b9691e62519e9"
+    },
+    {
+      "name": "combined Clippy",
+      "command": "combined helper conformance command 1",
+      "local_log": "/tmp/incant-rust-sdk-conformance-final/conformance-1.log",
+      "sha256": "b80b49938536c932c2fa11d31c848a2b4afa72b9fa1c93a52e06260e0999e57c"
+    },
+    {
+      "name": "development subprocess proof",
+      "command": "combined helper development phase",
+      "local_log": "/tmp/incant-rust-sdk-conformance-final/development/result.json",
+      "sha256": "44b7e33a9008a8a65385199e951d5373cc40a520d10ce647a34aa6f72a3981e7"
+    },
+    {
+      "name": "tools tests",
+      "command": "python3 -m unittest discover -s tools/tests -q",
+      "local_log": "/tmp/incant-rust-sdk-final-tools.log",
+      "sha256": "421ed03252e12cc05092d419b93dbcac31bc1cec9d8e94dd48cc13bea764d2b1"
+    },
+    {
+      "name": "default wasm32",
+      "command": "./tools/cargo check -j2 -p incant-module -p incant_wasm_abi -p incant_wasm_dev --no-default-features --target wasm32-unknown-unknown --locked",
+      "local_log": "/tmp/incant-rust-sdk-wasm-check.log",
+      "sha256": "7946b3697dc75542c518b8d0b4fbebffeaa28b0a1fff23d77e88876ccb0f2c5e"
+    },
+    {
+      "name": "normal graphs",
+      "command": "python3 tools/check_runtime_dependencies.py incant-module incant_wasm_abi incant_wasm_runtime incant_runtime incant_script incant_game_runtime incant_game_player --features incant_wasm_dev/static-conformance",
+      "local_log": "/tmp/incant-rust-sdk-graphs.log",
+      "sha256": "b391420632653b2261b43bca44b2013e9738228886f06dd5426dbb05c6e00207"
+    }
+  ],
+  "workspace_passed": 692,
+  "workspace_gpu_ignored": 71,
+  "combined_host_passed": 167,
+  "tools_passed": 93,
+  "shipping_command": "python3 tools/probes/static-game.py OUTPUT",
+  "shipping_result_sha256": "7e4826691a9d2ca9d344439c83bfc247cf4ad697612300023e3f9c1f1dab54f7",
+  "shipping": {
+    "passed": true,
+    "target": "aarch64-apple-darwin",
+    "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+    "wabt": {
+      "release": "1.0.42",
+      "url": "https://github.com/WebAssembly/wabt/releases/download/1.0.42/wabt-1.0.42-macos-arm64.tar.gz",
+      "archive_sha256": "3f654779b436c628db3ca4323c51538815f5fbc887a6d5f3bb1c18d36281e240"
+    },
+    "codegen": {
+      "incant_wasm_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_script": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_game_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_physics_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_input": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_audio_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_assets_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_wasm_player": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort",
+        "lto": "fat",
+        "debuginfo": "2",
+        "split-debuginfo": "packed"
+      }
+    },
+    "c_flags": [
+      "-O3",
+      "-frounding-math",
+      "-fno-optimize-sibling-calls",
+      "-ffp-contract=off",
+      "-DWASM_RT_MEMCHECK_BOUNDS_CHECK=1",
+      "-DWASM_RT_MAX_CALL_STACK_DEPTH=64"
+    ],
+    "normal_dependencies": [
+      "allocator-api2",
+      "approx",
+      "arrayvec",
+      "assert_type_match",
+      "async-channel",
+      "async-executor",
+      "async-task",
+      "atomic-arena",
+      "atomic-waker",
+      "bevy_ecs",
+      "bevy_ecs_macro_logic",
+      "bevy_ecs_macros",
+      "bevy_macro_utils",
+      "bevy_platform",
+      "bevy_ptr",
+      "bevy_reflect",
+      "bevy_reflect_derive",
+      "bevy_tasks",
+      "bevy_utils",
+      "bitflags",
+      "block-buffer",
+      "bumpalo",
+      "bytemuck",
+      "bytemuck_derive",
+      "byteorder",
+      "cfg-if",
+      "concurrent-queue",
+      "const-oid",
+      "convert_case",
+      "convert_case",
+      "cpu-time",
+      "cpufeatures",
+      "critical-section",
+      "crossbeam-deque",
+      "crossbeam-epoch",
+      "crossbeam-queue",
+      "crossbeam-utils",
+      "crypto-common",
+      "derive_more",
+      "derive_more-impl",
+      "digest",
+      "disqualified",
+      "downcast-rs",
+      "dyn-clone",
+      "either",
+      "ena",
+      "equivalent",
+      "erased-serde",
+      "event-listener",
+      "event-listener-strategy",
+      "fastrand",
+      "fixedbitset",
+      "float-cmp",
+      "foldhash",
+      "futures-channel",
+      "futures-core",
+      "futures-io",
+      "futures-lite",
+      "futures-macro",
+      "futures-sink",
+      "futures-task",
+      "futures-util",
+      "generic-array",
+      "getrandom",
+      "getrandom",
+      "glam",
+      "glam",
+      "glam",
+      "glam",
+      "glamx",
+      "hash32",
+      "hashbrown",
+      "hashbrown",
+      "heapless",
+      "heapless",
+      "incant_2d",
+      "incant_assets_runtime",
+      "incant_audio_runtime",
+      "incant_game_runtime",
+      "incant_input",
+      "incant_physics_2d_runtime",
+      "incant_physics_runtime",
+      "incant_runtime",
+      "incant_script",
+      "incant_types",
+      "incant_wasm_abi",
+      "incant_wasm_player",
+      "incant_wasm_runtime",
+      "indexmap",
+      "itoa",
+      "js-sys",
+      "kira",
+      "ktx2",
+      "libc",
+      "libm",
+      "log",
+      "matrixmultiply",
+      "memchr",
+      "meshopt",
+      "mint",
+      "nalgebra",
+      "nalgebra-macros",
+      "nonmax",
+      "num-bigint",
+      "num-complex",
+      "num-derive",
+      "num-integer",
+      "num-rational",
+      "num-traits",
+      "once_cell",
+      "ordered-float",
+      "parking",
+      "parry2d",
+      "parry3d",
+      "pastey",
+      "pin-project-lite",
+      "portable-atomic",
+      "portable-atomic-util",
+      "ppv-lite86",
+      "proc-macro-crate",
+      "proc-macro2",
+      "profiling",
+      "profiling-procmacros",
+      "quote",
+      "r-efi",
+      "r-efi",
+      "rand",
+      "rand_chacha",
+      "rand_core",
+      "rand_core",
+      "rapier2d",
+      "rapier3d",
+      "raw-window-handle",
+      "rawpointer",
+      "rayon",
+      "rayon-core",
+      "ref-cast",
+      "ref-cast-impl",
+      "relative-path",
+      "robust",
+      "rquickjs",
+      "rquickjs-core",
+      "rquickjs-macro",
+      "rquickjs-sys",
+      "rstar",
+      "rtrb",
+      "safe_arch",
+      "schemars",
+      "schemars_derive",
+      "send_wrapper",
+      "serde",
+      "serde_core",
+      "serde_derive",
+      "serde_derive_internals",
+      "serde_json",
+      "sha2",
+      "simba",
+      "slab",
+      "slotmap",
+      "smallvec",
+      "smol_str",
+      "spade",
+      "spin",
+      "stable_deref_trait",
+      "static_assertions",
+      "subtle",
+      "syn",
+      "syn",
+      "thiserror",
+      "thiserror-impl",
+      "thread_local",
+      "toml_datetime",
+      "toml_edit",
+      "toml_parser",
+      "triple_buffer",
+      "typeid",
+      "typenum",
+      "ulid",
+      "unicode-ident",
+      "unicode-segmentation",
+      "unicode-xid",
+      "uuid",
+      "variadics_please",
+      "wasip2",
+      "wasm-bindgen",
+      "wasm-bindgen-futures",
+      "wasm-bindgen-macro",
+      "wasm-bindgen-macro-support",
+      "wasm-bindgen-shared",
+      "web-sys",
+      "web-task",
+      "web-time",
+      "wgpu-types",
+      "wide",
+      "winapi",
+      "winapi-i686-pc-windows-gnu",
+      "winapi-x86_64-pc-windows-gnu",
+      "windows-link",
+      "windows-sys",
+      "winnow",
+      "wit-bindgen",
+      "zerocopy",
+      "zerocopy-derive",
+      "zeroize",
+      "zeroize_derive",
+      "zmij"
+    ],
+    "player_bytes": 5495136,
+    "rust_sdk": {
+      "target": "wasm32-unknown-unknown",
+      "edition": "2024",
+      "panic": "abort",
+      "opt_level": 2,
+      "source_sha256": {
+        "sdk/abi/native-v1.json": "9a601d8e0b45fbf544ae9d8e76e5bbedf14db7a699fd44e52cbc54e82f621da5",
+        "tools/rust_guest.py": "d439016fc399725244b85488871a09536416ba6a6ba53496d6c623ecc68e0296",
+        "crates/incant_wasm_abi/src/lib.rs": "edc78b17f923b04af7ecfcc32ea360e55858a62163e4b248ee5bc2acdeb5e686",
+        "sdk/rust/src/flipbook.rs": "4432747e8707e044aa63f6d22d679d1b88aec720805219d8d1f891c0e9969e65",
+        "sdk/rust/src/input.rs": "b088d9f4fe099abcf0247167e026193531bac854551103fff41b628be8bdbb63",
+        "sdk/rust/src/lib.rs": "9e5192477f0435dd480ba3cbb8ddef414e9b0cd6fd85b6fa86a8d66fb96e65b1",
+        "sdk/rust/src/raw.rs": "76085fd98239e39fbacfecfb8e85ee05023b116048ff6f2c1d181552203b62b2",
+        "sdk/rust/src/tick.rs": "66818a1ccba66b3910293e3d80647a31e63d1b42adfcb88922a4dfbbedbf9d9a"
+      },
+      "repository_sdk_sources_retained": true,
+      "build_scripts_or_proc_macros": false
+    },
+    "player_sha256": "77bd0003df2aed205885aaa948c20d816f05572217ed79fa526a71d87d6ed50c",
+    "symbols": {
+      "format": "Mach-O/dSYM",
+      "uuids": {
+        "arm64": "3e072be7-1b6d-3646-924a-ba8255f5a76c"
+      }
+    },
+    "source_sha256": "9f825c5d156cadb9bbb64f9a119302776128c2209ac1de21844e84b264c5f204",
+    "wasm_sha256": "eee5e54b2bce6b7b9944bcaa39662ebb26038f955713c6cf5e98d73b8fb74af4",
+    "temporary_compile_sources_tools_generated_c_wasm_and_build_storage_deleted": true,
+    "successes": [
+      {
+        "streaming": false,
+        "stdout": "tick=64 frames=44117 source=[2.078125, 1.0, 0.0] spawned=1.96875 pressed=1 released=1",
+        "pcm_sha256": "ec6d6527e9e52908b54859266987da54476d22c05fd4e4b886ce6e4647ce35c7",
+        "energy": [
+          443.54126608464867,
+          7673.058791487943
+        ]
+      },
+      {
+        "streaming": false,
+        "stdout": "tick=64 frames=44117 source=[2.078125, 1.0, 0.0] spawned=1.96875 pressed=1 released=1",
+        "pcm_sha256": "ec6d6527e9e52908b54859266987da54476d22c05fd4e4b886ce6e4647ce35c7",
+        "energy": [
+          443.54126608464867,
+          7673.058791487943
+        ]
+      },
+      {
+        "streaming": false,
+        "stdout": "tick=64 frames=44117 source=[2.078125, 1.0, 0.0] spawned=1.96875 pressed=1 released=1",
+        "pcm_sha256": "ec6d6527e9e52908b54859266987da54476d22c05fd4e4b886ce6e4647ce35c7",
+        "energy": [
+          443.54126608464867,
+          7673.058791487943
+        ]
+      },
+      {
+        "streaming": false,
+        "delayed_action": true,
+        "stdout": "tick=64 frames=44117 source=[2.078125, 1.0, 0.0] spawned=1.84375 pressed=1 released=1",
+        "pcm_sha256": "106ef5c6ba84b8695e013f94fcb2afaa6f7c98bb58b2e333821576bd0b14ca81"
+      },
+      {
+        "streaming": true,
+        "stdout": "tick=64 frames=44117 source=[2.078125, 1.0, 0.0] spawned=1.96875 pressed=1 released=1",
+        "pcm_sha256": "ec6d6527e9e52908b54859266987da54476d22c05fd4e4b886ce6e4647ce35c7",
+        "energy": [
+          443.54126608464867,
+          7673.058791487943
+        ]
+      },
+      {
+        "streaming": true,
+        "stdout": "tick=64 frames=44117 source=[2.078125, 1.0, 0.0] spawned=1.96875 pressed=1 released=1",
+        "pcm_sha256": "ec6d6527e9e52908b54859266987da54476d22c05fd4e4b886ce6e4647ce35c7",
+        "energy": [
+          443.54126608464867,
+          7673.058791487943
+        ]
+      },
+      {
+        "streaming": true,
+        "stdout": "tick=64 frames=44117 source=[2.078125, 1.0, 0.0] spawned=1.96875 pressed=1 released=1",
+        "pcm_sha256": "ec6d6527e9e52908b54859266987da54476d22c05fd4e4b886ce6e4647ce35c7",
+        "energy": [
+          443.54126608464867,
+          7673.058791487943
+        ]
+      },
+      {
+        "streaming": true,
+        "delayed_action": true,
+        "stdout": "tick=64 frames=44117 source=[2.078125, 1.0, 0.0] spawned=1.84375 pressed=1 released=1",
+        "pcm_sha256": "106ef5c6ba84b8695e013f94fcb2afaa6f7c98bb58b2e333821576bd0b14ca81"
+      }
+    ],
+    "rejections": [
+      {
+        "streaming": false,
+        "name": "trap",
+        "stderr": "Error: Session(Module(Trap(1)))"
+      },
+      {
+        "streaming": false,
+        "name": "nan",
+        "stderr": "Error: Session(Module(Boundary(Runtime(Scene(Component(StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2])))))))"
+      },
+      {
+        "streaming": false,
+        "name": "cycle",
+        "stderr": "Error: Session(Module(Boundary(Runtime(Scene(Component(StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1])))))))"
+      },
+      {
+        "streaming": false,
+        "name": "loop",
+        "stderr": "Error: Session(Module(Fuel))"
+      },
+      {
+        "streaming": false,
+        "name": "remove-listener",
+        "stderr": "Error: Session(Module(Boundary(Runtime(Scene(Invalid(\"audio declarations, limits or references\"))))))"
+      },
+      {
+        "streaming": false,
+        "name": "audio-pose",
+        "stderr": "Error: Audio(Invalid(\"audio world position outside mixer bounds\"))"
+      },
+      {
+        "streaming": false,
+        "name": "not-linked",
+        "stderr": "Error: \"unknown linked module\""
+      },
+      {
+        "streaming": false,
+        "name": "camera",
+        "stderr": "Error: SpatialHost"
+      },
+      {
+        "streaming": false,
+        "name": "manifest",
+        "stderr": "Error: SpatialHost"
+      },
+      {
+        "streaming": false,
+        "name": "overflow",
+        "stderr": "Error: Session(Runtime(Scene(Component(StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1])))))"
+      },
+      {
+        "streaming": false,
+        "name": "recording-clock",
+        "stderr": "Error: Rate"
+      },
+      {
+        "streaming": false,
+        "name": "clip-fingerprint",
+        "stderr": "Error: Asset(Io(Os { code: 2, kind: NotFound, message: \"No such file or directory\" }))"
+      },
+      {
+        "streaming": true,
+        "name": "trap",
+        "stderr": "Error: Session(Module(Trap(1)))"
+      },
+      {
+        "streaming": true,
+        "name": "nan",
+        "stderr": "Error: Session(Module(Boundary(Runtime(Scene(Component(StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2])))))))"
+      },
+      {
+        "streaming": true,
+        "name": "cycle",
+        "stderr": "Error: Session(Module(Boundary(Runtime(Scene(Component(StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1])))))))"
+      },
+      {
+        "streaming": true,
+        "name": "loop",
+        "stderr": "Error: Session(Module(Fuel))"
+      },
+      {
+        "streaming": true,
+        "name": "remove-listener",
+        "stderr": "Error: Session(Module(Boundary(Runtime(Scene(Invalid(\"audio declarations, limits or references\"))))))"
+      },
+      {
+        "streaming": true,
+        "name": "audio-pose",
+        "stderr": "Error: Audio(Invalid(\"audio world position outside mixer bounds\"))"
+      },
+      {
+        "streaming": true,
+        "name": "not-linked",
+        "stderr": "Error: \"unknown linked module\""
+      },
+      {
+        "streaming": true,
+        "name": "camera",
+        "stderr": "Error: SpatialHost"
+      },
+      {
+        "streaming": true,
+        "name": "manifest",
+        "stderr": "Error: SpatialHost"
+      },
+      {
+        "streaming": true,
+        "name": "overflow",
+        "stderr": "Error: Session(Runtime(Scene(Component(StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1])))))"
+      },
+      {
+        "streaming": true,
+        "name": "recording-clock",
+        "stderr": "Error: Rate"
+      },
+      {
+        "streaming": true,
+        "name": "clip-fingerprint",
+        "stderr": "Error: Asset(Io(Os { code: 2, kind: NotFound, message: \"No such file or directory\" }))"
+      },
+      {
+        "name": "--wasm-file",
+        "stderr": "Error: \"expected LINKED_MODULE COOKED_SCENE PCM_CACHE CLIP_KEY INPUT_RECORDING OUTPUT; no source/module loading supported\""
+      },
+      {
+        "name": "--script-file",
+        "stderr": "Error: \"expected LINKED_MODULE COOKED_SCENE PCM_CACHE CLIP_KEY INPUT_RECORDING OUTPUT; no source/module loading supported\""
+      }
+    ],
+    "limitations": [
+      "versioned copied input snapshot, not a complete gameplay SDK",
+      "QuickJS remains in normal dependency graph; this is not a QuickJS-free architecture",
+      "retained PCM and recording JSON are runtime exchange files, not deleted compile inputs",
+      "repository and validator build storage retained",
+      "copied bounded numeric transfer, not zero-copy",
+      "no renderer, full session save, mobile/device or performance gate",
+      "simulation/module/audio failures publish no PCM; output I/O itself is not atomic",
+      "trusted build environment; C flag audit checks global presence, not every translation unit"
+    ]
+  },
+  "limits": [
+    "Local macOS execution only; updated Linux/MSVC jobs await later union publication",
+    "No GPU/appearance changes or new rendered review",
+    "Complete gameplay SDK and authored module groups/props/timers are outside this slice",
+    "No Rust build sandbox, source loader, mobile/device/performance or phase gate claim",
+    "Whole-workspace run preceded standalone fixture rustfmt and stronger test-only truncation assertions; final both-host suite/proof used final inputs"
+  ],
+  "independent_review": {
+    "reviewer": "root Astra",
+    "result": "no blocking findings",
+    "local_report": "/tmp/incant-rust-sdk-root-review.md",
+    "sha256": "2cf9bcdaa91c481e33d2a9b4d80841309402fde4e9f864bbe381be2150523d02"
+  }
+}
