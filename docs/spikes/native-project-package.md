@@ -72,7 +72,45 @@ Windows-only cases skipped), including five package tests and 16 real process
 lifecycle tests. Independent review resolved
 unique asset accounting, publication wording and owned process cleanup. Exact
 identities and observations are in [the evidence file](evidence/native-project-package.json).
- Windows/Linux execution of this new exporter, window/GPU
+Windows/Linux execution of this new exporter, window/GPU
 package execution, automated export UI, physical-device measurements, phone/store
 packages, signing and a complete authoring-to-release workflow remain open. A
 successful desktop package does not approve any full export or phase gate.
+
+## Transactional source integration
+
+The source-store and command/journal implementation is now combined with the
+shared compiler and exporter on main87. The compiler regression creates an actual
+interrupted source transaction, observes typed `RecoveryRequired` before source
+graph acquisition, verifies that the read did not modify the file or marker, and
+then explicitly recovers it. The public source probe again passes all 32 RPC
+requests, including Undo, Redo and fresh-process journal recovery.
+
+The additional [acceptance probe](../../tools/probes/authored-native-export.py)
+creates its script, metadata and attachment in one public command transaction.
+It checks native motion, saves through `project.save`, reopens the checkpoint and
+journal, and runs the actual fresh shipping exporter. After deleting its private
+authoring fixture, three fresh copied-player processes each reproduce the same
+20-tick X translation, 2.0 within 1e-9. Private build storage is also absent before
+startup; shipping codegen, dependency, parser and symbol audits pass. The player
+SHA-256 is `3823cf67e7e55b19cd0249a7b468e96e9b995e3589f3d111088ed02675860744`.
+
+```sh
+python3 tools/probes/authored-native-export.py /new/proof-directory --binary target/ci/incant_headless
+```
+
+Final integration validation passes 786 ordinary workspace tests, 75 serialized
+GPU tests, 15 optional project/window tests, workspace and optional-window Clippy,
+177 Python tests (two Windows-only cases skipped), 17 Node tests and 536 UI tests.
+Build, strict types, generation, formatting, workflow lint and the resolved
+project/window runtime dependency guard pass. Shipping/GPU execution used frozen
+`e0fcc2f`; later main87 integration changes no production Rust, Cargo, compiler or
+export inputs. The final workspace run includes the Windows journal fixture
+correction and removes nine obsolete duplicate source tests.
+
+Independent integration review caught a resurrected prerequisite workflow and
+its duplicate old test file. Both are removed; a workflow-inventory guard prevents
+new full PR/main suites. Existing comprehensive macOS and Windows/Linux jobs now
+run the public export probe, exercising the optional build producer without a new
+workflow, context or fast-main job. Those hosted executions remain pending.
+[Exact results, identities and limits](evidence/authored-native-export.json).
