@@ -1,0 +1,29 @@
+{
+  "recorded_at": "2026-10-11T21:54:58.945562+00:00",
+  "source_commit": "9817f0ce08c9650d47a29c4372787da7383f5e1e",
+  "test_build_started_at": "0ca2bcd6e2b900f02e5f0cc111653cd99b88342e",
+  "rust_source_unchanged_during_checks": true,
+  "tests": {
+    "command": "./tools/cargo test --workspace --profile ci --locked --features incant_audio_runtime/scene -j2",
+    "exit_code": 0,
+    "passed": 993,
+    "failed": 0,
+    "ignored": 75,
+    "groups": 244
+  },
+  "clippy": {
+    "command": "./tools/cargo clippy --workspace --all-targets --profile ci --locked --features incant_audio_runtime/scene -j2 -- -D warnings",
+    "exit_code": 0
+  },
+  "logs": {
+    "incant-editor-union-workspace-tests.log": {
+      "path": "/tmp/incant-editor-union-workspace-tests.log",
+      "sha256": "bd7e65f55a1f41c458dcb0bec93acb438198dbe791bcc7e0e0f9d10c18c00add"
+    },
+    "incant-editor-union-clippy.log": {
+      "path": "/tmp/incant-editor-union-clippy.log",
+      "sha256": "dfb5f988ff5d491ec4b2a16d7ab390bc990f3354b71a75b47f501d1fd028945a"
+    }
+  },
+  "scope": "Ordinary local workspace unit/integration/doc tests and all-target lint. Ignored tests are not executed, no native-window, provider, device-performance or phase-gate claim. Optional native probe features receive their scoped checks and final build separately."
+}
