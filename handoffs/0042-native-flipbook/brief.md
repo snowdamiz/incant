@@ -11,10 +11,11 @@ incant_headless, cook_scene and native_frames binaries. Verify SHA256 before and
 after commands. No Cargo, shader, engine, schema, SDK or editor edits. No native
 application launch or system-wide input. Review uses bounded offscreen captures.
 Do not capture until artifacts/tools/gpu-review-ready exists; the GPU slot is
-coordinated by Astra and another packet may still own it. Your capture wrapper must check
-the gate and frozen executable hash before every GPU invocation, use an explicit
-120-second subprocess timeout, and terminate/wait for all children on timeout.
-Do not detach capture processes or silently extend the capture budget.
+coordinated by Astra and another packet may still own it. All GPU invocations must use the supplied Astra-owned `capture.py` wrapper, which
+checks the gate and frozen binary on every call, enforces cumulative budget and a
+60-second process deadline, and kills/reaps its private process group on timeout.
+Do not invoke native_frames/headless screenshots directly, edit this wrapper,
+change its budget file, detach capture processes or extend the capture budget.
 
 ## Actual path and contracts
 
@@ -46,7 +47,8 @@ input/session/audio/save or on-screen presentation is implemented by this helper
 
 ## Bounded helper protocol
 
-native_frames <cooked-scene> <model-cache> <texture-cache> <camera-hex-id>
+python3 handoffs/0042-native-flipbook/capture.py
+              <cooked-scene> <model-cache> <texture-cache> <camera-hex-id>
               <request-json> <new-output-directory>
 
 IDs are 32 hexadecimal digits of the cooked ULID bytes. Requests, parsed only at
@@ -103,4 +105,4 @@ Return result.md with verified model/effort, source/binary/input/output hashes,
 public commands, capture count and adapter/backend, scoped acceptance/failures,
 and limitations. State explicitly when all capture processes have ended so Astra
 can release the GPU. Commit only packet files with Built-by: claude; Astra owns
-this brief and integration.
+this brief, capture.py, immutable tool/budget manifests and integration.

@@ -1,7 +1,7 @@
 # Native sprite flipbooks
 
-Local implementation checkpoint; fresh shipping proof, Claude appearance review
-and publication remain pending. This is not a performance,
+The native implementation and local numerical/shipping checks are complete;
+Claude appearance review, hosted checks and publication remain pending. This is not a performance,
 phone, editor appearance or phase-gate result.
 
 `SpriteFlipbook` attaches 1–256 ordered pixel/atlas regions to one
@@ -72,8 +72,23 @@ The prepared `native-game.py --gpu --flipbook` extension compares animated first
 and last actual GPU readbacks with independent static-frame control scenes at
 identical script/input/physics/audio poses. It keeps the original source deletion,
 compiler exclusion, profile/symbol identity, replay, refusal and audio checks.
-Its execution is pending a fresh shipping build. The existing CI probe invocation
-now includes these additive controls in the same build.
+On source `95df19d`, the fresh macOS ARM shipping run passed in 219.96 seconds.
+All 32 repeated fixture processes passed, including four animated first/final
+GPU comparisons at 44,117 and 48,000 Hz; 35 refusal controls passed, including
+an invalid noncurrent animation frame and strict v8 refusal without a visual
+host. Existing logs, observations, CPU-only and plain-v1 controls also pass.
+Authoring and fresh build storage were deleted before execution. Source compiler
+symbols are absent, and the copied 8,943,600-byte executable matches dSYM UUID
+`cf52a010-4b33-3265-b421-cdb3d949161b` and SHA256
+`73e94eded698ee209128a5a10670ed86c7c1b3473544508f01dea8787c839f26`.
+
+The matched union `07c0d433` shipping executable is 8,893,968 bytes. Target,
+compiler, verified codegen and complete embedded-script metadata match; this
+candidate adds 49,632 bytes. That is a local executable-size comparison, not a
+performance gate. A wasm32 runtime check also passes, but only establishes
+compilation, not browser playback. Exact source/check hashes and full proof are
+in [native-flipbooks-local.json](evidence/native-flipbooks-local.json). The existing
+CI probe invocation includes the additive controls in the same fresh build.
 
 The `incant_render` `native_frames` example is a bounded review helper, using the
 real native world and retained renderer with no project, scripts, audio or
@@ -82,4 +97,6 @@ ticks and typed controls select committed states. It caps 4096 entities, 256
 flipbooks, 64 captures, 256 controls, 36000 ticks and 256 MiB total decoded output.
 Its PNG output is not atomic: earlier files can remain after a later failure.
 Claude packet 0042 owns visual captures and appearance review; its GPU gate is
-not yet granted.
+not yet granted. The supplied capture wrapper checks the gate and executable
+hash per call, bounds the cumulative budget, and kills/reaps timed-out process
+groups. Its absent-gate refusal was tested without invoking a renderer.
