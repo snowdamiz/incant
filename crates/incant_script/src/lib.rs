@@ -18,6 +18,7 @@ mod logging;
 mod program;
 mod queries;
 mod query_values;
+mod query_values_2d;
 mod schedule;
 mod session;
 mod synchronous;
@@ -454,6 +455,8 @@ mod tests;
 #[cfg(all(test, feature = "compiler"))]
 mod input_tests;
 
+#[cfg(all(test, feature = "compiler"))]
+mod query_2d_tests;
 #[cfg(all(test, feature = "compiler"))]
 mod query_tests;
 

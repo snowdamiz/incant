@@ -39,10 +39,21 @@ pub struct BodyState {
     /// Observation only; inputs cannot directly force the sleep state.
     pub sleeping: bool,
 }
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
-pub struct TriggerEvent {
-    pub first: StableId,
-    pub second: StableId,
+#[derive(
+    Debug,
+    Clone,
+    PartialEq,
+    Eq,
+    PartialOrd,
+    Ord,
+    serde::Serialize,
+    serde::Deserialize,
+    schemars::JsonSchema,
+)]
+#[schemars(rename = "TriggerEvent2D")]
+pub struct TriggerEvent<I = StableId> {
+    pub first: I,
+    pub second: I,
     pub entered: bool,
 }
 struct Entry {

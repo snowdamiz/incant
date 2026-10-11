@@ -9,6 +9,8 @@ publish.workspace = true
 incant_types.workspace = true
 incant_2d.workspace = true
 thiserror.workspace = true
+serde.workspace = true
+schemars.workspace = true
 rapier2d = { version = "=0.36.0", features = ["enhanced-determinism"] }
 
 # Keep browser/WASI serial until a supported worker pool exists.

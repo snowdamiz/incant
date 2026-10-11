@@ -1,5 +1,5 @@
 /** Native QuickJS migration API. Separate from the document-backed ScriptApi. */
-import type { InputFrame, ScriptClock, TimerEvent, PhysicsRayQuery, PhysicsRayHit, PhysicsCharacterQuery, PhysicsCharacterMovement, PhysicsTriggerEvent } from './generated';
+import type { InputFrame, ScriptClock, TimerEvent, PhysicsRayQuery, PhysicsRayHit, PhysicsCharacterQuery, PhysicsCharacterMovement, PhysicsTriggerEvent, PhysicsRayQuery2D, PhysicsRayHit2D, PhysicsTriggerEvent2D } from './generated';
 /** VM-owned bounded copy; no native pointers/handles or JSON conversion.
  * Retention cannot hold an ECS loan or alter the next input frame. */
 type InputReadonly<T> = T extends object ? { readonly [K in keyof T]: InputReadonly<T[K]> } : T;
@@ -64,7 +64,19 @@ export type NativeRayHit = PhysicsRayHit;
 export type NativeCharacterQuery = Omit<PhysicsCharacterQuery, 'scene_id'>;
 export type NativeCharacterMovement = PhysicsCharacterMovement;
 export type NativeTriggerEvent = PhysicsTriggerEvent;
+export type NativeRayQuery2D = PhysicsRayQuery2D;
+export type NativeRayHit2D = PhysicsRayHit2D;
+export type NativeTriggerEvent2D = PhysicsTriggerEvent2D;
 export interface NativePhysics {
+  /** XY ray against committed 2D colliders and solid tilemaps. Direction is
+   * normalized; zero direction refuses. Starting inside a shape hits at zero.
+   * include_sensors, exclude_entity and symmetric membership/filter masks apply.
+   * Shares the 1,024-call budget, active-tick lifetime and rollback below. */
+  raycast2D(query: NativeRayQuery2D): NativeRayHit2D | null;
+  /** Owned sorted planar sensor enter/exit events from the last solver step.
+   * Active scene is implicit; reading does not drain or include pending writes.
+   * Shares the query budget and active-tick lifetime with raycast2D/raycast. */
+  triggerEvents2D(): NativeTriggerEvent2D[];
   /** Computes a world-space displacement against committed bodies without moving
    * them. Apply it through the existing columns/commands. Up to 128 per update,
    * within the shared 1,024-call query budget; the update dt is implicit. */

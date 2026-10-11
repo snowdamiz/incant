@@ -4090,6 +4090,8 @@ dependencies = [
  "incant_2d",
  "incant_types",
  "rapier2d",
+ "schemars 1.2.2",
+ "serde",
  "thiserror 2.0.21",
 ]
 
