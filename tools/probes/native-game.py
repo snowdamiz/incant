@@ -23,6 +23,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'tools'))
 from shipping import cargo_output, codegen
 from shipping_symbols import backend, package, require, run
+from native_game_sprites import FRAME, component as sprite_component, import_atlas
 
 
 def sha(path):
@@ -92,8 +93,14 @@ def main():
             updated = json.loads(project.read_text())
             model = next(ident for ident in updated['assets'] if ident not in document['assets'])
             revision += 1
-        for streaming in (False, True):
-            name = 'stream' if streaming else 'static'
+        atlas_import = import_atlas(inputs, project, headless, run) if args.gpu else None
+        if atlas_import:
+            revision += 1
+        variants = [(False, False), (True, False)]
+        if args.gpu:
+            variants += [(False, True), (True, True)]
+        for streaming, sprite in variants:
+            name = ('stream' if streaming else 'static') + ('-sprite' if sprite else '')
             components = {
                 1: {'Transform': dict(transform, translation=[-3, 0, 0]),
                     'Velocity': {'linear': [0, 0, 0]},
@@ -107,7 +114,10 @@ def main():
                 3: {'Transform': transform, 'AudioBus': {'parent': None, 'gain_db': -6}},
             }
             if args.render_input:
-                components[1]['MeshRenderer'] = {'mesh': model, 'materials': [], 'cast_shadows': True}
+                if sprite:
+                    components[1]['SpriteRenderer'] = sprite_component(atlas_import['asset']['id'], streaming)
+                else:
+                    components[1]['MeshRenderer'] = {'mesh': model, 'materials': [], 'cast_shadows': True}
                 components[4] = {'Transform': dict(transform, translation=[0,0,8] if args.gpu else [0,0,0]), 'Camera': {'fov_degrees': 60, 'near': 0.1, 'far': 100, 'projection': {'kind': 'perspective'}}}
             commands = ([{'op': 'delete_entity', 'scene_id': scene, 'entity_id': ids[n]} for n in entity_order] if fixtures else [])
             commands += [{'op': 'create_entity', 'scene_id': scene, 'entity': {
@@ -119,8 +129,9 @@ def main():
             require(all('error' not in json.loads(line) for line in reply.splitlines()), f'Authoring failed: {reply}')
             revision += 1
             destination = inputs / f'{name}.scene'; run([cook, project, scene, destination])
-            require(destination.read_bytes()[8:12] == struct.pack('<I', 4 if args.render_input else 3), 'Unexpected cooked scene version')
-            fixtures.append({'name': name, 'path': destination})
+            version = 5 if sprite else (4 if args.render_input else 3)
+            require(destination.read_bytes()[8:12] == struct.pack('<I', version), 'Unexpected cooked scene version')
+            fixtures.append({'name': name, 'path': destination, 'sprite': sprite, 'version': version})
         authoring_hash = sha(project)
         source = inputs / 'game.js'
         checks = '''
@@ -174,6 +185,7 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
             shutil.copy2(metadata_files[0], out / 'symbols/script-symbols.json')
         shutil.copytree(cache, out / 'player/audio')
         if args.render_input: shutil.copytree(inputs / '.incant/cache/models', out / 'player/models')
+        if args.gpu: shutil.copytree(inputs / '.incant/cache/textures', out / 'player/textures')
         (out / 'player/clips.bin').write_bytes(table)
         for fixture in fixtures:
             dest = out / 'player' / fixture['path'].name
@@ -188,7 +200,10 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
     record_path = out / 'player/input.json'; record_path.write_text(json.dumps(replay))
     action_path = out / 'player/actions.json'; action_path.write_text(json.dumps(actions))
     cache = out / 'player/audio'; table_path = out / 'player/clips.bin'
-    before = {p.name: sha(p) for p in (out / 'player').rglob('*') if p.is_file()}
+    def package_hashes():
+        return {p.relative_to(out / 'player').as_posix(): sha(p)
+                for p in (out / 'player').rglob('*') if p.is_file()}
+    before = package_hashes()
     results = []
     def command(scene_path, recording, rate, dest, clips=table_path, spatial=None):
         cmd = [player, scene_path, cache, clips, recording, action_path, '120', str(rate), dest]
@@ -209,8 +224,11 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
                 if args.render_input:
                     spatial = report['render_input']
                     require(spatial['mode'] == ('gpu-offscreen' if args.gpu else 'cpu-only') and spatial['gpu_submitted'] == args.gpu and spatial['tick'] == 120, 'Wrong spatial publication scope')
-                    require(spatial['model_count'] == 1 and spatial['decoded_payload_bytes'] > 0 and spatial['camera'] == binary_id(ids[4]).hex(), 'Missing real cooked binding')
-                    require(spatial['first_model_position'] == source['position'] and spatial['camera_position'] == ([0,0,8] if args.gpu else [0,0,0]), 'CPU render input disagrees with committed simulation')
+                    sprite = fixture['sprite']
+                    require(spatial['model_count'] == int(not sprite) and spatial['sprite_count'] == int(sprite)
+                            and spatial['decoded_payload_bytes'] > 0 and spatial['camera'] == binary_id(ids[4]).hex(), 'Missing real cooked binding')
+                    position = spatial['first_sprite_position' if sprite else 'first_model_position']
+                    require(position == source['position'] and spatial['camera_position'] == ([0,0,8] if args.gpu else [0,0,0]), 'CPU render input disagrees with committed simulation')
                 if args.gpu:
                     gpu = spatial['gpu']; captures = gpu['captures']
                     require(gpu['accepted_frames'] == 120 and not gpu['on_screen'] and [gpu['width'],gpu['height']] == [160,96], 'Wrong GPU frame accounting')
@@ -224,7 +242,7 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
                 reports.append(report)
             require(reports[0] == reports[1], 'Fresh-process replay changed output')
             results.append({'fixture': fixture['name'], 'rate': rate, 'report': reports[0], 'rms': rms, 'early_balance': left, 'late_balance': right})
-    require(before == {p.name: sha(p) for p in (out / 'player').rglob('*') if p.is_file()}, 'Runtime changed retained package')
+    require(before == package_hashes(), 'Runtime changed retained package')
     failures = []
     def reject(label, cmd, dest, message=None):
         result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8')
@@ -272,6 +290,7 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
             dest = out/f'{label}.pcm'; cmd = command(fixtures[0]['path'], record_path, 48000, dest)
             cmd[index] = value; reject(label, cmd, dest, message)
     cpu_mode_preserved = False
+    sprite_cpu_mode_preserved = False
     if args.gpu:
         dest = out/'gpu-build-cpu-mode.pcm'
         cmd = command(fixtures[0]['path'], record_path, 48000, dest)
@@ -280,6 +299,29 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
         require(cpu['render_input']['mode'] == 'cpu-only' and not cpu['render_input']['gpu_submitted'] and 'gpu' not in cpu['render_input'], 'GPU feature forced GPU into CPU mode')
         require(cpu['pcm_sha256'] == results[1]['report']['pcm_sha256'] and cpu['render_input']['first_model_position'] == results[1]['report']['render_input']['first_model_position'], 'CPU mode diverged from accepted GPU simulation')
         cpu_mode_preserved = True
+        sprite_fixture = next(f for f in fixtures if f['sprite'])
+        dest = out/'gpu-build-sprite-cpu-mode.pcm'
+        cmd = command(sprite_fixture['path'], record_path, 48000, dest); cmd[9] = '--cpu-render-input'
+        sprite_cpu = json.loads(run(cmd)); spatial = sprite_cpu['render_input']
+        require(spatial['mode'] == 'cpu-only' and not spatial['gpu_submitted'] and 'gpu' not in spatial
+                and spatial['sprite_count'] == 1 and spatial['model_count'] == 0, 'Sprite CPU mode changed capability')
+        require(sprite_cpu['pcm_sha256'] == cpu['pcm_sha256'] and spatial['first_sprite_position'] == cpu['render_input']['first_model_position'], 'Sprite path changed simulation/audio')
+        sprite_cpu_mode_preserved = True
+        for label, fixture_path, texture_cache, spatial_mode, message in (
+            ('sprite-default-stays-strict', sprite_fixture['path'], None, False, 'no spatial host'),
+            ('missing-sprite-cache', sprite_fixture['path'], out/'missing-textures', True, 'Asset')):
+            dest = out/f'{label}.pcm'; cmd = command(fixture_path, record_path, 48000, dest, spatial=spatial_mode)
+            if texture_cache is not None: cmd[11] = texture_cache
+            reject(label, cmd, dest, message)
+        bad_frame = out/'unknown-frame.scene'; blob = Path(sprite_fixture['path']).read_bytes()
+        require(blob.count(binary_id(FRAME)) == 1, 'Ambiguous frame mutation fixture')
+        changed = bytearray(blob.replace(binary_id(FRAME), binary_id(f'{43:026d}')))
+        # Keep the checked binary envelope valid so this reaches atlas binding,
+        # rather than merely testing the unrelated corruption checksum.
+        changed[40:72] = hashlib.sha256(changed[:40] + changed[72:]).digest()
+        bad_frame.write_bytes(changed)
+        dest = out/'unknown-frame.pcm'
+        reject('unknown-sprite-frame', command(bad_frame, record_path, 48000, dest), dest, 'Sprite')
     existing = out/'preserved.pcm'; existing.write_bytes(b'keep')
     result = subprocess.run(command(fixtures[0]['path'], record_path, 48000, existing), capture_output=True)
     require(result.returncode != 0 and not result.stdout and existing.read_bytes() == b'keep', 'Existing output overwritten')
@@ -287,10 +329,12 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
               'player_bytes': player.stat().st_size, 'player_sha256': sha(player), 'script_metadata': metadata,
               'source_compiler_symbols_absent': True, 'dynamic_source_routes_rejected': True,
               'headless_sha256': sha(headless), 'cook_sha256': sha(cook), 'audio_example_sha256': sha(audio), 'fixture_tool_sha256': sha(fixture_tool),
-              'public_import': imported, 'public_model_import': model_import, 'cpu_render_input': args.render_input and not args.gpu, 'gpu_submitted': args.gpu, 'on_screen_presentation': False, 'gpu_build_cpu_mode_preserved': cpu_mode_preserved, 'project_hash_before_delete': authoring_hash,
-              'authoring_and_build_storage_deleted': True, 'removed_scope': 'authoring project/WAV/glTF/bin/journal/script source and fresh Cargo storage',
-              'retained_runtime_inputs': ['binary scenes', 'clips.bin', 'cooked PCM/manifests', 'startup input.json/actions.json'] + (['cooked model payloads/manifests'] if args.render_input else []),
-              'repeat_exact': True, 'recorded_ticks_per_process': 120, 'audio_processes': 8, 'results': results, 'rejected': failures,
+              'public_import': imported, 'public_model_import': model_import, 'public_atlas_import': atlas_import,
+              'cpu_render_input': args.render_input and not args.gpu, 'gpu_submitted': args.gpu, 'on_screen_presentation': False,
+              'gpu_build_cpu_mode_preserved': cpu_mode_preserved, 'sprite_cpu_mode_preserved': sprite_cpu_mode_preserved, 'project_hash_before_delete': authoring_hash,
+              'authoring_and_build_storage_deleted': True, 'removed_scope': 'authoring project/WAV/glTF/bin/PNG/atlas/journal/script source and fresh Cargo storage',
+              'retained_runtime_inputs': ['binary scenes', 'clips.bin', 'cooked PCM/manifests', 'startup input.json/actions.json'] + (['cooked model payloads/manifests'] if args.render_input else []) + (['cooked KTX2/atlas metadata'] if args.gpu else []),
+              'repeat_exact': True, 'recorded_ticks_per_process': 120, 'audio_processes': len(fixtures)*4, 'results': results, 'rejected': failures,
               'spatial_refusals': refusal_results, 'plain_v1_controls': 2, 'existing_output_preserved': True,
               'size_delta_from_audio_host_2885984': player.stat().st_size-2885984,
               'size_delta_from_physics_script_player_3941816': player.stat().st_size-3941816,

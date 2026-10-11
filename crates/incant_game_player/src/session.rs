@@ -167,6 +167,8 @@ pub(crate) fn input_report(
         "camera_position":camera.world.w_axis.to_array()[..3],
         "model_count":nodes.iter().filter(|n|n.mesh.is_some()).count(),
         "first_model_position":nodes.iter().find(|n|n.mesh.is_some()).map(|n| n.world.w_axis.to_array()[..3].to_vec()),
+        "sprite_count":nodes.iter().filter(|n|n.sprite.is_some()).count(),
+        "first_sprite_position":nodes.iter().find(|n|n.sprite.is_some()).map(|n| n.world.w_axis.to_array()[..3].to_vec()),
         "decoded_payload_bytes":input.payload_bytes(), "gpu_submitted":false
     }))
 }
