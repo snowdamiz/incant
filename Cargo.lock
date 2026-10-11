@@ -4288,6 +4288,21 @@ dependencies = [
 ]
 
 [[package]]
+name = "incant_source"
+version = "0.0.1"
+dependencies = [
+ "rustix",
+ "schemars 1.2.2",
+ "serde",
+ "serde_json",
+ "sha2 0.10.9",
+ "tempfile",
+ "thiserror 2.0.21",
+ "ulid",
+ "windows-sys 0.61.2",
+]
+
+[[package]]
 name = "incant_types"
 version = "0.0.1"
 dependencies = [
