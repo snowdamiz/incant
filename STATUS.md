@@ -40,6 +40,14 @@ checkpoint 3 is frozen at repaired main89 with all 23 contexts retained.
 [Combined evidence](docs/spikes/checkpoint-2-portability.md).
 [Service correction evidence](docs/spikes/local-service-foundation.md#linux-private-bootstrap-correction).
 
+Checkpoint 3 passed the Linux service repair and macOS Python tooling step, then
+Windows exposed a separate restricted TypeScript-host path lookup mismatch.
+The reviewed correction normalizes only compiler callback keys, preserves strict
+source/library confinement and passes actual TypeScript drive/UNC regressions,
+19 Node tests, six actual native compiler/agent tests and the source RPC proof.
+The failed candidate remains frozen; corrected Windows execution is still
+required before release. [Evidence](docs/spikes/windows-native-compiler-entry.md#checkpoint-3-restricted-typescript-host-lookup).
+
 ## Authored source and native package — locally integrated
 
 A public host-equals-target exporter now cooks authored Script attachments into a

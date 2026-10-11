@@ -7,6 +7,7 @@ import ts from 'typescript';
 import { transform } from '@swc/core';
 import { decode, encode } from '@jridgewell/sourcemap-codec';
 import { fail, LIMITS, portable, SDK_IMPORT, snapshotGraph, snapshotProjectGraph } from './graph.mjs';
+import { snapshotCompilerHost } from './typecheck_host.mjs';
 
 const require = createRequire(import.meta.url);
 const REPO = fileURLToPath(new URL('../../', import.meta.url));
@@ -31,26 +32,8 @@ function typecheck(graph) {
     types: [], lib: ['lib.es2022.d.ts'], skipLibCheck: false, isolatedModules: true,
     verbatimModuleSyntax: true, allowImportingTsExtensions: true,
     moduleDetection: ts.ModuleDetectionKind.Force };
-  const allowed = file => texts.has(file) || path.dirname(file) === LIB
-    && /^lib\.[a-z0-9.]+\.d\.ts$/u.test(path.basename(file));
-  const host = ts.createCompilerHost(options, true);
-  host.fileExists = file => allowed(file) && (texts.has(file) || fs.existsSync(file));
-  host.readFile = file => {
-    if (!allowed(file)) return undefined;
-    if (!texts.has(file)) texts.set(file, fs.readFileSync(file, 'utf8'));
-    return texts.get(file);
-  };
-  host.getSourceFile = (file, languageVersion) => {
-    const text = host.readFile(file);
-    return text === undefined ? undefined : ts.createSourceFile(file, text, languageVersion, true);
-  };
-  host.resolveModuleNames = (names, from) => names.map(name => {
-    const file = name === SDK_IMPORT ? native
-      : from === virtual ? entryImports.get(name)
-      : from === native && name === './generated' ? generated
-      : records.get(from)?.dependencies.get(name);
-    return file ? { resolvedFileName: file, extension: file.endsWith('.d.ts') ? ts.Extension.Dts : ts.Extension.Ts } : undefined;
-  });
+  const host = snapshotCompilerHost(options, { texts, records: graph.modules,
+    native, generated, virtual, entryImports, lib: LIB });
   const program = ts.createProgram([...records.keys(), virtual], options, host);
   const diagnostics = ts.getPreEmitDiagnostics(program);
   if (diagnostics.length) {
