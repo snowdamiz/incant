@@ -13,6 +13,7 @@ mod local_credentials;
 pub mod play;
 pub mod provider;
 mod scripts;
+pub mod session;
 pub use assets::{ProjectFiles, ProjectHost};
 use incant_cmd::{Actor, Command, CommandBus};
 use incant_doc::schema_registry;
