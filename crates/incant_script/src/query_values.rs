@@ -13,6 +13,8 @@ pub(super) enum Kind {
     Triggers,
     Ray2D,
     Triggers2D,
+    Navigation,
+    Grid,
 }
 pub(super) enum Request {
     Ray(RayQuery<StableId>),
@@ -20,6 +22,8 @@ pub(super) enum Request {
     Triggers,
     Ray2D(incant_runtime::RayQuery2D),
     Triggers2D,
+    Navigation(StableId, incant_runtime::PathRequest),
+    Grid(StableId, incant_runtime::GridPathRequest),
 }
 pub(super) enum ResultData {
     Ray(Option<RayHit<StableId>>),
@@ -27,6 +31,8 @@ pub(super) enum ResultData {
     Triggers(Vec<TriggerEvent<StableId>>),
     Ray2D(Option<incant_runtime::RayHit2D>),
     Triggers2D(Vec<incant_runtime::TriggerEvent2D>),
+    Navigation(Option<incant_runtime::NavigationPath>),
+    Grid(Option<incant_runtime::GridPath>),
 }
 pub(super) fn parse<'js>(
     kind: Kind,
@@ -35,6 +41,8 @@ pub(super) fn parse<'js>(
     scene: StableId,
 ) -> rquickjs::Result<Request> {
     match kind {
+        Kind::Navigation => crate::navigation_values::path(ctx, args),
+        Kind::Grid => crate::navigation_values::grid(ctx, args),
         Kind::Ray2D => crate::query_values_2d::ray(ctx, args).map(Request::Ray2D),
         Kind::Triggers2D if args.is_empty() => Ok(Request::Triggers2D),
         Kind::Triggers2D => Err(Exception::throw_type(
@@ -134,6 +142,8 @@ pub(super) fn materialize<'js>(ctx: &Ctx<'js>, data: ResultData) -> rquickjs::Re
         return Err(rquickjs::Error::Allocation);
     }
     match data {
+        ResultData::Navigation(path) => crate::navigation_values::path_value(ctx, path),
+        ResultData::Grid(path) => crate::navigation_values::grid_value(ctx, path),
         ResultData::Ray2D(hit) => crate::query_values_2d::hit(ctx, hit),
         ResultData::Triggers2D(events) => crate::query_values_2d::events(ctx, events),
         ResultData::Ray(Some(hit)) => ray_value(ctx, hit),

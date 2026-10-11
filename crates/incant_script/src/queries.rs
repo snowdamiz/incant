@@ -16,11 +16,15 @@ use std::{
 
 pub(crate) const MAX_PHYSICS_QUERIES: usize = 1024;
 const MAX_CHARACTER_QUERIES: usize = 128;
+const MAX_NAVIGATION_QUERIES: usize = 32;
+const MAX_NAVIGATION_EXPANSIONS: u32 = 65_536;
 #[derive(Default)]
 struct State {
     active: bool,
     calls: usize,
     characters: usize,
+    navigation: usize,
+    expansions: u32,
     failure: Option<ScriptError>,
 }
 pub(crate) struct TickQueries {
@@ -53,14 +57,30 @@ impl TickQueries {
         self.state.borrow_mut().failure.take().map_or(Ok(()), Err)
     }
     pub fn expose<'js>(&self, ctx: &Ctx<'js>) -> rquickjs::Result<Object<'js>> {
+        self.expose_methods(
+            ctx,
+            &[
+                ("raycast", Kind::Ray),
+                ("computeCharacterMotion", Kind::Character),
+                ("triggerEvents", Kind::Triggers),
+                ("raycast2D", Kind::Ray2D),
+                ("triggerEvents2D", Kind::Triggers2D),
+            ],
+        )
+    }
+    pub fn expose_navigation<'js>(&self, ctx: &Ctx<'js>) -> rquickjs::Result<Object<'js>> {
+        self.expose_methods(
+            ctx,
+            &[("findPath", Kind::Navigation), ("findGridPath", Kind::Grid)],
+        )
+    }
+    fn expose_methods<'js>(
+        &self,
+        ctx: &Ctx<'js>,
+        methods: &[(&str, Kind)],
+    ) -> rquickjs::Result<Object<'js>> {
         let object = Object::new_proto(ctx.clone(), None)?;
-        for (name, kind) in [
-            ("raycast", Kind::Ray),
-            ("computeCharacterMotion", Kind::Character),
-            ("triggerEvents", Kind::Triggers),
-            ("raycast2D", Kind::Ray2D),
-            ("triggerEvents2D", Kind::Triggers2D),
-        ] {
+        for &(name, kind) in methods {
             let dt = self.dt;
             let state = Rc::clone(&self.state);
             let queries = self.queries.clone();
@@ -70,17 +90,22 @@ impl TickQueries {
                     let rejection = {
                         let mut state = state.borrow_mut();
                         if !state.active {
-                            Some("physics queries belong to their active tick only")
+                            Some("native queries belong to their active tick only")
                         } else if state.failure.is_some() {
-                            Some("physics query capability already failed")
+                            Some("native query capability already failed")
                         } else if state.calls == MAX_PHYSICS_QUERIES
                             || (matches!(kind, Kind::Character)
                                 && state.characters == MAX_CHARACTER_QUERIES)
+                            || (matches!(kind, Kind::Navigation | Kind::Grid)
+                                && state.navigation == MAX_NAVIGATION_QUERIES)
                         {
                             state.failure = Some(ScriptError::InputLimit);
-                            Some("physics query limit exceeded")
+                            Some("native query limit exceeded")
                         } else {
                             state.calls += 1;
+                            if matches!(kind, Kind::Navigation | Kind::Grid) {
+                                state.navigation += 1;
+                            }
                             if matches!(kind, Kind::Character) {
                                 state.characters += 1;
                             }
@@ -105,18 +130,42 @@ impl TickQueries {
                     if state.borrow().failure.is_some() {
                         return Err(Exception::throw_type(
                             &ctx,
-                            "physics query capability failed",
+                            "native query capability failed",
                         ));
+                    }
+                    // Charge requested maximum work, including misses, before entering
+                    // native search. Nested getters have already consumed their share.
+                    let expansions = match &request {
+                        Request::Navigation(_, q) => q.max_visited,
+                        Request::Grid(_, q) => q.max_expansions,
+                        _ => 0,
+                    };
+                    {
+                        let mut state = state.borrow_mut();
+                        if expansions > MAX_NAVIGATION_EXPANSIONS - state.expansions {
+                            state.failure = Some(ScriptError::InputLimit);
+                            return Err(Exception::throw_type(
+                                &ctx,
+                                "navigation expansion limit exceeded",
+                            ));
+                        }
+                        state.expansions += expansions;
                     }
                     if let Err(error) = diagnostics::check_deadline(&deadline) {
                         state.borrow_mut().failure.get_or_insert(error);
                         return Err(Exception::throw_type(
                             &ctx,
-                            "physics query deadline exceeded",
+                            "native query deadline exceeded",
                         ));
                     }
-                    // No JS runs while the solver is borrowed. Hits are owned scalars.
+                    // No JS runs while a solver/cache is borrowed. Results are owned.
                     let result = match match request {
+                        Request::Navigation(entity, request) => queries
+                            .navigation_path(entity, &request)
+                            .map(ResultData::Navigation),
+                        Request::Grid(entity, request) => {
+                            queries.grid_path(entity, &request).map(ResultData::Grid)
+                        }
                         Request::Ray2D(request) => {
                             queries.raycast_2d(&request).map(ResultData::Ray2D)
                         }
@@ -135,19 +184,16 @@ impl TickQueries {
                                 .borrow_mut()
                                 .failure
                                 .get_or_insert(ScriptError::PhysicsQuery(error));
-                            return Err(Exception::throw_type(
-                                &ctx,
-                                "invalid native physics query",
-                            ));
+                            return Err(Exception::throw_type(&ctx, "invalid native query"));
                         }
                     };
-                    // QuickJS interrupts cannot preempt Rapier; account for the native
+                    // QuickJS interrupts cannot preempt native search; account for the native
                     // call immediately, before any more guest code or result allocation.
                     if let Err(error) = diagnostics::check_deadline(&deadline) {
                         state.borrow_mut().failure.get_or_insert(error);
                         return Err(Exception::throw_type(
                             &ctx,
-                            "physics query deadline exceeded",
+                            "native query deadline exceeded",
                         ));
                     }
                     match query_values::materialize(&ctx, result) {

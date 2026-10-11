@@ -1,5 +1,5 @@
 /** Native QuickJS migration API. Separate from the document-backed ScriptApi. */
-import type { InputFrame, ScriptClock, TimerEvent, PhysicsRayQuery, PhysicsRayHit, PhysicsCharacterQuery, PhysicsCharacterMovement, PhysicsTriggerEvent, PhysicsRayQuery2D, PhysicsRayHit2D, PhysicsTriggerEvent2D } from './generated';
+import type { InputFrame, ScriptClock, TimerEvent, PhysicsRayQuery, PhysicsRayHit, PhysicsCharacterQuery, PhysicsCharacterMovement, PhysicsTriggerEvent, PhysicsRayQuery2D, PhysicsRayHit2D, PhysicsTriggerEvent2D, NavigationQuery, NavigationPath, GridNavigationQuery, GridPath } from './generated';
 /** VM-owned bounded copy; no native pointers/handles or JSON conversion.
  * Retention cannot hold an ECS loan or alter the next input frame. */
 type InputReadonly<T> = T extends object ? { readonly [K in keyof T]: InputReadonly<T[K]> } : T;
@@ -100,6 +100,34 @@ export interface NativePhysics {
    * Returns owned values; mutating a result cannot alter native state. */
   raycast(query: NativeRayQuery): NativeRayHit | null;
 }
+export type NativePathRequest = NavigationQuery['path'];
+export type NativeNavigationPath = NavigationPath;
+export type NativeGridPathRequest = GridNavigationQuery['path'];
+export type NativeGridPath = GridPath;
+/** Read-only committed navigation in the active native scene. All results are
+ * owned mutable values, safe to retain. Functions expire after this update and
+ * never reactivate. Active-call errors, even caught, reject the whole update.
+ * Up to 32 calls within the shared 1,024 physics/navigation query quota. The
+ * sum of requested max_visited/max_expansions is at most 65,536 per update,
+ * including misses. CPU deadline checked before/after bounded native searches;
+ * native search itself is synchronous. Queries do not clone caches or geometry. */
+export interface NativeNavigation {
+  /** World-space mesh path or null when disconnected/outside snap distance.
+   * Points follow the quantized surface; use physics for exact grounding.
+   * Each traversal identifies a consecutive point pair across an off-mesh link;
+   * gameplay must explicitly handle it, never treat it as a walkable segment.
+   * Search exhaustion throws. Generation changes invalidate retained paths.
+   * Generations are scoped to this native world and owner; never reuse paths
+   * across sessions/worlds. Save restore advances the retained generation.
+   * Pending numeric writes/commands are invisible until commit. */
+  findPath(entity: NativeId, request: NativePathRequest): NativeNavigationPath | null;
+  /** Adjacent grid cell indices or null for blocked/disconnected endpoints.
+   * Diagonal movement (default false) never cuts blocked corners. World mapping,
+   * clearance and movement belong to gameplay. Default max_expansions=65,536
+   * consumes the entire tick budget; set it explicitly to make multiple queries.
+   * An absent mesh/grid, invalid endpoint, or exhausted search throws. */
+  findGridPath(entity: NativeId, request: NativeGridPathRequest): NativeGridPath | null;
+}
 export type NativeLogLevel = 'debug' | 'info' | 'warn' | 'error';
 /** Bulk committed state captured after simulation, before script commands.
  * Entries with the same index belong together; order is unspecified. Flags:
@@ -125,6 +153,7 @@ export interface NativeContext {
   readonly commands: NativeCommands;
   readonly input: NativeInput;
   readonly physics: NativePhysics;
+  readonly navigation: NativeNavigation;
   readonly clock: NativeClock;
   /** Functions expire after this update. Invalid/caught commands reject numeric,
    * structural and scheduling changes together and permanently fail the host. */

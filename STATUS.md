@@ -28,6 +28,13 @@ No phase, live-provider or physical-device performance gate is waived.
 
 ## Current integration and parallel work
 
+- Local native TypeScript navigation queries are implemented and independently reviewed:
+  committed mesh/grid paths with owned off-mesh metadata, revocable cache loans,
+  shared bounded search work and atomic script rollback. 299 distinct scoped tests,
+  Clippy and generated-contract checks pass. [Evidence](docs/spikes/native-script-navigation.md).
+  Query-only: movement, grid/world mapping, steering, automatic traversal, runtime
+  rebuild controls, static-Wasm parity and physical-device navigation gates remain open.
+
 | Workstream | Current result | Next work / boundary |
 | --- | --- | --- |
 | Editor and sprite authoring | [PR #61](https://github.com/snowdamiz/incant/pull/61) combines the final plain UI, typed atlas/audio imports, focus fixes and the corrected sprite/atlas baseline. 524 UI tests, strict TypeScript, production and native builds pass. | Merged after exact-head hosted checks and isolated native Claude acceptance. [Evidence](docs/spikes/editor-release-union.md). |
