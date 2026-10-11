@@ -30,8 +30,8 @@ describe('failure wording', () => {
     expect(failureSentence({ failure, approvals: [] })).toBe(sentence);
   });
 
-  it('says a denial ended the turn instead of blaming a tool', () => {
-    expect(failureSentence({ failure: 'tool', approvals: [{ id: 1, tool: 'doc_patch', bytes: 9, decision: 'denied' }] })).toBe('Ended after you denied a request.');
+  it('does not infer that an earlier denial caused a later tool failure', () => {
+    expect(failureSentence({ failure: 'tool', approvals: [{ id: 1, tool: 'doc_patch', bytes: 9, decision: 'denied' }] })).toBe('A tool the agent used failed.');
     expect(failureSentence({ failure: 'tool', approvals: [] })).toBe('A tool the agent used failed.');
   });
 

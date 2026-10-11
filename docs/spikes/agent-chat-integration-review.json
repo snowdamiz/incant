@@ -1,0 +1,46 @@
+{
+  "source_review": {
+    "reviewer": "/root/integrate_runtime_prs",
+    "reviewed_at": "2026-10-11T20:20:04.975978+00:00",
+    "base_head": "b94016589d8e5c0601c20769af6a803b46fd21f3",
+    "scope": "Uncommitted eight-file correctness corrections; source-only nonvisual independent review. No test execution or rendered-pixel review performed.",
+    "verdict": "accepted",
+    "actionable_findings": [],
+    "closed_findings": [
+      "A previous denied tool approval is no longer treated as evidence of the cause of a later Tool failure. The explicit denied approval row, actual decision dispatch and focus behavior remain covered.",
+      "Uncertain usage tooltip is cause-neutral and covers persistence failure as well as unconfirmed provider usage.",
+      "Both native cap-change fences return ProjectChanged, preserving true exhaustion as Budget and preserving zero/pre-provider versus exact 17-token/post-provider accounting and refused patch behavior."
+    ],
+    "integration_pending": [
+      "Durable project-allowance wording and controls remain a separate Claude-owned integration tied to actual host support; older non-durable hosts must retain their applicable semantics.",
+      "Root is running final scoped/native and bounded UI validation; this review does not assert those results."
+    ],
+    "source_sha256": {
+      "editor/app/src/agent/budget.rs": "0a69e3ec13b41f6e9fdce74cb9a2ace00c3a4da0ff5617f5bafcd3b2562a7210",
+      "editor/app/src/agent/budget/tests.rs": "58209050df56aa80c577f4531d221b251894915918a123d9c13d89ed1d367701",
+      "editor/app/src/agent/worker.rs": "b857d3cdbf577ba29285dc94ed099d3903181ef0e5d6df54c4314b4f299c60b6",
+      "editor/app/src/agent/worker/tests.rs": "11b926aa6145b79bd2b9be66f669ee3cc38e40c95f58a07051406aa87cde0848",
+      "editor/ui/src/components/agent/AgentSession.test.tsx": "e41e52c14e36d85431adfea1677aa954c861a01d2654d691c08db2c120dd514e",
+      "editor/ui/src/components/agent/AgentTurn.tsx": "11dea25254933a0d7a0b52126a97e28ee6c04061dc3d128ad4669744fcc068ee",
+      "editor/ui/src/components/agent/agentText.test.ts": "4efcf284c0e6d012f7c724ead752f7551a3d1bbb467ccff21ecec9fc8b4c9c5e",
+      "editor/ui/src/components/agent/agentText.ts": "185cb08fa57ac0f2e4117659fbea08d85479757448f8855ec4bc3c82419a2aef"
+    }
+  },
+  "logs_sha256": {
+    "/tmp/incant-agent-chat-unbounded-worker-timeout.log": "2ee72e65a1d4daf7bdc8ea2b2a04f3f4322fa5ca36cfedef227afb91bb8aeb5a",
+    "/tmp/incant-agent-chat-union-tests.log": "98ceeb8f9e7f525d2eb97ccffe66317cc8fcfede150bcda924b6034f8af90229",
+    "/tmp/incant-agent-chat-union-build.log": "51342b71b26e2bc4e5539bb30a095bff79c01ac5cc9a0775c1340afc99173510",
+    "/tmp/incant-agent-cap-scope-tests.log": "7b985cd2f4ebaeaae161ad4ac935ca1306607d84b9ea9a318173e98f50c71698",
+    "/tmp/incant-agent-cap-scope-clippy.log": "95a240460caf533793fc5f7c137ce890085b4eb66ad10e7756f83328027c2cbd"
+  },
+  "validation": {
+    "ui": "728/728 pass,39 files, bounded4workers; earlier727pass/1HierarchyMenu5000ms timeout retained, cause not established",
+    "native": "38 editor tests pass,1 existingGPUignored; all-target editor Clippy pass",
+    "build": "strict TypeScript and editor production build pass"
+  },
+  "limits": [
+    "Browser/scripted IPC does not prove actual native WebView, pixels or provider behavior.",
+    "Actual native acceptance and project-budget UI remain pending.",
+    "No phase gate completion."
+  ]
+}

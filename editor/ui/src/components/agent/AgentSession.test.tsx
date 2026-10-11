@@ -351,7 +351,7 @@ describe('Approvals', () => {
     expect(within(pane()).queryByRole('button', { name: 'Allow' })).toBeNull();
   });
 
-  it('sends Deny as approved false, and says the denial ended the turn', async () => {
+  it('records Deny separately from a later tool failure', async () => {
     const host = agentHost({ agent: RUNNING, session: session([awaiting({ ops: crateOps() })], { worker_running: true }) });
     action('Deny').focus();
     fireEvent.click(action('Deny'));
@@ -361,7 +361,7 @@ describe('Approvals', () => {
       agentSession: session([turn(3, { status: 'failed', failure: 'tool', approvals: [{ id: 7, tool: 'doc_patch', bytes: 321, decision: 'denied' }], charged_tokens: 40 })], { version: 2 }),
     });
     expect(document.activeElement).toBe(pane().querySelector('.agent-decision--denied'));
-    expect(pane().querySelector('.agent-failure')!.textContent).toBe('Ended after you denied a request.');
+    expect(pane().querySelector('.agent-failure')!.textContent).toBe('A tool the agent used failed.');
   });
 
   it('keeps an approval that is still pending when the decision fails, and says why', async () => {

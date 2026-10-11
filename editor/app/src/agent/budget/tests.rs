@@ -220,7 +220,10 @@ fn budget_scope_ignores_ordinary_edits_but_fences_identity_and_cap() {
         .unwrap();
     assert!(scope.check_agent(&bus).is_ok());
     set_cap(&bus, 101);
-    assert!(matches!(scope.check_agent(&bus), Err(AgentError::Budget)));
+    assert!(matches!(
+        scope.check_agent(&bus),
+        Err(AgentError::ProjectChanged)
+    ));
     *bus.lock().unwrap() =
         LoadState::Ready(Box::new(CommandBus::new(Project::empty("Other")).unwrap()));
     assert!(matches!(

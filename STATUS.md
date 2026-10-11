@@ -27,14 +27,17 @@ QuickJS state between threads. Actual cross-turn query, failed candidate and
 replacement controls pass alongside cancellation/shutdown/panic checks. The
 provider invalidation listener is integrated with its intervening-read race fixed.
 The current native slice passes 152 scoped Rust tests and four-package all-target
-Clippy after integrating main97. The earlier UI slice passed 658 UI tests; current
-strict types and the editor build pass, with the new chat integration pending. Four real native-handler turns used
+Clippy after integrating main97. Claude’s chat UI is integrated with retained
+conversation resizing, accurate denial/failure messages and cause-neutral uncertain
+usage. The combined UI suite passes 728 tests; strict types and the editor build
+pass. The corrected native cap-change fences pass 38 editor tests and Clippy. Four real native-handler turns used
 the saved ChatGPT login for approved edits, native Play and a later retained-state
 query; Undo and exact journal/account recovery passed after reopening. Claude's
-Play UI is integrated; chat UI and native visual/WebView interaction acceptance
-remain underway. No completed Phase 3 gate is claimed.
+Play and chat UI are integrated; project-budget controls and native visual/WebView
+interaction acceptance remain underway. No completed Phase 3 gate is claimed.
 [Binding evidence](docs/spikes/native-editor-agent.md),
-[persistent owner evidence](docs/spikes/persistent-native-agent-host.md).
+[persistent owner evidence](docs/spikes/persistent-native-agent-host.md),
+[chat integration review](docs/spikes/agent-chat-integration-review.json).
 
 ## Per-project agent budget — in progress
 

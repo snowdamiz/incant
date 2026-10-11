@@ -71,15 +71,8 @@ const FAILURES: Readonly<Record<AgentFailure, string>> = {
   context_limit: 'The conversation is too long for the model.',
 };
 
-/**
- * One sentence for a failed turn. A denial ends the native turn as a tool failure
- * (incant_agent returns "user denied this operation"), so a denied turn says so instead
- * of blaming a tool. Unknown or missing codes fall back to a generic sentence.
- */
+/** A recorded denial is a tool result, not evidence of why a later turn failed. */
 export function failureSentence(turn: Pick<AgentTurnSnapshot, 'failure' | 'approvals'>): string {
-  if (turn.failure === 'tool' && turn.approvals.some((approval) => approval.decision === 'denied')) {
-    return 'Ended after you denied a request.';
-  }
   const failure = turn.failure as string | null;
   return failure !== null && Object.hasOwn(FAILURES, failure) ? FAILURES[failure as AgentFailure] : 'The request failed.';
 }

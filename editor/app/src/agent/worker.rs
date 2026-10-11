@@ -173,7 +173,7 @@ impl Provider for BoundProvider<'_> {
                         return Err(AgentError::ProjectChanged);
                     }
                     if bus.project().settings.agent_budget.max_tokens != scope.max_tokens {
-                        return Err(AgentError::Budget);
+                        return Err(AgentError::ProjectChanged);
                     }
                 }
                 Ok(())

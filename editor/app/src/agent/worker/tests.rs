@@ -113,7 +113,7 @@ fn cap_changes_fence_provider_and_tools_without_refunding_completed_usage() {
         };
         let charge = if before_provider { 0 } else { 17 };
         assert_eq!(calls.load(Ordering::SeqCst), usize::from(!before_provider));
-        assert_eq!(snapshot.turns[0].failure, Some(Failure::BudgetExhausted));
+        assert_eq!(snapshot.turns[0].failure, Some(Failure::ProjectChanged));
         assert_eq!(snapshot.budget.used_tokens, charge);
         assert!(!snapshot.accounting_uncertain);
         let mut load = bus.lock().unwrap();

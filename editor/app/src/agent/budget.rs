@@ -47,8 +47,9 @@ impl Scope {
         if current.project_id != self.project_id {
             Err(AgentError::ProjectChanged)
         } else if current.max_tokens != self.max_tokens {
-            // Any cap change starts a fresh budget scope, even an increase.
-            Err(AgentError::Budget)
+            // Any cap change invalidates this authoring scope, even an increase.
+            // It does not imply that the new allowance is exhausted.
+            Err(AgentError::ProjectChanged)
         } else {
             Ok(())
         }

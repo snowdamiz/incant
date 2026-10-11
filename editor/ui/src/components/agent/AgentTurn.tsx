@@ -284,7 +284,7 @@ function TurnOutcome({ turn, actions }: { turn: AgentTurnSnapshot; actions: Turn
   if (edits !== undefined) parts.push(<span key="edits">{edits === 0 ? 'No edits' : `${edits.toLocaleString()} ${edits === 1 ? 'edit' : 'edits'}`}</span>);
   const cost = turnCost(turn);
   parts.push(
-    <span key="cost" className="agent-outcome__cost" title={turn.accounting_uncertain ? 'The provider did not confirm this usage. It is what the session allowance was charged.' : undefined}>
+    <span key="cost" className="agent-outcome__cost" title={turn.accounting_uncertain ? 'Exact usage could not be confirmed or saved. This is the amount charged to the allowance.' : undefined}>
       {cost}
     </span>,
   );
