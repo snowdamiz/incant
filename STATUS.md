@@ -469,3 +469,10 @@ changing its tested runtime/compiler/ABI inputs. Integrated verification include
 Actual main83 is now integrated without a tree change; the authored candidate is ready for direct-main publication.
 
 GameSession/exported-player checkpoint integration: reviewed source `0d841fcd` is preserved unchanged in main103 union `4661e254`; 34 integrated CPU tests and optional-GPU all-target Clippy pass. Original311-test/five-success/nine-refusal shipping evidence remains applicable; full-save limits are unchanged. See [integration evidence](docs/spikes/evidence/native-game-checkpoints-main103.json).
+
+## Native Wasm localization integration
+
+Actual main104 integration is clean: 74 development/static/SDK, 106 session library
+and five GameSession checkpoint cases pass, with 20 tooling tests, Clippy,
+compiler-disabled/static and dependency checks. Static checkpoints remain refused.
+[Integration evidence](docs/spikes/evidence/native-wasm-localization-main104.json).

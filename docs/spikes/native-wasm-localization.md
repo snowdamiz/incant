@@ -102,3 +102,15 @@ CPU checks. Standalone number/date formatting, catalog editing, report paging,
 VM/checkpoint migration, complete SDK, Windows/Linux/browser execution,
 graphics, devices and performance gates remain outside this slice. Runtime
 source compilation and executable loading routes remain unchanged.
+
+## Current-main integration
+
+Reviewed source `7c66106` merged actual main104 (`3da7185`) cleanly as
+`6d0d59b`. All 35 reviewed non-STATUS files and 378 prepared guest/C artifacts
+match their frozen identities. [Independent source review](evidence/native-wasm-localization-root-review.json)
+reported no actionable finding; [integrated evidence](evidence/native-wasm-localization-main104.json)
+records 74 actual Wasmtime/static/SDK tests, 106 ScriptHost/GameSession library
+cases and five checkpoint integration tests. Twenty tooling tests, combined
+all-target Clippy, compiler-disabled static checking, generated SDK, normal
+dependency guards, formatting and conventions pass. Existing static checkpoint
+refusals remain in force. No GPU, provider or physical-device result is claimed.
