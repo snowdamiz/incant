@@ -429,51 +429,57 @@ fn constructor_rejection_has_no_backend_effect_and_terminal_tick_drops_the_backe
 #[test]
 #[cfg(not(target_arch = "wasm32"))]
 fn background_decoder_failure_between_ticks_destroys_the_whole_session() {
-    let temp = tempfile::tempdir().unwrap();
-    let (_, binding) = clip(&temp);
-    let pcm = fs::read_dir(temp.path())
-        .unwrap()
-        .map(|p| p.unwrap().path())
-        .find(|p| p.extension().unwrap() == "ipcm")
+    for suspend in [false, true] {
+        let temp = tempfile::tempdir().unwrap();
+        let (_, binding) = clip(&temp);
+        let pcm = fs::read_dir(temp.path())
+            .unwrap()
+            .map(|p| p.unwrap().path())
+            .find(|p| p.extension().unwrap() == "ipcm")
+            .unwrap();
+        fs::OpenOptions::new()
+            .write(true)
+            .open(pcm)
+            .unwrap()
+            .write_all(&[255; 8])
+            .unwrap();
+        let counts = Arc::new(Counts::default());
+        let mut session = GameSession::new(
+            audio_scene(60, true, false),
+            code(""),
+            actions(),
+            vec![binding],
+            AudioManagerSettings::<Backend> {
+                backend_settings: counts.clone(),
+                ..Default::default()
+            },
+        )
         .unwrap();
-    fs::OpenOptions::new()
-        .write(true)
-        .open(pcm)
-        .unwrap()
-        .write_all(&[255; 8])
-        .unwrap();
-    let counts = Arc::new(Counts::default());
-    let mut session = GameSession::new(
-        audio_scene(60, true, false),
-        code(""),
-        actions(),
-        vec![binding],
-        AudioManagerSettings::<Backend> {
-            backend_settings: counts.clone(),
-            ..Default::default()
-        },
-    )
-    .unwrap();
-    assert_eq!(session.world().unwrap().tick(), 0);
-    let deadline = std::time::Instant::now() + std::time::Duration::from_secs(5);
-    loop {
-        match session.poll_audio() {
-            Err(GameError::Audio(AudioError::Stream(_))) => break,
-            Ok(()) => {
-                assert!(
-                    std::time::Instant::now() < deadline,
-                    "decoder error was lost"
-                );
-                std::thread::sleep(std::time::Duration::from_millis(1));
+        assert_eq!(session.world().unwrap().tick(), 0);
+        let deadline = std::time::Instant::now() + std::time::Duration::from_secs(5);
+        loop {
+            match if suspend {
+                session.set_suspended(true)
+            } else {
+                session.poll_audio()
+            } {
+                Err(GameError::Audio(AudioError::Stream(_))) => break,
+                Ok(()) => {
+                    assert!(
+                        std::time::Instant::now() < deadline,
+                        "decoder error was lost"
+                    );
+                    std::thread::sleep(std::time::Duration::from_millis(1));
+                }
+                Err(error) => panic!("unexpected error: {error}"),
             }
-            Err(error) => panic!("unexpected error: {error}"),
         }
+        assert!(session.is_failed());
+        assert_eq!(counts.drops.load(Ordering::SeqCst), 1);
+        assert!(session.world().is_err() && session.input().is_err());
+        assert!(session.source_state(id(1)).is_err() && session.rebind(actions()).is_err());
+        assert!(matches!(session.tick(&[]), Err(GameError::Failed)));
     }
-    assert!(session.is_failed());
-    assert_eq!(counts.drops.load(Ordering::SeqCst), 1);
-    assert!(session.world().is_err() && session.input().is_err());
-    assert!(session.source_state(id(1)).is_err() && session.rebind(actions()).is_err());
-    assert!(matches!(session.tick(&[]), Err(GameError::Failed)));
 }
 
 #[path = "support/spatial.rs"]
@@ -503,4 +509,31 @@ fn spatial_and_manifest_only_scenes_reject_before_vm_or_backend_setup() {
         ));
     }
     assert_eq!(counts.starts.load(Ordering::SeqCst), 0);
+}
+
+#[test]
+fn suspension_rejects_ticks_without_changing_world_or_output_and_resumes() {
+    let temp = tempfile::tempdir().unwrap();
+    let (_, binding) = clip(&temp);
+    let mut game = OfflineGameSession::new(
+        audio_scene(60, false, false),
+        code(""),
+        actions(),
+        vec![binding],
+        48000,
+    )
+    .unwrap();
+    let mut output = vec![1.; game.next_output_frames().unwrap() * 2];
+    game.set_suspended(true).unwrap();
+    game.set_suspended(true).unwrap();
+    assert!(matches!(
+        game.tick(&[], &mut output),
+        Err(GameError::Suspended)
+    ));
+    assert!(!game.is_failed());
+    assert_eq!(game.world().unwrap().tick(), 0);
+    assert!(output.iter().all(|v| *v == 1.));
+    game.set_suspended(false).unwrap();
+    game.tick(&[], &mut output).unwrap();
+    assert_eq!(game.world().unwrap().tick(), 1);
 }

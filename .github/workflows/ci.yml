@@ -31,7 +31,7 @@ jobs:
       - run: npm run test:tools
       # Check the real binary-scene/native-world slice and its shared values.
       # The legacy PlaySession still requires migration and is not certified here.
-      - run: python3 tools/check_runtime_dependencies.py incant_types incant_physics_runtime incant_runtime incant_script incant_script_player incant_assets_runtime incant_audio_runtime incant_render incant_render_data incant_render_native incant_render_game incant_render_gpu_host incant_game_runtime incant_game_player --features incant_audio_runtime/scene
+      - run: python3 tools/check_runtime_dependencies.py incant_types incant_physics_runtime incant_runtime incant_script incant_script_player incant_assets_runtime incant_audio_runtime incant_render incant_render_data incant_render_native incant_render_game incant_render_gpu_host incant_game_runtime incant_game_player --features incant_audio_runtime/scene,incant_game_player/native-window
       - run: node tools/build_bridge.mjs --check
       - run: npm run build --workspace editor/ui
       - run: npm run test --workspace editor/ui
@@ -39,7 +39,8 @@ jobs:
       - run: cargo clippy --workspace --all-targets --locked --features incant_audio_runtime/scene -- -D warnings
       - run: cargo check -p incant_audio --features device --locked
       # The workspace default deliberately omits this optional player module.
-      - run: cargo clippy -p incant_game_player --features render-gpu --all-targets --release --locked -- -D warnings
+      - run: cargo clippy -p incant_game_player --features native-window --all-targets --release --locked -j2 -- -D warnings
+      - run: cargo test -p incant_game_player --features native-window --bin incant_game_player --release --locked -j2
       - run: cargo test --workspace --release --locked --features incant_audio_runtime/scene --timings
       # Each GPU test owns a native device; serialize device lifetimes to avoid
       # hosted driver crashes when many renderer contexts initialize together.

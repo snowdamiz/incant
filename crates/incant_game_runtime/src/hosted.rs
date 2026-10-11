@@ -71,6 +71,10 @@ where
     pub fn poll_audio(&mut self) -> Result<(), H::Error> {
         self.core.poll_audio()
     }
+    /// Suspend transport and reject ticks until resumed; failure is terminal.
+    pub fn set_suspended(&mut self, suspended: bool) -> Result<(), H::Error> {
+        self.core.set_suspended(suspended)
+    }
     pub fn is_failed(&self) -> bool {
         self.core.live.is_none()
     }
@@ -136,6 +140,10 @@ impl<H: SceneHost> HostedOfflineGameSession<H> {
     pub fn poll_audio(&mut self) -> Result<(), H::Error> {
         self.inner.core.poll_audio()
     }
+    /// Suspend transport and reject ticks until resumed; failure is terminal.
+    pub fn set_suspended(&mut self, suspended: bool) -> Result<(), H::Error> {
+        self.inner.core.set_suspended(suspended)
+    }
     pub fn is_failed(&self) -> bool {
         self.inner.core.live.is_none()
     }
@@ -150,5 +158,13 @@ impl<H: SceneHost> HostedOfflineGameSession<H> {
     }
     pub fn rebind(&mut self, actions: InputActions) -> Result<(), H::Error> {
         self.inner.core.rebind(actions)
+    }
+}
+
+#[cfg(all(feature = "device", not(target_arch = "wasm32")))]
+impl<H: SceneHost> HostedGameSession<incant_audio_runtime::DeviceBackend, H> {
+    /// Poll real device errors. Any reported or discarded error is terminal.
+    pub fn poll_device(&mut self) -> Result<(), H::Error> {
+        self.core.poll_device()
     }
 }

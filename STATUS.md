@@ -10,6 +10,17 @@ after review and passing checks, without requesting separate merge approval.
 
 ## Implemented and locally verified
 
+- Optional native window player reuses the cooked/embedded game session and
+  retained GPU host, with bounded surface recovery, fixed ticks, native input,
+  master audio suspension and terminal device-error observation. 43 scoped
+  release tests, 10 legacy audio tests, optional/default/CPU Clippy and 40 tools
+  tests pass. A fresh 8,104,464-byte shipping executable passes two actual macOS
+  window lifecycle runs and two refusals after source/build deletion; matched
+  old offscreen GPU/PCM/pose output is unchanged. Static/streamed runs discarded
+  five/zero wall ticks; no performance gate is claimed. Claude 0037 visible
+  acceptance and hosted desktop compile checks remain pending. See
+  [native window evidence](docs/spikes/native-window-player.md).
+
 - Native game composition now owns typed input/VM/physics and retained scene
   audio with retryable invalid input, terminal accepted-tick failures, and an
   exact rational offline sample clock. The integrated workspace passes 504

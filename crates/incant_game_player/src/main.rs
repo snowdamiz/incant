@@ -2,18 +2,21 @@
 //! JSON is bounded and parsed once; ticks contain no document or JSON projection.
 //! Simulation failure creates no output. Output I/O itself is not atomic.
 use incant_assets_runtime::sha256;
-use incant_audio_runtime::{ClipBinding, MAX_SCENE_CLIPS};
 #[cfg(feature = "render-gpu")]
 mod gpu;
 mod session;
+mod startup;
+#[cfg(all(
+    feature = "native-window",
+    any(target_os = "macos", target_os = "windows", target_os = "linux")
+))]
+mod window;
 use incant_input::InputReplay;
-use incant_runtime::{CookedScene, StableId};
+use incant_runtime::CookedScene;
 use session::Player;
 use std::{
-    fmt::Write as _,
     fs::{File, OpenOptions},
     io::{Read, Write},
-    path::Path,
 };
 mod embedded {
     include!(concat!(env!("OUT_DIR"), "/behavior.rs"));
@@ -39,6 +42,18 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         );
         return Ok(());
     }
+    if args.first().is_some_and(|arg| arg == "--window") {
+        #[cfg(all(
+            feature = "native-window",
+            any(target_os = "macos", target_os = "windows", target_os = "linux")
+        ))]
+        return window::run(&args[1..]);
+        #[cfg(not(all(
+            feature = "native-window",
+            any(target_os = "macos", target_os = "windows", target_os = "linux")
+        )))]
+        return Err("native window mode requires the native-window feature on desktop".into());
+    }
     let spatial = session::settings(&args)?;
     let ticks: u64 = args[5].parse()?;
     let rate: u32 = args[6].parse()?;
@@ -62,23 +77,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         return Err("recording does not cover requested ticks".into());
     }
     let actions = serde_json::from_slice(&bounded(&args[4], 256 * 1024)?)?;
-    let table = bounded(&args[2], 12 + MAX_SCENE_CLIPS * 48)?;
-    if table.len() < 12 || &table[..8] != b"NCLIPS01" {
-        return Err("clip table header".into());
-    }
-    let count = u32::from_le_bytes(table[8..12].try_into()?) as usize;
-    if count > MAX_SCENE_CLIPS || table.len() != 12 + count * 48 {
-        return Err("clip table length/count".into());
-    }
-    let mut clips = Vec::with_capacity(count);
-    for row in table[12..].as_chunks::<48>().0 {
-        let id = StableId(row[..16].try_into()?);
-        let mut key = String::with_capacity(64);
-        for byte in &row[16..] {
-            write!(&mut key, "{byte:02x}")?;
-        }
-        clips.push(ClipBinding::load(id, Path::new(&args[1]), &key)?);
-    }
+    let clips = startup::clips(&args[1], &args[2])?;
     let mut game = Player::new(
         scene,
         embedded::load()?,
