@@ -1,7 +1,7 @@
 # Combined native editor acceptance
 
-Status: preparation only. Do not run this packet until Astra appends the immutable
-binary/source manifest, fixture grant and exclusive native graphics grant below.
+Status: granted for the exact immutable build and bounded operation below.
+Read the final grant before launching; never replace its binaries.
 Use Claude Opus 5.5 through ACP with explicitly verified Max on every new/resumed
 session. Own rendered review, interaction design and scoped UI corrections;
 Astra owns engine, transport and numerical correctness. No publishing or main edits. Keep every visual/review action in this explicitly
@@ -151,5 +151,36 @@ still use public commands; appearance/framing is yours to review after final gra
 
 ## Final immutable build and grants
 
-0046 and0047 are integrated. Pending0049 approval-readiness correction, final
-combined checks and immutable editor build. No native/process/provider grant yet.
+0044–0049 source corrections are integrated. Source commit `bb1b517034386021b49541221c72500316e0ccb2` includes
+actual main100 `39f5e40a793e57757af9ae79cb6a5a1ec27369d1`. Root combined 902 UI tests,
+app/node/test types, production UI build and generated checks pass. Existing
+workspace993 tests/75ignored and all-target Clippy passed before the additive
+main100 input change; its integrated input scope now passes 25 tests.
+The final native editor/headless build exited0. No native acceptance is implied.
+
+- Immutable manifest: `/tmp/incant-native-review-0048-final-bin-v1/manifest.json` (copy `build/manifest.json`),
+  SHA256 `b2f83ac7b598f68fa5b0cf148718e4a5c6f086599f05d2329c0bff03458f606e`.
+- Editor: `/tmp/incant-native-review-0048-final-bin-v1/incant_editor`,
+  SHA256 `3d059445c3691b219ff8cc2c6d990645af7f64bbeccee737b4dae4f9753c6603`.
+- Headless: `/tmp/incant-native-review-0048-final-bin-v1/incant_headless`,
+  SHA256 `68a2a04bbbb767cb65cedf1cfa8d62ec95c2064a69e63289a78fd67c8764873c`.
+- All baseline fixture hashes were reverified immediately before this grant.
+  Saved path `/tmp/incant-native-0048-fixtures/saved/project.json`, project ULID
+  `01M4PEJQNPMDQYEDGT0PRWN78X`; see the prepared-fixture section.
+- Exclusive native window/GPU ownership is granted to this verified Claude session
+  for this packet. Other agents are CPU/source only. No native process is running
+  from these binaries yet. Preserve ownership and report all spawned PIDs/cleanup.
+- Exactly one bounded real-provider WebView turn is granted as described above:
+  existing saved account/model, 64,000-token authored cap, Always approvals, only
+  entity ending0051 rename to `Allowance Rename Confirmed`, then Undo and reopen.
+  Do not invoke any CLI `agent-probe` mode: that automation issues multiple turns.
+- Launch the editor with the project path only, or no args for the unsaved check.
+  Provide the trusted startup compiler with the existing Node runtime:
+  `PATH=/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin:$PATH`.
+  This local probe-enabled build is for acceptance, not shipping performance.
+- Reuse the existing window-only native helpers under0044 where useful, updating
+  paths/hashes in your own scoped helpers. Do not relaunch the old0044 binary.
+  Public commands to the disposable fixture are authorized; no direct JSON edits.
+
+Root is now waiting for concise native results or a concrete product defect.
+Do not delay this acceptance with additional auxiliary reviews or broad test suites.
