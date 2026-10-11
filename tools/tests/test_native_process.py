@@ -232,5 +232,70 @@ class NativeProcessTests(unittest.TestCase):
             self.assertEqual(native_process.run(self.python('pass')).returncode, 0)
 
 
+@unittest.skipUnless(sys.platform == 'darwin', 'Darwin pre-3.13 Python compatibility')
+class DarwinWithoutWaitidTests(NativeProcessTests):
+    def setUp(self):
+        super().setUp()
+        patcher = mock.patch.object(native_process.os, 'waitid', None, create=True)
+        patcher.start()
+        self.addCleanup(patcher.stop)
+
+    def test_exit_observation_does_not_consume_the_child_exit_status(self):
+        tree = native_process._PosixTree(self.python('import sys; sys.exit(17)'),
+            dict(stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL))
+        try:
+            deadline = time.monotonic() + 10
+            while not tree.exited():
+                self.assertLess(time.monotonic(), deadline)
+                time.sleep(0.005)
+            self.assertTrue(tree.exited(), 'The observed exit stays latched')
+            self.assertIsNone(tree.process.returncode, 'Only stop may reap the direct child')
+        finally:
+            tree.stop()
+        self.assertEqual(tree.process.returncode, 17)
+        self.assertTrue(tree.observer.queue.closed)
+
+    def test_observer_setup_failure_reaps_child_and_closes_streams(self):
+        seen = []
+        original = native_process.subprocess.Popen
+
+        def spawn(*args, **kwargs):
+            process = original(*args, **kwargs)
+            seen.append(process)
+            return process
+
+        with mock.patch.object(native_process.subprocess, 'Popen', side_effect=spawn), \
+             mock.patch.object(native_process, '_DarwinExitObserver', side_effect=OSError('observer refusal')):
+            with self.assertRaisesRegex(OSError, 'observer refusal'):
+                native_process.run(self.python('import time; time.sleep(60)'))
+        self.assertEqual(len(seen), 1)
+        self.assertIsNotNone(seen[0].returncode)
+        self.assertTrue(seen[0].stdout.closed)
+        self.assertTrue(seen[0].stderr.closed)
+
+    def test_child_exit_before_registration_remains_waitable(self):
+        process = subprocess.Popen(self.python('import sys; sys.exit(19)'))
+        observer = None
+        try:
+            deadline = time.monotonic() + 10
+            while True:
+                state = subprocess.run(['/bin/ps', '-o', 'stat=', '-p', str(process.pid)],
+                                       capture_output=True, text=True, timeout=5)
+                if state.stdout.lstrip().startswith('Z'):
+                    break
+                self.assertLess(time.monotonic(), deadline)
+                time.sleep(0.005)
+            observer = native_process._DarwinExitObserver(process.pid)
+            self.assertTrue(observer.exited())
+            self.assertIsNone(process.returncode)
+            self.assertEqual(process.wait(), 19)
+        finally:
+            if observer is not None:
+                observer.close()
+            if process.poll() is None:
+                process.kill()
+            process.wait()
+
+
 if __name__ == '__main__':
     unittest.main()

@@ -10,6 +10,7 @@ import ctypes
 import math
 import os
 from pathlib import Path
+import select
 import signal
 import subprocess
 import sys
@@ -65,12 +66,54 @@ def _darwin_group_is_empty(group):
     raise RuntimeError('Owned process group exceeds inspection limit')
 
 
+class _DarwinExitObserver:
+    """Observe the owned child without reaping it on pre-3.13 macOS Python."""
+    def __init__(self, pid):
+        self.queue = select.kqueue()
+        self.already_exited = False
+        try:
+            event = select.kevent(pid, filter=select.KQ_FILTER_PROC,
+                                 flags=select.KQ_EV_ADD | select.KQ_EV_ONESHOT,
+                                 fflags=select.KQ_NOTE_EXIT)
+            try:
+                self.queue.control([event], 0, 0)
+            except ProcessLookupError:
+                # The unreaped direct child still reserves its PID. Darwin
+                # refuses registration if it exited before kevent was added.
+                self.already_exited = True
+        except BaseException:
+            self.queue.close()
+            raise
+
+    def exited(self):
+        if not self.already_exited:
+            self.already_exited = bool(self.queue.control(None, 1, 0))
+        return self.already_exited
+
+    def close(self):
+        self.queue.close()
+
+
 class _PosixTree:
     def __init__(self, command, options):
-        if not all(hasattr(os, name) for name in ('waitid', 'WNOWAIT', 'WEXITED', 'P_PID')):
-            raise RuntimeError('Managed tools require POSIX waitid with WNOWAIT')
+        self.use_waitid = callable(getattr(os, 'waitid', None)) and all(
+            hasattr(os, name) for name in ('WNOWAIT', 'WEXITED', 'P_PID'))
+        self.observer = None
+        if not self.use_waitid and not (sys.platform == 'darwin' and hasattr(select, 'kqueue')):
+            raise RuntimeError('Managed tools require non-reaping POSIX child observation')
         self.process = subprocess.Popen(command, stdin=subprocess.DEVNULL,
                                         start_new_session=True, **options)
+        if not self.use_waitid:
+            try:
+                self.observer = _DarwinExitObserver(self.process.pid)
+            except BaseException:
+                try:
+                    self.stop()
+                finally:
+                    for stream in (self.process.stdout, self.process.stderr):
+                        if stream is not None:
+                            stream.close()
+                raise
 
     def release(self):
         pass
@@ -79,6 +122,8 @@ class _PosixTree:
         # Do not reap: the leader's reserved PID prevents group-ID reuse before
         # killpg. communicate()/poll() would reap it and can also wait forever
         # when a descendant keeps stdout open after the leader has exited.
+        if self.observer is not None:
+            return self.observer.exited()
         return os.waitid(os.P_PID, self.process.pid,
                          os.WEXITED | os.WNOHANG | os.WNOWAIT) is not None
 
@@ -93,7 +138,11 @@ class _PosixTree:
                     raise
         finally:
             # The direct child remains ours until this wait, including errors.
-            self.process.wait()
+            try:
+                self.process.wait()
+            finally:
+                if self.observer is not None:
+                    self.observer.close()
 
 
 class _WindowsJob:
