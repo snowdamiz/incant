@@ -10,3 +10,8 @@ pub use scene::{CookError, cook_scene, stable_id};
 mod script;
 #[cfg(feature = "script")]
 pub use script::{CookedScriptArtifact, ScriptCookError, cook_script};
+
+#[cfg(feature = "script")]
+mod build_script;
+#[cfg(feature = "script")]
+pub use build_script::embed_script;

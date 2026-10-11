@@ -1,0 +1,236 @@
+{
+  "base_commit": "9cf171275debfd0cc959a636abf3db4c93865bfb",
+  "sources": {
+    "crates/incant_physics_runtime/src/queries.rs": "675914573c124551692b043dca98902c4efef98eda602b1023c1da3d032eafe6",
+    "crates/incant_runtime/src/physics_queries.rs": "f5ae3cbf26f716987babcb6791db70d90e8fe56cfa6a6de5265a9ac339f6a85d",
+    "crates/incant_runtime/tests/queries.rs": "1c2cd8f473a4421cc5bd18898ce3ab78854182c7c9ffb5d3de6b0213e6825aca",
+    "crates/incant_script/src/queries.rs": "95c2a90017589fe2bbc8369ad8034022a3baf796d202bbcf57f8a7c96947b723",
+    "crates/incant_script/src/lib.rs": "6447d5bb4c888adfc023e846396adf29297bd934a4efda05240cbd2a5f33a3fd",
+    "crates/incant_script/src/compiler.rs": "7e6f622abfdfcdb40c4dda3d7c261cf48000db752eae2ec6c400e7f16b5b8007",
+    "crates/incant_script/src/query_tests.rs": "3443b8e7cc8e41a977a7ad9454070162afadf1f1cb341ece182c9760fea7472b",
+    "crates/incant_script/build.rs": "61de4d2927b385483d346d388111ea9eb2a1206818193e18faaf378f236455a0",
+    "tools/probes/cooked-script.py": "8d49eace573c5e3ee80d785f7c0a25c8dd79bc6dce8fe2e82ef01f67e9e603e7",
+    "sdk/ts/src/native.d.ts": "ab0f4106427b3edbde1f0e8db244d53ad140dc645c444b8d41299f287cfd2e5b",
+    "sdk/templates/native-physics/raycast.ts": "7e3c94ef478f3d3bc99262b9c2e04ad695e57752e42dbdcb880b20d83ba878aa"
+  },
+  "validation": {
+    "package_release_tests_doctests": 124,
+    "package_all_targets_release_clippy": true,
+    "sdk_typecheck": true
+  },
+  "review": "# Native script raycast review\n\nRead-only review of impl/native-script-queries atop 9cf1712. No builds or source edits by reviewer.\n\nReviewed SHA-256:\n- runtime/physics_queries.rs: f5ae3cbf26f716987babcb6791db70d90e8fe56cfa6a6de5265a9ac339f6a85d\n- script/queries.rs: 40551db6c59e5881a5a79109bce88395c3cff68c54483ea27fae01280715f80e\n- script/lib.rs: 6447d5bb4c888adfc023e846396adf29297bd934a4efda05240cbd2a5f33a3fd\n- physics_runtime/queries.rs: 675914573c124551692b043dca98902c4efef98eda602b1023c1da3d032eafe6\n\nOne required failure-policy correction: script/queries.rs hit-result allocation propagates errors without latching tick failure. A guest that catches an allocation exception during hit materialization can reach queries.check with failure=None and publish earlier numeric/structural writes. Wrap result construction, latch a typed allocation/execution error on failure, then return the original QuickJS exception. Add deterministic swallowed-materialization-error rollback coverage. This is a source-path finding, not a reproduced allocation-pressure test.\n\nNo other blocker found. Solver capability storage allocates before moving the solver, the private guard restores it after numeric cleanup on return/unwind, and public query results contain owned values. Rust borrows do not span guest getters. Query reservations precede parsing, recursive failures latch, deadline checks bracket the solver call, and capability/loan revocation precedes diagnostic getters. Old capabilities never reactivate. Empty worlds validate requests; removal of the last collider retains an empty solver scene. Mutable result vectors use own writable data properties and bypass prototype setters. Query execution preserves solver continuation and cannot observe pending numeric/structural changes.\n\nLimits remain explicit: a synchronous native query cannot be preempted mid-call; its elapsed CPU is checked immediately afterward. This review does not claim general SDK migration, an allocation-free query path, or phone performance.\n\n## Follow-up accepted\n\nCorrected script/queries.rs SHA-256 95c2a90017589fe2bbc8369ad8034022a3baf796d202bbcf57f8a7c96947b723 wraps every hit-materialization operation and latches MemoryAllocation/Execution before propagating the original error. Test SHA-256 3443b8e7cc8e41a977a7ad9454070162afadf1f1cb341ece182c9760fea7472b uses a production-absent thread-local one-shot fault, exercises the real caught guest callback path, and proves numeric/despawn rollback plus next solver step. The finding is resolved.\n\nThe shipping helper extension (8d49eace573c5e3ee80d785f7c0a25c8dd79bc6dce8fe2e82ef01f67e9e603e7) preserves the single fresh build, source/build deletion, previous repeated structural/input/physics controls and parser/symbol auditing. It adds SDK-based floor/exclusion/null/stale-cap queries and typed invalid/budget refusal processes. No remaining source-review blocker; actual fresh proof execution is owned by root and was still running at review.\n",
+  "shipping": {
+    "passed": true,
+    "target": "aarch64-apple-darwin",
+    "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+    "codegen": {
+      "incant_input": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_script": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_script_player": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort",
+        "lto": "fat"
+      },
+      "incant_physics_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "rapier3d": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      }
+    },
+    "player_sha256": "99223e51c2ac67d3125f9bd222891860698b4db7438affff51172c1d8db0b934",
+    "player_bytes": 4074184,
+    "symbols": {
+      "format": "Mach-O/dSYM",
+      "uuids": {
+        "arm64": "9bae028c-2630-3e7d-a638-3a979eb84bd6"
+      }
+    },
+    "script_metadata": {
+      "build_id": "d0b4e96ea2eb00ebbf8117d61cd40b9c381bf6065fbce61f7be62935accbe489",
+      "bytecode_bytes": 5168,
+      "bytecode_sha256": "7175cfbfaa4048bc3625da8882fa026e67dbae5bbd3078716cb9d9268bfe74ec",
+      "debug_line_tables": true,
+      "embedded_source": false,
+      "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+      "format": 1,
+      "hardening_sha256": "4a2d87348651fab15d47582cce2fba82058255ddb2a2a29386db7705bea1cb23",
+      "source_map_sha256": "bd6a66510d44498aa0541da7a03867b2dc55c484d1539d4dfb796f5e647ffebb",
+      "source_name": "embedded-structural.js",
+      "source_sha256": "2c2029c3b13d2d2781be91ac6ef3fbe7afd921d47badc84eed8e570526edcdf2",
+      "symbolication": "map CommonJS locations after subtracting wrapper_prefix_lines; automatic runtime stack remapping remains unsupported",
+      "target": "aarch64-apple-darwin",
+      "trust": "fresh compiler output embedded by trusted native build; hashes are not authentication",
+      "wrapper_prefix_lines": 3
+    },
+    "authoring_preserved": {
+      "game.incant.json": "6de2af1966fbb03d46d9b357cd803f30c45aa546b6f233ca4b1eb0cdb33cd266",
+      "history.jsonl": "09a95417603308208efcd2302e7c3655d429ad5a54e6cc3a0d71bd3b0ef20a4e"
+    },
+    "inputs_and_build_storage_removed": true,
+    "removed_input_scope": "authoring/compile inputs and temporary Cargo storage; runtime exchange files retained",
+    "runtime_exchange_files": [
+      "input.json",
+      "actions.json",
+      "KeyQ.json",
+      "KeyB.json"
+    ],
+    "runtime_source_compiler_symbols_absent": true,
+    "dynamic_source_routes_rejected": true,
+    "observations": [
+      {
+        "ticks": 0,
+        "entities": 2,
+        "output": "tick=0 entities=2\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 0.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 0.0, 0.0]\n"
+      },
+      {
+        "ticks": 1,
+        "entities": 3,
+        "output": "tick=1 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 1.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 1.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]) [1.0, 0.0, 0.0]\n"
+      },
+      {
+        "ticks": 2,
+        "entities": 3,
+        "output": "tick=2 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 2.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 2.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]) [1.0333333333333334, 1.0, 0.0]\n"
+      },
+      {
+        "ticks": 3,
+        "entities": 3,
+        "output": "tick=3 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 3.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 3.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]) [1.0666666666666669, 2.0, 0.0]\n"
+      },
+      {
+        "ticks": 4,
+        "entities": 2,
+        "output": "tick=4 entities=2\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 4.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 4.0, 0.0]\n"
+      },
+      {
+        "ticks": 60,
+        "entities": 2,
+        "output": "tick=60 entities=2\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 60.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 60.0, 0.0]\n"
+      }
+    ],
+    "recorded_input_observations": [
+      {
+        "ticks": 0,
+        "entities": 2,
+        "output": "tick=0 entities=2\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 0.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 0.0, 0.0]\n"
+      },
+      {
+        "ticks": 1,
+        "entities": 3,
+        "output": "tick=1 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0125, 1.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0125, 1.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]) [1.0, 0.0, 0.0]\n"
+      },
+      {
+        "ticks": 2,
+        "entities": 3,
+        "output": "tick=2 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.016666666666666666, 2.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.016666666666666666, 2.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]) [1.0375, 1.0, 0.0]\n"
+      },
+      {
+        "ticks": 3,
+        "entities": 3,
+        "output": "tick=3 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.016666666666666666, 3.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.016666666666666666, 3.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]) [1.0708333333333335, 2.0, 0.0]\n"
+      },
+      {
+        "ticks": 4,
+        "entities": 2,
+        "output": "tick=4 entities=2\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.016666666666666666, 4.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.016666666666666666, 4.0, 3.0]\n"
+      },
+      {
+        "ticks": 60,
+        "entities": 2,
+        "output": "tick=60 entities=2\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.016666666666666666, 60.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.016666666666666666, 60.0, 3.0]\n"
+      }
+    ],
+    "native_physics_observations": [
+      {
+        "ticks": 0,
+        "output": "tick=0 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1]) [0.0, -0.5, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1]) [0.0, -0.5, 0.0] [0.0, 0.0, 0.0, 1.0] [0.0, 0.0, 0.0] [0.0, 0.0, 0.0] false\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2]) [0.0, 3.0, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2]) [0.0, 3.0, 0.0] [0.0, 0.0, 0.0, 1.0] [0.0, 0.0, 0.0] [0.0, 0.0, 0.0] false\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3]) [5.0, 4.0, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3]) [5.0, 4.0, 0.0] [0.0, 0.0, 0.0, 1.0] [2.0, 0.0, 0.0] [0.0, 1.0, 0.0] false\n"
+      },
+      {
+        "ticks": 1,
+        "output": "tick=1 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1]) [0.0, -0.5, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1]) [0.0, -0.5, 0.0] [0.0, 0.0, 0.0, 1.0] [0.0, 0.0, 0.0] [0.0, 0.0, 0.0] false\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2]) [0.0, 2.9982969760894775, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2]) [0.0, 2.9982969760894775, 0.0] [0.0, 0.0, 0.0, 1.0] [0.0, -0.16350001096725464, 0.0] [0.0, 0.0, 0.0] false\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3]) [5.033332824707031, 4.0, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3]) [5.033332824707031, 4.0, 0.0] [0.0, 0.00833322573453188, 0.0, 0.999965250492096] [2.0, 0.0, 0.0] [0.0, 1.0, 0.0] false\n"
+      },
+      {
+        "ticks": 60,
+        "output": "tick=60 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1]) [0.0, -0.5, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1]) [0.0, -0.5, 0.0] [0.0, 0.0, 0.0, 1.0] [0.0, 0.0, 0.0] [0.0, 0.0, 0.0] false\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2]) [0.00595275592058897, 0.4997122585773468, 0.0025561037473380566]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2]) [0.00595275592058897, 0.4997122585773468, 0.0025561037473380566] [-0.00012970506213605404, 1.568111542837869e-6, 0.00012519564188551158, 1.0] [0.00020080046670045704, -0.0002750213607214391, 0.00047549817827530205] [0.0009513464756309986, -8.687531583007058e-9, -0.0004017487808596343] false\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3]) [6.999969482421875, 4.0, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3]) [6.999969482421875, 4.0, 0.0] [0.0, 0.47942492365837097, 0.0, 0.8775829672813416] [2.0, 0.0, 0.0] [0.0, 1.0, 0.0] false\n"
+      },
+      {
+        "ticks": 600,
+        "output": "tick=600 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1]) [0.0, -0.5, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1]) [0.0, -0.5, 0.0] [0.0, 0.0, 0.0, 1.0] [0.0, 0.0, 0.0] [0.0, 0.0, 0.0] false\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2]) [0.0059583005495369434, 0.4999309182167053, 0.0025801181327551603]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2]) [0.0059583005495369434, 0.4999309182167053, 0.0025801181327551603] [-7.640940111741656e-7, 1.5690386589994887e-6, 2.5463174324613647e-7, 1.0] [0.0, 0.0, 0.0] [0.0, 0.0, 0.0] true\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3]) [24.99969482421875, 4.0, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3]) [24.99969482421875, 4.0, 0.0] [0.0, -0.958926260471344, 0.0, 0.28365570306777954] [2.0, 0.0, 0.0] [0.0, 1.0, 0.0] false\n"
+      }
+    ],
+    "committed_raycast_and_expired_capabilities": true,
+    "query_refusals": [
+      {
+        "key": "KeyQ",
+        "stderr": "Error: Script(PhysicsQuery(Physics(Query(\"ray direction must be nonzero\"))))"
+      },
+      {
+        "key": "KeyB",
+        "stderr": "Error: Script(InputLimit)"
+      }
+    ],
+    "input_exchange_only_at_startup": true,
+    "scope": "Native host==target embedded script; no portable ABI, authenticated file loader, full export, mobile execution or phone gate"
+  },
+  "shipping_processes": 34,
+  "shipping_success_processes": 32,
+  "shipping_refusal_processes": 2,
+  "limits": [
+    "Numerical/native-process evidence only; no phone or performance gate.",
+    "Synchronous native query work cannot be interrupted mid-call; budget is checked immediately before and after.",
+    "Only raycasts are migrated; shape casts, character controllers and trigger bindings remain separate work.",
+    "Capability slots and guest arguments/results allocate; no allocation-free claim.",
+    "World/solver is moved, never cloned, and no project representation is read during ticks."
+  ],
+  "integration": {
+    "tested_commit": "fd349ed",
+    "ordinary_release_tests_doctests": 553,
+    "ignored_gpu_tests": 66,
+    "workspace_all_targets_release_clippy": true,
+    "gpu_player_all_targets_release_clippy": true,
+    "python_tools_tests": 43,
+    "normal_dependency_roots": 6,
+    "renderer_implementation_changed": false,
+    "logs": {
+      "/tmp/incant-native-query-workspace-tests.log": {
+        "sha256": "c432f01fd139a4abab36443d74c42caca0654dc39850b700855549605a851e25",
+        "bytes": 108537
+      },
+      "/tmp/incant-native-query-workspace-clippy.log": {
+        "sha256": "73d7c8365dbff564c05550ca23bba1410644499eb551d0ef074db2b11b28846a",
+        "bytes": 15432
+      },
+      "/tmp/incant-native-query-player-clippy.log": {
+        "sha256": "f2af4dc4d8998ed35b51e4a5a97c3a9bb684fe609c8a1c1bfc29640ce9281062",
+        "bytes": 1396
+      },
+      "/tmp/incant-native-query-normal-graph.log": {
+        "sha256": "519747b1373149c234dfaf044f0234541fefea32af284f33e0c05a4085b1999c",
+        "bytes": 194
+      },
+      "/tmp/incant-native-query-tools.log": {
+        "sha256": "9a29f340924e4b8127919d51d2d1016a736b3f888c20585a33981c7ae8726768",
+        "bytes": 7519
+      }
+    }
+  }
+}

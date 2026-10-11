@@ -3,6 +3,7 @@
 #include <stdint.h>
 typedef int32_t (*incant_import)(void*,uint8_t*,size_t,uint32_t,int64_t,int32_t,int32_t,int32_t,int32_t,int32_t*);
 struct w2c_incant__v1 { incant_import callback; void* context; wasm_rt_memory_t* memory; };
+struct w2c_incant__input__v1 { struct w2c_incant__v1 core; };
 /* Exceptions are rejected before translation; no exception unwind target is
  * needed. The ordinary trap target remains wholly inside the C facade. */
 static inline void incant_trap_prepare(void) {

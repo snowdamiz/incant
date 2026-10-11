@@ -9,12 +9,13 @@ publish.workspace = true
 default = []
 static-conformance = ["wasmtime-host", "incant_wasm_runtime/embedded-fixture"]
 # Explicit desktop development dependency; never enabled by shipped players.
-wasmtime-host = ["dep:wasmtime", "dep:incant_runtime", "dep:incant_types", "dep:thiserror", "dep:wasmparser", "dep:incant_wasm_runtime"]
+wasmtime-host = ["dep:incant_input", "dep:wasmtime", "dep:incant_runtime", "dep:incant_types", "dep:thiserror", "dep:wasmparser", "dep:incant_wasm_runtime"]
 
 [target.'cfg(any(target_os = "macos", target_os = "linux", target_os = "windows"))'.dependencies]
 wasmtime = { version = "=49.0.2", default-features = false, features = ["std", "runtime", "cranelift"], optional = true }
 wasmparser = { version = "=0.258.3", default-features = false, features = ["std"], optional = true }
 incant_runtime = { workspace = true, optional = true }
+incant_input = { workspace = true, optional = true }
 incant_types = { workspace = true, optional = true }
 thiserror = { workspace = true, optional = true }
 

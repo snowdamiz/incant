@@ -17,6 +17,7 @@ mod physics;
 mod physics_2d;
 mod physics_2d_binary;
 mod physics_binary;
+mod physics_queries;
 mod save;
 mod scene;
 mod spatial;
@@ -47,8 +48,13 @@ pub use incant_physics_2d_runtime::{
     TriggerEvent as TriggerEvent2D,
 };
 pub use incant_physics_runtime::{BodyState, MAX_TRIGGER_EVENTS, MAX_TRIGGER_PAIRS, TriggerEvent};
+pub use incant_physics_runtime::{
+    CharacterMovement, CharacterOptions, CharacterQuery, CharacterStep,
+};
+pub use incant_physics_runtime::{RayHit, RayQuery};
 pub use physics::CookedPhysics;
 pub use physics_2d::CookedPhysics2D;
+pub use physics_queries::{NativeQueries, QueryError};
 pub use save::{MAX_SAVE_BYTES, SaveError};
 pub use scene::{CookedEntity, CookedScene, SceneError, StableId};
 pub use world::{EntitySnapshot, NativeWorld, RuntimeError};

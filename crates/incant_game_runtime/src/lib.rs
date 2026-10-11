@@ -14,7 +14,7 @@ use incant_audio_runtime::{
 };
 use incant_input::{InputActions, InputEvent, InputFrame};
 use incant_runtime::{CookedScene, NativeWorld, StableId};
-use incant_script::{CompiledScript, SessionError};
+use incant_script::{SessionError, SessionProgram};
 use kira::backend::Backend;
 pub use offline::OfflineGameSession;
 use std::{convert::Infallible, fmt::Debug};
@@ -38,6 +38,8 @@ pub enum GameError<E = Infallible> {
     SpatialHost,
     #[error("native sample clock exhausted")]
     Clock,
+    #[error("game session is suspended; resume before advancing simulation")]
+    Suspended,
 }
 pub type Result<T, E = Infallible> = std::result::Result<T, GameError<E>>;
 
@@ -60,7 +62,7 @@ where
 {
     pub fn new(
         scene: CookedScene,
-        script: CompiledScript,
+        program: impl Into<SessionProgram>,
         actions: InputActions,
         clips: Vec<ClipBinding>,
         settings: AudioManagerSettings<B>,
@@ -69,7 +71,7 @@ where
         Ok(Self {
             core: Core::prepare(
                 scene,
-                script,
+                program,
                 actions,
                 |_| Ok(NoHost),
                 |world| SceneAudio::new(world, clips, settings),
@@ -84,6 +86,11 @@ where
     pub fn poll_audio(&mut self) -> Result<()> {
         self.core.poll_audio()
     }
+    /// Pause/resume master audio and simulation together. Errors destroy the
+    /// session. Device commands take effect at the next callback boundary.
+    pub fn set_suspended(&mut self, suspended: bool) -> Result<()> {
+        self.core.set_suspended(suspended)
+    }
     pub fn is_failed(&self) -> bool {
         self.core.live.is_none()
     }
@@ -93,10 +100,22 @@ where
     pub fn input(&self) -> Result<&InputFrame> {
         self.core.input()
     }
+    pub fn logs(&self) -> Result<&incant_script::NativeLogs> {
+        self.core.logs()
+    }
     pub fn source_state(&self, id: StableId) -> Result<SourceState> {
         self.core.source_state(id)
     }
     pub fn rebind(&mut self, actions: InputActions) -> Result<()> {
         self.core.rebind(actions)
+    }
+}
+
+#[cfg(all(feature = "device", not(target_arch = "wasm32")))]
+impl GameSession<incant_audio_runtime::DeviceBackend> {
+    /// Poll CPAL device errors separately from generic decoder errors. Reported
+    /// or discarded errors destroy the session; device observation is asynchronous.
+    pub fn poll_device(&mut self) -> Result<()> {
+        self.core.poll_device()
     }
 }

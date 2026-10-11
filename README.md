@@ -51,6 +51,23 @@ open. [Editor and agent import evidence](docs/spikes/editor-agent-asset-imports.
 
 ## Headless tools
 
+The native runtime path cooks the project once and simulates a disposable world.
+For a native-SDK CommonJS behavior, the trusted developer coordinator builds it
+into a private executable before playback:
+
+```sh
+python3 tools/native_play.py artifacts/demo.incant.json --script behavior.js --ticks 120
+```
+
+Omit `--script` for the built-in no-op behavior. `--input-replay`, `--observe`,
+`--camera` and `--pcm-output` provide bounded input, assertions/state, CPU spatial
+validation and optional raw stereo audio. Spatial scenes require a camera.
+See [native project playback](docs/spikes/native-project-play.md) for the contract,
+validation and remaining migration work. This route has no runtime source parser.
+
+The older `run`, `script` and `play` commands below still use the legacy document
+simulation; their features are not evidence of native-runtime parity.
+
 ```sh
 tools/cargo run -p incant_headless -- init artifacts/demo.incant.json --name Demo
 tools/cargo run -p incant_headless -- validate artifacts/demo.incant.json

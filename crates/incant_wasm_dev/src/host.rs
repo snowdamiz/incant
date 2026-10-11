@@ -112,6 +112,26 @@ impl DevModuleHost {
     }
     pub fn tick(&mut self, world: &mut NativeWorld, dt: f64) -> Result<(), ModuleError> {
         let epoch = self.store.data_mut().capability.begin(world, dt)?;
+        self.run(world, dt, epoch)
+    }
+    /// Run against an engine-validated snapshot through `incant_input_v1`.
+    /// The owner must advance this input and native simulation on the same fixed
+    /// timeline. This method does not advance either clock. `tick` intentionally
+    /// supplies no input authority; imports there fail explicitly.
+    pub fn tick_with_input(
+        &mut self,
+        world: &mut NativeWorld,
+        dt: f64,
+        input: &incant_input::InputRuntime,
+    ) -> Result<(), ModuleError> {
+        let epoch = self
+            .store
+            .data_mut()
+            .capability
+            .begin_with_input(world, dt, input)?;
+        self.run(world, dt, epoch)
+    }
+    fn run(&mut self, world: &mut NativeWorld, dt: f64, epoch: i64) -> Result<(), ModuleError> {
         let result = (|| {
             self.store.set_fuel(bounds::TICK_FUEL)?;
             self.update.call(&mut self.store, (epoch, dt))?;

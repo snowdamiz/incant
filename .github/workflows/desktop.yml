@@ -47,25 +47,29 @@ jobs:
           cache-bin: 'false'
           # Share one default-branch dependency set; all PRs only restore.
           save-if: ${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
+      # Avoid retaining both the obsolete release and new CI target graphs.
+      # Fresh shipping storage is independent of this target cleanup.
+      - run: cargo clean --profile release
       - run: npm ci
       - run: node tools/build_bridge.mjs --check
       - run: npm run build --workspace editor/ui
       - run: npm test --workspace editor/ui
-      - run: cargo test --workspace --release --locked --features incant_audio_runtime/scene --timings
+      - run: cargo test --workspace --profile ci --locked --features incant_audio_runtime/scene --timings
       - run: cargo check -p incant_audio --features device --locked
       # The workspace default deliberately omits this optional player module.
-      - run: cargo clippy -p incant_game_player --features render-gpu --all-targets --release --locked -- -D warnings
+      - run: cargo clippy -p incant_game_player --features native-window --all-targets --profile ci --locked -j2 -- -D warnings
+      - run: cargo test -p incant_game_player --features native-window --all-targets --profile ci --locked -j2
       # Each GPU test owns a native device; serialize device lifetimes to avoid
       # hosted driver crashes when many renderer contexts initialize together.
       # Keep the same workspace feature graph as the preceding test run; scoped
       # package invocations otherwise rebuild the renderer dependencies.
       - name: Verify geometry, editor recovery and simulated frame capture
-        run: cargo test --workspace --release --locked --features incant_audio_runtime/scene --timings -- --ignored --test-threads=1 --nocapture
+        run: cargo test --workspace --profile ci --locked --features incant_audio_runtime/scene --timings -- --ignored --test-threads=1 --nocapture
       # Keep workspace feature unification from the release tests while building
       # only the editor, headless and cook tools used below.
-      - run: cargo build --workspace --bin incant_editor --bin incant_headless --example cook_scene --release --features incant_editor/custom-protocol,incant_audio_runtime/scene --locked --timings
+      - run: cargo build --workspace --bin incant_editor --bin incant_headless --example cook_scene --profile ci --features incant_editor/custom-protocol,incant_audio_runtime/scene --locked --timings
       - name: Build and execute the shipping runtime with matched crash symbols
-        run: python tools/shipping.py artifacts/shipping-runtime
+        run: python tools/shipping.py artifacts/shipping-runtime --headless-binary target/ci/incant_headless${{ matrix.suffix }} --cook-binary target/ci/examples/cook_scene${{ matrix.suffix }}
       - name: Verify Windows executables do not require redistributable CRT DLLs
         if: runner.os == 'Windows'
         shell: bash
@@ -80,7 +84,7 @@ jobs:
           host = re.search(r'^host: (.+)$', output('rustc', '-vV'), re.MULTILINE).group(1).strip()
           readobj = sysroot / 'lib/rustlib' / host / 'bin/llvm-readobj.exe'
           forbidden = re.compile(r'^(?:(?:msvcp|msvcr|vcruntime)\d.*|msvcrtd?|ucrtbased?|api-ms-win-crt-.*)\.dll$', re.IGNORECASE)
-          for binary in ('target/release/incant_editor.exe', 'target/release/incant_headless.exe',
+          for binary in ('target/ci/incant_editor.exe', 'target/ci/incant_headless.exe',
                          'artifacts/shipping-runtime/player/run_scene.exe'):
               imports = output(str(readobj), '--coff-imports', binary)
               libraries = re.findall(r'^\s*Name:\s*(\S+\.dll)\s*$', imports, re.MULTILINE | re.IGNORECASE)
@@ -100,49 +104,49 @@ jobs:
             artifacts/shipping-runtime/source-free
           if-no-files-found: error
       - name: Verify physics commands, persistence and sandbox playback
-        run: python tools/probes/physics-runtime.py artifacts/physics-runtime-cli --binary target/release/incant_headless${{ matrix.suffix }}
+        run: python tools/probes/physics-runtime.py artifacts/physics-runtime-cli --binary target/ci/incant_headless${{ matrix.suffix }}
       - name: Verify strict TypeScript character walking and jumping
-        run: python tools/probes/character-movement.py artifacts/character-movement-cli --binary target/release/incant_headless${{ matrix.suffix }}
+        run: python tools/probes/character-movement.py artifacts/character-movement-cli --binary target/ci/incant_headless${{ matrix.suffix }}
       - name: Verify compound authoring, recovery and scripted queries
-        run: python tools/probes/compound-colliders.py artifacts/compound-colliders-cli --binary target/release/incant_headless${{ matrix.suffix }}
+        run: python tools/probes/compound-colliders.py artifacts/compound-colliders-cli --binary target/ci/incant_headless${{ matrix.suffix }}
       - name: Verify versioned game saves across headless process restarts
-        run: python tools/probes/game-saves.py artifacts/game-saves-cli --binary target/release/incant_headless${{ matrix.suffix }}
+        run: python tools/probes/game-saves.py artifacts/game-saves-cli --binary target/ci/incant_headless${{ matrix.suffix }}
       - name: Verify recorded device input, character control and mid-jump save replay
-        run: python tools/probes/game-input.py artifacts/game-input-cli --binary target/release/incant_headless${{ matrix.suffix }}
+        run: python tools/probes/game-input.py artifacts/game-input-cli --binary target/ci/incant_headless${{ matrix.suffix }}
       - name: Verify script-driven WAV and Vorbis mixing without an audio device
-        run: python tools/probes/game-audio.py artifacts/game-audio-cli --binary target/release/incant_headless${{ matrix.suffix }}
+        run: python tools/probes/game-audio.py artifacts/game-audio-cli --binary target/ci/incant_headless${{ matrix.suffix }}
       - name: Verify saved timer callbacks across headless process restarts
-        run: python tools/probes/game-timers.py artifacts/game-timers-cli --binary target/release/incant_headless${{ matrix.suffix }}
+        run: python tools/probes/game-timers.py artifacts/game-timers-cli --binary target/ci/incant_headless${{ matrix.suffix }}
       - name: Verify saved runtime rebinding and named input actions
-        run: python tools/probes/game-actions.py artifacts/game-actions-cli --binary target/release/incant_headless${{ matrix.suffix }}
+        run: python tools/probes/game-actions.py artifacts/game-actions-cli --binary target/ci/incant_headless${{ matrix.suffix }}
       - name: Verify locale switching and string tables across process restarts
-        run: python tools/probes/game-localization.py artifacts/game-localization-cli --binary target/release/incant_headless${{ matrix.suffix }}
+        run: python tools/probes/game-localization.py artifacts/game-localization-cli --binary target/ci/incant_headless${{ matrix.suffix }}
       - name: Verify translator exchange, atomic import and shared Undo/Redo
-        run: python tools/probes/localization-exchange.py artifacts/localization-exchange-cli --binary target/release/incant_headless${{ matrix.suffix }}
+        run: python tools/probes/localization-exchange.py artifacts/localization-exchange-cli --binary target/ci/incant_headless${{ matrix.suffix }}
       - name: Verify runtime navigation and saved character chase
-        run: python tools/probes/game-navigation.py artifacts/game-navigation-cli --binary target/release/incant_headless${{ matrix.suffix }}
+        run: python tools/probes/game-navigation.py artifacts/game-navigation-cli --binary target/ci/incant_headless${{ matrix.suffix }}
       - name: Verify weighted grid doors and blocked-route save replay
-        run: python tools/probes/navigation-grid.py artifacts/navigation-grid-cli --binary target/release/incant_headless${{ matrix.suffix }}
+        run: python tools/probes/navigation-grid.py artifacts/navigation-grid-cli --binary target/ci/incant_headless${{ matrix.suffix }}
       - name: Verify one hundred steering agents and saved replay
-        run: python tools/probes/game-steering.py artifacts/game-steering-cli --binary target/release/incant_headless${{ matrix.suffix }}
+        run: python tools/probes/game-steering.py artifacts/game-steering-cli --binary target/ci/incant_headless${{ matrix.suffix }}
       - name: Verify directed off-mesh traversal and saved replay
-        run: python tools/probes/navigation-links.py artifacts/navigation-links-cli --binary target/release/incant_headless${{ matrix.suffix }}
+        run: python tools/probes/navigation-links.py artifacts/navigation-links-cli --binary target/ci/incant_headless${{ matrix.suffix }}
       - name: Verify authored and saved orthographic camera projections
-        run: python tools/probes/orthographic-cameras.py artifacts/orthographic-cameras-cli --binary target/release/incant_headless${{ matrix.suffix }}
+        run: python tools/probes/orthographic-cameras.py artifacts/orthographic-cameras-cli --binary target/ci/incant_headless${{ matrix.suffix }}
       - name: Verify pixel-perfect camera saves preserve unsnapped simulation
-        run: python tools/probes/orthographic-cameras.py artifacts/pixel-perfect-cameras-cli --pixel-perfect --binary target/release/incant_headless${{ matrix.suffix }}
+        run: python tools/probes/orthographic-cameras.py artifacts/pixel-perfect-cameras-cli --pixel-perfect --binary target/ci/incant_headless${{ matrix.suffix }}
       - name: Verify sprite authoring and source-free saved animation
-        run: python tools/probes/sprite-rendering.py artifacts/sprite-rendering-cli --binary target/release/incant_headless${{ matrix.suffix }}
+        run: python tools/probes/sprite-rendering.py artifacts/sprite-rendering-cli --binary target/ci/incant_headless${{ matrix.suffix }}
       - name: Verify atlas repacking and source-free saved frame references
-        run: python tools/probes/sprite-atlases.py artifacts/sprite-atlases-cli --binary target/release/incant_headless${{ matrix.suffix }}
+        run: python tools/probes/sprite-atlases.py artifacts/sprite-atlases-cli --binary target/ci/incant_headless${{ matrix.suffix }}
       - name: Exercise native GPU rendering without a user account
-        run: python tools/platforms/render-check.py
+        run: python tools/platforms/render-check.py --binary target/ci/incant_headless${{ matrix.suffix }}
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: editor-engine-${{ matrix.platform }}
           path: |
-            target/release/incant_editor${{ matrix.suffix }}
-            target/release/incant_headless${{ matrix.suffix }}
+            target/ci/incant_editor${{ matrix.suffix }}
+            target/ci/incant_headless${{ matrix.suffix }}
             artifacts/render-smoke
             artifacts/physics-runtime-cli
             artifacts/character-movement-cli

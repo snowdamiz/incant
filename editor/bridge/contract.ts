@@ -319,8 +319,15 @@ export type HostRequest =
   /** Request close; the host decides about unsaved-work prompts. */
   | { readonly type: 'window.close' };
 
+/** Receipt captured by the host while committing the import, before later reads. */
+export interface AssetImportCommit {
+  readonly revision: number;
+  /** Null means nothing changed: no transaction was added and redo was preserved. */
+  readonly transaction: Ulid | null;
+}
+
 export type BridgeResult =
-  | { readonly ok: true }
+  | { readonly ok: true; readonly assetImport?: AssetImportCommit }
   | { readonly ok: false; readonly error: BridgeError };
 
 export interface EditorBridge {

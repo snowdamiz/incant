@@ -23,6 +23,8 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'tools'))
 from shipping import cargo_output, codegen
 from shipping_symbols import backend, package, require, run
+from native_observations import verify as verify_observations
+from native_logs import ACTIONS as LOG_ACTIONS, BEHAVIOR as LOG_BEHAVIOR, BASELINE as LOG_BASELINE, verify as verify_logs
 from native_game_sprites import FRAME, MIDDLE_FRAME, LAST_FRAME, component as sprite_component, import_atlas
 
 
@@ -154,7 +156,7 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
         behavior = (ROOT / 'crates/incant_game_player/fixtures/game.js').read_text()
         if args.render_input:
             behavior += "\nconst update = exports.default.update; exports.default.update = function(ctx) { update(ctx); if(ctx.input.actions.camera_fail.pressed) ctx.commands.despawn('00000000000000000000000004'); };\n"
-        source.write_text(f'// {sentinel}\n' + checks + behavior)
+        source.write_text(f'// {sentinel}\n' + checks + behavior + LOG_BEHAVIOR)
         environment.update(INCANT_NATIVE_SCRIPT_SOURCE=str(source), INCANT_NATIVE_SCRIPT_NAME='embedded-game.js')
         environment.pop('INCANT_NATIVE_SCRIPT_MAP', None)
         with tempfile.TemporaryDirectory(prefix='native-game-build-', dir=out) as storage:
@@ -205,6 +207,7 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
     replay = {'format': 'incant-input', 'version': 1, 'tick_rate': 60, 'start_tick': 0, 'ticks': 120,
               'frames': [{'tick': 1, 'events': [{'type': 'key', 'code': 'KeyD', 'down': True}]}]}
     actions = {n: {'kind': 'button', 'bindings': [{'type': 'key', 'code': c}]} for n, c in (('right', 'KeyD'), ('fail', 'KeyF'))}
+    actions.update({n: {'kind': 'button', 'bindings': [{'type': 'key', 'code': c}]} for n,c in LOG_ACTIONS})
     if args.render_input: actions['camera_fail'] = {'kind': 'button', 'bindings': [{'type': 'key', 'code': 'KeyC'}]}
     record_path = out / 'player/input.json'; record_path.write_text(json.dumps(replay))
     action_path = out / 'player/actions.json'; action_path.write_text(json.dumps(actions))
@@ -226,6 +229,7 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
                 dest = out / f'{fixture["name"]}-{rate}-{repeat}.pcm'
                 report = json.loads(run(command(fixture['path'], record_path, rate, dest)))
                 require(report['tick'] == 120 and report['frames'] == 120*rate//60 and report['pcm_sha256'] == sha(dest), 'Tick/sample/hash mismatch')
+                require(report['logs'] == LOG_BASELINE, 'Committed log messages, clock, or levels changed')
                 require(len(report['sources']) == 1, 'Unexpected source count')
                 source = report['sources'][0]; expected = -3 + 119*3/60
                 require(abs(source['position'][0]-expected) < 0.001 and source['position'][1:] == [0, 0], 'Script/physics motion or ordering incorrect')
@@ -353,6 +357,14 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
     existing = out/'preserved.pcm'; existing.write_bytes(b'keep')
     result = subprocess.run(command(fixtures[0]['path'], record_path, 48000, existing), capture_output=True)
     require(result.returncode != 0 and not result.stdout and existing.read_bytes() == b'keep', 'Existing output overwritten')
+    observations = verify_observations(out, lambda dest: command(fixtures[0]['path'], record_path, 48000, dest),
+                                       results[1]['report'], len(entity_order), reject, run, require)
+    def log_command(recording, dest):
+        cmd = command(fixtures[0]['path'], recording, 48000, dest)
+        if args.gpu: cmd[9] = '--cpu-render-input'
+        return cmd
+    logs = verify_logs(out, log_command, results[1]['report'], replay, run, reject, require)
+    require(before == package_hashes(), 'Observation changed retained package')
     report = {'passed': True, 'target': target, 'compiler': compiler, 'codegen': flags, 'symbol_identity': identity,
               'player_bytes': player.stat().st_size, 'player_sha256': sha(player), 'script_metadata': metadata,
               'source_compiler_symbols_absent': True, 'dynamic_source_routes_rejected': True,
@@ -362,7 +374,7 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
               'flipbook_controls': flipbook_controls, 'gpu_build_cpu_mode_preserved': cpu_mode_preserved, 'sprite_cpu_mode_preserved': sprite_cpu_mode_preserved, 'project_hash_before_delete': authoring_hash,
               'authoring_and_build_storage_deleted': True, 'removed_scope': 'authoring project/WAV/glTF/bin/PNG/atlas/journal/script source and fresh Cargo storage',
               'retained_runtime_inputs': ['binary scenes', 'clips.bin', 'cooked PCM/manifests', 'startup input.json/actions.json'] + (['cooked model payloads/manifests'] if args.render_input else []) + (['cooked KTX2/atlas metadata'] if args.gpu else []),
-              'repeat_exact': True, 'recorded_ticks_per_process': 120, 'audio_processes': len(fixtures)*4, 'results': results, 'rejected': failures,
+              'native_logs': logs, 'native_observations': observations, 'repeat_exact': True, 'recorded_ticks_per_process': 120, 'audio_processes': len(fixtures)*4, 'results': results, 'rejected': failures,
               'spatial_refusals': refusal_results, 'plain_v1_controls': 2, 'existing_output_preserved': True,
               'size_delta_from_audio_host_2885984': player.stat().st_size-2885984,
               'size_delta_from_physics_script_player_3941816': player.stat().st_size-3941816,
