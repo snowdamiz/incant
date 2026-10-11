@@ -53,6 +53,12 @@ window package execution and complete UI/export/device gates remain open.
 
 ## Current integration and parallel work
 
+- Checkpoint 2 Windows native TypeScript startup has a reviewed local path adapter
+  correction: fixed engine-relative entry and canonical-equivalent ordinary launch
+  cwd; the scrubbed environment remains unchanged. Nine local tests and scoped
+  Clippy pass; actual Windows helper/workspace execution remains required.
+  [Diagnosis and evidence](docs/spikes/windows-native-compiler-entry.md).
+
 | Workstream | Current result | Next work / boundary |
 | --- | --- | --- |
 | Editor and sprite authoring | [PR #61](https://github.com/snowdamiz/incant/pull/61) combines the final plain UI, typed atlas/audio imports, focus fixes and the corrected sprite/atlas baseline. 524 UI tests, strict TypeScript, production and native builds pass. | Merged after exact-head hosted checks and isolated native Claude acceptance. [Evidence](docs/spikes/editor-release-union.md). |
