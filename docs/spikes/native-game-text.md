@@ -67,3 +67,14 @@ coverage and Claude-owned rendered golden review are still required. No native
 window, rendered appearance, reference-phone, performance or phase gate is passed
 by these CPU results. The existing localization runtime remains a separate input
 to future text widgets.
+
+## Current-main integration
+
+Frozen reviewed source `101b037` merged actual main105 (`01acc843`) cleanly as
+`5475d882`. All 14 source/test/font/review files outside STATUS and the lockfile
+retain their reviewed identities. The merged lock preserves all 935 previous
+main package records exactly, including their dependency edges, and all 22 new
+font-stack records from the source branch. Fifteen actual-font tests, all-target
+Clippy, standalone wasm32 checking, the normal runtime dependency guard, fmt and
+conventions pass on this integrated tree.
+[Exact integration evidence](evidence/native-game-text-main105.json).

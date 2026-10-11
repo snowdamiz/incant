@@ -487,3 +487,7 @@ Actual main104 integration is clean: 74 development/static/SDK, 106 session libr
 and five GameSession checkpoint cases pass, with 20 tooling tests, Clippy,
 compiler-disabled/static and dependency checks. Static checkpoints remain refused.
 [Integration evidence](docs/spikes/evidence/native-wasm-localization-main104.json).
+
+Packaged-font text integration against actual main105 passes all 15 actual-font
+tests, Clippy, standalone wasm32 and runtime dependency checks, preserving all
+935 prior lock records. [Integrated evidence](docs/spikes/evidence/native-game-text-main105.json).
