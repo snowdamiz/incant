@@ -23,6 +23,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'tools'))
 from shipping import cargo_output, codegen
 from shipping_symbols import backend, package, require, run
+from native_observations import verify as verify_observations
 from native_game_sprites import FRAME, component as sprite_component, import_atlas
 
 
@@ -325,6 +326,9 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
     existing = out/'preserved.pcm'; existing.write_bytes(b'keep')
     result = subprocess.run(command(fixtures[0]['path'], record_path, 48000, existing), capture_output=True)
     require(result.returncode != 0 and not result.stdout and existing.read_bytes() == b'keep', 'Existing output overwritten')
+    observations = verify_observations(out, lambda dest: command(fixtures[0]['path'], record_path, 48000, dest),
+                                       results[1]['report'], len(entity_order), reject, run, require)
+    require(before == package_hashes(), 'Observation changed retained package')
     report = {'passed': True, 'target': target, 'compiler': compiler, 'codegen': flags, 'symbol_identity': identity,
               'player_bytes': player.stat().st_size, 'player_sha256': sha(player), 'script_metadata': metadata,
               'source_compiler_symbols_absent': True, 'dynamic_source_routes_rejected': True,
@@ -334,7 +338,7 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
               'gpu_build_cpu_mode_preserved': cpu_mode_preserved, 'sprite_cpu_mode_preserved': sprite_cpu_mode_preserved, 'project_hash_before_delete': authoring_hash,
               'authoring_and_build_storage_deleted': True, 'removed_scope': 'authoring project/WAV/glTF/bin/PNG/atlas/journal/script source and fresh Cargo storage',
               'retained_runtime_inputs': ['binary scenes', 'clips.bin', 'cooked PCM/manifests', 'startup input.json/actions.json'] + (['cooked model payloads/manifests'] if args.render_input else []) + (['cooked KTX2/atlas metadata'] if args.gpu else []),
-              'repeat_exact': True, 'recorded_ticks_per_process': 120, 'audio_processes': len(fixtures)*4, 'results': results, 'rejected': failures,
+              'native_observations': observations, 'repeat_exact': True, 'recorded_ticks_per_process': 120, 'audio_processes': len(fixtures)*4, 'results': results, 'rejected': failures,
               'spatial_refusals': refusal_results, 'plain_v1_controls': 2, 'existing_output_preserved': True,
               'size_delta_from_audio_host_2885984': player.stat().st_size-2885984,
               'size_delta_from_physics_script_player_3941816': player.stat().st_size-3941816,

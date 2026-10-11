@@ -58,7 +58,13 @@ review; concurrent native reviews coordinate foreground ownership.
   source-free proof pass. [Queries](docs/spikes/native-script-queries.md),
   [character/trigger evidence](docs/spikes/native-script-character.md). Native fixed-tick
   timers now stage schedules alongside numeric/structural changes, with 63 script
-  tests and a 48-process source-free proof. [Timer evidence](docs/spikes/native-script-timers.md).
+  tests and a 48-process source-free proof. [Timer evidence](docs/spikes/native-script-timers.md). Native
+  headless observation plans now check selected typed state and input actions at
+  accepted ticks, return structured false-assertion reports/nonzero status, and
+  preserve terminal runtime refusal. Seven focused and 577 ordinary workspace
+  tests plus 54 fresh source-free process controls pass; existing project-oriented
+  legacy Play and full Core Sample/agent integration remain open.
+  [Observation evidence](docs/spikes/native-headless-observations.md).
 - **Native rendering.** Canonical typed renderer input and a separate authoring
   adapter; exact retained asset versions; binary v4 cameras/models/lights and
   binary v5 sprites; direct committed pose updates and mandatory GPU host sync.
