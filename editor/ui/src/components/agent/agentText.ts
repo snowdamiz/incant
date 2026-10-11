@@ -8,11 +8,11 @@ import type {
   AgentApprovalDecision,
   AgentApprovalMode,
   AgentFailure,
-  AgentSessionSnapshot,
   AgentTurnSnapshot,
   BridgeSnapshot,
   JsonValue,
 } from '../../bridge/contract';
+import { formatCount } from './tokenAllowance';
 
 /** The native host's defaults (editor/bridge/native.ts). The composer starts with them. */
 export const DEFAULT_MODEL = 'gpt-6-astra';
@@ -55,7 +55,8 @@ export function isActive(status: string): boolean {
 const FAILURES: Readonly<Record<AgentFailure, string>> = {
   provider: 'The model provider did not complete the request.',
   tool: 'A tool the agent used failed.',
-  budget_exhausted: 'The session’s token allowance ran out.',
+  // Neutral: the allowance is the project's on hosts with one, the session's on older hosts.
+  budget_exhausted: 'The token allowance ran out.',
   step_limit: 'The agent reached its step limit for one request.',
   project_unavailable: 'The project was not available.',
   project_changed: 'The project changed while the agent was working.',
@@ -77,26 +78,18 @@ export function failureSentence(turn: Pick<AgentTurnSnapshot, 'failure' | 'appro
   return failure !== null && Object.hasOwn(FAILURES, failure) ? FAILURES[failure as AgentFailure] : 'The request failed.';
 }
 
-const count = (value: number) => value.toLocaleString();
 export function tokensText(value: number): string {
-  return `${count(value)} ${value === 1 ? 'token' : 'tokens'}`;
+  return `${formatCount(value)} ${value === 1 ? 'token' : 'tokens'}`;
 }
 
 /**
- * What a finished turn cost the session allowance. An uncertain charge is marked as
- * estimated; an uncertain turn with no charge is "unknown", never "0 tokens".
+ * What a finished turn cost the allowance. An uncertain charge is marked as estimated;
+ * an uncertain turn with no charge is "unknown", never "0 tokens". The allowance itself
+ * is read with `allowanceOf` (tokenAllowance.ts).
  */
 export function turnCost(turn: Pick<AgentTurnSnapshot, 'charged_tokens' | 'accounting_uncertain'>): string {
   if (!turn.accounting_uncertain) return tokensText(turn.charged_tokens);
   return turn.charged_tokens > 0 ? `${tokensText(turn.charged_tokens)} (estimated)` : 'Token use unknown';
-}
-
-export type UsageLevel = 'normal' | 'low' | 'out';
-export function sessionUsage(session: AgentSessionSnapshot): { readonly text: string; readonly level: UsageLevel } {
-  const { used_tokens: used, max_tokens: max } = session.budget;
-  const unconfirmed = session.accounting_uncertain ? ' (some estimated)' : '';
-  const level: UsageLevel = used >= max ? 'out' : used >= max * 0.8 ? 'low' : 'normal';
-  return { text: `${count(used)} of ${count(max)} tokens used${unconfirmed}`, level };
 }
 
 export function sizeText(bytes: number): string {

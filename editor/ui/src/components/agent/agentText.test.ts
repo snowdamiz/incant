@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { AgentFailure, AgentSessionSnapshot, AgentTurnSnapshot, BridgeSnapshot } from '../../bridge/contract';
+import type { AgentFailure, AgentSessionSnapshot, AgentTurnSnapshot, BridgeSnapshot, Ulid } from '../../bridge/contract';
 import { agentPhase } from './agentPhase';
 import {
   argumentsText,
@@ -8,11 +8,11 @@ import {
   plainText,
   reveal,
   reviewApproval,
-  sessionUsage,
   toolPhrase,
   turnCost,
 } from './agentText';
 import type { Names } from './agentText';
+import { allowanceOf, allowanceText } from './tokenAllowance';
 
 const names: Names = {
   entity: (id) => ({ E1: 'Crate 03', S1: 'Harbor' } as Record<string, string>)[id],
@@ -58,9 +58,14 @@ describe('token accounting', () => {
       worker_running: false,
       turns: [],
     });
-    expect(sessionUsage(session(6532))).toEqual({ text: '6,532 of 200,000 tokens used', level: 'normal' });
-    expect(sessionUsage(session(170000, true))).toEqual({ text: '170,000 of 200,000 tokens used (some estimated)', level: 'low' });
-    expect(sessionUsage(session(200000)).level).toBe('out');
+    // An older host: no project allowance, so the session's own budget is the allowance.
+    const usage = (value: AgentSessionSnapshot) => {
+      const allowance = allowanceOf({ connection: { status: 'ready', project: { id: 'P' as Ulid, name: 'P' } }, agentSession: value })!;
+      return { text: allowanceText(allowance), level: allowance.level };
+    };
+    expect(usage(session(6532))).toEqual({ text: '6,532 of 200,000 tokens used', level: 'normal' });
+    expect(usage(session(170000, true))).toEqual({ text: '170,000 of 200,000 tokens used (some estimated)', level: 'low' });
+    expect(usage(session(200000)).level).toBe('out');
   });
 });
 

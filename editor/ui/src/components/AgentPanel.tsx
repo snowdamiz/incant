@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useSyncExternalStore } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
 import type { FocusEvent, MouseEvent } from 'react';
 import type { AgentApprovalMode, AgentPendingApproval, AgentTurnSnapshot, BridgeSnapshot } from '../bridge/contract';
 import { unavailableMessage } from '../bridge/resolve';
@@ -9,10 +9,13 @@ import { focusRegion } from '../shell/regions';
 import { useShell } from '../shell/ShellContext';
 import { ChatGPTButton } from './AccountDialog';
 import { comboText, usePlatform } from './ShortcutsDialog';
+import { AgentAllowance } from './agent/AgentAllowance';
 import { AgentComposer } from './agent/AgentComposer';
 import type { ComposerAction } from './agent/AgentComposer';
 import { AgentTranscript } from './agent/AgentTranscript';
 import type { TurnActions } from './agent/AgentTurn';
+import { allowanceOf } from './agent/tokenAllowance';
+import type { Allowance } from './agent/tokenAllowance';
 import { agentMemory, approvalKey, withoutItem, withoutKey } from './agent/agentMemory';
 import { agentPhase } from './agent/agentPhase';
 import {
@@ -36,7 +39,44 @@ export function agentReady(status: string | undefined): boolean {
 
 /** The pane gets a separator when it has a conversation to read or the agent is ready. */
 export function agentPaneResizable(snapshot: BridgeSnapshot | null): boolean {
-  return agentReady(snapshot?.agent?.status) || (snapshot?.agentSession?.turns.length ?? 0) > 0;
+  return agentReady(snapshot?.agent?.status) || (snapshot?.agentSession?.turns.length ?? 0) > 0 || agentRefreshing(snapshot);
+}
+
+/**
+ * The host holds new requests only while it re-reads the agent session after a change
+ * (an allowance edit, Undo or Redo, an account read): signed in, no transport error, a
+ * session to read and allowance left. The contract has no reason code for it, so it is
+ * recognised by what is absent. It normally lasts one read; the pane keeps the composer
+ * and says "Updating…" instead of swapping in a note and back.
+ */
+export function agentRefreshing(snapshot: BridgeSnapshot | null): boolean {
+  if (!snapshot || snapshot.agent.status !== 'unavailable' || isNotInEditorReason(snapshot.agent.reason)) return false;
+  if (snapshot.provider.status !== 'connected' || snapshot.agentError || !snapshot.agentSession) return false;
+  const allowance = allowanceOf(snapshot);
+  return allowance !== null && !allowance.exhausted;
+}
+
+/** How long a refresh says Updating… before the host's reason and Refresh are shown. */
+export const REFRESH_GRACE_MS = 4000;
+
+/** Why the agent cannot start: the allowance is used up, or set to 0. Scoped to where it belongs. */
+function exhaustedReason(allowance: Allowance, editable: boolean): string {
+  if (allowance.scope === 'session') return 'This session’s token allowance is used up.';
+  if (editable) return allowance.cap === 0 ? 'Raise the allowance to turn the agent on.' : 'Raise the allowance to send new requests.';
+  return allowance.cap === 0 ? 'The project’s token allowance is 0.' : 'The project’s token allowance is used up.';
+}
+
+/** The cannot-run note's one sentence, from the snapshot alone, so a retry can say the same words. */
+function cannotRunReason(snapshot: BridgeSnapshot | null, allowanceEditable: boolean): string {
+  if (!snapshot) return 'No engine is connected.';
+  // The banner shows a project failure itself; repeating it here adds nothing.
+  if (projectState(snapshot).kind === 'failed') return 'The agent needs an open project.';
+  const agent = snapshot.agent;
+  if (agent.status !== 'unavailable') return '';
+  if (isNotInEditorReason(agent.reason)) return 'The agent is not available in the editor yet.';
+  const allowance = allowanceOf(snapshot);
+  if (allowance?.exhausted && snapshot.provider.status === 'connected' && !snapshot.agentError) return exhaustedReason(allowance, allowanceEditable);
+  return agent.reason;
 }
 
 /**
@@ -68,12 +108,13 @@ function outcomeAnnouncement(turn: AgentTurnSnapshot): string {
 }
 
 /**
- * Agent area under the Inspector: the native session's turns, oldest first, and the
- * composer. Conversation state comes only from the host's `agentSession`; a send never
- * fabricates a turn. While the agent cannot run, the composer gives way to one short
- * note with its single next step, and any turns the session still holds stay readable
- * above it (account changes and transport recovery keep the history). The header
- * collapses the pane to its status line.
+ * Agent area under the Inspector: the native session's turns, oldest first, the composer
+ * and the token allowance. Conversation state comes only from the host's `agentSession`;
+ * a send never fabricates a turn. While the agent cannot run, the composer gives way to
+ * one short note with its single next step, and any turns the session still holds stay
+ * readable above it (account changes and transport recovery keep the history). The
+ * allowance line stays last either way, so it can be changed without an account. The
+ * header collapses the pane to its status line.
  */
 export function AgentPanel({ open, onToggle }: { open: boolean; onToggle: () => void }) {
   const { snapshot, capabilities, bridge, request, announce, explainUnavailable, openAccount, ask, showPanel, setDockTab } = useShell();
@@ -92,12 +133,46 @@ export function AgentPanel({ open, onToggle }: { open: boolean; onToggle: () => 
   const turns = useMemo(() => session?.turns ?? [], [session]);
   const last = turns.at(-1) ?? null;
   const pending = last?.pending ?? null;
-  const project = projectState(snapshot);
   const signedIn = provider?.status === 'connected';
   const signingIn = provider?.status === 'connecting' || provider?.status === 'checking';
   const notInEditor = agent?.status === 'unavailable' && isNotInEditorReason(agent.reason);
-  const exhausted = !!session && session.budget.used_tokens >= session.budget.max_tokens;
   const { phase, stoppable } = agentPhase(snapshot, { sending, cancelling, startedTurn });
+
+  // The allowance: the project's authored cap where the host has one, compared with the
+  // session's recorded usage (never with the session's copy of the cap, which can lag).
+  const projectId = snapshot?.connection.status === 'ready' ? snapshot.connection.project.id : null;
+  const connection = snapshot?.connection;
+  const projectBudget = snapshot?.projectAgentBudget;
+  const allowance = useMemo(() => (connection ? allowanceOf({ connection, projectAgentBudget: projectBudget, agentSession: session }) : null), [connection, projectBudget, session]);
+  const exhausted = allowance?.exhausted ?? false;
+  const allowanceEditable = allowance?.scope === 'project' && capabilities.has('agent.budget.set');
+  const savingAllowance = pane.allowanceSaving !== null && pane.allowanceSaving.project === projectId;
+  // The session has not caught up with the authored cap yet: the host holds decisions.
+  const allowancePending = allowance?.scope === 'project' && !!session && session.budget.max_tokens !== allowance.cap;
+
+  // A refresh keeps the composer (Updating…) rather than flashing a note. If the host
+  // never finishes it, its reason and Refresh appear above the composer after a grace
+  // period, counted from the end of this pane's own save (a slow save is in progress, not
+  // stalled). A new hold never starts stalled: the flag resets during the render that
+  // sees it begin, not an effect later.
+  const refreshing = phase === 'unavailable' && agentRefreshing(snapshot);
+  const holding = refreshing && !savingAllowance;
+  const [stall, setStall] = useState({ holding, stalled: false });
+  if (stall.holding !== holding) setStall({ holding, stalled: false });
+  useEffect(() => {
+    if (!holding) return;
+    const timer = window.setTimeout(() => setStall({ holding: true, stalled: true }), REFRESH_GRACE_MS);
+    return () => window.clearTimeout(timer);
+  }, [holding]);
+  const stalled = holding && stall.holding && stall.stalled;
+  const stallReason = stalled && agent?.status === 'unavailable' ? agent.reason : null;
+  const updating = (refreshing && !stalled) || (phase === 'idle' && savingAllowance);
+
+  // An edit begun in another project is dropped once a different project is open.
+  useEffect(() => {
+    const edit = memory.get().allowance;
+    if (projectId !== null && edit && edit.project !== projectId) memory.set({ allowance: null });
+  }, [memory, projectId]);
 
   const hierarchy = snapshot?.hierarchy;
   const assets = snapshot?.assets;
@@ -174,8 +249,13 @@ export function AgentPanel({ open, onToggle }: { open: boolean; onToggle: () => 
   const submit = async () => {
     const current = memory.get();
     if (current.sending) return;
+    if (updating) {
+      announce('The agent is updating its session. Send the message when it is ready.');
+      return;
+    }
     if (phase !== 'idle') {
       if (phase !== 'unavailable') announce('The agent is still working. Send the message when it finishes.');
+      else if (stallReason) announce(stallReason);
       return;
     }
     if (!capabilities.has('agent.send')) {
@@ -238,8 +318,10 @@ export function AgentPanel({ open, onToggle }: { open: boolean; onToggle: () => 
       // The bridge publishes its own safe error; nothing raw is shown here.
     }
     memory.set({ retrying: false });
-    const after = bridge.getSnapshot().agentError;
-    announce(after ? `Still unavailable. ${after.message}` : 'Agent session refreshed.');
+    // Said in the pane's own words, the ones its note would show.
+    const after = bridge.getSnapshot();
+    const still = after.agentError?.message ?? (after.agent.status === 'unavailable' ? cannotRunReason(after, allowanceEditable) : null);
+    announce(still === null ? 'Agent session refreshed.' : still ? `Still unavailable. ${still}` : 'Still unavailable.');
   };
 
   const showHistory = useCallback(() => {
@@ -263,7 +345,9 @@ export function AgentPanel({ open, onToggle }: { open: boolean; onToggle: () => 
         ? 'Sign in again to decide. You can still stop the agent.'
         : agentError
           ? 'Retry the connection to decide. You can still stop the agent.'
-          : null;
+          : savingAllowance || allowancePending
+            ? 'Waiting for the agent to apply the new allowance. You can still stop the agent.'
+            : null;
   const turnActions = useMemo<Omit<TurnActions, 'reading'>>(
     () => ({
       names,
@@ -282,42 +366,36 @@ export function AgentPanel({ open, onToggle }: { open: boolean; onToggle: () => 
   // Header status: the agent's own state first, then why it cannot run.
   const status: { text: string; tone: Tone } = !snapshot
     ? { text: 'No engine', tone: 'idle' }
-    : phase === 'idle'
-      ? { text: 'Ready', tone: 'ok' }
-      : phase === 'starting'
-        ? { text: 'Starting…', tone: 'busy' }
-        : phase === 'running'
-          ? { text: 'Working…', tone: 'busy' }
-          : phase === 'approval'
-            ? { text: 'Needs approval', tone: 'attention' }
-            : phase === 'stopping'
-              ? { text: 'Stopping…', tone: 'busy' }
-              : phase === 'finishing'
-                ? { text: 'Finishing…', tone: 'busy' }
-                : provider?.status === 'error'
-                  ? { text: 'Sign-in problem', tone: 'error' }
-                  : signingIn
-                    ? { text: 'Signing in…', tone: 'pending' }
-                    : agentError && signedIn
-                      ? { text: 'Unavailable', tone: 'error' }
-                      : signedIn || notInEditor
-                        ? { text: 'Unavailable', tone: 'idle' }
-                        : { text: 'Not signed in', tone: 'idle' };
+    : updating
+      ? { text: 'Updating…', tone: 'busy' }
+      : phase === 'idle'
+        ? { text: 'Ready', tone: 'ok' }
+        : phase === 'starting'
+          ? { text: 'Starting…', tone: 'busy' }
+          : phase === 'running'
+            ? { text: 'Working…', tone: 'busy' }
+            : phase === 'approval'
+              ? { text: 'Needs approval', tone: 'attention' }
+              : phase === 'stopping'
+                ? { text: 'Stopping…', tone: 'busy' }
+                : phase === 'finishing'
+                  ? { text: 'Finishing…', tone: 'busy' }
+                  : provider?.status === 'error'
+                    ? { text: 'Sign-in problem', tone: 'error' }
+                    : signingIn
+                      ? { text: 'Signing in…', tone: 'pending' }
+                      : agentError && signedIn
+                        ? { text: 'Unavailable', tone: 'error' }
+                        : exhausted && signedIn
+                          ? { text: allowance?.cap === 0 ? 'Off' : 'Allowance used up', tone: 'idle' }
+                          : signedIn || notInEditor
+                            ? { text: 'Unavailable', tone: 'idle' }
+                            : { text: 'Not signed in', tone: 'idle' };
 
-  const reason = !snapshot
-    ? 'No engine is connected.'
-    : project.kind === 'failed'
-      ? // The banner shows the failure itself; repeating it here adds nothing.
-        'The agent needs an open project.'
-      : agent?.status === 'unavailable'
-        ? notInEditor
-          ? 'The agent is not available in the editor yet.'
-          : exhausted && signedIn && !agentError
-            ? 'This session’s token allowance is used up.'
-            : agent.reason
-        : '';
+  const reason = cannotRunReason(snapshot, allowanceEditable);
 
-  const composerShown = phase !== 'unavailable';
+  // A refresh, finished or stalled, keeps the composer: the draft stays where it was.
+  const composerShown = phase !== 'unavailable' || refreshing;
   const transcriptShown = composerShown || turns.length > 0;
   // Mirrors App: a pane without a separator is as tall as its content, so held turns
   // above a note scroll within a bounded height.
@@ -333,6 +411,8 @@ export function AgentPanel({ open, onToggle }: { open: boolean; onToggle: () => 
       unavailable: !capabilities.has('agent.cancel'),
       onActivate: () => void stop(turnId),
     });
+    if (updating) return wait('Updating…', 'The agent is updating its session. You can send when it is ready.');
+    if (stallReason !== null) return { kind: 'send', label: 'Send', title: stallReason, unavailable: true, onActivate: () => announce(stallReason) };
     switch (phase) {
       case 'idle': {
         const supported = capabilities.has('agent.send');
@@ -430,13 +510,15 @@ export function AgentPanel({ open, onToggle }: { open: boolean; onToggle: () => 
           {transcriptShown ? <AgentTranscript session={session} actions={turnActions} /> : null}
           {composerShown ? (
             <>
-              {agentError ? (
+              {agentError || stallReason !== null ? (
+                // A transport failure while a worker still runs, or a refresh the host never
+                // finished: the reason and its one action, with the composer kept below.
                 <div className="agent-notice" role="note">
                   <Icon name="warning" size={12} className="agent-notice__icon" />
-                  <span className="agent-notice__text">{agentError.message}</span>
+                  <span className="agent-notice__text">{agentError ? agentError.message : stallReason}</span>
                   {bridge?.refreshAgent ? (
                     <button type="button" className="button button--ghost button--small agent-notice__action" aria-disabled={retrying || undefined} onClick={() => void retry()}>
-                      {retrying ? 'Retrying…' : 'Retry'}
+                      {agentError ? (retrying ? 'Retrying…' : 'Retry') : retrying ? 'Refreshing…' : 'Refresh'}
                     </button>
                   ) : null}
                 </div>
@@ -491,6 +573,9 @@ export function AgentPanel({ open, onToggle }: { open: boolean; onToggle: () => 
               ) : null}
             </div>
           )}
+          {allowance && projectId !== null ? (
+            <AgentAllowance allowance={allowance} project={projectId} memory={memory} pane={pane} activeTurn={phase === 'running' || phase === 'approval'} />
+          ) : null}
         </div>
       ) : null}
     </section>
