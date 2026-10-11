@@ -46,5 +46,40 @@
     "exit_code": 0,
     "passed": 19,
     "skipped": 0
+  },
+  "main101_integration": {
+    "recorded_at": "2026-10-11T22:43:42.510210+00:00",
+    "source_commit": "730ba75c16fbf218274bbd7404e720cd2f9df199",
+    "merged_main": "cd06450f870201bc8bc1aa44ab64eaa05683b891",
+    "tests": {
+      "command": "./tools/cargo test --locked --profile ci -j2 -p incant_script -p incant_agent_native -p incant_editor --features incant_editor/custom-protocol,incant_editor/play-probe,incant_editor/agent-probe",
+      "passed": 164,
+      "failed": 0,
+      "ignored": 1,
+      "groups": 11,
+      "exit_code": 0
+    },
+    "clippy": {
+      "command": "./tools/cargo clippy --locked --profile ci -j2 -p incant_script -p incant_agent_native -p incant_editor --features incant_editor/custom-protocol,incant_editor/play-probe,incant_editor/agent-probe --all-targets -- -D warnings",
+      "exit_code": 0
+    },
+    "logs": {
+      "tests": {
+        "path": "/tmp/incant-editor-main101-tests.log",
+        "sha256": "1d459a52368cb012c7da696de5c6766ac1ef34e361f5d61db82474e19bc065e0"
+      },
+      "clippy": {
+        "path": "/tmp/incant-editor-main101-clippy.log",
+        "sha256": "3992c1769f96f857005d2c2ba20650d0694551bc7c0d717fdb47845b4be9d3ca"
+      }
+    },
+    "generated_checks": [
+      "tools/generate_wasm_sdk.py --check",
+      "tools/build_bridge.mjs --check",
+      "tools/generate_conventions.py --check",
+      "git diff --check"
+    ],
+    "historical_command_error": "Initial bridge verification used nonexistent tools/generate_bridge.py; corrected to the actual Node build_bridge.mjs check, which passed. No repository source error.",
+    "scope": "Additive reviewed Wasm logging integrated with editor/agent/script source. UI source unchanged. This is scoped CPU verification; native0048 remains on its separately bound immutable bb1b517 build."
   }
 }
