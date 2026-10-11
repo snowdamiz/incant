@@ -102,7 +102,9 @@ export function AgentComposer({
           spellCheck={false}
           autoComplete="off"
           autoCapitalize="off"
-          style={{ width: `calc(${Math.min(Math.max(model.length, 4), 32)}ch + 10px)` }}
+          // 10px of padding plus the 2px WebKit's text field needs past its text (measured in 0048);
+          // with only the padding, the native editor ellipsizes every model name.
+          style={{ width: `calc(${Math.min(Math.max(model.length, 4), 32)}ch + 12px)` }}
           onChange={(event) => onModel(event.target.value)}
           onBlur={commitModel}
           onKeyDown={(event) => {

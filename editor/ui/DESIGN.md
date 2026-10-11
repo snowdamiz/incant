@@ -165,7 +165,8 @@ not shown.
 naming the target ("Harbor · Player Camera", or "Choose scene") that opens one radio list of
 every scene and camera. A single scene and a scene's only camera are used without asking. Play
 without a needed choice opens the list, and choosing starts Play. Choices are remembered per
-scene for the editor session.
+scene for the editor session. The button hides while a session exists; if it had focus, focus
+moves to Play.
 
 **Notice.** A failed session's message is one strip under the header, the engine's words
 after "Play could not start." or "Play stopped at tick 812.", with Dismiss; an unreadable

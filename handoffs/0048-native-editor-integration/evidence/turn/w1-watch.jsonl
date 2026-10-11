@@ -1,0 +1,8 @@
+{"t": 0.25, "header": "Agent  , Working…", "stop": true, "send": false, "allow": null, "deny": false, "buttons": ["Agent\n\n, Working…", "Stop", "Change allowance"], "text_chars": 370, "shot": "w1-01.png"}
+{"t": 1.25, "header": "Agent  , Working…", "stop": true, "send": false, "allow": null, "deny": false, "buttons": ["Agent\n\n, Working…", "Stop", "Change allowance"], "text_chars": 370}
+{"t": 1.93, "header": "Agent  , Working…", "stop": true, "send": false, "allow": null, "deny": false, "buttons": ["Agent\n\n, Working…", "Stop", "Change allowance"], "text_chars": 370}
+{"t": 2.61, "header": "Agent  , Working…", "stop": true, "send": false, "allow": null, "deny": false, "buttons": ["Agent\n\n, Working…", "Stop", "Change allowance"], "text_chars": 370}
+{"t": 3.27, "header": "Agent  , Working…", "stop": true, "send": false, "allow": null, "deny": false, "buttons": ["Agent\n\n, Working…", "Stop", "Change allowance"], "text_chars": 370}
+{"t": 3.94, "header": "Agent  , Working…", "stop": true, "send": false, "allow": null, "deny": false, "buttons": ["Agent\n\n, Working…", "Stop", "Change allowance"], "text_chars": 370}
+{"t": 4.7, "header": "Agent  , Working…", "stop": true, "send": false, "allow": null, "deny": false, "buttons": ["Agent\n\n, Working…", "Stop", "Change allowance"], "text_chars": 370}
+{"t": 5.37, "header": "Agent  , Needs approval", "stop": true, "send": false, "allow": {"title": "Allow", "enabled": true}, "deny": true, "buttons": ["Agent\n\n, Needs approval", "Exact arguments 11 bytes", "Deny", "Allow", "Stop", "Change allowance"], "text_chars": 243, "shot": "w1-02.png"}
