@@ -87,3 +87,22 @@ safe connecting metadata, pending cache readiness and malformed responses. All 1
 transport/resolve/AgentPanel tests, strict TypeScript, generated bridge equivalence
 and diff checks pass for this separate follow-up. No native browser, live account,
 UI layout or phase gate evidence is implied.
+
+Review of `51737ab` found that a session refresh could restore readiness while the
+hint's authoritative provider read was still pending. The original provider tests
+resolved that read before refreshing the session. Three deferred-read regressions
+reproduced the missing barrier for send, approval and overlapping provider reads.
+The bridge now retains only the latest provider read's pending generation/sequence;
+session reads during that interval can update worker metadata but cannot verify
+send or approval readiness. Publishing even unchanged account metadata invalidates
+session reads begun before provider recovery, requiring a subsequent session read.
+Older provider completions cannot release the current barrier, and superseded
+pending reads do not block readiness after the latest read and session recover.
+No worker cancellation or transcript clearing is introduced.
+
+Twenty provider tests now cover this ordering, post-provider session fencing,
+current failure recovery and obsolete reply/failure completion. All 108 combined
+transport/resolve/AgentPanel tests pass, including the original action failure
+receipt tests. Strict TypeScript, generated bridge equivalence and diff checks
+pass. This follow-up is mock transport evidence only; it adds no native account,
+browser or live-provider validation.
