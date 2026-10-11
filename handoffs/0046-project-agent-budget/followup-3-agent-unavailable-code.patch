@@ -4,13 +4,13 @@ index c92a65e..3aff66b 100644
 +++ b/editor/bridge/contract.ts
 @@ -238,10 +238,17 @@ export type ProviderState = (
  };
- 
+
  export type AgentState =
 -  | { readonly status: 'unavailable'; readonly reason: string }
 +  | { readonly status: 'unavailable'; readonly reason: string; readonly code?: AgentUnavailableCode }
    | { readonly status: 'idle' }
    | { readonly status: 'running'; readonly conversation: string };
- 
+
 +/**
 + * Why the agent cannot take a request, for hosts that say. `refreshing` is a short hold
 + * while the session is re-read after an account, allowance or history change. Older and
@@ -28,7 +28,7 @@ index 74d9b66..0c85944 100644
 @@ -392,6 +392,26 @@ describe('native project agent budget', () => {
      expect(JSON.stringify(bridge.getSnapshot())).not.toContain('secret');
    });
- 
+
 +  it('names why the agent is held: refreshing through a cap edit, exhausted after it, signed out', async () => {
 +    let engine = project(100);
 +    let current = session(100, 40);
@@ -141,13 +141,13 @@ index 014056d..95af133 100644
    const allowance = allowanceOf(snapshot);
    return allowance !== null && !allowance.exhausted;
 diff --git a/editor/ui/src/components/agent/AgentAllowance.test.tsx b/editor/ui/src/components/agent/AgentAllowance.test.tsx
-index cd8e20b..cc5bc01 100644
+index 642c791..6ad1e5a 100644
 --- a/editor/ui/src/components/agent/AgentAllowance.test.tsx
 +++ b/editor/ui/src/components/agent/AgentAllowance.test.tsx
 @@ -512,6 +512,17 @@ describe('While the agent applies a change', () => {
      expect(host.commands).toEqual([{ type: 'agent.budget.set', maxTokens: 300_000 }]);
    });
- 
+
 +  it('believes a host that names why the agent is unavailable', () => {
 +    const reason = 'The native agent session has not been read yet.';
 +    const host = allowanceHost({ budget: 250_000, session: session(6_532, 250_000), agent: { status: 'unavailable', reason, code: 'unread' } });
@@ -161,4 +161,4 @@ index cd8e20b..cc5bc01 100644
 +
    it('keeps a successful save when the session refresh after it fails', async () => {
      const refresh = vi.fn(() => Promise.resolve());
-     const host = allowanceHost({ budget: 100_000, agent: { status: 'unavailable', reason: EXHAUSTED_REASON }, session: session(100_000, 100_000) }, { refreshAgent: refresh });
+     const reply = deferred<BridgeResult>();

@@ -29,10 +29,10 @@ index 6ab8190..94e3358 100644
 +++ b/editor/ui/src/shell/ShellContext.tsx
 @@ -57,7 +57,7 @@ export interface Shell {
  const ShellContext = createContext<Shell | null>(null);
- 
+
  /** Plain-language failure prefixes; other commands keep their command name. */
 -const FAILURE_LABEL: Partial<Record<EditorCommand['type'], string>> = { 'asset.import': 'Import failed' };
 +const FAILURE_LABEL: Partial<Record<EditorCommand['type'], string>> = { 'asset.import': 'Import failed', 'agent.budget.set': 'Token allowance not saved' };
- 
+
  const NO_CAPABILITIES = readCapabilities([]);
  const noopSubscribe = () => () => undefined;

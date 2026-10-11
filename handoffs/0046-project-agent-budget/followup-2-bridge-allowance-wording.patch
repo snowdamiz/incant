@@ -95,7 +95,7 @@ index e17de4d..490f3e2 100644
 --- a/editor/bridge/native.ts
 +++ b/editor/bridge/native.ts
 @@ -349,7 +349,7 @@ function fields(value: unknown, keys: readonly string[]): value is Record<string
- 
+
  type ProjectAgentBudget = { status: 'unsupported' } | { status: 'ready'; maxTokens: number }
    | { status: 'error'; error: BridgeError };
 -const budgetInvalidResponse = (): BridgeError => ({ code: 'engine.invalid-response', message: 'The native project agent token cap is invalid. Refresh the project to retry.' });
