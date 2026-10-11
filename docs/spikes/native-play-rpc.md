@@ -73,8 +73,10 @@ fail cooking rather than silently running through the legacy path.
 
 ## Verification
 
-The main79-based implementation passes these executable checks (actualmain80
-integration and hosted checks remain pending):
+The implementation and its clean integration with verified main80
+(`611d867bee1ff3c8f33da8c221c82867408e96c6`) pass these executable checks.
+Integrated source was frozen at `b7514055e9913af62065f4789002870cdc07efba`;
+hosted checks remain pending publication within the merge queue:
 
 - Eight native CLI regression tests and five retained RPC tests cover motion,
   input, selected state, authoring isolation, rejection/retry, terminal failure
@@ -83,8 +85,8 @@ integration and hosted checks remain pending):
 - `native-project-play.py --typescript --rpc`: existing six real CLI controls
   plus four actual RPC processes on the same private source-deleted player,
   including custom motion, committed Unicode logs, failure and restart.
-- All-target headless release Clippy, 90 Python/12 Node tool tests and conventions
-  pass. Independent source review found the old physics probe consumer; that
+- All-target headless release Clippy and conventions pass on the integrated
+  source. The unchanged tooling passed 90 Python/12 Node tests before integration. Independent source review found the old physics probe consumer; that
   finding is resolved by the passing migrated real-process probe.
 
 [Exact source/log hashes and process results](evidence/native-play-rpc-local.json).
