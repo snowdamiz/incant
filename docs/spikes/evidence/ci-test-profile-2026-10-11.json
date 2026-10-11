@@ -3330,5 +3330,157 @@
       "tools/tests/test_ci_profile.py": "2378565e5fb3a3bca5a5883497c8446e6b46b734d24e012bf7aa6160c054781a"
     },
     "subsequent_workflow_guard": "After this frozen command-chain validation, docs selection additionally requires a successful classifier job. Test/profile/probe commands unchanged; 21 focused selector tests and actionlint pass."
+  },
+  "final_integration": {
+    "source_head": "22c0e34",
+    "base_main": "aef98042ac42f2bed5cf7d89a2c34ff9d19cc5d5",
+    "included_import_head": "9e0976c8348dad5fe9b40f1366065b33e8e501a4",
+    "included_original_plan8": "638bf8f409c96842f07c6cb7f1434123aecfaee6",
+    "passed": true,
+    "ordinary_tests": 544,
+    "ui_tests": 534,
+    "python_tools_tests": 86,
+    "source_preservation": {
+      "editor": "Byte-identical to reviewed import head",
+      "crates_and_lock": "Byte-identical to verified main67"
+    },
+    "steps": [
+      {
+        "name": "ordinary",
+        "args": [
+          "./tools/cargo",
+          "test",
+          "--workspace",
+          "--profile",
+          "ci",
+          "--locked",
+          "--features",
+          "incant_audio_runtime/scene",
+          "-j2"
+        ],
+        "exit_code": 0,
+        "seconds": 92.53042183298385,
+        "sha256": "4f3f1c49d40ac158ffeb719dbe566e8f09c9dc24e5a9aea3a7d0fd91bcc6a9d7"
+      },
+      {
+        "name": "clippy",
+        "args": [
+          "./tools/cargo",
+          "clippy",
+          "--workspace",
+          "--all-targets",
+          "--profile",
+          "ci",
+          "--locked",
+          "--features",
+          "incant_audio_runtime/scene",
+          "-j2",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "exit_code": 0,
+        "seconds": 67.26139229198452,
+        "sha256": "43a3b4e4a91c200ee5c2f021dd6970b54309f7be3d26fb6179a31270ef3a691c"
+      },
+      {
+        "name": "ui",
+        "args": [
+          "npm",
+          "test",
+          "--workspace",
+          "editor/ui"
+        ],
+        "exit_code": 0,
+        "seconds": 10.98744529200485,
+        "sha256": "efb3ff144c3ee127b265621c6e04d9df4670d2d4c98fb48f8cb85a2daff5a3b8"
+      },
+      {
+        "name": "typecheck",
+        "args": [
+          "npm",
+          "exec",
+          "--workspace",
+          "editor/ui",
+          "--",
+          "tsc",
+          "--noEmit"
+        ],
+        "exit_code": 0,
+        "seconds": 0.4416217500111088,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "build",
+        "args": [
+          "npm",
+          "run",
+          "build",
+          "--workspace",
+          "editor/ui"
+        ],
+        "exit_code": 0,
+        "seconds": 4.6959652499936055,
+        "sha256": "f0cb1e40bb890270c7edbc0e0c09563cb770f48f6d0bbb99f0a4db9abf94a31f"
+      },
+      {
+        "name": "bridge",
+        "args": [
+          "node",
+          "tools/build_bridge.mjs",
+          "--check"
+        ],
+        "exit_code": 0,
+        "seconds": 0.07780462500522844,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "tools",
+        "args": [
+          "python3",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tools/tests",
+          "-v"
+        ],
+        "exit_code": 0,
+        "seconds": 3.779399042017758,
+        "sha256": "badff4da922574eb01efad7b7ed45727c70e5c5b5bb5465779f51b8252725b54"
+      },
+      {
+        "name": "conventions",
+        "args": [
+          "python3",
+          "tools/generate_conventions.py",
+          "--check"
+        ],
+        "exit_code": 0,
+        "seconds": 0.043795624980702996,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "workflow",
+        "args": [
+          "/tmp/incant-actionlint/actionlint"
+        ],
+        "exit_code": 0,
+        "seconds": 0.37165825002011843,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "diff",
+        "args": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exit_code": 0,
+        "seconds": 0.011674000008497387,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "scope": "CPU-only final integrated validation after the frozen main64 full profile chain; hosted final-head shipping/GPU checks remain required before merge."
   }
 }

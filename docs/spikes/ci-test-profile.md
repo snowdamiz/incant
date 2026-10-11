@@ -88,7 +88,11 @@ tracked/input hashes stayed unchanged. This was functional validation with a
 separately cloned dependency target and CPU prefill during a native-review GPU
 hold; its wall time is **not** another matched performance sample.
 
-The later main/import union is validated separately before publication. The
+The later main67/import union `22c0e34` separately passed 544 ordinary tests,
+workspace all-target CI-profile Clippy, 534 UI tests, strict TypeScript/build/bridge,
+86 tool tests, formatting, conventions and actionlint. Its editor sources exactly
+match reviewed PR72; crates and Cargo.lock exactly match verified main67. Full
+hosted final-head shipping/GPU checks remain required before merge. The
 selector's failure-after-output hardening changes only workflow predicates and
 has its own failure-matrix test. Evidence retains the full shipping reports,
 command/log hashes, exact tested profile inputs and safe cleanup-boundary check.
