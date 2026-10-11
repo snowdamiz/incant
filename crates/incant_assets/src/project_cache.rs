@@ -10,6 +10,7 @@ pub enum CacheKind {
     Models,
     Textures,
     Audio,
+    Fonts,
 }
 impl CacheKind {
     pub(crate) fn directory(self) -> &'static str {
@@ -17,6 +18,7 @@ impl CacheKind {
             Self::Models => "models",
             Self::Textures => "textures",
             Self::Audio => "audio",
+            Self::Fonts => "fonts",
         }
     }
 }

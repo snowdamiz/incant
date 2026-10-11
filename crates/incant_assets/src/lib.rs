@@ -5,6 +5,7 @@ mod audio_cook;
 mod cache;
 #[cfg_attr(target_arch = "wasm32", path = "fbx_browser.rs")]
 mod fbx;
+mod font_cook;
 mod gltf_import;
 mod ktx;
 mod material;
@@ -21,6 +22,11 @@ mod texture_cache;
 
 pub use audio::{AUDIO_CHUNK_FRAMES, AudioMetadata, CookedAudio, MAX_AUDIO_PCM_BYTES, load_audio};
 pub use audio_cook::cook_audio;
+pub use font_cook::cook_font;
+pub use incant_assets_runtime::{CookedFont, FontMetadata, MAX_FONT_BYTES};
+pub fn load_font(cache: &std::path::Path, fingerprint: &str) -> Result<CookedFont> {
+    incant_assets_runtime::load_font(cache, fingerprint).map_err(Into::into)
+}
 pub use cache::{CookedModel, ModelMetadata, cook_fbx, cook_gltf, cook_model, load_model};
 pub use fbx::import_fbx;
 pub use gltf_import::{ImportedModel, ModelNode, import_gltf};

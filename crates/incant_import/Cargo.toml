@@ -15,5 +15,6 @@ schemars = { workspace = true }
 thiserror = { workspace = true }
 
 [dev-dependencies]
+incant_text.workspace = true
 tempfile = "3"
 image = { version = "=0.25.10", default-features = false, features = ["png"] }
