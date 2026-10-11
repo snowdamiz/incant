@@ -20,31 +20,67 @@ enum Pass {
     Sprites,
     Display,
 }
-#[derive(Resource)]
+#[cfg_attr(not(target_arch = "wasm32"), derive(Resource))]
 pub(crate) struct PreparedFrame {
     pub diagnostics: DiagnosticDraw,
     pub models: Option<ModelDraw>,
     pub sprites: Option<crate::sprites::SpriteDraw>,
     pub output: OutputDraw,
 }
-#[derive(Resource)]
+#[cfg_attr(not(target_arch = "wasm32"), derive(Resource))]
 struct Encoder(wgpu::CommandEncoder);
+#[cfg(not(target_arch = "wasm32"))]
+type FrameInput<'w> = Res<'w, PreparedFrame>;
+#[cfg(target_arch = "wasm32")]
+type FrameInput<'w> = NonSend<'w, PreparedFrame>;
+#[cfg(not(target_arch = "wasm32"))]
+type EncoderInput<'w> = ResMut<'w, Encoder>;
+#[cfg(target_arch = "wasm32")]
+type EncoderInput<'w> = NonSendMut<'w, Encoder>;
 struct GraphState {
     world: World,
     schedule: Schedule,
 }
-pub(crate) struct FrameGraph(Mutex<GraphState>);
+pub(crate) struct FrameGraph(
+    Mutex<GraphState>,
+    // World can move between threads even when it contains NonSend data. The
+    // browser graph itself must stay with the thread that owns its WebGPU handles.
+    #[cfg(target_arch = "wasm32")] std::marker::PhantomData<std::rc::Rc<()>>,
+);
+// These compile-time checks are ambiguous if the browser graph becomes Send or
+// Sync. They exercise the actual wasm type even in a library-only cross-check.
+#[cfg(target_arch = "wasm32")]
+const _: fn() = || {
+    trait AmbiguousIfSend<A> {
+        fn check() {}
+    }
+    struct SendMarker;
+    impl<T: ?Sized> AmbiguousIfSend<()> for T {}
+    impl<T: ?Sized + Send> AmbiguousIfSend<SendMarker> for T {}
+    let _ = <FrameGraph as AmbiguousIfSend<_>>::check;
+    trait AmbiguousIfSync<A> {
+        fn check() {}
+    }
+    struct SyncMarker;
+    impl<T: ?Sized> AmbiguousIfSync<()> for T {}
+    impl<T: ?Sized + Sync> AmbiguousIfSync<SyncMarker> for T {}
+    let _ = <FrameGraph as AmbiguousIfSync<_>>::check;
+};
+fn pass_schedule() -> Schedule {
+    let mut schedule = Schedule::default();
+    schedule.set_executor(SingleThreadedExecutor::new());
+    schedule.configure_sets((
+        Pass::InitializeScene.before(Pass::Models),
+        Pass::AssignLights.before(Pass::Models),
+        Pass::Shadows.before(Pass::Models),
+        Pass::Models.before(Pass::Sprites),
+        Pass::Sprites.before(Pass::Display),
+    ));
+    schedule
+}
 impl Default for FrameGraph {
     fn default() -> Self {
-        let mut schedule = Schedule::default();
-        schedule.set_executor(SingleThreadedExecutor::new());
-        schedule.configure_sets((
-            Pass::InitializeScene.before(Pass::Models),
-            Pass::AssignLights.before(Pass::Models),
-            Pass::Shadows.before(Pass::Models),
-            Pass::Models.before(Pass::Sprites),
-            Pass::Sprites.before(Pass::Display),
-        ));
+        let mut schedule = pass_schedule();
         // Registration order is deliberately unrelated to dependency order.
         schedule.add_systems((
             display.in_set(Pass::Display),
@@ -54,11 +90,39 @@ impl Default for FrameGraph {
             assign_lights.in_set(Pass::AssignLights),
             initialize_scene.in_set(Pass::InitializeScene),
         ));
-        Self(Mutex::new(GraphState {
-            world: World::new(),
-            schedule,
-        }))
+        Self(
+            Mutex::new(GraphState {
+                world: World::new(),
+                schedule,
+            }),
+            #[cfg(target_arch = "wasm32")]
+            std::marker::PhantomData,
+        )
     }
+}
+#[cfg(not(target_arch = "wasm32"))]
+fn insert_frame(world: &mut World, frame: PreparedFrame, encoder: Encoder) {
+    world.insert_resource(frame);
+    world.insert_resource(encoder);
+}
+#[cfg(target_arch = "wasm32")]
+fn insert_frame(world: &mut World, frame: PreparedFrame, encoder: Encoder) {
+    world.insert_non_send(frame);
+    world.insert_non_send(encoder);
+}
+#[cfg(not(target_arch = "wasm32"))]
+fn take_encoder(world: &mut World) -> Encoder {
+    world.remove_resource::<PreparedFrame>();
+    world
+        .remove_resource::<Encoder>()
+        .expect("graph owns encoder")
+}
+#[cfg(target_arch = "wasm32")]
+fn take_encoder(world: &mut World) -> Encoder {
+    world.remove_non_send::<PreparedFrame>();
+    world
+        .remove_non_send::<Encoder>()
+        .expect("graph owns encoder")
 }
 impl FrameGraph {
     pub fn encode(
@@ -71,26 +135,26 @@ impl FrameGraph {
             .lock()
             .map_err(|_| ResourceError::CacheLock("frame graph"))?;
         let GraphState { world, schedule } = &mut *state;
-        world.insert_resource(frame);
-        world.insert_resource(Encoder(device.create_command_encoder(
-            &wgpu::CommandEncoderDescriptor {
-                label: Some("Incant frame graph"),
-            },
-        )));
+        insert_frame(
+            world,
+            frame,
+            Encoder(
+                device.create_command_encoder(&wgpu::CommandEncoderDescriptor {
+                    label: Some("Incant frame graph"),
+                }),
+            ),
+        );
         schedule.run(world);
         // No frame handles remain in the scheduler after encoding. Wgpu retains
         // the referenced GPU resources in the returned command buffer instead.
-        world.remove_resource::<PreparedFrame>();
-        let encoder = world
-            .remove_resource::<Encoder>()
-            .expect("graph owns encoder");
+        let encoder = take_encoder(world);
         Ok(encoder.0.finish())
     }
 }
-fn initialize_scene(frame: Res<PreparedFrame>, mut encoder: ResMut<Encoder>) {
+fn initialize_scene(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
     frame.diagnostics.encode(&mut encoder.0);
 }
-fn assign_lights(frame: Res<PreparedFrame>, mut encoder: ResMut<Encoder>) {
+fn assign_lights(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
     if let Some(pass) = frame
         .models
         .as_ref()
@@ -99,23 +163,26 @@ fn assign_lights(frame: Res<PreparedFrame>, mut encoder: ResMut<Encoder>) {
         pass.encode(&mut encoder.0);
     }
 }
-fn models(frame: Res<PreparedFrame>, mut encoder: ResMut<Encoder>) {
+fn models(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
     if let Some(pass) = &frame.models {
         pass.encode(&mut encoder.0);
     }
 }
-fn display(frame: Res<PreparedFrame>, mut encoder: ResMut<Encoder>) {
+fn display(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
     frame.output.encode(&mut encoder.0);
 }
 
-fn shadows(frame: Res<PreparedFrame>, mut encoder: ResMut<Encoder>) {
+fn shadows(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
     if let Some(pass) = &frame.models {
         pass.shadows.encode(&mut encoder.0);
     }
 }
 
-fn sprites(frame: Res<PreparedFrame>, mut encoder: ResMut<Encoder>) {
+fn sprites(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
     if let Some(pass) = &frame.sprites {
         pass.encode(&mut encoder.0);
     }
 }
+#[cfg(test)]
+#[path = "../tests/graph_ownership/mod.rs"]
+mod ownership_tests;
