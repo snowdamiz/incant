@@ -643,6 +643,7 @@ class NativeBridge {
     };
     providerGeneration = 0;
     providerReadSequence = 0;
+    providerReadPending;
     agentSession;
     agentVerified = false;
     agentError;
@@ -711,9 +712,12 @@ class NativeBridge {
         this.listeners.forEach((fn)=>fn());
     }
     updateProvider(provider) {
+        const pendingRead = this.providerReadPending?.generation === this.providerGeneration;
         ++this.providerGeneration;
+        this.providerReadPending = undefined;
         const previous = this.provider;
-        if (previous.status !== provider.status || previous.activeAccount !== provider.activeAccount || previous.status === 'connected' && provider.status === 'connected' && (previous.accountLabel !== provider.accountLabel || previous.method !== provider.method)) {
+        // Even an unchanged account must invalidate session reads begun before its authoritative read completed.
+        if (pendingRead || previous.status !== provider.status || previous.activeAccount !== provider.activeAccount || previous.status === 'connected' && provider.status === 'connected' && (previous.accountLabel !== provider.accountLabel || previous.method !== provider.method)) {
             ++this.agentGeneration;
             this.agentVerified = false;
         }
@@ -730,9 +734,6 @@ class NativeBridge {
         try {
             if (listen) await listen("incant:provider-changed", ()=>{
                 // Events are hints, including null/late payloads. Only a current native read is authoritative.
-                ++this.agentGeneration;
-                this.agentVerified = false;
-                this.publishAgent();
                 void this.refreshProvider().catch(()=>console.error('Native provider update could not be published.'));
             });
             await this.refreshProvider();
@@ -748,17 +749,24 @@ class NativeBridge {
         if (generation !== this.providerGeneration) return {
             ok: true
         };
-        const sequence = ++this.providerReadSequence;
+        const pending = {
+            generation,
+            sequence: ++this.providerReadSequence
+        };
+        this.providerReadPending = pending;
+        ++this.agentGeneration;
+        this.agentVerified = false;
+        this.publishAgent();
         try {
             const provider = await this.invoke('provider_read');
             if (!validProviderState(provider)) throw providerTransportError();
-            if (generation === this.providerGeneration && sequence === this.providerReadSequence) this.updateProvider(provider);
+            if (generation === this.providerGeneration && pending.sequence === this.providerReadSequence) this.updateProvider(provider);
             return {
                 ok: true
             };
         } catch  {
             const error = providerTransportError();
-            if (generation === this.providerGeneration && sequence === this.providerReadSequence) this.updateProvider({
+            if (generation === this.providerGeneration && pending.sequence === this.providerReadSequence) this.updateProvider({
                 status: 'error',
                 provider: 'openai',
                 error
@@ -767,6 +775,9 @@ class NativeBridge {
                 ok: false,
                 error
             };
+        } finally{
+            // Only the latest read can release its barrier; obsolete reads may remain in flight.
+            if (this.providerReadPending === pending) this.providerReadPending = undefined;
         }
     }
     async startWindowUpdates(listen) {
@@ -818,6 +829,9 @@ class NativeBridge {
     agentNeedsPoll() {
         return this.agentStarting || this.agentReserved !== undefined || this.agentSession?.worker_running === true || AGENT_ACTIVE.includes(this.agentSession?.turns.at(-1)?.status ?? '');
     }
+    providerIsPending() {
+        return this.providerPending > 0 || this.providerReadPending?.generation === this.providerGeneration;
+    }
     agentState() {
         if (this.agentNeedsPoll()) return {
             status: 'running',
@@ -827,7 +841,7 @@ class NativeBridge {
             status: 'unavailable',
             reason: 'Wait for the project to load.'
         };
-        if (this.providerPending || this.provider.status !== 'connected') return {
+        if (this.providerIsPending() || this.provider.status !== 'connected') return {
             status: 'unavailable',
             reason: 'Connect an OpenAI account to use the agent.'
         };
@@ -924,8 +938,9 @@ class NativeBridge {
                 for (const key of this.agentDecisions)if (key !== `${pending?.turn}:${pending?.id}`) this.agentDecisions.delete(key);
             }
             if (this.agentReserved !== undefined && this.agentSession.turns.at(-1)?.id !== undefined && this.agentSession.turns.at(-1).id >= this.agentReserved) this.agentReserved = undefined;
-            const changed = this.agentError !== undefined || updated || !this.agentVerified;
-            this.agentVerified = true;
+            const verified = !this.providerIsPending();
+            const changed = this.agentError !== undefined || updated || this.agentVerified !== verified;
+            this.agentVerified = verified;
             this.agentError = undefined;
             if (changed) this.publishAgent();
             // Text chunks and unchanged versions never clone/re-read the project.
@@ -958,7 +973,7 @@ class NativeBridge {
         const current = this.agentSession?.turns.at(-1);
         if (request.type === 'agent.send') {
             if (this.agentNeedsPoll()) return reject('agent.busy', 'Wait for the current agent worker to stop.');
-            if (!this.read || !this.agentSession || !this.agentVerified || this.agentError || this.providerPending || this.provider.status !== 'connected') {
+            if (!this.read || !this.agentSession || !this.agentVerified || this.agentError || this.providerIsPending() || this.provider.status !== 'connected') {
                 const state = this.agentState();
                 return reject('agent.unavailable', state.status === 'unavailable' ? state.reason : 'The native agent is unavailable.');
             }
@@ -1002,7 +1017,7 @@ class NativeBridge {
             if (current?.status === 'stopping' || this.agentCancelling.has(request.turnId)) return reject('agent.busy', 'This agent turn is already stopping.');
             this.agentCancelling.add(request.turnId);
         } else {
-            if (!this.read || this.providerPending || this.provider.status !== 'connected' || this.agentError || !this.agentSession || !this.agentVerified) return reject('agent.unavailable', 'Connect an OpenAI account and refresh the native session before deciding an approval.');
+            if (!this.read || this.providerIsPending() || this.provider.status !== 'connected' || this.agentError || !this.agentSession || !this.agentVerified) return reject('agent.unavailable', 'Connect an OpenAI account and refresh the native session before deciding an approval.');
             if (!sequence(request.approvalId) || typeof request.approved !== 'boolean' || current?.status !== 'awaiting_approval' || current.pending?.turn !== request.turnId || current.pending.id !== request.approvalId || this.agentCancelling.has(request.turnId) || this.agentDecisions.has(`${request.turnId}:${request.approvalId}`)) return reject('agent.stale-approval', 'This agent approval is no longer pending.');
             this.agentDecisions.add(`${request.turnId}:${request.approvalId}`);
         }
