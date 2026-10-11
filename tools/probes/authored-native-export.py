@@ -31,11 +31,11 @@ def main():
         require(result.returncode == 0, result.stderr[-8000:])
         return result
     def write(path, value):
-        path.write_text(json.dumps(value, indent=2) + '\n')
+        path.write_text(json.dumps(value, indent=2) + '\n', encoding='utf-8')
     def digest(path):
         return hashlib.sha256(path.read_bytes()).hexdigest()
     if args.author:
-        document = json.loads(project.read_text())
+        document = json.loads(project.read_text(encoding='utf-8'))
         scene = next(iter(document['scenes']))
         rate = document['settings']['tick_rate']
         rpc = Rpc(binary, project, journal)
@@ -59,7 +59,7 @@ def main():
             require(abs(value['untrusted_runtime_data'][0] - expected) < 1e-9, 'Wrong Play result')
             require(rpc.call('project.read') == authored, 'Play mutated authoring')
             require(rpc.call('project.save')['saved'], 'Checkpoint was not saved')
-            require(json.loads(project.read_text()) == authored['project'], 'Checkpoint differs')
+            require(json.loads(project.read_text(encoding='utf-8')) == authored['project'], 'Checkpoint differs')
         finally:
             rpc.close()
         rpc = Rpc(binary, project, journal)
@@ -78,7 +78,7 @@ def main():
     inputs.mkdir()
     execute([str(binary), 'init', str(project), '--entities', '0'])
     execute([sys.executable, str(Path(__file__).resolve()), str(output), '--binary', str(binary), '--author'], timeout=180)
-    authored = json.loads((output / 'authoring-result.json').read_text())
+    authored = json.loads((output / 'authoring-result.json').read_text(encoding='utf-8'))
     report = export_native.export(project, output / 'package')
     require(report['project_sha256'] == authored['project_sha256'], 'Export used a different checkpoint')
     shutil.rmtree(inputs)  # Only this probe's newly created private fixture.
@@ -105,7 +105,7 @@ def main():
         'ticks_each': 20, 'authoring_deleted': True, 'build_storage_removed': report['build_storage_removed_before_startup'],
         'player_sha256': report['player_sha256'], 'target': report['target'],
         'limitations': ['CPU functional proof', 'No physical phone, GPU, performance or phase gate']})
-    print((output / 'result.json').read_text())
+    print((output / 'result.json').read_text(encoding='utf-8'))
 
 
 if __name__ == '__main__':

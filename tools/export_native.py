@@ -73,6 +73,12 @@ def verify_codegen(stderr, host, split):
     return flags
 
 
+def cargo_messages(path):
+    # Cargo's JSON stream is UTF-8 even on Windows with a legacy ANSI locale.
+    return [json.loads(line) for line in path.read_text(encoding='utf-8').splitlines()
+            if line.startswith('{')]
+
+
 def build(project, staging, storage, scene, camera, mode):
     rustc = Path(execute(['rustup', 'which', 'rustc']).stdout.strip())
     compiler = execute([rustc, '-vV']).stdout
@@ -106,7 +112,7 @@ def build(project, staging, storage, scene, camera, mode):
     log = (staging / 'build.log').read_text(encoding='utf-8')
     require(result.returncode == 0, 'Native player build failed; no package was published:\n' + log[-8000:])
     flags = verify_codegen(log, host, split)
-    messages = [json.loads(line) for line in (storage / 'cargo.jsonl').read_text().splitlines() if line.startswith('{')]
+    messages = cargo_messages(storage / 'cargo.jsonl')
     artifacts = [a for a in messages if a.get('reason') == 'compiler-artifact' and a['target']['name'] == NAME and a.get('executable')]
     require(len(artifacts) == 1, 'Missing unique actual player artifact')
     artifact = artifacts[0]

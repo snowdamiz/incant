@@ -101,11 +101,13 @@ python3 tools/probes/authored-native-export.py /new/proof-directory --binary tar
 
 Final integration validation passes 786 ordinary workspace tests, 75 serialized
 GPU tests, 15 optional project/window tests, workspace and optional-window Clippy,
-177 Python tests (two Windows-only cases skipped), 17 Node tests and 536 UI tests.
+178 Python tests (two Windows-only cases skipped), 17 Node tests and 536 UI tests.
 Build, strict types, generation, formatting, workflow lint and the resolved
 project/window runtime dependency guard pass. Shipping/GPU execution used frozen
-`e0fcc2f`; later main87 integration changes no production Rust, Cargo, compiler or
-export inputs. The final workspace run includes the Windows journal fixture
+`e0fcc2f`; later main87 integration changes no production Rust, Cargo or compiler inputs.
+A subsequent helper correction makes Cargo/probe JSON explicitly UTF-8; a real-byte
+legacy-Windows-codec regression verifies exact Unicode path preservation without
+rebuilding unchanged native code. The final workspace run includes the Windows journal fixture
 correction and removes nine obsolete duplicate source tests.
 
 Independent integration review caught a resurrected prerequisite workflow and

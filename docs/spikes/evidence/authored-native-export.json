@@ -26,7 +26,7 @@
   "frozen_proof_commit": "e0fcc2fa9e38dbd048e03e230f9c9b392d8b6d0b",
   "integrated_main": "a9472ceeaa20d0e0cba6c22b4783efedd09ebe57",
   "final_tested_commit": "22153651510d2c0b6bab516d7593314c6894165c",
-  "after_proof_changes": "Main87 service foundation and Windows test repair, removal of duplicate source test/obsolete workflow, and release proof wiring. Production Rust/Cargo/compiler/export inputs unchanged.",
+  "after_proof_changes": "Main87 service foundation and Windows test repair, removal of duplicate source test/obsolete workflow, release proof wiring, and explicitly UTF-8 Python Cargo/probe JSON. Production Rust/Cargo/compiler inputs unchanged; a real-byte cp1252 regression verifies the helper correction.",
   "shipping_audits": {
     "codegen": {
       "incant_runtime": {
@@ -249,14 +249,15 @@
     "workspace_gpu_ignored": 75,
     "serialized_gpu_passed": 75,
     "optional_window_project_passed": 15,
-    "python_passed": 177,
+    "python_passed": 178,
     "python_windows_skipped": 2,
     "node_passed": 17,
     "ui_passed": 536,
     "workspace_and_optional_window_clippy": "passed",
     "final_source_command_cook_clippy": "passed",
     "build_types_generators_format_workflows": "passed",
-    "resolved_project_window_runtime_dependency_guard": "passed"
+    "resolved_project_window_runtime_dependency_guard": "passed",
+    "cargo_utf8_legacy_windows_codec_regression": "passed; actual non-ASCII file bytes, default decode refused and production UTF-8 parse preserved exact path"
   },
   "source_rpc": {
     "passed": true,
@@ -290,6 +291,8 @@
     "/tmp/incant-source-export-union-ui-tests.log": "2c5eef81139408c77ba6e2c4217e1a23accf249e525ec5c3050e397c79130cf1",
     "/tmp/incant-source-export-union-proof.log": "b6eaf159e13bb6b28983b3cd02ae41f2d63d03de5d361a43503e061709345a9c",
     "/tmp/incant-source-export-final-dependencies.log": "8fb8b59848d460bff5207e3f730bfd1944dc3c1d5361d4de2cd9fcfa0b419568",
-    "/tmp/incant-source-export-union-proof/package/export.json": "a89a09ce9f3cdbe1ffc14fcef41bb3f580fc22bca279c02a92d1da3262f342da"
-  }
+    "/tmp/incant-source-export-union-proof/package/export.json": "a89a09ce9f3cdbe1ffc14fcef41bb3f580fc22bca279c02a92d1da3262f342da",
+    "/tmp/incant-source-export-final-tools-utf8.log": "4f5bb1adbd391aae9e9471bc6aef51a9be2c48db6114af8f258445b4bdd1358a"
+  },
+  "final_review": "Independent integration review accepted workflow/duplicate-test cleanup, existing-checkpoint probe wiring and UTF-8 correction; all findings resolved before publication."
 }

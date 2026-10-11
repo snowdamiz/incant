@@ -1,12 +1,15 @@
+import io
 import json
 from pathlib import Path
 import struct
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import native_package as package
+import export_native
 
 
 class NativePackageTests(unittest.TestCase):
@@ -24,6 +27,20 @@ class NativePackageTests(unittest.TestCase):
 
     def data(self):
         return package.data_package(self.root, self.producer, self.receipt, self.root / 'data', None)
+
+    def test_cargo_utf8_paths_survive_a_legacy_windows_text_encoding(self):
+        path = self.root / 'cargo.jsonl'
+        message = {'reason': 'compiler-artifact', 'executable': 'C:/Новый/世界/player.exe'}
+        path.write_bytes(('Compiling engine\n' + json.dumps(message, ensure_ascii=False) + '\n').encode('utf-8'))
+        original_open = io.open
+        def legacy_open(file, mode='r', buffering=-1, encoding=None, *args, **kwargs):
+            encoding = 'cp1252' if encoding in (None, 'locale') else encoding
+            return original_open(file, mode, buffering, encoding, *args, **kwargs)
+        # Use actual file bytes and decoding, with the Windows locale default.
+        with patch('io.open', side_effect=legacy_open):
+            with self.assertRaises(UnicodeDecodeError):
+                path.read_text(encoding='locale')
+            self.assertEqual(export_native.cargo_messages(path), [message])
 
     def test_minimal_data_is_source_free_and_startup_hashes_are_exact(self):
         (self.root / 'source.ts').write_text('DO NOT EXPORT AUTHORING SOURCE')

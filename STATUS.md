@@ -37,7 +37,7 @@ Source transactions and the shared compiler/exporter now integrate actual main87
 The public acceptance probe creates/writes/attaches, plays, saves, reopens and
 exports through the real interfaces, then reproduces motion after deleting its
 private authoring fixture. 786 workspace, 75 GPU, 15 optional window/project,
-177 Python (two Windows skips), 17 Node and 536 UI tests pass, with Clippy,
+178 Python (two Windows skips), 17 Node and 536 UI tests pass, with Clippy,
 build/generation and shipping audits. Independent review removed a resurrected
 old workflow and duplicate tests. [Evidence](docs/spikes/native-project-package.md).
 Existing full checkpoint jobs now include the export probe; hosted execution,
