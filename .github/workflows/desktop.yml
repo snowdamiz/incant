@@ -58,7 +58,7 @@ jobs:
       - run: cargo check -p incant_audio --features device --locked
       # The workspace default deliberately omits this optional player module.
       - run: cargo clippy -p incant_game_player --features native-window --all-targets --profile ci --locked -j2 -- -D warnings
-      - run: cargo test -p incant_game_player --features native-window --bin incant_game_player --profile ci --locked -j2
+      - run: cargo test -p incant_game_player --features native-window --all-targets --profile ci --locked -j2
       # Each GPU test owns a native device; serialize device lifetimes to avoid
       # hosted driver crashes when many renderer contexts initialize together.
       # Keep the same workspace feature graph as the preceding test run; scoped

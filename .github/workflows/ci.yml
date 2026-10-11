@@ -85,7 +85,7 @@ jobs:
       # The workspace default deliberately omits this optional player module.
       - run: cargo clippy -p incant_game_player --features native-window --all-targets --profile ci --locked -j2 -- -D warnings
         if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
-      - run: cargo test -p incant_game_player --features native-window --bin incant_game_player --profile ci --locked -j2
+      - run: cargo test -p incant_game_player --features native-window --all-targets --profile ci --locked -j2
         if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
       - run: cargo test --workspace --profile ci --locked --features incant_audio_runtime/scene --timings
         if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
