@@ -35,6 +35,11 @@ Credential CI has a report-only locked dependency classifier and conservative
 local-crate trigger coverage. Actual tests remain enabled; any selection policy
 requires separate review. [Scope and limits](docs/spikes/credential-impact-reporting.md).
 
+Pinned WABT provisioning now retries only bounded transient transport failures;
+all URL, checksum and archive checks remain enforced. Five local fault controls
+and all 95 tools tests pass; a real pinned macOS download succeeds. Hosted
+verification remains separate. [Evidence](docs/spikes/wabt-download-retry.md).
+
 Three Astra extra-high subagents own implementation/integration work in isolated
 checkouts. Root reviews and integrates completed slices rather than waiting for
 all workstreams to finish together. Claude sessions own editor/native appearance
