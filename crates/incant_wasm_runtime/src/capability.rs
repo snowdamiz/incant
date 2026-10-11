@@ -25,6 +25,19 @@ const _: () = {
 /// Trusted host adapter operation; all integer arguments are guest offsets/indices.
 #[derive(Clone, Copy)]
 pub enum Call {
+    Locale,
+    Localize {
+        ptr: i32,
+        len: i32,
+    },
+    ReadLocalized {
+        ptr: i32,
+        capacity: i32,
+    },
+    SetLocale {
+        ptr: i32,
+        len: i32,
+    },
     Log {
         level: i32,
         ptr: i32,
@@ -86,6 +99,7 @@ pub struct Capability {
     tick: u64,
     logs: crate::NativeLogs,
     tick_logs: crate::logging::TickLogs,
+    localization: Option<crate::localization::State>,
 }
 impl Capability {
     pub fn is_failed(&self) -> bool {
@@ -138,6 +152,9 @@ impl Capability {
         self.transferred = 0;
         self.calls = 0;
         self.tick_logs.clear();
+        self.localization = Some(crate::localization::State::new(
+            world.localization().clone(),
+        ));
         self.active = true;
         Ok(self.epoch)
     }
@@ -165,6 +182,7 @@ impl Capability {
         self.chunks.clear();
         self.commands.clear();
         self.tick_logs.clear();
+        self.localization = None;
     }
     pub fn finish(&mut self, world: &mut NativeWorld) -> Result<(), Error> {
         if !self.active {
@@ -174,6 +192,11 @@ impl Capability {
             self.abort();
             return Err(Error::Abi("rejected log transaction"));
         }
+        if self.localization.as_ref().is_some_and(|s| s.rejected) {
+            self.abort();
+            return Err(Error::Abi("rejected localization transaction"));
+        }
+        self.localization = None;
         self.active = false;
         self.input_available = false;
         self.input.clear();
@@ -259,11 +282,66 @@ impl Capability {
     /// Synchronous import; memory contains initialized guest bytes only and is
     /// borrowed for this call. No world observation/publication occurs here.
     pub fn invoke(&mut self, memory: &mut [u8], epoch: i64, call: Call) -> Result<i32, Error> {
+        // Only an authorized localization call can poison its active epoch. This
+        // wraps enter/memory/transfer checks as well as parsing/query dispatch;
+        // stale tokens and unrelated operations retain their existing semantics.
+        let authorized = self.active
+            && self.epoch == epoch
+            && matches!(
+                call,
+                Call::Locale
+                    | Call::Localize { .. }
+                    | Call::ReadLocalized { .. }
+                    | Call::SetLocale { .. }
+            );
+        let result = self.invoke_inner(memory, epoch, call);
+        if authorized
+            && result.is_err()
+            && let Some(state) = &mut self.localization
+        {
+            state.reject();
+        }
+        result
+    }
+    fn invoke_inner(&mut self, memory: &mut [u8], epoch: i64, call: Call) -> Result<i32, Error> {
         self.enter(epoch)?;
         if memory.len() > limits::MEMORY {
             return Err(Error::Limit("linear memory"));
         }
         match call {
+            Call::Locale => return self.locale_state()?.locale(),
+            Call::Localize { ptr, len } | Call::SetLocale { ptr, len } => {
+                let len =
+                    usize::try_from(len).map_err(|_| Error::Abi("localization byte length"))?;
+                let max = if matches!(call, Call::Localize { .. }) {
+                    incant_wasm_abi::LOCALIZATION_MAX_REQUEST_BYTES
+                } else {
+                    incant_wasm_abi::LOCALIZATION_MAX_SETTINGS_BYTES
+                };
+                if len > max {
+                    return Err(Error::Limit("localization frame bounds"));
+                }
+                let region = range(ptr, len, memory.len())?;
+                self.transfer(len)?;
+                if matches!(call, Call::Localize { .. }) {
+                    return self.locale_state()?.localize(&memory[region]);
+                }
+                let settings = self.locale_state()?.settings(&memory[region])?;
+                self.command(StructuralCommand::SetLocale(settings))?;
+            }
+            Call::ReadLocalized { ptr, capacity } => {
+                let len = self.locale_state()?.reply()?.len();
+                let capacity = usize::try_from(capacity)
+                    .map_err(|_| Error::Abi("localization destination capacity"))?;
+                if capacity < len {
+                    return Err(Error::Abi("localization destination capacity"));
+                }
+                range(ptr, capacity, memory.len())?;
+                let region = range(ptr, len, memory.len())?;
+                self.transfer(len)?;
+                memory[region].copy_from_slice(self.locale_state()?.reply()?);
+                return i32::try_from(len).map_err(|_| Error::Abi("localization result length"));
+            }
             Call::Log { level, ptr, len } => {
                 let result = (|| {
                     let len = usize::try_from(len).map_err(|_| Error::Abi("log byte length"))?;
@@ -418,6 +496,11 @@ impl Capability {
             }
         }
         Ok(0)
+    }
+    fn locale_state(&mut self) -> Result<&mut crate::localization::State, Error> {
+        self.localization
+            .as_mut()
+            .ok_or(Error::Abi("localization epoch unavailable"))
     }
 }
 fn range(ptr: i32, len: usize, total: usize) -> Result<std::ops::Range<usize>, Error> {
