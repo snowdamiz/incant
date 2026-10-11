@@ -37,3 +37,11 @@ The final scoped run passes 71 Rust tests; current-main integration additionally
 Exact executed checks and source/binary identities are recorded in the accompanying evidence JSON. Claude Opus 5.5 at explicitly verified Max owns the separate static geometry/material/texture rendered acceptance, including normal-map orientation. No screenshot or visual judgment by Astra substitutes for that review. Hosted desktop results and full FBX/animation/device/export gates remain separate.
 
 The PR77 platform correction passes the same 71 native tests and native/wasm release Clippy. An actual Chromium 156.0.8078.4 run executes all seven source-cooking refusal routes plus the existing 120-tick platform smoke; wasm-bindgen is pinned to 0.2.126 and GPU is disabled for this browser check. The native writer body and all three FBX conversion files are byte-identical to the original reviewed head. The Windows journal fixture now releases its persistent lock before byte inspection and verifies recovered project/revision after reopening, matching the existing atlas test pattern. [Correction identities and logs](evidence/static-fbx-platform-correction.json) preserve the original failures; hosted Windows rerun remains required.
+
+## Shared normal-map correction
+
+Claude0040 accepted static conversion and colour/reimport controls but exposed an
+existing generated-tangent handedness inversion shared with glTF. The original
+review is preserved; [the narrow correction and cache policy](generated-tangent-correction.md)
+record numerical controls and the pending separate appearance delta. Supplied
+tangents, UVs, shaders and old immutable cooked versions retain their behavior.

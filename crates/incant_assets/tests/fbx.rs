@@ -291,6 +291,7 @@ fn normal_texture_keeps_linear_role_and_generates_orthonormal_corner_tangents() 
         cooked.images[normal.image].format,
         incant_assets::TextureFormat::Rgba8Linear
     );
+    let mut front_vertices = 0;
     for mesh in &cooked.meshes {
         for vertex in &mesh.vertices {
             let n = glam::Vec3::from_slice(&vertex[3..6]);
@@ -299,8 +300,16 @@ fn normal_texture_keeps_linear_role_and_generates_orthonormal_corner_tangents() 
             assert!((n.length() - 1.).abs() < 1e-5);
             assert!((t.length() - 1.).abs() < 1e-5);
             assert_eq!(vertex[11].abs(), 1.);
+            if n == glam::Vec3::Z {
+                // Maya's front face has +U along +X. After conversion to glTF
+                // top-left UVs, normal-map +Y must still follow world +Y.
+                assert!((t - glam::Vec3::X).length() < 1e-5);
+                assert!((n.cross(t) * vertex[11] - glam::Vec3::Y).length() < 1e-5);
+                front_vertices += 1;
+            }
         }
     }
+    assert!(front_vertices >= 4);
 }
 
 #[test]

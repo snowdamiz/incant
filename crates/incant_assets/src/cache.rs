@@ -116,3 +116,7 @@ fn cook_imported(imported: ImportedModel, cache: &Path) -> Result<CookedModel> {
 pub fn load_model(cache: &Path, fingerprint: &str) -> Result<CookedModel> {
     incant_assets_runtime::load_model(cache, fingerprint).map_err(Into::into)
 }
+
+#[cfg(all(test, not(target_arch = "wasm32")))]
+#[path = "cache_tests.rs"]
+mod tests;

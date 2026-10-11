@@ -1,3 +1,10 @@
+# Current revision: bounded tangent delta
+
+The original review is complete and immutable. Read and execute only
+[tangent-delta-brief.md](tangent-delta-brief.md) for this continuation.
+Return the new tangent-delta-result.md; never overwrite original result.md.
+The historical packet below is context, not a request to rerun its full scope.
+
 # 0040 — Static FBX appearance and import affordance review
 
 This is a new, independent Claude Opus 5.5 / explicitly verified Max packet. Astra owns correctness and implementation; you own rendered appearance and visible UI review. Preserve all older handoffs. Read `docs/spikes/static-fbx-import.md` and the tests/fixture provenance before planning captures.
