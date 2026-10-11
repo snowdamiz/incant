@@ -154,7 +154,7 @@ pub fn tools() -> Vec<Value> {
         ),
         tool(
             "doc_patch",
-            "Apply an atomic, undoable transaction through the shared command bus. Use the last observed revision.",
+            "Apply an atomic, undoable transaction through the shared command bus. Use the last observed revision. Script upsert/removal changes registered metadata only, not source files. Requires approval under destructive/always modes.",
             json!(schemars::schema_for!(PatchArgs)),
         ),
         tool(
@@ -357,6 +357,8 @@ impl Agent {
                             .ok_or_else(|| AgentError::Tool("missing arguments".into()))?,
                     )
                     .map_err(|_| AgentError::Tool("invalid tool JSON".into()))?;
+                    // All document patches require destructive-mode approval,
+                    // including registered script replacement and removal.
                     let ask = matches!(self.approval, ApprovalMode::Always)
                         || (matches!(self.approval, ApprovalMode::Destructive)
                             && matches!(name, "doc_patch" | "asset_import"));
