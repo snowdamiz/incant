@@ -1,0 +1,38 @@
+{
+  "base": "d8a46756cff1e40c8637a84a4d4b56647e06f5e4",
+  "source_sha256": {
+    "crates/incant_game_runtime/src/lib.rs": "2a300b0aee8efdcfc80a4ae551a5a271afcb2ff44e25e4392a4c60c69bbc8b2c",
+    "crates/incant_game_runtime/src/core.rs": "40754dd065810852723e7869d5cf9499a8b0ac55b3e3f82f39e7928244a88dc8",
+    "crates/incant_game_runtime/src/hosted.rs": "ecd17fe52b4b94d1f8dbb7def90e10d06cfc8458a679737d6761e2bd4f645258",
+    "crates/incant_game_runtime/src/offline.rs": "1c2057c5d07b0a19b7bdfbd975b0662ed05ed06a8c140a495b362ad3b177cb83",
+    "crates/incant_game_runtime/tests/hosting.rs": "cf67c59c822698e88642c9042011cb99e5b8edf582e15fdf44ebec8082f9643f",
+    "crates/incant_script/src/lib.rs": "cc784ac1229e3190dead0334256c58557b768fe0fa9c685201b2616930bd37df",
+    "crates/incant_script/src/session.rs": "98df899cd5f99ff92c1067e52ff217acd84d4545aac5ac0c126235adf98cff58"
+  },
+  "log_sha256": {
+    "/tmp/incant-game-hosting-tests.log": "86219cd27b9999d400b278594d09dad0c3d74180e6da3027a68d92a91024d6f9",
+    "/tmp/incant-game-hosting-clippy.log": "8b927fec3c3c235c60d01aa348cd17615875d90fb75e4a3c58db234fa96c5fd8",
+    "/tmp/incant-game-hosting-device.log": "9c2dd70c1e814765340d3c075634d9520008d9ee3ee2c81e1342de9327cbbb3f",
+    "/tmp/incant-game-hosting-dependencies.log": "b594127de2072486fa17ed747450ab6fe99ff4ef05ef35ff72913b42f685f98b"
+  },
+  "tests": {
+    "new_hosting": 7,
+    "existing_game": 9,
+    "script_and_doctests": 41,
+    "total": 57
+  },
+  "verification": [
+    "release scoped tests",
+    "release all-target Clippy",
+    "macOS device feature compile only",
+    "normal and device-feature runtime dependency guards",
+    "format/conventions/whitespace"
+  ],
+  "limitations": [
+    "Trusted native trait; no arbitrary Rust sandbox",
+    "Actual prepared render adapter and GPU consumer are separate work",
+    "No device opened, no new source-free shipping executable proof",
+    "Previous a3327e3 shipping proof retains its original source/binary identity",
+    "No session save/restore or reference-device/performance/phase gate"
+  ]
+}

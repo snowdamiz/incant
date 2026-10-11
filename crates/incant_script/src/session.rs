@@ -32,22 +32,47 @@ pub struct NativeSession {
     failed: bool,
 }
 
+/// A fresh native world and validated input bindings, before guest execution.
+/// Native hosts may prepare retained bindings against this exact world. Starting
+/// preserves its identity across the move; no mutable world or tick is exposed.
+pub struct PendingNativeSession {
+    world: NativeWorld,
+    input: InputRuntime,
+    bindings: ValidatedActions,
+}
+impl PendingNativeSession {
+    pub fn new(scene: CookedScene, actions: InputActions) -> Result<Self, SessionError> {
+        let bindings = ValidatedActions::new(actions).map_err(InputError::from)?;
+        let mut input = InputRuntime::default();
+        input.map_validated(&bindings);
+        Ok(Self {
+            world: NativeWorld::new(scene),
+            input,
+            bindings,
+        })
+    }
+    pub fn world(&self) -> &NativeWorld {
+        &self.world
+    }
+    pub fn start(self, script: CompiledScript) -> Result<NativeSession, SessionError> {
+        let host = ScriptHost::new(script)?;
+        Ok(NativeSession {
+            world: self.world,
+            host,
+            input: self.input,
+            bindings: self.bindings,
+            failed: false,
+        })
+    }
+}
+
 impl NativeSession {
     pub fn new(
         scene: CookedScene,
         script: CompiledScript,
         actions: InputActions,
     ) -> Result<Self, SessionError> {
-        let bindings = ValidatedActions::new(actions).map_err(InputError::from)?;
-        let mut input = InputRuntime::default();
-        input.map_validated(&bindings);
-        Ok(Self {
-            world: NativeWorld::new(scene),
-            host: ScriptHost::new(script)?,
-            input,
-            bindings,
-            failed: false,
-        })
+        PendingNativeSession::new(scene, actions)?.start(script)
     }
 
     fn ready(&self) -> Result<(), SessionError> {

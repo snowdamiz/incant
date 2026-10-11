@@ -17,7 +17,7 @@ pub use artifact::{EmbeddedScript, ScriptMetadata};
 pub use compiled::CompiledScript;
 use incant_runtime::NativeWorld;
 use rquickjs::{Context, Function, Persistent, Runtime, Value};
-pub use session::{NativeSession, SessionError};
+pub use session::{NativeSession, PendingNativeSession, SessionError};
 use std::{
     sync::{Arc, Mutex},
     time::Duration,

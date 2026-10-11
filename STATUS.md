@@ -957,3 +957,15 @@ Typed Camera/MeshRenderer/current light/environment declarations now cook to che
 Game/audio host refusal is now covered by the composition tests and actual version-4 runner checks above. Native renderer input binding/primitive and GPU checks, explicit camera selection, spatial saves and the complete runtime/Play/pixel-placement migration remain open. No renderer/shader/UI change or performance/appearance gate is claimed.
 
 Retained native consumers can now attach an opaque world identity that survives moves/restore but rejects a different constructed world before trusting equal scene IDs/generations. Nine spatial regressions and runtime scoped Clippy pass; this is a CPU data-boundary prerequisite, not a rendered frame.
+
+## Explicit native game hosts
+
+The native game composition now retains a trusted `SceneHost` prepared against
+its exact pending world, with scheduled synchronization after every accepted
+tick and terminal cleanup on post-acceptance error or Rust unwind. Existing
+nonvisual constructors and players still refuse camera-only and manifest-only
+scenes. Seven new behavior regressions plus existing game/script coverage total
+57 passing scoped tests/doctests; release Clippy, device-feature compilation and
+normal/device authoring-free dependency guards pass. [Evidence](docs/spikes/native-game-hosting.md).
+Real render-input/GPU consumer integration and its fresh player/union proof
+remain separate; no runtime saves, rendering/performance or phase gate is claimed.
