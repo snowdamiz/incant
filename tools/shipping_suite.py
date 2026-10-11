@@ -10,6 +10,7 @@ import json
 from pathlib import Path
 import re
 import shutil
+import sys
 import time
 
 import shipping
@@ -17,6 +18,20 @@ from shipping_session import FreshSession
 from shipping_symbols import run
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def load_probe(name):
+    directory = ROOT / 'tools/probes'
+    search_path = sys.path[:]
+    try:
+        # Match direct probe execution, including trusted sibling helpers.
+        sys.path.insert(0, str(directory))
+        spec = importlib.util.spec_from_file_location(name.replace('-', '_'), directory / f'{name}.py')
+        probe = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(probe)
+        return probe
+    finally:
+        sys.path[:] = search_path
 
 
 def main():
@@ -35,11 +50,6 @@ def main():
     compiler = run([rustc, '-vV'])
     target = re.search(r'^host: (.+)$', compiler, re.MULTILINE).group(1)
     session = FreshSession(ROOT, out / 'fresh-build', rustc, target, 'packed')
-    def load_probe(name):
-        spec = importlib.util.spec_from_file_location(name.replace('-', '_'), ROOT / f'tools/probes/{name}.py')
-        probe = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(probe)
-        return probe
     script = load_probe('cooked-script')
     common = {'headless_binary': args.headless_binary, 'cook_binary': args.cook_binary}
     phases = [shipping.phases(argparse.Namespace(output=out / 'runtime', target=target, **common), session),

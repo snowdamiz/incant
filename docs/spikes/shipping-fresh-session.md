@@ -41,10 +41,15 @@ execution/refusal assertions remain. The GPU graph's same-name dependency
 versions are joined by exact rustc artifact suffix as well as package, target,
 features, profile and file hashes; ambiguous joins still fail.
 
-The extension passes 106 tool tests. Its matched standalone/shared measurement
-is pending an exclusive local CPU/GPU interval. Public authoring-tool preparation
-is outside that interval, and both runs will use the same frozen tools and source
-revision. The four-proof extension is not enabled in CI, has no measured speed
+The extension passes 107 tool tests. In its first exclusive local interval, all
+four standalone proofs passed in 529.76s. The shared command then failed before
+any Cargo build or player launch because dynamic loading did not supply the GPU
+probe's sibling-module search path. The loader correction temporarily supplies
+that path and restores it afterward; an isolated-process regression imports all
+three actual probe modules. [Initial evidence](evidence/shipping-four-proof-initial-2026-10-11.json)
+retains the failure without claiming a speedup. Both chains must be repeated on
+the same corrected frozen revision in a newly coordinated interval. Public
+authoring-tool preparation stays outside that measurement. The four-proof extension is not enabled in CI, has no measured speed
 claim and does not use a persistent shipping target cache. The older two-proof
 numbers below apply only to their recorded source revision.
 

@@ -1,6 +1,7 @@
 import copy
 import json
 from pathlib import Path
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -8,6 +9,23 @@ from unittest.mock import Mock, patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from shipping_session import FreshSession, sha
+
+
+class ShippingProbeLoaderTests(unittest.TestCase):
+    def test_real_probes_load_with_sibling_helpers_in_a_clean_process(self):
+        tools = Path(__file__).resolve().parents[1]
+        program = f'''import sys
+sys.path.insert(0, {str(tools)!r})
+from shipping_suite import load_probe
+before = sys.path[:]
+for name in ('cooked-script', 'native-scene-audio', 'native-game'):
+    probe = load_probe(name)
+    assert callable(probe.phases), name
+    assert sys.path == before, name
+'''
+        result = subprocess.run([sys.executable, '-I', '-c', program],
+                                capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
 
 
 class FreshShippingLedgerTests(unittest.TestCase):
