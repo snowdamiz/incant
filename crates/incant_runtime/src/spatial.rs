@@ -6,7 +6,7 @@ use std::collections::BTreeSet;
 
 pub use incant_types::{VisualAssetKind, VisualAssetRef};
 pub const MAX_MESH_ENTITIES: usize = 100_000;
-pub const MAX_VISUAL_ASSETS: usize = MAX_MESH_ENTITIES + 1;
+pub const MAX_VISUAL_ASSETS: usize = MAX_MESH_ENTITIES + crate::MAX_SPRITE_ENTITIES + 1;
 pub const MAX_DIRECTIONAL_LIGHTS: usize = 16;
 pub const MAX_LOCAL_LIGHTS: usize = 4096;
 pub const MAX_SHADOW_LIGHTS: usize = 4;
@@ -30,6 +30,9 @@ pub struct CookedSpatial {
     pub entity: StableId,
     pub camera: Option<Camera>,
     pub mesh: Option<NativeMeshRenderer>,
+    /// Cold binding data stays indirect so every unrelated structural command
+    /// and spatial node does not pay for a full sprite configuration.
+    pub sprite: Option<Box<crate::NativeSpriteRenderer>>,
     pub directional: Option<DirectionalLight>,
     pub point: Option<PointLight>,
     pub spot: Option<SpotLight>,
@@ -41,6 +44,7 @@ impl CookedSpatial {
             entity,
             camera: None,
             mesh: None,
+            sprite: None,
             directional: None,
             point: None,
             spot: None,
@@ -50,6 +54,7 @@ impl CookedSpatial {
     pub fn is_empty(&self) -> bool {
         self.camera.is_none()
             && self.mesh.is_none()
+            && self.sprite.is_none()
             && self.directional.is_none()
             && self.point.is_none()
             && self.spot.is_none()
@@ -83,7 +88,8 @@ pub(crate) fn validate<'a>(
 ) -> Result<(), SceneError> {
     let invalid = || SceneError::Invalid("spatial declarations, limits or references");
     let mut ids = BTreeSet::new();
-    let (mut meshes, mut directional, mut local, mut shadows, mut environments) = (0, 0, 0, 0, 0);
+    let (mut meshes, mut sprites, mut directional, mut local, mut shadows, mut environments) =
+        (0, 0, 0, 0, 0, 0);
     let asset = |id, kind| {
         assets
             .binary_search_by_key(&id, |a| a.id)
@@ -93,6 +99,7 @@ pub(crate) fn validate<'a>(
         if !exists(node.entity)
             || !ids.insert(node.entity)
             || node.is_empty()
+            || (node.mesh.is_some() && node.sprite.is_some())
             || usize::from(node.directional.is_some())
                 + usize::from(node.point.is_some())
                 + usize::from(node.spot.is_some())
@@ -106,6 +113,13 @@ pub(crate) fn validate<'a>(
         if let Some(mesh) = &node.mesh {
             meshes += 1;
             if !asset(mesh.mesh, VisualAssetKind::Model) {
+                return Err(invalid());
+            }
+        }
+        if let Some(sprite) = &node.sprite {
+            sprites += 1;
+            sprite.validate()?;
+            if !asset(sprite.texture, VisualAssetKind::Texture) {
                 return Err(invalid());
             }
         }
@@ -142,7 +156,8 @@ pub(crate) fn validate<'a>(
                 return Err(invalid());
             }
         }
-        if meshes > MAX_MESH_ENTITIES
+        if sprites > crate::MAX_SPRITE_ENTITIES
+            || meshes > MAX_MESH_ENTITIES
             || directional > MAX_DIRECTIONAL_LIGHTS
             || local > MAX_LOCAL_LIGHTS
             || shadows > MAX_SHADOW_LIGHTS

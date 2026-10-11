@@ -19,11 +19,12 @@ struct NodeBinding {
     camera: Option<incant_types::Camera>,
     light: Option<SceneLight>,
     mesh: Option<(AssetVersionId, bool)>,
+    sprite: Option<(AssetVersionId, incant_2d::SpriteRenderer)>,
 }
 /// Private double staging prevents callers from keeping an unsubmitted command
 /// buffer or a scene snapshot that aliases mutable instance/light resources.
 /// Binding changes require preparing a replacement and accepting its first frame.
-/// This path currently accepts native camera/model/light/environment inputs only.
+/// This path accepts native camera/model/sprite/light/environment inputs.
 /// Frame encoding still allocates bounded draw packets/uniform resources; this is
 /// not a claim that the complete renderer has reached its shipping budgets.
 pub struct RetainedScene {
@@ -45,15 +46,10 @@ fn environment(input: &SceneInput) -> Option<(AssetVersionId, f64, f64)> {
 impl Renderer {
     pub fn prepare_retained(&self, input: &SceneInput, camera: &str) -> Result<RetainedScene> {
         self.check_device()?;
-        if input
-            .nodes
-            .iter()
-            .any(|n| n.sprite.is_some() || n.diagnostic)
-        {
-            return Err(SceneError::Input(
-                "retained native sprites/diagnostics are not implemented",
-            )
-            .into());
+        if input.nodes.iter().any(|n| n.diagnostic) {
+            return Err(
+                SceneError::Input("retained native diagnostic cubes are not implemented").into(),
+            );
         }
         let camera_index = input
             .nodes
@@ -87,6 +83,10 @@ impl Renderer {
                     id: n.id.clone(),
                     camera: n.camera.clone(),
                     light: n.light.clone(),
+                    sprite: n
+                        .sprite
+                        .as_ref()
+                        .map(|s| (s.source.version_id(), s.sprite.clone())),
                     mesh: n
                         .mesh
                         .as_ref()
@@ -128,7 +128,11 @@ impl RetainedScene {
                     .as_ref()
                     .map(|m| (m.source.version_id(), m.cast_shadows))
                     != binding.mesh
-                || node.sprite.is_some()
+                || node
+                    .sprite
+                    .as_ref()
+                    .map(|s| (s.source.version_id(), &s.sprite))
+                    != binding.sprite.as_ref().map(|(id, s)| (*id, s))
                 || node.diagnostic
             {
                 return Err(SceneError::Input(
@@ -198,6 +202,11 @@ impl RetainedScene {
                 };
             }
         }
+        if let Some(sprites) = &mut self.staging.sprites {
+            Arc::get_mut(sprites)
+                .expect("private retained sprite ownership")
+                .stage(input)?;
+        }
         self.staging.stats.model_draw_calls = draw_calls;
         Ok(())
     }
@@ -237,6 +246,9 @@ impl RetainedScene {
         self.staging
             .lights
             .write(&renderer.queue, &self.packed_lights);
+        if let Some(sprites) = &self.staging.sprites {
+            sprites.write(&renderer.queue);
+        }
         let submission = renderer.queue.submit([commands]);
         std::mem::swap(&mut self.live, &mut self.staging);
         Ok(submission)
@@ -250,3 +262,7 @@ mod tests;
 #[cfg(test)]
 #[path = "retained_native_tests.rs"]
 mod native_tests;
+
+#[cfg(test)]
+#[path = "retained_sprite_tests.rs"]
+mod sprite_tests;

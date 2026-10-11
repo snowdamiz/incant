@@ -39,6 +39,8 @@ pub enum NativeRenderError {
     MissingCamera(StableId),
     #[error("normal textures cannot provide environment radiance")]
     EnvironmentUsage,
+    #[error("native sprite {entity:?} has invalid texture usage, region or atlas frame")]
+    Sprite { entity: StableId },
 }
 #[derive(Debug, Error)]
 pub enum SyncError<E> {
@@ -57,7 +59,8 @@ pub enum UpdateKind {
 /// Attached to exactly one world, with immutable startup assets and an explicitly
 /// selected camera. Configuration and topology rebuilds publish atomically;
 /// unchanged metadata retains every String/Arc/Vec allocation between frames.
-/// No sprites or diagnostic cubes are synthesized by this adapter. Selection is
+/// Sprite bindings resolve checked atlas metadata at configuration changes; no
+/// diagnostic cubes are synthesized by this adapter. Selection is
 /// fixed for its lifetime: removing that camera rejects sync until it is restored
 /// or the host explicitly constructs a new adapter. A published input can lag the
 /// native world after consumer rejection; synchronize again before drawing it as

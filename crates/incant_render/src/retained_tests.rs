@@ -204,3 +204,29 @@ fn motion_staging_reuses_reserved_slots_and_rejects_unsupported_bindings() {
     assert!(renderer.prepare_retained(&input, "camera").is_err());
     assert!(retained.stage(&input).is_err());
 }
+
+#[test]
+#[ignore = "requires a native GPU; run by desktop workflows"]
+fn retained_sprite_cpu_staging_allocates_nothing_and_rejects_changed_bindings() {
+    let (_, input, _) = super::sprite_tests::fixture();
+    let renderer = Renderer::headless().unwrap();
+    let mut retained = renderer
+        .prepare_retained(input.input(), input.camera_label())
+        .unwrap();
+    retained.stage(input.input()).unwrap();
+    let allocations = allocation::measured(|| {
+        for _ in 0..64 {
+            retained.stage(input.input()).unwrap();
+        }
+    });
+    assert_eq!(allocations, 0);
+    // A mismatch with frozen binding metadata requires a prepared replacement.
+    retained
+        .bindings
+        .iter_mut()
+        .find_map(|n| n.sprite.as_mut())
+        .unwrap()
+        .1
+        .layer += 1;
+    assert!(retained.stage(input.input()).is_err());
+}

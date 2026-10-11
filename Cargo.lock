@@ -3984,6 +3984,7 @@ name = "incant_render_native"
 version = "0.0.1"
 dependencies = [
  "glam 0.32.1",
+ "incant_2d",
  "incant_assets",
  "incant_assets_runtime",
  "incant_cook",
@@ -3995,6 +3996,7 @@ dependencies = [
  "serde_json",
  "tempfile",
  "thiserror 2.0.21",
+ "ulid",
 ]
 
 [[package]]
@@ -4003,6 +4005,7 @@ version = "0.0.1"
 dependencies = [
  "bevy_ecs",
  "glam 0.32.1",
+ "incant_2d",
  "incant_physics_runtime",
  "incant_types",
  "sha2 0.10.9",

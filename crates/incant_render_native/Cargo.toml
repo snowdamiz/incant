@@ -11,6 +11,8 @@ incant_render_data.workspace = true
 incant_assets_runtime = { workspace = true, features = ["visual"] }
 glam = "0.32"
 thiserror.workspace = true
+incant_2d.workspace = true
+ulid.workspace = true
 
 [dev-dependencies]
 incant_types.workspace = true

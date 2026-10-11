@@ -280,7 +280,7 @@ impl Renderer {
         }
         let sprites = self
             .sprites
-            .upload(&self.device, &self.queue, resolved.sprites)?;
+            .upload(&self.device, &self.queue, resolved.sprites, retained)?;
         Ok(RenderScene {
             sprites,
             lights,

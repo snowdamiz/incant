@@ -116,6 +116,7 @@ pub(crate) fn resolve(input: &SceneInput) -> Result<ResolvedScene, SceneError> {
                 return Err(SceneError::MissingSprite(sprite.source.info().id.clone()));
             }
             result.sprites.push(crate::sprites::SpritePlan {
+                node: entity_index,
                 source: Arc::clone(&sprite.source),
                 sprite: sprite.sprite.clone(),
                 world: world64,
