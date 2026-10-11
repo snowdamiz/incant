@@ -63,7 +63,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         return Err("tick/sample-rate bounds".into());
     }
     let mut observations = observation_path
-        .map(|path| observe::Plan::parse(&bounded(path, observe::MAX_PLAN_BYTES)?, ticks))
+        .map(|path| -> Result<_, Box<dyn std::error::Error>> {
+            Ok(observe::Plan::parse(
+                &bounded(path, observe::MAX_PLAN_BYTES)?,
+                ticks,
+            )?)
+        })
         .transpose()?;
     let scene = CookedScene::from_bytes(&bounded(&args[0], 128 * 1024 * 1024)?)?;
     if spatial.is_none() && (!scene.spatial().is_empty() || !scene.visual_assets().is_empty()) {
