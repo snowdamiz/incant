@@ -15,6 +15,7 @@ use std::{
 };
 mod assets;
 mod menu;
+mod play;
 mod project;
 mod provider;
 mod render_scene;
@@ -26,6 +27,7 @@ fn app_context() -> tauri::Context<tauri::Wry> {
 }
 
 struct Editor {
+    play: Arc<play::Service>,
     provider: Arc<provider::ProviderRuntime>,
     bus: Arc<Mutex<project::LoadState>>,
     viewport: Mutex<Option<Viewport>>,
@@ -142,13 +144,17 @@ fn viewport_bounds(
 }
 fn main() {
     let project_path = std::env::args_os().nth(1).map(PathBuf::from);
+    #[cfg(feature = "play-probe")]
+    let play_probe = play::probe::Options::from_args();
     let asset_root = project_path.as_ref().map(|path| {
         path.parent()
             .filter(|p| !p.as_os_str().is_empty())
             .unwrap_or(std::path::Path::new("."))
             .to_path_buf()
     });
+    let (play_service, play_requests) = play::Service::new();
     let editor = Arc::new(Editor {
+        play: play_service,
         provider: Arc::new(provider::ProviderRuntime::new()),
         bus: Arc::new(Mutex::new(project::LoadState::Loading)),
         viewport: Mutex::new(None),
@@ -166,6 +172,8 @@ fn main() {
             engine_execute,
             engine_script_read,
             engine_history,
+            play::play_read,
+            play::play_command,
             assets::engine_import,
             viewport_bounds,
             window::window_read,
@@ -221,8 +229,10 @@ fn main() {
             // The native surface is owned by the native window, independently of the webview.
             let instance = wgpu::Instance::default();
             let surface = instance.create_surface(window.clone())?;
-            let renderer = pollster::block_on(Renderer::new(&instance, Some(&surface)))
-                .map_err(|e| std::io::Error::other(e.to_string()))?;
+            let renderer = Arc::new(
+                pollster::block_on(Renderer::new(&instance, Some(&surface)))
+                    .map_err(|e| std::io::Error::other(e.to_string()))?,
+            );
             editor.console.lock().unwrap().push(ConsoleEvent::new(
                 "info",
                 format!("Native wgpu adapter: {}", renderer.adapter_name),
@@ -252,6 +262,8 @@ fn main() {
             let shared = editor.clone();
             let render_app = app.handle().clone();
             std::thread::spawn(move || {
+                let mut play =
+                    play::Worker::new(shared.play.clone(), play_requests, renderer.clone());
                 let mut configured = (0, 0);
                 let mut runtime = match render_scene::SceneRuntime::new(&renderer) {
                     Ok(runtime) => runtime,
@@ -267,10 +279,20 @@ fn main() {
                     .find(|f| f.is_srgb())
                     .unwrap_or(wgpu::TextureFormat::Bgra8Unorm);
                 while shared.alive.load(Ordering::Relaxed) {
+                    // Control/stop requests remain responsive when no drawable
+                    // exists, including minimized windows and hidden viewports.
+                    play.drain();
+                    if let Err(error) = renderer.check_device() {
+                        let message = error.to_string();
+                        play.fail(message.clone());
+                        publish_render_status(&shared, &render_app, Some(message));
+                        break;
+                    }
                     let Ok(size) = window.inner_size() else {
                         break;
                     };
-                    if size.width == 0 || size.height == 0 {
+                    if size.width == 0 || size.height == 0 || window.is_minimized().unwrap_or(true) {
+                        play.unavailable();
                         std::thread::sleep(Duration::from_millis(100));
                         continue;
                     }
@@ -297,6 +319,39 @@ fn main() {
                             && r[0] + r[2] <= size.width as f32
                             && r[1] + r[3] <= size.height as f32
                     });
+                    if play.active() {
+                        if let Some(viewport) = rect {
+                            match surface.get_current_texture() {
+                                wgpu::CurrentSurfaceTexture::Success(frame)
+                                | wgpu::CurrentSurfaceTexture::Suboptimal(frame) => play.frame(
+                                    frame,
+                                    format,
+                                    size.width,
+                                    size.height,
+                                    viewport,
+                                    window.is_focused().unwrap_or(false),
+                                ),
+                                wgpu::CurrentSurfaceTexture::Outdated => {
+                                    configured = (0, 0);
+                                    play.unavailable();
+                                }
+                                wgpu::CurrentSurfaceTexture::Timeout | wgpu::CurrentSurfaceTexture::Occluded => {
+                                    play.unavailable();
+                                    std::thread::sleep(Duration::from_millis(50));
+                                }
+                                wgpu::CurrentSurfaceTexture::Lost | wgpu::CurrentSurfaceTexture::Validation => {
+                                    let message = "Native surface was lost or rejected; reopen the editor to recreate it".to_string();
+                                    play.fail(message.clone());
+                                    publish_render_status(&shared, &render_app, Some(message));
+                                    break;
+                                }
+                            }
+                        } else {
+                            play.unavailable();
+                        }
+                        std::thread::sleep(Duration::from_millis(1));
+                        continue;
+                    }
                     let update = match shared.bus.lock() {
                         Ok(load) => match &*load {
                             project::LoadState::Ready(bus)
@@ -320,10 +375,17 @@ fn main() {
                     let frame = match surface.get_current_texture() {
                         wgpu::CurrentSurfaceTexture::Success(frame)
                         | wgpu::CurrentSurfaceTexture::Suboptimal(frame) => frame,
-                        _ => {
+                        wgpu::CurrentSurfaceTexture::Outdated => {
                             configured = (0, 0);
+                            continue;
+                        }
+                        wgpu::CurrentSurfaceTexture::Timeout | wgpu::CurrentSurfaceTexture::Occluded => {
                             std::thread::sleep(Duration::from_millis(50));
                             continue;
+                        }
+                        wgpu::CurrentSurfaceTexture::Lost | wgpu::CurrentSurfaceTexture::Validation => {
+                            publish_render_status(&shared, &render_app, Some("Native surface was lost or rejected; reopen the editor to recreate it".into()));
+                            break;
                         }
                     };
                     match renderer.draw_scene(
@@ -346,6 +408,8 @@ fn main() {
                     std::thread::sleep(Duration::from_millis(16));
                 }
             });
+            #[cfg(feature = "play-probe")]
+            if let Some(options) = play_probe { play::probe::start(app.handle().clone(), editor.clone(), options); }
             Ok(())
         })
         .run(app_context())

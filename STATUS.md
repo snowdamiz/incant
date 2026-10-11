@@ -43,6 +43,18 @@ old workflow and duplicate tests. [Evidence](docs/spikes/native-project-package.
 Existing full checkpoint jobs now include the export probe; hosted execution,
 window package execution and complete UI/export/device gates remain open.
 
+## Native editor Play transport — local, UI integration pending
+
+The real editor worker now owns disposable native Play, Pause, Step, Stop and
+selected-entity inspection. Cooking stays off the window thread and no authoring
+state enters ticks. 21 scoped Rust tests, 545 UI tests, strict types and Clippy pass.
+Actual macOS native-window numerical acceptance confirms paused GPU redraws,
+one-tick stepping, minimize/resume, discarded Stop state, fresh restart and
+unchanged project/script/journal bytes plus revision/history. Visible controls,
+desktop input routing and inspector presentation remain Claude handoff 0044 work; this is
+not a completed Play UI, pixel review, phone/performance or phase gate.
+[Evidence](docs/spikes/native-editor-play.md).
+
 ## Current integration and parallel work
 
 | Workstream | Current result | Next work / boundary |

@@ -15,6 +15,9 @@ import type {
   Origin,
   WindowChrome,
   ProviderState,
+  PlayStatus,
+  PlayEntity,
+  PlayRequest,
 } from "./contract";
 
 type Entity = {
@@ -326,6 +329,9 @@ export class NativeBridge implements EditorBridge {
     "provider.disconnect",
     "provider.switch",
     "viewport.bounds",
+    "play.control",
+    "play.inspect",
+    "play.input",
     "window.drag",
     "window.minimize",
     "window.maximize",
@@ -334,6 +340,9 @@ export class NativeBridge implements EditorBridge {
   readonly label = "Native engine";
   readonly isFixture = false;
   private read: EngineRead | undefined;
+  private play: PlayStatus | undefined;
+  private playError: BridgeError | undefined;
+  private playRead: Promise<void> | undefined;
   private listeners = new Set<() => void>();
   private historyListeners = new Set<(action: 'undo' | 'redo') => void>();
   private pending = false;
@@ -365,7 +374,7 @@ export class NativeBridge implements EditorBridge {
     // older document must not replace the command's newer revision on arrival.
     if (isReady(read) && this.read && read.project.id === this.read.project.id && read.revision < this.read.revision) return;
     this.read = isReady(read) ? freeze(read) : undefined;
-    const snapshot = { ...snapshotFromEngine(read), provider: this.provider };
+    const snapshot = { ...snapshotFromEngine(read), provider: this.provider, ...(this.play ? { play: this.play } : {}), ...(this.playError ? { playError: this.playError } : {}) };
     this.snapshot = freeze(
       this.chrome ? { ...snapshot, window: this.chrome } : snapshot,
     );
@@ -415,6 +424,77 @@ export class NativeBridge implements EditorBridge {
       if (request !== this.refreshId) return;
       const result = failure(error);
       if (!result.ok) this.publish({ status: "error", error: result.error });
+    }
+  }
+  updatePlay(status: PlayStatus) {
+    if (this.play && (status.generation < this.play.generation || status.sequence < this.play.sequence)) return;
+    this.play = freeze(status);
+    this.playError = undefined;
+    const { playError: _error, ...rest } = this.snapshot;
+    this.snapshot = freeze({ ...rest, play: this.play });
+    this.listeners.forEach((fn) => fn());
+  }
+  async refreshPlay() {
+    if (this.playRead) return this.playRead;
+    this.playRead = this.readPlay();
+    try { await this.playRead; } finally { this.playRead = undefined; }
+  }
+  private async readPlay() {
+    const published = this.play;
+    try { this.updatePlay(await this.invoke<PlayStatus>('play_read')); }
+    catch (error) {
+      if (this.play !== published) return;
+      const result = failure(error);
+      if (!result.ok) {
+        this.playError = result.error;
+        this.snapshot = freeze({ ...this.snapshot, playError: result.error });
+        this.listeners.forEach((fn) => fn());
+      }
+    }
+  }
+  /** One metadata read in flight, at most four per second. No engine_read polling. */
+  startPlayUpdates(): () => void {
+    let stopped = false;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const poll = async () => {
+      await this.refreshPlay();
+      if (!stopped) timer = setTimeout(() => { void poll(); }, 250);
+    };
+    void poll();
+    return () => { stopped = true; if (timer !== undefined) clearTimeout(timer); };
+  }
+  private async requestPlay(request: PlayRequest): Promise<BridgeResult> {
+    const intendedGeneration = this.play?.generation;
+    if (request.type === 'play.input' && (!this.play || this.playError || request.generation !== this.play.generation)) return failure('Game input session changed or is unavailable.');
+    if (!this.play || this.playError) {
+      await this.refreshPlay();
+      if (!this.play || this.playError) return failure(this.playError ?? 'Native Play is unavailable.');
+    }
+    const generation = this.play.generation;
+    if (intendedGeneration !== undefined && intendedGeneration !== generation) return failure('Play session changed; retry the operation.');
+    if (request.type === 'play.start' && !this.read) return failure('Wait for the project to load.');
+    if (request.type === 'play.input' && request.events.length > 128) return failure('Input packet exceeds 128 events.');
+    const command = {
+      op: request.type.slice('play.'.length), generation,
+      ...(request.type === 'play.start' ? { expected_revision: this.read!.revision,
+        options: { ...(request.scene ? { scene: request.scene } : {}), ...(request.camera ? { camera: request.camera } : {}) } } : {}),
+      ...(request.type === 'play.inspect' ? { entity: request.entity } : {}),
+      ...(request.type === 'play.input' ? { events: request.events } : {}),
+    };
+    try {
+      if (request.type === 'play.inspect') {
+        const entity = await this.invoke<PlayEntity>('play_command', { command });
+        if (this.play.generation !== generation || entity.generation !== generation) return failure('Play session changed; inspect again.');
+        return { ok: true, playEntity: freeze(entity) };
+      }
+      const status = await this.invoke<PlayStatus>('play_command', { command });
+      // Input is a bounded write to the disposable world; polling publishes its
+      // status at a fixed rate instead of making the whole UI render per event.
+      if (request.type !== 'play.input') this.updatePlay(status);
+      return { ok: true };
+    } catch (error) {
+      if (request.type !== 'play.input') await this.refreshPlay();
+      return failure(error);
     }
   }
   async dispatch(command: EditorCommand): Promise<BridgeResult> {
@@ -497,6 +577,7 @@ export class NativeBridge implements EditorBridge {
     }
   }
   async request(request: HostRequest): Promise<BridgeResult> {
+    if (request.type === 'play.start' || request.type === 'play.pause' || request.type === 'play.resume' || request.type === 'play.step' || request.type === 'play.stop' || request.type === 'play.inspect' || request.type === 'play.input') return this.requestPlay(request);
     if (request.type === "provider.connect" || request.type === "provider.cancel" || request.type === "provider.disconnect" || request.type === "provider.switch") {
       if (request.type === "provider.connect" && request.method !== "oauth") return failure("Use incant auth api-key for the hidden API-key prompt.");
       try {
@@ -550,6 +631,8 @@ export function installNativeBridge(): NativeBridge | undefined {
   if (!invoke || host.__INCANT_BRIDGE__) return undefined;
   const bridge = new NativeBridge(invoke);
   host.__INCANT_BRIDGE__ = bridge;
+  const stopPlayUpdates = bridge.startPlayUpdates();
+  window.addEventListener('pagehide', stopPlayUpdates, { once: true });
   void bridge.startEngineUpdates(host.__TAURI__?.event?.listen);
   void bridge.startHistoryRequests(host.__TAURI__?.event?.listen)
     .catch(() => console.error("Native history menu could not be connected."));

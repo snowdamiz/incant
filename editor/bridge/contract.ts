@@ -1,4 +1,5 @@
 /** Shared UI/native transport contract. Engine state and edits remain owned by incant_cmd. */
+import type { InputEvent, Transform, Velocity } from "../../sdk/ts/src/generated";
 
 export const UI_PROTOCOL_VERSION = 1 as const;
 
@@ -18,6 +19,9 @@ export const KNOWN_CAPABILITIES = [
   'provider.switch',
   'agent.send',
   'viewport.bounds',
+  'play.control',
+  'play.inspect',
+  'play.input',
   'window.drag',
   'window.minimize',
   'window.maximize',
@@ -263,6 +267,40 @@ export interface WindowChrome {
   readonly trailingInset: number;
 }
 
+/** Small native-world telemetry. It never carries a project or entity list. */
+export interface PlayStatus {
+  readonly generation: number;
+  readonly sequence: number;
+  readonly phase: 'stopped' | 'preparing' | 'running' | 'paused' | 'error';
+  readonly tick: number;
+  readonly discardedTicks: number;
+  readonly presentedFrames: number;
+  readonly scene: string | null;
+  readonly sourceRevision: number | null;
+  readonly spatial: boolean;
+  /** Focus/surface suspension, separate from an explicit user pause. */
+  readonly suspended: boolean;
+  readonly preparing: boolean;
+  readonly error: string | null;
+}
+export interface PlayEntity {
+  readonly generation: number;
+  readonly tick: number;
+  readonly entity: Ulid;
+  readonly parent: Ulid | null;
+  readonly transform: Transform;
+  readonly velocity: Velocity | null;
+  readonly worldTransform: readonly (readonly number[])[];
+}
+/** Desktop input only. Position is local to the viewport in CSS pixels. */
+export type PlayInput = Extract<InputEvent, { type: 'focus' | 'key' | 'pointer_position' | 'wheel' }>
+  | { readonly type: 'mouse_button'; readonly button: 'left' | 'right' | 'middle'; readonly down: boolean };
+export type PlayRequest =
+  | { readonly type: 'play.start'; readonly scene?: Ulid; readonly camera?: Ulid }
+  | { readonly type: 'play.pause' | 'play.resume' | 'play.step' | 'play.stop' }
+  | { readonly type: 'play.inspect'; readonly entity: Ulid }
+  | { readonly type: 'play.input'; readonly generation: number; readonly events: readonly PlayInput[] };
+
 export interface BridgeSnapshot {
   readonly connection: ConnectionState;
   readonly hierarchy: LoadState<HierarchyTree>;
@@ -281,6 +319,8 @@ export interface BridgeSnapshot {
   readonly provider: ProviderState;
   readonly agent: AgentState;
   readonly viewport: ViewportState;
+  readonly play?: PlayStatus;
+  readonly playError?: BridgeError;
   /** Present only inside the native host. */
   readonly window?: WindowChrome;
 }
@@ -295,6 +335,7 @@ export type EditorCommand =
 
 /** Requests to the host that are not document edits and are not journaled. */
 export type HostRequest =
+  | PlayRequest
   | { readonly type: 'provider.connect'; readonly method: 'oauth' | 'api-key'; readonly accountId?: string; readonly add?: boolean }
   | { readonly type: 'provider.cancel' }
   | { readonly type: 'provider.disconnect' }
@@ -327,7 +368,7 @@ export interface AssetImportCommit {
 }
 
 export type BridgeResult =
-  | { readonly ok: true; readonly assetImport?: AssetImportCommit }
+  | { readonly ok: true; readonly assetImport?: AssetImportCommit; readonly playEntity?: PlayEntity }
   | { readonly ok: false; readonly error: BridgeError };
 
 export interface EditorBridge {
