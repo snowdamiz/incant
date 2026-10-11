@@ -194,6 +194,14 @@ impl AnimationData {
                 }
             }
         }
+        for scene in scenes {
+            if scene
+                .iter()
+                .any(|&r| r >= nodes.len() || parents[r].is_some())
+            {
+                return Err(invalid("animation scene root"));
+            }
+        }
         let root = |mut n: usize| {
             while let Some(p) = parents[n] {
                 n = p;
@@ -284,12 +292,6 @@ impl AnimationData {
                 }
                 // Each referencing scene must also contain the complete joint tree.
                 for scene in scenes {
-                    if scene
-                        .iter()
-                        .any(|&r| r >= nodes.len() || parents[r].is_some())
-                    {
-                        return Err(invalid("animation scene root"));
-                    }
                     if scene.contains(&root(i)) && !scene.contains(&root(skin.joints[0])) {
                         return Err(invalid("skin joints absent from referencing scene"));
                     }

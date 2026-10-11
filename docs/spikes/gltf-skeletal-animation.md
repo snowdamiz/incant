@@ -117,8 +117,8 @@ claimed here.
 ## Verification
 
 The local evidence JSON records exact source/log hashes and commands. Scoped
-asset/runtime checks pass 89 tests across 16 result groups, with no failures or
-ignored tests, including 14 skeletal tests. A fresh child process loads cooked
+asset/runtime checks pass 90 tests across 16 result groups, with no failures or
+ignored tests, including 15 skeletal tests. A fresh child process loads cooked
 animation after both source files are deleted and computes `[12, 1, 0]` for the
 fixture's half-time influenced vertex. This is an actual process/test executable,
 not a shipped-player/export proof. Normal dependency guards separately verify the
@@ -139,4 +139,12 @@ Clippy
 failures encountered during development were a needless encoder borrow and a
 test modulo-style lint; both were corrected after their processes exited.
 
-Evidence: [exact local checks](evidence/gltf-skeletal-animation.json).
+Independent review found scene-root validation was incorrectly conditional on a
+bound skin. The follow-up moves root range/parent checks after parent construction
+for every animated model, preserving skin-specific scene membership checks. A
+clip-only regression failed on the prior implementation and now rejects both an
+out-of-range root and a parented root through shared validation and retained
+player construction. The affected full asset/runtime suite and Clippy pass again.
+
+Evidence: [original 89-test local checks](evidence/gltf-skeletal-animation.json),
+[scene-root correction and current source hashes](evidence/gltf-skeletal-scene-roots.json).

@@ -465,6 +465,40 @@ fn skinless_clips_and_missing_bind_matrices_have_explicit_rest_semantics() {
     assert!(player.joint_palette(0).is_err());
 }
 #[test]
+fn clip_only_scene_roots_are_revalidated_before_retained_copy() {
+    let dir = tempfile::tempdir().unwrap();
+    fixture::fixture(dir.path());
+    let mut model = cook_gltf(
+        dir.path(),
+        Path::new("model.gltf"),
+        &dir.path().join("cache"),
+    )
+    .unwrap();
+    let data = model.animation.as_mut().unwrap();
+    data.skins.clear();
+    data.node_skins.fill(None);
+    data.influences.iter_mut().for_each(Vec::clear);
+    data.validate(&model.metadata.nodes, &model.meshes, &model.metadata.scenes)
+        .unwrap();
+    AnimationPlayer::new(&model).unwrap();
+
+    // Public cooked values can change after decoding. Scene validation must not
+    // depend on a bound skin; both root range and hierarchy still apply to clips.
+    for root in [model.metadata.nodes.len(), 1] {
+        model.metadata.scenes = vec![vec![root]];
+        let shared = model.animation.as_ref().unwrap().validate(
+            &model.metadata.nodes,
+            &model.meshes,
+            &model.metadata.scenes,
+        );
+        assert!(shared.is_err(), "shared validation accepted root {root}");
+        assert!(
+            AnimationPlayer::new(&model).is_err(),
+            "retained player accepted root {root}"
+        );
+    }
+}
+#[test]
 fn mutable_model_geometry_aggregate_is_rechecked_before_retained_copy() {
     let dir = tempfile::tempdir().unwrap();
     fixture::fixture(dir.path());
