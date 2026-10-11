@@ -133,3 +133,14 @@ preparation-only scope. Its compiled source is unchanged;
 [exact commit, toolchain, feature/profile and copied-binary pairing](evidence/cooked-output-readback-binaries.json)
 are retained. No GPU grant, default enablement or equivalence claim follows from
 these CPU results.
+
+## Actual Metal numerical comparison
+
+The preserved default/cooked executables from `550b563` later ran the two existing
+HDR tests serially under an explicit GPU grant. Both passed and all 16 normalized
+readbacks were exactly byte-identical across all four formats and resize cases
+on Apple M5 Pro/Metal. [Source/binary, adapter, case and process receipt](evidence/cooked-output-metal-numerical.json).
+Both processes were reaped and independently confirmed absent before release.
+This supersedes the earlier pending-Metal-numerical status only. No PNG or pixel
+review occurred; Claude appearance, Vulkan/DX12 and reference-device acceptance
+remain pending. The feature is still off by default and there is no timing claim.

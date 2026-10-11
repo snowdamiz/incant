@@ -98,3 +98,21 @@ comparison first. Then reuse the existing geometry, shadow mask/reflection/range
 queued-atlas and pipeline-warmup numerical tests under default and cooked geometry.
 Any byte mismatch requires diagnosis; Claude owns rendered pixels and appearance
 acceptance. Metal success will not imply Vulkan/DX12 or reference-phone evidence.
+
+## Independent review and subsequent output-only check
+
+The source freeze is commit `c5268ae05236e5836f04a6098ac0eef31ca6ad43`.
+[Independent review](evidence/cooked-geometry-shaders-review.json) accepted the
+18 source files, complete host/unsafe boundary and CPU evidence with no finding.
+It does not establish geometry driver or appearance acceptance. No geometry
+fixture has run.
+
+After the native review explicitly released its grant, only the preserved
+`550b563` output comparison pair ran its two existing HDR tests. Both processes
+passed; all 16 normalized readbacks across four formats and resize cases were
+byte-identical on Apple M5 Pro/Metal, with matching shader and adapter identities.
+The process IDs were independently absent before graphics ownership was returned.
+[Exact output-only receipt](evidence/cooked-output-metal-numerical.json).
+No PNG, screenshot, geometry draw, provider call or performance measurement was
+made. Output and geometry remain optional pending their respective remaining
+backend and Claude acceptance.

@@ -24,9 +24,10 @@ Private fixed-family consumption validates the complete vertex/resource contract
 before native shader calls. Ten cooker, 42 cooked renderer and 36 default CPU
 tests pass, as do Clippy, default/feature Web compilation and the build-only
 dependency guard. Four new Metal stages compile/link; all six previous output
-payloads and the frozen output comparison binaries are unchanged. No GPU,
-rendered-pixel or performance acceptance is claimed; the original output-only
-comparison remains first after the current native review releases its grant.
+payloads and the frozen output comparison binaries are unchanged. Geometry GPU, rendered-pixel and performance acceptance remain pending.
+The separately preserved output-only pair subsequently passed both existing HDR
+tests with all 16 readbacks byte-identical on Apple M5 Pro/Metal; its feature
+still remains off pending remaining backend and Claude acceptance.
 [Contract, evidence and remaining scope](docs/spikes/cooked-geometry-shaders.md).
 
 ## Opt-in native session checkpoints — locally verified
