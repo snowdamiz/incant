@@ -64,6 +64,11 @@ Further work remains local; this queue does not waive any phase or device gate. 
 
 ## Implemented boundaries and evidence
 
+The native v1 save reader now rejects unsupported 2D solver state consistently
+with its writer and in-place restore. A rehashed-payload regression fails before
+the fix and passes afterward; full native session saves remain open.
+[Evidence](docs/spikes/native-save-planar-refusal.md).
+
 The reviewed native-assets/rendering union now preserves corrected FBX, pipeline
 prewarming and flipbook source on actual main80. All 685 ordinary/73 GPU tests,
 536 UI tests, 96 final tools tests, both workspace Clippy profiles, optional-window

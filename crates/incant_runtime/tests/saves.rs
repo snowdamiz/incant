@@ -247,3 +247,41 @@ fn scene_and_legacy_json_are_not_silently_accepted_as_native_saves() {
     restored.step().unwrap();
     assert_eq!(restored.tick(), 2);
 }
+
+#[test]
+fn rehashed_planar_physics_scene_cannot_bypass_the_v1_save_boundary() {
+    for body in [None, Some(incant_types::RigidBody::default())] {
+        let scene = CookedScene::new(id(99), 60, vec![entity(1, None, false)])
+            .unwrap()
+            .with_physics_2d(vec![incant_runtime::CookedPhysics2D {
+                entity: id(1),
+                collider: incant_types::Collider2D::default(),
+                body,
+                angular_velocity: None,
+            }])
+            .unwrap();
+        // A valid scene and both correct checksums still cannot represent the
+        // live planar solver contacts, sleeping or trigger history of a save.
+        let payload = scene.to_bytes();
+        let mut bytes = world(60).save_bytes().unwrap();
+        bytes.truncate(64);
+        bytes[16..24].copy_from_slice(&25_u64.to_le_bytes());
+        bytes[24..32].copy_from_slice(&(payload.len() as u64).to_le_bytes());
+        bytes.extend(payload);
+        rehash(&mut bytes, 32, 64);
+        assert!(matches!(
+            NativeWorld::from_save_bytes(&bytes),
+            Err(SaveError::PhysicsUnsupported)
+        ));
+        let mut target = world(60);
+        advance(&mut target, 7);
+        let before = target.save_bytes().unwrap();
+        assert_eq!(
+            target.restore_bytes(&bytes),
+            Err(SaveError::PhysicsUnsupported)
+        );
+        assert_eq!(target.save_bytes().unwrap(), before);
+        target.step().unwrap();
+        assert_eq!(target.tick(), 8);
+    }
+}
