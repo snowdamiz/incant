@@ -18,6 +18,8 @@ export const KNOWN_CAPABILITIES = [
   'provider.disconnect',
   'provider.switch',
   'agent.send',
+  'agent.cancel',
+  'agent.approve',
   'viewport.bounds',
   'play.control',
   'play.inspect',
@@ -239,6 +241,68 @@ export type AgentState =
   | { readonly status: 'idle' }
   | { readonly status: 'running'; readonly conversation: string };
 
+/** Native session metadata. Provider credentials/configuration never cross this boundary. */
+export type AgentApprovalMode = 'auto' | 'destructive' | 'always';
+export type AgentTurnStatus = 'running' | 'awaiting_approval' | 'stopping' | 'completed' | 'cancelled' | 'failed';
+export type AgentFailure = 'provider' | 'tool' | 'budget_exhausted' | 'step_limit'
+  | 'project_unavailable' | 'project_changed' | 'worker_panicked' | 'worker_spawn'
+  | 'budget_accounting' | 'output_limit' | 'approval_count_limit'
+  | 'approval_payload_limit' | 'approval_total_limit' | 'approval_invalid'
+  | 'approval_already_pending' | 'context_limit';
+export type AgentApprovalDecision = 'pending' | 'allowed' | 'denied' | 'cancelled';
+export type JsonValue = null | boolean | number | string | readonly JsonValue[]
+  | { readonly [key: string]: JsonValue };
+export interface AgentTurnRequest {
+  readonly prompt: string;
+  readonly model: string;
+  readonly approval: AgentApprovalMode;
+}
+export interface AgentApprovalSummary {
+  readonly id: number;
+  readonly tool: string;
+  readonly bytes: number;
+  readonly decision: AgentApprovalDecision;
+}
+export interface AgentPendingApproval {
+  readonly turn: number;
+  readonly id: number;
+  readonly tool: string;
+  readonly arguments: JsonValue;
+}
+export interface AgentReportSummary {
+  readonly steps: number;
+  readonly usage: { readonly input_tokens: number; readonly output_tokens: number };
+  readonly transaction_count: number;
+  readonly tool_call_count: number;
+  readonly transaction_ids: readonly string[];
+  readonly tool_calls: readonly {
+    readonly name: string | null;
+    readonly succeeded: boolean;
+    readonly selected_camera: string | null;
+  }[];
+  readonly truncated: boolean;
+}
+export interface AgentTurnSnapshot {
+  readonly id: number;
+  readonly request: AgentTurnRequest;
+  readonly status: AgentTurnStatus;
+  readonly text: string;
+  readonly approvals: readonly AgentApprovalSummary[];
+  readonly pending: AgentPendingApproval | null;
+  readonly report: AgentReportSummary | null;
+  readonly failure: AgentFailure | null;
+  /** A budget delta. It is not an invented input/output token split. */
+  readonly charged_tokens: number;
+  readonly accounting_uncertain: boolean;
+}
+export interface AgentSessionSnapshot {
+  readonly version: number;
+  readonly budget: { readonly max_tokens: number; readonly used_tokens: number };
+  readonly accounting_uncertain: boolean;
+  readonly worker_running: boolean;
+  readonly turns: readonly AgentTurnSnapshot[];
+}
+
 export type ViewportState =
   | { readonly status: 'not-attached'; readonly reason: string }
   | { readonly status: 'attached'; readonly surface: string }
@@ -318,6 +382,10 @@ export interface BridgeSnapshot {
   readonly console: readonly ConsoleEntry[];
   readonly provider: ProviderState;
   readonly agent: AgentState;
+  /** Optional for older/fixture hosts. Snake-case fields mirror the native session exactly. */
+  readonly agentSession?: AgentSessionSnapshot;
+  /** A transport/protocol failure, separate from the turn's native terminal failure. */
+  readonly agentError?: BridgeError;
   readonly viewport: ViewportState;
   readonly play?: PlayStatus;
   readonly playError?: BridgeError;
@@ -340,7 +408,9 @@ export type HostRequest =
   | { readonly type: 'provider.cancel' }
   | { readonly type: 'provider.disconnect' }
   | { readonly type: 'provider.switch'; readonly accountId: string }
-  | { readonly type: 'agent.send'; readonly text: string }
+  | { readonly type: 'agent.send'; readonly text: string; readonly model?: string; readonly approval?: AgentApprovalMode }
+  | { readonly type: 'agent.cancel'; readonly turnId: number }
+  | { readonly type: 'agent.approve'; readonly turnId: number; readonly approvalId: number; readonly approved: boolean }
   | {
       readonly type: 'viewport.bounds';
       /** CSS pixels relative to the webview's top-left, plus the device pixel ratio. */
@@ -368,7 +438,7 @@ export interface AssetImportCommit {
 }
 
 export type BridgeResult =
-  | { readonly ok: true; readonly assetImport?: AssetImportCommit; readonly playEntity?: PlayEntity }
+  | { readonly ok: true; readonly assetImport?: AssetImportCommit; readonly playEntity?: PlayEntity; readonly agentTurnId?: number }
   | { readonly ok: false; readonly error: BridgeError };
 
 export interface EditorBridge {
@@ -383,6 +453,8 @@ export interface EditorBridge {
   subscribe(listener: () => void): () => void;
   /** Native menu intent; the UI chooses text-editing or document history from focus. */
   subscribeHistoryRequests?(listener: (action: 'undo' | 'redo') => void): () => void;
+  /** Explicit read-only bootstrap/recovery. Optional for older/fixture hosts. */
+  refreshAgent?(): Promise<void>;
   dispatch(command: EditorCommand): Promise<BridgeResult>;
   request(request: HostRequest): Promise<BridgeResult>;
 }

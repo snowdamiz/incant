@@ -18,6 +18,9 @@ import type {
   PlayStatus,
   PlayEntity,
   PlayRequest,
+  AgentState,
+  AgentSessionSnapshot,
+  AgentTurnRequest,
 } from "./contract";
 
 type Entity = {
@@ -316,6 +319,120 @@ function failure(error: unknown): BridgeResult {
     },
   };
 }
+export interface EngineAgentRead {
+  /** Null means the requested session version is unchanged. */
+  readonly session: AgentSessionSnapshot | null;
+  readonly project_revision: number | null;
+}
+type AgentRequest = Extract<HostRequest, { type: `agent.${string}` }>;
+const AGENT_ACTIVE = ['running', 'awaiting_approval', 'stopping'];
+const AGENT_FAILURES = ['provider', 'tool', 'budget_exhausted', 'step_limit', 'project_unavailable',
+  'project_changed', 'worker_panicked', 'worker_spawn', 'budget_accounting', 'output_limit',
+  'approval_count_limit', 'approval_payload_limit', 'approval_total_limit', 'approval_invalid',
+  'approval_already_pending', 'context_limit'];
+const bytes = (value: string) => new TextEncoder().encode(value).length;
+const count = (value: unknown): value is number => typeof value === 'number' && Number.isSafeInteger(value) && value >= 0;
+const sequence = (value: unknown): value is number => count(value) && value > 0;
+const boundedText = (value: unknown, limit = 128): value is string => typeof value === 'string' && value.length <= limit && bytes(value) <= limit;
+function fields(value: unknown, keys: readonly string[]): value is Record<string, unknown> {
+  return value !== null && typeof value === 'object' && !Array.isArray(value)
+    && (Object.getPrototypeOf(value) === Object.prototype || Object.getPrototypeOf(value) === null)
+    && Object.keys(value).length === keys.length && keys.every(key => Object.hasOwn(value, key));
+}
+function validAgentRequest(value: unknown): value is AgentTurnRequest {
+  return fields(value, ['prompt', 'model', 'approval']) && boundedText(value.prompt, 16 * 1024)
+    && value.prompt.trim().length > 0 && boundedText(value.model) && value.model.trim().length > 0
+    && ['auto', 'destructive', 'always'].includes(value.approval as string);
+}
+/** Mirror native approval depth/node/byte limits before recursively freezing untrusted JSON. */
+function validApprovalArguments(value: unknown): boolean {
+  const pending: { value: unknown; depth: number }[] = [{ value, depth: 0 }];
+  const seen = new Set<object>();
+  let visited = 0;
+  let jsonBytes = 0;
+  while (pending.length) {
+    const node = pending.pop()!;
+    if (++visited > 4096 || node.depth > 32) return false;
+    if (node.value === null || typeof node.value === 'boolean' || typeof node.value === 'string' || typeof node.value === 'number') {
+      if (typeof node.value === 'number' && !Number.isFinite(node.value)
+        || typeof node.value === 'string' && !boundedText(node.value, 2 * 1024 * 1024)) return false;
+      jsonBytes += bytes(JSON.stringify(node.value));
+    } else {
+      if (typeof node.value !== 'object' || seen.has(node.value)) return false;
+      if (!Array.isArray(node.value) && Object.getPrototypeOf(node.value) !== Object.prototype && Object.getPrototypeOf(node.value) !== null) return false;
+      seen.add(node.value);
+      const entries = Object.entries(node.value);
+      if (Array.isArray(node.value) && (entries.length !== node.value.length || entries.some(([key], index) => key !== String(index)))) return false;
+      jsonBytes += 2 + Math.max(0, entries.length - 1);
+      for (const [key, child] of entries) {
+        if (!Array.isArray(node.value)) {
+          if (!boundedText(key, 2 * 1024 * 1024)) return false;
+          jsonBytes += bytes(JSON.stringify(key)) + 1;
+        }
+        if (pending.length + visited >= 4096) return false;
+        pending.push({ value: child, depth: node.depth + 1 });
+      }
+    }
+    if (jsonBytes > 2 * 1024 * 1024) return false;
+  }
+  return true;
+}
+function validAgentReport(value: unknown): boolean {
+  return fields(value, ['steps', 'usage', 'transaction_count', 'tool_call_count', 'transaction_ids', 'tool_calls', 'truncated'])
+    && count(value.steps) && fields(value.usage, ['input_tokens', 'output_tokens'])
+    && count(value.usage.input_tokens) && count(value.usage.output_tokens)
+    && count(value.transaction_count) && count(value.tool_call_count) && typeof value.truncated === 'boolean'
+    && Array.isArray(value.transaction_ids) && value.transaction_ids.length <= Math.min(128, value.transaction_count)
+    && value.transaction_ids.every(id => boundedText(id))
+    && Array.isArray(value.tool_calls) && value.tool_calls.length <= Math.min(128, value.tool_call_count)
+    && value.tool_calls.every(tool => fields(tool, ['name', 'succeeded', 'selected_camera'])
+      && (tool.name === null || boundedText(tool.name)) && typeof tool.succeeded === 'boolean'
+      && (tool.selected_camera === null || boundedText(tool.selected_camera)));
+}
+function validAgentSession(value: unknown): value is AgentSessionSnapshot {
+  if (!fields(value, ['version', 'budget', 'accounting_uncertain', 'worker_running', 'turns'])
+    || !count(value.version) || !fields(value.budget, ['max_tokens', 'used_tokens'])
+    || !count(value.budget.max_tokens) || !count(value.budget.used_tokens)
+    || typeof value.accounting_uncertain !== 'boolean' || typeof value.worker_running !== 'boolean'
+    || !Array.isArray(value.turns) || value.turns.length > 16) return false;
+  let previous = 0;
+  for (const [index, turn] of value.turns.entries()) {
+    if (!fields(turn, ['id', 'request', 'status', 'text', 'approvals', 'pending', 'report', 'failure', 'charged_tokens', 'accounting_uncertain'])
+      || !sequence(turn.id) || turn.id <= previous || !validAgentRequest(turn.request)
+      || ![...AGENT_ACTIVE, 'completed', 'cancelled', 'failed'].includes(turn.status as string)
+      || !boundedText(turn.text, 64 * 1024) || !count(turn.charged_tokens) || typeof turn.accounting_uncertain !== 'boolean'
+      || (turn.failure !== null && !AGENT_FAILURES.includes(turn.failure as string))
+      || (turn.report !== null && !validAgentReport(turn.report))
+      || !Array.isArray(turn.approvals) || turn.approvals.length > 32) return false;
+    previous = turn.id;
+    const ids = new Set<number>();
+    let approvalBytes = 0;
+    for (const approval of turn.approvals) {
+      if (!fields(approval, ['id', 'tool', 'bytes', 'decision']) || !sequence(approval.id) || ids.has(approval.id)
+        || !boundedText(approval.tool) || !count(approval.bytes) || approval.bytes > 2 * 1024 * 1024
+        || !['pending', 'allowed', 'denied', 'cancelled'].includes(approval.decision as string)) return false;
+      ids.add(approval.id);
+      approvalBytes += approval.bytes;
+    }
+    if (approvalBytes > 8 * 1024 * 1024) return false;
+    if (AGENT_ACTIVE.includes(turn.status as string) && (index !== value.turns.length - 1 || !value.worker_running)) return false;
+    if (turn.pending !== null) {
+      const pending = turn.pending;
+      if (turn.status !== 'awaiting_approval' || !fields(pending, ['turn', 'id', 'tool', 'arguments'])
+        || pending.turn !== turn.id || !sequence(pending.id) || !boundedText(pending.tool)
+        || !turn.approvals.some(approval => approval.id === pending.id && approval.tool === pending.tool && approval.decision === 'pending')
+        || turn.approvals.filter(approval => approval.decision === 'pending').length !== 1
+        || !validApprovalArguments(pending.arguments)) return false;
+    } else if (turn.status === 'awaiting_approval' || turn.approvals.some(approval => approval.decision === 'pending')) return false;
+  }
+  return !value.worker_running || value.turns.length > 0;
+}
+function agentFailure(error: unknown): BridgeError {
+  if (fields(error, ['code', 'message']) && typeof error.code === 'string' && /^agent\.[a-z-]+$/.test(error.code)
+    && typeof error.message === 'string') return { code: error.code, message: error.message };
+  return { code: 'agent.transport', message: 'Could not contact the native agent. Refresh the session to retry.' };
+}
+const invalidAgentResponse = () => ({ code: 'agent.invalid-response', message: 'The native agent returned an invalid response. Refresh the session to retry.' });
 export class NativeBridge implements EditorBridge {
   readonly protocolVersion = 1;
   readonly capabilities = [
@@ -328,6 +445,9 @@ export class NativeBridge implements EditorBridge {
     "provider.cancel",
     "provider.disconnect",
     "provider.switch",
+    "agent.send",
+    "agent.cancel",
+    "agent.approve",
     "viewport.bounds",
     "play.control",
     "play.inspect",
@@ -350,6 +470,19 @@ export class NativeBridge implements EditorBridge {
   private refreshId = 0;
   private chrome: WindowChrome | undefined;
   private provider: ProviderState = { status: "checking", provider: "openai" };
+  private providerGeneration = 0;
+  private agentSession: AgentSessionSnapshot | undefined;
+  private agentVerified = false;
+  private agentError: BridgeError | undefined;
+  private agentGeneration = 0;
+  private agentRead: { generation: number; promise: Promise<void> } | undefined;
+  private agentStarting = false;
+  private agentReserved: number | undefined;
+  private agentDecisions = new Set<string>();
+  private agentCancelling = new Set<number>();
+  private providerPending = 0;
+  private agentPolling = false;
+  private agentTimer: ReturnType<typeof setTimeout> | undefined;
   private snapshot: BridgeSnapshot = snapshotFromEngine({ status: "loading" });
   constructor(private invoke: Invoke) {}
   getSnapshot = () => this.snapshot;
@@ -374,7 +507,7 @@ export class NativeBridge implements EditorBridge {
     // older document must not replace the command's newer revision on arrival.
     if (isReady(read) && this.read && read.project.id === this.read.project.id && read.revision < this.read.revision) return;
     this.read = isReady(read) ? freeze(read) : undefined;
-    const snapshot = { ...snapshotFromEngine(read), provider: this.provider, ...(this.play ? { play: this.play } : {}), ...(this.playError ? { playError: this.playError } : {}) };
+    const snapshot = { ...snapshotFromEngine(read), provider: this.provider, ...this.agentFields(), ...(this.play ? { play: this.play } : {}), ...(this.playError ? { playError: this.playError } : {}) };
     this.snapshot = freeze(
       this.chrome ? { ...snapshot, window: this.chrome } : snapshot,
     );
@@ -386,13 +519,26 @@ export class NativeBridge implements EditorBridge {
     this.listeners.forEach((fn) => fn());
   }
   updateProvider(provider: ProviderState) {
+    ++this.providerGeneration;
+    const previous = this.provider;
+    if (previous.status !== provider.status || previous.activeAccount !== provider.activeAccount
+      || (previous.status === 'connected' && provider.status === 'connected'
+        && (previous.accountLabel !== provider.accountLabel || previous.method !== provider.method))) {
+      ++this.agentGeneration;
+      this.agentVerified = false;
+    }
     this.provider = freeze(provider);
     this.snapshot = freeze({ ...this.snapshot, provider: this.provider });
-    this.listeners.forEach((fn) => fn());
+    this.publishAgent();
+    if ((this.agentSession || this.agentPolling) && !this.providerPending) void this.refreshAgent();
   }
   async startProviderUpdates(listen?: Listen) {
     if (listen) await listen<ProviderState>("incant:provider-changed", (event) => this.updateProvider(event.payload));
-    this.updateProvider(await this.invoke<ProviderState>("provider_read"));
+    const generation = this.providerGeneration;
+    try {
+      const provider = await this.invoke<ProviderState>("provider_read");
+      if (generation === this.providerGeneration) this.updateProvider(provider);
+    } catch (error) { if (generation === this.providerGeneration) throw error; }
   }
   async startWindowUpdates(listen?: Listen) {
     if (listen)
@@ -425,6 +571,153 @@ export class NativeBridge implements EditorBridge {
       const result = failure(error);
       if (!result.ok) this.publish({ status: "error", error: result.error });
     }
+  }
+  private agentNeedsPoll() {
+    return this.agentStarting || this.agentReserved !== undefined || this.agentSession?.worker_running === true
+      || AGENT_ACTIVE.includes(this.agentSession?.turns.at(-1)?.status ?? '');
+  }
+  private agentState(): AgentState {
+    if (this.agentNeedsPoll()) return { status: 'running', conversation: String(this.agentReserved ?? this.agentSession?.turns.at(-1)?.id ?? 'starting') };
+    if (!this.read) return { status: 'unavailable', reason: 'Wait for the project to load.' };
+    if (this.providerPending || this.provider.status !== 'connected') return { status: 'unavailable', reason: 'Connect an OpenAI account to use the agent.' };
+    if (this.agentError) return { status: 'unavailable', reason: this.agentError.message };
+    if (!this.agentSession) return { status: 'unavailable', reason: 'The native agent session has not been read yet.' };
+    if (!this.agentVerified) return { status: 'unavailable', reason: 'Refresh the native agent session after the account change.' };
+    if (this.agentSession.budget.used_tokens >= this.agentSession.budget.max_tokens) return { status: 'unavailable', reason: 'The native agent session token allowance is exhausted.' };
+    return { status: 'idle' };
+  }
+  private agentFields() {
+    return { agent: this.agentState(), ...(this.agentSession ? { agentSession: this.agentSession } : {}),
+      ...(this.agentError ? { agentError: this.agentError } : {}) };
+  }
+  private publishAgent() {
+    const { agentSession: _session, agentError: _error, ...rest } = this.snapshot;
+    this.snapshot = freeze({ ...rest, ...this.agentFields() });
+    this.listeners.forEach((fn) => fn());
+    this.scheduleAgentPoll();
+  }
+  private scheduleAgentPoll() {
+    if (!this.agentPolling || !this.agentNeedsPoll()) {
+      if (this.agentTimer !== undefined) clearTimeout(this.agentTimer);
+      this.agentTimer = undefined;
+      return;
+    }
+    if (this.agentTimer !== undefined || this.agentRead?.generation === this.agentGeneration) return;
+    this.agentTimer = setTimeout(() => { this.agentTimer = undefined; void this.refreshAgent(); }, 250);
+  }
+  /** Bootstrap/recovery is explicit; normal polling reads at most one bounded session at a time. */
+  async refreshAgent() {
+    const generation = this.agentGeneration;
+    if (this.agentRead?.generation === generation) return this.agentRead.promise;
+    const pending = { generation, promise: this.readAgent(generation) };
+    this.agentRead = pending;
+    try { await pending.promise; } finally {
+      if (this.agentRead === pending) this.agentRead = undefined;
+      this.scheduleAgentPoll();
+    }
+  }
+  private async readAgent(generation: number) {
+    const version = this.agentSession?.version;
+    try {
+      const response = await this.invoke<unknown>('engine_agent_read', version === undefined ? {} : { afterVersion: version });
+      if (generation !== this.agentGeneration) return;
+      if (!fields(response, ['session', 'project_revision']) || (response.project_revision !== null && !count(response.project_revision))) throw invalidAgentResponse();
+      const session = response.session;
+      let updated = false;
+      if (session === null) {
+        if (version === undefined || version !== this.agentSession?.version) throw invalidAgentResponse();
+      } else {
+        if (!validAgentSession(session)) throw invalidAgentResponse();
+        if (this.agentSession && session.version < this.agentSession.version) return;
+        if (!this.agentSession || session.version > this.agentSession.version) { this.agentSession = freeze(session); updated = true; }
+        const pending = this.agentSession!.turns.at(-1)?.pending;
+        for (const key of this.agentDecisions) if (key !== `${pending?.turn}:${pending?.id}`) this.agentDecisions.delete(key);
+      }
+      if (this.agentReserved !== undefined && this.agentSession!.turns.at(-1)?.id !== undefined
+        && this.agentSession!.turns.at(-1)!.id >= this.agentReserved) this.agentReserved = undefined;
+      const changed = this.agentError !== undefined || updated || !this.agentVerified;
+      this.agentVerified = true;
+      this.agentError = undefined;
+      if (changed) this.publishAgent();
+      // Text chunks and unchanged versions never clone/re-read the project.
+      // A newer project read already covers an older revision observed by this poll.
+      if (response.project_revision !== null && this.read && response.project_revision > this.read.revision) await this.start();
+    } catch (error) {
+      if (generation !== this.agentGeneration) return;
+      this.agentVerified = false;
+      this.agentError = agentFailure(error);
+      this.publishAgent();
+    }
+  }
+  startAgentUpdates(): () => void {
+    this.agentPolling = true;
+    void this.refreshAgent();
+    return () => {
+      this.agentPolling = false;
+      if (this.agentTimer !== undefined) clearTimeout(this.agentTimer);
+      this.agentTimer = undefined;
+    };
+  }
+  private async requestAgent(request: AgentRequest): Promise<BridgeResult> {
+    const reject = (code: string, message: string): BridgeResult => ({ ok: false, error: { code, message } });
+    const current = this.agentSession?.turns.at(-1);
+    if (request.type === 'agent.send') {
+      if (this.agentNeedsPoll()) return reject('agent.busy', 'Wait for the current agent worker to stop.');
+      if (!this.read || !this.agentSession || !this.agentVerified || this.agentError || this.providerPending || this.provider.status !== 'connected') {
+        const state = this.agentState();
+        return reject('agent.unavailable', state.status === 'unavailable' ? state.reason : 'The native agent is unavailable.');
+      }
+      const turnRequest = { prompt: request.text, model: request.model ?? 'gpt-6-astra', approval: request.approval ?? 'destructive' };
+      if (!validAgentRequest(turnRequest)) return reject('agent.invalid-request', 'Enter a nonempty prompt up to 16 KiB and a model name up to 128 bytes.');
+      if (this.agentSession.budget.used_tokens >= this.agentSession.budget.max_tokens) return reject('agent.budget', 'The native agent session token allowance is exhausted.');
+      this.agentStarting = true;
+      const generation = ++this.agentGeneration;
+      this.publishAgent();
+      try {
+        const turnId = await this.invoke<unknown>('engine_agent_start', { request: turnRequest });
+        if (!sequence(turnId) || (current && turnId <= current.id)) throw invalidAgentResponse();
+        this.agentReserved = turnId;
+        await this.refreshAgent();
+        return { ok: true, agentTurnId: turnId };
+      } catch (error) {
+        if (generation === this.agentGeneration) {
+          await this.refreshAgent();
+          this.agentError = agentFailure(error);
+        }
+        return { ok: false, error: agentFailure(error) };
+      } finally { this.agentStarting = false; this.publishAgent(); }
+    }
+    if (!sequence(request.turnId) || (!current || current.id !== request.turnId || !AGENT_ACTIVE.includes(current.status))
+      && request.turnId !== this.agentReserved) return reject('agent.stale-turn', 'This agent turn is no longer active.');
+    if (request.type === 'agent.cancel') {
+      if (current?.status === 'stopping' || this.agentCancelling.has(request.turnId)) return reject('agent.busy', 'This agent turn is already stopping.');
+      this.agentCancelling.add(request.turnId);
+    } else {
+      if (!this.read || this.providerPending || this.provider.status !== 'connected' || this.agentError || !this.agentSession || !this.agentVerified)
+        return reject('agent.unavailable', 'Connect an OpenAI account and refresh the native session before deciding an approval.');
+      if (!sequence(request.approvalId) || typeof request.approved !== 'boolean' || current?.status !== 'awaiting_approval'
+        || current.pending?.turn !== request.turnId || current.pending.id !== request.approvalId
+        || this.agentCancelling.has(request.turnId)
+        || this.agentDecisions.has(`${request.turnId}:${request.approvalId}`)) return reject('agent.stale-approval', 'This agent approval is no longer pending.');
+      this.agentDecisions.add(`${request.turnId}:${request.approvalId}`);
+    }
+    const generation = ++this.agentGeneration;
+    try {
+      const result = request.type === 'agent.cancel'
+        ? await this.invoke<unknown>('engine_agent_cancel', { turnId: request.turnId })
+        : await this.invoke<unknown>('engine_agent_decide', { turnId: request.turnId, approvalId: request.approvalId, approved: request.approved });
+      if (result !== null && result !== undefined) throw invalidAgentResponse();
+      await this.refreshAgent();
+      return { ok: true };
+    } catch (error) {
+      if (generation === this.agentGeneration) {
+        await this.refreshAgent();
+        this.agentError = agentFailure(error);
+        this.publishAgent();
+      }
+      if (request.type === 'agent.approve') this.agentDecisions.delete(`${request.turnId}:${request.approvalId}`);
+      return { ok: false, error: agentFailure(error) };
+    } finally { this.agentCancelling.delete(request.turnId); }
   }
   updatePlay(status: PlayStatus) {
     if (this.play && (status.generation < this.play.generation || status.sequence < this.play.sequence)) return;
@@ -577,14 +870,26 @@ export class NativeBridge implements EditorBridge {
     }
   }
   async request(request: HostRequest): Promise<BridgeResult> {
+    if (request.type === 'agent.send' || request.type === 'agent.cancel' || request.type === 'agent.approve') return this.requestAgent(request);
     if (request.type === 'play.start' || request.type === 'play.pause' || request.type === 'play.resume' || request.type === 'play.step' || request.type === 'play.stop' || request.type === 'play.inspect' || request.type === 'play.input') return this.requestPlay(request);
     if (request.type === "provider.connect" || request.type === "provider.cancel" || request.type === "provider.disconnect" || request.type === "provider.switch") {
       if (request.type === "provider.connect" && request.method !== "oauth") return failure("Use incant auth api-key for the hidden API-key prompt.");
+      ++this.providerPending;
+      const providerGeneration = ++this.providerGeneration;
+      ++this.agentGeneration;
+      this.agentVerified = false;
+      this.publishAgent();
       try {
         await this.invoke("provider_action", { action: request.type.slice("provider.".length), accountId: "accountId" in request ? request.accountId ?? null : null, add: "add" in request ? request.add ?? false : false });
-        this.updateProvider(await this.invoke<ProviderState>("provider_read"));
+        const provider = await this.invoke<ProviderState>("provider_read");
+        if (providerGeneration === this.providerGeneration) this.updateProvider(provider);
         return { ok: true };
       } catch (error) { return failure(error); }
+      finally {
+        --this.providerPending;
+        this.publishAgent();
+        if ((this.agentSession || this.agentPolling) && !this.providerPending) void this.refreshAgent();
+      }
     }
     if (
       request.type === "window.drag" ||
@@ -632,7 +937,9 @@ export function installNativeBridge(): NativeBridge | undefined {
   const bridge = new NativeBridge(invoke);
   host.__INCANT_BRIDGE__ = bridge;
   const stopPlayUpdates = bridge.startPlayUpdates();
+  const stopAgentUpdates = bridge.startAgentUpdates();
   window.addEventListener('pagehide', stopPlayUpdates, { once: true });
+  window.addEventListener('pagehide', stopAgentUpdates, { once: true });
   void bridge.startEngineUpdates(host.__TAURI__?.event?.listen);
   void bridge.startHistoryRequests(host.__TAURI__?.event?.listen)
     .catch(() => console.error("Native history menu could not be connected."));
