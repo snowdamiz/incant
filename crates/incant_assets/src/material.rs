@@ -1,5 +1,6 @@
 pub use incant_assets_runtime::{AlphaMode, Material, MaterialTexture};
 
+#[cfg(not(target_arch = "wasm32"))]
 pub(crate) fn resolve(
     values: &[serde_json::Value],
     textures: &[crate::ModelTexture],

@@ -3,6 +3,7 @@ mod atlas;
 mod audio;
 mod audio_cook;
 mod cache;
+#[cfg_attr(target_arch = "wasm32", path = "fbx_browser.rs")]
 mod fbx;
 mod gltf_import;
 mod ktx;

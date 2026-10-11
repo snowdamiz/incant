@@ -4060,6 +4060,7 @@ dependencies = [
 name = "incant_platform_smoke"
 version = "0.0.1"
 dependencies = [
+ "incant_assets",
  "incant_core",
  "incant_doc",
  "incant_input",

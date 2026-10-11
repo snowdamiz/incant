@@ -1,3 +1,5 @@
+#![cfg(not(target_arch = "wasm32"))]
+
 use incant_assets::{ImportedModel, cook_fbx, import_fbx, load_model};
 use std::{
     fs,

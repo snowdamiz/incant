@@ -14,6 +14,21 @@ fn request(source: &str) -> ImportRequest {
         texture_usage: None,
     }
 }
+fn journal_bytes(bus: &mut CommandBus, journal: &Path) -> Vec<u8> {
+    let project = bus.project().clone();
+    let revision = bus.revision();
+    // Windows denies independent reads while the persistent bus owns its lock.
+    // Inspect exact bytes after releasing it, then verify recovered state.
+    drop(std::mem::replace(
+        bus,
+        CommandBus::new(project.clone()).unwrap(),
+    ));
+    let bytes = fs::read(journal).unwrap();
+    *bus = CommandBus::persistent(journal, project.clone()).unwrap();
+    assert_eq!(bus.project(), &project);
+    assert_eq!(bus.revision(), revision);
+    bytes
+}
 #[test]
 fn fbx_import_reimport_refusal_and_history_are_one_existing_transaction() {
     let root = tempfile::tempdir().unwrap();
@@ -55,7 +70,7 @@ fn fbx_import_reimport_refusal_and_history_are_one_existing_transaction() {
     assert_eq!(bus.project().assets[&first.id], first);
     bus.redo().unwrap();
     assert_eq!(bus.project(), &accepted);
-    let before_journal = fs::read(&journal).unwrap();
+    let before_journal = journal_bytes(&mut bus, &journal);
     let before_revision = bus.revision();
     fs::copy(
         fixtures().join("maya_textured_cube_7500_ascii.fbx"),
@@ -69,7 +84,7 @@ fn fbx_import_reimport_refusal_and_history_are_one_existing_transaction() {
     );
     assert_eq!(bus.project(), &accepted);
     assert_eq!(bus.revision(), before_revision);
-    assert_eq!(fs::read(&journal).unwrap(), before_journal);
+    assert_eq!(journal_bytes(&mut bus, &journal), before_journal);
     fs::write(root.join("cube.FBX"), b"truncated FBX").unwrap();
     assert!(
         ImportSnapshot::capture(&bus)
