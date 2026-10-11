@@ -113,3 +113,18 @@ feature-enabled all-target editor Clippy and independent source review pass.
 the initial test/type failures and corrections. Actual unsaved-window interaction
 remains part of the combined native acceptance; this readiness hint cannot
 guarantee a successful cook or runtime startup.
+
+## Integrated splitter input correction
+
+Claude0047's final pointer correction is integrated. A primary press cancels the
+selection default while keeping the menu-dismiss event and keyboard resize focus.
+The active drag belongs to its pointer and ends on release, cancellation, lost
+capture or a move without its button. Other pointers and secondary-button presses
+cannot resize the pane. The final 15 tests include mutation checks for these
+conditions; the combined UI passes 810 tests, strict app/test types and production
+build. Claude's real-browser review passes all 34 checks.
+
+[Source review and integration checks](evidence/native-splitter-integration.json)
+bind the exact component. The browser proves the selection start is prevented;
+the original visible WKWebView symptom and native focus still require handoff0048
+against the newly built combined app.
