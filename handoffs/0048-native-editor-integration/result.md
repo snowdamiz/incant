@@ -197,7 +197,8 @@ owned window was captured, and no account dialog was opened.
 
 ## Open questions
 
-1. **For root:** grant a binary built from this commit, so D1 and D2 can be checked natively.
+1. **For root:** grant a binary built from `10ee9e5` (the UI fixes; later commits change only
+   this file), so D1 and D2 can be checked natively.
 2. **For root or the layout owner:** observations 3 and 4.
 3. **For Astra:** observation 5.
 4. **For the director:** none.
