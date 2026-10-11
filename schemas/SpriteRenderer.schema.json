@@ -1,0 +1,170 @@
+{
+  "$defs": {
+    "SpriteMode": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "simple",
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "border": {
+              "description": "Source-pixel widths of left, right, top and bottom borders.",
+              "items": {
+                "format": "uint32",
+                "minimum": 0,
+                "type": "integer"
+              },
+              "maxItems": 4,
+              "minItems": 4,
+              "type": "array"
+            },
+            "kind": {
+              "const": "nine_slice",
+              "type": "string"
+            },
+            "pixels_per_unit": {
+              "description": "Unstretched border density. Small targets proportionally compress borders.",
+              "format": "double",
+              "type": "number"
+            }
+          },
+          "required": [
+            "kind",
+            "border",
+            "pixels_per_unit"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "SpriteRegion": {
+      "anyOf": [
+        {
+          "description": "Explicit source rectangle in top-left pixel coordinates.",
+          "items": {
+            "format": "uint32",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "type": "array"
+        },
+        {
+          "additionalProperties": false,
+          "description": "Stable frame identity, resolved from the current cooked atlas metadata.",
+          "properties": {
+            "frame": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "frame"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "SpriteSampling": {
+      "enum": [
+        "nearest",
+        "linear"
+      ],
+      "type": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "flip_x": {
+      "default": false,
+      "type": "boolean"
+    },
+    "flip_y": {
+      "default": false,
+      "type": "boolean"
+    },
+    "layer": {
+      "default": 0,
+      "description": "Lower layers draw first. Equal layer/order uses the stable entity ID.",
+      "format": "int16",
+      "maximum": 32767,
+      "minimum": -32768,
+      "type": "integer"
+    },
+    "mode": {
+      "$ref": "#/$defs/SpriteMode",
+      "default": {
+        "kind": "simple"
+      }
+    },
+    "order": {
+      "default": 0,
+      "format": "int32",
+      "type": "integer"
+    },
+    "pivot": {
+      "description": "Normalized local anchor measured from the bottom left.",
+      "items": {
+        "format": "double",
+        "type": "number"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "type": "array"
+    },
+    "region": {
+      "$ref": "#/$defs/SpriteRegion",
+      "description": "Explicit source rectangle or stable atlas frame. No implicit cropping."
+    },
+    "sampling": {
+      "$ref": "#/$defs/SpriteSampling",
+      "default": "nearest"
+    },
+    "size": {
+      "description": "Local width and height in metres, before the entity's inherited transform.",
+      "items": {
+        "format": "double",
+        "type": "number"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "type": "array",
+      "x-incant-unit": "m"
+    },
+    "texture": {
+      "description": "Stable ID of a cooked color texture. Source files are unnecessary at runtime.",
+      "type": "string"
+    },
+    "tint": {
+      "description": "Linear-light RGBA multiplier; alpha is straight in the document.",
+      "items": {
+        "format": "double",
+        "type": "number"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array"
+    }
+  },
+  "required": [
+    "texture",
+    "region",
+    "size",
+    "pivot",
+    "tint"
+  ],
+  "title": "SpriteRenderer",
+  "type": "object"
+}

@@ -1,7 +1,8 @@
 /*
- * Asset library, revision 4. Assets live in the left column as a second view beside the
+ * Asset library, revision 5. Assets live in the left column as a second view beside the
  * Hierarchy, and their details, reimport and import open in the Inspector. Same row pill,
  * focus ring, panel surfaces and section rhythm as the hierarchy and entity inspector.
+ * The list mounts only the folders and rows near its scroll position.
  */
 
 /* ---- Left column: Hierarchy | Assets ---- */
@@ -154,22 +155,33 @@
 }
 
 .asset-list {
+  position: relative;
   flex: 1;
   min-height: 0;
   overflow: auto;
-  padding: var(--space-1) 0 var(--space-4);
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border-strong) transparent;
 }
 
-.asset-list__group + .asset-list__group {
-  margin-top: var(--space-3);
+.asset-list__canvas {
+  position: relative;
+}
+
+.asset-list__group {
+  position: absolute;
+  left: 0;
+  right: 0;
 }
 
 .asset-list__folder {
+  position: absolute;
+  top: 0;
+  left: var(--space-3);
+  right: var(--space-3);
   display: flex;
   align-items: center;
   gap: 6px;
   height: 26px;
-  margin: 0 var(--space-3);
   padding: 0 var(--space-2);
   color: var(--color-text-subtle);
   font-size: var(--text-xs);
@@ -184,11 +196,13 @@
 }
 
 .asset-row {
+  position: absolute;
+  left: var(--space-3);
+  right: var(--space-3);
   display: flex;
   align-items: center;
   gap: 8px;
   height: var(--row-height);
-  margin: 0 var(--space-3);
   padding: 0 var(--space-3) 0 calc(var(--space-2) + var(--indent));
   border-radius: var(--radius);
   color: var(--color-text-soft);
@@ -207,6 +221,15 @@
 }
 
 .asset-row.is-selected .asset-row__name {
+  font-weight: var(--weight-medium);
+}
+
+.asset-row:focus-visible,
+.asset-row[data-focus-visible] {
+  outline-offset: -2px;
+}
+
+.asset-row__name {
   font-weight: var(--weight-medium);
 }
 
@@ -240,14 +263,6 @@
   background: var(--color-success);
 }
 
-.kind--model {
-  color: #a3adff;
-}
-
-.kind--texture {
-  color: #73d6c2;
-}
-
 /* ---- Inspector: asset details and import ---- */
 
 .asset-inspector {
@@ -256,31 +271,18 @@
   min-height: 100%;
 }
 
-/* The name takes focus when details open. Padding keeps the ring off the text so it reads
-   as focus on a title, not as an editable field (native review, 2026-10-09). */
-.asset-inspector__title {
-  width: fit-content;
-  max-width: 100%;
-  margin: 0 0 0 -6px;
-  padding: 1px 6px;
-  border-radius: var(--radius);
-}
-
-.asset-inspector__title:focus-visible,
-.asset-inspector__title[data-focus-visible] {
-  outline-offset: 0;
-}
-
 .asset-details {
   display: flex;
   flex-direction: column;
 }
 
+/* Sections share the entity Inspector's rhythm: hairline-separated, 12 px gutters,
+   value boxes 28 px tall on the raised fill. */
 .asset-section {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  padding: var(--space-4) var(--space-4) var(--space-4) var(--space-5);
+  padding: 14px 12px 16px var(--inspector-pad);
   border-top: 1px solid var(--color-border);
 }
 
@@ -314,9 +316,10 @@
 }
 
 .asset-source {
-  padding: 6px var(--space-3);
-  border-radius: var(--radius);
-  background: var(--color-bg-well);
+  min-height: var(--field-height);
+  padding: 5px var(--space-3);
+  border-radius: 5px;
+  background: var(--color-bg-raised);
   color: var(--color-text-soft);
   font-size: var(--text-xs);
   line-height: 18px;
@@ -324,7 +327,24 @@
   user-select: text;
 }
 
+/* A saved setting reimport cannot change (a sprite atlas is always color): the value in
+   the same raised box as the source path, with no control around it. */
+.asset-value {
+  display: flex;
+  align-items: center;
+  min-height: var(--field-height);
+  padding: 0 var(--space-3);
+  border-radius: 5px;
+  background: var(--color-bg-raised);
+  color: var(--color-text-soft);
+  font-size: var(--text-xs);
+}
+
+/* The same chevron as a component header, so every disclosure reads alike. */
 .asset-ids > summary {
+  display: flex;
+  align-items: center;
+  gap: 7px;
   width: fit-content;
   list-style: none;
   cursor: pointer;
@@ -336,20 +356,12 @@
   display: none;
 }
 
-.asset-ids > summary::before {
-  content: '';
-  display: inline-block;
-  width: 0;
-  height: 0;
-  margin-right: 8px;
-  border-left: 4px solid currentColor;
-  border-top: 4px solid transparent;
-  border-bottom: 4px solid transparent;
-  vertical-align: 1px;
+.asset-ids__chevron {
+  color: var(--color-text-subtle);
   transition: transform var(--duration-fast);
 }
 
-.asset-ids[open] > summary::before {
+.asset-ids[open] .asset-ids__chevron {
   transform: rotate(90deg);
 }
 
@@ -415,14 +427,14 @@
   padding: 2px;
   border: 0;
   border-radius: var(--radius);
-  background: var(--color-bg-well);
+  background: var(--color-bg-raised);
 }
 
 .segmented__option {
   position: relative;
   display: inline-flex;
   align-items: center;
-  height: 22px;
+  height: 24px;
   padding: 0 9px;
   border-radius: var(--radius-sm);
   color: var(--color-text-muted);
@@ -444,8 +456,8 @@
 }
 
 .segmented__option:has(input:checked) {
-  background: var(--color-bg-hover);
-  box-shadow: inset 0 0 0 1px var(--color-border-control);
+  background: var(--color-bg-selected);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-accent) 45%, transparent);
   color: var(--color-text);
   font-weight: var(--weight-medium);
 }
@@ -675,7 +687,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-  padding: 0 var(--space-4) 0 var(--space-5);
+  padding: 0 10px 0 var(--inspector-pad);
 }
 
 .import-form > .asset-note {
@@ -686,11 +698,11 @@
 .import-form__footer {
   position: sticky;
   bottom: 0;
-  margin: auto calc(-1 * var(--space-4)) 0 calc(-1 * var(--space-5));
+  margin: auto -10px 0 calc(-1 * var(--inspector-pad));
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  padding: var(--space-3) var(--space-4) var(--space-3) var(--space-5);
+  padding: var(--space-3) 10px var(--space-3) var(--inspector-pad);
   border-top: 1px solid var(--color-border);
   background: var(--color-bg-side);
 }

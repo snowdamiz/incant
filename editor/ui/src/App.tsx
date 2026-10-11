@@ -5,13 +5,12 @@ import { PROVIDER_FIXTURE_NAMES } from './bridge/providerFixture';
 import { UI_PROTOCOL_VERSION } from './bridge/contract';
 import { AssetsProvider } from './assets/AssetsContext';
 import { AccountDialog } from './components/AccountDialog';
-import { AgentPanel } from './components/AgentPanel';
+import { AgentPanel, agentReady } from './components/AgentPanel';
 import { BottomDock } from './components/BottomDock';
 import { HierarchyPanel } from './components/HierarchyPanel';
 import { InspectorPanel } from './components/inspector/InspectorPanel';
 import { ShortcutsDialog } from './components/ShortcutsDialog';
 import { Splitter } from './components/Splitter';
-import { StateView } from './components/StateView';
 import { Titlebar } from './components/Titlebar';
 import { ViewportPanel } from './components/ViewportPanel';
 import { Icon } from './icons/Icon';
@@ -19,8 +18,11 @@ import { ShellProvider, useShell } from './shell/ShellContext';
 import { installInputModality } from './shell/inputModality';
 import { projectState } from './shell/projectState';
 import { focusRegion, nextRegion, regionOf } from './shell/regions';
-import { clampLayout, defaultLayout, idleAgentHeight } from './shell/layout';
+import { clampLayout, defaultLayout } from './shell/layout';
 import type { Layout } from './shell/layout';
+
+/** Below this window height the agent pane starts collapsed (its status line stays visible). */
+export const AGENT_OPEN_MIN_HEIGHT = 720;
 
 export function App({ resolution }: { resolution: BridgeResolution }) {
   if (resolution.kind === 'incompatible') {
@@ -28,7 +30,7 @@ export function App({ resolution }: { resolution: BridgeResolution }) {
       <FatalScreen title="Engine bridge version mismatch">
         <p>
           This editor UI speaks bridge protocol {UI_PROTOCOL_VERSION}; the engine offered protocol{' '}
-          {resolution.protocolVersion}. The UI will not guess at an unknown protocol.
+          {resolution.protocolVersion}.
         </p>
         <p className="subtle">Rebuild the editor so the UI and engine come from the same version.</p>
       </FatalScreen>
@@ -40,8 +42,8 @@ export function App({ resolution }: { resolution: BridgeResolution }) {
         <p>
           No fixture is named <code>{resolution.requested}</code>.
         </p>
-        <p className="subtle">Available: {FIXTURE_VARIANTS.join(', ')}.</p>
-        <p className="subtle">Account states (provider=): {PROVIDER_FIXTURE_NAMES.join(', ')}.</p>
+        <FatalChoices title="Sample fixtures (fixture=)" names={FIXTURE_VARIANTS} />
+        <FatalChoices title="Account states (provider=)" names={PROVIDER_FIXTURE_NAMES} />
       </FatalScreen>
     );
   }
@@ -54,13 +56,37 @@ export function App({ resolution }: { resolution: BridgeResolution }) {
   );
 }
 
+/**
+ * The whole window when the shell cannot start: the problem as the page's heading and
+ * what to do next, as plain text. Announced as an alert.
+ */
 function FatalScreen({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <main className="fatal">
-      <StateView icon="error" tone="error" title={title}>
-        {children}
-      </StateView>
+      <div className="fatal__content" role="alert">
+        <h1 className="fatal__title">
+          <Icon name="error" size={16} className="fatal__icon" />
+          {title}
+        </h1>
+        <div className="fatal__body">{children}</div>
+      </div>
     </main>
+  );
+}
+
+/** Valid names for a URL parameter, as a labelled list. */
+function FatalChoices({ title, names }: { title: string; names: readonly string[] }) {
+  return (
+    <div className="fatal__choices">
+      <p className="fatal__choices-title">{title}</p>
+      <ul className="fatal__chips" aria-label={title}>
+        {names.map((name) => (
+          <li key={name}>
+            <code>{name}</code>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
@@ -68,9 +94,9 @@ function Workbench() {
   const shell = useShell();
   const { bridge, snapshot, run, accountOpen, panels, togglePanel } = shell;
   const [layout, setLayout] = useState<Layout>(() => defaultLayout(window.innerWidth, window.innerHeight));
-  const [windowHeight, setWindowHeight] = useState(() => window.innerHeight);
-  // Until someone drags the Agent splitter, an agent that cannot run keeps a compact pane.
-  const [agentSized, setAgentSized] = useState(false);
+  // The agent pane's disclosure; collapsing leaves its one-line status. A short window
+  // starts with it collapsed, so the Inspector keeps the column; the choice then sticks.
+  const [agentOpen, setAgentOpen] = useState(() => window.innerHeight >= AGENT_OPEN_MIN_HEIGHT);
   const [shortcutsOpen, setShortcutsOpen] = useState(false);
   const shortcutsReturn = useRef<HTMLElement | null>(null);
 
@@ -85,10 +111,7 @@ function Workbench() {
   }, [attached]);
 
   useEffect(() => {
-    const onResize = () => {
-      setWindowHeight(window.innerHeight);
-      setLayout((current) => clampLayout(current, window.innerWidth, window.innerHeight));
-    };
+    const onResize = () => setLayout((current) => clampLayout(current, window.innerWidth, window.innerHeight));
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
   }, []);
@@ -103,8 +126,9 @@ function Workbench() {
     if (isTextEntry(document.activeElement)) {
       // WebKit owns the text edit buffer, including React-controlled inputs.
       // No standard API exposes its undo stack. Never fall back to project undo
-      // if this draft has nothing to undo or the browser refuses the command.
-      document.execCommand(action);
+      // if this draft has nothing to undo or the browser refuses the command
+      // (or no longer offers execCommand at all).
+      if (typeof document.execCommand === 'function') document.execCommand(action);
       return;
     }
     if (shortcutsOpen || accountOpen || document.activeElement?.closest('[role="dialog"]')) return;
@@ -149,11 +173,9 @@ function Workbench() {
   const resize = (patch: Partial<Layout>) =>
     setLayout((current) => clampLayout({ ...current, ...patch }, window.innerWidth, window.innerHeight));
 
-  const agentStatus = snapshot?.agent?.status;
-  const agentHeight =
-    agentSized || agentStatus === 'idle' || agentStatus === 'running'
-      ? layout.agent
-      : Math.min(layout.agent, idleAgentHeight(windowHeight));
+  // Only an open, ready agent (transcript and composer) is a resizable pane. Otherwise the
+  // pane is as tall as its content: one status line, or a short note with its next step.
+  const agentResizable = agentOpen && agentReady(snapshot?.agent?.status);
 
   const columns = [
     panels.hierarchy ? `${layout.left}px var(--splitter-size)` : '',
@@ -202,21 +224,15 @@ function Workbench() {
         {panels.inspector ? (
           <>
             <Splitter label="Resize inspector and agent" orientation="vertical" invert value={layout.right} min={280} max={560} onChange={(right) => resize({ right })} />
-            <div className="column column--side" style={{ gridTemplateRows: `minmax(0, 1fr) var(--splitter-size) ${agentHeight}px` }}>
+            <div
+              className="column column--side"
+              style={{ gridTemplateRows: agentResizable ? `minmax(0, 1fr) var(--splitter-size) ${layout.agent}px` : 'minmax(0, 1fr) auto' }}
+            >
               <InspectorPanel />
-              <Splitter
-                label="Resize agent panel"
-                orientation="horizontal"
-                invert
-                value={agentHeight}
-                min={180}
-                max={560}
-                onChange={(agent) => {
-                  setAgentSized(true);
-                  resize({ agent });
-                }}
-              />
-              <AgentPanel />
+              {agentResizable ? (
+                <Splitter label="Resize agent panel" orientation="horizontal" invert value={layout.agent} min={180} max={560} onChange={(agent) => resize({ agent })} />
+              ) : null}
+              <AgentPanel open={agentOpen} onToggle={() => setAgentOpen((open) => !open)} />
             </div>
           </>
         ) : null}
@@ -256,8 +272,7 @@ function ConnectionBanner() {
       <div className="notice notice--info" role="note">
         <Icon name="plug" size={14} />
         <span>
-          <strong>No engine connected.</strong> You are looking at the editor shell. Open a project from the Incant
-          editor to start.
+          <strong>No engine connected.</strong> Open a project from the Incant editor to start.
         </span>
       </div>
     );
@@ -293,26 +308,53 @@ function ConnectionBanner() {
 }
 
 function StatusBar() {
-  const { snapshot, bridge, message, capabilities } = useShell();
+  const { snapshot, bridge, message, capabilities, showPanel, setDockTab } = useShell();
   const connection = snapshot?.connection.status;
   const tone = !bridge ? 'idle' : bridge.isFixture ? 'fixture' : connection === 'ready' ? 'ok' : connection === 'error' ? 'error' : 'pending';
   const errors = snapshot?.diagnostics.filter((d) => d.severity === 'error').length ?? 0;
   const warnings = snapshot?.diagnostics.filter((d) => d.severity === 'warning').length ?? 0;
-  // While the project is opening nothing has been validated, so no counts are claimed.
-  const loading = projectState(snapshot).kind === 'loading';
+  // While the project is opening nothing has been validated, so no counts are claimed;
+  // a project that failed to open is not "clear" either, only its reported problems count.
+  const project = projectState(snapshot).kind;
+  const unvalidated = project === 'loading' || (project === 'failed' && errors === 0 && warnings === 0);
   return (
     <footer className="statusbar">
       <span className={`statusbar__conn statusbar__conn--${tone}`}>
         <span className="statusbar__dot" aria-hidden="true" />
         {bridge ? bridge.label : 'No engine'}
       </span>
-      {snapshot && !loading ? (
-        <span className="statusbar__item">
-          <Icon name="error" size={12} className="sev sev--error" />
-          {errors} <span className="visually-hidden">errors,</span>
-          <Icon name="warning" size={12} className="sev sev--warning" />
-          {warnings} <span className="visually-hidden">warnings</span>
-        </span>
+      {snapshot && !unvalidated ? (
+        <button
+          type="button"
+          className={`statusbar__problems${errors ? ' has-errors' : warnings ? ' has-warnings' : ' is-clear'}`}
+          title="Show problems"
+          onClick={() => {
+            showPanel('dock');
+            setDockTab('problems');
+          }}
+        >
+          {errors === 0 && warnings === 0 ? (
+            <>
+              <Icon name="check" size={12} className="sev sev--clear" />
+              No problems
+            </>
+          ) : (
+            <>
+              {errors ? (
+                <span className="statusbar__count">
+                  <Icon name="error" size={12} className="sev sev--error" />
+                  {errors} <span className="visually-hidden">{errors === 1 ? 'error' : 'errors'}{warnings ? ', ' : ''}</span>
+                </span>
+              ) : null}
+              {warnings ? (
+                <span className="statusbar__count">
+                  <Icon name="warning" size={12} className="sev sev--warning" />
+                  {warnings} <span className="visually-hidden">{warnings === 1 ? 'warning' : 'warnings'}</span>
+                </span>
+              ) : null}
+            </>
+          )}
+        </button>
       ) : null}
       <span className="statusbar__message" role="status" aria-live="polite">
         {message}
@@ -322,9 +364,6 @@ function StatusBar() {
           {capabilities.unknown.length} unknown capabilities ignored
         </span>
       ) : null}
-      <span className="statusbar__hint">
-        <kbd>F6</kbd> next panel · <kbd>?</kbd> shortcuts
-      </span>
     </footer>
   );
 }

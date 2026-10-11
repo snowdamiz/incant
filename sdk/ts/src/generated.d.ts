@@ -26,7 +26,7 @@ export namespace CalendarDateSchema {
 export type CalendarDate = CalendarDateSchema.Root;
 
 export namespace CameraSchema {
-  export type CameraProjection = ({ "kind": "perspective" }) | ({ "kind": "orthographic"; "vertical_size": number });
+  export type CameraProjection = ({ "kind": "perspective" }) | ({ "kind": "orthographic"; "vertical_size": number }) | ({ "kind": "pixel_perfect"; "pixels_per_unit": number; "reference_resolution": [number, number] });
   export type Root = { "far": number; "fov_degrees": number; "near": number; "projection"?: CameraProjection };
 }
 export type Camera = CameraSchema.Root;
@@ -321,6 +321,20 @@ export namespace SpotLightSchema {
   export type Root = { "color": [number, number, number]; "inner_degrees": number; "intensity": number; "outer_degrees": number; "range": number };
 }
 export type SpotLight = SpotLightSchema.Root;
+
+export namespace SpriteAtlasSchema {
+  export type AtlasSource = { "name": string; "path": string; "region"?: [number, number, number, number] | null };
+  export type Root = { "frames": { [key: string]: AtlasSource }; "id": string; "maximum_size": [number, number]; "padding": number; "version": number };
+}
+export type SpriteAtlas = SpriteAtlasSchema.Root;
+
+export namespace SpriteRendererSchema {
+  export type SpriteMode = ({ "kind": "simple" }) | ({ "border": [number, number, number, number]; "kind": "nine_slice"; "pixels_per_unit": number });
+  export type SpriteRegion = ([number, number, number, number]) | ({ "frame": string });
+  export type SpriteSampling = "nearest" | "linear";
+  export type Root = { "flip_x"?: boolean; "flip_y"?: boolean; "layer"?: number; "mode"?: SpriteMode; "order"?: number; "pivot": [number, number]; "region": SpriteRegion; "sampling"?: SpriteSampling; "size": [number, number]; "texture": string; "tint": [number, number, number, number] };
+}
+export type SpriteRenderer = SpriteRendererSchema.Root;
 
 export namespace SteeringAgentSchema {
   export type Root = { "height": number; "id": string; "max_speed": number; "position": [number, number, number]; "preferred_velocity": [number, number]; "radius": number; "responsibility": number; "velocity": [number, number] };

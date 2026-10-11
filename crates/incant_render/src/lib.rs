@@ -14,10 +14,12 @@ mod material_pipeline;
 mod materials;
 mod models;
 mod output;
+mod pixel_grid;
 mod preview_environment;
 mod resource_error;
 mod scene;
 mod shadows;
+mod sprites;
 mod studio;
 #[cfg(test)]
 #[path = "../tests/support/mod.rs"]
@@ -56,6 +58,7 @@ pub struct Renderer {
     pipelines: Mutex<HashMap<wgpu::TextureFormat, wgpu::RenderPipeline>>,
     models: Mutex<models::ModelCache>,
     materials: materials::MaterialSystem,
+    sprites: sprites::SpriteSystem,
     environments: environment::EnvironmentSystem,
     lighting: lighting::LightingSystem,
     shadows: shadows::ShadowSystem,
@@ -87,7 +90,9 @@ impl Renderer {
         let shadows = shadows::ShadowSystem::new(&device);
         let materials =
             materials::MaterialSystem::new(&device, &queue, &environments.layout, &lighting.layout);
+        let sprites = sprites::SpriteSystem::new(&device);
         Ok(Self {
+            sprites,
             device,
             queue,
             adapter,
@@ -209,26 +214,58 @@ impl Renderer {
         if viewport.is_some_and(|v| v.corner_radii.iter().any(|r| !r.is_finite() || *r < 0.)) {
             return Err("invalid viewport corner radius".into());
         }
-        let attachments = self.frames.get(&self.device, width, height)?;
+        frame::FrameCache::validate(&self.device, width, height)?;
+        let grid = scene
+            .camera
+            .pixel_resolution
+            .map(|resolution| pixel_grid::PixelGrid::fit(resolution, rect))
+            .transpose()?;
+        let (frame_size, scene_rect) = if let Some(grid) = &grid {
+            (
+                grid.resolution,
+                [0., 0., grid.resolution[0] as f32, grid.resolution[1] as f32],
+            )
+        } else {
+            ([width, height], rect)
+        };
+        let attachments = self
+            .frames
+            .get(&self.device, frame_size[0], frame_size[1])?;
         let diagnostics =
-            diagnostic_draw::DiagnosticDraw::prepare(self, scene, attachments.clone(), rect)?;
+            diagnostic_draw::DiagnosticDraw::prepare(self, scene, attachments.clone(), scene_rect)?;
         let models = self.prepare_models(
             scene,
             models::ModelTarget {
                 color: attachments.color.clone(),
                 depth: attachments.depth.clone(),
                 format: frame::HDR_FORMAT,
-                rect,
+                rect: scene_rect,
             },
         )?;
-        let output =
-            self.output
-                .prepare(&self.device, &attachments.color, view, format, viewport)?;
+        let sprites = self.sprites.prepare(
+            &self.device,
+            scene,
+            models::ModelTarget {
+                color: attachments.color.clone(),
+                depth: attachments.depth.clone(),
+                format: frame::HDR_FORMAT,
+                rect: scene_rect,
+            },
+        )?;
+        let output = self.output.prepare(
+            &self.device,
+            &attachments.color,
+            view,
+            format,
+            viewport,
+            grid.map(|g| g.output),
+        )?;
         self.graph.encode(
             &self.device,
             graph::PreparedFrame {
                 diagnostics,
                 models,
+                sprites,
                 output,
             },
         )

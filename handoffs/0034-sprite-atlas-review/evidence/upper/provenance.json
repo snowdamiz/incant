@@ -1,0 +1,56 @@
+{
+ "upper-1": {
+  "binary_sha256_start": "b72389ee24276459938705850b5cfe3efe2ffb1b744ba94ecf1f5d2ba8cc27a2",
+  "binary_sha256_end": "b72389ee24276459938705850b5cfe3efe2ffb1b744ba94ecf1f5d2ba8cc27a2",
+  "binary_unchanged_every_call": true,
+  "engine_calls": 16,
+  "planned": {
+   "frames": 4,
+   "raw_bytes": 33177600
+  }
+ },
+ "upper-2-swapped": {
+  "binary_sha256_start": "b72389ee24276459938705850b5cfe3efe2ffb1b744ba94ecf1f5d2ba8cc27a2",
+  "planned": {
+   "frames": 4,
+   "raw_bytes": 33177600
+  },
+  "board_centres": {
+   "U": [
+    500.0,
+    500.0
+   ],
+   "UV": [
+    0.0,
+    0.0
+   ]
+  },
+  "frames": [
+   {
+    "run": "upper-2-swapped",
+    "path": "artifacts/0034-sprite-atlas-review/upper-2-swapped/states/atlas/pp-U-1920x1080.png",
+    "frames": 1,
+    "raw": 8294400
+   },
+   {
+    "run": "upper-2-swapped",
+    "path": "artifacts/0034-sprite-atlas-review/upper-2-swapped/states/atlas/pp-UV-1920x1080.png",
+    "frames": 1,
+    "raw": 8294400
+   },
+   {
+    "run": "upper-2-swapped",
+    "path": "artifacts/0034-sprite-atlas-review/upper-2-swapped/states/control/pp-U-1920x1080.png",
+    "frames": 1,
+    "raw": 8294400
+   },
+   {
+    "run": "upper-2-swapped",
+    "path": "artifacts/0034-sprite-atlas-review/upper-2-swapped/states/control/pp-UV-1920x1080.png",
+    "frames": 1,
+    "raw": 8294400
+   }
+  ],
+  "note": "Every engine call verified the binary hash before and after and aborts on a mismatch; the run completed. Its summary file was misnamed 'UV:56x:506' by a since-fixed variable-shadowing slip and lacks end-of-run fields."
+ }
+}

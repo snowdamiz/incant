@@ -80,6 +80,14 @@ export function requestFor(row: DraftRow, assets: readonly ProjectAsset[]): Asse
   return { source: row.source, textureUsage: row.usage };
 }
 
+/** Only ordinary images support changing interpretation; atlases stay color textures. */
+export function reimportRequest(asset: ProjectAsset, usage?: TextureUsage): AssetImportRequest {
+  return asset.kind === 'texture' && sourceKind(asset.path) === 'image'
+    && usage !== undefined && usage !== (asset.textureUsage ?? 'color')
+    ? { source: asset.path, textureUsage: usage }
+    : { source: asset.path };
+}
+
 /** The rows an import sends: blank rows are ignored unless every row is blank. */
 export function filledRows(draft: readonly DraftRow[]): readonly DraftRow[] {
   const filled = draft.filter((row) => row.source !== '');
@@ -204,10 +212,7 @@ export function AssetsProvider({ children }: { children: ReactNode }) {
     async (asset: ProjectAsset) => {
       const chosen = reimportUsage[asset.id];
       // Omitting the usage keeps the saved setting; it is sent only when the user changed it.
-      const source: AssetImportRequest =
-        asset.kind === 'texture' && chosen !== undefined && chosen !== (asset.textureUsage ?? 'color')
-          ? { source: asset.path, textureUsage: chosen }
-          : { source: asset.path };
+      const source = reimportRequest(asset, chosen);
       return start({ kind: 'reimport', sources: [source], asset: asset.id, name: asset.name });
     },
     [reimportUsage, start],

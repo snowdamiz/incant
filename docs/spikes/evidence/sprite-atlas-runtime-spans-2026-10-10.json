@@ -1,0 +1,131 @@
+{
+  "date": "2026-10-10",
+  "atlas_parent": "0efa73c0a5f95ad84a6b21ca1b0127a25bc05646",
+  "sprite_parent": "e4ec2a1d91bd5720aa099f35b6906528433b79fd",
+  "binary_sha256": "0257f7617d81a479788aaacd40697fe524978ace4a1c136e3a3b057ec0ffd8aa",
+  "checks": {
+    "workspace_normal": 365,
+    "workspace_ignored_gpu": 56,
+    "ui_tests": 420,
+    "tool_tests": 25,
+    "workspace_clippy": "pass",
+    "combined_release_build": "pass",
+    "ui_sdk_builds": "pass",
+    "schemas_and_sdk_unchanged": true,
+    "authoring_free_dependency_guard": "pass",
+    "workflow_lint": "pass"
+  },
+  "public_probes": {
+    "public": {
+      "passed": true,
+      "strict_typescript": true,
+      "stable_asset_and_frame_ids": true,
+      "target_frame_relocated": true,
+      "exact_reimport_undo_redo": true,
+      "sources_removed_before_runtime": true,
+      "exact_saved_and_repeated_state": true,
+      "binary_sha256": "0257f7617d81a479788aaacd40697fe524978ace4a1c136e3a3b057ec0ffd8aa",
+      "authored_hashes": {
+        "game.incant.json": "bf7879aef49a7f2c6ebe51bb85438d89003548369f2a15ee3c5d0f3bb52a623a",
+        "game.incant.journal.jsonl": "35cb26e45843c3ba9c4b3ac463bcf8e74ddbac6cb2df7b1a6d8a37a9d790951e"
+      },
+      "rendering_or_device_gate": false
+    },
+    "sprite": {
+      "passed": true,
+      "strict_typescript": true,
+      "source_removed_before_runtime": true,
+      "exact_saved_and_repeated_state": true,
+      "atomic_rollback_and_undo_redo": true,
+      "authored_hashes": {
+        "game.incant.json": "48409d5252ed6e0013fa21c943793c6ba094b95cf14a9df2a1d6f161e1ed0927",
+        "game.incant.journal.jsonl": "517bdcaa4e888c87edaa76d6a89b280600b1c7c6b5b256c08a130280d2543ebe"
+      },
+      "binary_sha256": "0257f7617d81a479788aaacd40697fe524978ace4a1c136e3a3b057ec0ffd8aa",
+      "rendering_or_device_gate": false
+    },
+    "pixel": {
+      "passed": true,
+      "strict_typescript": true,
+      "legacy_camera_authored_via_shared_commands": true,
+      "projection_kind": "pixel_perfect",
+      "subpixel_simulation_movement_checked": true,
+      "runtime_projection_edits_save_resume_and_repeat_exact": true,
+      "author_files_unchanged": {
+        "camera.incant.json": "5275a227bfef01ec9412254a57b7302a92487b82f312acfedc0889aaffd0a1d8",
+        "camera.incant.journal.jsonl": "d323dc9ddf783b4e9f2025b2216e9a248997566c8a71aeb7783b042c77f1c20b"
+      },
+      "binary_sha256": "0257f7617d81a479788aaacd40697fe524978ace4a1c136e3a3b057ec0ffd8aa",
+      "rendering_or_device_gate": false
+    },
+    "camera": {
+      "passed": true,
+      "strict_typescript": true,
+      "legacy_camera_authored_via_shared_commands": true,
+      "projection_kind": "orthographic",
+      "subpixel_simulation_movement_checked": false,
+      "runtime_projection_edits_save_resume_and_repeat_exact": true,
+      "author_files_unchanged": {
+        "camera.incant.json": "83ca8f316f4d5f0ad45b83f8b958f8bafa207923af49718da12dd0396466bf43",
+        "camera.incant.journal.jsonl": "24f59a1cbf62c912d6687d609c3880220b2b40383d3a20239ce1a4b63b41c167"
+      },
+      "binary_sha256": "0257f7617d81a479788aaacd40697fe524978ace4a1c136e3a3b057ec0ffd8aa",
+      "rendering_or_device_gate": false
+    }
+  },
+  "logs": {
+    "tests": {
+      "path": "/tmp/incant-atlas-runtime-spans-tests.log",
+      "sha256": "ff4dad7270306781df4fa541dec515b5f839a436f3d0e1f364ece9875b6b5192"
+    },
+    "gpu": {
+      "path": "/tmp/incant-atlas-runtime-spans-gpu.log",
+      "sha256": "5313ded99391cec7706222309b473a11ee02d5da429b6964e09fcc2150101e84"
+    },
+    "clippy": {
+      "path": "/tmp/incant-atlas-runtime-spans-clippy.log",
+      "sha256": "8bfae2efc1cd806bc5c687f7b4038c5b4a339e0aa6d59826e73bf6f5889394c8"
+    },
+    "build": {
+      "path": "/tmp/incant-atlas-runtime-spans-build.log",
+      "sha256": "5cfe9cedfb7219ae9828a766d9a7b05de6e5acbe8184b6560937c06e94ebd093"
+    },
+    "tools": {
+      "path": "/tmp/incant-atlas-runtime-spans-tools.log",
+      "sha256": "5af378a0cc3c3270a44c5c2883e18d5dab5ef56077d773bcabf76c818445f758"
+    },
+    "ui-tests": {
+      "path": "/tmp/incant-atlas-runtime-spans-ui-tests.log",
+      "sha256": "84d6280477227e0c23395b518484c0b680f3987a88b945c6a87ab28e2ec56fbe"
+    },
+    "ui-build": {
+      "path": "/tmp/incant-atlas-runtime-spans-ui-build.log",
+      "sha256": "137800e5e6103c1a0ec7e37dcb1c59c387df27d92cf1785a803f09b2fa4bed02"
+    },
+    "public": {
+      "path": "/tmp/incant-atlas-runtime-spans-public.log",
+      "sha256": "7020f5be4e75ad8b102eb87febead2a72c440e1f0e7cc3daf226795f1e0bd1af"
+    },
+    "sprite": {
+      "path": "/tmp/incant-atlas-runtime-spans-sprite.log",
+      "sha256": "de696e8e6b2ae0eaaf616f1027e2d3dd34f313a600204f6f35ae8e8dd399605a"
+    },
+    "pixel": {
+      "path": "/tmp/incant-atlas-runtime-spans-pixel.log",
+      "sha256": "509eafd9eec94c5a3f3cc4ccbdf768430bf746e455f69fc5561153c88937d267"
+    },
+    "camera": {
+      "path": "/tmp/incant-atlas-runtime-spans-camera.log",
+      "sha256": "1167ee65860605baa8852d1af2d2ea84440cee7ece54b40a4d0cc465fd432499"
+    },
+    "schema": {
+      "path": "/tmp/incant-atlas-runtime-spans-schema.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "limitations": [
+    "Legacy saved workflows; native gameplay migration remains open.",
+    "Claude review of ordinary sprites does not establish atlas/native acceptance.",
+    "Hosted/device/performance/phase gates not claimed."
+  ]
+}

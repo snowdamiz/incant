@@ -1,0 +1,42 @@
+{
+  "rust_tests": 320,
+  "gpu_tests": 47,
+  "gpu": "Apple M5 Pro",
+  "clippy": true,
+  "tools_tests": 5,
+  "contracts": true,
+  "initial_ui": {
+    "passed": 385,
+    "failed": 2,
+    "failure": "Camera schema parity not yet updated for third projection"
+  },
+  "public_pixel_perfect": {
+    "passed": true,
+    "strict_typescript": true,
+    "legacy_camera_authored_via_shared_commands": true,
+    "projection_kind": "pixel_perfect",
+    "subpixel_simulation_movement_checked": true,
+    "runtime_projection_edits_save_resume_and_repeat_exact": true,
+    "author_files_unchanged": {
+      "camera.incant.json": "3d2d22292a86b71581ebd9c3d2bd0fa58debd6e17578927766edd1ed10b95165",
+      "camera.incant.journal.jsonl": "3d893263725fad601a2cc75e085a381595f051d1e484f2b66976679514da27be"
+    },
+    "binary_sha256": "f9a9ed5506cd49b5b2597230b5f34cc8ea35713e6cc57b0321c779abe0fa5cb6",
+    "rendering_or_device_gate": false
+  },
+  "public_orthographic": {
+    "passed": true,
+    "strict_typescript": true,
+    "legacy_camera_authored_via_shared_commands": true,
+    "projection_kind": "orthographic",
+    "subpixel_simulation_movement_checked": false,
+    "runtime_projection_edits_save_resume_and_repeat_exact": true,
+    "author_files_unchanged": {
+      "camera.incant.json": "5911d466473a28f0cb1ed8f45a0ac9acca56990274754cfaa774df692eecfd1b",
+      "camera.incant.journal.jsonl": "4a6b79de7c6a1f6cb4bf3a8bf289c542c30c5034c10a4d6a665ee20c5e12198a"
+    },
+    "binary_sha256": "f9a9ed5506cd49b5b2597230b5f34cc8ea35713e6cc57b0321c779abe0fa5cb6",
+    "rendering_or_device_gate": false
+  },
+  "visual_native_portable_and_hosted_ci_pending": true
+}

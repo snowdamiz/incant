@@ -1,0 +1,79 @@
+{
+  "$defs": {
+    "AtlasSource": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "path": {
+          "description": "Relative to the atlas descriptor; resolved inside the granted project.",
+          "type": "string"
+        },
+        "region": {
+          "description": "Optional top-left source x/y and width/height; absent selects the whole image.",
+          "items": {
+            "format": "uint32",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "type": [
+            "array",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "path"
+      ],
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "frames": {
+      "additionalProperties": {
+        "$ref": "#/$defs/AtlasSource"
+      },
+      "type": "object"
+    },
+    "id": {
+      "type": "string"
+    },
+    "maximum_size": {
+      "description": "Upper bounds, not a request to allocate the entire rectangle.",
+      "items": {
+        "format": "uint32",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "type": "array"
+    },
+    "padding": {
+      "description": "Repeated edge texels around each frame. No rotation or transparent trimming.",
+      "format": "uint32",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "version": {
+      "format": "uint32",
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "version",
+    "id",
+    "maximum_size",
+    "padding",
+    "frames"
+  ],
+  "title": "SpriteAtlas",
+  "type": "object"
+}

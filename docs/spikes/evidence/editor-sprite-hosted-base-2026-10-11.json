@@ -1,0 +1,1095 @@
+{
+  "sprite_head": "5b3071b4e31a27f8a6729506aefd33e10c9a3466",
+  "checks": [
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-10T23:56:33Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38096545307/job/114343502318",
+      "name": "storage (macos-latest)",
+      "startedAt": "2026-10-10T23:53:33Z",
+      "status": "COMPLETED",
+      "workflowName": "Desktop credential persistence"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-11T00:20:11Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38096545310/job/114343502154",
+      "name": "desktop (windows-latest, Windows, .exe)",
+      "startedAt": "2026-10-10T23:53:07Z",
+      "status": "COMPLETED",
+      "workflowName": "Desktop editor and engine"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-11T00:21:47Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38096545331/job/114343560389",
+      "name": "checks",
+      "startedAt": "2026-10-10T23:56:39Z",
+      "status": "COMPLETED",
+      "workflowName": "Incant checks"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-11T00:00:07Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38096545327/job/114343502227",
+      "name": "native (macos-latest)",
+      "startedAt": "2026-10-10T23:53:11Z",
+      "status": "COMPLETED",
+      "workflowName": "Physics candidate feasibility"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-10T23:56:18Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38096545297/job/114343502289",
+      "name": "desktop (macos, macos-latest, incant_platform_smoke)",
+      "startedAt": "2026-10-10T23:53:11Z",
+      "status": "COMPLETED",
+      "workflowName": "Six platform probes"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-10T23:57:31Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38096545307/job/114343502348",
+      "name": "storage (windows-latest)",
+      "startedAt": "2026-10-10T23:53:06Z",
+      "status": "COMPLETED",
+      "workflowName": "Desktop credential persistence"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-11T00:08:29Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38096545310/job/114343502345",
+      "name": "desktop (ubuntu-latest, Linux)",
+      "startedAt": "2026-10-10T23:53:07Z",
+      "status": "COMPLETED",
+      "workflowName": "Desktop editor and engine"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-11T00:01:10Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38096545327/job/114343502347",
+      "name": "native (ubuntu-latest)",
+      "startedAt": "2026-10-10T23:53:06Z",
+      "status": "COMPLETED",
+      "workflowName": "Physics candidate feasibility"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-10T23:59:26Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38096545297/job/114343502366",
+      "name": "desktop (windows, windows-latest, incant_platform_smoke.exe)",
+      "startedAt": "2026-10-10T23:53:06Z",
+      "status": "COMPLETED",
+      "workflowName": "Six platform probes"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-10T23:55:36Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38096545307/job/114343502179",
+      "name": "storage (ubuntu-latest)",
+      "startedAt": "2026-10-10T23:53:07Z",
+      "status": "COMPLETED",
+      "workflowName": "Desktop credential persistence"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-11T00:03:46Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38096545327/job/114343502357",
+      "name": "native (windows-latest)",
+      "startedAt": "2026-10-10T23:53:06Z",
+      "status": "COMPLETED",
+      "workflowName": "Physics candidate feasibility"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-10T23:56:15Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38096545297/job/114343502321",
+      "name": "desktop (linux, ubuntu-latest, incant_platform_smoke)",
+      "startedAt": "2026-10-10T23:53:07Z",
+      "status": "COMPLETED",
+      "workflowName": "Six platform probes"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-10T23:58:18Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38096545327/job/114343502455",
+      "name": "portability",
+      "startedAt": "2026-10-10T23:56:25Z",
+      "status": "COMPLETED",
+      "workflowName": "Physics candidate feasibility"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-10T23:57:47Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38096545297/job/114343502315",
+      "name": "web",
+      "startedAt": "2026-10-10T23:53:07Z",
+      "status": "COMPLETED",
+      "workflowName": "Six platform probes"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-11T00:04:00Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38096545327/job/114345256455",
+      "name": "compare",
+      "startedAt": "2026-10-11T00:03:47Z",
+      "status": "COMPLETED",
+      "workflowName": "Physics candidate feasibility"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-11T00:03:14Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38096545297/job/114343502384",
+      "name": "ios",
+      "startedAt": "2026-10-10T23:54:13Z",
+      "status": "COMPLETED",
+      "workflowName": "Six platform probes"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-11T00:00:42Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38096545297/job/114343502160",
+      "name": "android",
+      "startedAt": "2026-10-10T23:53:07Z",
+      "status": "COMPLETED",
+      "workflowName": "Six platform probes"
+    }
+  ],
+  "gpu_identities": {
+    "baseline_log_sha256": "07feb7fa004073bf920a6f6ad7ffacde87f131c653f48036c53d0699fb75724c",
+    "hosts": {
+      "Linux": {
+        "job_id": 114343502345,
+        "names": [
+          "alpha_modes_and_back_faces_follow_material_semantics",
+          "camera_capture_tracks_simulated_camera_motion_and_rejects_unknown_selection",
+          "cameras::authored_camera_changes_projection_clips_geometry_and_retains_its_selected_pose",
+          "cameras::inherited_cameras_and_custom_light_clusters_match_the_all_light_reference",
+          "cameras::orthographic::orthographic_light_clusters_match_all_lights_at_multiple_sizes_poses_and_aspects",
+          "cameras::orthographic::orthographic_parallel_view_rays_preserve_specular_lighting_when_camera_moves_back",
+          "cameras::orthographic::orthographic_size_clipping_and_retained_projection_match_authored_world_units",
+          "cameras::pixel_perfect::fixed_logical_pixels_replicate_exactly_with_integer_scaling_and_letterboxing",
+          "cameras::pixel_perfect::followed_grid_geometry_is_stable_at_half_pixel_ties_and_odd_resolutions",
+          "cameras::pixel_perfect::subpixel_camera_motion_is_stable_and_crossing_the_grid_moves_by_one_logical_pixel",
+          "cameras::rotated_camera_under_uneven_parent_scale_matches_an_orthonormal_flat_pose",
+          "cameras::transparency_depth_order_follows_the_selected_camera",
+          "color_maps_use_srgb_and_texture_reimport_keeps_retained_materials",
+          "dark_fill_lit_materials_remain_distinguishable",
+          "editor_publishes_complete_revisions_and_recovers_after_failed_replacements",
+          "emissive_maps_and_samplers_retain_color_and_addressing",
+          "environments::authored_environments_preserve_color_space_versions_and_source_free_loading",
+          "environments::environment_intensity_rotation_and_roughness_change_real_reflections",
+          "environments::malformed_environment_cannot_replace_a_retained_scene",
+          "environments::studio_environment_renders_metal_and_dielectric_across_roughness",
+          "graph::tests::queued_graph_frames_outlive_scene_versions_and_failed_preparation",
+          "graph::tests::queued_pixel_frames_retain_logical_targets_and_physical_chrome_after_resizing",
+          "hdr_output::hdr_values_survive_until_tone_mapping_and_transfer_runs_once",
+          "hdr_output::output_composes_display_colors_and_reuses_bounded_resize_targets",
+          "headless_play_records_current_simulation_frames_and_publishes_a_complete_report",
+          "highlight_energy_survives_and_transparency_blends_before_tone_mapping",
+          "imported_geometry_survives_sources_and_retained_versions_survive_reimport",
+          "lighting::gpu_tests::clustered_viewport_offsets_and_queued_resize_commands_keep_their_own_light_data",
+          "lighting::gpu_tests::every_depth_slice_selects_its_light_and_reused_clusters_clear_old_membership",
+          "lighting::gpu_tests::masks_represent_every_light_and_clear_tail_bits_across_word_count_changes",
+          "lights::clustered_masks_match_total_light_energy_and_retain_old_scenes",
+          "lights::coverage::distinct_colored_lights_preserve_energy_across_mask_words",
+          "lights::coverage::local_range_edges_and_hdr_specular_materials_render_repeatably",
+          "lights::coverage::visible_depth_boundary_patches_match_all_light_oracle",
+          "lights::directional_point_and_spot_lights_obey_authored_physical_parameters",
+          "lights::finite_range_light_eases_to_zero_without_a_linear_edge_crease",
+          "lights::masks::all_4096_local_bits_match_unculled_point_and_spot_lighting",
+          "lights::masks::last_mask_bit_alone_lights_visible_geometry_after_a_directional_prefix",
+          "lights::spatial_clusters_match_brute_force_lighting_across_tile_edges_and_resize",
+          "material_maps_preserve_numeric_channels_normal_scale_and_occlusion_strength",
+          "shadows::alpha_masked_and_reflected_casters_preserve_holes_and_blend_casters_fail_explicitly",
+          "shadows::coverage::cascade_transitions_preserve_occlusion_and_fade_at_the_declared_distance",
+          "shadows::coverage::orthographic_cascade_transitions_preserve_occlusion_and_fade_at_the_declared_distance",
+          "shadows::directional_shadow_occlusion_respects_flags_range_and_retained_scene_versions",
+          "shadows::lookdev::directional_shadow_lookdev_contact_slopes_and_curves",
+          "shadows::normal_offset::opposing_normal_maps_preserve_the_geometric_shadow_boundary",
+          "shadows::offscreen_casters_and_multiple_directional_shadow_slots_remain_visible",
+          "shadows::queued::queued_shadow_maps_retain_camera_light_data_and_resized_atlas_versions",
+          "sprites::atlas::atlas_frame_ids_survive_repacking_source_removal_and_failed_replacement",
+          "sprites::inherited_sprite_transforms_and_queued_reimports_survive_scene_drop",
+          "sprites::nine_slice_preserves_pixel_borders_and_linear_sampling_has_no_hidden_color_fringe",
+          "sprites::sprite_layers_order_and_alpha_follow_painter_semantics",
+          "sprites::sprite_subregions_flips_and_retained_reimports_preserve_exact_pixels",
+          "sprites::ties::magnified_nearest_texels_keep_uniform_widths_past_pixel_center_ties",
+          "sprites::ties::nearest_texel_ties_preserve_each_texel_through_orientation_and_sheet_resize",
+          "sprites::wide::wide_magnified_nearest_regions_preserve_their_leading_and_trailing_texels"
+        ],
+        "passed": 56
+      },
+      "Windows": {
+        "job_id": 114343502154,
+        "names": [
+          "alpha_modes_and_back_faces_follow_material_semantics",
+          "camera_capture_tracks_simulated_camera_motion_and_rejects_unknown_selection",
+          "cameras::authored_camera_changes_projection_clips_geometry_and_retains_its_selected_pose",
+          "cameras::inherited_cameras_and_custom_light_clusters_match_the_all_light_reference",
+          "cameras::orthographic::orthographic_light_clusters_match_all_lights_at_multiple_sizes_poses_and_aspects",
+          "cameras::orthographic::orthographic_parallel_view_rays_preserve_specular_lighting_when_camera_moves_back",
+          "cameras::orthographic::orthographic_size_clipping_and_retained_projection_match_authored_world_units",
+          "cameras::pixel_perfect::fixed_logical_pixels_replicate_exactly_with_integer_scaling_and_letterboxing",
+          "cameras::pixel_perfect::followed_grid_geometry_is_stable_at_half_pixel_ties_and_odd_resolutions",
+          "cameras::pixel_perfect::subpixel_camera_motion_is_stable_and_crossing_the_grid_moves_by_one_logical_pixel",
+          "cameras::rotated_camera_under_uneven_parent_scale_matches_an_orthonormal_flat_pose",
+          "cameras::transparency_depth_order_follows_the_selected_camera",
+          "color_maps_use_srgb_and_texture_reimport_keeps_retained_materials",
+          "dark_fill_lit_materials_remain_distinguishable",
+          "editor_publishes_complete_revisions_and_recovers_after_failed_replacements",
+          "emissive_maps_and_samplers_retain_color_and_addressing",
+          "environments::authored_environments_preserve_color_space_versions_and_source_free_loading",
+          "environments::environment_intensity_rotation_and_roughness_change_real_reflections",
+          "environments::malformed_environment_cannot_replace_a_retained_scene",
+          "environments::studio_environment_renders_metal_and_dielectric_across_roughness",
+          "graph::tests::queued_graph_frames_outlive_scene_versions_and_failed_preparation",
+          "graph::tests::queued_pixel_frames_retain_logical_targets_and_physical_chrome_after_resizing",
+          "hdr_output::hdr_values_survive_until_tone_mapping_and_transfer_runs_once",
+          "hdr_output::output_composes_display_colors_and_reuses_bounded_resize_targets",
+          "headless_play_records_current_simulation_frames_and_publishes_a_complete_report",
+          "highlight_energy_survives_and_transparency_blends_before_tone_mapping",
+          "imported_geometry_survives_sources_and_retained_versions_survive_reimport",
+          "lighting::gpu_tests::clustered_viewport_offsets_and_queued_resize_commands_keep_their_own_light_data",
+          "lighting::gpu_tests::every_depth_slice_selects_its_light_and_reused_clusters_clear_old_membership",
+          "lighting::gpu_tests::masks_represent_every_light_and_clear_tail_bits_across_word_count_changes",
+          "lights::clustered_masks_match_total_light_energy_and_retain_old_scenes",
+          "lights::coverage::distinct_colored_lights_preserve_energy_across_mask_words",
+          "lights::coverage::local_range_edges_and_hdr_specular_materials_render_repeatably",
+          "lights::coverage::visible_depth_boundary_patches_match_all_light_oracle",
+          "lights::directional_point_and_spot_lights_obey_authored_physical_parameters",
+          "lights::finite_range_light_eases_to_zero_without_a_linear_edge_crease",
+          "lights::masks::all_4096_local_bits_match_unculled_point_and_spot_lighting",
+          "lights::masks::last_mask_bit_alone_lights_visible_geometry_after_a_directional_prefix",
+          "lights::spatial_clusters_match_brute_force_lighting_across_tile_edges_and_resize",
+          "material_maps_preserve_numeric_channels_normal_scale_and_occlusion_strength",
+          "shadows::alpha_masked_and_reflected_casters_preserve_holes_and_blend_casters_fail_explicitly",
+          "shadows::coverage::cascade_transitions_preserve_occlusion_and_fade_at_the_declared_distance",
+          "shadows::coverage::orthographic_cascade_transitions_preserve_occlusion_and_fade_at_the_declared_distance",
+          "shadows::directional_shadow_occlusion_respects_flags_range_and_retained_scene_versions",
+          "shadows::lookdev::directional_shadow_lookdev_contact_slopes_and_curves",
+          "shadows::normal_offset::opposing_normal_maps_preserve_the_geometric_shadow_boundary",
+          "shadows::offscreen_casters_and_multiple_directional_shadow_slots_remain_visible",
+          "shadows::queued::queued_shadow_maps_retain_camera_light_data_and_resized_atlas_versions",
+          "sprites::atlas::atlas_frame_ids_survive_repacking_source_removal_and_failed_replacement",
+          "sprites::inherited_sprite_transforms_and_queued_reimports_survive_scene_drop",
+          "sprites::nine_slice_preserves_pixel_borders_and_linear_sampling_has_no_hidden_color_fringe",
+          "sprites::sprite_layers_order_and_alpha_follow_painter_semantics",
+          "sprites::sprite_subregions_flips_and_retained_reimports_preserve_exact_pixels",
+          "sprites::ties::magnified_nearest_texels_keep_uniform_widths_past_pixel_center_ties",
+          "sprites::ties::nearest_texel_ties_preserve_each_texel_through_orientation_and_sheet_resize",
+          "sprites::wide::wide_magnified_nearest_regions_preserve_their_leading_and_trailing_texels"
+        ],
+        "passed": 56
+      }
+    }
+  },
+  "native_jobs": [
+    {
+      "head": "5b3071b4e31a27f8a6729506aefd33e10c9a3466",
+      "job_id": 114343502154,
+      "run_id": 38096545310,
+      "execution_seconds": 1624.0,
+      "queue_seconds": 2.0,
+      "requested_cache_key": "v0-rust-Desktop editor and engine-Windows-X64-desktop-Windows_NT-x64-773408be-6d6e6ef3",
+      "restored_cache_key": "v0-rust-Desktop editor and engine-Windows-X64-desktop-Windows_NT-x64-773408be-61680e07",
+      "save_if": "false",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "duration_seconds": 2.0
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success",
+          "duration_seconds": 10.0
+        },
+        {
+          "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+          "conclusion": "success",
+          "duration_seconds": 6.0
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "conclusion": "success",
+          "duration_seconds": 0.0
+        },
+        {
+          "name": "Run sudo apt-get update",
+          "conclusion": "skipped",
+          "duration_seconds": 0.0
+        },
+        {
+          "name": "Run rustup show",
+          "conclusion": "success",
+          "duration_seconds": 20.0
+        },
+        {
+          "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+          "conclusion": "success",
+          "duration_seconds": 39.0
+        },
+        {
+          "name": "Run npm ci",
+          "conclusion": "success",
+          "duration_seconds": 22.0
+        },
+        {
+          "name": "Run node tools/build_bridge.mjs --check",
+          "conclusion": "success",
+          "duration_seconds": 1.0
+        },
+        {
+          "name": "Run npm run build --workspace editor/ui",
+          "conclusion": "success",
+          "duration_seconds": 9.0
+        },
+        {
+          "name": "Run npm test --workspace editor/ui",
+          "conclusion": "success",
+          "duration_seconds": 37.0
+        },
+        {
+          "name": "Run cargo test --workspace --release --locked --timings",
+          "conclusion": "success",
+          "duration_seconds": 779.0
+        },
+        {
+          "name": "Run cargo check -p incant_audio --features device --locked",
+          "conclusion": "success",
+          "duration_seconds": 7.0
+        },
+        {
+          "name": "Verify geometry, editor recovery and simulated frame capture",
+          "conclusion": "success",
+          "duration_seconds": 194.0
+        },
+        {
+          "name": "Run cargo build --workspace --bin incant_editor --bin incant_headless --example cook_scene --release --features incant_editor/custom-protocol --locked --timings",
+          "conclusion": "success",
+          "duration_seconds": 97.0
+        },
+        {
+          "name": "Build and execute the shipping runtime with matched crash symbols",
+          "conclusion": "success",
+          "duration_seconds": 249.0
+        },
+        {
+          "name": "Verify Windows executables do not require redistributable CRT DLLs",
+          "conclusion": "success",
+          "duration_seconds": 0.0
+        },
+        {
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success",
+          "duration_seconds": 3.0
+        },
+        {
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success",
+          "duration_seconds": 1.0
+        },
+        {
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success",
+          "duration_seconds": 2.0
+        },
+        {
+          "name": "Verify physics commands, persistence and sandbox playback",
+          "conclusion": "success",
+          "duration_seconds": 5.0
+        },
+        {
+          "name": "Verify strict TypeScript character walking and jumping",
+          "conclusion": "success",
+          "duration_seconds": 6.0
+        },
+        {
+          "name": "Verify compound authoring, recovery and scripted queries",
+          "conclusion": "success",
+          "duration_seconds": 6.0
+        },
+        {
+          "name": "Verify versioned game saves across headless process restarts",
+          "conclusion": "success",
+          "duration_seconds": 5.0
+        },
+        {
+          "name": "Verify recorded device input, character control and mid-jump save replay",
+          "conclusion": "success",
+          "duration_seconds": 6.0
+        },
+        {
+          "name": "Verify script-driven WAV and Vorbis mixing without an audio device",
+          "conclusion": "success",
+          "duration_seconds": 12.0
+        },
+        {
+          "name": "Verify saved timer callbacks across headless process restarts",
+          "conclusion": "success",
+          "duration_seconds": 5.0
+        },
+        {
+          "name": "Verify saved runtime rebinding and named input actions",
+          "conclusion": "success",
+          "duration_seconds": 4.0
+        },
+        {
+          "name": "Verify locale switching and string tables across process restarts",
+          "conclusion": "success",
+          "duration_seconds": 6.0
+        },
+        {
+          "name": "Verify translator exchange, atomic import and shared Undo/Redo",
+          "conclusion": "success",
+          "duration_seconds": 7.0
+        },
+        {
+          "name": "Verify runtime navigation and saved character chase",
+          "conclusion": "success",
+          "duration_seconds": 7.0
+        },
+        {
+          "name": "Verify weighted grid doors and blocked-route save replay",
+          "conclusion": "success",
+          "duration_seconds": 7.0
+        },
+        {
+          "name": "Verify one hundred steering agents and saved replay",
+          "conclusion": "success",
+          "duration_seconds": 19.0
+        },
+        {
+          "name": "Verify directed off-mesh traversal and saved replay",
+          "conclusion": "success",
+          "duration_seconds": 7.0
+        },
+        {
+          "name": "Verify authored and saved orthographic camera projections",
+          "conclusion": "success",
+          "duration_seconds": 6.0
+        },
+        {
+          "name": "Verify pixel-perfect camera saves preserve unsnapped simulation",
+          "conclusion": "success",
+          "duration_seconds": 6.0
+        },
+        {
+          "name": "Verify sprite authoring and source-free saved animation",
+          "conclusion": "success",
+          "duration_seconds": 5.0
+        },
+        {
+          "name": "Verify atlas repacking and source-free saved frame references",
+          "conclusion": "success",
+          "duration_seconds": 5.0
+        },
+        {
+          "name": "Exercise native GPU rendering without a user account",
+          "conclusion": "success",
+          "duration_seconds": 12.0
+        },
+        {
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success",
+          "duration_seconds": 4.0
+        },
+        {
+          "name": "Preserve Cargo unit timing diagnostics",
+          "conclusion": "success",
+          "duration_seconds": 1.0
+        },
+        {
+          "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+          "conclusion": "success",
+          "duration_seconds": 0.0
+        },
+        {
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "conclusion": "success",
+          "duration_seconds": 1.0
+        },
+        {
+          "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+          "conclusion": "success",
+          "duration_seconds": 0.0
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success",
+          "duration_seconds": 3.0
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "duration_seconds": 0.0
+        }
+      ],
+      "log_sha256": "179e4c163859d6dbb925c4a62bc9badd28bd2cc9a9d35e68826064af16a19417"
+    },
+    {
+      "head": "5b3071b4e31a27f8a6729506aefd33e10c9a3466",
+      "job_id": 114343502345,
+      "run_id": 38096545310,
+      "execution_seconds": 922.0,
+      "queue_seconds": 2.0,
+      "requested_cache_key": "v0-rust-Desktop editor and engine-Linux-X64-desktop-Linux-x64-b9e20461-6d6e6ef3",
+      "restored_cache_key": "v0-rust-Desktop editor and engine-Linux-X64-desktop-Linux-x64-b9e20461-61680e07",
+      "save_if": "false",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "duration_seconds": 2.0
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success",
+          "duration_seconds": 4.0
+        },
+        {
+          "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+          "conclusion": "success",
+          "duration_seconds": 7.0
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "conclusion": "success",
+          "duration_seconds": 0.0
+        },
+        {
+          "name": "Run sudo apt-get update",
+          "conclusion": "success",
+          "duration_seconds": 42.0
+        },
+        {
+          "name": "Run rustup show",
+          "conclusion": "success",
+          "duration_seconds": 11.0
+        },
+        {
+          "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+          "conclusion": "success",
+          "duration_seconds": 28.0
+        },
+        {
+          "name": "Run npm ci",
+          "conclusion": "success",
+          "duration_seconds": 10.0
+        },
+        {
+          "name": "Run node tools/build_bridge.mjs --check",
+          "conclusion": "success",
+          "duration_seconds": 0.0
+        },
+        {
+          "name": "Run npm run build --workspace editor/ui",
+          "conclusion": "success",
+          "duration_seconds": 7.0
+        },
+        {
+          "name": "Run npm test --workspace editor/ui",
+          "conclusion": "success",
+          "duration_seconds": 27.0
+        },
+        {
+          "name": "Run cargo test --workspace --release --locked --timings",
+          "conclusion": "success",
+          "duration_seconds": 424.0
+        },
+        {
+          "name": "Run cargo check -p incant_audio --features device --locked",
+          "conclusion": "success",
+          "duration_seconds": 3.0
+        },
+        {
+          "name": "Verify geometry, editor recovery and simulated frame capture",
+          "conclusion": "success",
+          "duration_seconds": 95.0
+        },
+        {
+          "name": "Run cargo build --workspace --bin incant_editor --bin incant_headless --example cook_scene --release --features incant_editor/custom-protocol --locked --timings",
+          "conclusion": "success",
+          "duration_seconds": 40.0
+        },
+        {
+          "name": "Build and execute the shipping runtime with matched crash symbols",
+          "conclusion": "success",
+          "duration_seconds": 124.0
+        },
+        {
+          "name": "Verify Windows executables do not require redistributable CRT DLLs",
+          "conclusion": "skipped",
+          "duration_seconds": 0.0
+        },
+        {
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success",
+          "duration_seconds": 2.0
+        },
+        {
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success",
+          "duration_seconds": 3.0
+        },
+        {
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success",
+          "duration_seconds": 1.0
+        },
+        {
+          "name": "Verify physics commands, persistence and sandbox playback",
+          "conclusion": "success",
+          "duration_seconds": 0.0
+        },
+        {
+          "name": "Verify strict TypeScript character walking and jumping",
+          "conclusion": "success",
+          "duration_seconds": 4.0
+        },
+        {
+          "name": "Verify compound authoring, recovery and scripted queries",
+          "conclusion": "success",
+          "duration_seconds": 3.0
+        },
+        {
+          "name": "Verify versioned game saves across headless process restarts",
+          "conclusion": "success",
+          "duration_seconds": 4.0
+        },
+        {
+          "name": "Verify recorded device input, character control and mid-jump save replay",
+          "conclusion": "success",
+          "duration_seconds": 4.0
+        },
+        {
+          "name": "Verify script-driven WAV and Vorbis mixing without an audio device",
+          "conclusion": "success",
+          "duration_seconds": 7.0
+        },
+        {
+          "name": "Verify saved timer callbacks across headless process restarts",
+          "conclusion": "success",
+          "duration_seconds": 3.0
+        },
+        {
+          "name": "Verify saved runtime rebinding and named input actions",
+          "conclusion": "success",
+          "duration_seconds": 4.0
+        },
+        {
+          "name": "Verify locale switching and string tables across process restarts",
+          "conclusion": "success",
+          "duration_seconds": 3.0
+        },
+        {
+          "name": "Verify translator exchange, atomic import and shared Undo/Redo",
+          "conclusion": "success",
+          "duration_seconds": 3.0
+        },
+        {
+          "name": "Verify runtime navigation and saved character chase",
+          "conclusion": "success",
+          "duration_seconds": 5.0
+        },
+        {
+          "name": "Verify weighted grid doors and blocked-route save replay",
+          "conclusion": "success",
+          "duration_seconds": 3.0
+        },
+        {
+          "name": "Verify one hundred steering agents and saved replay",
+          "conclusion": "success",
+          "duration_seconds": 14.0
+        },
+        {
+          "name": "Verify directed off-mesh traversal and saved replay",
+          "conclusion": "success",
+          "duration_seconds": 4.0
+        },
+        {
+          "name": "Verify authored and saved orthographic camera projections",
+          "conclusion": "success",
+          "duration_seconds": 3.0
+        },
+        {
+          "name": "Verify pixel-perfect camera saves preserve unsnapped simulation",
+          "conclusion": "success",
+          "duration_seconds": 4.0
+        },
+        {
+          "name": "Verify sprite authoring and source-free saved animation",
+          "conclusion": "success",
+          "duration_seconds": 3.0
+        },
+        {
+          "name": "Verify atlas repacking and source-free saved frame references",
+          "conclusion": "success",
+          "duration_seconds": 4.0
+        },
+        {
+          "name": "Exercise native GPU rendering without a user account",
+          "conclusion": "success",
+          "duration_seconds": 6.0
+        },
+        {
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success",
+          "duration_seconds": 4.0
+        },
+        {
+          "name": "Preserve Cargo unit timing diagnostics",
+          "conclusion": "success",
+          "duration_seconds": 2.0
+        },
+        {
+          "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+          "conclusion": "success",
+          "duration_seconds": 0.0
+        },
+        {
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "conclusion": "success",
+          "duration_seconds": 0.0
+        },
+        {
+          "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+          "conclusion": "success",
+          "duration_seconds": 0.0
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success",
+          "duration_seconds": 0.0
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "duration_seconds": 0.0
+        }
+      ],
+      "log_sha256": "10f96d65d8dec76cda4f6095e863c9411d76e326f592b28a5e24d3229c6d4dbe"
+    },
+    {
+      "head": "5b3071b4e31a27f8a6729506aefd33e10c9a3466",
+      "job_id": 114343560389,
+      "run_id": 38096545331,
+      "execution_seconds": 1508.0,
+      "queue_seconds": 193.0,
+      "requested_cache_key": "v0-rust-Incant checks-macOS-ARM64-checks-Darwin-arm64-791fe27b-6d6e6ef3",
+      "restored_cache_key": "v0-rust-Incant checks-macOS-ARM64-checks-Darwin-arm64-791fe27b-61680e07",
+      "save_if": "false",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "duration_seconds": 2.0
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success",
+          "duration_seconds": 7.0
+        },
+        {
+          "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+          "conclusion": "success",
+          "duration_seconds": 16.0
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "conclusion": "success",
+          "duration_seconds": 1.0
+        },
+        {
+          "name": "Run rustup show",
+          "conclusion": "success",
+          "duration_seconds": 11.0
+        },
+        {
+          "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+          "conclusion": "success",
+          "duration_seconds": 67.0
+        },
+        {
+          "name": "Run npm ci",
+          "conclusion": "success",
+          "duration_seconds": 10.0
+        },
+        {
+          "name": "Run python3 tools/generate_conventions.py --check",
+          "conclusion": "success",
+          "duration_seconds": 0.0
+        },
+        {
+          "name": "Run npm run test:tools",
+          "conclusion": "success",
+          "duration_seconds": 2.0
+        },
+        {
+          "name": "Run python3 tools/check_runtime_dependencies.py incant_types incant_physics_runtime incant_runtime incant_script incant_script_player incant_assets_runtime incant_audio_runtime",
+          "conclusion": "success",
+          "duration_seconds": 19.0
+        },
+        {
+          "name": "Run node tools/build_bridge.mjs --check",
+          "conclusion": "success",
+          "duration_seconds": 1.0
+        },
+        {
+          "name": "Run npm run build --workspace editor/ui",
+          "conclusion": "success",
+          "duration_seconds": 8.0
+        },
+        {
+          "name": "Run npm run test --workspace editor/ui",
+          "conclusion": "success",
+          "duration_seconds": 31.0
+        },
+        {
+          "name": "Run cargo fmt --all --check",
+          "conclusion": "success",
+          "duration_seconds": 2.0
+        },
+        {
+          "name": "Run cargo clippy --workspace --all-targets --locked -- -D warnings",
+          "conclusion": "success",
+          "duration_seconds": 84.0
+        },
+        {
+          "name": "Run cargo check -p incant_audio --features device --locked",
+          "conclusion": "success",
+          "duration_seconds": 6.0
+        },
+        {
+          "name": "Run cargo test --workspace --release --locked --timings",
+          "conclusion": "success",
+          "duration_seconds": 472.0
+        },
+        {
+          "name": "Verify geometry, editor recovery and simulated frame capture",
+          "conclusion": "success",
+          "duration_seconds": 162.0
+        },
+        {
+          "name": "Run cargo build --workspace --bin incant_editor --bin incant_headless --example cook_scene --example collaboration_spike --example texture_probe --example save_world --release --features incant_editor/custom-protocol --locked --timings",
+          "conclusion": "success",
+          "duration_seconds": 63.0
+        },
+        {
+          "name": "Validate cooked KTX2 with the Khronos reference tool",
+          "conclusion": "success",
+          "duration_seconds": 1.0
+        },
+        {
+          "name": "Run target/release/incant_headless schema schemas",
+          "conclusion": "success",
+          "duration_seconds": 1.0
+        },
+        {
+          "name": "Verify native binary world saves across process restarts",
+          "conclusion": "success",
+          "duration_seconds": 0.0
+        },
+        {
+          "name": "Build and execute the shipping runtime with matched crash symbols",
+          "conclusion": "success",
+          "duration_seconds": 195.0
+        },
+        {
+          "name": "Verify embedded scripts with no runtime source compiler",
+          "conclusion": "success",
+          "duration_seconds": 256.0
+        },
+        {
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success",
+          "duration_seconds": 5.0
+        },
+        {
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success",
+          "duration_seconds": 2.0
+        },
+        {
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success",
+          "duration_seconds": 2.0
+        },
+        {
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success",
+          "duration_seconds": 1.0
+        },
+        {
+          "name": "Run python3 tools/probes/physics-runtime.py artifacts/physics-runtime-cli",
+          "conclusion": "success",
+          "duration_seconds": 2.0
+        },
+        {
+          "name": "Run python3 tools/probes/character-movement.py artifacts/character-movement-cli",
+          "conclusion": "success",
+          "duration_seconds": 6.0
+        },
+        {
+          "name": "Run python3 tools/probes/compound-colliders.py artifacts/compound-colliders-cli",
+          "conclusion": "success",
+          "duration_seconds": 3.0
+        },
+        {
+          "name": "Run python3 tools/probes/game-saves.py artifacts/game-saves-cli",
+          "conclusion": "success",
+          "duration_seconds": 3.0
+        },
+        {
+          "name": "Run python3 tools/probes/game-input.py artifacts/game-input-cli",
+          "conclusion": "success",
+          "duration_seconds": 3.0
+        },
+        {
+          "name": "Run python3 tools/probes/game-audio.py artifacts/game-audio-cli",
+          "conclusion": "success",
+          "duration_seconds": 6.0
+        },
+        {
+          "name": "Run python3 tools/probes/game-timers.py artifacts/game-timers-cli",
+          "conclusion": "success",
+          "duration_seconds": 3.0
+        },
+        {
+          "name": "Run python3 tools/probes/game-actions.py artifacts/game-actions-cli",
+          "conclusion": "success",
+          "duration_seconds": 2.0
+        },
+        {
+          "name": "Run python3 tools/probes/game-localization.py artifacts/game-localization-cli",
+          "conclusion": "success",
+          "duration_seconds": 4.0
+        },
+        {
+          "name": "Run python3 tools/probes/localization-exchange.py artifacts/localization-exchange-cli",
+          "conclusion": "success",
+          "duration_seconds": 3.0
+        },
+        {
+          "name": "Run python3 tools/probes/game-navigation.py artifacts/game-navigation-cli",
+          "conclusion": "success",
+          "duration_seconds": 4.0
+        },
+        {
+          "name": "Run python3 tools/probes/navigation-grid.py artifacts/navigation-grid-cli",
+          "conclusion": "success",
+          "duration_seconds": 4.0
+        },
+        {
+          "name": "Run python3 tools/probes/game-steering.py artifacts/game-steering-cli",
+          "conclusion": "success",
+          "duration_seconds": 11.0
+        },
+        {
+          "name": "Run python3 tools/probes/navigation-links.py artifacts/navigation-links-cli",
+          "conclusion": "success",
+          "duration_seconds": 2.0
+        },
+        {
+          "name": "Run python3 tools/probes/orthographic-cameras.py artifacts/orthographic-cameras-cli",
+          "conclusion": "success",
+          "duration_seconds": 4.0
+        },
+        {
+          "name": "Run python3 tools/probes/orthographic-cameras.py artifacts/pixel-perfect-cameras-cli --pixel-perfect",
+          "conclusion": "success",
+          "duration_seconds": 2.0
+        },
+        {
+          "name": "Run python3 tools/probes/sprite-rendering.py artifacts/sprite-rendering-cli",
+          "conclusion": "success",
+          "duration_seconds": 3.0
+        },
+        {
+          "name": "Run python3 tools/probes/sprite-atlases.py artifacts/sprite-atlases-cli",
+          "conclusion": "success",
+          "duration_seconds": 4.0
+        },
+        {
+          "name": "Run node tools/generate_sdk.mjs --check",
+          "conclusion": "success",
+          "duration_seconds": 0.0
+        },
+        {
+          "name": "Run git diff --exit-code -- schemas",
+          "conclusion": "success",
+          "duration_seconds": 1.0
+        },
+        {
+          "name": "Run node_modules/.bin/tsc -p sdk/ts/tsconfig.json",
+          "conclusion": "success",
+          "duration_seconds": 0.0
+        },
+        {
+          "name": "Run target/release/incant_headless eval-check",
+          "conclusion": "success",
+          "duration_seconds": 0.0
+        },
+        {
+          "name": "Run target/release/examples/collaboration_spike",
+          "conclusion": "success",
+          "duration_seconds": 0.0
+        },
+        {
+          "name": "Preserve Cargo unit timing diagnostics",
+          "conclusion": "success",
+          "duration_seconds": 2.0
+        },
+        {
+          "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+          "conclusion": "success",
+          "duration_seconds": 0.0
+        },
+        {
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "conclusion": "success",
+          "duration_seconds": 0.0
+        },
+        {
+          "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+          "conclusion": "success",
+          "duration_seconds": 1.0
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success",
+          "duration_seconds": 0.0
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "duration_seconds": 4.0
+        }
+      ],
+      "log_sha256": "c3a0050e8c3f81690813ee0707ee5dda26c8b190351cd9fc09400953e6d4fa72"
+    }
+  ],
+  "limitations": [
+    "This is hosted proof of the sprite base, not a replacement for the final UI union matrix.",
+    "Both native desktop GPU sets exactly match56 local baseline names.",
+    "The UI has separate newer frontend/account changes; native rendered acceptance remains open."
+  ]
+}

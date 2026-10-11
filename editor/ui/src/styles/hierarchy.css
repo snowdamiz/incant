@@ -1,0 +1,171 @@
+/* Hierarchy tree and the entity-kind tints shared by every panel. */
+
+.tree {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  /* The canvas carries the 2 px top inset; the bottom keeps a little air under the last row. */
+  padding: 0 0 var(--space-4);
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border-strong) transparent;
+}
+
+/* Rows are placed by index in a canvas as tall as every visible row, so only the rows near
+   the scroll position need to be mounted. */
+.tree__canvas {
+  position: relative;
+}
+
+.tree-row {
+  position: absolute;
+  left: var(--space-3);
+  right: var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: var(--row-height);
+  padding-inline-end: var(--space-3);
+  border-radius: var(--radius);
+  white-space: nowrap;
+  cursor: default;
+  user-select: none;
+  color: var(--color-text-soft);
+}
+
+.tree-row:hover {
+  background: var(--color-bg-hover);
+}
+
+.tree-row.is-selected {
+  background: var(--color-bg-selected);
+  color: var(--color-text);
+}
+
+/* A scene is the root of its tree: set like a heading. */
+.tree-row.is-scene {
+  color: var(--color-text);
+}
+
+.tree-row.is-scene .tree-row__name {
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+}
+
+.tree-row.is-selected .tree-row__name {
+  font-weight: var(--weight-medium);
+}
+
+/* Indent guides: one hairline per ancestor level, aligned to the parent's disclosure arrow. */
+.tree-row__guides {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--space-2);
+  background-image: linear-gradient(to right, var(--color-border) 1px, transparent 1px);
+  background-size: var(--indent) 100%;
+  background-position: 7px 0;
+  background-repeat: repeat-x;
+  pointer-events: none;
+}
+
+.tree-row.is-selected .tree-row__guides {
+  opacity: 0;
+}
+
+.tree-row__twisty {
+  position: relative;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  color: var(--color-text-subtle);
+  border-radius: var(--radius-sm);
+}
+
+.tree-row__twisty:not(.is-leaf):hover {
+  background: var(--color-bg-raised);
+  color: var(--color-text);
+}
+
+.tree-row__twisty .icon {
+  transition: transform var(--duration-fast);
+}
+
+.tree-row__twisty.is-open .icon {
+  transform: rotate(90deg);
+}
+
+.tree-row__kind {
+  position: relative;
+}
+
+.tree-row__name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tree-row.is-context .tree-row__name {
+  color: var(--color-text-subtle);
+}
+
+.tree-row__rename {
+  flex: 1;
+  min-width: 0;
+  height: 22px;
+  padding: 0 6px;
+  border: 1px solid var(--color-focus);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-viewport);
+  color: var(--color-text);
+  outline: none;
+}
+
+.tree-row__nested {
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.tree-row__nested.is-error {
+  background: var(--color-danger);
+}
+
+.tree-row__nested.is-warning {
+  background: var(--color-warning);
+}
+
+/* Entity and asset kind tints. Icons always sit next to a name; color is never the only cue. */
+.kind--scene {
+  color: var(--color-text-muted);
+}
+.kind--group,
+.kind--entity {
+  color: var(--color-text-subtle);
+}
+.kind--camera {
+  color: var(--color-kind-camera);
+}
+.kind--light {
+  color: var(--color-kind-light);
+}
+.kind--mesh,
+.kind--model {
+  color: var(--color-kind-mesh);
+}
+.kind--prefab {
+  color: var(--color-kind-prefab);
+}
+.kind--script {
+  color: var(--color-kind-script);
+}
+.kind--audio {
+  color: var(--color-kind-audio);
+}
+.kind--texture {
+  color: var(--color-kind-texture);
+}

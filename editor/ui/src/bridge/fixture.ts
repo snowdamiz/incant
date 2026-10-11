@@ -37,6 +37,7 @@ export const FIXTURE_VARIANTS = [
   'project-loading',
   'project-error',
   'large',
+  'stress',
 ] as const;
 export type FixtureVariant = (typeof FIXTURE_VARIANTS)[number];
 
@@ -187,7 +188,7 @@ const SCHEMAS: Record<string, ComponentSchema> = {
       near: { type: 'number', format: 'double', 'x-incant-unit': 'm', optional: false },
       projection: {
         type: 'tagged-union',
-        description: 'Perspective, or orthographic with parallel view rays and a fixed world-space height.',
+        description: 'Perspective, orthographic, or pixel-perfect with a fixed logical resolution.',
         default: { kind: 'perspective' },
         discriminator: 'kind',
         variants: {
@@ -211,6 +212,32 @@ const SCHEMAS: Record<string, ComponentSchema> = {
               },
             },
             required: ['kind', 'vertical_size'],
+          },
+          pixel_perfect: {
+            type: 'object',
+            additionalProperties: false,
+            properties: {
+              kind: { type: 'string', const: 'pixel_perfect', enum: ['pixel_perfect'], optional: false },
+              pixels_per_unit: {
+                type: 'number',
+                format: 'double',
+                description: 'Logical pixels per world metre. Camera motion snaps to this grid.',
+                minimum: 1,
+                maximum: 4096,
+                'x-incant-unit': 'px/m',
+                optional: false,
+              },
+              reference_resolution: {
+                type: 'array',
+                description: 'Fixed logical width and height, scaled by whole pixels with letterboxing.',
+                items: { type: 'integer', format: 'uint32', minimum: 0 },
+                minItems: 2,
+                maxItems: 2,
+                'x-incant-unit': 'px',
+                optional: false,
+              },
+            },
+            required: ['kind', 'pixels_per_unit', 'reference_resolution'],
           },
         },
         optional: true,
@@ -553,6 +580,20 @@ const SAMPLE_SCENE: Spec = {
               ],
             },
             {
+              // Perspective written out explicitly (no "Default" tag), with a narrow lens.
+              // Only projections that schemas/Camera.schema.json declares appear in the sample.
+              name: 'Close-up Camera',
+              kind: 'camera',
+              components: [
+                transform([0, 2, 10]),
+                {
+                  type: 'Camera',
+                  schemaVersion: 1,
+                  value: { fov_degrees: 35, near: 0.05, far: 60, projection: { kind: 'perspective' } },
+                },
+              ],
+            },
+            {
               name: 'Grapple Controller',
               kind: 'script',
               components: [
@@ -686,7 +727,7 @@ function largeScene(groups: number, perGroup: number): Spec {
       name: `Group ${String(g + 1).padStart(3, '0')}`,
       kind: 'group',
       children: Array.from({ length: perGroup }, (_, i) => ({
-        name: `Entity ${String(g + 1).padStart(3, '0')}.${String(i + 1).padStart(3, '0')}`,
+        name: `Entity ${String(g + 1).padStart(3, '0')}.${String(i + 1).padStart(perGroup > 999 ? 4 : 3, '0')}`,
         kind: 'mesh',
         components: [transform([i, 0, g])],
       })),
@@ -812,7 +853,7 @@ const SAMPLE_CONSOLE: ConsoleEntry[] = [
   { id: 'c2', level: 'debug', source: 'schema', message: 'Registered 7 component schemas.', at: at(0) },
   { id: 'c3', level: 'warn', source: 'assets', message: 'pier_planks.mesh: LOD 2 missing.', at: at(1) },
   { id: 'c4', level: 'error', source: 'script', message: 'Cannot resolve scripts/grapple.ts referenced by Grapple Controller.', at: at(2) },
-  { id: 'c5', level: 'info', source: 'viewport', message: 'Native viewport not attached (Spike 1 pending).', at: at(2) },
+  { id: 'c5', level: 'info', source: 'viewport', message: 'Viewport not attached: sample data has no engine to render it.', at: at(2) },
 ];
 
 /** Sample asset rows. Fingerprints are invented; nothing was cooked. */
@@ -837,7 +878,7 @@ const READ_ONLY_IMPORT = { available: false, reason: 'The sample fixture is read
 
 const NO_VIEWPORT = {
   status: 'not-attached',
-  reason: 'Sample data has no native surface. Open a project in the Incant editor app to attach the wgpu viewport.',
+  reason: 'Sample data has no engine to render it. Open a project in the Incant editor app to see the scene here.',
 } as const;
 
 function baseSnapshot(): Omit<BridgeSnapshot, 'connection' | 'hierarchy'> {
@@ -869,6 +910,20 @@ export function fixtureSnapshot(variant: FixtureVariant): BridgeSnapshot {
         history: { entries: SAMPLE_HISTORY, applied: 4 },
         console: SAMPLE_CONSOLE,
         assets: { status: 'ready', value: SAMPLE_ASSETS },
+        assetImport: READ_ONLY_IMPORT,
+      };
+    }
+    // 100,000 entities in 100 groups and 20,000 assets: the editor scale gate's entity count,
+    // for bounded-rendering tests and browser measurements (not device evidence).
+    case 'stress': {
+      const { roots, nodes, entities } = flatten(largeScene(100, 1000));
+      return {
+        ...baseSnapshot(),
+        connection: { status: 'ready', project: { id: fixtureId(0), name: 'Stress Scene (100,000 entities)' } },
+        hierarchy: { status: 'ready', value: { roots, nodes } },
+        schemas: SCHEMAS,
+        entities,
+        assets: { status: 'ready', value: largeAssets(20000, 200000) },
         assetImport: READ_ONLY_IMPORT,
       };
     }
@@ -951,14 +1006,15 @@ function failedProject(error: BridgeError): BridgeSnapshot {
   };
 }
 
-function largeAssets(count: number): ProjectAsset[] {
+/** Invented assets; `base` keeps their IDs clear of the entity IDs in the same fixture. */
+function largeAssets(count: number, base = 20000): ProjectAsset[] {
   const folders = ['models/props', 'models/architecture', 'textures/props', 'textures/terrain'];
   return Array.from({ length: count }, (_, index) => {
     const folder = folders[index % folders.length]!;
     const model = folder.startsWith('models');
     const name = `${model ? 'prop' : 'surface'}_${String(index).padStart(3, '0')}`;
     return {
-      id: fixtureId(20000 + index),
+      id: fixtureId(base + index),
       name,
       path: `${folder}/${name}.${model ? 'glb' : 'png'}`,
       kind: model ? 'model' : 'texture',

@@ -1,0 +1,31 @@
+{
+ "version": 1,
+ "id": "01JA34AA000000000000000002",
+ "maximum_size": [
+  256,
+  256
+ ],
+ "padding": 1,
+ "frames": {
+  "01JA34FR00000000000000000G": {
+   "name": "alt-card0",
+   "path": "cards.png",
+   "region": [
+    16,
+    2,
+    12,
+    14
+   ]
+  },
+  "01JA34FR00000000000000000H": {
+   "name": "alt-card1",
+   "path": "cards.png",
+   "region": [
+    2,
+    2,
+    12,
+    14
+   ]
+  }
+ }
+}
