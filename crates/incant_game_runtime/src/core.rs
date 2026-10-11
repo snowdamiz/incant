@@ -88,6 +88,17 @@ where
         self.live = Some(live);
         Ok(())
     }
+    pub fn refresh_host(&mut self) -> Result<(), H::Error> {
+        // Presentation of the current committed world is independent of the
+        // simulation clock and audio transport. External effects still make
+        // host failure/unwind terminal, exactly as in an accepted tick.
+        let mut live = self.live.take().ok_or(GameError::Failed)?;
+        live.host
+            .sync(live.native.world()?)
+            .map_err(GameError::Host)?;
+        self.live = Some(live);
+        Ok(())
+    }
     pub fn tick(
         &mut self,
         events: &[InputEvent],

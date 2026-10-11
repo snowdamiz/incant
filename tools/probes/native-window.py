@@ -99,7 +99,7 @@ for (const compile of [() => eval('1'), () => Function('return 1'),
         process=subprocess.run(command(scene),capture_output=True,text=True,timeout=30,cwd=runtime)
         require(process.returncode==0,f'Native lifecycle failed: {process.stderr}')
         report=json.loads(process.stdout);probe=report['lifecycle_probe']
-        require(report['tick']==report['accepted_frames']==40 and report['on_screen'],'Frame publication failed')
+        require(report['tick']==40 and report['accepted_frames']==40+report['presentation_refreshes'] and report['on_screen'],'Frame publication failed')
         require(probe['actual_resize'] and probe['actual_minimize_restore'] and 16 <= probe['suspended_tick'] <= 19 and probe['explicit_surface_recreation'] and report['surface_recreations']==1,'Lifecycle incomplete')
         results.append({'scene':scene,'report':report,'stderr':process.stderr})
     bad={'unsupported':{'kind':'button','bindings':[{'type':'gamepad_button','id':0,'button':'south'}]}}

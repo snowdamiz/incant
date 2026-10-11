@@ -17,7 +17,9 @@ escapes an event callback. A failed accepted tick destroys the composite session
 submitted GPU work and device audio cannot be rolled back.
 
 - Physical sizes are bounded to 16–1920 by 16–1080 pixels, initially 640×480.
-  Zero/minimized surfaces defer work. Resizing invalidates the configuration.
+  Zero/minimized and other out-of-range OS sizes defer work without terminating
+  the session. Maximize/fullscreen controls are disabled where Tao supports it;
+  OS constraints are not assumed to be infallible. Resizing invalidates the configuration.
 - Each acquisition performs at most two attempts. `Outdated` reconfigures;
   `Lost` recreates the surface and rechecks its capabilities. Repeated loss,
   timeout and occlusion defer simulation and audio. Validation/device failures
@@ -149,3 +151,42 @@ mobile support, audible speaker verification, a surface/device reset guarantee,
 shipping installers/signing, phone performance, full renderer migration, pixel
 placement completion or any phase gate. PDB source-symbol inspection is
 explicitly unsupported by this helper; Windows compile coverage remains in CI.
+
+## Native review corrections
+
+Claude Opus 5.5 Max completed [the original five native acceptance cases](https://github.com/snowdamiz/incant/blob/4073f8fab8b3a377230513d7cfa0c35b9f1db178/handoffs/0037-native-player-window/result.md)
+on the frozen `6b6a53a1` executable. Its 180 evidence hashes are verified. The
+review found an enabled fullscreen control that exceeded the bounded target and
+terminated the session, and stale stretching when resizing a background window.
+
+The correction disables maximize where supported and treats unsupported OS sizes
+as recoverable suspension. `HostedGameSession::refresh_host` (also available on
+the offline host) calls the existing owned host's sync with the current committed
+world. It advances neither native tick nor input, script, physics or audio. Host
+error/unwind drops the complete session. The window uses it only for pending
+redraw/resize while visible and paused; a 50 ms throttle advances only at its
+previous deadline, so a continuous event stream cannot postpone redraw forever.
+Successful refreshes are counted separately as `presentation_refreshes`; total
+`accepted_frames` includes both simulation presentations and these refreshes.
+
+Thirty-six ordinary scoped release tests, release all-target Clippy and four
+actual GPU regressions pass. Tests prove unchanged tick/input/poses, exact next
+audio samples after repeated paused refreshes, terminal error/unwind, unchanged
+GPU pixels, and bounded redraw opportunities under continuous 1 ms events.
+Forty-three tools tests and generated conventions also pass.
+
+The corrected fresh shipping executable is 8,120,976 bytes, SHA-256
+`ec18e426c67584c4ac762cf72deda6dfc10d9044c4a5ff91a07fc4ad0648edf5`.
+Its independently audited build/source directories were removed before the two
+actual static/streamed lifecycle processes and two refusals. Both accepted 40
+ticks with zero dropped wall ticks and zero presentation-only refreshes in that
+particular automated probe. Static acquisition deferred once; the streamed case
+never deferred. These timings/counts are observations, not performance gates.
+The corrected background resize/control behavior still needs Claude's separate
+hash-pinned delta review. Raw proof: `/tmp/incant-native-window-refresh-shipping-02`.
+
+The original review also observed one tick of motion on refocus (the existing
+step-before-script input latency) and 0.64–0.68 seconds of application-audio tail
+during macOS's blocking minimize animation. Focus-loss silence settled around
+0.10 seconds. No synchronous audio stop during an OS-blocked event loop or
+audible-speaker observation is claimed.

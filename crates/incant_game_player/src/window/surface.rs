@@ -83,18 +83,19 @@ impl SurfaceState {
     pub fn cancel(&mut self) {
         self.slot.borrow_mut().take();
     }
+    pub fn has_supported_size(&self) -> bool {
+        let size = self.window.inner_size();
+        supported_size(size.width, size.height)
+    }
     pub fn reserve(&mut self, renderer: &Renderer) -> Result<bool, Error> {
         if self.slot.borrow().is_some() {
             return Err(Error::Reservation);
         }
         renderer.check_device().map_err(Error::Render)?;
         let size = self.window.inner_size();
-        if size.width == 0 || size.height == 0 || self.window.is_minimized() {
+        if !supported_size(size.width, size.height) || self.window.is_minimized() {
             self.skipped += 1;
             return Ok(false);
-        }
-        if size.width < 16 || size.height < 16 || size.width > 1920 || size.height > 1080 {
-            return Err(Error::SurfaceSize);
         }
         if (self.config.width, self.config.height) != (size.width, size.height) {
             self.config.width = size.width;
@@ -161,6 +162,13 @@ impl SurfaceState {
         self.slot.borrow().is_none()
     }
 }
+
+// Window constraints are requests: fullscreen, display-scale changes or an OS
+// window manager can ignore them. Unsupported sizes defer simulation/presentation
+// without allocating an oversized target or terminating the live session.
+fn supported_size(width: u32, height: u32) -> bool {
+    (16..=1920).contains(&width) && (16..=1080).contains(&height)
+}
 impl TargetProvider for SurfaceTargets {
     type Error = Error;
     type Frame = Frame;
@@ -207,6 +215,23 @@ fn bounded_acquire<T>(
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn os_size_changes_are_bounded_and_can_reenter_the_supported_range() {
+        for size in [
+            (0, 0),
+            (15, 480),
+            (640, 15),
+            (1921, 1080),
+            (1920, 1081),
+            (3024, 1964),
+            (u32::MAX, u32::MAX),
+        ] {
+            assert!(!supported_size(size.0, size.1));
+        }
+        for size in [(16, 16), (1920, 1080), (640, 480)] {
+            assert!(supported_size(size.0, size.1));
+        }
+    }
     #[test]
     fn recovery_defers_repeated_loss_without_unbounded_acquisition() {
         let mut count = 0;

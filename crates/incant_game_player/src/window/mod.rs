@@ -31,8 +31,6 @@ pub enum Error {
     Surface(#[from] incant_render::wgpu::CreateSurfaceError),
     #[error("native surface lacks required sRGB format/alpha capabilities")]
     SurfaceCapabilities,
-    #[error("native surface dimensions must be within16..1920 by16..1080 physical pixels")]
-    SurfaceSize,
     #[error("native surface validation failed")]
     SurfaceValidation,
     #[error("native surface reservation invariant failed")]
@@ -108,6 +106,7 @@ pub fn run(args: &[String]) -> session::Result<()> {
             .with_inner_size(PhysicalSize::new(640, 480))
             .with_min_inner_size(PhysicalSize::new(16, 16))
             .with_max_inner_size(PhysicalSize::new(1920, 1080))
+            .with_maximizable(false)
             .build(&event_loop)?,
     );
     let (mut surface, renderer, targets) = SurfaceState::new(Arc::clone(&window))?;
@@ -138,6 +137,8 @@ pub fn run(args: &[String]) -> session::Result<()> {
     input.reset_focus(focused);
     let mut clock = clock::Clock::new(rate, Instant::now());
     let mut retry = Instant::now();
+    let mut redraw_pending = true;
+    let mut presentation_refreshes = 0u64;
     let mut failure: Option<Box<dyn std::error::Error>> = None;
     let mut exit = false;
     let mut last_audio_poll = Instant::now();
@@ -156,6 +157,7 @@ pub fn run(args: &[String]) -> session::Result<()> {
                     }
                     WindowEvent::Resized(_) | WindowEvent::ScaleFactorChanged { .. } => {
                         surface.invalidate();
+                        redraw_pending = true;
                     }
                     WindowEvent::Focused(value) => {
                         if !value && !suspended {
@@ -173,6 +175,7 @@ pub fn run(args: &[String]) -> session::Result<()> {
                     WindowEvent::Resumed => {
                         platform_suspended = false;
                         surface.invalidate();
+                        redraw_pending = true;
                     }
                     ref event if focused && !suspended => input.window(event)?,
                     _ => {}
@@ -180,6 +183,9 @@ pub fn run(args: &[String]) -> session::Result<()> {
                 // Raw DeviceEvent::MouseMotion is deliberately not forwarded:
                 // InputRuntime already derives displacement from CursorMoved.
                 // A future captured-pointer mode must choose the raw stream.
+                Event::RedrawRequested(id) if id == window.id() => {
+                    redraw_pending = true;
+                }
                 Event::MainEventsCleared => {
                     let now = Instant::now();
                     if let Some(probe) = &mut probe {
@@ -191,7 +197,10 @@ pub fn run(args: &[String]) -> session::Result<()> {
                         renderer.check_device().map_err(Error::Render)?;
                         last_audio_poll = now;
                     }
-                    let active = focused && !platform_suspended && !window.is_minimized();
+                    let presentable = !platform_suspended
+                        && !window.is_minimized()
+                        && surface.has_supported_size();
+                    let active = focused && presentable;
                     if !active {
                         if !suspended {
                             game.set_suspended(true)?;
@@ -199,7 +208,23 @@ pub fn run(args: &[String]) -> session::Result<()> {
                             input.reset_focus(focused);
                         }
                         clock.reset(now);
-                        retry = now + Duration::from_millis(50);
+                        // Background resize/redraw presents committed state once;
+                        // it cannot unpause input, the VM, physics or audio.
+                        if clock::claim_retry(&mut retry, now)
+                            && redraw_pending
+                            && presentable
+                            && surface.reserve(&renderer)?
+                        {
+                            let result = game.refresh_host();
+                            let consumed = surface.consumed();
+                            surface.cancel();
+                            result?;
+                            if !consumed {
+                                return Err(Error::Reservation.into());
+                            }
+                            redraw_pending = false;
+                            presentation_refreshes += 1;
+                        }
                     } else if now >= retry {
                         let due = if suspended { 1 } else { clock.due(now) };
                         for _ in 0..due {
@@ -227,6 +252,7 @@ pub fn run(args: &[String]) -> session::Result<()> {
                                 return Err(Error::Reservation.into());
                             }
                             input.clear();
+                            redraw_pending = false;
                             if options
                                 .stop_after
                                 .is_some_and(|n| game.world().is_ok_and(|w| w.tick() >= n))
@@ -266,7 +292,7 @@ pub fn run(args: &[String]) -> session::Result<()> {
     if let Some(probe) = &probe {
         probe.validate()?;
     }
-    let report = serde_json::json!({"mode":"native-window","tick":game.world()?.tick(),"accepted_frames":game.host()?.consumer().accepted_frames(),"adapter":renderer.adapter_name,"backend":format!("{:?}",renderer.adapter.get_info().backend),"on_screen":true,"dropped_wall_ticks":clock.dropped.to_string(),"surface_reconfigurations":surface.reconfigurations,"surface_recreations":surface.recreations,"surface_skipped":surface.skipped,"lifecycle_probe":probe.as_ref().map(|p|p.report())});
+    let report = serde_json::json!({"mode":"native-window","tick":game.world()?.tick(),"accepted_frames":game.host()?.consumer().accepted_frames(),"presentation_refreshes":presentation_refreshes,"adapter":renderer.adapter_name,"backend":format!("{:?}",renderer.adapter.get_info().backend),"on_screen":true,"dropped_wall_ticks":clock.dropped.to_string(),"surface_reconfigurations":surface.reconfigurations,"surface_recreations":surface.recreations,"surface_skipped":surface.skipped,"lifecycle_probe":probe.as_ref().map(|p|p.report())});
     drop(game); // stop device audio before returning/closing the native surface
     println!("{report}");
     Ok(())
