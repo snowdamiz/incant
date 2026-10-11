@@ -441,3 +441,126 @@ fn backend_driven_host_error_or_unwind_drops_the_backend_and_hides_all_state() {
         assert!(session.poll_audio().is_err() && session.tick(&[]).is_err());
     }
 }
+
+#[test]
+fn paused_refresh_preserves_tick_input_pose_and_exact_next_audio_samples() {
+    let temp = tempfile::tempdir().unwrap();
+    let samples: Vec<_> = (0..4800)
+        .map(|n| {
+            let v = (n as f32 * 0.071).sin() * 0.2;
+            [v, -v]
+        })
+        .collect();
+    let key = audio_support::cooked(temp.path(), &samples);
+    let scene = spatial::scenes()[1]
+        .clone()
+        .with_audio(vec![CookedAudio {
+            entity: id(),
+            bus: None,
+            listener: false,
+            source: Some(NativeAudioSource {
+                clip: id(),
+                bus: None,
+                gain_db: 0.,
+                pan: 0.,
+                rate: 1.,
+                start_seconds: 0.,
+                playing: true,
+                looping: true,
+                streaming: false,
+                spatial: None,
+            }),
+        }])
+        .unwrap();
+    let create = || {
+        HostedOfflineGameSession::<Host>::new(
+            scene.clone(),
+            script(),
+            InputActions::default(),
+            vec![ClipBinding::load(id(), temp.path(), &key).unwrap()],
+            48000,
+            HostSettings::default(),
+        )
+        .unwrap()
+    };
+    let (mut refreshed, mut control) = (create(), create());
+    let event = InputEvent::Key {
+        code: incant_input::KeyCode::Space,
+        down: true,
+    };
+    let mut a = vec![0.; 1600];
+    let mut b = a.clone();
+    refreshed
+        .tick(std::slice::from_ref(&event), &mut a)
+        .unwrap();
+    control.tick(&[event], &mut b).unwrap();
+    assert_eq!(a, b);
+    assert!(a.iter().any(|v| v.abs() > 0.01));
+    refreshed.set_suspended(true).unwrap();
+    control.set_suspended(true).unwrap();
+    let world = refreshed.world().unwrap().snapshot();
+    let input = refreshed.input().unwrap().clone();
+    let frames = refreshed.rendered_frames().unwrap();
+    let state = refreshed.source_state(id()).unwrap();
+    for _ in 0..8 {
+        refreshed.refresh_host().unwrap();
+    }
+    assert_eq!(refreshed.world().unwrap().tick(), 1);
+    assert_eq!(refreshed.world().unwrap().snapshot(), world);
+    assert_eq!(refreshed.input().unwrap(), &input);
+    assert_eq!(refreshed.rendered_frames().unwrap(), frames);
+    assert_eq!(refreshed.source_state(id()).unwrap(), state);
+    assert_eq!(refreshed.host().unwrap().observed, vec![(1, 2.); 9]);
+    assert!(matches!(
+        refreshed.tick(&[], &mut a),
+        Err(GameError::Suspended)
+    ));
+    refreshed.set_suspended(false).unwrap();
+    control.set_suspended(false).unwrap();
+    for _ in 0..3 {
+        refreshed.tick(&[], &mut a).unwrap();
+        control.tick(&[], &mut b).unwrap();
+        assert_eq!(a, b);
+    }
+}
+
+#[test]
+fn presentation_only_error_and_unwind_drop_the_entire_backend_session() {
+    for outcome in [Outcome::Reject, Outcome::Panic] {
+        let probe = Arc::new(Probe::default());
+        let mut session = HostedGameSession::<Backend, Host>::new(
+            spatial::scenes()[1].clone(),
+            script(),
+            InputActions::default(),
+            vec![],
+            backend(probe.clone(), false),
+            HostSettings {
+                probe: probe.clone(),
+                sync: outcome,
+                ..Default::default()
+            },
+        )
+        .unwrap();
+        session.set_suspended(true).unwrap();
+        let result = catch_unwind(AssertUnwindSafe(|| session.refresh_host()));
+        match outcome {
+            Outcome::Reject => assert!(matches!(result, Ok(Err(GameError::Host(HostError))))),
+            Outcome::Panic => assert!(result.is_err()),
+            _ => unreachable!(),
+        }
+        assert_eq!(
+            probe.calls(),
+            [
+                "prepare",
+                "backend-setup",
+                "backend-start",
+                "sync",
+                "backend-drop",
+                "host-drop"
+            ]
+        );
+        assert!(session.is_failed());
+        assert!(session.host().is_err() && session.world().is_err() && session.input().is_err());
+        assert!(session.refresh_host().is_err() && session.set_suspended(false).is_err());
+    }
+}

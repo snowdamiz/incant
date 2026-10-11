@@ -31,6 +31,7 @@ pub(crate) struct Live<B: Backend, H: Hook> {
 }
 pub(crate) struct Core<B: Backend, H: Hook = NoHost> {
     pub live: Option<Live<B, H>>,
+    suspended: bool,
 }
 impl<B: Backend, H: Hook> Core<B, H>
 where
@@ -48,6 +49,7 @@ where
         let native = pending.start(program)?;
         let audio = audio(native.world()?)?;
         Ok(Self {
+            suspended: false,
             live: Some(Live {
                 audio,
                 host,
@@ -82,11 +84,33 @@ where
         self.live = Some(live);
         Ok(())
     }
+    pub fn set_suspended(&mut self, suspended: bool) -> Result<(), H::Error> {
+        let mut live = self.live.take().ok_or(GameError::Failed)?;
+        live.audio.set_suspended(suspended)?;
+        self.suspended = suspended;
+        self.live = Some(live);
+        Ok(())
+    }
+    pub fn refresh_host(&mut self) -> Result<(), H::Error> {
+        // Presentation of the current committed world is independent of the
+        // simulation clock and audio transport. External effects still make
+        // host failure/unwind terminal, exactly as in an accepted tick.
+        let mut live = self.live.take().ok_or(GameError::Failed)?;
+        live.host
+            .sync(live.native.world()?)
+            .map_err(GameError::Host)?;
+        self.live = Some(live);
+        Ok(())
+    }
     pub fn tick(
         &mut self,
         events: &[InputEvent],
         render: impl FnOnce(&mut SceneAudio<B>) -> incant_audio_runtime::Result<()>,
     ) -> Result<(), H::Error> {
+        self.ready()?;
+        if self.suspended {
+            return Err(GameError::Suspended);
+        }
         // Keep the public state absent until the complete accepted operation
         // succeeds. Err and Rust unwind drop every live subsystem; no catch or
         // whole-world clone is needed. Abort cannot run cleanup.
@@ -102,6 +126,16 @@ where
         live.host
             .sync(live.native.world()?)
             .map_err(GameError::Host)?;
+        self.live = Some(live);
+        Ok(())
+    }
+}
+
+#[cfg(all(feature = "device", not(target_arch = "wasm32")))]
+impl<H: Hook> Core<incant_audio_runtime::DeviceBackend, H> {
+    pub fn poll_device(&mut self) -> Result<(), H::Error> {
+        let mut live = self.live.take().ok_or(GameError::Failed)?;
+        live.audio.check_device()?;
         self.live = Some(live);
         Ok(())
     }

@@ -2,10 +2,12 @@
 //! Geometry, premultiplied linear color and clip/depth math; no style presets.
 mod drawing;
 mod geometry;
+mod plans;
+pub(crate) use plans::{SpritePlan, TilemapPlan};
 mod texture;
 use crate::{ResourceError, Result};
 pub(crate) use drawing::SpriteDraw;
-use incant_2d::{SpriteRenderer, SpriteSampling};
+use incant_2d::SpriteSampling;
 use incant_assets_runtime::{RuntimeAsset, RuntimeAssetData};
 use std::{
     collections::HashMap,
@@ -21,13 +23,6 @@ struct Attributes {
     uv_bounds: [f32; 4],
     texel: [f32; 2],
     sampling: u32,
-}
-pub(crate) struct SpritePlan {
-    pub node: usize,
-    pub source: Arc<RuntimeAsset>,
-    pub sprite: SpriteRenderer,
-    pub world: glam::DMat4,
-    pub id: String,
 }
 struct GpuTexture {
     _source: Arc<RuntimeAsset>,
@@ -209,18 +204,17 @@ impl SpriteSystem {
         &self,
         device: &wgpu::Device,
         queue: &wgpu::Queue,
-        mut plans: Vec<SpritePlan>,
+        plans: Vec<SpritePlan>,
+        tilemaps: Vec<TilemapPlan>,
         retained: bool,
     ) -> Result<Option<Arc<SpriteScene>>> {
-        if plans.is_empty() {
+        let items = plans::ordered(&plans, &tilemaps)?;
+        if items.is_empty() {
             return Ok(None);
         }
-        if plans.len() > 32768 {
-            return Err(ResourceError::BufferSize("32768 sprite instances").into());
-        }
-        plans.sort_by(|a, b| {
-            (a.sprite.layer, a.sprite.order, &a.id).cmp(&(b.sprite.layer, b.sprite.order, &b.id))
-        });
+        let prepared = preflight(&items, device.limits().max_buffer_size, retained)?;
+        let vertex_count = prepared.vertices;
+        let mut span_sizes = prepared.spans.into_iter();
         let mut cache = self
             .cache
             .lock()
@@ -228,9 +222,9 @@ impl SpriteSystem {
         cache.retain(|_, v| v.strong_count() != 0);
         let mut unique = std::collections::BTreeSet::new();
         let mut texture_bytes = 0_u64;
-        for plan in &plans {
-            if unique.insert(plan.source.version_id()) {
-                let RuntimeAssetData::Texture(source) = plan.source.data() else {
+        for item in &items {
+            if unique.insert(item.source().version_id()) {
+                let RuntimeAssetData::Texture(source) = item.source().data() else {
                     return Err(ResourceError::TextureSize.into());
                 };
                 texture_bytes +=
@@ -240,31 +234,16 @@ impl SpriteSystem {
                 }
             }
         }
-        let mut positions = Vec::new();
-        let mut attributes = Vec::new();
-        let mut placements = Vec::new();
+        let mut positions = Vec::with_capacity(vertex_count);
+        let mut attributes = Vec::with_capacity(vertex_count);
+        let mut placements: Vec<Placement> = Vec::new();
         let mut batches: Vec<Batch> = Vec::new();
-        for plan in plans {
-            let RuntimeAssetData::Texture(source) = plan.source.data() else {
+        for item in items {
+            let RuntimeAssetData::Texture(source) = item.source().data() else {
                 return Err(ResourceError::TextureSize.into());
             };
-            // Resolve geometry before allocating GPU resources so an undersized
-            // reimport reports the affected entity and exact region/dimensions.
-            let sprite = &plan.sprite;
-            let region = sprite
-                .region
-                .pixels()
-                .ok_or(incant_2d::SpriteError::UnresolvedAtlas)?;
-            let texture_size = [source.texture.width, source.texture.height];
-            let geometry = incant_2d::tessellate(sprite, texture_size).map_err(|source| {
-                ResourceError::SpriteGeometry {
-                    entity: plan.id.clone(),
-                    texture: sprite.texture.clone(),
-                    region,
-                    texture_size,
-                    source,
-                }
-            })?;
+            let sprite = item.sprite();
+            let (geometry, region, texture_size) = base_geometry(&item)?;
             let geometry = if sprite.sampling == SpriteSampling::Nearest {
                 geometry::nearest(&geometry, region, texture_size)
             } else {
@@ -277,18 +256,8 @@ impl SpriteSystem {
                     })
                     .collect()
             };
-            // Enforce the total bound before extending the CPU vertex vector or
-            // allocating this sprite's GPU texture. Large regions add spans.
-            // Preserve the existing aggregate geometry limit and accepted scene
-            // capacity even though positions and attributes now use two streams.
-            let vertex_bytes = (positions.len() + geometry.len())
-                * (size_of::<[f32; 3]>() + size_of::<Attributes>());
-            if vertex_bytes > 128 * 1024 * 1024
-                || vertex_bytes as u64 > device.limits().max_buffer_size
-            {
-                return Err(ResourceError::BufferSize("sprite geometry").into());
-            }
-            let key = plan.source.version_id();
+            debug_assert!((positions.len() + geometry.len()) <= vertex_count);
+            let key = item.source().version_id();
             let texture = match cache.get(&key).and_then(Weak::upgrade) {
                 Some(texture) => texture,
                 None => {
@@ -296,7 +265,7 @@ impl SpriteSystem {
                         device,
                         queue,
                         &self.textures,
-                        Arc::clone(&plan.source),
+                        Arc::clone(item.source()),
                     )?);
                     cache.insert(key, Arc::downgrade(&texture));
                     texture
@@ -317,17 +286,39 @@ impl SpriteSystem {
                 [f64::from(x), f64::from(y), f64::from(w), f64::from(h)]
             }
             .map(|v| v as f32);
+            let offset = item.offset();
             if retained {
-                placements.push(Placement {
-                    node: plan.node,
-                    start: positions.len(),
-                    local: geometry.iter().map(|v| v.position).collect(),
-                });
+                if let Some(last) = placements.last_mut().filter(|p| p.node == item.node()) {
+                    last.local.extend(
+                        geometry
+                            .iter()
+                            .map(|v| [v.position[0] + offset[0], v.position[1] + offset[1]]),
+                    );
+                } else {
+                    placements.push(Placement {
+                        node: item.node(),
+                        start: positions.len(),
+                        local: {
+                            let count = span_sizes.next().expect("preflight placement count");
+                            let mut local = Vec::with_capacity(count);
+                            local.extend(
+                                geometry.iter().map(|v| {
+                                    [v.position[0] + offset[0], v.position[1] + offset[1]]
+                                }),
+                            );
+                            local
+                        },
+                    });
+                }
             }
             for local in geometry {
-                let position = plan
-                    .world
-                    .transform_point3(glam::DVec3::new(local.position[0], local.position[1], 0.))
+                let position = item
+                    .world()
+                    .transform_point3(glam::DVec3::new(
+                        local.position[0] + offset[0],
+                        local.position[1] + offset[1],
+                        0.,
+                    ))
                     .as_vec3();
                 if !position.is_finite() {
                     return Err(ResourceError::GeometryRange.into());
@@ -359,6 +350,8 @@ impl SpriteSystem {
                 });
             }
         }
+        debug_assert_eq!(positions.len(), vertex_count);
+        debug_assert!(span_sizes.next().is_none());
         let attributes = device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
             label: Some("Immutable sprite attributes"),
             contents: bytemuck::cast_slice(&attributes),
@@ -374,4 +367,79 @@ impl SpriteSystem {
             updates: if retained { positions } else { Vec::new() },
         })))
     }
+}
+
+fn base_geometry(
+    item: &plans::DrawItem<'_>,
+) -> Result<(Vec<incant_2d::SpriteVertex>, [u32; 4], [u32; 2])> {
+    let RuntimeAssetData::Texture(texture) = item.source().data() else {
+        return Err(ResourceError::TextureSize.into());
+    };
+    let sprite = item.sprite();
+    let region = sprite
+        .region
+        .pixels()
+        .ok_or(incant_2d::SpriteError::UnresolvedAtlas)?;
+    let size = [texture.texture.width, texture.texture.height];
+    let geometry =
+        incant_2d::tessellate(&sprite, size).map_err(|source| ResourceError::SpriteGeometry {
+            entity: item.id().to_owned(),
+            texture: item.source().info().id.clone(),
+            region,
+            texture_size: size,
+            source,
+        })?;
+    Ok((geometry, region, size))
+}
+
+struct GeometrySize {
+    vertices: usize,
+    spans: Vec<usize>,
+}
+fn preflight(
+    items: &[plans::DrawItem<'_>],
+    buffer_limit: u64,
+    retained: bool,
+) -> Result<GeometrySize> {
+    // Exact combined count precedes any expanded vertex buffer or texture.
+    // Per-item tessellation scratch never exceeds 54 vertices.
+    let mut result = GeometrySize {
+        vertices: 0,
+        spans: Vec::new(),
+    };
+    let mut last_node = None;
+    for item in items {
+        let (geometry, region, size) = base_geometry(item)?;
+        let count = if item.sprite().sampling == SpriteSampling::Nearest {
+            geometry::nearest_len(&geometry, region, size)
+        } else {
+            geometry.len()
+        };
+        result.vertices = result
+            .vertices
+            .checked_add(count)
+            .ok_or(ResourceError::BufferSize("sprite/tile geometry"))?;
+        let bytes = result
+            .vertices
+            .checked_mul(plans::LOGICAL_VERTEX_BYTES)
+            .ok_or(ResourceError::BufferSize("sprite/tile geometry"))?;
+        if bytes > plans::MAX_GEOMETRY_BYTES || bytes as u64 > buffer_limit {
+            return Err(ResourceError::BufferSize("sprite/tile geometry").into());
+        }
+        if retained {
+            if last_node == Some(item.node()) {
+                *result.spans.last_mut().expect("prior span") += count;
+            } else {
+                result.spans.push(count);
+                last_node = Some(item.node());
+            }
+        }
+    }
+    Ok(result)
+}
+#[cfg(test)]
+pub(crate) fn test_vertex_count(input: &incant_render_data::SceneInput) -> Result<usize> {
+    let scene = crate::scene::resolve(input)?;
+    let items = plans::ordered(&scene.sprites, &scene.tilemaps)?;
+    Ok(preflight(&items, u64::MAX, false)?.vertices)
 }

@@ -1,0 +1,65 @@
+{
+  "scope": "Native tilemap retained rendering; no appearance or device-performance gate",
+  "base_commit": "37d72fde24055b3dc06d5474085e65086ffc2eef",
+  "host": {
+    "os": "macOS 26.6 (25G72)",
+    "arch": "aarch64",
+    "adapter": "Apple M5 Pro / Metal",
+    "rust": "1.99.0"
+  },
+  "tests": {
+    "ordinary_release": 45,
+    "renderer_gpu": 62,
+    "cpu_stage_allocation_test": {
+      "accepted_calls": 64,
+      "allocations": 0,
+      "scope": "RetainedScene CPU stage only; not full draw or driver"
+    },
+    "tools": 43,
+    "clippy": "release all-target scoped pass",
+    "dependency_guard": "incant_render incant_render_data incant_render_native; runtime visual feature enabled; pass"
+  },
+  "headless_candidate": {
+    "sha256": "0445adae515a2c23b4d0d4924db00507023817ea3571c7164b6c0c40d8219b80",
+    "bytes": 39258752,
+    "profile": "release; authoring review tool, not shipping player"
+  },
+  "source_sha256": {
+    "crates/incant_render/src/models.rs": "e16bf4a834459478ae79b8e430804f5e1be489d37dd52b896ac16ddd76164a02",
+    "crates/incant_render/src/retained.rs": "2fd56373f17e04375b7f112e9dd1f17ccd8b4970895d7ebd44fa6885d98fe944",
+    "crates/incant_render/src/retained_alloc.rs": "30193b83cecca45c1f4c248e5e305adbef498ddd5e9194dc38464a1b86d0d772",
+    "crates/incant_render/src/retained_native_tests.rs": "8e5b750b9ca26ac22307fd99662477131e8611802d3c7266700b9dbfa931d8af",
+    "crates/incant_render/src/retained_sprite_tests.rs": "d3a53d2f2c4b4888cfc07650c4c01b8a25469e2c4a189b8a89edaddececdbc93",
+    "crates/incant_render/src/retained_tests.rs": "197afd6eec05d7adaf182f35f1af141c5897cf763c7808842540e17cfea09b89",
+    "crates/incant_render/src/retained_tilemap_tests.rs": "989afaca14d3b560933cb93d1cc290c25ec419aad6eeada23ab2a1098daa6cf6",
+    "crates/incant_render/src/scene.rs": "e96b2b3df731dddce38e2925d401b310d6fce28bd8db3dd49e0f34cf62ce3323",
+    "crates/incant_render/src/sprites/drawing.rs": "1844dfc3bcdb15750c4e48a3bf8762203956ebc9edb2d55160e559854068d8f7",
+    "crates/incant_render/src/sprites/geometry.rs": "df368b94770321355772fb38b74b7858db21b3a56eb85072be93431bb7906947",
+    "crates/incant_render/src/sprites/mod.rs": "bbc8d953b7bc4ad6d5f66577dd90b73d808379bd0dea49354d40dcf0eef49808",
+    "crates/incant_render/src/sprites/plans.rs": "19c0777812326bfa55b05b79c6d2488294bbd5393415caeb8c0775dd144eadc1",
+    "crates/incant_render/src/sprites/texture.rs": "78de4a2e556c1ec82eefb827f85bbcc7358bf2aa0690dc994a49889cc48edd84",
+    "crates/incant_render_authoring/src/lib.rs": "f32d4911e81cad64c3bffd2c2c4b0b03b78a93e22be253e88bfe61b8d3e390d5",
+    "crates/incant_render_data/src/lib.rs": "d81350ce8dac8eb7faad0ba10a4f140ab92128d973d3f4110274889df4449bb2",
+    "crates/incant_render_data/src/tilemap.rs": "023c5626764a046da7f071cc2f6b9250436c37d8a34a5dde02c6aa57c9a22b66",
+    "crates/incant_render_native/src/binding.rs": "c8dc357215f350f133e456738a34a8452ba870b8ed9483fa493f8ceaae127b5b",
+    "crates/incant_render_native/src/lib.rs": "7555254571e17646136a557175d76ce1a997b6b225d993c914deccc6c37c5f63",
+    "crates/incant_render_native/src/tilemap.rs": "cb85ca7a988c2cd20ae6a594934a34d741cc23079b18c5970658d8fdf956c683",
+    "crates/incant_render_native/src/update.rs": "cb00e9dcb4e6cb94ce10e66b47cbef7199d4afecb842c4caca6c5efc8dbc48dd"
+  },
+  "logs": {
+    "/tmp/incant-native-tile-render-tests.log": "6e4d0b47276a669d1056d523ddf99e1e6fc95596cbf2297a73ef8abd3eabce25",
+    "/tmp/incant-native-tile-render-clippy.log": "a2ccfce0132fecfd5c65b704a893982568cfba0d8eec1d2faa1815405cab891b",
+    "/tmp/incant-native-tile-render-gpu.log": "0b0421f94b379b30f1e9b776db354b3f18f807bddfaeaa7b6847f69e130fecd5",
+    "/tmp/incant-native-tile-render-headless.log": "3ebd4fe3844d8399186d5379900f5cd8778a4eee236451bb5629375492263efb",
+    "/tmp/incant-native-tile-render-dependencies.log": "368745b90ce4eabde28105554bba8a01249b0495dc0c6bd38788c2d0e7dcfd82",
+    "/tmp/incant-native-tile-render-tools.log": "2bc4fb4b4b7e0b44f872a272d19bbdf8cc78470476fd978f03b83287f9e04523",
+    "/tmp/incant-native-tile-render-conventions.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "limits": [
+    "Rapier2D solid simulation not implemented; refused",
+    "legacy Play unsupported",
+    "appearance review pending separately",
+    "no phone performance or phase gate",
+    "existing high-zoom nearest and camera-following limitations unchanged"
+  ]
+}

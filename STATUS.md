@@ -25,7 +25,9 @@ visual work, and Astra owns correctness and integration.
 | Native TypeScript cooking | Strict bounded local module cooking, flat source maps and developer native playback pass 12 Node/90 Python tests and six real source-deleted process controls. | Local only; full editor/project Script routing, complete SDK and hosted/export/device gates remain. [Evidence](docs/spikes/native-typescript-cook.md). |
 | Native Play RPC | Shared cooked-native startup, retained stepping and bounded selected observations pass 13 executable tests, the physics/persistence probe and ten source-deleted developer processes. | Local only; actualmain integration, editor controls, agent tools, project Script routing and complete session saves remain. [Evidence](docs/spikes/native-play-rpc.md). |
 | Native game and rendering | Input, embedded QuickJS, native physics, scene audio and retained GPU submission compose through one accepted-tick lifecycle. Binary v5 sprites share immutable geometry. | [PR #62](https://github.com/snowdamiz/incant/pull/62) is merged after all 20 checks. Native editor/legacy Play migration, complete SDK, shader pipeline work and device budgets remain. |
-| Native window player | A separate implementation branch adds real surface presentation, keyboard/mouse input, suspension and device audio. Local source-free lifecycle tests pass. | Independent review/CI and Claude native acceptance precede integration. No phone or frame-budget claim. |
+| Native window player | Optional cooked native game window has bounded recovery, keyboard/mouse input, suspension and device audio. Source-free lifecycle checks and Claude0037 corrected native acceptance pass. [Evidence](docs/spikes/native-window-player.md). | The reviewed PR63 source is consolidated with native project play and 2D integration in one validation head. Paused refresh preserves gameplay/audio; hosted platform checks remain pending. No phone or frame-budget claim. |
+| Native tilemaps | Typed v6 data and exact solid-cell collision preparation preserve the reviewed [PR68](https://github.com/snowdamiz/incant/pull/68) ancestry in the consolidated union. Retained GPU tile rendering now shares checked atlas versions, painter ordering and combined sprite/tile resource caps; 45 ordinary and 62 GPU tests pass. | Claude0039 accepted scoped tile appearance; the reviewed PR73 renderer now shares the consolidated validation head. Native solid-map collision is included through the planar physics boundary below; legacy Play remains unsupported. [Data](docs/spikes/native-tilemaps.md), [rendering](docs/spikes/native-tilemap-rendering.md). |
+| Native planar physics | Retained Rapier2D, cooked v7, typed native commands and solid-map collision pass 585 workspace tests, 66 GPU tests, 18 native/browser parity streams and seven fresh shipping processes. | The reviewed PR78 implementation now shares the consolidated validation head; hosted cross-desktop 2D parity is pending. Root/unit-scale planar bodies only; physics saves, 2D character/joints, full script SDK and phone/performance gates remain open. [Evidence](docs/spikes/native-physics-2d.md). |
 | Native WebAssembly | Shared bounded capability ABI serves Wasmtime and wasm2c. PR #64 passed actual Windows /Od + /O2, Linux and macOS static conformance and fresh packaging. PR #67 composes static modules with the native game session. The versioned input ABI now drives real guest motion/spawns in both hosts and a fresh local packaged game proof. | Complete SDK, static-module renderer/session saves, new input/composed-player hosted results and device gates remain. [Input ABI evidence](docs/spikes/native-wasm-input-abi.md). |
 | CI speed | Registry-only caches have actual three-host consumers. A strict documentation selector and measured opt1 functional profile are prepared and locally validated; unchanged main64 coverage passes 543 ordinary/66 ignored tests and all four fresh shipping proofs. | The main67/import union also passes 544 ordinary, 534 UI and 86 tools tests plus workspace Clippy; hosted union checks and Windows/cache-size measurements remain pending. [Profile scope](docs/spikes/ci-test-profile.md); shared fresh-build storage remains off CI. Shipping audits and device gates are unchanged. |
 
@@ -156,18 +158,30 @@ process controls and a fresh 47-process shipping-player regression proof.
 [Evidence](docs/spikes/native-project-play.md). Editor Play, agent play tools,
 project script routing, GPU capture and complete session saves remain open.
 
+## Consolidated native-window and 2D integration
+
+The ancestry-preserving union of PR63/68/73/78 on PR79/76 passes 650 ordinary
+workspace tests, all 69 ignored GPU tests, both workspace Clippy profiles,
+18 optional window policy/routing tests, 534 UI tests and 90 tools tests.
+Generated schemas remain unchanged. Static-module composition passes 101 tests
+and a fresh 34-process shipping proof; all 18 native/browser physics streams
+match, and seven fresh planar shipping processes pass. Six custom native-project
+runs and the fresh source-free GPU player also pass. Exact-head hosted checks
+remain pending. [Integrated evidence](docs/spikes/native-window-2d-union.md).
+
 ## Remaining engineering requirements
 
 - Complete migration of the editor, headless runner and full gameplay SDK from
   legacy document-backed Play into the native runtime. Persistent script state,
-  timers/coroutines, remaining native physics/navigation/audio/UI access and full composite
+  remaining timer/coroutine semantics, native physics/navigation/audio/UI access and full composite
   session restoration need production coverage. Do not extend the legacy tick
   path or add project cloning/JSON/authoring validation to native ticks.
 - Finish render features and their native path: offline backend shader cooking,
   persistent pipeline caches, asynchronous fallback/prewarming, temporal upscaling,
   dynamic resolution, backend interop and recorded device budgets. Runtime WGSL
   compilation is still present; source-free script proofs do not certify shader
-  performance. Native pixel placement, tilemaps/flipbooks and Rapier 2D remain.
+  performance. Native pixel placement, flipbooks and broader tilemap/2D-physics
+  feature and device coverage remain.
 - Complete animation, navigation, game UI/text/IME, localization and remaining
   input/haptics/native SDK deliverables. Existing scoped/legacy implementations
   are not evidence of full native feature parity.

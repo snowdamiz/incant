@@ -1,0 +1,14 @@
+{
+ "entities-control-s0.json": {
+  "sha256": "c45e4c8196d12fd657b5354e751c68672fe61fc0eb667985d6848f08db4ab84b",
+  "bytes": 178219,
+  "entities": 252,
+  "regenerated_identical": true
+ },
+ "entities-control-s1.json": {
+  "sha256": "b70a7b0ef73af7e2446df2478837dbbfb59cdafc8ce646b172fdd6c4722f1358",
+  "bytes": 181191,
+  "entities": 256,
+  "regenerated_identical": true
+ }
+}

@@ -9,6 +9,7 @@ fn node(id: &str) -> SceneNode {
         light: None,
         mesh: None,
         sprite: None,
+        tilemap: None,
         diagnostic: false,
     }
 }

@@ -2,11 +2,12 @@
 //! This is not the authoring command bus: no journal, provenance or JSON path.
 use crate::CookedPhysics;
 use crate::physics::{Binding, Spin};
+use crate::physics_2d::{Binding2D, Spin2D};
 use crate::scene::{MAX_ENTITIES, matrix, validate_values};
 use crate::world::{Global, Hierarchy, Local, Motion, spawn};
 use crate::{CookedEntity, NativeWorld, RuntimeError, SceneError, StableId};
 use incant_physics_runtime::PreparedBody;
-use incant_types::{AngularVelocity, Velocity};
+use incant_types::{AngularVelocity, AngularVelocity2D, Velocity};
 use std::collections::{BTreeMap, BTreeSet};
 
 pub const MAX_FRAME_COMMANDS: usize = 65_536;
@@ -40,6 +41,17 @@ pub enum StructuralCommand {
     SetPhysics {
         entity: StableId,
         physics: Option<CookedPhysics>,
+    },
+    /// Add/replace/remove planar configuration. Cannot share an entity with
+    /// a 3D collider or solid tilemap; final-state validation precedes writes.
+    SetPhysics2D {
+        entity: StableId,
+        physics: Option<crate::CookedPhysics2D>,
+    },
+    /// Requires a planar rigid body, including when None resets it to zero.
+    SetAngularVelocity2D {
+        entity: StableId,
+        velocity: Option<AngularVelocity2D>,
     },
     /// Physics angular motion is typed and never included in Transform/Velocity
     /// foreign numeric buffers. Requires a rigid body; None resets to zero.
@@ -92,6 +104,9 @@ struct Staged {
     physics: BTreeMap<StableId, Option<CookedPhysics>>,
     spins: BTreeMap<StableId, Option<AngularVelocity>>,
     prepared: BTreeMap<StableId, Option<PreparedBody>>,
+    spins_2d: BTreeMap<StableId, Option<AngularVelocity2D>>,
+    prepared_2d: Vec<(StableId, Option<incant_physics_2d_runtime::PreparedBody>)>,
+    bindings_2d: BTreeMap<StableId, (Option<crate::CookedPhysics2D>, bool)>,
     audio: BTreeMap<StableId, Option<crate::CookedAudio>>,
     spatial: BTreeMap<StableId, Option<crate::CookedSpatial>>,
     topology_generation: u64,
@@ -110,6 +125,7 @@ impl NativeWorld {
         if commands
             .iter()
             .all(|c| matches!(c, StructuralCommand::SetSpatial { .. }))
+            && !commands.iter().any(|c| matches!(c, StructuralCommand::SetSpatial{entity,spatial} if self.tilemap_collision_ids.contains(entity) || spatial.as_ref().is_some_and(|n|n.tilemap.as_ref().is_some_and(|m|m.layers.iter().any(|l|l.solid)))))
         {
             self.apply_spatial(commands)?;
             return Ok(());
@@ -146,10 +162,12 @@ impl NativeWorld {
                 c,
                 StructuralCommand::SetVelocity { .. }
                     | StructuralCommand::SetAngularVelocity { .. }
+                    | StructuralCommand::SetAngularVelocity2D { .. }
             )
         }) {
             let mut velocities = BTreeMap::new();
             let mut spins = BTreeMap::new();
+            let mut spins_2d = BTreeMap::new();
             let mut touched = BTreeSet::new();
             for command in commands.iter() {
                 let id = match command {
@@ -164,6 +182,14 @@ impl NativeWorld {
                                 .map_err(|_| SceneError::Component(*entity))?;
                         }
                         spins.insert(*entity, velocity.clone());
+                        *entity
+                    }
+                    StructuralCommand::SetAngularVelocity2D { entity, velocity } => {
+                        if let Some(v) = velocity {
+                            incant_types::physics_2d_validation::angular(v)
+                                .map_err(|_| SceneError::Component(*entity))?;
+                        }
+                        spins_2d.insert(*entity, velocity.clone());
                         *entity
                     }
                     _ => unreachable!(),
@@ -181,6 +207,32 @@ impl NativeWorld {
                 let body = binding.and_then(|b| b.body.as_ref());
                 if spins.contains_key(&id) && body.is_none() {
                     return Err(SceneError::Component(id).into());
+                }
+                let planar = entity.get::<Binding2D>();
+                let planar_body = planar.and_then(|p| p.body.as_ref());
+                if spins_2d.contains_key(&id) && planar_body.is_none() {
+                    return Err(SceneError::Component(id).into());
+                }
+                if let Some(planar) = planar {
+                    let velocity = velocities
+                        .get(&id)
+                        .map(|v| v.as_ref())
+                        .unwrap_or_else(|| entity.get::<Motion>().map(|v| &v.0));
+                    let spin = spins_2d
+                        .get(&id)
+                        .map(|v| v.as_ref())
+                        .unwrap_or_else(|| entity.get::<Spin2D>().map(|s| &s.0));
+                    if planar_body.is_some() && velocity.is_none() {
+                        return Err(SceneError::Component(id).into());
+                    }
+                    crate::physics_2d::validate_motion(
+                        id,
+                        self.parents[&id].is_some(),
+                        &entity.get::<Local>().unwrap().0,
+                        velocity,
+                        spin,
+                        planar.body.as_ref(),
+                    )?;
                 }
                 if let Some(binding) = binding {
                     let velocity = velocities
@@ -205,6 +257,11 @@ impl NativeWorld {
                 }
             }
             self.install_velocities(velocities);
+            for (id, spin) in spins_2d {
+                self.world
+                    .entity_mut(self.entities[&id])
+                    .insert(Spin2D(spin.unwrap_or(AngularVelocity2D { angular: 0. })));
+            }
             for (id, spin) in spins {
                 self.world
                     .entity_mut(self.entities[&id])
@@ -212,11 +269,17 @@ impl NativeWorld {
             }
         } else {
             let staged = self.stage(commands)?;
+            // The prepared final collection was checked during staging, while
+            // all native numeric undo was still owned by any script adapter.
+            self.physics_2d
+                .apply(staged.prepared_2d)
+                .expect("staged planar collection");
             // Everything that can reject external data completed above. These
             // handles/IDs are exclusively owned by this world until commit ends.
             for id in staged.removed {
                 self.audio_ids.remove(&id);
                 self.spatial_ids.remove(&id);
+                self.tilemap_collision_ids.remove(&id);
                 self.physics.remove(&self.scene_id(), &id);
                 let entity = self.entities.remove(&id).expect("staged entity");
                 self.world.despawn(entity);
@@ -230,6 +293,15 @@ impl NativeWorld {
             }
             for (id, node) in staged.audio {
                 self.install_audio(id, node);
+            }
+            for (id, (declaration, tilemap)) in staged.bindings_2d {
+                self.install_physics_2d(id, declaration, tilemap);
+            }
+            for (id, spin) in staged.spins_2d {
+                let mut entity = self.world.entity_mut(self.entities[&id]);
+                if entity.get::<Binding2D>().is_some_and(|b| b.body.is_some()) {
+                    entity.insert(Spin2D(spin.unwrap_or(AngularVelocity2D { angular: 0. })));
+                }
             }
             for (id, declaration) in staged.physics {
                 if let Some(declaration) = declaration {
@@ -317,6 +389,8 @@ impl NativeWorld {
         let mut removed = BTreeSet::new();
         let mut velocities = BTreeMap::new();
         let mut physics = BTreeMap::new();
+        let mut physics_2d = BTreeMap::new();
+        let mut spins_2d = BTreeMap::new();
         let mut spins = BTreeMap::new();
         let mut audio = BTreeMap::new();
         let mut spatial = BTreeMap::new();
@@ -344,6 +418,8 @@ impl NativeWorld {
                     }
                     velocities.remove(id);
                     physics.remove(id);
+                    physics_2d.remove(id);
+                    spins_2d.remove(id);
                     spins.remove(id);
                     audio.remove(id);
                     spatial.remove(id);
@@ -392,6 +468,29 @@ impl NativeWorld {
                     spins.remove(entity);
                     physics.insert(*entity, declaration.clone());
                 }
+                StructuralCommand::SetPhysics2D {
+                    entity,
+                    physics: declaration,
+                } => {
+                    if !parents.contains_key(entity) {
+                        return Err(RuntimeError::MissingEntity(*entity));
+                    }
+                    if declaration.as_ref().is_some_and(|p| p.entity != *entity) {
+                        return Err(SceneError::Invalid("2D entity reference").into());
+                    }
+                    spins_2d.remove(entity);
+                    physics_2d.insert(*entity, declaration.clone());
+                }
+                StructuralCommand::SetAngularVelocity2D { entity, velocity } => {
+                    if !parents.contains_key(entity) {
+                        return Err(RuntimeError::MissingEntity(*entity));
+                    }
+                    if let Some(v) = velocity {
+                        incant_types::physics_2d_validation::angular(v)
+                            .map_err(|_| SceneError::Component(*entity))?;
+                    }
+                    spins_2d.insert(*entity, velocity.clone());
+                }
                 StructuralCommand::SetAngularVelocity { entity, velocity } => {
                     if !parents.contains_key(entity) {
                         return Err(RuntimeError::MissingEntity(*entity));
@@ -424,6 +523,8 @@ impl NativeWorld {
             self.topology_generation
         };
         let mut prepared = BTreeMap::new();
+        let mut prepared_2d: Vec<_> = removed.iter().map(|&id| (id, None)).collect();
+        let mut bindings_2d = BTreeMap::new();
         for (&id, parent) in &parents {
             let live = self
                 .entities
@@ -453,6 +554,106 @@ impl NativeWorld {
                     Some(None) => None,
                     None => live.as_ref().and_then(|e| e.get::<Spin>()).map(|s| &s.0),
                 });
+            let old_planar = live.as_ref().and_then(|e| e.get::<Binding2D>());
+            let changed_planar = physics_2d.get(&id);
+            let has_planar = changed_planar
+                .map_or(old_planar.is_some_and(|b| b.collider.is_some()), |p| {
+                    p.is_some()
+                });
+            let planar_body = match changed_planar {
+                Some(Some(p)) => p.body.as_ref(),
+                Some(None) => None,
+                None => old_planar.and_then(|b| b.body.as_ref()),
+            };
+            let planar_spin =
+                spins_2d
+                    .get(&id)
+                    .map(|v| v.as_ref())
+                    .unwrap_or_else(|| match changed_planar {
+                        Some(Some(p)) => p.angular_velocity.as_ref(),
+                        Some(None) => None,
+                        None => live.as_ref().and_then(|e| e.get::<Spin2D>()).map(|s| &s.0),
+                    });
+            let changed_map = spatial.get(&id);
+            let next_node = changed_map
+                .map(|n| n.as_ref())
+                .unwrap_or_else(|| live.as_ref().and_then(|e| e.get::<crate::CookedSpatial>()));
+            let prepared_map = if changed_map.is_some() {
+                next_node
+                    .and_then(|n| n.tilemap.as_ref())
+                    .map(|m| m.prepare().expect("validated spatial graph"))
+            } else {
+                None
+            };
+            let map = if changed_map.is_some() {
+                prepared_map.as_ref()
+            } else {
+                live.as_ref()
+                    .and_then(|e| e.get::<crate::tilemap::Prepared>())
+                    .map(|p| &p.0)
+            };
+            let solid = map.is_some_and(|m| !m.collision().is_empty());
+            if (has_planar && solid) || (has_physics && (has_planar || solid)) {
+                return Err(SceneError::Invalid("mixed 2D/3D/tile collision bindings").into());
+            }
+            if spins_2d.contains_key(&id) && planar_body.is_none() {
+                return Err(SceneError::Component(id).into());
+            }
+            if has_planar || solid {
+                if planar_body.is_some() && velocities.get(&id).is_some_and(Option::is_none) {
+                    return Err(SceneError::Component(id).into());
+                }
+                crate::physics_2d::validate_motion(
+                    id,
+                    parent.is_some(),
+                    transform,
+                    velocity,
+                    planar_spin,
+                    planar_body,
+                )?;
+            }
+            if changed_planar.is_some()
+                || (changed_map.is_some()
+                    && (solid || old_planar.is_some_and(|b| b.collider.is_none())))
+            {
+                let entity = CookedEntity {
+                    id,
+                    parent: *parent,
+                    transform: transform.clone(),
+                    velocity: velocity.cloned(),
+                };
+                let mut declaration = changed_planar.cloned().flatten();
+                let value = if let Some(declaration) = &mut declaration {
+                    declaration.angular_velocity = planar_spin.cloned();
+                    declaration.validate(&entity)?;
+                    let previous = old_planar.and_then(|binding| {
+                        self.physics_2d.state(id).map(|state| (binding, state))
+                    });
+                    let state =
+                        crate::physics_2d::state(transform, velocity, planar_spin, previous);
+                    Some(
+                        incant_physics_2d_runtime::PreparedBody::new(
+                            declaration.body.clone(),
+                            declaration.collider.clone(),
+                            state,
+                        )
+                        .expect("validated planar declaration"),
+                    )
+                } else if solid {
+                    let previous = old_planar.and_then(|binding| {
+                        self.physics_2d.state(id).map(|state| (binding, state))
+                    });
+                    let state = crate::physics_2d::state(transform, velocity, None, previous);
+                    Some(incant_physics_2d_runtime::PreparedBody::tilemap(
+                        map.unwrap(),
+                        state,
+                    )?)
+                } else {
+                    None
+                };
+                bindings_2d.insert(id, (declaration, solid));
+                prepared_2d.push((id, value));
+            }
             if spins.contains_key(&id) && body.is_none() {
                 return Err(SceneError::Component(id).into());
             }
@@ -488,6 +689,7 @@ impl NativeWorld {
                 prepared.insert(id, value);
             }
         }
+        self.physics_2d.validate_changes(&prepared_2d)?;
         let hierarchy = crate::hierarchy::prepare(&parents, |id| {
             if let Some(data) = spawns.get(&id) {
                 matrix(&data.transform)
@@ -510,6 +712,9 @@ impl NativeWorld {
             physics,
             spins,
             prepared,
+            prepared_2d,
+            bindings_2d,
+            spins_2d,
             audio,
             spatial,
             topology_generation,

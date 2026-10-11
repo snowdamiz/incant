@@ -1,0 +1,610 @@
+{
+ "binary_sha256": "0445adae515a2c23b4d0d4924db00507023817ea3571c7164b6c0c40d8219b80",
+ "art_manifest_sha256": "5dec85c097e46a52b08dd7bdba8e06931cfb7e213626d927a3ab81dfcde26711",
+ "art_matches_committed": true,
+ "atlas_ids": {
+  "asset": "01M4MFBBDJ4HRCCCX98FBM0VC9",
+  "descriptor": "01JA39AT000000000000000001",
+  "layout": "01JA39AT000000000000000001"
+ },
+ "tile": {
+  "imports": {
+   "atlas-v1": {
+    "source": "art/tiles.atlas.json",
+    "usage": "color",
+    "exit": 0,
+    "stderr": "",
+    "authored_unchanged": false,
+    "new_cache_files": [
+     "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/135f00844748000573b8b9cae4cdb7028d1252c376fc741e4795c2029ed7cf30.json",
+     "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/2e72de4a2878ddd2d44ef99cccdc1fda0a388e75136bd87883bcdaf05057294a.ktx2"
+    ],
+    "asset": {
+     "id": "01M4MFBBDJ4HRCCCX98FBM0VC9",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "tiles.atlas",
+     "path": "art/tiles.atlas.json",
+     "sha256": "135f00844748000573b8b9cae4cdb7028d1252c376fc741e4795c2029ed7cf30"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "atlas": {
+      "frames": {
+       "01JA39FR000000000000000001": {
+        "name": "A",
+        "region": [
+         33,
+         42,
+         8,
+         8
+        ]
+       },
+       "01JA39FR000000000000000002": {
+        "name": "B",
+        "region": [
+         19,
+         56,
+         12,
+         10
+        ]
+       },
+       "01JA39FR000000000000000003": {
+        "name": "C",
+        "region": [
+         27,
+         9,
+         10,
+         14
+        ]
+       },
+       "01JA39FR000000000000000004": {
+        "name": "D",
+        "region": [
+         1,
+         33,
+         16,
+         16
+        ]
+       },
+       "01JA39FR000000000000000005": {
+        "name": "E",
+        "region": [
+         34,
+         25,
+         6,
+         9
+        ]
+       },
+       "01JA39FR000000000000000006": {
+        "name": "F",
+        "region": [
+         1,
+         19,
+         20,
+         12
+        ]
+       },
+       "01JA39FR000000000000000007": {
+        "name": "G",
+        "region": [
+         33,
+         52,
+         7,
+         11
+        ]
+       },
+       "01JA39FR000000000000000008": {
+        "name": "H",
+        "region": [
+         19,
+         33,
+         13,
+         7
+        ]
+       },
+       "01JA39FR000000000000000009": {
+        "name": "T",
+        "region": [
+         19,
+         42,
+         12,
+         12
+        ]
+       },
+       "01JA39FR00000000000000000A": {
+        "name": "X",
+        "region": [
+         1,
+         51,
+         16,
+         16
+        ]
+       },
+       "01JA39FR00000000000000000B": {
+        "name": "K",
+        "region": [
+         33,
+         1,
+         4,
+         4
+        ]
+       },
+       "01JA39FR00000000000000000C": {
+        "name": "W",
+        "region": [
+         1,
+         9,
+         24,
+         8
+        ]
+       },
+       "01JA39FR000000000000000033": {
+        "name": "ballast",
+        "region": [
+         1,
+         1,
+         30,
+         6
+        ]
+       }
+      },
+      "id": "01JA39AT000000000000000001",
+      "padding": 1,
+      "size": [
+       42,
+       68
+      ]
+     },
+     "dependencies": [
+      {
+       "path": "art/tiles.atlas.json",
+       "sha256": "6ca00f8d41fa045be3f9e615f2806e0496deebc53147996ded17f174eaf04a66"
+      },
+      {
+       "path": "art/ballast.png",
+       "sha256": "ec992abfbf98ac6a2e94e289fdf964ea4db10da50369361bd7433df0730c53cd"
+      },
+      {
+       "path": "art/tiles.png",
+       "sha256": "d73c0724eddbeaa116e1fce03956a45b0a2b986e7c8a918d5c5303a90cc12191"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 68,
+     "mip_levels": 7,
+     "usage": "color",
+     "width": 42
+    },
+    "revision": 1,
+    "diagnostics": []
+   },
+   "plates": {
+    "source": "art/plates.png",
+    "usage": "color",
+    "exit": 0,
+    "stderr": "",
+    "authored_unchanged": false,
+    "new_cache_files": [
+     "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/15acb4454994baa8902bb5325e654bf30781663d92ef0be7295516ba8632807a.json",
+     "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/460a58f8a4d70e76c6d17d471668d6864324283bcce142d4839247eebd0f0a92.ktx2"
+    ],
+    "asset": {
+     "id": "01M4MFBBF7B106FG5D1C5NTMPP",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "plates",
+     "path": "art/plates.png",
+     "sha256": "15acb4454994baa8902bb5325e654bf30781663d92ef0be7295516ba8632807a"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/plates.png",
+       "sha256": "65b34ef0ff8db38c60302bd637eb9a54dc3b62a9a539966f43d84b6fdb6bc5e1"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 4,
+     "mip_levels": 5,
+     "usage": "color",
+     "width": 16
+    },
+    "revision": 2,
+    "diagnostics": []
+   },
+   "badge": {
+    "source": "art/badge.png",
+    "usage": "color",
+    "exit": 0,
+    "stderr": "",
+    "authored_unchanged": false,
+    "new_cache_files": [
+     "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/56ac3ebf2c982b9e472fe43c477226ef11be814e716cef564572b36c6099cb6d.json",
+     "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/9bb117fb33a15a7e423f1f5a5453319e535d8a5c02bbbbf535f3ffa44ffaa5f9.ktx2"
+    ],
+    "asset": {
+     "id": "01M4MFBBHFZVCMVC4GR6MN2S4N",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "badge",
+     "path": "art/badge.png",
+     "sha256": "56ac3ebf2c982b9e472fe43c477226ef11be814e716cef564572b36c6099cb6d"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/badge.png",
+       "sha256": "2d0a32a6cdd1100e9f8e1837de6e8d93a9751e04ebccc44c1cd4b13ee37fe983"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 10,
+     "mip_levels": 4,
+     "usage": "color",
+     "width": 10
+    },
+    "revision": 3,
+    "diagnostics": []
+   }
+  },
+  "ids": {
+   "atlas": "01M4MFBBDJ4HRCCCX98FBM0VC9",
+   "plates": "01M4MFBBF7B106FG5D1C5NTMPP",
+   "badge": "01M4MFBBHFZVCMVC4GR6MN2S4N"
+  },
+  "create": {
+   "scene_id": "01M4MFBBBRN07KSV77JVKXQRD2",
+   "transaction_id": "01M4MFBBMCTQWDVH325M497Z9A",
+   "revision": 4,
+   "entities": 37,
+   "request_sha256": "47cc506159502e215353d8b0686a5e179687a50f9511c200cd6a4d245ec15e90"
+  },
+  "validate": {
+   "exit": 0,
+   "reply": {
+    "diagnostics": [],
+    "project_id": "01M4MFBBBR67WFZJQP9Y5Q6S3X",
+    "schema_version": 1,
+    "valid": true
+   },
+   "stderr": ""
+  },
+  "authored": {
+   "tile.incant.json": "89b424ec26572951ed9fc42c5136865e1a2b6be487911e264277b4bd9ece1153",
+   "tile.incant.journal.jsonl": "62b461dafcfd38c9da31d86d9e395098f0d2537d783de64c1302e68d8f36a5f6"
+  },
+  "fingerprints": {
+   "01M4MFBBDJ4HRCCCX98FBM0VC9": "135f00844748000573b8b9cae4cdb7028d1252c376fc741e4795c2029ed7cf30",
+   "01M4MFBBF7B106FG5D1C5NTMPP": "15acb4454994baa8902bb5325e654bf30781663d92ef0be7295516ba8632807a",
+   "01M4MFBBHFZVCMVC4GR6MN2S4N": "56ac3ebf2c982b9e472fe43c477226ef11be814e716cef564572b36c6099cb6d"
+  },
+  "cache_files": [
+   "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/135f00844748000573b8b9cae4cdb7028d1252c376fc741e4795c2029ed7cf30.json",
+   "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/15acb4454994baa8902bb5325e654bf30781663d92ef0be7295516ba8632807a.json",
+   "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/2e72de4a2878ddd2d44ef99cccdc1fda0a388e75136bd87883bcdaf05057294a.ktx2",
+   "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/460a58f8a4d70e76c6d17d471668d6864324283bcce142d4839247eebd0f0a92.ktx2",
+   "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/56ac3ebf2c982b9e472fe43c477226ef11be814e716cef564572b36c6099cb6d.json",
+   "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/9bb117fb33a15a7e423f1f5a5453319e535d8a5c02bbbbf535f3ffa44ffaa5f9.ktx2"
+  ]
+ },
+ "control-s0": {
+  "imports": {
+   "tiles.png": {
+    "source": "art/tiles.png",
+    "usage": "color",
+    "exit": 0,
+    "stderr": "",
+    "authored_unchanged": false,
+    "new_cache_files": [
+     "artifacts/0039-native-tilemaps/r2/control-s0/.incant/cache/textures/8311bfd51b20a2ae3208122d599a4dfa87d448be7de197a232d7d74c53ec2154.json",
+     "artifacts/0039-native-tilemaps/r2/control-s0/.incant/cache/textures/835d41a262dcbf2a0d6be318665b3fac2bbeaf2df1376c4687e3df6ede15e73c.ktx2"
+    ],
+    "asset": {
+     "id": "01M4MFBBS0034KQQH75R340VZX",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "tiles",
+     "path": "art/tiles.png",
+     "sha256": "8311bfd51b20a2ae3208122d599a4dfa87d448be7de197a232d7d74c53ec2154"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/tiles.png",
+       "sha256": "d73c0724eddbeaa116e1fce03956a45b0a2b986e7c8a918d5c5303a90cc12191"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 38,
+     "mip_levels": 7,
+     "usage": "color",
+     "width": 96
+    },
+    "revision": 1,
+    "diagnostics": []
+   },
+   "plates.png": {
+    "source": "art/plates.png",
+    "usage": "color",
+    "exit": 0,
+    "stderr": "",
+    "authored_unchanged": false,
+    "new_cache_files": [
+     "artifacts/0039-native-tilemaps/r2/control-s0/.incant/cache/textures/15acb4454994baa8902bb5325e654bf30781663d92ef0be7295516ba8632807a.json",
+     "artifacts/0039-native-tilemaps/r2/control-s0/.incant/cache/textures/460a58f8a4d70e76c6d17d471668d6864324283bcce142d4839247eebd0f0a92.ktx2"
+    ],
+    "asset": {
+     "id": "01M4MFBBTQNSWTDVJYT9EFFBJ6",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "plates",
+     "path": "art/plates.png",
+     "sha256": "15acb4454994baa8902bb5325e654bf30781663d92ef0be7295516ba8632807a"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/plates.png",
+       "sha256": "65b34ef0ff8db38c60302bd637eb9a54dc3b62a9a539966f43d84b6fdb6bc5e1"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 4,
+     "mip_levels": 5,
+     "usage": "color",
+     "width": 16
+    },
+    "revision": 2,
+    "diagnostics": []
+   },
+   "badge.png": {
+    "source": "art/badge.png",
+    "usage": "color",
+    "exit": 0,
+    "stderr": "",
+    "authored_unchanged": false,
+    "new_cache_files": [
+     "artifacts/0039-native-tilemaps/r2/control-s0/.incant/cache/textures/56ac3ebf2c982b9e472fe43c477226ef11be814e716cef564572b36c6099cb6d.json",
+     "artifacts/0039-native-tilemaps/r2/control-s0/.incant/cache/textures/9bb117fb33a15a7e423f1f5a5453319e535d8a5c02bbbbf535f3ffa44ffaa5f9.ktx2"
+    ],
+    "asset": {
+     "id": "01M4MFBBWE7PJQX6H56Y8XJZGP",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "badge",
+     "path": "art/badge.png",
+     "sha256": "56ac3ebf2c982b9e472fe43c477226ef11be814e716cef564572b36c6099cb6d"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/badge.png",
+       "sha256": "2d0a32a6cdd1100e9f8e1837de6e8d93a9751e04ebccc44c1cd4b13ee37fe983"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 10,
+     "mip_levels": 4,
+     "usage": "color",
+     "width": 10
+    },
+    "revision": 3,
+    "diagnostics": []
+   }
+  },
+  "ids": {
+   "tiles": "01M4MFBBS0034KQQH75R340VZX",
+   "plates": "01M4MFBBTQNSWTDVJYT9EFFBJ6",
+   "badge": "01M4MFBBWE7PJQX6H56Y8XJZGP"
+  },
+  "create": {
+   "scene_id": "01M4MFBBQ9ST5E8VH64B5KKBXD",
+   "transaction_id": "01M4MFBBZ75SFNXA89XJANQCRQ",
+   "revision": 4,
+   "entities": 252,
+   "request_sha256": "dacaa3156acbbf142cd3586539cf62142df7d6751679bf04c403442624694afc"
+  },
+  "validate": {
+   "exit": 0,
+   "reply": {
+    "diagnostics": [],
+    "project_id": "01M4MFBBQ9K2VJR12AR4APXXQZ",
+    "schema_version": 1,
+    "valid": true
+   },
+   "stderr": ""
+  },
+  "authored": {
+   "control.incant.json": "5ba723ae3d52501edb23ecad6c8a4d109ce5dec4b554a52e3693e1205b199cc3",
+   "control.incant.journal.jsonl": "65f8c0690b0ebee98b7d529891d2b2329617c14e0da1a7b388bfab1e24a8304d"
+  },
+  "fingerprints": {
+   "01M4MFBBS0034KQQH75R340VZX": "8311bfd51b20a2ae3208122d599a4dfa87d448be7de197a232d7d74c53ec2154",
+   "01M4MFBBTQNSWTDVJYT9EFFBJ6": "15acb4454994baa8902bb5325e654bf30781663d92ef0be7295516ba8632807a",
+   "01M4MFBBWE7PJQX6H56Y8XJZGP": "56ac3ebf2c982b9e472fe43c477226ef11be814e716cef564572b36c6099cb6d"
+  }
+ },
+ "control-s1": {
+  "imports": {
+   "tiles.png": {
+    "source": "art/tiles.png",
+    "usage": "color",
+    "exit": 0,
+    "stderr": "",
+    "authored_unchanged": false,
+    "new_cache_files": [
+     "artifacts/0039-native-tilemaps/r2/control-s1/.incant/cache/textures/8311bfd51b20a2ae3208122d599a4dfa87d448be7de197a232d7d74c53ec2154.json",
+     "artifacts/0039-native-tilemaps/r2/control-s1/.incant/cache/textures/835d41a262dcbf2a0d6be318665b3fac2bbeaf2df1376c4687e3df6ede15e73c.ktx2"
+    ],
+    "asset": {
+     "id": "01M4MFBC5JKY6NNT371YBR1PFN",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "tiles",
+     "path": "art/tiles.png",
+     "sha256": "8311bfd51b20a2ae3208122d599a4dfa87d448be7de197a232d7d74c53ec2154"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/tiles.png",
+       "sha256": "d73c0724eddbeaa116e1fce03956a45b0a2b986e7c8a918d5c5303a90cc12191"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 38,
+     "mip_levels": 7,
+     "usage": "color",
+     "width": 96
+    },
+    "revision": 1,
+    "diagnostics": []
+   },
+   "plates.png": {
+    "source": "art/plates.png",
+    "usage": "color",
+    "exit": 0,
+    "stderr": "",
+    "authored_unchanged": false,
+    "new_cache_files": [
+     "artifacts/0039-native-tilemaps/r2/control-s1/.incant/cache/textures/15acb4454994baa8902bb5325e654bf30781663d92ef0be7295516ba8632807a.json",
+     "artifacts/0039-native-tilemaps/r2/control-s1/.incant/cache/textures/460a58f8a4d70e76c6d17d471668d6864324283bcce142d4839247eebd0f0a92.ktx2"
+    ],
+    "asset": {
+     "id": "01M4MFBC79TYVCE3PM3282KYGA",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "plates",
+     "path": "art/plates.png",
+     "sha256": "15acb4454994baa8902bb5325e654bf30781663d92ef0be7295516ba8632807a"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/plates.png",
+       "sha256": "65b34ef0ff8db38c60302bd637eb9a54dc3b62a9a539966f43d84b6fdb6bc5e1"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 4,
+     "mip_levels": 5,
+     "usage": "color",
+     "width": 16
+    },
+    "revision": 2,
+    "diagnostics": []
+   },
+   "badge.png": {
+    "source": "art/badge.png",
+    "usage": "color",
+    "exit": 0,
+    "stderr": "",
+    "authored_unchanged": false,
+    "new_cache_files": [
+     "artifacts/0039-native-tilemaps/r2/control-s1/.incant/cache/textures/56ac3ebf2c982b9e472fe43c477226ef11be814e716cef564572b36c6099cb6d.json",
+     "artifacts/0039-native-tilemaps/r2/control-s1/.incant/cache/textures/9bb117fb33a15a7e423f1f5a5453319e535d8a5c02bbbbf535f3ffa44ffaa5f9.ktx2"
+    ],
+    "asset": {
+     "id": "01M4MFBC91MV7NYTRFGY65H91N",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "badge",
+     "path": "art/badge.png",
+     "sha256": "56ac3ebf2c982b9e472fe43c477226ef11be814e716cef564572b36c6099cb6d"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/badge.png",
+       "sha256": "2d0a32a6cdd1100e9f8e1837de6e8d93a9751e04ebccc44c1cd4b13ee37fe983"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 10,
+     "mip_levels": 4,
+     "usage": "color",
+     "width": 10
+    },
+    "revision": 3,
+    "diagnostics": []
+   }
+  },
+  "ids": {
+   "tiles": "01M4MFBC5JKY6NNT371YBR1PFN",
+   "plates": "01M4MFBC79TYVCE3PM3282KYGA",
+   "badge": "01M4MFBC91MV7NYTRFGY65H91N"
+  },
+  "create": {
+   "scene_id": "01M4MFBC3RYW2R9B77ZCE1ZMRH",
+   "transaction_id": "01M4MFBCCF947Q8194MYM7293Q",
+   "revision": 4,
+   "entities": 256,
+   "request_sha256": "0ac5e8723a6826229c007bfb71c2527eb542a15dd563b8df24332dbd2b3d6280"
+  },
+  "validate": {
+   "exit": 0,
+   "reply": {
+    "diagnostics": [],
+    "project_id": "01M4MFBC3R9VVTY0AYXVV51HMX",
+    "schema_version": 1,
+    "valid": true
+   },
+   "stderr": ""
+  },
+  "authored": {
+   "control.incant.json": "a80a0a8af8e0a01601547026bf29267d5563270aae9bddedee9dadf964e46e04",
+   "control.incant.journal.jsonl": "647d0c00a8cb21534a40db4a75a917967c9081b334e817dbd9f606479d321c71"
+  },
+  "fingerprints": {
+   "01M4MFBC5JKY6NNT371YBR1PFN": "8311bfd51b20a2ae3208122d599a4dfa87d448be7de197a232d7d74c53ec2154",
+   "01M4MFBC79TYVCE3PM3282KYGA": "15acb4454994baa8902bb5325e654bf30781663d92ef0be7295516ba8632807a",
+   "01M4MFBC91MV7NYTRFGY65H91N": "56ac3ebf2c982b9e472fe43c477226ef11be814e716cef564572b36c6099cb6d"
+  }
+ },
+ "binary_sha256_end": "0445adae515a2c23b4d0d4924db00507023817ea3571c7164b6c0c40d8219b80"
+}

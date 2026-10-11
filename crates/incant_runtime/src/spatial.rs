@@ -33,6 +33,7 @@ pub struct CookedSpatial {
     /// Cold binding data stays indirect so every unrelated structural command
     /// and spatial node does not pay for a full sprite configuration.
     pub sprite: Option<Box<crate::NativeSpriteRenderer>>,
+    pub tilemap: Option<Box<crate::NativeTilemap>>,
     pub directional: Option<DirectionalLight>,
     pub point: Option<PointLight>,
     pub spot: Option<SpotLight>,
@@ -45,6 +46,7 @@ impl CookedSpatial {
             camera: None,
             mesh: None,
             sprite: None,
+            tilemap: None,
             directional: None,
             point: None,
             spot: None,
@@ -55,6 +57,7 @@ impl CookedSpatial {
         self.camera.is_none()
             && self.mesh.is_none()
             && self.sprite.is_none()
+            && self.tilemap.is_none()
             && self.directional.is_none()
             && self.point.is_none()
             && self.spot.is_none()
@@ -88,6 +91,7 @@ pub(crate) fn validate<'a>(
 ) -> Result<(), SceneError> {
     let invalid = || SceneError::Invalid("spatial declarations, limits or references");
     let mut ids = BTreeSet::new();
+    let (mut tilemaps, mut tile_slots) = (0, 0usize);
     let (mut meshes, mut sprites, mut directional, mut local, mut shadows, mut environments) =
         (0, 0, 0, 0, 0, 0);
     let asset = |id, kind| {
@@ -99,7 +103,10 @@ pub(crate) fn validate<'a>(
         if !exists(node.entity)
             || !ids.insert(node.entity)
             || node.is_empty()
-            || (node.mesh.is_some() && node.sprite.is_some())
+            || usize::from(node.mesh.is_some())
+                + usize::from(node.sprite.is_some())
+                + usize::from(node.tilemap.is_some())
+                > 1
             || usize::from(node.directional.is_some())
                 + usize::from(node.point.is_some())
                 + usize::from(node.spot.is_some())
@@ -120,6 +127,20 @@ pub(crate) fn validate<'a>(
             sprites += 1;
             sprite.validate()?;
             if !asset(sprite.texture, VisualAssetKind::Texture) {
+                return Err(invalid());
+            }
+        }
+        if let Some(map) = &node.tilemap {
+            map.validate()
+                .map_err(|_| SceneError::Invalid("tilemap values"))?;
+            tilemaps += 1;
+            tile_slots = tile_slots
+                .checked_add(map.cell_slots())
+                .ok_or_else(invalid)?;
+            if tilemaps > crate::MAX_TILEMAP_ENTITIES
+                || tile_slots > crate::MAX_SCENE_TILE_SLOTS
+                || !asset(map.tileset, VisualAssetKind::Texture)
+            {
                 return Err(invalid());
             }
         }
