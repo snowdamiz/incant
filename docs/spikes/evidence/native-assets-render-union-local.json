@@ -1,0 +1,3231 @@
+{
+  "scope": "Reviewed static FBX, generated-tangent correction, pipeline prewarming and native flipbooks on actual main80",
+  "tested_source": "ef2897af60d74efdd193288108206d4858ef75ae",
+  "base_main": "611d867bee1ff3c8f33da8c221c82867408e96c6",
+  "parents": [
+    "8cbda8350b76ec213902d564b5bb1e8af87afecd",
+    "1f56e92dc0efdfbb823189b38004d224859adb34"
+  ],
+  "integration": {
+    "only_conflict": "STATUS.md",
+    "implementation_conflict_edits": false,
+    "assets_and_runtime_assets_match_reviewed_f2963ba": true,
+    "gpu_modules_preserved": [
+      "pipeline_warmup",
+      "tangents"
+    ],
+    "original_author_trailers_preserved": true,
+    "root_source_review": "accepted ef2897a; no new appearance route required for unchanged source composition"
+  },
+  "checks": {
+    "workspace_ci_ordinary_tests_and_doctests": 685,
+    "workspace_serialized_ignored_gpu_tests": 73,
+    "workspace_all_target_clippy_ci": true,
+    "workspace_all_target_clippy_dev": true,
+    "optional_native_window_tests": 12,
+    "optional_native_window_all_target_ci_clippy": true,
+    "ui_tests": 536,
+    "ui_test_files": 30,
+    "strict_ui_build": true,
+    "tool_tests": 91,
+    "sdk_typecheck": true,
+    "actual_fbx_cli_processes": 11,
+    "schema_files_equal": 58,
+    "runtime_normal_graph": "authoring-free including optional native-window and planar physics; ufbx forbidden",
+    "wasm_release_build_and_clippy": true,
+    "wasm_normal_graph_ufbx_absent": true,
+    "wasm_bindgen": "0.2.126",
+    "fmt_conventions_bridge_actionlint": true,
+    "original_frozen_0040_review_helper_tests": 17
+  },
+  "browser": {
+    "browser": "156.0.8078.4",
+    "gpu_disabled": true,
+    "source_model_refusal_checks": 7,
+    "wasm_sha256": "c49da9c2c7a3b3a9d6e44d1c8b39e8b0736b140fd1010577a816ecf6b224c7ba",
+    "result": {
+      "arch": "wasm32",
+      "character_movement": {
+        "collisions": [
+          "01M4MTMET3WD6PS3VC8RDMY96F"
+        ],
+        "grounded": true,
+        "sliding_down_slope": false,
+        "translation": [
+          0.10000000149011612,
+          5.1684826757991686e-05,
+          0
+        ]
+      },
+      "grid_navigation": {
+        "corner_cost": 2000,
+        "edited_cost": 2000,
+        "restart_route_equal": true,
+        "script_vm": false,
+        "snapshot_changed": true,
+        "visual_gate": false,
+        "weighted_cost": 2828
+      },
+      "incant": "hello-world",
+      "input": {
+        "action_dead_zone": true,
+        "focus_releases_controls": true,
+        "named_action_edges": true,
+        "pinch_rotation": 1.5707963267948966,
+        "pinch_scale": 2,
+        "replay_equal": true,
+        "scope": "normalized synthetic events; not a live device adapter"
+      },
+      "localization": {
+        "date": "5/8/24",
+        "number": "1.234,5",
+        "shaping_verified": false,
+        "text_values": [
+          "1 coin",
+          "2 \u043c\u043e\u043d\u0435\u0442\u044b",
+          "5 \u043c\u043e\u043d\u0435\u0442",
+          "\u3053\u3093\u306b\u3061\u306f \u6d77",
+          "\u0645\u0631\u062d\u0628\u0627 \u0646\u0648\u0631"
+        ],
+        "xliff_roundtrip": true
+      },
+      "navigation": {
+        "changed_tiles": 9,
+        "directed_off_mesh_link": true,
+        "first_corners": 4,
+        "link_endpoint_rollback": true,
+        "recast_tiled": true,
+        "retained_tiles": 6,
+        "second_corners": 2,
+        "visual_gate": false
+      },
+      "ok": true,
+      "os": "",
+      "physics_backend": "rapier-0.36-enhanced-determinism",
+      "physics_y": 0.49993008375167847,
+      "position_x": 5.999999999999987,
+      "steering": {
+        "agents": 100,
+        "overlap_recovery_finite": true,
+        "stable_id_order": true,
+        "visual_gate": false
+      },
+      "ticks": 120
+    }
+  },
+  "source_free_shipping": {
+    "passed": true,
+    "target": "aarch64-apple-darwin",
+    "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+    "codegen": {
+      "incant_render_game": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_render_native": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_render_data": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_render_gpu_host": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_render": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "wgpu": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_input": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_script": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_physics_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "rapier3d": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_assets_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_audio_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_game_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_game_player": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort",
+        "lto": "fat",
+        "debuginfo": "2",
+        "split-debuginfo": "packed"
+      }
+    },
+    "symbol_identity": {
+      "format": "Mach-O/dSYM",
+      "uuids": {
+        "arm64": "1f0b94b5-1799-3bf0-815f-fcfae4943fe6"
+      }
+    },
+    "player_bytes": 8960176,
+    "player_sha256": "d02e82a0c7d5785458422c3f33a8474cd30a6e329ca601f173aa982d9bb18a3a",
+    "script_metadata": {
+      "build_id": "7af2587eb1b5e7c378e6aeca6b324078c623ffc886ca88cf01f3f25dd4eb867e",
+      "bytecode_bytes": 3330,
+      "bytecode_sha256": "2e6aeb2ec0e038233aa014b704019c0db4630c47ae31db2fed6c5b5861009bdd",
+      "debug_line_tables": true,
+      "embedded_source": false,
+      "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+      "format": 1,
+      "hardening_sha256": "4a2d87348651fab15d47582cce2fba82058255ddb2a2a29386db7705bea1cb23",
+      "source_map_sha256": null,
+      "source_name": "embedded-game.js",
+      "source_sha256": "83f9d115a14c90e8f2258830dd06f3f95a86db7ef197910dc9a267312d8386fc",
+      "symbolication": "map CommonJS locations after subtracting wrapper_prefix_lines; automatic runtime stack remapping remains unsupported",
+      "target": "aarch64-apple-darwin",
+      "trust": "fresh compiler output embedded by trusted native build; hashes are not authentication",
+      "wrapper_prefix_lines": 3
+    },
+    "source_compiler_symbols_absent": true,
+    "dynamic_source_routes_rejected": true,
+    "headless_sha256": "434fcfe3940039bac432de2c11c17f9611d8e6ec62f63d6a73fd9af34d8b8188",
+    "cook_sha256": "35fcbd54bcf91393104f772c52addbb5e6f6fcdb7240ff23bfd98b6e9e73436a",
+    "audio_example_sha256": "8270554fba2743ad755a2efa33e2b02cf08c7b08a9a34f44ed70eae1a7b0401c",
+    "fixture_tool_sha256": "23efe56ee23e9bc171b0d9666d157a8a3b0b2cf59eea9869b9f69f2e60e5846d",
+    "public_import": {
+      "asset": {
+        "id": "01M4MT76MGXB0VZTPZHBM5SQKJ",
+        "kind": "audio",
+        "name": "tone",
+        "path": "tone.wav",
+        "sha256": "4a24dd0240956f6ad00cd68d2f816e25f6662a170b6a0a92ae86a0a10aa5176e"
+      },
+      "cache_hit": false,
+      "changed": true,
+      "details": {
+        "channels": 2,
+        "dependencies": [
+          {
+            "path": "tone.wav",
+            "sha256": "59aca4ec1400bba63489f30c73a82fb29e82c83a923fcb468fa1ba0176dab6e3"
+          }
+        ],
+        "duration_seconds": 0.5,
+        "frames": 24000,
+        "sample_rate": 48000
+      },
+      "revision": 1
+    },
+    "public_model_import": {
+      "asset": {
+        "id": "01M4MT76N2TA8EGY4P46VRMNGQ",
+        "kind": "model",
+        "name": "tri",
+        "path": "tri.gltf",
+        "sha256": "26387cf66f8d9562dab33b28fc906202b26d3bcb3cbc2521cead2d5096eb60f1"
+      },
+      "cache_hit": false,
+      "changed": true,
+      "details": {
+        "dependencies": [
+          {
+            "path": "tri.bin",
+            "sha256": "d8b87038ed2ace74ed183166f6b0a541eab77f7184d50e65edc4bca5ccb5445a"
+          },
+          {
+            "path": "tri.gltf",
+            "sha256": "34ef92ca7a431a27baf00c0291a5d30027cdf03e4e5243adc0a38ea8c863d722"
+          }
+        ],
+        "meshes": 1,
+        "textures": 0,
+        "vertices": 3
+      },
+      "revision": 2
+    },
+    "public_atlas_import": {
+      "asset": {
+        "id": "01M4MT76NPYVYFZ753NPN7RV3Y",
+        "import_settings": {
+          "type": "texture",
+          "usage": "color"
+        },
+        "kind": "texture",
+        "name": "numeric.atlas",
+        "path": "numeric.atlas.json",
+        "sha256": "d6dbcd01d5eea891a5b6a767af0e5a0c7fe5c51ae3861b68f1ecb666b24c56d7"
+      },
+      "cache_hit": false,
+      "changed": true,
+      "details": {
+        "atlas": {
+          "frames": {
+            "00000000000000000000000041": {
+              "name": "Numeric fixture",
+              "region": [
+                2,
+                2,
+                4,
+                4
+              ]
+            },
+            "00000000000000000000000043": {
+              "name": "Middle numerical frame",
+              "region": [
+                10,
+                2,
+                2,
+                4
+              ]
+            },
+            "00000000000000000000000044": {
+              "name": "Final numerical frame",
+              "region": [
+                16,
+                2,
+                2,
+                2
+              ]
+            }
+          },
+          "id": "00000000000000000000000042",
+          "padding": 2,
+          "size": [
+            20,
+            8
+          ]
+        },
+        "dependencies": [
+          {
+            "path": "numeric.atlas.json",
+            "sha256": "13c543f800d45f85bdc6fd7a6b1cb1f6aa48bace4439495cfd169511b1097c05"
+          },
+          {
+            "path": "numeric.png",
+            "sha256": "eae41c0e5134130ebe12122371d90eb92d13e11b545fbe27316ec2c311a1c109"
+          }
+        ],
+        "format": "rgba8_srgb",
+        "height": 8,
+        "mip_levels": 5,
+        "usage": "color",
+        "width": 20
+      },
+      "revision": 3
+    },
+    "cpu_render_input": false,
+    "gpu_submitted": true,
+    "on_screen_presentation": false,
+    "flipbook_controls": [
+      {
+        "fixture": "static-sprite",
+        "rate": 44117,
+        "first_frame": 0,
+        "last_frame": 2,
+        "first_matches_static": true,
+        "last_matches_static": true,
+        "gpu_output_changed": true
+      },
+      {
+        "fixture": "static-sprite",
+        "rate": 48000,
+        "first_frame": 0,
+        "last_frame": 2,
+        "first_matches_static": true,
+        "last_matches_static": true,
+        "gpu_output_changed": true
+      },
+      {
+        "fixture": "stream-sprite",
+        "rate": 44117,
+        "first_frame": 0,
+        "last_frame": 2,
+        "first_matches_static": true,
+        "last_matches_static": true,
+        "gpu_output_changed": true
+      },
+      {
+        "fixture": "stream-sprite",
+        "rate": 48000,
+        "first_frame": 0,
+        "last_frame": 2,
+        "first_matches_static": true,
+        "last_matches_static": true,
+        "gpu_output_changed": true
+      }
+    ],
+    "gpu_build_cpu_mode_preserved": true,
+    "sprite_cpu_mode_preserved": true,
+    "project_hash_before_delete": "9a8200e6bfd6ee1e571def4214d7ab5eb93515e5afb973faafe6172173f8e351",
+    "authoring_and_build_storage_deleted": true,
+    "removed_scope": "authoring project/WAV/glTF/bin/PNG/atlas/journal/script source and fresh Cargo storage",
+    "retained_runtime_inputs": [
+      "binary scenes",
+      "clips.bin",
+      "cooked PCM/manifests",
+      "startup input.json/actions.json",
+      "cooked model payloads/manifests",
+      "cooked KTX2/atlas metadata"
+    ],
+    "native_logs": {
+      "passed": true,
+      "retention_controls": [
+        {
+          "mode": "log_count",
+          "retained": 1024,
+          "dropped": 6656,
+          "pcm_sha256": "3822063f9e3b291d4bc8ab543e16bd09900c3ea82082b0181e5369fdd781ef58"
+        },
+        {
+          "mode": "log_bytes",
+          "retained": 256,
+          "dropped": 1664,
+          "pcm_sha256": "3822063f9e3b291d4bc8ab543e16bd09900c3ea82082b0181e5369fdd781ef58"
+        }
+      ],
+      "invalid_update_controls": 4,
+      "json_serialization": "once at completed game report, never per tick"
+    },
+    "native_observations": {
+      "passed": true,
+      "success_processes": 2,
+      "completed_false_processes": 2,
+      "startup_refusals": 9,
+      "terminal_failure_processes": 1,
+      "report": {
+        "checks": [
+          {
+            "actual": 4,
+            "expect": {
+              "type": "entity_count",
+              "value": 4
+            },
+            "name": "startup count",
+            "passed": true,
+            "tick": 0
+          },
+          {
+            "actual": [
+              -3.0,
+              0.0,
+              0.0
+            ],
+            "expect": {
+              "entity": "00000000000000000000000001",
+              "property": "translation",
+              "tolerance": 0.001,
+              "type": "vector",
+              "value": [
+                -3.0,
+                0.0,
+                0.0
+              ]
+            },
+            "name": "startup position",
+            "passed": true,
+            "tick": 0
+          },
+          {
+            "actual": [
+              3.0,
+              0.0,
+              0.0
+            ],
+            "expect": {
+              "entity": "00000000000000000000000001",
+              "property": "velocity",
+              "tolerance": 0.001,
+              "type": "vector",
+              "value": [
+                3.0,
+                0.0,
+                0.0
+              ]
+            },
+            "name": "accepted script velocity",
+            "passed": true,
+            "tick": 1
+          },
+          {
+            "actual": [
+              -3.0,
+              0.0,
+              0.0
+            ],
+            "expect": {
+              "entity": "00000000000000000000000001",
+              "property": "translation",
+              "tolerance": 0.001,
+              "type": "vector",
+              "value": [
+                -3.0,
+                0.0,
+                0.0
+              ]
+            },
+            "name": "first position precedes scripted velocity",
+            "passed": true,
+            "tick": 1
+          },
+          {
+            "actual": {
+              "active": true,
+              "kind": "button",
+              "pressed": true,
+              "released": false,
+              "value": [
+                1.0,
+                0.0
+              ]
+            },
+            "expect": {
+              "active": true,
+              "name": "right",
+              "pressed": true,
+              "type": "action"
+            },
+            "name": "press edge",
+            "passed": true,
+            "tick": 1
+          },
+          {
+            "actual": {
+              "active": true,
+              "kind": "button",
+              "pressed": false,
+              "released": false,
+              "value": [
+                1.0,
+                0.0
+              ]
+            },
+            "expect": {
+              "active": true,
+              "name": "right",
+              "pressed": false,
+              "type": "action"
+            },
+            "name": "held without repeated edge",
+            "passed": true,
+            "tick": 2
+          },
+          {
+            "actual": false,
+            "expect": {
+              "entity": "00000000000000000000000009",
+              "type": "exists",
+              "value": false
+            },
+            "name": "explicit missing entity",
+            "passed": true,
+            "tick": 120
+          },
+          {
+            "actual": [
+              2.9500136375427246,
+              0.0,
+              0.0
+            ],
+            "expect": {
+              "entity": "00000000000000000000000001",
+              "property": "world_translation",
+              "tolerance": 0.001,
+              "type": "vector",
+              "value": [
+                2.95,
+                0.0,
+                0.0
+              ]
+            },
+            "name": "final committed world",
+            "passed": true,
+            "tick": 120
+          },
+          {
+            "actual": [
+              2.9500136375427246,
+              0.0,
+              0.0
+            ],
+            "expect": {
+              "entity": "00000000000000000000000001",
+              "property": "physics_translation",
+              "tolerance": 0.001,
+              "type": "vector",
+              "value": [
+                2.95,
+                0.0,
+                0.0
+              ]
+            },
+            "name": "final solver position",
+            "passed": true,
+            "tick": 120
+          },
+          {
+            "actual": [
+              3.0,
+              0.0,
+              0.0
+            ],
+            "expect": {
+              "entity": "00000000000000000000000001",
+              "property": "physics_velocity",
+              "tolerance": 0.001,
+              "type": "vector",
+              "value": [
+                3.0,
+                0.0,
+                0.0
+              ]
+            },
+            "name": "final solver velocity",
+            "passed": true,
+            "tick": 120
+          }
+        ],
+        "entities": {
+          "00000000000000000000000001": {
+            "parent": null,
+            "rotation": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "translation": [
+              2.9500136375427246,
+              0.0,
+              0.0
+            ],
+            "velocity": [
+              3.0,
+              0.0,
+              0.0
+            ],
+            "world_transform": [
+              [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                2.9500136375427246,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          },
+          "00000000000000000000000009": null
+        },
+        "passed": true,
+        "tick": 120,
+        "tick_rate": 60
+      },
+      "count_failure": {
+        "checks": [
+          {
+            "actual": 4,
+            "expect": {
+              "type": "entity_count",
+              "value": 5
+            },
+            "name": "startup count",
+            "passed": false,
+            "tick": 0
+          },
+          {
+            "actual": [
+              -3.0,
+              0.0,
+              0.0
+            ],
+            "expect": {
+              "entity": "00000000000000000000000001",
+              "property": "translation",
+              "tolerance": 0.001,
+              "type": "vector",
+              "value": [
+                -3.0,
+                0.0,
+                0.0
+              ]
+            },
+            "name": "startup position",
+            "passed": true,
+            "tick": 0
+          },
+          {
+            "actual": [
+              3.0,
+              0.0,
+              0.0
+            ],
+            "expect": {
+              "entity": "00000000000000000000000001",
+              "property": "velocity",
+              "tolerance": 0.001,
+              "type": "vector",
+              "value": [
+                3.0,
+                0.0,
+                0.0
+              ]
+            },
+            "name": "accepted script velocity",
+            "passed": true,
+            "tick": 1
+          },
+          {
+            "actual": [
+              -3.0,
+              0.0,
+              0.0
+            ],
+            "expect": {
+              "entity": "00000000000000000000000001",
+              "property": "translation",
+              "tolerance": 0.001,
+              "type": "vector",
+              "value": [
+                -3.0,
+                0.0,
+                0.0
+              ]
+            },
+            "name": "first position precedes scripted velocity",
+            "passed": true,
+            "tick": 1
+          },
+          {
+            "actual": {
+              "active": true,
+              "kind": "button",
+              "pressed": true,
+              "released": false,
+              "value": [
+                1.0,
+                0.0
+              ]
+            },
+            "expect": {
+              "active": true,
+              "name": "right",
+              "pressed": true,
+              "type": "action"
+            },
+            "name": "press edge",
+            "passed": true,
+            "tick": 1
+          },
+          {
+            "actual": {
+              "active": true,
+              "kind": "button",
+              "pressed": false,
+              "released": false,
+              "value": [
+                1.0,
+                0.0
+              ]
+            },
+            "expect": {
+              "active": true,
+              "name": "right",
+              "pressed": false,
+              "type": "action"
+            },
+            "name": "held without repeated edge",
+            "passed": true,
+            "tick": 2
+          },
+          {
+            "actual": false,
+            "expect": {
+              "entity": "00000000000000000000000009",
+              "type": "exists",
+              "value": false
+            },
+            "name": "explicit missing entity",
+            "passed": true,
+            "tick": 120
+          },
+          {
+            "actual": [
+              2.9500136375427246,
+              0.0,
+              0.0
+            ],
+            "expect": {
+              "entity": "00000000000000000000000001",
+              "property": "world_translation",
+              "tolerance": 0.001,
+              "type": "vector",
+              "value": [
+                2.95,
+                0.0,
+                0.0
+              ]
+            },
+            "name": "final committed world",
+            "passed": true,
+            "tick": 120
+          },
+          {
+            "actual": [
+              2.9500136375427246,
+              0.0,
+              0.0
+            ],
+            "expect": {
+              "entity": "00000000000000000000000001",
+              "property": "physics_translation",
+              "tolerance": 0.001,
+              "type": "vector",
+              "value": [
+                2.95,
+                0.0,
+                0.0
+              ]
+            },
+            "name": "final solver position",
+            "passed": true,
+            "tick": 120
+          },
+          {
+            "actual": [
+              3.0,
+              0.0,
+              0.0
+            ],
+            "expect": {
+              "entity": "00000000000000000000000001",
+              "property": "physics_velocity",
+              "tolerance": 0.001,
+              "type": "vector",
+              "value": [
+                3.0,
+                0.0,
+                0.0
+              ]
+            },
+            "name": "final solver velocity",
+            "passed": true,
+            "tick": 120
+          }
+        ],
+        "entities": {
+          "00000000000000000000000001": {
+            "parent": null,
+            "rotation": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "translation": [
+              2.9500136375427246,
+              0.0,
+              0.0
+            ],
+            "velocity": [
+              3.0,
+              0.0,
+              0.0
+            ],
+            "world_transform": [
+              [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                2.9500136375427246,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          },
+          "00000000000000000000000009": null
+        },
+        "passed": false,
+        "tick": 120,
+        "tick_rate": 60
+      },
+      "missing_failure": {
+        "checks": [
+          {
+            "actual": null,
+            "expect": {
+              "entity": "00000000000000000000000002",
+              "property": "physics_velocity",
+              "tolerance": 0.0,
+              "type": "vector",
+              "value": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "name": "missing component",
+            "passed": false,
+            "tick": 120
+          }
+        ],
+        "entities": {
+          "00000000000000000000000001": {
+            "parent": null,
+            "rotation": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "translation": [
+              2.9500136375427246,
+              0.0,
+              0.0
+            ],
+            "velocity": [
+              3.0,
+              0.0,
+              0.0
+            ],
+            "world_transform": [
+              [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                2.9500136375427246,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          },
+          "00000000000000000000000009": null
+        },
+        "passed": false,
+        "tick": 120,
+        "tick_rate": 60
+      }
+    },
+    "repeat_exact": true,
+    "recorded_ticks_per_process": 120,
+    "audio_processes": 32,
+    "results": [
+      {
+        "fixture": "static",
+        "rate": 44117,
+        "report": {
+          "frames": 88234,
+          "logs": {
+            "dropped": 0,
+            "entries": [
+              {
+                "level": "info",
+                "message": "Ready \u96ea\ud83d\ude42",
+                "tick": 1
+              },
+              {
+                "level": "warn",
+                "message": "Finished",
+                "tick": 120
+              }
+            ]
+          },
+          "pcm_sha256": "a4722ea4c42fa7e629e2bc7bd99127d45e2616383113d71bec57379b771c99c8",
+          "render_input": {
+            "binding_generation": 0,
+            "camera": "00000000000000000000000000000004",
+            "camera_position": [
+              0.0,
+              0.0,
+              8.0
+            ],
+            "decoded_payload_bytes": 156,
+            "first_model_position": [
+              2.9500136375427246,
+              0.0,
+              0.0
+            ],
+            "first_sprite_position": null,
+            "gpu": {
+              "accepted_frames": 120,
+              "adapter": {
+                "backend": "Metal",
+                "device_type": "IntegratedGpu",
+                "name": "Apple M5 Pro"
+              },
+              "captures": [
+                {
+                  "frame": 1,
+                  "non_background_pixels": 55,
+                  "sha256": "f83486993de4f7ea04058053abd7af7e3aad7b7f6843300c292563a4d76593c3"
+                },
+                {
+                  "frame": 120,
+                  "non_background_pixels": 55,
+                  "sha256": "d7acf22c7808031e1ec5cd17987f68bdca40c324f2d531f89ac26d31c8863dda"
+                }
+              ],
+              "height": 96,
+              "on_screen": false,
+              "width": 160
+            },
+            "gpu_submitted": true,
+            "mode": "gpu-offscreen",
+            "model_count": 1,
+            "sprite_count": 0,
+            "tick": 120,
+            "topology_generation": 0
+          },
+          "sources": [
+            {
+              "id": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "physics": {
+                "position": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "sleeping": false,
+                "velocity": [
+                  3.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "position": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ]
+            }
+          ],
+          "tick": 120
+        },
+        "rms": 0.0553028731136091,
+        "early_balance": 109.52215792219184,
+        "late_balance": -115.71745094939368
+      },
+      {
+        "fixture": "static",
+        "rate": 48000,
+        "report": {
+          "frames": 96000,
+          "logs": {
+            "dropped": 0,
+            "entries": [
+              {
+                "level": "info",
+                "message": "Ready \u96ea\ud83d\ude42",
+                "tick": 1
+              },
+              {
+                "level": "warn",
+                "message": "Finished",
+                "tick": 120
+              }
+            ]
+          },
+          "pcm_sha256": "3822063f9e3b291d4bc8ab543e16bd09900c3ea82082b0181e5369fdd781ef58",
+          "render_input": {
+            "binding_generation": 0,
+            "camera": "00000000000000000000000000000004",
+            "camera_position": [
+              0.0,
+              0.0,
+              8.0
+            ],
+            "decoded_payload_bytes": 156,
+            "first_model_position": [
+              2.9500136375427246,
+              0.0,
+              0.0
+            ],
+            "first_sprite_position": null,
+            "gpu": {
+              "accepted_frames": 120,
+              "adapter": {
+                "backend": "Metal",
+                "device_type": "IntegratedGpu",
+                "name": "Apple M5 Pro"
+              },
+              "captures": [
+                {
+                  "frame": 1,
+                  "non_background_pixels": 55,
+                  "sha256": "f83486993de4f7ea04058053abd7af7e3aad7b7f6843300c292563a4d76593c3"
+                },
+                {
+                  "frame": 120,
+                  "non_background_pixels": 55,
+                  "sha256": "d7acf22c7808031e1ec5cd17987f68bdca40c324f2d531f89ac26d31c8863dda"
+                }
+              ],
+              "height": 96,
+              "on_screen": false,
+              "width": 160
+            },
+            "gpu_submitted": true,
+            "mode": "gpu-offscreen",
+            "model_count": 1,
+            "sprite_count": 0,
+            "tick": 120,
+            "topology_generation": 0
+          },
+          "sources": [
+            {
+              "id": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "physics": {
+                "position": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "sleeping": false,
+                "velocity": [
+                  3.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "position": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ]
+            }
+          ],
+          "tick": 120
+        },
+        "rms": 0.055305097447639784,
+        "early_balance": 108.70557752668313,
+        "late_balance": -114.8314969751412
+      },
+      {
+        "fixture": "stream",
+        "rate": 44117,
+        "report": {
+          "frames": 88234,
+          "logs": {
+            "dropped": 0,
+            "entries": [
+              {
+                "level": "info",
+                "message": "Ready \u96ea\ud83d\ude42",
+                "tick": 1
+              },
+              {
+                "level": "warn",
+                "message": "Finished",
+                "tick": 120
+              }
+            ]
+          },
+          "pcm_sha256": "5da6b39c9fac3c7dd96db9434a8e9879d101c7901398a23b90de5b5587a04e26",
+          "render_input": {
+            "binding_generation": 0,
+            "camera": "00000000000000000000000000000004",
+            "camera_position": [
+              0.0,
+              0.0,
+              8.0
+            ],
+            "decoded_payload_bytes": 156,
+            "first_model_position": [
+              2.9500136375427246,
+              0.0,
+              0.0
+            ],
+            "first_sprite_position": null,
+            "gpu": {
+              "accepted_frames": 120,
+              "adapter": {
+                "backend": "Metal",
+                "device_type": "IntegratedGpu",
+                "name": "Apple M5 Pro"
+              },
+              "captures": [
+                {
+                  "frame": 1,
+                  "non_background_pixels": 55,
+                  "sha256": "f83486993de4f7ea04058053abd7af7e3aad7b7f6843300c292563a4d76593c3"
+                },
+                {
+                  "frame": 120,
+                  "non_background_pixels": 55,
+                  "sha256": "d7acf22c7808031e1ec5cd17987f68bdca40c324f2d531f89ac26d31c8863dda"
+                }
+              ],
+              "height": 96,
+              "on_screen": false,
+              "width": 160
+            },
+            "gpu_submitted": true,
+            "mode": "gpu-offscreen",
+            "model_count": 1,
+            "sprite_count": 0,
+            "tick": 120,
+            "topology_generation": 0
+          },
+          "sources": [
+            {
+              "id": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "physics": {
+                "position": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "sleeping": false,
+                "velocity": [
+                  3.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "position": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ]
+            }
+          ],
+          "tick": 120
+        },
+        "rms": 0.05530287311397527,
+        "early_balance": 109.52215791799678,
+        "late_balance": -115.7174509755776
+      },
+      {
+        "fixture": "stream",
+        "rate": 48000,
+        "report": {
+          "frames": 96000,
+          "logs": {
+            "dropped": 0,
+            "entries": [
+              {
+                "level": "info",
+                "message": "Ready \u96ea\ud83d\ude42",
+                "tick": 1
+              },
+              {
+                "level": "warn",
+                "message": "Finished",
+                "tick": 120
+              }
+            ]
+          },
+          "pcm_sha256": "3822063f9e3b291d4bc8ab543e16bd09900c3ea82082b0181e5369fdd781ef58",
+          "render_input": {
+            "binding_generation": 0,
+            "camera": "00000000000000000000000000000004",
+            "camera_position": [
+              0.0,
+              0.0,
+              8.0
+            ],
+            "decoded_payload_bytes": 156,
+            "first_model_position": [
+              2.9500136375427246,
+              0.0,
+              0.0
+            ],
+            "first_sprite_position": null,
+            "gpu": {
+              "accepted_frames": 120,
+              "adapter": {
+                "backend": "Metal",
+                "device_type": "IntegratedGpu",
+                "name": "Apple M5 Pro"
+              },
+              "captures": [
+                {
+                  "frame": 1,
+                  "non_background_pixels": 55,
+                  "sha256": "f83486993de4f7ea04058053abd7af7e3aad7b7f6843300c292563a4d76593c3"
+                },
+                {
+                  "frame": 120,
+                  "non_background_pixels": 55,
+                  "sha256": "d7acf22c7808031e1ec5cd17987f68bdca40c324f2d531f89ac26d31c8863dda"
+                }
+              ],
+              "height": 96,
+              "on_screen": false,
+              "width": 160
+            },
+            "gpu_submitted": true,
+            "mode": "gpu-offscreen",
+            "model_count": 1,
+            "sprite_count": 0,
+            "tick": 120,
+            "topology_generation": 0
+          },
+          "sources": [
+            {
+              "id": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "physics": {
+                "position": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "sleeping": false,
+                "velocity": [
+                  3.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "position": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ]
+            }
+          ],
+          "tick": 120
+        },
+        "rms": 0.055305097447639784,
+        "early_balance": 108.70557752668313,
+        "late_balance": -114.8314969751412
+      },
+      {
+        "fixture": "static-sprite",
+        "rate": 44117,
+        "report": {
+          "frames": 88234,
+          "logs": {
+            "dropped": 0,
+            "entries": [
+              {
+                "level": "info",
+                "message": "Ready \u96ea\ud83d\ude42",
+                "tick": 1
+              },
+              {
+                "level": "warn",
+                "message": "Finished",
+                "tick": 120
+              }
+            ]
+          },
+          "pcm_sha256": "a4722ea4c42fa7e629e2bc7bd99127d45e2616383113d71bec57379b771c99c8",
+          "render_input": {
+            "binding_generation": 0,
+            "camera": "00000000000000000000000000000004",
+            "camera_position": [
+              0.0,
+              0.0,
+              8.0
+            ],
+            "decoded_payload_bytes": 852,
+            "first_model_position": null,
+            "first_sprite_position": [
+              2.9500136375427246,
+              0.0,
+              0.0
+            ],
+            "gpu": {
+              "accepted_frames": 120,
+              "adapter": {
+                "backend": "Metal",
+                "device_type": "IntegratedGpu",
+                "name": "Apple M5 Pro"
+              },
+              "captures": [
+                {
+                  "frame": 1,
+                  "non_background_pixels": 420,
+                  "sha256": "e57be536276c5d855799079587e16e0debf5b7e180b8ce3f7c758874ea8c9d30"
+                },
+                {
+                  "frame": 120,
+                  "non_background_pixels": 420,
+                  "sha256": "79a05fd14620d01ced198938e5904ed4a65c928a87430b8ee149b4e8ccf04f58"
+                }
+              ],
+              "height": 96,
+              "on_screen": false,
+              "width": 160
+            },
+            "gpu_submitted": true,
+            "mode": "gpu-offscreen",
+            "model_count": 0,
+            "sprite_count": 1,
+            "tick": 120,
+            "topology_generation": 0
+          },
+          "sources": [
+            {
+              "id": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "physics": {
+                "position": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "sleeping": false,
+                "velocity": [
+                  3.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "position": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ]
+            }
+          ],
+          "tick": 120
+        },
+        "rms": 0.0553028731136091,
+        "early_balance": 109.52215792219184,
+        "late_balance": -115.71745094939368
+      },
+      {
+        "fixture": "static-sprite",
+        "rate": 48000,
+        "report": {
+          "frames": 96000,
+          "logs": {
+            "dropped": 0,
+            "entries": [
+              {
+                "level": "info",
+                "message": "Ready \u96ea\ud83d\ude42",
+                "tick": 1
+              },
+              {
+                "level": "warn",
+                "message": "Finished",
+                "tick": 120
+              }
+            ]
+          },
+          "pcm_sha256": "3822063f9e3b291d4bc8ab543e16bd09900c3ea82082b0181e5369fdd781ef58",
+          "render_input": {
+            "binding_generation": 0,
+            "camera": "00000000000000000000000000000004",
+            "camera_position": [
+              0.0,
+              0.0,
+              8.0
+            ],
+            "decoded_payload_bytes": 852,
+            "first_model_position": null,
+            "first_sprite_position": [
+              2.9500136375427246,
+              0.0,
+              0.0
+            ],
+            "gpu": {
+              "accepted_frames": 120,
+              "adapter": {
+                "backend": "Metal",
+                "device_type": "IntegratedGpu",
+                "name": "Apple M5 Pro"
+              },
+              "captures": [
+                {
+                  "frame": 1,
+                  "non_background_pixels": 420,
+                  "sha256": "e57be536276c5d855799079587e16e0debf5b7e180b8ce3f7c758874ea8c9d30"
+                },
+                {
+                  "frame": 120,
+                  "non_background_pixels": 420,
+                  "sha256": "79a05fd14620d01ced198938e5904ed4a65c928a87430b8ee149b4e8ccf04f58"
+                }
+              ],
+              "height": 96,
+              "on_screen": false,
+              "width": 160
+            },
+            "gpu_submitted": true,
+            "mode": "gpu-offscreen",
+            "model_count": 0,
+            "sprite_count": 1,
+            "tick": 120,
+            "topology_generation": 0
+          },
+          "sources": [
+            {
+              "id": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "physics": {
+                "position": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "sleeping": false,
+                "velocity": [
+                  3.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "position": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ]
+            }
+          ],
+          "tick": 120
+        },
+        "rms": 0.055305097447639784,
+        "early_balance": 108.70557752668313,
+        "late_balance": -114.8314969751412
+      },
+      {
+        "fixture": "stream-sprite",
+        "rate": 44117,
+        "report": {
+          "frames": 88234,
+          "logs": {
+            "dropped": 0,
+            "entries": [
+              {
+                "level": "info",
+                "message": "Ready \u96ea\ud83d\ude42",
+                "tick": 1
+              },
+              {
+                "level": "warn",
+                "message": "Finished",
+                "tick": 120
+              }
+            ]
+          },
+          "pcm_sha256": "5da6b39c9fac3c7dd96db9434a8e9879d101c7901398a23b90de5b5587a04e26",
+          "render_input": {
+            "binding_generation": 0,
+            "camera": "00000000000000000000000000000004",
+            "camera_position": [
+              0.0,
+              0.0,
+              8.0
+            ],
+            "decoded_payload_bytes": 852,
+            "first_model_position": null,
+            "first_sprite_position": [
+              2.9500136375427246,
+              0.0,
+              0.0
+            ],
+            "gpu": {
+              "accepted_frames": 120,
+              "adapter": {
+                "backend": "Metal",
+                "device_type": "IntegratedGpu",
+                "name": "Apple M5 Pro"
+              },
+              "captures": [
+                {
+                  "frame": 1,
+                  "non_background_pixels": 420,
+                  "sha256": "729fbb6a59d71a214736bc78de5e44a2b6eed37ed5a6aac2bcb7b91cc924e39d"
+                },
+                {
+                  "frame": 120,
+                  "non_background_pixels": 420,
+                  "sha256": "55913d1ccfb8c3fc258fcce3ed1b4daba6dd17690bd7c11afc04ae6983e820b0"
+                }
+              ],
+              "height": 96,
+              "on_screen": false,
+              "width": 160
+            },
+            "gpu_submitted": true,
+            "mode": "gpu-offscreen",
+            "model_count": 0,
+            "sprite_count": 1,
+            "tick": 120,
+            "topology_generation": 0
+          },
+          "sources": [
+            {
+              "id": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "physics": {
+                "position": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "sleeping": false,
+                "velocity": [
+                  3.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "position": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ]
+            }
+          ],
+          "tick": 120
+        },
+        "rms": 0.05530287311397527,
+        "early_balance": 109.52215791799678,
+        "late_balance": -115.7174509755776
+      },
+      {
+        "fixture": "stream-sprite",
+        "rate": 48000,
+        "report": {
+          "frames": 96000,
+          "logs": {
+            "dropped": 0,
+            "entries": [
+              {
+                "level": "info",
+                "message": "Ready \u96ea\ud83d\ude42",
+                "tick": 1
+              },
+              {
+                "level": "warn",
+                "message": "Finished",
+                "tick": 120
+              }
+            ]
+          },
+          "pcm_sha256": "3822063f9e3b291d4bc8ab543e16bd09900c3ea82082b0181e5369fdd781ef58",
+          "render_input": {
+            "binding_generation": 0,
+            "camera": "00000000000000000000000000000004",
+            "camera_position": [
+              0.0,
+              0.0,
+              8.0
+            ],
+            "decoded_payload_bytes": 852,
+            "first_model_position": null,
+            "first_sprite_position": [
+              2.9500136375427246,
+              0.0,
+              0.0
+            ],
+            "gpu": {
+              "accepted_frames": 120,
+              "adapter": {
+                "backend": "Metal",
+                "device_type": "IntegratedGpu",
+                "name": "Apple M5 Pro"
+              },
+              "captures": [
+                {
+                  "frame": 1,
+                  "non_background_pixels": 420,
+                  "sha256": "729fbb6a59d71a214736bc78de5e44a2b6eed37ed5a6aac2bcb7b91cc924e39d"
+                },
+                {
+                  "frame": 120,
+                  "non_background_pixels": 420,
+                  "sha256": "55913d1ccfb8c3fc258fcce3ed1b4daba6dd17690bd7c11afc04ae6983e820b0"
+                }
+              ],
+              "height": 96,
+              "on_screen": false,
+              "width": 160
+            },
+            "gpu_submitted": true,
+            "mode": "gpu-offscreen",
+            "model_count": 0,
+            "sprite_count": 1,
+            "tick": 120,
+            "topology_generation": 0
+          },
+          "sources": [
+            {
+              "id": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "physics": {
+                "position": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "sleeping": false,
+                "velocity": [
+                  3.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "position": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ]
+            }
+          ],
+          "tick": 120
+        },
+        "rms": 0.055305097447639784,
+        "early_balance": 108.70557752668313,
+        "late_balance": -114.8314969751412
+      },
+      {
+        "fixture": "static-sprite-animated",
+        "rate": 44117,
+        "report": {
+          "frames": 88234,
+          "logs": {
+            "dropped": 0,
+            "entries": [
+              {
+                "level": "info",
+                "message": "Ready \u96ea\ud83d\ude42",
+                "tick": 1
+              },
+              {
+                "level": "warn",
+                "message": "Finished",
+                "tick": 120
+              }
+            ]
+          },
+          "pcm_sha256": "a4722ea4c42fa7e629e2bc7bd99127d45e2616383113d71bec57379b771c99c8",
+          "render_input": {
+            "binding_generation": 0,
+            "camera": "00000000000000000000000000000004",
+            "camera_position": [
+              0.0,
+              0.0,
+              8.0
+            ],
+            "decoded_payload_bytes": 852,
+            "first_model_position": null,
+            "first_sprite_position": [
+              2.9500136375427246,
+              0.0,
+              0.0
+            ],
+            "gpu": {
+              "accepted_frames": 120,
+              "adapter": {
+                "backend": "Metal",
+                "device_type": "IntegratedGpu",
+                "name": "Apple M5 Pro"
+              },
+              "captures": [
+                {
+                  "frame": 1,
+                  "non_background_pixels": 420,
+                  "sha256": "e57be536276c5d855799079587e16e0debf5b7e180b8ce3f7c758874ea8c9d30"
+                },
+                {
+                  "frame": 120,
+                  "non_background_pixels": 420,
+                  "sha256": "91a3a0741709fd0fd7372950b8f67358b9776492f5e8e5ab5446ec3f53be67af"
+                }
+              ],
+              "height": 96,
+              "on_screen": false,
+              "width": 160
+            },
+            "gpu_submitted": true,
+            "mode": "gpu-offscreen",
+            "model_count": 0,
+            "sprite_count": 1,
+            "tick": 120,
+            "topology_generation": 0
+          },
+          "sources": [
+            {
+              "id": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "physics": {
+                "position": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "sleeping": false,
+                "velocity": [
+                  3.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "position": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ]
+            }
+          ],
+          "tick": 120
+        },
+        "rms": 0.0553028731136091,
+        "early_balance": 109.52215792219184,
+        "late_balance": -115.71745094939368
+      },
+      {
+        "fixture": "static-sprite-animated",
+        "rate": 48000,
+        "report": {
+          "frames": 96000,
+          "logs": {
+            "dropped": 0,
+            "entries": [
+              {
+                "level": "info",
+                "message": "Ready \u96ea\ud83d\ude42",
+                "tick": 1
+              },
+              {
+                "level": "warn",
+                "message": "Finished",
+                "tick": 120
+              }
+            ]
+          },
+          "pcm_sha256": "3822063f9e3b291d4bc8ab543e16bd09900c3ea82082b0181e5369fdd781ef58",
+          "render_input": {
+            "binding_generation": 0,
+            "camera": "00000000000000000000000000000004",
+            "camera_position": [
+              0.0,
+              0.0,
+              8.0
+            ],
+            "decoded_payload_bytes": 852,
+            "first_model_position": null,
+            "first_sprite_position": [
+              2.9500136375427246,
+              0.0,
+              0.0
+            ],
+            "gpu": {
+              "accepted_frames": 120,
+              "adapter": {
+                "backend": "Metal",
+                "device_type": "IntegratedGpu",
+                "name": "Apple M5 Pro"
+              },
+              "captures": [
+                {
+                  "frame": 1,
+                  "non_background_pixels": 420,
+                  "sha256": "e57be536276c5d855799079587e16e0debf5b7e180b8ce3f7c758874ea8c9d30"
+                },
+                {
+                  "frame": 120,
+                  "non_background_pixels": 420,
+                  "sha256": "91a3a0741709fd0fd7372950b8f67358b9776492f5e8e5ab5446ec3f53be67af"
+                }
+              ],
+              "height": 96,
+              "on_screen": false,
+              "width": 160
+            },
+            "gpu_submitted": true,
+            "mode": "gpu-offscreen",
+            "model_count": 0,
+            "sprite_count": 1,
+            "tick": 120,
+            "topology_generation": 0
+          },
+          "sources": [
+            {
+              "id": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "physics": {
+                "position": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "sleeping": false,
+                "velocity": [
+                  3.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "position": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ]
+            }
+          ],
+          "tick": 120
+        },
+        "rms": 0.055305097447639784,
+        "early_balance": 108.70557752668313,
+        "late_balance": -114.8314969751412
+      },
+      {
+        "fixture": "static-sprite-final-reference",
+        "rate": 44117,
+        "report": {
+          "frames": 88234,
+          "logs": {
+            "dropped": 0,
+            "entries": [
+              {
+                "level": "info",
+                "message": "Ready \u96ea\ud83d\ude42",
+                "tick": 1
+              },
+              {
+                "level": "warn",
+                "message": "Finished",
+                "tick": 120
+              }
+            ]
+          },
+          "pcm_sha256": "a4722ea4c42fa7e629e2bc7bd99127d45e2616383113d71bec57379b771c99c8",
+          "render_input": {
+            "binding_generation": 0,
+            "camera": "00000000000000000000000000000004",
+            "camera_position": [
+              0.0,
+              0.0,
+              8.0
+            ],
+            "decoded_payload_bytes": 852,
+            "first_model_position": null,
+            "first_sprite_position": [
+              2.9500136375427246,
+              0.0,
+              0.0
+            ],
+            "gpu": {
+              "accepted_frames": 120,
+              "adapter": {
+                "backend": "Metal",
+                "device_type": "IntegratedGpu",
+                "name": "Apple M5 Pro"
+              },
+              "captures": [
+                {
+                  "frame": 1,
+                  "non_background_pixels": 420,
+                  "sha256": "5153058efd933700b7106cecf4f19db1ba315ea7f376a34fb0169c9dce55f46a"
+                },
+                {
+                  "frame": 120,
+                  "non_background_pixels": 420,
+                  "sha256": "91a3a0741709fd0fd7372950b8f67358b9776492f5e8e5ab5446ec3f53be67af"
+                }
+              ],
+              "height": 96,
+              "on_screen": false,
+              "width": 160
+            },
+            "gpu_submitted": true,
+            "mode": "gpu-offscreen",
+            "model_count": 0,
+            "sprite_count": 1,
+            "tick": 120,
+            "topology_generation": 0
+          },
+          "sources": [
+            {
+              "id": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "physics": {
+                "position": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "sleeping": false,
+                "velocity": [
+                  3.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "position": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ]
+            }
+          ],
+          "tick": 120
+        },
+        "rms": 0.0553028731136091,
+        "early_balance": 109.52215792219184,
+        "late_balance": -115.71745094939368
+      },
+      {
+        "fixture": "static-sprite-final-reference",
+        "rate": 48000,
+        "report": {
+          "frames": 96000,
+          "logs": {
+            "dropped": 0,
+            "entries": [
+              {
+                "level": "info",
+                "message": "Ready \u96ea\ud83d\ude42",
+                "tick": 1
+              },
+              {
+                "level": "warn",
+                "message": "Finished",
+                "tick": 120
+              }
+            ]
+          },
+          "pcm_sha256": "3822063f9e3b291d4bc8ab543e16bd09900c3ea82082b0181e5369fdd781ef58",
+          "render_input": {
+            "binding_generation": 0,
+            "camera": "00000000000000000000000000000004",
+            "camera_position": [
+              0.0,
+              0.0,
+              8.0
+            ],
+            "decoded_payload_bytes": 852,
+            "first_model_position": null,
+            "first_sprite_position": [
+              2.9500136375427246,
+              0.0,
+              0.0
+            ],
+            "gpu": {
+              "accepted_frames": 120,
+              "adapter": {
+                "backend": "Metal",
+                "device_type": "IntegratedGpu",
+                "name": "Apple M5 Pro"
+              },
+              "captures": [
+                {
+                  "frame": 1,
+                  "non_background_pixels": 420,
+                  "sha256": "5153058efd933700b7106cecf4f19db1ba315ea7f376a34fb0169c9dce55f46a"
+                },
+                {
+                  "frame": 120,
+                  "non_background_pixels": 420,
+                  "sha256": "91a3a0741709fd0fd7372950b8f67358b9776492f5e8e5ab5446ec3f53be67af"
+                }
+              ],
+              "height": 96,
+              "on_screen": false,
+              "width": 160
+            },
+            "gpu_submitted": true,
+            "mode": "gpu-offscreen",
+            "model_count": 0,
+            "sprite_count": 1,
+            "tick": 120,
+            "topology_generation": 0
+          },
+          "sources": [
+            {
+              "id": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "physics": {
+                "position": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "sleeping": false,
+                "velocity": [
+                  3.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "position": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ]
+            }
+          ],
+          "tick": 120
+        },
+        "rms": 0.055305097447639784,
+        "early_balance": 108.70557752668313,
+        "late_balance": -114.8314969751412
+      },
+      {
+        "fixture": "stream-sprite-animated",
+        "rate": 44117,
+        "report": {
+          "frames": 88234,
+          "logs": {
+            "dropped": 0,
+            "entries": [
+              {
+                "level": "info",
+                "message": "Ready \u96ea\ud83d\ude42",
+                "tick": 1
+              },
+              {
+                "level": "warn",
+                "message": "Finished",
+                "tick": 120
+              }
+            ]
+          },
+          "pcm_sha256": "5da6b39c9fac3c7dd96db9434a8e9879d101c7901398a23b90de5b5587a04e26",
+          "render_input": {
+            "binding_generation": 0,
+            "camera": "00000000000000000000000000000004",
+            "camera_position": [
+              0.0,
+              0.0,
+              8.0
+            ],
+            "decoded_payload_bytes": 852,
+            "first_model_position": null,
+            "first_sprite_position": [
+              2.9500136375427246,
+              0.0,
+              0.0
+            ],
+            "gpu": {
+              "accepted_frames": 120,
+              "adapter": {
+                "backend": "Metal",
+                "device_type": "IntegratedGpu",
+                "name": "Apple M5 Pro"
+              },
+              "captures": [
+                {
+                  "frame": 1,
+                  "non_background_pixels": 420,
+                  "sha256": "729fbb6a59d71a214736bc78de5e44a2b6eed37ed5a6aac2bcb7b91cc924e39d"
+                },
+                {
+                  "frame": 120,
+                  "non_background_pixels": 420,
+                  "sha256": "d3ce54429e4ecccdf5d4b82c79ba5e78492d18ba0c72d6b339a6794452f4c200"
+                }
+              ],
+              "height": 96,
+              "on_screen": false,
+              "width": 160
+            },
+            "gpu_submitted": true,
+            "mode": "gpu-offscreen",
+            "model_count": 0,
+            "sprite_count": 1,
+            "tick": 120,
+            "topology_generation": 0
+          },
+          "sources": [
+            {
+              "id": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "physics": {
+                "position": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "sleeping": false,
+                "velocity": [
+                  3.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "position": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ]
+            }
+          ],
+          "tick": 120
+        },
+        "rms": 0.05530287311397527,
+        "early_balance": 109.52215791799678,
+        "late_balance": -115.7174509755776
+      },
+      {
+        "fixture": "stream-sprite-animated",
+        "rate": 48000,
+        "report": {
+          "frames": 96000,
+          "logs": {
+            "dropped": 0,
+            "entries": [
+              {
+                "level": "info",
+                "message": "Ready \u96ea\ud83d\ude42",
+                "tick": 1
+              },
+              {
+                "level": "warn",
+                "message": "Finished",
+                "tick": 120
+              }
+            ]
+          },
+          "pcm_sha256": "3822063f9e3b291d4bc8ab543e16bd09900c3ea82082b0181e5369fdd781ef58",
+          "render_input": {
+            "binding_generation": 0,
+            "camera": "00000000000000000000000000000004",
+            "camera_position": [
+              0.0,
+              0.0,
+              8.0
+            ],
+            "decoded_payload_bytes": 852,
+            "first_model_position": null,
+            "first_sprite_position": [
+              2.9500136375427246,
+              0.0,
+              0.0
+            ],
+            "gpu": {
+              "accepted_frames": 120,
+              "adapter": {
+                "backend": "Metal",
+                "device_type": "IntegratedGpu",
+                "name": "Apple M5 Pro"
+              },
+              "captures": [
+                {
+                  "frame": 1,
+                  "non_background_pixels": 420,
+                  "sha256": "729fbb6a59d71a214736bc78de5e44a2b6eed37ed5a6aac2bcb7b91cc924e39d"
+                },
+                {
+                  "frame": 120,
+                  "non_background_pixels": 420,
+                  "sha256": "d3ce54429e4ecccdf5d4b82c79ba5e78492d18ba0c72d6b339a6794452f4c200"
+                }
+              ],
+              "height": 96,
+              "on_screen": false,
+              "width": 160
+            },
+            "gpu_submitted": true,
+            "mode": "gpu-offscreen",
+            "model_count": 0,
+            "sprite_count": 1,
+            "tick": 120,
+            "topology_generation": 0
+          },
+          "sources": [
+            {
+              "id": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "physics": {
+                "position": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "sleeping": false,
+                "velocity": [
+                  3.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "position": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ]
+            }
+          ],
+          "tick": 120
+        },
+        "rms": 0.055305097447639784,
+        "early_balance": 108.70557752668313,
+        "late_balance": -114.8314969751412
+      },
+      {
+        "fixture": "stream-sprite-final-reference",
+        "rate": 44117,
+        "report": {
+          "frames": 88234,
+          "logs": {
+            "dropped": 0,
+            "entries": [
+              {
+                "level": "info",
+                "message": "Ready \u96ea\ud83d\ude42",
+                "tick": 1
+              },
+              {
+                "level": "warn",
+                "message": "Finished",
+                "tick": 120
+              }
+            ]
+          },
+          "pcm_sha256": "5da6b39c9fac3c7dd96db9434a8e9879d101c7901398a23b90de5b5587a04e26",
+          "render_input": {
+            "binding_generation": 0,
+            "camera": "00000000000000000000000000000004",
+            "camera_position": [
+              0.0,
+              0.0,
+              8.0
+            ],
+            "decoded_payload_bytes": 852,
+            "first_model_position": null,
+            "first_sprite_position": [
+              2.9500136375427246,
+              0.0,
+              0.0
+            ],
+            "gpu": {
+              "accepted_frames": 120,
+              "adapter": {
+                "backend": "Metal",
+                "device_type": "IntegratedGpu",
+                "name": "Apple M5 Pro"
+              },
+              "captures": [
+                {
+                  "frame": 1,
+                  "non_background_pixels": 420,
+                  "sha256": "8bdacb4f4dc51586076ea985a8b2fa5408e04a6642eae5fd25820250d1d6a863"
+                },
+                {
+                  "frame": 120,
+                  "non_background_pixels": 420,
+                  "sha256": "d3ce54429e4ecccdf5d4b82c79ba5e78492d18ba0c72d6b339a6794452f4c200"
+                }
+              ],
+              "height": 96,
+              "on_screen": false,
+              "width": 160
+            },
+            "gpu_submitted": true,
+            "mode": "gpu-offscreen",
+            "model_count": 0,
+            "sprite_count": 1,
+            "tick": 120,
+            "topology_generation": 0
+          },
+          "sources": [
+            {
+              "id": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "physics": {
+                "position": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "sleeping": false,
+                "velocity": [
+                  3.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "position": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ]
+            }
+          ],
+          "tick": 120
+        },
+        "rms": 0.05530287311397527,
+        "early_balance": 109.52215791799678,
+        "late_balance": -115.7174509755776
+      },
+      {
+        "fixture": "stream-sprite-final-reference",
+        "rate": 48000,
+        "report": {
+          "frames": 96000,
+          "logs": {
+            "dropped": 0,
+            "entries": [
+              {
+                "level": "info",
+                "message": "Ready \u96ea\ud83d\ude42",
+                "tick": 1
+              },
+              {
+                "level": "warn",
+                "message": "Finished",
+                "tick": 120
+              }
+            ]
+          },
+          "pcm_sha256": "3822063f9e3b291d4bc8ab543e16bd09900c3ea82082b0181e5369fdd781ef58",
+          "render_input": {
+            "binding_generation": 0,
+            "camera": "00000000000000000000000000000004",
+            "camera_position": [
+              0.0,
+              0.0,
+              8.0
+            ],
+            "decoded_payload_bytes": 852,
+            "first_model_position": null,
+            "first_sprite_position": [
+              2.9500136375427246,
+              0.0,
+              0.0
+            ],
+            "gpu": {
+              "accepted_frames": 120,
+              "adapter": {
+                "backend": "Metal",
+                "device_type": "IntegratedGpu",
+                "name": "Apple M5 Pro"
+              },
+              "captures": [
+                {
+                  "frame": 1,
+                  "non_background_pixels": 420,
+                  "sha256": "8bdacb4f4dc51586076ea985a8b2fa5408e04a6642eae5fd25820250d1d6a863"
+                },
+                {
+                  "frame": 120,
+                  "non_background_pixels": 420,
+                  "sha256": "d3ce54429e4ecccdf5d4b82c79ba5e78492d18ba0c72d6b339a6794452f4c200"
+                }
+              ],
+              "height": 96,
+              "on_screen": false,
+              "width": 160
+            },
+            "gpu_submitted": true,
+            "mode": "gpu-offscreen",
+            "model_count": 0,
+            "sprite_count": 1,
+            "tick": 120,
+            "topology_generation": 0
+          },
+          "sources": [
+            {
+              "id": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "physics": {
+                "position": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "sleeping": false,
+                "velocity": [
+                  3.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "position": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ]
+            }
+          ],
+          "tick": 120
+        },
+        "rms": 0.055305097447639784,
+        "early_balance": 108.70557752668313,
+        "late_balance": -114.8314969751412
+      }
+    ],
+    "rejected": [
+      "accepted-script-failure",
+      "wrong-recording-clock",
+      "invalid-input-packet",
+      "wrong-clip-fingerprint",
+      "unknown-cooked-version",
+      "oversized-startup-actions",
+      "manual-input-route",
+      "incant_game_player-camera-only",
+      "native_scene_audio-camera-only",
+      "incant_game_player-manifest-only",
+      "native_scene_audio-manifest-only",
+      "late-camera-removal",
+      "feature-default-stays-strict",
+      "missing-model-cache",
+      "missing-camera",
+      "malformed-camera",
+      "sprite-default-stays-strict",
+      "missing-sprite-cache",
+      "unknown-sprite-frame",
+      "flipbook-default-stays-strict",
+      "unknown-noncurrent-flipbook-frame",
+      "observation-format",
+      "observation-version",
+      "observation-extra",
+      "observation-duplicate-entities",
+      "observation-noncanonical-id",
+      "observation-beyond-end",
+      "observation-excess-checks",
+      "observation-oversized",
+      "observation-duplicate-option",
+      "observation-terminal-failure",
+      "log_invalid",
+      "log_message",
+      "log_calls",
+      "log_total"
+    ],
+    "spatial_refusals": [
+      {
+        "player": "incant_game_player",
+        "fixture": "camera-only"
+      },
+      {
+        "player": "native_scene_audio",
+        "fixture": "camera-only"
+      },
+      {
+        "player": "incant_game_player",
+        "fixture": "manifest-only"
+      },
+      {
+        "player": "native_scene_audio",
+        "fixture": "manifest-only"
+      }
+    ],
+    "plain_v1_controls": 2,
+    "existing_output_preserved": true,
+    "size_delta_from_audio_host_2885984": 6074192,
+    "size_delta_from_physics_script_player_3941816": 5018360,
+    "size_comparison_scope": "whole executable graphs, not an isolated feature cost or performance gate",
+    "device_output": false,
+    "session_saves": false,
+    "phone_performance_gate": false,
+    "failure_semantics": "Invalid input/buffer retry is covered in host tests. Any failure after accepted simulation destroys composite state; device cursor is not rolled back. Simulation/host failure creates no output file; output I/O may leave a partial file."
+  },
+  "fbx_cli": {
+    "binary_sha256": "434fcfe3940039bac432de2c11c17f9611d8e6ec62f63d6a73fd9af34d8b8188",
+    "processes": 11,
+    "initial": {
+      "asset": {
+        "id": "01M4MT8S4ABCESBCVWKR1JE7NP",
+        "kind": "model",
+        "name": "cube",
+        "path": "cube.FBX",
+        "sha256": "530d4a2c778590c3fd3aeb4a3ee820cb3fa7e4815c5b49cf896ae401dc2737a3"
+      },
+      "cache_hit": false,
+      "changed": true,
+      "details": {
+        "dependencies": [
+          {
+            "path": "cube.FBX",
+            "sha256": "00a26466be678131f143a1fa29804eab09a7520f40787c7dc51f5b4bb9e6b98c"
+          }
+        ],
+        "meshes": 1,
+        "textures": 0,
+        "vertices": 36
+      },
+      "revision": 1
+    },
+    "unchanged": {
+      "asset": {
+        "id": "01M4MT8S4ABCESBCVWKR1JE7NP",
+        "kind": "model",
+        "name": "cube",
+        "path": "cube.FBX",
+        "sha256": "530d4a2c778590c3fd3aeb4a3ee820cb3fa7e4815c5b49cf896ae401dc2737a3"
+      },
+      "cache_hit": true,
+      "changed": false,
+      "details": {
+        "dependencies": [
+          {
+            "path": "cube.FBX",
+            "sha256": "00a26466be678131f143a1fa29804eab09a7520f40787c7dc51f5b4bb9e6b98c"
+          }
+        ],
+        "meshes": 1,
+        "textures": 0,
+        "vertices": 36
+      },
+      "revision": 1
+    },
+    "reimport": {
+      "asset": {
+        "id": "01M4MT8S4ABCESBCVWKR1JE7NP",
+        "kind": "model",
+        "name": "cube",
+        "path": "cube.FBX",
+        "sha256": "5ec97126de8c29b5696cb4c728bc94f8f731ecade0c7ef16d738a4baf0a28248"
+      },
+      "cache_hit": false,
+      "changed": true,
+      "details": {
+        "dependencies": [
+          {
+            "path": "cube.FBX",
+            "sha256": "8ca1c0dbd4e4979e9572dd3e0d5d93913587fe87967300a457e93a5ae8970fcd"
+          }
+        ],
+        "meshes": 1,
+        "textures": 0,
+        "vertices": 36
+      },
+      "revision": 2
+    },
+    "stable_asset_id": true,
+    "undo_redo_exact": true,
+    "rejected_import_project_and_journal_unchanged": true,
+    "sources_deleted": true,
+    "validation_after_deletion": true,
+    "cached_runtime_reader_executed": "separate Rust integration tests",
+    "cache": [
+      {
+        "path": "530d4a2c778590c3fd3aeb4a3ee820cb3fa7e4815c5b49cf896ae401dc2737a3.incmodel",
+        "bytes": 1218,
+        "sha256": "3fa82568c615034017d6bb2c5bcbdb7822f6d88957c3dd7ac0a67c4429d45e67"
+      },
+      {
+        "path": "5ec97126de8c29b5696cb4c728bc94f8f731ecade0c7ef16d738a4baf0a28248.incmodel",
+        "bytes": 1281,
+        "sha256": "8e73c569beb4d317c484e3d739790ea51de3638c5473ae423afaf0006faab7a3"
+      }
+    ],
+    "invalid_error": "Error: could not cook cube.FBX: invalid FBX: TruncatedFile: Truncated file",
+    "unsupported_error": "Error: could not cook animated.fbx: unsupported asset feature: static FBX: animation channels",
+    "calls": [
+      {
+        "args": [
+          "init",
+          "/private/tmp/incant-assets-render-union-fbx-cli/model.incant.json",
+          "--name",
+          "FBX command proof",
+          "--entities",
+          "0"
+        ],
+        "exit": 0
+      },
+      {
+        "args": [
+          "import",
+          "/private/tmp/incant-assets-render-union-fbx-cli/model.incant.json",
+          "cube.FBX"
+        ],
+        "exit": 0
+      },
+      {
+        "args": [
+          "rpc",
+          "/private/tmp/incant-assets-render-union-fbx-cli/model.incant.json",
+          "--journal",
+          "/private/tmp/incant-assets-render-union-fbx-cli/model.incant.journal.jsonl"
+        ],
+        "exit": 0
+      },
+      {
+        "args": [
+          "import",
+          "/private/tmp/incant-assets-render-union-fbx-cli/model.incant.json",
+          "cube.FBX"
+        ],
+        "exit": 0
+      },
+      {
+        "args": [
+          "rpc",
+          "/private/tmp/incant-assets-render-union-fbx-cli/model.incant.json",
+          "--journal",
+          "/private/tmp/incant-assets-render-union-fbx-cli/model.incant.journal.jsonl"
+        ],
+        "exit": 0
+      },
+      {
+        "args": [
+          "import",
+          "/private/tmp/incant-assets-render-union-fbx-cli/model.incant.json",
+          "cube.FBX"
+        ],
+        "exit": 0
+      },
+      {
+        "args": [
+          "rpc",
+          "history.undo",
+          "project.save"
+        ],
+        "exit": 0
+      },
+      {
+        "args": [
+          "rpc",
+          "history.redo",
+          "project.save"
+        ],
+        "exit": 0
+      },
+      {
+        "args": [
+          "import",
+          "/private/tmp/incant-assets-render-union-fbx-cli/model.incant.json",
+          "cube.FBX"
+        ],
+        "exit": 1
+      },
+      {
+        "args": [
+          "import",
+          "/private/tmp/incant-assets-render-union-fbx-cli/model.incant.json",
+          "animated.fbx"
+        ],
+        "exit": 1
+      },
+      {
+        "args": [
+          "validate",
+          "/private/tmp/incant-assets-render-union-fbx-cli/model.incant.json"
+        ],
+        "exit": 0
+      }
+    ],
+    "rendering": false,
+    "visual_review": false
+  },
+  "schema_parity": {
+    "equal": true,
+    "files": {
+      "agent-tools.json": "0334c9321c9771db6fc8ff4198dc4aa8fa71603b22c9afc35d695c209349ace4",
+      "MissingString.schema.json": "ab44bee65391b5a428b46a2c6f030846bc57ca090d82a86c546d5c1117191ed8",
+      "Collider.schema.json": "21f7b99bc438b8aa696c78d79940917dfb172c93cc63b48369449242582007ef",
+      "AngularVelocity2D.schema.json": "89041135cef82143d0862def980e183f070d90ee51b91ee450163ecee082ede0",
+      "PhysicsCharacterQuery.schema.json": "ef32f87b7a453f78f63a35844c30ce5e06aa85c20dcb70ba5ddd526d9aaf5568",
+      "LocaleSettings.schema.json": "6511d2cc958baef057cf4f1c1c51cd699631a498d6dd650082cb445f92aa9ae5",
+      "AudioBus.schema.json": "35fdb05f0b7d8216982c6cc4f011621fe776265da0339ea98e6d2e0a58ba18b1",
+      "TimerEvent.schema.json": "5a0dd5bebdf067809fca15f5d3d91bfe0057ca4c0623f9fbfd872d897e0f5a57",
+      "Command.schema.json": "855436f6adbd1d45ad3f631c2ef973f7e7d948afbc656cb466ed8bf9c8cdf622",
+      "PhysicsTriggerEvent.schema.json": "69f65e291acade59858c5379694421a55fd905c300050473c71adc1e0c24d6e0",
+      "Camera.schema.json": "abef119e79793dda0fb7fab953aaf69b6e04c6d1c18ec72efa011cff7c20408c",
+      "LocalizedText.schema.json": "e4bc6212ac03c507efcfad3bf8da548c5815d5abd101df8e696340e7f86a43f6",
+      "LocalizeRequest.schema.json": "35726cfa57aefa19ed45fc7d4eed5e9cf9f9c6e11720790fb35b12ec79340473",
+      "CalendarDate.schema.json": "10f3b6bb797fbb6fb85c1b9e33d0c83c118b8ff89cdf76633e4c37b12acad494",
+      "SpriteRenderer.schema.json": "16d6371fe7fdc1c91d05b59c64ab79c820a4db208d4749c39ac1702f0b951c76",
+      "GridNavigationQuery.schema.json": "39fd6e8dae661ebe946316827dcc8cbc0b58e932158b1dde50f0a2c95537a14d",
+      "SpriteAtlas.schema.json": "7024e1c09cc74fb476eb3c4eef49286e0bb7c88678de63079eff41c97ca7499b",
+      "NavigationPath.schema.json": "0580d7219c1619e22754afda769df5be421ea02bb5484030bd84f407e929330f",
+      "PhysicsCharacterMovement.schema.json": "b48a5d67f2f1248b46903841e848e8c224008189a386a2796bd13e52f61e564e",
+      "StringTable.schema.json": "8e70d1824d0676a31c9a0182b58c87191f45d9c7a0730ee30f0eef8913883f80",
+      "AudioListener.schema.json": "6cccfe72eecd9bfe999d54e880948b1e08c63cdad2b92b3fb384a4fd1f5a441b",
+      "InputEvent.schema.json": "0e2cacf4df1fe946a56eab3735accc4ecf96e40db10ab29ad72a4854ae2831bb",
+      "PhysicsRayHit.schema.json": "709a9f83a247eab9bf70ae0c3c05c539bfa8fd9a8fedd006062662233484b059",
+      "Script.schema.json": "0056db3a03637c271110c0cb183d4aac14ffcdf212412e66a4b69ee07a10a6b0",
+      "Transform.schema.json": "c7f6d26cc696acd7543c868c8eb6e9b05c975415f7551b9e77e7082640c510ee",
+      "MeshRenderer.schema.json": "252e14429d57b785fe117659cbb3c3c1bcc487c8d5cba1a9746e32c515ae7587",
+      "AudioSource.schema.json": "a9e20d41ec301b4add4f66ee7a1564e5500a266b12f43537797022db7b1bfb6f",
+      "OffMeshTraversal.schema.json": "ae7a74ef69cefb81c3615c6c40d61df8862c26139a23c2a2d5c99e8e8a18654f",
+      "GridPath.schema.json": "c33f56ce6950ecba9547c64d41e92f75bb98739315f23676a58b9564f4ac8b8f",
+      "PhysicsRayQuery.schema.json": "cd210e96317994741e7527ab9fe9a710ec2df05b212533f253ba85af14309ea0",
+      "InputActions.schema.json": "adb8727c82f34e332ef20e46b705f98d1394bf8bd2271f187423e3d0573c4463",
+      "NavigationMesh.schema.json": "48b722cfeb11cc1dd632c1d3d897e23ed74a9ab434525d6ea81c0ffe21fd58cc",
+      "NavigationQuery.schema.json": "17db79ed78ced255d0b12a84d531a7be8eb71fac30072312379e513efd512d50",
+      "SteeringVelocity.schema.json": "05f85ae37c5b8fd77bbc7045f8f96966344c305d526e6b3173395fbcf216309c",
+      "SteeringAgent.schema.json": "91b9091a3b7a1149b932ef55ab6d20d7a62cef57d51e0538752852cf7429f875",
+      "DirectionalLight.schema.json": "895db63fc658968c36d0a4ba28357544721eb336502d31e175ab498207ed917e",
+      "InputRecording.schema.json": "36ae123a18858d7bf99876e2ea23084c1402fb76350338878980d11d9211e39b",
+      "Velocity.schema.json": "2f782108b52bfef1bb86c83373ccc81ab0db6d1a6ab4f9f86b9c4348e5934896",
+      "Project.schema.json": "6651ee70c21de0d9e30703d3f50ea4b86968f1b2d76b4850c0a12eba6c23fb07",
+      "DateLength.schema.json": "9bc886a3bf1891d682723e6157137b5d68b68d1a081fffdc9c12da16b71a4f37",
+      "InputFrame.schema.json": "136bf6331b3b841c677338c962ce5f02385cc52a33f937175f1538622f9e5127",
+      "TimerRequest.schema.json": "5223a10cdfa7d5f60a5a58bd278fcb63e5161cc3735655fd9f88485aefd8c206",
+      "AngularVelocity.schema.json": "88b88e6b417adc2b0ee65aae4e870227439850c81d50dc36361079943694d325",
+      "SpotLight.schema.json": "5f0160cc5ce6f2d5d839d53c9547bbbe23b21410cd8bc02d13305c843cb960cd",
+      "PointLight.schema.json": "ce31d2b8cbbd04ac0c7c8535e4235dbe61aa1a6de424c4583350955b5dd6a7cb",
+      "Tilemap.schema.json": "3781c9926473b349139d6934fb4c2b3a8f2f823cc6474ab930426953e7d373f6",
+      "ScriptClock.schema.json": "48a464931d0c264adcaf7b3cbed8843d1eca9671e928db4a55148db5fd2e9cf0",
+      "EnvironmentLight.schema.json": "c3789e2a0947fe74bd26a62f93ed15a292720c373709300d81b72c9ef696aece",
+      "GameSave.schema.json": "4185ee2275b4eaac26966edbab1bdba70f636a86cb8d8a8a01bb6549fa03c359",
+      "RigidBody.schema.json": "025a15184d5dd7d30098d74af7cbfbbeb33a04e1ac21440bddc6530f928a2210",
+      "SpriteFlipbook.schema.json": "fa7f048190b557df5e45474b5ea4cff9012567a6bd9e0de316f3f4809de0c375",
+      "OffMeshLink.schema.json": "61972a46ced0480aaf7f03ad012b7ce1804e62149ffe6624ee54c8b1af6f0ec8",
+      "PlayAssertions.schema.json": "4a260351161e93b2202838210184ff6cdc76b23015395743a1d0064df5386a4f",
+      "Collider2D.schema.json": "eb29fd90526cbb2912e8a0c19a12e32683b8dd6c1769c849f0d36e9e1c5686a9",
+      "SteeringObstacle.schema.json": "682dcac1292a4b6dca9286833974c342fd267f897b06f229a924e1f9683c6055",
+      "SteeringQuery.schema.json": "3a3b930f2623c089240225b528da583b76c9877f6902847fb3c565e3a46e2ccd",
+      "NavigationGrid.schema.json": "a9031e646ff1dc2857b8e223d82b8686c957c5c39a3416f260785eb0a60fe89b",
+      "RigidBody2D.schema.json": "838eaae1ea5882a8b52db1cd033a18ad1df3eef8f1ab565c87041a1284dcd2ef"
+    }
+  },
+  "gpu_release": {
+    "head": "ef2897af60d74efdd193288108206d4858ef75ae",
+    "utc": "2026-10-11T06:30:12.450121+00:00",
+    "session": 51255,
+    "exit_code": 0,
+    "gpu_tests": 73,
+    "proof": "/tmp/incant-assets-render-union-shipping/result.json",
+    "remaining_proof_children": [],
+    "remaining_cargo": "CPU-only Clippy/window/wasm chain1455, no GPU or native foreground calls"
+  },
+  "logs": {
+    "tests": {
+      "path": "/tmp/incant-assets-render-union-tests.log",
+      "sha256": "57cb86fc75942f990eab36eab4b4e0674e00918041383531fab57bb4836b6aac"
+    },
+    "gpu": {
+      "path": "/tmp/incant-assets-render-union-gpu.log",
+      "sha256": "4cfa4b1d877214ab3863ed15342d3757809893421c077b183d8adc15e5c7de3b"
+    },
+    "tools-build": {
+      "path": "/tmp/incant-assets-render-union-tools-build.log",
+      "sha256": "792f6efee76d7ed527611f396d3da0e04f60a36c3c68fa8a792162e88425b58d"
+    },
+    "shipping": {
+      "path": "/tmp/incant-assets-render-union-shipping.log",
+      "sha256": "ecfc26360b36f2031b0c8cd7db735ee6a82e1e6e68c18b3f20f2a770316585eb"
+    },
+    "clippy-ci": {
+      "path": "/tmp/incant-assets-render-union-clippy-ci.log",
+      "sha256": "70eeb98cb8b13c214c0495c3463c330b6a0bd13ebb515d994102c8d7074c74e3"
+    },
+    "clippy-dev": {
+      "path": "/tmp/incant-assets-render-union-clippy-dev.log",
+      "sha256": "d67573b746d9ae93ce3c28a7d219da17a068b906d4df5e771d77c8dc5d373d7a"
+    },
+    "window-clippy": {
+      "path": "/tmp/incant-assets-render-union-window-clippy.log",
+      "sha256": "5208e270c6c57cd844b348f4976be8ff02526ef70c2cc762777fc0ba8b61d0a0"
+    },
+    "window-tests": {
+      "path": "/tmp/incant-assets-render-union-window-tests.log",
+      "sha256": "8a862fb912e04dfd1a33a3d10b1bf1bcf1a9897bb9e0af149561493b8fcc2f02"
+    },
+    "web-build": {
+      "path": "/tmp/incant-assets-render-union-web-build.log",
+      "sha256": "2516d1b0bbed60ea83faa9f0227002e5c9edff35a2b4b643ba2a1ea4265dc107"
+    },
+    "web-clippy": {
+      "path": "/tmp/incant-assets-render-union-web-clippy.log",
+      "sha256": "4d67ea7e1f2904cde2dd9480e47402ce70a4437411ff3a319f38933b1429da83"
+    },
+    "fmt": {
+      "path": "/tmp/incant-assets-render-union-fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tools": {
+      "path": "/tmp/incant-assets-render-union-tools.log",
+      "sha256": "ce223033889136b1c5cf68347a0cb4c6af9ab9da27d39930e8dc40a0c105cb2b"
+    },
+    "ui": {
+      "path": "/tmp/incant-assets-render-union-ui.log",
+      "sha256": "656ec6a3df19c725eef62b9438c48e9110894967b7d86ed38372fd802dfd98f3"
+    },
+    "ui-build": {
+      "path": "/tmp/incant-assets-render-union-ui-build.log",
+      "sha256": "bec3f6e06023ff033f2db3114138f74580f13e5c71306d576a495f242215ba21"
+    },
+    "conventions": {
+      "path": "/tmp/incant-assets-render-union-conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "bridge": {
+      "path": "/tmp/incant-assets-render-union-bridge.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "actionlint": {
+      "path": "/tmp/incant-assets-render-union-actionlint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "graph": {
+      "path": "/tmp/incant-assets-render-union-graph.log",
+      "sha256": "577d9b26eb59849d6d625edd30d43e1480ef9855aa1e1c64da6f9e7ddbe1531e"
+    },
+    "fbx-cli": {
+      "path": "/tmp/incant-assets-render-union-fbx-cli.log",
+      "sha256": "fa506d1af63b1d7b48680f54ad21e835f63e0e319be0d2703f052dee9969df9f"
+    },
+    "browser": {
+      "path": "/tmp/incant-assets-render-union-browser.log",
+      "sha256": "75adb7b84ed522e4fd33ad6a4b9ffc1b0330a35cd6f71a7f6c86a80409056025"
+    },
+    "wasm-graph": {
+      "path": "/tmp/incant-assets-render-union-wasm-graph.log",
+      "sha256": "dff1b1e96845347a6dbb25cd9caaf4218e808412230f0c2d4dfd62e40e0de57c"
+    },
+    "sdk": {
+      "path": "/tmp/incant-assets-render-union-sdk.log",
+      "sha256": "d99e730f3fa7ce96a929aee1bb21bf07f3ad6e45c94d7a985fe264a3af128aa1"
+    }
+  },
+  "limitations": [
+    "Local verification does not replace final-head hosted checks or real-device/phone gates.",
+    "No live native-window interaction or device audio is added by this proof; GPU submission is offscreen.",
+    "FBX remains a bounded static subset; browser model-source cooking explicitly refuses unavailable encoders.",
+    "Existing immutable cooked versions retain old generated tangents until explicit source-backed reimport/recook.",
+    "The independent OPAQUE/emissive/environment alpha-weighted mip defect is open in this union and tracked in a separate local implementation.",
+    "Flipbook SDK/save completeness, export and whole-engine/game completion remain open.",
+    "No timing comparison or performance gate claim; independent CPU work could overlap these correctness checks.",
+    "The helper tests use the original frozen0040 review context. The CLI helper is unchanged except selecting the integrated target/ci binary instead of target/release in a temporary copy."
+  ]
+}
