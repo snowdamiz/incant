@@ -6,7 +6,7 @@ use crate::{
 use incant_audio_runtime::{AudioManagerSettings, ClipBinding, SceneAudio, SourceState};
 use incant_input::{InputActions, InputEvent, InputFrame};
 use incant_runtime::{CookedScene, NativeWorld, StableId};
-use incant_script::CompiledScript;
+use incant_script::SessionProgram;
 use kira::backend::Backend;
 use std::{error::Error, fmt::Debug};
 
@@ -42,7 +42,7 @@ where
 {
     pub fn new(
         scene: CookedScene,
-        script: CompiledScript,
+        program: impl Into<SessionProgram>,
         actions: InputActions,
         clips: Vec<ClipBinding>,
         audio_settings: AudioManagerSettings<B>,
@@ -51,7 +51,7 @@ where
         Ok(Self {
             core: Core::prepare(
                 scene,
-                script,
+                program,
                 actions,
                 |world| {
                     H::prepare(world, host_settings)
@@ -97,7 +97,7 @@ pub struct HostedOfflineGameSession<H: SceneHost> {
 impl<H: SceneHost> HostedOfflineGameSession<H> {
     pub fn new(
         scene: CookedScene,
-        script: CompiledScript,
+        program: impl Into<SessionProgram>,
         actions: InputActions,
         clips: Vec<ClipBinding>,
         sample_rate: u32,
@@ -108,7 +108,7 @@ impl<H: SceneHost> HostedOfflineGameSession<H> {
             inner: OfflineCore {
                 core: Core::prepare(
                     scene,
-                    script,
+                    program,
                     actions,
                     |world| {
                         H::prepare(world, host_settings)

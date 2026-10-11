@@ -1,9 +1,18 @@
 use super::*;
-use crate::tests::{check, id};
+use crate::CompiledScript;
+use crate::tests::{check as check_script, id};
 use incant_input::*;
 use incant_runtime::{CookedEntity, CookedScene};
 use incant_types::{Transform, Velocity};
 use serde_json::json;
+
+fn check(vm: &SessionVm, source: &str) {
+    match vm {
+        SessionVm::Bytecode(host) => check_script(host, source),
+        #[cfg(feature = "static-module")]
+        SessionVm::Static(_) => panic!("this regression expects a bytecode session"),
+    }
+}
 
 fn scene(rate: u32) -> CookedScene {
     CookedScene::new(

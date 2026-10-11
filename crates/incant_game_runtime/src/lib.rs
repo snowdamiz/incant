@@ -14,7 +14,7 @@ use incant_audio_runtime::{
 };
 use incant_input::{InputActions, InputEvent, InputFrame};
 use incant_runtime::{CookedScene, NativeWorld, StableId};
-use incant_script::{CompiledScript, SessionError};
+use incant_script::{SessionError, SessionProgram};
 use kira::backend::Backend;
 pub use offline::OfflineGameSession;
 use std::{convert::Infallible, fmt::Debug};
@@ -60,7 +60,7 @@ where
 {
     pub fn new(
         scene: CookedScene,
-        script: CompiledScript,
+        program: impl Into<SessionProgram>,
         actions: InputActions,
         clips: Vec<ClipBinding>,
         settings: AudioManagerSettings<B>,
@@ -69,7 +69,7 @@ where
         Ok(Self {
             core: Core::prepare(
                 scene,
-                script,
+                program,
                 actions,
                 |_| Ok(NoHost),
                 |world| SceneAudio::new(world, clips, settings),
