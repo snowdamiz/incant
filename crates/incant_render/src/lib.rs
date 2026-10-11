@@ -3,6 +3,9 @@
 //! Authored clustered lights; the full production render graph remains open.
 mod camera;
 mod diagnostic_draw;
+#[cfg(test)]
+#[path = "../tests/diagnostic_output/mod.rs"]
+mod diagnostic_output;
 mod environment;
 mod frame;
 mod geometry_shader;
