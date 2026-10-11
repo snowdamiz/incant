@@ -66,5 +66,24 @@ formatting and generated conventions pass. These local tests execute macOS,
 not MSVC. Integrated source/proof identities and actual hosted results will be
 recorded separately before claiming the Windows gap is closed.
 
+## Runtime integration check
+
+The follow-up was applied to PR62's exact `d8d00c3` source as `fa408d0`; only the
+status ledger needed reconciliation. The combined helper passes 25 tests,
+Clippy and three real development guest processes on that union. All 44 tool
+tests and the six-root authoring dependency guard pass.
+
+`python3 tools/probes/shipping-wasm2c.py /tmp/incant-wasm2c-msvc-union-shipping --rustup /opt/homebrew/bin/rustup`
+passes on macOS arm64 at `fa408d0`, with three exact-motion processes and 18
+refusals after temporary source/Wasm/C/tool/build deletion. The executable is
+2,797,360 bytes, SHA-256
+`b75544b640fde6396fc458b98420fb60398a578092c5153d4a75de85ef38fb29`,
+with separately packaged arm64 dSYM UUID
+`f856c2c3-89a3-3d44-a28c-2d2da79c456d`. The
+[local evidence](evidence/wasm2c-msvc-local-2026-10-10.json) records the exact
+commit, sources, logs and report. This is regression evidence for the existing
+macOS path after integrating the runtime; it does not execute either MSVC
+configuration. Hosted Windows and optimized candidate acceptance remain pending.
+
 No phone performance, distribution signing, full SDK/export migration,
 arbitrary-source build service or phase gate is claimed.
