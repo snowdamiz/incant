@@ -20,6 +20,7 @@ export const KNOWN_CAPABILITIES = [
   'agent.send',
   'agent.cancel',
   'agent.approve',
+  'agent.budget.set',
   'viewport.bounds',
   'play.control',
   'play.inspect',
@@ -382,6 +383,8 @@ export interface BridgeSnapshot {
   readonly console: readonly ConsoleEntry[];
   readonly provider: ProviderState;
   readonly agent: AgentState;
+  /** User-authored project cap. Usage remains in the native session ledger. */
+  readonly projectAgentBudget?: { readonly maxTokens: number };
   /** Optional for older/fixture hosts. Snake-case fields mirror the native session exactly. */
   readonly agentSession?: AgentSessionSnapshot;
   /** A transport/protocol failure, separate from the turn's native terminal failure. */
@@ -398,6 +401,7 @@ export type EditorCommand =
   | { readonly type: 'entity.rename'; readonly entity: Ulid; readonly name: string }
   | { readonly type: 'entity.delete'; readonly entity: Ulid }
   | { readonly type: 'asset.import'; readonly sources: readonly AssetImportRequest[] }
+  | { readonly type: 'agent.budget.set'; readonly maxTokens: number }
   | { readonly type: 'history.undo' }
   | { readonly type: 'history.redo' };
 

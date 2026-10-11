@@ -32,6 +32,7 @@ type Entity = {
 type Project = {
   id: string;
   name: string;
+  settings?: unknown;
   assets?: Record<string, ProjectSchema.Asset>;
   scenes: Record<
     string,
@@ -65,6 +66,8 @@ export interface EngineRead {
   viewport_error: string | null;
   source_diagnostics?: { asset_id: string; source: string; message: string }[];
   asset_import?: { available: boolean; reason?: string };
+  /** Explicitly present only on hosts with the durable budget adapter. */
+  agent_budget?: { available: boolean };
 }
 export type EngineResponse = EngineRead
   | { status: "loading" }
@@ -190,6 +193,7 @@ export function snapshotFromEngine(read: EngineResponse): BridgeSnapshot {
         : { status: "not-attached", reason: "Loading project." },
     };
   }
+  const budget = projectAgentBudget(read);
   const nodes: Record<string, HierarchyNode> = {};
   const entities: Record<string, EntityDetail> = {};
   const roots: Ulid[] = [];
@@ -267,12 +271,15 @@ export function snapshotFromEngine(read: EngineResponse): BridgeSnapshot {
     hierarchy: { status: "ready", value: { roots, nodes } },
     schemas,
     entities,
+    ...(budget.status === 'ready' ? { projectAgentBudget: { maxTokens: budget.maxTokens } } : {}),
     ...(read.project.assets ? { assets: { status: 'ready' as const, value: Object.values(read.project.assets).map((asset) => ({
       id: id(asset.id), name: asset.name, path: asset.path, kind: asset.kind, fingerprint: asset.sha256,
       ...(asset.import_settings?.type === 'texture' ? { textureUsage: asset.import_settings.usage } : {}),
     })) } } : {}),
     assetImport: read.asset_import ?? { available: false, reason: 'This host does not expose asset importing.' },
     diagnostics: [
+      ...(budget.status === 'error' ? [{ id: 'agent-budget', severity: 'error' as const,
+        message: budget.error.message, entity: null, component: null, path: 'settings.agent_budget' }] : []),
       ...(read.viewport_error ? [{ id: 'native-viewport', severity: 'error' as const,
         message: read.viewport_error, entity: null, component: null, path: null }] : []),
       ...(read.source_diagnostics ?? []).map((issue) => ({
@@ -339,6 +346,47 @@ function fields(value: unknown, keys: readonly string[]): value is Record<string
     && (Object.getPrototypeOf(value) === Object.prototype || Object.getPrototypeOf(value) === null)
     && Object.keys(value).length === keys.length && keys.every(key => Object.hasOwn(value, key));
 }
+
+type ProjectAgentBudget = { status: 'unsupported' } | { status: 'ready'; maxTokens: number }
+  | { status: 'error'; error: BridgeError };
+const budgetInvalidResponse = (): BridgeError => ({ code: 'engine.invalid-response', message: 'The native project agent token cap is invalid. Refresh the project to retry.' });
+function record(value: unknown): value is Record<string, unknown> {
+  return value !== null && typeof value === 'object' && !Array.isArray(value)
+    && (Object.getPrototypeOf(value) === Object.prototype || Object.getPrototypeOf(value) === null);
+}
+/** Defaults require both the real host adapter and its published document schema. */
+function projectAgentBudget(read: EngineRead): ProjectAgentBudget {
+  if (!Object.hasOwn(read, 'agent_budget')) return { status: 'unsupported' };
+  const invalid = (): ProjectAgentBudget => ({ status: 'error', error: budgetInvalidResponse() });
+  if (!fields(read.agent_budget, ['available']) || typeof read.agent_budget.available !== 'boolean') return invalid();
+  if (!read.agent_budget.available) return { status: 'unsupported' };
+  const schema = read.schemas.Project;
+  const defs = schema?.$defs;
+  const settingsSchema = defs?.ProjectSettings;
+  const budgetSchema = defs?.AgentBudgetSettings;
+  if (!record(settingsSchema) || settingsSchema.type !== 'object' || !record(settingsSchema.properties)
+    || schema?.properties?.settings?.$ref !== '#/$defs/ProjectSettings'
+    || !record(budgetSchema) || budgetSchema.type !== 'object' || budgetSchema.additionalProperties !== false
+    || !Array.isArray(budgetSchema.required) || !budgetSchema.required.includes('max_tokens') || !record(budgetSchema.properties)) return invalid();
+  const budgetProperty = settingsSchema.properties.agent_budget;
+  const capSchema = budgetSchema.properties.max_tokens;
+  if (!record(budgetProperty) || budgetProperty.$ref !== '#/$defs/AgentBudgetSettings'
+    || !fields(budgetProperty.default, ['max_tokens']) || budgetProperty.default.max_tokens !== 1_000_000
+    || !record(capSchema) || capSchema.type !== 'integer' || capSchema.minimum !== 0
+    || capSchema.maximum !== Number.MAX_SAFE_INTEGER) return invalid();
+  const settings = read.project.settings;
+  if (!record(settings) || !count(settings.tick_rate) || settings.tick_rate > 4_294_967_295
+    || Object.keys(settings).some(key => !Object.hasOwn(settingsSchema.properties as object, key))) return invalid();
+  const budget = Object.hasOwn(settings, 'agent_budget') ? settings.agent_budget : budgetProperty.default;
+  if (!fields(budget, ['max_tokens']) || !count(budget.max_tokens)) return invalid();
+  return { status: 'ready', maxTokens: budget.max_tokens };
+}
+function budgetScope(read: EngineRead | undefined): string {
+  if (!read) return 'unavailable';
+  const budget = projectAgentBudget(read);
+  return `${read.project.id}:${budget.status}:${budget.status === 'ready' ? budget.maxTokens : ''}`;
+}
+
 function validAgentRequest(value: unknown): value is AgentTurnRequest {
   return fields(value, ['prompt', 'model', 'approval']) && boundedText(value.prompt, 16 * 1024)
     && value.prompt.trim().length > 0 && boundedText(value.model) && value.model.trim().length > 0
@@ -458,7 +506,7 @@ function samePlayStatus(previous: PlayStatus, next: PlayStatus): boolean {
 }
 export class NativeBridge implements EditorBridge {
   readonly protocolVersion = 1;
-  readonly capabilities = [
+  private readonly nativeCapabilities = [
     "entity.rename",
     "entity.delete",
     "asset.import",
@@ -480,6 +528,10 @@ export class NativeBridge implements EditorBridge {
     "window.maximize",
     "window.close",
   ];
+  get capabilities(): readonly string[] {
+    return this.read && projectAgentBudget(this.read).status === 'ready'
+      ? [...this.nativeCapabilities, 'agent.budget.set'] : this.nativeCapabilities;
+  }
   readonly label = "Native engine";
   readonly isFixture = false;
   private read: EngineRead | undefined;
@@ -499,6 +551,7 @@ export class NativeBridge implements EditorBridge {
   private providerReadPending: { generation: number; sequence: number } | undefined;
   private agentSession: AgentSessionSnapshot | undefined;
   private agentVerified = false;
+  private agentBudgetPending = false;
   private agentError: BridgeError | undefined;
   private agentGeneration = 0;
   private agentRead: { generation: number; promise: Promise<void> } | undefined;
@@ -532,12 +585,16 @@ export class NativeBridge implements EditorBridge {
     // A render/status event can read while a command is still in flight. Its
     // older document must not replace the command's newer revision on arrival.
     if (isReady(read) && this.read && read.project.id === this.read.project.id && read.revision < this.read.revision) return;
-    this.read = isReady(read) ? freeze(read) : undefined;
+    const next = isReady(read) ? freeze(read) : undefined;
+    const scopeChanged = budgetScope(this.read) !== budgetScope(next);
+    if (scopeChanged) { ++this.agentGeneration; this.agentVerified = false; }
+    this.read = next;
     const snapshot = { ...snapshotFromEngine(read), provider: this.provider, ...this.agentFields(), ...(this.play ? { play: this.play } : {}), ...(this.playError ? { playError: this.playError } : {}) };
     this.snapshot = freeze(
       this.chrome ? { ...snapshot, window: this.chrome } : snapshot,
     );
     this.listeners.forEach((fn) => fn());
+    if (scopeChanged && !this.agentBudgetPending && (this.agentSession || this.agentPolling)) void this.refreshAgent();
   }
   updateWindow(chrome: WindowChrome) {
     this.chrome = freeze(chrome);
@@ -615,14 +672,14 @@ export class NativeBridge implements EditorBridge {
     }
     await this.start();
   }
-  async start() {
+  async start(safeErrors = false) {
     const request = ++this.refreshId;
     try {
       const read = await this.invoke<EngineResponse>("engine_read");
       if (request === this.refreshId) this.publish(read);
     } catch (error) {
       if (request !== this.refreshId) return;
-      const result = failure(error);
+      const result = failure(safeErrors && typeof error === 'string' ? undefined : error);
       if (!result.ok) this.publish({ status: "error", error: result.error });
     }
   }
@@ -633,13 +690,18 @@ export class NativeBridge implements EditorBridge {
   private providerIsPending() {
     return this.providerPending > 0 || this.providerReadPending?.generation === this.providerGeneration;
   }
+  private agentBudgetReady(): boolean {
+    if (this.agentBudgetPending) return false;
+    const budget: ProjectAgentBudget = this.read ? projectAgentBudget(this.read) : { status: 'unsupported' };
+    return budget.status === 'unsupported' || budget.status === 'ready' && budget.maxTokens === this.agentSession?.budget.max_tokens;
+  }
   private agentState(): AgentState {
     if (this.agentNeedsPoll()) return { status: 'running', conversation: String(this.agentReserved ?? this.agentSession?.turns.at(-1)?.id ?? 'starting') };
     if (!this.read) return { status: 'unavailable', reason: 'Wait for the project to load.' };
     if (this.providerIsPending() || this.provider.status !== 'connected') return { status: 'unavailable', reason: 'Connect an OpenAI account to use the agent.' };
     if (this.agentError) return { status: 'unavailable', reason: this.agentError.message };
     if (!this.agentSession) return { status: 'unavailable', reason: 'The native agent session has not been read yet.' };
-    if (!this.agentVerified) return { status: 'unavailable', reason: 'Refresh the native agent session after the account change.' };
+    if (!this.agentVerified || !this.agentBudgetReady()) return { status: 'unavailable', reason: 'Refresh the native agent session after account or project settings changes.' };
     if (this.agentSession.budget.used_tokens >= this.agentSession.budget.max_tokens) return { status: 'unavailable', reason: 'The native agent session token allowance is exhausted.' };
     return { status: 'idle' };
   }
@@ -692,14 +754,21 @@ export class NativeBridge implements EditorBridge {
       }
       if (this.agentReserved !== undefined && this.agentSession!.turns.at(-1)?.id !== undefined
         && this.agentSession!.turns.at(-1)!.id >= this.agentReserved) this.agentReserved = undefined;
-      const verified = !this.providerIsPending();
+      const projectChanged = response.project_revision !== null && this.read !== undefined && response.project_revision > this.read.revision;
+      // A new revision may carry a cap edit. Do not reopen admission against a cached document.
+      const verified = !this.providerIsPending() && this.agentBudgetReady() && !projectChanged;
       const changed = this.agentError !== undefined || updated || this.agentVerified !== verified;
       this.agentVerified = verified;
       this.agentError = undefined;
       if (changed) this.publishAgent();
       // Text chunks and unchanged versions never clone/re-read the project.
       // A newer project read already covers an older revision observed by this poll.
-      if (response.project_revision !== null && this.read && response.project_revision > this.read.revision) await this.start();
+      if (projectChanged) {
+        await this.start(true);
+        if (generation !== this.agentGeneration) return;
+        const recovered = !this.providerIsPending() && this.agentBudgetReady();
+        if (this.agentVerified !== recovered) { this.agentVerified = recovered; this.publishAgent(); }
+      }
     } catch (error) {
       if (generation !== this.agentGeneration) return;
       this.agentVerified = false;
@@ -721,7 +790,7 @@ export class NativeBridge implements EditorBridge {
     const current = this.agentSession?.turns.at(-1);
     if (request.type === 'agent.send') {
       if (this.agentNeedsPoll()) return reject('agent.busy', 'Wait for the current agent worker to stop.');
-      if (!this.read || !this.agentSession || !this.agentVerified || this.agentError || this.providerIsPending() || this.provider.status !== 'connected') {
+      if (!this.read || !this.agentSession || !this.agentVerified || !this.agentBudgetReady() || this.agentError || this.providerIsPending() || this.provider.status !== 'connected') {
         const state = this.agentState();
         return reject('agent.unavailable', state.status === 'unavailable' ? state.reason : 'The native agent is unavailable.');
       }
@@ -751,7 +820,7 @@ export class NativeBridge implements EditorBridge {
       if (current?.status === 'stopping' || this.agentCancelling.has(request.turnId)) return reject('agent.busy', 'This agent turn is already stopping.');
       this.agentCancelling.add(request.turnId);
     } else {
-      if (!this.read || this.providerIsPending() || this.provider.status !== 'connected' || this.agentError || !this.agentSession || !this.agentVerified)
+      if (!this.read || this.providerIsPending() || this.provider.status !== 'connected' || this.agentError || !this.agentSession || !this.agentVerified || !this.agentBudgetReady())
         return reject('agent.unavailable', 'Connect an OpenAI account and refresh the native session before deciding an approval.');
       if (!sequence(request.approvalId) || typeof request.approved !== 'boolean' || current?.status !== 'awaiting_approval'
         || current.pending?.turn !== request.turnId || current.pending.id !== request.approvalId
@@ -855,6 +924,9 @@ export class NativeBridge implements EditorBridge {
     }
   }
   async dispatch(command: EditorCommand): Promise<BridgeResult> {
+    const budgetEdit = command.type === 'agent.budget.set';
+    if (budgetEdit && !count(command.maxTokens)) return { ok: false, error: { code: 'schema.invalid', message: 'Enter a nonnegative safe integer for the project agent token cap.' } };
+    if (budgetEdit && !this.capabilities.includes('agent.budget.set')) return { ok: false, error: { code: 'unsupported', message: 'This host does not expose project agent token cap editing.' } };
     const importing = command.type === 'asset.import';
     if (!this.read || this.pending || (importing && this.importing))
       return {
@@ -866,6 +938,15 @@ export class NativeBridge implements EditorBridge {
       };
     // Cooking owns a snapshot, so normal edits/history may continue. A changed
     // revision rejects the import at commit rather than locking the user out.
+    const recoverBudget = budgetEdit || (command.type === 'history.undo' || command.type === 'history.redo')
+      && projectAgentBudget(this.read).status !== 'unsupported';
+    const previous = this.read;
+    if (recoverBudget) {
+      this.agentBudgetPending = true;
+      ++this.agentGeneration;
+      this.agentVerified = false;
+      this.publishAgent();
+    }
     if (importing) this.importing = true;
     else this.pending = true;
     try {
@@ -884,6 +965,12 @@ export class NativeBridge implements EditorBridge {
           revision: imported.commit.revision,
           transaction: imported.commit.transaction === null ? null : id(imported.commit.transaction),
         } };
+      } else if (command.type === 'agent.budget.set') {
+        read = await this.invoke<EngineRead>('engine_execute', {
+          commands: [{ op: 'set_agent_budget', settings: { max_tokens: command.maxTokens } }],
+          description: 'Set project agent token cap',
+          expectedRevision: previous.revision,
+        });
       } else if (command.type === "history.undo" || command.type === "history.redo") {
         read = await this.invoke<EngineRead>("engine_history", {
           redo: command.type === "history.redo",
@@ -923,14 +1010,30 @@ export class NativeBridge implements EditorBridge {
           expectedRevision: this.read.revision,
         });
       }
+      if (recoverBudget) {
+        if (!isReady(read) || !count(read.revision) || !record(read.project) || projectAgentBudget(read).status !== 'ready') throw budgetInvalidResponse();
+        const cap = projectAgentBudget(read);
+        if (budgetEdit && cap.status === 'ready' && cap.maxTokens !== command.maxTokens
+          || read.project.id !== previous.project.id || read.revision < previous.revision
+          || this.read && read.project.id === this.read.project.id && read.revision < this.read.revision) {
+          throw { code: 'engine.stale', message: 'The project changed while updating its agent token cap. Refresh and retry.' };
+        }
+      }
       this.publish(read);
       return result;
     } catch (error) {
-      await this.start();
-      return failure(error);
+      await this.start(recoverBudget);
+      return failure(recoverBudget && typeof error === 'string' ? undefined : error);
     } finally {
       if (importing) this.importing = false;
       else this.pending = false;
+      if (recoverBudget) {
+        this.agentBudgetPending = false;
+        ++this.agentGeneration;
+        this.agentVerified = false;
+        this.publishAgent();
+        await this.refreshAgent();
+      }
     }
   }
   async request(request: HostRequest): Promise<BridgeResult> {

@@ -60,6 +60,7 @@ const CAPABILITY_LABELS: Record<Capability, string> = {
   'provider.switch': 'Switch account',
   'agent.send': 'Send to agent',
   'agent.cancel': 'Stop agent',
+  'agent.budget.set': 'Set project agent token cap',
   'agent.approve': 'Decide agent approval',
   'viewport.bounds': 'Viewport placement',
   'play.control': 'Native Play',
