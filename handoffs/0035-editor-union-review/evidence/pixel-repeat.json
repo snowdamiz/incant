@@ -1,0 +1,329 @@
+{
+  "generated": "2026-10-11T00:06:30.260Z",
+  "baselineDir": "./artifacts/0033-editor-design-review/u35-sweep",
+  "candidateDir": "./artifacts/0033-editor-design-review/u35-repeat",
+  "compared": 20,
+  "identical": 16,
+  "results": [
+    {
+      "name": "dock-paged-problems-minimum-1000x650-agent.png",
+      "sameSize": true,
+      "size": [
+        560,
+        74
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "dock-paged-problems-minimum-1000x650-inspector.png",
+      "sameSize": true,
+      "size": [
+        560,
+        1090
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "dock-paged-problems-minimum-1000x650-side.png",
+      "sameSize": true,
+      "size": [
+        560,
+        1164
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "dock-paged-problems-minimum-1000x650.png",
+      "sameSize": true,
+      "size": [
+        2000,
+        1300
+      ],
+      "differing": 22,
+      "box": [
+        1071,
+        66,
+        1827,
+        1213
+      ],
+      "clusters": [
+        {
+          "at": "1792,1184",
+          "count": 8
+        },
+        {
+          "at": "1824,1184",
+          "count": 8
+        },
+        {
+          "at": "1088,64",
+          "count": 1
+        },
+        {
+          "at": "1152,64",
+          "count": 1
+        },
+        {
+          "at": "1056,992",
+          "count": 1
+        },
+        {
+          "at": "1344,992",
+          "count": 1
+        },
+        {
+          "at": "1056,1024",
+          "count": 1
+        },
+        {
+          "at": "1344,1024",
+          "count": 1
+        }
+      ],
+      "mask": "dock-paged-problems-minimum-1000x650-diff.png"
+    },
+    {
+      "name": "dock-paged-problems-normal-1440x874-agent.png",
+      "sameSize": true,
+      "size": [
+        720,
+        136
+      ],
+      "differing": 16,
+      "box": [
+        536,
+        32,
+        547,
+        43
+      ],
+      "clusters": [
+        {
+          "at": "512,32",
+          "count": 8
+        },
+        {
+          "at": "544,32",
+          "count": 8
+        }
+      ],
+      "mask": "dock-paged-problems-normal-1440x874-agent-diff.png"
+    },
+    {
+      "name": "dock-paged-problems-normal-1440x874-inspector.png",
+      "sameSize": true,
+      "size": [
+        720,
+        1476
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "dock-paged-problems-normal-1440x874-side.png",
+      "sameSize": true,
+      "size": [
+        720,
+        1612
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "dock-paged-problems-normal-1440x874.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1748
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "no-selection-minimum-1000x650-agent.png",
+      "sameSize": true,
+      "size": [
+        560,
+        74
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "no-selection-minimum-1000x650-inspector.png",
+      "sameSize": true,
+      "size": [
+        560,
+        1090
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "no-selection-minimum-1000x650-side.png",
+      "sameSize": true,
+      "size": [
+        560,
+        1164
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "no-selection-minimum-1000x650.png",
+      "sameSize": true,
+      "size": [
+        2000,
+        1300
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "no-selection-normal-1440x874-agent.png",
+      "sameSize": true,
+      "size": [
+        720,
+        204
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "no-selection-normal-1440x874-inspector.png",
+      "sameSize": true,
+      "size": [
+        720,
+        1408
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "no-selection-normal-1440x874-side.png",
+      "sameSize": true,
+      "size": [
+        720,
+        1612
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "no-selection-normal-1440x874.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1748
+      ],
+      "differing": 7,
+      "box": [
+        516,
+        1310,
+        2678,
+        1524
+      ],
+      "clusters": [
+        {
+          "at": "1056,1344",
+          "count": 2
+        },
+        {
+          "at": "512,1280",
+          "count": 1
+        },
+        {
+          "at": "928,1280",
+          "count": 1
+        },
+        {
+          "at": "512,1312",
+          "count": 1
+        },
+        {
+          "at": "928,1312",
+          "count": 1
+        },
+        {
+          "at": "2656,1504",
+          "count": 1
+        }
+      ],
+      "mask": "no-selection-normal-1440x874-diff.png"
+    },
+    {
+      "name": "no-selection-wide-1920x1080-agent.png",
+      "sameSize": true,
+      "size": [
+        840,
+        204
+      ],
+      "differing": 16,
+      "box": [
+        638,
+        32,
+        649,
+        43
+      ],
+      "clusters": [
+        {
+          "at": "640,32",
+          "count": 12
+        },
+        {
+          "at": "608,32",
+          "count": 4
+        }
+      ],
+      "mask": "no-selection-wide-1920x1080-agent-diff.png"
+    },
+    {
+      "name": "no-selection-wide-1920x1080-inspector.png",
+      "sameSize": true,
+      "size": [
+        840,
+        1820
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "no-selection-wide-1920x1080-side.png",
+      "sameSize": true,
+      "size": [
+        840,
+        2024
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "no-selection-wide-1920x1080.png",
+      "sameSize": true,
+      "size": [
+        3840,
+        2160
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    }
+  ]
+}

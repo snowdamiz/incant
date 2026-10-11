@@ -1,5 +1,22 @@
 # Implementation status
 
+- Final plain editor + sprite/atlas union: reviewed presentation65e1717 and
+  completion-focus28e5491 pass524 UI tests, strict typecheck/build,40 tools tests
+  and the final native custom-protocol build. The inherited451 ordinary/56 GPU
+  Rust baseline and all17 corrected sprite hosted checks remain recorded with
+  exact source limits. Combined hosted checks and isolated native Claude review
+  are pending. [Release evidence](docs/spikes/editor-release-union.md).
+
+- The sprite/atlas publication union now includes the reviewed native runtime and
+  Tauri stack. Local checks pass: 451 ordinary Rust tests, all 56 GPU tests,
+  release Clippy, 420 UI tests, 38 tool tests, generated schemas/SDK, and the four
+  public atlas/sprite/camera probes. Those saved workflows are still legacy Play;
+  native 2D migration, known sampling/placement limits, native editor acceptance
+  and device/performance gates remain open. Hosted Linux/Windows check defects
+  now have scoped probe/test corrections; the replacement matrix is pending.
+  [Portability evidence](docs/spikes/sprite-atlases.md#hosted-probe-portability-corrections-2026-10-10).
+  [Exact union evidence](docs/spikes/evidence/sprite-atlas-publication-union-2026-10-10.json).
+
 Source: [PLAN.md](PLAN.md), revision 7 (2026-10-10) with director decisions; every open decision is resolved in its section 12. Current phase:
 **1, in progress**. The complete engine/game release is not implemented.
 On 2026-10-08 the director authorized beginning Phase 1 while keeping the open

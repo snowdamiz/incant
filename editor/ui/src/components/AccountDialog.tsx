@@ -53,7 +53,7 @@ export function AccountDialog() {
   const [failure, setFailure] = useState<BridgeError | null>(null);
   const [confirmingSignOut, setConfirmingSignOut] = useState(false);
 
-  const stateKey = provider ? `${provider.status}:${provider.status === 'connecting' ? (provider.phase ?? '') : ''}` : 'none';
+  const stateKey = provider ? `${provider.status}:${provider.status === 'connecting' ? (provider.phase ?? '') : ''}:${provider.activeAccount ?? ''}` : 'none';
   // A new host state supersedes an earlier request failure and any pending sign-out question.
   useEffect(() => {
     setFailure(null);

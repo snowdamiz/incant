@@ -1,0 +1,20 @@
+{
+  "generated": "2026-10-11T00:51:10.753Z",
+  "baselineDir": "./handoffs/0035-editor-union-review/screenshots/account",
+  "candidateDir": "./artifacts/0035-editor-union-review/f1",
+  "compared": 1,
+  "identical": 1,
+  "results": [
+    {
+      "name": "probe-account-normal-1440x874--question.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1748
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    }
+  ]
+}
