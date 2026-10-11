@@ -79,13 +79,31 @@ def cargo_messages(path):
             if line.startswith('{')]
 
 
+def runtime_symbol_audit(executable, kind, llvm_bin, link_map):
+    # Linked PE images normally have no COFF symbol table. The fresh final-link
+    # map provides defined symbols; matched PE/PDB packaging remains independent.
+    if kind == 'pdb':
+        payload = read(link_map, 64 * 1024**2)
+        symbols = payload.decode('utf-8')
+        evidence = {'source': 'fresh MSVC linker map', 'file': link_map.name,
+                    'sha256': sha256(payload)}
+    else:
+        symbols = execute([llvm_bin / 'llvm-nm', '--defined-only', '--demangle', executable]).stdout
+        evidence = {'source': 'llvm-nm defined symbols', 'sha256': sha256(symbols.encode('utf-8'))}
+    require('JS_ReadObject' in symbols and 'JS_EvalFunction' in symbols, 'Missing bytecode runtime')
+    require(not any(name in symbols for name in ('JS_AddIntrinsicEval', '__JS_EvalInternal', 'js_parse_program',
+                                                 'js_parse_function_decl', 'incant_script::compiler'))
+            # MSVC maps retain Rust mangling rather than llvm-nm's demangled text.
+            and not re.search(r'incant_script[0-9]+compiler', symbols), 'Source compiler linked')
+    return evidence
+
+
 def build(project, staging, storage, scene, camera, mode):
     rustc = Path(execute(['rustup', 'which', 'rustc']).stdout.strip())
     compiler = execute([rustc, '-vV']).stdout
     host = re.search(r'^host: (.+)$', compiler, re.MULTILINE).group(1)
     kind = backend(host)
     split = 'packed' if kind in ('dsym', 'pdb') else 'off'
-    suffix = '.exe' if os.name == 'nt' else ''
     llvm_bin = Path(execute([rustc, '--print', 'sysroot']).stdout.strip()) / 'lib/rustlib' / host / 'bin'
     # Ambient overrides are not an alternate export configuration. Actual target
     # rustc commands are checked below as well as this early refusal.
@@ -103,9 +121,14 @@ def build(project, staging, storage, scene, camera, mode):
     metadata = json.loads(execute([cargo, 'metadata', '--locked', '--format-version=1', '--filter-platform', host,
                                    '--features', ','.join(NAME + '/' + f for f in features.split(','))], env=env).stdout)
     graph = normal_dependencies(metadata)
-    command = [cargo, 'build', '-j2', '-p', NAME, '--features', features, '--profile', 'shipping', '--locked',
+    link_map = staging / 'player-link.map'
+    require(not link_map.exists(), 'Linker map must not preexist')
+    command = [cargo, 'rustc' if kind == 'pdb' else 'build', '-j2', '-p', NAME, '--bin', NAME,
+               '--features', features, '--profile', 'shipping', '--locked',
                '--target', host, '--target-dir', storage / 'target', '--config', f'profile.shipping.split-debuginfo="{split}"',
                '--message-format=json', '-vv']
+    if kind == 'pdb':
+        command += ['--', '-C', f'link-arg=/MAP:{link_map}']
     print(f'Compiling fresh {host} shipping player ({mode})...', flush=True)
     with (staging / 'build.log').open('w', encoding='utf-8') as stderr, (storage / 'cargo.jsonl').open('w', encoding='utf-8') as stdout:
         result = native_process.run(list(map(str, command)), cwd=ROOT, env=env, stdout=stdout, stderr=stderr, timeout=2400)
@@ -125,10 +148,7 @@ def build(project, staging, storage, scene, camera, mode):
     require(receipt['project_sha256'] == project_hash == sha256(read(project, 64 * 1024**2)), 'Project changed during build')
     require(receipt['target'] == host and receipt['startup_source_parsing'] is False, 'Project producer target/mode mismatch')
     chosen_camera = select_camera(receipt, camera, mode == 'window')
-    symbols = execute([llvm_bin / ('llvm-nm' + suffix), '--defined-only', '--demangle', executable]).stdout
-    require('JS_ReadObject' in symbols and 'JS_EvalFunction' in symbols, 'Missing bytecode runtime')
-    require(not any(name in symbols for name in ('JS_AddIntrinsicEval', '__JS_EvalInternal', 'js_parse_program',
-                                                 'js_parse_function_decl', 'incant_script::compiler')), 'Source compiler linked')
+    symbol_audit = runtime_symbol_audit(executable, kind, llvm_bin, link_map)
     player, identity = package(executable, staging, kind, llvm_bin)
     data = data_package(project.parent, producer, receipt, player.parent / 'data', chosen_camera)
     # Source maps are developer crash artifacts, never part of the runtime tree.
@@ -140,6 +160,7 @@ def build(project, staging, storage, scene, camera, mode):
     return player, {'format': 'incant-native-export', 'version': 1, 'target': host, 'mode': mode,
                     'project_sha256': project_hash, 'scene_id': receipt['scene_id'], 'camera': chosen_camera,
                     'compiler': compiler, 'codegen': flags, 'normal_dependencies': graph, 'symbols': identity,
+                    'symbol_audit': symbol_audit,
                     'player_sha256': sha256(read(player, 256 * 1024**2)), 'data': data,
                     'startup_source_parsing': False, 'signed': False,
                     'limits': ['host==target desktop only', 'existing cooked caches required',
