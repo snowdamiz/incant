@@ -1,0 +1,55 @@
+{
+  "status": "prepared; no graphics grant; approved diagnostic draw extension not added yet",
+  "required_model": "Opus 5.5",
+  "required_effort": "max",
+  "native_backend_scope": "Metal only",
+  "geometry_source": "a43dce6769477f5b320165831e7f6123711dbd59",
+  "profile": "ci",
+  "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1",
+  "geometry_manifest": {
+    "path": "/tmp/incant-geometry-acceptance-binaries-v1/manifest.json",
+    "sha256": "5f2bec61987e4bd10cf285b492029dc004148c1bf39e97e3df38892bc3f8052d"
+  },
+  "geometry_binaries": {
+    "default": {
+      "incant_render": {
+        "path": "/tmp/incant-geometry-acceptance-binaries-v1/default-incant_render",
+        "sha256": "690881805a7fb86a5aa9a809b426f1d10199fc669495671f916ab09f7848494c",
+        "bytes": 25701120
+      },
+      "model_gpu": {
+        "path": "/tmp/incant-geometry-acceptance-binaries-v1/default-model_gpu",
+        "sha256": "8e8beb89485ddd142df371e5c93cee644555c8cff7244d3356b7abc30b9fcf47",
+        "bytes": 15175800
+      }
+    },
+    "cooked-geometry": {
+      "incant_render": {
+        "path": "/tmp/incant-geometry-acceptance-binaries-v1/cooked-geometry-incant_render",
+        "sha256": "4bf7ba847bfbc24cf2cc4cd730bd08b823bad341b97bfcaa02283b754d3bf10f",
+        "bytes": 25781360
+      },
+      "model_gpu": {
+        "path": "/tmp/incant-geometry-acceptance-binaries-v1/cooked-geometry-model_gpu",
+        "sha256": "27fa070052500e8418c48255252afc5d010429d2e4810c18cd6de3445c8ab4bb",
+        "bytes": 15250744
+      }
+    }
+  },
+  "output_source": "550b5635ac04d47ea9eee2f8baacc25ae88b4652",
+  "output_pairing": {
+    "path": "/tmp/incant-output-acceptance-binaries-v1/source-pairing.json",
+    "sha256": "f4458bf11ec22c998c3aececa0abedca41a348bb609c55196d7df9b9425a43bf"
+  },
+  "output_numerical_receipt": {
+    "path": "/tmp/incant-output-numerical-acceptance-001/comparison.json",
+    "sha256": "af64a4dfb81e46f62e82f83313d6bf07de6a4cafb7caaf7b26257152efc59a49"
+  },
+  "geometry_cpu_review": {
+    "path": "/tmp/incant-cooked-geometry-root-review.json",
+    "sha256": "3acfacca03b8b331b2c82443fe8aee35d36ac6eed081ffdcd5b329b4a006a718"
+  },
+  "build_only": true,
+  "gpu_executed_for_preparation": false,
+  "commands_file": "brief.md"
+}
