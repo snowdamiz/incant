@@ -650,6 +650,61 @@ describe('native Play transport', () => {
     expect(bridge.getSnapshot().history.entries).toEqual([]);
     expect(calls.some((c) => c.name === 'engine_execute')).toBe(false);
   });
+  it.each([undefined, { available: true }])('keeps Start working for an older or ready host (%j)', async (availability) => {
+    const calls: string[] = [];
+    const current = { ...read(), ...(availability ? { play_start: availability } : {}) };
+    const bridge = new NativeBridge(async <T>(name: string) => {
+      calls.push(name);
+      return (name === 'engine_read' ? current : play()) as T;
+    });
+    await bridge.start();
+    expect(bridge.getSnapshot().playStart).toEqual(availability);
+    expect(await bridge.request({ type: 'play.start' })).toEqual({ ok: true });
+    expect(calls.filter(name => name === 'play_command')).toHaveLength(1);
+  });
+  it('refuses unavailable Start before invoking the worker, but still permits Stop', async () => {
+    const calls: string[] = [];
+    const current = { ...read(), play_start: { available: false, reason: 'Open a saved project to run Play' } };
+    const bridge = new NativeBridge(async <T>(name: string) => {
+      calls.push(name);
+      return (name === 'engine_read' ? current : play()) as T;
+    });
+    await bridge.start();
+    expect(bridge.getSnapshot().playStart).toEqual(current.play_start);
+    expect(await bridge.request({ type: 'play.start' })).toMatchObject({ ok: false, error: { message: current.play_start.reason } });
+    expect(calls).not.toContain('play_command');
+    expect(await bridge.request({ type: 'play.stop' })).toEqual({ ok: true });
+    expect(calls.filter(name => name === 'play_command')).toHaveLength(1);
+  });
+  it.each([undefined, null, [], {}, { available: 'true' }, { available: true, reason: 1 }, { available: false, reason: '' }])('refuses malformed advertised Start availability (%j)', async (availability) => {
+    const calls: string[] = [];
+    const current = { ...read(), play_start: availability } as unknown as EngineRead;
+    const bridge = new NativeBridge(async <T>(name: string) => {
+      calls.push(name);
+      return (name === 'engine_read' ? current : play()) as T;
+    });
+    await bridge.start();
+    expect(bridge.getSnapshot().playStart).toMatchObject({ available: false });
+    expect(await bridge.request({ type: 'play.start' })).toMatchObject({ ok: false, error: { message: expect.stringContaining('availability is invalid') } });
+    expect(calls).not.toContain('play_command');
+  });
+  it('rechecks the current prerequisite after a delayed Play status read', async () => {
+    let current: EngineRead = { ...read(), play_start: { available: true } };
+    let finish!: (value: PlayStatus) => void;
+    const calls: string[] = [];
+    const bridge = new NativeBridge(async <T>(name: string) => {
+      calls.push(name);
+      if (name === 'engine_read') return current as T;
+      return await new Promise<PlayStatus>(resolve => { finish = resolve; }) as T;
+    });
+    await bridge.start();
+    const starting = bridge.request({ type: 'play.start' });
+    current = { ...read(), play_start: { available: false, reason: 'Project is no longer saved' } };
+    await bridge.start();
+    finish(play());
+    expect(await starting).toMatchObject({ ok: false, error: { message: 'Project is no longer saved' } });
+    expect(calls).not.toContain('play_command');
+  });
   it('ignores delayed reads and Start replies that arrive after Stop', async () => {
     let finish!: (value: PlayStatus) => void;
     const bridge = new NativeBridge(async <T>() => await new Promise<PlayStatus>((r) => { finish = r; }) as T);

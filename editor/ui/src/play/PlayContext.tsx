@@ -116,6 +116,7 @@ export function PlayProvider({ children }: { children: ReactNode }) {
   else if (project.kind === 'none') startBlocked = 'Open a project to play.';
   else if (project.kind === 'loading') startBlocked = 'Wait for the project to open.';
   else if (project.kind === 'failed') startBlocked = 'The project could not be opened.';
+  else if (snapshot?.playStart?.available === false) startBlocked = snapshot.playStart.reason ?? 'Native Play cannot start for this project.';
   else if (scenes.length === 0) startBlocked = 'This project has no scene to play.';
   else if (state === 'preparing') startBlocked = 'Play is starting.';
   else if (state === 'stopping') startBlocked = 'The previous session is still stopping.';

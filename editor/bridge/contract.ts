@@ -392,6 +392,8 @@ export interface BridgeSnapshot {
   readonly viewport: ViewportState;
   readonly play?: PlayStatus;
   readonly playError?: BridgeError;
+  /** Host prerequisites for starting a new world; existing sessions can still stop. */
+  readonly playStart?: { readonly available: boolean; readonly reason?: string };
   /** Present only inside the native host. */
   readonly window?: WindowChrome;
 }

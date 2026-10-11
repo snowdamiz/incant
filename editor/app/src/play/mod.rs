@@ -18,6 +18,16 @@ use std::sync::{
 };
 pub use worker::Worker;
 
+const UNSAVED_PROJECT: &str = "Open a saved project to run Play";
+
+pub fn start_availability(saved: bool) -> Value {
+    if saved {
+        serde_json::json!({"available": true})
+    } else {
+        serde_json::json!({"available": false, "reason": UNSAVED_PROJECT})
+    }
+}
+
 #[derive(Clone, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Status {
@@ -230,10 +240,7 @@ fn execute(editor: &Editor, command: Action) -> Result<Value, String> {
         Ok(s.generation)
     })?;
     let result = (|| {
-        let root = editor
-            .asset_root
-            .as_deref()
-            .ok_or("Open a saved project to run Play")?;
+        let root = editor.asset_root.as_deref().ok_or(UNSAVED_PROJECT)?;
         let document = {
             let load = editor.bus.lock().map_err(|_| "Engine lock failed")?;
             let project::LoadState::Ready(bus) = &*load else {

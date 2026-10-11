@@ -29,6 +29,9 @@ Do not broaden into an unrelated redesign after the scoped review passes.
   and incant_cmd if needed, with a stationary explicit camera and a script filtered
   by its actual instances. Confirm real game geometry is visible and Stop returns
   the authoring viewport. Keep the no-camera failure fixture for notice layout.
+- Launch the same binary without a saved-project path and verify Start explains
+  the saved-project prerequisite without a failed session/notice. Reopen the saved
+  fixture and verify Start becomes available. Keep existing-session Stop usable.
 - Recheck the two0044 fixes against this build: Resume while Hierarchy/text fields
   have focus must not give the game keyboard/mouse focus; focus returns to Play
   after keyboard Dismiss, while pointer Dismiss preserves the existing focus.

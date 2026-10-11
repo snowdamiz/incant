@@ -4,7 +4,7 @@ import axe from 'axe-core';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it, vi } from 'vitest';
-import type { Invoke } from '../../../../bridge/native';
+import type { EngineRead, Invoke } from '../../../../bridge/native';
 import { NativeBridge } from '../../../../bridge/native';
 import { App } from '../../App';
 import type { EditorBridge, PlayInput } from '../../bridge/contract';
@@ -109,6 +109,48 @@ async function play(session: Session, target = 'Harbor · Player Camera') {
 }
 
 describe('native Play controls', () => {
+  it('announces an advertised unsaved prerequisite without creating a failed Play session', async () => {
+    const session = await open({
+      variant: 'single', saved: false,
+      wrap: invoke => async <T,>(name: string, args?: Record<string, unknown>) => {
+        const value = await invoke<T>(name, args);
+        return name === 'engine_read'
+          ? { ...value as EngineRead, play_start: { available: false, reason: 'Open a saved project to run Play' } } as T
+          : value;
+      },
+    });
+    expect(control('Play').getAttribute('aria-disabled')).toBe('true');
+    fireEvent.click(control('Play'));
+    await waitFor(() => expect(message()).toBe('Open a saved project to run Play'));
+    fireEvent.keyDown(document, { key: 'p', ctrlKey: true });
+    expect(ops(session)).toEqual([]);
+    expect(session.double.status().generation).toBe(0);
+    expect(stateText()).toBe('Live');
+    expect(document.querySelector('.play-notice')).toBeNull();
+  });
+  it('updates the Start prerequisite on metadata refresh without blocking controls of a running session', async () => {
+    let available = false;
+    const session = await open({
+      wrap: invoke => async <T,>(name: string, args?: Record<string, unknown>) => {
+        const value = await invoke<T>(name, args);
+        return name === 'engine_read'
+          ? { ...value as EngineRead, play_start: { available, ...(available ? {} : { reason: 'Open a saved project to run Play' }) } } as T
+          : value;
+      },
+    });
+    expect(control('Play').getAttribute('aria-disabled')).toBe('true');
+    available = true;
+    await act(async () => session.native.start());
+    expect(control('Play').getAttribute('aria-disabled')).toBeNull();
+    await play(session);
+    available = false;
+    await act(async () => session.native.start());
+    expect(control('Pause').getAttribute('aria-disabled')).toBeNull();
+    expect(control('Stop').getAttribute('aria-disabled')).toBeNull();
+    fireEvent.click(control('Stop'));
+    await waitFor(() => expect(ops(session)).toEqual(['start:0', 'stop:1']));
+    expect(control('Play').getAttribute('aria-disabled')).toBe('true');
+  });
   it('starts through the bridge with the chosen scene and camera, the session generation and the authoring revision', async () => {
     const session = await open();
     expect(stateText()).toBe('Live');

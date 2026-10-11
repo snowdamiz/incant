@@ -68,6 +68,8 @@ export interface EngineRead {
   asset_import?: { available: boolean; reason?: string };
   /** Explicitly present only on hosts with the durable budget adapter. */
   agent_budget?: { available: boolean };
+  /** Optional on older hosts; their Start request remains authoritative. */
+  play_start?: { available: boolean; reason?: string };
 }
 export type EngineResponse = EngineRead
   | { status: "loading" }
@@ -194,6 +196,7 @@ export function snapshotFromEngine(read: EngineResponse): BridgeSnapshot {
     };
   }
   const budget = projectAgentBudget(read);
+  const playStart = playStartAvailability(read);
   const nodes: Record<string, HierarchyNode> = {};
   const entities: Record<string, EntityDetail> = {};
   const roots: Ulid[] = [];
@@ -277,6 +280,7 @@ export function snapshotFromEngine(read: EngineResponse): BridgeSnapshot {
       ...(asset.import_settings?.type === 'texture' ? { textureUsage: asset.import_settings.usage } : {}),
     })) } } : {}),
     assetImport: read.asset_import ?? { available: false, reason: 'This host does not expose asset importing.' },
+    ...(playStart ? { playStart } : {}),
     diagnostics: [
       ...(budget.status === 'error' ? [{ id: 'agent-budget', severity: 'error' as const,
         message: budget.error.message, entity: null, component: null, path: 'settings.agent_budget' }] : []),
@@ -354,6 +358,17 @@ function record(value: unknown): value is Record<string, unknown> {
   return value !== null && typeof value === 'object' && !Array.isArray(value)
     && (Object.getPrototypeOf(value) === Object.prototype || Object.getPrototypeOf(value) === null);
 }
+function playStartAvailability(read: EngineRead): BridgeSnapshot['playStart'] {
+  if (!Object.hasOwn(read, 'play_start')) return undefined;
+  const value = read.play_start;
+  if (!value || typeof value !== 'object' || Array.isArray(value)
+    || typeof value.available !== 'boolean'
+    || (Object.hasOwn(value, 'reason') && (typeof value.reason !== 'string' || !value.reason.trim()))) {
+    return { available: false, reason: 'Native Play availability is invalid. Reopen the project to retry.' };
+  }
+  return { available: value.available, ...(value.reason ? { reason: value.reason } : {}) };
+}
+
 /** Defaults require both the real host adapter and its published document schema. */
 function projectAgentBudget(read: EngineRead): ProjectAgentBudget {
   if (!Object.hasOwn(read, 'agent_budget')) return { status: 'unsupported' };
@@ -899,6 +914,8 @@ export class NativeBridge implements EditorBridge {
     const generation = this.play.generation;
     if (intendedGeneration !== undefined && intendedGeneration !== generation) return failure('Play session changed; retry the operation.');
     if (request.type === 'play.start' && !this.read) return failure('Wait for the project to load.');
+    const availability = this.read && playStartAvailability(this.read);
+    if (request.type === 'play.start' && availability?.available === false) return failure(availability.reason ?? 'Native Play cannot start for this project.');
     if (request.type === 'play.input' && request.events.length > 128) return failure('Input packet exceeds 128 events.');
     const command = {
       op: request.type.slice('play.'.length), generation,

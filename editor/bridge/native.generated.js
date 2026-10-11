@@ -203,6 +203,7 @@ function snapshotFromEngine(read) {
         };
     }
     const budget = projectAgentBudget(read);
+    const playStart = playStartAvailability(read);
     const nodes = {};
     const entities = {};
     const roots = [];
@@ -308,6 +309,9 @@ function snapshotFromEngine(read) {
             available: false,
             reason: 'This host does not expose asset importing.'
         },
+        ...playStart ? {
+            playStart
+        } : {},
         diagnostics: [
             ...budget.status === 'error' ? [
                 {
@@ -426,6 +430,22 @@ const budgetInvalidResponse = ()=>({
     });
 function record(value) {
     return value !== null && typeof value === 'object' && !Array.isArray(value) && (Object.getPrototypeOf(value) === Object.prototype || Object.getPrototypeOf(value) === null);
+}
+function playStartAvailability(read) {
+    if (!Object.hasOwn(read, 'play_start')) return undefined;
+    const value = read.play_start;
+    if (!value || typeof value !== 'object' || Array.isArray(value) || typeof value.available !== 'boolean' || Object.hasOwn(value, 'reason') && (typeof value.reason !== 'string' || !value.reason.trim())) {
+        return {
+            available: false,
+            reason: 'Native Play availability is invalid. Reopen the project to retry.'
+        };
+    }
+    return {
+        available: value.available,
+        ...value.reason ? {
+            reason: value.reason
+        } : {}
+    };
 }
 /** Defaults require both the real host adapter and its published document schema. */ function projectAgentBudget(read) {
     if (!Object.hasOwn(read, 'agent_budget')) return {
@@ -1217,6 +1237,8 @@ class NativeBridge {
         const generation = this.play.generation;
         if (intendedGeneration !== undefined && intendedGeneration !== generation) return failure('Play session changed; retry the operation.');
         if (request.type === 'play.start' && !this.read) return failure('Wait for the project to load.');
+        const availability = this.read && playStartAvailability(this.read);
+        if (request.type === 'play.start' && availability?.available === false) return failure(availability.reason ?? 'Native Play cannot start for this project.');
         if (request.type === 'play.input' && request.events.length > 128) return failure('Input packet exceeds 128 events.');
         const command = {
             op: request.type.slice('play.'.length),

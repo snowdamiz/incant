@@ -96,3 +96,20 @@ presentation advances14→39 without ticking. No provider was called.
 [Exact sources, binary hashes, review and result](evidence/native-play-instance-isolation.json).
 This is numerical native evidence; the pending budget/splitter UI and corrected
 WebView focus interaction still require combined visual/native acceptance.
+
+## Saved-project prerequisite before Start
+
+The native ready snapshot now exposes the same saved-project prerequisite that
+Start enforces. The existing Play controls explain an unsaved project before
+issuing a request, without creating a failed session. Older hosts without the
+optional field retain their existing behavior; malformed present metadata refuses
+Start. The bridge rechecks the current prerequisite after asynchronous status
+recovery. Pause and Stop remain available for an existing session.
+
+The combined suite passes 795 UI tests; 85 focused bridge/Play tests pass after
+the final type correction. Strict app/test TypeScript, production UI build,
+feature-enabled all-target editor Clippy and independent source review pass.
+[Exact source and evidence](evidence/native-play-start-availability.json) preserve
+the initial test/type failures and corrections. Actual unsaved-window interaction
+remains part of the combined native acceptance; this readiness hint cannot
+guarantee a successful cook or runtime startup.

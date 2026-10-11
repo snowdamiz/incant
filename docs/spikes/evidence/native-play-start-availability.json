@@ -1,0 +1,91 @@
+{
+  "recorded_at": "2026-10-11T20:59:35.722264+00:00",
+  "source_base": "ffdd2cb9d2b71d156bc2c631e0f94d460cee95ac",
+  "source_sha256": {
+    "editor/app/src/main.rs": "5637c32a223f7d8e7b691041c7f00914e778f296fc259b45a89845a699ba7837",
+    "editor/app/src/play/mod.rs": "5a46fdab99b450c2667b216abd8d77e5375813487f1ae3a84c5c2cb7308e4dde",
+    "editor/bridge/contract.ts": "adfbb417ccf53b5dd08c1ad47b85d3855440219e82c6edcb894f7833c9f94fbe",
+    "editor/bridge/native.ts": "18505cd4f0f5300c92c32ee47fd5cc7a9dce88101bd6f58a993aa6b700824f63",
+    "editor/bridge/native.test.ts": "25e8e26267f37113418045f098e8db3e8e72b9e0a084faafee244c17657ecccb",
+    "editor/ui/src/play/PlayContext.tsx": "e22c903870f127b8b37b2b8b8d90829c3da51fd61ba2763812338e2f080b4147",
+    "editor/ui/src/components/play/Play.test.tsx": "d731fd8a1d1babe21716b0014dbd2aee3842c63e89af6c5fc324a3b0d9c5204f",
+    "editor/bridge/native.generated.js": "d43b43c5f9d4cf9a6a5a8614a51c552f26349c77e8b311755b56240a104de7bb"
+  },
+  "behavior": [
+    "Backend publishes its actual saved-project prerequisite through ready engine metadata. Authoritative Start validation remains.",
+    "Missing metadata retains legacy-host behavior; malformed present metadata refuses Start.",
+    "After asynchronous status recovery Start checks current metadata; Stop and other existing-session operations remain available.",
+    "Existing controls announce the prerequisite without issuing Start or creating a failed generation."
+  ],
+  "checks": {
+    "complete_ui": {
+      "log_sha256": "046e321c284d6d325f23d03de932adeb891cd329ce4ac03c8fff3e5ab98c948a",
+      "result": "795 passed in 40 files; before final type-only narrowing and Rust formatting"
+    },
+    "final_scoped_bridge_and_play": {
+      "log_sha256": "f76ae36dd7ae2ada3438b2e3e6d0f4743a76b22c0f4ec91f81d12e039dcfea65",
+      "result": "85 passed in 2 files on final behavior"
+    },
+    "strict_test_types": {
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "result": "passed"
+    },
+    "strict_app_types_and_production_build": {
+      "log_sha256": "26bc59559c8166ecf8692a3040b7c340053fd5110d0a8d13401facb2f7a7aba0",
+      "result": "passed"
+    },
+    "editor_feature_enabled_clippy": {
+      "log_sha256": "a94b93ee236c3802a49ef4872cb8690d745d2cb2f2c510bf46bc127ab61620bc",
+      "result": "passed; all targets, custom-protocol/play-probe/agent-probe, ci profile, warnings denied"
+    },
+    "initial_ui_test_failure": {
+      "log_sha256": "35a3c9d53d2ad7fbd09efa9c197d1a66384deac1ad8fd51524381357e64976ed",
+      "result": "preserved: synchronous announcement assertion corrected to await existing 30 ms publication"
+    },
+    "initial_type_failure": {
+      "log_sha256": "0b2fd79b6c87b4ba62333717604c27114470d76caa553fdde08e93086c4db248",
+      "result": "preserved: exact optional property narrowing corrected"
+    }
+  },
+  "independent_review": {
+    "sha256": "07cdf59a51f72d13125ad686f0cef7baa68f1bf0e17861d59fe23bf73b59e212",
+    "receipt": {
+      "reviewer": "/root/integrate_runtime_prs",
+      "time": "2026-10-11T20:55:48.892854+00:00",
+      "verdict": "final v2 source accepted; no actionable correctness finding",
+      "scope": "Independent read-only nonvisual review; no builds, provider, GUI or pixel review",
+      "patch": "/tmp/incant-play-start-availability-review-v2.patch",
+      "patch_sha256": "15f0212d5b1f8f34d05ff4305dc13cfe31fbe365c3d04dfc5c857a4aa7ad5364",
+      "source_hashes": {
+        "editor/app/src/main.rs": "5637c32a223f7d8e7b691041c7f00914e778f296fc259b45a89845a699ba7837",
+        "editor/app/src/play/mod.rs": "5a46fdab99b450c2667b216abd8d77e5375813487f1ae3a84c5c2cb7308e4dde",
+        "editor/bridge/contract.ts": "adfbb417ccf53b5dd08c1ad47b85d3855440219e82c6edcb894f7833c9f94fbe",
+        "editor/bridge/native.ts": "1431fea57d4d1bd06bb5a1c98f004cf9d10a3182e3595679709dedc0df7285b8",
+        "editor/bridge/native.test.ts": "25e8e26267f37113418045f098e8db3e8e72b9e0a084faafee244c17657ecccb",
+        "editor/ui/src/play/PlayContext.tsx": "e22c903870f127b8b37b2b8b8d90829c3da51fd61ba2763812338e2f080b4147",
+        "editor/ui/src/components/play/Play.test.tsx": "d731fd8a1d1babe21716b0014dbd2aee3842c63e89af6c5fc324a3b0d9c5204f"
+      },
+      "evidence": [
+        "Native readiness metadata uses precisely the immutable asset_root presence prerequisite enforced by Start; authoritative backend refusal remains.",
+        "Missing play_start is preserved for legacy hosts. Own malformed metadata refuses rather than enabling Start.",
+        "requestPlay examines latest this.read after its awaited status refresh and before any play_command; generation/revision guards remain.",
+        "Only Start observes the new prerequisite. Stop/Pause/input retain existing paths, including recovery of a previously running world.",
+        "PlayProvider reuses the existing startBlocked path; the added tests cover live metadata refresh, delayed status and no failed session generation.",
+        "V2 diff from preliminary review is only a local const plus defined conditional spread for exact optional typing, and cargo-fmt .ok_or formatting; semantics unchanged."
+      ],
+      "limitations": [
+        "Optional capability metadata is a readiness hint, not a successful cook guarantee. Backend validation remains authoritative.",
+        "Reviewer performed source review only; owner test evidence is credited as owner-run. Exact native unsaved-window acceptance remains pending.",
+        "Generated native JavaScript is mechanically derived and was excluded from the provided source patch."
+      ],
+      "owner_validation": "85 targeted tests, 795 complete UI tests, strict app/test types, production UI build and scoped Clippy passed per owner; initial failures retained separately"
+    },
+    "post_review_change": "Moved the pre-existing budget-helper comment back above projectAgentBudget after inserting playStartAvailability; regenerated JavaScript. No behavior changed."
+  },
+  "generated_bridge_check": "node tools/build_bridge.mjs --check passed after final regeneration; cargo fmt --all -- --check and git diff --check also passed",
+  "limitations": [
+    "Native WKWebView unsaved-project interaction remains for handoff0048 after UI integration.",
+    "Readiness describes the saved-project prerequisite, not a guarantee that cooking or runtime startup succeeds.",
+    "No provider request, credential access, phase gate or device/performance claim."
+  ]
+}
