@@ -1,0 +1,29 @@
+{
+  "base_commit": "f73514d42e0029b3bbebe68414a763f690c9186b",
+  "build_rs_sha256": "b752b73bf585df002c6ee0d2a8f42f49dfaa5c0733748c18f5a331fa0b102f1b",
+  "container": "ubuntu:24.04@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55",
+  "compiler": "gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\nldd (Ubuntu GLIBC 2.39-0ubuntu8.9) 2.39\nCopyright (C) 2024 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\nWritten by Roland McGrath and Ulrich Drepper.\n",
+  "c_fixture": "#include \"imports.h\"\n#include <stdio.h>\nint main(void) {\n  wasm_rt_init();\n  for (int i=0; i<3; ++i) {\n    incant_trap_prepare();\n    if (incant_try()==0) { wasm_rt_trap(WASM_RT_TRAP_UNREACHABLE); return 2; }\n    if (g_wasm_rt_jmp_buf.initialized) return 3;\n  }\n  puts(\"three C-only trap round trips passed\");\n  return 0;\n}\n",
+  "strict_c11_without_feature_macro": "link failure: undefined sigsetjmp",
+  "with_posix_200809l_and_implicit_declaration_errors": "three C-only trap round trips passed",
+  "macos_combined_conformance": {
+    "tests": 25,
+    "clippy": "passed",
+    "actual_guest_processes": 3
+  },
+  "logs_sha256": {
+    "/tmp/incant-linux-c-trap/main.c": "5760ee3e6ee13e29c6566df41ee27ee571b5d333c35cf6d6fc327b1932576e6b",
+    "/tmp/incant-linux-c-trap/compiler.txt": "7bda36ef1e301dd4da22903ca89058e4fe371ada475149d95ad793b83f56bf72",
+    "/tmp/incant-linux-c-trap/old.log": "04f3569e6b8432f4c8600663ff26f34c1ccb16fb761def3db79c5c608b13f1df",
+    "/tmp/incant-linux-c-trap/corrected.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/tmp/incant-linux-c-trap.log": "15e4eaa424f4c7ebac0d2128e60d411b6bf9e2ef2f0d50e8660ae8a3529f78ba",
+    "/tmp/incant-wasm2c-posix-conformance/conformance-0.log": "d19145686514971224890cd255e18098362b5b1bcb8b2c895629d0bb29278864",
+    "/tmp/incant-wasm2c-posix-conformance/conformance-1.log": "6bf98366b47e79a4d7a62d08b9129e1a432ea27cd6a38bb8015470bcefd282d9",
+    "/tmp/incant-wasm2c-posix-conformance/conformance-2.log": "0e77af9d03c64a364bff632f3ee399bc2bcea0325fa53df4bf40523c24ace1fe"
+  },
+  "limits": [
+    "Linux C fixture is local Docker arm64, not the hosted x64 Rust/static state suite",
+    "Full corrected Linux shipping/conformance remains a hosted check",
+    "No vendor, generated trap, signal-mask or callback semantics changed"
+  ]
+}
