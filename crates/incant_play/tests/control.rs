@@ -37,7 +37,8 @@ fn prepared(body: &str) -> PreparedPlay {
         code: CompiledScript::compile(&format!(
             "exports.default={{update({{chunks}}){{{body}}}}};"
         ))
-        .unwrap(),
+        .unwrap()
+        .into(),
         actions: Default::default(),
         clips: vec![],
         sample_rate: 48000,

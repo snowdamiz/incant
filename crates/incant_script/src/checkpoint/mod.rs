@@ -66,6 +66,10 @@ fn identity(code: &CompiledScript) -> [u8; 32] {
 fn bytecode(program: SessionProgram) -> Result<CompiledScript> {
     match program {
         SessionProgram::Bytecode(code) => Ok(code),
+        #[cfg(feature = "wasmtime-host")]
+        SessionProgram::DevelopmentWasm(_) => {
+            Err(CheckpointError::Unsupported("development module state ABI"))
+        }
         #[cfg(feature = "static-module")]
         SessionProgram::Static(_) => Err(CheckpointError::Unsupported("static module state ABI")),
     }
@@ -77,6 +81,10 @@ fn host(session: &NativeSession) -> Result<&ScriptHost> {
     match &session.host {
         SessionVm::Bytecode(host) if !host.failed => Ok(host),
         SessionVm::Bytecode(_) => Err(CheckpointError::FailedSession),
+        #[cfg(feature = "wasmtime-host")]
+        SessionVm::DevelopmentWasm(_) => {
+            Err(CheckpointError::Unsupported("development module state ABI"))
+        }
         #[cfg(feature = "static-module")]
         SessionVm::Static(_) => Err(CheckpointError::Unsupported("static module state ABI")),
     }

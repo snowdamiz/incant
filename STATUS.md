@@ -16,6 +16,28 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Public authored Wasm route — current-main integration verified
+
+One typed scene module now connects public bounded `.wasm` import/reimport,
+atomic selection/clear with provenance and Undo, durable editor-default journal
+reopen, captured-only Wasmtime development Play and the ordinary native exporter.
+The exporter translates the exact validated/metered capture with pinned wasm2c;
+ordinary `--package` startup automatically selects the linked guest. A real Rust
+SDK guest and three fresh source/cache/build-deleted packaged processes agree on
+20 ticks of clock, controls, movement and committed logs. Malformed/stale/mixed
+inputs and forged cache identities refuse. Current integration passes 278
+feature-enabled tests, five separate feature-disabled startup cases, all-target
+Clippy, supported wasm32 and tooling/contracts. A fresh current-lock shipping
+export repeats the three source/cache/build-deleted runs and refusal controls.
+The shipping graph excludes Wasmtime, cooker and authoring dependencies. Full
+guest checkpoints remain explicitly Unsupported, including active/paused
+crossfade sessions. Full SDK, routed UI ABI, other shipping platforms, device
+performance and phase gates remain open; this scope is ready for its fast main gate.
+[Contract and measured evidence](docs/spikes/authored-wasm-export.md).
+Independent review also corrected interrupted cache publication: private staged
+files now publish without clobber, with partial-write/concurrent/corrupt/symlink
+controls; the original source-free shipping proof remains separately recorded.
+
 ## Durable budget lock release — validated in checkpoint8
 
 Checkpoint7 exposed Busy when reopening a completed ledger. A private lock guard
@@ -61,7 +83,10 @@ fast PR gates until the next frozen checkpoint; release does not track moving ma
 The native text review's dropped-space/overflow defect is corrected in pinned
 cosmic-text, with separate regressions for direction changes and narrow glyph
 wrapping. The 77 integrated CPU cases, Clippy, wasm32 and dependency checks pass;
-independent source review accepted. Claude's focused rendered recheck is pending.
+independent source review accepted. Claude0055 also accepted the corrected
+180/300-pixel native cases on its frozen macOS/Metal ci-profile build, retaining
+all 250 non-whitespace glyphs with no new defect. Shipping/device/full Unicode
+and complete Game UI/IME gates remain open.
 [Evidence](docs/spikes/text-bidi-wrap.md).
 
 ## Current milestone
@@ -129,9 +154,11 @@ text consumer (#122) and crossfades (#123). Canonical world-space text drawing
 now has scoped Claude appearance/Metal numerical acceptance and current-main CPU
 integration checks (#124). Bounded text-editing state merged in #125; steering now
 merged in #126 after its corrected fast check passed. The reported mixed-bidi
-wrapping defect now has reviewed current-main CPU checks; its focused native
-rendered recheck remains separate.
-Connected Game UI and remaining public Wasm work continue separately.
+wrapping defect merged in #127 with reviewed current-main CPU checks;
+Claude0055 separately accepted the scoped frozen-build native rendered recheck.
+Connected Game UI and remaining Wasm capability parity continue separately;
+the public authored Wasm development/export route now passes its current-main
+integration and fresh ordinary shipping proof.
 No complete Game UI or phase gate is claimed.
 
 Progress reports are scheduled approximately every 30 minutes while the goal is
@@ -772,8 +799,9 @@ applicable checks passed; its actual-main tree equals the tested head. [Integrat
 - Complete animation, navigation, game UI/text/IME, localization and remaining
   input/haptics/native SDK deliverables. Existing scoped/legacy implementations
   are not evidence of full native feature parity.
-- Integrate Wasm gameplay modules into the complete runtime and export route;
-  generate the Rust SDK, establish platform/device conformance and measure the
+- Complete Wasm gameplay SDK and module checkpoint coverage beyond the locally
+  verified single-scene public import/Play/export route; establish platform/device
+  conformance and measure the
   settled TypeScript AOT/physics candidate adoption rules. Do not reopen Section
   12 decisions or substitute desktop timings for reference-phone results.
 - Build and exercise Core Sample and the 2D sample on the required device classes,

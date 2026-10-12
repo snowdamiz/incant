@@ -3971,6 +3971,7 @@ dependencies = [
  "incant_script",
  "incant_source",
  "incant_text",
+ "incant_wasm_cook",
  "serde_json",
  "sha2 0.10.9",
  "tempfile",
@@ -4132,11 +4133,13 @@ dependencies = [
  "incant_cmd",
  "incant_doc",
  "incant_text",
+ "incant_wasm_cook",
  "schemars 1.2.2",
  "serde",
  "serde_json",
  "tempfile",
  "thiserror 2.0.21",
+ "wat",
 ]
 
 [[package]]
@@ -4254,9 +4257,11 @@ version = "0.0.1"
 dependencies = [
  "incant_assets",
  "incant_audio_runtime",
+ "incant_cmd",
  "incant_cook",
  "incant_doc",
  "incant_game_runtime",
+ "incant_import",
  "incant_input",
  "incant_render_data",
  "incant_render_game",
@@ -4264,12 +4269,14 @@ dependencies = [
  "incant_runtime",
  "incant_script",
  "incant_types",
+ "incant_wasm_cook",
  "kira",
  "serde",
  "serde_json",
  "tempfile",
  "thiserror 2.0.21",
  "ulid",
+ "wat",
 ]
 
 [[package]]
@@ -4437,6 +4444,7 @@ dependencies = [
  "incant_localization",
  "incant_runtime",
  "incant_types",
+ "incant_wasm_dev",
  "incant_wasm_runtime",
  "rquickjs",
  "serde",
@@ -4516,6 +4524,10 @@ name = "incant_wasm_cook"
 version = "0.0.1"
 dependencies = [
  "incant_wasm_abi",
+ "serde",
+ "serde_json",
+ "sha2 0.10.9",
+ "tempfile",
  "thiserror 2.0.21",
  "wasm-encoder",
  "wasmparser",

@@ -6,7 +6,7 @@ use incant_game_runtime::{HostedOfflineGameSession, OfflineGameSession};
 use incant_input::{InputActions, InputEvent, InputFrame};
 use incant_render_game::{NativeRenderHost, NativeRenderSettings};
 use incant_runtime::{CookedScene, NativeWorld};
-use incant_script::{CompiledScript, NativeLogs};
+use incant_script::{NativeLogs, SessionProgram};
 use std::path::Path;
 
 #[derive(Debug, thiserror::Error)]
@@ -81,7 +81,7 @@ enum Game {
 impl Game {
     fn new(
         scene: CookedScene,
-        code: CompiledScript,
+        code: SessionProgram,
         actions: InputActions,
         clips: Vec<ClipBinding>,
         rate: u32,

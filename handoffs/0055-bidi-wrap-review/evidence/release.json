@@ -1,0 +1,12 @@
+{
+ "packet": "0055-bidi-wrap-review",
+ "leased_at": "2026-10-12T03:47:42+00:00",
+ "released_at": "2026-10-12T04:08:09+00:00",
+ "native_gpu": "released; both window players (pids 39653, 40669) exited normally through their own close buttons; no owned player, helper, capture or GPU test remains",
+ "cargo_target_dir": {
+  "path": "/tmp/incant-agent-native-target",
+  "state": "released; no owned cargo/rustc process; contents (about 15 GB) kept as a warm cache; nothing deleted"
+ },
+ "marker": "/tmp/incant0055/released (launch.sh, burst.sh, cap.sh, probe.sh and package.py refuse after it)",
+ "captures_used": "4 of 6"
+}
