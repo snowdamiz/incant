@@ -1361,7 +1361,7 @@
     "path": "docs/spikes/evidence/native-wasm-ik/final-review.json",
     "sha256": "d0c44bdc6f09c4c493f5ff1fdd9d77534fc07f078d5b9c095702d710bfcb2504"
   },
-  "integration": "STATUS-only producer conflict; all29 accepted implementation/test/helper inputs byte-identical. Existing main root-motion/Tao/input/IK corrections preserved. No dependency or source resolution changes. Independent current-main closure pending.",
+  "integration": "STATUS-only producer conflict; all29 accepted implementation/test/helper inputs byte-identical. Existing main root-motion/Tao/input/IK corrections preserved. No dependency or source resolution changes. Independent current-main closure accepted.",
   "release": "Checkpoint12 remains frozen at main150 with Linux Vulkan and Windows DX12 linear RGBA8 numerical failures; the Windows log and exact adapter receipt are retained here. Claude0059 owns the repair. This feature does not promote release.",
   "limitations": [
     "Actual local desktop CPU package; no GPU/rendered/device/performance or phase gate.",
@@ -1371,5 +1371,9 @@
     "CPU package proof checks complete native snapshots and transaction results; no renderer/window or pose-deformation appearance acceptance.",
     "Whole-module checkpoints remain explicitly unsupported.",
     "Operations44\u201346 additive; old0\u201343 preserved; all v1\u2013v4 legacy pose imports still refuse committed IK. Compound poses require the separately reserved v5/IK-v2/graph-v2 protocol."
-  ]
+  ],
+  "final_review": {
+    "path": "docs/spikes/evidence/native-wasm-ik-main152/root-final-review.json",
+    "sha256": "c858941df6267fc551793e1e4eda73b3e47371b566ebdd8b02178bf62f15e3eb"
+  }
 }

@@ -26,6 +26,8 @@ package files and 17 removed paths were verified. Player SHA256 is
 
 [The inventory](evidence/native-wasm-ik-main152.json) retains source identities,
 all commands, compressed/raw logs, proof receipts, reports and PCM. The
+[independent final review](evidence/native-wasm-ik-main152/root-final-review.json)
+accepts the integrated scope. The
 [producer contract](native-wasm-ik.md) remains bounded: no GPU/appearance, device,
 shipping-performance or phase acceptance; module checkpoints still refuse, and
 nonzero compound graph poses require the separate complete-pose protocol.
