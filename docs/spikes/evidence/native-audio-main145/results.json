@@ -1,0 +1,309 @@
+[
+  {
+    "name": "affected-tests",
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_runtime",
+      "-p",
+      "incant_script",
+      "--features",
+      "ui,audio",
+      "-p",
+      "incant_game_runtime",
+      "--features",
+      "ui",
+      "-p",
+      "incant_audio_runtime",
+      "--features",
+      "scene"
+    ],
+    "exit": 0,
+    "seconds": 57.80559354200068,
+    "sha256": "7b52f450e872cb6ee5fe0eeb4fd9970e8c7c205844c770446fd744c943a7a4b2"
+  },
+  {
+    "name": "affected-clippy",
+    "command": [
+      "./tools/cargo",
+      "clippy",
+      "--offline",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_runtime",
+      "-p",
+      "incant_script",
+      "--features",
+      "ui,audio",
+      "-p",
+      "incant_game_runtime",
+      "--features",
+      "ui",
+      "-p",
+      "incant_audio_runtime",
+      "--features",
+      "scene",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit": 0,
+    "seconds": 4.745009916000527,
+    "sha256": "fa19271d5d346680e1b9f78408be0282022b995c2574acaddfaeb97053b3b0eb"
+  },
+  {
+    "name": "kira-tests",
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--manifest-path",
+      "third_party/kira/Cargo.toml",
+      "--no-default-features",
+      "--features",
+      "offline-checkpoint",
+      "--lib",
+      "-j2"
+    ],
+    "exit": 0,
+    "seconds": 3.53504566599986,
+    "sha256": "81edb3855c7772a79e1e7d6bc3344abd446bcf4eb0cc247da6b815aaa0fbb222"
+  },
+  {
+    "name": "kira-clippy",
+    "command": [
+      "./tools/cargo",
+      "clippy",
+      "--offline",
+      "--locked",
+      "--manifest-path",
+      "third_party/kira/Cargo.toml",
+      "--no-default-features",
+      "--features",
+      "offline-checkpoint",
+      "--lib",
+      "-j2",
+      "--",
+      "-D",
+      "warnings",
+      "-A",
+      "clippy::derivable_impls"
+    ],
+    "exit": 0,
+    "seconds": 2.037167958000282,
+    "sha256": "8830c1db108149938a7d791e5c7d7adb572369dd2f3dff27c85e1028669ac1f2"
+  },
+  {
+    "name": "static-ui-audio",
+    "command": [
+      "./tools/cargo",
+      "check",
+      "--offline",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_script",
+      "--no-default-features",
+      "--features",
+      "static-module,ui,audio"
+    ],
+    "exit": 0,
+    "seconds": 1.633560624999518,
+    "sha256": "c55170685edba5e9e6462417801f0022652c5f8c9247ef853880a7a6a68ef75d"
+  },
+  {
+    "name": "device-compile",
+    "command": [
+      "./tools/cargo",
+      "check",
+      "--offline",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_audio_runtime",
+      "--features",
+      "scene,device"
+    ],
+    "exit": 0,
+    "seconds": 4.852954416999637,
+    "sha256": "cffa6a018e1e23548b1f38122aad8d26ac2fbe413f297bf8f442b2b5a383a103"
+  },
+  {
+    "name": "wasm",
+    "command": [
+      "./tools/cargo",
+      "check",
+      "--offline",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_audio_runtime",
+      "--features",
+      "scene",
+      "--target",
+      "wasm32-unknown-unknown"
+    ],
+    "exit": 0,
+    "seconds": 7.220895041000404,
+    "sha256": "ea85355460ad7901b56355001198081561648298a82b068bdc2ed17e77ea1b92"
+  },
+  {
+    "name": "script-no-default",
+    "command": [
+      "./tools/cargo",
+      "check",
+      "--offline",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_script",
+      "--no-default-features"
+    ],
+    "exit": 0,
+    "seconds": 3.805359457999657,
+    "sha256": "6be7a677033acb8a9f8e9481d2470fb6797126b07158fa9c47538745a3faacfa"
+  },
+  {
+    "name": "audio-default-clippy",
+    "command": [
+      "./tools/cargo",
+      "clippy",
+      "--offline",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_audio_runtime",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit": 0,
+    "seconds": 3.209332166999957,
+    "sha256": "b1822f59bcc187ea80d26101736c1c077a77b1d7af0121c37fdfefc0a1a55369"
+  },
+  {
+    "name": "game-default-clippy",
+    "command": [
+      "./tools/cargo",
+      "clippy",
+      "--offline",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_game_runtime",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit": 0,
+    "seconds": 1.8796977910005808,
+    "sha256": "df6eade7012e7de76a8543cce63fc23cdae2e753bb163603ff1fd3e70830de01"
+  },
+  {
+    "name": "graph",
+    "command": [
+      "python3",
+      "tools/check_runtime_dependencies.py",
+      "incant_runtime",
+      "incant_script",
+      "incant_audio_runtime",
+      "incant_game_runtime",
+      "incant_game_player",
+      "--features",
+      "incant_game_player/render-input"
+    ],
+    "exit": 0,
+    "seconds": 0.4652067500001067,
+    "sha256": "96949d5aa97cd30d4f51603da00df07f909dd8c40ade8dc2349a685b3ce6b0a9"
+  },
+  {
+    "name": "fmt",
+    "command": [
+      "./tools/cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.9787692910003898,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "conventions",
+    "command": [
+      "python3",
+      "tools/generate_conventions.py",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.03315695899982529,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "diff",
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.010527500000534928,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "headless",
+    "command": [
+      "./tools/cargo",
+      "build",
+      "--offline",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_headless"
+    ],
+    "exit": 0,
+    "seconds": 25.33721633300047,
+    "sha256": "cf36b03b07eb5d3d8d2b4cf37461313f6d035aa31f09e116cc98794eded388d6"
+  },
+  {
+    "name": "public-export",
+    "command": [
+      "python3",
+      "tools/probes/native-audio-checkpoint-export.py",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-main145-001/public-export",
+      "--binary",
+      "/Users/andreyyurlov/.codex/incant-integration-target/ci/incant_headless"
+    ],
+    "exit": 0,
+    "seconds": 315.5679726669996,
+    "sha256": "92636b0f22ba3b8fb3e2ca7119c2e023d23c6cb9e6c6e4a8e6023db9e5ec4019"
+  }
+]

@@ -1,0 +1,31 @@
+{
+  "name": "preedit",
+  "argv": [
+    "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-main145-001/public-export/package/player/incant_game_player",
+    "--package",
+    "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-main145-001/public-export/package/player/data",
+    "--ticks",
+    "1",
+    "--output",
+    "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-main145-001/public-export/preedit.pcm",
+    "--ui-viewport",
+    "600x300",
+    "--load-checkpoint",
+    "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-main145-001/public-export/middle.save",
+    "--save-checkpoint",
+    "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-main145-001/public-export/preedit.save",
+    "--input-recording",
+    "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-main145-001/public-export/preedit-input.json"
+  ],
+  "cwd": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-main145-001/public-export/package/player",
+  "environment_keys": [
+    "PATH",
+    "TEMP",
+    "TMP",
+    "TMPDIR"
+  ],
+  "returncode": 1,
+  "stdout": "",
+  "stderr": "Error: Checkpoint(Ui(CompositionActive))\n",
+  "matched_diagnostic": "Error: Checkpoint(Ui(CompositionActive))"
+}

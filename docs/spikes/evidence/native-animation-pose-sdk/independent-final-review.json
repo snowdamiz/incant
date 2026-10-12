@@ -1,0 +1,54 @@
+{
+  "at": "2026-10-12T15:35:56.694085+00:00",
+  "reviewer": "astra-root",
+  "accepted": true,
+  "commit": "8dd91697c09fd1d58f2bc6f41b60e645cc52e964",
+  "evidence_sha256": "88c916512c78e3180414f5bf28b5b5ae1a817d83f53b564b4fa42f5ec29cf9c3",
+  "source_files_verified": 17,
+  "test_probe_files_verified": 11,
+  "native_dependency_files_verified": 5,
+  "compressed_and_raw_logs_verified": 24,
+  "receipts_verified": 12,
+  "retained_actual_guest_files_verified": 58,
+  "checks": {
+    "actual_host_tests": 398,
+    "actual_host_groups": 70,
+    "actual_host_failed": 0,
+    "actual_host_ignored": 0,
+    "preflight_tests": 107,
+    "preflight_groups": 28,
+    "union_tests": 300,
+    "union_groups": 54,
+    "python_tests": 234,
+    "python_skips": 4,
+    "node_tests": 22,
+    "all_target_clippy": true,
+    "runtime_sdk_wasm32": true,
+    "generated_and_conventions": true,
+    "authoring_free_static_dependencies": true,
+    "final_union": [
+      {
+        "log": "boundary-tests.log",
+        "groups": 23,
+        "passed": 93,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "log": "tree-tests.log",
+        "groups": 1,
+        "passed": 6,
+        "failed": 0,
+        "ignored": 0
+      }
+    ]
+  },
+  "source_review": "Accepted separate v4 source and exact constructor568 reviews; unchanged hashes verified",
+  "limitations": [
+    "Local CPU actual-host conformance; no ordinary source-deleted weighted-pose shipping package, rendered acceptance or device gate.",
+    "Real connected graph has eight active samples; synthetic sixteen-sample coverage proves wire capacity, not active tree-state fades.",
+    "Nonzero tree-state fades and composite SLERP/weighted operands remain unsupported.",
+    "Old v1/v2/v3 snapshots explicitly refuse weighted poses; no silent representative-only downgrade.",
+    "Full SDK, layered animation, IK, root motion and complete guest checkpoints remain outside this slice."
+  ]
+}

@@ -1,0 +1,79 @@
+[
+  {
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_types",
+      "-p",
+      "incant_runtime",
+      "-p",
+      "incant-module",
+      "-p",
+      "incant_wasm_runtime"
+    ],
+    "exit_code": 0,
+    "log": "native-tests.log",
+    "sha256": "a9b2925c8efbe89bce728afd72d5f2086ba2d22726d5cd996032f758fb56011e"
+  },
+  {
+    "command": [
+      "./tools/cargo",
+      "clippy",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_types",
+      "-p",
+      "incant_runtime",
+      "-p",
+      "incant-module",
+      "-p",
+      "incant_wasm_runtime",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "log": "native-clippy.log",
+    "sha256": "530bc6f2c52a29b71bb82ca9894e4aabd5704558759d4569669c7ff7c17d021f"
+  },
+  {
+    "command": [
+      "./tools/cargo",
+      "check",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_wasm_runtime",
+      "-p",
+      "incant-module",
+      "--target",
+      "wasm32-unknown-unknown"
+    ],
+    "exit_code": 0,
+    "log": "wasm32.log",
+    "sha256": "13954bf967062c85c4787248f2d17d8e1db3ed0a14236bc36a89d90b42679aea"
+  },
+  {
+    "command": [
+      "./tools/cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit_code": 0,
+    "log": "fmt.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

@@ -1,0 +1,24 @@
+{
+  "format": "incant-native-observation",
+  "version": 1,
+  "entities": [
+    "00000000000000000000000002"
+  ],
+  "checks": [
+    {
+      "name": "state-timer-ui-13",
+      "tick": 13,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000002",
+        "property": "translation",
+        "value": [
+          31,
+          0,
+          0
+        ],
+        "tolerance": 0
+      }
+    }
+  ]
+}

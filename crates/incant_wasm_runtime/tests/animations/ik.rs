@@ -48,11 +48,12 @@ fn ik_pose_observations_refuse_without_memory_or_world_prefix() {
 }
 
 // Extend this list together with the central admission for each newer pose ABI.
-fn pose_imports() -> [Call; 6] {
+fn pose_imports() -> [Call; 8] {
     [
         Call::AnimationLen,
         Call::AnimationLenV2,
         Call::AnimationLenV3,
+        Call::AnimationLenV4,
         Call::ReadAnimations {
             ptr: 7,
             capacity: 1024,
@@ -62,6 +63,10 @@ fn pose_imports() -> [Call; 6] {
             capacity: 1024,
         },
         Call::ReadAnimationsV3 {
+            ptr: 7,
+            capacity: 1024,
+        },
+        Call::ReadAnimationsV4 {
             ptr: 7,
             capacity: 1024,
         },

@@ -81,3 +81,16 @@ and diff checks pass. These are CPU checks, not shipping/device measurements.
 [Independent source/evidence review](evidence/native-two-bone-ik-review.json)
 accepts this CPU scope with no findings. It does not approve the remaining
 authored, native control, SDK or visual integration gates.
+
+## Integration on main #146
+
+The six reviewed source/test inputs are unchanged on main #146. Only STATUS
+needed an additive conflict resolution. The existing audio Kira patch and local
+lockfile edges remain intact. The frozen union passes 118 CPU tests in 18 groups
+with zero failures/ignored cases, all-target Clippy, default audio-only and wasm32
+visual-reader compilation, dependency/fmt/convention checks. All eight commands
+exit successfully. Retained [source inventory and logs](evidence/native-two-bone-ik-main146.json)
+bind this scoped result; the original limitations remain in force.
+
+The final [independent integration review](evidence/native-two-bone-ik-main146/root-final-review.json)
+accepts the unchanged source and retained evidence within this CPU scope.

@@ -651,7 +651,33 @@ impl<'tick> Tick<'tick> {
         }
         self.check(FlipbookSnapshot::parse(&scratch[..len]))
     }
-    /// Copy the start-of-callback playback snapshot. Queued controls stay private
+    /// Copy the complete start-of-callback local pose with explicit interpolation
+    /// semantics and scene identity. Returned samples borrow only caller scratch.
+    /// Queued controls remain invisible until the entire callback commits.
+    pub fn animation_poses<'a>(
+        &mut self,
+        scratch: &'a mut [u8],
+    ) -> Result<crate::AnimationPoseSnapshot<'a>> {
+        self.ready()?;
+        // SAFETY: scalar length query followed by a checked initialized buffer.
+        let len = unsafe { raw::incant_animation_v4_snapshot_len(self.epoch) };
+        let len = self.snapshot_length(len, scratch.len(), abi::ANIMATION_V4_MAX_BYTES)?;
+        let actual = unsafe {
+            raw::incant_animation_v4_read_snapshot(
+                self.epoch,
+                scratch.as_mut_ptr() as usize as i32,
+                len as i32,
+            )
+        };
+        self.check(if usize::try_from(actual).ok() == Some(len) {
+            Ok(())
+        } else {
+            Err(Error::Malformed)
+        })?;
+        self.check(crate::AnimationPoseSnapshot::parse(&scratch[..len]))
+    }
+    /// Copy the v3 start-of-callback playback snapshot; weighted trees require
+    /// animation_poses instead. Queued controls stay private
     /// until the entire callback commits; the returned data borrows only scratch.
     pub fn animations<'a>(
         &mut self,
