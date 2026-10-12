@@ -78,7 +78,7 @@ root motion or Phase 1. [Contract and evidence](docs/spikes/native-root-motion-c
 
 
 
-## Complete compound Wasm — current-main158 verified; review pending
+## Complete compound Wasm — merged main159
 
 Additive operations 47–52 preserve 0–46 and all older definitions. The final
 actual Wasmtime/wasm2c suite passes 436 tests plus all-target Clippy; the ordinary
@@ -87,7 +87,8 @@ authoring/cache/build inputs and debug maps. All 64,512 scalar oracle comparison
 report/PCM parity and 23 exact refusal controls pass. Producer source and execution are independently accepted. Current-main integration
 passes the same 436 actual-host tests, scoped checks and three fresh player runs
 through an explicitly reviewed interrupted-build recovery. The runtime inputs
-remain unchanged across main157–158; final integration review/publication are pending. Root-motion may append reserved 53–55 from the immutable source
+remain unchanged across main157–158; final integration review is accepted and
+the exact-head fast check passed and the slice merged as main159. Root-motion may append reserved 53–55 from the immutable source
 ancestor. Whole-module checkpoints and visual/device gates remain open.
 See [scope and evidence](docs/spikes/native-wasm-compound.md) and the
 [current-main recovery record](docs/spikes/native-wasm-compound-main158.md).
@@ -101,7 +102,7 @@ following final window destruction. A probe-only terminal guard now preserves al
 256 cycles and the first typed error while refusing later native work. Two red-to-green
 regressions, native-feature build and Clippy pass. A bounded real-idle check did not
 launch the executable because user input remained active. The comprehensive native
-probe must still pass before release; checkpoint13 remains frozen and blocked.
+probe must still pass before release; checkpoint13 is terminal and unpromoted.
 [Scope and preserved failure](docs/spikes/macos-retirement-late-events.md).
 
 
@@ -133,16 +134,18 @@ and 238 Python cases (4 existing skips); suite counts overlap and remain separat
 A fresh current-lock shipping package passes 3 complete runs and 10 save/resume
 pairs after authoring/build/debug-map deletion, with 112 full pose rows and 224
 vector checks per full run and exact save/PCM/log continuation. Two precise
-negative controls refuse without checkpoint/PCM publication. Final independent integrated review and the exact fast check passed; merged main156. Complete compound Wasm ABI is a separate queued slice. Root-motion gameplay and device/appearance/phase gates remain open.
+negative controls refuse without checkpoint/PCM publication. Final independent integrated review and the exact fast check passed; merged main156. Complete compound Wasm ABI is merged as main159. Root-motion gameplay and device/appearance/phase gates remain open.
 [Integration and preserved failures](docs/spikes/native-compound-main155.md).
 
-## UI fixed-point blend reference — merged main155; checkpoint13 pending
+## UI fixed-point blend reference — merged main155; checkpoint13 terminal
 
 The independent reference now admits bounded 8-bit fixed-point UNORM blending
 while retaining exact geometry, clip, opacity and untouched-pixel controls.
 Shader/runtime behavior is unchanged. Current-main CPU tests, Clippy and wasm32
 compile pass; independent producer/current-main reviews and seven caught mutations are retained.
-Hosted Linux/WARP validation and all 23 required release checks remain pending.
+Checkpoint13 passed the Linux and Windows numerical rendering stages. Its general
+macOS probe failed and its Windows desktop job timed out later, so release remains
+held until a repaired frozen candidate passes all 23 required checks.
 The Windows conformance job also exceeded its 40-minute limit after successful
 conformance stages; only that existing job now permits 90 minutes for the remaining
 shipping checks. Workflow lint and all six release-policy tests pass.
@@ -553,23 +556,23 @@ and complete Game UI/IME gates remain open.
 
 ## Current milestone
 
-Main #153 includes connected authored two-bone IK and its ordinary checkpoint
-continuation, authored nested/2D animation trees with complete Wasm poses,
-offline audio/UI checkpoints, public physics queries and numeric root-motion.
-The complete native IK Rust/Wasm API is merged after current-main actual-host
-and fresh ordinary package checks. A narrow native-window shutdown correction
-now passes 57 CPU tests and scoped checks; final publication remains pending.
-Main149 repairs text-client lifetime/pointer focus; main150 has the earlier
-qualified UI reference and caret correction. Claude0058's native follow-up keeps
-its older-build, dead-key and excluded-process limitations.
+Main #159 includes compound native animation transitions and complete Wasm
+snapshots, authored two-bone IK, offline audio/UI checkpoints, public physics
+queries and the Core Sample gameplay slice. The reviewed complete root-motion
+integration is undergoing current-main CPU and ordinary package validation;
+HUD and audio transport remain separate reviewed producer queues. Phase 1 and
+the finished game remain incomplete.
 
-Checkpoint12 stays frozen at main150 `58cca708`, candidate `10129769`.
-Linux llvmpipe (LLVM20.1.2/Mesa25.2.8, Vulkan) and Windows Microsoft Basic Render
-Driver (10.0.26100.33438, DX12) both fail the scale-1 linear RGBA8 reference.
-Other required jobs were still active at the retained observation. Claude0059
-owns the numerical correction; no actual hosted success is claimed. Release
-stays at checkpoint8 until all 23 exact-head required checks pass. Later feature
-merges do not move the candidate or approve any release/phase gate.
+Checkpoint13 is terminal and unpromoted: 21 of 23 required contexts succeeded,
+the general macOS retirement probe failed on a late callback, and Windows desktop
+was cancelled at its one-hour job cap after 53m27s of successful pre-export checks.
+Main158 contains the reviewed probe-only callback repair. The reviewed Windows
+workflow repair allows that job 120 minutes while Linux stays at 60, preserving
+all checks and fresh private shipping builds. It awaits the exact-head fast check;
+checkpoint14 will then freeze the repaired main tree. Release remains at
+checkpoint8 until all 23 exact-head required checks succeed. Failed checkpoints
+remain historical, and later feature merges do not move an active candidate.
+[Windows timing and repair evidence](docs/spikes/windows-desktop-checkpoint-budget.md).
 
 Native animation graphs now connect ordinary typed authoring, captured models,
 v14 cooking, deterministic native clip states and flat adjacent-pair 1D blends.
