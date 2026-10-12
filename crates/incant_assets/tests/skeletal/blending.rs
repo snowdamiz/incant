@@ -99,6 +99,28 @@ fn overflow_during_hierarchy_composition_cannot_publish_a_partial_blend() {
     assert_eq!(player.locals(), locals);
     assert_eq!(player.globals(), globals);
     assert_eq!(player.joint_palette(0).unwrap(), joints);
+    use incant_assets_runtime::animation::WeightedClipSample;
+    assert!(
+        player
+            .sample_weighted(&[
+                WeightedClipSample {
+                    sample: sample(0, 1.),
+                    weight: 1.
+                },
+                WeightedClipSample {
+                    sample: ClipSample::REST,
+                    weight: 1.
+                },
+                WeightedClipSample {
+                    sample: sample(1, 1.),
+                    weight: 1.
+                },
+            ])
+            .is_err()
+    );
+    assert_eq!(player.locals(), locals);
+    assert_eq!(player.globals(), globals);
+    assert_eq!(player.joint_palette(0).unwrap(), joints);
     player
         .sample_blend(sample(0, 0.), sample(1, 2.), 0.5)
         .unwrap();
