@@ -36,7 +36,7 @@ recorded separately from the actual Android17/API37 execution evidence.
 The immutable implementation is `06d534cb`, main176 source composition
 `074bd373`, public probe `ad5ececb` and trusted tool-identity correction
 `8c6bc7c3`. Independent reviews accepted each production/probe source freeze.
-The final execution packet is awaiting independent review.
+Independent final execution review accepts the complete retained packet.
 
 Both project modes pass public command authoring of three real TypeScript files,
 shared imports, distinct per-instance properties, captured WAV audio and the
@@ -79,7 +79,10 @@ the exporter's scoped cleanup, requiring the fresh successful shipping002 builds
 
 The lossless [manifest](evidence/authored-android-project/manifest.json) binds
 raw command outputs, receipts, copied source reviews, per-tick observations and
-PCM. Large actual native binaries/archives remain at the durable external paths
+PCM. The final review rehashed all 869 records, 335 payloads, eight binaries, 14 inputs,
+484 raw command streams and every positive/refusal result. It verified all 13,405
+frozen inputs with 39 historical Git fallbacks after branch switching.
+Large actual native binaries/archives remain at the durable external paths
 with exact hashes and sizes; the manifest distinguishes them from repository
 payloads. Source reviews and the accepted StageA review are retained alongside it.
 

@@ -35,7 +35,7 @@ nine harness cases. An actual local Android 17/API 37 ARM emulator passes all 16
 C ABI controls; complete numeric/game/PCM records match prior macOS/iOS callers.
 Independent final execution review is accepted. That immutable candidate keeps default
 and authored admission denied. The separate authored Android implementation below
-now has shipping/emulator evidence pending final review; no phone or performance
+now has independently accepted shipping/emulator evidence; no phone or performance
 gate is claimed by either slice.
 [Candidate contract and retained attempts](docs/spikes/android-bytecode-candidate.md).
 
@@ -1827,4 +1827,4 @@ cook/Play suite passes 65 tests and Clippy in each of three compiled variants.
 Mode-aware launch/export and editor process switching remain separate follow-on
 work. [Evidence](docs/spikes/physics-project-setting.md).
 
-- Authored Android CPU archive route: reviewed fresh-source admission and separate physics-aware exporter pass focused Rust/Python/Clippy checks. Both deterministic and fast ordinary shipping archives pass three source/cache/build/map-deleted ARM Android17/API37 processes each, exact per-field/native/PCM parity and fourteen boundary refusals; owned emulators cleanly removed. Final execution review is pending. No minimum-OS/phone/performance/platform-host claim. See `docs/spikes/authored-android-project.md`.
+- Authored Android CPU archive route: reviewed fresh-source admission and separate physics-aware exporter pass focused Rust/Python/Clippy checks. Both deterministic and fast ordinary shipping archives pass three source/cache/build/map-deleted ARM Android17/API37 processes each, exact per-field/native/PCM parity and fourteen boundary refusals; owned emulators cleanly removed. Independent final execution review is accepted; publisher integration remains pending. No minimum-OS/phone/performance/platform-host claim. See `docs/spikes/authored-android-project.md`.

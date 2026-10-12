@@ -53,7 +53,7 @@
     }
   ],
   "source_and_probe_review": "accepted",
-  "final_execution_review": "pending",
+  "final_execution_review": "accepted",
   "limits": [
     "local Android17/API37 ARM emulator CPU only",
     "NDK API24 compiler identity is not minimum OS execution",
@@ -82,5 +82,9 @@
     "docs/spikes/authored-android-project.md"
   ],
   "frozen_git_commit": "8c6bc7c313ba338e009bca309954429dcd43fe3f",
-  "archive_payloads_redecoded_and_verified": true
+  "archive_payloads_redecoded_and_verified": true,
+  "final_review": {
+    "path": "docs/spikes/evidence/authored-android-project/authored-android-final-20261012.json",
+    "sha256": "b6db75b59c4912536e641207e70816b81eddcb2fae0567f21a1d7bb7a0236621"
+  }
 }
