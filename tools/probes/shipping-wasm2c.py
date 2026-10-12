@@ -121,6 +121,22 @@ def verify_module_symbols(symbols):
             'Runtime compiler symbols linked')
 
 
+def localization_guests(rustc, inputs, sdk_guests, environment):
+    """Fixed trusted sample/controls for the existing actual-host conformance."""
+    sample = inputs/'localization.rs'
+    shutil.copy2(ROOT/'sdk/rust/samples/localization.rs', sample)
+    failure = inputs/'localization-failure.rs'
+    shutil.copy2(ROOT/'sdk/rust/fixtures/localization_failure.rs', failure)
+    modules = []
+    for kind in (None, 'capacity', 'number', 'duplicate', 'callback'):
+        name = 'rust-localization'+('-'+kind if kind else '')
+        module = sdk_guests/(name+'.wasm')
+        rust_guest.compile(rustc, failure if kind else sample, module,
+                           env=environment, cfg=['sdk_locale_'+kind] if kind else ())
+        modules.append((name, module))
+    return modules
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
@@ -173,10 +189,11 @@ def main():
             rust_guest.compile(rustc,guest_source,module_path,env=environment)
             modules.append(('rust-sdk',module_path))
             failure_source=inputs/'sdk-failure.rs';shutil.copy2(ROOT/'sdk/rust/fixtures/failure.rs',failure_source)
-            for kind in ('callback-error','capacity','malformed','expired'):
+            for kind in ('callback-error','capacity','malformed','expired','log-bounds','log-invalid'):
                 name='rust-sdk-'+kind; module_path=sdk_guests/(name+'.wasm')
                 rust_guest.compile(rustc,failure_source,module_path,env=environment,cfg=['sdk_'+kind.replace('-','_')])
                 modules.append((name,module_path))
+            modules.extend(localization_guests(rustc, inputs, sdk_guests, environment))
             environment['INCANT_RUST_SDK_GUESTS']=str(sdk_guests)
             flipbook = inputs/'flipbook.rs'; shutil.copy2(ROOT/'crates/incant_game_player/fixtures/flipbook.rs', flipbook)
             flipbook_module = inputs/'flipbook.wasm'

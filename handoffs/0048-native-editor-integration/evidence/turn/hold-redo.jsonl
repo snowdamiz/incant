@@ -1,0 +1,9 @@
+{"t": 0.269, "header": "Agent  , Needs approval", "allow": {"title": "Allow", "enabled": true}, "hold": null, "decided": []}
+{"t": 0.599, "header": "Agent  , Needs approval", "allow": {"title": "Allow", "enabled": true}, "hold": null, "decided": []}
+{"t": 0.983, "header": "Agent  , Working…", "allow": null, "hold": null, "decided": ["Allowed"]}
+{"t": 1.403, "header": "Agent  , Working…", "allow": null, "hold": null, "decided": ["Allowed"]}
+{"t": 1.827, "header": "Agent  , Working…", "allow": null, "hold": null, "decided": ["Allowed"]}
+{"t": 2.126, "header": "Agent  , Working…", "allow": null, "hold": null, "decided": ["Allowed"]}
+{"t": 2.375, "header": "Agent  , Working…", "allow": null, "hold": null, "decided": ["Allowed"]}
+{"t": 2.716, "header": "Agent  , Working…", "allow": null, "hold": null, "decided": ["Allowed"]}
+{"t": 3.308, "header": "Agent  , Working…", "allow": null, "hold": null, "decided": ["Allowed"]}

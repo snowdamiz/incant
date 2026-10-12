@@ -58,6 +58,121 @@ impl<'tick> Tick<'tick> {
     fn ready(&mut self) -> Result<()> {
         self.check(Ok(()))
     }
+    fn localization_result<'a>(&mut self, len: i32, scratch: &'a mut [u8]) -> Result<&'a [u8]> {
+        let len = self.check(
+            usize::try_from(len)
+                .ok()
+                .filter(|&n| n <= abi::LOCALIZATION_MAX_RESULT_BYTES)
+                .ok_or(Error::Bounds),
+        )?;
+        self.check(if scratch.len() < len {
+            Err(Error::Capacity)
+        } else {
+            Ok(())
+        })?;
+        // SAFETY: exactly this initialized destination prefix is borrowed for the
+        // synchronous copied read. Host validates the epoch and complete range.
+        let written = unsafe {
+            raw::incant_localization_v1_read_result(
+                self.epoch,
+                scratch.as_mut_ptr() as usize as i32,
+                len as i32,
+            )
+        };
+        self.check(if usize::try_from(written).ok() == Some(len) {
+            Ok(())
+        } else {
+            Err(Error::Malformed)
+        })?;
+        Ok(&scratch[..len])
+    }
+    /// Observe the committed locale at the start of this callback. A queued
+    /// setting change becomes visible after acceptance, in the next callback.
+    pub fn locale<'a>(
+        &mut self,
+        scratch: &'a mut [u8],
+    ) -> Result<crate::localization::LocaleSnapshot<'a>> {
+        self.ready()?;
+        // SAFETY: scalar query only; the host retains its bounded copied result.
+        let len = unsafe { raw::incant_localization_v1_locale(self.epoch) };
+        let bytes = self.localization_result(len, scratch)?;
+        self.check(abi::localization::decode_locale(bytes).map_err(crate::localization::error))
+    }
+    /// Format a message using the shared native catalog/ICU rules. Arguments are
+    /// named Text, finite Number or CalendarDate values. No allocation is needed
+    /// in the guest; request/result scratch must be distinct borrowed slices.
+    pub fn localize<'a>(
+        &mut self,
+        request: crate::localization::LocalizeRequest<'_>,
+        request_scratch: &mut [u8],
+        result_scratch: &'a mut [u8],
+    ) -> Result<crate::localization::LocalizedText<'a>> {
+        self.ready()?;
+        let len = self.check(
+            abi::localization::encode_request(request, request_scratch)
+                .map_err(crate::localization::error),
+        )?;
+        // SAFETY: complete initialized versioned frame, synchronously copied.
+        let result = unsafe {
+            raw::incant_localization_v1_localize(
+                self.epoch,
+                request_scratch.as_ptr() as usize as i32,
+                len as i32,
+            )
+        };
+        let bytes = self.localization_result(result, result_scratch)?;
+        self.check(abi::localization::decode_localized(bytes).map_err(crate::localization::error))
+    }
+    /// Queue a validated locale/fallback/pseudo setting in the ordinary atomic
+    /// structural transaction. This does not edit an authoring document.
+    pub fn set_locale(
+        &mut self,
+        settings: crate::localization::LocaleSettings<'_>,
+        scratch: &mut [u8],
+    ) -> Result<()> {
+        self.ready()?;
+        let len = self.check(
+            abi::localization::encode_settings(settings, scratch)
+                .map_err(crate::localization::error),
+        )?;
+        // SAFETY: initialized bounded frame copied before this borrow expires;
+        // the host independently validates every setting and all command quotas.
+        unsafe {
+            raw::incant_localization_v1_set_locale(
+                self.epoch,
+                scratch.as_ptr() as usize as i32,
+                len as i32,
+            );
+        }
+        Ok(())
+    }
+    /// Copy a primitive UTF-8 diagnostic into this update's bounded log buffer.
+    /// Publication waits for acceptance; history retains a prefix and counts drops.
+    /// An invalid message poisons this callback even if its error is ignored.
+    pub fn log(&mut self, message: &str, level: abi::LogLevel) -> Result<()> {
+        self.ready()?;
+        self.check(if message.len() > abi::LOG_MAX_MESSAGE_BYTES {
+            Err(Error::Bounds)
+        } else if message
+            .chars()
+            .any(|c| c.is_control() && c != '\n' && c != '\t')
+        {
+            Err(Error::Malformed)
+        } else {
+            Ok(())
+        })?;
+        // SAFETY: initialized UTF-8 bytes borrowed through this synchronous copy;
+        // the host independently checks the epoch, range, level and all quotas.
+        unsafe {
+            raw::incant_log_v1_write(
+                self.epoch,
+                level as i32,
+                message.as_ptr() as usize as i32,
+                message.len() as i32,
+            );
+        }
+        Ok(())
+    }
     pub fn chunk_count(&mut self) -> Result<usize> {
         self.ready()?;
         // SAFETY: scalar import only. Host checks active epoch/call quota.

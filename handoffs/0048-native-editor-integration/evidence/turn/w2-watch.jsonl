@@ -1,0 +1,2 @@
+{"t": 0.3, "header": "Agent  , Working…", "stop": true, "send": false, "allow": null, "deny": false, "buttons": ["Agent\n\n, Working…", "Stop", "Change allowance"], "text_chars": 401, "shot": "w2-01.png"}
+{"t": 1.21, "header": "Agent  , Needs approval", "stop": true, "send": false, "allow": {"title": "Allow", "enabled": true}, "deny": true, "buttons": ["Agent\n\n, Needs approval", "Exact arguments 249 bytes", "Deny", "Allow", "Stop", "Change allowance"], "text_chars": 439, "shot": "w2-02.png"}

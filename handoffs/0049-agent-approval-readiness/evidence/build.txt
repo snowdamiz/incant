@@ -1,0 +1,24 @@
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 89 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                                       0.99 kB │ gzip:   0.54 kB
+dist/assets/jetbrains-mono-cyrillic-ext-wght-normal-EocZY2iu.woff2    2.02 kB
+dist/assets/jetbrains-mono-vietnamese-wght-normal-Bt-aOZkq.woff2      7.50 kB
+dist/assets/jetbrains-mono-greek-wght-normal-Bw9x6K1M.woff2           9.00 kB
+dist/assets/inter-vietnamese-wght-normal-CBcvBZtf.woff2              10.25 kB
+dist/assets/inter-greek-ext-wght-normal-DlzME5K_.woff2               11.23 kB
+dist/assets/jetbrains-mono-cyrillic-wght-normal-D73BlboJ.woff2       12.10 kB
+dist/assets/jetbrains-mono-latin-ext-wght-normal-DBQx-q_a.woff2      15.19 kB
+dist/assets/inter-cyrillic-wght-normal-DqGufNeO.woff2                18.74 kB
+dist/assets/inter-greek-wght-normal-CkhJZR-_.woff2                   18.99 kB
+dist/assets/inter-cyrillic-ext-wght-normal-BOeWTOD4.woff2            25.96 kB
+dist/assets/jetbrains-mono-latin-wght-normal-B9CIFXIH.woff2          40.40 kB
+dist/assets/inter-latin-wght-normal-Dx4kXJAl.woff2                   48.25 kB
+dist/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2               85.06 kB
+dist/assets/index-B5m-ebtY.css                                       87.95 kB │ gzip:  14.87 kB
+dist/assets/index--Grj09iZ.js                                       468.04 kB │ gzip: 143.57 kB │ map: 1,958.32 kB
+
+✓ built in 130ms
+exit=0

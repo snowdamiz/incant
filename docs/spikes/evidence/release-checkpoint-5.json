@@ -1,0 +1,612 @@
+{
+  "recorded_at": "2026-10-11T20:35:25.255343+00:00",
+  "checkpoint": 5,
+  "pr": "https://github.com/snowdamiz/incant/pull/85",
+  "candidate": "04f8d9b18a4b29893c63a346841fffd41ce437c7",
+  "selected_main": "04f8d9b18a4b29893c63a346841fffd41ce437c7",
+  "release_merge": "c603ca07bbe1e6e1ad46b2fd3aa2f70aaec07f50",
+  "release_parents": [
+    "cde3d7279ffe09204f853f3ce342175a14035b1e",
+    "04f8d9b18a4b29893c63a346841fffd41ce437c7"
+  ],
+  "tree": "438e65c9165372e45681d40c910d6bb05b056832",
+  "merged_at": "2026-10-11T20:33:01Z",
+  "all_23_required_checks_success": true,
+  "all_eight_push_workflows_success": true,
+  "tree_and_trailer_verified": true,
+  "protection": {
+    "release_required_contexts": 23,
+    "strict": true,
+    "enforce_admins": true,
+    "required_app_id": 15368
+  },
+  "checks": [
+    {
+      "name": "android",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-11T19:38:01Z",
+      "completedAt": "2026-10-11T19:46:01Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38168843389/job/114556976758"
+    },
+    {
+      "name": "build",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-11T19:38:01Z",
+      "completedAt": "2026-10-11T19:39:01Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38168843467/job/114556976791"
+    },
+    {
+      "name": "checks",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-11T19:42:11Z",
+      "completedAt": "2026-10-11T20:26:59Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38168843513/job/114557023869"
+    },
+    {
+      "name": "classify",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-11T19:38:01Z",
+      "completedAt": "2026-10-11T19:38:12Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38168843513/job/114556977090"
+    },
+    {
+      "name": "compare",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-11T19:52:48Z",
+      "completedAt": "2026-10-11T19:53:17Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38168843444/job/114560012388"
+    },
+    {
+      "name": "conformance (macos-latest)",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-11T19:38:05Z",
+      "completedAt": "2026-10-11T19:55:30Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38168843476/job/114556976803"
+    },
+    {
+      "name": "conformance (ubuntu-latest)",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-11T19:38:01Z",
+      "completedAt": "2026-10-11T19:49:51Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38168843476/job/114556976949"
+    },
+    {
+      "name": "conformance (windows-latest)",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-11T19:38:14Z",
+      "completedAt": "2026-10-11T20:05:28Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38168843476/job/114556976963"
+    },
+    {
+      "name": "desktop (linux, ubuntu-latest, incant_platform_smoke)",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-11T19:38:01Z",
+      "completedAt": "2026-10-11T19:42:39Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38168843389/job/114556976631"
+    },
+    {
+      "name": "desktop (macos, macos-latest, incant_platform_smoke)",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-11T19:38:07Z",
+      "completedAt": "2026-10-11T19:45:48Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38168843389/job/114556976583"
+    },
+    {
+      "name": "desktop (ubuntu-latest, Linux)",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-11T19:38:01Z",
+      "completedAt": "2026-10-11T19:54:43Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38168843455/job/114556976799"
+    },
+    {
+      "name": "desktop (windows, windows-latest, incant_platform_smoke.exe)",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-11T19:38:01Z",
+      "completedAt": "2026-10-11T19:50:02Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38168843389/job/114556976581"
+    },
+    {
+      "name": "desktop (windows-latest, Windows, .exe)",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-11T19:38:01Z",
+      "completedAt": "2026-10-11T20:32:07Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38168843455/job/114556976605"
+    },
+    {
+      "name": "ios",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-11T19:41:48Z",
+      "completedAt": "2026-10-11T19:47:37Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38168843389/job/114556976648"
+    },
+    {
+      "name": "local-service-protocols",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-11T19:38:00Z",
+      "completedAt": "2026-10-11T19:39:25Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38168843400/job/114556976470"
+    },
+    {
+      "name": "native (macos-latest)",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-11T19:38:09Z",
+      "completedAt": "2026-10-11T19:52:46Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38168843444/job/114556976847"
+    },
+    {
+      "name": "native (ubuntu-latest)",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-11T19:38:01Z",
+      "completedAt": "2026-10-11T19:48:10Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38168843444/job/114556976871"
+    },
+    {
+      "name": "native (windows-latest)",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-11T19:38:00Z",
+      "completedAt": "2026-10-11T19:51:12Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38168843444/job/114556976948"
+    },
+    {
+      "name": "portability",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-11T19:38:08Z",
+      "completedAt": "2026-10-11T19:41:36Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38168843444/job/114556976773"
+    },
+    {
+      "name": "storage (macos-latest)",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-11T19:38:09Z",
+      "completedAt": "2026-10-11T19:42:05Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38168843443/job/114556976865"
+    },
+    {
+      "name": "storage (ubuntu-latest)",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-11T19:38:00Z",
+      "completedAt": "2026-10-11T19:40:57Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38168843443/job/114556976891"
+    },
+    {
+      "name": "storage (windows-latest)",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-11T19:38:01Z",
+      "completedAt": "2026-10-11T19:43:07Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38168843443/job/114556976737"
+    },
+    {
+      "name": "web",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-11T19:38:01Z",
+      "completedAt": "2026-10-11T19:42:29Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38168843389/job/114556976489"
+    }
+  ],
+  "runs": {
+    "38168843443": {
+      "id": 38168843443,
+      "event": "push",
+      "head_sha": "04f8d9b18a4b29893c63a346841fffd41ce437c7",
+      "head_branch": "codex/release-candidate",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-11T19:37:58Z",
+      "updated_at": "2026-10-11T19:43:08Z"
+    },
+    "38168843455": {
+      "id": 38168843455,
+      "event": "push",
+      "head_sha": "04f8d9b18a4b29893c63a346841fffd41ce437c7",
+      "head_branch": "codex/release-candidate",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-11T19:37:58Z",
+      "updated_at": "2026-10-11T20:32:07Z"
+    },
+    "38168843476": {
+      "id": 38168843476,
+      "event": "push",
+      "head_sha": "04f8d9b18a4b29893c63a346841fffd41ce437c7",
+      "head_branch": "codex/release-candidate",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-11T19:37:58Z",
+      "updated_at": "2026-10-11T20:05:29Z"
+    },
+    "38168843513": {
+      "id": 38168843513,
+      "event": "push",
+      "head_sha": "04f8d9b18a4b29893c63a346841fffd41ce437c7",
+      "head_branch": "codex/release-candidate",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-11T19:37:58Z",
+      "updated_at": "2026-10-11T20:26:59Z"
+    },
+    "38168843400": {
+      "id": 38168843400,
+      "event": "push",
+      "head_sha": "04f8d9b18a4b29893c63a346841fffd41ce437c7",
+      "head_branch": "codex/release-candidate",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-11T19:37:58Z",
+      "updated_at": "2026-10-11T19:39:26Z"
+    },
+    "38168843444": {
+      "id": 38168843444,
+      "event": "push",
+      "head_sha": "04f8d9b18a4b29893c63a346841fffd41ce437c7",
+      "head_branch": "codex/release-candidate",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-11T19:37:58Z",
+      "updated_at": "2026-10-11T19:53:18Z"
+    },
+    "38168843389": {
+      "id": 38168843389,
+      "event": "push",
+      "head_sha": "04f8d9b18a4b29893c63a346841fffd41ce437c7",
+      "head_branch": "codex/release-candidate",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-11T19:37:58Z",
+      "updated_at": "2026-10-11T19:50:02Z"
+    },
+    "38168843467": {
+      "id": 38168843467,
+      "event": "push",
+      "head_sha": "04f8d9b18a4b29893c63a346841fffd41ce437c7",
+      "head_branch": "codex/release-candidate",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-11T19:37:58Z",
+      "updated_at": "2026-10-11T19:39:02Z"
+    }
+  },
+  "timings": {
+    "windows_desktop": {
+      "candidate": "04f8d9b18a4b29893c63a346841fffd41ce437c7",
+      "job": 114556976605,
+      "result": "success",
+      "execution_seconds": 3246.0,
+      "queue_from_run_creation_seconds": 3.0,
+      "log_sha256": "5e40c04c5278f127654f6be77832adb7550b8e6a3fdafccb33e739b99bc35a96",
+      "steps_at_least_25s": [
+        {
+          "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+          "seconds": 47.0,
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm test --workspace editor/ui",
+          "seconds": 74.0,
+          "conclusion": "success"
+        },
+        {
+          "name": "Run cargo test --workspace --profile ci --locked --features incant_audio_runtime/scene --timings",
+          "seconds": 652.0,
+          "conclusion": "success"
+        },
+        {
+          "name": "Run cargo clippy -p incant_game_player --features native-window --all-targets --profile ci --locked -j2 -- -D warnings",
+          "seconds": 110.0,
+          "conclusion": "success"
+        },
+        {
+          "name": "Run cargo test -p incant_game_player --features native-window --all-targets --profile ci --locked -j2",
+          "seconds": 308.0,
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify geometry, editor recovery and simulated frame capture",
+          "seconds": 248.0,
+          "conclusion": "success"
+        },
+        {
+          "name": "Run cargo build --workspace --bin incant_editor --bin incant_headless --example cook_scene --profile ci --features incant_editor/custom-protocol,incant_audio_runtime/scene --locked --timings",
+          "seconds": 56.0,
+          "conclusion": "success"
+        },
+        {
+          "name": "Export committed sources and execute the copied shipping game",
+          "seconds": 729.0,
+          "conclusion": "success"
+        },
+        {
+          "name": "Build and execute the shipping runtime with matched crash symbols",
+          "seconds": 448.0,
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+          "seconds": 327.0,
+          "conclusion": "success"
+        }
+      ],
+      "restored_key": "v0-rust-Desktop editor and engine-Windows-X64-desktop-Windows_NT-x64-773408be-923d50c1",
+      "restored_bytes": 1795150899,
+      "completed_replacement_cache": 8806499881,
+      "replacement_bytes": 2011726110,
+      "cache_post_step_seconds": 327,
+      "export_evidence": "/tmp/incant-checkpoint5-windows-authored-export-evidence.json",
+      "scope": "Actual hosted Windows checkpoint5, changed dependency graph with prefix fallback restore. No controlled cache/profile speedup claim; new exact cache has not yet been consumed."
+    },
+    "macos_general": {
+      "candidate": "04f8d9b18a4b29893c63a346841fffd41ce437c7",
+      "job": 114557023869,
+      "result": "success",
+      "execution_seconds": 2688.0,
+      "queue_from_run_creation_seconds": 253.0,
+      "job_log_sha256": "bc759c9664d2578ea8bd7a02b88bde32a394a30f76873ccbe85e420701612cf6",
+      "session_report_sha256": "05e14052b8bf254f43fc0d7c914efe5953f991f62edca9ac2aff550770b401d2",
+      "exact_source_files_verified": 3417,
+      "session_seconds": 1401.4855959580002,
+      "unique_target_units": 282,
+      "total_reused_unit_events": 371,
+      "builds": [
+        {
+          "index": 0,
+          "seconds": 231.623785708,
+          "fresh_units": 143,
+          "reused_units": 0,
+          "stdout_sha256": "b68fdb01f1ce9c9684b633ec57f8d3873f5a3f22ad4b86304f003cad05b5c02c",
+          "stderr_sha256": "98a79815a788502262ec9a40df824a572c9708c66f193925b48600af81ba1f8f"
+        },
+        {
+          "index": 1,
+          "seconds": 171.70418999999993,
+          "fresh_units": 35,
+          "reused_units": 120,
+          "stdout_sha256": "070bf9b2c9fbc21f5e6bccadfb59388f5d368064b6f7f6439f03a3ccfb12ba88",
+          "stderr_sha256": "21250059378f3a7ed66b6d206f636dd228fd096a0d4f4561cb611539cd8632d2"
+        },
+        {
+          "index": 2,
+          "seconds": 637.4536036670002,
+          "fresh_units": 88,
+          "reused_units": 118,
+          "stdout_sha256": "82597c6e54bc1591524840eb0c92d7a392062d8667e7af60f25ca057b0d96ee3",
+          "stderr_sha256": "86b576786ecde57f811238c7eedecb0453957045629c7f1c49c421a8074e73d8"
+        },
+        {
+          "index": 3,
+          "seconds": 245.12249904100008,
+          "fresh_units": 16,
+          "reused_units": 133,
+          "stdout_sha256": "b0bc2bb2c85facb0a7cfb94aaefd3bb39ccdb9dbbf8de4c3e5366d737590235b",
+          "stderr_sha256": "3d893b577a6bcc0be80d5a957550915bc10a32b8fbf75709c4875d781b7b4f4d"
+        }
+      ],
+      "deletion_barrier_verified": true,
+      "probes": [
+        "shipping.py",
+        "native-scene-audio.py",
+        "native-game.py --gpu --flipbook --flipbook-sdk",
+        "cooked-script.py --physics"
+      ],
+      "steps_at_least_20s": [
+        {
+          "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+          "seconds": 39.0,
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm run test:tools",
+          "seconds": 67.0,
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm run test --workspace editor/ui",
+          "seconds": 33.0,
+          "conclusion": "success"
+        },
+        {
+          "name": "Run cargo clippy --workspace --all-targets --locked --features incant_audio_runtime/scene -- -D warnings",
+          "seconds": 27.0,
+          "conclusion": "success"
+        },
+        {
+          "name": "Run cargo test -p incant_game_player --features native-window --all-targets --profile ci --locked -j2",
+          "seconds": 49.0,
+          "conclusion": "success"
+        },
+        {
+          "name": "Run cargo test --workspace --profile ci --locked --features incant_audio_runtime/scene --timings",
+          "seconds": 271.0,
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify geometry, editor recovery and simulated frame capture",
+          "seconds": 163.0,
+          "conclusion": "success"
+        },
+        {
+          "name": "Run cargo build --workspace --bin incant_editor --bin incant_headless --example cook_scene --example collaboration_spike --example texture_probe --example save_world --example native_scene_audio --example no_renderer_fixtures --profile ci --features incant_editor/custom-protocol,incant_audio_runtime/scene --locked --timings",
+          "seconds": 29.0,
+          "conclusion": "success"
+        },
+        {
+          "name": "Export committed sources and execute the copied shipping game",
+          "seconds": 399.0,
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify four source-free shipping players in one fresh session",
+          "seconds": 1404.0,
+          "conclusion": "success"
+        }
+      ],
+      "cache_restore": "Exact candidate Mac rust key ending b07e3261, 2535945525 bytes; exact npm lock key; no new immutable-key write.",
+      "scope": "Actual hosted macOS checkpoint5 evidence. No matched unchanged-source standalone run; no controlled speedup, Windows timing or phone performance inference."
+    },
+    "linux_desktop": {
+      "job": 114556976799,
+      "head": "04f8d9b18a4b29893c63a346841fffd41ce437c7",
+      "conclusion": "success",
+      "started_at": "2026-10-11T19:38:01Z",
+      "completed_at": "2026-10-11T19:54:43Z",
+      "execution_seconds": 1002,
+      "queue_seconds": 3,
+      "log": "/tmp/incant-checkpoint5-linux-desktop.log",
+      "log_sha256": "ead1c691b26ed57d517aa06b0b8e3bbc2ba732b6cebad670017a9b85692fb69c",
+      "restores": [
+        "2026-10-11T19:38:13.7041245Z Cache restored successfully",
+        "2026-10-11T19:38:13.7302639Z Cache restored from key: node-cache-Linux-x64-npm-cc5583e1c617d5173b900d08e240977372a527c60c11ac60a54a5698be77145c",
+        "2026-10-11T19:40:17.1279206Z Cache restored successfully"
+      ],
+      "scope": "Hosted Linux desktop success; comparison is observational with changed reviewed sources, not a controlled dependency-cache performance experiment.",
+      "rust_restoration": [
+        "2026-10-11T19:40:17.2133582Z Restored from cache key \"v0-rust-Desktop editor and engine-Linux-X64-desktop-Linux-x64-b9e20461-b07e3261\" full match: true."
+      ]
+    }
+  },
+  "windows_authored_export": {
+    "checked_at": "2026-10-11T20:24:12.836906+00:00",
+    "candidate": "04f8d9b18a4b29893c63a346841fffd41ce437c7",
+    "run": 38168843455,
+    "job": 114556976605,
+    "artifact": 11713924445,
+    "artifact_name": "authored-native-export-Windows",
+    "step_success": true,
+    "whole_job_success": "success",
+    "actual_target": "x86_64-pc-windows-msvc",
+    "result_sha256": "1d1ec76d8ae8518306c47b1ae9376d2970115f9a5256b0ea771fbe9f4a7b3945",
+    "export_receipt_sha256": "f7694eadd7b3cb36567fbd481245214eb32e7d6af6d4b60b71a1ed16c8924c53",
+    "player_sha256": "8f68e518b79016cb63ad0c4e9d29cb6af7e026c191bcb2d90bc1ff0799807d29",
+    "player_bytes": 9251328,
+    "pdb_sha256": "185f438c220a69a5f77e66e311189df65e55e16b70c0e2562b40ff943c0cab12",
+    "pe_pdb_identity": {
+      "guid": "bfdf950d-f56a-480f-a13c-ed0d77add418",
+      "age": 1
+    },
+    "map_audit": {
+      "source": "fresh MSVC linker map",
+      "file": "player-link.map",
+      "sha256": "10d7ebc7451861acbbf353b97f7cecced31ae5859548581685ab4dde97bf0186"
+    },
+    "codegen": {
+      "incant_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort",
+        "debuginfo": "2",
+        "split-debuginfo": "packed"
+      },
+      "incant_script": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort",
+        "debuginfo": "2",
+        "split-debuginfo": "packed"
+      },
+      "incant_game_player": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort",
+        "debuginfo": "2",
+        "split-debuginfo": "packed",
+        "lto": "fat"
+      }
+    },
+    "build_log_sha256": "aceefbc54d053f902d1bf89cca13653566aeb227cb1565f8653fa7824fb882a9",
+    "run_report_sha256": {
+      "run-0.json": "efd948ff5e0fc842341138ce285f968f58c1c949b4705de8f6642bda1b172122",
+      "run-1.json": "efd948ff5e0fc842341138ce285f968f58c1c949b4705de8f6642bda1b172122",
+      "run-2.json": "efd948ff5e0fc842341138ce285f968f58c1c949b4705de8f6642bda1b172122"
+    },
+    "independent_local_rechecks": [
+      "PE/PDB identity including DBI symbol/source information",
+      "required bytecode symbols and excluded source-parser/compiler symbols in fresh link map",
+      "fresh runtime/script/player target codegen flags from build log",
+      "player, cooked data and PCM hashes",
+      "three successful 20-tick observation reports"
+    ],
+    "scope": "Downloaded exact hosted artifact, parsed only; no local Windows execution. CPU functional proof; no phone/GPU/performance or phase claim.",
+    "local_verifier_setup_note": "Initial invocation used symlinked macOS /tmp path and package path guard correctly refused it. Repeated with its canonical /private/tmp path; no source change or hosted rerun."
+  },
+  "cache_retirement": {
+    "checked_at": "2026-10-11T20:33:59.251456+00:00",
+    "authority": "Existing exact obsolete generated-cache replacement retention policy; persistent trusted candidate producer replaces old main fallback.",
+    "retired": {
+      "id": 8800194134,
+      "ref": "refs/heads/main",
+      "key": "v0-rust-Desktop editor and engine-Windows-X64-desktop-Windows_NT-x64-773408be-923d50c1",
+      "version": "b8c7260acabdf13b21a4d2afac75b9c957be9f3f26540be324aaa1b498062cd2",
+      "size_in_bytes": 1795150899
+    },
+    "preserved_replacement": {
+      "id": 8806499881,
+      "ref": "refs/heads/codex/release-candidate",
+      "key": "v0-rust-Desktop editor and engine-Windows-X64-desktop-Windows_NT-x64-773408be-b07e3261",
+      "version": "b8c7260acabdf13b21a4d2afac75b9c957be9f3f26540be324aaa1b498062cd2",
+      "size_in_bytes": 2011726110
+    },
+    "successful_job": 114556976605,
+    "save_step": {
+      "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 95,
+      "started_at": "2026-10-11T20:26:35Z",
+      "completed_at": "2026-10-11T20:32:02Z"
+    },
+    "log_sha256": "5e40c04c5278f127654f6be77832adb7550b8e6a3fdafccb33e739b99bc35a96",
+    "upload_bytes": 2011726110,
+    "upload_percent": 100,
+    "before_bytes": 10496415344,
+    "after_bytes": 8701264445,
+    "before_count": 13,
+    "after_count": 12,
+    "deleted_by_this_action": [
+      8800194134
+    ],
+    "observed_removed_ids": [
+      8800194134
+    ],
+    "concurrent_disappearance_without_cause_claim": [],
+    "new_candidate_warm_consumption": "not yet observed; completed upload verified"
+  },
+  "historical_failures": [
+    {
+      "checkpoint": 1,
+      "promoted": false,
+      "terminal_receipt_sha256": "2ec3a858fd070b797d81bd980f00321861bd5c1adeee44cbe25e5972ccfb3ab7",
+      "summary": "Windows journal test read while exclusive CommandBus lock was live; repaired in main87."
+    },
+    {
+      "checkpoint": 2,
+      "promoted": false,
+      "terminal_receipt_sha256": "0f48704a0d85701c70af56894bfc76de9380735a43bd4ad170841a4f64352295",
+      "summary": "Linux private S3 UID, macOS process observer and Windows TypeScript entry path; repaired in main89."
+    },
+    {
+      "checkpoint": 3,
+      "promoted": false,
+      "terminal_receipt_sha256": "af715b9df2f008fc278619608ca36d16f92e605f649f378d38086c114fd64df1",
+      "summary": "Windows restricted TypeScript host callback path mismatch; repaired in main91."
+    },
+    {
+      "checkpoint": 4,
+      "promoted": false,
+      "terminal_receipt_sha256": "2b1723847592e334713a28885dd80e715db8cd39d35a99c78c72ba10b81bf26e",
+      "summary": "Three isolated physics lock failures, dependent compare skipped, Windows PE symbol audit failure; repaired in main95/96."
+    }
+  ],
+  "audit_receipts": {
+    "incant-release-checkpoint-5-promoted.json": "babe11c2f6650e8a36dc80e0b8e70330c3b267aaac6a4367b43f625604367ddd",
+    "incant-release-checkpoint-5-terminal.json": "63af6c87aa98db665eae24817040d640e52a34b1c0363b901276fbb883bc3b6f",
+    "incant-checkpoint5-hosted-shared-proof-summary.json": "6fbe5abd6bba7a0e73b30c4f0deb2b5f2408cf81d08b1e8f5aa0947ae9ae9b28",
+    "incant-checkpoint5-windows-desktop-evidence.json": "642fc0113df84f2ab9991984560e0705a4e33c4eedebc1c4f23177234d3ec4b5",
+    "incant-checkpoint5-windows-authored-export-evidence.json": "980f19e67f96cf4bc7a191cc2482da9605e71709898d5b6cce3db4c26de2b0d1",
+    "incant-checkpoint5-windows-cache-retirement/evidence.json": "c5f17e9b2426dee7f9aa248617ab15bc8547ed01bdced0badeb6cb6c20c3d4db"
+  },
+  "limitations": [
+    "Promotion is an integration baseline, not a signed/tagged/distributed release or phase approval.",
+    "No physical-device, frame-performance, visual, provider-quality or complete product gate is implied.",
+    "Full-job and shared-proof timings are actual hosted observations, not a matched unchanged-source speedup experiment.",
+    "The new Windows exact candidate cache was uploaded successfully; subsequent warm consumption remains unobserved.",
+    "Failed earlier checkpoints and the original PR83 missing-Wasm-target failure remain historical failures, not retroactive successes."
+  ]
+}

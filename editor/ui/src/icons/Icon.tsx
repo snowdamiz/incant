@@ -53,6 +53,12 @@ const PATHS = {
   pagePrev: 'M10 4L6 8l4 4',
   pageNext: 'M6 4l4 4-4 4',
   pageLast: 'M5 4l4 4-4 4M11.5 4v8',
+  // Play transport: play (and resume), pause, one-tick step, stop.
+  play: 'M5 3.25l7.5 4.75L5 12.75z',
+  pause: 'M5.75 3.5v9M10.25 3.5v9',
+  step: 'M3.75 3.25l6.5 4.75-6.5 4.75zM12.25 3.5v9',
+  stop: 'M4 4h8v8H4z',
+  refresh: 'M13 8a5 5 0 01-8.6 3.5M3 8a5 5 0 018.6-3.5M11.5 2v2.6H8.9M4.5 14v-2.6h2.6',
   pencil: 'M10.25 3.25l2.5 2.5L6 12.5H3.5V10zM8.75 4.75l2.5 2.5',
   trash: 'M3 4.5h10M6.5 4.5V3h3v1.5M4.5 4.5l.75 9h5.5l.75-9M6.75 7v4.25M9.25 7v4.25',
   // Component marks for Inspector section headers.

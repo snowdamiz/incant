@@ -2,71 +2,10 @@
 //! A retained log function loses authority when its update exits.
 use crate::ScriptError;
 use rquickjs::{Ctx, Exception, Function, Value, function::Rest};
-use serde::Serialize;
 use std::{cell::RefCell, rc::Rc};
 
-const MAX_MESSAGE_BYTES: usize = 1024;
-const MAX_TICK_ENTRIES: usize = 64;
-const MAX_TICK_BYTES: usize = 16 * 1024;
-const MAX_RETAINED_ENTRIES: usize = 1024;
-const MAX_RETAINED_BYTES: usize = 256 * 1024;
-
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
-#[serde(rename_all = "snake_case")]
-pub enum LogLevel {
-    Debug,
-    Info,
-    Warn,
-    Error,
-}
-#[derive(Debug, PartialEq, Eq, Serialize)]
-pub struct NativeLog {
-    /// Accepted script update, matching the native script clock.
-    pub tick: u64,
-    pub level: LogLevel,
-    pub message: String,
-}
-/// Bounded prefix of committed messages. Once full, further committed messages
-/// increment `dropped` instead of consuming additional host storage.
-#[derive(Default, Debug, Serialize)]
-pub struct NativeLogs {
-    entries: Vec<NativeLog>,
-    dropped: u64,
-    #[serde(skip)]
-    bytes: usize,
-}
-// Static modules currently have no logging ABI; their committed log is empty.
-#[cfg(feature = "static-module")]
-pub(crate) static NO_MODULE_LOGS: NativeLogs = NativeLogs {
-    entries: Vec::new(),
-    dropped: 0,
-    bytes: 0,
-};
-impl NativeLogs {
-    pub fn entries(&self) -> &[NativeLog] {
-        &self.entries
-    }
-    pub fn dropped(&self) -> u64 {
-        self.dropped
-    }
-    pub(crate) fn commit(&mut self, tick: u64, records: Vec<(LogLevel, String)>) {
-        for (level, message) in records {
-            if self.dropped > 0
-                || self.entries.len() == MAX_RETAINED_ENTRIES
-                || message.len() > MAX_RETAINED_BYTES - self.bytes
-            {
-                self.dropped = self.dropped.saturating_add(1);
-                continue;
-            }
-            self.bytes += message.len();
-            self.entries.push(NativeLog {
-                tick,
-                level,
-                message,
-            });
-        }
-    }
-}
+pub use incant_runtime::logging::{LogLevel, NativeLog, NativeLogs};
+use incant_runtime::logging::{MAX_MESSAGE_BYTES, MAX_TICK_BYTES, MAX_TICK_ENTRIES};
 #[derive(Default)]
 struct State {
     active: bool,

@@ -1,0 +1,31 @@
+{
+  "kind": "independent-root-review",
+  "reviewer": "astra",
+  "reviewed_at": "2026-10-11T23:26:16.094681+00:00",
+  "head": "7c66106c9afb2c2b2abd3e6b2107e54d74b06c35",
+  "tree": "014500f6134f93030057c186ae5a58a670180f61",
+  "packet_sha256": "9afdcf76665d6b22b82519e22aaa5974abb788bf0772e3130526d2d9e0d0e7df",
+  "verified": {
+    "source": 36,
+    "test_binaries_sha256": 19,
+    "scripts_sha256": 3,
+    "patch": 1,
+    "evidence": 1,
+    "artifact_manifest": 1,
+    "logs": 17,
+    "prepared_artifacts": 378
+  },
+  "rust_tests_passed": 74,
+  "rust_test_groups": 23,
+  "findings": [],
+  "review_scope": [
+    "shared no_std copied wire codec and malformed bounds",
+    "active-epoch sticky rejection and transaction publication",
+    "locale tick-start snapshots and staged settings semantics",
+    "generated C/Rust imports and owned result lifetime",
+    "SDK request encoding and checked caller output",
+    "actual Wasmtime and wasm2c localization parity controls",
+    "Rust guest ABI/SDK cache identity regression"
+  ],
+  "acceptance": "Approved for scoped integration; exact union checks still required. No GPU, external provider, browser or reference-device gate claimed."
+}

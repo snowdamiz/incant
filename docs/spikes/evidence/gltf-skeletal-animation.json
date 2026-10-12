@@ -1,0 +1,143 @@
+{
+  "scope": "glTF skeletal/clip import, INCMOD04 binary data and retained CPU sampling only",
+  "base": "2816ecde29bf4dd0bb058e46212cd836c1bb816c",
+  "branch": "codex/gltf-skeletal-animation",
+  "source_sha256": {
+    "Cargo.lock": "e6ab9cf4e3cac5a3f261bb03d607fa59a85bce1397030721635c0b8b12e4e4d2",
+    "crates/incant_assets/src/animation_cook.rs": "0fe6ded425961b4edd7f1a4ef8024300689f6e092b3c90aec534415fc2e54e9d",
+    "crates/incant_assets/src/cache.rs": "464d7a00f0b95501655e36b5e5d602397527244d02fa362a3ba3808c522f26e8",
+    "crates/incant_assets/src/fbx/mod.rs": "b25e66a52c57c69f3c714c8eb123adee685e48bdeff8da52fbe2daf3e48eaa8d",
+    "crates/incant_assets/src/gltf_animation.rs": "54bf1078e658770186ca938a2322d834fbc74f16f394b98e903994cb7ef3e0d2",
+    "crates/incant_assets/src/gltf_import.rs": "2ddf54702cea88fc764800d8359f45956e5557a687929945659c63470c6ee388",
+    "crates/incant_assets/src/lib.rs": "9281a2212d64469bd2ff7c1594ee0bf9b73200a7a31b0796e91a0bd45d50899f",
+    "crates/incant_assets/src/mesh.rs": "6d0afdb45b6995798b3e159a916ad054f3f2095e34538cdf51f297b62c2afa8e",
+    "crates/incant_assets/src/navigation.rs": "ee2122c7ec4a89ea7345b98bbc9122f36c6d944c913442f8c23644b9509017e3",
+    "crates/incant_assets/tests/navigation.rs": "fa2798a56fad72840077f2419c1dfacc966898754ea8e06d0e9aa785c4668a60",
+    "crates/incant_assets/tests/skeletal.rs": "4898ffbab270cebbf34905ad028a0e87ae8e77e9bc1482cf60070bf078806b1c",
+    "crates/incant_assets/tests/skeletal/alloc.rs": "f58df95c57c6f884684b9a20427701e16e9049e24f287b0a9ea1e3031cb927fb",
+    "crates/incant_assets/tests/skeletal/fixture.rs": "2197fec00fe41cffd023b9865702adc42dfd1d38cf93b14c5f6d37daee05995c",
+    "crates/incant_assets_runtime/Cargo.toml": "f56622df1f962feae0b2970fe6a1a118fc30a2e3d04d194cf7a238b788405b34",
+    "crates/incant_assets_runtime/src/animation/binary.rs": "2d4cdf6389116ceeac3dd77f2870deed82cec5d85c357b2ac678164e006b9727",
+    "crates/incant_assets_runtime/src/animation/mod.rs": "0c86c61d8b82c45605382b7ada37430eeb846f7491c24beb3c482a4b86544ff4",
+    "crates/incant_assets_runtime/src/animation/player.rs": "540d5717d07956e58ef3a0acc880cf341564d2ab5cadbf588d5e4efdd1f91b0e",
+    "crates/incant_assets_runtime/src/lib.rs": "a931e6d7a3135d7097c6ba65da0d7a578985a00025cc7ea78f99c2de37847167",
+    "crates/incant_assets_runtime/src/model.rs": "846a1943f44ee7b491f8cf1346f52d05b5ea5c338d0b85e49252910fd933db0e",
+    "crates/incant_assets_runtime/src/version.rs": "7395e20e7ccc72ce709c6443ab018620b1bcb46e8dae67b4a434d36368a20c05"
+  },
+  "target": "/tmp/incant-skeletal-target (private APFS clone; no shared writer)",
+  "test_result": {
+    "passed": 89,
+    "failed": 0,
+    "ignored": 0,
+    "result_groups": 16,
+    "skeletal_tests": 14
+  },
+  "source_deleted_process": {
+    "executed_by": "fresh_process_loads_only_cooked_animation_data",
+    "child": "source_deleted_process_child",
+    "deleted_inputs": [
+      "model.gltf",
+      "model.bin"
+    ],
+    "expected_and_asserted_position": [
+      12.0,
+      1.0,
+      0.0
+    ],
+    "executable": "/tmp/incant-skeletal-target/ci/deps/skeletal-f0d5f3412645e00e",
+    "executable_sha256": "9dd089a7ee35041d282f3a4000cf4ac9adcee7d7bd1ab14bc89855558a64be4d",
+    "claim": "Fresh test executable process using cooked reader; not an exported/shipping player proof."
+  },
+  "allocation_observation": {
+    "iterations": 1024,
+    "allocations": 0,
+    "scope": "Accepted sample + caller-buffer palette conversion + CPU position blending on test thread, after startup",
+    "malformed_count_allocations": 0,
+    "limitation": "Not RSS, complete load peak, driver/GPU or shipping performance evidence."
+  },
+  "checks": [
+    "cargo test --locked -j 2 --profile ci -p incant_assets -p incant_assets_runtime --features incant_assets_runtime/visual",
+    "cargo clippy --locked -j 2 --profile ci -p incant_assets -p incant_assets_runtime --features incant_assets_runtime/visual --all-targets -- -D warnings",
+    "cargo check --locked -j 2 -p incant_assets_runtime --no-default-features",
+    "cargo check --locked -j 2 --target wasm32-unknown-unknown -p incant_assets_runtime --features visual",
+    "cargo tree --locked -p incant_assets_runtime --no-default-features --edges normal",
+    "python3 tools/check_runtime_dependencies.py incant_assets_runtime",
+    "python3 tools/check_runtime_dependencies.py incant_assets_runtime --features incant_assets_runtime/visual",
+    "cargo fmt --all -- --check",
+    "python3 tools/generate_conventions.py --check",
+    "git diff --check"
+  ],
+  "logs": {
+    "tests-final": {
+      "path": "/tmp/incant-skeletal-tests-final.log",
+      "sha256": "8b0289d17ecb14f1e89ca3ffb53961e0daee13b9b3c4e103f2282f77cfdf0a7a"
+    },
+    "clippy-final": {
+      "path": "/tmp/incant-skeletal-clippy-final.log",
+      "sha256": "7ba0c6160fe68d1bfb3d5cd90035f6c37daed5874c4aded7fc7a06591f9b22fb"
+    },
+    "audio-only": {
+      "path": "/tmp/incant-skeletal-audio-only.log",
+      "sha256": "2a51002c28d635cd7fbcd3712e314a819d5c608425bdc53f9f41a3b9d5f50a47"
+    },
+    "graph-default": {
+      "path": "/tmp/incant-skeletal-graph-default.log",
+      "sha256": "0dbfc07f10b280cddf2424b6e6b9d5dee62d1cc0d4ed78d732928e5e8fef1e3a"
+    },
+    "graph-visual": {
+      "path": "/tmp/incant-skeletal-graph-visual.log",
+      "sha256": "466c27957bec6177e21911180caffd16c9a78482761e9fad8fb9622eb2023499"
+    },
+    "audio-graph": {
+      "path": "/tmp/incant-skeletal-audio-graph.log",
+      "sha256": "bcec3eef80dcc87ff7d7be466a4ab51766eb74bccc7f8e2f0d21cf690677a51f"
+    },
+    "wasm-check": {
+      "path": "/tmp/incant-skeletal-wasm-check.log",
+      "sha256": "7bbcefcf0073214f7a919f136b827b61b03ff37ad28fbd2f9ce3e7b753136dbf"
+    },
+    "fmt": {
+      "path": "/tmp/incant-skeletal-fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "conventions": {
+      "path": "/tmp/incant-skeletal-conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "limits": {
+    "animation_bytes": 33554432,
+    "model_bytes": 134217728,
+    "nodes": 4096,
+    "scenes": 4096,
+    "node_scene_references": 65536,
+    "skins": 256,
+    "joints_per_skin": 256,
+    "total_joints": 4096,
+    "clips": 256,
+    "channels": 8192,
+    "keys": 1000000,
+    "influences": 1000000
+  },
+  "compatibility": "Static INCMOD01/02/03 reader retained; static03 writer/recipe unchanged; animated04 distinct recipe. No dependency versions changed; optional visual adds existing glam0.32.1 edge.",
+  "explicit_missing": [
+    "Animated renderer/native scene/SDK/export integration",
+    "Blend trees/state machines/IK/root motion/retargeting",
+    "CUBICSPLINE/morph/extra influence sets",
+    "Normal/tangent skin deformation",
+    "Rendered/appearance/device/performance gates"
+  ],
+  "no_activity": [
+    "GPU",
+    "screenshots",
+    "provider/credentials",
+    "editor/world/checkpoint/player/SDK/Wasm ABI changes",
+    "PR/push/main publication"
+  ],
+  "accessor_red_green": {
+    "before_log": "/tmp/incant-skeletal-types-before.log",
+    "before_sha256": "33063f1106a564e1db8476fd20787740f148dd73cbb5171f96663dd185abaae4",
+    "before_result": "JSON-valid U32 rotation entered gltf1.4.1 unreachable!; regression failed",
+    "after_result": "eight malformed semantic accessor cases refuse without reader panic; U8/U16 normalized weights + U8 joint imports produce expected positions; full89 tests pass"
+  }
+}

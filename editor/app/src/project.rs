@@ -43,6 +43,14 @@ pub enum LoadState {
     Ready(Box<CommandBus>),
     Failed(LoadError),
 }
+impl incant_agent::ProjectSlot for LoadState {
+    fn command_bus(&mut self) -> Result<&mut CommandBus, incant_agent::AgentError> {
+        match self {
+            Self::Ready(bus) => Ok(bus),
+            Self::Loading | Self::Failed(_) => Err(incant_agent::AgentError::ProjectUnavailable),
+        }
+    }
+}
 impl LoadState {
     pub fn bus_mut(&mut self) -> Result<&mut CommandBus, String> {
         match self {

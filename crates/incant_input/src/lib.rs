@@ -5,6 +5,7 @@ pub use actions::{
     ActionError, ActionGesture, ActionKind, ActionState, InputAction, InputActions, InputBinding,
     Stick, ValidatedActions, validate_actions,
 };
+pub mod gamepad;
 mod gestures;
 mod recording;
 mod types;

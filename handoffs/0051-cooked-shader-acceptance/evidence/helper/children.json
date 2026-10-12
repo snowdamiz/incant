@@ -1,0 +1,202 @@
+[
+  {
+    "name": "output-default",
+    "command": [
+      "/Users/andreyyurlov/.codex/worktrees/native-fbx-import/incant/.worktrees/0051-cooked-shader-acceptance/artifacts/tools/0051/output-v1/default-incant-render-tests",
+      "hdr_output::hdr_values_survive_until_tone_mapping_and_transfer_runs_once",
+      "--exact",
+      "--ignored",
+      "--test-threads=1",
+      "--nocapture"
+    ],
+    "binary_sha256": "7ab2bf2dd27b8c5b6ac734f4667877bbec6e5cf6b5e446cb8848a602847519cb",
+    "started_at": "2026-10-12T00:16:35.865811+00:00",
+    "expected_capture_count": 1,
+    "pid": 8889,
+    "exit_code": 0,
+    "ended_at": "2026-10-12T00:16:36.801302+00:00",
+    "reaped": true,
+    "files": {
+      "child.log": "97952cd2d27e6d3f172a71232dad54182fd60a03e62bccad5647e5f87556171f",
+      "hdr-reference-swatches.png": "de99290cfd11f0af713beaafeb14ca4dbdc410840347c9949ae7f6d772709130"
+    },
+    "capture_count_matches": true
+  },
+  {
+    "name": "output-cooked",
+    "command": [
+      "/Users/andreyyurlov/.codex/worktrees/native-fbx-import/incant/.worktrees/0051-cooked-shader-acceptance/artifacts/tools/0051/output-v1/cooked-incant-render-tests",
+      "hdr_output::hdr_values_survive_until_tone_mapping_and_transfer_runs_once",
+      "--exact",
+      "--ignored",
+      "--test-threads=1",
+      "--nocapture"
+    ],
+    "binary_sha256": "5271c38c27b46f4850e3b2568e589ea2b936d67fbc298c05079c0f3baafe9d6a",
+    "started_at": "2026-10-12T00:16:40.291870+00:00",
+    "expected_capture_count": 1,
+    "pid": 8955,
+    "exit_code": 0,
+    "ended_at": "2026-10-12T00:16:40.792704+00:00",
+    "reaped": true,
+    "files": {
+      "child.log": "dc13c6d35da3db45c25e23b7cfcc7387a74fde4cffc22f5eeb41003b4fb0ac5a",
+      "hdr-reference-swatches.png": "de99290cfd11f0af713beaafeb14ca4dbdc410840347c9949ae7f6d772709130"
+    },
+    "capture_count_matches": true
+  },
+  {
+    "name": "lookdev-default",
+    "command": [
+      "/Users/andreyyurlov/.codex/worktrees/native-fbx-import/incant/.worktrees/0051-cooked-shader-acceptance/artifacts/tools/0051/geometry-v2/default-model_gpu",
+      "shadows::lookdev::directional_shadow_lookdev_contact_slopes_and_curves",
+      "--exact",
+      "--ignored",
+      "--test-threads=1",
+      "--nocapture"
+    ],
+    "binary_sha256": "2e0d6d6c826a9b4196acbbcf8e821f8f3c6ce446d80ca801495372b1a6f27b9e",
+    "started_at": "2026-10-12T00:16:43.622828+00:00",
+    "expected_capture_count": 4,
+    "pid": 9036,
+    "exit_code": 0,
+    "ended_at": "2026-10-12T00:16:45.998799+00:00",
+    "reaped": true,
+    "files": {
+      "child.log": "f69f325427897068a01a9f3eb4d0a442d2fab718955f07799e34ce4323599044",
+      "lookdev-sun-70.png": "06e846ead6866fae23146c0ac06c0ccf6138f1d3a26ce0e62e7a94b2968d7595",
+      "lookdev-sun-38.png": "be3da8cad70181dd67c2499a6d94d8af843b94ea253d4dd864ced637e94b4eb5",
+      "lookdev-sun-12.png": "9c25abff830a24300190bb608dbdea67f7a7a63883e4b4d792a6dd10479389b7",
+      "lookdev-unshadowed.png": "7fae7886e1067bfa0f0b910f5daaf7ce4a1cb6c07882442d1eb8fbb38b7f095c"
+    },
+    "capture_count_matches": true
+  },
+  {
+    "name": "lookdev-cooked",
+    "command": [
+      "/Users/andreyyurlov/.codex/worktrees/native-fbx-import/incant/.worktrees/0051-cooked-shader-acceptance/artifacts/tools/0051/geometry-v2/cooked-geometry-model_gpu",
+      "shadows::lookdev::directional_shadow_lookdev_contact_slopes_and_curves",
+      "--exact",
+      "--ignored",
+      "--test-threads=1",
+      "--nocapture"
+    ],
+    "binary_sha256": "5dfc98bfa6f6cd0b87d4f35445f7e0154d1b32ee520b6cb551c16c9c8f940305",
+    "started_at": "2026-10-12T00:16:48.752518+00:00",
+    "expected_capture_count": 4,
+    "pid": 9108,
+    "exit_code": 0,
+    "ended_at": "2026-10-12T00:16:50.770461+00:00",
+    "reaped": true,
+    "files": {
+      "child.log": "e8157100fe714666805ceedc36c9eadbf19997f0efc8635c3e2619ebcd467cdd",
+      "lookdev-sun-70.png": "06e846ead6866fae23146c0ac06c0ccf6138f1d3a26ce0e62e7a94b2968d7595",
+      "lookdev-sun-38.png": "be3da8cad70181dd67c2499a6d94d8af843b94ea253d4dd864ced637e94b4eb5",
+      "lookdev-sun-12.png": "9c25abff830a24300190bb608dbdea67f7a7a63883e4b4d792a6dd10479389b7",
+      "lookdev-unshadowed.png": "7fae7886e1067bfa0f0b910f5daaf7ce4a1cb6c07882442d1eb8fbb38b7f095c"
+    },
+    "capture_count_matches": true
+  },
+  {
+    "name": "masks-default",
+    "command": [
+      "/Users/andreyyurlov/.codex/worktrees/native-fbx-import/incant/.worktrees/0051-cooked-shader-acceptance/artifacts/tools/0051/geometry-v2/default-model_gpu",
+      "shadows::alpha_masked_and_reflected_casters_preserve_holes_and_blend_casters_fail_explicitly",
+      "--exact",
+      "--ignored",
+      "--test-threads=1",
+      "--nocapture"
+    ],
+    "binary_sha256": "2e0d6d6c826a9b4196acbbcf8e821f8f3c6ce446d80ca801495372b1a6f27b9e",
+    "started_at": "2026-10-12T00:16:53.441172+00:00",
+    "expected_capture_count": 5,
+    "pid": 9156,
+    "exit_code": 0,
+    "ended_at": "2026-10-12T00:16:55.718049+00:00",
+    "reaped": true,
+    "files": {
+      "shadow-blended-noncaster.png": "2a9abc8efdd367d3515da296fe3876db8d0b73c3233a60e4cffc8b1788ff576b",
+      "child.log": "07659011199169c2736837409a742d2fbe2cfe4b87f9008248b111987be9c239",
+      "shadow-double-sided-back.png": "c79d992829e5805d90b3a3fd47c1fa24a4434cf6dc96a5e04a51d42e60cda2ae",
+      "shadow-single-sided-back.png": "2a9abc8efdd367d3515da296fe3876db8d0b73c3233a60e4cffc8b1788ff576b",
+      "shadow-reflected-mask.png": "c79d992829e5805d90b3a3fd47c1fa24a4434cf6dc96a5e04a51d42e60cda2ae",
+      "shadow-alpha-mask.png": "51d25bad87d2c36f1a6a0b46a9ccf6ed8e3e4777a8c6f11a8e93572abab16c0c"
+    },
+    "capture_count_matches": true
+  },
+  {
+    "name": "masks-cooked",
+    "command": [
+      "/Users/andreyyurlov/.codex/worktrees/native-fbx-import/incant/.worktrees/0051-cooked-shader-acceptance/artifacts/tools/0051/geometry-v2/cooked-geometry-model_gpu",
+      "shadows::alpha_masked_and_reflected_casters_preserve_holes_and_blend_casters_fail_explicitly",
+      "--exact",
+      "--ignored",
+      "--test-threads=1",
+      "--nocapture"
+    ],
+    "binary_sha256": "5dfc98bfa6f6cd0b87d4f35445f7e0154d1b32ee520b6cb551c16c9c8f940305",
+    "started_at": "2026-10-12T00:17:37.624744+00:00",
+    "expected_capture_count": 5,
+    "pid": 9576,
+    "exit_code": 0,
+    "ended_at": "2026-10-12T00:17:39.627142+00:00",
+    "reaped": true,
+    "files": {
+      "shadow-blended-noncaster.png": "2a9abc8efdd367d3515da296fe3876db8d0b73c3233a60e4cffc8b1788ff576b",
+      "child.log": "296d18e1de97ec580bf564560a5481470ab94664553f91e85f1c8d6722b32704",
+      "shadow-double-sided-back.png": "c79d992829e5805d90b3a3fd47c1fa24a4434cf6dc96a5e04a51d42e60cda2ae",
+      "shadow-single-sided-back.png": "2a9abc8efdd367d3515da296fe3876db8d0b73c3233a60e4cffc8b1788ff576b",
+      "shadow-reflected-mask.png": "c79d992829e5805d90b3a3fd47c1fa24a4434cf6dc96a5e04a51d42e60cda2ae",
+      "shadow-alpha-mask.png": "51d25bad87d2c36f1a6a0b46a9ccf6ed8e3e4777a8c6f11a8e93572abab16c0c"
+    },
+    "capture_count_matches": true
+  },
+  {
+    "name": "diagnostic-default",
+    "command": [
+      "/Users/andreyyurlov/.codex/worktrees/native-fbx-import/incant/.worktrees/0051-cooked-shader-acceptance/artifacts/tools/0051/geometry-v2/default-incant_render",
+      "diagnostic_output::diagnostic_vertices_draw_reflected_geometry_and_preserve_display_formats",
+      "--exact",
+      "--ignored",
+      "--test-threads=1",
+      "--nocapture"
+    ],
+    "binary_sha256": "7d6b574d80a4fd68d48d1d7638fdee86324494c1fcf6981f5e8a611bd596d94f",
+    "started_at": "2026-10-12T00:17:42.306413+00:00",
+    "expected_capture_count": 2,
+    "pid": 9678,
+    "exit_code": 0,
+    "ended_at": "2026-10-12T00:17:42.696790+00:00",
+    "reaped": true,
+    "files": {
+      "child.log": "c24f4c4353df9651469cad0e07c608d4b88cf25cfdbb99d93cad32fb82f91d58",
+      "diagnostic-raised.png": "98266d7a5bfeee74a0db58ab947ddd330295e47110ee8aff51636e1826c5e286",
+      "diagnostic-base.png": "46c5129850d0c275fc6c03f0b13a8e153e3a1e2957eb3c871c54dd9dd93ec958"
+    },
+    "capture_count_matches": true
+  },
+  {
+    "name": "diagnostic-cooked",
+    "command": [
+      "/Users/andreyyurlov/.codex/worktrees/native-fbx-import/incant/.worktrees/0051-cooked-shader-acceptance/artifacts/tools/0051/geometry-v2/cooked-geometry-incant_render",
+      "diagnostic_output::diagnostic_vertices_draw_reflected_geometry_and_preserve_display_formats",
+      "--exact",
+      "--ignored",
+      "--test-threads=1",
+      "--nocapture"
+    ],
+    "binary_sha256": "24af19ad9c832d39f38e523a188b3846cf9361fd6d07d7022cb86b6c166a200a",
+    "started_at": "2026-10-12T00:17:45.537473+00:00",
+    "expected_capture_count": 2,
+    "pid": 9739,
+    "exit_code": 0,
+    "ended_at": "2026-10-12T00:17:45.939922+00:00",
+    "reaped": true,
+    "files": {
+      "child.log": "5539ddee86d868ae7799351b2d3904c3deae363df830f020fb4079a938451688",
+      "diagnostic-raised.png": "98266d7a5bfeee74a0db58ab947ddd330295e47110ee8aff51636e1826c5e286",
+      "diagnostic-base.png": "46c5129850d0c275fc6c03f0b13a8e153e3a1e2957eb3c871c54dd9dd93ec958"
+    },
+    "capture_count_matches": true
+  }
+]

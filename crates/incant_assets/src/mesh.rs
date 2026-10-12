@@ -8,6 +8,15 @@ pub fn cook_mesh(mesh: &Mesh) -> Result<Vec<u8>> {
     mesh.validate()?;
     let mut indices = meshopt::optimize_vertex_cache(&mesh.indices, mesh.vertices.len());
     let vertices = meshopt::optimize_vertex_fetch(&mut indices, &mesh.vertices);
+    encode(&vertices, &indices)
+}
+// Skinned streams retain source vertex order so their separate influences remain aligned.
+#[cfg(not(target_arch = "wasm32"))]
+pub(crate) fn cook_mesh_ordered(mesh: &Mesh) -> Result<Vec<u8>> {
+    mesh.validate()?;
+    encode(&mesh.vertices, &mesh.indices)
+}
+fn encode(vertices: &[Vertex], indices: &[u32]) -> Result<Vec<u8>> {
     let words: Vec<[u8; 48]> = vertices
         .iter()
         .map(|v| {
@@ -19,7 +28,7 @@ pub fn cook_mesh(mesh: &Mesh) -> Result<Vec<u8>> {
         })
         .collect();
     let vertex_data = meshopt::encode_vertex_buffer(&words).map_err(|e| invalid(e.to_string()))?;
-    let index_data = meshopt::encode_index_buffer(&indices, vertices.len())
+    let index_data = meshopt::encode_index_buffer(indices, vertices.len())
         .map_err(|e| invalid(e.to_string()))?;
     let mut out = b"INCMSH01".to_vec();
     for n in [

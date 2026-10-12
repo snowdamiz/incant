@@ -25,6 +25,24 @@ const _: () = {
 /// Trusted host adapter operation; all integer arguments are guest offsets/indices.
 #[derive(Clone, Copy)]
 pub enum Call {
+    Locale,
+    Localize {
+        ptr: i32,
+        len: i32,
+    },
+    ReadLocalized {
+        ptr: i32,
+        capacity: i32,
+    },
+    SetLocale {
+        ptr: i32,
+        len: i32,
+    },
+    Log {
+        level: i32,
+        ptr: i32,
+        len: i32,
+    },
     FlipbookLen,
     ReadFlipbooks {
         ptr: i32,
@@ -78,15 +96,29 @@ pub struct Capability {
     flipbooks: Vec<u8>,
     transferred: usize,
     calls: usize,
+    tick: u64,
+    logs: crate::NativeLogs,
+    tick_logs: crate::logging::TickLogs,
+    localization: Option<crate::localization::State>,
 }
 impl Capability {
     pub fn is_failed(&self) -> bool {
         self.failed
     }
-    pub fn replacement(&self) -> Self {
+    /// Successful trusted reload keeps committed history and its accepted clock.
+    pub fn replacement(&mut self) -> Self {
         Self {
             identity: self.identity.clone(),
+            tick: self.tick,
+            logs: std::mem::take(&mut self.logs),
             ..Self::default()
+        }
+    }
+    pub fn logs(&self) -> Result<&crate::NativeLogs, Error> {
+        if self.failed {
+            Err(Error::Failed)
+        } else {
+            Ok(&self.logs)
         }
     }
     pub fn begin(&mut self, world: &mut NativeWorld, dt: f64) -> Result<i64, Error> {
@@ -101,6 +133,10 @@ impl Capability {
             return Err(Error::Abi("module is bound to a different world"));
         }
         self.identity = Some(identity);
+        self.tick
+            .checked_add(1)
+            .filter(|&tick| tick <= incant_runtime::logging::MAX_LOG_TICK)
+            .ok_or(Error::Limit("log clock"))?;
         self.failed = true;
         self.input_available = false;
         self.input.clear();
@@ -115,6 +151,10 @@ impl Capability {
         self.commands.clear();
         self.transferred = 0;
         self.calls = 0;
+        self.tick_logs.clear();
+        self.localization = Some(crate::localization::State::new(
+            world.localization().clone(),
+        ));
         self.active = true;
         Ok(self.epoch)
     }
@@ -141,11 +181,22 @@ impl Capability {
         self.flipbooks.clear();
         self.chunks.clear();
         self.commands.clear();
+        self.tick_logs.clear();
+        self.localization = None;
     }
     pub fn finish(&mut self, world: &mut NativeWorld) -> Result<(), Error> {
         if !self.active {
             return Err(Error::Abi("inactive ECS transaction"));
         }
+        if self.tick_logs.rejected {
+            self.abort();
+            return Err(Error::Abi("rejected log transaction"));
+        }
+        if self.localization.as_ref().is_some_and(|s| s.rejected) {
+            self.abort();
+            return Err(Error::Abi("rejected localization transaction"));
+        }
+        self.localization = None;
         self.active = false;
         self.input_available = false;
         self.input.clear();
@@ -167,7 +218,11 @@ impl Capability {
             Ok(())
         });
         if result.is_ok() {
+            self.tick += 1; // checked before entering guest code or publishing writes
+            self.logs.commit(self.tick, self.tick_logs.take());
             self.failed = false;
+        } else {
+            self.tick_logs.clear();
         }
         result
     }
@@ -227,11 +282,81 @@ impl Capability {
     /// Synchronous import; memory contains initialized guest bytes only and is
     /// borrowed for this call. No world observation/publication occurs here.
     pub fn invoke(&mut self, memory: &mut [u8], epoch: i64, call: Call) -> Result<i32, Error> {
+        // Only an authorized localization call can poison its active epoch. This
+        // wraps enter/memory/transfer checks as well as parsing/query dispatch;
+        // stale tokens and unrelated operations retain their existing semantics.
+        let authorized = self.active
+            && self.epoch == epoch
+            && matches!(
+                call,
+                Call::Locale
+                    | Call::Localize { .. }
+                    | Call::ReadLocalized { .. }
+                    | Call::SetLocale { .. }
+            );
+        let result = self.invoke_inner(memory, epoch, call);
+        if authorized
+            && result.is_err()
+            && let Some(state) = &mut self.localization
+        {
+            state.reject();
+        }
+        result
+    }
+    fn invoke_inner(&mut self, memory: &mut [u8], epoch: i64, call: Call) -> Result<i32, Error> {
         self.enter(epoch)?;
         if memory.len() > limits::MEMORY {
             return Err(Error::Limit("linear memory"));
         }
         match call {
+            Call::Locale => return self.locale_state()?.locale(),
+            Call::Localize { ptr, len } | Call::SetLocale { ptr, len } => {
+                let len =
+                    usize::try_from(len).map_err(|_| Error::Abi("localization byte length"))?;
+                let max = if matches!(call, Call::Localize { .. }) {
+                    incant_wasm_abi::LOCALIZATION_MAX_REQUEST_BYTES
+                } else {
+                    incant_wasm_abi::LOCALIZATION_MAX_SETTINGS_BYTES
+                };
+                if len > max {
+                    return Err(Error::Limit("localization frame bounds"));
+                }
+                let region = range(ptr, len, memory.len())?;
+                self.transfer(len)?;
+                if matches!(call, Call::Localize { .. }) {
+                    return self.locale_state()?.localize(&memory[region]);
+                }
+                let settings = self.locale_state()?.settings(&memory[region])?;
+                self.command(StructuralCommand::SetLocale(settings))?;
+            }
+            Call::ReadLocalized { ptr, capacity } => {
+                let len = self.locale_state()?.reply()?.len();
+                let capacity = usize::try_from(capacity)
+                    .map_err(|_| Error::Abi("localization destination capacity"))?;
+                if capacity < len {
+                    return Err(Error::Abi("localization destination capacity"));
+                }
+                range(ptr, capacity, memory.len())?;
+                let region = range(ptr, len, memory.len())?;
+                self.transfer(len)?;
+                memory[region].copy_from_slice(self.locale_state()?.reply()?);
+                return i32::try_from(len).map_err(|_| Error::Abi("localization result length"));
+            }
+            Call::Log { level, ptr, len } => {
+                let result = (|| {
+                    let len = usize::try_from(len).map_err(|_| Error::Abi("log byte length"))?;
+                    if len > incant_wasm_abi::LOG_MAX_MESSAGE_BYTES {
+                        return Err(Error::Limit("log message"));
+                    }
+                    let region = range(ptr, len, memory.len())?;
+                    self.transfer(len)?;
+                    self.tick_logs.push(level, &memory[region])
+                })();
+                if result.is_err() {
+                    self.tick_logs.rejected = true;
+                }
+                result?;
+            }
             Call::FlipbookLen => return Ok(self.flipbooks.len() as i32),
             Call::ReadFlipbooks { ptr, capacity } => {
                 let len = self.flipbooks.len();
@@ -372,6 +497,11 @@ impl Capability {
         }
         Ok(0)
     }
+    fn locale_state(&mut self) -> Result<&mut crate::localization::State, Error> {
+        self.localization
+            .as_mut()
+            .ok_or(Error::Abi("localization epoch unavailable"))
+    }
 }
 fn range(ptr: i32, len: usize, total: usize) -> Result<std::ops::Range<usize>, Error> {
     let begin = usize::try_from(ptr).map_err(|_| Error::Abi("negative memory offset"))?;
@@ -383,4 +513,47 @@ fn range(ptr: i32, len: usize, total: usize) -> Result<std::ops::Range<usize>, E
 }
 fn values<const N: usize>(bytes: &[u8]) -> [f64; N] {
     std::array::from_fn(|i| f64::from_le_bytes(bytes[i * 8..i * 8 + 8].try_into().unwrap()))
+}
+
+#[cfg(test)]
+mod log_clock_tests {
+    use super::*;
+    #[test]
+    fn last_exact_json_tick_accepts_then_overflow_refuses_before_publication() {
+        use incant_runtime::{CookedScene, logging::MAX_LOG_TICK};
+        let mut world = NativeWorld::new(CookedScene::new(StableId([0; 16]), 64, vec![]).unwrap());
+        let mut cap = Capability {
+            tick: MAX_LOG_TICK - 1,
+            ..Capability::default()
+        };
+        let epoch = cap.begin(&mut world, 0.25).unwrap();
+        cap.invoke(
+            &mut [],
+            epoch,
+            Call::Log {
+                level: 1,
+                ptr: 0,
+                len: 0,
+            },
+        )
+        .unwrap();
+        cap.finish(&mut world).unwrap();
+        assert_eq!(cap.logs().unwrap().entries()[0].tick, MAX_LOG_TICK);
+        let before = world.snapshot();
+        assert!(matches!(
+            cap.begin(&mut world, 0.25),
+            Err(Error::Limit("log clock"))
+        ));
+        assert!(!cap.active && !cap.is_failed());
+        assert_eq!(cap.logs().unwrap().entries().len(), 1);
+        assert_eq!(world.snapshot(), before);
+        assert_eq!(world.tick(), 0);
+        // Reload cannot reset the accepted diagnostic clock to bypass its limit.
+        let mut next = cap.replacement();
+        assert!(matches!(
+            next.begin(&mut world, 0.25),
+            Err(Error::Limit("log clock"))
+        ));
+        assert_eq!(next.logs().unwrap().entries()[0].tick, MAX_LOG_TICK);
+    }
 }

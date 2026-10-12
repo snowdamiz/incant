@@ -1,0 +1,91 @@
+{
+  "source_head": "0d841fcd1d69380f83641eca2d8f58cca1785641",
+  "integrated_source": "4661e25418122e8c7256d83b84f42cc5e3740746",
+  "main_base": "2816ecde29bf4dd0bb058e46212cd836c1bb816c",
+  "integration": "clean merge; reviewed source/build/export bytes unchanged; incoming renderer/workflow/documentation only",
+  "sources": {
+    "crates/incant_game_player/Cargo.toml": "ca0b83f48edc0735fec75481d56a2ab3cd4ab644e5dcac42b02efeb45a519522",
+    "crates/incant_game_player/src/main.rs": "fb91810f935f49ccc23b04a91cbed7f71e01a0166f5567875d903f294c8207bb",
+    "crates/incant_game_player/src/session.rs": "16a56e61f2fed54c28266e872c7915b4147687addb8fd536e49a6284973f1318",
+    "crates/incant_game_runtime/src/core.rs": "0aad2fefc868473503e009ad215a997106c36aac6de95d71e431acda9fbecde4",
+    "crates/incant_game_runtime/src/hosted.rs": "1bda9ead25e6afc482d4a2b0d2eb24f7b98f3ed341e4cf411aa0e8bbf6b3dae7",
+    "crates/incant_game_runtime/src/lib.rs": "5722984028e6f8e7cfced44e07994403cd16970e46163e57a0648da0ab84cd11",
+    "crates/incant_game_runtime/src/offline.rs": "af67d4540ef05a770b2a8d7f4b5bdfa81607ad35e996b3281f1b4447c77094f3",
+    "crates/incant_script/build.rs": "6440efe0852d1199bd5a3348aa14466a1b1bf04c9a04baeac768e958a5188d8c",
+    "crates/incant_script/src/checkpoint/mod.rs": "c24d42025a75c1596190275650e420354594f72b0c2805fddfa3eac5d9ab3609",
+    "crates/incant_script/src/lib.rs": "3ca019aaac9280b897015df9a72f31cfbe0c7b9028a82c68bbe5cc493e0218ad",
+    "crates/incant_game_player/src/checkpoint.rs": "b320651e522fcedb42cec72cb92e162f25733826421669f4f0d3335100554b71",
+    "crates/incant_game_runtime/tests/checkpoints.rs": "b0f77daf3577d4e9b6a07e4f432bcd6c6881cb092bde85e4ca49e09ff4656f48",
+    "crates/incant_script/src/checkpoint/pending.rs": "5a6d6601268c2400349ba0ba79b3db73289d1dee9e68e7997381050c75b5cfe6",
+    "tools/probes/game-checkpoint-export.py": "42a03b7f92337793cd35284782ad9511c06c803aabaefe5094e35af75d265805"
+  },
+  "build_inputs": {
+    "Cargo.lock": "7bbd9006ca514936941d72772f8daeda94a48eecd5b22416239a4a191593b49b",
+    "rust-toolchain.toml": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124",
+    "tools/export_native.py": "834fba307d79efe44fb4d87ff7a12fa1a556784c223d6250b465c80d0fa3d42b",
+    "tools/native_package.py": "a6ce11f1eeb62edc39b74846aa0341ec7f17689018f31114075d720e693f24a5",
+    "tools/native_process.py": "493c6e70e9045bf3b6e128b4392f47b7cac8a475969d715f26cd1eb7d9777ec3",
+    "crates/incant_game_player/build.rs": "394e98899e701b8d00405111b78534276cf37abf5df9a962539d1206efbd4653",
+    "crates/incant_game_player/src/package.rs": "8bc986118821727285e7218cd53a12bdf243a59466312ae7edc5d865d7205d1a",
+    "tools/probes/native-session-checkpoint/src/behavior.ts": "1671cf90827d798301b9209e14cf634ccc94c30ecbdc8758cf3da2a58f269afb"
+  },
+  "source_review_sha256": "5172708c718734ff74b7bd15bb29df60e8004786456e2df7ac4ab6135df7e961",
+  "checks": {
+    "integrated_game_runtime_player_tests": 34,
+    "test_groups": 8,
+    "failed": 0,
+    "ignored": 0,
+    "all_target_clippy": "incant_game_runtime + incant_game_player/render-gpu; compile only",
+    "cpu_export_normal_build_graph_excludes_incant_render": true,
+    "fmt": true,
+    "conventions": true,
+    "diff": true
+  },
+  "logs": {
+    "/tmp/incant-game-checkpoint-main103-tests.log": {
+      "sha256": "8716673175b718f8ebf8a150101adad19c650cae465156562e6b7a204f67ff70",
+      "bytes": 7925
+    },
+    "/tmp/incant-game-checkpoint-main103-clippy.log": {
+      "sha256": "77fb3cd112eeeca04b9b654bf60dcd58fad037760df27a976b8b3b5d6d5cff67",
+      "bytes": 3089
+    },
+    "/tmp/incant-game-checkpoint-main103-graph.log": {
+      "sha256": "9b74e93c7d1dfdc55c72727d31d64c72500649ace5fcdaa6af708c4f4a3ae2a5",
+      "bytes": 37594
+    },
+    "/tmp/incant-game-checkpoint-main103-fmt.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/incant-game-checkpoint-main103-conventions.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/incant-game-checkpoint-main103-diff.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  },
+  "retained_source_checks": {
+    "tests": 311,
+    "groups": 37,
+    "fresh_export": {
+      "receipt": "native-game-checkpoints-process.json",
+      "sha256": "e25bfd65b0f16bc95e603ea4bbfd5550cc66458bb1b4bdd91585fbded601e5cf",
+      "successful_runs": 5,
+      "refusal_runs": 9,
+      "export_startup_separate": 1,
+      "player_sha256": "0ad959629a8cc33e75f5af94d5574192341c0bcc30c4b1d1b652bfae44d1b453",
+      "player_bytes": 7581680,
+      "target": "aarch64-apple-darwin",
+      "final_save_sha256": "b4b6ff05a695d9ac22969278e85e1bd701abe5d1b756eb8f83f7b87ac876da65",
+      "final_save_bytes": 815,
+      "source_and_private_build_deleted": true,
+      "all_owned_handles_reaped": true,
+      "actual_gpu_submissions": 0
+    },
+    "repeat_not_required": "The exact changed main103 paths are outside the CPU exporter compile/dependency inputs; all14 reviewed sources and8 build/export inputs remain byte-identical. No new shipping/backend claim."
+  },
+  "recorded_at": "2026-10-11T23:15:12.016162+00:00"
+}

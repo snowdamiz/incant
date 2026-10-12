@@ -1,0 +1,6 @@
+2026-10-11T23:45:49Z capture <worktree>/artifacts/0050/raw-c1-1440x875-380-playing-pause-focus.png
+2026-10-11T23:47:39Z capture <worktree>/artifacts/0050/raw-c2-1440x875-380-no-camera-refusal-focus.png
+2026-10-11T23:48:22Z capture <worktree>/artifacts/0050/raw-c3-1440x875-280-composer.png
+2026-10-11T23:52:27Z capture <worktree>/artifacts/0050/raw-c4-1000x650-280-composer.png
+2026-10-11T23:53:02Z capture <worktree>/artifacts/0050/raw-c5-1000x650-380-composer.png
+2026-10-11T23:54:17Z crop <worktree>/handoffs/0050-native-editor-focus-fit/screenshots/native/composer-04-crop-four-layouts-2x.png (from captures 1, 3, 5, 4)

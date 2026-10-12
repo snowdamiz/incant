@@ -1,0 +1,120 @@
+{
+  "recorded_at": "2026-10-11T22:47:42.228884+00:00",
+  "base": "cd06450f870201bc8bc1aa44ab64eaa05683b891",
+  "head": "510adeab3bfedd3a78da38981a4d4104973c6fe5",
+  "source": "647985a4a04e66b86a69b8600910ed900f673e53",
+  "root_review_sha256": "fefbfdf323bb27de46cf0859a4a5d0145980017b15ac8d7dae67967f66f171cc",
+  "source_hashes": {
+    "crates/incant_runtime/src/save.rs": "f2d0658e3e6321a7237cc6661355e04cc9ba17c3abc15d2e1ce3e85c34b25cb8",
+    "crates/incant_script/build.rs": "7a7fe6b2c5ca36dd628c6d997d808465263b80e24e051141fb24fae5f52b0563",
+    "crates/incant_script/src/bindings.rs": "590769b2bd154f1bc0edc4e93fbb27a812b9446d3a1c3878ad77cf2549a418e7",
+    "crates/incant_script/src/checkpoint/codec.rs": "ddc1322207964e9dedaed0b541f689c2022c16c32c24650452823d116c6a78ca",
+    "crates/incant_script/src/checkpoint/mod.rs": "b86aec9f9bbce2dc7423e4aa286d43cf6c2479e39f1bd8b36459adafdd6f87cd",
+    "crates/incant_script/src/checkpoint/tests.rs": "435c8c77c9a79182d0d48d5016838f8b9cafe228fc05f3802a1690e467ba5957",
+    "crates/incant_script/src/compiled.rs": "9357e2c8ad48ea609a81328d04d358285d8d643095b00490c039c35e39def853",
+    "crates/incant_script/src/compiler.rs": "9e74b56a9681d30b97bffd6e06f45ac6c90a30f8100825d0fe7e9541707cffa8",
+    "crates/incant_script/src/harden.js": "7924408ee14592d4ec675b3e3aba9ec488778e9f7abddae2774135c0f3f98aa1",
+    "crates/incant_script/src/lib.rs": "f813d7a35728674e3ee61587da42685ca39b0ce746056b3c0272c1036e0c9578",
+    "crates/incant_script/src/navigation_tests.rs": "e83ac8dced60545c0dd0d1cb3d1f15fe1cc24e0f12459e96bbcfc8b7903e5001",
+    "crates/incant_script/src/persistence.rs": "03f2e613f28538bf89e42bee7349fcb46475a9c8cb0a2dc934b4eba0aa6c5252",
+    "crates/incant_script/src/persistence/tests.rs": "6117d0cae13807aa7a3d28ee1b7c6ed8f672bca16b8385dbbf6766a59a966ec4",
+    "crates/incant_script/src/persistence/value.rs": "cb3eed3acbaa2b28962fdc9800d120a51125218c49246edc77c5274cfc413b2a",
+    "crates/incant_script/src/schedule.rs": "f74707a71f120d7e1c4ab8aaebc7d86bd91af1e4c3ae07ae9d56be65b0d1621f",
+    "crates/incant_script/src/session.rs": "33d524e17071c151d53b251c744bc16aa14cb47feb7f1fce103624161a46819c",
+    "sdk/ts/src/native.d.ts": "80ff92658d98479ef219b035b1da463e603cec3a2f6f7624731d6af3b4ce93e3",
+    "tools/probes/native-session-checkpoint.py": "b80787e8eb648f427818064427ba85186aac729041991d51d8b4d379d5f735e4",
+    "tools/probes/native-session-checkpoint/Cargo.toml": "0a7e132c86cb54c9ee1cc13637b34dbf7872a9f6b99e2b6854503262e2fc4b03",
+    "tools/probes/native-session-checkpoint/build.rs": "9033041c6a6ea4708a4c57b4f2ecb783182aaa544f2ae9e4ab449f36e889c3c1",
+    "tools/probes/native-session-checkpoint/src/behavior.ts": "1671cf90827d798301b9209e14cf634ccc94c30ecbdc8758cf3da2a58f269afb",
+    "tools/probes/native-session-checkpoint/src/main.rs": "fbde6d0014e6f5c391549afaeb950975e7c95b4db351b3875a9cd9e264b7d90f"
+  },
+  "source_hashes_unchanged": 22,
+  "findings": [],
+  "reviewed_seams": [
+    "SessionVm::logs uses the shared NativeLogs type for both VMs; checkpoint explicitly refuses static variants and does not claim to retain diagnostic history.",
+    "Checkpoint compatibility hashes now include main101 runtime logging sources and script logging/program sources; integration proof must recook on this graph.",
+    "Session checkpoint load restores world, active attachments, typed state and native schedule; physical input remains neutral and normal runtime dependency guards remain enforced.",
+    "No source merge conflicts: all22 reviewed checkpoint inputs remain byte-identical; main101 production sources inherited unchanged."
+  ],
+  "validation_status": "All integrated tests, Clippy, compiler-disabled static check and freshly recooked source/build-deleted process proof passed; handle62004 reaped0.",
+  "validation": {
+    "tests_passed": 324,
+    "test_groups": 46,
+    "failed": 0,
+    "ignored": 0,
+    "logs": {
+      "tests": {
+        "path": "/tmp/incant-session-main101-tests.log",
+        "sha256": "e27b79a069a4ec392761b07c2ea0dfcbd0d21a5d480a9681add08b274f005fd5"
+      },
+      "clippy": {
+        "path": "/tmp/incant-session-main101-clippy.log",
+        "sha256": "b3a8ed2de37aad2a307ab5239a25fa331883a50d377e48f232e240d56b0b9d57"
+      },
+      "static": {
+        "path": "/tmp/incant-session-main101-static.log",
+        "sha256": "dd9f5719bfc286e84050c3fb3902ec4995421bc12850c89f84316a3f6fddb38f"
+      },
+      "process": {
+        "path": "/tmp/incant-session-main101-process.log",
+        "sha256": "6155497e524565c2c4569e61ddd7cf6b40f436a2c03704c1151b8c2646e4141e"
+      },
+      "generated": {
+        "path": "/tmp/incant-session-main101-generated.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "bridge": {
+        "path": "/tmp/incant-session-main101-bridge.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "sdk": {
+        "path": "/tmp/incant-session-main101-sdk.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "dependencies-corrected": {
+        "path": "/tmp/incant-session-main101-dependencies-corrected.log",
+        "sha256": "86d268ca1d9f80da4e823873585c6ca4643cb8f74b8d4181a050e4f6ffc773ae"
+      },
+      "conventions": {
+        "path": "/tmp/incant-session-main101-conventions.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "fmt": {
+        "path": "/tmp/incant-session-main101-fmt.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "process_report_sha256": "d4fd622aff91a8afe631e7af3348afc6a43d2bc10e7fc2037ff9b1963a62aa92",
+    "process_proof": {
+      "passed": true,
+      "successful_processes": 4,
+      "refusal_processes": 1,
+      "observations": [
+        "tick=40 bytes=971 source_parser=false ordinary_load=true",
+        "tick=13 bytes=971 source_parser=false ordinary_load=true",
+        "tick=40 bytes=971 source_parser=false ordinary_load=true",
+        "tick=40 bytes=971 source_parser=false ordinary_load=true"
+      ],
+      "world_state_timer_bytes_equal": true,
+      "private_source_and_build_storage_deleted": true,
+      "source_parser_feature_disabled": true,
+      "generated_rust_sha256": "40ed71ce5472e4aa2650c0105daa35ccf0e99a279cdc514f6c1afc384310b613",
+      "player_sha256": "a5ebfae88289bc58672e97f2953e7c7bc31def930cc3a2fef20d9d3938e2333b",
+      "final_checkpoint_sha256": "b5d5c8c70fa3bd886714c9acf0af828d4654fc1309ce639d53064e8b042f55ee",
+      "warm_artifacts_cloned": true,
+      "limitations": [
+        "CI profile correctness only; no shipping/performance gate",
+        "original repository and warm cache retained; disposable copied build/source inputs removed",
+        "ordinary neutral-input load, not VM heap or exact physical-input replay",
+        "physics/audio/static-module and GameSession/export load routes remain unsupported"
+      ]
+    },
+    "compiler_identity_refreshed": true,
+    "owned_handles_reaped": true,
+    "initial_operator_error": {
+      "path": "/tmp/incant-session-main101-dependencies.log",
+      "sha256": "35292a5f5492e2ab73a3e68192c2936675664dc340eb5f1e74a33f853e13946f",
+      "reason": "Initial guard invocation omitted required positional root arguments and exited argparse2. Corrected explicit runtime/script/input roots pass; no source change or repeated failing test."
+    }
+  }
+}

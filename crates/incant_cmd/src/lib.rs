@@ -92,6 +92,11 @@ pub enum Command {
     SetInputActions {
         actions: incant_doc::InputActions,
     },
+    /// Replace the project token allowance. Only user-origin transactions may
+    /// issue this command, including when the allowance would remain unchanged.
+    SetAgentBudget {
+        settings: incant_doc::AgentBudgetSettings,
+    },
 }
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
@@ -165,6 +170,8 @@ pub enum CommandError {
     Document(#[from] DocumentError),
     #[error("invalid command: {0}")]
     Invalid(String),
+    #[error("only user-origin transactions may change the agent token allowance")]
+    AgentBudgetUserOnly,
     #[error("document revision conflict: expected {expected}, current {actual}")]
     Conflict { expected: u64, actual: u64 },
     #[error("nothing to {0}")]
@@ -304,6 +311,7 @@ impl CommandBus {
         Ok(self.history.last().expect("transaction was appended"))
     }
     fn commit_transaction(&mut self, transaction: Transaction) -> Result<(), CommandError> {
+        validate_agent_budget_authority(&transaction)?;
         let next = self.stage(&transaction.after)?;
         self.record(
             journal::Change::Apply {
@@ -402,6 +410,7 @@ impl CommandBus {
             before: self.project.clone(),
             after,
         };
+        validate_agent_budget_authority(&transaction)?;
         if let Some(journal) = &mut self.journal {
             journal.append(
                 journal::Action::Apply {
@@ -428,6 +437,20 @@ impl CommandBus {
         }
         Ok(())
     }
+}
+/// Apply replay and CRDT imports carry complete projections, so command-level
+/// authorization alone cannot protect the allowance at these boundaries.
+fn validate_agent_budget_authority(transaction: &Transaction) -> Result<(), CommandError> {
+    if transaction.actor.origin != Origin::User
+        && (transaction.before.settings.agent_budget != transaction.after.settings.agent_budget
+            || transaction
+                .commands
+                .iter()
+                .any(|command| matches!(command, Command::SetAgentBudget { .. })))
+    {
+        return Err(CommandError::AgentBudgetUserOnly);
+    }
+    Ok(())
 }
 fn scene_mut<'a>(project: &'a mut Project, id: &str) -> Result<&'a mut Scene, CommandError> {
     project
@@ -572,6 +595,12 @@ fn apply(
         }
         Command::SetInputActions { actions } => {
             project.settings.input_actions = actions.clone();
+        }
+        Command::SetAgentBudget { settings } => {
+            if provenance.origin != Origin::User {
+                return Err(CommandError::AgentBudgetUserOnly);
+            }
+            project.settings.agent_budget = *settings;
         }
     }
     Ok(())

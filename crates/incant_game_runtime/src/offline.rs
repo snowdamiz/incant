@@ -88,6 +88,38 @@ impl OfflineGameSession {
             },
         })
     }
+    /// Restore ordinary gameplay data, with a fresh silent mixer. Sample phase
+    /// derives from the restored world tick; no audio cursor is claimed saved.
+    pub fn from_checkpoint_bytes(
+        bytes: &[u8],
+        initial: &CookedScene,
+        program: impl Into<SessionProgram>,
+        actions: InputActions,
+        clips: Vec<ClipBinding>,
+        sample_rate: u32,
+    ) -> Result<Self> {
+        validate_rate(sample_rate)?;
+        crate::require_nonspatial(initial)?;
+        Ok(Self {
+            inner: OfflineCore {
+                core: Core::from_checkpoint(
+                    bytes,
+                    initial,
+                    program,
+                    actions,
+                    |world| {
+                        crate::require_nonspatial_world(world)?;
+                        Ok(NoHost)
+                    },
+                    |world| SceneAudio::offline(world, clips, sample_rate),
+                )?,
+                sample_rate,
+            },
+        })
+    }
+    pub fn checkpoint_bytes(&self) -> Result<Vec<u8>> {
+        self.inner.core.checkpoint_bytes()
+    }
     pub fn rendered_frames(&self) -> Result<u128> {
         self.inner.rendered_frames()
     }

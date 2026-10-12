@@ -1,0 +1,186 @@
+{
+  "scope": "production standalone desktop native-window gamepad adapter",
+  "created_utc": "2026-10-11T22:07:18.347664+00:00",
+  "base_commit": "f6389647dffd51f89011b5ae74e40dc7b768551e",
+  "branch": "codex/native-player-gamepad",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "xhigh",
+  "author_role": "astra",
+  "machine": {
+    "cpu": "Apple M5 Pro",
+    "arch": "arm64",
+    "os": "macOS26.6",
+    "os_build": "25G72",
+    "cargo": "1.99.0",
+    "rust": "1.99.0"
+  },
+  "source_hashes": {
+    "Cargo.lock": "ca6a45ef10a0472b68498b37e12510ce923de5dcf4e35437af93d7cd3cb9d424",
+    ".github/workflows/desktop.yml": "5a05f4f84edca34515e39f7c3b5cabc0268a6cb78703477bac0084e20ffd4940",
+    "crates/incant_input/src/lib.rs": "f1bef2d574a02d5d6a9ac1d0da4f649943fb3e4034cf310d0f974b8dad494e16",
+    "crates/incant_input/src/gamepad.rs": "d135f29279e20bb44c988b24418d867a3e95442b0e6c45c3c29e341b9c81014c",
+    "crates/incant_input/tests/gamepad_adapter.rs": "d99598b0bbe9ae2dbe1651416e53a9b600457db53d19a8b343d933e615dde4b8",
+    "crates/incant_game_player/Cargo.toml": "8b9502cb2c2a4ce22ee0cb8df732e23d842dae1540704af400820e13400e9cec",
+    "crates/incant_game_player/src/window/mod.rs": "3ffc566d819c5523f6f86544712ee8a53cf70d5f0f9981319859370b86561f53",
+    "crates/incant_game_player/src/window/input.rs": "b897779e63c90bd6402c26101468c727a471aa39f049b205155b1aa352c7ad28",
+    "crates/incant_game_player/src/window/gamepad.rs": "c08863f2e1247989bd53b6c811baa4e6a00547c50bb5a503dda5209928796b8f",
+    "crates/incant_game_player/src/window/gamepad/tests.rs": "828113daf0fef2ec4db467055db976fb5736ad2fec61ef84f01a3660f315bd62",
+    "STATUS.md": "c79b33a99dabdcd873c5c46a4834e933dc8ffe1afd1ef9510499a9cae00e87df",
+    "docs/spikes/native-window-player.md": "36daa77b675a37b1bcf3a2567c59ca576c152794afb323dcc3ebcb6aeb6a954f"
+  },
+  "backend_source_hashes": {
+    "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gilrs-0.11.2/src/gamepad.rs": "9f20529e2fa01c51e3de1a901a9d64d9ce74a0f3255ac071263190b789dbe661",
+    "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gilrs-0.11.2/src/ev/mod.rs": "f77411cafab57d0c440e5b88b367f52ee6f41cfdcf0fe485e2fcd26e13b13eb3",
+    "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gilrs-0.11.2/src/mapping/mod.rs": "58880a158c0d721f5788994a91b07968af64265051fcda46c808f848a224a412",
+    "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gilrs-core-0.6.8/src/platform/macos/gamepad.rs": "8a2a577701f28f26c5155ebd183a5c6958cf3776d50b5f9f4b06754af3da95cc",
+    "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gilrs-core-0.6.8/src/platform/macos/mod.rs": "0d917656dcceb167692261b2612f48edff6a5ef2ceb53f7c4957bee822b07483"
+  },
+  "source_freeze_receipt": {
+    "path": "/tmp/incant-gamepad-source-freeze.json",
+    "sha256": "8e2c280b9bdfed1d0437803c561e5b76d820f45dde48be8e08d9f3b3f7dc42d3"
+  },
+  "backend": {
+    "gilrs": "0.11.2",
+    "gilrs_core": "0.6.8",
+    "force_feedback": false,
+    "default_filters": false,
+    "automatic_backend_state_updates": true,
+    "primary_docs": "https://docs.rs/gilrs/0.11.2/gilrs/",
+    "new_locked_packages": [
+      "gilrs0.11.2",
+      "gilrs-core0.6.8",
+      "inotify0.11.5",
+      "inotify-sys0.1.8",
+      "libudev-sys0.1.4",
+      "objc2-io-kit0.3.2",
+      "vec_map0.8.2"
+    ],
+    "existing_package_pins_unchanged": true
+  },
+  "behavior": {
+    "player_ids": "0..15 discovery-order stable per backend identity for session",
+    "distinct_identity_limit": 16,
+    "raw_poll_limit": 1024,
+    "overflow_lookahead": 1,
+    "shared_pending_queue_limit": 1024,
+    "paused_poll": "retain topology, discard controls",
+    "focus_suspend": "clear pending packet and queued topology; reconcile physical vs last accepted tick before resuming",
+    "held_controls_after_resume": "neutral until a fresh OS event",
+    "commit": "only after successful fixed game tick",
+    "stick_y": "negate Gilrs +Y-up into Incant +Y-down",
+    "button_values": "measured ButtonChanged only; threshold/digital-edge events do not fabricate analog values",
+    "dpad_axes": "release opposite direction then apply normalized direction",
+    "haptics": "unsupported; no success path"
+  },
+  "validation": {
+    "rust_tests": {
+      "passed": 52,
+      "failed": 0,
+      "ignored": 0,
+      "new_observable_tests": 13,
+      "command": "CARGO_TARGET_DIR=/tmp/incant-agent-native-target ./tools/cargo test -p incant_input -p incant_game_player --features incant_game_player/native-window --all-targets --profile ci --locked -j2"
+    },
+    "clippy": {
+      "native_window": "pass",
+      "default": "pass",
+      "cpu_render_input": "pass",
+      "gpu_offscreen": "pass",
+      "all_targets": true,
+      "profile": "ci",
+      "jobs": 2,
+      "warnings_denied": true
+    },
+    "fmt": "pass for incant_input and incant_game_player",
+    "python_policy_tests": {
+      "passed": 32,
+      "command": "python3 -m unittest tools.tests.test_ci_profile tools.tests.test_runtime_dependencies tools.tests.test_ci_scope"
+    },
+    "authoring_free_dependency_guard": "pass for input/game_runtime/player with native-window",
+    "feature_graph_receipt": {
+      "path": "/tmp/incant-gamepad-graphs-001.json",
+      "sha256": "ad4fca884fccc097b57b5c2bb014e353d13734ad02f894516e0f8422a358c999",
+      "gilrs_absent": [
+        "default",
+        "render-input",
+        "render-gpu"
+      ],
+      "gilrs_present": [
+        "native-window"
+      ]
+    },
+    "linux_ci_prerequisites": "desktop workflow installs libudev-dev and pkg-config",
+    "initial_compile_failure": "first synthetic test incorrectly attempted private/nonexistent Axis::to_nec; corrected to an explicit unused public synthetic button code without OS discovery; log preserved",
+    "all_owned_tool_handles_reaped": true,
+    "target": "/tmp/incant-agent-native-target"
+  },
+  "logs": [
+    {
+      "name": "tests-001",
+      "path": "/tmp/incant-gamepad-tests-001.log",
+      "sha256": "58e0d96ed3de401f2041ba58d32dc481acbd157bdaf54ec715e1d51bba8c56bd"
+    },
+    {
+      "name": "tests-002",
+      "path": "/tmp/incant-gamepad-tests-002.log",
+      "sha256": "2577ab9909192ce373a0ce292855f0d2bcb6fe520c6c43a50e36518a877c8fe5"
+    },
+    {
+      "name": "tests-003",
+      "path": "/tmp/incant-gamepad-tests-003.log",
+      "sha256": "c7dc65412034889353909ddcb826b91bb60134087a0fa0ba5603c9c0b6babf3b"
+    },
+    {
+      "name": "clippy-window-001",
+      "path": "/tmp/incant-gamepad-clippy-window-001.log",
+      "sha256": "4a7797d4185e9f0f7dfe64988c98320edc029f079863b187b37161b44beaa6e8"
+    },
+    {
+      "name": "clippy-default-001",
+      "path": "/tmp/incant-gamepad-clippy-default-001.log",
+      "sha256": "24cb05a3cb65ea6dd15f31cf7ddd4d61d00a1e7759ce41aab50d5822c8144ca1"
+    },
+    {
+      "name": "clippy-cpu-001",
+      "path": "/tmp/incant-gamepad-clippy-cpu-001.log",
+      "sha256": "45d6616b98f689e54d9b7e19447e61585d5906083f1c1f4b1ca79211da61d40d"
+    },
+    {
+      "name": "clippy-offscreen-001",
+      "path": "/tmp/incant-gamepad-clippy-offscreen-001.log",
+      "sha256": "8449b42fff85328e77e0de097d2ec987ece2e2ccc9c323bba221fe6ce69ede31"
+    },
+    {
+      "name": "fmt-001",
+      "path": "/tmp/incant-gamepad-fmt-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "python-001",
+      "path": "/tmp/incant-gamepad-python-001.log",
+      "sha256": "3ffd404b0a69e11875d693c285d4a2e2d79ed3b5d3f78b4f524c1b88168a5fdf"
+    },
+    {
+      "name": "dependencies-001",
+      "path": "/tmp/incant-gamepad-dependencies-001.log",
+      "sha256": "96876408c46b52f9dc5e6048a39edc19c62218cd5a030590d1c388728c04579c"
+    }
+  ],
+  "boundaries": {
+    "native_window_launched": false,
+    "gpu_launched": false,
+    "os_gamepad_backend_initialized": false,
+    "physical_controller_used": false,
+    "provider_account_calls": false,
+    "windows_linux_execution": false,
+    "physical_device_or_phase_gate": false,
+    "backend_internal_buffers_bounded_by_adapter": false,
+    "mac_async_backend_failure": "pinned Gilrs IOHID worker logs manager creation failure without returning it; successful builder/empty polling does not attest liveness"
+  },
+  "remaining": [
+    "physical-controller acceptance on each supported desktop host",
+    "Windows/Linux execution",
+    "unsupported haptics/touch/gestures/text/extra physical buttons",
+    "stable persistent hardware/player selection beyond this session contract"
+  ],
+  "built_by": "astra"
+}

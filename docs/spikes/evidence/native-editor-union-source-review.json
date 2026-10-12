@@ -1,0 +1,114 @@
+{
+  "recorded_at": "2026-10-11T22:07:31.542404+00:00",
+  "reviewer": "/root/integrate_runtime_prs",
+  "baseline": "f6389647dffd51f89011b5ae74e40dc7b768551e",
+  "head": "02de0765efeb5f79bb9d1671c42b0d1a7c15c5cf",
+  "tree": "57e2d4e1aee692f10f9bca3fe9dbe8945c94a9e7",
+  "method": "Read-only frozen Git objects, cross-layer lifecycle review using existing component receipts. No tests/builds/provider/native/GPU/network activity, repository mutations or publication.",
+  "verdict": "No additional actionable correctness finding within this bounded source integration review.",
+  "findings": [],
+  "existing_open_items": [
+    {
+      "item": "Claude0049 AgentPanel must consume running.approvalReady during deferred Undo/Redo and other native admission barriers.",
+      "status": "Already recorded in component evidence; parent reports seven-line fix reviewed/tested in child; not present in this reviewed head and not independently accepted here."
+    },
+    {
+      "item": "Final exact-build native WKWebView/pixel and one-turn acceptance0048.",
+      "status": "Known pending, outside this source review. Earlier native handler/provider evidence is not substituted for it."
+    }
+  ],
+  "checked_seams": [
+    "Shared CommandBus per-tool identity/revision/provenance and user-only allowance authorization; no alternate project mutation path.",
+    "Native Play startup snapshot/revision validation, generation-fenced stop/load, thread-owned native state, disposable simulation and focus release.",
+    "Account/provider authoritative read generation fencing; approval/cancellation exact IDs and single-flight worker ownership through reap.",
+    "Durable reservation before work, settlement before final publication, persistent historical uncertainty separated from turn uncertainty, no usage refund through Undo/cap edits.",
+    "Headless additional CLI allowance cannot replace authored cap; native host setup remains inside the admitted worker; output follows settlement and reaping.",
+    "Bounded complete conversation protocol groups, explicit failed/omitted context, untrusted provider/project text rendered as text.",
+    "Authoring-only host dependencies, shipped runtime source unchanged, normal dependency guard excludes new host crate."
+  ],
+  "source_sha256": {
+    "crates/incant_agent/src/access.rs": "23c751b94e1db08414c4bf9e9fe25f1db0b965650c2ec39032a898ddd7134102",
+    "crates/incant_agent/src/lib.rs": "048e0ae1aa2d9f4f07e0b50ace3d8c335de1c2ffee114efd1b5c299f5c62c2e2",
+    "crates/incant_agent/src/conversation.rs": "4abc8f689f88eb86fc7e42c32261ac0379da4dae9d07c6a99a548c1a79d46747",
+    "crates/incant_agent/src/session.rs": "d7b1e0946fcbbc64ee47d7b5eac7e691d0a4e410a576a5ef7bbc5bd2e68f8b15",
+    "crates/incant_agent/src/session/durable.rs": "886b6ab3573ff485868b9df110eb9d781fad9422002ab19a0588e3d058053984",
+    "crates/incant_agent_native/src/host.rs": "0fabbf0b8acef8ae50da15066d77e83da039a8cb2ee8fa72f308e112c3ecf327",
+    "crates/incant_agent_native/src/controller.rs": "a11f7c09905ea0384287266980feb2f9f59f26a0940f9085f538758a59eef714",
+    "crates/incant_agent_native/src/controller/run.rs": "58e49ecfd1b00b788f76d6522b064328d6f202dda3c62879027977ce4cea9fcf",
+    "crates/incant_headless/src/agent_command.rs": "8566b9d675405dbc9f931488b43f6e693d9d7fa3322e45d1d2fa16ca5de6a4a4",
+    "crates/incant_cmd/src/lib.rs": "1ae889f39d9c2abc566d77e0fe118d875cc23e8ab4d48758bb97cbce92ac3be2",
+    "editor/app/src/main.rs": "5637c32a223f7d8e7b691041c7f00914e778f296fc259b45a89845a699ba7837",
+    "editor/app/src/agent.rs": "316e57f0dbe4f5c5c8a0dd59d1c6d38bd5331f73232498f76ab0f64b038a99da",
+    "editor/app/src/agent/budget.rs": "0a69e3ec13b41f6e9fdce74cb9a2ace00c3a4da0ff5617f5bafcd3b2562a7210",
+    "editor/app/src/agent/worker.rs": "b857d3cdbf577ba29285dc94ed099d3903181ef0e5d6df54c4314b4f299c60b6",
+    "editor/app/src/agent/worker/tests.rs": "11b926aa6145b79bd2b9be66f669ee3cc38e40c95f58a07051406aa87cde0848",
+    "editor/app/src/agent/owner.rs": "22bff7e6aca85c7926bf5da1ccf5c3aea7135e33eb074db9681cb5fb3b52a7b6",
+    "editor/app/src/play/mod.rs": "5a46fdab99b450c2667b216abd8d77e5375813487f1ae3a84c5c2cb7308e4dde",
+    "editor/app/src/play/worker.rs": "124ecf452e04ea2f66b9f4ca355b6dcbc30ae59f680ebcf93b4b39ac402c8b40",
+    "editor/app/src/provider.rs": "5fcc1e95d06162815a8a27276523c0909fd0d0e6d9d930d9d9e3d6e5328b0bf5",
+    "editor/bridge/native.ts": "fa29995216563796218fcfdbde2dc14d4a3d55daea6859db05363cd8bca17cc3",
+    "editor/bridge/contract.ts": "ddacc748167f137b069f57edc9572501b78739da9d6e160275621ee26e458216",
+    "editor/ui/src/components/AgentPanel.tsx": "b2afbc85629b1e6dd92fa018cd521d6abf289f19130e12fdeca83c84ba005cd5",
+    "editor/ui/src/components/agent/AgentAllowance.tsx": "0ad3dde7fc4b2771d82ffea02a9973a779e32e58b44a2357ac6c848105de8f3b",
+    "editor/ui/src/components/agent/AgentTurn.tsx": "11dea25254933a0d7a0b52126a97e28ee6c04061dc3d128ad4669744fcc068ee",
+    "editor/ui/src/components/agent/agentMemory.ts": "bb8e5bf14010722a128c2294088d7efe17b712ef9a62b7e6e46d67f961bbf4a8",
+    "editor/ui/src/components/agent/agentText.ts": "5cc237bdc3598ce676900e3796c1e266d8f8ab71c35e80febea3109543c06677",
+    "editor/ui/src/play/PlayContext.tsx": "e22c903870f127b8b37b2b8b8d90829c3da51fd61ba2763812338e2f080b4147",
+    "editor/ui/src/play/input.ts": "045e374df91f2e424456960834ef78cfc1e5c223fa4c4f34f8fbd11ac2167da9",
+    "editor/ui/src/play/useGameCapture.ts": "b8efe3fa82a2d5ddd48fd75dae27f43f90b25dd252b803346bfe549dd77c4d15",
+    "tools/check_runtime_dependencies.py": "661a879b8fdc1be5f29866c2c14c462c9df83d0e118f98d259732a67fced3000",
+    "Cargo.lock": "2ef570b1277b342590098968a2a8c943988f68f67686866bdd84b61e9e13bfd8",
+    "crates/incant_agent_native/Cargo.toml": "69e04789c396aaf48f4b98fd5bbdf98a46b9f491b157e46d3c96ca68cd712ced",
+    "crates/incant_play/Cargo.toml": "346de54ba81371615bdad6539bad042281362666cd7bf768534117533d293d88",
+    "crates/incant_headless/Cargo.toml": "9284e5e1400f7e4bbb8bdeed91f14d3ffb051c2228b932394586b7e639b8d061",
+    "editor/app/Cargo.toml": "e45c3f54a3ddafa6d97ea0bc6dbf4586afdc8cdc03ce80a8ba24e1c545c0ff48"
+  },
+  "component_receipt_sha256": {
+    "docs/spikes/evidence/native-editor-agent-review.md": "64de6c031dc46bb619479aae34c84e7d730dbf956b36dff811f7aaaf9a361a8b",
+    "docs/spikes/evidence/native-agent-session-review.md": "fee29dcf0e4a7880a609dd8362beec5cc33782f3067f9d4e76fbc4246feb7700",
+    "docs/spikes/headless-agent-budgets.md": "2d69205d20124284c6649de65a58746f12ee70b1ea9ffbf0076db573f47c1ab9",
+    "docs/spikes/native-agent-budget-bridge.md": "bcf8a6e9f5a5d61702d3e06adf42c70153a2b6b16d796060c1a9835fb726e44d",
+    "docs/spikes/evidence/native-agent-allowance-integration.json": "3451a078dfcac01b0d60cac085cce55ce3abd907701ea3e97059360f3c27b13f",
+    "docs/spikes/evidence/native-agent-durable-budget-live.json": "66f258915749e3c6334290b8d25c88fa5c12b613affdb666076194908c6848b3",
+    "docs/spikes/evidence/native-editor-union-checks.json": "bdf81feb692e31c50a4f59aa39a3f48bd83c78977de248eef4e388f7f5a423d3"
+  },
+  "ordinary_validation": {
+    "source": "9817f0ce08c9650d47a29c4372787da7383f5e1e",
+    "only_change_to_reviewed_head": "docs/spikes/evidence/native-editor-union-checks.json",
+    "tests": {
+      "command": "./tools/cargo test --workspace --profile ci --locked --features incant_audio_runtime/scene -j2",
+      "exit_code": 0,
+      "passed": 993,
+      "failed": 0,
+      "ignored": 75,
+      "groups": 244
+    },
+    "clippy": {
+      "command": "./tools/cargo clippy --workspace --all-targets --profile ci --locked --features incant_audio_runtime/scene -j2 -- -D warnings",
+      "exit_code": 0
+    },
+    "verified_logs": {
+      "incant-editor-union-workspace-tests.log": {
+        "path": "/tmp/incant-editor-union-workspace-tests.log",
+        "sha256": "bd7e65f55a1f41c458dcb0bec93acb438198dbe791bcc7e0e0f9d10c18c00add",
+        "matches_record": true
+      },
+      "incant-editor-union-clippy.log": {
+        "path": "/tmp/incant-editor-union-clippy.log",
+        "sha256": "dfb5f988ff5d491ec4b2a16d7ab390bc990f3354b71a75b47f501d1fd028945a",
+        "matches_record": true
+      }
+    }
+  },
+  "not_repeated": [
+    "Previously accepted component tests/source reviews",
+    "993 ordinary tests and Clippy (retained log hashes verified)",
+    "Parent-reported Python209/4skip and Node19 checks"
+  ],
+  "limitations": [
+    "This is a bounded nonvisual review, not a claim that every changed line was independently re-audited.",
+    "Source review does not replace required fast-main checks or frozen release-candidate matrix.",
+    "No graphics/device/shipping performance, phase gate, whole-save or full solver adoption claim.",
+    "Later readiness UI delta and final evidence commit require exact source-diff audit before publication."
+  ]
+}

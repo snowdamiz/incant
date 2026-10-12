@@ -13,6 +13,14 @@ struct Parameters {
     factors: [f32; 4],
     flags: [u32; 4],
 }
+// The cooked shadow uniform shares this exact host structure.
+const _: () = {
+    assert!(size_of::<Parameters>() == 64);
+    assert!(std::mem::offset_of!(Parameters, base) == 0);
+    assert!(std::mem::offset_of!(Parameters, emissive_roughness) == 16);
+    assert!(std::mem::offset_of!(Parameters, factors) == 32);
+    assert!(std::mem::offset_of!(Parameters, flags) == 48);
+};
 pub(crate) struct GpuMaterial {
     pub bind_group: wgpu::BindGroup,
     pub alpha: AlphaMode,
@@ -50,6 +58,28 @@ fn uniform_entry(binding: u32, visibility: wgpu::ShaderStages) -> wgpu::BindGrou
         count: None,
     }
 }
+pub(crate) fn layout_entries() -> Vec<wgpu::BindGroupLayoutEntry> {
+    let mut entries = vec![uniform_entry(0, wgpu::ShaderStages::FRAGMENT)];
+    for slot in 0..5 {
+        entries.push(wgpu::BindGroupLayoutEntry {
+            binding: slot * 2 + 1,
+            visibility: wgpu::ShaderStages::FRAGMENT,
+            ty: wgpu::BindingType::Texture {
+                sample_type: wgpu::TextureSampleType::Float { filterable: true },
+                view_dimension: wgpu::TextureViewDimension::D2,
+                multisampled: false,
+            },
+            count: None,
+        });
+        entries.push(wgpu::BindGroupLayoutEntry {
+            binding: slot * 2 + 2,
+            visibility: wgpu::ShaderStages::FRAGMENT,
+            ty: wgpu::BindingType::Sampler(wgpu::SamplerBindingType::Filtering),
+            count: None,
+        });
+    }
+    entries
+}
 impl MaterialSystem {
     pub fn new(
         device: &wgpu::Device,
@@ -61,25 +91,7 @@ impl MaterialSystem {
             label: Some("Material frame"),
             entries: &[uniform_entry(0, wgpu::ShaderStages::VERTEX_FRAGMENT)],
         });
-        let mut entries = vec![uniform_entry(0, wgpu::ShaderStages::FRAGMENT)];
-        for slot in 0..5 {
-            entries.push(wgpu::BindGroupLayoutEntry {
-                binding: slot * 2 + 1,
-                visibility: wgpu::ShaderStages::FRAGMENT,
-                ty: wgpu::BindingType::Texture {
-                    sample_type: wgpu::TextureSampleType::Float { filterable: true },
-                    view_dimension: wgpu::TextureViewDimension::D2,
-                    multisampled: false,
-                },
-                count: None,
-            });
-            entries.push(wgpu::BindGroupLayoutEntry {
-                binding: slot * 2 + 2,
-                visibility: wgpu::ShaderStages::FRAGMENT,
-                ty: wgpu::BindingType::Sampler(wgpu::SamplerBindingType::Filtering),
-                count: None,
-            });
-        }
+        let entries = layout_entries();
         let layout = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("glTF material maps"),
             entries: &entries,

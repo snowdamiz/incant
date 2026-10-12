@@ -1,0 +1,478 @@
+{
+ "scope": "0050 focused native verification of the two 0048 UI fixes in the actual WKWebView of the granted rebuilt editor; no provider turn.",
+ "model": {
+  "name": "Claude Opus 5.5",
+  "id": "claude-opus-5-5",
+  "thinking": "max",
+  "verification": "Session started by tools/handoff/main.py run 0050-native-editor-focus-fit (PID 64275) through claude-agent-acp (PID 64327); tools/acp/config.json pins model claude-opus-5-5 and effort max, and configure_model_and_effort raises before prompting unless ACP confirms both. The runner's confirmation line is not visible inside the session."
+ },
+ "host": {
+  "os": "macOS 26.6 (25G72)",
+  "arch": "arm64",
+  "display": "built-in, 1512x982 pt at 2x",
+  "visible_frame_pt": [
+   1512,
+   875
+  ],
+  "largest_window": "1440x875: 1440x900 does not fit the 875 pt visible desktop"
+ },
+ "build": {
+  "source_commit": "4589c2ba5edf2d89587fef8b815bdca1cd4af01e",
+  "packet_commit": "5970830",
+  "manifest": {
+   "path": "/tmp/incant-native-review-0050-bin-v1/manifest.json",
+   "sha256": "2d69d15cdffdb7ac7fcb9543c08c7e932affcd96c4a4f3fcb2005325467b70a3"
+  },
+  "editor": {
+   "path": "/tmp/incant-native-review-0050-bin-v1/incant_editor",
+   "sha256": "89f6b0d990cbaf1f275b8b0e7d3c448a543ef7b4199239ec7e57c419c27623fd",
+   "bytes": 62675088
+  },
+  "headless": {
+   "sha256": "e61898008e996282b5351c60247f97c8d02aa54dc76ef3f7d321b7567bb8d564",
+   "launched": false
+  },
+  "checks": [
+   "build.json values match the files",
+   "all 897 source_sha256 entries match git blobs at 4589c2b",
+   "commits after 4589c2b change only STATUS.md, docs evidence and this packet",
+   "editor hash checked again by launch.sh immediately before the launch"
+  ]
+ },
+ "fixture": {
+  "path": "/tmp/incant-native-0048-fixtures/saved/project.json",
+  "project_id": "01M4PEJQNPMDQYEDGT0PRWN78X",
+  "project_json_sha256": "3ff0ded175bc0c39b5a909234665a2ef12509aa8847726b34442873860fc7374",
+  "journal": {
+   "sha256": "0fd36d3eca6f5cf15d0c6d9c0cc07833a924f1bd4991b953191d867e60fe15df",
+   "records": 23
+  },
+  "unchanged": "identical before launch (23:42:04Z) and after quit (23:58:49Z); no project edit was made"
+ },
+ "usage_ledger": {
+  "path": "~/Library/Application Support/Incant/agent-usage/01M4PEJQNPMDQYEDGT0PRWN78X.json",
+  "sha256": "91cecc821692d0e478ef453384f00ca5daf3a5157c7ec441319d97d939d4ce09",
+  "record": {
+   "version": 1,
+   "charged_tokens": 22044,
+   "accounting_uncertain": false,
+   "pending": null
+  },
+  "unchanged": "identical before launch and after quit",
+  "read_only": "exact path only; no credential, keychain or account store was read"
+ },
+ "checks": {
+  "cmd_p_from_picker": {
+   "result": "pass",
+   "steps": "picker opened (pointer), Main · Stationary Camera chosen with Down and Return, focus back on the picker, then Cmd-P",
+   "timeline_utc": {
+    "picker_focused_before_cmd_p": "23:45:44.887",
+    "focus_on_primary_named_Play": "23:45:45.271 (+0.38 s)",
+    "same_button_named_Pause": "23:45:46.172 (+1.29 s) through 23:45:48.210 and at capture 1"
+   },
+   "state": "Playing · Main; picker hidden; Step unavailable (\"Pause Play to step one tick.\"); Stop available",
+   "evidence": [
+    "focus-sequences.jsonl step b2",
+    "states.jsonl p1",
+    "screenshots/native/play-01-…"
+   ]
+  },
+  "focus_kept_in_another_panel": {
+   "result": "pass",
+   "stop_from_pause": "Cmd-P with Pause focused stopped Play; focus stayed on the same button, named Play, 23:46:59.519-23:47:02.011; Live; picker back",
+   "from_hierarchy_row": "click on the Stationary Imported Mesh row (tree-row-00000000000000000000000024) focused it; Cmd-P started Play (Playing at 23:47:06.275) and every read 23:47:03.395-23:47:06.168 found the row focused; Cmd-P stopped Play (Live at 23:47:09.565) with the row still focused through 23:47:09.467",
+   "evidence": [
+    "focus-sequences.jsonl step b3",
+    "states.jsonl p2, p3, p4"
+   ]
+  },
+  "no_camera_refusal_and_keyboard_dismiss": {
+   "result": "pass",
+   "steps": "Spatial Without Camera chosen in the picker (focus back on it), Cmd-P",
+   "refusal": "header \"Play failed\"; notice \"Play could not start. native play: spatial content requires an explicit --camera and native render host\" with Dismiss; picker shown again",
+   "focus": "on Play from +0.34 s (23:47:35.649) through 23:47:38.644 and at capture 2; Tab: Step, Stop, Dismiss (988, 82, 63x24); Space: focus on Play (23:47:41.121); Live, notice gone (23:47:41.733)",
+   "compared_with_0048": "0048 play-06 recorded this flow with the notice shown and no element focused (defect D1)",
+   "evidence": [
+    "focus-sequences.jsonl step b4",
+    "states.jsonl n1, n2",
+    "screenshots/native/play-02-…"
+   ]
+  },
+  "model_field_shows_whole_default": {
+   "result": "pass",
+   "value": "gpt-6-astra (11 characters)",
+   "width": "AX 91 pt in every layout: calc(11ch + 12px) = 91.2 px; AX frames are whole points",
+   "method": "AX frames and AXBoundsForRange of the field (window-relative pt), then glyph ink of the raw capture inside the field box (device px, Display P3 values, tolerance 40 against the well colour #0e0f12)",
+   "startup_default_layout": {
+    "window_pt": [
+     1440,
+     875
+    ],
+    "column_px": 360,
+    "model": [
+     1099,
+     780,
+     91,
+     24
+    ],
+    "text_bounds_0_11": [
+     1104,
+     784,
+     80,
+     16
+    ],
+    "last_char_bounds_10_1": [
+     1175,
+     784,
+     9,
+     16
+    ]
+   },
+   "layouts": [
+    {
+     "window_pt": [
+      1440,
+      875
+     ],
+     "column_px": 380,
+     "capture": "play-01 (raw c1) and play-02 (raw c2)",
+     "agent_pane": [
+      1060,
+      558,
+      380,
+      289
+     ],
+     "message_field": [
+      1073,
+      744,
+      354,
+      30
+     ],
+     "model": [
+      1079,
+      780,
+      91,
+      24
+     ],
+     "approval": [
+      1172,
+      780,
+      116,
+      24
+     ],
+     "send": [
+      1393,
+      778,
+      28,
+      28
+     ],
+     "text_bounds_0_11": [
+      1084,
+      784,
+      80,
+      16
+     ],
+     "last_char_bounds_10_1": [
+      1155,
+      784,
+      9,
+      16
+     ],
+     "content_right_edge": 1165,
+     "bar_inner_right_edge": 1421,
+     "ink_device_px": {
+      "field_x": 2158,
+      "runs": 11,
+      "first_x": 2170,
+      "last_x": 2323,
+      "last_run_rows": [
+       1578,
+       1591
+      ]
+     },
+     "free_px_between_approval_and_send": 105,
+     "send_ends_at_bar_inner_edge": true,
+     "text_ends_inside_content": true
+    },
+    {
+     "window_pt": [
+      1440,
+      875
+     ],
+     "column_px": 280,
+     "capture": "composer-01 (raw c3)",
+     "agent_pane": [
+      1160,
+      558,
+      280,
+      289
+     ],
+     "message_field": [
+      1173,
+      744,
+      254,
+      30
+     ],
+     "model": [
+      1179,
+      780,
+      91,
+      24
+     ],
+     "approval": [
+      1272,
+      780,
+      116,
+      24
+     ],
+     "send": [
+      1393,
+      778,
+      28,
+      28
+     ],
+     "text_bounds_0_11": [
+      1184,
+      784,
+      80,
+      16
+     ],
+     "last_char_bounds_10_1": [
+      1255,
+      784,
+      9,
+      16
+     ],
+     "content_right_edge": 1265,
+     "bar_inner_right_edge": 1421,
+     "ink_device_px": {
+      "field_x": 2358,
+      "runs": 11,
+      "first_x": 2370,
+      "last_x": 2523,
+      "last_run_rows": [
+       1578,
+       1591
+      ]
+     },
+     "free_px_between_approval_and_send": 5,
+     "send_ends_at_bar_inner_edge": true,
+     "text_ends_inside_content": true
+    },
+    {
+     "window_pt": [
+      1000,
+      650
+     ],
+     "column_px": 280,
+     "capture": "composer-02 (raw c4)",
+     "agent_pane": [
+      720,
+      333,
+      280,
+      289
+     ],
+     "message_field": [
+      733,
+      519,
+      254,
+      30
+     ],
+     "model": [
+      739,
+      555,
+      91,
+      24
+     ],
+     "approval": [
+      832,
+      555,
+      116,
+      24
+     ],
+     "send": [
+      953,
+      553,
+      28,
+      28
+     ],
+     "text_bounds_0_11": [
+      744,
+      559,
+      80,
+      16
+     ],
+     "last_char_bounds_10_1": [
+      815,
+      559,
+      9,
+      16
+     ],
+     "content_right_edge": 825,
+     "bar_inner_right_edge": 981,
+     "ink_device_px": {
+      "field_x": 1478,
+      "runs": 11,
+      "first_x": 1490,
+      "last_x": 1643,
+      "last_run_rows": [
+       1128,
+       1141
+      ]
+     },
+     "free_px_between_approval_and_send": 5,
+     "send_ends_at_bar_inner_edge": true,
+     "text_ends_inside_content": true
+    },
+    {
+     "window_pt": [
+      1000,
+      650
+     ],
+     "column_px": 380,
+     "capture": "composer-03 (raw c5)",
+     "agent_pane": [
+      620,
+      333,
+      380,
+      289
+     ],
+     "message_field": [
+      633,
+      519,
+      354,
+      30
+     ],
+     "model": [
+      639,
+      555,
+      91,
+      24
+     ],
+     "approval": [
+      732,
+      555,
+      116,
+      24
+     ],
+     "send": [
+      953,
+      553,
+      28,
+      28
+     ],
+     "text_bounds_0_11": [
+      644,
+      559,
+      80,
+      16
+     ],
+     "last_char_bounds_10_1": [
+      715,
+      559,
+      9,
+      16
+     ],
+     "content_right_edge": 725,
+     "bar_inner_right_edge": 981,
+     "ink_device_px": {
+      "field_x": 1278,
+      "runs": 11,
+      "first_x": 1290,
+      "last_x": 1443,
+      "last_run_rows": [
+       1128,
+       1141
+      ]
+     },
+     "free_px_between_approval_and_send": 105,
+     "send_ends_at_bar_inner_edge": true,
+     "text_ends_inside_content": true
+    }
+   ],
+   "reading": "In every layout the 11 characters lie inside the field's content box, and the painted glyphs are 11 runs whose last is a full-height \"a\" (14 device px), not the three short dots of an ellipsis. AXVisibleCharacterRange returned {0,0} and is not used."
+  },
+  "no_surrounding_overflow": {
+   "result": "pass",
+   "reading": "Model, Approval (Ask before edits, the longest mode label) and Send keep their widths in all four layouts; Send ends exactly at the bar's inner edge; at 280 px 5 px remain between Approval and Send (2 px gap + 3 px free), so the 91 pt field is not shrunk. No AX scroll bar exists besides the web view's own top-level area, and no agent-pane control extends past the pane edge. The composer, allowance line and Change stay inside the column in every capture."
+  },
+  "account_and_usage_retained": {
+   "result": "pass (state); identity not compared",
+   "startup": "23:42:45Z, before any input: \"ChatGPT account, signed in as [redacted]\", Agent Ready, \"22,044 of 64,000 tokens used\", no sign-in step and no account dialog",
+   "end": "23:58:35Z: the same three reads",
+   "identity": "Account names are redacted by winctl and the account store was not read, so \"same account\" rests on the signed-in state reached without a sign-in, the unchanged ledger and the 0048 continuity; it was not compared directly."
+  },
+  "no_network_request": {
+   "result": "not met",
+   "observed": "One TLS connection from the editor process at startup, before any review input (first input 23:44:42Z): lsof 23:42:27Z-23:42:28Z (3 samples) showed TCP <local>:49832 -> 172.64.146.15:443 ESTABLISHED (a Cloudflare-range address); nettop counted 4,932 B in / 2,304 B out in its first second and 18,756 B in / 2,509 B out from its third second, unchanged through exit (927 rows). No other socket in 1,681 lsof samples, children included.",
+   "likely_cause_from_source": "editor/app/src/provider.rs: the restore action returns public_state(true), which calls auth::access_token; crates/incant_agent/src/auth.rs access_token_inner renews the saved session when the access token expires within 60 s (POST https://auth.openai.com/api/accounts/oauth/token, then GET openid-configuration and JWKS to validate the new ID token). These files are unchanged between the 0048 build (bb1b517) and this one, so 0048's quiet reopen five minutes after its turn and this exchange about 41 minutes later fit a time-dependent renewal. Not verified: the saved token's expiry was not read, and the host name was not observed.",
+   "owner": "root (backend). No UI change follows from it.",
+   "evidence": [
+    "network.txt"
+   ]
+  }
+ },
+ "processes": [
+  {
+   "pid": 71838,
+   "what": "incant_editor with the fixture",
+   "started": "23:42:26Z",
+   "ended": "Cmd-Q 23:58:35Z; gone 23:58:39Z"
+  },
+  {
+   "pid": 77320,
+   "what": "short-lived child of the editor at the first successful Play start (23:45:45Z); not inspected",
+   "ended": "gone"
+  },
+  {
+   "pid": 79786,
+   "what": "short-lived child of the editor at the second successful Play start (23:47:03Z); not inspected",
+   "ended": "gone"
+  },
+  {
+   "pid": 71839,
+   "what": "nettop on the editor PID (launch.sh)",
+   "ended": "stopped by netwatch.sh at the editor exit"
+  },
+  {
+   "pid": null,
+   "what": "netwatch.sh lsof sampler",
+   "ended": "exited 23:58:36Z after 1,681 samples"
+  },
+  {
+   "pid": [
+    69780,
+    69894
+   ],
+   "what": "loopback nettop method check (python), before the launch",
+   "ended": "exited"
+  },
+  {
+   "pid": null,
+   "what": "launch.sh, 8 burst.sh runs, winctl, flow.py, state.py, neutral.py, imgtool",
+   "ended": "short-lived; all exited"
+  }
+ ],
+ "bursts": "8 idle-gated bursts, 23:44:42Z-23:58:35Z; each began with the same front app and handed it back with the pointer restored; three waited 46 s, 172 s and 106 s for 15 s without input",
+ "images": {
+  "budget": 6,
+  "used": 6,
+  "window_captures": 5,
+  "crops": 1,
+  "hashes": "native-screenshots.sha256",
+  "redaction": "committed full-window images have the 28 pt titlebar account avatar (plus 2 pt) filled with the titlebar canvas #0b0c0f; each differs from its raw capture in exactly 2,040 pixels, all inside a 50x50 device-px box over the avatar (imgtool diff); every image keeps the captures' Display P3 profile; raw captures stay in git-ignored artifacts/0050"
+ },
+ "slips": [
+  "Captures 1-3 were taken with the pointer parked at (680, 20) pt, inside the Undo button (678-706), so Undo shows its hover fill (#25272d against the #0b0c0f canvas) in play-01, play-02 and composer-01. Later captures park the pointer on empty titlebar (neutral.py).",
+  "The start-of-burst focus snapshot reads null while the editor is in the background, so it cannot attribute changes between bursts; the first reads after the window comes forward are used instead.",
+  "One read-only measurement call failed (zsh expanded =Model and did not split a variable) and state.py failed once on a null focus; both were redone, and neither posted input.",
+  "The first redacted copies were converted to sRGB by imgtool, changing every pixel value slightly; imgtool now keeps the captures' Display P3 values, and the committed images were regenerated from the raw captures (imgtool diff confirms only the avatar box changed). No capture was retaken."
+ ],
+ "limitations": [
+  "macOS on this display only; two window sizes and two column widths; the default model value and the default approval mode only. A longer model value was not checked.",
+  "Focus was read every 0.2-0.4 s; a focus change shorter than that would not be seen.",
+  "Network observations are samples of this run: nettop covered only the editor PID, lsof sampled every 0.5 s, WebKit processes were not watched, and the remote host name was not observed.",
+  "No cross-platform, device-performance, full accessibility or phase-gate claim."
+ ],
+ "gpu_and_window_ownership": "released at 23:58:39Z when the editor exited; no native window or GPU work of this review remains"
+}

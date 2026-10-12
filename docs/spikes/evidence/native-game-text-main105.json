@@ -1,0 +1,64 @@
+{
+  "source": "101b03760caafd5dee20a16cb609ae1a2a28e5ea",
+  "base_main": "01acc843dc95dfcf2345737b4f51f259e77678ed",
+  "integrated_source": "5475d88211152d277be12e13e8c452fd1a5ddaca",
+  "unchanged_files": {
+    "crates/incant_text/Cargo.toml": "2055516fe9da2d7adedee9bd0f0cfa80f43d96725f8f3a8d3bb4056b8179e92f",
+    "crates/incant_text/src/fonts.rs": "a8eb58ae89a8a331cf81dc35e154b21240b550556c7b35bdcf765713e33b0524",
+    "crates/incant_text/src/layout.rs": "d274cde45aaeb884600712aac38ad1609ed2fc20d3a4f8f25d056b93cddf5263",
+    "crates/incant_text/src/lib.rs": "2343dce9914e9b89b144e99f731b4f678f74da85c7c1fe898cfdf4d1549e8cc8",
+    "crates/incant_text/tests/fonts/LICENSE": "5ec4347054089def6904da61d04f0360968f9ef36634b1fe007a5b6ec2f7aa96",
+    "crates/incant_text/tests/fonts/NotoSans-Regular.ttf": "2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9",
+    "crates/incant_text/tests/fonts/NotoSansArabic.ttf": "ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56",
+    "crates/incant_text/tests/fonts/NotoSansHebrew.ttf": "3d4fef85b449ade4d165de982969374fa30b2a5fe7bc679f5a3f5bfc047fb703",
+    "crates/incant_text/tests/fonts/provenance.json": "dcf7c3810ec80ee28781a413985a1d2f65172fa63a95d5669ca0b1c6bd6bb664",
+    "crates/incant_text/tests/shaping.rs": "52c72e66cea8904b9a11ba8bdb1803b6573223c25d1e02b4b7e017572a4d61a2",
+    "docs/spikes/evidence/native-game-text-review-final.json": "a0b13905d9940fe2a7cd174a93af0fd0d9bd63cef781e5f2aa91ae28b5f4428d",
+    "docs/spikes/evidence/native-game-text-review.json": "2a9d469477cf530e106d53479abb3b69143ba9c334db6cc849fcc04082c6d484",
+    "docs/spikes/evidence/native-game-text.json": "217c0a3a732348cad00b448829ff7483aa3006de477c80d2ddcea4025d6ff9b5",
+    "docs/spikes/native-game-text.md": "ccaea23becfaa12c7d23960018fd454c1b654ba0142c0087f1b0c9f5be1cc824"
+  },
+  "original_lock_entries_preserved": 935,
+  "new_font_lock_entries": 22,
+  "merged_lock_sha256": "5186bf83f14db83a1b236074b53d033551c9f97f11de8c59e68e493a4f45adee",
+  "source_review": "docs/spikes/evidence/native-game-text-review-final.json",
+  "merge_conflicts": false,
+  "logs": {
+    "/tmp/incant-game-text-main105-clippy.log": {
+      "sha256": "1811d9aec0233fa038a6526f5a32ff8cf79b0ba18f2406f4cae50fa76f1dca27",
+      "bytes": 993
+    },
+    "/tmp/incant-game-text-main105-conventions.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/incant-game-text-main105-diff.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/incant-game-text-main105-fmt.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/incant-game-text-main105-graph.log": {
+      "sha256": "031b1e6f05967d0e88a7ed7c078988ceda4129020699fe11b3f2a07a020691b0",
+      "bytes": 50
+    },
+    "/tmp/incant-game-text-main105-tests.log": {
+      "sha256": "f03357908ddeb82122b45b58505458b704a2ef024f6721054bdb13774629d667",
+      "bytes": 2360
+    },
+    "/tmp/incant-game-text-main105-wasm.log": {
+      "sha256": "dc8efd4649702b91dfb92c276d1d959e6acd317c04248eca45853e6814e7c2d3",
+      "bytes": 940
+    }
+  },
+  "checks": {
+    "actual_font_tests": 15,
+    "all_target_clippy": "pass",
+    "standalone_wasm32": "pass",
+    "normal_runtime_graph": "pass",
+    "fmt_conventions_diff": "pass"
+  },
+  "scope": "CPU shaping library only; unchanged source integrated into actualmain105 with all existing lock records preserved. No rendering/device/performance/IME/gameUI claim."
+}

@@ -1,0 +1,68 @@
+{
+ "what": "Agent composer model field (agent.css .composer__model) reproduced with the bundled JetBrains Mono in an offscreen system WKWebView (never shown). scrollWidth > clientWidth means WebKit ellipsizes the text.",
+ "engine": "system WebKit, user agent Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko)",
+ "font_loaded": true,
+ "text_width_px_gpt_6_astra": 79.19999694824219,
+ "single": {
+  "current": {
+   "width": "calc(11ch + 10px)",
+   "clientWidth": 89,
+   "scrollWidth": 91,
+   "overflows": true
+  },
+  "slack2": {
+   "width": "calc(11ch + 12px)",
+   "clientWidth": 91,
+   "scrollWidth": 91,
+   "overflows": false
+  },
+  "slack1": {
+   "width": "calc(11ch + 11px)",
+   "clientWidth": 90,
+   "scrollWidth": 91,
+   "overflows": true
+  },
+  "long": {
+   "width": "calc(24ch + 12px)",
+   "clientWidth": 185,
+   "scrollWidth": 185,
+   "overflows": false
+  }
+ },
+ "sweep_overflowing_lengths_by_slack_px": {
+  "10": [
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   18,
+   19,
+   20,
+   21,
+   22,
+   23,
+   24,
+   25,
+   26,
+   27,
+   28,
+   29,
+   30,
+   31,
+   32
+  ],
+  "12": [],
+  "13": [],
+  "14": []
+ }
+}

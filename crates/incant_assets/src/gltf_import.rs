@@ -9,6 +9,7 @@ pub use incant_assets_runtime::ModelNode;
 #[derive(Debug, Clone)]
 pub struct ImportedModel {
     pub meshes: Vec<Mesh>,
+    pub animation: Option<incant_assets_runtime::animation::AnimationData>,
     pub textures: Vec<crate::ModelTexture>,
     pub images: Vec<crate::Texture>,
     pub nodes: Vec<ModelNode>,
@@ -20,8 +21,7 @@ pub struct ImportedModel {
     pub fingerprint: String,
 }
 
-/// First static-model importer. Unsupported content fails explicitly instead of
-/// silently losing animation, morph targets or extension data.
+/// Static or bounded skeletal/TRS model import. Unsupported content fails explicitly.
 pub fn import_gltf(root: &Path, source: &Path) -> Result<ImportedModel> {
     let mut sources = SourceSet::new(root)?;
     let bytes = sources.read(source)?;
@@ -32,8 +32,13 @@ pub fn import_gltf(root: &Path, source: &Path) -> Result<ImportedModel> {
             "glTF extension {extension}"
         )));
     }
-    if doc.animations().next().is_some() || doc.skins().next().is_some() {
-        return Err(AssetError::Unsupported("skinned or animated glTF".into()));
+    let animated = doc.animations().len() != 0 || doc.skins().len() != 0;
+    if animated
+        && (doc.nodes().len() > incant_assets_runtime::animation::MAX_NODES
+            || doc.skins().len() > incant_assets_runtime::animation::MAX_SKINS
+            || doc.animations().len() > incant_assets_runtime::animation::MAX_CLIPS)
+    {
+        return Err(AssetError::Limit("animation objects"));
     }
     if doc.cameras().next().is_some() {
         return Err(AssetError::Unsupported("glTF cameras".into()));
@@ -92,9 +97,13 @@ pub fn import_gltf(root: &Path, source: &Path) -> Result<ImportedModel> {
             return Err(invalid("accessor outside buffer view"));
         }
     }
+    if animated {
+        crate::gltf_animation::preflight(doc)?;
+    }
     let (textures, images) =
         crate::model_textures::import_textures(doc, &buffers, &mut sources, source)?;
     let mut meshes = Vec::new();
+    let mut influences = Vec::new();
     let mut mesh_materials = Vec::new();
     let mut primitive_indices = Vec::new();
     let (mut total_vertices, mut total_indices) = (0, 0);
@@ -126,6 +135,8 @@ pub fn import_gltf(root: &Path, source: &Path) -> Result<ImportedModel> {
                         | Semantic::Normals
                         | Semantic::Tangents
                         | Semantic::TexCoords(0)
+                        | Semantic::Joints(0)
+                        | Semantic::Weights(0)
                 ) {
                     return Err(AssetError::Unsupported(format!(
                         "vertex attribute {semantic:?}"
@@ -135,6 +146,7 @@ pub fn import_gltf(root: &Path, source: &Path) -> Result<ImportedModel> {
                     return Err(invalid("vertex attribute counts differ"));
                 }
             }
+            crate::gltf_animation::validate_primitive(&primitive)?;
             let material = primitive.material();
             let pbr = material.pbr_metallic_roughness();
             let textured = pbr.base_color_texture().is_some()
@@ -185,8 +197,10 @@ pub fn import_gltf(root: &Path, source: &Path) -> Result<ImportedModel> {
                 })
                 .collect();
             let mut imported = Mesh { vertices, indices };
+            let mut weights = crate::gltf_animation::weights(&primitive, &buffers, n)?;
             imported.validate()?;
             if normals.is_none() {
+                crate::gltf_animation::expand(&mut weights, &imported.indices)?;
                 generate_flat_normals(&mut imported)?;
                 total_vertices = total_vertices - n + imported.vertices.len();
                 if total_vertices > MAX_VERTICES {
@@ -195,6 +209,7 @@ pub fn import_gltf(root: &Path, source: &Path) -> Result<ImportedModel> {
             }
             if tangents.is_none() && material.normal_texture().is_some() {
                 let old_count = imported.vertices.len();
+                crate::gltf_animation::expand(&mut weights, &imported.indices)?;
                 crate::tangents::generate(&mut imported)?;
                 total_vertices = total_vertices - old_count + imported.vertices.len();
                 if total_vertices > MAX_VERTICES {
@@ -204,6 +219,7 @@ pub fn import_gltf(root: &Path, source: &Path) -> Result<ImportedModel> {
             ids.push(meshes.len());
             mesh_materials.push(primitive.material().index());
             meshes.push(imported);
+            influences.push(weights);
         }
         primitive_indices.push(ids);
     }
@@ -227,6 +243,7 @@ pub fn import_gltf(root: &Path, source: &Path) -> Result<ImportedModel> {
         });
     }
     validate_nodes(&nodes)?;
+    let animation = crate::gltf_animation::read(doc, &buffers, &nodes, &meshes, influences)?;
     let document_json = serde_json::to_value(doc.clone().into_json())?;
     let materials = document_json
         .get("materials")
@@ -235,6 +252,7 @@ pub fn import_gltf(root: &Path, source: &Path) -> Result<ImportedModel> {
         .unwrap_or_default();
     Ok(ImportedModel {
         meshes,
+        animation,
         textures,
         images,
         nodes,
@@ -246,7 +264,11 @@ pub fn import_gltf(root: &Path, source: &Path) -> Result<ImportedModel> {
             .collect(),
         default_scene: doc.default_scene().map(|s| s.index()),
         dependencies: sources.dependencies(),
-        fingerprint: sources.fingerprint(),
+        fingerprint: if animated {
+            sources.fingerprint_with_salt(b"incant-gltf-skeletal-v1-incmod04\0")
+        } else {
+            sources.fingerprint()
+        },
     })
 }
 fn validate_nodes(nodes: &[ModelNode]) -> Result<()> {

@@ -57,21 +57,33 @@ impl CompiledScript {
         &self.metadata
     }
 
-    pub(crate) fn harden<'js>(&self, ctx: &Ctx<'js>) -> rquickjs::Result<Function<'js>> {
+    pub(crate) fn harden<'js>(
+        &self,
+        ctx: &Ctx<'js>,
+    ) -> rquickjs::Result<(Function<'js>, Function<'js>)> {
         // SAFETY: compiler or the documented native-build trust crossing above
         // is the sole source. The fixed engine module precedes all guest code.
         let module = unsafe { Module::load(ctx.clone(), &self.hardening) }?;
         let (module, promise) = module.eval()?;
         promise.result::<()>().ok_or(rquickjs::Error::Unknown)??;
-        module.get("freeze")
+        Ok((module.get("freeze")?, module.get("persistentWrapper")?))
     }
 
-    pub(crate) fn instantiate<'js>(&self, ctx: &Ctx<'js>) -> rquickjs::Result<Function<'js>> {
+    pub(crate) fn instantiate<'js>(
+        &self,
+        ctx: &Ctx<'js>,
+    ) -> rquickjs::Result<(Function<'js>, Vec<bool>)> {
         // SAFETY: only trusted compiler-produced bytes enter this allocation.
         // The host retains both Arc allocations until after VM destruction.
         let module = unsafe { Module::load(ctx.clone(), &self.bytes) }?;
         let (module, promise) = module.eval()?;
         promise.result::<()>().ok_or(rquickjs::Error::Unknown)??;
-        module.get("update")
+        let flags: rquickjs::Array = module.get("persistent")?;
+        let count = self.bindings.as_ref().map_or(1, |b| b.sources().len());
+        if flags.len() != count {
+            return Err(rquickjs::Error::Unknown);
+        }
+        let flags = flags.iter::<bool>().collect::<rquickjs::Result<Vec<_>>>()?;
+        Ok((module.get("update")?, flags))
     }
 }

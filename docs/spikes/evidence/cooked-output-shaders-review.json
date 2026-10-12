@@ -1,0 +1,44 @@
+{
+  "reviewer": "astra",
+  "recorded_at": "2026-10-11T22:33:52.201879+00:00",
+  "scope": "Opt-in engine-owned output-pass offline shader cooking and private native passthrough; source/CPU review only",
+  "baseline": "39f5e40a793e57757af9ae79cb6a5a1ec27369d1",
+  "source_patch_sha256": "49a07f5f93e217b618b3adbb9c56b1722df7ad40cc356ee78bcdb817d64e845a",
+  "source_hashes": {
+    "Cargo.lock": "14ffe28d6b33c658bd5a3a621db25f14ed23a4b91ae007d7b1da048d589a0bf2",
+    "crates/incant_render/Cargo.toml": "c01cce44eb70a65d7f6a1589edd48209f4ccef5d2dd5e5a159c555e414a512db",
+    "crates/incant_render/build.rs": "33c550814e5c769fc8622fe28b9c9a26a73c2e58e8d4afdd14336e4d60efd5db",
+    "crates/incant_render/src/lib.rs": "23bc4e0aaa84411bd6cc89db25fb043bbf69a87ec50ef9fb31de1702edd0cf73",
+    "crates/incant_render/src/output.rs": "014d67ea6af999a9d1d2550ba96625037e019cec3f80b695920ed6a0ea9716f4",
+    "crates/incant_render/src/output/cooked.rs": "bb317225e7f2da32261d832d3d2c7cdc429c7b44854fb48e96834547660820b5",
+    "crates/incant_render/src/output/layout.rs": "609e17db021135c7f4ab49f4d74b782bb3aa2bfe32dee6548ee210133a46fc84",
+    "crates/incant_render/src/resource_error.rs": "e7dd1b4a5970d32f78ff01c6cf599d5753130902c4a5921eaa72e54bf03a2a78",
+    "crates/incant_shader_cook/Cargo.toml": "e12b8b89f3b2d344cfa0dc7def97c2262d23d76b0ffd4688aa75f5d5ed656270",
+    "crates/incant_shader_cook/examples/output_bundle.rs": "567d7744d3bc31a9494296eb70a1952f43defe080848e97b1ee97bca351e550a",
+    "crates/incant_shader_cook/src/contract.rs": "c8956ae477c1e779cfe8ef5a6960a3950fff795849eb8d36bce917d1158c7515",
+    "crates/incant_shader_cook/src/emit.rs": "2da6ff21863ab62253c463449a592800f7a564d1b259c8b23f07030ca0aef596",
+    "crates/incant_shader_cook/src/lib.rs": "56df5f9b94a97aa7f1794d214e30583038199439da924481f36d42079a0342c1",
+    "crates/incant_shader_cook/src/manifest.rs": "88e6f5ae2a60345320463e7cfc7ebe335908a9f670c3ce2373c422948da6ca26",
+    "crates/incant_shader_cook/tests/output.rs": "6de04d9ef95f1d11d4b1239258504b57e33d7bc071da54aa3e03c9c0d6fd9bcd",
+    "tools/check_runtime_dependencies.py": "6f379fde53d544f345baecb4aced68d91d6dcf88795c25bb7561356e9b46066b",
+    "tools/tests/test_runtime_dependencies.py": "e7fb009c4ce4c09157220663f49343486eb2ceb7d914e75b25a68be9d27aca61"
+  },
+  "evidence_sha256": "507c6aea30cce01068e4b6d59ca5966ff274e70c7da03d03d39892cd758f18ba",
+  "verdict": "accepted for the bounded opt-in scope; no actionable findings",
+  "verified": [
+    "17 exact changed source identities, frozen patch, 16 log hashes and seven pinned API source identities",
+    "Strict Naga IR contract and stage/resource/layout validation; fixed output math and original WGSL unchanged",
+    "MSL texture0/buffer0, DX12 t0/b0 plus mandatory FIRST_VERTEX_INSTANCE b1, Vulkan negative-height viewport and no duplicate Y adjustment",
+    "Only private build-produced embedded constants reach unsafe passthrough; runtime checks detect damage and are not external artifact trust",
+    "Native capability/backend refusal; default WGSL path preserved; host compiler excluded from normal runtime graph",
+    "Five cooker plus four runtime CPU tests passed, two GPU tests explicitly ignored; native default and feature all-target Clippy passed",
+    "Independent ci/dev artifact equality and local Metal compile/link evidence inspected; default wasm errors reproduced on unchanged main100"
+  ],
+  "limitations": [
+    "No GPU execution, rendered-pixel or numerical equivalence acceptance",
+    "No DXC/HLSL driver, Vulkan driver or Metal runtime acceptance",
+    "Feature remains disabled by default",
+    "Not whole-renderer offline cooking, persistent driver caches or device performance completion",
+    "Default renderer wasm32 Send/Sync compile failure remains an explicit separate issue"
+  ]
+}
