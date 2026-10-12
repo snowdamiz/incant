@@ -267,3 +267,80 @@ fn checksum_valid_tree_downgrade_truncation_and_foreign_context_are_refused() {
         .is_err()
     );
 }
+
+#[test]
+fn checksum_valid_tree_tables_reject_bad_counts_edges_parameters_and_floats() {
+    let bytes = scene(true, false).to_bytes();
+    // The public v15 table starts with eleven nodes and eight clip leaves.
+    let mut prefix = vec![11];
+    for clip in 0u16..8 {
+        prefix.push(0);
+        prefix.extend(clip.to_le_bytes());
+    }
+    let matches: Vec<_> = bytes
+        .windows(prefix.len())
+        .enumerate()
+        .filter_map(|(i, value)| (value == prefix).then_some(i))
+        .collect();
+    assert_eq!(matches.len(), 1);
+    let start = matches[0];
+    let grid = 25;
+    let line = grid + 2 * (5 + 4 * 8 + 4);
+    for (offset, replacement) in [
+        (0, vec![0]),
+        (0, vec![65]),
+        (1, vec![255]),
+        (2, 8u16.to_le_bytes().to_vec()),
+        (grid + 1, vec![3]),
+        (grid + 3, vec![255]),
+        (grid + 5, f64::NAN.to_le_bytes().to_vec()),
+        (grid + 13, 0f64.to_le_bytes().to_vec()),
+        (grid + 37, vec![8]),  // self edge, violating postorder
+        (grid + 38, vec![10]), // forward edge
+        (line + 1, vec![3]),
+        (line + 2, vec![255]),
+        (line + 12, 0f64.to_le_bytes().to_vec()),
+    ] {
+        let mut bad = bytes.clone();
+        bad[start + offset..start + offset + replacement.len()].copy_from_slice(&replacement);
+        checksum(&mut bad);
+        assert!(
+            matches!(CookedScene::from_bytes(&bad), Err(SceneError::Invalid(_))),
+            "tree table offset {offset} should fail semantic admission"
+        );
+    }
+}
+
+#[test]
+fn v15_requires_a_tree_and_does_not_relabel_legacy_graphs() {
+    let original = scene(true, false);
+    let mut nodes = original.spatial().to_vec();
+    let animation = Arc::make_mut(nodes[0].animation.as_mut().unwrap());
+    let graph = animation.graph.as_ref().unwrap();
+    animation.graph = Some(Arc::new(
+        NativeAnimationGraph::new(
+            0,
+            graph.parameters().to_vec(),
+            vec![NativeAnimationGraphState {
+                id: id(20),
+                motion: NativeAnimationMotion::Clip(Some(0)),
+                looping: true,
+            }],
+            vec![],
+            &animation.clip_durations,
+        )
+        .unwrap(),
+    ));
+    animation.initial.clip = Some(0);
+    let assets = original.visual_assets().to_vec();
+    let legacy = original.with_spatial(assets, nodes).unwrap();
+    let mut bytes = legacy.to_bytes();
+    assert_eq!(&bytes[8..12], &14u32.to_le_bytes());
+    assert_eq!(CookedScene::from_bytes(&bytes).unwrap().to_bytes(), bytes);
+    bytes[8..12].copy_from_slice(&15u32.to_le_bytes());
+    checksum(&mut bytes);
+    assert!(matches!(
+        CookedScene::from_bytes(&bytes),
+        Err(SceneError::Invalid(_))
+    ));
+}
