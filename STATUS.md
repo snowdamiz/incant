@@ -622,16 +622,17 @@ changing its tested runtime/compiler/ABI inputs. Integrated verification include
 536 UI tests and 17 Node tests. The fresh bound-script embedding proof passed all16 copied-player processes after removing source/build storage. [Integrated evidence](docs/spikes/native-authored-sdk-integration.md).
 Actual main83 is now integrated without a tree change; the authored candidate is ready for direct-main publication.
 
-## Native skeletal model consumer — CPU checkpoint, rendered acceptance pending
+## Native skeletal model consumer — numerical GPU verified, appearance pending
 
 The corrected glTF skeletal foundation is preserved in actual main107. Native
 clock samples now bind to exact sealed clip-duration tables; retained CPU skinning
 feeds the canonical material/shadow vertex path with independent live/staging
 buffers. Source/cache-deleted clocks/extraction, rollback, normal/tangent basis,
 uniform reflection and mixed-sign refusal have CPU controls. The affected suite
-passes 155 tests, all-target Clippy and runtime dependency checks. Seventy GPU tests
-(including two new numerical animation oracles) remain unrun; Claude appearance
-acceptance and the complete authoring/export/native-Play union are pending.
+passes 155 tests, all-target Clippy and runtime dependency checks. All 70 affected
+GPU tests pass on Apple M5 Pro/Metal, including independent pose, single-sided
+reflection and shadow oracles. Claude appearance acceptance and the complete
+authoring/export/native-Play union remain pending.
 Blend/state/IK/root motion, GPU skinning and device budgets remain.
 [Scope/evidence](docs/spikes/native-animation-rendering.md).
 
