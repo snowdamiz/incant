@@ -1,0 +1,127 @@
+{
+  "at": "2026-10-12T16:13:34.173731+00:00",
+  "base": "4487c5ae92369c2a69a08dc53a02f25143eefe34",
+  "branch": "codex/native-root-motion-core",
+  "plan_sha256": "c60adc7457e6f5929b3430876f6b8ea02acffce5bf55fbaae9090933fe4aab6c",
+  "cargo_lock_sha256": "ac059d1a2493d570bd202515e729830c56ecc7758cd808ccd0f245d06abcac7f",
+  "source_hashes": {
+    "crates/incant_assets_runtime/src/animation/root_motion.rs": "d2c953f0f103c16288db5175d153060a6b8dea83011468debb6b535e93c8cae7",
+    "crates/incant_assets_runtime/src/animation/sampling.rs": "a85c451b6d06fc8464c19ec91e5b8f7d40122b7229c5c14d2e3472dfd50ce415",
+    "crates/incant_assets_runtime/src/animation/mod.rs": "15456dfcc3338c26e7f152e567eb14a15aa10c10e6d16ea636e06f2d81349101",
+    "crates/incant_assets/tests/root_motion.rs": "cf0c26f94170f29763e78b1df71d076a6636578f69bd0edd878c6e20957f9907",
+    "crates/incant_assets/tests/root_motion/fixture.rs": "28e5e4d86360cf3b63da5102e95f648d8905107a24341f0ca11fa331f0176dc7",
+    "crates/incant_assets/tests/skeletal/fixture.rs": "2197fec00fe41cffd023b9865702adc42dfd1d38cf93b14c5f6d37daee05995c",
+    "crates/incant_assets/tests/skeletal/alloc.rs": "f58df95c57c6f884684b9a20427701e16e9049e24f287b0a9ea1e3031cb927fb"
+  },
+  "checks": {
+    "focused_root_motion_tests": 10,
+    "all_assets_runtime_tests": 128,
+    "groups": 19,
+    "failed": 0,
+    "ignored": 0,
+    "source_deleted_cooked_tracks": true,
+    "independent_repeated_cycle_matrix_cases": 243,
+    "allocation_measurement": {
+      "iterations": 4096,
+      "accepted_queries": 8192,
+      "typed_refusals": 4096,
+      "allocations": 0
+    },
+    "clippy_all_targets_all_features": true,
+    "wasm32_visual": true,
+    "authoring_free_dependency_graph": true,
+    "fmt_diff": true
+  },
+  "contract": {
+    "coordinate_frame": "rigid selected-node local track; right-multiplied relative transform",
+    "duration_seconds_max": 86400,
+    "cycle_span_max": 4294967296,
+    "loop_phase": "0 <= seconds < positive clip duration",
+    "absolute_cycle_type": "i64; checked difference, no float conversion",
+    "retention": "borrowed immutable cooked tracks and fixed-size cached transforms; no owned track copies or query allocations",
+    "unsupported": [
+      "selected static matrix",
+      "nonunit selected rest scale",
+      "selected scale animation channel",
+      "glTF CUBICSPLINE (existing importer refusal)"
+    ]
+  },
+  "commands_environment": {
+    "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+    "CARGO_TARGET_DIR": "/tmp/incant-agent-font-target"
+  },
+  "focused_command": [
+    "./tools/cargo",
+    "test",
+    "--locked",
+    "--profile",
+    "ci",
+    "-j2",
+    "-p",
+    "incant_assets",
+    "--test",
+    "root_motion"
+  ],
+  "logs": {
+    "docs/spikes/evidence/native-root-motion-core/root-motion-clippy-001.log.gz": {
+      "sha256": "679a2d99eb0e9c3c883d9b5e198859604a4b233532cd51e23817bcb52631cfa2",
+      "uncompressed_sha256": "c0a905f17b089a0fb0e1f2148b2689055c5b4d82975bdd32f99dabdea9a9495a",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-clippy-001.log"
+    },
+    "docs/spikes/evidence/native-root-motion-core/root-motion-deps-001.log.gz": {
+      "sha256": "c47f7c849e70472779f3b4dae6f07b5e01dd29c7207e905f4fa4e4dcff3ee951",
+      "uncompressed_sha256": "466c27957bec6177e21911180caffd16c9a78482761e9fad8fb9622eb2023499",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-deps-001.log"
+    },
+    "docs/spikes/evidence/native-root-motion-core/root-motion-diff-001.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-diff-001.log"
+    },
+    "docs/spikes/evidence/native-root-motion-core/root-motion-fmt-001.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-fmt-001.log"
+    },
+    "docs/spikes/evidence/native-root-motion-core/root-motion-tests-001.log.gz": {
+      "sha256": "0a22b8c20eff16975c495855fe0cd3b811e7913efad54912e06bb8d0402616a1",
+      "uncompressed_sha256": "db6f33de80398bb510e019363f8d67944819944765709b77a2711ce8a6906f72",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-tests-001.log"
+    },
+    "docs/spikes/evidence/native-root-motion-core/root-motion-tests-002.log.gz": {
+      "sha256": "8293e18539a3d158198be7108121b6deecd34999d06a90c9e920b9aa0f472608",
+      "uncompressed_sha256": "50609cf0adf16dc7e7183275c210d78bf8032c5fbcb8c7079e51fa2fc9fef974",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-tests-002.log"
+    },
+    "docs/spikes/evidence/native-root-motion-core/root-motion-tests-003.log.gz": {
+      "sha256": "a18a41d40f6b094939130127ab3e68393a0fa061d3a137d2c60d364a3f873f0c",
+      "uncompressed_sha256": "f01d5d410d57cb7d0669f7ac10f6883f1378bc3eeb157ba165df080cd121225f",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-tests-003.log"
+    },
+    "docs/spikes/evidence/native-root-motion-core/root-motion-wasm-001.log.gz": {
+      "sha256": "5443dab7c0a3e1f335aa6ad67dd07ab496f52cd9a1afee9a5d0fb44c56e981ac",
+      "uncompressed_sha256": "00095631451270808ff302fbf7e78e72739657f52b05965614e2e932ad80b6ac",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-001.log"
+    }
+  },
+  "receipts": {
+    "docs/spikes/evidence/native-root-motion-core/source-freeze-001.json": {
+      "sha256": "cce81964a24ec8b4b58e4b4d30c78c292aa1fcdb232de581c19a0149e81ca5b7",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-freeze-001/inventory.json"
+    },
+    "docs/spikes/evidence/native-root-motion-core/checks-001.json": {
+      "sha256": "5adc2267a0b23d0e6e1466e6f986f39b8e7989403960b79ab0ac282a8fb26001",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-checks-001.json"
+    }
+  },
+  "historical_failure": "tests001 exited101 at test compilation because fixture callback used &mut Vec<u8> where the function accepted &mut [u8]. Production compiled. Corrected only the test helper signature and added the independent previous-root-basis control before focused002/broad003 passed.",
+  "review": "Independent source review pending; producer source and terminal logs frozen.",
+  "limitations": [
+    "CPU numerical primitive, not complete root motion or Phase1.",
+    "No authoring/root selection, native graph/clock, pose extraction, body movement, save or TypeScript/Wasm controls added.",
+    "Parent/model/entity/world/physics space transforms are not incorporated.",
+    "No grouped blend/fade integration; the caller chooses one cooked clip and node.",
+    "No renderer/GPU/pixel/device/performance acceptance.",
+    "No scene/save format or mutable gameplay state change."
+  ]
+}
