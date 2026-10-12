@@ -30,6 +30,15 @@ Current main169 integration passes all 16 checks with new matching archives and
 [Contract and evidence](docs/spikes/mobile-bytecode-compatibility.md);
 [current integration](docs/spikes/mobile-bytecode-main169.md).
 
+## Ordinary desktop exporter — library audit corrected
+
+The player library and thin executable share a crate name. The shipping audit
+now checks both target units independently, preserving required optimization,
+source-compiler exclusion and final executable fat LTO. Six parser regressions
+and 63 scoped tools tests pass; root source review is accepted. The original
+failed export remains retained and corrected fresh packaging is pending in the
+Planar proof. [Evidence](docs/spikes/native-export-player-units.md).
+
 ## Headless UI and reusable player — merged main169
 
 The shared recorded UI route and optional mobile C ABI pass all 19 integrated
@@ -716,15 +725,16 @@ and complete Game UI/IME gates remain open.
 
 ## Current milestone
 
-Main #169 includes compound native animation and Wasm snapshots, authored two-bone
+Main #170 includes compound native animation and Wasm snapshots, authored two-bone
 IK, complete native/TypeScript/Wasm root motion, native audio transport and HUD,
 Wasm HUD controls, offline audio/UI checkpoints, public physics queries, and the
 Core/Planar gameplay foundations. Wasm audio transport is merged after current-main
 shipping validation. Headless UI and the reusable player/mobile library with
 actual macOS C/Swift callers are merged. Trusted-source iOS bytecode compatibility
 has passed current-main CPU/simulator checks and final integration review.
-A separately reproduced desktop exporter lib/bin audit defect is being corrected;
-no failed export is counted as shipping success. Phase 1 and the finished game
+The desktop exporter lib/bin audit repair is merged after scoped checks and
+review; fresh Planar packaging is still being verified, and no failed export is
+counted as shipping success. Phase 1 and the finished game
 remain incomplete.
 
 Checkpoint14 promoted selected main160 `d1ef35ee` after all 23 exact-candidate
