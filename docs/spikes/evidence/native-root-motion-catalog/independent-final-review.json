@@ -1,0 +1,30 @@
+{
+  "at": "2026-10-12T16:54:57.900902+00:00",
+  "reviewer": "astra",
+  "commit": "4f142bedb04c79ee4f4a00e18409e158a14db555",
+  "packet_sha256": "1bfcadbe56b3b8437daefbd1dea6b8b547ae09f5a20983d7fb12b7145ed3434b",
+  "freeze_sha256": "f1f4d0aef6e8e61caae80be51a1e4effee1e377264dc6ad090afa94c64b0d195",
+  "result": "accept bounded catalog foundation; no findings",
+  "reviewed": [
+    "shared f32 track arithmetic and quaternion interpolation preserve accepted asset sampling",
+    "bounded binary preallocation, framing, finite values, unique keys and exact payload continuation",
+    "captured project-owned cache loading, root topology and rigid-ancestor admission",
+    "stable authoring binding and atomic command-bus undo/redo/journal behavior",
+    "immutable shared catalog ownership and allocation-free interval queries"
+  ],
+  "verified": {
+    "source_inputs": 29,
+    "raw_and_compressed_logs": 16,
+    "command_and_freeze_receipts": 4,
+    "broad_cpu_tests": 232,
+    "broad_test_groups": 59,
+    "final_changed_cook_tests": 4,
+    "failed": 0,
+    "ignored": 0
+  },
+  "limits": [
+    "Foundation is not connected ordinary root-motion gameplay. Ordinary cooker still rejects the new component until native binding exists.",
+    "Full prepared animation step, root/body policy, rendering strip hook, save/SDK and exported continuation remain required.",
+    "No GPU, reference-phone or phase gate claim."
+  ]
+}

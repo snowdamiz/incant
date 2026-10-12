@@ -58,6 +58,7 @@ fn input(sources: &[Arc<RuntimeAsset>]) -> SceneInput {
                     animation_blend: None,
                     animation_pose: None,
                     animation_ik: None,
+                    animation_root: None,
                 }),
             })
             .collect(),

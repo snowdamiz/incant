@@ -9,7 +9,7 @@ publish.workspace = true
 # Audio-only players keep their existing dependency graph.
 default = []
 font = ["dep:incant_text", "dep:ulid", "dep:incant_types"]
-visual = ["dep:incant_2d", "dep:incant_types", "dep:meshopt", "dep:ktx2", "dep:glam"]
+visual = ["dep:incant_2d", "dep:incant_types", "dep:incant_anim", "dep:meshopt", "dep:ktx2", "dep:glam"]
 
 [dependencies]
 glam = { version = "0.32", optional = true }
@@ -18,6 +18,7 @@ incant_text = { workspace = true, optional = true }
 ulid = { version = "=1.2.1", default-features = false, optional = true }
 incant_2d = { workspace = true, optional = true }
 incant_types = { workspace = true, optional = true }
+incant_anim = { workspace = true, optional = true }
 meshopt = { version = "=0.6.2", optional = true }
 ktx2 = { version = "=0.5.0", optional = true }
 serde.workspace = true

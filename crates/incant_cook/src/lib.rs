@@ -5,7 +5,11 @@ mod animation;
 #[cfg(feature = "scene")]
 mod animation_graph;
 #[cfg(feature = "scene")]
+mod root_motion;
+#[cfg(feature = "scene")]
 pub use animation::{AnimationResources, load_project_animation_resources};
+#[cfg(feature = "scene")]
+pub use root_motion::{RootMotionResources, load_project_root_motion_resources};
 #[cfg(feature = "scene")]
 mod navigation;
 #[cfg(feature = "scene")]

@@ -27,4 +27,5 @@ name = "shipping_module"
 required-features = ["embedded-fixture"]
 
 [dev-dependencies]
+incant_anim.workspace = true
 incant-module = { path = "../../sdk/rust" }

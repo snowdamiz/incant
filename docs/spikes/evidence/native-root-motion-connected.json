@@ -1,0 +1,444 @@
+{
+  "scope": "Native cooked/root body and clock integration, world11, TypeScript and numeric strip-to-IK transport; Wasm/public package work continues",
+  "base": "c964deb8694d563cc1fdd73caaa288dc31bb32e8",
+  "source_inventory": "docs/spikes/evidence/native-root-motion-connected/source-freeze-002.json",
+  "test_counts": {
+    "passed": 600,
+    "failed": 0,
+    "ignored": 0,
+    "cargo_result_groups": 82,
+    "nonempty_groups": 69
+  },
+  "final_commands": [
+    {
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_physics_runtime",
+        "-p",
+        "incant_render_native",
+        "-p",
+        "incant_cook",
+        "-p",
+        "incant_assets",
+        "--all-targets"
+      ],
+      "status": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-broad-002/00.log"
+    },
+    {
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_anim",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_physics_runtime",
+        "-p",
+        "incant_assets_runtime",
+        "-p",
+        "incant_cook",
+        "-p",
+        "incant_render_native",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_authoring",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "status": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-broad-002/01.log"
+    },
+    {
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_anim",
+        "-p",
+        "incant_runtime",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "status": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-broad-002/02.log"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_anim",
+        "incant_runtime",
+        "incant_script",
+        "incant_render_native"
+      ],
+      "status": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-broad-002/03.log"
+    },
+    {
+      "command": [
+        "node",
+        "node_modules/typescript/bin/tsc",
+        "--noEmit",
+        "-p",
+        "sdk/ts/tsconfig.json"
+      ],
+      "status": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-broad-002/04.log"
+    },
+    {
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "status": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-broad-002/05.log"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "status": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-broad-002/06.log"
+    }
+  ],
+  "review": "independent source and retained native evidence accepted; composed Wasm/public package work remains pending",
+  "allocation_measurements": {
+    "root_preparation_4096": 0,
+    "retained_character_refresh_and_sweep_1024": 0,
+    "staged_strip_ik_sampler_1024": 0,
+    "whole_world_1024": 38946,
+    "matched_world_without_root_1024": 38955,
+    "limits": "Existing global hierarchy preparation allocates; whole-world zero allocation and device/performance gates are not claimed."
+  },
+  "retained": [
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-broad-001/00.log",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-connected-broad-001-00.log.gz",
+      "sha256": "8a80fcfba56e7f032bb260a340428047aa6e8e223b6a2586998dc3ef6d6bdf9e",
+      "retained_sha256": "743e815220bb4dd6b603e2d2bd9847877cdc543a6d51def778350d3038b16344",
+      "bytes": 65890
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-broad-001/commands.json",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-connected-broad-001-commands.json",
+      "sha256": "641823e4c9326b2352592267b360e10c51acfddc52753f995ba2f4cf55898e81",
+      "retained_sha256": "641823e4c9326b2352592267b360e10c51acfddc52753f995ba2f4cf55898e81",
+      "bytes": 496
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-broad-002/00.log",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-connected-broad-002-00.log.gz",
+      "sha256": "618ed8fa280277a2038b70bb095331af76ea23d489d6a922d464dd4a09b0fd37",
+      "retained_sha256": "d9838d6f7300872549aac1a978e4eb5bb8a468929405620d676fc8794ffb8dbb",
+      "bytes": 69743
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-broad-002/01.log",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-connected-broad-002-01.log.gz",
+      "sha256": "cc2faf77a0b79cf3ac641955d0c0d166b2147b1106ddea33a55fc203442ed4ea",
+      "retained_sha256": "a6a70f97a5d63aa58c56258b1d0417565700c7a5f7b2ba6782139197f1ef5fc6",
+      "bytes": 4632
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-broad-002/02.log",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-connected-broad-002-02.log.gz",
+      "sha256": "8aa1708adfb2aa3f29b0cffb610f11271381b60caa5530b3f31d91b72a5eece0",
+      "retained_sha256": "d6b6ca518f9d3d7273e778f5f896d79af5df962ff43e958297a928ff759db35f",
+      "bytes": 827
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-broad-002/03.log",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-connected-broad-002-03.log.gz",
+      "sha256": "e23d5b771f94dafb42603fe99c5a2143d1c9c7ffd48cfc25d2843e5d5765503e",
+      "retained_sha256": "e3f2c9337dc616c4f56e6ec889db0e7f1c3741bcf8145dc4a25821f57c050c7c",
+      "bytes": 103
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-broad-002/04.log",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-connected-broad-002-04.log.gz",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 0
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-broad-002/05.log",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-connected-broad-002-05.log.gz",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 0
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-broad-002/06.log",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-connected-broad-002-06.log.gz",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 0
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-broad-002/commands.json",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-connected-broad-002-commands.json",
+      "sha256": "4c0208c4555ed6e7ef8b1978f73302b2ed9ce575becf25e09904cba2214a6f13",
+      "retained_sha256": "4c0208c4555ed6e7ef8b1978f73302b2ed9ce575becf25e09904cba2214a6f13",
+      "bytes": 2488
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-ts-tests-004/00.log",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-ts-tests-004-00.log.gz",
+      "sha256": "57447c32c7428bf97e46436a1daa82a2e6f4a1f21ed0b71a6110d89a08b38620",
+      "retained_sha256": "1208960e1e5f98526078afb0f18ee556c033270762d373467219c824d045d246",
+      "bytes": 2540
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-ts-tests-004/commands.json",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-ts-tests-004-commands.json",
+      "sha256": "c41cc0eee285d47dd45d255d7e57296161eccea5aafe307a957e52c6567b0511",
+      "retained_sha256": "c41cc0eee285d47dd45d255d7e57296161eccea5aafe307a957e52c6567b0511",
+      "bytes": 313
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-ts-tests-005/00.log",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-ts-tests-005-00.log.gz",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 0
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-ts-tests-005/01.log",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-ts-tests-005-01.log.gz",
+      "sha256": "d11bc71fd4364b724b8fd4f848657e3227ccfd92459d0ac0a93a5095306a47c0",
+      "retained_sha256": "beee8a6d00aad444646f2b630079a04c509a0ada4a9362fdb42c8385c891c920",
+      "bytes": 2074
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-ts-tests-005/02.log",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-ts-tests-005-02.log.gz",
+      "sha256": "52fd96fce5941e53c4d081da90d70368d91d3e66fe400ba676024d02c7abbde4",
+      "retained_sha256": "b36ed5174cbd22a0a904a810e9a24e3431058cbfa465260117059c80e7843f0f",
+      "bytes": 1898
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-ts-tests-005/03.log",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-ts-tests-005-03.log.gz",
+      "sha256": "f3568a77ddde504d3d38d72ef55c6d92de45f8de7e2bef0e5751e82de7b159c7",
+      "retained_sha256": "b655fb877b186a6e6f81ed2cafc2b2f31e9d8acaa55fde8a53ba8818223f039e",
+      "bytes": 3913
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-ts-tests-005/commands.json",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-ts-tests-005-commands.json",
+      "sha256": "01a0bbbd56e345d37571825c3916bf633342cbe806c8257abd20baf592611765",
+      "retained_sha256": "01a0bbbd56e345d37571825c3916bf633342cbe806c8257abd20baf592611765",
+      "bytes": 1160
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-ts-tests-007/00.log",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-ts-tests-007-00.log.gz",
+      "sha256": "0b2b925d55c6748647e2d7b1186de4476f165dc692c0227215d52eecc6e5915b",
+      "retained_sha256": "a895929effde1608c7a0b2d98e87f47442075ff349fbcac4346687dbc226219f",
+      "bytes": 2215
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-ts-tests-007/01.log",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-ts-tests-007-01.log.gz",
+      "sha256": "c9e8b81c8f8a86a230ec6bf272b247568e1c80ace1126f87185aad50bd5813c4",
+      "retained_sha256": "1a55b778dd7a0214192ba7ec8ddbbeab74dcc994884b72fbc2e4ac98a56ebf5c",
+      "bytes": 2164
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-ts-tests-007/02.log",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-ts-tests-007-02.log.gz",
+      "sha256": "fa26545152487917c69ec51f702ca0373e324a81fafc8794c23db329a5ac375d",
+      "retained_sha256": "ae722a80aef249d6d24ecf1d7c18180ac692c75d8d21cda91e3e1475822d9dd5",
+      "bytes": 1642
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-ts-tests-007/commands.json",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-ts-tests-007-commands.json",
+      "sha256": "ebd3edf1e175703d3d408ba2cf36f4b70a6811edd8ce220860c29b6319d203aa",
+      "retained_sha256": "ebd3edf1e175703d3d408ba2cf36f4b70a6811edd8ce220860c29b6319d203aa",
+      "bytes": 972
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-render-tests-008/00.log",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-render-tests-008-00.log.gz",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 0
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-render-tests-008/01.log",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-render-tests-008-01.log.gz",
+      "sha256": "94dfaa28d1547196556974024f9387d9aa35bbce72966ff5b9f6793c6d540ca6",
+      "retained_sha256": "eaf961a945f2a19200d3f20deed7c3fb65e400a75a81a574ef3a5e9fe5e7cb18",
+      "bytes": 520
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-render-tests-008/commands.json",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-render-tests-008-commands.json",
+      "sha256": "d7a6f36f27b57bfd1625e97ca2a150dd686130f3d9f44510a4be3b1b324d96dc",
+      "retained_sha256": "d7a6f36f27b57bfd1625e97ca2a150dd686130f3d9f44510a4be3b1b324d96dc",
+      "bytes": 533
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-cold-checks-002/00.log",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-connected-cold-checks-002-00.log.gz",
+      "sha256": "63bb083048698901ef6deebe8b10e6de5f327e4bdcc5a4b6bfc3481449fc0fa9",
+      "retained_sha256": "80bf4e09bb9b40a4390c539b35ae6b5dd5b0a314536411e9faa7f28dd662ab38",
+      "bytes": 4138
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-cold-checks-002/01.log",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-connected-cold-checks-002-01.log.gz",
+      "sha256": "e94661afbf260745ada503c9e4e7557030265a5ad85b1c99d6e49660678229d9",
+      "retained_sha256": "f60c684b75c4b3be947c45e5a6b139fcfe0943724d420b15872104e625250be2",
+      "bytes": 4509
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-cold-checks-002/commands.json",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-connected-cold-checks-002-commands.json",
+      "sha256": "d9cde78a6113d0f1251c1125848222cd85e152deb683d793a402272e51d9b6d4",
+      "retained_sha256": "d9cde78a6113d0f1251c1125848222cd85e152deb683d793a402272e51d9b6d4",
+      "bytes": 1173
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-world11-tests-001/00.log",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-world11-tests-001-00.log.gz",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 0
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-world11-tests-001/01.log",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-world11-tests-001-01.log.gz",
+      "sha256": "6c25753735252b05592719ca3317142a440ff24bf4abbb75f7588aaa060bbf2e",
+      "retained_sha256": "2cf82b840deaa651834888b0b144f63b684226aa56dad35b9b560622923b2a94",
+      "bytes": 1787
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-world11-tests-001/commands.json",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-world11-tests-001-commands.json",
+      "sha256": "59a00d17b648d0713b51a79d85995a4b66e30566d634d4e847f8902d2dde8950",
+      "retained_sha256": "59a00d17b648d0713b51a79d85995a4b66e30566d634d4e847f8902d2dde8950",
+      "bytes": 509
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-native-tests-002/00.log",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-connected-native-tests-002-00.log.gz",
+      "sha256": "5651e0c22332958a6a173a91ffec89526d8dd79a9f553f5c6b3294f94c3e4686",
+      "retained_sha256": "1d7208f10446258611eba5450fa34da09b24c57c8db6484e28498bc02972ec56",
+      "bytes": 1192
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-native-tests-002/01.log",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-connected-native-tests-002-01.log.gz",
+      "sha256": "281ff251ac36d4b4313b45dda6b55fe875025f852d115b4cf2a3988e3e8f0444",
+      "retained_sha256": "911df4f9190362bf7dba062095d2fcf75b32ae65bb450e615b43daa81b5c9e61",
+      "bytes": 4870
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-native-tests-002/commands.json",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-connected-native-tests-002-commands.json",
+      "sha256": "20a09b2b5d70b694c0bba810175c39049a1310aaefa06be2f5ceb32236a6cd27",
+      "retained_sha256": "20a09b2b5d70b694c0bba810175c39049a1310aaefa06be2f5ceb32236a6cd27",
+      "bytes": 738
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-character-tests-002/00.log",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-character-tests-002-00.log.gz",
+      "sha256": "426422ea7c8450cd5f28ce091b45aec2497f9cc99d48a57d01dd037dd3be613b",
+      "retained_sha256": "c63cb0f0b8b300e048723bdb23e9216f1cbc40a10972b80e4ede6aa4613497b3",
+      "bytes": 1419
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-character-tests-002/01.log",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-character-tests-002-01.log.gz",
+      "sha256": "ffad714d24da9d4edfc27dc5ee3cfeb3686264470e1478e19a1364589727d225",
+      "retained_sha256": "1b507ad7c475a030be139e40460a74f78ee1b7380b79b57cb43d61e08dfe946c",
+      "bytes": 1762
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-character-tests-002/commands.json",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/root-motion-character-tests-002-commands.json",
+      "sha256": "918dd73365e6982cdff17e9a7ab3f1a1d7091e0bce0a5e97249f9e3040e341db",
+      "retained_sha256": "918dd73365e6982cdff17e9a7ab3f1a1d7091e0bce0a5e97249f9e3040e341db",
+      "bytes": 643
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-source-freeze-001/inventory.json",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/source-freeze-001.json",
+      "sha256": "d7ad5acc0d7016fa0ee9d04383f6bcfafaf348fa6553057dba1d90d50d11bb20"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-source-freeze-002/inventory.json",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/source-freeze-002.json",
+      "sha256": "b2fd70f3631bd64df04c66d6d3486dfe8e0f71d852ce3e2ff231fc6aff6bda70"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-span-freeze-001/inventory.json",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/span-freeze.json",
+      "sha256": "87a3de38576d95101ef23ea264df8ade712ea293bb45e355f46a4650c8f52079"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-shared-quaternion-extraction-001/before.json",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/quaternion-before.json",
+      "sha256": "ae4efef6b4e5b2a6fa3a85f644eca091eec8a9c2ec0bba9885b4e10c43996462"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-shared-quaternion-extraction-001/after.json",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/quaternion-after.json",
+      "sha256": "db8e741241cefc870b5f716dbc8a61ee2219d671e5f8c578d87f2abf3a7224e4"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-reviews/native-root-motion-connected-source-20261012.json",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/connected-source-review.json",
+      "sha256": "ba37ee7f2cc3a4658861b658cf90303325dd6ee7f2b59825370727ed435485a7"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-reviews/native-root-motion-span-source-20261012.json",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/span-source-review.json",
+      "sha256": "5dd3e7dbe44ac405b742b57fa865a2eabd9b2353f3841fc49e64513388e371a5"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-reviews/native-root-motion-connected-final-20261012.json",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/final-review.json",
+      "sha256": "f9f6b3679e8815c352b21891fd35c3018cb12ae1b1401ce1d8ef1feb38794f40"
+    }
+  ],
+  "residual": [
+    "Wasm53-55 and actual dual-host/root package evidence pending",
+    "Ordinary source-deleted public root game export pending",
+    "Physics and static guest checkpoint continuation unsupported",
+    "Root CUBICSPLINE scale/matrix/general-affine paths remain explicit refusals",
+    "No GPU, rendered interpretation, reference device or complete Phase1 gate"
+  ]
+}

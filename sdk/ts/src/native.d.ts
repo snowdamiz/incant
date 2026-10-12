@@ -76,6 +76,11 @@ export interface NativeCommands {
   controlAnimation(id: NativeId, control: 'playing' | 'looping', enabled: boolean): void;
   /** Finite [-16,16]; negative speed plays backward, zero holds the sample. */
   controlAnimation(id: NativeId, control: 'speed', speed: number): void;
+  /** Applying controls body movement, not root stripping. Reset clears only the
+   * four observed deltas; neither command seeks or applies stored motion.
+   * Shares the ordered atomic tick queue, including caught-error rollback. */
+  controlRootMotion(id: NativeId, control: 'applying', enabled: boolean): void;
+  controlRootMotion(id: NativeId, control: 'reset'): void;
   /** Set a declared graph parameter within its authored range. */
   setAnimationParameter(id: NativeId, parameter: NativeId, value: number): void;
   /** Ordered two-bone constraints solve after the full animation pose. Coordinates
@@ -237,7 +242,45 @@ export interface NativeAnimationIk {
   readonly poles: Float64Array;
   readonly weights: Float64Array;
 }
+/** Committed root rows, sorted by stable owner ID, at most 1024. Every array is
+ * VM-owned; mutating or retaining it cannot alter native state. Row identities
+ * bind the captured model fingerprint (32 bytes/row) and model-node index.
+ * Policies: 0 extract-only, 1 bodyless transform, 2 velocity kinematic 3D,
+ * 3 collision-limited character 3D. Flags: bit0 applying, bit1 outgoing present.
+ * Clock owner is state ULID for graphs, else clip index (-1 rest). Absent
+ * outgoing clock has null state, -1 clip, zero cycle/seconds. Graph phases use
+ * their authored cycle, not a representative clip's duration. Exact signed
+ * cycles and accepted tick are BigInts; never convert them to Number.
+ * Each delta has stride7 [tx,ty,tz,qx,qy,qz,qw]. Requested is model-space local
+ * locomotion before application; applied is actual displacement expressed in
+ * the pre-step entity frame (including physics collision limitation). Bodyless
+ * deltas remain in unscaled model units; the owner transform applies its
+ * admitted uniform scale. Physics policies require unit scale.
+ * Accumulations compose these accepted interval deltas in order. Disabling
+ * application preserves extraction/clocks and strips the root from the pose.
+ * Parameter/select/seek changes alone do not apply a displacement. */
+export interface NativeRootMotion {
+  readonly ids: readonly NativeId[];
+  readonly fingerprints: Uint8Array;
+  readonly roots: Uint16Array;
+  readonly policies: Uint8Array;
+  readonly flags: Uint8Array;
+  readonly ticks: BigUint64Array;
+  readonly states: readonly (NativeId | null)[];
+  readonly clips: Int32Array;
+  readonly cycles: BigInt64Array;
+  readonly seconds: Float64Array;
+  readonly outgoingStates: readonly (NativeId | null)[];
+  readonly outgoingClips: Int32Array;
+  readonly outgoingCycles: BigInt64Array;
+  readonly outgoingSeconds: Float64Array;
+  readonly requested: Float64Array;
+  readonly applied: Float64Array;
+  readonly accumulatedRequested: Float64Array;
+  readonly accumulatedApplied: Float64Array;
+}
 export interface NativeAnimations {
+  readonly rootMotion: NativeRootMotion;
   readonly ik: NativeAnimationIk;
   readonly graphs: NativeAnimationGraphs;
   /** Packed complete poses. Empty span means legacy clip/two-pose playback.

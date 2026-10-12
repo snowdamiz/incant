@@ -25,6 +25,7 @@ incant_wasm_runtime = { path = "../incant_wasm_runtime", optional = true }
 incant_wasm_abi = { path = "../incant_wasm_abi" }
 
 [dev-dependencies]
+incant_anim.workspace = true
 incant_wasm_cook = { path = "../incant_wasm_cook" }
 wat = "=1.258.3"
 incant_script = { workspace = true, features = ["compiler"] }

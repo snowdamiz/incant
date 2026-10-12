@@ -1,4 +1,4 @@
-//! Versions 1–16 and18, little-endian checked data (not executable code). SHA-256 detects
+//! Versions 1–18, little-endian checked data (not executable code). SHA-256 detects
 //! damage, not authorship. No casts, alignment assumptions or native-layout ABI.
 use crate::scene::MAX_ENTITIES;
 use crate::{CookedEntity, CookedScene, SceneError, StableId};
@@ -26,6 +26,8 @@ impl CookedScene {
         bytes.extend(MAGIC);
         let version = if self.has_compound_animation_fades() {
             VERSION
+        } else if self.has_root_motion() {
+            17
         } else if self.has_ik() {
             16
         } else if self.has_animation_trees() {
@@ -167,10 +169,8 @@ impl CookedScene {
         if version >= 16 {
             crate::ik_binary::write(&mut bytes, &self.spatial);
         }
-        // Reserved v17 root-motion catalogs and bindings. This producer does
-        // not yet construct them; its decoder refuses nonempty sections.
         if version >= 17 {
-            bytes.extend([0; 8]);
+            crate::root_motion::binary::write(&mut bytes, &self.spatial);
         }
         let length = (bytes.len() - HEADER) as u32;
         bytes[36..40].copy_from_slice(&length.to_le_bytes());
@@ -188,7 +188,7 @@ impl CookedScene {
             return Err(SceneError::Invalid("magic"));
         }
         let version = header.u32()?;
-        if !(1..=VERSION).contains(&version) || version == 17 {
+        if !(1..=VERSION).contains(&version) {
             return Err(SceneError::Version(version));
         }
         let tick_rate = header.u32()?;
@@ -435,10 +435,8 @@ impl CookedScene {
         if version >= 16 {
             crate::ik_binary::read(&mut reader, &mut spatial, version >= 17)?;
         }
-        if version >= 17 && (reader.u32()? != 0 || reader.u32()? != 0) {
-            return Err(SceneError::Invalid(
-                "root-motion catalogs unsupported by this decoder",
-            ));
+        if version >= 17 {
+            crate::root_motion::binary::read(&mut reader, &mut spatial, version >= 18)?;
         }
         if !reader.0.is_empty() {
             return Err(SceneError::Invalid("trailing payload"));
