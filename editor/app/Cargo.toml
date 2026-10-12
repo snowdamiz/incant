@@ -6,12 +6,46 @@ rust-version.workspace = true
 publish.workspace = true
 
 [features]
+default = ["physics-deterministic"]
+
 wasmtime-host = ["incant_play/wasmtime-host"]
 # Explicit local numerical native-window acceptance, absent from normal builds.
 play-probe = []
 # Explicit local live-provider acceptance, absent from normal builds.
 agent-probe = []
 custom-protocol = ["tauri/custom-protocol"]
+
+# Select one physics kernel for the entire process, including build/test hosts.
+physics-deterministic = [
+    "incant_agent/physics-deterministic",
+    "incant_agent_native/physics-deterministic",
+    "incant_assets/physics-deterministic",
+    "incant_audio_runtime/physics-deterministic",
+    "incant_cmd/physics-deterministic",
+    "incant_core/physics-deterministic",
+    "incant_import/physics-deterministic",
+    "incant_play/physics-deterministic",
+    "incant_render/physics-deterministic",
+    "incant_render_authoring/physics-deterministic",
+    "incant_render_gpu_host/physics-deterministic",
+    "incant_runtime/physics-deterministic",
+    "incant_script/physics-deterministic",
+]
+physics-fast-simd8 = [
+    "incant_agent/physics-fast-simd8",
+    "incant_agent_native/physics-fast-simd8",
+    "incant_assets/physics-fast-simd8",
+    "incant_audio_runtime/physics-fast-simd8",
+    "incant_cmd/physics-fast-simd8",
+    "incant_core/physics-fast-simd8",
+    "incant_import/physics-fast-simd8",
+    "incant_play/physics-fast-simd8",
+    "incant_render/physics-fast-simd8",
+    "incant_render_authoring/physics-fast-simd8",
+    "incant_render_gpu_host/physics-fast-simd8",
+    "incant_runtime/physics-fast-simd8",
+    "incant_script/physics-fast-simd8",
+]
 
 [build-dependencies]
 tauri-build = { version = "2", features = ["codegen"] }
@@ -21,18 +55,18 @@ incant_render_authoring.workspace = true
 tauri = { version = "=2.12.1", features = ["unstable", "macos-private-api"] }
 incant_doc = { workspace = true }
 incant_cmd = { workspace = true }
-incant_import = { path = "../../crates/incant_import" }
-incant_assets = { path = "../../crates/incant_assets" }
+incant_import = { path = "../../crates/incant_import", default-features = false }
+incant_assets = { path = "../../crates/incant_assets", default-features = false }
 incant_core = { workspace = true }
 incant_agent = { workspace = true }
-incant_agent_native = { path = "../../crates/incant_agent_native" }
-incant_render = { path = "../../crates/incant_render" }
-incant_play = { path = "../../crates/incant_play", features = ["device"] }
+incant_agent_native = { path = "../../crates/incant_agent_native", default-features = false }
+incant_render = { path = "../../crates/incant_render", default-features = false }
+incant_play = { path = "../../crates/incant_play", features = ["device"], default-features = false }
 incant_script.workspace = true
 incant_input.workspace = true
 incant_runtime.workspace = true
 incant_audio_runtime = { workspace = true, features = ["device"] }
-incant_render_gpu_host = { path = "../../crates/incant_render_gpu_host" }
+incant_render_gpu_host = { path = "../../crates/incant_render_gpu_host", default-features = false }
 ulid.workspace = true
 serde = { workspace = true }
 serde_json = { workspace = true }

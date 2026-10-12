@@ -1,3 +1,5 @@
+#[path = "support/scene_format.rs"]
+mod scene_format;
 use incant_runtime::*;
 use incant_types::{Transform, Velocity};
 use sha2::{Digest, Sha256};
@@ -70,11 +72,17 @@ fn refresh(mut bytes: Vec<u8>) -> Vec<u8> {
 fn scene_v12_roundtrip_preserves_chain_utf8_and_old_static_bytes() {
     let plain = CookedScene::new(id(0), 60, vec![entity(1), entity(2)]).unwrap();
     let old = plain.to_bytes();
-    assert_eq!(u32::from_le_bytes(old[8..12].try_into().unwrap()), 1);
+    assert_eq!(
+        u32::from_le_bytes(old[8..12].try_into().unwrap()),
+        crate::scene_format::scene_format(1)
+    );
     assert_eq!(plain.with_text(vec![], vec![]).unwrap().to_bytes(), old);
     let s = scene();
     let bytes = s.to_bytes();
-    assert_eq!(u32::from_le_bytes(bytes[8..12].try_into().unwrap()), 12);
+    assert_eq!(
+        u32::from_le_bytes(bytes[8..12].try_into().unwrap()),
+        crate::scene_format::scene_format(12)
+    );
     let loaded = CookedScene::from_bytes(&bytes).unwrap();
     assert_eq!(loaded.to_bytes(), bytes);
     assert_eq!(loaded.texts(), s.texts());

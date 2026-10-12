@@ -6,7 +6,7 @@ rust-version.workspace = true
 publish.workspace = true
 
 [features]
-default = []
+default = ["physics-deterministic"]
 # Thin platform ABI for bounded offline CPU package execution, not a UI host.
 mobile-ffi = ["dep:thiserror"]
 # Project source is compiled exclusively by the trusted build-time producer.
@@ -18,17 +18,47 @@ render-gpu = ["render-input", "dep:incant_render_gpu_host", "dep:incant_render",
 
 native-window = ["render-gpu", "incant_game_runtime/device", "dep:tao", "dep:pollster", "dep:gilrs"]
 
+# Select one physics kernel for the entire process, including build/test hosts.
+physics-deterministic = [
+    "incant_audio_runtime/physics-deterministic",
+    "incant_cook/physics-deterministic",
+    "incant_game_runtime/physics-deterministic",
+    "incant_observe/physics-deterministic",
+    "incant_render?/physics-deterministic",
+    "incant_render_game?/physics-deterministic",
+    "incant_render_gpu_host?/physics-deterministic",
+    "incant_render_native?/physics-deterministic",
+    "incant_runtime/physics-deterministic",
+    "incant_script/physics-deterministic",
+    "incant_ui?/physics-deterministic",
+    "incant_wasm_runtime?/physics-deterministic",
+]
+physics-fast-simd8 = [
+    "incant_audio_runtime/physics-fast-simd8",
+    "incant_cook/physics-fast-simd8",
+    "incant_game_runtime/physics-fast-simd8",
+    "incant_observe/physics-fast-simd8",
+    "incant_render?/physics-fast-simd8",
+    "incant_render_game?/physics-fast-simd8",
+    "incant_render_gpu_host?/physics-fast-simd8",
+    "incant_render_native?/physics-fast-simd8",
+    "incant_runtime/physics-fast-simd8",
+    "incant_script/physics-fast-simd8",
+    "incant_ui?/physics-fast-simd8",
+    "incant_wasm_runtime?/physics-fast-simd8",
+]
+
 [dependencies]
 incant_ui = { workspace = true, optional = true }
 tempfile = "3"
-incant_wasm_runtime = { path = "../incant_wasm_runtime", optional = true }
-incant_observe = { path = "../incant_observe" }
-incant_render_gpu_host = { path = "../incant_render_gpu_host", optional = true }
-incant_render = { path = "../incant_render", optional = true }
-incant_render_native = { path = "../incant_render_native", optional = true }
+incant_wasm_runtime = { path = "../incant_wasm_runtime", optional = true, default-features = false }
+incant_observe = { path = "../incant_observe", default-features = false }
+incant_render_gpu_host = { path = "../incant_render_gpu_host", optional = true, default-features = false }
+incant_render = { path = "../incant_render", optional = true, default-features = false }
+incant_render_native = { path = "../incant_render_native", optional = true, default-features = false }
 thiserror = { workspace = true, optional = true }
-incant_render_game = { path = "../incant_render_game", optional = true }
-incant_game_runtime = { path = "../incant_game_runtime" }
+incant_render_game = { path = "../incant_render_game", optional = true, default-features = false }
+incant_game_runtime = { path = "../incant_game_runtime", default-features = false }
 incant_script.workspace = true
 incant_types.workspace = true
 incant_runtime.workspace = true

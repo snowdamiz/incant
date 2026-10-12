@@ -1,0 +1,19 @@
+{
+  "reviewer": "astra root",
+  "at": "2026-10-12T21:22:28.895982+00:00",
+  "decision": "accepted",
+  "agent_receipt_sha256": "25e67c7707e500875119998a069ab74e451fd99010b74c8c145de263e4f832c6",
+  "sources": {
+    "tools/physics_features.py": "514b60331bf9610505eaf2ed4f603186cd918273898c334a2611c92d2fd31821",
+    "tools/tests/test_physics_features.py": "a17790e72c81f5b76d83d4a5a0c2a436cf17566a9506e30b393d489846586176"
+  },
+  "coverage": [
+    "direct mode and explicit default feature flags",
+    "inherited workspace feature union",
+    "renamed optional, build, dev and target-specific dependencies",
+    "local, dependency and weak-dependency aliases including cycles",
+    "benign aliases/dependency activation retained and valid mode forwarding unchanged"
+  ],
+  "verification": "Root reran all19 tests and repository manifest guard; passed. Actual deterministic/fast/fast-simd8 headless/player/editor compiler receipts validated with fixed guard, six ancestry commands exit0 and1461frozen inputs unchanged.",
+  "remaining": "Guard integration in workflow/export routing is separate; no project selector or performance gate claimed."
+}

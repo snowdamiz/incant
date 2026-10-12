@@ -8,6 +8,13 @@ publish.workspace = true
 [lib]
 crate-type = ["rlib", "staticlib", "cdylib"]
 
+[features]
+default = ["physics-deterministic"]
+
+# Select one physics kernel for the entire process, including build/test hosts.
+physics-deterministic = ["incant_assets/physics-deterministic", "incant_core/physics-deterministic"]
+physics-fast-simd8 = ["incant_assets/physics-fast-simd8", "incant_core/physics-fast-simd8"]
+
 [dependencies]
 incant_doc = { workspace = true }
 incant_core = { workspace = true }
@@ -16,5 +23,5 @@ incant_localization.workspace = true
 serde_json = { workspace = true }
 
 [target.'cfg(target_arch = "wasm32")'.dependencies]
-incant_assets = { path = "../incant_assets" }
+incant_assets = { path = "../incant_assets", default-features = false }
 wasm-bindgen = "=0.2.126"

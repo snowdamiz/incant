@@ -5,6 +5,13 @@ edition.workspace = true
 rust-version.workspace = true
 publish.workspace = true
 
+[features]
+default = ["physics-deterministic"]
+
+# Select one physics kernel for the entire process, including build/test hosts.
+physics-deterministic = ["incant_physics_runtime/deterministic", "rapier3d/enhanced-determinism"]
+physics-fast-simd8 = ["incant_physics_runtime/fast-simd8", "rapier3d/simd8"]
+
 [dependencies]
 incant_nav.workspace = true
 incant_physics_runtime.workspace = true
@@ -13,7 +20,7 @@ serde.workspace = true
 serde_json.workspace = true
 schemars.workspace = true
 thiserror.workspace = true
-rapier3d = { version = "=0.36.0", features = ["enhanced-determinism"] }
+rapier3d = { version = "=0.36.0" }
 
 # Browser/WASI builds stay serial until an explicit supported worker pool exists.
 # Native stepping uses Rapier's calling/global Rayon pool without changing APIs.

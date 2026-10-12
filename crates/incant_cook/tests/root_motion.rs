@@ -1,4 +1,7 @@
 #![cfg(feature = "scene")]
+#[path = "support/scene_format.rs"]
+mod format;
+use format::scene_format;
 #[path = "../../incant_assets/tests/skeletal/fixture.rs"]
 mod fixture;
 use incant_cmd::{Actor, Command, CommandBus};
@@ -265,7 +268,7 @@ fn ordinary_scene_cook_embeds_root_catalog_and_rejects_stale_or_malformed_bindin
     let animations = load_project_animation_resources(&p, &sid, root.path()).unwrap();
     assert!(incant_cook::cook_scene(&p, &sid).is_err()); // Captured resources are required.
     let bytes = cook_scene_with_resources(&p, &sid, &Default::default(), &animations).unwrap();
-    assert_eq!(&bytes[8..12], &17u32.to_le_bytes());
+    assert_eq!(&bytes[8..12], &scene_format(17).to_le_bytes());
     let catalog_size = load_project_root_motion_resources(&p, &sid, root.path())
         .unwrap()
         .catalog(stable_id(&eid).unwrap())

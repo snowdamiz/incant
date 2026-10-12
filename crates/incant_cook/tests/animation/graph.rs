@@ -22,7 +22,7 @@ fn graph_cook_uses_captured_asset_then_runs_after_all_source_and_cache_deletion(
     let (parameter, _, blend) = attach(&mut p, &sid, &eid);
     let resources = load_project_animation_resources(&p, &sid, root.path()).unwrap();
     let bytes = cook_scene_with_resources(&p, &sid, &Default::default(), &resources).unwrap();
-    assert_eq!(&bytes[8..12], &14u32.to_le_bytes());
+    assert_eq!(&bytes[8..12], &scene_format(14).to_le_bytes());
     drop(resources);
     drop(p);
     root.close().unwrap();

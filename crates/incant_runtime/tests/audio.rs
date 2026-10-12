@@ -1,3 +1,5 @@
+#[path = "support/scene_format.rs"]
+mod scene_format;
 use incant_runtime::{
     CookedAudio, CookedEntity, CookedScene, FrameCommands, NativeAudioBus, NativeAudioSource,
     NativeWorld, StableId, StructuralCommand,
@@ -68,10 +70,16 @@ fn nodes() -> Vec<CookedAudio> {
 #[test]
 fn canonical_audio_roundtrip_retains_typed_values_and_world_pose() {
     let plain = scene().to_bytes();
-    assert_eq!(&plain[8..12], &1u32.to_le_bytes());
+    assert_eq!(
+        &plain[8..12],
+        &crate::scene_format::scene_format(1).to_le_bytes()
+    );
     assert_eq!(scene().with_audio(vec![]).unwrap().to_bytes(), plain);
     let expected = scene().with_audio(nodes()).unwrap().to_bytes();
-    assert_eq!(&expected[8..12], &3u32.to_le_bytes());
+    assert_eq!(
+        &expected[8..12],
+        &crate::scene_format::scene_format(3).to_le_bytes()
+    );
     let mut reversed = nodes();
     reversed.reverse();
     assert_eq!(scene().with_audio(reversed).unwrap().to_bytes(), expected);
@@ -110,7 +118,10 @@ fn nonzero_transport_epochs_roundtrip_with_exact_u64_precision_in_scene_v19() {
         let mut audio = nodes();
         audio[1].source.as_mut().unwrap().transport_epoch = epoch;
         let bytes = scene().with_audio(audio.clone()).unwrap().to_bytes();
-        assert_eq!(&bytes[8..12], &19u32.to_le_bytes());
+        assert_eq!(
+            &bytes[8..12],
+            &crate::scene_format::scene_format(19).to_le_bytes()
+        );
         let decoded = CookedScene::from_bytes(&bytes).unwrap();
         assert_eq!(decoded.audio(), audio);
         assert_eq!(decoded.to_bytes(), bytes);
