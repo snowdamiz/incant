@@ -56,5 +56,32 @@
     "At most16samples per source; graph layer must impose8each/16combined",
     "Accepted sampling measured allocation-free; refused input diagnostic may allocate",
     "No GPU, native visual, device or performance gate"
-  ]
+  ],
+  "local_union": {
+    "commit": "fe01513517dbfd6d7255ce8000145b03a83d2c43",
+    "inputs": "accepted grouped41539545 plus publisher private4487c5ae on actual main147",
+    "resolved_source_seams": "Additive grouped+IK module declarations/reexports only; all numerical implementations unchanged",
+    "tests": {
+      "passed": 123,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 18
+    },
+    "clippy": "all-targets all-features passed",
+    "limits": "Publisher full union proof still running; no final union/PR/render/device claim",
+    "artifacts": {
+      "docs/spikes/evidence/grouped-animation-pose/main147-00.log.gz": {
+        "sha256": "8ec8bc438ab15e3122ab0b75f9fb251c393ec26be29f9914a45780e6e5f231dd",
+        "uncompressed_sha256": "4f390bb8510006ff2db6162d9191472b33a3ec1dc933a35474010b6d4e2118f5"
+      },
+      "docs/spikes/evidence/grouped-animation-pose/main147-01.log.gz": {
+        "sha256": "70c493c170932bfaa0b8c3af44826c2b5d1a663777cb8bb6352c6c2a7c3e69ea",
+        "uncompressed_sha256": "14ef4a708939cccfc4250d02d15ed40ea1953d558b66073813ce0be25dfd86fc"
+      },
+      "docs/spikes/evidence/grouped-animation-pose/main147-commands.json": {
+        "sha256": "e31dc321135cdeaf08e2270946ef3f5bd51073e07ca7e9467bc066e9a6ce4c95",
+        "uncompressed_sha256": "e31dc321135cdeaf08e2270946ef3f5bd51073e07ca7e9467bc066e9a6ce4c95"
+      }
+    }
+  }
 }

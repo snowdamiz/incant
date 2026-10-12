@@ -36,3 +36,9 @@ numeric algorithm to hide a failure.
 [Hashes, exact logs and independent review](evidence/grouped-animation-pose.json)
 retain the measured evidence. This proves no rendered result, device performance,
 complete animation feature or phase gate.
+
+The local union with main147 and the publisher’s private tree/v4 source passes
+123 affected CPU cases and all-target Clippy. Merge resolutions only combine
+module declarations/reexports for the accepted grouped sampler and IK solver;
+none changes the numerical implementation. The publisher’s broader union
+validation remains separate, and connected graph fades are still pending.
