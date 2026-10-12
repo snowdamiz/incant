@@ -22,7 +22,7 @@ visual work, and Astra owns correctness and integration.
 The independent reference now admits bounded 8-bit fixed-point UNORM blending
 while retaining exact geometry, clip, opacity and untouched-pixel controls.
 Shader/runtime behavior is unchanged. Current-main CPU tests, Clippy and wasm32
-compile pass; independent producer review and seven caught mutations are retained.
+compile pass; independent producer/current-main reviews and seven caught mutations are retained.
 Hosted Linux/WARP validation and all 23 required release checks remain pending.
 The Windows conformance job also exceeded its 40-minute limit after successful
 conformance stages; only that existing job now permits 90 minutes for the remaining

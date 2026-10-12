@@ -216,7 +216,7 @@
     "path": "docs/spikes/evidence/claude-0059-unorm-final-review.json",
     "sha256": "d7db13b4e292ecc71c668c05f6408d47684d23668a96e1c174301a6d24013713"
   },
-  "integration": "Both source files and all 40 accepted changed packet files are exact de73103d. Directory-rename heuristic was corrected to retain original handoffs paths and bytes. Original Linux and Windows checkpoint12 failures and parent brief retained. No shader or runtime behavior changes. Independent current-main closure pending.",
+  "integration": "Both source files and all 40 accepted changed packet files are exact de73103d. Directory-rename heuristic was corrected to retain original handoffs paths and bytes. Original Linux and Windows checkpoint12 failures and parent brief retained. No shader or runtime behavior changes. Independent current-main closure accepted with no blocking findings.",
   "limitations": [
     "No GPU, native window, capture or device execution in this integration; ignored GPU tests are not passing gates.",
     "Claude original Metal checks and seven caught mutations retain their exact producer scope. Emulated WARP arithmetic is inferred from aggregate statistics, not Windows pixel capture.",
@@ -256,5 +256,9 @@
     ],
     "policy_tests": 6,
     "after_frozen_renderer_checks": true
+  },
+  "final_review": {
+    "path": "docs/spikes/evidence/native-ui-unorm-main154/root-final-review.json",
+    "sha256": "bf982442d2491dcc53f2754068a3f7b63107c6f79de80dc539439bb5c193c59b"
   }
 }
