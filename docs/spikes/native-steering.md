@@ -68,3 +68,14 @@ collection, navigation debug drawing, a Core Sample, or phone performance
 evidence. Source deletion in an in-process cooked-session test is not a fresh
 shipping-player export, a platform test or a Phase 1 gate. Those requirements
 remain open.
+
+## Main125 integration
+
+The original implementation and conservative build-identity follow-up were
+cherry-picked onto current main after text editing. No source conflict occurred.
+All 16 reviewed implementation/build/test inputs are unchanged; the two additive
+main differences preserve existing lock edges and the TypeScript crossfade API.
+The actual main125 ancestry merge has the identical tested tree. Current checks
+pass 363 navigation/runtime/script tests plus the strict source-deleted cook test,
+all-target Clippy, wasm32 compilation, SDK/template types and dependency guards.
+[Exact sources and retained check hashes](evidence/native-steering-main125.json).
