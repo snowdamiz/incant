@@ -15,6 +15,7 @@ typescript = ["scene", "script", "dep:tempfile", "dep:incant_source", "dep:incan
 # Select one physics kernel for the entire process, including build/test hosts.
 physics-deterministic = [
     "incant_assets/physics-deterministic",
+    "incant_audio_runtime/physics-deterministic",
     "incant_cmd/physics-deterministic",
     "incant_import/physics-deterministic",
     "incant_runtime?/physics-deterministic",
@@ -23,6 +24,7 @@ physics-deterministic = [
 ]
 physics-fast-simd8 = [
     "incant_assets/physics-fast-simd8",
+    "incant_audio_runtime/physics-fast-simd8",
     "incant_cmd/physics-fast-simd8",
     "incant_import/physics-fast-simd8",
     "incant_runtime?/physics-fast-simd8",
@@ -52,6 +54,7 @@ sha2 = { workspace = true, optional = true }
 tempfile = { version = "3", optional = true }
 
 [dev-dependencies]
+incant_audio_runtime = { workspace = true, features = ["scene"] }
 sha2.workspace = true
 incant_ui.workspace = true
 incant_cmd.workspace = true

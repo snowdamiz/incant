@@ -90,11 +90,13 @@ impl Controller {
             &StartOptions {
                 scene: request.scene,
                 camera: request.camera,
+                ui_viewport: request.ui_viewport,
                 script_sha256: request.script_sha256,
             },
             48000,
             self.fallback,
         )?;
+        session.validate_ui_recording(replay.as_ref().is_some_and(InputReplay::has_ui))?;
         check_budget(cancel, started)?;
         validate()?;
         check_budget(cancel, started)?;
@@ -117,9 +119,22 @@ impl Controller {
                 .transpose()
                 .map_err(native)?
                 .unwrap_or(&[]);
-            candidate
-                .session
-                .tick(input, &mut candidate.samples[..frames * 2])?;
+            candidate.session.tick_recorded(
+                input,
+                replay
+                    .as_ref()
+                    .map(|r| r.ui_at(tick))
+                    .transpose()
+                    .map_err(native)?
+                    .unwrap_or(&[]),
+                replay
+                    .as_ref()
+                    .map(|r| r.viewport_at(tick))
+                    .transpose()
+                    .map_err(native)?
+                    .flatten(),
+                &mut candidate.samples[..frames * 2],
+            )?;
             if let Some(plan) = &mut plan {
                 plan.observe(candidate.session.world()?, candidate.session.input()?)
                     .map_err(native)?;

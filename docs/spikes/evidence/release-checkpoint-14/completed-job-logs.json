@@ -1,0 +1,23 @@
+{
+  "logs": {
+    "macos-general": {
+      "job": 114973645171,
+      "raw_sha256": "1b264adde8cba3c48395f64fae5fba44bad99348c248c5a3a403479b59199ed8",
+      "gzip_sha256": "13d6dc7b099a4a88b83ebea59bced8c77360a151b5699ed45e1922647458f8e4",
+      "bytes": 1648766
+    },
+    "windows-desktop": {
+      "job": 114973528654,
+      "raw_sha256": "3d5e30cf30f613fb122d2fb9d62e68c162363b8117874d53b20dc9661da7b17a",
+      "gzip_sha256": "1f83f5e02a02f2f3a7db01bb3e3b99ed84912f810961812b2ee3b98b959883ef",
+      "bytes": 763528
+    },
+    "linux-desktop": {
+      "job": 114973528158,
+      "raw_sha256": "09253a72100203b6bd62bd8b092fe452a008461f7ffc62b506d255dfd9c7d8eb",
+      "gzip_sha256": "c314b4eaa38438ac22d328dd0b10943b06692a2cb3432c9a5f9585f855833628",
+      "bytes": 1693046
+    }
+  },
+  "capture_note": "Concurrent gh run view returned a local invalid-zip cache error for Windows; direct job API initially refused ANSI output, then succeeded with explicit allow-escape-sequences into a raw file. Hosted job succeeded; no job rerun."
+}

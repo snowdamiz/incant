@@ -38,12 +38,29 @@ pub struct Options {
     /// Required for any scene with spatial content. Validates retained CPU input.
     #[arg(long)]
     pub camera: Option<String>,
+    /// Logical UI viewport WIDTHxHEIGHT, requires an explicit camera.
+    #[arg(long, value_parser = viewport)]
+    pub ui_viewport: Option<[f32; 2]>,
     #[arg(long,default_value_t=48000,value_parser=clap::value_parser!(u32).range(8000..=192000))]
     pub sample_rate: u32,
     /// New raw stereo f32-le PCM file; published only after a completed run.
     #[arg(long)]
     pub pcm_output: Option<PathBuf>,
 }
+fn viewport(value: &str) -> std::result::Result<[f32; 2], &'static str> {
+    let (width, height) = value.split_once('x').ok_or("expected WIDTHxHEIGHT")?;
+    let v = [
+        width.parse::<f32>().map_err(|_| "invalid UI width")?,
+        height.parse::<f32>().map_err(|_| "invalid UI height")?,
+    ];
+    if v.iter()
+        .any(|n| !n.is_finite() || !(1.0..=65_536.0).contains(n))
+    {
+        return Err("UI viewport must be within 1..=65536 logical pixels");
+    }
+    Ok(v)
+}
+
 #[derive(Debug, thiserror::Error)]
 pub enum PlayError {
     #[error("native play: {0}")]
@@ -157,10 +174,12 @@ pub fn run(options: Options) -> Result<Report> {
             scene: options.scene.clone(),
             script_sha256: options.script_sha256.clone(),
             camera: options.camera.clone(),
+            ui_viewport: options.ui_viewport,
         },
         options.sample_rate,
         embedded::load,
     )?;
+    game.validate_ui_recording(replay.as_ref().is_some_and(InputReplay::has_ui))?;
     // No guest update retains or consults this authoring document.
     drop(document);
     let mut pcm = if let Some(path) = &options.pcm_output {
@@ -192,7 +211,22 @@ pub fn run(options: Options) -> Result<Report> {
             .transpose()
             .map_err(native)?
             .unwrap_or(&[]);
-        game.tick(events, output)?;
+        game.tick_recorded(
+            events,
+            replay
+                .as_ref()
+                .map(|r| r.ui_at(tick))
+                .transpose()
+                .map_err(native)?
+                .unwrap_or(&[]),
+            replay
+                .as_ref()
+                .map(|r| r.viewport_at(tick))
+                .transpose()
+                .map_err(native)?
+                .flatten(),
+            output,
+        )?;
         bytes.clear();
         bytes.extend(output.iter().flat_map(|v| v.to_le_bytes()));
         hash.update(&bytes);

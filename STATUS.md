@@ -16,12 +16,93 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Planar gameplay — current-main integration reviewed
+## Pinned mobile bytecode compatibility — current-main checks passed
+
+Fresh source cooks bind exact producer/destination and the pinned QuickJS ABI.
+Actual C and Swift callers each pass the same complete numeric/input/failure
+records on macOS and an iOS 27.0 ARM simulator (32 controls per platform). iOS
+device archives compile and link only. Native script/cooker tests, union Clippy
+and lean dependency checks pass; independent final source/execution review is accepted. Android
+cross-target admission and authored-project cross-export remain denied. No
+physical-phone or performance gate is claimed.
+Current main169 integration passes all 16 checks with new matching archives and
+64 actual C/Swift controls; final integrated audit is accepted.
+[Contract and evidence](docs/spikes/mobile-bytecode-compatibility.md);
+[current integration](docs/spikes/mobile-bytecode-main169.md).
+
+## Ordinary desktop exporter — library audit corrected
+
+The player library and thin executable share a crate name. The shipping audit
+now checks both target units independently, preserving required optimization,
+source-compiler exclusion and final executable fat LTO. Six parser regressions
+and 63 scoped tools tests pass; root source review is accepted. The original
+failed export remains retained and corrected fresh packaging is pending in the
+Planar proof. [Evidence](docs/spikes/native-export-player-units.md).
+
+## Headless UI and reusable player — merged main169
+
+The shared recorded UI route and optional mobile C ABI pass all 19 integrated
+checks on the accepted audio ABI union. Real C/Swift callers of the new immutable
+macOS archive pass 32 controls/39 commands, including native held/released movement,
+exact failures and no-clobber output behavior. Producer source bytes and dependency
+versions are unchanged; independent final integration review and exact-head
+fast CI passed before PR169 merged. iOS/Android compatibility stays separate; no GPU/window/device gate.
+[Integrated commands and actual callers](docs/spikes/headless-ui-mobile-integration.md).
+
+## Mobile runtime callers — macOS C/Swift CPU proof accepted
+
+Actual callers of the frozen native runtime archive pass 32 controls / 39
+commands with typed cooked input-driven movement, precise failure reports,
+repeat PCM and create-only outputs. Fixture Clippy and authoring-free graph
+checks pass; source/execution review is accepted. The later trusted-source
+compatibility route above adds iOS simulator execution and device archive links.
+Android NDK/CI and physical-phone/render/device gates remain pending; the old
+document smoke is not reused as game execution evidence.
+[Source and measured scope](docs/spikes/mobile-runtime-callers.md).
+
+## Shared cooked-player library
+
+The ordinary packaged player now has a reusable Rust entry and optional bounded C
+ABI. Local macOS CPU/CLI tests and native-window/static-module compatibility pass;
+actual macOS C/Swift caller verification passes as recorded above. The first iOS
+archive refusal remains retained; the separately verified trusted-source route is
+described above. Authored-project cross-export stays denied. No physical-device
+or performance gate passes from the library extraction. [Contract and evidence](docs/spikes/mobile-runtime-library.md).
+## Rust/Wasm audio transport — merged main168
+
+The accepted ops59–61 pass 483 actual-host cases and all 12 integration checks.
+A fresh ordinary exported player runs three source/map/build-deleted 96-tick cases
+with 17,856 declaration scalars and 248 observations each, exact native-oracle PCM,
+and thirteen precise no-output refusals. All accepted source inputs remain exact;
+independent integration review and exact-head fast CI passed before PR168 merged. Desired state
+snapshots do not expose mixer cursors; whole guest saves and device gates stay open.
+[Current integration evidence](docs/spikes/native-wasm-audio-main166.md).
+
+## Release checkpoint 14 — promoted main160 baseline
+
+All 23 required contexts and eight exact-candidate push workflows passed.
+Release `2444d81f` has the exact tested main160 tree. Actual hosted AppKit retirement
+and numerical UI checks pass; the logs identify Windows DX12 software rendering,
+Linux llvmpipe/Vulkan and macOS paravirtual Metal. Main161+ features remain outside
+this release baseline. Failed checkpoints stay historical; Phase 1, reference-phone,
+appearance and complete engine/game gates remain open.
+[Promotion and retained evidence](docs/spikes/release-checkpoint-14.md).
+
+## Wasm HUD controls — merged main166
+
+The unchanged accepted ABI passes 469 actual-host cases, Clippy and target/tooling
+checks. A fresh ordinary shipping player passes three source/map/build-deleted
+12-tick runs with exact report/PCM equality and six precise no-output refusals.
+Independent integration review and exact-head fast CI passed before PR166 merged. Module checkpoints,
+GPU/window/appearance, device and full SDK gates remain open.
+[Current integration evidence](docs/spikes/native-wasm-hud-integration.md).
+
+## Planar gameplay — merged main165
 
 All five reviewed sample/workflow inputs remain exact. Seven native gameplay
 scenarios, strict types, 28 policy cases and actionlint pass with a matching engine
 binary. Independent review accepts the source/receipts. Original shipping proof
-remains explicitly based on main160; fast CI/publication are pending. The
+remains explicitly based on main160; exact-head fast CI passed before PR165 merged. The
 numerical room does not establish authored visuals, device or physics-save gates.
 [Current integration evidence](docs/spikes/planar-sample-main163.md).
 
@@ -242,7 +323,7 @@ while retaining exact geometry, clip, opacity and untouched-pixel controls.
 Shader/runtime behavior is unchanged. Current-main CPU tests, Clippy and wasm32
 compile pass; independent producer/current-main reviews and seven caught mutations are retained.
 Checkpoint13 passed the Linux and Windows numerical rendering stages. Its general
-macOS probe failed and its Windows desktop job timed out later, so release remains
+macOS probe failed and its Windows desktop job timed out later, so that batch remained
 held until a repaired frozen candidate passes all 23 required checks.
 The Windows conformance job also exceeded its 40-minute limit after successful
 conformance stages; only that existing job now permits 90 minutes for the remaining
@@ -654,25 +735,26 @@ and complete Game UI/IME gates remain open.
 
 ## Current milestone
 
-Main #161 includes compound native animation transitions and complete Wasm
-snapshots, authored two-bone IK, offline audio/UI checkpoints, public physics
-queries and the Core Sample gameplay slice. Complete native/TypeScript/Wasm root-motion integration merged after current-main
-CPU, ordinary package, independent review and fast checks passed. HUD current-main
-validation and independent final review are complete; audio transport
-remains a separate reviewed producer queue. Phase 1 and
-the finished game remain incomplete.
+Main #170 includes compound native animation and Wasm snapshots, authored two-bone
+IK, complete native/TypeScript/Wasm root motion, native audio transport and HUD,
+Wasm HUD controls, offline audio/UI checkpoints, public physics queries, and the
+Core/Planar gameplay foundations. Wasm audio transport is merged after current-main
+shipping validation. Headless UI and the reusable player/mobile library with
+actual macOS C/Swift callers are merged. Trusted-source iOS bytecode compatibility
+has passed current-main CPU/simulator checks and final integration review.
+The desktop exporter lib/bin audit repair is merged after scoped checks and
+review; fresh Planar packaging is still being verified, and no failed export is
+counted as shipping success. Phase 1 and the finished game
+remain incomplete.
 
-Checkpoint13 is terminal and unpromoted: 21 of 23 required contexts succeeded,
-the general macOS retirement probe failed on a late callback, and Windows desktop
-was cancelled at its one-hour job cap after 53m27s of successful pre-export checks.
-Main158 contains the reviewed probe-only callback repair. The reviewed Windows
-workflow repair allows that job 120 minutes while Linux stays at 60, preserving
-all checks and fresh private shipping builds. The repair merged after its exact-head
-fast check passed. Checkpoint14 is frozen at main160 `d1ef35ee`, candidate
-`e9c0b288`; all 23 full checks remain required. Release remains at
-checkpoint8 until all 23 exact-head required checks succeed. Failed checkpoints
-remain historical, and later feature merges do not move an active candidate.
-[Windows timing and repair evidence](docs/spikes/windows-desktop-checkpoint-budget.md).
+Checkpoint14 promoted selected main160 `d1ef35ee` after all 23 exact-candidate
+required checks and eight push workflows succeeded. Release `2444d81f` has tested
+tree `c0137be6`; later main161+ features are excluded. The repaired AppKit probe
+and hosted Linux/Windows numerical UI checks passed. Failed checkpoint13 remains
+historical: its general macOS probe failed and Windows desktop exceeded its old
+one-hour allowance. The main158 probe repair and main160 Windows job allowance
+were verified by this successful batch, without removing checks or reusing private
+shipping builds. [Promotion and evidence](docs/spikes/release-checkpoint-14.md).
 
 Native animation graphs now connect ordinary typed authoring, captured models,
 v14 cooking, deterministic native clip states and flat adjacent-pair 1D blends.
@@ -688,8 +770,8 @@ snapshots explicitly refuse unrepresentable graph blends. The additive guest
 graph SDK now carries bounded snapshots and atomic controls through both native
 Wasm hosts, with its current-main checks recorded above. The newer nested/2D
 tree route is verified separately above. The later compound transition and authored IK routes are separately verified
-above; layering, connected root-motion publication, rendered acceptance and
-device gates remain open.
+above; complete layering, rendered acceptance and device gates remain open. Connected
+root motion merged as main161.
 [Scope and evidence](docs/spikes/native-animation-graphs.md).
 
 Connected native UI now composes typed UiNode authoring, v13 cooked scenes,
@@ -1607,3 +1689,20 @@ receipts identify the selected family and exact kernel. All three builds passed
 134 document/command/cook/Play tests and Clippy with frozen inputs. Actual matching
 launcher/export execution and editor process switching remain in progress.
 [Contract and evidence](docs/spikes/physics-project-setting.md).
+
+- Native Rust/Wasm HUD: additive ops56–58 preserve ops0–55/input-v1. 365 ordinary tests, three actual Wasmtime/wasm2c tests, all-target Clippy and scoped generation/wasm/runtime guards pass. Public source/cache/build/map-deleted package passes three fresh shaped-HUD/movement/PCM runs and six exact refusals; source and final evidence reviews accepted, publisher intake pending. Module checkpoints, headless native-play UI routing and native/GPU/device gates remain open. See `docs/spikes/native-wasm-hud.md`.
+
+- Native headless UI routing: explicit bounded viewport now reaches the retained host; CLI and native Play RPC replay the existing UI/resize format through the ordinary player's shared resolver. All 100 affected tests, scoped Clippy, input wasm32 and runtime/generation checks pass, including actual CLI/RPC parity and failure preservation. Independent source and final execution reviews accepted; publisher intake pending. No native-window/GPU/IME/device claim. See `docs/spikes/native-headless-ui.md`.
+- **Native Rust/Wasm audio transport (private execution checkpoint).** Additive
+  ops59–61 preserve all previous imports and expose copied desired declarations,
+  exact u64 transport epochs and atomic ordered controls. Independent source
+  review, ten focused tests, 483 actual-host tests in 87 groups, all-target
+  Clippy and three fresh development processes pass. Full 96-tick declarations
+  and real mixed PCM match the typed native oracle. Independent final host review
+  accepts the retained evidence. The public import/select/Undo/Redo/reopen and
+  captured-only development route passes; three fresh ordinary wasm2c players
+  match every declaration field and exact PCM after private source/cache/build/map
+  deletion, with 13 exact refusals. Independent final package review accepts the
+  retained evidence; publisher integration remains pending. No actual-cursor,
+  arbitrary guest checkpoint, physical-device or phase-gate claim. See
+  [contract and evidence](docs/spikes/native-wasm-audio.md).

@@ -209,3 +209,86 @@ fn foreign_physics_mode_refuses_before_assets_or_fallback_are_touched() {
     assert_eq!(project.canonical_text().unwrap(), before);
     assert_eq!(std::fs::read_dir(root.path()).unwrap().count(), 0);
 }
+
+#[test]
+fn invalid_ui_viewport_or_missing_camera_refuses_before_any_fallback() {
+    let temp = tempfile::tempdir().unwrap();
+    let (project, _, _) = fixture();
+    for viewport in [[0., 200.], [f32::NAN, 200.], [65537., 100.], [320., 200.]] {
+        let options = StartOptions {
+            ui_viewport: Some(viewport),
+            ..Default::default()
+        };
+        let error = PreparedPlay::load(&project, temp.path(), &options, 48000, || {
+            panic!("must reject before compiler")
+        })
+        .err()
+        .unwrap();
+        assert!(error.to_string().contains("UI viewport"));
+    }
+}
+#[test]
+fn prepared_ui_settings_survive_paused_play_transport_and_source_disposal() {
+    use incant_types::{UiKind, UiNode};
+    let temp = tempfile::tempdir().unwrap();
+    let (mut p, sid, eid) = fixture();
+    p.scenes
+        .get_mut(&sid)
+        .unwrap()
+        .entities
+        .get_mut(&eid)
+        .unwrap()
+        .components
+        .insert(
+            "Camera".into(),
+            json!({"fov_degrees":60,"near":0.1,"far":100}),
+        );
+    let mut e = Entity::new("UI root");
+    e.components.insert(
+        "UiNode".into(),
+        json!(UiNode::<String> {
+            kind: UiKind::Root,
+            style: Default::default(),
+            order: 0,
+            disabled: false
+        }),
+    );
+    p.scenes
+        .get_mut(&sid)
+        .unwrap()
+        .entities
+        .insert(e.id.clone(), e);
+    let before = p.clone();
+    let prepared = PreparedPlay::load(
+        &p,
+        temp.path(),
+        &StartOptions {
+            camera: Some(eid),
+            ui_viewport: Some([321., 201.]),
+            ..Default::default()
+        },
+        48000,
+        || CompiledScript::compile("exports.default={update(){}};"),
+    )
+    .unwrap();
+    assert_eq!(
+        prepared.render.as_ref().unwrap().ui.unwrap().viewport,
+        [321., 201.]
+    );
+    assert_eq!(p, before);
+    drop(p);
+    temp.close().unwrap();
+    let mut game = incant_play::PlaySession::<incant_audio_runtime::OfflineBackend>::new(
+        prepared,
+        incant_audio_runtime::AudioManagerSettings {
+            backend_settings: 48000,
+            ..Default::default()
+        },
+        (),
+    )
+    .unwrap();
+    assert_eq!(game.mode(), incant_play::PlayMode::Paused);
+    assert!(game.refresh().unwrap());
+    game.step(&[]).unwrap();
+    assert_eq!(game.world().unwrap().tick(), 1);
+}

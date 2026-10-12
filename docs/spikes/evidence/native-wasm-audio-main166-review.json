@@ -1,0 +1,67 @@
+{
+  "scope": "Independent read-only current-main166 audio ABI source-identity and execution/artifact audit",
+  "commit": "439b06324b1292f17f1624efa418c263d1be732b",
+  "tested_head": "aa23956568dd8aaec3d6c2f23c13ae4bbfe5bdc2",
+  "main": "5bdb77ac11a73c4110e45d8dbb82bfe6ce3aacbe",
+  "producer": "ed77de6d46adbb0d5ba96b2117446efe0bdc222c",
+  "accepted": true,
+  "findings": [],
+  "manifest": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/local-service-stack/incant/docs/spikes/evidence/native-wasm-audio-main166.json",
+    "sha256": "51669d09ac764587064d6d4a2df69f2bf38c7c41e1f39c94d66b206986e806af"
+  },
+  "verified": {
+    "accepted_source_files": 35,
+    "accepted_source_blobs_match_producer": true,
+    "frozen_inputs": 1859,
+    "retained_raw_original_artifact_pairs": 577,
+    "scoped_commands": 12,
+    "scoped_commands_exit_zero": true,
+    "conformance_commands": 3,
+    "conformance_passed": 483,
+    "conformance_groups": 87,
+    "conformance_failed": 0,
+    "conformance_ignored": 0,
+    "prepared_manifest_modules": 221,
+    "prepared_manifest_file_entries": 1106,
+    "prepared_selected_files_rehashed": 405,
+    "public_commands": 33,
+    "live_package_files": 15,
+    "removed_private_file_paths_absent": 20,
+    "player": {
+      "sha256": "4ef40118b4f7e39eab37f6dc3bc9619c8e4a397929d04f26ab473c471b371ce3",
+      "bytes": 9966928
+    },
+    "fresh_public_runs": 3,
+    "ticks_per_run": 96,
+    "scalars_checked_per_report": 17856,
+    "scalar_reports_checked": 4,
+    "public_vectors_checked_per_report": 248,
+    "equal_pcm_bytes_each": 614400,
+    "native_development_and_three_package_pcm_equal": true,
+    "three_complete_package_reports_equal": true,
+    "exact_refusal_raw_command_matches": 13,
+    "refusal_stdout_empty": true,
+    "refusal_pcm_absent": true,
+    "static_checkpoint_absent": true,
+    "all_previous_registry_entries_unchanged": true,
+    "export_player_and_project_hashes_bound": true
+  },
+  "source_review": [
+    "canonical complete-frame validation: size/count/stride, sorted unique owners, roles, bus references/cycles, finite/exact-f32 values, listener/spatial relationships",
+    "bounded copied pre-command snapshots; full destination range checked before writes",
+    "original-f64 command validation before conversion, all batch rows before staging, shared quotas",
+    "active-epoch failures poison complete callback; stale epochs preserve current callback semantics",
+    "actual-host regression sources cover raw bounds/canonical/quota failures, SDK caught failures, traps, late owners/roles and no-prefix publication",
+    "native oracle/guest transport schedules and all186 declaration values align, unequal22050/32000Hz clips, static+streamed, bus/spatial/listener and silent/nonzero PCM are real",
+    "helper deletion/precise-negative/output rules read; source-free public player invokes ordinary captured module route"
+  ],
+  "execution_audit": "Independently reread and compared retained outputs; no duplicate compiler, native player, GPU or device execution.",
+  "limits": [
+    "Desired declaration snapshots are not mixer cursor state.",
+    "Seek beyond clip duration is a terminal audio-host refusal after native command acceptance, not claimed callback rollback.",
+    "Conformance and public guests share accepted source scope; no byte identity asserted across distinct builds.",
+    "The complete prepared-file count is bound by the producer manifest/command; this audit rehashed its retained selected subset plus all577 retained artifacts, not a deleted full prepared build directory.",
+    "Whole static guest checkpoints remain refused; no hardware audio, native window, rendered appearance, physical-device or performance gate."
+  ]
+}

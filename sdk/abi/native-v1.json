@@ -1067,6 +1067,116 @@
       ],
       "result": "i32",
       "call": "Call::ControlRootMotion { ptr, len }"
+    },
+    {
+      "namespace": "incant_hud_v1",
+      "name": "snapshot_len",
+      "opcode": 56,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::HudLen"
+    },
+    {
+      "namespace": "incant_hud_v1",
+      "name": "read_snapshot",
+      "opcode": 57,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "capacity",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::ReadHud { ptr, capacity }"
+    },
+    {
+      "namespace": "incant_hud_v1",
+      "name": "control",
+      "opcode": 58,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "len",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::ControlHud { ptr, len }"
+    },
+    {
+      "namespace": "incant_audio_v1",
+      "name": "snapshot_len",
+      "opcode": 59,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::AudioLen"
+    },
+    {
+      "namespace": "incant_audio_v1",
+      "name": "read_snapshot",
+      "opcode": 60,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "capacity",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::ReadAudio {ptr,capacity}"
+    },
+    {
+      "namespace": "incant_audio_v1",
+      "name": "command",
+      "opcode": 61,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "len",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::CommandAudio {ptr,len}"
     }
   ],
   "enums": {
@@ -1764,6 +1874,68 @@
       [
         "State",
         2
+      ]
+    ],
+    "HudRole": [
+      [
+        "Root",
+        0
+      ],
+      [
+        "Container",
+        1
+      ],
+      [
+        "Label",
+        2
+      ],
+      [
+        "Button",
+        3
+      ],
+      [
+        "TextInput",
+        4
+      ]
+    ],
+    "HudEventKind": [
+      [
+        "Activated",
+        0
+      ],
+      [
+        "ValueChanged",
+        1
+      ],
+      [
+        "Submitted",
+        2
+      ]
+    ],
+    "AudioControlKind": [
+      [
+        "SetPlaying",
+        0
+      ],
+      [
+        "Stop",
+        1
+      ],
+      [
+        "Restart",
+        2
+      ],
+      [
+        "Seek",
+        3
+      ],
+      [
+        "SourceGain",
+        4
+      ],
+      [
+        "BusGain",
+        5
       ]
     ]
   },
@@ -3146,6 +3318,289 @@
         "value",
         "u32"
       ]
+    ],
+    "HudHeader": [
+      [
+        "magic",
+        "u8",
+        8
+      ],
+      [
+        "scene",
+        "u8",
+        16
+      ],
+      [
+        "tick",
+        "u64"
+      ],
+      [
+        "widgets",
+        "u32"
+      ],
+      [
+        "texts",
+        "u32"
+      ],
+      [
+        "events",
+        "u32"
+      ],
+      [
+        "bytes",
+        "u32"
+      ],
+      [
+        "focused",
+        "u8",
+        16
+      ],
+      [
+        "flags",
+        "u32"
+      ],
+      [
+        "discarded",
+        "u32"
+      ],
+      [
+        "widget_stride",
+        "u32"
+      ],
+      [
+        "text_stride",
+        "u32"
+      ],
+      [
+        "event_stride",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ]
+    ],
+    "HudWidget": [
+      [
+        "entity",
+        "u8",
+        16
+      ],
+      [
+        "role",
+        "u32"
+      ],
+      [
+        "disabled",
+        "u32"
+      ],
+      [
+        "offset",
+        "u32"
+      ],
+      [
+        "len",
+        "u32"
+      ]
+    ],
+    "HudText": [
+      [
+        "entity",
+        "u8",
+        16
+      ],
+      [
+        "offset",
+        "u32"
+      ],
+      [
+        "len",
+        "u32"
+      ]
+    ],
+    "HudEvent": [
+      [
+        "entity",
+        "u8",
+        16
+      ],
+      [
+        "kind",
+        "u32"
+      ],
+      [
+        "offset",
+        "u32"
+      ],
+      [
+        "len",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ]
+    ],
+    "HudCommand": [
+      [
+        "entity",
+        "u8",
+        16
+      ],
+      [
+        "kind",
+        "u32"
+      ],
+      [
+        "value",
+        "u32"
+      ],
+      [
+        "len",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ]
+    ],
+    "AudioHeader": [
+      [
+        "magic",
+        "u8",
+        8
+      ],
+      [
+        "scene",
+        "u8",
+        16
+      ],
+      [
+        "tick",
+        "u64"
+      ],
+      [
+        "count",
+        "u32"
+      ],
+      [
+        "stride",
+        "u32"
+      ]
+    ],
+    "AudioRow": [
+      [
+        "entity",
+        "u8",
+        16
+      ],
+      [
+        "roles",
+        "u32"
+      ],
+      [
+        "bus_parent_present",
+        "u32"
+      ],
+      [
+        "bus_parent",
+        "u8",
+        16
+      ],
+      [
+        "bus_gain",
+        "f64"
+      ],
+      [
+        "clip",
+        "u8",
+        16
+      ],
+      [
+        "source_bus_present",
+        "u32"
+      ],
+      [
+        "source_flags",
+        "u32"
+      ],
+      [
+        "source_bus",
+        "u8",
+        16
+      ],
+      [
+        "transport_epoch",
+        "u64"
+      ],
+      [
+        "gain",
+        "f64"
+      ],
+      [
+        "pan",
+        "f64"
+      ],
+      [
+        "rate",
+        "f64"
+      ],
+      [
+        "start_seconds",
+        "f64"
+      ],
+      [
+        "min_distance",
+        "f64"
+      ],
+      [
+        "max_distance",
+        "f64"
+      ],
+      [
+        "world_translation",
+        "f64",
+        3
+      ],
+      [
+        "listener_rotation",
+        "f64",
+        4
+      ]
+    ],
+    "AudioCommandHeader": [
+      [
+        "magic",
+        "u8",
+        8
+      ],
+      [
+        "count",
+        "u32"
+      ],
+      [
+        "stride",
+        "u32"
+      ]
+    ],
+    "AudioCommand": [
+      [
+        "entity",
+        "u8",
+        16
+      ],
+      [
+        "kind",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ],
+      [
+        "value",
+        "f64"
+      ]
     ]
   },
   "input_sections": [
@@ -3242,7 +3697,19 @@
     "ANIMATION_COMPOUND_MAX_ROWS": 1024,
     "ROOT_MOTION_MAX_ROWS": 1024,
     "ROOT_MOTION_MAX_MODEL_NODES": 4096,
-    "ROOT_MOTION_MAX_SECONDS": 86400
+    "ROOT_MOTION_MAX_SECONDS": 86400,
+    "HUD_MAX_WIDGETS": 1024,
+    "HUD_MAX_TEXTS": 1024,
+    "HUD_MAX_TEXT_BYTES": 16384,
+    "HUD_MAX_DECLARATION_BYTES": 1048576,
+    "HUD_MAX_EVENTS": 256,
+    "HUD_MAX_EVENT_BYTES": 65536,
+    "HUD_MAX_COMMANDS": 256,
+    "HUD_MAX_COMMAND_BYTES": 1048576,
+    "AUDIO_MAX_NODES": 161,
+    "AUDIO_MAX_BUSES": 32,
+    "AUDIO_MAX_SOURCES": 128,
+    "AUDIO_MAX_COMMANDS": 1024
   },
   "magic": {
     "INPUT_MAGIC": "INPINP01",
@@ -3269,7 +3736,10 @@
     "ANIMATION_V5_MAGIC": "INCANI05",
     "ANIMATION_IK_V2_MAGIC": "INCIK002",
     "ANIMATION_GRAPH_V2_MAGIC": "INCAGR02",
-    "ROOT_MOTION_MAGIC": "INCRTM01"
+    "ROOT_MOTION_MAGIC": "INCRTM01",
+    "HUD_MAGIC": "INCHUD01",
+    "AUDIO_MAGIC": "INCADS01",
+    "AUDIO_COMMAND_MAGIC": "INCADC01"
   },
   "optional_none": -1,
   "namespaces": {
@@ -3289,6 +3759,8 @@
     "incant_animation_v5": "animation5",
     "incant_animation_ik_v2": "animationik2",
     "incant_animation_graph_v2": "animationgraph2",
-    "incant_root_motion_v1": "rootmotion"
+    "incant_root_motion_v1": "rootmotion",
+    "incant_hud_v1": "hud",
+    "incant_audio_v1": "audio"
   }
 }

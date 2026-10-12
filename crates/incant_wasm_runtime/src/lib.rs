@@ -7,6 +7,7 @@ mod animation_ik_v2;
 mod animation_poses;
 mod animation_poses_v5;
 mod animations;
+mod audio;
 mod capability;
 mod flipbooks;
 mod generated;
@@ -17,6 +18,7 @@ mod steering;
 pub use flipbooks::{
     MAGIC as FLIPBOOK_MAGIC, MAX_BYTES as MAX_FLIPBOOK_BYTES, ROW_BYTES as FLIPBOOK_ROW_BYTES,
 };
+mod hud;
 mod input;
 mod localization;
 mod logging;

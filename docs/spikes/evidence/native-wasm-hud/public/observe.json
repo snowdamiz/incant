@@ -1,0 +1,24 @@
+{
+  "format": "incant-native-observation",
+  "version": 1,
+  "entities": [
+    "00000000000000000000000002"
+  ],
+  "checks": [
+    {
+      "name": "movement",
+      "tick": 12,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000002",
+        "property": "translation",
+        "value": [
+          1.2,
+          0,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    }
+  ]
+}

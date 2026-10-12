@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-12T20:17:50.368231+00:00",
+  "reviewer": "astra root",
+  "verdict": "accepted",
+  "producer_commit": "723aeb89e0432c47ff19efd7d4ba45f3fd153238",
+  "manifest_sha256": "0b8df860fb5f42b9f99608358ee2256859a04e40e622b88ed4b2fa99cca9ca1f",
+  "archive_sha256": "3ca09158afd769f4bb8b6f0acaf9f1e9d843a944bd46c2e55048e88768fbeb9b",
+  "archive_records": 110,
+  "original_records_rehashed": 109,
+  "engine_inputs_unchanged": 1629,
+  "package_files_rehashed": 15,
+  "command_receipts": 33,
+  "fresh_shipping_runs": 3,
+  "development_runs": 1,
+  "records_per_run": 576,
+  "scalar_observations_per_run": 17856,
+  "vector_checks_per_run": 248,
+  "exact_pcm_bytes_per_run": 614400,
+  "exact_refusals": 13,
+  "limitations": [
+    "Only private proof sources/cache/build/maps removed; engine repository/toolchain and retained evidence remain.",
+    "Copied declarations are desired committed state, not actual mixer cursor/status. Exact PCM measures actual static/stream/spatial/transport behavior.",
+    "The separate typed oracle cooks the same captured scene and uses native commands/mixer without loading guest or ABI parser. Independent actual-host boundary tests establish transaction rollback.",
+    "Seek beyond actual captured clip duration is rejected by the audio host after native command acceptance; package negative only proves exact terminal diagnostic and no published output.",
+    "Whole guest checkpoints explicitly unsupported.",
+    "CPU desktop package only; no GPU/window/rendered appearance, physical audio device, hosted-phone/performance, full SDK or Phase1 acceptance."
+  ],
+  "source_review": "Previously accepted host boundary and strict C producer guards; current public helper confirms actual native oracle and source-deleted shipping package, no repeated build was needed."
+}
