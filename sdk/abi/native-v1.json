@@ -492,6 +492,27 @@
       ],
       "result": null,
       "call": "Call::ControlAnimation { id, ptr }"
+    },
+    {
+      "namespace": "incant_localization_v1",
+      "name": "format",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "len",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "opcode": 25,
+      "call": "Call::Format { ptr, len }"
     }
   ],
   "enums": {
@@ -1090,6 +1111,20 @@
         "Error",
         3
       ]
+    ],
+    "DateLength": [
+      [
+        "Short",
+        0
+      ],
+      [
+        "Medium",
+        1
+      ],
+      [
+        "Long",
+        2
+      ]
     ]
   },
   "records": {
@@ -1475,7 +1510,8 @@
     "LOCALIZATION_MAX_SETTINGS_BYTES": 2364,
     "ANIMATION_MAX_ROWS": 100000,
     "ANIMATION_MAX_CLIPS": 256,
-    "ANIMATION_MAX_SPEED": 16
+    "ANIMATION_MAX_SPEED": 16,
+    "LOCALIZATION_FORMAT_BYTES": 24
   },
   "magic": {
     "INPUT_MAGIC": "INPINP01",
@@ -1483,7 +1519,8 @@
     "LOCALIZATION_REQUEST_MAGIC": "INCLQR01",
     "LOCALIZATION_SETTINGS_MAGIC": "INCLST01",
     "LOCALIZATION_RESULT_MAGIC": "INCLRS01",
-    "ANIMATION_MAGIC": "INCAN001"
+    "ANIMATION_MAGIC": "INCAN001",
+    "LOCALIZATION_FORMAT_MAGIC": "INCLFM01"
   },
   "optional_none": -1,
   "namespaces": {
