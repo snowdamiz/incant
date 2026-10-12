@@ -29,6 +29,12 @@ export namespace AnimationGraphSchema {
 }
 export type AnimationGraph = AnimationGraphSchema.Root;
 
+export namespace AnimationIkSchema {
+  export type AnimationIkConstraint = { "chain": [number, number, number]; "id": string; "pole": [number, number, number]; "target": [number, number, number]; "weight": number };
+  export type Root = { "constraints": Array<AnimationIkConstraint> };
+}
+export type AnimationIk = AnimationIkSchema.Root;
+
 export namespace AnimationRootMotionSchema {
   export type RootMotionApplication = "extract_only" | "transform" | "kinematic3d" | "character3d";
   export type Root = { "application": RootMotionApplication; "applying": boolean; "fingerprint": string; "model": string; "root": number };

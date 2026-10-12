@@ -1,0 +1,570 @@
+{
+  "base": "1ec7ad00ceab29c37f2e7ea4b969775b4049bfbc",
+  "scope": "Connected authored IK, native controls/save and canonical CPU deformation; no rendered acceptance",
+  "source_freeze_sha256": "e969bca3e9a31044dae46de4dbd5b86274fad5e223eb5a39213b17d9c9763134",
+  "sources": [
+    {
+      "path": "crates/incant_cook/src/animation.rs",
+      "sha256": "077fa16658e062f94e76a2baed8757e9561aad970be28562e7628ea6abc080c4"
+    },
+    {
+      "path": "crates/incant_cook/src/animation_ik.rs",
+      "sha256": "9b8e9f8b6b2549d9c4a876755a6d7ec09def248153a7ea0d1df764a580c4a543"
+    },
+    {
+      "path": "crates/incant_cook/src/scene.rs",
+      "sha256": "81086cc1264617065556088a9d58700576191cf51899a8848f1a41ba24cb2d1d"
+    },
+    {
+      "path": "crates/incant_cook/src/spatial.rs",
+      "sha256": "fa9281c50770b42f204f11b98ad796629a72f36748ad661825a55965a4bcfcfe"
+    },
+    {
+      "path": "crates/incant_cook/tests/animation.rs",
+      "sha256": "1503614c41328d60bb9a53437de61579e384528a9f19f201b001de8045a0f8ec"
+    },
+    {
+      "path": "crates/incant_cook/tests/animation/ik.rs",
+      "sha256": "aa649d07d465d23f795fa4f89b73f5324f3aa93197d968ca388424b8f6199138"
+    },
+    {
+      "path": "crates/incant_doc/src/lib.rs",
+      "sha256": "3396dcea898971b2c15fab9d9109ac0af3c09bf4f09133dc6fcb41925d9c2057"
+    },
+    {
+      "path": "crates/incant_render/src/animation_ik_tests.rs",
+      "sha256": "db0384fe2a18bfc996a3182a2ad11e8c2850639bc6c0568dc598f754fa7da8c2"
+    },
+    {
+      "path": "crates/incant_render/src/animation_tests.rs",
+      "sha256": "8a755b3c683f19ee8381998e9a6790f6af751b0da7e1ad2472ec7ef76cf10774"
+    },
+    {
+      "path": "crates/incant_render/src/flipbook_tests.rs",
+      "sha256": "abe64e9c87b590314f58ce03e9b46f3a358a8c3deb31e808665447ee0d17fba0"
+    },
+    {
+      "path": "crates/incant_render/src/models/animation.rs",
+      "sha256": "41a9ce14b8c7927b99120da93fd91afb260c532cec5ce0ed3595ffe2cecbcf7f"
+    },
+    {
+      "path": "crates/incant_render/src/retained.rs",
+      "sha256": "b857ef9c87c1678b81d8dcc444646dcd6d1b35bc8d342c84cdaab53edf46ba62"
+    },
+    {
+      "path": "crates/incant_render/src/retained_tilemap_tests.rs",
+      "sha256": "8ebb07fc1cac5e0dc46ff8149241b07f82708d2399522a13bbc37fd78dce4bff"
+    },
+    {
+      "path": "crates/incant_render/src/scene.rs",
+      "sha256": "88de893bbd852b7b59ac70b4552f02eaee2355b78f37f5640faffa421c1f23e0"
+    },
+    {
+      "path": "crates/incant_render/src/version_tests.rs",
+      "sha256": "c93f222c66a18348fb7d583fb9a861859934885ba357909584e1abc24a970b1a"
+    },
+    {
+      "path": "crates/incant_render_authoring/src/lib.rs",
+      "sha256": "2dc6d4fb8498fcef06d33df67554c04ba164898d8efc9415314ba0e5b5e56196"
+    },
+    {
+      "path": "crates/incant_render_data/src/lib.rs",
+      "sha256": "ad4b8d616ac781887c216f7ae87e030055212ee10484224f882425d01bd48553"
+    },
+    {
+      "path": "crates/incant_render_native/src/animation.rs",
+      "sha256": "00c675a24fd09fea67951229109749dc05fcd0b45e78a05e233f2f53a9691eef"
+    },
+    {
+      "path": "crates/incant_render_native/src/binding.rs",
+      "sha256": "7b1d1e41776cf5860536be255c4761149efbaae74df76d6c2cb1a876016e85d7"
+    },
+    {
+      "path": "crates/incant_render_native/src/lib.rs",
+      "sha256": "87f2f2a42baa8ecb872795eb3a7ff63316ffe4bf2dd63dcc260c7798c8590cf7"
+    },
+    {
+      "path": "crates/incant_render_native/src/update.rs",
+      "sha256": "80a3670837eff27ac51d339eedb1549c0a34a437d78adfe9058f65aeaaeb2dd3"
+    },
+    {
+      "path": "crates/incant_render_native/tests/animation.rs",
+      "sha256": "0454950148f57e4693b6cbd7c9444a1260178ff21fb45e839d16041be2f6f50f"
+    },
+    {
+      "path": "crates/incant_render_native/tests/animation/ik.rs",
+      "sha256": "3d6a019b8b2a6a241b7c33f4f4c52cdc131e4135bdcb058bd79077f720bb42cc"
+    },
+    {
+      "path": "crates/incant_runtime/src/animation_graph/binary.rs",
+      "sha256": "4e1aa4bc7a48ffca61e3b627135924724b565eda91c7fb1d4f97a95fd361cf00"
+    },
+    {
+      "path": "crates/incant_runtime/src/binary.rs",
+      "sha256": "ad63b1bdea76c0147be1c2fdf946e45a7138eae966f1e103e1ba5d51ef945e10"
+    },
+    {
+      "path": "crates/incant_runtime/src/commands.rs",
+      "sha256": "d1fcad13818cfdf6661e618cc08aa04d1ee181d3b151b7201005120976b09d53"
+    },
+    {
+      "path": "crates/incant_runtime/src/ik.rs",
+      "sha256": "24ca204889d8179e832d7d250afb27a871f3dfe8d2e9101c3a1bce72e148818b"
+    },
+    {
+      "path": "crates/incant_runtime/src/ik_binary.rs",
+      "sha256": "4e9c65ec21b56d01b1b1854d7f7d9678ae3d3612ae342e6af04afc52b4c9733b"
+    },
+    {
+      "path": "crates/incant_runtime/src/lib.rs",
+      "sha256": "eb845d6f0d24ec4386f7cb1cad73dc80f8c90c0fbc2a7ba9acf77867f30a1f78"
+    },
+    {
+      "path": "crates/incant_runtime/src/save.rs",
+      "sha256": "879901dd273bc01c6d402cab52b2340bcf2c1de17b7df32bb6b7b6a6f5bcab7a"
+    },
+    {
+      "path": "crates/incant_runtime/src/save/codec.rs",
+      "sha256": "00954b7b6c2245e5d738e7adbb269e0f4255cd6cff61346977ed9a0142dbfdbb"
+    },
+    {
+      "path": "crates/incant_runtime/src/save/ik.rs",
+      "sha256": "02c6b934b02800179177580da1b8a88cb43a75e49645b2e5fee567066d285cc6"
+    },
+    {
+      "path": "crates/incant_runtime/src/scene.rs",
+      "sha256": "1f81fdb99084b4a4fc9e67d2eb3831dc47d46eed1f6d6a71df52d93fdadbcd2b"
+    },
+    {
+      "path": "crates/incant_runtime/src/spatial.rs",
+      "sha256": "d808a8a9f86842cf52f8fdb8d684cca292e0c49cb5e237766f703968ad5ee076"
+    },
+    {
+      "path": "crates/incant_runtime/src/spatial_binary.rs",
+      "sha256": "0254a27808e996f98c0edbe6b64b95a6ea55be83acf2f2df468a8d6fc583ef98"
+    },
+    {
+      "path": "crates/incant_runtime/src/spatial_view.rs",
+      "sha256": "4fde15dc41e961d2a953bc6f5af223438f8e453a5482c86c2551da0407d9e9bf"
+    },
+    {
+      "path": "crates/incant_runtime/src/world.rs",
+      "sha256": "aff382f257cff12c4bee5c3aecf9e697daf6dccee3a23d8076c58f3868c31e43"
+    },
+    {
+      "path": "crates/incant_runtime/tests/animation.rs",
+      "sha256": "d623ff43c1f7c7ded52df7169838d3e433f15db703bedfbcd7ebb27951108566"
+    },
+    {
+      "path": "crates/incant_runtime/tests/ik.rs",
+      "sha256": "6d342bc8f0d146a71fc7acc28f4d79ea9ff09c2d651f5453f0cc08a8c99a2e17"
+    },
+    {
+      "path": "crates/incant_runtime/tests/ik/alloc.rs",
+      "sha256": "21ebc74c2efa260ff90ce029b006924dc910bc31813b8ee6528d684c8e70f1f2"
+    },
+    {
+      "path": "crates/incant_script/build.rs",
+      "sha256": "24de4f8a03a7e237249c4c41398097d1c23065268697c9228a26009ec4482f49"
+    },
+    {
+      "path": "crates/incant_script/src/animation_ik.rs",
+      "sha256": "99018222a4b5d1344fb05c9e7e2b97ffa9903f3e410d45b30cff0b1f6b65cfb9"
+    },
+    {
+      "path": "crates/incant_script/src/animations.rs",
+      "sha256": "d485ea117be24afd8098e4d5089e42e23fda65ae6f0c1319017ce5d15a170d9e"
+    },
+    {
+      "path": "crates/incant_script/src/checkpoint/pending.rs",
+      "sha256": "bc9c92e2bf200447d70d7ee3c1354bc74bff9c537c279db02c123fe01d84fd73"
+    },
+    {
+      "path": "crates/incant_script/src/checkpoint/tests/animation.rs",
+      "sha256": "1d2838b7e586e3b0955a604d87d0355ec85b1e1accfd59d2ceb3a79709372219"
+    },
+    {
+      "path": "crates/incant_script/src/commands.rs",
+      "sha256": "217f7f91969cfea83821397f262a3ef67ce68b1ef45fc319ab02c5de38bf8b3a"
+    },
+    {
+      "path": "crates/incant_script/src/lib.rs",
+      "sha256": "abf0cde3a314f858e15b80175b0510148a513396d68b862ad56779adf226db56"
+    },
+    {
+      "path": "crates/incant_script/tests/animations.rs",
+      "sha256": "6628489a8a6f57693291e08e01c003d5bc7f62f99fa802bf49c06b2a93b2caac"
+    },
+    {
+      "path": "crates/incant_script/tests/animations/ik.rs",
+      "sha256": "d7d7982643d2745814f6015f7435a8b274b39c185297976ddcd6875b6876bd61"
+    },
+    {
+      "path": "crates/incant_types/src/animation_ik.rs",
+      "sha256": "544f79d56077781ba72440f19757ce1d411e3d2bf3a9da20406280ace0734f7c"
+    },
+    {
+      "path": "crates/incant_types/src/lib.rs",
+      "sha256": "63da935cc7741ad07e4adab5ea8d143522784272122a2d123700aecd10ba1e56"
+    },
+    {
+      "path": "crates/incant_wasm_runtime/src/capability.rs",
+      "sha256": "905f580cc6cd73b62f64bda77e269988817f75f31dbc256d9098c43092fdffb0"
+    },
+    {
+      "path": "crates/incant_wasm_runtime/tests/animations.rs",
+      "sha256": "6b089933a3110995c7fc5f56ae8a915ef58f9ef06fd92eb4d555a2508ee462b0"
+    },
+    {
+      "path": "crates/incant_wasm_runtime/tests/animations/ik.rs",
+      "sha256": "3af3bfde1f627c01dc5e61646613f48ce584cfe5a755427d39a175de5f9da112"
+    },
+    {
+      "path": "schemas/AnimationIk.schema.json",
+      "sha256": "986dc9c2b69d9f26e43d7b771ad4c5994cb5321863f3fa6a3a944cd21ddede0f"
+    },
+    {
+      "path": "sdk/ts/src/generated.d.ts",
+      "sha256": "9a9f34641e9e992c546955f937b4e2ca8405000e599960a49b9a85257c9d720d"
+    },
+    {
+      "path": "sdk/ts/src/native.d.ts",
+      "sha256": "dd3fcfbe209d0b2c805cc9f1fa3fa3e86d2961b092b6e8dfbe7f71742a31873a"
+    },
+    {
+      "path": "tools/probes/native-animation-ik-export.py",
+      "sha256": "fe95748fcfee430fd9713a2658fa32591606f4bda3dba9eadbcc431c30fe3715"
+    },
+    {
+      "path": "tools/probes/native-animation-ik-export/behavior.ts",
+      "sha256": "d976fefd9aa3e79a6c502d8366402e7289fe8658766de73ceaa64c3b508515aa"
+    }
+  ],
+  "build_and_player_inputs_unchanged_during_validation": {
+    "Cargo.lock": "ac059d1a2493d570bd202515e729830c56ecc7758cd808ccd0f245d06abcac7f",
+    "Cargo.toml": "4638e2bb3f9c98cdc26145c0f39a4299ac168cd0209587ed2bcfe5c1a445dbea",
+    "crates/incant_script/build.rs": "24de4f8a03a7e237249c4c41398097d1c23065268697c9228a26009ec4482f49",
+    "crates/incant_game_player/Cargo.toml": "28056082e89b012c1c6c976bb349d8dace821bd26d535ec0b53cbb55b778d401",
+    "crates/incant_game_player/build.rs": "9c2503ff557cbc15a17a42e3a8ace8759709013fb6cbe3b7f22974eb8224b058",
+    "crates/incant_game_player/src/main.rs": "71a39e60435979e4a83f1601fa050698a35853ad5b5bc825665e07094bbadc50",
+    "crates/incant_game_player/src/package.rs": "c7d70da9643fee2ee134519ab87f4dfd3792f5386b0b3bd4109bc95820a91366",
+    "crates/incant_game_player/src/checkpoint.rs": "b320651e522fcedb42cec72cb92e162f25733826421669f4f0d3335100554b71",
+    "tools/export_native.py": "a22f6431bb6db373982970e53a219f1f57633c538e08055bcafacefa887699a1",
+    "tools/native_package.py": "0362128f683f835e31674ad2f024f54f35d7401ebdb6eb0b51d791e14578413b",
+    "tools/native_process.py": "493c6e70e9045bf3b6e128b4392f47b7cac8a475969d715f26cd1eb7d9777ec3"
+  },
+  "headless": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/native-authored-ik-headless-002",
+    "sha256": "f402f3d3d234defc9c1c156a71a781c7af873f4c4047e71f5cd470b5ba9d25b9",
+    "bytes": 59668096
+  },
+  "logs": [
+    {
+      "path": "docs/spikes/evidence/native-authored-ik-logs/native-authored-ik-check-001.log.gz",
+      "sha256": "c57202d34ff98525040319f1452bc325006d0364a14a0478404ccaa3f3fb0c8a",
+      "uncompressed_sha256": "41ff3b0c8bf126e2b620464d00b11291cdd428f11b754671464f2f8feec286d9"
+    },
+    {
+      "path": "docs/spikes/evidence/native-authored-ik-logs/native-authored-ik-check-002.log.gz",
+      "sha256": "6763cb1830220a81bfeb723c84d1f137612a280283b1419d646854591d80c25a",
+      "uncompressed_sha256": "f1d3d5da692c92bf88ba7838b4092983bc32044b61a57eece472a33b3c344402"
+    },
+    {
+      "path": "docs/spikes/evidence/native-authored-ik-logs/native-authored-ik-clippy-001.log.gz",
+      "sha256": "5a44aa37a9e10fa9b9fe972763b8a01cb44c7bbeb7b3ac05ee7b9dfb50f144e3",
+      "uncompressed_sha256": "3dd8138c5d805329d1bb6024399aa1448a404bcbab297e6be07263de79c7e93e"
+    },
+    {
+      "path": "docs/spikes/evidence/native-authored-ik-logs/native-authored-ik-connected-001.log.gz",
+      "sha256": "01a4312bcfe1cbbea456d78a8318ff86069ae2d2fdb4ef76f897d146ed8887b6",
+      "uncompressed_sha256": "e03f789c6e8f2fefe7053e8751a4dc6cb63c0c76cb7147f62b4663360ecde11a"
+    },
+    {
+      "path": "docs/spikes/evidence/native-authored-ik-logs/native-authored-ik-connected-002.log.gz",
+      "sha256": "2c4bab3cccc34b69b2b1ec2710959614484b8c60ef6c1389e17ba2a55b8a84a2",
+      "uncompressed_sha256": "6ef664f4d9322513097c55eac2bd66235073a851ef25f0fc387aeaf4f7bdc500",
+      "passed": 6,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 3
+    },
+    {
+      "path": "docs/spikes/evidence/native-authored-ik-logs/native-authored-ik-connected-003.log.gz",
+      "sha256": "9759cfadb797ad4eb19e278ada6f1c38fec5a59f419e870208ea5d4c11968fea",
+      "uncompressed_sha256": "094ef03252e319572d344a289ebe7376acfca43e411c08e2b68cf21ef1370b3d",
+      "passed": 2,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 1
+    },
+    {
+      "path": "docs/spikes/evidence/native-authored-ik-logs/native-authored-ik-contracts-002.log.gz",
+      "sha256": "465a74316acc9a4bd1edf7a115267da7efd8967f5a79758b7ee2df5f755aef28",
+      "uncompressed_sha256": "356566558b09640e47837e64043963df98083941b61f83da8491611366c26205"
+    },
+    {
+      "path": "docs/spikes/evidence/native-authored-ik-logs/native-authored-ik-conventions-001.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/spikes/evidence/native-authored-ik-logs/native-authored-ik-dependencies-001.log.gz",
+      "sha256": "108cdf9e9ea739ef6f7cc76ff8a6826279dd4042f4c812c0aa6e44b236c10b03",
+      "uncompressed_sha256": "245ae130b4e57452540112ddcadf0e36af5d6b340180813f3e9728c07828e2eb"
+    },
+    {
+      "path": "docs/spikes/evidence/native-authored-ik-logs/native-authored-ik-full-tests-001.log.gz",
+      "sha256": "9e4c37726508ffecc7b0483ae68a69db8b560a7e1d183c39f09d490224ebd0f6",
+      "uncompressed_sha256": "0774e07686fbb38c05b2ab28f20d64adf071964ec6990f22964b877d1052f5b7",
+      "passed": 219,
+      "failed": 1,
+      "ignored": 82,
+      "groups": 53
+    },
+    {
+      "path": "docs/spikes/evidence/native-authored-ik-logs/native-authored-ik-full-tests-002.log.gz",
+      "sha256": "9867e120d99fbf83c09340b7312d49f6a246a6e062fb3d5276c2f6f6bddbd4a0",
+      "uncompressed_sha256": "f189c3405368c0829894e341406dcde3a813a518ebb38765dac0f2aa800fcbfb",
+      "passed": 525,
+      "failed": 1,
+      "ignored": 82,
+      "groups": 86
+    },
+    {
+      "path": "docs/spikes/evidence/native-authored-ik-logs/native-authored-ik-full-tests-003.log.gz",
+      "sha256": "9107003e60713c32d4c4d90aa98a50d667a446c2b74e49cbb00ebe9e104213df",
+      "uncompressed_sha256": "87cf1183f104cff30084db540040262bd4d4c12b3365f8e470dbd4531a3e8539",
+      "passed": 643,
+      "failed": 0,
+      "ignored": 82,
+      "groups": 104
+    },
+    {
+      "path": "docs/spikes/evidence/native-authored-ik-logs/native-authored-ik-headless-001.log.gz",
+      "sha256": "3c0ca0f84e22d4cb80e460c3da1084e547eb441367ea1697d19047c1326218f5",
+      "uncompressed_sha256": "e0bf5d32e348b2d87d67296d5e4f4ca6bff2ade6870fc40ca23e8e3becc34f14"
+    },
+    {
+      "path": "docs/spikes/evidence/native-authored-ik-logs/native-authored-ik-headless-002.log.gz",
+      "sha256": "ca446e7a11cac94575698c8adf838359bd9494b1addb70be6a05400683565fbb",
+      "uncompressed_sha256": "bd66fb225113ce57839a0acd78f70463ee9d67c6f0d57e4264b1249e6e50afc5"
+    },
+    {
+      "path": "docs/spikes/evidence/native-authored-ik-logs/native-authored-ik-preflight-001.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/spikes/evidence/native-authored-ik-logs/native-authored-ik-probe-types-001.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/spikes/evidence/native-authored-ik-logs/native-authored-ik-render-001.log.gz",
+      "sha256": "5928845a891911a78c1cf12e02517d4d9d91b3204055e753788f6b3b16271488",
+      "uncompressed_sha256": "ef047cbf90cea184fb05621498782c5e8d75e8bf9a3df3565bf626ccdaab4472",
+      "passed": 3,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 1
+    },
+    {
+      "path": "docs/spikes/evidence/native-authored-ik-logs/native-authored-ik-runtime-001.log.gz",
+      "sha256": "0c6e8f7bda6bd2106086aac1e52f8d3d7f399ae9e1f92f5472ee9323663a6a30",
+      "uncompressed_sha256": "a49e5819c2b0fd50537244dda322e6fbaca989ef04ff6467b75cda6fb3a4ee3f",
+      "passed": 5,
+      "failed": 1,
+      "ignored": 0,
+      "groups": 1
+    },
+    {
+      "path": "docs/spikes/evidence/native-authored-ik-logs/native-authored-ik-runtime-002.log.gz",
+      "sha256": "d14d1c02962c3e6382cfad66b826943c34867ec6cd225e01188312adaac42c5b",
+      "uncompressed_sha256": "0c196cecf533788a6a51d707d08b27c42742476e4e5b3aa681fbb199289dde52",
+      "passed": 6,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 1
+    },
+    {
+      "path": "docs/spikes/evidence/native-authored-ik-logs/native-authored-ik-runtime-003.log.gz",
+      "sha256": "ba304a524c890be5610e2993be3fd09b675af0d4b0e314bd4d927b03972d9694",
+      "uncompressed_sha256": "d316604eae835a5121320c62e07f053e06081d9550d66711a174d3b3d767de9a",
+      "passed": 7,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 1
+    },
+    {
+      "path": "docs/spikes/evidence/native-authored-ik-logs/native-authored-ik-schema-001.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/spikes/evidence/native-authored-ik-logs/native-authored-ik-script-final-001.log.gz",
+      "sha256": "2d0f35ede1c1d9e8a056ad60b33b8d2dfaad193ab4aee1254f1a0c37c8f2ce12",
+      "uncompressed_sha256": "53e7066b8507444d0751e6f7fe31c37fb870684ed0e7f0afbce185690812e865",
+      "passed": 118,
+      "failed": 1,
+      "ignored": 0,
+      "groups": 1
+    },
+    {
+      "path": "docs/spikes/evidence/native-authored-ik-logs/native-authored-ik-script-wasm-001.log.gz",
+      "sha256": "048e69a9485770cc19cdfc0e1ea0efe455986b24d2ad40e31cdd3454e0f8674c",
+      "uncompressed_sha256": "ee34e2a4aefcf3e1ff8ad88146276f8a72ec59134ffe05dbf9963a6ff2e456e2",
+      "passed": 167,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 4
+    },
+    {
+      "path": "docs/spikes/evidence/native-authored-ik-logs/native-authored-ik-shipping-001.log.gz",
+      "sha256": "05dadb7dc2e4da5dbc6a8d8fb6b052380c9b0203b461ce8403fe51ceb97f1d5e",
+      "uncompressed_sha256": "24d0115bb137f57dfe36866fc30712b981d86037421a9faf81dfff83f883fb95"
+    },
+    {
+      "path": "docs/spikes/evidence/native-authored-ik-logs/native-authored-ik-static-001.log.gz",
+      "sha256": "4752e896d58035a874050e64a7a8dbaadddc9e6c776d46a0e6d3118e776ad95f",
+      "uncompressed_sha256": "885338cec24246ed11d539fabecddf29c3c6593d1d9484d59392dcf8e2c86f18"
+    },
+    {
+      "path": "docs/spikes/evidence/native-authored-ik-logs/native-authored-ik-wasm32-001.log.gz",
+      "sha256": "b635e542bdcbd25295e24c6b4891c9e05040077fa903b12f0ad6e2161522e350",
+      "uncompressed_sha256": "cd9fcb7e60fbefe32d5b810a7c52813f4f6be257a849108cc126d9ff61a9b8f8"
+    }
+  ],
+  "receipts": [
+    {
+      "path": "docs/spikes/evidence/native-authored-ik-freeze-002.json",
+      "sha256": "e969bca3e9a31044dae46de4dbd5b86274fad5e223eb5a39213b17d9c9763134",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-authored-ik-source-freeze-002.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-authored-ik-shipping-inputs.json",
+      "sha256": "1bb4b54cc035468ad30e8214a389a612756357b1d4dada25bab4d40cb2ca3058",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-authored-ik-shipping-inputs-001.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-authored-ik-source-review.json",
+      "sha256": "6125fdcfe1d3e0bbfa43c63bf42292d9967f75acaaacedd321dd7b3c7859b9d7",
+      "original_path": "/Users/andreyyurlov/.codex/incant-reviews/native-authored-ik-source-20261012.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-authored-ik-public-export.json",
+      "sha256": "6ddb81c2dd8dbb9107ccf25168f2e0568ba0c7590ec72709f1be4b49143b3965",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-authored-ik-shipping-001/result.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-authored-ik-package-preparation.json",
+      "sha256": "0dc5ef767072e799bd792e297cfe16e8eed2d89d29531c5bc7a960c1786a38fd",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-authored-ik-shipping-001/package-preparation.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-authored-ik-public-processes.json",
+      "sha256": "31d0885498fad77507da9712ec7ed6615734f6e8b45e222d5c7d2a14736895ac",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-authored-ik-shipping-001/processes.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-authored-ik-author-processes.json",
+      "sha256": "43fc5f168fe57cf588cf35a24de757d6a60bf1ac97bcd6e9dead7ab0a89c2c28",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-authored-ik-shipping-001/author-child-processes.json"
+    }
+  ],
+  "commands": [
+    "cargo test --profile ci -p incant_types -p incant_doc -p incant_cmd -p incant_runtime -p incant_script -p incant_cook -p incant_render_native -p incant_render_data -p incant_render -p incant_wasm_runtime --all-targets -j2",
+    "cargo clippy --profile ci -p incant_types -p incant_doc -p incant_cmd -p incant_runtime -p incant_script -p incant_cook -p incant_render_native -p incant_render_data -p incant_render -p incant_wasm_runtime --all-targets -j2 -- -D warnings",
+    "cargo check --profile ci -p incant_runtime --target wasm32-unknown-unknown -j2",
+    "cargo check --profile ci -p incant_script --no-default-features --features static-module -j2",
+    "cargo build --profile ci -p incant_headless -j2",
+    "python3 tools/check_runtime_dependencies.py incant_runtime incant_script incant_render_native incant_render_data incant_wasm_runtime",
+    "python3 tools/probes/native-animation-ik-export.py /Users/andreyyurlov/.codex/incant-evidence/native-authored-ik-shipping-001 --binary /Users/andreyyurlov/.codex/incant-evidence/native-authored-ik-headless-002"
+  ],
+  "validation": {
+    "final_affected_tests": {
+      "passed": 643,
+      "failed": 0,
+      "ignored": 82,
+      "groups": 104
+    },
+    "all_target_clippy": "passed",
+    "wasm32_runtime": "passed",
+    "static_module_script": "passed",
+    "fresh_schema_equality": 68,
+    "strict_sdk_and_proof_types": "passed",
+    "bridge_conventions_format_dependency_checks": "passed",
+    "public_export": {
+      "source_deleted_runs": 4,
+      "exact_typed_refusals": 7,
+      "player_sha256": "b80b1b2ad023eb15e18545ee4a6891fd55d8f0b8ce6f87f6a414550d7c43126a",
+      "player_bytes": 9268592,
+      "final_save_sha256": "ba7417fa351d6b5786d3a3c752ff59bc202abc4077f3dffadaf4c982467bddee",
+      "full_pcm_sha256": "24a046dc04fefdb652e4077b41162490b344a4dd45f918505477f84c592f3070",
+      "full_pcm_bytes": 256000
+    }
+  },
+  "historical_failures": [
+    "Initial fixture Rust float literal/enum typos were corrected before the focused pass; the old outer shell status did not substitute for inspecting child logs.",
+    "Allocation instrumentation initially missed its global allocator; corrected counted controls are retained in runtime003, not claimed from the initial run.",
+    "Two full suites encountered stale test-only future-world-version/diagnostic expectations after version9; final full003 passed.",
+    "No GPU tests were executed; all82 ignored cases remain unexecuted."
+  ],
+  "allocation_scope": {
+    "kind": "local CPU requested allocation/reallocation counts and cumulative bytes, not RSS/device performance",
+    "batches": 128,
+    "commands_per_owner": 2,
+    "rows": [
+      {
+        "owners": 1,
+        "constraints": 1,
+        "allocations": 256,
+        "requested_bytes": 59392
+      },
+      {
+        "owners": 1,
+        "constraints": 32,
+        "allocations": 256,
+        "requested_bytes": 376832
+      },
+      {
+        "owners": 8,
+        "constraints": 1,
+        "allocations": 1152,
+        "requested_bytes": 145408
+      },
+      {
+        "owners": 8,
+        "constraints": 32,
+        "allocations": 1152,
+        "requested_bytes": 2684928
+      },
+      {
+        "owners": 128,
+        "constraints": 32,
+        "allocations": 19072,
+        "requested_bytes": 43231232
+      }
+    ],
+    "unchanged_extraction_allocations": 0,
+    "canonical_preallocated_solve_deform_allocations": 0
+  },
+  "required_integration": [
+    "Current-main pose ABI v4 AnimationLenV4 and ReadAnimationsV4 must join the central IK rejection and pose_imports test list before publication.",
+    "Root grouped pose sampler stays before IK; future root-motion removal is also before IK."
+  ],
+  "limitations": [
+    "CPU canonical input/control/checkpoint proof; deformation is separately exercised by actual CPU solver tests",
+    "No GPU/window/appearance/device/performance acceptance",
+    "Ordinary load saves opt-in typed script state/timers, not arbitrary VM globals",
+    "IK Rust/Wasm command ABI remains a follow-up; existing unsupported solver/module saves remain explicit",
+    "PCM and create-only checkpoint publication are separate operations",
+    "Authoring edit-mode IK preview remains unsupported; native Play/game canonical input applies IK.",
+    "Targets changing each tick allocate one coalesced Arc per affected owner plus bounded staging map nodes.",
+    "No claim of completion of Phase1 IK/render/device gates."
+  ],
+  "final_review": {
+    "path": "docs/spikes/evidence/native-authored-ik-final-review.json",
+    "sha256": "e8170be971cb5f30a5cf05a4d20dbbb611a4a024fa22551f9ff55254359a28ee",
+    "decision": "accepted for scoped connected CPU implementation and public proof; v4 integration seam remains required"
+  }
+}

@@ -1,4 +1,4 @@
-//! Versions 1–15, little-endian checked data (not executable code). SHA-256 detects
+//! Versions 1–16, little-endian checked data (not executable code). SHA-256 detects
 //! damage, not authorship. No casts, alignment assumptions or native-layout ABI.
 use crate::scene::MAX_ENTITIES;
 use crate::{CookedEntity, CookedScene, SceneError, StableId};
@@ -7,7 +7,7 @@ use sha2::{Digest, Sha256};
 use std::collections::BTreeMap;
 
 const MAGIC: &[u8; 8] = b"INCANTSC";
-const VERSION: u32 = 15;
+const VERSION: u32 = 16;
 const PREFIX: usize = 40;
 const HEADER: usize = 72;
 const MIN_RECORD: usize = 104;
@@ -24,8 +24,10 @@ impl CookedScene {
             .collect();
         let mut bytes = Vec::with_capacity(HEADER + self.entities.len() * MAX_RECORD);
         bytes.extend(MAGIC);
-        let version = if self.has_animation_trees() {
+        let version = if self.has_ik() {
             VERSION
+        } else if self.has_animation_trees() {
+            15
         } else if self.has_animation_graphs() {
             14
         } else if self.has_ui() {
@@ -159,6 +161,9 @@ impl CookedScene {
         }
         if version >= 14 {
             crate::animation_graph::binary::write(&mut bytes, &self.spatial);
+        }
+        if version >= 16 {
+            crate::ik_binary::write(&mut bytes, &self.spatial);
         }
         let length = (bytes.len() - HEADER) as u32;
         bytes[36..40].copy_from_slice(&length.to_le_bytes());
@@ -419,6 +424,9 @@ impl CookedScene {
         }
         if version >= 14 {
             crate::animation_graph::binary::read(&mut reader, &mut spatial, version)?;
+        }
+        if version >= 16 {
+            crate::ik_binary::read(&mut reader, &mut spatial)?;
         }
         if !reader.0.is_empty() {
             return Err(SceneError::Invalid("trailing payload"));

@@ -147,6 +147,7 @@ pub(crate) fn cook_validated_scene_with_resources(
                 "MeshRenderer",
                 "Animation",
                 "AnimationGraph",
+                "AnimationIk",
                 "SpriteRenderer",
                 "SpriteFlipbook",
                 "Tilemap",

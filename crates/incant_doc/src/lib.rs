@@ -32,11 +32,11 @@ use thiserror::Error;
 
 pub const SCHEMA_VERSION: u32 = 1;
 pub use incant_types::{
-    AngularVelocity, AngularVelocity2D, Animation, AnimationGraph, AnimationMotion, AudioBus,
-    AudioListener, AudioSource, AudioSpatial, BodyMotion, Camera, CameraProjection, Collider,
-    Collider2D, ColliderPart, ColliderShape, ColliderShape2D, DirectionalLight, DirectionalShadows,
-    EnvironmentLight, Id, MeshRenderer, PointLight, PrimitiveColliderShape, RigidBody, SpotLight,
-    Text, TextureUsage, Transform, Velocity,
+    AngularVelocity, AngularVelocity2D, Animation, AnimationGraph, AnimationIk, AnimationMotion,
+    AudioBus, AudioListener, AudioSource, AudioSpatial, BodyMotion, Camera, CameraProjection,
+    Collider, Collider2D, ColliderPart, ColliderShape, ColliderShape2D, DirectionalLight,
+    DirectionalShadows, EnvironmentLight, Id, MeshRenderer, PointLight, PrimitiveColliderShape,
+    RigidBody, SpotLight, Text, TextureUsage, Transform, Velocity,
 };
 pub fn new_id() -> Id {
     ulid::Ulid::new().to_string()
@@ -406,6 +406,14 @@ impl Project {
                 if let Err(message) = animation_root_motion::validate(entity, self) {
                     issue(format!("{path}/components/AnimationRootMotion"), &message);
                 }
+                if entity.components.contains_key("AnimationIk")
+                    && !entity.components.contains_key("Animation")
+                {
+                    issue(
+                        format!("{path}/components/AnimationIk"),
+                        "AnimationIk requires Animation and MeshRenderer",
+                    );
+                }
                 if entity.components.contains_key("Animation")
                     && (!entity.components.contains_key("MeshRenderer")
                         || entity.components.contains_key("SpriteRenderer")
@@ -604,6 +612,10 @@ fn validate_component(kind: &str, value: &Value, project: &Project) -> Result<()
                 }
             }
         }
+        "AnimationIk" => {
+            let ik: AnimationIk = decode(value)?;
+            ik.validate().map_err(str::to_owned)?;
+        }
         "AnimationGraph" => {
             let graph: AnimationGraph = decode(value)?;
             graph.validate().map_err(str::to_owned)?;
@@ -712,6 +724,10 @@ pub fn schema_registry() -> BTreeMap<String, Value> {
         (
             "AnimationRootMotion".into(),
             json!(schemars::schema_for!(AnimationRootMotion)),
+        ),
+        (
+            "AnimationIk".into(),
+            json!(schemars::schema_for!(AnimationIk)),
         ),
         (
             "AnimationGraph".into(),

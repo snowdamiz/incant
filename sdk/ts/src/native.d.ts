@@ -78,6 +78,14 @@ export interface NativeCommands {
   controlAnimation(id: NativeId, control: 'speed', speed: number): void;
   /** Set a declared graph parameter within its authored range. */
   setAnimationParameter(id: NativeId, parameter: NativeId, value: number): void;
+  /** Ordered two-bone constraints solve after the full animation pose. Coordinates
+   * are cooked MODEL space, before entity/world transforms; not world-space
+   * targets. Finite coordinates within +/-1e9 and weight 0..1. Chain topology
+   * and constraint IDs are immutable cooked data. Calls share the atomic tick
+   * queue; invalid caught calls still fail the tick. Affine/zero-length sampled
+   * chains refuse consumption explicitly; no stretching or silent skip. */
+  setAnimationIk(id: NativeId, constraint: NativeId, tx: number, ty: number, tz: number,
+    px: number, py: number, pz: number, weight: number): void;
   /** Immediately select a declared graph state; preserves play/pause and speed. */
   selectAnimationState(id: NativeId, state: NativeId): void;
   spawn(id: NativeId, transform: NativeTransform, parent: NativeId | null, velocity: NativeVector3 | null): void;
@@ -208,7 +216,20 @@ export interface NativeAnimationGraphs {
   readonly sourceSeconds: Float64Array;
   readonly weights: Float64Array;
 }
+/** Owned committed rows (<=4096 total, <=32/owner), ordered by entity then
+ * authored constraint order. Three lanes per row in chains/targets/poles;
+ * weights and both ID arrays have one lane per row. Guest mutations never
+ * affect native state. Model-node indices are not entity or skin-palette IDs. */
+export interface NativeAnimationIk {
+  readonly ids: readonly NativeId[];
+  readonly constraintIds: readonly NativeId[];
+  readonly chains: Uint16Array;
+  readonly targets: Float64Array;
+  readonly poles: Float64Array;
+  readonly weights: Float64Array;
+}
 export interface NativeAnimations {
+  readonly ik: NativeAnimationIk;
   readonly graphs: NativeAnimationGraphs;
   /** For row i, [poseOffsets[i], poseOffsets[i+1]) contains its complete tree
    * pose (up to 16 normalized weights). Empty means the legacy clip/two-pose path.

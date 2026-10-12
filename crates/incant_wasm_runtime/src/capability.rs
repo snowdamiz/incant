@@ -175,6 +175,7 @@ pub struct Capability {
     animation_graph_rows: Vec<incant_runtime::AnimationGraphSnapshot>,
     animation_graphs: Vec<u8>,
     animation_rejected: bool,
+    animation_ik_present: bool,
     transferred: usize,
     calls: usize,
     tick: u64,
@@ -246,6 +247,10 @@ impl Capability {
         }
         self.animation_rejected = false;
         self.animation_scene = Some(world.scene_id());
+        self.animation_ik_present = self
+            .animation_rows
+            .iter()
+            .any(|row| world.ik_state(row.id).is_some());
         self.animations_v3.clear();
         self.animations_v4.clear();
         self.animation_graphs.clear();
@@ -554,6 +559,26 @@ impl Capability {
         self.enter(epoch)?;
         if memory.len() > limits::MEMORY {
             return Err(Error::Limit("linear memory"));
+        }
+        // These pose protocols have no post-sample IK payload. Refuse only
+        // pose observations; other module capabilities and native rendering
+        // remain usable. Every later pose ABI must preserve this admission.
+        if self.animation_ik_present
+            && matches!(
+                call,
+                Call::AnimationLen
+                    | Call::ReadAnimations { .. }
+                    | Call::AnimationLenV2
+                    | Call::ReadAnimationsV2 { .. }
+                    | Call::AnimationLenV3
+                    | Call::ReadAnimationsV3 { .. }
+                    | Call::AnimationLenV4
+                    | Call::ReadAnimationsV4 { .. }
+            )
+        {
+            return Err(Error::Abi(
+                "animation snapshots cannot represent IK constraints",
+            ));
         }
         let units = match call {
             Call::Locale | Call::Format { .. } | Call::Localize { .. } => {

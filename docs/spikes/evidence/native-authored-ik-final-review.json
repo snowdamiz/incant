@@ -1,0 +1,38 @@
+{
+  "at": "2026-10-12T16:32:41.746744+00:00",
+  "reviewer": "astra root",
+  "accepted": true,
+  "source_review_sha256": "6125fdcfe1d3e0bbfa43c63bf42292d9967f75acaaacedd321dd7b3c7859b9d7",
+  "evidence_sha256": "657277f7129db5eb87d77f36ae8ec950bbf45891172924414768a551f0aa6349",
+  "independently_verified": {
+    "sources": 59,
+    "build_inputs": 11,
+    "compressed_and_raw_logs": 26,
+    "receipts_and_originals": 7,
+    "package_files": 14,
+    "fresh_successful_processes": 4,
+    "exact_refusals": 7,
+    "save_and_pcm_and_log_continuation": "byte exact",
+    "final_tests": {
+      "passed": 643,
+      "failed": 0,
+      "ignored": 82,
+      "groups": 104
+    }
+  },
+  "audit_note": "Initial audit regex counted only passing groups and missed deliberately retained historical failing groups; corrected audit includes ok and FAILED and all recorded counts match. No source changes or reruns.",
+  "required_integration": [
+    "Current-main pose ABI v4 AnimationLenV4 and ReadAnimationsV4 must join the central IK rejection and pose_imports test list before publication.",
+    "Root grouped pose sampler stays before IK; future root-motion removal is also before IK."
+  ],
+  "limitations": [
+    "CPU canonical input/control/checkpoint proof; deformation is separately exercised by actual CPU solver tests",
+    "No GPU/window/appearance/device/performance acceptance",
+    "Ordinary load saves opt-in typed script state/timers, not arbitrary VM globals",
+    "IK Rust/Wasm command ABI remains a follow-up; existing unsupported solver/module saves remain explicit",
+    "PCM and create-only checkpoint publication are separate operations",
+    "Authoring edit-mode IK preview remains unsupported; native Play/game canonical input applies IK.",
+    "Targets changing each tick allocate one coalesced Arc per affected owner plus bounded staging map nodes.",
+    "No claim of completion of Phase1 IK/render/device gates."
+  ]
+}

@@ -3,6 +3,7 @@
 //! The prior document-backed host lives temporarily in incant_play_legacy.
 mod animation_commands;
 mod animation_graphs;
+mod animation_ik;
 mod animations;
 pub mod artifact;
 mod audio_commands;

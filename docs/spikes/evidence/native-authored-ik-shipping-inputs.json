@@ -1,0 +1,21 @@
+{
+  "source_freeze_sha256": "e969bca3e9a31044dae46de4dbd5b86274fad5e223eb5a39213b17d9c9763134",
+  "headless": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/native-authored-ik-headless-002",
+    "sha256": "f402f3d3d234defc9c1c156a71a781c7af873f4c4047e71f5cd470b5ba9d25b9",
+    "bytes": 59668096
+  },
+  "build_inputs": {
+    "Cargo.lock": "ac059d1a2493d570bd202515e729830c56ecc7758cd808ccd0f245d06abcac7f",
+    "Cargo.toml": "4638e2bb3f9c98cdc26145c0f39a4299ac168cd0209587ed2bcfe5c1a445dbea",
+    "crates/incant_script/build.rs": "24de4f8a03a7e237249c4c41398097d1c23065268697c9228a26009ec4482f49",
+    "crates/incant_game_player/Cargo.toml": "28056082e89b012c1c6c976bb349d8dace821bd26d535ec0b53cbb55b778d401",
+    "crates/incant_game_player/build.rs": "9c2503ff557cbc15a17a42e3a8ace8759709013fb6cbe3b7f22974eb8224b058",
+    "crates/incant_game_player/src/main.rs": "71a39e60435979e4a83f1601fa050698a35853ad5b5bc825665e07094bbadc50",
+    "crates/incant_game_player/src/package.rs": "c7d70da9643fee2ee134519ab87f4dfd3792f5386b0b3bd4109bc95820a91366",
+    "crates/incant_game_player/src/checkpoint.rs": "b320651e522fcedb42cec72cb92e162f25733826421669f4f0d3335100554b71",
+    "tools/export_native.py": "a22f6431bb6db373982970e53a219f1f57633c538e08055bcafacefa887699a1",
+    "tools/native_package.py": "0362128f683f835e31674ad2f024f54f35d7401ebdb6eb0b51d791e14578413b",
+    "tools/native_process.py": "493c6e70e9045bf3b6e128b4392f47b7cac8a475969d715f26cd1eb7d9777ec3"
+  }
+}
