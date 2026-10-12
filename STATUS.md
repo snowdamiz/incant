@@ -32,6 +32,15 @@ export, Android and mobile static Wasm remain denied in this slice. No signing,
 mobile window/audio host, phone performance or phase gate is claimed.
 [Current source and evidence](docs/spikes/authored-ios-main177.md).
 
+## Retained native CPU worker — local checks and review passed
+
+A native worker drops authoring state after startup and retains only its disposable
+runtime composition. Both matching physics binaries pass 21 headless tests,
+Clippy and real source-deleted process checks, including duplicate-step fencing,
+strict protocol refusals and disconnect cleanup. Independent review is accepted;
+integration is pending. Automatic editor process selection and GPU viewport
+embedding remain open. [Contract and evidence](docs/spikes/native-play-worker.md).
+
 ## Physics process selection — local execution passed
 
 The developer launcher builds the authored physics variant and runs a private
