@@ -13,8 +13,48 @@ type Config = {
   player: string; navigation: string; exit: string;
   enemies: readonly string[]; pickups: readonly string[]; camera: string | null;
   speed: number; enemySpeed: number; jumpSpeed: number;
+  hud: HudBinding | null; audio: AudioBinding | null;
 };
+type HudBinding = {
+  table: string; health: string; collected: string; objective: string;
+  won: string; lost: string; result: string; inactive: string;
+};
+type AudioBinding = Partial<Record<'music' | 'pickup' | 'damage' | 'won' | 'lost', string>>;
 let cached: Config | undefined;
+let displayed: { health: number; collected: number; phase: Progress['phase']; locale: string } | undefined;
+
+function properties(value: NativeProp, field: string): { readonly [key: string]: NativeProp } {
+  if (value === null || typeof value !== 'object' || Array.isArray(value))
+    throw Error(`Core Sample: ${field} must be an object`);
+  return value as { readonly [key: string]: NativeProp };
+}
+function hudBinding(value: NativeProp | undefined): HudBinding | null {
+  if (value === undefined || value === null) return null;
+  const p = properties(value, 'hud');
+  const result = {
+    table: id(p.table, 'hud.table'), health: id(p.health, 'hud.health'),
+    collected: id(p.collected, 'hud.collected'), objective: id(p.objective, 'hud.objective'),
+    won: id(p.won, 'hud.won'), lost: id(p.lost, 'hud.lost'),
+    result: id(p.result, 'hud.result'), inactive: id(p.inactive, 'hud.inactive'),
+  };
+  const widgets = [result.health, result.collected, result.objective, result.won,
+    result.lost, result.result, result.inactive];
+  if (new Set(widgets).size !== widgets.length) throw Error('Core Sample: HUD roles must be distinct');
+  if (Object.keys(p).some(key => !Object.hasOwn(result, key))) throw Error('Core Sample: unknown HUD binding');
+  return result;
+}
+function audioBinding(value: NativeProp | undefined): AudioBinding | null {
+  if (value === undefined || value === null) return null;
+  const p = properties(value, 'audio'), result: AudioBinding = {};
+  for (const key of Object.keys(p)) {
+    if (!['music', 'pickup', 'damage', 'won', 'lost'].includes(key))
+      throw Error('Core Sample: unknown audio binding');
+    result[key as keyof AudioBinding] = id(p[key], 'audio.' + key);
+  }
+  const sources = Object.values(result);
+  if (new Set(sources).size !== sources.length) throw Error('Core Sample: audio roles must be distinct');
+  return result;
+}
 
 function id(value: NativeProp | undefined, field: string): string {
   if (typeof value !== 'string' || !/^[0-7][0-9A-HJKMNP-TV-Z]{25}$/.test(value))
@@ -43,6 +83,7 @@ function config(context: NativeContext): Config {
     exit: id(p.exit, 'exit'), enemies: ids(p.enemies, 'enemies'), pickups: ids(p.pickups, 'pickups'),
     camera: p.camera === undefined || p.camera === null ? null : id(p.camera, 'camera'),
     speed: speed(p.speed, 3), enemySpeed: speed(p.enemySpeed, 1.5), jumpSpeed: speed(p.jumpSpeed, 6),
+    hud: hudBinding(p.hud), audio: audioBinding(p.audio),
   };
   const owned = [result.player, result.navigation, result.exit, ...result.enemies, ...result.pickups];
   if (result.camera) owned.push(result.camera);
@@ -78,6 +119,50 @@ function initial(player: Vec3, count: number): Progress {
     previousPlayer: player, jumps: 0, searches: 0 };
 }
 
+/** Bind gameplay to authored widgets and sources without changing their styling,
+ * fonts, geometry, audio routing or the project document. Only changed displays
+ * queue commands. A fresh VM refreshes text/parents but does not replay cues. */
+function present(context: NativeContext, c: Config, state: Progress, previous: Progress | null): void {
+  if (c.hud) {
+    const h = c.hud, locale = context.localization.locale();
+    const localeKey = [locale.locale, locale.pseudo ? '1' : '0', ...(locale.fallbacks ?? [])].join('|');
+    const refresh = displayed === undefined || displayed.locale !== localeKey;
+    const text = (key: string, args: Record<string, number> = {}) => {
+      const value = context.localization.localize({ table_id: h.table, key, arguments: args });
+      if (value.missing?.kind === 'key') throw Error(`Core Sample: missing HUD key ${key}`);
+      return value.text;
+    };
+    if (refresh || displayed!.health !== state.health)
+      context.commands.setUiText(h.health, text('hud.health', { health: state.health }));
+    if (refresh || displayed!.collected !== state.collected.length) {
+      context.commands.setUiText(h.collected, text('hud.samples', {
+        collected: state.collected.length, total: c.pickups.length,
+      }));
+      context.commands.setUiText(h.objective, text(
+        state.collected.length === c.pickups.length ? 'hud.objective.exit' : 'hud.objective.collect'));
+    }
+    if (refresh) {
+      context.commands.setUiText(h.won, text('hud.won'));
+      context.commands.setUiText(h.lost, text('hud.lost'));
+    }
+    if (displayed === undefined || displayed.phase !== state.phase) {
+      context.commands.setParent(h.won, state.phase === 'won' ? h.result : h.inactive);
+      context.commands.setParent(h.lost, state.phase === 'lost' ? h.result : h.inactive);
+    }
+    displayed = { health: state.health, collected: state.collected.length, phase: state.phase, locale: localeKey };
+  }
+  const a = c.audio;
+  if (!a) return;
+  if (a.music && previous === null && state.phase === 'playing') context.commands.restartAudio(a.music);
+  if (a.pickup && state.collected.length > (previous?.collected.length ?? 0)) context.commands.restartAudio(a.pickup);
+  if (a.damage && state.health < (previous?.health ?? 3)) context.commands.restartAudio(a.damage);
+  if (state.phase !== 'playing' && previous?.phase !== state.phase) {
+    if (a.music) context.commands.stopAudio(a.music);
+    const cue = a[state.phase];
+    if (cue) context.commands.restartAudio(cue);
+  }
+}
+
 /** One source callback updates the whole game through native column views.
  * All gameplay state lives in the explicit source state. No project queries,
  * authoring commands, per-entity script callbacks or world serialization.
@@ -110,6 +195,7 @@ export default {
     if (state.phase !== 'playing') {
       velocity(player, [0, 0, 0]);
       for (const entity of c.enemies) velocity(actor(actors, entity), [0, 0, 0]);
+      present(context, c, state, stored);
       context.state.set(state);
       return undefined;
     }
@@ -143,6 +229,7 @@ export default {
     if (state.phase !== 'playing') {
       velocity(player, [0, 0, 0]);
       for (const entity of c.enemies) velocity(actor(actors, entity), [0, 0, 0]);
+      present(context, c, state, stored);
       context.state.set(state);
       return undefined;
     }
@@ -190,6 +277,7 @@ export default {
       advance(context, body, entity, [dx, -0.1, dz]);
     }
     state.routes = routes;
+    present(context, c, state, stored);
     context.state.set(state);
     return undefined;
   },

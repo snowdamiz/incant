@@ -1,0 +1,513 @@
+{
+  "at": "2026-10-12T19:36:18.573795+00:00",
+  "base": "2de9812aa6b101ccce49a1ca55e0f80df7f43e9f",
+  "sources": {
+    "samples/core/gameplay.ts": "6901e09d862745a9408bdcbf725ee6bc58da6315f05a52edbec991021210c00b",
+    "samples/core/verify_presentation.py": "42ff52aae1c2ca0f923a4677f87f72e4bffe31193d19d6ba8249cadfbad477bc"
+  },
+  "source_review": {
+    "path": "docs/spikes/evidence/core-presentation-bindings/core-sample-presentation-source-20261012.json",
+    "sha256": "18fd9184c082d461100e056c8472488b31a26d5512f92671b71edb58216113c3",
+    "scope": "Original production source audit; final helper correction and retained execution are covered by final_review."
+  },
+  "checks": {
+    "strict_types": "passed tsc -p samples/core/tsconfig.json",
+    "script_seam_tests": "docs/spikes/evidence/core-presentation-bindings/core-presentation-001/seam-tests.log.gz",
+    "matching_headless": "docs/spikes/evidence/core-presentation-bindings/core-presentation-001/headless.log.gz",
+    "original_gameplay_scenarios": 7,
+    "shipping_playback": {
+      "passed": true,
+      "gameplay_sha256": "6901e09d862745a9408bdcbf725ee6bc58da6315f05a52edbec991021210c00b",
+      "binary_sha256": null,
+      "proof_root": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-003",
+      "authoring_undo_redo_reopen": true,
+      "source_removed_before_runs": true,
+      "player_sha256": "b38b808047247912cdd80024560e831bb605ee2deb1f82957ca54224bddc66d0",
+      "runs": [
+        "win",
+        "lose",
+        "repeat-win"
+      ],
+      "real_native_hud_updates": true,
+      "locale_change_tick": 50,
+      "exact_repeat_pcm": true,
+      "terminal_music_stops": true,
+      "limits": [
+        "Numerical UI fixture, no visual approval",
+        "Observed test wrapper; production gameplay preserved",
+        "Ordinary CPU exported numerical fixture; authored visual level and physics saves remain separate"
+      ]
+    }
+  },
+  "shipping": {
+    "producer": "core-presentation-binding-003",
+    "verification": "core-presentation-binding-004",
+    "source_removed_before_runs": true,
+    "positive_final_processes": 3,
+    "player_sha256": "b38b808047247912cdd80024560e831bb605ee2deb1f82957ca54224bddc66d0",
+    "original_build_exit": 0,
+    "original_helper_exit": 1,
+    "original_helper_failure": "Expected a full-health win; existing gameplay takes damage at tick 126 and wins at tick 165 with 2 health. Only the helper expectation changed. The same hash-bound ordinary player passed in a new directory without rebuilding.",
+    "final_helper_exit": 0,
+    "final_independent_review": "accepted"
+  },
+  "artifacts": [
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-001/target-owner.json.gz",
+      "sha256": "b85057e8d24f4bfcfec3fa996e887e0e14db6f5b2bb5f2f6c5d0daef2e97065b",
+      "raw_sha256": "70a7f130f18b6f22972df27e01ab85c7c43aae4d88440b5fe311f36fb8a11056",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-001/target-owner.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-001/headless.log.gz",
+      "sha256": "b0a362567d524d78f305aa0a664bcd7e7500cddf094aea8472d2bc408c16509f",
+      "raw_sha256": "d0d79df9c3fcdfe4bafd59be8e2696586027e529de6ec5377c6bde1d064815c7",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-001/headless.log"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-001/results.json.gz",
+      "sha256": "3fe646bc092e98fbb3aa1a1d29f60a215b9c57c3167737e69cfd54f54838a55b",
+      "raw_sha256": "646882fd2ad52840d9a08c5ce5a19f72dbbfcb1092e86aebeb403ed1699dc6af",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-001/results.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-001/clean-local-crates.log.gz",
+      "sha256": "09b5a78de29ee937225fc4ba6787a099b0ef8fb020d54d1711fe88c8e2794425",
+      "raw_sha256": "f775e38bdb2da01708613c0d15d0b90051088748b41f0b66a88f724bf7b56e8b",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-001/clean-local-crates.log"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-001/seam-tests.log.gz",
+      "sha256": "81de85ed8d145dcf1b2ac689ac58ebe868e9ed6c1c32696cb3163033bd362a97",
+      "raw_sha256": "48a9a8775206fea63e8df2b2f62aa46783fca3d6d200fa5db41d0702e570e8ca",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-001/seam-tests.log"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/process-01.json.gz",
+      "sha256": "c2265a75f1f91a50cb1db7a9585708c8ed35a91ef8305622e9071ddf0559d701",
+      "raw_sha256": "e54749e262d1e8dcc4ca6bb7a3cde7c897ede8332bd0088454cd7544940cca13",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-gameplay-001/process-01.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/repeat-win.json.gz",
+      "sha256": "56de2b6038f374e8da30f7905924b28a034289f6304e65aa8cda1963c5949e6f",
+      "raw_sha256": "8715f03c7e89296cd5f8a28376d72faa9fe182ccbb7ba0b846cb7a8a8083971e",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-gameplay-001/repeat-win.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/lose-input.json.gz",
+      "sha256": "cb81adeb43532701eedf372d1d963e33ade64d8b5fe24f46b6ad175e2d7ca8a1",
+      "raw_sha256": "e4707335c2d5116ef604c1976dbd864eeafab305cecd583a20795dd0d2976227",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-gameplay-001/lose-input.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/skip-pickup-observe.json.gz",
+      "sha256": "1e338b08b200cd52ffc7607cd5c3a6378a89b9b317398042dadd290e7bbb8f78",
+      "raw_sha256": "ae8aee17d141bcf67aafdeb7c49b1b6410d08412befc578900777302aa6356d4",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-gameplay-001/skip-pickup-observe.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/repeat-win-input.json.gz",
+      "sha256": "1fd02f62fe580dd92dd698b4bfbe94f1f6a0d5d2217dce6f5f66c904ae1cd3c6",
+      "raw_sha256": "aedbc57164dcdd45652c98f5c67e5f3987472eed5625f56ac0af0f9fea0cc731",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-gameplay-001/repeat-win-input.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/process-00.json.gz",
+      "sha256": "d6727ba7d265f1161b6146d542bf4623e59af2ed2ec4dadafaadb3d7bdfad7c7",
+      "raw_sha256": "aa0899f20db29917fe32875fee81cf49619557c9ddf7f3fa3736676a3d4cced8",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-gameplay-001/process-00.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/skip-pickup.json.gz",
+      "sha256": "c8de812fcfe3187293cf2bd2679afeb7896432476a1ca9e2f967aae575192af7",
+      "raw_sha256": "6aa218c1dbb8656656a825cc1ba3173c5841981fd48fcaf576b29f7ca228aa85",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-gameplay-001/skip-pickup.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/jump-input.json.gz",
+      "sha256": "f5ef8d8bc00fa972dc2d4632d0fb76cf14daf846c22b908336cfafc488b30f85",
+      "raw_sha256": "aea85027dc03cc63b99bf611716ad775ced10cdef0a7b8c6e1c7abe5c1e37cbb",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-gameplay-001/jump-input.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/wall-input.json.gz",
+      "sha256": "99bfbc7d5e8df6c57e1fb9f4b8a7efbbf010b0e74db57b4455a975ebeb927bb6",
+      "raw_sha256": "4ac0e3cdb046ee14ea7fa9fe234f123bcc32b5e0b95f3e592aa97ddbd7a63f68",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-gameplay-001/wall-input.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/gamepad-input.json.gz",
+      "sha256": "6c756bce334389eec29985ae7e73bc8200e3c91f3087da34e2df71d7ed4b88fc",
+      "raw_sha256": "2cacb813c6bd3521150dca137d8adc649e6039c12ad0fb349f27a309e78a3b1c",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-gameplay-001/gamepad-input.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/wall.json.gz",
+      "sha256": "5da0faa200c09998dc576bdd8d9483652396e1fdadd042365c057dda7b613fbc",
+      "raw_sha256": "dce89a9093710d358b705f12ef6066a13357cf2f7d57fba01d5ddaf6d3f2fcfa",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-gameplay-001/wall.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/win-observe.json.gz",
+      "sha256": "9ac5d87aa95a97caa3383abb52cabb7fdde96579dfce6f0eff8afe23c53a6323",
+      "raw_sha256": "6c73c23f0de6297b049a189cb34697364590bc51cb3db671275b1bf6f19806d5",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-gameplay-001/win-observe.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/process-07.json.gz",
+      "sha256": "17b6beabfd151229f5964727704482f04c1f6a4289585622c3189c87e911982e",
+      "raw_sha256": "7f0f29783e703d30e40dc39a4a81c5c8de3f86e2318f06b01d471c3febe385ca",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-gameplay-001/process-07.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/win.json.gz",
+      "sha256": "56de2b6038f374e8da30f7905924b28a034289f6304e65aa8cda1963c5949e6f",
+      "raw_sha256": "8715f03c7e89296cd5f8a28376d72faa9fe182ccbb7ba0b846cb7a8a8083971e",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-gameplay-001/win.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/wall-observe.json.gz",
+      "sha256": "bc56a62ee5c0309e840c75ecb99ada1dabd62fd17e0b237a31967d97474fef0e",
+      "raw_sha256": "1a41c16c67de45d54f75522338b59b9a722bb6dfe902078dc2dda1fd15e16a1e",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-gameplay-001/wall-observe.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/process-06.json.gz",
+      "sha256": "cab028e585a6a4c1b7f6d2c33c2f39c015c340be3c8b03d63902dea03d85a85c",
+      "raw_sha256": "5b2e6839febab75d48f9d348e67eb3127d225cfbb08ee81b95c5775b81e2c6fc",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-gameplay-001/process-06.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/lose.json.gz",
+      "sha256": "10541d1e2c25189dbe488cbebf429524fdb3d7b4a5e849e016af0f78e2d81b8f",
+      "raw_sha256": "a8d1d7fc438619b21403bf8fe48e32a31627c3067782906c148d65310e39f9b6",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-gameplay-001/lose.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/repeat-win-observe.json.gz",
+      "sha256": "9ac5d87aa95a97caa3383abb52cabb7fdde96579dfce6f0eff8afe23c53a6323",
+      "raw_sha256": "6c73c23f0de6297b049a189cb34697364590bc51cb3db671275b1bf6f19806d5",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-gameplay-001/repeat-win-observe.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/authoring-calls.json.gz",
+      "sha256": "65727fae03e9d8eb602aafe850687a7d4ea4d41a46f21f790bce8184c730ec82",
+      "raw_sha256": "0525bee02ad16494af03f814a4f0201368dee93ee2ac48c5a1f816c96b6640b7",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-gameplay-001/authoring-calls.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/jump-observe.json.gz",
+      "sha256": "76922546fc99ee7402f16061b496f44f6a48a4cedd7878583337d5fa6ecf88b3",
+      "raw_sha256": "2c4fa46a4369c9ad5e9b66ed301a44821dccfce46531628586fc481b2eba6315",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-gameplay-001/jump-observe.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/jump.json.gz",
+      "sha256": "24fec2c6130b899618ec47f39e91728c0a81f5347624f0d78ef92d45c6637a9a",
+      "raw_sha256": "4cf5b0fbd1dabaddb9771851b7eed083759e1d2d3a55d27b16e1ab35a8224e30",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-gameplay-001/jump.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/process-05.json.gz",
+      "sha256": "44706c359d2e9c5073d2df045d580c06800d153c926c9e4877d03a613934936a",
+      "raw_sha256": "c325152cd85a955ee81676c832a34f4ba6326a677bb9eb57ac817a6a85652f67",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-gameplay-001/process-05.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/process-04.json.gz",
+      "sha256": "1caa9d4b8dd54d7d47244f86fb906cac41e421db753a6aaf2a31dec3c2d33abb",
+      "raw_sha256": "7494d0707b45f00e3133117d98783294d7b16e17f3caba2ad9779a836572c877",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-gameplay-001/process-04.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/gamepad-observe.json.gz",
+      "sha256": "9ac5d87aa95a97caa3383abb52cabb7fdde96579dfce6f0eff8afe23c53a6323",
+      "raw_sha256": "6c73c23f0de6297b049a189cb34697364590bc51cb3db671275b1bf6f19806d5",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-gameplay-001/gamepad-observe.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/gamepad.json.gz",
+      "sha256": "56de2b6038f374e8da30f7905924b28a034289f6304e65aa8cda1963c5949e6f",
+      "raw_sha256": "8715f03c7e89296cd5f8a28376d72faa9fe182ccbb7ba0b846cb7a8a8083971e",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-gameplay-001/gamepad.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/process-03.json.gz",
+      "sha256": "d6c78fdbd3c2108de7e49efc390a2dfad90be0f157c385c8abb793b679d0b6aa",
+      "raw_sha256": "13f29388fa950a9bc4a7a3dc84d30e66c96b05f0ffc79649bd08e746747ee6ce",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-gameplay-001/process-03.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/win-input.json.gz",
+      "sha256": "1fd02f62fe580dd92dd698b4bfbe94f1f6a0d5d2217dce6f5f66c904ae1cd3c6",
+      "raw_sha256": "aedbc57164dcdd45652c98f5c67e5f3987472eed5625f56ac0af0f9fea0cc731",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-gameplay-001/win-input.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/lose-observe.json.gz",
+      "sha256": "89e8988f10098585f07776083566792e302a0db662dff96b2a88f3c10b2ad287",
+      "raw_sha256": "5efea284d7ae848427f533b38fcf503109298be762ea9aefd5f8148903385689",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-gameplay-001/lose-observe.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/skip-pickup-input.json.gz",
+      "sha256": "8b60e456536167676774dbbcb02e32a1a69bbc25877a84741f274a05daa49cbf",
+      "raw_sha256": "10bf77b346b66beacea785e2f2ac095f57512b8784397bec4756b77d1c491110",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-gameplay-001/skip-pickup-input.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/runs.json.gz",
+      "sha256": "ec3c5c48b6ac189c4c0e9d48702083ed0dbc7013f8b323db44b8ea98d2a60cb9",
+      "raw_sha256": "f308ecf7b5df7caf0c69deadf8b73cfe69c9ce850a40c7b90a30f5ee2e0635e5",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-gameplay-001/runs.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/process-02.json.gz",
+      "sha256": "018c24f5229289391d8c821b14af261d76439091327ae74cf5c667453b5923ff",
+      "raw_sha256": "5f1c69562d70cff24c9a8fe44913947fea0da19a0cda8d32d4512696935d29f0",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-gameplay-001/process-02.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-export-001/export.log.gz",
+      "sha256": "b0cd72bae5a54678b5739d0a9e8b11346dfb43a70e74980b4c39e6b797b748c9",
+      "raw_sha256": "c031087c9dad68f49e8cbfe87a4c74063ab3099c2ae7dd9514585fe527a4349f",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-export-001/export.log"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-export-001/terminal.json.gz",
+      "sha256": "8cf81084d338b3b830928db5cebc0e630d05a4b94db326bd1e64e8accf2130c3",
+      "raw_sha256": "44002befa6fe63d7de927f2f5f993242b597dc697a4424f58e2728e41b263485",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-export-001/terminal.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-export-001/freeze.json.gz",
+      "sha256": "989ee37b3bde93567483ad79f8cf484216d2439e5a1f1cbf82bc85e4e027e598",
+      "raw_sha256": "496f5f1a544755a7383311009069aba4bacbcd69003292026571961d93daf819",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-export-001/freeze.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/process-01.json.gz",
+      "sha256": "88d93f75f361b79f0179091047309937ea62b0409d7f104f780d1c529a00cb33",
+      "raw_sha256": "2f3ed34fd724f5a4a77ee3b20b450666d72f9a45fe8e088cae2d13958a47a56c",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-003/process-01.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/deleted-maps.json.gz",
+      "sha256": "669a4b8812138f2b52b83c24593c756206f70050dc4987153f6db5e80993e0a7",
+      "raw_sha256": "34d1bfd1ba0cb0fbe4099b7b2d6efe0f913de840b6c38b8a8c17701ae7cbf6cd",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-003/deleted-maps.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/process-00.json.gz",
+      "sha256": "fbdec3e96232063cd2131275f045a504df12b90e7d59d1d8fe87a1c8c5ca043d",
+      "raw_sha256": "442b791c759e24848fec446635a7b3a783795a69ab3afeaefe312ede13eb39e9",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-003/process-00.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/win-observe.json.gz",
+      "sha256": "f46447f56dc534cd35fdfa778fa3eaf84cf0200b766b64922e43d71c7948edc5",
+      "raw_sha256": "f477a3badfb468fd72e04780898dd88a50cd16ac3875795807466d83f53165d2",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-003/win-observe.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/win.json.gz",
+      "sha256": "2454a5139af65315abd47d2166a14e280c58ce9bcedd4f146b4c081263551692",
+      "raw_sha256": "64db8a7b02cedda6829834417ff8df106b72cd1eb446ad566cdccb206d445432",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-003/win.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/process-06.json.gz",
+      "sha256": "30350d79a45b3066c6c56f25fb87a482214b4e8806ac6004716575b94873011c",
+      "raw_sha256": "63b5059719c3c2d37812783d53614e8c0ede1e4833ce7d9a7a4cec33f0316f4c",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-003/process-06.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/authoring-calls.json.gz",
+      "sha256": "de28fcd7ce3afafc557fc53e4166ffff9088713a761c1012dff6ec6e3a2b5c3d",
+      "raw_sha256": "50c4645d7f93e8c1ad167675cf597938e0d2d61fb6e55f11657601b8d64a44ae",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-003/authoring-calls.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/process-05.json.gz",
+      "sha256": "c5dc2b9ce40fbf0018b9512a2386c42d529dd2c835cfcf05cda35e9f4ef61f95",
+      "raw_sha256": "ee0d8d2ee4aff50969123c6a90b979d0cc43776b07ce64bd1db6a3b5e216a70f",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-003/process-05.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/process-04.json.gz",
+      "sha256": "55d40a4ad20d1f3a67131756eb925ca8389b6431d073b2ed5c944da236adc763",
+      "raw_sha256": "b63bb1b40e33a4e2d2c821856e656926cae4eadeea50d5ea1b14c8a88f2b3bee",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-003/process-04.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/win.pcm.gz",
+      "sha256": "ac854987a04401e404bc68b4d56e83fe952901d1cbc679235ff7b82d43b81a1a",
+      "raw_sha256": "5cc3227745f064c559e7f17dbe260006981b6b82d47dd0d92e2f13c5884de996",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-003/win.pcm"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/original-helper.py.gz",
+      "sha256": "76636ac96e7509e456a4a63a8bc7f71f12aaf52fb6d98c363990a89e826f995c",
+      "raw_sha256": "fc374493d485f224c0112f218c6926b04f75fc867a2e16b42720cb69b5e6a179",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-003/original-helper.py"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/process-03.json.gz",
+      "sha256": "e8c46c18b771f2ddc73dc560e1f858d78126c6aa307e33b01216ed7ebf28007a",
+      "raw_sha256": "8cd07ae35db70a8b6531f2f4f50e649c717aeee6f962ab081637f76ff7c0da96",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-003/process-03.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/deleted-authoring.json.gz",
+      "sha256": "e5712830cc14b46bd54039da22df8f6599826a3086263eede2ce0e419226246f",
+      "raw_sha256": "5edb6c6ebae1581a9dbf9bc0323911c477b860c16be21b783a35ae7410a1fe82",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-003/deleted-authoring.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/win-input.json.gz",
+      "sha256": "1fd02f62fe580dd92dd698b4bfbe94f1f6a0d5d2217dce6f5f66c904ae1cd3c6",
+      "raw_sha256": "aedbc57164dcdd45652c98f5c67e5f3987472eed5625f56ac0af0f9fea0cc731",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-003/win-input.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/process-02.json.gz",
+      "sha256": "3b36c5152a9118e7e590b26efa5d191f0cc69fcd7d10d9ea4be98ea98ce14647",
+      "raw_sha256": "107a6c03bc77955403ac1f3ce55a36af526864a2756c0ab464c764c57b40787a",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-003/process-02.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-004/process-01.json.gz",
+      "sha256": "17028dd31b22ed232be050ee2e31990c7b6aae439cfc010d363e456b3f61bb81",
+      "raw_sha256": "6ab998f426da1b37b6b907e38730b89c543e38abedb38b9900cd929e707a51cf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004/process-01.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-004/repeat-win.json.gz",
+      "sha256": "2454a5139af65315abd47d2166a14e280c58ce9bcedd4f146b4c081263551692",
+      "raw_sha256": "64db8a7b02cedda6829834417ff8df106b72cd1eb446ad566cdccb206d445432",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004/repeat-win.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-004/lose-input.json.gz",
+      "sha256": "cb81adeb43532701eedf372d1d963e33ade64d8b5fe24f46b6ad175e2d7ca8a1",
+      "raw_sha256": "e4707335c2d5116ef604c1976dbd864eeafab305cecd583a20795dd0d2976227",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004/lose-input.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-004/repeat-win-input.json.gz",
+      "sha256": "1fd02f62fe580dd92dd698b4bfbe94f1f6a0d5d2217dce6f5f66c904ae1cd3c6",
+      "raw_sha256": "aedbc57164dcdd45652c98f5c67e5f3987472eed5625f56ac0af0f9fea0cc731",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004/repeat-win-input.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-004/result.json.gz",
+      "sha256": "83ee713c4d8ca98ae5fc28ef79dc04079df6f4986ff8b4eb0dfa3b9821917fb6",
+      "raw_sha256": "46e26f99ba1f06e68559a56340154c15896c4d0f055807c2e35a8fc0f7b545aa",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004/result.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-004/process-00.json.gz",
+      "sha256": "45657d1a79dd3b87776da9aedb5a6704281a97e80c180bf200f40c4184662eda",
+      "raw_sha256": "c89d5c01ec95791a45db827cec13d1c1ab8a0862cbd48d31d1f5b6e291e5f934",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004/process-00.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-004/repeat-win.pcm.gz",
+      "sha256": "ac854987a04401e404bc68b4d56e83fe952901d1cbc679235ff7b82d43b81a1a",
+      "raw_sha256": "5cc3227745f064c559e7f17dbe260006981b6b82d47dd0d92e2f13c5884de996",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004/repeat-win.pcm"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-004/win-observe.json.gz",
+      "sha256": "f46447f56dc534cd35fdfa778fa3eaf84cf0200b766b64922e43d71c7948edc5",
+      "raw_sha256": "f477a3badfb468fd72e04780898dd88a50cd16ac3875795807466d83f53165d2",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004/win-observe.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-004/win.json.gz",
+      "sha256": "2454a5139af65315abd47d2166a14e280c58ce9bcedd4f146b4c081263551692",
+      "raw_sha256": "64db8a7b02cedda6829834417ff8df106b72cd1eb446ad566cdccb206d445432",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004/win.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-004/lose.json.gz",
+      "sha256": "003ac17d8494f7bb8e539b12764d66dd818c1e3b87674c1f39478ccaec4ac5cb",
+      "raw_sha256": "451c4b93fac661f63d7d22e0a080b003c8f6ab42d4ca954ca06d4460ef5d4e22",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004/lose.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-004/repeat-win-observe.json.gz",
+      "sha256": "f46447f56dc534cd35fdfa778fa3eaf84cf0200b766b64922e43d71c7948edc5",
+      "raw_sha256": "f477a3badfb468fd72e04780898dd88a50cd16ac3875795807466d83f53165d2",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004/repeat-win-observe.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-004/lose.pcm.gz",
+      "sha256": "65bb543fe85450e7b8f97666866a3028f068de7daa073078db3d27c4e1fb2f89",
+      "raw_sha256": "c4baa82e7504eb240b6d4fa8108ff53530c4b4fa13176cac7bb2b4e9b13bc625",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004/lose.pcm"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-004/win.pcm.gz",
+      "sha256": "ac854987a04401e404bc68b4d56e83fe952901d1cbc679235ff7b82d43b81a1a",
+      "raw_sha256": "5cc3227745f064c559e7f17dbe260006981b6b82d47dd0d92e2f13c5884de996",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004/win.pcm"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-004/package-before.json.gz",
+      "sha256": "9700e224b784e95ad7eeaa427b601e7695c1aa7a55d94988269682eec1bf5d12",
+      "raw_sha256": "a26d875329c8a0bb79b8c41b3587c142e3d582c233f15e6d27e9cf9c839ad7ed",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004/package-before.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-004/win-input.json.gz",
+      "sha256": "1fd02f62fe580dd92dd698b4bfbe94f1f6a0d5d2217dce6f5f66c904ae1cd3c6",
+      "raw_sha256": "aedbc57164dcdd45652c98f5c67e5f3987472eed5625f56ac0af0f9fea0cc731",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004/win-input.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-004/lose-observe.json.gz",
+      "sha256": "9f3982db857ece5d92a1930f7c2d4a1390b932c03aeb0db1186ecda0b123c207",
+      "raw_sha256": "11c62726be7f32a1fca5d7224420afaa34febb43e76e26dc4db55d3de277fa5c",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004/lose-observe.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-004/process-02.json.gz",
+      "sha256": "dbb7cd4b4ef5837fae0a214edb478a61658f3ace57e55927df1703246d3ed287",
+      "raw_sha256": "bd4f8456bc71e51521cb1d3d47356c46c2ae8cc5a97c8d9b98fba678010d2597",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004/process-02.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/package/export.json.gz",
+      "sha256": "ad847b0615be5bd940a350208ce0ee06416905d1784c1e26d3ffe0c840798fa8",
+      "raw_sha256": "c341c465695afad5c31ee33245565d9e0b4212d8619e0dab5b785f23a76bc4fd",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-003/package/export.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/package/project-build.json.gz",
+      "sha256": "707af1c4661d12c41e61ee7ab6217ba39a91b5aa720ded8791c32b84d0243baf",
+      "raw_sha256": "31da313ff6974e8093c50254dbb255eb1f647ce6fe307502c342b08ebfb04631",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-003/package/project-build.json"
+    },
+    {
+      "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/package/build.log.gz",
+      "sha256": "ff3ce8e03d270d36cc1495185fd951ad3a0d97c4c2abfa8cf0d9eb6a77c2170f",
+      "raw_sha256": "18cb0f8a52fdcebdadf890bc50ecde0b73faafee6eae84beec26e871e5f6f2c4",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-003/package/build.log"
+    }
+  ],
+  "limits": [
+    "Numerical UI fixture, no visual approval",
+    "Observed test wrapper; production gameplay preserved",
+    "Ordinary CPU exported numerical fixture; authored visual level and physics saves remain separate",
+    "Per-cue once semantics source-reviewed; this probe doesnot independently inspecteach audio transport epoch.",
+    "Native-play screen-spaceUI is stillunsupported; this proof usesordinarygameplayer."
+  ],
+  "final_review": {
+    "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-bindings-final-20261012.json",
+    "sha256": "927907c779d8ecf956aa1d2d62aed1553ebafa3705c5f9afdd4ef539506695a8",
+    "accepted": true,
+    "findings": []
+  }
+}
