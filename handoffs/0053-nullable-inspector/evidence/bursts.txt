@@ -1,0 +1,33 @@
+2026-10-12T01:35:55Z burst start, frontmost 1866
+{"focused":null}
+2026-10-12T01:35:57Z burst end, exit 0, frontmost 1866
+2026-10-12T01:38:40Z burst start, frontmost 1866
+{"focused":null}
+2026-10-12T01:38:43Z burst end, exit 0, frontmost 1866
+2026-10-12T01:41:42Z burst start, frontmost 1866
+{"focused":null}
+2026-10-12T01:41:47Z burst end, exit 0, frontmost 1866
+2026-10-12T01:47:18Z burst start, frontmost 1866
+{"focused":null}
+2026-10-12T01:47:19Z burst end, exit 1, frontmost 1866
+2026-10-12T01:47:26Z burst start, frontmost 1866
+{"focused":null}
+2026-10-12T01:47:38Z burst end, exit 0, frontmost 1866
+2026-10-12T01:51:24Z burst start, frontmost 1866
+{"focused":null}
+2026-10-12T01:51:36Z burst end, exit 0, frontmost 1866
+2026-10-12T01:52:29Z burst start, frontmost 1866
+{"focused":null}
+2026-10-12T01:52:42Z burst end, exit 0, frontmost 1866
+2026-10-12T01:53:19Z burst start, frontmost 1866
+{"focused":null}
+2026-10-12T01:53:22Z burst end, exit 0, frontmost 1866
+2026-10-12T01:53:56Z burst start, frontmost 1866
+{"focused":null}
+2026-10-12T01:54:00Z burst end, exit 0, frontmost 1866
+2026-10-12T01:56:17Z burst start, frontmost 1866
+{"focused":null}
+2026-10-12T01:56:19Z burst end, exit 0, frontmost 1866
+2026-10-12T01:56:43Z burst start, frontmost 1866
+{"focused":null}
+2026-10-12T01:56:44Z burst end, exit 0, frontmost 1866

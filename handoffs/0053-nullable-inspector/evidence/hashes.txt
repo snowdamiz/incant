@@ -1,0 +1,21 @@
+# 0053 input and output hashes (sha256). <worktree> = this handoff worktree, <checkout> = its parent checkout.
+
+## Packet inputs: all verified before launch; the editor hash again by launch.sh at 01:30:33Z
+5b92610710a5e441586358de19f44c620ab2b11ee414b21ec20620a70e212fe6  <worktree>/handoffs/0053-nullable-inspector/build.json
+67f60a8e882011deb18288f8b470cc50abe4642096f1d5014ba9822a716ddd62  /tmp/incant-nullable-inspector-0053-bin-v1/manifest.json
+677f3955970e5f63621dbc4a5ac0df09dce2c90d520b5278918da6ffcd3ae5f4  /tmp/incant-nullable-inspector-0053-bin-v1/incant_editor
+069789bef712fa54c17ffab6a19415581f06bc18fb85ea7d84bc1449913056f2  /tmp/incant-animation-native-review-v2-manifest.json
+
+## Raw window captures (local, git-ignored; screencapture -o -x -l <window>)
+b4bfe0b693341fac2243119b124c5271a8eb9852633a6cabb8b1c05e2409cd28  <worktree>/artifacts/0053/raw/01-authoring-1440.png
+efe26b34a321ac53a69e71293588620788a055345a8e7950c304c4ea9fe8212d  <worktree>/artifacts/0053/raw/02-paused-1440.png
+e1b0d788e650f06693bf77625456b33674297c83d2224451302b943577f9e5fb  <worktree>/artifacts/0053/raw/03-paused-1000x650.png
+
+## Committed images (avatar filled in 01-03; 04 is a crop sheet of 0052 01 and 0053 01 and 03)
+fe4b79a4d5ac1447530d1bc8c06a174300f7e7eb1e1021da30b926f8daca7afe  <worktree>/handoffs/0053-nullable-inspector/screenshots/native/01-authoring-1440x875-clip-0.png
+b75d0de6a54b2f20509a9614a93db39d32fa56af6e46c0119acf1d62c51f14fb  <worktree>/handoffs/0053-nullable-inspector/screenshots/native/02-paused-tick10-1440x875-runtime-and-animation.png
+65c640b8d3abb4daa8bb5599367d19b41946d7bee17978a6309093e73fad20a8  <worktree>/handoffs/0053-nullable-inspector/screenshots/native/03-paused-tick195-1000x650.png
+36c219cd65da0d3ed0f441913f9a736fe35b75abfa4f51fd26b46db9c8636172  <worktree>/handoffs/0053-nullable-inspector/screenshots/native/04-crop-clip-before-after-1440-and-1000.png
+
+## Prior evidence read, not changed
+cf79269df03b2b94b3157b821649d31076c85400332005786fad1f4cea8921e5  <worktree>/handoffs/0052-native-animation/screenshots/native/01-authoring-1440x875-rig-selected.png
