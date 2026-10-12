@@ -16,6 +16,16 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Rust/Wasm audio transport — current-main execution verified
+
+The accepted ops59–61 pass 483 actual-host cases and all 12 integration checks.
+A fresh ordinary exported player runs three source/map/build-deleted 96-tick cases
+with 17,856 declaration scalars and 248 observations each, exact native-oracle PCM,
+and thirteen precise no-output refusals. All accepted source inputs remain exact;
+independent integration review and fast publication are pending. Desired state
+snapshots do not expose mixer cursors; whole guest saves and device gates stay open.
+[Current integration evidence](docs/spikes/native-wasm-audio-main166.md).
+
 ## Wasm HUD controls — current-main execution verified
 
 The unchanged accepted ABI passes 469 actual-host cases, Clippy and target/tooling
