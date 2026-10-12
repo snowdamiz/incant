@@ -1,0 +1,18 @@
+{
+  "at": "2026-10-12T06:00:52.255072+00:00",
+  "source_review": "No new finding. Three explicit integration differences preserve main APIs/dependencies, nineteen renderer source inputs match accepted Claude source. Numerical/source-only review; no pixel review.",
+  "accepted_evidence_sha256": "961867fdd1f8cf13e9076a0782d2af41214b2a6fd4b8dd693562cd8060f0bc7e",
+  "frozen_inputs_verified": 1474,
+  "source_inputs_verified": 22,
+  "logs_verified": 7,
+  "receipts_verified": 4,
+  "cpu_passed": 206,
+  "groups": 40,
+  "ignored_gpu": 89,
+  "same_tree": "379c9a518a71a966acd1764eae9038327261bfe7",
+  "limits": [
+    "Original Claude offscreen/numerical/appearance acceptance remains tied to its exact frozen build; no fresh current-main GPU or shipping package execution here.",
+    "SUPPORTS_UI now allows existing native-window UI startup; reserved-frame/viewport correction and actual native-window acceptance remain separately queued root work.",
+    "No native OS IME interaction, canonical OS caret placement, HiDPI glyph raster acceptance, phone performance or complete Game UI/phase gate."
+  ]
+}
