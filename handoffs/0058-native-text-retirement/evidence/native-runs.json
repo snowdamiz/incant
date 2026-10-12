@@ -1,0 +1,383 @@
+{
+  "format": "incant-0058-native-runs",
+  "player": "pkg-1/player/incant_game_player --package data --window (ordinary composed player, exec-launched child of tools/launch.sh, which waits and records the real exit status)",
+  "event_mechanisms": {
+    "keys": "CGEvent keyDown/keyUp, US virtual key codes, kCGHIDEventTap; Shift/Option as real flagsChanged",
+    "live_composition": "U.S. layout dead key Option-E then E: macOS marked text then commit (not synthetic)",
+    "unicode_text": "CGEvent key events carrying a Unicode string, committed through the managed NSTextInputContext; not an Arabic layout or CJK input method",
+    "pointer": "CGEvent mouseMoved/leftMouseDown/leftMouseUp at kCGHIDEventTap (one click, r2)",
+    "blur_refocus": "System Events app activation of the previous front app, then of the player",
+    "close": "AX close button press (CloseRequested), so the player prints its report",
+    "capture": "screencapture -o -x -l <player window id>, window only",
+    "input_sources_enabled": [
+      "com.apple.keylayout.US (current)",
+      "com.apple.CharacterPaletteIM",
+      "com.apple.PressAndHold"
+    ]
+  },
+  "guards": "every launch/burst waited for an unlocked awake display and 20 s HID idle (our own events count, so the wait is conservative); every event rechecked that the player was frontmost, the session unlocked and the pointer unmoved; the previous front app and pointer were restored",
+  "runs": {
+    "r1-latin": {
+      "pid": 28900,
+      "purpose": "repeated Latin edit, field switches and blur/refocus, close with a field focused",
+      "bursts": [
+        "p1a",
+        "p1b",
+        "p1c"
+      ],
+      "steps": [
+        [
+          "p1a",
+          "Tab x4 -> Name, End",
+          "capture p1-01: caret after \"Ada Lovelace\""
+        ],
+        [
+          "p1a",
+          "keys \" Byron\", Shift+Left x5",
+          "capture p1-02: \"Byron\" selected"
+        ],
+        [
+          "p1a",
+          "Right; Tab -> Arabic (R1); End; key b",
+          "b committed into Arabic"
+        ],
+        [
+          "p1a",
+          "Tab -> CJK (R2); End; key c",
+          "c committed into CJK"
+        ],
+        [
+          "p1a",
+          "Shift-Tab -> Arabic (R3); End; key d",
+          "d committed into Arabic"
+        ],
+        [
+          "p1a",
+          "Shift-Tab -> Name (R4); End; key e",
+          "e committed into Name"
+        ],
+        [
+          "p1a",
+          "activate previous app: window blur with Name focused (R5)",
+          "process alive 25 s later"
+        ],
+        [
+          "p1b",
+          "raise; Tab x4 -> Name; End; key f; blur (R6)",
+          "f in Name"
+        ],
+        [
+          "p1b",
+          "refocus; Tab x5 -> Arabic; End; key g; blur (R7)",
+          "g in Arabic: UI focus was not restored"
+        ],
+        [
+          "p1b",
+          "refocus; Tab x6 -> CJK; End; key h; blur (R8)",
+          "h in CJK; process alive 21 s later"
+        ],
+        [
+          "p1c",
+          "raise; Tab x4 -> Name; End",
+          "capture p1-03: all three fields"
+        ],
+        [
+          "p1c",
+          "AX close button with Name focused (R9 at loop exit)",
+          "exit 0, report ui.focus = Name"
+        ]
+      ],
+      "retirements": {
+        "field_switch": 4,
+        "blur_with_field_focused": 4,
+        "close_with_field_focused": 1
+      },
+      "final_fields_observed": {
+        "Name": "Ada Lovelace Byronef",
+        "Arabic": "سلام + bdg (rendered bdg|سلام, RTL)",
+        "CJK": "中文ch"
+      },
+      "exit": {
+        "exit_status": 0,
+        "signal": null,
+        "ended_at": "2026-10-12T16:31:54Z",
+        "native_report_printed": true,
+        "new_crash_reports": []
+      },
+      "native_report": {
+        "accepted_frames": 1219,
+        "adapter": "Apple M5 Pro",
+        "backend": "Metal",
+        "discarded_stale_text_events": 0,
+        "dropped_wall_ticks": "0",
+        "lifecycle_probe": null,
+        "mode": "native-window",
+        "on_screen": true,
+        "presentation_refreshes": 0,
+        "surface_reconfigurations": 1,
+        "surface_recreations": 0,
+        "surface_skipped": 1,
+        "tick": 1219,
+        "ui": {
+          "focus": "0000000000000000000000582B",
+          "glyph_quads": 103,
+          "gpu_bytes": 21869,
+          "quads": 164,
+          "relayouts": 0,
+          "scale_factor": 1.0,
+          "uploads": {
+            "atlas_bytes": 151810,
+            "atlas_textures": 14,
+            "frame_writes": 1,
+            "quad_buffers": 51,
+            "quad_bytes": 519872
+          },
+          "viewport": [
+            640.0,
+            480.0
+          ],
+          "widgets": 12
+        }
+      },
+      "captures": {
+        "p1-01-name-caret": "c7690e0161fa64f778dc81a751374f104fa388308a6d7f86585cd3219f26529c",
+        "p1-02-name-selection": "cb06f618a8c2e194845286b82e37b69668ff232e14acf54889cebc587373317c",
+        "p1-03-after-retirements": "bb52c3acbf3ae7cbf16fdc7650b2ee9d938db80fc6c22891dc284691b1972748"
+      }
+    },
+    "r2-deadkey": {
+      "pid": 30776,
+      "purpose": "live U.S. dead-key composition (Option-E) retired by blur, pointer focus change and close",
+      "bursts": [
+        "p2a",
+        "p2b"
+      ],
+      "steps": [
+        [
+          "p2a",
+          "Tab x4 -> Name; End; keys \" Byron\"; Option-E",
+          "capture p2-01: live marked \"´\", underlined, IME caret"
+        ],
+        [
+          "p2a",
+          "blur while marked (R1, composition active)",
+          "process alive 38 s later"
+        ],
+        [
+          "p2b",
+          "raise; Tab x5 -> Arabic; End; key e",
+          "plain e in Arabic: no dead-key carry-over"
+        ],
+        [
+          "p2b",
+          "Shift-Tab -> Name (R2); End; Option-E",
+          "marked text in Name (not captured)"
+        ],
+        [
+          "p2b",
+          "pointer click into CJK while marked (R3, composition active)",
+          "CJK focused; crate not lifted"
+        ],
+        [
+          "p2b",
+          "End; key e",
+          "plain e in CJK: no \"´\" or \"é\" from the retired Name context"
+        ],
+        [
+          "p2b",
+          "Shift-Tab -> Arabic (R4); Shift-Tab -> Name (R5); End; Option-E; key e",
+          "é committed into Name"
+        ],
+        [
+          "p2b",
+          "capture",
+          "capture p2-02: all three fields"
+        ],
+        [
+          "p2b",
+          "Option-E; AX close while marked (R6 at loop exit, composition active)",
+          "exit 0, report ui.focus = Name"
+        ]
+      ],
+      "retirements": {
+        "field_switch": 3,
+        "pointer_field_switch_while_composing": 1,
+        "blur_while_composing": 1,
+        "close_while_composing": 1
+      },
+      "final_fields_observed": {
+        "Name": "Ada Lovelace Byroné",
+        "Arabic": "سلام + e (rendered e|سلام, RTL)",
+        "CJK": "中文e"
+      },
+      "click_submit_note": "The click focused CJK but did not submit it, so the crate stayed down. Inferred from source: focus loss cancelled the Name preedit, the display text changed, the layout generation advanced and UiInput cancelled the captured press, suppressing the release. A plain click into an unfocused field (0057) still submits; that limitation is unchanged.",
+      "exit": {
+        "exit_status": 0,
+        "signal": null,
+        "ended_at": "2026-10-12T16:33:11Z",
+        "native_report_printed": true,
+        "new_crash_reports": []
+      },
+      "native_report": {
+        "accepted_frames": 770,
+        "adapter": "Apple M5 Pro",
+        "backend": "Metal",
+        "discarded_stale_text_events": 0,
+        "dropped_wall_ticks": "0",
+        "lifecycle_probe": null,
+        "mode": "native-window",
+        "on_screen": true,
+        "presentation_refreshes": 0,
+        "surface_reconfigurations": 1,
+        "surface_recreations": 0,
+        "surface_skipped": 1,
+        "tick": 770,
+        "ui": {
+          "focus": "0000000000000000000000582B",
+          "glyph_quads": 100,
+          "gpu_bytes": 21418,
+          "quads": 162,
+          "relayouts": 0,
+          "scale_factor": 1.0,
+          "uploads": {
+            "atlas_bytes": 172193,
+            "atlas_textures": 16,
+            "frame_writes": 1,
+            "quad_buffers": 29,
+            "quad_bytes": 290432
+          },
+          "viewport": [
+            640.0,
+            480.0
+          ],
+          "widgets": 12
+        }
+      },
+      "captures": {
+        "p2-01-name-deadkey-preedit": "c8184ddd6dca90b96f7f1de2c6aeca8669d4f11d993cdc28e27d020eb01fa7c3",
+        "p2-02-after-composition-retirements": "c4b468eada061aea2a90a96ce78fec4be58a363941f5b5b4dc26d88c2c47f8d2"
+      }
+    },
+    "r3-unicode": {
+      "pid": 32684,
+      "purpose": "Unicode-string RTL/CJK commits, field switches, blur and close with CJK focused",
+      "bursts": [
+        "p3a",
+        "p3b"
+      ],
+      "steps": [
+        [
+          "p3a",
+          "Tab x5 -> Arabic; End; unicode \" مرحبا\"",
+          "Arabic commits"
+        ],
+        [
+          "p3a",
+          "Tab -> CJK (R1); End; unicode \"日本語\"",
+          "CJK commits"
+        ],
+        [
+          "p3a",
+          "blur with CJK focused (R2)",
+          "process alive 20 s later"
+        ],
+        [
+          "p3b",
+          "raise; Tab x5 -> Arabic; End; unicode \" نعم\"",
+          "Arabic commits"
+        ],
+        [
+          "p3b",
+          "Tab -> CJK (R3); End; unicode \"一\"; Shift+Left x2",
+          "capture p3-01: \"語一\" selected"
+        ],
+        [
+          "p3b",
+          "Shift-Tab -> Arabic (R4); Tab -> CJK (R5)",
+          "no text typed"
+        ],
+        [
+          "p3b",
+          "AX close with CJK focused (R6 at loop exit)",
+          "exit 0, report ui.focus = CJK"
+        ]
+      ],
+      "retirements": {
+        "field_switch": 4,
+        "blur_with_field_focused": 1,
+        "close_with_field_focused": 1
+      },
+      "final_fields_observed": {
+        "Name": "Ada Lovelace (unchanged)",
+        "Arabic": "سلام مرحبا نعم",
+        "CJK": "中文日本語一"
+      },
+      "exit": {
+        "exit_status": 0,
+        "signal": null,
+        "ended_at": "2026-10-12T16:34:53Z",
+        "native_report_printed": true,
+        "new_crash_reports": []
+      },
+      "native_report": {
+        "accepted_frames": 665,
+        "adapter": "Apple M5 Pro",
+        "backend": "Metal",
+        "discarded_stale_text_events": 0,
+        "dropped_wall_ticks": "0",
+        "lifecycle_probe": null,
+        "mode": "native-window",
+        "on_screen": true,
+        "presentation_refreshes": 0,
+        "surface_reconfigurations": 1,
+        "surface_recreations": 0,
+        "surface_skipped": 0,
+        "tick": 665,
+        "ui": {
+          "focus": "00000000000000000000005832",
+          "glyph_quads": 103,
+          "gpu_bytes": 22532,
+          "quads": 164,
+          "relayouts": 0,
+          "scale_factor": 1.0,
+          "uploads": {
+            "atlas_bytes": 166787,
+            "atlas_textures": 15,
+            "frame_writes": 1,
+            "quad_buffers": 32,
+            "quad_bytes": 323840
+          },
+          "viewport": [
+            640.0,
+            480.0
+          ],
+          "widgets": 12
+        }
+      },
+      "captures": {
+        "p3-01-rtl-cjk-selection": "1c2b887dd6a0378ca68f9d62990514815d86de0c7b401078b9ac3a5da141d1f6"
+      }
+    }
+  },
+  "retirements_total": 21,
+  "retirement_definition": "one event that ends the active native text session of a focused field: a focus change between fields, a window blur, or close with the field focused. Triggers and their consequences are observed; that each one retired and dropped exactly one managed client is inferred from view.rs set_text_input_session (one managed_text per view, old.retire() then drop) and window/ime.rs synchronize.",
+  "stale_text_events": "discarded_stale_text_events was 0 in all three reports. It counts only stale-session TextInput events that reached the active player; callbacks to a retired client are dropped inside the client and are not observable from outside.",
+  "probe_failure_not_counted": {
+    "run": "p1-latin",
+    "pid": 27789,
+    "exit_status": 1,
+    "stderr": "Error: Failed",
+    "crash_reports": [],
+    "input_sent": false,
+    "observed": [
+      "heap census started 16:28:24Z while the player sat in the background with no text session (0 managed clients, 1 NSTextInputContext)",
+      "the process exited 2 s later with status 1, no native report, no crash report",
+      "unified log at resume: CoreAudio HALC_ProxyIOContext::IOWorkLoop \"skipping cycle due to overload\", window finishing close"
+    ],
+    "inferred": [
+      "the ~1.7 s task suspension broke a real-time audio/device check and ended the session",
+      "window/mod.rs stores every loop error in `failure`; after the first error drops the live session, the end-of-callback text-session sync calls game.host()? and overwrites it with GameError::Failed, so stderr shows only \"Failed\""
+    ],
+    "action": "retained; heap.sh retired; no live process was suspended again"
+  }
+}

@@ -1,0 +1,93 @@
+== real home, lease released
+setup.sh: refused (exit 2) 0058 lease was released; refusing
+build.py headless: refused (exit 1) 0058 lease was released; refusing
+build.py player: refused (exit 1) 0058 lease was released; refusing
+fixture.py: refused (exit 1) 0058 lease was released; refusing
+launch.sh: refused (exit 2) 0058 lease was released; refusing
+burst.sh: refused (exit 2) 0058 lease was released; refusing
+cap.sh: refused (exit 2) 0058 lease was released; refusing
+heap.sh: refused (exit 2) 0058 lease was released; refusing
+winctl idle: refused (exit 2) 0058 lease was released; refusing
+winctl locked: refused (exit 2) 0058 lease was released; refusing
+winctl frontmost: refused (exit 2) 0058 lease was released; refusing
+winctl cursor: refused (exit 2) 0058 lease was released; refusing
+winctl displays: refused (exit 2) 0058 lease was released; refusing
+winctl sources: refused (exit 2) 0058 lease was released; refusing
+winctl warp 0 0: refused (exit 2) 0058 lease was released; refusing
+winctl hold 0: refused (exit 2) 0058 lease was released; refusing
+winctl activate 1: refused (exit 2) 0058 lease was released; refusing
+winctl 1 window: refused (exit 2) 0058 lease was released; refusing
+winctl 1 raise: refused (exit 2) 0058 lease was released; refusing
+winctl 1 close: refused (exit 2) 0058 lease was released; refusing
+winctl 1 key 48: refused (exit 2) 0058 lease was released; refusing
+evidence directory unchanged
+== fake home, expired lease
+setup.sh: refused (exit 2) no valid 0058 lease (missing, foreign or expired); refusing
+build.py headless: refused (exit 1) no valid 0058 lease (foreign, other target or expired); refusing
+build.py player: refused (exit 1) no valid 0058 lease (foreign, other target or expired); refusing
+fixture.py: refused (exit 1) no valid 0058 lease (foreign or expired); refusing
+launch.sh: refused (exit 2) no valid 0058 lease (missing, foreign or expired); refusing
+burst.sh: refused (exit 2) no valid 0058 lease (missing, foreign or expired); refusing
+cap.sh: refused (exit 2) no valid 0058 lease (missing, foreign or expired); refusing
+heap.sh: refused (exit 2) no valid 0058 lease (missing, foreign or expired); refusing
+winctl idle: refused (exit 2) 0058 lease was released; refusing
+winctl locked: refused (exit 2) 0058 lease was released; refusing
+winctl frontmost: refused (exit 2) 0058 lease was released; refusing
+winctl cursor: refused (exit 2) 0058 lease was released; refusing
+winctl displays: refused (exit 2) 0058 lease was released; refusing
+winctl sources: refused (exit 2) 0058 lease was released; refusing
+winctl warp 0 0: refused (exit 2) 0058 lease was released; refusing
+winctl hold 0: refused (exit 2) 0058 lease was released; refusing
+winctl activate 1: refused (exit 2) 0058 lease was released; refusing
+winctl 1 window: refused (exit 2) 0058 lease was released; refusing
+winctl 1 raise: refused (exit 2) 0058 lease was released; refusing
+winctl 1 close: refused (exit 2) 0058 lease was released; refusing
+winctl 1 key 48: refused (exit 2) 0058 lease was released; refusing
+fake home unchanged
+== fake home, foreign lease
+setup.sh: refused (exit 2) no valid 0058 lease (missing, foreign or expired); refusing
+build.py headless: refused (exit 1) no valid 0058 lease (foreign, other target or expired); refusing
+build.py player: refused (exit 1) no valid 0058 lease (foreign, other target or expired); refusing
+fixture.py: refused (exit 1) no valid 0058 lease (foreign or expired); refusing
+launch.sh: refused (exit 2) no valid 0058 lease (missing, foreign or expired); refusing
+burst.sh: refused (exit 2) no valid 0058 lease (missing, foreign or expired); refusing
+cap.sh: refused (exit 2) no valid 0058 lease (missing, foreign or expired); refusing
+heap.sh: refused (exit 2) no valid 0058 lease (missing, foreign or expired); refusing
+winctl idle: refused (exit 2) 0058 lease was released; refusing
+winctl locked: refused (exit 2) 0058 lease was released; refusing
+winctl frontmost: refused (exit 2) 0058 lease was released; refusing
+winctl cursor: refused (exit 2) 0058 lease was released; refusing
+winctl displays: refused (exit 2) 0058 lease was released; refusing
+winctl sources: refused (exit 2) 0058 lease was released; refusing
+winctl warp 0 0: refused (exit 2) 0058 lease was released; refusing
+winctl hold 0: refused (exit 2) 0058 lease was released; refusing
+winctl activate 1: refused (exit 2) 0058 lease was released; refusing
+winctl 1 window: refused (exit 2) 0058 lease was released; refusing
+winctl 1 raise: refused (exit 2) 0058 lease was released; refusing
+winctl 1 close: refused (exit 2) 0058 lease was released; refusing
+winctl 1 key 48: refused (exit 2) 0058 lease was released; refusing
+fake home unchanged
+== fake home, missing lease
+setup.sh: refused (exit 2) no valid 0058 lease (missing, foreign or expired); refusing
+build.py headless: refused (exit 1) no valid 0058 lease; refusing
+build.py player: refused (exit 1) no valid 0058 lease; refusing
+fixture.py: refused (exit 1) no valid 0058 lease; refusing
+launch.sh: refused (exit 2) no valid 0058 lease (missing, foreign or expired); refusing
+burst.sh: refused (exit 2) no valid 0058 lease (missing, foreign or expired); refusing
+cap.sh: refused (exit 2) no valid 0058 lease (missing, foreign or expired); refusing
+heap.sh: refused (exit 2) no valid 0058 lease (missing, foreign or expired); refusing
+winctl idle: refused (exit 2) 0058 lease was released; refusing
+winctl locked: refused (exit 2) 0058 lease was released; refusing
+winctl frontmost: refused (exit 2) 0058 lease was released; refusing
+winctl cursor: refused (exit 2) 0058 lease was released; refusing
+winctl displays: refused (exit 2) 0058 lease was released; refusing
+winctl sources: refused (exit 2) 0058 lease was released; refusing
+winctl warp 0 0: refused (exit 2) 0058 lease was released; refusing
+winctl hold 0: refused (exit 2) 0058 lease was released; refusing
+winctl activate 1: refused (exit 2) 0058 lease was released; refusing
+winctl 1 window: refused (exit 2) 0058 lease was released; refusing
+winctl 1 raise: refused (exit 2) 0058 lease was released; refusing
+winctl 1 close: refused (exit 2) 0058 lease was released; refusing
+winctl 1 key 48: refused (exit 2) 0058 lease was released; refusing
+fake home unchanged
+verdict: 0 failure(s)

@@ -1,0 +1,126 @@
+== processes.log
+2026-10-12T16:20:57Z lease written (/Users/andreyyurlov/.codex/incant-evidence/0058/lease.json); no owned process yet
+2026-10-12T16:22:14Z built winctl from 71254655fc114d9c8018d38b8e3b677cbf29dec07bbc8bb5cd82980ff67e9831 -> bcbcc0bebe5845c56cbf71f37c09dc9fa87c15ccdaec393d45cfd863cba28d84
+2026-10-12T16:23:56Z build incant_headless started: build --locked --offline -j2 -p incant_headless --bin incant_headless --profile ci --message-format=json
+2026-10-12T16:25:23Z build incant_headless ended: exit 0 (process group reaped by native_process)
+2026-10-12T16:25:32Z fixture authoring started (incant_headless init/import/rpc, CPU only)
+2026-10-12T16:25:33Z fixture authoring ended
+2026-10-12T16:25:38Z worktree-root node_modules -> ../../node_modules link created for the TypeScript cook (package-lock.json sha256 cbea068b... identical in both checkouts)
+2026-10-12T16:25:40Z build incant_game_player started: build --locked --offline -j2 -p incant_game_player --bin incant_game_player --features project,native-window --profile ci --message-format=json
+2026-10-12T16:26:34Z build incant_game_player ended: exit 0 (process group reaped by native_process)
+2026-10-12T16:26:34Z startup check started: /Users/andreyyurlov/.codex/incant-evidence/0058/pkg-1/player/incant_game_player --package data --ticks 1 (CPU, no window)
+2026-10-12T16:26:34Z startup check ended: exit 0
+2026-10-12T16:28:09Z launched p1-latin pid 27789 (/Users/andreyyurlov/.codex/incant-evidence/0058/pkg-1/player/incant_game_player --package /Users/andreyyurlov/.codex/incant-evidence/0058/pkg-1/player/data --window) sha256 38ee8b96e78bf46a7b4d710084809b34066ee054841a1427d1fde299c7d6cebf; supervisor pid 26717
+2026-10-12T16:28:11Z p1-latin pid 27789 window {"id":673,"x":-2040.0,"y":-158.0,"w":640.0,"h":512.0} scale 1.0 titlebar 32 pt; front returned to 2047 (waited 48s)
+2026-10-12T16:28:24Z heap census 00-baseline of pid 27789
+2026-10-12T16:28:26Z p1-latin pid 27789 exited with status 1; crash reports since launch: none
+2026-10-12T16:30:00Z note: p1-latin pid 27789 ended 2 s after my heap census (task suspension ~1.7 s) with exit 1, stderr 'Error: Failed', no crash report, no native report; unified log: CoreAudio HALC_ProxyIOContext::IOWorkLoop overload at resume, then window close. No input had been sent. Probe-induced failure, retained; heap census is not used on live players again.
+2026-10-12T16:30:16Z launched r1-latin pid 28900 (/Users/andreyyurlov/.codex/incant-evidence/0058/pkg-1/player/incant_game_player --package /Users/andreyyurlov/.codex/incant-evidence/0058/pkg-1/player/data --window) sha256 38ee8b96e78bf46a7b4d710084809b34066ee054841a1427d1fde299c7d6cebf; supervisor pid 28825
+2026-10-12T16:30:17Z r1-latin pid 28900 window {"id":682,"x":-2040.0,"y":-158.0,"w":640.0,"h":512.0} scale 1.0 titlebar 32 pt; front returned to 2048 (waited 4s)
+2026-10-12T16:31:54Z r1-latin pid 28900 exited with status 0; crash reports since launch: none
+2026-10-12T16:32:14Z launched r2-deadkey pid 30776 (/Users/andreyyurlov/.codex/incant-evidence/0058/pkg-1/player/incant_game_player --package /Users/andreyyurlov/.codex/incant-evidence/0058/pkg-1/player/data --window) sha256 38ee8b96e78bf46a7b4d710084809b34066ee054841a1427d1fde299c7d6cebf; supervisor pid 30478
+2026-10-12T16:32:15Z r2-deadkey pid 30776 window {"id":695,"x":-2040.0,"y":-158.0,"w":640.0,"h":512.0} scale 1.0 titlebar 32 pt; front returned to 2045 (waited 8s)
+2026-10-12T16:33:11Z r2-deadkey pid 30776 exited with status 0; crash reports since launch: none
+2026-10-12T16:34:16Z launched r3-unicode pid 32684 (/Users/andreyyurlov/.codex/incant-evidence/0058/pkg-1/player/incant_game_player --package /Users/andreyyurlov/.codex/incant-evidence/0058/pkg-1/player/data --window) sha256 38ee8b96e78bf46a7b4d710084809b34066ee054841a1427d1fde299c7d6cebf; supervisor pid 32658
+2026-10-12T16:34:17Z r3-unicode pid 32684 window {"id":710,"x":-2040.0,"y":-158.0,"w":640.0,"h":512.0} scale 1.0 titlebar 32 pt; front returned to 2047 (waited 0s)
+2026-10-12T16:34:53Z r3-unicode pid 32684 exited with status 0; crash reports since launch: none
+2026-10-12T16:38:35Z worktree-root node_modules link removed
+2026-10-12T16:38:42Z lease released (released marker written); no owned process remains
+
+== bursts.log
+2026-10-12T16:30:45Z burst start, run r1-latin, pid 28900, frontmost 2045, cursor -1787.62890625 619.89453125, waited 22s: # p1a: Tab to Name (caret capture), type, select (capture), then four field switches with one
+# distinct Latin letter each, and a window blur with Name focused (retirements R1-R5).
+$W $P raise && $W hold 0.6 &&
+$W $P key 48 && $W $P key 48 && $W $P key 48 && $W $P key 48 && $W hold 0.4 &&
+$W $P key 119 && $W hold 0.3 &&
+$C p1-01-name-caret &&
+$W $P keys " Byron" && $W hold 0.3 &&
+for i in 1 2 3 4 5; do $W $P key 123 shift || exit 7; done && $W hold 0.3 &&
+$C p1-02-name-selection &&
+$W $P key 124 && $W hold 0.2 &&
+$W $P key 48 && $W hold 0.3 && $W $P key 119 && $W $P keys b && $W hold 0.3 &&
+$W $P key 48 && $W hold 0.3 && $W $P key 119 && $W $P keys c && $W hold 0.3 &&
+$W $P key 48 shift && $W hold 0.3 && $W $P key 119 && $W $P keys d && $W hold 0.3 &&
+$W $P key 48 shift && $W hold 0.3 && $W $P key 119 && $W $P keys e && $W hold 0.3 &&
+$W activate $PREV >/dev/null && $W hold 0.8
+2026-10-12T16:30:56Z burst end, exit 0, frontmost 2045, cursor -1787.0 619.0
+2026-10-12T16:31:21Z burst start, run r1-latin, pid 28900, frontmost 2045, cursor -1787.0 619.0, waited 0s: # p1b: three blur/refocus cycles, each with a different field focused and one letter typed
+# (retirements R6-R8). Refocus does not restore UI focus, so each cycle Tabs to its field.
+$W $P raise && $W hold 0.6 &&
+$W $P key 48 && $W $P key 48 && $W $P key 48 && $W $P key 48 && $W hold 0.4 &&
+$W $P key 119 && $W $P keys f && $W hold 0.3 &&
+$W activate $PREV >/dev/null && $W hold 0.8 &&
+$W activate $P >/dev/null && $W hold 0.6 &&
+$W $P key 48 && $W $P key 48 && $W $P key 48 && $W $P key 48 && $W $P key 48 && $W hold 0.4 &&
+$W $P key 119 && $W $P keys g && $W hold 0.3 &&
+$W activate $PREV >/dev/null && $W hold 0.8 &&
+$W activate $P >/dev/null && $W hold 0.6 &&
+$W $P key 48 && $W $P key 48 && $W $P key 48 && $W $P key 48 && $W $P key 48 && $W $P key 48 && $W hold 0.4 &&
+$W $P key 119 && $W $P keys h && $W hold 0.3 &&
+$W activate $PREV >/dev/null && $W hold 0.8
+2026-10-12T16:31:31Z burst end, exit 0, frontmost 2045, cursor -1787.0 619.0
+2026-10-12T16:31:52Z burst start, run r1-latin, pid 28900, frontmost 2045, cursor -1787.0 619.0, waited 12s: # p1c: Tab to Name, capture all three fields, then close through the AX close button with
+# Name focused (retirement R9 at exit).
+$W $P raise && $W hold 0.6 &&
+$W $P key 48 && $W $P key 48 && $W $P key 48 && $W $P key 48 && $W hold 0.4 &&
+$W $P key 119 && $W hold 0.3 &&
+$C p1-03-after-retirements &&
+$W $P close >/dev/null
+2026-10-12T16:31:55Z burst end, exit 0, frontmost 2045, cursor -1787.0 619.0
+2026-10-12T16:32:20Z burst start, run r2-deadkey, pid 30776, frontmost 2045, cursor -1787.0 619.0, waited 0s: # p2a: Tab to Name, type, live dead key Option-E (marked text, capture), then blur while the
+# composition is active (retirement R1 with marked text).
+[ "$($W $P scale)" = 1.0 ] || { echo "window is not on the 1x display"; exit 9; }
+$W $P raise && $W hold 0.6 &&
+$W $P key 48 && $W $P key 48 && $W $P key 48 && $W $P key 48 && $W hold 0.4 &&
+$W $P key 119 && $W $P keys " Byron" && $W hold 0.3 &&
+$W $P key 14 alt && $W hold 0.4 &&
+$C p2-01-name-deadkey-preedit &&
+$W activate $PREV >/dev/null && $W hold 0.8
+2026-10-12T16:32:25Z burst end, exit 0, frontmost 2045, cursor -1787.0 619.0
+2026-10-12T16:33:02Z burst start, run r2-deadkey, pid 30776, frontmost 2047, cursor -802.62109375 455.74609375, waited 24s: # p2b: after refocus, E in Arabic (no dead-key carry-over), Shift-Tab to Name (R2), dead key,
+# pointer click into CJK while marked (R3; the click also submits CJK: known limitation),
+# E in CJK, Shift-Tab twice back to Name (R4, R5), live dead-key commit, capture all fields,
+# dead key again and AX close while marked (R6 at exit).
+[ "$($W $P scale)" = 1.0 ] || { echo "window is not on the 1x display"; exit 9; }
+$W $P raise && $W hold 0.6 &&
+$W $P key 48 && $W $P key 48 && $W $P key 48 && $W $P key 48 && $W $P key 48 && $W hold 0.4 &&
+$W $P key 119 && $W $P key 14 && $W hold 0.3 &&
+$W $P key 48 shift && $W hold 0.4 &&
+$W $P key 119 && $W $P key 14 alt && $W hold 0.4 &&
+$W $P click 192 165 && $W hold 0.5 &&
+$W $P key 119 && $W $P key 14 && $W hold 0.3 &&
+$W $P key 48 shift && $W hold 0.3 && $W $P key 48 shift && $W hold 0.4 &&
+$W $P key 119 && $W $P key 14 alt && $W hold 0.3 && $W $P key 14 && $W hold 0.4 &&
+$C p2-02-after-composition-retirements &&
+$W $P key 14 alt && $W hold 0.4 &&
+$W $P close >/dev/null
+2026-10-12T16:33:11Z burst end, exit 0, frontmost 2047, cursor -802.0 455.0
+2026-10-12T16:34:21Z burst start, run r3-unicode, pid 32684, frontmost 2047, cursor -802.0 455.0, waited 0s: # p3a: Unicode-string commits: Arabic into the Arabic field, Tab to CJK (R1), CJK into the
+# CJK field, then blur with CJK focused (R2).
+$W $P raise && $W hold 0.6 &&
+$W $P key 48 && $W $P key 48 && $W $P key 48 && $W $P key 48 && $W $P key 48 && $W hold 0.4 &&
+$W $P key 119 && $W $P unicode " مرحبا" && $W hold 0.4 &&
+$W $P key 48 && $W hold 0.4 &&
+$W $P key 119 && $W $P unicode "日本語" && $W hold 0.4 &&
+$W activate $PREV >/dev/null && $W hold 0.8
+2026-10-12T16:34:27Z burst end, exit 0, frontmost 2047, cursor -802.0 455.0
+2026-10-12T16:34:47Z burst start, run r3-unicode, pid 32684, frontmost 2047, cursor -802.0 455.0, waited 14s: # p3b: after refocus, Arabic commit, Tab to CJK (R3), CJK commit, select two graphemes and
+# capture, Shift-Tab and Tab (R4, R5), then AX close with CJK focused (R6 at exit).
+$W $P raise && $W hold 0.6 &&
+$W $P key 48 && $W $P key 48 && $W $P key 48 && $W $P key 48 && $W $P key 48 && $W hold 0.4 &&
+$W $P key 119 && $W $P unicode " نعم" && $W hold 0.4 &&
+$W $P key 48 && $W hold 0.4 &&
+$W $P key 119 && $W $P unicode "一" && $W hold 0.3 &&
+$W $P key 123 shift && $W $P key 123 shift && $W hold 0.3 &&
+$C p3-01-rtl-cjk-selection &&
+$W $P key 48 shift && $W hold 0.3 && $W $P key 48 && $W hold 0.4 &&
+$W $P close >/dev/null
+2026-10-12T16:34:53Z burst end, exit 0, frontmost 2047, cursor -802.0 455.0
+
+== images.log
+2026-10-12T16:30:48Z capture /Users/andreyyurlov/.codex/incant-evidence/0058/runs/r1-latin/caps/p1-01-name-caret.png window 682 pid 28900 frontmost 28900 {"id":682,"x":-2040.0,"y":-158.0,"w":640.0,"h":512.0}
+2026-10-12T16:30:50Z capture /Users/andreyyurlov/.codex/incant-evidence/0058/runs/r1-latin/caps/p1-02-name-selection.png window 682 pid 28900 frontmost 28900 {"id":682,"x":-2040.0,"y":-158.0,"w":640.0,"h":512.0}
+2026-10-12T16:31:54Z capture /Users/andreyyurlov/.codex/incant-evidence/0058/runs/r1-latin/caps/p1-03-after-retirements.png window 682 pid 28900 frontmost 28900 {"id":682,"x":-2040.0,"y":-158.0,"w":640.0,"h":512.0}
+2026-10-12T16:32:24Z capture /Users/andreyyurlov/.codex/incant-evidence/0058/runs/r2-deadkey/caps/p2-01-name-deadkey-preedit.png window 695 pid 30776 frontmost 30776 {"id":695,"x":-2040.0,"y":-158.0,"w":640.0,"h":512.0}
+2026-10-12T16:33:10Z capture /Users/andreyyurlov/.codex/incant-evidence/0058/runs/r2-deadkey/caps/p2-02-after-composition-retirements.png window 695 pid 30776 frontmost 30776 {"id":695,"x":-2040.0,"y":-158.0,"w":640.0,"h":512.0}
+2026-10-12T16:34:52Z capture /Users/andreyyurlov/.codex/incant-evidence/0058/runs/r3-unicode/caps/p3-01-rtl-cjk-selection.png window 710 pid 32684 frontmost 32684 {"id":710,"x":-2040.0,"y":-158.0,"w":640.0,"h":512.0}

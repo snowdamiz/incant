@@ -1,0 +1,127 @@
+{
+  "format": "incant-0058-identities",
+  "brief_sha256_applied": "a7e99f03b8940a3ac73c54a4095618df029cb9bef1884ccb94aef1759de8527a",
+  "acp_record": "~/.codex/incant-evidence/0058/acp.log (root): \"Claude session verified: Opus 5.5; thinking: max\"",
+  "source": {
+    "head": "b583c82c78216ad81a548fe5a6bcbe21be4810fb",
+    "tree": "549885bf9a2e4898a1d9dca2ae613ed7d27c26e4",
+    "fix_commit": "f830f49621bf163f266e8bc4ba4cebb9cbb20bc4",
+    "text_input_rs_sha256": "84135a47c8767ac4a7d3bb295d80f896d50e0861eb4fcf105ad804a84e1e623c",
+    "text_input_rs_matches_spike_fixed_hash": true,
+    "worktree_clean_outside_handoff_at_build": true,
+    "not_merged": "0057 shader/reference candidate e2551dd2 and caret accessor ca111ccf are absent"
+  },
+  "toolchain": {
+    "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)",
+    "cargo": "cargo 1.99.0 (5f94df478 2026-08-27)",
+    "rust_toolchain_toml_sha256": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124",
+    "cargo_lock_sha256": "ac059d1a2493d570bd202515e729830c56ecc7758cd808ccd0f245d06abcac7f"
+  },
+  "cargo_target_dir": "/Users/andreyyurlov/.codex/incant-native-target",
+  "binaries": {
+    "incant_headless": {
+      "sha256": "043e1aa8134ae5c5c52e91a67af6da9d8dcb204c3e6d2b26891d60e97645e06b",
+      "bytes": 59215568,
+      "profile": "ci",
+      "command": "build --locked --offline -j2 -p incant_headless --bin incant_headless --profile ci --message-format=json"
+    },
+    "incant_game_player": {
+      "sha256": "38ee8b96e78bf46a7b4d710084809b34066ee054841a1427d1fde299c7d6cebf",
+      "bytes": 31400048,
+      "features": "project,native-window",
+      "profile": "ci",
+      "command": "build --locked --offline -j2 -p incant_game_player --bin incant_game_player --features project,native-window --profile ci --message-format=json",
+      "note": "ordinary player binary; frozen copy in pkg-1/player"
+    },
+    "winctl": {
+      "source_sha256": "71254655fc114d9c8018d38b8e3b677cbf29dec07bbc8bb5cd82980ff67e9831",
+      "binary_sha256": "bcbcc0bebe5845c56cbf71f37c09dc9fa87c15ccdaec393d45cfd863cba28d84"
+    }
+  },
+  "fixture": {
+    "project_sha256": "6c50ea75353961bcffea547541c4bb488b5e9dfe9411072efabcd609410548d0",
+    "script_sha256": "69edca6cc8d030dc5381c542d6aaff6bd533b80fde57db5bdcfd559bcb8ee823",
+    "font_sha256": {
+      "IncantCJKFixture.ttf": "3299d6ab8033fb1d163f892dfcb1b8838cf1c46935c329d82da6f7b9e27dad82",
+      "NotoSans-Regular.ttf": "2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9",
+      "NotoSansArabic.ttf": "ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56"
+    },
+    "revision": 3,
+    "scene": "01M4REY1BEGP2TP8W8FPEBSW74",
+    "command_bus_only": true,
+    "undo_redo": true,
+    "journal_reopened": true,
+    "binary_sha256": "043e1aa8134ae5c5c52e91a67af6da9d8dcb204c3e6d2b26891d60e97645e06b"
+  },
+  "fixture_ids": {
+    "name": "0000000000000000000000582B",
+    "arabic": "0000000000000000000000582E",
+    "cjk": "00000000000000000000005832",
+    "camera": "00000000000000000000005810"
+  },
+  "package": {
+    "data_bytes": 1334534,
+    "data_files": {
+      "world.scene": "79b6433374dc4902a40b5a56aaf4071acd632d197b1c72e034b0e3b40e1d8924",
+      "input-actions.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+      "models/b987f331dba8c90975c9619493ea4f21877af6adae103e84bff75c263dfd76fb.incmodel": "b6b6c12351730a9fbfc574eeb98bdb4bbf1e98e4b4921725d6e4fa6da6503ace",
+      "models/a22841f34ceb0b312f5778f559ea8d20496a43296d835a718885225fee464493.incmodel": "f8976212c00b4a33f13c320c06f87fe4c300897636af7c53fcafe4a13d2ad98b",
+      "models/400d3faa3eb2d93abf5261bec41217742ae53f11589ba293153e7b0c26fca17c.incmodel": "214516cd6f32870b3a71e589df97e1825ac8b95ad863e0ec1241db936bbcbe32",
+      "fonts/9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2.json": "e43c79c54c311c5759bdf686b43b9b112b0177bafd6938782ebb782d75018812",
+      "fonts/2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9.ifont": "92960e6b23eff12e1bf13361b2b94b490d723f8d93e6945ba34b9f9b3acd2081",
+      "fonts/6864e1444bc7002790e682360d3f93bd45fe51b7045a64ecbf0e76e19e6b758e.json": "167d0dc13b807552b06d0195e3a90ee24f5074206dd6d6f2106ad59e65b35fde",
+      "fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont": "8bd20a742cc19c0fe65b106d983ea1ed816c4cd5ca1c3d50bdc4d05aeb5f8e7a",
+      "fonts/1087d4bb69160e3e5955407294226ca3da11166a3188ada3c1a166ba14e55ceb.json": "c3fd206832637ec3ad354dee08b4c67012da904d34a3ce9ec9c97e30f70e07f0",
+      "fonts/3299d6ab8033fb1d163f892dfcb1b8838cf1c46935c329d82da6f7b9e27dad82.ifont": "49e09202aadc1c7463502004f791b596480a92d22e04b9948fabf8648a004814",
+      "clips.bin": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+      "package.json": "bdbd62779cbaf8de476621c7660da3b698fdbe86e26454def95fa8d0e5c4df24"
+    },
+    "camera": "0000000000000000000000000002a020",
+    "scene_id": "01M4REY1BEGP2TP8W8FPEBSW74",
+    "startup_check": {
+      "route": "CPU render-input at --ui-viewport 320x240; no window or GPU device",
+      "ui": {
+        "atlas_sha256": "818aac34d61d6e1eadfcfe2e2fff523a38e7d0140eb0f20ad1f7c7cd1d0d06e5",
+        "focus": null,
+        "glyphs": 99,
+        "values": {
+          "0000000000000000000000582B": "Ada Lovelace",
+          "0000000000000000000000582E": "سلام",
+          "00000000000000000000005832": "中文"
+        },
+        "viewport": [
+          320.0,
+          240.0
+        ],
+        "widgets": 18
+      }
+    }
+  },
+  "host": {
+    "os": "macOS 27.0.1 (26A434)",
+    "machine": "Mac17,9",
+    "cpu": "Apple M5 Pro",
+    "gpu_backend": "Metal (wgpu), adapter \"Apple M5 Pro\"",
+    "displays": [
+      "built-in 1512x982 pt at 2x (main)",
+      "external 3440x1440 at 1x, x -3440..0"
+    ],
+    "player_window": "opened on the external display at (-2040,-158), 640x512 pt, scale 1, in every run"
+  },
+  "lease": {
+    "packet": "0058-native-text-retirement",
+    "lease": "exclusive native-window/GPU review and warm cargo target for this handoff",
+    "granted_by": "handoffs/0058-native-text-retirement/brief.md, 'Resource and desktop rules'",
+    "brief_sha256": "a7e99f03b8940a3ac73c54a4095618df029cb9bef1884ccb94aef1759de8527a",
+    "cargo_target_dir": "/Users/andreyyurlov/.codex/incant-native-target",
+    "evidence": "/Users/andreyyurlov/.codex/incant-evidence/0058",
+    "started_at": "2026-10-12T16:20:57+00:00",
+    "expires_at": "2026-10-12T21:20:57+00:00",
+    "release_marker": "/Users/andreyyurlov/.codex/incant-evidence/0058/released",
+    "capture_budget": 12,
+    "source_head": "b583c82c78216ad81a548fe5a6bcbe21be4810fb",
+    "source_tree": "549885bf9a2e4898a1d9dca2ae613ed7d27c26e4",
+    "note": "Fresh 0058 lease. 0057 tools, markers and processes are never reopened; only 0057 files are read as reference."
+  }
+}
