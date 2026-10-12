@@ -1,0 +1,109 @@
+{
+  "source": "edfc443763a6850fda58607b317c4638608e1f1d",
+  "actual_main": "94c4927abadb10d2203db2e1ab031de7853947fa",
+  "core": "dc383d8bf2260c81221a572f17408f92ec87fd16",
+  "authoring": "1c8e6979862701140409a108c6372df0bcd8fc40",
+  "script": "4183af8d782791ae35555facc23866e40fc3d762",
+  "renderer": "cdd090324285c9822119ee2340ae00f56e94e375",
+  "checkpoint_fix": "430972705160795fd131b0ebaa0eaf3499fd7a55",
+  "earlier_union": {
+    "source": "42f57fd",
+    "tests": {
+      "groups": 60,
+      "passed": 397,
+      "failed": 0,
+      "ignored": 70
+    },
+    "clippy": "passed all targets -D warnings",
+    "tests_log": {
+      "path": "/tmp/incant-native-animation-union-tests-001.log",
+      "sha256": "d6dc04e78da952b19dfdf9f11e6f1f2543ea00ba4333d78c708785cee32b4802"
+    },
+    "clippy_log": {
+      "path": "/tmp/incant-native-animation-union-clippy-001.log",
+      "sha256": "e2edc91f608e3c0607cffbd582e843c4aed27b3a095c797f5c788209ff31e213"
+    }
+  },
+  "editor_union": {
+    "tests": {
+      "groups": 41,
+      "passed": 357,
+      "failed": 0,
+      "ignored": 1
+    },
+    "clippy": "passed all targets -D warnings",
+    "package_scope": [
+      "incant_runtime",
+      "incant_script",
+      "incant_play",
+      "incant_agent_native",
+      "incant_editor"
+    ],
+    "features": [
+      "incant_editor/custom-protocol",
+      "incant_editor/play-probe",
+      "incant_editor/agent-probe"
+    ]
+  },
+  "logs": {
+    "editor-integration-tests-001": {
+      "path": "/tmp/incant-animation-editor-integration-tests-001.log",
+      "sha256": "3c8ee396118ee84c1bb55c586b3a48a461e22d071934cfa839e15d838810f497"
+    },
+    "editor-integration-clippy-001": {
+      "path": "/tmp/incant-animation-editor-integration-clippy-001.log",
+      "sha256": "a629fed25999a74b62c0d7e8d85d906e6fb5f94ac0a68c1b7c66d1608ef39c60"
+    },
+    "editor-build-001": {
+      "path": "/tmp/incant-animation-editor-build-001.log",
+      "sha256": "9abb7ae3798cd57f60c64f1c1a7d25a07bf2e1e94bb84335370d7a00cba98080"
+    },
+    "editor-ui-build-002": {
+      "path": "/tmp/incant-animation-editor-ui-build-002.log",
+      "sha256": "8fd0cb7c48fad0ba5a6e4fa003027767ef1845ee93888a3f8506db1a055d5f3a"
+    },
+    "editor-build-002": {
+      "path": "/tmp/incant-animation-editor-build-002.log",
+      "sha256": "68ad5561798c49057858ba8b5ec797d024c33653a1e23818ef1254cbf8c00903"
+    },
+    "bridge-check": {
+      "path": "/tmp/incant-animation-bridge-check.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "sdk-check": {
+      "path": "/tmp/incant-animation-sdk-check.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "conventions-check": {
+      "path": "/tmp/incant-animation-conventions-check.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "source_review_receipt": {
+    "path": "animation-integration-hash-review.json",
+    "sha256": "fc717d4ff9624699b715da8c2310dbb38e9806a65327fce5f16f4ee42345fd88",
+    "verified": 65,
+    "differences_reviewed": [
+      "Cargo.lock internal font/main109 edges",
+      "font feature RuntimeAssetData variant"
+    ]
+  },
+  "native_manifest": {
+    "path": "/tmp/incant-native-animation-0052-bin-v1/manifest.json",
+    "sha256": "eba86ebe57c1ff904f8c36af4d121d0ab78f6e66fdfb19db168f6691c3cc799f"
+  },
+  "native_review": "0052 prepared and granted; outcome pending",
+  "source_free_shipping_proof": "in progress separately",
+  "ui": {
+    "sources_equal_main109": 116,
+    "rebuilt": true,
+    "executable_assets_equal_native0050": true,
+    "source_map": "dependency paths differ; mappings/content unchanged"
+  },
+  "limitations": [
+    "Scopes overlap; test counts not additive",
+    "Metal numerical evidence binds frozen cdd0903; no new integrated GPU run claimed",
+    "No native appearance or source-free shipping result claimed yet",
+    "No Wasm animation/blend/state/IK/root-motion or device/phase gate claim"
+  ]
+}

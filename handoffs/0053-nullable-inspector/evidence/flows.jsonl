@@ -1,0 +1,83 @@
+{"burst": "burst1", "d": 0, "role": "AXGroup", "x": 8.0, "y": 146.0, "w": 229.0, "h": 28.0, "focused": true, "dom": "tree-row-00000000000000000000000002"}
+{"burst": "burst1", "text": "step exit 0 (waited 254s)"}
+{"burst": "burst2", "x": 36.0, "y": 33.0, "w": 1440.0, "h": 875.0}
+{"burst": "burst2", "d": 0, "role": "AXGroup", "x": 8.0, "y": 146.0, "w": 229.0, "h": 28.0, "focused": true, "dom": "tree-row-00000000000000000000000002"}
+{"burst": "burst2", "checked": "s2-authoring-1440", "window": [1440.0, 875.0], "words": ["Live"], "clip": [1215.0, 112.0, 206.0, 28.0]}
+{"burst": "burst2", "text": "01-authoring-1440.png (2880, 1750)"}
+{"burst": "burst2", "text": "step exit 0 (waited 50s)"}
+{"burst": "burst3", "focused": null}
+{"burst": "burst3", "at": "2026-10-12T01:41:43.573+00:00", "event": "key", "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000002", "box": [8.0, 146.0, 229.0, 28.0]}, "key": "35:cmd"}
+{"burst": "burst3", "at": "2026-10-12T01:41:44.316+00:00", "event": "shown", "word": "Playing", "after_s": 0.65}
+{"burst": "burst3", "at": "2026-10-12T01:41:44.664+00:00", "event": "key", "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000002", "box": [8.0, 146.0, 229.0, 28.0]}, "key": "35:cmd,shift"}
+{"burst": "burst3", "at": "2026-10-12T01:41:45.037+00:00", "event": "shown", "word": "Paused", "after_s": 0.28}
+{"burst": "burst3", "d": 0, "role": "AXTextField", "title": "Y", "value": "0", "x": 1300.0, "y": 110.0, "w": 49.0, "h": 28.0, "focused": true, "dom": "field-runtime_002d00000000000000000000000002-Transform-translation-1--value"}
+{"burst": "burst3", "at": "2026-10-12T01:41:45.942+00:00", "event": "key", "focus": {"role": "AXTextField", "name": "Z", "dom": "field-runtime_002d00000000000000000000000002-Transform-translation-2--value", "box": [1374.0, 110.0, 48.0, 28.0]}, "key": "48"}
+{"burst": "burst3", "at": "2026-10-12T01:41:46.332+00:00", "event": "key", "focus": {"role": "AXTextField", "name": "Y", "dom": "field-runtime_002d00000000000000000000000002-Transform-translation-1--value", "box": [1300.0, 110.0, 49.0, 28.0]}, "key": "48:shift"}
+{"burst": "burst3", "checked": "s3-paused-1440", "window": [1440.0, 875.0], "words": ["Paused"], "clip": [1215.0, 284.0, 206.0, 28.0]}
+{"burst": "burst3", "text": "02-paused-1440.png (2880, 1750)"}
+{"burst": "burst3", "text": "step exit 0 (waited 22s)"}
+{"burst": "burst4a", "focused": null}
+{"burst": "burst4a", "text": "another app came forward; stopping the watch"}
+{"burst": "burst4a", "text": "step exit 1 (waited 150s)"}
+{"burst": "burst4a2", "text": "front"}
+{"burst": "burst4a2", "at": "2026-10-12T01:47:27.279+00:00", "event": "focus", "after_s": 0.0, "focus": {"role": "AXWebArea", "name": "Incant Editor", "dom": null, "box": [0.0, 0.0, 1440.0, 875.0]}}
+{"burst": "burst4a2", "at": "2026-10-12T01:47:28.363+00:00", "event": "watched", "after_s": 1.08, "focus": {"role": "AXWebArea", "name": "Incant Editor", "dom": null, "box": [0.0, 0.0, 1440.0, 875.0]}}
+{"burst": "burst4a2", "d": 9, "role": "AXTextField", "title": "Clip", "label": "Clip", "value": "0", "x": 1215.0, "y": 284.0, "w": 206.0, "h": 28.0, "dom": "field-00000000000000000000000002-Animation-clip--value"}
+{"burst": "burst4a2", "at": "2026-10-12T01:47:28.684+00:00", "event": "focus", "after_s": 0.0, "focus": {"role": "AXTextField", "name": "Clip", "dom": "field-00000000000000000000000002-Animation-clip--value", "box": [1215.0, 284.0, 206.0, 28.0]}}
+{"burst": "burst4a2", "at": "2026-10-12T01:47:31.751+00:00", "event": "watched", "after_s": 3.07, "focus": {"role": "AXTextField", "name": "Clip", "dom": "field-00000000000000000000000002-Animation-clip--value", "box": [1215.0, 284.0, 206.0, 28.0]}}
+{"burst": "burst4a2", "at": "2026-10-12T01:47:32.102+00:00", "event": "key", "focus": {"role": "AXCheckBox", "name": "Looping", "dom": "field-00000000000000000000000002-Animation-looping--value", "box": [1207.0, 318.0, 57.0, 28.0]}, "key": "48"}
+{"burst": "burst4a2", "at": "2026-10-12T01:47:32.493+00:00", "event": "key", "focus": {"role": "AXTextField", "name": "Clip", "dom": "field-00000000000000000000000002-Animation-clip--value", "box": [1215.0, 284.0, 206.0, 28.0]}, "key": "48:shift"}
+{"burst": "burst4a2", "at": "2026-10-12T01:47:32.657+00:00", "event": "focus", "after_s": 0.0, "focus": {"role": "AXTextField", "name": "Clip", "dom": "field-00000000000000000000000002-Animation-clip--value", "box": [1215.0, 284.0, 206.0, 28.0]}}
+{"burst": "burst4a2", "at": "2026-10-12T01:47:35.671+00:00", "event": "watched", "after_s": 3.01, "focus": {"role": "AXTextField", "name": "Clip", "dom": "field-00000000000000000000000002-Animation-clip--value", "box": [1215.0, 284.0, 206.0, 28.0]}}
+{"burst": "burst4a2", "at": "2026-10-12T01:47:35.962+00:00", "event": "focus", "after_s": 0.0, "focus": {"role": "AXTextField", "name": "Clip", "dom": "field-00000000000000000000000002-Animation-clip--value", "box": [1215.0, 284.0, 206.0, 28.0]}}
+{"burst": "burst4a2", "at": "2026-10-12T01:47:38.068+00:00", "event": "watched", "after_s": 2.11, "focus": {"role": "AXTextField", "name": "Clip", "dom": "field-00000000000000000000000002-Animation-clip--value", "box": [1215.0, 284.0, 206.0, 28.0]}}
+{"burst": "burst4a2", "text": "step exit 0 (waited 0s)"}
+{"burst": "burst4b", "text": "front"}
+{"burst": "burst4b", "at": "2026-10-12T01:51:25.108+00:00", "event": "focus", "after_s": 0.0, "focus": {"role": "AXTextField", "name": "Clip", "dom": "field-00000000000000000000000002-Animation-clip--value", "box": [1215.0, 284.0, 206.0, 28.0]}}
+{"burst": "burst4b", "at": "2026-10-12T01:51:26.253+00:00", "event": "watched", "after_s": 1.15, "focus": {"role": "AXTextField", "name": "Clip", "dom": "field-00000000000000000000000002-Animation-clip--value", "box": [1215.0, 284.0, 206.0, 28.0]}}
+{"burst": "burst4b", "d": 11, "role": "AXTextField", "title": "Y", "value": "0", "x": 1300.0, "y": 110.0, "w": 49.0, "h": 28.0, "dom": "field-runtime_002d00000000000000000000000002-Transform-translation-1--value"}
+{"burst": "burst4b", "at": "2026-10-12T01:51:26.605+00:00", "event": "focus", "after_s": 0.0, "focus": {"role": "AXTextField", "name": "Y", "dom": "field-runtime_002d00000000000000000000000002-Transform-translation-1--value", "box": [1300.0, 110.0, 49.0, 28.0]}}
+{"burst": "burst4b", "at": "2026-10-12T01:51:32.665+00:00", "event": "watched", "after_s": 6.06, "focus": {"role": "AXTextField", "name": "Y", "dom": "field-runtime_002d00000000000000000000000002-Transform-translation-1--value", "box": [1300.0, 110.0, 49.0, 28.0]}}
+{"burst": "burst4b", "at": "2026-10-12T01:51:33.035+00:00", "event": "key", "focus": {"role": "AXTextField", "name": "Z", "dom": "field-runtime_002d00000000000000000000000002-Transform-translation-2--value", "box": [1374.0, 110.0, 48.0, 28.0]}, "key": "48"}
+{"burst": "burst4b", "at": "2026-10-12T01:51:33.447+00:00", "event": "key", "focus": {"role": "AXTextField", "name": "Y", "dom": "field-runtime_002d00000000000000000000000002-Transform-translation-1--value", "box": [1300.0, 110.0, 49.0, 28.0]}, "key": "48:shift"}
+{"burst": "burst4b", "at": "2026-10-12T01:51:33.638+00:00", "event": "focus", "after_s": 0.0, "focus": {"role": "AXTextField", "name": "Y", "dom": "field-runtime_002d00000000000000000000000002-Transform-translation-1--value", "box": [1300.0, 110.0, 49.0, 28.0]}}
+{"burst": "burst4b", "at": "2026-10-12T01:51:36.670+00:00", "event": "watched", "after_s": 3.03, "focus": {"role": "AXTextField", "name": "Y", "dom": "field-runtime_002d00000000000000000000000002-Transform-translation-1--value", "box": [1300.0, 110.0, 49.0, 28.0]}}
+{"burst": "burst4b", "text": "step exit 0 (waited 206s)"}
+{"burst": "burst5", "text": "front"}
+{"burst": "burst5", "text": "CYCLE-A"}
+{"burst": "burst5", "at": "2026-10-12T01:52:30.182+00:00", "event": "key", "focus": {"role": "AXTextField", "name": "Y", "dom": "field-runtime_002d00000000000000000000000002-Transform-translation-1--value", "box": [1300.0, 110.0, 49.0, 28.0]}, "key": "35:cmd,shift"}
+{"burst": "burst5", "at": "2026-10-12T01:52:30.696+00:00", "event": "shown", "word": "Playing", "after_s": 0.37}
+{"burst": "burst5", "at": "2026-10-12T01:52:31.068+00:00", "event": "key", "focus": {"role": "AXTextField", "name": "Y", "dom": "field-runtime_002d00000000000000000000000002-Transform-translation-1--value", "box": [1300.0, 110.0, 49.0, 28.0]}, "key": "35:cmd,shift"}
+{"burst": "burst5", "at": "2026-10-12T01:52:31.507+00:00", "event": "shown", "word": "Paused", "after_s": 0.33}
+{"burst": "burst5", "d": 11, "role": "AXTextField", "title": "Y", "value": "0", "x": 1300.0, "y": 110.0, "w": 49.0, "h": 28.0, "focused": true, "dom": "field-runtime_002d00000000000000000000000002-Transform-translation-1--value"}
+{"burst": "burst5", "at": "2026-10-12T01:52:31.824+00:00", "event": "focus", "after_s": 0.0, "focus": {"role": "AXTextField", "name": "Y", "dom": "field-runtime_002d00000000000000000000000002-Transform-translation-1--value", "box": [1300.0, 110.0, 49.0, 28.0]}}
+{"burst": "burst5", "at": "2026-10-12T01:52:36.039+00:00", "event": "watched", "after_s": 4.09, "focus": {"role": "AXTextField", "name": "Y", "dom": "field-runtime_002d00000000000000000000000002-Transform-translation-1--value", "box": [1300.0, 110.0, 49.0, 28.0]}}
+{"burst": "burst5", "text": "CYCLE-B"}
+{"burst": "burst5", "d": 9, "role": "AXTextField", "title": "Clip", "label": "Clip", "value": "0", "x": 1215.0, "y": 284.0, "w": 206.0, "h": 28.0, "dom": "field-00000000000000000000000002-Animation-clip--value"}
+{"burst": "burst5", "at": "2026-10-12T01:52:36.855+00:00", "event": "key", "focus": {"role": "AXTextField", "name": "Clip", "dom": "field-00000000000000000000000002-Animation-clip--value", "box": [1215.0, 282.0, 206.0, 28.0]}, "key": "35:cmd,shift"}
+{"burst": "burst5", "at": "2026-10-12T01:52:37.432+00:00", "event": "shown", "word": "Playing", "after_s": 0.45}
+{"burst": "burst5", "at": "2026-10-12T01:52:37.806+00:00", "event": "key", "focus": {"role": "AXTextField", "name": "Clip", "dom": "field-00000000000000000000000002-Animation-clip--value", "box": [1215.0, 305.0, 206.0, 28.0]}, "key": "35:cmd,shift"}
+{"burst": "burst5", "at": "2026-10-12T01:52:38.392+00:00", "event": "shown", "word": "Paused", "after_s": 0.46}
+{"burst": "burst5", "at": "2026-10-12T01:52:38.529+00:00", "event": "focus", "after_s": 0.0, "focus": {"role": "AXTextField", "name": "Clip", "dom": "field-00000000000000000000000002-Animation-clip--value", "box": [1215.0, 284.0, 206.0, 28.0]}}
+{"burst": "burst5", "at": "2026-10-12T01:52:42.585+00:00", "event": "watched", "after_s": 4.07, "focus": {"role": "AXTextField", "name": "Clip", "dom": "field-00000000000000000000000002-Animation-clip--value", "box": [1215.0, 284.0, 206.0, 28.0]}}
+{"burst": "burst5", "text": "step exit 0 (waited 24s)"}
+{"burst": "burst6", "text": "front"}
+{"burst": "burst6", "at": "2026-10-12T01:53:20.158+00:00", "event": "key", "focus": {"role": "AXTextField", "name": "Clip", "dom": "field-00000000000000000000000002-Animation-clip--value", "box": [1215.0, 284.0, 206.0, 28.0]}, "key": "35:cmd,shift"}
+{"burst": "burst6", "at": "2026-10-12T01:53:20.695+00:00", "event": "shown", "word": "Playing", "after_s": 0.41}
+{"burst": "burst6", "at": "2026-10-12T01:53:21.462+00:00", "event": "key", "focus": {"role": "AXTextField", "name": "Clip", "dom": "field-00000000000000000000000002-Animation-clip--value", "box": [1215.0, 284.0, 206.0, 28.0]}, "key": "35:cmd,shift"}
+{"burst": "burst6", "at": "2026-10-12T01:53:21.896+00:00", "event": "shown", "word": "Paused", "after_s": 0.32}
+{"burst": "burst6", "text": "step exit 0 (waited 0s)"}
+{"burst": "burst7", "text": "front"}
+{"burst": "burst7", "d": 0, "role": "AXGroup", "x": 8.0, "y": 146.0, "w": 229.0, "h": 28.0, "focused": true, "dom": "tree-row-00000000000000000000000002"}
+{"burst": "burst7", "x": 256.0, "y": 145.0, "w": 1000.0, "h": 650.0}
+{"burst": "burst7", "checked": "s9-paused-1000", "window": [1000.0, 650.0], "words": ["Paused"], "clip": [775.0, 284.0, 206.0, 28.0]}
+{"burst": "burst7", "text": "03-paused-1000x650.png (2000, 1300)"}
+{"burst": "burst7", "text": "step exit 0 (waited 0s)"}
+{"burst": "burst8", "text": "front"}
+{"burst": "burst8", "at": "2026-10-12T01:56:18.507+00:00", "event": "key", "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000002", "box": [8.0, 146.0, 229.0, 28.0]}, "key": "35:cmd"}
+{"burst": "burst8", "at": "2026-10-12T01:56:18.815+00:00", "event": "shown", "word": "Live", "after_s": 0.22}
+{"burst": "burst8", "checked": "s10-stopped-1000", "window": [1000.0, 650.0], "words": ["Live"], "clip": [775.0, 112.0, 206.0, 28.0]}
+{"burst": "burst8", "text": "step exit 0 (waited 108s)"}
+{"burst": "burst9", "text": "front"}
+{"burst": "burst9", "text": "2026-10-12T01:56:44Z 7560 exited"}
+{"burst": "burst9", "text": "step exit 0 (waited 0s)"}

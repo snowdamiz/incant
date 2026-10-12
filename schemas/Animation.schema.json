@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Authored starting playback for a MeshRenderer's immutable cooked model.\nClip indices are checked against that exact asset during scene cooking.",
+  "properties": {
+    "clip": {
+      "format": "uint16",
+      "maximum": 255,
+      "minimum": 0,
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "looping": {
+      "type": "boolean"
+    },
+    "playing": {
+      "type": "boolean"
+    },
+    "seconds": {
+      "format": "double",
+      "minimum": 0,
+      "type": "number"
+    },
+    "speed": {
+      "format": "double",
+      "maximum": 16,
+      "minimum": -16,
+      "type": "number"
+    }
+  },
+  "required": [
+    "seconds",
+    "speed",
+    "playing",
+    "looping"
+  ],
+  "title": "Animation",
+  "type": "object"
+}

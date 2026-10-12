@@ -36,7 +36,8 @@ pub enum SaveError {
 
 impl NativeWorld {
     /// Checkpoint committed components, hierarchy, spatial/asset declarations,
-    /// exact flipbook fractions, locale settings/catalog and the fixed-step clock. Navigation geometry is
+    /// exact flipbook fractions, animation clocks/flags, locale settings/catalog and
+    /// the fixed-step clock. Navigation geometry is
     /// saved; bounded query caches are rebuilt on load. No asset files are read.
     ///
     /// This is NOT a game-session/VM checkpoint: input, timers, callbacks, script
@@ -95,19 +96,30 @@ impl NativeWorld {
                     .map(|p| (id, p.state.checkpoint()))
             })
             .collect::<Vec<_>>();
+        let animations = self
+            .entities
+            .iter()
+            .filter_map(|(&id, &handle)| {
+                self.world
+                    .get::<crate::animation::Playback>(handle)
+                    .map(|p| (id, p.state))
+            })
+            .collect::<Vec<_>>();
         codec::encode(
             self.tick,
             self.source_scene_fingerprint,
             &scene.to_bytes(),
             &states,
+            &animations,
         )
     }
 
-    /// Load validated data without source/project/asset-cache access. V2/v3 retain
+    /// Load validated data without source/project/asset-cache access. V2–v4 retain
     /// the original cooked-scene fingerprint for later program pairing; it is not
     /// authentication and does not restore a VM. Legacy v1 has no original binding
     /// field: its fingerprint describes only the saved plain scene. V3 adds localized
-    /// scenes; older saves cannot silently clear an existing locale/catalog.
+    /// scenes and v4 adds animation playback; older saves cannot silently clear
+    /// an existing locale/catalog.
     pub fn from_save_bytes(bytes: &[u8]) -> Result<Self, SaveError> {
         let decoded = codec::decode(bytes)?;
         let scene = CookedScene::from_bytes(decoded.scene)?;
@@ -133,6 +145,14 @@ impl NativeWorld {
         if decoded.states.len() != expected * codec::STATE_BYTES {
             return Err(SaveError::Invalid("flipbook membership"));
         }
+        let expected_animations = scene
+            .spatial()
+            .iter()
+            .filter(|n| n.animation.is_some())
+            .count();
+        if decoded.animations.len() != expected_animations * codec::ANIMATION_BYTES {
+            return Err(SaveError::Invalid("animation membership"));
+        }
         let mut world = Self::new(scene);
         for row in decoded.states.as_chunks::<{ codec::STATE_BYTES }>().0 {
             let (id, checkpoint) = codec::state(row)?;
@@ -148,6 +168,26 @@ impl NativeWorld {
                 .clock
                 .restore(checkpoint)
                 .map_err(|_| SaveError::Invalid("flipbook checkpoint"))?;
+        }
+        for row in decoded
+            .animations
+            .as_chunks::<{ codec::ANIMATION_BYTES }>()
+            .0
+        {
+            let (id, state) = codec::animation(row)?;
+            let entity = *world
+                .entities
+                .get(&id)
+                .ok_or(SaveError::Invalid("animation entity"))?;
+            let mut playback = world
+                .world
+                .get_mut::<crate::animation::Playback>(entity)
+                .ok_or(SaveError::Invalid("animation component"))?;
+            playback
+                .definition
+                .validate_state(state)
+                .map_err(|_| SaveError::Invalid("animation checkpoint"))?;
+            playback.state = state;
         }
         world.tick = decoded.tick;
         if let Some(origin) = decoded.origin {
@@ -217,7 +257,10 @@ impl NativeWorld {
     pub fn restore_bytes(&mut self, bytes: &[u8]) -> Result<(), SaveError> {
         self.check_save_capabilities()?;
         let mut candidate = Self::from_save_bytes(bytes)?;
-        if bytes[8..12] != 3u32.to_le_bytes() && !self.localization.is_default() {
+        // The complete candidate decode validated framing and the supported
+        // version. Both v3 and v4 carry the localization contract.
+        let version = u32::from_le_bytes(bytes[8..12].try_into().unwrap());
+        if version < 3 && !self.localization.is_default() {
             return Err(SaveError::LocalizationUnsupported);
         }
         // Legacy data has no extended-state/origin contract. Do not let a plain

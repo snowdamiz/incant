@@ -1,0 +1,171 @@
+{
+  "scope": "Narrow animation world-save-v4 compatibility at native in-place restore and pending bytecode-session load; no schema, runtime command, checkpoint layout or authoring changes",
+  "base": "4183af8d782791ae35555facc23866e40fc3d762",
+  "native_core": "dc383d8bf2260c81221a572f17408f92ec87fd16",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "xhigh",
+  "role": "astra nonvisual",
+  "environment": {
+    "host": "macOS arm64",
+    "rust_toolchain": "1.99.0-aarch64-apple-darwin",
+    "profile": "ci",
+    "target": "/tmp/incant-agent-font-target",
+    "jobs": 2,
+    "locked": true,
+    "offline": true
+  },
+  "sources": {
+    "crates/incant_runtime/src/save.rs": "c90cc58b805a245f0142dafc1600fe5ece95aeb5d206d4e9ad56e7171b7c0fd4",
+    "crates/incant_runtime/tests/animation.rs": "67cf87ba41b7b21d64ef1e3d9794505e0b23f6281ed96acdd886aff910bcec06",
+    "crates/incant_script/src/checkpoint/pending.rs": "d986c2ba3c4c035f8d1e103300f3741d1f6cb2a95a439ef1386e2fdbd05b41d0",
+    "crates/incant_script/src/checkpoint/tests.rs": "625dd65b5b06c6ea3aa2fd2a475eca085ba336bf77c7b3db0f7363bc120915ee",
+    "crates/incant_script/src/checkpoint/tests/animation.rs": "6d6ebeed6330a712e12b826f069a9564bda38c2d3ab06c52c1dc33a02814cf38"
+  },
+  "behavior": [
+    "A decoded supported world-save v4 carries the same localization contract as v3; v1/v2 cannot clear existing nondefault localization",
+    "PendingSessionCheckpoint admits only exact world-save v3 or v4 before its existing actual-world decoder and trusted binding checks; legacy, future and short sections refuse",
+    "137 native continuation ticks compare fresh and in-place loaded v4 worlds with uninterrupted animation and current locale",
+    "50 actual QuickJS NativeSession continuation ticks compare entire checkpoint bytes after fresh and in-place load, including reverse looping animation controls, locale query/lookup, persistent data and native timer events",
+    "Valid v1/v2, unknown and short sections, wrong initial binding, immutable localization catalog and trusted program refuse without replacing committed bytes or live incarnation",
+    "Existing GameSession and standalone player delegate to PendingSessionCheckpoint; no additional save/scene-version admission changes were needed"
+  ],
+  "checks": [
+    {
+      "name": "tests-frozen",
+      "command": "cargo test -p incant_runtime -p incant_script --all-features --profile ci --locked --offline -j2",
+      "exit": 0,
+      "path": "/tmp/incant-animation-checkpoint-tests-frozen.log",
+      "sha256": "5da19be8438411b4278e27e7382fcae69f6cd63eb6989ff3017c11ba6e1d0316",
+      "groups": 31,
+      "passed": 301,
+      "failed": 0,
+      "ignored": 0
+    },
+    {
+      "name": "game-tests-frozen",
+      "command": "cargo test -p incant_game_runtime --test checkpoints --features static-module --profile ci --locked --offline -j2",
+      "exit": 0,
+      "path": "/tmp/incant-animation-checkpoint-game-tests-frozen.log",
+      "sha256": "a3113bda86fde86e8833014ba7f43d5f9f0b50c745cf85e9bbf3e312868340fe",
+      "groups": 1,
+      "passed": 5,
+      "failed": 0,
+      "ignored": 0
+    },
+    {
+      "name": "clippy-frozen",
+      "command": "cargo clippy -p incant_runtime -p incant_script -p incant_game_runtime --all-features --all-targets --profile ci --locked --offline -j2 -- -D warnings",
+      "exit": 0,
+      "path": "/tmp/incant-animation-checkpoint-clippy-frozen.log",
+      "sha256": "4c2be8232dbcd46088fe3ef99e7d2657bf0bd2491f50e22ece12744b6914f44a"
+    },
+    {
+      "name": "no-compiler-frozen",
+      "command": "cargo check -p incant_script --no-default-features --features static-module --profile ci --locked --offline -j2",
+      "exit": 0,
+      "path": "/tmp/incant-animation-checkpoint-no-compiler-frozen.log",
+      "sha256": "c2dceee8702ff66ddc2c7dab105860a317ccf75d5ae50b0040d34570aac7dd60"
+    },
+    {
+      "name": "fmt-frozen",
+      "command": "cargo fmt --all --check",
+      "exit": 0,
+      "path": "/tmp/incant-animation-checkpoint-fmt-frozen.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runtime-graph",
+      "command": "python3 tools/check_runtime_dependencies.py incant_script incant_runtime --features incant_script/static-module",
+      "exit": 0,
+      "path": "/tmp/incant-animation-checkpoint-runtime-graph.log",
+      "sha256": "452286d0026a385d61cbd4334f838de1e79c6ea33ce77928f42301fff99b6b17"
+    },
+    {
+      "name": "conventions",
+      "command": "python3 tools/generate_conventions.py --check",
+      "exit": 0,
+      "path": "/tmp/incant-animation-checkpoint-conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff-check",
+      "command": "git diff --check",
+      "exit": 0,
+      "path": "/tmp/incant-animation-checkpoint-diff-check.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "prior_attempts": [
+    {
+      "role": "standalone original runtime v4 failure",
+      "exit": 101,
+      "path": "/tmp/incant-animation-core-restore-red.log",
+      "sha256": "56c726a52dfc04d38e30a9521ddde7f53b4f77ed4ebaca67a60d419473b1862b"
+    },
+    {
+      "role": "runtime regression old exact-v3 guard failure",
+      "exit": 101,
+      "path": "/tmp/incant-animation-checkpoint-red-002.log",
+      "sha256": "9eeb6ac1cbd49ebc151c7e2dc88283521a6bab16bb6d87109056d66aa7257865"
+    },
+    {
+      "role": "actual NativeSession self-checkpoint load old exact-v3 guard failure",
+      "exit": 101,
+      "path": "/tmp/incant-animation-session-checkpoint-red.log",
+      "sha256": "e2ba6e316c9e47766b59a6f172e17daeabe637adfca40fed3e171665a6310ee5"
+    },
+    {
+      "role": "corrected public identity accessor in test harness",
+      "exit": 101,
+      "path": "/tmp/incant-animation-checkpoint-red.log",
+      "sha256": "95c28892f01bba6f5af1b1583bd3876053ea5a3db700b5d532d09ed24612f044"
+    },
+    {
+      "role": "corrected test assumption: mutable declaration origin is not authentication",
+      "exit": 101,
+      "path": "/tmp/incant-animation-checkpoint-green.log",
+      "sha256": "9b218d39108a498dc2c0257cb6a395e9dd5338c3a74e51d38b5fc1a5d5905359"
+    },
+    {
+      "role": "four final focused regressions",
+      "exit": 0,
+      "path": "/tmp/incant-animation-checkpoint-green-002.log",
+      "sha256": "996110b431b857accbb1811c14b07804e7389ac9a1dc5a7fc7c6883578b45b89"
+    },
+    {
+      "role": "standalone original runtime repro after fix",
+      "exit": 0,
+      "path": "/tmp/incant-animation-core-restore-green.log",
+      "sha256": "dcc0e89f64977cb0f7cc578025610580bee2fde13670e30c84a02525545a19f4"
+    }
+  ],
+  "repro": {
+    "manifest": {
+      "path": "/tmp/incant-animation-core-repro/Cargo.toml",
+      "sha256": "95b8fc1b360c4fe5d88515d3a00cc082495478b2c315510f266a4be557160e08"
+    },
+    "lock": {
+      "path": "/tmp/incant-animation-core-repro/Cargo.lock",
+      "sha256": "84351ba5ea148cfa626342180f9d9c715d1dda35253e00d313618cdd3038ba21"
+    },
+    "source": {
+      "path": "/tmp/incant-animation-core-repro/src/lib.rs",
+      "sha256": "89b1ff690f08a1caee802ddd759d204c0e19cb62bb416b91c458e6e3c7c8cdeb"
+    },
+    "command": "cargo test --manifest-path /tmp/incant-animation-core-repro/Cargo.toml --profile ci --locked --offline -j2"
+  },
+  "version_audit": {
+    "path": "/tmp/incant-animation-checkpoint-version-audit.log",
+    "sha256": "a2ec8e7a057f04e3b3363c44004d60f88dffd68bfa24afcaa8c10483dce1a523"
+  },
+  "core_hash_verification": {
+    "path": "/tmp/incant-native-animation-core-hash-verification.json",
+    "sha256": "2f45df4a46878f2ed0729c0e7c6b7259ad717ffd43f559ce67523dfed83efef0"
+  },
+  "limitations": [
+    "CPU-only tests and compile checks; no native window, GPU, hardware, reference-device performance or phase gate claim",
+    "Source/build identities and hashes are compatibility checks, not authentication of mutable saves",
+    "Static Wasm, arbitrary VM heap, solver/audio cursor continuation and physical-input replay remain unsupported",
+    "No changes to frozen animation feature4183af8, native coredc383d8, packaged font branch, production editor or renderer files"
+  ]
+}

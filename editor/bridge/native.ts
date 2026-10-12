@@ -124,6 +124,14 @@ function inspectorField(
       ])),
     };
   }
+  if (Array.isArray(raw.type)) {
+    // Schemars emits nullable primitives as type: [T, "null"]. Preserve
+    // constraints and recurse so nullable objects/array items resolve normally.
+    if (raw.type.length !== 2 || !raw.type.includes("null")) return unsupported;
+    const concrete = raw.type.find(type => type !== "null");
+    if (typeof concrete !== "string" || !["boolean", "integer", "number", "string", "array", "object"].includes(concrete)) return unsupported;
+    return { ...inspectorField({ ...raw, type: concrete }, defs, depth + 1), nullable: true };
+  }
   if (typeof raw.type !== "string") return unsupported;
   const field = { ...raw };
   if (raw.type === "string" && typeof raw.const === "string") field.enum = [raw.const];

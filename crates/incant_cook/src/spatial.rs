@@ -11,6 +11,7 @@ pub(crate) fn cook(
     project: &Project,
     entity: &Entity,
     assets: &mut BTreeMap<StableId, VisualAssetRef>,
+    animations: &crate::AnimationResources,
 ) -> Result<Option<CookedSpatial>, CookError> {
     macro_rules! decode {
         ($name:literal, $ty:ty) => {
@@ -107,6 +108,13 @@ pub(crate) fn cook(
             mesh: mesh_id,
             cast_shadows: mesh.cast_shadows,
         });
+    }
+    if let Some(initial) = decode!("Animation", incant_doc::Animation) {
+        let mesh = node
+            .mesh
+            .as_ref()
+            .ok_or_else(|| CookError::AnimationResource(entity.id.clone()))?;
+        node.animation = Some(animations.bind(&assets[&mesh.mesh], initial)?);
     }
     if let Some(env) = decode!("EnvironmentLight", incant_doc::EnvironmentLight) {
         let texture = bind(project, &env.texture, VisualAssetKind::Texture, assets)?;

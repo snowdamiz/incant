@@ -21,6 +21,8 @@ mod output;
 mod pixel_grid;
 mod preview_environment;
 mod resource_error;
+#[cfg(test)]
+mod retained_alloc;
 mod scene;
 mod shader;
 mod shadows;

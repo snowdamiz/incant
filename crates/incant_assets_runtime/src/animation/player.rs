@@ -1,5 +1,8 @@
 use super::*;
 use crate::CookedModel;
+#[path = "deform.rs"]
+mod deform;
+pub use deform::SkinPose;
 
 /// One retained, immutable model animation copy and two preallocated pose buffers.
 /// `sample` performs no allocation, source IO or JSON. It has no implicit clock:
@@ -11,6 +14,7 @@ pub struct AnimationPlayer {
     parents: Vec<Option<usize>>,
     order: Vec<usize>,
     offsets: Vec<usize>,
+    durations: Vec<f32>,
     live: Pose,
     staged: Pose,
     trs: Vec<Option<NodeTrs>>,
@@ -30,6 +34,48 @@ impl Pose {
     }
 }
 impl AnimationPlayer {
+    /// Logical owned allocation payload for one player, excluding allocator
+    /// headers and validation scratch. Counts cloned keys/topology as well as
+    /// both pose buffers. Callers can charge many instances before constructing
+    /// them. Shared source pixels/geometry are not copied by a player.
+    pub fn retained_bytes(model: &CookedModel) -> Result<usize> {
+        let data = model
+            .animation
+            .as_ref()
+            .ok_or_else(|| invalid("model has no animation data"))?;
+        let mut bytes = data.retained_bytes()?;
+        let mut charge = |count: usize, size: usize| -> Result<()> {
+            bytes = count
+                .checked_mul(size)
+                .and_then(|n| bytes.checked_add(n))
+                .ok_or(AssetError::Limit("retained animation bytes"))?;
+            Ok(())
+        };
+        let nodes = model.metadata.nodes.len();
+        charge(nodes, size_of::<ModelNode>())?;
+        for node in &model.metadata.nodes {
+            charge(node.children.len(), size_of::<usize>())?;
+            charge(node.meshes.len(), size_of::<usize>())?;
+            charge(node.name.as_ref().map_or(0, String::len), 1)?;
+        }
+        charge(
+            nodes,
+            size_of::<Option<usize>>() + size_of::<usize>() + size_of::<Option<NodeTrs>>(),
+        )?;
+        charge(
+            data.skins
+                .len()
+                .checked_add(1)
+                .ok_or(AssetError::Limit("retained animation bytes"))?,
+            size_of::<usize>(),
+        )?;
+        charge(data.clips.len(), size_of::<f32>())?;
+        charge(nodes, 4 * size_of::<DMat4>())?;
+        for skin in &data.skins {
+            charge(skin.joints.len(), 2 * size_of::<DMat4>())?;
+        }
+        Ok(bytes)
+    }
     pub fn new(model: &CookedModel) -> Result<Self> {
         let data = model
             .animation
@@ -43,11 +89,13 @@ impl AnimationPlayer {
                 parents[c] = Some(i);
             }
         }
-        let mut order: Vec<_> = parents
-            .iter()
-            .enumerate()
-            .filter_map(|(i, p)| p.is_none().then_some(i))
-            .collect();
+        let mut order = Vec::with_capacity(nodes.len());
+        order.extend(
+            parents
+                .iter()
+                .enumerate()
+                .filter_map(|(i, p)| p.is_none().then_some(i)),
+        );
         let mut cursor = 0;
         while cursor < order.len() {
             let i = order[cursor];
@@ -69,9 +117,22 @@ impl AnimationPlayer {
             parents,
             order,
             offsets,
+            durations: data
+                .clips
+                .iter()
+                .map(|clip| {
+                    clip.channels.iter().fold(0.0f32, |duration, channel| {
+                        duration.max(*channel.times.last().expect("validated keys"))
+                    })
+                })
+                .collect(),
         };
         out.sample(None, 0.)?;
         Ok(out)
+    }
+    /// Canonical duration from the last key of every channel, retained at startup.
+    pub fn clip_duration(&self, clip: usize) -> Option<f32> {
+        self.durations.get(clip).copied()
     }
     pub fn clips(&self) -> &[Clip] {
         &self.data.clips

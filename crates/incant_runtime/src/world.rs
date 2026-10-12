@@ -21,7 +21,7 @@ pub(crate) struct Motion(pub Velocity);
 #[derive(Component)]
 pub(crate) struct Global(pub DMat4);
 #[derive(Resource)]
-struct Step(f64);
+pub(crate) struct Step(pub(crate) f64);
 #[derive(Resource)]
 pub(crate) struct Hierarchy {
     pub nodes: Vec<(Entity, Option<usize>)>,
@@ -72,6 +72,7 @@ pub struct NativeWorld {
     pub(crate) world: World,
     schedule: Schedule,
     pub(crate) flipbook_query: crate::flipbook::PlaybackQuery,
+    pub(crate) animation_query: crate::animation::PlaybackQuery,
     pub(crate) physics: incant_physics_runtime::PhysicsRuntime<StableId>,
     pub(crate) physics_2d: incant_physics_2d_runtime::PhysicsWorld2D,
     pub(crate) physics_2d_used: bool,
@@ -148,8 +149,17 @@ impl NativeWorld {
         let mut schedule = Schedule::default();
         // Native builds enable Bevy's multi_threaded executor and parallel
         // queries. Browser builds remain serial until their worker host exists.
-        schedule.add_systems((integrate, publish_globals, crate::flipbook::advance).chain());
+        schedule.add_systems(
+            (
+                integrate,
+                publish_globals,
+                crate::flipbook::advance,
+                crate::animation::advance,
+            )
+                .chain(),
+        );
         let flipbook_query = world.query::<(&Identity, &crate::flipbook::Playback)>();
+        let animation_query = world.query::<(&Identity, &crate::animation::Playback)>();
         let mut result = Self {
             localization: scene.localization,
             navigation_used: !navigation.nodes.is_empty(),
@@ -172,6 +182,7 @@ impl NativeWorld {
             audio_ids: BTreeSet::new(),
             schedule,
             flipbook_query,
+            animation_query,
             entities,
             parents,
             scene_id: scene.id,
@@ -239,6 +250,16 @@ impl NativeWorld {
         if self.world.get::<crate::CookedSpatial>(self.entities[&id]) == node.as_ref() {
             return;
         }
+        let previous_animation = self
+            .world
+            .get::<crate::CookedSpatial>(self.entities[&id])
+            .and_then(|n| n.animation.as_ref());
+        let next_animation = node.as_ref().and_then(|n| n.animation.as_ref());
+        let animation_changed = previous_animation != next_animation;
+        let next_animation_playback = next_animation.map(|definition| crate::animation::Playback {
+            definition: definition.clone(),
+            state: definition.initial_state(),
+        });
         let previous_flipbook = self
             .world
             .get::<crate::CookedSpatial>(self.entities[&id])
@@ -262,6 +283,13 @@ impl NativeWorld {
             self.tilemap_collision_ids.remove(&id);
         }
         let mut entity = self.world.entity_mut(self.entities[&id]);
+        if animation_changed {
+            if let Some(playback) = next_animation_playback {
+                entity.insert(playback);
+            } else {
+                entity.remove::<crate::animation::Playback>();
+            }
+        }
         if playback_changed {
             if let Some(playback) = next_playback {
                 entity.insert(playback);
