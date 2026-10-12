@@ -89,7 +89,7 @@ active. Report merged work separately from local checks and unmet exit gates.
 The project is still early relative to the complete Engine 1.0 and Driftwake
 scope; no defensible percentage or completion date follows from the PR count.
 
-## Native text scene, packaging and composed CPU input — locally checked
+## Native text scene, packaging and composed CPU input — integrated CPU verification
 
 Typed Text declarations now cook into bounded v12 binary scene data with explicit
 ordered font chains and immutable recipe bindings. Structural edits and
@@ -110,6 +110,10 @@ Actual text drawing/Claude acceptance, widget layout/IME/focus and reference-pho
 gates remain open. Evidence: [text bindings](docs/spikes/native-text-bindings.md),
 [composed text input](docs/spikes/native-text-input.md) and
 [draw handoff](docs/spikes/native-text-draw-handoff.md).
+The current main121 union passes 120 CPU tests, all-target Clippy and three fresh
+source/build-deleted exported runs with matching atlas and audible PCM. Missing or
+tampered fonts refuse; 75 GPU tests remain ignored.
+[Integration receipt](docs/spikes/evidence/native-text-input-main121.json).
 
 ## Runtime font atlas — integrated CPU foundation
 
