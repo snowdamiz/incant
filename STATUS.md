@@ -44,6 +44,16 @@ Actual macOS C/Swift caller verification passes as recorded above. The first iOS
 hit the existing cross-target script-cook refusal. That guard remains intact while
 a separate compatibility route is developed; no mobile runtime/device/performance
 gate passes from this work. [Contract and evidence](docs/spikes/mobile-runtime-library.md).
+## Rust/Wasm audio transport — current-main execution verified
+
+The accepted ops59–61 pass 483 actual-host cases and all 12 integration checks.
+A fresh ordinary exported player runs three source/map/build-deleted 96-tick cases
+with 17,856 declaration scalars and 248 observations each, exact native-oracle PCM,
+and thirteen precise no-output refusals. All accepted source inputs remain exact;
+independent integration review is accepted and exact-head fast CI remains required. Desired state
+snapshots do not expose mixer cursors; whole guest saves and device gates stay open.
+[Current integration evidence](docs/spikes/native-wasm-audio-main166.md).
+
 ## Release checkpoint 14 — promoted main160 baseline
 
 All 23 required contexts and eight exact-candidate push workflows passed.
