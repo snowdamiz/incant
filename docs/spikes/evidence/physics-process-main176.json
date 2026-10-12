@@ -1000,5 +1000,9 @@
     "Selected Linux/Windows normal graphs are read-only CPU dependency checks, not hosted compiler/device execution.",
     "Movement fixture contains no active physics bodies; no solver parity/speedup, editor worker selection, physics-save, GPU or phase claim."
   ],
-  "review_status": "current-main independent closure pending"
+  "review_status": "accepted current-main independent closure",
+  "final_review": {
+    "path": "docs/spikes/evidence/physics-process-main176/final-review.json",
+    "sha256": "61221e1491182b72cadbec8e3e013d62bd005f570791bd3f9a088feea2d8ded5"
+  }
 }
