@@ -16,6 +16,15 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Core presentation bindings — current-main integration verified
+
+The two reviewed sample/helper inputs are unchanged. Strict types, seven native
+scenarios and a fresh ordinary source/map/build-deleted win/loss/repeat proof pass
+on the integrated native HUD/audio engine. Actual text/locale/result parenting,
+repeat PCM and terminal silence are verified. Independent integration audit and
+publication remain pending; authored appearance/device gates remain separate.
+[Current integration evidence](docs/spikes/core-presentation-integration.md).
+
 ## Core Sample presentation bindings — locally verified
 
 Optional authored role maps connect gameplay to localized health, collection and
