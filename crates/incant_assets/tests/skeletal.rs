@@ -1,3 +1,5 @@
+#[path = "skeletal/blending.rs"]
+mod blending;
 #[path = "skeletal/fixture.rs"]
 mod fixture;
 use incant_assets::{cook_gltf, import_gltf};
@@ -361,6 +363,7 @@ fn fresh_process_loads_only_cooked_animation_data() {
     assert!(
         String::from_utf8_lossy(&output.stdout).contains("SKELETAL_NUMERIC_OK [12.0, 1.0, 0.0]")
     );
+    assert!(String::from_utf8_lossy(&output.stdout).contains("SKELETAL_BLEND_OK"));
 }
 #[test]
 fn source_deleted_process_child() {
@@ -377,6 +380,25 @@ fn source_deleted_process_child() {
     let p = player.skin_position(3, 0, 0, [1., 1., 0.]).unwrap();
     assert_eq!(p, [12., 1., 0.]);
     println!("SKELETAL_NUMERIC_OK {p:?}");
+    use incant_assets_runtime::animation::ClipSample;
+    player
+        .sample_blend(
+            ClipSample {
+                clip: Some(0),
+                seconds: 2.,
+            },
+            ClipSample {
+                clip: Some(1),
+                seconds: 2.,
+            },
+            0.5,
+        )
+        .unwrap();
+    near(
+        player.skin_position(3, 0, 2, [2., 0., 0.]).unwrap(),
+        [13., 2., 0.],
+    );
+    println!("SKELETAL_BLEND_OK");
 }
 #[test]
 fn source_buffers_refuse_bad_key_times_weights_and_aggregate_channels() {
