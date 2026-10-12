@@ -1301,10 +1301,14 @@ Retained CPU pose blending integration against actual main120 preserves all five
 reviewed source hashes and passes 166 CPU tests plus Clippy/graph checks; 71 GPU
 tests remain ignored. [Receipt](docs/spikes/evidence/runtime-pose-blending-main120.json).
 
-## Complete compound Wasm source (2026-10-12)
+## Complete compound Wasm — CPU/package checks passed (2026-10-12)
 
-Additive operations 47–52 are independently source-reviewed and locally frozen;
-final broad conformance and ordinary source-deleted exported-player proof are
-pending. Root-motion may append reserved 53–55 from this immutable ancestor.
-Whole-module checkpoints and visual/device gates remain open.
+Additive operations 47–52 preserve 0–46 and all older definitions. The final
+actual Wasmtime/wasm2c suite passes 436 tests plus all-target Clippy; the ordinary
+public exported player passes three fresh 56-tick runs after deleting its
+authoring/cache/build inputs and debug maps. All 64,512 scalar oracle comparisons,
+report/PCM parity and 23 exact refusal controls pass. Source, public execution and
+the final durable evidence packet are independently accepted; publisher intake
+remains pending. Root-motion may append reserved 53–55 from the immutable source
+ancestor. Whole-module checkpoints and visual/device gates remain open.
 See [scope and evidence](docs/spikes/native-wasm-compound.md).

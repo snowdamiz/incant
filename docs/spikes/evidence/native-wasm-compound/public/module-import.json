@@ -1,0 +1,24 @@
+{
+  "asset": {
+    "id": "01M4RM3GJKRAJ79H5MN53EHB74",
+    "kind": "wasm",
+    "name": "behavior",
+    "path": "behavior.wasm",
+    "sha256": "dcd80795d8283e0a238786d9aef51e5d1fd106370cfc1d39fffac27f95b6f32d"
+  },
+  "cache_hit": false,
+  "changed": true,
+  "details": {
+    "bytes": 711394,
+    "dependencies": [
+      {
+        "path": "behavior.wasm",
+        "sha256": "9ae814f53be8af3b5180fdbcea7ebfcd0e5ee06801ac72d9bddca65341b778d8"
+      }
+    ],
+    "input_sha256": "9ae814f53be8af3b5180fdbcea7ebfcd0e5ee06801ac72d9bddca65341b778d8",
+    "prepared_sha256": "abcb31850ce02e243c61b52a8db82a4ba51b364c2b220a942fcc39a3eb294be4",
+    "registry_sha256": "f162a7cde4a27541ddfb19aad3c5c80f75ba006c9a87ac4aa4683d9fbbf36ecc"
+  },
+  "revision": 2
+}
