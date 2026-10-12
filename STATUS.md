@@ -36,6 +36,26 @@ Current-main integration remains pending. The actual package is retained outside
 remain open. [Package proof](docs/spikes/native-wasm-physics-package.md).
 [Contract and evidence](docs/spikes/native-wasm-physics-queries.md).
 
+## Nested animation tree numeric core — current-main verified
+
+The native evaluator now supports bounded nested 1D and rectangular bilinear 2D
+blend trees, normalized clip phases and sixteen-contribution fades. Full runtime
+checks pass 200 cases; 4096 sampling/fade steps allocate nothing. Clippy, wasm32,
+dependency checks and independent source review pass. This is numerical core
+work: authored/cooked graphs, active runtime/renderer/SDK wiring and complete
+checkpoint continuation remain open. [Contract and evidence](docs/spikes/native-animation-tree-core.md).
+
+## Multi-pose animation sampling — current-main verified
+
+The retained numeric animation player now mixes up to sixteen clip samples with
+weighted local translation/scale and normalized quaternion averaging. Existing
+unpublished pose storage supplies the scratch lanes, so retained memory and
+per-sample allocations do not increase. All 108 affected tests, Clippy, wasm32,
+dependency and formatting checks pass; independent source review accepts the
+scope. Combined integration on main #143 passes 310 CPU tests and Clippy.
+Authored nested/2D trees, blended-state transitions and their native/SDK
+wiring remain open. [Contract and evidence](docs/spikes/runtime-weighted-pose.md).
+
 ## Checkpoint 11 — failed frozen batch, two probe contracts repaired
 
 The main #141 snapshot finished 20/23 required checks successfully; release is
@@ -575,7 +595,7 @@ Integrated main101 passes 324 affected tests/doctests, scoped Clippy/contracts a
 source/build-deleted processes plus a corruption refusal pass. Whole checkpoint
 bytes match uninterrupted execution. Module globals/closures remain explicitly
 ephemeral and physical input restarts neutral. Physics/audio/static continuation
-and platform durability remain unsupported; this does not complete Phase1 saves. [Contract and evidence](docs/spikes/native-session-checkpoints.md).
+and platform durability remain unsupported; this does not complete Phase 1 saves. [Contract and evidence](docs/spikes/native-session-checkpoints.md).
 Animation-bearing world-save v4 now passes the same ordinary-load boundary,
 including nondefault locale restoration and exact script-state/timer continuation;
 legacy and wrong-binding refusals stay atomic.
@@ -592,7 +612,7 @@ and absolute observations, and refuses unsupported window/GPU/static routes.
 and private build deletion, five successful processes and nine refusal controls
 pass; uninterrupted and twice-resumed final checkpoint bytes match. This remains
 opt-in typed gameplay persistence, not arbitrary VM, physics/audio or complete
-Phase1 saves. PCM/checkpoint are not a multifile atomic transaction, and full
+Phase 1 saves. PCM/checkpoint are not a multifile atomic transaction, and full
 power-loss durability is not claimed. [Contract/evidence](docs/spikes/native-game-checkpoints.md).
 
 ## Shared agent project access — locally verified
@@ -1107,7 +1127,7 @@ and reject mixed numeric/entity/animation/log prefixes on failure. The combined
 20 tooling tests pass; independent boundary review accepted the frozen code.
 [Evidence and limits](docs/spikes/native-wasm-animation.md). Publication/integration
 against actual main117 now repeats all 281 actual-host tests and affected checks. This does not add
-blending/state machines/IK/root motion or satisfy device/complete SDK/Phase1 gates.
+blending/state machines/IK/root motion or satisfy device/complete SDK/Phase 1 gates.
 
 ## Native text data/package foundation — historical verification
 
