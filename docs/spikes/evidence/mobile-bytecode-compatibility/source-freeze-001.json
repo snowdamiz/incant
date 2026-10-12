@@ -1,0 +1,51 @@
+{
+  "base": "b79460343bd25872ee9b6ca88bda9f3301b91a52",
+  "root": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+  "scope": "Narrow compiler/cook compatibility; native tests active; iOS execution and device compilation pending; Android denied",
+  "files": [
+    {
+      "path": "crates/incant_cook/src/build_script.rs",
+      "sha256": "5e41bb377bb55cb7cc3e77d8cd5d663dde350767f596711e7f9930918a797863"
+    },
+    {
+      "path": "crates/incant_cook/src/script.rs",
+      "sha256": "cc3cce8b49bdc39ab4661d461cdd62a9e0cff6eba92b49adbb802b04914604e2"
+    },
+    {
+      "path": "crates/incant_cook/tests/scripts.rs",
+      "sha256": "64c592a27ae0641ebe4f61dc6ea276b48f340fbfcae89eddf38fcc59f25522d0"
+    },
+    {
+      "path": "crates/incant_script/build.rs",
+      "sha256": "4a592581860180d2689f4583ff676a596817526f1caf78056f5d7217cdb8977e"
+    },
+    {
+      "path": "crates/incant_script/src/artifact.rs",
+      "sha256": "af5f82dea89b8e1e96f68264b4413606e90ece9b07caf9564d2b816a217c52ac"
+    },
+    {
+      "path": "crates/incant_script/src/artifact/compatibility.rs",
+      "sha256": "aa7548c658a85ee664316fe636fe290026b146a4863bd96b4ca6cfd45f161f35"
+    },
+    {
+      "path": "crates/incant_script/src/artifact/mobile_tests.rs",
+      "sha256": "0a2a803feb813503c60e108d24502ab82fc12d0dbc7522d0e0d9806013262427"
+    },
+    {
+      "path": "crates/incant_script/src/compiler.rs",
+      "sha256": "7ee38efe4df269ce7723d87a79ac98bae3ef010567449918e616c81ce96d74f4"
+    },
+    {
+      "path": "crates/incant_script/src/lib.rs",
+      "sha256": "0e79a3bb3e9fd5d3f3e489fe4ef0aab06a0a4391ab206b216a3284bd7ce9dc71"
+    },
+    {
+      "path": "crates/incant_script/tests/fixtures/mobile_compat.expected.json",
+      "sha256": "9c4295810f5e50750dcfc99c44b677da45d164fbe7167312c1aca4d644dce612"
+    },
+    {
+      "path": "crates/incant_script/tests/fixtures/mobile_compat.js",
+      "sha256": "acc5c78fe7c2eb9f28d2bf45c7d43e61a98486cc2509f1d69aff02be54f8f032"
+    }
+  ]
+}

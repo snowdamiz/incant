@@ -16,6 +16,15 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Pinned mobile bytecode compatibility — target execution pending
+
+A fresh trusted-source cook now records exact producer/destination and the pinned
+QuickJS bytecode/numeric ABI for the Mac ARM to iOS device/simulator route. Native
+script/cooker behavior and scoped Clippy checks pass; target archive and actual
+simulator execution remain pending. Android cross-target admission and authored
+project cross-export remain denied. This does not establish a phone gate.
+[Contract and evidence](docs/spikes/mobile-bytecode-compatibility.md).
+
 ## Headless UI and reusable player — current integration verified
 
 The shared recorded UI route and optional mobile C ABI pass all 19 integrated
