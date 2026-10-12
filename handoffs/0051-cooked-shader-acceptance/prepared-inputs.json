@@ -1,0 +1,74 @@
+{
+  "status": "root granted graphics after verified 0050 release; all four numerical suites passed; Claude appearance pending",
+  "required_model": "Opus 5.5",
+  "required_effort": "max",
+  "native_backend_scope": "Metal only",
+  "geometry_source": "85e1c5fca86beca95ce33dd8f882d44ed40d7e45",
+  "profile": "ci",
+  "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1",
+  "geometry_manifest": {
+    "path": "/tmp/incant-geometry-acceptance-binaries-v2/manifest.json",
+    "sha256": "b063b8b10888725b9f533f189ad665e8ec9fce04e9ef81c20ac1dbdfed5c5806"
+  },
+  "geometry_binaries": {
+    "default": {
+      "model_gpu": {
+        "path": "/tmp/incant-geometry-acceptance-binaries-v2/default-model_gpu",
+        "sha256": "2e0d6d6c826a9b4196acbbcf8e821f8f3c6ce446d80ca801495372b1a6f27b9e",
+        "bytes": 15175800
+      },
+      "incant_render": {
+        "path": "/tmp/incant-geometry-acceptance-binaries-v2/default-incant_render",
+        "sha256": "7d6b574d80a4fd68d48d1d7638fdee86324494c1fcf6981f5e8a611bd596d94f",
+        "bytes": 25790160
+      }
+    },
+    "cooked-geometry": {
+      "incant_render": {
+        "path": "/tmp/incant-geometry-acceptance-binaries-v2/cooked-geometry-incant_render",
+        "sha256": "24af19ad9c832d39f38e523a188b3846cf9361fd6d07d7022cb86b6c166a200a",
+        "bytes": 25884160
+      },
+      "model_gpu": {
+        "path": "/tmp/incant-geometry-acceptance-binaries-v2/cooked-geometry-model_gpu",
+        "sha256": "5dfc98bfa6f6cd0b87d4f35445f7e0154d1b32ee520b6cb551c16c9c8f940305",
+        "bytes": 15250744
+      }
+    }
+  },
+  "output_source": "550b5635ac04d47ea9eee2f8baacc25ae88b4652",
+  "output_pairing": {
+    "path": "/tmp/incant-output-acceptance-binaries-v1/source-pairing.json",
+    "sha256": "f4458bf11ec22c998c3aececa0abedca41a348bb609c55196d7df9b9425a43bf"
+  },
+  "output_numerical_receipt": {
+    "path": "/tmp/incant-output-numerical-acceptance-001/comparison.json",
+    "sha256": "af64a4dfb81e46f62e82f83313d6bf07de6a4cafb7caaf7b26257152efc59a49"
+  },
+  "geometry_cpu_review": {
+    "path": "/tmp/incant-cooked-geometry-root-review.json",
+    "sha256": "3acfacca03b8b331b2c82443fe8aee35d36ac6eed081ffdcd5b329b4a006a718"
+  },
+  "build_only": false,
+  "gpu_executed_for_preparation": true,
+  "commands_file": "brief.md",
+  "diagnostic_source": {
+    "path": "crates/incant_render/tests/diagnostic_output/mod.rs",
+    "sha256": "8f863c455bf264e89c85683197eb9d813c06a72879bba058636101dfc208e9d6"
+  },
+  "prior_geometry_pair_preserved": "/tmp/incant-geometry-acceptance-binaries-v1/manifest.json",
+  "expected_raw_cases": {
+    "output": 16,
+    "diagnostic": 12
+  },
+  "capture_limit": 24,
+  "focused_children": 8,
+  "full_suite_children": 4,
+  "numerical_acceptance": {
+    "path": "numerical-acceptance.json",
+    "sha256": "f5b716093bcc9d6f2744baa96e02b297d214428604a93d1979d41ea9ef95d7d5",
+    "original_receipt_sha256": "2636fc588223b84ff145f8fb6fe1a235eff39f9e4250faa4b45b082b5df325b7",
+    "tests": 138,
+    "exact_raw_pairs": 28
+  }
+}

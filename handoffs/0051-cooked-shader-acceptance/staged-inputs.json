@@ -1,0 +1,10 @@
+{
+  "binaries": {
+    "geometry-v2/default-model_gpu": "2e0d6d6c826a9b4196acbbcf8e821f8f3c6ce446d80ca801495372b1a6f27b9e",
+    "geometry-v2/default-incant_render": "7d6b574d80a4fd68d48d1d7638fdee86324494c1fcf6981f5e8a611bd596d94f",
+    "geometry-v2/cooked-geometry-incant_render": "24af19ad9c832d39f38e523a188b3846cf9361fd6d07d7022cb86b6c166a200a",
+    "geometry-v2/cooked-geometry-model_gpu": "5dfc98bfa6f6cd0b87d4f35445f7e0154d1b32ee520b6cb551c16c9c8f940305",
+    "output-v1/default-incant-render-tests": "7ab2bf2dd27b8c5b6ac734f4667877bbec6e5cf6b5e446cb8848a602847519cb",
+    "output-v1/cooked-incant-render-tests": "5271c38c27b46f4850e3b2568e589ea2b936d67fbc298c05079c0f3baafe9d6a"
+  }
+}

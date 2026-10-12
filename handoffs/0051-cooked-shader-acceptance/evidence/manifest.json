@@ -1,0 +1,501 @@
+{
+  "scope": "0051 Claude appearance review: 8 helper children, 24 captures, Metal only",
+  "captures": [
+    {
+      "case": "output",
+      "mode": "default",
+      "file": "hdr-reference-swatches.png",
+      "artifact": "artifacts/0051-cooked-shader-acceptance/output-default/hdr-reference-swatches.png",
+      "width": 384,
+      "height": 128,
+      "file_sha256": "de99290cfd11f0af713beaafeb14ca4dbdc410840347c9949ae7f6d772709130",
+      "rgba_sha256": "9f8f492c60954c350f8f450d18d1c43b0746129239184ebc77b07c7c95653d45",
+      "retained_copy": "evidence/captures/hdr-reference-swatches.png"
+    },
+    {
+      "case": "output",
+      "mode": "cooked",
+      "file": "hdr-reference-swatches.png",
+      "artifact": "artifacts/0051-cooked-shader-acceptance/output-cooked/hdr-reference-swatches.png",
+      "width": 384,
+      "height": 128,
+      "file_sha256": "de99290cfd11f0af713beaafeb14ca4dbdc410840347c9949ae7f6d772709130",
+      "rgba_sha256": "9f8f492c60954c350f8f450d18d1c43b0746129239184ebc77b07c7c95653d45",
+      "retained_copy": null
+    },
+    {
+      "case": "lookdev",
+      "mode": "default",
+      "file": "lookdev-sun-12.png",
+      "artifact": "artifacts/0051-cooked-shader-acceptance/lookdev-default/lookdev-sun-12.png",
+      "width": 640,
+      "height": 480,
+      "file_sha256": "9c25abff830a24300190bb608dbdea67f7a7a63883e4b4d792a6dd10479389b7",
+      "rgba_sha256": "df59747c237bb929d831fee84fa28c6cb96744efdb2eb1f50542a3ae62f20bec",
+      "retained_copy": "evidence/captures/lookdev-sun-12.png"
+    },
+    {
+      "case": "lookdev",
+      "mode": "cooked",
+      "file": "lookdev-sun-12.png",
+      "artifact": "artifacts/0051-cooked-shader-acceptance/lookdev-cooked/lookdev-sun-12.png",
+      "width": 640,
+      "height": 480,
+      "file_sha256": "9c25abff830a24300190bb608dbdea67f7a7a63883e4b4d792a6dd10479389b7",
+      "rgba_sha256": "df59747c237bb929d831fee84fa28c6cb96744efdb2eb1f50542a3ae62f20bec",
+      "retained_copy": null
+    },
+    {
+      "case": "lookdev",
+      "mode": "default",
+      "file": "lookdev-sun-38.png",
+      "artifact": "artifacts/0051-cooked-shader-acceptance/lookdev-default/lookdev-sun-38.png",
+      "width": 640,
+      "height": 480,
+      "file_sha256": "be3da8cad70181dd67c2499a6d94d8af843b94ea253d4dd864ced637e94b4eb5",
+      "rgba_sha256": "283784f2024c24d3a6be61b7d039a3bca98309277754d01e213c80faa5a9ed1c",
+      "retained_copy": "evidence/captures/lookdev-sun-38.png"
+    },
+    {
+      "case": "lookdev",
+      "mode": "cooked",
+      "file": "lookdev-sun-38.png",
+      "artifact": "artifacts/0051-cooked-shader-acceptance/lookdev-cooked/lookdev-sun-38.png",
+      "width": 640,
+      "height": 480,
+      "file_sha256": "be3da8cad70181dd67c2499a6d94d8af843b94ea253d4dd864ced637e94b4eb5",
+      "rgba_sha256": "283784f2024c24d3a6be61b7d039a3bca98309277754d01e213c80faa5a9ed1c",
+      "retained_copy": null
+    },
+    {
+      "case": "lookdev",
+      "mode": "default",
+      "file": "lookdev-sun-70.png",
+      "artifact": "artifacts/0051-cooked-shader-acceptance/lookdev-default/lookdev-sun-70.png",
+      "width": 640,
+      "height": 480,
+      "file_sha256": "06e846ead6866fae23146c0ac06c0ccf6138f1d3a26ce0e62e7a94b2968d7595",
+      "rgba_sha256": "5d4d53ac605a077d10f7b80eccbc09b0604daded2dcea83510a5d53d61736297",
+      "retained_copy": "evidence/captures/lookdev-sun-70.png"
+    },
+    {
+      "case": "lookdev",
+      "mode": "cooked",
+      "file": "lookdev-sun-70.png",
+      "artifact": "artifacts/0051-cooked-shader-acceptance/lookdev-cooked/lookdev-sun-70.png",
+      "width": 640,
+      "height": 480,
+      "file_sha256": "06e846ead6866fae23146c0ac06c0ccf6138f1d3a26ce0e62e7a94b2968d7595",
+      "rgba_sha256": "5d4d53ac605a077d10f7b80eccbc09b0604daded2dcea83510a5d53d61736297",
+      "retained_copy": null
+    },
+    {
+      "case": "lookdev",
+      "mode": "default",
+      "file": "lookdev-unshadowed.png",
+      "artifact": "artifacts/0051-cooked-shader-acceptance/lookdev-default/lookdev-unshadowed.png",
+      "width": 640,
+      "height": 480,
+      "file_sha256": "7fae7886e1067bfa0f0b910f5daaf7ce4a1cb6c07882442d1eb8fbb38b7f095c",
+      "rgba_sha256": "3bf60feae72467a699336b962cede9a6494714d9fffe66a51edb3a80619d6a32",
+      "retained_copy": "evidence/captures/lookdev-unshadowed.png"
+    },
+    {
+      "case": "lookdev",
+      "mode": "cooked",
+      "file": "lookdev-unshadowed.png",
+      "artifact": "artifacts/0051-cooked-shader-acceptance/lookdev-cooked/lookdev-unshadowed.png",
+      "width": 640,
+      "height": 480,
+      "file_sha256": "7fae7886e1067bfa0f0b910f5daaf7ce4a1cb6c07882442d1eb8fbb38b7f095c",
+      "rgba_sha256": "3bf60feae72467a699336b962cede9a6494714d9fffe66a51edb3a80619d6a32",
+      "retained_copy": null
+    },
+    {
+      "case": "masks",
+      "mode": "default",
+      "file": "shadow-alpha-mask.png",
+      "artifact": "artifacts/0051-cooked-shader-acceptance/masks-default/shadow-alpha-mask.png",
+      "width": 640,
+      "height": 480,
+      "file_sha256": "51d25bad87d2c36f1a6a0b46a9ccf6ed8e3e4777a8c6f11a8e93572abab16c0c",
+      "rgba_sha256": "1245a09b45d79d3c42b78bfb5b82d88e804af1f13aab4342e1c22c580f583415",
+      "retained_copy": "evidence/captures/shadow-alpha-mask.png"
+    },
+    {
+      "case": "masks",
+      "mode": "cooked",
+      "file": "shadow-alpha-mask.png",
+      "artifact": "artifacts/0051-cooked-shader-acceptance/masks-cooked/shadow-alpha-mask.png",
+      "width": 640,
+      "height": 480,
+      "file_sha256": "51d25bad87d2c36f1a6a0b46a9ccf6ed8e3e4777a8c6f11a8e93572abab16c0c",
+      "rgba_sha256": "1245a09b45d79d3c42b78bfb5b82d88e804af1f13aab4342e1c22c580f583415",
+      "retained_copy": null
+    },
+    {
+      "case": "masks",
+      "mode": "default",
+      "file": "shadow-blended-noncaster.png",
+      "artifact": "artifacts/0051-cooked-shader-acceptance/masks-default/shadow-blended-noncaster.png",
+      "width": 640,
+      "height": 480,
+      "file_sha256": "2a9abc8efdd367d3515da296fe3876db8d0b73c3233a60e4cffc8b1788ff576b",
+      "rgba_sha256": "5a516e916b5aa6ce2d6f73b0fb410a63e1df9510a7331fa7536193c977bf46d6",
+      "retained_copy": "evidence/captures/shadow-blended-noncaster.png"
+    },
+    {
+      "case": "masks",
+      "mode": "cooked",
+      "file": "shadow-blended-noncaster.png",
+      "artifact": "artifacts/0051-cooked-shader-acceptance/masks-cooked/shadow-blended-noncaster.png",
+      "width": 640,
+      "height": 480,
+      "file_sha256": "2a9abc8efdd367d3515da296fe3876db8d0b73c3233a60e4cffc8b1788ff576b",
+      "rgba_sha256": "5a516e916b5aa6ce2d6f73b0fb410a63e1df9510a7331fa7536193c977bf46d6",
+      "retained_copy": null
+    },
+    {
+      "case": "masks",
+      "mode": "default",
+      "file": "shadow-double-sided-back.png",
+      "artifact": "artifacts/0051-cooked-shader-acceptance/masks-default/shadow-double-sided-back.png",
+      "width": 640,
+      "height": 480,
+      "file_sha256": "c79d992829e5805d90b3a3fd47c1fa24a4434cf6dc96a5e04a51d42e60cda2ae",
+      "rgba_sha256": "944e2a0f0f893eb2bd034f7bf4eb0f18a1d7e5184221cdf2b7e4710fbc6640a9",
+      "retained_copy": "evidence/captures/shadow-double-sided-back.png"
+    },
+    {
+      "case": "masks",
+      "mode": "cooked",
+      "file": "shadow-double-sided-back.png",
+      "artifact": "artifacts/0051-cooked-shader-acceptance/masks-cooked/shadow-double-sided-back.png",
+      "width": 640,
+      "height": 480,
+      "file_sha256": "c79d992829e5805d90b3a3fd47c1fa24a4434cf6dc96a5e04a51d42e60cda2ae",
+      "rgba_sha256": "944e2a0f0f893eb2bd034f7bf4eb0f18a1d7e5184221cdf2b7e4710fbc6640a9",
+      "retained_copy": null
+    },
+    {
+      "case": "masks",
+      "mode": "default",
+      "file": "shadow-reflected-mask.png",
+      "artifact": "artifacts/0051-cooked-shader-acceptance/masks-default/shadow-reflected-mask.png",
+      "width": 640,
+      "height": 480,
+      "file_sha256": "c79d992829e5805d90b3a3fd47c1fa24a4434cf6dc96a5e04a51d42e60cda2ae",
+      "rgba_sha256": "944e2a0f0f893eb2bd034f7bf4eb0f18a1d7e5184221cdf2b7e4710fbc6640a9",
+      "retained_copy": "evidence/captures/shadow-reflected-mask.png"
+    },
+    {
+      "case": "masks",
+      "mode": "cooked",
+      "file": "shadow-reflected-mask.png",
+      "artifact": "artifacts/0051-cooked-shader-acceptance/masks-cooked/shadow-reflected-mask.png",
+      "width": 640,
+      "height": 480,
+      "file_sha256": "c79d992829e5805d90b3a3fd47c1fa24a4434cf6dc96a5e04a51d42e60cda2ae",
+      "rgba_sha256": "944e2a0f0f893eb2bd034f7bf4eb0f18a1d7e5184221cdf2b7e4710fbc6640a9",
+      "retained_copy": null
+    },
+    {
+      "case": "masks",
+      "mode": "default",
+      "file": "shadow-single-sided-back.png",
+      "artifact": "artifacts/0051-cooked-shader-acceptance/masks-default/shadow-single-sided-back.png",
+      "width": 640,
+      "height": 480,
+      "file_sha256": "2a9abc8efdd367d3515da296fe3876db8d0b73c3233a60e4cffc8b1788ff576b",
+      "rgba_sha256": "5a516e916b5aa6ce2d6f73b0fb410a63e1df9510a7331fa7536193c977bf46d6",
+      "retained_copy": "evidence/captures/shadow-single-sided-back.png"
+    },
+    {
+      "case": "masks",
+      "mode": "cooked",
+      "file": "shadow-single-sided-back.png",
+      "artifact": "artifacts/0051-cooked-shader-acceptance/masks-cooked/shadow-single-sided-back.png",
+      "width": 640,
+      "height": 480,
+      "file_sha256": "2a9abc8efdd367d3515da296fe3876db8d0b73c3233a60e4cffc8b1788ff576b",
+      "rgba_sha256": "5a516e916b5aa6ce2d6f73b0fb410a63e1df9510a7331fa7536193c977bf46d6",
+      "retained_copy": null
+    },
+    {
+      "case": "diagnostic",
+      "mode": "default",
+      "file": "diagnostic-base.png",
+      "artifact": "artifacts/0051-cooked-shader-acceptance/diagnostic-default/diagnostic-base.png",
+      "width": 160,
+      "height": 96,
+      "file_sha256": "46c5129850d0c275fc6c03f0b13a8e153e3a1e2957eb3c871c54dd9dd93ec958",
+      "rgba_sha256": "72d5dc5db09525812163a0cec39c5e59ec83f5dbece6f2da01b708b071386898",
+      "retained_copy": "evidence/captures/diagnostic-base.png"
+    },
+    {
+      "case": "diagnostic",
+      "mode": "cooked",
+      "file": "diagnostic-base.png",
+      "artifact": "artifacts/0051-cooked-shader-acceptance/diagnostic-cooked/diagnostic-base.png",
+      "width": 160,
+      "height": 96,
+      "file_sha256": "46c5129850d0c275fc6c03f0b13a8e153e3a1e2957eb3c871c54dd9dd93ec958",
+      "rgba_sha256": "72d5dc5db09525812163a0cec39c5e59ec83f5dbece6f2da01b708b071386898",
+      "retained_copy": null
+    },
+    {
+      "case": "diagnostic",
+      "mode": "default",
+      "file": "diagnostic-raised.png",
+      "artifact": "artifacts/0051-cooked-shader-acceptance/diagnostic-default/diagnostic-raised.png",
+      "width": 160,
+      "height": 96,
+      "file_sha256": "98266d7a5bfeee74a0db58ab947ddd330295e47110ee8aff51636e1826c5e286",
+      "rgba_sha256": "297f944bfacf4627fca44039b61f9891a1efea386a3e2a788bd98d9b0007b58b",
+      "retained_copy": "evidence/captures/diagnostic-raised.png"
+    },
+    {
+      "case": "diagnostic",
+      "mode": "cooked",
+      "file": "diagnostic-raised.png",
+      "artifact": "artifacts/0051-cooked-shader-acceptance/diagnostic-cooked/diagnostic-raised.png",
+      "width": 160,
+      "height": 96,
+      "file_sha256": "98266d7a5bfeee74a0db58ab947ddd330295e47110ee8aff51636e1826c5e286",
+      "rgba_sha256": "297f944bfacf4627fca44039b61f9891a1efea386a3e2a788bd98d9b0007b58b",
+      "retained_copy": null
+    }
+  ],
+  "copies": {
+    "evidence/helper/children.json": {
+      "source": "artifacts/0051-cooked-shader-acceptance/children.json",
+      "sha256": "65d90167e9fcc696f54cbcd80b6751f44f24a2ee7b37803ff09bfdb6fc3700a5"
+    },
+    "evidence/helper/RELEASED.json": {
+      "source": "artifacts/tools/0051/RELEASED.json",
+      "sha256": "4dde458f39d8290a47f232202e5a52ec5ab5039cfb5165426abaabe7dab1233d"
+    },
+    "evidence/analysis.json": {
+      "source": "artifacts/0051-cooked-shader-acceptance/review/analysis.json",
+      "sha256": "5b8e79bf68a70ad9f4fe76eda5d42ee969376f12858856634963febda9e9eab8"
+    },
+    "evidence/helper/logs/output-default.child-log.txt": {
+      "source": "artifacts/0051-cooked-shader-acceptance/output-default/child.log",
+      "sha256": "bfa149cb77346efeb99ce85aa74d7292b0460a4385596f3eb22146d5b42c4b6b",
+      "raw_sha256": "97952cd2d27e6d3f172a71232dad54182fd60a03e62bccad5647e5f87556171f",
+      "normalization": "trailing blank line removed"
+    },
+    "evidence/helper/logs/output-cooked.child-log.txt": {
+      "source": "artifacts/0051-cooked-shader-acceptance/output-cooked/child.log",
+      "sha256": "1e0210db8202d3beab29af8123d79386788d61ad8e1c55737d19adb578921724",
+      "raw_sha256": "dc13c6d35da3db45c25e23b7cfcc7387a74fde4cffc22f5eeb41003b4fb0ac5a",
+      "normalization": "trailing blank line removed"
+    },
+    "evidence/helper/logs/lookdev-default.child-log.txt": {
+      "source": "artifacts/0051-cooked-shader-acceptance/lookdev-default/child.log",
+      "sha256": "9cefd925013c9da13670f641ae87af0876ea6c0b14a2fa69fda20bd190d6a7f5",
+      "raw_sha256": "f69f325427897068a01a9f3eb4d0a442d2fab718955f07799e34ce4323599044",
+      "normalization": "trailing blank line removed"
+    },
+    "evidence/helper/logs/lookdev-cooked.child-log.txt": {
+      "source": "artifacts/0051-cooked-shader-acceptance/lookdev-cooked/child.log",
+      "sha256": "5a30ba633b41e05f336b243203ac9bad53c1dc349cd9f77a1909b4ce9b5c369a",
+      "raw_sha256": "e8157100fe714666805ceedc36c9eadbf19997f0efc8635c3e2619ebcd467cdd",
+      "normalization": "trailing blank line removed"
+    },
+    "evidence/helper/logs/masks-default.child-log.txt": {
+      "source": "artifacts/0051-cooked-shader-acceptance/masks-default/child.log",
+      "sha256": "c36831de8be138ff75fd40d6fe1599fbc05b2c674b79496aeba252e38a2a2ddd",
+      "raw_sha256": "07659011199169c2736837409a742d2fbe2cfe4b87f9008248b111987be9c239",
+      "normalization": "trailing blank line removed"
+    },
+    "evidence/helper/logs/masks-cooked.child-log.txt": {
+      "source": "artifacts/0051-cooked-shader-acceptance/masks-cooked/child.log",
+      "sha256": "59ba7f84a03bb9df2af9ff14fecc90b22d94c53bb64fe1e6f9d35e112a60ce07",
+      "raw_sha256": "296d18e1de97ec580bf564560a5481470ab94664553f91e85f1c8d6722b32704",
+      "normalization": "trailing blank line removed"
+    },
+    "evidence/helper/logs/diagnostic-default.child-log.txt": {
+      "source": "artifacts/0051-cooked-shader-acceptance/diagnostic-default/child.log",
+      "sha256": "c73d4da914c9d2f6aa4021cf3ee1175b66008ca9c257e1e925972e91cdb5d7ba",
+      "raw_sha256": "c24f4c4353df9651469cad0e07c608d4b88cf25cfdbb99d93cad32fb82f91d58",
+      "normalization": "trailing blank line removed"
+    },
+    "evidence/helper/logs/diagnostic-cooked.child-log.txt": {
+      "source": "artifacts/0051-cooked-shader-acceptance/diagnostic-cooked/child.log",
+      "sha256": "2c9e08f294fde68706b88c9463951b0b18eb9a61ffa2527f283fcb2b2c53dfaf",
+      "raw_sha256": "5539ddee86d868ae7799351b2d3904c3deae363df830f020fb4079a938451688",
+      "normalization": "trailing blank line removed"
+    },
+    "evidence/preflight/output-default.json": {
+      "source": "artifacts/0051-cooked-shader-acceptance/preflight/output-default.json",
+      "sha256": "56a76cf9ae8bb57dbc5a81fecf267b632c7458eaefa6c99e89c96ef3db4cfc98"
+    },
+    "evidence/preflight/output-cooked.json": {
+      "source": "artifacts/0051-cooked-shader-acceptance/preflight/output-cooked.json",
+      "sha256": "5a1fe38cea2a00420abdc318a8378387f92fb4a4db76ab23ab7e74190af9b636"
+    },
+    "evidence/preflight/lookdev-default.json": {
+      "source": "artifacts/0051-cooked-shader-acceptance/preflight/lookdev-default.json",
+      "sha256": "187c35140f4e95bbdf1a9bfb69232c81d1174420dc9ed652a291b99d1bf7c23b"
+    },
+    "evidence/preflight/lookdev-cooked.json": {
+      "source": "artifacts/0051-cooked-shader-acceptance/preflight/lookdev-cooked.json",
+      "sha256": "194f497ac3b909e14d0e00c3e8cb630261bbf602e45d78c341a8160ff0e01190"
+    },
+    "evidence/preflight/masks-default.json": {
+      "source": "artifacts/0051-cooked-shader-acceptance/preflight/masks-default.json",
+      "sha256": "45e673ebeadfd7642fffffd1ccfe7176b8fcf0921f7ad9b4406b2ecaccbe3e25"
+    },
+    "evidence/preflight/masks-cooked.json": {
+      "source": "artifacts/0051-cooked-shader-acceptance/preflight/masks-cooked.json",
+      "sha256": "d50868d0e1f3b3fe6384ed8187980cb1f6a66ae15156c1125a53f8b910fae76f"
+    },
+    "evidence/preflight/diagnostic-default.json": {
+      "source": "artifacts/0051-cooked-shader-acceptance/preflight/diagnostic-default.json",
+      "sha256": "95d77ce3fab78c01d3b746b5e575c15439a2eab16b65d7b68b7b969ea95b21d5"
+    },
+    "evidence/preflight/diagnostic-cooked.json": {
+      "source": "artifacts/0051-cooked-shader-acceptance/preflight/diagnostic-cooked.json",
+      "sha256": "3cd7d15fb5d631780b06e4af44785bf3a01fd9e2f5f6cc145033999331635c20"
+    },
+    "evidence/captures/hdr-reference-swatches.png": {
+      "source": "artifacts/0051-cooked-shader-acceptance/output-default/hdr-reference-swatches.png",
+      "sha256": "de99290cfd11f0af713beaafeb14ca4dbdc410840347c9949ae7f6d772709130"
+    },
+    "evidence/captures/lookdev-sun-12.png": {
+      "source": "artifacts/0051-cooked-shader-acceptance/lookdev-default/lookdev-sun-12.png",
+      "sha256": "9c25abff830a24300190bb608dbdea67f7a7a63883e4b4d792a6dd10479389b7"
+    },
+    "evidence/captures/lookdev-sun-38.png": {
+      "source": "artifacts/0051-cooked-shader-acceptance/lookdev-default/lookdev-sun-38.png",
+      "sha256": "be3da8cad70181dd67c2499a6d94d8af843b94ea253d4dd864ced637e94b4eb5"
+    },
+    "evidence/captures/lookdev-sun-70.png": {
+      "source": "artifacts/0051-cooked-shader-acceptance/lookdev-default/lookdev-sun-70.png",
+      "sha256": "06e846ead6866fae23146c0ac06c0ccf6138f1d3a26ce0e62e7a94b2968d7595"
+    },
+    "evidence/captures/lookdev-unshadowed.png": {
+      "source": "artifacts/0051-cooked-shader-acceptance/lookdev-default/lookdev-unshadowed.png",
+      "sha256": "7fae7886e1067bfa0f0b910f5daaf7ce4a1cb6c07882442d1eb8fbb38b7f095c"
+    },
+    "evidence/captures/shadow-alpha-mask.png": {
+      "source": "artifacts/0051-cooked-shader-acceptance/masks-default/shadow-alpha-mask.png",
+      "sha256": "51d25bad87d2c36f1a6a0b46a9ccf6ed8e3e4777a8c6f11a8e93572abab16c0c"
+    },
+    "evidence/captures/shadow-blended-noncaster.png": {
+      "source": "artifacts/0051-cooked-shader-acceptance/masks-default/shadow-blended-noncaster.png",
+      "sha256": "2a9abc8efdd367d3515da296fe3876db8d0b73c3233a60e4cffc8b1788ff576b"
+    },
+    "evidence/captures/shadow-double-sided-back.png": {
+      "source": "artifacts/0051-cooked-shader-acceptance/masks-default/shadow-double-sided-back.png",
+      "sha256": "c79d992829e5805d90b3a3fd47c1fa24a4434cf6dc96a5e04a51d42e60cda2ae"
+    },
+    "evidence/captures/shadow-reflected-mask.png": {
+      "source": "artifacts/0051-cooked-shader-acceptance/masks-default/shadow-reflected-mask.png",
+      "sha256": "c79d992829e5805d90b3a3fd47c1fa24a4434cf6dc96a5e04a51d42e60cda2ae"
+    },
+    "evidence/captures/shadow-single-sided-back.png": {
+      "source": "artifacts/0051-cooked-shader-acceptance/masks-default/shadow-single-sided-back.png",
+      "sha256": "2a9abc8efdd367d3515da296fe3876db8d0b73c3233a60e4cffc8b1788ff576b"
+    },
+    "evidence/captures/diagnostic-base.png": {
+      "source": "artifacts/0051-cooked-shader-acceptance/diagnostic-default/diagnostic-base.png",
+      "sha256": "46c5129850d0c275fc6c03f0b13a8e153e3a1e2957eb3c871c54dd9dd93ec958"
+    },
+    "evidence/captures/diagnostic-raised.png": {
+      "source": "artifacts/0051-cooked-shader-acceptance/diagnostic-default/diagnostic-raised.png",
+      "sha256": "98266d7a5bfeee74a0db58ab947ddd330295e47110ee8aff51636e1826c5e286"
+    }
+  },
+  "derived_inspection_images_ignored": {
+    "folder": "artifacts/0051-cooked-shader-acceptance/review/derived",
+    "note": "CPU-derived nearest-neighbour crops and difference maps of the captures; not renders, not committed, regenerable with review/views.py",
+    "files": {
+      "derived-lookdev38-cube-contact-x4.png": {
+        "sha256": "617209eefaf276fcf71220af1de930fa9b52bfa41a658fc973e964eadcb14b0e",
+        "source": "lookdev-default/lookdev-sun-38.png"
+      },
+      "derived-lookdev38-sphere-terminator-contact-x3.png": {
+        "sha256": "571d9b71975cb28497a9c6b36c788e9a8f76eb13697c27a92b189c1e21f9ab85",
+        "source": "lookdev-default/lookdev-sun-38.png"
+      },
+      "derived-lookdev38-wall-and-distant-posts-x3.png": {
+        "sha256": "26a6da1870651f9f0f2238b5696dfcce356e77088a0a342653c172d3e6f689d4",
+        "source": "lookdev-default/lookdev-sun-38.png"
+      },
+      "derived-lookdev38-ramp-post-x3.png": {
+        "sha256": "5cdf49521afb546f3708fb1e8585660926626b687b5bdb9a1a6a803530ef3295",
+        "source": "lookdev-default/lookdev-sun-38.png"
+      },
+      "derived-lookdev12-sphere-shadow-edge-x4.png": {
+        "sha256": "e3423e1d9a37d4ae99e68ddd154afb18e40e8c07901686ad5348f0fc2190ca9f",
+        "source": "lookdev-default/lookdev-sun-12.png"
+      },
+      "derived-lookdev12-distant-post-shadows-x3.png": {
+        "sha256": "82c2f30a23fbc482cd7ec3cc244b791a17df88fed3bc2577510b19db9e23ede8",
+        "source": "lookdev-default/lookdev-sun-12.png"
+      },
+      "derived-lookdev12-cube-wall-contact-x3.png": {
+        "sha256": "28d32fbc01c72152b7d894e8ab112558e9fa04ff0bcf04a8d10ae346558c9713",
+        "source": "lookdev-default/lookdev-sun-12.png"
+      },
+      "derived-lookdev12-ramp-right-edge-x3.png": {
+        "sha256": "e64b12187afc44df76c84f33c237ab4e850fbc9798dd484e8aa26c9ae3de1c83",
+        "source": "lookdev-default/lookdev-sun-12.png"
+      },
+      "derived-lookdev70-contacts-x3.png": {
+        "sha256": "4c11adb278f2fd86bd1dfd23179853d57ad8f74e47c5686d04208c6b8f04bec1",
+        "source": "lookdev-default/lookdev-sun-70.png"
+      },
+      "derived-lookdev70-ramp-post-x3.png": {
+        "sha256": "7f1d4ac9aa6c1e08d99d980592706b26ddd6064e28077255cc1d818169009498",
+        "source": "lookdev-default/lookdev-sun-70.png"
+      },
+      "derived-unshadowed-sphere-x4.png": {
+        "sha256": "f3b7a579a7a5d17ec897d0307e01fffa5b87ea5a08d0c8b46045d83faeea2dd5",
+        "source": "lookdev-default/lookdev-unshadowed.png"
+      },
+      "derived-mask-alpha-shadow-x4.png": {
+        "sha256": "4f789f0819159539773d93a2a94ce423b89b5e23880a49102cf171067b7288c7",
+        "source": "masks-default/shadow-alpha-mask.png"
+      },
+      "derived-mask-reflected-shadow-x4.png": {
+        "sha256": "20eadadddf31ca4717af314c4069bb70225b75c32577037638f816f2b8e9d1d5",
+        "source": "masks-default/shadow-reflected-mask.png"
+      },
+      "derived-mask-double-sided-shadow-x4.png": {
+        "sha256": "20eadadddf31ca4717af314c4069bb70225b75c32577037638f816f2b8e9d1d5",
+        "source": "masks-default/shadow-double-sided-back.png"
+      },
+      "derived-mask-single-sided-region-x4.png": {
+        "sha256": "c68a2d070dfa198ce31285cf77af900b2054a9880ae36fc7ec5a1ad6b4aa3869",
+        "source": "masks-default/shadow-single-sided-back.png"
+      },
+      "derived-mask-blended-region-x4.png": {
+        "sha256": "c68a2d070dfa198ce31285cf77af900b2054a9880ae36fc7ec5a1ad6b4aa3869",
+        "source": "masks-default/shadow-blended-noncaster.png"
+      },
+      "derived-diagnostic-base-x6.png": {
+        "sha256": "2b74b9c8143508e2eb2888ab07bab044cf40745d61483ea68140203880ac5906",
+        "source": "diagnostic-default/diagnostic-base.png"
+      },
+      "derived-diagnostic-raised-x6.png": {
+        "sha256": "a8c930e75bc3668c71c071850f9915e83a9b0bc19494e5ad556a715ee58450e8",
+        "source": "diagnostic-default/diagnostic-raised.png"
+      },
+      "derived-diffmap-sun38-vs-unshadowed.png": {
+        "sha256": "4103d6af7e8461e6321ad3bc3b1f5b04b1e915b546669e46b20bde461443be31",
+        "source": "lookdev-sun-38.png minus lookdev-unshadowed.png (default side)"
+      },
+      "derived-diffmap-sun38-sphere-x4.png": {
+        "sha256": "a8c0effd73228b0f94e45ee18e590dd2084ad32086b568ee8fecf4f914526911",
+        "source": "lookdev-sun-38.png minus lookdev-unshadowed.png (default side)"
+      }
+    }
+  },
+  "root_staged_files_cited_not_copied": {
+    "acp-settings-confirmation.log": "a4fe4889e947e3e810bb0b259256561df750aacf8052ee01c9a7b0f9a37bdabd",
+    "coordination-note.md": "9ef1b9399b702b675ca901be47403659d67fa81decf3c81cf179229abd6ab96e"
+  }
+}

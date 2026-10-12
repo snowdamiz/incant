@@ -1,0 +1,259 @@
+{
+  "source_base": "df71ef8e65571661347b555daa14287c60147bf3",
+  "integrated_main": "2816ecde29bf4dd0bb058e46212cd836c1bb816c",
+  "patch": {
+    "path": "/tmp/incant-cooked-geometry-review.patch",
+    "sha256": "cc8719a78cb89e8d36596e5eb7e0c22b271b377b2d4c4163e9eb5911885d8a98"
+  },
+  "sources": {
+    "crates/incant_render/Cargo.toml": "df267789db36c1db7607c65a7fe0251044859ce4d4e93c33e2151b9271ed32c5",
+    "crates/incant_render/build.rs": "087c70bb7fd826dff2a77343c78935fddb076db9d14cb18866f2f6c17c43202a",
+    "crates/incant_render/src/geometry_shader.rs": "6781836f98e381ac600211fbee33a4674869f6c7b21ebddaadf31f4b8e5cdee6",
+    "crates/incant_render/src/geometry_shader/cooked.rs": "4742b2bc2473d13ab67bca41f32af14ec74baac748fa375aa410484458acdded",
+    "crates/incant_render/src/lib.rs": "4f606ca6e144b28136a0cfc05b08f03c2a9e36ce488fd4d2515f56532b5c371b",
+    "crates/incant_render/src/materials.rs": "f97b533da972066485ebbe78f455960fd68183565da4a671e5fc1ce5546accd7",
+    "crates/incant_render/src/output.rs": "adb73c440d87b0599ca2084b2552d0582c2e4c78affd679b009d37dddd0b1cda",
+    "crates/incant_render/src/output/cooked.rs": "ba0e1c585a2bfb2cd14a19d9a1a00aba7eac54c15057eeecfd52de9e94e58c50",
+    "crates/incant_render/src/resource_error.rs": "4f825d7e38bad01052d2334b9edfdd76e04114d7c7f169ad6dc608f3b435e0d2",
+    "crates/incant_render/src/shader.rs": "9aeadf08eae040fb3d955cbf7d93b1e059add0fee17ebcfbe5356de133587dd5",
+    "crates/incant_render/src/shader/native.rs": "e1ebfe6cd764991437c34308775d5329062344e5c6ff1adeb524342204de1843",
+    "crates/incant_render/src/shadows/mod.rs": "614f29505d80344ceba24d1448a24b55c2ae10c90c5d02bf237ea8b748d080d5",
+    "crates/incant_render/src/shadows/pipeline.rs": "99da7af93c75207b1c834926a4376a66fce697eb00b98c6e638a7a84bb202bfe",
+    "crates/incant_shader_cook/src/geometry/contract.rs": "cf1f25c829206e536b8c95da3699fffa24b514af6b1219c92c2073cb9446839d",
+    "crates/incant_shader_cook/src/geometry/emit.rs": "1ec015b285dc0bd173070040d6848a442e3a6e591a3db327f22dca55073b78df",
+    "crates/incant_shader_cook/src/geometry/mod.rs": "098f617dbf41b374c71bbb1455b880193e377858d2b81b6a01101f9e9eaa3f4d",
+    "crates/incant_shader_cook/src/lib.rs": "6c60089be46ade672cdfa51510e683a0a15bff1c62c910a9395f9a192b737e57",
+    "crates/incant_shader_cook/tests/geometry.rs": "6670dc980abdc053a036ebf2b6bee4fcc4eb2fa6c20e4450d640633a4496f82f"
+  },
+  "pinned_sources": {
+    "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wgpu-hal-29.0.4/src/metal/device.rs": "c34d2bd9fe2a547f5cb28106c07ed22c99aa5891c0ad6a75f08ec6d70a1f6864",
+    "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wgpu-hal-29.0.4/src/metal/command.rs": "49b3dd48ea241ac66738854b9e76a77ba2863fdc9fe1aaa936e1bc16e5d79e52",
+    "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wgpu-hal-29.0.4/src/metal/adapter.rs": "6da21d590125e601015862dd2a66e4dae2fdd5e35d80624dd2c6cca52099d9bf",
+    "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wgpu-hal-29.0.4/src/dx12/device.rs": "77db671eb1302646d1ff9f257413858bc23038578ecc36e0fe3c3a26b0e696dc",
+    "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wgpu-hal-29.0.4/src/vulkan/device.rs": "7d72923762700aed073922f80d1bd510009c6249d8861cd30d9998c794eb7e27",
+    "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wgpu-hal-29.0.4/src/lib.rs": "2effd334c7421e774d91d5e2fec56ec58c44ec4693867707def2b3a2b3e126a4",
+    "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wgpu-core-29.0.4/src/device/resource.rs": "796858f878f290e872a113cb474d7ff947dfdd61f5dcf38f6f64b9e69c959644"
+  },
+  "logs": {
+    "/tmp/incant-cooked-geometry-final-cooker.log": "f9c2c1b412289855f1074a830bcf787058a4f63406ca99e0b7d2065da7dbe881",
+    "/tmp/incant-cooked-geometry-final-tests.log": "e0983d3710f8ab5dadd52b5f89f41dcad61a6a421f59779198beb3cfe4c9dc9f",
+    "/tmp/incant-cooked-geometry-final-clippy.log": "beac55f0493a5e0d86eed8020ebf793c57efb1090661b18d4d18b6bcaf07d815",
+    "/tmp/incant-cooked-geometry-default-tests.log": "9e39055920b5b6a46beb4436f0c877999925c25d007696d3aa975f9541c55d93",
+    "/tmp/incant-cooked-geometry-default-clippy.log": "18bf62d774d4370885dec842d8ce60f9a96701e05c9fe2d47d7df30a063caa44",
+    "/tmp/incant-cooked-geometry-default-wasm.log": "4f37a79f4212d0d5710bd7566cc13abbfdc09a35a8d2d980d9e44f7f5fdfdebf",
+    "/tmp/incant-cooked-geometry-feature-wasm.log": "5d3cd38cd47acdb456452b125e5202ba463bed1206167a836b89b1017a967c8b",
+    "/tmp/incant-cooked-geometry-graph.log": "4f76d9a61cb3102436db0feadde69cf89fb5ba93a1d80829c2cfdb27019930b3",
+    "/tmp/incant-cooked-geometry-fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/tmp/incant-cooked-geometry-conventions.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/tmp/incant-cooked-geometry-diff.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/tmp/incant-cooked-geometry-artifacts-v2/metal.log": "47cb11c284e83b4c39eb53f89882a227303b428d2bd32b6281f1c22bf3c1da91"
+  },
+  "prior_failures": {
+    "/tmp/incant-geometry-cooker-tests-initial.log": "029fbdc090103f98306a807d55c0d67d53b7c46d899bb2738981c87bc0386de8",
+    "/tmp/incant-geometry-cooker-tests-2.log": "d429b135be9396aed3bd6e2b9e0d095438f3ee12baf772b57aae45964cb8b7a9",
+    "/tmp/incant-cooked-geometry-check-initial.log": "3e2c90244484a28e1aa1c8086d1c94063316ab69388dc5eec1f97fc6af59377a",
+    "/tmp/incant-cooked-geometry-artifacts-v1/metal.log": "76f7672444ab48c05cfc3a174a0125a652eebc0c6b21cf696090b3201e4c5da7"
+  },
+  "metal_receipt": {
+    "path": "/tmp/incant-cooked-geometry-artifacts-v2/receipt.json",
+    "sha256": "56a094d3fcc8417d35c3958893e1cf13ba491835a7349df800b4ecab9cfc332f"
+  },
+  "preserved_output_pairing_sha256": "f4458bf11ec22c998c3aececa0abedca41a348bb609c55196d7df9b9425a43bf",
+  "results": {
+    "cooker": 10,
+    "renderer_cooked_cpu": 42,
+    "renderer_default_cpu": 36,
+    "gpu_ignored_per_renderer_run": 18,
+    "clippy": [
+      "default all-targets",
+      "cooked geometry all-targets + cooker"
+    ],
+    "wasm32": [
+      "default lib",
+      "cooked-geometry lib"
+    ],
+    "metal_compile_link_stages": 4,
+    "existing_output_payloads_unchanged": 6,
+    "runtime_dependency_guard": "passed: cooker build-only"
+  },
+  "limitations": [
+    "Default disabled; no GPU/native-window execution.",
+    "No Vulkan/DX12 driver or DXC compilation; HLSL contract tests and SPIR-V parsing only.",
+    "All numerical/Claude acceptance pending.",
+    "Only output, diagnostic, shadow translated; sprite/material/light-grid still WGSL.",
+    "No driver-cache/per-level/async-fallback/performance completion."
+  ],
+  "prior_failures_explanation": [
+    "Naga location pattern required per_primitive false; corrected before source freeze.",
+    "HLSL test needed exact register(t5, space0) syntax; production unchanged.",
+    "Vertex layout arrays needed stable const storage; corrected before source freeze.",
+    "Metal CLI first used invalid -std=metal2.4; corrected to -std=macos-metal2.4 without source changes."
+  ],
+  "metal_artifacts": {
+    "generated_source": "/Users/andreyyurlov/.codex/worktrees/native-fbx-import/incant/target/ci/build/incant_render-e4264bd49f1be87c/out",
+    "matching_build_directories": [
+      "/Users/andreyyurlov/.codex/worktrees/native-fbx-import/incant/target/ci/build/incant_render-e4264bd49f1be87c/out",
+      "/Users/andreyyurlov/.codex/worktrees/native-fbx-import/incant/target/ci/build/incant_render-bbdca94fd6a988a9/out"
+    ],
+    "artifacts": {
+      "diagnostic-shaders/Metal-Fragment.shader": "63927d714f873e30bbb5a8dd38816f29f77a2743efa603699c4503a13e94adca",
+      "diagnostic-shaders/manifest.rs": "3dbaa45bf1db371a560ae6219c2472a12a58a4ca2ade8aa3e569ea9a47ad3bed",
+      "diagnostic-shaders/Metal-Vertex.shader": "880651ccd00eb8789895b52ec64f90a5c6d434ae589a098996fe44f2c5ddfd02",
+      "diagnostic-shaders/Vulkan-Fragment.shader": "13d57592ec84330cb42b390e77ecfbab5537a03a801398ca7623cbc1cc9c2e2b",
+      "diagnostic-shaders/Vulkan-Vertex.shader": "b3b7d8e155cc377d1eba8df20f8976eed309c127f39b35cc53ec572c72330e8d",
+      "diagnostic-shaders/Dx12-Fragment.shader": "26a9ee7525aac3fe6b32387de0da0de7338d351824b10e5e219452a4932e2c7b",
+      "diagnostic-shaders/Dx12-Vertex.shader": "4f1fe3dbd25fcd5b808acacb58a3bc1020be696fbb146de88be341f8beb18b51",
+      "shadow-shaders/Metal-Fragment.shader": "6af72e99f6832fa300acddd5488297f28b3c3cdb87e5084f901651f3b65e2e3e",
+      "shadow-shaders/manifest.rs": "bb5de073e48bbed0c6de398276d11247d8bcd76a6bbf7376bc9d4c25c466db5f",
+      "shadow-shaders/Metal-Vertex.shader": "e606ea8a8c35fe9e88b2f25d1137dd5797f4475e1f882c39c3436f2bfae98d53",
+      "shadow-shaders/Vulkan-Fragment.shader": "83c4630d173f2ac7d6dc5c605df72a560ff36dc8a711e95e18ad0e9751aa6f8d",
+      "shadow-shaders/Vulkan-Vertex.shader": "820a4f89a100209f8a6141ec63bc399069a4f91f0ed44b339aaff509503af2e0",
+      "shadow-shaders/Dx12-Fragment.shader": "d49df04215c40955e84a06db86335d85c386d440f347be34ad59da2a61012ec0",
+      "shadow-shaders/Dx12-Vertex.shader": "6d40410ce5b5e26f286f58f6676f1dda39cadb2f7d79acc94979d77c059c7daa",
+      "output-shaders/Metal-Fragment.shader": "cc2a7197769ba09090757dc93a79ba67001b86ba6cd987545199450a2040410e",
+      "output-shaders/manifest.rs": "f169e18e18504a62c2f643ebb24523b5ba2fc0b722ee6ef2f3ae603b2439dce1",
+      "output-shaders/Metal-Vertex.shader": "f1cee22e81317613980bed8fc8fd22efee923f1c565ee91d7c106c2b9565fe3e",
+      "output-shaders/Vulkan-Fragment.shader": "dacf90c0e06af8bf75fa034b59e8b85026cca4ac975a0d763a855683ff5ce260",
+      "output-shaders/Vulkan-Vertex.shader": "ba4e456005e083e48d92667b61f8fc565713b71df5c3d48d971009461d1cedc6",
+      "output-shaders/Dx12-Fragment.shader": "c321dde205b9c0b535a198b26f91db6f82035ce9b086c004d8fffe19a3ca011a",
+      "output-shaders/Dx12-Vertex.shader": "345dfc638d89a3d4ec6679f9cfeb0efdb083bf21394e5a8f3521a75d609e3d0a"
+    },
+    "metal": [
+      {
+        "family": "diagnostic-shaders",
+        "stage": "Vertex",
+        "source_sha256": "880651ccd00eb8789895b52ec64f90a5c6d434ae589a098996fe44f2c5ddfd02",
+        "air_sha256": "26ff4b6b2ba610c02cbf3c891e84be859b0633facc90e41710b03f3db3f08fa6",
+        "library_sha256": "93a27704fcca56dc1e41b1150c08af8c4a23a9563299e2b202f6a3aa61e52378",
+        "commands": [
+          [
+            "xcrun",
+            "-sdk",
+            "macosx",
+            "metal",
+            "-std=macos-metal2.4",
+            "-x",
+            "metal",
+            "-c",
+            "/tmp/incant-cooked-geometry-artifacts-v2/diagnostic-shaders/Metal-Vertex.shader",
+            "-o",
+            "/tmp/incant-cooked-geometry-artifacts-v2/diagnostic-shaders/Vertex.air"
+          ],
+          [
+            "xcrun",
+            "-sdk",
+            "macosx",
+            "metallib",
+            "/tmp/incant-cooked-geometry-artifacts-v2/diagnostic-shaders/Vertex.air",
+            "-o",
+            "/tmp/incant-cooked-geometry-artifacts-v2/diagnostic-shaders/Vertex.metallib"
+          ]
+        ]
+      },
+      {
+        "family": "diagnostic-shaders",
+        "stage": "Fragment",
+        "source_sha256": "63927d714f873e30bbb5a8dd38816f29f77a2743efa603699c4503a13e94adca",
+        "air_sha256": "0352dcb3ad4902c12704d7000c11ed89fe1b33059983ea2729dd713172bd0907",
+        "library_sha256": "ad8d51b87e39d8caeb51803fa665ef8f252e906f616d713025a4f263b2c56482",
+        "commands": [
+          [
+            "xcrun",
+            "-sdk",
+            "macosx",
+            "metal",
+            "-std=macos-metal2.4",
+            "-x",
+            "metal",
+            "-c",
+            "/tmp/incant-cooked-geometry-artifacts-v2/diagnostic-shaders/Metal-Fragment.shader",
+            "-o",
+            "/tmp/incant-cooked-geometry-artifacts-v2/diagnostic-shaders/Fragment.air"
+          ],
+          [
+            "xcrun",
+            "-sdk",
+            "macosx",
+            "metallib",
+            "/tmp/incant-cooked-geometry-artifacts-v2/diagnostic-shaders/Fragment.air",
+            "-o",
+            "/tmp/incant-cooked-geometry-artifacts-v2/diagnostic-shaders/Fragment.metallib"
+          ]
+        ]
+      },
+      {
+        "family": "shadow-shaders",
+        "stage": "Vertex",
+        "source_sha256": "e606ea8a8c35fe9e88b2f25d1137dd5797f4475e1f882c39c3436f2bfae98d53",
+        "air_sha256": "a2e895a0677052aa12c8276dfa6956c96bdbdead05283b46dd088436ce0803b0",
+        "library_sha256": "cfaa068d34be8483eda6f23cd5c26f501a38a1bca69e1e66b96942e8bebede1c",
+        "commands": [
+          [
+            "xcrun",
+            "-sdk",
+            "macosx",
+            "metal",
+            "-std=macos-metal2.4",
+            "-x",
+            "metal",
+            "-c",
+            "/tmp/incant-cooked-geometry-artifacts-v2/shadow-shaders/Metal-Vertex.shader",
+            "-o",
+            "/tmp/incant-cooked-geometry-artifacts-v2/shadow-shaders/Vertex.air"
+          ],
+          [
+            "xcrun",
+            "-sdk",
+            "macosx",
+            "metallib",
+            "/tmp/incant-cooked-geometry-artifacts-v2/shadow-shaders/Vertex.air",
+            "-o",
+            "/tmp/incant-cooked-geometry-artifacts-v2/shadow-shaders/Vertex.metallib"
+          ]
+        ]
+      },
+      {
+        "family": "shadow-shaders",
+        "stage": "Fragment",
+        "source_sha256": "6af72e99f6832fa300acddd5488297f28b3c3cdb87e5084f901651f3b65e2e3e",
+        "air_sha256": "f1b20f61b4d53e80778e42d10101015cea0464cabc913b2eb2e805674a603518",
+        "library_sha256": "fb09c22e4f274a0420565e21f94570c2cfe753fed272289810212ea1012322e0",
+        "commands": [
+          [
+            "xcrun",
+            "-sdk",
+            "macosx",
+            "metal",
+            "-std=macos-metal2.4",
+            "-x",
+            "metal",
+            "-c",
+            "/tmp/incant-cooked-geometry-artifacts-v2/shadow-shaders/Metal-Fragment.shader",
+            "-o",
+            "/tmp/incant-cooked-geometry-artifacts-v2/shadow-shaders/Fragment.air"
+          ],
+          [
+            "xcrun",
+            "-sdk",
+            "macosx",
+            "metallib",
+            "/tmp/incant-cooked-geometry-artifacts-v2/shadow-shaders/Fragment.air",
+            "-o",
+            "/tmp/incant-cooked-geometry-artifacts-v2/shadow-shaders/Fragment.metallib"
+          ]
+        ]
+      }
+    ],
+    "output_payloads_unchanged": {
+      "Metal-Fragment.shader": "cc2a7197769ba09090757dc93a79ba67001b86ba6cd987545199450a2040410e",
+      "Metal-Vertex.shader": "f1cee22e81317613980bed8fc8fd22efee923f1c565ee91d7c106c2b9565fe3e",
+      "Vulkan-Fragment.shader": "dacf90c0e06af8bf75fa034b59e8b85026cca4ac975a0d763a855683ff5ce260",
+      "Vulkan-Vertex.shader": "ba4e456005e083e48d92667b61f8fc565713b71df5c3d48d971009461d1cedc6",
+      "Dx12-Fragment.shader": "c321dde205b9c0b535a198b26f91db6f82035ce9b086c004d8fffe19a3ca011a",
+      "Dx12-Vertex.shader": "345dfc638d89a3d4ec6679f9cfeb0efdb083bf21394e5a8f3521a75d609e3d0a"
+    },
+    "metal_version": "Apple metal version 32023.921 (metalfe-32023.921.6)\nTarget: air64-apple-darwin25.6.0\nThread model: posix\nInstalledDir: /private/var/run/com.apple.security.cryptexd/mnt/com.apple.MobileAsset.MetalToolchain-v27.1.266.1.HMBnco/Metal.xctoolchain/usr/metal/current/bin\n",
+    "metal_log_sha256": "47cb11c284e83b4c39eb53f89882a227303b428d2bd32b6281f1c22bf3c1da91"
+  },
+  "review_status": "Independent CPU-scope source review requested; actual backend and Claude acceptance remain pending."
+}

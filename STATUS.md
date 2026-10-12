@@ -32,15 +32,34 @@ login and usage. Both follow-up UI fixes passed focused native rechecking.
 Parallel work connects native animation clocks, scripting and rendering, and
 checks cooked shaders. Complete game UI/text input, remaining SDK/render features,
 the Core Sample and reference-device measurements still prevent a Phase 1
-completion claim. The feature merge queue is clear after PRs #107–108; the editor integration and
-locally checked animation integration are the next candidates.
+completion claim. The native editor integration is merged in PR #109. Cooked shaders are the next
+reviewed publication candidate; native animation integration remains local.
 
 Progress reports are scheduled approximately every 30 minutes while the goal is
 active. Report merged work separately from local checks and unmet exit gates.
 The project is still early relative to the complete Engine 1.0 and Driftwake
 scope; no defensible percentage or completion date follows from the PR count.
 
-## Native editor agent integration — in progress
+## Opt-in cooked output, diagnostic and shadow shaders — scoped Metal acceptance
+
+The build-only cooker emits actual native MSL/SPIR-V/HLSL for output, diagnostic
+geometry and all eight shadow variants. `cooked-output` and `cooked-geometry`
+remain disabled by default. Private fixed-family consumption validates the full
+vertex/resource contract before native shader calls. CPU cooker/renderer tests,
+Clippy, default/feature Web compilation and build-only dependency guards pass.
+The frozen v2 default/cooked pair passes all 138 existing/new numerical renderer
+tests on Apple M5 Pro/Metal: all 16 output and 12 actual-diagnostic readbacks are
+byte-identical. The actual main109 integration repeats all 138 tests successfully,
+with identical paired and prior raw results. Claude0051 inspected 24 bounded PNGs
+from eight successful/reaped processes and reports scoped Metal appearance passes;
+all 12 pairs are identical. Shared thin-wall contact leakage, low-sun aliasing,
+far thin-caster breakup and subtle receiver modulation remain renderer follow-ups;
+the shadow fixture does not establish main-pass caster visibility. Vulkan/DX12
+drivers, phones/performance, remaining shader families, caches and whole-renderer
+translation removal remain open. Both features stay disabled by default.
+[Contract and evidence](docs/spikes/cooked-geometry-shaders.md).
+
+## Native editor agent integration — merged in PR #109
 
 The native session/bridge now connect streamed turns, approval/cancel, bounded
 account-scoped conversation and real edits to the editor's shared bus. Account

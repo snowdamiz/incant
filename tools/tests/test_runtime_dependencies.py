@@ -26,7 +26,7 @@ def edge(data, source, dest, kind=None, target=None):
 
 class RuntimeDependencies(unittest.TestCase):
     def test_source_authoring_store_stays_outside_shipped_runtime(self):
-        for authoring in ('incant_source', 'incant_play'):
+        for authoring in ('incant_source', 'incant_play', 'incant_shader_cook'):
             with self.subTest(authoring=authoring):
                 data = graph()
                 data['packages'].append({'id': f'pkg:{authoring}', 'name': authoring})

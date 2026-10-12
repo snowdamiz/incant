@@ -3,8 +3,12 @@
 //! Authored clustered lights; the full production render graph remains open.
 mod camera;
 mod diagnostic_draw;
+#[cfg(test)]
+#[path = "../tests/diagnostic_output/mod.rs"]
+mod diagnostic_output;
 mod environment;
 mod frame;
+mod geometry_shader;
 mod graph;
 #[cfg(test)]
 #[path = "../tests/hdr_output/mod.rs"]
@@ -18,6 +22,7 @@ mod pixel_grid;
 mod preview_environment;
 mod resource_error;
 mod scene;
+mod shader;
 mod shadows;
 mod sprites;
 mod studio;
@@ -90,6 +95,7 @@ impl Renderer {
         let (device, queue) = adapter
             .request_device(&wgpu::DeviceDescriptor {
                 label: Some("Incant renderer"),
+                required_features: output::required_features(&adapter)?,
                 ..Default::default()
             })
             .await?;
@@ -105,9 +111,11 @@ impl Renderer {
         let lighting = lighting::LightingSystem::new(&device);
         let materials =
             materials::MaterialSystem::new(&device, &queue, &environments.layout, &lighting.layout);
-        let shadows = shadows::ShadowSystem::new(&device, &materials.layout);
-        let diagnostic_pipeline = Self::pipeline(&device, frame::HDR_FORMAT);
-        let output = output::OutputPass::new(&device);
+        let shadows =
+            shadows::ShadowSystem::new(&device, &materials.layout, adapter.get_info().backend)?;
+        let diagnostic_pipeline =
+            Self::pipeline(&device, frame::HDR_FORMAT, adapter.get_info().backend)?;
+        let output = output::OutputPass::new(&device, adapter.get_info().backend)?;
         let sprites = sprites::SpriteSystem::new(&device);
         if let Some(error) = validation.pop().await {
             #[cfg(target_arch = "wasm32")]
@@ -147,49 +155,53 @@ impl Renderer {
         }
         Ok(())
     }
-    fn pipeline(device: &wgpu::Device, format: wgpu::TextureFormat) -> wgpu::RenderPipeline {
-        let shader = device.create_shader_module(wgpu::ShaderModuleDescriptor {
-            label: Some("Phase 0 diagnostic shader"),
-            source: wgpu::ShaderSource::Wgsl(include_str!("fixture.wgsl").into()),
+    fn pipeline(
+        device: &wgpu::Device,
+        format: wgpu::TextureFormat,
+        backend: wgpu::Backend,
+    ) -> Result<wgpu::RenderPipeline> {
+        let shader = geometry_shader::stages(device, backend, geometry_shader::Kind::Diagnostic)?;
+        let layout = device.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
+            label: Some("Diagnostic empty layout"),
+            bind_group_layouts: &[],
+            immediate_size: 0,
         });
-        device.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
-            label: Some("Phase 0 geometry"),
-            layout: None,
-            vertex: wgpu::VertexState {
-                module: &shader,
-                entry_point: Some("vertex"),
-                compilation_options: Default::default(),
-                buffers: &[wgpu::VertexBufferLayout {
-                    array_stride: std::mem::size_of::<Vertex>() as u64,
-                    step_mode: wgpu::VertexStepMode::Vertex,
-                    attributes: &wgpu::vertex_attr_array![0=>Float32x4,1=>Float32x3],
-                }],
-            },
-            primitive: wgpu::PrimitiveState {
-                cull_mode: None,
-                ..Default::default()
-            },
-            depth_stencil: Some(wgpu::DepthStencilState {
-                format: wgpu::TextureFormat::Depth32Float,
-                depth_write_enabled: Some(true),
-                depth_compare: Some(wgpu::CompareFunction::Less),
-                stencil: Default::default(),
-                bias: Default::default(),
+        Ok(
+            device.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
+                label: Some("Phase 0 geometry"),
+                layout: Some(&layout),
+                vertex: wgpu::VertexState {
+                    module: &shader.vertex,
+                    entry_point: Some(shader.vertex_entry),
+                    compilation_options: Default::default(),
+                    buffers: &geometry_shader::diagnostic_buffers(),
+                },
+                primitive: wgpu::PrimitiveState {
+                    cull_mode: None,
+                    ..Default::default()
+                },
+                depth_stencil: Some(wgpu::DepthStencilState {
+                    format: wgpu::TextureFormat::Depth32Float,
+                    depth_write_enabled: Some(true),
+                    depth_compare: Some(wgpu::CompareFunction::Less),
+                    stencil: Default::default(),
+                    bias: Default::default(),
+                }),
+                multisample: Default::default(),
+                fragment: Some(wgpu::FragmentState {
+                    module: &shader.fragment,
+                    entry_point: Some(shader.fragment_entry),
+                    compilation_options: Default::default(),
+                    targets: &[Some(wgpu::ColorTargetState {
+                        format,
+                        blend: None,
+                        write_mask: wgpu::ColorWrites::ALL,
+                    })],
+                }),
+                multiview_mask: None,
+                cache: None,
             }),
-            multisample: Default::default(),
-            fragment: Some(wgpu::FragmentState {
-                module: &shader,
-                entry_point: Some("fragment"),
-                compilation_options: Default::default(),
-                targets: &[Some(wgpu::ColorTargetState {
-                    format,
-                    blend: None,
-                    write_mask: wgpu::ColorWrites::ALL,
-                })],
-            }),
-            multiview_mask: None,
-            cache: None,
-        })
+        )
     }
     pub fn draw_scene(
         &self,

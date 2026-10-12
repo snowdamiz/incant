@@ -1,0 +1,34 @@
+{
+  "name": "masks-default",
+  "checked_at": "2026-10-12T00:16:53.376691+00:00",
+  "binary": "geometry-v2/default-model_gpu",
+  "binary_sha256": "2e0d6d6c826a9b4196acbbcf8e821f8f3c6ce446d80ca801495372b1a6f27b9e",
+  "expected_sha256_by_source": {
+    "staged-inputs.json": "2e0d6d6c826a9b4196acbbcf8e821f8f3c6ce446d80ca801495372b1a6f27b9e",
+    "prepared-inputs.json": "2e0d6d6c826a9b4196acbbcf8e821f8f3c6ce446d80ca801495372b1a6f27b9e",
+    "geometry-v2/manifest.json": "2e0d6d6c826a9b4196acbbcf8e821f8f3c6ce446d80ca801495372b1a6f27b9e"
+  },
+  "manifest_hashes": {
+    "geometry-v2/manifest.json": {
+      "actual": "b063b8b10888725b9f533f189ad665e8ec9fce04e9ef81c20ac1dbdfed5c5806",
+      "prepared_inputs": "b063b8b10888725b9f533f189ad665e8ec9fce04e9ef81c20ac1dbdfed5c5806"
+    },
+    "output-v1/source-pairing.json": {
+      "actual": "f4458bf11ec22c998c3aececa0abedca41a348bb609c55196d7df9b9425a43bf",
+      "prepared_inputs": "f4458bf11ec22c998c3aececa0abedca41a348bb609c55196d7df9b9425a43bf"
+    }
+  },
+  "gate_sha256": "058aa21c4ce98fcc5996da3bcf89f5445b7a17af8853dc3f090bec49a9e4c4dd",
+  "frozen_binary_processes": [],
+  "checks": {
+    "released_latch_absent": true,
+    "gate_present": true,
+    "root_grant_true": true,
+    "gate_prepared_inputs_match": true,
+    "gate_helper_match": true,
+    "binary_matches_every_manifest": true,
+    "pairing_manifests_match_prepared_inputs": true,
+    "no_frozen_binary_running": true
+  },
+  "passed": true
+}
