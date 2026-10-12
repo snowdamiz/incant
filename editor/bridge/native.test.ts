@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import { NativeBridge, snapshotFromEngine } from "./native";
 import type { EngineRead, EngineResponse, Invoke } from "./native";
-import type { Ulid, WindowChrome } from "./contract";
+import type { Ulid, WindowChrome, PlayStatus, PlayEntity } from "./contract";
 import colliderSchema from '../../schemas/Collider.schema.json';
 const scene = "00000000000000000000000002";
 const entity = "00000000000000000000000010";
@@ -542,4 +542,266 @@ describe("native bridge", () => {
     expect(bridge.getSnapshot().history.entries).toEqual([]);
   });
 
+});
+
+function play(overrides: Partial<PlayStatus> = {}): PlayStatus {
+  return { generation: 0, sequence: 0, phase: 'stopped', tick: 0, discardedTicks: 0, presentedFrames: 0,
+    scene: null, sourceRevision: null, spatial: false, suspended: false, preparing: false,
+    error: null, ...overrides };
+}
+describe('native Play transport', () => {
+  it.each([
+    ['idle', play()],
+    ['paused', play({ generation: 1, sequence: 10, phase: 'paused', tick: 5 })],
+    ['running', play({ generation: 1, sequence: 10, phase: 'running', tick: 5 })],
+  ] as const)('retains snapshot identity and avoids duplicate %s notices at four-Hz polling', async (_phase, current) => {
+    vi.useFakeTimers();
+    let stop = () => {};
+    try {
+      let reads = 0;
+      let notices = 0;
+      const bridge = new NativeBridge(async <T>(name: string) => {
+        expect(name).toBe('play_read');
+        reads++;
+        return { ...current } as T;
+      });
+      bridge.subscribe(() => { notices++; });
+      stop = bridge.startPlayUpdates();
+      await bridge.refreshPlay();
+      const snapshot = bridge.getSnapshot();
+      expect(notices).toBe(1);
+      await vi.advanceTimersByTimeAsync(1000);
+      expect(reads).toBe(5);
+      expect(notices).toBe(1);
+      expect(bridge.getSnapshot()).toBe(snapshot);
+      expect(bridge.getSnapshot().play).toBe(snapshot.play);
+    } finally { stop(); vi.useRealTimers(); }
+  });
+  it('publishes changed ticks, sequences and fields within the same generation', async () => {
+    let current = play({ generation: 1, sequence: 10, phase: 'running', tick: 5 });
+    let notices = 0;
+    const bridge = new NativeBridge(async <T>() => ({ ...current }) as T);
+    bridge.subscribe(() => { notices++; });
+    await bridge.refreshPlay();
+    for (const update of [{ sequence: 11, tick: 6, presentedFrames: 6 }, { sequence: 12 }, { suspended: true }]) {
+      const previous = bridge.getSnapshot();
+      current = { ...current, ...update };
+      await bridge.refreshPlay();
+      expect(bridge.getSnapshot()).not.toBe(previous);
+      expect(bridge.getSnapshot().play).toEqual(current);
+    }
+    expect(notices).toBe(4);
+  });
+  it('clears a read error on identical status recovery exactly once', async () => {
+    const current = play({ generation: 1, sequence: 10, phase: 'paused', tick: 5 });
+    let fail = true;
+    let notices = 0;
+    const bridge = new NativeBridge(async <T>(name: string) => {
+      expect(name).toBe('play_read');
+      if (fail) throw 'worker disconnected';
+      return { ...current } as T;
+    });
+    bridge.subscribe(() => { notices++; });
+    bridge.updatePlay(current);
+    await bridge.refreshPlay();
+    const failed = bridge.getSnapshot();
+    expect(failed.playError).toBeDefined();
+    expect(notices).toBe(2);
+    fail = false;
+    await bridge.refreshPlay();
+    const recovered = bridge.getSnapshot();
+    expect(recovered).not.toBe(failed);
+    expect(recovered.play).toBe(failed.play);
+    expect(recovered.playError).toBeUndefined();
+    expect(notices).toBe(3);
+    await bridge.refreshPlay();
+    expect(notices).toBe(3);
+    expect(bridge.getSnapshot()).toBe(recovered);
+  });
+  it('fences an old read failure behind a newer identical accepted status', async () => {
+    let reject!: (reason: string) => void;
+    const current = play({ generation: 1, sequence: 10, phase: 'paused', tick: 5 });
+    const bridge = new NativeBridge(async <T>() => await new Promise<T>((_, no) => { reject = no; }));
+    bridge.updatePlay(current);
+    let notices = 0;
+    bridge.subscribe(() => { notices++; });
+    const snapshot = bridge.getSnapshot();
+    const pending = bridge.refreshPlay();
+    bridge.updatePlay({ ...current });
+    expect(bridge.getSnapshot()).toBe(snapshot);
+    reject('obsolete failure');
+    await pending;
+    expect(notices).toBe(0);
+    expect(bridge.getSnapshot()).toBe(snapshot);
+    expect(bridge.getSnapshot().playError).toBeUndefined();
+  });
+  it('uses revision and generation without sending project content or creating transactions', async () => {
+    const calls: { name: string; args: unknown }[] = [];
+    const bridge = new NativeBridge(async <T>(name: string, args?: Record<string, unknown>) => {
+      calls.push({ name, args });
+      return (name === 'engine_read' ? read() : name === 'play_read' ? play() : play({ generation: 1, sequence: 1, phase: 'running' })) as T;
+    });
+    await bridge.start();
+    await bridge.refreshPlay();
+    expect(await bridge.request({ type: 'play.start', scene: scene as Ulid })).toEqual({ ok: true });
+    expect(calls.at(-1)).toEqual({ name: 'play_command', args: { command: { op: 'start', generation: 0, expected_revision: read().revision, options: { scene } } } });
+    await bridge.start();
+    expect(bridge.getSnapshot().play?.phase).toBe('running');
+    expect(bridge.getSnapshot().history.entries).toEqual([]);
+    expect(calls.some((c) => c.name === 'engine_execute')).toBe(false);
+  });
+  it.each([undefined, { available: true }])('keeps Start working for an older or ready host (%j)', async (availability) => {
+    const calls: string[] = [];
+    const current = { ...read(), ...(availability ? { play_start: availability } : {}) };
+    const bridge = new NativeBridge(async <T>(name: string) => {
+      calls.push(name);
+      return (name === 'engine_read' ? current : play()) as T;
+    });
+    await bridge.start();
+    expect(bridge.getSnapshot().playStart).toEqual(availability);
+    expect(await bridge.request({ type: 'play.start' })).toEqual({ ok: true });
+    expect(calls.filter(name => name === 'play_command')).toHaveLength(1);
+  });
+  it('refuses unavailable Start before invoking the worker, but still permits Stop', async () => {
+    const calls: string[] = [];
+    const current = { ...read(), play_start: { available: false, reason: 'Open a saved project to run Play' } };
+    const bridge = new NativeBridge(async <T>(name: string) => {
+      calls.push(name);
+      return (name === 'engine_read' ? current : play()) as T;
+    });
+    await bridge.start();
+    expect(bridge.getSnapshot().playStart).toEqual(current.play_start);
+    expect(await bridge.request({ type: 'play.start' })).toMatchObject({ ok: false, error: { message: current.play_start.reason } });
+    expect(calls).not.toContain('play_command');
+    expect(await bridge.request({ type: 'play.stop' })).toEqual({ ok: true });
+    expect(calls.filter(name => name === 'play_command')).toHaveLength(1);
+  });
+  it.each([undefined, null, [], {}, { available: 'true' }, { available: true, reason: 1 }, { available: false, reason: '' }])('refuses malformed advertised Start availability (%j)', async (availability) => {
+    const calls: string[] = [];
+    const current = { ...read(), play_start: availability } as unknown as EngineRead;
+    const bridge = new NativeBridge(async <T>(name: string) => {
+      calls.push(name);
+      return (name === 'engine_read' ? current : play()) as T;
+    });
+    await bridge.start();
+    expect(bridge.getSnapshot().playStart).toMatchObject({ available: false });
+    expect(await bridge.request({ type: 'play.start' })).toMatchObject({ ok: false, error: { message: expect.stringContaining('availability is invalid') } });
+    expect(calls).not.toContain('play_command');
+  });
+  it('rechecks the current prerequisite after a delayed Play status read', async () => {
+    let current: EngineRead = { ...read(), play_start: { available: true } };
+    let finish!: (value: PlayStatus) => void;
+    const calls: string[] = [];
+    const bridge = new NativeBridge(async <T>(name: string) => {
+      calls.push(name);
+      if (name === 'engine_read') return current as T;
+      return await new Promise<PlayStatus>(resolve => { finish = resolve; }) as T;
+    });
+    await bridge.start();
+    const starting = bridge.request({ type: 'play.start' });
+    current = { ...read(), play_start: { available: false, reason: 'Project is no longer saved' } };
+    await bridge.start();
+    finish(play());
+    expect(await starting).toMatchObject({ ok: false, error: { message: 'Project is no longer saved' } });
+    expect(calls).not.toContain('play_command');
+  });
+  it('ignores delayed reads and Start replies that arrive after Stop', async () => {
+    let finish!: (value: PlayStatus) => void;
+    const bridge = new NativeBridge(async <T>() => await new Promise<PlayStatus>((r) => { finish = r; }) as T);
+    bridge.updatePlay(play({ generation: 1, sequence: 10, phase: 'preparing' }));
+    const pending = bridge.refreshPlay();
+    bridge.updatePlay(play({ generation: 2, sequence: 12, phase: 'stopped' }));
+    finish(play({ generation: 1, sequence: 11, phase: 'running' }));
+    await pending;
+    expect(bridge.getSnapshot().play).toMatchObject({ generation: 2, phase: 'stopped' });
+    bridge.updatePlay(play({ generation: 2, sequence: 9, phase: 'running' }));
+    expect(bridge.getSnapshot().play?.phase).toBe('stopped');
+  });
+  it('does not apply an old read failure after a newer successful Stop', async () => {
+    let reject!: (reason: string) => void;
+    const bridge = new NativeBridge(async <T>() => await new Promise<T>((_, r) => { reject = r; }));
+    bridge.updatePlay(play({ generation: 1, sequence: 10, phase: 'running' }));
+    const pending = bridge.refreshPlay();
+    bridge.updatePlay(play({ generation: 2, sequence: 12, phase: 'stopped' }));
+    reject('obsolete failure');
+    await pending;
+    expect(bridge.getSnapshot().playError).toBeUndefined();
+    expect(bridge.getSnapshot().play).toMatchObject({ generation: 2, phase: 'stopped' });
+  });
+  it('rejects obsolete runtime inspection after the session changes', async () => {
+    let finish!: (value: Partial<PlayEntity>) => void;
+    const bridge = new NativeBridge(async <T>() => await new Promise<Partial<PlayEntity>>((r) => { finish = r; }) as T);
+    bridge.updatePlay(play({ generation: 1, sequence: 10, phase: 'paused' }));
+    const pending = bridge.request({ type: 'play.inspect', entity: entity as Ulid });
+    bridge.updatePlay(play({ generation: 2, sequence: 11 }));
+    finish({ generation: 1, entity: entity as Ulid, tick: 2 });
+    expect(await pending).toMatchObject({ ok: false });
+  });
+  it('refuses oversized input before IPC and avoids status notifications per input event', async () => {
+    let calls = 0;
+    let notices = 0;
+    const bridge = new NativeBridge(async <T>() => { calls++; return play({ generation: 1, sequence: 20 }) as T; });
+    bridge.updatePlay(play({ generation: 1, sequence: 10, phase: 'running' }));
+    bridge.subscribe(() => { notices++; });
+    expect(await bridge.request({ type: 'play.input', generation: 1, events: Array.from({ length: 129 }, () => ({ type: 'focus', focused: true })) })).toMatchObject({ ok: false });
+    expect(calls).toBe(0);
+    expect(await bridge.request({ type: 'play.input', generation: 1, events: [{ type: 'focus', focused: false }] })).toEqual({ ok: true });
+    expect(calls).toBe(1);
+    expect(notices).toBe(0);
+  });
+  it('refuses buffered input for an old session without sending or refreshing it', async () => {
+    let calls = 0;
+    const bridge = new NativeBridge(async <T>() => { calls++; return play() as T; });
+    bridge.updatePlay(play({ generation: 2, sequence: 20, phase: 'running' }));
+    expect(await bridge.request({ type: 'play.input', generation: 1, events: [{ type: 'focus', focused: true }] })).toMatchObject({ ok: false });
+    expect(calls).toBe(0);
+  });
+  it('does not redirect a control intent to a new session discovered during recovery', async () => {
+    let reject = true;
+    let finish!: (value: PlayStatus) => void;
+    const calls: string[] = [];
+    const bridge = new NativeBridge(async <T>(name: string) => { calls.push(name); if (reject) throw 'temporarily unavailable'; return await new Promise<PlayStatus>((r) => { finish = r; }) as T; });
+    bridge.updatePlay(play({ generation: 1, sequence: 10, phase: 'paused' }));
+    await bridge.refreshPlay();
+    reject = false;
+    const pending = bridge.request({ type: 'play.stop' });
+    finish(play({ generation: 2, sequence: 12, phase: 'running' }));
+    expect(await pending).toMatchObject({ ok: false });
+    expect(calls).toEqual(['play_read', 'play_read']);
+    expect(bridge.getSnapshot().play?.phase).toBe('running');
+  });
+  it('polls only small metadata with one request in flight and stops on disposal', async () => {
+    vi.useFakeTimers();
+    try {
+      const calls: string[] = [];
+      let finish!: (value: PlayStatus) => void;
+      const bridge = new NativeBridge(async <T>(name: string) => { calls.push(name); return await new Promise<PlayStatus>((r) => { finish = r; }) as T; });
+      const stop = bridge.startPlayUpdates();
+      const concurrentRefresh = bridge.refreshPlay();
+      await vi.advanceTimersByTimeAsync(3000);
+      expect(calls).toEqual(['play_read']);
+      finish(play());
+      await concurrentRefresh;
+      await vi.advanceTimersByTimeAsync(249);
+      expect(calls).toHaveLength(1);
+      await vi.advanceTimersByTimeAsync(1);
+      expect(calls).toEqual(['play_read', 'play_read']);
+      stop();
+      finish(play({ sequence: 1 }));
+      await vi.advanceTimersByTimeAsync(1000);
+      expect(calls).toHaveLength(2);
+    } finally { vi.useRealTimers(); }
+  });
+  it('keeps transport failure distinct from native state and recovers without reading a project', async () => {
+    let fail = true;
+    const bridge = new NativeBridge(async <T>(name: string) => { expect(name).toBe('play_read'); if (fail) throw 'worker disconnected'; return play({ sequence: 2 }) as T; });
+    bridge.updatePlay(play({ generation: 0, sequence: 1, phase: 'paused' }));
+    await bridge.refreshPlay();
+    expect(bridge.getSnapshot().playError?.message).toBe('worker disconnected');
+    expect(bridge.getSnapshot().play?.phase).toBe('paused');
+    fail = false;
+    await bridge.refreshPlay();
+    expect(bridge.getSnapshot().playError).toBeUndefined();
+    expect(bridge.getSnapshot().play?.phase).toBe('stopped');
+  });
 });

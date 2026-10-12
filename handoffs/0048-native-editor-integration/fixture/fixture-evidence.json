@@ -1,0 +1,262 @@
+{
+  "passed": true,
+  "fixture_root": "/tmp/incant-native-0048-fixtures/saved",
+  "project": "/tmp/incant-native-0048-fixtures/saved/project.json",
+  "journal": "/tmp/incant-native-0048-fixtures/saved/project.journal.jsonl",
+  "ids": {
+    "key_script": "00000000000000000000000011",
+    "pointer_script": "00000000000000000000000012",
+    "move_script": "00000000000000000000000013",
+    "key_probe": "00000000000000000000000021",
+    "pointer_probe": "00000000000000000000000022",
+    "moving_mesh": "00000000000000000000000023",
+    "stationary_mesh": "00000000000000000000000024",
+    "camera": "00000000000000000000000031",
+    "second_camera": "00000000000000000000000032",
+    "no_camera_scene": "00000000000000000000000041",
+    "no_camera_mesh": "00000000000000000000000042",
+    "rename_target": "00000000000000000000000051",
+    "model_asset": "01M4PEJQQ5BFGPFSK68BWRC7ZM",
+    "main_scene": "01M4PEJQNPKJKBZRM6FFAP8SXA",
+    "project": "01M4PEJQNPMDQYEDGT0PRWN78X"
+  },
+  "source_commit": "263cacc122760ced67efee4caeb2218ea13810f4",
+  "headless_sha256": "4c4cb80869e6b2ceb6c26d70217b0571dbec495701dfe39eb9e4ce09f1c5ae3e",
+  "headless_manifest_sha256": "3045bac824295bc8b7bfe44183514e7267548a391e03d784b46680905181f05c",
+  "revision": 4,
+  "tick_rate": 60,
+  "history": [
+    {
+      "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+      },
+      "commands": 1,
+      "description": "Import blender_272_cube_7400_binary",
+      "id": "01M4PEJQQ5K6TNESSHJCW3AZDN"
+    },
+    {
+      "actor": {
+        "actor": "editor",
+        "conversation_id": null,
+        "model": null,
+        "origin": "user"
+      },
+      "commands": 9,
+      "description": "Author0048 imported geometry and movement fixture",
+      "id": "01M4PEJQQW43ZA5SNAKTY3R6SQ"
+    },
+    {
+      "actor": {
+        "actor": "editor",
+        "conversation_id": null,
+        "model": null,
+        "origin": "user"
+      },
+      "commands": 3,
+      "description": "Add0048 instance-filtered key probe",
+      "id": "01M4PEJQSDXA1HB7BMETXQ34ST"
+    },
+    {
+      "actor": {
+        "actor": "editor",
+        "conversation_id": null,
+        "model": null,
+        "origin": "user"
+      },
+      "commands": 3,
+      "description": "Add0048 instance-filtered pointer probe",
+      "id": "01M4PEJQTVXX0ZD8TKRKJCTZ6Y"
+    }
+  ],
+  "public_mutations_only": true,
+  "saved_reopen_equal": true,
+  "authoring_unchanged_by_cpu_play": true,
+  "no_camera_refusal": {
+    "message": "native play startup/runtime failure: native play: spatial content requires an explicit --camera and native render host"
+  },
+  "gpu_submitted": false,
+  "cpu_ticks": 23,
+  "cpu_runtime_source_sha256": "52c2967974f1b188ce0111da0fbdabee0d9e7e52c1f749a776677bd1cdc5331d",
+  "model_import": {
+    "asset": {
+      "id": "01M4PEJQQ5BFGPFSK68BWRC7ZM",
+      "kind": "model",
+      "name": "blender_272_cube_7400_binary",
+      "path": "blender_272_cube_7400_binary.fbx",
+      "sha256": "fa37f6f007f8a164206254cc2eebaaad702971c13855bc61afefe4815f3553d0"
+    },
+    "cache_hit": false,
+    "changed": true,
+    "details": {
+      "dependencies": [
+        {
+          "path": "blender_272_cube_7400_binary.fbx",
+          "sha256": "bb78c7ee90fa811baa9a4400b613c845d3a5329f4bfa87ff5e20692ddb8bd2ae"
+        }
+      ],
+      "meshes": 1,
+      "textures": 0,
+      "vertices": 36
+    },
+    "revision": 1
+  },
+  "cooked_model": {
+    "path": "/tmp/incant-native-0048-fixtures/saved/.incant/cache/models/fa37f6f007f8a164206254cc2eebaaad702971c13855bc61afefe4815f3553d0.incmodel",
+    "sha256": "a40c5fa97b1a626dcb26ce6f9bcea279b4a9a2c03376bf267ea2e50d597d0b9d",
+    "magic": "INCMOD03",
+    "mesh_count": 1,
+    "metadata": {
+      "fingerprint": "fa37f6f007f8a164206254cc2eebaaad702971c13855bc61afefe4815f3553d0",
+      "dependencies": [
+        {
+          "path": "blender_272_cube_7400_binary.fbx",
+          "sha256": "bb78c7ee90fa811baa9a4400b613c845d3a5329f4bfa87ff5e20692ddb8bd2ae"
+        }
+      ],
+      "nodes": [
+        {
+          "name": null,
+          "children": [
+            1
+          ],
+          "meshes": [],
+          "transform": [
+            [
+              -1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              -1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "name": "Cube",
+          "children": [],
+          "meshes": [
+            0
+          ],
+          "transform": [
+            [
+              1.0,
+              0.0,
+              -0.0,
+              0.0
+            ],
+            [
+              -0.0,
+              -1.6292068e-07,
+              -1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              -1.6292068e-07,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "scenes": [
+        [
+          0
+        ]
+      ],
+      "default_scene": 0,
+      "materials": [],
+      "mesh_materials": [
+        null
+      ],
+      "textures": []
+    }
+  },
+  "input_checks": {
+    "key_d_ticks": 1,
+    "left_button_ticks": 1,
+    "wheel_sum": 3.5,
+    "pointer_logical_pixels": [
+      123.25,
+      45.5
+    ],
+    "focus_scale_x": [
+      1,
+      2,
+      1
+    ]
+  },
+  "moving_mesh_final_x": 2.095833333333333,
+  "stationary_camera_and_mesh_unchanged": true,
+  "script_logic_source_sha256": "d4ef9db9a717a6f4e3e0ec0334b94a93bffc5a0e43d8f0372d2897b6d608416d",
+  "fixture_files_sha256": {
+    "pointer-probe.ts": "809ed2846f2479e6af8bf870bf4b5226a85703a19e4aab3e001643eaad677ce6",
+    "MODEL-LICENSE": "0dd48ebadf52273c736256325c8f078c03c8bb4facee22a4122de0ad3f615391",
+    "key-probe.ts": "a2e92ede5092181662934839559a766aedaf48ac3184a3cd085f4d68a928993f",
+    "project.journal.jsonl": "4564ee7553070d49f8328f501caf6cfa8d2da1aa2ca8f09d7047d83a05cb0b14",
+    "project.json": "3ff0ded175bc0c39b5a909234665a2ef12509aa8847726b34442873860fc7374",
+    "blender_272_cube_7400_binary.fbx": "bb78c7ee90fa811baa9a4400b613c845d3a5329f4bfa87ff5e20692ddb8bd2ae",
+    "move.ts": "8b048d55ec72ee2c61fedbec163c30ffc55601e9639590e9367db9a78bcc6b93",
+    ".incant-source-transactions/01M4PEJQSF7FX53Q6DSVVP9ZHV.old-receipt": "0a841533b51e907b721015f1c3ebad7eedb660ec6ceb6727dffc10a562116a79",
+    ".incant-source-transactions/lock": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".incant-source-transactions/receipt": "61e9a6cbbd446c5e043ad5f3ab43c121e080e50dfca4c079ba4250dc82eb8965",
+    ".incant-source-transactions/01M4PEJQTWC1S6NDZPCV31A3TV.old-receipt": "b0fc45764730411a404dac60d5ca5af55063c544946ee8b8d41ca6a30fa7459c",
+    ".incant/cache/models/fa37f6f007f8a164206254cc2eebaaad702971c13855bc61afefe4815f3553d0.incmodel": "a40c5fa97b1a626dcb26ce6f9bcea279b4a9a2c03376bf267ea2e50d597d0b9d"
+  },
+  "processes": [
+    {
+      "pid": 52884,
+      "argv": [
+        "/tmp/incant-native-review-0048-fixture-bin/incant_headless",
+        "rpc",
+        "/tmp/incant-native-0048-fixtures/saved/project.json",
+        "--journal",
+        "/tmp/incant-native-0048-fixtures/saved/project.journal.jsonl"
+      ],
+      "reaped": true,
+      "exit_code": 0
+    },
+    {
+      "pid": 52885,
+      "argv": [
+        "/tmp/incant-native-review-0048-fixture-bin/incant_headless",
+        "rpc",
+        "/tmp/incant-native-0048-fixtures/saved/project.json",
+        "--journal",
+        "/tmp/incant-native-0048-fixtures/saved/project.journal.jsonl"
+      ],
+      "reaped": true,
+      "exit_code": 0
+    }
+  ],
+  "limitations": [
+    "Preliminary fixture authoring/CPU evidence only; final native binary/graphics grant is root-owned.",
+    "No appearance, rendered visibility, live account/provider, GPU/native window or phase gate was evaluated.",
+    "Authoring probe logic uses existing0044 instance filters; camera is stationary with local-Z-forward convention checked from source only."
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "head": "57837a525e69257deb7d2f39d190ceca2224297d",
+  "sources": {
+    "editor/app/Cargo.toml": "e45c3f54a3ddafa6d97ea0bc6dbf4586afdc8cdc03ce80a8ba24e1c545c0ff48",
+    "editor/app/src/main.rs": "2949cbb57b5b72a14ab2f07483d6871dfb43a5d9d1b044ce006dabed489aa539",
+    "editor/app/src/agent_probe.rs": "5d0bbcceb26f4168375f7f53358fd90ffd36b63a08db67f71d88c4c4fa9c5300",
+    "tools/probes/native-editor-agent.py": "483d791c50f98899fa8d430ad53b0ce6c3171b86b64228b2007c267dfd1f6609"
+  },
+  "mode": "read-only; no builds, live provider, GPU, window or edits",
+  "outcome": "accepted read-only; camera, journal recovery and iterator corrections inspected; actual live proof pending"
+}

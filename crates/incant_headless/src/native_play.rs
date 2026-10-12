@@ -4,12 +4,11 @@
 //! behavior. Simulation has no source parsing or authoring dependency.
 use incant_input::InputReplay;
 use incant_observe::Plan;
-mod embedded {
+pub(crate) mod embedded {
     include!(concat!(env!("OUT_DIR"), "/behavior.rs"));
 }
+use incant_agent_native::{Session, StartOptions};
 use serde::Serialize;
-mod session;
-pub(crate) use session::{Session, StartOptions};
 use sha2::{Digest, Sha256};
 use std::{
     fs::File,
@@ -51,6 +50,8 @@ pub enum PlayError {
     Invalid(&'static str),
     #[error("native play IO: {0}")]
     Io(#[from] std::io::Error),
+    #[error(transparent)]
+    Session(#[from] incant_agent_native::SessionError),
     #[error("native play startup/runtime failure: {0}")]
     Native(#[source] Box<dyn std::error::Error>),
 }
@@ -158,6 +159,7 @@ pub fn run(options: Options) -> Result<Report> {
             camera: options.camera.clone(),
         },
         options.sample_rate,
+        embedded::load,
     )?;
     // No guest update retains or consults this authoring document.
     drop(document);

@@ -1,4 +1,5 @@
 //! The text-native project format and validated CRDT projection. No filesystem or UI.
+mod agent_budget;
 mod audio;
 mod camera;
 #[cfg(feature = "crdt")]
@@ -7,6 +8,7 @@ mod lights;
 mod navigation;
 mod physics;
 mod physics_2d;
+pub use agent_budget::{AgentBudgetSettings, DEFAULT_AGENT_TOKEN_CAP, MAX_AGENT_TOKEN_CAP};
 #[cfg(feature = "crdt")]
 pub use crdt::CollaborativeDocument;
 pub use incant_2d::atlas::{AtlasLayout, SpriteAtlas};
@@ -58,6 +60,9 @@ pub struct ProjectSettings {
     pub input_actions: InputActions,
     #[serde(default, skip_serializing_if = "LocaleSettings::is_default")]
     pub localization: LocaleSettings,
+    #[serde(default, skip_serializing_if = "AgentBudgetSettings::is_default")]
+    #[schemars(extend("default" = AgentBudgetSettings::default()))]
+    pub agent_budget: AgentBudgetSettings,
 }
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
@@ -165,6 +170,7 @@ impl Project {
                 tick_rate: 60,
                 input_actions: InputActions::new(),
                 localization: LocaleSettings::default(),
+                agent_budget: AgentBudgetSettings::default(),
             },
             memory: BTreeMap::new(),
         }
@@ -249,6 +255,12 @@ impl Project {
         }
         if let Err(error) = self.settings.localization.validate() {
             issue("/settings/localization".into(), &error.to_string());
+        }
+        if self.settings.agent_budget.max_tokens > MAX_AGENT_TOKEN_CAP {
+            issue(
+                "/settings/agent_budget/max_tokens".into(),
+                "must be between 0 and 9007199254740991",
+            );
         }
         if let Err(error) = incant_localization::Catalog::compile(&self.string_tables) {
             let path = match &error {

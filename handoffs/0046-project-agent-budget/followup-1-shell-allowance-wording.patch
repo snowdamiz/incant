@@ -1,0 +1,38 @@
+diff --git a/editor/ui/src/bridge/resolve.ts b/editor/ui/src/bridge/resolve.ts
+index 84825da..4ba9bf0 100644
+--- a/editor/ui/src/bridge/resolve.ts
++++ b/editor/ui/src/bridge/resolve.ts
+@@ -60,7 +60,7 @@ const CAPABILITY_LABELS: Record<Capability, string> = {
+   'provider.switch': 'Switch account',
+   'agent.send': 'Send to agent',
+   'agent.cancel': 'Stop agent',
+-  'agent.budget.set': 'Set project agent token cap',
++  'agent.budget.set': 'Change token allowance',
+   'agent.approve': 'Decide agent approval',
+   'viewport.bounds': 'Viewport placement',
+   'play.control': 'Native Play',
+diff --git a/editor/ui/src/components/agent/AgentAllowance.test.tsx b/editor/ui/src/components/agent/AgentAllowance.test.tsx
+index f34c3fd..1c054fb 100644
+--- a/editor/ui/src/components/agent/AgentAllowance.test.tsx
++++ b/editor/ui/src/components/agent/AgentAllowance.test.tsx
+@@ -302,6 +302,7 @@ describe('Changing the allowance', () => {
+     expect(field().getAttribute('aria-invalid')).toBeNull();
+     expect(field().getAttribute('aria-describedby')).toBe(note()!.id);
+     expect(line()).toBeNull();
++    await waitFor(() => expect(statusLine()).toBe('Token allowance not saved: Project revision changed.'));
+     type('300001');
+     expect(within(pane()).queryByText(error.message)).toBeNull();
+     expect(host.commands).toEqual([{ type: 'agent.budget.set', maxTokens: 300_000 }]);
+diff --git a/editor/ui/src/shell/ShellContext.tsx b/editor/ui/src/shell/ShellContext.tsx
+index 6ab8190..94e3358 100644
+--- a/editor/ui/src/shell/ShellContext.tsx
++++ b/editor/ui/src/shell/ShellContext.tsx
+@@ -57,7 +57,7 @@ export interface Shell {
+ const ShellContext = createContext<Shell | null>(null);
+
+ /** Plain-language failure prefixes; other commands keep their command name. */
+-const FAILURE_LABEL: Partial<Record<EditorCommand['type'], string>> = { 'asset.import': 'Import failed' };
++const FAILURE_LABEL: Partial<Record<EditorCommand['type'], string>> = { 'asset.import': 'Import failed', 'agent.budget.set': 'Token allowance not saved' };
+
+ const NO_CAPABILITIES = readCapabilities([]);
+ const noopSubscribe = () => () => undefined;

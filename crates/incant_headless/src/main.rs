@@ -1,11 +1,11 @@
 use clap::{Parser, Subcommand};
+use incant_agent_native::GpuPerception;
 use incant_render_authoring::RendererAuthoringExt as _;
+mod agent_command;
 mod assets;
 mod eval;
 mod localization;
-mod native_agent_play;
 mod native_play;
-mod native_rpc;
 mod play;
 mod play_assertions;
 mod play_audio;
@@ -146,18 +146,7 @@ enum Cli {
         #[arg(long)]
         journal: Option<PathBuf>,
     },
-    Agent {
-        project: PathBuf,
-        prompt: String,
-        #[arg(long)]
-        model: String,
-        #[arg(long, default_value_t = 64000)]
-        max_tokens: u64,
-        #[arg(long, default_value_t = 25000)]
-        max_output_tokens: u64,
-        #[arg(long)]
-        journal: Option<PathBuf>,
-    },
+    Agent(agent_command::Options),
     Auth {
         #[command(subcommand)]
         action: AuthCli,
@@ -227,6 +216,7 @@ fn auth_command(action: AuthCli) -> Result<()> {
             let key = rpassword::prompt_password("OpenAI API key (hidden): ")?;
             OpenAiProvider::new(key.clone(), "connection-validation".into())?.models()?;
             let mut store = AccountStore::open()?;
+            store.invalidate_selection()?;
             CredentialStore::save("api-key", &key)?;
             store.data.api_key_connected = true;
             store.data.active = None;
@@ -296,7 +286,7 @@ fn rpc(project: PathBuf, journal: Option<PathBuf>) -> Result<()> {
     } else {
         CommandBus::new(initial)?
     };
-    let mut play = native_rpc::Controller::default();
+    let mut play = incant_agent_native::Controller::new(native_play::embedded::load);
     for line in io::stdin().lock().lines() {
         let line = line?;
         if line.len() > 16 * 1024 * 1024 {
@@ -734,115 +724,7 @@ fn run() -> Result<()> {
             case.as_deref(),
         )?,
         Cli::Auth { action } => auth_command(action)?,
-        Cli::Agent {
-            project,
-            prompt,
-            model,
-            max_tokens,
-            max_output_tokens,
-            journal,
-        } => {
-            let mut provider = provider(model)?;
-            let initial = read_project(&project)?;
-            let journal = journal.unwrap_or_else(|| project.with_extension("journal.jsonl"));
-            let root = project
-                .parent()
-                .filter(|p| !p.as_os_str().is_empty())
-                .unwrap_or(Path::new("."));
-            let mut bus = CommandBus::persistent_with_sources(&journal, initial, root)?;
-            let mut agent = Agent {
-                budget: Budget {
-                    max_tokens,
-                    used_tokens: 0,
-                },
-                approval: ApprovalMode::Destructive,
-                max_steps: 30,
-                max_output_tokens,
-            };
-            let root = project
-                .parent()
-                .filter(|p| !p.as_os_str().is_empty())
-                .unwrap_or(Path::new("."));
-            let viewport = GpuPerception::new(Some(root.to_path_buf()));
-            let viewport = native_agent_play::Host::new(root.to_path_buf(), viewport);
-            let mut host = incant_agent::ProjectHost::new(bus.project(), root, viewport)?;
-            let report = agent.run(
-                &mut provider,
-                &mut bus,
-                &mut host,
-                &prompt,
-                &new_id(),
-                &AtomicBool::new(false),
-                &mut |name, args| {
-                    eprintln!("Approve {name}: {args}\nType yes to apply:");
-                    let mut answer = String::new();
-                    io::stdin().read_line(&mut answer).is_ok() && answer.trim() == "yes"
-                },
-                &mut |text| eprint!("{text}"),
-            )?;
-            // Keep the input file as the journal's genesis; explicit RPC save is separate.
-            let output = project.with_extension("agent-result.json");
-            save(&output, &bus.project().canonical_text()?)?;
-            print(json!({"report":report,"output":output,"journal":journal}))?;
-        }
+        Cli::Agent(options) => agent_command::run(options)?,
     }
     Ok(())
-}
-
-struct GpuPerception {
-    renderer: Option<incant_render::Renderer>,
-    project_root: Option<PathBuf>,
-    assets: incant_assets::AssetStore,
-}
-impl GpuPerception {
-    fn new(project_root: Option<PathBuf>) -> Self {
-        Self {
-            renderer: None,
-            project_root,
-            assets: Default::default(),
-        }
-    }
-}
-impl incant_agent::Perception for GpuPerception {
-    fn screenshot(
-        &mut self,
-        project: &Project,
-        camera: Option<&str>,
-        width: u32,
-        height: u32,
-    ) -> std::result::Result<Value, incant_agent::AgentError> {
-        use base64::Engine;
-        if self.renderer.is_none() {
-            self.renderer =
-                Some(incant_render::Renderer::headless().map_err(|_| {
-                    incant_agent::AgentError::Tool("GPU renderer unavailable".into())
-                })?);
-        }
-        let renderer = self.renderer.as_mut().expect("initialized renderer");
-        if let Some(root) = &self.project_root {
-            self.assets.sync_project(project, root).map_err(|_| {
-                incant_agent::AgentError::Tool("Cooked assets could not be loaded".into())
-            })?;
-        } else if !project.assets.is_empty() {
-            return Err(incant_agent::AgentError::Tool(
-                "This viewport has no project asset access".into(),
-            ));
-        }
-        let scene = renderer.prepare_scene(project, &self.assets).map_err(|_| {
-            incant_agent::AgentError::Tool("Scene geometry could not be prepared".into())
-        })?;
-        let scene = if let Some(id) = camera {
-            scene
-                .with_camera(id)
-                .map_err(|error| incant_agent::AgentError::Tool(error.to_string()))?
-        } else {
-            scene
-        };
-        let bytes = renderer
-            .screenshot_scene_png(&scene, width, height)
-            .map_err(|_| incant_agent::AgentError::Tool("GPU capture failed".into()))?;
-        Ok(
-            json!({"mime_type":"image/png","data_url":format!("data:image/png;base64,{}",base64::engine::general_purpose::STANDARD.encode(bytes)),"width":width,"height":height,"camera":camera}),
-        )
-    }
 }

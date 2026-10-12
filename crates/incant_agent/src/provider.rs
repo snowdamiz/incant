@@ -1,4 +1,4 @@
-use crate::{AgentError, Usage};
+use crate::{AgentError, Usage, accounts::AccountSelection};
 use reqwest::blocking::Client;
 use serde_json::{Value, json};
 use std::io::{BufRead, BufReader};
@@ -12,6 +12,12 @@ pub struct Completion {
     pub usage: Usage,
 }
 pub trait Provider {
+    /// Validate the turn's non-secret authorization receipt. Agent calls this
+    /// outside the project lock, after charging responses and around tools.
+    /// Explicit credentials and deterministic providers may have no account store.
+    fn check_active(&self) -> Result<(), AgentError> {
+        Ok(())
+    }
     fn complete(
         &mut self,
         input: &[Value],
@@ -29,8 +35,10 @@ pub struct OpenAiProvider {
     renewable: bool,
     model: String,
     base_url: String,
+    active: Option<ActiveCheck>,
 }
 type TokenSource = Box<dyn Fn(bool) -> Result<Zeroizing<String>, AgentError> + Send + Sync>;
+type ActiveCheck = Box<dyn Fn() -> Result<(), AgentError> + Send + Sync>;
 impl OpenAiProvider {
     pub fn new(credential: String, model: String) -> Result<Self, AgentError> {
         if credential.trim().is_empty() || model.trim().is_empty() {
@@ -39,10 +47,16 @@ impl OpenAiProvider {
         let secret = Zeroizing::new(credential);
         Self::with_token_source(Box::new(move |_| Ok(secret.clone())), false, model)
     }
-    pub(crate) fn for_account(account_id: String, model: String) -> Result<Self, AgentError> {
-        Self::with_token_source(
+    pub(crate) fn for_account(
+        account_id: String,
+        selection: AccountSelection,
+        model: String,
+    ) -> Result<Self, AgentError> {
+        let request_selection = selection.clone();
+        let mut provider = Self::with_token_source(
             Box::new(move |force| {
                 let store = crate::accounts::AccountStore::open()?;
+                store.check_selection(&request_selection)?;
                 let account = store
                     .selected()
                     .filter(|account| account.id == account_id)
@@ -60,12 +74,19 @@ impl OpenAiProvider {
             }),
             true,
             model,
-        )
+        )?;
+        provider.bind_selection(selection);
+        Ok(provider)
     }
-    pub(crate) fn for_saved_api_key(model: String) -> Result<Self, AgentError> {
-        Self::with_token_source(
-            Box::new(|_| {
+    pub(crate) fn for_saved_api_key(
+        selection: AccountSelection,
+        model: String,
+    ) -> Result<Self, AgentError> {
+        let request_selection = selection.clone();
+        let mut provider = Self::with_token_source(
+            Box::new(move |_| {
                 let store = crate::accounts::AccountStore::open()?;
+                store.check_selection(&request_selection)?;
                 if store.data.active.is_some() || !store.data.api_key_connected {
                     return Err(AgentError::Provider(
                         "The active account changed or signed out; start a new agent request."
@@ -76,7 +97,16 @@ impl OpenAiProvider {
             }),
             false,
             model,
-        )
+        )?;
+        provider.bind_selection(selection);
+        Ok(provider)
+    }
+    fn bind_selection(&mut self, selection: AccountSelection) {
+        self.active = Some(Box::new(move || {
+            // No access_token/load_optional here: checks cannot prompt keychain
+            // access, renew tokens or issue a network request.
+            crate::accounts::AccountStore::open()?.check_selection(&selection)
+        }));
     }
     fn with_token_source(
         credential: TokenSource,
@@ -98,6 +128,7 @@ impl OpenAiProvider {
             renewable,
             model,
             base_url: "https://api.openai.com/v1".into(),
+            active: None,
         })
     }
     pub fn models(&self) -> Result<Value, AgentError> {
@@ -120,6 +151,9 @@ impl OpenAiProvider {
     }
 }
 impl Provider for OpenAiProvider {
+    fn check_active(&self) -> Result<(), AgentError> {
+        self.active.as_ref().map_or(Ok(()), |check| check())
+    }
     fn model(&self) -> &str {
         &self.model
     }

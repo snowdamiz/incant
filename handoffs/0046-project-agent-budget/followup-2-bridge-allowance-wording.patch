@@ -1,0 +1,175 @@
+diff --git a/editor/bridge/native.budget.test.ts b/editor/bridge/native.budget.test.ts
+index 440ff2c..74d9b66 100644
+--- a/editor/bridge/native.budget.test.ts
++++ b/editor/bridge/native.budget.test.ts
+@@ -142,7 +142,7 @@ describe('native project agent budget', () => {
+     calls.length = 0;
+     expect(await bridge.dispatch({ type: 'agent.budget.set', maxTokens: cap })).toEqual({ ok: true });
+     expect(calls).toEqual([
+-      { name: 'engine_execute', args: { commands: [{ op: 'set_agent_budget', settings: { max_tokens: cap } }], description: 'Set project agent token cap', expectedRevision: 7 } },
++      { name: 'engine_execute', args: { commands: [{ op: 'set_agent_budget', settings: { max_tokens: cap } }], description: 'Set agent token allowance', expectedRevision: 7 } },
+       { name: 'engine_agent_read', args: { afterVersion: 1 } },
+     ]);
+     expect(bridge.getSnapshot().projectAgentBudget).toEqual({ maxTokens: cap });
+diff --git a/editor/bridge/native.generated.js b/editor/bridge/native.generated.js
+index 2d8aa41..93f98cd 100644
+--- a/editor/bridge/native.generated.js
++++ b/editor/bridge/native.generated.js
+@@ -422,7 +422,7 @@ function fields(value, keys) {
+ }
+ const budgetInvalidResponse = ()=>({
+         code: 'engine.invalid-response',
+-        message: 'The native project agent token cap is invalid. Refresh the project to retry.'
++        message: 'The project’s agent token allowance is invalid. Refresh the project to retry.'
+     });
+ function record(value) {
+     return value !== null && typeof value === 'object' && !Array.isArray(value) && (Object.getPrototypeOf(value) === Object.prototype || Object.getPrototypeOf(value) === null);
+@@ -944,16 +944,19 @@ class NativeBridge {
+         };
+         if (!this.agentVerified || !this.agentBudgetReady()) return {
+             status: 'unavailable',
+-            reason: 'Refresh the native agent session after account or project settings changes.'
++            reason: 'The agent session has not caught up with a recent account or project change.'
+         };
+         if (this.agentSession.budget.used_tokens >= this.agentSession.budget.max_tokens) return {
+             status: 'unavailable',
+-            reason: 'The native agent session token allowance is exhausted.'
++            reason: this.exhaustedReason()
+         };
+         return {
+             status: 'idle'
+         };
+     }
++    /** Scoped to where the allowance belongs: the project's authored cap, or an older host's session. */ exhaustedReason() {
++        return this.read && projectAgentBudget(this.read).status === 'ready' ? 'The project’s agent token allowance is used up.' : 'This agent session’s token allowance is used up.';
++    }
+     agentFields() {
+         return {
+             agent: this.agentState(),
+@@ -1082,7 +1085,7 @@ class NativeBridge {
+                 approval: request.approval ?? 'destructive'
+             };
+             if (!validAgentRequest(turnRequest)) return reject('agent.invalid-request', 'Enter a nonempty prompt up to 16 KiB and a model name up to 128 bytes.');
+-            if (this.agentSession.budget.used_tokens >= this.agentSession.budget.max_tokens) return reject('agent.budget', 'The native agent session token allowance is exhausted.');
++            if (this.agentSession.budget.used_tokens >= this.agentSession.budget.max_tokens) return reject('agent.budget', this.exhaustedReason());
+             this.agentStarting = true;
+             const generation = ++this.agentGeneration;
+             this.publishAgent();
+@@ -1270,14 +1273,14 @@ class NativeBridge {
+             ok: false,
+             error: {
+                 code: 'schema.invalid',
+-                message: 'Enter a nonnegative safe integer for the project agent token cap.'
++                message: 'Enter a whole number of tokens from 0 to 9,007,199,254,740,991.'
+             }
+         };
+         if (budgetEdit && !this.capabilities.includes('agent.budget.set')) return {
+             ok: false,
+             error: {
+                 code: 'unsupported',
+-                message: 'This host does not expose project agent token cap editing.'
++                message: 'This host cannot change the project’s agent token allowance.'
+             }
+         };
+         const importing = command.type === 'asset.import';
+@@ -1336,7 +1339,7 @@ class NativeBridge {
+                             }
+                         }
+                     ],
+-                    description: 'Set project agent token cap',
++                    description: 'Set agent token allowance',
+                     expectedRevision: previous.revision
+                 });
+             } else if (command.type === "history.undo" || command.type === "history.redo") {
+@@ -1376,7 +1379,7 @@ class NativeBridge {
+                 if (budgetEdit && cap.status === 'ready' && cap.maxTokens !== command.maxTokens || read.project.id !== previous.project.id || read.revision < previous.revision || this.read && read.project.id === this.read.project.id && read.revision < this.read.revision) {
+                     throw {
+                         code: 'engine.stale',
+-                        message: 'The project changed while updating its agent token cap. Refresh and retry.'
++                        message: 'The project changed while saving the agent token allowance. Try again.'
+                     };
+                 }
+             }
+diff --git a/editor/bridge/native.ts b/editor/bridge/native.ts
+index e17de4d..490f3e2 100644
+--- a/editor/bridge/native.ts
++++ b/editor/bridge/native.ts
+@@ -349,7 +349,7 @@ function fields(value: unknown, keys: readonly string[]): value is Record<string
+
+ type ProjectAgentBudget = { status: 'unsupported' } | { status: 'ready'; maxTokens: number }
+   | { status: 'error'; error: BridgeError };
+-const budgetInvalidResponse = (): BridgeError => ({ code: 'engine.invalid-response', message: 'The native project agent token cap is invalid. Refresh the project to retry.' });
++const budgetInvalidResponse = (): BridgeError => ({ code: 'engine.invalid-response', message: 'The project’s agent token allowance is invalid. Refresh the project to retry.' });
+ function record(value: unknown): value is Record<string, unknown> {
+   return value !== null && typeof value === 'object' && !Array.isArray(value)
+     && (Object.getPrototypeOf(value) === Object.prototype || Object.getPrototypeOf(value) === null);
+@@ -701,10 +701,16 @@ export class NativeBridge implements EditorBridge {
+     if (this.providerIsPending() || this.provider.status !== 'connected') return { status: 'unavailable', reason: 'Connect an OpenAI account to use the agent.' };
+     if (this.agentError) return { status: 'unavailable', reason: this.agentError.message };
+     if (!this.agentSession) return { status: 'unavailable', reason: 'The native agent session has not been read yet.' };
+-    if (!this.agentVerified || !this.agentBudgetReady()) return { status: 'unavailable', reason: 'Refresh the native agent session after account or project settings changes.' };
+-    if (this.agentSession.budget.used_tokens >= this.agentSession.budget.max_tokens) return { status: 'unavailable', reason: 'The native agent session token allowance is exhausted.' };
++    if (!this.agentVerified || !this.agentBudgetReady()) return { status: 'unavailable', reason: 'The agent session has not caught up with a recent account or project change.' };
++    if (this.agentSession.budget.used_tokens >= this.agentSession.budget.max_tokens) return { status: 'unavailable', reason: this.exhaustedReason() };
+     return { status: 'idle' };
+   }
++  /** Scoped to where the allowance belongs: the project's authored cap, or an older host's session. */
++  private exhaustedReason(): string {
++    return this.read && projectAgentBudget(this.read).status === 'ready'
++      ? 'The project’s agent token allowance is used up.'
++      : 'This agent session’s token allowance is used up.';
++  }
+   private agentFields() {
+     return { agent: this.agentState(), ...(this.agentSession ? { agentSession: this.agentSession } : {}),
+       ...(this.agentError ? { agentError: this.agentError } : {}) };
+@@ -796,7 +802,7 @@ export class NativeBridge implements EditorBridge {
+       }
+       const turnRequest = { prompt: request.text, model: request.model ?? 'gpt-6-astra', approval: request.approval ?? 'destructive' };
+       if (!validAgentRequest(turnRequest)) return reject('agent.invalid-request', 'Enter a nonempty prompt up to 16 KiB and a model name up to 128 bytes.');
+-      if (this.agentSession.budget.used_tokens >= this.agentSession.budget.max_tokens) return reject('agent.budget', 'The native agent session token allowance is exhausted.');
++      if (this.agentSession.budget.used_tokens >= this.agentSession.budget.max_tokens) return reject('agent.budget', this.exhaustedReason());
+       this.agentStarting = true;
+       const generation = ++this.agentGeneration;
+       this.publishAgent();
+@@ -925,8 +931,8 @@ export class NativeBridge implements EditorBridge {
+   }
+   async dispatch(command: EditorCommand): Promise<BridgeResult> {
+     const budgetEdit = command.type === 'agent.budget.set';
+-    if (budgetEdit && !count(command.maxTokens)) return { ok: false, error: { code: 'schema.invalid', message: 'Enter a nonnegative safe integer for the project agent token cap.' } };
+-    if (budgetEdit && !this.capabilities.includes('agent.budget.set')) return { ok: false, error: { code: 'unsupported', message: 'This host does not expose project agent token cap editing.' } };
++    if (budgetEdit && !count(command.maxTokens)) return { ok: false, error: { code: 'schema.invalid', message: 'Enter a whole number of tokens from 0 to 9,007,199,254,740,991.' } };
++    if (budgetEdit && !this.capabilities.includes('agent.budget.set')) return { ok: false, error: { code: 'unsupported', message: 'This host cannot change the project’s agent token allowance.' } };
+     const importing = command.type === 'asset.import';
+     if (!this.read || this.pending || (importing && this.importing))
+       return {
+@@ -970,7 +976,7 @@ export class NativeBridge implements EditorBridge {
+       } else if (command.type === 'agent.budget.set') {
+         read = await this.invoke<EngineRead>('engine_execute', {
+           commands: [{ op: 'set_agent_budget', settings: { max_tokens: command.maxTokens } }],
+-          description: 'Set project agent token cap',
++          description: 'Set agent token allowance',
+           expectedRevision: previous.revision,
+         });
+       } else if (command.type === "history.undo" || command.type === "history.redo") {
+@@ -1018,7 +1024,7 @@ export class NativeBridge implements EditorBridge {
+         if (budgetEdit && cap.status === 'ready' && cap.maxTokens !== command.maxTokens
+           || read.project.id !== previous.project.id || read.revision < previous.revision
+           || this.read && read.project.id === this.read.project.id && read.revision < this.read.revision) {
+-          throw { code: 'engine.stale', message: 'The project changed while updating its agent token cap. Refresh and retry.' };
++          throw { code: 'engine.stale', message: 'The project changed while saving the agent token allowance. Try again.' };
+         }
+       }
+       this.publish(read);
+diff --git a/editor/ui/src/components/agent/AgentAllowance.test.tsx b/editor/ui/src/components/agent/AgentAllowance.test.tsx
+index f34c3fd..cd8e20b 100644
+--- a/editor/ui/src/components/agent/AgentAllowance.test.tsx
++++ b/editor/ui/src/components/agent/AgentAllowance.test.tsx
+@@ -584,7 +584,7 @@ describe('Allowance on the real native bridge (mocked IPC)', () => {
+     enter();
+     await waitFor(() => expect(line()?.textContent).toBe('150,000 of 1,000,000 tokens used'));
+     expect(calls.filter((call) => call.name !== 'viewport_bounds')).toEqual([
+-      { name: 'engine_execute', args: { commands: [{ op: 'set_agent_budget', settings: { max_tokens: 1_000_000 } }], description: 'Set project agent token cap', expectedRevision: 7 } },
++      { name: 'engine_execute', args: { commands: [{ op: 'set_agent_budget', settings: { max_tokens: 1_000_000 } }], description: 'Set agent token allowance', expectedRevision: 7 } },
+       { name: 'engine_agent_read', args: { afterVersion: 1 } },
+     ]);
+     await waitFor(() => expect(header()).toBe('Ready'));

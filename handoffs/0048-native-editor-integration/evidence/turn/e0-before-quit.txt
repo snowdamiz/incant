@@ -1,0 +1,6 @@
+2026-10-11T23:05:05Z
+3ff0ded175bc0c39b5a909234665a2ef12509aa8847726b34442873860fc7374  project.json
+c57f717eb8493baac506a728139f267b102ca8fc12abad76eda111667119a2c8  project.journal.jsonl
+      20
+91cecc821692d0e478ef453384f00ca5daf3a5157c7ec441319d97d939d4ce09  ~/Library/Application Support/Incant/agent-usage/01M4PEJQNPMDQYEDGT0PRWN78X.json
+{"version":1,"project_id":"01M4PEJQNPMDQYEDGT0PRWN78X","charged_tokens":22044,"accounting_uncertain":false,"pending":null}

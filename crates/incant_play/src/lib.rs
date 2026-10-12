@@ -8,6 +8,8 @@ use incant_runtime::{CookedScene, StableId};
 use incant_script::{CompiledScript, ScriptError};
 use serde::Deserialize;
 use std::{collections::BTreeSet, path::Path};
+mod control;
+pub use control::{PlayError, PlayMode, PlaySession};
 
 #[derive(Default, Deserialize)]
 #[serde(default, deny_unknown_fields)]

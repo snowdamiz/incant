@@ -1,0 +1,10 @@
+Mutation checks: each line replaces one part of the final Splitter.tsx and runs
+  cd editor/ui && vitest run --maxWorkers=4 --reporter=verbose src/components/Splitter.test.tsx
+then restores the file (byte-identical, checked with cmp). Every mutation fails at least one test.
+
+no pointer filter on move: 3 failed -> ['ends the drag on pointerUp from its own pointer', 'ends the drag on pointerCancel from its own pointer', 'ends the drag on lostPointerCapture from its own pointer']
+no lost-release guard: 1 failed -> ['ends the drag at the first move without the primary button']
+Control-click not cancelled: 1 failed -> ['does not drag on a Control-click, the macOS secondary click, nor select text']
+no lostpointercapture handler: 1 failed -> ['ends the drag on lostPointerCapture from its own pointer']
+no explicit focus: 4 failed -> ['cancels the default action of a primary press and focuses the separator itself', 'does not drag on a Control-click, the macOS secondary click, nor select text', 'resizes the hierarchy by pointer, then by keyboard, ringed only for the keyboard', 'closes an open menu when a splitter is pressed, like any press outside it']
+cancel pointerdown instead of mousedown: 2 failed -> ['does not drag on a Control-click, the macOS secondary click, nor select text', 'closes an open menu when a splitter is pressed, like any press outside it']

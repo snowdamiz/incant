@@ -1,0 +1,27 @@
+<!doctype html>
+<meta charset="utf-8">
+<!-- 0048 probe: the Agent composer's model field (editor/ui/src/styles/agent.css .composer__model,
+     base.css body/input rules) in the system WebKit. Only the computed styles that size the text. -->
+<style>
+  @font-face {
+    font-family: 'JetBrains Mono Variable';
+    font-style: normal;
+    font-weight: 100 800;
+    src: url(jetbrains-mono-latin-wght-normal.woff2) format('woff2-variations');
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  body { font-family: system-ui; font-size: 13px; font-feature-settings: 'cv11', 'ss01', 'tnum' 0; -webkit-font-smoothing: antialiased; }
+  input { font: inherit; }
+  .bar { display: flex; align-items: center; gap: 4px; width: 360px; }
+  .model {
+    flex: 0 1 auto; min-width: 4ch; height: 24px; padding: 0 5px; border: 0; border-radius: 4px;
+    background: transparent; font-family: 'JetBrains Mono Variable', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 12px; text-overflow: ellipsis;
+  }
+  .measure { font-family: 'JetBrains Mono Variable', ui-monospace, monospace; font-size: 12px; white-space: pre; font-feature-settings: 'cv11', 'ss01', 'tnum' 0; }
+</style>
+<div class="bar"><input class="model" id="current" value="gpt-6-astra" style="width: calc(11ch + 10px)"></div>
+<div class="bar"><input class="model" id="slack2" value="gpt-6-astra" style="width: calc(11ch + 12px)"></div>
+<div class="bar"><input class="model" id="slack1" value="gpt-6-astra" style="width: calc(11ch + 11px)"></div>
+<div class="bar"><input class="model" id="long" value="gpt-6-astra-preview-2026" style="width: calc(24ch + 12px)"></div>
+<span class="measure" id="text">gpt-6-astra</span>

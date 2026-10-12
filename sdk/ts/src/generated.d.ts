@@ -57,6 +57,7 @@ export type Collider2D = Collider2DSchema.Root;
 
 export namespace CommandSchema {
   export type ActionGesture = "tap" | "long_press" | "swipe";
+  export type AgentBudgetSettings = { "max_tokens": number };
   export type Asset = { "id": string; "import_settings"?: (AssetImportSettings) | (null); "kind": string; "name": string; "path": string; "sha256": string };
   export type AssetImportSettings = ({ "type": "texture"; "usage": TextureUsage });
   export type Entity = { "components": { [key: string]: unknown }; "id": string; "name": string; "parent"?: string | null; "provenance"?: (Provenance) | (null) };
@@ -75,7 +76,7 @@ export namespace CommandSchema {
   export type Stick = "left" | "right";
   export type StringTable = { "id": string; "messages": { [key: string]: { [key: string]: string } }; "name": string; "source_locale": string };
   export type TextureUsage = "color" | "linear" | "normal";
-  export type Root = ({ "op": "create_scene"; "scene": Scene }) | ({ "op": "delete_scene"; "scene_id": string }) | ({ "entity": Entity; "op": "create_entity"; "scene_id": string }) | ({ "entity_id": string; "op": "delete_entity"; "scene_id": string }) | ({ "entity_id": string; "name": string; "op": "rename_entity"; "scene_id": string }) | ({ "entity_id": string; "op": "reparent_entity"; "parent"?: string | null; "scene_id": string }) | ({ "component": string; "entity_id": string; "op": "set_component"; "scene_id": string; "value": unknown }) | ({ "component": string; "entity_id": string; "op": "remove_component"; "scene_id": string }) | ({ "asset": Asset; "op": "upsert_asset" }) | ({ "asset_id": string; "op": "remove_asset" }) | ({ "op": "upsert_script"; "script": ScriptSource }) | ({ "op": "remove_script"; "script_id": string }) | ({ "expected_source": SourceVersion; "op": "write_script"; "script_id": string; "source": string }) | ({ "op": "set_memory"; "section": string; "text": string }) | ({ "op": "upsert_string_table"; "table": StringTable }) | ({ "op": "remove_string_table"; "table_id": string }) | ({ "op": "set_locale"; "settings": LocaleSettings }) | ({ "actions": { [key: string]: InputAction }; "op": "set_input_actions" });
+  export type Root = ({ "op": "create_scene"; "scene": Scene }) | ({ "op": "delete_scene"; "scene_id": string }) | ({ "entity": Entity; "op": "create_entity"; "scene_id": string }) | ({ "entity_id": string; "op": "delete_entity"; "scene_id": string }) | ({ "entity_id": string; "name": string; "op": "rename_entity"; "scene_id": string }) | ({ "entity_id": string; "op": "reparent_entity"; "parent"?: string | null; "scene_id": string }) | ({ "component": string; "entity_id": string; "op": "set_component"; "scene_id": string; "value": unknown }) | ({ "component": string; "entity_id": string; "op": "remove_component"; "scene_id": string }) | ({ "asset": Asset; "op": "upsert_asset" }) | ({ "asset_id": string; "op": "remove_asset" }) | ({ "op": "upsert_script"; "script": ScriptSource }) | ({ "op": "remove_script"; "script_id": string }) | ({ "expected_source": SourceVersion; "op": "write_script"; "script_id": string; "source": string }) | ({ "op": "set_memory"; "section": string; "text": string }) | ({ "op": "upsert_string_table"; "table": StringTable }) | ({ "op": "remove_string_table"; "table_id": string }) | ({ "op": "set_locale"; "settings": LocaleSettings }) | ({ "actions": { [key: string]: InputAction }; "op": "set_input_actions" }) | ({ "op": "set_agent_budget"; "settings": AgentBudgetSettings });
 }
 export type Command = CommandSchema.Root;
 
@@ -97,6 +98,7 @@ export type EnvironmentLight = EnvironmentLightSchema.Root;
 
 export namespace GameSaveSchema {
   export type ActionGesture = "tap" | "long_press" | "swipe";
+  export type AgentBudgetSettings = { "max_tokens": number };
   export type Asset = { "id": string; "import_settings"?: (AssetImportSettings) | (null); "kind": string; "name": string; "path": string; "sha256": string };
   export type AssetImportSettings = ({ "type": "texture"; "usage": TextureUsage });
   export type Entity = { "components": { [key: string]: unknown }; "id": string; "name": string; "parent"?: string | null; "provenance"?: (Provenance) | (null) };
@@ -109,7 +111,7 @@ export namespace GameSaveSchema {
   export type MouseButton = "left" | "right" | "middle" | "back" | "forward";
   export type Origin = "user" | "agent" | "script" | "import";
   export type Project = { "assets": { [key: string]: Asset }; "id": string; "memory": { [key: string]: string }; "name": string; "scenes": { [key: string]: Scene }; "schema_version": number; "scripts": { [key: string]: ScriptSource }; "settings": ProjectSettings; "string_tables"?: { [key: string]: StringTable } };
-  export type ProjectSettings = { "input_actions"?: { [key: string]: InputAction }; "localization"?: LocaleSettings; "tick_rate": number };
+  export type ProjectSettings = { "agent_budget"?: AgentBudgetSettings; "input_actions"?: { [key: string]: InputAction }; "localization"?: LocaleSettings; "tick_rate": number };
   export type Provenance = { "actor": string; "conversation_id"?: string | null; "model"?: string | null; "origin": Origin; "transaction": string };
   export type Scene = { "entities": { [key: string]: Entity }; "id": string; "name": string };
   export type Schedule = { "clock": ScriptClock; "timers": { [key: string]: Timer } };
@@ -324,6 +326,7 @@ export type PointLight = PointLightSchema.Root;
 
 export namespace ProjectSchema {
   export type ActionGesture = "tap" | "long_press" | "swipe";
+  export type AgentBudgetSettings = { "max_tokens": number };
   export type Asset = { "id": string; "import_settings"?: (AssetImportSettings) | (null); "kind": string; "name": string; "path": string; "sha256": string };
   export type AssetImportSettings = ({ "type": "texture"; "usage": TextureUsage });
   export type Entity = { "components": { [key: string]: unknown }; "id": string; "name": string; "parent"?: string | null; "provenance"?: (Provenance) | (null) };
@@ -335,7 +338,7 @@ export namespace ProjectSchema {
   export type LocaleSettings = { "fallbacks"?: Array<string>; "locale": string; "pseudo"?: boolean };
   export type MouseButton = "left" | "right" | "middle" | "back" | "forward";
   export type Origin = "user" | "agent" | "script" | "import";
-  export type ProjectSettings = { "input_actions"?: { [key: string]: InputAction }; "localization"?: LocaleSettings; "tick_rate": number };
+  export type ProjectSettings = { "agent_budget"?: AgentBudgetSettings; "input_actions"?: { [key: string]: InputAction }; "localization"?: LocaleSettings; "tick_rate": number };
   export type Provenance = { "actor": string; "conversation_id"?: string | null; "model"?: string | null; "origin": Origin; "transaction": string };
   export type Scene = { "entities": { [key: string]: Entity }; "id": string; "name": string };
   export type ScriptSource = { "id": string; "name": string; "path": string };

@@ -1,0 +1,77 @@
+{
+  "recorded_at": "2026-10-11T19:56:15.497406+00:00",
+  "base": "34e1df4d1f985da2ee4246adcaf7625784d292ab",
+  "scope": "durable Session admission and idle restoration; local foundation only, no provider/GUI wiring",
+  "source_sha256": {
+    "crates/incant_agent/src/ledger.rs": "c54cde4db5d81f77f7b861fe1f7738012dbc8c7d6ea1cb1934bde2fa4742af6e",
+    "crates/incant_agent/src/session.rs": "d7b1e0946fcbbc64ee47d7b5eac7e691d0a4e410a576a5ef7bbc5bd2e68f8b15",
+    "crates/incant_agent/src/session/durable.rs": "886b6ab3573ff485868b9df110eb9d781fad9422002ab19a0588e3d058053984",
+    "crates/incant_agent/src/session/durable/tests.rs": "6020dd39016e64d493738d1719c7366449466a56ef25b9eab829ce894c2e1770"
+  },
+  "validation": {
+    "command": "./tools/cargo test -p incant_agent --all-targets --profile ci --locked -j2",
+    "passed": 106,
+    "ignored": 0,
+    "result_groups": 10,
+    "new_durable_cases": 12,
+    "restore_start_race_iterations": 16,
+    "all_target_clippy": "passed --profile ci --locked -j2 -- -D warnings",
+    "fmt": "passed",
+    "conventions": "passed",
+    "review_regressions": "two initially failing uncertainty/overrun assertions pass after correction"
+  },
+  "logs_sha256": {
+    "/tmp/incant-durable-session-initial-tests.log": "78aced11a737019aae6b7b0f41dcbc7750947f46ab50313d07a073ecd8253f10",
+    "/tmp/incant-durable-session-initial-clippy.log": "bf0ccd210002d0f9cd7ef6a95248a299594522fd5c4da008739ff4f2293310d1",
+    "/tmp/incant-durable-session-review-red.log": "21acbe39ced33a98746013ec524b9e6d1bad5d6ab2ae0df3baefdb59d6f8d9e6",
+    "/tmp/incant-durable-session-tests.log": "6f8b68d321b56ba8f055bfdb7f866f731bba6e4e9b41a0efecc8909634dfb60c",
+    "/tmp/incant-durable-session-clippy.log": "463e74ca8df4e3162e336bd440561dc595e03d97db69f990d0d62c14ac7944db"
+  },
+  "independent_review": {
+    "reviewer": "/root",
+    "report_path": "/tmp/incant-durable-session-review.json",
+    "report_sha256": "e315392289f7c85045d9a38ee7c8cd7111c94f11fac99f579363137a1931662c",
+    "report": {
+      "reviewer": "/root",
+      "reviewed_at": "2026-10-11T19:56:07.536611+00:00",
+      "verdict": "accepted_after_two_accounting_corrections",
+      "source_sha256": {
+        "crates/incant_agent/src/ledger.rs": "c54cde4db5d81f77f7b861fe1f7738012dbc8c7d6ea1cb1934bde2fa4742af6e",
+        "crates/incant_agent/src/session.rs": "d7b1e0946fcbbc64ee47d7b5eac7e691d0a4e410a576a5ef7bbc5bd2e68f8b15",
+        "crates/incant_agent/src/session/durable.rs": "886b6ab3573ff485868b9df110eb9d781fad9422002ab19a0588e3d058053984",
+        "crates/incant_agent/src/session/durable/tests.rs": "6020dd39016e64d493738d1719c7366449466a56ef25b9eab829ce894c2e1770"
+      },
+      "initial_findings": [
+        {
+          "issue": "Historical uncertainty incorrectly applied to exact new turn",
+          "reproduced": true,
+          "corrected": true
+        },
+        {
+          "issue": "Failed settlement dropped known over-cap usage in memory",
+          "reproduced": true,
+          "corrected": true
+        }
+      ],
+      "source_review": [
+        "Request validation and worker ownership precede any reservation",
+        "Restoration/start use same ordered worker/state locks; identical idle snapshot is version-stable",
+        "Accepted worker reserves before provider; cancellation before work can refund exact zero only",
+        "Completion validates cumulative usage before durable settlement and final publication",
+        "Panic/inconsistent receipt keep reservation; physical single-flight reaping unchanged"
+      ],
+      "red_log_sha256": "21acbe39ced33a98746013ec524b9e6d1bad5d6ab2ae0df3baefdb59d6f8d9e6",
+      "limitations": [
+        "Source review only; corrected owner tests/Clippy pending terminal report",
+        "Native adapter and visual controls separate",
+        "Unavailable storage can retain reservation only, not an exact later unpersisted overrun"
+      ]
+    }
+  },
+  "limitations": [
+    "Host adapter must select/fence project and cap and keep ledger open during snapshot restoration.",
+    "Spawn failure uses the real admission path with an injected spawner refusal; no claim of actual OS resource exhaustion.",
+    "No provider request, GUI/native window, Windows/Linux execution or power-cut test in this slice.",
+    "If settlement storage is unavailable, memory retains bounded known overrun, but disk may contain only the earlier conservative reservation; uncertainty remains explicit."
+  ]
+}
