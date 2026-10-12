@@ -77,3 +77,7 @@ audio-only and wasm32 visual-reader compilation, lean graph, format, conventions
 and diff checks pass. These are CPU checks, not shipping/device measurements.
 
 [Exact source/build identities, commands, retained logs and initial test failures](evidence/native-two-bone-ik.json).
+
+[Independent source/evidence review](evidence/native-two-bone-ik-review.json)
+accepts this CPU scope with no findings. It does not approve the remaining
+authored, native control, SDK or visual integration gates.

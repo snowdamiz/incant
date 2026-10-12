@@ -146,5 +146,10 @@
     "No GPU/visual/animation-feel/device timing/RSS acceptance",
     "Current batch operates on already accepted pose; a prior sample call is a separate transaction"
   ],
-  "review": "pending root independent receipt"
+  "review": {
+    "decision": "accepted scoped CPU implementation",
+    "path": "docs/spikes/evidence/native-two-bone-ik-review.json",
+    "sha256": "801bb1f7f3a274bb883faa5eacc295d296e952ce7813cecb16994aeebc4e9a37",
+    "implementation_commit": "a7415c7af551de6ac0ea28c0eb977657a790289d"
+  }
 }
