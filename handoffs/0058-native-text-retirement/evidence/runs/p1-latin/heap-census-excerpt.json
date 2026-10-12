@@ -1,0 +1,25 @@
+{
+  "tool": "/usr/bin/heap <pid> (suspends the task while it scans malloc zones)",
+  "full_listing_sha256": "c9c762b2a97dda5c6130c3084c9761ef9ecc65134e8d5d9de4695f729e720956",
+  "header": [
+    "Process:         incant_game_player [27789]",
+    "Path:            /Users/USER/*/incant_game_player",
+    "Load Address:    0x1026ac000",
+    "Identifier:      incant_game_player",
+    "Version:         0",
+    "Code Type:       ARM64",
+    "Platform:        macOS",
+    "Parent Process:  bash [26717]",
+    "Target Type:     live task (Roots Present)",
+    "",
+    "Date/Time:       2026-10-12 12:28:24.880 -0400",
+    "Launch Time:     2026-10-12 12:28:09.533 -0400"
+  ],
+  "rows": [
+    "       1        640     640.0   TaoView                                           ObjC    incant_game_player",
+    "       1        224     224.0   NSTextInputContext                                ObjC    AppKit",
+    "       1        224     224.0   NSTextInputContext._documentID (malloc)           C       AppKit",
+    "       1        192     192.0   TaoView.taoState (malloc)                         C       incant_game_player",
+    "       1        160     160.0   __NSTextInputContextAuxiliaryStorage              ObjC    AppKit"
+  ]
+}
