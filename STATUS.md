@@ -16,6 +16,15 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Durable budget lock release — correction validated locally
+
+Checkpoint7 exposed Busy when reopening a completed ledger. A private lock guard
+now explicitly releases ownership before descriptor close; two deterministic
+shared-description regressions fail old source and pass fixed. All 64 agent
+tests and Clippy pass, retaining live exclusion and conservative reservations.
+Exact hosted scheduling cause and the next full candidate remain unverified.
+[Evidence](docs/spikes/ledger-explicit-release.md).
+
 ## Release checkpoint6 correction
 
 Failed checkpoint6 selected main110 and was never promoted. Three native physics jobs

@@ -96,6 +96,71 @@ fn inconsistent_receipt_never_refunds_the_reservation() {
     }
 }
 
+// On Unix, a cloned descriptor shares the same open file description as an
+// inherited descriptor between fork and exec. Closing only the owner's copy
+// must not extend that owner's lock lifetime to the unrelated copy.
+#[cfg(unix)]
+#[test]
+fn owner_drop_releases_lock_while_an_inherited_description_stays_open() {
+    for reserved in [false, true] {
+        let temp = tempfile::tempdir().unwrap();
+        let owner = open(temp.path());
+        let inherited = owner._lock.0.try_clone().unwrap();
+        assert!(matches!(
+            Ledger::open_at(temp.path(), PROJECT),
+            Err(LedgerError::Busy)
+        ));
+        if reserved {
+            drop(owner.reserve(100).unwrap());
+        } else {
+            drop(owner);
+        }
+        let reopened = open(temp.path());
+        let snapshot = reopened.snapshot(100).unwrap();
+        assert_eq!(snapshot.budget.used_tokens, if reserved { 100 } else { 0 });
+        assert_eq!(snapshot.accounting_uncertain, reserved);
+        assert_eq!(snapshot.recovered_reservation, reserved);
+        // The new live owner still excludes everyone even with the old alias open.
+        assert!(matches!(
+            Ledger::open_at(temp.path(), PROJECT),
+            Err(LedgerError::Busy)
+        ));
+        drop(inherited);
+        assert!(matches!(
+            Ledger::open_at(temp.path(), PROJECT),
+            Err(LedgerError::Busy)
+        ));
+    }
+}
+
+#[cfg(unix)]
+#[test]
+fn receipt_release_unlocks_inherited_description_without_refunding_invalid_usage() {
+    for valid in [false, true] {
+        let temp = tempfile::tempdir().unwrap();
+        let owner = open(temp.path());
+        let inherited = owner._lock.0.try_clone().unwrap();
+        let lease = owner.reserve(100).unwrap();
+        let completion = lease.complete(
+            &Budget {
+                max_tokens: if valid { 100 } else { 101 },
+                used_tokens: 25,
+            },
+            false,
+        );
+        if valid {
+            assert_eq!(completion.unwrap().budget.used_tokens, 25);
+        } else {
+            assert!(matches!(completion, Err(LedgerError::InvalidReceipt)));
+        }
+        let snapshot = open(temp.path()).snapshot(100).unwrap();
+        assert_eq!(snapshot.budget.used_tokens, if valid { 25 } else { 100 });
+        assert_eq!(snapshot.accounting_uncertain, !valid);
+        assert_eq!(snapshot.recovered_reservation, !valid);
+        drop(inherited);
+    }
+}
+
 #[test]
 fn usage_over_the_requested_allowance_is_not_forgiven() {
     let temp = tempfile::tempdir().unwrap();
