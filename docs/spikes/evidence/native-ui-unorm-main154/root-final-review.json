@@ -1,0 +1,15 @@
+{
+  "at": "2026-10-12T18:03:19.947273+00:00",
+  "reviewer": "astra",
+  "head": "0d406ed9267de457a277c49adbffb04027b2060d",
+  "packet_sha256": "6ea7b64202433678b08bc2e72fbfc47cd4156255fd5809baff16024d3b7147f2",
+  "result": "accepted for fast-gated main merge; hosted candidate validation required",
+  "verified_artifacts": 18,
+  "frozen_sources": 1728,
+  "source_files_exact_accepted_claude": true,
+  "cpu_tests": 64,
+  "ignored_gpu_not_claimed": 82,
+  "zero_exit_commands": 9,
+  "workflow_review": "Only Windows job timeout40 to90; actual GitHub timeout annotation+raw log retained. No steps/events/context changes; actionlint and six release-policy tests passed.",
+  "pending": "Actual Linux/WARP and all23 release checks before promotion; no phase approval."
+}

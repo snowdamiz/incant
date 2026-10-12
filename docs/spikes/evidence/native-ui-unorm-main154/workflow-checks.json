@@ -1,0 +1,26 @@
+[
+  {
+    "name": "actionlint",
+    "command": [
+      "/Users/andreyyurlov/.codex/incant-tools/actionlint-1.7.12/actionlint",
+      ".github/workflows/development-wasm.yml"
+    ],
+    "exit": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "release-policy",
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools/tests",
+      "-p",
+      "test_release_policy.py"
+    ],
+    "exit": 0,
+    "sha256": "c6b9b1f09add0403cc07e90bfdf272129b1ddfa2f8f7675ea8218862f2516371"
+  }
+]

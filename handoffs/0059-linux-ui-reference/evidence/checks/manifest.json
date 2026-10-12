@@ -1,0 +1,242 @@
+{
+ "after-ui-draw-tests": {
+  "argv": "test -p incant_render --profile ci --locked -j2 --lib ui::draw_tests -- --include-ignored --test-threads=1 --nocapture",
+  "committed": "evidence/checks/after-ui-draw-tests.txt",
+  "committed_sha256": "45ac3db82c6334e4c1a5e73f7a146cbd1814dc15718d1c76cbbefedab2eb9a03",
+  "end": "2026-10-12T17:38:21Z",
+  "exit": 0,
+  "raw_log": "/Users/andreyyurlov/.codex/incant-evidence/0059/logs/after-ui-draw-tests.log",
+  "raw_sha256": "45ac3db82c6334e4c1a5e73f7a146cbd1814dc15718d1c76cbbefedab2eb9a03",
+  "start": "2026-10-12T17:38:12Z"
+ },
+ "before-ui-draw-tests": {
+  "argv": "test -p incant_render --profile ci --locked -j2 --lib ui::draw_tests -- --include-ignored --test-threads=1 --nocapture",
+  "committed": "evidence/checks/before-ui-draw-tests.txt",
+  "committed_sha256": "7e99328453819e9007b2fa420583646914501425457f0e3e636c99d4df67fb92",
+  "end": "2026-10-12T17:27:42Z",
+  "exit": 0,
+  "raw_log": "/Users/andreyyurlov/.codex/incant-evidence/0059/logs/before-ui-draw-tests.log",
+  "raw_sha256": "7e99328453819e9007b2fa420583646914501425457f0e3e636c99d4df67fb92",
+  "start": "2026-10-12T17:27:01Z"
+ },
+ "before-ui-draw-tests-attempt0-no-rustc-on-path": {
+  "argv": null,
+  "committed": "evidence/checks/before-ui-draw-tests-attempt0-no-rustc-on-path.txt",
+  "committed_sha256": "a78b0d82098a2cf8309f689ed03857a089901d64cb2c684a72ad92e1e48dbf93",
+  "end": null,
+  "exit": null,
+  "raw_log": "/Users/andreyyurlov/.codex/incant-evidence/0059/logs/before-ui-draw-tests-attempt0-no-rustc-on-path.log",
+  "raw_sha256": "a78b0d82098a2cf8309f689ed03857a089901d64cb2c684a72ad92e1e48dbf93",
+  "start": null
+ },
+ "clippy-incant-render-2": {
+  "argv": "clippy -p incant_render --all-targets --profile ci --locked -j2 -- -D warnings",
+  "committed": "evidence/checks/clippy-incant-render-2.txt",
+  "committed_sha256": "18866d7b16e77196c4240209929f491273b1b9e681f27473a0e98505f4b231f4",
+  "end": "2026-10-12T17:41:24Z",
+  "exit": 0,
+  "raw_log": "/Users/andreyyurlov/.codex/incant-evidence/0059/logs/clippy-incant-render-2.log",
+  "raw_sha256": "18866d7b16e77196c4240209929f491273b1b9e681f27473a0e98505f4b231f4",
+  "start": "2026-10-12T17:41:23Z"
+ },
+ "cpu-reference-after-2": {
+  "argv": "test -p incant_render --profile ci --locked -j2 --lib ui::draw_tests::reference_admits -- --test-threads=1 --nocapture",
+  "committed": "evidence/checks/cpu-reference-after-2.txt",
+  "committed_sha256": "71ab543e30af3b8d5ad39e7aaab478a72bb6850e59713632b663277440e9e5d8",
+  "end": "2026-10-12T17:41:35Z",
+  "exit": 0,
+  "raw_log": "/Users/andreyyurlov/.codex/incant-evidence/0059/logs/cpu-reference-after-2.log",
+  "raw_sha256": "71ab543e30af3b8d5ad39e7aaab478a72bb6850e59713632b663277440e9e5d8",
+  "start": "2026-10-12T17:41:24Z"
+ },
+ "diag-trace-dump": {
+  "argv": "test -p incant_render --profile ci --locked -j2 --lib ui::draw_tests::diag_0059 -- --test-threads=1 --nocapture",
+  "committed": "evidence/checks/diag-trace-dump.txt",
+  "committed_sha256": "19b76979166420bfa099712f0dfbe20ff6c64f3154118658dd20ba7a4f58dda2",
+  "end": "2026-10-12T17:36:32Z",
+  "exit": 0,
+  "raw_log": "/Users/andreyyurlov/.codex/incant-evidence/0059/logs/diag-trace-dump.log",
+  "raw_sha256": "19b76979166420bfa099712f0dfbe20ff6c64f3154118658dd20ba7a4f58dda2",
+  "start": "2026-10-12T17:36:22Z"
+ },
+ "diag-unorm-emulation-vs-base-reference": {
+  "argv": "test -p incant_render --profile ci --locked -j2 --lib ui::draw_tests::reference_admits -- --test-threads=1 --nocapture",
+  "committed": "evidence/checks/diag-unorm-emulation-vs-base-reference.txt",
+  "committed_sha256": "c2fe2a4e0aafeab3eb9a291e7b34c28b2f4960cd8913da54be6133ee95ee005c",
+  "end": "2026-10-12T17:30:20Z",
+  "exit": 101,
+  "raw_log": "/Users/andreyyurlov/.codex/incant-evidence/0059/logs/diag-unorm-emulation-vs-base-reference.log",
+  "raw_sha256": "c2fe2a4e0aafeab3eb9a291e7b34c28b2f4960cd8913da54be6133ee95ee005c",
+  "start": "2026-10-12T17:30:10Z"
+ },
+ "final-render-cpu-tests": {
+  "argv": "test -p incant_render --profile ci --locked -j2 --lib -- --test-threads=2",
+  "committed": "evidence/checks/final-render-cpu-tests.txt",
+  "committed_sha256": "a73aaa4801b88c6f10c698ec4f9f434f104f9e4103d04fa9f8aa96335cb72a0a",
+  "end": "2026-10-12T17:44:34Z",
+  "exit": 0,
+  "raw_log": "/Users/andreyyurlov/.codex/incant-evidence/0059/logs/final-render-cpu-tests.log",
+  "raw_sha256": "a73aaa4801b88c6f10c698ec4f9f434f104f9e4103d04fa9f8aa96335cb72a0a",
+  "start": "2026-10-12T17:44:33Z"
+ },
+ "final-render-gpu-subset": {
+  "argv": "test -p incant_render --profile ci --locked -j2 --lib -- --ignored --test-threads=1 --nocapture",
+  "committed": "evidence/checks/final-render-gpu-subset.txt",
+  "committed_sha256": "90bc9d6f78c2c5f15a0b66a966d4ec307cd14987283568b393e72b2e0f13c5a8",
+  "end": "2026-10-12T17:44:45Z",
+  "exit": 0,
+  "raw_log": "/Users/andreyyurlov/.codex/incant-evidence/0059/logs/final-render-gpu-subset.log",
+  "raw_sha256": "90bc9d6f78c2c5f15a0b66a966d4ec307cd14987283568b393e72b2e0f13c5a8",
+  "start": "2026-10-12T17:44:42Z"
+ },
+ "final-ui-all-tests": {
+  "argv": "test -p incant_render --profile ci --locked -j2 --lib ui:: -- --include-ignored --test-threads=1 --nocapture",
+  "committed": "evidence/checks/final-ui-all-tests.txt",
+  "committed_sha256": "b71631bf1b01aa89b9950c33d3721460c80cc88a07ae184227555835e8ccfee9",
+  "end": "2026-10-12T17:44:33Z",
+  "exit": 0,
+  "raw_log": "/Users/andreyyurlov/.codex/incant-evidence/0059/logs/final-ui-all-tests.log",
+  "raw_sha256": "b71631bf1b01aa89b9950c33d3721460c80cc88a07ae184227555835e8ccfee9",
+  "start": "2026-10-12T17:44:33Z"
+ },
+ "fmt-check-2": {
+  "argv": null,
+  "committed": "evidence/checks/fmt-check-2.txt",
+  "committed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "end": null,
+  "exit": null,
+  "raw_log": "/Users/andreyyurlov/.codex/incant-evidence/0059/logs/fmt-check-2.log",
+  "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "start": null
+ },
+ "mutate-driver": {
+  "argv": null,
+  "committed": "evidence/checks/mutate-driver.txt",
+  "committed_sha256": "0ea08adce0368fa9fac724ebecf52d23951048c5c5e0070adb727c56e7efb411",
+  "end": null,
+  "exit": null,
+  "raw_log": "/Users/andreyyurlov/.codex/incant-evidence/0059/logs/mutate-driver.log",
+  "raw_sha256": "0ea08adce0368fa9fac724ebecf52d23951048c5c5e0070adb727c56e7efb411",
+  "start": null
+ },
+ "mutation-0-unmutated-before": {
+  "argv": "test -p incant_render --profile ci --locked -j2 --lib ui::draw_tests -- --include-ignored --test-threads=1 --nocapture",
+  "committed": "evidence/checks/mutation-0-unmutated-before.txt",
+  "committed_sha256": "c14f840dada3d939ef4d4eafe31ca74a46ac3f2487dc751d7b76560e5ff228bd",
+  "end": "2026-10-12T17:41:55Z",
+  "exit": 0,
+  "raw_log": "/Users/andreyyurlov/.codex/incant-evidence/0059/logs/mutation-0-unmutated-before.log",
+  "raw_sha256": "c14f840dada3d939ef4d4eafe31ca74a46ac3f2487dc751d7b76560e5ff228bd",
+  "start": "2026-10-12T17:41:54Z"
+ },
+ "mutation-1-unorm-linear": {
+  "argv": "test -p incant_render --profile ci --locked -j2 --lib ui::draw_tests -- --include-ignored --test-threads=1 --nocapture",
+  "committed": "evidence/checks/mutation-1-unorm-linear.txt",
+  "committed_sha256": "f646fa84f3c1ae5b51a8cf52f817770dc23fe8938eafa360232e2616ed1552bd",
+  "end": "2026-10-12T17:42:05Z",
+  "exit": 101,
+  "raw_log": "/Users/andreyyurlov/.codex/incant-evidence/0059/logs/mutation-1-unorm-linear.log",
+  "raw_sha256": "f646fa84f3c1ae5b51a8cf52f817770dc23fe8938eafa360232e2616ed1552bd",
+  "start": "2026-10-12T17:41:55Z"
+ },
+ "mutation-2-unorm-colour-98": {
+  "argv": "test -p incant_render --profile ci --locked -j2 --lib ui::draw_tests -- --include-ignored --test-threads=1 --nocapture",
+  "committed": "evidence/checks/mutation-2-unorm-colour-98.txt",
+  "committed_sha256": "01b9b6845094be4c1902a9b83e6cd4bb86802009d43c4be4714f0d5d73f977fb",
+  "end": "2026-10-12T17:42:15Z",
+  "exit": 101,
+  "raw_log": "/Users/andreyyurlov/.codex/incant-evidence/0059/logs/mutation-2-unorm-colour-98.log",
+  "raw_sha256": "01b9b6845094be4c1902a9b83e6cd4bb86802009d43c4be4714f0d5d73f977fb",
+  "start": "2026-10-12T17:42:05Z"
+ },
+ "mutation-3-unorm-colour-99": {
+  "argv": "test -p incant_render --profile ci --locked -j2 --lib ui::draw_tests -- --include-ignored --test-threads=1 --nocapture",
+  "committed": "evidence/checks/mutation-3-unorm-colour-99.txt",
+  "committed_sha256": "90e4adfac41167c62ff438346de106e6584b5459e5322d7d760468be0d184c5c",
+  "end": "2026-10-12T17:42:29Z",
+  "exit": 101,
+  "raw_log": "/Users/andreyyurlov/.codex/incant-evidence/0059/logs/mutation-3-unorm-colour-99.log",
+  "raw_sha256": "90e4adfac41167c62ff438346de106e6584b5459e5322d7d760468be0d184c5c",
+  "start": "2026-10-12T17:42:15Z"
+ },
+ "mutation-4-unorm-opacity-97": {
+  "argv": "test -p incant_render --profile ci --locked -j2 --lib ui::draw_tests -- --include-ignored --test-threads=1 --nocapture",
+  "committed": "evidence/checks/mutation-4-unorm-opacity-97.txt",
+  "committed_sha256": "dcd762d611e4cbc1837b3e025159b6258b05b1953d86605d4b10b7f4e94c8ff6",
+  "end": "2026-10-12T17:42:40Z",
+  "exit": 101,
+  "raw_log": "/Users/andreyyurlov/.codex/incant-evidence/0059/logs/mutation-4-unorm-opacity-97.log",
+  "raw_sha256": "dcd762d611e4cbc1837b3e025159b6258b05b1953d86605d4b10b7f4e94c8ff6",
+  "start": "2026-10-12T17:42:29Z"
+ },
+ "mutation-5-pen-right": {
+  "argv": "test -p incant_render --profile ci --locked -j2 --lib ui::draw_tests -- --include-ignored --test-threads=1 --nocapture",
+  "committed": "evidence/checks/mutation-5-pen-right.txt",
+  "committed_sha256": "8df1e827ddd2b023067eefabb8c969e22e0a7ebaa6eb852ccbfeac0911bec148",
+  "end": "2026-10-12T17:42:55Z",
+  "exit": 101,
+  "raw_log": "/Users/andreyyurlov/.codex/incant-evidence/0059/logs/mutation-5-pen-right.log",
+  "raw_sha256": "8df1e827ddd2b023067eefabb8c969e22e0a7ebaa6eb852ccbfeac0911bec148",
+  "start": "2026-10-12T17:42:40Z"
+ },
+ "mutation-6-no-clip": {
+  "argv": "test -p incant_render --profile ci --locked -j2 --lib ui::draw_tests -- --include-ignored --test-threads=1 --nocapture",
+  "committed": "evidence/checks/mutation-6-no-clip.txt",
+  "committed_sha256": "8833586de69709d8811ddd535c6cb89c31a0f105fa55b3b6118c9f438b19e65f",
+  "end": "2026-10-12T17:43:09Z",
+  "exit": 101,
+  "raw_log": "/Users/andreyyurlov/.codex/incant-evidence/0059/logs/mutation-6-no-clip.log",
+  "raw_sha256": "8833586de69709d8811ddd535c6cb89c31a0f105fa55b3b6118c9f438b19e65f",
+  "start": "2026-10-12T17:42:55Z"
+ },
+ "mutation-7-reference-float-only": {
+  "argv": "test -p incant_render --profile ci --locked -j2 --lib ui::draw_tests -- --include-ignored --test-threads=1 --nocapture",
+  "committed": "evidence/checks/mutation-7-reference-float-only.txt",
+  "committed_sha256": "53877f97f6fc78609994cc182e3619ed9b8000e7f5210f17b33114c023d70de2",
+  "end": "2026-10-12T17:43:21Z",
+  "exit": 101,
+  "raw_log": "/Users/andreyyurlov/.codex/incant-evidence/0059/logs/mutation-7-reference-float-only.log",
+  "raw_sha256": "53877f97f6fc78609994cc182e3619ed9b8000e7f5210f17b33114c023d70de2",
+  "start": "2026-10-12T17:43:09Z"
+ },
+ "mutation-9-unmutated-after": {
+  "argv": "test -p incant_render --profile ci --locked -j2 --lib ui::draw_tests -- --include-ignored --test-threads=1 --nocapture",
+  "committed": "evidence/checks/mutation-9-unmutated-after.txt",
+  "committed_sha256": "ba7f63e360809c754661f786ad5002724647cc9d196d092b6d54636fb3233671",
+  "end": "2026-10-12T17:43:33Z",
+  "exit": 0,
+  "raw_log": "/Users/andreyyurlov/.codex/incant-evidence/0059/logs/mutation-9-unmutated-after.log",
+  "raw_sha256": "ba7f63e360809c754661f786ad5002724647cc9d196d092b6d54636fb3233671",
+  "start": "2026-10-12T17:43:22Z"
+ },
+ "unorm-fingerprint-2": {
+  "argv": null,
+  "committed": "evidence/checks/unorm-fingerprint-2.txt",
+  "committed_sha256": "fb58ef9ebdd150bd2b0f221a953d525b62a9834bbc19518013eda78c0b9d5d73",
+  "end": null,
+  "exit": null,
+  "raw_log": "/Users/andreyyurlov/.codex/incant-evidence/0059/logs/unorm-fingerprint-2.log",
+  "raw_sha256": "fb58ef9ebdd150bd2b0f221a953d525b62a9834bbc19518013eda78c0b9d5d73",
+  "start": null
+ },
+ "wasm32-check-incant-render": {
+  "argv": "check -p incant_render --lib --target wasm32-unknown-unknown --locked -j2",
+  "committed": "evidence/checks/wasm32-check-incant-render.txt",
+  "committed_sha256": "d6e557f6248e94cabfe70b37655467b1c21dcd29880ea95d91590f2f97af5063",
+  "end": "2026-10-12T17:40:24Z",
+  "exit": 0,
+  "raw_log": "/Users/andreyyurlov/.codex/incant-evidence/0059/logs/wasm32-check-incant-render.log",
+  "raw_sha256": "d6e557f6248e94cabfe70b37655467b1c21dcd29880ea95d91590f2f97af5063",
+  "start": "2026-10-12T17:39:53Z"
+ },
+ "wasm32-check-incant-render-ci": {
+  "argv": "check -p incant_render --lib --target wasm32-unknown-unknown --profile ci --locked -j2",
+  "committed": "evidence/checks/wasm32-check-incant-render-ci.txt",
+  "committed_sha256": "e14d3c30a14340d152436d88a553c669f8a4d066e8948656053d441d192a03d2",
+  "end": "2026-10-12T17:40:34Z",
+  "exit": 0,
+  "raw_log": "/Users/andreyyurlov/.codex/incant-evidence/0059/logs/wasm32-check-incant-render-ci.log",
+  "raw_sha256": "e14d3c30a14340d152436d88a553c669f8a4d066e8948656053d441d192a03d2",
+  "start": "2026-10-12T17:40:31Z"
+ }
+}

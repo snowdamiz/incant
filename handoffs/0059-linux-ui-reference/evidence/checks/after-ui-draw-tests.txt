@@ -1,0 +1,60 @@
+# label: after-ui-draw-tests
+# cwd: /Users/andreyyurlov/.codex/worktrees/cooked-native-scripts/incant/.worktrees/0059-linux-ui-reference
+# CARGO_TARGET_DIR=/Users/andreyyurlov/.codex/incant-native-target cargo test -p incant_render --profile ci --locked -j2 --lib ui::draw_tests -- --include-ignored --test-threads=1 --nocapture
+# rustc 1.99.0 (b940084d7 2026-09-28)
+# binary: rustc
+# commit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4
+# commit-date: 2026-09-28
+# host: aarch64-apple-darwin
+# release: 1.99.0
+# LLVM version: 23.1.1
+# start: 2026-10-12T17:38:12Z
+   Compiling incant_render v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-native-scripts/incant/.worktrees/0059-linux-ui-reference/crates/incant_render)
+    Finished `ci` profile [optimized] target(s) in 8.62s
+     Running unittests src/lib.rs (/Users/andreyyurlov/.codex/incant-native-target/ci/deps/incant_render-0b72bec43c7fffff)
+
+running 6 tests
+test ui::draw_tests::editor_viewport_region_offsets_scales_and_bounds_the_ui ... UI draw selected adapter: AdapterInfo { name: "Apple M5 Pro", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: "", driver: "", driver_info: "", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }
+region: outside 0 by 0, widest 5 (51 channels > 2); vs exact worst 1, >1: 0
+ok
+test ui::draw_tests::logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales ... UI draw selected adapter: AdapterInfo { name: "Apple M5 Pro", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: "", driver: "", driver_info: "", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }
+scale 1 Rgba8UnormSrgb: outside 0 by 0, widest 4 (44 channels > 2); vs exact worst 1, >1: 0, changed 4245
+scale 2 Rgba8UnormSrgb: outside 0 by 0, widest 21 (6535 channels > 2); vs exact worst 1, >1: 0, changed 17954
+scale 1.5 Rgba8UnormSrgb: outside 0 by 0, widest 29 (6114 channels > 2); vs exact worst 1, >1: 0, changed 10146
+scale 1 Rgba8Unorm: outside 0 by 0, widest 2 (0 channels > 2); vs exact worst 0, >1: 0, changed 4246
+ok
+test ui::draw_tests::nested_clips_cut_actual_glyph_bounds_including_negative_x_rtl_overflow ... UI draw selected adapter: AdapterInfo { name: "Apple M5 Pro", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: "", driver: "", driver_info: "", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }
+nested clips: outside 0 by 0, widest 4 (16 channels > 2); vs exact worst 1, >1: 0
+ok
+test ui::draw_tests::reference_admits_backend_precision_but_not_wrong_geometry_clip_or_opacity ... scale 1 Rgba8UnormSrgb: emulated llvmpipe outside 0 by 0, widest 4 (44 channels > 2); vs exact worst 2, >1: 1, changed 4246
+scale 1 Rgba8UnormSrgb: blending in the other space rejected by Admission { outside: 3267, excess: 66.0, widest: 4.0, wide: 44 }
+scale 1 Rgba8UnormSrgb: text 1 px right rejected by Admission { outside: 3053, excess: 229.0, widest: 4.0, wide: 44 }
+scale 1 Rgba8UnormSrgb: 90% text opacity rejected by Admission { outside: 2233, excess: 11.0, widest: 4.0, wide: 44 }
+scale 2 Rgba8UnormSrgb: emulated llvmpipe outside 0 by 0, widest 21 (6535 channels > 2); vs exact worst 7, >1: 303, changed 17961
+scale 2 Rgba8UnormSrgb: blending in the other space rejected by Admission { outside: 17167, excess: 68.0, widest: 21.0, wide: 6535 }
+scale 2 Rgba8UnormSrgb: text 1 px right rejected by Admission { outside: 13562, excess: 159.0, widest: 21.0, wide: 6535 }
+scale 2 Rgba8UnormSrgb: text 0.5 px right rejected by Admission { outside: 3460, excess: 106.0, widest: 21.0, wide: 6535 }
+scale 2 Rgba8UnormSrgb: 90% text opacity rejected by Admission { outside: 10699, excess: 10.0, widest: 21.0, wide: 6535 }
+scale 1.5 Rgba8UnormSrgb: emulated llvmpipe outside 0 by 0, widest 29 (6114 channels > 2); vs exact worst 6, >1: 179, changed 10154
+scale 1.5 Rgba8UnormSrgb: blending in the other space rejected by Admission { outside: 9681, excess: 66.0, widest: 29.0, wide: 6114 }
+scale 1.5 Rgba8UnormSrgb: text 1 px right rejected by Admission { outside: 8057, excess: 164.0, widest: 29.0, wide: 6114 }
+scale 1.5 Rgba8UnormSrgb: 90% text opacity rejected by Admission { outside: 5558, excess: 10.0, widest: 29.0, wide: 6114 }
+scale 1 Rgba8Unorm: emulated llvmpipe outside 0 by 0, widest 2 (0 channels > 2); vs exact worst 2, >1: 5, changed 4248
+scale 1 Rgba8Unorm: blending in the other space rejected by Admission { outside: 3303, excess: 67.0, widest: 2.0, wide: 0 }
+scale 1 Rgba8Unorm: text 1 px right rejected by Admission { outside: 3111, excess: 223.0, widest: 2.0, wide: 0 }
+scale 1 Rgba8Unorm: 90% text opacity rejected by Admission { outside: 2219, excess: 23.0, widest: 2.0, wide: 0 }
+nested Exact vs exact worst 0, >1: 0
+nested Llvmpipe vs exact worst 2, >1: 2
+nested: label without its ancestor clip rejected by Admission { outside: 146, excess: 230.0, widest: 4.0, wide: 16 }
+ok
+test ui::draw_tests::retained_atlas_and_quads_follow_input_identity_and_survive_refused_stages ... UI draw selected adapter: AdapterInfo { name: "Apple M5 Pro", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: "", driver: "", driver_info: "", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }
+UI draw selected adapter: AdapterInfo { name: "Apple M5 Pro", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: "", driver: "", driver_info: "", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }
+ok
+test ui::draw_tests::ui_composites_over_the_finished_world_frame_and_leaves_uncovered_pixels ... UI draw selected adapter: AdapterInfo { name: "Apple M5 Pro", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: "", driver: "", driver_info: "", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }
+over world: outside 0 by 0, widest 3 (7 channels > 2); vs exact worst 1, >1: 0
+over world, text under selection: outside 279 by 47
+ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 85 filtered out; finished in 0.31s
+
+# exit: 0 at 2026-10-12T17:38:21Z

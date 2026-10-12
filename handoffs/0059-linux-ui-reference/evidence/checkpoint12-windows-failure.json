@@ -1,0 +1,30 @@
+{
+  "at": "2026-10-12T17:24:24.253811+00:00",
+  "candidate": "10129769b82a5a6dd7b075f0d8f42bfcc33e9ae5",
+  "main": "58cca708545eb494868e18469fd4de98f47eb2da",
+  "run": 38281150114,
+  "job": 114918474729,
+  "name": "desktop (windows-latest, Windows, .exe)",
+  "result": "FAILURE",
+  "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint12/windows-desktop-failure.log",
+  "log_sha256": "cec7da5a271729c47964244ce18e496ecd8383dc2e3c505a127e54b9b12a1ebb",
+  "source_hashes": {
+    "crates/incant_render/src/ui/ui.wgsl": "f67e4982b038833e87ed84861d5be3018f5f0d6587ff8da6faf8bfd840c33c39",
+    "crates/incant_render/src/ui_draw_tests.rs": "1f51d53d0deb8705dfd61780913c7241dd7b77a0603970de3dec94aa79978f3a",
+    "crates/incant_render/src/ui/mod.rs": "275028849806cb6bdf541ea1150639d9081fffd405a31b32a5831bf73b97fa0d",
+    "crates/incant_render/src/ui/geometry.rs": "47bd7838b52a46e0034b05cf5458f8b12bf70c475889ba30848078dcb15d352b",
+    "Cargo.lock": "ac059d1a2493d570bd202515e729830c56ecc7758cd808ccd0f245d06abcac7f"
+  },
+  "actual_adapter": {
+    "name": "Microsoft Basic Render Driver",
+    "vendor": 5140,
+    "device": 140,
+    "device_type": "Cpu",
+    "driver": "10.0.26100.33438",
+    "backend": "Dx12",
+    "subgroup_min_size": 4,
+    "subgroup_max_size": 4
+  },
+  "failure": "logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales:scale1 Rgba8Unorm outside245 excess2 widest2, expectedoutside0;31other GPU cases pass in this final subset. sRGB1/2/1.5 controls preceding it pass.",
+  "action": "Preserve frozen candidate; no retry or reference adjustment. Route actual backend evidence to Claude for numerical/appearance contract repair."
+}
