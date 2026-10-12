@@ -54,14 +54,28 @@ Authored root selection, graph/clock integration, pose extraction, body movement
 save/SDK controls and rendered/device gates remain open; this is not complete
 root motion or Phase 1. [Contract and evidence](docs/spikes/native-root-motion-core.md).
 
+## Native Rust/Wasm IK — actual hosts and ordinary package passed
+
+Additive operations 44–46 expose the complete pre-command v4 pose plus ordered
+IK constraints and atomic target/pole/weight controls. Existing operations 0–43
+and layouts are unchanged; all eight old pose readers explicitly refuse IK.
+Actual Wasmtime/wasm2c checks passed 418 tests, with final formatted fixture
+reexecution, scoped Clippy, wasm32, generated registry and lean graph checks.
+Three fresh source/cache/build/map-deleted ordinary players each matched 252
+public vector assertions, 4,140 full scalar records, native-oracle clocks and
+PCM. All fifteen exact refusals passed. Independent source and final execution/package reviews are accepted;
+coordinator intake remains pending. Compound-pose SDK
+parity, static-module checkpoints, rendered acceptance and device gates remain
+open. [Contract/evidence](docs/spikes/native-wasm-ik.md).
+
 ## Compound animation transitions — private focused verification
 
 Transitions involving authored blend states now retain independent state clocks,
 inner interpolation and exact world-save continuation. The TypeScript snapshot
 and CPU renderer consume the grouped pose; a single staged sampling/IK boundary
 preserves the last complete pose on a late refusal. The affected suite passes
-749 CPU tests, Clippy, wasm32 and SDK TypeScript. Independent review, ordinary
-exported continuation and complete compound
+749 CPU tests, Clippy, wasm32 and SDK TypeScript; independent source review passes.
+Ordinary exported continuation and complete compound
 Wasm bindings remain open. Root-motion integration continues separately; this
 private revision does not claim complete animation or a Phase 1 gate.
 [Contract](docs/spikes/native-compound-animation-fades.md).
@@ -82,6 +96,11 @@ refusals. Independent source and final evidence reviews are accepted;
 coordinator intake remains pending.
 
 Renderer appearance/GPU/device budgets, edit-mode IK preview/authoring UI and
+Wasm compound-pose integration remain open. The current-v4 union preserves all
+eight legacy pose-import refusals; the additive IK API is recorded above.
+[Contract and evidence](docs/spikes/native-authored-ik.md).
+
+
 Rust/Wasm IK controls remain open. Existing v1–v3 pose imports explicitly refuse
 IK; current-main integration must extend that guard and regression to v4.
 [Contract and evidence](docs/spikes/native-authored-ik.md).
@@ -1319,3 +1338,11 @@ checks; the three fresh bulk processes remain a separate development-only smoke.
 Retained CPU pose blending integration against actual main120 preserves all five
 reviewed source hashes and passes 166 CPU tests plus Clippy/graph checks; 71 GPU
 tests remain ignored. [Receipt](docs/spikes/evidence/runtime-pose-blending-main120.json).
+
+## Complete compound Wasm source (2026-10-12)
+
+Additive operations 47–52 are independently source-reviewed and locally frozen;
+final broad conformance and ordinary source-deleted exported-player proof are
+pending. Root-motion may append reserved 53–55 from this immutable ancestor.
+Whole-module checkpoints and visual/device gates remain open.
+See [scope and evidence](docs/spikes/native-wasm-compound.md).

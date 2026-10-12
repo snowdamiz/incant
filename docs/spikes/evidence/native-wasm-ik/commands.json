@@ -1,0 +1,795 @@
+[
+  {
+    "argv": [
+      "/private/tmp/incant-font-atlas-target/ci/incant_headless",
+      "init",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/authoring/project.json",
+      "--entities",
+      "0"
+    ],
+    "at": "2026-10-12T17:07:52.080494+00:00",
+    "exit_code": 0,
+    "seconds": 0.02996737499961455,
+    "stdout": {
+      "file": "command-000-stdout.txt",
+      "sha256": "ee4bc3eea140bb77d2a5bcdd3eaf394c4a925fd1a6d1e2fdf8fb04a7bae0390e"
+    },
+    "stderr": {
+      "file": "command-000-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/private/tmp/incant-font-atlas-target/ci/incant_headless",
+      "import",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/authoring/project.json",
+      "rig.gltf"
+    ],
+    "at": "2026-10-12T17:07:52.112151+00:00",
+    "exit_code": 0,
+    "seconds": 0.04068445799930487,
+    "stdout": {
+      "file": "command-001-stdout.txt",
+      "sha256": "ca7bf14816e6605adb8f784f1f3f6f194b14b98ab0d1f2424cb9194ac673b110"
+    },
+    "stderr": {
+      "file": "command-001-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/tools/rust_guest.py",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/guest-build/behavior.rs",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/guest-build/behavior.wasm",
+      "--rustup",
+      "/opt/homebrew/bin/rustup"
+    ],
+    "at": "2026-10-12T17:07:52.153680+00:00",
+    "exit_code": 0,
+    "seconds": 1.207468874999904,
+    "stdout": {
+      "file": "command-002-stdout.txt",
+      "sha256": "f9ad977981e5f14bcdb61d309efe4a36638337123534c3a4a9958a9170b8719a"
+    },
+    "stderr": {
+      "file": "command-002-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/private/tmp/incant-font-atlas-target/ci/incant_headless",
+      "import",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/authoring/project.json",
+      "behavior.wasm"
+    ],
+    "at": "2026-10-12T17:07:53.362670+00:00",
+    "exit_code": 0,
+    "seconds": 0.06278424999982235,
+    "stdout": {
+      "file": "command-003-stdout.txt",
+      "sha256": "14ab546ba3e59686e491cdbf7c5c3ee017a0c89db4802445af6d9233d40cb2ec"
+    },
+    "stderr": {
+      "file": "command-003-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/private/tmp/incant-font-atlas-target/ci/incant_headless",
+      "validate",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/authoring/project.json"
+    ],
+    "at": "2026-10-12T17:07:53.526474+00:00",
+    "exit_code": 0,
+    "seconds": 0.018404582999210106,
+    "stdout": {
+      "file": "command-004-stdout.txt",
+      "sha256": "9361ed32ede38049fc9767737e3d5fcd59e916e6259185c16c6db6d200e1e796"
+    },
+    "stderr": {
+      "file": "command-004-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/private/tmp/incant-font-atlas-target/ci/examples/animation_pose_package_oracle",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/authoring/project.json",
+      "00000000000000000000000033",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/oracle.scene",
+      "20",
+      "--ik"
+    ],
+    "at": "2026-10-12T17:07:53.549180+00:00",
+    "exit_code": 0,
+    "seconds": 0.01710987499973271,
+    "stdout": {
+      "file": "command-005-stdout.txt",
+      "sha256": "e6417d1148adb7567d5a98c88a2e09de3d9ff2670fb3d80f9e3ac3d31051b307"
+    },
+    "stderr": {
+      "file": "command-005-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/private/tmp/incant-font-atlas-target/ci/incant_headless",
+      "native-play",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/authoring/project.json",
+      "--camera",
+      "0000000000000000000000009C",
+      "--ticks",
+      "20",
+      "--input-replay",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/positive-input.json",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/observe.json",
+      "--pcm-output",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/development.pcm"
+    ],
+    "at": "2026-10-12T17:07:53.570419+00:00",
+    "exit_code": 0,
+    "seconds": 0.12470241700066254,
+    "stdout": {
+      "file": "command-006-stdout.txt",
+      "sha256": "a41f5cf73f188845d8d78befd383e17f76d7c0955cfceb55b0ace7b1f8dfd7c4"
+    },
+    "stderr": {
+      "file": "command-006-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/private/tmp/incant-font-atlas-target/ci/incant_headless",
+      "native-play",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/authoring/project.json",
+      "--camera",
+      "0000000000000000000000009C",
+      "--ticks",
+      "20",
+      "--input-replay",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/old-v1-input.json",
+      "--pcm-output",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/dev-old-v1.pcm"
+    ],
+    "at": "2026-10-12T17:07:53.698125+00:00",
+    "exit_code": 1,
+    "seconds": 0.11644616699959442,
+    "stdout": {
+      "file": "command-007-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-007-stderr.txt",
+      "sha256": "026212fcc6ebf56f89c5ecafab44ce5f2b082c4947b7b9c58629bac2fca64d21"
+    }
+  },
+  {
+    "argv": [
+      "/private/tmp/incant-font-atlas-target/ci/incant_headless",
+      "native-play",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/authoring/project.json",
+      "--camera",
+      "0000000000000000000000009C",
+      "--ticks",
+      "20",
+      "--input-replay",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/old-v2-input.json",
+      "--pcm-output",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/dev-old-v2.pcm"
+    ],
+    "at": "2026-10-12T17:07:53.815644+00:00",
+    "exit_code": 1,
+    "seconds": 0.10430274999998801,
+    "stdout": {
+      "file": "command-008-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-008-stderr.txt",
+      "sha256": "026212fcc6ebf56f89c5ecafab44ce5f2b082c4947b7b9c58629bac2fca64d21"
+    }
+  },
+  {
+    "argv": [
+      "/private/tmp/incant-font-atlas-target/ci/incant_headless",
+      "native-play",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/authoring/project.json",
+      "--camera",
+      "0000000000000000000000009C",
+      "--ticks",
+      "20",
+      "--input-replay",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/old-v3-input.json",
+      "--pcm-output",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/dev-old-v3.pcm"
+    ],
+    "at": "2026-10-12T17:07:53.920891+00:00",
+    "exit_code": 1,
+    "seconds": 0.1145686250001745,
+    "stdout": {
+      "file": "command-009-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-009-stderr.txt",
+      "sha256": "026212fcc6ebf56f89c5ecafab44ce5f2b082c4947b7b9c58629bac2fca64d21"
+    }
+  },
+  {
+    "argv": [
+      "/private/tmp/incant-font-atlas-target/ci/incant_headless",
+      "native-play",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/authoring/project.json",
+      "--camera",
+      "0000000000000000000000009C",
+      "--ticks",
+      "20",
+      "--input-replay",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/old-v4-input.json",
+      "--pcm-output",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/dev-old-v4.pcm"
+    ],
+    "at": "2026-10-12T17:07:54.036603+00:00",
+    "exit_code": 1,
+    "seconds": 0.11118591699960234,
+    "stdout": {
+      "file": "command-010-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-010-stderr.txt",
+      "sha256": "026212fcc6ebf56f89c5ecafab44ce5f2b082c4947b7b9c58629bac2fca64d21"
+    }
+  },
+  {
+    "argv": [
+      "/private/tmp/incant-font-atlas-target/ci/incant_headless",
+      "native-play",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/authoring/project.json",
+      "--camera",
+      "0000000000000000000000009C",
+      "--ticks",
+      "20",
+      "--input-replay",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/short-scratch-input.json",
+      "--pcm-output",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/dev-short-scratch.pcm"
+    ],
+    "at": "2026-10-12T17:07:54.148966+00:00",
+    "exit_code": 1,
+    "seconds": 0.10340329100108647,
+    "stdout": {
+      "file": "command-011-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-011-stderr.txt",
+      "sha256": "8438ab8be63ad4646f0bcbd24f4fb8bdfc3cf459bb8306b4f85fb7d59a32994c"
+    }
+  },
+  {
+    "argv": [
+      "/private/tmp/incant-font-atlas-target/ci/incant_headless",
+      "native-play",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/authoring/project.json",
+      "--camera",
+      "0000000000000000000000009C",
+      "--ticks",
+      "20",
+      "--input-replay",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/late-command-input.json",
+      "--pcm-output",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/dev-late-command.pcm"
+    ],
+    "at": "2026-10-12T17:07:54.253620+00:00",
+    "exit_code": 1,
+    "seconds": 0.1038315000005241,
+    "stdout": {
+      "file": "command-012-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-012-stderr.txt",
+      "sha256": "278865c4ee58003d56c3fded05d4ff45064eb235f74852a3f391a1f8626db98c"
+    }
+  },
+  {
+    "argv": [
+      "/private/tmp/incant-font-atlas-target/ci/incant_headless",
+      "native-play",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/authoring/project.json",
+      "--camera",
+      "0000000000000000000000009C",
+      "--ticks",
+      "20",
+      "--input-replay",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/bad-constraint-input.json",
+      "--pcm-output",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/dev-bad-constraint.pcm"
+    ],
+    "at": "2026-10-12T17:07:54.359334+00:00",
+    "exit_code": 1,
+    "seconds": 0.11459162499886588,
+    "stdout": {
+      "file": "command-013-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-013-stderr.txt",
+      "sha256": "3d0f871fc9e8980adc77a9a7391deab726b25c91afa27bdecc9a3ef9c4688736"
+    }
+  },
+  {
+    "argv": [
+      "rustup",
+      "which",
+      "rustc"
+    ],
+    "at": "2026-10-12T17:08:25.329169+00:00",
+    "exit_code": 0,
+    "seconds": 0.03438420799830055,
+    "stdout": {
+      "file": "command-014-stdout.txt",
+      "sha256": "1dc5ff25a027f5c0a04ac183e96b6665181272c327130fb0663c5c1be8aad81d"
+    },
+    "stderr": {
+      "file": "command-014-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/rustc",
+      "-vV"
+    ],
+    "at": "2026-10-12T17:08:25.364206+00:00",
+    "exit_code": 0,
+    "seconds": 0.027157667000210495,
+    "stdout": {
+      "file": "command-015-stdout.txt",
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    "stderr": {
+      "file": "command-015-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/rustc",
+      "--print",
+      "sysroot"
+    ],
+    "at": "2026-10-12T17:08:25.392119+00:00",
+    "exit_code": 0,
+    "seconds": 0.02798525000071095,
+    "stdout": {
+      "file": "command-016-stdout.txt",
+      "sha256": "b22adee5ac5a93ade5d52f11392360e1c1a95ef2add2bd03365e896e8f1688e1"
+    },
+    "stderr": {
+      "file": "command-016-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/tools/cargo",
+      "build",
+      "--locked",
+      "-j2",
+      "-p",
+      "incant_wasm_cook",
+      "--target-dir",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/private-builds/incant-project-build-f6ai9vh6/cook-target"
+    ],
+    "at": "2026-10-12T17:08:25.421968+00:00",
+    "exit_code": 0,
+    "seconds": 9.327421416999641,
+    "stdout": {
+      "file": "command-017-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-017-stderr.txt",
+      "sha256": "bbf1249b5343e40ad41ffdcbd34ec4e2daee604097c8b8d75ca1ee4916810f0b"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/private-builds/incant-project-build-f6ai9vh6/cook-target/debug/incant_wasm_cook",
+      "--capture",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/authoring",
+      "aa0c6933b38e4425d9d3d24d51c006107924598c3753e38c3af9856a68697cf7",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/private-builds/incant-project-build-f6ai9vh6/captured"
+    ],
+    "at": "2026-10-12T17:08:34.750123+00:00",
+    "exit_code": 0,
+    "seconds": 0.3897294590005913,
+    "stdout": {
+      "file": "command-018-stdout.txt",
+      "sha256": "62da9b6939aef71f9b3182d61e1609a1d6b14e0d63e7122cdc524fdfa5c7a333"
+    },
+    "stderr": {
+      "file": "command-018-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/tools/cargo",
+      "metadata",
+      "--locked",
+      "--format-version=1",
+      "--filter-platform",
+      "aarch64-apple-darwin",
+      "--features",
+      "incant_game_player/project,incant_game_player/render-input,incant_game_player/static-module"
+    ],
+    "at": "2026-10-12T17:08:35.254072+00:00",
+    "exit_code": 0,
+    "seconds": 0.4415024169993558,
+    "stdout": {
+      "file": "command-019-stdout.txt",
+      "sha256": "7b21493d7ede536c03802bc40c3c002ffa4d353ca2b451657541819004760a85"
+    },
+    "stderr": {
+      "file": "command-019-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/tools/cargo",
+      "build",
+      "-j2",
+      "-p",
+      "incant_game_player",
+      "--bin",
+      "incant_game_player",
+      "--features",
+      "project,render-input,static-module",
+      "--profile",
+      "shipping",
+      "--locked",
+      "--target",
+      "aarch64-apple-darwin",
+      "--target-dir",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/private-builds/incant-project-build-f6ai9vh6/target",
+      "--config",
+      "profile.shipping.split-debuginfo=\"packed\"",
+      "--message-format=json",
+      "-vv"
+    ],
+    "at": "2026-10-12T17:08:35.721765+00:00",
+    "exit_code": 0,
+    "seconds": 344.5839116669995,
+    "stdout": {
+      "file": "command-020-stdout.txt",
+      "sha256": "11ba8db66c9330137db16a5b27c9e5371f69144cb7aed1a6c6a69daa04b59094"
+    },
+    "stderr": {
+      "file": "command-020-stderr.txt",
+      "sha256": "fafc079c08336cf923926e9ac50dd08d8fb03faf108893d266e50ddc8d9c2f11"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/lib/rustlib/aarch64-apple-darwin/bin/llvm-nm",
+      "--defined-only",
+      "--demangle",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/private-builds/incant-project-build-f6ai9vh6/target/aarch64-apple-darwin/shipping/incant_game_player"
+    ],
+    "at": "2026-10-12T17:14:20.519736+00:00",
+    "exit_code": 0,
+    "seconds": 0.12057199999981094,
+    "stdout": {
+      "file": "command-021-stdout.txt",
+      "sha256": "11db4caad7db1b7b5aa8df9e72ff1c71133308cfc8ee208f855669e9dd66c337"
+    },
+    "stderr": {
+      "file": "command-021-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/private-builds/incant-native-export-5ur3qhm_/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/private-builds/incant-native-export-5ur3qhm_/player/data",
+      "--ticks",
+      "1",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/private-builds/incant-native-export-5ur3qhm_/startup.pcm"
+    ],
+    "at": "2026-10-12T17:14:25.214158+00:00",
+    "exit_code": 0,
+    "seconds": 0.14627124999969965,
+    "stdout": {
+      "file": "command-022-stdout.txt",
+      "sha256": "f7a35c62d91609386bb6b29c3e4dcf66569df0adc4037098e91a8fd31a82905a"
+    },
+    "stderr": {
+      "file": "command-022-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/package/player/data",
+      "--ticks",
+      "20",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/positive-input.json",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/observe.json",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/run-0.pcm"
+    ],
+    "at": "2026-10-12T17:14:25.452378+00:00",
+    "exit_code": 0,
+    "seconds": 0.11871358400094323,
+    "stdout": {
+      "file": "command-023-stdout.txt",
+      "sha256": "2b28926abdd72655bec26f00e630c2bb2b0056fad3d0e0081302bda614c9b862"
+    },
+    "stderr": {
+      "file": "command-023-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/package/player/data",
+      "--ticks",
+      "20",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/positive-input.json",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/observe.json",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/run-1.pcm"
+    ],
+    "at": "2026-10-12T17:14:25.574637+00:00",
+    "exit_code": 0,
+    "seconds": 0.017811000001529464,
+    "stdout": {
+      "file": "command-024-stdout.txt",
+      "sha256": "2b28926abdd72655bec26f00e630c2bb2b0056fad3d0e0081302bda614c9b862"
+    },
+    "stderr": {
+      "file": "command-024-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/package/player/data",
+      "--ticks",
+      "20",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/positive-input.json",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/observe.json",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/run-2.pcm"
+    ],
+    "at": "2026-10-12T17:14:25.595266+00:00",
+    "exit_code": 0,
+    "seconds": 0.019351541999640176,
+    "stdout": {
+      "file": "command-025-stdout.txt",
+      "sha256": "2b28926abdd72655bec26f00e630c2bb2b0056fad3d0e0081302bda614c9b862"
+    },
+    "stderr": {
+      "file": "command-025-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/package/player/data",
+      "--ticks",
+      "20",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/old-v1-input.json",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/package-old-v1.pcm"
+    ],
+    "at": "2026-10-12T17:14:25.617594+00:00",
+    "exit_code": 1,
+    "seconds": 0.019821208999928785,
+    "stdout": {
+      "file": "command-026-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-026-stderr.txt",
+      "sha256": "0e8eb00e2a2596d6b89e12a7269ac3e6d98ab910c9c52aba711bd527e2508305"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/package/player/data",
+      "--ticks",
+      "20",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/old-v2-input.json",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/package-old-v2.pcm"
+    ],
+    "at": "2026-10-12T17:14:25.638425+00:00",
+    "exit_code": 1,
+    "seconds": 0.019166959000358474,
+    "stdout": {
+      "file": "command-027-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-027-stderr.txt",
+      "sha256": "0e8eb00e2a2596d6b89e12a7269ac3e6d98ab910c9c52aba711bd527e2508305"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/package/player/data",
+      "--ticks",
+      "20",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/old-v3-input.json",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/package-old-v3.pcm"
+    ],
+    "at": "2026-10-12T17:14:25.658750+00:00",
+    "exit_code": 1,
+    "seconds": 0.01700258299933921,
+    "stdout": {
+      "file": "command-028-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-028-stderr.txt",
+      "sha256": "0e8eb00e2a2596d6b89e12a7269ac3e6d98ab910c9c52aba711bd527e2508305"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/package/player/data",
+      "--ticks",
+      "20",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/old-v4-input.json",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/package-old-v4.pcm"
+    ],
+    "at": "2026-10-12T17:14:25.676599+00:00",
+    "exit_code": 1,
+    "seconds": 0.028111583000281826,
+    "stdout": {
+      "file": "command-029-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-029-stderr.txt",
+      "sha256": "0e8eb00e2a2596d6b89e12a7269ac3e6d98ab910c9c52aba711bd527e2508305"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/package/player/data",
+      "--ticks",
+      "20",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/short-scratch-input.json",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/package-short-scratch.pcm"
+    ],
+    "at": "2026-10-12T17:14:25.706443+00:00",
+    "exit_code": 1,
+    "seconds": 0.021461999998791725,
+    "stdout": {
+      "file": "command-030-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-030-stderr.txt",
+      "sha256": "c503f6ae0ef932ea9309837945d0ff26605c3dbf9daf4bbec9192ad0506c34b3"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/package/player/data",
+      "--ticks",
+      "20",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/late-command-input.json",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/package-late-command.pcm"
+    ],
+    "at": "2026-10-12T17:14:25.728749+00:00",
+    "exit_code": 1,
+    "seconds": 0.01883504199940944,
+    "stdout": {
+      "file": "command-031-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-031-stderr.txt",
+      "sha256": "c8c6ca15839ccad282f656a5a1277d4ca7dd2a15f6579a216c65b3788644216e"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/package/player/data",
+      "--ticks",
+      "20",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/bad-constraint-input.json",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/package-bad-constraint.pcm"
+    ],
+    "at": "2026-10-12T17:14:25.748408+00:00",
+    "exit_code": 1,
+    "seconds": 0.015678583000408253,
+    "stdout": {
+      "file": "command-032-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-032-stderr.txt",
+      "sha256": "4eced5d1b1f3c15d127b24ba30856a86844cc1340951fc876265088b757a8f6d"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/package/player/data",
+      "--ticks",
+      "1",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/checkpoint-refused.pcm",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/checkpoint-refused.bin"
+    ],
+    "at": "2026-10-12T17:14:25.765068+00:00",
+    "exit_code": 1,
+    "seconds": 0.019515833000696148,
+    "stdout": {
+      "file": "command-033-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-033-stderr.txt",
+      "sha256": "8553d484ef61a5488bc165050a946d44ae606e41c8018ff857501df0ebb8122d"
+    }
+  }
+]

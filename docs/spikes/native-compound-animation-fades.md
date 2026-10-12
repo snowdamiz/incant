@@ -37,6 +37,7 @@ fixture failures are retained under ~/.codex/incant-evidence/grouped-fade-*.
 The full affected-package suite now passes 749 CPU tests in 113 groups, with 82
 GPU tests explicitly ignored. All-target Clippy, wasm32 renderer compilation,
 lean runtime dependency checks, strict SDK TypeScript and formatting/conventions
-pass on the frozen inputs. [Raw logs and identities](evidence/native-compound-fades.json)
-retain the earlier failures and their corrections. Independent review, full
-package continuation and current-main integration remain pending.
+pass on the frozen inputs. Independent source review accepted the 389481c7 core
+with no correctness blocker; the later authoring-test correction changes no
+production code. [Raw logs and identities](evidence/native-compound-fades.json)
+retain the earlier failures and their corrections. Full package continuation and current-main integration remain pending.

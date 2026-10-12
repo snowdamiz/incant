@@ -103,8 +103,38 @@ class RegistryTests(unittest.TestCase):
             value=self.data[name]
             prefix=value[:length] if isinstance(value,list) else dict(list(value.items())[:length])
             self.assertEqual(hashlib.sha256(json.dumps(prefix,sort_keys=True).encode()).hexdigest(),digest,name)
-        self.assertEqual([(f['name'],f['opcode']) for f in self.data['functions'][42:]], [('snapshot_len',42),('read_snapshot',43)])
+        self.assertEqual([(f['name'],f['opcode']) for f in self.data['functions'][42:44]], [('snapshot_len',42),('read_snapshot',43)])
         size=lambda name: sum(generator.SIZES[t]*(n[0] if n else 1) for _,t,*n in self.data['records'][name])
         self.assertEqual([size(n) for n in ('AnimationHeaderV4','AnimationRowV4','AnimationPoseSample')], [40,96,24])
         self.assertEqual(self.data['records']['AnimationRowV4'][:-4], self.data['records']['AnimationRowV2'])
         self.assertLess(40+100000*96+214336*24,self.data['constants']['MEMORY'])
+
+    def test_compound_v5_preserves_all_ik_v1_and_older_contracts(self):
+        import hashlib
+        prior = {'functions': (47, '24a4f20a4824173fd34ccfe146ffdd4bc02d5a223254e9b8e9d2c22532ac59eb'), 'constants': (79, 'b3dd8bc360f94f28cf8f201757612eb4db3ab78e8802cda823fdcb086591b0b4'), 'magic': (21, '9fda2c34d213c5f6e47d7f19894f5c50c35980082dce3940211807837e41fcc5'), 'enums': (10, 'ee8f597e5d8ac45fbb2156428d197fb24e7c00d1df7891ad529a7a5062024ed2'), 'records': (47, '03e7330e3a13a870f3ef1ca2a0bf7dbd55a1625b2db309c6a9e54bb4f2827858'), 'namespaces': (13, '63726804aa625d91daaa4292808840540e23f7512c0886dc656e30dfc0eadf82')}
+        for name, (length, digest) in prior.items():
+            value = self.data[name]
+            prefix = value[:length] if isinstance(value, list) else dict(list(value.items())[:length])
+            self.assertEqual(hashlib.sha256(json.dumps(prefix, sort_keys=True).encode()).hexdigest(), digest, name)
+        self.assertEqual([(f['namespace'], f['name'], f['opcode']) for f in self.data['functions'][47:53]], [
+            ('incant_animation_v5','snapshot_len',47),('incant_animation_v5','read_snapshot',48),
+            ('incant_animation_ik_v2','snapshot_len',49),('incant_animation_ik_v2','read_snapshot',50),
+            ('incant_animation_graph_v2','snapshot_len',51),('incant_animation_graph_v2','read_snapshot',52)])
+        size=lambda name: sum(generator.SIZES[t]*(n[0] if n else 1) for _,t,*n in self.data['records'][name])
+        self.assertEqual([size(n) for n in ('AnimationHeaderV5','AnimationPoseGroups','AnimationGraphHeaderV2','AnimationGraphFade')],[48,40,24,72])
+        self.assertLess(24+48+100000*96+214336*24+1024*40+4096*104,self.data['constants']['MEMORY'])
+
+    def test_ik_appends_complete_pose_and_controls_without_changing_prior_contracts(self):
+        import hashlib
+        prior = {'functions': (44, 'e01ce550578a75dd34b10b66e72ca60a41b121abcf939d2192119a29240ba3fe'), 'constants': (75, '0836adeb1054b65ecd57a43fd98830d4467f9143ab70ee6b7e83eaa49d3c0ccd'), 'magic': (20, '619885d7e753e6c210d83b5a1038fb98131d21711161e031cdb17ee7992048c2'), 'enums': (10, 'ee8f597e5d8ac45fbb2156428d197fb24e7c00d1df7891ad529a7a5062024ed2'), 'records': (44, '0a7b76658ed18036af674986ec5b4ba538f606d03157fff185b27bb578e25fdf'), 'namespaces': (12, '17f9963c5a4fc8bcd41d02cd5c1e9dff8106cd08dc4e0599936f476e55a79d81')}
+        for name, (length, digest) in prior.items():
+            value = self.data[name]
+            prefix = value[:length] if isinstance(value, list) else dict(list(value.items())[:length])
+            self.assertEqual(hashlib.sha256(json.dumps(prefix, sort_keys=True).encode()).hexdigest(), digest, name)
+        self.assertEqual([(f['namespace'], f['name'], f['opcode']) for f in self.data['functions'][44:47]], [
+            ('incant_animation_ik_v1', 'snapshot_len', 44),
+            ('incant_animation_ik_v1', 'read_snapshot', 45),
+            ('incant_animation_ik_v1', 'control', 46)])
+        size = lambda name: sum(generator.SIZES[t] * (n[0] if n else 1) for _, t, *n in self.data['records'][name])
+        self.assertEqual([size(n) for n in ('AnimationIkHeader', 'AnimationIkRow', 'AnimationIkCommand')], [24, 104, 88])
+        self.assertEqual(self.data['magic']['ANIMATION_IK_MAGIC'], 'INCIK001')

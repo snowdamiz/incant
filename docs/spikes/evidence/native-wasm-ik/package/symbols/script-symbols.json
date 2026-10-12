@@ -1,0 +1,18 @@
+{
+  "bindings_sha256": null,
+  "build_id": "5991c6c5440171e089e5c962a4b503351491b225519dfc12698e758e39941b8b",
+  "bytecode_bytes": 3729,
+  "bytecode_sha256": "6e7e0c714d17067e9d6d9aaa4b8beddeb93add7f27d9df102ba69a51bd180d3b",
+  "debug_line_tables": true,
+  "embedded_source": false,
+  "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+  "format": 2,
+  "hardening_sha256": "971716e2f49f08f91ffd7ab3d3f9701f08c1d20ec46670a906875621e2659708",
+  "source_map_sha256": null,
+  "source_name": "incant-empty-project",
+  "source_sha256": "71991b2c2ce0590a5d04e7f8551f7baf0bbd943dcb6187080c205e5d71ee027c",
+  "symbolication": "map CommonJS locations after subtracting wrapper_prefix_lines; automatic runtime stack remapping remains unsupported",
+  "target": "aarch64-apple-darwin",
+  "trust": "fresh compiler output embedded by trusted native build; hashes are not authentication",
+  "wrapper_prefix_lines": 3
+}

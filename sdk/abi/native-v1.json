@@ -855,6 +855,163 @@
       ],
       "result": "i32",
       "call": "Call::ReadAnimationsV4 { ptr, capacity }"
+    },
+    {
+      "namespace": "incant_animation_ik_v1",
+      "name": "snapshot_len",
+      "opcode": 44,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::AnimationIkLen"
+    },
+    {
+      "namespace": "incant_animation_ik_v1",
+      "name": "read_snapshot",
+      "opcode": 45,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "capacity",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::ReadAnimationIk { ptr, capacity }"
+    },
+    {
+      "namespace": "incant_animation_ik_v1",
+      "name": "control",
+      "opcode": 46,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "len",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::ControlAnimationIk { ptr, len }"
+    },
+    {
+      "namespace": "incant_animation_v5",
+      "name": "snapshot_len",
+      "opcode": 47,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::AnimationLenV5"
+    },
+    {
+      "namespace": "incant_animation_v5",
+      "name": "read_snapshot",
+      "opcode": 48,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "capacity",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::ReadAnimationsV5 { ptr, capacity }"
+    },
+    {
+      "namespace": "incant_animation_ik_v2",
+      "name": "snapshot_len",
+      "opcode": 49,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::AnimationIkLenV2"
+    },
+    {
+      "namespace": "incant_animation_ik_v2",
+      "name": "read_snapshot",
+      "opcode": 50,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "capacity",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::ReadAnimationIkV2 { ptr, capacity }"
+    },
+    {
+      "namespace": "incant_animation_graph_v2",
+      "name": "snapshot_len",
+      "opcode": 51,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::AnimationGraphLenV2"
+    },
+    {
+      "namespace": "incant_animation_graph_v2",
+      "name": "read_snapshot",
+      "opcode": 52,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "capacity",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::ReadAnimationGraphsV2 { ptr, capacity }"
     }
   ],
   "enums": {
@@ -1484,6 +1641,42 @@
       [
         "WeightedQuaternionMean",
         3
+      ]
+    ],
+    "AnimationPoseKindV5": [
+      [
+        "Single",
+        0
+      ],
+      [
+        "SlerpTransition",
+        1
+      ],
+      [
+        "SlerpParameter",
+        2
+      ],
+      [
+        "WeightedQuaternionMean",
+        3
+      ],
+      [
+        "Compound",
+        4
+      ]
+    ],
+    "PoseInterpolation": [
+      [
+        "Clip",
+        0
+      ],
+      [
+        "SphericalPair",
+        1
+      ],
+      [
+        "Weighted",
+        2
       ]
     ]
   },
@@ -2523,6 +2716,212 @@
         "weight",
         "f64"
       ]
+    ],
+    "AnimationIkHeader": [
+      [
+        "magic",
+        "u8",
+        8
+      ],
+      [
+        "pose_bytes",
+        "u32"
+      ],
+      [
+        "count",
+        "u32"
+      ],
+      [
+        "stride",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ]
+    ],
+    "AnimationIkRow": [
+      [
+        "entity",
+        "u8",
+        16
+      ],
+      [
+        "constraint",
+        "u8",
+        16
+      ],
+      [
+        "chain",
+        "u32",
+        3
+      ],
+      [
+        "reserved",
+        "u32"
+      ],
+      [
+        "target",
+        "f64",
+        3
+      ],
+      [
+        "pole",
+        "f64",
+        3
+      ],
+      [
+        "weight",
+        "f64"
+      ]
+    ],
+    "AnimationIkCommand": [
+      [
+        "entity",
+        "u8",
+        16
+      ],
+      [
+        "constraint",
+        "u8",
+        16
+      ],
+      [
+        "target",
+        "f64",
+        3
+      ],
+      [
+        "pole",
+        "f64",
+        3
+      ],
+      [
+        "weight",
+        "f64"
+      ]
+    ],
+    "AnimationHeaderV5": [
+      [
+        "magic",
+        "u8",
+        8
+      ],
+      [
+        "scene",
+        "u8",
+        16
+      ],
+      [
+        "count",
+        "u32"
+      ],
+      [
+        "stride",
+        "u32"
+      ],
+      [
+        "sample_count",
+        "u32"
+      ],
+      [
+        "sample_stride",
+        "u32"
+      ],
+      [
+        "compound_count",
+        "u32"
+      ],
+      [
+        "compound_stride",
+        "u32"
+      ]
+    ],
+    "AnimationPoseGroups": [
+      [
+        "entity",
+        "u8",
+        16
+      ],
+      [
+        "split",
+        "u32"
+      ],
+      [
+        "source_kind",
+        "u32"
+      ],
+      [
+        "destination_kind",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ],
+      [
+        "weight",
+        "f64"
+      ]
+    ],
+    "AnimationGraphHeaderV2": [
+      [
+        "magic",
+        "u8",
+        8
+      ],
+      [
+        "graph_bytes",
+        "u32"
+      ],
+      [
+        "count",
+        "u32"
+      ],
+      [
+        "stride",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ]
+    ],
+    "AnimationGraphFade": [
+      [
+        "entity",
+        "u8",
+        16
+      ],
+      [
+        "state",
+        "u8",
+        16
+      ],
+      [
+        "seconds",
+        "f64"
+      ],
+      [
+        "speed",
+        "f64"
+      ],
+      [
+        "elapsed",
+        "f64"
+      ],
+      [
+        "duration",
+        "f64"
+      ],
+      [
+        "flags",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ]
     ]
   },
   "input_sections": [
@@ -2611,7 +3010,12 @@
     "PHYSICS_MAX_RESULT_BYTES": 71696,
     "PHYSICS_MAX_EVENT_BYTES": 5242912,
     "ANIMATION_POSE_MAX_SAMPLES": 16,
-    "ANIMATION_POSE_MAX_SAMPLE_ROWS": 214336
+    "ANIMATION_POSE_MAX_SAMPLE_ROWS": 214336,
+    "ANIMATION_IK_MAX_ROWS": 4096,
+    "ANIMATION_IK_MAX_PER_OWNER": 32,
+    "ANIMATION_IK_MAX_MODEL_NODES": 4096,
+    "ANIMATION_IK_MAX_COORDINATE": 1000000000,
+    "ANIMATION_COMPOUND_MAX_ROWS": 1024
   },
   "magic": {
     "INPUT_MAGIC": "INPINP01",
@@ -2633,7 +3037,11 @@
     "PHYSICS_REQUEST_MAGIC": "INCPHYQ1",
     "PHYSICS_RESULT_MAGIC": "INCPHYR1",
     "PHYSICS_EVENTS_MAGIC": "INCPHYE1",
-    "ANIMATION_V4_MAGIC": "INCAN004"
+    "ANIMATION_V4_MAGIC": "INCAN004",
+    "ANIMATION_IK_MAGIC": "INCIK001",
+    "ANIMATION_V5_MAGIC": "INCANI05",
+    "ANIMATION_IK_V2_MAGIC": "INCIK002",
+    "ANIMATION_GRAPH_V2_MAGIC": "INCAGR02"
   },
   "optional_none": -1,
   "namespaces": {
@@ -2648,6 +3056,10 @@
     "incant_animation_v3": "animationv3",
     "incant_animation_graph_v1": "animationgraph",
     "incant_physics_v1": "physics",
-    "incant_animation_v4": "animationv4"
+    "incant_animation_v4": "animationv4",
+    "incant_animation_ik_v1": "animationik",
+    "incant_animation_v5": "animation5",
+    "incant_animation_ik_v2": "animationik2",
+    "incant_animation_graph_v2": "animationgraph2"
   }
 }

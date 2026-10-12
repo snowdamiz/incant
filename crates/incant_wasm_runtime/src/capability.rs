@@ -25,6 +25,21 @@ const _: () = {
 /// Trusted host adapter operation; all integer arguments are guest offsets/indices.
 #[derive(Clone, Copy)]
 pub enum Call {
+    AnimationLenV5,
+    ReadAnimationsV5 {
+        ptr: i32,
+        capacity: i32,
+    },
+    AnimationIkLenV2,
+    ReadAnimationIkV2 {
+        ptr: i32,
+        capacity: i32,
+    },
+    AnimationGraphLenV2,
+    ReadAnimationGraphsV2 {
+        ptr: i32,
+        capacity: i32,
+    },
     PhysicsQuery {
         ptr: i32,
         len: i32,
@@ -47,6 +62,15 @@ pub enum Call {
     ReadPath {
         ptr: i32,
         capacity: i32,
+    },
+    AnimationIkLen,
+    ReadAnimationIk {
+        ptr: i32,
+        capacity: i32,
+    },
+    ControlAnimationIk {
+        ptr: i32,
+        len: i32,
     },
     AnimationLenV4,
     ReadAnimationsV4 {
@@ -172,10 +196,15 @@ pub struct Capability {
     animations_v3: Vec<u8>,
     animation_scene: Option<StableId>,
     animations_v4: Vec<u8>,
+    animations_v5: Vec<u8>,
+    animation_ik_v2: Vec<u8>,
+    animation_graphs_v2: Vec<u8>,
     animation_graph_rows: Vec<incant_runtime::AnimationGraphSnapshot>,
     animation_graphs: Vec<u8>,
     animation_rejected: bool,
     animation_ik_present: bool,
+    ik_rows: Vec<incant_runtime::IkSnapshot>,
+    animation_ik: Vec<u8>,
     transferred: usize,
     calls: usize,
     tick: u64,
@@ -246,13 +275,18 @@ impl Capability {
             return Err(error);
         }
         self.animation_rejected = false;
+        if let Err(error) = world.snapshot_ik(&mut self.ik_rows) {
+            self.abort();
+            return Err(error.into());
+        }
+        self.animation_ik_present = !self.ik_rows.is_empty();
+        self.animation_ik.clear();
         self.animation_scene = Some(world.scene_id());
-        self.animation_ik_present = self
-            .animation_rows
-            .iter()
-            .any(|row| world.ik_state(row.id).is_some());
         self.animations_v3.clear();
         self.animations_v4.clear();
+        self.animations_v5.clear();
+        self.animation_ik_v2.clear();
+        self.animation_graphs_v2.clear();
         self.animation_graphs.clear();
         if let Err(error) = world.snapshot_animation_graphs(&mut self.animation_graph_rows) {
             self.abort();
@@ -333,10 +367,15 @@ impl Capability {
     }
     pub fn abort(&mut self) {
         self.animation_rows.clear();
+        self.ik_rows.clear();
+        self.animation_ik.clear();
         self.animations.clear();
         self.animations_v2.clear();
         self.animations_v3.clear();
         self.animations_v4.clear();
+        self.animations_v5.clear();
+        self.animation_ik_v2.clear();
+        self.animation_graphs_v2.clear();
         self.animation_graph_rows.clear();
         self.animation_graphs.clear();
         self.active = false;
@@ -375,10 +414,15 @@ impl Capability {
             return Err(Error::Abi("rejected animation transaction"));
         }
         self.animation_rows.clear();
+        self.ik_rows.clear();
+        self.animation_ik.clear();
         self.animations.clear();
         self.animations_v2.clear();
         self.animations_v3.clear();
         self.animations_v4.clear();
+        self.animations_v5.clear();
+        self.animation_ik_v2.clear();
+        self.animation_graphs_v2.clear();
         self.animation_graph_rows.clear();
         self.animation_graphs.clear();
         if self.tick_logs.rejected {
@@ -501,6 +545,15 @@ impl Capability {
                 Call::AnimationLen
                     | Call::ReadAnimations { .. }
                     | Call::ControlAnimation { .. }
+                    | Call::AnimationIkLen
+                    | Call::ReadAnimationIk { .. }
+                    | Call::ControlAnimationIk { .. }
+                    | Call::AnimationLenV5
+                    | Call::ReadAnimationsV5 { .. }
+                    | Call::AnimationIkLenV2
+                    | Call::ReadAnimationIkV2 { .. }
+                    | Call::AnimationGraphLenV2
+                    | Call::ReadAnimationGraphsV2 { .. }
                     | Call::AnimationLenV2
                     | Call::ReadAnimationsV2 { .. }
                     | Call::ControlAnimationV2 { .. }
@@ -583,6 +636,8 @@ impl Capability {
                     | Call::ReadAnimationsV3 { .. }
                     | Call::AnimationLenV4
                     | Call::ReadAnimationsV4 { .. }
+                    | Call::AnimationLenV5
+                    | Call::ReadAnimationsV5 { .. }
             )
         {
             return Err(Error::Abi(
@@ -671,6 +726,116 @@ impl Capability {
                 self.transfer(len)?;
                 memory[region].copy_from_slice(self.navigation_state()?.reply()?);
                 return Ok(len as i32);
+            }
+            Call::AnimationLenV5
+            | Call::ReadAnimationsV5 { .. }
+            | Call::AnimationIkLenV2
+            | Call::ReadAnimationIkV2 { .. }
+            | Call::AnimationGraphLenV2
+            | Call::ReadAnimationGraphsV2 { .. } => {
+                let graph = matches!(
+                    call,
+                    Call::AnimationGraphLenV2 | Call::ReadAnimationGraphsV2 { .. }
+                );
+                let ik = matches!(
+                    call,
+                    Call::AnimationIkLenV2 | Call::ReadAnimationIkV2 { .. }
+                );
+                if graph {
+                    if self.animation_graphs_v2.is_empty() {
+                        self.prepare_animation_snapshot(true);
+                        crate::animation_graphs_v2::encode(
+                            &self.animation_graph_rows,
+                            &self.animation_graphs,
+                            &mut self.animation_graphs_v2,
+                        );
+                    }
+                } else {
+                    if self.animations_v5.is_empty() {
+                        crate::animation_poses_v5::encode(
+                            self.animation_scene
+                                .ok_or(Error::Abi("animation scene absent"))?,
+                            &mut self.animation_rows,
+                            &mut self.animations_v5,
+                        )?;
+                    }
+                    if ik && self.animation_ik_v2.is_empty() {
+                        crate::animation_ik_v2::encode(
+                            &self.animation_rows,
+                            &self.animations_v5,
+                            &self.ik_rows,
+                            &mut self.animation_ik_v2,
+                        )?;
+                    }
+                }
+                let len = if graph {
+                    self.animation_graphs_v2.len()
+                } else if ik {
+                    self.animation_ik_v2.len()
+                } else {
+                    self.animations_v5.len()
+                };
+                if let Call::ReadAnimationsV5 { ptr, capacity }
+                | Call::ReadAnimationIkV2 { ptr, capacity }
+                | Call::ReadAnimationGraphsV2 { ptr, capacity } = call
+                {
+                    let capacity = usize::try_from(capacity)
+                        .map_err(|_| Error::Abi("animation destination capacity"))?;
+                    if capacity < len {
+                        return Err(Error::Abi("animation destination capacity"));
+                    }
+                    range(ptr, capacity, memory.len())?;
+                    let region = range(ptr, len, memory.len())?;
+                    self.transfer(len)?;
+                    let bytes = if graph {
+                        &self.animation_graphs_v2
+                    } else if ik {
+                        &self.animation_ik_v2
+                    } else {
+                        &self.animations_v5
+                    };
+                    memory[region].copy_from_slice(bytes);
+                }
+                return Ok(len as i32);
+            }
+            Call::AnimationIkLen | Call::ReadAnimationIk { .. } => {
+                if self.animation_ik.is_empty() {
+                    if self.animations_v4.is_empty() {
+                        crate::animation_poses::encode(
+                            self.animation_scene
+                                .ok_or(Error::Abi("animation scene absent"))?,
+                            &mut self.animation_rows,
+                            &mut self.animations_v4,
+                        )?;
+                    }
+                    crate::animation_ik::encode(
+                        &self.animation_rows,
+                        &self.animations_v4,
+                        &self.ik_rows,
+                        &mut self.animation_ik,
+                    )?;
+                }
+                let len = self.animation_ik.len();
+                if let Call::ReadAnimationIk { ptr, capacity } = call {
+                    let capacity = usize::try_from(capacity)
+                        .map_err(|_| Error::Abi("animation IK destination capacity"))?;
+                    if capacity < len {
+                        return Err(Error::Abi("animation IK destination capacity"));
+                    }
+                    range(ptr, capacity, memory.len())?;
+                    let region = range(ptr, len, memory.len())?;
+                    self.transfer(len)?;
+                    memory[region].copy_from_slice(&self.animation_ik);
+                }
+                return Ok(len as i32);
+            }
+            Call::ControlAnimationIk { ptr, len } => {
+                if usize::try_from(len).ok() != Some(incant_wasm_abi::AnimationIkCommand::SIZE) {
+                    return Err(Error::Abi("animation IK command length"));
+                }
+                let bytes =
+                    self.read::<{ incant_wasm_abi::AnimationIkCommand::SIZE }>(memory, ptr)?;
+                self.command(crate::animation_ik::command(&bytes)?)?;
             }
             Call::AnimationLenV4 | Call::ReadAnimationsV4 { .. } => {
                 if self.animations_v4.is_empty() {

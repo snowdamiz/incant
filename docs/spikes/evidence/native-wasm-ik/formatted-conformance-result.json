@@ -1,0 +1,254 @@
+{
+  "scope": "Final rustfmt-only fixtures; exact actual IK static/JIT reexecution, no broad production changes",
+  "passed": true,
+  "wabt": {
+    "release": "1.0.42",
+    "url": "https://github.com/WebAssembly/wabt/releases/download/1.0.42/wabt-1.0.42-macos-arm64.tar.gz",
+    "archive_sha256": "3f654779b436c628db3ca4323c51538815f5fbc887a6d5f3bb1c18d36281e240",
+    "download_attempts": 1
+  },
+  "manifest": {
+    "wabt": "1.0.42",
+    "modules": [
+      {
+        "name": "rust-animation-ik",
+        "prefix": "m0",
+        "input_sha256": "0c65cc3257a1d6f651aea84a3666284dbab059ae16fd451ceef01a4f684b4115",
+        "prepared_sha256": "8daf1c20d40fe8ae2857d305e5fbb041b9eedf434c820ec2c3fadee1774b6488"
+      },
+      {
+        "name": "rust-animation-ik-prefix",
+        "prefix": "m1",
+        "input_sha256": "d1e99bf578e6a9be09547498eee33638d2ab5d8fce976bb218c4421bb758f064",
+        "prepared_sha256": "41c09d783b31884f56faebbf1e21eca9772149847bab981463faefc599b5c079"
+      },
+      {
+        "name": "rust-animation-ik-capacity",
+        "prefix": "m2",
+        "input_sha256": "61727a87d28a2f7569006557e310f56154b0da895bfa1ec270b402e2b8fa6618",
+        "prepared_sha256": "1ca596b23eb9253eedd1b385d9eca041465d93e26b508882811a33a5a9a80521"
+      },
+      {
+        "name": "rust-animation-ik-legacy",
+        "prefix": "m3",
+        "input_sha256": "2ecd73d1512c687cef3fcf019a897c6efcafd9820d06cebdd229555b291942ac",
+        "prepared_sha256": "1e0263d8c83fdcf9bff2b1705bbb092ad768d402ab63d3832cf04bfb6c913feb"
+      },
+      {
+        "name": "rust-animation-ik-v2",
+        "prefix": "m4",
+        "input_sha256": "c711e3cf4628ded4813c7f1d3c0f48492981a3c68277dfa3736c11e96db63a86",
+        "prepared_sha256": "d64ffea05c5cf178652765b802286235bbeee06b3586d1e71c55c8177143f59c"
+      },
+      {
+        "name": "rust-animation-ik-v3",
+        "prefix": "m5",
+        "input_sha256": "221e0578867c6d6940f1e7b3bb69d85d4abc3e50e729072833b8c5e0326041da",
+        "prepared_sha256": "39f01dbdc714fe6132bc9420a05827316686e587df2551fa7fc7684d2920af69"
+      },
+      {
+        "name": "rust-animation-ik-v4",
+        "prefix": "m6",
+        "input_sha256": "fe6677a2c67cd2f4749903f39b961b170fd5d108fdf0fe389fcc82854faae390",
+        "prepared_sha256": "ad42f74426084e3ae2f0b2a087eed4a6a17316250a6fdfcf2d194d475e78ff15"
+      },
+      {
+        "name": "rust-animation-ik-number",
+        "prefix": "m7",
+        "input_sha256": "4f33cdb03950a5e9abce6ed1434aac76b47085a613e411a85b3c40dba4c17b64",
+        "prepared_sha256": "79a876481987f6ceab45bcb6c297b068b0c416087be0c96f78805597c108154d"
+      },
+      {
+        "name": "rust-animation-ik-coordinate",
+        "prefix": "m8",
+        "input_sha256": "07aa3c2c1edd368b78524b2c6345fc7d7eee15547530b48acf8923a820d4e21d",
+        "prepared_sha256": "94e548e88a964f9f64607eeff87467cd2eacb3b333293c7869039563d4e77ce0"
+      },
+      {
+        "name": "rust-animation-ik-weight",
+        "prefix": "m9",
+        "input_sha256": "470b844f3ac0763861bc48a71f66832d0acd9182b706ddd253e655d742636bf4",
+        "prepared_sha256": "c399424657b96e127aea42f6b8b9622479e5f783591ae7617c50f9e81f6331e6"
+      },
+      {
+        "name": "rust-animation-ik-constraint",
+        "prefix": "m10",
+        "input_sha256": "321bcf162c5c4bc126728f54bf426fb1e400ad7373d00cb1fac470cfb16531cf",
+        "prepared_sha256": "d8aff7c6a0a67cab6f2cc1f3d56f22692d9220a8fa7f68048141fd6acebfc1ae"
+      },
+      {
+        "name": "rust-animation-ik-owner",
+        "prefix": "m11",
+        "input_sha256": "b0d358fb1f0a86e89cfac53dd03b673ff2981b8b74e2e5a6f6a6e8c883d09dad",
+        "prepared_sha256": "e86ceb329293b70f162141c556614230311d4e35a376149fcf17d6d4c72c01aa"
+      },
+      {
+        "name": "rust-animation-ik-quota",
+        "prefix": "m12",
+        "input_sha256": "a91d1eceb07e63e2a43081c7eabcc06ed88b48c50163b0976b5f73371d5da8ab",
+        "prepared_sha256": "ac6a1b9790d6e6b53c90af8d8d588ec034ada55ba24a8242dba6996e741f28b5"
+      },
+      {
+        "name": "rust-animation-ik-late",
+        "prefix": "m13",
+        "input_sha256": "ed125dd13b5cc699cfff6066c44ed0d9bbd74a7b8eb09eac143a2b40cdaaffd7",
+        "prepared_sha256": "0b1413a0d5d1664400b684514ada13d79fa4ebc8a5f30a45f59eb8cd0a2b2336"
+      },
+      {
+        "name": "rust-animation-ik-callback",
+        "prefix": "m14",
+        "input_sha256": "fa60a090511381f0f213104b12748524ff4d4f2111bd791af0e67b6b7e2e757c",
+        "prepared_sha256": "754a40b7ce441e1705e25ecf194099ae28c2dd719621635db8a4ece715121b51"
+      },
+      {
+        "name": "rust-animation-ik-trap",
+        "prefix": "m15",
+        "input_sha256": "a4d75c33197006fb9d74de3772db5de3686c6508f4f8888659f3202264fa4e70",
+        "prepared_sha256": "e3986a01ad33290dd88752c44bafa62efc1c46457b827f9e76293bc9607272da"
+      },
+      {
+        "name": "animation-ik",
+        "prefix": "m16",
+        "input_sha256": "4bc9ba85ca9d760ced4f9a22bb7f472f4d8e58e818f008b022972634209cd8a5",
+        "prepared_sha256": "88f184b8a2eb6e65387826c864708be6cfd087152936921767e9f7f44c047f6f"
+      }
+    ],
+    "files": {
+      "linked.rs": "ef5661dfeea26f41a9c2499ffc485698e452c5c3531447c37e94653f6a9d55b7",
+      "m0-facade.c": "3b1f6972a53a4167fafaf7688efad2198762b839ec550a367715b8b073656dce",
+      "m0.c": "da7c2309b3ac7cf0bc926df32c2a128060de7547d1d6190e6d9c41d4fc419baf",
+      "m0.h": "bc055a5debb1989e03445146227e461c352c2e20fac2e89cdc82e43c2435ceb1",
+      "m0.original.wasm": "0c65cc3257a1d6f651aea84a3666284dbab059ae16fd451ceef01a4f684b4115",
+      "m0.wasm": "8daf1c20d40fe8ae2857d305e5fbb041b9eedf434c820ec2c3fadee1774b6488",
+      "m1-facade.c": "8808a9a18a6468ae1a55ac6ca8a1e22408dd43980498ba9a47cf78f4fa94da78",
+      "m1.c": "5010716b460d3e34c46587f71fb0ecff4e5dbe8e0a88d0468479ef4f9b604d08",
+      "m1.h": "7feed905c7c0eb9d71d9cc887b7e4fccf0c0027b791481798fbac13b0da4bc82",
+      "m1.original.wasm": "d1e99bf578e6a9be09547498eee33638d2ab5d8fce976bb218c4421bb758f064",
+      "m1.wasm": "41c09d783b31884f56faebbf1e21eca9772149847bab981463faefc599b5c079",
+      "m10-facade.c": "368212b689dce530ca3e77df2c4b086b57b83a23b58467c75dd49f2b90227e92",
+      "m10.c": "2802718faea86a22e227290be837c8788d149456d44bb712a67ce057d8ae5b03",
+      "m10.h": "26b1464fdceb954519adcd5e28278460575ad5ab141b6cac95588e27bb080940",
+      "m10.original.wasm": "321bcf162c5c4bc126728f54bf426fb1e400ad7373d00cb1fac470cfb16531cf",
+      "m10.wasm": "d8aff7c6a0a67cab6f2cc1f3d56f22692d9220a8fa7f68048141fd6acebfc1ae",
+      "m11-facade.c": "2d9aee661fe04f1c80af553aec84dd42f623cb067910f27e117b8b43250a32a3",
+      "m11.c": "c8e06c6d99ea2b4d1c4a82ec6334a7d8bc9cb72a007a8a1e3a5dd1c74438803f",
+      "m11.h": "1763268f106143e66ff7f06106416ce058f6818e3792bfa0ff9d2f1b95cac672",
+      "m11.original.wasm": "b0d358fb1f0a86e89cfac53dd03b673ff2981b8b74e2e5a6f6a6e8c883d09dad",
+      "m11.wasm": "e86ceb329293b70f162141c556614230311d4e35a376149fcf17d6d4c72c01aa",
+      "m12-facade.c": "150b3e3a7006823638ccc18d84d6c7e9b349095458a35dd8d59f1116cf0dbc45",
+      "m12.c": "5d54cb7bdd2430e4345ad34d9ae2a5fc97c90f292be617e3f542fcfe7f2a5215",
+      "m12.h": "194587374bb3489a06fdd70aba7e9bba0b593938e67062d1c04253fc06e6d06b",
+      "m12.original.wasm": "a91d1eceb07e63e2a43081c7eabcc06ed88b48c50163b0976b5f73371d5da8ab",
+      "m12.wasm": "ac6a1b9790d6e6b53c90af8d8d588ec034ada55ba24a8242dba6996e741f28b5",
+      "m13-facade.c": "2b0c00eed052d80d1f431d1b36f763530587fcf30f49650aa506389d6713543e",
+      "m13.c": "773a30930002f37e87241e8e4ddfd78954b40c2f3f83d04c0612ddd18575cd9b",
+      "m13.h": "08d939cecad3588c834282776b9d2502ed285520df9bb99e2443809a3e6f0368",
+      "m13.original.wasm": "ed125dd13b5cc699cfff6066c44ed0d9bbd74a7b8eb09eac143a2b40cdaaffd7",
+      "m13.wasm": "0b1413a0d5d1664400b684514ada13d79fa4ebc8a5f30a45f59eb8cd0a2b2336",
+      "m14-facade.c": "d0836317ae6c2d93c5c7bf7431ca31bab17c459c3eecd961c5384e77cbcc7fde",
+      "m14.c": "1ec3a18bea7bae642157bdd761c376200ae4469895dd77421a1db26d9daac887",
+      "m14.h": "3fff1ba38b9f306152896b2c18f8248543dfba1abfc75fb205ce8d5749070d9b",
+      "m14.original.wasm": "fa60a090511381f0f213104b12748524ff4d4f2111bd791af0e67b6b7e2e757c",
+      "m14.wasm": "754a40b7ce441e1705e25ecf194099ae28c2dd719621635db8a4ece715121b51",
+      "m15-facade.c": "ebc1eeaa8c702b19ba586006c5fddfc0dabe17fc07ae19cf80e5ceda73fd583c",
+      "m15.c": "40303d9f7381d6b3fe27ddebe46f287d09fbf495cd9b23038add38a808936443",
+      "m15.h": "f89fcfe78796545d9f8ed3b0549d515d81dc049406640653175b30ea81659f17",
+      "m15.original.wasm": "a4d75c33197006fb9d74de3772db5de3686c6508f4f8888659f3202264fa4e70",
+      "m15.wasm": "e3986a01ad33290dd88752c44bafa62efc1c46457b827f9e76293bc9607272da",
+      "m16-facade.c": "ba4681d8e1d313265e604e4fe7b33f22a0fe54eba70936799f275cd74bcc1b30",
+      "m16.c": "d0d13148d2b56d06f956d21f422117828690b983fdd8886d832fc2c575877cdd",
+      "m16.h": "b41e419a11e6b92e7299f8d9226597dfa557daa82af0df9ddb1809b83b2638b6",
+      "m16.original.wasm": "4bc9ba85ca9d760ced4f9a22bb7f472f4d8e58e818f008b022972634209cd8a5",
+      "m16.wasm": "88f184b8a2eb6e65387826c864708be6cfd087152936921767e9f7f44c047f6f",
+      "m2-facade.c": "86dd03ed3b15a636e891e48d7f442b2d93da3922d652429d8c937d64f7da93c2",
+      "m2.c": "a65f7d2801b259e7db3c486ad6a8f18edc26615c473b3ca70ff0e126b52124bc",
+      "m2.h": "44c70af6d90446a57a9f1dcaf4ae90ae7e9b5c79c045ef125f6131e7187c80ad",
+      "m2.original.wasm": "61727a87d28a2f7569006557e310f56154b0da895bfa1ec270b402e2b8fa6618",
+      "m2.wasm": "1ca596b23eb9253eedd1b385d9eca041465d93e26b508882811a33a5a9a80521",
+      "m3-facade.c": "79efd71384c45b07b4767fc7cc468fdd4330a7f1371ef6b803579de03b9e9625",
+      "m3.c": "458ff9bd4298aa6adf954b6bb678aa685f047f6dc9085f1d977d5877a6d6111b",
+      "m3.h": "c8cb5aad8d5c93d4364613f734d5d20292007b6841ad22463631a01e564bdece",
+      "m3.original.wasm": "2ecd73d1512c687cef3fcf019a897c6efcafd9820d06cebdd229555b291942ac",
+      "m3.wasm": "1e0263d8c83fdcf9bff2b1705bbb092ad768d402ab63d3832cf04bfb6c913feb",
+      "m4-facade.c": "5d665da968790dabdbad560b186bccd63f8374687948b01aed1275972330d0b4",
+      "m4.c": "04d4cc03dd4fa680f4beb3c1e8ed227f594ea729cf314222f91447254f63e96a",
+      "m4.h": "3ddce1973def6cb20eff859ec36a7d1c3aa708029d1228c74a5988139eedd3e8",
+      "m4.original.wasm": "c711e3cf4628ded4813c7f1d3c0f48492981a3c68277dfa3736c11e96db63a86",
+      "m4.wasm": "d64ffea05c5cf178652765b802286235bbeee06b3586d1e71c55c8177143f59c",
+      "m5-facade.c": "a7aad2cf96b7c4c688d0df8ae261b7a318b61ad2f4afa15a1d5989377db26b38",
+      "m5.c": "6fbe379b27a5bdbfbc0e3cb3a6741a1629048aca7a9d889727408c93a37513db",
+      "m5.h": "adb2a744a0ec560a9b6b97299e2fb19886d4d7ad89e5d2c33ad41b15f04ab82e",
+      "m5.original.wasm": "221e0578867c6d6940f1e7b3bb69d85d4abc3e50e729072833b8c5e0326041da",
+      "m5.wasm": "39f01dbdc714fe6132bc9420a05827316686e587df2551fa7fc7684d2920af69",
+      "m6-facade.c": "a5630fda041f97a9643c29d34aa503d2b55f362eb712c93d4b93636023a21488",
+      "m6.c": "0bbf7f5c47df9cc6ed63dd388b85a3805e16cc67da0eda0d3ec3927fe581605d",
+      "m6.h": "35e91a9d381a602058d41e4985e3aa58f341dea049102c0d4da0be66ec010ecc",
+      "m6.original.wasm": "fe6677a2c67cd2f4749903f39b961b170fd5d108fdf0fe389fcc82854faae390",
+      "m6.wasm": "ad42f74426084e3ae2f0b2a087eed4a6a17316250a6fdfcf2d194d475e78ff15",
+      "m7-facade.c": "57a32e154b71043cddb366005623e94700b85b0993e9546e23f3eba8fa174a73",
+      "m7.c": "44408fa0ee27e823e79d2b0f5158d0cd943a4d6568fd039859d3611226e2964d",
+      "m7.h": "47e1ba3ee1fc4e0a053b3e6843fdd5eafaf6e1cddf890d54c40795886a86d3bc",
+      "m7.original.wasm": "4f33cdb03950a5e9abce6ed1434aac76b47085a613e411a85b3c40dba4c17b64",
+      "m7.wasm": "79a876481987f6ceab45bcb6c297b068b0c416087be0c96f78805597c108154d",
+      "m8-facade.c": "024f4f37a75652dfec1458deb840e985fa5af7f2a9aaf1db1a16aa0e92d56e59",
+      "m8.c": "5c3d09adcd18a9214468de33a2042d9dca2b1c633111cf8412213886499065e2",
+      "m8.h": "7a284dd2a9b573b62ec89cb6a391969489dcaf12565dded7abe2049282f7c26e",
+      "m8.original.wasm": "07aa3c2c1edd368b78524b2c6345fc7d7eee15547530b48acf8923a820d4e21d",
+      "m8.wasm": "94e548e88a964f9f64607eeff87467cd2eacb3b333293c7869039563d4e77ce0",
+      "m9-facade.c": "9ea64a85c02c47b1d4df54a7029ae8dc9251fcf0eac93f62487cae1fcf115e21",
+      "m9.c": "62911daedf303eadbadac0cd2c561899c945df05de6adb565f68e7245d41e732",
+      "m9.h": "6ce046b0b1cc1e32bb36ed2075c208008b9df802f917e85a7ada375d63aba0c2",
+      "m9.original.wasm": "470b844f3ac0763861bc48a71f66832d0acd9182b706ddd253e655d742636bf4",
+      "m9.wasm": "c399424657b96e127aea42f6b8b9622479e5f783591ae7617c50f9e81f6331e6"
+    }
+  },
+  "sources": {
+    "sdk/rust/samples/animation_ik.rs": "1091b3430e5bb694812317846e473200143554d8b4ed21ff73e6195ef4860af0",
+    "sdk/rust/fixtures/animation_ik_failure.rs": "8be1708a7a1566be7a1dae534396ede4f2ec35c73e8c8d5f2e6b54966b711dd1",
+    "crates/incant_wasm_runtime/fixtures/animation-ik.wat": "bf66df2279efc7caa9b281be54817e2778a31058d0a2b2a760f820f0f0245be9",
+    "crates/incant_wasm_dev/tests/animation_ik_parity.rs": "2ab216900b17627f0e281342cf9e327323bee3c9484d5f0b35345c5bd3ad600d"
+  },
+  "commands": [
+    {
+      "argv": [
+        "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+        "test",
+        "--profile",
+        "ci",
+        "--locked",
+        "-j2",
+        "-p",
+        "incant_wasm_dev",
+        "--features",
+        "static-conformance",
+        "--test",
+        "animation_ik_parity"
+      ],
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-formatted-conformance-003/test.log",
+      "sha256": "6f0c0db71f79bce055310914b9c5e616dfe8bb5a6afeb4f2204e241fe980ca44"
+    },
+    {
+      "argv": [
+        "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+        "clippy",
+        "--profile",
+        "ci",
+        "--locked",
+        "-j2",
+        "-p",
+        "incant_wasm_dev",
+        "--features",
+        "static-conformance",
+        "--test",
+        "animation_ik_parity",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-formatted-conformance-003/clippy.log",
+      "sha256": "edf31ceb1f58c6b16ca266de012753aac6fe855aed1cb376ae29c35492c79b4b"
+    }
+  ]
+}

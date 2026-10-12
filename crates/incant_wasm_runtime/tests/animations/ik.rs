@@ -52,12 +52,8 @@ fn pose_imports() -> [Call; 8] {
     [
         Call::AnimationLen,
         Call::AnimationLenV2,
-        Call::AnimationLenV4,
-        Call::ReadAnimationsV4 {
-            ptr: 0,
-            capacity: 4096,
-        },
         Call::AnimationLenV3,
+        Call::AnimationLenV4,
         Call::ReadAnimations {
             ptr: 7,
             capacity: 1024,
@@ -67,6 +63,10 @@ fn pose_imports() -> [Call; 8] {
             capacity: 1024,
         },
         Call::ReadAnimationsV3 {
+            ptr: 7,
+            capacity: 1024,
+        },
+        Call::ReadAnimationsV4 {
             ptr: 7,
             capacity: 1024,
         },

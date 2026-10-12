@@ -1,0 +1,19 @@
+{
+  "authoring/rig.gltf": "053fca5c2057f9114282476cf461b474c144d839319bc5ca0a36351efae4af73",
+  "authoring/rig.bin": "46e5187bf111d665549dad2b4a9a6ca0e79a8e8b4e1f1c4280f5a764736a4625",
+  "authoring/behavior.wasm": "0b8f31212ca4e4ed1004c98063b2cb747a85197c83bc530c667f5e68aa00afc6",
+  "guest-build/behavior.rs": "02651fc5ade43f73f742fbfa0e5607da20a407ce4164c3224f80a454ae42ec43",
+  "guest-build/behavior.wasm": "0b8f31212ca4e4ed1004c98063b2cb747a85197c83bc530c667f5e68aa00afc6",
+  "guest-build/rust-sdk-libraries/incant_module.sha256": "8f8cbff39e0ea62c506e8221394cab20b0904b41ce76f728df1930fa88c90e43",
+  "guest-build/rust-sdk-libraries/incant_wasm_abi.sha256": "5d48639c7f90f63aaa0f727a318cc53b9eedd739c0f010c8dc09f65548894011",
+  "guest-build/rust-sdk-libraries/libincant_module.rlib": "6790168fd4085715275d3339212e1081cdac54a9ed1aaf123ab4c6212fa5a735",
+  "guest-build/rust-sdk-libraries/libincant_wasm_abi.rlib": "0cee20c3c0d130778f362a6120934ce5f21d5bb678cb6de16b90b2b2c9eb133f",
+  "authoring/.incant/cache/models/b744b3412da8391f5c6d683ac023f79609d62ea1a1a49b06392b22a4a861b282.incmodel": "a1e28e3197dcf8010b2548cdc7a2fe65a85f5886c2b1d88cca90888d8c6ce383",
+  "authoring/.incant/cache/wasm/aa0c6933b38e4425d9d3d24d51c006107924598c3753e38c3af9856a68697cf7.wasm.json": "8def27cad5b395d5960547d32338148bae5fdd749b262d355630e12355f27346",
+  "authoring/.incant-source-transactions/lock": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "authoring/project.journal.jsonl": "87187e6cac01627296da7cff6fa2e7899b66f852075d15ba8f903429968d9796",
+  "authoring/project.json": "9510bfcc27461bdd1d1798a10ee415d74bb96502ffdb9463c23dff3586575529",
+  "trusted-tools/wabt/bin/wasm2c": "4f1ba571063deca36e330ad67cf0414dbbaee944c7d920df7a338a30725570f2",
+  "trusted-tools/wabt/bin/wat2wasm": "69117d2b10c1818cf6da921f96ab4e3c50e45a05a848d6c4c1788375aec4d250",
+  "trusted-tools/wabt.tar.gz": "3f654779b436c628db3ca4323c51538815f5fbc887a6d5f3bb1c18d36281e240"
+}

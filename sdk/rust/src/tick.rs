@@ -1,3 +1,5 @@
+mod compound;
+mod ik;
 use crate::{EntityId, Error, FlipbookSnapshot, InputSnapshot, Result, Transform, Velocity, raw};
 use core::marker::PhantomData;
 use incant_wasm_abi as abi;
