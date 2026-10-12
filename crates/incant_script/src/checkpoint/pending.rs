@@ -36,8 +36,14 @@ impl PendingSessionCheckpoint {
         let store = codec::store(sections.store)?;
         let schedule = codec::schedule(sections.schedule)?;
         let bindings = ValidatedActions::new(actions).map_err(InputError::from)?;
-        if sections.world.get(8..12) != Some(3u32.to_le_bytes().as_slice()) {
-            return Err(CheckpointError::Invalid("session requires world save v3"));
+        let version = sections
+            .world
+            .get(8..12)
+            .map(|bytes| u32::from_le_bytes(bytes.try_into().unwrap()));
+        if !matches!(version, Some(3 | 4)) {
+            return Err(CheckpointError::Invalid(
+                "session requires world save v3/v4",
+            ));
         }
         let world = load_world(sections.world)?;
         if world.source_scene_fingerprint() != sections.origin {

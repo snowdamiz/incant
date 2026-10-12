@@ -114,11 +114,12 @@ impl NativeWorld {
         )
     }
 
-    /// Load validated data without source/project/asset-cache access. V2/v3 retain
+    /// Load validated data without source/project/asset-cache access. V2–v4 retain
     /// the original cooked-scene fingerprint for later program pairing; it is not
     /// authentication and does not restore a VM. Legacy v1 has no original binding
     /// field: its fingerprint describes only the saved plain scene. V3 adds localized
-    /// scenes; older saves cannot silently clear an existing locale/catalog.
+    /// scenes and v4 adds animation playback; older saves cannot silently clear
+    /// an existing locale/catalog.
     pub fn from_save_bytes(bytes: &[u8]) -> Result<Self, SaveError> {
         let decoded = codec::decode(bytes)?;
         let scene = CookedScene::from_bytes(decoded.scene)?;
@@ -256,7 +257,10 @@ impl NativeWorld {
     pub fn restore_bytes(&mut self, bytes: &[u8]) -> Result<(), SaveError> {
         self.check_save_capabilities()?;
         let mut candidate = Self::from_save_bytes(bytes)?;
-        if bytes[8..12] != 3u32.to_le_bytes() && !self.localization.is_default() {
+        // The complete candidate decode validated framing and the supported
+        // version. Both v3 and v4 carry the localization contract.
+        let version = u32::from_le_bytes(bytes[8..12].try_into().unwrap());
+        if version < 3 && !self.localization.is_default() {
             return Err(SaveError::LocalizationUnsupported);
         }
         // Legacy data has no extended-state/origin contract. Do not let a plain

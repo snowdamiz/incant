@@ -301,6 +301,135 @@ fn asset_binding_and_duration_tables_reject_before_world_publication() {
 }
 
 #[test]
+fn localized_v4_restores_in_place_and_resumes_exactly() {
+    use incant_localization::LocaleSettings;
+    let initial = scene()
+        .with_localization(
+            NativeLocalization::new(
+                Default::default(),
+                LocaleSettings {
+                    locale: "fr".into(),
+                    ..Default::default()
+                },
+            )
+            .unwrap(),
+        )
+        .unwrap();
+    let mut baseline = NativeWorld::new(initial.clone());
+    control(&mut baseline, 1, AnimationControl::SetLooping(true));
+    control(&mut baseline, 2, AnimationControl::Seek(0.75));
+    control(&mut baseline, 2, AnimationControl::SetSpeed(-0.75));
+    let locale = LocaleSettings {
+        locale: "de".into(),
+        fallbacks: vec!["fr".into()],
+        pseudo: true,
+    };
+    let mut commands = FrameCommands::default();
+    commands
+        .push(StructuralCommand::SetLocale(locale.clone()))
+        .unwrap();
+    baseline.apply(&mut commands).unwrap();
+    for _ in 0..13 {
+        baseline.step().unwrap();
+    }
+    let saved = baseline.save_bytes().unwrap();
+    assert_eq!(&saved[8..12], &4u32.to_le_bytes());
+    let mut fresh = NativeWorld::from_save_bytes_for_scene(&saved, &initial).unwrap();
+    let mut restored = NativeWorld::new(initial);
+    let identity = restored.spatial_view().unwrap().identity().clone();
+    let incarnation = restored.incarnation();
+    restored.step().unwrap();
+    restored.restore_bytes(&saved).unwrap();
+    assert_eq!(restored.spatial_view().unwrap().identity(), &identity);
+    assert_ne!(restored.incarnation(), incarnation);
+    assert_eq!(restored.localization().settings(), &locale);
+    assert_eq!(restored.save_bytes().unwrap(), saved);
+    for _ in 0..137 {
+        baseline.step().unwrap();
+        fresh.step().unwrap();
+        restored.step().unwrap();
+        assert_eq!(
+            restored.save_bytes().unwrap(),
+            baseline.save_bytes().unwrap()
+        );
+        assert_eq!(fresh.save_bytes().unwrap(), baseline.save_bytes().unwrap());
+    }
+}
+
+#[test]
+fn localized_v4_restore_keeps_legacy_and_wrong_binding_refusals_atomic() {
+    use incant_localization::LocaleSettings;
+    use sha2::{Digest, Sha256};
+    let initial = scene()
+        .with_localization(
+            NativeLocalization::new(
+                Default::default(),
+                LocaleSettings {
+                    locale: "fr".into(),
+                    ..Default::default()
+                },
+            )
+            .unwrap(),
+        )
+        .unwrap();
+    let mut live = NativeWorld::new(initial.clone());
+    live.step().unwrap();
+    let saved = live.save_bytes().unwrap();
+    let incarnation = live.incarnation();
+    let plain = CookedScene::new(id(0), 60, initial.entities().to_vec()).unwrap();
+    let mut v2 = NativeWorld::new(plain.clone()).save_bytes().unwrap();
+    v2[8..12].copy_from_slice(&2u32.to_le_bytes());
+    let mut v1 = v2[..64].to_vec();
+    v1[8..12].copy_from_slice(&1u32.to_le_bytes());
+    v1.extend(plain.to_bytes());
+    for mut legacy in [v1, v2] {
+        let size = (legacy.len() - 64) as u64;
+        legacy[24..32].copy_from_slice(&size.to_le_bytes());
+        let mut h = Sha256::new();
+        h.update(&legacy[..32]);
+        h.update(&legacy[64..]);
+        legacy[32..64].copy_from_slice(&h.finalize());
+        assert!(NativeWorld::from_save_bytes(&legacy).is_ok());
+        assert!(matches!(
+            live.restore_bytes(&legacy),
+            Err(SaveError::LocalizationUnsupported)
+        ));
+        assert_eq!(live.save_bytes().unwrap(), saved);
+        assert_eq!(live.incarnation(), incarnation);
+    }
+    let mut changed = (*definition()).clone();
+    changed.clip_durations = Arc::from([2., 0.]);
+    let foreign = initial
+        .clone()
+        .with_spatial(
+            initial.visual_assets().to_vec(),
+            vec![node(1, Arc::new(changed)), node(2, definition())],
+        )
+        .unwrap();
+    let wrong = NativeWorld::new(foreign).save_bytes().unwrap();
+    assert!(matches!(
+        live.restore_bytes(&wrong),
+        Err(SaveError::WorldMismatch)
+    ));
+    assert_eq!(live.save_bytes().unwrap(), saved);
+    assert_eq!(live.incarnation(), incarnation);
+    let mut future = saved.clone();
+    future[8..12].copy_from_slice(&5u32.to_le_bytes());
+    let mut h = Sha256::new();
+    h.update(&future[..32]);
+    h.update(&future[64..]);
+    future[32..64].copy_from_slice(&h.finalize());
+    assert!(matches!(
+        live.restore_bytes(&future),
+        Err(SaveError::Version(5))
+    ));
+    assert_eq!(live.save_bytes().unwrap(), saved);
+    assert_eq!(live.incarnation(), incarnation);
+    live.step().unwrap();
+    assert_eq!(live.tick(), 2);
+}
+
+#[test]
 fn failed_tick_never_advances_animation() {
     let mut world = NativeWorld::new(scene());
     world.step().unwrap();
