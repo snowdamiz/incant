@@ -16,14 +16,23 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Headless UI and reusable player — current integration verified
+## Ordinary desktop exporter — library audit corrected
+
+The player library and thin executable share a crate name. The shipping audit
+now checks both target units independently, preserving required optimization,
+source-compiler exclusion and final executable fat LTO. Six parser regressions
+and 63 scoped tools tests pass; root source review is accepted. The original
+failed export remains retained and corrected fresh packaging is pending in the
+Planar proof. [Evidence](docs/spikes/native-export-player-units.md).
+
+## Headless UI and reusable player — merged main169
 
 The shared recorded UI route and optional mobile C ABI pass all 19 integrated
 checks on the accepted audio ABI union. Real C/Swift callers of the new immutable
 macOS archive pass 32 controls/39 commands, including native held/released movement,
 exact failures and no-clobber output behavior. Producer source bytes and dependency
-versions are unchanged; independent final integration review is accepted and
-exact-head fast CI remains required. iOS/Android compatibility stays separate; no GPU/window/device gate.
+versions are unchanged; independent final integration review and exact-head
+fast CI passed before PR169 merged. iOS/Android compatibility stays separate; no GPU/window/device gate.
 [Integrated commands and actual callers](docs/spikes/headless-ui-mobile-integration.md).
 
 ## Mobile runtime callers — macOS C/Swift CPU proof accepted
