@@ -115,7 +115,7 @@ fn simulate(tick: &mut Tick<'_>, dt: f64) -> Result<()> {
         "Health 8"
     };
     tick.control_hud(button, HudControl::UiText(next), &mut command)?;
-    tick.control_hud(world_text, HudControl::Text("Pickup 世界"), &mut command)?;
+    tick.control_hud(world_text, HudControl::Text("Pickup 中文"), &mut command)?;
     if before.tick() == 4 {
         tick.control_hud(button, HudControl::UiDisabled(true), &mut command)?;
     }
