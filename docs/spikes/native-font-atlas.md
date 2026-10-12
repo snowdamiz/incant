@@ -106,3 +106,17 @@ custom variable-font rasterization are additional capability work. Claude owns
 rendered acceptance and visual design; no image, screenshot, GPU, native window,
 provider or device was used here. This slice does not complete Game UI, the Core
 Sample, the reference-phone performance gates or Phase 1.
+
+## Main113 integration
+
+The reviewed atlas commit `579e9e6` is preserved in integration `43a06af` on
+actual main113. Only STATUS required manual resolution. All implementation, test,
+fixture and copied license bytes match the reviewed source. Every external lock
+package record is unchanged; only the five reviewed `incant_text` dependency
+edges are added. The upstream license text retains its original whitespace.
+
+The integrated source passes 31 tests, all-target Clippy, standalone wasm32
+compilation, the normal runtime dependency guard, formatting and conventions.
+No GPU, window, pixel or performance acceptance is claimed. Runtime renderer
+upload/draw and exported-game font binding remain subsequent work.
+[Exact source and checks](evidence/native-font-atlas-main113.json).
