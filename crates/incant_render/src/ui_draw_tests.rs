@@ -18,6 +18,18 @@
 //!   and the stored code within 0.67 code of exact, rounding included
 //!   (llvmpipe documents ±0.35 for decode and ±0.17 before rounding for
 //!   encode). UNORM targets read back exactly.
+//! * `CONVERT`/`PRODUCT`, a UNORM target blended at its own 8-bit precision,
+//!   which Vulkan ("no lower than that used to represent destination
+//!   components") and D3D11.3 §17.5 ("equal or more ... precision ... than the
+//!   output format") permit, and llvmpipe and WARP do. The premultiplied
+//!   source and the alpha each become a code within `CONVERT` (D3D11.3
+//!   §3.2.3.6 allows 0.6; Vulkan recommends and llvmpipe uses the nearest),
+//!   the destination product d·(255 − a)/255 one within `PRODUCT` (llvmpipe's
+//!   `(t + (t >> 8) + 128) >> 8` misrounds 24 of the 65,536 8-bit products by
+//!   128/255), then the sum saturates. A channel admits this blend or the
+//!   float one: at most 1.71 codes from exact per blend, exact for opaque
+//!   fragments. Coarser blend arithmetic (truncation, `a·(b + 1) >> 8`) is
+//!   outside this reference.
 //!
 //! Near black the sRGB encoding magnifies a coverage step of 1/255 to several
 //! codes, so a fixed code tolerance cannot express the contract there.
@@ -36,6 +48,8 @@ const UNORM: wgpu::TextureFormat = wgpu::TextureFormat::Rgba8Unorm;
 const TAP: f64 = 1. / 255.;
 const DECODE: f64 = 0.5;
 const ENCODE: f64 = 0.67;
+const CONVERT: f64 = 0.6;
+const PRODUCT: f64 = 128. / 255.;
 
 // Existing checkpoint runs use --nocapture; retain the actual selected adapter
 // rather than inferring a backend from installed driver packages.
@@ -55,10 +69,11 @@ enum Model {
     Portable,
     /// One candidate image: exact filtering and conversion, nearest storage.
     Exact,
-    /// One candidate image emulated from Mesa llvmpipe source; the failing
-    /// Linux CI adapter has not been identified. `lp_bld_sample_aos.c` (8-bit
-    /// fixed-point bilinear), `lp_bld_arit.c` (SSSE3/AVX2 rounded lerp) and
-    /// `lp_bld_format_srgb.c` (polynomial sRGB). sRGB targets only.
+    /// One candidate image emulated from the source of Mesa 25.2.8 llvmpipe,
+    /// the Linux CI adapter: `lp_bld_sample_aos.c` (8-bit fixed-point
+    /// bilinear), `lp_bld_arit.c` (SSSE3/AVX2 rounded lerp, `mul_norm`),
+    /// `lp_bld_format_srgb.c` (polynomial sRGB around a float blend) and, for
+    /// UNORM8 targets, the 8-bit blend of `lp_state_fs.c` and `lp_bld_conv.c`.
     Llvmpipe,
 }
 mod llvmpipe {
@@ -96,6 +111,18 @@ mod llvmpipe {
                 - 0.062 * 255.
         };
         f64::from(v.round_ties_even())
+    }
+    /// The code an 8-bit UNORM target stores for the shader's premultiplied
+    /// f32 output: UNORM8 targets blend in their own 8-bit type, the colour
+    /// and alpha converted by `cvtps2dq`, then `uadd.sat(s, mul_norm(d, !a))`.
+    pub fn unorm_over(color: u8, opacity: u8, coverage: f64, destination: f64) -> f64 {
+        // Fetch scales UNORM8 by 1/255 (`lp_build_unsigned_norm_to_float`).
+        let unit = |code: u8| f32::from(code) * (1. / 255.);
+        let alpha = unit(opacity) * coverage as f32;
+        let code = |x: f32| i64::from((x.min(1.) * 255.).round_ties_even() as u8);
+        let (s, a) = (code(unit(color) * alpha), code(alpha));
+        let t = destination as i64 * (255 - a);
+        (s + ((t + (t >> 8) + 128) >> 8)).min(255) as f64
     }
 }
 
@@ -156,10 +183,6 @@ impl Canvas {
         viewport: [f32; 2],
         model: Model,
     ) -> Self {
-        assert!(
-            srgb || model != Model::Llvmpipe,
-            "emulated for sRGB targets"
-        );
         Self {
             size,
             srgb,
@@ -199,7 +222,11 @@ impl Canvas {
             if model == Model::Llvmpipe {
                 // A zero llvmpipe tap was discarded above.
                 let a = alpha[0] as f32;
-                let stored = llvmpipe::encode(src as f32 * a + llvmpipe::decode(low) * (1. - a));
+                let stored = if srgb {
+                    llvmpipe::encode(src as f32 * a + llvmpipe::decode(low) * (1. - a))
+                } else {
+                    llvmpipe::unorm_over(color[c], color[3], coverage[0], low)
+                };
                 pixel[c] = [stored; 2];
                 continue;
             }
@@ -220,10 +247,16 @@ impl Canvas {
                 .flat_map(|a| destination.map(|d| src * a + d * (1. - a)));
             let (min, max) = blended.fold((f64::MAX, f64::MIN), |(l, h), v| (l.min(v), h.max(v)));
             let stored = |v: f64| if srgb { encode(v) } else { v * 255. };
-            pixel[c] = [
+            let float = [
                 (stored(min) - write).ceil().max(0.),
                 (stored(max) + write).floor().min(255.),
             ];
+            pixel[c] = if model == Model::Portable && !srgb {
+                let fixed = fixed_point(src, alpha, [low, high]);
+                [float[0].min(fixed[0]), float[1].max(fixed[1])]
+            } else {
+                float
+            };
         }
     }
     fn physical(&self, x: f64, axis: usize) -> f64 {
@@ -395,6 +428,24 @@ impl Canvas {
 }
 fn self_space(srgb: bool, byte: f64) -> f64 {
     if srgb { decode(byte) } else { byte / 255. }
+}
+/// The codes a UNORM blend at the target's 8-bit precision may store over the
+/// destination codes `[low, high]`: source and alpha codes within `CONVERT`,
+/// the destination product within `PRODUCT`, then a saturating sum.
+fn fixed_point(src: f64, alpha: [f64; 2], [low, high]: [f64; 2]) -> [f64; 2] {
+    let codes = |[l, h]: [f64; 2]| {
+        [
+            (l * 255. - CONVERT).ceil().max(0.),
+            (h * 255. + CONVERT).floor().min(255.),
+        ]
+    };
+    let source = codes(alpha.map(|a| src * a));
+    let a = codes(alpha);
+    let product = [low * (255. - a[1]) / 255., high * (255. - a[0]) / 255.];
+    [
+        (source[0] + (product[0] - PRODUCT).ceil().max(0.)).min(255.),
+        (source[1] + (product[1] + PRODUCT).floor()).min(255.),
+    ]
 }
 
 struct Run {
@@ -995,35 +1046,51 @@ fn editor_viewport_region_offsets_scales_and_bounds_the_ui() {
 }
 
 /// CPU only: the admitted codes accept exact arithmetic and an emulated
-/// conformant backend, yet still reject wrong geometry, clipping, opacity and
-/// layering by wide margins. Prints the emulated backend's distance from exact
-/// arithmetic, which the previous fixed code tolerance could not express.
+/// conformant backend, yet still reject wrong geometry, clipping, opacity,
+/// blending space and layering by wide margins. Prints the emulated backend's
+/// statistics as the GPU test does: at 1x UNORM, its distance from exact
+/// (worst 2, five channels over 1, 4,248 changed pixels) is what checkpoint
+/// 12's llvmpipe and WARP draws printed.
 #[test]
 fn reference_admits_backend_precision_but_not_wrong_geometry_clip_or_opacity() {
     let input = panel();
-    for (scale, srgb) in [(1., true), (2., true), (1.5, true), (1., false)] {
+    for (scale, format) in [(1., SRGB), (2., SRGB), (1.5, SRGB), (1., UNORM)] {
+        let (srgb, case) = (format.is_srgb(), format!("scale {scale} {format:?}"));
         let size = [(160. * scale) as u32, (90. * scale) as u32];
         let background = background(size);
-        let candidate = |input: &UiInput, model, text| {
+        let compose = |input: &UiInput, model, text, srgb| {
             let full = [0., 0., f64::from(size[0]), f64::from(size[1])];
             let mut canvas = Canvas::new(&background, size, srgb, full, input.viewport, model);
             reference_order(input, &mut canvas, false, text);
             canvas.image()
         };
+        let candidate = |input: &UiInput, model, text| compose(input, model, text, srgb);
         let portable = panel_canvas(&input, &background, size, srgb, Model::Portable);
         let exact = candidate(&input, Model::Exact, theme::TEXT);
-        assert_eq!(admitted(&exact, &portable).outside, 0, "{scale} exact");
-        if srgb {
-            let emulated = candidate(&input, Model::Llvmpipe, theme::TEXT);
-            let (worst, over) = difference(&emulated, &exact);
-            let admission = admitted(&emulated, &portable);
-            eprintln!(
-                "scale {scale}: emulated llvmpipe vs exact worst {worst}, >1: {over}; \
-                 admitted outside {}, widest {} ({} channels > 2)",
-                admission.outside, admission.widest, admission.wide
-            );
-            assert_eq!(admission.outside, 0, "{scale} llvmpipe: {admission:?}");
-        }
+        assert_eq!(admitted(&exact, &portable).outside, 0, "{case} exact");
+        let emulated = candidate(&input, Model::Llvmpipe, theme::TEXT);
+        let (worst, over) = difference(&emulated, &exact);
+        let admission = admitted(&emulated, &portable);
+        eprintln!(
+            "{case}: emulated llvmpipe outside {} by {}, widest {} ({} channels > 2); \
+             vs exact worst {worst}, >1: {over}, changed {}",
+            admission.outside,
+            admission.excess,
+            admission.widest,
+            admission.wide,
+            ink(&emulated, &background)
+        );
+        assert_eq!(admission.outside, 0, "{case} llvmpipe: {admission:?}");
+        // Linear-light blending on a UNORM target, encoded on an sRGB one.
+        let wrong = admitted(
+            &compose(&input, Model::Exact, theme::TEXT, !srgb),
+            &portable,
+        );
+        eprintln!("{case}: blending in the other space rejected by {wrong:?}");
+        assert!(
+            wrong.outside > 100 && wrong.excess > 10.,
+            "{case}: {wrong:?}"
+        );
         // Text one physical pixel right, or half a pixel at 2x.
         for shift in [1., 0.5] {
             if shift * scale < 1. && scale != 2. {
@@ -1039,19 +1106,19 @@ fn reference_admits_backend_precision_but_not_wrong_geometry_clip_or_opacity() {
                 widgets,
             };
             let wrong = admitted(&candidate(&moved, Model::Exact, theme::TEXT), &portable);
-            eprintln!("scale {scale}: text {shift} px right rejected by {wrong:?}");
+            eprintln!("{case}: text {shift} px right rejected by {wrong:?}");
             assert!(
                 wrong.outside > 100 && wrong.excess > 30.,
-                "{scale}/{shift}: {wrong:?}"
+                "{case}/{shift}: {wrong:?}"
             );
         }
         // Text at 90 % opacity.
         let faint = theme::alpha(theme::TEXT, 0.9);
         let wrong = admitted(&candidate(&input, Model::Exact, faint), &portable);
-        eprintln!("scale {scale}: 90% text opacity rejected by {wrong:?}");
+        eprintln!("{case}: 90% text opacity rejected by {wrong:?}");
         assert!(
             wrong.outside > 100 && wrong.excess > 5.,
-            "{scale}: {wrong:?}"
+            "{case}: {wrong:?}"
         );
     }
     // A label drawn to its own content box instead of the ancestor clip.
