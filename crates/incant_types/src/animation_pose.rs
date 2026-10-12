@@ -111,8 +111,81 @@ impl AnimationPoseSamples {
     fn normalize(&mut self) {
         let entries = &mut self.samples[..usize::from(self.len)];
         let sum: f64 = entries.iter().map(|entry| entry.weight).sum();
-        for entry in entries {
+        let mut retained = 0;
+        for index in 0..entries.len() {
+            let mut entry = entries[index];
             entry.weight /= sum;
+            // An admitted positive relative weight can underflow during
+            // normalization. Keep the published pose canonical and nonzero,
+            // just as push() does for zero input contributions.
+            if entry.weight > 0.0 {
+                entries[retained] = entry;
+                retained += 1;
+            }
+        }
+        self.len = retained as u8;
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn entry(clip: Option<u16>, seconds: f64, weight: f64) -> WeightedAnimationSample {
+        WeightedAnimationSample {
+            sample: AnimationSample { clip, seconds },
+            weight,
+        }
+    }
+
+    #[test]
+    fn copied_pose_preserves_phases_coalesces_equal_samples_and_normalizes_extreme_weights() {
+        let pose = AnimationPoseSamples::new(&[
+            entry(Some(0), 0.25, f64::MAX),
+            entry(Some(0), 0.75, f64::MAX),
+            entry(Some(0), 0.25, f64::MAX),
+            entry(None, 0.0, 0.0),
+        ])
+        .unwrap();
+        assert_eq!(pose.samples().len(), 2);
+        assert_eq!(pose.samples()[0], entry(Some(0), 0.25, 2.0 / 3.0));
+        assert_eq!(pose.samples()[1], entry(Some(0), 0.75, 1.0 / 3.0));
+        let tiny = AnimationPoseSamples::new(&[
+            entry(Some(0), 0.0, f64::from_bits(1)),
+            entry(None, 0.0, f64::from_bits(1)),
+        ])
+        .unwrap();
+        assert!(tiny.samples().iter().all(|v| v.weight == 0.5));
+        let mut wide: Vec<_> = (0..15).map(|n| entry(Some(n), 0.0, 1.0)).collect();
+        wide.push(entry(None, 0.0, f64::from_bits(1)));
+        let pose = AnimationPoseSamples::new(&wide).unwrap();
+        assert_eq!(pose.samples().len(), 15);
+        assert!(pose.samples().iter().all(|v| v.weight > 0.0));
+    }
+
+    #[test]
+    fn copied_pose_validates_zero_weight_entries_and_refuses_invalid_capacity() {
+        assert!(AnimationPoseSamples::new(&[]).is_err());
+        assert!(AnimationPoseSamples::new(&[entry(None, 0.0, 0.0)]).is_err());
+        let full: Vec<_> = (0..16).map(|n| entry(Some(n), 0.0, 1.0)).collect();
+        assert_eq!(
+            AnimationPoseSamples::new(&full).unwrap().samples().len(),
+            16
+        );
+        let mut overflow = full;
+        overflow.push(entry(Some(16), 0.0, 0.0));
+        assert!(AnimationPoseSamples::new(&overflow).is_err());
+        for bad in [
+            entry(None, 1.0, 0.0),
+            entry(Some(256), 0.0, 0.0),
+            entry(Some(0), -1.0, 0.0),
+            entry(Some(0), f64::NAN, 0.0),
+            entry(Some(0), f64::INFINITY, 0.0),
+            entry(None, 0.0, -1.0),
+            entry(None, 0.0, f64::NAN),
+            entry(None, 0.0, f64::INFINITY),
+        ] {
+            assert!(AnimationPoseSamples::new(&[entry(None, 0.0, 1.0), bad]).is_err());
         }
     }
 }
