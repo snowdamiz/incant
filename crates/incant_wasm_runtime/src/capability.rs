@@ -25,6 +25,15 @@ const _: () = {
 /// Trusted host adapter operation; all integer arguments are guest offsets/indices.
 #[derive(Clone, Copy)]
 pub enum Call {
+    HudLen,
+    ReadHud {
+        ptr: i32,
+        capacity: i32,
+    },
+    ControlHud {
+        ptr: i32,
+        len: i32,
+    },
     RootMotionLen,
     ReadRootMotion {
         ptr: i32,
@@ -197,6 +206,8 @@ pub struct Capability {
     commands: FrameCommands,
     input: Vec<u8>,
     input_available: bool,
+    hud: Vec<u8>,
+    hud_rejected: bool,
     flipbook_rows: Vec<FlipbookSnapshot>,
     flipbooks: Vec<u8>,
     animation_rows: Vec<AnimationSnapshot>,
@@ -249,6 +260,14 @@ impl Capability {
         }
     }
     pub fn begin(&mut self, world: &mut NativeWorld, dt: f64) -> Result<i64, Error> {
+        self.begin_hud(world, dt, &incant_input::UiSnapshot::default())
+    }
+    fn begin_hud(
+        &mut self,
+        world: &mut NativeWorld,
+        dt: f64,
+        ui: &incant_input::UiSnapshot,
+    ) -> Result<i64, Error> {
         if self.failed {
             return Err(Error::Failed);
         }
@@ -276,6 +295,11 @@ impl Capability {
             return Err(error);
         }
         self.commands.clear();
+        self.hud_rejected = false;
+        if let Err(error) = crate::hud::encode(world, ui, &mut self.hud) {
+            self.abort();
+            return Err(error);
+        }
         if let Err(error) = crate::animations::encode(
             world,
             &mut self.animation_rows,
@@ -336,7 +360,7 @@ impl Capability {
         dt: f64,
         input: &incant_input::InputRuntime,
     ) -> Result<i64, Error> {
-        let epoch = self.begin(world, dt)?;
+        let epoch = self.begin_hud(world, dt, &input.frame().ui)?;
         if let Err(error) = crate::input::encode(input, world.tick(), &mut self.input) {
             self.abort();
             return Err(error);
@@ -382,6 +406,7 @@ impl Capability {
             .ok_or(Error::Abi("missing physics state"))
     }
     pub fn abort(&mut self) {
+        self.hud.clear();
         self.root_motion_rows.clear();
         self.root_motion.clear();
         self.animation_rows.clear();
@@ -427,6 +452,11 @@ impl Capability {
             self.abort();
             return Err(Error::Abi("rejected navigation transaction"));
         }
+        if self.hud_rejected {
+            self.abort();
+            return Err(Error::Abi("rejected HUD transaction"));
+        }
+        self.hud.clear();
         if self.animation_rejected {
             self.abort();
             return Err(Error::Abi("rejected animation transaction"));
@@ -542,6 +572,12 @@ impl Capability {
     /// Synchronous import; memory contains initialized guest bytes only and is
     /// borrowed for this call. No world observation/publication occurs here.
     pub fn invoke(&mut self, memory: &mut [u8], epoch: i64, call: Call) -> Result<i32, Error> {
+        let hud_authorized = self.active
+            && self.epoch == epoch
+            && matches!(
+                call,
+                Call::HudLen | Call::ReadHud { .. } | Call::ControlHud { .. }
+            );
         let physics_authorized = self.active
             && self.epoch == epoch
             && matches!(
@@ -619,6 +655,9 @@ impl Capability {
             && let Some(state) = &mut self.navigation
         {
             state.reject();
+        }
+        if hud_authorized && result.is_err() {
+            self.hud_rejected = true;
         }
         if animation_authorized && result.is_err() {
             self.animation_rejected = true;
@@ -718,6 +757,34 @@ impl Capability {
                 .ok_or(Error::Limit("navigation query quota"))?;
         }
         match call {
+            Call::HudLen | Call::ReadHud { .. } => {
+                let len = self.hud.len();
+                if let Call::ReadHud { ptr, capacity } = call {
+                    if usize::try_from(capacity).ok().is_none_or(|n| n < len) {
+                        return Err(Error::Abi("HUD destination capacity"));
+                    }
+                    let region = range(ptr, len, memory.len())?;
+                    self.transfer(len)?;
+                    memory[region].copy_from_slice(&self.hud);
+                }
+                return Ok(len as i32);
+            }
+            Call::ControlHud { ptr, len } => {
+                let len = usize::try_from(len)
+                    .ok()
+                    .filter(|&n| {
+                        (incant_wasm_abi::HudCommand::SIZE
+                            ..=incant_wasm_abi::HudCommand::SIZE
+                                + incant_wasm_abi::HUD_MAX_TEXT_BYTES)
+                            .contains(&n)
+                    })
+                    .ok_or(Error::Abi("HUD command size"))?;
+                let region = range(ptr, len, memory.len())?;
+                self.transfer(len)?;
+                let command = crate::hud::command(&memory[region])?;
+                self.command(command)?;
+                return Ok(0);
+            }
             Call::RootMotionLen | Call::ReadRootMotion { .. } => {
                 if self.root_motion.is_empty() {
                     let scene = self

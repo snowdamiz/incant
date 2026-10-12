@@ -109,6 +109,17 @@ class RegistryTests(unittest.TestCase):
         self.assertEqual(self.data['records']['AnimationRowV4'][:-4], self.data['records']['AnimationRowV2'])
         self.assertLess(40+100000*96+214336*24,self.data['constants']['MEMORY'])
 
+    def test_hud_is_additive_and_keeps_every_existing_definition(self):
+        import hashlib
+        prior = {'functions': (56, '7bc086cca969c85182c9ac7cc76aeeb78f525101e1ee09a9fb4703255606497a'), 'constants': (83, 'dc0641095face8dcc5f4272324eb29baee6a59519e319a2436ae0acc61f1f7f9'), 'magic': (25, 'fdf193751733a8c34dd6d592bd1127680bf6d820d3dd037a88e7b01fb38f246e'), 'enums': (14, '61087efd5ded951d7c33c64e3f2aca42da14b2ed57bfbbbbcf5b423b6a356f6d'), 'records': (54, 'a98d1a75f7a4531cbe38cc9baf6c1a656b174d1113f39d853dc41356d9f26461'), 'namespaces': (17, '94e7812e8ff0469646a83623dd46e3a6626f2be6268b8774ee88d575139c4f0d')}
+        for name, (count, digest) in prior.items():
+            value = self.data[name]
+            prefix = value[:count] if isinstance(value,list) else dict(list(value.items())[:count])
+            self.assertEqual(hashlib.sha256(json.dumps(prefix, sort_keys=True).encode()).hexdigest(), digest, name)
+        self.assertEqual([(f['name'], f['opcode']) for f in self.data['functions'][56:59]], [('snapshot_len',56),('read_snapshot',57),('control',58)])
+        self.assertEqual(self.data['constants']['HUD_MAX_WIDGETS'], 1024)
+        self.assertEqual(self.data['constants']['HUD_MAX_EVENT_BYTES'], 65536)
+
     def test_root_motion_is_additive_and_composes_bounded_complete_pose(self):
         import hashlib
         prior = {'functions': (53, 'd27012c3cbb5d955fc95e016a6b81aea45aa2c2723370cf3d26add863b642844'), 'constants': (80, '7bf1f9c9967a0a4b08d2f0c9f4cefa77f54598f08a6bd3a7231d739bb8d21eec'), 'magic': (24, '30df319d481b60150961bac7dc576a196ab8c0a9dd7309c26b99865b89a028ae'), 'enums': (12, 'b4b4ead339d515212605318268308bcf4628cc3b172efabf02997638b20d1629'), 'records': (51, '170b465881f84eee24becf739d8a69162f41bbc7bb46b276ae51dd6cb41e0715'), 'namespaces': (16, '7c6db52d1444153c7b74e3de9ee4d9b13297611693068ab46d6afb8a76f02292')}

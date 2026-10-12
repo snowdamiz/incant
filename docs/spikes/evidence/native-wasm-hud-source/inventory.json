@@ -1,0 +1,33 @@
+{
+  "base": "e581a330dc9f050cd8176eda49545fe6b15cb81e",
+  "sources": {
+    "Cargo.lock": "a68d4557c33f40769bfd918a5e3a0134651b5b39d87f0553ad2617aade63b22d",
+    "crates/incant_script/src/program.rs": "7d808a091cd615020f07c50ecfe3e333f258c1b72fb316b3b487f97fcdbc3fda",
+    "crates/incant_wasm_abi/src/hud.rs": "d3180fb882926c0a3a8db4dc10900de9c8005123545d7141b493f86357823c71",
+    "crates/incant_wasm_abi/src/lib.rs": "28261f9d4a4d1fb65deee76ce37699eecb7bb4ec4eb508c1c80f1749cf888369",
+    "crates/incant_wasm_dev/Cargo.toml": "768430ed049e60d86ccf2c95a8a7f2743bf7e3c0e1226bcd59c04465f5bf9de3",
+    "crates/incant_wasm_dev/src/generated.rs": "0fdae41fbc6d7289c33af270deb82cb05a155d9b56f62b0d308ef17b6f9de4e4",
+    "crates/incant_wasm_dev/tests/hud_parity.rs": "35422ba1c598bacccdf1f1940c92ef5d73b2e0c90101987c61de355f035643a5",
+    "crates/incant_wasm_dev/tests/support/hud.rs": "fd6a2600bd4c53e398c0cde5f228f3ba48cf18dd9166fedd1f73fae030265b3a",
+    "crates/incant_wasm_runtime/c/generated.h": "763c35c26ab1062d69c50ea50061cf8dfefc536f36e78c71ee205e8ed0ee3e0d",
+    "crates/incant_wasm_runtime/c/generated.inc": "b080d50b85707d728bcd67e06d1bdfda83664ed27ff8c22bace51fbcb39b1858",
+    "crates/incant_wasm_runtime/fixtures/hud.wat": "62f220a12c8b80fffa1ec2be910d864474b2286ce45858c5b94efe11c5116af8",
+    "crates/incant_wasm_runtime/src/capability.rs": "2982469a8e67341a418d3ee15c4d7a21da31e7f4fbd6cb14dffe29cb5e8a84f4",
+    "crates/incant_wasm_runtime/src/generated.rs": "b8ef0580cff1c72cf64be93a502ed6eca642a89f53bb928aa8524ab862b6999d",
+    "crates/incant_wasm_runtime/src/hud.rs": "f07aef3b6e6f7543b20a838b5fca16dac35d3c999752617fc52b60a28cf7dd92",
+    "crates/incant_wasm_runtime/src/input_tags.rs": "30fa63732871f3fecf3b8a66a3681c24b1cf51d5c3df62a67f9106c0e7473574",
+    "crates/incant_wasm_runtime/src/lib.rs": "59f1b7a9ba8429f6615c9a5ce6c7e21796061a1735c7c66fe75309b85097d4c3",
+    "crates/incant_wasm_runtime/tests/hud.rs": "e60d4711a44790ef3a27f432b0342fe6c7b6617d8bcfb264948dab9f8e766f0f",
+    "sdk/abi/native-v1.json": "215f64819445d3fb969c15237f18bdabf85213fc0ceabd3f563b31a6d05d3926",
+    "sdk/rust/samples/hud.rs": "f1840b1e737189290e91375d8952c084dcd4134d9abc2ed02cec1d4231c6ea8c",
+    "sdk/rust/src/hud.rs": "908486a75c13368e76aa9aabbf85f4e07b16213e907c92e05800290aeaa7181c",
+    "sdk/rust/src/lib.rs": "4bd81fd93b604f21c783228476292f02987d3cb3e0e1675854f2af4f0edc52e7",
+    "sdk/rust/src/raw.rs": "515d0c2ef5636c2a792cfba6224f129e02bc2ebea3ace79b249c347b69119afb",
+    "sdk/rust/src/tick.rs": "5838444dede84d86a4e4ceda472328736c8b067b6171fc7df97b79b65068e178",
+    "sdk/rust/src/tick/hud.rs": "970bab9570712c8c2a263ab90b27bc82c24c99f27012655a77542317297953db",
+    "sdk/rust/tests/hud.rs": "cdf33836587c7f563d8fbac925dd2ed503a194c707c3759639860326a5f478a6",
+    "tools/generate_wasm_sdk.py": "0b922fca3d12c9516ed556cafc8c1e173d14a4cc54da70649f95672f203e2781",
+    "tools/tests/test_wasm_sdk.py": "ca9890e0f26fc335126ca32016a6a7640d38b91f82ed3ba7f2529d01604b07af",
+    "tools/wasm_abi.py": "3b4d5c7ad8fe5e6d12152a021fd815ce4594efcfefcbf148a78b54937775b555"
+  }
+}

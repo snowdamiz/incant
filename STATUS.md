@@ -1532,3 +1532,5 @@ checks; the three fresh bulk processes remain a separate development-only smoke.
 Retained CPU pose blending integration against actual main120 preserves all five
 reviewed source hashes and passes 166 CPU tests plus Clippy/graph checks; 71 GPU
 tests remain ignored. [Receipt](docs/spikes/evidence/runtime-pose-blending-main120.json).
+
+- Native Rust/Wasm HUD source checkpoint: additive ops56–58 preserve ops0–55/input-v1, expose routed outcomes and atomically control UI/world text through both actual module hosts. Focused parser/native/composed/generated checks pass; broad validation and ordinary source-deleted package proof remain pending. Module checkpoints, headless native-play UI viewport, native/GPU/device gates remain open. See `docs/spikes/native-wasm-hud.md`.
