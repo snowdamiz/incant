@@ -18,6 +18,7 @@ fn node(source: Arc<RuntimeAsset>, id: &str, seconds: f64) -> SceneNode {
         mesh: Some(MeshInput {
             source,
             cast_shadows: true,
+            animation_blend: None,
             animation: Some(incant_types::AnimationSample {
                 clip: Some(0),
                 seconds,
@@ -557,3 +558,6 @@ fn single_sided_reflected_skin_and_shadow_match_static_transform_oracle() {
         );
     }
 }
+
+#[path = "animation_crossfade_tests.rs"]
+mod crossfade;

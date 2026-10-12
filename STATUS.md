@@ -22,9 +22,12 @@ Native two-input crossfade clocks and controls now retain independent outgoing
 playback, pause both inputs, finish at explicit endpoints and persist active
 transitions in world-save v5/session checkpoints. Older v4 animation saves keep
 their encoding. The local core passed 319 runtime/script tests and scoped Clippy;
-independent review accepted the exact sources. Canonical render binding and
-TypeScript/Wasm crossfade APIs remain active follow-ups; this is not full blend
-trees, state machines, IK or root motion. See
+independent review accepted the exact sources. Canonical render bindings now carry
+both samples through rollback and preallocated CPU blending; 350 distinct affected
+CPU tests, Clippy and the wasm32 adapter check pass locally. Crossfade GPU/Claude
+acceptance and TypeScript/Wasm controls remain active follow-ups; this is not full
+blend trees, state machines, IK or root motion. See
+[the consumer evidence](docs/spikes/native-animation-crossfade-consumer.md) and
 [the crossfade evidence](docs/spikes/native-animation-crossfades.md).
 
 The project is still building the Phase 1 core engine. Native simulation,
