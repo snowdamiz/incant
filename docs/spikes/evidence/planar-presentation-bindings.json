@@ -1,0 +1,2497 @@
+{
+  "format": "incant-planar-presentation-bindings-evidence",
+  "version": 1,
+  "head": "f28b5441e3656f1ae7ec26bae42a9691f6c8f587",
+  "proof_root": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001",
+  "source_freeze": {
+    "head": "4fc128f9aba4d5992b9dfd5476d998db7a9a4b7a",
+    "root": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+    "files": {
+      "samples/planar/gameplay.ts": "7dd5d9965fe25f9f373420b22734755cd79dc3a84c689288f871b9fa2fa81d90",
+      "samples/planar/verify.py": "3651445947a44419fd1934519f4374484f071e55610c1ccf2c874ce0795796f4",
+      "samples/planar/export_verify.py": "f31cf4669fb7acef283b9e02ba0505ef492a8abb0c0d32488fd555291b86ed2a",
+      "samples/planar/presentation.py": "5b4e15cb52a5e403e89498802657d5f6551f771b08fb828b955d3328e0da0f71",
+      "samples/planar/README.md": "c6503a9c3267b6545c7e0a3c8c7e19b43216820db90971b904fe2c88a3a4990d"
+    },
+    "changes_since_source_001": [
+      "presentation.py observer excludes undefined non-text widget content",
+      "export_verify.py asserts canonical shaped sources, nonzero glyph count, viewport and focus after actual shipping run"
+    ],
+    "production_gameplay_unchanged": true
+  },
+  "engine_input_count": 1759,
+  "engine_freeze_retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-source-freeze-002.json.gz",
+  "binaries": {
+    "default": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/package/player/incant_game_player",
+      "sha256": "281ee68cc8b22ce228f0461e5b47c8a33e8817af9d465cddab9f9b2ada852cfe",
+      "bytes": 9500112
+    },
+    "presentation": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/package/player/incant_game_player",
+      "sha256": "090e8db475f9d1fb78a0cfead075fbde56529cd8cb69a26ba38f2f4628247eed",
+      "bytes": 9500112
+    },
+    "development": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/incant_headless",
+      "sha256": "72e8e2b9306cf4777c4cc41f90b341a2431d181939a6ef5184d0c5a96060966d",
+      "bytes": 60197952
+    }
+  },
+  "checks": [
+    {
+      "name": "shipping-default-002",
+      "argv": [
+        "python3",
+        "-B",
+        "samples/planar/export_verify.py",
+        "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default",
+        "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "exit": 0,
+      "seconds": 445.00549817085266,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002.log",
+      "sha256": "6b02079ac40d7376099ab460e979e868fd364cf0947e15102b15af043b9f6dc4"
+    },
+    {
+      "name": "shipping-presentation-002",
+      "argv": [
+        "python3",
+        "-B",
+        "samples/planar/export_verify.py",
+        "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002",
+        "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "exit": 0,
+      "seconds": 400.3939571380615,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002.log",
+      "sha256": "85984fd09366f3af8730581998b2c79639281ba8275bccc1ed429b457d9a7eef"
+    }
+  ],
+  "results": {
+    "default": {
+      "win": {
+        "ticks": 300,
+        "frames": 240000,
+        "pcm_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+        "report_sha256": "58c024bc979685f533ad41514fbce9723cf2c775717f00dd826ea89e8b06754c"
+      },
+      "gamepad": {
+        "ticks": 300,
+        "frames": 240000,
+        "pcm_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+        "report_sha256": "58c024bc979685f533ad41514fbce9723cf2c775717f00dd826ea89e8b06754c"
+      },
+      "lose": {
+        "ticks": 300,
+        "frames": 240000,
+        "pcm_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+        "report_sha256": "2e26c0bfe150ade648773ab67fd0fb87fb96c1564027e256efc690cacf5a4b2a"
+      },
+      "wall": {
+        "ticks": 300,
+        "frames": 240000,
+        "pcm_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+        "report_sha256": "6360b19a8842c152cc7506286882d0d4589aa218a1958099aaef1fff5602c6ed"
+      },
+      "locked-exit": {
+        "ticks": 300,
+        "frames": 240000,
+        "pcm_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+        "report_sha256": "987927a2f5cc59950b5ab91fc43680ef1498faa33264fd2a4c942773caadc89f"
+      },
+      "diagonal": {
+        "ticks": 60,
+        "frames": 48000,
+        "pcm_sha256": "fec9afb531a8e036eba1d81651896e1b2c1f78b0234dbadc8e7549563f09407b",
+        "report_sha256": "1bb0ba4e273178b85549011c0a21f5367195fe1958ea534749fd66346da5141f"
+      },
+      "repeat-win": {
+        "ticks": 300,
+        "frames": 240000,
+        "pcm_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+        "report_sha256": "58c024bc979685f533ad41514fbce9723cf2c775717f00dd826ea89e8b06754c"
+      }
+    },
+    "presentation": {
+      "win": {
+        "ticks": 300,
+        "frames": 240000,
+        "pcm_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+        "report_sha256": "f5d5bc2ab772ad2ae487a50be471c795f7ca54cfe391a3bc289d6f654bcbea26",
+        "ui": {
+          "widgets": 7,
+          "glyphs": 34,
+          "viewport": [
+            640.0,
+            480.0
+          ],
+          "focus": null,
+          "sources": {
+            "00000000000000000000000101": "Retour avec 2 perles",
+            "00000000000000000000000102": "",
+            "00000000000000000000000103": "Pending",
+            "00000000000000000000000104": "Pending"
+          }
+        }
+      },
+      "gamepad": {
+        "ticks": 300,
+        "frames": 240000,
+        "pcm_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+        "report_sha256": "f5d5bc2ab772ad2ae487a50be471c795f7ca54cfe391a3bc289d6f654bcbea26",
+        "ui": {
+          "widgets": 7,
+          "glyphs": 34,
+          "viewport": [
+            640.0,
+            480.0
+          ],
+          "focus": null,
+          "sources": {
+            "00000000000000000000000101": "Retour avec 2 perles",
+            "00000000000000000000000102": "",
+            "00000000000000000000000103": "Pending",
+            "00000000000000000000000104": "Pending"
+          }
+        }
+      },
+      "lose": {
+        "ticks": 300,
+        "frames": 240000,
+        "pcm_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+        "report_sha256": "e56e05f0007fc4ec46f07424d7723e6149c89acc2aa5554c3e996c1f606eef0a",
+        "ui": {
+          "widgets": 7,
+          "glyphs": 33,
+          "viewport": [
+            640.0,
+            480.0
+          ],
+          "focus": null,
+          "sources": {
+            "00000000000000000000000101": "Piqu\u00e9 par un oursin",
+            "00000000000000000000000102": "",
+            "00000000000000000000000103": "Pending",
+            "00000000000000000000000104": "Pending"
+          }
+        }
+      },
+      "wall": {
+        "ticks": 300,
+        "frames": 240000,
+        "pcm_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+        "report_sha256": "55443cf8d4e013936639b4117dfd56074b2ae6bd4df40472ff1cb4a8816f1aec",
+        "ui": {
+          "widgets": 7,
+          "glyphs": 28,
+          "viewport": [
+            640.0,
+            480.0
+          ],
+          "focus": null,
+          "sources": {
+            "00000000000000000000000101": "Perles 1 sur 2",
+            "00000000000000000000000102": "",
+            "00000000000000000000000103": "Pending",
+            "00000000000000000000000104": "Pending"
+          }
+        }
+      },
+      "locked-exit": {
+        "ticks": 300,
+        "frames": 240000,
+        "pcm_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+        "report_sha256": "7e1c277631aaa3c9f1074a45e58ea04224601ee55b568ef420cbd8d86637260a",
+        "ui": {
+          "widgets": 7,
+          "glyphs": 28,
+          "viewport": [
+            640.0,
+            480.0
+          ],
+          "focus": null,
+          "sources": {
+            "00000000000000000000000101": "Perles 1 sur 2",
+            "00000000000000000000000102": "",
+            "00000000000000000000000103": "Pending",
+            "00000000000000000000000104": "Pending"
+          }
+        }
+      },
+      "diagonal": {
+        "ticks": 60,
+        "frames": 48000,
+        "pcm_sha256": "fec9afb531a8e036eba1d81651896e1b2c1f78b0234dbadc8e7549563f09407b",
+        "report_sha256": "d6b3d999a40c8783afe6d8364606d2e7dd3d4ecd0214416f28c0c2bf96b3217b",
+        "ui": {
+          "widgets": 7,
+          "glyphs": 28,
+          "viewport": [
+            640.0,
+            480.0
+          ],
+          "focus": null,
+          "sources": {
+            "00000000000000000000000101": "Perles 0 sur 2",
+            "00000000000000000000000102": "",
+            "00000000000000000000000103": "Pending",
+            "00000000000000000000000104": "Pending"
+          }
+        }
+      },
+      "repeat-win": {
+        "ticks": 300,
+        "frames": 240000,
+        "pcm_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+        "report_sha256": "f5d5bc2ab772ad2ae487a50be471c795f7ca54cfe391a3bc289d6f654bcbea26",
+        "ui": {
+          "widgets": 7,
+          "glyphs": 34,
+          "viewport": [
+            640.0,
+            480.0
+          ],
+          "focus": null,
+          "sources": {
+            "00000000000000000000000101": "Retour avec 2 perles",
+            "00000000000000000000000102": "",
+            "00000000000000000000000103": "Pending",
+            "00000000000000000000000104": "Pending"
+          }
+        }
+      }
+    }
+  },
+  "package_files": {
+    "default": {
+      "incant_game_player": "281ee68cc8b22ce228f0461e5b47c8a33e8817af9d465cddab9f9b2ada852cfe",
+      "data/empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+      "data/clips.bin": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+      "data/package.json": "712fcd46268320174029d78b542f1699124ab9eeeb39f5f0a7e7f38537603f54",
+      "data/world.scene": "6cbe4c667213c4ee750403f681100e5460cd99bb58c11779fd8b0c75ec0a0110",
+      "data/input-actions.json": "a5b42df51661fd383f72af600c590c78cd2a5c6fab62bd219f3f1305a1254e0c",
+      "data/textures/de1efc9cac8d47956233a59b453545d7a915a1b4603d03d3d71530821637dd3e.json": "f8be1a88e557457b3be4d083f4b7d0a2b336df2fc71483a5f6f519bf62aa3cde",
+      "data/textures/cf7db76b5fe2aa853a59139d8f4d166947eaa3894b5b1e616e3e9ffdff74f19f.ktx2": "cf7db76b5fe2aa853a59139d8f4d166947eaa3894b5b1e616e3e9ffdff74f19f"
+    },
+    "presentation": {
+      "incant_game_player": "090e8db475f9d1fb78a0cfead075fbde56529cd8cb69a26ba38f2f4628247eed",
+      "data/empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+      "data/clips.bin": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+      "data/package.json": "ba6eb48a7bdfd631be14fa9d9b6b2de6e8533017a1177428a3c2b18c900cb679",
+      "data/world.scene": "3550f0f7a64510299136e653b462678707481705472d1cd334d69d800364e9a7",
+      "data/input-actions.json": "a5b42df51661fd383f72af600c590c78cd2a5c6fab62bd219f3f1305a1254e0c",
+      "data/textures/de1efc9cac8d47956233a59b453545d7a915a1b4603d03d3d71530821637dd3e.json": "f8be1a88e557457b3be4d083f4b7d0a2b336df2fc71483a5f6f519bf62aa3cde",
+      "data/textures/cf7db76b5fe2aa853a59139d8f4d166947eaa3894b5b1e616e3e9ffdff74f19f.ktx2": "cf7db76b5fe2aa853a59139d8f4d166947eaa3894b5b1e616e3e9ffdff74f19f",
+      "data/fonts/27434b14189e6b823382d06b768a3544557f29f875e3b483452bac0eb87edc9a.json": "a08043e6d0266c90d90356aafb8c5b4b775f34abb9dbe96ae2e338e438e3f43c",
+      "data/fonts/2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9.ifont": "92960e6b23eff12e1bf13361b2b94b490d723f8d93e6945ba34b9f9b3acd2081"
+    }
+  },
+  "native_summary": {
+    "native": {
+      "default": {
+        "runs": 7,
+        "processes": 9,
+        "ticks": 1860,
+        "frames": 1488000,
+        "outcomes": {
+          "win": [
+            "planar.won tick=209 pickups=2"
+          ],
+          "gamepad": [
+            "planar.won tick=209 pickups=2"
+          ],
+          "lose": [
+            "planar.lost tick=89 pickups=0"
+          ],
+          "wall": [],
+          "locked-exit": [],
+          "diagonal": [],
+          "repeat-win": [
+            "planar.won tick=209 pickups=2"
+          ]
+        }
+      },
+      "presentation-002": {
+        "runs": 7,
+        "processes": 10,
+        "ticks": 1860,
+        "frames": 1488000,
+        "outcomes": {
+          "win": [
+            "planar.won tick=209 pickups=2"
+          ],
+          "gamepad": [
+            "planar.won tick=209 pickups=2"
+          ],
+          "lose": [
+            "planar.lost tick=89 pickups=0"
+          ],
+          "wall": [],
+          "locked-exit": [],
+          "diagonal": [],
+          "repeat-win": [
+            "planar.won tick=209 pickups=2"
+          ]
+        }
+      }
+    },
+    "refusals": [
+      {
+        "name": "duplicate-frame-role",
+        "diagnostic": "Planar Sample flipbook roles must be distinct",
+        "exit": 1
+      },
+      {
+        "name": "duplicate-ui-role",
+        "diagnostic": "Planar Sample UI roles must be distinct",
+        "exit": 1
+      },
+      {
+        "name": "invalid-identity",
+        "diagnostic": "Planar Sample: invalid hud.table identity",
+        "exit": 1
+      },
+      {
+        "name": "unknown-role",
+        "diagnostic": "Planar Sample: unknown flipbooks binding",
+        "exit": 1
+      }
+    ]
+  },
+  "oracle_mutations": {
+    "default_to_presentation_exact_gameplay": [
+      "win",
+      "gamepad",
+      "lose",
+      "wall",
+      "locked-exit",
+      "diagonal",
+      "repeat-win"
+    ],
+    "actual_report_mutations_rejected": [
+      "frame",
+      "text",
+      "missing-change",
+      "parent"
+    ]
+  },
+  "artifacts": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/build.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/build.json.gz",
+      "raw_sha256": "f2bb14f58fe3dfab41e57d722557bc8cb4965a69294a2ec82085ed83a76c8416",
+      "raw_bytes": 273,
+      "sha256": "665680501603379a8e78fe307d297299d756c464dab092b3dbad961de53114b3",
+      "bytes": 186,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/build.log",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/build.log.gz",
+      "raw_sha256": "55b997acd6aef24890bcf89fcfee5a1bb18d104b92ec6b15830a3b9ef2a4272b",
+      "raw_bytes": 3174,
+      "sha256": "b47abb04482da0b4b1dd6dfd4a07e162594463d07143ab2bcb607d43fc745391",
+      "bytes": 390,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/checks.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/checks.json.gz",
+      "raw_sha256": "16ece84697dd014b81b73820f1962a4eaf9b10dfe151d7b7f386e95157942a46",
+      "raw_bytes": 1139,
+      "sha256": "980c444e06926778fbc4e22300913733572842d66c0a79ff9c5528ae70c5ec9e",
+      "bytes": 409,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/conventions-check.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/conventions-check.json.gz",
+      "raw_sha256": "94d123280e7731569e3fac3a9ad3b24bdb141324ca0fb0326d957f7ee946ceba",
+      "raw_bytes": 193,
+      "sha256": "798617e8f1fb9b9d9f0649f81013175ece47f83f55f6966089d2e0de3c64cc2e",
+      "bytes": 168,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/conventions-check.log",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/conventions-check.log.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default/authoring/gameplay.ts",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default/authoring/gameplay.ts.gz",
+      "raw_sha256": "7dd5d9965fe25f9f373420b22734755cd79dc3a84c689288f871b9fa2fa81d90",
+      "raw_bytes": 10699,
+      "sha256": "85cabd536060d6a7bdd88283ed7db2883daff31cfe3133c6f5491e6985a0883f",
+      "bytes": 3477,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default/authoring/planar.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default/authoring/planar.json.gz",
+      "raw_sha256": "d7a38143960c1e94793951b3353ea6f34e06bd395174c84aaf12642086272fe7",
+      "raw_bytes": 18564,
+      "sha256": "d1f079d2b010bffe7d0bcc9f80233a4bd22fdc762a5d1c098efcfc1d47a04cc8",
+      "bytes": 1495,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default/authoring-calls.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default/authoring-calls.json.gz",
+      "raw_sha256": "843d0938e18d6cafc870746d56291b73a5c1b2b071644de9810dc38d50b43170",
+      "raw_bytes": 170086,
+      "sha256": "1709580a186b192b283c62f75e2e542c6a2491561d1717471c8ad82459fa04bd",
+      "bytes": 7451,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default/diagonal-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default/diagonal-input.json.gz",
+      "raw_sha256": "dab40ff34829f2274d142e6a8b59d2077ebfc3f46e5ca19276c44c101924e564",
+      "raw_bytes": 995,
+      "sha256": "9171a3a78d164df4f75fb9931f6d042fa76e4e363dc799fadb3e37c1c5a0e924",
+      "bytes": 208,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default/diagonal-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default/diagonal-observe.json.gz",
+      "raw_sha256": "c8c058c55dc303980b1ba46dad77d9946b44d129fec726ac07e241fc1dbbfce7",
+      "raw_bytes": 819,
+      "sha256": "cf9173637166c655ba9d11c9493b35f1d7f9d3a8d796ac925284d62c4e6bd40a",
+      "bytes": 248,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default/diagonal.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default/diagonal.json.gz",
+      "raw_sha256": "01c5ffb05775404869a9de303915cb89225c8d4c97044c67d268e14d98b1e647",
+      "raw_bytes": 2503,
+      "sha256": "42a0c2694b9c6d59b607b10c10a671d213c3727d2a13b486ac716f43d4c1806a",
+      "bytes": 692,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default/gamepad-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default/gamepad-input.json.gz",
+      "raw_sha256": "d40f93f9a92b9164a460f61a1ba9816187d761ede7bb526c9710b5c38023ea82",
+      "raw_bytes": 1407,
+      "sha256": "7522a7dff829ea672ce3ac59b29fadd49e747fe872533ca4c8ba73ec4f66ffb8",
+      "bytes": 236,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default/gamepad-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default/gamepad-observe.json.gz",
+      "raw_sha256": "2085c417c78dd54ed09bf6344b6ed35d38dd5df9a5f89bd91b22e39cfd26b83f",
+      "raw_bytes": 824,
+      "sha256": "73256dc626444af60f328261080f3f5e53ed1f9675563e6406efff6080d2530c",
+      "bytes": 247,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default/gamepad.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default/gamepad.json.gz",
+      "raw_sha256": "44f38eb411ad262c6b850bcf4d15b2d9c9f99bb9be73da6a5f8b8e6d7f349f60",
+      "raw_bytes": 2890,
+      "sha256": "395a5a2f25c9b13429d9257d4d8adc5dba3b2b6aeb30c5bdc40bfb10e7d41d8f",
+      "bytes": 777,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default/locked-exit-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default/locked-exit-input.json.gz",
+      "raw_sha256": "15c29da8390f459f3a5afa5918a8499b6bcaf6937b1b7c659ab9e0b125f33b33",
+      "raw_bytes": 1437,
+      "sha256": "cd9ee8ccdbd23a217f06953b911154c49023d9de7464ce251cd1fdcd803af3ed",
+      "bytes": 220,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default/locked-exit-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default/locked-exit-observe.json.gz",
+      "raw_sha256": "5e3742a9c37b7fe3556e4c7e1c8532642a256a987b628b38407aef602b14e46c",
+      "raw_bytes": 543,
+      "sha256": "583ac662c4c885b477add8715d6f00871f4afbd3778c44e89d237529a3fff3b5",
+      "bytes": 200,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default/locked-exit.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default/locked-exit.json.gz",
+      "raw_sha256": "df9827540ebad3856e7281fbd0fea6d59f5182d5f8ad2e4677ee1fca7523ad20",
+      "raw_bytes": 2227,
+      "sha256": "9f731a3f692b816b76e55871216d668a22646c9696dd515ee02b45e329631a26",
+      "bytes": 704,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default/lose-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default/lose-input.json.gz",
+      "raw_sha256": "2cbd99ee77f98d9ce4f01501f7decabf04baae615a94f906468711471259e2cd",
+      "raw_bytes": 557,
+      "sha256": "5ea8729f1d874999815ec6f3ff5d91fa0ac03544d733f446baa3f5b1075e23a1",
+      "bytes": 193,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default/lose-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default/lose-observe.json.gz",
+      "raw_sha256": "8aee4dd1c2a2d7318d5051e0e62f3423896c541b7ab31291230abca0168a6793",
+      "raw_bytes": 822,
+      "sha256": "3c4d2292270957561f7a3a2c6ef2303d6d71ce9fc329c1d7203f1bb259732d4d",
+      "bytes": 248,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default/lose.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default/lose.json.gz",
+      "raw_sha256": "8d14001b8bc840bd923eca4f4e8609a362818a4014a9ef04e822ed468e68917a",
+      "raw_bytes": 2598,
+      "sha256": "4527185ab86dcaf310d070c72a66e17d31adeddd2177a7a92b7447a5a07290d0",
+      "bytes": 743,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default/process-00.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default/process-00.json.gz",
+      "raw_sha256": "ab3b6b89925499a68bba7b94f2066cfe528a9e4a90d80e58a8bf9cc462473b65",
+      "raw_bytes": 433,
+      "sha256": "4615409e043f751b979ef96585e3578f3ec74c677f90989f2b519daf28099852",
+      "bytes": 265,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default/process-01.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default/process-01.json.gz",
+      "raw_sha256": "797ea7cf775b3388243faffaab94bc95f6281e6b8b85d11ceeef9e3d1034101b",
+      "raw_bytes": 1575,
+      "sha256": "5decaf9734178b3c7e7d8b47288ac7ac4b512157f0ec04ee035b5b903462cd5a",
+      "bytes": 672,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default/process-02.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default/process-02.json.gz",
+      "raw_sha256": "bcf65bf1ee3380b9195268c7828a3eb0a0c8ded0c1fba98c4d044f5b3c71262b",
+      "raw_bytes": 3821,
+      "sha256": "84ca98af90e76ad87dc3f48495718578bf81b99f89cf594f1df6e8f1efb4539a",
+      "bytes": 979,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default/process-03.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default/process-03.json.gz",
+      "raw_sha256": "cb1d985c1c2ebd78e910e9332f80830626940b9d464bbdcf0ea748a6205d91a8",
+      "raw_bytes": 3829,
+      "sha256": "087003a4811d8751f6a2cbb735feded185bf7a21b20d4c38ed0935ebedec9331",
+      "bytes": 982,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default/process-04.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default/process-04.json.gz",
+      "raw_sha256": "65014d7c532b44ce666aa12da84219850a61e717443da62d984077b4ad7877c7",
+      "raw_bytes": 3501,
+      "sha256": "d9d06affd51d03cd078014e95de891951304e6c3859fb9ef7c34310472c209a4",
+      "bytes": 942,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default/process-05.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default/process-05.json.gz",
+      "raw_sha256": "3eb490fede4c7aa49080d903c3cc1f5c92c8b69c103351261d01d13323785de7",
+      "raw_bytes": 3052,
+      "sha256": "bfb4885280df69a369dfc1dc815034e1b83e78192c1e439fc24df6ededa82533",
+      "bytes": 892,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default/process-06.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default/process-06.json.gz",
+      "raw_sha256": "a48ef4fb13e60c28be08e797a900ef3f4c15cadf77e1287aecedc5dd28ead0b5",
+      "raw_bytes": 3095,
+      "sha256": "a5536f3c5c4c5ab4371f42a2ba759008f677e4ff2f4e903f5f5da0a750d76d0d",
+      "bytes": 903,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default/process-07.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default/process-07.json.gz",
+      "raw_sha256": "d5e06dade699607649d388342f962684e278ab830eaaeb24f5573705f6e83ac3",
+      "raw_bytes": 3397,
+      "sha256": "fd2a55bae8ce35c376162946cff02a08511d2edd928b0a32e97c616bbfe10c51",
+      "bytes": 896,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default/process-08.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default/process-08.json.gz",
+      "raw_sha256": "139a16925e8143ce363bb7957a9a169c8148ff011859f0a216957f8f204e01db",
+      "raw_bytes": 3835,
+      "sha256": "a32a1b016388e1e1685e293a0cc33e19cccff380009fb5c8978c3b5140fe99b3",
+      "bytes": 984,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default/repeat-win-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default/repeat-win-input.json.gz",
+      "raw_sha256": "12507f1135e300f8ddb26a9c810cd5d67e18775bc1a88f4d6e2beb596d1491db",
+      "raw_bytes": 1877,
+      "sha256": "e420b5e1f1e5b9ed42083c3dde71964471c6f701f5a52c23d8830cdf2c2cc6e9",
+      "bytes": 228,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default/repeat-win-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default/repeat-win-observe.json.gz",
+      "raw_sha256": "2085c417c78dd54ed09bf6344b6ed35d38dd5df9a5f89bd91b22e39cfd26b83f",
+      "raw_bytes": 824,
+      "sha256": "73256dc626444af60f328261080f3f5e53ed1f9675563e6406efff6080d2530c",
+      "bytes": 247,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default/repeat-win.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default/repeat-win.json.gz",
+      "raw_sha256": "44f38eb411ad262c6b850bcf4d15b2d9c9f99bb9be73da6a5f8b8e6d7f349f60",
+      "raw_bytes": 2890,
+      "sha256": "395a5a2f25c9b13429d9257d4d8adc5dba3b2b6aeb30c5bdc40bfb10e7d41d8f",
+      "bytes": 777,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default/result.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default/result.json.gz",
+      "raw_sha256": "12df95c96c007a6610acbd5c7c1e3e66e03b84df109d464e62c1e5b9114739d5",
+      "raw_bytes": 700,
+      "sha256": "c5abb211d8909efc5ce4f9d41cdf7b15856b159ceffe731f14d1274a2ca88bbd",
+      "bytes": 389,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default/wall-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default/wall-input.json.gz",
+      "raw_sha256": "29e406638309e4f87c434439d2e838df8b4a67a2e4d234c6c926f1616d3e2bc3",
+      "raw_bytes": 557,
+      "sha256": "e41b8660a2afa15cafccbe1a9e0eddc7ad684d2d499bb655844fa190700b05b5",
+      "bytes": 192,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default/wall-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default/wall-observe.json.gz",
+      "raw_sha256": "731818f451ef829d1ef9f1eb7dc388150eef9a6d17913d17ccd94b4f4a90f565",
+      "raw_bytes": 543,
+      "sha256": "e38f3d83ced605ecc1cca64f1cbe4c78bd4dff56a11ee8c417ba9dc22950dca3",
+      "bytes": 200,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default/wall.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default/wall.json.gz",
+      "raw_sha256": "89793198ca27ff61e701f156c15d3148bc7045bc2b820e1b29adf32c8bd242e6",
+      "raw_bytes": 2198,
+      "sha256": "7b27f836f3f022a0288adbe2b3e92e6453d70c627a3d918e4cc890692438d06c",
+      "bytes": 696,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default/win-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default/win-input.json.gz",
+      "raw_sha256": "12507f1135e300f8ddb26a9c810cd5d67e18775bc1a88f4d6e2beb596d1491db",
+      "raw_bytes": 1877,
+      "sha256": "e420b5e1f1e5b9ed42083c3dde71964471c6f701f5a52c23d8830cdf2c2cc6e9",
+      "bytes": 228,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default/win-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default/win-observe.json.gz",
+      "raw_sha256": "2085c417c78dd54ed09bf6344b6ed35d38dd5df9a5f89bd91b22e39cfd26b83f",
+      "raw_bytes": 824,
+      "sha256": "73256dc626444af60f328261080f3f5e53ed1f9675563e6406efff6080d2530c",
+      "bytes": 247,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default/win.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default/win.json.gz",
+      "raw_sha256": "44f38eb411ad262c6b850bcf4d15b2d9c9f99bb9be73da6a5f8b8e6d7f349f60",
+      "raw_bytes": 2890,
+      "sha256": "395a5a2f25c9b13429d9257d4d8adc5dba3b2b6aeb30c5bdc40bfb10e7d41d8f",
+      "bytes": 777,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default-shipping-self-audit.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default-shipping-self-audit.json.gz",
+      "raw_sha256": "c289de5eccc74fda19018748fff783cf0d57d03fcfee51a69626a49fd9cd6ffe",
+      "raw_bytes": 2099,
+      "sha256": "7e6641bbaf563e8bdf94d31beb0e0222381c6c6710f6ad7bf5aad510547ced9a",
+      "bytes": 585,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/default.log",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/default.log.gz",
+      "raw_sha256": "a09aeb6d139dfca1db334aa01ca4c78678763968516ff8de9f4c008acd49d5cd",
+      "raw_bytes": 125,
+      "sha256": "79cb613a1ba77aee0f2f426b4fe49b38e5ae4c85c1b090b7575b728708c74a0f",
+      "bytes": 124,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/diff-final.log",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/diff-final.log.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/final-static-checks.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/final-static-checks.json.gz",
+      "raw_sha256": "f2b5f8352d842e98090b149c3c1ff2f0ac18b29d409567fb72150ddadf4af120",
+      "raw_bytes": 460,
+      "sha256": "135aedf9bcc460f7ddf227c2b79f7b2dc3a74ef2fedeb8ae6922955a3ebf2024",
+      "bytes": 227,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/interruption-002.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/interruption-002.json.gz",
+      "raw_sha256": "53179a2332d0446a0cfedbf02693432ef81ba73fa050b46fc507fe1c28bda54c",
+      "raw_bytes": 415,
+      "sha256": "4e2af99e057d0e3b563f6c39f412a1b03768f8e49e50375a783fdd1cbdd979fb",
+      "bytes": 313,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/main170-ancestry-readonly.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/main170-ancestry-readonly.json.gz",
+      "raw_sha256": "ff24a67638493f0cc07ad62e513aaa1fc9072c1e3354e7c34e5b16a3503d822e",
+      "raw_bytes": 826,
+      "sha256": "681d38a6138b355afbdb23e6295dae2d75059be88bcbd93ba4194f72b1e57fdb",
+      "bytes": 362,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/native-export-player-units-root-20261012.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/native-export-player-units-root-20261012.json.gz",
+      "raw_sha256": "ba901427c3410b82d49c0d9f215c73d9c414f8ff09d5ddeaffacce7ef9bd70da",
+      "raw_bytes": 830,
+      "sha256": "41b2051da0671aa67354a3f01efda47233778fe69e1b8437aa00a3945b4493cc",
+      "bytes": 531,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/native-self-audit.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/native-self-audit.json.gz",
+      "raw_sha256": "09068ab96d6516a6ac0534419d8cfa544acea598d5a7cda8e0b1b02fc85e5149",
+      "raw_bytes": 1563,
+      "sha256": "98e8d615ad7dc8f46498085e84441488f50d21d0de82f24b895faad2221c0675",
+      "bytes": 381,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/numerical-parity-mutations.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/numerical-parity-mutations.json.gz",
+      "raw_sha256": "86b75293587f0f465a07c6d41a72a08e33990c8353745dfa9e3ad329da44d31f",
+      "raw_bytes": 261,
+      "sha256": "0f81833252c8fc71e76df436f46b8aca2e38f216651b7a9b84e5af3ea5c3b751",
+      "bytes": 172,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/observer-correction.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/observer-correction.json.gz",
+      "raw_sha256": "9278b4d0ea024039546f967d8ce66fe9dae77af230c4395362529fb94f833eea",
+      "raw_bytes": 236,
+      "sha256": "06fff703ecc8b04595d8a2d9c0976938607c9f481aead22cc0a68bbca3559cf1",
+      "bytes": 208,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/planar-presentation-bindings-source-20261012.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/planar-presentation-bindings-source-20261012.json.gz",
+      "raw_sha256": "ac3598515851d94a8d3443c78be4dbaed6b5b8043d7e67310f2c5b61a39bdc75",
+      "raw_bytes": 1494,
+      "sha256": "a4ba200162a5bbd7c38bc6c01c45063fb148b9a1434a3f12994377f2d1f24c77",
+      "bytes": 874,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/planar-presentation-local-20261012.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/planar-presentation-local-20261012.json.gz",
+      "raw_sha256": "6eec4abdead394f9bc9e61cfc180169821aef6acdf5a4a413737aef899571b06",
+      "raw_bytes": 2854,
+      "sha256": "c2032fdc3feaf02abaecc143c96a57a84ff9e74fb1406a2cb4f8acf8e9ccd644",
+      "bytes": 1025,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation/authoring/gameplay.ts",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation/authoring/gameplay.ts.gz",
+      "raw_sha256": "ebdc18d9c22964c1d024928549d1ec3ee9bca33f0a6845ab45117c3c5a58b844",
+      "raw_bytes": 11263,
+      "sha256": "8542fccd93357dcb4f8e88af5b1eecdb07efcd686ae43fceb8e18f340676093d",
+      "bytes": 3665,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation/authoring/planar.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation/authoring/planar.json.gz",
+      "raw_sha256": "557406890411fb63ece764c24fdb7b7f83db39354b0b02ad10e610aaa4cec956",
+      "raw_bytes": 32727,
+      "sha256": "4e3f21c7330935b773ae5f1f6df9626df8f92c0cb90e814ee87a432b835211c2",
+      "bytes": 2446,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation/authoring-calls.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation/authoring-calls.json.gz",
+      "raw_sha256": "eb2a740ade639d6e4af727b2885f8456e20d5f705ff8358da5f97f460d4b5659",
+      "raw_bytes": 289282,
+      "sha256": "bbb9af6c31ae0e860c80e1297af3af81c5ed43cfee2145c2f12f4c8162d56c78",
+      "bytes": 17870,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation/diagonal-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation/diagonal-input.json.gz",
+      "raw_sha256": "dab40ff34829f2274d142e6a8b59d2077ebfc3f46e5ca19276c44c101924e564",
+      "raw_bytes": 995,
+      "sha256": "9171a3a78d164df4f75fb9931f6d042fa76e4e363dc799fadb3e37c1c5a0e924",
+      "bytes": 208,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation/diagonal-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation/diagonal-observe.json.gz",
+      "raw_sha256": "9a9016f4b7c3cc157253429cb34e41b287a520f36600d95a8cceea50af4ca085",
+      "raw_bytes": 887,
+      "sha256": "9fc16f68d63b98b6fdf1dbf21abe6afa908636fe4488ac02d9d4c0935a23c179",
+      "bytes": 260,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation/diagonal.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation/diagonal.json.gz",
+      "raw_sha256": "36efb2393eddf7c9e4ccdc81c16a8218abc6649cce39d59d621e79ad46b85ccc",
+      "raw_bytes": 5554,
+      "sha256": "d09baa082483756ec6899e908830a5fef5767ffab1acdacc5ce06a1a2afb028b",
+      "bytes": 906,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation/gamepad-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation/gamepad-input.json.gz",
+      "raw_sha256": "d40f93f9a92b9164a460f61a1ba9816187d761ede7bb526c9710b5c38023ea82",
+      "raw_bytes": 1407,
+      "sha256": "7522a7dff829ea672ce3ac59b29fadd49e747fe872533ca4c8ba73ec4f66ffb8",
+      "bytes": 236,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation/gamepad-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation/gamepad-observe.json.gz",
+      "raw_sha256": "a40abe9b37f6fa3c8836d98b82104c27c4469c2e188b0cf5ed55bdde15e3e356",
+      "raw_bytes": 892,
+      "sha256": "32588972d20b8f9fcbe7a5c96b7629c282fd442f6b8939c9c5b4568498900a45",
+      "bytes": 260,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation/gamepad.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation/gamepad.json.gz",
+      "raw_sha256": "8cc60eb23d21be176fe8a6a9da7fa3921ef369297d9af137cc45bd4013cf3c51",
+      "raw_bytes": 7462,
+      "sha256": "c784648b66b77373cfee45cc964f5572572e5a6ae9593ecd13a1d6e44244fe25",
+      "bytes": 1047,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation/locked-exit-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation/locked-exit-input.json.gz",
+      "raw_sha256": "15c29da8390f459f3a5afa5918a8499b6bcaf6937b1b7c659ab9e0b125f33b33",
+      "raw_bytes": 1437,
+      "sha256": "cd9ee8ccdbd23a217f06953b911154c49023d9de7464ce251cd1fdcd803af3ed",
+      "bytes": 220,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation/locked-exit-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation/locked-exit-observe.json.gz",
+      "raw_sha256": "6cee0115833f366486a2badf6e8384089a3f52e15510a2b376da011eeb5eeca8",
+      "raw_bytes": 611,
+      "sha256": "2bd6672e7ddef162dee0e919e4ab59ab162d8006bddef8ed2ec504d1e654cec0",
+      "bytes": 211,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation/locked-exit.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation/locked-exit.json.gz",
+      "raw_sha256": "12c77ddeae54a1f59d1e470c0d9efcbf0e11b91a9736d087282cded885f8c884",
+      "raw_bytes": 5776,
+      "sha256": "cac8dd60f41e4c59eb71cb4ff7774cc12a6c45b03bf51dd01923640bc54d3621",
+      "bytes": 904,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation/lose-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation/lose-input.json.gz",
+      "raw_sha256": "2cbd99ee77f98d9ce4f01501f7decabf04baae615a94f906468711471259e2cd",
+      "raw_bytes": 557,
+      "sha256": "5ea8729f1d874999815ec6f3ff5d91fa0ac03544d733f446baa3f5b1075e23a1",
+      "bytes": 193,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation/lose-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation/lose-observe.json.gz",
+      "raw_sha256": "6769fbc32e51cd9721a93d0701d3855ffa7fc85dd2e068b25838ad6b640e5294",
+      "raw_bytes": 890,
+      "sha256": "ffcbc546d5ecb7a9b8602d46ec3653681725d646ab8e995d3e4006b7662e2417",
+      "bytes": 259,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation/lose.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation/lose.json.gz",
+      "raw_sha256": "5bd422bf33a2f7e8825ab240103b8a832ca0975e638e4072145961993a4102c1",
+      "raw_bytes": 6156,
+      "sha256": "3fb6628d285f584fec4c297f1d47ca96699d51e2b7ef25f4bb255f7528039ffa",
+      "bytes": 972,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation/process-00.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation/process-00.json.gz",
+      "raw_sha256": "69689d9eed597fc67a2f7ab4496f4e313423e514b562da211b7d15b0e9eb0d62",
+      "raw_bytes": 438,
+      "sha256": "c9d080b6768e432518847129d4e81cdf8e6bac44b0b7087bd8e025878eea2667",
+      "bytes": 260,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation/process-01.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation/process-01.json.gz",
+      "raw_sha256": "5c3b2c7f752224c96fc831081e1edd31173aeafac46993c31d7768ee20484ef6",
+      "raw_bytes": 1580,
+      "sha256": "6435aad201e47f6c5f1eaccdc30bc3da2322f8e57321e5f3913ff8a28a7de6b4",
+      "bytes": 672,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation/process-02.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation/process-02.json.gz",
+      "raw_sha256": "6dc73f4ae274b001221de5f6aaf3cd491a33143698bde958f834971093b205d3",
+      "raw_bytes": 836,
+      "sha256": "f312fff051d8592b7a7ab6c32b1c0122b94cd33621a33ee63d10aa8395bf9819",
+      "bytes": 446,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation/process-03.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation/process-03.json.gz",
+      "raw_sha256": "dbf3f01c24dacbdbfabb884aab501cb71f34e05d5a455963b8c190b6cf4284db",
+      "raw_bytes": 9018,
+      "sha256": "5ee8c0c405b7ed29f1c6e1bdc320920d3632cce2f22a8daec3d91ba2c8af7919",
+      "bytes": 1256,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation/process-04.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation/process-04.json.gz",
+      "raw_sha256": "b4b1379aeb8ee354eaf6182fa7f3331b1ab10ba5a2aac221021dd6c8f899b864",
+      "raw_bytes": 9026,
+      "sha256": "a8579a6cf2dc75d545d69f377cf90f3b108a8d151c55b8c8f81b7dd63b193768",
+      "bytes": 1259,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation/process-05.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation/process-05.json.gz",
+      "raw_sha256": "c8ab32435e981968fc03bc9ed4d189c363183eee96cce9d8d0ae88d318064b05",
+      "raw_bytes": 7534,
+      "sha256": "ff2fd8113fdd77b0a0cb9abee721017742afa44c4c64ee6e58c2ece906775b14",
+      "bytes": 1181,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation/process-06.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation/process-06.json.gz",
+      "raw_sha256": "65f3ce36c4afedb1ae95883330bb69b6cf59f67d7a4be3c92049d10121f8ffe1",
+      "raw_bytes": 7074,
+      "sha256": "500fd6c5df86480e746ee2fd1aa520dbc0984477093afc71e7e55c28a4115b64",
+      "bytes": 1111,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation/process-07.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation/process-07.json.gz",
+      "raw_sha256": "bbdcce5c45c4f620ce6b6aa88dbf01e155fcdf29caa28ab67629fdb1e5b8da83",
+      "raw_bytes": 7119,
+      "sha256": "ab5cf385ccd48ad004a67814cc373228cc301b998375de01e523ada6057df682",
+      "bytes": 1119,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation/process-08.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation/process-08.json.gz",
+      "raw_sha256": "6bf50377648306ecc8fb08ebd579956baf48ffafcd48060499f8bd004b7fa724",
+      "raw_bytes": 6849,
+      "sha256": "69e327b13089002e131e067b232d5b4ae1d5edc6a069c85f9aeac0f1cd87959a",
+      "bytes": 1122,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation/process-09.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation/process-09.json.gz",
+      "raw_sha256": "de7a82d6c3c7a08e3e9ec5b5afba73d534df74d703a12c98193950ac681fb9e4",
+      "raw_bytes": 9032,
+      "sha256": "70e04e4f6392bf8381e89c0627f424337f1fddce1dcdca6c1f293e3d62011e72",
+      "bytes": 1261,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation/repeat-win-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation/repeat-win-input.json.gz",
+      "raw_sha256": "12507f1135e300f8ddb26a9c810cd5d67e18775bc1a88f4d6e2beb596d1491db",
+      "raw_bytes": 1877,
+      "sha256": "e420b5e1f1e5b9ed42083c3dde71964471c6f701f5a52c23d8830cdf2c2cc6e9",
+      "bytes": 228,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation/repeat-win-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation/repeat-win-observe.json.gz",
+      "raw_sha256": "a40abe9b37f6fa3c8836d98b82104c27c4469c2e188b0cf5ed55bdde15e3e356",
+      "raw_bytes": 892,
+      "sha256": "32588972d20b8f9fcbe7a5c96b7629c282fd442f6b8939c9c5b4568498900a45",
+      "bytes": 260,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation/repeat-win.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation/repeat-win.json.gz",
+      "raw_sha256": "8cc60eb23d21be176fe8a6a9da7fa3921ef369297d9af137cc45bd4013cf3c51",
+      "raw_bytes": 7462,
+      "sha256": "c784648b66b77373cfee45cc964f5572572e5a6ae9593ecd13a1d6e44244fe25",
+      "bytes": 1047,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation/wall-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation/wall-input.json.gz",
+      "raw_sha256": "29e406638309e4f87c434439d2e838df8b4a67a2e4d234c6c926f1616d3e2bc3",
+      "raw_bytes": 557,
+      "sha256": "e41b8660a2afa15cafccbe1a9e0eddc7ad684d2d499bb655844fa190700b05b5",
+      "bytes": 192,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation/wall-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation/wall-observe.json.gz",
+      "raw_sha256": "c92d1bbfdc4367a7858724daadd404c409f6af3040f8b9e6f34eee5b80de14c3",
+      "raw_bytes": 611,
+      "sha256": "2ec6041ff79946fa1e350dad1fda7ca325dfebe630b12ede4deec91a96402d7e",
+      "bytes": 211,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation/wall.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation/wall.json.gz",
+      "raw_sha256": "554ea23a3596a6cd0df9cc1238d3f1270ffabd06bc5bc05a5b3d961b1fb64260",
+      "raw_bytes": 5745,
+      "sha256": "ac3867f54b7448863ce88ebb991408d0953194f9b602397fcac09ecae5f8c13c",
+      "bytes": 900,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation/win-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation/win-input.json.gz",
+      "raw_sha256": "12507f1135e300f8ddb26a9c810cd5d67e18775bc1a88f4d6e2beb596d1491db",
+      "raw_bytes": 1877,
+      "sha256": "e420b5e1f1e5b9ed42083c3dde71964471c6f701f5a52c23d8830cdf2c2cc6e9",
+      "bytes": 228,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation/win-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation/win-observe.json.gz",
+      "raw_sha256": "a40abe9b37f6fa3c8836d98b82104c27c4469c2e188b0cf5ed55bdde15e3e356",
+      "raw_bytes": 892,
+      "sha256": "32588972d20b8f9fcbe7a5c96b7629c282fd442f6b8939c9c5b4568498900a45",
+      "bytes": 260,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation/win.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation/win.json.gz",
+      "raw_sha256": "8cc60eb23d21be176fe8a6a9da7fa3921ef369297d9af137cc45bd4013cf3c51",
+      "raw_bytes": 7462,
+      "sha256": "c784648b66b77373cfee45cc964f5572572e5a6ae9593ecd13a1d6e44244fe25",
+      "bytes": 1047,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/authoring/gameplay.ts",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/authoring/gameplay.ts.gz",
+      "raw_sha256": "f76de4ec420f1c8e265b196ac6f388dba1ab49da8a4ef6f443472e5a98051cba",
+      "raw_bytes": 11274,
+      "sha256": "247c59616a023cb8e658c3025b3ca72a522b845b30bd7b3e1a94333a65dd73e4",
+      "bytes": 3668,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/authoring/planar.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/authoring/planar.json.gz",
+      "raw_sha256": "49c674e1360d73e088dfc134b2863fb884ecb8a1402fa09cf87c5b2e4c6665cf",
+      "raw_bytes": 32727,
+      "sha256": "8818c38910b1c569d397afcda910c58163326354271f107144ccf9d3598babd9",
+      "bytes": 2449,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/authoring-calls.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/authoring-calls.json.gz",
+      "raw_sha256": "93f265f998540508441f7b1af051767d83cc07a9da4b27a81f61d23114e29693",
+      "raw_bytes": 289293,
+      "sha256": "dfaf838fea5a99cf9453d33e65de98d776830092e70f20b320dee7a91cb61244",
+      "bytes": 17892,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/diagonal-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/diagonal-input.json.gz",
+      "raw_sha256": "dab40ff34829f2274d142e6a8b59d2077ebfc3f46e5ca19276c44c101924e564",
+      "raw_bytes": 995,
+      "sha256": "9171a3a78d164df4f75fb9931f6d042fa76e4e363dc799fadb3e37c1c5a0e924",
+      "bytes": 208,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/diagonal-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/diagonal-observe.json.gz",
+      "raw_sha256": "9a9016f4b7c3cc157253429cb34e41b287a520f36600d95a8cceea50af4ca085",
+      "raw_bytes": 887,
+      "sha256": "9fc16f68d63b98b6fdf1dbf21abe6afa908636fe4488ac02d9d4c0935a23c179",
+      "bytes": 260,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/diagonal.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/diagonal.json.gz",
+      "raw_sha256": "9b23cae7225d3c97255bad5f5a192d03e77eed30978f5bebe1ab6fbce90aa25b",
+      "raw_bytes": 5212,
+      "sha256": "5dfe0ffa13ad21653bf76158b4704dfab133015226ea368ed30f2d55efa71c12",
+      "bytes": 889,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/gamepad-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/gamepad-input.json.gz",
+      "raw_sha256": "d40f93f9a92b9164a460f61a1ba9816187d761ede7bb526c9710b5c38023ea82",
+      "raw_bytes": 1407,
+      "sha256": "7522a7dff829ea672ce3ac59b29fadd49e747fe872533ca4c8ba73ec4f66ffb8",
+      "bytes": 236,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/gamepad-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/gamepad-observe.json.gz",
+      "raw_sha256": "a40abe9b37f6fa3c8836d98b82104c27c4469c2e188b0cf5ed55bdde15e3e356",
+      "raw_bytes": 892,
+      "sha256": "32588972d20b8f9fcbe7a5c96b7629c282fd442f6b8939c9c5b4568498900a45",
+      "bytes": 260,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/gamepad.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/gamepad.json.gz",
+      "raw_sha256": "a19c9217ef5b3d11e8a13a89879b3f148158beb620a1a595f82938b20dde829e",
+      "raw_bytes": 6778,
+      "sha256": "5ed64a68d181aeab2467af3407588e5687320c78e153fc5f58dad7ac5966fd37",
+      "bytes": 1026,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/locked-exit-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/locked-exit-input.json.gz",
+      "raw_sha256": "15c29da8390f459f3a5afa5918a8499b6bcaf6937b1b7c659ab9e0b125f33b33",
+      "raw_bytes": 1437,
+      "sha256": "cd9ee8ccdbd23a217f06953b911154c49023d9de7464ce251cd1fdcd803af3ed",
+      "bytes": 220,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/locked-exit-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/locked-exit-observe.json.gz",
+      "raw_sha256": "6cee0115833f366486a2badf6e8384089a3f52e15510a2b376da011eeb5eeca8",
+      "raw_bytes": 611,
+      "sha256": "2bd6672e7ddef162dee0e919e4ab59ab162d8006bddef8ed2ec504d1e654cec0",
+      "bytes": 211,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/locked-exit.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/locked-exit.json.gz",
+      "raw_sha256": "5d222648b651fa745d488f626ecd60909519102197780ba2b0e6c1d7430c9a3c",
+      "raw_bytes": 5320,
+      "sha256": "e54d2d0a9e65193a5705f9a9dbe88770c4337d020bfd85d18923771d36f5ba96",
+      "bytes": 889,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/lose-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/lose-input.json.gz",
+      "raw_sha256": "2cbd99ee77f98d9ce4f01501f7decabf04baae615a94f906468711471259e2cd",
+      "raw_bytes": 557,
+      "sha256": "5ea8729f1d874999815ec6f3ff5d91fa0ac03544d733f446baa3f5b1075e23a1",
+      "bytes": 193,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/lose-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/lose-observe.json.gz",
+      "raw_sha256": "6769fbc32e51cd9721a93d0701d3855ffa7fc85dd2e068b25838ad6b640e5294",
+      "raw_bytes": 890,
+      "sha256": "ffcbc546d5ecb7a9b8602d46ec3653681725d646ab8e995d3e4006b7662e2417",
+      "bytes": 259,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/lose.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/lose.json.gz",
+      "raw_sha256": "3c7bb22e810e2ddcb7612e9dd15a42b1fb99d299fa12d63c4d88a20ee1ee51d6",
+      "raw_bytes": 5700,
+      "sha256": "c67d0f5e173d25b3d4dc00e5e5ae3b4b9fc1f2130caf729ca3e21021093c9ccc",
+      "bytes": 954,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/process-00.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/process-00.json.gz",
+      "raw_sha256": "e94d67cf859e3503d55955b3561c18e4d5950ad668a7367470dd8a897e2a945a",
+      "raw_bytes": 442,
+      "sha256": "b41590b164ea23cdc888ec2743e70f68d5d0918e2523d0893eccd796b976c8a8",
+      "bytes": 264,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/process-01.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/process-01.json.gz",
+      "raw_sha256": "52d3d68f280f03b4026aba46c65381b85bad2da95cd4bbb1774583bc503b9766",
+      "raw_bytes": 1584,
+      "sha256": "d9ab6e8495360abc64b7e343d00c2d10ffb0a76e1dcedc0935a87f36b4d0ce25",
+      "bytes": 673,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/process-02.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/process-02.json.gz",
+      "raw_sha256": "a7eaa8314dcb1031afda0d5425486ad6edf7f2f786fbef1669e14f7adb29e1e5",
+      "raw_bytes": 840,
+      "sha256": "f714beca325f68994bd2006dc6a0a4609186b5fb0dcf2df83bfaadcd34aeee27",
+      "bytes": 451,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/process-03.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/process-03.json.gz",
+      "raw_sha256": "719b283ce6671fc2cb854db7c8f034a4dfabe95b7958e5c2ac35582ad505c92a",
+      "raw_bytes": 8274,
+      "sha256": "665d4301372bc51867763902122e1b232af0fc89fc475ccf0715ab0030768858",
+      "bytes": 1243,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/process-04.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/process-04.json.gz",
+      "raw_sha256": "572150775007a1cb8eee3888da4a2c02aa20aa3258058859a54cd203b80d50e0",
+      "raw_bytes": 8282,
+      "sha256": "8bfe631fec5709f4abc15ca0e6edf54deb4b4b4c8ee94e6c76e26a7ef38fceec",
+      "bytes": 1245,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/process-05.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/process-05.json.gz",
+      "raw_sha256": "2870491fab013335beb5466b40932f56ade1811cb993650b3cdfd6b350784e97",
+      "raw_bytes": 7042,
+      "sha256": "336595808fedd5f2da712b8ef53ca5e117561471740b45dbca049dc3969e83ca",
+      "bytes": 1172,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/process-06.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/process-06.json.gz",
+      "raw_sha256": "ceef5142b608916f0d614989e8412de1737bb56d159381ba0d3405fd27b13d07",
+      "raw_bytes": 6582,
+      "sha256": "8ab3fd0b047fd98ffb16b6d2fc49ef4f4e34e7e28ee6678632c79d23c7a11236",
+      "bytes": 1101,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/process-07.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/process-07.json.gz",
+      "raw_sha256": "a7a241a27b01a46b6a2ed86f0f4f61f608283e95fbb92b75553e1a7995d6c28a",
+      "raw_bytes": 6627,
+      "sha256": "39fc063525dfe1a288416c56ea314ab12d05da32821b9cf7968d84615174f290",
+      "bytes": 1108,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/process-08.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/process-08.json.gz",
+      "raw_sha256": "1b79dad2743cce6c567b42e954ff3deec6de794e4d73a3a5c7a0cd8d2c3bb1ff",
+      "raw_bytes": 6483,
+      "sha256": "00d394c6c51966c14006ee6b86b8fb673392c98cae149935e4fe2d947c4ad9b2",
+      "bytes": 1110,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/process-09.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/process-09.json.gz",
+      "raw_sha256": "f225c492a351de33cce5ea1a692101993083963d84e851a27dd9bf7f00aeada6",
+      "raw_bytes": 8288,
+      "sha256": "17b3532c4d96056e5df68cf1699a6ff4d45131b2ce3da4fee7c047e8f575bc65",
+      "bytes": 1247,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/refusals/duplicate-frame-role.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/refusals/duplicate-frame-role.json.gz",
+      "raw_sha256": "c004e6f60cc9944812fcd2ebe14e36afaea4c5c19815a7cda11b53031be4198c",
+      "raw_bytes": 40428,
+      "sha256": "61cfb44f3883820cc256fadc0b9acdff74e353a22ce99b671f52d4e5fed18c65",
+      "bytes": 3867,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/refusals/duplicate-ui-role.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/refusals/duplicate-ui-role.json.gz",
+      "raw_sha256": "2ff093b07d5f1c66592d3d7526e2670aa507538d258d2bee90df53fe69d4892e",
+      "raw_bytes": 40407,
+      "sha256": "41a18db85f7e03bdbdba69ca58b0d2b985b2d9e4594974bd101a89b35b5916c0",
+      "bytes": 3866,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/refusals/invalid-identity.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/refusals/invalid-identity.json.gz",
+      "raw_sha256": "c07cd0628454c50ce064e5a650a63d29654c82e0b6ebe13c229132043c0ee712",
+      "raw_bytes": 40391,
+      "sha256": "23256f3ca490fa050f850b4d17d36a300f4ccc3597e665b101758cae2be77838",
+      "bytes": 3861,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/refusals/unknown-role.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/refusals/unknown-role.json.gz",
+      "raw_sha256": "d0e30f9eecc1a2a5156d954022e25b0a4b5873c9f7a769b8b5c3dfe37edc02a5",
+      "raw_bytes": 40454,
+      "sha256": "e4aa61644f73e11f7ddc776551179547a40b78684b2b5992134b51f48dc78578",
+      "bytes": 3858,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/repeat-win-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/repeat-win-input.json.gz",
+      "raw_sha256": "12507f1135e300f8ddb26a9c810cd5d67e18775bc1a88f4d6e2beb596d1491db",
+      "raw_bytes": 1877,
+      "sha256": "e420b5e1f1e5b9ed42083c3dde71964471c6f701f5a52c23d8830cdf2c2cc6e9",
+      "bytes": 228,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/repeat-win-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/repeat-win-observe.json.gz",
+      "raw_sha256": "a40abe9b37f6fa3c8836d98b82104c27c4469c2e188b0cf5ed55bdde15e3e356",
+      "raw_bytes": 892,
+      "sha256": "32588972d20b8f9fcbe7a5c96b7629c282fd442f6b8939c9c5b4568498900a45",
+      "bytes": 260,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/repeat-win.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/repeat-win.json.gz",
+      "raw_sha256": "a19c9217ef5b3d11e8a13a89879b3f148158beb620a1a595f82938b20dde829e",
+      "raw_bytes": 6778,
+      "sha256": "5ed64a68d181aeab2467af3407588e5687320c78e153fc5f58dad7ac5966fd37",
+      "bytes": 1026,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/result.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/result.json.gz",
+      "raw_sha256": "6649e0296245f335912fdc0b14d87ac482b3d94e00e43106ff45808a5bf4e674",
+      "raw_bytes": 1727,
+      "sha256": "96b7d8a00cb6c5ceeeec17a23853576f5a5b67be63c1235332fc41ca86ed989e",
+      "bytes": 624,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/wall-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/wall-input.json.gz",
+      "raw_sha256": "29e406638309e4f87c434439d2e838df8b4a67a2e4d234c6c926f1616d3e2bc3",
+      "raw_bytes": 557,
+      "sha256": "e41b8660a2afa15cafccbe1a9e0eddc7ad684d2d499bb655844fa190700b05b5",
+      "bytes": 192,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/wall-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/wall-observe.json.gz",
+      "raw_sha256": "c92d1bbfdc4367a7858724daadd404c409f6af3040f8b9e6f34eee5b80de14c3",
+      "raw_bytes": 611,
+      "sha256": "2ec6041ff79946fa1e350dad1fda7ca325dfebe630b12ede4deec91a96402d7e",
+      "bytes": 211,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/wall.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/wall.json.gz",
+      "raw_sha256": "06a50aab8dcc7e63c4a93e4da4d7f268725cc21edfe6fda58f4eb4bbd9960347",
+      "raw_bytes": 5289,
+      "sha256": "020a1c6a35e03dad9952c9a0229325511dce0eec14cc664125319e3fcb6aa827",
+      "bytes": 882,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/win-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/win-input.json.gz",
+      "raw_sha256": "12507f1135e300f8ddb26a9c810cd5d67e18775bc1a88f4d6e2beb596d1491db",
+      "raw_bytes": 1877,
+      "sha256": "e420b5e1f1e5b9ed42083c3dde71964471c6f701f5a52c23d8830cdf2c2cc6e9",
+      "bytes": 228,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/win-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/win-observe.json.gz",
+      "raw_sha256": "a40abe9b37f6fa3c8836d98b82104c27c4469c2e188b0cf5ed55bdde15e3e356",
+      "raw_bytes": 892,
+      "sha256": "32588972d20b8f9fcbe7a5c96b7629c282fd442f6b8939c9c5b4568498900a45",
+      "bytes": 260,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/win.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002/win.json.gz",
+      "raw_sha256": "a19c9217ef5b3d11e8a13a89879b3f148158beb620a1a595f82938b20dde829e",
+      "raw_bytes": 6778,
+      "sha256": "5ed64a68d181aeab2467af3407588e5687320c78e153fc5f58dad7ac5966fd37",
+      "bytes": 1026,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002-check.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002-check.json.gz",
+      "raw_sha256": "08f45023798f1c1cb84b80933044bfc71dab42db2181d136f17e96608e504f6a",
+      "raw_bytes": 406,
+      "sha256": "07a9112adb313a5fafd06cda4049f5d64c6543cedeb35047a2d4bde9abeebfe1",
+      "bytes": 240,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002.log",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation-002.log.gz",
+      "raw_sha256": "5b3726bc59d7e68297f35898757243fb43181ffd4501fae48333a4ed1feb6eb9",
+      "raw_bytes": 134,
+      "sha256": "a239f0e090a127cbaaed26e0c5d8369ea306332491ce3e32c16f5848294ef677",
+      "bytes": 127,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation.log",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/presentation.log.gz",
+      "raw_sha256": "9c5dd3b454176cfed862aa938f0c7945dd8389914889554ed3531dbd1ff03c65",
+      "raw_bytes": 4907,
+      "sha256": "463e00e19781726e4763825b371d29eacf4b1456fd8e7690741b26a40f9cb29f",
+      "bytes": 577,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-checks-002.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-checks-002.json.gz",
+      "raw_sha256": "3a486d9e5f6eaf287a5729dbdacff5a3e04a23e809eac532623459be651b00d8",
+      "raw_bytes": 657,
+      "sha256": "3c28063b6c3bf1f4681abaf673ddd1eeeb6653883e2a184491d7b5391c14f570",
+      "bytes": 317,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-checks-003.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-checks-003.json.gz",
+      "raw_sha256": "096030628900ceeb6d6c1826b682720364913599144be601bf42929cec3087b6",
+      "raw_bytes": 1334,
+      "sha256": "115d1ad4c9a94fc89fcf98332238d6d538b1912864aac1e60be2b115e5e6874e",
+      "bytes": 405,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-checks.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-checks.json.gz",
+      "raw_sha256": "f0392a49e70fe30e4bb4b6aadf9cca07d61f49898cec6269f4b5b98c8780a23d",
+      "raw_bytes": 644,
+      "sha256": "5960a2e809dd3ce363593925be4c32755ca2fcc47c3303c974cb57e86636ffa5",
+      "bytes": 315,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/diagonal-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/diagonal-input.json.gz",
+      "raw_sha256": "dab40ff34829f2274d142e6a8b59d2077ebfc3f46e5ca19276c44c101924e564",
+      "raw_bytes": 995,
+      "sha256": "9171a3a78d164df4f75fb9931f6d042fa76e4e363dc799fadb3e37c1c5a0e924",
+      "bytes": 208,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/diagonal-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/diagonal-observe.json.gz",
+      "raw_sha256": "c8c058c55dc303980b1ba46dad77d9946b44d129fec726ac07e241fc1dbbfce7",
+      "raw_bytes": 819,
+      "sha256": "cf9173637166c655ba9d11c9493b35f1d7f9d3a8d796ac925284d62c4e6bd40a",
+      "bytes": 248,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/diagonal-process.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/diagonal-process.json.gz",
+      "raw_sha256": "abb6aaec67482cdf45c07ac4b5cadda1d3402139dfa76648f65bd70ab03f78ce",
+      "raw_bytes": 2602,
+      "sha256": "fd7dffd759510bffe13c3504df214a5a21e3309581636006270afb43b5c3eb3b",
+      "bytes": 820,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/diagonal.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/diagonal.json.gz",
+      "raw_sha256": "1bb0ba4e273178b85549011c0a21f5367195fe1958ea534749fd66346da5141f",
+      "raw_bytes": 2926,
+      "sha256": "6482fd1f1a573b64f88f65c6730c303158b7d06bc8ab6a978cbc2b8859e3f477",
+      "bytes": 716,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/diagonal.pcm",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/diagonal.pcm.gz",
+      "raw_sha256": "fec9afb531a8e036eba1d81651896e1b2c1f78b0234dbadc8e7549563f09407b",
+      "raw_bytes": 384000,
+      "sha256": "0d93427291eb9a1ae0d310b550f2a2a5c0a0e96c81e7e7baa2aa8d6e9f5ee981",
+      "bytes": 407,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/gamepad-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/gamepad-input.json.gz",
+      "raw_sha256": "d40f93f9a92b9164a460f61a1ba9816187d761ede7bb526c9710b5c38023ea82",
+      "raw_bytes": 1407,
+      "sha256": "7522a7dff829ea672ce3ac59b29fadd49e747fe872533ca4c8ba73ec4f66ffb8",
+      "bytes": 236,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/gamepad-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/gamepad-observe.json.gz",
+      "raw_sha256": "2085c417c78dd54ed09bf6344b6ed35d38dd5df9a5f89bd91b22e39cfd26b83f",
+      "raw_bytes": 824,
+      "sha256": "73256dc626444af60f328261080f3f5e53ed1f9675563e6406efff6080d2530c",
+      "bytes": 247,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/gamepad-process.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/gamepad-process.json.gz",
+      "raw_sha256": "d69d262e8374092b50b018fc6451bd3ac69e94fc6a7899d51c5aaaa60bdd70d7",
+      "raw_bytes": 2882,
+      "sha256": "8579cd5790da317bdb637cb46007c028c7b6cc7f82dd2054455e2c0cabe6b8da",
+      "bytes": 903,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/gamepad.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/gamepad.json.gz",
+      "raw_sha256": "58c024bc979685f533ad41514fbce9723cf2c775717f00dd826ea89e8b06754c",
+      "raw_bytes": 3315,
+      "sha256": "3e6567920879f088a09816bb7b03bf614d0b8a1fe36a72aba4de7bc1d03afdb4",
+      "bytes": 805,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/gamepad.pcm",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/gamepad.pcm.gz",
+      "raw_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+      "raw_bytes": 1920000,
+      "sha256": "c87758fc095a0657c5049a8fa408a5ccec4fedc1e568be46e3dd413d02a1339c",
+      "bytes": 1895,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/locked-exit-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/locked-exit-input.json.gz",
+      "raw_sha256": "15c29da8390f459f3a5afa5918a8499b6bcaf6937b1b7c659ab9e0b125f33b33",
+      "raw_bytes": 1437,
+      "sha256": "cd9ee8ccdbd23a217f06953b911154c49023d9de7464ce251cd1fdcd803af3ed",
+      "bytes": 220,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/locked-exit-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/locked-exit-observe.json.gz",
+      "raw_sha256": "5e3742a9c37b7fe3556e4c7e1c8532642a256a987b628b38407aef602b14e46c",
+      "raw_bytes": 543,
+      "sha256": "583ac662c4c885b477add8715d6f00871f4afbd3778c44e89d237529a3fff3b5",
+      "bytes": 200,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/locked-exit-process.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/locked-exit-process.json.gz",
+      "raw_sha256": "819a203d8d8161a410fab9f33c36fbfc05a25cf8a736d23822b154a76d6a7d10",
+      "raw_bytes": 2495,
+      "sha256": "99adff9b13cf75e53fccd701742f5c3d015bb91f2be8bc2ce8bbc70ede1bf694",
+      "bytes": 840,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/locked-exit.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/locked-exit.json.gz",
+      "raw_sha256": "987927a2f5cc59950b5ab91fc43680ef1498faa33264fd2a4c942773caadc89f",
+      "raw_bytes": 2651,
+      "sha256": "188caa0b777b6069ec09ef013cc53a440fd63a47a5ba378d37a540b644626011",
+      "bytes": 736,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/locked-exit.pcm",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/locked-exit.pcm.gz",
+      "raw_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+      "raw_bytes": 1920000,
+      "sha256": "c87758fc095a0657c5049a8fa408a5ccec4fedc1e568be46e3dd413d02a1339c",
+      "bytes": 1895,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/lose-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/lose-input.json.gz",
+      "raw_sha256": "2cbd99ee77f98d9ce4f01501f7decabf04baae615a94f906468711471259e2cd",
+      "raw_bytes": 557,
+      "sha256": "5ea8729f1d874999815ec6f3ff5d91fa0ac03544d733f446baa3f5b1075e23a1",
+      "bytes": 193,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/lose-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/lose-observe.json.gz",
+      "raw_sha256": "8aee4dd1c2a2d7318d5051e0e62f3423896c541b7ab31291230abca0168a6793",
+      "raw_bytes": 822,
+      "sha256": "3c4d2292270957561f7a3a2c6ef2303d6d71ce9fc329c1d7203f1bb259732d4d",
+      "bytes": 248,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/lose-process.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/lose-process.json.gz",
+      "raw_sha256": "79f3414de537fbb3019963c8914d86b87ebbc290a56763d5c254462d19accb77",
+      "raw_bytes": 2634,
+      "sha256": "b6d5a703e15a48caf1e0892fc3f9118303c80aaeb709b134150eb4f9f605aff4",
+      "bytes": 859,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/lose.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/lose.json.gz",
+      "raw_sha256": "2e26c0bfe150ade648773ab67fd0fb87fb96c1564027e256efc690cacf5a4b2a",
+      "raw_bytes": 3008,
+      "sha256": "fb066b4dcb4dfb739b9369bb813f3599924d754a94d7d63e61d0a0613de55434",
+      "bytes": 768,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/lose.pcm",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/lose.pcm.gz",
+      "raw_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+      "raw_bytes": 1920000,
+      "sha256": "c87758fc095a0657c5049a8fa408a5ccec4fedc1e568be46e3dd413d02a1339c",
+      "bytes": 1895,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/package/build.log",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/package/build.log.gz",
+      "raw_sha256": "d5d617a6d66473ed5c8b7870c4b29b1e2511374fccfe55e22bc5bab83823fc23",
+      "raw_bytes": 1356741,
+      "sha256": "2a88451222856f9073b837d4e95b75049795e96f098e96f0964a255b61ee8176",
+      "bytes": 127414,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/package/export.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/package/export.json.gz",
+      "raw_sha256": "fee0f46ce18e280edb86a4e1e1873654782ce31363844e4c534833e1e2baf741",
+      "raw_bytes": 8945,
+      "sha256": "ab2d036a862265315dc32abdee5b7e9225b0eebd814bfc63a3aea322f0635e35",
+      "bytes": 3156,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/package/player/data/clips.bin",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/package/player/data/clips.bin.gz",
+      "raw_sha256": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+      "raw_bytes": 12,
+      "sha256": "a568799ca294ca001efc2c864c9c7b660e1fb03c4811c7160b752a87361d378d",
+      "bytes": 30,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/package/player/data/empty-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/package/player/data/empty-input.json.gz",
+      "raw_sha256": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+      "raw_bytes": 103,
+      "sha256": "438100c9c52fd35517bc237cb9289ac1088282ab6f2b851a4878fd0ecc79abcc",
+      "bytes": 104,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/package/player/data/input-actions.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/package/player/data/input-actions.json.gz",
+      "raw_sha256": "a5b42df51661fd383f72af600c590c78cd2a5c6fab62bd219f3f1305a1254e0c",
+      "raw_bytes": 307,
+      "sha256": "2300d565dff57bf8b44311cdfb76c7bdd448ecad202e91ca635acdb7878ee755",
+      "bytes": 171,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/package/player/data/package.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/package/player/data/package.json.gz",
+      "raw_sha256": "712fcd46268320174029d78b542f1699124ab9eeeb39f5f0a7e7f38537603f54",
+      "raw_bytes": 479,
+      "sha256": "e5a8e8aafcd5a9326e236692903956c7a4848878e886951aac4cd3e612724477",
+      "bytes": 317,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/package/player/data/textures/cf7db76b5fe2aa853a59139d8f4d166947eaa3894b5b1e616e3e9ffdff74f19f.ktx2",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/package/player/data/textures/cf7db76b5fe2aa853a59139d8f4d166947eaa3894b5b1e616e3e9ffdff74f19f.ktx2.gz",
+      "raw_sha256": "cf7db76b5fe2aa853a59139d8f4d166947eaa3894b5b1e616e3e9ffdff74f19f",
+      "raw_bytes": 312,
+      "sha256": "a3b6839954b1e2c3282b076cf40f110786ab0541cdd79a92a9fb606e37eda448",
+      "bytes": 155,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/package/player/data/textures/de1efc9cac8d47956233a59b453545d7a915a1b4603d03d3d71530821637dd3e.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/package/player/data/textures/de1efc9cac8d47956233a59b453545d7a915a1b4603d03d3d71530821637dd3e.json.gz",
+      "raw_sha256": "f8be1a88e557457b3be4d083f4b7d0a2b336df2fc71483a5f6f519bf62aa3cde",
+      "raw_bytes": 674,
+      "sha256": "5d40d54a2e0622ace8e0471ee9783314be0c8f7d7299486361fa2d83c807b2a9",
+      "bytes": 388,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/package/player/data/world.scene",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/package/player/data/world.scene.gz",
+      "raw_sha256": "6cbe4c667213c4ee750403f681100e5460cd99bb58c11779fd8b0c75ec0a0110",
+      "raw_bytes": 3032,
+      "sha256": "8b4e8b37083652115ded868a99823bcf1cc91edb592c12078c29fc6f572964a9",
+      "bytes": 377,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/package/project-build.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/package/project-build.json.gz",
+      "raw_sha256": "554cf58a12c20a4b37ec3c2951b1335be28bc8990496fea93e69228087a08aa8",
+      "raw_bytes": 1707,
+      "sha256": "5d87b21ea8499ca85ad4b2ec49a616ab86136e9aa6da51af166c33ffac92e000",
+      "bytes": 862,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/repeat-win-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/repeat-win-input.json.gz",
+      "raw_sha256": "12507f1135e300f8ddb26a9c810cd5d67e18775bc1a88f4d6e2beb596d1491db",
+      "raw_bytes": 1877,
+      "sha256": "e420b5e1f1e5b9ed42083c3dde71964471c6f701f5a52c23d8830cdf2c2cc6e9",
+      "bytes": 228,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/repeat-win-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/repeat-win-observe.json.gz",
+      "raw_sha256": "2085c417c78dd54ed09bf6344b6ed35d38dd5df9a5f89bd91b22e39cfd26b83f",
+      "raw_bytes": 824,
+      "sha256": "73256dc626444af60f328261080f3f5e53ed1f9675563e6406efff6080d2530c",
+      "bytes": 247,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/repeat-win-process.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/repeat-win-process.json.gz",
+      "raw_sha256": "5341fa1124c989dfe8c64194f4d9e8e816c9610959e4102c1af164a8a46742dd",
+      "raw_bytes": 2891,
+      "sha256": "d4599d49e4c66403f8dfb5757b7ab785850842e68621f3412e87b8cab72bebc3",
+      "bytes": 907,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/repeat-win.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/repeat-win.json.gz",
+      "raw_sha256": "58c024bc979685f533ad41514fbce9723cf2c775717f00dd826ea89e8b06754c",
+      "raw_bytes": 3315,
+      "sha256": "3e6567920879f088a09816bb7b03bf614d0b8a1fe36a72aba4de7bc1d03afdb4",
+      "bytes": 805,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/repeat-win.pcm",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/repeat-win.pcm.gz",
+      "raw_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+      "raw_bytes": 1920000,
+      "sha256": "c87758fc095a0657c5049a8fa408a5ccec4fedc1e568be46e3dd413d02a1339c",
+      "bytes": 1895,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/result.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/result.json.gz",
+      "raw_sha256": "cd35c8206404832190e58ffd198e6681d573e7cb90afa8738b2c278844e73472",
+      "raw_bytes": 12963,
+      "sha256": "6768ff1f8e36c4a5e341931d66c106c0fcb0371bbaa6a06d92be2040e6702c68",
+      "bytes": 4027,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/wall-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/wall-input.json.gz",
+      "raw_sha256": "29e406638309e4f87c434439d2e838df8b4a67a2e4d234c6c926f1616d3e2bc3",
+      "raw_bytes": 557,
+      "sha256": "e41b8660a2afa15cafccbe1a9e0eddc7ad684d2d499bb655844fa190700b05b5",
+      "bytes": 192,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/wall-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/wall-observe.json.gz",
+      "raw_sha256": "731818f451ef829d1ef9f1eb7dc388150eef9a6d17913d17ccd94b4f4a90f565",
+      "raw_bytes": 543,
+      "sha256": "e38f3d83ced605ecc1cca64f1cbe4c78bd4dff56a11ee8c417ba9dc22950dca3",
+      "bytes": 200,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/wall-process.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/wall-process.json.gz",
+      "raw_sha256": "3e5f67ad0a1dedfdafd96215855c897f439efe099d1782f3abad60976d0a544d",
+      "raw_bytes": 2431,
+      "sha256": "dc7360ade060e933da329b402d9cf0d1a6b43697a2f43dab436b1b074234ed22",
+      "bytes": 823,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/wall.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/wall.json.gz",
+      "raw_sha256": "6360b19a8842c152cc7506286882d0d4589aa218a1958099aaef1fff5602c6ed",
+      "raw_bytes": 2608,
+      "sha256": "fcd92e419cd35fd6b5e96e3abd56bba7fb7bbdd1e02aa595949e9949582b3e18",
+      "bytes": 728,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/wall.pcm",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/wall.pcm.gz",
+      "raw_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+      "raw_bytes": 1920000,
+      "sha256": "c87758fc095a0657c5049a8fa408a5ccec4fedc1e568be46e3dd413d02a1339c",
+      "bytes": 1895,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/win-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/win-input.json.gz",
+      "raw_sha256": "12507f1135e300f8ddb26a9c810cd5d67e18775bc1a88f4d6e2beb596d1491db",
+      "raw_bytes": 1877,
+      "sha256": "e420b5e1f1e5b9ed42083c3dde71964471c6f701f5a52c23d8830cdf2c2cc6e9",
+      "bytes": 228,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/win-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/win-observe.json.gz",
+      "raw_sha256": "2085c417c78dd54ed09bf6344b6ed35d38dd5df9a5f89bd91b22e39cfd26b83f",
+      "raw_bytes": 824,
+      "sha256": "73256dc626444af60f328261080f3f5e53ed1f9675563e6406efff6080d2530c",
+      "bytes": 247,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/win-process.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/win-process.json.gz",
+      "raw_sha256": "d39d1e86be175efc108407d58a60e4c937ae2c15dc5640722de2c175b3bd2591",
+      "raw_bytes": 2870,
+      "sha256": "15909b2c63ca5ec135afb1f9191803774e6a71a605ce25ee20b1d49d3f00f564",
+      "bytes": 899,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/win.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/win.json.gz",
+      "raw_sha256": "58c024bc979685f533ad41514fbce9723cf2c775717f00dd826ea89e8b06754c",
+      "raw_bytes": 3315,
+      "sha256": "3e6567920879f088a09816bb7b03bf614d0b8a1fe36a72aba4de7bc1d03afdb4",
+      "bytes": 805,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002/win.pcm",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002/win.pcm.gz",
+      "raw_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+      "raw_bytes": 1920000,
+      "sha256": "c87758fc095a0657c5049a8fa408a5ccec4fedc1e568be46e3dd413d02a1339c",
+      "bytes": 1895,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default-002.log",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default-002.log.gz",
+      "raw_sha256": "6b02079ac40d7376099ab460e979e868fd364cf0947e15102b15af043b9f6dc4",
+      "raw_bytes": 282,
+      "sha256": "fabf97fce8057a7c655aa52cf989cc31d503627f5980ff96f7051148d6d81158",
+      "bytes": 224,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default.log",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-default.log.gz",
+      "raw_sha256": "b1e8c317f241d51d984d9f25985f3781524d04e7fc4d6bad25d594b22b81ed92",
+      "raw_bytes": 1507,
+      "sha256": "be2e40a0de882a30baedfcfaf6c1069c70f96f4c2504aa1691389cb3b4c7848f",
+      "bytes": 552,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-001.log",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-001.log.gz",
+      "raw_sha256": "78a6cf7ed409d2abc7c39aa4847504d35c9e01754b05488f71a5642ff1b3e3c9",
+      "raw_bytes": 67,
+      "sha256": "e14d317e6baec479af85ab405f2f62c9792c0faa50ee77d7c0169aa86880c112",
+      "bytes": 85,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/diagonal-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/diagonal-input.json.gz",
+      "raw_sha256": "dab40ff34829f2274d142e6a8b59d2077ebfc3f46e5ca19276c44c101924e564",
+      "raw_bytes": 995,
+      "sha256": "9171a3a78d164df4f75fb9931f6d042fa76e4e363dc799fadb3e37c1c5a0e924",
+      "bytes": 208,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/diagonal-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/diagonal-observe.json.gz",
+      "raw_sha256": "9a9016f4b7c3cc157253429cb34e41b287a520f36600d95a8cceea50af4ca085",
+      "raw_bytes": 887,
+      "sha256": "9fc16f68d63b98b6fdf1dbf21abe6afa908636fe4488ac02d9d4c0935a23c179",
+      "bytes": 260,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/diagonal-process.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/diagonal-process.json.gz",
+      "raw_sha256": "cc276c563e90efe2b7aa8f4e9f20fa44938188b7244c7408e2d99057e7786e7c",
+      "raw_bytes": 4960,
+      "sha256": "7580636001c57e187e2caeb10828a1b70ca835743279d335e22cfdaed0dddd33",
+      "bytes": 1170,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/diagonal.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/diagonal.json.gz",
+      "raw_sha256": "d6b3d999a40c8783afe6d8364606d2e7dd3d4ecd0214416f28c0c2bf96b3217b",
+      "raw_bytes": 6666,
+      "sha256": "809b76b586fed803c79bdfd1a1ca2b2ad7264e5b17c37de0fed113a03a68dcce",
+      "bytes": 1098,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/diagonal.pcm",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/diagonal.pcm.gz",
+      "raw_sha256": "fec9afb531a8e036eba1d81651896e1b2c1f78b0234dbadc8e7549563f09407b",
+      "raw_bytes": 384000,
+      "sha256": "0d93427291eb9a1ae0d310b550f2a2a5c0a0e96c81e7e7baa2aa8d6e9f5ee981",
+      "bytes": 407,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/gamepad-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/gamepad-input.json.gz",
+      "raw_sha256": "d40f93f9a92b9164a460f61a1ba9816187d761ede7bb526c9710b5c38023ea82",
+      "raw_bytes": 1407,
+      "sha256": "7522a7dff829ea672ce3ac59b29fadd49e747fe872533ca4c8ba73ec4f66ffb8",
+      "bytes": 236,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/gamepad-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/gamepad-observe.json.gz",
+      "raw_sha256": "a40abe9b37f6fa3c8836d98b82104c27c4469c2e188b0cf5ed55bdde15e3e356",
+      "raw_bytes": 892,
+      "sha256": "32588972d20b8f9fcbe7a5c96b7629c282fd442f6b8939c9c5b4568498900a45",
+      "bytes": 260,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/gamepad-process.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/gamepad-process.json.gz",
+      "raw_sha256": "a5aaf2ba167f4ec4025134937824c939324a619698cfa6b155d3023e79ed14a6",
+      "raw_bytes": 6472,
+      "sha256": "635817a94cac0093ac0f1f79f71fd99fd5ef34f5f15821f097b6ae11d012de68",
+      "bytes": 1307,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/gamepad.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/gamepad.json.gz",
+      "raw_sha256": "f5d5bc2ab772ad2ae487a50be471c795f7ca54cfe391a3bc289d6f654bcbea26",
+      "raw_bytes": 8240,
+      "sha256": "b9c7a9750df19270e95c3676d31f8e66ed6a8d5ad2f728fcfc7dd16ee703bbae",
+      "bytes": 1241,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/gamepad.pcm",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/gamepad.pcm.gz",
+      "raw_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+      "raw_bytes": 1920000,
+      "sha256": "c87758fc095a0657c5049a8fa408a5ccec4fedc1e568be46e3dd413d02a1339c",
+      "bytes": 1895,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/locked-exit-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/locked-exit-input.json.gz",
+      "raw_sha256": "15c29da8390f459f3a5afa5918a8499b6bcaf6937b1b7c659ab9e0b125f33b33",
+      "raw_bytes": 1437,
+      "sha256": "cd9ee8ccdbd23a217f06953b911154c49023d9de7464ce251cd1fdcd803af3ed",
+      "bytes": 220,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/locked-exit-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/locked-exit-observe.json.gz",
+      "raw_sha256": "6cee0115833f366486a2badf6e8384089a3f52e15510a2b376da011eeb5eeca8",
+      "raw_bytes": 611,
+      "sha256": "2bd6672e7ddef162dee0e919e4ab59ab162d8006bddef8ed2ec504d1e654cec0",
+      "bytes": 211,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/locked-exit-process.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/locked-exit-process.json.gz",
+      "raw_sha256": "6a2c573501667d6bc41530630121aa43a2fa37a1bfa75bfbb487b03c3ca69f10",
+      "raw_bytes": 5256,
+      "sha256": "35860babc09b4696175321461fca00ba5bca522d19eba966e80e1c04613196ab",
+      "bytes": 1188,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/locked-exit.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/locked-exit.json.gz",
+      "raw_sha256": "7e1c277631aaa3c9f1074a45e58ea04224601ee55b568ef420cbd8d86637260a",
+      "raw_bytes": 6775,
+      "sha256": "1a3d0382d53ad5954a78e9ec72627bb63e9e01f8e6af83b3909dbf742593268f",
+      "bytes": 1106,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/locked-exit.pcm",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/locked-exit.pcm.gz",
+      "raw_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+      "raw_bytes": 1920000,
+      "sha256": "c87758fc095a0657c5049a8fa408a5ccec4fedc1e568be46e3dd413d02a1339c",
+      "bytes": 1895,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/lose-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/lose-input.json.gz",
+      "raw_sha256": "2cbd99ee77f98d9ce4f01501f7decabf04baae615a94f906468711471259e2cd",
+      "raw_bytes": 557,
+      "sha256": "5ea8729f1d874999815ec6f3ff5d91fa0ac03544d733f446baa3f5b1075e23a1",
+      "bytes": 193,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/lose-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/lose-observe.json.gz",
+      "raw_sha256": "6769fbc32e51cd9721a93d0701d3855ffa7fc85dd2e068b25838ad6b640e5294",
+      "raw_bytes": 890,
+      "sha256": "ffcbc546d5ecb7a9b8602d46ec3653681725d646ab8e995d3e4006b7662e2417",
+      "bytes": 259,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/lose-process.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/lose-process.json.gz",
+      "raw_sha256": "cab7dda2d8f07fa09dfa78a96a30d48a20791610b67c4ceb4225aa91246bab2f",
+      "raw_bytes": 5414,
+      "sha256": "726c5672d67e73df22af79b063daacfd175ae74212ac7d979da57af02968f49e",
+      "bytes": 1237,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/lose.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/lose.json.gz",
+      "raw_sha256": "e56e05f0007fc4ec46f07424d7723e6149c89acc2aa5554c3e996c1f606eef0a",
+      "raw_bytes": 7151,
+      "sha256": "6e084e16ae8b6b48542713b364addd03110ce8b4e52fe0fe11d70996f4e97879",
+      "bytes": 1169,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/lose.pcm",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/lose.pcm.gz",
+      "raw_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+      "raw_bytes": 1920000,
+      "sha256": "c87758fc095a0657c5049a8fa408a5ccec4fedc1e568be46e3dd413d02a1339c",
+      "bytes": 1895,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/package/build.log",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/package/build.log.gz",
+      "raw_sha256": "c4ffa31941e8f20282b66bb4225e63f408df0d1e04f96e8d5cdbdaeba500fa3b",
+      "raw_bytes": 1356741,
+      "sha256": "fb3e16fd8679e936ab958b586d6ae51b135c1e0c7dc2d3a27f3de37f09ecec52",
+      "bytes": 126642,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/package/export.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/package/export.json.gz",
+      "raw_sha256": "bb6812cdf96ad00541c67516cf30bef5bf7448a1320afde4879014e83d9a00b8",
+      "raw_bytes": 10851,
+      "sha256": "cb18ba32dcbd1deaf998ad63993ec09d408668a020603a8f3560318d172d4f84",
+      "bytes": 3685,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/package/player/data/clips.bin",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/package/player/data/clips.bin.gz",
+      "raw_sha256": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+      "raw_bytes": 12,
+      "sha256": "a568799ca294ca001efc2c864c9c7b660e1fb03c4811c7160b752a87361d378d",
+      "bytes": 30,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/package/player/data/empty-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/package/player/data/empty-input.json.gz",
+      "raw_sha256": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+      "raw_bytes": 103,
+      "sha256": "438100c9c52fd35517bc237cb9289ac1088282ab6f2b851a4878fd0ecc79abcc",
+      "bytes": 104,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/package/player/data/fonts/27434b14189e6b823382d06b768a3544557f29f875e3b483452bac0eb87edc9a.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/package/player/data/fonts/27434b14189e6b823382d06b768a3544557f29f875e3b483452bac0eb87edc9a.json.gz",
+      "raw_sha256": "a08043e6d0266c90d90356aafb8c5b4b775f34abb9dbe96ae2e338e438e3f43c",
+      "raw_bytes": 302,
+      "sha256": "106cf5561dca99ccee4fe53742f5428758c7805d7bcc8110b186e222ebcac395",
+      "bytes": 194,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/package/player/data/fonts/2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9.ifont",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/package/player/data/fonts/2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9.ifont.gz",
+      "raw_sha256": "92960e6b23eff12e1bf13361b2b94b490d723f8d93e6945ba34b9f9b3acd2081",
+      "raw_bytes": 556264,
+      "sha256": "9dc27c01a7199a0ba473b585a67678b67abf3ac17771599bb412539c8b624f4a",
+      "bytes": 263892,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/package/player/data/input-actions.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/package/player/data/input-actions.json.gz",
+      "raw_sha256": "a5b42df51661fd383f72af600c590c78cd2a5c6fab62bd219f3f1305a1254e0c",
+      "raw_bytes": 307,
+      "sha256": "2300d565dff57bf8b44311cdfb76c7bdd448ecad202e91ca635acdb7878ee755",
+      "bytes": 171,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/package/player/data/package.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/package/player/data/package.json.gz",
+      "raw_sha256": "ba6eb48a7bdfd631be14fa9d9b6b2de6e8533017a1177428a3c2b18c900cb679",
+      "raw_bytes": 479,
+      "sha256": "ed190f36f51904cf39bc84f05ce1449803ff78bb57f6cc14bce6d83c1e2f18a8",
+      "bytes": 317,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/package/player/data/textures/cf7db76b5fe2aa853a59139d8f4d166947eaa3894b5b1e616e3e9ffdff74f19f.ktx2",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/package/player/data/textures/cf7db76b5fe2aa853a59139d8f4d166947eaa3894b5b1e616e3e9ffdff74f19f.ktx2.gz",
+      "raw_sha256": "cf7db76b5fe2aa853a59139d8f4d166947eaa3894b5b1e616e3e9ffdff74f19f",
+      "raw_bytes": 312,
+      "sha256": "a3b6839954b1e2c3282b076cf40f110786ab0541cdd79a92a9fb606e37eda448",
+      "bytes": 155,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/package/player/data/textures/de1efc9cac8d47956233a59b453545d7a915a1b4603d03d3d71530821637dd3e.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/package/player/data/textures/de1efc9cac8d47956233a59b453545d7a915a1b4603d03d3d71530821637dd3e.json.gz",
+      "raw_sha256": "f8be1a88e557457b3be4d083f4b7d0a2b336df2fc71483a5f6f519bf62aa3cde",
+      "raw_bytes": 674,
+      "sha256": "5d40d54a2e0622ace8e0471ee9783314be0c8f7d7299486361fa2d83c807b2a9",
+      "bytes": 388,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/package/player/data/world.scene",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/package/player/data/world.scene.gz",
+      "raw_sha256": "3550f0f7a64510299136e653b462678707481705472d1cd334d69d800364e9a7",
+      "raw_bytes": 5213,
+      "sha256": "2682915daa9badfd139a69179af16c52be19bd10187915d5d967483893869b46",
+      "bytes": 840,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/package/project-build.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/package/project-build.json.gz",
+      "raw_sha256": "ddc4cd613bba785c138460f994e0cf2eae4dbcc1957561f3ababa2a2c2078de9",
+      "raw_bytes": 1852,
+      "sha256": "22b8b39844c31c5b205551a1f5049b3ae49ed527099868cdd5a8e63442421e86",
+      "bytes": 926,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/repeat-win-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/repeat-win-input.json.gz",
+      "raw_sha256": "12507f1135e300f8ddb26a9c810cd5d67e18775bc1a88f4d6e2beb596d1491db",
+      "raw_bytes": 1877,
+      "sha256": "e420b5e1f1e5b9ed42083c3dde71964471c6f701f5a52c23d8830cdf2c2cc6e9",
+      "bytes": 228,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/repeat-win-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/repeat-win-observe.json.gz",
+      "raw_sha256": "a40abe9b37f6fa3c8836d98b82104c27c4469c2e188b0cf5ed55bdde15e3e356",
+      "raw_bytes": 892,
+      "sha256": "32588972d20b8f9fcbe7a5c96b7629c282fd442f6b8939c9c5b4568498900a45",
+      "bytes": 260,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/repeat-win-process.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/repeat-win-process.json.gz",
+      "raw_sha256": "19f75f490f6c148a2540ea4a0f83dd9304d68fe2478989c3a75fc7a1cb32d8e4",
+      "raw_bytes": 6481,
+      "sha256": "cb724066c243521c7d44e2fbea3189b8f21564be230a6a00f4553173c9d304d0",
+      "bytes": 1311,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/repeat-win.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/repeat-win.json.gz",
+      "raw_sha256": "f5d5bc2ab772ad2ae487a50be471c795f7ca54cfe391a3bc289d6f654bcbea26",
+      "raw_bytes": 8240,
+      "sha256": "b9c7a9750df19270e95c3676d31f8e66ed6a8d5ad2f728fcfc7dd16ee703bbae",
+      "bytes": 1241,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/repeat-win.pcm",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/repeat-win.pcm.gz",
+      "raw_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+      "raw_bytes": 1920000,
+      "sha256": "c87758fc095a0657c5049a8fa408a5ccec4fedc1e568be46e3dd413d02a1339c",
+      "bytes": 1895,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/result.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/result.json.gz",
+      "raw_sha256": "121e09e7348809f001e49bf77afad1e76e9d815734cbeff00587ea84935d66e8",
+      "raw_bytes": 16256,
+      "sha256": "5d20bbc3cdb88f4175ecbaabac5604551cca9e80b19972d197ffe8f8127e885b",
+      "bytes": 4718,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/wall-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/wall-input.json.gz",
+      "raw_sha256": "29e406638309e4f87c434439d2e838df8b4a67a2e4d234c6c926f1616d3e2bc3",
+      "raw_bytes": 557,
+      "sha256": "e41b8660a2afa15cafccbe1a9e0eddc7ad684d2d499bb655844fa190700b05b5",
+      "bytes": 192,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/wall-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/wall-observe.json.gz",
+      "raw_sha256": "c92d1bbfdc4367a7858724daadd404c409f6af3040f8b9e6f34eee5b80de14c3",
+      "raw_bytes": 611,
+      "sha256": "2ec6041ff79946fa1e350dad1fda7ca325dfebe630b12ede4deec91a96402d7e",
+      "bytes": 211,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/wall-process.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/wall-process.json.gz",
+      "raw_sha256": "b620213911268d29da75d81e3dd8a8781f50ad0f6e5792b0c708227cc7e092e3",
+      "raw_bytes": 5190,
+      "sha256": "73e516de653bf548313ea0b7497c5e7c55e553bf19aa0552833ae94e848f9aec",
+      "bytes": 1170,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/wall.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/wall.json.gz",
+      "raw_sha256": "55443cf8d4e013936639b4117dfd56074b2ae6bd4df40472ff1cb4a8816f1aec",
+      "raw_bytes": 6730,
+      "sha256": "373bce0c807298a50f2537b2fc2482b025860f8ded0c1635934cb9f80f95e0c3",
+      "bytes": 1094,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/wall.pcm",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/wall.pcm.gz",
+      "raw_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+      "raw_bytes": 1920000,
+      "sha256": "c87758fc095a0657c5049a8fa408a5ccec4fedc1e568be46e3dd413d02a1339c",
+      "bytes": 1895,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/win-input.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/win-input.json.gz",
+      "raw_sha256": "12507f1135e300f8ddb26a9c810cd5d67e18775bc1a88f4d6e2beb596d1491db",
+      "raw_bytes": 1877,
+      "sha256": "e420b5e1f1e5b9ed42083c3dde71964471c6f701f5a52c23d8830cdf2c2cc6e9",
+      "bytes": 228,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/win-observe.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/win-observe.json.gz",
+      "raw_sha256": "a40abe9b37f6fa3c8836d98b82104c27c4469c2e188b0cf5ed55bdde15e3e356",
+      "raw_bytes": 892,
+      "sha256": "32588972d20b8f9fcbe7a5c96b7629c282fd442f6b8939c9c5b4568498900a45",
+      "bytes": 260,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/win-process.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/win-process.json.gz",
+      "raw_sha256": "65f19c3bef55a68765961448fb244678bbb57e394b0cbf8ae9e73a3b3a072162",
+      "raw_bytes": 6460,
+      "sha256": "eb97a9d58e504c6ae8e1359c0bcc9b91db2f20ebb02ccb5eb26a9a4f7b1911a0",
+      "bytes": 1306,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/win.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/win.json.gz",
+      "raw_sha256": "f5d5bc2ab772ad2ae487a50be471c795f7ca54cfe391a3bc289d6f654bcbea26",
+      "raw_bytes": 8240,
+      "sha256": "b9c7a9750df19270e95c3676d31f8e66ed6a8d5ad2f728fcfc7dd16ee703bbae",
+      "bytes": 1241,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002/win.pcm",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002/win.pcm.gz",
+      "raw_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+      "raw_bytes": 1920000,
+      "sha256": "c87758fc095a0657c5049a8fa408a5ccec4fedc1e568be46e3dd413d02a1339c",
+      "bytes": 1895,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-presentation-002.log",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-presentation-002.log.gz",
+      "raw_sha256": "85984fd09366f3af8730581998b2c79639281ba8275bccc1ed429b457d9a7eef",
+      "raw_bytes": 287,
+      "sha256": "7964239914cee1e020eef35b53dbb10f62eb1b86738cd5296011a00259227d00",
+      "bytes": 224,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-source-freeze-002.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-source-freeze-002.json.gz",
+      "raw_sha256": "092bf8d71c599b8596188d619de95c1fba0cc4358d02223c8e8298d14ed6cf7d",
+      "raw_bytes": 205547,
+      "sha256": "f2e972969625242a6ba073407a7b2eb0fa3ee1908fea21b6c5e3f64e9663f69c",
+      "bytes": 82682,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-source-freeze.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/shipping-source-freeze.json.gz",
+      "raw_sha256": "8cf07e0a8578b073ae2dcc67549a5ff0d4c1ae1790b76ac4c67962a7a6374113",
+      "raw_bytes": 205171,
+      "sha256": "d023d94c25f734e21ded9831125c8ddfe032d82659a02dfd1a85aa99c11f355b",
+      "bytes": 82525,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/source-freeze.json",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/source-freeze.json.gz",
+      "raw_sha256": "ae0dcb9842de81114d10515ef603637c51876dfbd34db86a057bd63ae0092920",
+      "raw_bytes": 205090,
+      "sha256": "a73879f9a0189bd00e18ba1acc4affff0f3dcb2b58ada92ca048bc1ff4438776",
+      "bytes": 82456,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/typescript-final.log",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/typescript-final.log.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/typescript.log",
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/typescript.log.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    }
+  ],
+  "limitations": [
+    "CPU numerical fixture only; no art, layout, window, GPU or appearance acceptance",
+    "Original development evidence remains outside isolated player path; own export authoring/cache, build directory and script maps removed",
+    "PCM is silent and verifies clock/repeat parity, not audible cues",
+    "Physics save/load and genuine whole-session restart remain unsupported",
+    "Camera follow and simultaneous hazard/exit priority remain outside these seven scenarios"
+  ],
+  "review": {
+    "source": "accepted",
+    "native_execution": "accepted",
+    "shipping_execution": "accepted",
+    "final_receipt": {
+      "retained": "docs/spikes/evidence/planar-presentation-bindings/final-review.json",
+      "sha256": "d2c9467a1a129564b823c187bf593650e441922a7066bfc63d02011cff98d192",
+      "reviewed_manifest_sha256": "33f17219d4d2a2d7ca4ad61be3cb6e112df7908a21720ceb9a0a444f3b08c11b"
+    }
+  }
+}

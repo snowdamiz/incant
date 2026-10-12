@@ -1,0 +1,267 @@
+{
+  "adapter": "Apple M5 Pro",
+  "backend": "Metal",
+  "captures": [
+    {
+      "flipbooks": [
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000001",
+          "playing": false
+        },
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000005",
+          "playing": false
+        },
+        {
+          "frame": 0,
+          "id": "01b65d5000000000000000000000000b",
+          "playing": true
+        },
+        {
+          "frame": 0,
+          "id": "01b65d5000000000000000000000000c",
+          "playing": true
+        },
+        {
+          "frame": 0,
+          "id": "01b65d5000000000000000000000000d",
+          "playing": true
+        },
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000015",
+          "playing": true
+        },
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000016",
+          "playing": true
+        },
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000017",
+          "playing": true
+        },
+        {
+          "frame": 0,
+          "id": "01b65d5000000000000000000000001f",
+          "playing": true
+        },
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000020",
+          "playing": true
+        },
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000021",
+          "playing": true
+        },
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000022",
+          "playing": true
+        }
+      ],
+      "hud": {
+        "glyph_quads": 11,
+        "gpu_bytes": 2788,
+        "labels": {
+          "01b662d0000000000000000000000002": {
+            "parent": "01b662d0000000000000000000000001",
+            "text": "Perlas: 0 de 3"
+          },
+          "01b662d0000000000000000000000003": {
+            "parent": "01b662d0000000000000000000000001",
+            "text": ""
+          }
+        },
+        "missing_glyphs": 0,
+        "widgets": 2
+      },
+      "rgba": "tick-00002.rgba",
+      "rgba_sha256": "521dbf1d0bae3d1443996b43e110c39842802c9c10a595e0ae434faf5a1bd017",
+      "size": [
+        1280,
+        720
+      ],
+      "tick": 2
+    },
+    {
+      "flipbooks": [
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000001",
+          "playing": false
+        },
+        {
+          "frame": 1,
+          "id": "01b65d50000000000000000000000005",
+          "playing": false
+        },
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000015",
+          "playing": true
+        },
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000016",
+          "playing": true
+        },
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000017",
+          "playing": true
+        },
+        {
+          "frame": 1,
+          "id": "01b65d5000000000000000000000001f",
+          "playing": true
+        },
+        {
+          "frame": 10,
+          "id": "01b65d50000000000000000000000020",
+          "playing": true
+        },
+        {
+          "frame": 1,
+          "id": "01b65d50000000000000000000000021",
+          "playing": true
+        },
+        {
+          "frame": 10,
+          "id": "01b65d50000000000000000000000022",
+          "playing": true
+        }
+      ],
+      "hud": {
+        "glyph_quads": 32,
+        "gpu_bytes": 6301,
+        "labels": {
+          "01b662d0000000000000000000000002": {
+            "parent": "01b662d0000000000000000000000001",
+            "text": "Tienes todas las perlas. Sube al bote."
+          },
+          "01b662d0000000000000000000000003": {
+            "parent": "01b662d0000000000000000000000001",
+            "text": ""
+          }
+        },
+        "missing_glyphs": 0,
+        "widgets": 2
+      },
+      "rgba": "tick-00560.rgba",
+      "rgba_sha256": "696f2bc27dab44ed16facd4b2bf352fe7a1fe86b5ec572129a016e05ec07edcc",
+      "size": [
+        1280,
+        720
+      ],
+      "tick": 560
+    },
+    {
+      "flipbooks": [
+        {
+          "frame": 2,
+          "id": "01b65d50000000000000000000000001",
+          "playing": false
+        },
+        {
+          "frame": 1,
+          "id": "01b65d50000000000000000000000005",
+          "playing": false
+        },
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000015",
+          "playing": true
+        },
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000016",
+          "playing": true
+        },
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000017",
+          "playing": true
+        },
+        {
+          "frame": 1,
+          "id": "01b65d5000000000000000000000001f",
+          "playing": true
+        },
+        {
+          "frame": 3,
+          "id": "01b65d50000000000000000000000020",
+          "playing": true
+        },
+        {
+          "frame": 1,
+          "id": "01b65d50000000000000000000000021",
+          "playing": true
+        },
+        {
+          "frame": 3,
+          "id": "01b65d50000000000000000000000022",
+          "playing": true
+        }
+      ],
+      "hud": {
+        "glyph_quads": 20,
+        "gpu_bytes": 4675,
+        "labels": {
+          "01b662d0000000000000000000000002": {
+            "parent": "01b662d0000000000000000000000001",
+            "text": "Rumbo a casa con 3 perlas"
+          },
+          "01b662d0000000000000000000000003": {
+            "parent": "01b662d0000000000000000000000001",
+            "text": ""
+          }
+        },
+        "missing_glyphs": 0,
+        "widgets": 2
+      },
+      "rgba": "tick-00781.rgba",
+      "rgba_sha256": "d46771689bb2e604d52b6571eba263c0bd4e89aad787bf631c7962c0267a93b2",
+      "size": [
+        1280,
+        720
+      ],
+      "tick": 781
+    }
+  ],
+  "format": "incant-0061-hud-frames",
+  "logs": [
+    {
+      "message": "planar.pickup 01PSEN0000000000000000000B 1/3",
+      "tick": 130
+    },
+    {
+      "message": "planar.pickup 01PSEN0000000000000000000C 2/3",
+      "tick": 430
+    },
+    {
+      "message": "planar.pickup 01PSEN0000000000000000000D 3/3",
+      "tick": 529
+    },
+    {
+      "message": "planar.won tick=719 pickups=3",
+      "tick": 719
+    }
+  ],
+  "scale": 2.0,
+  "scope": "offscreen GPU frames of the embedded program; no window or presentation",
+  "size": [
+    1280,
+    720
+  ],
+  "target_format": "Rgba8UnormSrgb",
+  "viewport": [
+    640.0,
+    360.0
+  ]
+}

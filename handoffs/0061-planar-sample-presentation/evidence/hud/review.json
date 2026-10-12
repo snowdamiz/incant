@@ -1,0 +1,928 @@
+{
+  "format": "incant-0061-hud-review",
+  "head": "44060bc3940b1f4c845b94beaff5a8c1c5b8872f",
+  "headless_sha256": "614fe208a1365f10dd3f68bdaa2c9ddcefd09850b74acfe13d4689c91707e7a0",
+  "locales": {
+    "en": {
+      "settings": {
+        "locale": "en"
+      },
+      "project_sha256": "5726c159d42a7b37e059b22c4b05e781a4b34f8e68156b6e4b72fc382c8d87d6",
+      "package": {
+        "producer": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/build/incant_game_player-82ac48e8e0b8886f/out",
+        "camera_hex": "01b65d50000000000000000000000003",
+        "data": {
+          "bytes": 663958,
+          "files": {
+            "world.scene": "1cac97225825fc33b0333eaa6fdca949fbcd8affc82dc57867f306cda03f62ed",
+            "input-actions.json": "617123f0cd018451a23ddc8e096249208484867db707e9041e76af832f1e1624",
+            "empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+            "textures/122f66de7e10580a78ad5ab1e62a0ec78160dd9d63de90044e4135824977dc9b.json": "7b9e665144dedd1dd71fedd36e99ff6ca68863a827eb87588fd403e6812a5a0b",
+            "textures/ca7474ab217451d31f28d49082d0995859ed2374d10e441d1b0d4eae7bc53f2a.ktx2": "ca7474ab217451d31f28d49082d0995859ed2374d10e441d1b0d4eae7bc53f2a",
+            "textures/615703c8f498271b604c202a36dc115ae39062ec72c25be6f743c6be3e604079.ktx2": "615703c8f498271b604c202a36dc115ae39062ec72c25be6f743c6be3e604079",
+            "fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json": "76b2977309e2485a6007bcb9c6e75df3a2e161dc576ebbf6be00f6b8b961d0f0",
+            "fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont": "48804b712c66bb0ce00b2cc3272c7be18171810a3bb0555e3d247544951e0fdc",
+            "clips.bin": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+            "package.json": "7e33fc6ef1ea95ea982fc6dbf09452d99b728c52982fe9f6dcbf1c963f7ac563"
+          }
+        },
+        "binary": "hud_frames",
+        "binary_sha256": "f5618072142690f4b7befa1623bb30488e2721fedd6ff755182c11de4668d88e"
+      },
+      "captures": {
+        "keyboard-win-640x360x2": {
+          "adapter": "Apple M5 Pro",
+          "backend": "Metal",
+          "size": [
+            1280,
+            720
+          ],
+          "logs": [
+            "planar.pickup 01PSEN0000000000000000000B 1/3",
+            "planar.pickup 01PSEN0000000000000000000C 2/3",
+            "planar.pickup 01PSEN0000000000000000000D 3/3",
+            "planar.won tick=719 pickups=3"
+          ],
+          "checks": [
+            {
+              "tick": 2,
+              "state": "start",
+              "status": "Pearls 0 of 3",
+              "player_frame": 0,
+              "boat_frame": 0,
+              "png": "tick-00002.png",
+              "png_sha256": "d725aae21d6371246ac1f38f3dee05d1ea3df0a084ca4ac400d3649771cb6adb",
+              "rgba_sha256": "e92cb7802deb4489c229cc4660fb9116329c5e85fb33613a069ce13fc6712ff7",
+              "glyph_quads": 10
+            },
+            {
+              "tick": 150,
+              "state": "one",
+              "status": "Pearls 1 of 3",
+              "player_frame": 0,
+              "boat_frame": 0,
+              "png": "tick-00150.png",
+              "png_sha256": "16c07b1ad84c6bba3e6446fc12baf162ff2e4d5bb4b7e9d81c1fe936df000ad0",
+              "rgba_sha256": "9562cbeab37875f909ccb03bcb18818442de0c7aade14c3412fbd461068a290e",
+              "glyph_quads": 10
+            },
+            {
+              "tick": 450,
+              "state": "two",
+              "status": "Pearls 2 of 3",
+              "player_frame": 0,
+              "boat_frame": 0,
+              "png": "tick-00450.png",
+              "png_sha256": "e9733e9721d3ddfc39a9d96408ae8c810e46c30ac9ad26a98f5b0fb98ae92284",
+              "rgba_sha256": "b9533314760c7ebd6e507c1681b4f6fe6bce6474c3f13785c0992e8c2070a999",
+              "glyph_quads": 10
+            },
+            {
+              "tick": 560,
+              "state": "ready",
+              "status": "All pearls found. Board the boat.",
+              "player_frame": 0,
+              "boat_frame": 1,
+              "png": "tick-00560.png",
+              "png_sha256": "95b04e586e34d1979ef099a5e2d2603352ec71f545ce1b12855b4911a9679bf4",
+              "rgba_sha256": "27009afbff5e7eb7c67cb1d3f448783badca13d8cb187263c49f59714e0ac156",
+              "glyph_quads": 28
+            },
+            {
+              "tick": 781,
+              "state": "won",
+              "status": "Sailing home with 3 pearls",
+              "player_frame": 2,
+              "boat_frame": 1,
+              "png": "tick-00781.png",
+              "png_sha256": "21c1400e75e5ea9b77eeb834ecc857553abe384efe9b224f5456e87143dfeec6",
+              "rgba_sha256": "276e21d1a657fcd2e3518ac1c10c57451b1a1ea6bcaa6d0394eb17f0159da709",
+              "glyph_quads": 22
+            }
+          ]
+        },
+        "gamepad-win-640x360x2": {
+          "adapter": "Apple M5 Pro",
+          "backend": "Metal",
+          "size": [
+            1280,
+            720
+          ],
+          "logs": [
+            "planar.pickup 01PSEN0000000000000000000B 1/3",
+            "planar.pickup 01PSEN0000000000000000000C 2/3",
+            "planar.pickup 01PSEN0000000000000000000D 3/3",
+            "planar.won tick=719 pickups=3"
+          ],
+          "checks": [
+            {
+              "tick": 781,
+              "state": "won",
+              "status": "Sailing home with 3 pearls",
+              "player_frame": 2,
+              "boat_frame": 1,
+              "png": "tick-00781.png",
+              "png_sha256": "21c1400e75e5ea9b77eeb834ecc857553abe384efe9b224f5456e87143dfeec6",
+              "rgba_sha256": "276e21d1a657fcd2e3518ac1c10c57451b1a1ea6bcaa6d0394eb17f0159da709",
+              "glyph_quads": 22
+            }
+          ]
+        },
+        "urchin-loss-640x360x2": {
+          "adapter": "Apple M5 Pro",
+          "backend": "Metal",
+          "size": [
+            1280,
+            720
+          ],
+          "logs": [
+            "planar.lost tick=149 pickups=0"
+          ],
+          "checks": [
+            {
+              "tick": 201,
+              "state": "lost",
+              "status": "Stung by a sea urchin",
+              "player_frame": 1,
+              "boat_frame": 0,
+              "png": "tick-00201.png",
+              "png_sha256": "fcafdb2596638c102e0371753ac851bd5131464dfe2f9836ae3de42148329a7a",
+              "rgba_sha256": "71820d2f4ca049e92fd6f433ec0032c4a3bc5ee9651c88aa981a87dcbca1a1ef",
+              "glyph_quads": 17
+            }
+          ]
+        },
+        "locked-boat-640x360x2": {
+          "adapter": "Apple M5 Pro",
+          "backend": "Metal",
+          "size": [
+            1280,
+            720
+          ],
+          "logs": [],
+          "checks": [
+            {
+              "tick": 181,
+              "state": "locked",
+              "status": "Pearls 0 of 3",
+              "player_frame": 0,
+              "boat_frame": 0,
+              "png": "tick-00181.png",
+              "png_sha256": "130faf3f9f6dca9fe12a18082e034c698551d387375fab230cb6d531e55e9bac",
+              "rgba_sha256": "5bdeda302f1dce8f09bf89a8a1f42466e54ea932f8587812a4e417b1f155e01a",
+              "glyph_quads": 10
+            }
+          ]
+        },
+        "keyboard-win-640x480x2": {
+          "adapter": "Apple M5 Pro",
+          "backend": "Metal",
+          "size": [
+            1280,
+            960
+          ],
+          "logs": [
+            "planar.pickup 01PSEN0000000000000000000B 1/3",
+            "planar.pickup 01PSEN0000000000000000000C 2/3",
+            "planar.pickup 01PSEN0000000000000000000D 3/3",
+            "planar.won tick=719 pickups=3"
+          ],
+          "checks": [
+            {
+              "tick": 2,
+              "state": "start",
+              "status": "Pearls 0 of 3",
+              "player_frame": 0,
+              "boat_frame": 0,
+              "png": "tick-00002.png",
+              "png_sha256": "7c74bdbe99d7444d58f00572920c621415afcafe2cc6d87b43a1a4524c0422c8",
+              "rgba_sha256": "5ef36ad605ed3a5d20bc8b5adb002695296e98769ac1661b0391959bed7955da",
+              "glyph_quads": 10
+            },
+            {
+              "tick": 781,
+              "state": "won",
+              "status": "Sailing home with 3 pearls",
+              "player_frame": 2,
+              "boat_frame": 1,
+              "png": "tick-00781.png",
+              "png_sha256": "e21a8b1a3f5163579683208cc98787a9a8bb086551a49b5948e8b05220fafc84",
+              "rgba_sha256": "110780ec163f56209c71b959155152b892f2f79aa62c105bd98bb6e5a8969ed5",
+              "glyph_quads": 22
+            }
+          ]
+        },
+        "keyboard-win-844x390x3": {
+          "adapter": "Apple M5 Pro",
+          "backend": "Metal",
+          "size": [
+            2532,
+            1170
+          ],
+          "logs": [
+            "planar.pickup 01PSEN0000000000000000000B 1/3",
+            "planar.pickup 01PSEN0000000000000000000C 2/3",
+            "planar.pickup 01PSEN0000000000000000000D 3/3",
+            "planar.won tick=719 pickups=3"
+          ],
+          "checks": [
+            {
+              "tick": 2,
+              "state": "start",
+              "status": "Pearls 0 of 3",
+              "player_frame": 0,
+              "boat_frame": 0,
+              "png": "tick-00002.png",
+              "png_sha256": "f966a1a1eee2b8b32ba8203236569e78a1db731e9d03d34bf536b664ec952d34",
+              "rgba_sha256": "ae0594fd25b7c54f9c595555ba4a0c9ddfb73426a95a8dd43b954794cb9de15b",
+              "glyph_quads": 10
+            },
+            {
+              "tick": 781,
+              "state": "won",
+              "status": "Sailing home with 3 pearls",
+              "player_frame": 2,
+              "boat_frame": 1,
+              "png": "tick-00781.png",
+              "png_sha256": "5d87e3a573a94370c8247263bd88929188fa461779dccdcd09b79dd5f9f6e9d6",
+              "rgba_sha256": "8e40ed6b2ac3b0f3837cf6c38a3f99757ae8b31014aa7ef4d58814c3f458a92e",
+              "glyph_quads": 22
+            }
+          ]
+        }
+      }
+    },
+    "es": {
+      "settings": {
+        "locale": "es"
+      },
+      "project_sha256": "837b6ed95abecd495d066c45c3f9202f43791140700b18a07a5d80bb3aae9175",
+      "package": {
+        "producer": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/build/incant_game_player-82ac48e8e0b8886f/out",
+        "camera_hex": "01b65d50000000000000000000000003",
+        "data": {
+          "bytes": 663958,
+          "files": {
+            "world.scene": "27496d3d140766e090d9e75ecfd4a56b8a18f81b5089324f8201e42e877cef54",
+            "input-actions.json": "617123f0cd018451a23ddc8e096249208484867db707e9041e76af832f1e1624",
+            "empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+            "textures/122f66de7e10580a78ad5ab1e62a0ec78160dd9d63de90044e4135824977dc9b.json": "7b9e665144dedd1dd71fedd36e99ff6ca68863a827eb87588fd403e6812a5a0b",
+            "textures/ca7474ab217451d31f28d49082d0995859ed2374d10e441d1b0d4eae7bc53f2a.ktx2": "ca7474ab217451d31f28d49082d0995859ed2374d10e441d1b0d4eae7bc53f2a",
+            "textures/615703c8f498271b604c202a36dc115ae39062ec72c25be6f743c6be3e604079.ktx2": "615703c8f498271b604c202a36dc115ae39062ec72c25be6f743c6be3e604079",
+            "fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json": "76b2977309e2485a6007bcb9c6e75df3a2e161dc576ebbf6be00f6b8b961d0f0",
+            "fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont": "48804b712c66bb0ce00b2cc3272c7be18171810a3bb0555e3d247544951e0fdc",
+            "clips.bin": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+            "package.json": "da63842242458cfac6e8bdf9139d8fc9f58e19c6d11ab722a732c02c779733b1"
+          }
+        },
+        "binary": "hud_frames",
+        "binary_sha256": "a090cb39a79d12249e67c33749d85dc1e026a2442d6bb46055ce5f0e9cd69d08"
+      },
+      "captures": {
+        "keyboard-win-640x360x2": {
+          "adapter": "Apple M5 Pro",
+          "backend": "Metal",
+          "size": [
+            1280,
+            720
+          ],
+          "logs": [
+            "planar.pickup 01PSEN0000000000000000000B 1/3",
+            "planar.pickup 01PSEN0000000000000000000C 2/3",
+            "planar.pickup 01PSEN0000000000000000000D 3/3",
+            "planar.won tick=719 pickups=3"
+          ],
+          "checks": [
+            {
+              "tick": 2,
+              "state": "start",
+              "status": "Perlas: 0 de 3",
+              "player_frame": 0,
+              "boat_frame": 0,
+              "png": "tick-00002.png",
+              "png_sha256": "7ab65437c26cfb8eb64c181490d2c603a102667e27a4f1973dd012fd54f95007",
+              "rgba_sha256": "521dbf1d0bae3d1443996b43e110c39842802c9c10a595e0ae434faf5a1bd017",
+              "glyph_quads": 11
+            },
+            {
+              "tick": 560,
+              "state": "ready",
+              "status": "Tienes todas las perlas. Sube al bote.",
+              "player_frame": 0,
+              "boat_frame": 1,
+              "png": "tick-00560.png",
+              "png_sha256": "5ec08fd21d92fedbe84140b6c8a7165065d5b5a8afbfae9a3007bd4991520b29",
+              "rgba_sha256": "696f2bc27dab44ed16facd4b2bf352fe7a1fe86b5ec572129a016e05ec07edcc",
+              "glyph_quads": 32
+            },
+            {
+              "tick": 781,
+              "state": "won",
+              "status": "Rumbo a casa con 3 perlas",
+              "player_frame": 2,
+              "boat_frame": 1,
+              "png": "tick-00781.png",
+              "png_sha256": "5fdabe2f595556caf1f9e631f452cf4922c7ff0fe64d3d98d4fe26f769341b36",
+              "rgba_sha256": "d46771689bb2e604d52b6571eba263c0bd4e89aad787bf631c7962c0267a93b2",
+              "glyph_quads": 20
+            }
+          ]
+        },
+        "urchin-loss-640x360x2": {
+          "adapter": "Apple M5 Pro",
+          "backend": "Metal",
+          "size": [
+            1280,
+            720
+          ],
+          "logs": [
+            "planar.lost tick=149 pickups=0"
+          ],
+          "checks": [
+            {
+              "tick": 201,
+              "state": "lost",
+              "status": "Te picó un erizo de mar",
+              "player_frame": 1,
+              "boat_frame": 0,
+              "png": "tick-00201.png",
+              "png_sha256": "e5fb6001afe70df0e327f538651c1b63a562fac30eea0b3c953ef2109a140874",
+              "rgba_sha256": "ebf2cbf73205210e3000a319e914239b254f68b31df0133b3b61bbcc3641436e",
+              "glyph_quads": 18
+            }
+          ]
+        }
+      }
+    },
+    "fr": {
+      "settings": {
+        "locale": "fr"
+      },
+      "project_sha256": "5ec81f0a581558812f6593ed6800f5f3d7273801be3d7f2f599228cb7f2746c6",
+      "package": {
+        "producer": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/build/incant_game_player-82ac48e8e0b8886f/out",
+        "camera_hex": "01b65d50000000000000000000000003",
+        "data": {
+          "bytes": 663958,
+          "files": {
+            "world.scene": "61abaf2ce42c7b5dc26ee0de0a3e9a11467ac8cbb3698f29e724a2c16743ca7d",
+            "input-actions.json": "617123f0cd018451a23ddc8e096249208484867db707e9041e76af832f1e1624",
+            "empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+            "textures/122f66de7e10580a78ad5ab1e62a0ec78160dd9d63de90044e4135824977dc9b.json": "7b9e665144dedd1dd71fedd36e99ff6ca68863a827eb87588fd403e6812a5a0b",
+            "textures/ca7474ab217451d31f28d49082d0995859ed2374d10e441d1b0d4eae7bc53f2a.ktx2": "ca7474ab217451d31f28d49082d0995859ed2374d10e441d1b0d4eae7bc53f2a",
+            "textures/615703c8f498271b604c202a36dc115ae39062ec72c25be6f743c6be3e604079.ktx2": "615703c8f498271b604c202a36dc115ae39062ec72c25be6f743c6be3e604079",
+            "fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json": "76b2977309e2485a6007bcb9c6e75df3a2e161dc576ebbf6be00f6b8b961d0f0",
+            "fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont": "48804b712c66bb0ce00b2cc3272c7be18171810a3bb0555e3d247544951e0fdc",
+            "clips.bin": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+            "package.json": "049fd94208352927d9ed37914ab26464da00bb4c5f63aac5a21a452af095fb67"
+          }
+        },
+        "binary": "hud_frames",
+        "binary_sha256": "5059ecea4187464077e9ff094c7bd9d4295d96cf5a6d474afd6317814da5b749"
+      },
+      "captures": {
+        "keyboard-win-640x360x2": {
+          "adapter": "Apple M5 Pro",
+          "backend": "Metal",
+          "size": [
+            1280,
+            720
+          ],
+          "logs": [
+            "planar.pickup 01PSEN0000000000000000000B 1/3",
+            "planar.pickup 01PSEN0000000000000000000C 2/3",
+            "planar.pickup 01PSEN0000000000000000000D 3/3",
+            "planar.won tick=719 pickups=3"
+          ],
+          "checks": [
+            {
+              "tick": 2,
+              "state": "start",
+              "status": "Perles : 0 sur 3",
+              "player_frame": 0,
+              "boat_frame": 0,
+              "png": "tick-00002.png",
+              "png_sha256": "a0a1c44d4d13310e56562736604983654ae0ab4e1739f70a375840b68782cd54",
+              "rgba_sha256": "5d8d68bd39d6469c83239add478bc9df53a447e3cb0cb3205ed142701317897a",
+              "glyph_quads": 12
+            },
+            {
+              "tick": 560,
+              "state": "ready",
+              "status": "Toutes les perles sont là. Montez dans la barque.",
+              "player_frame": 0,
+              "boat_frame": 1,
+              "png": "tick-00560.png",
+              "png_sha256": "0703ea00cc75126f3761160c02703abc40426be812d37e4950825c7763189275",
+              "rgba_sha256": "412abaef7f668d6c6ec4c19b883db5c700943e8ba28b84ebb6fbc37ae1e66677",
+              "glyph_quads": 41
+            },
+            {
+              "tick": 781,
+              "state": "won",
+              "status": "Retour au port avec 3 perles",
+              "player_frame": 2,
+              "boat_frame": 1,
+              "png": "tick-00781.png",
+              "png_sha256": "f8380356c0db51b5fa5d50caa10df6d6fc50be092915af10a81e4070e6381b57",
+              "rgba_sha256": "def9f5b09ad40e8fb79b6ca3090d72b6ef8f104689c4089f5e40b7816a013cdf",
+              "glyph_quads": 23
+            }
+          ]
+        },
+        "urchin-loss-640x360x2": {
+          "adapter": "Apple M5 Pro",
+          "backend": "Metal",
+          "size": [
+            1280,
+            720
+          ],
+          "logs": [
+            "planar.lost tick=149 pickups=0"
+          ],
+          "checks": [
+            {
+              "tick": 201,
+              "state": "lost",
+              "status": "Piqué par un oursin",
+              "player_frame": 1,
+              "boat_frame": 0,
+              "png": "tick-00201.png",
+              "png_sha256": "28b1b147052ead2e523272165ce1505067a5ced39fbddc6bcdc96f56b805f51f",
+              "rgba_sha256": "47a6a1041d78fad3b971ac658431524155e6cc1f5a50849a644333f800f558c0",
+              "glyph_quads": 16
+            }
+          ]
+        }
+      }
+    },
+    "de": {
+      "settings": {
+        "locale": "de"
+      },
+      "project_sha256": "1d9f1b0ca14da5dd75c60e81aecf661658936e78efa4a6808f31bafc9207f235",
+      "package": {
+        "producer": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/build/incant_game_player-82ac48e8e0b8886f/out",
+        "camera_hex": "01b65d50000000000000000000000003",
+        "data": {
+          "bytes": 663958,
+          "files": {
+            "world.scene": "e34b79ca5dddaebbdf12091cdcea1c15af7eb5378aa55c33ece6e4f934ab6301",
+            "input-actions.json": "617123f0cd018451a23ddc8e096249208484867db707e9041e76af832f1e1624",
+            "empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+            "textures/122f66de7e10580a78ad5ab1e62a0ec78160dd9d63de90044e4135824977dc9b.json": "7b9e665144dedd1dd71fedd36e99ff6ca68863a827eb87588fd403e6812a5a0b",
+            "textures/ca7474ab217451d31f28d49082d0995859ed2374d10e441d1b0d4eae7bc53f2a.ktx2": "ca7474ab217451d31f28d49082d0995859ed2374d10e441d1b0d4eae7bc53f2a",
+            "textures/615703c8f498271b604c202a36dc115ae39062ec72c25be6f743c6be3e604079.ktx2": "615703c8f498271b604c202a36dc115ae39062ec72c25be6f743c6be3e604079",
+            "fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json": "76b2977309e2485a6007bcb9c6e75df3a2e161dc576ebbf6be00f6b8b961d0f0",
+            "fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont": "48804b712c66bb0ce00b2cc3272c7be18171810a3bb0555e3d247544951e0fdc",
+            "clips.bin": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+            "package.json": "d68803ef8a620d37a42ff4058ef77e6fc0e9e84f93827c7cb31ce7b320ebbbe5"
+          }
+        },
+        "binary": "hud_frames",
+        "binary_sha256": "cbeb0f920f4f36c1c70a5cb1cd00aba2c85e6f2df36a4ea78f994ab0005494cb"
+      },
+      "captures": {
+        "keyboard-win-640x360x2": {
+          "adapter": "Apple M5 Pro",
+          "backend": "Metal",
+          "size": [
+            1280,
+            720
+          ],
+          "logs": [
+            "planar.pickup 01PSEN0000000000000000000B 1/3",
+            "planar.pickup 01PSEN0000000000000000000C 2/3",
+            "planar.pickup 01PSEN0000000000000000000D 3/3",
+            "planar.won tick=719 pickups=3"
+          ],
+          "checks": [
+            {
+              "tick": 2,
+              "state": "start",
+              "status": "Perlen: 0 von 3",
+              "player_frame": 0,
+              "boat_frame": 0,
+              "png": "tick-00002.png",
+              "png_sha256": "b697efe0c89b04abc22740308e0923a0c05099414bb446395b564f9a36f951ca",
+              "rgba_sha256": "824e9f2e3d4e4677379d058823dc2b25f2816324326c8e57f6e26d8fe07fdc8b",
+              "glyph_quads": 12
+            },
+            {
+              "tick": 560,
+              "state": "ready",
+              "status": "Alle Perlen gefunden. Ab ins Boot!",
+              "player_frame": 0,
+              "boat_frame": 1,
+              "png": "tick-00560.png",
+              "png_sha256": "9452031005e723bb2e33a45c20c3dc2d1fde41f58679046741972fc7547e3f5f",
+              "rgba_sha256": "57c5ed640e34321be122db575fd92fe5304190e8bf1cad3bbb09311416d87061",
+              "glyph_quads": 29
+            },
+            {
+              "tick": 781,
+              "state": "won",
+              "status": "Mit 3 Perlen nach Hause",
+              "player_frame": 2,
+              "boat_frame": 1,
+              "png": "tick-00781.png",
+              "png_sha256": "b2a70313695f391fc54ad0cabc87aba6751865df6bd9cf04d5a74b8a1c74f642",
+              "rgba_sha256": "b5789e864fcd0ab4604d818ac3e7d36d947f66891947180d809cfa5dbde7627a",
+              "glyph_quads": 19
+            }
+          ]
+        },
+        "urchin-loss-640x360x2": {
+          "adapter": "Apple M5 Pro",
+          "backend": "Metal",
+          "size": [
+            1280,
+            720
+          ],
+          "logs": [
+            "planar.lost tick=149 pickups=0"
+          ],
+          "checks": [
+            {
+              "tick": 201,
+              "state": "lost",
+              "status": "Von einem Seeigel gestochen",
+              "player_frame": 1,
+              "boat_frame": 0,
+              "png": "tick-00201.png",
+              "png_sha256": "55376ecae1c33d060e0f1308a91897bc4149eb209ac799b1201c834e7ccd93b9",
+              "rgba_sha256": "15e67b0b7fa19dcd9b5019f1eb6461a973a2874a2ca5678c29e9f19b8210a320",
+              "glyph_quads": 24
+            }
+          ]
+        }
+      }
+    },
+    "pseudo": {
+      "settings": {
+        "locale": "en",
+        "pseudo": true
+      },
+      "project_sha256": "74f8c383c0ddacad25e7980e70857b03d6c9d7c65265b0b75c2c37794bb83569",
+      "package": {
+        "producer": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/build/incant_game_player-82ac48e8e0b8886f/out",
+        "camera_hex": "01b65d50000000000000000000000003",
+        "data": {
+          "bytes": 663958,
+          "files": {
+            "world.scene": "453be656fcc7079318363ab0481a72dbbfaf30960be55c1c8762e9527fb728dd",
+            "input-actions.json": "617123f0cd018451a23ddc8e096249208484867db707e9041e76af832f1e1624",
+            "empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+            "textures/122f66de7e10580a78ad5ab1e62a0ec78160dd9d63de90044e4135824977dc9b.json": "7b9e665144dedd1dd71fedd36e99ff6ca68863a827eb87588fd403e6812a5a0b",
+            "textures/ca7474ab217451d31f28d49082d0995859ed2374d10e441d1b0d4eae7bc53f2a.ktx2": "ca7474ab217451d31f28d49082d0995859ed2374d10e441d1b0d4eae7bc53f2a",
+            "textures/615703c8f498271b604c202a36dc115ae39062ec72c25be6f743c6be3e604079.ktx2": "615703c8f498271b604c202a36dc115ae39062ec72c25be6f743c6be3e604079",
+            "fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json": "76b2977309e2485a6007bcb9c6e75df3a2e161dc576ebbf6be00f6b8b961d0f0",
+            "fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont": "48804b712c66bb0ce00b2cc3272c7be18171810a3bb0555e3d247544951e0fdc",
+            "clips.bin": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+            "package.json": "6c5bc6d29d0d457aaf5dd801e121cf5e9f6bf21b937e7a220a9118db79a2f326"
+          }
+        },
+        "binary": "hud_frames",
+        "binary_sha256": "f1c8a03dfde61d43e5a2563de6a7c5a2d7f7049ac28e5f56374e969f77442312"
+      },
+      "captures": {
+        "keyboard-win-640x360x2": {
+          "adapter": "Apple M5 Pro",
+          "backend": "Metal",
+          "size": [
+            1280,
+            720
+          ],
+          "logs": [
+            "planar.pickup 01PSEN0000000000000000000B 1/3",
+            "planar.pickup 01PSEN0000000000000000000C 2/3",
+            "planar.pickup 01PSEN0000000000000000000D 3/3",
+            "planar.won tick=719 pickups=3"
+          ],
+          "checks": [
+            {
+              "tick": 2,
+              "state": "start",
+              "status": "[!! Þééááŕľš 0 óóƒ 3 !!]",
+              "player_frame": 0,
+              "boat_frame": 0,
+              "png": "tick-00002.png",
+              "png_sha256": "32969e11ea47f8de45ac6a674cd22d3fe6841743fdb96d1b5cffd5367f499af3",
+              "rgba_sha256": "6656a3fffbece605946c9a491c46a5e75ca1118fe0d6d9585fd00a2f9ba981c0",
+              "glyph_quads": 19
+            },
+            {
+              "tick": 560,
+              "state": "ready",
+              "status": "[!! ÁÁľľ þééááŕľš ƒóóúúñď. Ƀóóááŕď ţĥéé ƀóóááţ. !!]",
+              "player_frame": 0,
+              "boat_frame": 1,
+              "png": "tick-00560.png",
+              "png_sha256": "b762be36a9213b61785f2c93b8a67d02143b11decf0b4c2759e62f9f011604a8",
+              "rgba_sha256": "feb422aa87b84a6cb847afe41391d5a6be2f2ffe88eb3b8dae611b1e91d30432",
+              "glyph_quads": 44
+            },
+            {
+              "tick": 781,
+              "state": "won",
+              "status": "[!! Šááííľííñğ ĥóóɱéé ŵííţĥ 3 þééááŕľš !!]",
+              "player_frame": 2,
+              "boat_frame": 1,
+              "png": "tick-00781.png",
+              "png_sha256": "a0c25a07a99110058146d17e00379a9ad9aa3cbb016dfd74fb20998501177683",
+              "rgba_sha256": "befd9e9d99a9ef2058a450d18d22705945e24c1f9a23d6f3af59a588d9b28802",
+              "glyph_quads": 36
+            }
+          ]
+        },
+        "urchin-loss-640x360x2": {
+          "adapter": "Apple M5 Pro",
+          "backend": "Metal",
+          "size": [
+            1280,
+            720
+          ],
+          "logs": [
+            "planar.lost tick=149 pickups=0"
+          ],
+          "checks": [
+            {
+              "tick": 201,
+              "state": "lost",
+              "status": "[!! Šţúúñğ ƀý áá šééáá úúŕçĥííñ !!]",
+              "player_frame": 1,
+              "boat_frame": 0,
+              "png": "tick-00201.png",
+              "png_sha256": "c54e79fe26b282ec23ca4c1b360633f4e16c5ccbb5d830f50c65944b3b4d2838",
+              "rgba_sha256": "c7df912905607ea7aebf8afa4625c2797ae178e072e942e09c731b5fc9849085",
+              "glyph_quads": 29
+            }
+          ]
+        }
+      }
+    }
+  },
+  "gamepad_matches_keyboard_frame": true,
+  "player": {
+    "package": {
+      "producer": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/build/incant_game_player-ed4c03d060cdfa51/out",
+      "camera_hex": "01b65d50000000000000000000000003",
+      "data": {
+        "bytes": 663958,
+        "files": {
+          "world.scene": "1cac97225825fc33b0333eaa6fdca949fbcd8affc82dc57867f306cda03f62ed",
+          "input-actions.json": "617123f0cd018451a23ddc8e096249208484867db707e9041e76af832f1e1624",
+          "empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+          "textures/122f66de7e10580a78ad5ab1e62a0ec78160dd9d63de90044e4135824977dc9b.json": "7b9e665144dedd1dd71fedd36e99ff6ca68863a827eb87588fd403e6812a5a0b",
+          "textures/ca7474ab217451d31f28d49082d0995859ed2374d10e441d1b0d4eae7bc53f2a.ktx2": "ca7474ab217451d31f28d49082d0995859ed2374d10e441d1b0d4eae7bc53f2a",
+          "textures/615703c8f498271b604c202a36dc115ae39062ec72c25be6f743c6be3e604079.ktx2": "615703c8f498271b604c202a36dc115ae39062ec72c25be6f743c6be3e604079",
+          "fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json": "76b2977309e2485a6007bcb9c6e75df3a2e161dc576ebbf6be00f6b8b961d0f0",
+          "fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont": "48804b712c66bb0ce00b2cc3272c7be18171810a3bb0555e3d247544951e0fdc",
+          "clips.bin": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+          "package.json": "7e33fc6ef1ea95ea982fc6dbf09452d99b728c52982fe9f6dcbf1c963f7ac563"
+        }
+      },
+      "binary": "incant_game_player",
+      "binary_sha256": "6056511b3cce9d2a1032181a43f3fbcd1fb58cdee8cc513044fd14473e9bdf78"
+    },
+    "runs": {
+      "keyboard-win": {
+        "tick": 781,
+        "status": "Sailing home with 3 pearls",
+        "ui": {
+          "widgets": 3,
+          "focus": null
+        }
+      },
+      "gamepad-win": {
+        "tick": 781,
+        "status": "Sailing home with 3 pearls",
+        "ui": {
+          "widgets": 3,
+          "focus": null
+        }
+      },
+      "urchin-loss": {
+        "tick": 201,
+        "status": "Stung by a sea urchin",
+        "ui": {
+          "widgets": 3,
+          "focus": null
+        }
+      },
+      "locked-boat": {
+        "tick": 181,
+        "status": "Pearls 0 of 3",
+        "ui": {
+          "widgets": 3,
+          "focus": null
+        }
+      }
+    }
+  },
+  "scene_result": {
+    "passed": true,
+    "binary_sha256": "614fe208a1365f10dd3f68bdaa2c9ddcefd09850b74acfe13d4689c91707e7a0",
+    "project": "/Users/andreyyurlov/.codex/incant-evidence/0061-hud/review-2/build/project/planar.json",
+    "scene": "01M4S1CXR011CR0TP9K32C5HAS",
+    "camera": "01PSEN00000000000000000003",
+    "atlas": "01M4S1CXVABARY19P2RJQDHY4D",
+    "font": "01M4S1CXWBA8HSTK8D5EH3Z66E",
+    "hud": {
+      "root": "01PSHD00000000000000000001",
+      "status": "01PSHD00000000000000000002",
+      "prompt": "01PSHD00000000000000000003",
+      "table": "01PSST00000000000000000001"
+    },
+    "gameplay_sha256": "7dd5d9965fe25f9f373420b22734755cd79dc3a84c689288f871b9fa2fa81d90",
+    "art_files": {
+      "cove-tiles.png": "f27c019367042dd278a80853c96c3de47dd048454d16f75b7a291d9594d9af74",
+      "cove-sprites.png": "44e37849f354e0b98df429395892d3c3a882fa2026b92b7a8b8c9c160009e3bd",
+      "cove.atlas.json": "b07d9d2cfed7e54d6b4e471463e882479a0c5617ded7b2986a06c4c0f5afb631"
+    },
+    "tile_frames": 78,
+    "sprite_frames": 15,
+    "transactions": [
+      {
+        "description": "Add Planar Sample controller and input",
+        "id": "01M4S1CXX7TRFQN59M4ECBAT0B",
+        "commands": 3
+      },
+      {
+        "description": "Lay out Pearl Cove terrain and camera",
+        "id": "01M4S1CXYDMMD69P704JQRZMAP",
+        "commands": 2
+      },
+      {
+        "description": "Place Pearl Cove actors and controller",
+        "id": "01M4S1CXYNSEMDM0GEQ81X34CS",
+        "commands": 13
+      },
+      {
+        "description": "Add Pearl Cove HUD and localized strings",
+        "id": "01M4S1CXZ29W6HDDTSXYDT2GXD",
+        "commands": 6
+      }
+    ],
+    "history": [
+      {
+        "actor": {
+          "actor": "texture",
+          "conversation_id": null,
+          "model": null,
+          "origin": "import"
+        },
+        "commands": 1,
+        "description": "Import cove.atlas",
+        "id": "01M4S1CXVA9Q5BY9JX1TX1G79Z"
+      },
+      {
+        "actor": {
+          "actor": "font",
+          "conversation_id": null,
+          "model": null,
+          "origin": "import"
+        },
+        "commands": 1,
+        "description": "Import Inter-Regular",
+        "id": "01M4S1CXWBMZ6A9F22A12C96BX"
+      },
+      {
+        "actor": {
+          "actor": "editor",
+          "conversation_id": null,
+          "model": null,
+          "origin": "user"
+        },
+        "commands": 3,
+        "description": "Add Planar Sample controller and input",
+        "id": "01M4S1CXX7TRFQN59M4ECBAT0B"
+      },
+      {
+        "actor": {
+          "actor": "editor",
+          "conversation_id": null,
+          "model": null,
+          "origin": "user"
+        },
+        "commands": 2,
+        "description": "Lay out Pearl Cove terrain and camera",
+        "id": "01M4S1CXYDMMD69P704JQRZMAP"
+      },
+      {
+        "actor": {
+          "actor": "editor",
+          "conversation_id": null,
+          "model": null,
+          "origin": "user"
+        },
+        "commands": 13,
+        "description": "Place Pearl Cove actors and controller",
+        "id": "01M4S1CXYNSEMDM0GEQ81X34CS"
+      },
+      {
+        "actor": {
+          "actor": "editor",
+          "conversation_id": null,
+          "model": null,
+          "origin": "user"
+        },
+        "commands": 6,
+        "description": "Add Pearl Cove HUD and localized strings",
+        "id": "01M4S1CXZ29W6HDDTSXYDT2GXD"
+      }
+    ],
+    "undo_redo_reopen": true,
+    "authored_files": {
+      ".incant-source-transactions/01M4S1CY08P1VV8ENGV5H0CAW4.old-receipt": "67582f2a27cc670afa19c4c0289c2fea62d78fdb9cc3c3b4c43626d47a9fd04c",
+      ".incant-source-transactions/01M4S1CY08P1VV8ENGV5H0CAW4.previous": "7dd5d9965fe25f9f373420b22734755cd79dc3a84c689288f871b9fa2fa81d90",
+      ".incant-source-transactions/01M4S1CY1M19H4JNAMHVKZH9PE.old-receipt": "3608cf06937a634aeaad9ff98984b78846f29cb5e3f3406d97f16ff88814e3ef",
+      ".incant-source-transactions/lock": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      ".incant-source-transactions/receipt": "03058d1c3e1a89aa0da6f4de3afa00bc8583aed89f0ee82e610d392abccdea5a",
+      "art/art.json": "fde90e354a1c7bece34ecf4522910aaca1515bd2eb5e7d724e17258cc9e9abaa",
+      "art/cove-sprites.png": "44e37849f354e0b98df429395892d3c3a882fa2026b92b7a8b8c9c160009e3bd",
+      "art/cove-tiles.png": "f27c019367042dd278a80853c96c3de47dd048454d16f75b7a291d9594d9af74",
+      "art/cove.atlas.json": "b07d9d2cfed7e54d6b4e471463e882479a0c5617ded7b2986a06c4c0f5afb631",
+      "fonts/Inter-LICENSE": "3c8d13d97ea5eb62868833a377034c6be6a9833e768d32abec2a767a8101e4bc",
+      "fonts/Inter-Regular.ttf": "3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384",
+      "gameplay.ts": "7dd5d9965fe25f9f373420b22734755cd79dc3a84c689288f871b9fa2fa81d90",
+      "planar.journal.jsonl": "b394888a253b93a9ebdef0199716c5f67e1a1fb3474e81346d6a2173ea93b767",
+      "planar.json": "5726c159d42a7b37e059b22c4b05e781a4b34f8e68156b6e4b72fc382c8d87d6"
+    },
+    "scenarios": {
+      "keyboard-win": {
+        "tick": 781,
+        "pickups": 3,
+        "won": 1,
+        "lost": 0,
+        "final_translation": [
+          10.499939918518066,
+          2.6000022888183594
+        ]
+      },
+      "arrows-win": {
+        "tick": 781,
+        "pickups": 3,
+        "won": 1,
+        "lost": 0,
+        "final_translation": [
+          10.499939918518066,
+          2.6000022888183594
+        ]
+      },
+      "gamepad-win": {
+        "tick": 781,
+        "pickups": 3,
+        "won": 1,
+        "lost": 0,
+        "final_translation": [
+          10.499939918518066,
+          2.6000022888183594
+        ]
+      },
+      "dpad-win": {
+        "tick": 781,
+        "pickups": 3,
+        "won": 1,
+        "lost": 0,
+        "final_translation": [
+          10.499939918518066,
+          2.6000022888183594
+        ]
+      },
+      "urchin-loss": {
+        "tick": 201,
+        "pickups": 0,
+        "won": 0,
+        "lost": 1,
+        "final_translation": [
+          13.499893188476562,
+          4.100006103515625
+        ]
+      },
+      "locked-boat": {
+        "tick": 181,
+        "pickups": 0,
+        "won": 0,
+        "lost": 0,
+        "final_translation": [
+          10.49993896484375,
+          2.2999982833862305
+        ]
+      },
+      "shore-and-cliff": {
+        "tick": 221,
+        "pickups": 0,
+        "won": 0,
+        "lost": 0,
+        "final_translation": [
+          6.5,
+          9.700006484985352
+        ]
+      },
+      "route_metres": 37,
+      "route_seconds_at_speed": 13
+    },
+    "play_left_project_unchanged": true
+  }
+}

@@ -1,0 +1,3 @@
+    Checking incant_observe v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-rust-sdk/incant/.worktrees/0061-planar-sample-presentation/crates/incant_observe)
+    Checking incant_game_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-rust-sdk/incant/.worktrees/0061-planar-sample-presentation/crates/incant_game_runtime)
+    Finished `ci` profile [optimized] target(s) in 18.37s
