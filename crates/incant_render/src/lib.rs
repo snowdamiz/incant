@@ -26,6 +26,7 @@ mod studio;
 #[cfg(test)]
 #[path = "../tests/support/mod.rs"]
 mod test_support;
+mod text;
 #[cfg(test)]
 mod version_tests;
 #[cfg(any(target_arch = "wasm32", test))]
@@ -38,6 +39,10 @@ pub use models::{RenderScene, RetainedScene, RetainedTarget};
 pub use resource_error::{PreparationError, ResourceError};
 pub use scene::{SceneError, SceneStats};
 use std::{collections::HashMap, error::Error, sync::Mutex, time::Duration};
+pub use text::{
+    MAX_TEXT_GLYPHS, MAX_TEXT_NODES, TEXT_COLOR, TEXT_LOGICAL_PIXELS_PER_UNIT, TextUploads,
+    text_layout_to_local,
+};
 #[cfg(target_arch = "wasm32")]
 pub use web_error::PreparationErrorKind;
 pub use wgpu;
@@ -69,6 +74,7 @@ pub struct Renderer {
     models: Mutex<models::ModelCache>,
     materials: materials::MaterialSystem,
     sprites: sprites::SpriteSystem,
+    text: text::TextSystem,
     environments: environment::EnvironmentSystem,
     lighting: lighting::LightingSystem,
     shadows: shadows::ShadowSystem,
@@ -111,6 +117,7 @@ impl Renderer {
         let diagnostic_pipeline = Self::pipeline(&device, frame::HDR_FORMAT);
         let output = output::OutputPass::new(&device);
         let sprites = sprites::SpriteSystem::new(&device);
+        let text = text::TextSystem::new(&device);
         if let Some(error) = validation.pop().await {
             #[cfg(target_arch = "wasm32")]
             let error = error.into();
@@ -120,6 +127,7 @@ impl Renderer {
             identity: std::sync::Arc::new(()),
             device_lost,
             sprites,
+            text,
             device,
             queue,
             adapter,
@@ -258,6 +266,16 @@ impl Renderer {
                 rect: scene_rect,
             },
         )?;
+        let text = self.text.prepare(
+            &self.device,
+            scene,
+            models::ModelTarget {
+                color: attachments.color.clone(),
+                depth: attachments.depth.clone(),
+                format: frame::HDR_FORMAT,
+                rect: scene_rect,
+            },
+        )?;
         let output = self.output.prepare(
             &self.device,
             &attachments.color,
@@ -272,9 +290,14 @@ impl Renderer {
                 diagnostics,
                 models,
                 sprites,
+                text,
                 output,
             },
         )
+    }
+    /// Renderer-lifetime text texture/quad upload counts, for retention checks.
+    pub fn text_uploads(&self) -> TextUploads {
+        self.text.uploads()
     }
     pub fn screenshot_scene_png(
         &self,

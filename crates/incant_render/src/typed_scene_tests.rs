@@ -129,7 +129,7 @@ fn typed_environment_rejects_normal_map_and_out_of_range_rotation_at_startup() {
 }
 
 #[test]
-fn prepared_cpu_text_is_explicitly_refused_by_canonical_scene_resolution() {
+fn canonical_scene_resolution_accepts_text_input_without_nodes_as_nothing_to_draw() {
     let atlas = incant_text::GlyphAtlas::new(incant_text::AtlasConfig {
         width: 8,
         height: 8,
@@ -143,8 +143,7 @@ fn prepared_cpu_text_is_explicitly_refused_by_canonical_scene_resolution() {
         }),
         ..Default::default()
     };
-    assert!(matches!(
-        crate::scene::resolve(&input),
-        Err(crate::SceneError::Input("text drawing is not implemented"))
-    ));
+    let resolved = crate::scene::resolve(&input).unwrap();
+    assert!(resolved.text.is_none());
+    assert_eq!(resolved.stats.text_entities, 0);
 }

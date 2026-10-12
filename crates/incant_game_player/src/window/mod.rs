@@ -62,35 +62,48 @@ struct Options {
 }
 impl Options {
     fn parse(args: &[String]) -> session::Result<Self> {
+        const USAGE: &str = "expected --window SCENE AUDIO_CACHE CLIPS ACTIONS MODEL_CACHE TEXTURE_CACHE CAMERA_HEX [--font-cache FONT_CACHE] [--stop-after TICKS]";
         let probe = args.last().is_some_and(|arg| arg == "--lifecycle-probe");
         let args = if probe { &args[..args.len() - 1] } else { args };
-        if args.len() != 7 && !(args.len() == 9 && args[7] == "--stop-after") {
-            return Err("expected --window SCENE AUDIO_CACHE CLIPS ACTIONS MODEL_CACHE TEXTURE_CACHE CAMERA_HEX [--stop-after TICKS]".into());
+        if args.len() < 7 {
+            return Err(USAGE.into());
         }
-        let text = &args[6];
-        if text.len() != 32 || !text.bytes().all(|b| b.is_ascii_hexdigit()) {
+        let (args, mut rest) = args.split_at(7);
+        // Explicit checked font catalog for the composed text binding; never
+        // inferred from another cache or the system.
+        let mut text = None;
+        if let [flag, path, tail @ ..] = rest
+            && flag == "--font-cache"
+        {
+            text = Some(incant_render_game::TextSettings::new(path.into()));
+            rest = tail;
+        }
+        let stop_after = match rest {
+            [] => None,
+            [flag, n] if flag == "--stop-after" => {
+                let n = n.parse()?;
+                if !(1..=36000).contains(&n) {
+                    return Err("window tick bound1..36000".into());
+                }
+                Some(n)
+            }
+            _ => return Err(USAGE.into()),
+        };
+        let hex = &args[6];
+        if hex.len() != 32 || !hex.bytes().all(|b| b.is_ascii_hexdigit()) {
             return Err("CAMERA_HEX must contain exactly32 hexadecimal digits".into());
         }
         let mut id = [0; 16];
         for (i, v) in id.iter_mut().enumerate() {
-            *v = u8::from_str_radix(&text[i * 2..i * 2 + 2], 16)?;
+            *v = u8::from_str_radix(&hex[i * 2..i * 2 + 2], 16)?;
         }
-        let stop_after = if args.len() == 9 {
-            let n = args[8].parse()?;
-            if !(1..=36000).contains(&n) {
-                return Err("window tick bound1..36000".into());
-            }
-            Some(n)
-        } else {
-            None
-        };
         Ok(Self {
             scene: args[0].clone(),
             cache: args[1].clone(),
             clips: args[2].clone(),
             actions: args[3].clone(),
             render: NativeRenderSettings {
-                text: None,
+                text,
                 model_cache: args[4].clone().into(),
                 texture_cache: args[5].clone().into(),
                 camera: StableId(id),
@@ -319,4 +332,47 @@ pub fn run(args: &[String]) -> session::Result<()> {
     drop(game); // stop device audio before returning/closing the native surface
     println!("{report}");
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::Options;
+    fn args(tail: &[&str]) -> Vec<String> {
+        [
+            "scene",
+            "audio",
+            "clips",
+            "actions",
+            "models",
+            "textures",
+            "0123456789abcdef0123456789abcdef",
+        ]
+        .iter()
+        .chain(tail)
+        .map(|s| (*s).to_owned())
+        .collect()
+    }
+    #[test]
+    fn explicit_font_cache_and_tick_bound_parse_in_fixed_order() {
+        let plain = Options::parse(&args(&[])).unwrap();
+        assert!(plain.render.text.is_none() && plain.stop_after.is_none());
+        let text = Options::parse(&args(&["--font-cache", "fonts", "--stop-after", "3"])).unwrap();
+        assert_eq!(
+            text.render.text.unwrap().font_cache,
+            std::path::Path::new("fonts")
+        );
+        assert_eq!(text.stop_after, Some(3));
+        let probe = Options::parse(&args(&["--font-cache", "fonts", "--lifecycle-probe"])).unwrap();
+        assert!(probe.probe && probe.render.text.is_some());
+        assert_eq!(probe.stop_after, Some(40));
+        for bad in [
+            &["--stop-after", "3", "--font-cache", "fonts"][..],
+            &["--font-cache"],
+            &["--fonts", "fonts"],
+            &["--stop-after", "0"],
+            &["--font-cache", "a", "--font-cache", "b"],
+        ] {
+            assert!(Options::parse(&args(bad)).is_err(), "{bad:?}");
+        }
+    }
 }
