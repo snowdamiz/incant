@@ -27,8 +27,12 @@ rollback. Event frames retain scene identity and dimension. Published operations
 runtime tests, wasm32/tooling and lean dependency checks also pass. Independent
 source and durable final evidence review accepted the implementation; main
 integration is pending. Private `/tmp` artifacts were lost after restart, so
-new review verifies retained repository logs/receipts rather than those files. Full SDK, physics/guest checkpoints, an ordinary source-deleted
-physics guest shipping proof, device measurements and phase gates remain open.
+new review verifies retained repository logs/receipts rather than those files. A separate ordinary
+Rust physics package proof now passes three fresh source/cache/build/map-deleted
+shipping processes, 60 native-oracle assertions per run and ten exact runtime
+refusals; its final review is pending. The actual package is retained outside
+`/tmp`. Full SDK, physics/guest checkpoints, device measurements and phase gates
+remain open. [Package proof](docs/spikes/native-wasm-physics-package.md).
 [Contract and evidence](docs/spikes/native-wasm-physics-queries.md).
 
 ## Public Wasm navigation paths — locally verified
