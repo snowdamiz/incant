@@ -1,0 +1,106 @@
+{
+  "adapter": "Apple M5 Pro",
+  "backend": "Metal",
+  "captures": [
+    {
+      "flipbooks": [
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000001",
+          "playing": false
+        },
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000005",
+          "playing": false
+        },
+        {
+          "frame": 0,
+          "id": "01b65d5000000000000000000000000b",
+          "playing": true
+        },
+        {
+          "frame": 0,
+          "id": "01b65d5000000000000000000000000c",
+          "playing": true
+        },
+        {
+          "frame": 0,
+          "id": "01b65d5000000000000000000000000d",
+          "playing": true
+        },
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000015",
+          "playing": true
+        },
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000016",
+          "playing": true
+        },
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000017",
+          "playing": true
+        },
+        {
+          "frame": 7,
+          "id": "01b65d5000000000000000000000001f",
+          "playing": true
+        },
+        {
+          "frame": 10,
+          "id": "01b65d50000000000000000000000020",
+          "playing": true
+        },
+        {
+          "frame": 7,
+          "id": "01b65d50000000000000000000000021",
+          "playing": true
+        },
+        {
+          "frame": 10,
+          "id": "01b65d50000000000000000000000022",
+          "playing": true
+        }
+      ],
+      "hud": {
+        "glyph_quads": 10,
+        "gpu_bytes": 2705,
+        "labels": {
+          "01b662d0000000000000000000000002": {
+            "parent": "01b662d0000000000000000000000001",
+            "text": "Pearls 0 of 3"
+          },
+          "01b662d0000000000000000000000003": {
+            "parent": "01b662d0000000000000000000000001",
+            "text": ""
+          }
+        },
+        "missing_glyphs": 0,
+        "widgets": 2
+      },
+      "rgba": "tick-00181.rgba",
+      "rgba_sha256": "5bdeda302f1dce8f09bf89a8a1f42466e54ea932f8587812a4e417b1f155e01a",
+      "size": [
+        1280,
+        720
+      ],
+      "tick": 181
+    }
+  ],
+  "format": "incant-0061-hud-frames",
+  "logs": [],
+  "scale": 2.0,
+  "scope": "offscreen GPU frames of the embedded program; no window or presentation",
+  "size": [
+    1280,
+    720
+  ],
+  "target_format": "Rgba8UnormSrgb",
+  "viewport": [
+    640.0,
+    360.0
+  ]
+}

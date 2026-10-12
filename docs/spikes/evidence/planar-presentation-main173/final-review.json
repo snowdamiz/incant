@@ -1,0 +1,26 @@
+{
+  "at": "2026-10-12T22:37:41.188272+00:00",
+  "accepted": true,
+  "manifest_sha256": "2c596eb2f19f822c4041c7788307eab48a940d79bee0eadd634e4187098efe73",
+  "tested_head": "0efd6d9b83b1cf09fdc4d3c2ac07f2609fce1623",
+  "current_head": "6cb24d93304998696a87d64e773dd42081cb2506",
+  "source_rows": 18,
+  "claude_packet_files": 138,
+  "artifacts": 243,
+  "frozen_inputs": 1890,
+  "current_checks": 12,
+  "scenarios": {
+    "default": 7,
+    "presentation": 7,
+    "authored-cove": 7
+  },
+  "recorded_processes": 30,
+  "review": "Behavior, builders, art assets and render-review example source exact accepted producers; README additive only. Rehashed all actual CPU results and observation checks, original authored bytes, archive streams and matching binary. Retained Claude pixel acceptance remains producer scoped, no new rendering claim.",
+  "limits": [
+    "Current-main checks execute CPU only; HUD review example compiles/Clippy but is not run.",
+    "Appearance belongs to Claude0061 exact preserved offscreen packet. No Astra pixel review or new GPU equivalence claim.",
+    "Original producer two shipping exports/fourteen fresh source-deleted processes remain historical accepted producer source, not new current-main shipping builds.",
+    "Native-window acceptance pending, restart/localized terminal-headline bindings/audio/physical device/performance/physics-save gates remain open.",
+    "Historical Claude text saying Wasm HUD parity is open describes that packet era; engine capability mergedmain166, but this authored sample has no public Wasm proof."
+  ]
+}

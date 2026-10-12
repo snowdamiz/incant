@@ -1,0 +1,267 @@
+{
+  "adapter": "Apple M5 Pro",
+  "backend": "Metal",
+  "captures": [
+    {
+      "flipbooks": [
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000001",
+          "playing": false
+        },
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000005",
+          "playing": false
+        },
+        {
+          "frame": 0,
+          "id": "01b65d5000000000000000000000000b",
+          "playing": true
+        },
+        {
+          "frame": 0,
+          "id": "01b65d5000000000000000000000000c",
+          "playing": true
+        },
+        {
+          "frame": 0,
+          "id": "01b65d5000000000000000000000000d",
+          "playing": true
+        },
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000015",
+          "playing": true
+        },
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000016",
+          "playing": true
+        },
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000017",
+          "playing": true
+        },
+        {
+          "frame": 0,
+          "id": "01b65d5000000000000000000000001f",
+          "playing": true
+        },
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000020",
+          "playing": true
+        },
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000021",
+          "playing": true
+        },
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000022",
+          "playing": true
+        }
+      ],
+      "hud": {
+        "glyph_quads": 12,
+        "gpu_bytes": 2751,
+        "labels": {
+          "01b662d0000000000000000000000002": {
+            "parent": "01b662d0000000000000000000000001",
+            "text": "Perles : 0 sur 3"
+          },
+          "01b662d0000000000000000000000003": {
+            "parent": "01b662d0000000000000000000000001",
+            "text": ""
+          }
+        },
+        "missing_glyphs": 0,
+        "widgets": 2
+      },
+      "rgba": "tick-00002.rgba",
+      "rgba_sha256": "5d8d68bd39d6469c83239add478bc9df53a447e3cb0cb3205ed142701317897a",
+      "size": [
+        1280,
+        720
+      ],
+      "tick": 2
+    },
+    {
+      "flipbooks": [
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000001",
+          "playing": false
+        },
+        {
+          "frame": 1,
+          "id": "01b65d50000000000000000000000005",
+          "playing": false
+        },
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000015",
+          "playing": true
+        },
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000016",
+          "playing": true
+        },
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000017",
+          "playing": true
+        },
+        {
+          "frame": 1,
+          "id": "01b65d5000000000000000000000001f",
+          "playing": true
+        },
+        {
+          "frame": 10,
+          "id": "01b65d50000000000000000000000020",
+          "playing": true
+        },
+        {
+          "frame": 1,
+          "id": "01b65d50000000000000000000000021",
+          "playing": true
+        },
+        {
+          "frame": 10,
+          "id": "01b65d50000000000000000000000022",
+          "playing": true
+        }
+      ],
+      "hud": {
+        "glyph_quads": 41,
+        "gpu_bytes": 8048,
+        "labels": {
+          "01b662d0000000000000000000000002": {
+            "parent": "01b662d0000000000000000000000001",
+            "text": "Toutes les perles sont là. Montez dans la barque."
+          },
+          "01b662d0000000000000000000000003": {
+            "parent": "01b662d0000000000000000000000001",
+            "text": ""
+          }
+        },
+        "missing_glyphs": 0,
+        "widgets": 2
+      },
+      "rgba": "tick-00560.rgba",
+      "rgba_sha256": "412abaef7f668d6c6ec4c19b883db5c700943e8ba28b84ebb6fbc37ae1e66677",
+      "size": [
+        1280,
+        720
+      ],
+      "tick": 560
+    },
+    {
+      "flipbooks": [
+        {
+          "frame": 2,
+          "id": "01b65d50000000000000000000000001",
+          "playing": false
+        },
+        {
+          "frame": 1,
+          "id": "01b65d50000000000000000000000005",
+          "playing": false
+        },
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000015",
+          "playing": true
+        },
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000016",
+          "playing": true
+        },
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000017",
+          "playing": true
+        },
+        {
+          "frame": 1,
+          "id": "01b65d5000000000000000000000001f",
+          "playing": true
+        },
+        {
+          "frame": 3,
+          "id": "01b65d50000000000000000000000020",
+          "playing": true
+        },
+        {
+          "frame": 1,
+          "id": "01b65d50000000000000000000000021",
+          "playing": true
+        },
+        {
+          "frame": 3,
+          "id": "01b65d50000000000000000000000022",
+          "playing": true
+        }
+      ],
+      "hud": {
+        "glyph_quads": 23,
+        "gpu_bytes": 4819,
+        "labels": {
+          "01b662d0000000000000000000000002": {
+            "parent": "01b662d0000000000000000000000001",
+            "text": "Retour au port avec 3 perles"
+          },
+          "01b662d0000000000000000000000003": {
+            "parent": "01b662d0000000000000000000000001",
+            "text": ""
+          }
+        },
+        "missing_glyphs": 0,
+        "widgets": 2
+      },
+      "rgba": "tick-00781.rgba",
+      "rgba_sha256": "def9f5b09ad40e8fb79b6ca3090d72b6ef8f104689c4089f5e40b7816a013cdf",
+      "size": [
+        1280,
+        720
+      ],
+      "tick": 781
+    }
+  ],
+  "format": "incant-0061-hud-frames",
+  "logs": [
+    {
+      "message": "planar.pickup 01PSEN0000000000000000000B 1/3",
+      "tick": 130
+    },
+    {
+      "message": "planar.pickup 01PSEN0000000000000000000C 2/3",
+      "tick": 430
+    },
+    {
+      "message": "planar.pickup 01PSEN0000000000000000000D 3/3",
+      "tick": 529
+    },
+    {
+      "message": "planar.won tick=719 pickups=3",
+      "tick": 719
+    }
+  ],
+  "scale": 2.0,
+  "scope": "offscreen GPU frames of the embedded program; no window or presentation",
+  "size": [
+    1280,
+    720
+  ],
+  "target_format": "Rgba8UnormSrgb",
+  "viewport": [
+    640.0,
+    360.0
+  ]
+}

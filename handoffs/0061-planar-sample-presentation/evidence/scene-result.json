@@ -1,0 +1,169 @@
+{
+  "passed": true,
+  "binary_sha256": "e60b5132ceb6e3611f8c154acabbe4a57c0d307a05c24a48352a94160f909bba",
+  "project": "/Users/andreyyurlov/.codex/worktrees/native-rust-sdk/incant/.worktrees/0061-planar-sample-presentation/artifacts/0061/review-5/build/project/planar.json",
+  "scene": "01M4RXRVHVMFGBG6NQZT6XGX41",
+  "camera": "01PSEN00000000000000000003",
+  "atlas": "01M4RXRVMN5JKAVWR7TZ12PR6X",
+  "gameplay_sha256": "ccd01284ad30ff4cc9d3070a8220890509af160f3aae4521f0954502fdf45e5e",
+  "art_files": {
+    "cove-tiles.png": "1fa33c43572d98a78e0c5eee8723604ecdfa44202d910aaf64f7aa9ab6f7fa85",
+    "cove-sprites.png": "44e37849f354e0b98df429395892d3c3a882fa2026b92b7a8b8c9c160009e3bd",
+    "cove.atlas.json": "fe87b37158af8bac9cf1d2739751e4cc368d20476ad3cdbb18f6e55f8b250cb2"
+  },
+  "tile_frames": 73,
+  "sprite_frames": 15,
+  "transactions": [
+    {
+      "description": "Add Planar Sample controller and input",
+      "id": "01M4RXRVNB3T9A2T9NHW81NPYP",
+      "commands": 3
+    },
+    {
+      "description": "Lay out Pearl Cove terrain and camera",
+      "id": "01M4RXRVPBM1ADV8PCEB6BPBMP",
+      "commands": 2
+    },
+    {
+      "description": "Place Pearl Cove actors and controller",
+      "id": "01M4RXRVPHJTJSPYRH998WK19B",
+      "commands": 13
+    }
+  ],
+  "history": [
+    {
+      "actor": {
+        "actor": "texture",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+      },
+      "commands": 1,
+      "description": "Import cove.atlas",
+      "id": "01M4RXRVMN4F0SWMQDMPQSQPEC"
+    },
+    {
+      "actor": {
+        "actor": "editor",
+        "conversation_id": null,
+        "model": null,
+        "origin": "user"
+      },
+      "commands": 3,
+      "description": "Add Planar Sample controller and input",
+      "id": "01M4RXRVNB3T9A2T9NHW81NPYP"
+    },
+    {
+      "actor": {
+        "actor": "editor",
+        "conversation_id": null,
+        "model": null,
+        "origin": "user"
+      },
+      "commands": 2,
+      "description": "Lay out Pearl Cove terrain and camera",
+      "id": "01M4RXRVPBM1ADV8PCEB6BPBMP"
+    },
+    {
+      "actor": {
+        "actor": "editor",
+        "conversation_id": null,
+        "model": null,
+        "origin": "user"
+      },
+      "commands": 13,
+      "description": "Place Pearl Cove actors and controller",
+      "id": "01M4RXRVPHJTJSPYRH998WK19B"
+    }
+  ],
+  "undo_redo_reopen": true,
+  "authored_files": {
+    ".incant-source-transactions/01M4RXRVQBS88DSNPFXE9BN7FR.old-receipt": "beabe0a1cdbab89c2e5d4f4ed9f8b01454c749aad18b11d04e7d8a11e8a6a55d",
+    ".incant-source-transactions/01M4RXRVQBS88DSNPFXE9BN7FR.previous": "ccd01284ad30ff4cc9d3070a8220890509af160f3aae4521f0954502fdf45e5e",
+    ".incant-source-transactions/01M4RXRVRGDC8PB74Y1F8BF2T6.old-receipt": "0f74699ca51f094b7490abc138c22b328a4b5d7aee1f8774e6294e0018d628c3",
+    ".incant-source-transactions/lock": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".incant-source-transactions/receipt": "6072f0e9c63f0d50101da06bb22d01f41b4fe1b60d1725c41565e923d49cbc6a",
+    "art/art.json": "6d1712d011b14d25bdad6da9ab64bbfaef7ddfe3a1beb70ec374698b73a20e7b",
+    "art/cove-sprites.png": "44e37849f354e0b98df429395892d3c3a882fa2026b92b7a8b8c9c160009e3bd",
+    "art/cove-tiles.png": "1fa33c43572d98a78e0c5eee8723604ecdfa44202d910aaf64f7aa9ab6f7fa85",
+    "art/cove.atlas.json": "fe87b37158af8bac9cf1d2739751e4cc368d20476ad3cdbb18f6e55f8b250cb2",
+    "gameplay.ts": "ccd01284ad30ff4cc9d3070a8220890509af160f3aae4521f0954502fdf45e5e",
+    "planar.journal.jsonl": "123018829747020ab32c7e744dfecf0ba91dbea883cfb56a99ef5605192b0eb6",
+    "planar.json": "abd3903a46f5744a6a8733cf464b8e02ded1deb9ad4ffc99e86a1b06a8908deb"
+  },
+  "scenarios": {
+    "keyboard-win": {
+      "tick": 781,
+      "pickups": 3,
+      "won": 1,
+      "lost": 0,
+      "final_translation": [
+        10.499939918518066,
+        2.6000022888183594
+      ]
+    },
+    "arrows-win": {
+      "tick": 781,
+      "pickups": 3,
+      "won": 1,
+      "lost": 0,
+      "final_translation": [
+        10.499939918518066,
+        2.6000022888183594
+      ]
+    },
+    "gamepad-win": {
+      "tick": 781,
+      "pickups": 3,
+      "won": 1,
+      "lost": 0,
+      "final_translation": [
+        10.499939918518066,
+        2.6000022888183594
+      ]
+    },
+    "dpad-win": {
+      "tick": 781,
+      "pickups": 3,
+      "won": 1,
+      "lost": 0,
+      "final_translation": [
+        10.499939918518066,
+        2.6000022888183594
+      ]
+    },
+    "urchin-loss": {
+      "tick": 201,
+      "pickups": 0,
+      "won": 0,
+      "lost": 1,
+      "final_translation": [
+        13.499893188476562,
+        4.100006103515625
+      ]
+    },
+    "locked-boat": {
+      "tick": 181,
+      "pickups": 0,
+      "won": 0,
+      "lost": 0,
+      "final_translation": [
+        10.49993896484375,
+        2.2999982833862305
+      ]
+    },
+    "shore-and-cliff": {
+      "tick": 221,
+      "pickups": 0,
+      "won": 0,
+      "lost": 0,
+      "final_translation": [
+        6.5,
+        9.700006484985352
+      ]
+    },
+    "route_metres": 37,
+    "route_seconds_at_speed": 13
+  },
+  "play_left_project_unchanged": true
+}
