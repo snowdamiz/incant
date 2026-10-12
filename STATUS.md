@@ -16,6 +16,16 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Checkpoint 11 — failed frozen batch, two probe contracts repaired
+
+The main #141 snapshot finished 20/23 required checks successfully; release is
+unchanged. Windows model receipt validation now requires all twelve exact
+geometry counters, and the macOS shipping helper expects the current explicit
+manual-input argument refusal. CPU regression checks and independent review
+pass; production behavior and rendering thresholds are unchanged. Linux UI
+numeric differences remain with Claude, and the next full checkpoint waits for
+that repair. See [retained failures and checks](docs/spikes/checkpoint11-probe-repairs.md).
+
 ## Hosted native UI session checkpoints — local CPU proof passed
 
 The bounded widget codec now composes with native world v7 and session v2:

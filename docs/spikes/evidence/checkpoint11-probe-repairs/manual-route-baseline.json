@@ -1,0 +1,25 @@
+{
+  "command": [
+    "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint11-render-probe/incant_game_player",
+    "missing-scene",
+    "missing-cache",
+    "missing-clips",
+    "missing-recording",
+    "missing-actions",
+    "1",
+    "48000",
+    "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint11-render-probe/must-not-exist.pcm",
+    "--cpu-render-input",
+    "missing-models",
+    "missing-textures",
+    "00000000000000000000000000000001",
+    "--input",
+    "KeyD"
+  ],
+  "returncode": 1,
+  "stdout": "",
+  "stderr": "Error: \"unknown or duplicate spatial option\"\n",
+  "old_expected": "manual input/source paths are unsupported",
+  "old_predicate_passed": false,
+  "new_predicate_passed": true
+}
