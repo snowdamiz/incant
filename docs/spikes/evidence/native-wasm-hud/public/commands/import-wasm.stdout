@@ -1,0 +1,24 @@
+{
+  "asset": {
+    "id": "01M4RSFW7WGECM3V396SZKQM3D",
+    "kind": "wasm",
+    "name": "hud",
+    "path": "hud.wasm",
+    "sha256": "fac4d89c9139244b33083f5a92a1fd3b70c53e9ae9e683e2509230e6fc6c557e"
+  },
+  "cache_hit": false,
+  "changed": true,
+  "details": {
+    "bytes": 661160,
+    "dependencies": [
+      {
+        "path": "hud.wasm",
+        "sha256": "99a79dea3853b97e505e8d7fcb48380f94390cf86a6a507354496e4384a84327"
+      }
+    ],
+    "input_sha256": "99a79dea3853b97e505e8d7fcb48380f94390cf86a6a507354496e4384a84327",
+    "prepared_sha256": "378ba0e36af0b6b508a7d458bb4288dc76e630bc6a7341785eec7be03a414d27",
+    "registry_sha256": "215f64819445d3fb969c15237f18bdabf85213fc0ceabd3f563b31a6d05d3926"
+  },
+  "revision": 1
+}
