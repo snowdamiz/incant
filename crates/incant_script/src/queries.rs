@@ -25,6 +25,8 @@ struct State {
     characters: usize,
     navigation: usize,
     expansions: u32,
+    steering_agents: usize,
+    steering_edges: usize,
     localization: usize,
     argument_bytes: usize,
     output_bytes: usize,
@@ -74,7 +76,11 @@ impl TickQueries {
     pub fn expose_navigation<'js>(&self, ctx: &Ctx<'js>) -> rquickjs::Result<Object<'js>> {
         self.expose_methods(
             ctx,
-            &[("findPath", Kind::Navigation), ("findGridPath", Kind::Grid)],
+            &[
+                ("findPath", Kind::Navigation),
+                ("findGridPath", Kind::Grid),
+                ("steerAgents", Kind::Steering),
+            ],
         )
     }
     pub fn expose_localization<'js>(&self, ctx: &Ctx<'js>) -> rquickjs::Result<Object<'js>> {
@@ -117,7 +123,7 @@ impl TickQueries {
                             || (localized && state.localization == 64)
                             || (matches!(kind, Kind::Character)
                                 && state.characters == MAX_CHARACTER_QUERIES)
-                            || (matches!(kind, Kind::Navigation | Kind::Grid)
+                            || (matches!(kind, Kind::Navigation | Kind::Grid | Kind::Steering)
                                 && state.navigation == MAX_NAVIGATION_QUERIES)
                         {
                             state.failure = Some(ScriptError::InputLimit);
@@ -127,7 +133,7 @@ impl TickQueries {
                             if localized {
                                 state.localization += 1;
                             }
-                            if matches!(kind, Kind::Navigation | Kind::Grid) {
+                            if matches!(kind, Kind::Navigation | Kind::Grid | Kind::Steering) {
                                 state.navigation += 1;
                             }
                             if matches!(kind, Kind::Character) {
@@ -139,17 +145,17 @@ impl TickQueries {
                     if let Some(message) = rejection {
                         return Err(Exception::throw_type(&ctx, message));
                     }
-                    let request = match query_values::parse(kind, &ctx, &args.0, queries.scene_id())
-                    {
-                        Ok(request) => request,
-                        Err(error) => {
-                            state
-                                .borrow_mut()
-                                .failure
-                                .get_or_insert(ScriptError::QueryInput);
-                            return Err(error);
-                        }
-                    };
+                    let request =
+                        match query_values::parse(kind, &ctx, &args.0, queries.scene_id(), dt) {
+                            Ok(request) => request,
+                            Err(error) => {
+                                state
+                                    .borrow_mut()
+                                    .failure
+                                    .get_or_insert(ScriptError::QueryInput);
+                                return Err(error);
+                            }
+                        };
                     // A recursive getter may have exhausted/failed this tick while parsing.
                     if state.borrow().failure.is_some() {
                         return Err(Exception::throw_type(
@@ -186,6 +192,25 @@ impl TickQueries {
                             ));
                         }
                         state.expansions += expansions;
+                        if let Request::Steering(query) = &request {
+                            let agents = query.agents.len();
+                            let edges: usize = query
+                                .obstacles
+                                .iter()
+                                .map(|o| if o.closed { o.vertices.len() } else { 1 })
+                                .sum();
+                            if agents > 128 - state.steering_agents
+                                || edges > 128 - state.steering_edges
+                            {
+                                state.failure = Some(ScriptError::InputLimit);
+                                return Err(Exception::throw_type(
+                                    &ctx,
+                                    "steering work limit exceeded",
+                                ));
+                            }
+                            state.steering_agents += agents;
+                            state.steering_edges += edges;
+                        }
                     }
                     if let Err(error) = diagnostics::check_deadline(&deadline) {
                         state.borrow_mut().failure.get_or_insert(error);
@@ -214,6 +239,9 @@ impl TickQueries {
                             .map(ResultData::Navigation),
                         Request::Grid(entity, request) => {
                             queries.grid_path(entity, &request).map(ResultData::Grid)
+                        }
+                        Request::Steering(request) => {
+                            queries.steer_agents(&request, dt).map(ResultData::Steering)
                         }
                         Request::Ray2D(request) => {
                             queries.raycast_2d(&request).map(ResultData::Ray2D)
