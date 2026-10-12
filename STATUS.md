@@ -16,6 +16,28 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Physics process selection — local execution passed
+
+The developer launcher builds the authored physics variant and runs a private
+executable copy. Public setting edits, Undo/Redo and native execution pass in
+deterministic, fast and deterministic again. Fresh ordinary shipping exports
+of both modes run after source/cache/map/build removal with exact native
+observations and PCM; five actual solver feature sets and shipping codegen are
+audited. The full tools suite passes with four Python skips. Independent review
+and integration remain pending; automatic editor worker selection, physics saves,
+reference-device performance and phase gates remain open.
+[Scope and retained evidence](docs/spikes/physics-process-selection.md).
+
+## Physics process/export selection — current main176 verified
+
+Developer Play and ordinary desktop export now choose the fixed matching kernel
+from the public project setting. Selected normal dependency audits replace the
+workspace-unified metadata false refusal seen in frozen checkpoint15. The current
+CPU integration passes 15 checks and two unchanged-package replays; all producer
+compile/cook inputs remain exact. Independent final closure is accepted. Automatic
+editor workers, physics saves and device/performance gates remain separate.
+[Evidence](docs/spikes/physics-process-main176.md).
+
 ## Project physics selection — current main173 verified
 
 The public command bus atomically selects deterministic or fast physics, with
@@ -23,7 +45,7 @@ legacy deterministic defaults preserved. Cook/Play explicitly refuse a mismatche
 process before assets or source fallback. All 70 schemas and strict TypeScript
 contracts match. Current integration reuses byte-identical three-mode Rust checks
 and reruns schema/generation/guard checks; final independent review is accepted. Automatic editor
-process switching and mode-aware export remain separate follow-on work.
+process switching remains separate; developer/export selection is recorded above.
 [Integrated contract and evidence](docs/spikes/physics-project-main173.md).
 
 ## Pearl Cove presentation — current main173 verified

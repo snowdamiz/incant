@@ -1,0 +1,167 @@
+{
+  "at": "2026-10-12T22:36:32.295533+00:00",
+  "reviewer": "astra integration lane, independent of author",
+  "source": "35694825",
+  "manifest_sha256": "af11c230a0e76db2bf06e57d909c72f9fa879f2a709f02081ed4e0fd7ff26a9d",
+  "decision": "accepted bounded CPU developer and ordinary shipping process selection",
+  "findings": [],
+  "sources_verified": 7,
+  "artifacts_verified": 83,
+  "external_binary_symbol_files": 8,
+  "frozen_inputs": 1526,
+  "public_mode_undo_redo": 3,
+  "developer_runs": 3,
+  "precise_wrong_mode_refusal": 1,
+  "shipping": [
+    {
+      "mode": "deterministic",
+      "tick": 12,
+      "player_sha256": "5b2600e1a309ed3be5134f6457803ac1ac7abeb4d359d65c94e217047f50c755",
+      "package_files": 6,
+      "features": {
+        "simba": [
+          "libm",
+          "libm_force",
+          "std",
+          "wide"
+        ],
+        "parry2d": [
+          "alloc",
+          "dim2",
+          "downcast-rs",
+          "ena",
+          "enhanced-determinism",
+          "f32",
+          "hashbrown",
+          "indexmap",
+          "parallel",
+          "rayon",
+          "required-features",
+          "slab",
+          "smallvec",
+          "spade",
+          "std"
+        ],
+        "parry3d": [
+          "alloc",
+          "dim3",
+          "downcast-rs",
+          "ena",
+          "enhanced-determinism",
+          "f32",
+          "hashbrown",
+          "indexmap",
+          "parallel",
+          "rayon",
+          "required-features",
+          "rstar",
+          "slab",
+          "smallvec",
+          "std"
+        ],
+        "rapier2d": [
+          "alloc",
+          "block-solver",
+          "default",
+          "dim2",
+          "enhanced-determinism",
+          "f32",
+          "parallel",
+          "std"
+        ],
+        "rapier3d": [
+          "alloc",
+          "default",
+          "dim3",
+          "enhanced-determinism",
+          "f32",
+          "parallel",
+          "std"
+        ]
+      },
+      "four_codegen_units_verified": true
+    },
+    {
+      "mode": "fast",
+      "tick": 12,
+      "player_sha256": "1ec2332489e3a140e126661d91100e33ca2c398bd2c14cbb2955edf9141e75e8",
+      "package_files": 6,
+      "features": {
+        "simba": [
+          "libm",
+          "std",
+          "wide"
+        ],
+        "parry2d": [
+          "alloc",
+          "dim2",
+          "downcast-rs",
+          "ena",
+          "f32",
+          "hashbrown",
+          "parallel",
+          "rayon",
+          "required-features",
+          "slab",
+          "smallvec",
+          "spade",
+          "std"
+        ],
+        "parry3d": [
+          "alloc",
+          "dim3",
+          "downcast-rs",
+          "ena",
+          "f32",
+          "hashbrown",
+          "parallel",
+          "rayon",
+          "required-features",
+          "rstar",
+          "slab",
+          "smallvec",
+          "std"
+        ],
+        "rapier2d": [
+          "alloc",
+          "block-solver",
+          "default",
+          "dim2",
+          "f32",
+          "parallel",
+          "std"
+        ],
+        "rapier3d": [
+          "alloc",
+          "default",
+          "dim3",
+          "f32",
+          "parallel",
+          "std"
+        ]
+      },
+      "four_codegen_units_verified": true
+    }
+  ],
+  "independent_tests": {
+    "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-process-independent-001/tests.log",
+    "sha256": "90dda41f85292fa83c5ca3fe016947a21d3f4d5b5f3edc32ca8cedcf9a55df74",
+    "exit": 0
+  },
+  "source_review": [
+    "Fixed project mode allowlist selects only engine features; no project tool path or Cargo options.",
+    "Build and executable copy share existing build lock; copied process checks exact project bytes before/after startup.",
+    "Selected normal dependency graph replaces workspace-unified metadata without dropping forbidden package checks. Actual five compiled target feature records and producer identity both bind requested kernel.",
+    "Shipping builds remain fresh private outputs, with four target codegen unit audits and compiler/symbol exclusion; original failed attempts retained."
+  ],
+  "reviewer_harness_correction": "Initial independent assertion incorrectly expected the removed simd-stable feature for pinned Rapier0.36. Read the pinned manifests/current guard, corrected to enhanced-determinism versus default4 lanes with no simd8 and actual parallel target; no producer source or evidence changed.",
+  "limits": [
+    "Developer launcher is CPU native Play, not editor worker or shipped process.",
+    "Both ordinary copied shipping players executed on ARM macOS only. No window/GPU/device or performance claim.",
+    "Motion fixture has no active physics bodies; proves process/kernel selection and cooked admission, not solver numerical parity or speed.",
+    "PCM is repeatable silence, not audible device playback.",
+    "Physics-world saves remain explicitly refused; eight-lane target promotion not claimed.",
+    "Shipping actual Cargo JSON artifacts were audited before private storage removal; raw verbose target compiler commands independently bind the five solver features and four codegen units.",
+    "Development executable copies were ephemeral; actual compiler/launch records and binary hashes retained, shipping executables remain external local artifacts."
+  ]
+}
