@@ -1,0 +1,56 @@
+{
+  "at": "2026-10-12T18:28:05.892360+00:00",
+  "reviewer": "astra /root/native_wasm_export",
+  "decision": "accepted",
+  "findings": [],
+  "commit": "48b0fc5ad64110ad89a7975101ad991a9d676123",
+  "scope": "Independent source and retained numerical development/ordinary shipping evidence review; no fresh compile/game execution/GPU/render/device gate.",
+  "source_review": "Read gameplay earlier at 9ca63624 and final export helper, four-line exit observation correction, CI registration, documentation and limitations.",
+  "verified": {
+    "source_files": 6,
+    "exact_archive_entries": 205,
+    "archive_sha256": "efc560b9d73a521c0f95f78530e6b3e6d5cdf91e34ef5592c74b6e6e377c4e1c",
+    "shipping_result_sha256": "bb19c6376e2ed8f7a8fe1d46de891e50c36259b649a619927fbc6abcc60b55d8",
+    "actual_package_files": 6,
+    "shipping_fresh_process_receipts": 7,
+    "shipping_report_and_pcm_hashes": 7,
+    "exact_development_shipping_fields": [
+      "logs",
+      "observations",
+      "pcm_sha256",
+      "frames",
+      "tick"
+    ],
+    "shipping_selected_checks": 52,
+    "development_run005_selected_checks": 53,
+    "final_check_commands": 6,
+    "original_shipping_inputs": {
+      "total": 1230,
+      "current_matches": 1228,
+      "two_historical_git_matches": [
+        "samples/core/README.md",
+        "samples/core/verify.py"
+      ],
+      "historical_commit": "9ca63624aa764c29e3580fa85f28e10a7b6f2cd3",
+      "qualification": "Two post-shipping source/document changes were verified against original Git objects and reviewed as explicit final deltas. Does not claim all 1230 still match current working files."
+    },
+    "exit_proximity": {
+      "development_shipping_exact": true,
+      "position": [
+        5.4001641273498535,
+        0.6114398241043091,
+        0.07480064779520035
+      ],
+      "first_pickup_retained": true,
+      "second_pickup_removed": true,
+      "win_absent": true
+    }
+  },
+  "review_notes": [
+    "Public authoring Undo/Redo/reopen and unchanged authoring assertions are retained.",
+    "Ordinary --package startup uses exported bytecode/cooked resources; only newly copied proof authoring/build/maps removed, original source preserved.",
+    "Actual package inventory and absence of copied authoring/maps verified; seven on-disk shipping reports/PCM hashes and process stdout checked in preceding read-only audit.",
+    "Retained run005 verify_reports assertions re-executed in preceding read-only audit; no new game execution was required.",
+    "Numerical collider room only; Claude presentation, hosted CI and reference-device/shipping-performance gates remain outstanding."
+  ]
+}

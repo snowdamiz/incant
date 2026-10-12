@@ -372,5 +372,11 @@
       "log": "5.log",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     }
-  ]
+  ],
+  "final_review": {
+    "path": "docs/spikes/evidence/core-sample-gameplay-review.json",
+    "sha256": "2e95104d8f9812ce6cbcac2d06bc9424abd456658372d821f36569d4b3fc2fc4",
+    "verdict": "accepted independent source and execution audit",
+    "reviewed_commit": "48b0fc5ad64110ad89a7975101ad991a9d676123"
+  }
 }
