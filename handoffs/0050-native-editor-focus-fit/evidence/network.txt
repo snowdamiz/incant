@@ -1,0 +1,31 @@
+# 0050 network observations for the editor process (PID 71838)
+#
+# Method. launch.sh started nettop on the editor PID right after spawn
+# (nettop -P -L 0 -s 1 -x -p 71838 -J bytes_in,bytes_out; cumulative per-process
+# bytes) and netwatch.sh, which ran lsof -nP -i every 0.5 s on the editor and its
+# children until it exited. Checked beforehand with a local loopback socket: nettop
+# attached before a short flow counted it (3,072 bytes each way) and kept the count
+# after the flow closed; attached after the flow closed, it showed nothing. Both are
+# observations of this run only. They are not proof that no other traffic happened
+# (e.g. in the first fraction of a second, in WebKit's own processes, or in a child
+# that lived between two samples). The LAN address is replaced by <local>.
+
+## lsof samples with any internet socket (netwatch.sh, 1,681 samples, 23:42:26Z-23:58:36Z)
+start 2026-10-11T23:42:26Z pid 71838
+2026-10-11T23:42:27Z sockets
+incant_ed 71838 <user>   11u  IPv4 0x…      0t0  TCP <local>:49832->172.64.146.15:443 (ESTABLISHED)
+2026-10-11T23:42:28Z sockets
+incant_ed 71838 <user>   11u  IPv4 0x…      0t0  TCP <local>:49832->172.64.146.15:443 (ESTABLISHED)
+2026-10-11T23:42:28Z sockets
+incant_ed 71838 <user>   11u  IPv4 0x…      0t0  TCP <local>:49832->172.64.146.15:443 (ESTABLISHED)
+2026-10-11T23:45:45Z children 71838,77320
+2026-10-11T23:45:46Z children 71838,77320
+2026-10-11T23:47:03Z children 71838,79786
+2026-10-11T23:47:03Z children 71838,79786
+end 2026-10-11T23:58:36Z after 1681 samples
+
+## nettop rows for incant_editor.71838 (bytes_in, bytes_out), one per second
+rows: 927
+row 1: incant_editor.71838,4932,2304,
+row 3: incant_editor.71838,18756,2509,
+row 927 (last): incant_editor.71838,18756,2509,

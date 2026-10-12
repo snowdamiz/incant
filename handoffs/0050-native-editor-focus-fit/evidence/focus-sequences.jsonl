@@ -1,0 +1,70 @@
+{"step": "b2", "at": "2026-10-11T23:45:43.415+00:00", "event": "picker clicked", "focus": {"role": "AXMenuItem", "name": "Spatial Without Camera No camera", "dom": null, "box": [825.0, 77.0, 256.0, 29.0]}, "picker": "Play scene and camera: Choose scene"}
+{"step": "b2", "at": "2026-10-11T23:45:44.665+00:00", "event": "chosen", "focus": {"role": "AXPopUpButton", "name": "Play scene and camera: Main · Stationary Camera", "dom": null, "box": [758.0, 45.0, 204.0, 25.0]}, "target": "Main · Stationary Camera"}
+{"step": "b2", "at": "2026-10-11T23:45:44.887+00:00", "event": "before", "focus": {"role": "AXPopUpButton", "name": "Play scene and camera: Main · Stationary Camera", "dom": null, "box": [758.0, 45.0, 204.0, 25.0]}, "key": "35:cmd"}
+{"step": "b2", "at": "2026-10-11T23:45:45.271+00:00", "event": "after", "focus": {"role": "AXButton", "name": "Play", "dom": null, "box": [963.0, 43.0, 28.0, 29.0]}, "key": "35:cmd"}
+{"step": "b2", "at": "2026-10-11T23:45:45.574+00:00", "event": "after", "focus": {"role": "AXButton", "name": "Play", "dom": null, "box": [963.0, 43.0, 28.0, 29.0]}, "key": "35:cmd"}
+{"step": "b2", "at": "2026-10-11T23:45:45.871+00:00", "event": "after", "focus": {"role": "AXButton", "name": "Play", "dom": null, "box": [963.0, 43.0, 28.0, 29.0]}, "key": "35:cmd"}
+{"step": "b2", "at": "2026-10-11T23:45:46.172+00:00", "event": "after", "focus": {"role": "AXButton", "name": "Pause", "dom": null, "box": [963.0, 43.0, 28.0, 29.0]}, "key": "35:cmd"}
+{"step": "b2", "at": "2026-10-11T23:45:46.473+00:00", "event": "after", "focus": {"role": "AXButton", "name": "Pause", "dom": null, "box": [963.0, 43.0, 28.0, 29.0]}, "key": "35:cmd"}
+{"step": "b2", "at": "2026-10-11T23:45:46.767+00:00", "event": "after", "focus": {"role": "AXButton", "name": "Pause", "dom": null, "box": [963.0, 43.0, 28.0, 29.0]}, "key": "35:cmd"}
+{"step": "b2", "at": "2026-10-11T23:45:47.057+00:00", "event": "after", "focus": {"role": "AXButton", "name": "Pause", "dom": null, "box": [963.0, 43.0, 28.0, 29.0]}, "key": "35:cmd"}
+{"step": "b2", "at": "2026-10-11T23:45:47.343+00:00", "event": "after", "focus": {"role": "AXButton", "name": "Pause", "dom": null, "box": [963.0, 43.0, 28.0, 29.0]}, "key": "35:cmd"}
+{"step": "b2", "at": "2026-10-11T23:45:47.632+00:00", "event": "after", "focus": {"role": "AXButton", "name": "Pause", "dom": null, "box": [963.0, 43.0, 28.0, 29.0]}, "key": "35:cmd"}
+{"step": "b2", "at": "2026-10-11T23:45:47.924+00:00", "event": "after", "focus": {"role": "AXButton", "name": "Pause", "dom": null, "box": [963.0, 43.0, 28.0, 29.0]}, "key": "35:cmd"}
+{"step": "b2", "at": "2026-10-11T23:45:48.210+00:00", "event": "after", "focus": {"role": "AXButton", "name": "Pause", "dom": null, "box": [963.0, 43.0, 28.0, 29.0]}, "key": "35:cmd"}
+{"step": "b2", "event": "focused element (winctl ax focused)", "node": {"d": 0, "role": "AXButton", "title": "Pause", "label": "Pause", "help": "Pause (⇧⌘P)", "x": 963.0, "y": 43.0, "w": 28.0, "h": 29.0, "focused": true}}
+{"step": "b3", "at": "2026-10-11T23:46:59.015+00:00", "event": "before", "focus": {"role": null, "name": null, "dom": null, "box": [null, null, null, null]}, "key": "35:cmd"}
+{"step": "b3", "at": "2026-10-11T23:46:59.519+00:00", "event": "after", "focus": {"role": "AXButton", "name": "Play", "dom": null, "box": [963.0, 43.0, 28.0, 29.0]}, "key": "35:cmd"}
+{"step": "b3", "at": "2026-10-11T23:46:59.795+00:00", "event": "after", "focus": {"role": "AXButton", "name": "Play", "dom": null, "box": [963.0, 43.0, 28.0, 29.0]}, "key": "35:cmd"}
+{"step": "b3", "at": "2026-10-11T23:47:00.070+00:00", "event": "after", "focus": {"role": "AXButton", "name": "Play", "dom": null, "box": [963.0, 43.0, 28.0, 29.0]}, "key": "35:cmd"}
+{"step": "b3", "at": "2026-10-11T23:47:00.345+00:00", "event": "after", "focus": {"role": "AXButton", "name": "Play", "dom": null, "box": [963.0, 43.0, 28.0, 29.0]}, "key": "35:cmd"}
+{"step": "b3", "at": "2026-10-11T23:47:00.621+00:00", "event": "after", "focus": {"role": "AXButton", "name": "Play", "dom": null, "box": [963.0, 43.0, 28.0, 29.0]}, "key": "35:cmd"}
+{"step": "b3", "at": "2026-10-11T23:47:00.901+00:00", "event": "after", "focus": {"role": "AXButton", "name": "Play", "dom": null, "box": [963.0, 43.0, 28.0, 29.0]}, "key": "35:cmd"}
+{"step": "b3", "at": "2026-10-11T23:47:01.178+00:00", "event": "after", "focus": {"role": "AXButton", "name": "Play", "dom": null, "box": [963.0, 43.0, 28.0, 29.0]}, "key": "35:cmd"}
+{"step": "b3", "at": "2026-10-11T23:47:01.453+00:00", "event": "after", "focus": {"role": "AXButton", "name": "Play", "dom": null, "box": [963.0, 43.0, 28.0, 29.0]}, "key": "35:cmd"}
+{"step": "b3", "at": "2026-10-11T23:47:01.735+00:00", "event": "after", "focus": {"role": "AXButton", "name": "Play", "dom": null, "box": [963.0, 43.0, 28.0, 29.0]}, "key": "35:cmd"}
+{"step": "b3", "at": "2026-10-11T23:47:02.011+00:00", "event": "after", "focus": {"role": "AXButton", "name": "Play", "dom": null, "box": [963.0, 43.0, 28.0, 29.0]}, "key": "35:cmd"}
+{"step": "b3", "event": "focused element (winctl ax focused)", "node": {"d": 0, "role": "AXGroup", "x": 8.0, "y": 286.0, "w": 229.0, "h": 28.0, "focused": true, "dom": "tree-row-00000000000000000000000024"}}
+{"step": "b3", "at": "2026-10-11T23:47:03.007+00:00", "event": "before", "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000024", "box": [8.0, 286.0, 229.0, 28.0]}, "key": "35:cmd"}
+{"step": "b3", "at": "2026-10-11T23:47:03.395+00:00", "event": "after", "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000024", "box": [8.0, 286.0, 229.0, 28.0]}, "key": "35:cmd"}
+{"step": "b3", "at": "2026-10-11T23:47:03.672+00:00", "event": "after", "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000024", "box": [8.0, 286.0, 229.0, 28.0]}, "key": "35:cmd"}
+{"step": "b3", "at": "2026-10-11T23:47:03.944+00:00", "event": "after", "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000024", "box": [8.0, 286.0, 229.0, 28.0]}, "key": "35:cmd"}
+{"step": "b3", "at": "2026-10-11T23:47:04.223+00:00", "event": "after", "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000024", "box": [8.0, 286.0, 229.0, 28.0]}, "key": "35:cmd"}
+{"step": "b3", "at": "2026-10-11T23:47:04.495+00:00", "event": "after", "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000024", "box": [8.0, 286.0, 229.0, 28.0]}, "key": "35:cmd"}
+{"step": "b3", "at": "2026-10-11T23:47:04.775+00:00", "event": "after", "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000024", "box": [8.0, 286.0, 229.0, 28.0]}, "key": "35:cmd"}
+{"step": "b3", "at": "2026-10-11T23:47:05.057+00:00", "event": "after", "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000024", "box": [8.0, 286.0, 229.0, 28.0]}, "key": "35:cmd"}
+{"step": "b3", "at": "2026-10-11T23:47:05.335+00:00", "event": "after", "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000024", "box": [8.0, 286.0, 229.0, 28.0]}, "key": "35:cmd"}
+{"step": "b3", "at": "2026-10-11T23:47:05.614+00:00", "event": "after", "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000024", "box": [8.0, 286.0, 229.0, 28.0]}, "key": "35:cmd"}
+{"step": "b3", "at": "2026-10-11T23:47:05.890+00:00", "event": "after", "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000024", "box": [8.0, 286.0, 229.0, 28.0]}, "key": "35:cmd"}
+{"step": "b3", "at": "2026-10-11T23:47:06.168+00:00", "event": "after", "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000024", "box": [8.0, 286.0, 229.0, 28.0]}, "key": "35:cmd"}
+{"step": "b3", "at": "2026-10-11T23:47:06.575+00:00", "event": "before", "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000024", "box": [8.0, 286.0, 229.0, 28.0]}, "key": "35:cmd"}
+{"step": "b3", "at": "2026-10-11T23:47:06.973+00:00", "event": "after", "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000024", "box": [8.0, 286.0, 229.0, 28.0]}, "key": "35:cmd"}
+{"step": "b3", "at": "2026-10-11T23:47:07.251+00:00", "event": "after", "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000024", "box": [8.0, 286.0, 229.0, 28.0]}, "key": "35:cmd"}
+{"step": "b3", "at": "2026-10-11T23:47:07.524+00:00", "event": "after", "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000024", "box": [8.0, 286.0, 229.0, 28.0]}, "key": "35:cmd"}
+{"step": "b3", "at": "2026-10-11T23:47:07.809+00:00", "event": "after", "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000024", "box": [8.0, 286.0, 229.0, 28.0]}, "key": "35:cmd"}
+{"step": "b3", "at": "2026-10-11T23:47:08.100+00:00", "event": "after", "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000024", "box": [8.0, 286.0, 229.0, 28.0]}, "key": "35:cmd"}
+{"step": "b3", "at": "2026-10-11T23:47:08.378+00:00", "event": "after", "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000024", "box": [8.0, 286.0, 229.0, 28.0]}, "key": "35:cmd"}
+{"step": "b3", "at": "2026-10-11T23:47:08.650+00:00", "event": "after", "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000024", "box": [8.0, 286.0, 229.0, 28.0]}, "key": "35:cmd"}
+{"step": "b3", "at": "2026-10-11T23:47:08.923+00:00", "event": "after", "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000024", "box": [8.0, 286.0, 229.0, 28.0]}, "key": "35:cmd"}
+{"step": "b3", "at": "2026-10-11T23:47:09.195+00:00", "event": "after", "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000024", "box": [8.0, 286.0, 229.0, 28.0]}, "key": "35:cmd"}
+{"step": "b3", "at": "2026-10-11T23:47:09.467+00:00", "event": "after", "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000024", "box": [8.0, 286.0, 229.0, 28.0]}, "key": "35:cmd"}
+{"step": "b4", "at": "2026-10-11T23:47:33.750+00:00", "event": "picker clicked", "focus": {"role": "AXMenuItem", "name": "Main · Stationary Camera", "dom": null, "box": [762.0, 105.0, 256.0, 29.0]}, "picker": "Play scene and camera: Main · Stationary Camera"}
+{"step": "b4", "at": "2026-10-11T23:47:35.144+00:00", "event": "chosen", "focus": {"role": "AXPopUpButton", "name": "Play scene and camera: Spatial Without Camera", "dom": null, "box": [768.0, 45.0, 193.0, 25.0]}, "target": "Spatial Without Camera"}
+{"step": "b4", "at": "2026-10-11T23:47:35.314+00:00", "event": "before", "focus": {"role": "AXPopUpButton", "name": "Play scene and camera: Spatial Without Camera", "dom": null, "box": [768.0, 45.0, 193.0, 25.0]}, "key": "35:cmd"}
+{"step": "b4", "at": "2026-10-11T23:47:35.649+00:00", "event": "after", "focus": {"role": "AXButton", "name": "Play", "dom": null, "box": [963.0, 43.0, 28.0, 29.0]}, "key": "35:cmd"}
+{"step": "b4", "at": "2026-10-11T23:47:35.919+00:00", "event": "after", "focus": {"role": "AXButton", "name": "Play", "dom": null, "box": [963.0, 43.0, 28.0, 29.0]}, "key": "35:cmd"}
+{"step": "b4", "at": "2026-10-11T23:47:36.182+00:00", "event": "after", "focus": {"role": "AXButton", "name": "Play", "dom": null, "box": [963.0, 43.0, 28.0, 29.0]}, "key": "35:cmd"}
+{"step": "b4", "at": "2026-10-11T23:47:36.450+00:00", "event": "after", "focus": {"role": "AXButton", "name": "Play", "dom": null, "box": [963.0, 43.0, 28.0, 29.0]}, "key": "35:cmd"}
+{"step": "b4", "at": "2026-10-11T23:47:36.738+00:00", "event": "after", "focus": {"role": "AXButton", "name": "Play", "dom": null, "box": [963.0, 43.0, 28.0, 29.0]}, "key": "35:cmd"}
+{"step": "b4", "at": "2026-10-11T23:47:37.015+00:00", "event": "after", "focus": {"role": "AXButton", "name": "Play", "dom": null, "box": [963.0, 43.0, 28.0, 29.0]}, "key": "35:cmd"}
+{"step": "b4", "at": "2026-10-11T23:47:37.290+00:00", "event": "after", "focus": {"role": "AXButton", "name": "Play", "dom": null, "box": [963.0, 43.0, 28.0, 29.0]}, "key": "35:cmd"}
+{"step": "b4", "at": "2026-10-11T23:47:37.561+00:00", "event": "after", "focus": {"role": "AXButton", "name": "Play", "dom": null, "box": [963.0, 43.0, 28.0, 29.0]}, "key": "35:cmd"}
+{"step": "b4", "at": "2026-10-11T23:47:37.830+00:00", "event": "after", "focus": {"role": "AXButton", "name": "Play", "dom": null, "box": [963.0, 43.0, 28.0, 29.0]}, "key": "35:cmd"}
+{"step": "b4", "at": "2026-10-11T23:47:38.106+00:00", "event": "after", "focus": {"role": "AXButton", "name": "Play", "dom": null, "box": [963.0, 43.0, 28.0, 29.0]}, "key": "35:cmd"}
+{"step": "b4", "at": "2026-10-11T23:47:38.373+00:00", "event": "after", "focus": {"role": "AXButton", "name": "Play", "dom": null, "box": [963.0, 43.0, 28.0, 29.0]}, "key": "35:cmd"}
+{"step": "b4", "at": "2026-10-11T23:47:38.644+00:00", "event": "after", "focus": {"role": "AXButton", "name": "Play", "dom": null, "box": [963.0, 43.0, 28.0, 29.0]}, "key": "35:cmd"}
+{"step": "b4", "event": "focused element (winctl ax focused)", "node": {"d": 0, "role": "AXButton", "title": "Play", "label": "Play", "help": "Play (⌘P)", "x": 963.0, "y": 43.0, "w": 28.0, "h": 29.0, "focused": true}}
+{"step": "b4", "at": "2026-10-11T23:47:39.849+00:00", "event": "tab", "focus": {"role": "AXButton", "name": "Step", "dom": null, "box": [993.0, 43.0, 28.0, 29.0]}}
+{"step": "b4", "at": "2026-10-11T23:47:40.245+00:00", "event": "tab", "focus": {"role": "AXButton", "name": "Stop", "dom": null, "box": [1023.0, 43.0, 28.0, 29.0]}}
+{"step": "b4", "at": "2026-10-11T23:47:40.648+00:00", "event": "tab", "focus": {"role": "AXButton", "name": "Dismiss", "dom": null, "box": [988.0, 82.0, 63.0, 24.0]}}
+{"step": "b4", "at": "2026-10-11T23:47:41.121+00:00", "event": "key", "focus": {"role": "AXButton", "name": "Play", "dom": null, "box": [963.0, 43.0, 28.0, 29.0]}, "key": "49"}
