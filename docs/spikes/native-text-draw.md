@@ -173,3 +173,23 @@ Outstanding Game UI work: widget layout and screen-space anchoring with device
 pixel ratio, styling (color, outline, clipping), editable text/IME,
 focus/gamepad navigation, emoji/color fonts, localization-driven text and
 reference-phone measurements.
+
+## Current-main integration
+
+The original Claude source/evidence commits are preserved with actual main123.
+The merge is automatic: six existing files also retain main's opt-in cooked shader
+path and crossfade fields/undo/static-model refusals; the other sixteen reviewed
+source/test files are byte-identical. The subsequent actual-main ancestry merge
+leaves the tested tree unchanged.
+
+Integrated CPU validation passes 127 tests in 28 groups, with 82 GPU tests ignored,
+all-target Clippy, wasm32 render/native checks, cooked-geometry compilation, normal
+runtime dependency guards, formatting and conventions. The exact observation
+routing regression that failed on the older Claude base now passes. Its original
+failed log remains in the handoff. No additional graphics run or appearance claim
+is inferred: original Metal and Claude evidence above stays bound to that frozen
+source/binary. The existing bidi layout defect remains a separate follow-up.
+
+[Integrated evidence](evidence/native-text-draw-main123.json) and
+[independent source review](evidence/native-text-draw-root-review.json) retain the
+source/log identities, merged seams and explicit limits.

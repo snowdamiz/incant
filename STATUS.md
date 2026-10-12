@@ -106,9 +106,11 @@ input, remaining SDK capabilities, and the Core Sample/2D sample with specified
 device performance checks still prevent a Phase 1 completion claim. Main now includes
 native animation (#116), Console logs (#117), Wasm animation (#118), typed text
 packaging (#119), Wasm formatting (#120), pose blending (#121) and the composed CPU
-text consumer (#122). The next private integration combines crossfade core,
-consumer and SDK; reviewed text-editing and steering work follow. Claude's text
-drawing return remains a separate source/appearance review, not a merged gate.
+text consumer (#122) and crossfades (#123). Canonical world-space text drawing
+now has scoped Claude appearance/Metal numerical acceptance and current-main CPU
+integration checks. Reviewed text-editing and steering remain separate next scopes;
+the reported mixed-bidi wrapping defect has a separately reviewed local repair.
+No complete Game UI or phase gate is claimed.
 
 Progress reports are scheduled approximately every 30 minutes while the goal is
 active. Report merged work separately from local checks and unmet exit gates.
@@ -130,10 +132,13 @@ Three actual fresh exported `--package` runs after source/build deletion pass
 mixed model, native script motion, multilingual shape/atlas and audible PCM
 controls; missing/tampered packaged fonts refuse before output. The affected
 120 CPU tests and Clippy pass; 74 GPU tests were intentionally not executed.
-Plain games and legacy Play remain strict, and the canonical GPU consumer
-explicitly refuses Text before submission. No second player mode was added.
-Actual text drawing/Claude acceptance, widget layout/IME/focus and reference-phone
-gates remain open. Evidence: [text bindings](docs/spikes/native-text-bindings.md),
+The original CPU-only milestone kept the canonical GPU text refusal; the reviewed
+0054 consumer now replaces that refusal with checked glyph drawing in the shared
+HDR graph and uses the ordinary packaged font-cache/window route. Current-main
+integration passes 127 CPU tests, Clippy, wasm32 and cooked-shader compilation;
+82 GPU tests are ignored in this integration run. Claude's original Metal tests
+and rendered review remain bound to their frozen build. Widget layout/IME/focus,
+reference-phone gates and the separate bidi-wrapping repair remain open. Evidence: [text bindings](docs/spikes/native-text-bindings.md),
 [composed text input](docs/spikes/native-text-input.md) and
 [draw handoff](docs/spikes/native-text-draw-handoff.md).
 The current main121 union passes 120 CPU tests, all-target Clippy and three fresh
