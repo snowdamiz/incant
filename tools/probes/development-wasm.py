@@ -32,6 +32,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
     parser.add_argument('--rustup', default='rustup')
+    parser.add_argument('--profile', choices=('dev', 'ci'), default='dev', help='Local conformance profile')
     parser.add_argument('--static-conformance', action='store_true', help='Reuse a prepared combined development/static test graph')
     args = parser.parse_args()
     feature = 'static-conformance' if args.static_conformance else 'wasmtime-host'
@@ -59,7 +60,7 @@ def main():
                 raise SystemExit(f'Development compiler leaked into {root}: {names[ident]}')
             pending.extend(dep['pkg'] for dep in nodes[ident]['deps']
                            if any(kind['kind'] is None for kind in dep['dep_kinds']))
-    built = cargo_output([str(cargo), 'build', '-j2', '-p', 'incant_wasm_dev', '--features',
+    built = cargo_output([str(cargo), 'build', '--profile', args.profile, '-j2', '-p', 'incant_wasm_dev', '--features',
                           feature, '--example', 'development_module', '--locked',
                           '--message-format=json'], cwd=ROOT, env=env)
     if built.returncode:

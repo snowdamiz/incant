@@ -1,0 +1,181 @@
+{
+  "scope": "Independent native Wasm animation host boundary tests and bounded read-only host/SDK review",
+  "implementing_model": "gpt-6.1-sol",
+  "reasoning_effort": "xhigh (Extra High)",
+  "author_role": "astra",
+  "shared_worktree": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant",
+  "base_head": "f74379ef70a037a6705636d058d3eb876907815f",
+  "production_state": "Root-owned uncommitted frozen slice; no production edits by this reviewer",
+  "owned_test_files": [
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/crates/incant_wasm_runtime/tests/animations.rs",
+      "sha256": "e8af4ec4e1dd9afe454f19f9f67ab80abc42c14897569ef94120405bd8ba23a9",
+      "bytes": 16173
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/crates/incant_wasm_runtime/tests/support/animations.rs",
+      "sha256": "d4286d6282c11ed94828dd1860dfce04725aedc547d37b88f825f6b244d37939",
+      "bytes": 1360
+    }
+  ],
+  "reviewed_source_files": [
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/crates/incant_wasm_runtime/src/capability.rs",
+      "sha256": "ffe3a3ee30d0789ef94c5374e50b837b82a4f9232f8641e79cf5602166a6943b",
+      "bytes": 23642
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/crates/incant_wasm_runtime/src/animations.rs",
+      "sha256": "d1be1280c899cb2021b65cebcd265e9dce1749179c46a021ee4f5e7d4d6c8d0f",
+      "bytes": 3089
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/crates/incant_wasm_runtime/src/generated.rs",
+      "sha256": "6a1eb762749fba18098c48dbfc7a39a98352c8c7d398b0b9910cfaa4cccfbca3",
+      "bytes": 3607
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/crates/incant_wasm_dev/src/generated.rs",
+      "sha256": "bc57cb0d7d3afe06ad33e67413a888356567d57b9a07da0e91806a1139b30037",
+      "bytes": 6514
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/crates/incant_wasm_runtime/c/generated.inc",
+      "sha256": "2a621e0a80a27ae2b5d201f540d077489109f9fe77181eaa3f866eb6a567efe5",
+      "bytes": 4007
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/crates/incant_wasm_runtime/c/generated.h",
+      "sha256": "05fce5fa6ea8dc7d6179c81b5a5ca39ef2b6e7c8f27f63dadc307e70956b6742",
+      "bytes": 470
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/crates/incant_wasm_abi/src/lib.rs",
+      "sha256": "0266fdb599b4725a3279b13f96bf31eba8aabcbf9748ebf3928d167c3c17e332",
+      "bytes": 53991
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/sdk/abi/native-v1.json",
+      "sha256": "9dd95c6c3730ad9749c65d6feb5a4d973c513f1cecb126a998d54079cc10e3e6",
+      "bytes": 21752
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/sdk/rust/src/animation.rs",
+      "sha256": "9ac7ab2ba5e4716b47bd46adad3d1f4a3531eaf14d64f487182fa4f9b7aea34f",
+      "bytes": 4700
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/sdk/rust/src/tick.rs",
+      "sha256": "e68674bc3e79073410564ab45918a9659cd367a2734ef044d3aeabdbb47d6225",
+      "bytes": 16692
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/sdk/rust/src/raw.rs",
+      "sha256": "9ad9edccecb621a6eeb36f32eeefedc124a1a477be76936a34e357bd23915aca",
+      "bytes": 10506
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/sdk/rust/src/lib.rs",
+      "sha256": "1fb76c2fc3345b57356d875c66ee3db455407d00e048d28ca7b3446c95cd4cbd",
+      "bytes": 2908
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/Cargo.lock",
+      "sha256": "5f20234afb379a4aed411821719288a173c4c6959890bba065aa10c30e90c699",
+      "bytes": 250514
+    }
+  ],
+  "findings": [],
+  "bounded_conclusion": "No actionable correctness finding in inspected animation ingress, transaction publication or latest SDK parsing/control code",
+  "review_observations": [
+    "Authorized current-epoch animation failures poison the entire batch across enter/call, linear-memory, transfer, parsing, entity-pointer and structural-command admission errors; stale/inactive epochs and unrelated errors retain earlier behavior",
+    "Snapshot/copy uses bounded owned rows and initialized byte transfers; complete range and capacity checks precede all guest-memory writes, including unaligned buffers",
+    "Controls validate finite primitive values and fixed reserved fields before queueing; actual entity/asset clip and duration validation occurs in ordinary NativeWorld.apply with numeric-prefix rollback",
+    "Queued controls remain invisible to captured guest snapshots and native state until successful finish; other instances remain unchanged",
+    "SDK parses exact framing/count/stride/magic and all rows before iteration; latest root fix rejects completed with either playing or looping and rest completion; scratch contains only copies and no native loans",
+    "SDK validates every locally representable control argument, and ignored local errors poison Tick so the exported callback traps; host authority remains final for actual asset bounds",
+    "Generated ABI imports/opcodes22/23/24 map to the same three calls in Wasmtime and static C/Rust dispatch"
+  ],
+  "tests": {
+    "passed": 10,
+    "failed": 0,
+    "ignored": 0,
+    "cases": [
+      "Owned unaligned snapshots/canaries, per-instance readback and all ordered controls",
+      "Rest and zero-duration completion flags",
+      "Nine pointer/capacity/OOB errors with unchanged memory and rollback",
+      "Eighteen malformed tag/reserved/nonfinite/bounds inputs with ignored-error/superseding control refusal",
+      "Five wire-valid native asset/entity refusals with numeric/structural/log rollback",
+      "Stale/inactive animation and unrelated errors preserve fresh-epoch acceptance",
+      "Shared1024 structural command quota",
+      "Actual65536 call and32MiB linear-memory boundaries",
+      "Actual128MiB transfer quota after bounded4096-row numeric reads, no partial snapshot copy",
+      "Prior committed history hidden after failure, restored only by explicit replacement"
+    ]
+  },
+  "checks": [
+    {
+      "name": "boundary tests",
+      "command": "PATH=/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:$PATH CARGO_TARGET_DIR=/tmp/incant-agent-font-target cargo test -p incant_wasm_runtime --test animations --profile ci --locked --offline -j2",
+      "exit_code": 0,
+      "log": {
+        "path": "/tmp/incant-wasm-animation-boundary-tests-final.log",
+        "sha256": "002d881e524f405f58f8a29cbd8899e3bdea2140f12b2486798a0aa4d4f919b5",
+        "bytes": 1261
+      }
+    },
+    {
+      "name": "targeted Clippy",
+      "command": "PATH=/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:$PATH CARGO_TARGET_DIR=/tmp/incant-agent-font-target cargo clippy -p incant_wasm_runtime --test animations --profile ci --locked --offline -j2 -- -D warnings",
+      "exit_code": 0,
+      "log": {
+        "path": "/tmp/incant-wasm-animation-boundary-clippy-final.log",
+        "sha256": "159ce1bbfb0d69200963c04d6f3ff27bacc9091af57bb4a5c95fffc2235f463b",
+        "bytes": 188
+      }
+    },
+    {
+      "name": "targeted formatting",
+      "command": "PATH=/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:$PATH rustfmt --edition 2024 --check crates/incant_wasm_runtime/tests/animations.rs crates/incant_wasm_runtime/tests/support/animations.rs",
+      "exit_code": 0,
+      "log": {
+        "path": "/tmp/incant-wasm-animation-boundary-fmt-final.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    }
+  ],
+  "earlier_test_only_corrections": [
+    {
+      "scope": "Literal0.2 assertion used exact equality against accumulated0.19999999999999998; replaced with exact native-copy equality and independent1e-12 numerical tolerance",
+      "log": {
+        "path": "/tmp/incant-wasm-animation-boundary-tests-first.log",
+        "sha256": "d4a68887210f77f71f4dfcc76d8b2684c4890fbe5ffed1d58b453318a5bb7c9f",
+        "bytes": 2610
+      },
+      "exit_code": 101
+    },
+    {
+      "scope": "Pinned Clippy requested constant as_chunks iterator; test helper changed accordingly, no production change",
+      "log": {
+        "path": "/tmp/incant-wasm-animation-boundary-clippy-first.log",
+        "sha256": "84994a498c295eb029aa3f40ea22c4e084b6cad3ec419f3442ed3356a15ebb94",
+        "bytes": 2464
+      },
+      "exit_code": 101
+    }
+  ],
+  "limits": [
+    "Tests call actual Capability/NativeWorld directly; root owns separately executed Rust/WAT Wasmtime/static-wasm2c conformance",
+    "No GPU/window/device/performance/complete-resource or phase gate claim",
+    "Review does not authenticate arbitrary host-provided asset metadata; native asset-specific commit validation remains authoritative"
+  ],
+  "no_shared_branch_switch_or_commit": true,
+  "owned_handles": {
+    "97260": 101,
+    "2460": 0,
+    "54611": 101,
+    "94621": 0
+  },
+  "all_owned_processes_reaped": true
+}
