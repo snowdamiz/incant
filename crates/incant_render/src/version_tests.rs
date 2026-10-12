@@ -55,6 +55,7 @@ fn input(sources: &[Arc<RuntimeAsset>]) -> SceneInput {
                     source: Arc::clone(source),
                     cast_shadows: true,
                     animation: None,
+                    animation_blend: None,
                 }),
             })
             .collect(),

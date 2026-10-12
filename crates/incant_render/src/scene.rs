@@ -189,7 +189,7 @@ pub(crate) fn resolve(input: &SceneInput) -> Result<ResolvedScene, SceneError> {
             result.animations.push(animation);
             continue;
         }
-        if binding.animation.is_some() {
+        if binding.animation.is_some() || binding.animation_blend.is_some() {
             return Err(SceneError::Input(
                 "animation sample requires animated model",
             ));

@@ -2,10 +2,13 @@
 use crate::{CookedSpatial, FrameCommands, NativeWorld, RuntimeError, SceneError, StableId};
 use bevy_ecs::prelude::{Component, Query, QueryState, Res};
 use incant_types::Animation;
-pub use incant_types::{AnimationSample, MAX_ANIMATION_CLIPS, MAX_ANIMATION_SPEED};
+pub use incant_types::{
+    AnimationBlendSample, AnimationSample, MAX_ANIMATION_CLIPS, MAX_ANIMATION_SPEED,
+};
 use std::{collections::BTreeMap, sync::Arc};
 
 pub const MAX_SCENE_ANIMATION_CLIPS: usize = 1_000_000;
+pub const MAX_ANIMATION_TRANSITION_SECONDS: f64 = 60.0;
 
 /// Checked cold metadata tied to the same mesh asset as its spatial declaration.
 /// Consumers compare the complete duration table with the sealed cooked asset.
@@ -51,6 +54,21 @@ impl NativeAnimation {
         if !state.speed.is_finite() || state.speed.abs() > MAX_ANIMATION_SPEED {
             return Err(SceneError::Invalid("animation speed"));
         }
+        if let Some(transition) = state.transition {
+            self.validate_sample(transition.source)?;
+            if !transition.speed.is_finite()
+                || transition.speed.abs() > MAX_ANIMATION_SPEED
+                || !transition.duration.is_finite()
+                || transition.duration <= 0.0
+                || transition.duration > MAX_ANIMATION_TRANSITION_SECONDS
+                || !transition.elapsed.is_finite()
+                || transition.elapsed < 0.0
+                || transition.elapsed >= transition.duration
+                || state.completed
+            {
+                return Err(SceneError::Invalid("animation transition state"));
+            }
+        }
         if state.completed {
             let clip = state
                 .sample
@@ -76,6 +94,7 @@ impl NativeAnimation {
             playing: self.initial.playing,
             looping: self.initial.looping,
             completed: false,
+            transition: None,
         }
     }
     pub(crate) fn control(
@@ -89,6 +108,32 @@ impl NativeAnimation {
                 self.validate_sample(sample)?;
                 next.sample = sample;
                 next.completed = false;
+                next.transition = None;
+            }
+            AnimationControl::Crossfade { target, duration } => {
+                self.validate_sample(target)?;
+                if !duration.is_finite()
+                    || !(0.0..=MAX_ANIMATION_TRANSITION_SECONDS).contains(&duration)
+                {
+                    return Err(SceneError::Invalid("animation transition duration"));
+                }
+                if duration == 0.0 {
+                    next.transition = None;
+                } else {
+                    if next.transition.is_some() {
+                        return Err(SceneError::Invalid("animation transition already active"));
+                    }
+                    next.transition = Some(AnimationTransition {
+                        source: next.sample,
+                        speed: next.speed,
+                        playing: next.playing,
+                        looping: next.looping,
+                        elapsed: 0.0,
+                        duration,
+                    });
+                }
+                next.sample = target;
+                next.completed = false;
             }
             AnimationControl::Seek(seconds) => {
                 let sample = AnimationSample {
@@ -98,6 +143,7 @@ impl NativeAnimation {
                 self.validate_sample(sample)?;
                 next.sample = sample;
                 next.completed = false;
+                next.transition = None;
             }
             AnimationControl::SetPlaying(playing) => {
                 next.playing = playing;
@@ -130,11 +176,39 @@ pub struct AnimationState {
     pub playing: bool,
     pub looping: bool,
     pub completed: bool,
+    pub transition: Option<AnimationTransition>,
+}
+impl AnimationState {
+    pub fn blend_sample(self) -> Option<AnimationBlendSample> {
+        self.transition.map(|t| AnimationBlendSample {
+            sample: t.source,
+            weight: t.elapsed / t.duration,
+        })
+    }
+}
+/// Outgoing clock captured when a crossfade starts. Master `playing` pauses
+/// both clocks and the fade; speed/loop controls thereafter affect only the
+/// destination. No model data or evaluated pose is copied per step.
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub struct AnimationTransition {
+    pub source: AnimationSample,
+    pub speed: f64,
+    pub playing: bool,
+    pub looping: bool,
+    pub elapsed: f64,
+    pub duration: f64,
 }
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub enum AnimationControl {
     /// Select a clip/rest pose and seek atomically; preserves speed/play/loop flags.
     Select(AnimationSample),
+    /// Blend to a clip/rest sample over 0..=60 seconds; zero selects immediately.
+    /// A nonzero transition cannot interrupt another transition. Seek/Select
+    /// explicitly cancel it. The master playing flag is preserved.
+    Crossfade {
+        target: AnimationSample,
+        duration: f64,
+    },
     Seek(f64),
     SetPlaying(bool),
     SetLooping(bool),
@@ -229,33 +303,73 @@ impl NativeWorld {
 
 pub(crate) fn advance(step: Res<crate::world::Step>, mut query: Query<&mut Playback>) {
     for mut playback in &mut query {
-        let Some(clip) = playback.state.sample.clip else {
-            continue;
-        };
         if !playback.state.playing {
             continue;
         }
-        let duration = f64::from(playback.definition.clip_durations[usize::from(clip)]);
-        let state = &mut playback.state;
-        if duration == 0.0 {
-            state.sample.seconds = 0.0;
-            if !state.looping {
-                state.playing = false;
-                state.completed = true;
-            }
-        } else if state.speed != 0.0 {
-            let next = state.sample.seconds + step.0 * state.speed;
-            if state.looping {
-                let wrapped = next.rem_euclid(duration);
-                state.sample.seconds = if wrapped >= duration { 0.0 } else { wrapped };
-            } else if (state.speed > 0.0 && next >= duration) || (state.speed < 0.0 && next <= 0.0)
+        let Playback { definition, state } = &mut *playback;
+        let ended = advance_sample(
+            &mut state.sample,
+            state.speed,
+            state.looping,
+            step.0,
+            definition,
+        );
+        if let Some(transition) = &mut state.transition {
+            if transition.playing
+                && advance_sample(
+                    &mut transition.source,
+                    transition.speed,
+                    transition.looping,
+                    step.0,
+                    definition,
+                )
             {
-                state.sample.seconds = next.clamp(0.0, duration);
-                state.playing = false;
-                state.completed = true;
-            } else {
-                state.sample.seconds = next;
+                transition.playing = false;
+            }
+            transition.elapsed += step.0;
+            // Bound accumulated addition roundoff by step count * epsilon *
+            // duration (under one nanosecond at the supported 60s/240Hz limits).
+            // An integral-tick fade must not gain an extra frame from rounding.
+            let roundoff =
+                f64::EPSILON * transition.duration * (transition.duration / step.0 + 1.0);
+            if transition.duration - transition.elapsed <= roundoff {
+                state.transition = None;
             }
         }
+        if ended && state.transition.is_none() {
+            state.playing = false;
+            state.completed = true;
+        }
     }
+}
+
+fn advance_sample(
+    sample: &mut AnimationSample,
+    speed: f64,
+    looping: bool,
+    seconds: f64,
+    definition: &NativeAnimation,
+) -> bool {
+    let Some(clip) = sample.clip else {
+        return false;
+    };
+    let duration = f64::from(definition.clip_durations[usize::from(clip)]);
+    if duration == 0.0 {
+        sample.seconds = 0.0;
+        return !looping;
+    }
+    if speed == 0.0 {
+        return false;
+    }
+    let next = sample.seconds + seconds * speed;
+    if looping {
+        let wrapped = next.rem_euclid(duration);
+        sample.seconds = if wrapped >= duration { 0.0 } else { wrapped };
+    } else if (speed > 0.0 && next >= duration) || (speed < 0.0 && next <= 0.0) {
+        sample.seconds = next.clamp(0.0, duration);
+        return true;
+    } else {
+        sample.seconds = next;
+    }
+    false
 }

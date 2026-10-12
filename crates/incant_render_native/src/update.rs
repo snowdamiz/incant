@@ -108,6 +108,7 @@ impl NativeRenderInput {
                 world: node.world,
                 frame: node.sprite.as_ref().map_or(0, |s| s.frame),
                 animation: node.mesh.as_ref().and_then(|m| m.animation),
+                animation_blend: node.mesh.as_ref().and_then(|m| m.animation_blend),
             };
         }
         let mut guard = MotionGuard {
@@ -126,6 +127,7 @@ impl NativeRenderInput {
                 guard.input.nodes[slot].world = *node.global;
                 if let Some(mesh) = &mut guard.input.nodes[slot].mesh {
                     mesh.animation = node.animation;
+                    mesh.animation_blend = node.animation_blend;
                 }
                 if let Some(sprite) = &mut guard.input.nodes[slot].sprite {
                     sprite.frame = node.flipbook.map_or(0, |p| p.frame());
@@ -161,6 +163,7 @@ impl Drop for MotionGuard<'_> {
                 node.world = old.world;
                 if let Some(mesh) = &mut node.mesh {
                     mesh.animation = old.animation;
+                    mesh.animation_blend = old.animation_blend;
                 }
                 if let Some(sprite) = &mut node.sprite {
                     sprite.frame = old.frame;

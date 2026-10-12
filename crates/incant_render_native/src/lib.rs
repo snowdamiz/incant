@@ -96,6 +96,7 @@ struct NumericUndo {
     world: DMat4,
     frame: u16,
     animation: Option<incant_runtime::AnimationSample>,
+    animation_blend: Option<incant_runtime::AnimationBlendSample>,
 }
 
 pub struct NativeRenderInput {
