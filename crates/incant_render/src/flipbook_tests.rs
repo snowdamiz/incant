@@ -22,6 +22,7 @@ fn static_selection(input: &SceneInput) -> SceneInput {
                 mesh: node.mesh.as_ref().map(|m| MeshInput {
                     source: Arc::clone(&m.source),
                     cast_shadows: m.cast_shadows,
+                    animation: m.animation,
                 }),
                 sprite: node.sprite.as_ref().map(|s| {
                     let mut sprite = s.sprite.clone();

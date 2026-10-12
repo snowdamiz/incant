@@ -127,6 +127,15 @@ impl RuntimeAsset {
         fingerprint: &str,
         data: RuntimeAssetData,
     ) -> Result<Self> {
+        let animation_bytes = match &data {
+            RuntimeAssetData::Model(model) => model
+                .animation
+                .as_ref()
+                .map(crate::animation::AnimationData::retained_bytes)
+                .transpose()?
+                .unwrap_or(0),
+            _ => 0,
+        };
         let (kind, usage) = match &data {
             RuntimeAssetData::Model(_) => ("model", None),
             RuntimeAssetData::Texture(texture) => ("texture", Some(texture.metadata.usage)),
@@ -144,10 +153,16 @@ impl RuntimeAsset {
                 kind: kind.into(),
                 fingerprint: fingerprint.into(),
                 generation,
-                payload_bytes: data.payload_bytes(),
+                payload_bytes: data
+                    .payload_bytes()
+                    .checked_add(animation_bytes)
+                    .ok_or(crate::AssetError::Limit("model animation payload"))?,
             },
             usage,
-            resident_payload_bytes: data.resident_payload_bytes(),
+            resident_payload_bytes: data
+                .resident_payload_bytes()
+                .checked_add(animation_bytes)
+                .ok_or(crate::AssetError::Limit("model animation payload"))?,
             data,
         })
     }
@@ -160,11 +175,6 @@ impl RuntimeAsset {
     pub fn load_model(id: &str, generation: u64, cache: &Path, fingerprint: &str) -> Result<Self> {
         Self::check_id(id)?;
         let model = crate::load_model(cache, fingerprint)?;
-        if model.animation.is_some() {
-            return Err(crate::AssetError::Unsupported(
-                "animated model rendering is not implemented; use the CPU AnimationPlayer".into(),
-            ));
-        }
         Self::create(id, generation, fingerprint, RuntimeAssetData::Model(model))
     }
     pub fn load_texture(

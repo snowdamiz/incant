@@ -51,6 +51,7 @@ pub(crate) struct ResolvedScene {
     pub cameras: BTreeMap<String, crate::camera::CameraView>,
     pub sprites: Vec<crate::sprites::SpritePlan>,
     pub tilemaps: Vec<crate::sprites::TilemapPlan>,
+    pub animations: Vec<crate::models::animation::Plan>,
 }
 
 /// Resolve startup/revision input. Native moving-frame extraction will use a
@@ -68,6 +69,7 @@ pub(crate) fn resolve(input: &SceneInput) -> Result<ResolvedScene, SceneError> {
         cameras: BTreeMap::new(),
         sprites: Vec::new(),
         tilemaps: Vec::new(),
+        animations: Vec::new(),
     };
     if let Some(environment) = &input.environment {
         if !(0.0..=100.).contains(&environment.intensity)
@@ -90,6 +92,7 @@ pub(crate) fn resolve(input: &SceneInput) -> Result<ResolvedScene, SceneError> {
     }
     let mut ids = BTreeSet::new();
     let mut tile_slots = 0usize;
+    let mut animation_bytes = 0usize;
     for (entity_index, entity) in input.nodes.iter().enumerate() {
         if entity.id.is_empty() || entity.id.len() > 256 || !ids.insert(entity.id.as_str()) {
             return Err(SceneError::Input("empty, oversized or duplicate node ID"));
@@ -166,6 +169,28 @@ pub(crate) fn resolve(input: &SceneInput) -> Result<ResolvedScene, SceneError> {
         let RuntimeAssetData::Model(model) = source.data() else {
             return Err(SceneError::MissingModel(binding.source.info().id.clone()));
         };
+        if model.animation.is_some() {
+            let animation = crate::models::animation::resolve(
+                entity_index,
+                entity.world,
+                binding,
+                &mut result.stats,
+                &mut animation_bytes,
+            )?;
+            let key = (source.info().fingerprint.clone(), source.version_id());
+            result.models.entry(key).or_insert_with(|| ModelPlan {
+                source: Arc::clone(&source),
+                primitives: BTreeMap::new(),
+                placements: BTreeMap::new(),
+            });
+            result.animations.push(animation);
+            continue;
+        }
+        if binding.animation.is_some() {
+            return Err(SceneError::Input(
+                "animation sample requires animated model",
+            ));
+        }
         let scene = model.metadata.default_scene.unwrap_or(0);
         let roots = model
             .metadata
