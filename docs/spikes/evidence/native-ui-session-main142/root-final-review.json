@@ -1,0 +1,18 @@
+{
+  "at": "2026-10-12T14:58:07.288290+00:00",
+  "reviewer": "astra/root",
+  "accepted": true,
+  "scope": "Hosted CPU UI checkpoint actual-main142 integration only",
+  "receipt_sha256": "d924a221da98c712c13a541cd3982d1b4089c9c554d37a177d6f750645f75c03",
+  "verified_artifacts": 42,
+  "verified_runtime_files": 13,
+  "verified_proof_outputs": 34,
+  "current_frozen_inputs": 1480,
+  "accepted_input_comparisons": 32,
+  "results": "450 affected + 9 player cases, 13 zero-exit commands; four success runs and seven refusals; exact continued saves and PCM; legacy lost temp outputs not used",
+  "limits": [
+    "Hosted CPU ordinary-load only. No GPU/window/native IME/phone or full-save gate.",
+    "Physics/audio/static/development module checkpoint paths remain explicitly refused. Active preedit refuses; physical input neutralized; transient pointer capture discarded.",
+    "No source change or evidence from active Claude Linux rendering diagnosis is included."
+  ]
+}

@@ -104,3 +104,22 @@ The completed source and actual public proof review is
 [evidence/native-ui-session-checkpoints-final-review.json](evidence/native-ui-session-checkpoints-final-review.json).
 No GPU submission, native window, screenshot, appearance or performance gate is
 claimed by these checks.
+
+## Actual main #142 integration
+
+The accepted 31 non-lock source/probe inputs remain byte-identical. The current
+lock includes the previously merged Tao vendoring, so a new public shipping
+export was cooked and built against it. The integrated run passes 450 affected
+CPU tests, nine player cases, all-target Clippy, feature-disabled and
+static/development-module checks, wasm32, the runtime graph and formatting.
+Four fresh exported CPU processes and seven refusal cases pass after authoring,
+build storage and debug source maps are removed. Final saves are byte-identical,
+and split PCM concatenates exactly to the uninterrupted run.
+
+After that frozen run, main #142 adds only unrelated probe expectations, tests
+and evidence. The UI export/compiler/runtime closure is unchanged; its new CLI
+refusal test and Clippy were rerun through Cargo. The prior /tmp current-lock
+run disappeared at restart and is not used as evidence. All replacement logs,
+source identities and process receipts are retained in
+[the integration record](evidence/native-ui-session-main142.json). Native
+window/IME, unsupported save families and phase limits above still apply.
