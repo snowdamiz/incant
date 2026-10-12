@@ -1,0 +1,275 @@
+{
+  "at": "2026-10-12T18:51:31.519882+00:00",
+  "base": "d8738ff91fd75b7e6fa05a0d78e650eddf70adcc",
+  "source": {
+    "crates/incant_game_player/examples/macos_text_retirement.rs": "56aa6b954c9f6e9f0e7e6e9eb11483d6729dc1fe950f895eb013948fd7941662"
+  },
+  "checkpoint": {
+    "number": 13,
+    "candidate": "5a033ace85c43680ceade9212d2fe90e417d3ae8",
+    "selected_main": "fca5d5fe714748215fc285d24b998d33f6655fc1",
+    "failure_job": "https://github.com/snowdamiz/incant/actions/runs/38289655867/job/114946489598",
+    "diagnostic": "macos_text_retirement.rs:32 live hidden window"
+  },
+  "checks": [
+    {
+      "name": "cargo-tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "native-window",
+        "--example",
+        "macos_text_retirement"
+      ],
+      "exit": 0,
+      "seconds": 1.4632296670024516,
+      "sha256": "82e833a78890d570ac9cd57319eced689fe613e1223cffbf155de9e40c5e5735"
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "native-window",
+        "--example",
+        "macos_text_retirement",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 0.9081902500001888,
+      "sha256": "b2feee668ecc30b8db79ba9f9f5a538eea07bc2eeabff152d1ff98b730a0b79f"
+    },
+    {
+      "name": "build",
+      "command": [
+        "./tools/cargo",
+        "build",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "native-window",
+        "--example",
+        "macos_text_retirement"
+      ],
+      "exit": 0,
+      "seconds": 1.033020332997694,
+      "sha256": "43df9c8403efe2e4e25ddf5da82e07f279043847508c7dd1befbe408140da273"
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 1.903481749999628,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.05541845799962175,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.03277629099829937,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "regression": {
+    "baseline": {
+      "passed": 0,
+      "failed": 2,
+      "exit": 101,
+      "mechanism": "Existing callback body extracted without terminal guard; late-completion and late-error tests both fail."
+    },
+    "fixed": {
+      "passed": 2,
+      "failed": 0,
+      "ignored": 0,
+      "feature": "native-window"
+    },
+    "preserved_contract": [
+      "256cycles before success",
+      "Final active owner destroyed exactly once",
+      "First typed error retained",
+      "No later native operation after completion or error"
+    ]
+  },
+  "binary": {
+    "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/macos-retirement-late-events-003/macos_text_retirement",
+    "sha256": "cc3dead50b353b4edbb27c37dd3b5580b2a9e7c2f01d410087bb88b3da4f1d6e",
+    "source_sha256": "56aa6b954c9f6e9f0e7e6e9eb11483d6729dc1fe950f895eb013948fd7941662",
+    "profile": "ci",
+    "features": [
+      "native-window"
+    ]
+  },
+  "artifacts": {
+    "docs/spikes/evidence/macos-retirement-late-events/001/hosted-failure.log.gz": {
+      "sha256": "87ddfda55b317029372e017ac326e9931d895aa3572e1d1eb229990d9c49be1d",
+      "uncompressed_sha256": "695763a093a730c3bcdd90a1e2f3dc45bc1f462d23d5c0d431e53a27b9cfe2d9",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/macos-retirement-late-events-001/hosted-failure.log"
+    },
+    "docs/spikes/evidence/macos-retirement-late-events/001/repair.patch.gz": {
+      "sha256": "f94c2b69790fa2fa8886f50203539fd37bd6b355cb6713aab6ab659b8b317d3e",
+      "uncompressed_sha256": "a9a39fe6cc304cfe9010965ef1034fd7611bfdd44bb231beca81f273c437ac72",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/macos-retirement-late-events-001/repair.patch"
+    },
+    "docs/spikes/evidence/macos-retirement-late-events/001/results.json.gz": {
+      "sha256": "2348b8ca9af02a04cce7f5eb45e1d67b8fe6196add0858a60c02d961cec22ee6",
+      "uncompressed_sha256": "73a5b6b38263542564adb83d3853f6beff00ac709e14a071106a20ae2358066f",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/macos-retirement-late-events-001/results.json"
+    },
+    "docs/spikes/evidence/macos-retirement-late-events/001/before.rs.gz": {
+      "sha256": "fac2363343fe1f93fa97b1ae0f5c514b5469fd3352a9fe9373bca49f6f1052be",
+      "uncompressed_sha256": "700df634973f45c1700cb76128603305c47d08477109cb0d813c4893cb9417a8",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/macos-retirement-late-events-001/before.rs"
+    },
+    "docs/spikes/evidence/macos-retirement-late-events/001/before.log.gz": {
+      "sha256": "b54207bdbc15591c7f9c07f0edfe00c487dc18dfcc0080be212fc2ca592f2880",
+      "uncompressed_sha256": "d05c339b77814d569220b0ccbcac890f10460dba15e2e435aa3084abcad5b030",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/macos-retirement-late-events-001/before.log"
+    },
+    "docs/spikes/evidence/macos-retirement-late-events/001/cargo-tests.log.gz": {
+      "sha256": "25425873ed2e289c97802ab7e537322bc08500a03f191d54d1e4264b5680abfc",
+      "uncompressed_sha256": "ab9cc9c0ee64b650e669d823a022754fb204ff1affe4fe67c443358154d5cf09",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/macos-retirement-late-events-001/cargo-tests.log"
+    },
+    "docs/spikes/evidence/macos-retirement-late-events/001/freeze.json.gz": {
+      "sha256": "66ac72be295470a5c8f44027fe8cceebeb5b3375822bb52df24cf146ad05d200",
+      "uncompressed_sha256": "6684fd981aa383cd89cc083fb827f660f74c98a3a1489409ce92aaf80c3a06f9",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/macos-retirement-late-events-001/freeze.json"
+    },
+    "docs/spikes/evidence/macos-retirement-late-events/001/after.log.gz": {
+      "sha256": "5a2bb5d4bdfdd409db0588d82bdf47d45497b80dd0f2ba4b428852d50f33d6b8",
+      "uncompressed_sha256": "08215e9bc3a68686b03388073f167456f770449315285a0393fe2e14933f9ee7",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/macos-retirement-late-events-001/after.log"
+    },
+    "docs/spikes/evidence/macos-retirement-late-events/002/results.json.gz": {
+      "sha256": "2173c405c998ddaa79699dbac7b7e5e041567caa2eeeae94feef79c3fb436b21",
+      "uncompressed_sha256": "07b848cdd8c0d29173e9ed62da7019990509a1169dd9379b68daf637130857ae",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/macos-retirement-late-events-002/results.json"
+    },
+    "docs/spikes/evidence/macos-retirement-late-events/002/clippy.log.gz": {
+      "sha256": "42a87f7ac542a51bf7cf957a41cd1431f572d855734c5bb56c265d55c2f31ea9",
+      "uncompressed_sha256": "a9c8d05776d2b2861576644978dd1ff2aa439538505ab9b90b83e153db3f89df",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/macos-retirement-late-events-002/clippy.log"
+    },
+    "docs/spikes/evidence/macos-retirement-late-events/002/cargo-tests.log.gz": {
+      "sha256": "71a937a79020decb2be91a029048157b8ee4bcbcb664923cd6b936e25b753b1c",
+      "uncompressed_sha256": "509abf2f8df9de86b93134e23a6954a4126b990adf837b86d1256f82d86a38b1",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/macos-retirement-late-events-002/cargo-tests.log"
+    },
+    "docs/spikes/evidence/macos-retirement-late-events/002/freeze.json.gz": {
+      "sha256": "a72bc6df769cef915a9b09dbb394e8d73355321aefcfeb135d32157599abed17",
+      "uncompressed_sha256": "09fd5d2455e4d473acf4febc8dad3730001e7ce84aab55def9173a5afe11761e",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/macos-retirement-late-events-002/freeze.json"
+    },
+    "docs/spikes/evidence/macos-retirement-late-events/003/fmt.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/macos-retirement-late-events-003/fmt.log"
+    },
+    "docs/spikes/evidence/macos-retirement-late-events/003/repair.patch.gz": {
+      "sha256": "8fb710c1885d24953c9cc47d0b3a7fe72935146bb777e0a1fc8e15a7bbc87666",
+      "uncompressed_sha256": "e944cf76cfd158702e6d70b5a2181aad4dcaf0790f00b6a567fae203c35c6f31",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/macos-retirement-late-events-003/repair.patch"
+    },
+    "docs/spikes/evidence/macos-retirement-late-events/003/conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/macos-retirement-late-events-003/conventions.log"
+    },
+    "docs/spikes/evidence/macos-retirement-late-events/003/idle-no-launch.json.gz": {
+      "sha256": "7d0727e097cf7b8981fe2baf94f2c18d320b11cae0f0b504c57839565b36836a",
+      "uncompressed_sha256": "ef02df3f204a416c4dfb8a1ab59660f27b28c17252656b997709908fe5140188",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/macos-retirement-late-events-003/idle-no-launch.json"
+    },
+    "docs/spikes/evidence/macos-retirement-late-events/003/results.json.gz": {
+      "sha256": "23d68b26f9aae40a4ddf9002a9ab2f3d6ea9ac76b748527edbbe27c7932a440e",
+      "uncompressed_sha256": "fa9c6a4dd04a7fdf799f7c18ab45213b419f036106d0524e9f365530b72c311a",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/macos-retirement-late-events-003/results.json"
+    },
+    "docs/spikes/evidence/macos-retirement-late-events/003/clippy.log.gz": {
+      "sha256": "61aaad351e5f975c1b7cbd68484b4682053d153ea0df775b775d4debd08e0275",
+      "uncompressed_sha256": "b2feee668ecc30b8db79ba9f9f5a538eea07bc2eeabff152d1ff98b730a0b79f",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/macos-retirement-late-events-003/clippy.log"
+    },
+    "docs/spikes/evidence/macos-retirement-late-events/003/cargo-tests.log.gz": {
+      "sha256": "7481b24b40ab19bac7d8082d952b647747b7b0f6b2b30737c25e9d70a9a326f5",
+      "uncompressed_sha256": "82e833a78890d570ac9cd57319eced689fe613e1223cffbf155de9e40c5e5735",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/macos-retirement-late-events-003/cargo-tests.log"
+    },
+    "docs/spikes/evidence/macos-retirement-late-events/003/binary.json.gz": {
+      "sha256": "a95fe063be8bd3267e0458e368b17d85f0a19f3ede628e0f937f42d5b20a2a70",
+      "uncompressed_sha256": "770aba5c61124d7507d5608754ff35dfa9e7f454b31000d8a38c61b8f872d71b",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/macos-retirement-late-events-003/binary.json"
+    },
+    "docs/spikes/evidence/macos-retirement-late-events/003/diff.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/macos-retirement-late-events-003/diff.log"
+    },
+    "docs/spikes/evidence/macos-retirement-late-events/003/freeze.json.gz": {
+      "sha256": "af0ba43001031d90a5f19f31cdbc3a395434b832de6a7e8c81a4c01ccf7a5666",
+      "uncompressed_sha256": "50ac4add26c7ea9a46ba701a52fcbc41044b2570347f45b25f80e1eb78f13299",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/macos-retirement-late-events-003/freeze.json"
+    },
+    "docs/spikes/evidence/macos-retirement-late-events/003/build.log.gz": {
+      "sha256": "b6c00b03d43387c0cd98acbc44af501c3b701b1ce50ddf94ef8f263180afd069",
+      "uncompressed_sha256": "43df9c8403efe2e4e25ddf5da82e07f279043847508c7dd1befbe408140da273",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/macos-retirement-late-events-003/build.log"
+    },
+    "docs/spikes/evidence/macos-retirement-late-events/idle-runner.py.gz": {
+      "sha256": "93993d09394a018853feb1c0116f6c30d90758a34183af75902b34489a87c98d",
+      "uncompressed_sha256": "861dc5112121c67682663cd492936ca547f517e1b54258a8655b0f19f8708030",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/run-hidden-retirement-on-idle.py"
+    }
+  },
+  "prior_failures": [
+    "Feature build caught missing explicit Result<(), TextInputError> after helper extraction; concrete type restored.",
+    "Clippy requested let-chain collapse; corrected without changing short-circuit order."
+  ],
+  "limits": [
+    "Only the example probe and its deterministic tests changed; production player/Tao handlers are unchanged.",
+    "The copied native-feature binary was built but not launched locally: no20-second real user-idle interval occurred.",
+    "Actual AppKit execution in the comprehensive checkpoint remains required before release; deterministic tests are not live-native acceptance."
+  ],
+  "review": "Probe source mechanism accepted independently; final source/log closure pending."
+}

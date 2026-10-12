@@ -18,6 +18,17 @@ visual work, and Astra owns correctness and integration.
 
 
 
+## macOS retirement probe — callback repair verified; native run pending
+
+Checkpoint13's general macOS job failed when the probe received a queued callback
+following final window destruction. A probe-only terminal guard now preserves all
+256cycles and the first typed error while refusing later native work. Two red-to-green
+regressions, native-feature build and Clippy pass. A bounded real-idle check did not
+launch the executable because user input remained active. The comprehensive native
+probe must still pass before release; checkpoint13 remains frozen and blocked.
+[Scope and preserved failure](docs/spikes/macos-retirement-late-events.md).
+
+
 ## Compound animation transitions — current-main integration verified
 
 Reviewed grouped-pose transitions now integrate with actual main155, retaining
