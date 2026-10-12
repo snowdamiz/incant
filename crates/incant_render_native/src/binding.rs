@@ -84,6 +84,7 @@ pub(crate) fn prepare(
                     source: Arc::clone(source),
                     cast_shadows: mesh.cast_shadows,
                     animation: node.animation,
+                    animation_blend: node.animation_blend,
                 })
             })
             .transpose()?;
@@ -205,6 +206,7 @@ pub(crate) fn prepare(
             world: DMat4::IDENTITY,
             frame: 0,
             animation: None,
+            animation_blend: None,
         };
         input.nodes.len()
     ];

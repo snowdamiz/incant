@@ -16,6 +16,8 @@ pub struct SpatialNode<'a> {
     pub tilemap: Option<&'a crate::PreparedTilemap>,
     pub flipbook: Option<crate::FlipbookState>,
     pub animation: Option<crate::AnimationSample>,
+    /// Outgoing sample and destination weight from the same committed state.
+    pub animation_blend: Option<incant_types::AnimationBlendSample>,
 }
 
 /// Scoped view at a committed boundary. Numeric/structural mutation cannot
@@ -84,6 +86,9 @@ impl<'a> SpatialView<'a> {
                 animation: world
                     .get::<crate::animation::Playback>(entity)
                     .map(|p| p.state.sample),
+                animation_blend: world
+                    .get::<crate::animation::Playback>(entity)
+                    .and_then(|p| p.state.blend_sample()),
                 flipbook: world
                     .get::<crate::flipbook::Playback>(entity)
                     .map(|p| p.state),

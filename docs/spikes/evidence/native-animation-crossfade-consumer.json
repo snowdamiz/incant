@@ -1,0 +1,196 @@
+{
+  "scope": "Canonical native crossfade binding and retained CPU model sampler; no GPU execution",
+  "base": "265a8ac3571da8883d36b92d11a2f107e5f990bf",
+  "preserved_parents": [
+    "6144e1e8f7d5b6d6db212b3b7de4df9b5915407e",
+    "934af1b0f9c04d45588873369a4d69295c6380f3"
+  ],
+  "recorded_at_utc": "2026-10-12T02:26:47.806856+00:00",
+  "freeze": {
+    "path": "/tmp/incant-crossfade-consumer-freeze-004.json",
+    "sha256": "2be7645167d6eb6c2621f5b08fa675c976faf5342aabbcb4047657898cf25f44",
+    "bytes": 1973
+  },
+  "source_files": {
+    "crates/incant_render/src/animation_tests.rs": "8c6591b5f82a2f6f15e5aaa56b9588b6ba067075241f1f78668a5f6c76de9429",
+    "crates/incant_render/src/flipbook_tests.rs": "1ac07251e0fc248274979701c5ad1d75ceb4314d67259e51e1d1f9c35632ed7b",
+    "crates/incant_render/src/models/animation.rs": "544605592e1b512e95e6e941a582c4bcb87c19cc0716374bb43eb1aba13dcb99",
+    "crates/incant_render/src/retained.rs": "9fa552cf05f4e24b27f4ac6f27c21203520548e508c7c3219d7860c9fca5fade",
+    "crates/incant_render/src/retained_tilemap_tests.rs": "1e5af8f04a1517f05e0511cf6c8bd3a8cca40b6f64a0039f7ba3b6be8513defc",
+    "crates/incant_render/src/scene.rs": "f7e11c74e00157c64ae73acb668215ca0023d41a3889f23b424ca488d19c98bd",
+    "crates/incant_render/src/version_tests.rs": "71c1e707b5b2ac2ceffc820693898cec0ac3b52e37f294a85d5fb927d3a2798c",
+    "crates/incant_render_authoring/src/lib.rs": "bdc9fc1ebf598708e6fe745bd600f99e5c080fb47e5e2b15cdc20ccdf95850ed",
+    "crates/incant_render_data/src/lib.rs": "1c9000c5ec9a184cd5a2697d8306395436e875596dbeede81a1820b41c4853e0",
+    "crates/incant_render_native/src/binding.rs": "5966a2f5fef47b5d56f1567b06460670b95b1be401eec49236337b97bace10e5",
+    "crates/incant_render_native/src/lib.rs": "a44c6b0223a1ad5394d606a0bff263a0e58f344bd453833c17b49087f2a3d3d7",
+    "crates/incant_render_native/src/update.rs": "35a25532527bd2e5e6548c00c7de761a2be7f114ce47c97784094cae786b5d23",
+    "crates/incant_render_native/tests/animation.rs": "5ce316411f04a6fcbdd0dec46a7dbd543a839408b80274ec7d48bf1461f8ef3e",
+    "crates/incant_runtime/src/spatial_view.rs": "4965204c0696d42113a804fb2025c09bc95916bff1b627664c677ab03aa78930",
+    "crates/incant_render/src/animation_crossfade_tests.rs": "05677546247386972a58d432d53b89c2ccf02e0c3a805a6d2c6d380deb5468b4",
+    "crates/incant_render_native/tests/animation/crossfade.rs": "21b1613ee156151f3eff88415ea37e6cd546aeacfd41167e8504b85ab24430c6"
+  },
+  "production_unchanged_since_first_full_test_run": true,
+  "dependency_resolutions_changed": false,
+  "rustc": [
+    "rustc 1.99.0 (b940084d7 2026-09-28)",
+    "binary: rustc",
+    "commit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4",
+    "commit-date: 2026-09-28",
+    "host: aarch64-apple-darwin",
+    "release: 1.99.0",
+    "LLVM version: 23.1.1"
+  ],
+  "private_target": "/tmp/incant-font-atlas-target",
+  "max_compile_jobs": 2,
+  "logs": {
+    "tests-001": {
+      "path": "/tmp/incant-crossfade-consumer-tests-001.log",
+      "sha256": "e98c585fd82dff67a53a72fe0cc500368deb2174aa010f64b66d9825e289dca1",
+      "bytes": 55783,
+      "result_groups": 59,
+      "passed": 349,
+      "failed": 0,
+      "ignored": 70,
+      "command": "cargo test --locked --offline --profile ci -j2 -p incant_render_native -p incant_render -p incant_render_authoring -p incant_runtime -p incant_assets_runtime -p incant_assets"
+    },
+    "tests-002": {
+      "path": "/tmp/incant-crossfade-consumer-tests-002.log",
+      "sha256": "052e28e9556a11b5a2cd1244b478c09ab8115d899935cfb9b215c59266b820fd",
+      "bytes": 3591,
+      "result_groups": 1,
+      "passed": 3,
+      "failed": 1,
+      "ignored": 0,
+      "command": "cargo test --locked --offline --profile ci -j2 -p incant_render animation::tests::crossfade"
+    },
+    "tests-003": {
+      "path": "/tmp/incant-crossfade-consumer-tests-003.log",
+      "sha256": "274e6352a9adc7bad8ee28df3c2b3fb904b2ecd352d1877a3c2bccfd378efc03",
+      "bytes": 1088,
+      "result_groups": 2,
+      "passed": 4,
+      "failed": 0,
+      "ignored": 0,
+      "command": "cargo test --locked --offline --profile ci -j2 -p incant_render animation::tests::crossfade"
+    },
+    "tests-004": {
+      "path": "/tmp/incant-crossfade-consumer-tests-004.log",
+      "sha256": "5e424ad2794fc0704c0f1a8a3107a2fe9588ddf71677de2f9531e92da964cffb",
+      "bytes": 13045,
+      "result_groups": 52,
+      "passed": 17,
+      "failed": 0,
+      "ignored": 0,
+      "command": "cargo test --locked --offline --profile ci -j2 -p incant_render_native -p incant_render -p incant_render_authoring -p incant_runtime -p incant_assets_runtime -p incant_assets crossfade"
+    },
+    "clippy-001": {
+      "path": "/tmp/incant-crossfade-consumer-clippy-001.log",
+      "sha256": "fe5c9c27980207953e0443b12d88b92e6eb30f2f1d891fd7b05a8391c08ce3bb",
+      "bytes": 5867,
+      "command": "cargo clippy --locked --offline --profile ci -j2 -p incant_render_native -p incant_render -p incant_render_authoring -p incant_runtime -p incant_assets_runtime -p incant_assets -p incant_game_player -p incant_play --features incant_game_player/native-window --all-targets -- -D warnings"
+    },
+    "clippy-002": {
+      "path": "/tmp/incant-crossfade-consumer-clippy-002.log",
+      "sha256": "eed91670a03a55921769107722efec6ef5fab55b2d827f9f192defb087ad2a83",
+      "bytes": 188,
+      "command": "cargo clippy --locked --offline --profile ci -j2 -p incant_render_native -p incant_render -p incant_render_authoring -p incant_runtime -p incant_assets_runtime -p incant_assets -p incant_game_player -p incant_play --features incant_game_player/native-window --all-targets -- -D warnings"
+    },
+    "wasm-001": {
+      "path": "/tmp/incant-crossfade-consumer-wasm-001.log",
+      "sha256": "81cecc6eee5da67ba22cc6520d4b90d2cfa445b7d6c071ff63b374783fec3b5c",
+      "bytes": 958,
+      "command": "cargo check --locked --offline --profile ci -j2 --target wasm32-unknown-unknown -p incant_render_data -p incant_render_native"
+    },
+    "graph-001": {
+      "path": "/tmp/incant-crossfade-consumer-graph-001.log",
+      "sha256": "b4274d614344b32e22af25e274070d9cbba9392946e093f711f83f3784046dd8",
+      "bytes": 133,
+      "command": "python3 tools/check_runtime_dependencies.py incant_runtime incant_assets_runtime incant_render_data incant_render_native incant_render"
+    },
+    "fmt-002": {
+      "path": "/tmp/incant-crossfade-consumer-fmt-002.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "command": "cargo fmt --all --check"
+    },
+    "conventions-002": {
+      "path": "/tmp/incant-crossfade-consumer-conventions-002.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "command": "python3 tools/generate_conventions.py --check"
+    }
+  },
+  "relevant_test_binaries": {
+    "/tmp/incant-font-atlas-target/ci/deps/incant_render-674d0340b02c7194": {
+      "path": "/tmp/incant-font-atlas-target/ci/deps/incant_render-674d0340b02c7194",
+      "sha256": "f8a22ad37586b75efe089ecc548157e9b93e2a9128258ed7ca44ee525b7b2d36",
+      "bytes": 28010208
+    },
+    "/tmp/incant-font-atlas-target/ci/deps/animation-ce82875c97ba376a": {
+      "path": "/tmp/incant-font-atlas-target/ci/deps/animation-ce82875c97ba376a",
+      "sha256": "d0a9ca9e32c7daab03ba5587adcdf89b31bf5c00b8a4792e1f9327048e51b66a",
+      "bytes": 18629544
+    },
+    "/tmp/incant-font-atlas-target/ci/deps/animation-b8c7ffda1f9b2b17": {
+      "path": "/tmp/incant-font-atlas-target/ci/deps/animation-b8c7ffda1f9b2b17",
+      "sha256": "df972540093474bf9989c4581729c2b133e2cc4a94a8bed110bb023c8b9b6f7e",
+      "bytes": 13557112
+    }
+  },
+  "verification": {
+    "unique_passed_tests": 350,
+    "new_tests": 6,
+    "full_run_passed": 349,
+    "full_run_groups": 59,
+    "full_run_gpu_ignored": 70,
+    "final_focused_passed": 17,
+    "final_focused_groups": 52,
+    "final_focused_failed": 0,
+    "eight_package_all_target_clippy": "pass; native-window feature compiled only",
+    "wasm32_unknown_unknown_render_data_native_check": "pass",
+    "lean_normal_graph_roots": [
+      "incant_runtime",
+      "incant_assets_runtime",
+      "incant_render_data",
+      "incant_render_native",
+      "incant_render"
+    ],
+    "fmt_conventions_diff": "pass",
+    "all_owned_handles_reaped": true
+  },
+  "numerical_controls": {
+    "canonical_fractions": [
+      0,
+      0.125,
+      0.5,
+      0.875,
+      1
+    ],
+    "measured_canonical_sample_deform_calls": 320,
+    "canonical_sample_deform_allocations": 0,
+    "source_deleted_native_ticks": 60,
+    "measured_native_accepted_sync_allocations": 0,
+    "measured_rejected_native_sync_calls": 2,
+    "measured_rejected_native_sync_allocations": 0,
+    "source_deleted": true,
+    "cooked_cache_deleted": true,
+    "gpu_submissions": 0
+  },
+  "preserved_failure": {
+    "log": "/tmp/incant-crossfade-consumer-tests-002.log",
+    "cause": "New test assumed finite singular pose matrices fail in AnimationPlayer::sample_blend; actual documented boundary permits sampling and refuses canonical vertex-normal deformation. Test corrected, production unchanged.",
+    "corrected_in": "tests-003 and tests-004"
+  },
+  "limitations": [
+    "CPU pose acceptance is not retained GPU live-frame publication evidence. No graphics calls, screenshot, pixel/appearance or device performance acceptance.",
+    "The singular midpoint is allowed in pose matrices and refuses vertex deformation; retained rendering uses private staging. GPU rollback execution remains pending.",
+    "Allocation counts isolate adapter sync and canonical CPU sample/deform only; not world stepping, startup, driver/RSS or a whole-frame performance gate.",
+    "No authored blend graph, state machine, IK, retargeting or root motion. TypeScript/Wasm crossfade integration remains separately owned.",
+    "Existing explicit Text GPU refusal is unchanged on this branch; Claude owns later text drawing."
+  ],
+  "command_environment": {
+    "PATH_prefix": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+    "CARGO_TARGET_DIR": "/tmp/incant-font-atlas-target"
+  },
+  "test_binary_scope": "Final on-disk relevant executables after the focused repeat; historical pre-test-only-change binary hashes are not claimed."
+}

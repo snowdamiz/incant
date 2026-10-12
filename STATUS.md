@@ -22,14 +22,16 @@ Native two-input crossfade clocks and controls now retain independent outgoing
 playback, pause both inputs, finish at explicit endpoints and persist active
 transitions in world-save v5/session checkpoints. Older v4 animation saves keep
 their encoding. The local core passed 319 runtime/script tests and scoped Clippy;
-independent review accepted the exact sources.
-TypeScript/Wasm crossfade APIs are now locally checked with copied full transition
-snapshots, explicit v2 Wasm framing, atomic controls and actual guest continuation.
-The frozen SDK suite passed 313 CPU tests/doctests, Clippy and wasm32 compilation;
-independent source review accepted it. Canonical render binding and a fresh
-source-deleted exported crossfade proof remain separate follow-ups. This is not
+independent review accepted the exact sources. Canonical render bindings carry
+both samples through rollback and preallocated CPU blending; 350 distinct affected
+CPU tests, Clippy and the wasm32 adapter check pass locally. TypeScript/Wasm APIs
+expose copied full transition snapshots, explicit v2 Wasm framing and atomic
+controls; the frozen SDK suite passed 313 CPU tests/doctests, Clippy and wasm32
+compilation with independent source review. A fresh source-deleted exported
+crossfade proof and GPU/Claude acceptance remain separate follow-ups. This is not
 full blend trees, state machines, IK or root motion. See
-[the core evidence](docs/spikes/native-animation-crossfades.md) and
+[the core evidence](docs/spikes/native-animation-crossfades.md),
+[the consumer evidence](docs/spikes/native-animation-crossfade-consumer.md) and
 [the SDK evidence](docs/spikes/native-animation-crossfade-sdk.md).
 
 The project is still building the Phase 1 core engine. Native simulation,
@@ -67,7 +69,7 @@ active. Report merged work separately from local checks and unmet exit gates.
 The project is still early relative to the complete Engine 1.0 and Driftwake
 scope; no defensible percentage or completion date follows from the PR count.
 
-## Native text scene and font packaging — locally checked foundation
+## Native text scene, packaging and composed CPU input — locally checked
 
 Typed Text declarations now cook into bounded v12 binary scene data with explicit
 ordered font chains and immutable recipe bindings. Structural edits and
@@ -75,12 +77,19 @@ save/restore retain/check the same font catalog and invalidate retained consumer
 by world identity/generation. Font loading and export data packaging preflight a
 64 MiB aggregate before payload reads. The actual public command/import/cook,
 export producer and data packager feed a fresh source-deleted numerical
-Latin/Arabic/CJK shaping/atlas test. This is not a successful exported game or
-rendered text claim: plain game, legacy Play and canonical render input explicitly
-refuse Text while the composed consumer is absent. No second CLI mode was added.
-The retained composed CPU text input, actual renderer consumption/Claude
-acceptance, widget layout/IME/focus and reference-phone gates remain open.
-Evidence: [native text bindings](docs/spikes/native-text-bindings.md).
+Latin/Arabic/CJK shaping/atlas test. The existing composed host now retains that
+canonical text input beside spatial/script/audio state; motion preserves immutable
+layout/atlas allocations and failed candidates preserve accepted CPU input.
+Three actual fresh exported `--package` runs after source/build deletion pass
+mixed model, native script motion, multilingual shape/atlas and audible PCM
+controls; missing/tampered packaged fonts refuse before output. The affected
+120 CPU tests and Clippy pass; 74 GPU tests were intentionally not executed.
+Plain games and legacy Play remain strict, and the canonical GPU consumer
+explicitly refuses Text before submission. No second player mode was added.
+Actual text drawing/Claude acceptance, widget layout/IME/focus and reference-phone
+gates remain open. Evidence: [text bindings](docs/spikes/native-text-bindings.md),
+[composed text input](docs/spikes/native-text-input.md) and
+[draw handoff](docs/spikes/native-text-draw-handoff.md).
 
 ## Runtime font atlas — locally checked
 

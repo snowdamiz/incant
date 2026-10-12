@@ -7,8 +7,9 @@ publish.workspace = true
 
 [dependencies]
 incant_runtime.workspace = true
+incant_text.workspace = true
 incant_render_data.workspace = true
-incant_assets_runtime = { workspace = true, features = ["visual"] }
+incant_assets_runtime = { workspace = true, features = ["visual", "font"] }
 glam = "0.32"
 thiserror.workspace = true
 incant_2d.workspace = true

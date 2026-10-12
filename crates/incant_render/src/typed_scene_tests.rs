@@ -36,6 +36,7 @@ fn retained_typed_model_input_outlives_authoring_and_source_files() {
 #[test]
 fn typed_input_checks_identity_projection_light_and_affine_transform_without_documents() {
     let mut input = SceneInput {
+        text: None,
         nodes: vec![node("one"), node("one")],
         environment: None,
     };
@@ -94,6 +95,7 @@ fn typed_environment_rejects_normal_map_and_out_of_range_rotation_at_startup() {
         .unwrap(),
     );
     let mut input = SceneInput {
+        text: None,
         nodes: vec![],
         environment: Some(EnvironmentInput {
             source,
@@ -107,6 +109,7 @@ fn typed_environment_rejects_normal_map_and_out_of_range_rotation_at_startup() {
     ));
     let source = Arc::clone(&input.environment.as_ref().unwrap().source);
     let mut sprite_input = SceneInput {
+        text: None,
         nodes: vec![node("sprite")],
         environment: None,
     };
@@ -123,4 +126,25 @@ fn typed_environment_rejects_normal_map_and_out_of_range_rotation_at_startup() {
     ));
     input.environment.as_mut().unwrap().rotation_degrees = f64::MAX;
     assert!(matches!(resolve(&input), Err(SceneError::Input(_))));
+}
+
+#[test]
+fn prepared_cpu_text_is_explicitly_refused_by_canonical_scene_resolution() {
+    let atlas = incant_text::GlyphAtlas::new(incant_text::AtlasConfig {
+        width: 8,
+        height: 8,
+        max_glyphs: 1,
+    })
+    .unwrap();
+    let input = SceneInput {
+        text: Some(incant_render_data::TextInput {
+            nodes: vec![],
+            atlas: std::sync::Arc::new(atlas),
+        }),
+        ..Default::default()
+    };
+    assert!(matches!(
+        crate::scene::resolve(&input),
+        Err(crate::SceneError::Input("text drawing is not implemented"))
+    ));
 }

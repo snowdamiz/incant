@@ -2,6 +2,7 @@
 //! The default consumer exposes CPU input only; it does not submit a GPU frame.
 use incant_game_runtime::SceneHost;
 use incant_render_data::SceneInput;
+pub use incant_render_native::TextSettings;
 use incant_render_native::{
     NativeRenderError, NativeRenderInput, SyncError, UpdateKind, VisualCaches,
 };
@@ -15,6 +16,8 @@ pub struct NativeRenderSettings<S = ()> {
     pub model_cache: PathBuf,
     pub texture_cache: PathBuf,
     pub camera: StableId,
+    /// Explicit checked font catalog and bounded CPU atlas settings.
+    pub text: Option<TextSettings>,
     pub consumer: S,
 }
 #[derive(Debug, Error)]
@@ -90,25 +93,37 @@ impl<C: RenderInputConsumer> SceneHost for NativeRenderHost<C> {
     type Settings = NativeRenderSettings<C::Settings>;
     type Error = RenderHostError<C::Error>;
     fn prepare(world: &NativeWorld, settings: Self::Settings) -> Result<Self, Self::Error> {
-        let input = NativeRenderInput::load(
-            &world.spatial_view()?,
-            VisualCaches {
-                models: &settings.model_cache,
-                textures: &settings.texture_cache,
-            },
-            settings.camera,
-        )?;
+        let spatial = world.spatial_view()?;
+        let caches = VisualCaches {
+            models: &settings.model_cache,
+            textures: &settings.texture_cache,
+        };
+        let input = if let Some(text) = settings.text {
+            NativeRenderInput::load_with_text(
+                &spatial,
+                &world.text_view()?,
+                caches,
+                settings.camera,
+                text,
+            )?
+        } else {
+            NativeRenderInput::load(&spatial, caches, settings.camera)?
+        };
         let consumer = C::prepare(input.input(), input.camera_label(), settings.consumer)
             .map_err(RenderHostError::Consumer)?;
         Ok(Self { input, consumer })
     }
     fn sync(&mut self, world: &NativeWorld) -> Result<(), Self::Error> {
         let consumer = &mut self.consumer;
-        match self
-            .input
-            .try_sync(&world.spatial_view()?, |input, camera, kind| {
-                consumer.accept(input, camera, kind)
-            }) {
+        let spatial = world.spatial_view()?;
+        let accept = |input: &SceneInput, camera: &str, kind| consumer.accept(input, camera, kind);
+        let result = if self.input.has_text_binding() {
+            self.input
+                .try_sync_with_text(&spatial, &world.text_view()?, accept)
+        } else {
+            self.input.try_sync(&spatial, accept)
+        };
+        match result {
             Ok(()) => Ok(()),
             Err(SyncError::Native(error)) => Err(error.into()),
             Err(SyncError::Consumer(error)) => Err(RenderHostError::Consumer(error)),

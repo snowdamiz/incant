@@ -1,5 +1,7 @@
 //! Typed renderer input shared by authoring and native extraction. No project,
 //! command bus, importer, GPU or agent dependency. Construct/replace at sync points.
+mod text;
+pub use text::{TextInput, TextNode};
 mod flipbook;
 mod tilemap;
 pub use flipbook::SpriteFrames;
@@ -76,6 +78,8 @@ pub struct SceneStats {
 #[derive(Default)]
 pub struct SceneInput {
     pub nodes: Vec<SceneNode>,
+    /// Prepared CPU glyph coverage. A consumer must handle or explicitly refuse it.
+    pub text: Option<TextInput>,
     pub environment: Option<EnvironmentInput>,
 }
 pub struct SceneNode {
@@ -101,6 +105,9 @@ pub struct MeshInput {
     /// Committed native time; absent uses an animated model's authored rest pose.
     /// Supplying a sample for a static model is a binding error.
     pub animation: Option<incant_types::AnimationSample>,
+    /// Optional outgoing pose; its weight is the primary sample contribution.
+    /// Both samples and the weight are validated even at an endpoint.
+    pub animation_blend: Option<incant_types::AnimationBlendSample>,
 }
 pub struct SpriteInput {
     pub source: Arc<RuntimeAsset>,

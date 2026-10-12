@@ -172,6 +172,7 @@ impl Fixture {
     }
     fn settings(&self) -> NativeRenderSettings {
         NativeRenderSettings {
+            text: None,
             model_cache: self.temp.path().join("models"),
             texture_cache: self.temp.path().join("textures"),
             camera: id(2),
@@ -457,6 +458,7 @@ fn consumer_settings(
     failure: Failure,
 ) -> NativeRenderSettings<ConsumerSettings> {
     NativeRenderSettings {
+        text: None,
         model_cache: fixture.temp.path().join("models"),
         texture_cache: fixture.temp.path().join("textures"),
         camera: id(2),
@@ -549,4 +551,87 @@ fn mandatory_consumer_observes_motion_and_rebuild_but_not_rejected_input() {
     );
     assert_eq!(game.host().unwrap().consumer().0.drops.get(), 0);
     assert_eq!(game.host().unwrap().render_input().tick(), 2);
+}
+
+#[test]
+fn mixed_game_retains_numeric_text_and_atlas_with_script_models_and_audible_pcm() {
+    use incant_runtime::{CookedText, FontAssetRef, NativeText, TextLayout, TextWrap};
+    use std::sync::Arc;
+    let mut fixture = Fixture::new(false);
+    let root = fixture.temp.path();
+    let mut fonts = Vec::new();
+    for (i, bytes) in [
+        include_bytes!("../../incant_text/tests/fonts/NotoSans-Regular.ttf").as_slice(),
+        include_bytes!("../../incant_text/tests/fonts/NotoSansArabic.ttf").as_slice(),
+        include_bytes!("../../incant_text/tests/fonts/IncantCJKFixture.ttf").as_slice(),
+    ]
+    .into_iter()
+    .enumerate()
+    {
+        fs::write(root.join("font.ttf"), bytes).unwrap();
+        let font =
+            incant_assets::cook_font(root, Path::new("font.ttf"), &root.join("fonts")).unwrap();
+        fonts.push(FontAssetRef {
+            id: id(80 + i as u128),
+            fingerprint: std::array::from_fn(|n| {
+                u8::from_str_radix(&font.metadata().fingerprint[2 * n..2 * n + 2], 16).unwrap()
+            }),
+        });
+    }
+    fixture.scene = fixture
+        .scene
+        .with_text(
+            fonts.clone(),
+            vec![CookedText {
+                entity: id(1),
+                text: Arc::new(NativeText {
+                    content: "ffi سلام 中文".into(),
+                    fonts: fonts.iter().map(|f| f.id).collect(),
+                    layout: TextLayout {
+                        font_size: 20.,
+                        line_height: 28.,
+                        width: 500.,
+                        wrap: TextWrap::WordOrGlyph,
+                    },
+                }),
+            }],
+        )
+        .unwrap();
+    let mut settings = fixture.settings();
+    settings.text = Some(incant_render_native::TextSettings::new(root.join("fonts")));
+    let mut game = Game::new(
+        fixture.scene,
+        code("for (const c of chunks) for(let i=0;i<c.ids.length;i++) c.transforms[i*10] += 2;"),
+        actions(),
+        vec![fixture.clip],
+        48000,
+        settings,
+    )
+    .unwrap();
+    fixture.temp.close().unwrap();
+    let original = game
+        .host()
+        .unwrap()
+        .render_input()
+        .input()
+        .text
+        .as_ref()
+        .unwrap();
+    let atlas = original.atlas.clone();
+    let layout = original.nodes[0].layout.clone();
+    assert!(layout.missing_clusters().is_empty());
+    assert!(layout.glyphs().iter().any(|g| g.bidi_level % 2 == 1));
+    assert!(atlas.pixels().iter().any(|&p| p > 0));
+    for tick in 1..=8 {
+        let mut pcm = next(&game);
+        game.tick(&[], &mut pcm).unwrap();
+        assert!(pcm.iter().any(|&v| v != 0.));
+        let input = game.host().unwrap().render_input();
+        assert_eq!(input.tick(), tick);
+        let text = input.input().text.as_ref().unwrap();
+        assert!(Arc::ptr_eq(&text.atlas, &atlas));
+        assert!(Arc::ptr_eq(&text.nodes[0].layout, &layout));
+        assert_eq!(text.nodes[0].world.w_axis.x, position(&game));
+        assert_eq!(position(&game), -2. + tick as f64 * (2. + 1. / 64.));
+    }
 }

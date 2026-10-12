@@ -23,8 +23,13 @@ pub fn settings(args: &[String]) -> Result<Option<Settings>> {
     if args.len() == 8 {
         return Ok(None);
     }
-    if args.len() != 12 || !matches!(args[8].as_str(), "--cpu-render-input" | "--gpu-offscreen") {
-        return Err("expected SCENE CACHE CLIPS RECORDING ACTIONS TICKS SAMPLE_RATE OUTPUT [--cpu-render-input|--gpu-offscreen MODEL_CACHE TEXTURE_CACHE CAMERA_HEX] [--observe PLAN.json]; manual input/source paths are unsupported".into());
+    if !matches!(args.len(), 12 | 14)
+        || !matches!(args[8].as_str(), "--cpu-render-input" | "--gpu-offscreen")
+    {
+        return Err("expected SCENE CACHE CLIPS RECORDING ACTIONS TICKS SAMPLE_RATE OUTPUT [--cpu-render-input|--gpu-offscreen MODEL_CACHE TEXTURE_CACHE CAMERA_HEX [--font-cache FONT_CACHE]] [--observe PLAN.json]; manual input/source paths are unsupported".into());
+    }
+    if args.len() == 14 && args[12] != "--font-cache" {
+        return Err("expected --font-cache FONT_CACHE after spatial settings".into());
     }
     #[cfg(not(feature = "render-gpu"))]
     if args[8] == "--gpu-offscreen" {
@@ -45,6 +50,9 @@ pub fn settings(args: &[String]) -> Result<Option<Settings>> {
             *value = u8::from_str_radix(&text[i * 2..i * 2 + 2], 16)?;
         }
         let settings = NativeRenderSettings {
+            text: args
+                .get(13)
+                .map(|path| incant_render_native::TextSettings::new(path.into())),
             model_cache: args[9].clone().into(),
             texture_cache: args[10].clone().into(),
             camera: incant_runtime::StableId(camera),
@@ -221,7 +229,28 @@ pub(crate) fn input_report(
         .iter()
         .find(|n| n.id == input.camera_label())
         .ok_or("selected camera invariant")?;
+    let text = input.input().text.as_ref();
+    let glyph_count = text.map_or(0, |t| {
+        t.nodes
+            .iter()
+            .map(|n| n.layout.glyphs().len())
+            .sum::<usize>()
+    });
+    let text_fonts: std::collections::BTreeSet<_> = text
+        .into_iter()
+        .flat_map(|t| &t.nodes)
+        .flat_map(|n| n.layout.glyphs())
+        .map(|g| g.font)
+        .collect();
     Ok(serde_json::json!({
+        "text_count":text.map_or(0, |t|t.nodes.len()), "text_generation":input.text_generation(),
+        "text_glyph_count":glyph_count,"text_font_count":text_fonts.len(),
+        "text_missing_clusters":text.map_or(0,|t|t.nodes.iter().map(|n|n.layout.missing_clusters().len()).sum::<usize>()),
+        "text_rtl_glyphs":text.map_or(0,|t|t.nodes.iter().flat_map(|n|n.layout.glyphs()).filter(|g|g.bidi_level%2==1).count()),
+        "text_atlas_bytes":text.map_or(0,|t|t.atlas.pixels().len()),
+        "text_atlas_nonzero":text.map_or(0,|t|t.atlas.pixels().iter().filter(|&&p|p!=0).count()),
+        "text_atlas_sha256":text.map(|t|incant_assets_runtime::sha256(t.atlas.pixels())),
+        "first_text_position":text.and_then(|t|t.nodes.first()).map(|n|n.world.w_axis.to_array()[..3].to_vec()),
         "mode":"cpu-only", "tick":input.tick(), "topology_generation":input.topology_generation(),
         "binding_generation":input.binding_generation(), "camera":input.camera_label(),
         "camera_position":camera.world.w_axis.to_array()[..3],
@@ -231,4 +260,48 @@ pub(crate) fn input_report(
         "first_sprite_position":nodes.iter().find(|n|n.sprite.is_some()).map(|n| n.world.w_axis.to_array()[..3].to_vec()),
         "decoded_payload_bytes":input.payload_bytes(), "gpu_submitted":false
     }))
+}
+
+#[cfg(all(test, feature = "render-input"))]
+mod text_settings_tests {
+    #[test]
+    fn explicit_font_cache_extends_existing_cpu_mode_without_inference() {
+        let mut args: Vec<String> = [
+            "scene",
+            "audio",
+            "clips",
+            "recording",
+            "actions",
+            "1",
+            "48000",
+            "out",
+            "--cpu-render-input",
+            "models",
+            "textures",
+            "00000000000000000000000000000002",
+        ]
+        .into_iter()
+        .map(str::to_owned)
+        .collect();
+        let settings = match super::settings(&args).unwrap().unwrap() {
+            super::Settings::Cpu(s) => s,
+            #[cfg(feature = "render-gpu")]
+            _ => panic!("CPU"),
+        };
+        assert!(settings.text.is_none());
+        args.extend(["--font-cache".into(), "explicit-fonts".into()]);
+        let settings = match super::settings(&args).unwrap().unwrap() {
+            super::Settings::Cpu(s) => s,
+            #[cfg(feature = "render-gpu")]
+            _ => panic!("CPU"),
+        };
+        assert_eq!(
+            settings.text.unwrap().font_cache,
+            std::path::PathBuf::from("explicit-fonts")
+        );
+        args[12] = "--unknown".into();
+        assert!(super::settings(&args).is_err());
+        args.pop();
+        assert!(super::settings(&args).is_err());
+    }
 }

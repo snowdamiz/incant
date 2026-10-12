@@ -90,6 +90,7 @@ impl Options {
             clips: args[2].clone(),
             actions: args[3].clone(),
             render: NativeRenderSettings {
+                text: None,
                 model_cache: args[4].clone().into(),
                 texture_cache: args[5].clone().into(),
                 camera: StableId(id),
@@ -127,6 +128,7 @@ pub fn run(args: &[String]) -> session::Result<()> {
         clips,
         AudioManagerSettings::default(),
         NativeRenderSettings {
+            text: options.render.text,
             model_cache: options.render.model_cache,
             texture_cache: options.render.texture_cache,
             camera: options.render.camera,

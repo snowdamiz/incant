@@ -124,6 +124,8 @@ pub fn expand(args: Vec<String>) -> Result<Vec<String>> {
             path(root, "models")?,
             path(root, "textures")?,
             camera(&manifest)?,
+            "--font-cache".into(),
+            path(root, "fonts")?,
         ]);
     }
     if let Some(plan) = options.remove("--observe") {
@@ -197,7 +199,15 @@ mod tests {
             &offline[5..9],
             ["4", "48000", "audio.pcm", "--cpu-render-input"]
         );
-        assert_eq!(&offline[12..], ["--observe", "assertions.json"]);
+        assert_eq!(&offline[14..], ["--observe", "assertions.json"]);
+        let (settings, plan) = crate::observe::split_args(&offline);
+        assert_eq!(plan, Some("assertions.json"));
+        assert_eq!(settings.len(), 14);
+        #[cfg(feature = "render-input")]
+        assert!(matches!(
+            crate::session::settings(settings).unwrap(),
+            Some(crate::session::Settings::Cpu(_))
+        ));
         let window = expand(args(dir.path(), &["--window", "--stop-after", "3"])).unwrap();
         assert_eq!(window[0], "--window");
         assert_eq!(&window[8..], ["--stop-after", "3"]);

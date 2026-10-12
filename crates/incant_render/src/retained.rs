@@ -47,6 +47,9 @@ fn environment(input: &SceneInput) -> Option<(AssetVersionId, f64, f64)> {
 }
 impl Renderer {
     pub fn prepare_retained(&self, input: &SceneInput, camera: &str) -> Result<RetainedScene> {
+        if input.text.is_some() {
+            return Err(SceneError::Input("text drawing is not implemented").into());
+        }
         self.check_device()?;
         if input.nodes.iter().any(|n| n.diagnostic) {
             return Err(
@@ -120,6 +123,9 @@ impl RetainedScene {
     }
 
     pub(super) fn stage(&mut self, input: &SceneInput) -> Result<()> {
+        if input.text.is_some() {
+            return Err(SceneError::Input("text drawing is not implemented").into());
+        }
         if input.nodes.len() != self.bindings.len() || environment(input) != self.environment {
             return Err(SceneError::Input(
                 "retained scene bindings changed; prepare a replacement",
@@ -128,7 +134,7 @@ impl RetainedScene {
         }
         self.light_plan.clear();
         for (node, binding) in input.nodes.iter().zip(&self.bindings) {
-            if node.mesh.as_ref().is_some_and(|mesh| mesh.animation.is_some()
+            if node.mesh.as_ref().is_some_and(|mesh| (mesh.animation.is_some() || mesh.animation_blend.is_some())
                 && matches!(mesh.source.data(), incant_assets_runtime::RuntimeAssetData::Model(model) if model.animation.is_none())) {
                 return Err(SceneError::Input("animation sample requires animated model").into());
             }

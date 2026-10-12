@@ -388,3 +388,31 @@ fn independent_engines_produce_identical_geometry_from_packaged_fonts() {
     assert_eq!(a.lines(), b.lines());
     assert_eq!(a.missing_clusters(), b.missing_clusters());
 }
+
+#[test]
+fn independently_ordered_engines_share_immutable_payload_without_sharing_shape_identity() {
+    let bytes = Arc::new(LATIN.to_vec());
+    let source = incant_text::SharedFontSource {
+        id: Ulid::from(1),
+        bytes: Arc::clone(&bytes),
+    };
+    let mut first = TextEngine::new_shared(vec![source.clone()]).unwrap();
+    let mut second = TextEngine::new_shared(vec![source]).unwrap();
+    assert!(Arc::strong_count(&bytes) >= 5); // Both fontdb and raster retain the same raw bytes.
+    let a = first.shape("ffi", style()).unwrap();
+    let b = second.shape("ffi", style()).unwrap();
+    assert_eq!(a.glyphs(), b.glyphs());
+    let mut atlas = incant_text::GlyphAtlas::new(incant_text::AtlasConfig {
+        width: 64,
+        height: 64,
+        max_glyphs: 8,
+    })
+    .unwrap();
+    assert!(second.cache_glyph(&a, 0, &mut atlas).is_err());
+    first.cache_glyph(&a, 0, &mut atlas).unwrap();
+    drop(first);
+    drop(second);
+    drop(a);
+    drop(b);
+    assert_eq!(Arc::strong_count(&bytes), 1);
+}

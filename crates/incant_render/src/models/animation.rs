@@ -55,10 +55,10 @@ fn charge(total: &mut usize, count: usize, size: usize) -> std::result::Result<(
         .ok_or(SceneError::Input("retained animation byte limit"))?;
     Ok(())
 }
-fn sample(player: &mut AnimationPlayer, input: &MeshInput) -> std::result::Result<(), SceneError> {
-    let sample = input
-        .animation
-        .unwrap_or(incant_types::AnimationSample::REST);
+fn checked_sample(
+    player: &AnimationPlayer,
+    sample: incant_types::AnimationSample,
+) -> std::result::Result<incant_assets_runtime::animation::ClipSample, SceneError> {
     if !sample.seconds.is_finite()
         || sample.seconds < 0.
         || (sample.clip.is_none() && sample.seconds != 0.)
@@ -73,7 +73,31 @@ fn sample(player: &mut AnimationPlayer, input: &MeshInput) -> std::result::Resul
             return Err(SceneError::Input("animation sample exceeds clip duration"));
         }
     }
-    player.sample(sample.clip.map(usize::from), sample.seconds)?;
+    Ok(incant_assets_runtime::animation::ClipSample {
+        clip: sample.clip.map(usize::from),
+        seconds: sample.seconds,
+    })
+}
+fn sample(player: &mut AnimationPlayer, input: &MeshInput) -> std::result::Result<(), SceneError> {
+    let primary = checked_sample(
+        player,
+        input
+            .animation
+            .unwrap_or(incant_types::AnimationSample::REST),
+    )?;
+    if let Some(blend) = input.animation_blend {
+        // Do not skip invalid outgoing samples at weight one or invalid primary
+        // samples at zero. These are complete committed bindings, not hints.
+        let outgoing = checked_sample(player, blend.sample)?;
+        if !blend.weight.is_finite() || !(0. ..=1.).contains(&blend.weight) {
+            return Err(SceneError::Input(
+                "invalid committed animation blend weight",
+            ));
+        }
+        player.sample_blend(outgoing, primary, blend.weight)?;
+    } else {
+        player.sample(primary.clip, primary.seconds)?;
+    }
     Ok(())
 }
 pub(crate) fn resolve(
