@@ -38,8 +38,10 @@ tests; a separate frozen renderer passes all 70 numerical Metal tests. Independe
 review found two save-version admission defects, now corrected with actual world
 and script-session continuation regressions. The integrated editor/runtime/script
 suite passes 357 CPU tests, Clippy and a fresh native build with the current
-production UI. The separately reviewed source-free export proof is ready; Claude’s native
-appearance review and final main110 integration checks remain pending. [Integration evidence](docs/spikes/native-animation-integration.md).
+production UI. The final main110 union passes 519 ordinary tests, 57 cooker/cooked-geometry CPU
+tests (overlapping scope), Clippy and a fresh source-free export proof with exact
+replay/checkpoint continuation and refusal controls. Claude’s native appearance
+review remains pending. [Integration evidence](docs/spikes/native-animation-integration.md).
 
 Opt-in cooked output/diagnostic/shadow shaders merged in PR #110 after scoped
 Metal numerical and Claude appearance acceptance; both features stay off.
@@ -47,7 +49,7 @@ Runtime glyph atlases proceed independently. Advanced
 rendering, animation blending/state machines/IK/root motion, complete game UI/text
 input, remaining SDK capabilities, and the Core Sample/2D sample with specified
 device performance checks still prevent a Phase 1 completion claim. The feature merge queue is clear after PR #110; the animation integration is
-next, with the reviewed font atlas queued separately.
+next, with the reviewed font atlas and Wasm animation parity queued separately.
 
 Progress reports are scheduled approximately every 30 minutes while the goal is
 active. Report merged work separately from local checks and unmet exit gates.

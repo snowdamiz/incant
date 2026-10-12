@@ -2,7 +2,8 @@
 
 The local integration combines authored Animation components, checked cached
 model metadata, native clocks and atomic TypeScript controls with retained
-render deformation. Actual main109 editor/agent changes are included. It is not
+render deformation. Actual main110, including the optional cooked shader paths,
+is included in the current local union. It is not
 published yet and does not complete animation or the Phase 1 exit gate.
 
 The first runtime/script/cook/Play/renderer union passes 397 CPU tests in 60 result
@@ -29,8 +30,8 @@ UI. Only source-map dependency paths differ because node_modules lives in anothe
 checkout; its mappings and embedded source content match. Source code and build
 output identities are in the immutable manifest, not inferred from a branch name.
 
-The source-free exported player and Claude's native animation review remain
-pending. Handoff0052 covers actual visible playback, pause/step/restart, resize,
+The source-free exported player is now verified below; Claude's native animation
+review remains pending. Handoff0052 covers actual visible playback, pause/step/restart, resize,
 and unchanged authoring. Its v2 fixture and binary identities are now complete;
 the earlier shader GPU interval is released and the exclusive native interval is
 granted to0052. The initial retained fixture used a journal filename different
@@ -49,3 +50,37 @@ desktop numerical frames do not satisfy the phone or Core Sample gates.
 [integrated seam review](evidence/native-animation-integrated-seam-review.md),
 [checkpoint correction](native-animation-checkpoint-compatibility.md),
 [renderer numerical evidence](native-animation-rendering.md).
+
+
+## Main110 integration and fresh export
+
+Frozen `990ccef` preserves actual main110, the reviewed animation source `f74379e`
+and original public export proof `43400d`. Only STATUS required manual conflict
+resolution. The animation consumer changes and default-off cooked shader paths
+merge additively. This union passes 519 ordinary tests in 92 groups, 57 additional
+cooker/cooked-geometry CPU tests in seven groups, and affected all-target Clippy.
+The scopes overlap. Each Rust test run leaves 71 GPU/optional tests ignored; no
+new integrated GPU or native-window run is claimed. Tooling passes 214 Python
+cases (four skipped) and 21 Node cases, plus formatting, generated contracts,
+strict SDK types and normal runtime dependency checks.
+
+The CPU export's 210 normal/build package records and 356 local package/helper
+inputs match the prior proof. However, the conservative script compatibility ID
+hashes the entire Cargo.lock. Main110's shader-only lock additions therefore
+require a new trusted cook despite the unchanged CPU dependency closure. The
+original proof stays historical; a fresh integrated headless build and unchanged
+public animation probe now pass against this new identity.
+
+The new fresh shipping player runs only after its authoring directory and private
+build storage are removed. Three 160-tick replays produce identical reports and
+checkpoint bytes; a 41+119 continuation matches the final save, committed logs,
+CPU model input and concatenated PCM. Corrupt checkpoint and wrong-observation
+controls fail without save or PCM publication. All seven packaged-player
+processes are reaped. The player SHA256 is
+`07bf8028643e34be20c5164ba10e31b888a22078785c7d89d2a3c744a04575f1`;
+this is CPU functional shipping evidence, not GPU, performance or device evidence.
+
+[Exact integrated source, logs, dependency audit and fresh-process receipts](evidence/native-animation-main110-integration.json)
+bind these results. [Independent export probe review](evidence/native-animation-export-independent-review.json)
+records the original probe's unchanged assertions and retained results. Native0052
+appearance acceptance remains required before publication.
