@@ -123,6 +123,47 @@ impl<'tick> Tick<'tick> {
         let bytes = self.localization_result(result, result_scratch)?;
         self.check(abi::localization::decode_localized(bytes).map_err(crate::localization::error))
     }
+    fn format<'a>(
+        &mut self,
+        request: abi::localization::FormatRequest,
+        scratch: &'a mut [u8],
+    ) -> Result<&'a str> {
+        self.ready()?;
+        let mut input = [0; abi::LOCALIZATION_FORMAT_BYTES];
+        let len = self.check(
+            abi::localization::encode_format(request, &mut input)
+                .map_err(crate::localization::error),
+        )?;
+        // SAFETY: complete fixed-size initialized request, synchronously copied.
+        let result = unsafe {
+            raw::incant_localization_v1_format(
+                self.epoch,
+                input.as_ptr() as usize as i32,
+                len as i32,
+            )
+        };
+        let bytes = self.localization_result(result, scratch)?;
+        self.check(abi::localization::decode_formatted(bytes).map_err(crate::localization::error))
+    }
+    /// ICU number formatting in the callback's committed locale. Finite values
+    /// must be within JavaScript's safe integer magnitude. No pseudo wrapping.
+    pub fn format_number<'a>(&mut self, value: f64, scratch: &'a mut [u8]) -> Result<&'a str> {
+        self.format(abi::localization::FormatRequest::Number(value), scratch)
+    }
+    /// ICU calendar-date formatting in the callback's committed locale. Use
+    /// DateLength::Medium for the TypeScript API's default length. The native
+    /// formatter checks actual Gregorian validity, including leap years.
+    pub fn format_date<'a>(
+        &mut self,
+        date: crate::localization::CalendarDate,
+        length: crate::localization::DateLength,
+        scratch: &'a mut [u8],
+    ) -> Result<&'a str> {
+        self.format(
+            abi::localization::FormatRequest::Date(date, length),
+            scratch,
+        )
+    }
     /// Queue a validated locale/fallback/pseudo setting in the ordinary atomic
     /// structural transaction. This does not edit an authoring document.
     pub fn set_locale(
