@@ -1,0 +1,68 @@
+--- a/crates/incant_render/src/ui_draw_tests.rs
++++ b/crates/incant_render/src/ui_draw_tests.rs
+@@ -173,6 +173,7 @@
+     region: [f64; 4],
+     scale: [f64; 2],
+     pixels: Vec<[[f64; 2]; 3]>,
++    trace: Vec<(u32, u32, [u8; 4], [f64; 2])>,
+ }
+ impl Canvas {
+     fn new(
+@@ -198,6 +199,7 @@
+                 .iter()
+                 .map(|p| std::array::from_fn(|c| [f64::from(p[c]); 2]))
+                 .collect(),
++            trace: Vec::new(),
+         }
+     }
+     /// A candidate model's image (the lowest admitted code otherwise).
+@@ -214,6 +216,7 @@
+         if alpha == [0.; 2] {
+             return;
+         }
++        self.trace.push((x, y, color, coverage));
+         let (srgb, model) = (self.srgb, self.model);
+         let pixel = &mut self.pixels[(y * self.size[0] + x) as usize];
+         for c in 0..3 {
+@@ -1140,3 +1143,41 @@
+     eprintln!("nested: label without its ancestor clip rejected by {wrong:?}");
+     assert!(wrong.outside > 50 && wrong.excess > 30., "{wrong:?}");
+ }
++
++/// Diagnostic only (handoff 0059): the 1x UNORM panel's blend trace and images.
++#[test]
++fn diag_0059_unorm_trace() {
++    use std::fmt::Write;
++    let Some(dir) = std::env::var_os("INCANT_0059_DIAG") else {
++        return;
++    };
++    let input = panel();
++    let size = [160u32, 90];
++    let background = background(size);
++    let full = [0., 0., 160., 90.];
++    let compose = |model| {
++        let mut canvas = Canvas::new(&background, size, false, full, input.viewport, model);
++        reference(&input, &mut canvas);
++        canvas
++    };
++    let (exact, portable, llvmpipe) = (
++        compose(Model::Exact),
++        compose(Model::Portable),
++        compose(Model::Llvmpipe),
++    );
++    assert_eq!(exact.trace, llvmpipe.trace);
++    let mut out = String::new();
++    writeln!(out, "size {} {}", size[0], size[1]).unwrap();
++    for (i, p) in background.as_chunks::<4>().0.iter().enumerate() {
++        writeln!(out, "bg {i} {} {} {}", p[0], p[1], p[2]).unwrap();
++    }
++    for (x, y, c, v) in &exact.trace {
++        writeln!(out, "blend {x} {y} {} {} {} {} {:?} {:?}", c[0], c[1], c[2], c[3], v[0], v[1]).unwrap();
++    }
++    for (name, canvas) in [("exact", &exact), ("llvmpipe", &llvmpipe), ("portable", &portable)] {
++        for (i, p) in canvas.pixels.iter().enumerate() {
++            writeln!(out, "{name} {i} {} {} {} {} {} {}", p[0][0], p[0][1], p[1][0], p[1][1], p[2][0], p[2][1]).unwrap();
++        }
++    }
++    std::fs::write(std::path::Path::new(&dir).join("unorm-1x-trace.txt"), out).unwrap();
++}

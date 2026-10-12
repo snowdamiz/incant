@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-12T16:11:46.859739+00:00",
+  "base": "4487c5ae92369c2a69a08dc53a02f25143eefe34",
+  "worktree": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+  "sources": {
+    "crates/incant_assets_runtime/src/animation/root_motion.rs": "d2c953f0f103c16288db5175d153060a6b8dea83011468debb6b535e93c8cae7",
+    "crates/incant_assets_runtime/src/animation/sampling.rs": "a85c451b6d06fc8464c19ec91e5b8f7d40122b7229c5c14d2e3472dfd50ce415",
+    "crates/incant_assets_runtime/src/animation/mod.rs": "15456dfcc3338c26e7f152e567eb14a15aa10c10e6d16ea636e06f2d81349101",
+    "crates/incant_assets/tests/root_motion.rs": "cf0c26f94170f29763e78b1df71d076a6636578f69bd0edd878c6e20957f9907",
+    "crates/incant_assets/tests/root_motion/fixture.rs": "28e5e4d86360cf3b63da5102e95f648d8905107a24341f0ca11fa331f0176dc7",
+    "crates/incant_assets/tests/skeletal/fixture.rs": "2197fec00fe41cffd023b9865702adc42dfd1d38cf93b14c5f6d37daee05995c",
+    "crates/incant_assets/tests/skeletal/alloc.rs": "f58df95c57c6f884684b9a20427701e16e9049e24f287b0a9ea1e3031cb927fb"
+  },
+  "changed_source_count": 5,
+  "declared_existing_test_helpers": 2,
+  "focused_tests": {
+    "passed": 10,
+    "failed": 0,
+    "ignored": 0,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-tests-002.log"
+  },
+  "pending": "broader assets/runtime checks, Clippy, wasm32, dependency and independent review"
+}

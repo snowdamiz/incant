@@ -1,0 +1,30 @@
+{
+  "at": "2026-10-12T17:15:50.221821+00:00",
+  "passed": true,
+  "frozen_inputs": 1716,
+  "commands": 17,
+  "cpu": {
+    "passed": 823,
+    "failed": 0,
+    "ignored_gpu": 82,
+    "groups": 138
+  },
+  "source_head": "897ff4067f2f171f25bb1387a0f78c11b9a0e61c",
+  "actual_package_files": 14,
+  "fresh_processes": 4,
+  "exact_refusals": 7,
+  "save_and_split_pcm_equal": true,
+  "player_sha256": "7b8921ea3ad2535c03aaa4c63907d9302651b42a565c4fc3f905cfba0281ab93",
+  "player_bytes": 9268592,
+  "result_sha256": "f0408c918acf07b47dde7a90a8e0f41581bdaf4b57acc3ef479d9aa52e785862",
+  "headless_sha256": "04554fd236d3062dae00fcab693049db2f9b321ebdecc9ac21e845fe543104de",
+  "source_maps_absent": true,
+  "authoring_absent": true,
+  "limits": [
+    "CPU canonical input/control/checkpoint proof; deformation is separately exercised by actual CPU solver tests",
+    "No GPU/window/appearance/device/performance acceptance",
+    "Ordinary load saves opt-in typed script state/timers, not arbitrary VM globals",
+    "IK Rust/Wasm command ABI remains a follow-up; existing unsupported solver/module saves remain explicit",
+    "PCM and create-only checkpoint publication are separate operations"
+  ]
+}

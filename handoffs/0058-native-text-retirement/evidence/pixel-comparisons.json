@@ -1,0 +1,180 @@
+{
+  "format": "incant-0058-pixel-comparisons",
+  "method": "stored code values of window captures in the same Display profile (1x external display, 640 x 512 px), tolerance 0",
+  "before_source": "0057 run 2 (pid 17610), ~/.codex/incant-evidence/0057/run-2/caps, read only; that build used the old NSView client and also carried the separate 0057 zero-coverage shader candidate, which 0057 measured as pixel-neutral on Metal; this build carries neither",
+  "comparisons": [
+    {
+      "state": "caret at the end of \"Ada Lovelace\", focus ring",
+      "native_0058": "p1-01-name-caret.png",
+      "native_0058_sha256": "c7690e0161fa64f778dc81a751374f104fa388308a6d7f86585cd3219f26529c",
+      "before_0057": "11-name-click.png",
+      "before_0057_sha256": "644b30049188e23524d00e542d46b06a12f341e7263f46480da017496a400eb0",
+      "region_xywh": [
+        0,
+        33,
+        330,
+        176
+      ],
+      "offset_b": [
+        0,
+        0
+      ],
+      "pixels": 58080,
+      "differing": 0,
+      "max_delta": 0,
+      "bbox": null
+    },
+    {
+      "state": "\"Byron\" selected",
+      "native_0058": "p1-02-name-selection.png",
+      "native_0058_sha256": "cb06f618a8c2e194845286b82e37b69668ff232e14acf54889cebc587373317c",
+      "before_0057": "13-name-selection.png",
+      "before_0057_sha256": "7e44de85a21f54757b35eac568a729456403f4206b7456035370224d93814e33",
+      "region_xywh": [
+        0,
+        33,
+        330,
+        176
+      ],
+      "offset_b": [
+        0,
+        0
+      ],
+      "pixels": 58080,
+      "differing": 0,
+      "max_delta": 0,
+      "bbox": null
+    },
+    {
+      "state": "live marked \"´\": underline and IME caret",
+      "native_0058": "p2-01-name-deadkey-preedit.png",
+      "native_0058_sha256": "c8184ddd6dca90b96f7f1de2c6aeca8669d4f11d993cdc28e27d020eb01fa7c3",
+      "before_0057": "14-deadkey-preedit.png",
+      "before_0057_sha256": "0c45403902d6b6b2bd58420c45dd908e408133a4e4be21b9a2ccf01e1a9b256d",
+      "region_xywh": [
+        0,
+        33,
+        330,
+        176
+      ],
+      "offset_b": [
+        0,
+        0
+      ],
+      "pixels": 58080,
+      "differing": 0,
+      "max_delta": 0,
+      "bbox": null
+    },
+    {
+      "state": "committed \"é\", caret; Name row",
+      "native_0058": "p2-02-after-composition-retirements.png",
+      "native_0058_sha256": "c4b468eada061aea2a90a96ce78fec4be58a363941f5b5b4dc26d88c2c47f8d2",
+      "before_0057": "15-deadkey-commit.png",
+      "before_0057_sha256": "dfd214bad07cd04849ff6efff5dec5f5b24185a54a56db9e54fab8b32cde4cc7",
+      "region_xywh": [
+        0,
+        120,
+        320,
+        34
+      ],
+      "offset_b": [
+        0,
+        0
+      ],
+      "pixels": 10880,
+      "differing": 0,
+      "max_delta": 0,
+      "bbox": null
+    },
+    {
+      "state": "title, body and buttons",
+      "native_0058": "p2-02-after-composition-retirements.png",
+      "native_0058_sha256": "c4b468eada061aea2a90a96ce78fec4be58a363941f5b5b4dc26d88c2c47f8d2",
+      "before_0057": "15-deadkey-commit.png",
+      "before_0057_sha256": "dfd214bad07cd04849ff6efff5dec5f5b24185a54a56db9e54fab8b32cde4cc7",
+      "region_xywh": [
+        0,
+        33,
+        330,
+        87
+      ],
+      "offset_b": [
+        0,
+        0
+      ],
+      "pixels": 28710,
+      "differing": 0,
+      "max_delta": 0,
+      "bbox": null
+    }
+  ],
+  "controls": [
+    {
+      "control": "caret vs selection (0058 p1-01 vs p1-02)",
+      "region_xywh": [
+        0,
+        33,
+        330,
+        176
+      ],
+      "offset_b": [
+        0,
+        0
+      ],
+      "pixels": 58080,
+      "differing": 592,
+      "max_delta": 214,
+      "bbox": [
+        158,
+        98,
+        197,
+        113
+      ]
+    },
+    {
+      "control": "0058 caret vs 0057 caret shifted 1 px right",
+      "region_xywh": [
+        0,
+        33,
+        329,
+        176
+      ],
+      "offset_b": [
+        1,
+        0
+      ],
+      "pixels": 57904,
+      "differing": 5625,
+      "max_delta": 225,
+      "bbox": [
+        11,
+        13,
+        311,
+        175
+      ]
+    },
+    {
+      "control": "Arabic and CJK rows of p2-02 vs 0057 15 (0058 has an extra committed e in each)",
+      "region_xywh": [
+        0,
+        154,
+        330,
+        55
+      ],
+      "offset_b": [
+        0,
+        0
+      ],
+      "pixels": 18150,
+      "differing": 86,
+      "max_delta": 213,
+      "bbox": [
+        105,
+        10,
+        279,
+        49
+      ]
+    }
+  ]
+}

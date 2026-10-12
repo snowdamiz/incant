@@ -1,0 +1,14 @@
+# label: clippy-incant-render-2
+# cwd: /Users/andreyyurlov/.codex/worktrees/cooked-native-scripts/incant/.worktrees/0059-linux-ui-reference
+# CARGO_TARGET_DIR=/Users/andreyyurlov/.codex/incant-native-target cargo clippy -p incant_render --all-targets --profile ci --locked -j2 -- -D warnings
+# rustc 1.99.0 (b940084d7 2026-09-28)
+# binary: rustc
+# commit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4
+# commit-date: 2026-09-28
+# host: aarch64-apple-darwin
+# release: 1.99.0
+# LLVM version: 23.1.1
+# start: 2026-10-12T17:41:23Z
+    Checking incant_render v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-native-scripts/incant/.worktrees/0059-linux-ui-reference/crates/incant_render)
+    Finished `ci` profile [optimized] target(s) in 1.68s
+# exit: 0 at 2026-10-12T17:41:24Z

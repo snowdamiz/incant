@@ -3,6 +3,8 @@
 mod fixture;
 #[path = "animation/graph.rs"]
 mod graph;
+#[path = "animation/ik.rs"]
+mod ik;
 #[path = "animation/tree.rs"]
 mod tree;
 use incant_cook::{

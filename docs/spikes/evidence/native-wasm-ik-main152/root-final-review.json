@@ -1,0 +1,46 @@
+{
+  "at": "2026-10-12T17:39:35.945402+00:00",
+  "decision": "accepted scoped current-main IK Rust/Wasm integration",
+  "head": "dc4d0d2bbd1d0200ad9810c9eab5d26e38b5c9b0",
+  "manifest_sha256": "4bbc7775a9c1241d64323966852d9d05b15a06c39b759ae3fe8728072b9088ee",
+  "retained_artifacts_verified": 154,
+  "accepted_producer_sources_exact": 29,
+  "frozen_inputs": 1727,
+  "commands_zero_exit": 13,
+  "actual_host_tests": {
+    "passed": 418,
+    "failed": 0,
+    "ignored": 0,
+    "groups": 74
+  },
+  "package": {
+    "files": 14,
+    "player_sha256": "31403e3ec29c3c7ff1aa88fcdd45b7665e6569c5d711ae441ee9589629843226",
+    "player_bytes": 9869136,
+    "fresh_runs": 3,
+    "ticks_each": 20,
+    "scalar_comparisons_each": 4140,
+    "public_vector_checks_each": 252,
+    "exact_refusals": 15,
+    "pcm_log_development_equality": true,
+    "removed_files": 17
+  },
+  "verification": [
+    "all committed compressed/raw/source counterparts and current tracked artifacts",
+    "all29 actual Git producer source blobs match current files",
+    "post-test main ancestry changes only recorded documentation",
+    "retained assertion code read and executed without mutating original receipt",
+    "positive reports compared with actual development logs/PCM and typed-native20tick oracle",
+    "all15 exact negative results, absent outputs, all removed paths and live14file package hashes"
+  ],
+  "limitations": [
+    "Actual local desktop CPU package; no GPU/rendered/device/performance or phase gate.",
+    "Eight active weighted samples; nonzero tree fades/composite operands remain unsupported.",
+    "Whole guest checkpoints explicitly unsupported; gameplay counter lives in native ECS, not module global state.",
+    "Only newly created proof source/cache/build/maps are removed; repository and shared engine build storage are retained.",
+    "CPU package proof checks complete native snapshots and transaction results; no renderer/window or pose-deformation appearance acceptance.",
+    "Whole-module checkpoints remain explicitly unsupported.",
+    "Operations44\u201346 additive; old0\u201343 preserved; all v1\u2013v4 legacy pose imports still refuse committed IK. Compound poses require the separately reserved v5/IK-v2/graph-v2 protocol."
+  ],
+  "blocking_findings": []
+}

@@ -2,6 +2,7 @@
 //! static render and navigation consumers do not yet implement animated models.
 mod binary;
 mod player;
+mod root_motion;
 mod sampling;
 use crate::{AssetError, Mesh, ModelNode, Result, invalid};
 pub use binary::decode_animation;
@@ -9,6 +10,10 @@ use glam::{DMat4, DQuat, DVec3};
 pub use player::{
     AnimationPlayer, MAX_POSE_SAMPLES, MAX_TWO_BONE_IK, SkinPose, TwoBoneIk, TwoBoneIkError,
     WeightedClipSample,
+};
+pub use root_motion::{
+    MAX_ROOT_MOTION_CYCLES, MAX_ROOT_MOTION_DURATION, RootMotionDelta, RootMotionError,
+    RootMotionSampler, RootMotionTime,
 };
 pub use sampling::ClipSample;
 use std::collections::BTreeSet;

@@ -1,0 +1,317 @@
+[
+  {
+    "name": "affected-tests",
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_types",
+      "-p",
+      "incant_doc",
+      "-p",
+      "incant_cmd",
+      "-p",
+      "incant_cook",
+      "-p",
+      "incant_runtime",
+      "-p",
+      "incant_script",
+      "-p",
+      "incant_assets",
+      "-p",
+      "incant_assets_runtime",
+      "-p",
+      "incant_render_data",
+      "-p",
+      "incant_render_native",
+      "-p",
+      "incant_render_authoring",
+      "-p",
+      "incant_render",
+      "-p",
+      "incant_wasm_runtime",
+      "-p",
+      "incant_game_runtime",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "incant_script/ui,incant_script/audio,incant_game_runtime/ui,incant_assets_runtime/visual"
+    ],
+    "exit": 0,
+    "seconds": 206.82642062500054,
+    "sha256": "6bdd5caee299a29ead408e92e0a838f5c4ae8669ed9e0e8d74c523e9d729d918"
+  },
+  {
+    "name": "affected-clippy",
+    "command": [
+      "./tools/cargo",
+      "clippy",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_types",
+      "-p",
+      "incant_doc",
+      "-p",
+      "incant_cmd",
+      "-p",
+      "incant_cook",
+      "-p",
+      "incant_runtime",
+      "-p",
+      "incant_script",
+      "-p",
+      "incant_assets",
+      "-p",
+      "incant_assets_runtime",
+      "-p",
+      "incant_render_data",
+      "-p",
+      "incant_render_native",
+      "-p",
+      "incant_render_authoring",
+      "-p",
+      "incant_render",
+      "-p",
+      "incant_wasm_runtime",
+      "-p",
+      "incant_game_runtime",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "incant_script/ui,incant_script/audio,incant_game_runtime/ui,incant_assets_runtime/visual",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit": 0,
+    "seconds": 20.20917187499981,
+    "sha256": "41332fb7958b813ecd8f1718edf6f0393130c7e67322f7093a2eac7462310908"
+  },
+  {
+    "name": "static",
+    "command": [
+      "./tools/cargo",
+      "check",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_script",
+      "--no-default-features",
+      "--features",
+      "static-module,ui,audio"
+    ],
+    "exit": 0,
+    "seconds": 3.5076267500007816,
+    "sha256": "afbb2185647c0747811af189011e82de8c9663cbf952c03e390ea857b3cf1f74"
+  },
+  {
+    "name": "headless",
+    "command": [
+      "./tools/cargo",
+      "build",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_headless",
+      "--features",
+      "wasmtime-host"
+    ],
+    "exit": 0,
+    "seconds": 54.40918670799874,
+    "sha256": "fa847d8efc428f8deff80281e5e11ba716d4309bf1e71a29c84bffa3eb584ed4"
+  },
+  {
+    "name": "wasm",
+    "command": [
+      "./tools/cargo",
+      "check",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "--lib",
+      "-p",
+      "incant_types",
+      "-p",
+      "incant_runtime",
+      "-p",
+      "incant_render_data",
+      "-p",
+      "incant_render_native",
+      "-p",
+      "incant_wasm_runtime",
+      "-p",
+      "incant-module",
+      "--target",
+      "wasm32-unknown-unknown"
+    ],
+    "exit": 0,
+    "seconds": 2.781892582999717,
+    "sha256": "b9a10936f21e29199d52afddd86d8ede0f4be2cc076d4eb060390f9a1f22b6fd"
+  },
+  {
+    "name": "graph",
+    "command": [
+      "python3",
+      "tools/check_runtime_dependencies.py",
+      "incant_runtime",
+      "incant_script",
+      "incant_assets_runtime",
+      "incant_render_data",
+      "incant_render_native",
+      "incant_render",
+      "incant_game_runtime",
+      "incant_wasm_runtime",
+      "incant_wasm_player",
+      "incant_game_player",
+      "--features",
+      "incant_game_player/static-module,incant_game_player/render-input"
+    ],
+    "exit": 0,
+    "seconds": 0.5060772920005547,
+    "sha256": "ee9ee3bac78124f0d702ddd2a88a0ab0a529600a649d5b8119e68a600f8b9c4a"
+  },
+  {
+    "name": "schema",
+    "command": [
+      "/Users/andreyyurlov/.codex/incant-integration-target/ci/incant_headless",
+      "schema",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ik-main151-001/schemas"
+    ],
+    "exit": 0,
+    "seconds": 0.7117682919997605,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "schema-match",
+    "command": [
+      "python3",
+      "-c",
+      "from pathlib import Path; a=Path('schemas'); b=Path('/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ik-main151-001/schemas'); assert {p.name:p.read_bytes() for p in a.glob('*.schema.json')}=={p.name:p.read_bytes() for p in b.glob('*.schema.json')}"
+    ],
+    "exit": 0,
+    "seconds": 0.029517958999349503,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "generated",
+    "command": [
+      "python3",
+      "tools/generate_wasm_sdk.py",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.2046362080000108,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "sdk",
+    "command": [
+      "node",
+      "tools/generate_sdk.mjs",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.13034745900040434,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "typescript",
+    "command": [
+      "node",
+      "node_modules/typescript/bin/tsc",
+      "-p",
+      "sdk/ts/tsconfig.json"
+    ],
+    "exit": 0,
+    "seconds": 0.31400254199979827,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "bridge",
+    "command": [
+      "node",
+      "tools/build_bridge.mjs",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.08802983300120104,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "fmt",
+    "command": [
+      "./tools/cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 1.3449894579989632,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "conventions",
+    "command": [
+      "python3",
+      "tools/generate_conventions.py",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.03849041699868394,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "tools",
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools/tests",
+      "-p",
+      "test_*.py"
+    ],
+    "exit": 0,
+    "seconds": 22.033923749999303,
+    "sha256": "df0291f90897d9b03d67d30fea99014dcf9b76b09a6774cbc1315b02dfb7ca0e"
+  },
+  {
+    "name": "diff",
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.012701042000117013,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "public-export",
+    "command": [
+      "python3",
+      "tools/probes/native-animation-ik-export.py",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ik-main151-001/public-export",
+      "--binary",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ik-main151-001/incant_headless"
+    ],
+    "exit": 0,
+    "seconds": 336.99926374999995,
+    "sha256": "ec3bdcd5e66aa754c2efdce9dec028ec843cc7087adb4ccd998e299ed11ea958"
+  }
+]

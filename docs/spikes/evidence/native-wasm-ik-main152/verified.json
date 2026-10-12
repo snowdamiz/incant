@@ -1,0 +1,34 @@
+{
+  "at": "2026-10-12T17:36:20.345309+00:00",
+  "passed": true,
+  "tested_head": "c8115289af04ab82f74667400d79da31988c33be",
+  "frozen_inputs": 1727,
+  "accepted_sources": 29,
+  "commands": 13,
+  "conformance": {
+    "passed": 418,
+    "failed": 0,
+    "ignored": 0,
+    "groups": 74,
+    "development_processes": 3,
+    "prepared_files_verified_before_cleanup": 841
+  },
+  "package": {
+    "files": 14,
+    "player_sha256": "31403e3ec29c3c7ff1aa88fcdd45b7665e6569c5d711ae441ee9589629843226",
+    "player_bytes": 9869136,
+    "fresh_runs": 3,
+    "ticks_each": 20,
+    "scalar_comparisons_each": 4140,
+    "public_vector_checks_each": 252,
+    "exact_refusals": 15,
+    "pcm_log_development_equality": true,
+    "removed_files": 17
+  },
+  "limits": [
+    "Actual local desktop CPU package; no GPU/rendered/device/performance or phase gate.",
+    "Eight active weighted samples; nonzero tree fades/composite operands remain unsupported.",
+    "Whole guest checkpoints explicitly unsupported; gameplay counter lives in native ECS, not module global state.",
+    "Only newly created proof source/cache/build/maps are removed; repository and shared engine build storage are retained."
+  ]
+}

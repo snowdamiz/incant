@@ -1,0 +1,40 @@
+[
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/native-authored-ik-headless-002",
+      "init",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-authored-ik-shipping-001/authoring/project.json",
+      "--entities",
+      "0"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"created\": \"01M4REW79M4C5TQT1PCM1Y5BTB\",\n  \"entities\": 0\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/tools/probes/native-animation-ik-export.py",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-authored-ik-shipping-001",
+      "--binary",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-authored-ik-headless-002",
+      "--author"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/tools/export_native.py",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-authored-ik-shipping-001/authoring/project.json",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-authored-ik-shipping-001/package",
+      "--camera",
+      "00000000000000000000000003"
+    ],
+    "returncode": 0,
+    "stdout": "Compiling fresh aarch64-apple-darwin shipping player (headless)...\nChecking copied player after removal of private build storage...\n{\"output\": \"/Users/andreyyurlov/.codex/incant-evidence/native-authored-ik-shipping-001/package\", \"target\": \"aarch64-apple-darwin\", \"player_sha256\": \"b80b1b2ad023eb15e18545ee4a6891fd55d8f0b8ce6f87f6a414550d7c43126a\"}\n",
+    "stderr": ""
+  }
+]

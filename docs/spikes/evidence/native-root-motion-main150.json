@@ -1,0 +1,197 @@
+{
+  "at": "2026-10-12T17:00:33.124232+00:00",
+  "scope": "Bounded cooked root-motion CPU primitive on actual main150",
+  "main": "58cca708545eb494868e18469fd4de98f47eb2da",
+  "tested_head": "af412bc72df7842401e23c3a8d0564361b0c6edc",
+  "ancestry_head": "db6c2b4a5bc1d0931627e78ec88f5474d135ec64",
+  "tree_unchanged_by_main_merge": true,
+  "source_count": 1701,
+  "accepted_source_hashes": {
+    "crates/incant_assets_runtime/src/animation/root_motion.rs": "d2c953f0f103c16288db5175d153060a6b8dea83011468debb6b535e93c8cae7",
+    "crates/incant_assets_runtime/src/animation/sampling.rs": "a85c451b6d06fc8464c19ec91e5b8f7d40122b7229c5c14d2e3472dfd50ce415",
+    "crates/incant_assets_runtime/src/animation/mod.rs": "15456dfcc3338c26e7f152e567eb14a15aa10c10e6d16ea636e06f2d81349101",
+    "crates/incant_assets/tests/root_motion.rs": "cf0c26f94170f29763e78b1df71d076a6636578f69bd0edd878c6e20957f9907",
+    "crates/incant_assets/tests/root_motion/fixture.rs": "28e5e4d86360cf3b63da5102e95f648d8905107a24341f0ca11fa331f0176dc7",
+    "crates/incant_assets/tests/skeletal/fixture.rs": "2197fec00fe41cffd023b9865702adc42dfd1d38cf93b14c5f6d37daee05995c",
+    "crates/incant_assets/tests/skeletal/alloc.rs": "f58df95c57c6f884684b9a20427701e16e9049e24f287b0a9ea1e3031cb927fb"
+  },
+  "checks": [
+    {
+      "name": "tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_assets",
+        "-p",
+        "incant_assets_runtime",
+        "--all-features"
+      ],
+      "exit": 0,
+      "seconds": 40.08201504200042,
+      "sha256": "07a7bd00028f114837ff7e53ce92f8c0854492a42bdaf9ab3505fd0255582bf4"
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_assets",
+        "-p",
+        "incant_assets_runtime",
+        "--all-features",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 3.8023376659984933,
+      "sha256": "3fb244aac77baa53533110a10cf26645415a177fe41e4588e83dba0204f98197"
+    },
+    {
+      "name": "wasm",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_assets_runtime",
+        "--features",
+        "visual",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "exit": 0,
+      "seconds": 0.8719843750004657,
+      "sha256": "3dfa60578af3fc18108520cd9b83fc0c1e3a86aaf54400e3f5deab83fbe3a232"
+    },
+    {
+      "name": "graph",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_assets_runtime",
+        "--features",
+        "incant_assets_runtime/visual"
+      ],
+      "exit": 0,
+      "seconds": 0.5750332919997163,
+      "sha256": "466c27957bec6177e21911180caffd16c9a78482761e9fad8fb9622eb2023499"
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 1.3416019159994903,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.04309866599942325,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.015520625000135624,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "test_counts": {
+    "passed": 128,
+    "failed": 0,
+    "ignored": 0,
+    "groups": 19
+  },
+  "artifacts": {
+    "docs/spikes/evidence/native-root-motion-main150/freeze.json": {
+      "sha256": "b26e77de5dcfd2822def82976c410a20dd3b728d35c6642b844ddd58293acee5",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/root-motion-main150-001/freeze.json"
+    },
+    "docs/spikes/evidence/native-root-motion-main150/results.json": {
+      "sha256": "111d4e8627ef12e2e15d93d672caae5d34cf30b6490a36f6f27c839064da208b",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/root-motion-main150-001/results.json"
+    },
+    "docs/spikes/evidence/native-root-motion-main150/tests.log.gz": {
+      "sha256": "8dc48751fa5b347818f6f50f52237cc504f0cc299a0e48ed5beb6db3e6ebcfdf",
+      "uncompressed_sha256": "07a7bd00028f114837ff7e53ce92f8c0854492a42bdaf9ab3505fd0255582bf4",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/root-motion-main150-001/tests.log"
+    },
+    "docs/spikes/evidence/native-root-motion-main150/clippy.log.gz": {
+      "sha256": "cc94d5c3f33277d14d79ba730e7a1ddc7594420d093b4ae15b6942cc7684c5c5",
+      "uncompressed_sha256": "3fb244aac77baa53533110a10cf26645415a177fe41e4588e83dba0204f98197",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/root-motion-main150-001/clippy.log"
+    },
+    "docs/spikes/evidence/native-root-motion-main150/wasm.log.gz": {
+      "sha256": "d4608ae1295359b75ab22bd74e4066b3ae27f654ccee8b4d6ffdb4a06a9098a6",
+      "uncompressed_sha256": "3dfa60578af3fc18108520cd9b83fc0c1e3a86aaf54400e3f5deab83fbe3a232",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/root-motion-main150-001/wasm.log"
+    },
+    "docs/spikes/evidence/native-root-motion-main150/graph.log.gz": {
+      "sha256": "c47f7c849e70472779f3b4dae6f07b5e01dd29c7207e905f4fa4e4dcff3ee951",
+      "uncompressed_sha256": "466c27957bec6177e21911180caffd16c9a78482761e9fad8fb9622eb2023499",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/root-motion-main150-001/graph.log"
+    },
+    "docs/spikes/evidence/native-root-motion-main150/fmt.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/root-motion-main150-001/fmt.log"
+    },
+    "docs/spikes/evidence/native-root-motion-main150/conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/root-motion-main150-001/conventions.log"
+    },
+    "docs/spikes/evidence/native-root-motion-main150/diff.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/root-motion-main150-001/diff.log"
+    }
+  },
+  "source_review": {
+    "path": "docs/spikes/evidence/native-root-motion-core/independent-final-review.json",
+    "sha256": "788be798df117f5f69e642ffb76a2c4153f13a9dabec051701602b70e7a976b3"
+  },
+  "integration_review": "Source delta inspected: same accepted five source/test files; sampling helper preserves prior arithmetic/order; no Cargo.lock or production dependency changes. STATUS-only producer conflict, actual-main merge has identical tested tree. Final independent current-main closure pending.",
+  "documentation_only_followup": {
+    "claude_original": "bab8dd1c66090e39b69e758714aac333fb4e2af3",
+    "integrated": "5a3d4b1de27a80f8b0eb2f060ac696b1419768ea",
+    "packet_files_verified": 48,
+    "source_review": "docs/spikes/evidence/native-text-0058-final-review.json",
+    "qualifications": "See native-text-0058-acceptance.md. No new native execution or pixel review by integrator."
+  },
+  "limitations": [
+    "CPU numerical primitive only: no authored root selection, clocks/graphs, full-pose stripping, body movement, save or SDK route.",
+    "No GPU, visual, device, shipping-performance or complete root-motion/phase claim.",
+    "Checkpoint12 is frozen at earlier main150 and does not contain this primitive; release advancement requires all23 exact-head successes."
+  ]
+}

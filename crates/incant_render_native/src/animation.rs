@@ -49,3 +49,39 @@ pub(crate) fn validate(
     }
     Ok(())
 }
+
+pub(crate) fn validate_ik(
+    entity: StableId,
+    source: &RuntimeAsset,
+    definition: Option<&incant_runtime::NativeIk>,
+) -> Result<(), NativeRenderError> {
+    let Some(definition) = definition else {
+        return Ok(());
+    };
+    let invalid = || NativeRenderError::Animation {
+        entity,
+        reason: "IK chain differs from cooked model",
+    };
+    definition.validate().map_err(|_| invalid())?;
+    let RuntimeAssetData::Model(model) = source.data() else {
+        return Err(invalid());
+    };
+    let data = model.animation.as_ref().ok_or_else(invalid)?;
+    for constraint in definition.initial.iter() {
+        let [root, middle, tip] = constraint.chain.map(usize::from);
+        let nodes = &model.metadata.nodes;
+        if root >= nodes.len()
+            || middle >= nodes.len()
+            || tip >= nodes.len()
+            || !nodes[root].children.contains(&middle)
+            || !nodes[middle].children.contains(&tip)
+            || data.rest[root].is_none()
+            || data.rest[middle].is_none()
+        {
+            return Err(invalid());
+        }
+    }
+    // Pose-dependent lengths/affine frames are checked after actual sampling by
+    // the canonical consumer, before private staging is published or uploaded.
+    Ok(())
+}
