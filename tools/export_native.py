@@ -57,17 +57,26 @@ def normal_dependencies(metadata):
 def verify_codegen(stderr, host, split):
     flags = {}
     target_lines = [line for line in stderr.splitlines() if 'Running `' in line and f'--target {host}' in line]
-    for name in ('incant_runtime', 'incant_script', NAME):
-        commands = [line for line in target_lines if re.search(r'--crate-name ' + name + r'\b', line)]
-        require(len(commands) == 1, f'Missing fresh target invocation for {name}')
+    # The player library owns the runtime; the executable is now a thin caller.
+    # Audit both target units instead of confusing their shared crate name, or
+    # auditing only the executable while allowing a weaker library build.
+    units = [('incant_runtime', 'lib', 'incant_runtime'),
+             ('incant_script', 'lib', 'incant_script'),
+             (NAME, 'lib', NAME + '_library'), (NAME, 'bin', NAME)]
+    for name, kind, key in units:
+        commands = [line for line in target_lines
+                    if re.search(r'--crate-name ' + name + r'\b', line)
+                    and re.search(r'--crate-type ' + kind + r'(?:\s|$)', line)]
+        require(len(commands) == 1, f'Missing unique fresh target invocation for {name} ({kind})')
         require('feature="compiler"' not in commands[0], 'Runtime source compiler feature leaked')
+        require('--test' not in commands[0], 'Test harness cannot verify shipping codegen')
         actual = codegen(commands[0])
         expected = {'opt-level': '3', 'codegen-units': '1', 'panic': 'abort', 'debuginfo': '2', 'split-debuginfo': split}
-        if name == NAME:
+        if kind == 'bin':
             expected['lto'] = 'fat'
         require(all(actual.get(k) == v for k, v in expected.items()) and actual.get('target-cpu') != 'native',
-                f'Incorrect shipping codegen for {name}: {actual}')
-        flags[name] = expected
+                f'Incorrect shipping codegen for {name} ({kind}): {actual}')
+        flags[key] = expected
     forbidden = r'--crate-name (?:incant_doc|incant_cmd|incant_agent|incant_cook|incant_core|incant_source|incant_play|loro|wasmtime)\b'
     require(not any(re.search(forbidden, line) for line in target_lines), 'Authoring dependency compiled into player target')
     return flags

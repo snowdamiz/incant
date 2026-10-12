@@ -1,0 +1,53 @@
+{
+  "head": "4fc128f9aba4d5992b9dfd5476d998db7a9a4b7a",
+  "source_files": {
+    "tools/export_native.py": "15f74de2f69a8b2d7a3b1e48e62a9dae9aa153784de0ff7b5c64096c377814b6",
+    "tools/tests/test_native_codegen.py": "29222a65d192069a44e18276c0d63c4ba027c4ed13fd180dd1411a765d56052a"
+  },
+  "artifacts": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-export-player-units-001/tests.log",
+      "retained": "docs/spikes/evidence/native-export-player-units/tests.log.gz",
+      "raw_sha256": "2c0930b91adf2d62c59fbd5748026436a1d32af72af8a607834255cfb8b34d85",
+      "sha256": "bbf7e33d41659c5f7cf6633ff3567079797c18cbf76538babc60ce729b19df9b",
+      "raw_bytes": 12024
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-export-player-units-001/check.json",
+      "retained": "docs/spikes/evidence/native-export-player-units/check.json.gz",
+      "raw_sha256": "a9246c510f827b9ec32ef1ea421bcb7864395289c26343244b606cfd341175f8",
+      "sha256": "ab1447fa15e97b1816a270bb5648c45e223184a4e703857a406055efd2e0857f",
+      "raw_bytes": 255
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-export-player-units-001/red.json",
+      "retained": "docs/spikes/evidence/native-export-player-units/red.json.gz",
+      "raw_sha256": "f14a516af0359c6a3c87c33c0919c49a3a47dbed63040c129c1568334fc01962",
+      "sha256": "c0c8dea05fcac6117e4746ad1e56b0e6601d5667f80e0c5afb3f79f29a10b5d6",
+      "raw_bytes": 1683
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-default.log",
+      "retained": "docs/spikes/evidence/native-export-player-units/shipping-default.log.gz",
+      "raw_sha256": "b1e8c317f241d51d984d9f25985f3781524d04e7fc4d6bad25d594b22b81ed92",
+      "sha256": "be2e40a0de882a30baedfcfaf6c1069c70f96f4c2504aa1691389cb3b4c7848f",
+      "raw_bytes": 1507
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/shipping-checks.json",
+      "retained": "docs/spikes/evidence/native-export-player-units/shipping-checks.json.gz",
+      "raw_sha256": "f0392a49e70fe30e4bb4b6aadf9cca07d61f49898cec6269f4b5b98c8780a23d",
+      "sha256": "5960a2e809dd3ce363593925be4c32755ca2fcc47c3303c974cb57e86636ffa5",
+      "raw_bytes": 644
+    }
+  ],
+  "tests": {
+    "ran": 67,
+    "passed": 63,
+    "skipped": 4,
+    "failed": 0,
+    "new_regressions": 6,
+    "scope": "Synthetic rustc log parser and native tooling tests, not shipping or cross-platform execution evidence"
+  },
+  "shipping": "Original current-main169 export built then failed audit before publication. Corrected fresh export execution is pending."
+}
