@@ -2894,7 +2894,11 @@
   "evidence_directory": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-wasm-main156-001",
   "recovery_directory": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-wasm-main156-recovery",
   "recovery_review_sha256": "2f4d0d33c73c9316229088235a8d882508871190091bdc63c9629c700c6ab907",
-  "integration_review": "pending independent final current-main review",
+  "integration_review": {
+    "verdict": "accepted scoped current-main review; no findings",
+    "path": "docs/spikes/evidence/native-wasm-compound-main158-review.json",
+    "sha256": "4de0e1db299babaaf0f38e78d13f94d1aadd3c893226c438609474af2bc73b89"
+  },
   "limitations": [
     "Original controller interrupted while fresh shipping Cargo survived. No original process exit status exists; final Cargo build-finished success and pinned original inputs were independently verified before one approved recovery.",
     "Recovery executes unchanged exporter post-build audits/package/cleanup/startup and unchanged proof assertions, with two setup substitutions reusing verified private directories and pinned tools. No cold rebuild or fabricated original exit zero.",

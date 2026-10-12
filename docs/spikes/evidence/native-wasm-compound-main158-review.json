@@ -1,0 +1,46 @@
+{
+  "at": "2026-10-12T19:16:21.028594+00:00",
+  "reviewer": "root astra",
+  "accepted": true,
+  "manifest_sha256": "c0f9bea0a62607c184ab3f4272308de9fe56e34603e67437753559c2c6319975",
+  "source_head": "311d50b25039ea2337d901dad3f06d064a8a1ba0",
+  "main": "d35cf969e16cd6c187a841f72e5f604b5b68a6c7",
+  "verified": {
+    "retained_artifacts": 510,
+    "frozen_inputs": 1771,
+    "unchanged_inputs": 1768,
+    "accepted_source_build_inputs": 53,
+    "changed_inputs_exact_main": [
+      ".github/workflows/ci.yml",
+      ".github/workflows/desktop.yml",
+      "crates/incant_game_player/examples/macos_text_retirement.rs"
+    ],
+    "tests": {
+      "passed": 436,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 77
+    },
+    "checks": 11,
+    "package_files": 14,
+    "fresh_processes": 3,
+    "scalars_compared": 64512,
+    "vectors_each": 256,
+    "refusals": 23,
+    "command_receipts": 41,
+    "reports": [
+      "b9b2b2a305fa68830d0a11286563686b318b576ba130b1d2cdf62f8f73a323cc",
+      "b9b2b2a305fa68830d0a11286563686b318b576ba130b1d2cdf62f8f73a323cc",
+      "b9b2b2a305fa68830d0a11286563686b318b576ba130b1d2cdf62f8f73a323cc"
+    ],
+    "recovery_exit": 0,
+    "original_controller_exit": null
+  },
+  "limitations": [
+    "Original controller interrupted while fresh shipping Cargo survived. No original process exit status exists; final Cargo build-finished success and pinned original inputs were independently verified before one approved recovery.",
+    "Recovery executes unchanged exporter post-build audits/package/cleanup/startup and unchanged proof assertions, with two setup substitutions reusing verified private directories and pinned tools. No cold rebuild or fabricated original exit zero.",
+    "Current main adds only two CI workflow changes, the separately reviewed macOS example, opt-in local target helper, Core Sample content and docs. Runtime/cook/ABI/SDK/lock/proof sources remain byte-identical to the tested union.",
+    "Local macOS CPU package only; no GPU/window/appearance/device/performance acceptance. All module checkpoint refusals remain.",
+    "Release candidate13 remains frozen and failed; main integration does not promote release or satisfy Phase1."
+  ]
+}
