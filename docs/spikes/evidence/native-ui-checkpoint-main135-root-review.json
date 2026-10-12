@@ -1,0 +1,15 @@
+{
+  "at": "2026-10-12T05:31:43.148531+00:00",
+  "reviewer": "astra-root",
+  "evidence_sha256": "95ddbec81820f3acec9d8a1f939aebb34380674286a88244c4c8477ea8446703",
+  "source": "f4e758e79891984801fb74ae61b8f7c60f246c8c",
+  "accepted_source": "4ee1c21ec4c470f730ebd7f151efd49e3a540da3",
+  "source_files_compared": 5,
+  "frozen_inputs_verified": 1330,
+  "logs_verified": 6,
+  "receipts_verified": 2,
+  "tests": 41,
+  "groups": 8,
+  "same_tree": true,
+  "assessment": "Accept integration of independently reviewed CPU widget checkpoint section. Existing world/session refusals and stated native/render/export limitations remain in force."
+}

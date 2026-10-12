@@ -78,3 +78,14 @@ bounded fixture correction and both runs are retained in the evidence.
 No GPU, native input-method execution, exported-player continuation, shipping
 performance or device claim is made here. See
 [the retained source, logs and review receipt](evidence/native-ui-checkpoint-state.json).
+
+## Main135 integration
+
+All five accepted source inputs, including the manifest and lockfile, remain
+byte-identical after integration. The only conflict was additive STATUS text.
+The frozen union repeats all 41 UI tests across eight groups, all-target Clippy,
+wasm32 compilation and authoring-free dependency checks. Merging the actual
+main135 commit changes ancestry only and preserves the tested tree. The
+[integrated receipt](evidence/native-ui-checkpoint-main135.json) retains all
+1,330 compiled inputs and six completed command logs. Existing world/session
+UI-save refusal paths remain unchanged; no native input or rendering ran.
