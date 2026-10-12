@@ -31,13 +31,22 @@ This is a numerical fixture, not the finished authored level or device gate.
 Headless recorded UI routing and physics save support remain separate open work.
 [Contract and retained evidence](docs/spikes/core-presentation-bindings.md).
 
-## Native HUD controls — main161 integration reviewed; fast check pending
+## Native audio transport — merged main163
+
+541 affected CPU cases, Clippy and target/contracts checks pass. A fresh ordinary
+package passes four source/map/build-deleted playback/continuation processes with
+exact save and PCM equality plus ten precise refusal controls. Integration source
+seams, final evidence and exact-head fast CI passed before PR163 merged. Wasm
+transport, Core presentation and physical audio/device gates remain separate.
+[Current-main evidence](docs/spikes/native-audio-transport-main162.md).
+
+## Native HUD controls — merged main162
 
 All 20 accepted inputs remain exact. Current-main CPU checks pass 444 affected
 and 10 player cases plus Clippy/target/contracts/dependency checks. A fresh
 ordinary package passes five source/map/build-deleted processes with canonical
 shaped text/focus and exact save/PCM continuation, plus three precise refusals.
-Independent integration review is accepted; exact-head fast CI/publication remain pending. Wasm parity,
+Independent integration review and exact-head fast CI passed before PR162 merged. Wasm parity,
 window/IME/appearance and device gates remain separate.
 [Current-main evidence](docs/spikes/native-hud-main161.md).
 
