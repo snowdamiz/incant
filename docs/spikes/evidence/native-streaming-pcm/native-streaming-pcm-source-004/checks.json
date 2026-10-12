@@ -1,0 +1,62 @@
+[
+  {
+    "argv": [
+      "cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "native-window,mobile-ffi",
+      "--lib"
+    ],
+    "exit_code": 0,
+    "seconds": 109.47192258400173,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/native-streaming-pcm-source-004/check-00.log"
+  },
+  {
+    "argv": [
+      "cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_game_runtime",
+      "--features",
+      "ui",
+      "--test",
+      "checkpoints",
+      "--test",
+      "restart"
+    ],
+    "exit_code": 0,
+    "seconds": 16.49560787500377,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/native-streaming-pcm-source-004/check-01.log"
+  },
+  {
+    "argv": [
+      "cargo",
+      "clippy",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_game_player",
+      "--all-targets",
+      "--features",
+      "native-window,mobile-ffi",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 101,
+    "seconds": 20.69541654200293,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/native-streaming-pcm-source-004/check-02.log"
+  }
+]

@@ -16,6 +16,21 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Bounded offline PCM streaming — CPU shipping proof accepted
+
+The ordinary player now stages PCM with one tick buffer and an 8 KiB encoder,
+then syncs and publishes without clobbering an existing output. The former
+one-million-frame capture cap is removed; existing tick/sample-rate bounds,
+diagnostic failed-observation output, fractional checkpoints and restart clocks
+remain intact. 75 CPU tests and scoped Clippy/static-module/graph checks pass.
+A fresh source/map/build-deleted Core package completes 2,156 ticks at 48 kHz
+(1,724,800 frames), repeats exactly and matches the prior player for its first
+1,000 ticks. Eight actual process controls cover the old refusal, diagnostic PCM,
+and precise publication errors. Independent source and final execution reviews are accepted; publisher
+integration is pending. No whole-engine memory, native-window,
+GPU or device/performance gate is claimed.
+[Contract and evidence](docs/spikes/native-streaming-pcm.md).
+
 ## Whole native session restart — CPU shipping proof accepted
 
 Opted-in native TypeScript hosts now replace the complete world, VM, input/UI and

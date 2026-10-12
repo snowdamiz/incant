@@ -1,0 +1,8 @@
+{
+  "sources": [
+    {
+      "path": "tools/probes/native-streaming-pcm.py",
+      "sha256": "660e23cbe0877829001a44e04c940faf9aba6526265ae576f6d3957310698ad1"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "engine_freeze": "/Users/andreyyurlov/.codex/incant-evidence/native-streaming-pcm-shipping-001/engine-freeze.json",
+  "total_rows": 1770,
+  "unchanged_rows": 1769,
+  "only_delta": {
+    "path": "tools/probes/native-streaming-pcm.py",
+    "shipping_initial_sha256": "660e23cbe0877829001a44e04c940faf9aba6526265ae576f6d3957310698ad1",
+    "followup_sha256": "3acc9997b5e73910004f4e4bb993b2bf337c76099ae5556d710aab200278afb9",
+    "reason": "Four exact CLI Debug error-format assertions; no runtime/build input changed."
+  },
+  "production_source_freeze_sha256": "911499b2301635287403153082b07c9a7a1819de2deaefe17327af299618254c"
+}

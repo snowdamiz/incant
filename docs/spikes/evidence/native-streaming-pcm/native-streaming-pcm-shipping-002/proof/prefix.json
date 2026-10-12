@@ -1,0 +1,413 @@
+{
+  "flipbooks": [],
+  "frames": 800000,
+  "logs": {
+    "dropped": 0,
+    "entries": [
+      {
+        "level": "info",
+        "message": "core.route 01CSEN00000000000000000020 corners=5",
+        "tick": 1
+      },
+      {
+        "level": "info",
+        "message": "core.route 01CSEN00000000000000000021 corners=32",
+        "tick": 2
+      },
+      {
+        "level": "info",
+        "message": "core.route 01CSEN00000000000000000022 corners=24",
+        "tick": 3
+      },
+      {
+        "level": "info",
+        "message": "core.pickup 01CSEN00000000000000000030 1/4",
+        "tick": 127
+      },
+      {
+        "level": "info",
+        "message": "core.pickup 01CSEN00000000000000000031 2/4",
+        "tick": 508
+      },
+      {
+        "level": "info",
+        "message": "core.damage health=2",
+        "tick": 664
+      }
+    ]
+  },
+  "observations": {
+    "checks": [],
+    "entities": {
+      "01CSEN00000000000000000002": {
+        "parent": null,
+        "rotation": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "translation": [
+          6.1873087882995605,
+          0.6099916696548462,
+          2.554182529449463
+        ],
+        "velocity": [
+          2.917266860604286,
+          0.005999999848427251,
+          1.7462734133005142
+        ],
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            6.1873087882995605,
+            0.6099916696548462,
+            2.554182529449463,
+            1.0
+          ]
+        ]
+      }
+    },
+    "passed": true,
+    "tick": 1000,
+    "tick_rate": 60
+  },
+  "pcm_sha256": "caa4760217c2b7639eb1d4411b3fa4f0924c5969e9f45dc775addc11a68bb4ca",
+  "render_input": {
+    "binding_generation": 2,
+    "camera": "01665d50000000000000000000000003",
+    "camera_position": [
+      6.1873087882995605,
+      3.9099916648864745,
+      9.954182529449461
+    ],
+    "decoded_payload_bytes": 28473056,
+    "first_model_position": [
+      6.1873087882995605,
+      0.6099916696548462,
+      2.554182529449463
+    ],
+    "first_sprite_position": null,
+    "first_text_position": null,
+    "gpu_submitted": false,
+    "mode": "cpu-only",
+    "model_count": 8,
+    "sprite_count": 0,
+    "text_atlas_bytes": 0,
+    "text_atlas_nonzero": 0,
+    "text_atlas_sha256": null,
+    "text_count": 0,
+    "text_font_count": 0,
+    "text_generation": 0,
+    "text_glyph_count": 0,
+    "text_missing_clusters": 0,
+    "text_rtl_glyphs": 0,
+    "text_sources": {},
+    "tick": 1000,
+    "topology_generation": 2,
+    "ui": {
+      "atlas_sha256": "b8ad4a4fe3e1416cdc2d00a082c36b60175b5182972653817dd5f2d891d41cc8",
+      "focus": null,
+      "glyphs": 88,
+      "sources": {
+        "01CSWD00000000000000000004": "● ● ●",
+        "01CSWD00000000000000000005": "Collect the core samples",
+        "01CSWD00000000000000000007": "Samples 0/4",
+        "01CSWD00000000000000000008": "WASD move · Space jump",
+        "01CSWD00000000000000000011": "Samples secured",
+        "01CSWD00000000000000000012": "Surveyor down"
+      },
+      "values": {},
+      "viewport": [
+        640.0,
+        480.0
+      ],
+      "widgets": 12
+    }
+  },
+  "sources": [
+    {
+      "id": [
+        1,
+        102,
+        93,
+        80,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        130
+      ],
+      "physics": null,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": [
+        1,
+        102,
+        93,
+        80,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        131
+      ],
+      "physics": null,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": [
+        1,
+        102,
+        93,
+        80,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        132
+      ],
+      "physics": null,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": [
+        1,
+        102,
+        93,
+        80,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        133
+      ],
+      "physics": null,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": [
+        1,
+        102,
+        93,
+        80,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        134
+      ],
+      "physics": null,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": [
+        1,
+        102,
+        93,
+        80,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        135
+      ],
+      "physics": null,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": [
+        1,
+        102,
+        93,
+        80,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        136
+      ],
+      "physics": null,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": [
+        1,
+        102,
+        93,
+        80,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        137
+      ],
+      "physics": null,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": [
+        1,
+        102,
+        93,
+        80,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        160
+      ],
+      "physics": null,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": [
+        1,
+        102,
+        93,
+        80,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        161
+      ],
+      "physics": null,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "tick": 1000
+}

@@ -1,0 +1,98 @@
+[
+  {
+    "argv": [
+      "cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "native-window,mobile-ffi",
+      "--lib"
+    ],
+    "exit_code": 0,
+    "seconds": 6.09689745799551,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/native-streaming-pcm-source-005/check-00.log"
+  },
+  {
+    "argv": [
+      "cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_game_runtime",
+      "--features",
+      "ui",
+      "--test",
+      "checkpoints",
+      "--test",
+      "restart"
+    ],
+    "exit_code": 0,
+    "seconds": 0.2074410830027773,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/native-streaming-pcm-source-005/check-01.log"
+  },
+  {
+    "argv": [
+      "cargo",
+      "clippy",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_game_player",
+      "--all-targets",
+      "--features",
+      "native-window,mobile-ffi",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "seconds": 0.9266413330042269,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/native-streaming-pcm-source-005/check-02.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "tools/check_runtime_dependencies.py",
+      "incant_game_runtime",
+      "incant_game_player",
+      "incant_script",
+      "--features",
+      "incant_game_player/render-input"
+    ],
+    "exit_code": 0,
+    "seconds": 0.49995449999551056,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/native-streaming-pcm-source-005/check-03.log"
+  },
+  {
+    "argv": [
+      "cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 1.305517750006402,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/native-streaming-pcm-source-005/check-04.log"
+  },
+  {
+    "argv": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 0.019678500000736676,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/native-streaming-pcm-source-005/check-05.log"
+  }
+]

@@ -1,0 +1,54 @@
+{
+  "format": "incant-native-observation",
+  "version": 1,
+  "entities": [
+    "01CSEN00000000000000000002"
+  ],
+  "checks": [
+    {
+      "name": "player survives",
+      "tick": 2156,
+      "expect": {
+        "type": "exists",
+        "entity": "01CSEN00000000000000000002",
+        "value": true
+      }
+    },
+    {
+      "name": "collected 01CSEN00000000000000000030",
+      "tick": 2156,
+      "expect": {
+        "type": "exists",
+        "entity": "01CSEN00000000000000000030",
+        "value": false
+      }
+    },
+    {
+      "name": "collected 01CSEN00000000000000000031",
+      "tick": 2156,
+      "expect": {
+        "type": "exists",
+        "entity": "01CSEN00000000000000000031",
+        "value": false
+      }
+    },
+    {
+      "name": "collected 01CSEN00000000000000000032",
+      "tick": 2156,
+      "expect": {
+        "type": "exists",
+        "entity": "01CSEN00000000000000000032",
+        "value": false
+      }
+    },
+    {
+      "name": "collected 01CSEN00000000000000000033",
+      "tick": 2156,
+      "expect": {
+        "type": "exists",
+        "entity": "01CSEN00000000000000000033",
+        "value": false
+      }
+    }
+  ]
+}

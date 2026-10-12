@@ -1,0 +1,22 @@
+{
+  "at": "2026-10-12T23:23:10.778575+00:00",
+  "result": "accepted_source_and_helper",
+  "source_freeze": "911499b2301635287403153082b07c9a7a1819de2deaefe17327af299618254c",
+  "helper_freeze": "a75dba347cbc7fda7dc02392a085d42ff75929b5f952baa03595bbbd9ecad7cb",
+  "helper_sha256": "2e2191ff7b94156ed601e24c0b88ac099f17a7f1114d83b4f72c4b781af438f4",
+  "prior_source_review": "4c8bcb1d9fcd6b9193db6bd60a5444550b1926f38ca9ddbbfb2420bde53b304c",
+  "source_followup": "Only encoder fixed-size chunks iterator changed; byte count/hash/IO semantics unchanged",
+  "helper_review": [
+    "Immutable copied source/controller and full2156tick route matched to prior package identity",
+    "Fresh ordinary native export and authoring/cache/maps/build removal verified",
+    "Prior full48k cap refusal, exact1000tick PCM/state/log prefix, new full route and repeat compare",
+    "Pickup/win chronology and1,724,800frames asserted",
+    "Preserves completed failed-observation diagnostic PCM; late no-clobber sentinel and missing-parent cleanup",
+    "No visual/GPU, credentials or user source mutations"
+  ],
+  "limits": [
+    "Actual fresh export/execution still pending",
+    "Platform error diagnostics scoped to this macOS run",
+    "No physical-device/performance/gate claim"
+  ]
+}

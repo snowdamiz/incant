@@ -1,0 +1,33 @@
+{
+  "root": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+  "sources": [
+    {
+      "path": "Cargo.lock",
+      "sha256": "c683157804a73bae6f7657f390e7d13e74283980b02d9b03e84b01bf1914131d"
+    },
+    {
+      "path": "crates/incant_game_player/Cargo.toml",
+      "sha256": "f2433709b8ed9a95cbacfd7bbabc340701aea8b2d4fa58f1908f95e041d70f7b"
+    },
+    {
+      "path": "crates/incant_game_player/src/lib.rs",
+      "sha256": "5cf9df067f0202d3807fd9a43266c89626ac3cbbc94103bfd7244f5ab1cbf049"
+    },
+    {
+      "path": "crates/incant_game_player/src/checkpoint.rs",
+      "sha256": "b5b4d891cf6593ec4922162b290aea71caa0ecfbfaab3f32dd0bd770172b2d2b"
+    },
+    {
+      "path": "crates/incant_game_player/src/pcm_output.rs",
+      "sha256": "e847911af4af865e73f233ebcdc2cded3074ab1d414cb340cf77a702bf7a3fcf"
+    },
+    {
+      "path": "crates/incant_game_player/src/pcm_output/tests.rs",
+      "sha256": "8e2732b48908de74c00311f65fc860b00f7f41ed2562522214220ce647a184d2"
+    },
+    {
+      "path": "crates/incant_game_player/src/pcm_output/tests/runner.rs",
+      "sha256": "4889eb9705e60dc1ce2cab8adfe4c0bf7a14b2660496a36440d90a247cba360e"
+    }
+  ]
+}

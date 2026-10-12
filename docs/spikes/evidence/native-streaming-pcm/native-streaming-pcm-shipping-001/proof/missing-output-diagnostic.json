@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/native-streaming-pcm-shipping-001/proof/package/player/incant_game_player",
+    "--package",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-streaming-pcm-shipping-001/proof/package/player/data",
+    "--ticks",
+    "2156",
+    "--input-recording",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-streaming-pcm-shipping-001/proof/old-bound-input.json",
+    "--observe",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-streaming-pcm-shipping-001/proof/old-bound-observe.json",
+    "--ui-viewport",
+    "640x480",
+    "--output",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-streaming-pcm-shipping-001/proof/absent/audio.pcm"
+  ],
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Error: Custom { kind: NotFound, error: PathError { path: \"/Users/andreyyurlov/.codex/incant-evidence/native-streaming-pcm-shipping-001/proof/absent/.incant-pcm-RdziCV\", err: Os { code: 2, kind: NotFound, message: \"No such file or directory\" } } }\n"
+}

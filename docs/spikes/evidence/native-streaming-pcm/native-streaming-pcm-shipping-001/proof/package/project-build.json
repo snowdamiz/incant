@@ -1,0 +1,103 @@
+{
+  "audio_clips": {
+    "01CSAS00000000000000000020": "4f31a36d777d5ce2702b9a5237742cc8a69efa73d7067afae35dff713cbb935f",
+    "01CSAS00000000000000000021": "b63a98f27758a1bb7f2a4ba44f4fb8d263230bf401520116b87e6946cdf56117",
+    "01CSAS00000000000000000022": "3d3e537168e5bf96036e6625c0b5d55b12cf122a4715f7e8d77baf937edc8c58",
+    "01CSAS00000000000000000023": "08b4d5af1f19e43c1c228d7c6ca243e8d2362f27f336f87a347cb697f6ebca28",
+    "01CSAS00000000000000000024": "4ecb37a4cf20667d8d7922971a3b609c1898cb988fb96bc0a3857546f3123c4e"
+  },
+  "cameras": [
+    "01CSEN00000000000000000003"
+  ],
+  "compiler": {
+    "bundleBytes": 11268,
+    "bundleSha256": "1a22a75d492daad58f8b0baab1813cb16d4687fc4cd13eeef6488458c10fd01a",
+    "compilers": {
+      "swc": "1.16.13",
+      "typescript": "5.9.3"
+    },
+    "format": "incant-native-typescript-project",
+    "limits": {
+      "bundleBytes": 1000000,
+      "fileBytes": 262144,
+      "mapBytes": 4194304,
+      "modules": 64,
+      "sourceBytes": 1048576
+    },
+    "mapBytes": 20420,
+    "mapSha256": "9ce8bd01f48bc6bb9cd5dd4bb0a392a9fdf302fdc9a4ebf88a9ddbecc579288a",
+    "modules": [
+      {
+        "bytes": 10108,
+        "path": "gameplay.ts",
+        "sha256": "58d7007de2cb942de4bf4c254b4d514deb07df15a88cb1b057cac30fbca393a5"
+      }
+    ],
+    "sourceBytes": 10108,
+    "sources": [
+      {
+        "id": "01CSSC00000000000000000001",
+        "path": "gameplay.ts"
+      }
+    ],
+    "trust": "fresh local source transform; no project code or configuration executed",
+    "version": 1
+  },
+  "font_assets": [
+    {
+      "fingerprint": "74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f",
+      "id": "01CSAS00000000000000000010"
+    },
+    {
+      "fingerprint": "efbee025bcb27036123566525a911cd346bbe425cceb413eb800661df6b65767",
+      "id": "01CSAS00000000000000000011"
+    },
+    {
+      "fingerprint": "04997af85ce1afe4180d11009cc2884dd84449b72338e7d095c96cf6462aeaee",
+      "id": "01CSAS00000000000000000012"
+    }
+  ],
+  "format": "incant-native-project-build",
+  "has_spatial_content": true,
+  "program": null,
+  "project_id": "01M4S2M8XK6DRA90HXGXY9SR1A",
+  "project_sha256": "443f32437090cb510278f11f4ae5da142d3028f074ad2ec91ce30b5c719fcb01",
+  "scene_id": "01CSSN00000000000000000001",
+  "scene_sha256": "77616abae7566eb37aa8f8591204966b3489a82359a402b0000a63253bab2551",
+  "startup_source_parsing": false,
+  "target": "aarch64-apple-darwin",
+  "tick_rate": 60,
+  "version": 1,
+  "visual_assets": [
+    {
+      "fingerprint": "1649bb952607a07a912661374fa6a8c104a261d625b339a5aa2e096f52970bec",
+      "id": "01CSAS00000000000000000001",
+      "kind": "model"
+    },
+    {
+      "fingerprint": "018d021c673a74b618fc3516d8ab4e64b32a88f6c8323d0d84395e684d811c13",
+      "id": "01CSAS00000000000000000002",
+      "kind": "model"
+    },
+    {
+      "fingerprint": "da2588e81cf9f61d9b06dec86cbf644e5322cdc48594af5c9ac4e9aa08a6e1ad",
+      "id": "01CSAS00000000000000000003",
+      "kind": "model"
+    },
+    {
+      "fingerprint": "b85f1046e4d28277bd6bb792cdcff4dc070268bb95b3b8040b697bbf7f631262",
+      "id": "01CSAS00000000000000000004",
+      "kind": "model"
+    },
+    {
+      "fingerprint": "ec9f2569b551d61c9552dd311c3190e9dd262c96b8823e1f3c3c04819811bf99",
+      "id": "01CSAS00000000000000000005",
+      "kind": "model"
+    },
+    {
+      "fingerprint": "5c2d2703c28f3deb6e566781de8833f45f442888602c7a72872b3ea7f5b141c8",
+      "id": "01CSAS00000000000000000006",
+      "kind": "texture"
+    }
+  ]
+}

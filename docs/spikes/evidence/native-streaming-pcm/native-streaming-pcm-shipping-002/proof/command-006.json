@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/native-streaming-pcm-shipping-001/proof/package/player/incant_game_player",
+    "--package",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-streaming-pcm-shipping-001/proof/package/player/data",
+    "--ticks",
+    "2156",
+    "--input-recording",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-streaming-pcm-shipping-002/proof/no-clobber-input.json",
+    "--observe",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-streaming-pcm-shipping-002/proof/no-clobber-observe.json",
+    "--ui-viewport",
+    "640x480",
+    "--output",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-streaming-pcm-shipping-002/proof/existing.pcm"
+  ],
+  "cwd": "/Users/andreyyurlov/.codex/incant-evidence/native-streaming-pcm-shipping-001/proof/package/player",
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Error: Os { code: 17, kind: AlreadyExists, message: \"File exists\" }\n"
+}

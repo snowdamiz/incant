@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0060/packages/f5-en-playing/player/incant_game_player",
+    "--package",
+    "/Users/andreyyurlov/.codex/incant-evidence/0060/packages/f5-en-playing/player/data",
+    "--ticks",
+    "2156",
+    "--input-recording",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-streaming-pcm-shipping-002/proof/old-bound-input.json",
+    "--observe",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-streaming-pcm-shipping-002/proof/old-bound-observe.json",
+    "--ui-viewport",
+    "640x480",
+    "--output",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-streaming-pcm-shipping-002/proof/old-bound.pcm"
+  ],
+  "cwd": "/Users/andreyyurlov/.codex/incant-evidence/0060/packages/f5-en-playing/player",
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Error: \"output frame bound\"\n"
+}

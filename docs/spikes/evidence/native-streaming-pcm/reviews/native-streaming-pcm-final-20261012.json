@@ -1,0 +1,39 @@
+{
+  "at": "2026-10-12T23:36:17.314018+00:00",
+  "reviewer": "astra root",
+  "verdict": "accepted bounded offline PCM writer and actual source-deleted shipping proof",
+  "audit_script_sha256": "68f1d37dc4d3bb27df113ad323377344afbc391fc1a979480f70ff0bda52071e",
+  "manifest_sha256": "9c3fd6457e0564977d067de4d8773591829da1e935175476ad952f24c848f666",
+  "source005_review": "9b3b1bfdd5fcfcc3699b02adf93142e93d3095450cd465c2e43da3bf498095ff",
+  "helper003_review": "Reviewed exact diff: four Rust Debug diagnostics, anchored random six-character tempfile name; no gameplay oracle or production weakening",
+  "method": [
+    "Read and executed read-only assertion auditor; no process, emulator, GPU or producer mutation",
+    "Verified raw and lossless retention hashes, original files, source005 and explicit helper003 delta against export freeze",
+    "Verified codegen, preserved source-deleted package and exact compiled player hash, unchanged original Claude fixture and prior player",
+    "Independently checked full/repeat and shared1000-tick state/log/PCM prefix, full route pickup/win observations and every finite sample",
+    "Checked precise no-clobber/IO refusal, diagnostic PCM, failed-output absence and temporary-file cleanup"
+  ],
+  "execution": {
+    "passed": true,
+    "manifest_sha256": "9c3fd6457e0564977d067de4d8773591829da1e935175476ad952f24c848f666",
+    "retained_artifacts": 85,
+    "source_inputs": 7,
+    "engine_inputs_unchanged": 1769,
+    "helper_delta_explicit": true,
+    "cpu_tests": 75,
+    "groups": 3,
+    "commands": 8,
+    "package_files": 36,
+    "player_bytes": 9533264,
+    "frames": 1724800,
+    "pcm_sha256": "7d5a10ee3eb4ae369ebf86b6aa6e60649a11cf6f805358ac665d5b713a7023bd",
+    "finite_samples": 3449600,
+    "nonzero_samples": 3449356
+  },
+  "findings": [],
+  "limits": [
+    "Derived output-buffer bound, not engine RSS or device memory measurement",
+    "PCM and checkpoint are separate create-only file transactions",
+    "No native-window/GPU/device/performance acceptance"
+  ]
+}

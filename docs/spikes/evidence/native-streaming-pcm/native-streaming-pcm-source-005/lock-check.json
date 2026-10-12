@@ -1,0 +1,9 @@
+{
+  "package_records": 963,
+  "changed_package": [
+    "incant_game_player",
+    "0.0.1"
+  ],
+  "added_edge": "sha2 0.10.9",
+  "all_resolutions_unchanged": true
+}
