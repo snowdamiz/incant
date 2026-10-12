@@ -16,6 +16,15 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Native window error preservation — locally verified
+
+After an error or explicit exit, the window host stops delivering game callbacks.
+Surface and IME cleanup still run, while the original typed failure takes precedence
+rather than being replaced by a later generic failed-session or cleanup error.
+The 57 player tests, native-window Clippy and source review pass; current-main
+integration is pending. This does not diagnose the original instrumented-process
+failure or change audio-overload behavior. [Scope and evidence](docs/spikes/native-window-terminal-errors.md).
+
 ## Native input corrections — main148 integration verified
 
 Text-field pointer release now focuses without submitting its value. Buttons
