@@ -20,6 +20,7 @@ fn node(source: Arc<RuntimeAsset>, id: &str, seconds: f64) -> SceneNode {
             cast_shadows: true,
             animation_blend: None,
             animation_pose: None,
+            animation_ik: None,
             animation: Some(incant_types::AnimationSample {
                 clip: Some(0),
                 seconds,
@@ -615,3 +616,6 @@ fn weighted_tree_consumer_uses_full_local_pose_and_refuses_inconsistent_bindings
     assert!(sample(&mut reusable, mesh).is_err());
     assert_eq!(reusable.globals(), before);
 }
+
+#[path = "animation_ik_tests.rs"]
+mod ik;

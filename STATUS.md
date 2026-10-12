@@ -16,6 +16,26 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Authored two-bone IK — connected CPU proof passed
+
+Bounded stable-ID constraints now bind actual cooked model topology/fingerprints,
+travel through v16 scene/v9 world saves, and expose owned TypeScript columns and
+atomic controls. The canonical CPU consumer applies ordered IK after animation
+sampling; unsupported sampled chains explicitly refuse with retained-input
+rollback. Unchanged extraction and preallocated pose/deformation tests allocate
+nothing, while moving targets replace one immutable slice per affected owner;
+measured allocation counts/bytes are recorded separately. All 643 affected CPU
+tests pass (82 GPU cases ignored), with Clippy, schema/SDK and runtime graph/target
+checks. The ordinary public exporter produced four fresh source/map/build-deleted
+player runs with exact save/PCM/log continuation and seven diagnostic-bound
+refusals. Independent source and final evidence reviews are accepted;
+coordinator intake remains pending.
+
+Renderer appearance/GPU/device budgets, edit-mode IK preview/authoring UI and
+Rust/Wasm IK controls remain open. Existing v1–v3 pose imports explicitly refuse
+IK; current-main integration must extend that guard and regression to v4.
+[Contract and evidence](docs/spikes/native-authored-ik.md).
+
 ## Ordinary offline audio session checkpoints — local CPU proof passed
 
 World v8/session v3 resume real static and streamed Kira voices alongside existing

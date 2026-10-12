@@ -195,6 +195,9 @@ impl CookedScene {
     pub fn has_text(&self) -> bool {
         !self.font_assets.is_empty() || !self.texts.is_empty()
     }
+    pub fn has_ik(&self) -> bool {
+        self.spatial.iter().any(|n| n.ik.is_some())
+    }
     pub fn has_animation_graphs(&self) -> bool {
         self.spatial
             .iter()
@@ -212,9 +215,9 @@ impl CookedScene {
             })
     }
     fn text_bytes(&self) -> usize {
-        if self.has_text() || self.has_ui() || self.has_animation_graphs() {
+        if self.has_text() || self.has_ui() || self.has_animation_graphs() || self.has_ik() {
             crate::text_binary::size(&self.font_assets, &self.texts)
-                + if self.has_ui() || self.has_animation_graphs() {
+                + if self.has_ui() || self.has_animation_graphs() || self.has_ik() {
                     crate::ui_binary::size(&self.ui)
                 } else {
                     0
@@ -278,7 +281,8 @@ impl CookedScene {
         &self.visual_assets
     }
     fn spatial_bytes(&self) -> usize {
-        usize::from(self.has_animation_graphs()) * 4
+        usize::from(self.has_ik()) * 4
+            + usize::from(self.has_animation_graphs() || self.has_ik()) * 4
             + usize::from(
                 self.has_text()
                     || !self.navigation.is_empty()

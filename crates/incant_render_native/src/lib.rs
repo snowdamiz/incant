@@ -93,13 +93,14 @@ pub enum UpdateKind {
 /// or the host explicitly constructs a new adapter. A published input can lag the
 /// native world after consumer rejection; synchronize again before drawing it as
 /// the current simulation frame.
-#[derive(Clone, Copy)]
+#[derive(Clone)]
 struct NumericUndo {
     world: DMat4,
     frame: u16,
     animation: Option<incant_runtime::AnimationSample>,
     animation_blend: Option<incant_runtime::AnimationBlendSample>,
     animation_pose: Option<incant_runtime::AnimationPoseSamples>,
+    animation_ik: Option<Arc<[incant_runtime::AnimationIkSample]>>,
 }
 
 pub struct NativeRenderInput {

@@ -117,6 +117,54 @@ fn sample(player: &mut AnimationPlayer, input: &MeshInput) -> std::result::Resul
     } else {
         player.sample(primary.clip, primary.seconds)?;
     }
+    if let Some(ik) = &input.animation_ik {
+        use incant_assets_runtime::animation::TwoBoneIk;
+        if ik.is_empty() || ik.len() > incant_types::MAX_ANIMATION_IK {
+            return Err(SceneError::Input("IK constraint count"));
+        }
+        let mut constraints = [TwoBoneIk {
+            root: 0,
+            middle: 1,
+            tip: 2,
+            target: [0.; 3],
+            pole: [0.; 3],
+            weight: 0.,
+        }; incant_types::MAX_ANIMATION_IK];
+        for (i, (out, c)) in constraints.iter_mut().zip(ik.iter()).enumerate() {
+            c.validate().map_err(SceneError::Input)?;
+            if ik[..i].iter().any(|old| old.id == c.id) {
+                return Err(SceneError::Input("duplicate IK constraint"));
+            }
+            *out = TwoBoneIk {
+                root: usize::from(c.chain[0]),
+                middle: usize::from(c.chain[1]),
+                tip: usize::from(c.chain[2]),
+                target: c.target,
+                pole: c.pole,
+                weight: c.weight,
+            };
+        }
+        player
+            .apply_two_bone_ik(&constraints[..ik.len()])
+            .map_err(|_| SceneError::Input("unsupported or degenerate sampled IK pose"))?;
+    }
+    Ok(())
+}
+pub(crate) fn validate_ik_capacity(input: &SceneInput) -> std::result::Result<(), SceneError> {
+    let mut count = 0usize;
+    for node in &input.nodes {
+        if let Some(ik) = node.mesh.as_ref().and_then(|m| m.animation_ik.as_ref()) {
+            if ik.is_empty() || ik.len() > incant_types::MAX_ANIMATION_IK {
+                return Err(SceneError::Input("IK constraint count"));
+            }
+            count = count
+                .checked_add(ik.len())
+                .ok_or(SceneError::Input("IK aggregate capacity"))?;
+            if count > incant_types::MAX_SCENE_ANIMATION_IK {
+                return Err(SceneError::Input("IK aggregate capacity"));
+            }
+        }
+    }
     Ok(())
 }
 pub(crate) fn resolve(
