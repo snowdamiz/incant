@@ -31,9 +31,9 @@ conventions also pass. Independent source review accepted the correction without
 findings; the final checks used those unchanged frozen inputs.
 [Machine-readable evidence](evidence/text-bidi-wrap.json).
 
-Claude0055 will verify the corrected layout through the canonical native text
-draw route. That rendered followup is pending, and this evidence does not claim
-complete Unicode conformance, full game UI/IME, device performance or a phase gate.
+Claude0055 accepted the corrected layout through the canonical native text
+draw route on its frozen macOS/Metal ci-profile build. This evidence does not
+claim complete Unicode conformance, full game UI/IME, device performance or a phase gate.
 
 A final repository portability correction retains the exact published CRLF
 license/fixture bytes and removes upstream Git LFS filters for the already
@@ -49,3 +49,27 @@ had a clean diff. The [portability receipt](evidence/text-bidi-wrap-portability.
 and [independent review](evidence/text-bidi-wrap-portability-review.json) cover
 that metadata-only follow-up; 88 original frozen inputs remain byte-identical,
 and the three differences are attributes and patch documentation.
+
+## Current main126 integration
+
+All reviewed library/vendor/regression inputs are unchanged. The only merge
+conflict was additive STATUS prose; current main lock edges are preserved.
+The integrated text and composed-render-input suites pass 77 CPU tests in
+20 groups, all-target Clippy, wasm32 compilation and dependency checks. The
+reviewed isolated physics-probe lock correction was then included without changing
+these compile inputs; all nine structural guards pass. Actual main synchronization
+preserves the resulting tested content. [Integration receipt and exact hashes](evidence/text-bidi-wrap-main126.json). The historical integration receipt correctly records Claude0055 as pending at
+that freeze; its later separate acceptance is recorded below.
+
+## Focused native acceptance
+
+Claude Opus 5.5 with explicitly verified Max effort personally reviewed native
+output from frozen routing commit `90fbb18037bf6b9440a3fb43048b52a02c309f73`.
+The 180/300-pixel cases retain interior spaces and all 250 non-whitespace glyphs;
+no new defect or source change was required. The packet records 127 Metal
+numerical tests, 63 CPU tests and 32 player tests, plus process cleanup.
+[Original Claude report](../../handoffs/0055-bidi-wrap-review/result.md) and
+[independent evidence review](evidence/text-bidi-wrap-native-review.json) retain
+exact source, player, data, logs and capture identities. This is the frozen
+macOS ci-profile build, not a current-main rerender, shipping/profile benchmark,
+phone result or complete Unicode/Game UI/IME/phase acceptance.

@@ -1,0 +1,54 @@
+{
+  "reviewed_utc": "2026-10-12T04:13:25.559736+00:00",
+  "reviewer": "astra/root",
+  "verdict": "accepted scoped native bidi correction evidence; visual judgment belongs to Claude",
+  "packet_commit": "23750e1bf6e32266181b25d70fe63fb55c45588b",
+  "routing_commit": "90fbb18037bf6b9440a3fb43048b52a02c309f73",
+  "tested_source": {
+    "head": "90fbb18037bf6b9440a3fb43048b52a02c309f73",
+    "tree": "d80276eaf4fa61bd318fd0af932a22db18316709",
+    "branch": "handoff/0055-bidi-wrap-review",
+    "clean_outside_packet": true,
+    "files": {
+      "Cargo.lock": "f6e26cf61a147b5bbc33a497ba111bd8071227932752aa1297762135f0eac6cd",
+      "Cargo.toml": "a3d2dddd4c22528fb90564d633d670e23c818c32ff5ddd9f943c47a67fbe3742",
+      "third_party/cosmic-text/src/shape.rs": "3f313fd311fe0a31c83360c9c9e2f35709cabc3b8891ef8066efd185fccb2edd",
+      "third_party/cosmic-text/INCANT_PATCH.diff": "d7a692da9d75df05e995c965132466002fb0fa1613ee676278a55923e08df466",
+      "crates/incant_text/tests/bidi_wrap.rs": "11383a54a0afec25dff55170ae52f67ece89c4a1697eab3b9aea2a1a9eec499e",
+      "crates/incant_render/src/text/text.wgsl": "e6925b0518fb941794c1f929a3a4f0cd752b7a00608448c6b7b292b63f3dae00",
+      "crates/incant_render/src/output.wgsl": "6ceefe2e706624f4fff93fab83fffc8e2938af514e3b2ce4e92a1389f11f6a8a"
+    },
+    "vendored_patch_check": "diff -u of the 4 changed files between ~/.cargo/registry/src/*/cosmic-text-0.14.2 (read only) and third_party/cosmic-text equals INCANT_PATCH.diff (whitespace-normalized); no other source file differs"
+  },
+  "model": "ACP explicitly verified claude-opus-5-5, Max before prompting",
+  "artifact_count": 52,
+  "verified_test_counts": {
+    "test-cpu-text.txt": 63,
+    "test-render-gpu.txt": 122,
+    "test-gpu-host.txt": 5,
+    "test-player-window.txt": 32
+  },
+  "identities_sha256": "254cbc6f9e55aec0234a682ee36ea0148c019a2560f99ac500df2cc1920628f3",
+  "result_sha256": "c6dbcf1c3892abc15fd9888d1cb13c20ec34fe316d361a04cbbd32770e66c742",
+  "release_sha256": "6433fe9ef24688d85d7b12ba6e1bfb70dd61d225df8a5e07da90b8e6f2f53ab6",
+  "player": {
+    "profile": "ci (inherits release, opt-level 1)",
+    "features": "project,native-window",
+    "sha256": "3b6e2294b4be42b38677d94debd1b96b75a2f114e18041f63dc2d5ceccc928f8",
+    "bytes": 29803888,
+    "signed": false,
+    "built": "/tmp/incant-agent-native-target/ci/incant_game_player",
+    "copies": {
+      "wrap": "/private/tmp/incant0055/pkg/wrap/player/incant_game_player",
+      "narrow": "/private/tmp/incant0055/pkg/narrow/player/incant_game_player"
+    }
+  },
+  "root_review": "Read report, authoring/build/probe/collection/window ownership tools and numerical layout evidence; independently verified all recorded source, test-log, capture/crop, package/data and player hashes. Root did not view or judge pixels. No production source changed. Twelve CPU layout reports preserve every non-whitespace cluster and interior space; bounded mixed-direction regression lines fit.",
+  "claude_visual_verdict": "No new defect; original mixed-direction dropped-space/overflow fixed at180/300px, real native windows agree with CPU reference,250 nonwhitespace glyphs retained, four oracle mutations caught.",
+  "processes": "Root ACP41362 terminal0/reaped; packet release marker present; owned native/GPU/target lease released.",
+  "limitations": [
+    "Frozen macOS/Metal ci-profile ordinary package/window source, not current-main rerender.",
+    "No shipping profile/device/frame pacing/full Unicode or full Game UI/IME/phase gate.",
+    "Word or single-glyph oversize permitted; Hebrew deliberately uses missing-glyph fallback."
+  ]
+}
