@@ -16,6 +16,15 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## macOS native text retirement — local crash regression repaired
+
+The managed input client now avoids an AppKit view-destructor callback into
+already-dropped Rust state. The original invisible-window probe aborts; the
+fixed source passes 768 actual contexts and 256 stale-owner checks, all 126
+affected CPU tests, Clippy and independent source review. Integration and fresh
+visible typing/IME acceptance remain pending. The same regression is added to
+comprehensive macOS CI. [Repair and evidence](docs/spikes/macos-text-retirement.md).
+
 ## Public Wasm complete animation poses — local host and package proofs passed
 
 The Rust SDK now reads complete v4 pose frames with stable scene/entity identity,
