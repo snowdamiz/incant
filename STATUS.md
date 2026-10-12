@@ -22,8 +22,11 @@ Frozen PR #111 selects main110 and remains unpromoted. Three native physics jobs
 exposed a stale isolated probe lock edge; the reviewed one-edge correction and
 required-dependency guard pass local locked Cargo/Clippy and tooling checks.
 Actual hosted confirmation is pending the next deliberate candidate refresh.
-A separate desktop observation-routing failure is being repaired independently.
-[Retained failure and correction evidence](docs/spikes/checkpoint6-probe-lock.md).
+The independent fresh observation-routing correction restores the precise
+pre-startup refusal while preserving absolute checkpoint-resume bounds; its
+unchanged process regression, 36 scoped tests and Clippy pass.
+[Lock evidence](docs/spikes/checkpoint6-probe-lock.md),
+[routing evidence](docs/spikes/checkpoint6-player-routing.md).
 
 ## Current milestone
 
@@ -41,8 +44,9 @@ login and usage. Both follow-up UI fixes passed focused native rechecking.
 Parallel work connects native animation clocks, scripting and rendering, and
 checks cooked shaders. Complete game UI/text input, remaining SDK/render features,
 the Core Sample and reference-device measurements still prevent a Phase 1
-completion claim. The native editor integration is merged in PR #109. Cooked shaders are the next
-reviewed publication candidate; native animation integration remains local.
+completion claim. The native editor integration is merged in PR #109 and opt-in cooked shaders in
+PR #110. Native animation integration remains local pending its focused native
+review correction; full release checkpoint6 failures are being repaired.
 
 Progress reports are scheduled approximately every 30 minutes while the goal is
 active. Report merged work separately from local checks and unmet exit gates.
