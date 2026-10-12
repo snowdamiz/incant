@@ -81,6 +81,17 @@ class RegistryTests(unittest.TestCase):
     def test_navigation_path_imports_append_without_changing_prior_contract(self):
         import hashlib
         self.assertEqual(hashlib.sha256(json.dumps(self.data['functions'][:36],sort_keys=True).encode()).hexdigest(), 'fa2e3ec7dde134d5458c49a49fbbd98ad9e2964690a9e7f69e343bd12676e5b1')
-        self.assertEqual([(f['name'],f['opcode']) for f in self.data['functions'][36:]], [('find_path',36),('find_grid_path',37),('read_path',38)])
+        self.assertEqual([(f['name'],f['opcode']) for f in self.data['functions'][36:39]], [('find_path',36),('find_grid_path',37),('read_path',38)])
         size=lambda name: sum(generator.SIZES[t]*(n[0] if n else 1) for _,t,*n in self.data['records'][name])
         self.assertEqual([size(n) for n in ('PathRequest','GridPathRequest','PathResultHeader','PathPoint','PathTraversal','GridPathResultHeader','GridPathCell')], [80,40,32,24,32,24,8])
+
+    def test_physics_preserves_every_published_operation_and_record(self):
+        import hashlib
+        prior = {'functions': (39, 'e0d4a885e49771e5daa50a01df376190db803ea0ec6d1d1c9227f906cd38b827'), 'constants': (66, '9e783e73163b4113bbb31feffe5e184660f7e32c1c9224060c7c0d9c22efccef'), 'magic': (16, '8e27ae4ba830e36b9a78910acb43e108b8945cfeb7fa3cf46bba42e804e84aa1'), 'enums': (9, '8af90a2e8f963fee749b2c02742ef375ee6c1c522f823534b44d79f86560dcae'), 'records': (36, 'bc13e394043f8a4c6ae4e0f96445f2bc93c1543978c55fc4c1c0a38bb5e6b3f4'), 'namespaces': (10, '642193b37901f7992fabdf53d9d6badb7e68482955ce0b42222f4522d25a7c00')}
+        for name, (length, digest) in prior.items():
+            value=self.data[name]
+            prefix=value[:length] if isinstance(value,list) else dict(list(value.items())[:length])
+            self.assertEqual(hashlib.sha256(json.dumps(prefix,sort_keys=True).encode()).hexdigest(),digest,name)
+        self.assertEqual([(f['name'],f['opcode']) for f in self.data['functions'][39:]], [('query_batch',39),('trigger_events',40),('read_result',41)])
+        size=lambda name: sum(generator.SIZES[t]*(n[0] if n else 1) for _,t,*n in self.data['records'][name])
+        self.assertEqual([size(n) for n in ('PhysicsHeader','PhysicsQuery','PhysicsRow','PhysicsEvent','PhysicsEventHeader')],[16,112,96,40,32])

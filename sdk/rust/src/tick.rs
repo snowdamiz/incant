@@ -58,6 +58,87 @@ impl<'tick> Tick<'tick> {
     fn ready(&mut self) -> Result<()> {
         self.check(Ok(()))
     }
+    /// Up to 64 heterogeneous queries over the committed solvers. Results retain
+    /// input order and borrow only result scratch, never the Tick or native data.
+    pub fn query_physics<'a>(
+        &mut self,
+        queries: &[crate::physics::Query],
+        request_scratch: &mut [u8],
+        result_scratch: &'a mut [u8],
+    ) -> Result<crate::physics::Results<'a>> {
+        self.ready()?;
+        self.check(if queries.len() <= abi::PHYSICS_MAX_BATCH {
+            Ok(())
+        } else {
+            Err(Error::Bounds)
+        })?;
+        let mut rows = [crate::physics::EMPTY; abi::PHYSICS_MAX_BATCH];
+        for (to, from) in rows.iter_mut().zip(queries) {
+            *to = from.wire();
+        }
+        let len = self.check(
+            abi::physics::encode_batch(&rows[..queries.len()], request_scratch)
+                .map_err(crate::physics::error),
+        )?;
+        // SAFETY: the complete initialized request is copied synchronously.
+        let len = unsafe {
+            raw::incant_physics_v1_query_batch(
+                self.epoch,
+                request_scratch.as_ptr() as usize as i32,
+                len as i32,
+            )
+        };
+        let len = self.read_physics_reply(len, result_scratch, abi::PHYSICS_MAX_RESULT_BYTES)?;
+        let result = self.check(
+            abi::physics::decode_results(&result_scratch[..len]).map_err(crate::physics::error),
+        )?;
+        self.check(
+            if result.len() == queries.len()
+                && result.iter().zip(&rows).all(|((r, _), q)| r.kind == q.kind)
+            {
+                Ok(())
+            } else {
+                Err(Error::Malformed)
+            },
+        )?;
+        Ok(crate::physics::Results(result))
+    }
+    /// Complete sorted enter/exit events from the last committed step. Reading
+    /// is nondestructive, bounded, and shares the native query/transfer quotas.
+    pub fn physics_events<'a>(
+        &mut self,
+        dimension: crate::physics::Dimension,
+        scratch: &'a mut [u8],
+    ) -> Result<crate::physics::Events<'a>> {
+        self.ready()?;
+        // SAFETY: scalar selector only; the host retains its copied reply.
+        let len = unsafe { raw::incant_physics_v1_trigger_events(self.epoch, dimension.wire()) };
+        let len = self.read_physics_reply(len, scratch, abi::PHYSICS_MAX_EVENT_BYTES)?;
+        let result = self
+            .check(abi::physics::decode_events(&scratch[..len]).map_err(crate::physics::error))?;
+        self.check(if result.dimension as i32 == dimension.wire() {
+            Ok(())
+        } else {
+            Err(Error::Malformed)
+        })?;
+        Ok(crate::physics::Events(result))
+    }
+    fn read_physics_reply(&mut self, len: i32, scratch: &mut [u8], limit: usize) -> Result<usize> {
+        let len = self.snapshot_length(len, scratch.len(), limit)?;
+        // SAFETY: checked initialized destination prefix; no native pointer.
+        let actual = unsafe {
+            raw::incant_physics_v1_read_result(
+                self.epoch,
+                scratch.as_mut_ptr() as usize as i32,
+                len as i32,
+            )
+        };
+        self.check(if usize::try_from(actual).ok() == Some(len) {
+            Ok(len)
+        } else {
+            Err(Error::Malformed)
+        })
+    }
     /// Find an owned-copy path on the active scene's committed navmesh. A miss
     /// returns None; invalid owners/requests and exhausted budgets reject the tick.
     pub fn find_path<'a>(

@@ -1,0 +1,470 @@
+{
+  "at": "2026-10-12T13:24:36.953137+00:00",
+  "base": "524595bad41ab00c15fa6e46ba8df7ce6033e1a9",
+  "branch": "codex/native-wasm-physics-queries",
+  "plan_sha256": "c60adc7457e6f5929b3430876f6b8ea02acffce5bf55fbaae9090933fe4aab6c",
+  "cargo_lock_sha256": "77809a6a0b2ee2f932a12c62abf242bb109885ed320f1f26d263c5b82c7e72c1",
+  "source_hashes": {
+    "crates/incant_runtime/src/physics_queries.rs": "cff88b176b3a8a2b4bf1838127255d1cd160f9b2da9bd9e6a812d21350d61d27",
+    "crates/incant_wasm_abi/src/lib.rs": "0835946ea91a798e15372a9044650b6ff9518a19f0253e705d119f0b69a24efb",
+    "crates/incant_wasm_abi/src/physics.rs": "e37093d0c5b0532888f1f356d6f1cdfa1339e83a2fa7dfbc3fd48e874ba58064",
+    "crates/incant_wasm_dev/src/generated.rs": "d6ff53ae493e3e9c55264e2001ae738a6820543a95c405790383f533ba6da42d",
+    "crates/incant_wasm_dev/src/host.rs": "f5aa0e80ce37593a9e4d563a65709f9da839717dfd5c90ae6d31663e7d9ba481",
+    "crates/incant_wasm_runtime/c/generated.h": "fe4faa509787340e61ca2f42c20b27246aceb21af4d089443a44711f6393a60e",
+    "crates/incant_wasm_runtime/c/generated.inc": "08fd6687966978c861eea38d3dad2569205af2668254f62123f369c6c1f08807",
+    "crates/incant_wasm_runtime/src/capability.rs": "8e2051a10aa1f4dcac17a3de843a136da11879ea90d4429f9e64e9229d47521a",
+    "crates/incant_wasm_runtime/src/compiled.rs": "e8bc8fe5baf23bdb8942efcbd0b93660921302a624fa0f9af70b9af316c88758",
+    "crates/incant_wasm_runtime/src/generated.rs": "36f88faa1df05af31884849d274071cb7e4ef6f578f7b6e6ab5709d0ffa3639c",
+    "crates/incant_wasm_runtime/src/input_tags.rs": "3134365727ea47be362ae432e286cf01bf0ede18552172ab3a056ee26f2ea2b6",
+    "crates/incant_wasm_runtime/src/lib.rs": "486db51003cd66a38e7ebdcde535c3e7a9c31ac7e95592e840db4cb19b79872a",
+    "crates/incant_wasm_runtime/src/physics_queries.rs": "bb88cda4b8ea6d2a8b7b89dba1e1d754f8519cdb0c88642b442b53b54c515cea",
+    "sdk/abi/native-v1.json": "5176cdc3d29c1b8184e1a69f8bd4fdf44caaa8d7d282378596351410fbf25eaf",
+    "sdk/rust/src/lib.rs": "d191a7a6a8dbc4e193c64df59ce1c09b977da300358466744eb55d4c0f840ad6",
+    "sdk/rust/src/physics.rs": "9daecf44e1046dbfb34c7f124dc882c471afb0d0b980ebc9724ba2e1d1b79cbc",
+    "sdk/rust/src/raw.rs": "0349a6b5ab9599537662d512931180c05afcefe7a47ab9a80da9f75f942614b8",
+    "sdk/rust/src/tick.rs": "f96f8925c505a51714fa6277d690c273a88f799f6b8481c5e32a20ad2d935cd6",
+    "tools/generate_wasm_sdk.py": "8b0e17222774b20cefbc261b685475d0340a3c3547bf7bab84b89ca3fa77ef0a",
+    "tools/wasm_abi.py": "e62bc3faa621e7ae3d1f19d506e0489b3d7568621f945fde98b95ec8c6cb6b42"
+  },
+  "test_probe_hashes": {
+    "crates/incant_wasm_abi/tests/physics.rs": "7ba32acab05ceb2c9f38ae7afa5b2c15319285431dc193f065497515742367fb",
+    "crates/incant_wasm_runtime/tests/physics_queries.rs": "a3bafc0695072c08aae23d7f14dedb086be1f4ce2a71c4a6dd78b525671d57b8",
+    "crates/incant_wasm_runtime/tests/support/physics.rs": "fcdda6e3cd2085e4a99460f3b716999ac48fe7210eb1d72d6d1dac7aa6817cd9",
+    "crates/incant_wasm_dev/tests/physics_parity.rs": "c1a27a27e1a81fb22b25e75d392bc95e9bd9ba19211d9e4e7cd89a60916a6ce3",
+    "crates/incant_wasm_runtime/fixtures/physics-queries.wat": "cafde6270aa0c2e9db38a3857ada7efa93e0e21a18587ca8e432beccf6174571",
+    "sdk/rust/samples/physics.rs": "17a24fd76fc82df2e78c81431eacdd521e0e6ea9321e89c0ac68bfa51b588bf0",
+    "sdk/rust/fixtures/physics_failure.rs": "6bda16e333cbf4baedf6c98f29528dcc437e9a1369435b57d7efd4420fd89243",
+    "tools/probes/shipping-wasm2c.py": "09139ad10d8a5b22c7a13dd7b3b3bd48c53da92fbcf8a02e48cfd500f3601930",
+    "tools/tests/test_wasm_sdk.py": "9b0d9452bac797d3fb1a607f126cb71641564da166c9eefc79c3ba768b1699ce"
+  },
+  "checks": {
+    "actual_hosts": {
+      "passed": 382,
+      "groups": 67,
+      "failed": 0,
+      "ignored": 0
+    },
+    "native_runtime": {
+      "passed": 190,
+      "groups": 29,
+      "failed": 0,
+      "ignored": 0
+    },
+    "actual_host_all_target_clippy": true,
+    "native_runtime_all_target_clippy": true,
+    "existing_development_processes": 3,
+    "python_tests": 233,
+    "python_skipped": 4,
+    "node_tests": 22,
+    "wire_and_shared_tests": 10,
+    "runtime_and_sdk_wasm32": true,
+    "generated_registry_and_conventions": true,
+    "fmt_and_diff": true,
+    "authoring_free_runtime_graph_with_static_player": true,
+    "shipping_graph_excludes_wasmtime_and_cook": true
+  },
+  "prepared_modules": 140,
+  "prepared_files_verified_before_cleanup": 701,
+  "physics_guest_modules": 15,
+  "physics_retained_artifacts_verified": 75,
+  "physics_guest_source_copies_verified": 3,
+  "proof": {
+    "root": "/tmp/incant-wasm-physics-host-proof-003",
+    "report": "docs/spikes/evidence/native-wasm-physics-queries/conformance-result.json",
+    "private_build_cleanup": "TemporaryDirectory removed after conformance. Retained physics-guests intentionally preserved for independent audit. Interrupted proof002 inputs remain preserved. Not an ordinary shipping package deletion proof."
+  },
+  "commands": {
+    "environment": {
+      "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+      "CARGO_TARGET_DIR": "/tmp/incant-agent-font-target"
+    },
+    "conformance": [
+      "python3",
+      "tools/probes/shipping-wasm2c.py",
+      "/tmp/incant-wasm-physics-host-proof-003",
+      "--rustup",
+      "/opt/homebrew/bin/rustup",
+      "--profile",
+      "ci",
+      "--conformance-only"
+    ],
+    "nested_actual_host_commands": [
+      {
+        "command": [
+          "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/tools/cargo",
+          "test",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant-module",
+          "-p",
+          "incant_wasm_abi",
+          "-p",
+          "incant_wasm_runtime",
+          "-p",
+          "incant_wasm_cook",
+          "-p",
+          "incant_wasm_dev",
+          "-p",
+          "incant_wasm_player",
+          "-p",
+          "incant_game_runtime",
+          "-p",
+          "incant_script",
+          "--features",
+          "incant_wasm_dev/static-conformance,incant_wasm_player/fixture,incant_script/compiler",
+          "--locked"
+        ],
+        "exit_code": 0,
+        "log": "conformance-0.log",
+        "sha256": "b76d24b391d9bbffe3e24da2d627260ed044def84790b6826a64fc1a0d8c6aff"
+      },
+      {
+        "command": [
+          "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/tools/cargo",
+          "clippy",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant-module",
+          "-p",
+          "incant_wasm_abi",
+          "-p",
+          "incant_wasm_runtime",
+          "-p",
+          "incant_wasm_cook",
+          "-p",
+          "incant_wasm_dev",
+          "-p",
+          "incant_wasm_player",
+          "-p",
+          "incant_game_runtime",
+          "-p",
+          "incant_script",
+          "--features",
+          "incant_wasm_dev/static-conformance,incant_wasm_player/fixture,incant_script/compiler",
+          "--all-targets",
+          "--locked",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "exit_code": 0,
+        "log": "conformance-1.log",
+        "sha256": "2a1f429c261cfbb246f0dacab99541db959584e043203a4128fa7bdb461df728"
+      },
+      {
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/tools/probes/development-wasm.py",
+          "/private/tmp/incant-wasm-physics-host-proof-003/development",
+          "--rustup",
+          "/opt/homebrew/bin/rustup",
+          "--static-conformance",
+          "--profile",
+          "ci"
+        ],
+        "exit_code": 0,
+        "log": "conformance-2.log",
+        "sha256": "b81020a7d4dff856a63d3246869c024fc7ae4a0a17c2bd0f9f31fb84bc62e624"
+      }
+    ],
+    "final_checks": [
+      {
+        "name": "native-tests",
+        "command": [
+          "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/tools/cargo",
+          "test",
+          "--locked",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant_runtime"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/incant-wasm-physics-native-tests-final.log"
+      },
+      {
+        "name": "native-clippy",
+        "command": [
+          "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/tools/cargo",
+          "clippy",
+          "--locked",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant_runtime",
+          "--all-targets",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/incant-wasm-physics-native-clippy-final.log"
+      },
+      {
+        "name": "wasm32",
+        "command": [
+          "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/tools/cargo",
+          "check",
+          "--locked",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant_wasm_runtime",
+          "-p",
+          "incant-module",
+          "--target",
+          "wasm32-unknown-unknown"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/incant-wasm-physics-wasm32-final.log"
+      },
+      {
+        "name": "graph",
+        "command": [
+          "python3",
+          "tools/check_runtime_dependencies.py",
+          "incant_runtime",
+          "incant_wasm_runtime",
+          "incant_wasm_player",
+          "incant_game_player",
+          "--features",
+          "incant_game_player/static-module"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/incant-wasm-physics-graph-final.log"
+      },
+      {
+        "name": "shipping-tree",
+        "command": [
+          "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/tools/cargo",
+          "tree",
+          "--locked",
+          "-p",
+          "incant_game_player",
+          "--features",
+          "static-module",
+          "--edges",
+          "normal",
+          "--prefix",
+          "none"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/incant-wasm-physics-shipping-tree-final.log"
+      },
+      {
+        "name": "fmt",
+        "command": [
+          "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/tools/cargo",
+          "fmt",
+          "--all",
+          "--",
+          "--check"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/incant-wasm-physics-fmt-final.log"
+      },
+      {
+        "name": "generated",
+        "command": [
+          "python3",
+          "tools/generate_wasm_sdk.py",
+          "--check"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/incant-wasm-physics-generated-final.log"
+      },
+      {
+        "name": "conventions",
+        "command": [
+          "python3",
+          "tools/generate_conventions.py",
+          "--check"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/incant-wasm-physics-conventions-final.log"
+      },
+      {
+        "name": "diff",
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exit_code": 0,
+        "log": "/tmp/incant-wasm-physics-diff-final.log"
+      }
+    ]
+  },
+  "review": {
+    "status": "production freeze002 accepted by independent root review; final evidence review pending"
+  },
+  "logs": {
+    "docs/spikes/evidence/native-wasm-physics-queries/conformance-0.log.gz": {
+      "sha256": "2a1732228155e58c984e15be633459c74f9789aa4b41d01755f35680beb85f4d",
+      "uncompressed_sha256": "b76d24b391d9bbffe3e24da2d627260ed044def84790b6826a64fc1a0d8c6aff",
+      "source": "/tmp/incant-wasm-physics-host-proof-003/conformance-0.log"
+    },
+    "docs/spikes/evidence/native-wasm-physics-queries/conformance-1.log.gz": {
+      "sha256": "55440ee4e59a897fc1408b0417f8ed26824381729bafa48612d74d876e7c26ba",
+      "uncompressed_sha256": "2a1f429c261cfbb246f0dacab99541db959584e043203a4128fa7bdb461df728",
+      "source": "/tmp/incant-wasm-physics-host-proof-003/conformance-1.log"
+    },
+    "docs/spikes/evidence/native-wasm-physics-queries/conformance-2.log.gz": {
+      "sha256": "6638fb08fa0564598c41f18eb425c63c542b66fd2b3902a3eed20908f99368d9",
+      "uncompressed_sha256": "b81020a7d4dff856a63d3246869c024fc7ae4a0a17c2bd0f9f31fb84bc62e624",
+      "source": "/tmp/incant-wasm-physics-host-proof-003/conformance-2.log"
+    },
+    "docs/spikes/evidence/native-wasm-physics-queries/cook-build.log.gz": {
+      "sha256": "0afeeefd0789252fa491a456c06a976a2b597ebcdcdf1599c5b4edf3cb2a0587",
+      "uncompressed_sha256": "1515cac16fb6cd75f90d29d52b86958b2a4ce81086cf776e37f12739be9e432d",
+      "source": "/tmp/incant-wasm-physics-host-proof-003/cook-build.log"
+    },
+    "docs/spikes/evidence/native-wasm-physics-queries/native-tests.log.gz": {
+      "sha256": "71a82c36c3da0a4c94561aa545d75d19c6c74e100f415a5670ee0ed2be8c523a",
+      "uncompressed_sha256": "561f5921776ddfa58d438a482f94e320da31d8a87c54ea2ad47ceb1ad1eb0f0e",
+      "source": "/tmp/incant-wasm-physics-native-tests-final.log"
+    },
+    "docs/spikes/evidence/native-wasm-physics-queries/native-clippy.log.gz": {
+      "sha256": "60a32b2954ed9d3b20981665fecc55f5f8df348f6d1876ba9ffb4c090ffda5da",
+      "uncompressed_sha256": "ce0d1b31b2d09dbf6101dc1a289f53a87624fe20301f591ddaa3153704bc6ba5",
+      "source": "/tmp/incant-wasm-physics-native-clippy-final.log"
+    },
+    "docs/spikes/evidence/native-wasm-physics-queries/wasm32.log.gz": {
+      "sha256": "db126bd72016698aa603eb0d7181174cc4f657459530a1408b733550d44ac173",
+      "uncompressed_sha256": "80b8e4b5b842bc80f57286690cbef3cdf4d0d4134cb0dbeb83403252e16afd3a",
+      "source": "/tmp/incant-wasm-physics-wasm32-final.log"
+    },
+    "docs/spikes/evidence/native-wasm-physics-queries/graph.log.gz": {
+      "sha256": "5e7a9b499b10f0f7ce2024ffbd9cb6f06a04c03db2bc713390a4222eb387b490",
+      "uncompressed_sha256": "4819cd767b786d453665aa411520368623f23374d113cb0595aff968e31ea7e4",
+      "source": "/tmp/incant-wasm-physics-graph-final.log"
+    },
+    "docs/spikes/evidence/native-wasm-physics-queries/shipping-tree.log.gz": {
+      "sha256": "e480f0830d06dc9d6669f982c30af62785afd61cd49caf67899f53f4ad922aea",
+      "uncompressed_sha256": "2d77886b2554a1f46ee9950a3962152c324b85a20a87680e4b8f6dd915606943",
+      "source": "/tmp/incant-wasm-physics-shipping-tree-final.log"
+    },
+    "docs/spikes/evidence/native-wasm-physics-queries/fmt.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/tmp/incant-wasm-physics-fmt-final.log"
+    },
+    "docs/spikes/evidence/native-wasm-physics-queries/generated.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/tmp/incant-wasm-physics-generated-final.log"
+    },
+    "docs/spikes/evidence/native-wasm-physics-queries/conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/tmp/incant-wasm-physics-conventions-final.log"
+    },
+    "docs/spikes/evidence/native-wasm-physics-queries/diff.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/tmp/incant-wasm-physics-diff-final.log"
+    },
+    "docs/spikes/evidence/native-wasm-physics-queries/boundary-tests.log.gz": {
+      "sha256": "def205354e06649aac4f569fb1bebea003403efd2de53f8205cbd4d9cf1432ec",
+      "uncompressed_sha256": "be4b5c94f41a149346c9ab76ec2f93fd54311ca3d3dd7bfd01d52c9dffede3c4",
+      "source": "/tmp/incant-wasm-physics-boundary-003.log"
+    },
+    "docs/spikes/evidence/native-wasm-physics-queries/tools.log.gz": {
+      "sha256": "f768fdfda50dc5acfed3d38d08883590049b487787d17092677bd1798c7f7d23",
+      "uncompressed_sha256": "d599e925db89d33c5f622b09513d438d607f7ba037e2c68e218845b52a7c40fa",
+      "source": "/tmp/incant-wasm-physics-tools-002.log"
+    },
+    "docs/spikes/evidence/native-wasm-physics-queries/node.log.gz": {
+      "sha256": "2527a91d7a3ea9fe6a1c39f8a174e01cfeb9a89b971f4af9da98ac243aed5964",
+      "uncompressed_sha256": "a9c368de5c0ae7b284dcbaee1d1a9cbb632c3f03e36442054020a230466b45ee",
+      "source": "/tmp/incant-wasm-physics-node-002.log"
+    },
+    "docs/spikes/evidence/native-wasm-physics-queries/registry.log.gz": {
+      "sha256": "0295c2214f84165f1a295573075e52ca8a825f95adc35657df4ccef6c32f8dea",
+      "uncompressed_sha256": "d3dbc606baadd942a9789fa4ea11b857a1e4864567840aaab1ccb605da5dfa30",
+      "source": "/tmp/incant-wasm-physics-registry-002.log"
+    },
+    "docs/spikes/evidence/native-wasm-physics-queries/old-initial-clippy-failure.log.gz": {
+      "sha256": "19291b0797059af897ff290c75913544a096eff6a8bee1de3bf61e496d511132",
+      "uncompressed_sha256": "4f95c8b274f9d442107edc15f1a3837e0ba53fa842b1d94faebbe5353d86a2d2",
+      "source": "/tmp/incant-wasm-physics-clippy-001.log"
+    },
+    "docs/spikes/evidence/native-wasm-physics-queries/old-raw-fixture-order-failure.log.gz": {
+      "sha256": "51a2b4dfead98fc843aa3a48bf68067a2327d158b3b0ae8b6b406172d49801f8",
+      "uncompressed_sha256": "6b7769d48e8f9f0f1a08f3249adc7dd74ab47e21c0ba5f4ff7f74cc05ee0adc9",
+      "source": "/tmp/incant-wasm-physics-host-proof-001/conformance-0.log"
+    },
+    "docs/spikes/evidence/native-wasm-physics-queries/old-interrupted-tests.log.gz": {
+      "sha256": "b466010a32ee74b8f692f4c173a19feb7db4d2e2f72edefffc1a01b671391234",
+      "uncompressed_sha256": "a037dc6dec318a3e123d416d5ce1d214d34f3cf0ba8698bf2c004cba4e38f4c3",
+      "source": "/tmp/incant-wasm-physics-host-proof-002/conformance-0.log"
+    },
+    "docs/spikes/evidence/native-wasm-physics-queries/old-interrupted-clippy.log.gz": {
+      "sha256": "66a4ba83a47260f28bfd3bc5c6abf8aace6a02b6f021ae188b71301c1fb3ebf5",
+      "uncompressed_sha256": "85e2802c5817667c30ddb6b3b8cebd3379a1648716c8aea5298ba4ac4eb3c42d",
+      "source": "/tmp/incant-wasm-physics-host-proof-002/conformance-1.log"
+    }
+  },
+  "receipts": {
+    "docs/spikes/evidence/native-wasm-physics-queries/conformance-result.json": {
+      "sha256": "b8c7e09016457d8f5643d00b7e9c00542e3d37a312a7497e712da31c3650a230",
+      "source": "/tmp/incant-wasm-physics-host-proof-003/conformance-result.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-queries/prepared-manifest.json": {
+      "sha256": "ebe7889da6267a2348adfd75448fcd71eb71f68d1e2c113ab66da97f6be7d8b4",
+      "source": "/tmp/incant-wasm-physics-host-proof-003/prepared-manifest.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-queries/rust-sdk.json": {
+      "sha256": "6215fa117d1766546406beb19ddfd089a59b598dbba721304c26d04bfcf32317",
+      "source": "/tmp/incant-wasm-physics-host-proof-003/rust-sdk.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-queries/independent-prepared-verification.json": {
+      "sha256": "0b8a283b786e2a3443c3b7cc171710a9308b8eb3de9f5ec9b3f797e2bc2c1e8d",
+      "source": "/tmp/incant-wasm-physics-host-proof-003/independent-prepared-verification.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-queries/root-source-review-002.json": {
+      "sha256": "a1a82788a2a98630b8fa08cf6120cc04ceec0eb3d95af1861faa3f3fe05ec921",
+      "source": "/tmp/incant-wasm-physics-root-source-review-002.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-queries/production-freeze-001.json": {
+      "sha256": "7d7c8bdfdafd31d0813ff52d11a06da02fea0e60ca836b0e5faceaa5efc761ee",
+      "source": "/tmp/incant-wasm-physics-production-freeze-001/inventory.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-queries/production-freeze-002.json": {
+      "sha256": "2e78ddeb0475ba88d9d0227ae1837f9b3a00715b145261ca51365934765f8ad0",
+      "source": "/tmp/incant-wasm-physics-production-freeze-002/inventory.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-queries/test-freeze-003.json": {
+      "sha256": "dc2f25374e8cf06c70041998d0e05542f4dc462d01b6fb7c32b4f1c46294844f",
+      "source": "/tmp/incant-wasm-physics-test-freeze-003.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-queries/final-checks.json": {
+      "sha256": "6dd84efbcee008b3540077d3ab507a2e58d2ba973de69f6cea78ea5e65043008",
+      "source": "/tmp/incant-wasm-physics-final-checks.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-queries/old-interrupted-recovery.json": {
+      "sha256": "1927d980d388799b50c481454cd0b14158e3060416ffed4abf02d1822395d2d8",
+      "source": "/tmp/incant-wasm-physics-host-proof-002/recovery-verification.json"
+    }
+  },
+  "earlier_attempts": [
+    "Initial scoped Clippy rejected two nested-if styles; corrected before production freeze001.",
+    "Proof001 raw positive assertion assumed first numeric row id1 after archetype changes; observable changed-row assertion corrected.",
+    "Proof002 tests and Clippy passed but interrupted before development proof result; recovery rehashed all 701 prepared files; no full-pass claim.",
+    "Freeze002 includes independently requested scene/dimension event metadata; final proof003 uses this contract."
+  ],
+  "limitations": [
+    "Local CPU conformance only; no reference-phone/device/performance or phase gate.",
+    "No fresh ordinary source-deleted physics guest shipping package proof.",
+    "Full guest/physics/session checkpoints remain outside this slice.",
+    "No physics debug-draw or rendered acceptance.",
+    "Full SDK, complete engine and game-release requirements remain open."
+  ]
+}

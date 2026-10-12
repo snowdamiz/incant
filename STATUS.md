@@ -16,6 +16,20 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Public Wasm physics queries — locally verified
+
+The Rust SDK now batches native 3D/2D rays and character movement queries and
+copies nondraining sensor enter/exit observations. Callback-scoped native solver
+loans preserve committed-state visibility, exact world/epoch authority and atomic
+rollback. Event frames retain scene identity and dimension. Published operations
+0–38 and old layouts remain unchanged. Actual Wasmtime/wasm2c conformance passes
+382 tests/doctests, all-target Clippy and three development processes; 190 native
+runtime tests, wasm32/tooling and lean dependency checks also pass. Independent
+source review accepted freeze002; final evidence review and main integration
+are pending. Full SDK, physics/guest checkpoints, an ordinary source-deleted
+physics guest shipping proof, device measurements and phase gates remain open.
+[Contract and evidence](docs/spikes/native-wasm-physics-queries.md).
+
 ## Checkpoint 11 — failed frozen batch, two probe contracts repaired
 
 The main #141 snapshot finished 20/23 required checks successfully; release is

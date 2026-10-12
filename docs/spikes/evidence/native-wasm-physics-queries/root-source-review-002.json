@@ -1,0 +1,37 @@
+{
+  "at": "2026-10-12T13:23:10.113597+00:00",
+  "verdict": "Source accepted pending final actual-host and integration proof",
+  "freeze_sha256": "2e78ddeb0475ba88d9d0227ae1837f9b3a00715b145261ca51365934765f8ad0",
+  "source_hashes": {
+    "crates/incant_runtime/src/physics_queries.rs": "cff88b176b3a8a2b4bf1838127255d1cd160f9b2da9bd9e6a812d21350d61d27",
+    "crates/incant_wasm_abi/src/lib.rs": "0835946ea91a798e15372a9044650b6ff9518a19f0253e705d119f0b69a24efb",
+    "crates/incant_wasm_abi/src/physics.rs": "e37093d0c5b0532888f1f356d6f1cdfa1339e83a2fa7dfbc3fd48e874ba58064",
+    "crates/incant_wasm_dev/src/generated.rs": "d6ff53ae493e3e9c55264e2001ae738a6820543a95c405790383f533ba6da42d",
+    "crates/incant_wasm_dev/src/host.rs": "f5aa0e80ce37593a9e4d563a65709f9da839717dfd5c90ae6d31663e7d9ba481",
+    "crates/incant_wasm_runtime/c/generated.h": "fe4faa509787340e61ca2f42c20b27246aceb21af4d089443a44711f6393a60e",
+    "crates/incant_wasm_runtime/c/generated.inc": "08fd6687966978c861eea38d3dad2569205af2668254f62123f369c6c1f08807",
+    "crates/incant_wasm_runtime/src/capability.rs": "8e2051a10aa1f4dcac17a3de843a136da11879ea90d4429f9e64e9229d47521a",
+    "crates/incant_wasm_runtime/src/compiled.rs": "e8bc8fe5baf23bdb8942efcbd0b93660921302a624fa0f9af70b9af316c88758",
+    "crates/incant_wasm_runtime/src/generated.rs": "36f88faa1df05af31884849d274071cb7e4ef6f578f7b6e6ab5709d0ffa3639c",
+    "crates/incant_wasm_runtime/src/input_tags.rs": "3134365727ea47be362ae432e286cf01bf0ede18552172ab3a056ee26f2ea2b6",
+    "crates/incant_wasm_runtime/src/lib.rs": "486db51003cd66a38e7ebdcde535c3e7a9c31ac7e95592e840db4cb19b79872a",
+    "crates/incant_wasm_runtime/src/physics_queries.rs": "bb88cda4b8ea6d2a8b7b89dba1e1d754f8519cdb0c88642b442b53b54c515cea",
+    "sdk/abi/native-v1.json": "5176cdc3d29c1b8184e1a69f8bd4fdf44caaa8d7d282378596351410fbf25eaf",
+    "sdk/rust/src/lib.rs": "d191a7a6a8dbc4e193c64df59ce1c09b977da300358466744eb55d4c0f840ad6",
+    "sdk/rust/src/physics.rs": "9daecf44e1046dbfb34c7f124dc882c471afb0d0b980ebc9724ba2e1d1b79cbc",
+    "sdk/rust/src/raw.rs": "0349a6b5ab9599537662d512931180c05afcefe7a47ab9a80da9f75f942614b8",
+    "sdk/rust/src/tick.rs": "f96f8925c505a51714fa6277d690c273a88f799f6b8481c5e32a20ad2d935cd6",
+    "tools/generate_wasm_sdk.py": "8b0e17222774b20cefbc261b685475d0340a3c3547bf7bab84b89ca3fa77ef0a",
+    "tools/wasm_abi.py": "e62bc3faa621e7ae3d1f19d506e0489b3d7568621f945fde98b95ec8c6cb6b42"
+  },
+  "review": [
+    "Exact native WorldIdentity and active callback epoch gate solver loans; native Restore revokes retained capability and restores solvers on success/error/unwind. Both actual adapters revoke before finish, failed calls abort staged writes.",
+    "Authorized request/read errors poison physics transaction including malformed ingress, memory/call/transfer and shared query quotas; stale epochs do not poison a fresh owner. Replies copied and fully bounds-validated before destination write.",
+    "Complete original f64 request validation, native solver/canonical queries reused; no solver clone/rebuild or second physics implementation introduced. Character requests have128limit; batch64 and collision/event frames bounded.",
+    "Public SDK validates request buffers and copied result count/kind; scene/dimension now retained once per trigger-event frame, including empty results. Existing published records/opcodes compared against base and preserved."
+  ],
+  "findings": [],
+  "limits": [
+    "Actual-host proof003 and broader checks remain pending; no package-source-deletion, GPU, phone performance or full SDK gate claim."
+  ]
+}

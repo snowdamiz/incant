@@ -1,0 +1,16 @@
+{
+  "time": "2026-10-12T13:20:23.692516+00:00",
+  "production_freeze": "/tmp/incant-wasm-physics-production-freeze-002/inventory.json",
+  "test_probe_hashes": {
+    "crates/incant_wasm_abi/tests/physics.rs": "7ba32acab05ceb2c9f38ae7afa5b2c15319285431dc193f065497515742367fb",
+    "crates/incant_wasm_runtime/tests/physics_queries.rs": "a3bafc0695072c08aae23d7f14dedb086be1f4ce2a71c4a6dd78b525671d57b8",
+    "crates/incant_wasm_runtime/tests/support/physics.rs": "fcdda6e3cd2085e4a99460f3b716999ac48fe7210eb1d72d6d1dac7aa6817cd9",
+    "crates/incant_wasm_dev/tests/physics_parity.rs": "c1a27a27e1a81fb22b25e75d392bc95e9bd9ba19211d9e4e7cd89a60916a6ce3",
+    "crates/incant_wasm_runtime/fixtures/physics-queries.wat": "cafde6270aa0c2e9db38a3857ada7efa93e0e21a18587ca8e432beccf6174571",
+    "sdk/rust/samples/physics.rs": "17a24fd76fc82df2e78c81431eacdd521e0e6ea9321e89c0ac68bfa51b588bf0",
+    "sdk/rust/fixtures/physics_failure.rs": "6bda16e333cbf4baedf6c98f29528dcc437e9a1369435b57d7efd4420fd89243",
+    "tools/probes/shipping-wasm2c.py": "09139ad10d8a5b22c7a13dd7b3b3bd48c53da92fbcf8a02e48cfd500f3601930",
+    "tools/tests/test_wasm_sdk.py": "9b0d9452bac797d3fb1a607f126cb71641564da166c9eefc79c3ba768b1699ce"
+  },
+  "delta": "Empty/nonempty/unaligned scene event frames, both dimensions, copied retention metadata in real guest."
+}
