@@ -105,7 +105,7 @@ pub(crate) fn read(
     version: u32,
 ) -> Result<(), SceneError> {
     let count = reader.u32()? as usize;
-    if count == 0
+    if (count == 0 && version < 16)
         || count > MAX_ANIMATION_GRAPH_INSTANCES
         || count > nodes.len()
         || count > reader.remaining_len() / MIN_RECORD

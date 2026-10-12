@@ -16,6 +16,7 @@ pub struct SpatialNode<'a> {
     pub tilemap: Option<&'a crate::PreparedTilemap>,
     pub flipbook: Option<crate::FlipbookState>,
     pub animation: Option<crate::AnimationSample>,
+    pub animation_ik: Option<&'a std::sync::Arc<[crate::AnimationIkSample]>>,
     /// Outgoing sample and destination weight from the same committed state.
     pub animation_blend: Option<incant_types::AnimationBlendSample>,
     pub animation_pose: Option<incant_types::AnimationPoseSamples>,
@@ -84,6 +85,7 @@ impl<'a> SpatialView<'a> {
                     .expect("committed spatial global")
                     .0,
                 declaration: world.get::<CookedSpatial>(entity),
+                animation_ik: world.get::<crate::ik::IkState>(entity).map(|s| &s.0),
                 animation: world
                     .get::<crate::animation::Playback>(entity)
                     .map(|p| p.state.sample),

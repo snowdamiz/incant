@@ -58,6 +58,7 @@ pub(crate) struct ResolvedScene {
 /// Resolve startup/revision input. Native moving-frame extraction will use a
 /// retained topology/instance path; this entry point does not claim that migration.
 pub(crate) fn resolve(input: &SceneInput) -> Result<ResolvedScene, SceneError> {
+    crate::models::animation::validate_ik_capacity(input)?;
     if input.nodes.len() > 1_000_000 {
         return Err(SceneError::Input("node limit"));
     }
@@ -204,6 +205,7 @@ pub(crate) fn resolve(input: &SceneInput) -> Result<ResolvedScene, SceneError> {
         if binding.animation.is_some()
             || binding.animation_blend.is_some()
             || binding.animation_pose.is_some()
+            || binding.animation_ik.is_some()
         {
             return Err(SceneError::Input(
                 "animation sample requires animated model",

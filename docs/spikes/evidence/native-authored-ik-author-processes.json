@@ -1,0 +1,13 @@
+[
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/native-authored-ik-headless-002",
+      "import",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-authored-ik-shipping-001/authoring/project.json",
+      "rig.gltf"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"asset\": {\n    \"id\": \"01M4REW7DGAQT74XVS5N0V7CDJ\",\n    \"kind\": \"model\",\n    \"name\": \"rig\",\n    \"path\": \"rig.gltf\",\n    \"sha256\": \"49b2aec09e28a9f2bfed40fe943d5bd3ee03b900aca98adb9114c039f958950e\"\n  },\n  \"cache_hit\": false,\n  \"changed\": true,\n  \"details\": {\n    \"dependencies\": [\n      {\n        \"path\": \"rig.bin\",\n        \"sha256\": \"2f712c8c77c452501530084781af183c7e176f46281ca7f1e8273a2b01c8c236\"\n      },\n      {\n        \"path\": \"rig.gltf\",\n        \"sha256\": \"42707109f2461d29fc43ee18ed00f8f875584e0a628928c60c2006db142bd463\"\n      }\n    ],\n    \"meshes\": 1,\n    \"textures\": 0,\n    \"vertices\": 3\n  },\n  \"revision\": 1\n}\n",
+    "stderr": ""
+  }
+]

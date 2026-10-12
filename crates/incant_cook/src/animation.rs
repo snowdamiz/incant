@@ -1,5 +1,7 @@
-//! Startup-only animation metadata, derived from checked cooked model bytes.
-//! The sealed table cannot be populated with caller-invented clip durations.
+#[path = "animation_ik.rs"]
+mod ik;
+// Startup-only animation metadata derived from checked cooked model bytes.
+// Sealed tables cannot be populated with caller-invented model metadata.
 use crate::{CookError, stable_id};
 use incant_doc::{Animation, Entity, MeshRenderer, Project};
 use incant_runtime::{NativeAnimation, StableId, VisualAssetRef};
@@ -14,6 +16,7 @@ struct Resource {
     fingerprint: [u8; 32],
     durations: Arc<[f32]>,
     path: PathBuf,
+    ik: BTreeMap<StableId, Arc<incant_runtime::NativeIk>>,
 }
 #[derive(Default)]
 pub struct AnimationResources {
@@ -23,6 +26,23 @@ impl AnimationResources {
     /// Validated cache inputs for build-system invalidation, never source paths.
     pub fn cache_paths(&self) -> impl Iterator<Item = &Path> {
         self.models.values().map(|r| r.path.as_path())
+    }
+    pub(crate) fn bind_ik(
+        &self,
+        asset: &VisualAssetRef,
+        entity: StableId,
+        authored: &incant_types::AnimationIk,
+    ) -> Result<Arc<incant_runtime::NativeIk>, CookError> {
+        let error = || CookError::AnimationResource(ulid::Ulid::from_bytes(entity.0).to_string());
+        let resource = self.models.get(&asset.id).ok_or_else(error)?;
+        let compiled = resource.ik.get(&entity).ok_or_else(error)?;
+        // Resources are a snapshot of checked authoring; never reuse against a changed declaration.
+        if resource.fingerprint != asset.fingerprint
+            || compiled.as_ref() != &ik::compile(authored, asset.fingerprint)?
+        {
+            return Err(error());
+        }
+        Ok(compiled.clone())
     }
     pub(crate) fn bind(
         &self,
@@ -74,6 +94,7 @@ pub fn load_project_animation_resources(
     let mut resources = AnimationResources::default();
     let mut cache = None;
     let mut clips = 0usize;
+    let mut ik_budget = 0usize;
     for entity in scene
         .entities
         .values()
@@ -119,11 +140,13 @@ pub fn load_project_animation_resources(
             let hex = |b: u8| char::from(b).to_digit(16).expect("checked model key") as u8;
             *byte = hex(pair[0]) << 4 | hex(pair[1]);
         }
+        let ik = ik::admit(scene, &mesh.mesh, &model, fingerprint, &mut ik_budget)?;
         resources.models.insert(
             id,
             Resource {
                 fingerprint,
                 durations,
+                ik,
                 path: incant_assets_runtime::model::key_path(directory, &key)
                     .map_err(|_| error())?,
             },

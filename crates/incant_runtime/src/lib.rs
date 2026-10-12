@@ -3,6 +3,11 @@
 //! committed spatial extraction. Mixer/render hosts and authoring stay separate.
 mod animation;
 mod animation_binary;
+mod ik;
+mod ik_binary;
+pub use ik::{
+    AnimationIkSample, IkControl, IkSnapshot, MAX_ANIMATION_IK, MAX_SCENE_ANIMATION_IK, NativeIk,
+};
 mod animation_graph;
 pub use animation::{
     AnimationBlendSample, AnimationControl, AnimationSample, AnimationSnapshot, AnimationState,
