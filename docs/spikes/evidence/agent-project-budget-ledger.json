@@ -1,0 +1,39 @@
+{
+  "recorded_at": "2026-10-11T19:44:31.367220+00:00",
+  "scope": "per-project local consumption ledger foundation; no native admission or UI wiring",
+  "platform": "macOS-26.6-arm64-arm-64bit-Mach-O",
+  "source_sha256": {
+    "crates/incant_agent/src/ledger.rs": "d22fb27c374c61a953e4bfab841bf7bae1e882ceb3bf13ddfa4872e2880156eb",
+    "crates/incant_agent/src/ledger/tests.rs": "4ddeb4115045690fefaf3667c7b0c5d5262e580911a983e9bfc780f6290e471f",
+    "crates/incant_agent/src/lib.rs": "048e0ae1aa2d9f4f07e0b50ace3d8c335de1c2ffee114efd1b5c299f5c62c2e2"
+  },
+  "validation": {
+    "scoped_ledger_tests": 13,
+    "all_agent_tests": 94,
+    "clippy": "all-targets passed",
+    "logs": {
+      "/tmp/incant-agent-ledger-tests.log": "6452729f2e0de0abea14ac8ecd351395dc7ddd50e30de1bfb7b17e8f7717e3cd",
+      "/tmp/incant-agent-ledger-full-tests.log": "54d26c9e5f4080fd6b5567f23c08eda6ebc51cc3a270b9717c489500e3b84a13",
+      "/tmp/incant-agent-ledger-clippy.log": "dbd4530feda57b9fe7cb19d0a29a7a487609eaf575acc31bc8017b614780499c"
+    }
+  },
+  "independent_review": {
+    "reviewer": "/root/integrate_runtime_prs",
+    "reviewed_at": "2026-10-11T19:43:28.095177+00:00",
+    "verdict": "accepted_no_actionable_findings",
+    "scope": "unwired ledger foundation; source-only",
+    "source_sha256": {
+      "crates/incant_agent/src/ledger.rs": "d22fb27c374c61a953e4bfab841bf7bae1e882ceb3bf13ddfa4872e2880156eb",
+      "crates/incant_agent/src/ledger/tests.rs": "4ddeb4115045690fefaf3667c7b0c5d5262e580911a983e9bfc780f6290e471f",
+      "crates/incant_agent/src/lib.rs": "048e0ae1aa2d9f4f07e0b50ace3d8c335de1c2ffee114efd1b5c299f5c62c2e2"
+    },
+    "report_sha256": "b4e2678da9c78c67dd1d6dc03e5fa4dcfb3c8de9c4c9833c73d20d2a8cb859b7",
+    "owner_test_log": "/tmp/incant-agent-ledger-tests.log",
+    "native_wiring": false
+  },
+  "limitations": [
+    "Native admission and GUI controls are not connected",
+    "Local process-crash evidence only; no power-cut or Windows/Linux execution claim",
+    "No live provider or billing evidence"
+  ]
+}

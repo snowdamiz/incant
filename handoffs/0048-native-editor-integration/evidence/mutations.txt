@@ -1,0 +1,27 @@
+# 0048 mutation checks (editor/ui, vitest 5.0.3, --maxWorkers=4)
+# final PlayControls.tsx sha256 ef43596b85ff4cd00ad3e8b3e6b873869d990a9cbeb0ec2103b18d8e7d7ee48a
+# final AgentComposer.tsx sha256 56d6729c1d308105fd52fd0764970c0f1e38a3ed1eeefbf4afa10d59c9d3e686
+
+## 1. Final source
+ ✓ src/components/play/Play.test.tsx > native Play controls > keeps keyboard focus at Play when Play starts from the focused scene and camera picker 210ms
+ ✓ src/components/play/Play.test.tsx > native Play controls > leaves focus where it is when Play starts from outside the picker 75ms
+      Tests  2 passed | 35 skipped (37)
+
+## 2. Reviewed-build PlayControls.tsx (git show HEAD): no fix
+ × src/components/play/Play.test.tsx > native Play controls > keeps keyboard focus at Play when Play starts from the focused scene and camera picker 193ms
+ ✓ src/components/play/Play.test.tsx > native Play controls > leaves focus where it is when Play starts from outside the picker 79ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+AssertionError: expected null to be '' // Object.is equality
+      Tests  1 failed | 1 passed | 35 skipped (37)
+
+## 3. Over-broad variant: focus Play on every picker unmount (condition removed)
+ ✓ src/components/play/Play.test.tsx > native Play controls > keeps keyboard focus at Play when Play starts from the focused scene and camera picker 197ms
+ ✓ src/components/play/Play.test.tsx > native Play controls > leaves focus where it is when Play starts from outside the picker 88ms
+      Tests  2 passed | 35 skipped (37)
+Variant 3 passes: after a commit React refocuses the element that held focus before it, if that element is still in the document. A move made while the picker unmounts therefore sticks only when the picker itself held focus. The condition states the intent; React's restore also stops an over-broad move.
+
+## 4. Model field width guard on the reviewed-build AgentComposer.tsx (calc(...ch + 10px))
+ × src/components/agent/AgentSession.test.tsx > Sending > sends the chosen model and approval mode, and returns a cleared model to the default 172ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+AssertionError: expected 'calc(11ch + 10px)' to be 'calc(11ch + 12px)' // Object.is equality
+      Tests  1 failed | 32 skipped (33)

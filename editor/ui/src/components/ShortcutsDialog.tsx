@@ -27,8 +27,8 @@ interface ShortcutGroup {
 
 /**
  * Every shortcut the editor handles, as implemented (App.tsx, HierarchyPanel,
- * AssetBrowser, Splitter, the Inspector lists, Menu and AgentPanel). Nothing is
- * listed that the code does not do.
+ * AssetBrowser, Splitter, the Inspector lists, Menu, AgentPanel and the game view in
+ * src/play/useGameCapture.ts). Nothing is listed that the code does not do.
  */
 export const SHORTCUT_GROUPS: readonly ShortcutGroup[] = [
   {
@@ -40,6 +40,15 @@ export const SHORTCUT_GROUPS: readonly ShortcutGroup[] = [
       { action: 'Redo', keys: [['Shift', 'Mod', 'Z']], other: [['Ctrl', 'Y'], ['Ctrl', 'Shift', 'Z']] },
       { action: 'Keyboard shortcuts', keys: [['?'], ['Mod', '/']] },
       { action: 'Close a dialog or menu', keys: [['Esc']] },
+    ],
+  },
+  {
+    title: 'Play',
+    items: [
+      { action: 'Play or stop', keys: [['Mod', 'P']] },
+      { action: 'Pause or resume', keys: [['Shift', 'Mod', 'P']], other: [['Ctrl', 'Shift', 'P']] },
+      { action: 'Step one tick', keys: [['Alt', 'Mod', 'P']], other: [['Ctrl', 'Alt', 'P']], where: 'while paused' },
+      { action: 'Leave the game view', keys: [['F6'], ['Shift', 'F6']], where: 'while keys go to the game' },
     ],
   },
   {

@@ -1,0 +1,76 @@
+{
+  "recorded_at": "2026-10-11T22:14:09.362698+00:00",
+  "source_commit": "c825f946d03d9c54782f4cc16392b8c59ac46758",
+  "claude_model": "Opus 5.5",
+  "claude_effort": "Max explicitly verified via ACP",
+  "integrated_author_commits": [
+    "710f9a1",
+    "ff6d9ae85d7dacc664447e1e19c97cf2c11aa457",
+    "36b4ee545802348f13089e76a9983a3b60a42711",
+    "1985ccc098072510f789bab9943b18376a8389f4"
+  ],
+  "integrated_followups": [
+    "1: shell allowance wording",
+    "2: scope-aware bridge wording",
+    "3: optional unavailable code"
+  ],
+  "source_sha256": {
+    "editor/bridge/contract.ts": "ddacc748167f137b069f57edc9572501b78739da9d6e160275621ee26e458216",
+    "editor/bridge/native.ts": "fa29995216563796218fcfdbde2dc14d4a3d55daea6859db05363cd8bca17cc3",
+    "editor/bridge/native.generated.js": "fd67d6dbc21afb8c881168dcb6aebc226e1f048277008bc822ee9ec7cd8affae",
+    "editor/ui/src/components/AgentPanel.tsx": "513e583bd0bac0a5415ded100d3d5a1447adaaf0fe2e340804d53a83bd70dcb9",
+    "editor/ui/src/components/agent/AgentAllowance.tsx": "0ad3dde7fc4b2771d82ffea02a9973a779e32e58b44a2357ac6c848105de8f3b",
+    "editor/ui/src/components/agent/AgentTranscript.tsx": "ebb95b180fe6e98705947cb479f124456853a50c81d2f6a3aa070295715b45d3",
+    "editor/ui/src/components/agent/tokenAllowance.ts": "fb4473b3c3f031b48facc9c48382a8a8ab866e820bf4e7a534bc159eaf5f2d7c"
+  },
+  "checks": {
+    "ui_tests": {
+      "result": "902 tests/44 files pass",
+      "path": "/tmp/incant-final-editor-ui-tests.log",
+      "sha256": "b405d82b44615d0919dc82522f4cd31aff068f55994c65022e4b8a78d9787c51"
+    },
+    "app_types_and_build": {
+      "result": "pass",
+      "path": "/tmp/incant-final-editor-ui-build.log",
+      "sha256": "8473e3d250f146ee9a2e55122f9d05bee9686f509dc3024c25b66c1a40159c51"
+    },
+    "test_types": {
+      "result": "app/node/test TypeScript project references pass",
+      "path": "/tmp/incant-final-editor-ui-types.log",
+      "sha256": "5e05d0271a5a922a5b1639a75c386f68b84dc6f16fa9c31d0ca3992328a98dc3"
+    },
+    "bridge_scope": {
+      "result": "103tests pass",
+      "path": "/tmp/incant-approval-ready-bridge-tests.log",
+      "sha256": "e3047f3ed199467905d06bc20c0c9c17403793b30ee220f0f0452c300800ff80"
+    }
+  },
+  "reviews": {
+    "initial_nonvisual": {
+      "path": "/tmp/incant-claude0046-nonvisual-review/review-receipt.json",
+      "sha256": "f2fcb33764a0bbf250a233847c6a3debf990de8ab2e40559b669a39197e1d2f4"
+    },
+    "bridge_correction": {
+      "path": "/tmp/incant-claude0046-nonvisual-review/approval-ready-root-review.json",
+      "sha256": "8885dbf99438ac5e96970f202d51e7efc2175aa9b716a3596b49a2d21ff14b4a"
+    },
+    "readiness_ui": {
+      "path": "handoffs/0049-agent-approval-readiness/review/root-consumer-review.json",
+      "sha256": "097cd7f293d1e5174ebb0402ba8751f43257dcd6c3fece1c52079c4ed4402a46"
+    }
+  },
+  "review_observations": [
+    "Allowance saves use the shared command and retained per-bridge draft/in-flight state; cumulative usage is never reset.",
+    "Current authored cap and safe-integer parsing determine admission presentation; explicit unavailable code avoids guessing from messages when supplied.",
+    "Latest now appears for new transcript growth rather than a usage/cap-only session revision; source and meaningful regression reviewed.",
+    "A race in the test double was corrected to publish native cap/read failure before resolving the save, matching the real dispatch lifecycle."
+  ],
+  "acceptance": "Scoped source/automated integration only. Actual WKWebView/appearance and one bounded real-account WebView turn remain pending0048; no native/device/phase gate claimed.",
+  "closed_finding": {
+    "priority": "P2",
+    "description": "During deferred Undo/Redo with equal cached caps, approval buttons remain usable while native admission refuses. Native safety and Stop hold.",
+    "bridge_correction": "0e81494 optional running.approvalReady with shared exact admission predicate; independently reviewed and103focused tests pass",
+    "ui_correction": "1985ccc integrated as c825f94; exact source independently reviewed, 12 deferred-IPC regressions and combined 902-test suite pass; verified Claude Opus5.5 Max reviewed scoped browser captures.",
+    "scope": "Source/browser closure; native WKWebView acceptance remains pending0048."
+  }
+}

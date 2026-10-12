@@ -1,0 +1,12 @@
+{
+  "review": "accepted",
+  "head": "77ed9777b8218725a4a35c62848d23293feed8a8",
+  "findings": [],
+  "corrected": "Current authoritative provider read gates readiness; same-account result fences session reads begun during invalidation. Latest-read identity preserves superseding generations without cancelling worker or retaining obsolete barrier. Send and approval check both verification and current provider pending state.",
+  "source_sha256": {
+    "editor/bridge/native.ts": "98defc607d842c9940ee69bff466d06e4a7da53473737f1805ff7d7dba415555",
+    "editor/bridge/native.generated.js": "ab81c737a22fce07eda5f52582dc8971bda51f89ce1e6c1aa7fb81680fd6faac",
+    "editor/bridge/native.provider.test.ts": "41864e3ba85c31e663d2b82a4833118f5807b9a73a6b29d0f6a56c71d5cbf2a4"
+  },
+  "evidence": "Root independently reviewed production code and deferred-read regressions; old51737 defect independently reproduced by coordinator.108 focused tests passed in owner checkout; integrated fullUIvalidation next."
+}

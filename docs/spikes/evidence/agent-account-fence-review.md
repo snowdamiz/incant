@@ -1,0 +1,7 @@
+# Independent account-fence review
+
+Accepted the seven exact Rust source hashes in incant-account-fence-identities.json after reading the implementation and tests. Durable generation and registration receipts detect cooperative account switching, reconnect and ABA; legacy metadata reads remain stable. Invalidation precedes credential replacement/deletion, while ordinary token refresh is unchanged. Metadata checks never load credentials and run outside the project bus lock. The Agent checks before requests, after charging response usage and before each dispatch, including after approvals. Prior committed tools remain undoable when a later check fails.
+
+The final provider.complete normalization preserves measured Response usage and classifies unknown failed-request charges explicitly as Response usage:None. Metadata fence failures outside that callsite retain their known-usage interpretation. Cancellation's atomic flag remains intact. Reviewed regressions cover both classifications and raw private detail redaction. No actionable blocker found. Owner reports 73 tests and matching scoped Clippy/fmt passing; this review does not duplicate those runs or claim live-provider/hosted-platform evidence.
+
+Limits remain explicit: cooperative checks are not an atomic cross-process dispatch CAS, already admitted operations are not retroactively revoked, and legacy/uncooperative metadata writers can bypass generation semantics. Native lifecycle admission and conversation receipt binding are separate integration work.

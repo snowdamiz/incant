@@ -1,0 +1,55 @@
+{
+  "artifact_sha256": {
+    "README.md": "9bf672e35e280dd2cc80bfa6edaf61b582ebc32cc517ca40bb91da3b596cb2c2",
+    "author.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "author.stdout": "42676d0f5fbd27255556b2bac6c8d65946bd14a68a0c3a34e59ef3a408e70321",
+    "author_fixture.py": "11c9215635fbaeb41a3b447be33a92510f181f7f73622ac7b9a57fa8ab8d8723",
+    "fixture-evidence.json": "241430033c033c8590da56201601edefee51693485dbd0e33bfa4a8a7413e2d4",
+    "import.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "import.stdout": "275022a8c9984a49d874fba8d83f4fe11729a2a0784bf8385d263e258633379b",
+    "init.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "init.stdout": "4b5f58587dcbb17ffe8a8d254e94d2e7126b77cd240c9333cba16f7120921356",
+    "numerical-states.json": "6f291ca9df32cdae486d68c52a56fff6c6cfab27ae16f8d9b0268400e7213bfa",
+    "public-commands.jsonl": "4d21887d9cb92cb1cefab4697c61246e2785522f784bd57bf05e5a8567e22162",
+    "rpc-1.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "rpc-2.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "saved/.incant-source-transactions/01M4PEJQSF7FX53Q6DSVVP9ZHV.old-receipt": "0a841533b51e907b721015f1c3ebad7eedb660ec6ceb6727dffc10a562116a79",
+    "saved/.incant-source-transactions/01M4PEJQTWC1S6NDZPCV31A3TV.old-receipt": "b0fc45764730411a404dac60d5ca5af55063c544946ee8b8d41ca6a30fa7459c",
+    "saved/.incant-source-transactions/lock": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "saved/.incant-source-transactions/receipt": "61e9a6cbbd446c5e043ad5f3ab43c121e080e50dfca4c079ba4250dc82eb8965",
+    "saved/.incant/cache/models/fa37f6f007f8a164206254cc2eebaaad702971c13855bc61afefe4815f3553d0.incmodel": "a40c5fa97b1a626dcb26ce6f9bcea279b4a9a2c03376bf267ea2e50d597d0b9d",
+    "saved/MODEL-LICENSE": "0dd48ebadf52273c736256325c8f078c03c8bb4facee22a4122de0ad3f615391",
+    "saved/blender_272_cube_7400_binary.fbx": "bb78c7ee90fa811baa9a4400b613c845d3a5329f4bfa87ff5e20692ddb8bd2ae",
+    "saved/key-probe.ts": "a2e92ede5092181662934839559a766aedaf48ac3184a3cd085f4d68a928993f",
+    "saved/move.ts": "8b048d55ec72ee2c61fedbec163c30ffc55601e9639590e9367db9a78bcc6b93",
+    "saved/pointer-probe.ts": "809ed2846f2479e6af8bf870bf4b5226a85703a19e4aab3e001643eaad677ce6",
+    "saved/project.journal.jsonl": "4564ee7553070d49f8328f501caf6cfa8d2da1aa2ca8f09d7047d83a05cb0b14",
+    "saved/project.json": "3ff0ded175bc0c39b5a909234665a2ef12509aa8847726b34442873860fc7374",
+    "upstream-model-provenance.json": "fd582b8fef41aa2ed705136df32781d3f3ff8171bf01db6b4bc7131c56780fec",
+    "validate.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "validate.stdout": "42864c616d4a7747b1cc55c79b9e598dc84066c0da64f0fcf8de8d6c84dbaf46"
+  },
+  "headless_manifest_sha256": "3045bac824295bc8b7bfe44183514e7267548a391e03d784b46680905181f05c",
+  "native_renderer_or_provider_launched": false,
+  "owned_processes_reaped": true,
+  "passed": true,
+  "paths": {
+    "commands": "/tmp/incant-native-0048-fixtures/public-commands.jsonl",
+    "evidence": "/tmp/incant-native-0048-fixtures/fixture-evidence.json",
+    "launcher_instructions": "/tmp/incant-native-0048-fixtures/README.md",
+    "project": "/tmp/incant-native-0048-fixtures/saved/project.json"
+  },
+  "prepared_by": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "xhigh",
+    "role": "astra"
+  },
+  "project_id": "01M4PEJQNPMDQYEDGT0PRWN78X",
+  "public_authoring_only": true,
+  "revision": 4,
+  "rpc_pids_checked_absent": [
+    52884,
+    52885
+  ],
+  "source_commit": "263cacc122760ced67efee4caeb2218ea13810f4"
+}

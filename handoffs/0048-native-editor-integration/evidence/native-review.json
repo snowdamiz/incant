@@ -1,0 +1,316 @@
+{
+ "scope": "0048 combined native editor acceptance: actual WKWebView of the granted immutable build. Native captures and AX reads of the owned PID only.",
+ "model": {
+  "name": "Claude Opus 5.5",
+  "id": "claude-opus-5-5",
+  "thinking": "max",
+  "verification": "Session started by tools/handoff/main.py run 0048-native-editor-integration (PID 74710) through claude-agent-acp; configure_model_and_effort raises before prompting unless ACP confirms both settings. The runner's own confirmation line is not visible inside the session."
+ },
+ "host": {
+  "os": "macOS 26.6 (25G72)",
+  "arch": "arm64",
+  "display": "built-in Liquid Retina XDR, 1512x982 pt at 2x",
+  "visible_frame_pt": [
+   1512,
+   875
+  ],
+  "note": "Menu bar and Dock leave 875 pt; the requested 1440x900 window opened at 1440x875 (1440x874 after an AX resize)."
+ },
+ "build": {
+  "source_commit": "bb1b517034386021b49541221c72500316e0ccb2",
+  "packet_commit": "62dcfcf",
+  "manifest": {
+   "path": "/tmp/incant-native-review-0048-final-bin-v1/manifest.json",
+   "sha256": "b2f83ac7b598f68fa5b0cf148718e4a5c6f086599f05d2329c0bff03458f606e"
+  },
+  "editor": {
+   "path": "/tmp/incant-native-review-0048-final-bin-v1/incant_editor",
+   "sha256": "3d059445c3691b219ff8cc2c6d990645af7f64bbeccee737b4dae4f9753c6603"
+  },
+  "headless": {
+   "sha256": "68a2a04bbbb767cb65cedf1cfa8d62ec95c2064a69e63289a78fd67c8764873c",
+   "launched": false
+  },
+  "hash_checked": "before every launch by tools/native/launch.sh"
+ },
+ "fixture": {
+  "path": "/tmp/incant-native-0048-fixtures/saved/project.json",
+  "project_id": "01M4PEJQNPMDQYEDGT0PRWN78X",
+  "project_json_sha256": "3ff0ded175bc0c39b5a909234665a2ef12509aa8847726b34442873860fc7374 (unchanged before and after)",
+  "journal_before": {
+   "sha256": "4564ee7553070d49f8328f501caf6cfa8d2da1aa2ca8f09d7047d83a05cb0b14",
+   "lines": 8
+  },
+  "journal_after": {
+   "sha256": "0fd36d3eca6f5cf15d0c6d9c0cc07833a924f1bd4991b953191d867e60fe15df",
+   "lines": 23
+  },
+  "all_baseline_hashes_verified_before_launch": true,
+  "edits": "Only through the editor UI (command bus): allowance sets, undo/redo, one rename of Pointer Probe, the agent's one granted rename and its Undo. No file was edited directly.",
+  "final_state": "cap 64,000; Pointer Probe and Allowance Rename Target carry their original names; 23 journal records"
+ },
+ "usage_ledger": {
+  "path": "~/Library/Application Support/Incant/agent-usage/01M4PEJQNPMDQYEDGT0PRWN78X.json",
+  "before_turn": "absent",
+  "after_turn": {
+   "sha256": "91cecc821692d0e478ef453384f00ca5daf3a5157c7ec441319d97d939d4ce09",
+   "record": {
+    "version": 1,
+    "charged_tokens": 22044,
+    "accounting_uncertain": false,
+    "pending": null
+   }
+  },
+  "after_undo": "unchanged hash",
+  "after_quit_and_reopen": "unchanged hash",
+  "after_lower_to_10000_and_undo": "unchanged hash",
+  "read_only": "Read by exact path only; no credential file, keychain or account store was opened."
+ },
+ "processes": [
+  {
+   "pid": 77528,
+   "argv": "incant_editor (no project path)",
+   "started": "2026-10-11T22:21:49Z",
+   "ended": "Cmd+Q, before 22:25Z",
+   "exit": "exited"
+  },
+  {
+   "pid": 80574,
+   "argv": "incant_editor <fixture>",
+   "started": "2026-10-11T22:25:08Z",
+   "ended": "Cmd+Q 2026-10-11T23:05:05Z",
+   "exit": "exited"
+  },
+  {
+   "pid": 39232,
+   "argv": "incant_editor <fixture> (reopen)",
+   "started": "2026-10-11T23:06:42Z",
+   "ended": "Cmd+Q 2026-10-11T23:10:04Z",
+   "exit": "exited"
+  },
+  {
+   "helpers": "winctl, cap.sh, watch_turn.py, poll_hold.py, webkit-probe: short-lived, all exited; pgrep finds no incant_editor, incant_headless or helper process"
+  }
+ ],
+ "input_method": "CGEvents posted only while the owned PID is frontmost (rechecked per event), each burst after 15 s without human input; front app and pointer handed back after each burst except during the agent turn. Window-only captures with screencapture -o -x -l.",
+ "checks": {
+  "unsaved_launch": {
+   "result": "pass",
+   "evidence": "Play button aria-disabled, description 'Play (⌘P). Open a saved project to run Play'; click and ⌘P put 'Open a saved project to run Play' in the status line; header stays Live; no notice; no session (Stop: 'Play is not running.')."
+  },
+  "saved_reopen_start_available": {
+   "result": "pass",
+   "evidence": "Play enabled ('Play (⌘P)'); with two scenes Play opens the scene/camera list; choosing Main · Stationary Camera starts Play and focuses Pause."
+  },
+  "play_transport": {
+   "result": "pass",
+   "evidence": "Preparing… → Playing · Main → Paused · tick 263 → Stepped to tick 264 → Resumed. → 'Play stopped. Runtime changes were discarded.'; header returns to Live."
+  },
+  "runtime_values": {
+   "result": "pass",
+   "evidence": [
+    {
+     "entity": "Moving Imported Mesh",
+     "tick": 263,
+     "x": 3.095833333333388,
+     "expected": 3.0958333
+    },
+    {
+     "entity": "Moving Imported Mesh",
+     "tick": 264,
+     "x": 3.1000000000000547,
+     "expected": 3.1
+    },
+    {
+     "entity": "Moving Imported Mesh",
+     "tick": 82,
+     "x": 2.3416666666666837,
+     "expected": 2.3416667,
+     "note": "read on selection while running"
+    },
+    {
+     "entity": "Moving Imported Mesh",
+     "tick": 278,
+     "x": 3.158333333333391,
+     "expected": 3.1583333
+    }
+   ],
+   "authored": "Authored Transform X stays 2 during and after Play; the runtime block disappears on Stop."
+  },
+  "game_geometry": {
+   "result": "pass",
+   "evidence": "Both imported cubes render from the Stationary Camera (stationary centred, moving to its right, moving +X); Stop returns the authoring viewport."
+  },
+  "viewport_hole": {
+   "result": "pass",
+   "measurements_device_px": {
+    "1440x875_inspector_380": "native surface #141519 from x 492 (246 pt) to 2117, panel hairlines #25282f at 490-491 and 2118-2119; from y 152 (76 pt) to 1219, hairlines at 150-151 and 1220-1221",
+    "1000x650_inspector_280": "native from x 492 and y 152; bottom hairline at 770-771 (385 pt); right edge meets the focused separator, whose ring (#c3c8ff, 1436-1441) overlaps the surface by 1 pt"
+   }
+  },
+  "titlebar": {
+   "result": "pass",
+   "measurements_device_px": "traffic-light centre y 39.5 and logo centre y 39.5 at both 1440x875 and 1000x650; titlebar hairline 78-79; zoom button ends at x 75 pt, logo starts at 86 pt"
+  },
+  "key_probe_focus": {
+   "result": "pass",
+   "evidence": [
+    {
+     "case": "game view focused by click, D held 1.0 s, ⇧⌘P",
+     "tick": 250,
+     "x_ticks_d": 65,
+     "y_ticks_button": 0,
+     "wheel": 0,
+     "scale_x": 2
+    },
+    {
+     "case": "Resume 0.1 s with focus on the Agent region (see unattributed change)",
+     "tick": 260,
+     "scale_x": 1,
+     "x_ticks_d": 65
+    },
+    {
+     "case": "Resume 0.6 s, pointer moved over the game view, no click",
+     "tick": 305,
+     "scale_x": 1,
+     "pointer_probe": [
+      414,
+      224
+     ],
+     "note": "pointer unchanged"
+    },
+    {
+     "case": "Resume 0.3 s with a Hierarchy row focused",
+     "tick": 428,
+     "scale_x": 1
+    },
+    {
+     "case": "Resume 0.5 s with the Hierarchy filter field focused",
+     "tick": 339,
+     "scale_x": 1
+    },
+    {
+     "case": "Resume, D held 0.5 s in the agent composer",
+     "tick": 406,
+     "scale_x": 1,
+     "x_ticks_d": 65,
+     "note": "the D went to the composer ('d'), then was deleted"
+    }
+   ],
+   "pointer_probe_first": {
+    "tick": 250,
+    "value": [
+     414,
+     224
+    ],
+    "expected": "click (660,300) − game view origin (246,76)"
+   }
+  },
+  "dismiss_focus": {
+   "keyboard": "pass: Tab reached Dismiss (picker → Play → Step → Stop → Dismiss); Space dismissed; focus on Play.",
+   "pointer": "app does not move focus (correct); WebKit's own mouse press focuses the clicked button's focusable ancestor, the Viewport region (tabindex -1), so the previously focused Hierarchy row loses focus as for any click in that panel. Never dropped to the page."
+  },
+  "splitters": {
+   "result": "pass",
+   "evidence": [
+    "Inspector separator dragged 1079.5→1300 pt across Inspector text: value clamps at 280, AXSelectedTextMarkerRange absent (no selection), separator focused without ring; ArrowLeft +16 (296) shows the focus colour, ArrowRight 280, End 560, Home 280",
+    "Dock separator dragged 610.5→830: clamps at 120, no selection, focused; ArrowUp 136, ArrowDown 120",
+    "Hierarchy separator dragged 245.5→60: clamps at 200, no selection, focused",
+    "Agent separator dragged 603.5→250: clamps at 560, no selection, focused",
+    "Right-click and Control-click on the Inspector separator, then pointer moves: no resize (280 kept); Control-click left an empty selection",
+    "Hierarchy context menu open, press on the Inspector separator: menu closed, separator focused",
+    "Ordinary text drag from 'Translation' in the Inspector: 83 characters selected (positive control for the selection probe)"
+   ],
+   "not_reproduced": "pointercancel and lost capture cannot be produced with synthetic CGEvents here; covered by 0047's jsdom and Chromium checks"
+  },
+  "allowance_offline": {
+   "result": "pass",
+   "evidence": [
+    "Change opens the field with 1000000 selected and '0 used' under it",
+    "'12.5' and 'abc': 'Enter a whole number of tokens.'; '-5': 'The allowance can’t be negative.'; Save stays unavailable",
+    "Escape: no command, focus back on Change",
+    "500000 → '0 of 500,000'; 100 → '0 of 100'; 0 → header Off, 'Raise the allowance to turn the agent on.', no Send",
+    "Titlebar Undo → 100 (Ready), Redo → 0 (Off), Undo → 100; then 64000 → '0 of 64,000 tokens used'",
+    "Journal: set_agent_budget transactions with user origin plus undo/redo records; History 'Set agent token allowance' (User); unchanged values send nothing",
+    "No network socket on the editor PID before or after the edits (lsof)"
+   ],
+   "after_usage": "Reopened process: 10000 previewed 'No new requests: 22,044 already used.'; saved → header 'Allowance used up', 'Raise the allowance to send new requests.', '22,044 of 10,000 tokens used' in red, no Send; Undo → 64,000; usage record unchanged"
+  },
+  "real_turn": {
+   "result": "pass",
+   "timeline_utc": {
+    "send": "2026-10-11T23:01:12.25Z",
+    "approval_1_read": "23:01:18Z ('Read the whole project?', 11 bytes, {\"path\":\"\"})",
+    "undo_redo_and_allow": "23:02:01-23:02:03Z",
+    "approval_2_patch": "23:02:08Z ('Apply 1 change to the project?', 249 bytes)",
+    "patch_allowed": "23:04:02Z after exact-argument verification",
+    "finished": "23:04:08Z",
+    "history_undo": "23:04:40Z"
+   },
+   "settings": "allowance 64,000 set in the UI; approval 'Ask every time'; model field left at its default gpt-6-astra; one prompt, sent once with ⌘↩",
+   "prompt": "Rename the entity with ID 00000000000000000000000051, currently named “Allowance Rename Target”, to “Allowance Rename Confirmed”. Change nothing else. (macOS smart quotes replaced the typed straight quotes)",
+   "patch_arguments": {
+    "description": "Rename Allowance Rename Target to Allowance Rename Confirmed",
+    "expected_revision": 14,
+    "ops": [
+     {
+      "op": "rename_entity",
+      "scene_id": "01M4PEJQNPKJKBZRM6FFAP8SXA",
+      "entity_id": "00000000000000000000000051",
+      "name": "Allowance Rename Confirmed"
+     }
+    ]
+   },
+   "reply": "Renamed entity `00000000000000000000000051` to “Allowance Rename Confirmed”. Nothing else was changed.",
+   "outcome_line": "1 edit · 22,044 tokens",
+   "allowance_line_after": "22,044 of 64,000 tokens used",
+   "stop": "Stop shown and enabled throughout Working… and both approvals; not pressed (only turn)",
+   "budget_refresh": "allowance line stayed '0 of 64,000' while working, then 22,044 once the turn finished; no partial or invented numbers",
+   "history": "'Rename Allowance Rename Target to Allowance Rename Confirmed' · Agent · gpt-6-astra; Show in History focused the History tab; Undo restored the name and marked the entry (undone), 8 of 9 applied",
+   "denied_or_unrelated_proposals": "none were proposed",
+   "network": "no socket on the editor PID before the turn or after it finished (lsof)"
+  },
+  "approval_readiness_0049": {
+   "result": "pass with unobserved hold",
+   "evidence": "During the read-only approval: titlebar Undo then Redo of 'Rename entity to Pointer Probe Review' (never the allowance), Allow pressed ~0.1-0.2 s after Redo. One decision ('Allowed'); no account or refusal error text in any dump; the agent then read the post-Redo revision 14 and its patch applied. AX polling every ~0.22-0.4 s after Undo and after Redo never saw 'Waiting for the agent to update its session.' or a held Allow: the hold, if any, was shorter than the poll and is unobserved.",
+   "stale_patch": "not exercised: the patch's expected revision was current"
+  },
+  "reopen": {
+   "result": "pass",
+   "evidence": "Same binary, same fixture path: account button 'ChatGPT account, signed in as [redacted]' with no login prompt, Agent Ready, '22,044 of 64,000 tokens used', History 9 entries, names as left; lsof sampled every 0.5 s for the first 15 s: 0 sockets."
+  },
+  "layout": {
+   "sizes_pt": [
+    "1440x875 (requested 1440x900, clamped by the visible desktop)",
+    "1000x650"
+   ],
+   "sidebars_px": [
+    280,
+    380
+   ],
+   "result": "pass",
+   "evidence": "Header, transport, runtime rows, notice, allowance line and composer fit at both sizes and both widths; the notice wraps to 3 lines at 1000/380 and 2 lines at 1000/280; the picker label truncates ('Spatial …') with its full name in the accessible name and tooltip; hierarchy names ellipsize; the Inspector reflows to stacked labels at 280."
+  },
+  "defects": [
+   {
+    "id": "D1",
+    "status": "fixed in UI source, needs a newly granted binary",
+    "what": "Starting Play with ⌘P while the scene/camera picker has focus drops focus to the page: the picker unmounts during a session (AX focused element: AXWebArea).",
+    "fix": "TargetPicker hands focus to the Play button when it unmounts while focused."
+   },
+   {
+    "id": "D2",
+    "status": "fixed in UI source, needs a newly granted binary",
+    "what": "The composer's model field shows every model name ellipsized natively ('gpt-6-astr…'): WebKit's text field needs ~2 px past the text; the width left 0.",
+    "fix": "Width calc(Nch + 12px); measured in the system WebKit: all lengths 4-32 fit."
+   }
+  ],
+  "observations": [
+   "Unattributed change between two bursts (22:34:43-22:35:59Z): the Agent pane shrank 289→243 px (only a pointer drag of its separator can do that) and the Agent region held focus with its ring. No input of this review touched that separator; the 10 later start-of-burst focus snapshots all matched the previous burst's end state.",
+   "The message composer applies macOS text substitution (smart quotes, the inline autocorrect bubble); the model field disables spellcheck. Harmless for this request.",
+   "In the default 288 px agent pane a patch card's 'Exact arguments' disclosure sits under the sticky Deny/Allow row; a pointer click there hits the row. Keyboard (Shift+Tab to the disclosure) works and scrolls it into view.",
+   "History follows the page that holds Now, not its scroll position: in a 236 px dock the agent's newest entry and Now are below the fold after Show in History and after Undo.",
+   "The host's unsaved-project sentence has no final period ('Open a saved project to run Play'); the engine's no-camera message keeps CLI wording ('--camera')."
+  ]
+ }
+}

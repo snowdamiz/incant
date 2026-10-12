@@ -12,6 +12,7 @@ import './styles/inspector.css';
 import './styles/agent.css';
 import './styles/dialogs.css';
 import './styles/assets.css';
+import './styles/play.css';
 import { App } from './App';
 import { resolveBridge } from './bridge/resolve';
 

@@ -1,0 +1,238 @@
+{
+  "built_source": {
+    "source_head": "79b5b7c9e6f06f5cc32aa4efaae9151154d21cb5",
+    "binaries": {
+      "incant_editor": "faab1c6688f301c2b1e6c757eef4d41338f7776e2006030cce0ebe524b36c7ed",
+      "incant_headless": "cf8f08a1030e6e33b27e7382a41eaee69ff3cecb2ab0800c75267cf12cb8e3d7"
+    },
+    "scope": "real native durable-budget handlers; UI0046 and0044 fixes are not in this build",
+    "build_log_sha256": "02974313695525478bbba3b1c653b450f9e1ac4a998acee5879306f955269f92"
+  },
+  "result": {
+    "passed": true,
+    "live": {
+      "accounting_uncertain": false,
+      "agent_provenance": true,
+      "budget_after_undo": {
+        "max_tokens": 1000000,
+        "used_tokens": 73259
+      },
+      "budget_before": {
+        "max_tokens": 1000000,
+        "used_tokens": 0
+      },
+      "journal_after_undo": {
+        "applied": 1,
+        "redo": 2,
+        "revision": 5,
+        "transaction_ids": [
+          "01M4PAESBDE8WJ5P2RZC8Z4MA4",
+          "01M4PAF49Y7MG9RWMS4JV2YKH1",
+          "01M4PAFDQSX1FVX9RY0T0VDD69"
+        ]
+      },
+      "limitations": [
+        "Local live account and numerical native handler acceptance; not rendered-pixel or WebView IPC dispatch evidence",
+        "Not a model quality evaluation, physical-device measurement or phase gate"
+      ],
+      "native_handler_calls": true,
+      "native_play_retained_across_turns": true,
+      "passed": true,
+      "platform": "macos",
+      "play_preserved_authoring": true,
+      "saved_account_restored": true,
+      "turns": [
+        {
+          "approval_count": 2,
+          "charged_tokens": 20069,
+          "completed": true,
+          "observed_stream_before_completion": true,
+          "report": {
+            "steps": 3,
+            "tool_call_count": 2,
+            "tool_calls": [
+              {
+                "name": "doc_query",
+                "selected_camera": null,
+                "succeeded": true
+              },
+              {
+                "name": "doc_patch",
+                "selected_camera": null,
+                "succeeded": true
+              }
+            ],
+            "transaction_count": 1,
+            "transaction_ids": [
+              "01M4PAF49Y7MG9RWMS4JV2YKH1"
+            ],
+            "truncated": false,
+            "usage": {
+              "input_tokens": 19985,
+              "output_tokens": 84
+            }
+          },
+          "turn": 1,
+          "used_tokens": 20069
+        },
+        {
+          "approval_count": 2,
+          "charged_tokens": 21882,
+          "completed": true,
+          "observed_stream_before_completion": true,
+          "report": {
+            "steps": 3,
+            "tool_call_count": 2,
+            "tool_calls": [
+              {
+                "name": "doc_query",
+                "selected_camera": null,
+                "succeeded": true
+              },
+              {
+                "name": "doc_patch",
+                "selected_camera": null,
+                "succeeded": true
+              }
+            ],
+            "transaction_count": 1,
+            "transaction_ids": [
+              "01M4PAFDQSX1FVX9RY0T0VDD69"
+            ],
+            "truncated": false,
+            "usage": {
+              "input_tokens": 21794,
+              "output_tokens": 88
+            }
+          },
+          "turn": 2,
+          "used_tokens": 41951
+        },
+        {
+          "approval_count": 1,
+          "charged_tokens": 15432,
+          "completed": true,
+          "observed_stream_before_completion": true,
+          "report": {
+            "steps": 2,
+            "tool_call_count": 1,
+            "tool_calls": [
+              {
+                "name": "play_run",
+                "selected_camera": null,
+                "succeeded": true
+              }
+            ],
+            "transaction_count": 0,
+            "transaction_ids": [],
+            "truncated": false,
+            "usage": {
+              "input_tokens": 15394,
+              "output_tokens": 38
+            }
+          },
+          "turn": 3,
+          "used_tokens": 57383
+        },
+        {
+          "approval_count": 1,
+          "charged_tokens": 15876,
+          "completed": true,
+          "observed_stream_before_completion": true,
+          "report": {
+            "steps": 2,
+            "tool_call_count": 1,
+            "tool_calls": [
+              {
+                "name": "play_state_query",
+                "selected_camera": null,
+                "succeeded": true
+              }
+            ],
+            "transaction_count": 0,
+            "transaction_ids": [],
+            "truncated": false,
+            "usage": {
+              "input_tokens": 15850,
+              "output_tokens": 26
+            }
+          },
+          "turn": 4,
+          "used_tokens": 73259
+        }
+      ],
+      "undo_restored_document": true
+    },
+    "reopen": {
+      "accounting_uncertain": false,
+      "budget_after_undo": {
+        "max_tokens": 1000000,
+        "used_tokens": 73259
+      },
+      "journal_after_undo": {
+        "applied": 1,
+        "redo": 2,
+        "revision": 5,
+        "transaction_ids": [
+          "01M4PAESBDE8WJ5P2RZC8Z4MA4",
+          "01M4PAF49Y7MG9RWMS4JV2YKH1",
+          "01M4PAFDQSX1FVX9RY0T0VDD69"
+        ]
+      },
+      "passed": true,
+      "provider_turns": 0,
+      "saved_account_restored": true
+    },
+    "authored_sha256": {
+      "project.json": "d46f35d6643d1f46c65c4dcca2a281bd70bcd00c3d63183a255e02012e851703",
+      "move.ts": "e86e92defb88e4eb157a52078475647f45456c64b9ead82a0cd5091a08275304"
+    },
+    "editor_sha256": "faab1c6688f301c2b1e6c757eef4d41338f7776e2006030cce0ebe524b36c7ed",
+    "headless_sha256": "cf8f08a1030e6e33b27e7382a41eaee69ff3cecb2ab0800c75267cf12cb8e3d7",
+    "journal_sha256_after_undo": "18b731b0082d7999503cc520d7846979a111082e64fcfcca8714a67c09b6821c",
+    "fixture_authored_through_incant_cmd": true,
+    "saved_project_and_sources_unchanged": true,
+    "journal_revision_and_transaction_ids_recovered": true,
+    "project_usage_recovered_after_undo_and_reopen": true,
+    "scope": "Local real provider/native handler acceptance, not WebView dispatch, rendered pixels or a phase gate"
+  },
+  "source_sha256": {
+    "editor/app/src/agent.rs": "316e57f0dbe4f5c5c8a0dd59d1c6d38bd5331f73232498f76ab0f64b038a99da",
+    "editor/app/src/agent/budget.rs": "0a69e3ec13b41f6e9fdce74cb9a2ace00c3a4da0ff5617f5bafcd3b2562a7210",
+    "editor/app/src/agent/worker.rs": "b857d3cdbf577ba29285dc94ed099d3903181ef0e5d6df54c4314b4f299c60b6",
+    "editor/app/src/agent/owner.rs": "22bff7e6aca85c7926bf5da1ccf5c3aea7135e33eb074db9681cb5fb3b52a7b6",
+    "editor/app/src/agent_probe.rs": "3f3ac3267f0789c0f0a44afbc19b67cf5376f65674d795cfc9dceb7e9955ae07",
+    "editor/app/src/main.rs": "9a1dc8f20d3e0a8f1d63e3db9958102529991a11233c05c14fb47ebdcc1d1e12",
+    "crates/incant_agent/src/ledger.rs": "c54cde4db5d81f77f7b861fe1f7738012dbc8c7d6ea1cb1934bde2fa4742af6e",
+    "crates/incant_agent/src/session.rs": "d7b1e0946fcbbc64ee47d7b5eac7e691d0a4e410a576a5ef7bbc5bd2e68f8b15",
+    "tools/probes/native-editor-agent.py": "ee49a3ecdcee53f401bc1c5759021139eb149d08034562e3e40e0e9e230250b0"
+  },
+  "receipt_sha256": "a45c4b9a457e91bd905b38a03ea256694a9a5c0d65827195cd2548c380a60444",
+  "run_log_sha256": "9cd651992a38a4b58b313d1e4f5237ceb5391956fa4166f1659dd849bc315cbf",
+  "independent_review": {
+    "reviewer": "/root/integrate_runtime_prs",
+    "checked_at": "2026-10-11T20:32:36.138458+00:00",
+    "verdict": "accepted receipt consistency and artifact identities",
+    "source_head": "79b5b7c9e6f06f5cc32aa4efaae9151154d21cb5",
+    "binary_sha256": {
+      "incant_editor": "faab1c6688f301c2b1e6c757eef4d41338f7776e2006030cce0ebe524b36c7ed",
+      "incant_headless": "cf8f08a1030e6e33b27e7382a41eaee69ff3cecb2ab0800c75267cf12cb8e3d7"
+    },
+    "result_sha256": "a45c4b9a457e91bd905b38a03ea256694a9a5c0d65827195cd2548c380a60444",
+    "manifest_sha256": "e0b8aadefb8bb46738e94942b46e3a016f43b69081b19f6f74be976a0ffa9bc5",
+    "live_sha256": "135ce532a446025a82732bfadf85c1d98cb2f7501ac082d2903cdb35a165b095",
+    "reopen_sha256": "a0e1b4761bd87fbe2edd14b608e6f2d4592eedacdacf741739cbe9304c8b1850",
+    "authored_sha256": {
+      "project.json": "d46f35d6643d1f46c65c4dcca2a281bd70bcd00c3d63183a255e02012e851703",
+      "move.ts": "e86e92defb88e4eb157a52078475647f45456c64b9ead82a0cd5091a08275304"
+    },
+    "journal_sha256": "18b731b0082d7999503cc520d7846979a111082e64fcfcca8714a67c09b6821c",
+    "completed_provider_turns": 4,
+    "approvals": 6,
+    "exact_measured_tokens": 73259,
+    "usage_after_undo_and_reopen": 73259,
+    "reopen_provider_turns": 0,
+    "accounting_uncertain": false,
+    "scope": "Independent local parsing/hashing of requested immutable binaries and receipt/fixture/journal only. No credential store, environment, raw provider traffic, native process or screenshot accessed. This verifies retained reported native-handler live evidence, not WebView dispatch, pixel acceptance, quality/performance or a phase gate."
+  }
+}

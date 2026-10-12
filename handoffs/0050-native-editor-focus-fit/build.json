@@ -1,0 +1,17 @@
+{
+  "manifest_path": "/tmp/incant-native-review-0050-bin-v1/manifest.json",
+  "manifest_sha256": "2d69d15cdffdb7ac7fcb9543c08c7e932affcd96c4a4f3fcb2005325467b70a3",
+  "source_commit": "4589c2ba5edf2d89587fef8b815bdca1cd4af01e",
+  "binaries": {
+    "incant_editor": {
+      "path": "/tmp/incant-native-review-0050-bin-v1/incant_editor",
+      "sha256": "89f6b0d990cbaf1f275b8b0e7d3c448a543ef7b4199239ec7e57c419c27623fd",
+      "bytes": 62675088
+    },
+    "incant_headless": {
+      "path": "/tmp/incant-native-review-0050-bin-v1/incant_headless",
+      "sha256": "e61898008e996282b5351c60247f97c8d02aa54dc76ef3f7d321b7567bb8d564",
+      "bytes": 52415952
+    }
+  }
+}

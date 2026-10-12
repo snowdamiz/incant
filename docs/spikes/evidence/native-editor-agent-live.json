@@ -1,0 +1,209 @@
+{
+  "base_head": "57837a525e69257deb7d2f39d190ceca2224297d",
+  "source_sha256": {
+    "editor/app/Cargo.toml": "e45c3f54a3ddafa6d97ea0bc6dbf4586afdc8cdc03ce80a8ba24e1c545c0ff48",
+    "editor/app/src/main.rs": "2949cbb57b5b72a14ab2f07483d6871dfb43a5d9d1b044ce006dabed489aa539",
+    "editor/app/src/agent_probe.rs": "5d0bbcceb26f4168375f7f53358fd90ffd36b63a08db67f71d88c4c4fa9c5300",
+    "tools/probes/native-editor-agent.py": "483d791c50f98899fa8d430ad53b0ce6c3171b86b64228b2007c267dfd1f6609",
+    "editor/app/src/agent.rs": "d0a9209be484f3e1c96cd0da5186f691f5947c43c5ccf628d7f560820eb4535a",
+    "editor/app/src/agent/owner.rs": "22bff7e6aca85c7926bf5da1ccf5c3aea7135e33eb074db9681cb5fb3b52a7b6",
+    "editor/app/src/agent/worker.rs": "bf60d3d1933cef1f761600bbded872a4cb666fb4e43e7e2f3c375c89b75b1ce5",
+    "editor/app/src/provider.rs": "5fcc1e95d06162815a8a27276523c0909fd0d0e6d9d930d9d9e3d6e5328b0bf5",
+    "editor/bridge/native.ts": "98defc607d842c9940ee69bff466d06e4a7da53473737f1805ff7d7dba415555",
+    "editor/bridge/native.generated.js": "ab81c737a22fce07eda5f52582dc8971bda51f89ce1e6c1aa7fb81680fd6faac"
+  },
+  "live": {
+    "passed": true,
+    "live": {
+      "agent_provenance": true,
+      "journal_after_undo": {
+        "applied": 1,
+        "redo": 2,
+        "revision": 5,
+        "transaction_ids": [
+          "01M4P701RQH3QSG9X4Y6FQY6CA",
+          "01M4P70C8TX8HEEZ78AFT40CDQ",
+          "01M4P70N9H6DF117FD5J5RS74P"
+        ]
+      },
+      "limitations": [
+        "Local live account and numerical native handler acceptance; not rendered-pixel or WebView IPC dispatch evidence",
+        "Not a model quality evaluation, physical-device measurement or phase gate"
+      ],
+      "native_handler_calls": true,
+      "native_play_retained_across_turns": true,
+      "passed": true,
+      "platform": "macos",
+      "play_preserved_authoring": true,
+      "saved_account_restored": true,
+      "turns": [
+        {
+          "approval_count": 2,
+          "charged_tokens": 19810,
+          "completed": true,
+          "observed_stream_before_completion": true,
+          "report": {
+            "steps": 3,
+            "tool_call_count": 2,
+            "tool_calls": [
+              {
+                "name": "doc_query",
+                "selected_camera": null,
+                "succeeded": true
+              },
+              {
+                "name": "doc_patch",
+                "selected_camera": null,
+                "succeeded": true
+              }
+            ],
+            "transaction_count": 1,
+            "transaction_ids": [
+              "01M4P70C8TX8HEEZ78AFT40CDQ"
+            ],
+            "truncated": false,
+            "usage": {
+              "input_tokens": 19727,
+              "output_tokens": 83
+            }
+          },
+          "turn": 1,
+          "used_tokens": 19810
+        },
+        {
+          "approval_count": 2,
+          "charged_tokens": 21614,
+          "completed": true,
+          "observed_stream_before_completion": true,
+          "report": {
+            "steps": 3,
+            "tool_call_count": 2,
+            "tool_calls": [
+              {
+                "name": "doc_query",
+                "selected_camera": null,
+                "succeeded": true
+              },
+              {
+                "name": "doc_patch",
+                "selected_camera": null,
+                "succeeded": true
+              }
+            ],
+            "transaction_count": 1,
+            "transaction_ids": [
+              "01M4P70N9H6DF117FD5J5RS74P"
+            ],
+            "truncated": false,
+            "usage": {
+              "input_tokens": 21526,
+              "output_tokens": 88
+            }
+          },
+          "turn": 2,
+          "used_tokens": 41424
+        },
+        {
+          "approval_count": 1,
+          "charged_tokens": 15252,
+          "completed": true,
+          "observed_stream_before_completion": true,
+          "report": {
+            "steps": 2,
+            "tool_call_count": 1,
+            "tool_calls": [
+              {
+                "name": "play_run",
+                "selected_camera": null,
+                "succeeded": true
+              }
+            ],
+            "transaction_count": 0,
+            "transaction_ids": [],
+            "truncated": false,
+            "usage": {
+              "input_tokens": 15214,
+              "output_tokens": 38
+            }
+          },
+          "turn": 3,
+          "used_tokens": 56676
+        },
+        {
+          "approval_count": 1,
+          "charged_tokens": 15696,
+          "completed": true,
+          "observed_stream_before_completion": true,
+          "report": {
+            "steps": 2,
+            "tool_call_count": 1,
+            "tool_calls": [
+              {
+                "name": "play_state_query",
+                "selected_camera": null,
+                "succeeded": true
+              }
+            ],
+            "transaction_count": 0,
+            "transaction_ids": [],
+            "truncated": false,
+            "usage": {
+              "input_tokens": 15670,
+              "output_tokens": 26
+            }
+          },
+          "turn": 4,
+          "used_tokens": 72372
+        }
+      ],
+      "undo_restored_document": true
+    },
+    "reopen": {
+      "journal_after_undo": {
+        "applied": 1,
+        "redo": 2,
+        "revision": 5,
+        "transaction_ids": [
+          "01M4P701RQH3QSG9X4Y6FQY6CA",
+          "01M4P70C8TX8HEEZ78AFT40CDQ",
+          "01M4P70N9H6DF117FD5J5RS74P"
+        ]
+      },
+      "passed": true,
+      "provider_turns": 0,
+      "saved_account_restored": true
+    },
+    "authored_sha256": {
+      "project.json": "e4b9bb709af20378b0946d5c5ea8c5e8918ac1eb9669504333b6212ed90907e7",
+      "move.ts": "e86e92defb88e4eb157a52078475647f45456c64b9ead82a0cd5091a08275304"
+    },
+    "editor_sha256": "718ea75b9d792015fa2af4d939d4af2e2e412c01c706b046a910075cf70bd1b6",
+    "headless_sha256": "4aae16cedbe4feaae7d6e59d2a01dc19e1e4afc0a1285a287210a9bacf156c0f",
+    "journal_sha256_after_undo": "83db6a48649f06d9ca819d1badcfbb32e4548f715ee2edc18ebe07f83839d235",
+    "fixture_authored_through_incant_cmd": true,
+    "saved_project_and_sources_unchanged": true,
+    "journal_revision_and_transaction_ids_recovered": true,
+    "scope": "Local real provider/native handler acceptance, not WebView dispatch, rendered pixels or a phase gate"
+  },
+  "checks": {
+    "integrated_rust_tests": 118,
+    "gpu_ignored": 1,
+    "ui_tests": 658,
+    "clippy": "four packages, all targets, agent-probe/play-probe, passed",
+    "strict_types": "passed",
+    "native_custom_protocol_build": "passed",
+    "logs": {
+      "/tmp/incant-agent-native-integrated-tests.log": "38c939a20231cad6125671e2ba732f9c8d8e0bbfa1485f1d243aeeb35d6e5d0f",
+      "/tmp/incant-native-agent-probe-final-tests-2.log": "3e362abd71f241ec8041dbacf40930a37c1b0dff2f17e353f1a2807f3c80f543",
+      "/tmp/incant-native-agent-probe-clippy.log": "d180e1c95632239aa672cf90a2db536b63e28c196535e01f184801bb0bd5bfa5",
+      "/tmp/incant-native-agent-probe-build.log": "4c0fe93a163fc8495a6f28a02720a397e6d711cc2400c438a400eebf4cc9704f",
+      "/tmp/incant-editor-agent-play-union-ui.log": "a6a113b6e5339e07f1c4d78872ce5dd9a5532c8c47199869e9484057be178d29",
+      "/tmp/incant-editor-agent-play-union-types.log": "5e05d0271a5a922a5b1639a75c386f68b84dc6f16fa9c31d0ca3992328a98dc3",
+      "/tmp/incant-editor-agent-play-union-build.log": "fc8ce71a5944a4c6cde56e43895de088a14e27cf1f275d93fe5386332422bf21"
+    }
+  },
+  "prior_failure": {
+    "log_sha256": "a7c56e8af55f255a5d5174caea8e6d6cccc75b6dc4f9ce0b065a2025bdb005a0",
+    "description": "Opt-in probe used len on opaque redo iterator; compiler refusal retained, corrected to count before passing final tests/build."
+  }
+}

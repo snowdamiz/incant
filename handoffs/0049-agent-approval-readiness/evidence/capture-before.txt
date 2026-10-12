@@ -1,0 +1,11 @@
+pending-w1440-s380: status=Needs approval ready=false allow=null note=null refused=false decide=0 axe=0
+pressed-w1440-s380: status=Needs approval ready=false allow=null note="Connect an OpenAI account and refresh the native session before deciding an approval." refused=true decide=0
+reading-w1440-s380: status=Needs approval ready=false allow=null note="Connect an OpenAI account and refresh the native session before deciding an approval." refused=true decide=0
+recovered-w1440-s380: status=Needs approval ready=true allow=null note="Connect an OpenAI account and refresh the native session before deciding an approval." refused=true decide=0 axe=0
+pending-w1440-s280: status=Needs approval ready=false allow=null note=null refused=false decide=0 axe=0
+pressed-w1440-s280: status=Needs approval ready=false allow=null note="Connect an OpenAI account and refresh the native session before deciding an approval." refused=true decide=0
+reading-w1440-s280: status=Needs approval ready=false allow=null note="Connect an OpenAI account and refresh the native session before deciding an approval." refused=true decide=0
+recovered-w1440-s280: status=Needs approval ready=true allow=null note="Connect an OpenAI account and refresh the native session before deciding an approval." refused=true decide=0 axe=0
+flow keyboard-undo: ok
+flow redo-then-stop: ok
+Wrote 8 captures and 2 flows to <worktree>/handoffs/0049-agent-approval-readiness/artifacts/before

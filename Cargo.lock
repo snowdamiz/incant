@@ -3839,6 +3839,32 @@ dependencies = [
 ]
 
 [[package]]
+name = "incant_agent_native"
+version = "0.0.1"
+dependencies = [
+ "base64 0.22.1",
+ "incant_agent",
+ "incant_assets",
+ "incant_audio_runtime",
+ "incant_cmd",
+ "incant_doc",
+ "incant_game_runtime",
+ "incant_input",
+ "incant_observe",
+ "incant_play",
+ "incant_render",
+ "incant_render_authoring",
+ "incant_render_game",
+ "incant_runtime",
+ "incant_script",
+ "serde",
+ "serde_json",
+ "tempfile",
+ "thiserror 2.0.21",
+ "ulid",
+]
+
+[[package]]
 name = "incant_assets"
 version = "0.0.1"
 dependencies = [
@@ -3990,13 +4016,20 @@ name = "incant_editor"
 version = "0.0.1"
 dependencies = [
  "incant_agent",
+ "incant_agent_native",
  "incant_assets",
+ "incant_audio_runtime",
  "incant_cmd",
  "incant_core",
  "incant_doc",
  "incant_import",
+ "incant_input",
+ "incant_play",
  "incant_render",
  "incant_render_authoring",
+ "incant_render_gpu_host",
+ "incant_runtime",
+ "incant_script",
  "pollster",
  "serde",
  "serde_json",
@@ -4004,6 +4037,7 @@ dependencies = [
  "tauri-build",
  "tempfile",
  "thiserror 2.0.21",
+ "ulid",
 ]
 
 [[package]]
@@ -4058,6 +4092,7 @@ dependencies = [
  "clap",
  "dirs 6.0.0",
  "incant_agent",
+ "incant_agent_native",
  "incant_assets",
  "incant_audio",
  "incant_audio_runtime",
@@ -4221,9 +4256,13 @@ dependencies = [
  "incant_doc",
  "incant_game_runtime",
  "incant_input",
+ "incant_render_data",
  "incant_render_game",
+ "incant_render_native",
  "incant_runtime",
  "incant_script",
+ "incant_types",
+ "kira",
  "serde",
  "serde_json",
  "tempfile",

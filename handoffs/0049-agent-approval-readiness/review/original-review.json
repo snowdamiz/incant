@@ -1,0 +1,94 @@
+{
+  "findings": [
+    {
+      "cause": "The new UI barrier infers readiness only from its own save and cap equality. Equal retained values do not prove the native history/account/project read has completed.",
+      "expected": "Approval buttons must stay unavailable while native admission is fenced, including before the history reply and until a freshly verified session. Stop and the existing transcript must remain available.",
+      "file": "editor/ui/src/components/AgentPanel.tsx",
+      "line_end": 350,
+      "line_start": 349,
+      "minimal_followup_agreed_with_root": "Optional approvalReady?: boolean on AgentState.running, emitted from a shared native agentApprovalReady() predicate also used by requestAgent; Claude consumes false in decisionBlocked. Absence preserves older-host behavior. No phase replacement.",
+      "observed": "NativeBridge fences approval admission immediately but publishes the retained running phase. The pane has no local allowanceSaving and no cap mismatch, so Allow remains enabled. A click is rejected with agent.unavailable and the unrelated account/refresh message. No engine_agent_decide IPC occurs; Stop remains available.",
+      "priority": "P2",
+      "proof": "One passing observational test on the real NativeBridge/App with mocked IPC, and one desired-behavior test failing because aria-disabled is null instead of true.",
+      "title": "Expose authoritative approval readiness during history recovery",
+      "trigger": "Awaiting-approval worker, matching cached authored/session caps, external budget-aware Undo or Redo with engine_history deferred."
+    }
+  ],
+  "inputs": {
+    "claude_commit": "710f9a1f577bf851e18ee409d74e07d3676fa7a9",
+    "claude_parent": "79b5b7c9e6f06f5cc32aa4efaae9151154d21cb5",
+    "followups": {
+      "followup-1-shell-allowance-wording.patch": "ffc6374ed424cd755ffad22507dd3f63fcb189c20f5fca7838a7d3837c830fe5",
+      "followup-2-bridge-allowance-wording.patch": "535d8e416f867fdd44ec4c0ffc5c12709b8c71094fd61658da9657c089526d74",
+      "followup-3-agent-unavailable-code.patch": "0fe5cc759cae699b4fe35b076a615861c0c7d522e2781c08819e809ef33e7ee3"
+    },
+    "root_cherry_pick": "abca768c9ca946e154056b30233d59fb349f0b4a",
+    "verified_integrated_commit": "263cacc122760ced67efee4caeb2218ea13810f4"
+  },
+  "limitations": [
+    "This receipt covers710f9a1 plus exactly the three named followups as integrated263cacc. Any later Claude useFollow/Latest changes need separate review.",
+    "Visual/pixel/layout acceptance remains Claude-owned. Browser fake-IPC captures do not prove a native or live provider gate.",
+    "The approval bug is an availability/feedback gap; native mutation safety is preserved. Complete plan phase/release gates are not approved."
+  ],
+  "proof_artifact_sha256": {
+    "/tmp/incant-claude0046-nonvisual-repro/expected-red.log": "fe86b426062e55e5e5a6221742bef8b386da4c1e9e14aa8734a0380748092fae",
+    "/tmp/incant-claude0046-nonvisual-repro/vitest.config.ts": "b1ffa9441822f95c3b8101de4844a51aacd60b3207c20cf190407a26f510a5ab",
+    "/tmp/incant-claude0046-nonvisual-repro/vitest.expected.config.ts": "eed838c39dd555fd2aba842c718eb7d53842efce2bae453c5b6fc7e76d9db7e1",
+    "/tmp/incant-claude0046-nonvisual-repro/vitest.log": "e668414e65869ef856808b79d252896f9d9634e99ee235dd96648e5e5a45602f",
+    "/tmp/incant-claude0046-nonvisual-review/integrated-source/editor/ui/src/test/approval-history.expected.test.tsx": "343b13b751a1e7304824e680960615eb160be4f754790c2ae34b28afca907491",
+    "/tmp/incant-claude0046-nonvisual-review/integrated-source/editor/ui/src/test/approval-history.review.test.tsx": "b05503aa6611962798034423bc934181fbf8eaa39ed374de96e197715084b425"
+  },
+  "reviewed_source_sha256": {
+    "AGENTS.md": "cab17f69f519b40681263a4e6cdf6de7d74f00e3d25316c769e6ec63ee3e145a",
+    "PLAN.md": "c60adc7457e6f5929b3430876f6b8ea02acffce5bf55fbaae9090933fe4aab6c",
+    "editor/bridge/contract.ts": "99b2c8c7a5917698ddda26a3397972392e444095e080ab853fad4b19be00360d",
+    "editor/bridge/native.budget.test.ts": "9bd1ea96ce55105e79904731b54171a972373b580dbd518da1698c8b3a96f666",
+    "editor/bridge/native.generated.js": "54f824dbd3fa8697e606c828af7fd52204a2911546eade5f67ca7996b9127e06",
+    "editor/bridge/native.ts": "d9f2bfce6ea01909b9e16f78fc4a27d218268c7f9bcdb2ac1669393f95fabb2e",
+    "editor/ui/src/bridge/resolve.ts": "b1a46f2637b503eac5c0cd3d64654829c821b9a27c2d2f9ff9850ae08a9c3f3b",
+    "editor/ui/src/components/AgentPanel.test.tsx": "5cfd248c7f94a45984ac5f3ee81ef818b39e3ce5b5c5036b6d4bf266d3d2d6d9",
+    "editor/ui/src/components/AgentPanel.tsx": "b2afbc85629b1e6dd92fa018cd521d6abf289f19130e12fdeca83c84ba005cd5",
+    "editor/ui/src/components/agent/AgentAllowance.test.tsx": "f76a978902e56493f9255e9b64abf9e933c5640987fbe3ee3687dcf1e30f8111",
+    "editor/ui/src/components/agent/AgentAllowance.tsx": "0ad3dde7fc4b2771d82ffea02a9973a779e32e58b44a2357ac6c848105de8f3b",
+    "editor/ui/src/components/agent/AgentComposer.tsx": "e813229a3cdf2d4ed0c9baaccf36fd9b57695b3b2bf9465c17b93e0b96b3589e",
+    "editor/ui/src/components/agent/AgentSession.test.tsx": "e41e52c14e36d85431adfea1677aa954c861a01d2654d691c08db2c120dd514e",
+    "editor/ui/src/components/agent/AgentTranscript.tsx": "0c86204666d13642935fce9c7473c29a499fd6800beb57963b825ff48b9ffcca",
+    "editor/ui/src/components/agent/AgentTurn.tsx": "11dea25254933a0d7a0b52126a97e28ee6c04061dc3d128ad4669744fcc068ee",
+    "editor/ui/src/components/agent/agentMemory.ts": "bb8e5bf14010722a128c2294088d7efe17b712ef9a62b7e6e46d67f961bbf4a8",
+    "editor/ui/src/components/agent/agentPhase.ts": "148dccd105f3376ba0c17cc2d721a144d0e536d5642e692a93a7247b528957a8",
+    "editor/ui/src/components/agent/agentText.test.ts": "7161eecd883830c89cbd260ba0eeffa6b58e08724caeef4db9d460d57c279d67",
+    "editor/ui/src/components/agent/agentText.ts": "5cc237bdc3598ce676900e3796c1e266d8f8ab71c35e80febea3109543c06677",
+    "editor/ui/src/components/agent/tokenAllowance.test.ts": "04f49169a830f94191bc396d2df8f56fc1662ff5dcf232e037680609761d24bb",
+    "editor/ui/src/components/agent/tokenAllowance.ts": "fb4473b3c3f031b48facc9c48382a8a8ab866e820bf4e7a534bc159eaf5f2d7c",
+    "editor/ui/src/shell/ShellContext.test.tsx": "9e53f0caab3f20f8515d58563c6b7609385cd29edfcbe293ec11043311e9824e",
+    "editor/ui/src/shell/ShellContext.tsx": "df8df6f1f4157cb093fd557e5c494c6b999f0ddd369510aa495fae2f2edf5071",
+    "handoffs/0046-project-agent-budget/brief.md": "d5ce93e915330eb8ce0c3ccc29b727dfbc7765ddebaca1e3d9d6aca09a710d63",
+    "package-lock.json": "cbea068b7d9182270271319a7a77d24805b9c9c66ed5e9eb3e188d60e5337c60"
+  },
+  "reviewer": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "xhigh",
+    "role": "astra"
+  },
+  "scope": "Independent nonvisual correctness review only. Exact immutable commit export and three hash-verified patches; no production edits or visual review.",
+  "validation": {
+    "commands": [
+      {
+        "command": "/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node node_modules/vitest/vitest.mjs run --config vitest.config.ts",
+        "cwd": "/tmp/incant-claude0046-nonvisual-repro",
+        "exit_code": 0,
+        "result": "1 observational test passed; confirms the finding, not candidate acceptance."
+      },
+      {
+        "command": "/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node node_modules/vitest/vitest.mjs run --config vitest.expected.config.ts",
+        "cwd": "/tmp/incant-claude0046-nonvisual-repro",
+        "exit_code": 1,
+        "result": "1 desired-behavior test failed at the approval hold assertion; expected true, received null."
+      }
+    ],
+    "full_suite": "Not rerun by this reviewer. Root separately reported887 UI tests, types/build/generated checks and native build passed on263cacc.",
+    "infrastructure": "Existing pinned dependencies used via private symlinks, one Vitest worker and private cache. Early private test/config path setup failures were corrected before the two recorded final runs. No production source writes, live provider/account calls, native window/GPU or screenshots.",
+    "source_hashes": "All listed reviewed files byte-identical to immutable root263cacc; exact three input patch hashes verified before application.",
+    "source_inspection": "Read the applicable public contract, native cap/schema/session barriers and relevant component/tests. Parsing refuses unsafe/fractional/negative inputs without clamping; saves retain newer typing/remount state and cannot dispatch another project draft; usage stays host-owned."
+  }
+}
