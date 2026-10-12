@@ -129,6 +129,18 @@ active. Report merged work separately from local checks and unmet exit gates.
 The project is still early relative to the complete Engine 1.0 and Driftwake
 scope; no defensible percentage or completion date follows from the PR count.
 
+## Native local avoidance — locally checked
+
+The native simulation and TypeScript SDK now expose bounded bulk steering with
+fixed native IDs and owned, sorted velocity proposals. Existing authoring schemas
+and numerical avoidance behavior are preserved. Shared work limits, hostile
+getters, expired callbacks and caught failures retain the whole-update rollback
+contract. The 360 distinct scoped tests include strict authored TypeScript that
+continues moving after its source directory is deleted; Clippy, wasm32 compilation
+and authoring-free dependency checks pass. Wasm steering bindings, automatic
+obstacle gathering, debug draw, the Core Sample and real-device performance
+evidence remain open. [Scope and evidence](docs/spikes/native-steering.md).
+
 ## Native text editing — locally checked
 
 The runtime text buffer now supports bounded committed text, directional

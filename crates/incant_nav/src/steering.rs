@@ -6,10 +6,55 @@ use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use std::{borrow::Cow, collections::BTreeSet};
 
+mod sealed {
+    pub trait Id {}
+    impl Id for String {}
+    impl Id for incant_types::StableId {}
+}
+
+/// The authoring boundary uses canonical strings; native gameplay keeps IDs in
+/// their fixed 16-byte representation. Both forms retain identical sorting and
+/// overlap resolution without formatting/parsing IDs inside the native solver.
+pub trait SteeringId: sealed::Id + Clone + Ord + std::fmt::Debug {
+    fn valid(&self) -> bool;
+    fn canonical_bytes(&self) -> [u8; 26];
+}
+
+impl SteeringId for String {
+    fn valid(&self) -> bool {
+        id_valid(self)
+    }
+    fn canonical_bytes(&self) -> [u8; 26] {
+        let mut bytes = [0; 26];
+        // Public callers may use this helper before validation. Invalid IDs do
+        // not panic; the solver always rejects them before using their bytes.
+        if self.len() == bytes.len() {
+            bytes.copy_from_slice(self.as_bytes());
+        }
+        bytes
+    }
+}
+
+impl SteeringId for incant_types::StableId {
+    fn valid(&self) -> bool {
+        true
+    }
+    fn canonical_bytes(&self) -> [u8; 26] {
+        let mut value = u128::from_be_bytes(self.0);
+        let mut bytes = [b'0'; 26];
+        for byte in bytes.iter_mut().rev() {
+            *byte = b"0123456789ABCDEFGHJKMNPQRSTVWXYZ"[(value & 31) as usize];
+            value >>= 5;
+        }
+        bytes
+    }
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
-pub struct SteeringAgent {
-    pub id: String,
+#[schemars(rename = "SteeringAgent")]
+pub struct SteeringAgent<I = String> {
+    pub id: I,
     /// World-space feet, with +Y up. Avoidance operates in the horizontal XZ plane.
     pub position: [f32; 3],
     pub velocity: [f32; 2],
@@ -21,8 +66,9 @@ pub struct SteeringAgent {
 }
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
-pub struct SteeringObstacle {
-    pub id: String,
+#[schemars(rename = "SteeringObstacle")]
+pub struct SteeringObstacle<I = String> {
+    pub id: I,
     /// Convex closed polygon, or a two-point one-sided segment. Solid is on the
     /// left of each directed edge: CCW polygons block their interior; CW enclose.
     pub vertices: Vec<[f32; 2]>,
@@ -32,12 +78,16 @@ pub struct SteeringObstacle {
 }
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
-pub struct SteeringQuery {
+#[schemars(rename = "SteeringQuery")]
+#[serde(bound(deserialize = "I: Deserialize<'de>"))]
+pub struct SteeringQuery<I = String> {
     #[schemars(length(max = 128))]
-    pub agents: Vec<SteeringAgent>,
+    pub agents: Vec<SteeringAgent<I>>,
     #[serde(default)]
     #[schemars(length(max = 32))]
-    pub obstacles: Vec<SteeringObstacle>,
+    // Generic field defaults are otherwise omitted from schema generation.
+    #[schemars(extend("default" = []))]
+    pub obstacles: Vec<SteeringObstacle<I>>,
     pub time_horizon: f32,
     pub obstacle_time_horizon: f32,
     /// Additional clearance in meters on each agent, including against obstacles.
@@ -49,8 +99,9 @@ fn default_margin() -> f32 {
     0.05
 }
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
-pub struct SteeringVelocity {
-    pub id: String,
+#[schemars(rename = "SteeringVelocity")]
+pub struct SteeringVelocity<I = String> {
+    pub id: I,
     pub velocity: [f32; 2],
     pub neighbors: u32,
 }
@@ -73,7 +124,7 @@ fn horizontal(p: [f32; 3]) -> Vec2 {
 fn overlap(a: f32, b: f32, c: f32, d: f32) -> bool {
     a < d && c < b
 }
-impl SteeringQuery {
+impl<I: SteeringId> SteeringQuery<I> {
     pub fn validate(&self, time_step: f32) -> Result<(), NavigationError> {
         if !scalar(time_step, 1. / 240., 1.)
             || !scalar(self.time_horizon, time_step, 10.)
@@ -89,7 +140,7 @@ impl SteeringQuery {
         }
         let mut ids = BTreeSet::new();
         for a in &self.agents {
-            if !id_valid(&a.id) || !ids.insert(&a.id) {
+            if !a.id.valid() || !ids.insert(&a.id) {
                 return Err(invalid("steering requires distinct stable ULIDs"));
             }
             if !a.position.iter().all(|v| scalar(*v, -10000., 10000.))
@@ -109,7 +160,7 @@ impl SteeringQuery {
         }
         let mut edges = 0;
         for o in &self.obstacles {
-            if !id_valid(&o.id) || !ids.insert(&o.id) {
+            if !o.id.valid() || !ids.insert(&o.id) {
                 return Err(invalid("steering requires distinct stable ULIDs"));
             }
             let n = o.vertices.len();
@@ -166,10 +217,10 @@ impl SteeringQuery {
 }
 /// All agents read the same input snapshot; output order is canonical by ID.
 /// No positions, velocities or documents are mutated by this function.
-pub fn steer(
-    query: &SteeringQuery,
+pub fn steer<I: SteeringId>(
+    query: &SteeringQuery<I>,
     time_step: f32,
-) -> Result<Vec<SteeringVelocity>, NavigationError> {
+) -> Result<Vec<SteeringVelocity<I>>, NavigationError> {
     query.validate(time_step)?;
     let mut agents: Vec<_> = query.agents.iter().collect();
     agents.sort_by(|a, b| a.id.cmp(&b.id));
@@ -288,7 +339,7 @@ pub fn steer(
         );
         if !velocity.is_finite() {
             return Err(invalid(format!(
-                "avoidance solver returned an invalid velocity: {} {:?} max {}",
+                "avoidance solver returned an invalid velocity: {:?} {:?} max {}",
                 input.id, velocity, input.max_speed
             )));
         }
@@ -302,11 +353,12 @@ pub fn steer(
     }
     Ok(output)
 }
-fn pair_direction(a: &str, b: &str) -> Vec2 {
+fn pair_direction<I: SteeringId>(a: &I, b: &I) -> Vec2 {
     let (low, high, sign) = if a < b { (a, b, 1.) } else { (b, a, -1.) };
     let hash = low
-        .bytes()
-        .chain(high.bytes())
+        .canonical_bytes()
+        .into_iter()
+        .chain(high.canonical_bytes())
         .fold(2166136261_u32, |hash, b| {
             (hash ^ u32::from(b)).wrapping_mul(16777619)
         });

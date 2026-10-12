@@ -1,0 +1,134 @@
+{
+  "recorded_at": "2026-10-12T03:05:44.376048+00:00",
+  "base": "37f61419d707cacb844a38abe2e048d3ffd1cd19",
+  "source_freeze_sha256": "4e83f573d6859ee64521bd8a099dbd7d5995b1ba5b2ba9d49e93c5b9a3e99190",
+  "sources": {
+    "Cargo.lock": "d80656cda94229032e820408a3086ed501c98f78e6159695b3939a9dcc5ba888",
+    "crates/incant_cook/tests/steering.rs": "8e0d4ab181841d1582ad06fcab67947b8c5453c39416e4f5ef3355332438d8bc",
+    "crates/incant_nav/Cargo.toml": "7a5d3142db098c458d11c993c03742d2393be44b7519edcb1d0107d84b6e1234",
+    "crates/incant_nav/src/lib.rs": "bcae807cd23466cec608efba9f98e91b8706b8401aad43a918eba7639b40b831",
+    "crates/incant_nav/src/steering.rs": "38aed7e91a93c9daaa81458ee3f0937a4b75c06a96a9fdb2e4c3d1469d9e5fe2",
+    "crates/incant_nav/tests/native_steering.rs": "6a52f81e70f523b81dc0611b17d09c38e5fbf6ace3ea735c29286a791b16a39a",
+    "crates/incant_runtime/src/lib.rs": "ce2ab60e8981597ece2fbd76f6bd352174573a0a0e2ceff7b6e3c0c4dad6decb",
+    "crates/incant_runtime/src/physics_queries.rs": "bd81211907e74672c6679eab1b7c36c1e46c05f544d329f9ae02f479bb6ad971",
+    "crates/incant_runtime/tests/steering_queries.rs": "1d3bc195f7168d716803923ff247856e4d8519d3124ae7bd8329f1f1678f1487",
+    "crates/incant_script/src/lib.rs": "c5573147658032807b5f3b1ff69dbc5573a4f66fd5e01df98625a9ae5c7867fc",
+    "crates/incant_script/src/navigation_tests.rs": "80bffc63e4e8fe059302ebaa6562dbb3ba2d9d982e80ab8da1406bcd3d004325",
+    "crates/incant_script/src/queries.rs": "52fd7696239249efbd2c088b7ef5481e7481420d7590616ea7dfcaba6a6713c3",
+    "crates/incant_script/src/query_values.rs": "6e9fa5b66919c866191888532bf54a808f3558e08bbd3ba3294b25dc29edebee",
+    "crates/incant_script/src/steering_tests.rs": "edca53ad4d554b4cd2cc83f96752d621e68a62c80e118575ea1bb0dfe0a31d18",
+    "crates/incant_script/src/steering_values.rs": "fd8187fa6529bf85d4e97cd2c8aa605affc43fe5a600bccbe7a5bc81487517ac",
+    "sdk/templates/native-navigation/steering.ts": "220c0f8b454b731cad1a790c4164fc762d0d07d2e58de02228f0b28f67cc9438",
+    "sdk/ts/src/native.d.ts": "615d07c35962f40d5719acf75723e32851148fd6224c6f06e558ce03c927c44c"
+  },
+  "scope": "Native fixed-ID avoidance query plus bounded QuickJS/TypeScript bulk API; no Wasm guest ABI, GPU or phone claims",
+  "distinct_tests": 360,
+  "new_tests": 13,
+  "checks": [
+    {
+      "name": "nav-runtime-script",
+      "exit": 0,
+      "description": "359 tests/42 groups, 0 failures/ignored on freeze001; all production sources unchanged in final freeze",
+      "log": "/tmp/incant-native-steering-all-tests-001.log",
+      "sha256": "8a0ce9af647f529fa7ed7ecb0f5136c8a94522e2df6bc1dca0359e69e015116d"
+    },
+    {
+      "name": "strict-typescript-cook",
+      "exit": 0,
+      "description": "1 source-deleted cooked NativeSession test after first-tick ordering fixture correction",
+      "log": "/tmp/incant-native-steering-cook-002.log",
+      "sha256": "e8472ce42fb46f3176f1f24dacc8b5831063a1e62566907ecb87db3bed014b65"
+    },
+    {
+      "name": "final-steering-js",
+      "exit": 0,
+      "description": "8 tests rerun after sharing navigation test fixture; already included in the359 count",
+      "log": "/tmp/incant-native-steering-js-final.log",
+      "sha256": "2ef79e65346a49ee40f85e92bbd47e9f67773407417e1deca0c324d683366624"
+    },
+    {
+      "name": "clippy",
+      "exit": 0,
+      "description": "All targets for nav/runtime/script/cook, compiler and typescript features, -D warnings",
+      "log": "/tmp/incant-native-steering-clippy-002.log",
+      "sha256": "bb08f74750eddc6bc61f4c8c167384c7f9b2fbba43bc84533a2acc119896a08e"
+    },
+    {
+      "name": "wasm32",
+      "exit": 0,
+      "description": "wasm32-unknown-unknown compile only: nav/runtime/script; not the guest steering ABI",
+      "log": "/tmp/incant-native-steering-wasm-001.log",
+      "sha256": "2f4add04f042ae8871c27997e7ea313dafd9e08231e743d9b4730da29c45579b"
+    },
+    {
+      "name": "runtime-graph",
+      "exit": 0,
+      "description": "No authoring dependencies reachable from nav/runtime/script normal graph",
+      "log": "/tmp/incant-native-steering-graph-001.log",
+      "sha256": "c93b0855f3506f4e6299ad651068d474938559a50bc09caf2322c9a092bd8cf6"
+    },
+    {
+      "name": "typescript-template",
+      "exit": 0,
+      "description": "Strict noEmit ES2022/bundler compile of the steering template",
+      "log": "/tmp/incant-native-steering-types-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "additional_checked_commands": [
+    {
+      "command": "node tools/generate_sdk.mjs --check",
+      "exit": 0
+    },
+    {
+      "command": "python3 tools/generate_conventions.py --check",
+      "exit": 0
+    },
+    {
+      "command": "./tools/cargo fmt --all --check",
+      "exit": 0
+    }
+  ],
+  "retained_failures": [
+    {
+      "log": "/tmp/incant-native-steering-tests-001.log",
+      "sha256": "4291c1a230d7ba31056cff2b5fa7e5e4bc1e3b17ea5eeffbeee9732d07c3945f",
+      "reason": "Schema regression: generic obstacles default annotation disappeared; explicitly restored default:[] before final checks"
+    },
+    {
+      "log": "/tmp/incant-native-steering-tests-002.log",
+      "sha256": "f8fe0299d59f1f10edf8a1a294f8d8d0e25c5d562820be50760070389ec0e787",
+      "reason": "Three schema/numerical tests passed; Rapier build interrupted by ENOSPC before runtime/JS execution"
+    },
+    {
+      "log": "/tmp/incant-native-steering-cook-001.log",
+      "sha256": "2dbe6bb914f4c6c1dd686c5969f9cb86d05c110715acbc051cc049c7ef46872f",
+      "reason": "Test expected60 movement steps despite first session tick committing velocity after simulation; corrected to assert first-tick ordering and then60 steps"
+    },
+    {
+      "log": "/tmp/incant-native-steering-clippy-001.log",
+      "sha256": "bca7c50a1adab1b18769349fbb1626a742b341ad7fbd85612f0241bf30d714a2",
+      "reason": "Duplicate test fixture module; changed to shared sibling fixture import, no production change"
+    }
+  ],
+  "limits": {
+    "agents_per_update": 128,
+    "obstacle_edges_per_update": 128,
+    "obstacles_per_call": 32,
+    "vertices_per_closed_polygon": 32,
+    "navigation_calls_per_update": 32,
+    "shared_query_cost_per_update": 1024
+  },
+  "limitations": [
+    "Existing solver still allocates bounded working vectors; no zero-allocation or reference-phone performance claim",
+    "Only proposals; gameplay supplies world-space samples/obstacles and applies physical motion",
+    "No Wasm steering ABI, automatic collider extraction, debug drawing or Core Sample",
+    "Source deletion test uses a real compiled in-process NativeSession, not a fresh shipping export or device gate"
+  ],
+  "independent_review": {
+    "path": "native-steering-review.json",
+    "sha256": "cdada053427377f14992acbfbf360c23090727c67ebfe68b8469c0df73d43bff",
+    "accepted": true,
+    "scope": "17 frozen inputs and completed checks; no extra builds or GPU review"
+  }
+}

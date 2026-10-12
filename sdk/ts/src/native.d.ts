@@ -1,5 +1,5 @@
 /** Native QuickJS migration API. Separate from the document-backed ScriptApi. */
-import type { LocaleSettings, LocalizeRequest, LocalizedText, CalendarDate, DateLength, LocalizationReportRequest, LocalizationReport, InputFrame, ScriptClock, TimerEvent, PhysicsRayQuery, PhysicsRayHit, PhysicsCharacterQuery, PhysicsCharacterMovement, PhysicsTriggerEvent, PhysicsRayQuery2D, PhysicsRayHit2D, PhysicsTriggerEvent2D, NavigationQuery, NavigationPath, GridNavigationQuery, GridPath } from './generated';
+import type { LocaleSettings, LocalizeRequest, LocalizedText, CalendarDate, DateLength, LocalizationReportRequest, LocalizationReport, InputFrame, ScriptClock, TimerEvent, PhysicsRayQuery, PhysicsRayHit, PhysicsCharacterQuery, PhysicsCharacterMovement, PhysicsTriggerEvent, PhysicsRayQuery2D, PhysicsRayHit2D, PhysicsTriggerEvent2D, NavigationQuery, NavigationPath, GridNavigationQuery, GridPath, SteeringAgent, SteeringObstacle, SteeringQuery, SteeringVelocity } from './generated';
 /** VM-owned bounded copy; no native pointers/handles or JSON conversion.
  * Retention cannot hold an ECS loan or alter the next input frame. */
 type InputReadonly<T> = T extends object ? { readonly [K in keyof T]: InputReadonly<T[K]> } : T;
@@ -120,6 +120,19 @@ export type NativePathRequest = NavigationQuery['path'];
 export type NativeNavigationPath = NavigationPath;
 export type NativeGridPathRequest = GridNavigationQuery['path'];
 export type NativeGridPath = GridPath;
+export type NativeVector2 = readonly [number, number] | Float64Array;
+export type NativeSteeringAgent = Omit<InputReadonly<SteeringAgent>, 'position' | 'velocity' | 'preferred_velocity'> & {
+  readonly position: NativeVector3;
+  readonly velocity: NativeVector2;
+  readonly preferred_velocity: NativeVector2;
+};
+export type NativeSteeringObstacle = Omit<InputReadonly<SteeringObstacle>, 'vertices'> & {
+  readonly vertices: readonly NativeVector2[];
+};
+export type NativeSteeringQuery = Omit<InputReadonly<SteeringQuery>, 'agents' | 'obstacles'> & {
+  readonly agents: readonly NativeSteeringAgent[];
+  readonly obstacles?: readonly NativeSteeringObstacle[];
+};
 /** Read-only committed navigation in the active native scene. All results are
  * owned mutable values, safe to retain. Functions expire after this update and
  * never reactivate. Active-call errors, even caught, reject the whole update.
@@ -143,6 +156,15 @@ export interface NativeNavigation {
    * consumes the entire tick budget; set it explicitly to make multiple queries.
    * An absent mesh/grid, invalid endpoint, or exhausted search throws. */
   findGridPath(entity: NativeId, request: NativeGridPathRequest): NativeGridPath | null;
+  /** Bulk reciprocal avoidance proposals, sorted by stable ID. Input positions
+   * are world-space feet (+Y up); velocities use XZ. IDs correlate values and
+   * need not name scene entities. Apply proposals through ordinary gameplay
+   * motion/physics; separation is not guaranteed for infeasible constraints.
+   * Uses this update's dt. Maximum 128 agents and 128 obstacle edges total per
+   * update, shared across calls/authored scripts, within the 32 navigation-call
+   * quota. Up to 32 obstacles per call; margin defaults to 0.05 m. Fixed-field
+   * copies, no JSON or document access. Owned results survive the tick. */
+  steerAgents(request: NativeSteeringQuery): SteeringVelocity[];
 }
 export type NativeLogLevel = 'debug' | 'info' | 'warn' | 'error';
 /** Bulk committed state captured after simulation, before script commands.
