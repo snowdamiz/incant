@@ -3974,6 +3974,7 @@ dependencies = [
  "incant_anim",
  "incant_assets",
  "incant_assets_runtime",
+ "incant_audio_runtime",
  "incant_cmd",
  "incant_doc",
  "incant_import",
@@ -4577,6 +4578,8 @@ version = "0.0.1"
 dependencies = [
  "incant_anim",
  "incant_assets",
+ "incant_assets_runtime",
+ "incant_audio_runtime",
  "incant_game_runtime",
  "incant_input",
  "incant_localization",

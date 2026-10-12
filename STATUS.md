@@ -1585,3 +1585,13 @@ reviewed source hashes and passes 166 CPU tests plus Clippy/graph checks; 71 GPU
 tests remain ignored. [Receipt](docs/spikes/evidence/runtime-pose-blending-main120.json).
 
 - Native Rust/Wasm HUD: additive ops56–58 preserve ops0–55/input-v1. 365 ordinary tests, three actual Wasmtime/wasm2c tests, all-target Clippy and scoped generation/wasm/runtime guards pass. Public source/cache/build/map-deleted package passes three fresh shaped-HUD/movement/PCM runs and six exact refusals; source and final evidence reviews accepted, publisher intake pending. Module checkpoints, headless native-play UI routing and native/GPU/device gates remain open. See `docs/spikes/native-wasm-hud.md`.
+
+- **Native Rust/Wasm audio transport (private execution checkpoint).** Additive
+  ops59–61 preserve all previous imports and expose copied desired declarations,
+  exact u64 transport epochs and atomic ordered controls. Independent source
+  review, ten focused tests, 483 actual-host tests in 87 groups, all-target
+  Clippy and three fresh development processes pass. Full 96-tick declarations
+  and real mixed PCM match the typed native oracle. Final evidence review and
+  ordinary public source-deleted shipping proof remain pending; no actual-cursor,
+  arbitrary guest checkpoint, physical-device or phase-gate claim. See
+  [contract and evidence](docs/spikes/native-wasm-audio.md).

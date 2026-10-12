@@ -109,6 +109,19 @@ class RegistryTests(unittest.TestCase):
         self.assertEqual(self.data['records']['AnimationRowV4'][:-4], self.data['records']['AnimationRowV2'])
         self.assertLess(40+100000*96+214336*24,self.data['constants']['MEMORY'])
 
+    def test_audio_preserves_all_prior_entries_and_bounds_complete_batches(self):
+        import hashlib
+        prior = {'functions': (59, 'ff94f98874d021ee6f475e464025e7e7d0365ef4d73ad043b91ffd075e72355b'), 'constants': (91, 'dbe7519e2f573722b4cc510f264bad5171d72a781af30184393ea81847db0449'), 'magic': (26, '623cd993b428e1129a8668527669aeb5de41727edf4770ec9b30532ba7e33269'), 'enums': (16, '79bb31b08db7c9114769a28cb51186284518aa40a961d970ddd22bdd16705682'), 'records': (59, 'da104457d876b74abce25b6ca1e6cf75c5b9514a77c7d963bc69ed2ea714baa9'), 'namespaces': (18, '4f02d3fe8c61a0510cde409b52c822b55daee6aeb960a475bdb28d68e69e3650')}
+        for name, (count, digest) in prior.items():
+            value = self.data[name]
+            prefix = value[:count] if isinstance(value, list) else dict(list(value.items())[:count])
+            self.assertEqual(hashlib.sha256(json.dumps(prefix, sort_keys=True).encode()).hexdigest(), digest, name)
+        self.assertEqual([(f['name'], f['opcode']) for f in self.data['functions'][59:62]], [('snapshot_len',59),('read_snapshot',60),('command',61)])
+        size = lambda name: sum(generator.SIZES[t]*(n[0] if n else 1) for _,t,*n in self.data['records'][name])
+        self.assertEqual([size(n) for n in ('AudioHeader','AudioRow','AudioCommandHeader','AudioCommand')], [40,200,16,32])
+        self.assertEqual([self.data['constants'][n] for n in ('AUDIO_MAX_NODES','AUDIO_MAX_BUSES','AUDIO_MAX_SOURCES','AUDIO_MAX_COMMANDS')], [161,32,128,1024])
+        self.assertLess(40+161*200, self.data['constants']['MEMORY'])
+
     def test_hud_is_additive_and_keeps_every_existing_definition(self):
         import hashlib
         prior = {'functions': (56, '7bc086cca969c85182c9ac7cc76aeeb78f525101e1ee09a9fb4703255606497a'), 'constants': (83, 'dc0641095face8dcc5f4272324eb29baee6a59519e319a2436ae0acc61f1f7f9'), 'magic': (25, 'fdf193751733a8c34dd6d592bd1127680bf6d820d3dd037a88e7b01fb38f246e'), 'enums': (14, '61087efd5ded951d7c33c64e3f2aca42da14b2ed57bfbbbbcf5b423b6a356f6d'), 'records': (54, 'a98d1a75f7a4531cbe38cc9baf6c1a656b174d1113f39d853dc41356d9f26461'), 'namespaces': (17, '94e7812e8ff0469646a83623dd46e3a6626f2be6268b8774ee88d575139c4f0d')}
