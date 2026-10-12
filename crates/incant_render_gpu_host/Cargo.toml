@@ -24,3 +24,5 @@ incant_assets = { path = "../incant_assets" }
 incant_assets_runtime = { workspace = true, features = ["visual"] }
 serde_json.workspace = true
 tempfile = "3"
+incant_ui.workspace = true
+png = "0.18"

@@ -3,12 +3,13 @@
 mod ui;
 use incant_game_runtime::SceneHost;
 use incant_render_data::SceneInput;
+pub use incant_render_data::UiInput;
 pub use incant_render_native::TextSettings;
 use incant_render_native::{
     NativeRenderError, NativeRenderInput, SyncError, UpdateKind, VisualCaches,
 };
 use incant_runtime::{NativeWorld, RuntimeError, StableId};
-use std::{convert::Infallible, path::PathBuf};
+use std::{convert::Infallible, path::PathBuf, sync::Arc};
 use thiserror::Error;
 pub use ui::UiSettings;
 
@@ -47,6 +48,11 @@ pub enum RenderHostError<E = Infallible> {
 /// The game composition destroys all live hosts on post-acceptance failure/unwind.
 /// A consumer may prepare and submit a replacement before swapping it into its
 /// own state. Device loss is terminal; neither sound nor submitted frames rewind.
+///
+/// Screen-space UI arrives as the exact candidate `UiInput` of the same
+/// transaction (None when the host has no UI owner). A UI-capable consumer must
+/// draw it or refuse, and must refuse before consuming a target frame; the CPU
+/// UI candidate is published only after `accept`/`admit_ui` succeeds.
 pub trait RenderInputConsumer: Sized {
     /// Screen-space input is a separate capability from world-space Text.
     /// Defaults to refusal before resources or GPU submissions are prepared.
@@ -56,6 +62,7 @@ pub trait RenderInputConsumer: Sized {
     fn prepare(
         input: &SceneInput,
         camera: &str,
+        ui: Option<&Arc<UiInput>>,
         settings: Self::Settings,
     ) -> Result<Self, Self::Error>;
     fn accept(
@@ -63,7 +70,11 @@ pub trait RenderInputConsumer: Sized {
         input: &SceneInput,
         camera: &str,
         kind: UpdateKind,
+        ui: Option<&Arc<UiInput>>,
     ) -> Result<(), Self::Error>;
+    /// Viewport-only relayout: admit the candidate's screen-space resources
+    /// without presenting a frame. A refusal leaves the accepted UI drawable.
+    fn admit_ui(&mut self, ui: &Arc<UiInput>) -> Result<(), Self::Error>;
 }
 
 /// Explicit CPU observation mode. GPU validity, submission, display and appearance
@@ -73,10 +84,24 @@ impl RenderInputConsumer for CpuInputObserver {
     const SUPPORTS_UI: bool = true;
     type Settings = ();
     type Error = Infallible;
-    fn prepare(_: &SceneInput, _: &str, (): ()) -> Result<Self, Infallible> {
+    fn prepare(
+        _: &SceneInput,
+        _: &str,
+        _: Option<&Arc<UiInput>>,
+        (): (),
+    ) -> Result<Self, Infallible> {
         Ok(Self)
     }
-    fn accept(&mut self, _: &SceneInput, _: &str, _: UpdateKind) -> Result<(), Infallible> {
+    fn accept(
+        &mut self,
+        _: &SceneInput,
+        _: &str,
+        _: UpdateKind,
+        _: Option<&Arc<UiInput>>,
+    ) -> Result<(), Infallible> {
+        Ok(())
+    }
+    fn admit_ui(&mut self, _: &Arc<UiInput>) -> Result<(), Infallible> {
         Ok(())
     }
 }
@@ -95,8 +120,12 @@ impl<C: RenderInputConsumer> NativeRenderHost<C> {
     pub fn ui(&self) -> Option<&incant_ui::UiRuntime> {
         self.ui.as_ref().map(|ui| &ui.runtime)
     }
-    pub fn ui_paint(&self) -> Option<&std::sync::Arc<incant_ui::UiPaint>> {
+    pub fn ui_paint(&self) -> Option<&Arc<incant_ui::UiPaint>> {
         self.ui.as_ref().map(|ui| &ui.paint)
+    }
+    /// The accepted screen-space draw input; its Arc is reused while unchanged.
+    pub fn ui_input(&self) -> Option<&Arc<UiInput>> {
+        self.ui.as_ref().map(|ui| &ui.input)
     }
     /// The last fully accepted frame's continuous f64 CPU input.
     pub fn render_input(&self) -> &NativeRenderInput {
@@ -132,6 +161,10 @@ impl<C: RenderInputConsumer> SceneHost for NativeRenderHost<C> {
     fn resize_ui(&mut self, world: &NativeWorld, viewport: [f32; 2]) -> Result<(), Self::Error> {
         let ui = self.ui.as_mut().ok_or(RenderHostError::UiUnsupported)?;
         let next = ui.prepare(world, viewport)?;
+        // The consumer admits the same candidate before the CPU owner publishes it.
+        self.consumer
+            .admit_ui(next.input())
+            .map_err(RenderHostError::Consumer)?;
         ui.commit(next)?;
         Ok(())
     }
@@ -164,8 +197,13 @@ impl<C: RenderInputConsumer> SceneHost for NativeRenderHost<C> {
             .ui
             .map(|settings| ui::Binding::load(world, &input, settings))
             .transpose()?;
-        let consumer = C::prepare(input.input(), input.camera_label(), settings.consumer)
-            .map_err(RenderHostError::Consumer)?;
+        let consumer = C::prepare(
+            input.input(),
+            input.camera_label(),
+            ui.as_ref().map(|ui| &ui.input),
+            settings.consumer,
+        )
+        .map_err(RenderHostError::Consumer)?;
         Ok(Self {
             input,
             consumer,
@@ -183,7 +221,9 @@ impl<C: RenderInputConsumer> SceneHost for NativeRenderHost<C> {
             .transpose()?;
         let consumer = &mut self.consumer;
         let spatial = world.spatial_view()?;
-        let accept = |input: &SceneInput, camera: &str, kind| consumer.accept(input, camera, kind);
+        let ui_input = ui_next.as_ref().map(|next| next.input());
+        let accept =
+            |input: &SceneInput, camera: &str, kind| consumer.accept(input, camera, kind, ui_input);
         let result = if self.input.has_text_binding() {
             self.input
                 .try_sync_with_text(&spatial, &world.text_view()?, accept)

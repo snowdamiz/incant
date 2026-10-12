@@ -331,6 +331,7 @@ fn unsupported_consumers_refuse_before_prepare_vm_and_audio() {
         fn prepare(
             _: &incant_render_data::SceneInput,
             _: &str,
+            _: Option<&Arc<incant_render_data::UiInput>>,
             _: (),
         ) -> Result<Self, Self::Error> {
             CALLS.fetch_add(1, Ordering::SeqCst);
@@ -341,7 +342,11 @@ fn unsupported_consumers_refuse_before_prepare_vm_and_audio() {
             _: &incant_render_data::SceneInput,
             _: &str,
             _: UpdateKind,
+            _: Option<&Arc<incant_render_data::UiInput>>,
         ) -> Result<(), Self::Error> {
+            panic!("unsupported")
+        }
+        fn admit_ui(&mut self, _: &Arc<incant_render_data::UiInput>) -> Result<(), Self::Error> {
             panic!("unsupported")
         }
     }
