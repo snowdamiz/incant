@@ -16,6 +16,19 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Planar presentation bindings — CPU shipping proof complete
+
+Optional authored roles now drive state flipbooks, localized status and terminal
+result parenting through existing native commands. Seven original and seven
+presentation native scenarios preserve gameplay behavior; two fresh shipping
+exports pass fourteen source/map/build-deleted player runs with exact logs,
+observations and PCM. Actual canonical shaped HUD text is verified. Independent
+source, local execution and final shipping reviews are accepted. Claude
+owns the separate Pearl Cove art/HUD branch and native-window appearance; whole-
+session restart, physics save/load and device gates remain open.
+[Contract and retained evidence](docs/spikes/planar-presentation-bindings.md).
+
+
 ## Pinned mobile bytecode compatibility — merged main171
 
 Fresh source cooks bind exact producer/destination and the pinned QuickJS ABI.
