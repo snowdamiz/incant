@@ -36,8 +36,8 @@ rerun or production change was needed.
 The [final packet](evidence/native-wasm-hud.json) retains 30 source identities,
 10 build inputs, 1,710 engine inputs, raw/compressed logs and public command,
 report, PCM and refusal receipts. Earlier failed fixture/setup attempts remain
-recorded. Independent source review is accepted; final execution and durable
-packet audit are pending. The earlier [source checkpoint](evidence/native-wasm-hud-source.json)
+recorded. Independent source and final execution/durable packet reviews are accepted;
+the [final receipt](evidence/native-wasm-hud/final-review.json) binds the exact proof. The earlier [source checkpoint](evidence/native-wasm-hud-source.json)
 is retained with its original, narrower status.
 
 Static/development guest checkpoints remain unsupported. No native-window,
