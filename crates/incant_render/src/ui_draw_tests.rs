@@ -170,7 +170,25 @@ impl Canvas {
     }
     /// Glyph coverage: snapped pen, padded rectangle at `scale` pixels per
     /// texel, one bilinear tap clamped to the padded texels (scale >= 0.8).
+    /// Labels first draw the same coverage as a shadow at the theme offset.
     fn glyphs(&mut self, atlas: &GlyphAtlas, widget: &UiWidget, color: [u8; 4]) {
+        if widget.role == UiRole::Label {
+            self.glyph_pass(
+                atlas,
+                widget,
+                theme::LABEL_SHADOW,
+                theme::LABEL_SHADOW_OFFSET,
+            );
+        }
+        self.glyph_pass(atlas, widget, color, [0.; 2]);
+    }
+    fn glyph_pass(
+        &mut self,
+        atlas: &GlyphAtlas,
+        widget: &UiWidget,
+        color: [u8; 4],
+        offset: [f32; 2],
+    ) {
         assert!(self.scale.iter().all(|s| *s >= 0.8), "single-tap reference");
         let [aw, _] = atlas.size();
         let texel =
@@ -190,8 +208,14 @@ impl Canvas {
             let [x, y, w, h] = rect.map(f64::from);
             let [ox, oy] = entry.origin.map(f64::from);
             let pen = [
-                snap(self.physical(f64::from(widget.origin[0] + glyph.position[0]), 0)),
-                snap(self.physical(f64::from(widget.origin[1] + glyph.position[1]), 1)),
+                snap(self.physical(
+                    f64::from(widget.origin[0] + glyph.position[0] + offset[0]),
+                    0,
+                )),
+                snap(self.physical(
+                    f64::from(widget.origin[1] + glyph.position[1] + offset[1]),
+                    1,
+                )),
             ];
             let p0 = [
                 pen[0] + (ox - 1.) * self.scale[0],
