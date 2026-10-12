@@ -1,5 +1,6 @@
 use crate::TextError;
 use cosmic_text::{Fallback, FontSystem, fontdb};
+use sha2::{Digest, Sha256};
 use std::{collections::BTreeMap, sync::Arc};
 use ulid::Ulid;
 use unicode_script::Script;
@@ -42,6 +43,12 @@ impl Fallback for OrderedFallback {
 pub(crate) struct Fonts {
     pub system: FontSystem,
     pub ids: BTreeMap<fontdb::ID, Ulid>,
+    pub sources: BTreeMap<Ulid, Source>,
+    pub identity: Arc<()>,
+}
+pub(crate) struct Source {
+    pub bytes: Arc<Vec<u8>>,
+    pub digest: [u8; 32],
 }
 
 impl Fonts {
@@ -73,7 +80,17 @@ impl Fonts {
         let count = fonts.len();
         let mut db = fontdb::Database::new();
         let mut assets = Vec::with_capacity(count);
+        let mut sources = BTreeMap::new();
         for (index, font) in fonts.into_iter().enumerate() {
+            let digest = Sha256::digest(&font.bytes).into();
+            let bytes = Arc::new(font.bytes);
+            sources.insert(
+                font.id,
+                Source {
+                    bytes: Arc::clone(&bytes),
+                    digest,
+                },
+            );
             // This API selects concrete asset faces, not CSS families/styles.
             // Construct bounded matching metadata instead of decoding arbitrary
             // name tables, whose overlapping records can amplify allocations.
@@ -81,7 +98,7 @@ impl Fonts {
             // or bold faces; the actual bytes/outlines remain unchanged.
             db.push_face_info(fontdb::FaceInfo {
                 id: fontdb::ID::dummy(),
-                source: fontdb::Source::Binary(Arc::new(font.bytes)),
+                source: fontdb::Source::Binary(bytes),
                 index: 0,
                 families: vec![(
                     FAMILIES[index].into(),
@@ -118,7 +135,12 @@ impl Fonts {
                 return Err(TextError::Font(asset));
             }
         }
-        Ok(Self { system, ids })
+        Ok(Self {
+            system,
+            ids,
+            sources,
+            identity: Arc::new(()),
+        })
     }
 }
 
