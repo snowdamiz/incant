@@ -16,6 +16,18 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Native physics saves — checked persistent boundary still open
+
+A bounded Rapier 0.36 diagnostic preserves trusted typed 2D/3D solver state and
+subsequent overlap events across eight cases / 960 continuation ticks. Rebuilding
+only current poses, velocities and sleep state diverges at nonzero checkpoints,
+including changed trigger events. Production `PhysicsUnsupported` remains intact;
+no untrusted solver graph decoder or world-v12 section has been adopted. The
+source audit identifies the private graph families a checked format must cover
+and the storage/load limits of deterministic replay. Independent source/evidence
+review accepted this bounded diagnostic; full physics saves remain open.
+[Diagnostic, source barrier and next options](docs/spikes/native-physics-snapshot-boundary.md).
+
 ## Native audio transport — main162 review accepted; fast check pending
 
 541 affected CPU cases, Clippy and target/contracts checks pass. A fresh ordinary

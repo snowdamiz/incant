@@ -1,0 +1,6 @@
+{
+  "owned_handle": 41950,
+  "exit_code": 0,
+  "matched_owned_processes": [],
+  "scope": "private probe executable and its Cargo/rustc commands only"
+}

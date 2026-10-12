@@ -1,0 +1,138 @@
+[
+  {
+    "checkpoint_tick": 0,
+    "continued_ticks": 120,
+    "dimension": 2,
+    "entered": 5,
+    "exited": 2,
+    "full_serialized_state_and_handles_compared_each_tick": true,
+    "initial_warmstart_contacts": 0,
+    "lossy_comparison": {
+      "first_subsequent_event_difference": null,
+      "first_subsequent_state_difference": null,
+      "initial_complete_bytes_equal": false,
+      "initial_states_equal": true
+    },
+    "trusted_clone_exact": true,
+    "untrusted_bytes_decoded": false
+  },
+  {
+    "checkpoint_tick": 30,
+    "continued_ticks": 120,
+    "dimension": 2,
+    "entered": 2,
+    "exited": 2,
+    "full_serialized_state_and_handles_compared_each_tick": true,
+    "initial_warmstart_contacts": 16,
+    "lossy_comparison": {
+      "first_subsequent_event_difference": null,
+      "first_subsequent_state_difference": 1,
+      "initial_complete_bytes_equal": false,
+      "initial_states_equal": true
+    },
+    "trusted_clone_exact": true,
+    "untrusted_bytes_decoded": false
+  },
+  {
+    "checkpoint_tick": 150,
+    "continued_ticks": 120,
+    "dimension": 2,
+    "entered": 2,
+    "exited": 2,
+    "full_serialized_state_and_handles_compared_each_tick": true,
+    "initial_warmstart_contacts": 22,
+    "lossy_comparison": {
+      "first_subsequent_event_difference": 10,
+      "first_subsequent_state_difference": 1,
+      "initial_complete_bytes_equal": false,
+      "initial_states_equal": true
+    },
+    "trusted_clone_exact": true,
+    "untrusted_bytes_decoded": false
+  },
+  {
+    "checkpoint_tick": 480,
+    "continued_ticks": 120,
+    "dimension": 2,
+    "entered": 2,
+    "exited": 2,
+    "full_serialized_state_and_handles_compared_each_tick": true,
+    "initial_warmstart_contacts": 22,
+    "lossy_comparison": {
+      "first_subsequent_event_difference": 10,
+      "first_subsequent_state_difference": 1,
+      "initial_complete_bytes_equal": false,
+      "initial_states_equal": true
+    },
+    "trusted_clone_exact": true,
+    "untrusted_bytes_decoded": false
+  },
+  {
+    "checkpoint_tick": 0,
+    "continued_ticks": 120,
+    "dimension": 3,
+    "entered": 5,
+    "exited": 2,
+    "full_serialized_state_and_handles_compared_each_tick": true,
+    "initial_warmstart_contacts": 0,
+    "lossy_comparison": {
+      "first_subsequent_event_difference": null,
+      "first_subsequent_state_difference": null,
+      "initial_complete_bytes_equal": false,
+      "initial_states_equal": true
+    },
+    "trusted_clone_exact": true,
+    "untrusted_bytes_decoded": false
+  },
+  {
+    "checkpoint_tick": 30,
+    "continued_ticks": 120,
+    "dimension": 3,
+    "entered": 2,
+    "exited": 2,
+    "full_serialized_state_and_handles_compared_each_tick": true,
+    "initial_warmstart_contacts": 32,
+    "lossy_comparison": {
+      "first_subsequent_event_difference": null,
+      "first_subsequent_state_difference": 1,
+      "initial_complete_bytes_equal": false,
+      "initial_states_equal": true
+    },
+    "trusted_clone_exact": true,
+    "untrusted_bytes_decoded": false
+  },
+  {
+    "checkpoint_tick": 150,
+    "continued_ticks": 120,
+    "dimension": 3,
+    "entered": 2,
+    "exited": 2,
+    "full_serialized_state_and_handles_compared_each_tick": true,
+    "initial_warmstart_contacts": 35,
+    "lossy_comparison": {
+      "first_subsequent_event_difference": 10,
+      "first_subsequent_state_difference": 1,
+      "initial_complete_bytes_equal": false,
+      "initial_states_equal": true
+    },
+    "trusted_clone_exact": true,
+    "untrusted_bytes_decoded": false
+  },
+  {
+    "checkpoint_tick": 480,
+    "continued_ticks": 120,
+    "dimension": 3,
+    "entered": 2,
+    "exited": 2,
+    "full_serialized_state_and_handles_compared_each_tick": true,
+    "initial_warmstart_contacts": 35,
+    "lossy_comparison": {
+      "first_subsequent_event_difference": 10,
+      "first_subsequent_state_difference": 1,
+      "initial_complete_bytes_equal": false,
+      "initial_states_equal": true
+    },
+    "trusted_clone_exact": true,
+    "untrusted_bytes_decoded": false
+  }
+]

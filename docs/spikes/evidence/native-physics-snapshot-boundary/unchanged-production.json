@@ -1,0 +1,16 @@
+{
+  "Cargo.toml": "dd9a6d6ff626086e7e1bf2f6845dac09d94c60651d0f43efc1be0cc3b5d83b7c",
+  "Cargo.lock": "bb9f6bc5183813d1be0124986e00515864d4a45f45290a537d5b9e91c995a6f3",
+  "crates/incant_physics_runtime/Cargo.toml": "b46d383c71229ebfc5e5293cec8f710865a52bff011da621762ee34c45ca6c97",
+  "crates/incant_physics_2d_runtime/Cargo.toml": "19f80020558bccfa3a890ffb97d0479a82f55a504af6fca689a848a5012b8c0b",
+  "crates/incant_runtime/src/save.rs": "8d399337ee694197bfa5718ce26740670f4fb4bde321f9597d3d2b06f2cec754",
+  "crates/incant_runtime/src/save/codec.rs": "89c7b7b3d7254db8542719cd417ac32ed9948eb1899204f4e49b52db89e9bcf9",
+  "crates/incant_physics_runtime/src/lib.rs": "7157c2d9650d3dc1e62840254ec5bc9de2862ae5ce6cb6e2f890b99845ce46a3",
+  "crates/incant_physics_runtime/src/queries.rs": "675914573c124551692b043dca98902c4efef98eda602b1023c1da3d032eafe6",
+  "crates/incant_physics_runtime/src/character_frame.rs": "97252c4b7ecf9b68ba9e33d5b94dd9c9b512069bf223adedca846732d26de98d",
+  "crates/incant_physics_2d_runtime/src/lib.rs": "2f0948f7cc93007327a07e4ffc0debd6ffd9f36052fcf70ca6e5d22d64114b13",
+  "crates/incant_physics_2d_runtime/src/query.rs": "3d0026bca040b22aacec283af9fa923c28ded1c0fdabf40652b5db0540d2a491",
+  "crates/incant_runtime/src/physics.rs": "ba1f98eddeef3becebe82831ea45cf6de4f7462e8e24ca422e4e68f7152a397f",
+  "crates/incant_runtime/src/physics_2d.rs": "3f3563e72e81d05a70d104291dddcc0d9e1355070ea8eb01f67581d319d8c3ac",
+  "crates/incant_runtime/src/world.rs": "730c648cd636306b21059a9fe7c17c432fb1d7761afe98f0e25e9c3896605db6"
+}
