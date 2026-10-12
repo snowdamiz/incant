@@ -1,0 +1,32 @@
+{
+  "checked_at": "2026-10-12T06:04:10.980299+00:00",
+  "pr": 139,
+  "head": "247e940bdd5f28f1dedd96628b475bc5fa109d94",
+  "base": "319e3e000f63ed2b0d349ac0bd9bff21df442aa8",
+  "tested_tree": "a049bb77252a758c9f1ce8dc427f9ce1b14afc14",
+  "prospective_tree": "a049bb77252a758c9f1ce8dc427f9ce1b14afc14",
+  "checks": [
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-12T06:04:06Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38210552180/job/114683497041",
+      "name": "development-checks",
+      "startedAt": "2026-10-12T06:01:29Z",
+      "status": "COMPLETED",
+      "workflowName": "Development checks"
+    }
+  ],
+  "policy": "Reviewed local verification and exact fast main gate; full23-context release promotion separate",
+  "merge": "3b316029d664d56e445a7823c888d04b174389a3",
+  "merged_at": "2026-10-12T06:04:12Z",
+  "parents": [
+    "319e3e000f63ed2b0d349ac0bd9bff21df442aa8",
+    "247e940bdd5f28f1dedd96628b475bc5fa109d94"
+  ],
+  "actual_main": "3b316029d664d56e445a7823c888d04b174389a3",
+  "merge_body": "Merge pull request #139 from snowdamiz/codex/integrate-native-ui-draw\n\nIntegrate Claude-authored canonical screen-space UI drawing after independent source review, scoped current-main CPU/compile validation and the exact fast gate. Retain original appearance/numerical evidence and explicit native-window/HiDPI/device limitations.\n\nBuilt-by: astra",
+  "tree_verified": true,
+  "trailer_verified": true,
+  "state": "MERGED"
+}

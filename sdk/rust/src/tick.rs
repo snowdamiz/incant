@@ -58,6 +58,88 @@ impl<'tick> Tick<'tick> {
     fn ready(&mut self) -> Result<()> {
         self.check(Ok(()))
     }
+    /// Find an owned-copy path on the active scene's committed navmesh. A miss
+    /// returns None; invalid owners/requests and exhausted budgets reject the tick.
+    pub fn find_path<'a>(
+        &mut self,
+        owner: &EntityId,
+        request: crate::navigation::PathRequest,
+        scratch: &'a mut [u8],
+    ) -> Result<Option<crate::navigation::Path<'a>>> {
+        self.ready()?;
+        let bytes = self.check(
+            abi::navigation_paths::encode_path(abi::PathRequest {
+                owner: owner.0,
+                start: request.start,
+                end: request.end,
+                snap_distance: request.snap_distance,
+                max_visited: request.max_visited,
+                reserved: 0,
+            })
+            .map_err(crate::navigation::error),
+        )?;
+        // SAFETY: the initialized fixed frame is copied synchronously.
+        let len = unsafe {
+            raw::incant_navigation_v1_find_path(
+                self.epoch,
+                bytes.as_ptr() as usize as i32,
+                bytes.len() as i32,
+            )
+        };
+        let len = self.read_path_reply(len, scratch, abi::PATH_MAX_RESULT_BYTES)?;
+        self.check(
+            abi::navigation_paths::decode_path_result(&scratch[..len])
+                .map_err(crate::navigation::error),
+        )
+    }
+    /// Adjacent grid-cell route with exact integer cost and captured generation.
+    pub fn find_grid_path<'a>(
+        &mut self,
+        owner: &EntityId,
+        request: crate::navigation::GridPathRequest,
+        scratch: &'a mut [u8],
+    ) -> Result<Option<crate::navigation::GridPath<'a>>> {
+        self.ready()?;
+        let bytes = self.check(
+            abi::navigation_paths::encode_grid(abi::GridPathRequest {
+                owner: owner.0,
+                start: request.start.map(u32::from),
+                end: request.end.map(u32::from),
+                flags: u32::from(request.diagonal),
+                max_expansions: request.max_expansions,
+            })
+            .map_err(crate::navigation::error),
+        )?;
+        // SAFETY: the initialized fixed frame is copied synchronously.
+        let len = unsafe {
+            raw::incant_navigation_v1_find_grid_path(
+                self.epoch,
+                bytes.as_ptr() as usize as i32,
+                bytes.len() as i32,
+            )
+        };
+        let len = self.read_path_reply(len, scratch, abi::GRID_PATH_MAX_RESULT_BYTES)?;
+        self.check(
+            abi::navigation_paths::decode_grid_result(&scratch[..len])
+                .map_err(crate::navigation::error),
+        )
+    }
+    fn read_path_reply(&mut self, len: i32, scratch: &mut [u8], limit: usize) -> Result<usize> {
+        let len = self.snapshot_length(len, scratch.len(), limit)?;
+        // SAFETY: checked initialized destination prefix; host validates whole range.
+        let actual = unsafe {
+            raw::incant_navigation_v1_read_path(
+                self.epoch,
+                scratch.as_mut_ptr() as usize as i32,
+                len as i32,
+            )
+        };
+        self.check(if usize::try_from(actual).ok() == Some(len) {
+            Ok(len)
+        } else {
+            Err(Error::Malformed)
+        })
+    }
     /// Compute sorted local-avoidance proposals using this callback's fixed dt.
     /// Aggregate work is bounded to 128 agents, 128 obstacle edges and 32 calls
     /// per update. Returned rows borrow only the caller's result scratch.

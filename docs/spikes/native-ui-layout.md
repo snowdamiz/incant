@@ -32,8 +32,9 @@ The old legacy gameplay path explicitly refuses UiNode.
 bytes with world Text, but owns separate screen-space shaping, widget values and
 atlas data. It requires the exact `WorldIdentity`, UI generation and native
 incarnation set. A missing UI-capable host/consumer refuses before VM/audio
-preparation or GPU submission. The existing CPU observer accepts the canonical
-data; GPU/window consumers deliberately do not yet accept UI.
+preparation or GPU submission. The CPU observer and the GPU consumer accept the
+canonical data ([GPU drawing](native-ui-draw.md)); the native window host does
+not yet configure UI.
 
 ## Input and transaction contract
 

@@ -10,6 +10,7 @@ pub mod animation_graph;
 pub mod flipbook;
 pub mod input;
 pub mod localization;
+pub mod navigation;
 mod raw;
 pub mod steering;
 mod tick;

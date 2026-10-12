@@ -1,0 +1,148 @@
+diff --git a/crates/incant_game_player/src/window/mod.rs b/crates/incant_game_player/src/window/mod.rs
+--- a/crates/incant_game_player/src/window/mod.rs
++++ b/crates/incant_game_player/src/window/mod.rs
+@@ -8,7 +8,7 @@
+ use crate::{bounded, embedded, session, startup};
+ use incant_audio_runtime::{AudioManagerSettings, DeviceBackend};
+ use incant_game_runtime::HostedGameSession;
+-use incant_render_game::{NativeRenderHost, NativeRenderSettings};
++use incant_render_game::{NativeRenderHost, NativeRenderSettings, UiSettings};
+ use incant_render_gpu_host::{GpuRenderConsumer, GpuRenderSettings};
+ use incant_runtime::{CookedScene, StableId};
+ use std::{
+@@ -119,6 +119,9 @@
+     let options = Options::parse(args)?;
+     let scene = CookedScene::from_bytes(&bounded(&options.scene, 128 * 1024 * 1024)?)?;
+     let rate = scene.tick_rate();
++    // Screen-space UI is laid out in logical pixels of the window's own scale;
++    // the GPU consumer draws it over the game in every presented frame.
++    let has_ui = scene.has_ui();
+     let actions = serde_json::from_slice(&bounded(&options.actions, 256 * 1024)?)?;
+     input::validate_actions(&actions)?;
+     let clips = startup::clips(&options.cache, &options.clips)?;
+@@ -135,6 +138,7 @@
+     );
+     let mut gamepads = gamepad::Gamepads::new()?;
+     let (mut surface, renderer, targets) = SurfaceState::new(Arc::clone(&window))?;
++    let size = window.inner_size();
+     let mut game = Game::new(
+         scene,
+         script,
+@@ -142,7 +146,12 @@
+         clips,
+         AudioManagerSettings::default(),
+         NativeRenderSettings {
+-            ui: None,
++            ui: has_ui.then(|| {
++                UiSettings::new(logical_viewport(
++                    [size.width, size.height],
++                    window.scale_factor(),
++                ))
++            }),
+             text: options.render.text,
+             model_cache: options.render.model_cache,
+             texture_cache: options.render.texture_cache,
+@@ -166,6 +175,7 @@
+     let mut retry = Instant::now();
+     let mut redraw_pending = true;
+     let mut presentation_refreshes = 0u64;
++    let mut ui_relayouts = 0u64;
+     let mut failure: Option<Box<dyn std::error::Error>> = None;
+     let mut exit = false;
+     let mut last_audio_poll = Instant::now();
+@@ -250,6 +260,9 @@
+                             && presentable
+                             && surface.reserve(&renderer)?
+                         {
++                            if has_ui {
++                                ui_relayouts += fit_ui(&mut game, &mut surface, &window)?;
++                            }
+                             let result = game.refresh_host();
+                             let consumed = surface.consumed();
+                             surface.cancel();
+@@ -275,6 +288,9 @@
+                                 break;
+                             }
+                             game.poll_device()?;
++                            if has_ui {
++                                ui_relayouts += fit_ui(&mut game, &mut surface, &window)?;
++                            }
+                             if suspended {
+                                 game.set_suspended(false)?;
+                                 suspended = false;
+@@ -330,10 +346,43 @@
+     if let Some(probe) = &probe {
+         probe.validate()?;
+     }
+-    let report = serde_json::json!({"mode":"native-window","tick":game.world()?.tick(),"accepted_frames":game.host()?.consumer().accepted_frames(),"presentation_refreshes":presentation_refreshes,"adapter":renderer.adapter_name,"backend":format!("{:?}",renderer.adapter.get_info().backend),"on_screen":true,"dropped_wall_ticks":clock.dropped.to_string(),"surface_reconfigurations":surface.reconfigurations,"surface_recreations":surface.recreations,"surface_skipped":surface.skipped,"lifecycle_probe":probe.as_ref().map(|p|p.report())});
++    let mut report = serde_json::json!({"mode":"native-window","tick":game.world()?.tick(),"accepted_frames":game.host()?.consumer().accepted_frames(),"presentation_refreshes":presentation_refreshes,"adapter":renderer.adapter_name,"backend":format!("{:?}",renderer.adapter.get_info().backend),"on_screen":true,"dropped_wall_ticks":clock.dropped.to_string(),"surface_reconfigurations":surface.reconfigurations,"surface_recreations":surface.recreations,"surface_skipped":surface.skipped,"lifecycle_probe":probe.as_ref().map(|p|p.report())});
++    if let Some(input) = game.host()?.ui_input() {
++        let host = game.host()?;
++        let stats = host.consumer().ui_stats();
++        let uploads = renderer.ui_uploads();
++        report["ui"] = serde_json::json!({"viewport":input.viewport,"scale_factor":window.scale_factor(),
++            "widgets":input.widgets.len(),"relayouts":ui_relayouts,
++            "focus":host.ui().and_then(|ui|ui.focus()).map(|f|ulid::Ulid::from_bytes(f.widget().0).to_string()),
++            "glyph_quads":stats.map(|s|s.glyph_quads),"quads":stats.map(|s|s.quads),"gpu_bytes":stats.map(|s|s.gpu_bytes),
++            "uploads":{"atlas_textures":uploads.atlas_textures,"atlas_bytes":uploads.atlas_bytes,"quad_buffers":uploads.quad_buffers,"quad_bytes":uploads.quad_bytes,"frame_writes":uploads.frame_writes}});
++    }
+     drop(game); // stop device audio before returning/closing the native surface
+     println!("{report}");
+     Ok(())
++}
++
++/// Logical UI size of a physical surface at the window's current scale factor.
++fn logical_viewport(size: [u32; 2], scale_factor: f64) -> [f32; 2] {
++    size.map(|n| ((f64::from(n) / scale_factor) as f32).max(1.))
++}
++/// Keep the UI viewport equal to the reserved surface in logical pixels before
++/// a frame is presented. Relayout is presentation only: no tick advances.
++fn fit_ui(
++    game: &mut Game,
++    surface: &mut SurfaceState,
++    window: &tao::window::Window,
++) -> session::Result<u64> {
++    let wanted = logical_viewport(surface.size(), window.scale_factor());
++    let current = game.host()?.ui_input().map(|input| input.viewport);
++    if current == Some(wanted) {
++        return Ok(0);
++    }
++    if let Err(error) = game.resize_ui(wanted) {
++        surface.cancel();
++        return Err(error.into());
++    }
++    Ok(1)
+ }
+
+ #[cfg(test)]
+@@ -353,6 +402,16 @@
+         .chain(tail)
+         .map(|s| (*s).to_owned())
+         .collect()
++    }
++    #[test]
++    fn ui_viewport_is_the_surface_in_logical_pixels() {
++        assert_eq!(super::logical_viewport([640, 480], 2.), [320., 240.]);
++        assert_eq!(
++            super::logical_viewport([641, 481], 1.5),
++            [641. / 1.5, 481. / 1.5]
++        );
++        assert_eq!(super::logical_viewport([16, 16], 2.), [8., 8.]);
++        assert_eq!(super::logical_viewport([1, 1], 3.), [1., 1.]);
+     }
+     #[test]
+     fn explicit_font_cache_and_tick_bound_parse_in_fixed_order() {
+diff --git a/crates/incant_game_player/src/window/surface.rs b/crates/incant_game_player/src/window/surface.rs
+--- a/crates/incant_game_player/src/window/surface.rs
++++ b/crates/incant_game_player/src/window/surface.rs
+@@ -161,6 +161,10 @@
+     pub fn consumed(&self) -> bool {
+         self.slot.borrow().is_none()
+     }
++    /// Physical size of the configured (reserved) surface.
++    pub fn size(&self) -> [u32; 2] {
++        [self.config.width, self.config.height]
++    }
+ }
+
+ // Window constraints are requests: fullscreen, display-scale changes or an OS

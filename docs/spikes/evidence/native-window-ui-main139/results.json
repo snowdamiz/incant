@@ -1,0 +1,92 @@
+[
+  {
+    "name": "tests",
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--offline",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_game_player",
+      "-p",
+      "incant_ui",
+      "-p",
+      "incant_input",
+      "-p",
+      "incant_render_game",
+      "--features",
+      "incant_game_player/native-window"
+    ],
+    "exit": 0,
+    "seconds": 95.39364095800556,
+    "log": "/tmp/incant-ui-surface-main139-checks/tests.log",
+    "sha256": "984f78fb63270b4041db6c34358d8e28c4c91dd42f959165236b8194b9931222"
+  },
+  {
+    "name": "clippy",
+    "command": [
+      "./tools/cargo",
+      "clippy",
+      "--locked",
+      "--offline",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "native-window",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit": 0,
+    "seconds": 3.729031249997206,
+    "log": "/tmp/incant-ui-surface-main139-checks/clippy.log",
+    "sha256": "6fd23e92e200c7abc56bf36bc6949fd56c4942732ccea6ee0bba3b3bf79259eb"
+  },
+  {
+    "name": "graph",
+    "command": [
+      "python3",
+      "tools/check_runtime_dependencies.py",
+      "incant_game_player",
+      "--features",
+      "incant_game_player/native-window"
+    ],
+    "exit": 0,
+    "seconds": 0.3579950830026064,
+    "log": "/tmp/incant-ui-surface-main139-checks/graph.log",
+    "sha256": "07d87a62d54ea4bd4f630d421b90904510f782b795c04820a194e18835a118dc"
+  },
+  {
+    "name": "fmt",
+    "command": [
+      "./tools/cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.9597673329990357,
+    "log": "/tmp/incant-ui-surface-main139-checks/fmt.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "conventions",
+    "command": [
+      "python3",
+      "tools/generate_conventions.py",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.029732458002399653,
+    "log": "/tmp/incant-ui-surface-main139-checks/conventions.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

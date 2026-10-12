@@ -1,0 +1,27 @@
+{
+  "time": "2026-10-12T05:23:05.153806+00:00",
+  "root": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+  "base": "52bb80154ab91edfe49214b02221247f371ed717",
+  "source_hashes": {
+    "crates/incant_runtime/src/lib.rs": "8a40ffb82a12ac6f2955a087d83ef07d848df394d25c27ae23772239050f2228",
+    "crates/incant_runtime/src/navigation_runtime.rs": "9945df566a125c0216d8a55635eade907f49943df7454eb5a3a6c40e3a1544ee",
+    "crates/incant_wasm_abi/src/lib.rs": "41518c2c4341905259f4f18fba8594dbdca38e20dc6af3548052728028da6b0f",
+    "crates/incant_wasm_abi/src/navigation_paths.rs": "b4cad03e82af1644bf4b6ad536e9addf298e8da8268ffa5b4d5e98320d5a3c87",
+    "crates/incant_wasm_dev/src/generated.rs": "64d4de13079b188e3fbad4e73432f298fb416068eff430309fd6f01fc18748f5",
+    "crates/incant_wasm_runtime/c/generated.inc": "e2e7c633c3404ab754298548dbd17bca03577e5db16d9ab236ed1a169b999953",
+    "crates/incant_wasm_runtime/src/capability.rs": "770963bb65a47dccf3a864dca53ad6ef1961b98e449ee2021816c6f3fb4d5fa0",
+    "crates/incant_wasm_runtime/src/generated.rs": "b691caa19545265751ec2e8ae20c0cba9cd0fd6e5a0cacee6549046bd569f983",
+    "crates/incant_wasm_runtime/src/input_tags.rs": "34886b96b777ac59ae48318607898419b8daa0354d75f3a53662a59b4c20feb1",
+    "crates/incant_wasm_runtime/src/lib.rs": "6db89a6c9facb661da725387637331028f70c32ee086a2cf6756cc8131f95fb0",
+    "crates/incant_wasm_runtime/src/navigation_paths.rs": "97f87251189e2eddeb2f751333f71d7cabfa3f3203659870bbc99948ab7d9cfa",
+    "crates/incant_wasm_runtime/src/steering.rs": "46e80454e85518532580a82cde5def0351b80c4507801c3036dd30cfea4cfb7e",
+    "sdk/abi/native-v1.json": "e510865a706e09e440f82003d36def13b9daca92a8c1da7b7e35cd86f0d5d7ac",
+    "sdk/rust/src/lib.rs": "777e8d58ab754922ee0dce2388639b8d74e83a901ef248ff2d7d05d5fbf68060",
+    "sdk/rust/src/navigation.rs": "09fe00fa737c1aa4e066a25b63c9a0be2fc3c108188fc3b288faffa6c7698de4",
+    "sdk/rust/src/raw.rs": "fbffa7124f47fae6041e99895185afa87f6702ea9ade5bd6f56b5e8b68825c34",
+    "sdk/rust/src/tick.rs": "b682c2ccbbc3e81609cb1ff2798166ccff23c322ec59e007e16668165a3481cd",
+    "tools/generate_wasm_sdk.py": "976a337c9464e55685aa76450161610278f049a3e113361ebc383714d251f1cf",
+    "tools/wasm_abi.py": "ba0e21964558dadf0437ecf3c37430608cdf905655070b5546a6229b90e4cde6"
+  },
+  "scope": "Production frozen for independent nonvisual review; tests/probe/docs still evolving."
+}

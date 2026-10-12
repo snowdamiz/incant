@@ -1,0 +1,12 @@
+{
+  "at": "2026-10-12T13:24:14.052356+00:00",
+  "verdict": "Accepted narrow test fixture repair",
+  "source_sha256": "0e1d527255072ba9440a52b0bef210687285ec6a08d192001ca5a70adfd5d81e",
+  "patch_sha256": "3f07e15695118578786738a598213c3a1bea8341a4a7329c2091cd0c2f4b7313",
+  "review_sha256": "ae320a5c6dd9c9d4cc1e013343cd4cb89f6de6aa39f8a06565ce2d4af975ae2b",
+  "verified_logs": 3,
+  "red_exit": 101,
+  "green_cases": 3,
+  "source_review": "InputReplay production accepts exactly1|2. Prior fixture labels2invalid. Changing unknownversionto3 restores intended assertion; all originalfuture-event/rate/start/range/oversize/no-output controls remain and nowassertspecificmessages. Positivecontrolactuallyruns1/2 andchecksstate/input/logs pluslostfocus andemptyheldkeys. No production parser edits.",
+  "limits": "Local macOS test-only evidence; failedcheckpoint10 keptunpromoted untilnewfrozenrelease passes."
+}

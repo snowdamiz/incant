@@ -16,6 +16,33 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Native game UI reserved-frame connection — current-main verified
+
+Managed native input and Claude's accepted screen-space consumer compose in the
+native player. Reserved-frame sizing now fences old pointer coordinates before
+relayout and preserves text ownership; unchanged frames reuse UI resources.
+All 138 affected CPU tests, Clippy, dependency checks and independent source
+review pass again with both production files unchanged on actual main139.
+Actual native-window/IME and pixel review are assigned to fresh Claude0057, so no
+native appearance or complete Game UI claim is made. See
+[the sizing contract](docs/spikes/native-window-ui-reserved.md).
+
+## Public Wasm navigation paths — current-main integration verified
+
+The Rust SDK now queries the committed native navmesh and prepared-grid solvers
+through bounded copied request/results. Existing opcodes 0–35 remain unchanged;
+new calls preserve stable IDs, exact generations/costs and off-mesh metadata.
+Navigation and steering share the same callback quota, with a separate bounded
+requested-search budget; authorized failures reject the complete staged native
+transaction. Actual Wasmtime/wasm2c conformance passes 369 tests/doctests, Clippy
+and three development processes. A separate 190 native runtime tests, supported
+wasm32/tooling checks and the authoring-free dependency check pass. Independent
+source and final evidence review accepted the implementation. Current-main
+integration repeats all 369 actual-host and 190 native cases with unchanged
+source; PR #138 passed the fast gate and merged. An ordinary source-deleted navigation guest shipping proof, full SDK,
+guest checkpoints, devices and phase gates remain open.
+[Contract and evidence](docs/spikes/native-wasm-navigation-paths.md).
+
 ## Native UI checkpoint state — CPU section merged
 
 Committed widget text, grapheme selection and logical focus now have a bounded
@@ -63,6 +90,18 @@ Independent review also corrected interrupted cache publication: private staged
 files now publish without clobber, with partial-write/concurrent/corrupt/symlink
 controls; the original source-free shipping proof remains separately recorded.
 
+## Native screen-space UI drawing — scoped integration
+
+The canonical UI candidate now reaches the retained GPU consumer, drawing labels,
+buttons, text fields, focus, selection and preedit over the world. Candidate
+refusal preserves accepted owner/resources; unchanged frames reuse their UI
+resources. Claude0056 supplied and reviewed the visuals on its frozen offscreen
+Metal build. Current-main CPU/compile checks preserve all renderer/shader source.
+The capability also admits the existing desktop UI startup route; reserved-frame
+correction now has current-main CPU verification; actual window/IME acceptance
+remains with Claude0057. PR #139 passed the fast gate and merged. No current-main GPU, phone or complete Game UI gate is claimed.
+[Contract and evidence](docs/spikes/native-ui-draw.md).
+
 ## Native game UI window delivery — CPU adapter
 
 The ordinary desktop host queues bounded opaque pointer/text receipts into its
@@ -106,6 +145,16 @@ pass; PR #113 merged the fixture correction. Checkpoint7 Windows desktop and
 Wasm conformance both pass.
 [Journal test evidence](docs/spikes/checkpoint6-budget-journal-tests.md).
 
+## Checkpoint10 replay fixture correction
+
+All eight frozen workflows finished: 20 required checks passed and three desktop
+checks failed the same outdated unknown-version fixture. Recording version 2 is
+intentionally supported. The test now refuses version 3 and compares accepted
+versions 1/2, preserving all prior refusal and no-output assertions with specific
+diagnostics. Three actual headless cases and scoped Clippy pass; independent
+source review accepted. Checkpoint10 remains failed and unpromoted; hosted repair
+confirmation awaits a new frozen candidate. [Evidence](docs/spikes/checkpoint10-input-fixture.md).
+
 ## Checkpoint9 agent fixture correction
 
 The frozen main132 release run reaches the same pre-provider test assertion in
@@ -126,12 +175,11 @@ Checkpoint8 promoted frozen main117 into release at
 exact-candidate push workflows succeeded. Its tree is exactly the selected main117
 tree; parents and Built-by trailer are verified. Checkpoints6–7 remain historical
 failed attempts. Later main118+ work continues through reviewed local checks and
-fast PR gates. Checkpoint9 now freezes main132 at candidate
-`7b908b38a9f2b984285b7de310dc1d2c6aa702b9` in PR #133; its comprehensive
-checks are active, with six jobs reaching the same pre-provider agent fixture
-failure because its fixed allowance is smaller than the current tool input. The
-reviewed test-only correction is merged in PR #135; checkpoint9 remains frozen
-and unpromoted, and full repair validation needs a later batch.
+fast PR gates. Checkpoint9 finished on frozen main132 with 17 required successes
+and six jobs failing at the same pre-provider fixture; no failed batch was
+promoted. The independently reviewed correction merged in PR #135. Checkpoint10
+froze main137 at `af3f84fdd60dda011d77295cbc21bcf55414b3f8` in PR #133,
+with the same 23 required contexts. Navigation and later feature work are excluded.
 Release does not track moving main.
 [Promotion evidence](docs/spikes/evidence/release-checkpoint-8.json).
 
@@ -171,10 +219,12 @@ script/Play/game cases, Clippy, compiler-disabled/wasm checks and 67 exact fresh
 schemas. A fresh current-lock shipping export deletes authoring/build storage
 and developer source maps before three 12-tick runs and five precise refusals.
 UI checkpoints and static/development Wasm UI remain explicitly unsupported.
-Claude0056's separate offscreen drawing implementation is accepted locally and
-queued after navigation; it has not yet been integrated here. Managed IME has
-CPU/platform compilation evidence, while actual window interaction and complete
-Game UI/device gates remain open. [CPU scope and evidence](docs/spikes/native-ui-layout.md).
+Claude0056's reviewed offscreen drawing implementation now has current-main
+CPU/compile validation: 206 cases, Clippy, downstream and wasm32 checks pass;
+89 GPU tests remain ignored in this integration. Its original frozen Metal
+numerical and appearance acceptance stays separately recorded. Managed IME has
+CPU/platform compilation evidence. Reserved-frame geometry has scoped CPU verification. Actual window interaction,
+HiDPI glyphs and complete Game UI/device gates remain open. [CPU scope and evidence](docs/spikes/native-ui-layout.md).
 
 Native two-input crossfade clocks and controls now retain independent outgoing
 playback, pause both inputs, finish at explicit endpoints and persist active

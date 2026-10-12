@@ -1,0 +1,122 @@
+{
+  "at": "2026-10-12T05:59:58.267349+00:00",
+  "original_claude_head": "75e17c3f8b4653311c3cd23beb46e83f34e9fb5a",
+  "original_tested_source": "0fe9dff97358a04b6ab077e4dc09e173be69d465",
+  "actual_main": "319e3e000f63ed2b0d349ac0bd9bff21df442aa8",
+  "tested_source": "eb856d9916844832a093ca99e875ea3a28c30a8f",
+  "actual_main_ancestry_head": "4bca7d05a6074d22c170521086fc499ecde35a7f",
+  "tested_and_ancestry_tree": "379c9a518a71a966acd1764eae9038327261bfe7",
+  "accepted_code_inputs": 22,
+  "unchanged_accepted_code_inputs": 19,
+  "source_hashes": {
+    "Cargo.lock": "6d574acc59d671f8adc2f3ea40c749b5f0562526fb96e5b978c52fc856132016",
+    "crates/incant_play/tests/control.rs": "2ff825a15065c4a2492e6a2c0aa9b54f8f1655c1c6a0679e2caa01cd93283870",
+    "crates/incant_render/src/lib.rs": "b7bab5bfcc46291aa091fdc03035fd2c09a5d3c1e7e93a4750148ba94309b847",
+    "crates/incant_render/src/ui/geometry.rs": "09ee21de05e5ba494f95adb0bc9996927facb3b9cb7db2232a8f6fdb853c6e6d",
+    "crates/incant_render/src/ui/mod.rs": "06cc8001e405646b5319f7d9522bf59393fc56ab0aa31921065de82cb798004e",
+    "crates/incant_render/src/ui/theme.rs": "d8b7e0c7861a6c6d77a867d7fc0127c26dfef2c76f901e0d2597011d08779858",
+    "crates/incant_render/src/ui/ui.wgsl": "5a69027155d75b52809d57b65cf4e11581ec2dec00473049f80de6b61879dcb4",
+    "crates/incant_render/src/ui_draw_tests.rs": "288bfc94d0ba1c59de0f918b9e1173a1661d85a42f7e95279cf59e9e71ff91be",
+    "crates/incant_render/src/ui_tests.rs": "84c4f4f420e57cf239746653fd74ccd63909efeadc7c8357b66a610f67408201",
+    "crates/incant_render_data/src/lib.rs": "4d3e351a04ec6083c6bcda903db7abec491561601c0c1ab671d2500e5b5b2386",
+    "crates/incant_render_data/src/ui.rs": "930fb593c2ce8271f00c5ca0a436471407ab77ed701f21692ae390b0ae849e26",
+    "crates/incant_render_game/src/lib.rs": "04c61311870440b602786ff04cbe060562089130a79383b3ce7cc8121cbb1dfb",
+    "crates/incant_render_game/src/ui.rs": "a70cf4845029789f4c1081b5c6333e84f85fe2bdbbdd3e18ee045ac023d0b996",
+    "crates/incant_render_game/tests/hosted.rs": "95feb58d04c3b5c4b224fffeebe3a4107bb5807ab3670dae20122ecb5275f91c",
+    "crates/incant_render_game/tests/ui.rs": "096c9a7b041682824e29e6a711e649594d374e6479ac54e80f48a053afae16b9",
+    "crates/incant_render_gpu_host/Cargo.toml": "7a8c8d4ddf7f94818cce53eb0eec01b9441944c0e2233be4240f65318c8f4bcf",
+    "crates/incant_render_gpu_host/examples/ui_review.rs": "592070b7410a9d2568f54cfb0266d06f8c1f619d0d76605f29612364a9d65b49",
+    "crates/incant_render_gpu_host/src/lib.rs": "d7ab8b9c4a90d6fdb2551de9925b0a4ed2eba006f4b3e6ff5f269d9a8d1af1b6",
+    "crates/incant_render_gpu_host/tests/ui.rs": "fe169d278f0b77f36794ec7fa8de480d72ebc55945342effb73ff0bb7b25c07e",
+    "crates/incant_ui/src/lib.rs": "0be3e4164f6aa6c9c98b6957b56d4df65852b7f92accb095db0be4c09de8ee27",
+    "crates/incant_ui/src/visual.rs": "4d9ee8ade63790a175ecf47f05028152403e32e644a909becf9a4cba6a77fa9d",
+    "crates/incant_ui/tests/visual.rs": "3736000fb5f1fdedba1980192c413e75e978dd59ee125e662b7c2281dab4f209"
+  },
+  "frozen_inputs": 1474,
+  "integration": "All six Claude commits preserved through cherry-picks with author trailers. No conflict or new renderer/shader edit. Three accepted-input differences preserve current main: additive incant_ui checkpoint exports; existing PreparedPlay test conversion to native module; Cargo.lock existing main edges/Tao source plus original reviewed GPU-host test dependencies.",
+  "checks": {
+    "cpu_passed": 206,
+    "failed": 0,
+    "gpu_ignored": 89,
+    "groups": 40,
+    "all_target_clippy": true,
+    "native_window_compile": true,
+    "headless_editor_compile": true,
+    "default_wasm_renderer_compile": true,
+    "normal_dependency_graph": true,
+    "fmt_conventions": true
+  },
+  "original_acceptance": {
+    "source": "0fe9dff97358a04b6ab077e4dc09e173be69d465",
+    "scope": "Root reviewed source/candidate publication/resource boundaries and numerical evidence. Appearance and pixel review belong to Claude. No native window, phone performance, full game UI or phase acceptance. High-DPI glyphs/hover/alignment and native wiring remain open.",
+    "tests": {
+      "test-gpu-host.txt": {
+        "passed": 7,
+        "groups": 4
+      },
+      "test-play.txt": {
+        "passed": 9,
+        "groups": 5
+      },
+      "test-player-window.txt": {
+        "passed": 33,
+        "groups": 2
+      },
+      "test-render-game.txt": {
+        "passed": 44,
+        "groups": 16
+      },
+      "test-render-gpu.txt": {
+        "passed": 138,
+        "groups": 3
+      },
+      "test-ui.txt": {
+        "passed": 30,
+        "groups": 8
+      }
+    },
+    "new_gpu_execution": false
+  },
+  "logs": {
+    "docs/spikes/evidence/native-ui-draw-main138/clippy.log.gz": {
+      "sha256": "ed3ad6ec755ba8769d130325da3a8fefd71adddc9fda4739ccf8e45b618d0a76",
+      "uncompressed_sha256": "af907e5bc0bb66dd8b147fcdd2154fb7c00d2d61af189f059dc8872c3058798d"
+    },
+    "docs/spikes/evidence/native-ui-draw-main138/conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/native-ui-draw-main138/cpu-tests.log.gz": {
+      "sha256": "e0a18b9119960e124bc906d854a20003fcee07e5e8a580e5caee96123874619a",
+      "uncompressed_sha256": "dc125c836f204604a31c68d2ec6d65bf090372c837795d9b4517ad9ac83cde4c"
+    },
+    "docs/spikes/evidence/native-ui-draw-main138/downstream.log.gz": {
+      "sha256": "c7ef9a698f7b3362a5c477e1f556275fb92bd2e919b2adb2e06469f7724eb2d7",
+      "uncompressed_sha256": "cd3755e3d855cb18fdce7fcf4354f14ff447e30fa349f3828c0b403ed1f5fd65"
+    },
+    "docs/spikes/evidence/native-ui-draw-main138/fmt.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/native-ui-draw-main138/graph.log.gz": {
+      "sha256": "7c6b47e31795476080c94010b6e2f2ac1d6040646c0b25442125133b7703d54f",
+      "uncompressed_sha256": "28c5ea0344450292217c0873900762453cece8d887cd00d17402f3d254ffaa2f"
+    },
+    "docs/spikes/evidence/native-ui-draw-main138/wasm32.log.gz": {
+      "sha256": "ec0b8bc147b3fc25506ff62b5903f98cace9fbfffb49094118295925ba3c43c7",
+      "uncompressed_sha256": "9008e1a4f5eb456691e6662535c6769eb4b58a91d462077056498517c7eb461e"
+    }
+  },
+  "receipts": {
+    "docs/spikes/evidence/native-ui-draw-main138/freeze.json": "c01b9e730c55cabb4b69dfd8fb46cffb277d4ed0902b2a6f45856f639fae4abc",
+    "docs/spikes/evidence/native-ui-draw-main138/results.json": "544756469659e87157fb5ca4938000511b0636b206ce509d522e296d5b9c203c",
+    "docs/spikes/evidence/native-ui-draw-root-review.json": "2f295137f9d351bd4bf882c4de935ad43a48314a8a5041784c86818a40164500",
+    "docs/spikes/evidence/native-ui-draw-main138/integration-seams.patch": "b06c938d96f8298e2e21a647bb956100e77e813fde6e2fa9eefa1b634b72eacd"
+  },
+  "limits": [
+    "Original Claude offscreen/numerical/appearance acceptance remains tied to its exact frozen build; no fresh current-main GPU or shipping package execution here.",
+    "SUPPORTS_UI now allows existing native-window UI startup; reserved-frame/viewport correction and actual native-window acceptance remain separately queued root work.",
+    "No native OS IME interaction, canonical OS caret placement, HiDPI glyph raster acceptance, phone performance or complete Game UI/phase gate."
+  ],
+  "processes": "All private CPU/compile checks terminal and reaped; no window/GPU/provider actions by integration."
+}

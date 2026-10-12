@@ -1,0 +1,58 @@
+{
+  "flipbooks": [],
+  "frames": 11200,
+  "logs": {
+    "dropped": 0,
+    "entries": []
+  },
+  "pcm_sha256": "a6430511b6325d09ced3334a8eb3172755a07f3224265eed8c80005f182ccde3",
+  "render_input": {
+    "binding_generation": 0,
+    "camera": "00000000000000000000000000000020",
+    "camera_position": [
+      0.0,
+      0.9,
+      7.0
+    ],
+    "decoded_payload_bytes": 1328220,
+    "first_model_position": [
+      0.0,
+      -1.25,
+      -2.0
+    ],
+    "first_sprite_position": null,
+    "first_text_position": null,
+    "gpu_submitted": false,
+    "mode": "cpu-only",
+    "model_count": 3,
+    "sprite_count": 0,
+    "text_atlas_bytes": 0,
+    "text_atlas_nonzero": 0,
+    "text_atlas_sha256": null,
+    "text_count": 0,
+    "text_font_count": 0,
+    "text_generation": 0,
+    "text_glyph_count": 0,
+    "text_missing_clusters": 0,
+    "text_rtl_glyphs": 0,
+    "tick": 14,
+    "topology_generation": 0,
+    "ui": {
+      "atlas_sha256": "58d4a5f3b9c09719c3b4950097b97091ba5bfcaa8aa4607631098c4a7ff22527",
+      "focus": "0000000000000000000000002E",
+      "glyphs": 155,
+      "values": {
+        "0000000000000000000000002A": "Ada Byron",
+        "0000000000000000000000002C": "سلام عليكم",
+        "0000000000000000000000002E": "日本語"
+      },
+      "viewport": [
+        960.0,
+        540.0
+      ],
+      "widgets": 18
+    }
+  },
+  "sources": [],
+  "tick": 14
+}

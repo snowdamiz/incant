@@ -1,0 +1,2 @@
+    Checking incant_render v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0056-native-game-ui-draw/crates/incant_render)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.59s
