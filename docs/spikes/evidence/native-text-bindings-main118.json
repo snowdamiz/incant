@@ -1,0 +1,298 @@
+{
+  "recorded_at": "2026-10-12T02:33:35.131471+00:00",
+  "reviewed_feature": "14079e2a6b12641f63134bc645a515f9ee4754b3",
+  "tested_source": "579b1111931f8a58f139dc6b9ed96d50fa9922ef",
+  "actual_main": "d3a12c8057aee9ffc96bed50daba7fcb37280cfc",
+  "integrated_source": "e8d8b90ac59afde90f4ab36022d0a9fa56ff8fe4",
+  "integration": "Original feature ancestry preserved; initial STATUS conflict additive. Actual main118 merge changes no tree bytes. All38 reviewed production/test/generated inputs preserved; Cargo.lock retains current main external resolutions and adds only the three original incant_cook dev edges.",
+  "preserved_source_hashes": {
+    "crates/incant_assets_runtime/Cargo.toml": "1b8dabdd797ac786935d503e041429f6b0b75aaa5daab04a6ac7089683aca8cb",
+    "crates/incant_assets_runtime/src/font.rs": "db57e2eeaf154f6acc79ba1263f921b3217722a05f3b7fda86d777461597bff0",
+    "crates/incant_assets_runtime/src/font_catalog.rs": "6c528b0fdeb192e6a6fc281a7975e4ced76bb464879bb9e09c3e5c422effb077",
+    "crates/incant_assets_runtime/src/lib.rs": "134479ad6625a3723c3238bffdcb04006df0a4497349c4bda4fe065b8dd93c92",
+    "crates/incant_cook/Cargo.toml": "fb6dda9948d6988378fe8a61d2a396e7d2e9627ad6c08351d278315381dc0490",
+    "crates/incant_cook/src/lib.rs": "ac010f93e50772f0e9ccf79dd96d28e7d6517deacf4badefd23a6509f0c6f18f",
+    "crates/incant_cook/src/project_build.rs": "b9e8791a010935653cb3ae71afa5e70a56f3f6f055fd4317d6500c494d498548",
+    "crates/incant_cook/src/scene.rs": "a746d1bb2f18bfee1543c69117330e782b0eccb1e4a369df8b61967f12fb03ed",
+    "crates/incant_cook/src/text.rs": "58c14761a295039cee27cc6d1350abe055c11ecf9999f797ce0e5ac8e72a9c3f",
+    "crates/incant_cook/tests/text.rs": "6fcefa7a0dd9a0c924817c09463daddbc072f8a46e9abe5b55a43dc3743042fe",
+    "crates/incant_core/src/scene.rs": "0267e1bf856691b9ed1d15faeb413abcdc47efef0050b5a2bd60ceb68f205ee3",
+    "crates/incant_core/tests/scene_projection.rs": "f6d8983e2b2fceeba1bc44007108c2df2bf3065077a503bab8a9fd68c5b7bb8f",
+    "crates/incant_doc/src/lib.rs": "a3aad37022ab8c3f343a74a3914b8b76aa063f13bb5a813bd3eb782f6116b5da",
+    "crates/incant_game_runtime/src/lib.rs": "6acb7074c5ed7aa331c40a6ddc1262a3480f5c0258a3d6a70ed45e3c8e7b96b4",
+    "crates/incant_game_runtime/tests/text_refusal.rs": "39682f7afeaa1c940f0cf9c5e01ff4fbcb57084b066e65e57a96171a03989034",
+    "crates/incant_render_native/src/lib.rs": "36dd4296ea79e9c79563ed53ce00b92a6dac94422f6bb6bc68ef8ffc817096ed",
+    "crates/incant_render_native/src/update.rs": "37a032a835e363abb8609273e01a3416269d9f2f9ec38d8c87e2a171837e4506",
+    "crates/incant_render_native/tests/text_refusal.rs": "083fa44fc73f1800a7cf9f1709c7244459110e7e9e0302aa3a46952c2fb8170f",
+    "crates/incant_runtime/src/binary.rs": "eb8107dfe8fa8cde973a1dac01b2859e6c835cc3a021ea0c47196a49dfa56e51",
+    "crates/incant_runtime/src/commands.rs": "099f7635f39e83c8626a328724df28703f6ffb2e54b3ef02002406ed5a942c7c",
+    "crates/incant_runtime/src/lib.rs": "6b36260f799a7195ed7fc8b7b10e7902918ccaec2ffb8e6a4ed4e7360ff6509d",
+    "crates/incant_runtime/src/save.rs": "e613d399b84ffe26498973239d7993ca5b1a167ddf0319a6ac60f3931b46db1d",
+    "crates/incant_runtime/src/scene.rs": "4c31458e0522187f034c5d91a5210ae5dd01ae20ce6710081ff98edc6ac6bc1a",
+    "crates/incant_runtime/src/spatial_view.rs": "c1f1a83040a42e81f0f7b742f7ed55ba475288fd26f99de8f92eb9e0b3f554f7",
+    "crates/incant_runtime/src/text.rs": "b2284b714ddf819a84c0765efc099f5f62fb8384c91b8185c8d3042af244dcb0",
+    "crates/incant_runtime/src/text_binary.rs": "8e087da6ecf0e922cfbfe0bdc9a9048e298cb255b20ec92c3cef075c4b7f702b",
+    "crates/incant_runtime/src/world.rs": "fd628b369b6ca690700b73ca33b4c519e7a383c9c95553d77de1e7d291097764",
+    "crates/incant_runtime/tests/physics.rs": "0cb4d21a6a752290965ff020cfc1cb357d9d341db9e0933989e0a931f68fa4fb",
+    "crates/incant_runtime/tests/physics_2d.rs": "d25e7cd1710478d0bb027774ab01dc18b79f4e3b1a78e9b472ea9f1e91a09ceb",
+    "crates/incant_runtime/tests/scenes.rs": "3ad9fd6080bebd8a4ca8f20b6c0079c5f40717140c3bc6d2b56cab19cc68a6e1",
+    "crates/incant_runtime/tests/text.rs": "e8d903ddc059acf79144418ab4dbd4335b9b150bd897af0457c33c082c74866c",
+    "crates/incant_types/src/lib.rs": "308375a8c1a52eca9f3fc478febd0e467ca234c3d4b58156ecf381977ab8d8d3",
+    "crates/incant_types/src/text.rs": "e0ca627a693d61033e75440fce2248ecf4c26a0143df2a317945c0f7523f8de5",
+    "tools/native_fonts.py": "36ec65e17f4fe5be7614b902d19b16143b7c3c093119b8c35fd794c23fe50ebc",
+    "tools/native_package.py": "0362128f683f835e31674ad2f024f54f35d7401ebdb6eb0b51d791e14578413b",
+    "tools/tests/test_native_fonts.py": "4b2cab371ee3cebd1e6a8bd7410a0327fd4bec8e809d4d7bda597d5903bc403d",
+    "schemas/Text.schema.json": "7940c39a9be230cc2fc88158f6a3e425cb6ab4d4b7048613836880c150b8f06e",
+    "sdk/ts/src/generated.d.ts": "a8d79ad9266a46dc52a6b9492e593cf25b799eb9f3ab6341156c8f125b959d1e"
+  },
+  "cargo_lock_sha256": "42d84e65a9430ed1b3cd142135cf646f4625703ad224f9f7626dcdf9ace9d650",
+  "checks": [
+    {
+      "name": "tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j2",
+        "-p",
+        "incant_types",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_cook",
+        "-p",
+        "incant_game_runtime",
+        "-p",
+        "incant_render_native",
+        "-p",
+        "incant_doc",
+        "-p",
+        "incant_core",
+        "-p",
+        "incant_assets_runtime",
+        "-p",
+        "incant_text",
+        "--features",
+        "incant_cook/typescript,incant_assets_runtime/font"
+      ],
+      "exit": 0,
+      "seconds": 164.68804554099916,
+      "log": "/tmp/incant-text-bindings-union-checks/tests.log",
+      "sha256": "559fce816fae5d0865a47bf7c4f3376ef0554016b472b553ad3eddb2ae2b5c13"
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j2",
+        "-p",
+        "incant_types",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_cook",
+        "-p",
+        "incant_game_runtime",
+        "-p",
+        "incant_render_native",
+        "-p",
+        "incant_doc",
+        "-p",
+        "incant_core",
+        "-p",
+        "incant_assets_runtime",
+        "-p",
+        "incant_text",
+        "--features",
+        "incant_cook/typescript,incant_assets_runtime/font",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 16.880058790993644,
+      "log": "/tmp/incant-text-bindings-union-checks/clippy.log",
+      "sha256": "7851c5861e0474bee8378bb09c8ddf6ccdd1d3af1a834f29e321035e129e1923"
+    },
+    {
+      "name": "wasm32",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_assets_runtime",
+        "--features",
+        "incant_assets_runtime/font",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--locked",
+        "--offline",
+        "-j2"
+      ],
+      "exit": 0,
+      "seconds": 8.925488916022005,
+      "log": "/tmp/incant-text-bindings-union-checks/wasm32.log",
+      "sha256": "b9f388ee955eac1220a421dc28acc18a45d7b9e091e9dc5e47022133a6181ab9"
+    },
+    {
+      "name": "font-tools",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_native_fonts.py"
+      ],
+      "exit": 0,
+      "seconds": 0.0994997920060996,
+      "log": "/tmp/incant-text-bindings-union-checks/font-tools.log",
+      "sha256": "ca3dcf078063fdb28d91e34bfb42032e3e70af47717ac32ee57110ea8aaaf10f"
+    },
+    {
+      "name": "package-tools",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_native_package.py"
+      ],
+      "exit": 0,
+      "seconds": 0.09200895900721662,
+      "log": "/tmp/incant-text-bindings-union-checks/package-tools.log",
+      "sha256": "6ff8cb6673e52248481ba0fa0eca3657ce430b443dbc93e93c7a3e25938b7877"
+    },
+    {
+      "name": "graph",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_runtime",
+        "incant_assets_runtime",
+        "incant_game_runtime",
+        "incant_render_native",
+        "incant_text",
+        "--features",
+        "incant_assets_runtime/font"
+      ],
+      "exit": 0,
+      "seconds": 0.4332374169898685,
+      "log": "/tmp/incant-text-bindings-union-checks/graph.log",
+      "sha256": "f81bf87ca60d6e685dba4690002b77d276f2916f79d0a0895a0bce19a6f4117d"
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.8622624579875264,
+      "log": "/tmp/incant-text-bindings-union-checks/fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.0335422919888515,
+      "log": "/tmp/incant-text-bindings-union-checks/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "schema",
+      "command": [
+        "./tools/cargo",
+        "run",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j2",
+        "-p",
+        "incant_doc",
+        "--example",
+        "schema",
+        "--",
+        "/tmp/incant-text-bindings-main118-schemas"
+      ],
+      "exit": 0,
+      "log": "/tmp/incant-text-bindings-union-checks/schema.log",
+      "sha256": "15a43bff2857bd9ff1472e64c4be482c942211699b0e5250b47bbd4cede69e60"
+    },
+    {
+      "name": "sdk-generation",
+      "command": [
+        "node",
+        "tools/generate_sdk.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "log": "/tmp/incant-text-bindings-union-checks/sdk-generation.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "sdk-types",
+      "command": [
+        "node_modules/.bin/tsc",
+        "-p",
+        "sdk/ts/tsconfig.json"
+      ],
+      "exit": 0,
+      "log": "/tmp/incant-text-bindings-union-checks/sdk-types.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "bridge",
+      "command": [
+        "node",
+        "tools/build_bridge.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "log": "/tmp/incant-text-bindings-union-checks/bridge.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "rust": {
+    "passed": 320,
+    "failed": 0,
+    "ignored": 0,
+    "groups": 75
+  },
+  "schema": {
+    "count": 27,
+    "equal": true
+  },
+  "root_review_sha256": "d3095df02867e00c1f1e795419e09e87cd45a37582d73a4749223e6ebaabc534",
+  "limitations": [
+    "Typed declaration, cook, retained world and font package foundation only.",
+    "Existing game/player, canonical renderer and legacy Play explicitly refuse Text until the separately reviewed composed consumer is integrated.",
+    "No GPU, pixels, IME/widget, provider, device or performance evidence.",
+    "No repeated full shipping proof: this scoped source still intentionally refuses mixed Text startup."
+  ]
+}

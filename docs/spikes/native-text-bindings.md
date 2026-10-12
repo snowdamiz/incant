@@ -97,3 +97,16 @@ inputs, both generated outputs and the exact logs, including preliminary fixture
 failures. [Independent root review](evidence/native-text-bindings-root-review.json)
 accepted that scope with no findings. All owned commands were terminal before
 this commit; no runtime or visual acceptance is inferred from these checks.
+
+## Actual main118 integration
+
+The original reviewed feature is preserved on actual main118. Its 38 reviewed
+source/test/generated hashes are unchanged; the lock retains current main
+resolutions and only the original three cooker dev-dependency edges are added.
+The integrated scoped run passes 320 Rust tests in 75 groups (zero failures or
+ignored cases), all-target Clippy, both wasm32 checks, 11 Python package/font
+controls, all 27 actual document schemas, strict SDK/template types and generated
+bridge/SDK checks. The actual-main merge changes no tested tree bytes.
+[Integration evidence](evidence/native-text-bindings-main118.json) retains exact
+commands and log hashes. This remains the data/package foundation with explicit
+Text consumer refusals; no rendering or mixed-game export acceptance is inferred.

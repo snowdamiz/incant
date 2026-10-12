@@ -778,7 +778,7 @@ and reject mixed numeric/entity/animation/log prefixes on failure. The combined
 against actual main117 now repeats all 281 actual-host tests and affected checks. This does not add
 blending/state machines/IK/root motion or satisfy device/complete SDK/Phase1 gates.
 
-## Native text scene and font packaging — locally checked foundation
+## Native text scene and font packaging — reviewed main integration
 
 Typed Text declarations now cook into bounded v12 binary scene data with explicit
 ordered font chains and immutable recipe bindings. Structural edits and
@@ -793,3 +793,10 @@ The retained composed CPU text input, actual renderer consumption/Claude
 acceptance, widget layout/IME/focus and reference-phone gates remain open.
 Evidence: [native text bindings](docs/spikes/native-text-bindings.md).
 
+
+Typed text foundation integration against actual main118 preserves all reviewed
+implementation inputs and passes 320 scoped Rust tests, Clippy, wasm32, 11 Python
+package/font controls and actual schema/generated/strict SDK checks.
+[Integration receipt](docs/spikes/evidence/native-text-bindings-main118.json).
+Composed Text startup and drawing remain separate queued work; existing consumers
+explicitly refuse Text in this foundation.
