@@ -3,6 +3,7 @@ import { NativeBridge, snapshotFromEngine } from "./native";
 import type { EngineRead, EngineResponse, Invoke } from "./native";
 import type { Ulid, WindowChrome, PlayStatus, PlayEntity } from "./contract";
 import colliderSchema from '../../schemas/Collider.schema.json';
+import animationSchema from '../../schemas/Animation.schema.json';
 const scene = "00000000000000000000000002";
 const entity = "00000000000000000000000010";
 it('preserves real compound part schemas, bounds and nested shape alternatives', () => {
@@ -66,6 +67,43 @@ function read(): EngineRead {
   };
 }
 describe("native bridge", () => {
+  it('normalizes the real nullable animation clip without changing its value or bounds', () => {
+    for (const clip of [0, 255, null, undefined]) {
+      const current = read();
+      current.schemas.Animation = animationSchema;
+      current.project.scenes[scene]!.entities[entity]!.components.Animation = {
+        ...(clip === undefined ? {} : { clip }), seconds: 0, speed: 1, playing: true, looping: true,
+      };
+      const before = JSON.stringify(current);
+      const snapshot = snapshotFromEngine(current);
+      expect(snapshot.schemas.Animation!.properties.clip).toMatchObject({
+        type: 'integer', nullable: true, optional: true, minimum: 0, maximum: 255,
+      });
+      expect(snapshot.entities[entity]!.components.find(c => c.type === 'Animation')!.value)
+        .toEqual(current.project.scenes[scene]!.entities[entity]!.components.Animation);
+      expect(JSON.stringify(current)).toBe(before);
+    }
+  });
+  it('normalizes nullable type arrays recursively while refusing ambiguous or malformed types', () => {
+    const current = read();
+    current.schemas.Nullable = { required: ['chain'], properties: {
+      chain: { type: ['null', 'array'], items: { type: ['integer', 'null'], minimum: 0 },
+        default: null, title: 'Chain', description: 'Ordered values', maxItems: 4 },
+      reference: { $ref: '#/$defs/OptionalNumber' },
+    }, $defs: { OptionalNumber: { type: ['number', 'null'], minimum: -1, maximum: 1 } } };
+    const before = JSON.stringify(current);
+    const fields = snapshotFromEngine(current).schemas.Nullable!.properties;
+    expect(fields.chain).toMatchObject({ type: 'array', nullable: true, optional: false,
+      default: null, title: 'Chain', description: 'Ordered values', maxItems: 4,
+      items: { type: 'integer', nullable: true, minimum: 0 } });
+    expect(fields.reference).toMatchObject({ type: 'number', nullable: true, minimum: -1, maximum: 1 });
+    expect(JSON.stringify(current)).toBe(before);
+    for (const type of [[], ['null'], ['null', 'null'], ['number', 'string'],
+      ['number', 'string', 'null'], ['null', {}], ['unknown', 'null']]) {
+      current.schemas.Invalid = { properties: { value: { type } } };
+      expect(snapshotFromEngine(current).schemas.Invalid!.properties.value!.type).toBe('unsupported');
+    }
+  });
   it('retains property defaults across local references and unions without authoring them', () => {
     const current = read();
     current.schemas.Camera = {
