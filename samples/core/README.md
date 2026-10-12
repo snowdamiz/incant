@@ -1,8 +1,9 @@
 # Core Sample
 
 Work in progress toward the Phase 1 sample in PLAN.md. The native TypeScript
-gameplay controller is implemented; the finished level, presentation, audio,
-shipping validation and reference-device results are still being assembled.
+gameplay controller has passed development and source-free shipping checks;
+the finished level, presentation, audio and reference-device results are still
+being assembled.
 
 `gameplay.ts` updates the scene through native bulk component columns. Its one
 controller instance references a player, a navigation mesh, an exit, enemies
@@ -23,7 +24,17 @@ keyboard win, gamepad win, jumping, losing, identical replay, missing pickup,
 and collision against a wall. It checks exact movement stopping, unique pickups,
 damage spacing and the game's state transitions. It also verifies that Play
 does not modify the authored project or script. This development command parses
-source at startup; the separate shipping proof must use cooked bytecode.
+source at startup. These scenarios also run in the existing comprehensive desktop
+checkpoint jobs, using their already-built headless tool.
+
+Run `python3 samples/core/export_verify.py <successful-development-output> <new-export-output>`
+to build an ordinary shipping player and replay the same scenarios with cooked
+bytecode. The helper removes only its new copied project, private build storage
+and external script maps; original development evidence remains unchanged. It
+checks exact logs, state observations and PCM against development. The missing
+pickup check verifies arrival within the exit's radius without granting a win.
+[Recorded local verification](../../docs/spikes/core-sample-gameplay.md) distinguishes
+these numerical checks from the ongoing visual and device work.
 
 The room is a test fixture, not the finished level or a performance benchmark.
 No device, full-save or Phase 1 gate is claimed by these checks.

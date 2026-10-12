@@ -117,6 +117,12 @@ jobs:
       - name: Verify public source edits, native Play and journal recovery
         if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
         run: python3 tools/probes/script-source-transactions.py artifacts/script-source-transactions --binary target/ci/incant_headless
+      - name: Play Core Sample gameplay scenarios on the native runtime
+        if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
+        run: python3 samples/core/verify.py artifacts/core-sample-gameplay --binary target/ci/incant_headless
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: ${{ !cancelled() && (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs') }}
+        with: {name: core-sample-gameplay-macOS, path: artifacts/core-sample-gameplay, if-no-files-found: error}
       - name: Export committed sources and execute the copied shipping game
         if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
         timeout-minutes: 45

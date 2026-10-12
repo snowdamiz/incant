@@ -113,6 +113,10 @@ def observations(name, ticks):
         checks.append({'name': 'jump-clears-ground', 'tick': 20, 'expect': {
             'type': 'vector', 'entity': PLAYER, 'property': 'physics_translation',
             'value': [-4, 2, 0], 'tolerance': .4}})
+    if name == 'skip-pickup':
+        checks.append({'name': 'missing-pickup-at-exit', 'tick': 200, 'expect': {
+            'type': 'vector', 'entity': PLAYER, 'property': 'physics_translation',
+            'value': [5, .62, 0], 'tolerance': .5}})
     return {'format': 'incant-native-observation', 'version': 1,
             'entities': [PLAYER, *ENEMIES], 'checks': checks}
 
