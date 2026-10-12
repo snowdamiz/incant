@@ -342,7 +342,7 @@
     }
   },
   "limitations": [
-    "Current-main verification reused the immutable matching main156 headless binary with all1752 non-workflow input hashes equal; there is no new shipping export here.",
+    "Current-main verification reused the immutable matching main156 headless binary with all 1740 frozen non-workflow input hashes equal; there is no new shipping export here.",
     "The seven source-deleted ordinary shipping runs remain the accepted producer evidence, not relabeled current-main runs.",
     "Gameplay in a numerical fixture only; Claude presentation, dynamic HUD, device and phase gates remain open."
   ],
