@@ -38,8 +38,8 @@ The trusted developer owner builds the selected kernel, verifies worker identity
 and enforces request deadlines and complete process-tree cleanup. Actual sessions
 preserve their original kernel while public authoring changes the next mode;
 state matches ordinary native Play after private source removal. Both compiled modes pass all-target tests and Clippy; actual owned-process proofs
-and full tools checks pass on main178. Final integration review/publication is
-pending. Editor GPU embedding and Windows execution remain separate.
+and full tools checks pass on main178. Independent final integration review is accepted; required fast check and
+publication are pending. Editor GPU embedding and Windows execution remain separate.
 [Contract and evidence](docs/spikes/native-worker-owner.md).
 
 ## Retained native CPU worker — current main178 checks passed
@@ -48,7 +48,7 @@ A native worker drops authoring state after startup and retains only its disposa
 runtime composition. Both matching physics binaries pass 65 all-target headless tests each,
 Clippy and real source-deleted process checks, including duplicate-step fencing,
 strict protocol refusals and disconnect cleanup. The three mode-aware test fixtures
-use public commands and preserve explicit foreign-mode refusal. Final review and
+use public commands and preserve explicit foreign-mode refusal. Independent final review is accepted; fast check and
 publication are pending; [integrated evidence](docs/spikes/native-worker-main178.md). Automatic editor process selection and GPU viewport
 embedding remain open. [Contract and evidence](docs/spikes/native-play-worker.md).
 
@@ -841,7 +841,7 @@ and complete Game UI/IME gates remain open.
 
 ## Current milestone
 
-Main #177 includes compound native animation and Wasm snapshots, authored two-bone
+Main #178 includes compound native animation and Wasm snapshots, authored two-bone
 IK, native/TypeScript/Wasm root motion, audio transport and HUD, offline audio/UI
 checkpoints, public physics queries, and the Core/Planar gameplay foundations.
 Pearl Cove's authored art/HUD and runtime hooks are merged with their scoped
@@ -849,9 +849,10 @@ producer visual and shipping evidence. Headless UI, the reusable player library,
 macOS C/Swift callers and trusted-source iOS bytecode compatibility are merged.
 Reviewed physics kernel forwarding, cooked/save identity, project selection and
 mode-aware developer/desktop export tools are merged; automatic editor worker
-selection and actual physics saves remain separate. The authored iOS current-main
-simulator proof and final review have passed and await publication; Android and
-retained CPU worker work are local parallel lanes. Phase 1 and the finished game
+selection and actual physics saves remain separate. Authored iOS archives are
+merged with actual simulator proof and qualified device-link evidence. The retained
+CPU worker current-main proof and final review pass, awaiting the fast PR check;
+whole-session restart and authored Android work remain local integration lanes. Phase 1 and the finished game
 remain incomplete.
 
 Checkpoint14 promoted selected main160 `d1ef35ee` after all 23 exact-candidate

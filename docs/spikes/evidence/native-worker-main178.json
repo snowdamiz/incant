@@ -963,5 +963,10 @@
     "Worker drops authoring state after startup but startup compiles native TypeScript. PCM is not exposed by the worker protocol.",
     "Request/read/write deadlines and encoded response cap do not establish bounded allocator use or an untrusted process sandbox."
   ],
-  "review_state": "Independent final current-main execution review pending."
+  "review_state": "Independent final current-main execution review accepted; required exact-head fast check and publication remain pending.",
+  "reviewed_manifest_sha256": "9334dcc6347dc8542446c4992e23d37773b337c6e6afbf412c314f67d5541a6b",
+  "final_review": {
+    "path": "docs/spikes/evidence/native-worker-main178/final-review.json",
+    "sha256": "1f63d53d4bdd544ecef6bf3ce8383480525181dcec249983901318d577fb9b02"
+  }
 }
