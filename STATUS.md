@@ -16,7 +16,7 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Public Wasm complete animation poses — local host proof passed
+## Public Wasm complete animation poses — local host and package proofs passed
 
 The Rust SDK now reads complete v4 pose frames with stable scene/entity identity,
 exact native contributions and explicit interpolation kinds. Legacy SLERP pairs
@@ -26,9 +26,14 @@ unchanged. Actual Wasmtime/wasm2c conformance passes 398 tests/doctests, Clippy 
 three generic development smoke processes; the new guest matches a direct native
 eight-pose oracle over twenty ticks. Source review accepts the frozen boundary.
 Final corrected union checks and independent evidence review pass; main integration
-remains pending. Synthetic sixteen-sample coverage
-establishes wire capacity only; tree-state fades/composite operands, source-deleted
-ordinary tree-game export, rendered/device gates and complete SDK remain open.
+remains pending. The ordinary public Rust tree-game package proof now passes
+three fresh source/cache/build/map-deleted wasm2c processes. Each matches 60
+complete records (3420 scalars), 228 bounded checks, native clocks and PCM against
+captured Wasmtime play and a direct native oracle. All eleven exact refusals pass,
+including old snapshots and unsupported guest checkpoints; independent package
+review is pending. [Package evidence](docs/spikes/native-wasm-animation-pose-package.md).
+Synthetic sixteen-sample coverage establishes wire capacity only; tree-state
+fades/composite operands, rendered/device gates and complete SDK remain open.
 [Contract and evidence](docs/spikes/native-animation-pose-sdk.md).
 
 ## Public Wasm physics queries — locally verified

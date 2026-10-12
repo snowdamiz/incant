@@ -1,0 +1,61 @@
+[
+  {
+    "argv": [
+      "./tools/cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 1.657539290999921,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-final-check-0.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "rustfmt",
+      "--edition",
+      "2024",
+      "--check",
+      "tools/probes/native-wasm-animation-pose-export/behavior.rs"
+    ],
+    "exit_code": 0,
+    "seconds": 0.025315875000160304,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-final-check-1.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "python3",
+      "tools/generate_wasm_sdk.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 0.2025322090003101,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-final-check-2.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "python3",
+      "tools/generate_conventions.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 0.039090958000087994,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-final-check-3.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 0.01495129100021586,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-final-check-4.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]
