@@ -16,6 +16,16 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Native worker owner — local execution and review passed
+
+The trusted developer owner builds the selected kernel, verifies worker identity,
+and enforces request deadlines and complete process-tree cleanup. Actual sessions
+preserve their original kernel while public authoring changes the next mode;
+state matches ordinary native Play after private source removal. Full tools and
+focused lifecycle checks and independent review pass; integration is pending. Editor GPU
+embedding and Windows execution remain separate.
+[Contract and evidence](docs/spikes/native-worker-owner.md).
+
 ## Retained native CPU worker — local checks and review passed
 
 A native worker drops authoring state after startup and retains only its disposable

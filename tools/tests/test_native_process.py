@@ -125,6 +125,42 @@ class NativeProcessTests(unittest.TestCase):
         self.assertEqual(result.stdout, 'x' * 262144)
         self.assertEqual(result.stderr, 'y' * 262144)
 
+    def test_interactive_gate_preserves_first_payload_and_eof(self):
+        payload = b'first request: ' + b'x' * 65536 + b'\n'
+        with native_process.Interactive(self.python(
+            'import sys; data=sys.stdin.buffer.readline(); '
+            'sys.stdout.buffer.write(data); sys.stdout.buffer.flush(); '
+            'assert sys.stdin.buffer.read()==b""; sys.exit(17)')) as child:
+            child.stdin.write(payload)
+            child.stdin.flush()
+            self.assertEqual(child.stdout.readline(), payload)
+            child.stdin.close()
+            self.assertEqual(child.wait(timeout=10), 17)
+            child.close()
+            self.assertEqual(child.wait(timeout=10), 17)
+        self.assertTrue(child.stdout.closed)
+
+    def test_interactive_timeout_reaps_actual_pipe_holding_descendant(self):
+        with native_process.Interactive(self.tree('running')) as child:
+            self.assertEqual(child.stdout.readline(), b'child ready\n')
+            with self.assertRaises(subprocess.TimeoutExpired):
+                child.wait(timeout=0.05)
+        self.assert_stopped()
+
+    def test_interactive_caller_failure_reaps_actual_descendants(self):
+        with self.assertRaisesRegex(RuntimeError, 'caller failed'):
+            with native_process.Interactive(self.tree('running')) as child:
+                self.assertEqual(child.stdout.readline(), b'child ready\n')
+                raise RuntimeError('caller failed')
+        child.close()
+        self.assert_stopped()
+
+    def test_interactive_success_cleans_descendants_before_private_files_return(self):
+        with native_process.Interactive(self.tree('exit')) as child:
+            self.assertEqual(child.stdout.readline(), b'child ready\n')
+            self.assertEqual(child.wait(timeout=10), 0)
+        self.assert_stopped()
+
     def test_timeout_kills_grandchild_before_returning_output(self):
         with self.assertRaises(subprocess.TimeoutExpired) as caught:
             native_process.run(self.tree('running'), timeout=3)
@@ -272,6 +308,24 @@ class DarwinWithoutWaitidTests(NativeProcessTests):
         self.assertIsNotNone(seen[0].returncode)
         self.assertTrue(seen[0].stdout.closed)
         self.assertTrue(seen[0].stderr.closed)
+
+    def test_interactive_observer_failure_closes_all_three_pipes(self):
+        seen = []
+        original = native_process.subprocess.Popen
+
+        def spawn(*args, **kwargs):
+            process = original(*args, **kwargs)
+            seen.append(process)
+            return process
+
+        with mock.patch.object(native_process.subprocess, 'Popen', side_effect=spawn), \
+             mock.patch.object(native_process, '_DarwinExitObserver', side_effect=OSError('observer refusal')):
+            with self.assertRaisesRegex(OSError, 'observer refusal'):
+                native_process.Interactive(self.python('import time; time.sleep(60)'))
+        self.assertEqual(len(seen), 1)
+        self.assertIsNotNone(seen[0].returncode)
+        for stream in (seen[0].stdin, seen[0].stdout, seen[0].stderr):
+            self.assertTrue(stream.closed)
 
     def test_child_exit_before_registration_remains_waitable(self):
         process = subprocess.Popen(self.python('import sys; sys.exit(19)'))

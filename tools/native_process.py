@@ -95,13 +95,13 @@ class _DarwinExitObserver:
 
 
 class _PosixTree:
-    def __init__(self, command, options):
+    def __init__(self, command, options, interactive=False):
         self.use_waitid = callable(getattr(os, 'waitid', None)) and all(
             hasattr(os, name) for name in ('WNOWAIT', 'WEXITED', 'P_PID'))
         self.observer = None
         if not self.use_waitid and not (sys.platform == 'darwin' and hasattr(select, 'kqueue')):
             raise RuntimeError('Managed tools require non-reaping POSIX child observation')
-        self.process = subprocess.Popen(command, stdin=subprocess.DEVNULL,
+        self.process = subprocess.Popen(command, stdin=subprocess.PIPE if interactive else subprocess.DEVNULL,
                                         start_new_session=True, **options)
         if not self.use_waitid:
             try:
@@ -110,7 +110,7 @@ class _PosixTree:
                 try:
                     self.stop()
                 finally:
-                    for stream in (self.process.stdout, self.process.stderr):
+                    for stream in (self.process.stdin, self.process.stdout, self.process.stderr):
                         if stream is not None:
                             stream.close()
                 raise
@@ -228,15 +228,16 @@ class _WindowsJob:
 
 
 class _WindowsTree:
-    def __init__(self, command, options):
+    def __init__(self, command, options, interactive=False):
         self.job = _WindowsJob()
+        self.interactive = interactive
         self.process = None
         try:
             # This fixed, isolated Python wrapper cannot spawn a command until
             # assignment succeeds. No assign-after-command-spawn race, taskkill
             # fallback, inheritable job handle, or breakaway flag is permitted.
             wrapper = [sys.executable, '-I', '-S', str(Path(__file__).resolve()),
-                       '--managed-child', *command]
+                       '--interactive-child' if interactive else '--managed-child', *command]
             self.process = subprocess.Popen(wrapper, stdin=subprocess.PIPE, **options)
             self.job.assign(self.process.pid)
         except BaseException:
@@ -254,7 +255,8 @@ class _WindowsTree:
     def release(self):
         self.process.stdin.write(b'GO\n')
         self.process.stdin.flush()
-        self.process.stdin.close()
+        if not self.interactive:
+            self.process.stdin.close()
 
     def exited(self):
         return self.process.poll() is not None  # Job handle owns descendant lifetime.
@@ -282,6 +284,77 @@ def _wait(tree, readers, command, timeout, deadline):
         time.sleep(min(0.01, remaining))
 
 
+def _command(command):
+    if isinstance(command, (str, bytes, os.PathLike)):
+        raise TypeError('command must be an argv sequence, never shell text')
+    command = [os.fsdecode(os.fspath(argument)) for argument in command]
+    if not command:
+        raise ValueError('command must not be empty')
+    if os.name == 'nt' and command[0].rstrip(' .').lower().endswith(('.bat', '.cmd')):
+        raise ValueError('Windows batch files require a shell and are not managed commands')
+    return command
+
+
+def _timeout(timeout):
+    if not isinstance(timeout, (int, float)) or not math.isfinite(timeout) or timeout <= 0:
+        raise ValueError('timeout must be finite and positive')
+
+
+class Interactive:
+    """Owned trusted-tool pipes; use as a context manager and drain output.
+
+    The caller supplies bounded protocol IO/deadlines. Never poll/wait the raw
+    child: wait() here preserves the POSIX group identity until tree cleanup.
+    Context exit, timeout and successful leader exit kill/reap all descendants
+    before private inputs may be deleted. close() is idempotent.
+    """
+    def __init__(self, command, *, cwd=None, env=None, stderr=None):
+        self.command = _command(command)
+        self.tree = (_WindowsTree if os.name == 'nt' else _PosixTree)(
+            self.command, dict(cwd=cwd, env=env, stdout=subprocess.PIPE,
+                               stderr=subprocess.PIPE if stderr is None else stderr,
+                               text=False), interactive=True)
+        self.closed = False
+        self.stdin, self.stdout, self.stderr = (
+            self.tree.process.stdin, self.tree.process.stdout, self.tree.process.stderr)
+        try:
+            self.tree.release()
+        except BaseException:
+            self.close()
+            raise
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *_):
+        self.close()
+
+    @property
+    def returncode(self):
+        return self.tree.process.returncode
+
+    def wait(self, timeout=30):
+        _timeout(timeout)
+        if not self.closed:
+            try:
+                _wait(self.tree, [], self.command, timeout, time.monotonic() + timeout)
+            finally:
+                self.close()
+        return self.tree.process.returncode
+
+    def close(self):
+        if self.closed:
+            return
+        # Mark first: a second cleanup must never signal a reused POSIX group ID.
+        self.closed = True
+        try:
+            self.tree.stop()
+        finally:
+            for stream in (self.stdin, self.stdout, self.stderr):
+                if stream is not None:
+                    stream.close()
+
+
 def run(command, *, cwd=None, env=None, timeout=120, stdout=None, stderr=None,
         text=True, encoding='utf-8'):
     """Run argv without a shell; default stdout/stderr are captured, stdin is EOF.
@@ -293,15 +366,8 @@ def run(command, *, cwd=None, env=None, timeout=120, stdout=None, stderr=None,
     stderr. POSIX launch failures raise OSError. Kernel termination/reaping may
     exceed the execution timeout; returning with a live owned tree is forbidden.
     """
-    if isinstance(command, (str, bytes, os.PathLike)):
-        raise TypeError('command must be an argv sequence, never shell text')
-    command = [os.fsdecode(os.fspath(argument)) for argument in command]
-    if not command:
-        raise ValueError('command must not be empty')
-    if os.name == 'nt' and command[0].rstrip(' .').lower().endswith(('.bat', '.cmd')):
-        raise ValueError('Windows batch files require a shell and are not managed commands')
-    if not isinstance(timeout, (int, float)) or not math.isfinite(timeout) or timeout <= 0:
-        raise ValueError('timeout must be finite and positive')
+    command = _command(command)
+    _timeout(timeout)
     deadline = time.monotonic() + timeout
     options = dict(cwd=cwd, env=env, stdout=subprocess.PIPE if stdout is None else stdout,
                    stderr=subprocess.PIPE if stderr is None else stderr, text=False)
@@ -344,12 +410,23 @@ def run(command, *, cwd=None, env=None, timeout=120, stdout=None, stderr=None,
     return subprocess.CompletedProcess(command, tree.process.returncode, out, err)
 
 
-def _managed_child(command):
+def _managed_child(command, interactive=False):
     # Fixed trusted entry point, never a project-selected Python module/script.
-    if os.name != 'nt' or sys.stdin.buffer.read(3) != b'GO\n' or not command:
+    if os.name != 'nt' or not command:
+        return 125
+    # Do not buffer beyond the assignment gate: subsequent bytes belong to the
+    # actual interactive child, even if the parent already wrote its request.
+    gate = b''
+    while len(gate) < 3:
+        chunk = os.read(sys.stdin.fileno(), 3 - len(gate))
+        if not chunk:
+            return 125
+        gate += chunk
+    if gate != b'GO\n':
         return 125
     try:
-        result = subprocess.run(command, stdin=subprocess.DEVNULL, check=False)
+        result = subprocess.run(command, stdin=sys.stdin if interactive else subprocess.DEVNULL,
+                                check=False)
     except OSError as error:
         print(f'Managed command could not start: {error}', file=sys.stderr, flush=True)
         return 127
@@ -362,6 +439,6 @@ def _managed_child(command):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) < 3 or sys.argv[1] != '--managed-child':
+    if len(sys.argv) < 3 or sys.argv[1] not in ('--managed-child', '--interactive-child'):
         raise SystemExit('This engine helper is imported, not a public command.')
-    raise SystemExit(_managed_child(sys.argv[2:]))
+    raise SystemExit(_managed_child(sys.argv[2:], interactive=sys.argv[1] == '--interactive-child'))
