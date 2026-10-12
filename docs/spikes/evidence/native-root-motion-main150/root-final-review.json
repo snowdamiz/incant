@@ -1,0 +1,24 @@
+{
+  "at": "2026-10-12T17:01:46.470368+00:00",
+  "reviewer": "astra",
+  "head": "d584790dfd2683dd0433dfce81b841390e716ded",
+  "packet_sha256": "234824e067e76da5125a8b97a4df296d5688cddcb31d1a574f88753cebf34c41",
+  "result": "accept scoped main150 integration; no findings",
+  "verified": {
+    "frozen_inputs": 1701,
+    "accepted_source_files": 7,
+    "retained_raw_and_compressed_artifacts": 9,
+    "cpu_tests": 128,
+    "test_groups": 19,
+    "failed": 0,
+    "ignored": 0,
+    "commands": 7,
+    "claude_packet_files": 48
+  },
+  "basis": "Source bytes and original independent review preserved. Actual-main ancestry merge tree exactly equals tested tree. Later changes are documentation only; Claude0058 packet and qualified acceptance receipt exact.",
+  "limitations": [
+    "CPU numerical primitive only: no authored root selection, clocks/graphs, full-pose stripping, body movement, save or SDK route.",
+    "No GPU, visual, device, shipping-performance or complete root-motion/phase claim.",
+    "Checkpoint12 is frozen at earlier main150 and does not contain this primitive; release advancement requires all23 exact-head successes."
+  ]
+}
