@@ -176,6 +176,25 @@ impl Player {
             )?,
         )))
     }
+    pub fn enable_restart_requests(&mut self) -> Result<()> {
+        match self {
+            Self::Plain(game) => game.enable_restart_requests()?,
+            #[cfg(feature = "render-input")]
+            Self::Spatial(game) => game.enable_restart_requests()?,
+            #[cfg(feature = "render-gpu")]
+            Self::Gpu(_) => return Err("offscreen GPU restart is unsupported".into()),
+        }
+        Ok(())
+    }
+    pub fn take_session_request(&mut self) -> Result<Option<incant_script::SessionRequest>> {
+        Ok(match self {
+            Self::Plain(game) => game.take_session_request()?,
+            #[cfg(feature = "render-input")]
+            Self::Spatial(game) => game.take_session_request()?,
+            #[cfg(feature = "render-gpu")]
+            Self::Gpu(game) => game.inner.take_session_request()?,
+        })
+    }
     pub fn checkpoint_bytes(&self) -> Result<Vec<u8>> {
         Ok(match self {
             Self::Plain(game) => game.checkpoint_bytes()?,

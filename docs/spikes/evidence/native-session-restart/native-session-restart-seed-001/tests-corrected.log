@@ -1,0 +1,9 @@
+   Compiling incant_game_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_game_runtime)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.82s
+     Running tests/restart.rs (/tmp/incant-font-atlas-target/debug/deps/restart-a3f715d500077ca4)
+
+running 1 test
+test reset_recreates_vm_world_input_timers_and_static_streamed_mixer_clocks ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+

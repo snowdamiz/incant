@@ -1,0 +1,33 @@
+{
+  "root": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+  "sources": [
+    {
+      "path": "tools/probes/native-session-restart.py",
+      "sha256": "bc2833c1331a30efd4649bf27aa4ced288638d9fde24cd6ea6ae8bd6353d3e28"
+    },
+    {
+      "path": "samples/core/gameplay.ts",
+      "sha256": "ff6158f60fa87a7fa6d42f8fa7bcd6fb16c50e903fa07c28f31df103341ca211"
+    },
+    {
+      "path": "samples/core/verify.py",
+      "sha256": "63830ec6225ddf9bc82dceed2c1791912fd30c6fd2db5426f07095ab329974ca"
+    },
+    {
+      "path": "samples/core/verify_presentation.py",
+      "sha256": "42ff52aae1c2ca0f923a4677f87f72e4bffe31193d19d6ba8249cadfbad477bc"
+    },
+    {
+      "path": "samples/planar/gameplay.ts",
+      "sha256": "3aa27cdc2e0e3002e4d8251d0ab3cd0004875bfb0da02c3afbb222b3b9b6b7b8"
+    },
+    {
+      "path": "samples/planar/verify.py",
+      "sha256": "3651445947a44419fd1934519f4374484f071e55610c1ccf2c874ce0795796f4"
+    },
+    {
+      "path": "samples/planar/presentation.py",
+      "sha256": "5b4e15cb52a5e403e89498802657d5f6551f771b08fb828b955d3328e0da0f71"
+    }
+  ]
+}

@@ -82,6 +82,48 @@ impl<B: Backend, H: SceneHost> HostedGameSession<B, H>
 where
     B::Error: Debug,
 {
+    /// Destroy every live owner immediately. Further access fails closed. Native
+    /// hosts use this before acquiring resources for a complete replacement.
+    pub fn stop(&mut self) {
+        self.core.live.take();
+    }
+    /// Fresh restart-capable composition. Audio is born suspended; no asynchronous
+    /// pause command follows an already-playing startup voice.
+    pub fn from_seed_suspended(
+        seed: &crate::GameSeed,
+        audio_settings: AudioManagerSettings<B>,
+        host_settings: H::Settings,
+    ) -> Result<Self, H::Error> {
+        let mut game = Self {
+            core: Core::prepare(
+                seed.scene.clone(),
+                seed.program.clone(),
+                seed.actions.clone(),
+                |world| {
+                    H::prepare(world, host_settings)
+                        .map(WithHost)
+                        .map_err(GameError::Host)
+                },
+                |world| SceneAudio::new_suspended(world, seed.clips.clone(), audio_settings),
+            )?
+            .initially_suspended(),
+        };
+        game.enable_restart_requests()?;
+        Ok(game)
+    }
+    /// Destroy all live state before replacement. Failure leaves this owner
+    /// terminal. The fresh session stays paused until explicitly resumed.
+    pub fn restart_from_suspended(
+        &mut self,
+        seed: &crate::GameSeed,
+        audio_settings: AudioManagerSettings<B>,
+        host_settings: H::Settings,
+    ) -> Result<(), H::Error> {
+        self.core.ready()?;
+        self.core.live.take();
+        *self = Self::from_seed_suspended(seed, audio_settings, host_settings)?;
+        Ok(())
+    }
     pub fn new(
         scene: CookedScene,
         program: impl Into<SessionProgram>,
@@ -185,6 +227,17 @@ where
     pub fn logs(&self) -> Result<&incant_script::NativeLogs, H::Error> {
         self.core.logs()
     }
+    /// Explicit trusted-owner opt-in for whole-session replacement.
+    pub fn enable_restart_requests(&mut self) -> Result<(), H::Error> {
+        self.core.enable_restart_requests()
+    }
+    /// Only visible after the complete composed tick succeeds.
+    pub fn take_session_request(
+        &mut self,
+    ) -> Result<Option<incant_script::SessionRequest>, H::Error> {
+        self.core.take_session_request()
+    }
+
     pub fn source_state(&self, id: StableId) -> Result<SourceState, H::Error> {
         self.core.source_state(id)
     }
@@ -200,6 +253,36 @@ pub struct HostedOfflineGameSession<H: SceneHost> {
     inner: OfflineCore<WithHost<H>>,
 }
 impl<H: SceneHost> HostedOfflineGameSession<H> {
+    /// Reuse only immutable startup data. The retained host is prepared on the
+    /// fresh exact world before guest/audio initialization as on ordinary start.
+    pub fn from_seed(
+        seed: &crate::GameSeed,
+        sample_rate: u32,
+        host_settings: H::Settings,
+    ) -> Result<Self, H::Error> {
+        let mut game = Self::new(
+            seed.scene.clone(),
+            seed.program.clone(),
+            seed.actions.clone(),
+            seed.clips.clone(),
+            sample_rate,
+            host_settings,
+        )?;
+        game.enable_restart_requests()?;
+        Ok(game)
+    }
+    /// Replacement is destructive at an accepted host boundary. Preparation
+    /// failure leaves the old composition dropped and this session terminal.
+    pub fn restart_from(
+        &mut self,
+        seed: &crate::GameSeed,
+        host_settings: H::Settings,
+    ) -> Result<(), H::Error> {
+        self.inner.core.ready()?;
+        self.inner.core.live.take();
+        *self = Self::from_seed(seed, self.inner.sample_rate, host_settings)?;
+        Ok(())
+    }
     pub fn new(
         scene: CookedScene,
         program: impl Into<SessionProgram>,
@@ -318,6 +401,17 @@ impl<H: SceneHost> HostedOfflineGameSession<H> {
     pub fn logs(&self) -> Result<&incant_script::NativeLogs, H::Error> {
         self.inner.core.logs()
     }
+    /// Explicit trusted-owner opt-in for whole-session replacement.
+    pub fn enable_restart_requests(&mut self) -> Result<(), H::Error> {
+        self.inner.core.enable_restart_requests()
+    }
+    /// Only visible after the complete composed tick succeeds.
+    pub fn take_session_request(
+        &mut self,
+    ) -> Result<Option<incant_script::SessionRequest>, H::Error> {
+        self.inner.core.take_session_request()
+    }
+
     pub fn source_state(&self, id: StableId) -> Result<SourceState, H::Error> {
         self.inner.core.source_state(id)
     }

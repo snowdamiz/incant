@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/tools/probes/native-session-restart.py", line 268, in <module>
+    main()
+    ~~~~^^
+  File "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/tools/probes/native-session-restart.py", line 264, in main
+    args = parser.parse_args(); (prepare if args.mode == 'prepare' else ship)(args)
+                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/tools/probes/native-session-restart.py", line 143, in prepare
+    process.run([binary, 'native-play', project, '--camera', camera, '--ticks', 300, '--ui-viewport', '640x480',
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 '--input-replay', out / 'unsupported-input.json'], diagnostic='this host does not accept session restart requests')
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/tools/probes/native-session-restart.py", line 53, in run
+    assert result.returncode != 0 and diagnostic in result.stderr, record
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'argv': ['/private/tmp/incant-font-atlas-target/ci/incant_headless', 'native-play', '/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/authoring/planar.json', '--camera', '00000000000000000000000007', '--ticks', '300', '--ui-viewport', '640x480', '--input-replay', '/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/unsupported-input.json'], 'cwd': '/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant', 'exit_code': 1, 'stdout': '', 'stderr': 'Error: native play startup/runtime failure: script tick failed: TypeError: host does not accept session restart requests\n'}

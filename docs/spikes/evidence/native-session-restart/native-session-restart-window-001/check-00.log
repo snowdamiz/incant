@@ -1,0 +1,348 @@
+   Compiling unicode-ident v1.0.26
+   Compiling zerocopy v0.8.62
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+   Compiling objc2 v0.6.5
+   Compiling syn v3.0.6
+   Compiling syn v2.0.119
+   Compiling synstructure v0.14.0
+   Compiling thiserror-impl v2.0.21
+   Compiling zerofrom-derive v0.1.8
+   Compiling thiserror v2.0.21
+   Compiling yoke-derive v0.8.4
+   Compiling zerofrom v0.1.8
+   Compiling displaydoc v0.2.7
+   Compiling yoke v0.8.3
+   Compiling zerovec-derive v0.11.6
+   Compiling serde_derive v1.0.229
+   Compiling zerovec v0.11.8
+   Compiling bytemuck_derive v1.12.1
+   Compiling serde v1.0.229
+   Compiling bytemuck v1.25.2
+   Compiling tinystr v0.8.4
+   Compiling ref-cast-impl v1.0.27
+   Compiling zerocopy-derive v0.8.62
+   Compiling serde_derive_internals v0.30.0
+   Compiling schemars_derive v1.2.2
+   Compiling icu_locale_core v2.3.0
+   Compiling ref-cast v1.0.27
+   Compiling potential_utf v0.1.6
+   Compiling zerotrie v0.2.5
+   Compiling nalgebra-macros v0.3.0
+   Compiling icu_provider v2.3.1
+   Compiling schemars v1.2.2
+   Compiling objc2-encode v4.1.0
+   Compiling profiling-procmacros v1.0.18
+   Compiling profiling v1.0.18
+   Compiling block2 v0.6.2
+   Compiling num-derive v0.5.1
+   Compiling dispatch2 v0.3.1
+   Compiling objc2-core-foundation v0.3.2
+   Compiling icu_collections v2.3.0
+   Compiling incant_types v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_types)
+   Compiling icu_locale_fallback v2.3.0
+   Compiling ppv-lite86 v0.2.21
+   Compiling rand_chacha v0.9.0
+   Compiling rand v0.9.5
+   Compiling objc2-foundation v0.3.2
+   Compiling calendrical_calculations v0.2.4
+   Compiling fixed_decimal v0.7.2
+   Compiling derive_more-impl v2.1.1
+   Compiling rerecast v0.4.0 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/third_party/rerecast)
+   Compiling icu_calendar v2.3.0
+   Compiling bevy_macro_utils v0.19.1
+   Compiling wide v1.7.1
+   Compiling bevy_ecs_macro_logic v0.19.1
+   Compiling icu_time v2.3.0
+   Compiling icu_decimal v2.3.0
+   Compiling icu_plurals v2.3.0
+   Compiling derive_more v2.1.1
+   Compiling incant_anim v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_anim)
+   Compiling icu_pattern v0.5.0
+   Compiling bevy_tasks v0.19.1
+   Compiling icu_datetime v2.3.0
+   Compiling simba v0.10.2
+   Compiling nalgebra v0.35.0
+   Compiling bevy_ecs_macros v0.19.1
+   Compiling ulid v1.2.1
+   Compiling icu_locale v2.3.0
+   Compiling variadics_please v1.1.0
+   Compiling cfg_aliases v0.2.2
+   Compiling bevy_ecs v0.19.1
+   Compiling glamx v0.3.1
+   Compiling incant_2d v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_2d)
+   Compiling rustybuzz v0.14.1
+   Compiling cosmic-text v0.14.2 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/third_party/cosmic-text)
+   Compiling parry3d v0.31.1
+   Compiling parry2d v0.31.1
+   Compiling dodgy_2d v0.5.5
+   Compiling incant_text v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_text)
+   Compiling incant_nav v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_nav)
+   Compiling rapier2d v0.36.0
+   Compiling rapier3d v0.36.0
+   Compiling objc2-core-audio-types v0.3.2
+   Compiling incant_input v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_input)
+   Compiling meshopt v0.6.2
+   Compiling objc2-core-audio v0.3.2
+   Compiling incant_physics_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_physics_runtime)
+   Compiling incant_physics_2d_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_physics_2d_runtime)
+   Compiling naga v29.0.4
+   Compiling incant_localization v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_localization)
+   Compiling bit-vec v0.9.1
+   Compiling unicode-width v0.2.2
+   Compiling raw-window-handle v0.6.2
+   Compiling parking_lot_core v0.9.12
+   Compiling codespan-reporting v0.13.1
+   Compiling incant_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_runtime)
+   Compiling bit-set v0.9.1
+   Compiling incant_assets_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_assets_runtime)
+   Compiling objc2-audio-toolbox v0.3.2
+   Compiling objc2-metal v0.3.2
+   Compiling half v2.7.1
+   Compiling cpal v0.18.2
+   Compiling hexf-parse v0.2.1
+   Compiling scopeguard v1.2.0
+   Compiling lock_api v0.4.14
+   Compiling objc2-quartz-core v0.3.2
+   Compiling coreaudio-rs v0.14.2
+   Compiling wgpu-types v29.0.4
+   Compiling wgpu-hal v29.0.4
+   Compiling icu_normalizer_data v2.3.0
+   Compiling mach2 v0.6.0
+   Compiling simd-adler32 v0.3.10
+   Compiling dasp_sample v0.11.0
+   Compiling icu_properties_data v2.3.0
+   Compiling wgpu-naga-bridge v29.0.4
+   Compiling parking_lot v0.12.5
+   Compiling raw-window-metal v1.1.0
+   Compiling adler2 v2.0.1
+   Compiling crc32fast v1.5.2
+   Compiling kira v0.12.5 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/third_party/kira)
+warning: field `custom_device` is never read
+  --> third_party/kira/src/backend/cpal/desktop/stream_manager.rs:66:2
+   |
+62 | pub(super) struct StreamManager {
+   |                   ------------- field in this struct
+...
+66 |     custom_device: bool,
+   |     ^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `kira` (lib) generated 1 warning
+   Compiling wgpu-core v29.0.4
+   Compiling incant_script v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_script)
+   Compiling litrs v1.0.0
+   Compiling document-features v0.2.12
+   Compiling incant_ui v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_ui)
+   Compiling icu_properties v2.3.0
+   Compiling icu_normalizer v2.3.0
+   Compiling wgpu-core-deps-apple v29.0.4
+   Compiling incant_audio_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_audio_runtime)
+   Compiling miniz_oxide v0.9.1
+   Compiling incant_render_data v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_render_data)
+   Compiling wgpu v29.0.4
+   Compiling core-foundation-sys v0.8.7
+   Compiling core-foundation v0.10.1
+   Compiling flate2 v1.1.10
+   Compiling idna_adapter v1.2.2
+   Compiling miniz_oxide v0.8.9
+   Compiling fdeflate v0.3.7
+   Compiling foreign-types-macros v0.2.4
+   Compiling percent-encoding v2.3.2
+   Compiling foreign-types-shared v0.3.1
+   Compiling incant_render v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_render)
+   Compiling foreign-types v0.5.0
+   Compiling form_urlencoded v1.2.2
+   Compiling png v0.18.1
+   Compiling idna v1.1.0
+   Compiling incant_cook v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_cook)
+   Compiling incant_game_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_game_runtime)
+   Compiling core-graphics-types v0.2.0
+   Compiling incant_render_native v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_render_native)
+   Compiling objc2-io-kit v0.3.2
+   Compiling gilrs v0.11.2
+   Compiling vec_map v0.8.2
+   Compiling uuid v1.27.0
+   Compiling pollster v0.4.0
+   Compiling gilrs-core v0.6.8
+   Compiling incant_render_game v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_render_game)
+   Compiling core-graphics v0.25.0
+   Compiling incant_game_player v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_game_player)
+   Compiling url v2.5.8
+   Compiling objc2-app-kit v0.3.2
+   Compiling crossbeam-channel v0.5.17
+   Compiling dpi v0.1.2
+   Compiling fnv v1.0.7
+   Compiling tao v0.37.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/third_party/tao)
+warning: unused import: `NSString`
+  --> third_party/tao/src/platform_impl/macos/monitor.rs:23:53
+   |
+23 | use objc2_foundation::{ns_string, MainThreadMarker, NSString, NSUInteger};
+   |                                                     ^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `DispatchQueueAttr`
+  --> third_party/tao/src/platform_impl/macos/util/async.rs:11:32
+   |
+11 | use dispatch2::{DispatchQueue, DispatchQueueAttr};
+   |                                ^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated static `objc2_app_kit::NSKeyUp`
+  --> third_party/tao/src/platform_impl/macos/app.rs:38:30
+   |
+38 |     if event_type == appkit::NSKeyUp
+   |                              ^^^^^^^
+   |
+   = note: `#[warn(deprecated)]` on by default
+
+warning: use of deprecated static `objc2_app_kit::NSWindowFullScreenButton`: The standard window button for NSWindowFullScreenButton is always nil; use NSWindowZoomButton instead
+  --> third_party/tao/src/platform_impl/macos/window.rs:56:57
+   |
+56 |   NSWindow, NSWindowButton, NSWindowCollectionBehavior, NSWindowFullScreenButton,
+   |                                                         ^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated static `objc2_app_kit::NSWindowFullScreenButton`: The standard window button for NSWindowFullScreenButton is always nil; use NSWindowZoomButton instead
+   --> third_party/tao/src/platform_impl/macos/window.rs:274:11
+    |
+274 |           NSWindowFullScreenButton,
+    |           ^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated static `objc2_app_kit::NSFilenamesPboardType`: Create multiple pasteboard items with NSPasteboardTypeFileURL or kUTTypeFileURL instead
+   --> third_party/tao/src/platform_impl/macos/window.rs:575:75
+    |
+575 |       ns_window.registerForDraggedTypes(&NSArray::arrayWithObject(appkit::NSFilenamesPboardType));
+    |                                                                           ^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated static `objc2_app_kit::NSFilenamesPboardType`: Create multiple pasteboard items with NSPasteboardTypeFileURL or kUTTypeFileURL instead
+   --> third_party/tao/src/platform_impl/macos/window_delegate.rs:424:61
+    |
+424 |     unsafe { NSPasteboard::propertyListForType(&pb, appkit::NSFilenamesPboardType) }.unwrap();
+    |                                                             ^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated static `objc2_app_kit::NSFilenamesPboardType`: Create multiple pasteboard items with NSPasteboardTypeFileURL or kUTTypeFileURL instead
+   --> third_party/tao/src/platform_impl/macos/window_delegate.rs:458:61
+    |
+458 |     unsafe { NSPasteboard::propertyListForType(&pb, appkit::NSFilenamesPboardType) }.unwrap();
+    |                                                             ^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated constant `std::f64::EPSILON`: replaced by the `EPSILON` associated constant on `f64`
+  --> third_party/tao/src/platform_impl/macos/window_delegate.rs:76:42
+   |
+76 |     if (scale_factor - 1.0).abs() > f64::EPSILON {
+   |                                          ^^^^^^^
+
+warning: use of deprecated constant `std::f64::EPSILON`: replaced by the `EPSILON` associated constant on `f64`
+   --> third_party/tao/src/platform_impl/macos/window_delegate.rs:104:65
+    |
+104 |     if (scale_factor - self.previous_scale_factor).abs() < f64::EPSILON {
+    |                                                                 ^^^^^^^
+
+   Compiling incant_render_gpu_host v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_render_gpu_host)
+   Compiling incant_observe v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_observe)
+warning: unnecessary `unsafe` block
+   --> third_party/tao/src/platform_impl/macos/app_delegate.rs:139:14
+    |
+139 |   let urls = unsafe {
+    |              ^^^^^^ unnecessary `unsafe` block
+    |
+    = note: `#[warn(unused_unsafe)]` (part of `#[warn(unused)]`) on by default
+
+warning: unnecessary `unsafe` block
+   --> third_party/tao/src/platform_impl/macos/event.rs:166:21
+    |
+166 |     let modifiers = unsafe { NSEvent::modifierFlags(ns_event) };
+    |                     ^^^^^^ unnecessary `unsafe` block
+
+warning: unnecessary `unsafe` block
+   --> third_party/tao/src/platform_impl/macos/event.rs:309:15
+    |
+309 |   let flags = unsafe { NSEvent::modifierFlags(event) };
+    |               ^^^^^^ unnecessary `unsafe` block
+
+warning: unnecessary `unsafe` block
+   --> third_party/tao/src/platform/macos.rs:419:5
+    |
+419 |     unsafe { objc2_app_kit::NSApplication::sharedApplication(mtm).unhide(None) }
+    |     ^^^^^^ unnecessary `unsafe` block
+
+warning: methods `set_badge_count` and `set_badge_label` are never used
+   --> third_party/tao/src/platform_impl/macos/event_loop.rs:127:10
+    |
+ 86 | impl<T: 'static> EventLoopWindowTarget<T> {
+    | ----------------------------------------- methods in this implementation
+...
+127 |   pub fn set_badge_count(&self, count: Option<i64>, _desktop_filename: Option<String>) {
+    |          ^^^^^^^^^^^^^^^
+...
+132 |   pub fn set_badge_label(&self, label: Option<String>) {
+    |          ^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: field `0` is never read
+ --> third_party/tao/src/platform_impl/macos/icon.rs:8:25
+  |
+8 | pub struct PlatformIcon(RgbaIcon);
+  |            ------------ ^^^^^^^^
+  |            |
+  |            field in this struct
+  |
+  = help: consider removing this field
+  = note: `PlatformIcon` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+
+warning: function `yes` is never used
+   --> third_party/tao/src/platform_impl/macos/util/mod.rs:126:19
+    |
+126 | pub extern "C" fn yes(_: &Object, _: Sel) -> BOOL {
+    |                   ^^^
+
+warning: field `saved_desktop_display_mode` is never read
+   --> third_party/tao/src/platform_impl/macos/window.rs:471:7
+    |
+451 | pub struct SharedState {
+    |            ----------- field in this struct
+...
+471 |   pub saved_desktop_display_mode: Option<(CGDisplay, CGDisplayMode)>,
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: field `inner_rect` is never read
+   --> third_party/tao/src/platform_impl/macos/window.rs:508:7
+    |
+500 | pub struct UnownedWindow {
+    |            ------------- field in this struct
+...
+508 |   pub inner_rect: Option<PhysicalSize<u32>>,
+    |       ^^^^^^^^^^
+
+warning: field `composition` is never read
+  --> third_party/tao/src/text_input.rs:56:7
+   |
+54 | pub(crate) struct State {
+   |                   ----- field in this struct
+55 |   pub session: Option<Session>, // None preserves the original Tao behavior.
+56 |   pub composition: Option<u64>,
+   |       ^^^^^^^^^^^
+   |
+   = note: `State` has a derived impl for the trait `Debug`, but this is intentionally ignored during dead code analysis
+
+warning: method `active` is never used
+  --> third_party/tao/src/text_input.rs:69:10
+   |
+58 | impl State {
+   | ---------- method in this implementation
+...
+69 |   pub fn active(&self) -> Option<u64> {
+   |          ^^^^^^
+
+warning: `tao` (lib) generated 21 warnings (run `cargo fix --lib -p tao` to apply 2 suggestions)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1m 09s
+     Running unittests src/lib.rs (/tmp/incant-font-atlas-target/debug/deps/incant_game_player-324367c5e8dbbf8f)
+
+running 2 tests
+test restart::input::tests::fresh_game_gets_topology_but_never_a_held_press_or_axis ... ok
+test restart::tests::accepted_requests_reset_simulation_while_fractional_output_and_host_steps_continue ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 56 filtered out; finished in 0.02s
+

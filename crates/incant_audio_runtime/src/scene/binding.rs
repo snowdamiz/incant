@@ -9,6 +9,7 @@ pub const MAX_CLIP_METADATA_BYTES: usize = 4 * 1024 * 1024;
 /// Startup-only binding from the cooked package's ID/key table. The cache loader
 /// verifies the expected fingerprint, manifest, dimensions and every PCM chunk.
 /// No API exposes mutable metadata or substitutes a different clip under an ID.
+#[derive(Clone)]
 pub struct ClipBinding {
     pub(super) id: StableId,
     pub(super) clip: Arc<CookedAudio>,

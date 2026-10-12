@@ -1,0 +1,9 @@
+   Compiling incant_script v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_script)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.58s
+     Running tests/project_bindings.rs (/tmp/incant-font-atlas-target/debug/deps/project_bindings-d43fdd64a9f96848)
+
+running 1 test
+test later_source_failure_hides_restart_from_an_earlier_group ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 11 filtered out; finished in 0.01s
+

@@ -12,6 +12,7 @@ pub struct RoutedUiInput {
 }
 mod hosted;
 mod offline;
+mod seed;
 use core::{Core, NoHost};
 pub use hosted::{HostedGameSession, HostedOfflineGameSession, SceneHost};
 use incant_audio_runtime::{
@@ -22,6 +23,7 @@ use incant_runtime::{CookedScene, NativeWorld, StableId};
 use incant_script::{SessionError, SessionProgram};
 use kira::backend::Backend;
 pub use offline::OfflineGameSession;
+pub use seed::GameSeed;
 use std::{convert::Infallible, fmt::Debug};
 use thiserror::Error;
 
@@ -91,6 +93,31 @@ impl<B: Backend> GameSession<B>
 where
     B::Error: Debug,
 {
+    pub fn from_seed_suspended(seed: &GameSeed, settings: AudioManagerSettings<B>) -> Result<Self> {
+        require_nonspatial(&seed.scene)?;
+        let mut game = Self {
+            core: Core::prepare(
+                seed.scene.clone(),
+                seed.program.clone(),
+                seed.actions.clone(),
+                |_| Ok(NoHost),
+                |world| SceneAudio::new_suspended(world, seed.clips.clone(), settings),
+            )?
+            .initially_suspended(),
+        };
+        game.enable_restart_requests()?;
+        Ok(game)
+    }
+    pub fn restart_from_suspended(
+        &mut self,
+        seed: &GameSeed,
+        settings: AudioManagerSettings<B>,
+    ) -> Result<()> {
+        self.core.ready()?;
+        self.core.live.take();
+        *self = Self::from_seed_suspended(seed, settings)?;
+        Ok(())
+    }
     pub fn new(
         scene: CookedScene,
         program: impl Into<SessionProgram>,
@@ -164,6 +191,15 @@ where
     pub fn logs(&self) -> Result<&incant_script::NativeLogs> {
         self.core.logs()
     }
+    /// Explicit trusted-owner opt-in for whole-session replacement.
+    pub fn enable_restart_requests(&mut self) -> Result<()> {
+        self.core.enable_restart_requests()
+    }
+    /// Only visible after the complete composed tick succeeds.
+    pub fn take_session_request(&mut self) -> Result<Option<incant_script::SessionRequest>> {
+        self.core.take_session_request()
+    }
+
     pub fn source_state(&self, id: StableId) -> Result<SourceState> {
         self.core.source_state(id)
     }

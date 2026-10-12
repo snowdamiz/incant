@@ -16,6 +16,17 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Whole native session restart — CPU shipping proof accepted
+
+Opted-in native TypeScript hosts now replace the complete world, VM, input/UI and
+mixer from a trusted startup seed. Host-step/output chronology stays monotonic;
+held controls and stale native text/pointer ownership cannot enter the new game.
+343 CPU tests and 24 fresh source/map/build-deleted Core/Planar runs pass, including
+exact fresh-state and concatenated static/streamed PCM comparisons. Independent
+source and final execution reviews are accepted; publisher integration is pending.
+Native-window/device/appearance acceptance, Wasm/headless restart ownership and
+physics save continuation remain open. [Contract and evidence](docs/spikes/native-session-restart.md).
+
 ## Planar presentation bindings — CPU shipping proof complete
 
 Optional authored roles now drive state flipbooks, localized status and terminal
@@ -24,8 +35,8 @@ presentation native scenarios preserve gameplay behavior; two fresh shipping
 exports pass fourteen source/map/build-deleted player runs with exact logs,
 observations and PCM. Actual canonical shaped HUD text is verified. Independent
 source, local execution and final shipping reviews are accepted. Claude
-owns the separate Pearl Cove art/HUD branch and native-window appearance; whole-
-session restart, physics save/load and device gates remain open.
+owns the separate Pearl Cove art/HUD branch and native-window appearance; native-
+window restart acceptance, physics save/load and device gates remain open.
 [Contract and retained evidence](docs/spikes/planar-presentation-bindings.md).
 
 ## Pinned mobile bytecode compatibility — merged main171

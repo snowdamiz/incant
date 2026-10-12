@@ -55,8 +55,17 @@ use std::{
 };
 use thiserror::Error;
 
+/// Accepted metadata for the trusted composed owner. This does not mutate a
+/// world and contains no persisted command or guest-supplied startup payload.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum SessionRequest {
+    Restart,
+}
+
 #[derive(Debug, Error)]
 pub enum ScriptError {
+    #[error("this host does not accept session restart requests")]
+    SessionRequestsUnsupported,
     #[error("script engine failed without a JavaScript diagnostic")]
     Execution,
     #[error("cooked script engine/build/target or artifact format is incompatible")]
@@ -136,6 +145,8 @@ pub struct ScriptHost {
     logs: NativeLogs,
     flipbooks: flipbooks::Scratch,
     animations: animations::Scratch,
+    restart_requests: bool,
+    session_request: Option<SessionRequest>,
     failed: bool,
 }
 
@@ -226,6 +237,8 @@ impl ScriptHost {
             logs: NativeLogs::default(),
             flipbooks: flipbooks::Scratch::default(),
             animations: animations::Scratch::default(),
+            restart_requests: false,
+            session_request: None,
             failed: false,
         })
     }
@@ -237,6 +250,25 @@ impl ScriptHost {
         } else {
             Ok(&self.logs)
         }
+    }
+
+    /// Trusted owner opt-in. The caller must consume requests after its complete
+    /// composed tick succeeds. Ordinary hosts refuse the primitive by default.
+    pub fn enable_restart_requests(&mut self) -> Result<(), ScriptError> {
+        if self.failed {
+            return Err(ScriptError::FailedSession);
+        }
+        self.restart_requests = true;
+        Ok(())
+    }
+
+    /// Script-phase acceptance only. A composed host must wait for its audio
+    /// and mandatory consumer acceptance before exposing this request.
+    pub fn take_session_request(&mut self) -> Result<Option<SessionRequest>, ScriptError> {
+        if self.failed {
+            return Err(ScriptError::FailedSession);
+        }
+        Ok(self.session_request.take())
     }
 
     /// Run only the script phase. Native simulation stepping remains explicitly
@@ -349,7 +381,7 @@ impl ScriptHost {
                 .clone()
                 .restore(&ctx)
                 .map_err(diagnostics::allocation)?;
-            let commands = commands::TickCommands::default();
+            let commands = commands::TickCommands::new(self.restart_requests);
             let hud = hud::expose(&ctx, world)?;
             let api = commands.expose(&ctx).map_err(|error| {
                 diagnostics::javascript(&ctx, error, "command bindings", &self.deadline)
@@ -467,22 +499,23 @@ impl ScriptHost {
                     self.synchronous.check(&ctx, false)?;
                     queries.check()?;
                     loan.validate_numeric()?;
-                    let commands = commands.take()?;
+                    let (commands, request) = commands.take()?;
                     schedule.apply(timers.take()?)?;
                     let logs = logs.take()?;
                     let changes = persistent.take()?;
-                    Ok((loan.finish(), commands, schedule, logs, changes))
+                    Ok((loan.finish(), commands, request, schedule, logs, changes))
                 })
                 .map_err(ScriptError::Structural)?
         });
         // No JS value or raw column pointer crosses this sync point. Apply is
         // native host work, after the script CPU/deferred-work checks; its time
         // is separate from the JS execution budget, not a claimed phone budget.
-        let result = result.and_then(|(undo, mut commands, schedule, logs, changes)| {
+        let result = result.and_then(|(undo, mut commands, request, schedule, logs, changes)| {
             undo.apply(world, &mut commands)?;
             self.logs.commit(schedule.tick, logs);
             self.schedule = schedule;
             self.persistent.borrow_mut().apply(changes);
+            self.session_request = self.session_request.or(request);
             Ok(())
         });
         if result.is_err() {
@@ -565,3 +598,6 @@ mod localization_tests;
 
 #[cfg(test)]
 mod hud_tests;
+
+#[cfg(all(test, feature = "compiler"))]
+mod restart_request_tests;

@@ -1,0 +1,32 @@
+{
+  "at": "2026-10-12T23:10:52.272576+00:00",
+  "result": "accepted",
+  "manifest_sha256": "73d2aac17339f42f546f644119f9f3e0d68e24856a44af2024a8374814e0a992",
+  "verification": {
+    "sources": 34,
+    "helper_inputs": 7,
+    "engine_inputs": 1767,
+    "lossless_artifacts": 273,
+    "packaged_runs": 24,
+    "checks": 13,
+    "test_counts": {
+      "native_window": 59,
+      "affected_packages": 284,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 29
+    },
+    "restart_observations_logs_render_flipbooks_audio_sources": "exact fresh-session parity",
+    "pcm": "exact concatenated baselines",
+    "repeated_simulation_tick": "distinct host checks",
+    "held_input": "neutral until release",
+    "source_cache_maps_removed": true
+  },
+  "prior_source_review": "41475dd021291c4d8e074ae17db6b45f6b127ab4a625279aba29ec94cd933abc",
+  "limits": [
+    "No native window, GPU, device audio, IME callback or performance acceptance",
+    "Fresh initial physics reconstruction, not saved solver continuation",
+    "Headless Play, static/development module restart request owners remain unsupported"
+  ],
+  "method": "Independent source/current freeze and raw-retained hashing plus actual command/report/PCM checks; no new execution."
+}

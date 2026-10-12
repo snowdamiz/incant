@@ -1,0 +1,25 @@
+   Compiling incant_game_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_game_runtime)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.18s
+     Running tests/hosting.rs (/tmp/incant-font-atlas-target/debug/deps/hosting-8fe337da05c8935b)
+
+running 10 tests
+test invalid_sample_rate_rejects_before_host_or_guest_setup ... ok
+test pending_start_preserves_the_exact_world_identity_without_guest_execution_during_prepare ... ok
+test accepted_script_failure_never_calls_host_and_also_drops_it ... ok
+test presentation_only_error_and_unwind_drop_the_entire_backend_session ... ok
+test backend_driven_host_error_or_unwind_drops_the_backend_and_hides_all_state ... ok
+test restart_drops_previous_host_before_new_prepare_and_failure_is_terminal ... ok
+test successful_ticks_sync_the_stored_host_once_and_retryable_rejections_leave_it_unchanged ... ok
+test host_error_and_unwind_terminalize_offline_session_and_silence_entire_output ... ok
+test host_prepare_precedes_guest_and_backend_setup_and_failures_drop_prepared_state ... ok
+test paused_refresh_preserves_tick_input_pose_and_exact_next_audio_samples ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/restart.rs (/tmp/incant-font-atlas-target/debug/deps/restart-a3f715d500077ca4)
+
+running 1 test
+test reset_recreates_vm_world_input_timers_and_static_streamed_mixer_clocks ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+

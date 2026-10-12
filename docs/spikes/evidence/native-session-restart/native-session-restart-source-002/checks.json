@@ -1,0 +1,79 @@
+[
+  {
+    "argv": [
+      "cargo",
+      "test",
+      "--locked",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "native-window",
+      "--lib",
+      "-j2"
+    ],
+    "exit_code": 0,
+    "seconds": 5.585507625000901
+  },
+  {
+    "argv": [
+      "cargo",
+      "test",
+      "--locked",
+      "-p",
+      "incant_script",
+      "-p",
+      "incant_game_runtime",
+      "-p",
+      "incant_render_game",
+      "-p",
+      "incant_observe",
+      "-p",
+      "incant_audio_runtime",
+      "-j2"
+    ],
+    "exit_code": 0,
+    "seconds": 19.35745316700195
+  },
+  {
+    "argv": [
+      "cargo",
+      "clippy",
+      "--locked",
+      "-p",
+      "incant_script",
+      "-p",
+      "incant_game_runtime",
+      "-p",
+      "incant_game_player",
+      "-p",
+      "incant_render_game",
+      "-p",
+      "incant_observe",
+      "-p",
+      "incant_audio_runtime",
+      "--all-targets",
+      "--features",
+      "incant_game_player/native-window",
+      "-j2",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "seconds": 64.94546358300067
+  },
+  {
+    "argv": [
+      "cargo",
+      "build",
+      "--locked",
+      "--profile",
+      "ci",
+      "-p",
+      "incant_headless",
+      "-j2"
+    ],
+    "exit_code": 0,
+    "seconds": 31.666725832998054
+  }
+]

@@ -1,0 +1,95 @@
+{
+  "format": "incant-native-observation",
+  "version": 1,
+  "entities": [
+    "00000000000000000000000002",
+    "00000000000000000000000103",
+    "00000000000000000000000104"
+  ],
+  "checks": [
+    {
+      "name": "before-pickup-00000000000000000000000011",
+      "tick": 300,
+      "expect": {
+        "type": "exists",
+        "entity": "00000000000000000000000011",
+        "value": false
+      }
+    },
+    {
+      "name": "before-pickup-00000000000000000000000012",
+      "tick": 300,
+      "expect": {
+        "type": "exists",
+        "entity": "00000000000000000000000012",
+        "value": false
+      }
+    },
+    {
+      "name": "before-stopped",
+      "tick": 300,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000002",
+        "property": "velocity",
+        "value": [
+          0,
+          0,
+          0
+        ],
+        "tolerance": 0
+      }
+    },
+    {
+      "name": "after-pickup-00000000000000000000000011",
+      "tick": 600,
+      "expect": {
+        "type": "exists",
+        "entity": "00000000000000000000000011",
+        "value": false
+      }
+    },
+    {
+      "name": "after-pickup-00000000000000000000000012",
+      "tick": 600,
+      "expect": {
+        "type": "exists",
+        "entity": "00000000000000000000000012",
+        "value": false
+      }
+    },
+    {
+      "name": "after-stopped",
+      "tick": 600,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000002",
+        "property": "velocity",
+        "value": [
+          0,
+          0,
+          0
+        ],
+        "tolerance": 0
+      }
+    },
+    {
+      "name": "fresh-pickup-host-1",
+      "tick": 1,
+      "expect": {
+        "type": "exists",
+        "entity": "00000000000000000000000011",
+        "value": true
+      }
+    },
+    {
+      "name": "fresh-pickup-host-301",
+      "tick": 301,
+      "expect": {
+        "type": "exists",
+        "entity": "00000000000000000000000011",
+        "value": true
+      }
+    }
+  ]
+}

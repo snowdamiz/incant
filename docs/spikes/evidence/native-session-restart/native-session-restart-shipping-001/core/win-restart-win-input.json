@@ -1,0 +1,64 @@
+{
+  "format": "incant-input",
+  "version": 1,
+  "tick_rate": 60,
+  "start_tick": 0,
+  "ticks": 600,
+  "frames": [
+    {
+      "tick": 1,
+      "events": [
+        {
+          "type": "key",
+          "code": "KeyD",
+          "down": true
+        }
+      ]
+    },
+    {
+      "tick": 250,
+      "events": [
+        {
+          "type": "key",
+          "code": "KeyD",
+          "down": false
+        }
+      ]
+    },
+    {
+      "tick": 300,
+      "events": [
+        {
+          "type": "key",
+          "code": "KeyR",
+          "down": true
+        }
+      ]
+    },
+    {
+      "tick": 301,
+      "events": [
+        {
+          "type": "key",
+          "code": "KeyR",
+          "down": false
+        },
+        {
+          "type": "key",
+          "code": "KeyD",
+          "down": true
+        }
+      ]
+    },
+    {
+      "tick": 550,
+      "events": [
+        {
+          "type": "key",
+          "code": "KeyD",
+          "down": false
+        }
+      ]
+    }
+  ]
+}

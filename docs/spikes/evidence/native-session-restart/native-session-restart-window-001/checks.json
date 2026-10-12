@@ -1,0 +1,71 @@
+[
+  {
+    "argv": [
+      "cargo",
+      "test",
+      "--locked",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "native-window",
+      "--lib",
+      "restart",
+      "-j2"
+    ],
+    "exit_code": 0
+  },
+  {
+    "argv": [
+      "cargo",
+      "test",
+      "--locked",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "native-window",
+      "--lib",
+      "whole_session_replacement",
+      "-j2"
+    ],
+    "exit_code": 0
+  },
+  {
+    "argv": [
+      "cargo",
+      "test",
+      "--locked",
+      "-p",
+      "incant_render_game",
+      "--test",
+      "ui",
+      "restart_recreates",
+      "-j2"
+    ],
+    "exit_code": 0
+  },
+  {
+    "argv": [
+      "cargo",
+      "test",
+      "--locked",
+      "-p",
+      "incant_observe",
+      "repeated_simulation_ticks",
+      "-j2"
+    ],
+    "exit_code": 0
+  },
+  {
+    "argv": [
+      "cargo",
+      "test",
+      "--locked",
+      "-p",
+      "incant_script",
+      "--lib",
+      "restart_request_tests",
+      "-j2"
+    ],
+    "exit_code": 0
+  }
+]

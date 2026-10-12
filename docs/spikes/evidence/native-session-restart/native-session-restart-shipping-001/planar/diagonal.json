@@ -1,0 +1,318 @@
+{
+  "flipbooks": [
+    {
+      "completed": false,
+      "frame": 0,
+      "id": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      "playing": false
+    },
+    {
+      "completed": false,
+      "frame": 0,
+      "id": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        4
+      ],
+      "playing": false
+    }
+  ],
+  "frames": 48000,
+  "logs": {
+    "dropped": 0,
+    "entries": [
+      {
+        "level": "info",
+        "message": "fixture.presentation {\"widgets\":[[\"00000000000000000000000101\",\"Pending\"],[\"00000000000000000000000102\",\"Pending\"],[\"00000000000000000000000103\",\"Pending\"],[\"00000000000000000000000104\",\"Pending\"]],\"frames\":[[\"00000000000000000000000004\",0,0],[\"00000000000000000000000002\",0,0]]}",
+        "tick": 1
+      },
+      {
+        "level": "info",
+        "message": "fixture.presentation {\"widgets\":[[\"00000000000000000000000101\",\"Pearls 0 of 2\"],[\"00000000000000000000000102\",\"\"],[\"00000000000000000000000103\",\"Pending\"],[\"00000000000000000000000104\",\"Pending\"]],\"frames\":[[\"00000000000000000000000004\",0,0],[\"00000000000000000000000002\",0,0]]}",
+        "tick": 2
+      },
+      {
+        "level": "info",
+        "message": "fixture.presentation {\"widgets\":[[\"00000000000000000000000101\",\"Perles 0 sur 2\"],[\"00000000000000000000000102\",\"\"],[\"00000000000000000000000103\",\"Pending\"],[\"00000000000000000000000104\",\"Pending\"]],\"frames\":[[\"00000000000000000000000004\",0,0],[\"00000000000000000000000002\",0,0]]}",
+        "tick": 52
+      }
+    ]
+  },
+  "observations": {
+    "checks": [
+      {
+        "actual": true,
+        "expect": {
+          "entity": "00000000000000000000000011",
+          "type": "exists",
+          "value": true
+        },
+        "name": "pickup-00000000000000000000000011",
+        "passed": true,
+        "tick": 60
+      },
+      {
+        "actual": true,
+        "expect": {
+          "entity": "00000000000000000000000012",
+          "type": "exists",
+          "value": true
+        },
+        "name": "pickup-00000000000000000000000012",
+        "passed": true,
+        "tick": 60
+      },
+      {
+        "actual": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "expect": {
+          "entity": "00000000000000000000000002",
+          "property": "velocity",
+          "tolerance": 0.0,
+          "type": "vector",
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "name": "stopped",
+        "passed": true,
+        "tick": 60
+      }
+    ],
+    "entities": {
+      "00000000000000000000000002": {
+        "parent": null,
+        "rotation": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "translation": [
+          3.560667037963867,
+          3.560667037963867,
+          0.0
+        ],
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            3.560667037963867,
+            3.560667037963867,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000103": {
+        "parent": "00000000000000000000000106",
+        "rotation": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "translation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000104": {
+        "parent": "00000000000000000000000106",
+        "rotation": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "translation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "passed": true,
+    "tick": 60,
+    "tick_rate": 60
+  },
+  "pcm_sha256": "fec9afb531a8e036eba1d81651896e1b2c1f78b0234dbadc8e7549563f09407b",
+  "render_input": {
+    "binding_generation": 0,
+    "camera": "00000000000000000000000000000007",
+    "camera_position": [
+      7.0,
+      5.0,
+      20.0
+    ],
+    "decoded_payload_bytes": 556296,
+    "first_model_position": null,
+    "first_sprite_position": [
+      3.560667037963867,
+      3.560667037963867,
+      0.0
+    ],
+    "first_text_position": null,
+    "gpu_submitted": false,
+    "mode": "cpu-only",
+    "model_count": 0,
+    "sprite_count": 5,
+    "text_atlas_bytes": 0,
+    "text_atlas_nonzero": 0,
+    "text_atlas_sha256": null,
+    "text_count": 0,
+    "text_font_count": 0,
+    "text_generation": 0,
+    "text_glyph_count": 0,
+    "text_missing_clusters": 0,
+    "text_rtl_glyphs": 0,
+    "text_sources": {},
+    "tick": 60,
+    "topology_generation": 0,
+    "ui": {
+      "atlas_sha256": "f8d3e1b1b1a256a98af14ea0b3fdf60b671716b61168ae3f5a2513a03bd16dde",
+      "focus": null,
+      "glyphs": 28,
+      "sources": {
+        "00000000000000000000000101": "Perles 0 sur 2",
+        "00000000000000000000000102": "",
+        "00000000000000000000000103": "Pending",
+        "00000000000000000000000104": "Pending"
+      },
+      "values": {},
+      "viewport": [
+        640.0,
+        480.0
+      ],
+      "widgets": 7
+    }
+  },
+  "sources": [],
+  "tick": 60
+}

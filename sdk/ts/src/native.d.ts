@@ -44,6 +44,13 @@ export interface NativeChunk {
  * Functions belong to one tick only; retained functions never reactivate.
  * Vector/transform inputs are copied as fixed numeric fields, never JSON. */
 export interface NativeCommands {
+  /** Request whole-session replacement at the next accepted host boundary.
+   * Requires an explicitly restart-capable native host; unsupported hosts refuse
+   * and poison the active tick. No arguments, coalesced within the shared command
+   * quota. Publication waits for all source callbacks, world, audio and consumer
+   * acceptance. Does not reset this callback's state. Wasm parity is pending. */
+  requestRestart(): void;
+
   /** Ordered existing-widget controls. Preserve role, fonts, layout and hierarchy.
    * Literal content is UTF-8 <=16KiB; use localization.localize(...).text for
    * localized values. At most 256 HUD controls and 1MiB text per whole tick,

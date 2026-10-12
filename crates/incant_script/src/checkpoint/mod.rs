@@ -230,6 +230,11 @@ impl NativeSession {
             ));
         }
         let host = host(self)?;
+        if host.session_request.is_some() {
+            return Err(CheckpointError::Unsupported(
+                "pending session restart request",
+            ));
+        }
         let active = host
             .project
             .as_ref()

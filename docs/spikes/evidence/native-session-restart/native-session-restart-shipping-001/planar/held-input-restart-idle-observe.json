@@ -1,0 +1,98 @@
+{
+  "format": "incant-native-observation",
+  "version": 1,
+  "entities": [
+    "00000000000000000000000002"
+  ],
+  "checks": [
+    {
+      "name": "before-pickup-00000000000000000000000011",
+      "tick": 300,
+      "expect": {
+        "type": "exists",
+        "entity": "00000000000000000000000011",
+        "value": false
+      }
+    },
+    {
+      "name": "before-pickup-00000000000000000000000012",
+      "tick": 300,
+      "expect": {
+        "type": "exists",
+        "entity": "00000000000000000000000012",
+        "value": false
+      }
+    },
+    {
+      "name": "before-stopped",
+      "tick": 300,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000002",
+        "property": "velocity",
+        "value": [
+          0,
+          0,
+          0
+        ],
+        "tolerance": 0
+      }
+    },
+    {
+      "name": "after-fresh-00000000000000000000000011",
+      "tick": 330,
+      "expect": {
+        "type": "exists",
+        "entity": "00000000000000000000000011",
+        "value": true
+      }
+    },
+    {
+      "name": "after-fresh-00000000000000000000000012",
+      "tick": 330,
+      "expect": {
+        "type": "exists",
+        "entity": "00000000000000000000000012",
+        "value": true
+      }
+    },
+    {
+      "name": "fresh-pickup-host-1",
+      "tick": 1,
+      "expect": {
+        "type": "exists",
+        "entity": "00000000000000000000000011",
+        "value": true
+      }
+    },
+    {
+      "name": "fresh-pickup-host-301",
+      "tick": 301,
+      "expect": {
+        "type": "exists",
+        "entity": "00000000000000000000000011",
+        "value": true
+      }
+    },
+    {
+      "name": "held-isolated-move",
+      "tick": 301,
+      "expect": {
+        "type": "action",
+        "name": "move",
+        "active": false,
+        "pressed": false
+      }
+    },
+    {
+      "name": "held-isolated-restart",
+      "tick": 301,
+      "expect": {
+        "type": "action",
+        "name": "restart",
+        "active": false,
+        "pressed": false
+      }
+    }
+  ]
+}

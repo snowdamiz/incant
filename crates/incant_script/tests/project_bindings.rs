@@ -430,3 +430,19 @@ fn authored_updates_cannot_compile_source_through_eval_or_function_constructors(
         assert_eq!(world.snapshot(), before);
     }
 }
+
+#[test]
+fn later_source_failure_hides_restart_from_an_earlier_group() {
+    let (mut host, mut world) = start(
+        "",
+        "ctx.commands.requestRestart();ctx.chunks[0].transforms[0]=99;",
+        "throw Error('later source failure')",
+    );
+    host.enable_restart_requests().unwrap();
+    assert!(host.tick(&mut world, 0.1).is_err());
+    assert_eq!(world.inspect(id(1)).unwrap().transform.translation[0], 0.);
+    assert!(matches!(
+        host.take_session_request(),
+        Err(ScriptError::FailedSession)
+    ));
+}

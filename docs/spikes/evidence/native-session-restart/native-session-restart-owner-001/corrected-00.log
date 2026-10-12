@@ -1,0 +1,9 @@
+   Compiling incant_audio_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_audio_runtime)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.48s
+     Running tests/scene.rs (/tmp/incant-font-atlas-target/debug/deps/scene-63d4a29a650f055a)
+
+running 1 test
+test startup_suspended_master_has_no_audible_prefix_or_cursor_advance ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 16 filtered out; finished in 0.04s
+

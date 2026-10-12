@@ -1,0 +1,122 @@
+{
+  "at": "2026-10-12T22:52:35.783414+00:00",
+  "accepted": true,
+  "source_inventory_sha256": "338cb5b4f087a0e87103e991e2f1684a1a298c67c7705af26106906e76a6d71e",
+  "helper_inventory_sha256": "17497bb1f7701a33309889076ab8e51569175d2b206995f0e1bd62302fc98805",
+  "source_files": 34,
+  "helper_inputs": 7,
+  "checks": [
+    {
+      "argv": [
+        "cargo",
+        "test",
+        "--locked",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "native-window",
+        "--lib",
+        "-j2"
+      ],
+      "exit_code": 0,
+      "seconds": 5.585507625000901
+    },
+    {
+      "argv": [
+        "cargo",
+        "test",
+        "--locked",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_game_runtime",
+        "-p",
+        "incant_render_game",
+        "-p",
+        "incant_observe",
+        "-p",
+        "incant_audio_runtime",
+        "-j2"
+      ],
+      "exit_code": 0,
+      "seconds": 19.35745316700195
+    },
+    {
+      "argv": [
+        "cargo",
+        "clippy",
+        "--locked",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_game_runtime",
+        "-p",
+        "incant_game_player",
+        "-p",
+        "incant_render_game",
+        "-p",
+        "incant_observe",
+        "-p",
+        "incant_audio_runtime",
+        "--all-targets",
+        "--features",
+        "incant_game_player/native-window",
+        "-j2",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "seconds": 64.94546358300067
+    },
+    {
+      "argv": [
+        "cargo",
+        "build",
+        "--locked",
+        "--profile",
+        "ci",
+        "-p",
+        "incant_headless",
+        "-j2"
+      ],
+      "exit_code": 0,
+      "seconds": 31.666725832998054
+    }
+  ],
+  "check_logs": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-source-002/check-00.log",
+      "sha256": "535aad33337ecdf976e88da73e4fbc3ced3082272649c5327351b99958010797",
+      "test_groups": 1
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-source-002/check-01.log",
+      "sha256": "4cbc284733ce147fa7c98cc9e6fe8ad48b794e7bd85e385f5f1ae68e92f5eff7",
+      "test_groups": 28
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-source-002/check-02.log",
+      "sha256": "175032264bf19ccce855c1a50685f720a1a773b4779a368bceecc15bf7d98deb",
+      "test_groups": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-source-002/check-03.log",
+      "sha256": "4c163489837a1926641acf98f50820aa5832efb149d69fa68e051fdd8d2f96bc",
+      "test_groups": 0
+    }
+  ],
+  "review": [
+    "Request primitive has zero guest startup arguments, explicit owner opt-in, shared structural quota including reentrant getters, poison-on-caught-failure and post-composition visibility.",
+    "Immutable cooked seed reconstructs world/VM/timers/input/audio; old composition destroyed before replacement and fail-closed construction. Pending request cannot be lost via checkpoint.",
+    "Native window retains OS surface only, replaces mandatory consumer, starts audio suspended, retires monotonic IME authority and suppresses held input until real release.",
+    "Monotonic host observations distinguish repeated world ticks; exact PCM/fresh-state shipping helper selected independently of implementation.",
+    "Both copied samples publicly edited with atomic write_script/input actions, Undo/Redo/save/reopen; eight actual native baseline runs each."
+  ],
+  "findings": [],
+  "limits": [
+    "Source and CPU tests reviewed; fresh ordinary shipping restart executions are next, not yet claimed.",
+    "No native window/pixel/GPU/device execution proof; Claude review still required.",
+    "Native Play, static/development Wasm and offscreen GPU do not implement replacement ownership."
+  ]
+}

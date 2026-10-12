@@ -76,6 +76,16 @@ impl SurfaceState {
             targets,
         ))
     }
+    /// The old composed host must already be destroyed. No provider or reserved
+    /// frame may cross a session boundary; the OS surface alone is retained.
+    pub fn replacement_targets(&mut self) -> Result<SurfaceTargets, Error> {
+        if self.slot.borrow().is_some() || Rc::strong_count(&self.slot) != 1 {
+            return Err(Error::Reservation);
+        }
+        Ok(SurfaceTargets {
+            slot: Rc::clone(&self.slot),
+        })
+    }
     pub fn invalidate(&mut self) {
         self.slot.borrow_mut().take();
         self.configured = false;

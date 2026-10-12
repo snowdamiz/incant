@@ -1,0 +1,37 @@
+{
+  "format": "incant-native-observation",
+  "version": 1,
+  "entities": [
+    "00000000000000000000000002",
+    "00000000000000000000000010",
+    "00000000000000000000000011"
+  ],
+  "checks": [
+    {
+      "name": "collected-entities-removed",
+      "tick": 210,
+      "expect": {
+        "type": "entity_count",
+        "value": 23
+      }
+    },
+    {
+      "name": "pickup-00000000000000000000000012",
+      "tick": 210,
+      "expect": {
+        "type": "exists",
+        "entity": "00000000000000000000000012",
+        "value": false
+      }
+    },
+    {
+      "name": "pickup-00000000000000000000000013",
+      "tick": 210,
+      "expect": {
+        "type": "exists",
+        "entity": "00000000000000000000000013",
+        "value": true
+      }
+    }
+  ]
+}

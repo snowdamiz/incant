@@ -1,0 +1,2424 @@
+{
+  "format": "incant-native-session-restart-evidence",
+  "version": 1,
+  "source_freeze": {
+    "root": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+    "head": "5e3de230755ef10dab86e35faae12818066fd7b4",
+    "sources": [
+      {
+        "path": "crates/incant_audio_runtime/src/mixer.rs",
+        "sha256": "9b4928ec942aa66c703e9190bfc2faa33aeff0f09af6024fb380ad9af59bb052"
+      },
+      {
+        "path": "crates/incant_audio_runtime/src/scene.rs",
+        "sha256": "5772a2105fb9a5cbd5d47fec32835837f452baab1236a0cd6e8683e8fd5ae33d"
+      },
+      {
+        "path": "crates/incant_audio_runtime/src/scene/binding.rs",
+        "sha256": "657de6b00a996c9f4635ac9611cfc8979cd5b1f795c28b8d7fc0be3f9f126648"
+      },
+      {
+        "path": "crates/incant_audio_runtime/tests/scene.rs",
+        "sha256": "7da9583c22d352c17603fb14c6267433557079bcc2a8a266a28ad563e9de53d4"
+      },
+      {
+        "path": "crates/incant_game_player/Cargo.toml",
+        "sha256": "f55f69fb27e06087f1c924ecc36adec81318a1ae5507d99191fd4f2f248603f2"
+      },
+      {
+        "path": "crates/incant_game_player/src/lib.rs",
+        "sha256": "eb6f1807af92e5208436b86cafa4a8ee13d537f2d7ccaf051df6576d84d72f67"
+      },
+      {
+        "path": "crates/incant_game_player/src/session.rs",
+        "sha256": "ea29d2b68b3a24e30ae6bf908c5c769b5e5744b4075b02e68a4667006c8eccee"
+      },
+      {
+        "path": "crates/incant_game_player/src/window/gamepad/tests.rs",
+        "sha256": "46b31fff0bcae9e519aaed314992892b5107847ad7378b5aa90f173424544c10"
+      },
+      {
+        "path": "crates/incant_game_player/src/window/mod.rs",
+        "sha256": "907748d2b57fc669524db8bd5aec1e5b6016ba5565178acc836c47a6c03ac67f"
+      },
+      {
+        "path": "crates/incant_game_player/src/window/surface.rs",
+        "sha256": "a9c860514476d147500bbd6e3988783e6c365f214f498ef26a1af7edc6cf623c"
+      },
+      {
+        "path": "crates/incant_game_player/src/window/ui_input.rs",
+        "sha256": "a6296e20f3675210f9dd045b3ea0ac144022aa949098f20b8581f63047db22f5"
+      },
+      {
+        "path": "crates/incant_game_player/src/window/ui_input/tests.rs",
+        "sha256": "0a6c06412ff0f09dcc18c145d00caff803c41e37e8beb8df469f7449e5b49462"
+      },
+      {
+        "path": "crates/incant_game_runtime/src/core.rs",
+        "sha256": "db8885eca01d6b194ce9497b6334ac1aacd1561283ccae7aa29d4d143a2f554b"
+      },
+      {
+        "path": "crates/incant_game_runtime/src/hosted.rs",
+        "sha256": "dd88ff6501f09caa3793af4c3e050f0b61a8eebba99aacbc5f47ae9c0902c1a4"
+      },
+      {
+        "path": "crates/incant_game_runtime/src/lib.rs",
+        "sha256": "1f3cf3be48f410a388bde88afea3055e11d9c56eb1989f695e9e5908a58485b3"
+      },
+      {
+        "path": "crates/incant_game_runtime/src/offline.rs",
+        "sha256": "19e1b7ae9fa9337bab222134086b00013791a1e12e21fc8eff117f53bd0931bc"
+      },
+      {
+        "path": "crates/incant_game_runtime/tests/hosting.rs",
+        "sha256": "add1f3ed165df1979355e99f79e07bae4775ea3575f5043e6a16e1784abfaac9"
+      },
+      {
+        "path": "crates/incant_observe/src/lib.rs",
+        "sha256": "c15032240bdf7ab115762902091330a966a9ee7cb2abc007ea6d854783c2345e"
+      },
+      {
+        "path": "crates/incant_observe/src/tests.rs",
+        "sha256": "87695572d360885a86e05c0ca6914922232ceeecab259d531ab3082b4cbdd690"
+      },
+      {
+        "path": "crates/incant_render_game/tests/ui/checkpoints.rs",
+        "sha256": "f3616aa9f4b2537d7f3e1b51f1f68699f283bac89a20be68f7aecabd13775475"
+      },
+      {
+        "path": "crates/incant_script/src/checkpoint/mod.rs",
+        "sha256": "064662800b4f4138d9aa96f5e372eda2b99f8d99cbcffeb2d277c56d36cf2480"
+      },
+      {
+        "path": "crates/incant_script/src/commands.rs",
+        "sha256": "d58969ae3f24eef677394fd16810c907ac715a4f3f0b77f867a5b728ef44f425"
+      },
+      {
+        "path": "crates/incant_script/src/lib.rs",
+        "sha256": "9e0412af9de774afadedd4feb52d5f225020d3a53c0bdf39f46f151d0f376d57"
+      },
+      {
+        "path": "crates/incant_script/src/program.rs",
+        "sha256": "d13e6709e8768053de1aa6831d10c8b16a2f0602b24bb19606b22530a58ff15e"
+      },
+      {
+        "path": "crates/incant_script/src/session.rs",
+        "sha256": "101f6ec19a9221a5f658339278b2c127b624bfc47d34739ae03e2e873dedda7f"
+      },
+      {
+        "path": "crates/incant_script/tests/project_bindings.rs",
+        "sha256": "89415d2e7223612293b8797e819290ca3f20196318876ed51f73c50cd72e42a8"
+      },
+      {
+        "path": "samples/core/gameplay.ts",
+        "sha256": "ff6158f60fa87a7fa6d42f8fa7bcd6fb16c50e903fa07c28f31df103341ca211"
+      },
+      {
+        "path": "samples/planar/gameplay.ts",
+        "sha256": "3aa27cdc2e0e3002e4d8251d0ab3cd0004875bfb0da02c3afbb222b3b9b6b7b8"
+      },
+      {
+        "path": "sdk/ts/src/native.d.ts",
+        "sha256": "4a9e36893f882a48dc91e1675dbfa780386d44f43c819fdaa45adde16936161c"
+      },
+      {
+        "path": "crates/incant_game_player/src/restart.rs",
+        "sha256": "ff924b11dc50cf76403830ad52682836c44107ed63d29f926bbc272f6ce249c3"
+      },
+      {
+        "path": "crates/incant_game_player/src/restart/input.rs",
+        "sha256": "77976afd18f9e294287f361dfcbea4ee5e1035d89eeba5bdde300b4cfb2f074a"
+      },
+      {
+        "path": "crates/incant_game_runtime/src/seed.rs",
+        "sha256": "a2ebee27ba7da838d497a63c0dcb9200dbd0c92a8eae416ba17e6eb8bee33b9f"
+      },
+      {
+        "path": "crates/incant_game_runtime/tests/restart.rs",
+        "sha256": "f5e061efaa59d2efa3b9aa279ee09673560ef9bc31a2782b57837b5529142bb8"
+      },
+      {
+        "path": "crates/incant_script/src/restart_request_tests.rs",
+        "sha256": "dd982d0f3084e421bc6b31cab991896cdc19653ddf490bea19beb7a4c5cf86e6"
+      }
+    ]
+  },
+  "engine_freeze_sha256": "5a82253b845e4e5ec2b468ce4e1cd6f993af80b45ec73ec3733b9419b5e9cc3f",
+  "checks": [
+    {
+      "argv": [
+        "cargo",
+        "test",
+        "--locked",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "native-window",
+        "--lib",
+        "-j2"
+      ],
+      "exit_code": 0,
+      "seconds": 5.585507625000901
+    },
+    {
+      "argv": [
+        "cargo",
+        "test",
+        "--locked",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_game_runtime",
+        "-p",
+        "incant_render_game",
+        "-p",
+        "incant_observe",
+        "-p",
+        "incant_audio_runtime",
+        "-j2"
+      ],
+      "exit_code": 0,
+      "seconds": 19.35745316700195
+    },
+    {
+      "argv": [
+        "cargo",
+        "clippy",
+        "--locked",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_game_runtime",
+        "-p",
+        "incant_game_player",
+        "-p",
+        "incant_render_game",
+        "-p",
+        "incant_observe",
+        "-p",
+        "incant_audio_runtime",
+        "--all-targets",
+        "--features",
+        "incant_game_player/native-window",
+        "-j2",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "seconds": 64.94546358300067
+    },
+    {
+      "argv": [
+        "cargo",
+        "build",
+        "--locked",
+        "--profile",
+        "ci",
+        "-p",
+        "incant_headless",
+        "-j2"
+      ],
+      "exit_code": 0,
+      "seconds": 31.666725832998054
+    },
+    {
+      "argv": [
+        "cargo",
+        "check",
+        "--locked",
+        "-p",
+        "incant_game_player",
+        "--no-default-features",
+        "--features",
+        "static-module,render-input",
+        "-j2"
+      ],
+      "exit_code": 0,
+      "seconds": 6.061559125002532
+    },
+    {
+      "argv": [
+        "cargo",
+        "check",
+        "--locked",
+        "-p",
+        "incant_script",
+        "--no-default-features",
+        "-j2"
+      ],
+      "exit_code": 0,
+      "seconds": 1.6120976669990341
+    },
+    {
+      "argv": [
+        "node",
+        "node_modules/typescript/bin/tsc",
+        "-p",
+        "samples/core/tsconfig.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.22592020799856982
+    },
+    {
+      "argv": [
+        "node",
+        "node_modules/typescript/bin/tsc",
+        "-p",
+        "samples/planar/tsconfig.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.22018541699799243
+    },
+    {
+      "argv": [
+        "node",
+        "node_modules/typescript/bin/tsc",
+        "-p",
+        "sdk/ts/tsconfig.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.22008229199855123
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_game_runtime",
+        "incant_game_player",
+        "incant_script",
+        "--features",
+        "incant_game_player/static-module,incant_game_player/render-input"
+      ],
+      "exit_code": 0,
+      "seconds": 0.37347083399799885
+    },
+    {
+      "argv": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 1.2636765000024752
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.03531591700084391
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.048421375002362765
+    }
+  ],
+  "test_counts": {
+    "native_window": 59,
+    "affected_packages": 284,
+    "failed": 0,
+    "ignored": 0,
+    "groups": 29
+  },
+  "packages": {
+    "planar": {
+      "root": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/package",
+      "player_sha256": "fa27c7e8a351a4176b9b028e82666d7c49c454e6f2c98f913a94b8526fc48996",
+      "player_bytes": 9549776,
+      "files": {
+        "build.log": "626920a553b133ba32389a4b4aff01c6e3c18dace279377575fc00e4bc411903",
+        "export.json": "97b66e4708f021017be8a9f25cca210865a6d3ba91181126740d86e389aa2555",
+        "player/data/clips.bin": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+        "player/data/empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+        "player/data/fonts/27434b14189e6b823382d06b768a3544557f29f875e3b483452bac0eb87edc9a.json": "a08043e6d0266c90d90356aafb8c5b4b775f34abb9dbe96ae2e338e438e3f43c",
+        "player/data/fonts/2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9.ifont": "92960e6b23eff12e1bf13361b2b94b490d723f8d93e6945ba34b9f9b3acd2081",
+        "player/data/input-actions.json": "769b7d548f12fae2532d9cd8ec632aaab76bb4eea15031f2715871b2f1f360c2",
+        "player/data/package.json": "b4ddceb0be4e0ba73672021940551a46164cdc32e0653a04baa57250b1756694",
+        "player/data/textures/cf7db76b5fe2aa853a59139d8f4d166947eaa3894b5b1e616e3e9ffdff74f19f.ktx2": "cf7db76b5fe2aa853a59139d8f4d166947eaa3894b5b1e616e3e9ffdff74f19f",
+        "player/data/textures/de1efc9cac8d47956233a59b453545d7a915a1b4603d03d3d71530821637dd3e.json": "f8be1a88e557457b3be4d083f4b7d0a2b336df2fc71483a5f6f519bf62aa3cde",
+        "player/data/world.scene": "3550f0f7a64510299136e653b462678707481705472d1cd334d69d800364e9a7",
+        "player/incant_game_player": "fa27c7e8a351a4176b9b028e82666d7c49c454e6f2c98f913a94b8526fc48996",
+        "project-build.json": "0721c453d5d0db862f7f7cc655435b829b536429ea584deb3b9ba014047c26c8",
+        "symbols/incant_game_player.dSYM/Contents/Info.plist": "34ade40e73ea2438b149d0e75aa4fd292b8d5f4dad43e6af08786c15c4b7ea22",
+        "symbols/incant_game_player.dSYM/Contents/Resources/DWARF/incant_game_player-8def80b48e2adefd": "87da71d04e982c57b6d4d26dceff770b531ea94dd879dcc77c7f6ea23c6727ef",
+        "symbols/incant_game_player.dSYM/Contents/Resources/Relocations/aarch64/incant_game_player-8def80b48e2adefd.yml": "970ac3129c85242ea8b17bf6b1f7148734167cb02efdcc19e61ed3db6b9f785d",
+        "symbols/script-symbols.json": "7fdc44bee82c2a996d1e5e893b846f14c24ed7a25ea38c1c5d2f75d51f3e599a"
+      }
+    },
+    "core": {
+      "root": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/package",
+      "player_sha256": "101050e3c8a33dec53e55394dca4e34b9eb9085d634e0ce6ecae4393ee3943d2",
+      "player_bytes": 9549776,
+      "files": {
+        "build.log": "d62d0b6351be8dcb55a9a4ab7b4c41c1988cdb2dd8c421161b347f947d91957a",
+        "export.json": "368147c2a65271806a34622f8cca5ae091dcfefc2473b841c749e7efc2c7f488",
+        "player/data/audio/0d703edf8fc9341848b5c265fd4ece9171d98693d0d64f74148641ef1ae6df4e.ipcm": "0d703edf8fc9341848b5c265fd4ece9171d98693d0d64f74148641ef1ae6df4e",
+        "player/data/audio/2398da29e2def0b16fccdcacba29b8a83e3aa0c7f1132ac7b83f30968b5cf102.json": "15f5ddadde2cb5f7352de105d2d7fdc87fbb0084b042e59bf4b9ed61346f4849",
+        "player/data/audio/395329b5981927a184aa612c4709fbdaae717a7fb1ef7df8c81b535721e2a9fa.json": "de730c367d68e88d68db1cbb8d7b23d26d6a31f86adc22de71735865f70a2cfe",
+        "player/data/audio/3b9d7408f9e8467a46f26b7d43bc4b3230faf7ce549445ed1756fc7838752f84.json": "2df70e6b78b69baf75da3020b37e52a34a2a821726987bb6eeca68d51545c402",
+        "player/data/audio/3c1296a9c03eda2e90ade53650776166ac3126345dfa13690052feaf390506a0.json": "df160fecacfa564c74bf33af9351faa138dadeafa89434ab23debc02187ff0ed",
+        "player/data/audio/459081754b942c81495b0e5cd4ac8773100ff7fabd52a54fa8c6a2daeaf53d71.ipcm": "459081754b942c81495b0e5cd4ac8773100ff7fabd52a54fa8c6a2daeaf53d71",
+        "player/data/audio/76d1d2b6b7ec18a99448e0d3651057014a3952a2a3df4d307c998e07a303d8fe.ipcm": "76d1d2b6b7ec18a99448e0d3651057014a3952a2a3df4d307c998e07a303d8fe",
+        "player/data/audio/a32b666415328455ef62426b3b10bba357c757246d4209dbaa2f58ce6ccbe852.json": "298895127a2e1013ed8cab96d941c7cfcfce24602299580d51807ee7a1c4dfb0",
+        "player/data/audio/c85ced8e077bc39729e9f18405bc8218eb0e4ee91840428fd07237b2336871a5.ipcm": "c85ced8e077bc39729e9f18405bc8218eb0e4ee91840428fd07237b2336871a5",
+        "player/data/audio/f01894a8ef6dd549b16b0130e4404b0ec83df571bc821f76100648e100f4306a.ipcm": "f01894a8ef6dd549b16b0130e4404b0ec83df571bc821f76100648e100f4306a",
+        "player/data/clips.bin": "d6240ea3eef2ce260066a21dc01dbe147669facea3e8158b9b097efd9d58e3ae",
+        "player/data/empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+        "player/data/fonts/2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9.ifont": "92960e6b23eff12e1bf13361b2b94b490d723f8d93e6945ba34b9f9b3acd2081",
+        "player/data/fonts/9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2.json": "e43c79c54c311c5759bdf686b43b9b112b0177bafd6938782ebb782d75018812",
+        "player/data/input-actions.json": "4c0449a25e70fb1c39c7e00464380bbdb928a29bd6960a5f9e5b2a778eecbb5b",
+        "player/data/package.json": "381e0937ecfacd19a98b84bb646330a10a8589d9d075b626cbe4ded930ec07ec",
+        "player/data/world.scene": "80b351226d03bf3176ad741652bae882f3556d3f9e6281069e678dbd1f9ec147",
+        "player/incant_game_player": "101050e3c8a33dec53e55394dca4e34b9eb9085d634e0ce6ecae4393ee3943d2",
+        "project-build.json": "c6d45ca023f87ec22c1f68075e51ffb212949764de09fe19eeb5fa3eca562865",
+        "symbols/incant_game_player.dSYM/Contents/Info.plist": "34ade40e73ea2438b149d0e75aa4fd292b8d5f4dad43e6af08786c15c4b7ea22",
+        "symbols/incant_game_player.dSYM/Contents/Resources/DWARF/incant_game_player-8def80b48e2adefd": "37fee72e26f68bd6e85c82d7162bd59a902ca6c42868215ca72761ed1fdb9aeb",
+        "symbols/incant_game_player.dSYM/Contents/Resources/Relocations/aarch64/incant_game_player-8def80b48e2adefd.yml": "0577cb2c341827d056dbd9a0f41fa5c3e6528435f1797f086ec25f4250968226",
+        "symbols/script-symbols.json": "5d116e7958786a9f3bb48e85a4e30f44057fa643e0faca191384c6e4b7b40ec6"
+      }
+    }
+  },
+  "results": {
+    "planar": {
+      "passed": true,
+      "sample": "planar",
+      "proof": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar",
+      "helper_sha256": "bc2833c1331a30efd4649bf27aa4ced288638d9fde24cd6ea6ae8bd6353d3e28",
+      "player_sha256": "fa27c7e8a351a4176b9b028e82666d7c49c454e6f2c98f913a94b8526fc48996",
+      "source_sha256": "3aa27cdc2e0e3002e4d8251d0ab3cd0004875bfb0da02c3afbb222b3b9b6b7b8",
+      "project_sha256": "09507561641fb87454de8eeb9d8671db5ecdbbf18f0fde5ff9174cbec8cf5698",
+      "package_files": {
+        "build.log": "626920a553b133ba32389a4b4aff01c6e3c18dace279377575fc00e4bc411903",
+        "export.json": "97b66e4708f021017be8a9f25cca210865a6d3ba91181126740d86e389aa2555",
+        "player/data/clips.bin": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+        "player/data/empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+        "player/data/fonts/27434b14189e6b823382d06b768a3544557f29f875e3b483452bac0eb87edc9a.json": "a08043e6d0266c90d90356aafb8c5b4b775f34abb9dbe96ae2e338e438e3f43c",
+        "player/data/fonts/2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9.ifont": "92960e6b23eff12e1bf13361b2b94b490d723f8d93e6945ba34b9f9b3acd2081",
+        "player/data/input-actions.json": "769b7d548f12fae2532d9cd8ec632aaab76bb4eea15031f2715871b2f1f360c2",
+        "player/data/package.json": "b4ddceb0be4e0ba73672021940551a46164cdc32e0653a04baa57250b1756694",
+        "player/data/textures/cf7db76b5fe2aa853a59139d8f4d166947eaa3894b5b1e616e3e9ffdff74f19f.ktx2": "cf7db76b5fe2aa853a59139d8f4d166947eaa3894b5b1e616e3e9ffdff74f19f",
+        "player/data/textures/de1efc9cac8d47956233a59b453545d7a915a1b4603d03d3d71530821637dd3e.json": "f8be1a88e557457b3be4d083f4b7d0a2b336df2fc71483a5f6f519bf62aa3cde",
+        "player/data/world.scene": "3550f0f7a64510299136e653b462678707481705472d1cd334d69d800364e9a7",
+        "player/incant_game_player": "fa27c7e8a351a4176b9b028e82666d7c49c454e6f2c98f913a94b8526fc48996",
+        "project-build.json": "0721c453d5d0db862f7f7cc655435b829b536429ea584deb3b9ba014047c26c8",
+        "symbols/incant_game_player.dSYM/Contents/Info.plist": "34ade40e73ea2438b149d0e75aa4fd292b8d5f4dad43e6af08786c15c4b7ea22",
+        "symbols/incant_game_player.dSYM/Contents/Resources/DWARF/incant_game_player-8def80b48e2adefd": "87da71d04e982c57b6d4d26dceff770b531ea94dd879dcc77c7f6ea23c6727ef",
+        "symbols/incant_game_player.dSYM/Contents/Resources/Relocations/aarch64/incant_game_player-8def80b48e2adefd.yml": "970ac3129c85242ea8b17bf6b1f7148734167cb02efdcc19e61ed3db6b9f785d",
+        "symbols/script-symbols.json": "7fdc44bee82c2a996d1e5e893b846f14c24ed7a25ea38c1c5d2f75d51f3e599a"
+      },
+      "runs": [
+        "win",
+        "gamepad",
+        "lose",
+        "wall",
+        "locked-exit",
+        "diagonal",
+        "repeat-win",
+        "idle",
+        "win-restart-win",
+        "gamepad-restart-win",
+        "lose-restart-win",
+        "held-input-restart-idle"
+      ],
+      "commands": 12,
+      "exact_fresh_session_pcm": true,
+      "same_simulation_tick_distinct_host_checks": true,
+      "limits": [
+        "CPU ordinary package only; no native-window/GPU/device evidence",
+        "Fresh startup reset, not physics save/restore",
+        "Wasm and headless Play request owners remain unsupported"
+      ]
+    },
+    "core": {
+      "passed": true,
+      "sample": "core",
+      "proof": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core",
+      "helper_sha256": "bc2833c1331a30efd4649bf27aa4ced288638d9fde24cd6ea6ae8bd6353d3e28",
+      "player_sha256": "101050e3c8a33dec53e55394dca4e34b9eb9085d634e0ce6ecae4393ee3943d2",
+      "source_sha256": "ff6158f60fa87a7fa6d42f8fa7bcd6fb16c50e903fa07c28f31df103341ca211",
+      "project_sha256": "3e791022909986462c6153e15a26305a3bc8293ee16b731e65edbc45e8964395",
+      "package_files": {
+        "build.log": "d62d0b6351be8dcb55a9a4ab7b4c41c1988cdb2dd8c421161b347f947d91957a",
+        "export.json": "368147c2a65271806a34622f8cca5ae091dcfefc2473b841c749e7efc2c7f488",
+        "player/data/audio/0d703edf8fc9341848b5c265fd4ece9171d98693d0d64f74148641ef1ae6df4e.ipcm": "0d703edf8fc9341848b5c265fd4ece9171d98693d0d64f74148641ef1ae6df4e",
+        "player/data/audio/2398da29e2def0b16fccdcacba29b8a83e3aa0c7f1132ac7b83f30968b5cf102.json": "15f5ddadde2cb5f7352de105d2d7fdc87fbb0084b042e59bf4b9ed61346f4849",
+        "player/data/audio/395329b5981927a184aa612c4709fbdaae717a7fb1ef7df8c81b535721e2a9fa.json": "de730c367d68e88d68db1cbb8d7b23d26d6a31f86adc22de71735865f70a2cfe",
+        "player/data/audio/3b9d7408f9e8467a46f26b7d43bc4b3230faf7ce549445ed1756fc7838752f84.json": "2df70e6b78b69baf75da3020b37e52a34a2a821726987bb6eeca68d51545c402",
+        "player/data/audio/3c1296a9c03eda2e90ade53650776166ac3126345dfa13690052feaf390506a0.json": "df160fecacfa564c74bf33af9351faa138dadeafa89434ab23debc02187ff0ed",
+        "player/data/audio/459081754b942c81495b0e5cd4ac8773100ff7fabd52a54fa8c6a2daeaf53d71.ipcm": "459081754b942c81495b0e5cd4ac8773100ff7fabd52a54fa8c6a2daeaf53d71",
+        "player/data/audio/76d1d2b6b7ec18a99448e0d3651057014a3952a2a3df4d307c998e07a303d8fe.ipcm": "76d1d2b6b7ec18a99448e0d3651057014a3952a2a3df4d307c998e07a303d8fe",
+        "player/data/audio/a32b666415328455ef62426b3b10bba357c757246d4209dbaa2f58ce6ccbe852.json": "298895127a2e1013ed8cab96d941c7cfcfce24602299580d51807ee7a1c4dfb0",
+        "player/data/audio/c85ced8e077bc39729e9f18405bc8218eb0e4ee91840428fd07237b2336871a5.ipcm": "c85ced8e077bc39729e9f18405bc8218eb0e4ee91840428fd07237b2336871a5",
+        "player/data/audio/f01894a8ef6dd549b16b0130e4404b0ec83df571bc821f76100648e100f4306a.ipcm": "f01894a8ef6dd549b16b0130e4404b0ec83df571bc821f76100648e100f4306a",
+        "player/data/clips.bin": "d6240ea3eef2ce260066a21dc01dbe147669facea3e8158b9b097efd9d58e3ae",
+        "player/data/empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+        "player/data/fonts/2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9.ifont": "92960e6b23eff12e1bf13361b2b94b490d723f8d93e6945ba34b9f9b3acd2081",
+        "player/data/fonts/9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2.json": "e43c79c54c311c5759bdf686b43b9b112b0177bafd6938782ebb782d75018812",
+        "player/data/input-actions.json": "4c0449a25e70fb1c39c7e00464380bbdb928a29bd6960a5f9e5b2a778eecbb5b",
+        "player/data/package.json": "381e0937ecfacd19a98b84bb646330a10a8589d9d075b626cbe4ded930ec07ec",
+        "player/data/world.scene": "80b351226d03bf3176ad741652bae882f3556d3f9e6281069e678dbd1f9ec147",
+        "player/incant_game_player": "101050e3c8a33dec53e55394dca4e34b9eb9085d634e0ce6ecae4393ee3943d2",
+        "project-build.json": "c6d45ca023f87ec22c1f68075e51ffb212949764de09fe19eeb5fa3eca562865",
+        "symbols/incant_game_player.dSYM/Contents/Info.plist": "34ade40e73ea2438b149d0e75aa4fd292b8d5f4dad43e6af08786c15c4b7ea22",
+        "symbols/incant_game_player.dSYM/Contents/Resources/DWARF/incant_game_player-8def80b48e2adefd": "37fee72e26f68bd6e85c82d7162bd59a902ca6c42868215ca72761ed1fdb9aeb",
+        "symbols/incant_game_player.dSYM/Contents/Resources/Relocations/aarch64/incant_game_player-8def80b48e2adefd.yml": "0577cb2c341827d056dbd9a0f41fa5c3e6528435f1797f086ec25f4250968226",
+        "symbols/script-symbols.json": "5d116e7958786a9f3bb48e85a4e30f44057fa643e0faca191384c6e4b7b40ec6"
+      },
+      "runs": [
+        "win",
+        "lose",
+        "gamepad",
+        "jump",
+        "skip-pickup",
+        "wall",
+        "repeat-win",
+        "idle",
+        "win-restart-win",
+        "gamepad-restart-win",
+        "lose-restart-win",
+        "held-input-restart-idle"
+      ],
+      "commands": 12,
+      "exact_fresh_session_pcm": true,
+      "same_simulation_tick_distinct_host_checks": true,
+      "limits": [
+        "CPU ordinary package only; no native-window/GPU/device evidence",
+        "Fresh startup reset, not physics save/restore",
+        "Wasm and headless Play request owners remain unsupported"
+      ]
+    }
+  },
+  "artifacts": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-request-001/check-00.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-request-001/check-00.log",
+      "raw_sha256": "2aff86888cb507198d61035c83105be2f22b058073dae4cd4792ef78e811b7cf",
+      "raw_bytes": 6395,
+      "retained_sha256": "2aff86888cb507198d61035c83105be2f22b058073dae4cd4792ef78e811b7cf"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-request-001/check-01.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-request-001/check-01.log",
+      "raw_sha256": "890ad87c33f489b25157ae4d069d1e9352b24436a6b86b2279d2710d8399deb9",
+      "raw_bytes": 488,
+      "retained_sha256": "890ad87c33f489b25157ae4d069d1e9352b24436a6b86b2279d2710d8399deb9"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-request-001/check-02.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-request-001/check-02.log",
+      "raw_sha256": "837db3b740a241ad167ff8840678970cdab258af786ec377b2841362ec7b9331",
+      "raw_bytes": 1872,
+      "retained_sha256": "837db3b740a241ad167ff8840678970cdab258af786ec377b2841362ec7b9331"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-request-001/checks.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-request-001/checks.json",
+      "raw_sha256": "810c700394a6194409cb0b16ece54df78cce2086a0f86f4fedcfeb474a7340a5",
+      "raw_bytes": 1296,
+      "retained_sha256": "810c700394a6194409cb0b16ece54df78cce2086a0f86f4fedcfeb474a7340a5"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-request-001/freeze.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-request-001/freeze.json",
+      "raw_sha256": "1d31509e98e7754ed037340a453cd964bd8041f39ba884e3079ff77d01b76ca9",
+      "raw_bytes": 1532,
+      "retained_sha256": "1d31509e98e7754ed037340a453cd964bd8041f39ba884e3079ff77d01b76ca9"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-seed-001/freeze.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-seed-001/freeze.json",
+      "raw_sha256": "7b5c58e2aad810c9ef5241b488ef456adf1057d0ef5cfe6e8348d31a7e27681b",
+      "raw_bytes": 2676,
+      "retained_sha256": "7b5c58e2aad810c9ef5241b488ef456adf1057d0ef5cfe6e8348d31a7e27681b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-seed-001/tests-corrected.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-seed-001/tests-corrected.log",
+      "raw_sha256": "93167401b6c6aac4b2076438e56143a9a9225409a6c0c942bc8701648fff65cb",
+      "raw_bytes": 495,
+      "retained_sha256": "93167401b6c6aac4b2076438e56143a9a9225409a6c0c942bc8701648fff65cb"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-seed-001/tests.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-seed-001/tests.log",
+      "raw_sha256": "13034b7f81262d2bb9f9357e48187f630d9f78870ef2345acfb99a992b9ce3ef",
+      "raw_bytes": 1578,
+      "retained_sha256": "13034b7f81262d2bb9f9357e48187f630d9f78870ef2345acfb99a992b9ce3ef"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-owner-001/check-00.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-owner-001/check-00.log",
+      "raw_sha256": "e5342786b4e5eced0201bdfcb1f6a7fada8459038fc7624222c3dfe9d2d983f5",
+      "raw_bytes": 1554,
+      "retained_sha256": "e5342786b4e5eced0201bdfcb1f6a7fada8459038fc7624222c3dfe9d2d983f5"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-owner-001/check-01.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-owner-001/check-01.log.gz",
+      "raw_sha256": "2f262aad5cd369b24e6297b062f47586c421a5993db2e1ba872110f045b80280",
+      "raw_bytes": 69790,
+      "retained_sha256": "2722324191aba514f6c19f4cb85bf1b42f192fc2b71842e06d85c8ebcae9ee40"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-owner-001/checks.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-owner-001/checks.json",
+      "raw_sha256": "64433eb2e43d3e78c9c9ff39df940e354a1593602b7699be93d559d32d58b90e",
+      "raw_bytes": 469,
+      "retained_sha256": "64433eb2e43d3e78c9c9ff39df940e354a1593602b7699be93d559d32d58b90e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-owner-001/corrected-00.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-owner-001/corrected-00.log",
+      "raw_sha256": "8e50eef89d1637d881ccd169b11f1ba2b6636287bf2dce1071303b364508386b",
+      "raw_bytes": 488,
+      "retained_sha256": "8e50eef89d1637d881ccd169b11f1ba2b6636287bf2dce1071303b364508386b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-owner-001/corrected-01.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-owner-001/corrected-01.log",
+      "raw_sha256": "f8f14c41d07833bb9068335389f263367a131cf7b9f247bb16de69338c4cecc4",
+      "raw_bytes": 3718,
+      "retained_sha256": "f8f14c41d07833bb9068335389f263367a131cf7b9f247bb16de69338c4cecc4"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-owner-001/corrected-checks.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-owner-001/corrected-checks.json",
+      "raw_sha256": "7e19bcc36b4d6e083909fa608473f493af70198aa389bd631c8477d18b5b0e1a",
+      "raw_bytes": 474,
+      "retained_sha256": "7e19bcc36b4d6e083909fa608473f493af70198aa389bd631c8477d18b5b0e1a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-owner-001/freeze.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-owner-001/freeze.json",
+      "raw_sha256": "d341e76961906e24f483469304761506315dd014e980501476ef76e99be53798",
+      "raw_bytes": 3596,
+      "retained_sha256": "d341e76961906e24f483469304761506315dd014e980501476ef76e99be53798"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-window-001/check-00.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-window-001/check-00.log",
+      "raw_sha256": "fa149db772c940eb3e65806bb10190e9cfadf385912b4d0330ef7c4b346e1d39",
+      "raw_bytes": 15750,
+      "retained_sha256": "fa149db772c940eb3e65806bb10190e9cfadf385912b4d0330ef7c4b346e1d39"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-window-001/check-01.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-window-001/check-01.log",
+      "raw_sha256": "fba529a7c36863cac92a967d7c05c99bf05a6c519328265271a10b4f40209704",
+      "raw_bytes": 7862,
+      "retained_sha256": "fba529a7c36863cac92a967d7c05c99bf05a6c519328265271a10b4f40209704"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-window-001/check-02.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-window-001/check-02.log",
+      "raw_sha256": "a6dbefb8bad0240d4cef5ab1fc79abbd6ce913f0bab993c0f533b458a1b50cc9",
+      "raw_bytes": 4651,
+      "retained_sha256": "a6dbefb8bad0240d4cef5ab1fc79abbd6ce913f0bab993c0f533b458a1b50cc9"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-window-001/check-03.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-window-001/check-03.log",
+      "raw_sha256": "004ba0ff075bab7974cb7934b6d3d3051fc363524829bac53670624ebbc72bf2",
+      "raw_bytes": 1620,
+      "retained_sha256": "004ba0ff075bab7974cb7934b6d3d3051fc363524829bac53670624ebbc72bf2"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-window-001/check-04.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-window-001/check-04.log",
+      "raw_sha256": "b804030a35b9ecd908f20f26f26eacf7da12cd8529d6d9319addfd942cc3d3bf",
+      "raw_bytes": 811,
+      "retained_sha256": "b804030a35b9ecd908f20f26f26eacf7da12cd8529d6d9319addfd942cc3d3bf"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-window-001/checks.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-window-001/checks.json",
+      "raw_sha256": "20df56013d022100bcb8b30bf25b73ea25c931e5ef1b21b71dcf656bef0676ad",
+      "raw_bytes": 1037,
+      "retained_sha256": "20df56013d022100bcb8b30bf25b73ea25c931e5ef1b21b71dcf656bef0676ad"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-window-001/freeze.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-window-001/freeze.json",
+      "raw_sha256": "5508bdcbcfa0e7d650cc46c4313a31a521a3e2d1ce18ca0be9be6a9a7319938a",
+      "raw_bytes": 5139,
+      "retained_sha256": "5508bdcbcfa0e7d650cc46c4313a31a521a3e2d1ce18ca0be9be6a9a7319938a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-source-001/check-00.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-source-001/check-00.log",
+      "raw_sha256": "1e60d3dd3688ac6ee0bcae763edd799f02a3b790d15b72135e600ada243c4822",
+      "raw_bytes": 13984,
+      "retained_sha256": "1e60d3dd3688ac6ee0bcae763edd799f02a3b790d15b72135e600ada243c4822"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-source-001/check-01.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-source-001/check-01.log.gz",
+      "raw_sha256": "a2cb705bb42588705a84a876bb2e5cc42e6721fa34e5457ecd0f2df2ebc14582",
+      "raw_bytes": 25833,
+      "retained_sha256": "84861c5addf98327653b2ad1360e52856fee944216ff9d92c4da513f0bc90a5c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-source-001/checks.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-source-001/checks.json",
+      "raw_sha256": "a44c867563534cdee7e0494febe24ad83425f822b9fc84fa6611dce610189e12",
+      "raw_bytes": 579,
+      "retained_sha256": "a44c867563534cdee7e0494febe24ad83425f822b9fc84fa6611dce610189e12"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-source-001/freeze.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-source-001/freeze.json",
+      "raw_sha256": "771d1f26479385ab5c9696b82dff9206424bb47507ea9e3a413dad8ae605a176",
+      "raw_bytes": 5379,
+      "retained_sha256": "771d1f26479385ab5c9696b82dff9206424bb47507ea9e3a413dad8ae605a176"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-source-001/tracked.patch",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-source-001/tracked.patch.gz",
+      "raw_sha256": "0add7d7c90308b2bbfa08837c8d9ab94d1019b88405714747a4a0a9a467ea5d1",
+      "raw_bytes": 63103,
+      "retained_sha256": "6304cce58fd21b3908c497b5805e6dfe20a45b6e2bf1bd7e769e5e724f6cb0d7"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-source-002/check-00.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-source-002/check-00.log",
+      "raw_sha256": "535aad33337ecdf976e88da73e4fbc3ced3082272649c5327351b99958010797",
+      "raw_bytes": 14605,
+      "retained_sha256": "535aad33337ecdf976e88da73e4fbc3ced3082272649c5327351b99958010797"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-source-002/check-01.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-source-002/check-01.log.gz",
+      "raw_sha256": "4cbc284733ce147fa7c98cc9e6fe8ad48b794e7bd85e385f5f1ae68e92f5eff7",
+      "raw_bytes": 32266,
+      "retained_sha256": "5c2e56b8293cb8d191504dc57375d63f154890cb6b57f2620566c57007bf016b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-source-002/check-02.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-source-002/check-02.log.gz",
+      "raw_sha256": "175032264bf19ccce855c1a50685f720a1a773b4779a368bceecc15bf7d98deb",
+      "raw_bytes": 19874,
+      "retained_sha256": "847a264455fc9bbe18c9469f87fe40c0ced8bc68d31817b92e98dd8946120020"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-source-002/check-03.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-source-002/check-03.log",
+      "raw_sha256": "4c163489837a1926641acf98f50820aa5832efb149d69fa68e051fdd8d2f96bc",
+      "raw_bytes": 2518,
+      "retained_sha256": "4c163489837a1926641acf98f50820aa5832efb149d69fa68e051fdd8d2f96bc"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-source-002/checks.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-source-002/checks.json",
+      "raw_sha256": "78ebbd7127c8788cf13ac3c6dc1068ffdb9759be58077cb280dd9342f622da93",
+      "raw_bytes": 1296,
+      "retained_sha256": "78ebbd7127c8788cf13ac3c6dc1068ffdb9759be58077cb280dd9342f622da93"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-source-002/closure-00.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-source-002/closure-00.log",
+      "raw_sha256": "05c9730c37234e27bba5de450a79e73889647c6074e24b8002b280d6f33d3f92",
+      "raw_bytes": 3930,
+      "retained_sha256": "05c9730c37234e27bba5de450a79e73889647c6074e24b8002b280d6f33d3f92"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-source-002/closure-checks-fixed.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-source-002/closure-checks-fixed.json",
+      "raw_sha256": "40d27696a301c2005cfc9e4dd11226bf9f0d188d6085b1c08d7eecf391db1ef3",
+      "raw_bytes": 1789,
+      "retained_sha256": "40d27696a301c2005cfc9e4dd11226bf9f0d188d6085b1c08d7eecf391db1ef3"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-source-002/closure-checks.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-source-002/closure-checks.json",
+      "raw_sha256": "e679746e16f00510b2acc64daf16acf2abe4a398046e0113aec2193b30c82c3c",
+      "raw_bytes": 276,
+      "retained_sha256": "e679746e16f00510b2acc64daf16acf2abe4a398046e0113aec2193b30c82c3c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-source-002/closure-fixed-00.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-source-002/closure-fixed-00.log",
+      "raw_sha256": "59caf18bccd14d3e915e7c9d8c12cce48c2fa4a8600ffe9aedacd3831b70c8b8",
+      "raw_bytes": 1786,
+      "retained_sha256": "59caf18bccd14d3e915e7c9d8c12cce48c2fa4a8600ffe9aedacd3831b70c8b8"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-source-002/closure-fixed-01.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-source-002/closure-fixed-01.log",
+      "raw_sha256": "81c71429300f548cc2d555cc7cdee65cfbcc1963810f33665217744cc04894d2",
+      "raw_bytes": 584,
+      "retained_sha256": "81c71429300f548cc2d555cc7cdee65cfbcc1963810f33665217744cc04894d2"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-source-002/closure-fixed-02.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-source-002/closure-fixed-02.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-source-002/closure-fixed-03.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-source-002/closure-fixed-03.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-source-002/closure-fixed-04.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-source-002/closure-fixed-04.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-source-002/closure-fixed-05.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-source-002/closure-fixed-05.log",
+      "raw_sha256": "a5ae06e078f8dca5b3b87ebe583bec9a85b2b118b41f608fee5bb26ee8380041",
+      "raw_bytes": 170,
+      "retained_sha256": "a5ae06e078f8dca5b3b87ebe583bec9a85b2b118b41f608fee5bb26ee8380041"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-source-002/closure-fixed-06.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-source-002/closure-fixed-06.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-source-002/closure-fixed-07.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-source-002/closure-fixed-07.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-source-002/closure-fixed-08.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-source-002/closure-fixed-08.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-source-002/freeze.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-source-002/freeze.json",
+      "raw_sha256": "338cb5b4f087a0e87103e991e2f1684a1a298c67c7705af26106906e76a6d71e",
+      "raw_bytes": 5379,
+      "retained_sha256": "338cb5b4f087a0e87103e991e2f1684a1a298c67c7705af26106906e76a6d71e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-source-002/prepare-planar.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-source-002/prepare-planar.log",
+      "raw_sha256": "91f97bbf974dacd1cf7c73883c6be1076042458a57fd77699008b5a49f4a2a9a",
+      "raw_bytes": 2033,
+      "retained_sha256": "91f97bbf974dacd1cf7c73883c6be1076042458a57fd77699008b5a49f4a2a9a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-source-002/static-bundle.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-source-002/static-bundle.json",
+      "raw_sha256": "d6abc0a67621e17153f883c6897fc0fa367df6e5ea81bfb4e2d7ebac2382f6ed",
+      "raw_bytes": 1128,
+      "retained_sha256": "d6abc0a67621e17153f883c6897fc0fa367df6e5ea81bfb4e2d7ebac2382f6ed"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-source-002/tracked.patch",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-source-002/tracked.patch.gz",
+      "raw_sha256": "8c747350327927eba07d2f5ea367530a3b853c265c9f1c8b9f79b64f9108eee4",
+      "raw_bytes": 63181,
+      "retained_sha256": "ea37344677ba166835c8bf9cbb40a102d56ad9503097e5b2d89deb85cddf148b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-probe-source-001/freeze.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-probe-source-001/freeze.json",
+      "raw_sha256": "17497bb1f7701a33309889076ab8e51569175d2b206995f0e1bd62302fc98805",
+      "raw_bytes": 1092,
+      "retained_sha256": "17497bb1f7701a33309889076ab8e51569175d2b206995f0e1bd62302fc98805"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/authoring-calls.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/authoring-calls.json.gz",
+      "raw_sha256": "589d356ddd365e5ec4116b1c1a22769e0c614e77d0323d68b1d9e0e5133751ba",
+      "raw_bytes": 413956,
+      "retained_sha256": "e52da8c43e53cddd839d1002c26682d6dcff0db6b4c5c586447d1ab1ecf89521"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/command-001.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/command-001.json",
+      "raw_sha256": "59f003acb13d5e6de72fc7101a26e08c093eea6fa639b48168fefe8b77c79bc4",
+      "raw_bytes": 8289,
+      "retained_sha256": "59f003acb13d5e6de72fc7101a26e08c093eea6fa639b48168fefe8b77c79bc4"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/command-002.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/command-002.json",
+      "raw_sha256": "e32a87489e828562f5c352a65a4fbcf05b96bd1944cda4930584938c1a392490",
+      "raw_bytes": 8297,
+      "retained_sha256": "e32a87489e828562f5c352a65a4fbcf05b96bd1944cda4930584938c1a392490"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/command-003.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/command-003.json",
+      "raw_sha256": "a36666f36cad57e9f6d794402384446a81dcee5d3315219b1626df2342e78647",
+      "raw_bytes": 7053,
+      "retained_sha256": "a36666f36cad57e9f6d794402384446a81dcee5d3315219b1626df2342e78647"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/command-004.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/command-004.json",
+      "raw_sha256": "6c3fe2d52b3752203b8e26d6b40edb4b3e714fcc73e42419eb2c9fa532ba8361",
+      "raw_bytes": 6597,
+      "retained_sha256": "6c3fe2d52b3752203b8e26d6b40edb4b3e714fcc73e42419eb2c9fa532ba8361"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/command-005.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/command-005.json",
+      "raw_sha256": "d6a5def5218da40c15c1c2db35dec3f75f91626147885d016fc9813e874ada78",
+      "raw_bytes": 6642,
+      "retained_sha256": "d6a5def5218da40c15c1c2db35dec3f75f91626147885d016fc9813e874ada78"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/command-006.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/command-006.json",
+      "raw_sha256": "c54369e2b8966ae25bd6bd8a54ee14e8d6b16a879f5a42694e72996de8ed7624",
+      "raw_bytes": 6498,
+      "retained_sha256": "c54369e2b8966ae25bd6bd8a54ee14e8d6b16a879f5a42694e72996de8ed7624"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/command-007.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/command-007.json",
+      "raw_sha256": "dd772c93957803121eb4407a36969f03e803fcdabd85a8e1085cf071e82faa10",
+      "raw_bytes": 8303,
+      "retained_sha256": "dd772c93957803121eb4407a36969f03e803fcdabd85a8e1085cf071e82faa10"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/command-008.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/command-008.json",
+      "raw_sha256": "c7146dcd53b34d146140ca8a9a01d95894e239f6e49bd4100523db8bbf4e2b61",
+      "raw_bytes": 3847,
+      "retained_sha256": "c7146dcd53b34d146140ca8a9a01d95894e239f6e49bd4100523db8bbf4e2b61"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/command-009.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/command-009.json",
+      "raw_sha256": "4ef3bdf3dc1addfcf5f839d16219caecc7e908483d7da65d0d38d9663d1b2017",
+      "raw_bytes": 707,
+      "retained_sha256": "4ef3bdf3dc1addfcf5f839d16219caecc7e908483d7da65d0d38d9663d1b2017"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/diagonal-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/diagonal-input.json",
+      "raw_sha256": "dab40ff34829f2274d142e6a8b59d2077ebfc3f46e5ca19276c44c101924e564",
+      "raw_bytes": 995,
+      "retained_sha256": "dab40ff34829f2274d142e6a8b59d2077ebfc3f46e5ca19276c44c101924e564"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/diagonal-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/diagonal-observe.json",
+      "raw_sha256": "9a9016f4b7c3cc157253429cb34e41b287a520f36600d95a8cceea50af4ca085",
+      "raw_bytes": 887,
+      "retained_sha256": "9a9016f4b7c3cc157253429cb34e41b287a520f36600d95a8cceea50af4ca085"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/diagonal.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/diagonal.json",
+      "raw_sha256": "8728f86e5431593745d12c7f351e64107f40bb157eddf74848aad4dee7906036",
+      "raw_bytes": 5212,
+      "retained_sha256": "8728f86e5431593745d12c7f351e64107f40bb157eddf74848aad4dee7906036"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/gamepad-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/gamepad-input.json",
+      "raw_sha256": "d40f93f9a92b9164a460f61a1ba9816187d761ede7bb526c9710b5c38023ea82",
+      "raw_bytes": 1407,
+      "retained_sha256": "d40f93f9a92b9164a460f61a1ba9816187d761ede7bb526c9710b5c38023ea82"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/gamepad-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/gamepad-observe.json",
+      "raw_sha256": "a40abe9b37f6fa3c8836d98b82104c27c4469c2e188b0cf5ed55bdde15e3e356",
+      "raw_bytes": 892,
+      "retained_sha256": "a40abe9b37f6fa3c8836d98b82104c27c4469c2e188b0cf5ed55bdde15e3e356"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/gamepad.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/gamepad.json",
+      "raw_sha256": "c6fe10226f1ddfb1ab5fdfa7b2d189782735ed2e22bd75b35c84eb423dd28952",
+      "raw_bytes": 6778,
+      "retained_sha256": "c6fe10226f1ddfb1ab5fdfa7b2d189782735ed2e22bd75b35c84eb423dd28952"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/idle-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/idle-input.json",
+      "raw_sha256": "cee21dcac738f7c7069a9e385bc7a8d2e0692e26c5d0d71485c0d8a92083a3a0",
+      "raw_bytes": 116,
+      "retained_sha256": "cee21dcac738f7c7069a9e385bc7a8d2e0692e26c5d0d71485c0d8a92083a3a0"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/idle-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/idle-observe.json",
+      "raw_sha256": "ce5aa343424f1bc5ff37647ef9aa35ad9e7420265e0afd1ad76b7e26649b0519",
+      "raw_bytes": 538,
+      "retained_sha256": "ce5aa343424f1bc5ff37647ef9aa35ad9e7420265e0afd1ad76b7e26649b0519"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/idle.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/idle.json",
+      "raw_sha256": "17bb62cd47294ce04932d45eb26c9573f3a8e1e4d0b9f184813c92a97ba31dde",
+      "raw_bytes": 2805,
+      "retained_sha256": "17bb62cd47294ce04932d45eb26c9573f3a8e1e4d0b9f184813c92a97ba31dde"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/locked-exit-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/locked-exit-input.json",
+      "raw_sha256": "15c29da8390f459f3a5afa5918a8499b6bcaf6937b1b7c659ab9e0b125f33b33",
+      "raw_bytes": 1437,
+      "retained_sha256": "15c29da8390f459f3a5afa5918a8499b6bcaf6937b1b7c659ab9e0b125f33b33"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/locked-exit-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/locked-exit-observe.json",
+      "raw_sha256": "6cee0115833f366486a2badf6e8384089a3f52e15510a2b376da011eeb5eeca8",
+      "raw_bytes": 611,
+      "retained_sha256": "6cee0115833f366486a2badf6e8384089a3f52e15510a2b376da011eeb5eeca8"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/locked-exit.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/locked-exit.json",
+      "raw_sha256": "daf1bc5f41bddd51631f6afc99a41c48d05d040e6349529be9fe9d9bc3439477",
+      "raw_bytes": 5320,
+      "retained_sha256": "daf1bc5f41bddd51631f6afc99a41c48d05d040e6349529be9fe9d9bc3439477"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/lose-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/lose-input.json",
+      "raw_sha256": "2cbd99ee77f98d9ce4f01501f7decabf04baae615a94f906468711471259e2cd",
+      "raw_bytes": 557,
+      "retained_sha256": "2cbd99ee77f98d9ce4f01501f7decabf04baae615a94f906468711471259e2cd"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/lose-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/lose-observe.json",
+      "raw_sha256": "6769fbc32e51cd9721a93d0701d3855ffa7fc85dd2e068b25838ad6b640e5294",
+      "raw_bytes": 890,
+      "retained_sha256": "6769fbc32e51cd9721a93d0701d3855ffa7fc85dd2e068b25838ad6b640e5294"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/lose.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/lose.json",
+      "raw_sha256": "46b7b5765585a614709a244c9e6afd9314eaab4ab78d7737ec6daade007f4de4",
+      "raw_bytes": 5696,
+      "retained_sha256": "46b7b5765585a614709a244c9e6afd9314eaab4ab78d7737ec6daade007f4de4"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/repeat-win-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/repeat-win-input.json",
+      "raw_sha256": "12507f1135e300f8ddb26a9c810cd5d67e18775bc1a88f4d6e2beb596d1491db",
+      "raw_bytes": 1877,
+      "retained_sha256": "12507f1135e300f8ddb26a9c810cd5d67e18775bc1a88f4d6e2beb596d1491db"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/repeat-win-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/repeat-win-observe.json",
+      "raw_sha256": "a40abe9b37f6fa3c8836d98b82104c27c4469c2e188b0cf5ed55bdde15e3e356",
+      "raw_bytes": 892,
+      "retained_sha256": "a40abe9b37f6fa3c8836d98b82104c27c4469c2e188b0cf5ed55bdde15e3e356"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/repeat-win.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/repeat-win.json",
+      "raw_sha256": "c6fe10226f1ddfb1ab5fdfa7b2d189782735ed2e22bd75b35c84eb423dd28952",
+      "raw_bytes": 6778,
+      "retained_sha256": "c6fe10226f1ddfb1ab5fdfa7b2d189782735ed2e22bd75b35c84eb423dd28952"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/unsupported-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/unsupported-input.json",
+      "raw_sha256": "ea6f28bf3cc5d78065876835e912be4048b498ae9505d885ead96fd4743f899a",
+      "raw_bytes": 2029,
+      "retained_sha256": "ea6f28bf3cc5d78065876835e912be4048b498ae9505d885ead96fd4743f899a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/wall-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/wall-input.json",
+      "raw_sha256": "29e406638309e4f87c434439d2e838df8b4a67a2e4d234c6c926f1616d3e2bc3",
+      "raw_bytes": 557,
+      "retained_sha256": "29e406638309e4f87c434439d2e838df8b4a67a2e4d234c6c926f1616d3e2bc3"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/wall-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/wall-observe.json",
+      "raw_sha256": "c92d1bbfdc4367a7858724daadd404c409f6af3040f8b9e6f34eee5b80de14c3",
+      "raw_bytes": 611,
+      "retained_sha256": "c92d1bbfdc4367a7858724daadd404c409f6af3040f8b9e6f34eee5b80de14c3"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/wall.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/wall.json",
+      "raw_sha256": "a2ec26fac7a743b7fc401656419fb976cc22c8c3823b52bf44e98f0cc762c9f9",
+      "raw_bytes": 5289,
+      "retained_sha256": "a2ec26fac7a743b7fc401656419fb976cc22c8c3823b52bf44e98f0cc762c9f9"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/win-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/win-input.json",
+      "raw_sha256": "12507f1135e300f8ddb26a9c810cd5d67e18775bc1a88f4d6e2beb596d1491db",
+      "raw_bytes": 1877,
+      "retained_sha256": "12507f1135e300f8ddb26a9c810cd5d67e18775bc1a88f4d6e2beb596d1491db"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/win-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/win-observe.json",
+      "raw_sha256": "a40abe9b37f6fa3c8836d98b82104c27c4469c2e188b0cf5ed55bdde15e3e356",
+      "raw_bytes": 892,
+      "retained_sha256": "a40abe9b37f6fa3c8836d98b82104c27c4469c2e188b0cf5ed55bdde15e3e356"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/win.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-001/planar/win.json",
+      "raw_sha256": "c6fe10226f1ddfb1ab5fdfa7b2d189782735ed2e22bd75b35c84eb423dd28952",
+      "raw_bytes": 6778,
+      "retained_sha256": "c6fe10226f1ddfb1ab5fdfa7b2d189782735ed2e22bd75b35c84eb423dd28952"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/binary.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/binary.json",
+      "raw_sha256": "25b2fb1bff320dfccf483fd8a666b6a0782b82de30479062d425041bf865354d",
+      "raw_bytes": 210,
+      "retained_sha256": "25b2fb1bff320dfccf483fd8a666b6a0782b82de30479062d425041bf865354d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/commands.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/commands.json",
+      "raw_sha256": "c41afe6e8fe92ad2ed5ca8d7f52859b9c76ddf888fc4f3e88b79f19f643b0160",
+      "raw_bytes": 833,
+      "retained_sha256": "c41afe6e8fe92ad2ed5ca8d7f52859b9c76ddf888fc4f3e88b79f19f643b0160"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/authoring-calls.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/authoring-calls.json.gz",
+      "raw_sha256": "e91e2467a4de56b0642641e8c9801e1c04959a99ec0ef5d72e02de740657ad2c",
+      "raw_bytes": 483371,
+      "retained_sha256": "911371542b8e07da2513c655a05ef0f0c00335a1f5c256ded1bfdc7f4f6746dd"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/command-001.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/command-001.json",
+      "raw_sha256": "c50c6c163e4f8113b5db986ff24092f9ec727adbfe37f3cb986eac3ede6afd01",
+      "raw_bytes": 12098,
+      "retained_sha256": "c50c6c163e4f8113b5db986ff24092f9ec727adbfe37f3cb986eac3ede6afd01"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/command-002.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/command-002.json",
+      "raw_sha256": "d08a77dba7ae27606061debbe03a3502d480a839f6b907bc14eb55b57956f208",
+      "raw_bytes": 12037,
+      "retained_sha256": "d08a77dba7ae27606061debbe03a3502d480a839f6b907bc14eb55b57956f208"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/command-003.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/command-003.json",
+      "raw_sha256": "878ef0f630ee2b3c017df994585fde607b4f0af6503299340280e5c7f1a0560d",
+      "raw_bytes": 12106,
+      "retained_sha256": "878ef0f630ee2b3c017df994585fde607b4f0af6503299340280e5c7f1a0560d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/command-004.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/command-004.json",
+      "raw_sha256": "4f27ba2add11a21884cf7eef10bd8f819ea6f6476e03b7d8298c75f82da75bcf",
+      "raw_bytes": 12720,
+      "retained_sha256": "4f27ba2add11a21884cf7eef10bd8f819ea6f6476e03b7d8298c75f82da75bcf"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/command-005.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/command-005.json",
+      "raw_sha256": "ce2140ee8f4ae947043f2b3db65ec45e24a0603f606b507079a192dbb8aa9104",
+      "raw_bytes": 9073,
+      "retained_sha256": "ce2140ee8f4ae947043f2b3db65ec45e24a0603f606b507079a192dbb8aa9104"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/command-006.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/command-006.json",
+      "raw_sha256": "51aa7ec171c29140b9bf11ec19d9e06b00e91e16ed4841be8292dd6e25964391",
+      "raw_bytes": 7795,
+      "retained_sha256": "51aa7ec171c29140b9bf11ec19d9e06b00e91e16ed4841be8292dd6e25964391"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/command-007.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/command-007.json",
+      "raw_sha256": "bfe0502f4a805bbea0f79809b810231acc3e60bd392b960ac447d81a03795159",
+      "raw_bytes": 12112,
+      "retained_sha256": "bfe0502f4a805bbea0f79809b810231acc3e60bd392b960ac447d81a03795159"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/command-008.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/command-008.json",
+      "raw_sha256": "8b30604daf90521400744a4f4aef2e987d53ec9569c959f7712d5891f22bb08b",
+      "raw_bytes": 4289,
+      "retained_sha256": "8b30604daf90521400744a4f4aef2e987d53ec9569c959f7712d5891f22bb08b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/command-009.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/command-009.json",
+      "raw_sha256": "05b4029d56f161687eace45c1286feef3a94eb3e8f23ea6d397629758d473873",
+      "raw_bytes": 701,
+      "retained_sha256": "05b4029d56f161687eace45c1286feef3a94eb3e8f23ea6d397629758d473873"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/gamepad-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/gamepad-input.json",
+      "raw_sha256": "2cacb813c6bd3521150dca137d8adc649e6039c12ad0fb349f27a309e78a3b1c",
+      "raw_bytes": 555,
+      "retained_sha256": "2cacb813c6bd3521150dca137d8adc649e6039c12ad0fb349f27a309e78a3b1c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/gamepad-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/gamepad-observe.json",
+      "raw_sha256": "ca6628858947acd3647e553daccfccd1882844792e656a344e65e267b79d5339",
+      "raw_bytes": 2668,
+      "retained_sha256": "ca6628858947acd3647e553daccfccd1882844792e656a344e65e267b79d5339"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/gamepad.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/gamepad.json",
+      "raw_sha256": "7114ec5dd728b1542153f5a92dd166f3eeb57001605ba9996f7b0a456e944d1a",
+      "raw_bytes": 10249,
+      "retained_sha256": "7114ec5dd728b1542153f5a92dd166f3eeb57001605ba9996f7b0a456e944d1a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/idle-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/idle-input.json",
+      "raw_sha256": "cee21dcac738f7c7069a9e385bc7a8d2e0692e26c5d0d71485c0d8a92083a3a0",
+      "raw_bytes": 116,
+      "retained_sha256": "cee21dcac738f7c7069a9e385bc7a8d2e0692e26c5d0d71485c0d8a92083a3a0"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/idle-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/idle-observe.json",
+      "raw_sha256": "30e1e0a0cc79b0da24838ae7c9b842ce40582d1dcc7aa9896b916a65221dc434",
+      "raw_bytes": 538,
+      "retained_sha256": "30e1e0a0cc79b0da24838ae7c9b842ce40582d1dcc7aa9896b916a65221dc434"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/idle.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/idle.json",
+      "raw_sha256": "b1ea1b7c95b044d481e7df44acd4337aa06c6317a0b04530d6120de2751db1bf",
+      "raw_bytes": 3217,
+      "retained_sha256": "b1ea1b7c95b044d481e7df44acd4337aa06c6317a0b04530d6120de2751db1bf"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/jump-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/jump-input.json",
+      "raw_sha256": "aea85027dc03cc63b99bf611716ad775ced10cdef0a7b8c6e1c7abe5c1e37cbb",
+      "raw_bytes": 725,
+      "retained_sha256": "aea85027dc03cc63b99bf611716ad775ced10cdef0a7b8c6e1c7abe5c1e37cbb"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/jump-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/jump-observe.json",
+      "raw_sha256": "dd85cfc161ed93f8922a3ec45d290d4880b1eb6b8e8523313b2b0dfe9a5eeb42",
+      "raw_bytes": 2972,
+      "retained_sha256": "dd85cfc161ed93f8922a3ec45d290d4880b1eb6b8e8523313b2b0dfe9a5eeb42"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/jump.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/jump.json",
+      "raw_sha256": "086377f9019e351a55772b1a8efea35d2d903fb0323af610981608fafa76b932",
+      "raw_bytes": 10805,
+      "retained_sha256": "086377f9019e351a55772b1a8efea35d2d903fb0323af610981608fafa76b932"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/lose-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/lose-input.json",
+      "raw_sha256": "e4707335c2d5116ef604c1976dbd864eeafab305cecd583a20795dd0d2976227",
+      "raw_bytes": 117,
+      "retained_sha256": "e4707335c2d5116ef604c1976dbd864eeafab305cecd583a20795dd0d2976227"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/lose-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/lose-observe.json",
+      "raw_sha256": "60bd599d72638053e6de1abf926eb02946e8c1777a3e74aebe0760b666d98a33",
+      "raw_bytes": 2666,
+      "retained_sha256": "60bd599d72638053e6de1abf926eb02946e8c1777a3e74aebe0760b666d98a33"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/lose.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/lose.json",
+      "raw_sha256": "da3ea81de5211068e9e3d6fb0c39eaade78c8c0a4a627cf04d26f74649df7e63",
+      "raw_bytes": 10186,
+      "retained_sha256": "da3ea81de5211068e9e3d6fb0c39eaade78c8c0a4a627cf04d26f74649df7e63"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/prepared.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/prepared.json",
+      "raw_sha256": "c197b837ba05d6b1955728b3dba3649c128ef6d22274ed1feeadff259dfe25b7",
+      "raw_bytes": 9062,
+      "retained_sha256": "c197b837ba05d6b1955728b3dba3649c128ef6d22274ed1feeadff259dfe25b7"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/repeat-win-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/repeat-win-input.json",
+      "raw_sha256": "aedbc57164dcdd45652c98f5c67e5f3987472eed5625f56ac0af0f9fea0cc731",
+      "raw_bytes": 422,
+      "retained_sha256": "aedbc57164dcdd45652c98f5c67e5f3987472eed5625f56ac0af0f9fea0cc731"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/repeat-win-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/repeat-win-observe.json",
+      "raw_sha256": "ca6628858947acd3647e553daccfccd1882844792e656a344e65e267b79d5339",
+      "raw_bytes": 2668,
+      "retained_sha256": "ca6628858947acd3647e553daccfccd1882844792e656a344e65e267b79d5339"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/repeat-win.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/repeat-win.json",
+      "raw_sha256": "7114ec5dd728b1542153f5a92dd166f3eeb57001605ba9996f7b0a456e944d1a",
+      "raw_bytes": 10249,
+      "retained_sha256": "7114ec5dd728b1542153f5a92dd166f3eeb57001605ba9996f7b0a456e944d1a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/skip-pickup-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/skip-pickup-input.json",
+      "raw_sha256": "10bf77b346b66beacea785e2f2ac095f57512b8784397bec4756b77d1c491110",
+      "raw_bytes": 727,
+      "retained_sha256": "10bf77b346b66beacea785e2f2ac095f57512b8784397bec4756b77d1c491110"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/skip-pickup-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/skip-pickup-observe.json",
+      "raw_sha256": "9436545d7f13cbb71445c099826ffea016c1fee1f2ee7614e2cf2e7c9939f91c",
+      "raw_bytes": 1076,
+      "retained_sha256": "9436545d7f13cbb71445c099826ffea016c1fee1f2ee7614e2cf2e7c9939f91c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/skip-pickup.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/skip-pickup.json",
+      "raw_sha256": "6db9b59decac17bf88c71ab468473f9ea577fdfda11f444f9dc6c03d790c2b31",
+      "raw_bytes": 7535,
+      "retained_sha256": "6db9b59decac17bf88c71ab468473f9ea577fdfda11f444f9dc6c03d790c2b31"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/unsupported-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/unsupported-input.json",
+      "raw_sha256": "f12454c33f02e3f5a65385f14c4ca82e763e9ff7159873bd723325298eda03aa",
+      "raw_bytes": 574,
+      "retained_sha256": "f12454c33f02e3f5a65385f14c4ca82e763e9ff7159873bd723325298eda03aa"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/wall-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/wall-input.json",
+      "raw_sha256": "4ac0e3cdb046ee14ea7fa9fe234f123bcc32b5e0b95f3e592aa97ddbd7a63f68",
+      "raw_bytes": 764,
+      "retained_sha256": "4ac0e3cdb046ee14ea7fa9fe234f123bcc32b5e0b95f3e592aa97ddbd7a63f68"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/wall-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/wall-observe.json",
+      "raw_sha256": "87d5644fe2ab87b71f806b98e1056c11ffc470320945ecaf901d8e7efae332f9",
+      "raw_bytes": 765,
+      "retained_sha256": "87d5644fe2ab87b71f806b98e1056c11ffc470320945ecaf901d8e7efae332f9"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/wall.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/wall.json",
+      "raw_sha256": "ac6fad8a3f59ae0921ff2a1a05f6dcbf16d427db7db0dc8377fc333947604e7e",
+      "raw_bytes": 6415,
+      "retained_sha256": "ac6fad8a3f59ae0921ff2a1a05f6dcbf16d427db7db0dc8377fc333947604e7e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/win-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/win-input.json",
+      "raw_sha256": "aedbc57164dcdd45652c98f5c67e5f3987472eed5625f56ac0af0f9fea0cc731",
+      "raw_bytes": 422,
+      "retained_sha256": "aedbc57164dcdd45652c98f5c67e5f3987472eed5625f56ac0af0f9fea0cc731"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/win-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/win-observe.json",
+      "raw_sha256": "ca6628858947acd3647e553daccfccd1882844792e656a344e65e267b79d5339",
+      "raw_bytes": 2668,
+      "retained_sha256": "ca6628858947acd3647e553daccfccd1882844792e656a344e65e267b79d5339"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/win.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core/win.json",
+      "raw_sha256": "7114ec5dd728b1542153f5a92dd166f3eeb57001605ba9996f7b0a456e944d1a",
+      "raw_bytes": 10249,
+      "retained_sha256": "7114ec5dd728b1542153f5a92dd166f3eeb57001605ba9996f7b0a456e944d1a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/core.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/authoring-calls.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/authoring-calls.json.gz",
+      "raw_sha256": "93ad8c15d9c02fd77802f896d1ee6404593489c1cf085171b47b782c36077582",
+      "raw_bytes": 413956,
+      "retained_sha256": "8c331de34eae17560bf9eec5aac59543083954b2c57a837c038f7097125a41cc"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/command-001.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/command-001.json",
+      "raw_sha256": "13fe343aec493649af9f898b1bfaab5374b16e81452a11ce235725cb01f24545",
+      "raw_bytes": 8289,
+      "retained_sha256": "13fe343aec493649af9f898b1bfaab5374b16e81452a11ce235725cb01f24545"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/command-002.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/command-002.json",
+      "raw_sha256": "b79f6c216ce96763898f265601b2c791fb0284d7b0ad09692cf3b1b818e2d5df",
+      "raw_bytes": 8297,
+      "retained_sha256": "b79f6c216ce96763898f265601b2c791fb0284d7b0ad09692cf3b1b818e2d5df"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/command-003.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/command-003.json",
+      "raw_sha256": "cb1c7a2f5b53f8260f82d959c6a115158959ae6ca374ef4c4d92fd21bae3cd5d",
+      "raw_bytes": 7053,
+      "retained_sha256": "cb1c7a2f5b53f8260f82d959c6a115158959ae6ca374ef4c4d92fd21bae3cd5d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/command-004.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/command-004.json",
+      "raw_sha256": "24f8be9a3d93058150b2334713b197ba7b33adf7c47dab19a49439054be6cf36",
+      "raw_bytes": 6597,
+      "retained_sha256": "24f8be9a3d93058150b2334713b197ba7b33adf7c47dab19a49439054be6cf36"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/command-005.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/command-005.json",
+      "raw_sha256": "d25e10a5f5b0f76eaf4f71dd3f20a7ed74b07bff8dde41ce5fc17da68c6ce0c4",
+      "raw_bytes": 6642,
+      "retained_sha256": "d25e10a5f5b0f76eaf4f71dd3f20a7ed74b07bff8dde41ce5fc17da68c6ce0c4"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/command-006.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/command-006.json",
+      "raw_sha256": "37fcfd5bd55c190b34ca92e1d2d6af83f369a2d0a6f5c387ee74e0662eff440b",
+      "raw_bytes": 6498,
+      "retained_sha256": "37fcfd5bd55c190b34ca92e1d2d6af83f369a2d0a6f5c387ee74e0662eff440b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/command-007.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/command-007.json",
+      "raw_sha256": "8b00e990dba9638d9b619b4b1153139367c4be35e3f507714cfe12028e42c98f",
+      "raw_bytes": 8303,
+      "retained_sha256": "8b00e990dba9638d9b619b4b1153139367c4be35e3f507714cfe12028e42c98f"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/command-008.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/command-008.json",
+      "raw_sha256": "12bf914d530005a76423df06d2b4c54eeabe102556fa66c911c9a47603bceef9",
+      "raw_bytes": 3847,
+      "retained_sha256": "12bf914d530005a76423df06d2b4c54eeabe102556fa66c911c9a47603bceef9"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/command-009.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/command-009.json",
+      "raw_sha256": "e5180fa7e0bd91689aab31de71259bd128a865430d693a46ad0c18c0eb062a56",
+      "raw_bytes": 707,
+      "retained_sha256": "e5180fa7e0bd91689aab31de71259bd128a865430d693a46ad0c18c0eb062a56"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/diagonal-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/diagonal-input.json",
+      "raw_sha256": "dab40ff34829f2274d142e6a8b59d2077ebfc3f46e5ca19276c44c101924e564",
+      "raw_bytes": 995,
+      "retained_sha256": "dab40ff34829f2274d142e6a8b59d2077ebfc3f46e5ca19276c44c101924e564"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/diagonal-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/diagonal-observe.json",
+      "raw_sha256": "9a9016f4b7c3cc157253429cb34e41b287a520f36600d95a8cceea50af4ca085",
+      "raw_bytes": 887,
+      "retained_sha256": "9a9016f4b7c3cc157253429cb34e41b287a520f36600d95a8cceea50af4ca085"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/diagonal.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/diagonal.json",
+      "raw_sha256": "8728f86e5431593745d12c7f351e64107f40bb157eddf74848aad4dee7906036",
+      "raw_bytes": 5212,
+      "retained_sha256": "8728f86e5431593745d12c7f351e64107f40bb157eddf74848aad4dee7906036"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/gamepad-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/gamepad-input.json",
+      "raw_sha256": "d40f93f9a92b9164a460f61a1ba9816187d761ede7bb526c9710b5c38023ea82",
+      "raw_bytes": 1407,
+      "retained_sha256": "d40f93f9a92b9164a460f61a1ba9816187d761ede7bb526c9710b5c38023ea82"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/gamepad-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/gamepad-observe.json",
+      "raw_sha256": "a40abe9b37f6fa3c8836d98b82104c27c4469c2e188b0cf5ed55bdde15e3e356",
+      "raw_bytes": 892,
+      "retained_sha256": "a40abe9b37f6fa3c8836d98b82104c27c4469c2e188b0cf5ed55bdde15e3e356"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/gamepad.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/gamepad.json",
+      "raw_sha256": "c6fe10226f1ddfb1ab5fdfa7b2d189782735ed2e22bd75b35c84eb423dd28952",
+      "raw_bytes": 6778,
+      "retained_sha256": "c6fe10226f1ddfb1ab5fdfa7b2d189782735ed2e22bd75b35c84eb423dd28952"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/idle-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/idle-input.json",
+      "raw_sha256": "cee21dcac738f7c7069a9e385bc7a8d2e0692e26c5d0d71485c0d8a92083a3a0",
+      "raw_bytes": 116,
+      "retained_sha256": "cee21dcac738f7c7069a9e385bc7a8d2e0692e26c5d0d71485c0d8a92083a3a0"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/idle-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/idle-observe.json",
+      "raw_sha256": "ce5aa343424f1bc5ff37647ef9aa35ad9e7420265e0afd1ad76b7e26649b0519",
+      "raw_bytes": 538,
+      "retained_sha256": "ce5aa343424f1bc5ff37647ef9aa35ad9e7420265e0afd1ad76b7e26649b0519"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/idle.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/idle.json",
+      "raw_sha256": "17bb62cd47294ce04932d45eb26c9573f3a8e1e4d0b9f184813c92a97ba31dde",
+      "raw_bytes": 2805,
+      "retained_sha256": "17bb62cd47294ce04932d45eb26c9573f3a8e1e4d0b9f184813c92a97ba31dde"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/locked-exit-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/locked-exit-input.json",
+      "raw_sha256": "15c29da8390f459f3a5afa5918a8499b6bcaf6937b1b7c659ab9e0b125f33b33",
+      "raw_bytes": 1437,
+      "retained_sha256": "15c29da8390f459f3a5afa5918a8499b6bcaf6937b1b7c659ab9e0b125f33b33"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/locked-exit-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/locked-exit-observe.json",
+      "raw_sha256": "6cee0115833f366486a2badf6e8384089a3f52e15510a2b376da011eeb5eeca8",
+      "raw_bytes": 611,
+      "retained_sha256": "6cee0115833f366486a2badf6e8384089a3f52e15510a2b376da011eeb5eeca8"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/locked-exit.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/locked-exit.json",
+      "raw_sha256": "daf1bc5f41bddd51631f6afc99a41c48d05d040e6349529be9fe9d9bc3439477",
+      "raw_bytes": 5320,
+      "retained_sha256": "daf1bc5f41bddd51631f6afc99a41c48d05d040e6349529be9fe9d9bc3439477"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/lose-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/lose-input.json",
+      "raw_sha256": "2cbd99ee77f98d9ce4f01501f7decabf04baae615a94f906468711471259e2cd",
+      "raw_bytes": 557,
+      "retained_sha256": "2cbd99ee77f98d9ce4f01501f7decabf04baae615a94f906468711471259e2cd"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/lose-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/lose-observe.json",
+      "raw_sha256": "6769fbc32e51cd9721a93d0701d3855ffa7fc85dd2e068b25838ad6b640e5294",
+      "raw_bytes": 890,
+      "retained_sha256": "6769fbc32e51cd9721a93d0701d3855ffa7fc85dd2e068b25838ad6b640e5294"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/lose.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/lose.json",
+      "raw_sha256": "46b7b5765585a614709a244c9e6afd9314eaab4ab78d7737ec6daade007f4de4",
+      "raw_bytes": 5696,
+      "retained_sha256": "46b7b5765585a614709a244c9e6afd9314eaab4ab78d7737ec6daade007f4de4"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/prepared.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/prepared.json",
+      "raw_sha256": "3774957de181fb54db5da03d07610667014b35e69fc9ec73bfedb8acc75fad35",
+      "raw_bytes": 5394,
+      "retained_sha256": "3774957de181fb54db5da03d07610667014b35e69fc9ec73bfedb8acc75fad35"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/repeat-win-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/repeat-win-input.json",
+      "raw_sha256": "12507f1135e300f8ddb26a9c810cd5d67e18775bc1a88f4d6e2beb596d1491db",
+      "raw_bytes": 1877,
+      "retained_sha256": "12507f1135e300f8ddb26a9c810cd5d67e18775bc1a88f4d6e2beb596d1491db"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/repeat-win-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/repeat-win-observe.json",
+      "raw_sha256": "a40abe9b37f6fa3c8836d98b82104c27c4469c2e188b0cf5ed55bdde15e3e356",
+      "raw_bytes": 892,
+      "retained_sha256": "a40abe9b37f6fa3c8836d98b82104c27c4469c2e188b0cf5ed55bdde15e3e356"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/repeat-win.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/repeat-win.json",
+      "raw_sha256": "c6fe10226f1ddfb1ab5fdfa7b2d189782735ed2e22bd75b35c84eb423dd28952",
+      "raw_bytes": 6778,
+      "retained_sha256": "c6fe10226f1ddfb1ab5fdfa7b2d189782735ed2e22bd75b35c84eb423dd28952"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/unsupported-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/unsupported-input.json",
+      "raw_sha256": "ea6f28bf3cc5d78065876835e912be4048b498ae9505d885ead96fd4743f899a",
+      "raw_bytes": 2029,
+      "retained_sha256": "ea6f28bf3cc5d78065876835e912be4048b498ae9505d885ead96fd4743f899a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/wall-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/wall-input.json",
+      "raw_sha256": "29e406638309e4f87c434439d2e838df8b4a67a2e4d234c6c926f1616d3e2bc3",
+      "raw_bytes": 557,
+      "retained_sha256": "29e406638309e4f87c434439d2e838df8b4a67a2e4d234c6c926f1616d3e2bc3"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/wall-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/wall-observe.json",
+      "raw_sha256": "c92d1bbfdc4367a7858724daadd404c409f6af3040f8b9e6f34eee5b80de14c3",
+      "raw_bytes": 611,
+      "retained_sha256": "c92d1bbfdc4367a7858724daadd404c409f6af3040f8b9e6f34eee5b80de14c3"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/wall.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/wall.json",
+      "raw_sha256": "a2ec26fac7a743b7fc401656419fb976cc22c8c3823b52bf44e98f0cc762c9f9",
+      "raw_bytes": 5289,
+      "retained_sha256": "a2ec26fac7a743b7fc401656419fb976cc22c8c3823b52bf44e98f0cc762c9f9"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/win-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/win-input.json",
+      "raw_sha256": "12507f1135e300f8ddb26a9c810cd5d67e18775bc1a88f4d6e2beb596d1491db",
+      "raw_bytes": 1877,
+      "retained_sha256": "12507f1135e300f8ddb26a9c810cd5d67e18775bc1a88f4d6e2beb596d1491db"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/win-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/win-observe.json",
+      "raw_sha256": "a40abe9b37f6fa3c8836d98b82104c27c4469c2e188b0cf5ed55bdde15e3e356",
+      "raw_bytes": 892,
+      "retained_sha256": "a40abe9b37f6fa3c8836d98b82104c27c4469c2e188b0cf5ed55bdde15e3e356"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar/win.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar/win.json",
+      "raw_sha256": "c6fe10226f1ddfb1ab5fdfa7b2d189782735ed2e22bd75b35c84eb423dd28952",
+      "raw_bytes": 6778,
+      "retained_sha256": "c6fe10226f1ddfb1ab5fdfa7b2d189782735ed2e22bd75b35c84eb423dd28952"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-public-002/planar.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/commands.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/commands.json",
+      "raw_sha256": "bd2e39a6f934dcda1e34874e0dfdd2a2103287518a281dc95bdbe99943d214c0",
+      "raw_bytes": 698,
+      "retained_sha256": "bd2e39a6f934dcda1e34874e0dfdd2a2103287518a281dc95bdbe99943d214c0"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/command-001.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/command-001.json",
+      "raw_sha256": "325c55fc66f0c5a3b39680e7409ffe87104db7527ae407f0509c10a239f32e10",
+      "raw_bytes": 8987,
+      "retained_sha256": "325c55fc66f0c5a3b39680e7409ffe87104db7527ae407f0509c10a239f32e10"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/command-002.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/command-002.json",
+      "raw_sha256": "8b2a5e994ca6a6e0a77e4359326b31ee23a0b8cb1925918d22e50d246eded781",
+      "raw_bytes": 8930,
+      "retained_sha256": "8b2a5e994ca6a6e0a77e4359326b31ee23a0b8cb1925918d22e50d246eded781"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/command-003.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/command-003.json",
+      "raw_sha256": "30e7f9e114cbd4f32fcb7b7bc855ed76b140e8cb25f4fb23fc930446fdc2e909",
+      "raw_bytes": 8999,
+      "retained_sha256": "30e7f9e114cbd4f32fcb7b7bc855ed76b140e8cb25f4fb23fc930446fdc2e909"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/command-004.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/command-004.json",
+      "raw_sha256": "da48b6656249b8b6fa93edab2019b44d44ff7fda0662f26dc293ace5d5bc7f32",
+      "raw_bytes": 9315,
+      "retained_sha256": "da48b6656249b8b6fa93edab2019b44d44ff7fda0662f26dc293ace5d5bc7f32"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/command-005.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/command-005.json",
+      "raw_sha256": "366eeff902656491cc24186d85837f7efd26a8aba638c773f78363be913ebf7b",
+      "raw_bytes": 7301,
+      "retained_sha256": "366eeff902656491cc24186d85837f7efd26a8aba638c773f78363be913ebf7b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/command-006.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/command-006.json",
+      "raw_sha256": "736291c7275db45cd13008f4f0197b836365a2d6f7f63d3551e45eb0a7ad174f",
+      "raw_bytes": 6409,
+      "retained_sha256": "736291c7275db45cd13008f4f0197b836365a2d6f7f63d3551e45eb0a7ad174f"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/command-007.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/command-007.json",
+      "raw_sha256": "66235f7e4c486de9fdbb9d345da3ebc44ad647468ee020c0966cecffb5067b22",
+      "raw_bytes": 9008,
+      "retained_sha256": "66235f7e4c486de9fdbb9d345da3ebc44ad647468ee020c0966cecffb5067b22"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/command-008.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/command-008.json",
+      "raw_sha256": "c5b3eb3cf051a680588f0d27bcdd8b13dbe93612a716d3f25a9e06cb74efbef7",
+      "raw_bytes": 4370,
+      "retained_sha256": "c5b3eb3cf051a680588f0d27bcdd8b13dbe93612a716d3f25a9e06cb74efbef7"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/command-009.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/command-009.json",
+      "raw_sha256": "6055d713edbd5433a3b4b595c1fc340af059bcaac08aa7b19916a227c3386409",
+      "raw_bytes": 11719,
+      "retained_sha256": "6055d713edbd5433a3b4b595c1fc340af059bcaac08aa7b19916a227c3386409"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/command-010.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/command-010.json",
+      "raw_sha256": "c9879101840472fbd29cdc637a966ac544ee451f48c67f0039bb09c8912e9de6",
+      "raw_bytes": 11731,
+      "retained_sha256": "c9879101840472fbd29cdc637a966ac544ee451f48c67f0039bb09c8912e9de6"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/command-011.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/command-011.json",
+      "raw_sha256": "301d34b3c50d12f5362bd4e45151de7bcb2a2644462896dabaf1d51c14435c2a",
+      "raw_bytes": 11729,
+      "retained_sha256": "301d34b3c50d12f5362bd4e45151de7bcb2a2644462896dabaf1d51c14435c2a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/command-012.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/command-012.json",
+      "raw_sha256": "bfe6cfeb8d228527b79ed3f853ce63c052530ca664eccbb9a940d40365141646",
+      "raw_bytes": 7601,
+      "retained_sha256": "bfe6cfeb8d228527b79ed3f853ce63c052530ca664eccbb9a940d40365141646"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/deleted-authoring.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/deleted-authoring.json",
+      "raw_sha256": "50882baeae32f7a472e3d6589c18c28798ff521c0db4ca60e4302c176193391f",
+      "raw_bytes": 4560,
+      "retained_sha256": "50882baeae32f7a472e3d6589c18c28798ff521c0db4ca60e4302c176193391f"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/deleted-maps.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/deleted-maps.json",
+      "raw_sha256": "2bebfb83106d3158f24fe541acc9ef6e5539a6bc0167ae701c1a9d410b3d9297",
+      "raw_bytes": 132,
+      "retained_sha256": "2bebfb83106d3158f24fe541acc9ef6e5539a6bc0167ae701c1a9d410b3d9297"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/gamepad-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/gamepad-input.json",
+      "raw_sha256": "2cacb813c6bd3521150dca137d8adc649e6039c12ad0fb349f27a309e78a3b1c",
+      "raw_bytes": 555,
+      "retained_sha256": "2cacb813c6bd3521150dca137d8adc649e6039c12ad0fb349f27a309e78a3b1c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/gamepad-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/gamepad-observe.json",
+      "raw_sha256": "ca6628858947acd3647e553daccfccd1882844792e656a344e65e267b79d5339",
+      "raw_bytes": 2668,
+      "retained_sha256": "ca6628858947acd3647e553daccfccd1882844792e656a344e65e267b79d5339"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/gamepad-restart-win-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/gamepad-restart-win-input.json",
+      "raw_sha256": "ffc8ecd98ac3539d3c5a165418709ef5e9458038f56b43dc604a8a513167fbd8",
+      "raw_bytes": 1224,
+      "retained_sha256": "ffc8ecd98ac3539d3c5a165418709ef5e9458038f56b43dc604a8a513167fbd8"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/gamepad-restart-win-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/gamepad-restart-win-observe.json",
+      "raw_sha256": "dcb55df90082a90ec59a31e840003dac3448b18207cfe17c317598a720379de2",
+      "raw_bytes": 5635,
+      "retained_sha256": "dcb55df90082a90ec59a31e840003dac3448b18207cfe17c317598a720379de2"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/gamepad-restart-win.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/gamepad-restart-win.json.gz",
+      "raw_sha256": "4f9e53e12db819d1fd2db0a521f3fa3ec12aeb8d972e9d88520823bc22ddad6f",
+      "raw_bytes": 17021,
+      "retained_sha256": "bf1e4a94e2c0a9e39b9e7ae7ec4f30e312cf2c57172d69f87fc7e7a9ff4d8f30"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/gamepad.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/gamepad.json",
+      "raw_sha256": "eced876a8b4bf9560e44f81c6c1ad621b8c9101751423dd95fc9da6d5fd1a079",
+      "raw_bytes": 12646,
+      "retained_sha256": "eced876a8b4bf9560e44f81c6c1ad621b8c9101751423dd95fc9da6d5fd1a079"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/held-input-restart-idle-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/held-input-restart-idle-input.json",
+      "raw_sha256": "1e445f14943221f954343fafe156256a56edaf393a584d2f74b05c2432d16f99",
+      "raw_bytes": 822,
+      "retained_sha256": "1e445f14943221f954343fafe156256a56edaf393a584d2f74b05c2432d16f99"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/held-input-restart-idle-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/held-input-restart-idle-observe.json",
+      "raw_sha256": "340804f576880ba7b433d7be57ace2136786447ddda16f91d3910b03740b4d57",
+      "raw_bytes": 3859,
+      "retained_sha256": "340804f576880ba7b433d7be57ace2136786447ddda16f91d3910b03740b4d57"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/held-input-restart-idle.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/held-input-restart-idle.json",
+      "raw_sha256": "1d235dcb5c2272c42dd6a597d107345ad4e8c79624966802e3802ca86326d895",
+      "raw_bytes": 10846,
+      "retained_sha256": "1d235dcb5c2272c42dd6a597d107345ad4e8c79624966802e3802ca86326d895"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/idle-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/idle-input.json",
+      "raw_sha256": "cee21dcac738f7c7069a9e385bc7a8d2e0692e26c5d0d71485c0d8a92083a3a0",
+      "raw_bytes": 116,
+      "retained_sha256": "cee21dcac738f7c7069a9e385bc7a8d2e0692e26c5d0d71485c0d8a92083a3a0"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/idle-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/idle-observe.json",
+      "raw_sha256": "30e1e0a0cc79b0da24838ae7c9b842ce40582d1dcc7aa9896b916a65221dc434",
+      "raw_bytes": 538,
+      "retained_sha256": "30e1e0a0cc79b0da24838ae7c9b842ce40582d1dcc7aa9896b916a65221dc434"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/idle.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/idle.json",
+      "raw_sha256": "be7c9986c5b8feac77647069a58fbba6a2af5d90069f4998bea29f4b155f529d",
+      "raw_bytes": 5612,
+      "retained_sha256": "be7c9986c5b8feac77647069a58fbba6a2af5d90069f4998bea29f4b155f529d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/jump-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/jump-input.json",
+      "raw_sha256": "aea85027dc03cc63b99bf611716ad775ced10cdef0a7b8c6e1c7abe5c1e37cbb",
+      "raw_bytes": 725,
+      "retained_sha256": "aea85027dc03cc63b99bf611716ad775ced10cdef0a7b8c6e1c7abe5c1e37cbb"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/jump-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/jump-observe.json",
+      "raw_sha256": "dd85cfc161ed93f8922a3ec45d290d4880b1eb6b8e8523313b2b0dfe9a5eeb42",
+      "raw_bytes": 2972,
+      "retained_sha256": "dd85cfc161ed93f8922a3ec45d290d4880b1eb6b8e8523313b2b0dfe9a5eeb42"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/jump.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/jump.json",
+      "raw_sha256": "3a9e6835d0968ed1d277b33aff8cd2e239011936e4af1b967c0e867b6f92b7c9",
+      "raw_bytes": 13202,
+      "retained_sha256": "3a9e6835d0968ed1d277b33aff8cd2e239011936e4af1b967c0e867b6f92b7c9"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/lose-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/lose-input.json",
+      "raw_sha256": "e4707335c2d5116ef604c1976dbd864eeafab305cecd583a20795dd0d2976227",
+      "raw_bytes": 117,
+      "retained_sha256": "e4707335c2d5116ef604c1976dbd864eeafab305cecd583a20795dd0d2976227"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/lose-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/lose-observe.json",
+      "raw_sha256": "60bd599d72638053e6de1abf926eb02946e8c1777a3e74aebe0760b666d98a33",
+      "raw_bytes": 2666,
+      "retained_sha256": "60bd599d72638053e6de1abf926eb02946e8c1777a3e74aebe0760b666d98a33"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/lose-restart-win-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/lose-restart-win-input.json",
+      "raw_sha256": "56727e2b6fcd27c0da1dcb9cbd2b5386db2e6a234c53d7a5f3fe2e10aa931178",
+      "raw_bytes": 674,
+      "retained_sha256": "56727e2b6fcd27c0da1dcb9cbd2b5386db2e6a234c53d7a5f3fe2e10aa931178"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/lose-restart-win-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/lose-restart-win-observe.json",
+      "raw_sha256": "e1787b4367daf20921beb9473931f5f11ba32f5a02f15febfb413546f7c95ec1",
+      "raw_bytes": 5642,
+      "retained_sha256": "e1787b4367daf20921beb9473931f5f11ba32f5a02f15febfb413546f7c95ec1"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/lose-restart-win.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/lose-restart-win.json.gz",
+      "raw_sha256": "4e317203f9f81dbc0efe0e9d4a7778b589b96da2e62e3466ff9fbe3180363237",
+      "raw_bytes": 17027,
+      "retained_sha256": "0a0d9bf9d6bb1e1a8adc5a4ce48b24d1bc1347e02a2071f3f3efd31cc001809d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/lose.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/lose.json",
+      "raw_sha256": "a7bef143f32178688148cd713627567fbb2a4f5d2154356242baae5fbb4e09b0",
+      "raw_bytes": 12586,
+      "retained_sha256": "a7bef143f32178688148cd713627567fbb2a4f5d2154356242baae5fbb4e09b0"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/repeat-win-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/repeat-win-input.json",
+      "raw_sha256": "aedbc57164dcdd45652c98f5c67e5f3987472eed5625f56ac0af0f9fea0cc731",
+      "raw_bytes": 422,
+      "retained_sha256": "aedbc57164dcdd45652c98f5c67e5f3987472eed5625f56ac0af0f9fea0cc731"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/repeat-win-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/repeat-win-observe.json",
+      "raw_sha256": "ca6628858947acd3647e553daccfccd1882844792e656a344e65e267b79d5339",
+      "raw_bytes": 2668,
+      "retained_sha256": "ca6628858947acd3647e553daccfccd1882844792e656a344e65e267b79d5339"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/repeat-win.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/repeat-win.json",
+      "raw_sha256": "eced876a8b4bf9560e44f81c6c1ad621b8c9101751423dd95fc9da6d5fd1a079",
+      "raw_bytes": 12646,
+      "retained_sha256": "eced876a8b4bf9560e44f81c6c1ad621b8c9101751423dd95fc9da6d5fd1a079"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/result.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/result.json",
+      "raw_sha256": "1256d875600f32826ed66164e15dc196e58fb0bf39096043aa39f74c462c1212",
+      "raw_bytes": 4471,
+      "retained_sha256": "1256d875600f32826ed66164e15dc196e58fb0bf39096043aa39f74c462c1212"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/skip-pickup-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/skip-pickup-input.json",
+      "raw_sha256": "10bf77b346b66beacea785e2f2ac095f57512b8784397bec4756b77d1c491110",
+      "raw_bytes": 727,
+      "retained_sha256": "10bf77b346b66beacea785e2f2ac095f57512b8784397bec4756b77d1c491110"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/skip-pickup-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/skip-pickup-observe.json",
+      "raw_sha256": "9436545d7f13cbb71445c099826ffea016c1fee1f2ee7614e2cf2e7c9939f91c",
+      "raw_bytes": 1076,
+      "retained_sha256": "9436545d7f13cbb71445c099826ffea016c1fee1f2ee7614e2cf2e7c9939f91c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/skip-pickup.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/skip-pickup.json",
+      "raw_sha256": "a46687989884b63fc9f314aa986b3e21734373bc3c6e84a67d792aeaedb705a7",
+      "raw_bytes": 9935,
+      "retained_sha256": "a46687989884b63fc9f314aa986b3e21734373bc3c6e84a67d792aeaedb705a7"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/wall-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/wall-input.json",
+      "raw_sha256": "4ac0e3cdb046ee14ea7fa9fe234f123bcc32b5e0b95f3e592aa97ddbd7a63f68",
+      "raw_bytes": 764,
+      "retained_sha256": "4ac0e3cdb046ee14ea7fa9fe234f123bcc32b5e0b95f3e592aa97ddbd7a63f68"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/wall-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/wall-observe.json",
+      "raw_sha256": "87d5644fe2ab87b71f806b98e1056c11ffc470320945ecaf901d8e7efae332f9",
+      "raw_bytes": 765,
+      "retained_sha256": "87d5644fe2ab87b71f806b98e1056c11ffc470320945ecaf901d8e7efae332f9"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/wall.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/wall.json",
+      "raw_sha256": "a4c0b5af9ecbbfaa1ec08c607c14062b2ca390d19ca3e2eae911c680402de5e8",
+      "raw_bytes": 8815,
+      "retained_sha256": "a4c0b5af9ecbbfaa1ec08c607c14062b2ca390d19ca3e2eae911c680402de5e8"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/win-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/win-input.json",
+      "raw_sha256": "aedbc57164dcdd45652c98f5c67e5f3987472eed5625f56ac0af0f9fea0cc731",
+      "raw_bytes": 422,
+      "retained_sha256": "aedbc57164dcdd45652c98f5c67e5f3987472eed5625f56ac0af0f9fea0cc731"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/win-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/win-observe.json",
+      "raw_sha256": "ca6628858947acd3647e553daccfccd1882844792e656a344e65e267b79d5339",
+      "raw_bytes": 2668,
+      "retained_sha256": "ca6628858947acd3647e553daccfccd1882844792e656a344e65e267b79d5339"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/win-restart-win-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/win-restart-win-input.json",
+      "raw_sha256": "2190bb535241a27b430f4752ef96845f88595ea1afcc41c3f533c227de788717",
+      "raw_bytes": 975,
+      "retained_sha256": "2190bb535241a27b430f4752ef96845f88595ea1afcc41c3f533c227de788717"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/win-restart-win-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/win-restart-win-observe.json",
+      "raw_sha256": "dcb55df90082a90ec59a31e840003dac3448b18207cfe17c317598a720379de2",
+      "raw_bytes": 5635,
+      "retained_sha256": "dcb55df90082a90ec59a31e840003dac3448b18207cfe17c317598a720379de2"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/win-restart-win.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/win-restart-win.json.gz",
+      "raw_sha256": "4f9e53e12db819d1fd2db0a521f3fa3ec12aeb8d972e9d88520823bc22ddad6f",
+      "raw_bytes": 17021,
+      "retained_sha256": "bf1e4a94e2c0a9e39b9e7ae7ec4f30e312cf2c57172d69f87fc7e7a9ff4d8f30"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/win.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/win.json",
+      "raw_sha256": "eced876a8b4bf9560e44f81c6c1ad621b8c9101751423dd95fc9da6d5fd1a079",
+      "raw_bytes": 12646,
+      "retained_sha256": "eced876a8b4bf9560e44f81c6c1ad621b8c9101751423dd95fc9da6d5fd1a079"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core.log",
+      "raw_sha256": "477d5edc41eb09e083f985cedbfd3bda05b43e83bf8bcd3c8bcbd284d7b35868",
+      "raw_bytes": 132,
+      "retained_sha256": "477d5edc41eb09e083f985cedbfd3bda05b43e83bf8bcd3c8bcbd284d7b35868"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/engine-freeze.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/engine-freeze.json.gz",
+      "raw_sha256": "5a82253b845e4e5ec2b468ce4e1cd6f993af80b45ec73ec3733b9419b5e9cc3f",
+      "raw_bytes": 273417,
+      "retained_sha256": "5602cd77b42f117a90f4159c2a6e036d90347107b96b7fbf21620dce460994f0"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/command-001.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/command-001.json",
+      "raw_sha256": "45a04af5de8b625be58f6d0f152e5f7e4db8790ee650861149001076890f6032",
+      "raw_bytes": 6498,
+      "retained_sha256": "45a04af5de8b625be58f6d0f152e5f7e4db8790ee650861149001076890f6032"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/command-002.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/command-002.json",
+      "raw_sha256": "b819cc034097c5cbd223e5eb7c63b39a0d330a25e1b91bd19849a4edb525ad0d",
+      "raw_bytes": 6510,
+      "retained_sha256": "b819cc034097c5cbd223e5eb7c63b39a0d330a25e1b91bd19849a4edb525ad0d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/command-003.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/command-003.json",
+      "raw_sha256": "c436012045b018089579dc8b0f3339ecd60f325d669c8cb778975efb446b9186",
+      "raw_bytes": 5444,
+      "retained_sha256": "c436012045b018089579dc8b0f3339ecd60f325d669c8cb778975efb446b9186"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/command-004.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/command-004.json",
+      "raw_sha256": "4edc56894cb709759870e9d6b27fa7c4c5d35834c82dc91045ebc9245a2bcf6b",
+      "raw_bytes": 5228,
+      "retained_sha256": "4edc56894cb709759870e9d6b27fa7c4c5d35834c82dc91045ebc9245a2bcf6b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/command-005.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/command-005.json",
+      "raw_sha256": "510c83ee006203dbab1501ce93c0d94ddcdb4e185c282a79e0931ad5b1d287b7",
+      "raw_bytes": 5294,
+      "retained_sha256": "510c83ee006203dbab1501ce93c0d94ddcdb4e185c282a79e0931ad5b1d287b7"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/command-006.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/command-006.json",
+      "raw_sha256": "88343c1ca3b5df29b524f7b9eb2bfd50c485608122d194b21c1ac244cb1df0fb",
+      "raw_bytes": 4998,
+      "retained_sha256": "88343c1ca3b5df29b524f7b9eb2bfd50c485608122d194b21c1ac244cb1df0fb"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/command-007.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/command-007.json",
+      "raw_sha256": "b237709839b539a8b701dc9576b7eb6ce12c492d9b89f4f8842e355367d1025f",
+      "raw_bytes": 6519,
+      "retained_sha256": "b237709839b539a8b701dc9576b7eb6ce12c492d9b89f4f8842e355367d1025f"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/command-008.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/command-008.json",
+      "raw_sha256": "e7d8f62c30b801b39062b3292d8ae0877296c796d066d55c615302a393c8c005",
+      "raw_bytes": 3735,
+      "retained_sha256": "e7d8f62c30b801b39062b3292d8ae0877296c796d066d55c615302a393c8c005"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/command-009.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/command-009.json",
+      "raw_sha256": "eda697075c1c62479640d9964113a109d03e5c164451408c1e3f2fee7dacfd92",
+      "raw_bytes": 7693,
+      "retained_sha256": "eda697075c1c62479640d9964113a109d03e5c164451408c1e3f2fee7dacfd92"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/command-010.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/command-010.json",
+      "raw_sha256": "3c190821cf42a4aa31326d7a9c1f9369c2555bff98c81961eceeb7cf0092e7bf",
+      "raw_bytes": 7705,
+      "retained_sha256": "3c190821cf42a4aa31326d7a9c1f9369c2555bff98c81961eceeb7cf0092e7bf"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/command-011.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/command-011.json",
+      "raw_sha256": "45c82a43a9dafc279d844a40a95474468a428b5b0e2b1be2bf0667ca5053ab9e",
+      "raw_bytes": 7692,
+      "retained_sha256": "45c82a43a9dafc279d844a40a95474468a428b5b0e2b1be2bf0667ca5053ab9e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/command-012.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/command-012.json",
+      "raw_sha256": "d6bf018adca4927052c23f02b9ddc69e53d64942e03d623db507d878ddb1968f",
+      "raw_bytes": 5465,
+      "retained_sha256": "d6bf018adca4927052c23f02b9ddc69e53d64942e03d623db507d878ddb1968f"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/deleted-authoring.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/deleted-authoring.json",
+      "raw_sha256": "4dbb8b36540402f97de8d690e78354e5d798b1b65fa7cee138fc61d67de780b2",
+      "raw_bytes": 2739,
+      "retained_sha256": "4dbb8b36540402f97de8d690e78354e5d798b1b65fa7cee138fc61d67de780b2"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/deleted-maps.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/deleted-maps.json",
+      "raw_sha256": "a31358ffd5c087ce4a5a93b1f2947e99f656cc3571cd284fbbc1553912d6ee40",
+      "raw_bytes": 132,
+      "retained_sha256": "a31358ffd5c087ce4a5a93b1f2947e99f656cc3571cd284fbbc1553912d6ee40"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/diagonal-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/diagonal-input.json",
+      "raw_sha256": "dab40ff34829f2274d142e6a8b59d2077ebfc3f46e5ca19276c44c101924e564",
+      "raw_bytes": 995,
+      "retained_sha256": "dab40ff34829f2274d142e6a8b59d2077ebfc3f46e5ca19276c44c101924e564"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/diagonal-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/diagonal-observe.json",
+      "raw_sha256": "9a9016f4b7c3cc157253429cb34e41b287a520f36600d95a8cceea50af4ca085",
+      "raw_bytes": 887,
+      "retained_sha256": "9a9016f4b7c3cc157253429cb34e41b287a520f36600d95a8cceea50af4ca085"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/diagonal.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/diagonal.json",
+      "raw_sha256": "d6b3d999a40c8783afe6d8364606d2e7dd3d4ecd0214416f28c0c2bf96b3217b",
+      "raw_bytes": 6666,
+      "retained_sha256": "d6b3d999a40c8783afe6d8364606d2e7dd3d4ecd0214416f28c0c2bf96b3217b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/gamepad-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/gamepad-input.json",
+      "raw_sha256": "d40f93f9a92b9164a460f61a1ba9816187d761ede7bb526c9710b5c38023ea82",
+      "raw_bytes": 1407,
+      "retained_sha256": "d40f93f9a92b9164a460f61a1ba9816187d761ede7bb526c9710b5c38023ea82"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/gamepad-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/gamepad-observe.json",
+      "raw_sha256": "a40abe9b37f6fa3c8836d98b82104c27c4469c2e188b0cf5ed55bdde15e3e356",
+      "raw_bytes": 892,
+      "retained_sha256": "a40abe9b37f6fa3c8836d98b82104c27c4469c2e188b0cf5ed55bdde15e3e356"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/gamepad-restart-win-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/gamepad-restart-win-input.json",
+      "raw_sha256": "c657df180c8489e8cb9bf7c069b6ec7c940e214614ea862cc7c8a54a88c6d59e",
+      "raw_bytes": 2929,
+      "retained_sha256": "c657df180c8489e8cb9bf7c069b6ec7c940e214614ea862cc7c8a54a88c6d59e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/gamepad-restart-win-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/gamepad-restart-win-observe.json",
+      "raw_sha256": "fd22b73d249e298b18ac1fd69145f7f60bbbb87b1cc796ed223644f3cf5e447d",
+      "raw_bytes": 2005,
+      "retained_sha256": "fd22b73d249e298b18ac1fd69145f7f60bbbb87b1cc796ed223644f3cf5e447d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/gamepad-restart-win.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/gamepad-restart-win.json",
+      "raw_sha256": "9972742f1ef3a3052d1338716e87fbb1c101bafd40890a322ff25303d3e92d1d",
+      "raw_bytes": 10014,
+      "retained_sha256": "9972742f1ef3a3052d1338716e87fbb1c101bafd40890a322ff25303d3e92d1d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/gamepad.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/gamepad.json",
+      "raw_sha256": "f5d5bc2ab772ad2ae487a50be471c795f7ca54cfe391a3bc289d6f654bcbea26",
+      "raw_bytes": 8240,
+      "retained_sha256": "f5d5bc2ab772ad2ae487a50be471c795f7ca54cfe391a3bc289d6f654bcbea26"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/held-input-restart-idle-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/held-input-restart-idle-input.json",
+      "raw_sha256": "1fcc24b3bec4111f54de58bee72b0d379d049a475267ffc75ad5a27c1363d953",
+      "raw_bytes": 2277,
+      "retained_sha256": "1fcc24b3bec4111f54de58bee72b0d379d049a475267ffc75ad5a27c1363d953"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/held-input-restart-idle-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/held-input-restart-idle-observe.json",
+      "raw_sha256": "d21592f94e79acb856b337dc5c2ec57fef960426214030542b9d84673b01fee4",
+      "raw_bytes": 2041,
+      "retained_sha256": "d21592f94e79acb856b337dc5c2ec57fef960426214030542b9d84673b01fee4"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/held-input-restart-idle.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/held-input-restart-idle.json",
+      "raw_sha256": "a8f2a55daab0abbfff84264972c9c03768e1d182625264d12118461dec49a78b",
+      "raw_bytes": 6899,
+      "retained_sha256": "a8f2a55daab0abbfff84264972c9c03768e1d182625264d12118461dec49a78b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/idle-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/idle-input.json",
+      "raw_sha256": "cee21dcac738f7c7069a9e385bc7a8d2e0692e26c5d0d71485c0d8a92083a3a0",
+      "raw_bytes": 116,
+      "retained_sha256": "cee21dcac738f7c7069a9e385bc7a8d2e0692e26c5d0d71485c0d8a92083a3a0"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/idle-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/idle-observe.json",
+      "raw_sha256": "ce5aa343424f1bc5ff37647ef9aa35ad9e7420265e0afd1ad76b7e26649b0519",
+      "raw_bytes": 538,
+      "retained_sha256": "ce5aa343424f1bc5ff37647ef9aa35ad9e7420265e0afd1ad76b7e26649b0519"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/idle.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/idle.json",
+      "raw_sha256": "45d2cc210ed9691d2462819d78fdfaf6a4e1af4c71f02c954115ee09f370e343",
+      "raw_bytes": 4230,
+      "retained_sha256": "45d2cc210ed9691d2462819d78fdfaf6a4e1af4c71f02c954115ee09f370e343"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/locked-exit-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/locked-exit-input.json",
+      "raw_sha256": "15c29da8390f459f3a5afa5918a8499b6bcaf6937b1b7c659ab9e0b125f33b33",
+      "raw_bytes": 1437,
+      "retained_sha256": "15c29da8390f459f3a5afa5918a8499b6bcaf6937b1b7c659ab9e0b125f33b33"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/locked-exit-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/locked-exit-observe.json",
+      "raw_sha256": "6cee0115833f366486a2badf6e8384089a3f52e15510a2b376da011eeb5eeca8",
+      "raw_bytes": 611,
+      "retained_sha256": "6cee0115833f366486a2badf6e8384089a3f52e15510a2b376da011eeb5eeca8"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/locked-exit.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/locked-exit.json",
+      "raw_sha256": "7e1c277631aaa3c9f1074a45e58ea04224601ee55b568ef420cbd8d86637260a",
+      "raw_bytes": 6775,
+      "retained_sha256": "7e1c277631aaa3c9f1074a45e58ea04224601ee55b568ef420cbd8d86637260a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/lose-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/lose-input.json",
+      "raw_sha256": "2cbd99ee77f98d9ce4f01501f7decabf04baae615a94f906468711471259e2cd",
+      "raw_bytes": 557,
+      "retained_sha256": "2cbd99ee77f98d9ce4f01501f7decabf04baae615a94f906468711471259e2cd"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/lose-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/lose-observe.json",
+      "raw_sha256": "6769fbc32e51cd9721a93d0701d3855ffa7fc85dd2e068b25838ad6b640e5294",
+      "raw_bytes": 890,
+      "retained_sha256": "6769fbc32e51cd9721a93d0701d3855ffa7fc85dd2e068b25838ad6b640e5294"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/lose-restart-win-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/lose-restart-win-input.json",
+      "raw_sha256": "7db9258e6a609a6f696345dde0430b781b7301dedac2941e5026cdd0397342dd",
+      "raw_bytes": 2566,
+      "retained_sha256": "7db9258e6a609a6f696345dde0430b781b7301dedac2941e5026cdd0397342dd"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/lose-restart-win-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/lose-restart-win-observe.json",
+      "raw_sha256": "913b181e5cce6051cc2eae76d2e3743ac9ce855e8912f11bbb0009146a2c19a0",
+      "raw_bytes": 2003,
+      "retained_sha256": "913b181e5cce6051cc2eae76d2e3743ac9ce855e8912f11bbb0009146a2c19a0"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/lose-restart-win.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/lose-restart-win.json",
+      "raw_sha256": "eb78d94d130d3416462fb7e74300f6c2f6548f3eea048211c2aa033509a6d71f",
+      "raw_bytes": 10010,
+      "retained_sha256": "eb78d94d130d3416462fb7e74300f6c2f6548f3eea048211c2aa033509a6d71f"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/lose.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/lose.json",
+      "raw_sha256": "a28ce4fc5a2d3b8b4538bfed95108914ff2b231a2b8fcf4092c8d1b85ebbc949",
+      "raw_bytes": 7143,
+      "retained_sha256": "a28ce4fc5a2d3b8b4538bfed95108914ff2b231a2b8fcf4092c8d1b85ebbc949"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/repeat-win-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/repeat-win-input.json",
+      "raw_sha256": "12507f1135e300f8ddb26a9c810cd5d67e18775bc1a88f4d6e2beb596d1491db",
+      "raw_bytes": 1877,
+      "retained_sha256": "12507f1135e300f8ddb26a9c810cd5d67e18775bc1a88f4d6e2beb596d1491db"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/repeat-win-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/repeat-win-observe.json",
+      "raw_sha256": "a40abe9b37f6fa3c8836d98b82104c27c4469c2e188b0cf5ed55bdde15e3e356",
+      "raw_bytes": 892,
+      "retained_sha256": "a40abe9b37f6fa3c8836d98b82104c27c4469c2e188b0cf5ed55bdde15e3e356"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/repeat-win.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/repeat-win.json",
+      "raw_sha256": "f5d5bc2ab772ad2ae487a50be471c795f7ca54cfe391a3bc289d6f654bcbea26",
+      "raw_bytes": 8240,
+      "retained_sha256": "f5d5bc2ab772ad2ae487a50be471c795f7ca54cfe391a3bc289d6f654bcbea26"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/result.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/result.json",
+      "raw_sha256": "1b3d91550e458d0b520f7de18378ca71f48787024dd0ebd74638cfa760e2e178",
+      "raw_bytes": 3181,
+      "retained_sha256": "1b3d91550e458d0b520f7de18378ca71f48787024dd0ebd74638cfa760e2e178"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/wall-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/wall-input.json",
+      "raw_sha256": "29e406638309e4f87c434439d2e838df8b4a67a2e4d234c6c926f1616d3e2bc3",
+      "raw_bytes": 557,
+      "retained_sha256": "29e406638309e4f87c434439d2e838df8b4a67a2e4d234c6c926f1616d3e2bc3"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/wall-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/wall-observe.json",
+      "raw_sha256": "c92d1bbfdc4367a7858724daadd404c409f6af3040f8b9e6f34eee5b80de14c3",
+      "raw_bytes": 611,
+      "retained_sha256": "c92d1bbfdc4367a7858724daadd404c409f6af3040f8b9e6f34eee5b80de14c3"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/wall.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/wall.json",
+      "raw_sha256": "55443cf8d4e013936639b4117dfd56074b2ae6bd4df40472ff1cb4a8816f1aec",
+      "raw_bytes": 6730,
+      "retained_sha256": "55443cf8d4e013936639b4117dfd56074b2ae6bd4df40472ff1cb4a8816f1aec"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/win-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/win-input.json",
+      "raw_sha256": "12507f1135e300f8ddb26a9c810cd5d67e18775bc1a88f4d6e2beb596d1491db",
+      "raw_bytes": 1877,
+      "retained_sha256": "12507f1135e300f8ddb26a9c810cd5d67e18775bc1a88f4d6e2beb596d1491db"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/win-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/win-observe.json",
+      "raw_sha256": "a40abe9b37f6fa3c8836d98b82104c27c4469c2e188b0cf5ed55bdde15e3e356",
+      "raw_bytes": 892,
+      "retained_sha256": "a40abe9b37f6fa3c8836d98b82104c27c4469c2e188b0cf5ed55bdde15e3e356"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/win-restart-win-input.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/win-restart-win-input.json",
+      "raw_sha256": "7652cca4c6adedfae5f4cf08e682cb1d1440286950c8c927a379dc9ae3567504",
+      "raw_bytes": 3886,
+      "retained_sha256": "7652cca4c6adedfae5f4cf08e682cb1d1440286950c8c927a379dc9ae3567504"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/win-restart-win-observe.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/win-restart-win-observe.json",
+      "raw_sha256": "fd22b73d249e298b18ac1fd69145f7f60bbbb87b1cc796ed223644f3cf5e447d",
+      "raw_bytes": 2005,
+      "retained_sha256": "fd22b73d249e298b18ac1fd69145f7f60bbbb87b1cc796ed223644f3cf5e447d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/win-restart-win.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/win-restart-win.json",
+      "raw_sha256": "9972742f1ef3a3052d1338716e87fbb1c101bafd40890a322ff25303d3e92d1d",
+      "raw_bytes": 10014,
+      "retained_sha256": "9972742f1ef3a3052d1338716e87fbb1c101bafd40890a322ff25303d3e92d1d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/win.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/win.json",
+      "raw_sha256": "f5d5bc2ab772ad2ae487a50be471c795f7ca54cfe391a3bc289d6f654bcbea26",
+      "raw_bytes": 8240,
+      "retained_sha256": "f5d5bc2ab772ad2ae487a50be471c795f7ca54cfe391a3bc289d6f654bcbea26"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar.log",
+      "raw_sha256": "477d5edc41eb09e083f985cedbfd3bda05b43e83bf8bcd3c8bcbd284d7b35868",
+      "raw_bytes": 132,
+      "retained_sha256": "477d5edc41eb09e083f985cedbfd3bda05b43e83bf8bcd3c8bcbd284d7b35868"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/package/export.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/package/export.json",
+      "raw_sha256": "97b66e4708f021017be8a9f25cca210865a6d3ba91181126740d86e389aa2555",
+      "raw_bytes": 10851,
+      "retained_sha256": "97b66e4708f021017be8a9f25cca210865a6d3ba91181126740d86e389aa2555"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/package/project-build.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/package/project-build.json",
+      "raw_sha256": "0721c453d5d0db862f7f7cc655435b829b536429ea584deb3b9ba014047c26c8",
+      "raw_bytes": 1852,
+      "retained_sha256": "0721c453d5d0db862f7f7cc655435b829b536429ea584deb3b9ba014047c26c8"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar/package/build.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/planar/package/build.log.gz",
+      "raw_sha256": "626920a553b133ba32389a4b4aff01c6e3c18dace279377575fc00e4bc411903",
+      "raw_bytes": 1357197,
+      "retained_sha256": "f3c07e7cc06498b574066ce4666dd92979ade9da9b8c348f372614ca60257822"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/package/export.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/package/export.json",
+      "raw_sha256": "368147c2a65271806a34622f8cca5ae091dcfefc2473b841c749e7efc2c7f488",
+      "raw_bytes": 13391,
+      "retained_sha256": "368147c2a65271806a34622f8cca5ae091dcfefc2473b841c749e7efc2c7f488"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/package/project-build.json",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/package/project-build.json",
+      "raw_sha256": "c6d45ca023f87ec22c1f68075e51ffb212949764de09fe19eeb5fa3eca562865",
+      "raw_bytes": 2194,
+      "retained_sha256": "c6d45ca023f87ec22c1f68075e51ffb212949764de09fe19eeb5fa3eca562865"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core/package/build.log",
+      "retained": "docs/spikes/evidence/native-session-restart/native-session-restart-shipping-001/core/package/build.log.gz",
+      "raw_sha256": "d62d0b6351be8dcb55a9a4ab7b4c41c1988cdb2dd8c421161b347f947d91957a",
+      "raw_bytes": 1357197,
+      "retained_sha256": "02109842d9e81898e1de75e850a382b7689de310341da4bf1728104cae034f80"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/native-session-restart-source-20261012.json",
+      "retained": "docs/spikes/evidence/native-session-restart/source-review.json",
+      "raw_sha256": "41475dd021291c4d8e074ae17db6b45f6b127ab4a625279aba29ec94cd933abc",
+      "raw_bytes": 3911,
+      "retained_sha256": "41475dd021291c4d8e074ae17db6b45f6b127ab4a625279aba29ec94cd933abc"
+    }
+  ],
+  "independent_source_review": "41475dd021291c4d8e074ae17db6b45f6b127ab4a625279aba29ec94cd933abc",
+  "final_review": {
+    "status": "accepted",
+    "receipt": "docs/spikes/evidence/native-session-restart/final-review.json",
+    "sha256": "7e5f2907f0baff970f90b5f0b0b5ba189bfa850953b92fc129b8a9bfa8fe5097"
+  },
+  "limitations": [
+    "No native window, GPU, device audio, IME callback or performance acceptance",
+    "Fresh initial physics reconstruction, not saved solver continuation",
+    "Headless Play, static/development module restart request owners remain unsupported"
+  ]
+}

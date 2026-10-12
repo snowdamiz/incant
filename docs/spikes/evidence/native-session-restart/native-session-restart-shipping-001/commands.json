@@ -1,0 +1,24 @@
+[
+  {
+    "argv": [
+      "python3",
+      "tools/probes/native-session-restart.py",
+      "ship",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar"
+    ],
+    "exit_code": 0,
+    "seconds": 267.2827704580013
+  },
+  {
+    "argv": [
+      "python3",
+      "tools/probes/native-session-restart.py",
+      "ship",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/core"
+    ],
+    "exit_code": 0,
+    "seconds": 282.36149970800034
+  }
+]

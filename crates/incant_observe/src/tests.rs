@@ -241,3 +241,39 @@ fn skipped_or_incomplete_requested_ticks_are_errors() {
     assert!(plan.observe(&world, &InputFrame::default()).is_err());
     assert!(parse(value).unwrap().finish(&world).is_err());
 }
+
+#[test]
+fn repeated_simulation_ticks_have_distinct_monotonic_host_observations() {
+    let mut plan=parse(request(json!([
+        check("first world",1,json!({"type":"vector","entity":CHILD,"property":"translation","value":[1,0,0],"tolerance":0})),
+        check("replacement world",2,json!({"type":"vector","entity":CHILD,"property":"translation","value":[5,0,0],"tolerance":0})),
+    ]))).unwrap();
+    let mut first = world();
+    first.step().unwrap();
+    plan.observe_at(1, &first, &InputFrame::default()).unwrap();
+    let mut second = NativeWorld::new(
+        CookedScene::new(
+            id(99),
+            2,
+            vec![CookedEntity {
+                id: id(2),
+                parent: None,
+                transform: Transform {
+                    translation: [4., 0., 0.],
+                    ..Default::default()
+                },
+                velocity: Some(Velocity {
+                    linear: [2., 0., 0.],
+                }),
+            }],
+        )
+        .unwrap(),
+    );
+    second.step().unwrap();
+    assert_eq!(first.tick(), second.tick());
+    plan.observe_at(2, &second, &InputFrame::default()).unwrap();
+    let report = serde_json::to_value(plan.finish(&second).unwrap()).unwrap();
+    assert_eq!(report["passed"], true);
+    assert_eq!(report["checks"].as_array().unwrap().len(), 2);
+    assert_eq!(report["tick"], 1);
+}

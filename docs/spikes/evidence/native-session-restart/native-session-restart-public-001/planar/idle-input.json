@@ -1,0 +1,8 @@
+{
+  "format": "incant-input",
+  "version": 1,
+  "tick_rate": 60,
+  "start_tick": 0,
+  "ticks": 30,
+  "frames": []
+}

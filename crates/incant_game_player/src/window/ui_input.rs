@@ -121,6 +121,21 @@ impl UiInput {
         self.receipts.clear();
         self.bytes = 0;
     }
+    /// Retire platform text authority and all queued UI receipts, preserving
+    /// the monotonic native serial allocator. A held pointer release cannot be
+    /// retargeted to the replacement tree or create a gameplay press.
+    pub fn replace_session(&mut self) -> Result<Option<(u64, bool)>, Error> {
+        let retired = self.ime.synchronize(None, false)?;
+        self.accepted();
+        self.observed = None;
+        self.position = None;
+        self.pointer_ready = false;
+        if !matches!(self.left, Left::Up) {
+            self.left = Left::Suppressed;
+        }
+        self.surface_retry = true;
+        Ok(retired)
+    }
     pub fn reset_focus(&mut self) {
         self.surface_retry = false;
         self.accepted();

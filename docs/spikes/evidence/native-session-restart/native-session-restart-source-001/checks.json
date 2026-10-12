@@ -1,0 +1,37 @@
+[
+  {
+    "argv": [
+      "cargo",
+      "test",
+      "--locked",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "native-window",
+      "--lib",
+      "-j2"
+    ],
+    "exit_code": 0,
+    "seconds": 1.70633375000034
+  },
+  {
+    "argv": [
+      "cargo",
+      "test",
+      "--locked",
+      "-p",
+      "incant_script",
+      "-p",
+      "incant_game_runtime",
+      "-p",
+      "incant_render_game",
+      "-p",
+      "incant_observe",
+      "-p",
+      "incant_audio_runtime",
+      "-j2"
+    ],
+    "exit_code": 101,
+    "seconds": 18.43039641699943
+  }
+]

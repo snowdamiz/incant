@@ -1,0 +1,50 @@
+{
+  "passed": true,
+  "sample": "planar",
+  "proof": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-shipping-001/planar",
+  "helper_sha256": "bc2833c1331a30efd4649bf27aa4ced288638d9fde24cd6ea6ae8bd6353d3e28",
+  "player_sha256": "fa27c7e8a351a4176b9b028e82666d7c49c454e6f2c98f913a94b8526fc48996",
+  "source_sha256": "3aa27cdc2e0e3002e4d8251d0ab3cd0004875bfb0da02c3afbb222b3b9b6b7b8",
+  "project_sha256": "09507561641fb87454de8eeb9d8671db5ecdbbf18f0fde5ff9174cbec8cf5698",
+  "package_files": {
+    "build.log": "626920a553b133ba32389a4b4aff01c6e3c18dace279377575fc00e4bc411903",
+    "export.json": "97b66e4708f021017be8a9f25cca210865a6d3ba91181126740d86e389aa2555",
+    "player/data/clips.bin": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+    "player/data/empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+    "player/data/fonts/27434b14189e6b823382d06b768a3544557f29f875e3b483452bac0eb87edc9a.json": "a08043e6d0266c90d90356aafb8c5b4b775f34abb9dbe96ae2e338e438e3f43c",
+    "player/data/fonts/2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9.ifont": "92960e6b23eff12e1bf13361b2b94b490d723f8d93e6945ba34b9f9b3acd2081",
+    "player/data/input-actions.json": "769b7d548f12fae2532d9cd8ec632aaab76bb4eea15031f2715871b2f1f360c2",
+    "player/data/package.json": "b4ddceb0be4e0ba73672021940551a46164cdc32e0653a04baa57250b1756694",
+    "player/data/textures/cf7db76b5fe2aa853a59139d8f4d166947eaa3894b5b1e616e3e9ffdff74f19f.ktx2": "cf7db76b5fe2aa853a59139d8f4d166947eaa3894b5b1e616e3e9ffdff74f19f",
+    "player/data/textures/de1efc9cac8d47956233a59b453545d7a915a1b4603d03d3d71530821637dd3e.json": "f8be1a88e557457b3be4d083f4b7d0a2b336df2fc71483a5f6f519bf62aa3cde",
+    "player/data/world.scene": "3550f0f7a64510299136e653b462678707481705472d1cd334d69d800364e9a7",
+    "player/incant_game_player": "fa27c7e8a351a4176b9b028e82666d7c49c454e6f2c98f913a94b8526fc48996",
+    "project-build.json": "0721c453d5d0db862f7f7cc655435b829b536429ea584deb3b9ba014047c26c8",
+    "symbols/incant_game_player.dSYM/Contents/Info.plist": "34ade40e73ea2438b149d0e75aa4fd292b8d5f4dad43e6af08786c15c4b7ea22",
+    "symbols/incant_game_player.dSYM/Contents/Resources/DWARF/incant_game_player-8def80b48e2adefd": "87da71d04e982c57b6d4d26dceff770b531ea94dd879dcc77c7f6ea23c6727ef",
+    "symbols/incant_game_player.dSYM/Contents/Resources/Relocations/aarch64/incant_game_player-8def80b48e2adefd.yml": "970ac3129c85242ea8b17bf6b1f7148734167cb02efdcc19e61ed3db6b9f785d",
+    "symbols/script-symbols.json": "7fdc44bee82c2a996d1e5e893b846f14c24ed7a25ea38c1c5d2f75d51f3e599a"
+  },
+  "runs": [
+    "win",
+    "gamepad",
+    "lose",
+    "wall",
+    "locked-exit",
+    "diagonal",
+    "repeat-win",
+    "idle",
+    "win-restart-win",
+    "gamepad-restart-win",
+    "lose-restart-win",
+    "held-input-restart-idle"
+  ],
+  "commands": 12,
+  "exact_fresh_session_pcm": true,
+  "same_simulation_tick_distinct_host_checks": true,
+  "limits": [
+    "CPU ordinary package only; no native-window/GPU/device evidence",
+    "Fresh startup reset, not physics save/restore",
+    "Wasm and headless Play request owners remain unsupported"
+  ]
+}

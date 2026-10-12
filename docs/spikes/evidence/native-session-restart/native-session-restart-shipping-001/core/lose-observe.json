@@ -1,0 +1,127 @@
+{
+  "format": "incant-native-observation",
+  "version": 1,
+  "entities": [
+    "00000000000000000000000002",
+    "00000000000000000000000010",
+    "00000000000000000000000011"
+  ],
+  "checks": [
+    {
+      "name": "collected-entities-removed",
+      "tick": 900,
+      "expect": {
+        "type": "entity_count",
+        "value": 24
+      }
+    },
+    {
+      "name": "pickup-00000000000000000000000012",
+      "tick": 900,
+      "expect": {
+        "type": "exists",
+        "entity": "00000000000000000000000012",
+        "value": true
+      }
+    },
+    {
+      "name": "pickup-00000000000000000000000013",
+      "tick": 900,
+      "expect": {
+        "type": "exists",
+        "entity": "00000000000000000000000013",
+        "value": true
+      }
+    },
+    {
+      "name": "terminal-stop-00000000000000000000000002-500",
+      "tick": 500,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000002",
+        "property": "velocity",
+        "value": [
+          0,
+          0,
+          0
+        ],
+        "tolerance": 0
+      }
+    },
+    {
+      "name": "terminal-stop-00000000000000000000000010-500",
+      "tick": 500,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000010",
+        "property": "velocity",
+        "value": [
+          0,
+          0,
+          0
+        ],
+        "tolerance": 0
+      }
+    },
+    {
+      "name": "terminal-stop-00000000000000000000000011-500",
+      "tick": 500,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000011",
+        "property": "velocity",
+        "value": [
+          0,
+          0,
+          0
+        ],
+        "tolerance": 0
+      }
+    },
+    {
+      "name": "terminal-stop-00000000000000000000000002-900",
+      "tick": 900,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000002",
+        "property": "velocity",
+        "value": [
+          0,
+          0,
+          0
+        ],
+        "tolerance": 0
+      }
+    },
+    {
+      "name": "terminal-stop-00000000000000000000000010-900",
+      "tick": 900,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000010",
+        "property": "velocity",
+        "value": [
+          0,
+          0,
+          0
+        ],
+        "tolerance": 0
+      }
+    },
+    {
+      "name": "terminal-stop-00000000000000000000000011-900",
+      "tick": 900,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000011",
+        "property": "velocity",
+        "value": [
+          0,
+          0,
+          0
+        ],
+        "tolerance": 0
+      }
+    }
+  ]
+}

@@ -84,6 +84,27 @@ pub struct OfflineGameSession {
     inner: OfflineCore,
 }
 impl OfflineGameSession {
+    /// Create a fresh native session with the restart-request contract enabled.
+    pub fn from_seed(seed: &crate::GameSeed, sample_rate: u32) -> Result<Self> {
+        let mut game = Self::new(
+            seed.scene.clone(),
+            seed.program.clone(),
+            seed.actions.clone(),
+            seed.clips.clone(),
+            sample_rate,
+        )?;
+        game.enable_restart_requests()?;
+        Ok(game)
+    }
+    /// Drop all live state before constructing the replacement. Constructor
+    /// failure/unwind is terminal; no previous/new mixed session is observable.
+    /// Output chronology belongs to the host, not the reset simulation clock.
+    pub fn restart_from(&mut self, seed: &crate::GameSeed) -> Result<()> {
+        self.inner.core.ready()?;
+        self.inner.core.live.take();
+        *self = Self::from_seed(seed, self.inner.sample_rate)?;
+        Ok(())
+    }
     pub fn new(
         scene: CookedScene,
         program: impl Into<SessionProgram>,
@@ -168,6 +189,15 @@ impl OfflineGameSession {
     pub fn logs(&self) -> Result<&incant_script::NativeLogs> {
         self.inner.core.logs()
     }
+    /// Explicit trusted-owner opt-in for whole-session replacement.
+    pub fn enable_restart_requests(&mut self) -> Result<()> {
+        self.inner.core.enable_restart_requests()
+    }
+    /// Only visible after the complete composed tick succeeds.
+    pub fn take_session_request(&mut self) -> Result<Option<incant_script::SessionRequest>> {
+        self.inner.core.take_session_request()
+    }
+
     pub fn source_state(&self, id: StableId) -> Result<SourceState> {
         self.inner.core.source_state(id)
     }

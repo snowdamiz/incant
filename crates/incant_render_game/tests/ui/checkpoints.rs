@@ -437,3 +437,56 @@ fn fresh_process_child() {
     }
     std::fs::write(root.join("final.save"), game.checkpoint_bytes().unwrap()).unwrap();
 }
+
+#[test]
+fn restart_recreates_actual_ui_host_buffers_focus_router_and_canonical_paint() {
+    let (temp, scene, _) = fixture();
+    let seed =
+        incant_game_runtime::GameSeed::new(scene, program(), Default::default(), vec![]).unwrap();
+    let mut game = Game::from_seed(&seed, 44100, settings(temp.path(), [320., 200.])).unwrap();
+    let initial = game.host().unwrap().ui_input().unwrap().clone();
+    edit(&mut game);
+    let old_focus = game.host().unwrap().ui().unwrap().focus().unwrap();
+    let old_id = game.world().unwrap().incarnation();
+    std::fs::remove_file(temp.path().join("font.ttf")).unwrap();
+    game.restart_from(&seed, settings(temp.path(), [600., 300.]))
+        .unwrap();
+    assert_ne!(old_id, game.world().unwrap().incarnation());
+    assert_eq!(game.world().unwrap().tick(), 0);
+    let ui = game.host().unwrap().ui().unwrap();
+    assert_eq!(ui.text(id(3)).unwrap().text(), "Name");
+    assert!(ui.focus().is_none());
+    let draw = game.host().unwrap().ui_input().unwrap();
+    assert_eq!(draw.viewport, [600., 300.]);
+    assert!(!Arc::ptr_eq(draw, &initial));
+    assert!(
+        game.host()
+            .unwrap()
+            .ui_paint()
+            .unwrap()
+            .atlas
+            .pixels()
+            .iter()
+            .any(|p| *p != 0)
+    );
+    tick(
+        &mut game,
+        &[],
+        &[UiEvent::Commit {
+            target: old_focus,
+            text: "stale".into(),
+        }],
+    );
+    assert_eq!(game.input().unwrap().ui.discarded_events, 1);
+    assert_eq!(
+        game.host()
+            .unwrap()
+            .ui()
+            .unwrap()
+            .text(id(3))
+            .unwrap()
+            .text(),
+        "Name"
+    );
+    assert!(game.input().unwrap().keyboard.held.is_empty());
+}

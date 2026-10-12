@@ -1,0 +1,17 @@
+{
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-hud-host-008/prepared",
+  "files": {
+    "linked.rs": "4c748f199de5c8ef766cc0063d4eef459e55d0fb19e33e268c8fddd185cbdcfe",
+    "m0-facade.c": "8444facf73c4951689c89d5e6c3d2b38022e22ead1e4a20f4f6b3116743173f6",
+    "m0.c": "e28273cf3adda453cf26d6dab4a6936f56bce6f4dc2653fb63b62764525a6d07",
+    "m0.h": "ad31a85bfc00032993a1d66ecd1425a5167e98d7a49fbca92f8458b37877b8e2",
+    "m0.original.wasm": "99a79dea3853b97e505e8d7fcb48380f94390cf86a6a507354496e4384a84327",
+    "m0.wasm": "378ba0e36af0b6b508a7d458bb4288dc76e630bc6a7341785eec7be03a414d27",
+    "m1-facade.c": "779d2baa0745913777dc5e2db9eafa455234c62716e6a9bc85622d6d4840ca64",
+    "m1.c": "805cd58467802d7296366ba0bded8f53639fbb39950faf4a4744ed15c8f51160",
+    "m1.h": "5f9e12d88046e9c6afcb3463a90aed6e81df665eba1f8c39a858907dd69ccb37",
+    "m1.original.wasm": "22a80123b67c22ec5e27705f61c3cdaa8b23ee290d3d09f19ef9e26106317134",
+    "m1.wasm": "85c7e18a75e70dda04337a5112941aad9f4ce5ec27abd6d7d1cb5f75203d2069",
+    "manifest.json": "a8661b7637dff6192fec97ab643cd9127214cbd35172bf08a714587138080d64"
+  }
+}

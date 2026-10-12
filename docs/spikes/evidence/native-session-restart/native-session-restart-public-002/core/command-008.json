@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "/private/tmp/incant-font-atlas-target/ci/incant_headless",
+    "native-play",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/authoring/core.json",
+    "--camera",
+    "00000000000000000000000109",
+    "--ticks",
+    "30",
+    "--ui-viewport",
+    "640x480",
+    "--input-replay",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/idle-input.json",
+    "--observe",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core/idle-observe.json"
+  ],
+  "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+  "exit_code": 0,
+  "stdout": "{\n  \"passed\": true,\n  \"runtime\": \"native\",\n  \"script_source_sha256\": \"a52d817137e20f664afbbb946ac07af3bdcc29c166fa00184a72ae9e1c9157dc\",\n  \"script_source_parsing\": true,\n  \"scene\": \"01M4RRNP608GE63DEKJRY2DTBW\",\n  \"tick\": 30,\n  \"tick_rate\": 60,\n  \"entity_count\": 24,\n  \"frames\": 24000,\n  \"pcm_sha256\": \"a3dd1dccf9b11d8ac8734baf07ddf140a564903d47afc0c3376c2bcdbe9e397f\",\n  \"logs\": {\n    \"dropped\": 0,\n    \"entries\": [\n      {\n        \"level\": \"info\",\n        \"message\": \"fixture.hud [[\\\"00000000000000000000000101\\\",\\\"Pending\\\"],[\\\"00000000000000000000000102\\\",\\\"Pending\\\"],[\\\"00000000000000000000000103\\\",\\\"Pending\\\"],[\\\"00000000000000000000000104\\\",\\\"Pending\\\"],[\\\"00000000000000000000000105\\\",\\\"Pending\\\"],[\\\"00000000000000000000000106\\\",null],[\\\"00000000000000000000000107\\\",null],[\\\"00000000000000000000000108\\\",null]]\",\n        \"tick\": 1\n      },\n      {\n        \"level\": \"info\",\n        \"message\": \"core.route 00000000000000000000000010 corners=3\",\n        \"tick\": 1\n      },\n      {\n        \"level\": \"info\",\n        \"message\": \"fixture.hud [[\\\"00000000000000000000000101\\\",\\\"Health 3\\\"],[\\\"00000000000000000000000102\\\",\\\"Samples 0/2\\\"],[\\\"00000000000000000000000103\\\",\\\"Collect samples\\\"],[\\\"00000000000000000000000104\\\",\\\"Won\\\"],[\\\"00000000000000000000000105\\\",\\\"Lost\\\"],[\\\"00000000000000000000000106\\\",null],[\\\"00000000000000000000000107\\\",null],[\\\"00000000000000000000000108\\\",null]]\",\n        \"tick\": 2\n      },\n      {\n        \"level\": \"info\",\n        \"message\": \"core.route 00000000000000000000000011 corners=3\",\n        \"tick\": 2\n      }\n    ]\n  },\n  \"observations\": {\n    \"passed\": true,\n    \"tick\": 30,\n    \"tick_rate\": 60,\n    \"checks\": [\n      {\n        \"name\": \"fresh-00000000000000000000000012\",\n        \"tick\": 30,\n        \"expect\": {\n          \"type\": \"exists\",\n          \"entity\": \"00000000000000000000000012\",\n          \"value\": true\n        },\n        \"passed\": true,\n        \"actual\": true\n      },\n      {\n        \"name\": \"fresh-00000000000000000000000013\",\n        \"tick\": 30,\n        \"expect\": {\n          \"type\": \"exists\",\n          \"entity\": \"00000000000000000000000013\",\n          \"value\": true\n        },\n        \"passed\": true,\n        \"actual\": true\n      }\n    ],\n    \"entities\": {\n      \"00000000000000000000000002\": {\n        \"parent\": null,\n        \"translation\": [\n          -5.0,\n          0.609829306602478,\n          0.0\n        ],\n        \"rotation\": [\n          0.0,\n          0.0,\n          0.0,\n          1.0\n        ],\n        \"scale\": [\n          1.0,\n          1.0,\n          1.0\n        ],\n        \"velocity\": [\n          0.0,\n          0.005999999848427251,\n          0.0\n        ],\n        \"world_transform\": [\n          [\n            1.0,\n            0.0,\n            0.0,\n            0.0\n          ],\n          [\n            0.0,\n            1.0,\n            0.0,\n            0.0\n          ],\n          [\n            0.0,\n            0.0,\n            1.0,\n            0.0\n          ],\n          [\n            -5.0,\n            0.609829306602478,\n            0.0,\n            1.0\n          ]\n        ]\n      }\n    }\n  },\n  \"cpu_render_input\": true,\n  \"gpu_submitted\": false,\n  \"project_sha256\": \"3e791022909986462c6153e15a26305a3bc8293ee16b731e65edbc45e8964395\"\n}\n",
+  "stderr": ""
+}
