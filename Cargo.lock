@@ -4575,6 +4575,7 @@ dependencies = [
 name = "incant_wasm_dev"
 version = "0.0.1"
 dependencies = [
+ "incant_anim",
  "incant_input",
  "incant_localization",
  "incant_runtime",
@@ -4612,6 +4613,7 @@ version = "0.0.1"
 dependencies = [
  "cc",
  "incant-module",
+ "incant_anim",
  "incant_input",
  "incant_localization",
  "incant_nav",

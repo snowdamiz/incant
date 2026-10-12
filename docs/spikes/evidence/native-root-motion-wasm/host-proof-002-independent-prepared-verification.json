@@ -1,0 +1,9 @@
+{
+  "at": "2026-10-12T18:31:40.221174+00:00",
+  "scope": "Separate read-only producer-lane rehash of actual prepared original/prepared/C/facade/header files while conformance build remains alive; not an independent reviewer acceptance.",
+  "module_count": 206,
+  "files_verified": 1031,
+  "prepared_manifest_sha256": "ac36d386629d16c015647e539a35724e86e9f1cdaf63252b8e6495bb180c0dbd",
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-host-proof-002/static-wasm-inputs-4apglht_/bundle",
+  "passed": true
+}

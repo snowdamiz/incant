@@ -24,8 +24,11 @@ IK sampling. World11 and QuickJS session continuation preserve active/paused
 reverse fades; owned TypeScript cycles/ticks remain exact BigInt arrays. The
 600-case CPU suite, scoped Clippy, wasm32, dependency and SDK checks pass.
 Independent production source and retained evidence reviews accept the native
-connection. Wasm53–55 and ordinary source-deleted public
-root gameplay export are the next connected work, not yet proved. Physics saves,
+connection. The composed Wasm53–55 boundary now passes 453 actual-host cases,
+Clippy, wasm32 and 240 Python checks; source review is accepted and final evidence
+review is pending. The ordinary source-deleted public root gameplay export is
+building after its complete native-oracle development preflight passed.
+[Wasm contract and evidence](docs/spikes/native-root-motion-wasm.md). Physics saves,
 general affine/CUBICSPLINE roots, rendered/device and full Phase1 gates remain
 open. [Contract and measured limits](docs/spikes/native-root-motion-connected.md).
 

@@ -1,0 +1,22 @@
+{
+  "at": "2026-10-12T18:18:50.800895+00:00",
+  "verdict": "accepted scoped production source; actual guest/export/broad evidence pending",
+  "source_manifest": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-source-freeze-001/inventory.json",
+  "source_manifest_sha256": "47f32ac48120c8486965c7d12971a854697caf669389381997c3c39dd30226d4",
+  "verified_files": 21,
+  "prior_registry": "All functions0\u201352 and every prior record, enum, constant, magic and namespace byte-equivalent to fd3eded6",
+  "review": [
+    "Complete bounded composed IK-v2/v5 plus sorted root rows; association and exact integer clocks preserved",
+    "Capture precedes commands; root stripping admitted independently of ExtractOnly/application flag; all14 old pose/IK calls refused before shared caches",
+    "Nested zero-copy parser validates exact sizes, limits, owner order/membership, tags, reserved/padding, finite clocks and normalized rigid rotations",
+    "Authorized boundary refusal is sticky and discards staged controls; stale epoch cannot poison new callback",
+    "Complete15596144-byte snapshot fits32MiB memory and128MiB transfer quota",
+    "Native source connection accepted separately; no runtime world clone/serialization or new JIT dependency"
+  ],
+  "findings": [],
+  "limitations": [
+    "No independent actual guest execution in this review",
+    "Public source-free package/host conformance and broad integration pending",
+    "No appearance, device or phase acceptance"
+  ]
+}
