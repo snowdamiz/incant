@@ -83,8 +83,8 @@ this is CPU functional shipping evidence, not GPU, performance or device evidenc
 [Exact integrated source, logs, dependency audit and fresh-process receipts](evidence/native-animation-main110-integration.json)
 bind these results. [Independent export probe review](evidence/native-animation-export-independent-review.json)
 records the original probe's unchanged assertions and retained results. Native0052
-evidence is preserved; the focused nullable Inspector recheck remains required
-before publication.
+evidence is preserved; the focused nullable Inspector recheck was required at this stage and is closed
+by the final acceptance below.
 
 ## Main113 and the nullable Inspector correction
 
@@ -104,7 +104,7 @@ the earlier fresh shipping proof remains bound to its recorded source and binary
 Claude0052 reports native skeletal playback, transport, resize and unchanged
 authoring passes on the exact granted build. Ten committed image hashes were
 independently verified without a new pixel review. Its unsupported nullable Clip
-row prompted the bridge correction; focused Claude0053 acceptance is pending.
+row prompted the bridge correction; focused Claude0053 acceptance is recorded below.
 Script Play logs still do not surface in the editor Console and remain a separate
 transport task. No integrator GPU/window/provider work or broader gate claim is
 made by this source/CPU integration.
@@ -126,4 +126,36 @@ save/PCM. All seven player processes are reaped.
 source, logs and retained outputs; the player SHA256 is
 `ad79a8149a13c7a74759cddcd92d57268ad084c4f76237bcb2750bdfe535ca21`. This is CPU functional
 evidence. Earlier native appearance evidence remains on its exact granted build,
-and the focused0053 acceptance is still pending.
+and the focused0053 acceptance is recorded below.
+
+## Final main115 integration and native nullable Inspector acceptance
+
+Frozen `8325797` includes actual main115. The only production changes since the
+main114 fresh export are the independently reviewed authoring ledger lock repair;
+all runtime/cook/player/renderer source and Cargo.lock inputs remain unchanged.
+The integrated 64 agent tests and all-target Clippy pass. The prior fresh export
+receipt stays bound to its exact source and executable, without claiming a new
+native or shipping run for this authoring-only correction.
+
+Claude Opus 5.5 with explicitly verified Max effort accepted the focused0053
+native recheck on editor SHA256
+`677f3955970e5f63621dbc4a5ac0df09dce2c90d520b5278918da6ffcd3ae5f4`.
+The corrected Clip=0 field, adjacent Play/Pause/Stop and tab focus pass at
+1440×875 and 1000×650; all twelve fixture files retain identical bytes and mtimes.
+The original evidence-only Claude commit `3bacba7` is cherry-picked with its author
+and trailer preserved. Only its packet inputs are copied from the parent; the
+parent's separately queued Wasm-animation implementation is excluded. Four
+committed image hashes and the binary/manifest/result receipts are independently
+verified; rendered pixels are reviewed exclusively by Claude. All owned native
+and helper processes are reaped, and the graphics interval is released.
+
+Two adjacent observations remain explicit followups: one Runtime-field focus loss
+with unconfirmed cause, and a possible transient Runtime layout shift. Neither
+blocked the corrected Clip acceptance. Native null-Clip editing, new provider
+turns, device performance and complete phase gates are not claimed. Play-to-Console
+transport remains a separate reviewed intake.
+
+[Main115 CPU/source receipt](evidence/native-animation-main115-integration.json),
+[root native acceptance](evidence/native-animation-0053-acceptance.json),
+[integrator hash record](evidence/native-animation-0053-intake.json), and
+[Claude's native report](../../handoffs/0053-nullable-inspector/result.md).

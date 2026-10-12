@@ -31,7 +31,9 @@ Failed checkpoint6 selected main110 and was never promoted. Three native physics
 exposed a stale isolated probe lock edge; the reviewed one-edge correction and
 required-dependency guard pass local locked Cargo/Clippy and tooling checks.
 The fixes are merged in PR #112; checkpoint7 now verifies frozen repaired
-main113 through the same 23 required contexts in PR #111.
+main113 through the same 23 required contexts in PR #111. Checkpoint7 finished
+with 22 successful contexts and one macOS ledger failure; it is not promoted.
+PR #115 repairs that failure locally, pending the next full candidate.
 The independent fresh observation-routing correction restores the precise
 pre-startup refusal while preserving absolute checkpoint-resume bounds; its
 unchanged process regression, 36 scoped tests and Clippy pass.
@@ -39,8 +41,8 @@ unchanged process regression, 36 scoped tests and Clippy pass.
 [routing evidence](docs/spikes/checkpoint6-player-routing.md).
 The separate Windows budget-test correction closes the journal owner before
 independent reads, then verifies recovered state. Seven local tests and Clippy
-pass; PR #113 merged the fixture correction. Actual Windows confirmation
-remains pending checkpoint7.
+pass; PR #113 merged the fixture correction. Checkpoint7 Windows desktop and
+Wasm conformance both pass.
 [Journal test evidence](docs/spikes/checkpoint6-budget-journal-tests.md).
 
 ## Current milestone
@@ -69,7 +71,10 @@ production UI. The final main110 union passes 519 ordinary tests, 57 cooker/cook
 tests (overlapping scope), Clippy and a fresh source-free export proof with exact
 replay/checkpoint continuation and refusal controls. Claude0052 passed native playback/transport/resize/authoring checks, then found
 the nullable clip field was unsupported in the Inspector. A bounded bridge
-correction and focused Claude0053 recheck remain in progress. [Integration evidence](docs/spikes/native-animation-integration.md).
+correction and focused Claude0053 native recheck now pass. The main114 fresh
+export repeats exact source-free continuation after the atlas lockfile change;
+main115 adds only the reviewed authoring ledger repair with 64 agent tests/Clippy.
+Two adjacent Runtime focus/transient-layout observations remain scoped followups. [Integration evidence](docs/spikes/native-animation-integration.md).
 
 Opt-in cooked output/diagnostic/shadow shaders merged in PR #110 after scoped
 Metal numerical and Claude appearance acceptance; both features stay off.
