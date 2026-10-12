@@ -16,6 +16,14 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Text-field clicks — locally corrected
+
+Text-field pointer release now focuses without submitting its value. Buttons
+still activate on matching release; explicit submit and IME ownership remain
+unchanged. The original regression fails, and all 47 UI tests plus Clippy pass
+after the correction. Native interaction confirmation remains open.
+[Evidence](docs/spikes/ui-pointer-focus.md).
+
 ## macOS native text retirement — local crash regression repaired
 
 The managed input client now avoids an AppKit view-destructor callback into

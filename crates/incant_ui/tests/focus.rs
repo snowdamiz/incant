@@ -265,6 +265,67 @@ fn stale_ime_never_cancels_global_focus_loss_or_targets_new_owner() {
     assert_eq!(replacement.text(id(3)).unwrap().text(), "A👩‍💻B");
 }
 #[test]
+fn pointer_focus_never_submits_text_but_explicit_activation_does() {
+    let mut ui = runtime();
+    for _ in 0..2 {
+        let target = ui.pointer_token().unwrap();
+        accept(
+            &mut ui,
+            &[
+                UiEvent::Pointer {
+                    position: [110., 10.],
+                    pressed: true,
+                    target: target.clone(),
+                },
+                UiEvent::Pointer {
+                    position: [110., 10.],
+                    pressed: false,
+                    target,
+                },
+            ],
+        );
+        assert_eq!(ui.text_focus().unwrap().widget(), id(3));
+        assert!(ui.actions().is_empty(), "a field click must not submit");
+    }
+    let target = ui.text_focus().unwrap();
+    accept(
+        &mut ui,
+        &[UiEvent::Submit {
+            target: target.clone(),
+        }],
+    );
+    assert_eq!(
+        ui.actions(),
+        [UiAction::Submitted {
+            widget: id(3),
+            value: Arc::from("A👩‍💻B")
+        }]
+    );
+    accept(&mut ui, &[UiEvent::Activate]);
+    assert_eq!(
+        ui.actions(),
+        [UiAction::Submitted {
+            widget: id(3),
+            value: Arc::from("A👩‍💻B")
+        }]
+    );
+    accept(
+        &mut ui,
+        &[UiEvent::Preedit {
+            target: target.clone(),
+            text: "日本".into(),
+            cursor: None,
+        }],
+    );
+    accept(&mut ui, &[UiEvent::Submit { target }, UiEvent::Activate]);
+    assert!(
+        ui.actions().is_empty(),
+        "IME owns activation during composition"
+    );
+    assert_eq!(ui.text(id(3)).unwrap().display_text(), "A👩‍💻B日本");
+}
+
+#[test]
 fn pointer_release_needs_same_capture_and_current_displayed_layout() {
     let mut ui = runtime();
     let target = ui.pointer_token().unwrap();
