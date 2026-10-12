@@ -1,0 +1,33 @@
+   Compiling mint v0.5.9
+   Compiling triple_buffer v9.0.0
+   Compiling rtrb v0.4.0
+   Compiling glam v0.33.12
+   Compiling pastey v0.2.3
+   Compiling atomic-arena v0.1.2
+   Compiling incant_script v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_script)
+   Compiling incant_assets_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_assets_runtime)
+   Compiling rustix v1.1.5
+   Compiling getrandom v0.4.3
+   Compiling errno v0.3.14
+   Compiling once_cell v1.21.4
+   Compiling nalgebra v0.35.0
+   Compiling kira v0.12.5 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/third_party/kira)
+   Compiling tempfile v3.27.0
+   Compiling glamx v0.3.1
+   Compiling parry2d v0.31.1
+   Compiling parry3d v0.31.1
+   Compiling rapier3d v0.36.0
+   Compiling rapier2d v0.36.0
+   Compiling incant_physics_2d_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_physics_2d_runtime)
+   Compiling incant_physics_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_physics_runtime)
+   Compiling incant_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_runtime)
+   Compiling incant_audio_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_audio_runtime)
+   Compiling incant_game_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_game_runtime)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 19.08s
+     Running tests/hosting.rs (/tmp/incant-font-atlas-target/debug/deps/hosting-8fe337da05c8935b)
+
+running 1 test
+test host_error_and_unwind_terminalize_offline_session_and_silence_entire_output ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 8 filtered out; finished in 0.02s
+

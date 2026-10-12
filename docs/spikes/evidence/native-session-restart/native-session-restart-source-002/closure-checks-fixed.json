@@ -1,0 +1,101 @@
+[
+  {
+    "argv": [
+      "cargo",
+      "check",
+      "--locked",
+      "-p",
+      "incant_game_player",
+      "--no-default-features",
+      "--features",
+      "static-module,render-input",
+      "-j2"
+    ],
+    "exit_code": 0,
+    "seconds": 6.061559125002532
+  },
+  {
+    "argv": [
+      "cargo",
+      "check",
+      "--locked",
+      "-p",
+      "incant_script",
+      "--no-default-features",
+      "-j2"
+    ],
+    "exit_code": 0,
+    "seconds": 1.6120976669990341
+  },
+  {
+    "argv": [
+      "node",
+      "node_modules/typescript/bin/tsc",
+      "-p",
+      "samples/core/tsconfig.json"
+    ],
+    "exit_code": 0,
+    "seconds": 0.22592020799856982
+  },
+  {
+    "argv": [
+      "node",
+      "node_modules/typescript/bin/tsc",
+      "-p",
+      "samples/planar/tsconfig.json"
+    ],
+    "exit_code": 0,
+    "seconds": 0.22018541699799243
+  },
+  {
+    "argv": [
+      "node",
+      "node_modules/typescript/bin/tsc",
+      "-p",
+      "sdk/ts/tsconfig.json"
+    ],
+    "exit_code": 0,
+    "seconds": 0.22008229199855123
+  },
+  {
+    "argv": [
+      "python3",
+      "tools/check_runtime_dependencies.py",
+      "incant_game_runtime",
+      "incant_game_player",
+      "incant_script",
+      "--features",
+      "incant_game_player/static-module,incant_game_player/render-input"
+    ],
+    "exit_code": 0,
+    "seconds": 0.37347083399799885
+  },
+  {
+    "argv": [
+      "cargo",
+      "fmt",
+      "--all",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 1.2636765000024752
+  },
+  {
+    "argv": [
+      "python3",
+      "tools/generate_conventions.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 0.03531591700084391
+  },
+  {
+    "argv": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 0.048421375002362765
+  }
+]

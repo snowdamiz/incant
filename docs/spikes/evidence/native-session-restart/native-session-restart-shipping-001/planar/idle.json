@@ -1,0 +1,200 @@
+{
+  "flipbooks": [
+    {
+      "completed": false,
+      "frame": 0,
+      "id": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      "playing": false
+    },
+    {
+      "completed": false,
+      "frame": 0,
+      "id": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        4
+      ],
+      "playing": false
+    }
+  ],
+  "frames": 24000,
+  "logs": {
+    "dropped": 0,
+    "entries": [
+      {
+        "level": "info",
+        "message": "fixture.presentation {\"widgets\":[[\"00000000000000000000000101\",\"Pending\"],[\"00000000000000000000000102\",\"Pending\"],[\"00000000000000000000000103\",\"Pending\"],[\"00000000000000000000000104\",\"Pending\"]],\"frames\":[[\"00000000000000000000000004\",0,0],[\"00000000000000000000000002\",0,0]]}",
+        "tick": 1
+      },
+      {
+        "level": "info",
+        "message": "fixture.presentation {\"widgets\":[[\"00000000000000000000000101\",\"Pearls 0 of 2\"],[\"00000000000000000000000102\",\"\"],[\"00000000000000000000000103\",\"Pending\"],[\"00000000000000000000000104\",\"Pending\"]],\"frames\":[[\"00000000000000000000000004\",0,0],[\"00000000000000000000000002\",0,0]]}",
+        "tick": 2
+      }
+    ]
+  },
+  "observations": {
+    "checks": [
+      {
+        "actual": true,
+        "expect": {
+          "entity": "00000000000000000000000011",
+          "type": "exists",
+          "value": true
+        },
+        "name": "fresh-00000000000000000000000011",
+        "passed": true,
+        "tick": 30
+      },
+      {
+        "actual": true,
+        "expect": {
+          "entity": "00000000000000000000000012",
+          "type": "exists",
+          "value": true
+        },
+        "name": "fresh-00000000000000000000000012",
+        "passed": true,
+        "tick": 30
+      }
+    ],
+    "entities": {
+      "00000000000000000000000002": {
+        "parent": null,
+        "rotation": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "translation": [
+          2.5,
+          2.5,
+          0.0
+        ],
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            2.5,
+            2.5,
+            0.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "passed": true,
+    "tick": 30,
+    "tick_rate": 60
+  },
+  "pcm_sha256": "ea0787f65f73b0013d03b359490e3125211b28ad5c1502ffb1544c0ded4192f5",
+  "render_input": {
+    "binding_generation": 0,
+    "camera": "00000000000000000000000000000007",
+    "camera_position": [
+      7.0,
+      5.0,
+      20.0
+    ],
+    "decoded_payload_bytes": 556296,
+    "first_model_position": null,
+    "first_sprite_position": [
+      2.5,
+      2.5,
+      0.0
+    ],
+    "first_text_position": null,
+    "gpu_submitted": false,
+    "mode": "cpu-only",
+    "model_count": 0,
+    "sprite_count": 5,
+    "text_atlas_bytes": 0,
+    "text_atlas_nonzero": 0,
+    "text_atlas_sha256": null,
+    "text_count": 0,
+    "text_font_count": 0,
+    "text_generation": 0,
+    "text_glyph_count": 0,
+    "text_missing_clusters": 0,
+    "text_rtl_glyphs": 0,
+    "text_sources": {},
+    "tick": 30,
+    "topology_generation": 0,
+    "ui": {
+      "atlas_sha256": "50ca7096be8d359ac2a39bc76947bf16c066f826daba21ae221fb3d9ea94c156",
+      "focus": null,
+      "glyphs": 27,
+      "sources": {
+        "00000000000000000000000101": "Pearls 0 of 2",
+        "00000000000000000000000102": "",
+        "00000000000000000000000103": "Pending",
+        "00000000000000000000000104": "Pending"
+      },
+      "values": {},
+      "viewport": [
+        640.0,
+        480.0
+      ],
+      "widgets": 7
+    }
+  },
+  "sources": [],
+  "tick": 30
+}

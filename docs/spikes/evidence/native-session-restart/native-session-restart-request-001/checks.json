@@ -1,0 +1,52 @@
+[
+  {
+    "argv": [
+      "cargo",
+      "test",
+      "--locked",
+      "-p",
+      "incant_script",
+      "--lib",
+      "restart_request_tests",
+      "-j2"
+    ],
+    "exit": 0,
+    "seconds": 35.530641078948975,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-request-001/check-00.log",
+    "sha256": "2aff86888cb507198d61035c83105be2f22b058073dae4cd4792ef78e811b7cf"
+  },
+  {
+    "argv": [
+      "cargo",
+      "test",
+      "--locked",
+      "-p",
+      "incant_script",
+      "--test",
+      "project_bindings",
+      "later_source_failure_hides_restart",
+      "-j2"
+    ],
+    "exit": 0,
+    "seconds": 2.0604381561279297,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-request-001/check-01.log",
+    "sha256": "890ad87c33f489b25157ae4d069d1e9352b24436a6b86b2279d2710d8399deb9"
+  },
+  {
+    "argv": [
+      "cargo",
+      "test",
+      "--locked",
+      "-p",
+      "incant_game_runtime",
+      "--test",
+      "hosting",
+      "host_error_and_unwind_terminalize",
+      "-j2"
+    ],
+    "exit": 0,
+    "seconds": 19.62436604499817,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-request-001/check-02.log",
+    "sha256": "837db3b740a241ad167ff8840678970cdab258af786ec377b2841362ec7b9331"
+  }
+]

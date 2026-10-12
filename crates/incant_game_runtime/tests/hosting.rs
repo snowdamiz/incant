@@ -342,7 +342,7 @@ fn host_error_and_unwind_terminalize_offline_session_and_silence_entire_output()
         let probe = Arc::new(Probe::default());
         let mut session = HostedOfflineGameSession::<Host>::new(
             scene.clone(),
-            script(),
+            CompiledScript::compile("exports.default={update({chunks,log,commands}){chunks[0].transforms[0]+=2;log('accepted');commands.requestRestart();}}").unwrap(),
             InputActions::default(),
             vec![ClipBinding::load(id(), temp.path(), &key).unwrap()],
             48000,
@@ -353,6 +353,7 @@ fn host_error_and_unwind_terminalize_offline_session_and_silence_entire_output()
             },
         )
         .unwrap();
+        session.enable_restart_requests().unwrap();
         let mut output = vec![0.7; session.next_output_frames().unwrap() * 2];
         let result = catch_unwind(AssertUnwindSafe(|| session.tick(&[], &mut output)));
         match outcome {
@@ -361,6 +362,11 @@ fn host_error_and_unwind_terminalize_offline_session_and_silence_entire_output()
                 assert!(output.iter().any(|sample| sample.abs() > 0.01));
                 assert_eq!(session.host().unwrap().observed, [(1, 2.)]);
                 assert_eq!(session.logs().unwrap().entries()[0].message, "accepted");
+                assert_eq!(
+                    session.take_session_request().unwrap(),
+                    Some(incant_script::SessionRequest::Restart)
+                );
+                assert_eq!(session.take_session_request().unwrap(), None);
                 continue;
             }
             Outcome::Reject => assert!(matches!(result, Ok(Err(GameError::Host(HostError))))),
@@ -368,6 +374,10 @@ fn host_error_and_unwind_terminalize_offline_session_and_silence_entire_output()
         }
         assert!(output.iter().all(|sample| *sample == 0.));
         assert_eq!(probe.calls(), ["prepare", "sync", "host-drop"]);
+        assert!(matches!(
+            session.take_session_request(),
+            Err(GameError::Failed)
+        ));
         failed(&mut session);
     }
 }
@@ -564,5 +574,61 @@ fn presentation_only_error_and_unwind_drop_the_entire_backend_session() {
         assert!(session.is_failed());
         assert!(session.host().is_err() && session.world().is_err() && session.input().is_err());
         assert!(session.refresh_host().is_err() && session.set_suspended(false).is_err());
+    }
+}
+
+#[test]
+fn restart_drops_previous_host_before_new_prepare_and_failure_is_terminal() {
+    let seed = incant_game_runtime::GameSeed::new(
+        spatial::scenes()[1].clone(),
+        script(),
+        Default::default(),
+        vec![],
+    )
+    .unwrap();
+    for outcome in [Outcome::Accept, Outcome::Reject, Outcome::Panic] {
+        let probe = Arc::new(Probe::default());
+        let mut game = HostedOfflineGameSession::<Host>::from_seed(
+            &seed,
+            48000,
+            HostSettings {
+                probe: probe.clone(),
+                ..Default::default()
+            },
+        )
+        .unwrap();
+        let old = game.host().unwrap().identity.clone();
+        game.tick(&[], &mut vec![0.; game.next_output_frames().unwrap() * 2])
+            .unwrap();
+        let result = catch_unwind(AssertUnwindSafe(|| {
+            game.restart_from(
+                &seed,
+                HostSettings {
+                    probe: probe.clone(),
+                    prepare: outcome,
+                    ..Default::default()
+                },
+            )
+        }));
+        assert_eq!(
+            probe.calls()[..4],
+            ["prepare", "sync", "host-drop", "prepare"]
+        );
+        match outcome {
+            Outcome::Accept => {
+                result.unwrap().unwrap();
+                assert_ne!(game.host().unwrap().identity, old);
+                assert_eq!(game.world().unwrap().tick(), 0);
+                assert!(game.host().unwrap().observed.is_empty());
+            }
+            Outcome::Reject => {
+                assert!(matches!(result.unwrap(), Err(GameError::Host(_))));
+                failed(&mut game);
+            }
+            Outcome::Panic => {
+                assert!(result.is_err());
+                failed(&mut game);
+            }
+        }
     }
 }

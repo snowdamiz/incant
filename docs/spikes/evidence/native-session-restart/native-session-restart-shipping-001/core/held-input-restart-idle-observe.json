@@ -1,0 +1,181 @@
+{
+  "format": "incant-native-observation",
+  "version": 1,
+  "entities": [
+    "00000000000000000000000002"
+  ],
+  "checks": [
+    {
+      "name": "before-collected-entities-removed",
+      "tick": 300,
+      "expect": {
+        "type": "entity_count",
+        "value": 22
+      }
+    },
+    {
+      "name": "before-pickup-00000000000000000000000012",
+      "tick": 300,
+      "expect": {
+        "type": "exists",
+        "entity": "00000000000000000000000012",
+        "value": false
+      }
+    },
+    {
+      "name": "before-pickup-00000000000000000000000013",
+      "tick": 300,
+      "expect": {
+        "type": "exists",
+        "entity": "00000000000000000000000013",
+        "value": false
+      }
+    },
+    {
+      "name": "before-terminal-stop-00000000000000000000000002-200",
+      "tick": 200,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000002",
+        "property": "velocity",
+        "value": [
+          0,
+          0,
+          0
+        ],
+        "tolerance": 0
+      }
+    },
+    {
+      "name": "before-terminal-stop-00000000000000000000000010-200",
+      "tick": 200,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000010",
+        "property": "velocity",
+        "value": [
+          0,
+          0,
+          0
+        ],
+        "tolerance": 0
+      }
+    },
+    {
+      "name": "before-terminal-stop-00000000000000000000000011-200",
+      "tick": 200,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000011",
+        "property": "velocity",
+        "value": [
+          0,
+          0,
+          0
+        ],
+        "tolerance": 0
+      }
+    },
+    {
+      "name": "before-terminal-stop-00000000000000000000000002-300",
+      "tick": 300,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000002",
+        "property": "velocity",
+        "value": [
+          0,
+          0,
+          0
+        ],
+        "tolerance": 0
+      }
+    },
+    {
+      "name": "before-terminal-stop-00000000000000000000000010-300",
+      "tick": 300,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000010",
+        "property": "velocity",
+        "value": [
+          0,
+          0,
+          0
+        ],
+        "tolerance": 0
+      }
+    },
+    {
+      "name": "before-terminal-stop-00000000000000000000000011-300",
+      "tick": 300,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000011",
+        "property": "velocity",
+        "value": [
+          0,
+          0,
+          0
+        ],
+        "tolerance": 0
+      }
+    },
+    {
+      "name": "after-fresh-00000000000000000000000012",
+      "tick": 330,
+      "expect": {
+        "type": "exists",
+        "entity": "00000000000000000000000012",
+        "value": true
+      }
+    },
+    {
+      "name": "after-fresh-00000000000000000000000013",
+      "tick": 330,
+      "expect": {
+        "type": "exists",
+        "entity": "00000000000000000000000013",
+        "value": true
+      }
+    },
+    {
+      "name": "fresh-pickup-host-1",
+      "tick": 1,
+      "expect": {
+        "type": "exists",
+        "entity": "00000000000000000000000012",
+        "value": true
+      }
+    },
+    {
+      "name": "fresh-pickup-host-301",
+      "tick": 301,
+      "expect": {
+        "type": "exists",
+        "entity": "00000000000000000000000012",
+        "value": true
+      }
+    },
+    {
+      "name": "held-isolated-move",
+      "tick": 301,
+      "expect": {
+        "type": "action",
+        "name": "move",
+        "active": false,
+        "pressed": false
+      }
+    },
+    {
+      "name": "held-isolated-restart",
+      "tick": 301,
+      "expect": {
+        "type": "action",
+        "name": "restart",
+        "active": false,
+        "pressed": false
+      }
+    }
+  ]
+}

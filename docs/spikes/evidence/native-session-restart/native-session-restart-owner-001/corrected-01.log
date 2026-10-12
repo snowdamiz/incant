@@ -1,0 +1,66 @@
+   Compiling bytemuck v1.25.2
+   Compiling unicode-segmentation v1.13.3
+   Compiling toml_edit v0.25.16+spec-1.1.0
+   Compiling convert_case v0.10.0
+   Compiling wide v1.7.1
+   Compiling derive_more-impl v2.1.1
+   Compiling bevy_macro_utils v0.19.1
+   Compiling bevy_ecs_macro_logic v0.19.1
+   Compiling derive_more v2.1.1
+   Compiling bevy_tasks v0.19.1
+   Compiling simba v0.10.2
+   Compiling nalgebra v0.35.0
+   Compiling bevy_ecs_macros v0.19.1
+   Compiling bevy_ecs v0.19.1
+   Compiling glamx v0.3.1
+   Compiling glam v0.33.12
+   Compiling memmap2 v0.9.11
+   Compiling tinyvec v1.13.3
+   Compiling unicode-script v0.5.8
+   Compiling ttf-parser v0.21.1
+   Compiling unicode-properties v0.1.4
+   Compiling unicode-ccc v0.2.0
+   Compiling ttf-parser v0.20.0
+   Compiling unicode-bidi-mirroring v0.2.0
+   Compiling rustybuzz v0.14.1
+   Compiling fontdb v0.16.2
+   Compiling parry3d v0.31.1
+   Compiling parry2d v0.31.1
+   Compiling rustc-hash v1.1.0
+   Compiling sys-locale v0.3.2
+   Compiling rangemap v1.8.0
+   Compiling smol_str v0.2.2
+   Compiling unicode-linebreak v0.1.5
+   Compiling self_cell v1.3.0
+   Compiling unicode-bidi v0.3.18
+   Compiling rapier2d v0.36.0
+   Compiling cosmic-text v0.14.2 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/third_party/cosmic-text)
+   Compiling rapier3d v0.36.0
+   Compiling zeno v0.3.3
+   Compiling incant_text v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_text)
+   Compiling incant_physics_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_physics_runtime)
+   Compiling incant_physics_2d_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_physics_2d_runtime)
+   Compiling float-cmp v0.10.0
+   Compiling meshopt v0.6.2
+   Compiling incant_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_runtime)
+   Compiling ktx2 v0.5.0
+   Compiling incant_assets_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_assets_runtime)
+   Compiling incant_script v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_script)
+   Compiling taffy v0.14.0
+   Compiling incant_ui v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_ui)
+   Compiling incant_audio_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_audio_runtime)
+   Compiling incant_cook v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_cook)
+   Compiling incant_render_data v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_render_data)
+   Compiling incant_render_native v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_render_native)
+   Compiling incant_game_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_game_runtime)
+   Compiling incant_game_player v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_game_player)
+   Compiling incant_render_game v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_render_game)
+   Compiling incant_observe v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_observe)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 36.96s
+     Running unittests src/lib.rs (/tmp/incant-font-atlas-target/debug/deps/incant_game_player-53fe87b1aa675ec1)
+
+running 1 test
+test restart::input::tests::fresh_game_gets_topology_but_never_a_held_press_or_axis ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 9 filtered out; finished in 0.00s
+
