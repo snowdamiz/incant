@@ -31,3 +31,5 @@ stages. macOS/Linux retain 40 minutes, every existing check remains, and the job
 still runs only in full checkpoint validation. Actionlint 1.7.12 (verified against
 its published archive checksum) and six release-policy tests pass. This isolated
 workflow edit followed the frozen renderer checks and changed no compiled inputs.
+
+[Independent current-main review](evidence/native-ui-unorm-main154/root-final-review.json) accepted the exact source, retained checks and Windows-only timeout correction.
