@@ -79,3 +79,13 @@ The actual main125 ancestry merge has the identical tested tree. Current checks
 pass 363 navigation/runtime/script tests plus the strict source-deleted cook test,
 all-target Clippy, wasm32 compilation, SDK/template types and dependency guards.
 [Exact sources and retained check hashes](evidence/native-steering-main125.json).
+
+### Isolated physics probe correction
+
+The initial PR126 fast check caught a stale isolated physics lockfile: its
+`incant_nav` row lacked the new `incant_types` edge. Locked offline Cargo metadata
+and the structural guard reproduce the refusal. Adding only that edge makes both
+native and wasm32-filtered resolution and all nine guards pass. Full tooling passes
+223 Python cases (four platform skips) and 22 Node cases. No version, runtime
+source or check policy changed. The original hosted failure is retained in
+[the reviewed correction evidence](evidence/native-steering-probe-lock.json).
