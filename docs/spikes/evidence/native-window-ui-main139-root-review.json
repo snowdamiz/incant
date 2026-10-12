@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-12T13:21:21.747203+00:00",
+  "verdict": "Accepted scoped current-main integration; original two source inputs exact and numerical evidence unchanged. No visual review.",
+  "evidence_sha256": "27969ea18d190b5a176838762bebcca9bacf28dbf1bdc6d5bbeab1e740ec0fce",
+  "frozen_inputs": 1474,
+  "verified_logs": 5,
+  "verified_receipts": 4,
+  "tests": 138,
+  "groups": 23,
+  "same_tree": "cb71dcf5104bb3cbe68ef2e0031094d87cd66f43",
+  "limits": [
+    "CPU checks only; no new native window/GPU/provider execution. Claude0057 actual window/IME/HiDPI/pixel acceptance remains separate.",
+    "Reserved size uses configured SurfaceState reservation metadata, not an independently measured driver texture.",
+    "Original scoped Claude0056 Metal and appearance evidence remains bound to its frozen binary. No phone/performance/full Game UI or phase-gate claim."
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "at": "2026-10-12T13:20:30.332468+00:00",
+  "base": "3b316029d664d56e445a7823c888d04b174389a3",
+  "tested_head": "5b6307854c7ca1595cbcbab882f96c1bf3919b68",
+  "actual_main_integration_head": "7bea59ae8d019548914390eeda9fed6f94393e4d",
+  "tree": "cb71dcf5104bb3cbe68ef2e0031094d87cd66f43",
+  "tested_tree_equal": true,
+  "source_commits": [
+    "407ca9da1b29272789f2b77ef5ac69113e2a586e",
+    "5399dcd4cad0265dcc0448ccd1f848518f76bf9f"
+  ],
+  "source_hashes": {
+    "crates/incant_game_player/src/window/mod.rs": "d4e3a5339241cbcebcb8935d1a18fddf3f9e629e4ad2f4dd459ccf559bd15b07",
+    "crates/incant_game_player/src/window/surface.rs": "42eba11f0c95ea913ec6aac57e13b130a4d9f7a13ca898a9456c67c50eb4b8e6"
+  },
+  "frozen_input_count": 1474,
+  "checks": {
+    "passed": 138,
+    "failed": 0,
+    "ignored": 0,
+    "groups": 23,
+    "clippy": true,
+    "normal_graph": true,
+    "fmt_conventions": true
+  },
+  "logs": {
+    "docs/spikes/evidence/native-window-ui-main139/tests.log.gz": {
+      "sha256": "d81d28230a308d2e0a970a4997792583fb0db383f3c04f72e468c216cf911868",
+      "uncompressed_sha256": "984f78fb63270b4041db6c34358d8e28c4c91dd42f959165236b8194b9931222"
+    },
+    "docs/spikes/evidence/native-window-ui-main139/clippy.log.gz": {
+      "sha256": "81b5e1d318ec6c8686c4be6745766fe381ef9a37465ad12c1014091ddbd4d854",
+      "uncompressed_sha256": "6fd23e92e200c7abc56bf36bc6949fd56c4942732ccea6ee0bba3b3bf79259eb"
+    },
+    "docs/spikes/evidence/native-window-ui-main139/graph.log.gz": {
+      "sha256": "a1453519251971c8187d2004dc510036ddccc25f7b16d4983f14a1f2191913da",
+      "uncompressed_sha256": "07d87a62d54ea4bd4f630d421b90904510f782b795c04820a194e18835a118dc"
+    },
+    "docs/spikes/evidence/native-window-ui-main139/fmt.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/native-window-ui-main139/conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "receipts": {
+    "docs/spikes/evidence/native-window-ui-main139/freeze.json": "cbe17a8562b3ed7b1f1eac4fbc123156d6f506193cae17ae994539c531fd82bb",
+    "docs/spikes/evidence/native-window-ui-main139/results.json": "9d5c750c39921ecff14a04aeef262e31966218ca9aec063db60d254896866861",
+    "docs/spikes/evidence/native-window-ui-main139/incant-pr139-merge-verified.json": "94a39e19b2c95d4b379c596189d44f7bb0be3446d80e706d05c13ffa5f76a0c9"
+  },
+  "original_source_review": {
+    "path": "docs/spikes/evidence/native-window-ui-reserved/independent-review.json",
+    "sha256": "4c8e906233531ed9437fa1f702a83ad93446eea50fb386b3f11760dd64d222d9"
+  },
+  "recovery": "After interruption all5 completed results/logs and all1474 frozen source bytes independently rechecked; no builds remained. No assumption of process completion or redundant test restart.",
+  "limits": [
+    "CPU checks only; no new native window/GPU/provider execution. Claude0057 actual window/IME/HiDPI/pixel acceptance remains separate.",
+    "Reserved size uses configured SurfaceState reservation metadata, not an independently measured driver texture.",
+    "Original scoped Claude0056 Metal and appearance evidence remains bound to its frozen binary. No phone/performance/full Game UI or phase-gate claim."
+  ]
+}
