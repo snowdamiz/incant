@@ -34,7 +34,7 @@ pub enum ImportError {
     #[error("multiple assets use source {0}; resolve their identities before reimport")]
     AmbiguousSource(String),
     #[error(
-        "unsupported import source: {0}; expected glTF, GLB, FBX, PNG, JPEG, EXR, .atlas.json, WAV, OGG, TTF or OTF"
+        "unsupported import source: {0}; expected glTF, GLB, FBX, PNG, JPEG, EXR, .atlas.json, WAV, OGG, TTF, OTF or WASM"
     )]
     Unsupported(String),
     #[error("texture usage applies only to standalone images: {0}")]
@@ -65,6 +65,13 @@ pub struct ImportRequest {
 #[derive(Debug, Serialize)]
 #[serde(untagged)]
 pub enum ImportDetails {
+    Wasm {
+        bytes: usize,
+        input_sha256: String,
+        prepared_sha256: String,
+        registry_sha256: String,
+        dependencies: Vec<Dependency>,
+    },
     Font {
         bytes: u32,
         dependencies: Vec<Dependency>,
@@ -162,6 +169,7 @@ impl ImportSnapshot {
                 "png" | "jpg" | "jpeg" | "exr" => ImportKind::Texture,
                 "wav" | "ogg" => ImportKind::Audio,
                 "ttf" | "otf" => ImportKind::Font,
+                "wasm" => ImportKind::Wasm,
                 "json" if request.source.to_ascii_lowercase().ends_with(".atlas.json") => {
                     ImportKind::Texture
                 }
@@ -262,6 +270,7 @@ enum ImportKind {
     Texture,
     Audio,
     Font,
+    Wasm,
 }
 
 fn cook(
@@ -272,7 +281,33 @@ fn cook(
     kind: ImportKind,
 ) -> incant_assets::Result<ImportOutcome> {
     let source = Path::new(&request.source);
-    let (kind, fingerprint, cache_hit, import_settings, details) = if kind == ImportKind::Model {
+    let (kind, fingerprint, cache_hit, import_settings, details) = if kind == ImportKind::Wasm {
+        let cache = cache_directory(root, cache_override, "wasm")?;
+        std::fs::create_dir_all(&cache)?;
+        let bytes = incant_assets::SourceSet::new(root)?
+            .read_limited(source, incant_wasm_cook::MAX_MODULE_BYTES)?;
+        let captured = incant_wasm_cook::CapturedModule::capture(&bytes)
+            .map_err(|e| AssetError::Invalid(e.to_string()))?;
+        let hit = captured
+            .store(&cache)
+            .map_err(|e| AssetError::Invalid(e.to_string()))?;
+        (
+            "wasm",
+            captured.fingerprint(),
+            hit,
+            None,
+            ImportDetails::Wasm {
+                bytes: bytes.len(),
+                input_sha256: captured.input_sha256().into(),
+                prepared_sha256: captured.prepared_sha256().into(),
+                registry_sha256: captured.registry_sha256().into(),
+                dependencies: vec![Dependency {
+                    path: request.source.clone(),
+                    sha256: captured.input_sha256().into(),
+                }],
+            },
+        )
+    } else if kind == ImportKind::Model {
         let cache = cache_directory(root, cache_override, "models")?;
         let cooked = cook_model(root, source, &cache)?;
         (

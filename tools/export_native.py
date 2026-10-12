@@ -4,8 +4,8 @@
 Usage: python3 tools/export_native.py PROJECT OUTPUT [--scene ULID] [--camera ULID]
        [--mode headless|window]
 
-Only the trusted engine is compiled. Project JSON/TypeScript is bounded compiler
-input, never Cargo configuration or a native build script. Existing cooked data
+The trusted engine and validated, metered Wasm translated by pinned wasm2c are
+compiled. Project data never selects Cargo configuration or native build scripts. Existing cooked data
 caches are required. This host==target exporter is unsigned and does not satisfy
 phone, store, performance, full export, or phase gates.
 """
@@ -42,7 +42,7 @@ def normal_dependencies(metadata):
     require(len(pending) == 1, 'Missing unique native player')
     seen = set()
     forbidden = {'incant_doc', 'incant_cmd', 'incant_agent', 'incant_core', 'incant_cook',
-                 'incant_source', 'incant_play', 'incant_play_legacy', 'loro', 'automerge'}
+                 'incant_source', 'incant_play', 'incant_play_legacy', 'incant_wasm_cook', 'incant_wasm_dev', 'loro', 'automerge'}
     while pending:
         ident = pending.pop()
         if ident in seen:
@@ -98,7 +98,7 @@ def runtime_symbol_audit(executable, kind, llvm_bin, link_map):
     return evidence
 
 
-def build(project, staging, storage, scene, camera, mode):
+def build(project, staging, storage, scene, camera, mode, wabt=None):
     rustc = Path(execute(['rustup', 'which', 'rustc']).stdout.strip())
     compiler = execute([rustc, '-vV']).stdout
     host = re.search(r'^host: (.+)$', compiler, re.MULTILINE).group(1)
@@ -111,13 +111,17 @@ def build(project, staging, storage, scene, camera, mode):
         if (name in ('RUSTFLAGS', 'CARGO_ENCODED_RUSTFLAGS', 'RUSTC', 'RUSTC_WRAPPER', 'RUSTC_WORKSPACE_WRAPPER')
                 or name.startswith('CARGO_PROFILE_') or name.endswith('_RUSTFLAGS')):
             require(not value, f'Unset {name} for the audited shipping exporter')
-    env = {k: v for k, v in os.environ.items() if not k.startswith(('INCANT_NATIVE_SCRIPT_', 'INCANT_NATIVE_PROJECT'))}
+    env = {k: v for k, v in os.environ.items() if not k.startswith(('INCANT_NATIVE_SCRIPT_', 'INCANT_NATIVE_PROJECT', 'INCANT_NATIVE_WASM_', 'INCANT_WASM_BUNDLE', 'INCANT_AUTHORED_WASM'))}
     env.update(PATH=str(rustc.parent) + os.pathsep + env.get('PATH', ''), INCANT_NATIVE_PROJECT=str(project))
     if scene is not None:
         env['INCANT_NATIVE_PROJECT_SCENE'] = scene
     cargo = ROOT / 'tools/cargo' if os.name != 'nt' else rustc.with_name('cargo.exe')
     features = 'project,' + ('native-window' if mode == 'window' else 'render-input')
     project_hash = sha256(read(project, 64 * 1024**2))
+    from native_wasm import capture
+    module = capture(project, scene, storage, cargo, env, execute, wabt)
+    if module is not None:
+        features += ',static-module'
     metadata = json.loads(execute([cargo, 'metadata', '--locked', '--format-version=1', '--filter-platform', host,
                                    '--features', ','.join(NAME + '/' + f for f in features.split(','))], env=env).stdout)
     graph = normal_dependencies(metadata)
@@ -147,6 +151,8 @@ def build(project, staging, storage, scene, camera, mode):
     receipt = json.loads(read(producer / 'project-export.json', 4 * 1024**2))
     require(receipt['project_sha256'] == project_hash == sha256(read(project, 64 * 1024**2)), 'Project changed during build')
     require(receipt['target'] == host and receipt['startup_source_parsing'] is False, 'Project producer target/mode mismatch')
+    if module is not None:
+        require(all(receipt['program'].get(k) == v for k, v in module.items()), 'Wasm program changed during export')
     chosen_camera = select_camera(receipt, camera, mode == 'window')
     symbol_audit = runtime_symbol_audit(executable, kind, llvm_bin, link_map)
     player, identity = package(executable, staging, kind, llvm_bin)
@@ -159,7 +165,7 @@ def build(project, staging, storage, scene, camera, mode):
     write_json(staging / 'project-build.json', receipt)
     return player, {'format': 'incant-native-export', 'version': 1, 'target': host, 'mode': mode,
                     'project_sha256': project_hash, 'scene_id': receipt['scene_id'], 'camera': chosen_camera,
-                    'compiler': compiler, 'codegen': flags, 'normal_dependencies': graph, 'symbols': identity,
+                    'program': receipt.get('program'), 'compiler': compiler, 'codegen': flags, 'normal_dependencies': graph, 'symbols': identity,
                     'symbol_audit': symbol_audit,
                     'player_sha256': sha256(read(player, 256 * 1024**2)), 'data': data,
                     'startup_source_parsing': False, 'signed': False,
@@ -167,7 +173,7 @@ def build(project, staging, storage, scene, camera, mode):
                                'window export GPU execution requires a desktop', 'no phone or performance gate']}
 
 
-def export(project, output, scene=None, camera=None, mode='headless'):
+def export(project, output, scene=None, camera=None, mode='headless', wabt=None):
     require(mode in ('headless', 'window'), 'Unknown native export mode')
     project = project.resolve(strict=True)
     output = output.absolute()
@@ -180,7 +186,7 @@ def export(project, output, scene=None, camera=None, mode='headless'):
         staging = Path(temporary).resolve()
         with tempfile.TemporaryDirectory(prefix='incant-project-build-') as scratch:
             storage = Path(scratch).resolve()
-            player, report = build(project, staging, storage, scene, camera, mode)
+            player, report = build(project, staging, storage, scene, camera, mode, wabt)
         require(not storage.exists(), 'Private build storage was not removed')
         print('Checking copied player after removal of private build storage...', flush=True)
         runtime_env = {'PATH': str(player.parent), 'HOME': str(staging / 'absent-home'),
@@ -202,12 +208,13 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('project', type=Path)
     parser.add_argument('output', type=Path)
+    parser.add_argument('--wabt', type=Path, help='Trusted pinned WABT 1.0.42 directory for authored Wasm export')
     parser.add_argument('--scene')
     parser.add_argument('--camera')
     parser.add_argument('--mode', choices=('headless', 'window'), default='headless')
     args = parser.parse_args()
     try:
-        result = export(args.project, args.output, args.scene, args.camera, args.mode)
+        result = export(args.project, args.output, args.scene, args.camera, args.mode, args.wabt)
     except (OSError, ValueError, subprocess.SubprocessError) as error:
         parser.exit(1, f'Native export failed: {error}\n')
     print(json.dumps({'output': str(args.output.absolute()), 'target': result['target'], 'player_sha256': result['player_sha256']}))

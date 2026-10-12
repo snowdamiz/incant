@@ -713,6 +713,16 @@
         },
         "name": {
           "type": "string"
+        },
+        "program": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SceneProgram"
+            },
+            {
+              "type": "null"
+            }
+          ]
         }
       },
       "required": [
@@ -721,6 +731,28 @@
         "entities"
       ],
       "type": "object"
+    },
+    "SceneProgram": {
+      "description": "One scene-wide native module; absent preserves authored TypeScript behavior.",
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "wasm",
+              "type": "string"
+            },
+            "module": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "module"
+          ],
+          "type": "object"
+        }
+      ]
     },
     "Schedule": {
       "additionalProperties": false,

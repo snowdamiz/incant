@@ -11,8 +11,11 @@ default = ["compiler"]
 compiler = []
 # Trusted build-linked wasm2c modules; no runtime compiler/JIT or module loader.
 static-module = ["dep:incant_wasm_runtime"]
+# Development-only raw Wasm host, explicitly absent from native exports.
+wasmtime-host = ["dep:incant_wasm_dev", "incant_wasm_dev/wasmtime-host"]
 
 [dependencies]
+incant_wasm_dev = { path = "../incant_wasm_dev", optional = true }
 incant_localization.workspace = true
 incant_wasm_runtime = { path = "../incant_wasm_runtime", optional = true }
 incant_runtime.workspace = true

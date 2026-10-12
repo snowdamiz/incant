@@ -70,6 +70,14 @@ pub struct Scene {
     pub id: Id,
     pub name: String,
     pub entities: BTreeMap<Id, Entity>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub program: Option<SceneProgram>,
+}
+/// One scene-wide native module; absent preserves authored TypeScript behavior.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
+#[serde(tag = "kind", rename_all = "snake_case", deny_unknown_fields)]
+pub enum SceneProgram {
+    Wasm { module: Id },
 }
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
@@ -320,6 +328,28 @@ impl Project {
             }
             if scene.name.trim().is_empty() {
                 issue(format!("{path}/name"), "name cannot be empty");
+            }
+            if let Some(SceneProgram::Wasm { module }) = &scene.program {
+                if self
+                    .assets
+                    .get(module)
+                    .is_none_or(|asset| asset.kind != "wasm")
+                {
+                    issue(
+                        format!("{path}/program/module"),
+                        "scene program requires an existing wasm asset",
+                    );
+                }
+                if scene
+                    .entities
+                    .values()
+                    .any(|entity| entity.components.contains_key("Script"))
+                {
+                    issue(
+                        format!("{path}/program"),
+                        "Wasm scene programs cannot mix with per-entity TypeScript scripts",
+                    );
+                }
             }
             for (eid, entity) in &scene.entities {
                 let path = format!("{path}/entities/{eid}");
@@ -742,6 +772,7 @@ impl Scene {
             id: new_id(),
             name: name.into(),
             entities: BTreeMap::new(),
+            program: None,
         }
     }
 }

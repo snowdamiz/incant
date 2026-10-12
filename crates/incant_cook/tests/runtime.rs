@@ -31,6 +31,7 @@ fn fixture() -> (Project, String, String) {
     project.scenes.insert(
         scene_id.clone(),
         Scene {
+            program: None,
             id: scene_id.clone(),
             name: "Main".into(),
             entities: BTreeMap::from([(entity_id.clone(), entity)]),

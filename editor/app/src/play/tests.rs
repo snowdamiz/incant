@@ -204,7 +204,8 @@ fn actual_cpu_play_commits_logs_once_and_failed_callback_never_enters_transport(
             chunks[0].transforms[0]+=1;\n\
         }};",
         )
-        .unwrap(),
+        .unwrap()
+        .into(),
         actions: Default::default(),
         clips: vec![],
         sample_rate: 48000,

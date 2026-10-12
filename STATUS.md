@@ -16,6 +16,23 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Public authored Wasm route — locally verified
+
+One typed scene module now connects public bounded `.wasm` import/reimport,
+atomic selection/clear with provenance and Undo, durable editor-default journal
+reopen, captured-only Wasmtime development Play and the ordinary native exporter.
+The exporter translates the exact validated/metered capture with pinned wasm2c;
+ordinary `--package` startup automatically selects the linked guest. A real Rust
+SDK guest and three fresh source/cache/build-deleted packaged processes agree on
+20 ticks of clock, controls, movement and committed logs. Malformed/stale/mixed
+inputs and forged cache identities refuse. Scoped 261 Rust tests, all-target
+Clippy, editor/wasm compilation, tooling/contracts and 936 UI tests pass locally.
+The shipping graph excludes Wasmtime, cooker and authoring dependencies. Full
+guest checkpoints remain explicitly Unsupported, including active/paused
+crossfade sessions. Full SDK, routed UI ABI, other shipping platforms, device
+performance and phase gates remain open; this scoped work awaits integration.
+[Contract and measured evidence](docs/spikes/authored-wasm-export.md).
+
 ## Durable budget lock release — correction validated locally
 
 Checkpoint7 exposed Busy when reopening a completed ledger. A private lock guard
@@ -690,8 +707,9 @@ applicable checks passed; its actual-main tree equals the tested head. [Integrat
 - Complete animation, navigation, game UI/text/IME, localization and remaining
   input/haptics/native SDK deliverables. Existing scoped/legacy implementations
   are not evidence of full native feature parity.
-- Integrate Wasm gameplay modules into the complete runtime and export route;
-  generate the Rust SDK, establish platform/device conformance and measure the
+- Complete Wasm gameplay SDK and module checkpoint coverage beyond the locally
+  verified single-scene public import/Play/export route; establish platform/device
+  conformance and measure the
   settled TypeScript AOT/physics candidate adoption rules. Do not reopen Section
   12 decisions or substitute desktop timings for reference-phone results.
 - Build and exercise Core Sample and the 2D sample on the required device classes,

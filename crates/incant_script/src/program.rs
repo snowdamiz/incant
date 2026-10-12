@@ -17,6 +17,8 @@ use incant_runtime::NativeWorld;
 #[allow(clippy::large_enum_variant)]
 pub enum SessionProgram {
     Bytecode(CompiledScript),
+    #[cfg(feature = "wasmtime-host")]
+    DevelopmentWasm(Vec<u8>),
     #[cfg(feature = "static-module")]
     Static(incant_wasm_runtime::ModuleExports),
 }
@@ -34,6 +36,10 @@ impl From<incant_wasm_runtime::ModuleExports> for SessionProgram {
 impl SessionProgram {
     pub(crate) fn start(self, world: &NativeWorld) -> Result<SessionVm, SessionError> {
         match self {
+            #[cfg(feature = "wasmtime-host")]
+            Self::DevelopmentWasm(bytes) => Ok(SessionVm::DevelopmentWasm(Box::new(
+                incant_wasm_dev::DevModuleHost::new(&bytes)?,
+            ))),
             Self::Bytecode(script) => Ok(SessionVm::Bytecode(Box::new(ScriptHost::for_world(
                 script, world,
             )?))),
@@ -48,6 +54,8 @@ impl SessionProgram {
 // private state. Tick dispatch creates no additional allocation or mutation path.
 pub(crate) enum SessionVm {
     Bytecode(Box<ScriptHost>),
+    #[cfg(feature = "wasmtime-host")]
+    DevelopmentWasm(Box<incant_wasm_dev::DevModuleHost>),
     #[cfg(feature = "static-module")]
     Static(Box<incant_wasm_runtime::StaticModule>),
 }
@@ -55,6 +63,8 @@ impl SessionVm {
     pub fn logs(&self) -> Result<&crate::NativeLogs, SessionError> {
         match self {
             Self::Bytecode(host) => Ok(host.logs()?),
+            #[cfg(feature = "wasmtime-host")]
+            Self::DevelopmentWasm(host) => Ok(host.logs()?),
             #[cfg(feature = "static-module")]
             Self::Static(host) => Ok(host.logs()?),
         }
@@ -68,6 +78,8 @@ impl SessionVm {
     ) -> Result<(), SessionError> {
         match self {
             Self::Bytecode(host) => Ok(host.tick_with_input(world, dt, input)?),
+            #[cfg(feature = "wasmtime-host")]
+            Self::DevelopmentWasm(host) => Ok(host.tick_with_input(world, dt, input)?),
             #[cfg(feature = "static-module")]
             Self::Static(host) => Ok(host.tick_with_input(world, dt, input)?),
         }

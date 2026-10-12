@@ -5,6 +5,9 @@ edition.workspace = true
 rust-version.workspace = true
 publish.workspace = true
 
+[features]
+wasmtime-host = ["incant_play/wasmtime-host"]
+
 [dependencies]
 incant_agent_native = { path = "../incant_agent_native" }
 incant_play = { path = "../incant_play" }

@@ -120,6 +120,11 @@ impl AssetStore {
         let mut changes = AssetChanges::default();
         let reuse = self.scope.as_ref() == Some(&scope);
         for (id, asset) in &project.assets {
+            // Program modules are resolved by native Play/export from the captured
+            // Wasm cache, never decoded as a renderer/audio asset.
+            if asset.kind == "wasm" {
+                continue;
+            }
             let version = match self
                 .assets
                 .get(id)

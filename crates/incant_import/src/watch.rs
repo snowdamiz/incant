@@ -238,7 +238,7 @@ impl SourceWatcher {
             entry.attempted = Some(now);
             let result = if matches!(
                 entry.asset.kind.as_str(),
-                "model" | "texture" | "audio" | "font"
+                "model" | "texture" | "audio" | "font" | "wasm"
             ) {
                 snapshot.clone().prepare(
                     &self.root,
@@ -278,7 +278,8 @@ fn clear(entry: &mut Entry, report: &mut WatchReport) {
 
 fn dependencies(details: &ImportDetails) -> &[Dependency] {
     match details {
-        ImportDetails::Font { dependencies, .. }
+        ImportDetails::Wasm { dependencies, .. }
+        | ImportDetails::Font { dependencies, .. }
         | ImportDetails::Audio { dependencies, .. }
         | ImportDetails::Model { dependencies, .. }
         | ImportDetails::Texture { dependencies, .. } => dependencies,
@@ -288,6 +289,17 @@ fn dependencies(details: &ImportDetails) -> &[Dependency] {
 fn cached_dependencies(root: &Path, asset: &Asset) -> Option<Vec<Dependency>> {
     crate::validate_path(&asset.path).ok()?;
     let mut deps = match asset.kind.as_str() {
+        "wasm" => {
+            let module = incant_wasm_cook::CapturedModule::load(
+                &incant_wasm_cook::project_cache(root, false).ok()?,
+                &asset.sha256,
+            )
+            .ok()?;
+            vec![Dependency {
+                path: asset.path.clone(),
+                sha256: module.input_sha256().into(),
+            }]
+        }
         "model" => {
             load_model(
                 &project_cache_directory(root, CacheKind::Models).ok()?,

@@ -50,7 +50,7 @@ pub struct PreparedPlay {
     pub script_source_sha256: String,
     pub authored_scripts: bool,
     pub cooked: CookedScene,
-    pub code: CompiledScript,
+    pub code: incant_script::SessionProgram,
     pub actions: InputActions,
     pub clips: Vec<ClipBinding>,
     pub sample_rate: u32,
@@ -82,6 +82,8 @@ impl PreparedPlay {
         };
         id(&scene)?;
         let camera = options.camera.as_deref().map(id).transpose()?;
+        document.validate().map_err(native)?;
+        let authored_module = document.scenes.get(&scene).and_then(|s| s.program.as_ref());
         let authored_scripts = document.scenes.get(&scene).is_some_and(|scene| {
             scene
                 .entities
@@ -90,7 +92,39 @@ impl PreparedPlay {
         });
         let animations = incant_cook::load_project_animation_resources(document, &scene, root)
             .map_err(native)?;
-        let (cooked, code) = if authored_scripts {
+        let (cooked, code, script_source_sha256) = if let Some(incant_doc::SceneProgram::Wasm {
+            module,
+        }) = authored_module
+        {
+            #[cfg(not(feature = "wasmtime-host"))]
+            {
+                let _ = module;
+                return Err(invalid(
+                    "Wasm Play requires the wasmtime-host development feature",
+                ));
+            }
+            #[cfg(feature = "wasmtime-host")]
+            {
+                let asset = &document.assets[module];
+                let captured = incant_wasm_cook::CapturedModule::load(
+                    &incant_wasm_cook::project_cache(root, false).map_err(native)?,
+                    &asset.sha256,
+                )
+                .map_err(native)?;
+                let bytes = incant_cook::cook_scene_with_resources(
+                    document,
+                    &scene,
+                    &Default::default(),
+                    &animations,
+                )
+                .map_err(native)?;
+                (
+                    CookedScene::from_bytes(&bytes).map_err(native)?,
+                    incant_script::SessionProgram::DevelopmentWasm(captured.original().to_vec()),
+                    captured.input_sha256().to_owned(),
+                )
+            }
+        } else if authored_scripts {
             let prepared = incant_cook::prepare_script_scene_with_resources(
                 document,
                 &scene,
@@ -98,10 +132,12 @@ impl PreparedPlay {
                 &animations,
             )
             .map_err(native)?;
-            incant_cook::compile_project_sources(prepared, root)
+            let (cooked, code) = incant_cook::compile_project_sources(prepared, root)
                 .map_err(native)?
                 .program
-                .into_parts()
+                .into_parts();
+            let hash = source_hash(&code);
+            (cooked, code.into(), hash)
         } else {
             let bytes = incant_cook::cook_scene_with_resources(
                 document,
@@ -110,9 +146,12 @@ impl PreparedPlay {
                 &animations,
             )
             .map_err(native)?;
+            let code = fallback().map_err(native)?;
+            let hash = source_hash(&code);
             (
                 CookedScene::from_bytes(&bytes).map_err(native)?,
-                fallback().map_err(native)?,
+                code.into(),
+                hash,
             )
         };
         if camera.is_none()
@@ -195,12 +234,6 @@ impl PreparedPlay {
                 .map_err(native)?,
             );
         }
-        let script_source_sha256 = code
-            .metadata()
-            .source_sha256
-            .iter()
-            .map(|b| format!("{b:02x}"))
-            .collect();
         if options
             .script_sha256
             .as_ref()
@@ -223,4 +256,12 @@ impl PreparedPlay {
             render: settings,
         })
     }
+}
+
+fn source_hash(code: &CompiledScript) -> String {
+    code.metadata()
+        .source_sha256
+        .iter()
+        .map(|b| format!("{b:02x}"))
+        .collect()
 }
