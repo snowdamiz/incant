@@ -26,7 +26,7 @@ corrected implementation passes 355 actual-host tests/doctests, Clippy and three
 development processes, plus supported wasm32/tooling checks. Independent source
 review closed a forged-rest-destination parser case. The actual main132 union
 repeats all 355 cases and three development processes with the 31 reviewed source
-inputs unchanged; its fast publication gate remains pending. Complete animation/SDK, guest checkpoints, device and
+inputs unchanged; PR #134 passed its fast gate and merged. Complete animation/SDK, guest checkpoints, device and
 phase requirements remain open. [Contract/evidence](docs/spikes/native-animation-graph-sdk.md).
 
 ## Public authored Wasm route — current-main integration verified
@@ -90,6 +90,18 @@ independent reads, then verifies recovered state. Seven local tests and Clippy
 pass; PR #113 merged the fixture correction. Checkpoint7 Windows desktop and
 Wasm conformance both pass.
 [Journal test evidence](docs/spikes/checkpoint6-budget-journal-tests.md).
+
+## Checkpoint9 agent fixture correction
+
+The frozen main132 release run reaches the same pre-provider test assertion in
+Linux/macOS/Windows credential checks and Linux desktop tests: the old fixed
+allowance is smaller than the current generated tool input. Only that fixture
+now derives its allowance from the current catalog, retaining exact redaction,
+conservative full charging and no-mutation assertions. The unchanged baseline
+fails locally; all 108 agent tests and Clippy pass after the correction, with
+independent source/evidence review. Checkpoint9 remains failed and unpromoted;
+actual cross-platform repair validation needs a later frozen batch.
+[Evidence](docs/spikes/checkpoint9-agent-fixture.md).
 
 ## Latest comprehensive release baseline
 
