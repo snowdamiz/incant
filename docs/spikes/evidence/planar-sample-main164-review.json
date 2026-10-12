@@ -1,0 +1,44 @@
+{
+  "kind": "independent-planar-main164-integration-review",
+  "at": "2026-10-12T20:21:30.734743+00:00",
+  "reviewer": "astra /root/native_wasm_export",
+  "accepted": true,
+  "findings": [],
+  "head": "b4689cf07e8a428633bc94e60bb86f20c85392ba",
+  "manifest_sha256": "fada349c42284b20aabf7c44e5e7e22ef12644d36e58299c29d27c4ac5261112",
+  "directly_rehashed": {
+    "retained_compressed_and_raw_artifacts": 43,
+    "surviving_originals": 43,
+    "frozen_current_inputs": 1832,
+    "producer_source_blobs": 5,
+    "original_producer_compressed_raw_and_originals": 79,
+    "headless_bytes": 60143808
+  },
+  "engine_matches": {
+    "prior_engine_inputs": 1827,
+    "sole_difference": [
+      ".github/workflows/desktop.yml"
+    ],
+    "reason": "Five additive workflow scenario/artifact lines are not compiled inputs"
+  },
+  "actual_retained_execution": {
+    "checks": 7,
+    "policy_tests": 28,
+    "native_scenarios": 7,
+    "public_observation_checks": 19,
+    "authoring_undo_redo_default_journal_reopen": true,
+    "exact_keyboard_gamepad_repeat_reports": true,
+    "silent_pcm_hashes_recomputed": true
+  },
+  "limits": [
+    "Read-only review; no new build or execution",
+    "Fresh integration evidence is native CPU gameplay on unchanged main163 build closure plus main164 ancestry; original source-free shipping remains accepted main160 evidence, not a fresh main163/main164 export",
+    "Simultaneous hazard/exit priority and optional follow-camera remain source-reviewed only",
+    "No rendered appearance, native-window, physical gamepad, device performance, or physics checkpoint claim"
+  ],
+  "producer_shipping_review": {
+    "accepted": true,
+    "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-final-20261012.json",
+    "sha256": "ec88e1b92906b897ea103d6319c7a28742d6cd2043f96bd3b1b4aa62f65f75b1"
+  }
+}

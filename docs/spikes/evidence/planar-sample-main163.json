@@ -1,0 +1,586 @@
+{
+  "scope": "Unchanged accepted planar sample on main163 with numerical CPU native Play verification.",
+  "tested_head": "258acf62b8de26619a7eeb02eac2290806451bdf",
+  "main": "4347bf0faa7e3b305f425ed4bb8bbf02b7c2a07f",
+  "sources": {
+    "samples/planar/gameplay.ts": "ccd01284ad30ff4cc9d3070a8220890509af160f3aae4521f0954502fdf45e5e",
+    "samples/planar/verify.py": "f26d5d2441e840e1dfa87744ce339ed9af731268757540bbc44e809815f38396",
+    "samples/planar/export_verify.py": "0e19662fbee6bd10e6070ea607428eaf23ce77d077d37c9cdae89bfc796672b0",
+    "samples/planar/tsconfig.json": "869922e94ccde7a4c5d023dcc15dc661034031b34d42cbfaa41a4a354abc625b",
+    ".github/workflows/desktop.yml": "b9942e4333403d578dc0096c66c4504d338a1635b82462da32b187439da9ecc7"
+  },
+  "engine_matches": {
+    "headless": {
+      "source_head": "ae013e20eb2b60a1440fe20cf7b92d1e481ab44e",
+      "profile": "ci",
+      "features": [],
+      "sha256": "c6adb728ebd40936a09f93223d0a8e65394d218c79eb506958a5ea789ea6ae8b",
+      "bytes": 60143808
+    },
+    "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/freeze.json",
+    "only_exemption": {
+      "path": ".github/workflows/desktop.yml",
+      "reason": "Five additive CI scenario/artifact lines; not a compiled input"
+    }
+  },
+  "checks": [
+    {
+      "name": "types",
+      "command": [
+        "node_modules/.bin/tsc",
+        "-p",
+        "samples/planar/tsconfig.json"
+      ],
+      "exit": 0,
+      "seconds": 0.35829991600257927,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "gameplay",
+      "command": [
+        "python3",
+        "samples/planar/verify.py",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/gameplay",
+        "--binary",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/incant_headless"
+      ],
+      "exit": 0,
+      "seconds": 8.724081167001714,
+      "sha256": "2e405a5d7d6bd41f27ad22b66f605512aa0d4adb45d02bd36604ad65a7ce3ca9"
+    },
+    {
+      "name": "syntax",
+      "command": [
+        "python3",
+        "-c",
+        "import ast;from pathlib import Path;[ast.parse(p.read_text()) for p in Path('samples/planar').glob('*.py')]"
+      ],
+      "exit": 0,
+      "seconds": 0.04421229099898483,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "policy",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "tools.tests.test_ci_scope",
+        "tools.tests.test_release_policy"
+      ],
+      "exit": 0,
+      "seconds": 3.5620908749988303,
+      "sha256": "314a2203d1991f976d5ae2dc15a415c743620f5c41006da932954c5fed0691f1"
+    },
+    {
+      "name": "actionlint",
+      "command": [
+        "/Users/andreyyurlov/.codex/incant-tools/actionlint-1.7.12/actionlint",
+        ".github/workflows/desktop.yml"
+      ],
+      "exit": 0,
+      "seconds": 0.20533504199920571,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.04889141700186883,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.01648666699838941,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "native_result": {
+    "passed": true,
+    "binary_sha256": "c6adb728ebd40936a09f93223d0a8e65394d218c79eb506958a5ea789ea6ae8b",
+    "gameplay_sha256": "ccd01284ad30ff4cc9d3070a8220890509af160f3aae4521f0954502fdf45e5e",
+    "authoring_undo_redo_reopen": true,
+    "authoring_unchanged": true,
+    "runs": [
+      "win",
+      "gamepad",
+      "lose",
+      "wall",
+      "locked-exit",
+      "diagonal",
+      "repeat-win"
+    ],
+    "limits": [
+      "Numerical CPU fixture",
+      "No visual/device/physics save gate"
+    ]
+  },
+  "artifacts": {
+    "actionlint.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/actionlint.log"
+    },
+    "conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/conventions.log"
+    },
+    "diff.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/diff.log"
+    },
+    "freeze.json.gz": {
+      "sha256": "bfd3762737d5314d56ae71b71e870a21803d20dded3d7937f1ae8e90b50cd8b8",
+      "raw_sha256": "9f3c772eb46d9bd7bf433c6b8efaeea0ce0950bf7f8f409998e53df1dc855264",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/freeze.json"
+    },
+    "gameplay/authoring-calls.json.gz": {
+      "sha256": "2a2515e915bccd3bf028d9c0901213e8cec19091e1514425493946aac4e1b03a",
+      "raw_sha256": "a631ebd0a64aa1e0f16f465063504446482b0989d04bfd66e964cd6d7b8b7a41",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/gameplay/authoring-calls.json"
+    },
+    "gameplay/diagonal-input.json.gz": {
+      "sha256": "9171a3a78d164df4f75fb9931f6d042fa76e4e363dc799fadb3e37c1c5a0e924",
+      "raw_sha256": "dab40ff34829f2274d142e6a8b59d2077ebfc3f46e5ca19276c44c101924e564",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/gameplay/diagonal-input.json"
+    },
+    "gameplay/diagonal-observe.json.gz": {
+      "sha256": "cf9173637166c655ba9d11c9493b35f1d7f9d3a8d796ac925284d62c4e6bd40a",
+      "raw_sha256": "c8c058c55dc303980b1ba46dad77d9946b44d129fec726ac07e241fc1dbbfce7",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/gameplay/diagonal-observe.json"
+    },
+    "gameplay/diagonal.json.gz": {
+      "sha256": "ee4c410f45fee625b2db3004f58a98b51ccd7a0132c0b045fd263aada9264794",
+      "raw_sha256": "1cb3523582f2731c113a0a2450328dfd2bb026a0fabb4aa73062347634cee3fd",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/gameplay/diagonal.json"
+    },
+    "gameplay/gamepad-input.json.gz": {
+      "sha256": "7522a7dff829ea672ce3ac59b29fadd49e747fe872533ca4c8ba73ec4f66ffb8",
+      "raw_sha256": "d40f93f9a92b9164a460f61a1ba9816187d761ede7bb526c9710b5c38023ea82",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/gameplay/gamepad-input.json"
+    },
+    "gameplay/gamepad-observe.json.gz": {
+      "sha256": "73256dc626444af60f328261080f3f5e53ed1f9675563e6406efff6080d2530c",
+      "raw_sha256": "2085c417c78dd54ed09bf6344b6ed35d38dd5df9a5f89bd91b22e39cfd26b83f",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/gameplay/gamepad-observe.json"
+    },
+    "gameplay/gamepad.json.gz": {
+      "sha256": "625b3486da8821e2654cfc9746bb0e6153f146d523232fbeb1530885f2892830",
+      "raw_sha256": "a6f72f8bdd13f18bf940089908b65c92f1156bbef649205da09647ba09e4765f",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/gameplay/gamepad.json"
+    },
+    "gameplay/locked-exit-input.json.gz": {
+      "sha256": "cd9ee8ccdbd23a217f06953b911154c49023d9de7464ce251cd1fdcd803af3ed",
+      "raw_sha256": "15c29da8390f459f3a5afa5918a8499b6bcaf6937b1b7c659ab9e0b125f33b33",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/gameplay/locked-exit-input.json"
+    },
+    "gameplay/locked-exit-observe.json.gz": {
+      "sha256": "583ac662c4c885b477add8715d6f00871f4afbd3778c44e89d237529a3fff3b5",
+      "raw_sha256": "5e3742a9c37b7fe3556e4c7e1c8532642a256a987b628b38407aef602b14e46c",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/gameplay/locked-exit-observe.json"
+    },
+    "gameplay/locked-exit.json.gz": {
+      "sha256": "3f0889555c28104523db2df2f133108a0e38986639508b8eb0747ddeb3d134d9",
+      "raw_sha256": "83d6603bc1e37c61c2baa454148e33855ff2c22fc8ae0c338eb462bd347d339c",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/gameplay/locked-exit.json"
+    },
+    "gameplay/lose-input.json.gz": {
+      "sha256": "5ea8729f1d874999815ec6f3ff5d91fa0ac03544d733f446baa3f5b1075e23a1",
+      "raw_sha256": "2cbd99ee77f98d9ce4f01501f7decabf04baae615a94f906468711471259e2cd",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/gameplay/lose-input.json"
+    },
+    "gameplay/lose-observe.json.gz": {
+      "sha256": "3c4d2292270957561f7a3a2c6ef2303d6d71ce9fc329c1d7203f1bb259732d4d",
+      "raw_sha256": "8aee4dd1c2a2d7318d5051e0e62f3423896c541b7ab31291230abca0168a6793",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/gameplay/lose-observe.json"
+    },
+    "gameplay/lose.json.gz": {
+      "sha256": "d052779c0bdd48cbb00bc47fe89b8f49e5cdd2c5e124baf0566d7cb309cb57ee",
+      "raw_sha256": "d79d0caf64fc31e1a12b7eec837b265314138f53c9095558677b96a2661df3db",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/gameplay/lose.json"
+    },
+    "gameplay/process-00.json.gz": {
+      "sha256": "cd665f29cbc8516b1685aa6cc2079d6b059f48f6e233e25bc20ceb7279e6facb",
+      "raw_sha256": "8c3da2164f415436b5a041ea12ccb9b7ade1cbab579a988b89ecc125843f8acb",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/gameplay/process-00.json"
+    },
+    "gameplay/process-01.json.gz": {
+      "sha256": "ad4081a8fcbd0e34551ce2c04f9a955118ed63e51cc4309c4afe90af59791bdc",
+      "raw_sha256": "06524eefb7b60e8e1fb966084fd7498f76985ce0b4a4d785c0efd68a1f3129f5",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/gameplay/process-01.json"
+    },
+    "gameplay/process-02.json.gz": {
+      "sha256": "08e140d1868e6abb9718f96e302a21347a62b40c386aa08b2075e2fc60792f4e",
+      "raw_sha256": "8db593071ec1dd8fb9b6e38a0992d10892f712b7d9efc78971e29123f992048b",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/gameplay/process-02.json"
+    },
+    "gameplay/process-03.json.gz": {
+      "sha256": "706d87743742fc7d6d7268a2afe5b43becccfae922a7cc6fae258579e2ae846f",
+      "raw_sha256": "f3ee5cde6562b012c0347d6c7e0e4c0a2639ff229933abdff35b0d67581a1c12",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/gameplay/process-03.json"
+    },
+    "gameplay/process-04.json.gz": {
+      "sha256": "decc7cc11f585093a87845213789b48e182d2d2db7e05f4b3daae51e991923bd",
+      "raw_sha256": "6d3f3d64249f17947bb69f8a2ecf2893457abdb42e94ee58854eb31a593f69e7",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/gameplay/process-04.json"
+    },
+    "gameplay/process-05.json.gz": {
+      "sha256": "408690a992af5b9db5b0ed92e75073ca214d04f0b4ccf3cc64db766ba228d663",
+      "raw_sha256": "e8f67092e095843f100c6d9e3b159cdfad759973ab5a5658c87caf1d910d58e3",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/gameplay/process-05.json"
+    },
+    "gameplay/process-06.json.gz": {
+      "sha256": "6bbaa2e3797cd0cf61f4bcf1a0b07a1f201c3c78d7fd64a9d7e43d5e306a7131",
+      "raw_sha256": "a1b53155c5c47cf3920c8558057aaf5fdf989cc996a556e2e02f77633009a85c",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/gameplay/process-06.json"
+    },
+    "gameplay/process-07.json.gz": {
+      "sha256": "45e6c35e34dd65425f7ffbc40ea032891cc4ebac0a1d493d001c10a05e55805b",
+      "raw_sha256": "f967c75ece06714305f92ca2dc91107dfa243c389897cbd4f9cddf53ab7ec16a",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/gameplay/process-07.json"
+    },
+    "gameplay/process-08.json.gz": {
+      "sha256": "387575b063c1114e15f5aa7408e4c95d376a33ccad65ee42b7c0494a83c088ed",
+      "raw_sha256": "6417c4c5b72d4307d129a9bbd7d56564a4ab49299800edb867fd059dc93b3589",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/gameplay/process-08.json"
+    },
+    "gameplay/repeat-win-input.json.gz": {
+      "sha256": "e420b5e1f1e5b9ed42083c3dde71964471c6f701f5a52c23d8830cdf2c2cc6e9",
+      "raw_sha256": "12507f1135e300f8ddb26a9c810cd5d67e18775bc1a88f4d6e2beb596d1491db",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/gameplay/repeat-win-input.json"
+    },
+    "gameplay/repeat-win-observe.json.gz": {
+      "sha256": "73256dc626444af60f328261080f3f5e53ed1f9675563e6406efff6080d2530c",
+      "raw_sha256": "2085c417c78dd54ed09bf6344b6ed35d38dd5df9a5f89bd91b22e39cfd26b83f",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/gameplay/repeat-win-observe.json"
+    },
+    "gameplay/repeat-win.json.gz": {
+      "sha256": "625b3486da8821e2654cfc9746bb0e6153f146d523232fbeb1530885f2892830",
+      "raw_sha256": "a6f72f8bdd13f18bf940089908b65c92f1156bbef649205da09647ba09e4765f",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/gameplay/repeat-win.json"
+    },
+    "gameplay/result.json.gz": {
+      "sha256": "81738e7a51d436089421ac8f4dccc6a6b7fab6ca100c48a28bda01098f1d070c",
+      "raw_sha256": "32b6d068cf4e247bf833cb2085c56804e60dc79e8d9a92e9b9968e57e9306382",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/gameplay/result.json"
+    },
+    "gameplay/wall-input.json.gz": {
+      "sha256": "e41b8660a2afa15cafccbe1a9e0eddc7ad684d2d499bb655844fa190700b05b5",
+      "raw_sha256": "29e406638309e4f87c434439d2e838df8b4a67a2e4d234c6c926f1616d3e2bc3",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/gameplay/wall-input.json"
+    },
+    "gameplay/wall-observe.json.gz": {
+      "sha256": "e38f3d83ced605ecc1cca64f1cbe4c78bd4dff56a11ee8c417ba9dc22950dca3",
+      "raw_sha256": "731818f451ef829d1ef9f1eb7dc388150eef9a6d17913d17ccd94b4f4a90f565",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/gameplay/wall-observe.json"
+    },
+    "gameplay/wall.json.gz": {
+      "sha256": "016f88d05418dc30cc75b92a5e2b1e6b2bb92b03c0c3960644596ff57cc6889d",
+      "raw_sha256": "a79aa64dc36a35e865178ab502e3ae2ce410ff6ba51b61e89876fb9cde8d35d1",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/gameplay/wall.json"
+    },
+    "gameplay/win-input.json.gz": {
+      "sha256": "e420b5e1f1e5b9ed42083c3dde71964471c6f701f5a52c23d8830cdf2c2cc6e9",
+      "raw_sha256": "12507f1135e300f8ddb26a9c810cd5d67e18775bc1a88f4d6e2beb596d1491db",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/gameplay/win-input.json"
+    },
+    "gameplay/win-observe.json.gz": {
+      "sha256": "73256dc626444af60f328261080f3f5e53ed1f9675563e6406efff6080d2530c",
+      "raw_sha256": "2085c417c78dd54ed09bf6344b6ed35d38dd5df9a5f89bd91b22e39cfd26b83f",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/gameplay/win-observe.json"
+    },
+    "gameplay/win.json.gz": {
+      "sha256": "625b3486da8821e2654cfc9746bb0e6153f146d523232fbeb1530885f2892830",
+      "raw_sha256": "a6f72f8bdd13f18bf940089908b65c92f1156bbef649205da09647ba09e4765f",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/gameplay/win.json"
+    },
+    "gameplay.log.gz": {
+      "sha256": "3f5d1f70c234bd011eb6cb8e8fa7a9540e302b5bc5001d9dbe692f037bf105b2",
+      "raw_sha256": "2e405a5d7d6bd41f27ad22b66f605512aa0d4adb45d02bd36604ad65a7ce3ca9",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/gameplay.log"
+    },
+    "policy.log.gz": {
+      "sha256": "d1d524340257606d76bbb6a305efaa7a9635e21654ea1b7d90d2372b9bb73a63",
+      "raw_sha256": "314a2203d1991f976d5ae2dc15a415c743620f5c41006da932954c5fed0691f1",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/policy.log"
+    },
+    "results.json.gz": {
+      "sha256": "642b82e510291727bd0f91026cf9c3b189f3849f6b0c8d615ec8ce6b5c84889b",
+      "raw_sha256": "c48cf3207b38df7e151310aca93fe4f4c12576bdffdbd80abece3e743482fcb6",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/results.json"
+    },
+    "syntax.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/syntax.log"
+    },
+    "types.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-001/types.log"
+    },
+    "validation-runner.py.gz": {
+      "sha256": "7fae2e18e80ab50d0c0b3413aacea6d26e724a03ea1225c81b4ee3d3368cc9b9",
+      "raw_sha256": "9306930f944917849898983683f2577831556f8445b2c09b07d9e50fa9d20dbe",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main163-run.py"
+    },
+    "actual-main164.json.gz": {
+      "sha256": "3b2bda290f1a29230981db2563cd0754cde2b3679cefa34ce0d269964a040725",
+      "raw_sha256": "9bfa1f481c56a74a6642bc1fc0e07825c7bd1309a117f7130f4aa5a4cb8ab141",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/planar-main164-ancestry.json"
+    }
+  },
+  "producer_artifacts_verified": 79,
+  "shipping_scope": "Original accepted producer shipping proof is based on main160; no fresh main163 shipping export claimed. Current integrated engine was exercised by all seven native scenarios.",
+  "review": {
+    "accepted": true,
+    "path": "docs/spikes/evidence/planar-sample-main164-review.json",
+    "sha256": "596340dc96acab30d91ceec7db7113d931d8f89ef7514273aa28fee3c91997d6",
+    "reviewed_manifest_sha256": "fada349c42284b20aabf7c44e5e7e22ef12644d36e58299c29d27c4ac5261112"
+  },
+  "limitations": [
+    "No rendered appearance, native-window, physical gamepad or device performance claim",
+    "Silent PCM fixture",
+    "Physics checkpoint gate remains open"
+  ],
+  "integrated_ancestry": {
+    "head": "a1e6d2237ae4ee896933e33f709f6d0ca1032af7",
+    "main": "68fc0aa5f4e7bd9eb11baf766b93df72b1fea353",
+    "frozen_inputs": 1832,
+    "changed_frozen_inputs": [],
+    "post_test_paths": [
+      "STATUS.md",
+      "docs/spikes/core-presentation-bindings.md",
+      "docs/spikes/core-presentation-integration.md",
+      "docs/spikes/evidence/core-presentation-bindings.json",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-001/clean-local-crates.log.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-001/headless.log.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-001/results.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-001/seam-tests.log.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-001/target-owner.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/authoring-calls.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/deleted-authoring.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/deleted-maps.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/original-helper.py.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/package/build.log.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/package/export.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/package/project-build.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/process-00.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/process-01.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/process-02.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/process-03.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/process-04.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/process-05.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/process-06.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/win-input.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/win-observe.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/win.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-003/win.pcm.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-004/lose-input.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-004/lose-observe.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-004/lose.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-004/lose.pcm.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-004/package-before.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-004/process-00.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-004/process-01.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-004/process-02.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-004/repeat-win-input.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-004/repeat-win-observe.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-004/repeat-win.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-004/repeat-win.pcm.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-004/result.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-004/win-input.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-004/win-observe.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-004/win.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-binding-004/win.pcm.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-bindings-final-20261012.json",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-export-001/export.log.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-export-001/freeze.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-export-001/terminal.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/authoring-calls.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/gamepad-input.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/gamepad-observe.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/gamepad.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/jump-input.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/jump-observe.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/jump.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/lose-input.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/lose-observe.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/lose.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/process-00.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/process-01.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/process-02.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/process-03.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/process-04.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/process-05.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/process-06.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/process-07.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/repeat-win-input.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/repeat-win-observe.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/repeat-win.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/runs.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/skip-pickup-input.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/skip-pickup-observe.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/skip-pickup.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/wall-input.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/wall-observe.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/wall.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/win-input.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/win-observe.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-presentation-gameplay-001/win.json.gz",
+      "docs/spikes/evidence/core-presentation-bindings/core-sample-presentation-source-20261012.json",
+      "docs/spikes/evidence/core-presentation-integration-review.json",
+      "docs/spikes/evidence/core-presentation-integration.json",
+      "docs/spikes/evidence/core-presentation-integration/closeout/conventions.log.gz",
+      "docs/spikes/evidence/core-presentation-integration/closeout/diff.log.gz",
+      "docs/spikes/evidence/core-presentation-integration/closeout/results.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/closeout/source-comparison.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/conventions.log.gz",
+      "docs/spikes/evidence/core-presentation-integration/core-presentation-checks.py.gz",
+      "docs/spikes/evidence/core-presentation-integration/core-presentation-export-main162.py.gz",
+      "docs/spikes/evidence/core-presentation-integration/core-presentation-preparation-main162.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/diff.log.gz",
+      "docs/spikes/evidence/core-presentation-integration/freeze.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/gameplay.log.gz",
+      "docs/spikes/evidence/core-presentation-integration/gameplay/authoring-calls.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/gameplay/gamepad-input.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/gameplay/gamepad-observe.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/gameplay/gamepad.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/gameplay/jump-input.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/gameplay/jump-observe.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/gameplay/jump.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/gameplay/lose-input.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/gameplay/lose-observe.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/gameplay/lose.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/gameplay/process-00.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/gameplay/process-01.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/gameplay/process-02.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/gameplay/process-03.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/gameplay/process-04.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/gameplay/process-05.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/gameplay/process-06.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/gameplay/process-07.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/gameplay/repeat-win-input.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/gameplay/repeat-win-observe.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/gameplay/repeat-win.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/gameplay/runs.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/gameplay/skip-pickup-input.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/gameplay/skip-pickup-observe.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/gameplay/skip-pickup.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/gameplay/wall-input.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/gameplay/wall-observe.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/gameplay/wall.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/gameplay/win-input.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/gameplay/win-observe.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/gameplay/win.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/prior-path-failure/freeze.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/prior-path-failure/results.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/prior-path-failure/types.log.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export-terminal.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export.log.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/authoring-calls.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/deleted-authoring.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/deleted-maps.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/lose-input.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/lose-observe.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/lose.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/lose.pcm.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/package-before.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/package/build.log.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/package/export.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/package/player/data/audio/2398da29e2def0b16fccdcacba29b8a83e3aa0c7f1132ac7b83f30968b5cf102.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/package/player/data/audio/395329b5981927a184aa612c4709fbdaae717a7fb1ef7df8c81b535721e2a9fa.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/package/player/data/audio/3b9d7408f9e8467a46f26b7d43bc4b3230faf7ce549445ed1756fc7838752f84.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/package/player/data/audio/3c1296a9c03eda2e90ade53650776166ac3126345dfa13690052feaf390506a0.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/package/player/data/audio/a32b666415328455ef62426b3b10bba357c757246d4209dbaa2f58ce6ccbe852.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/package/player/data/clips.bin.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/package/player/data/empty-input.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/package/player/data/fonts/9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/package/player/data/input-actions.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/package/player/data/package.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/package/player/data/world.scene.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/package/project-build.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/package/symbols/script-symbols.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/process-00.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/process-01.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/process-02.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/process-03.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/process-04.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/process-05.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/process-06.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/process-07.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/process-08.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/repeat-win-input.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/repeat-win-observe.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/repeat-win.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/repeat-win.pcm.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/result.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/win-input.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/win-observe.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/win.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/public-export/win.pcm.gz",
+      "docs/spikes/evidence/core-presentation-integration/results.json.gz",
+      "docs/spikes/evidence/core-presentation-integration/syntax.log.gz",
+      "docs/spikes/evidence/core-presentation-integration/types.log.gz",
+      "docs/spikes/evidence/planar-sample-main163.json",
+      "docs/spikes/evidence/planar-sample-main163/actionlint.log.gz",
+      "docs/spikes/evidence/planar-sample-main163/conventions.log.gz",
+      "docs/spikes/evidence/planar-sample-main163/diff.log.gz",
+      "docs/spikes/evidence/planar-sample-main163/freeze.json.gz",
+      "docs/spikes/evidence/planar-sample-main163/gameplay.log.gz",
+      "docs/spikes/evidence/planar-sample-main163/gameplay/authoring-calls.json.gz",
+      "docs/spikes/evidence/planar-sample-main163/gameplay/diagonal-input.json.gz",
+      "docs/spikes/evidence/planar-sample-main163/gameplay/diagonal-observe.json.gz",
+      "docs/spikes/evidence/planar-sample-main163/gameplay/diagonal.json.gz",
+      "docs/spikes/evidence/planar-sample-main163/gameplay/gamepad-input.json.gz",
+      "docs/spikes/evidence/planar-sample-main163/gameplay/gamepad-observe.json.gz",
+      "docs/spikes/evidence/planar-sample-main163/gameplay/gamepad.json.gz",
+      "docs/spikes/evidence/planar-sample-main163/gameplay/locked-exit-input.json.gz",
+      "docs/spikes/evidence/planar-sample-main163/gameplay/locked-exit-observe.json.gz",
+      "docs/spikes/evidence/planar-sample-main163/gameplay/locked-exit.json.gz",
+      "docs/spikes/evidence/planar-sample-main163/gameplay/lose-input.json.gz",
+      "docs/spikes/evidence/planar-sample-main163/gameplay/lose-observe.json.gz",
+      "docs/spikes/evidence/planar-sample-main163/gameplay/lose.json.gz",
+      "docs/spikes/evidence/planar-sample-main163/gameplay/process-00.json.gz",
+      "docs/spikes/evidence/planar-sample-main163/gameplay/process-01.json.gz",
+      "docs/spikes/evidence/planar-sample-main163/gameplay/process-02.json.gz",
+      "docs/spikes/evidence/planar-sample-main163/gameplay/process-03.json.gz",
+      "docs/spikes/evidence/planar-sample-main163/gameplay/process-04.json.gz",
+      "docs/spikes/evidence/planar-sample-main163/gameplay/process-05.json.gz",
+      "docs/spikes/evidence/planar-sample-main163/gameplay/process-06.json.gz",
+      "docs/spikes/evidence/planar-sample-main163/gameplay/process-07.json.gz",
+      "docs/spikes/evidence/planar-sample-main163/gameplay/process-08.json.gz",
+      "docs/spikes/evidence/planar-sample-main163/gameplay/repeat-win-input.json.gz",
+      "docs/spikes/evidence/planar-sample-main163/gameplay/repeat-win-observe.json.gz",
+      "docs/spikes/evidence/planar-sample-main163/gameplay/repeat-win.json.gz",
+      "docs/spikes/evidence/planar-sample-main163/gameplay/result.json.gz",
+      "docs/spikes/evidence/planar-sample-main163/gameplay/wall-input.json.gz",
+      "docs/spikes/evidence/planar-sample-main163/gameplay/wall-observe.json.gz",
+      "docs/spikes/evidence/planar-sample-main163/gameplay/wall.json.gz",
+      "docs/spikes/evidence/planar-sample-main163/gameplay/win-input.json.gz",
+      "docs/spikes/evidence/planar-sample-main163/gameplay/win-observe.json.gz",
+      "docs/spikes/evidence/planar-sample-main163/gameplay/win.json.gz",
+      "docs/spikes/evidence/planar-sample-main163/policy.log.gz",
+      "docs/spikes/evidence/planar-sample-main163/results.json.gz",
+      "docs/spikes/evidence/planar-sample-main163/syntax.log.gz",
+      "docs/spikes/evidence/planar-sample-main163/types.log.gz",
+      "docs/spikes/evidence/planar-sample-main163/validation-runner.py.gz",
+      "docs/spikes/planar-sample-main163.md",
+      "samples/core/gameplay.ts",
+      "samples/core/verify_presentation.py"
+    ],
+    "compiled_inputs_unchanged": true
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "kind": "independent-planar-sample-source-review",
+  "reviewer": "astra /root/native_wasm_export",
+  "base": "d1ef35ee32b92e6756b528463ab092fdc79c7ef4",
+  "source_freeze": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-runner-001/freeze.json",
+  "source_freeze_sha256": "214e6a66c0389991938340dbc6c1a0c9041806d8838e3f42702066d4db93f85d",
+  "reviewed_files": {
+    "samples/planar/gameplay.ts": "ccd01284ad30ff4cc9d3070a8220890509af160f3aae4521f0954502fdf45e5e",
+    "samples/planar/verify.py": "f26d5d2441e840e1dfa87744ce339ed9af731268757540bbc44e809815f38396",
+    "samples/planar/export_verify.py": "0e19662fbee6bd10e6070ea607428eaf23ce77d077d37c9cdae89bfc796672b0",
+    ".github/workflows/desktop.yml": "b9942e4333403d578dc0096c66c4504d338a1635b82462da32b187439da9ecc7"
+  },
+  "accepted": true,
+  "findings": [],
+  "reviewed_behavior": [
+    "Strict distinct stable-ID configuration, checked persisted state and bulk row access",
+    "Zero-gravity native dynamic body velocity control, diagonal normalization, tile-wall collision fixture",
+    "De-duplicated pickup despawns, exit enter/leave tracking, hazard priority and stable terminal zero velocity",
+    "Seven scenario verifier establishes terminal outcomes, locked exit, solid wall, diagonal distance and exact keyboard/gamepad/replay equality",
+    "Export helper revalidates development proof, exports actual project, deletes only proof-owned authoring and source maps, uses restricted child environment and compares ordinary package observations/logs/PCM to all seven references",
+    "Two additive desktop workflow verification and artifact-upload steps"
+  ],
+  "qualifications": [
+    "Source-only independent review; did not rerun build, development or shipping processes",
+    "Producer reports seven development scenarios passed; final shipping process remains pending",
+    "Coincident hazard/exit priority and optional camera following are reviewed source branches but not exercised by these seven fixture scenarios",
+    "Numerical CPU sample only; no visual, GPU, reference-device, performance or physics checkpoint acceptance"
+  ]
+}
