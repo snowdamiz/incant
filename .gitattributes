@@ -11,5 +11,13 @@ third_party/wabt/wasm-rt.h whitespace=-blank-at-eol
 crates/incant_assets/tests/fixtures/fbx/*.fbx -text whitespace=-blank-at-eol,cr-at-eol
 
 # Preserve exact published cosmic-text license and CRLF regression fixture bytes.
-third_party/cosmic-text/fonts/Inter-LICENSE -text
-third_party/cosmic-text/sample/crlf.txt -text
+third_party/cosmic-text/fonts/Inter-LICENSE -text whitespace=-blank-at-eol,cr-at-eol
+third_party/cosmic-text/sample/crlf.txt -text whitespace=-blank-at-eol,cr-at-eol
+# Upstream test inputs and license text keep their published whitespace.
+third_party/cosmic-text/benches/layout.rs whitespace=-blank-at-eol
+third_party/cosmic-text/fonts/FiraMono-LICENSE whitespace=-blank-at-eol
+third_party/cosmic-text/fonts/NotoSans-LICENSE whitespace=-blank-at-eol
+third_party/cosmic-text/sample/hebrew.txt whitespace=-blank-at-eol
+third_party/cosmic-text/sample/hello.txt whitespace=-blank-at-eol
+# Unified diff context lines intentionally contain their leading space.
+third_party/cosmic-text/INCANT_PATCH.diff whitespace=-blank-at-eol

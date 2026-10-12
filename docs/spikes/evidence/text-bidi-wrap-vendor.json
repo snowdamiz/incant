@@ -5,7 +5,7 @@
   },
   ".gitattributes": {
     "upstream": "89d5a306f16ddd385a5928e51ee5a3446720ff6f0b17a0e38a02b42ea8d4cabb",
-    "patched": "89d5a306f16ddd385a5928e51ee5a3446720ff6f0b17a0e38a02b42ea8d4cabb"
+    "patched": "8008c588e812145ac420aaeb942deb693633e4ebab79642dd3059999c24b9035"
   },
   ".github/workflows/pages.yml": {
     "upstream": "5c767eff510c39d83f3846a2ab99857d79c21fe3299076c50b7c744fd7aa088b",

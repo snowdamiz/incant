@@ -34,3 +34,10 @@ findings; the final checks used those unchanged frozen inputs.
 Claude0055 will verify the corrected layout through the canonical native text
 draw route. That rendered followup is pending, and this evidence does not claim
 complete Unicode conformance, full game UI/IME, device performance or a phase gate.
+
+A final repository portability correction retains the exact published CRLF
+license/fixture bytes and removes upstream Git LFS filters for the already
+included fonts/images. Narrow whitespace attributes preserve upstream inputs
+and the raw patch. This changes no Rust source or font bytes; the original
+source review and all numerical checks remain applicable. The vendor manifest
+records the additional attributes delta.

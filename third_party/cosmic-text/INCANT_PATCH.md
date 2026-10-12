@@ -11,6 +11,10 @@ shaper; no system font discovery is enabled in Incant.
 
 Incant changes:
 
+- `.gitattributes`: remove upstream Git LFS filters. Published font/image bytes
+  stay in Git directly, so configured LFS clients need no external objects.
+  Root attributes preserve published CRLF and fixture/license whitespace.
+
 - `src/shape.rs`: a wrapped line must commit when it contains an earlier bidi
   span, even if the current span has accumulated no width. Otherwise the next
   word exceeds the line width or an interior space is skipped. The reverse
