@@ -56,6 +56,14 @@ failed attempts. Later main118+ work continues through reviewed local checks and
 fast PR gates until the next frozen checkpoint; release does not track moving main.
 [Promotion evidence](docs/spikes/evidence/release-checkpoint-8.json).
 
+## Mixed-direction text wrapping — local CPU correction
+
+The native text review's dropped-space/overflow defect is corrected in pinned
+cosmic-text, with separate regressions for direction changes and narrow glyph
+wrapping. The affected CPU suites, Clippy, wasm32 and dependency checks pass;
+independent source review accepted. Claude's focused rendered recheck is pending.
+[Evidence](docs/spikes/text-bidi-wrap.md).
+
 ## Current milestone
 
 Native two-input crossfade clocks and controls now retain independent outgoing

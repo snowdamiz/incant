@@ -1,0 +1,346 @@
+{
+  ".cargo_vcs_info.json": {
+    "upstream": "4ae57c7a39e97991b281829bb046d389ab304f975648282f195de123def78f1a",
+    "patched": "4ae57c7a39e97991b281829bb046d389ab304f975648282f195de123def78f1a"
+  },
+  ".gitattributes": {
+    "upstream": "89d5a306f16ddd385a5928e51ee5a3446720ff6f0b17a0e38a02b42ea8d4cabb",
+    "patched": "8008c588e812145ac420aaeb942deb693633e4ebab79642dd3059999c24b9035"
+  },
+  ".github/workflows/pages.yml": {
+    "upstream": "5c767eff510c39d83f3846a2ab99857d79c21fe3299076c50b7c744fd7aa088b",
+    "patched": "5c767eff510c39d83f3846a2ab99857d79c21fe3299076c50b7c744fd7aa088b"
+  },
+  ".github/workflows/rust.yml": {
+    "upstream": "5c37ec8b856a5672c4f0d5f8b6466c0ee7805c9c367e88d9490814387b31e878",
+    "patched": "5c37ec8b856a5672c4f0d5f8b6466c0ee7805c9c367e88d9490814387b31e878"
+  },
+  ".gitignore": {
+    "upstream": "2247bf287ca6b50f01cea74357adb5434e0c5d2b3d522442f48a1d3bda7283a3",
+    "patched": "2247bf287ca6b50f01cea74357adb5434e0c5d2b3d522442f48a1d3bda7283a3"
+  },
+  "CHANGELOG.md": {
+    "upstream": "36a07d9163722f1ea0631d40dc66402caddc5d63d413f53fe42ed403dab03587",
+    "patched": "36a07d9163722f1ea0631d40dc66402caddc5d63d413f53fe42ed403dab03587"
+  },
+  "Cargo.lock": {
+    "upstream": "0ac778e4af5a821e878e1dea9dbc660efdf56e770a74d921f94752337308bcf2",
+    "patched": "0ac778e4af5a821e878e1dea9dbc660efdf56e770a74d921f94752337308bcf2"
+  },
+  "Cargo.toml": {
+    "upstream": "a1255253ab95624ef85be6629f54f834a91046e0a1d327bcfc5ca855c32bb8f8",
+    "patched": "a1255253ab95624ef85be6629f54f834a91046e0a1d327bcfc5ca855c32bb8f8"
+  },
+  "Cargo.toml.orig": {
+    "upstream": "8c6ae1c5e4ea2c033ed2fd17d22fe60a6bc0bb7f0ffde92e0e0bc6e4d70e7c44",
+    "patched": "8c6ae1c5e4ea2c033ed2fd17d22fe60a6bc0bb7f0ffde92e0e0bc6e4d70e7c44"
+  },
+  "LICENSE-APACHE": {
+    "upstream": "000b4962e6b27176a0ff89cce4be555b16472cafb5671eb2804a8fdac6854793",
+    "patched": "000b4962e6b27176a0ff89cce4be555b16472cafb5671eb2804a8fdac6854793"
+  },
+  "LICENSE-MIT": {
+    "upstream": "95557bafe728379e206f3b6d4aceeaa054d271c71d722411a6222e2dec01138c",
+    "patched": "95557bafe728379e206f3b6d4aceeaa054d271c71d722411a6222e2dec01138c"
+  },
+  "README.md": {
+    "upstream": "c0c25b46fe630c169a359a92845f0639c4fe127a5020f8047b8a3a3d91c1ac08",
+    "patched": "c0c25b46fe630c169a359a92845f0639c4fe127a5020f8047b8a3a3d91c1ac08"
+  },
+  "benches/layout.rs": {
+    "upstream": "8946ca090f1875a0b162079f40f3deb102dd369be485d682be56b9ec9aa11005",
+    "patched": "8946ca090f1875a0b162079f40f3deb102dd369be485d682be56b9ec9aa11005"
+  },
+  "ci.sh": {
+    "upstream": "2a9f308406fd6cfffc42e56714d30ff39c801b78fc37e9b3204fe8f6a42b38cc",
+    "patched": "2a9f308406fd6cfffc42e56714d30ff39c801b78fc37e9b3204fe8f6a42b38cc"
+  },
+  "deny.toml": {
+    "upstream": "549ecc17a61885a81eaf12e189dccc58a47e98d82b48be69a620fbf7e76572f1",
+    "patched": "549ecc17a61885a81eaf12e189dccc58a47e98d82b48be69a620fbf7e76572f1"
+  },
+  "editor-test.sh": {
+    "upstream": "d5be92b97c2c705f7e24dcd5a9ff70c25a166db2d71e9941efee549590a81862",
+    "patched": "d5be92b97c2c705f7e24dcd5a9ff70c25a166db2d71e9941efee549590a81862"
+  },
+  "editor.sh": {
+    "upstream": "a8ab44adf4efdfa764e8c5038236ae26b023b95870cea470b5c6285e6079162a",
+    "patched": "a8ab44adf4efdfa764e8c5038236ae26b023b95870cea470b5c6285e6079162a"
+  },
+  "fonts/FiraMono-LICENSE": {
+    "upstream": "587dd9548304fd421cd254f7550bd101c1250ffc95417f2f7f92d55b44ecbe53",
+    "patched": "587dd9548304fd421cd254f7550bd101c1250ffc95417f2f7f92d55b44ecbe53"
+  },
+  "fonts/FiraMono-Medium.ttf": {
+    "upstream": "5f9173ce3d05fadef74c7eed06570d54e4f75bd0cd9860726fb2987a7f848292",
+    "patched": "5f9173ce3d05fadef74c7eed06570d54e4f75bd0cd9860726fb2987a7f848292"
+  },
+  "fonts/Inter-LICENSE": {
+    "upstream": "3c8d13d97ea5eb62868833a377034c6be6a9833e768d32abec2a767a8101e4bc",
+    "patched": "3c8d13d97ea5eb62868833a377034c6be6a9833e768d32abec2a767a8101e4bc"
+  },
+  "fonts/Inter-Regular.ttf": {
+    "upstream": "3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384",
+    "patched": "3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384"
+  },
+  "fonts/NotoSans-LICENSE": {
+    "upstream": "5ec4347054089def6904da61d04f0360968f9ef36634b1fe007a5b6ec2f7aa96",
+    "patched": "5ec4347054089def6904da61d04f0360968f9ef36634b1fe007a5b6ec2f7aa96"
+  },
+  "fonts/NotoSans-Regular.ttf": {
+    "upstream": "2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9",
+    "patched": "2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9"
+  },
+  "fonts/NotoSansArabic.ttf": {
+    "upstream": "ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56",
+    "patched": "ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56"
+  },
+  "fonts/NotoSansHebrew.ttf": {
+    "upstream": "3d4fef85b449ade4d165de982969374fa30b2a5fe7bc679f5a3f5bfc047fb703",
+    "patched": "3d4fef85b449ade4d165de982969374fa30b2a5fe7bc679f5a3f5bfc047fb703"
+  },
+  "multiview.sh": {
+    "upstream": "8de55e39c5089f9c3b2c62292ce916f7ae7f7b1f56d8cdb1ad366f0592d14809",
+    "patched": "8de55e39c5089f9c3b2c62292ce916f7ae7f7b1f56d8cdb1ad366f0592d14809"
+  },
+  "redoxer.sh": {
+    "upstream": "3a2aff4147e48ca2ee95f5ad884be8ad988a289c12aff493f6a22880cc80c5a9",
+    "patched": "3a2aff4147e48ca2ee95f5ad884be8ad988a289c12aff493f6a22880cc80c5a9"
+  },
+  "rich-text.sh": {
+    "upstream": "7313beac5c0c51820faf059197596c644cb2ca17d19ac04f8551f190d9855e29",
+    "patched": "7313beac5c0c51820faf059197596c644cb2ca17d19ac04f8551f190d9855e29"
+  },
+  "sample/arabic.txt": {
+    "upstream": "228447a4719fb5fa01f53443bfa4dfd0b92825d35f78dfa6696194295357c5aa",
+    "patched": "228447a4719fb5fa01f53443bfa4dfd0b92825d35f78dfa6696194295357c5aa"
+  },
+  "sample/bengali.txt": {
+    "upstream": "2cae6bbaf8fdf763189d5a2da8b14fbdd852363c58f29a0177225cd4402d868e",
+    "patched": "2cae6bbaf8fdf763189d5a2da8b14fbdd852363c58f29a0177225cd4402d868e"
+  },
+  "sample/crlf.txt": {
+    "upstream": "2f3f11962bfb72508d815b8a8787a7a05d2086d36201469414ca735f631bb255",
+    "patched": "2f3f11962bfb72508d815b8a8787a7a05d2086d36201469414ca735f631bb255"
+  },
+  "sample/em.txt": {
+    "upstream": "e06efae4660ed07a26319c9270fee916b1d1ac1a384852867ae6d659fdbd102a",
+    "patched": "e06efae4660ed07a26319c9270fee916b1d1ac1a384852867ae6d659fdbd102a"
+  },
+  "sample/emoji-zjw.txt": {
+    "upstream": "d0356ad25aaf338383d5909f9303265d7cf233898a0d821a8c8e39ac733367c0",
+    "patched": "d0356ad25aaf338383d5909f9303265d7cf233898a0d821a8c8e39ac733367c0"
+  },
+  "sample/emoji.txt": {
+    "upstream": "933b90ec6dad907c32beab9f7f1002d3c4f4a1918cdd24cf75835c62eb367cbd",
+    "patched": "933b90ec6dad907c32beab9f7f1002d3c4f4a1918cdd24cf75835c62eb367cbd"
+  },
+  "sample/fallback.txt": {
+    "upstream": "d28c11f893f356c5ce512bb6ac95cc1ac9f8c5adff618645bca9c7a3f588d833",
+    "patched": "d28c11f893f356c5ce512bb6ac95cc1ac9f8c5adff618645bca9c7a3f588d833"
+  },
+  "sample/farsi.txt": {
+    "upstream": "3dfe69ed259cce6a1772e3e2484e94a68fe11024285347f6aa6fc994b50db69d",
+    "patched": "3dfe69ed259cce6a1772e3e2484e94a68fe11024285347f6aa6fc994b50db69d"
+  },
+  "sample/han.txt": {
+    "upstream": "795540d33d3e0627d32f54c9031c6e9e06cbe0fbd53c212a5fa266d1b1581ecc",
+    "patched": "795540d33d3e0627d32f54c9031c6e9e06cbe0fbd53c212a5fa266d1b1581ecc"
+  },
+  "sample/hebrew.txt": {
+    "upstream": "3cf23f2a3b9391cb707781e079b2125e2e269fca00d83de048cda15ba0dc99f3",
+    "patched": "3cf23f2a3b9391cb707781e079b2125e2e269fca00d83de048cda15ba0dc99f3"
+  },
+  "sample/hello.txt": {
+    "upstream": "0dca2ba1ce4b5de21a1a6802099610dc0932b771dbf8056822e0551413631ea3",
+    "patched": "0dca2ba1ce4b5de21a1a6802099610dc0932b771dbf8056822e0551413631ea3"
+  },
+  "sample/ligature.txt": {
+    "upstream": "05987a9a2f90f2146a05791374ab7fe370d9c52fa99f5138dde88b8f48a66f89",
+    "patched": "05987a9a2f90f2146a05791374ab7fe370d9c52fa99f5138dde88b8f48a66f89"
+  },
+  "sample/lioneatingpoet.txt": {
+    "upstream": "1d19412e4275ab86306b1abb3397095463324f68632e6125f831793100551b34",
+    "patched": "1d19412e4275ab86306b1abb3397095463324f68632e6125f831793100551b34"
+  },
+  "sample/mono.txt": {
+    "upstream": "6ab901226d19b7e9278561d727f01f30b059a9eddec439b125d2ab4ebc22057d",
+    "patched": "6ab901226d19b7e9278561d727f01f30b059a9eddec439b125d2ab4ebc22057d"
+  },
+  "sample/proportional.txt": {
+    "upstream": "31288194d36cb0401c627e9c04f4c3e05e4a7ec62fc0218af91072fbdb2d7f15",
+    "patched": "31288194d36cb0401c627e9c04f4c3e05e4a7ec62fc0218af91072fbdb2d7f15"
+  },
+  "sample/tabs.txt": {
+    "upstream": "fa3eeec0ba036d042fe329911dc1173bfc156a407efd2df8b02b9e9390b1a84c",
+    "patched": "fa3eeec0ba036d042fe329911dc1173bfc156a407efd2df8b02b9e9390b1a84c"
+  },
+  "sample/thai.txt": {
+    "upstream": "f1a2929c86c0332a2f0e14417085f36f68066adb5f0bbe1a3a417c093f894d7e",
+    "patched": "f1a2929c86c0332a2f0e14417085f36f68066adb5f0bbe1a3a417c093f894d7e"
+  },
+  "screenshots/arabic.png": {
+    "upstream": "38994360da746e9331c0f0ffcc637d3342be5d0d568c25ffeb7d908b5c40be95",
+    "patched": "38994360da746e9331c0f0ffcc637d3342be5d0d568c25ffeb7d908b5c40be95"
+  },
+  "screenshots/chinese-simplified.png": {
+    "upstream": "84f494ab596674e29b47f4b367bd2695ef21d63010e568fa432edea4f94265ca",
+    "patched": "84f494ab596674e29b47f4b367bd2695ef21d63010e568fa432edea4f94265ca"
+  },
+  "screenshots/hindi.png": {
+    "upstream": "28ddfa78fffabea00d1caedee477b071c0a40064701d54ef9371b3a596d91fa5",
+    "patched": "28ddfa78fffabea00d1caedee477b071c0a40064701d54ef9371b3a596d91fa5"
+  },
+  "src/attrs.rs": {
+    "upstream": "34862eb2f35b664b65e5c4ebbfa5feadacbe83780d12a6f420cccace1070ac91",
+    "patched": "1d9c7fbe76d7a3f946a6699d513e0a9574a386e09ee89a0bad439985c0b8b9ba"
+  },
+  "src/bidi_para.rs": {
+    "upstream": "43a305709e5a20b176bf7dd22e263b16072ba56b15f993672c097ef702337df3",
+    "patched": "43a305709e5a20b176bf7dd22e263b16072ba56b15f993672c097ef702337df3"
+  },
+  "src/buffer.rs": {
+    "upstream": "8f8a447ec0540c049cba8385f236bb90e411b40c4e9ca30064952ceda8bc1309",
+    "patched": "f912643ed0056a067dbd1b79d081d081c75e6b4618aa67c3ebf8a9cb3c55ed93"
+  },
+  "src/buffer_line.rs": {
+    "upstream": "d1ec2b7fef9be810e661fc012959f7afb803f3b1906ade48ddd2f7c9ec75392a",
+    "patched": "d1ec2b7fef9be810e661fc012959f7afb803f3b1906ade48ddd2f7c9ec75392a"
+  },
+  "src/cached.rs": {
+    "upstream": "1e31deafa47bf93d9f8b1154317fef2db8da821098bc10697450655329d338a5",
+    "patched": "1e31deafa47bf93d9f8b1154317fef2db8da821098bc10697450655329d338a5"
+  },
+  "src/cursor.rs": {
+    "upstream": "6c693d1d041d5104f0f7f5f8b12791b2a6db6c1d7a5c2e6dadd4cde15ebac50d",
+    "patched": "6c693d1d041d5104f0f7f5f8b12791b2a6db6c1d7a5c2e6dadd4cde15ebac50d"
+  },
+  "src/edit/editor.rs": {
+    "upstream": "86b807b77de5b594d0df48ddcdd3f00c1dde662f239516ba138f3db9490a6437",
+    "patched": "99edaa0630fc9804f6dda9a2c82e97e7926caabb7da77b298d1bb5f3cf64ca55"
+  },
+  "src/edit/mod.rs": {
+    "upstream": "57c52f98042a78f45ddaa70260eb385033954bdaf347821d79a3d578ebb9f4f5",
+    "patched": "57c52f98042a78f45ddaa70260eb385033954bdaf347821d79a3d578ebb9f4f5"
+  },
+  "src/edit/syntect.rs": {
+    "upstream": "10dc8af1dec13be9efcf2bcc3e95c121cc411d760e45060d430425f0173a7b5f",
+    "patched": "10dc8af1dec13be9efcf2bcc3e95c121cc411d760e45060d430425f0173a7b5f"
+  },
+  "src/edit/vi.rs": {
+    "upstream": "85562f4b1a23311b1a75be9f2f115fa509bfaccc8be4e261bcc3fa567141d70f",
+    "patched": "85562f4b1a23311b1a75be9f2f115fa509bfaccc8be4e261bcc3fa567141d70f"
+  },
+  "src/font/fallback/macos.rs": {
+    "upstream": "7a200cdd634814e86fc49719a71ba21591972a6a49e44fd70e2303417e67e39a",
+    "patched": "7a200cdd634814e86fc49719a71ba21591972a6a49e44fd70e2303417e67e39a"
+  },
+  "src/font/fallback/mod.rs": {
+    "upstream": "3a499951646fc155c4ee5e607ed656262d055ca0d809bd7d8fb30200c108aedb",
+    "patched": "3a499951646fc155c4ee5e607ed656262d055ca0d809bd7d8fb30200c108aedb"
+  },
+  "src/font/fallback/other.rs": {
+    "upstream": "34a4b36d784cf6beb82e6ea5f0a11e2e96176ff618d19b05c25db10f59325744",
+    "patched": "34a4b36d784cf6beb82e6ea5f0a11e2e96176ff618d19b05c25db10f59325744"
+  },
+  "src/font/fallback/unix.rs": {
+    "upstream": "15deaf10b07f2da302ab251fed7edef2802752bbae72faa445ef90db1a78e349",
+    "patched": "15deaf10b07f2da302ab251fed7edef2802752bbae72faa445ef90db1a78e349"
+  },
+  "src/font/fallback/windows.rs": {
+    "upstream": "b96f09a775b9274da0ab424b4160b01ccfd9da1e693116debf51da5e5b4119aa",
+    "patched": "b96f09a775b9274da0ab424b4160b01ccfd9da1e693116debf51da5e5b4119aa"
+  },
+  "src/font/mod.rs": {
+    "upstream": "24b765a5a86f1fff50d18bb3e0b503bad25ef5d29de38bb76fc95008355638b8",
+    "patched": "24b765a5a86f1fff50d18bb3e0b503bad25ef5d29de38bb76fc95008355638b8"
+  },
+  "src/font/system.rs": {
+    "upstream": "ba00271604f90b1f945feba951bd5ac8b61163e7b27e0ddd2165fc4bbaa6f845",
+    "patched": "ba00271604f90b1f945feba951bd5ac8b61163e7b27e0ddd2165fc4bbaa6f845"
+  },
+  "src/glyph_cache.rs": {
+    "upstream": "178e7f826e8f4577abac351b9bd2fc8b7dd9cb54f613de8cab8a69636920cc3f",
+    "patched": "178e7f826e8f4577abac351b9bd2fc8b7dd9cb54f613de8cab8a69636920cc3f"
+  },
+  "src/layout.rs": {
+    "upstream": "f962d53d8d4b1efc205241948edcc427809e1478eedef32ba23a6fd53d5e1875",
+    "patched": "f962d53d8d4b1efc205241948edcc427809e1478eedef32ba23a6fd53d5e1875"
+  },
+  "src/lib.rs": {
+    "upstream": "a4a99070556a865e4159dcf3c89bfd76de8d3410c3a073f1f1681a9f047c13a8",
+    "patched": "a4a99070556a865e4159dcf3c89bfd76de8d3410c3a073f1f1681a9f047c13a8"
+  },
+  "src/line_ending.rs": {
+    "upstream": "e808aca3e5b6200894e4cfc21a6de95ad1344286efa3be736a3dd1f91cb6cd5f",
+    "patched": "e808aca3e5b6200894e4cfc21a6de95ad1344286efa3be736a3dd1f91cb6cd5f"
+  },
+  "src/math.rs": {
+    "upstream": "9acafa8fef8e2653fbb1081ae6c6e3fb58877e8c05069e9661effdd9d1ade27a",
+    "patched": "9acafa8fef8e2653fbb1081ae6c6e3fb58877e8c05069e9661effdd9d1ade27a"
+  },
+  "src/shape.rs": {
+    "upstream": "e883f25f93407ef1448f08b0dbd81201a7d166ccdeec62163a70cc39b04f81bb",
+    "patched": "3f313fd311fe0a31c83360c9c9e2f35709cabc3b8891ef8066efd185fccb2edd"
+  },
+  "src/shape_run_cache.rs": {
+    "upstream": "85ea80e64a91d9d8bdad212ebdeed473880dd70ef10e3e2911f7f9fbf1d6abe4",
+    "patched": "85ea80e64a91d9d8bdad212ebdeed473880dd70ef10e3e2911f7f9fbf1d6abe4"
+  },
+  "src/swash.rs": {
+    "upstream": "7f7e16ea51546fd089a9f36c1435062d7746fbef15f00f42332443439e6f78c2",
+    "patched": "7f7e16ea51546fd089a9f36c1435062d7746fbef15f00f42332443439e6f78c2"
+  },
+  "terminal.sh": {
+    "upstream": "f3aed1c37d48a35e86b5d489680fdc1aed65035d3b159af3d7f8c2288c639d04",
+    "patched": "f3aed1c37d48a35e86b5d489680fdc1aed65035d3b159af3d7f8c2288c639d04"
+  },
+  "test.sh": {
+    "upstream": "24d56d21a8d02bafbfdeb69b5b6955009eaf41b0bd76c22faa8be8c9f88757fb",
+    "patched": "24d56d21a8d02bafbfdeb69b5b6955009eaf41b0bd76c22faa8be8c9f88757fb"
+  },
+  "tests/common/mod.rs": {
+    "upstream": "e7a9282b827ade13c15773bc6839d592beccc96a39af080ca4ad4af0ead4fcb8",
+    "patched": "e7a9282b827ade13c15773bc6839d592beccc96a39af080ca4ad4af0ead4fcb8"
+  },
+  "tests/editor_modified_state.rs": {
+    "upstream": "4c95c8488695cf7459a8e7d62a65b356a38b3a4154ca5c7c2f94edc0803a8643",
+    "patched": "4c95c8488695cf7459a8e7d62a65b356a38b3a4154ca5c7c2f94edc0803a8643"
+  },
+  "tests/images/a_hebrew_paragraph.png": {
+    "upstream": "2f72802a3ee4244c55f3ee0e1841a0f07dfe19904c57e29f8ab1d18f0e06dcab",
+    "patched": "2f72802a3ee4244c55f3ee0e1841a0f07dfe19904c57e29f8ab1d18f0e06dcab"
+  },
+  "tests/images/a_hebrew_word.png": {
+    "upstream": "e0bc89c5a0fc5b9e79cf30bf66fd456cbf8e3fdca0f8dff110ab2706030e0c43",
+    "patched": "e0bc89c5a0fc5b9e79cf30bf66fd456cbf8e3fdca0f8dff110ab2706030e0c43"
+  },
+  "tests/images/an_arabic_paragraph.png": {
+    "upstream": "3e7cab5e17e253b6a3ba175fb08468cf79f69877122e1470ccc3a17f3e297512",
+    "patched": "3e7cab5e17e253b6a3ba175fb08468cf79f69877122e1470ccc3a17f3e297512"
+  },
+  "tests/images/an_arabic_word.png": {
+    "upstream": "2805960705f701c297ff700840b9fcc296bd0803a0a33d2c7209d7c6ba208c2e",
+    "patched": "2805960705f701c297ff700840b9fcc296bd0803a0a33d2c7209d7c6ba208c2e"
+  },
+  "tests/images/some_english_mixed_with_arabic.png": {
+    "upstream": "d292af9a584bbb04d89b515db917c175f57267602f934c6a9dd30906a75a99aa",
+    "patched": "d292af9a584bbb04d89b515db917c175f57267602f934c6a9dd30906a75a99aa"
+  },
+  "tests/images/some_english_mixed_with_hebrew.png": {
+    "upstream": "e46e15f44eef847fd76a751ec2b198862cafc61e821ac2b5dbdc7c33480a73be",
+    "patched": "e46e15f44eef847fd76a751ec2b198862cafc61e821ac2b5dbdc7c33480a73be"
+  },
+  "tests/shaping_and_rendering.rs": {
+    "upstream": "d1582d6f7d0d5ca940ac1e643e1ca1b7a72ab5515c89fa8ff20f036ab99e8bf4",
+    "patched": "d1582d6f7d0d5ca940ac1e643e1ca1b7a72ab5515c89fa8ff20f036ab99e8bf4"
+  },
+  "tests/wrap_stability.rs": {
+    "upstream": "0e90f52fa82b3a6492238751530f22894eacc4954ee8ad1a0679ad70056389bc",
+    "patched": "0e90f52fa82b3a6492238751530f22894eacc4954ee8ad1a0679ad70056389bc"
+  },
+  "tests/wrap_word_fallback.rs": {
+    "upstream": "a7e12fc2aca50cbad51c9a7594331f8f20ceb48ca23f28602ec8cc999262297f",
+    "patched": "a7e12fc2aca50cbad51c9a7594331f8f20ceb48ca23f28602ec8cc999262297f"
+  }
+}
