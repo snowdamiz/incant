@@ -23,6 +23,9 @@ impl TickCommands {
     pub fn expose<'js>(&self, ctx: &Ctx<'js>) -> rquickjs::Result<Object<'js>> {
         let object = Object::new_proto(ctx.clone(), None)?;
         for name in [
+            "setUiText",
+            "setUiDisabled",
+            "setText",
             "setLocale",
             "spawn",
             "despawn",
@@ -129,6 +132,9 @@ fn parse<'js>(
     name: &str,
     args: &[Value<'js>],
 ) -> rquickjs::Result<StructuralCommand> {
+    if matches!(name, "setUiText" | "setUiDisabled" | "setText") {
+        return crate::hud::parse(ctx, name, args);
+    }
     if matches!(name, "setAudioPlaying" | "setAudioGain" | "setAudioBusGain") {
         return crate::audio_commands::parse(ctx, name, args);
     }

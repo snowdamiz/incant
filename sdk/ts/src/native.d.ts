@@ -44,6 +44,17 @@ export interface NativeChunk {
  * Functions belong to one tick only; retained functions never reactivate.
  * Vector/transform inputs are copied as fixed numeric fields, never JSON. */
 export interface NativeCommands {
+  /** Ordered existing-widget controls. Preserve role, fonts, layout and hierarchy.
+   * Literal content is UTF-8 <=16KiB; use localization.localize(...).text for
+   * localized values. At most 256 HUD controls and 1MiB text per whole tick,
+   * within the shared structural quota. Invalid caught calls reject the tick.
+   * A changed text-input declaration replaces its buffer; unchanged text keeps
+   * user edits. Reconciliation retires old focus receipts/composition. */
+  setUiText(id: NativeId, text: string): void;
+  /** Disabled descendants keep layout but lose focus/input eligibility. */
+  setUiDisabled(id: NativeId, disabled: boolean): void;
+  /** Existing world-space Text content, preserving fonts and text layout. */
+  setText(id: NativeId, text: string): void;
   /** Buffered runtime locale change; visible on the next accepted update. At
    * most 64 per tick within the shared structural quota. The entire numeric,
    * locale and structural batch rolls back on refusal. Catalog is immutable. */
@@ -347,7 +358,18 @@ export interface NativePersistentState {
    * poisoning the current source update. */
   set(value: NativePersistentValue, entity?: NativeId): void;
 }
+/** Owned pre-command declarations sorted by stable entity ID, <=1024 widgets
+ * and <=1024 world-text rows, combined text <=1MiB. This is not editable input
+ * buffer state: use input.ui events for accepted edits/submission. Queued writes
+ * appear next tick. Immutable properties/array length; no borrowed native data.
+ * Native Rust uses the same typed ControlUi/ControlText queue; Wasm parity for
+ * these controls/snapshots remains unsupported. No runtime authoring mutation. */
+export interface NativeHud {
+  readonly widgets: readonly { readonly id: NativeId; readonly role: 'root' | 'container' | 'label' | 'button' | 'text_input'; readonly text: string | undefined; readonly disabled: boolean }[];
+  readonly texts: readonly { readonly id: NativeId; readonly text: string }[];
+}
 export interface NativeContext {
+  readonly hud: NativeHud;
   /** Authored attachments for this source, sorted by stable entity ID. The array
    * and initial props are deeply frozen. One callback per nonempty source runs
    * in source-ID order with the same world-wide bulk views/transaction. A queued

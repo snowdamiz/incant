@@ -14,6 +14,16 @@ pub const MAX_FRAME_COMMANDS: usize = 65_536;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum StructuralCommand {
+    /// Update an existing widget declaration, preserving its role/fonts/layout.
+    ControlUi {
+        entity: StableId,
+        control: crate::UiControl,
+    },
+    /// Update existing world-space text, preserving its fonts/layout.
+    ControlText {
+        entity: StableId,
+        control: crate::TextControl,
+    },
     /// Replace/remove UI configuration against the same final native hierarchy.
     SetUi {
         entity: StableId,
@@ -118,11 +128,25 @@ pub enum StructuralCommand {
 #[derive(Debug, Default)]
 pub struct FrameCommands {
     commands: Vec<StructuralCommand>,
+    hud_count: usize,
+    hud_bytes: usize,
 }
 impl FrameCommands {
     pub fn push(&mut self, command: StructuralCommand) -> Result<(), RuntimeError> {
         if self.commands.len() == MAX_FRAME_COMMANDS {
             return Err(RuntimeError::BufferFull(MAX_FRAME_COMMANDS));
+        }
+        if let Some(bytes) = crate::hud::bytes(&command) {
+            if bytes > crate::MAX_TEXT_BYTES || self.hud_count == crate::MAX_HUD_COMMANDS {
+                return Err(SceneError::Invalid("HUD command text or count limit").into());
+            }
+            let next = self
+                .hud_bytes
+                .checked_add(bytes)
+                .filter(|&n| n <= crate::MAX_HUD_COMMAND_BYTES)
+                .ok_or(SceneError::Invalid("HUD command byte limit"))?;
+            self.hud_count += 1;
+            self.hud_bytes = next;
         }
         self.commands.push(command);
         Ok(())
@@ -135,6 +159,8 @@ impl FrameCommands {
     }
     pub fn clear(&mut self) {
         self.commands.clear();
+        self.hud_count = 0;
+        self.hud_bytes = 0;
     }
     pub fn iter(&self) -> impl ExactSizeIterator<Item = &StructuralCommand> {
         self.commands.iter()
@@ -272,6 +298,8 @@ impl NativeWorld {
                 StructuralCommand::SetLocale(_)
                     | StructuralCommand::SetText { .. }
                     | StructuralCommand::SetUi { .. }
+                    | StructuralCommand::ControlUi { .. }
+                    | StructuralCommand::ControlText { .. }
                     | StructuralCommand::SetVelocity { .. }
                     | StructuralCommand::SetAngularVelocity { .. }
                     | StructuralCommand::SetAngularVelocity2D { .. }
@@ -313,6 +341,8 @@ impl NativeWorld {
                     StructuralCommand::SetLocale(_)
                     | StructuralCommand::SetText { .. }
                     | StructuralCommand::SetUi { .. }
+                    | StructuralCommand::ControlUi { .. }
+                    | StructuralCommand::ControlText { .. }
                     | StructuralCommand::ControlAnimation { .. }
                     | StructuralCommand::ControlAnimationGraph { .. }
                     | StructuralCommand::ControlRootMotion { .. }
@@ -634,6 +664,8 @@ impl NativeWorld {
                 StructuralCommand::SetLocale(_)
                 | StructuralCommand::SetText { .. }
                 | StructuralCommand::SetUi { .. }
+                | StructuralCommand::ControlUi { .. }
+                | StructuralCommand::ControlText { .. }
                 | StructuralCommand::ControlAnimation { .. }
                 | StructuralCommand::ControlAnimationGraph { .. }
                 | StructuralCommand::ControlRootMotion { .. }
