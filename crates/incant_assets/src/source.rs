@@ -29,6 +29,11 @@ impl SourceSet {
         })
     }
     pub fn read(&mut self, relative: &Path) -> Result<Vec<u8>> {
+        self.read_limited(relative, MAX_SOURCE_BYTES)
+    }
+    /// Apply a format-specific cap before reading or cloning source bytes while
+    /// preserving the shared project containment and aggregate source budget.
+    pub fn read_limited(&mut self, relative: &Path, max_bytes: usize) -> Result<Vec<u8>> {
         if relative.is_absolute()
             || relative
                 .components()
@@ -61,6 +66,9 @@ impl SourceSet {
             return Err(invalid("asset path is not portable"));
         }
         if let Some(bytes) = self.files.get(&name) {
+            if bytes.len() > max_bytes {
+                return Err(AssetError::Limit("source bytes"));
+            }
             return Ok(bytes.clone());
         }
         let path = self.root.join(&normalized).canonicalize()?;
@@ -74,7 +82,7 @@ impl SourceSet {
         if !file.metadata()?.is_file() {
             return Err(invalid("asset dependency is not a regular file"));
         }
-        let remaining = MAX_SOURCE_BYTES - self.total;
+        let remaining = (MAX_SOURCE_BYTES - self.total).min(max_bytes);
         if file.metadata()?.len() > remaining as u64 {
             return Err(AssetError::Limit("source bytes"));
         }

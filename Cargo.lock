@@ -3852,6 +3852,7 @@ dependencies = [
  "incant_cmd",
  "incant_doc",
  "incant_nav",
+ "incant_text",
  "incant_types",
  "ktx2",
  "meshopt",
@@ -3872,6 +3873,7 @@ version = "0.0.1"
 dependencies = [
  "glam 0.32.1",
  "incant_2d",
+ "incant_text",
  "incant_types",
  "ktx2",
  "meshopt",
@@ -3880,6 +3882,7 @@ dependencies = [
  "sha2 0.10.9",
  "tempfile",
  "thiserror 2.0.21",
+ "ulid",
 ]
 
 [[package]]
@@ -4092,6 +4095,7 @@ dependencies = [
  "incant_assets",
  "incant_cmd",
  "incant_doc",
+ "incant_text",
  "schemars 1.2.2",
  "serde",
  "serde_json",
@@ -4428,6 +4432,7 @@ name = "incant_text"
 version = "0.0.1"
 dependencies = [
  "cosmic-text",
+ "rustybuzz",
  "thiserror 2.0.21",
  "ulid",
  "unicode-script",

@@ -1,0 +1,194 @@
+{
+  "reviewer": "astra /root/integrate_runtime_prs (independent of author)",
+  "reviewed_head": "927b86f27842d9a1a47703679d6efc3a58069ac4",
+  "feature_commit": "3f38add6fdef28d001b772665aa04b43f8a5047c",
+  "recorded_at": "2026-10-11T23:57:48.747154+00:00",
+  "result": "accepted scoped CPU font import/cooked-reader/shaper path; no actionable source finding",
+  "packet_sha256": "da11afbb8b710ca6533c27fa006e54e51a8117ba5bfa63e6a5d513107916ac78",
+  "source_hashes": {
+    "Cargo.lock": {
+      "sha256": "aa934e9eace4e3b4539b32d9877589d9a1432aa0e634f2b9f8d5ced4349347c4",
+      "bytes": 249791
+    },
+    "Cargo.toml": {
+      "sha256": "7599f2f1c4bbfad1ebc8e0a10a467d1a7df0930bdade7962321b065f98911c3c",
+      "bytes": 2811
+    },
+    "crates/incant_assets/Cargo.toml": {
+      "sha256": "dc00b7455e5a48b8d1283dd256eda0971cb607ab71bb206077e1347ed1ea1d83",
+      "bytes": 1314
+    },
+    "crates/incant_assets/src/font_cook.rs": {
+      "sha256": "841798098a0707de4e4e41e5fe69849d6ab0319e6ace30baec08ed25ff25e92b",
+      "bytes": 2330
+    },
+    "crates/incant_assets/src/lib.rs": {
+      "sha256": "943878b520a5715aee3a5421faee721269aba6015709996f424e2a9963e434a8",
+      "bytes": 3061
+    },
+    "crates/incant_assets/src/project_cache.rs": {
+      "sha256": "e62c81dc6a5787f79f2b41700719e13cbb39f75e7dfb6ad166a253195361f790",
+      "bytes": 1367
+    },
+    "crates/incant_assets/src/runtime.rs": {
+      "sha256": "2d41101d866fddd3c6a24fce132fb4fe2549cb1c951d6acd7be00e2a05023ef0",
+      "bytes": 7183
+    },
+    "crates/incant_assets/src/source.rs": {
+      "sha256": "3c4dcc6ba9bf18f63fc2b0317c5395494c9dbdd175b5d96e7bd971848f63a93b",
+      "bytes": 6157
+    },
+    "crates/incant_assets/tests/fonts.rs": {
+      "sha256": "d7ef87a550effff5f736fa50493123302f488d5c65d3e5bedd6d7ea22411e0a1",
+      "bytes": 2481
+    },
+    "crates/incant_assets_runtime/Cargo.toml": {
+      "sha256": "a7951f89ccefb82e93f5cdc5cf0297308ab14247ae07786c6bb091c32ae6c841",
+      "bytes": 891
+    },
+    "crates/incant_assets_runtime/src/font.rs": {
+      "sha256": "9b7a9a0f6bb0c8cf25faca821b1cd90dd85b19b89d8566a4a203a06942ac32d9",
+      "bytes": 5420
+    },
+    "crates/incant_assets_runtime/src/lib.rs": {
+      "sha256": "efeedfd1448fd5a525861e40fb4b076afcb3a85ff27031a2fb104256db7a8799",
+      "bytes": 2884
+    },
+    "crates/incant_assets_runtime/src/version.rs": {
+      "sha256": "c86af40d074ac7ce516600d74ebaa4b8d15bac9ab29d92fd915fc21d0e9a5788",
+      "bytes": 8260
+    },
+    "crates/incant_assets_runtime/tests/fonts.rs": {
+      "sha256": "7cdd379f660c3f73a0bd9ec405c8244d3af12395b617d09e90a0e9e808bc7d07",
+      "bytes": 5951
+    },
+    "crates/incant_import/Cargo.toml": {
+      "sha256": "51554caa95d34f6219d1c6b7ae11dcf1a9db023dbd273aae5f3edc44d5e023d8",
+      "bytes": 539
+    },
+    "crates/incant_import/src/lib.rs": {
+      "sha256": "de4a86f24b460505fcbbd9a929f9010a570ea80eae7df5d4e180b9df2d0cfb86",
+      "bytes": 13920
+    },
+    "crates/incant_import/src/watch.rs": {
+      "sha256": "d36278f63b4fd347b083301f66ff148611c668367a9bd6d806bc3a74732f444b",
+      "bytes": 12715
+    },
+    "crates/incant_import/tests/fonts.rs": {
+      "sha256": "72cf29da5b6066edc3bfd2b763c18ebca655ab72bd744c09b58d63e2ac66dc64",
+      "bytes": 12009
+    },
+    "crates/incant_text/Cargo.toml": {
+      "sha256": "5b6c17c5381464d3e3ea969f2fc975c87eb782acde236ac0c7fb090a8381b745",
+      "bytes": 577
+    },
+    "crates/incant_text/src/fonts.rs": {
+      "sha256": "021b1913d9c7ff446b47181936e3a57762a91d24e072e8c442cf2c31db4ae060",
+      "bytes": 5178
+    },
+    "crates/incant_text/src/lib.rs": {
+      "sha256": "90b785dd5f82d94a495f33e8ec654f3c32aed3593fc07fff01e11a17a5ad3cc0",
+      "bytes": 1377
+    }
+  },
+  "verified_logs": {
+    "affected_tests": {
+      "path": "/tmp/incant-font-tests-final.log",
+      "sha256": "bad49adce2a1ddbdd3514ae3d0817e6e7e15cc0b6e9ddeae190783becad09feb",
+      "bytes": 15842,
+      "exit_code": 0
+    },
+    "font_only_tests": {
+      "path": "/tmp/incant-font-only-tests-002.log",
+      "sha256": "1cfc492c65361f0813a8e08c05357b7373c15264e791dfbb2821b5deb109c84d",
+      "bytes": 727,
+      "exit_code": 0
+    },
+    "default_reader_tests": {
+      "path": "/tmp/incant-font-default-tests.log",
+      "sha256": "be2169b671e12252327aa907d1ddf449e91220d4dfefe5cf3a0085cdd02207af",
+      "bytes": 857,
+      "exit_code": 0
+    },
+    "clippy": {
+      "path": "/tmp/incant-font-clippy-002.log",
+      "sha256": "5686f890573619cfb94c492eebc29314dd29e4d6a0adabb5dd3745332f34a3da",
+      "bytes": 57,
+      "exit_code": 0
+    },
+    "consumers": {
+      "path": "/tmp/incant-font-consumer-check.log",
+      "sha256": "55ba33ca02862cac10c5214c7ad97198d929e99981380d0943aa1217550a15a3",
+      "bytes": 3055,
+      "exit_code": 0
+    },
+    "wasm": {
+      "path": "/tmp/incant-font-wasm-check-002.log",
+      "sha256": "e1d3ebf0952c4fcfc382a8c8751b4f0e11d7e38da9fb0f65ac302da728f4a730",
+      "bytes": 1177,
+      "exit_code": 0
+    },
+    "dependencies": {
+      "path": "/tmp/incant-font-dependencies.log",
+      "sha256": "94b7e96580c55065505e064bbeab558ea31132f91b00dda4f1ecad2b75baecb0",
+      "bytes": 112,
+      "exit_code": 0
+    },
+    "default_graph": {
+      "path": "/tmp/incant-font-default-runtime-tree.log",
+      "sha256": "4d463f5a6b2fa1ed215b8d1429a98c9d07b452da65f2b9e1265d693cacb69b1b",
+      "bytes": 1346,
+      "exit_code": 0
+    },
+    "font_graph": {
+      "path": "/tmp/incant-font-enabled-runtime-tree-002.log",
+      "sha256": "0d384d4448ca0ad94c1918e99c44ba683d6b6c1e426b7c739736f7939bd06efe",
+      "bytes": 2993,
+      "exit_code": 0
+    },
+    "lock_graph_assertions": {
+      "path": "/tmp/incant-font-lock-graphs.log",
+      "sha256": "b87044ee71030c9b1a913a4f818de53e8dff4a1be8079a61853c33295c14448f",
+      "bytes": 206,
+      "exit_code": 0
+    },
+    "fmt": {
+      "path": "/tmp/incant-font-fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "exit_code": 0
+    },
+    "conventions": {
+      "path": "/tmp/incant-font-conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "exit_code": 0
+    },
+    "diff_check": {
+      "path": "/tmp/incant-font-diff-check.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "exit_code": 0
+    }
+  },
+  "reviewed_contracts": [
+    "Read_limited keeps existing root containment/portable source identity, caps before read/clone, and preserves aggregate bound",
+    "Borrowed single-sfnt admission uses exact existing shaper parser; bounded names are not decoded",
+    "Recipe includes source path/hash and pinned compiler versions; manifest/key/header/exact length/hash validation precedes immutable font exposure",
+    "Default project cache paths retain component checks; explicit cache override stays host-only; file symlinks refused",
+    "Cook publishes staged content before manifest; cache repair cannot mutate retained bytes",
+    "Prepared import batch and watcher keep existing sole CommandBus publication, stale revision/project fences, stable asset/name, Undo/Redo and provenance",
+    "Payload bytes participate in staged AssetStore budget/generation; default audio and standalone font graphs stay bounded",
+    "Actual tests cover source-deleted multilingual shaping, ligature, mixed bad batch rollback, recovery, journal reopen, stale redo, corrupt cache and path refusal"
+  ],
+  "limits": [
+    "CPU/backend asset path only; editor import form still excludes ttf/otf in its format allowlist",
+    "No binary scene font reference/archive integration, atlas/drawing/widgets/IME, GPU/device/performance or CFF-outline numerical claim",
+    "No universal peak-memory or concurrent-host-filesystem-adversary claim"
+  ],
+  "integration_requirements": [
+    "Preserve main107 animation modules/visual glam dependency while adding font registration",
+    "Run integrated asset/runtime/import/text tests and consumer compile for new RuntimeAssetData variant",
+    "Keep editor chooser limitation explicit in publication prose"
+  ]
+}
