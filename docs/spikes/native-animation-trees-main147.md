@@ -44,3 +44,5 @@ native-input/renderer corrections are outside this frozen union. Earlier produce
 checks remain retained with their original source and artifact identities.
 
 [Exact source comparisons, commands, logs and process audit](evidence/native-animation-trees-main147.json).
+
+[Independent final integration review](evidence/native-animation-trees-main147/root-final-review.json) accepted the frozen source and both current-lock package proofs. Publication still requires the exact PR head fast check.
