@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-12T18:47:54.222046+00:00",
+  "reviewer": "astra root",
+  "decision": "accepted",
+  "scope": "Core Sample unchanged reviewed source integrated with main156",
+  "manifest_sha256": "6509e7c176bedfc82c97a9cad839d35ef7a6ef6dc595717655e3f667c8c243dd",
+  "tested_head": "fb718fef552dcf2c5e013a43e9ae0aa34bf791e5",
+  "verified": {
+    "accepted_source_bytes": 6,
+    "matching_engine_inputs": 1740,
+    "retained_raw_artifacts": 47,
+    "zero_exit_checks": 6,
+    "current_main_dev_scenarios": 7,
+    "state_observations": 53,
+    "unchanged_authoring": true
+  },
+  "limitations": [
+    "Current-main verification reused the immutable matching main156 headless binary with all 1740 frozen non-workflow input hashes equal; there is no new shipping export here.",
+    "The seven source-deleted ordinary shipping runs remain the accepted producer evidence, not relabeled current-main runs.",
+    "Gameplay in a numerical fixture only; Claude presentation, dynamic HUD, device and phase gates remain open."
+  ],
+  "findings": []
+}

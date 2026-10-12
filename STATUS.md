@@ -29,6 +29,24 @@ probe must still pass before release; checkpoint13 remains frozen and blocked.
 [Scope and preserved failure](docs/spikes/macos-retirement-late-events.md).
 
 
+
+## Core Sample gameplay — main156 integration verified
+
+A native TypeScript controller now covers movement, jumping, navmesh enemies,
+pickups, damage cooldown and terminal game states. Seven actual development
+scenarios and seven ordinary source-free shipping runs pass, with identical
+observations, logs and PCM; an additional exit-proximity control confirms that
+a missing pickup prevents winning. Public authoring, Undo/Redo and reopening
+pass, and Play leaves the project unchanged. Existing desktop checkpoint jobs
+now include the seven cheap headless scenarios; their hosted results are pending.
+Current-main integration also passes seven native-play scenarios with 53 checks,
+strict sample types, workflow lint and 25 CI policy tests. Independent integration
+review is accepted; final publication awaits its exact fast check.
+The numerical room is a test fixture. Claude is assembling the finished level
+and presentation; dynamic HUD bindings, music and reference-device performance
+remain open. [Scope and evidence](docs/spikes/core-sample-gameplay.md).
+
+
 ## Compound animation transitions — current-main integration verified
 
 Reviewed grouped-pose transitions now integrate with actual main155, retaining
