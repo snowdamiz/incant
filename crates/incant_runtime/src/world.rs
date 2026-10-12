@@ -64,6 +64,9 @@ pub enum RuntimeError {
 /// A disposable Bevy world; no project, command bus, authoring validator or
 /// serialization in the tick path. Snapshot conversion is explicitly requested.
 pub struct NativeWorld {
+    pub(crate) font_assets: Vec<crate::FontAssetRef>,
+    pub(crate) text_ids: BTreeSet<StableId>,
+    pub(crate) text_generation: u64,
     pub(crate) localization: crate::NativeLocalization,
     pub(crate) navigation: crate::navigation_runtime::NavigationRuntime,
     pub(crate) navigation_used: bool,
@@ -102,6 +105,8 @@ impl NativeWorld {
         // Startup pairing only. No document, scene serialization or hashing is
         // performed during simulation or native structural operations.
         let source_scene_fingerprint = Sha256::digest(scene.to_bytes()).into();
+        let texts = scene.texts;
+        let font_assets = scene.font_assets;
         let navigation = scene.prepared_navigation;
         let physics = scene.physics.clone();
         let physics_2d = scene.physics_2d.clone();
@@ -162,6 +167,9 @@ impl NativeWorld {
         let animation_query = world.query::<(&Identity, &crate::animation::Playback)>();
         let mut result = Self {
             localization: scene.localization,
+            font_assets,
+            text_ids: BTreeSet::new(),
+            text_generation: 0,
             navigation_used: !navigation.nodes.is_empty(),
             navigation,
             identity: crate::WorldIdentity::new(),
@@ -189,6 +197,9 @@ impl NativeWorld {
             tick: 0,
             tick_rate: scene.tick_rate,
         };
+        for node in texts {
+            result.install_text(node.entity, Some(node.text));
+        }
         for node in spatial {
             result.install_spatial(node.entity, Some(node));
         }

@@ -390,3 +390,55 @@ fn legacy_gameplay_refuses_flipbooks_instead_of_silently_running_a_static_sprite
     );
     assert_eq!(incant_core::project_entities(&project).unwrap().len(), 1);
 }
+
+#[test]
+fn legacy_text_startup_and_sync_refuse_without_changing_existing_motion() {
+    let mut project = Project::empty("Text refusal");
+    let mut scene = Scene::new("Main");
+    let mut entity = positioned("Mover", [1., 2., 0.]);
+    entity
+        .components
+        .insert("Velocity".into(), json!({"linear":[3.,0.,0.]}));
+    let id = entity.id.clone();
+    let sid = scene.id.clone();
+    scene.entities.insert(id.clone(), entity);
+    project.scenes.insert(sid.clone(), scene);
+    let mut engine = Engine::new(&project).unwrap();
+    let mut control = Engine::new(&project).unwrap();
+    engine.run_ticks(2).unwrap();
+    control.run_ticks(2).unwrap();
+    let font = new_id();
+    project.assets.insert(
+        font.clone(),
+        Asset {
+            id: font.clone(),
+            name: "Font".into(),
+            path: "font.ttf".into(),
+            kind: "font".into(),
+            sha256: "0".repeat(64),
+            import_settings: None,
+        },
+    );
+    project.scenes.get_mut(&sid).unwrap().entities.get_mut(&id).unwrap().components.insert("Text".into(),json!({"content":"text","fonts":[font],"font_size":16,"line_height":20,"width":200,"wrap":"word"}));
+    project.validate().unwrap();
+    assert!(
+        Engine::new(&project)
+            .err()
+            .unwrap()
+            .to_string()
+            .contains("Text gameplay is unsupported")
+    );
+    assert!(
+        engine
+            .sync(&project)
+            .unwrap_err()
+            .to_string()
+            .contains("Text gameplay is unsupported")
+    );
+    engine.step().unwrap();
+    control.step().unwrap();
+    assert_eq!(
+        serde_json::to_value(engine.snapshot()).unwrap(),
+        serde_json::to_value(control.snapshot()).unwrap()
+    );
+}

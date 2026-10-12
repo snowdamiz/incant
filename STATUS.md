@@ -53,6 +53,21 @@ active. Report merged work separately from local checks and unmet exit gates.
 The project is still early relative to the complete Engine 1.0 and Driftwake
 scope; no defensible percentage or completion date follows from the PR count.
 
+## Native text scene and font packaging — locally checked foundation
+
+Typed Text declarations now cook into bounded v12 binary scene data with explicit
+ordered font chains and immutable recipe bindings. Structural edits and
+save/restore retain/check the same font catalog and invalidate retained consumers
+by world identity/generation. Font loading and export data packaging preflight a
+64 MiB aggregate before payload reads. The actual public command/import/cook,
+export producer and data packager feed a fresh source-deleted numerical
+Latin/Arabic/CJK shaping/atlas test. This is not a successful exported game or
+rendered text claim: plain game, legacy Play and canonical render input explicitly
+refuse Text while the composed consumer is absent. No second CLI mode was added.
+The retained composed CPU text input, actual renderer consumption/Claude
+acceptance, widget layout/IME/focus and reference-phone gates remain open.
+Evidence: [native text bindings](docs/spikes/native-text-bindings.md).
+
 ## Runtime font atlas — locally checked
 
 A retained CPU alpha atlas now rasterizes actual packaged TrueType glyphs with

@@ -1,0 +1,60 @@
+{
+  "$defs": {
+    "TextWrap": {
+      "enum": [
+        "none",
+        "word",
+        "word_or_glyph"
+      ],
+      "type": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Literal text with an explicit ordered font chain. Localization can supply\nfuture updates; this declaration does not guess locale keys or host fonts.",
+  "properties": {
+    "content": {
+      "maxLength": 16384,
+      "type": "string"
+    },
+    "font_size": {
+      "format": "float",
+      "maximum": 512,
+      "minimum": 1,
+      "type": "number"
+    },
+    "fonts": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 32,
+      "minItems": 1,
+      "type": "array"
+    },
+    "line_height": {
+      "format": "float",
+      "maximum": 4096,
+      "minimum": 1,
+      "type": "number"
+    },
+    "width": {
+      "format": "float",
+      "maximum": 65536,
+      "minimum": 1,
+      "type": "number"
+    },
+    "wrap": {
+      "$ref": "#/$defs/TextWrap"
+    }
+  },
+  "required": [
+    "content",
+    "fonts",
+    "font_size",
+    "line_height",
+    "width",
+    "wrap"
+  ],
+  "title": "Text",
+  "type": "object"
+}

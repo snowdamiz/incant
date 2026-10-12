@@ -38,6 +38,8 @@ pub enum GameError<E = Infallible> {
     SampleRate,
     #[error("this game session has no spatial host")]
     SpatialHost,
+    #[error("this game session has no text host")]
+    TextHost,
     #[error("native sample clock exhausted")]
     Clock,
     #[error("game session is suspended; resume before advancing simulation")]
@@ -46,6 +48,9 @@ pub enum GameError<E = Infallible> {
 pub type Result<T, E = Infallible> = std::result::Result<T, GameError<E>>;
 
 fn require_nonspatial(scene: &CookedScene) -> Result<()> {
+    if scene.has_text() {
+        return Err(GameError::TextHost);
+    }
     if !scene.spatial().is_empty() || !scene.visual_assets().is_empty() {
         return Err(GameError::SpatialHost);
     }
@@ -54,6 +59,9 @@ fn require_nonspatial(scene: &CookedScene) -> Result<()> {
 
 fn require_nonspatial_world(world: &NativeWorld) -> Result<()> {
     let view = world.spatial_view().map_err(SessionError::from)?;
+    if view.has_text() {
+        return Err(GameError::TextHost);
+    }
     if view.nodes().any(|node| node.declaration.is_some()) || !view.assets().is_empty() {
         return Err(GameError::SpatialHost);
     }

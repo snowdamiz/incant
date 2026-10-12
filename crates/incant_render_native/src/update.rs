@@ -21,6 +21,9 @@ impl NativeRenderInput {
         if &self.identity != view.identity() {
             return Err(NativeRenderError::DifferentWorld.into());
         }
+        if view.has_text() {
+            return Err(NativeRenderError::TextUnsupported.into());
+        }
         if self.topology_generation != view.topology_generation()
             || self.binding_generation != view.binding_generation()
         {

@@ -30,7 +30,7 @@ pub use incant_types::{
     AngularVelocity, AngularVelocity2D, Animation, AudioBus, AudioListener, AudioSource,
     AudioSpatial, BodyMotion, Camera, CameraProjection, Collider, Collider2D, ColliderPart,
     ColliderShape, ColliderShape2D, DirectionalLight, DirectionalShadows, EnvironmentLight, Id,
-    MeshRenderer, PointLight, PrimitiveColliderShape, RigidBody, SpotLight, TextureUsage,
+    MeshRenderer, PointLight, PrimitiveColliderShape, RigidBody, SpotLight, Text, TextureUsage,
     Transform, Velocity,
 };
 pub fn new_id() -> Id {
@@ -536,6 +536,19 @@ fn validate_component(kind: &str, value: &Value, project: &Project) -> Result<()
                 return Err("tilemap requires a color atlas texture asset".into());
             }
         }
+        "Text" => {
+            let text: Text = decode(value)?;
+            text.validate().map_err(str::to_owned)?;
+            for id in &text.fonts {
+                if project
+                    .assets
+                    .get(id)
+                    .is_none_or(|asset| asset.kind != "font")
+                {
+                    return Err("text requires existing font assets".into());
+                }
+            }
+        }
         "Animation" => {
             let animation: Animation = decode(value)?;
             animation.validate().map_err(str::to_owned)?;
@@ -630,6 +643,7 @@ pub fn schema_registry() -> BTreeMap<String, Value> {
             "MeshRenderer".into(),
             json!(schemars::schema_for!(MeshRenderer)),
         ),
+        ("Text".into(), json!(schemars::schema_for!(Text))),
         ("Animation".into(), json!(schemars::schema_for!(Animation))),
         ("Camera".into(), json!(schemars::schema_for!(Camera))),
         ("Tilemap".into(), json!(schemars::schema_for!(Tilemap))),

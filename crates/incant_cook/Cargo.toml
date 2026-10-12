@@ -31,6 +31,9 @@ sha2 = { workspace = true, optional = true }
 tempfile = { version = "3", optional = true }
 
 [dev-dependencies]
+incant_cmd.workspace = true
+incant_import = { path = "../incant_import" }
+incant_text.workspace = true
 incant_assets = { path = "../incant_assets" }
 incant_assets_runtime = { workspace = true, features = ["visual"] }
 tempfile = "3"

@@ -82,7 +82,7 @@ def data_package(root, producer, receipt, destination, camera):
     require(receipt.get('format') == 'incant-native-project-build' and receipt.get('version') == 1,
             'Unsupported project build receipt')
     destination.mkdir()
-    for directory in ('models', 'textures', 'audio'):
+    for directory in ('models', 'textures', 'audio', 'fonts'):
         (destination / directory).mkdir()
     manifest = {}
     total = 0
@@ -133,6 +133,8 @@ def data_package(root, producer, receipt, destination, camera):
                 put('textures/' + content + '.ktx2', payload)
         else:
             raise ValueError('Unsupported visual asset kind')
+    from native_fonts import package_fonts
+    package_fonts(cache / 'fonts', receipt.get('font_assets', []), put, read)
     audio = receipt['audio_clips']
     require(isinstance(audio, dict) and len(audio) <= 128, 'Audio clip count exceeds export capacity')
     clips = bytearray(b'NCLIPS01' + struct.pack('<I', len(audio)))

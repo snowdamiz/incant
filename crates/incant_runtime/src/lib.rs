@@ -95,3 +95,10 @@ pub use spatial::{
     MAX_VISUAL_ASSETS, NativeEnvironmentLight, NativeMeshRenderer, VisualAssetKind, VisualAssetRef,
 };
 pub use spatial_view::{SpatialNode, SpatialView};
+
+mod text;
+mod text_binary;
+pub use text::{
+    CookedText, FontAssetRef, MAX_SCENE_TEXT_BYTES, MAX_TEXT_BYTES, MAX_TEXT_FONTS, MAX_TEXT_NODES,
+    NativeText, TextLayout, TextView, TextWrap,
+};
