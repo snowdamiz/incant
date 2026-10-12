@@ -16,12 +16,22 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Wasm HUD controls — current-main execution verified
+## Release checkpoint 14 — promoted main160 baseline
+
+All 23 required contexts and eight exact-candidate push workflows passed.
+Release `2444d81f` has the exact tested main160 tree. Actual hosted AppKit retirement
+and numerical UI checks pass; the logs identify Windows DX12 software rendering,
+Linux llvmpipe/Vulkan and macOS paravirtual Metal. Main161+ features remain outside
+this release baseline. Failed checkpoints stay historical; Phase 1, reference-phone,
+appearance and complete engine/game gates remain open.
+[Promotion and retained evidence](docs/spikes/release-checkpoint-14.md).
+
+## Wasm HUD controls — merged main166
 
 The unchanged accepted ABI passes 469 actual-host cases, Clippy and target/tooling
 checks. A fresh ordinary shipping player passes three source/map/build-deleted
 12-tick runs with exact report/PCM equality and six precise no-output refusals.
-Independent integration review is accepted; fast CI/publication remain pending. Module checkpoints,
+Independent integration review and exact-head fast CI passed before PR166 merged. Module checkpoints,
 GPU/window/appearance, device and full SDK gates remain open.
 [Current integration evidence](docs/spikes/native-wasm-hud-integration.md).
 
@@ -241,7 +251,7 @@ while retaining exact geometry, clip, opacity and untouched-pixel controls.
 Shader/runtime behavior is unchanged. Current-main CPU tests, Clippy and wasm32
 compile pass; independent producer/current-main reviews and seven caught mutations are retained.
 Checkpoint13 passed the Linux and Windows numerical rendering stages. Its general
-macOS probe failed and its Windows desktop job timed out later, so release remains
+macOS probe failed and its Windows desktop job timed out later, so that batch remained
 held until a repaired frozen candidate passes all 23 required checks.
 The Windows conformance job also exceeded its 40-minute limit after successful
 conformance stages; only that existing job now permits 90 minutes for the remaining
@@ -653,25 +663,21 @@ and complete Game UI/IME gates remain open.
 
 ## Current milestone
 
-Main #161 includes compound native animation transitions and complete Wasm
-snapshots, authored two-bone IK, offline audio/UI checkpoints, public physics
-queries and the Core Sample gameplay slice. Complete native/TypeScript/Wasm root-motion integration merged after current-main
-CPU, ordinary package, independent review and fast checks passed. HUD current-main
-validation and independent final review are complete; audio transport
-remains a separate reviewed producer queue. Phase 1 and
-the finished game remain incomplete.
+Main #166 includes compound native animation and Wasm snapshots, authored two-bone
+IK, complete native/TypeScript/Wasm root motion, native audio transport and HUD,
+Wasm HUD controls, offline audio/UI checkpoints, public physics queries, and the
+Core/Planar gameplay foundations. Wasm audio transport is under current-main
+shipping validation; reviewed headless UI and the reusable player/mobile library
+remain in the local integration queue. Phase 1 and the finished game remain incomplete.
 
-Checkpoint13 is terminal and unpromoted: 21 of 23 required contexts succeeded,
-the general macOS retirement probe failed on a late callback, and Windows desktop
-was cancelled at its one-hour job cap after 53m27s of successful pre-export checks.
-Main158 contains the reviewed probe-only callback repair. The reviewed Windows
-workflow repair allows that job 120 minutes while Linux stays at 60, preserving
-all checks and fresh private shipping builds. The repair merged after its exact-head
-fast check passed. Checkpoint14 is frozen at main160 `d1ef35ee`, candidate
-`e9c0b288`; all 23 full checks remain required. Release remains at
-checkpoint8 until all 23 exact-head required checks succeed. Failed checkpoints
-remain historical, and later feature merges do not move an active candidate.
-[Windows timing and repair evidence](docs/spikes/windows-desktop-checkpoint-budget.md).
+Checkpoint14 promoted selected main160 `d1ef35ee` after all 23 exact-candidate
+required checks and eight push workflows succeeded. Release `2444d81f` has tested
+tree `c0137be6`; later main161+ features are excluded. The repaired AppKit probe
+and hosted Linux/Windows numerical UI checks passed. Failed checkpoint13 remains
+historical: its general macOS probe failed and Windows desktop exceeded its old
+one-hour allowance. The main158 probe repair and main160 Windows job allowance
+were verified by this successful batch, without removing checks or reusing private
+shipping builds. [Promotion and evidence](docs/spikes/release-checkpoint-14.md).
 
 Native animation graphs now connect ordinary typed authoring, captured models,
 v14 cooking, deterministic native clip states and flat adjacent-pair 1D blends.
@@ -687,8 +693,8 @@ snapshots explicitly refuse unrepresentable graph blends. The additive guest
 graph SDK now carries bounded snapshots and atomic controls through both native
 Wasm hosts, with its current-main checks recorded above. The newer nested/2D
 tree route is verified separately above. The later compound transition and authored IK routes are separately verified
-above; layering, connected root-motion publication, rendered acceptance and
-device gates remain open.
+above; complete layering, rendered acceptance and device gates remain open. Connected
+root motion merged as main161.
 [Scope and evidence](docs/spikes/native-animation-graphs.md).
 
 Connected native UI now composes typed UiNode authoring, v13 cooked scenes,
