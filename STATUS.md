@@ -32,17 +32,20 @@ unsupported; arbitrary VM heap/effects and full save/device gates are not claime
 [Contract and evidence](docs/spikes/native-audio-session-checkpoints.md) and
 [current integration](docs/spikes/evidence/native-audio-main145.json).
 
-## Two-bone IK retained CPU integration — locally verified
+## Two-bone IK retained CPU integration — current-main verified
 
 The cooked-model animation player applies up to 32 ordered model-space constraints
 to sampled or blended local poses and publishes the complete hierarchy/palettes
 atomically. Both reach limits, weighted rotations, degenerate/refused chains,
 source-deleted cooked skinning and allocation-free repeated solving are covered
-by ten new cases; 118 affected tests and scoped Clippy pass. Existing cooked
+by ten new cases; current-main #146 integration passes all 118 affected tests,
+all-target Clippy, wasm32 and dependency checks. The six accepted source files
+remain byte-identical. Existing cooked
 formats, normal sampling and renderer paths stay unchanged. Authored/native/SDK
 control integration, general affine chains and Claude rendered/animation-feel
 acceptance remain open; this is not the complete Phase 1 animation gate.
-[Contract and evidence](docs/spikes/native-two-bone-ik.md).
+[Contract and evidence](docs/spikes/native-two-bone-ik.md) and
+[current integration](docs/spikes/evidence/native-two-bone-ik-main146.json).
 
 ## Public Wasm physics queries — current-main verified
 
@@ -280,11 +283,12 @@ and complete Game UI/IME gates remain open.
 
 ## Current milestone
 
-Main #144 includes the multi-pose sampler and bounded nested/2D animation numeric
-core; authored tree playback and its complete SDK/render route remain separate
-local work. The current public Wasm physics integration adds real query/event
-capabilities and an ordinary source-deleted package proof, as recorded above.
-Offline audio checkpoint continuation is now current-main verified above.
+Main #146 includes the multi-pose sampler, bounded nested/2D animation numeric
+core, public Wasm physics queries and ordinary offline audio checkpoint
+continuation. The reviewed two-bone IK CPU integration is current-main verified;
+authored IK controls and rendered acceptance remain open. Authored tree playback
+and complete-pose SDK work remain separately reviewed local lanes awaiting their
+ordinary shipping proofs.
 Checkpoint 11 remains failed and frozen; its Linux rendering repair is with
 Claude. No release or phase gate advances on these local feature results.
 
