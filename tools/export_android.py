@@ -33,6 +33,7 @@ def build(project, staging, storage, target, scene, camera, ndk_root):
     host = match.group(1)
     android_archive.admit(host, target)
     ndk = android_archive.toolchain(ndk_root)
+    ndk_hashes = android_archive.tool_hashes(ndk)
     clang = execute([ndk['clang'], '--version']).stdout
     require('clang version 19.0.1' in clang, 'Unexpected reviewed NDK compiler identity')
     env, selected_env = android_archive.environment(os.environ, rustc, project, scene, ndk)
@@ -96,12 +97,13 @@ def build(project, staging, storage, target, scene, camera, ndk_root):
         if source.is_file():
             shutil.copy2(source, staging / 'symbols' / name)
     write_json(staging / 'project-build.json', receipt)
+    require(android_archive.tool_hashes(ndk) == ndk_hashes, 'NDK tools changed during archive build')
     return {'format': 'incant-android-project-archive', 'version': 1, 'target': target, 'producer_target': host,
             'profile': 'shipping', 'features': selected_features, 'command': command_receipt,
             'compiler': compiler, 'ndk': {'revision': android_archive.NDK_REVISION,
                  'path': str(ndk['root']), 'api': android_archive.API, 'clang': clang,
                  'properties_sha256': sha256(read(ndk['root'] / 'source.properties', 65536)),
-                 'tool_sha256': {name: sha256(read(path, 512 * 1024**2)) for name, path in ndk.items() if path.is_file()}},
+                 'tool_sha256': ndk_hashes},
             'codegen': flags, 'physics_mode': mode, 'physics_variant': mode,
             'physics': physics,
             'normal_dependencies': graph, 'project_sha256': project_hash, 'scene_id': receipt['scene_id'],

@@ -136,6 +136,28 @@ class AndroidExport(unittest.TestCase):
             with self.subTest(path=path), self.assertRaises(ValueError):
                 archive.producer_receipt(bad, 'p', 'fast')
 
+    def test_trusted_tool_symlinks_hash_targets_but_keep_invocation_and_refuse_escape(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory).resolve()
+            ndk = root / 'ndk'
+            ndk.mkdir()
+            binary, link = ndk / 'llvm-objcopy', ndk / 'llvm-strip'
+            binary.write_bytes(b'actual tool contents')
+            link.symlink_to(binary.name)
+            tools = {'root': ndk, 'strip': link, 'objcopy': binary}
+            expected = archive.sha256(binary.read_bytes())
+            self.assertEqual(archive.tool_hashes(tools), {'strip': expected, 'objcopy': expected})
+            self.assertEqual(tools['strip'], link)
+            self.assertTrue(link.is_symlink())
+            with self.assertRaisesRegex(ValueError, 'Linked package input'):
+                archive.read(link, 1024)  # Project/package file policy is unchanged.
+            outside = root / 'outside'
+            outside.write_bytes(b'foreign tool')
+            link.unlink()
+            link.symlink_to(outside)
+            with self.assertRaisesRegex(ValueError, 'NDK tool escapes reviewed root'):
+                archive.tool_hashes(tools)
+
     def test_failed_build_retains_raw_evidence_and_publishes_nothing(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory).resolve()

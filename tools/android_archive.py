@@ -49,6 +49,21 @@ def toolchain(ndk):
     return paths
 
 
+def tool_hashes(ndk):
+    """Hash trusted tool symlinks inside the canonical NDK, never package links.
+
+    Keep the original invocation path: LLVM multi-call tools select their action
+    from argv[0], so executing the resolved llvm-objcopy as llvm-strip is wrong.
+    """
+    result = {}
+    for name, path in ndk.items():
+        if path.is_file():
+            resolved = path.resolve(strict=True)
+            require(resolved.is_relative_to(ndk['root']), 'NDK tool escapes reviewed root: ' + name)
+            result[name] = sha256(read(resolved, 512 * 1024**2))
+    return result
+
+
 def preflight_project(project, scene):
     payload = read(project, 64 * 1024**2)
     mode = physics_export.project_mode(payload)
