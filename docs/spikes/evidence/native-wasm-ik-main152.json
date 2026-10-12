@@ -1,0 +1,1379 @@
+{
+  "at": "2026-10-12T17:37:47.784093+00:00",
+  "scope": "Complete native IK Rust/Wasm snapshot/control API on actual main152",
+  "main": "1ab376c799ab61e179f15af8adc94db21188086c",
+  "tested_head": "c8115289af04ab82f74667400d79da31988c33be",
+  "ancestry_head": "fec80d132322b6e3eaa9428cd270c38854fcc92c",
+  "post_test_ancestry_delta": [
+    "STATUS.md",
+    "docs/spikes/evidence/native-authored-ik-main151.json",
+    "docs/spikes/evidence/native-authored-ik-main151/integration-seams.patch",
+    "docs/spikes/evidence/native-authored-ik-main151/integration-seams.patch.gz",
+    "docs/spikes/evidence/native-authored-ik-main151/root-final-review.json",
+    "docs/spikes/native-authored-ik-main151.md"
+  ],
+  "source_count": 1727,
+  "all_frozen_inputs_unchanged": true,
+  "producer_head": "01cef7d35c6e8cc9c30c325200f6d46511c99ec1",
+  "accepted_sources": {
+    "crates/incant_cook/examples/animation_pose_package_oracle.rs": "5d8e9164d9ecfc78561e8a58dfbe9288e9fb56d327e66c18a1dc17502d1cb8d1",
+    "crates/incant_wasm_abi/src/lib.rs": "33a5af6c14b75329a692ea7ae5a045d115ab02c3ccb7561465c16c26d51551dd",
+    "crates/incant_wasm_dev/src/generated.rs": "8e3672793d46a4ddb4da7df271718e543b55b930b8de966efcdf8aa1da25e0b1",
+    "crates/incant_wasm_dev/tests/animation_ik_parity.rs": "2ab216900b17627f0e281342cf9e327323bee3c9484d5f0b35345c5bd3ad600d",
+    "crates/incant_wasm_runtime/c/generated.h": "44233a06213c783a41a012b33e65a83e996f18679dd1db1babf3aa707c3fee6a",
+    "crates/incant_wasm_runtime/c/generated.inc": "9f6da55f589c8085aad2af8f7401f42166734fac0b6b8f15eb0ed114cf3cc133",
+    "crates/incant_wasm_runtime/fixtures/animation-ik.wat": "bf66df2279efc7caa9b281be54817e2778a31058d0a2b2a760f820f0f0245be9",
+    "crates/incant_wasm_runtime/src/animation_ik.rs": "f9fb94daebf1bd1f8b647b584a4012bb7052f6d8290293b180ca4a24017d90a8",
+    "crates/incant_wasm_runtime/src/capability.rs": "432990fe3862e49506d04208ee5338b416b89774d0472711c0c31e7fb98372f1",
+    "crates/incant_wasm_runtime/src/generated.rs": "aa094c36020d24aa91c3d486e2575306ad863260a5caa75ef659f6a7ac1bcbcc",
+    "crates/incant_wasm_runtime/src/input_tags.rs": "af28120ef61a46100fcd5f0425a11a82407d7292db54d0eba4181a8d06a962b3",
+    "crates/incant_wasm_runtime/src/lib.rs": "da8fcfd829f8e38225b46cd47161867e8d14cfe850c5134caaaab8768410e77c",
+    "crates/incant_wasm_runtime/tests/animation_ik.rs": "08c3a71303ed3241b95fe386ce5a54eda5d548083b8008c4ae43457896120b0f",
+    "crates/incant_wasm_runtime/tests/support/animation_ik.rs": "078aee1dd85bd23cd59d7d9a73a6d049723e79167de5434fb2a548636d5a79bb",
+    "sdk/abi/native-v1.json": "6f8cd9ef213d162af67fd2a69c5fd8a16e60907890d09345cb9aa0f6822fd6d7",
+    "sdk/rust/fixtures/animation_ik_failure.rs": "8be1708a7a1566be7a1dae534396ede4f2ec35c73e8c8d5f2e6b54966b711dd1",
+    "sdk/rust/samples/animation_ik.rs": "1091b3430e5bb694812317846e473200143554d8b4ed21ff73e6195ef4860af0",
+    "sdk/rust/src/animation_ik.rs": "cff5169c4ac16aa6c0e525fca7a09ae2679c2c37237fe871268d1c678581e45e",
+    "sdk/rust/src/lib.rs": "d1ed8ae78087502ea3fb2daac7269947584acaa4f23385cbe70e8b272418272f",
+    "sdk/rust/src/raw.rs": "b94cc2502af18da439ffeaba4f31368999e45db6c86228b02119ed8c5c469586",
+    "sdk/rust/src/tick.rs": "5b26be75142f3cbe70988a4c99417ee6588f7bb561d5c61f9131a8264d6d190b",
+    "sdk/rust/src/tick/ik.rs": "d3d3461e1d6d6f69e22eddad6cba86678e84f29ae114869426f056e92f0e1c29",
+    "sdk/rust/tests/animation_ik.rs": "16a27ac698e87b62e16926d7ec6a150e9b209ccde9e47386ece186b1169bc1e7",
+    "tools/generate_wasm_sdk.py": "b4cede593d005a0b551b3ff0e047274652686cf9cfb9efb958b587de1a670fc6",
+    "tools/probes/native-wasm-animation-pose-export.py": "e582e7c23e127456f11820392dced4cf49b5d11a11467fd37fc58e077589174b",
+    "tools/probes/native-wasm-animation-pose-export/ik.rs": "02651fc5ade43f73f742fbfa0e5607da20a407ce4164c3224f80a454ae42ec43",
+    "tools/probes/shipping-wasm2c.py": "9bd5e65c5a29236f13a25f28fd7d4fceb9c9804d05f91ae8800c76a5faaacd5a",
+    "tools/wasm_abi.py": "073d14ade317def8f6fdea720865eb38dad1dfb1791099a653cd8eb302aa2d65",
+    "tools/tests/test_wasm_sdk.py": "ee506d8ad41c6f85a140a454c0c6c1ee40b3ec68dbc8a00518d987ac423a7288"
+  },
+  "checks": [
+    {
+      "name": "conformance",
+      "command": [
+        "python3",
+        "tools/probes/shipping-wasm2c.py",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/conformance",
+        "--rustup",
+        "/opt/homebrew/bin/rustup",
+        "--profile",
+        "ci",
+        "--conformance-only"
+      ],
+      "exit": 0,
+      "seconds": 279.65443462500116,
+      "sha256": "574af3621e3ea33f4f833844525fcf843cf3d6fd0f8b4c4cda3bea2cebb4805b"
+    },
+    {
+      "name": "wasm",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_wasm_abi",
+        "-p",
+        "incant_wasm_runtime",
+        "-p",
+        "incant-module",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "exit": 0,
+      "seconds": 2.460850000001301,
+      "sha256": "4d4b151ce11b462ef6a02e650f30cf702828a10e15784c0b1a59319b56084a7e"
+    },
+    {
+      "name": "graph",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_runtime",
+        "incant_script",
+        "incant_assets_runtime",
+        "incant_wasm_abi",
+        "incant_wasm_runtime",
+        "incant_wasm_player",
+        "incant_game_runtime",
+        "incant_game_player",
+        "--features",
+        "incant_game_player/static-module,incant_game_player/render-input"
+      ],
+      "exit": 0,
+      "seconds": 0.3608970000004774,
+      "sha256": "417393acccae9e78ff908995398f3f5a659fa16f114a8e05495b5fb88d3c04f5"
+    },
+    {
+      "name": "generated",
+      "command": [
+        "python3",
+        "tools/generate_wasm_sdk.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.18537545899926045,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "sdk",
+      "command": [
+        "node",
+        "tools/generate_sdk.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.0538133750014822,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "bridge",
+      "command": [
+        "node",
+        "tools/build_bridge.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.08412300000054529,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 1.1853947910003626,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.039644500000576954,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "tools",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_*.py"
+      ],
+      "exit": 0,
+      "seconds": 20.674450041000455,
+      "sha256": "0b1fe306c57d267b945b57a8eb122a6a4729ce5034138bbe1987e2f3257f5a56"
+    },
+    {
+      "name": "headless",
+      "command": [
+        "./tools/cargo",
+        "build",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_headless",
+        "--features",
+        "wasmtime-host"
+      ],
+      "exit": 0,
+      "seconds": 52.95066083399979,
+      "sha256": "01c94cd44af4faaaf59f9c11c2be76355baff86408462eca4b28144e3e9cd695"
+    },
+    {
+      "name": "oracle",
+      "command": [
+        "./tools/cargo",
+        "build",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_cook",
+        "--example",
+        "animation_pose_package_oracle"
+      ],
+      "exit": 0,
+      "seconds": 33.92644737500086,
+      "sha256": "797f372d6289e883a29b3c1b4dcb6a426f064ea53e451d93539bb6099914c5c2"
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.012648916999751236,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "public-export",
+      "command": [
+        "python3",
+        "tools/probes/native-wasm-animation-pose-export.py",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export",
+        "--binary",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/incant_headless",
+        "--oracle",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/animation_pose_package_oracle",
+        "--ik"
+      ],
+      "exit": 0,
+      "seconds": 330.60679354199965,
+      "sha256": "10ddb6fe6107226dd01dde6638a80afe857f323208ae44bc8238c1e11a37012a"
+    }
+  ],
+  "verified": {
+    "at": "2026-10-12T17:36:20.345309+00:00",
+    "passed": true,
+    "tested_head": "c8115289af04ab82f74667400d79da31988c33be",
+    "frozen_inputs": 1727,
+    "accepted_sources": 29,
+    "commands": 13,
+    "conformance": {
+      "passed": 418,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 74,
+      "development_processes": 3,
+      "prepared_files_verified_before_cleanup": 841
+    },
+    "package": {
+      "files": 14,
+      "player_sha256": "31403e3ec29c3c7ff1aa88fcdd45b7665e6569c5d711ae441ee9589629843226",
+      "player_bytes": 9869136,
+      "fresh_runs": 3,
+      "ticks_each": 20,
+      "scalar_comparisons_each": 4140,
+      "public_vector_checks_each": 252,
+      "exact_refusals": 15,
+      "pcm_log_development_equality": true,
+      "removed_files": 17
+    },
+    "limits": [
+      "Actual local desktop CPU package; no GPU/rendered/device/performance or phase gate.",
+      "Eight active weighted samples; nonzero tree fades/composite operands remain unsupported.",
+      "Whole guest checkpoints explicitly unsupported; gameplay counter lives in native ECS, not module global state.",
+      "Only newly created proof source/cache/build/maps are removed; repository and shared engine build storage are retained."
+    ]
+  },
+  "artifacts": {
+    "docs/spikes/evidence/native-wasm-ik-main152/freeze.json": {
+      "sha256": "4446f54da003a8d100b950e0d4a3a7e9776d1e98109b2d8fdb56d0e009ac68eb",
+      "bytes": 200129,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/freeze.json",
+      "uncompressed_sha256": "4446f54da003a8d100b950e0d4a3a7e9776d1e98109b2d8fdb56d0e009ac68eb",
+      "uncompressed_bytes": 200129
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/accepted-source-comparison.json": {
+      "sha256": "9eba9195284a8dd5288577ca8d5da6e077e5753988674f9718736658054e2614",
+      "bytes": 3221,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/accepted-source-comparison.json",
+      "uncompressed_sha256": "9eba9195284a8dd5288577ca8d5da6e077e5753988674f9718736658054e2614",
+      "uncompressed_bytes": 3221
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/results.json": {
+      "sha256": "77e99e83dd82976f532c43cec6a07c2a429cfedc2554d84df4ab831ae97f0c93",
+      "bytes": 4668,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/results.json",
+      "uncompressed_sha256": "77e99e83dd82976f532c43cec6a07c2a429cfedc2554d84df4ab831ae97f0c93",
+      "uncompressed_bytes": 4668
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/headless.json": {
+      "sha256": "63ee12c10a68a1d7fc2c45424af994be53f0c4f00c542c41dd088047934e7691",
+      "bytes": 329,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/headless.json",
+      "uncompressed_sha256": "63ee12c10a68a1d7fc2c45424af994be53f0c4f00c542c41dd088047934e7691",
+      "uncompressed_bytes": 329
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/oracle.json": {
+      "sha256": "60fad55152870a7698040b4e685da3d311e06bec37e0fec98f783eb32b8e5d0c",
+      "bytes": 320,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/oracle.json",
+      "uncompressed_sha256": "60fad55152870a7698040b4e685da3d311e06bec37e0fec98f783eb32b8e5d0c",
+      "uncompressed_bytes": 320
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/verified.json": {
+      "sha256": "de62bd2ac64c8e065ce25fcaf13c2b83fcd272cb4b27fd90972606011d044668",
+      "bytes": 1187,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/verified.json",
+      "uncompressed_sha256": "de62bd2ac64c8e065ce25fcaf13c2b83fcd272cb4b27fd90972606011d044668",
+      "uncompressed_bytes": 1187
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/verification.py": {
+      "sha256": "4f73bd72d9409d96da7ead27b841bfcd9863b6e4e8d1ef37d5f6afc697de300a",
+      "bytes": 4249,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/verify-wasm-ik-main152.py",
+      "uncompressed_sha256": "4f73bd72d9409d96da7ead27b841bfcd9863b6e4e8d1ef37d5f6afc697de300a",
+      "uncompressed_bytes": 4249
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/verification.log.gz": {
+      "sha256": "78bf760acd1612d9f46337f22b536cb006f7637a860e85fa2a66668b8fecc2e3",
+      "bytes": 667,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/verification.log",
+      "uncompressed_sha256": "36f761b5c80b4916d410d3992f4a4559d8a0b1772012b6cbda31fb03e4e7b3f7",
+      "uncompressed_bytes": 1075
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/logs/conformance.log.gz": {
+      "sha256": "1da3ae640d1d5b56e48252081c725236b9535bafb8259d62cba4a2f1bb27d33a",
+      "bytes": 115,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/conformance.log",
+      "uncompressed_sha256": "574af3621e3ea33f4f833844525fcf843cf3d6fd0f8b4c4cda3bea2cebb4805b",
+      "uncompressed_bytes": 120
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/logs/wasm.log.gz": {
+      "sha256": "9b3f635c99e86ee2bfce964e58fa74ae72168a96cce51096840164d096b33d98",
+      "bytes": 236,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/wasm.log",
+      "uncompressed_sha256": "4d4b151ce11b462ef6a02e650f30cf702828a10e15784c0b1a59319b56084a7e",
+      "uncompressed_bytes": 1025
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/logs/graph.log.gz": {
+      "sha256": "7894fc25663af68bf7d7a2890702b2c190c03f8d374e3e4634309f1bda1c3285",
+      "bytes": 147,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/graph.log",
+      "uncompressed_sha256": "417393acccae9e78ff908995398f3f5a659fa16f114a8e05495b5fb88d3c04f5",
+      "uncompressed_bytes": 267
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/logs/generated.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/generated.log",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/logs/sdk.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/sdk.log",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/logs/bridge.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/bridge.log",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/logs/fmt.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/fmt.log",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/logs/conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/conventions.log",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/logs/tools.log.gz": {
+      "sha256": "febd43b39722ba2b22bdbeccd53c6135014a5e05899d28a7326fdd3e50f7cd38",
+      "bytes": 652,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/tools.log",
+      "uncompressed_sha256": "0b1fe306c57d267b945b57a8eb122a6a4729ce5034138bbe1987e2f3257f5a56",
+      "uncompressed_bytes": 2469
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/logs/headless.log.gz": {
+      "sha256": "2d03fd24d64bbb3f6208d62793ae506dcc085f2955f77abf36d2d051fdecc883",
+      "bytes": 438,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/headless.log",
+      "uncompressed_sha256": "01c94cd44af4faaaf59f9c11c2be76355baff86408462eca4b28144e3e9cd695",
+      "uncompressed_bytes": 3918
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/logs/oracle.log.gz": {
+      "sha256": "e14a1d91e8afe7d50a53ee584bf6f1cc838b3bd5fa430705b557c798937c99a0",
+      "bytes": 308,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/oracle.log",
+      "uncompressed_sha256": "797f372d6289e883a29b3c1b4dcb6a426f064ea53e451d93539bb6099914c5c2",
+      "uncompressed_bytes": 1815
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/logs/diff.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/diff.log",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/logs/public-export.log.gz": {
+      "sha256": "2072e6ba800ca4c4f828970af4175294e541595fe9fb1b2ccd0b2a016b71bde3",
+      "bytes": 342,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export.log",
+      "uncompressed_sha256": "10ddb6fe6107226dd01dde6638a80afe857f323208ae44bc8238c1e11a37012a",
+      "uncompressed_bytes": 474
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/conformance/conformance-0.log.gz": {
+      "sha256": "606ec247026a93a3377d6a9806a6b94179ba3dd2643c0c3a6209e811929ab0f7",
+      "bytes": 13029,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/conformance/conformance-0.log",
+      "uncompressed_sha256": "c7f1a0e4616afa208922028b3a61181b60d0430175ebe3841951b467d4129ce7",
+      "uncompressed_bytes": 56505
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/conformance/conformance-1.log.gz": {
+      "sha256": "6cdce2ade3e01f16aff6dec48c5973e01b4ce0827215448d6612a43c7864c793",
+      "bytes": 381,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/conformance/conformance-1.log",
+      "uncompressed_sha256": "4de68a3938a448480a2e06bf562e65fa2dab87100c60046b27dccf008b04cd8e",
+      "uncompressed_bytes": 2005
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/conformance/conformance-2.log.gz": {
+      "sha256": "dee5b7803ebbce8af6bc83bd13bb6633fb5c74b7a1be7b94294bb641995240ef",
+      "bytes": 1778,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/conformance/conformance-2.log",
+      "uncompressed_sha256": "956e0983d2c356cde7bac285f8d2fce8dfb065c63b4e910ecfdbd2ad815a327f",
+      "uncompressed_bytes": 3581
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/conformance/conformance-result.json.gz": {
+      "sha256": "e677eb2f6c598f9233f37e24c97c070460c6eb9b8e2d336d65c05b21a3170bb1",
+      "bytes": 7869,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/conformance/conformance-result.json",
+      "uncompressed_sha256": "28487adc4fc72e4893c0aa1522d41b0432a6f2cc80ce5bd5da9aae0e8483b389",
+      "uncompressed_bytes": 22618
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/conformance/cook-build.log.gz": {
+      "sha256": "1db47087a56c3c86807969361c5ae62049abee7808b3c0d1be54047de448f6c2",
+      "bytes": 3410,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/conformance/cook-build.log",
+      "uncompressed_sha256": "7210e487531e4b27a32c0c6b7d307b4e0205a65f0d0fbd2c4b60e17703d64869",
+      "uncompressed_bytes": 43185
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/conformance/prepared-manifest.json.gz": {
+      "sha256": "321935086c301662a905f32ac291b36767d22509db85e66c1153253cd68d7585",
+      "bytes": 46740,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/conformance/prepared-manifest.json",
+      "uncompressed_sha256": "746793d8252e28a0f39832d2d053b85fe3f46d1eef61eda4efd6672a64b0946d",
+      "uncompressed_bytes": 115078
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/conformance/rust-sdk.json.gz": {
+      "sha256": "e227ad933984b3e6af61abc23637f73194f6addf6faea88d61b221c3c526896c",
+      "bytes": 1202,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/conformance/rust-sdk.json",
+      "uncompressed_sha256": "c28bf5e862834e361f6d1d3351e5e8ff80643fd2f061eef39be647fd4af57b40",
+      "uncompressed_bytes": 2383
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/bad-constraint-input.json.gz": {
+      "sha256": "dfeb2440cb1f9e49b06acd6444042a63cfc13283f01368405d152490146a79d6",
+      "bytes": 167,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/bad-constraint-input.json",
+      "uncompressed_sha256": "52ec897eb0c2725124473a561ae645109e033ed7b00951154ab2a9e69a2fc37a",
+      "uncompressed_bytes": 268
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/checkpoint-refused.json.gz": {
+      "sha256": "94e7513cb5fd8075e80b49ee0b6c168653e980847daaf61b459d6e454c1e512e",
+      "bytes": 295,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/checkpoint-refused.json",
+      "uncompressed_sha256": "4bcc851fc8de5b86d133c4c4ecf6e6127dd073dbd920943949134785cab33e49",
+      "uncompressed_bytes": 808
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-000-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-000-stderr.txt",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-000-stdout.txt.gz": {
+      "sha256": "cc267d749e497533de433b46d332b706318abd4c604448101162054771a42a97",
+      "bytes": 80,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-000-stdout.txt",
+      "uncompressed_sha256": "33fab5094f357e3af01c323c4ea0afe92d65a30d93cbeb03871411a915bc9326",
+      "uncompressed_bytes": 63
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-001-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-001-stderr.txt",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-001-stdout.txt.gz": {
+      "sha256": "791931822099457d6b11d0d964c35227bcd9e387f8b760bcf5e5416d4d971d03",
+      "bytes": 374,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-001-stdout.txt",
+      "uncompressed_sha256": "80aff1909d5186eb663ffaab1bc2f97822cab947409718905756b0bb7c5bf81a",
+      "uncompressed_bytes": 625
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-002-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-002-stderr.txt",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-002-stdout.txt.gz": {
+      "sha256": "37713f56c01b8faafd2fd72a202434495db0ee67a59c90b3808874654e8bfc30",
+      "bytes": 1342,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-002-stdout.txt",
+      "uncompressed_sha256": "16f19ec13b535d233acb1e963f4a4fe56c6e0ad2553b5b0f8fe306d89984ddd1",
+      "uncompressed_bytes": 2669
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-003-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-003-stderr.txt",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-003-stdout.txt.gz": {
+      "sha256": "30725cd59b2a23b70a730c15b455a4e4de61be338dd68fd8b84c30d9f47e8542",
+      "bytes": 412,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-003-stdout.txt",
+      "uncompressed_sha256": "c845a33d820b905dcefee0cc7599f395b988b88669e2147bccf9bfb521962fea",
+      "uncompressed_bytes": 746
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-004-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-004-stderr.txt",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-004-stdout.txt.gz": {
+      "sha256": "35b24e225a650d8881ba3f40f3b693cb9a20cf7d18939a1b52d04c49be5d9912",
+      "bytes": 116,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-004-stdout.txt",
+      "uncompressed_sha256": "aa3ac590f7e4168fbee882547456380ca3bf47d7770b258ae68e37edaf2e186b",
+      "uncompressed_bytes": 110
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-005-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-005-stderr.txt",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-005-stdout.txt.gz": {
+      "sha256": "48ec6816886b8a68a4ba31edd8b8feca16c0552f0ee3aa3f8513b2b6b5704ef1",
+      "bytes": 1715,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-005-stdout.txt",
+      "uncompressed_sha256": "e6417d1148adb7567d5a98c88a2e09de3d9ff2670fb3d80f9e3ac3d31051b307",
+      "uncompressed_bytes": 25202
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-006-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-006-stderr.txt",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-006-stdout.txt.gz": {
+      "sha256": "7c65d665bab34d5f9c98d7f4d5b3743a5e16908423309d717f020187d6164e21",
+      "bytes": 6646,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-006-stdout.txt",
+      "uncompressed_sha256": "827db0de13bc13defe799f837a4fd1a04ec520659c518134cbe455945bda7e38",
+      "uncompressed_bytes": 207935
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-007-stderr.txt.gz": {
+      "sha256": "cfc91d5554c868350d6bd317412441b7f23e8dc76b46929e1a3650194f3d3bdf",
+      "bytes": 132,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-007-stderr.txt",
+      "uncompressed_sha256": "026212fcc6ebf56f89c5ecafab44ce5f2b082c4947b7b9c58629bac2fca64d21",
+      "uncompressed_bytes": 144
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-007-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-007-stdout.txt",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-008-stderr.txt.gz": {
+      "sha256": "cfc91d5554c868350d6bd317412441b7f23e8dc76b46929e1a3650194f3d3bdf",
+      "bytes": 132,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-008-stderr.txt",
+      "uncompressed_sha256": "026212fcc6ebf56f89c5ecafab44ce5f2b082c4947b7b9c58629bac2fca64d21",
+      "uncompressed_bytes": 144
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-008-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-008-stdout.txt",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-009-stderr.txt.gz": {
+      "sha256": "cfc91d5554c868350d6bd317412441b7f23e8dc76b46929e1a3650194f3d3bdf",
+      "bytes": 132,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-009-stderr.txt",
+      "uncompressed_sha256": "026212fcc6ebf56f89c5ecafab44ce5f2b082c4947b7b9c58629bac2fca64d21",
+      "uncompressed_bytes": 144
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-009-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-009-stdout.txt",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-010-stderr.txt.gz": {
+      "sha256": "cfc91d5554c868350d6bd317412441b7f23e8dc76b46929e1a3650194f3d3bdf",
+      "bytes": 132,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-010-stderr.txt",
+      "uncompressed_sha256": "026212fcc6ebf56f89c5ecafab44ce5f2b082c4947b7b9c58629bac2fca64d21",
+      "uncompressed_bytes": 144
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-010-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-010-stdout.txt",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-011-stderr.txt.gz": {
+      "sha256": "3796b933d0f77c9dbd012d224595a925500b04a690bb1a5b1bc683fea382e04a",
+      "bytes": 122,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-011-stderr.txt",
+      "uncompressed_sha256": "8438ab8be63ad4646f0bcbd24f4fb8bdfc3cf459bb8306b4f85fb7d59a32994c",
+      "uncompressed_bytes": 133
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-011-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-011-stdout.txt",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-012-stderr.txt.gz": {
+      "sha256": "f0b3c875fe4fd229455eaadcbfa008a4e7862221ce406766281c7280ff09c783",
+      "bytes": 106,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-012-stderr.txt",
+      "uncompressed_sha256": "278865c4ee58003d56c3fded05d4ff45064eb235f74852a3f391a1f8626db98c",
+      "uncompressed_bytes": 134
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-012-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-012-stdout.txt",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-013-stderr.txt.gz": {
+      "sha256": "883912e4b26072329648dfdb6acbd5dd20fcab9ef8504e223d945c6a87138311",
+      "bytes": 96,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-013-stderr.txt",
+      "uncompressed_sha256": "3d0f871fc9e8980adc77a9a7391deab726b25c91afa27bdecc9a3ef9c4688736",
+      "uncompressed_bytes": 87
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-013-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-013-stdout.txt",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-014-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-014-stderr.txt",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-014-stdout.txt.gz": {
+      "sha256": "26e3860aaf450c399882013e8cc9678d00b947966a9f5a5f959d0d2270dbbf77",
+      "bytes": 93,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-014-stdout.txt",
+      "uncompressed_sha256": "1dc5ff25a027f5c0a04ac183e96b6665181272c327130fb0663c5c1be8aad81d",
+      "uncompressed_bytes": 77
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-015-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-015-stderr.txt",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-015-stdout.txt.gz": {
+      "sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e",
+      "bytes": 163,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-015-stdout.txt",
+      "uncompressed_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "uncompressed_bytes": 192
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-016-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-016-stderr.txt",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-016-stdout.txt.gz": {
+      "sha256": "4fa3c5a9212d8409cafb854a9147e39ff7fbe781b19748df6de4f50c6582fe15",
+      "bytes": 86,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-016-stdout.txt",
+      "uncompressed_sha256": "b22adee5ac5a93ade5d52f11392360e1c1a95ef2add2bd03365e896e8f1688e1",
+      "uncompressed_bytes": 67
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-017-stderr.txt.gz": {
+      "sha256": "b60bf162a3918a6937ce5de8ee50503e3cca3b5521e89b78c88ee6c5d3d2b542",
+      "bytes": 523,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-017-stderr.txt",
+      "uncompressed_sha256": "59933dfee470f1ff589a98f93e8070d02f16ef65d0fd2dde1baee9ab3516e45b",
+      "uncompressed_bytes": 1346
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-017-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-017-stdout.txt",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-018-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-018-stderr.txt",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-018-stdout.txt.gz": {
+      "sha256": "c58e1f8de8c986db60e363f7aaecde8cf0f377db06ec70edff347a93e3ce9c2e",
+      "bytes": 237,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-018-stdout.txt",
+      "uncompressed_sha256": "effed0de2f9f4ee26e144d4bcda81a74b269fb08868ca908d81d018ff983a789",
+      "uncompressed_bytes": 335
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-019-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-019-stderr.txt",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-019-stdout.txt.gz": {
+      "sha256": "77b0b39ff34340a913cd44449b98e09d883ac579b114e7c00b2b1cd2331ed3ca",
+      "bytes": 287091,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-019-stdout.txt",
+      "uncompressed_sha256": "fb4bc34a9e2f8eb2d82fe66cd888f01da2acc888eb0d14ddea1f5cc7955aa534",
+      "uncompressed_bytes": 3738470
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-020-stderr.txt.gz": {
+      "sha256": "84605d4ce20f1a28e3719b6ea72b7a19af5a9090fdc5872d371a37ddfafa9164",
+      "bytes": 133555,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-020-stderr.txt",
+      "uncompressed_sha256": "b1e1803a0edd818512d3ea7d649ae37692a8d5352f0fe6231ba3cc9597122d3d",
+      "uncompressed_bytes": 1495518
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-020-stdout.txt.gz": {
+      "sha256": "8529753c7efae1850046824d014338a83e88dae316723dbf88358c4b85af3f18",
+      "bytes": 748556,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-020-stdout.txt",
+      "uncompressed_sha256": "87058e96f6e3f78bf34f866c48722785e98a4ba6df3a2e404d4500dbc01d84d8",
+      "uncompressed_bytes": 32975757
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-021-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-021-stderr.txt",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-021-stdout.txt.gz": {
+      "sha256": "e974739d0dfb1000dc30038ed781ee393ad5799626ebe88a1bfaf8f8164a0271",
+      "bytes": 189901,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-021-stdout.txt",
+      "uncompressed_sha256": "d40ffde1e05ecfabadfda1a7e837f7c87866ac3dc0cc20d3e2d5ee1db874f4c5",
+      "uncompressed_bytes": 1871537
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-022-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-022-stderr.txt",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-022-stdout.txt.gz": {
+      "sha256": "98e86776a4a043be57885cbfd8e3d046b8138195e8d563bf5b5028f35d29bfa0",
+      "bytes": 619,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-022-stdout.txt",
+      "uncompressed_sha256": "f7a35c62d91609386bb6b29c3e4dcf66569df0adc4037098e91a8fd31a82905a",
+      "uncompressed_bytes": 2587
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-023-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-023-stderr.txt",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-023-stdout.txt.gz": {
+      "sha256": "88bf5f3e3119e54f5ba7612c26d5786aa7cf990388b7ce70265d117bab0cd4b4",
+      "bytes": 5690,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-023-stdout.txt",
+      "uncompressed_sha256": "2b28926abdd72655bec26f00e630c2bb2b0056fad3d0e0081302bda614c9b862",
+      "uncompressed_bytes": 111249
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-024-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-024-stderr.txt",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-024-stdout.txt.gz": {
+      "sha256": "88bf5f3e3119e54f5ba7612c26d5786aa7cf990388b7ce70265d117bab0cd4b4",
+      "bytes": 5690,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-024-stdout.txt",
+      "uncompressed_sha256": "2b28926abdd72655bec26f00e630c2bb2b0056fad3d0e0081302bda614c9b862",
+      "uncompressed_bytes": 111249
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-025-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-025-stderr.txt",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-025-stdout.txt.gz": {
+      "sha256": "88bf5f3e3119e54f5ba7612c26d5786aa7cf990388b7ce70265d117bab0cd4b4",
+      "bytes": 5690,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-025-stdout.txt",
+      "uncompressed_sha256": "2b28926abdd72655bec26f00e630c2bb2b0056fad3d0e0081302bda614c9b862",
+      "uncompressed_bytes": 111249
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-026-stderr.txt.gz": {
+      "sha256": "3f77a75981a89266148506f31aeac7cf6d56125dfbccf37f3304a2a856e95b35",
+      "bytes": 104,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-026-stderr.txt",
+      "uncompressed_sha256": "0e8eb00e2a2596d6b89e12a7269ac3e6d98ab910c9c52aba711bd527e2508305",
+      "uncompressed_bytes": 93
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-026-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-026-stdout.txt",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-027-stderr.txt.gz": {
+      "sha256": "3f77a75981a89266148506f31aeac7cf6d56125dfbccf37f3304a2a856e95b35",
+      "bytes": 104,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-027-stderr.txt",
+      "uncompressed_sha256": "0e8eb00e2a2596d6b89e12a7269ac3e6d98ab910c9c52aba711bd527e2508305",
+      "uncompressed_bytes": 93
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-027-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-027-stdout.txt",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-028-stderr.txt.gz": {
+      "sha256": "3f77a75981a89266148506f31aeac7cf6d56125dfbccf37f3304a2a856e95b35",
+      "bytes": 104,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-028-stderr.txt",
+      "uncompressed_sha256": "0e8eb00e2a2596d6b89e12a7269ac3e6d98ab910c9c52aba711bd527e2508305",
+      "uncompressed_bytes": 93
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-028-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-028-stdout.txt",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-029-stderr.txt.gz": {
+      "sha256": "3f77a75981a89266148506f31aeac7cf6d56125dfbccf37f3304a2a856e95b35",
+      "bytes": 104,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-029-stderr.txt",
+      "uncompressed_sha256": "0e8eb00e2a2596d6b89e12a7269ac3e6d98ab910c9c52aba711bd527e2508305",
+      "uncompressed_bytes": 93
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-029-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-029-stdout.txt",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-030-stderr.txt.gz": {
+      "sha256": "134785d2d3c4538f38a635e39aab31d680fb1fb9c65ffc6ff8f6d43d18aef45c",
+      "bytes": 52,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-030-stderr.txt",
+      "uncompressed_sha256": "c503f6ae0ef932ea9309837945d0ff26605c3dbf9daf4bbec9192ad0506c34b3",
+      "uncompressed_bytes": 32
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-030-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-030-stdout.txt",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-031-stderr.txt.gz": {
+      "sha256": "76073c34bc49034c7c41f097a4c61851ff82ba5df417c4319d8781e667378a21",
+      "bytes": 92,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-031-stderr.txt",
+      "uncompressed_sha256": "c8c6ca15839ccad282f656a5a1277d4ca7dd2a15f6579a216c65b3788644216e",
+      "uncompressed_bytes": 118
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-031-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-031-stdout.txt",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-032-stderr.txt.gz": {
+      "sha256": "66f5c8f3bdc2c77204b0fb738ef7076c32527788ca4b5f6b0b4b770328ab7725",
+      "bytes": 99,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-032-stderr.txt",
+      "uncompressed_sha256": "4eced5d1b1f3c15d127b24ba30856a86844cc1340951fc876265088b757a8f6d",
+      "uncompressed_bytes": 84
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-032-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-032-stdout.txt",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-033-stderr.txt.gz": {
+      "sha256": "c9912b5e3d6bc4d5ddf47db615e04b5c5ecd93049df904917e7f7770a5fb1cf0",
+      "bytes": 75,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-033-stderr.txt",
+      "uncompressed_sha256": "8553d484ef61a5488bc165050a946d44ae606e41c8018ff857501df0ebb8122d",
+      "uncompressed_bytes": 58
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/command-033-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/command-033-stdout.txt",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/commands.json.gz": {
+      "sha256": "a4d0724b807b4efa0c46263052e484b5a8b69e7e1143ab00c5b9c3f13521674b",
+      "bytes": 3458,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/commands.json",
+      "uncompressed_sha256": "3c17e479f32ca8ead736243fbad88033f1c817d790647e88c26e4faab825d4fe",
+      "uncompressed_bytes": 30962
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/dev-bad-constraint.json.gz": {
+      "sha256": "980e27b0f7725d8972531598f7a520d90eab8539bc55d1a8ff8ce6df5d300aeb",
+      "bytes": 333,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/dev-bad-constraint.json",
+      "uncompressed_sha256": "ed38bf511c58b9b14730a219e5997cd4f20ba9083f3ccac9960439182e6dd622",
+      "uncompressed_bytes": 890
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/dev-late-command.json.gz": {
+      "sha256": "823af38d44cd0608659943447c8db8f86f01f94e4679ef8559b0cc01d65f9390",
+      "bytes": 344,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/dev-late-command.json",
+      "uncompressed_sha256": "08ab6154132db103777c0d69adbb2b17a2c82a861243635d7c2a291ee3915f38",
+      "uncompressed_bytes": 980
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/dev-old-v1.json.gz": {
+      "sha256": "92c22fc0ebe3197135c113535c5dc908b95c26aabb1425315f4d67a9236fa193",
+      "bytes": 365,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/dev-old-v1.json",
+      "uncompressed_sha256": "ae24e1fccfebf4e818ac6ee67a15a828a333559b1472149b7c67a7fd46f69d1d",
+      "uncompressed_bytes": 988
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/dev-old-v2.json.gz": {
+      "sha256": "e985c2941ff54887e418481a6330c40d71fe4a5657f7dff926bf19858c8c554b",
+      "bytes": 365,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/dev-old-v2.json",
+      "uncompressed_sha256": "88bce0aae590107a50af0190be2e98434d826f7ddb299a1714453c10317ee8f4",
+      "uncompressed_bytes": 988
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/dev-old-v3.json.gz": {
+      "sha256": "e00225b1d31817857adadbbc97701ab6a026b32806b2401534ea3da8b23e7f37",
+      "bytes": 366,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/dev-old-v3.json",
+      "uncompressed_sha256": "51fec9eeec6ae4d202cb0f96e79729d806a89722442351da7497523c7b23f302",
+      "uncompressed_bytes": 988
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/dev-old-v4.json.gz": {
+      "sha256": "9085bb6991c72711a2f000988d9aaf0c95b51d21ed9b53da70fa4077d497c51a",
+      "bytes": 366,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/dev-old-v4.json",
+      "uncompressed_sha256": "eb2592b7aec42360981fdd5e9b4701a791c99d6871cb676676724c7bf9c6f782",
+      "uncompressed_bytes": 988
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/dev-short-scratch.json.gz": {
+      "sha256": "91aa3b17e480930e4f37aa754b2280c88278e6bff8027a1ddc2f7d6753852761",
+      "bytes": 359,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/dev-short-scratch.json",
+      "uncompressed_sha256": "60cbe323f609ecab93b011f889f20dbb3a9b01bed8666cd46af3bded63f18c5c",
+      "uncompressed_bytes": 980
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/development.json.gz": {
+      "sha256": "7c65d665bab34d5f9c98d7f4d5b3743a5e16908423309d717f020187d6164e21",
+      "bytes": 6646,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/development.json",
+      "uncompressed_sha256": "827db0de13bc13defe799f837a4fd1a04ec520659c518134cbe455945bda7e38",
+      "uncompressed_bytes": 207935
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/development.pcm.gz": {
+      "sha256": "dd2cd7e33efeb516c8c817c51fe7888ae23ad876ac4ea8adde5b1a4f57fdd9de",
+      "bytes": 159,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/development.pcm",
+      "uncompressed_sha256": "eec19bc6af0b3b6dfb97a08782c65f4bb3c3203e789a015d2008b0d689ad08be",
+      "uncompressed_bytes": 128000
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/guest-compile.json.gz": {
+      "sha256": "37713f56c01b8faafd2fd72a202434495db0ee67a59c90b3808874654e8bfc30",
+      "bytes": 1342,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/guest-compile.json",
+      "uncompressed_sha256": "16f19ec13b535d233acb1e963f4a4fe56c6e0ad2553b5b0f8fe306d89984ddd1",
+      "uncompressed_bytes": 2669
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/late-command-input.json.gz": {
+      "sha256": "5c90cac5769f68dd841949bdc5381e55443a3d4e8fa8793d54876d9c140aaa12",
+      "bytes": 167,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/late-command-input.json",
+      "uncompressed_sha256": "762127dea100785c39fe3502d69fc588a07d2859eaf669e0b7ced7ac1c4bd0f1",
+      "uncompressed_bytes": 268
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/model-import.json.gz": {
+      "sha256": "791931822099457d6b11d0d964c35227bcd9e387f8b760bcf5e5416d4d971d03",
+      "bytes": 374,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/model-import.json",
+      "uncompressed_sha256": "80aff1909d5186eb663ffaab1bc2f97822cab947409718905756b0bb7c5bf81a",
+      "uncompressed_bytes": 625
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/module-import.json.gz": {
+      "sha256": "30725cd59b2a23b70a730c15b455a4e4de61be338dd68fd8b84c30d9f47e8542",
+      "bytes": 412,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/module-import.json",
+      "uncompressed_sha256": "c845a33d820b905dcefee0cc7599f395b988b88669e2147bccf9bfb521962fea",
+      "uncompressed_bytes": 746
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/observe.json.gz": {
+      "sha256": "ae8f59c6efcf3e8d55436ed8ce5ca609aa23c8ac9d9d3491a68c8409d209188b",
+      "bytes": 2587,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/observe.json",
+      "uncompressed_sha256": "8d4ae42c9728df3323d213890a2f43d3f760fb02ba4fa0591dd9557377972ea5",
+      "uncompressed_bytes": 82271
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/old-v1-input.json.gz": {
+      "sha256": "05f5fb4a9b85302a9abd08ec2211adfd862c06fd6a40bbea92c53fbca8ac0c21",
+      "bytes": 167,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/old-v1-input.json",
+      "uncompressed_sha256": "1ffba5e4203cc1c4ee564633312a59c1d9ec345f9f1699d9daa57698e6fe575b",
+      "uncompressed_bytes": 268
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/old-v2-input.json.gz": {
+      "sha256": "29b42dc5c211a1084d3e540b51a38ea820d3ba39507e609c120c0fe643dab7fd",
+      "bytes": 167,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/old-v2-input.json",
+      "uncompressed_sha256": "81f79b61ebafc63256e5bf9468847cb013796850e6157061b5cb9569fbbf9892",
+      "uncompressed_bytes": 268
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/old-v3-input.json.gz": {
+      "sha256": "29ed17c89ae4623d4cef825c4e7df12a647fefdf68f414d1e3179a442a834f26",
+      "bytes": 167,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/old-v3-input.json",
+      "uncompressed_sha256": "83e7db1c62491976ae0c409150e94993944eeddb03cd6c0424e0e1b7b448eb64",
+      "uncompressed_bytes": 268
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/old-v4-input.json.gz": {
+      "sha256": "7b2d0697edea9bb1f1f725c1b416fab3f2844fa5b3722fdd4530c90bb6fd3108",
+      "bytes": 167,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/old-v4-input.json",
+      "uncompressed_sha256": "7948ea99e25a29f28c586c8a97fba723e6240f92c837edd9e52e5d44803c5d1a",
+      "uncompressed_bytes": 268
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/oracle.json.gz": {
+      "sha256": "4cdb21029a04a7a5c38904edc9cf39b98ff795ea5bce54553eb2106b5a3fa184",
+      "bytes": 2246,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/oracle.json",
+      "uncompressed_sha256": "f6f728cf15458d328d8ce91566e488b7e19e8a01c2a0a2d159bb1703701cfe5a",
+      "uncompressed_bytes": 82685
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/oracle.scene.gz": {
+      "sha256": "d5bfc19cf62dd8a2800b4041f0de7dd4e03a740660bac4cd6b930c6a0e1bbbbe",
+      "bytes": 640,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/oracle.scene",
+      "uncompressed_sha256": "d8a2f1e217f0efab3c794d9a8b5214ec1b03efcb9c2ff30fb7e2ccb7a4f5bed2",
+      "uncompressed_bytes": 9189
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/package-bad-constraint.json.gz": {
+      "sha256": "7f701a58588565fe60f9f3fc43d0ec59203129c1834121dc5e08511e53b4ec00",
+      "bytes": 322,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/package-bad-constraint.json",
+      "uncompressed_sha256": "6b14212c54f12890193a081494b23a8b6f6e12113b94f549b71d1f727772c0e6",
+      "uncompressed_bytes": 868
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/package-late-command.json.gz": {
+      "sha256": "314c5e26f4ae517155c8e331f6dad53344288ca79d2ca7b6933da917c52240db",
+      "bytes": 322,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/package-late-command.json",
+      "uncompressed_sha256": "9d59c2e3db3b67f7f9476c3cbe164d1b56c827e6fbe1446e4ac744bdd5694045",
+      "uncompressed_bytes": 928
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/package-old-v1.json.gz": {
+      "sha256": "bd57f0451699657ab7b85780d51a8a90b77c9d5c3cf769e6ed1a1d8ef82f75c4",
+      "bytes": 324,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/package-old-v1.json",
+      "uncompressed_sha256": "4ab9824189825e326c9150792fe91284f924a547dabbc4b379ff8d1ae6451bea",
+      "uncompressed_bytes": 870
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/package-old-v2.json.gz": {
+      "sha256": "59e8e36dcd386e9aa5e4c0bc86495e036b92027c4cbd572f8654d6f546c1d8a1",
+      "bytes": 324,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/package-old-v2.json",
+      "uncompressed_sha256": "2fce952cdf60aaeefc7744a2c6919c5f11208e7d911a41211d80fd4369c7e81e",
+      "uncompressed_bytes": 870
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/package-old-v3.json.gz": {
+      "sha256": "4dd34bf22300536ec4d778ff40c42a6ae9ec1f0aa63c587458ae948bdd671860",
+      "bytes": 325,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/package-old-v3.json",
+      "uncompressed_sha256": "d9036f60ecd70d9fe8674710f6b1b8dc180560546b3462c726e39a1541fc8094",
+      "uncompressed_bytes": 870
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/package-old-v4.json.gz": {
+      "sha256": "5df0b136b755aa1e7ef5e0b50158533edb9105e3d566374a7daea3cf3edc0abd",
+      "bytes": 325,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/package-old-v4.json",
+      "uncompressed_sha256": "be97d137e38ae499444346b4244106782125c4f8f8b9d4c5a4aba1a04261276a",
+      "uncompressed_bytes": 870
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/package-short-scratch.json.gz": {
+      "sha256": "e99ad787d90a0bab269c185becff699002503c6dfe636ce47fce3613e4535d46",
+      "bytes": 291,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/package-short-scratch.json",
+      "uncompressed_sha256": "34fd6a4a5830ed69c9f11cacc3a796a1fc4e72d072bd650c5b4b10219c977729",
+      "uncompressed_bytes": 758
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/positive-input.json.gz": {
+      "sha256": "d56fbe16f94e5d7d048f0f2ac183f9707bebc7dd45b6b7e078a2b9bba9136e3a",
+      "bytes": 107,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/positive-input.json",
+      "uncompressed_sha256": "aaf059115e6a8c06eed070f468774c675e2c177ab2f91e2f2de723b6bca8a2af",
+      "uncompressed_bytes": 116
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/preflight.json.gz": {
+      "sha256": "4cf5f60efde22a40e0853619ef6e1f645c5d4701479d60c40d3235cfcee4aa23",
+      "bytes": 775,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/preflight.json",
+      "uncompressed_sha256": "52f35aeb739fc848b10ff26ae7d5eda8d22d19eb37a53903c4bc9464e2f71e83",
+      "uncompressed_bytes": 1444
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/public-commands.json.gz": {
+      "sha256": "6b2fda02ea89201549c3838c835c7109452fa91f1fe80b2be44dbe3c2f62c950",
+      "bytes": 17725,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/public-commands.json",
+      "uncompressed_sha256": "96eda9529ec5265eb66159bdfcb2b59ca402acd4c2bb52b7d073fac98bf4617a",
+      "uncompressed_bytes": 593856
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/removed.json.gz": {
+      "sha256": "645d8243eb8a386ab83ddd391d03d6701ca1620d278f160b5ffd25ff2e842f49",
+      "bytes": 980,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/removed.json",
+      "uncompressed_sha256": "6282bd946be3fdf6aca141764a2f817a32fe1662b3834462d4372ed70b2ce67d",
+      "uncompressed_bytes": 1964
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/result.json.gz": {
+      "sha256": "52a2b43c08c05dec00609e0376daba7d8fd212de6d56b2c678b18e902426a158",
+      "bytes": 3053,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/result.json",
+      "uncompressed_sha256": "8d45ebdb9cb25377bf14ac4f95d42be492f9c89b1821fefed3bfcfa3b37591a9",
+      "uncompressed_bytes": 6649
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/run-0.json.gz": {
+      "sha256": "a7f74844c4b5c273cf051e3904b11ce0f4a9c28ee1337396e4d6838e3276824d",
+      "bytes": 6511,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/run-0.json",
+      "uncompressed_sha256": "0235a227e7e260fc4a9f4d1855992d599c232221ed0251164cb3816181108ef9",
+      "uncompressed_bytes": 208305
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/run-0.pcm.gz": {
+      "sha256": "dd2cd7e33efeb516c8c817c51fe7888ae23ad876ac4ea8adde5b1a4f57fdd9de",
+      "bytes": 159,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/run-0.pcm",
+      "uncompressed_sha256": "eec19bc6af0b3b6dfb97a08782c65f4bb3c3203e789a015d2008b0d689ad08be",
+      "uncompressed_bytes": 128000
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/run-1.json.gz": {
+      "sha256": "a7f74844c4b5c273cf051e3904b11ce0f4a9c28ee1337396e4d6838e3276824d",
+      "bytes": 6511,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/run-1.json",
+      "uncompressed_sha256": "0235a227e7e260fc4a9f4d1855992d599c232221ed0251164cb3816181108ef9",
+      "uncompressed_bytes": 208305
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/run-1.pcm.gz": {
+      "sha256": "dd2cd7e33efeb516c8c817c51fe7888ae23ad876ac4ea8adde5b1a4f57fdd9de",
+      "bytes": 159,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/run-1.pcm",
+      "uncompressed_sha256": "eec19bc6af0b3b6dfb97a08782c65f4bb3c3203e789a015d2008b0d689ad08be",
+      "uncompressed_bytes": 128000
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/run-2.json.gz": {
+      "sha256": "a7f74844c4b5c273cf051e3904b11ce0f4a9c28ee1337396e4d6838e3276824d",
+      "bytes": 6511,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/run-2.json",
+      "uncompressed_sha256": "0235a227e7e260fc4a9f4d1855992d599c232221ed0251164cb3816181108ef9",
+      "uncompressed_bytes": 208305
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/run-2.pcm.gz": {
+      "sha256": "dd2cd7e33efeb516c8c817c51fe7888ae23ad876ac4ea8adde5b1a4f57fdd9de",
+      "bytes": 159,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/run-2.pcm",
+      "uncompressed_sha256": "eec19bc6af0b3b6dfb97a08782c65f4bb3c3203e789a015d2008b0d689ad08be",
+      "uncompressed_bytes": 128000
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/short-scratch-input.json.gz": {
+      "sha256": "eb10468daf6c80f370fb53aa712ad4ba52eed73e8dbdf39fa36af3dbf8c30570",
+      "bytes": 167,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/short-scratch-input.json",
+      "uncompressed_sha256": "a72c80e59bd1da895b70c34e6f51ef93abd88654869327380bd7cf2dc2b1db34",
+      "uncompressed_bytes": 268
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/wabt.json.gz": {
+      "sha256": "d3e1f7840b083a8e00580aee5e36754861303fc687d64993b0ce708b3ff32f8f",
+      "bytes": 199,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/wabt.json",
+      "uncompressed_sha256": "eb6e2576392cc1f9eb0bc5ed8522926d0838dd1718d7e1dc3eb791648f5c5682",
+      "uncompressed_bytes": 244
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/package/build.log.gz": {
+      "sha256": "84605d4ce20f1a28e3719b6ea72b7a19af5a9090fdc5872d371a37ddfafa9164",
+      "bytes": 133555,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/package/build.log",
+      "uncompressed_sha256": "b1e1803a0edd818512d3ea7d649ae37692a8d5352f0fe6231ba3cc9597122d3d",
+      "uncompressed_bytes": 1495518
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/package/export.json.gz": {
+      "sha256": "cf8b19c638a28a1628691b5dc343f7f1ec2a38d13ad01f92e2c40eea4b0f8535",
+      "bytes": 3587,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/package/export.json",
+      "uncompressed_sha256": "7e136ab58816e7db70297683931a5a887aa673ce71637af0cff01f1c077534d1",
+      "uncompressed_bytes": 11190
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/package/player/data/clips.bin.gz": {
+      "sha256": "a568799ca294ca001efc2c864c9c7b660e1fb03c4811c7160b752a87361d378d",
+      "bytes": 30,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/package/player/data/clips.bin",
+      "uncompressed_sha256": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+      "uncompressed_bytes": 12
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/package/player/data/empty-input.json.gz": {
+      "sha256": "438100c9c52fd35517bc237cb9289ac1088282ab6f2b851a4878fd0ecc79abcc",
+      "bytes": 104,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/package/player/data/empty-input.json",
+      "uncompressed_sha256": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+      "uncompressed_bytes": 103
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/package/player/data/input-actions.json.gz": {
+      "sha256": "f2ac4e22dbdc4b0e92e428e787d8c8e8612953856a47c856cefee65a94f015ce",
+      "bytes": 177,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/package/player/data/input-actions.json",
+      "uncompressed_sha256": "c9c9808aecf251d085d334003963f2bac22aa2464b8453d024bf73802ae9747a",
+      "uncompressed_bytes": 743
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/package/player/data/models/b744b3412da8391f5c6d683ac023f79609d62ea1a1a49b06392b22a4a861b282.incmodel.gz": {
+      "sha256": "fbefbb49b49bb7a0b6fa204757edf1b30f525895a6852c0f9e159cfde604aa98",
+      "bytes": 684,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/package/player/data/models/b744b3412da8391f5c6d683ac023f79609d62ea1a1a49b06392b22a4a861b282.incmodel",
+      "uncompressed_sha256": "a1e28e3197dcf8010b2548cdc7a2fe65a85f5886c2b1d88cca90888d8c6ce383",
+      "uncompressed_bytes": 2196
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/package/player/data/package.json.gz": {
+      "sha256": "5caff3c77d34a101a52ab99f8372569d1ee9d6fe44f6a9ac0cbfad747ba7d3cd",
+      "bytes": 314,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/package/player/data/package.json",
+      "uncompressed_sha256": "ca940ed5d83d588e6a52016947ed7fda6f01b355bdc190d2eeb406a846f9d086",
+      "uncompressed_bytes": 479
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/package/player/data/world.scene.gz": {
+      "sha256": "d5bfc19cf62dd8a2800b4041f0de7dd4e03a740660bac4cd6b930c6a0e1bbbbe",
+      "bytes": 640,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/package/player/data/world.scene",
+      "uncompressed_sha256": "d8a2f1e217f0efab3c794d9a8b5214ec1b03efcb9c2ff30fb7e2ccb7a4f5bed2",
+      "uncompressed_bytes": 9189
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/package/project-build.json.gz": {
+      "sha256": "9b85ef98570cfcf526c877b154b1d2e9d06b4e6293b07aea2594729ddbb3a41e",
+      "bytes": 727,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/package/project-build.json",
+      "uncompressed_sha256": "6d24f6c498d7ac19f0801546b6c3bc32153b1212a017bc72667a320bbde0f7fb",
+      "uncompressed_bytes": 1228
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/package/symbols/incant_game_player.dSYM/Contents/Info.plist.gz": {
+      "sha256": "f812bc57f47ea10a8c36e35ae3511f3ec3868768a0d02cd39e09e4f093232545",
+      "bytes": 345,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/package/symbols/incant_game_player.dSYM/Contents/Info.plist",
+      "uncompressed_sha256": "c9105e700eab794c3fcb77d6855c8625420561dbe970effbc8313c53c972a2c7",
+      "uncompressed_bytes": 664
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/public-export/package/symbols/script-symbols.json.gz": {
+      "sha256": "d298d082fe7ae071210f7e05f9b058908cf476eba3084ecd77cf485df8be812f",
+      "bytes": 553,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export/package/symbols/script-symbols.json",
+      "uncompressed_sha256": "4639067ee3b71d580e568c4b375f551400ed70929ee0ac070c33191b0ebfae3a",
+      "uncompressed_bytes": 911
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/conformance/development-result.json": {
+      "sha256": "956e0983d2c356cde7bac285f8d2fce8dfb065c63b4e910ecfdbd2ad815a327f",
+      "bytes": 3581,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/conformance/development/result.json",
+      "uncompressed_sha256": "956e0983d2c356cde7bac285f8d2fce8dfb065c63b4e910ecfdbd2ad815a327f",
+      "uncompressed_bytes": 3581
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/checkpoint12/windows-failure.json": {
+      "sha256": "d1e982c0cf0f7924219d80ffe2ec020c3672c809a48f3583c5ee62070ddcb555",
+      "bytes": 1680,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint12/windows-failure.json",
+      "uncompressed_sha256": "d1e982c0cf0f7924219d80ffe2ec020c3672c809a48f3583c5ee62070ddcb555",
+      "uncompressed_bytes": 1680
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/checkpoint12/windows-desktop-failure.log.gz": {
+      "sha256": "e6549406d4004312481528820021ea2c87a0a3ca0eda7a98b6b241b725f9651c",
+      "bytes": 105931,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint12/windows-desktop-failure.log",
+      "uncompressed_sha256": "cec7da5a271729c47964244ce18e496ecd8383dc2e3c505a127e54b9b12a1ebb",
+      "uncompressed_bytes": 481733
+    },
+    "docs/spikes/evidence/native-wasm-ik-main152/checkpoint12/status-1727.json": {
+      "sha256": "a1fd595654e19f02c6caca5e31df10492176bc319903387091d0925afde58a50",
+      "bytes": 7492,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint12/status-1727.json",
+      "uncompressed_sha256": "a1fd595654e19f02c6caca5e31df10492176bc319903387091d0925afde58a50",
+      "uncompressed_bytes": 7492
+    }
+  },
+  "producer_review": {
+    "path": "docs/spikes/evidence/native-wasm-ik/final-review.json",
+    "sha256": "d0c44bdc6f09c4c493f5ff1fdd9d77534fc07f078d5b9c095702d710bfcb2504"
+  },
+  "integration": "STATUS-only producer conflict; all29 accepted implementation/test/helper inputs byte-identical. Existing main root-motion/Tao/input/IK corrections preserved. No dependency or source resolution changes. Independent current-main closure accepted.",
+  "release": "Checkpoint12 remains frozen at main150 with Linux Vulkan and Windows DX12 linear RGBA8 numerical failures; the Windows log and exact adapter receipt are retained here. Claude0059 owns the repair. This feature does not promote release.",
+  "limitations": [
+    "Actual local desktop CPU package; no GPU/rendered/device/performance or phase gate.",
+    "Eight active weighted samples; nonzero tree fades/composite operands remain unsupported.",
+    "Whole guest checkpoints explicitly unsupported; gameplay counter lives in native ECS, not module global state.",
+    "Only newly created proof source/cache/build/maps are removed; repository and shared engine build storage are retained.",
+    "CPU package proof checks complete native snapshots and transaction results; no renderer/window or pose-deformation appearance acceptance.",
+    "Whole-module checkpoints remain explicitly unsupported.",
+    "Operations44\u201346 additive; old0\u201343 preserved; all v1\u2013v4 legacy pose imports still refuse committed IK. Compound poses require the separately reserved v5/IK-v2/graph-v2 protocol."
+  ],
+  "final_review": {
+    "path": "docs/spikes/evidence/native-wasm-ik-main152/root-final-review.json",
+    "sha256": "c858941df6267fc551793e1e4eda73b3e47371b566ebdd8b02178bf62f15e3eb"
+  }
+}
