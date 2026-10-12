@@ -42,7 +42,8 @@ uses the public command bus and exporter and checks changed shaped text, native
 motion, PCM, ordinary-load continuation and precise refusal paths after removal
 of its disposable authoring/cache/build inputs and packaged debug source maps.
 
-Source review is accepted; final independent execution audit is pending. The
+Source review and the [final independent execution audit](evidence/native-hud-final-review.json)
+are accepted. The
 affected runtime/script/render host suite passed 444 tests and the player suite
 passed 10, with no failures or ignored tests. Scoped all-target Clippy, strict SDK
 and fixture typing, generated SDK/bridge equality, compiler-disabled static/UI/audio

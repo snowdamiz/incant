@@ -23,10 +23,11 @@ and world Text content through the atomic gameplay transaction. Readonly
 pre-command declarations, role/lifetime validation, aggregate quotas, localized
 literal results and composed input/shaping reconciliation are tested. The 444
 affected cases plus 10 player tests, all-target Clippy, strict typing, wasm32 and
-normal-runtime dependency guards pass. Independent source review is accepted.
+normal-runtime dependency guards pass. Independent source and final execution
+reviews are accepted.
 Five fresh source/map/build-deleted player processes verify changed shaped text,
 pre-command reads, exact save/PCM continuation; three exact refusals publish no
-outputs. Final independent execution audit is pending.
+outputs. Final independent execution audit is accepted.
 Wasm HUD parity, native/GPU appearance and complete Game UI remain open.
 [Contract and limits](docs/spikes/native-hud-controls.md).
 

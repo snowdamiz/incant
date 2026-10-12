@@ -264,7 +264,7 @@
         "00000000000000000000000002": "Pickup 12"
       },
       "ui_sources": {
-        "00000000000000000000000011": "Santé 8",
+        "00000000000000000000000011": "Sant\u00e9 8",
         "00000000000000000000000012": "Done"
       },
       "logs": 12
@@ -279,7 +279,7 @@
         "00000000000000000000000002": "Pickup 12"
       },
       "ui_sources": {
-        "00000000000000000000000011": "Santé 8",
+        "00000000000000000000000011": "Sant\u00e9 8",
         "00000000000000000000000012": "Done"
       },
       "logs": 12
@@ -294,7 +294,7 @@
         "00000000000000000000000002": "Pickup 12"
       },
       "ui_sources": {
-        "00000000000000000000000011": "Santé 8",
+        "00000000000000000000000011": "Sant\u00e9 8",
         "00000000000000000000000012": "Done"
       },
       "logs": 12
@@ -310,7 +310,7 @@
       },
       "ui_sources": {
         "00000000000000000000000011": "Health 14",
-        "00000000000000000000000012": "Name中文"
+        "00000000000000000000000012": "Name\u4e2d\u6587"
       },
       "logs": 6
     },
@@ -324,7 +324,7 @@
         "00000000000000000000000002": "Pickup 12"
       },
       "ui_sources": {
-        "00000000000000000000000011": "Santé 8",
+        "00000000000000000000000011": "Sant\u00e9 8",
         "00000000000000000000000012": "Done"
       },
       "logs": 6
@@ -1448,7 +1448,12 @@
       "raw_bytes": 266
     }
   ],
-  "final_review": "pending independent execution/artifact audit",
+  "final_review": {
+    "verdict": "accepted",
+    "path": "docs/spikes/evidence/native-hud-final-review.json",
+    "sha256": "93973531a5d1c3a89029029d1cf18df2c48bb465325dcc99c6caa368579827ad",
+    "reviewed_manifest_sha256": "7c071253036e649ddf3bc0ad95e44274ec4a7ab78b26ffdc44f965e447ce37eb"
+  },
   "limitations": [
     "CPU canonical shaped text; no GPU/window/appearance",
     "Wasm HUD commands/snapshots not implemented",
