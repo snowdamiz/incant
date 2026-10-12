@@ -1,5 +1,6 @@
 import io
 import json
+import os
 from pathlib import Path
 import struct
 import sys
@@ -135,6 +136,34 @@ class NativePackageTests(unittest.TestCase):
         self.receipt['scene_sha256'] = '0' * 64
         with self.assertRaisesRegex(ValueError, 'receipt'):
             self.data()
+
+    @unittest.skipIf(os.name == 'nt', 'POSIX executable fixture; environment keys are shared with Windows')
+    def test_export_startup_omits_home_and_keeps_restricted_runtime_paths(self):
+        project = self.root / 'project.json'
+        project.write_text('{}')
+        parent_home = os.environ.get('HOME')
+        def build(_project, staging, storage, *_args):
+            self.assertTrue(storage.is_dir())
+            player = staging / 'player' / 'fixture'
+            player.parent.mkdir()
+            player.write_text('#!' + sys.executable + '\n'
+                'import json, os, pathlib, sys\n'
+                'pathlib.Path(sys.argv[sys.argv.index("--output")+1]).write_bytes(b"pcm")\n'
+                'print(json.dumps({"environment": dict(os.environ)}))\n')
+            player.chmod(0o755)
+            return player, {}
+        with patch.object(export_native, 'build', side_effect=build):
+            report = export_native.export(project, self.root / 'exported')
+        environment = report['startup']['environment']
+        self.assertNotIn('HOME', environment)
+        self.assertEqual(os.environ.get('HOME'), parent_home)
+        self.assertEqual(Path(environment['PATH']).name, 'player')
+        self.assertEqual(environment['TMPDIR'], environment['TEMP'])
+        self.assertEqual(environment['TMPDIR'], environment['TMP'])
+        self.assertEqual(Path(environment['PATH']).parent, Path(environment['TMPDIR']))
+        for key in ('SystemRoot', 'SystemDrive', 'WINDIR'):
+            self.assertEqual(environment.get(key), os.environ.get(key))
+        self.assertTrue(report['build_storage_removed_before_startup'])
 
     def test_publication_never_replaces_existing_output(self):
         staged = self.root / 'staged'
