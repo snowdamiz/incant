@@ -121,7 +121,7 @@ drivers, phones/performance, remaining shader families, caches and whole-rendere
 translation removal remain open. Both features stay disabled by default.
 [Contract and evidence](docs/spikes/cooked-geometry-shaders.md).
 
-## Skeletal pose blending — locally verified
+## Skeletal pose blending — reviewed main integration
 
 The retained animation player can blend two independently sampled clips in local
 TRS space before composing hierarchy and skinning. Exact endpoints, missing-channel
@@ -830,3 +830,7 @@ implementation hashes preserved. Current-source actual Wasmtime/wasm2c validatio
 passes 295 tests, all-target Clippy, default wasm32, 19 tooling tests and SDK/graph
 checks; the three fresh bulk processes remain a separate development-only smoke.
 [Receipt](docs/spikes/evidence/native-wasm-formatting-main119.json).
+
+Retained CPU pose blending integration against actual main120 preserves all five
+reviewed source hashes and passes 166 CPU tests plus Clippy/graph checks; 71 GPU
+tests remain ignored. [Receipt](docs/spikes/evidence/runtime-pose-blending-main120.json).

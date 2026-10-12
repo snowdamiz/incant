@@ -30,3 +30,14 @@ inputs and logs. This is a working two-input runtime primitive. Authored blend
 trees, transition clocks/state machines, native frame/SDK blend controls, IK and
 root motion remain outstanding. No rendered appearance, reference-phone timing,
 shipping performance, or Phase 1 gate is claimed.
+
+## Actual main120 integration
+
+The original reviewed commit and all five implementation/test hashes are preserved.
+The current integration passes 166 affected CPU tests in 30 groups, all-target
+Clippy, normal runtime graph guards and formatting; 71 GPU tests stayed ignored.
+The actual-main merge changes no tested tree bytes.
+[Integration receipt](evidence/runtime-pose-blending-main120.json) records exact
+commands and log hashes. This remains the two-input sampler primitive; native
+frame blend controls, authored graphs, IK/root motion and visual/device gates are
+separate unfinished work.
