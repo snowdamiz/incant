@@ -89,6 +89,32 @@ active. Report merged work separately from local checks and unmet exit gates.
 The project is still early relative to the complete Engine 1.0 and Driftwake
 scope; no defensible percentage or completion date follows from the PR count.
 
+## Native text scene, packaging and composed CPU input — integrated CPU verification
+
+Typed Text declarations now cook into bounded v12 binary scene data with explicit
+ordered font chains and immutable recipe bindings. Structural edits and
+save/restore retain/check the same font catalog and invalidate retained consumers
+by world identity/generation. Font loading and export data packaging preflight a
+64 MiB aggregate before payload reads. The actual public command/import/cook,
+export producer and data packager feed a fresh source-deleted numerical
+Latin/Arabic/CJK shaping/atlas test. The existing composed host now retains that
+canonical text input beside spatial/script/audio state; motion preserves immutable
+layout/atlas allocations and failed candidates preserve accepted CPU input.
+Three actual fresh exported `--package` runs after source/build deletion pass
+mixed model, native script motion, multilingual shape/atlas and audible PCM
+controls; missing/tampered packaged fonts refuse before output. The affected
+120 CPU tests and Clippy pass; 74 GPU tests were intentionally not executed.
+Plain games and legacy Play remain strict, and the canonical GPU consumer
+explicitly refuses Text before submission. No second player mode was added.
+Actual text drawing/Claude acceptance, widget layout/IME/focus and reference-phone
+gates remain open. Evidence: [text bindings](docs/spikes/native-text-bindings.md),
+[composed text input](docs/spikes/native-text-input.md) and
+[draw handoff](docs/spikes/native-text-draw-handoff.md).
+The current main121 union passes 120 CPU tests, all-target Clippy and three fresh
+source/build-deleted exported runs with matching atlas and audible PCM. Missing or
+tampered fonts refuse; 75 GPU tests remain ignored.
+[Integration receipt](docs/spikes/evidence/native-text-input-main121.json).
+
 ## Runtime font atlas — integrated CPU foundation
 
 A retained CPU alpha atlas now rasterizes actual packaged TrueType glyphs with

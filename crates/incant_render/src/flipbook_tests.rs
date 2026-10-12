@@ -11,6 +11,7 @@ use std::sync::Arc;
 
 fn static_selection(input: &SceneInput) -> SceneInput {
     SceneInput {
+        text: None,
         nodes: input
             .nodes
             .iter()

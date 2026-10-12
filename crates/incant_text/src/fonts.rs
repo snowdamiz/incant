@@ -16,6 +16,23 @@ pub struct FontSource {
     pub bytes: Vec<u8>,
 }
 
+/// Immutable packaged bytes shared by independently ordered shaping chains.
+/// Construction performs the same admission as owned fonts; mutation requires a
+/// new allocation, so an admitted engine never observes changed bytes.
+#[derive(Clone)]
+pub struct SharedFontSource {
+    pub id: Ulid,
+    pub bytes: Arc<Vec<u8>>,
+}
+impl From<FontSource> for SharedFontSource {
+    fn from(source: FontSource) -> Self {
+        Self {
+            id: source.id,
+            bytes: Arc::new(source.bytes),
+        }
+    }
+}
+
 // cosmic-text's fallback trait takes static family names. Fixed, bounded private
 // aliases let each project choose its own ordered asset chain without leaking
 // strings, consulting platform fallback lists, or depending on font name aliases.
@@ -52,7 +69,7 @@ pub(crate) struct Source {
 }
 
 impl Fonts {
-    pub fn new(fonts: Vec<FontSource>) -> Result<Self, TextError> {
+    pub fn new(fonts: Vec<SharedFontSource>) -> Result<Self, TextError> {
         if fonts.is_empty() || fonts.len() > MAX_FONTS {
             return Err(TextError::Limit("font count"));
         }
@@ -82,8 +99,8 @@ impl Fonts {
         let mut assets = Vec::with_capacity(count);
         let mut sources = BTreeMap::new();
         for (index, font) in fonts.into_iter().enumerate() {
-            let digest = Sha256::digest(&font.bytes).into();
-            let bytes = Arc::new(font.bytes);
+            let digest = Sha256::digest(font.bytes.as_slice()).into();
+            let bytes = font.bytes;
             sources.insert(
                 font.id,
                 Source {

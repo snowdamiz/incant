@@ -30,6 +30,7 @@ fn scene(geometry: bool, raised: f64) -> SceneInput {
     });
     let mut input = SceneInput {
         nodes: vec![camera],
+        text: None,
         environment: None,
     };
     if geometry {

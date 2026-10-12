@@ -1,5 +1,7 @@
 //! Retained CPU input for the native renderer. Bind checked cooked versions once;
 //! ordinary frames only copy committed f64 poses into existing typed slots.
+mod text;
+pub use text::{MAX_TEXT_CHAINS, MAX_TEXT_GLYPHS, MAX_TEXT_LINES, TextSettings};
 mod animation;
 mod binding;
 mod tilemap;
@@ -12,7 +14,7 @@ use incant_runtime::{SpatialView, StableId, WorldIdentity};
 use std::{collections::BTreeMap, path::Path, sync::Arc};
 use thiserror::Error;
 
-/// Published decoded vertex/index/mip payload, excluding metadata/allocator/GPU
+/// Published decoded vertex/index/mip/raw-font payload, excluding metadata/allocator/GPU
 /// overhead. Startup may stage one bounded asset beyond this aggregate before
 /// rejecting. Retained prior adapters also contribute to process peak memory.
 pub const MAX_PAYLOAD_BYTES: usize = 256 * 1024 * 1024;
@@ -24,6 +26,14 @@ pub struct VisualCaches<'a> {
 }
 #[derive(Debug, Error)]
 pub enum NativeRenderError {
+    #[error(transparent)]
+    Text(#[from] incant_text::TextError),
+    #[error(transparent)]
+    Font(#[from] incant_assets_runtime::AssetError),
+    #[error("native text catalog/topology binding mismatch")]
+    TextBinding,
+    #[error("native text consumer limit: {0}")]
+    TextLimit(&'static str),
     #[error("native text rendering is not implemented")]
     TextUnsupported,
     #[error("spatial input belongs to a different native world")]
@@ -100,6 +110,10 @@ pub struct NativeRenderInput {
     binding_generation: u64,
     tick: u64,
     payload_bytes: usize,
+    text: Option<text::Binding>,
+    text_generation: u64,
+    text_slots: Vec<Option<usize>>,
+    text_undo: Vec<DMat4>,
 }
 
 impl NativeRenderInput {
@@ -111,11 +125,54 @@ impl NativeRenderInput {
         caches: VisualCaches<'_>,
         camera: StableId,
     ) -> Result<Self, NativeRenderError> {
-        if view.has_text() {
+        Self::load_inner(view, None, caches, camera)
+    }
+    /// Composed startup: the text view must come from this exact world. Checked
+    /// font bytes/layouts/atlas enter the same canonical consumer transaction.
+    pub fn load_with_text(
+        view: &SpatialView<'_>,
+        text: &incant_runtime::TextView<'_>,
+        caches: VisualCaches<'_>,
+        camera: StableId,
+        settings: TextSettings,
+    ) -> Result<Self, NativeRenderError> {
+        if view.identity() != text.identity() {
+            return Err(NativeRenderError::DifferentWorld);
+        }
+        Self::load_inner(view, Some((text, settings)), caches, camera)
+    }
+    fn load_inner(
+        view: &SpatialView<'_>,
+        text: Option<(&incant_runtime::TextView<'_>, TextSettings)>,
+        caches: VisualCaches<'_>,
+        camera: StableId,
+    ) -> Result<Self, NativeRenderError> {
+        if view.has_text() && text.is_none() {
             return Err(NativeRenderError::TextUnsupported);
         }
-        let (assets, payload_bytes) = binding::load(view.assets(), caches)?;
-        let prepared = binding::prepare(view, &assets, camera)?;
+        // An empty immutable font catalog can never acquire a valid Text
+        // declaration. Preserve the old spatial-only allocation path.
+        let text = text.filter(|(text, _)| !text.fonts().is_empty());
+        let (assets, mut payload_bytes) = binding::load(view.assets(), caches)?;
+        let mut prepared = binding::prepare(view, &assets, camera)?;
+        let mut text_generation = 0;
+        let mut text_slots = Vec::new();
+        let mut text_undo = Vec::new();
+        let text = text
+            .map(|(view_text, settings)| {
+                let binding = text::Binding::load(view_text, settings)?;
+                payload_bytes = payload_bytes
+                    .checked_add(binding.bytes)
+                    .filter(|n| *n <= MAX_PAYLOAD_BYTES)
+                    .ok_or(NativeRenderError::PayloadLimit)?;
+                let candidate = binding.prepare(view_text, view)?;
+                prepared.input.text = candidate.input;
+                text_slots = candidate.slots;
+                text_undo = candidate.undo;
+                text_generation = view_text.generation();
+                Ok::<_, NativeRenderError>(binding)
+            })
+            .transpose()?;
         Ok(Self {
             identity: view.identity().clone(),
             assets,
@@ -128,7 +185,17 @@ impl NativeRenderInput {
             binding_generation: view.binding_generation(),
             tick: view.tick(),
             payload_bytes,
+            text,
+            text_generation,
+            text_slots,
+            text_undo,
         })
+    }
+    pub fn has_text_binding(&self) -> bool {
+        self.text.is_some()
+    }
+    pub fn text_generation(&self) -> u64 {
+        self.text_generation
     }
     pub fn input(&self) -> &SceneInput {
         &self.input

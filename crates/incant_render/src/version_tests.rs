@@ -39,6 +39,7 @@ fn versions(root: &Path) -> [Arc<RuntimeAsset>; 2] {
 }
 fn input(sources: &[Arc<RuntimeAsset>]) -> SceneInput {
     SceneInput {
+        text: None,
         nodes: sources
             .iter()
             .enumerate()
