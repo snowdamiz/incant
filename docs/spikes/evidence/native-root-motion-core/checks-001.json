@@ -1,0 +1,101 @@
+[
+  {
+    "argv": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_assets",
+      "-p",
+      "incant_assets_runtime",
+      "--all-features"
+    ],
+    "exit_code": 0,
+    "seconds": 22.87013320799997,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-tests-003.log",
+    "sha256": "f01d5d410d57cb7d0669f7ac10f6883f1378bc3eeb157ba165df080cd121225f"
+  },
+  {
+    "argv": [
+      "./tools/cargo",
+      "clippy",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_assets",
+      "-p",
+      "incant_assets_runtime",
+      "--all-features",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "seconds": 15.688013666999723,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-clippy-001.log",
+    "sha256": "c0a905f17b089a0fb0e1f2148b2689055c5b4d82975bdd32f99dabdea9a9495a"
+  },
+  {
+    "argv": [
+      "./tools/cargo",
+      "check",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_assets_runtime",
+      "--features",
+      "visual",
+      "--target",
+      "wasm32-unknown-unknown"
+    ],
+    "exit_code": 0,
+    "seconds": 8.651500790999307,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-001.log",
+    "sha256": "00095631451270808ff302fbf7e78e72739657f52b05965614e2e932ad80b6ac"
+  },
+  {
+    "argv": [
+      "python3",
+      "tools/check_runtime_dependencies.py",
+      "incant_assets_runtime",
+      "--features",
+      "incant_assets_runtime/visual"
+    ],
+    "exit_code": 0,
+    "seconds": 0.6496680000000197,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-deps-001.log",
+    "sha256": "466c27957bec6177e21911180caffd16c9a78482761e9fad8fb9622eb2023499"
+  },
+  {
+    "argv": [
+      "./tools/cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 1.491094666999743,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-fmt-001.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 0.015500874999816006,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-diff-001.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]
