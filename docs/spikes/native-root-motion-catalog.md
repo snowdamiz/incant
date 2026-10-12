@@ -48,7 +48,8 @@ deletion. This is a source-deleted catalog test, not a packaged game proof.
 [The evidence inventory](evidence/native-root-motion-catalog.json) binds the
 source freezes, literal commands and retained logs. The second freeze adds only
 generated declarations and the stronger captured binary round-trip control to
-the first passing broad suite. Independent review remains pending.
+the first passing broad suite. Independent source and retained evidence review accepts the foundation without
+findings; full runtime connection remains ongoing.
 
 This is the admission foundation of ongoing connected root-motion work. Ordinary
 scene cooking still explicitly refuses the component until cooked v17 and native

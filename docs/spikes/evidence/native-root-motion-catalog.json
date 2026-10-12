@@ -156,7 +156,7 @@
     "CARGO_TARGET_DIR": "/tmp/incant-agent-font-target"
   },
   "source_progression": "Freeze001 broad checks pass; freeze002 changes only the captured-catalog test plus generated component schema/TS. Final four cook tests, focused Clippy, SDK check/typecheck and conventions/fmt/diff pass. Existing accepted root-motion tests are retained.",
-  "review": "Independent source/evidence review pending. This immutable foundation does not complete the connected feature.",
+  "review": "Independent source/evidence review accepted4f142bed with no findings; connected runtime feature and publisher integration remain pending.",
   "limits": {
     "clips": 256,
     "keys_per_catalog": 1000000,
@@ -171,5 +171,9 @@
     "No animation step, graph interval blend, pose stripping, body movement or checkpoint wiring yet.",
     "No TS/Wasm gameplay control or ordinary shipped root-motion game proof yet.",
     "No rendered, device, performance or Phase 1 acceptance."
-  ]
+  ],
+  "independent_final_review": {
+    "path": "docs/spikes/evidence/native-root-motion-catalog/independent-final-review.json",
+    "sha256": "4bdffed9ef448bf23fc005924b9ca3c47b3d5dfd8530394e0e242ad648dcb8c0"
+  }
 }

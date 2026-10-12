@@ -23,8 +23,8 @@ binary payload, sharing the existing full-pose interpolation arithmetic. Typed
 root selection uses normal command transactions, Undo/Redo and journal reopen;
 the captured-model loader validates topology and deduplicates catalogs. All 232
 affected tests, scoped Clippy, wasm32 and dependency checks pass. The catalog
-round-trips and samples after deleting source and cache data. Independent review
-and runtime connection remain pending: ordinary scene cooking explicitly refuses
+round-trips and samples after deleting source and cache data. Independent source
+and evidence review is accepted. Runtime connection remains pending: scene cooking refuses
 the component until v17 binding lands. This is not connected body movement or
 complete root motion. [Admission evidence](docs/spikes/native-root-motion-catalog.md).
 
