@@ -16,13 +16,15 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Pinned mobile bytecode compatibility — target execution pending
+## Pinned mobile bytecode compatibility — actual simulator proof passed
 
-A fresh trusted-source cook now records exact producer/destination and the pinned
-QuickJS bytecode/numeric ABI for the Mac ARM to iOS device/simulator route. Native
-script/cooker behavior and scoped Clippy checks pass; target archive and actual
-simulator execution remain pending. Android cross-target admission and authored
-project cross-export remain denied. This does not establish a phone gate.
+Fresh source cooks bind exact producer/destination and the pinned QuickJS ABI.
+Actual C and Swift callers each pass the same complete numeric/input/failure
+records on macOS and an iOS 27.0 ARM simulator (32 controls per platform). iOS
+device archives compile and link only. Native script/cooker tests, union Clippy
+and lean dependency checks pass; final execution review is pending. Android
+cross-target admission and authored-project cross-export remain denied. No
+physical-phone or performance gate is claimed.
 [Contract and evidence](docs/spikes/mobile-bytecode-compatibility.md).
 
 ## Shared cooked-player library
@@ -30,9 +32,9 @@ project cross-export remain denied. This does not establish a phone gate.
 The ordinary packaged player now has a reusable Rust entry and optional bounded C
 ABI. Local macOS CPU/CLI tests and native-window/static-module compatibility pass;
 C/Swift caller verification is underway. The first iOS simulator archive attempt
-hit the existing cross-target script-cook refusal. That guard remains intact while
-a separate compatibility route is developed; no mobile runtime/device/performance
-gate passes from this work. [Contract and evidence](docs/spikes/mobile-runtime-library.md).
+hit the existing cross-target script-cook refusal. That failure remains retained;
+the separately verified compatibility route is described above. No physical-device
+or performance gate passes from the library extraction. [Contract and evidence](docs/spikes/mobile-runtime-library.md).
 
 ## Wasm HUD controls — merged main166
 

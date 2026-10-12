@@ -1,0 +1,22 @@
+{
+  "at": "2026-10-12T20:45:19.156122+00:00",
+  "reviewer": "astra root",
+  "source_inventory": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/mobile-bytecode-source-freeze-002/inventory.json",
+    "sha256": "f702b341d55170a13196a85f835b4489123892bd38c6171d1a12991a089b9a84",
+    "files": 11
+  },
+  "source_commit": "24363a100143b938599d8567753b36a8d2564b63",
+  "scope": "source architecture review only; target archive and execution evidence pending",
+  "findings_fixed": [
+    "positive ABI contract test now uses explicit audited sample, native eligibility remains tested separately"
+  ],
+  "reviewed": [
+    "fresh-source-only ScriptBuild constructor; no cache retarget method",
+    "exact producer/destination admission; Android and authored cross-export remain refused",
+    "bytecode28 numeric/layout identity, fixed package checksums, linked engine version and default C flags",
+    "consumer checks metadata and blob hashes before unsafe trusted loader",
+    "fixture exercises f64 bit records, BigInt typed arrays, closure, Unicode, input epochs, hardening and failed tick"
+  ],
+  "acceptance": "source accepted for actual target build and C/Swift proof; no claim that iOS route has executed yet"
+}
