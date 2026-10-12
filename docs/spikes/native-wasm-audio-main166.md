@@ -31,6 +31,6 @@ products in that private clone were removed before validation. The original fail
 and complete cleanup inventory are retained. No shared/dependency cache was purged.
 
 [Source, commands and full retained evidence](evidence/native-wasm-audio-main166.json)
-bind the 1,844-input freeze, copied tools, actual packages and reports. Independent
+bind the 1,859-input freeze, copied tools, actual packages and reports. Independent
 integration audit and exact-head fast CI are pending. Whole-module checkpoints,
 GPU/window/appearance, hardware audio, phone/performance and phase gates remain open.
