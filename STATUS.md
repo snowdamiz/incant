@@ -16,6 +16,16 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Multi-pose animation sampling — locally verified
+
+The retained numeric animation player now mixes up to sixteen clip samples with
+weighted local translation/scale and normalized quaternion averaging. Existing
+unpublished pose storage supplies the scratch lanes, so retained memory and
+per-sample allocations do not increase. All 108 affected tests, Clippy, wasm32,
+dependency and formatting checks pass; independent source review accepts the
+scope. Authored nested/2D trees, blended-state transitions and their native/SDK
+wiring remain open. [Contract and evidence](docs/spikes/runtime-weighted-pose.md).
+
 ## Native game UI reserved-frame connection — locally verified
 
 Managed native input and Claude's accepted screen-space consumer compose in the
