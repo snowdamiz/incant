@@ -36,7 +36,8 @@ pub enum SaveError {
 
 impl NativeWorld {
     /// Checkpoint committed components, hierarchy, spatial/asset declarations,
-    /// exact flipbook fractions, locale settings/catalog and the fixed-step clock. Navigation geometry is
+    /// exact flipbook fractions, animation clocks/flags, locale settings/catalog and
+    /// the fixed-step clock. Navigation geometry is
     /// saved; bounded query caches are rebuilt on load. No asset files are read.
     ///
     /// This is NOT a game-session/VM checkpoint: input, timers, callbacks, script
@@ -95,11 +96,21 @@ impl NativeWorld {
                     .map(|p| (id, p.state.checkpoint()))
             })
             .collect::<Vec<_>>();
+        let animations = self
+            .entities
+            .iter()
+            .filter_map(|(&id, &handle)| {
+                self.world
+                    .get::<crate::animation::Playback>(handle)
+                    .map(|p| (id, p.state))
+            })
+            .collect::<Vec<_>>();
         codec::encode(
             self.tick,
             self.source_scene_fingerprint,
             &scene.to_bytes(),
             &states,
+            &animations,
         )
     }
 
@@ -133,6 +144,14 @@ impl NativeWorld {
         if decoded.states.len() != expected * codec::STATE_BYTES {
             return Err(SaveError::Invalid("flipbook membership"));
         }
+        let expected_animations = scene
+            .spatial()
+            .iter()
+            .filter(|n| n.animation.is_some())
+            .count();
+        if decoded.animations.len() != expected_animations * codec::ANIMATION_BYTES {
+            return Err(SaveError::Invalid("animation membership"));
+        }
         let mut world = Self::new(scene);
         for row in decoded.states.as_chunks::<{ codec::STATE_BYTES }>().0 {
             let (id, checkpoint) = codec::state(row)?;
@@ -148,6 +167,26 @@ impl NativeWorld {
                 .clock
                 .restore(checkpoint)
                 .map_err(|_| SaveError::Invalid("flipbook checkpoint"))?;
+        }
+        for row in decoded
+            .animations
+            .as_chunks::<{ codec::ANIMATION_BYTES }>()
+            .0
+        {
+            let (id, state) = codec::animation(row)?;
+            let entity = *world
+                .entities
+                .get(&id)
+                .ok_or(SaveError::Invalid("animation entity"))?;
+            let mut playback = world
+                .world
+                .get_mut::<crate::animation::Playback>(entity)
+                .ok_or(SaveError::Invalid("animation component"))?;
+            playback
+                .definition
+                .validate_state(state)
+                .map_err(|_| SaveError::Invalid("animation checkpoint"))?;
+            playback.state = state;
         }
         world.tick = decoded.tick;
         if let Some(origin) = decoded.origin {
