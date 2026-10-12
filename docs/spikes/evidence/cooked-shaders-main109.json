@@ -1,0 +1,345 @@
+{
+  "source_commit": "9a13f4b87813a4b1b8b79fb96792794052b4b6d8",
+  "source_tree": "47a0811dfd678d06ba466951fd21c8d13b21947c",
+  "actual_main": "94c4927abadb10d2203db2e1ab031de7853947fa",
+  "integration_resolution": "Only STATUS and additive dependency guard list conflicts; no Rust, WGSL or cooker source conflict. Retains incant_agent_native and incant_shader_cook forbidden runtime dependencies.",
+  "source_hashes": {
+    "crates/incant_render/Cargo.toml": "df267789db36c1db7607c65a7fe0251044859ce4d4e93c33e2151b9271ed32c5",
+    "crates/incant_render/build.rs": "087c70bb7fd826dff2a77343c78935fddb076db9d14cb18866f2f6c17c43202a",
+    "crates/incant_render/src/geometry_shader.rs": "6781836f98e381ac600211fbee33a4674869f6c7b21ebddaadf31f4b8e5cdee6",
+    "crates/incant_render/src/geometry_shader/cooked.rs": "4742b2bc2473d13ab67bca41f32af14ec74baac748fa375aa410484458acdded",
+    "crates/incant_render/src/lib.rs": "e379470bb06d9566e9dc480c8136c6499d0f28e1fd28036ab6d482d6f176830d",
+    "crates/incant_render/src/materials.rs": "f97b533da972066485ebbe78f455960fd68183565da4a671e5fc1ce5546accd7",
+    "crates/incant_render/src/output.rs": "adb73c440d87b0599ca2084b2552d0582c2e4c78affd679b009d37dddd0b1cda",
+    "crates/incant_render/src/output/cooked.rs": "ba0e1c585a2bfb2cd14a19d9a1a00aba7eac54c15057eeecfd52de9e94e58c50",
+    "crates/incant_render/src/output/layout.rs": "609e17db021135c7f4ab49f4d74b782bb3aa2bfe32dee6548ee210133a46fc84",
+    "crates/incant_render/src/resource_error.rs": "4f825d7e38bad01052d2334b9edfdd76e04114d7c7f169ad6dc608f3b435e0d2",
+    "crates/incant_render/src/shader.rs": "9aeadf08eae040fb3d955cbf7d93b1e059add0fee17ebcfbe5356de133587dd5",
+    "crates/incant_render/src/shader/native.rs": "e1ebfe6cd764991437c34308775d5329062344e5c6ff1adeb524342204de1843",
+    "crates/incant_render/src/shadows/mod.rs": "614f29505d80344ceba24d1448a24b55c2ae10c90c5d02bf237ea8b748d080d5",
+    "crates/incant_render/src/shadows/pipeline.rs": "99da7af93c75207b1c834926a4376a66fce697eb00b98c6e638a7a84bb202bfe",
+    "crates/incant_render/tests/diagnostic_output/mod.rs": "8f863c455bf264e89c85683197eb9d813c06a72879bba058636101dfc208e9d6",
+    "crates/incant_render/tests/hdr_output/mod.rs": "394c3ee6a9ee295fe48764b66417a7082933191540c979b390dbe1b700f04d52",
+    "crates/incant_shader_cook/Cargo.toml": "e12b8b89f3b2d344cfa0dc7def97c2262d23d76b0ffd4688aa75f5d5ed656270",
+    "crates/incant_shader_cook/examples/output_bundle.rs": "567d7744d3bc31a9494296eb70a1952f43defe080848e97b1ee97bca351e550a",
+    "crates/incant_shader_cook/src/contract.rs": "c8956ae477c1e779cfe8ef5a6960a3950fff795849eb8d36bce917d1158c7515",
+    "crates/incant_shader_cook/src/emit.rs": "2da6ff21863ab62253c463449a592800f7a564d1b259c8b23f07030ca0aef596",
+    "crates/incant_shader_cook/src/geometry/contract.rs": "cf1f25c829206e536b8c95da3699fffa24b514af6b1219c92c2073cb9446839d",
+    "crates/incant_shader_cook/src/geometry/emit.rs": "1ec015b285dc0bd173070040d6848a442e3a6e591a3db327f22dca55073b78df",
+    "crates/incant_shader_cook/src/geometry/mod.rs": "098f617dbf41b374c71bbb1455b880193e377858d2b81b6a01101f9e9eaa3f4d",
+    "crates/incant_shader_cook/src/lib.rs": "6c60089be46ade672cdfa51510e683a0a15bff1c62c910a9395f9a192b737e57",
+    "crates/incant_shader_cook/src/manifest.rs": "88e6f5ae2a60345320463e7cfc7ebe335908a9f670c3ce2373c422948da6ca26",
+    "crates/incant_shader_cook/tests/geometry.rs": "6670dc980abdc053a036ebf2b6bee4fcc4eb2fa6c20e4450d640633a4496f82f",
+    "crates/incant_shader_cook/tests/output.rs": "6de04d9ef95f1d11d4b1239258504b57e33d7bc071da54aa3e03c9c0d6fd9bcd",
+    "tools/check_runtime_dependencies.py": "c9a79d1484a32bc12485eef2f1c5f79dd16991de1d3fb4789e1ee6e92e74c64f",
+    "tools/tests/test_runtime_dependencies.py": "e7fb009c4ce4c09157220663f49343486eb2ceb7d914e75b25a68be9d27aca61"
+  },
+  "cpu": {
+    "source": "9a13f4b87813a4b1b8b79fb96792794052b4b6d8",
+    "runs": [
+      {
+        "name": "cooked-tests",
+        "command": [
+          "./tools/cargo",
+          "test",
+          "--locked",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant_shader_cook",
+          "-p",
+          "incant_render",
+          "--features",
+          "incant_render/cooked-geometry"
+        ],
+        "exit_code": 0,
+        "started_at": "2026-10-12T00:27:12.133703+00:00",
+        "ended_at": "2026-10-12T00:28:14.120145+00:00",
+        "log": "/tmp/incant-shader-main109-checks/cooked-tests.log",
+        "sha256": "eb76377ee1a268c0672f8146d0bb69b89575b2e353039ccfa51b1ea821475369"
+      },
+      {
+        "name": "default-tests",
+        "command": [
+          "./tools/cargo",
+          "test",
+          "--locked",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant_render"
+        ],
+        "exit_code": 0,
+        "started_at": "2026-10-12T00:28:14.120661+00:00",
+        "ended_at": "2026-10-12T00:28:27.667526+00:00",
+        "log": "/tmp/incant-shader-main109-checks/default-tests.log",
+        "sha256": "000f903008b866286a87ad33ebdcb1b30c659a1fd826b794f8d6289d4113821e"
+      },
+      {
+        "name": "clippy",
+        "command": [
+          "./tools/cargo",
+          "clippy",
+          "--locked",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant_shader_cook",
+          "-p",
+          "incant_render",
+          "--features",
+          "incant_render/cooked-geometry",
+          "--all-targets",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "exit_code": 0,
+        "started_at": "2026-10-12T00:28:27.667965+00:00",
+        "ended_at": "2026-10-12T00:28:33.057115+00:00",
+        "log": "/tmp/incant-shader-main109-checks/clippy.log",
+        "sha256": "9ca761dff55f4a92c5762f7c628618d85220180ee2d83e13468064dc6123606d"
+      },
+      {
+        "name": "default-wasm",
+        "command": [
+          "./tools/cargo",
+          "check",
+          "--locked",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant_render",
+          "--lib",
+          "--target",
+          "wasm32-unknown-unknown"
+        ],
+        "exit_code": 0,
+        "started_at": "2026-10-12T00:28:33.057529+00:00",
+        "ended_at": "2026-10-12T00:28:34.723290+00:00",
+        "log": "/tmp/incant-shader-main109-checks/default-wasm.log",
+        "sha256": "ebd45a43abc13715f2bac2a9229e5eb9bc80e0144fba8199880eab8f2fdee173"
+      },
+      {
+        "name": "cooked-wasm",
+        "command": [
+          "./tools/cargo",
+          "check",
+          "--locked",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant_render",
+          "--lib",
+          "--features",
+          "cooked-geometry",
+          "--target",
+          "wasm32-unknown-unknown"
+        ],
+        "exit_code": 0,
+        "started_at": "2026-10-12T00:28:34.723681+00:00",
+        "ended_at": "2026-10-12T00:28:36.085853+00:00",
+        "log": "/tmp/incant-shader-main109-checks/cooked-wasm.log",
+        "sha256": "3150c39ef85f2cbad38c28e2fb967cd80ae8c4c0790fe4c4a974287c3d6e2b0e"
+      },
+      {
+        "name": "graph",
+        "command": [
+          "python3",
+          "tools/check_runtime_dependencies.py",
+          "incant_render",
+          "incant_game_runtime",
+          "incant_game_player",
+          "--features",
+          "incant_render/cooked-geometry,incant_game_player/render-gpu"
+        ],
+        "exit_code": 0,
+        "started_at": "2026-10-12T00:28:36.086598+00:00",
+        "ended_at": "2026-10-12T00:28:36.462172+00:00",
+        "log": "/tmp/incant-shader-main109-checks/graph.log",
+        "sha256": "1a6b8e4d026cdf3085ccdd9fc5ac96e0277f984daeb27c74cbd984972ed54df8"
+      },
+      {
+        "name": "fmt",
+        "command": [
+          "./tools/cargo",
+          "fmt",
+          "--all",
+          "--check"
+        ],
+        "exit_code": 0,
+        "started_at": "2026-10-12T00:28:36.462613+00:00",
+        "ended_at": "2026-10-12T00:28:37.391154+00:00",
+        "log": "/tmp/incant-shader-main109-checks/fmt.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "conventions",
+        "command": [
+          "python3",
+          "tools/generate_conventions.py",
+          "--check"
+        ],
+        "exit_code": 0,
+        "started_at": "2026-10-12T00:28:37.391577+00:00",
+        "ended_at": "2026-10-12T00:28:37.430685+00:00",
+        "log": "/tmp/incant-shader-main109-checks/conventions.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "gpu_executed": false
+  },
+  "cpu_result_sha256": "09e02d25c3b1cd413d6dc11258dc1530eb90eccb2af3b17587d91499fba285d8",
+  "binary_manifest": {
+    "path": "/tmp/incant-geometry-main109-binaries-v1/manifest.json",
+    "sha256": "14e72ad991bbc2ac18a61caf77f13722de0a5cb5d7df1ab383954bb379b10587",
+    "source_count": 805,
+    "profile": "ci",
+    "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1",
+    "cargo_version": "cargo 1.99.0 (5f94df478 2026-08-27)",
+    "runs": {
+      "default": {
+        "command": [
+          "./tools/cargo",
+          "test",
+          "--locked",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant_render",
+          "--lib",
+          "--test",
+          "model_gpu",
+          "--no-run",
+          "--message-format=json"
+        ],
+        "binaries": {
+          "model_gpu": {
+            "path": "/tmp/incant-geometry-main109-binaries-v1/default-model_gpu",
+            "sha256": "ff99eca57eb7d250286e9ffc6eae0c2fdb5c6ab47a942d03997d00a926b548ac",
+            "bytes": 15512728
+          },
+          "incant_render": {
+            "path": "/tmp/incant-geometry-main109-binaries-v1/default-incant_render",
+            "sha256": "d5c50f83752417cdc354e8fc2b21fe85874e9df234ccdcf58656dd267fccde20",
+            "bytes": 26111008
+          }
+        },
+        "build_log": {
+          "path": "/tmp/incant-geometry-main109-binaries-v1/default-build.jsonl",
+          "sha256": "61656ae6b3ae2481c28efd588fd8aac2604e4e4cc87e776fadb79467610d2efb"
+        },
+        "stderr": {
+          "path": "/tmp/incant-geometry-main109-binaries-v1/default-build.stderr",
+          "sha256": "67840ecfdff96ee3e612c533bca8c24a8c7a830426952de895cdec60b6f9fd51"
+        }
+      },
+      "cooked-geometry": {
+        "command": [
+          "./tools/cargo",
+          "test",
+          "--locked",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant_render",
+          "--lib",
+          "--test",
+          "model_gpu",
+          "--no-run",
+          "--message-format=json",
+          "--features",
+          "cooked-geometry"
+        ],
+        "binaries": {
+          "incant_render": {
+            "path": "/tmp/incant-geometry-main109-binaries-v1/cooked-geometry-incant_render",
+            "sha256": "87b34b67f545286f4a775d34c376f8ba5f9f48985c8bcb3a3bef188f39d58041",
+            "bytes": 26201216
+          },
+          "model_gpu": {
+            "path": "/tmp/incant-geometry-main109-binaries-v1/cooked-geometry-model_gpu",
+            "sha256": "f8d25e8a2069e25290b2f414b9fb097257eb9f483d1d5e28fd4abb88e2bb61ba",
+            "bytes": 15569816
+          }
+        },
+        "build_log": {
+          "path": "/tmp/incant-geometry-main109-binaries-v1/cooked-geometry-build.jsonl",
+          "sha256": "eaa466821ed29d334fa906bbd2a03ef3854ab6adf66d5087c3ded095dce3cdd8"
+        },
+        "stderr": {
+          "path": "/tmp/incant-geometry-main109-binaries-v1/cooked-geometry-build.stderr",
+          "sha256": "509d9f912e6e1289ab4e67d24866d82b7b10794ec2a665a9eb292f37f35a0177"
+        }
+      }
+    }
+  },
+  "numerical_receipt": {
+    "path": "/tmp/incant-0051-numerical-main109-001/comparison.json",
+    "sha256": "8170feaf7f0770b62cab7ee4b6993307ab720e85b38ceb3fd99ab13ed43dca39",
+    "committed": "cooked-shaders-main109-numerical.json"
+  },
+  "gpu_release": {
+    "released_at": "2026-10-12T00:33:54.668037+00:00",
+    "source": "9a13f4b87813a4b1b8b79fb96792794052b4b6d8",
+    "session": 21800,
+    "session_exit": 0,
+    "comparison_path": "/tmp/incant-0051-numerical-main109-001/comparison.json",
+    "comparison_sha256": "8170feaf7f0770b62cab7ee4b6993307ab720e85b38ceb3fd99ab13ed43dca39",
+    "runs": [
+      {
+        "name": "default-incant_render",
+        "pid": 18539,
+        "exit_code": 0,
+        "test_summary": [
+          "test result: ok. 19 passed; 0 failed; 0 ignored; 0 measured; 36 filtered out; finished in 1.54s"
+        ]
+      },
+      {
+        "name": "cooked-geometry-incant_render",
+        "pid": 18545,
+        "exit_code": 0,
+        "test_summary": [
+          "test result: ok. 19 passed; 0 failed; 0 ignored; 0 measured; 42 filtered out; finished in 1.51s"
+        ]
+      },
+      {
+        "name": "default-model_gpu",
+        "pid": 18578,
+        "exit_code": 0,
+        "test_summary": [
+          "test result: ok. 50 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 48.27s"
+        ]
+      },
+      {
+        "name": "cooked-geometry-model_gpu",
+        "pid": 20530,
+        "exit_code": 0,
+        "test_summary": [
+          "test result: ok. 50 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 46.60s"
+        ]
+      }
+    ],
+    "paired_raw_cases": 28,
+    "unchanged_prior_raw_cases": 56,
+    "pids_absent": [
+      "18539",
+      "18545",
+      "18578",
+      "20530"
+    ],
+    "png_export": false
+  },
+  "limits": [
+    "Metal numerical scope only; Claude0051 appearance report is a separate earlier-binary review.",
+    "No Vulkan/DX12 driver, phone, performance or default-enablement claim.",
+    "Other shader families and runtime translation, per-level recording and persistent pipeline caches remain incomplete."
+  ]
+}

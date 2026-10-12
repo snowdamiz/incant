@@ -1,0 +1,5 @@
+
+running 1 test
+test hdr_output::hdr_values_survive_until_tone_mapping_and_transfer_runs_once ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 53 filtered out; finished in 0.18s

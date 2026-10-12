@@ -2,9 +2,10 @@
 
 `incant_render/cooked-geometry` extends the optional output-pass path with actual
 build-produced diagnostic and shadow stages. It implies `cooked-output` and is
-off by default. The default native and Web routes keep WGSL. No GPU, native
-window, screenshot or provider was used for this slice. Numerical and Claude
-pixel acceptance remain pending; CPU results do not enable the feature.
+off by default. The default native and Web routes keep WGSL. The initial source
+review below was CPU-only; subsequent Metal numerical checks are recorded at the
+end of this document. No result enables the feature by default or establishes
+Vulkan/DX12, device-performance or whole-renderer completion.
 
 ## Contract and consumption
 
@@ -93,19 +94,18 @@ per-level permutations, asynchronous missing-permutation fallback and hitch/
 device measurements remain unfinished PLAN requirements. This slice makes no
 whole-renderer translation-removal, backend/device parity or performance claim.
 
-After the existing GPU owner releases its grant, run the preserved output-only
-comparison first. Then reuse the existing geometry, shadow mask/reflection/range,
+The subsequent checks reuse the existing geometry, shadow mask/reflection/range,
 queued-atlas and pipeline-warmup numerical tests under default and cooked geometry.
 Any byte mismatch requires diagnosis; Claude owns rendered pixels and appearance
-acceptance. Metal success will not imply Vulkan/DX12 or reference-phone evidence.
+acceptance. Metal success does not imply Vulkan/DX12 or reference-phone evidence.
 
 ## Independent review and subsequent output-only check
 
 The source freeze is commit `c5268ae05236e5836f04a6098ac0eef31ca6ad43`.
 [Independent review](evidence/cooked-geometry-shaders-review.json) accepted the
 18 source files, complete host/unsafe boundary and CPU evidence with no finding.
-It does not establish geometry driver or appearance acceptance. No geometry
-fixture has run.
+That CPU review did not establish geometry driver or appearance acceptance; no
+geometry fixture had run at that point.
 
 After the native review explicitly released its grant, only the preserved
 `550b563` output comparison pair ran its two existing HDR tests. Both processes
@@ -116,3 +116,62 @@ The process IDs were independently absent before graphics ownership was returned
 No PNG, screenshot, geometry draw, provider call or performance measurement was
 made. Output and geometry remain optional pending their respective remaining
 backend and Claude acceptance.
+
+## Actual main109 integration and Metal numerical checks
+
+Source `9a13f4b87813a4b1b8b79fb96792794052b4b6d8` integrates actual main109
+`94c4927abadb10d2203db2e1ab031de7853947fa`. Only STATUS and the additive runtime
+dependency guard required conflict resolution; both authoring-agent and shader
+cooker exclusions remain. Renderer, cooker and fixture source are unchanged from
+the frozen source used for Claude0051; main's newly integrated asset readers
+required new linked comparison binaries.
+
+[Integrated receipt](evidence/cooked-shaders-main109.json) records 52 cooked
+renderer/cooker and 36 default CPU tests, all-target Clippy, default and feature
+Web library compilation, dependency checks, formatting and conventions. The
+805-file source freeze and copied test executables bind profile, toolchain,
+features and build logs. No source changed during compilation or execution.
+
+The four serial GPU suites pass all 138 cases: 19 library and 50 model cases in
+each mode. [Numerical receipt](evidence/cooked-shaders-main109-numerical.json)
+records Apple M5 Pro/Metal, exact commands, child identities, logs and normalized
+readbacks. All 16 output and 12 diagnostic pairs match byte-for-byte across the
+four formats, resize and actual reflected-draw cases. All 56 per-mode records and
+bytes also match the earlier frozen0051 numerical run. Original analytic and
+model assertions remain unchanged. No PNG was exported by this integration run;
+all four processes were reaped and independently absent before GPU release.
+
+Claude0051's bounded pixel review is a separate acceptance record on its original
+immutable binaries. The integrated numerical comparison does not expand that
+visual review to new fixtures or backends. Both features remain off by default.
+
+## Scoped Claude appearance acceptance
+
+[Claude0051's report](../../handoffs/0051-cooked-shader-acceptance/result.md)
+records explicitly verified Opus 5.5/Max and actual pixel inspection of 24
+captures from eight serial, successful children. All 12 default/cooked PNG pairs
+and decoded images are identical. The output swatch, diagnostic reflected cubes,
+and shadow contact/slope/curve/mask/reflection/culling properties pass within the
+fixed fixtures on Apple M5 Pro/Metal. The original output-only and geometry-v2
+source/build identities remain distinct. No production visual changes were made.
+
+The report also preserves five shared baseline observations: a thin-wall contact
+light seam, grazing-light stair steps, far thin-caster breakup, sub-visible
+receiver modulation and a faint grazing-edge fringe. None differs between the
+WGSL and cooked paths. Their causes and temporal behavior remain follow-up work;
+these results do not approve complete shadow quality. The masks fixture does not
+distinguish the caster from the receiver in the main pass, so its appearance
+coverage is limited to shadow semantics. No new capture or rebaseline was used
+to hide those limitations.
+
+The [main109 source/evidence review](evidence/cooked-shaders-main109-review.json)
+preserves the earlier private unsafe-boundary review and accepts the additive
+integration. Retained raw captures, child logs and helper manifests are in the
+Claude packet. Its independently reproduced CPU analysis and identity review
+are recorded in [the closeout receipt](evidence/cooked-shaders-0051-closeout.json).
+
+Packet scope disclosure: Claude produced 18 magnified CPU crops and two difference
+maps from the existing captures, despite the brief’s “no further images” wording.
+They are ignored, labeled derived inspection aids with source hashes; they add no
+render/capture coverage. The 24 original captures remain unchanged. This does not
+authorize additional captures or change model routing.

@@ -1,0 +1,34 @@
+{
+  "name": "output-default",
+  "checked_at": "2026-10-12T00:16:35.788052+00:00",
+  "binary": "output-v1/default-incant-render-tests",
+  "binary_sha256": "7ab2bf2dd27b8c5b6ac734f4667877bbec6e5cf6b5e446cb8848a602847519cb",
+  "expected_sha256_by_source": {
+    "staged-inputs.json": "7ab2bf2dd27b8c5b6ac734f4667877bbec6e5cf6b5e446cb8848a602847519cb",
+    "output-v1/manifest.json": "7ab2bf2dd27b8c5b6ac734f4667877bbec6e5cf6b5e446cb8848a602847519cb",
+    "output-v1/source-pairing.json": "7ab2bf2dd27b8c5b6ac734f4667877bbec6e5cf6b5e446cb8848a602847519cb"
+  },
+  "manifest_hashes": {
+    "geometry-v2/manifest.json": {
+      "actual": "b063b8b10888725b9f533f189ad665e8ec9fce04e9ef81c20ac1dbdfed5c5806",
+      "prepared_inputs": "b063b8b10888725b9f533f189ad665e8ec9fce04e9ef81c20ac1dbdfed5c5806"
+    },
+    "output-v1/source-pairing.json": {
+      "actual": "f4458bf11ec22c998c3aececa0abedca41a348bb609c55196d7df9b9425a43bf",
+      "prepared_inputs": "f4458bf11ec22c998c3aececa0abedca41a348bb609c55196d7df9b9425a43bf"
+    }
+  },
+  "gate_sha256": "058aa21c4ce98fcc5996da3bcf89f5445b7a17af8853dc3f090bec49a9e4c4dd",
+  "frozen_binary_processes": [],
+  "checks": {
+    "released_latch_absent": true,
+    "gate_present": true,
+    "root_grant_true": true,
+    "gate_prepared_inputs_match": true,
+    "gate_helper_match": true,
+    "binary_matches_every_manifest": true,
+    "pairing_manifests_match_prepared_inputs": true,
+    "no_frozen_binary_running": true
+  },
+  "passed": true
+}

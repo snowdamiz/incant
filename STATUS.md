@@ -40,7 +40,7 @@ active. Report merged work separately from local checks and unmet exit gates.
 The project is still early relative to the complete Engine 1.0 and Driftwake
 scope; no defensible percentage or completion date follows from the PR count.
 
-## Opt-in cooked output, diagnostic and shadow shaders — Metal numerical checks pass
+## Opt-in cooked output, diagnostic and shadow shaders — scoped Metal acceptance
 
 The build-only cooker emits actual native MSL/SPIR-V/HLSL for output, diagnostic
 geometry and all eight shadow variants. `cooked-output` and `cooked-geometry`
@@ -49,10 +49,14 @@ vertex/resource contract before native shader calls. CPU cooker/renderer tests,
 Clippy, default/feature Web compilation and build-only dependency guards pass.
 The frozen v2 default/cooked pair passes all 138 existing/new numerical renderer
 tests on Apple M5 Pro/Metal: all 16 output and 12 actual-diagnostic readbacks are
-byte-identical. Claude0051 captured 24 bounded PNGs in eight successful/reaped
-processes and is finishing CPU pixel review; no appearance acceptance is claimed
-yet. Vulkan/DX12 drivers, phones/performance, remaining shader families, caches and
-whole-renderer translation removal remain open.
+byte-identical. The actual main109 integration repeats all 138 tests successfully,
+with identical paired and prior raw results. Claude0051 inspected 24 bounded PNGs
+from eight successful/reaped processes and reports scoped Metal appearance passes;
+all 12 pairs are identical. Shared thin-wall contact leakage, low-sun aliasing,
+far thin-caster breakup and subtle receiver modulation remain renderer follow-ups;
+the shadow fixture does not establish main-pass caster visibility. Vulkan/DX12
+drivers, phones/performance, remaining shader families, caches and whole-renderer
+translation removal remain open. Both features stay disabled by default.
 [Contract and evidence](docs/spikes/cooked-geometry-shaders.md).
 
 ## Native editor agent integration — merged in PR #109

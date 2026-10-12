@@ -1,9 +1,10 @@
 # Cooked output-pass shaders (opt-in)
 
 The `incant_render/cooked-output` feature connects actual offline artifacts to the
-existing display-output pass. It is off by default and has CPU validation only.
-No generated shader has been submitted to a GPU and no appearance, device,
-performance or release gate is claimed.
+existing display-output pass. It is off by default. The initial implementation
+was CPU-validated; later Metal numerical checks are recorded in
+[the geometry integration evidence](cooked-geometry-shaders.md#actual-main109-integration-and-metal-numerical-checks).
+No Vulkan/DX12, reference-device, performance or release gate is claimed.
 
 ## Production path
 
