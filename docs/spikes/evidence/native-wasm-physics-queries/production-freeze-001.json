@@ -1,0 +1,28 @@
+{
+  "time": "2026-10-12T05:55:35.708907+00:00",
+  "root": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+  "base": "524595bad41ab00c15fa6e46ba8df7ce6033e1a9",
+  "source_hashes": {
+    "crates/incant_runtime/src/physics_queries.rs": "cff88b176b3a8a2b4bf1838127255d1cd160f9b2da9bd9e6a812d21350d61d27",
+    "crates/incant_wasm_abi/src/lib.rs": "765637df932d7b630afcdf69df678d88250dbcda8c5bfd24cb5bb0cb95a08849",
+    "crates/incant_wasm_abi/src/physics.rs": "8d8cb93c309549b17c1db07ea53f79f0ec4c9081aa66269a8d575df4c756abc6",
+    "crates/incant_wasm_dev/src/generated.rs": "9102a5e6e5c10a5e3eadf23891a9a035d9528fb78ec9fbefbaf09da8d01e3b51",
+    "crates/incant_wasm_dev/src/host.rs": "f5aa0e80ce37593a9e4d563a65709f9da839717dfd5c90ae6d31663e7d9ba481",
+    "crates/incant_wasm_runtime/c/generated.h": "fe4faa509787340e61ca2f42c20b27246aceb21af4d089443a44711f6393a60e",
+    "crates/incant_wasm_runtime/c/generated.inc": "f162c8d9edb11194624585530f431376e00bcc73961704094e6889c40c69692c",
+    "crates/incant_wasm_runtime/src/capability.rs": "8e2051a10aa1f4dcac17a3de843a136da11879ea90d4429f9e64e9229d47521a",
+    "crates/incant_wasm_runtime/src/compiled.rs": "e8bc8fe5baf23bdb8942efcbd0b93660921302a624fa0f9af70b9af316c88758",
+    "crates/incant_wasm_runtime/src/generated.rs": "b5bb42d7ab506b45634cced4f496ff768235974894e54dd7d1c047a7443e02bc",
+    "crates/incant_wasm_runtime/src/input_tags.rs": "7b09459d14b1bbf62e63bac9b5a30c93d0a7f4ab27b28d7721a93bbfe7c49c28",
+    "crates/incant_wasm_runtime/src/lib.rs": "486db51003cd66a38e7ebdcde535c3e7a9c31ac7e95592e840db4cb19b79872a",
+    "crates/incant_wasm_runtime/src/physics_queries.rs": "19d40f73c83f75a401f8ef41cc7470042846179b1aa14ae0354e77ca8dff9466",
+    "sdk/abi/native-v1.json": "7f163d65f742958a89edb2c54139ab20a6c67c04f9f5fd5ab2d7b346b5cb0068",
+    "sdk/rust/src/lib.rs": "d191a7a6a8dbc4e193c64df59ce1c09b977da300358466744eb55d4c0f840ad6",
+    "sdk/rust/src/physics.rs": "7afc1349da569fdf4f867b96d0189ee3788798b0694f81ae74c4239b9f173907",
+    "sdk/rust/src/raw.rs": "6149dbb837740f52d94d7aa10015207bd9541448fbe498e8534bf9d0de29bd40",
+    "sdk/rust/src/tick.rs": "f96f8925c505a51714fa6277d690c273a88f799f6b8481c5e32a20ad2d935cd6",
+    "tools/generate_wasm_sdk.py": "8b0e17222774b20cefbc261b685475d0340a3c3547bf7bab84b89ca3fa77ef0a",
+    "tools/wasm_abi.py": "001d398227bb1e96173a4cc59350a62e2fab44b8b7c31fa74304de5e2e6d7d5e"
+  },
+  "scope": "Physics production frozen for independent review; tests/guests/probe still being extended. Existing ABI 0-38 and all prior records unchanged."
+}
