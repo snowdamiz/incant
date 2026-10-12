@@ -433,6 +433,11 @@ impl Capability {
             }
             Call::AnimationLen | Call::AnimationLenV2 => {
                 let v2 = matches!(call, Call::AnimationLenV2);
+                if self.animations_v2.is_empty() {
+                    return Err(Error::Abi(
+                        "animation graph blend requires graph snapshot ABI",
+                    ));
+                }
                 if !v2 && self.animations.is_empty() {
                     return Err(Error::Abi("active transitions require animation v2"));
                 }
@@ -444,6 +449,11 @@ impl Capability {
             }
             Call::ReadAnimations { ptr, capacity } | Call::ReadAnimationsV2 { ptr, capacity } => {
                 let v2 = matches!(call, Call::ReadAnimationsV2 { .. });
+                if self.animations_v2.is_empty() {
+                    return Err(Error::Abi(
+                        "animation graph blend requires graph snapshot ABI",
+                    ));
+                }
                 if !v2 && self.animations.is_empty() {
                     return Err(Error::Abi("active transitions require animation v2"));
                 }
