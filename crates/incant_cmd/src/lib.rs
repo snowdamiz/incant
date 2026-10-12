@@ -21,6 +21,10 @@ pub enum Command {
     CreateScene {
         scene: Scene,
     },
+    SetSceneProgram {
+        scene_id: Id,
+        program: Option<incant_doc::SceneProgram>,
+    },
     DeleteScene {
         scene_id: Id,
     },
@@ -499,6 +503,9 @@ fn apply(
                 entity.provenance = Some(provenance.clone());
             }
             project.scenes.insert(scene.id.clone(), scene);
+        }
+        Command::SetSceneProgram { scene_id, program } => {
+            scene_mut(project, scene_id)?.program = program.clone();
         }
         Command::DeleteScene { scene_id } => {
             if project.scenes.remove(scene_id).is_none() {

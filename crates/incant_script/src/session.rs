@@ -18,6 +18,9 @@ pub enum SessionError {
     #[cfg(feature = "static-module")]
     #[error(transparent)]
     Module(#[from] incant_wasm_runtime::StaticError),
+    #[cfg(feature = "wasmtime-host")]
+    #[error(transparent)]
+    DevelopmentModule(#[from] incant_wasm_dev::ModuleError),
     #[error("native session failed; recreate it before continuing or accessing saveable state")]
     Failed,
 }

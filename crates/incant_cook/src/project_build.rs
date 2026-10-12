@@ -1,5 +1,6 @@
 //! Trusted native-build producer for an authored project. Only engine Rust is
-//! compiled; project input is bounded JSON and TypeScript source data.
+//! compiled alongside validated, metered Wasm through the trusted translator;
+//! project input is bounded data, never native build configuration.
 use crate::{
     compile_project_sources, prepare_script_scene_with_resources, script::artifact_from_compiled,
 };
@@ -51,6 +52,39 @@ pub fn embed_project(project_path: &Path, selected_scene: Option<&str>) -> Resul
         .scenes
         .get(&scene_id)
         .ok_or("selected scene is missing")?;
+    let wasm = if let Some(incant_doc::SceneProgram::Wasm { module }) = &authored.program {
+        if env::var_os("CARGO_FEATURE_STATIC_MODULE").is_none() {
+            return Err("authored Wasm export requires the static-module player feature".into());
+        }
+        let asset = &project.assets[module];
+        let cache = incant_wasm_cook::project_cache(root, false)?;
+        changed(&cache.join(format!("{}.wasm.json", asset.sha256)))?;
+        let captured = incant_wasm_cook::CapturedModule::load(&cache, &asset.sha256)?;
+        for (key, expected) in [
+            ("INCANT_NATIVE_WASM_FINGERPRINT", captured.fingerprint()),
+            ("INCANT_NATIVE_WASM_INPUT", captured.input_sha256().into()),
+            (
+                "INCANT_NATIVE_WASM_PREPARED",
+                captured.prepared_sha256().into(),
+            ),
+            (
+                "INCANT_NATIVE_WASM_REGISTRY",
+                captured.registry_sha256().into(),
+            ),
+        ] {
+            if env::var(key).ok().as_deref() != Some(&expected) {
+                return Err("authored Wasm export requires matching trusted captured build inputs; use tools/export_native.py".into());
+            }
+        }
+        println!("cargo:rustc-env=INCANT_AUTHORED_WASM=scene-program");
+        serde_json::json!({"kind":"wasm", "module":module, "fingerprint":captured.fingerprint(), "input_sha256":captured.input_sha256(), "prepared_sha256":captured.prepared_sha256(), "registry_sha256":captured.registry_sha256(), "translator":"wasm2c-1.0.42"})
+    } else {
+        if env::var_os("INCANT_NATIVE_WASM_FINGERPRINT").is_some() {
+            return Err("unexpected Wasm binding for TypeScript scene".into());
+        }
+        println!("cargo:rustc-env=INCANT_AUTHORED_WASM=");
+        serde_json::Value::Null
+    };
     let attached = authored
         .entities
         .values()
@@ -166,6 +200,7 @@ pub fn embed_project(project_path: &Path, selected_scene: Option<&str>) -> Resul
             .map(|n| ulid::Ulid::from_bytes(n.entity.0).to_string()).collect::<Vec<_>>(),
         "has_spatial_content": !scene.spatial().is_empty() || !scene.visual_assets().is_empty(),
         "startup_source_parsing": false,
+        "program": wasm,
     });
     // This receipt is last. A failed producer cannot advertise a complete build.
     if incant_source::check_recovery(root)? != source_epoch {

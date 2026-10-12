@@ -6,6 +6,7 @@ rust-version.workspace = true
 publish.workspace = true
 
 [dependencies]
+incant_wasm_cook = { path = "../incant_wasm_cook" }
 incant_assets = { path = "../incant_assets" }
 incant_doc = { workspace = true }
 incant_cmd = { workspace = true }
@@ -15,6 +16,7 @@ schemars = { workspace = true }
 thiserror = { workspace = true }
 
 [dev-dependencies]
+wat = "=1.258.3"
 incant_text.workspace = true
 tempfile = "3"
 image = { version = "=0.25.10", default-features = false, features = ["png"] }

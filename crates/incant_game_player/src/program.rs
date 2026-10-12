@@ -13,6 +13,11 @@ pub fn split_args(args: &[String]) -> Result<(&[String], Option<&str>)> {
     }
 }
 pub fn load(module: Option<&str>) -> Result<SessionProgram> {
+    let authored = option_env!("INCANT_AUTHORED_WASM").filter(|name| !name.is_empty());
+    if authored.is_some() && module.is_some() {
+        return Err("authored package program cannot be overridden".into());
+    }
+    let module = module.or(authored);
     match module {
         None => Ok(crate::embedded::load()?.into()),
         Some(name) => {

@@ -72,7 +72,7 @@ void incant_{module}_free(void* instance) {{ Instance* p=instance; wasm2c_{modul
 '''
 
 
-def prepare(output, modules, wabt, cook):
+def prepare(output, modules, wabt, cook, captured=None):
     translator = wabt / ('bin/wasm2c.exe' if os.name == 'nt' else 'bin/wasm2c')
     if run([translator, '--version']).strip() != '1.0.42':
         raise ValueError('WABT 1.0.42 required')
@@ -90,7 +90,11 @@ def prepare(output, modules, wabt, cook):
         module = f'm{index}'
         (output / f'{module}.original.wasm').write_bytes(source.read_bytes())
         prepared = output / f'{module}.wasm'
-        run([cook, output / f'{module}.original.wasm', prepared])
+        if captured is None:
+            run([cook, output / f'{module}.original.wasm', prepared])
+        else:
+            if len(modules) != 1 or name != "scene-program": raise ValueError("Captured export requires one scene program")
+            prepared.write_bytes(captured.read_bytes())
         run([translator, prepared, '--module-name', module, '--no-debug-names',
              '--disable-exceptions', '--disable-tail-call', '--disable-memory64',
              '--disable-multi-memory', '--disable-simd', '--disable-relaxed-simd',

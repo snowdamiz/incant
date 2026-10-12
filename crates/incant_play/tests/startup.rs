@@ -148,3 +148,34 @@ fn expected_behavior_digest_is_enforced_before_returning_owned_inputs() {
             .contains("does not match requested source hash")
     );
 }
+
+#[cfg(not(feature = "wasmtime-host"))]
+#[test]
+fn selected_wasm_requires_explicit_development_host_instead_of_fallback() {
+    let root = tempfile::tempdir().unwrap();
+    let (mut project, scene, _) = fixture();
+    let module = new_id();
+    project.assets.insert(
+        module.clone(),
+        incant_doc::Asset {
+            id: module.clone(),
+            name: "Module".into(),
+            path: "guest.wasm".into(),
+            kind: "wasm".into(),
+            sha256: "ab".repeat(32),
+            import_settings: None,
+        },
+    );
+    project.scenes.get_mut(&scene).unwrap().program =
+        Some(incant_doc::SceneProgram::Wasm { module });
+    let error = PreparedPlay::load(
+        &project,
+        root.path(),
+        &StartOptions::default(),
+        48000,
+        || panic!("selected Wasm must not run fallback"),
+    )
+    .err()
+    .expect("host is disabled");
+    assert!(error.to_string().contains("wasmtime-host"));
+}
