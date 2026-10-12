@@ -9,6 +9,8 @@ pub enum ResourceError {
     CookedOutput(&'static str),
     #[error("cooked geometry shader rejected: {0}")]
     CookedGeometry(&'static str),
+    #[error("cooked sprite shader rejected: {0}")]
+    CookedSprite(&'static str),
     #[error("renderer initialization failed: {0}")]
     Preparation(#[source] PreparationError),
     #[error("{0} pipeline variant was not prepared during renderer initialization")]

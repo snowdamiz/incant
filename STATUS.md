@@ -16,6 +16,15 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Cooked sprite shader family — CPU and compiler checks passed
+
+The existing sprite shader now has an opt-in fixed backend artifact path with
+checked stage/resource/host layouts and preserved sampling math. CPU tests,
+Clippy, default/web compilation and actual Metal stage compilation/linking pass;
+independent source review is accepted. Native GPU and Claude appearance checks
+remain pending, as do other shader families and device performance requirements.
+[Scope and evidence](docs/spikes/cooked-sprite-shaders.md).
+
 ## Authored Core runtime bindings — CPU proof accepted
 
 The 0060 mesa now binds its existing localized HUD and audio sources to the

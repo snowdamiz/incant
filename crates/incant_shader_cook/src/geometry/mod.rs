@@ -1,6 +1,7 @@
 //! Fixed diagnostic and shadow programs; never a project shader passthrough.
 mod contract;
 mod emit;
+mod sprite;
 
 use crate::{Artifact, Backend, Bundle, CookError, Result, Stage};
 use naga::{ShaderStage, back::pipeline_constants, valid};
@@ -11,6 +12,7 @@ use std::{fmt::Write as _, fs, path::Path};
 pub enum Kind {
     Diagnostic,
     Shadow,
+    Sprite,
 }
 impl Kind {
     pub fn contract(self) -> &'static str {
@@ -20,6 +22,9 @@ impl Kind {
             }
             Self::Shadow => {
                 "incant-shadow-v1;naga=29.0.4;wgpu=29.0.4;msl=2.4,pull15v14i,stride48-112,sizes1;spv=1.0,no-y-flip;hlsl=6.0,camera-b0,material-b1,texture-t0,sampler-indices-t5,special-b2;bounds=restrict;loops=bounded"
+            }
+            Self::Sprite => {
+                "incant-sprite-v1;naga=29.0.4;wgpu=29.0.4;msl=2.4,pull15v14v,stride12-52,sizes1;spv=1.0,no-y-flip;hlsl=6.0,camera-b0,texture-t0,sampler-indices-t1,special-b1;bounds=restrict;loops=bounded"
             }
         }
     }
@@ -61,6 +66,7 @@ pub fn cook(kind: Kind, source: &str) -> Result<Bundle> {
         include_str!("mod.rs"),
         include_str!("contract.rs"),
         include_str!("emit.rs"),
+        include_str!("sprite.rs"),
         include_str!("../../Cargo.toml"),
     ]
     .join("\n");
