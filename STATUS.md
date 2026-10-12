@@ -696,3 +696,9 @@ and reject mixed numeric/entity/animation/log prefixes on failure. The combined
 [Evidence and limits](docs/spikes/native-wasm-animation.md). Publication/integration
 against the next actual-main animation union is still pending. This does not add
 blending/state machines/IK/root motion or satisfy device/complete SDK/Phase1 gates.
+
+Native Play committed script logs now reach the existing Console through bounded
+incremental copied tails, with generation/project fences, stable row IDs and an
+explicit truncation warning across restarts. Local CPU host, bridge race/bounds,
+strict types and Clippy checks pass; native window/rendered Console acceptance
+remains separate. [Scope and evidence](docs/spikes/native-editor-play.md#committed-script-logs-in-console).

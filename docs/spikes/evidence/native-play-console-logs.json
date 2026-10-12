@@ -1,0 +1,238 @@
+{
+  "scope": "Native Play accepted script log prefix to existing Console; no UI layout/style changes",
+  "base": "2841c242a4b9d118e4b7e5f13f9c59e0f0ed0041",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "xhigh",
+  "author": "astra",
+  "source_freeze": "/tmp/incant-play-console-source-freeze.json",
+  "source_inputs": [
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/editor/app/src/main.rs",
+      "sha256": "be4238abaf4483fec42cee29106c615ca8cc7de8739c7344cfcf4775b64a6bbe",
+      "bytes": 19490
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/editor/app/src/play/mod.rs",
+      "sha256": "fcb67d3d8abeb2491d922c8645faddd65c2dffa936a6891f90b7f9d305c49c6c",
+      "bytes": 10527
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/editor/app/src/play/logs.rs",
+      "sha256": "38c5346df022bafcaae38f57f936cb54fb54933e42bfda15f51ef19d3bb6bca9",
+      "bytes": 3675
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/editor/app/src/play/worker.rs",
+      "sha256": "d9c45395615c2a0351e076890801d0e44d62714f29d838c779d6b54d4869529c",
+      "bytes": 20158
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/editor/app/src/play/tests.rs",
+      "sha256": "4121c057cc7aa4ce669b4c3d5443e5202e8a8953c8990220d687bca1f4791271",
+      "bytes": 8376
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/editor/bridge/contract.ts",
+      "sha256": "2a8a14afe93b295e5ab777e502266b33732895373069c03a817f9835967df635",
+      "bytes": 19486
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/editor/bridge/native.ts",
+      "sha256": "2378b6307880209e5e162b2f5e8db8d497ab3e194eb097398d2e3c44a2e44b93",
+      "bytes": 66811
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/editor/bridge/native.generated.js",
+      "sha256": "e452a26b24435471b8933dd82fcc537ead62b28a36ed664211af0607327fa74b",
+      "bytes": 72900
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/editor/bridge/play-logs.test.ts",
+      "sha256": "ce4910f92aacc40448349f9feef63952e87fe174c0a913dc5bf72b96f8bc7b6d",
+      "bytes": 16594
+    }
+  ],
+  "transport": {
+    "status": "optional logs:{count,dropped}",
+    "command": "play_logs_read({generation,afterIndex})",
+    "packet_fields": [
+      "generation",
+      "from",
+      "next",
+      "dropped",
+      "warningId",
+      "entries"
+    ],
+    "row_fields": [
+      "id",
+      "tick",
+      "level",
+      "message"
+    ],
+    "max_rows": 64,
+    "max_message_bytes": 1024,
+    "max_batch_message_bytes": 16384,
+    "max_native_prefix_rows": 1024,
+    "max_native_prefix_message_bytes": 262144,
+    "max_retained_play_console_rows": 1024,
+    "max_retained_play_console_message_bytes": 262144,
+    "retention_warning_reserved_rows": 1,
+    "retention_warning_reserved_bytes": 256,
+    "poll_hz": 4,
+    "wire_note": "UTF-8 message byte quotas; bounded row metadata and JSON escaping add wire bytes.",
+    "counter_max": 9007199254740991
+  },
+  "semantics": [
+    "Only committed rows enter the mirror after a successful actual game operation.",
+    "Each accepted generation/index gets one native ULID; same-tick duplicate rows/levels remain ordered.",
+    "No prior-row scan/copy on unchanged prefix, pause or redraw; no engine_read polling.",
+    "Generation/project/terminal/protocol-error fences reject late unread tails and stale errors.",
+    "Delivered accepted Console history survives Stop/error; terminal native reads refuse unread live history.",
+    "New generation resets the live cursor; actual project identity change clears retained Play history.",
+    "Whole-packet type/row/byte/ID validation precedes publication and cursor advancement.",
+    "Native drops plus cross-restart retention eviction update one stable existing Console warning.",
+    "Old hosts lacking optional logs metadata never invoke the new command; no project mutations added."
+  ],
+  "validation": [
+    {
+      "command": "cargo test -p incant_editor --profile ci --locked --offline -j2",
+      "target": "/tmp/incant-agent-font-target",
+      "result": "42 passed; 0 failed; 1 existing native GPU test ignored",
+      "log": "/tmp/incant-play-console-rust-final.log"
+    },
+    {
+      "command": "cargo clippy -p incant_editor --all-targets --profile ci --locked --offline -j2 -- -D warnings",
+      "target": "/tmp/incant-agent-font-target",
+      "result": "passed",
+      "log": "/tmp/incant-play-console-clippy-final.log"
+    },
+    {
+      "command": "npm exec --workspace editor/ui -- vitest run ../bridge",
+      "result": "185 passed across 5 files; actual native CPU host test is in Rust; bridge IPC is synthetic",
+      "log": "/tmp/incant-play-console-bridge-final-002.log"
+    },
+    {
+      "command": "npm exec --workspace editor/ui -- tsc -p tsconfig.test.json --noEmit",
+      "result": "passed",
+      "log": "/tmp/incant-play-console-test-types-final-002.log"
+    },
+    {
+      "command": "npm exec --workspace editor/ui -- tsc -b --noEmit",
+      "result": "passed",
+      "log": "/tmp/incant-play-console-app-types-final-002.log"
+    },
+    {
+      "command": "node tools/build_bridge.mjs --check",
+      "result": "passed",
+      "log": "/tmp/incant-play-console-generated-final-002.log"
+    },
+    {
+      "command": "cargo fmt --all -- --check",
+      "result": "passed"
+    },
+    {
+      "command": "python3 tools/generate_conventions.py --check",
+      "result": "passed"
+    },
+    {
+      "command": "git diff --check",
+      "result": "passed"
+    }
+  ],
+  "prior_failures": [
+    {
+      "log": "/tmp/incant-play-console-rust-first.log",
+      "result": "9 passed/1 failed: test guest used the wrong QuickJS log argument order; fixture corrected to log(message,level). Production unchanged by that correction."
+    },
+    {
+      "log": "/tmp/incant-play-console-malformed-status-red.log",
+      "result": "29 passed/1 failed: deferred old tail cleared newer malformed-status error; scope invalidation added. Regression is green in final 185-test run."
+    }
+  ],
+  "processes": {
+    "reaped": [
+      26795,
+      65724,
+      12295,
+      61836,
+      63589,
+      39917,
+      10536,
+      46180
+    ],
+    "private_target_idle": true
+  },
+  "limits": [
+    "CPU only; no native window/GPU/browser/provider/account calls or physical-device/performance claim.",
+    "Actual CPU PlaySession/QuickJS verifies committed-vs-trapped logs; this is not live native Console/appearance acceptance.",
+    "Only already-delivered accepted history survives a terminal stop/error; unread live observer state is not recovered.",
+    "No runtime/script/checkpoint/player changes, dependency changes, credentials, or new authoring mutation route."
+  ],
+  "logs": [
+    {
+      "path": "/tmp/incant-play-console-rust-first.log",
+      "sha256": "3fee1bd2f6f57656674326ae47a81d8ae0ddc285628619d9d5b73a1769819d96",
+      "bytes": 6214
+    },
+    {
+      "path": "/tmp/incant-play-console-rust-final.log",
+      "sha256": "86a6a62642ef92fbe5ba2ab1853b3714c4f8ad0827bc09c0d40fd20d11dca0a4",
+      "bytes": 4800
+    },
+    {
+      "path": "/tmp/incant-play-console-clippy-final.log",
+      "sha256": "7633af1a371285d2a31ac4a70871c48ba6523feb17dac44ac18d50902beabed2",
+      "bytes": 4523
+    },
+    {
+      "path": "/tmp/incant-play-console-bridge-first.log",
+      "sha256": "2602e1ea8f8bbca21369d11f46299bcf5f7a7da419ef3a225477af7300600de8",
+      "bytes": 252
+    },
+    {
+      "path": "/tmp/incant-play-console-bridge-final.log",
+      "sha256": "c7a0a5d88ad447ca813d7d6b55b9c87dff34439d45249d58e8a83f007882d653",
+      "bytes": 254
+    },
+    {
+      "path": "/tmp/incant-play-console-malformed-status-red.log",
+      "sha256": "80b5f2e4836d4dee70e432bbf6c0af54c7867ccae51a58ef9dba0ec9e429c289",
+      "bytes": 1099
+    },
+    {
+      "path": "/tmp/incant-play-console-bridge-final-002.log",
+      "sha256": "eed21465ac5c1887a189407e5020662fda7b707aa00622c6ba7299803ef541b9",
+      "bytes": 255
+    },
+    {
+      "path": "/tmp/incant-play-console-test-types-final-002.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/tmp/incant-play-console-app-types-final-002.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/tmp/incant-play-console-generated-final-002.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/tmp/incant-play-console-fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/tmp/incant-play-console-conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/tmp/incant-play-console-diff-check.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ]
+}

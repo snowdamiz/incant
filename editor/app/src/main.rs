@@ -188,6 +188,7 @@ fn main() {
             agent::engine_agent_cancel,
             agent::engine_agent_decide,
             play::play_read,
+            play::play_logs_read,
             play::play_command,
             assets::engine_import,
             viewport_bounds,

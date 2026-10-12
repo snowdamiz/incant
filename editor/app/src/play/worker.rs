@@ -259,14 +259,15 @@ impl Worker {
             .consumer()
             .map_err(|e| e.to_string())?
             .map_or(0, |consumer| consumer.accepted_frames());
-        self.service.edit(|s| {
-            s.phase = if self.running { "running" } else { "paused" };
-            s.tick = tick;
-            s.discarded_ticks = self.clock.discarded;
-            s.presented_frames = frames;
-            s.suspended = self.held;
-            Ok(())
-        })
+        let logs = game.logs().map_err(|e| e.to_string())?;
+        self.service
+            .publish_logs(self.service.snapshot()?.generation, logs, |s| {
+                s.phase = if self.running { "running" } else { "paused" };
+                s.tick = tick;
+                s.discarded_ticks = self.clock.discarded;
+                s.presented_frames = frames;
+                s.suspended = self.held;
+            })
     }
     pub fn unavailable(&mut self) {
         if std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| self.hold())).is_err() {
