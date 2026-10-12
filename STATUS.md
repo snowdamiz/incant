@@ -47,7 +47,7 @@ Developer Play and ordinary desktop export now choose the fixed matching kernel
 from the public project setting. Selected normal dependency audits replace the
 workspace-unified metadata false refusal seen in frozen checkpoint15. The current
 CPU integration passes 15 checks and two unchanged-package replays; all producer
-compile/cook inputs remain exact. Independent final closure is pending. Automatic
+compile/cook inputs remain exact. Independent final closure is accepted. Automatic
 editor workers, physics saves and device/performance gates remain separate.
 [Evidence](docs/spikes/physics-process-main176.md).
 
