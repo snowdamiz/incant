@@ -1,0 +1,12 @@
+$ python3 -B handoffs/0054-native-text-draw/tools/mutate.py /tmp/incant0054/logs/mutation-summary.txt
+source 264fd08867c6d0bdf5fe236f37500b5e90b9f00f tree f0a72cd612523abd3702eab5014d79cd7addfa5c
+quad shifted by its padding CAUGHT
+layout Y not flipped CAUGHT
+motion transforms not staged CAUGHT
+atlas prefix drops right padding column CAUGHT
+single tap when minified CAUGHT
+missing text binding accepted CAUGHT
+no depth test CAUGHT
+foreign handles not checked CAUGHT
+unmutated PASS
+exit 0
