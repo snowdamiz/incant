@@ -94,10 +94,13 @@ and complete Game UI/IME gates remain open.
 Native animation graphs now connect ordinary typed authoring, captured models,
 v14 cooking, deterministic native clip states and flat adjacent-pair 1D blends.
 TypeScript controls and v6 checkpoints retain parameters, phase, fades and a
-separate master pause, allowing transitions after natural completion. The final
-481-test scoped suite, Clippy and Wasm checks pass. Three fresh source/cache/build-
-deleted ordinary packages match 90-tick DevPlay observations and exact active,
-paused, completed-paused and blended checkpoint continuations. Legacy Wasm v1/v2
+separate master pause, allowing transitions after natural completion. The actual
+main130 integration passes 538 CPU cases and 342 overlapping actual Wasmtime/wasm2c
+cases, Clippy, wasm32 and 68 exact schemas. A fresh current-lock shipping export
+removes source/cache/build inputs and external debug maps before three 90-tick
+replays, eight checkpoint split/continuation processes and two precise refusals.
+Active, paused, completed-paused and blended v6 continuations preserve exact final
+save bytes, PCM and logs. Legacy Wasm v1/v2
 snapshots explicitly refuse unrepresentable graph blends; the additive guest
 graph SDK remains outstanding. Four-pose blended-state fades, nested/2D trees,
 layering, IK, root motion, rendered acceptance and device gates remain open.
@@ -127,8 +130,8 @@ The current main122 integration passes 367 CPU tests, 313 actual dual-host tests
 and Clippy. A fresh current-lock QuickJS export removes authoring/build inputs
 and external debug maps before nine copied-player processes: three full replays,
 active/paused v5 continuations and two refusals all pass. The original export
-retaining an external map remains qualified historical evidence. Crossfade GPU/Claude acceptance, full blend trees,
-state machines, IK and root motion remain open. See
+retaining an external map remains qualified historical evidence. Crossfade GPU/Claude acceptance, nested/2D blend trees, layering,
+IK and root motion remain open; bounded clip-state graphs are recorded above. See
 [the consumer evidence](docs/spikes/native-animation-crossfade-consumer.md),
 [the core evidence](docs/spikes/native-animation-crossfades.md) and
 [the SDK evidence](docs/spikes/native-animation-crossfade-sdk.md) and

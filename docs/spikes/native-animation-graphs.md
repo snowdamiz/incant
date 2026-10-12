@@ -102,3 +102,37 @@ preserved QuickJS export receipt does not claim a combined later source build.
 and [independent export review](evidence/native-animation-graphs-export-review.json).
 Local CPU tests do not establish phone or visual acceptance. Nested/2D blend trees, layered animation, blended-state fades,
 interruptible transitions, IK and root-motion integration remain outstanding.
+
+## Actual main130 integration
+
+The accepted graph implementation and legacy Wasm guard were merged with the
+reviewed public Wasm, steering and CPU UI foundation. The only text conflict was
+STATUS; the six automatic source merges retain both sets of contracts. The
+actual main130 ancestry merge changed no file in the tested tree.
+
+This union passes 538 affected CPU tests in 92 groups, including the long Undo
+sequence; 342 actual Wasmtime/wasm2c tests in 58 groups and three development
+processes; all-target Clippy; wasm32; lean runtime graph checks; tooling; strict
+SDK types; 68 byte-identical schema exports; generators and formatting. The CPU
+and actual-host suites overlap and are not summed as distinct cases. All 97
+prepared modules and 486 artifact hashes were verified before private cleanup.
+
+A fresh current-lock ordinary export produced a 9,103,120-byte shipping player
+SHA-256 `efb19fb84d387ab45262090bf3e9aaf4527965bac72bef312a59005c5aeddf1b`.
+After deleting its private authoring/cache/build inputs and external debug map,
+three new processes reproduced all 60 graph observations over 90 ticks. Eight
+split/continued processes covered active, paused, completed-paused and blended
+v6 checkpoints with exact final save, PCM and logs; corrupt checkpoint and wrong
+observation controls refused without publishing output. The same frozen source
+also contains the legacy Wasm snapshot refusal. This closes the earlier
+combined-build evidence gap without claiming static-module checkpoints, graph
+Rust/Wasm controls, rendering, device performance or phase completion.
+
+[Integrated sources, commands, retained logs and fresh export evidence](evidence/native-animation-graphs-main130.json).
+
+The final independent [integration review](evidence/native-animation-graphs-main130-root-review.json)
+accepted the exact source, logs, package and continuation identities. Its initial
+evidence digest precedes a packaging-only change: the source seam diff is now
+stored as gzip with its original uncompressed hash, preserving every reviewed
+byte while avoiding patch-context whitespace diagnostics. The final evidence
+digest is `c806075c0479228b77f37201ee91af661d59a3d2d85c38b359e3e22a88b04907`.

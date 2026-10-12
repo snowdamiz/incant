@@ -1,0 +1,656 @@
+{
+  "recorded_at": "2026-10-12T05:05:04.044668+00:00",
+  "baseline": "117558d6baaba186fd3f4a9fd339e85d61557062",
+  "integrated_head": "2b410f4aabe0aef7c2fdfb09ab031b4e07a8dc74",
+  "tested_source": "ba73319c68f8c759d1084c0ba0d1fb9f3e2508c7",
+  "accepted_graph_head": "1aabd8037460d40c2080359eac4a3eb028c586fc",
+  "accepted_implementation": "915199f744f5761e9e5239c29b1a99408ed6b127",
+  "accepted_guard": "cc302120baa6130bc83e79c5dec00b8266b91fac",
+  "source_hashes": {
+    "crates/incant_cmd/tests/animation.rs": "b25fc5feda5f97c32ac4fc3991004c5bc03bea377176935c17c9b99978d4dcca",
+    "crates/incant_cook/src/animation.rs": "6132416e8245e69bc646d75b82b7a876bf999a348e9d5525bea46ab2d51bd626",
+    "crates/incant_cook/src/animation_graph.rs": "3c140a83f385a41cd98faebd89b2e50f1eb29e7a7c305d48e816d4e8f469d1bc",
+    "crates/incant_cook/src/lib.rs": "fd81bcca525ee67b7e1ebc460a22b05f9f81f79ddf8b31a23225ae2f5e7a70a3",
+    "crates/incant_cook/src/scene.rs": "5ece3771c3d063e40e7e9cd1db7a41bf880a591604fd8e9c537a42d831d2b1b8",
+    "crates/incant_cook/src/spatial.rs": "bf00c834e6ebd3f27e64d5424b283a53d50c676d7393d01d468a422bd673d292",
+    "crates/incant_cook/tests/animation.rs": "37894107e1a06f3842396e98409f4bf50a36339bbb8ea2461ff1b483fa1e9a7b",
+    "crates/incant_cook/tests/animation/graph.rs": "6f4f7210f5227bf7467c550875cd3b846e08d662f7b5f063c5bb9b6028ec7a35",
+    "crates/incant_doc/src/animation_graph.rs": "be099b2d1e0bc9a88b2cbe48caccb1881aeb8c097e2e4d6be10f5956b1f40691",
+    "crates/incant_doc/src/lib.rs": "74593e6b8216244479c46cc119613ed0d78eca985e7199ed1d92e7bbbe79de45",
+    "crates/incant_render_native/tests/animation.rs": "dc3945fbc98aa4fa926e9cd7f88795334792eee9bb96e79f389418dcd38dc5fa",
+    "crates/incant_runtime/src/animation.rs": "cd021f8b7e6994a479d9262e33d004217240b9ad1f8f3302f0da0f6a6e313f98",
+    "crates/incant_runtime/src/animation_binary.rs": "f1d584c41fd79a581c2efe6d7ea7f1312365ca86265b4a0738e53c76e6eefa09",
+    "crates/incant_runtime/src/animation_graph/binary.rs": "708d8d83dc7f96b386de54fe36fb8b00e930b56f8a02e62826fad32b501f176b",
+    "crates/incant_runtime/src/animation_graph/definition.rs": "21fbefa8dd4d9b364e92740562d290f80cc9450966096bf2e8434d796a09fb6f",
+    "crates/incant_runtime/src/animation_graph/mod.rs": "df449d2258089e9ecc19c63adff128d00d948110a0a96f24609108750673cd66",
+    "crates/incant_runtime/src/animation_graph/playback.rs": "1afa06c6d47cefe626ee94dbe83e353e9df7de0751f1829dafc2cf4d9122d030",
+    "crates/incant_runtime/src/binary.rs": "02e74e1db505a1ed11f0004fa7f037cd5db5e89ab0cf66002448e57ac4efe2c5",
+    "crates/incant_runtime/src/commands.rs": "99c805cc289f77f4ef2865af59c0c11b98d6993dce3d913b939e4de732bdd41d",
+    "crates/incant_runtime/src/lib.rs": "ec5dcdb8f10bb2d3139c1d14d8cc5435222353ebc4087778730c3e44faaded28",
+    "crates/incant_runtime/src/save.rs": "1a9f0eb299bd69c35ae7ddb597ff74882c0ef5983dc3c40b62d2571ec31e7e7a",
+    "crates/incant_runtime/src/save/codec.rs": "3738ab83c4805907b61d2a51b4051749fd57d1a283f5d8759ac321ea09c0f5e6",
+    "crates/incant_runtime/src/scene.rs": "2718c4113dd5dcab050cdfad092bbc2d063ad8736ae9ec8682712d7e0d0500e0",
+    "crates/incant_runtime/src/spatial.rs": "fad32932ed6b249d4fc33b7061579f4230164a9d34bab65a37171d223c9d4261",
+    "crates/incant_runtime/src/spatial_binary.rs": "e1aad82cbb16bf436dc3e901e3fcde85f389fcb6da14cc31a6285551c13b620a",
+    "crates/incant_runtime/src/spatial_view.rs": "8eab3830985b512bc82a76f52a2bd2437498eadf8683bfcbe53564b725c9f211",
+    "crates/incant_runtime/src/ui_binary.rs": "91e9838c427f6539f89c07ec31db8912c0403f94a799d3f09d6bf08b947a1f7b",
+    "crates/incant_runtime/src/world.rs": "c3095dca86c4e3dbeebc922bf9cac55215d7ca4ce08b4860cda3b48add4c02ee",
+    "crates/incant_runtime/tests/animation.rs": "2319fb62b34ec706f97f0bbf768b733531cdef2ebc488584bd40d0f3736f42e3",
+    "crates/incant_runtime/tests/animation_graph.rs": "cfbef3ac1b6eb8ba09fae8a4e54a5426cf96125450cf46088fa1c1ebf4bba3bf",
+    "crates/incant_runtime/tests/physics.rs": "b445b812db83fa59c01ead2b7577f403fd7863531a11480f401071770a41871e",
+    "crates/incant_runtime/tests/physics_2d.rs": "0fcaecca0ab84398ef82e3791891bad76987dc2dd5d12ec0f0a409a2b4fe4ff6",
+    "crates/incant_runtime/tests/scenes.rs": "e7935ad0d6965685f716efdc0daeea81742e8cc30c754fb291360914415b99c4",
+    "crates/incant_script/src/animation_graphs.rs": "459fe7549796d380f5cad3132a097a4a1c7071539ca83270e011f86f1691e450",
+    "crates/incant_script/src/animations.rs": "a9f60ac2c02cbc43816a5f96867a1eae7e8630a66135571399c842b4c42f8213",
+    "crates/incant_script/src/checkpoint/pending.rs": "bde5f288cdab35420d0c0f3addbb651d7ea48ddfbb9ae971d27c1f3e80a19bc5",
+    "crates/incant_script/src/checkpoint/tests/animation.rs": "6eb7312ab7100d63d7bd75888c07fd20da5e0b4f5dec0cc58535e2421be8d40a",
+    "crates/incant_script/src/commands.rs": "3acfd61ccc3c1801342651de0939fd5987b5e0fc28bcf0c3ef952ccde620bc36",
+    "crates/incant_script/src/lib.rs": "3149572c7b79a37fc9e176e927f3573ee48cc40f3918019858e9b956a69308ad",
+    "crates/incant_script/tests/animations.rs": "b843e01aa85834e508b84a4ad5cae7b338100f828194a6401b0ff5e854df9b8c",
+    "crates/incant_script/tests/animations/graph.rs": "2b0c7e0800d8cb0349c06e4bba09b294166b153a67e2f900928b82292fb46bb3",
+    "crates/incant_types/src/animation_graph.rs": "128da018fbde7283f8395a42886d5447edadb61b7ff84e856dbe5774b130a4a9",
+    "crates/incant_types/src/lib.rs": "3683b744e0e1f4ae86a75042e3c05c588af4381365bf7798e049edead7c72377",
+    "crates/incant_wasm_dev/tests/animation_graph_legacy.rs": "af52e90fef11fc717916d000a88589df526a3532888cf62d8a693f16763abeeb",
+    "crates/incant_wasm_runtime/fixtures/animation-graph-legacy.wat": "3ea71f95327bf8394a5d80cba72e07368fffdf35ff49f1802f564e022d05794c",
+    "crates/incant_wasm_runtime/src/animations.rs": "74c0ac1776b2fed86ac3d20075df968a1aaf9d679c2a7399546694895538fd63",
+    "crates/incant_wasm_runtime/src/capability.rs": "46ffcc87a6cf67db2f6a061f3c1a638328fcfacc09390b85415d16f93707c294",
+    "crates/incant_wasm_runtime/tests/animations.rs": "4461f1cd4f313e94b32bb90f51f59ac0caa841848329db03437da5e30ff189be",
+    "crates/incant_wasm_runtime/tests/animations/graph.rs": "5a2ef6cdcaa155411057fcbb4d8578e643b312ee7f773418918fe5685f39d3fa",
+    "crates/incant_wasm_runtime/tests/support/animation_graph.rs": "3cd6285ae5f5c1568a9a2e674b3dd25f8fbb8d1bab48a5829c07ff74c9d024b3",
+    "crates/incant_wasm_runtime/tests/support/animations.rs": "1c9ebe15f58b2627f0876deddca1c63643263bc8bb16b652aa6c4c6043b6eb28",
+    "schemas/AnimationGraph.schema.json": "144d21c95d78c4a8f6b3240dcb3e2e39d9d691c53bf10ebaf1c42261195c9f8a",
+    "sdk/ts/src/generated.d.ts": "ab7704be3d34c49eb92702ab7cd600fff908437fa967379f911d549cbe618e74",
+    "sdk/ts/src/native.d.ts": "2e9c28bb6b3e87504e820d2e7220b9a16ccfbc4a0b8876180b3f1669f269cddd",
+    "tools/probes/native-animation-graph-export.py": "6e116c6ab103a6e40c64da6586160cd49336530854390986aa3850052d6a9f49",
+    "tools/probes/native-animation-graph-export/behavior.ts": "7e45926ced165a3f85059e70b8a1164149f0d693e37d66711fb07c7b13895360"
+  },
+  "compiled_source_count": 1350,
+  "post_test_source_drift": [],
+  "ancestry_merge": "Actual main130 is the same tested PR130 tree; its ancestry merge changed no file.",
+  "checks": {
+    "ordinary": {
+      "passed": 538,
+      "groups": 92,
+      "failed": 0,
+      "ignored": 0
+    },
+    "actual_hosts": {
+      "passed": 342,
+      "groups": 58,
+      "failed": 0,
+      "ignored": 0,
+      "hosts": [
+        "Wasmtime49.0.2",
+        "pinnedWABT1.0.42 wasm2c"
+      ],
+      "development_processes": 3
+    },
+    "suite_overlap": "The ordinary and actual-host suites overlap; do not sum them as distinct cases.",
+    "schemas": 68,
+    "commands": [
+      {
+        "name": "tests",
+        "command": [
+          "./tools/cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant_types",
+          "-p",
+          "incant_doc",
+          "-p",
+          "incant_cmd",
+          "-p",
+          "incant_runtime",
+          "-p",
+          "incant_script",
+          "-p",
+          "incant_cook",
+          "-p",
+          "incant_render_native",
+          "-p",
+          "incant_wasm_runtime",
+          "--features",
+          "incant_cook/typescript"
+        ],
+        "exit": 0,
+        "seconds": 149.8360325419926,
+        "log": "/tmp/incant-animation-graphs-main130-checks/tests.log",
+        "sha256": "64952c11672d887c5116a5b7b864b57ff678ac6122465d4698102c18acb39a9f"
+      },
+      {
+        "name": "clippy",
+        "command": [
+          "./tools/cargo",
+          "clippy",
+          "--locked",
+          "--offline",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant_types",
+          "-p",
+          "incant_doc",
+          "-p",
+          "incant_cmd",
+          "-p",
+          "incant_runtime",
+          "-p",
+          "incant_script",
+          "-p",
+          "incant_cook",
+          "-p",
+          "incant_render_native",
+          "-p",
+          "incant_wasm_runtime",
+          "-p",
+          "incant_headless",
+          "--features",
+          "incant_cook/typescript,incant_headless/wasmtime-host",
+          "--all-targets",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "exit": 0,
+        "seconds": 32.678634500014596,
+        "log": "/tmp/incant-animation-graphs-main130-checks/clippy.log",
+        "sha256": "c52894776e0558b1a98d4e5f7b7602fab2847dddf4d9b43cc08473e6ccc416b7"
+      },
+      {
+        "name": "actual-hosts",
+        "command": [
+          "python3",
+          "tools/probes/shipping-wasm2c.py",
+          "/tmp/incant-animation-graphs-main130-conformance",
+          "--conformance-only",
+          "--profile",
+          "ci"
+        ],
+        "exit": 0,
+        "seconds": 133.37432025000453,
+        "log": "/tmp/incant-animation-graphs-main130-checks/actual-hosts.log",
+        "sha256": "574af3621e3ea33f4f833844525fcf843cf3d6fd0f8b4c4cda3bea2cebb4805b"
+      },
+      {
+        "name": "headless",
+        "command": [
+          "./tools/cargo",
+          "build",
+          "--locked",
+          "--offline",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant_headless",
+          "--features",
+          "wasmtime-host"
+        ],
+        "exit": 0,
+        "seconds": 40.04798070900142,
+        "log": "/tmp/incant-animation-graphs-main130-checks/headless.log",
+        "sha256": "8750d7d631ff3a84c94889b4895c24b039ab0a66d9b864a275f145151af921b0"
+      },
+      {
+        "name": "wasm32",
+        "command": [
+          "./tools/cargo",
+          "check",
+          "--locked",
+          "--offline",
+          "-j2",
+          "-p",
+          "incant_types",
+          "-p",
+          "incant_runtime",
+          "--target",
+          "wasm32-unknown-unknown"
+        ],
+        "exit": 0,
+        "seconds": 2.211048958997708,
+        "log": "/tmp/incant-animation-graphs-main130-checks/wasm32.log",
+        "sha256": "253bf0dbd65b28ae292044c584e604bfbbab4bfc3a92671e3d323d16275b4259"
+      },
+      {
+        "name": "graph",
+        "command": [
+          "python3",
+          "tools/check_runtime_dependencies.py",
+          "incant_runtime",
+          "incant_script",
+          "incant_render_native",
+          "incant_game_runtime",
+          "incant_game_player",
+          "--features",
+          "incant_game_player/project,incant_game_player/render-input"
+        ],
+        "exit": 0,
+        "seconds": 0.3985336249752436,
+        "log": "/tmp/incant-animation-graphs-main130-checks/graph.log",
+        "sha256": "6cfac1b3e0431752566f5ab64fca4662798d8e50eb526c4077f868f3fc142f2b"
+      },
+      {
+        "name": "tooling",
+        "command": [
+          "npm",
+          "run",
+          "test:tools"
+        ],
+        "exit": 0,
+        "seconds": 24.632977375003975,
+        "log": "/tmp/incant-animation-graphs-main130-checks/tooling.log",
+        "sha256": "6f629a2bd0cec360e6132af2afb64e56f66f8e657db84ae7fe86242447a8ff16"
+      },
+      {
+        "name": "types",
+        "command": [
+          "node",
+          "node_modules/typescript/bin/tsc",
+          "--noEmit",
+          "-p",
+          "sdk/ts/tsconfig.json"
+        ],
+        "exit": 0,
+        "seconds": 0.18839162497897632,
+        "log": "/tmp/incant-animation-graphs-main130-checks/types.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "sdk",
+        "command": [
+          "node",
+          "tools/generate_sdk.mjs",
+          "--check"
+        ],
+        "exit": 0,
+        "seconds": 0.04481249998207204,
+        "log": "/tmp/incant-animation-graphs-main130-checks/sdk.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "bridge",
+        "command": [
+          "node",
+          "tools/build_bridge.mjs",
+          "--check"
+        ],
+        "exit": 0,
+        "seconds": 0.043197582999709994,
+        "log": "/tmp/incant-animation-graphs-main130-checks/bridge.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "wasm-sdk",
+        "command": [
+          "python3",
+          "tools/generate_wasm_sdk.py",
+          "--check"
+        ],
+        "exit": 0,
+        "seconds": 0.13194999998086132,
+        "log": "/tmp/incant-animation-graphs-main130-checks/wasm-sdk.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "fmt",
+        "command": [
+          "./tools/cargo",
+          "fmt",
+          "--all",
+          "--",
+          "--check"
+        ],
+        "exit": 0,
+        "seconds": 0.9878885830112267,
+        "log": "/tmp/incant-animation-graphs-main130-checks/fmt.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "conventions",
+        "command": [
+          "python3",
+          "tools/generate_conventions.py",
+          "--check"
+        ],
+        "exit": 0,
+        "seconds": 0.03386766600306146,
+        "log": "/tmp/incant-animation-graphs-main130-checks/conventions.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "export",
+        "command": [
+          "python3",
+          "tools/probes/native-animation-graph-export.py",
+          "/tmp/incant-animation-graphs-main130-proof",
+          "--binary",
+          "/tmp/incant-animation-integration-target/ci/incant_headless"
+        ],
+        "exit": 0,
+        "seconds": 238.77879462498822,
+        "log": "/tmp/incant-animation-graphs-main130-checks/export.log",
+        "sha256": "c2de622de2d68bd6f874de56b9dce8c7f48ace18a5e87432c3e13f53b9f6fadd"
+      }
+    ]
+  },
+  "fresh_export": {
+    "result": "native-animation-graphs-main130/export-result.json",
+    "result_sha256": "6e0c7ebc6695de281eb6cd2a75287dc6581d7e723681425fb6626a596ff146d4",
+    "player_sha256": "efb19fb84d387ab45262090bf3e9aaf4527965bac72bef312a59005c5aeddf1b",
+    "player_bytes": 9103120,
+    "fresh_full_runs": 3,
+    "ticks_each": 90,
+    "independent_graph_observations": 60,
+    "checkpoint_continuations": [
+      "active fade v6",
+      "paused fade v6",
+      "completed paused v6",
+      "blend state v6"
+    ],
+    "successful_copied_player_processes": 11,
+    "refused_copied_player_processes": 2,
+    "authoring_and_private_build_deleted": true,
+    "source_maps_removed": {
+      "symbols/behavior.js.map": "b6b84ff45091fbb9344ab601d81410703127ae6645a5f022d68469b5faa393fc"
+    },
+    "runtime_package": {
+      "data/clips.bin": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+      "data/empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+      "data/input-actions.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "data/models/dd3cba5627cb4d1e028126f4f00f84b4f95712f835fc78fb7b866132278b2cf9.incmodel": "e02aab0c14a6c2c6ef38561db241e97bb15d43d727318f76ecfcae4aa9cdbe4f",
+      "data/package.json": "b53538fceb31f12684e487e563ee59298d008dee465449a1deef35ac1ba76f04",
+      "data/world.scene": "ec03f2963c77bcb078e2ca23dd26e9506bfde1ec56ff08609999dbca028b1d7f",
+      "incant_game_player": "efb19fb84d387ab45262090bf3e9aaf4527965bac72bef312a59005c5aeddf1b"
+    },
+    "runs": [
+      {
+        "name": "baseline",
+        "ticks": 90,
+        "start": 0,
+        "report_sha256": "7af4091dee2c8fb0c35b5cd178f24b800931e6b177809117463d0049381ab839",
+        "pcm_sha256": "30fafbdc0facf210a26498db982f7ff8ad1e0b9a805816731c72e356a768c162",
+        "save_sha256": "b19addfd2018e836633a5e42d5d704de19d1bbe4b1625d834f47a31048ccbfda",
+        "world_save_version": 6
+      },
+      {
+        "name": "repeat-0",
+        "ticks": 90,
+        "start": 0,
+        "report_sha256": "7af4091dee2c8fb0c35b5cd178f24b800931e6b177809117463d0049381ab839",
+        "pcm_sha256": "30fafbdc0facf210a26498db982f7ff8ad1e0b9a805816731c72e356a768c162",
+        "save_sha256": "b19addfd2018e836633a5e42d5d704de19d1bbe4b1625d834f47a31048ccbfda",
+        "world_save_version": 6
+      },
+      {
+        "name": "repeat-1",
+        "ticks": 90,
+        "start": 0,
+        "report_sha256": "7af4091dee2c8fb0c35b5cd178f24b800931e6b177809117463d0049381ab839",
+        "pcm_sha256": "30fafbdc0facf210a26498db982f7ff8ad1e0b9a805816731c72e356a768c162",
+        "save_sha256": "b19addfd2018e836633a5e42d5d704de19d1bbe4b1625d834f47a31048ccbfda",
+        "world_save_version": 6
+      },
+      {
+        "name": "active-first",
+        "ticks": 10,
+        "start": 0,
+        "report_sha256": "a24872bbf226c5a99ee1d0d28afb03061ed00cf94aa56fa5d13344f3d67b47ef",
+        "pcm_sha256": "4f7988030a00d082fe445e00a2ac5dab502300ff1b80e8592dd569867b60ef74",
+        "save_sha256": "5c27dfb635a6ea54d241a99938fc17b15a0c67ef4b14cd1fe29ae3d383c62cbc",
+        "world_save_version": 6
+      },
+      {
+        "name": "active-continued",
+        "ticks": 80,
+        "start": 10,
+        "report_sha256": "b323f004b9a8a27f254ec0e424480f52ca707f0c1beeb2afe3d3d8a2e036940c",
+        "pcm_sha256": "2d4da04b861bb9dbe77c871415931785a18138d6db035f1bbcd0cf8277c6fc23",
+        "save_sha256": "b19addfd2018e836633a5e42d5d704de19d1bbe4b1625d834f47a31048ccbfda",
+        "world_save_version": 6
+      },
+      {
+        "name": "paused-first",
+        "ticks": 7,
+        "start": 0,
+        "report_sha256": "2444561461bfd7b6fe9810eda20578188c6f2636cebfdab3caf20922fa0eef70",
+        "pcm_sha256": "83e3a378d982f2eb58920deabe073501dcd8bca293224e4639d6a7094e8e16c7",
+        "save_sha256": "9a4ae8b3294023351468bd381f8b989dd657779612b075afbeeb50b099042176",
+        "world_save_version": 6
+      },
+      {
+        "name": "paused-continued",
+        "ticks": 83,
+        "start": 7,
+        "report_sha256": "d35c35e16576eb85bcf966ab84ae81d5a7e62eb1af9e63f33549fec595ab5a34",
+        "pcm_sha256": "5fdb59636369307ec1ae8cf6e116affd56bb4b70ebdd51185766060b05a89e5a",
+        "save_sha256": "b19addfd2018e836633a5e42d5d704de19d1bbe4b1625d834f47a31048ccbfda",
+        "world_save_version": 6
+      },
+      {
+        "name": "completed-paused-first",
+        "ticks": 11,
+        "start": 0,
+        "report_sha256": "79874a8560b0175cdb014a6c3bdc15bce5dece850fd306e16e6d06b6e42c5017",
+        "pcm_sha256": "c4527252a0b06fcda9139288af35098246c319087447a40400a9cc6c200dbf10",
+        "save_sha256": "b41ea377e751310555702279a6a41579c197fc9c305bc8d91d2339d2b20bf984",
+        "world_save_version": 6
+      },
+      {
+        "name": "completed-paused-continued",
+        "ticks": 79,
+        "start": 11,
+        "report_sha256": "0b7b62037e27a5517c58f01048a4e5a0b440f6ef0063378f6786e7d36fe10c98",
+        "pcm_sha256": "da8f60b2f517cabed6e1d46a677b4cd340b6cc4327751fc4dfb775bbbe25bef1",
+        "save_sha256": "b19addfd2018e836633a5e42d5d704de19d1bbe4b1625d834f47a31048ccbfda",
+        "world_save_version": 6
+      },
+      {
+        "name": "blended-first",
+        "ticks": 46,
+        "start": 0,
+        "report_sha256": "cc1427f641ab78328ee48d44116ae2beb08549aedbf4a3ad91a22edbea067c85",
+        "pcm_sha256": "e644a365055f002ab3ef102468a2708616304a6b1eabd49d1b7913ca65c63d25",
+        "save_sha256": "cf4d75a9100f5ce99db20a38c250356d94c277d46d1fcae354e9737c42e689aa",
+        "world_save_version": 6
+      },
+      {
+        "name": "blended-continued",
+        "ticks": 44,
+        "start": 46,
+        "report_sha256": "00ea9d611fcbb8c2521b9afbceb0654b8c44b70a6809e5256799f670519cbf59",
+        "pcm_sha256": "538fc88a7e6ff735ad41ddf0f0065267004add5bf141ceed4587ddf0c8514d95",
+        "save_sha256": "b19addfd2018e836633a5e42d5d704de19d1bbe4b1625d834f47a31048ccbfda",
+        "world_save_version": 6
+      }
+    ],
+    "refusal_controls": [
+      "corrupt checkpoint: no PCM/save",
+      "wrong observation: no PCM/save"
+    ]
+  },
+  "logs": {
+    "docs/spikes/evidence/native-animation-graphs-main130/actual-hosts.log.gz": {
+      "sha256": "1da3ae640d1d5b56e48252081c725236b9535bafb8259d62cba4a2f1bb27d33a",
+      "uncompressed_sha256": "574af3621e3ea33f4f833844525fcf843cf3d6fd0f8b4c4cda3bea2cebb4805b"
+    },
+    "docs/spikes/evidence/native-animation-graphs-main130/bridge.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/native-animation-graphs-main130/clippy.log.gz": {
+      "sha256": "7226ccaaa2a230d00896af5d5be7c060916f6568f5c4ec3f276db4d34304f7f7",
+      "uncompressed_sha256": "c52894776e0558b1a98d4e5f7b7602fab2847dddf4d9b43cc08473e6ccc416b7"
+    },
+    "docs/spikes/evidence/native-animation-graphs-main130/conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/native-animation-graphs-main130/export.log.gz": {
+      "sha256": "163f8514b822c111bd5d135dcb5a235d11c174f7088b915636972be86aba2dce",
+      "uncompressed_sha256": "c2de622de2d68bd6f874de56b9dce8c7f48ace18a5e87432c3e13f53b9f6fadd"
+    },
+    "docs/spikes/evidence/native-animation-graphs-main130/fmt.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/native-animation-graphs-main130/graph.log.gz": {
+      "sha256": "92fff084417170108de90b86e0b1e56172d3f2baf77a93d47c84910fc69d1471",
+      "uncompressed_sha256": "6cfac1b3e0431752566f5ab64fca4662798d8e50eb526c4077f868f3fc142f2b"
+    },
+    "docs/spikes/evidence/native-animation-graphs-main130/headless.log.gz": {
+      "sha256": "2f66ee7ee0a0d066d2c7836369c9a8da5ff68eb03f9e946b3dc96ab3d6781a9a",
+      "uncompressed_sha256": "8750d7d631ff3a84c94889b4895c24b039ab0a66d9b864a275f145151af921b0"
+    },
+    "docs/spikes/evidence/native-animation-graphs-main130/sdk.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/native-animation-graphs-main130/tests.log.gz": {
+      "sha256": "6aa7b67ce414db13586e4702b0989f6c0284bb4d4efbc0737ee32a58e90040bd",
+      "uncompressed_sha256": "64952c11672d887c5116a5b7b864b57ff678ac6122465d4698102c18acb39a9f"
+    },
+    "docs/spikes/evidence/native-animation-graphs-main130/tooling.log.gz": {
+      "sha256": "bc201b2c13c8d24d954d0315fda5ffe8bc7141678dfc7d0e2cd60d248f9283dc",
+      "uncompressed_sha256": "6f629a2bd0cec360e6132af2afb64e56f66f8e657db84ae7fe86242447a8ff16"
+    },
+    "docs/spikes/evidence/native-animation-graphs-main130/types.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/native-animation-graphs-main130/wasm-sdk.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/native-animation-graphs-main130/wasm32.log.gz": {
+      "sha256": "4a287ad9e05dd932ff2e742857284fb7fae7f0b46d38aa1f3308b572cc629bfd",
+      "uncompressed_sha256": "253bf0dbd65b28ae292044c584e604bfbbab4bfc3a92671e3d323d16275b4259"
+    },
+    "docs/spikes/evidence/native-animation-graphs-main130/hosts-conformance-0.log.gz": {
+      "sha256": "a7e7ee552494221458fa2d79ae7912d43c5a57959b30a050afa45c23eeb8ef85",
+      "uncompressed_sha256": "9fbcb2e22ce55d462b2eacfb3b48a4d8f067254d82c351b34ba515910961621f"
+    },
+    "docs/spikes/evidence/native-animation-graphs-main130/hosts-conformance-1.log.gz": {
+      "sha256": "23042760f9ae8ca21c9d81f110db851e9f04c3e6915b70f55fa6478fc527e21d",
+      "uncompressed_sha256": "24027a6babed99fa08e849cb4f7c6d78239ef8157b3c8943875acbf67d4bf538"
+    },
+    "docs/spikes/evidence/native-animation-graphs-main130/hosts-conformance-2.log.gz": {
+      "sha256": "417b9bd489c689cd191ce94b15457bb9cf48657653b67549bb8cf7bff2d3a28d",
+      "uncompressed_sha256": "050240785eac9a2eb501a28e0018268b72b030eabe442b31883baeb5cca1080a"
+    },
+    "docs/spikes/evidence/native-animation-graphs-main130/hosts-cook-build.log.gz": {
+      "sha256": "d140f6a47ed1177b689cd96fe4882909ef7dda8fc6f0edbe901dc35377c4207a",
+      "uncompressed_sha256": "bbc0090779dc8b1ebe3727d681ea768d357c51cfd19486a111ffc6a23364f0ff"
+    },
+    "docs/spikes/evidence/native-animation-graphs-main130/shipping-build.log.gz": {
+      "sha256": "58c7075147d1c1282b38921bc4199c867496e8d76d93873347e06f6f9a0633a8",
+      "uncompressed_sha256": "0f65b1f1d270eca6107d9c99feb3a1b8bbea3df749617e1929144652d683cb57"
+    },
+    "docs/spikes/evidence/native-animation-graphs-main130/report-active-continued.json.gz": {
+      "sha256": "e88a1875cb967ff3bf948c5ec17db322bf6805b383e9a0f26a37da5a167a1e73",
+      "uncompressed_sha256": "b323f004b9a8a27f254ec0e424480f52ca707f0c1beeb2afe3d3d8a2e036940c"
+    },
+    "docs/spikes/evidence/native-animation-graphs-main130/report-active-first.json.gz": {
+      "sha256": "2005a4d83b912bf87a7b31b8e13648841d12e3c77f524ab7b3da0481fc806934",
+      "uncompressed_sha256": "a24872bbf226c5a99ee1d0d28afb03061ed00cf94aa56fa5d13344f3d67b47ef"
+    },
+    "docs/spikes/evidence/native-animation-graphs-main130/report-baseline.json.gz": {
+      "sha256": "3a691c93d08f98923820662ad9c2c1463651faebb4e1c33c383b88f8ae85fb97",
+      "uncompressed_sha256": "7af4091dee2c8fb0c35b5cd178f24b800931e6b177809117463d0049381ab839"
+    },
+    "docs/spikes/evidence/native-animation-graphs-main130/report-blended-continued.json.gz": {
+      "sha256": "637c8092b80b5d9b9f9664dfe425db31bc83dec2f8b96cb421ebb42d5d027457",
+      "uncompressed_sha256": "00ea9d611fcbb8c2521b9afbceb0654b8c44b70a6809e5256799f670519cbf59"
+    },
+    "docs/spikes/evidence/native-animation-graphs-main130/report-blended-first.json.gz": {
+      "sha256": "1d705c06cf1264fc6b96ade4a384d67f511580fe093e059e7b2f54840839e552",
+      "uncompressed_sha256": "cc1427f641ab78328ee48d44116ae2beb08549aedbf4a3ad91a22edbea067c85"
+    },
+    "docs/spikes/evidence/native-animation-graphs-main130/report-completed-paused-continued.json.gz": {
+      "sha256": "2f19105d64fbf5d7ed0cf35a084a50fcff14e227a260e50d5b5e4a3e7ee7416b",
+      "uncompressed_sha256": "0b7b62037e27a5517c58f01048a4e5a0b440f6ef0063378f6786e7d36fe10c98"
+    },
+    "docs/spikes/evidence/native-animation-graphs-main130/report-completed-paused-first.json.gz": {
+      "sha256": "80674a43ea17c7691204f97af54d169f685e9ea0452b70a0e43a730d7ed468e7",
+      "uncompressed_sha256": "79874a8560b0175cdb014a6c3bdc15bce5dece850fd306e16e6d06b6e42c5017"
+    },
+    "docs/spikes/evidence/native-animation-graphs-main130/report-paused-continued.json.gz": {
+      "sha256": "d3f59d6db6630f18e613af2c67527457ee428e24c4bdd2539da134e06e155ee6",
+      "uncompressed_sha256": "d35c35e16576eb85bcf966ab84ae81d5a7e62eb1af9e63f33549fec595ab5a34"
+    },
+    "docs/spikes/evidence/native-animation-graphs-main130/report-paused-first.json.gz": {
+      "sha256": "f9708bc5e8d8eef710c3fdf845a5ca405f3b4b01d08032c93a0c8dad5b1f5a5f",
+      "uncompressed_sha256": "2444561461bfd7b6fe9810eda20578188c6f2636cebfdab3caf20922fa0eef70"
+    },
+    "docs/spikes/evidence/native-animation-graphs-main130/report-repeat-0.json.gz": {
+      "sha256": "3a691c93d08f98923820662ad9c2c1463651faebb4e1c33c383b88f8ae85fb97",
+      "uncompressed_sha256": "7af4091dee2c8fb0c35b5cd178f24b800931e6b177809117463d0049381ab839"
+    },
+    "docs/spikes/evidence/native-animation-graphs-main130/report-repeat-1.json.gz": {
+      "sha256": "3a691c93d08f98923820662ad9c2c1463651faebb4e1c33c383b88f8ae85fb97",
+      "uncompressed_sha256": "7af4091dee2c8fb0c35b5cd178f24b800931e6b177809117463d0049381ab839"
+    }
+  },
+  "receipts": {
+    "docs/spikes/evidence/native-animation-graphs-main130/compiled-source-freeze.json": "ec1f60d43300658aab7331297b64fb43e16512f1c4d87c89ab535ca35a981dcf",
+    "docs/spikes/evidence/native-animation-graphs-main130/checks.json": "151e17a1b280859e661c8067e7ff0c7c311b7014b056c4b5bcabe5d6688dc6c0",
+    "docs/spikes/evidence/native-animation-graphs-main130/export-result.json": "6e0c7ebc6695de281eb6cd2a75287dc6581d7e723681425fb6626a596ff146d4",
+    "docs/spikes/evidence/native-animation-graphs-main130/public-commands.json": "c34ab01c3fd744c2bb38fe639ec756dc9007109ee6c960235bfba93ffff91320",
+    "docs/spikes/evidence/native-animation-graphs-main130/prepared-manifest.json": "3524fd83e2186e0171673324564dc09c4cfa4d51926940e0e4901b2128772764",
+    "docs/spikes/evidence/native-animation-graphs-main130/rust-sdk.json": "27350c75650bdc662a22bbb5670dd6ba2d95ea4bb62ccf76117dcbe4988a15e9",
+    "docs/spikes/evidence/native-animation-graphs-main130/development-result.json": "050240785eac9a2eb501a28e0018268b72b030eabe442b31883baeb5cca1080a",
+    "docs/spikes/evidence/native-animation-graphs-main130/schemas.json": "44e9ae96acecbaa68013ecc56392cead7edde687138c9accf0fc9c4ff9e9a05b",
+    "docs/spikes/evidence/native-animation-graphs-main130/prepared-verification.json": "6205fef2032a03d306b88d3b0c101d501772614ecd24a05659b988205621e76a",
+    "docs/spikes/evidence/native-animation-graphs-main130/integration-review.json": "2b7f95b8c8a4c4c73a91c814f82860e533527f9ec64ca23726250ab00c65e066",
+    "docs/spikes/evidence/native-animation-graphs-main130/prior-evidence-verified.json": "ca3ee7879a1d861ef4bab8adeaf92b3adce28ac54cdc5c4d957fbea4b9a5bedf",
+    "docs/spikes/evidence/native-animation-graphs-main130/process-active-continued-receipt.json": "2a86301ceda00ab1bcc25de95a5520e791ddfc1a66ea6bc8c0cc80c95919cca6",
+    "docs/spikes/evidence/native-animation-graphs-main130/process-active-first-receipt.json": "668d4fd9df8567e5934553a544bc975d8edd1efcda20f6fab323676e8444cc79",
+    "docs/spikes/evidence/native-animation-graphs-main130/process-baseline-receipt.json": "4aead687755bce79e60cd4c4b9f9ac300150a9fb41804371d938b2a3eb99328b",
+    "docs/spikes/evidence/native-animation-graphs-main130/process-blended-continued-receipt.json": "a4c8f20f4de3ebb47f89e09d682226629b39afd39f3da2eef140a269cc91b408",
+    "docs/spikes/evidence/native-animation-graphs-main130/process-blended-first-receipt.json": "d1cd24fc4cd61640a1793e7cbf4d2bcd7339c8de8f822cb91582a91ac6f8f4ec",
+    "docs/spikes/evidence/native-animation-graphs-main130/process-completed-paused-continued-receipt.json": "a868bb31efaca5631f44631bd887c4921d28f9f29774c2bcc78fd37bb3f5bd7d",
+    "docs/spikes/evidence/native-animation-graphs-main130/process-completed-paused-first-receipt.json": "085b8090716f9c1213ca60d97f5d1d02d5289c2b16862a48ba565c86fb9a2398",
+    "docs/spikes/evidence/native-animation-graphs-main130/process-corrupt-receipt.json": "b248b5384ce32fb817f2926dab3f274fe7346c52e084dad03748c7ca135c4e35",
+    "docs/spikes/evidence/native-animation-graphs-main130/process-paused-continued-receipt.json": "8ab1a46cf1d4aef1471ca7b98d17891275ae0b526462cfb30220cd6dab8e3af4",
+    "docs/spikes/evidence/native-animation-graphs-main130/process-paused-first-receipt.json": "05a56afd9539f6bfcceea29f71df3ac01785aee65adeddbce14dd5aa4aaa7346",
+    "docs/spikes/evidence/native-animation-graphs-main130/process-repeat-0-receipt.json": "c1fc6834a39e726a76569dc1adbe4db71f187a2dc9975ad484aaca6b726e7683",
+    "docs/spikes/evidence/native-animation-graphs-main130/process-repeat-1-receipt.json": "426bfbbd820b42ce78a7a19edf5a6df67110c333e93484b0eafbf0ce45bd2a57",
+    "docs/spikes/evidence/native-animation-graphs-main130/process-wrong-observation-receipt.json": "2898bb9617a6f42b4e798ac51b09f3e4e431dcf5209368f4ee8280fd213636e6",
+    "docs/spikes/evidence/native-animation-graphs-main130/observation-active-continued-observe.json": "d7f15bf96a2b25cf7131702133715bc94469da9441fe67c0c589022eede1548a",
+    "docs/spikes/evidence/native-animation-graphs-main130/observation-active-first-observe.json": "3ff4283fedef6ac59e1ff8048ae67b405ad6e21a0a760893c7243b0d9313c442",
+    "docs/spikes/evidence/native-animation-graphs-main130/observation-baseline-observe.json": "1e1af2fdb8e3a7af00d2ae7feb6e86feeffe04f981f32942df2c7ed2d25c5b8e",
+    "docs/spikes/evidence/native-animation-graphs-main130/observation-blended-continued-observe.json": "c8836836d9a941767b5c4e3dc6d6ff1dc99b2f90e5fe80023653e55fbcd54f1b",
+    "docs/spikes/evidence/native-animation-graphs-main130/observation-blended-first-observe.json": "5fb891d971bd927feca3130fde60192e4adf7ed3b513eadf1fee592ae9d51107",
+    "docs/spikes/evidence/native-animation-graphs-main130/observation-completed-paused-continued-observe.json": "d7f15bf96a2b25cf7131702133715bc94469da9441fe67c0c589022eede1548a",
+    "docs/spikes/evidence/native-animation-graphs-main130/observation-completed-paused-first-observe.json": "3ff4283fedef6ac59e1ff8048ae67b405ad6e21a0a760893c7243b0d9313c442",
+    "docs/spikes/evidence/native-animation-graphs-main130/observation-corrupt-observe.json": "5ef402be1b6f60e4c575ac3a77ac2526e7c8cf41ac4e9667aba1fa4fe25b5ede",
+    "docs/spikes/evidence/native-animation-graphs-main130/observation-paused-continued-observe.json": "d224f0ebfe4f3f55220eba9aa4fc8510eb08bb0563ac07df1085c66c780be063",
+    "docs/spikes/evidence/native-animation-graphs-main130/observation-paused-first-observe.json": "fbc3888adc75ec8a6e8ef929e510462d2ec632c4a62478e6fdaf70c85ad89af2",
+    "docs/spikes/evidence/native-animation-graphs-main130/observation-repeat-0-observe.json": "1e1af2fdb8e3a7af00d2ae7feb6e86feeffe04f981f32942df2c7ed2d25c5b8e",
+    "docs/spikes/evidence/native-animation-graphs-main130/observation-repeat-1-observe.json": "1e1af2fdb8e3a7af00d2ae7feb6e86feeffe04f981f32942df2c7ed2d25c5b8e",
+    "docs/spikes/evidence/native-animation-graphs-main130/observation-wrong-observation-observe.json": "541f50ad5ad11b1a77e7605c6a4f3423f31178892080aa6082af6982dbe66052",
+    "docs/spikes/evidence/native-animation-graphs-main130/package-export.json": "b13ed77aeb1c4086a29ffe909f3b2fb8abbbc2559a0a46ab0196612db74b0161",
+    "docs/spikes/evidence/native-animation-graphs-main130/package-project-build.json": "2f518901d9c02b6c2922784ecad443bf1ec75d0a5597d6cca4312c0d950eec0a",
+    "docs/spikes/evidence/native-animation-graphs-main130/integration-seams.patch.gz": "96a9e0f3af8c1d078172911e2cf9337ba609e1e810dcb6b47a906ab0a2406ccb"
+  },
+  "prior_review_receipts": [
+    "docs/spikes/evidence/native-animation-graphs-source-review.json",
+    "docs/spikes/evidence/native-animation-graphs-export-review.json",
+    "docs/spikes/evidence/native-animation-graphs-guard-root-review.json"
+  ],
+  "integration_review": "No production text conflict. Six auto-merged files retain current public Wasm/UI/steering APIs and graph legacy-snapshot guard. STATUS-only conflict preserves both feature histories.",
+  "prior_failures": "Earlier graph source/export attempts and findings remain preserved in original source receipts. This integrated chain passed without retries.",
+  "limitations": [
+    "Local CPU render input and SDK observations, not deformed-vertex readback/GPU/window/appearance/device/performance acceptance",
+    "Graph controls currently use the public TypeScript path; graph Rust/Wasm ABI controls are not claimed",
+    "Existing combined SDK tests cover Wasmtime/static wasm2c separately; full static module-state checkpoints remain Unsupported",
+    "Ordinary checkpoints retain explicit script state; ephemeral VM globals/closures are not persisted",
+    "No phase gate; flat 1D adjacent-pair blend only, blended-state fades/2D/nested trees/IK/root motion remain unsupported"
+  ],
+  "integration_patch_uncompressed_sha256": "3d92c4a31cae222db497c596d8983ff375504e4518f89271c611e03f9c85242b"
+}
