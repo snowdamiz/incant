@@ -1,0 +1,67 @@
+running 1 test
+mixed300 (Word 28 px, line 36, width 300): 2 lines, size [283.80798, 72.0]
+    w 283.8079833984375 rtl false spaces 4 over false | "Wrapped ffi سلام 中文 "
+    w 170.5760040283203 rtl false spaces 2 over false | "ש and spaces"
+    checks {"clusters_equal_unwrapped":true,"interior_spaces_missing":[],"lost_non_whitespace":[],"missing_clusters":[[28,30]],"source_spaces":6,"space_glyphs":6,"widest_unwrapped_glyph":28.0}
+mixed180 (Word 28 px, line 36, width 180): 3 lines, size [160.972, 108.0]
+    w 160.9720001220703 rtl false spaces 2 over false | "Wrapped ffi "
+    w 139.63600158691406 rtl false spaces 2 over false | "سلام 中文 ש"
+    w 146.49600219726562 rtl false spaces 1 over false | "and spaces"
+    checks {"clusters_equal_unwrapped":true,"interior_spaces_missing":[],"lost_non_whitespace":[],"missing_clusters":[[28,30]],"source_spaces":6,"space_glyphs":5,"widest_unwrapped_glyph":28.0}
+rtl250 (Word 28 px, line 36, width 250): 2 lines, size [206.276, 72.0]
+    w 206.2760009765625 rtl true spaces 2 over false | "سلام hello world"
+    w 204.4840087890625 rtl true spaces 2 over false | "سلام hello again"
+    checks {"clusters_equal_unwrapped":true,"interior_spaces_missing":[],"lost_non_whitespace":[],"missing_clusters":[],"source_spaces":5,"space_glyphs":4,"widest_unwrapped_glyph":22.007999420166016}
+rtl180 (Word 28 px, line 36, width 180): 3 lines, size [142.18399, 108.0]
+    w 142.18399047851562 rtl true spaces 2 over false | "مرحبا بالعالم "
+    w 121.99600219726562 rtl true spaces 1 over false | "and hello"
+    w 134.51199340820312 rtl true spaces 1 over false | "سلام world"
+    checks {"clusters_equal_unwrapped":true,"interior_spaces_missing":[],"lost_non_whitespace":[],"missing_clusters":[],"source_spaces":5,"space_glyphs":4,"widest_unwrapped_glyph":22.007999420166016}
+mixed300_turned (Word 28 px, line 36, width 300): 2 lines, size [283.80798, 72.0]
+    w 283.8079833984375 rtl false spaces 4 over false | "Wrapped ffi سلام 中文 "
+    w 170.5760040283203 rtl false spaces 2 over false | "ש and spaces"
+    checks {"clusters_equal_unwrapped":true,"interior_spaces_missing":[],"lost_non_whitespace":[],"missing_clusters":[[28,30]],"source_spaces":6,"space_glyphs":6,"widest_unwrapped_glyph":28.0}
+narrow60_glyph (WordOrGlyph 28 px, line 36, width 60): 13 lines, size [59.556, 468.0]
+    w 59.555999755859375 rtl true spaces 1 over false | "سلام "
+    w 53.788002014160156 rtl true spaces 0 over false | "ABC"
+    w 50.540000915527344 rtl true spaces 0 over false | "DEF"
+    w 58.26799774169922 rtl true spaces 0 over false | "GHIJ"
+    w 57.400001525878906 rtl true spaces 0 over false | "KLM"
+    w 43.14799880981445 rtl true spaces 0 over false | "NO"
+    w 56.2239990234375 rtl true spaces 0 over false | "PQR"
+    w 51.40800094604492 rtl true spaces 0 over false | "STU"
+    w 59.24800491333008 rtl true spaces 0 over false | "VWX"
+    w 39.14400100708008 rtl true spaces 1 over false | "YZ "
+    w 50.400001525878906 rtl true spaces 0 over false | "שלו"
+    w 24.080001831054688 rtl true spaces 1 over false | "ם "
+    w 42.25199890136719 rtl true spaces 0 over false | "xyz"
+    checks {"clusters_equal_unwrapped":true,"interior_spaces_missing":[],"lost_non_whitespace":[],"missing_clusters":[[36,38],[38,40],[40,42],[42,44]],"source_spaces":3,"space_glyphs":3,"widest_unwrapped_glyph":26.040000915527344}
+narrow60_word (Word 28 px, line 36, width 60): 4 lines, size [461.88803, 144.0]
+    w 59.555999755859375 rtl true spaces 1 over false | "سلام "
+    w 461.8880310058594 rtl true spaces 0 over true | "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    w 67.20000457763672 rtl true spaces 0 over true | "שלום"
+    w 42.25199890136719 rtl true spaces 0 over false | "xyz"
+    checks {"clusters_equal_unwrapped":true,"interior_spaces_missing":[],"lost_non_whitespace":[],"missing_clusters":[[36,38],[38,40],[40,42],[42,44]],"source_spaces":3,"space_glyphs":1,"widest_unwrapped_glyph":26.040000915527344}
+glyph15 (WordOrGlyph 28 px, line 36, width 15): 3 lines, size [28.0, 108.0]
+    w 28.0 rtl false spaces 0 over true | "中"
+    w 28.0 rtl false spaces 0 over true | "文"
+    w 26.040000915527344 rtl false spaces 0 over true | "W"
+    checks {"clusters_equal_unwrapped":true,"interior_spaces_missing":[],"lost_non_whitespace":[],"missing_clusters":[],"source_spaces":1,"space_glyphs":0,"widest_unwrapped_glyph":28.0}
+latin (Word 28 px, line 36, width 600): 1 lines, size [338.24, 36.0]
+    w 338.239990234375 rtl false spaces 3 over false | "Office affinity fluffy waffle"
+    checks {"clusters_equal_unwrapped":true,"interior_spaces_missing":[],"lost_non_whitespace":[],"missing_clusters":[],"source_spaces":3,"space_glyphs":3,"widest_unwrapped_glyph":26.487998962402344}
+arabic (Word 28 px, line 36, width 340): 1 lines, size [134.90399, 36.0]
+    w 134.90399169921875 rtl true spaces 1 over false | "مرحبا بالعالم"
+    checks {"clusters_equal_unwrapped":true,"interior_spaces_missing":[],"lost_non_whitespace":[],"missing_clusters":[],"source_spaces":1,"space_glyphs":1,"widest_unwrapped_glyph":15.73599910736084}
+cjk (Word 28 px, line 36, width 600): 1 lines, size [147.28, 36.0]
+    w 147.27999877929688 rtl false spaces 1 over false | "中文 日本語"
+    checks {"clusters_equal_unwrapped":true,"interior_spaces_missing":[],"lost_non_whitespace":[],"missing_clusters":[],"source_spaces":1,"space_glyphs":1,"widest_unwrapped_glyph":28.0}
+short300 (Word 28 px, line 36, width 300): 2 lines, size [283.80798, 72.0]
+    w 283.8079833984375 rtl false spaces 4 over false | "Wrapped ffi سلام 中文 "
+    w 74.31200408935547 rtl false spaces 1 over false | "ש and"
+    checks {"clusters_equal_unwrapped":true,"interior_spaces_missing":[],"lost_non_whitespace":[],"missing_clusters":[[28,30]],"source_spaces":5,"space_glyphs":5,"widest_unwrapped_glyph":28.0}
+test dump_0055_layouts ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+probe exit 0; crates/ unchanged

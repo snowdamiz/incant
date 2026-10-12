@@ -1,0 +1,48 @@
+   Compiling incant_cook v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/crates/incant_cook)
+   Compiling incant_game_player v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/crates/incant_game_player)
+    Finished `ci` profile [optimized] target(s) in 4.15s
+     Running unittests src/main.rs (/tmp/incant-agent-native-target/ci/deps/incant_game_player-b7a343233a682d40)
+
+running 31 tests
+test checkpoint::tests::fractional_output_continues_absolute_phase_and_checks_overflow ... ok
+test window::clock::tests::overload_and_resume_are_bounded ... ok
+test window::gamepad::tests::failed_backend_initialization_is_a_visible_error_without_dummy_fallback ... ok
+test window::clock::tests::continuous_background_events_do_not_starve_pending_redraws ... ok
+test program::tests::explicit_prefix_is_bounded_and_default_arguments_are_unchanged ... ok
+test session::text_settings_tests::explicit_font_cache_extends_existing_cpu_mode_without_inference ... ok
+test checkpoint::tests::unsupported_routes_and_ambiguous_options_refuse_before_startup ... ok
+test window::clock::tests::fractional_ticks_have_no_per_tick_rounding_drift ... ok
+test observe::tests::observation_options_preserve_strict_legacy_and_spatial_argument_shapes ... ok
+test window::gamepad::tests::malformed_native_values_are_visible_and_unknown_controls_do_not_change_keyboard ... ok
+test window::gamepad::tests::focus_reset_discards_unpublished_hotplug_then_resume_keeps_neutral_controls ... ok
+test window::gamepad::tests::gamepad_bindings_are_accepted_only_for_bounded_player_ids_and_gestures_stay_unsupported ... ok
+test window::gamepad::tests::raw_poll_work_and_combined_input_queue_are_bounded_even_for_ignored_paused_events ... ok
+test window::gamepad::tests::measured_analog_values_and_all_standard_buttons_map_without_invented_edges ... ok
+test window::gamepad::tests::native_measured_trigger_and_stick_events_drive_typed_actions_and_preserve_taps ... ok
+test window::gamepad::tests::sticks_use_down_positive_and_dpad_reversals_release_opposite_before_pressing ... ok
+test window::input::coordinate_tests::cursor_and_pixel_wheel_use_logical_pixels_at_scale_one_and_two ... ok
+test window::input::coordinate_tests::invalid_scale_is_typed_and_does_not_mutate_the_pending_batch ... ok
+test window::input::coordinate_tests::scale_changes_use_each_samples_current_factor_without_inventing_motion ... ok
+test window::input::coordinate_tests::scaled_cursor_coalescing_retains_discrete_order_and_logical_displacement ... ok
+test window::input::tests::absolute_motion_coalesces_only_without_intervening_button ... ok
+test window::input::tests::high_rate_cursor_stream_preserves_initial_motion_and_discrete_order_without_double_counting ... ok
+test window::input::tests::invalid_coalesced_sample_is_refused_without_replacing_the_last_valid_position ... ok
+test window::input::tests::queue_is_bounded_and_focus_reset_releases_previous_buttons ... ok
+test window::surface::tests::os_size_changes_are_bounded_and_can_reenter_the_supported_range ... ok
+test window::surface::tests::recovery_defers_repeated_loss_without_unbounded_acquisition ... ok
+test window::surface::tests::transient_skip_and_fatal_validation_never_issue_extra_attempts ... ok
+test window::tests::explicit_font_cache_and_tick_bound_parse_in_fixed_order ... ok
+test package::tests::tampered_or_indirected_startup_files_are_refused ... ok
+test package::tests::offline_and_window_expand_to_existing_hosts ... ok
+test checkpoint::tests::publication_is_complete_create_only_and_cleans_failed_staging ... ok
+
+test result: ok. 31 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/routing.rs (/tmp/incant-agent-native-target/ci/deps/routing-1690331bc47b44f0)
+
+running 1 test
+test window_observation_refuses_before_startup_but_headless_keeps_observation_route ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.47s
+
+exit 0

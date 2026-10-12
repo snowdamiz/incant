@@ -1,0 +1,6 @@
+2026-10-12T04:01:48Z launched wrap pid 39653 (/tmp/incant0055/pkg/wrap/player/incant_game_player --package /tmp/incant0055/pkg/wrap/player/data --window) sha256 3b6e2294b4be42b38677d94debd1b96b75a2f114e18041f63dc2d5ceccc928f8
+2026-10-12T04:01:50Z wrap pid 39653 window {"id":42531,"x":596.0,"y":184.0,"w":320.0,"h":272.0} titlebar 32 pt; front returned to 1866 (waited 0s)
+2026-10-12T04:03:15Z closed wrap pid 39653 via AX close
+2026-10-12T04:03:19Z launched narrow pid 40669 (/tmp/incant0055/pkg/narrow/player/incant_game_player --package /tmp/incant0055/pkg/narrow/player/data --window) sha256 3b6e2294b4be42b38677d94debd1b96b75a2f114e18041f63dc2d5ceccc928f8
+2026-10-12T04:03:20Z narrow pid 40669 window {"id":42541,"x":596.0,"y":184.0,"w":320.0,"h":272.0} titlebar 32 pt; front returned to 1866 (waited 0s)
+2026-10-12T04:04:06Z closed narrow pid 40669 via AX close

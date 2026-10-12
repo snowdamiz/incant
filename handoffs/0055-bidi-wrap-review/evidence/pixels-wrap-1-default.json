@@ -1,0 +1,496 @@
+{
+ "capture": "/tmp/incant0055/captures/wrap-1-default.png",
+ "page": "wrap",
+ "capture_size": [
+  640,
+  544
+ ],
+ "titlebar_px": 64,
+ "content_px": [
+  640,
+  480
+ ],
+ "layout_px_per_frame_px": 1.0,
+ "pixels_per_unit": 100.0,
+ "texts": {
+  "mixed300": {
+   "width": 300,
+   "wrap": "word",
+   "pixels_compared": 8982,
+   "max_abs_code_value": 1,
+   "pixels_over_2": 0,
+   "mean_abs": 0.1374,
+   "glyphs_checked": 23,
+   "glyph_ink_ratio_min": [
+    0.998,
+    "W",
+    0
+   ],
+   "glyph_ink_ratio_max": [
+    1.0,
+    "s",
+    23
+   ],
+   "lines": [
+    {
+     "logical": "Wrapped ffi سلام 中文 ",
+     "layout_width": 283.808,
+     "pen": [
+      0.0,
+      283.808
+     ],
+     "captured_ink_x": [
+      0.5,
+      275.5
+     ],
+     "over_width": false,
+     "interior_spaces": [
+      {
+       "source": [
+        7,
+        8
+       ],
+       "advance": 7.28,
+       "core_peak_captured": 0.0,
+       "core_peak_expected": 0.0
+      },
+      {
+       "source": [
+        11,
+        12
+       ],
+       "advance": 7.28,
+       "core_peak_captured": 0.0,
+       "core_peak_expected": 0.0
+      },
+      {
+       "source": [
+        20,
+        21
+       ],
+       "advance": 7.28,
+       "core_peak_captured": 0.0,
+       "core_peak_expected": 0.0
+      }
+     ]
+    },
+    {
+     "logical": "ש and spaces",
+     "layout_width": 170.576,
+     "pen": [
+      0.0,
+      170.576
+     ],
+     "captured_ink_x": [
+      2.5,
+      168.5
+     ],
+     "over_width": false,
+     "interior_spaces": [
+      {
+       "source": [
+        30,
+        31
+       ],
+       "advance": 7.28,
+       "core_peak_captured": 0.0,
+       "core_peak_expected": 0.0
+      },
+      {
+       "source": [
+        34,
+        35
+       ],
+       "advance": 7.28,
+       "core_peak_captured": 0.0,
+       "core_peak_expected": 0.0
+      }
+     ]
+    }
+   ]
+  },
+  "mixed180": {
+   "width": 180,
+   "wrap": "word",
+   "pixels_compared": 8957,
+   "max_abs_code_value": 1,
+   "pixels_over_2": 0,
+   "mean_abs": 0.1161,
+   "glyphs_checked": 23,
+   "glyph_ink_ratio_min": [
+    0.998,
+    "W",
+    0
+   ],
+   "glyph_ink_ratio_max": [
+    1.001,
+    "ש",
+    17
+   ],
+   "lines": [
+    {
+     "logical": "Wrapped ffi ",
+     "layout_width": 160.972,
+     "pen": [
+      0.0,
+      160.972
+     ],
+     "captured_ink_x": [
+      0.5,
+      151.5
+     ],
+     "over_width": false,
+     "interior_spaces": [
+      {
+       "source": [
+        7,
+        8
+       ],
+       "advance": 7.28,
+       "core_peak_captured": 0.0,
+       "core_peak_expected": 0.0
+      }
+     ]
+    },
+    {
+     "logical": "سلام 中文 ש",
+     "layout_width": 139.636,
+     "pen": [
+      0.0,
+      139.636
+     ],
+     "captured_ink_x": [
+      0.5,
+      136.5
+     ],
+     "over_width": false,
+     "interior_spaces": [
+      {
+       "source": [
+        20,
+        21
+       ],
+       "advance": 7.28,
+       "core_peak_captured": 0.0,
+       "core_peak_expected": 0.0
+      },
+      {
+       "source": [
+        27,
+        28
+       ],
+       "advance": 7.28,
+       "core_peak_captured": 0.0,
+       "core_peak_expected": 0.0
+      }
+     ]
+    },
+    {
+     "logical": "and spaces",
+     "layout_width": 146.496,
+     "pen": [
+      0.0,
+      146.496
+     ],
+     "captured_ink_x": [
+      1.5,
+      144.5
+     ],
+     "over_width": false,
+     "interior_spaces": [
+      {
+       "source": [
+        34,
+        35
+       ],
+       "advance": 7.28,
+       "core_peak_captured": 0.0,
+       "core_peak_expected": 0.0
+      }
+     ]
+    }
+   ]
+  },
+  "rtl250": {
+   "width": 250,
+   "wrap": "word",
+   "pixels_compared": 7583,
+   "max_abs_code_value": 1,
+   "pixels_over_2": 0,
+   "mean_abs": 0.1688,
+   "glyphs_checked": 26,
+   "glyph_ink_ratio_min": [
+    0.998,
+    "l",
+    5
+   ],
+   "glyph_ink_ratio_max": [
+    1.002,
+    "l",
+    26
+   ],
+   "lines": [
+    {
+     "logical": "سلام hello world",
+     "layout_width": 206.276,
+     "pen": [
+      43.724,
+      250.0
+     ],
+     "captured_ink_x": [
+      46.5,
+      248.5
+     ],
+     "over_width": false,
+     "interior_spaces": [
+      {
+       "source": [
+        8,
+        9
+       ],
+       "advance": 7.28,
+       "core_peak_captured": 0.0,
+       "core_peak_expected": 0.0
+      },
+      {
+       "source": [
+        14,
+        15
+       ],
+       "advance": 7.28,
+       "core_peak_captured": 0.0,
+       "core_peak_expected": 0.0
+      }
+     ]
+    },
+    {
+     "logical": "سلام hello again",
+     "layout_width": 204.484,
+     "pen": [
+      45.516,
+      250.0
+     ],
+     "captured_ink_x": [
+      47.5,
+      248.5
+     ],
+     "over_width": false,
+     "interior_spaces": [
+      {
+       "source": [
+        29,
+        30
+       ],
+       "advance": 7.28,
+       "core_peak_captured": 0.0,
+       "core_peak_expected": 0.0
+      },
+      {
+       "source": [
+        35,
+        36
+       ],
+       "advance": 7.28,
+       "core_peak_captured": 0.0,
+       "core_peak_expected": 0.0
+      }
+     ]
+    }
+   ]
+  },
+  "rtl180": {
+   "width": 180,
+   "wrap": "word",
+   "pixels_compared": 7384,
+   "max_abs_code_value": 1,
+   "pixels_over_2": 0,
+   "mean_abs": 0.1479,
+   "glyphs_checked": 28,
+   "glyph_ink_ratio_min": [
+    0.998,
+    "l",
+    28
+   ],
+   "glyph_ink_ratio_max": [
+    1.002,
+    "l",
+    15
+   ],
+   "lines": [
+    {
+     "logical": "مرحبا بالعالم ",
+     "layout_width": 142.184,
+     "pen": [
+      37.816,
+      180.0
+     ],
+     "captured_ink_x": [
+      45.5,
+      178.5
+     ],
+     "over_width": false,
+     "interior_spaces": [
+      {
+       "source": [
+        10,
+        11
+       ],
+       "advance": 7.28,
+       "core_peak_captured": 0.0,
+       "core_peak_expected": 0.0
+      }
+     ]
+    },
+    {
+     "logical": "and hello",
+     "layout_width": 121.996,
+     "pen": [
+      58.004,
+      180.0
+     ],
+     "captured_ink_x": [
+      59.5,
+      178.5
+     ],
+     "over_width": false,
+     "interior_spaces": [
+      {
+       "source": [
+        29,
+        30
+       ],
+       "advance": 7.28,
+       "core_peak_captured": 0.0,
+       "core_peak_expected": 0.0
+      }
+     ]
+    },
+    {
+     "logical": "سلام world",
+     "layout_width": 134.512,
+     "pen": [
+      45.488,
+      180.0
+     ],
+     "captured_ink_x": [
+      45.5,
+      178.5
+     ],
+     "over_width": false,
+     "interior_spaces": [
+      {
+       "source": [
+        44,
+        45
+       ],
+       "advance": 7.28,
+       "core_peak_captured": 0.0,
+       "core_peak_expected": 0.0
+      }
+     ]
+    }
+   ]
+  },
+  "mixed300_turned": {
+   "width": 300,
+   "wrap": "word",
+   "pixels_compared": 11876,
+   "max_abs_code_value": 3,
+   "pixels_over_2": 2,
+   "mean_abs": 0.1394,
+   "glyphs_checked": 23,
+   "glyph_ink_ratio_min": [
+    0.999,
+    "a",
+    19
+   ],
+   "glyph_ink_ratio_max": [
+    1.0,
+    "文",
+    15
+   ],
+   "lines": [
+    {
+     "logical": "Wrapped ffi سلام 中文 ",
+     "layout_width": 283.808,
+     "pen": [
+      0.0,
+      283.808
+     ],
+     "captured_ink_x": [
+      0.58,
+      275.5
+     ],
+     "over_width": false,
+     "interior_spaces": [
+      {
+       "source": [
+        7,
+        8
+       ],
+       "advance": 7.28,
+       "core_peak_captured": 0.0,
+       "core_peak_expected": 0.0
+      },
+      {
+       "source": [
+        11,
+        12
+       ],
+       "advance": 7.28,
+       "core_peak_captured": 0.0,
+       "core_peak_expected": 0.0
+      },
+      {
+       "source": [
+        20,
+        21
+       ],
+       "advance": 7.28,
+       "core_peak_captured": 0.0,
+       "core_peak_expected": 0.0
+      }
+     ]
+    },
+    {
+     "logical": "ש and spaces",
+     "layout_width": 170.576,
+     "pen": [
+      0.0,
+      170.576
+     ],
+     "captured_ink_x": [
+      2.21,
+      168.99
+     ],
+     "over_width": false,
+     "interior_spaces": [
+      {
+       "source": [
+        30,
+        31
+       ],
+       "advance": 7.28,
+       "core_peak_captured": 0.0,
+       "core_peak_expected": 0.0
+      },
+      {
+       "source": [
+        34,
+        35
+       ],
+       "advance": 7.28,
+       "core_peak_captured": 0.0,
+       "core_peak_expected": 0.0
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "outside_quads": {
+  "pixels_checked": 258110,
+  "non_backdrop": 0,
+  "bbox": null
+ }
+}

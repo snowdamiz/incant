@@ -1,0 +1,40 @@
+   Compiling cosmic-text v0.14.2 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/third_party/cosmic-text)
+   Compiling incant_physics_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/crates/incant_physics_runtime)
+   Compiling incant_text v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/crates/incant_text)
+   Compiling incant_assets_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/crates/incant_assets_runtime)
+   Compiling incant_physics_2d_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/crates/incant_physics_2d_runtime)
+   Compiling incant_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/crates/incant_runtime)
+   Compiling incant_render_data v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/crates/incant_render_data)
+   Compiling incant_script v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/crates/incant_script)
+   Compiling incant_audio_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/crates/incant_audio_runtime)
+   Compiling incant_game_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/crates/incant_game_runtime)
+   Compiling incant_render_native v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/crates/incant_render_native)
+   Compiling incant_render v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/crates/incant_render)
+   Compiling incant_render_game v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/crates/incant_render_game)
+   Compiling incant_assets v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/crates/incant_assets)
+   Compiling incant_render_gpu_host v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/crates/incant_render_gpu_host)
+    Finished `ci` profile [optimized] target(s) in 21.06s
+     Running unittests src/lib.rs (/tmp/incant-agent-native-target/ci/deps/incant_render_gpu_host-a5ff5e2e7ed1c3e0)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/game.rs (/tmp/incant-agent-native-target/ci/deps/game-20008b10b5657416)
+
+running 5 tests
+test observed_device_loss_stops_the_host_before_another_target_is_acquired ... ok
+test script_physics_audio_and_submitted_frames_share_the_source_free_native_tick ... ok
+test paused_committed_refresh_submits_without_advancing_game_or_audio ... ok
+test target_errors_and_presentation_unwind_terminalize_game_and_silence_offline_pcm ... ok
+test hosted_text_child_draws_with_models_script_and_audio_without_motion_uploads ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.56s
+
+   Doc-tests incant_render_gpu_host
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+exit 0

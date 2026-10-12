@@ -1,0 +1,605 @@
+{
+ "capture": "/tmp/incant0055/captures/narrow-2-large.png",
+ "page": "narrow",
+ "capture_size": [
+  1920,
+  1144
+ ],
+ "titlebar_px": 64,
+ "content_px": [
+  1920,
+  1080
+ ],
+ "layout_px_per_frame_px": 0.4444444444444444,
+ "pixels_per_unit": 225.0,
+ "texts": {
+  "narrow60_glyph": {
+   "width": 60,
+   "wrap": "word_or_glyph",
+   "pixels_compared": 69002,
+   "max_abs_code_value": 2,
+   "pixels_over_2": 0,
+   "mean_abs": 0.1475,
+   "glyphs_checked": 36,
+   "glyph_ink_ratio_min": [
+    0.998,
+    "F",
+    7
+   ],
+   "glyph_ink_ratio_max": [
+    1.0,
+    "س",
+    0
+   ],
+   "lines": [
+    {
+     "logical": "سلام ",
+     "layout_width": 59.556,
+     "pen": [
+      0.444,
+      60.0
+     ],
+     "captured_ink_x": [
+      8.0,
+      58.67
+     ],
+     "over_width": false,
+     "interior_spaces": []
+    },
+    {
+     "logical": "ABC",
+     "layout_width": 53.788,
+     "pen": [
+      6.212,
+      60.0
+     ],
+     "captured_ink_x": [
+      6.22,
+      59.11
+     ],
+     "over_width": false,
+     "interior_spaces": []
+    },
+    {
+     "logical": "DEF",
+     "layout_width": 50.54,
+     "pen": [
+      9.46,
+      60.0
+     ],
+     "captured_ink_x": [
+      12.0,
+      59.56
+     ],
+     "over_width": false,
+     "interior_spaces": []
+    },
+    {
+     "logical": "GHIJ",
+     "layout_width": 58.268,
+     "pen": [
+      1.732,
+      60.0
+     ],
+     "captured_ink_x": [
+      3.56,
+      57.33
+     ],
+     "over_width": false,
+     "interior_spaces": []
+    },
+    {
+     "logical": "KLM",
+     "layout_width": 57.4,
+     "pen": [
+      2.6,
+      60.0
+     ],
+     "captured_ink_x": [
+      5.33,
+      57.33
+     ],
+     "over_width": false,
+     "interior_spaces": []
+    },
+    {
+     "logical": "NO",
+     "layout_width": 43.148,
+     "pen": [
+      16.852,
+      60.0
+     ],
+     "captured_ink_x": [
+      19.56,
+      58.22
+     ],
+     "over_width": false,
+     "interior_spaces": []
+    },
+    {
+     "logical": "PQR",
+     "layout_width": 56.224,
+     "pen": [
+      3.776,
+      60.0
+     ],
+     "captured_ink_x": [
+      6.22,
+      59.56
+     ],
+     "over_width": false,
+     "interior_spaces": []
+    },
+    {
+     "logical": "STU",
+     "layout_width": 51.408,
+     "pen": [
+      8.592,
+      60.0
+     ],
+     "captured_ink_x": [
+      9.78,
+      57.33
+     ],
+     "over_width": false,
+     "interior_spaces": []
+    },
+    {
+     "logical": "VWX",
+     "layout_width": 59.248,
+     "pen": [
+      0.752,
+      60.0
+     ],
+     "captured_ink_x": [
+      0.89,
+      59.56
+     ],
+     "over_width": false,
+     "interior_spaces": []
+    },
+    {
+     "logical": "YZ ",
+     "layout_width": 39.144,
+     "pen": [
+      20.856,
+      60.0
+     ],
+     "captured_ink_x": [
+      28.0,
+      59.11
+     ],
+     "over_width": false,
+     "interior_spaces": []
+    },
+    {
+     "logical": "שלו",
+     "layout_width": 50.4,
+     "pen": [
+      9.6,
+      60.0
+     ],
+     "captured_ink_x": [
+      12.0,
+      57.33
+     ],
+     "over_width": false,
+     "interior_spaces": []
+    },
+    {
+     "logical": "ם ",
+     "layout_width": 24.08,
+     "pen": [
+      35.92,
+      60.0
+     ],
+     "captured_ink_x": [
+      45.78,
+      57.33
+     ],
+     "over_width": false,
+     "interior_spaces": []
+    },
+    {
+     "logical": "xyz",
+     "layout_width": 42.252,
+     "pen": [
+      17.748,
+      60.0
+     ],
+     "captured_ink_x": [
+      18.67,
+      59.11
+     ],
+     "over_width": false,
+     "interior_spaces": []
+    }
+   ]
+  },
+  "narrow60_word": {
+   "width": 60,
+   "wrap": "word",
+   "pixels_compared": 67357,
+   "max_abs_code_value": 3,
+   "pixels_over_2": 1,
+   "mean_abs": 0.1446,
+   "glyphs_checked": 36,
+   "glyph_ink_ratio_min": [
+    0.997,
+    "L",
+    18
+   ],
+   "glyph_ink_ratio_max": [
+    1.0,
+    "س",
+    0
+   ],
+   "lines": [
+    {
+     "logical": "سلام ",
+     "layout_width": 59.556,
+     "pen": [
+      0.444,
+      60.0
+     ],
+     "captured_ink_x": [
+      8.22,
+      58.89
+     ],
+     "over_width": false,
+     "interior_spaces": []
+    },
+    {
+     "logical": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+     "layout_width": 461.888,
+     "pen": [
+      -401.888,
+      60.0
+     ],
+     "captured_ink_x": [
+      -402.0,
+      58.89
+     ],
+     "over_width": true,
+     "interior_spaces": []
+    },
+    {
+     "logical": "שלום",
+     "layout_width": 67.2,
+     "pen": [
+      -7.2,
+      60.0
+     ],
+     "captured_ink_x": [
+      -4.67,
+      57.56
+     ],
+     "over_width": true,
+     "interior_spaces": []
+    },
+    {
+     "logical": "xyz",
+     "layout_width": 42.252,
+     "pen": [
+      17.748,
+      60.0
+     ],
+     "captured_ink_x": [
+      18.44,
+      58.89
+     ],
+     "over_width": false,
+     "interior_spaces": []
+    }
+   ]
+  },
+  "glyph15": {
+   "width": 15,
+   "wrap": "word_or_glyph",
+   "pixels_compared": 9438,
+   "max_abs_code_value": 1,
+   "pixels_over_2": 0,
+   "mean_abs": 0.1132,
+   "glyphs_checked": 3,
+   "glyph_ink_ratio_min": [
+    0.999,
+    "W",
+    2
+   ],
+   "glyph_ink_ratio_max": [
+    1.0,
+    "文",
+    1
+   ],
+   "lines": [
+    {
+     "logical": "中",
+     "layout_width": 28.0,
+     "pen": [
+      0.0,
+      28.0
+     ],
+     "captured_ink_x": [
+      2.44,
+      25.11
+     ],
+     "over_width": true,
+     "interior_spaces": []
+    },
+    {
+     "logical": "文",
+     "layout_width": 28.0,
+     "pen": [
+      0.0,
+      28.0
+     ],
+     "captured_ink_x": [
+      1.11,
+      26.89
+     ],
+     "over_width": true,
+     "interior_spaces": []
+    },
+    {
+     "logical": "W",
+     "layout_width": 26.04,
+     "pen": [
+      0.0,
+      26.04
+     ],
+     "captured_ink_x": [
+      0.22,
+      25.56
+     ],
+     "over_width": true,
+     "interior_spaces": []
+    }
+   ]
+  },
+  "latin": {
+   "width": 600,
+   "wrap": "word",
+   "pixels_compared": 34995,
+   "max_abs_code_value": 2,
+   "pixels_over_2": 0,
+   "mean_abs": 0.1392,
+   "glyphs_checked": 18,
+   "glyph_ink_ratio_min": [
+    0.998,
+    "t",
+    9
+   ],
+   "glyph_ink_ratio_max": [
+    1.0,
+    "y",
+    15
+   ],
+   "lines": [
+    {
+     "logical": "Office affinity fluffy waffle",
+     "layout_width": 338.24,
+     "pen": [
+      0.0,
+      338.24
+     ],
+     "captured_ink_x": [
+      1.78,
+      336.89
+     ],
+     "over_width": false,
+     "interior_spaces": [
+      {
+       "source": [
+        6,
+        7
+       ],
+       "advance": 7.28,
+       "core_peak_captured": 0.0,
+       "core_peak_expected": 0.0
+      },
+      {
+       "source": [
+        15,
+        16
+       ],
+       "advance": 7.28,
+       "core_peak_captured": 0.0,
+       "core_peak_expected": 0.0
+      },
+      {
+       "source": [
+        22,
+        23
+       ],
+       "advance": 7.28,
+       "core_peak_captured": 0.0,
+       "core_peak_expected": 0.0
+      }
+     ]
+    }
+   ]
+  },
+  "arabic": {
+   "width": 340,
+   "wrap": "word",
+   "pixels_compared": 13081,
+   "max_abs_code_value": 2,
+   "pixels_over_2": 0,
+   "mean_abs": 0.1319,
+   "glyphs_checked": 12,
+   "glyph_ink_ratio_min": [
+    0.999,
+    "ب",
+    3
+   ],
+   "glyph_ink_ratio_max": [
+    1.0,
+    "م",
+    12
+   ],
+   "lines": [
+    {
+     "logical": "مرحبا بالعالم",
+     "layout_width": 134.904,
+     "pen": [
+      205.096,
+      340.0
+     ],
+     "captured_ink_x": [
+      205.33,
+      338.22
+     ],
+     "over_width": false,
+     "interior_spaces": [
+      {
+       "source": [
+        10,
+        11
+       ],
+       "advance": 7.28,
+       "core_peak_captured": 0.0,
+       "core_peak_expected": 0.0
+      }
+     ]
+    }
+   ]
+  },
+  "cjk": {
+   "width": 600,
+   "wrap": "word",
+   "pixels_compared": 19141,
+   "max_abs_code_value": 2,
+   "pixels_over_2": 0,
+   "mean_abs": 0.147,
+   "glyphs_checked": 5,
+   "glyph_ink_ratio_min": [
+    0.998,
+    "中",
+    0
+   ],
+   "glyph_ink_ratio_max": [
+    1.0,
+    "語",
+    5
+   ],
+   "lines": [
+    {
+     "logical": "中文 日本語",
+     "layout_width": 147.28,
+     "pen": [
+      0.0,
+      147.28
+     ],
+     "captured_ink_x": [
+      2.67,
+      146.22
+     ],
+     "over_width": false,
+     "interior_spaces": [
+      {
+       "source": [
+        6,
+        7
+       ],
+       "advance": 7.28,
+       "core_peak_captured": 0.0,
+       "core_peak_expected": 0.0
+      }
+     ]
+    }
+   ]
+  },
+  "short300": {
+   "width": 300,
+   "wrap": "word",
+   "pixels_compared": 36594,
+   "max_abs_code_value": 2,
+   "pixels_over_2": 0,
+   "mean_abs": 0.1347,
+   "glyphs_checked": 17,
+   "glyph_ink_ratio_min": [
+    0.999,
+    "a",
+    2
+   ],
+   "glyph_ink_ratio_max": [
+    1.001,
+    "r",
+    1
+   ],
+   "lines": [
+    {
+     "logical": "Wrapped ffi سلام 中文 ",
+     "layout_width": 283.808,
+     "pen": [
+      0.0,
+      283.808
+     ],
+     "captured_ink_x": [
+      0.44,
+      275.56
+     ],
+     "over_width": false,
+     "interior_spaces": [
+      {
+       "source": [
+        7,
+        8
+       ],
+       "advance": 7.28,
+       "core_peak_captured": 0.0,
+       "core_peak_expected": 0.0
+      },
+      {
+       "source": [
+        11,
+        12
+       ],
+       "advance": 7.28,
+       "core_peak_captured": 0.0,
+       "core_peak_expected": 0.0
+      },
+      {
+       "source": [
+        20,
+        21
+       ],
+       "advance": 7.28,
+       "core_peak_captured": 0.0,
+       "core_peak_expected": 0.0
+      }
+     ]
+    },
+    {
+     "logical": "ש and",
+     "layout_width": 74.312,
+     "pen": [
+      0.0,
+      74.312
+     ],
+     "captured_ink_x": [
+      2.22,
+      72.0
+     ],
+     "over_width": false,
+     "interior_spaces": [
+      {
+       "source": [
+        30,
+        31
+       ],
+       "advance": 7.28,
+       "core_peak_captured": 0.0,
+       "core_peak_expected": 0.0
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "outside_quads": {
+  "pixels_checked": 1791026,
+  "non_backdrop": 0,
+  "bbox": null
+ }
+}

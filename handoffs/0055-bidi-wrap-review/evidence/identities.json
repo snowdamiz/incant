@@ -1,0 +1,373 @@
+{
+ "source": {
+  "head": "90fbb18037bf6b9440a3fb43048b52a02c309f73",
+  "tree": "d80276eaf4fa61bd318fd0af932a22db18316709",
+  "branch": "handoff/0055-bidi-wrap-review",
+  "clean_outside_packet": true,
+  "files": {
+   "Cargo.lock": "f6e26cf61a147b5bbc33a497ba111bd8071227932752aa1297762135f0eac6cd",
+   "Cargo.toml": "a3d2dddd4c22528fb90564d633d670e23c818c32ff5ddd9f943c47a67fbe3742",
+   "third_party/cosmic-text/src/shape.rs": "3f313fd311fe0a31c83360c9c9e2f35709cabc3b8891ef8066efd185fccb2edd",
+   "third_party/cosmic-text/INCANT_PATCH.diff": "d7a692da9d75df05e995c965132466002fb0fa1613ee676278a55923e08df466",
+   "crates/incant_text/tests/bidi_wrap.rs": "11383a54a0afec25dff55170ae52f67ece89c4a1697eab3b9aea2a1a9eec499e",
+   "crates/incant_render/src/text/text.wgsl": "e6925b0518fb941794c1f929a3a4f0cd752b7a00608448c6b7b292b63f3dae00",
+   "crates/incant_render/src/output.wgsl": "6ceefe2e706624f4fff93fab83fffc8e2938af514e3b2ce4e92a1389f11f6a8a"
+  },
+  "vendored_patch_check": "diff -u of the 4 changed files between ~/.cargo/registry/src/*/cosmic-text-0.14.2 (read only) and third_party/cosmic-text equals INCANT_PATCH.diff (whitespace-normalized); no other source file differs"
+ },
+ "host": {
+  "os": "macOS 26.6 (25G72)",
+  "machine": "Apple M5 Pro, Mac17,9",
+  "gpu_backend": "Metal",
+  "rustc": "rustc 1.99.0 (b940084d7 2026-09-28), aarch64-apple-darwin"
+ },
+ "binaries": {
+  "incant_headless": {
+   "profile": "ci",
+   "sha256": "a2970ed925e60c6e8b7f7ed2a30052a0f5ffe3fe6d4f3009a6c73fea172ce4e1",
+   "use": "fixture init/import/RPC only (CPU)"
+  },
+  "incant_game_player": {
+   "profile": "ci (inherits release, opt-level 1)",
+   "features": "project,native-window",
+   "sha256": "3b6e2294b4be42b38677d94debd1b96b75a2f114e18041f63dc2d5ceccc928f8",
+   "bytes": 29803888,
+   "signed": false,
+   "built": "/tmp/incant-agent-native-target/ci/incant_game_player",
+   "copies": {
+    "wrap": "/private/tmp/incant0055/pkg/wrap/player/incant_game_player",
+    "narrow": "/private/tmp/incant0055/pkg/narrow/player/incant_game_player"
+   }
+  }
+ },
+ "fixture": {
+  "project_sha256": "d8724010ef3dfaf4c800bc357b4d489a4c1116c5ab841afbcdaee1c476d9b6bf",
+  "fixture_json_sha256": "ede091902c40ef216d438a427b73f9006b3927367f521a119d76046587d89f0b",
+  "journal_sha256": "de8d7f78a8930daeb6b049f0f35416c8f51d475e92f0489db75b9232eb5bca03",
+  "project_journal_sha256": "087b05d0662b1f431da95c27f9978a050d001bfa46a2ef8b9fe57596d6fe59b9",
+  "cases_sha256": "2acc31105f26a58773aa8ecad371bbc7da16b24443fe4435c769bb19889cbc02",
+  "font_files": {
+   "NotoSans-Regular.ttf": "2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9",
+   "NotoSansArabic.ttf": "ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56",
+   "IncantCJKFixture.ttf": "3299d6ab8033fb1d163f892dfcb1b8838cf1c46935c329d82da6f7b9e27dad82"
+  },
+  "packaged_font_payloads": {
+   "2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9.ifont": 556264,
+   "3299d6ab8033fb1d163f892dfcb1b8838cf1c46935c329d82da6f7b9e27dad82.ifont": 2424,
+   "ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont": 765788
+  },
+  "cameras": {
+   "wrap": "00000000000000000000000010",
+   "narrow": "00000000000000000000000011"
+  }
+ },
+ "packages": {
+  "wrap": {
+   "camera": "00000000000000000000000000000020",
+   "data_files": {
+    "world.scene": "339faab58aba11b98d28ea5c606e8c0e5e70abbe897793eaacd606ebd14d6c83",
+    "input-actions.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+    "models/5c0811487c2bad2045f1fac4e3f7c4651ec25e063012eec08b59d8a9365aafad.incmodel": "5926f9c137b2658f77a4a28951090f646ae338ba35c59ef573bc976ee75c9054",
+    "fonts/9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2.json": "e43c79c54c311c5759bdf686b43b9b112b0177bafd6938782ebb782d75018812",
+    "fonts/2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9.ifont": "92960e6b23eff12e1bf13361b2b94b490d723f8d93e6945ba34b9f9b3acd2081",
+    "fonts/6864e1444bc7002790e682360d3f93bd45fe51b7045a64ecbf0e76e19e6b758e.json": "167d0dc13b807552b06d0195e3a90ee24f5074206dd6d6f2106ad59e65b35fde",
+    "fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont": "8bd20a742cc19c0fe65b106d983ea1ed816c4cd5ca1c3d50bdc4d05aeb5f8e7a",
+    "fonts/1087d4bb69160e3e5955407294226ca3da11166a3188ada3c1a166ba14e55ceb.json": "c3fd206832637ec3ad354dee08b4c67012da904d34a3ce9ec9c97e30f70e07f0",
+    "fonts/3299d6ab8033fb1d163f892dfcb1b8838cf1c46935c329d82da6f7b9e27dad82.ifont": "49e09202aadc1c7463502004f791b596480a92d22e04b9948fabf8648a004814",
+    "clips.bin": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+    "package.json": "d03335b60442be02597199402924af2d9700c110176c15fc4cfa9f6972a899a7"
+   },
+   "startup_text": {
+    "first_text_position": [
+     -2.96,
+     2.16,
+     0.0
+    ],
+    "text_atlas_bytes": 4194304,
+    "text_atlas_nonzero": 10722,
+    "text_atlas_sha256": "2420ed029f3c3ef41c5d4251ecba263d7b488c225bf2fd3adb9f7e88f6920d52",
+    "text_count": 12,
+    "text_font_count": 3,
+    "text_generation": 0,
+    "text_glyph_count": 289,
+    "text_missing_clusters": 12,
+    "text_rtl_glyphs": 73
+   }
+  },
+  "narrow": {
+   "camera": "00000000000000000000000000000021",
+   "data_files": {
+    "world.scene": "339faab58aba11b98d28ea5c606e8c0e5e70abbe897793eaacd606ebd14d6c83",
+    "input-actions.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+    "models/5c0811487c2bad2045f1fac4e3f7c4651ec25e063012eec08b59d8a9365aafad.incmodel": "5926f9c137b2658f77a4a28951090f646ae338ba35c59ef573bc976ee75c9054",
+    "fonts/9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2.json": "e43c79c54c311c5759bdf686b43b9b112b0177bafd6938782ebb782d75018812",
+    "fonts/2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9.ifont": "92960e6b23eff12e1bf13361b2b94b490d723f8d93e6945ba34b9f9b3acd2081",
+    "fonts/6864e1444bc7002790e682360d3f93bd45fe51b7045a64ecbf0e76e19e6b758e.json": "167d0dc13b807552b06d0195e3a90ee24f5074206dd6d6f2106ad59e65b35fde",
+    "fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont": "8bd20a742cc19c0fe65b106d983ea1ed816c4cd5ca1c3d50bdc4d05aeb5f8e7a",
+    "fonts/1087d4bb69160e3e5955407294226ca3da11166a3188ada3c1a166ba14e55ceb.json": "c3fd206832637ec3ad354dee08b4c67012da904d34a3ce9ec9c97e30f70e07f0",
+    "fonts/3299d6ab8033fb1d163f892dfcb1b8838cf1c46935c329d82da6f7b9e27dad82.ifont": "49e09202aadc1c7463502004f791b596480a92d22e04b9948fabf8648a004814",
+    "clips.bin": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+    "package.json": "5dc78fd39f6e825ec83b1c426753b7e687789be51feaf858155d5d86f161bdb8"
+   },
+   "startup_text": {
+    "first_text_position": [
+     -2.96,
+     2.16,
+     0.0
+    ],
+    "text_atlas_bytes": 4194304,
+    "text_atlas_nonzero": 10722,
+    "text_atlas_sha256": "2420ed029f3c3ef41c5d4251ecba263d7b488c225bf2fd3adb9f7e88f6920d52",
+    "text_count": 12,
+    "text_font_count": 3,
+    "text_generation": 0,
+    "text_glyph_count": 289,
+    "text_missing_clusters": 12,
+    "text_rtl_glyphs": 73
+   }
+  }
+ },
+ "layout_probe": {
+  "layout_json_sha256": "10ee2efc3ea1f5b2a5c32a3084aa9e513c604662f9aae182ee5ea786f02afbbe",
+  "atlas_pgm_sha256": "668b31b64234144fab79fc6aa1432285f5be5bd5d60cb8c0f86941f0f3ad7ae6",
+  "native_startup_atlas_sha256": "2420ed029f3c3ef41c5d4251ecba263d7b488c225bf2fd3adb9f7e88f6920d52",
+  "probe_atlas_as_2048_plane_sha256": "2420ed029f3c3ef41c5d4251ecba263d7b488c225bf2fd3adb9f7e88f6920d52",
+  "recheck_after_rustfmt": "byte-identical layout.json and atlas.pgm"
+ },
+ "captures": {
+  "narrow-1-default.png": {
+   "sha256": "4a9ced36ebd1f3f9aeab39004e3e039be70233562986481b0ff33af5c991803a",
+   "px": [
+    640,
+    544
+   ],
+   "window_frame_pt": {
+    "id": 42541,
+    "x": 596.0,
+    "y": 184.0,
+    "w": 320.0,
+    "h": 272.0,
+    "window": 42541,
+    "at": "2026-10-12T04:03:27Z"
+   },
+   "kind": "actual window-only capture (screencapture -o -x -l), Display P3 tagged"
+  },
+  "narrow-2-large.png": {
+   "sha256": "9ff93ac023f86ec4144e0bbd22e9045d03b7a86aed572d55c0e1009c2dbeec99",
+   "px": [
+    1920,
+    1144
+   ],
+   "window_frame_pt": {
+    "id": 42541,
+    "x": 120.0,
+    "y": 90.0,
+    "w": 960.0,
+    "h": 572.0,
+    "window": 42541,
+    "at": "2026-10-12T04:03:58Z"
+   },
+   "kind": "actual window-only capture (screencapture -o -x -l), Display P3 tagged"
+  },
+  "wrap-1-default.png": {
+   "sha256": "636ed05a52cb335d13d00ffc4e9a074806916da258416acdbb5e5731bdf18ee5",
+   "px": [
+    640,
+    544
+   ],
+   "window_frame_pt": {
+    "id": 42531,
+    "x": 596.0,
+    "y": 184.0,
+    "w": 320.0,
+    "h": 272.0,
+    "window": 42531,
+    "at": "2026-10-12T04:01:58Z"
+   },
+   "kind": "actual window-only capture (screencapture -o -x -l), Display P3 tagged"
+  },
+  "wrap-2-large.png": {
+   "sha256": "e0451a89ae2c357afceb73000fa0e8d3f763e69b6d90eb830979c8b55a1a2131",
+   "px": [
+    1920,
+    1144
+   ],
+   "window_frame_pt": {
+    "id": 42531,
+    "x": 120.0,
+    "y": 90.0,
+    "w": 960.0,
+    "h": 572.0,
+    "window": 42531,
+    "at": "2026-10-12T04:02:47Z"
+   },
+   "kind": "actual window-only capture (screencapture -o -x -l), Display P3 tagged"
+  }
+ },
+ "crops": {
+  "narrow-1-default-context-x2.png": {
+   "sha256": "93736ba3cf3040091c2fc4162ed32c95529ffbf2ea1798cd1db4ce215667ade9",
+   "px": [
+    960,
+    280
+   ],
+   "source": "narrow-1-default.png",
+   "kind": "nearest-neighbour crop of an actual capture (pngcrop.py, colour chunks kept)"
+  },
+  "narrow-1-default-glyph60-x2.png": {
+   "sha256": "57b871aa19b71f884f501f93e040ed0fcb9cec07c846fcc601f2a299565dc044",
+   "px": [
+    160,
+    960
+   ],
+   "source": "narrow-1-default.png",
+   "kind": "nearest-neighbour crop of an actual capture (pngcrop.py, colour chunks kept)"
+  },
+  "narrow-1-default-short300-x3.png": {
+   "sha256": "a18e98715a3801cc5387fac5e3bc9b94e387657b2f587722f90bf531cf7c6af0",
+   "px": [
+    960,
+    264
+   ],
+   "source": "narrow-1-default.png",
+   "kind": "nearest-neighbour crop of an actual capture (pngcrop.py, colour chunks kept)"
+  },
+  "narrow-1-default-word60-x2.png": {
+   "sha256": "e5026914a14499f676197434a00557aa9d872487729c677e17a8e6ab71bf5357",
+   "px": [
+    960,
+    312
+   ],
+   "source": "narrow-1-default.png",
+   "kind": "nearest-neighbour crop of an actual capture (pngcrop.py, colour chunks kept)"
+  },
+  "wrap-1-default-mixed180-x3.png": {
+   "sha256": "3cc3dc18e50463cd80b52317a244503a1052dfa3c88599dcfbe1249cb11b8f9c",
+   "px": [
+    600,
+    372
+   ],
+   "source": "wrap-1-default.png",
+   "kind": "nearest-neighbour crop of an actual capture (pngcrop.py, colour chunks kept)"
+  },
+  "wrap-1-default-mixed300-x3.png": {
+   "sha256": "973847a5fe9b943b96df499eb2ef4d8640d9d876b9d8eeed65a92ee881ad3fd4",
+   "px": [
+    960,
+    264
+   ],
+   "source": "wrap-1-default.png",
+   "kind": "nearest-neighbour crop of an actual capture (pngcrop.py, colour chunks kept)"
+  },
+  "wrap-1-default-rtl-x2.png": {
+   "sha256": "fc8df08bd01c2c298f3fe8feee3a4f8d15f8f0138fed73e7741be13f8bcbfc6e",
+   "px": [
+    1192,
+    268
+   ],
+   "source": "wrap-1-default.png",
+   "kind": "nearest-neighbour crop of an actual capture (pngcrop.py, colour chunks kept)"
+  },
+  "wrap-1-default-turned-x2.png": {
+   "sha256": "8adfa5059df4fedea702f0cad568f7ccc76c75072c897cc13f6435982900e806",
+   "px": [
+    744,
+    260
+   ],
+   "source": "wrap-1-default.png",
+   "kind": "nearest-neighbour crop of an actual capture (pngcrop.py, colour chunks kept)"
+  }
+ },
+ "analyses": {
+  "pixels-wrap-1-default.json": "e1c5d0383a7f35d559dd6513e5744c6dbc88a12bcf3c0642ecc93e82f7303939",
+  "pixels-wrap-2-large.json": "954e2a4d9f8c8f1d179573186fda924d6fe996f7ed1dc7eadf1ddf655b158a3f",
+  "pixels-narrow-1-default.json": "f501a18eba6183eff560f0299193184448529c00e58e5f9b53cebff74096cc5c",
+  "pixels-narrow-2-large.json": "2fd5e9166c9c338171b1fb954ea0562e6c5375d33d847558dd5bfbbbe111ec32",
+  "reference-wrap-1-default.png": "787dbb8eb20c97f5e9be19e370db3204da844be37a338921c4577694a503df53",
+  "diff-wrap-1-default.png": "c7ea7400eb9bc8ea3ae2240c329c5ced009f0091c33346920a5175f10d091164",
+  "reference-narrow-1-default.png": "5368731cf4e1d0e55731bf2ba5f74085ca2bcbe69700d481ce42441eabcd25fb",
+  "diff-narrow-1-default.png": "d4bbb54ea0745ad709ae2ec8546909a78b3a55b230306d6d1fcbcd833da81aa8"
+ },
+ "logs": {
+  "probe": {
+   "raw": "/private/tmp/incant0055/logs/probe.log",
+   "raw_sha256": "6529d410488b086ad423976f5f75f0dad52f53ec689f16224e8cddf6458070bd",
+   "committed": "probe.txt",
+   "committed_sha256": "236372ada56bf4acdad0be5ef01e9fdc7f883e224a500a32d43566965d12aae3"
+  },
+  "test-cpu-text": {
+   "raw": "/private/tmp/incant0055/logs/test-cpu-text.log",
+   "raw_sha256": "03c588d1fbdea1221ecefa57e77dc87f9d352befb8992a3cfc9fae1163ff4aa2",
+   "committed": "test-cpu-text.txt",
+   "committed_sha256": "03c588d1fbdea1221ecefa57e77dc87f9d352befb8992a3cfc9fae1163ff4aa2"
+  },
+  "test-render-gpu": {
+   "raw": "/private/tmp/incant0055/logs/test-render-gpu.log",
+   "raw_sha256": "57c0d4e2861d3858a0c0f2c6293e8dc8a4d0449289fad1787aa375c3123b136c",
+   "committed": "test-render-gpu.txt",
+   "committed_sha256": "57c0d4e2861d3858a0c0f2c6293e8dc8a4d0449289fad1787aa375c3123b136c"
+  },
+  "test-gpu-host": {
+   "raw": "/private/tmp/incant0055/logs/test-gpu-host.log",
+   "raw_sha256": "777d9f23479d4e2fa96b95f4b7d7f7e7649b8149f7fca3903367bdc469ccfbb0",
+   "committed": "test-gpu-host.txt",
+   "committed_sha256": "777d9f23479d4e2fa96b95f4b7d7f7e7649b8149f7fca3903367bdc469ccfbb0"
+  },
+  "test-player-window": {
+   "raw": "/private/tmp/incant0055/logs/test-player-window.log",
+   "raw_sha256": "ac3bed234ef2dfcb8d48469ec1c146e748420d18915959ff7e28f4f47e394e51",
+   "committed": "test-player-window.txt",
+   "committed_sha256": "ac3bed234ef2dfcb8d48469ec1c146e748420d18915959ff7e28f4f47e394e51"
+  },
+  "processes": {
+   "raw": "/private/tmp/incant0055/processes.log",
+   "raw_sha256": "9352c1edbd87dca3796d49c0cccc4cbde833073f479a3a94f68ba9097cd28c27",
+   "committed": "processes.txt",
+   "committed_sha256": "9352c1edbd87dca3796d49c0cccc4cbde833073f479a3a94f68ba9097cd28c27"
+  },
+  "bursts": {
+   "raw": "/private/tmp/incant0055/bursts.log",
+   "raw_sha256": "db42bbfb72e2917ce2f7ce99ed612bb5da91f9ef586a7d29e0b5a81130e2d9d3",
+   "committed": "bursts.txt",
+   "committed_sha256": "db42bbfb72e2917ce2f7ce99ed612bb5da91f9ef586a7d29e0b5a81130e2d9d3"
+  },
+  "images": {
+   "raw": "/private/tmp/incant0055/images.log",
+   "raw_sha256": "78f32159f2aad84951978764174a945543eebf19cb1c0f4856d83aed8a42410c",
+   "committed": "images.txt",
+   "committed_sha256": "78f32159f2aad84951978764174a945543eebf19cb1c0f4856d83aed8a42410c"
+  }
+ },
+ "player_reports": {
+  "wrap": {
+   "accepted_frames": 659,
+   "adapter": "Apple M5 Pro",
+   "backend": "Metal",
+   "dropped_wall_ticks": "0",
+   "lifecycle_probe": null,
+   "mode": "native-window",
+   "on_screen": true,
+   "presentation_refreshes": 0,
+   "surface_reconfigurations": 2,
+   "surface_recreations": 0,
+   "surface_skipped": 2,
+   "tick": 659
+  },
+  "narrow": {
+   "accepted_frames": 631,
+   "adapter": "Apple M5 Pro",
+   "backend": "Metal",
+   "dropped_wall_ticks": "0",
+   "lifecycle_probe": null,
+   "mode": "native-window",
+   "on_screen": true,
+   "presentation_refreshes": 0,
+   "surface_reconfigurations": 2,
+   "surface_recreations": 0,
+   "surface_skipped": 0,
+   "tick": 631
+  }
+ }
+}

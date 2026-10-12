@@ -1,0 +1,4 @@
+2026-10-12T04:01:58Z capture /tmp/incant0055/captures/wrap-1-default.png window 42531 {"id":42531,"x":596.0,"y":184.0,"w":320.0,"h":272.0}
+2026-10-12T04:02:47Z capture /tmp/incant0055/captures/wrap-2-large.png window 42531 {"id":42531,"x":120.0,"y":90.0,"w":960.0,"h":572.0}
+2026-10-12T04:03:27Z capture /tmp/incant0055/captures/narrow-1-default.png window 42541 {"id":42541,"x":596.0,"y":184.0,"w":320.0,"h":272.0}
+2026-10-12T04:03:58Z capture /tmp/incant0055/captures/narrow-2-large.png window 42541 {"id":42541,"x":120.0,"y":90.0,"w":960.0,"h":572.0}

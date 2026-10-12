@@ -1,0 +1,36 @@
+{
+  "about": "0055 review content. Two 640x480 orthographic pages (vertical_size 4.8 m, so 100 layout px per unit at the startup window). 'at' is the layout box top-left in startup frame pixels; 'guides' frames the declared width box [0, width] with 2 px bars just outside it; turned text rotates/scales its whole group about that corner.",
+  "fonts": ["NotoSans-Regular.ttf", "NotoSansArabic.ttf", "IncantCJKFixture.ttf"],
+  "frame": [640, 480],
+  "vertical_size": 4.8,
+  "pages": {
+    "wrap": {"camera": [0, 0, 10]},
+    "narrow": {"camera": [10, 0, 10]}
+  },
+  "texts": [
+    {"key": "mixed300", "page": "wrap", "at": [24, 24], "guides": true,
+     "content": "Wrapped ffi سلام 中文 ש and spaces", "font_size": 28, "line_height": 36, "width": 300, "wrap": "word"},
+    {"key": "mixed180", "page": "wrap", "at": [420, 24], "guides": true,
+     "content": "Wrapped ffi سلام 中文 ש and spaces", "font_size": 28, "line_height": 36, "width": 180, "wrap": "word"},
+    {"key": "rtl250", "page": "wrap", "at": [24, 150], "guides": true,
+     "content": "سلام hello world سلام hello again", "font_size": 28, "line_height": 36, "width": 250, "wrap": "word"},
+    {"key": "rtl180", "page": "wrap", "at": [420, 160], "guides": true,
+     "content": "مرحبا بالعالم and hello سلام world", "font_size": 28, "line_height": 36, "width": 180, "wrap": "word"},
+    {"key": "mixed300_turned", "page": "wrap", "at": [40, 330], "guides": true, "rotate_degrees": 5, "scale": 1.15,
+     "content": "Wrapped ffi سلام 中文 ש and spaces", "font_size": 28, "line_height": 36, "width": 300, "wrap": "word"},
+    {"key": "narrow60_glyph", "page": "narrow", "at": [30, 6], "guides": true,
+     "content": "سلام ABCDEFGHIJKLMNOPQRSTUVWXYZ שלום xyz", "font_size": 28, "line_height": 36, "width": 60, "wrap": "word_or_glyph"},
+    {"key": "narrow60_word", "page": "narrow", "at": [560, 24], "guides": true,
+     "content": "سلام ABCDEFGHIJKLMNOPQRSTUVWXYZ שלום xyz", "font_size": 28, "line_height": 36, "width": 60, "wrap": "word"},
+    {"key": "glyph15", "page": "narrow", "at": [560, 200], "guides": true,
+     "content": "中文 W", "font_size": 28, "line_height": 36, "width": 15, "wrap": "word_or_glyph"},
+    {"key": "latin", "page": "narrow", "at": [130, 200], "guides": false,
+     "content": "Office affinity fluffy waffle", "font_size": 28, "line_height": 36, "width": 600, "wrap": "word"},
+    {"key": "arabic", "page": "narrow", "at": [130, 244], "guides": false,
+     "content": "مرحبا بالعالم", "font_size": 28, "line_height": 36, "width": 340, "wrap": "word"},
+    {"key": "cjk", "page": "narrow", "at": [130, 288], "guides": false,
+     "content": "中文 日本語", "font_size": 28, "line_height": 36, "width": 600, "wrap": "word"},
+    {"key": "short300", "page": "narrow", "at": [130, 372], "guides": true,
+     "content": "Wrapped ffi سلام 中文 ש and", "font_size": 28, "line_height": 36, "width": 300, "wrap": "word"}
+  ]
+}
