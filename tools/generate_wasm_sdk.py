@@ -47,7 +47,8 @@ def generate(data, digest):
         shared.append('pub mod localization;\n')
     shared += [f'pub const {name}: usize = {value};\n' for name,value in data['constants'].items()]
     shared += [f'pub const {name}: &[u8; 8] = b"{value}";\n' for name,value in data['magic'].items()]
-    shared += ['pub const FLIPBOOK_MAX_BYTES: usize = FlipbookHeader::SIZE + FLIPBOOK_MAX_ROWS * Flipbook::SIZE;\n',
+    shared += ['pub const ANIMATION_MAX_BYTES: usize = AnimationHeader::SIZE + ANIMATION_MAX_ROWS * AnimationRow::SIZE;\n',
+               'pub const FLIPBOOK_MAX_BYTES: usize = FlipbookHeader::SIZE + FLIPBOOK_MAX_ROWS * Flipbook::SIZE;\n',
                '#[derive(Clone,Copy,Debug,PartialEq,Eq)] pub enum ValueType { I32, I64 }\n',
                '#[derive(Debug)] pub struct Import { pub namespace: &\'static str, pub name: &\'static str, pub opcode: u32, pub params: &\'static [ValueType], pub results: &\'static [ValueType] }\n',
                'pub const IMPORTS: &[Import] = &[\n']

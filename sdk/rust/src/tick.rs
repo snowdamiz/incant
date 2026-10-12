@@ -395,6 +395,44 @@ impl<'tick> Tick<'tick> {
         }
         self.check(FlipbookSnapshot::parse(&scratch[..len]))
     }
+    /// Copy the start-of-callback playback snapshot. Queued controls stay private
+    /// until the entire callback commits; the returned data borrows only scratch.
+    pub fn animations<'a>(
+        &mut self,
+        scratch: &'a mut [u8],
+    ) -> Result<crate::AnimationSnapshot<'a>> {
+        self.ready()?;
+        // SAFETY: scalar length query, then a checked initialized destination.
+        let len = unsafe { raw::incant_animation_v1_snapshot_len(self.epoch) };
+        let len = self.snapshot_length(len, scratch.len(), abi::ANIMATION_MAX_BYTES)?;
+        let actual = unsafe {
+            raw::incant_animation_v1_read_snapshot(
+                self.epoch,
+                scratch.as_mut_ptr() as usize as i32,
+                len as i32,
+            )
+        };
+        if actual as usize != len {
+            return self.check(Err(Error::Malformed));
+        }
+        self.check(crate::AnimationSnapshot::parse(&scratch[..len]))
+    }
+    /// Queue one validated control on an existing authored animation declaration.
+    /// Clip-specific time bounds and entity existence are checked at atomic commit.
+    pub fn control_animation(
+        &mut self,
+        id: &EntityId,
+        control: crate::AnimationControl,
+    ) -> Result<()> {
+        self.ready()?;
+        let bytes = self.check(control.encode())?;
+        // SAFETY: both fixed-size initialized records remain live for this copied
+        // synchronous call; the host also checks epoch, ranges and every field.
+        unsafe {
+            raw::incant_animation_v1_control(self.epoch, ptr(id), bytes.as_ptr() as usize as i32);
+        }
+        Ok(())
+    }
     fn snapshot_length(&mut self, len: i32, capacity: usize, limit: usize) -> Result<usize> {
         let len = self.check(
             usize::try_from(len)

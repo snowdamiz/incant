@@ -54,6 +54,7 @@ def cargo_build(command, *, cwd, env, log):
     result = cargo_output(command, cwd=cwd, env=env)
     log.write_text(result.stdout + result.stderr, encoding='utf-8')
     require(result.returncode == 0, f'Cargo build failed; see {log}: {result.stderr[-4000:]}')
+    return result
 
 
 def transient_download_error(error):
@@ -137,10 +138,27 @@ def localization_guests(rustc, inputs, sdk_guests, environment):
     return modules
 
 
+def animation_guests(rustc, inputs, sdk_guests, environment):
+    """Compile real no_std animation controls and transactional failure guests."""
+    sample = inputs/'animation.rs'
+    shutil.copy2(ROOT/'sdk/rust/samples/animation.rs', sample)
+    failure = inputs/'animation-failure.rs'
+    shutil.copy2(ROOT/'sdk/rust/fixtures/animation_failure.rs', failure)
+    modules = []
+    for kind in (None, 'capacity', 'number', 'rest', 'clip', 'entity', 'callback'):
+        name = 'rust-animation'+('-'+kind if kind else '')
+        module = sdk_guests/(name+'.wasm')
+        rust_guest.compile(rustc, failure if kind else sample, module,
+                           env=environment, cfg=['sdk_animation_'+kind] if kind else ())
+        modules.append((name, module))
+    return modules
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
     parser.add_argument('--rustup', default='rustup')
+    parser.add_argument('--profile', choices=('dev', 'ci'), default='dev', help='Local conformance profile; shipping builds always use shipping')
     parser.add_argument('--conformance-only', action='store_true', help='Run combined actual static/JIT tests and development guest probe on one dev graph')
     parser.add_argument('--msvc-opt-level', choices=('0', '2'), default='0',
                         help='Windows C /Od baseline or explicit /O2 conformance candidate')
@@ -158,9 +176,11 @@ def main():
     if kind == 'pdb':
         environment['INCANT_WASM_MSVC_OPT_LEVEL'] = args.msvc_opt_level
     cargo = ROOT / 'tools/cargo' if os.name != 'nt' else rustc.with_name('cargo.exe')
-    cargo_build([str(cargo), 'build', '-j2', '-p', 'incant_wasm_cook', '--locked'],
+    built = cargo_build([str(cargo), 'build', '-j2', '-p', 'incant_wasm_cook', '--locked', '--profile', args.profile, '--message-format=json'],
                 cwd=ROOT, env=environment, log=out/'cook-build.log')
-    cook = ROOT / f'target/debug/incant_wasm_cook{suffix}'
+    cook = next(Path(record['executable']) for record in map(json.loads, built.stdout.splitlines())
+                if record.get('reason') == 'compiler-artifact' and record.get('executable')
+                and record['target']['name'] == 'incant_wasm_cook')
     metadata = cargo_metadata([str(cargo), 'metadata', '--locked', '--format-version=1', '--features', 'incant_wasm_dev/wasmtime-host,incant_wasm_runtime/embedded-fixture'], cwd=ROOT, env=environment)
     names = {p['id']: p['name'] for p in metadata['packages']}; nodes = {n['id']: n for n in metadata['resolve']['nodes']}
     roots = ['incant_wasm_runtime', 'incant_runtime', 'incant_script', 'incant_game_runtime', 'incant_script_player', 'incant_game_player']
@@ -194,6 +214,7 @@ def main():
                 rust_guest.compile(rustc,failure_source,module_path,env=environment,cfg=['sdk_'+kind.replace('-','_')])
                 modules.append((name,module_path))
             modules.extend(localization_guests(rustc, inputs, sdk_guests, environment))
+            modules.extend(animation_guests(rustc, inputs, sdk_guests, environment))
             environment['INCANT_RUST_SDK_GUESTS']=str(sdk_guests)
             flipbook = inputs/'flipbook.rs'; shutil.copy2(ROOT/'crates/incant_game_player/fixtures/flipbook.rs', flipbook)
             flipbook_module = inputs/'flipbook.wasm'
@@ -213,9 +234,9 @@ def main():
         (out/'rust-sdk.json').write_text(json.dumps(rust_guest.provenance(),indent=2)+'\n')
         if args.conformance_only:
             commands = [
-                [cargo, 'test', '-j2', '-p', 'incant-module', '-p', 'incant_wasm_abi', '-p', 'incant_wasm_runtime', '-p', 'incant_wasm_cook', '-p', 'incant_wasm_dev', '-p', 'incant_wasm_player', '-p', 'incant_game_runtime', '-p', 'incant_script', '--features', 'incant_wasm_dev/static-conformance,incant_wasm_player/fixture,incant_script/compiler', '--locked'],
-                [cargo, 'clippy', '-j2', '-p', 'incant-module', '-p', 'incant_wasm_abi', '-p', 'incant_wasm_runtime', '-p', 'incant_wasm_cook', '-p', 'incant_wasm_dev', '-p', 'incant_wasm_player', '-p', 'incant_game_runtime', '-p', 'incant_script', '--features', 'incant_wasm_dev/static-conformance,incant_wasm_player/fixture,incant_script/compiler', '--all-targets', '--locked', '--', '-D', 'warnings'],
-                [sys.executable, ROOT/'tools/probes/development-wasm.py', out/'development', '--rustup', args.rustup, '--static-conformance'],
+                [cargo, 'test', '--profile', args.profile, '-j2', '-p', 'incant-module', '-p', 'incant_wasm_abi', '-p', 'incant_wasm_runtime', '-p', 'incant_wasm_cook', '-p', 'incant_wasm_dev', '-p', 'incant_wasm_player', '-p', 'incant_game_runtime', '-p', 'incant_script', '--features', 'incant_wasm_dev/static-conformance,incant_wasm_player/fixture,incant_script/compiler', '--locked'],
+                [cargo, 'clippy', '--profile', args.profile, '-j2', '-p', 'incant-module', '-p', 'incant_wasm_abi', '-p', 'incant_wasm_runtime', '-p', 'incant_wasm_cook', '-p', 'incant_wasm_dev', '-p', 'incant_wasm_player', '-p', 'incant_game_runtime', '-p', 'incant_script', '--features', 'incant_wasm_dev/static-conformance,incant_wasm_player/fixture,incant_script/compiler', '--all-targets', '--locked', '--', '-D', 'warnings'],
+                [sys.executable, ROOT/'tools/probes/development-wasm.py', out/'development', '--rustup', args.rustup, '--static-conformance', '--profile', args.profile],
             ]
             for index, command in enumerate(commands):
                 result = subprocess.run([str(x) for x in command], cwd=ROOT, env=environment, capture_output=True, text=True, encoding='utf-8')

@@ -31,7 +31,7 @@ class RegistryTests(unittest.TestCase):
         self.assertEqual([self.data['constants'][n] for n in ('LOG_MAX_MESSAGE_BYTES','LOG_MAX_TICK_ENTRIES','LOG_MAX_TICK_BYTES','LOG_MAX_RETAINED_ENTRIES','LOG_MAX_RETAINED_BYTES')],[1024,64,16384,1024,262144])
 
     def test_localization_has_four_versioned_copied_imports_and_separate_wire_bounds(self):
-        self.assertEqual([(f['namespace'], f['name'], f['opcode']) for f in self.data['functions'][18:]], [
+        self.assertEqual([(f['namespace'], f['name'], f['opcode']) for f in self.data['functions'][18:22]], [
             ('incant_localization_v1', 'locale', 18), ('incant_localization_v1', 'localize', 19),
             ('incant_localization_v1', 'read_result', 20), ('incant_localization_v1', 'set_locale', 21)])
         self.assertEqual([self.data['constants'][n] for n in ('LOCALIZATION_MAX_QUERIES', 'LOCALIZATION_MAX_INPUT_BYTES', 'LOCALIZATION_MAX_OUTPUT_BYTES', 'LOCALIZATION_MAX_COMMANDS')], [64, 65536, 262144, 64])
