@@ -1,0 +1,43 @@
+$ ./tools/cargo test --locked --offline --profile ci -j2 -p incant_play
+source 264fd08867c6d0bdf5fe236f37500b5e90b9f00f tree f0a72cd612523abd3702eab5014d79cd7addfa5c
+    Finished `ci` profile [optimized] target(s) in 0.18s
+     Running unittests src/lib.rs (/tmp/incant-agent-native-target/ci/deps/incant_play-62f85a7907371661)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/animation.rs (/tmp/incant-agent-native-target/ci/deps/animation-f7582d2da59cf369)
+
+running 1 test
+test actual_editor_and_headless_startup_binds_animation_for_both_script_routes ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.84s
+
+     Running tests/control.rs (/tmp/incant-agent-native-target/ci/deps/control-eb69ee8b8a8be8e3)
+
+running 4 tests
+test paused_redraw_does_not_tick_and_stop_drops_the_retained_render_host ... ok
+test pause_step_resume_and_stop_act_on_disposable_native_state ... ok
+test rejected_input_preserves_a_paused_step_and_guest_failure_is_terminal ... ok
+test presentation_errors_and_unwinds_destroy_native_state_even_during_pause ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/startup.rs (/tmp/incant-agent-native-target/ci/deps/startup-da4be48b90369a59)
+
+running 4 tests
+test invalid_startup_selection_refuses_before_compiling_a_fallback ... ok
+test expected_behavior_digest_is_enforced_before_returning_owned_inputs ... ok
+test prepared_inputs_transfer_to_a_worker_and_outlive_the_authoring_document ... ok
+test authored_startup_uses_shared_cook_and_never_the_engine_fallback ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.75s
+
+   Doc-tests incant_play
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+exit 0

@@ -1,0 +1,185 @@
+$ ./tools/cargo test --locked --offline --profile ci -j2 -p incant_render_native -p incant_render_game -p incant_render_data -p incant_text
+source 264fd08867c6d0bdf5fe236f37500b5e90b9f00f tree f0a72cd612523abd3702eab5014d79cd7addfa5c
+    Finished `ci` profile [optimized] target(s) in 0.18s
+     Running unittests src/lib.rs (/tmp/incant-agent-native-target/ci/deps/incant_render_data-71b8c7662ea69d29)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (/tmp/incant-agent-native-target/ci/deps/incant_render_game-9c07d0368874a3d5)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/hosted.rs (/tmp/incant-agent-native-target/ci/deps/hosted-6f80e26267b4840f)
+
+running 8 tests
+test bad_binding_refuses_before_guest_execution_and_plain_game_remains_spatial_strict ... ok
+test mandatory_consumer_observes_motion_and_rebuild_but_not_rejected_input ... ok
+test retained_assets_survive_script_topology_changes_and_new_input_uses_committed_parent_pose ... ok
+test invalid_input_and_wrong_output_size_keep_render_audio_input_and_vm_retryable ... ok
+test accepted_input_script_physics_audio_and_render_input_share_one_tick_after_source_and_cache_deletion ... ok
+test script_error_and_missing_camera_after_acceptance_destroy_the_composite_and_silence_pcm ... ok
+test consumer_preparation_precedes_guest_and_accepted_failures_drop_all_state_and_clear_pcm ... ok
+test mixed_game_retains_numeric_text_and_atlas_with_script_models_and_audible_pcm ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.09s
+
+     Running unittests src/lib.rs (/tmp/incant-agent-native-target/ci/deps/incant_render_native-e77256c2d8fa7270)
+
+running 1 test
+test binding::tests::published_payload_limit_includes_every_version_and_checks_overflow ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/allocations.rs (/tmp/incant-agent-native-target/ci/deps/allocations-bf0b0175007668dc)
+
+running 2 tests
+test ordinary_committed_motion_and_callback_rejection_allocate_nothing ... ok
+test composed_text_motion_and_callback_rejection_allocate_nothing ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/animation.rs (/tmp/incant-agent-native-target/ci/deps/animation-2c9ec5fa454bcf25)
+
+running 3 tests
+test complete_duration_table_checked_on_startup_and_atomic_rebinding ... ok
+test sample_rejection_and_unwind_restore_complete_prior_input_then_allow_retry ... ok
+test source_deleted_native_samples_use_independent_clocks_without_rebinding_or_allocation ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/bindings.rs (/tmp/incant-agent-native-target/ci/deps/bindings-b5493b639176cd3c)
+
+running 5 tests
+test authoring_cook_to_binary_world_to_input_needs_no_project_or_source_at_runtime ... ok
+test source_free_assets_are_sealed_retained_and_not_reloaded_on_motion_or_rebuild ... ok
+test native_sprite_binding_retains_color_texture_and_rejects_unavailable_geometry_atomically ... ok
+test environment_usage_is_checked_at_startup_and_a_bad_rebind_keeps_prior_input ... ok
+test startup_rejects_missing_stale_corrupt_wrong_kind_and_unused_bad_bindings ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+
+     Running tests/flipbook.rs (/tmp/incant-agent-native-target/ci/deps/flipbook-00c9406781ee47ac)
+
+running 4 tests
+test animation_replaces_unused_static_region_and_a_removal_revalidates_the_static_binding ... ok
+test rejected_or_unwound_frame_consumer_preserves_complete_prior_numeric_input ... ok
+test source_free_frames_reuse_bindings_and_numeric_storage_through_rational_timing_and_controls ... ok
+test every_frame_is_resolved_before_first_publication_and_bad_rebind_keeps_prior_frame ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+
+     Running tests/retained.rs (/tmp/incant-agent-native-target/ci/deps/retained-2f5bb5bd3a40cc43)
+
+running 5 tests
+test failed_world_tick_and_failed_structural_batch_do_not_leak_candidate_values ... ok
+test rejected_and_unwinding_motion_restore_all_input_and_publish_only_after_acceptance ... ok
+test structural_rebuild_is_atomic_on_error_and_unwind_and_can_retry_same_world ... ok
+test camera_removal_and_different_world_fail_before_consumer_and_keep_previous_input ... ok
+test committed_parent_poses_and_labels_reuse_storage_through_motion_and_archetype_relocation ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/text_input.rs (/tmp/incant-agent-native-target/ci/deps/text_input-9a7e72604a684ccc)
+
+running 4 tests
+test real_layout_atlas_motion_and_topology_reuse_survive_deleted_sources_and_cache ... ok
+test text_and_spatial_publication_is_atomic_on_callback_error_unwind_and_late_preparation_refusal ... ok
+test aggregate_layout_cap_refuses_before_raster_and_preserves_the_old_candidate ... ok
+test wrong_world_restore_and_despawn_reuse_keep_text_handles_scoped ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+     Running tests/text_refusal.rs (/tmp/incant-agent-native-target/ci/deps/text_refusal-24a3fef563093b1d)
+
+running 1 test
+test mixed_text_is_refused_before_cache_reads_or_camera_publication ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/tilemaps.rs (/tmp/incant-agent-native-target/ci/deps/tilemaps-28f56165d57f784b)
+
+running 2 tests
+test checked_tile_atlas_bindings_survive_source_and_cache_removal_and_reject_wrong_references ... ok
+test tile_input_binds_once_and_failed_rebuild_preserves_previous_input ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+     Running unittests src/lib.rs (/tmp/incant-agent-native-target/ci/deps/incant_text-d090d30bce9a2ca5)
+
+running 4 tests
+test raster::glyf::tests::repeated_empty_components_and_deep_chains_have_finite_expansion_budgets ... ok
+test raster::tests::base_outline_coverage_agrees_with_independent_area_and_y_down_bounds ... ok
+test raster::tests::malicious_finite_dimensions_refuse_before_mask_allocation ... ok
+test raster::tests::cyclic_overlarge_and_truncated_glyphs_refuse_before_outline_or_mask_allocation ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/atlas.rs (/tmp/incant-agent-native-target/ci/deps/atlas-8311fa4f2e049cb8)
+
+running 5 tests
+test atlas_configuration_limits_reject_before_pixels ... ok
+test missing_and_space_are_distinct_and_exhaustion_is_atomic ... ok
+test unchanged_reuse_size_identity_and_reset_are_explicit ... ok
+test real_latin_rtl_and_cjk_outlines_have_nonempty_antialiased_coverage ... ok
+test reloaded_font_identity_cannot_reinterpret_old_shaped_glyph_ids ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/packaged_atlas.rs (/tmp/incant-agent-native-target/ci/deps/packaged_atlas-bf01e42b68f90a41)
+
+running 1 test
+test checked_packaged_font_rasterizes_after_source_and_cache_are_gone ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/shaping.rs (/tmp/incant-agent-native-target/ci/deps/shaping-3fa1c33b5a2fc10e)
+
+running 16 tests
+test metadata_without_a_loadable_shaping_face_is_refused_at_construction ... ok
+test bad_fonts_and_collections_refuse_without_silent_system_substitution ... ok
+test missing_glyphs_are_reported_without_host_font_fallback ... ok
+test fallback_order_is_explicit_for_two_faces_covering_the_same_missing_script ... ok
+test independently_ordered_engines_share_immutable_payload_without_sharing_shape_identity ... ok
+test shaping_does_not_require_or_decode_font_family_names ... ok
+test empty_and_trailing_line_breaks_have_measurable_caret_lines ... ok
+test no_wrap_allows_overflow_and_word_or_glyph_breaks_long_tokens ... ok
+test wrapping_and_resize_remeasure_but_unchanged_layout_is_retained ... ok
+test invalid_update_does_not_replace_the_last_valid_layout ... ok
+test supplied_chain_order_wins_even_for_same_named_font_files ... ok
+test font_size_scales_shaped_metrics ... ok
+test latin_ligatures_and_combining_marks_preserve_utf8_clusters ... ok
+test packaged_fallback_and_rtl_preserve_absolute_source_positions ... ok
+test independent_engines_produce_identical_geometry_from_packaged_fonts ... ok
+test concrete_asset_order_is_independent_of_style_weight_and_stretch_metadata ... ok
+
+test result: ok. 16 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+   Doc-tests incant_render_data
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests incant_render_game
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests incant_render_native
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests incant_text
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+exit 0

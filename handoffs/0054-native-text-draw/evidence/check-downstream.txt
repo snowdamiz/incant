@@ -1,0 +1,33 @@
+$ ./tools/cargo check --locked --offline --profile ci -j2 -p incant_play -p incant_headless -p incant_editor --all-targets
+source 264fd08867c6d0bdf5fe236f37500b5e90b9f00f tree f0a72cd612523abd3702eab5014d79cd7addfa5c
+    Checking incant_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0054-native-text-draw/crates/incant_runtime)
+   Compiling rerecast v0.4.0 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0054-native-text-draw/third_party/rerecast)
+    Checking incant_core v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0054-native-text-draw/crates/incant_core)
+   Compiling incant_types v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0054-native-text-draw/crates/incant_types)
+    Checking incant_script v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0054-native-text-draw/crates/incant_script)
+    Checking incant_audio_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0054-native-text-draw/crates/incant_audio_runtime)
+    Checking incant_render_native v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0054-native-text-draw/crates/incant_render_native)
+    Checking incant_cook v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0054-native-text-draw/crates/incant_cook)
+    Checking incant_game_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0054-native-text-draw/crates/incant_game_runtime)
+    Checking incant_render_game v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0054-native-text-draw/crates/incant_render_game)
+   Compiling incant_nav v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0054-native-text-draw/crates/incant_nav)
+    Checking incant_play v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0054-native-text-draw/crates/incant_play)
+   Compiling incant_2d v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0054-native-text-draw/crates/incant_2d)
+    Checking incant_render v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0054-native-text-draw/crates/incant_render)
+   Compiling incant_localization v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0054-native-text-draw/crates/incant_localization)
+   Compiling incant_physics_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0054-native-text-draw/crates/incant_physics_runtime)
+   Compiling incant_physics_2d_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0054-native-text-draw/crates/incant_physics_2d_runtime)
+    Checking incant_observe v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0054-native-text-draw/crates/incant_observe)
+    Checking incant_agent v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0054-native-text-draw/crates/incant_agent)
+    Checking incant_render_authoring v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0054-native-text-draw/crates/incant_render_authoring)
+   Compiling incant_input v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0054-native-text-draw/crates/incant_input)
+    Checking incant_agent_native v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0054-native-text-draw/crates/incant_agent_native)
+    Checking incant_play_legacy v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0054-native-text-draw/crates/incant_play_legacy)
+   Compiling incant_headless v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0054-native-text-draw/crates/incant_headless)
+    Checking incant_audio v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0054-native-text-draw/crates/incant_audio)
+   Compiling tauri v2.12.1
+   Compiling incant_editor v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0054-native-text-draw/editor/app)
+   Compiling tauri-macros v2.7.1
+    Checking incant_render_gpu_host v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0054-native-text-draw/crates/incant_render_gpu_host)
+    Finished `ci` profile [optimized] target(s) in 11.61s
+exit 0

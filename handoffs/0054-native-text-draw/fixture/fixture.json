@@ -1,0 +1,168 @@
+{
+  "binary_sha256": "b3d5139c8981fd466e2755c5f09d7e81c93b01c1f24673a3d96ae8a982c66fb9",
+  "project_sha256": "045e3d50233e3c8f18ff7384c22eb9abf7d3b53f49f83d3ce01171cdf62a892f",
+  "script_sha256": "97c3b123d177b5dbf89e47e9d936fcc8934fd98f4fd127e9fd3971cc159a6204",
+  "scene": "01M4Q116XEKT5JBR91X68YQ1CA",
+  "ids": {
+    "script": "00000000000000000000000001",
+    "camera": "00000000000000000000000010",
+    "light": "00000000000000000000000011",
+    "cube": "00000000000000000000000012",
+    "latin": "00000000000000000000000020",
+    "arabic": "00000000000000000000000021",
+    "cjk": "00000000000000000000000022",
+    "mixed": "00000000000000000000000023",
+    "label": "00000000000000000000000024",
+    "behind": "00000000000000000000000025"
+  },
+  "fonts": [
+    "01M4Q116YWHF25B03HZ0ZHAXKE",
+    "01M4Q116ZY41XYJRVDSG15FKJS",
+    "01M4Q1170SF6CVBTHJBGECRSTC"
+  ],
+  "mesh": "01M4Q1171E3WWSWHPTMR0ZC839",
+  "clip": "01M4Q11728PQM1Z9ASBGWDWR7R",
+  "texts": {
+    "latin": {
+      "content": "Office affinity fluffy waffle",
+      "font_size": 44,
+      "line_height": 56,
+      "width": 640,
+      "wrap": "word",
+      "translation": [
+        -3.4,
+        2.55,
+        0
+      ]
+    },
+    "arabic": {
+      "content": "مرحبا بالعالم",
+      "font_size": 40,
+      "line_height": 56,
+      "width": 640,
+      "wrap": "word",
+      "translation": [
+        -3.4,
+        1.75,
+        0
+      ]
+    },
+    "cjk": {
+      "content": "中文 日本語",
+      "font_size": 48,
+      "line_height": 64,
+      "width": 640,
+      "wrap": "word",
+      "translation": [
+        -3.4,
+        1.0,
+        0
+      ]
+    },
+    "mixed": {
+      "content": "Wrapped ffi سلام 中文 ש and spaces",
+      "font_size": 28,
+      "line_height": 36,
+      "width": 300,
+      "wrap": "word",
+      "translation": [
+        -3.4,
+        0.1,
+        0
+      ]
+    },
+    "label": {
+      "content": "ffi 中文",
+      "font_size": 24,
+      "line_height": 32,
+      "width": 300,
+      "wrap": "none",
+      "translation": [
+        -0.42,
+        0.25,
+        0.51
+      ]
+    },
+    "behind": {
+      "content": "Behind the cube",
+      "font_size": 36,
+      "line_height": 48,
+      "width": 600,
+      "wrap": "none",
+      "translation": [
+        0.6,
+        -0.8,
+        -1.6
+      ]
+    }
+  },
+  "revision": 1,
+  "transcript": [
+    {
+      "argv": [
+        "incant_headless",
+        "init",
+        "/private/tmp/incant0054/fixture/authoring/project.json",
+        "--entities",
+        "0"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "incant_headless",
+        "import",
+        "/private/tmp/incant0054/fixture/authoring/project.json",
+        "NotoSans-Regular.ttf"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "incant_headless",
+        "import",
+        "/private/tmp/incant0054/fixture/authoring/project.json",
+        "NotoSansArabic.ttf"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "incant_headless",
+        "import",
+        "/private/tmp/incant0054/fixture/authoring/project.json",
+        "IncantCJKFixture.ttf"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "incant_headless",
+        "import",
+        "/private/tmp/incant0054/fixture/authoring/project.json",
+        "cube.gltf"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "incant_headless",
+        "import",
+        "/private/tmp/incant0054/fixture/authoring/project.json",
+        "silence.wav"
+      ],
+      "exit_code": 0
+    },
+    {
+      "rpc": [
+        "project.read",
+        "command.execute",
+        "project.read",
+        "project.save"
+      ],
+      "commands": 11
+    }
+  ],
+  "command_bus_only": true,
+  "journal_reopened": true
+}
