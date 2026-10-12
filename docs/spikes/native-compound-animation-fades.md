@@ -34,6 +34,9 @@ Focused checks pass: 17 runtime graph tests; 23 TypeScript and 26 Wasm animation
 tests; 43 skeletal asset tests including zero-allocation staged publication;
 14 renderer animation CPU tests with two GPU tests ignored. Initial compile and
 fixture failures are retained under ~/.codex/incant-evidence/grouped-fade-*.
-The full affected-package/Clippy/wasm/dependency chain is running against the
-immutable inputs in grouped-fade-core-checks-001/freeze.json. Independent review,
-full package continuation and current-main integration remain pending.
+The full affected-package suite now passes 749 CPU tests in 113 groups, with 82
+GPU tests explicitly ignored. All-target Clippy, wasm32 renderer compilation,
+lean runtime dependency checks, strict SDK TypeScript and formatting/conventions
+pass on the frozen inputs. [Raw logs and identities](evidence/native-compound-fades.json)
+retain the earlier failures and their corrections. Independent review, full
+package continuation and current-main integration remain pending.

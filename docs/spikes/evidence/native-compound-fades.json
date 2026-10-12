@@ -1,0 +1,231 @@
+{
+  "at": "2026-10-12T17:00:51.381498+00:00",
+  "scope": "Private compound animation fades and atomic CPU pose publication",
+  "implementation": "389481c7",
+  "frozen_count": 1126,
+  "checks": [
+    {
+      "name": "tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_types",
+        "-p",
+        "incant_assets_runtime",
+        "-p",
+        "incant_assets",
+        "-p",
+        "incant_doc",
+        "-p",
+        "incant_cmd",
+        "-p",
+        "incant_cook",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_wasm_runtime",
+        "-p",
+        "incant_render",
+        "--all-targets"
+      ],
+      "exit": 0,
+      "seconds": 48.98102617263794
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_types",
+        "-p",
+        "incant_assets_runtime",
+        "-p",
+        "incant_assets",
+        "-p",
+        "incant_doc",
+        "-p",
+        "incant_cmd",
+        "-p",
+        "incant_cook",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_wasm_runtime",
+        "-p",
+        "incant_render",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 22.986066818237305
+    },
+    {
+      "name": "wasm",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "exit": 0,
+      "seconds": 11.685617923736572
+    },
+    {
+      "name": "dependencies",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_runtime",
+        "incant_render",
+        "incant_wasm_runtime"
+      ],
+      "exit": 0,
+      "seconds": 0.5720341205596924
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 1.4260742664337158
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.04405379295349121
+    },
+    {
+      "name": "typescript",
+      "command": [
+        "/Users/andreyyurlov/Documents/dev/incant/node_modules/.bin/tsc",
+        "--noEmit",
+        "-p",
+        "sdk/ts/tsconfig.json"
+      ],
+      "exit": 0,
+      "seconds": 0.4295647144317627
+    }
+  ],
+  "cpu_tests": 749,
+  "failed": 0,
+  "ignored_gpu": 82,
+  "groups": 113,
+  "artifacts": {
+    "docs/spikes/evidence/native-compound-fades/freeze.json": {
+      "sha256": "13fdd8b470ceccddff62a85b259fbd5b5510defa424765518fe7c77a6b49a51f",
+      "raw_sha256": "13fdd8b470ceccddff62a85b259fbd5b5510defa424765518fe7c77a6b49a51f",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/grouped-fade-core-checks-002/freeze.json"
+    },
+    "docs/spikes/evidence/native-compound-fades/results.json": {
+      "sha256": "3c2bf4dc4b6f47cd02b82ed55f5693864528848ad368143ab52875a79926ebd9",
+      "raw_sha256": "3c2bf4dc4b6f47cd02b82ed55f5693864528848ad368143ab52875a79926ebd9",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/grouped-fade-core-checks-002/results.json"
+    },
+    "docs/spikes/evidence/native-compound-fades/dependencies.log.gz": {
+      "sha256": "0ec74a634d21e7d1b43fccdb815f935edf66a14a3e695c46d3c1ba54579526f3",
+      "raw_sha256": "77f32bded9393afa2dbbd786af3c4fcb2398fecb95340981d481f90a3cea969e",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/grouped-fade-core-checks-002/dependencies.log"
+    },
+    "docs/spikes/evidence/native-compound-fades/typescript.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/grouped-fade-core-checks-002/typescript.log"
+    },
+    "docs/spikes/evidence/native-compound-fades/fmt.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/grouped-fade-core-checks-002/fmt.log"
+    },
+    "docs/spikes/evidence/native-compound-fades/wasm.log.gz": {
+      "sha256": "694bc8d0914433764c7fbad0ee9116456b30142fb388c3a93ffae51ad357d0b6",
+      "raw_sha256": "17520b981e226ffd594690822ac0617057a8ecd6070f2b4ef39c4a56036664cd",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/grouped-fade-core-checks-002/wasm.log"
+    },
+    "docs/spikes/evidence/native-compound-fades/conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/grouped-fade-core-checks-002/conventions.log"
+    },
+    "docs/spikes/evidence/native-compound-fades/clippy.log.gz": {
+      "sha256": "71fb4d04626509f239a7db5f330dcc4690f4832f7e190f1eb3c7a072eb12f6c8",
+      "raw_sha256": "bde51707620e2978f80181808ed3a3f55511beee69ff393e72698011b35d3b96",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/grouped-fade-core-checks-002/clippy.log"
+    },
+    "docs/spikes/evidence/native-compound-fades/tests.log.gz": {
+      "sha256": "31edb030e0c98feaa3b5a2334d75db687a67dff4c78a051f7342bf859b7e4e2b",
+      "raw_sha256": "9082eabc1fdea267a870dc1f6f6a622b3ffa92901c2032f8391a47fe028db576",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/grouped-fade-core-checks-002/tests.log"
+    },
+    "docs/spikes/evidence/native-compound-fades/prior-grouped-fade-core-checks-001-tests.log.gz": {
+      "sha256": "87d91f9d8c0653cee70b1fa31520a4eb57d34dae70390939b39c4c0d561fed28",
+      "raw_sha256": "2210a51797ef6d7f35fce4aead1fc9fe2673f963ca16e1a5790cf782821fd4f1",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/grouped-fade-core-checks-001/tests.log"
+    },
+    "docs/spikes/evidence/native-compound-fades/prior-grouped-fade-focused-001.log.gz": {
+      "sha256": "c88d1aad087cecaebe62e76ab9deb63da7c208ac8c5a3bc15e5b83bf4bbd8b16",
+      "raw_sha256": "c68dd8fa0a92e292d59f88d7ceb1002be73f4ab0f3d6cc5d252bed9f908d7cf1",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/grouped-fade-focused-001.log"
+    },
+    "docs/spikes/evidence/native-compound-fades/prior-grouped-fade-focused-002.log.gz": {
+      "sha256": "6e72e594279806e873fcc7f78111609cbd3aef251c837b984a55d1354dac467f",
+      "raw_sha256": "94584e61db8beded7508d26dd4ad915fa65685e6d723a93c3e10c2216c0c9f44",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/grouped-fade-focused-002.log"
+    },
+    "docs/spikes/evidence/native-compound-fades/prior-grouped-fade-pipeline-001.log.gz": {
+      "sha256": "4982eb569417ed10d873fce4d1deb987b8753f9f7c507f684aed6f5f11346110",
+      "raw_sha256": "38d15ec6c01c28eac347d20276d937a8972aa840cb9a0db441a5b35fbd5e1f5e",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/grouped-fade-pipeline-001.log"
+    },
+    "docs/spikes/evidence/native-compound-fades/prior-grouped-fade-pipeline-002.log.gz": {
+      "sha256": "e8b00d3fd61cded62cfe787d93fc8a8b812b1eb1ab7986d16f75a4cc5cd8b985",
+      "raw_sha256": "7dfd797c03297134cebf50be1b58d1de5680cdd14444c4552806c3e2fda72bb2",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/grouped-fade-pipeline-002.log"
+    }
+  },
+  "initial_failures": [
+    "wrong Capability method name in new test corrected",
+    "nullable SDK fade-state column initially undefined; now explicit null matching types",
+    "sibling private method visibility compile corrected",
+    "pose fixture animated node1, notnode0; corrected root selection, retained assertions",
+    "old authoring test expected new valid compound edge to refuse; now positive0.5 and negative-0.5"
+  ],
+  "open": [
+    "Independent source review",
+    "Actual authored ordinary exported compound gameplay and full composite session continuation",
+    "New complete compound Wasm pose/graph protocol",
+    "Connected root motion and current-main integration",
+    "Claude visual/GPU and reference-device/Phase1 gates"
+  ]
+}
