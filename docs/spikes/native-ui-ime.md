@@ -96,3 +96,31 @@ width is introduced. Actual native interaction and screen-space drawing must be
 validated on the combined consumer branch. Widget styling, visual bidi/hit
 geometry, mobile text APIs, clipboard and surrounding-text reconversion remain
 separate work; this does not complete the Phase 1 game-UI requirement.
+
+
+## Actual main136 integration
+
+The accepted implementation is integrated on `d418c6365c2c3ef8c8201a84c64f16359b53488a`.
+Only STATUS required a conflict resolution. All 27 accepted non-lock source inputs
+and 122 vendor files remain byte-identical. Compared with actual main136,
+Cargo.lock changes only Tao's registry source/checksum to the pinned local source;
+all 962 package versions and dependency arrays are preserved. Seven local-package
+dependency additions already on main remain intact relative to the older source
+branch. All 208 records in Tao's transitive lock closure are unchanged.
+
+The [integration evidence](evidence/native-ui-ime-main136.json) binds 1,453 frozen
+inputs and nine completed command logs: 119 CPU tests across 18 groups, eight
+exact protocol tests, scoped all-target Clippy, editor all-target compilation,
+Windows Tao compilation, dependency guards, formatting and conventions pass.
+The earlier Linux GTK compile is reused with identical Tao sources and full
+transitive dependency closure; it was not executed again. A missing-rustc PATH
+setup failure occurred before the protocol compiler launched. The remaining
+commands then passed using the exact installed Rust 1.99 compiler; already-passed
+commands were not repeated. Both runners are terminal and reaped.
+
+The [final source review](evidence/native-ui-ime-root-final-review.json) and
+[independent integration closure](evidence/native-ui-ime-main136-root-review.json)
+are retained.
+No native window, OS input method, GPU, provider or device was exercised during
+integration. The existing pre-window UI refusal remains until the separately
+reviewed draw consumer is composed and its native behavior accepted.

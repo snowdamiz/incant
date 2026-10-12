@@ -1,0 +1,381 @@
+{
+  "scope": "Hosted CPU ordinary-load UI session checkpoints; world v7 and session v2. No GPU/window/OS IME or full-save gate.",
+  "base": "390a27683876b4a847d8137ccc101b76feb6183e",
+  "base_main": "d418c6365c2c3ef8c8201a84c64f16359b53488a",
+  "accepted_renderer_ancestor": "75e17c3f",
+  "source_freeze": {
+    "sha256": "aedf1343d69a7c64d806bc07e10289ba4947a9187f9f0eb62b217e868f1763c7",
+    "reviewed_inputs": 30,
+    "all_still_identical": true
+  },
+  "source_sha256": {
+    "Cargo.lock": "d42014bbba10969ad40d0c025e33afe54e520a33a65cb80171ca64d62e050730",
+    "crates/incant_game_runtime/Cargo.toml": "59c8cbc2ff14ce4c024f9b1b0b4505a80103fd258b95170beaff55503c1d97af",
+    "crates/incant_game_runtime/src/core.rs": "8932ca2dd3d1cf45f3e5f44e8937afccb34eae2241ecf0c7e45722b4cd668d2c",
+    "crates/incant_game_runtime/src/hosted.rs": "9c2c2805bd1932cd31883161150725061a1ba78871cbe9fa1295870404466a01",
+    "crates/incant_game_runtime/src/lib.rs": "4925d41fa2a2336ddb72b90b36cc4ba4737015ed3adbac8a1ba44071cf06a76c",
+    "crates/incant_game_runtime/src/offline.rs": "e9c99e47dda9c1fdf9df9242a67ddc12eb347b3c7942e41a56f402ff8dea1112",
+    "crates/incant_render_game/Cargo.toml": "e26f4147a0e59e253599a67ae06e93c6c854e15ba53a7900793cc2bbb805f672",
+    "crates/incant_render_game/src/lib.rs": "d2209d5512d511b22c3926c54ff1699f07e5287cc4f02ceb30f6362a5580b640",
+    "crates/incant_render_game/src/ui.rs": "8401b7e095b7e38f7213b835ba566fa53c01f389312a285f6e7d99db71c18b4b",
+    "crates/incant_render_game/tests/ui.rs": "7e57e7a28093f020b3ea18b31a84dc088fcae6babe1096a7bdefa5184198fc50",
+    "crates/incant_render_game/tests/ui/checkpoints.rs": "25ca8836875a35fb4bae5a88b1a80dea84eb3edaa8723b71fa056c53df40355e",
+    "crates/incant_runtime/src/save.rs": "4ff4aa848d59dac9c63b84b303d0dc40e691908ad5fa3408975b3c86ae52d2d7",
+    "crates/incant_runtime/src/save/codec.rs": "fa0b084b0445408d1f490ceba401a056f31e99118cbcce49d526ede5358ede27",
+    "crates/incant_runtime/tests/animation.rs": "feb939d3f88d44524e91800b9d841bc81000b32d4c4ea89531e67edd1d64e550",
+    "crates/incant_runtime/tests/animation_graph.rs": "d04f6d5f4cd0531cb5c2b179112ef360743f1fb0775e5b4548158cade008f8fe",
+    "crates/incant_runtime/tests/ui.rs": "ff6cb04f4f9bb04250a3d55dc4ec7087a0024402e27c32178db789c568cf6c11",
+    "crates/incant_script/Cargo.toml": "2e52edb2c41a23dc1a47c96724e9100cc7f59384f4aeeab6131f9cf4b365c629",
+    "crates/incant_script/build.rs": "0ab1681fcb669b1b6afb187ae3bb0912810754ddf34887f70198818dbd4b1e1d",
+    "crates/incant_script/src/checkpoint/codec.rs": "35d0cd773066dc49a5a8d264b83cd049a0031f58a782e815fcbebe120ff65100",
+    "crates/incant_script/src/checkpoint/mod.rs": "5dfcabf28c78bc2463978ca47c9ad1d7fc3421bec3363846b82f9a7d0aeb9017",
+    "crates/incant_script/src/checkpoint/pending.rs": "f19fcac1f73923a0c31c3dd5af47b2f14fac6a3c4fbac206bee6a982ab47f728",
+    "crates/incant_script/src/checkpoint/tests/animation.rs": "fc328ae783709579ff5c595216dd3db793ef1289a998cde24ac34f1474a0324d",
+    "crates/incant_ui/Cargo.toml": "4f2502ffb6f7df4dd763bb6ce704fbfadea86d65273554d9f3aa75353aeecb7f",
+    "crates/incant_ui/src/checkpoint.rs": "95ca5b7ebd256f9754ffad6e08e712f5d36728bfba894b5dd6703cf1a2a98179",
+    "crates/incant_ui/src/focus.rs": "5be6d64821acebe0304c69905860cab2783e0abd459202c509dcaf753486be56",
+    "crates/incant_ui/src/lib.rs": "164f1cf825061f9291a4161258f15a3b5b423d1b7a4784d49774d8794642b703",
+    "crates/incant_ui/src/native.rs": "a25a622033a2189cd45fd4f16eadbbdce52ef79c2436c8b351081012a6e1d911",
+    "crates/incant_ui/src/routing.rs": "87dc87ae5b7b3d2fac5b66c480facc54e4e46e37eac7a334f7ed0eb56b1a58d9",
+    "crates/incant_ui/tests/checkpoint.rs": "ecf2dd773bef3153d30ee4490f8f3d8cb6936e7a6a6f2cebdb421ba206be99b5",
+    "crates/incant_ui/tests/checkpoint/native.rs": "81e1d44536648f251c5e2a13491cd01eccacd2d6ca48cb083397a62e9a812ba0",
+    "tools/probes/native-ui-checkpoint-export.py": "660248eb7bec66d3e4b1db98d72dc59fb12d133671acbb2a5e4ae0e534173274",
+    "tools/probes/native-ui-export.py": "7d87a29dcef8d137c6da4792703732b073474a9186426ac6be1d4b66e265a6e8"
+  },
+  "unchanged_build_player_inputs": {
+    "Cargo.toml": "3d4228361045ff29e5fcfde55f3ab4769f71b8d3805f69301428af0eaddb3e52",
+    "rust-toolchain.toml": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124",
+    "crates/incant_game_player/Cargo.toml": "28056082e89b012c1c6c976bb349d8dace821bd26d535ec0b53cbb55b778d401",
+    "crates/incant_game_player/build.rs": "9c2503ff557cbc15a17a42e3a8ace8759709013fb6cbe3b7f22974eb8224b058",
+    "crates/incant_game_player/src/main.rs": "71a39e60435979e4a83f1601fa050698a35853ad5b5bc825665e07094bbadc50",
+    "crates/incant_game_player/src/package.rs": "c7d70da9643fee2ee134519ab87f4dfd3792f5386b0b3bd4109bc95820a91366",
+    "crates/incant_game_player/src/checkpoint.rs": "b320651e522fcedb42cec72cb92e162f25733826421669f4f0d3335100554b71",
+    "tools/export_native.py": "14f64b270a3728b58ce1e2cd99ff52dd826cdfbbb4dda5734bd48da3e40184cb",
+    "tools/native_package.py": "0362128f683f835e31674ad2f024f54f35d7401ebdb6eb0b51d791e14578413b",
+    "tools/native_process.py": "493c6e70e9045bf3b6e128b4392f47b7cac8a475969d715f26cd1eb7d9777ec3"
+  },
+  "lock": {
+    "packages": 962,
+    "resolution_changes": false,
+    "changes": [
+      {
+        "package": "incant_script",
+        "added_dependencies": [
+          "incant_ui"
+        ]
+      },
+      {
+        "package": "incant_ui",
+        "added_dependencies": [
+          "incant_runtime"
+        ]
+      }
+    ]
+  },
+  "checks": {
+    "affected_suite": {
+      "passed": 449,
+      "failed": 0,
+      "ignored": 0,
+      "result_groups": 55,
+      "command": "cargo test --offline --locked --profile ci -j2 -p incant_runtime -p incant_ui --features incant_ui/native -p incant_script --features incant_script/ui -p incant_game_runtime --features incant_game_runtime/ui -p incant_render_game"
+    },
+    "player_suite": {
+      "passed": 9,
+      "failed": 0,
+      "ignored": 0,
+      "command": "cargo test --offline --locked --profile ci -j2 -p incant_game_player --features render-input"
+    },
+    "clippy": "same five affected packages/features; --all-targets -- -D warnings",
+    "no_ui": "cargo check --offline --locked --profile ci -j2 -p incant_script -p incant_game_runtime --no-default-features",
+    "module_compile": "cargo check --offline --locked --profile ci -j2 -p incant_script --no-default-features --features ui,static-module,wasmtime-host",
+    "wasm32": "cargo check --offline --locked --profile ci -j2 -p incant_ui --features native --target wasm32-unknown-unknown",
+    "other": [
+      "headless build",
+      "normal runtime dependency guard",
+      "cargo fmt --all -- --check",
+      "generate_conventions.py --check",
+      "git diff --check",
+      "Python proof helpers py_compile"
+    ]
+  },
+  "environment": {
+    "host": "aarch64-apple-darwin",
+    "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+    "cpu_target": "/tmp/incant-font-atlas-target",
+    "gpu_executed": false
+  },
+  "logs": [
+    {
+      "path": "docs/spikes/evidence/native-ui-session-checkpoint-logs/incant-ui-session-clippy-001.log.gz",
+      "sha256": "347b7fc6c32af2412ccc8c76a7303e241fde813e8248e42df45e0ed1af36789e",
+      "uncompressed_sha256": "de4277db878490d46f7a7149e2d049c07f6f7eda4969c614bdc2b394a0c7f916",
+      "bytes": 3145,
+      "outcome": "passed",
+      "tests": {
+        "passed": 0,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 0
+      }
+    },
+    {
+      "path": "docs/spikes/evidence/native-ui-session-checkpoint-logs/incant-ui-session-conventions.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "outcome": "passed",
+      "tests": {
+        "passed": 0,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 0
+      }
+    },
+    {
+      "path": "docs/spikes/evidence/native-ui-session-checkpoint-logs/incant-ui-session-diff.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "outcome": "passed",
+      "tests": {
+        "passed": 0,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 0
+      }
+    },
+    {
+      "path": "docs/spikes/evidence/native-ui-session-checkpoint-logs/incant-ui-session-export-001.log.gz",
+      "sha256": "10aea655642c4185585fcc24048ba268687fc5a39130670d568b0e4be9f4e040",
+      "uncompressed_sha256": "bea48188b62c9e12d59e11f7a26f1aff4c1b9eca124d8186801f8a7f4890e817",
+      "bytes": 219,
+      "outcome": "passed",
+      "tests": {
+        "passed": 0,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 0
+      }
+    },
+    {
+      "path": "docs/spikes/evidence/native-ui-session-checkpoint-logs/incant-ui-session-first-check.log.gz",
+      "sha256": "486dec1e048507481acb1f117b8a80ab607c1ef2362b268ca7ad7163017b7494",
+      "uncompressed_sha256": "eb2ec872d25e1d890a76de56452a6d7335f5005537675d2b76f0d3c79fc7bcab",
+      "bytes": 1914,
+      "outcome": "passed",
+      "tests": {
+        "passed": 0,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 0
+      }
+    },
+    {
+      "path": "docs/spikes/evidence/native-ui-session-checkpoint-logs/incant-ui-session-fmt.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "outcome": "passed",
+      "tests": {
+        "passed": 0,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 0
+      }
+    },
+    {
+      "path": "docs/spikes/evidence/native-ui-session-checkpoint-logs/incant-ui-session-graph.log.gz",
+      "sha256": "9b83fa45d425915143ef86c127d91d5dc709ccb2048a2fc11baee7a4c221c38b",
+      "uncompressed_sha256": "17278b883158f1788cba100f303613dc690b4bb3263e9800e230a2bcb73a1997",
+      "bytes": 155,
+      "outcome": "passed",
+      "tests": {
+        "passed": 0,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 0
+      }
+    },
+    {
+      "path": "docs/spikes/evidence/native-ui-session-checkpoint-logs/incant-ui-session-headless.log.gz",
+      "sha256": "f8881fd85d7e574e3b0074385ccfbaeab9f3f63ed5ff1c3bf2cf9f597eac6b16",
+      "uncompressed_sha256": "0f2dcc2f0a4459b80b8f51fe6e15784ecb91ee70a35457280b91188c1ca9c7c4",
+      "bytes": 4179,
+      "outcome": "passed",
+      "tests": {
+        "passed": 0,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 0
+      }
+    },
+    {
+      "path": "docs/spikes/evidence/native-ui-session-checkpoint-logs/incant-ui-session-modules.log.gz",
+      "sha256": "340a24a9b526ce0a8241fb6c6ee2f0333263247581cf2d72865db6ab2a08093f",
+      "uncompressed_sha256": "e301d00000340b7fc456dbe4e4c75094d1e1676e2a7f134b870c9bc5f7bf307d",
+      "bytes": 5527,
+      "outcome": "passed",
+      "tests": {
+        "passed": 0,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 0
+      }
+    },
+    {
+      "path": "docs/spikes/evidence/native-ui-session-checkpoint-logs/incant-ui-session-no-ui.log.gz",
+      "sha256": "8c33e8d46ab05796f25393d4b20089e1d69de11435c60daa0921a0c50ae3bbea",
+      "uncompressed_sha256": "34b67a5a26b40caecb37bb43b22225453d52044292945111c786f1ff8bdda6b1",
+      "bytes": 1136,
+      "outcome": "passed",
+      "tests": {
+        "passed": 0,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 0
+      }
+    },
+    {
+      "path": "docs/spikes/evidence/native-ui-session-checkpoint-logs/incant-ui-session-player.log.gz",
+      "sha256": "94a0085c718f83025756a490818e5591985ef7a865fd92cae6506370b85bd3c8",
+      "uncompressed_sha256": "1bf07f5e68dc5979b21ba6397bb85fffbc7e1439f7b4851bae0f9b3ae7dd5d77",
+      "bytes": 3521,
+      "outcome": "passed",
+      "tests": {
+        "passed": 9,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 2
+      }
+    },
+    {
+      "path": "docs/spikes/evidence/native-ui-session-checkpoint-logs/incant-ui-session-tests-001.log.gz",
+      "sha256": "9e36cf09211a593cab78d15fbaa4f62d05a8db921fc7e8f7f70fb5d57c00d32d",
+      "uncompressed_sha256": "8a72affe78c5afc7f6f194676d09e1771a9e1e8293b0d3d286185c415b631d8c",
+      "bytes": 2739,
+      "outcome": "superseded test compilation/assertion failure",
+      "tests": {
+        "passed": 0,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 0
+      }
+    },
+    {
+      "path": "docs/spikes/evidence/native-ui-session-checkpoint-logs/incant-ui-session-tests-002.log.gz",
+      "sha256": "035ba85c8bef627c3cac85df9e8a8b00fb64b4ef9339a6d15fcde27ef9a565d2",
+      "uncompressed_sha256": "8291b0125a896c03cd26afc6fe317a4b72700326d5881c8a163d45ce5a0c902a",
+      "bytes": 760,
+      "outcome": "superseded test compilation/assertion failure",
+      "tests": {
+        "passed": 0,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 0
+      }
+    },
+    {
+      "path": "docs/spikes/evidence/native-ui-session-checkpoint-logs/incant-ui-session-tests-003.log.gz",
+      "sha256": "8bd1543a06891bc7265c03bedc226effecf48ce37f68c460dbae63e8b8cebc3c",
+      "uncompressed_sha256": "ac49cb1cadc117b1786e941c524c79f91d8c71b643cceb8d84bb88662040643c",
+      "bytes": 39479,
+      "outcome": "superseded test compilation/assertion failure",
+      "tests": {
+        "passed": 349,
+        "failed": 1,
+        "ignored": 0,
+        "groups": 36
+      }
+    },
+    {
+      "path": "docs/spikes/evidence/native-ui-session-checkpoint-logs/incant-ui-session-tests-004.log.gz",
+      "sha256": "bd0a274efbea92e7ae1eb197015fbdde498fbf1db8474d89319c798f31650625",
+      "uncompressed_sha256": "f3b73005f0e3d6dbb7c4f4f8361b553d238976b83b57b2a8fe65b1ddeca486f7",
+      "bytes": 50485,
+      "outcome": "passed",
+      "tests": {
+        "passed": 449,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 55
+      }
+    },
+    {
+      "path": "docs/spikes/evidence/native-ui-session-checkpoint-logs/incant-ui-session-wasm.log.gz",
+      "sha256": "42b3686b677edd21740bf098731f2f831b50df4ad0244d7d575d3132f4977226",
+      "uncompressed_sha256": "a524e144296abc02a87046db244d06c90291a4c43633d3df3a612c830c0e9048",
+      "bytes": 1019,
+      "outcome": "passed",
+      "tests": {
+        "passed": 0,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 0
+      }
+    }
+  ],
+  "public_export": {
+    "command": "python3 tools/probes/native-ui-checkpoint-export.py /tmp/incant-ui-checkpoint-export-001 --binary /tmp/incant-font-atlas-target/ci/incant_headless",
+    "receipt": {
+      "path": "docs/spikes/evidence/native-ui-session-checkpoints-process.json",
+      "sha256": "9f344e74e5a28c000e50d0bb17065c0ffb22063377a4230aff9b54b6cb86f91c",
+      "original": "/tmp/incant-ui-checkpoint-export-001/result.json"
+    },
+    "project_receipt": {
+      "path": "docs/spikes/evidence/native-ui-session-checkpoints-project.json",
+      "sha256": "0c7302bd90431d59ceb35421a4eea581217de73141204bbcf25f1677200625c7",
+      "original": "/tmp/incant-ui-checkpoint-export-001/package/project-build.json"
+    },
+    "export_receipt": {
+      "path": "docs/spikes/evidence/native-ui-session-checkpoints-export.json",
+      "sha256": "7772132df262887d464aaca35bba0e93b495c2b2faafb21e5239580a13d22960",
+      "original": "/tmp/incant-ui-checkpoint-export-001/package/export.json"
+    },
+    "package_path": "/tmp/incant-ui-checkpoint-export-001/package",
+    "player_bytes": 9119696,
+    "player_sha256": "697bb080d39dde8b7c152bad74ba643b7c2aae5768029405383f183677c01495",
+    "fresh_successes_after_source_map_deletion": 4,
+    "typed_refusals": 7,
+    "extra_exporter_smoke_before_authoring_and_map_deletion": 1,
+    "final_checkpoint_sha256": "6d0ba9bf9c56786b89e16f1d71e737cab08815d43baf53136738d35e41041932",
+    "middle_checkpoint_sha256": "37f5913e3d8bdfefa889b891043e9df97e852fa5d2bdcd355fb812f28613c232",
+    "pcm_concatenation_equal": true,
+    "authoring_absent": true,
+    "external_js_maps_absent": true,
+    "normal_graph_has_no_authoring_or_wasmtime": true,
+    "source_compiler_symbols_audited_by_exporter": true,
+    "source_parsing_on_player_startup": false
+  },
+  "independent_source_review": {
+    "path": "docs/spikes/evidence/native-ui-session-checkpoints-review.json",
+    "sha256": "038b298379cf61851c8f84144b5b1bbb052e9ed2b5ad33ba997b6bc0508f1cc2",
+    "findings": []
+  },
+  "terminal": {
+    "checked_utc": "2026-10-12T06:04:17.467020+00:00",
+    "owned_test_clippy_export_handles_reaped": true,
+    "no_native_player_or_headless_process": true,
+    "no_gpu_or_native_window_launched": true
+  },
+  "prior_failures": [
+    "tests-001: missing Rust path attributes for nested test modules; test-only correction",
+    "tests-002: selection assertion compared Range to typed Option<Selection>; test-only correction",
+    "tests-003: old unsupported world-version sentinel 7 became supported; changed sentinel to 8; final full suite passed"
+  ],
+  "limits": [
+    "Explicit opt-in typed script persistence; closures/globals and arbitrary external state are not checkpointed.",
+    "Active preedit refuses, pointer capture is discarded, physical input/router/context reset neutral.",
+    "Physics/audio/static/development-module save adapters remain unsupported.",
+    "Window/GPU CLI checkpoint routes remain unsupported; CPU --package route is exercised.",
+    "Checksums and origin/program identities are compatibility/corruption checks, not authentication.",
+    "PCM and checkpoint publication are not a multi-file atomic transaction.",
+    "macOS CPU evidence only; no rendered/native IME/phone/performance or complete Game UI/full-save gate.",
+    "Prior native-ui-export full mixed-audio proof not rerun here; its assertion now names the still-required audio refusal."
+  ],
+  "final_independent_review": {
+    "path": "docs/spikes/evidence/native-ui-session-checkpoints-final-review.json",
+    "sha256": "9f8138ddcdf97d0f2f1288728136f0f55c43abe4a4b3e015079244e03dd4f827",
+    "result": "accepted bounded source and actual exported CPU proof; no findings"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "time": "2026-10-12T14:53:52.792721+00:00",
+  "base": "8a329939d3fc43095001a4bf3cfb5853ec86944b",
+  "source_hashes": {
+    "tools/probes/native-wasm-physics-export.py": "bfb5d3baa6ffaf02f807c8c432689244307c1ebe86e0656b9b9b0c6b441ade36",
+    "tools/probes/native-wasm-physics-export/behavior.rs": "bf8374956da896902960634bf80be86b9d6835ff2ca5a6ea07bed669131b0814",
+    "crates/incant_runtime/examples/physics_package_oracle.rs": "92a106f5a20572d8f749c7d1e6a2716cbfc692374c0c80171ed2212f885715f0"
+  },
+  "scope": "Public authored Rust/Wasm physics ordinary package proof only; no production/ABI/session/world codec changes.",
+  "delta": "Probe-only correction after proof001 terminal: separate execution/transaction ledgers, successful same replay routes, exact observed runtime error diagnostics, no child HOME override. Native oracle and guest unchanged."
+}

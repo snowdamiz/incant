@@ -77,25 +77,3 @@ handoffs/0057-native-window-game-ui/result.md with checks, your visual judgment,
 image links, exact limitations and proposed CPU contracts. Stop and reap all
 owned player/helper/build processes, remove only your temporary node_modules
 link if used, retain useful caches and record release of the GPU/native lease.
-
-## Priority recovery and cross-platform failure — 2026-10-12
-
-The host restarted; previous /tmp files, build caches and owned processes are gone.
-Inspect and preserve your existing source edits and tools, then finish this packet.
-Store NEW proof artifacts and logs under ~/.codex/incant-evidence/0057 instead of
-/tmp, and the exclusive GPU/native cache under ~/.codex/incant-native-target.
-No old missing process or result may be treated as a passed check.
-
-First diagnose the actual Linux full-checkpoint failures in the accepted 0056
-UI renderer tests at ui_draw_tests.rs:437 and :545: scale2 comparison worst7,
-275 channels beyond1; nested clip worst2, one channel beyond1. Root's integration
-owner retains the remote failure log and will provide it. Compare the intended
-portable rendering behavior against the independent oracle, backend precision and
-sampling rules. Correct a genuine rendering or reference-test defect at its source.
-Do not simply widen thresholds to force a pass; any justified numerical tolerance
-must state why it preserves the tested geometry/color/clip contract and demonstrate
-that actual wrong geometry, clipping and opacity still fail. Avoid new CI runs;
-return a focused source patch and local Metal/numeric review plus honest Linux
-verification limitations to root for the next frozen checkpoint. Continue the real
-native-window acceptance scope afterward. Root owns CPU geometry-receipt Windows
-checks; do not edit tools/probes/render-check.py.

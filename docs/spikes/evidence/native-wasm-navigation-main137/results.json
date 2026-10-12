@@ -1,0 +1,188 @@
+[
+  {
+    "name": "native-tests",
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--offline",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_runtime"
+    ],
+    "exit": 0,
+    "seconds": 70.43629295800929,
+    "log": "/tmp/incant-navigation-main137-checks/native-tests.log",
+    "sha256": "4f137c5f21ad62bb84c55a1f70e2b0eaedccea7cf42aca800db333affe2dfb53"
+  },
+  {
+    "name": "native-clippy",
+    "command": [
+      "./tools/cargo",
+      "clippy",
+      "--locked",
+      "--offline",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_runtime",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit": 0,
+    "seconds": 8.421529459010344,
+    "log": "/tmp/incant-navigation-main137-checks/native-clippy.log",
+    "sha256": "29867a8cbc1a06cfd6f14463a07f19e00502e948ca118928e24d606a49d1a893"
+  },
+  {
+    "name": "actual-hosts",
+    "command": [
+      "python3",
+      "tools/probes/shipping-wasm2c.py",
+      "/tmp/incant-navigation-main137-conformance",
+      "--conformance-only",
+      "--profile",
+      "ci",
+      "--rustup",
+      "/opt/homebrew/bin/rustup"
+    ],
+    "exit": 0,
+    "seconds": 167.7896431669942,
+    "log": "/tmp/incant-navigation-main137-checks/actual-hosts.log",
+    "sha256": "574af3621e3ea33f4f833844525fcf843cf3d6fd0f8b4c4cda3bea2cebb4805b"
+  },
+  {
+    "name": "wasm32",
+    "command": [
+      "./tools/cargo",
+      "check",
+      "--locked",
+      "--offline",
+      "-j2",
+      "-p",
+      "incant-module",
+      "-p",
+      "incant_wasm_abi",
+      "-p",
+      "incant_runtime",
+      "--target",
+      "wasm32-unknown-unknown"
+    ],
+    "exit": 0,
+    "seconds": 1.1983872919809073,
+    "log": "/tmp/incant-navigation-main137-checks/wasm32.log",
+    "sha256": "07672d3b2a57544894d811e4af65290743ff1781a8532ba7bcd44da1a024999d"
+  },
+  {
+    "name": "graph",
+    "command": [
+      "python3",
+      "tools/check_runtime_dependencies.py",
+      "incant_wasm_runtime",
+      "incant_runtime",
+      "incant_script",
+      "incant_game_runtime",
+      "incant_game_player",
+      "--features",
+      "incant_game_player/static-module"
+    ],
+    "exit": 0,
+    "seconds": 0.3654192909889389,
+    "log": "/tmp/incant-navigation-main137-checks/graph.log",
+    "sha256": "8c07445a004f1fc2c971002478187aeb15e4cb669a2fee63611d743a3b92cd78"
+  },
+  {
+    "name": "tools",
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools/tests"
+    ],
+    "exit": 0,
+    "seconds": 20.165456208982505,
+    "log": "/tmp/incant-navigation-main137-checks/tools.log",
+    "sha256": "fa2ea789d21e316c0e10c75dc222b83a88835d0961c130991826c311a7ab9901"
+  },
+  {
+    "name": "node",
+    "command": [
+      "node",
+      "--test",
+      "tools/tests/native_script.test.mjs"
+    ],
+    "exit": 0,
+    "seconds": 4.017651541013038,
+    "log": "/tmp/incant-navigation-main137-checks/node.log",
+    "sha256": "e07ef06f117d0b612101a9858ff0b749d42fc6edc87537dc982fcb4396bb8a6f"
+  },
+  {
+    "name": "wasm-sdk",
+    "command": [
+      "python3",
+      "tools/generate_wasm_sdk.py",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.1459750839858316,
+    "log": "/tmp/incant-navigation-main137-checks/wasm-sdk.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "sdk",
+    "command": [
+      "node",
+      "tools/generate_sdk.mjs",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.07951312500517815,
+    "log": "/tmp/incant-navigation-main137-checks/sdk.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "bridge",
+    "command": [
+      "node",
+      "tools/build_bridge.mjs",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.0833250000141561,
+    "log": "/tmp/incant-navigation-main137-checks/bridge.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "fmt",
+    "command": [
+      "./tools/cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.9189112919848412,
+    "log": "/tmp/incant-navigation-main137-checks/fmt.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "conventions",
+    "command": [
+      "python3",
+      "tools/generate_conventions.py",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.046194083988666534,
+    "log": "/tmp/incant-navigation-main137-checks/conventions.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

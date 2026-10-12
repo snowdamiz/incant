@@ -1,0 +1,27 @@
+{
+  "name": "wrong-audio-clock",
+  "argv": [
+    "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-main145-001/public-export/package/player/incant_game_player",
+    "--package",
+    "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-main145-001/public-export/package/player/data",
+    "--ticks",
+    "1",
+    "--output",
+    "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-main145-001/public-export/wrong-audio-clock.pcm",
+    "--ui-viewport",
+    "600x300",
+    "--load-checkpoint",
+    "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-main145-001/public-export/wrong-audio-clock.save"
+  ],
+  "cwd": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-main145-001/public-export/package/player",
+  "environment_keys": [
+    "PATH",
+    "TEMP",
+    "TMP",
+    "TMPDIR"
+  ],
+  "returncode": 1,
+  "stdout": "",
+  "stderr": "Error: Checkpoint(Audio(Invalid(\"audio/world sample clock\")))\n",
+  "matched_diagnostic": "Error: Checkpoint(Audio(Invalid(\"audio/world sample clock\")))"
+}

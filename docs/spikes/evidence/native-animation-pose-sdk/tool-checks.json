@@ -1,0 +1,88 @@
+[
+  {
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools/tests"
+    ],
+    "exit_code": 0,
+    "log": "check-0.log",
+    "sha256": "e1326f07ef2c42280f5447adfad10e4f824d2f26a416ce6a6aef014740d1f47e"
+  },
+  {
+    "command": [
+      "python3",
+      "tools/generate_wasm_sdk.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "log": "check-1.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "command": [
+      "python3",
+      "tools/generate_conventions.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "log": "check-2.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit_code": 0,
+    "log": "check-3.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "command": [
+      "node",
+      "--test",
+      "tools/tests/native_script.test.mjs"
+    ],
+    "exit_code": 0,
+    "log": "check-4.log",
+    "sha256": "bda3c30f2baf943274aa7c85be5146d185fd7cb5dbc3774f1dd03a50aabd2148"
+  },
+  {
+    "command": [
+      "python3",
+      "tools/check_runtime_dependencies.py",
+      "incant_runtime",
+      "incant_wasm_runtime",
+      "incant_wasm_player",
+      "incant_game_player",
+      "--features",
+      "incant_game_player/static-module"
+    ],
+    "exit_code": 0,
+    "log": "check-5.log",
+    "sha256": "4819cd767b786d453665aa411520368623f23374d113cb0595aff968e31ea7e4"
+  },
+  {
+    "command": [
+      "./tools/cargo",
+      "tree",
+      "--locked",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "static-module",
+      "--edges",
+      "normal",
+      "--prefix",
+      "none"
+    ],
+    "exit_code": 0,
+    "log": "check-6.log",
+    "sha256": "2d77886b2554a1f46ee9950a3962152c324b85a20a87680e4b8f6dd915606943"
+  }
+]

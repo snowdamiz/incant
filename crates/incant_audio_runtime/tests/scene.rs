@@ -661,7 +661,7 @@ fn master_suspend_freezes_static_and_streamed_cursors_without_resuming_paused_so
     let temp = tempfile::tempdir().unwrap();
     let key = tone(&temp);
     for streaming in [false, true] {
-        let world = world(vec![bus(), source(streaming)]);
+        let mut world = world(vec![bus(), source(streaming)]);
         let mut control = SceneAudio::offline(&world, vec![binding(&temp, &key)], 44100).unwrap();
         let mut host = SceneAudio::offline(&world, vec![binding(&temp, &key)], 44100).unwrap();
         assert_eq!(render(&mut host, 512), render(&mut control, 512));
@@ -677,8 +677,10 @@ fn master_suspend_freezes_static_and_streamed_cursors_without_resuming_paused_so
         assert_eq!(&resumed[256..], &expected[256..]);
         let mut paused = source(streaming);
         paused.source.as_mut().unwrap().playing = false;
-        let paused_world = self::world(vec![bus(), paused]);
-        host.sync(&paused_world).unwrap();
+        let paused_world = self::world(vec![bus(), paused.clone()]);
+        assert!(host.sync(&paused_world).is_err()); // No cross-world owner reuse.
+        edit(&mut world, paused);
+        host.sync(&world).unwrap();
         render(&mut host, 256);
         host.set_suspended(true).unwrap();
         render(&mut host, 256);

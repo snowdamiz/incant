@@ -1,0 +1,130 @@
+[
+  {
+    "name": "tests",
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--offline",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_assets",
+      "-p",
+      "incant_assets_runtime",
+      "-p",
+      "incant_runtime"
+    ],
+    "exit": 0,
+    "seconds": 248.21481429200003,
+    "sha256": "828abd28611e6742b046ebc5b8611ff1935e8680f67f75346ba9728d2f72a414"
+  },
+  {
+    "name": "clippy",
+    "command": [
+      "./tools/cargo",
+      "clippy",
+      "--locked",
+      "--offline",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_assets",
+      "-p",
+      "incant_assets_runtime",
+      "-p",
+      "incant_runtime",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit": 0,
+    "seconds": 28.977880416000062,
+    "sha256": "234a80374d440b8530b1d4ac84758d9f981bf4e04de80508f4ee41cbad9e3ab2"
+  },
+  {
+    "name": "wasm",
+    "command": [
+      "./tools/cargo",
+      "check",
+      "--locked",
+      "--offline",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_runtime",
+      "-p",
+      "incant_assets_runtime",
+      "--features",
+      "incant_assets_runtime/visual",
+      "--target",
+      "wasm32-unknown-unknown"
+    ],
+    "exit": 0,
+    "seconds": 1.6980047080000986,
+    "sha256": "67a102eabc95d010476bac56ef4c23fdfb0088aa176d30f5a7da6fcd4c7068bb"
+  },
+  {
+    "name": "graph-runtime",
+    "command": [
+      "python3",
+      "tools/check_runtime_dependencies.py",
+      "incant_runtime"
+    ],
+    "exit": 0,
+    "seconds": 0.4207068339997022,
+    "sha256": "8f77a37ec4738c7752086111a5ed5a7dfc5454816ab0b7123c6dbdbac4cfb5a1"
+  },
+  {
+    "name": "graph-assets",
+    "command": [
+      "python3",
+      "tools/check_runtime_dependencies.py",
+      "incant_assets_runtime",
+      "--features",
+      "incant_assets_runtime/visual"
+    ],
+    "exit": 0,
+    "seconds": 0.3387858330002018,
+    "sha256": "466c27957bec6177e21911180caffd16c9a78482761e9fad8fb9622eb2023499"
+  },
+  {
+    "name": "fmt",
+    "command": [
+      "./tools/cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.976149333000194,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "conventions",
+    "command": [
+      "python3",
+      "tools/generate_conventions.py",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.036931707999883656,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "diff",
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.019900000000234286,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

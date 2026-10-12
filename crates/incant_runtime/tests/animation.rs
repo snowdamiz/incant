@@ -415,14 +415,14 @@ fn localized_v4_restore_keeps_legacy_and_wrong_binding_refusals_atomic() {
     assert_eq!(live.save_bytes().unwrap(), saved);
     assert_eq!(live.incarnation(), incarnation);
     let mut future = saved.clone();
-    future[8..12].copy_from_slice(&7u32.to_le_bytes());
+    future[8..12].copy_from_slice(&9u32.to_le_bytes());
     let mut h = Sha256::new();
     h.update(&future[..32]);
     h.update(&future[64..]);
     future[32..64].copy_from_slice(&h.finalize());
     assert!(matches!(
         live.restore_bytes(&future),
-        Err(SaveError::Version(7))
+        Err(SaveError::Version(9))
     ));
     assert_eq!(live.save_bytes().unwrap(), saved);
     assert_eq!(live.incarnation(), incarnation);

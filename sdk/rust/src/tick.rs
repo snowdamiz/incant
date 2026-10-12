@@ -58,6 +58,169 @@ impl<'tick> Tick<'tick> {
     fn ready(&mut self) -> Result<()> {
         self.check(Ok(()))
     }
+    /// Up to 64 heterogeneous queries over the committed solvers. Results retain
+    /// input order and borrow only result scratch, never the Tick or native data.
+    pub fn query_physics<'a>(
+        &mut self,
+        queries: &[crate::physics::Query],
+        request_scratch: &mut [u8],
+        result_scratch: &'a mut [u8],
+    ) -> Result<crate::physics::Results<'a>> {
+        self.ready()?;
+        self.check(if queries.len() <= abi::PHYSICS_MAX_BATCH {
+            Ok(())
+        } else {
+            Err(Error::Bounds)
+        })?;
+        let mut rows = [crate::physics::EMPTY; abi::PHYSICS_MAX_BATCH];
+        for (to, from) in rows.iter_mut().zip(queries) {
+            *to = from.wire();
+        }
+        let len = self.check(
+            abi::physics::encode_batch(&rows[..queries.len()], request_scratch)
+                .map_err(crate::physics::error),
+        )?;
+        // SAFETY: the complete initialized request is copied synchronously.
+        let len = unsafe {
+            raw::incant_physics_v1_query_batch(
+                self.epoch,
+                request_scratch.as_ptr() as usize as i32,
+                len as i32,
+            )
+        };
+        let len = self.read_physics_reply(len, result_scratch, abi::PHYSICS_MAX_RESULT_BYTES)?;
+        let result = self.check(
+            abi::physics::decode_results(&result_scratch[..len]).map_err(crate::physics::error),
+        )?;
+        self.check(
+            if result.len() == queries.len()
+                && result.iter().zip(&rows).all(|((r, _), q)| r.kind == q.kind)
+            {
+                Ok(())
+            } else {
+                Err(Error::Malformed)
+            },
+        )?;
+        Ok(crate::physics::Results(result))
+    }
+    /// Complete sorted enter/exit events from the last committed step. Reading
+    /// is nondestructive, bounded, and shares the native query/transfer quotas.
+    pub fn physics_events<'a>(
+        &mut self,
+        dimension: crate::physics::Dimension,
+        scratch: &'a mut [u8],
+    ) -> Result<crate::physics::Events<'a>> {
+        self.ready()?;
+        // SAFETY: scalar selector only; the host retains its copied reply.
+        let len = unsafe { raw::incant_physics_v1_trigger_events(self.epoch, dimension.wire()) };
+        let len = self.read_physics_reply(len, scratch, abi::PHYSICS_MAX_EVENT_BYTES)?;
+        let result = self
+            .check(abi::physics::decode_events(&scratch[..len]).map_err(crate::physics::error))?;
+        self.check(if result.dimension as i32 == dimension.wire() {
+            Ok(())
+        } else {
+            Err(Error::Malformed)
+        })?;
+        Ok(crate::physics::Events(result))
+    }
+    fn read_physics_reply(&mut self, len: i32, scratch: &mut [u8], limit: usize) -> Result<usize> {
+        let len = self.snapshot_length(len, scratch.len(), limit)?;
+        // SAFETY: checked initialized destination prefix; no native pointer.
+        let actual = unsafe {
+            raw::incant_physics_v1_read_result(
+                self.epoch,
+                scratch.as_mut_ptr() as usize as i32,
+                len as i32,
+            )
+        };
+        self.check(if usize::try_from(actual).ok() == Some(len) {
+            Ok(len)
+        } else {
+            Err(Error::Malformed)
+        })
+    }
+    /// Find an owned-copy path on the active scene's committed navmesh. A miss
+    /// returns None; invalid owners/requests and exhausted budgets reject the tick.
+    pub fn find_path<'a>(
+        &mut self,
+        owner: &EntityId,
+        request: crate::navigation::PathRequest,
+        scratch: &'a mut [u8],
+    ) -> Result<Option<crate::navigation::Path<'a>>> {
+        self.ready()?;
+        let bytes = self.check(
+            abi::navigation_paths::encode_path(abi::PathRequest {
+                owner: owner.0,
+                start: request.start,
+                end: request.end,
+                snap_distance: request.snap_distance,
+                max_visited: request.max_visited,
+                reserved: 0,
+            })
+            .map_err(crate::navigation::error),
+        )?;
+        // SAFETY: the initialized fixed frame is copied synchronously.
+        let len = unsafe {
+            raw::incant_navigation_v1_find_path(
+                self.epoch,
+                bytes.as_ptr() as usize as i32,
+                bytes.len() as i32,
+            )
+        };
+        let len = self.read_path_reply(len, scratch, abi::PATH_MAX_RESULT_BYTES)?;
+        self.check(
+            abi::navigation_paths::decode_path_result(&scratch[..len])
+                .map_err(crate::navigation::error),
+        )
+    }
+    /// Adjacent grid-cell route with exact integer cost and captured generation.
+    pub fn find_grid_path<'a>(
+        &mut self,
+        owner: &EntityId,
+        request: crate::navigation::GridPathRequest,
+        scratch: &'a mut [u8],
+    ) -> Result<Option<crate::navigation::GridPath<'a>>> {
+        self.ready()?;
+        let bytes = self.check(
+            abi::navigation_paths::encode_grid(abi::GridPathRequest {
+                owner: owner.0,
+                start: request.start.map(u32::from),
+                end: request.end.map(u32::from),
+                flags: u32::from(request.diagonal),
+                max_expansions: request.max_expansions,
+            })
+            .map_err(crate::navigation::error),
+        )?;
+        // SAFETY: the initialized fixed frame is copied synchronously.
+        let len = unsafe {
+            raw::incant_navigation_v1_find_grid_path(
+                self.epoch,
+                bytes.as_ptr() as usize as i32,
+                bytes.len() as i32,
+            )
+        };
+        let len = self.read_path_reply(len, scratch, abi::GRID_PATH_MAX_RESULT_BYTES)?;
+        self.check(
+            abi::navigation_paths::decode_grid_result(&scratch[..len])
+                .map_err(crate::navigation::error),
+        )
+    }
+    fn read_path_reply(&mut self, len: i32, scratch: &mut [u8], limit: usize) -> Result<usize> {
+        let len = self.snapshot_length(len, scratch.len(), limit)?;
+        // SAFETY: checked initialized destination prefix; host validates whole range.
+        let actual = unsafe {
+            raw::incant_navigation_v1_read_path(
+                self.epoch,
+                scratch.as_mut_ptr() as usize as i32,
+                len as i32,
+            )
+        };
+        self.check(if usize::try_from(actual).ok() == Some(len) {
+            Ok(len)
+        } else {
+            Err(Error::Malformed)
+        })
+    }
     /// Compute sorted local-avoidance proposals using this callback's fixed dt.
     /// Aggregate work is bounded to 128 agents, 128 obstacle edges and 32 calls
     /// per update. Returned rows borrow only the caller's result scratch.
@@ -488,7 +651,33 @@ impl<'tick> Tick<'tick> {
         }
         self.check(FlipbookSnapshot::parse(&scratch[..len]))
     }
-    /// Copy the start-of-callback playback snapshot. Queued controls stay private
+    /// Copy the complete start-of-callback local pose with explicit interpolation
+    /// semantics and scene identity. Returned samples borrow only caller scratch.
+    /// Queued controls remain invisible until the entire callback commits.
+    pub fn animation_poses<'a>(
+        &mut self,
+        scratch: &'a mut [u8],
+    ) -> Result<crate::AnimationPoseSnapshot<'a>> {
+        self.ready()?;
+        // SAFETY: scalar length query followed by a checked initialized buffer.
+        let len = unsafe { raw::incant_animation_v4_snapshot_len(self.epoch) };
+        let len = self.snapshot_length(len, scratch.len(), abi::ANIMATION_V4_MAX_BYTES)?;
+        let actual = unsafe {
+            raw::incant_animation_v4_read_snapshot(
+                self.epoch,
+                scratch.as_mut_ptr() as usize as i32,
+                len as i32,
+            )
+        };
+        self.check(if usize::try_from(actual).ok() == Some(len) {
+            Ok(())
+        } else {
+            Err(Error::Malformed)
+        })?;
+        self.check(crate::AnimationPoseSnapshot::parse(&scratch[..len]))
+    }
+    /// Copy the v3 start-of-callback playback snapshot; weighted trees require
+    /// animation_poses instead. Queued controls stay private
     /// until the entire callback commits; the returned data borrows only scratch.
     pub fn animations<'a>(
         &mut self,

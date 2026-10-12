@@ -1,0 +1,426 @@
+{
+  "at": "2026-10-12T05:36:52.778255+00:00",
+  "base": "52bb80154ab91edfe49214b02221247f371ed717",
+  "branch": "codex/native-wasm-navigation-paths",
+  "plan_sha256": "c60adc7457e6f5929b3430876f6b8ea02acffce5bf55fbaae9090933fe4aab6c",
+  "cargo_lock_sha256": "77809a6a0b2ee2f932a12c62abf242bb109885ed320f1f26d263c5b82c7e72c1",
+  "source_hashes": {
+    "crates/incant_runtime/src/lib.rs": "8a40ffb82a12ac6f2955a087d83ef07d848df394d25c27ae23772239050f2228",
+    "crates/incant_runtime/src/navigation_runtime.rs": "9945df566a125c0216d8a55635eade907f49943df7454eb5a3a6c40e3a1544ee",
+    "crates/incant_wasm_abi/src/lib.rs": "41518c2c4341905259f4f18fba8594dbdca38e20dc6af3548052728028da6b0f",
+    "crates/incant_wasm_abi/src/navigation_paths.rs": "b4cad03e82af1644bf4b6ad536e9addf298e8da8268ffa5b4d5e98320d5a3c87",
+    "crates/incant_wasm_dev/src/generated.rs": "64d4de13079b188e3fbad4e73432f298fb416068eff430309fd6f01fc18748f5",
+    "crates/incant_wasm_runtime/c/generated.inc": "e2e7c633c3404ab754298548dbd17bca03577e5db16d9ab236ed1a169b999953",
+    "crates/incant_wasm_runtime/src/capability.rs": "d2b5f4db698cefc078683f37675c030607d06afeb3b6b153c9512a1304c54643",
+    "crates/incant_wasm_runtime/src/generated.rs": "b691caa19545265751ec2e8ae20c0cba9cd0fd6e5a0cacee6549046bd569f983",
+    "crates/incant_wasm_runtime/src/input_tags.rs": "34886b96b777ac59ae48318607898419b8daa0354d75f3a53662a59b4c20feb1",
+    "crates/incant_wasm_runtime/src/lib.rs": "6db89a6c9facb661da725387637331028f70c32ee086a2cf6756cc8131f95fb0",
+    "crates/incant_wasm_runtime/src/navigation_paths.rs": "97f87251189e2eddeb2f751333f71d7cabfa3f3203659870bbc99948ab7d9cfa",
+    "crates/incant_wasm_runtime/src/steering.rs": "46e80454e85518532580a82cde5def0351b80c4507801c3036dd30cfea4cfb7e",
+    "sdk/abi/native-v1.json": "e510865a706e09e440f82003d36def13b9daca92a8c1da7b7e35cd86f0d5d7ac",
+    "sdk/rust/src/lib.rs": "777e8d58ab754922ee0dce2388639b8d74e83a901ef248ff2d7d05d5fbf68060",
+    "sdk/rust/src/navigation.rs": "09fe00fa737c1aa4e066a25b63c9a0be2fc3c108188fc3b288faffa6c7698de4",
+    "sdk/rust/src/raw.rs": "fbffa7124f47fae6041e99895185afa87f6702ea9ade5bd6f56b5e8b68825c34",
+    "sdk/rust/src/tick.rs": "b682c2ccbbc3e81609cb1ff2798166ccff23c322ec59e007e16668165a3481cd",
+    "tools/generate_wasm_sdk.py": "976a337c9464e55685aa76450161610278f049a3e113361ebc383714d251f1cf",
+    "tools/wasm_abi.py": "ba0e21964558dadf0437ecf3c37430608cdf905655070b5546a6229b90e4cde6"
+  },
+  "test_probe_hashes": {
+    "tools/probes/shipping-wasm2c.py": "9b2ac1f31450348172fa95d6f45b38b649213d583169f6585fbaa0ae95894ddf",
+    "tools/tests/test_wasm_sdk.py": "40d5a993c4d9e1adb0b26cf246ae420e7e672a486b1424d4d0fa5d1a8b5dd103",
+    "crates/incant_runtime/tests/navigation_snapshots.rs": "6219e014849914f3defcc0080dc15269baa6db2f35ce85a0d7de32050a772dc7",
+    "crates/incant_wasm_abi/tests/navigation_paths.rs": "da4eeaa415d1f393f76b5ef696fb71862278f076f8d099d7aa8b80c8970e844f",
+    "crates/incant_wasm_dev/tests/navigation_paths_parity.rs": "bc2575d61bda51dd8216a21b113d4b1830ca7b3b4e0434e5a7c415bc3b13f8cc",
+    "crates/incant_wasm_runtime/fixtures/navigation-paths.wat": "25bc169eb5d0bbae43c8f1487d493cb05d95b297bc31dd2c944d43a7b63a49d2",
+    "crates/incant_wasm_runtime/tests/navigation_paths.rs": "27f6b383527d69da9ec390b144e4a7f284f0bc2fdf21341d62287f0e521f6ada",
+    "sdk/rust/fixtures/navigation_paths_failure.rs": "5a0d79ed28b1cd2b11739f9ee8ea26541447898e0603a751e2f7d0822547c980",
+    "sdk/rust/samples/navigation_paths.rs": "89b98d14984d644954dcb2a5728a324f15aae30d65019a0528267173c5a93c20"
+  },
+  "checks": {
+    "actual_hosts": {
+      "passed": 369,
+      "groups": 64,
+      "failed": 0,
+      "ignored": 0,
+      "wasmtime": "49.0.2",
+      "wasm2c": "WABT1.0.42"
+    },
+    "native_runtime": {
+      "passed": 190,
+      "groups": 29,
+      "failed": 0,
+      "ignored": 0
+    },
+    "actual_host_all_target_clippy": true,
+    "native_runtime_all_target_clippy": true,
+    "existing_development_processes": 3,
+    "python_tests": 232,
+    "python_skipped": 4,
+    "node_tests": 22,
+    "runtime_and_sdk_wasm32": true,
+    "generated_registry_and_conventions": true,
+    "fmt_and_diff": true,
+    "authoring_free_runtime_graph_with_static_player": true,
+    "shipping_graph_excludes_wasmtime_and_cook": true
+  },
+  "prepared_modules": 125,
+  "prepared_files_verified_before_cleanup": 626,
+  "navigation_guest_modules": 16,
+  "navigation_retained_artifacts_verified": 80,
+  "navigation_guest_source_copies_verified": 3,
+  "proof": {
+    "root": "/tmp/incant-wasm-navigation-paths-host-proof-003",
+    "private_build_cleanup": "TemporaryDirectory removed after conformance. Retained navigation-guests are intentionally preserved for independent audit. This is not an ordinary shipping package deletion proof.",
+    "report": "docs/spikes/evidence/native-wasm-navigation-paths/conformance-result.json"
+  },
+  "commands": {
+    "environment": {
+      "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+      "CARGO_TARGET_DIR": "/tmp/incant-agent-font-target"
+    },
+    "conformance": [
+      "python3",
+      "tools/probes/shipping-wasm2c.py",
+      "/tmp/incant-wasm-navigation-paths-host-proof-003",
+      "--rustup",
+      "/opt/homebrew/bin/rustup",
+      "--profile",
+      "ci",
+      "--conformance-only"
+    ],
+    "nested_actual_host_commands": [
+      {
+        "command": [
+          "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/tools/cargo",
+          "test",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant-module",
+          "-p",
+          "incant_wasm_abi",
+          "-p",
+          "incant_wasm_runtime",
+          "-p",
+          "incant_wasm_cook",
+          "-p",
+          "incant_wasm_dev",
+          "-p",
+          "incant_wasm_player",
+          "-p",
+          "incant_game_runtime",
+          "-p",
+          "incant_script",
+          "--features",
+          "incant_wasm_dev/static-conformance,incant_wasm_player/fixture,incant_script/compiler",
+          "--locked"
+        ],
+        "exit_code": 0,
+        "log": "conformance-0.log",
+        "sha256": "a70ef3036a310613a376d98898667d2df7d462b92a296a6129c4ec08976c7777"
+      },
+      {
+        "command": [
+          "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/tools/cargo",
+          "clippy",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant-module",
+          "-p",
+          "incant_wasm_abi",
+          "-p",
+          "incant_wasm_runtime",
+          "-p",
+          "incant_wasm_cook",
+          "-p",
+          "incant_wasm_dev",
+          "-p",
+          "incant_wasm_player",
+          "-p",
+          "incant_game_runtime",
+          "-p",
+          "incant_script",
+          "--features",
+          "incant_wasm_dev/static-conformance,incant_wasm_player/fixture,incant_script/compiler",
+          "--all-targets",
+          "--locked",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "exit_code": 0,
+        "log": "conformance-1.log",
+        "sha256": "c4fefe783c28a4768ffba21fbe4554f6eee167e48aa945b46547f0ca11f7a58b"
+      },
+      {
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/tools/probes/development-wasm.py",
+          "/private/tmp/incant-wasm-navigation-paths-host-proof-003/development",
+          "--rustup",
+          "/opt/homebrew/bin/rustup",
+          "--static-conformance",
+          "--profile",
+          "ci"
+        ],
+        "exit_code": 0,
+        "log": "conformance-2.log",
+        "sha256": "4fd666a849e5a1e4d18166fffeb88edb06e38ffaf2254aa011228584343d1ba5"
+      }
+    ],
+    "native_tests": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_runtime"
+    ],
+    "native_clippy": [
+      "./tools/cargo",
+      "clippy",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_runtime",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "wasm32": [
+      "./tools/cargo",
+      "check",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "--target",
+      "wasm32-unknown-unknown",
+      "-p",
+      "incant_runtime",
+      "-p",
+      "incant-module"
+    ],
+    "graph": [
+      "python3",
+      "tools/check_runtime_dependencies.py",
+      "incant_runtime",
+      "incant_wasm_runtime",
+      "incant_wasm_player",
+      "incant_game_runtime",
+      "incant_game_player",
+      "--features",
+      "incant_game_player/static-module"
+    ],
+    "tools": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools/tests"
+    ],
+    "node": [
+      "node",
+      "--test",
+      "tools/tests/native_script.test.mjs"
+    ],
+    "other": [
+      [
+        "python3",
+        "tools/generate_wasm_sdk.py",
+        "--check"
+      ],
+      [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      [
+        "git",
+        "diff",
+        "--check"
+      ]
+    ],
+    "explicit_shipping_graph": {
+      "metadata": [
+        "./tools/cargo",
+        "metadata",
+        "--locked",
+        "--format-version",
+        "1",
+        "--features",
+        "incant_game_player/static-module"
+      ],
+      "method": "For each of four recorded runtime roots, traverse every normal dependency edge (dep_kind null), retaining all target-specific normal edges; assert each recorded forbidden package absent. Exact closure names retained in shipping-graph.json."
+    }
+  },
+  "review": "Root independently accepted frozen source002 and final actual-host evidence for scoped integration. Root reverified retained artifacts and logs; the 626 prepared-file validation is the recorded pre-cleanup probe check, not a fresh root read after cleanup.",
+  "logs": {
+    "docs/spikes/evidence/native-wasm-navigation-paths/conformance-0.log.gz": {
+      "sha256": "7458c3d7b4924571ccd87edd6348687d8d1b67e497810b3c8f835739dbf3c6c0",
+      "uncompressed_sha256": "a70ef3036a310613a376d98898667d2df7d462b92a296a6129c4ec08976c7777",
+      "source": "/tmp/incant-wasm-navigation-paths-host-proof-003/conformance-0.log"
+    },
+    "docs/spikes/evidence/native-wasm-navigation-paths/conformance-1.log.gz": {
+      "sha256": "4a51886929a7cd7fc04d0b6f8d0bdefca7ca99b8e4e952e14b9ba6c56a634e38",
+      "uncompressed_sha256": "c4fefe783c28a4768ffba21fbe4554f6eee167e48aa945b46547f0ca11f7a58b",
+      "source": "/tmp/incant-wasm-navigation-paths-host-proof-003/conformance-1.log"
+    },
+    "docs/spikes/evidence/native-wasm-navigation-paths/conformance-2.log.gz": {
+      "sha256": "fd6ad253c388e7ad517b3b5b0cb639c7ecff3a708e0be1aab473ad1536e718b3",
+      "uncompressed_sha256": "4fd666a849e5a1e4d18166fffeb88edb06e38ffaf2254aa011228584343d1ba5",
+      "source": "/tmp/incant-wasm-navigation-paths-host-proof-003/conformance-2.log"
+    },
+    "docs/spikes/evidence/native-wasm-navigation-paths/cook-build.log.gz": {
+      "sha256": "6d5f46feb665f4e19df150ba16cc13d34f5522bf58eea2d13fd04bf2f6d51deb",
+      "uncompressed_sha256": "e4fdf013492ced33089a502f8f34dfd5b1679e26c9d61190249155657e604fc3",
+      "source": "/tmp/incant-wasm-navigation-paths-host-proof-003/cook-build.log"
+    },
+    "docs/spikes/evidence/native-wasm-navigation-paths/native-tests.log.gz": {
+      "sha256": "0c9185a934d8aa1b908c7e52be1c9ece15163c8951e71a962e8b08bcc336e110",
+      "uncompressed_sha256": "3765dff48fdc575a7aa30474f30c70089d1fce0f88646ba20b8d4f3745e2c546",
+      "source": "/tmp/incant-wasm-navigation-paths-native-final.log"
+    },
+    "docs/spikes/evidence/native-wasm-navigation-paths/native-clippy.log.gz": {
+      "sha256": "457ad9fc30cbac2fc97de2d97cac59e81d521adb7a7b0a5fe5c21a5c9afaf279",
+      "uncompressed_sha256": "060ff75c9850313fcca2e05d64d8441a76fbb69a079f89aed6a420dd66fc88b1",
+      "source": "/tmp/incant-wasm-navigation-paths-native-clippy.log"
+    },
+    "docs/spikes/evidence/native-wasm-navigation-paths/boundary-tests.log.gz": {
+      "sha256": "9902177f918664f7a64c104b070c8020f70dced76b1829afb880fd52c9872446",
+      "uncompressed_sha256": "a542bfc1c7ccfaeb9dacce03534e7148d5c7f0808157e61befae7d17bd0c93f9",
+      "source": "/tmp/incant-wasm-navigation-paths-boundary-003.log"
+    },
+    "docs/spikes/evidence/native-wasm-navigation-paths/wire-tests.log.gz": {
+      "sha256": "fe08554a66a32c85774f8a336d8592e8c0afdb9f776b967c954b59eec5a90971",
+      "uncompressed_sha256": "c8218de99ce19347cfa1cae8df5718d70185fdc1e1f4fb21511f18f03d47573b",
+      "source": "/tmp/incant-wasm-navigation-paths-wire-001.log"
+    },
+    "docs/spikes/evidence/native-wasm-navigation-paths/wasm32.log.gz": {
+      "sha256": "e2369aac74a7dfc20f29c2bf9b4154dd2224d157714eec4ed54cc7d1ba95a598",
+      "uncompressed_sha256": "9b0f7425f39ebe8e12b63011e144d4f087c7428d6027e5a584a6aeb3d42fcbb7",
+      "source": "/tmp/incant-wasm-navigation-paths-wasm32.log"
+    },
+    "docs/spikes/evidence/native-wasm-navigation-paths/tools.log.gz": {
+      "sha256": "9f6acbb4a8dc3e8605e0f4671820f97e376eed1e2487be8cac99794212d2866e",
+      "uncompressed_sha256": "801d12b654c45e7269db04d5c0d97c9a9f087e4ab8277bf4a03cb226b1802542",
+      "source": "/tmp/incant-wasm-navigation-paths-tools.log"
+    },
+    "docs/spikes/evidence/native-wasm-navigation-paths/node.log.gz": {
+      "sha256": "eaa07be489d6536fc5ab80bfc09bccfb9b69a74156250cc5c3437d0d85e6ae96",
+      "uncompressed_sha256": "1cd0df4d747ab300930c0efef643f05f5f0104ba283883aab32b42372dd449c2",
+      "source": "/tmp/incant-wasm-navigation-paths-node.log"
+    },
+    "docs/spikes/evidence/native-wasm-navigation-paths/graph.log.gz": {
+      "sha256": "cbe723f43c831eba32746404e3138b804e70ed948a598f9bd620685a6a61ebfa",
+      "uncompressed_sha256": "dbbdebcd0157208547acef3f74e4e83d0a126765b4bb1d3e1bb4c491144b55d2",
+      "source": "/tmp/incant-wasm-navigation-paths-graph.log"
+    },
+    "docs/spikes/evidence/native-wasm-navigation-paths/fmt.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/tmp/incant-wasm-navigation-paths-fmt.log"
+    },
+    "docs/spikes/evidence/native-wasm-navigation-paths/old-boundary-physics-save-failure.log.gz": {
+      "sha256": "11843b58e170d945c007612cf0682d361a9c7c3b7414dbfa82a45d279e55bb3f",
+      "uncompressed_sha256": "2bcbc47aec6c0ea4b8d12c96b6740ec706d5d0528599bf991efbf43be6dd10a9",
+      "source": "/tmp/incant-wasm-navigation-paths-boundary-001.log"
+    },
+    "docs/spikes/evidence/native-wasm-navigation-paths/old-probe-rustup-path-failure.log.gz": {
+      "sha256": "a9fe8f0b46788010fead9c8e670c393a791dd88500e03baac0f5062379c0b944",
+      "uncompressed_sha256": "620eeddc0afc3d0058110f6755e8d31858c51aaf723f3b845639e7c5e08b35ef",
+      "source": "/tmp/incant-wasm-navigation-paths-host-proof-001.log"
+    },
+    "docs/spikes/evidence/native-wasm-navigation-paths/old-tests-before-final-controls.log.gz": {
+      "sha256": "226542d4bd416fd2ba6e0aafb9ee83fee0dc1f91858d3addb5ebcd8156a1a800",
+      "uncompressed_sha256": "1175a584ddc09133881c95f1b74105f58843192a7fe2e9e564385aae228f5489",
+      "source": "/tmp/incant-wasm-navigation-paths-host-proof-002/conformance-0.log"
+    },
+    "docs/spikes/evidence/native-wasm-navigation-paths/old-clippy-fixed-chunks-failure.log.gz": {
+      "sha256": "e344cee162ecf27bf680adde74df16119ddf75b533841e22185204d8cae4778d",
+      "uncompressed_sha256": "f4567249c665f602a80ef97a3e65cdb5ecfcbc12d5aad79d913435b0ba9196a4",
+      "source": "/tmp/incant-wasm-navigation-paths-host-proof-002/conformance-1.log"
+    }
+  },
+  "receipts": {
+    "docs/spikes/evidence/native-wasm-navigation-paths/production-freeze-001.json": {
+      "sha256": "397b1a07c63e0ef5d522b398cfa653136100c6ece1a7d926ab55789bd2c222c6",
+      "source": "/tmp/incant-wasm-navigation-paths-production-freeze-001/inventory.json"
+    },
+    "docs/spikes/evidence/native-wasm-navigation-paths/production-freeze-002.json": {
+      "sha256": "dc8b441efa630d8f85474bcb06e2d3bf7058b4b4f3312698a898bb2eaa5d7b2a",
+      "source": "/tmp/incant-wasm-navigation-paths-production-freeze-002/inventory.json"
+    },
+    "docs/spikes/evidence/native-wasm-navigation-paths/root-source-review-002.json": {
+      "sha256": "4bac7efb12d7b8ba14257d87d29b55d91456da5e75295a8fa521af4ce5dba8b8",
+      "source": "/tmp/incant-wasm-navigation-paths-root-source-review-002.json"
+    },
+    "docs/spikes/evidence/native-wasm-navigation-paths/conformance-result.json": {
+      "sha256": "8eaf901fa5adf864cfdbea0c5013ac9286d21d5d4f926b11ece081be638ab9b6",
+      "source": "/tmp/incant-wasm-navigation-paths-host-proof-003/conformance-result.json"
+    },
+    "docs/spikes/evidence/native-wasm-navigation-paths/prepared-manifest.json": {
+      "sha256": "b47de8890bbdd6507c357a02d4c44f7f69f1fa2f6dc323dae7b57f5c4d5dd3e4",
+      "source": "/tmp/incant-wasm-navigation-paths-host-proof-003/prepared-manifest.json"
+    },
+    "docs/spikes/evidence/native-wasm-navigation-paths/rust-sdk.json": {
+      "sha256": "7dc305a90632013cba8f67854a2ad642c9fca9ac7f0fcfd4ec97d4876f964936",
+      "source": "/tmp/incant-wasm-navigation-paths-host-proof-003/rust-sdk.json"
+    },
+    "docs/spikes/evidence/native-wasm-navigation-paths/old-conformance-result-002.json": {
+      "sha256": "581ced71618247a1885f1afcac3c134f83501b0083e70b5d57ac9c21bc15f686",
+      "source": "/tmp/incant-wasm-navigation-paths-host-proof-002/conformance-result.json"
+    },
+    "docs/spikes/evidence/native-wasm-navigation-paths/shipping-graph.json": {
+      "source": "/tmp/incant-wasm-navigation-paths-shipping-graph.json",
+      "sha256": "87d89db70603327de7848e9857e0525f641a830acba675999546d92651587603"
+    },
+    "docs/spikes/evidence/native-wasm-navigation-paths/root-final-review.json": {
+      "source": "/tmp/incant-wasm-navigation-paths-root-final-review.json",
+      "sha256": "1fe2b8124921cdd9114a5b1a564b533b6822c736b21e6d0e48955da4db1b1bc4"
+    }
+  },
+  "earlier_attempts": [
+    {
+      "attempt": "boundary001",
+      "outcome": "Fixture attempted unsupported physics checkpoint save; test oracle changed to complete entity snapshots and canonical retained routes. No physics checkpoint claim."
+    },
+    {
+      "attempt": "guest-compile001",
+      "outcome": "New failure fixture passed a slice where SDK SetVelocity requires Option; corrected fixture to Some(&[]) before conformance."
+    },
+    {
+      "attempt": "host-proof001",
+      "outcome": "Incorrect explicit rustup path refused before host work; corrected to /opt/homebrew/bin/rustup."
+    },
+    {
+      "attempt": "host-proof002",
+      "outcome": "366 tests in 64 groups passed; Clippy rejected test-only chunks_exact_mut style. Corrected fixed-size iteration, added final boundary controls and reran complete proof003. Report/logs retained."
+    }
+  ],
+  "limitations": [
+    "Local CPU capability conformance only; no reference-phone, performance, rendered debug-draw or phase gate.",
+    "No fresh ordinary source-deleted shipping package for this navigation guest in this slice.",
+    "Existing whole guest checkpoint continuation remains explicitly unsupported.",
+    "Navmesh/grid authoring and canonical solvers are reused; movement, off-mesh execution and grid-to-world mapping remain gameplay responsibilities.",
+    "No complete SDK claim.",
+    "Main integration and required fast PR gates remain the publisher responsibility."
+  ],
+  "reviewed_implementation_commit": "c9fb4436b787c7ff34586666e640fbb19f7df0c5"
+}

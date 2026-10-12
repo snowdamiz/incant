@@ -9,6 +9,9 @@ pub use weighted::{MAX_POSE_SAMPLES, WeightedClipSample};
 #[path = "grouped.rs"]
 mod grouped;
 pub use grouped::PoseSource;
+#[path = "ik.rs"]
+mod ik;
+pub use ik::{MAX_TWO_BONE_IK, TwoBoneIk, TwoBoneIkError};
 
 /// One retained, immutable model animation copy and two preallocated pose buffers.
 /// Sampling performs no allocation, source IO or JSON. There is no implicit clock:
@@ -39,6 +42,32 @@ impl Pose {
             global: vec![DMat4::IDENTITY; nodes],
             joints: vec![DMat4::IDENTITY; joints],
         }
+    }
+    fn rebuild(
+        &mut self,
+        parents: &[Option<usize>],
+        order: &[usize],
+        data: &AnimationData,
+        offsets: &[usize],
+    ) -> std::result::Result<(), &'static str> {
+        for &i in order {
+            let local = self.local[i];
+            let global = parents[i].map_or(local, |p| self.global[p] * local);
+            if !local.is_finite() || !global.is_finite() {
+                return Err("nonfinite composed animation pose");
+            }
+            self.global[i] = global;
+        }
+        for (s, skin) in data.skins.iter().enumerate() {
+            for (j, (&node, bind)) in skin.joints.iter().zip(&skin.inverse_bind).enumerate() {
+                let value = self.global[node] * matrix(bind);
+                if !value.is_finite() {
+                    return Err("nonfinite joint palette");
+                }
+                self.joints[offsets[s] + j] = value;
+            }
+        }
+        Ok(())
     }
 }
 impl AnimationPlayer {
@@ -262,22 +291,11 @@ impl AnimationPlayer {
             let local = self.trs[i]
                 .as_ref()
                 .map_or_else(|| matrix(&self.nodes[i].transform), NodeTrs::matrix);
-            let global = self.parents[i].map_or(local, |p| self.staged.global[p] * local);
-            if !local.is_finite() || !global.is_finite() {
-                return Err(invalid("nonfinite composed animation pose"));
-            }
             self.staged.local[i] = local;
-            self.staged.global[i] = global;
         }
-        for (s, skin) in self.data.skins.iter().enumerate() {
-            for (j, (&node, bind)) in skin.joints.iter().zip(&skin.inverse_bind).enumerate() {
-                let value = self.staged.global[node] * matrix(bind);
-                if !value.is_finite() {
-                    return Err(invalid("nonfinite joint palette"));
-                }
-                self.staged.joints[self.offsets[s] + j] = value;
-            }
-        }
+        self.staged
+            .rebuild(&self.parents, &self.order, &self.data, &self.offsets)
+            .map_err(invalid)?;
         std::mem::swap(&mut self.live, &mut self.staged);
         Ok(())
     }

@@ -1,0 +1,72 @@
+{
+  "audio_clips": {},
+  "cameras": [
+    "00000000000000000000000003"
+  ],
+  "compiler": {
+    "bundleBytes": 1607,
+    "bundleSha256": "293b24d1aef029e33cb38bf5762f424c6e5b0bf882bf7217d6cf538f3ade42f9",
+    "compilers": {
+      "swc": "1.16.13",
+      "typescript": "5.9.3"
+    },
+    "format": "incant-native-typescript-project",
+    "limits": {
+      "bundleBytes": 1000000,
+      "fileBytes": 262144,
+      "mapBytes": 4194304,
+      "modules": 64,
+      "sourceBytes": 1048576
+    },
+    "mapBytes": 2150,
+    "mapSha256": "0eb185e5521a43147a0420ab91e0477b5cd119750b2993ea84d0fe154314783c",
+    "modules": [
+      {
+        "bytes": 783,
+        "path": "move.ts",
+        "sha256": "ff0edf9e08491ef01b1504a8e7ce6143c308e65e996b05bd47f6b979a1c5ee5a"
+      }
+    ],
+    "sourceBytes": 783,
+    "sources": [
+      {
+        "id": "00000000000000000000000001",
+        "path": "move.ts"
+      }
+    ],
+    "trust": "fresh local source transform; no project code or configuration executed",
+    "version": 1
+  },
+  "font_assets": [
+    {
+      "fingerprint": "9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2",
+      "id": "01M4QAVHYNSHVPK3ZSMCBR18VP"
+    },
+    {
+      "fingerprint": "6864e1444bc7002790e682360d3f93bd45fe51b7045a64ecbf0e76e19e6b758e",
+      "id": "01M4QAVHZRJKQ629JYXQCR8XA7"
+    },
+    {
+      "fingerprint": "1087d4bb69160e3e5955407294226ca3da11166a3188ada3c1a166ba14e55ceb",
+      "id": "01M4QAVJ0W72DESEH6VTP4ZHK5"
+    }
+  ],
+  "format": "incant-native-project-build",
+  "has_spatial_content": true,
+  "program": null,
+  "project_id": "01M4QAVHTRDC84FCH2YJDHHEE8",
+  "project_sha256": "c8c8947b8c260c9ce157b6ad5e61d61ed88815efd93edd2bd5a402b0190287ce",
+  "scene_id": "01M4QAVHTRJJ2F6R8MCDR5ER0K",
+  "scene_sha256": "6bf4ca81413b6a4e095c342dcc6a6d4bdd3e52d8cc7ad5b7b1cf45814e603167",
+  "startup_source_parsing": false,
+  "target": "aarch64-apple-darwin",
+  "tick_rate": 60,
+  "version": 1,
+  "visual_assets": [
+    {
+      "fingerprint": "71fbcae82debc0236bda7576327733a6943d93ce7adb913cbe1d95fe931d511f",
+      "id": "01M4QAVJ1PV73K0XTA68ZHNG33",
+      "kind": "model"
+    }
+  ]
+}

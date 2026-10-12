@@ -1,0 +1,16 @@
+{
+  "command": [
+    "/Users/andreyyurlov/.codex/incant-integration-target/ci/incant_headless",
+    "native-play",
+    "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-main144-001/public-export/authoring/project.json",
+    "--ticks",
+    "1",
+    "--pcm-output",
+    "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-main144-001/public-export/dev-cache-mismatch.pcm"
+  ],
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Error: native play startup/runtime failure: native play startup failure: static Wasm preparation: captured module identity mismatch\n",
+  "output_absent": true,
+  "expected_stderr": "Error: native play startup/runtime failure: native play startup failure: static Wasm preparation: captured module identity mismatch"
+}

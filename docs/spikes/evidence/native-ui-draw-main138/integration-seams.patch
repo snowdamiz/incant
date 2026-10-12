@@ -1,0 +1,171 @@
+diff --git a/Cargo.lock b/Cargo.lock
+index 9371dd1f..21864f3f 100644
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -3973,6 +3973,7 @@ dependencies = [
+  "incant_text",
+  "incant_types",
+  "incant_ui",
++ "incant_wasm_cook",
+  "serde_json",
+  "sha2 0.10.9",
+  "tempfile",
+@@ -4047,7 +4048,6 @@ dependencies = [
+ name = "incant_game_player"
+ version = "0.0.1"
+ dependencies = [
+- "incant_ui",
+  "gilrs",
+  "incant_assets_runtime",
+  "incant_audio_runtime",
+@@ -4062,6 +4062,7 @@ dependencies = [
+  "incant_runtime",
+  "incant_script",
+  "incant_types",
++ "incant_ui",
+  "incant_wasm_runtime",
+  "pollster",
+  "serde",
+@@ -4076,13 +4077,13 @@ dependencies = [
+ name = "incant_game_runtime"
+ version = "0.0.1"
+ dependencies = [
+- "incant_ui",
+  "incant_assets_runtime",
+  "incant_audio_runtime",
+  "incant_input",
+  "incant_runtime",
+  "incant_script",
+  "incant_types",
++ "incant_ui",
+  "kira",
+  "serde_json",
+  "tempfile",
+@@ -4136,11 +4137,13 @@ dependencies = [
+  "incant_cmd",
+  "incant_doc",
+  "incant_text",
++ "incant_wasm_cook",
+  "schemars 1.2.2",
+  "serde",
+  "serde_json",
+  "tempfile",
+  "thiserror 2.0.21",
++ "wat",
+ ]
+ 
+ [[package]]
+@@ -4258,9 +4261,11 @@ version = "0.0.1"
+ dependencies = [
+  "incant_assets",
+  "incant_audio_runtime",
++ "incant_cmd",
+  "incant_cook",
+  "incant_doc",
+  "incant_game_runtime",
++ "incant_import",
+  "incant_input",
+  "incant_render_data",
+  "incant_render_game",
+@@ -4268,12 +4273,14 @@ dependencies = [
+  "incant_runtime",
+  "incant_script",
+  "incant_types",
++ "incant_wasm_cook",
+  "kira",
+  "serde",
+  "serde_json",
+  "tempfile",
+  "thiserror 2.0.21",
+  "ulid",
++ "wat",
+ ]
+ 
+ [[package]]
+@@ -4355,7 +4362,6 @@ dependencies = [
+ name = "incant_render_game"
+ version = "0.0.1"
+ dependencies = [
+- "incant_ui",
+  "incant_assets",
+  "incant_assets_runtime",
+  "incant_audio_runtime",
+@@ -4366,6 +4372,7 @@ dependencies = [
+  "incant_runtime",
+  "incant_script",
+  "incant_types",
++ "incant_ui",
+  "kira",
+  "serde_json",
+  "tempfile",
+@@ -4444,6 +4451,7 @@ dependencies = [
+  "incant_localization",
+  "incant_runtime",
+  "incant_types",
++ "incant_wasm_dev",
+  "incant_wasm_runtime",
+  "rquickjs",
+  "serde",
+@@ -4521,6 +4529,7 @@ dependencies = [
+  "incant_input",
+  "incant_text",
+  "incant_types",
++ "sha2 0.10.9",
+  "taffy",
+  "tempfile",
+  "thiserror 2.0.21",
+@@ -4536,6 +4545,10 @@ name = "incant_wasm_cook"
+ version = "0.0.1"
+ dependencies = [
+  "incant_wasm_abi",
++ "serde",
++ "serde_json",
++ "sha2 0.10.9",
++ "tempfile",
+  "thiserror 2.0.21",
+  "wasm-encoder",
+  "wasmparser",
+@@ -4585,6 +4598,7 @@ dependencies = [
+  "incant-module",
+  "incant_input",
+  "incant_localization",
++ "incant_nav",
+  "incant_runtime",
+  "incant_types",
+  "incant_wasm_abi",
+@@ -8414,8 +8428,6 @@ dependencies = [
+ [[package]]
+ name = "tao"
+ version = "0.37.1"
+-source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "f37f381f4e048e6cdf038b5705f8cf14ad108279d46eb968140a7b291aba9400"
+ dependencies = [
+  "bitflags 2.13.2",
+  "block2",
+diff --git a/crates/incant_play/tests/control.rs b/crates/incant_play/tests/control.rs
+index fe55e251..5bd8f94f 100644
+--- a/crates/incant_play/tests/control.rs
++++ b/crates/incant_play/tests/control.rs
+@@ -37,7 +37,8 @@ fn prepared(body: &str) -> PreparedPlay {
+         code: CompiledScript::compile(&format!(
+             "exports.default={{update({{chunks}}){{{body}}}}};"
+         ))
+-        .unwrap(),
++        .unwrap()
++        .into(),
+         actions: Default::default(),
+         clips: vec![],
+         sample_rate: 48000,
+diff --git a/crates/incant_ui/src/lib.rs b/crates/incant_ui/src/lib.rs
+index 56bd4cd0..f83a348c 100644
+--- a/crates/incant_ui/src/lib.rs
++++ b/crates/incant_ui/src/lib.rs
+@@ -2,6 +2,8 @@
+ //! declarations and explicitly supplied packaged fonts. No authoring document,
+ //! filesystem, renderer, OS input method or provider dependency.
+ #![forbid(unsafe_code)]
++mod checkpoint;
++pub use checkpoint::{MAX_UI_CHECKPOINT_BYTES, UiCheckpointError};
+ mod focus;
+ mod fonts;
+ pub use fonts::{MAX_UI_FONT_CHAINS, UiFonts};

@@ -1,0 +1,139 @@
+{
+  "at": "2026-10-12T05:44:37.429564+00:00",
+  "accepted_source": "bba440ac84960edac88c6deda79a046cd2b6031c",
+  "actual_main": "d418c6365c2c3ef8c8201a84c64f16359b53488a",
+  "tested_source": "cbfdc7acfeecc5007b17d995914dace10f9f54c4",
+  "source_hashes": {
+    "Cargo.toml": "98768e3ad77d7294049dddf94291d024f9065596e783ae06b84585cfb69d14e8",
+    "Cargo.lock": "612bfe300e94bd21074e1bb8ee6b6ed805ce12ebe9b7b5a6847d24a5d1d216de",
+    "crates/incant_game_player/src/window/mod.rs": "e8453d6d4a2af3321225b28d23bf4065d53c269405fc4e4f7790af0a17d96ad4",
+    "crates/incant_game_player/src/window/ui_input.rs": "3fede07cd57508339182cdc9708f033d86f6e8782b1e3ec707c78f14aabd0470",
+    "crates/incant_game_player/src/window/ui_input/tests.rs": "2bc776403b2cc7b1147e1f81337030cae1616034b6b0da0990e326218d94b13f",
+    "crates/incant_game_player/src/window/ime.rs": "90990c7e68de5ad287830a82b35f060d3535a1dcee15dec78f3c75237a56ab84",
+    "third_party/tao/Cargo.toml": "0c7532197536ab91685090097e75de8cf38b84553f07f402d2f8d5e87d5a1961",
+    "third_party/tao/src/event.rs": "13a2ab465ba0a0a61b526182526d6433c893c990fba81bc0fc2d00f7a10e4bf0",
+    "third_party/tao/src/lib.rs": "99507f565ebce2fa11a5cff08005d762929883fc14f24f7b9b5ae4bcf3f50252",
+    "third_party/tao/src/platform_impl/android/mod.rs": "aee14af3e0b166f206ca3929503a38425c183ea33e5d88c778395c6d2367c1d5",
+    "third_party/tao/src/platform_impl/linux/event_loop.rs": "59850637e6bcf1c8ce1ef121e92d7097d5ab882bdc71c00bfe2f1bfbb433000e",
+    "third_party/tao/src/platform_impl/linux/keyboard.rs": "57ef23a723171b23cc827d9a1132a7b46a1240077870ae4c44b7a8b33f9ca342",
+    "third_party/tao/src/platform_impl/linux/mod.rs": "0d20e775a0cc22be426ce7b7fd545d5ec69e0606173583a9ce1f336edce54c8c",
+    "third_party/tao/src/platform_impl/linux/text_input.rs": "b8854edab71ce2b707dfbf7dcfba171e062721c3ab76c847d5c6457704be7074",
+    "third_party/tao/src/platform_impl/linux/window.rs": "9d9c146744ddff7ba902689ce227f042ca460a2751432808c3e4b38d55bf393d",
+    "third_party/tao/src/platform_impl/macos/event.rs": "16c65224f2ecad26e2af2903678fcae9b1da3bfd99b68e825b200dd5037a81b5",
+    "third_party/tao/src/platform_impl/macos/mod.rs": "eb042c6d1b71c743cbf35519a823d41085e4aaef0da627834d60fec13169209f",
+    "third_party/tao/src/platform_impl/macos/text_input.rs": "6671bc9c25b30f2ebbee7a746a5745eab9802879b59f709b431df4af61bbebb2",
+    "third_party/tao/src/platform_impl/macos/view.rs": "577461d0ac07740aefe0ff32c29afdf959f6e63543a3aff5524f79dbf71f093f",
+    "third_party/tao/src/platform_impl/macos/window.rs": "ee33cbdbbac26c994f979a78a22e3f2d1201d6c18e0a08d8dcda7559d701eb5d",
+    "third_party/tao/src/platform_impl/windows/event_loop.rs": "198b88217fcfe0faaaabbc33017028d536aace1a78c5fa261f6eb5126cd01757",
+    "third_party/tao/src/platform_impl/windows/keyboard.rs": "563e1bb6034209e49ff8fa1c30cdf755be7699ed99d942c85f514dbf7f0d4297",
+    "third_party/tao/src/platform_impl/windows/mod.rs": "049c0ef56617f217e27387d7085c03301e94e033a14e5db5cc8f36bf144c220b",
+    "third_party/tao/src/platform_impl/windows/text_input.rs": "d587dffc4119322333de682dcfe99c62a59ec4ed382aa45eadc81efee1a36278",
+    "third_party/tao/src/platform_impl/windows/window.rs": "4ee5217b8bcac5565a15d28b015049a2abedafeec4d6df83ea4d62eb35a7cfc9",
+    "third_party/tao/src/platform_impl/windows/window_state.rs": "05339c583ed9432892878937d9b78a7cf6bda95ea0a11d4359944841ae4426db",
+    "third_party/tao/src/text_input.rs": "fe9be03d71891d2c727a30ca172434b18f5bfafd3e85e76f13bbf3b592591854",
+    "third_party/tao/src/window.rs": "fbcd77518b1de55068cb0ddaa064b61b7dd19b5e305539f470753f8fd7aa0ab7"
+  },
+  "frozen_inputs": 1453,
+  "vendor_files_exact": 122,
+  "integration": "Only STATUS conflict; retained main milestone/fixture text and incoming managed IME section.27 non-lock accepted sources and122vendor files exact. Main136 lock preserves seven local-package dependency additions already on main since the accepted source base; compared with actualmain only Tao source/checksum removed, no package version/dependency changes.",
+  "preserved_main_local_dependency_additions": {
+    "incant_cook": [
+      "incant_wasm_cook"
+    ],
+    "incant_import": [
+      "incant_wasm_cook",
+      "wat"
+    ],
+    "incant_play": [
+      "incant_cmd",
+      "incant_import",
+      "incant_wasm_cook",
+      "wat"
+    ],
+    "incant_script": [
+      "incant_wasm_dev"
+    ],
+    "incant_ui": [
+      "sha2 0.10.9"
+    ],
+    "incant_wasm_cook": [
+      "serde",
+      "serde_json",
+      "sha2 0.10.9",
+      "tempfile"
+    ],
+    "incant_wasm_runtime": [
+      "incant_nav"
+    ]
+  },
+  "lock_package_count": 962,
+  "tao_transitive_lock_records_byte_equal": 208,
+  "linux_compile_reuse": "Accepted aarch64 GTK3.24.41 compile receipt retained: exact122 Tao files, exact Cargo.toml and unchanged entire Tao transitive dependency closure. No repeated Linux container build; this is reuse, not new platform execution.",
+  "checks": {
+    "cpu_tests": 119,
+    "groups": 18,
+    "failed": 0,
+    "ignored": 0,
+    "exact_protocol_tests": 8,
+    "all_target_clippy": true,
+    "editor_all_target_compile": true,
+    "windows_tao_compile": true,
+    "normal_dependency_graph": true,
+    "fmt_conventions": true
+  },
+  "logs": {
+    "docs/spikes/evidence/native-ui-ime-main136/clippy.log.gz": {
+      "sha256": "1ec36d00667718d8e0ce2d1394c6753c0b529d05429caaec115458f7ebdce00e",
+      "uncompressed_sha256": "cfe15dace90a597cca2c385de61fa485b10d923b412fb05b5bd2d2210bf9bbb3"
+    },
+    "docs/spikes/evidence/native-ui-ime-main136/conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/native-ui-ime-main136/editor-compile.log.gz": {
+      "sha256": "bd1fcb079daee81e64fd5f494bedf6e402fcc09559cd73123af5617a93fe29d9",
+      "uncompressed_sha256": "0f5087121c0ae8ba7716be81211c06f9aaf1676c38028945b582983000170507"
+    },
+    "docs/spikes/evidence/native-ui-ime-main136/fmt.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/native-ui-ime-main136/graph.log.gz": {
+      "sha256": "e480ba03e7faf0164f2b401877534016d15a0d1c715f5e483a57f994e3614c5e",
+      "uncompressed_sha256": "edeb76e68c24a8b7aa02ee4735e60eaa53b17fd7ca90e8f4f53ab243e6b74cb8"
+    },
+    "docs/spikes/evidence/native-ui-ime-main136/protocol-build.log.gz": {
+      "sha256": "b9c44f4209ec581e0d68875b559f74c49443f0cae523ffe04313206b3c98322b",
+      "uncompressed_sha256": "628fa69829c45fe77967cbe79dd4fb13bf35373fa56e932dd5cc9539eae57247"
+    },
+    "docs/spikes/evidence/native-ui-ime-main136/protocol-tests.log.gz": {
+      "sha256": "51f41e46ec6d0e34f8ebb7796326bf835efebad742295c575083abad011a7d61",
+      "uncompressed_sha256": "7852e788d12a80cf03265d6d3ca2dea68047619d8d51de31d88e25980a4b38ab"
+    },
+    "docs/spikes/evidence/native-ui-ime-main136/tests.log.gz": {
+      "sha256": "b6fbfa25fa40406d2a65ca6d4f2100bc8e012151b289cf8503034cfba810867b",
+      "uncompressed_sha256": "517818b7893c4a10701537eb2aa3d81853abddefee8fb797b534b95a80c7ba62"
+    },
+    "docs/spikes/evidence/native-ui-ime-main136/windows-compile.log.gz": {
+      "sha256": "d84ccfbc143ce491cbbd9c75cbbb736d442e69d3f8f24c5ab8e57e9ef4854a3f",
+      "uncompressed_sha256": "e60302299979cf17efc65ffd700049b7793003f79bc3d25ffe9cc9b0abf3e476"
+    }
+  },
+  "receipts": {
+    "docs/spikes/evidence/native-ui-ime-main136/freeze.json": "335322bd9452e0f526b53959c16640b1351e5747384c5c75fa76a5f39ae0238f",
+    "docs/spikes/evidence/native-ui-ime-main136/results.json": "cb9a7940ef36e9e8f35fa4a636cb3a6384c702232f30a1730f1e66fa746195fe",
+    "docs/spikes/evidence/native-ui-ime-main136/runner-setup-failure.json": "e04ac62165a7b8998b07c35dd79fd86b698ca803721ce6fdbd61964f4f1afd91",
+    "docs/spikes/evidence/native-ui-ime-root-final-review.json": "b84e603be9645a0ab9dc386b384599276b0c70a58d97f2c2a955a318f4a6943e"
+  },
+  "prior_setup_failure": "Runner22170 stopped before protocol build because rustc was absent from PATH. No compiler launched; remaining-only81345 used exact installed1.99 compiler and passed. Completed tests/Clippy/editor compile were not repeated.",
+  "processes": "Both owned runner handles22170/81345 terminal and reaped; no native/GPU/window/provider launch.",
+  "limits": [
+    "No actual NS/GTK/IMM input method interaction, native windows, screenshots, GPU, phone or timing acceptance",
+    "Precise caret rectangle from canonical positioned glyphs is not yet integrated; existing native IME position hook preserved, default origin fallback explicit",
+    "No bound on native OS/input-method allocations or the preexisting Tao queue; own text payload/state copies and accepted UI receipt packet are bounded",
+    "Surrounding-text reconversion/replacement beyond exact current marked range is explicitly unsupported",
+    "Ordinary no-UI Tao behavior stays default; mobile managed text-session API refuses unsupported",
+    "Existing UiUnsupported draw guard retained until reviewed Claude0056 consumer integrates",
+    "IME context/serial/preedit are transient and not serialized; new restored UiRuntime owner requires new native lease; viewport-only surface retry preserves current lease"
+  ]
+}

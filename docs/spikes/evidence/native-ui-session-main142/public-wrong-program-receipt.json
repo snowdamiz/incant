@@ -1,0 +1,6 @@
+{
+  "name": "wrong-program",
+  "returncode": 1,
+  "stdout": "",
+  "stderr": "Error: Checkpoint(ProgramMismatch)\n"
+}

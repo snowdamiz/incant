@@ -26,21 +26,95 @@ nothing; existing refusal diagnostics may allocate. This is a numeric foundation
 only: authored graph fades, clocks, cooked/save and SDK/render integration remain
 in progress. [Contract and evidence](docs/spikes/grouped-animation-pose.md).
 
-## Authored nested animation trees — connected implementation under verification
+
+## Public Wasm complete animation poses — local host and package proofs passed
+
+The Rust SDK now reads complete v4 pose frames with stable scene/entity identity,
+exact native contributions and explicit interpolation kinds. Legacy SLERP pairs
+retain their semantics; weighted tree poses use the native normalized quaternion
+mean. Old observations refuse weighted poses. Published operations 0–41 remain
+unchanged. Actual Wasmtime/wasm2c conformance passes 398 tests/doctests, Clippy and
+three generic development smoke processes; the new guest matches a direct native
+eight-pose oracle over twenty ticks. Source review accepts the frozen boundary.
+Final corrected union checks and independent evidence review pass; main integration
+remains pending. The ordinary public Rust tree-game package proof now passes
+three fresh source/cache/build/map-deleted wasm2c processes. Each matches 60
+complete records (3420 scalars), 228 bounded checks, native clocks and PCM against
+captured Wasmtime play and a direct native oracle. All eleven exact refusals pass,
+including old snapshots and unsupported guest checkpoints; independent package
+review is pending. [Package evidence](docs/spikes/native-wasm-animation-pose-package.md).
+Synthetic sixteen-sample coverage establishes wire capacity only; tree-state
+fades/composite operands, rendered/device gates and complete SDK remain open.
+[Contract and evidence](docs/spikes/native-animation-pose-sdk.md).
+
+## Authored nested animation trees — local and ordinary shipping checks passed
 
 Stable-ID nested 1D and rectangular 2D motions now cook into a bounded v15 node
 table and run on the native graph clock. Complete weighted samples travel through
 native/render snapshots and owned TypeScript columns; legacy Wasm pose snapshots
 explicitly refuse these unrepresentable states. Existing clip/flat-pair encodings
-and SLERP sampling remain unchanged. Focused CPU checks pass 94 cases, including
-command rollback/Undo, source-deleted cooking, eight-leaf clock/parameter behavior,
-completed/rest/paused save continuation, render-adapter rollback and actual
-QuickJS observations. Broader checks and rendered acceptance remain pending.
-Nonzero transitions involving blend states, layering, IK, root motion, the full
-Wasm weighted SDK and public shipped tree-game proof remain in progress; this is
-not animation or Phase 1 completion.
+and SLERP sampling remain unchanged. All 665 affected CPU tests, Clippy, wasm32,
+dependency guards and exact schemas/SDK checks pass; 82 renderer GPU tests stayed
+ignored. Public command authoring, Undo/Redo and fresh recovery pass 228 selected
+state checks plus complete 56-tick sample logs. An ordinary shipping player runs
+after deleting authoring/build inputs and external source maps: three full runs,
+six save/resume pairs and two exact refusals pass, with matching final saves,
+logs and PCM. Current-main integration and rendered acceptance remain pending.
+Nonzero transitions involving blend states, layering, IK, root motion, the
+separate Wasm weighted SDK proof and device gates remain in progress; this is
+not animation or Phase 1 completion. [Contract and evidence](docs/spikes/native-animation-tree-playback.md).
 
-## Nested animation tree numeric core — locally verified
+## Ordinary offline audio session checkpoints — current-main verified
+
+World v8/session v3 resume real static and streamed Kira voices alongside existing
+script state/timers and hosted UI. Fractional/resampler history, birth order,
+queued/retired voices, nested buses/listener state, tick-zero startup and master
+suspension are preserved. Integration with main #145 passes 422 affected CPU
+cases, 99 Kira cases, scoped Clippy and feature/platform/dependency checks.
+A fresh public shipping export passes four source/build/map-deleted processes
+with exact final saves and split/repeated PCM, plus nine precise refusals.
+All 1672 frozen inputs remain unchanged after main ancestry integration.
+
+Physics/module/device-native audio and native-window/GPU checkpoint routes remain
+unsupported; arbitrary VM heap/effects and full save/device gates are not claimed.
+[Contract and evidence](docs/spikes/native-audio-session-checkpoints.md) and
+[current integration](docs/spikes/evidence/native-audio-main145.json).
+
+## Two-bone IK retained CPU integration — current-main verified
+
+The cooked-model animation player applies up to 32 ordered model-space constraints
+to sampled or blended local poses and publishes the complete hierarchy/palettes
+atomically. Both reach limits, weighted rotations, degenerate/refused chains,
+source-deleted cooked skinning and allocation-free repeated solving are covered
+by ten new cases; current-main #146 integration passes all 118 affected tests,
+all-target Clippy, wasm32 and dependency checks. The six accepted source files
+remain byte-identical. Existing cooked
+formats, normal sampling and renderer paths stay unchanged. Authored/native/SDK
+control integration, general affine chains and Claude rendered/animation-feel
+acceptance remain open; this is not the complete Phase 1 animation gate.
+[Contract and evidence](docs/spikes/native-two-bone-ik.md) and
+[current integration](docs/spikes/evidence/native-two-bone-ik-main146.json).
+
+## Public Wasm physics queries — current-main verified
+
+The Rust SDK now batches native 3D/2D rays and character movement queries and
+copies nondraining sensor enter/exit observations. Callback-scoped native solver
+loans preserve committed-state visibility, exact world/epoch authority and atomic
+rollback. Event frames retain scene identity and dimension. Published operations
+0–38 and old layouts remain unchanged. Integration on main #144 passes 382 actual
+Wasmtime/wasm2c cases, 202 native cases, all-target Clippy, wasm32/tooling and lean
+dependency checks. All 1533 frozen inputs remain unchanged after main integration.
+A fresh ordinary shipping package passes three source/cache/build/map-deleted
+processes, 60 native-oracle assertions per run and ten exact runtime refusals.
+The initial comparison host omitted its optional Wasmtime feature; its successful
+shipping package was preserved byte-for-byte while the host was rebuilt and the
+reviewed remaining proof resumed. The original failure stays recorded. Full SDK,
+physics/guest checkpoints, device measurements and phase gates remain open.
+[Package proof](docs/spikes/native-wasm-physics-package.md) and
+[current integration](docs/spikes/evidence/native-wasm-physics-main144.json).
+[Contract and evidence](docs/spikes/native-wasm-physics-queries.md).
+
+## Nested animation tree numeric core — current-main verified
 
 The native evaluator now supports bounded nested 1D and rectangular bilinear 2D
 blend trees, normalized clip phases and sixteen-contribution fades. Full runtime
@@ -49,37 +123,72 @@ dependency checks and independent source review pass. This is numerical core
 work: authored/cooked graphs, active runtime/renderer/SDK wiring and complete
 checkpoint continuation remain open. [Contract and evidence](docs/spikes/native-animation-tree-core.md).
 
-## Multi-pose animation sampling — locally verified
+## Multi-pose animation sampling — current-main verified
 
 The retained numeric animation player now mixes up to sixteen clip samples with
 weighted local translation/scale and normalized quaternion averaging. Existing
 unpublished pose storage supplies the scratch lanes, so retained memory and
 per-sample allocations do not increase. All 108 affected tests, Clippy, wasm32,
 dependency and formatting checks pass; independent source review accepts the
-scope. Authored nested/2D trees, blended-state transitions and their native/SDK
+scope. Combined integration on main #143 passes 310 CPU tests and Clippy.
+Authored nested/2D trees, blended-state transitions and their native/SDK
 wiring remain open. [Contract and evidence](docs/spikes/runtime-weighted-pose.md).
 
-## Native game UI reserved-frame connection — locally verified
+## Checkpoint 11 — failed frozen batch, two probe contracts repaired
+
+The main #141 snapshot finished 20/23 required checks successfully; release is
+unchanged. Windows model receipt validation now requires all twelve exact
+geometry counters, and the macOS shipping helper expects the current explicit
+manual-input argument refusal. CPU regression checks and independent review
+pass; production behavior and rendering thresholds are unchanged. Linux UI
+numeric differences remain with Claude, and the next full checkpoint waits for
+that repair. See [retained failures and checks](docs/spikes/checkpoint11-probe-repairs.md).
+
+## Hosted native UI session checkpoints — current-main CPU proof passed
+
+The bounded widget codec now composes with native world v7 and session v2:
+committed UiNode declarations, text buffers, grapheme selection, logical focus,
+script persistent values and timers restore into one fresh world and UI owner.
+Non-UI encodings remain unchanged. Exact world/generation/tick authority and
+complete typed sections are checked before consumer/guest initialization;
+ordinary loads neutralize physical input and discard transient pointer capture.
+The current-main suite passes 450 CPU tests plus nine player tests, scoped Clippy,
+feature-disabled/static/development-module builds, wasm32 and lean runtime checks.
+A fresh ordinary public export passes four map/source/build-deleted player runs
+and seven typed refusals; uninterrupted and resumed final saves match exactly.
+Active preedit, physics state, static/development modules and window/GPU
+checkpoint routes remain unsupported. Offline audio continuation is covered by
+the reviewed local slice above. This is not a full-session, native IME,
+Game UI or device gate. The fresh current-lock public proof passes again; source and evidence review
+remain scoped to this CPU ordinary-load route. [Contract and evidence](docs/spikes/native-ui-session-checkpoints.md).
+
+## Native game UI reserved-frame connection — current-main verified
 
 Managed native input and Claude's accepted screen-space consumer compose in the
 native player. Reserved-frame sizing now fences old pointer coordinates before
 relayout and preserves text ownership; unchanged frames reuse UI resources.
-Affected CPU tests, Clippy, dependency checks and independent source review pass.
+All 138 affected CPU tests, Clippy, dependency checks and independent source
+review pass again with both production files unchanged on actual main139.
 Actual native-window/IME and pixel review are assigned to fresh Claude0057, so no
 native appearance or complete Game UI claim is made. See
 [the sizing contract](docs/spikes/native-window-ui-reserved.md).
 
-## Native UI checkpoint state — CPU section locally verified
+## Public Wasm navigation paths — current-main integration verified
 
-Committed widget text, grapheme selection and logical focus now have a bounded
-binary save/load section with fresh-owner receipt invalidation. Active preedit
-refuses saving; pointer capture, physical input and notifications remain
-transient. All 41 UI tests, Clippy, wasm32 and dependency checks pass again on
-the actual main135 integration, with all five reviewed source inputs unchanged.
-Independent source review accepts this section. Complete world/session/renderer
-integration remains open and existing UI-save refusals are unchanged. This is
-not a full save, native IME or Game UI gate.
-[Contract and evidence](docs/spikes/native-ui-checkpoint-state.md).
+The Rust SDK now queries the committed native navmesh and prepared-grid solvers
+through bounded copied request/results. Existing opcodes 0–35 remain unchanged;
+new calls preserve stable IDs, exact generations/costs and off-mesh metadata.
+Navigation and steering share the same callback quota, with a separate bounded
+requested-search budget; authorized failures reject the complete staged native
+transaction. Actual Wasmtime/wasm2c conformance passes 369 tests/doctests, Clippy
+and three development processes. A separate 190 native runtime tests, supported
+wasm32/tooling checks and the authoring-free dependency check pass. Independent
+source and final evidence review accepted the implementation. Current-main
+integration repeats all 369 actual-host and 190 native cases with unchanged
+source; PR #138 passed the fast gate and merged. An ordinary source-deleted navigation guest shipping proof, full SDK,
+guest checkpoints, devices and phase gates remain open.
+[Contract and evidence](docs/spikes/native-wasm-navigation-paths.md).
+
 
 ## Public Wasm animation graphs — current-main integration verified
 
@@ -116,16 +225,29 @@ Independent review also corrected interrupted cache publication: private staged
 files now publish without clobber, with partial-write/concurrent/corrupt/symlink
 controls; the original source-free shipping proof remains separately recorded.
 
+## Native screen-space UI drawing — scoped integration
+
+The canonical UI candidate now reaches the retained GPU consumer, drawing labels,
+buttons, text fields, focus, selection and preedit over the world. Candidate
+refusal preserves accepted owner/resources; unchanged frames reuse their UI
+resources. Claude0056 supplied and reviewed the visuals on its frozen offscreen
+Metal build. Current-main CPU/compile checks preserve all renderer/shader source.
+The capability also admits the existing desktop UI startup route; reserved-frame
+correction now has current-main CPU verification; actual window/IME acceptance
+remains with Claude0057. PR #139 passed the fast gate and merged. No current-main GPU, phone or complete Game UI gate is claimed.
+[Contract and evidence](docs/spikes/native-ui-draw.md).
+
 ## Native game UI window delivery — CPU adapter
 
 The ordinary desktop host queues bounded opaque pointer/text receipts into its
 composed UI tick, with logical-DPI relayout, exclusive pointer ownership and
 transactional cancellation. The new opt-in Tao 0.37.1 managed bridge binds native
 Cocoa/GTK/IMM contexts to exact text-owner leases, supplies preedit/commit/cancel,
-and discards retired callbacks. 105 affected CPU tests, 8 native protocol tests,
-scoped Clippy, Windows/Linux Tao compile checks and runtime graph checks pass.
-Actual OS IME interaction, canonical caret geometry and combined Claude0056 draw
-acceptance remain open. The source branch retains its unsupported draw guard;
+and discards retired callbacks. The actual main136 integration passes 119 CPU
+tests, 8 exact protocol tests, scoped Clippy, editor/Windows compile and runtime
+graph checks. Prior Linux compile evidence retains identical Tao sources and its
+entire dependency closure. Actual OS IME interaction, canonical caret geometry
+and combined window/draw acceptance remain open. This integration retains its unsupported draw guard;
 no native/GPU/device gate is claimed. See [managed IME evidence](docs/spikes/native-ui-ime.md).
 
 ## Durable budget lock release — validated in checkpoint8
@@ -158,6 +280,16 @@ pass; PR #113 merged the fixture correction. Checkpoint7 Windows desktop and
 Wasm conformance both pass.
 [Journal test evidence](docs/spikes/checkpoint6-budget-journal-tests.md).
 
+## Checkpoint10 replay fixture correction
+
+All eight frozen workflows finished: 20 required checks passed and three desktop
+checks failed the same outdated unknown-version fixture. Recording version 2 is
+intentionally supported. The test now refuses version 3 and compares accepted
+versions 1/2, preserving all prior refusal and no-output assertions with specific
+diagnostics. Three actual headless cases and scoped Clippy pass; independent
+source review accepted. Checkpoint10 remains failed and unpromoted; hosted repair
+confirmation awaits a new frozen candidate. [Evidence](docs/spikes/checkpoint10-input-fixture.md).
+
 ## Checkpoint9 agent fixture correction
 
 The frozen main132 release run reaches the same pre-provider test assertion in
@@ -178,11 +310,11 @@ Checkpoint8 promoted frozen main117 into release at
 exact-candidate push workflows succeeded. Its tree is exactly the selected main117
 tree; parents and Built-by trailer are verified. Checkpoints6–7 remain historical
 failed attempts. Later main118+ work continues through reviewed local checks and
-fast PR gates. Checkpoint9 now freezes main132 at candidate
-`7b908b38a9f2b984285b7de310dc1d2c6aa702b9` in PR #133; its comprehensive
-checks are active, with a Linux agent test failing before its intended provider
-fixture because the fixed allowance is smaller than the current tool input. The
-failure is preserved for a reviewed correction; checkpoint9 is not promoted.
+fast PR gates. Checkpoint9 finished on frozen main132 with 17 required successes
+and six jobs failing at the same pre-provider fixture; no failed batch was
+promoted. The independently reviewed correction merged in PR #135. Checkpoint10
+froze main137 at `af3f84fdd60dda011d77295cbc21bcf55414b3f8` in PR #133,
+with the same 23 required contexts. Navigation and later feature work are excluded.
 Release does not track moving main.
 [Promotion evidence](docs/spikes/evidence/release-checkpoint-8.json).
 
@@ -198,6 +330,15 @@ and complete Game UI/IME gates remain open.
 [Evidence](docs/spikes/text-bidi-wrap.md).
 
 ## Current milestone
+
+Main #147 includes the multi-pose sampler, bounded nested/2D animation numeric
+core, public Wasm physics queries and ordinary offline audio checkpoint
+continuation. The reviewed two-bone IK CPU integration is merged;
+authored IK controls and rendered acceptance remain open. Authored tree playback
+and complete-pose SDK work remain separately reviewed local lanes awaiting their
+ordinary shipping proofs.
+Checkpoint 11 remains failed and frozen; its Linux rendering repair is with
+Claude. No release or phase gate advances on these local feature results.
 
 Native animation graphs now connect ordinary typed authoring, captured models,
 v14 cooking, deterministic native clip states and flat adjacent-pair 1D blends.
@@ -221,9 +362,13 @@ reviewed main129 integration passes 510 CPU cases plus 209 overlapping final
 script/Play/game cases, Clippy, compiler-disabled/wasm checks and 67 exact fresh
 schemas. A fresh current-lock shipping export deletes authoring/build storage
 and developer source maps before three 12-tick runs and five precise refusals.
-UI checkpoints and static/development Wasm UI remain explicitly unsupported.
-Claude0056 owns the separate drawing review; platform input/IME and complete
-Game UI/device gates remain open. [CPU scope and evidence](docs/spikes/native-ui-layout.md).
+Hosted CPU UI checkpoints are locally verified above; static/development Wasm UI remains explicitly unsupported.
+Claude0056's reviewed offscreen drawing implementation now has current-main
+CPU/compile validation: 206 cases, Clippy, downstream and wasm32 checks pass;
+89 GPU tests remain ignored in this integration. Its original frozen Metal
+numerical and appearance acceptance stays separately recorded. Managed IME has
+CPU/platform compilation evidence. Reserved-frame geometry has scoped CPU verification. Actual window interaction,
+HiDPI glyphs and complete Game UI/device gates remain open. [CPU scope and evidence](docs/spikes/native-ui-layout.md).
 
 Native two-input crossfade clocks and controls now retain independent outgoing
 playback, pause both inputs, finish at explicit endpoints and persist active

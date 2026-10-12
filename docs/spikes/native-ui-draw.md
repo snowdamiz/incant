@@ -119,3 +119,34 @@ review fixture, offscreen captures and logs.
   there is no content alignment for button labels.
 - OS IME activation, preedit/cancel delivery, clipboard, accessibility, UI
   save/restore, phone and performance gates are not addressed here.
+
+
+## Current-main138 integration
+
+All six original Claude commits retain their author trailers on the actual
+main138 union. Nineteen of the 22 accepted source inputs are identical. The
+three differences preserve current main's additive widget-checkpoint exports,
+the existing native-module conversion in a Play test, and existing Cargo.lock
+edges/Tao source alongside the reviewed GPU-host test dependencies. No new
+renderer, shader, resource math or appearance change was made during integration.
+
+[Current-main evidence](evidence/native-ui-draw-main138.json) retains frozen
+inputs, exact integration seams and seven completed command logs. It records
+206 CPU tests across 40 groups, with zero failures and 89 GPU cases explicitly
+ignored, eight-package all-target Clippy, native-window/downstream compilation,
+default wasm32 renderer compilation, dependency checks, formatting and conventions.
+The actual-main ancestry merge followed terminal checks and preserved the tested
+tree exactly. [Root's original review](evidence/native-ui-draw-root-review.json)
+remains bound to the original frozen offscreen build and its Claude acceptance;
+this is not a fresh current-main GPU or packaged-player execution.
+
+The now-supported consumer also lets the existing desktop startup admit UI.
+The separately reviewed reserved-frame correction and actual native window/IME
+acceptance are still queued with Claude0057. Precise native caret placement,
+HiDPI glyphs, hover, complete UI checkpoint composition, mobile and device gates
+remain open. The earlier evidence and handoff limitations remain historical
+records of their exact tested source.
+
+[Independent integration closure](evidence/native-ui-draw-main138-root-review.json)
+verified all 1,474 frozen inputs, the three additive seams, seven command logs and
+the identical tested/ancestry tree with no actionable finding.

@@ -487,3 +487,6 @@ fn consumers_see_the_candidate_ui_and_a_refusal_publishes_nothing() {
         &("admit", [200., 120.], vec![id(3)])
     );
 }
+
+#[path = "ui/checkpoints.rs"]
+mod checkpoints;

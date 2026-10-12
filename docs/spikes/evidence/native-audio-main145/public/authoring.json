@@ -1,0 +1,25 @@
+{
+  "project_sha256": "9e2c0fc5432f8cfd48d94c9375983d2cff6597e12032bb2faa92ce54850bfa1b",
+  "source_sha256": "f5d953a16d0b697a7f2537267a0648673fc5fd88cc8083a4f822389fedd8d53d",
+  "scene": "01M4RBXFFB43CJSR6FY4WPKKMX",
+  "tick_rate": 60,
+  "fonts": [
+    "01M4RBXFN5SK7P115XJA9E6TZE",
+    "01M4RBXFPFHQM6MH8C67G96G4A",
+    "01M4RBXFQKQ4SWP7EC85WC7HS9"
+  ],
+  "revision": 7,
+  "command_bus_only": true,
+  "journal_reopened": true,
+  "ui_undo_redo": true,
+  "checkpoint_undo_redo": true,
+  "audio_clips": [
+    "01M4RBXFGJB7WD9ZWSQ6QCJ1MB",
+    "01M4RBXFHFAC5Q4XBS624NQG87"
+  ],
+  "audio_source_rates": [
+    22050,
+    32000
+  ],
+  "audio_source_frames": 2309
+}

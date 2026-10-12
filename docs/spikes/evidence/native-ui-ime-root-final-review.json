@@ -1,0 +1,24 @@
+{
+  "at": "2026-10-12T05:36:03.987083+00:00",
+  "reviewer": "astra-root",
+  "commit": "bba440ac84960edac88c6deda79a046cd2b6031c",
+  "evidence_sha256": "c10da28e282ed7b60f12866b179fc90294c61902e5eb61347463ae821e84737c",
+  "changed_sources_verified": 28,
+  "vendor_files_verified": 122,
+  "raw_logs_verified": 31,
+  "retained_gzip_logs_verified": 8,
+  "cpu_tests": 105,
+  "groups": 17,
+  "exact_source_protocol_tests": 8,
+  "lock_packages_verified": 962,
+  "assessment": "Accepted immutable corrected source and evidence for bounded opt-in desktop text bridge. Both source findings have retained failing and passing regressions. Ready for current-main integration and applicable scoped checks.",
+  "limits": [
+    "No actual NS/GTK/IMM input method interaction, native windows, screenshots, GPU, phone or timing acceptance",
+    "Precise caret rectangle from canonical positioned glyphs is not yet integrated; existing native IME position hook preserved, default origin fallback explicit",
+    "No bound on native OS/input-method allocations or the preexisting Tao queue; own text payload/state copies and accepted UI receipt packet are bounded",
+    "Surrounding-text reconversion/replacement beyond exact current marked range is explicitly unsupported",
+    "Ordinary no-UI Tao behavior stays default; mobile managed text-session API refuses unsupported",
+    "Existing UiUnsupported draw guard retained until reviewed Claude0056 consumer integrates",
+    "IME context/serial/preedit are transient and not serialized; new restored UiRuntime owner requires new native lease; viewport-only surface retry preserves current lease"
+  ]
+}

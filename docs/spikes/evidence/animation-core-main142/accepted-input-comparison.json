@@ -1,0 +1,24 @@
+{
+  "sampler": "b5666f3dd4cea2e76594f4c95c2b1ef2638ae389",
+  "core": "abbfd1a187d5b2422060ff1a803ca5aa68adf806",
+  "integration": "803c13dbcc3812983ed3b0f448ccebba345ee66c",
+  "matches": {
+    "crates/incant_assets_runtime/src/animation/mod.rs": true,
+    "crates/incant_assets_runtime/src/animation/player.rs": true,
+    "crates/incant_assets_runtime/src/animation/weighted.rs": true,
+    "crates/incant_assets/tests/skeletal.rs": true,
+    "crates/incant_assets/tests/skeletal/blending.rs": true,
+    "crates/incant_assets/tests/skeletal/weighted.rs": true,
+    "Cargo.toml": true,
+    "Cargo.lock": false,
+    "rust-toolchain.toml": true,
+    "crates/incant_runtime/src/animation_graph/mod.rs": true,
+    "crates/incant_runtime/src/animation_graph/tree/mod.rs": true,
+    "crates/incant_runtime/src/animation_graph/tree/evaluate.rs": true,
+    "crates/incant_runtime/src/animation_graph/tree/validate.rs": true,
+    "crates/incant_runtime/tests/animation_tree.rs": true,
+    "crates/incant_runtime/tests/support/alloc.rs": true
+  },
+  "only_conflicts": "STATUS additive headings; no source conflict",
+  "lock": "Accepted UI checkpoint dependency edges differ from original sampler base; all versions fixed. Initial blanket equality assertion correctly detected this and was replaced by explicit qualified comparison."
+}

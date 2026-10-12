@@ -15,20 +15,61 @@ use std::{
     convert::Infallible,
     sync::{
         Arc, Mutex,
-        atomic::{AtomicU8, Ordering},
+        atomic::{AtomicBool, AtomicU8, AtomicU64, Ordering},
     },
 };
 
 const PLAYING: u8 = 0;
 const PAUSED: u8 = 1;
 const STOPPED: u8 = 2;
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub(crate) struct Checkpoint {
+    pub position: f64,
+    pub state: u8,
+    pub parameters: (f32, f32, f64),
+}
+#[cfg(any(feature = "scene", test))]
+impl Checkpoint {
+    pub fn validate(self, clip: &CookedAudio) -> crate::Result<()> {
+        // A final sample may advance at most 96 source frames (192k / 8k * 4).
+        // Loop normalization occurs before sampling, not after the increment.
+        if !self.position.is_finite()
+            || self.position < 0.0
+            || self.position > clip.metadata.frames as f64 + 96.0
+            || self.state > STOPPED
+        {
+            return Err(crate::AudioError::Invalid("stream cursor/state"));
+        }
+        PlayOptions {
+            gain_db: self.parameters.0,
+            pan: self.parameters.1,
+            rate: self.parameters.2,
+            ..Default::default()
+        }
+        .validate(0.)
+    }
+}
 struct Shared {
+    position: AtomicU64,
+    retained: AtomicBool,
     state: AtomicU8,
     error: Mutex<Option<String>>,
     parameters: Mutex<(f32, f32, f64)>,
 }
 pub(crate) struct Handle(Arc<Shared>);
 impl Handle {
+    #[cfg(any(feature = "scene", test))]
+    pub fn checkpoint(&self) -> Checkpoint {
+        Checkpoint {
+            position: f64::from_bits(self.0.position.load(Ordering::Relaxed)),
+            state: self.0.state.load(Ordering::Relaxed),
+            parameters: *self.0.parameters.lock().unwrap_or_else(|e| e.into_inner()),
+        }
+    }
+    #[cfg(any(feature = "scene", test))]
+    pub fn retained(&self) -> bool {
+        self.0.retained.load(Ordering::Relaxed)
+    }
     pub fn state(&self) -> PlaybackState {
         match self.0.state.load(Ordering::Relaxed) {
             PLAYING => PlaybackState::Playing,
@@ -62,17 +103,25 @@ impl Handle {
 pub(crate) struct Data {
     pub clip: Arc<CookedAudio>,
     pub options: PlayOptions,
+    pub resume: Option<Checkpoint>,
 }
 impl SoundData for Data {
     type Error = Infallible;
     type Handle = Handle;
     fn into_sound(self) -> Result<(Box<dyn Sound>, Handle), Infallible> {
-        let shared = Arc::new(Shared {
-            state: AtomicU8::new(PLAYING),
-            error: Mutex::new(None),
-            parameters: Mutex::new((self.options.gain_db, self.options.pan, self.options.rate)),
+        let checkpoint = self.resume.unwrap_or(Checkpoint {
+            position: self.options.start_seconds * f64::from(self.clip.metadata.sample_rate),
+            state: PLAYING,
+            parameters: (self.options.gain_db, self.options.pan, self.options.rate),
         });
-        let position = self.options.start_seconds * f64::from(self.clip.metadata.sample_rate);
+        let shared = Arc::new(Shared {
+            position: AtomicU64::new(checkpoint.position.to_bits()),
+            retained: AtomicBool::new(true),
+            state: AtomicU8::new(checkpoint.state),
+            error: Mutex::new(None),
+            parameters: Mutex::new(checkpoint.parameters),
+        });
+        let position = checkpoint.position;
         let gain = kira::Decibels(self.options.gain_db).as_amplitude();
         Ok((
             Box::new(OfflineSound {
@@ -162,8 +211,15 @@ impl Sound for OfflineSound {
                 }
             }
         }
+        self.shared
+            .position
+            .store(self.position.to_bits(), Ordering::Relaxed);
     }
     fn finished(&self) -> bool {
-        self.shared.state.load(Ordering::Relaxed) == STOPPED
+        let finished = self.shared.state.load(Ordering::Relaxed) == STOPPED;
+        if finished {
+            self.shared.retained.store(false, Ordering::Relaxed);
+        }
+        finished
     }
 }

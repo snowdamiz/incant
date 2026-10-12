@@ -266,7 +266,15 @@ fn native_lifetime_reuse_and_empty_ui_never_silently_enable_saving() {
             .unwrap()
             .incarnation
     );
-    assert_eq!(w.save_bytes().unwrap_err(), SaveError::UiUnsupported);
+    let saved = w.save_bytes().unwrap();
+    assert_eq!(u32::from_le_bytes(saved[8..12].try_into().unwrap()), 7);
+    let restored = NativeWorld::from_save_bytes_for_scene(&saved, &scene()).unwrap();
+    assert!(restored.requires_ui_checkpoint());
+    assert_eq!(
+        restored.ui_view().unwrap().nodes().len(),
+        w.ui_view().unwrap().nodes().len()
+    );
+    assert_eq!(restored.save_bytes().unwrap(), saved);
     apply(
         &mut w,
         vec![
@@ -277,7 +285,15 @@ fn native_lifetime_reuse_and_empty_ui_never_silently_enable_saving() {
     )
     .unwrap();
     assert_eq!(w.ui_view().unwrap().nodes().len(), 0);
-    assert_eq!(w.save_bytes().unwrap_err(), SaveError::UiUnsupported);
+    let saved = w.save_bytes().unwrap();
+    assert_eq!(u32::from_le_bytes(saved[8..12].try_into().unwrap()), 7);
+    let restored = NativeWorld::from_save_bytes_for_scene(&saved, &scene()).unwrap();
+    assert!(restored.requires_ui_checkpoint());
+    assert_eq!(
+        restored.ui_view().unwrap().nodes().len(),
+        w.ui_view().unwrap().nodes().len()
+    );
+    assert_eq!(restored.save_bytes().unwrap(), saved);
 }
 #[test]
 fn world_components_and_numeric_ui_motion_refuse_without_partial_publication() {
@@ -355,4 +371,74 @@ fn world_components_and_numeric_ui_motion_refuse_without_partial_publication() {
     .unwrap();
     assert_eq!(w.ui_view().unwrap().nodes().len(), 4);
     w.step().unwrap();
+}
+
+#[test]
+fn ui_world_save_preserves_committed_declarations_and_refuses_old_or_malformed_data() {
+    let original = scene();
+    let mut world = NativeWorld::new(original.clone());
+    let changed = Arc::new(UiNode {
+        disabled: true,
+        ..(*declarations()[1].node).clone()
+    });
+    apply(
+        &mut world,
+        vec![StructuralCommand::SetUi {
+            entity: id(2),
+            node: Some(changed),
+        }],
+    )
+    .unwrap();
+    world.step().unwrap();
+    let bytes = world.save_bytes().unwrap();
+    let loaded = NativeWorld::from_save_bytes_for_scene(&bytes, &original).unwrap();
+    assert!(
+        loaded
+            .ui_view()
+            .unwrap()
+            .nodes()
+            .find(|n| n.id == id(2))
+            .unwrap()
+            .node
+            .disabled
+    );
+    assert_eq!(loaded.tick(), 1);
+    assert_eq!(loaded.save_bytes().unwrap(), bytes);
+    let generation = world.ui_view().unwrap().generation();
+    world.restore_bytes(&bytes).unwrap();
+    assert!(world.ui_view().unwrap().generation() > generation);
+    fn seal(b: &mut [u8]) {
+        let mut hash = Sha256::new();
+        hash.update(&b[..32]);
+        hash.update(&b[64..]);
+        b[32..64].copy_from_slice(&hash.finalize());
+    }
+    for (offset, value) in [(8, 8), (12, 0), (12, 2), (100, 255), (104, 255), (108, 255)] {
+        let mut bad = bytes.clone();
+        bad[offset] = value;
+        seal(&mut bad);
+        assert!(world.restore_bytes(&bad).is_err());
+        assert_eq!(world.save_bytes().unwrap(), bytes);
+    }
+    // Matching origin is not permission to silently discard an older UI contract.
+    let plain = CookedScene::new(
+        original.id(),
+        original.tick_rate(),
+        original.entities().to_vec(),
+    )
+    .unwrap()
+    .with_text(original.font_assets().to_vec(), vec![])
+    .unwrap();
+    let mut old = NativeWorld::new(plain).save_bytes().unwrap();
+    old[64..96].copy_from_slice(&bytes[64..96]);
+    seal(&mut old);
+    assert!(matches!(
+        world.restore_bytes(&old),
+        Err(SaveError::UiUnsupported)
+    ));
+    assert!(matches!(
+        NativeWorld::from_save_bytes_for_scene(&old, &original),
+        Err(SaveError::UiUnsupported)
+    ));
+    assert_eq!(world.save_bytes().unwrap(), bytes);
 }

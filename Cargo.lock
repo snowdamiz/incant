@@ -3935,6 +3935,7 @@ dependencies = [
  "schemars 1.2.2",
  "serde",
  "serde_json",
+ "sha2 0.10.9",
  "tempfile",
  "thiserror 2.0.21",
 ]
@@ -4447,10 +4448,12 @@ name = "incant_script"
 version = "0.0.1"
 dependencies = [
  "cpu-time",
+ "incant_audio_runtime",
  "incant_input",
  "incant_localization",
  "incant_runtime",
  "incant_types",
+ "incant_ui",
  "incant_wasm_dev",
  "incant_wasm_runtime",
  "rquickjs",
@@ -4527,6 +4530,7 @@ name = "incant_ui"
 version = "0.0.1"
 dependencies = [
  "incant_input",
+ "incant_runtime",
  "incant_text",
  "incant_types",
  "sha2 0.10.9",
@@ -5013,8 +5017,6 @@ checksum = "e2db585e1d738fc771bf08a151420d3ed193d9d895a36df7f6f8a9456b911ddc"
 [[package]]
 name = "kira"
 version = "0.12.5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "aae7115ef1161313b8f71f49487702a662ab333bd2a47bf69af410b69112a519"
 dependencies = [
  "atomic-arena",
  "cpal",

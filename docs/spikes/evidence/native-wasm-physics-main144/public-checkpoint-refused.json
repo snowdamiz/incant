@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-main144-001/public-export/package/player/incant_game_player",
+    "--package",
+    "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-main144-001/public-export/package/player/data",
+    "--ticks",
+    "1",
+    "--output",
+    "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-main144-001/public-export/checkpoint-refused.pcm",
+    "--save-checkpoint",
+    "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-main144-001/public-export/checkpoint-refused.bin"
+  ],
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Error: Checkpoint(Unsupported(\"static module state ABI\"))\n",
+  "output_absent": true,
+  "expected_stderr": "Error: Checkpoint(Unsupported(\"static module state ABI\"))"
+}

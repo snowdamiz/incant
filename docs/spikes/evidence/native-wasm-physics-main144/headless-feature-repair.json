@@ -1,0 +1,21 @@
+{
+  "command": [
+    "./tools/cargo",
+    "build",
+    "--locked",
+    "--profile",
+    "ci",
+    "-j2",
+    "-p",
+    "incant_headless",
+    "--features",
+    "wasmtime-host"
+  ],
+  "exit": 0,
+  "seconds": 322.99678720800057,
+  "source_head": "fff9253fe181f9737c47f85822db43be5a7d660b",
+  "source_manifest_sha256": "e33539a3c2223deb030d5604a20cfed200a98a9cad71cd9091353b44ad55ff77",
+  "log_sha256": "bb9cdf291a038ad4bf159b720edf515fafa00c602dd8498c69d09517f9859798",
+  "binary": "/Users/andreyyurlov/.codex/incant-integration-target/ci/incant_headless",
+  "binary_sha256": "1b8387e505d2ecc248aefbf8a50ce122a61151012b979a4ec3cc074cea3c5879"
+}

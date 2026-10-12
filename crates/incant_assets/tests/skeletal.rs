@@ -4,6 +4,8 @@ mod blending;
 mod fixture;
 #[path = "skeletal/grouped.rs"]
 mod grouped;
+#[path = "skeletal/ik.rs"]
+mod ik;
 #[path = "skeletal/weighted.rs"]
 mod weighted;
 use incant_assets::{cook_gltf, import_gltf};

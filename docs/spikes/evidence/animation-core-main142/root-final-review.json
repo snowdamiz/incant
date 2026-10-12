@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-12T15:00:46.940406+00:00",
+  "accepted": true,
+  "reviewer": "astra/root",
+  "scope": "Combined retained weighted sampler and numeric nested/1D/2D tree primitive; no authored graph/runtime route, renderer, SDK, GPU or device completion.",
+  "receipt_sha256": "4db9fd6130ac9ee79869ac2a074a6d110472c616e2ea2510c4fc191c66c78073",
+  "tested_head": "803c13dbcc3812983ed3b0f448ccebba345ee66c",
+  "verified_inputs": 1487,
+  "results": "310 tests/48groups,0failed/ignored; 8 successful commands; accepted source hashes unchanged except qualified local UI dependency edges",
+  "limitations": [
+    "Private preparatory integration while UI checkpoint source-free proof ran independently. Publication follows actual UI main merge and unchanged-source/tree audit.",
+    "No numerical GPU/window execution or performance/device claim. Existing zero-allocation regressions remain CPU behavior evidence."
+  ]
+}

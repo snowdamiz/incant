@@ -6,7 +6,10 @@ mod sampling;
 use crate::{AssetError, Mesh, ModelNode, Result, invalid};
 pub use binary::decode_animation;
 use glam::{DMat4, DQuat, DVec3};
-pub use player::{AnimationPlayer, MAX_POSE_SAMPLES, PoseSource, SkinPose, WeightedClipSample};
+pub use player::{
+    AnimationPlayer, MAX_POSE_SAMPLES, MAX_TWO_BONE_IK, PoseSource, SkinPose, TwoBoneIk,
+    TwoBoneIkError, WeightedClipSample,
+};
 pub use sampling::ClipSample;
 use std::collections::BTreeSet;
 

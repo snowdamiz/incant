@@ -1,0 +1,105 @@
+{
+  "scope": "Combined retained weighted sampler and numeric nested/1D/2D tree primitive; no authored graph/runtime route, renderer, SDK, GPU or device completion.",
+  "tested_head": "803c13dbcc3812983ed3b0f448ccebba345ee66c",
+  "private_base": "d58944ae",
+  "main_base": "1fef267db3e06fe81307ac475397d1e1ec8e975a",
+  "pending_ui_source": "a24d485bf1b2b87c5622e8f49e7429cb3db0d9bb",
+  "accepted_commits": [
+    "b5666f3dd4cea2e76594f4c95c2b1ef2638ae389",
+    "abbfd1a187d5b2422060ff1a803ca5aa68adf806"
+  ],
+  "source_comparison": {
+    "sampler": "b5666f3dd4cea2e76594f4c95c2b1ef2638ae389",
+    "core": "abbfd1a187d5b2422060ff1a803ca5aa68adf806",
+    "integration": "803c13dbcc3812983ed3b0f448ccebba345ee66c",
+    "matches": {
+      "crates/incant_assets_runtime/src/animation/mod.rs": true,
+      "crates/incant_assets_runtime/src/animation/player.rs": true,
+      "crates/incant_assets_runtime/src/animation/weighted.rs": true,
+      "crates/incant_assets/tests/skeletal.rs": true,
+      "crates/incant_assets/tests/skeletal/blending.rs": true,
+      "crates/incant_assets/tests/skeletal/weighted.rs": true,
+      "Cargo.toml": true,
+      "Cargo.lock": false,
+      "rust-toolchain.toml": true,
+      "crates/incant_runtime/src/animation_graph/mod.rs": true,
+      "crates/incant_runtime/src/animation_graph/tree/mod.rs": true,
+      "crates/incant_runtime/src/animation_graph/tree/evaluate.rs": true,
+      "crates/incant_runtime/src/animation_graph/tree/validate.rs": true,
+      "crates/incant_runtime/tests/animation_tree.rs": true,
+      "crates/incant_runtime/tests/support/alloc.rs": true
+    },
+    "only_conflicts": "STATUS additive headings; no source conflict",
+    "lock": "Accepted UI checkpoint dependency edges differ from original sampler base; all versions fixed. Initial blanket equality assertion correctly detected this and was replaced by explicit qualified comparison."
+  },
+  "frozen_input_count": 1487,
+  "checks": {
+    "tests_passed": 310,
+    "failed": 0,
+    "ignored": 0,
+    "groups": 48,
+    "commands_zero": 8
+  },
+  "artifacts": {
+    "accepted-input-comparison.json": {
+      "sha256": "8ad0b2dd7a93f37260a24e1e8288d83347ae1d755284093b2e59b20edf99c913"
+    },
+    "clippy.log.gz": {
+      "sha256": "f078fdeac860909a9c7b5edcd4b7e060b85291004c9722c1c6f61eb71b376827",
+      "uncompressed_sha256": "234a80374d440b8530b1d4ac84758d9f981bf4e04de80508f4ee41cbad9e3ab2"
+    },
+    "conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "diff.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "fmt.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "freeze.json": {
+      "sha256": "b2c08fec87c0422e979a82dc5f398ce9df65dc8a454f06a52119b00cadb0a073"
+    },
+    "graph-assets.log.gz": {
+      "sha256": "c47f7c849e70472779f3b4dae6f07b5e01dd29c7207e905f4fa4e4dcff3ee951",
+      "uncompressed_sha256": "466c27957bec6177e21911180caffd16c9a78482761e9fad8fb9622eb2023499"
+    },
+    "graph-runtime.log.gz": {
+      "sha256": "3deae625b91834b4e492b6bb02a70a0719cad489ee7dff02c4a84c9847ccdca7",
+      "uncompressed_sha256": "8f77a37ec4738c7752086111a5ed5a7dfc5454816ab0b7123c6dbdbac4cfb5a1"
+    },
+    "lock-delta.patch": {
+      "sha256": "62fd909187e7e61e8f84783005d3d5acd4fbe312c73f7e0bea87fb19e58548c6"
+    },
+    "results.json": {
+      "sha256": "a1c66d537a15be7f3397613b77581dfad4aebbff5c94884ddd92930081ad112f"
+    },
+    "tests.log.gz": {
+      "sha256": "1d2ff38ee7921b59a4aab9b297bf8c52307e3c352b987eebef1f49384fbc5243",
+      "uncompressed_sha256": "828abd28611e6742b046ebc5b8611ff1935e8680f67f75346ba9728d2f72a414"
+    },
+    "wasm.log.gz": {
+      "sha256": "477ba62188199c81ee384c6f17142cf1ac35a19ec9ad49cb995b0f970199d369",
+      "uncompressed_sha256": "67a102eabc95d010476bac56ef4c23fdfb0088aa176d30f5a7da6fcd4c7068bb"
+    },
+    "root-final-review.json": {
+      "sha256": "e0515f3bb0ce820d3b93a25f434808838328c038122270cf01b296ea8ba5098f"
+    },
+    "actual-main143-audit.json": {
+      "sha256": "5d898b02aed5932eeceec8a9f6f013280ba63ce743e78a52e4a34df604d09314"
+    }
+  },
+  "limitations": [
+    "Originally tested in private parallel integration; actual merged main143 was then included with all 1487 compiled inputs byte-identical. Source and evidence acceptance remain scoped to this numeric core.",
+    "No numerical GPU/window execution or performance/device claim. Existing zero-allocation regressions remain CPU behavior evidence."
+  ],
+  "setup_observation": "An initial blanket original-freeze equality assertion detected the expected UI dependency edges in Cargo.lock. The qualified source comparison records this exact difference; package versions did not move.",
+  "pre_review_record_sha256": "4db9fd6130ac9ee79869ac2a074a6d110472c616e2ea2510c4fc191c66c78073",
+  "final_main": "e1eabaeb32a6df5edd0e9a3a450cfa4e6200a5a9",
+  "ancestry_head": "d842043a5140f5a51c2b19ad4dc1e5b388c0f6c8",
+  "root_review": "root-final-review.json",
+  "actual_main_audit": "actual-main143-audit.json"
+}

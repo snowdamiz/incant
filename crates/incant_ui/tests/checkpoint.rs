@@ -500,3 +500,7 @@ fn empty_owner_and_button_focus_round_trip_without_inventing_text() {
         Err(UiCheckpointError::Invalid("no committed layout"))
     ));
 }
+
+#[cfg(feature = "native")]
+#[path = "checkpoint/native.rs"]
+mod native;

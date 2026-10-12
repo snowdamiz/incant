@@ -1,0 +1,137 @@
+diff --git a/crates/incant_headless/tests/play_input.rs b/crates/incant_headless/tests/play_input.rs
+index 122d6f19..06e3ad7c 100644
+--- a/crates/incant_headless/tests/play_input.rs
++++ b/crates/incant_headless/tests/play_input.rs
+@@ -102,44 +102,64 @@ fn invalid_future_events_ranges_and_oversized_files_fail_before_output_is_publis
+     fixture(root);
+     let mut bad = clip();
+     bad["frames"][3]["events"] = json!([{"type":"gamepad_disconnected","id":99}]);
+-    for recording in [
+-        bad,
+-        {
+-            let mut c = clip();
+-            c["tick_rate"] = json!(120);
+-            c
+-        },
+-        {
+-            let mut c = clip();
+-            c["version"] = json!(2);
+-            c
+-        },
+-        {
+-            let mut c = clip();
+-            c["start_tick"] = json!(100);
+-            c
+-        },
+-        json!({"format":"incant-input","version":1,"tick_rate":60,"start_tick":0,"ticks":0,"frames":[]}),
++    for (recording, expected) in [
++        (
++            bad,
++            "input recording is invalid at offset 40: gamepad is not connected",
++        ),
++        (
++            {
++                let mut c = clip();
++                c["tick_rate"] = json!(120);
++                c
++            },
++            "input-recording tick rate must match the game",
++        ),
++        (
++            {
++                let mut c = clip();
++                c["version"] = json!(3);
++                c
++            },
++            "unsupported input-recording format or version",
++        ),
++        (
++            {
++                let mut c = clip();
++                c["start_tick"] = json!(100);
++                c
++            },
++            "requested game tick is outside the input clip",
++        ),
++        (
++            json!({"format":"incant-input","version":1,"tick_rate":60,"start_tick":0,"ticks":0,"frames":[]}),
++            "requested game tick is outside the input clip",
++        ),
+     ] {
+         fs::write(root.join("bad.json"), recording.to_string()).unwrap();
++        let failed = run(
++            root,
++            &[
++                "play",
++                "game.incant.json",
++                "--ticks",
++                "1",
++                "--input-replay",
++                "bad.json",
++                "--save-output",
++                "absent.json",
++                "--log-output",
++                "absent.jsonl",
++            ],
++        );
++        assert!(
++            !failed.status.success(),
++            "accepted invalid recording: {recording}"
++        );
+         assert!(
+-            !run(
+-                root,
+-                &[
+-                    "play",
+-                    "game.incant.json",
+-                    "--ticks",
+-                    "1",
+-                    "--input-replay",
+-                    "bad.json",
+-                    "--save-output",
+-                    "absent.json",
+-                    "--log-output",
+-                    "absent.jsonl"
+-                ]
+-            )
+-            .status
+-            .success()
++            String::from_utf8_lossy(&failed.stderr).contains(expected),
++            "expected {expected}: {}",
++            String::from_utf8_lossy(&failed.stderr)
+         );
+         assert!(!root.join("absent.json").exists());
+         assert!(!root.join("absent.jsonl").exists());
+@@ -170,3 +190,32 @@ fn invalid_future_events_ranges_and_oversized_files_fail_before_output_is_publis
+     assert!(!failed.status.success());
+     assert!(String::from_utf8_lossy(&failed.stderr).contains("exceeds"));
+ }
++
++#[test]
++fn supported_recording_versions_preserve_the_same_non_ui_playback() {
++    let temp = tempfile::tempdir().unwrap();
++    let root = temp.path();
++    fixture(root);
++    let mut reports = Vec::new();
++    for version in [1, 2] {
++        let mut recording = clip();
++        recording["version"] = json!(version);
++        fs::write(root.join("input.json"), recording.to_string()).unwrap();
++        reports.push(success(run(
++            root,
++            &[
++                "play",
++                "game.incant.json",
++                "--ticks",
++                "60",
++                "--input-replay",
++                "input.json",
++            ],
++        )));
++    }
++    for key in ["state", "input", "logs"] {
++        assert_eq!(reports[0][key], reports[1][key], "{key}");
++    }
++    assert_eq!(reports[1]["input"]["focused"], false);
++    assert_eq!(reports[1]["input"]["keyboard"]["held"], json!([]));
++}

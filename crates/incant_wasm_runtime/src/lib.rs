@@ -1,10 +1,13 @@
 //! Shared copied `incant_v1` capability and native transaction boundary.
 //! Contains no compiler, parser, JIT, OS or authoring capability.
 mod animation_graphs;
+mod animation_poses;
 mod animations;
 mod capability;
 mod flipbooks;
 mod generated;
+mod navigation_paths;
+mod physics_queries;
 mod steering;
 pub use flipbooks::{
     MAGIC as FLIPBOOK_MAGIC, MAX_BYTES as MAX_FLIPBOOK_BYTES, ROW_BYTES as FLIPBOOK_ROW_BYTES,
@@ -29,6 +32,8 @@ pub enum BoundaryError {
     Limit(&'static str),
     #[error(transparent)]
     Runtime(#[from] RuntimeError),
+    #[error(transparent)]
+    Query(#[from] incant_runtime::QueryError),
     #[error("module failed; construct or reload a new instance")]
     Failed,
 }

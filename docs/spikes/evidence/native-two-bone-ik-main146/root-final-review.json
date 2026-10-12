@@ -1,0 +1,25 @@
+{
+  "at": "2026-10-12T15:54:22.078935+00:00",
+  "decision": "accepted scoped main146 integration",
+  "tested_head": "fa0a70d717c4066b5fd55064c2e14304e8b2db2e",
+  "actual_main": "51fe8e666db54c9e321e6456f3ae909bcde6ecd2",
+  "packet_sha256": "9443c355fe25a89bff2a7ecb4fe43afa35fc4275ef048201543dba680a4c1f22",
+  "inputs_verified": 1675,
+  "accepted_source_files_verified": 6,
+  "compressed_and_raw_artifacts_verified": 10,
+  "observed_tests": {
+    "passed": 118,
+    "failed": 0,
+    "ignored": 0,
+    "groups": 18
+  },
+  "zero_exit_commands_verified": 8,
+  "build_inputs": "Cargo.toml/Cargo.lock byte-equal actual main146, accepted audio changes retained",
+  "review": "Only additive STATUS conflict; frozen six CPU source/test files exactly match accepted independent IK review; no new behavior changes. Logs and limits match scope.",
+  "findings": [],
+  "limits": [
+    "Retained CPU rotation-only immediate two-bone chains, at most32 ordered constraints.",
+    "No authored/cooked IK controls, runtime/SDK/checkpoint wiring, general affine chains, stretch or joint limits.",
+    "No shipping executable, GPU/pixel/animation-feel/device/RSS/performance or whole Phase1 gate claim."
+  ]
+}

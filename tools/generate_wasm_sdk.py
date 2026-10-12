@@ -46,10 +46,13 @@ def generate(data, digest):
     if 'incant_localization_v1' in data['namespaces']:
         shared.append('pub mod localization;\n')
     if 'incant_navigation_v1' in data['namespaces']:
-        shared.append('pub mod steering;\n')
+        shared.append('pub mod steering;\npub mod navigation_paths;\n')
+    if 'incant_physics_v1' in data['namespaces']:
+        shared.append('pub mod physics;\n')
     shared += [f'pub const {name}: usize = {value};\n' for name,value in data['constants'].items()]
     shared += [f'pub const {name}: &[u8; 8] = b"{value}";\n' for name,value in data['magic'].items()]
-    shared += ['pub const ANIMATION_V3_MAX_BYTES: usize = AnimationHeader::SIZE + ANIMATION_MAX_ROWS * AnimationRowV3::SIZE;\n',
+    shared += ['pub const ANIMATION_V4_MAX_BYTES: usize = AnimationHeaderV4::SIZE + ANIMATION_MAX_ROWS * AnimationRowV4::SIZE + ANIMATION_POSE_MAX_SAMPLE_ROWS * AnimationPoseSample::SIZE;\n',
+               'pub const ANIMATION_V3_MAX_BYTES: usize = AnimationHeader::SIZE + ANIMATION_MAX_ROWS * AnimationRowV3::SIZE;\n',
                'pub const ANIMATION_GRAPH_MAX_BYTES: usize = AnimationGraphHeader::SIZE + ANIMATION_GRAPH_MAX_ROWS * AnimationGraphRow::SIZE + ANIMATION_GRAPH_MAX_PARAMETER_ROWS * AnimationGraphParameter::SIZE;\n',
                'pub const ANIMATION_V2_MAX_BYTES: usize = AnimationHeader::SIZE + ANIMATION_MAX_ROWS * AnimationRowV2::SIZE;\n',
                'pub const ANIMATION_MAX_BYTES: usize = AnimationHeader::SIZE + ANIMATION_MAX_ROWS * AnimationRow::SIZE;\n',

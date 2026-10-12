@@ -86,6 +86,19 @@ source, raw Wasm or cached native modules at runtime.
   Active timed blends make v1 length/read refuse; parameter blends make both v1
   and v2 refuse. The parser accepts all three exact layouts. Old hosts/parsers
   reject the new namespace/magic instead of silently dropping the second pose.
+  All three versions explicitly refuse native weighted tree poses.
+- `animation_poses(scratch)` uses `incant_animation_v4` for complete copied
+  poses, including nested animation trees. It returns scene identity and sorted
+  stable entity IDs; each row exposes `samples()` and an explicit pose kind.
+  `Single` is one sample. `SlerpTransition` and `SlerpParameter` retain ordered
+  source/destination operands and the existing exact two-pose SLERP semantics.
+  `WeightedQuaternionMean` carries the native positive normalized weights for
+  local translation/scale blending and normalized quaternion averaging. These
+  kinds are not interchangeable. The row clip/time is representative only; use
+  all samples for a weighted pose. Unknown kinds or reserved metadata fail
+  explicitly. Copied clocks, flags and timed-transition metadata remain available.
+  Queued controls do not change the current callback snapshot. See
+  [samples/animation_poses.rs](samples/animation_poses.rs).
 - `animation_graphs(scratch)` returns sorted entity/state IDs, the explicit master
   pause bit, state clocks, and sorted stable parameter IDs with captured values.
   `control_animation_graph` queues SetParameter/SelectState commands through the
@@ -103,6 +116,32 @@ source, raw Wasm or cached native modules at runtime.
   `incant_module::localization`; smaller initialized scratch works when the whole
   frame fits. [samples/localization.rs](samples/localization.rs) is runnable with
   the same trusted compile helper and actual two-host conformance command.
+- `query_physics(queries, request_scratch, result_scratch)` batches up to 64
+  3D/2D rays and character movement queries against the committed native solvers.
+  Typed results retain request order and borrow only caller-owned scratch.
+  `physics_events(dimension, scratch)` observes complete sorted sensor enter/exit
+  events without draining them. Copied event frames retain their scene ID and
+  dimension, exposed by `scene()` and `dimension()`, including empty frames.
+  Pending numeric/structural writes are invisible;
+  apply returned character displacement through the ordinary columns. Types and
+  scratch bounds are in `incant_module::physics`; the
+  [physics sample](samples/physics.rs) exercises both dimensions and character
+  movement. Invalid/caught requests or insufficient scratch reject the callback.
+  The [public package proof](../../docs/spikes/native-wasm-physics-package.md)
+  exercises ordinary authored import/export and fresh source-free shipping
+  players against a direct native physics oracle.
+- `find_path(owner, request, result_scratch)` queries the active scene's committed
+  navmesh; `find_grid_path` queries its prepared grid. Both return `None` for a
+  valid miss and a borrowed view of the complete copied route on success. Mesh
+  paths retain points, corridor, visited count, generation and explicit off-mesh
+  link IDs/point pairs/direction. Grid paths retain adjacent indices, generation
+  and exact integer cost. All u64 metadata stays exact. Pending numeric/structural
+  writes remain invisible until native commit. Queries do not move entities;
+  gameplay must handle off-mesh traversal and grid-to-world conversion explicitly.
+  Types and scratch maxima are in `incant_module::navigation`; the complete
+  [navigation sample](samples/navigation_paths.rs) observes a rebuild after
+  committed obstacle movement. Unknown owners, invalid inputs and exhausted
+  budgets reject the callback, including when the guest ignores an SDK error.
 - `steer_agents(request, request_scratch, result_scratch)` computes local-avoidance
   velocities over explicit world-space agent samples and obstacle polygons or
   segments. It never gathers collision geometry or moves entities implicitly.
@@ -146,7 +185,12 @@ Additive `incant_animation_v1` supplies legacy skeletal playback snapshots/contr
 `incant_animation_graph_v1` adds copied graph state/parameters and atomic controls.
 `incant_log_v1` supplies logging and `incant_localization_v1` supplies
 copied locale/message queries and atomic settings. `incant_navigation_v1` adds
-local-avoidance requests/results; older hosts reject these imports explicitly.
+local-avoidance requests/results and committed navmesh/grid path queries. The
+path imports append at opcodes 36–38; all previous operations remain unchanged.
+`incant_physics_v1` appends bounded batch/event/result operations at 39–41.
+`incant_animation_v4` appends complete pose snapshot length/read at 42–43; all
+previous operations and layouts remain unchanged.
+Older hosts reject unsupported imports explicitly.
 Existing `incant_v1`, `incant_input_v1`, and `incant_flipbook_v1` layouts remain
 unchanged. Unknown namespaces, signatures and magic/layout versions fail closed.
 The host's native numeric layout is checked against generated sizes and offsets
@@ -163,7 +207,14 @@ v2: 8,000,016; v3: 10,400,016 copied bytes), 256 clips
 per entity and finite speed in [-16, 16]. Snapshot row order is unspecified;
 use stable IDs. Callers should retain appropriately sized scratch across ticks. The SDK exports
 snapshot maximum sizes for reusable buffers; `ANIMATION_MAX_BYTES` remains the
-v1 bound, and v2/v3 have explicit versioned constants. Graph snapshots hold at
+v1 bound, and v2/v3 have explicit versioned constants. V4 has sorted entity IDs,
+at most 16 samples per row and at most 1,024 weighted graph rows. Its complete
+frame is bounded to 14,744,104 bytes (`ANIMATION_V4_MAX_BYTES`), including at most
+214,336 samples. Native sample order and f64 weights/times are retained exactly;
+the parser validates the complete frame before exposing any iterator. The
+connected standalone tree currently supplies up to eight active samples;
+sixteen-sample wire capacity does not imply connected tree-state fades. Future
+composite/grouped pose kinds require an explicit compatible version. Graph snapshots hold at
 most 1,024 entities with 16 parameters each (458,776 bytes). Parameter values
 are finite within ±1,000,000 and the narrower authored range. Elapsed state time
 is bounded to 3,600 seconds; clip time may exceed this for longer clips. Host fuel and native validation
@@ -187,7 +238,26 @@ charges its fixed 24-byte request and result copies to transfer limits. See
 [samples/formatting.rs](samples/formatting.rs). Catalog edits and report
 enumeration remain unsupported.
 
-Local avoidance is bounded per callback to 32 requests, 128 aggregate agent
+Physics uses the same 1,024 native query units as navigation/localization, one
+unit per batch row or event observation, with at most 128 character queries per
+callback. A batch holds at most 64 queries and 4,096 aggregate returned collision
+IDs. Requests/results are at most 7,184/71,696 bytes. Events preserve the native
+131,072-row bound (5,242,912 bytes); provide smaller scratch for smaller frames.
+The existing native ray and character scalar domains apply before narrowing,
+including the character displacement limit against the actual callback dt.
+Queries preserve masks, optional exclusion, sensors, autostep, ground snap and
+slope settings. Events describe the last committed physics step, not pending
+movement. The SDK provides no solver handle or implicit movement.
+
+Navmesh, grid and local avoidance share 32 requests per callback. Path searches
+also share 65,536 requested expansions, charged even for misses. Mesh requests
+permit finite coordinates within ±100,000, snap distance 0.001–10 and 1–32,768
+visits; grid cells are u16 indices with 1–65,536 expansions. Native owner/grid
+bounds remain authoritative. There are at most 4,096 points, corridor entries,
+traversal records or grid cells. Maximum copied results are 245,800 mesh bytes
+and 32,800 grid bytes. A short destination never receives a partial frame.
+
+Local avoidance is additionally bounded per callback to 128 aggregate agent
 samples and 128 aggregate obstacle edges. Each request has at most 32 obstacles;
 closed polygons have 3..32 vertices and segments exactly two. The copied request
 and result maxima are 17,192 and 5,136 bytes. Scalar domains, duplicate IDs and

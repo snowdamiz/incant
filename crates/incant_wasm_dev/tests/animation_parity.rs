@@ -128,7 +128,7 @@ fn active_tick_version_and_signature_contracts_are_enforced_before_execution() {
     assert!(StaticModule::new(embedded::linked("animations-start").unwrap()).is_err());
     assert!(DevModuleHost::new(&bytes("animations-start")).is_err());
     for import in [
-        r#"(import "incant_animation_v4" "snapshot_len" (func (param i64)(result i32)))"#,
+        r#"(import "incant_animation_v5" "snapshot_len" (func (param i64)(result i32)))"#,
         r#"(import "incant_animation_v1" "control" (func (param i64 i32 i32)(result i32)))"#,
         r#"(import "incant_animation_v1" "read_snapshot" (func (param i64 i32)(result i32)))"#,
     ] {

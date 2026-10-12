@@ -1,0 +1,13 @@
+{
+  "base": "d9747284f7ddbaceba6c7498698e5a2a6b131332",
+  "sources": {
+    "tools/probes/native-wasm-animation-pose-export.py": "7977df9c1cf49323349f8c0395a51e885af6845758f656ccc7ea850ed50401c4",
+    "tools/probes/native-wasm-animation-pose-export/behavior.rs": "9c42af82283c680ecb007786cca0d27dc040c7d7f9206daeadb90034a0317b8b",
+    "crates/incant_cook/examples/animation_pose_package_oracle.rs": "3900b876fd2ebd917d537fa35f041c2a8d79408743773040f386a9df19ae4b65",
+    "tools/probes/native-animation-graph-export.py": "6e116c6ab103a6e40c64da6586160cd49336530854390986aa3850052d6a9f49",
+    "tools/export_native.py": "a22f6431bb6db373982970e53a219f1f57633c538e08055bcafacefa887699a1"
+  },
+  "preflight_sha256": "359bc481808f86773d226b247d25d0e38d849fba4e164ec8f042d02636c565fb",
+  "cargo_lock_sha256": "6d574acc59d671f8adc2f3ea40c749b5f0562526fb96e5b978c52fc856132016",
+  "status": "author/dev preflight passed; shipping export pending"
+}
