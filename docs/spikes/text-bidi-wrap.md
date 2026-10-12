@@ -49,3 +49,14 @@ had a clean diff. The [portability receipt](evidence/text-bidi-wrap-portability.
 and [independent review](evidence/text-bidi-wrap-portability-review.json) cover
 that metadata-only follow-up; 88 original frozen inputs remain byte-identical,
 and the three differences are attributes and patch documentation.
+
+## Current main126 integration
+
+All reviewed library/vendor/regression inputs are unchanged. The only merge
+conflict was additive STATUS prose; current main lock edges are preserved.
+The integrated text and composed-render-input suites pass 77 CPU tests in
+20 groups, all-target Clippy, wasm32 compilation and dependency checks. The
+reviewed isolated physics-probe lock correction was then included without changing
+these compile inputs; all nine structural guards pass. Actual main synchronization
+preserves the resulting tested content. [Integration receipt and exact hashes](evidence/text-bidi-wrap-main126.json). Claude0055 remains a separate pending
+rendered recheck; these checks do not claim its result.
