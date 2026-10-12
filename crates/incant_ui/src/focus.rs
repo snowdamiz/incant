@@ -606,7 +606,10 @@ impl Context<'_> {
                 } else if let Some(captured) = state.pointer.take()
                     && hit == Some(captured)
                     && state.focus == Some(captured)
+                    && matches!(self.widgets[captured].node.kind, UiKind::Button { .. })
                 {
+                    // Releasing a field click only focuses it. Submission is
+                    // an explicit keyboard/gamepad action, never a pointer hit.
                     self.activate(state, actions)?;
                 }
             }
