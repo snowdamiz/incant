@@ -1,0 +1,108 @@
+{
+  "format": "incant-0057-identities",
+  "brief_sha256_applied": "97c004ad2ee9ed8dd39a58ab67c1bc5e739f7c0d51a5dd8cd8822bcfc27de9ec",
+  "acp_record": "~/.codex/incant-evidence/0057/acp-resume-20261012.log (root): \"Claude session verified: Opus 5.5; thinking: max\"",
+  "source": {
+    "packet_base": "5399dcd4cad0265dcc0448ccd1f848518f76bf9f",
+    "commits": {
+      "e2551dd2": "Model backend precision in the UI draw reference",
+      "ca111ccf": "Expose the drawn UI caret as a read-only accessor"
+    },
+    "native_review_head": "ca111ccf616c660ca3abba83e94b1b2de4630ba1",
+    "native_review_tree": "d276eaef23bb1d65f41dca28910537856e28a08b",
+    "worktree_clean_outside_handoff_at_build": true
+  },
+  "toolchain": {
+    "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)",
+    "cargo": "cargo 1.99.0 (5f94df478 2026-08-27)",
+    "rust_toolchain_toml_sha256": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124",
+    "cargo_lock_sha256": "6d574acc59d671f8adc2f3ea40c749b5f0562526fb96e5b978c52fc856132016"
+  },
+  "host": {
+    "os": "27.0.1 (26A434)",
+    "machine": "Mac17,9",
+    "cpu": "Apple M5 Pro",
+    "gpu_backend": "Metal (wgpu), adapter \"Apple M5 Pro\"",
+    "displays": [
+      "{\"id\":1,\"main\":true,\"x\":0.0,\"y\":0.0,\"w\":1512.0,\"h\":982.0,\"scale\":2.0}",
+      "{\"id\":5,\"main\":false,\"x\":-3440.0,\"y\":-413.0,\"w\":3440.0,\"h\":1440.0,\"scale\":1.0}"
+    ],
+    "previous_session_before_restart": "macOS 26.6 (25G72); its /tmp evidence was lost and is not counted"
+  },
+  "cargo_target_dir": "/Users/andreyyurlov/.codex/incant-native-target",
+  "profile": "ci (inherits release, opt-level 1)",
+  "binaries": {
+    "incant_headless": {
+      "sha256": "5a05216b50f2cebbb1931c9102b007c40c1a11c5b6cbd18c88ecec83c6651d27",
+      "bytes": 59164368,
+      "profile": "ci"
+    },
+    "incant_game_player": {
+      "sha256": "4b6cc6a19bca3415f9d11f3c94a46c70dfaf490539a2b3c864bd4ba5439462fa",
+      "bytes": 31119248,
+      "features": "project,native-window",
+      "profile": "ci"
+    }
+  },
+  "fixture": {
+    "project_sha256": "0821bf54aa9bd27ab10f9babbea5f8700d72b49c0ad3806f5b7030296afb643d",
+    "script_sha256": "c92929690e554e9f8676098de14b21b57147450a9f28a7665644f7f9009149aa",
+    "font_sha256": {
+      "IncantCJKFixture.ttf": "3299d6ab8033fb1d163f892dfcb1b8838cf1c46935c329d82da6f7b9e27dad82",
+      "NotoSans-Regular.ttf": "2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9",
+      "NotoSansArabic.ttf": "ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56"
+    },
+    "revision": 3,
+    "command_bus_only": true,
+    "undo_redo": true,
+    "journal_reopened": true,
+    "headless_binary_sha256": "5a05216b50f2cebbb1931c9102b007c40c1a11c5b6cbd18c88ecec83c6651d27"
+  },
+  "package": {
+    "data_manifest": {
+      "bytes": 1334534,
+      "files": {
+        "world.scene": "739c3a622e2b7de5de7eb8531db682d1a7b3594e2caf41017df8c68dbca666b9",
+        "input-actions.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+        "models/b987f331dba8c90975c9619493ea4f21877af6adae103e84bff75c263dfd76fb.incmodel": "b6b6c12351730a9fbfc574eeb98bdb4bbf1e98e4b4921725d6e4fa6da6503ace",
+        "models/a22841f34ceb0b312f5778f559ea8d20496a43296d835a718885225fee464493.incmodel": "f8976212c00b4a33f13c320c06f87fe4c300897636af7c53fcafe4a13d2ad98b",
+        "models/400d3faa3eb2d93abf5261bec41217742ae53f11589ba293153e7b0c26fca17c.incmodel": "214516cd6f32870b3a71e589df97e1825ac8b95ad863e0ec1241db936bbcbe32",
+        "fonts/9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2.json": "e43c79c54c311c5759bdf686b43b9b112b0177bafd6938782ebb782d75018812",
+        "fonts/2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9.ifont": "92960e6b23eff12e1bf13361b2b94b490d723f8d93e6945ba34b9f9b3acd2081",
+        "fonts/6864e1444bc7002790e682360d3f93bd45fe51b7045a64ecbf0e76e19e6b758e.json": "167d0dc13b807552b06d0195e3a90ee24f5074206dd6d6f2106ad59e65b35fde",
+        "fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont": "8bd20a742cc19c0fe65b106d983ea1ed816c4cd5ca1c3d50bdc4d05aeb5f8e7a",
+        "fonts/1087d4bb69160e3e5955407294226ca3da11166a3188ada3c1a166ba14e55ceb.json": "c3fd206832637ec3ad354dee08b4c67012da904d34a3ce9ec9c97e30f70e07f0",
+        "fonts/3299d6ab8033fb1d163f892dfcb1b8838cf1c46935c329d82da6f7b9e27dad82.ifont": "49e09202aadc1c7463502004f791b596480a92d22e04b9948fabf8648a004814",
+        "clips.bin": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+        "package.json": "ac30c9b723faaece4329343c59928d744abe61703776b13f6410d749ff208dbc"
+      }
+    },
+    "font_cache_sha256": {
+      "fonts/1087d4bb69160e3e5955407294226ca3da11166a3188ada3c1a166ba14e55ceb.json": "c3fd206832637ec3ad354dee08b4c67012da904d34a3ce9ec9c97e30f70e07f0",
+      "fonts/2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9.ifont": "92960e6b23eff12e1bf13361b2b94b490d723f8d93e6945ba34b9f9b3acd2081",
+      "fonts/3299d6ab8033fb1d163f892dfcb1b8838cf1c46935c329d82da6f7b9e27dad82.ifont": "49e09202aadc1c7463502004f791b596480a92d22e04b9948fabf8648a004814",
+      "fonts/6864e1444bc7002790e682360d3f93bd45fe51b7045a64ecbf0e76e19e6b758e.json": "167d0dc13b807552b06d0195e3a90ee24f5074206dd6d6f2106ad59e65b35fde",
+      "fonts/9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2.json": "e43c79c54c311c5759bdf686b43b9b112b0177bafd6938782ebb782d75018812",
+      "fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont": "8bd20a742cc19c0fe65b106d983ea1ed816c4cd5ca1c3d50bdc4d05aeb5f8e7a"
+    },
+    "producer_receipt_project_sha256": "0821bf54aa9bd27ab10f9babbea5f8700d72b49c0ad3806f5b7030296afb643d",
+    "camera": "00000000000000000000000000029c20",
+    "startup_check": "CPU render-input at --ui-viewport 320x240; no window or GPU device",
+    "startup_ui": {
+      "atlas_sha256": "818aac34d61d6e1eadfcfe2e2fff523a38e7d0140eb0f20ad1f7c7cd1d0d06e5",
+      "focus": null,
+      "glyphs": 99,
+      "values": {
+        "0000000000000000000000572B": "Ada Lovelace",
+        "0000000000000000000000572E": "سلام",
+        "00000000000000000000005732": "中文"
+      },
+      "viewport": [
+        320.0,
+        240.0
+      ],
+      "widgets": 18
+    }
+  }
+}

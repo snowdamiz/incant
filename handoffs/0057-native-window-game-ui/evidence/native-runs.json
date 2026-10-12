@@ -1,0 +1,225 @@
+{
+  "format": "incant-0057-native-runs",
+  "player": "pkg-1/player/incant_game_player --package data --window (ordinary composed player; probe run uses the explicit --window arguments plus --lifecycle-probe)",
+  "event_mechanisms": {
+    "pointer": "CGEvent mouseMoved/leftMouseDown/leftMouseUp posted at kCGHIDEventTap (tao CursorMoved/MouseInput)",
+    "keys": "CGEvent keyDown/keyUp with US ANSI virtual key codes at kCGHIDEventTap; Shift and Option as real flagsChanged modifier events plus event flags (tao KeyboardInput; text through the managed NSTextInputContext insertText)",
+    "unicode_text": "CGEvent key events carrying a Unicode string (keyboardSetUnicodeString), delivered by the managed NSTextInputContext as insertText commits; not an Arabic layout or CJK input method",
+    "live_composition": "U.S. layout dead key Option-E then E: macOS text input system setMarkedText then insertText (live marked text, not a synthetic receipt)",
+    "press_and_hold": "key down plus autorepeat key downs (kCGKeyboardEventAutorepeat): the accent picker did not appear; repeated characters were inserted",
+    "resize_move": "AX kAXSizeAttribute/kAXPositionAttribute on the standard window",
+    "minimize": "AX kAXMinimizedAttribute",
+    "close": "AX close button press (CloseRequested)",
+    "focus": "System Events set frontmost (app activation and hand-back)",
+    "capture": "screencapture -o -x -l <window id> of the player window only; captures are colour-managed into the display profile",
+    "input_sources_enabled": [
+      "com.apple.keylayout.US (current)",
+      "com.apple.CharacterPaletteIM"
+    ]
+  },
+  "guards": "bursts start only when unlocked, display awake and 20 s idle; every event rechecks the player is frontmost, the pointer was not moved by a person and the session is unlocked; holds abort on real input; front app and pointer restored",
+  "runs": [
+    {
+      "run": 1,
+      "pid": 85772,
+      "display": "built-in, scale 2, window (596,184) 320x272 pt",
+      "captures": [
+        "01-idle-a",
+        "01-idle-b",
+        "02-tab-resume",
+        "03-shifttab-options",
+        "04a-space-options",
+        "04b-spin-paused",
+        "05-return-resume",
+        "06-options-pressed",
+        "07a-options-released",
+        "07b-spin-resumed",
+        "08-online-disabled-click",
+        "09-continue-click",
+        "10-tab-name-caret"
+      ],
+      "findings": {
+        "idle_a_vs_b": "only the crate box changed (1600 px)",
+        "vs_offscreen_reference_tol2": "differences only: moving crate, colour-managed teal pillar, OS-rounded bottom corners, macOS 27 title-bar hairline over content row 0",
+        "space_on_options": "0 changed pixels over 0.6 s (spin paused)",
+        "pressed_fill": [
+          32,
+          34,
+          39
+        ],
+        "released_fill": [
+          47,
+          50,
+          57
+        ],
+        "accent_ring_display_p3": [
+          93,
+          144,
+          247
+        ]
+      },
+      "outcome": "crashed within 5 s of blur after Tab focus on the Name field (SIGSEGV, crashes/crash-85772.json)",
+      "yielded_bursts": 1
+    },
+    {
+      "run": 2,
+      "pid": 17610,
+      "display": "external, scale 1; opened at (-2040,-158), moved by the director to (-924,83)",
+      "captures": [
+        "10b-idle-1x",
+        "11-name-click",
+        "12-name-typed",
+        "13-name-selection",
+        "14-deadkey-preedit",
+        "15-deadkey-commit",
+        "16-return-submit",
+        "17-name-overflow",
+        "18-name-home"
+      ],
+      "findings": {
+        "click_submits": "crate lifted right after the pointer click (submitted), lowered again by Return",
+        "overflow": "text clipped at the content box; caret past the box is invisible (no scroll)"
+      },
+      "outcome": "aborted after blur with the field focused (SIGABRT: Rust cannot catch foreign exceptions; crashes/crash-17610.json)"
+    },
+    {
+      "run": 3,
+      "pid": 28481,
+      "display": "external, scale 1",
+      "captures": [
+        "19-arabic-click",
+        "20-arabic-typed",
+        "21-arabic-selection",
+        "22-arabic-cjk-mixed"
+      ],
+      "outcome": "crashed after blur with the Arabic field focused (SIGSEGV; crashes/crash-28481.json)"
+    },
+    {
+      "run": 4,
+      "pid": 35850,
+      "display": "external, scale 1",
+      "captures": [
+        "23-cjk-click",
+        "24-cjk-typed",
+        "25-cjk-select-all",
+        "26-hold-e",
+        "27-after-1"
+      ],
+      "findings": {
+        "press_and_hold": "no input-method window appeared; autorepeat inserted repeated e"
+      },
+      "outcome": "crashed after blur with the CJK field focused (SIGSEGV; crashes/crash-35850.json)"
+    },
+    {
+      "run": 5,
+      "pid": 41607,
+      "display": "external scale 1, resized, then moved to built-in scale 2",
+      "captures": [
+        "28-resized-400x300-1x",
+        "29-narrow-200x300-1x",
+        "30-narrow-click-options",
+        "31-moved-to-2x",
+        "32-blurred-background",
+        "33-refocused",
+        "34-restored"
+      ],
+      "findings": {
+        "dpi_move_vs_run1": "bit-identical to run 1 frame in the same UI state except the moving crate",
+        "blur": "inactive frame still shows the focus ring",
+        "refocus": "focus cleared, not restored"
+      },
+      "outcome": "closed by the AX close button; report printed",
+      "report": {
+        "accepted_frames": 665,
+        "adapter": "Apple M5 Pro",
+        "backend": "Metal",
+        "discarded_stale_text_events": 0,
+        "dropped_wall_ticks": "0",
+        "lifecycle_probe": null,
+        "mode": "native-window",
+        "on_screen": true,
+        "presentation_refreshes": 3,
+        "surface_reconfigurations": 4,
+        "surface_recreations": 0,
+        "surface_skipped": 0,
+        "tick": 662,
+        "ui": {
+          "focus": null,
+          "glyph_quads": 91,
+          "gpu_bytes": 20034,
+          "quads": 151,
+          "relayouts": 3,
+          "scale_factor": 2.0,
+          "uploads": {
+            "atlas_bytes": 41480,
+            "atlas_textures": 4,
+            "frame_writes": 4,
+            "quad_buffers": 12,
+            "quad_bytes": 116480
+          },
+          "viewport": [
+            320.0,
+            240.0
+          ],
+          "widgets": 12
+        }
+      },
+      "yielded_bursts": 1
+    },
+    {
+      "run": 6,
+      "pid": 69999,
+      "display": "external, scale 1",
+      "captures": [],
+      "outcome": "lifecycle probe exit 0",
+      "report": {
+        "accepted_frames": 41,
+        "adapter": "Apple M5 Pro",
+        "backend": "Metal",
+        "discarded_stale_text_events": 0,
+        "dropped_wall_ticks": "0",
+        "lifecycle_probe": {
+          "actual_minimize_restore": true,
+          "actual_resize": true,
+          "explicit_surface_recreation": true,
+          "os_loss_injected": false,
+          "suspended_tick": 16
+        },
+        "mode": "native-window",
+        "on_screen": true,
+        "presentation_refreshes": 1,
+        "surface_reconfigurations": 3,
+        "surface_recreations": 1,
+        "surface_skipped": 0,
+        "tick": 40,
+        "ui": {
+          "focus": null,
+          "glyph_quads": 91,
+          "gpu_bytes": 20034,
+          "quads": 151,
+          "relayouts": 1,
+          "scale_factor": 1.0,
+          "uploads": {
+            "atlas_bytes": 20740,
+            "atlas_textures": 2,
+            "frame_writes": 2,
+            "quad_buffers": 2,
+            "quad_bytes": 19328
+          },
+          "viewport": [
+            512.0,
+            320.0
+          ],
+          "widgets": 12
+        }
+      }
+    }
+  ],
+  "previous_session_before_restart": {
+    "pid": 84607,
+    "os": "macOS 26.6",
+    "outcome": "same SIGSEGV after the Name field session retired (crashes/crash-84607.json); other evidence lost with /tmp and not counted"
+  },
+  "captures_taken": 38,
+  "capture_budget": 40
+}

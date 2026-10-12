@@ -1,0 +1,179 @@
+{
+  "source": "macOS DiagnosticReports incant_game_player-2026-10-12-092258.ips (excerpt; full report not committed)",
+  "timestamp": "2026-10-12 09:22:58.00 -0400",
+  "os_version": "macOS 26.6 (25G72)",
+  "pid": 84607,
+  "exception": {
+    "codes": "0x0000000000000001, 0x0000000000000010",
+    "rawCodes": [
+      1,
+      16
+    ],
+    "type": "EXC_BAD_ACCESS",
+    "signal": "SIGSEGV",
+    "subtype": "KERN_INVALID_ADDRESS at 0x0000000000000010"
+  },
+  "termination": {
+    "flags": 0,
+    "code": 11,
+    "namespace": "SIGNAL",
+    "indicator": "Segmentation fault: 11",
+    "byProc": "exc handler",
+    "byPid": 84607
+  },
+  "asi": null,
+  "faulting_thread": 0,
+  "frames": [
+    {
+      "image": "libobjc.A.dylib",
+      "symbol": "objc_msgSend",
+      "offset": 32
+    },
+    {
+      "image": "AppKit",
+      "symbol": "-[NSView(NSFocusEngine_Private) _useFocusEngine]",
+      "offset": 40
+    },
+    {
+      "image": "AppKit",
+      "symbol": "-[NSView previousKeyView]",
+      "offset": 28
+    },
+    {
+      "image": "AppKit",
+      "symbol": "-[NSView _removeFromKeyViewLoop]",
+      "offset": 40
+    },
+    {
+      "image": "AppKit",
+      "symbol": "-[NSView _finalize]",
+      "offset": 580
+    },
+    {
+      "image": "AppKit",
+      "symbol": "-[NSView dealloc]",
+      "offset": 128
+    },
+    {
+      "image": "incant_game_player",
+      "symbol": "_RINvNtNtCsd6bto2Hv4vY_5objc215___macro_helpers13defined_ivars7deallocNtNtNtNtCs39uZS8SNBja_3tao13platform_impl8platform10text_input13ManagedClientEB1d_",
+      "offset": 152
+    },
+    {
+      "image": "libobjc.A.dylib",
+      "symbol": "AutoreleasePoolPage::releaseUntil(objc_object**)",
+      "offset": 204
+    },
+    {
+      "image": "libobjc.A.dylib",
+      "symbol": "objc_autoreleasePoolPop",
+      "offset": 244
+    },
+    {
+      "image": "CoreFoundation",
+      "symbol": "_CFAutoreleasePoolPop",
+      "offset": 32
+    },
+    {
+      "image": "CoreFoundation",
+      "symbol": "__CFRunLoopPerCalloutARPEnd",
+      "offset": 48
+    },
+    {
+      "image": "CoreFoundation",
+      "symbol": "__CFRunLoopDoObservers",
+      "offset": 656
+    },
+    {
+      "image": "CoreFoundation",
+      "symbol": "__CFRunLoopRun",
+      "offset": 924
+    },
+    {
+      "image": "CoreFoundation",
+      "symbol": "_CFRunLoopRunSpecificWithOptions",
+      "offset": 532
+    },
+    {
+      "image": "HIToolbox",
+      "symbol": "RunCurrentEventLoopInMode",
+      "offset": 320
+    },
+    {
+      "image": "HIToolbox",
+      "symbol": "ReceiveNextEventCommon",
+      "offset": 488
+    },
+    {
+      "image": "HIToolbox",
+      "symbol": "_BlockUntilNextEventMatchingListInMode",
+      "offset": 48
+    },
+    {
+      "image": "AppKit",
+      "symbol": "_DPSBlockUntilNextEventMatchingListInMode",
+      "offset": 228
+    },
+    {
+      "image": "AppKit",
+      "symbol": "_DPSNextEvent",
+      "offset": 576
+    },
+    {
+      "image": "AppKit",
+      "symbol": "-[NSApplication(NSEventRouting) _nextEventMatchingEventMask:untilDate:inMode:dequeue:]",
+      "offset": 688
+    },
+    {
+      "image": "AppKit",
+      "symbol": "-[NSApplication(NSEventRouting) nextEventMatchingMask:untilDate:inMode:dequeue:]",
+      "offset": 72
+    },
+    {
+      "image": "AppKit",
+      "symbol": "-[NSApplication run]",
+      "offset": 368
+    },
+    {
+      "image": "incant_game_player",
+      "symbol": "_RINvMs3_NtNtNtCs39uZS8SNBja_3tao13platform_impl8platform10event_loopINtB6_9EventLoopuE10run_returnNCNvNtCs7F6eIqbaLLy_18incant_game_player6window3runs_0EB1E_",
+      "offset": 344
+    },
+    {
+      "image": "incant_game_player",
+      "symbol": "_RNvNtCs7F6eIqbaLLy_18incant_game_player6window3run",
+      "offset": 6724
+    },
+    {
+      "image": "incant_game_player",
+      "symbol": "_RNvCs7F6eIqbaLLy_18incant_game_player4main",
+      "offset": 772
+    },
+    {
+      "image": "incant_game_player",
+      "symbol": "_RINvNtNtCs1SSuMAdGM58_3std3sys9backtrace28___rust_begin_short_backtraceFEINtNtCsjIpoRzUjyHQ_4core6result6ResultuINtNtCs6zY7rJBZy9D_5alloc5boxed3BoxDNtNtB1e_5error5ErrorEL_EEB19_ECs7F6eIqbaLLy_18incant_game_player",
+      "offset": 12
+    },
+    {
+      "image": "incant_game_player",
+      "symbol": "_RNCINvNtCs1SSuMAdGM58_3std2rt10lang_startINtNtCsjIpoRzUjyHQ_4core6result6ResultuINtNtCs6zY7rJBZy9D_5alloc5boxed3BoxDNtNtBI_5error5ErrorEL_EEE0Cs7F6eIqbaLLy_18incant_game_player",
+      "offset": 16
+    },
+    {
+      "image": "incant_game_player",
+      "symbol": "_RNvNtCs1SSuMAdGM58_3std2rt19lang_start_internal",
+      "offset": 936
+    },
+    {
+      "image": "incant_game_player",
+      "symbol": "main",
+      "offset": 52
+    },
+    {
+      "image": "dyld",
+      "symbol": "start",
+      "offset": 6992
+    }
+  ],
+  "note": "Observed in the session before the host restart (macOS 26.6, player built from 5399dcd4); its other evidence was lost with /tmp."
+}

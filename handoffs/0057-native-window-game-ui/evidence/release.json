@@ -1,0 +1,35 @@
+{
+  "packet": "0057-native-window-game-ui",
+  "released_at": "2026-10-12T16:01:43.683769+00:00",
+  "lease_marker": "/Users/andreyyurlov/.codex/incant-evidence/0057/lease.json",
+  "released_marker": "/Users/andreyyurlov/.codex/incant-evidence/0057/released",
+  "owned_processes_running_at_release": [],
+  "native_windows_launched": 6,
+  "player_pids": [
+    85772,
+    17610,
+    28481,
+    35850,
+    41607,
+    69999
+  ],
+  "player_outcomes": {
+    "85772": "crash after text-session retirement",
+    "17610": "abort after text-session retirement",
+    "28481": "crash after text-session retirement",
+    "35850": "crash after text-session retirement",
+    "41607": "closed via AX close, report printed",
+    "69999": "lifecycle probe exit 0"
+  },
+  "captures": 38,
+  "gpu_work": "Metal: incant_render and incant_render_gpu_host test suites, mutation harness, offscreen zz_0057_review example (temporary copy, removed), native window player",
+  "cargo_target_dir": "/Users/andreyyurlov/.codex/incant-native-target",
+  "target_dir_disposition": "kept as warm cache; nothing deleted",
+  "scratch": "/Users/andreyyurlov/.codex/incant-evidence/0057 (fixture, package, captures, logs; curated copies committed in the handoff)",
+  "worktree_node_modules_symlink": "removed",
+  "system_side_effects": "macOS wrote crash reports incant_game_player-2026-10-12-{092258,113531,113923,114405,114535}.ips under ~/Library/Logs/DiagnosticReports; left in place",
+  "other_lanes_observed": [
+    "cargo builds in ~/.codex/incant-integration-target, /tmp/incant-agent-font-target and ~/.codex/incant-animation-target at session start; left alone",
+    "an Android emulator (qemu-system-aarch64) and Brave in front at times; front always handed back"
+  ]
+}

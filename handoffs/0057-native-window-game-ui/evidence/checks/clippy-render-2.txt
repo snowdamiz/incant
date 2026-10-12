@@ -1,0 +1,2 @@
+    Checking incant_render v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_render)
+    Finished `ci` profile [optimized] target(s) in 2.08s

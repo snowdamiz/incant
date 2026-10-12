@@ -1,0 +1,23 @@
+   Compiling incant_render v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_render)
+    Finished `ci` profile [optimized] target(s) in 7.39s
+     Running unittests src/lib.rs (/Users/andreyyurlov/.codex/incant-native-target/ci/deps/incant_render-0b72bec43c7fffff)
+
+running 1 test
+scale 1: emulated llvmpipe vs exact worst 2, >1: 1; admitted outside 0, widest 4 (44 channels > 2)
+scale 1: text 1 px right rejected by Admission { outside: 3053, excess: 229.0, widest: 4.0, wide: 44 }
+scale 1: 90% text opacity rejected by Admission { outside: 2233, excess: 11.0, widest: 4.0, wide: 44 }
+scale 2: emulated llvmpipe vs exact worst 7, >1: 303; admitted outside 0, widest 21 (6535 channels > 2)
+scale 2: text 1 px right rejected by Admission { outside: 13562, excess: 159.0, widest: 21.0, wide: 6535 }
+scale 2: text 0.5 px right rejected by Admission { outside: 3460, excess: 106.0, widest: 21.0, wide: 6535 }
+scale 2: 90% text opacity rejected by Admission { outside: 10699, excess: 10.0, widest: 21.0, wide: 6535 }
+scale 1.5: emulated llvmpipe vs exact worst 6, >1: 179; admitted outside 0, widest 29 (6114 channels > 2)
+scale 1.5: text 1 px right rejected by Admission { outside: 8057, excess: 164.0, widest: 29.0, wide: 6114 }
+scale 1.5: 90% text opacity rejected by Admission { outside: 5558, excess: 10.0, widest: 29.0, wide: 6114 }
+scale 1: text 1 px right rejected by Admission { outside: 3119, excess: 223.0, widest: 2.0, wide: 0 }
+scale 1: 90% text opacity rejected by Admission { outside: 2255, excess: 23.0, widest: 2.0, wide: 0 }
+nested Exact vs exact worst 0, >1: 0
+nested Llvmpipe vs exact worst 2, >1: 2
+nested: label without its ancestor clip rejected by Admission { outside: 146, excess: 230.0, widest: 4.0, wide: 16 }
+test ui::draw_tests::reference_admits_backend_precision_but_not_wrong_geometry_clip_or_opacity ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 88 filtered out; finished in 0.05s

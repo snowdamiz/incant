@@ -1,0 +1,397 @@
+   Compiling syn v3.0.6
+   Compiling serde_core v1.0.229
+   Compiling serde v1.0.229
+   Compiling libc v0.2.190
+   Compiling synstructure v0.14.0
+   Compiling serde_derive v1.0.229
+   Compiling thiserror-impl v2.0.21
+   Compiling zerofrom-derive v0.1.8
+   Compiling yoke-derive v0.8.4
+   Compiling displaydoc v0.2.7
+   Compiling smallvec v1.16.2
+   Compiling zeroize_derive v1.5.0
+   Compiling zerovec-derive v0.11.6
+   Compiling zeroize v1.9.1
+   Compiling bytemuck_derive v1.12.1
+   Compiling either v1.19.0
+   Compiling thiserror v2.0.21
+   Compiling subtle v2.6.1
+   Compiling generic-array v0.14.7
+   Compiling bytemuck v1.25.2
+   Compiling jobserver v0.1.35
+   Compiling const-oid v0.9.6
+   Compiling cc v1.6.0
+   Compiling ref-cast-impl v1.0.27
+   Compiling serde_derive_internals v0.30.0
+   Compiling schemars_derive v1.2.2
+   Compiling num-complex v0.4.6
+   Compiling crypto-common v0.1.7
+   Compiling block-buffer v0.10.4
+   Compiling digest v0.10.7
+   Compiling zerofrom v0.1.8
+   Compiling allocator-api2 v0.2.21
+   Compiling foldhash v0.2.0
+   Compiling yoke v0.8.3
+   Compiling serde_json v1.0.151
+   Compiling zerovec v0.11.8
+   Compiling writeable v0.6.4
+   Compiling arrayvec v0.7.8
+   Compiling hashbrown v0.17.1
+   Compiling tinystr v0.8.4
+   Compiling icu_locale_core v2.3.0
+   Compiling indexmap v2.14.2
+   Compiling potential_utf v0.1.6
+   Compiling zerotrie v0.2.5
+   Compiling once_cell v1.21.4
+   Compiling icu_provider v2.3.1
+   Compiling num-bigint v0.4.8
+   Compiling getrandom v0.2.17
+   Compiling libm v0.2.16
+   Compiling rand_core v0.6.4
+   Compiling num-rational v0.4.2
+   Compiling futures-core v0.3.34
+   Compiling memchr v2.8.3
+   Compiling sha2 v0.10.9
+   Compiling ref-cast v1.0.27
+   Compiling num-derive v0.5.1
+   Compiling schemars v1.2.2
+   Compiling icu_collections v2.3.0
+   Compiling ulid v1.2.1
+   Compiling toml_edit v0.25.16+spec-1.1.0
+   Compiling semver v1.0.28
+   Compiling rustc_version v0.4.1
+   Compiling icu_locale_fallback v2.3.0
+   Compiling bevy_macro_utils v0.19.1
+   Compiling incant_types v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_types)
+   Compiling stable_deref_trait v1.2.1
+   Compiling nonmax v0.5.5
+   Compiling bytes v1.12.1
+   Compiling bevy_ecs_macro_logic v0.19.1
+   Compiling wide v1.7.1
+   Compiling calendrical_calculations v0.2.4
+   Compiling bevy_ecs_macros v0.19.1
+   Compiling incant_2d v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_2d)
+   Compiling simba v0.10.2
+   Compiling fixed_decimal v0.7.2
+   Compiling icu_calendar v2.3.0
+   Compiling nalgebra v0.35.0
+   Compiling parking_lot_core v0.9.12
+   Compiling num-traits v0.2.19
+   Compiling parking_lot v0.12.5
+   Compiling icu_time v2.3.0
+   Compiling glamx v0.3.1
+   Compiling icu_decimal v2.3.0
+   Compiling rerecast v0.4.0 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/third_party/rerecast)
+   Compiling icu_plurals v2.3.0
+   Compiling rayon v1.12.0
+   Compiling futures-lite v2.6.1
+   Compiling num-iter v0.1.46
+   Compiling icu_pattern v0.5.0
+   Compiling crossbeam-utils v0.8.23
+   Compiling strsim v0.11.1
+   Compiling ident_case v1.0.1
+   Compiling fnv v1.0.7
+   Compiling darling_core v0.20.11
+   Compiling icu_datetime v2.3.0
+   Compiling incant_nav v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_nav)
+   Compiling icu_locale v2.3.0
+   Compiling heapless v0.7.17
+   Compiling bevy_platform v0.19.1
+   Compiling incant_localization v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_localization)
+   Compiling darling_macro v0.20.11
+   Compiling rand_chacha v0.3.1
+   Compiling tracing-core v0.1.36
+   Compiling hash32 v0.2.1
+   Compiling itertools v0.11.0
+   Compiling tracing-attributes v0.1.31
+   Compiling thiserror v1.0.69
+   Compiling heck v0.5.0
+   Compiling spin v0.9.9
+   Compiling async-executor v1.14.0
+   Compiling lazy_static v1.5.1
+   Compiling tracing v0.1.44
+   Compiling rand v0.8.8
+   Compiling darling v0.20.11
+   Compiling async-channel v2.5.0
+   Compiling rstar v0.13.0
+   Compiling rquickjs-sys v0.14.0
+   Compiling cobs v0.3.0
+   Compiling ahash v0.8.12
+   Compiling thiserror-impl v1.0.69
+   Compiling syn v1.0.109
+   Compiling ucd-trie v0.1.7
+   Compiling rustc-hash v2.1.3
+   Compiling heapless v0.9.3
+   Compiling rustybuzz v0.14.1
+   Compiling bevy_utils v0.19.1
+   Compiling pest v2.9.2
+   Compiling postcard v1.1.3
+   Compiling parry3d v0.31.1
+   Compiling bevy_tasks v0.19.1
+   Compiling serde_columnar_derive v0.3.7
+   Compiling num v0.4.3
+   Compiling incant_input v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_input)
+   Compiling derive_arbitrary v1.5.0
+   Compiling proc-macro2 v1.0.107
+   Compiling append-only-bytes v0.1.12
+   Compiling cosmic-text v0.14.2 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/third_party/cosmic-text)
+   Compiling bevy_ecs v0.19.1
+   Compiling loro-rle v1.6.0
+   Compiling arbitrary v1.5.0
+   Compiling serde_columnar v0.3.14
+   Compiling rapier3d v0.36.0
+   Compiling pest_meta v2.9.2
+   Compiling enum-as-inner v0.6.1
+   Compiling meshopt v0.6.2
+   Compiling bitmaps v2.1.0
+   Compiling cpufeatures v0.2.17
+   Compiling im v15.1.0
+   Compiling loro-thunderdome v0.6.2
+   Compiling arref v0.1.0
+   Compiling base64ct v1.8.3
+   Compiling zerocopy v0.8.62
+   Compiling leb128 v0.2.7
+   Compiling heck v0.4.1
+   Compiling twox-hash v2.1.5
+   Compiling lz4_flex v0.11.6
+   Compiling enum-as-inner v0.5.1
+   Compiling loro-common v1.16.0
+   Compiling pem-rfc7468 v0.7.0
+   Compiling generic-btree v0.10.7
+   Compiling incant_text v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_text)
+   Compiling sized-chunks v0.6.5
+   Compiling pest_generator v2.9.2
+   Compiling quick_cache v0.6.24
+   Compiling incant_physics_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_physics_runtime)
+   Compiling rand_xoshiro v0.6.0
+   Compiling getrandom v0.3.4
+   Compiling ensure-cov v0.1.0
+   Compiling yansi v1.0.1
+   Compiling xxhash-rust v0.8.19
+   Compiling diff v0.1.13
+   Compiling pretty_assertions v1.4.1
+   Compiling enum_dispatch v0.3.13
+   Compiling loro-kv-store v1.16.0
+   Compiling spade v2.15.1
+   Compiling pest_derive v2.9.2
+   Compiling loro-delta v1.13.0
+   Compiling der v0.7.10
+   Compiling loro_fractional_index v1.13.0
+   Compiling approx v0.5.1
+   Compiling crossbeam-epoch v0.9.21
+   Compiling itertools v0.12.1
+   Compiling zmij v1.0.23
+   Compiling md5 v0.7.0
+   Compiling litemap v0.8.3
+   Compiling loro-internal v1.16.2
+   Compiling incant_assets_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_assets_runtime)
+   Compiling ppv-lite86 v0.2.21
+   Compiling spki v0.7.3
+   Compiling rand_core v0.9.5
+   Compiling parry2d v0.31.1
+   Compiling symphonia-core v0.6.1
+   Compiling num-integer v0.1.47
+   Compiling crossbeam-deque v0.8.8
+   Compiling matrixmultiply v0.3.11
+   Compiling icu_locale_fallback_data v2.3.0
+   Compiling cmake v0.1.58
+   Compiling itoa v1.0.18
+   Compiling pin-project-lite v0.2.17
+   Compiling pkg-config v0.3.34
+   Compiling parking v2.2.1
+   Compiling fs_extra v1.3.0
+   Compiling bitflags v2.13.2
+   Compiling dunce v1.0.5
+   Compiling rawpointer v0.2.1
+   Compiling slab v0.4.12
+   Compiling aws-lc-sys v0.45.0
+   Compiling rapier2d v0.36.0
+   Compiling rand_chacha v0.9.0
+   Compiling pkcs8 v0.10.2
+   Compiling loro v1.16.2
+   Compiling glam v0.33.12
+   Compiling rayon-core v1.13.0
+   Compiling hashbrown v0.16.1
+   Compiling dyn-clone v1.0.20
+   Compiling log v0.4.34
+   Compiling symphonia-metadata v0.6.1
+   Compiling incant_doc v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_doc)
+   Compiling rand v0.9.5
+   Compiling incant_physics_2d_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_physics_2d_runtime)
+   Compiling incant_script v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_script)
+   Compiling incant_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_runtime)
+   Compiling ena v0.14.4
+   Compiling ordered-float v5.5.0
+   Compiling downcast-rs v2.0.2
+   Compiling aws-lc-rs v1.18.1
+   Compiling fastrand v2.5.0
+   Compiling byteorder v1.5.0
+   Compiling futures-io v0.3.34
+   Compiling hash32 v0.3.1
+   Compiling symphonia-common v0.6.1
+   Compiling core_maths v0.1.1
+   Compiling icu_calendar_data v2.3.0
+   Compiling heapless v0.8.0
+   Compiling hmac v0.12.1
+   Compiling slotmap v1.1.1
+   Compiling mio v1.2.4
+   Compiling socket2 v0.6.5
+   Compiling icu_properties_data v2.3.0
+   Compiling icu_normalizer_data v2.3.0
+   Compiling static_assertions v1.1.0
+   Compiling pulp v0.22.3
+   Compiling tokio v1.53.2
+   Compiling tempfile v3.27.0
+   Compiling event-listener v5.4.2
+   Compiling concurrent-queue v2.5.0
+   Compiling http v1.5.0
+   Compiling signature v2.2.0
+   Compiling ff v0.13.1
+   Compiling icu_time_data v2.3.1
+   Compiling icu_decimal_data v2.3.0
+   Compiling anyhow v1.0.104
+   Compiling icu_plurals_data v2.3.0
+   Compiling profiling v1.0.18
+   Compiling ufbx v0.11.5
+   Compiling robust v1.2.0
+   Compiling futures-sink v0.3.34
+   Compiling spin v0.10.1
+   Compiling base16ct v0.2.0
+   Compiling exr v1.74.2
+   Compiling sec1 v0.7.3
+   Compiling symphonia-format-riff v0.6.1
+   Compiling group v0.13.0
+   Compiling http-body v1.1.0
+   Compiling event-listener-strategy v0.5.4
+   Compiling rquickjs-core v0.14.0
+   Compiling gltf-json v1.4.1
+   Compiling hkdf v0.12.4
+   Compiling symphonia-codec-vorbis v0.6.1
+   Compiling symphonia-format-ogg v0.6.1
+   Compiling symphonia-codec-pcm v0.6.1
+   Compiling icu_datetime_data v2.3.0
+   Compiling crypto-bigint v0.5.5
+   Compiling glam v0.32.1
+   Compiling glam v0.29.3
+   Compiling rustls-pki-types v1.15.1
+   Compiling async-task v4.7.1
+   Compiling futures-task v0.3.34
+   Compiling utf8_iter v1.0.4
+   Compiling httparse v1.10.1
+   Compiling rustls v0.23.45
+   Compiling untrusted v0.9.0
+   Compiling rustls-webpki v0.103.15
+   Compiling wgpu-types v29.0.4
+   Compiling image v0.25.10
+   Compiling naga v29.0.4
+   Compiling futures-util v0.3.34
+   Compiling dodgy_2d v0.5.5
+   Compiling wasmparser v0.258.3
+   Compiling elliptic-curve v0.13.8
+   Compiling symphonia v0.6.0
+   Compiling gltf v1.4.1
+   Compiling icu_normalizer v2.3.0
+   Compiling icu_properties v2.3.0
+   Compiling rquickjs v0.14.0
+   Compiling incant_source v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_source)
+   Compiling crossbeam-queue v0.3.14
+   Compiling derive_more v2.1.1
+   Compiling thread_local v1.1.10
+   Compiling cpu-time v1.0.0
+   Compiling tower-service v0.3.3
+   Compiling disqualified v1.1.0
+   Compiling atomic-waker v1.1.2
+   Compiling core-foundation-sys v0.8.7
+   Compiling try-lock v0.2.5
+   Compiling leb128fmt v0.1.0
+   Compiling want v0.3.2
+   Compiling wasm-encoder v0.258.3
+   Compiling incant_assets v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_assets)
+   Compiling idna_adapter v1.2.2
+   Compiling wgpu-naga-bridge v29.0.4
+   Compiling rfc6979 v0.4.0
+   Compiling form_urlencoded v1.2.2
+   Compiling incant_render_data v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_render_data)
+   Compiling bevy_derive v0.19.1
+   Compiling curve25519-dalek v4.1.3
+   Compiling quick-xml v0.42.0
+   Compiling fixedbitset v0.5.7
+   Compiling bumpalo v3.20.3
+   Compiling incant_wasm_abi v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_wasm_abi)
+   Compiling num-bigint-dig v0.8.6
+   Compiling bevy_ptr v0.19.1
+   Compiling incant_wasm_cook v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_wasm_cook)
+   Compiling bevy_app v0.19.1
+   Compiling ecdsa v0.16.9
+   Compiling hyper v1.12.0
+   Compiling wgpu-hal v29.0.4
+   Compiling idna v1.1.0
+   Compiling incant_audio_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_audio_runtime)
+   Compiling core-foundation v0.10.1
+   Compiling security-framework-sys v2.17.0
+   Compiling primeorder v0.13.6
+   Compiling futures-channel v0.3.34
+   Compiling incant_physics v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_physics)
+   Compiling taffy v0.14.0
+   Compiling sync_wrapper v1.0.2
+   Compiling tower-layer v0.3.3
+   Compiling base64 v0.23.1
+   Compiling ipnet v2.12.2
+   Compiling hyper-util v0.1.21
+   Compiling incant_ui v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_ui)
+   Compiling tower v0.5.3
+   Compiling incant_core v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_core)
+   Compiling security-framework v3.7.0
+   Compiling url v2.5.8
+   Compiling wgpu-core-deps-apple v29.0.4
+   Compiling tokio-rustls v0.26.6
+   Compiling incant_cmd v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_cmd)
+   Compiling ed25519 v2.2.3
+   Compiling pkcs1 v0.7.5
+   Compiling option-ext v0.2.0
+   Compiling utf8parse v0.2.2
+   Compiling ryu v1.0.23
+   Compiling serde_urlencoded v0.7.1
+   Compiling anstyle-parse v1.0.0
+   Compiling dirs-sys v0.5.0
+   Compiling rsa v0.9.10
+   Compiling ed25519-dalek v2.2.0
+   Compiling hyper-rustls v0.27.10
+   Compiling wgpu-core v29.0.4
+   Compiling tower-http v0.6.11
+   Compiling rustls-platform-verifier v0.7.1
+   Compiling incant_game_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_game_runtime)
+   Compiling p256 v0.13.2
+   Compiling p384 v0.13.1
+   Compiling incant_render_native v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_render_native)
+   Compiling http-body-util v0.1.5
+   Compiling anstyle v1.0.14
+   Compiling anstyle-query v1.1.5
+   Compiling colorchoice v1.0.5
+   Compiling is_terminal_polyfill v1.70.2
+   Compiling anstream v1.0.0
+   Compiling reqwest v0.13.5
+   Compiling incant_render_game v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_render_game)
+   Compiling wgpu v29.0.4
+   Compiling jsonwebtoken v10.4.0
+   Compiling incant_cook v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_cook)
+   Compiling dirs v6.0.0
+   Compiling incant_import v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_import)
+   Compiling uuid v1.27.0
+   Compiling incant_observe v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_observe)
+   Compiling open v5.4.4
+   Compiling clap_lex v1.1.1
+   Compiling incant_render v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_render)
+   Compiling clap_builder v4.6.7
+   Compiling incant_agent v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_agent)
+   Compiling incant_play v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_play)
+   Compiling incant_headless v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_headless)
+   Compiling incant_render_authoring v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_render_authoring)
+   Compiling clap_derive v4.6.7
+   Compiling rtoolbox v0.0.6
+   Compiling rpassword v7.5.4
+   Compiling clap v4.6.7
+   Compiling incant_agent_native v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_agent_native)
+   Compiling incant_play_legacy v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_play_legacy)
+   Compiling incant_audio v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_audio)
+    Finished `ci` profile [optimized] target(s) in 5m 23s

@@ -1,0 +1,1390 @@
+{
+  "binary_sha256": "5a05216b50f2cebbb1931c9102b007c40c1a11c5b6cbd18c88ecec83c6651d27",
+  "project_sha256": "0821bf54aa9bd27ab10f9babbea5f8700d72b49c0ad3806f5b7030296afb643d",
+  "script_sha256": "c92929690e554e9f8676098de14b21b57147450a9f28a7665644f7f9009149aa",
+  "scene": "01M4RB32TA7SCQXHKHTZPTX5TD",
+  "ids": {
+    "script": "00000000000000000000005701",
+    "camera": "00000000000000000000005710",
+    "light": "00000000000000000000005711",
+    "floor": "00000000000000000000005712",
+    "crate": "00000000000000000000005713",
+    "pillar": "00000000000000000000005714",
+    "root": "00000000000000000000005720",
+    "title": "00000000000000000000005721",
+    "body": "00000000000000000000005722",
+    "actions": "00000000000000000000005723",
+    "resume": "00000000000000000000005724",
+    "options": "00000000000000000000005725",
+    "online": "00000000000000000000005726",
+    "continue": "00000000000000000000005727",
+    "fields": "00000000000000000000005728",
+    "name_row": "00000000000000000000005729",
+    "name_caption": "0000000000000000000000572A",
+    "name": "0000000000000000000000572B",
+    "arabic_row": "0000000000000000000000572C",
+    "arabic_caption": "0000000000000000000000572D",
+    "arabic": "0000000000000000000000572E",
+    "cjk_row": "00000000000000000000005730",
+    "cjk_caption": "00000000000000000000005731",
+    "cjk": "00000000000000000000005732"
+  },
+  "fonts": [
+    "01M4RB32VJQ86JMF47SWCF301B",
+    "01M4RB32WDPDF4FE0G70E7KH7M",
+    "01M4RB32X7H0DH4T5PFPB7BGE1"
+  ],
+  "font_sha256": {
+    "IncantCJKFixture.ttf": "3299d6ab8033fb1d163f892dfcb1b8838cf1c46935c329d82da6f7b9e27dad82",
+    "NotoSans-Regular.ttf": "2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9",
+    "NotoSansArabic.ttf": "ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56"
+  },
+  "meshes": {
+    "floor": "01M4RB32XXGVCKP01QKGFAZXQ8",
+    "crate": "01M4RB32YKYQ6ZV039PGCH8J8J",
+    "pillar": "01M4RB32Z90GGQ6ZTPREZ7Y81X"
+  },
+  "revision": 3,
+  "transcript": [
+    {
+      "argv": [
+        "incant_headless",
+        "init",
+        "/Users/andreyyurlov/.codex/incant-evidence/0057/fixture-1/authoring/project.json",
+        "--entities",
+        "0"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "incant_headless",
+        "import",
+        "/Users/andreyyurlov/.codex/incant-evidence/0057/fixture-1/authoring/project.json",
+        "NotoSans-Regular.ttf"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "incant_headless",
+        "import",
+        "/Users/andreyyurlov/.codex/incant-evidence/0057/fixture-1/authoring/project.json",
+        "NotoSansArabic.ttf"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "incant_headless",
+        "import",
+        "/Users/andreyyurlov/.codex/incant-evidence/0057/fixture-1/authoring/project.json",
+        "IncantCJKFixture.ttf"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "incant_headless",
+        "import",
+        "/Users/andreyyurlov/.codex/incant-evidence/0057/fixture-1/authoring/project.json",
+        "floor.gltf"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "incant_headless",
+        "import",
+        "/Users/andreyyurlov/.codex/incant-evidence/0057/fixture-1/authoring/project.json",
+        "crate.gltf"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "incant_headless",
+        "import",
+        "/Users/andreyyurlov/.codex/incant-evidence/0057/fixture-1/authoring/project.json",
+        "pillar.gltf"
+      ],
+      "exit_code": 0
+    },
+    {
+      "rpc": [
+        "project.read",
+        "command.execute",
+        "project.read",
+        "history.undo",
+        "history.redo",
+        "project.read",
+        "project.save",
+        "project.read"
+      ],
+      "commands": 25
+    }
+  ],
+  "command_bus_only": true,
+  "undo_redo": true,
+  "journal_reopened": true,
+  "commands": [
+    {
+      "op": "write_script",
+      "script_id": "00000000000000000000005701",
+      "expected_source": {
+        "state": "missing"
+      },
+      "source": "import type { NativeBehavior } from '@incant/runtime/native';\n// 0057 review motion. The crate spins from accumulated simulation time, so the\n// world keeps moving under the UI. Accepted UI outcomes change the world, so\n// activation and submission are visible in pixels: Resume steps the crate one\n// of four slots right, the Arabic button one slot left, Options pauses or\n// resumes the spin, and any submitted field lifts or lowers the crate.\nconst RESUME = '00000000000000000000005724';\nconst OPTIONS = '00000000000000000000005725';\nconst CONTINUE = '00000000000000000000005727';\nlet slot = 1;\nlet spinning = true;\nlet lifted = false;\nlet angle = 0;\nexport default {\n  update({ instances, chunks, dt, input }) {\n    for (const event of input.ui.events) {\n      if (event.kind === 'activated') {\n        if (event.entity_id === RESUME) slot = (slot + 1) % 4;\n        else if (event.entity_id === CONTINUE) slot = (slot + 3) % 4;\n        else if (event.entity_id === OPTIONS) spinning = !spinning;\n      } else if (event.kind === 'submitted') {\n        lifted = !lifted;\n      }\n    }\n    if (spinning) angle += 0.9 * dt;\n    for (const instance of instances) {\n      for (const chunk of chunks) {\n        const i = chunk.ids.indexOf(instance.entity);\n        if (i < 0) continue;\n        const o = i * chunk.transformStride;\n        chunk.transforms[o] = -1.35 + 0.9 * slot;\n        chunk.transforms[o + 1] = lifted ? 0.15 : -0.55;\n        chunk.transforms[o + 2] = 0.2;\n        chunk.transforms[o + 3] = 0;\n        chunk.transforms[o + 4] = Math.sin(angle / 2);\n        chunk.transforms[o + 5] = 0;\n        chunk.transforms[o + 6] = Math.cos(angle / 2);\n      }\n    }\n    return undefined;\n  },\n} satisfies NativeBehavior;\n"
+    },
+    {
+      "op": "upsert_script",
+      "script": {
+        "id": "00000000000000000000005701",
+        "name": "Review outcomes",
+        "path": "review_outcomes.ts"
+      }
+    },
+    {
+      "op": "create_entity",
+      "scene_id": "01M4RB32TA7SCQXHKHTZPTX5TD",
+      "entity": {
+        "id": "00000000000000000000005710",
+        "name": "Camera",
+        "parent": null,
+        "provenance": null,
+        "components": {
+          "Transform": {
+            "translation": [
+              0,
+              0.9,
+              7
+            ],
+            "rotation": [
+              -0.0697564737441253,
+              0,
+              0,
+              0.9975640502598242
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "Camera": {
+            "fov_degrees": 45,
+            "near": 0.1,
+            "far": 100,
+            "projection": {
+              "kind": "perspective"
+            }
+          }
+        }
+      }
+    },
+    {
+      "op": "create_entity",
+      "scene_id": "01M4RB32TA7SCQXHKHTZPTX5TD",
+      "entity": {
+        "id": "00000000000000000000005711",
+        "name": "Key light",
+        "parent": null,
+        "provenance": null,
+        "components": {
+          "Transform": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": [
+              -0.33036608954935215,
+              0.24321034680169396,
+              0.08852132690137686,
+              0.9076733711903687
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "DirectionalLight": {
+            "color": [
+              1,
+              0.97,
+              0.92
+            ],
+            "intensity": 2.4,
+            "shadows": null
+          }
+        }
+      }
+    },
+    {
+      "op": "create_entity",
+      "scene_id": "01M4RB32TA7SCQXHKHTZPTX5TD",
+      "entity": {
+        "id": "00000000000000000000005712",
+        "name": "Floor",
+        "parent": null,
+        "provenance": null,
+        "components": {
+          "Transform": {
+            "translation": [
+              0,
+              -1.25,
+              -2
+            ],
+            "rotation": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              16,
+              0.1,
+              12
+            ]
+          },
+          "MeshRenderer": {
+            "mesh": "01M4RB32XXGVCKP01QKGFAZXQ8",
+            "materials": [],
+            "cast_shadows": false
+          }
+        }
+      }
+    },
+    {
+      "op": "create_entity",
+      "scene_id": "01M4RB32TA7SCQXHKHTZPTX5TD",
+      "entity": {
+        "id": "00000000000000000000005713",
+        "name": "Review crate",
+        "parent": null,
+        "provenance": null,
+        "components": {
+          "Transform": {
+            "translation": [
+              -0.45,
+              -0.55,
+              0.2
+            ],
+            "rotation": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "MeshRenderer": {
+            "mesh": "01M4RB32YKYQ6ZV039PGCH8J8J",
+            "materials": [],
+            "cast_shadows": false
+          },
+          "Script": {
+            "source": "00000000000000000000005701",
+            "props": {}
+          }
+        }
+      }
+    },
+    {
+      "op": "create_entity",
+      "scene_id": "01M4RB32TA7SCQXHKHTZPTX5TD",
+      "entity": {
+        "id": "00000000000000000000005714",
+        "name": "Pillar",
+        "parent": null,
+        "provenance": null,
+        "components": {
+          "Transform": {
+            "translation": [
+              2.4,
+              0.2,
+              -2.5
+            ],
+            "rotation": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              0.9,
+              3,
+              0.9
+            ]
+          },
+          "MeshRenderer": {
+            "mesh": "01M4RB32Z90GGQ6ZTPREZ7Y81X",
+            "materials": [],
+            "cast_shadows": false
+          }
+        }
+      }
+    },
+    {
+      "op": "create_entity",
+      "scene_id": "01M4RB32TA7SCQXHKHTZPTX5TD",
+      "entity": {
+        "id": "00000000000000000000005720",
+        "name": "UI root",
+        "parent": null,
+        "provenance": null,
+        "components": {
+          "UiNode": {
+            "kind": {
+              "role": "root"
+            },
+            "style": {
+              "size": [
+                "auto",
+                "auto"
+              ],
+              "min_size": [
+                0,
+                0
+              ],
+              "max_size": [
+                null,
+                null
+              ],
+              "padding": [
+                12,
+                10,
+                12,
+                10
+              ],
+              "gap": [
+                0,
+                7
+              ],
+              "direction": "column",
+              "wrap": false,
+              "align": "start",
+              "justify": "start",
+              "grow": 0,
+              "shrink": 1,
+              "basis": "auto"
+            },
+            "order": 0,
+            "disabled": false
+          }
+        }
+      }
+    },
+    {
+      "op": "create_entity",
+      "scene_id": "01M4RB32TA7SCQXHKHTZPTX5TD",
+      "entity": {
+        "id": "00000000000000000000005721",
+        "name": "Title",
+        "parent": "00000000000000000000005720",
+        "provenance": null,
+        "components": {
+          "UiNode": {
+            "kind": {
+              "role": "label",
+              "text": {
+                "content": "Paused",
+                "fonts": [
+                  "01M4RB32VJQ86JMF47SWCF301B",
+                  "01M4RB32WDPDF4FE0G70E7KH7M",
+                  "01M4RB32X7H0DH4T5PFPB7BGE1"
+                ],
+                "font_size": 18,
+                "line_height": 22,
+                "wrap": "none"
+              }
+            },
+            "style": {
+              "size": [
+                "auto",
+                "auto"
+              ],
+              "min_size": [
+                0,
+                0
+              ],
+              "max_size": [
+                null,
+                null
+              ],
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "gap": [
+                0,
+                0
+              ],
+              "direction": "column",
+              "wrap": false,
+              "align": "stretch",
+              "justify": "start",
+              "grow": 0,
+              "shrink": 0,
+              "basis": "auto"
+            },
+            "order": 1,
+            "disabled": false
+          }
+        }
+      }
+    },
+    {
+      "op": "create_entity",
+      "scene_id": "01M4RB32TA7SCQXHKHTZPTX5TD",
+      "entity": {
+        "id": "00000000000000000000005722",
+        "name": "Body",
+        "parent": "00000000000000000000005720",
+        "provenance": null,
+        "components": {
+          "UiNode": {
+            "kind": {
+              "role": "label",
+              "text": {
+                "content": "Progress is saved. تم حفظ التقدم. 日本語 中文",
+                "fonts": [
+                  "01M4RB32VJQ86JMF47SWCF301B",
+                  "01M4RB32WDPDF4FE0G70E7KH7M",
+                  "01M4RB32X7H0DH4T5PFPB7BGE1"
+                ],
+                "font_size": 12,
+                "line_height": 16,
+                "wrap": "word"
+              }
+            },
+            "style": {
+              "size": [
+                {
+                  "fraction": 1
+                },
+                "auto"
+              ],
+              "min_size": [
+                0,
+                0
+              ],
+              "max_size": [
+                360,
+                null
+              ],
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "gap": [
+                0,
+                0
+              ],
+              "direction": "column",
+              "wrap": false,
+              "align": "stretch",
+              "justify": "start",
+              "grow": 0,
+              "shrink": 0,
+              "basis": "auto"
+            },
+            "order": 2,
+            "disabled": false
+          }
+        }
+      }
+    },
+    {
+      "op": "create_entity",
+      "scene_id": "01M4RB32TA7SCQXHKHTZPTX5TD",
+      "entity": {
+        "id": "00000000000000000000005723",
+        "name": "Actions",
+        "parent": "00000000000000000000005720",
+        "provenance": null,
+        "components": {
+          "UiNode": {
+            "kind": {
+              "role": "container"
+            },
+            "style": {
+              "size": [
+                {
+                  "fraction": 1
+                },
+                "auto"
+              ],
+              "min_size": [
+                0,
+                0
+              ],
+              "max_size": [
+                420,
+                null
+              ],
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "gap": [
+                6,
+                6
+              ],
+              "direction": "row",
+              "wrap": true,
+              "align": "start",
+              "justify": "start",
+              "grow": 0,
+              "shrink": 0,
+              "basis": "auto"
+            },
+            "order": 3,
+            "disabled": false
+          }
+        }
+      }
+    },
+    {
+      "op": "create_entity",
+      "scene_id": "01M4RB32TA7SCQXHKHTZPTX5TD",
+      "entity": {
+        "id": "00000000000000000000005724",
+        "name": "Resume",
+        "parent": "00000000000000000000005723",
+        "provenance": null,
+        "components": {
+          "UiNode": {
+            "kind": {
+              "role": "button",
+              "text": {
+                "content": "Resume",
+                "fonts": [
+                  "01M4RB32VJQ86JMF47SWCF301B",
+                  "01M4RB32WDPDF4FE0G70E7KH7M",
+                  "01M4RB32X7H0DH4T5PFPB7BGE1"
+                ],
+                "font_size": 13,
+                "line_height": 16,
+                "wrap": "none"
+              }
+            },
+            "style": {
+              "size": [
+                "auto",
+                "auto"
+              ],
+              "min_size": [
+                0,
+                0
+              ],
+              "max_size": [
+                null,
+                null
+              ],
+              "padding": [
+                10,
+                5,
+                10,
+                5
+              ],
+              "gap": [
+                0,
+                0
+              ],
+              "direction": "column",
+              "wrap": false,
+              "align": "stretch",
+              "justify": "start",
+              "grow": 0,
+              "shrink": 0,
+              "basis": "auto"
+            },
+            "order": 1,
+            "disabled": false
+          }
+        }
+      }
+    },
+    {
+      "op": "create_entity",
+      "scene_id": "01M4RB32TA7SCQXHKHTZPTX5TD",
+      "entity": {
+        "id": "00000000000000000000005725",
+        "name": "Options",
+        "parent": "00000000000000000000005723",
+        "provenance": null,
+        "components": {
+          "UiNode": {
+            "kind": {
+              "role": "button",
+              "text": {
+                "content": "Options",
+                "fonts": [
+                  "01M4RB32VJQ86JMF47SWCF301B",
+                  "01M4RB32WDPDF4FE0G70E7KH7M",
+                  "01M4RB32X7H0DH4T5PFPB7BGE1"
+                ],
+                "font_size": 13,
+                "line_height": 16,
+                "wrap": "none"
+              }
+            },
+            "style": {
+              "size": [
+                "auto",
+                "auto"
+              ],
+              "min_size": [
+                0,
+                0
+              ],
+              "max_size": [
+                null,
+                null
+              ],
+              "padding": [
+                10,
+                5,
+                10,
+                5
+              ],
+              "gap": [
+                0,
+                0
+              ],
+              "direction": "column",
+              "wrap": false,
+              "align": "stretch",
+              "justify": "start",
+              "grow": 0,
+              "shrink": 0,
+              "basis": "auto"
+            },
+            "order": 2,
+            "disabled": false
+          }
+        }
+      }
+    },
+    {
+      "op": "create_entity",
+      "scene_id": "01M4RB32TA7SCQXHKHTZPTX5TD",
+      "entity": {
+        "id": "00000000000000000000005726",
+        "name": "Online",
+        "parent": "00000000000000000000005723",
+        "provenance": null,
+        "components": {
+          "UiNode": {
+            "kind": {
+              "role": "button",
+              "text": {
+                "content": "Online",
+                "fonts": [
+                  "01M4RB32VJQ86JMF47SWCF301B",
+                  "01M4RB32WDPDF4FE0G70E7KH7M",
+                  "01M4RB32X7H0DH4T5PFPB7BGE1"
+                ],
+                "font_size": 13,
+                "line_height": 16,
+                "wrap": "none"
+              }
+            },
+            "style": {
+              "size": [
+                "auto",
+                "auto"
+              ],
+              "min_size": [
+                0,
+                0
+              ],
+              "max_size": [
+                null,
+                null
+              ],
+              "padding": [
+                10,
+                5,
+                10,
+                5
+              ],
+              "gap": [
+                0,
+                0
+              ],
+              "direction": "column",
+              "wrap": false,
+              "align": "stretch",
+              "justify": "start",
+              "grow": 0,
+              "shrink": 0,
+              "basis": "auto"
+            },
+            "order": 3,
+            "disabled": true
+          }
+        }
+      }
+    },
+    {
+      "op": "create_entity",
+      "scene_id": "01M4RB32TA7SCQXHKHTZPTX5TD",
+      "entity": {
+        "id": "00000000000000000000005727",
+        "name": "متابعة",
+        "parent": "00000000000000000000005723",
+        "provenance": null,
+        "components": {
+          "UiNode": {
+            "kind": {
+              "role": "button",
+              "text": {
+                "content": "متابعة",
+                "fonts": [
+                  "01M4RB32VJQ86JMF47SWCF301B",
+                  "01M4RB32WDPDF4FE0G70E7KH7M",
+                  "01M4RB32X7H0DH4T5PFPB7BGE1"
+                ],
+                "font_size": 13,
+                "line_height": 16,
+                "wrap": "none"
+              }
+            },
+            "style": {
+              "size": [
+                "auto",
+                "auto"
+              ],
+              "min_size": [
+                0,
+                0
+              ],
+              "max_size": [
+                null,
+                null
+              ],
+              "padding": [
+                10,
+                5,
+                10,
+                5
+              ],
+              "gap": [
+                0,
+                0
+              ],
+              "direction": "column",
+              "wrap": false,
+              "align": "stretch",
+              "justify": "start",
+              "grow": 0,
+              "shrink": 0,
+              "basis": "auto"
+            },
+            "order": 4,
+            "disabled": false
+          }
+        }
+      }
+    },
+    {
+      "op": "create_entity",
+      "scene_id": "01M4RB32TA7SCQXHKHTZPTX5TD",
+      "entity": {
+        "id": "00000000000000000000005728",
+        "name": "Fields",
+        "parent": "00000000000000000000005720",
+        "provenance": null,
+        "components": {
+          "UiNode": {
+            "kind": {
+              "role": "container"
+            },
+            "style": {
+              "size": [
+                {
+                  "fraction": 1
+                },
+                "auto"
+              ],
+              "min_size": [
+                0,
+                0
+              ],
+              "max_size": [
+                300,
+                null
+              ],
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "gap": [
+                0,
+                5
+              ],
+              "direction": "column",
+              "wrap": false,
+              "align": "stretch",
+              "justify": "start",
+              "grow": 0,
+              "shrink": 0,
+              "basis": "auto"
+            },
+            "order": 4,
+            "disabled": false
+          }
+        }
+      }
+    },
+    {
+      "op": "create_entity",
+      "scene_id": "01M4RB32TA7SCQXHKHTZPTX5TD",
+      "entity": {
+        "id": "00000000000000000000005729",
+        "name": "name row",
+        "parent": "00000000000000000000005728",
+        "provenance": null,
+        "components": {
+          "UiNode": {
+            "kind": {
+              "role": "container"
+            },
+            "style": {
+              "size": [
+                {
+                  "fraction": 1
+                },
+                "auto"
+              ],
+              "min_size": [
+                0,
+                0
+              ],
+              "max_size": [
+                null,
+                null
+              ],
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "gap": [
+                8,
+                0
+              ],
+              "direction": "row",
+              "wrap": false,
+              "align": "center",
+              "justify": "start",
+              "grow": 0,
+              "shrink": 0,
+              "basis": "auto"
+            },
+            "order": 1,
+            "disabled": false
+          }
+        }
+      }
+    },
+    {
+      "op": "create_entity",
+      "scene_id": "01M4RB32TA7SCQXHKHTZPTX5TD",
+      "entity": {
+        "id": "0000000000000000000000572A",
+        "name": "name caption",
+        "parent": "00000000000000000000005729",
+        "provenance": null,
+        "components": {
+          "UiNode": {
+            "kind": {
+              "role": "label",
+              "text": {
+                "content": "Name",
+                "fonts": [
+                  "01M4RB32VJQ86JMF47SWCF301B",
+                  "01M4RB32WDPDF4FE0G70E7KH7M",
+                  "01M4RB32X7H0DH4T5PFPB7BGE1"
+                ],
+                "font_size": 12,
+                "line_height": 16,
+                "wrap": "none"
+              }
+            },
+            "style": {
+              "size": [
+                {
+                  "pixels": 52
+                },
+                "auto"
+              ],
+              "min_size": [
+                0,
+                0
+              ],
+              "max_size": [
+                null,
+                null
+              ],
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "gap": [
+                0,
+                0
+              ],
+              "direction": "column",
+              "wrap": false,
+              "align": "stretch",
+              "justify": "start",
+              "grow": 0,
+              "shrink": 0,
+              "basis": "auto"
+            },
+            "order": 1,
+            "disabled": false
+          }
+        }
+      }
+    },
+    {
+      "op": "create_entity",
+      "scene_id": "01M4RB32TA7SCQXHKHTZPTX5TD",
+      "entity": {
+        "id": "0000000000000000000000572B",
+        "name": "name field",
+        "parent": "00000000000000000000005729",
+        "provenance": null,
+        "components": {
+          "UiNode": {
+            "kind": {
+              "role": "text_input",
+              "text": {
+                "content": "Ada Lovelace",
+                "fonts": [
+                  "01M4RB32VJQ86JMF47SWCF301B",
+                  "01M4RB32WDPDF4FE0G70E7KH7M",
+                  "01M4RB32X7H0DH4T5PFPB7BGE1"
+                ],
+                "font_size": 13,
+                "line_height": 16,
+                "wrap": "none"
+              }
+            },
+            "style": {
+              "size": [
+                "auto",
+                "auto"
+              ],
+              "min_size": [
+                0,
+                0
+              ],
+              "max_size": [
+                null,
+                null
+              ],
+              "padding": [
+                7,
+                4,
+                7,
+                4
+              ],
+              "gap": [
+                0,
+                0
+              ],
+              "direction": "column",
+              "wrap": false,
+              "align": "stretch",
+              "justify": "start",
+              "grow": 1,
+              "shrink": 1,
+              "basis": {
+                "pixels": 0
+              }
+            },
+            "order": 2,
+            "disabled": false
+          }
+        }
+      }
+    },
+    {
+      "op": "create_entity",
+      "scene_id": "01M4RB32TA7SCQXHKHTZPTX5TD",
+      "entity": {
+        "id": "0000000000000000000000572C",
+        "name": "arabic row",
+        "parent": "00000000000000000000005728",
+        "provenance": null,
+        "components": {
+          "UiNode": {
+            "kind": {
+              "role": "container"
+            },
+            "style": {
+              "size": [
+                {
+                  "fraction": 1
+                },
+                "auto"
+              ],
+              "min_size": [
+                0,
+                0
+              ],
+              "max_size": [
+                null,
+                null
+              ],
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "gap": [
+                8,
+                0
+              ],
+              "direction": "row",
+              "wrap": false,
+              "align": "center",
+              "justify": "start",
+              "grow": 0,
+              "shrink": 0,
+              "basis": "auto"
+            },
+            "order": 2,
+            "disabled": false
+          }
+        }
+      }
+    },
+    {
+      "op": "create_entity",
+      "scene_id": "01M4RB32TA7SCQXHKHTZPTX5TD",
+      "entity": {
+        "id": "0000000000000000000000572D",
+        "name": "arabic caption",
+        "parent": "0000000000000000000000572C",
+        "provenance": null,
+        "components": {
+          "UiNode": {
+            "kind": {
+              "role": "label",
+              "text": {
+                "content": "الاسم",
+                "fonts": [
+                  "01M4RB32VJQ86JMF47SWCF301B",
+                  "01M4RB32WDPDF4FE0G70E7KH7M",
+                  "01M4RB32X7H0DH4T5PFPB7BGE1"
+                ],
+                "font_size": 12,
+                "line_height": 16,
+                "wrap": "none"
+              }
+            },
+            "style": {
+              "size": [
+                {
+                  "pixels": 52
+                },
+                "auto"
+              ],
+              "min_size": [
+                0,
+                0
+              ],
+              "max_size": [
+                null,
+                null
+              ],
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "gap": [
+                0,
+                0
+              ],
+              "direction": "column",
+              "wrap": false,
+              "align": "stretch",
+              "justify": "start",
+              "grow": 0,
+              "shrink": 0,
+              "basis": "auto"
+            },
+            "order": 1,
+            "disabled": false
+          }
+        }
+      }
+    },
+    {
+      "op": "create_entity",
+      "scene_id": "01M4RB32TA7SCQXHKHTZPTX5TD",
+      "entity": {
+        "id": "0000000000000000000000572E",
+        "name": "arabic field",
+        "parent": "0000000000000000000000572C",
+        "provenance": null,
+        "components": {
+          "UiNode": {
+            "kind": {
+              "role": "text_input",
+              "text": {
+                "content": "سلام",
+                "fonts": [
+                  "01M4RB32VJQ86JMF47SWCF301B",
+                  "01M4RB32WDPDF4FE0G70E7KH7M",
+                  "01M4RB32X7H0DH4T5PFPB7BGE1"
+                ],
+                "font_size": 13,
+                "line_height": 16,
+                "wrap": "none"
+              }
+            },
+            "style": {
+              "size": [
+                "auto",
+                "auto"
+              ],
+              "min_size": [
+                0,
+                0
+              ],
+              "max_size": [
+                null,
+                null
+              ],
+              "padding": [
+                7,
+                4,
+                7,
+                4
+              ],
+              "gap": [
+                0,
+                0
+              ],
+              "direction": "column",
+              "wrap": false,
+              "align": "stretch",
+              "justify": "start",
+              "grow": 1,
+              "shrink": 1,
+              "basis": {
+                "pixels": 0
+              }
+            },
+            "order": 2,
+            "disabled": false
+          }
+        }
+      }
+    },
+    {
+      "op": "create_entity",
+      "scene_id": "01M4RB32TA7SCQXHKHTZPTX5TD",
+      "entity": {
+        "id": "00000000000000000000005730",
+        "name": "cjk row",
+        "parent": "00000000000000000000005728",
+        "provenance": null,
+        "components": {
+          "UiNode": {
+            "kind": {
+              "role": "container"
+            },
+            "style": {
+              "size": [
+                {
+                  "fraction": 1
+                },
+                "auto"
+              ],
+              "min_size": [
+                0,
+                0
+              ],
+              "max_size": [
+                null,
+                null
+              ],
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "gap": [
+                8,
+                0
+              ],
+              "direction": "row",
+              "wrap": false,
+              "align": "center",
+              "justify": "start",
+              "grow": 0,
+              "shrink": 0,
+              "basis": "auto"
+            },
+            "order": 3,
+            "disabled": false
+          }
+        }
+      }
+    },
+    {
+      "op": "create_entity",
+      "scene_id": "01M4RB32TA7SCQXHKHTZPTX5TD",
+      "entity": {
+        "id": "00000000000000000000005731",
+        "name": "cjk caption",
+        "parent": "00000000000000000000005730",
+        "provenance": null,
+        "components": {
+          "UiNode": {
+            "kind": {
+              "role": "label",
+              "text": {
+                "content": "日本語",
+                "fonts": [
+                  "01M4RB32VJQ86JMF47SWCF301B",
+                  "01M4RB32WDPDF4FE0G70E7KH7M",
+                  "01M4RB32X7H0DH4T5PFPB7BGE1"
+                ],
+                "font_size": 12,
+                "line_height": 16,
+                "wrap": "none"
+              }
+            },
+            "style": {
+              "size": [
+                {
+                  "pixels": 52
+                },
+                "auto"
+              ],
+              "min_size": [
+                0,
+                0
+              ],
+              "max_size": [
+                null,
+                null
+              ],
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "gap": [
+                0,
+                0
+              ],
+              "direction": "column",
+              "wrap": false,
+              "align": "stretch",
+              "justify": "start",
+              "grow": 0,
+              "shrink": 0,
+              "basis": "auto"
+            },
+            "order": 1,
+            "disabled": false
+          }
+        }
+      }
+    },
+    {
+      "op": "create_entity",
+      "scene_id": "01M4RB32TA7SCQXHKHTZPTX5TD",
+      "entity": {
+        "id": "00000000000000000000005732",
+        "name": "cjk field",
+        "parent": "00000000000000000000005730",
+        "provenance": null,
+        "components": {
+          "UiNode": {
+            "kind": {
+              "role": "text_input",
+              "text": {
+                "content": "中文",
+                "fonts": [
+                  "01M4RB32VJQ86JMF47SWCF301B",
+                  "01M4RB32WDPDF4FE0G70E7KH7M",
+                  "01M4RB32X7H0DH4T5PFPB7BGE1"
+                ],
+                "font_size": 13,
+                "line_height": 16,
+                "wrap": "none"
+              }
+            },
+            "style": {
+              "size": [
+                "auto",
+                "auto"
+              ],
+              "min_size": [
+                0,
+                0
+              ],
+              "max_size": [
+                null,
+                null
+              ],
+              "padding": [
+                7,
+                4,
+                7,
+                4
+              ],
+              "gap": [
+                0,
+                0
+              ],
+              "direction": "column",
+              "wrap": false,
+              "align": "stretch",
+              "justify": "start",
+              "grow": 1,
+              "shrink": 1,
+              "basis": {
+                "pixels": 0
+              }
+            },
+            "order": 2,
+            "disabled": false
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+   Compiling incant_render v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_render)
+    Finished `ci` profile [optimized] target(s) in 7.13s
+     Running unittests src/lib.rs (/Users/andreyyurlov/.codex/incant-native-target/ci/deps/incant_render-0b72bec43c7fffff)
+
+running 8 tests
+test ui::tests::plan_layers_each_widget_in_canonical_order_with_state_colours ... ok
+test ui::tests::caret_and_composition_follow_the_supplied_edit_ranges_only ... ok
+test ui::tests::glyph_quads_use_exact_shaped_positions_and_keep_overflowing_rtl_glyphs ... ok
+test ui::tests::caret_accessor_returns_the_drawn_caret_and_only_for_a_focused_enabled_field ... ok
+test ui::tests::selection_spans_merge_per_line_and_split_mixed_direction_runs ... ok
+test ui::tests::caret_follows_cluster_edges_bidi_levels_and_downstream_affinity ... ok
+test ui::tests::caret_on_empty_text_empty_paragraphs_and_every_line_ending ... ok
+test ui::tests::plan_refuses_foreign_reset_and_inconsistent_input_before_building ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 82 filtered out; finished in 0.04s

@@ -1,0 +1,5 @@
+   Compiling incant_render_gpu_host v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_render_gpu_host)
+    Finished `ci` profile [optimized] target(s) in 5.08s
+     Running `/Users/andreyyurlov/.codex/incant-native-target/ci/examples/zz_0057_review /Users/andreyyurlov/.codex/incant-evidence/0057/pkg-1/player/data handoffs/0057-native-window-game-ui/tools/plan-1x.json /Users/andreyyurlov/.codex/incant-evidence/0057/offscreen-2`
+/Users/andreyyurlov/.codex/incant-evidence/0057/offscreen-2/review.json
+offscreen exit 0; incant_render_gpu_host unchanged
