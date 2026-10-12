@@ -1,0 +1,1099 @@
+{
+  "adapter": "Apple M5 Pro",
+  "backend": "Metal",
+  "cases": [
+    {
+      "accepted_frames": 14,
+      "captures": [
+        {
+          "accepted_ui_snapshot": {
+            "discarded_events": 0,
+            "events": [],
+            "focused": null,
+            "text_input": false
+          },
+          "capture": "desktop-1x-01-idle.png",
+          "fields": {
+            "0000000000000000000000002A": {
+              "display": "Ada Lovelace",
+              "preedit": null,
+              "selection": [
+                12,
+                12
+              ],
+              "text": "Ada Lovelace"
+            },
+            "0000000000000000000000002C": {
+              "display": "سلام عليكم",
+              "preedit": null,
+              "selection": [
+                19,
+                19
+              ],
+              "text": "سلام عليكم"
+            },
+            "0000000000000000000000002E": {
+              "display": "日本",
+              "preedit": null,
+              "selection": [
+                6,
+                6
+              ],
+              "text": "日本"
+            }
+          },
+          "png_rgba_sha256": "072702aff7b65784d7bc3a02a60db2f3a1bc49b6698e16d417111d7047f7a8a2",
+          "size": [
+            960,
+            540
+          ],
+          "tick": 1,
+          "ui": {
+            "glyph_quads": 140,
+            "gpu_bytes": 37746,
+            "missing_glyphs": 0,
+            "quads": 240,
+            "widgets": 12
+          },
+          "uploads_since_startup": {
+            "atlas_textures": 0,
+            "frame_writes": 1,
+            "quad_buffers": 0
+          }
+        },
+        {
+          "accepted_ui_snapshot": {
+            "discarded_events": 0,
+            "events": [],
+            "focused": "00000000000000000000000024",
+            "text_input": false
+          },
+          "capture": "desktop-1x-02-focus-resume.png",
+          "fields": {
+            "0000000000000000000000002A": {
+              "display": "Ada Lovelace",
+              "preedit": null,
+              "selection": [
+                12,
+                12
+              ],
+              "text": "Ada Lovelace"
+            },
+            "0000000000000000000000002C": {
+              "display": "سلام عليكم",
+              "preedit": null,
+              "selection": [
+                19,
+                19
+              ],
+              "text": "سلام عليكم"
+            },
+            "0000000000000000000000002E": {
+              "display": "日本",
+              "preedit": null,
+              "selection": [
+                6,
+                6
+              ],
+              "text": "日本"
+            }
+          },
+          "png_rgba_sha256": "60f8ffc8a1b9889169d34558291766cfd7ef71df92ebd2adf09a49da0ecf3d88",
+          "size": [
+            960,
+            540
+          ],
+          "tick": 3,
+          "ui": {
+            "glyph_quads": 140,
+            "gpu_bytes": 37810,
+            "missing_glyphs": 0,
+            "quads": 241,
+            "widgets": 12
+          },
+          "uploads_since_startup": {
+            "atlas_textures": 0,
+            "frame_writes": 1,
+            "quad_buffers": 1
+          }
+        },
+        {
+          "accepted_ui_snapshot": {
+            "discarded_events": 0,
+            "events": [],
+            "focused": "00000000000000000000000025",
+            "text_input": false
+          },
+          "capture": "desktop-1x-03-pressed-options.png",
+          "fields": {
+            "0000000000000000000000002A": {
+              "display": "Ada Lovelace",
+              "preedit": null,
+              "selection": [
+                12,
+                12
+              ],
+              "text": "Ada Lovelace"
+            },
+            "0000000000000000000000002C": {
+              "display": "سلام عليكم",
+              "preedit": null,
+              "selection": [
+                19,
+                19
+              ],
+              "text": "سلام عليكم"
+            },
+            "0000000000000000000000002E": {
+              "display": "日本",
+              "preedit": null,
+              "selection": [
+                6,
+                6
+              ],
+              "text": "日本"
+            }
+          },
+          "png_rgba_sha256": "37e71590755f42a52a69fcd395108ddd588a86193e8d427888fff3e20e53608a",
+          "size": [
+            960,
+            540
+          ],
+          "tick": 4,
+          "ui": {
+            "glyph_quads": 140,
+            "gpu_bytes": 37810,
+            "missing_glyphs": 0,
+            "quads": 241,
+            "widgets": 12
+          },
+          "uploads_since_startup": {
+            "atlas_textures": 0,
+            "frame_writes": 1,
+            "quad_buffers": 2
+          }
+        },
+        {
+          "accepted_ui_snapshot": {
+            "discarded_events": 0,
+            "events": [],
+            "focused": "0000000000000000000000002A",
+            "text_input": true
+          },
+          "capture": "desktop-1x-04-field-caret.png",
+          "fields": {
+            "0000000000000000000000002A": {
+              "display": "Ada Lovelace",
+              "preedit": null,
+              "selection": [
+                12,
+                12
+              ],
+              "text": "Ada Lovelace"
+            },
+            "0000000000000000000000002C": {
+              "display": "سلام عليكم",
+              "preedit": null,
+              "selection": [
+                19,
+                19
+              ],
+              "text": "سلام عليكم"
+            },
+            "0000000000000000000000002E": {
+              "display": "日本",
+              "preedit": null,
+              "selection": [
+                6,
+                6
+              ],
+              "text": "日本"
+            }
+          },
+          "png_rgba_sha256": "2a65a893bd1c11a49f02778e2d2b7644032f7356dad61fbdff7698d2888171cd",
+          "size": [
+            960,
+            540
+          ],
+          "tick": 6,
+          "ui": {
+            "glyph_quads": 140,
+            "gpu_bytes": 37810,
+            "missing_glyphs": 0,
+            "quads": 241,
+            "widgets": 12
+          },
+          "uploads_since_startup": {
+            "atlas_textures": 0,
+            "frame_writes": 1,
+            "quad_buffers": 4
+          }
+        },
+        {
+          "accepted_ui_snapshot": {
+            "discarded_events": 0,
+            "events": [],
+            "focused": "0000000000000000000000002A",
+            "text_input": true
+          },
+          "capture": "desktop-1x-05-field-selection.png",
+          "fields": {
+            "0000000000000000000000002A": {
+              "display": "Ada Lovelace",
+              "preedit": null,
+              "selection": [
+                12,
+                4
+              ],
+              "text": "Ada Lovelace"
+            },
+            "0000000000000000000000002C": {
+              "display": "سلام عليكم",
+              "preedit": null,
+              "selection": [
+                19,
+                19
+              ],
+              "text": "سلام عليكم"
+            },
+            "0000000000000000000000002E": {
+              "display": "日本",
+              "preedit": null,
+              "selection": [
+                6,
+                6
+              ],
+              "text": "日本"
+            }
+          },
+          "png_rgba_sha256": "100ce9c044e15f45352b08148ed8e7a2f1250f0eecebec8372c439680b1e9635",
+          "size": [
+            960,
+            540
+          ],
+          "tick": 7,
+          "ui": {
+            "glyph_quads": 140,
+            "gpu_bytes": 37810,
+            "missing_glyphs": 0,
+            "quads": 241,
+            "widgets": 12
+          },
+          "uploads_since_startup": {
+            "atlas_textures": 0,
+            "frame_writes": 1,
+            "quad_buffers": 5
+          }
+        },
+        {
+          "accepted_ui_snapshot": {
+            "discarded_events": 0,
+            "events": [
+              {
+                "entity_id": "0000000000000000000000002A",
+                "kind": "value_changed",
+                "value": "Ada Byron"
+              }
+            ],
+            "focused": "0000000000000000000000002A",
+            "text_input": true
+          },
+          "capture": "desktop-1x-06-field-value.png",
+          "fields": {
+            "0000000000000000000000002A": {
+              "display": "Ada Byron",
+              "preedit": null,
+              "selection": [
+                9,
+                9
+              ],
+              "text": "Ada Byron"
+            },
+            "0000000000000000000000002C": {
+              "display": "سلام عليكم",
+              "preedit": null,
+              "selection": [
+                19,
+                19
+              ],
+              "text": "سلام عليكم"
+            },
+            "0000000000000000000000002E": {
+              "display": "日本",
+              "preedit": null,
+              "selection": [
+                6,
+                6
+              ],
+              "text": "日本"
+            }
+          },
+          "png_rgba_sha256": "44c180ec984e26b70b5dae87ad30b90c2ae7467a2edc961d543f64778b747410",
+          "size": [
+            960,
+            540
+          ],
+          "tick": 8,
+          "ui": {
+            "glyph_quads": 137,
+            "gpu_bytes": 37670,
+            "missing_glyphs": 0,
+            "quads": 238,
+            "widgets": 12
+          },
+          "uploads_since_startup": {
+            "atlas_textures": 1,
+            "frame_writes": 1,
+            "quad_buffers": 6
+          }
+        },
+        {
+          "accepted_ui_snapshot": {
+            "discarded_events": 0,
+            "events": [],
+            "focused": "0000000000000000000000002C",
+            "text_input": true
+          },
+          "capture": "desktop-1x-07-arabic-caret.png",
+          "fields": {
+            "0000000000000000000000002A": {
+              "display": "Ada Byron",
+              "preedit": null,
+              "selection": [
+                9,
+                9
+              ],
+              "text": "Ada Byron"
+            },
+            "0000000000000000000000002C": {
+              "display": "سلام عليكم",
+              "preedit": null,
+              "selection": [
+                19,
+                19
+              ],
+              "text": "سلام عليكم"
+            },
+            "0000000000000000000000002E": {
+              "display": "日本",
+              "preedit": null,
+              "selection": [
+                6,
+                6
+              ],
+              "text": "日本"
+            }
+          },
+          "png_rgba_sha256": "aa73420cc6072cd01645dbc29a20be16c64a44f95087ba343ce56e238e805b5c",
+          "size": [
+            960,
+            540
+          ],
+          "tick": 9,
+          "ui": {
+            "glyph_quads": 137,
+            "gpu_bytes": 37670,
+            "missing_glyphs": 0,
+            "quads": 238,
+            "widgets": 12
+          },
+          "uploads_since_startup": {
+            "atlas_textures": 1,
+            "frame_writes": 1,
+            "quad_buffers": 7
+          }
+        },
+        {
+          "accepted_ui_snapshot": {
+            "discarded_events": 0,
+            "events": [],
+            "focused": "0000000000000000000000002E",
+            "text_input": true
+          },
+          "capture": "desktop-1x-08-cjk-preedit.png",
+          "fields": {
+            "0000000000000000000000002A": {
+              "display": "Ada Byron",
+              "preedit": null,
+              "selection": [
+                9,
+                9
+              ],
+              "text": "Ada Byron"
+            },
+            "0000000000000000000000002C": {
+              "display": "سلام عليكم",
+              "preedit": null,
+              "selection": [
+                19,
+                19
+              ],
+              "text": "سلام عليكم"
+            },
+            "0000000000000000000000002E": {
+              "display": "日本語",
+              "preedit": [
+                6,
+                9
+              ],
+              "selection": [
+                9,
+                9
+              ],
+              "text": "日本"
+            }
+          },
+          "png_rgba_sha256": "260aabfbde7ac4b5f283b9944c4e37485cdc3863aeacdbb882ae4f0fbafcc49c",
+          "size": [
+            960,
+            540
+          ],
+          "tick": 11,
+          "ui": {
+            "glyph_quads": 138,
+            "gpu_bytes": 37798,
+            "missing_glyphs": 0,
+            "quads": 240,
+            "widgets": 12
+          },
+          "uploads_since_startup": {
+            "atlas_textures": 2,
+            "frame_writes": 1,
+            "quad_buffers": 9
+          }
+        },
+        {
+          "accepted_ui_snapshot": {
+            "discarded_events": 0,
+            "events": [
+              {
+                "entity_id": "0000000000000000000000002E",
+                "kind": "value_changed",
+                "value": "日本語"
+              }
+            ],
+            "focused": "0000000000000000000000002E",
+            "text_input": true
+          },
+          "capture": "desktop-1x-09-cjk-commit.png",
+          "fields": {
+            "0000000000000000000000002A": {
+              "display": "Ada Byron",
+              "preedit": null,
+              "selection": [
+                9,
+                9
+              ],
+              "text": "Ada Byron"
+            },
+            "0000000000000000000000002C": {
+              "display": "سلام عليكم",
+              "preedit": null,
+              "selection": [
+                19,
+                19
+              ],
+              "text": "سلام عليكم"
+            },
+            "0000000000000000000000002E": {
+              "display": "日本語",
+              "preedit": null,
+              "selection": [
+                9,
+                9
+              ],
+              "text": "日本語"
+            }
+          },
+          "png_rgba_sha256": "fa21aa1fb14063aa1ea6eef68f69aa7f551cca7e9b2fdae63e143b1b836e875c",
+          "size": [
+            960,
+            540
+          ],
+          "tick": 12,
+          "ui": {
+            "glyph_quads": 138,
+            "gpu_bytes": 37734,
+            "missing_glyphs": 0,
+            "quads": 239,
+            "widgets": 12
+          },
+          "uploads_since_startup": {
+            "atlas_textures": 2,
+            "frame_writes": 1,
+            "quad_buffers": 10
+          }
+        }
+      ],
+      "case": "desktop-1x",
+      "final": {
+        "atlas_sha256": "58d4a5f3b9c09719c3b4950097b97091ba5bfcaa8aa4607631098c4a7ff22527",
+        "focus": "0000000000000000000000002E",
+        "glyphs": 155,
+        "tick": 14,
+        "values": {
+          "0000000000000000000000002A": "Ada Byron",
+          "0000000000000000000000002C": "سلام عليكم",
+          "0000000000000000000000002E": "日本語"
+        }
+      },
+      "guest_logs": [
+        {
+          "message": "activated 00000000000000000000000025",
+          "tick": 5
+        },
+        {
+          "message": "value_changed 0000000000000000000000002A Ada Byron",
+          "tick": 8
+        },
+        {
+          "message": "value_changed 0000000000000000000000002E 日本語",
+          "tick": 12
+        },
+        {
+          "message": "submitted 0000000000000000000000002E 日本語",
+          "tick": 13
+        }
+      ],
+      "pointers": [
+        {
+          "position": [
+            180.24798583984375,
+            157.0
+          ],
+          "pressed": true,
+          "tick": 4
+        },
+        {
+          "position": [
+            180.24798583984375,
+            157.0
+          ],
+          "pressed": false,
+          "tick": 5
+        }
+      ],
+      "scale": 1.0,
+      "target": [
+        960,
+        540
+      ],
+      "viewport": [
+        960.0,
+        540.0
+      ]
+    },
+    {
+      "accepted_frames": 7,
+      "captures": [
+        {
+          "accepted_ui_snapshot": {
+            "discarded_events": 0,
+            "events": [],
+            "focused": null,
+            "text_input": false
+          },
+          "capture": "desktop-2x-01-idle.png",
+          "fields": {
+            "0000000000000000000000002A": {
+              "display": "Ada Lovelace",
+              "preedit": null,
+              "selection": [
+                12,
+                12
+              ],
+              "text": "Ada Lovelace"
+            },
+            "0000000000000000000000002C": {
+              "display": "سلام عليكم",
+              "preedit": null,
+              "selection": [
+                19,
+                19
+              ],
+              "text": "سلام عليكم"
+            },
+            "0000000000000000000000002E": {
+              "display": "日本",
+              "preedit": null,
+              "selection": [
+                6,
+                6
+              ],
+              "text": "日本"
+            }
+          },
+          "png_rgba_sha256": "fde60dab4aad98f73bab0ccae302f203db2b61deb2829ce889c02d8a1e14ac3d",
+          "size": [
+            1920,
+            1080
+          ],
+          "tick": 1,
+          "ui": {
+            "glyph_quads": 140,
+            "gpu_bytes": 37746,
+            "missing_glyphs": 0,
+            "quads": 240,
+            "widgets": 12
+          },
+          "uploads_since_startup": {
+            "atlas_textures": 0,
+            "frame_writes": 1,
+            "quad_buffers": 0
+          }
+        },
+        {
+          "accepted_ui_snapshot": {
+            "discarded_events": 0,
+            "events": [],
+            "focused": "00000000000000000000000024",
+            "text_input": false
+          },
+          "capture": "desktop-2x-02-focus-resume.png",
+          "fields": {
+            "0000000000000000000000002A": {
+              "display": "Ada Lovelace",
+              "preedit": null,
+              "selection": [
+                12,
+                12
+              ],
+              "text": "Ada Lovelace"
+            },
+            "0000000000000000000000002C": {
+              "display": "سلام عليكم",
+              "preedit": null,
+              "selection": [
+                19,
+                19
+              ],
+              "text": "سلام عليكم"
+            },
+            "0000000000000000000000002E": {
+              "display": "日本",
+              "preedit": null,
+              "selection": [
+                6,
+                6
+              ],
+              "text": "日本"
+            }
+          },
+          "png_rgba_sha256": "7cce413887590464e4c63f4750eecddf9c7a19fa983ff7d1f7cb19bfff705d3f",
+          "size": [
+            1920,
+            1080
+          ],
+          "tick": 3,
+          "ui": {
+            "glyph_quads": 140,
+            "gpu_bytes": 37810,
+            "missing_glyphs": 0,
+            "quads": 241,
+            "widgets": 12
+          },
+          "uploads_since_startup": {
+            "atlas_textures": 0,
+            "frame_writes": 1,
+            "quad_buffers": 1
+          }
+        },
+        {
+          "accepted_ui_snapshot": {
+            "discarded_events": 0,
+            "events": [],
+            "focused": "0000000000000000000000002A",
+            "text_input": true
+          },
+          "capture": "desktop-2x-05-field-selection.png",
+          "fields": {
+            "0000000000000000000000002A": {
+              "display": "Ada Lovelace",
+              "preedit": null,
+              "selection": [
+                12,
+                4
+              ],
+              "text": "Ada Lovelace"
+            },
+            "0000000000000000000000002C": {
+              "display": "سلام عليكم",
+              "preedit": null,
+              "selection": [
+                19,
+                19
+              ],
+              "text": "سلام عليكم"
+            },
+            "0000000000000000000000002E": {
+              "display": "日本",
+              "preedit": null,
+              "selection": [
+                6,
+                6
+              ],
+              "text": "日本"
+            }
+          },
+          "png_rgba_sha256": "cca3564bfe58888933a218ac56f133464e79aa8e31310655a7c89b15b6f394b3",
+          "size": [
+            1920,
+            1080
+          ],
+          "tick": 5,
+          "ui": {
+            "glyph_quads": 140,
+            "gpu_bytes": 37810,
+            "missing_glyphs": 0,
+            "quads": 241,
+            "widgets": 12
+          },
+          "uploads_since_startup": {
+            "atlas_textures": 0,
+            "frame_writes": 1,
+            "quad_buffers": 3
+          }
+        },
+        {
+          "accepted_ui_snapshot": {
+            "discarded_events": 0,
+            "events": [],
+            "focused": "0000000000000000000000002E",
+            "text_input": true
+          },
+          "capture": "desktop-2x-08-cjk-preedit.png",
+          "fields": {
+            "0000000000000000000000002A": {
+              "display": "Ada Lovelace",
+              "preedit": null,
+              "selection": [
+                12,
+                4
+              ],
+              "text": "Ada Lovelace"
+            },
+            "0000000000000000000000002C": {
+              "display": "سلام عليكم",
+              "preedit": null,
+              "selection": [
+                19,
+                19
+              ],
+              "text": "سلام عليكم"
+            },
+            "0000000000000000000000002E": {
+              "display": "日本語",
+              "preedit": [
+                6,
+                9
+              ],
+              "selection": [
+                9,
+                9
+              ],
+              "text": "日本"
+            }
+          },
+          "png_rgba_sha256": "910d642fbbd8f7af0e6c26577a27227c2495de6ad0412c41b57725f9d18af7f8",
+          "size": [
+            1920,
+            1080
+          ],
+          "tick": 7,
+          "ui": {
+            "glyph_quads": 141,
+            "gpu_bytes": 37938,
+            "missing_glyphs": 0,
+            "quads": 243,
+            "widgets": 12
+          },
+          "uploads_since_startup": {
+            "atlas_textures": 1,
+            "frame_writes": 1,
+            "quad_buffers": 5
+          }
+        }
+      ],
+      "case": "desktop-2x",
+      "final": {
+        "atlas_sha256": "2b9561c0ae47f10f9ee279518851b51523f08b3fb1db36971ec6dcc90bd44101",
+        "focus": "0000000000000000000000002E",
+        "glyphs": 158,
+        "tick": 7,
+        "values": {
+          "0000000000000000000000002A": "Ada Lovelace",
+          "0000000000000000000000002C": "سلام عليكم",
+          "0000000000000000000000002E": "日本"
+        }
+      },
+      "guest_logs": [],
+      "pointers": [],
+      "scale": 2.0,
+      "target": [
+        1920,
+        1080
+      ],
+      "viewport": [
+        960.0,
+        540.0
+      ]
+    },
+    {
+      "accepted_frames": 7,
+      "captures": [
+        {
+          "accepted_ui_snapshot": {
+            "discarded_events": 0,
+            "events": [],
+            "focused": null,
+            "text_input": false
+          },
+          "capture": "narrow-2x-01-idle.png",
+          "fields": {
+            "0000000000000000000000002A": {
+              "display": "Ada Lovelace",
+              "preedit": null,
+              "selection": [
+                12,
+                12
+              ],
+              "text": "Ada Lovelace"
+            },
+            "0000000000000000000000002C": {
+              "display": "سلام عليكم",
+              "preedit": null,
+              "selection": [
+                19,
+                19
+              ],
+              "text": "سلام عليكم"
+            },
+            "0000000000000000000000002E": {
+              "display": "日本",
+              "preedit": null,
+              "selection": [
+                6,
+                6
+              ],
+              "text": "日本"
+            }
+          },
+          "png_rgba_sha256": "939c07d0827c23bc40dea18adc398957cd20415cfcc31fc58161cc81ddc75877",
+          "size": [
+            720,
+            1280
+          ],
+          "tick": 1,
+          "ui": {
+            "glyph_quads": 140,
+            "gpu_bytes": 37746,
+            "missing_glyphs": 0,
+            "quads": 240,
+            "widgets": 12
+          },
+          "uploads_since_startup": {
+            "atlas_textures": 0,
+            "frame_writes": 1,
+            "quad_buffers": 0
+          }
+        },
+        {
+          "accepted_ui_snapshot": {
+            "discarded_events": 0,
+            "events": [],
+            "focused": "00000000000000000000000024",
+            "text_input": false
+          },
+          "capture": "narrow-2x-02-focus-resume.png",
+          "fields": {
+            "0000000000000000000000002A": {
+              "display": "Ada Lovelace",
+              "preedit": null,
+              "selection": [
+                12,
+                12
+              ],
+              "text": "Ada Lovelace"
+            },
+            "0000000000000000000000002C": {
+              "display": "سلام عليكم",
+              "preedit": null,
+              "selection": [
+                19,
+                19
+              ],
+              "text": "سلام عليكم"
+            },
+            "0000000000000000000000002E": {
+              "display": "日本",
+              "preedit": null,
+              "selection": [
+                6,
+                6
+              ],
+              "text": "日本"
+            }
+          },
+          "png_rgba_sha256": "f391b5721962f999139813753d755d91915683f1a4f4a5dc4e8d58832a5c8924",
+          "size": [
+            720,
+            1280
+          ],
+          "tick": 3,
+          "ui": {
+            "glyph_quads": 140,
+            "gpu_bytes": 37810,
+            "missing_glyphs": 0,
+            "quads": 241,
+            "widgets": 12
+          },
+          "uploads_since_startup": {
+            "atlas_textures": 0,
+            "frame_writes": 1,
+            "quad_buffers": 1
+          }
+        },
+        {
+          "accepted_ui_snapshot": {
+            "discarded_events": 0,
+            "events": [],
+            "focused": "0000000000000000000000002A",
+            "text_input": true
+          },
+          "capture": "narrow-2x-05-field-selection.png",
+          "fields": {
+            "0000000000000000000000002A": {
+              "display": "Ada Lovelace",
+              "preedit": null,
+              "selection": [
+                12,
+                4
+              ],
+              "text": "Ada Lovelace"
+            },
+            "0000000000000000000000002C": {
+              "display": "سلام عليكم",
+              "preedit": null,
+              "selection": [
+                19,
+                19
+              ],
+              "text": "سلام عليكم"
+            },
+            "0000000000000000000000002E": {
+              "display": "日本",
+              "preedit": null,
+              "selection": [
+                6,
+                6
+              ],
+              "text": "日本"
+            }
+          },
+          "png_rgba_sha256": "c3e24068879b2a83bd0b9aecb0f3b679a585821e33dced9a0003a3f7ecb0ccac",
+          "size": [
+            720,
+            1280
+          ],
+          "tick": 5,
+          "ui": {
+            "glyph_quads": 140,
+            "gpu_bytes": 37810,
+            "missing_glyphs": 0,
+            "quads": 241,
+            "widgets": 12
+          },
+          "uploads_since_startup": {
+            "atlas_textures": 0,
+            "frame_writes": 1,
+            "quad_buffers": 3
+          }
+        },
+        {
+          "accepted_ui_snapshot": {
+            "discarded_events": 0,
+            "events": [],
+            "focused": "0000000000000000000000002E",
+            "text_input": true
+          },
+          "capture": "narrow-2x-08-cjk-preedit.png",
+          "fields": {
+            "0000000000000000000000002A": {
+              "display": "Ada Lovelace",
+              "preedit": null,
+              "selection": [
+                12,
+                4
+              ],
+              "text": "Ada Lovelace"
+            },
+            "0000000000000000000000002C": {
+              "display": "سلام عليكم",
+              "preedit": null,
+              "selection": [
+                19,
+                19
+              ],
+              "text": "سلام عليكم"
+            },
+            "0000000000000000000000002E": {
+              "display": "日本語",
+              "preedit": [
+                6,
+                9
+              ],
+              "selection": [
+                9,
+                9
+              ],
+              "text": "日本"
+            }
+          },
+          "png_rgba_sha256": "78a10555863879414cd44fde25a7e21b5a95887a82ede4ad6bd8d005c545e74c",
+          "size": [
+            720,
+            1280
+          ],
+          "tick": 7,
+          "ui": {
+            "glyph_quads": 141,
+            "gpu_bytes": 37938,
+            "missing_glyphs": 0,
+            "quads": 243,
+            "widgets": 12
+          },
+          "uploads_since_startup": {
+            "atlas_textures": 1,
+            "frame_writes": 1,
+            "quad_buffers": 5
+          }
+        }
+      ],
+      "case": "narrow-2x",
+      "final": {
+        "atlas_sha256": "2b9561c0ae47f10f9ee279518851b51523f08b3fb1db36971ec6dcc90bd44101",
+        "focus": "0000000000000000000000002E",
+        "glyphs": 158,
+        "tick": 7,
+        "values": {
+          "0000000000000000000000002A": "Ada Lovelace",
+          "0000000000000000000000002C": "سلام عليكم",
+          "0000000000000000000000002E": "日本"
+        }
+      },
+      "guest_logs": [],
+      "pointers": [],
+      "scale": 2.0,
+      "target": [
+        720,
+        1280
+      ],
+      "viewport": [
+        360.0,
+        640.0
+      ]
+    }
+  ],
+  "format": "incant-0056-ui-review",
+  "format_target": "Rgba8UnormSrgb"
+}

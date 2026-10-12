@@ -1,0 +1,239 @@
+{
+  "format": "incant-input",
+  "version": 2,
+  "tick_rate": 60,
+  "start_tick": 0,
+  "ticks": 14,
+  "frames": [
+    {
+      "tick": 2,
+      "events": [
+        {
+          "type": "key",
+          "code": "Tab",
+          "down": true
+        }
+      ]
+    },
+    {
+      "tick": 3,
+      "events": [
+        {
+          "type": "key",
+          "code": "Tab",
+          "down": false
+        }
+      ]
+    },
+    {
+      "tick": 4,
+      "events": [],
+      "ui": [
+        {
+          "type": "pointer",
+          "position": [
+            180.24798583984375,
+            157.0
+          ],
+          "pressed": true
+        }
+      ]
+    },
+    {
+      "tick": 5,
+      "events": [],
+      "ui": [
+        {
+          "type": "pointer",
+          "position": [
+            180.24798583984375,
+            157.0
+          ],
+          "pressed": false
+        }
+      ]
+    },
+    {
+      "tick": 6,
+      "events": [],
+      "ui": [
+        {
+          "type": "focus",
+          "entity_id": "0000000000000000000000002A"
+        }
+      ]
+    },
+    {
+      "tick": 7,
+      "events": [
+        {
+          "type": "key",
+          "code": "ShiftLeft",
+          "down": true
+        },
+        {
+          "type": "key",
+          "code": "ArrowLeft",
+          "down": true
+        },
+        {
+          "type": "key",
+          "code": "ArrowLeft",
+          "down": false
+        },
+        {
+          "type": "key",
+          "code": "ArrowLeft",
+          "down": true
+        },
+        {
+          "type": "key",
+          "code": "ArrowLeft",
+          "down": false
+        },
+        {
+          "type": "key",
+          "code": "ArrowLeft",
+          "down": true
+        },
+        {
+          "type": "key",
+          "code": "ArrowLeft",
+          "down": false
+        },
+        {
+          "type": "key",
+          "code": "ArrowLeft",
+          "down": true
+        },
+        {
+          "type": "key",
+          "code": "ArrowLeft",
+          "down": false
+        },
+        {
+          "type": "key",
+          "code": "ArrowLeft",
+          "down": true
+        },
+        {
+          "type": "key",
+          "code": "ArrowLeft",
+          "down": false
+        },
+        {
+          "type": "key",
+          "code": "ArrowLeft",
+          "down": true
+        },
+        {
+          "type": "key",
+          "code": "ArrowLeft",
+          "down": false
+        },
+        {
+          "type": "key",
+          "code": "ArrowLeft",
+          "down": true
+        },
+        {
+          "type": "key",
+          "code": "ArrowLeft",
+          "down": false
+        },
+        {
+          "type": "key",
+          "code": "ArrowLeft",
+          "down": true
+        },
+        {
+          "type": "key",
+          "code": "ArrowLeft",
+          "down": false
+        },
+        {
+          "type": "key",
+          "code": "ShiftLeft",
+          "down": false
+        }
+      ]
+    },
+    {
+      "tick": 8,
+      "events": [],
+      "ui": [
+        {
+          "type": "commit",
+          "entity_id": "0000000000000000000000002A",
+          "text": "Byron"
+        }
+      ]
+    },
+    {
+      "tick": 9,
+      "events": [],
+      "ui": [
+        {
+          "type": "focus",
+          "entity_id": "0000000000000000000000002C"
+        }
+      ]
+    },
+    {
+      "tick": 10,
+      "events": [],
+      "ui": [
+        {
+          "type": "focus",
+          "entity_id": "0000000000000000000000002E"
+        }
+      ]
+    },
+    {
+      "tick": 11,
+      "events": [],
+      "ui": [
+        {
+          "type": "preedit",
+          "entity_id": "0000000000000000000000002E",
+          "text": "語",
+          "cursor": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "tick": 12,
+      "events": [],
+      "ui": [
+        {
+          "type": "commit",
+          "entity_id": "0000000000000000000000002E",
+          "text": "語"
+        }
+      ]
+    },
+    {
+      "tick": 13,
+      "events": [
+        {
+          "type": "key",
+          "code": "Enter",
+          "down": true
+        }
+      ]
+    },
+    {
+      "tick": 14,
+      "events": [
+        {
+          "type": "key",
+          "code": "Enter",
+          "down": false
+        }
+      ]
+    }
+  ]
+}
