@@ -19,6 +19,7 @@ pub struct CookedEntity {
 pub struct CookedScene {
     pub(crate) font_assets: Vec<crate::FontAssetRef>,
     pub(crate) texts: Vec<crate::CookedText>,
+    pub(crate) ui: Vec<crate::CookedUi>,
     pub(crate) localization: crate::NativeLocalization,
     pub(crate) id: StableId,
     pub(crate) tick_rate: u32,
@@ -83,6 +84,7 @@ impl CookedScene {
         Ok(Self {
             font_assets: Vec::new(),
             texts: Vec::new(),
+            ui: Vec::new(),
             localization: Default::default(),
             id,
             tick_rate,
@@ -194,8 +196,13 @@ impl CookedScene {
         !self.font_assets.is_empty() || !self.texts.is_empty()
     }
     fn text_bytes(&self) -> usize {
-        if self.has_text() {
+        if self.has_text() || self.has_ui() {
             crate::text_binary::size(&self.font_assets, &self.texts)
+                + if self.has_ui() {
+                    crate::ui_binary::size(&self.ui)
+                } else {
+                    0
+                }
         } else {
             0
         }
@@ -291,8 +298,9 @@ impl CookedScene {
     pub fn physics_2d(&self) -> &[crate::CookedPhysics2D] {
         &self.physics_2d
     }
-    fn validate_physics_2d(&self) -> Result<(), SceneError> {
+    pub(crate) fn validate_physics_2d(&self) -> Result<(), SceneError> {
         let entities: BTreeMap<_, _> = self.entities.iter().map(|e| (e.id, e)).collect();
+        self.validate_ui(&entities)?;
         crate::text::validate(
             &self.font_assets,
             self.texts.iter().map(|n| (n.entity, n.text.as_ref())),
@@ -382,6 +390,7 @@ impl CookedScene {
 
     fn localization_bytes(&self) -> usize {
         if !self.has_text()
+            && !self.has_ui()
             && self.localization.is_default()
             && !self.spatial.iter().any(|n| n.animation.is_some())
         {

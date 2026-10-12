@@ -5,6 +5,11 @@
 //! world nor asynchronous device cursors are rolled back. Plain constructors
 //! refuse spatial declarations. Hosted variants require a trusted native host.
 mod core;
+#[cfg(feature = "ui")]
+pub struct RoutedUiInput {
+    pub events: Vec<incant_input::InputEvent>,
+    pub snapshot: incant_input::UiSnapshot,
+}
 mod hosted;
 mod offline;
 use core::{Core, NoHost};
@@ -40,6 +45,8 @@ pub enum GameError<E = Infallible> {
     SpatialHost,
     #[error("this game session has no text host")]
     TextHost,
+    #[error("this game session has no compatible retained UI host")]
+    UiHost,
     #[error("native sample clock exhausted")]
     Clock,
     #[error("game session is suspended; resume before advancing simulation")]
@@ -48,6 +55,9 @@ pub enum GameError<E = Infallible> {
 pub type Result<T, E = Infallible> = std::result::Result<T, GameError<E>>;
 
 fn require_nonspatial(scene: &CookedScene) -> Result<()> {
+    if scene.has_ui() {
+        return Err(GameError::UiHost);
+    }
     if scene.has_text() {
         return Err(GameError::TextHost);
     }
@@ -58,6 +68,9 @@ fn require_nonspatial(scene: &CookedScene) -> Result<()> {
 }
 
 fn require_nonspatial_world(world: &NativeWorld) -> Result<()> {
+    if world.ui_view().map_err(SessionError::from)?.nodes().len() != 0 {
+        return Err(GameError::UiHost);
+    }
     let view = world.spatial_view().map_err(SessionError::from)?;
     if view.has_text() {
         return Err(GameError::TextHost);

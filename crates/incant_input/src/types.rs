@@ -304,6 +304,7 @@ pub enum Gesture {
 }
 #[derive(Debug, Clone, PartialEq, Serialize, JsonSchema)]
 pub struct InputFrame {
+    pub ui: crate::UiSnapshot,
     pub actions: BTreeMap<String, crate::ActionState>,
     pub focused: bool,
     pub keyboard: Buttons<KeyCode>,
@@ -318,6 +319,7 @@ pub struct InputFrame {
 impl Default for InputFrame {
     fn default() -> Self {
         Self {
+            ui: crate::UiSnapshot::default(),
             actions: BTreeMap::new(),
             focused: true,
             keyboard: Buttons::default(),

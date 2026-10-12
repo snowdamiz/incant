@@ -1,6 +1,6 @@
 //! Bounded event clips with fixed-tick seeking. Preparing a clip validates its
 //! entire device lifetime before a game can consume even its first event.
-use crate::{InputError, InputEvent, InputRuntime, MAX_EVENTS_PER_TICK};
+use crate::{InputError, InputEvent, InputRuntime, MAX_EVENTS_PER_TICK, RecordedUiEvent};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use thiserror::Error;
@@ -33,6 +33,11 @@ pub struct RecordedTick {
     tick: u64,
     #[schemars(length(max = 1024))]
     events: Vec<InputEvent>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[schemars(length(max = 256))]
+    ui: Vec<RecordedUiEvent>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    viewport: Option<[f32; 2]>,
 }
 #[derive(Debug, Error)]
 pub enum RecordingError {
@@ -40,6 +45,8 @@ pub enum RecordingError {
     Size,
     #[error("unsupported input-recording format or version")]
     Version,
+    #[error("UI input history cannot be seeked without a retained widget checkpoint")]
+    UiSeek,
     #[error("input-recording tick rate must match the game")]
     Rate,
     #[error("input-recording frames must have strictly increasing offsets within the clip")]
@@ -65,8 +72,19 @@ impl InputReplay {
             return Err(RecordingError::Size);
         }
         let recording: InputRecording = serde_json::from_str(text)?;
-        if recording.format != "incant-input" || recording.version != 1 {
+        if recording.format != "incant-input" || !matches!(recording.version, 1 | 2) {
             return Err(RecordingError::Version);
+        }
+        if recording.version == 1
+            && recording
+                .frames
+                .iter()
+                .any(|f| !f.ui.is_empty() || f.viewport.is_some())
+        {
+            return Err(RecordingError::Version);
+        }
+        if game_tick != recording.start_tick && recording.has_ui() {
+            return Err(RecordingError::UiSeek);
         }
         if !(1..=240).contains(&recording.tick_rate) || recording.tick_rate != tick_rate {
             return Err(RecordingError::Rate);
@@ -74,14 +92,13 @@ impl InputReplay {
         if recording.ticks > MAX_TICKS
             || recording.start_tick > MAX_SAFE_TICK - recording.ticks
             || recording.frames.len() > MAX_TICKS as usize
+            || recording.frames.iter().any(|f| {
+                f.events.len() > MAX_EVENTS_PER_TICK || f.ui.len() > crate::MAX_UI_NOTIFICATIONS
+            })
             || recording
                 .frames
                 .iter()
-                .any(|f| f.events.len() > MAX_EVENTS_PER_TICK)
-            || recording
-                .frames
-                .iter()
-                .map(|f| f.events.len())
+                .map(|f| f.events.len() + f.ui.len())
                 .sum::<usize>()
                 > MAX_EVENTS
         {
@@ -94,6 +111,25 @@ impl InputReplay {
         for frame in &recording.frames {
             if frame.tick <= previous || frame.tick > recording.ticks {
                 return Err(RecordingError::Order);
+            }
+            if frame.viewport.is_some_and(|size| {
+                size.iter()
+                    .any(|n| !n.is_finite() || !(1.0..=65_536.0).contains(n))
+            }) {
+                return Err(RecordingError::Input {
+                    tick: frame.tick,
+                    source: InputError::Ui,
+                });
+            }
+            let mut bytes = 0usize;
+            for ui in &frame.ui {
+                bytes = bytes
+                    .checked_add(ui.validate().map_err(|source| RecordingError::Input {
+                        tick: frame.tick,
+                        source,
+                    })?)
+                    .filter(|n| *n <= crate::MAX_UI_NOTIFICATION_BYTES)
+                    .ok_or(RecordingError::Size)?;
             }
             previous = frame.tick;
         }
@@ -110,6 +146,23 @@ impl InputReplay {
         }
         Ok(Self { recording, initial })
     }
+    pub fn has_ui(&self) -> bool {
+        self.recording.has_ui()
+    }
+    pub fn ui_at(&self, tick: u64) -> Result<&[RecordedUiEvent], RecordingError> {
+        self.events_at(tick)?;
+        Ok(self
+            .recording
+            .frame(tick - self.recording.start_tick)
+            .map_or(&[], |f| f.ui.as_slice()))
+    }
+    pub fn viewport_at(&self, tick: u64) -> Result<Option<[f32; 2]>, RecordingError> {
+        self.events_at(tick)?;
+        Ok(self
+            .recording
+            .frame(tick - self.recording.start_tick)
+            .and_then(|f| f.viewport))
+    }
     pub fn initial_state(&self) -> InputRuntime {
         self.initial.clone()
     }
@@ -124,6 +177,17 @@ impl InputReplay {
     }
 }
 impl InputRecording {
+    fn has_ui(&self) -> bool {
+        self.frames
+            .iter()
+            .any(|f| !f.ui.is_empty() || f.viewport.is_some())
+    }
+    fn frame(&self, tick: u64) -> Option<&RecordedTick> {
+        self.frames
+            .binary_search_by_key(&tick, |f| f.tick)
+            .ok()
+            .map(|i| &self.frames[i])
+    }
     fn at_offset(&self, tick: u64) -> &[InputEvent] {
         self.frames
             .binary_search_by_key(&tick, |frame| frame.tick)

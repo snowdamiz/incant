@@ -66,6 +66,15 @@ independent source review accepted. Claude's focused rendered recheck is pending
 
 ## Current milestone
 
+Connected native UI is locally implemented from typed UiNode authoring through
+v13 cooking, bounded Taffy layout/focus, retained packaged-font text and ordinary
+composed CPU gameplay. The 226-test composed suite and 279-test affected suite
+(overlapping coverage), strict TypeScript and 11-package all-target Clippy pass.
+Keyboard/gamepad ownership, stale IME/pointer receipts, structural lifetimes and
+script failure publication have observable controls. Final-source public export
+proof is pending; screen-space GPU drawing, platform IME, UI checkpoint state and
+complete Game UI gates remain open. [CPU scope and evidence](docs/spikes/native-ui-layout.md).
+
 Native two-input crossfade clocks and controls now retain independent outgoing
 playback, pause both inputs, finish at explicit endpoints and persist active
 transitions in world-save v5/session checkpoints. Older v4 animation saves keep

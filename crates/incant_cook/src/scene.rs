@@ -106,6 +106,7 @@ pub(crate) fn cook_validated_scene_with_resources(
         .get(scene_id)
         .ok_or_else(|| CookError::MissingScene(scene_id.into()))?;
     let mut texts = Vec::new();
+    let mut ui = Vec::new();
     let mut font_assets = std::collections::BTreeMap::new();
     let mut entities = Vec::with_capacity(scene.entities.len());
     let mut physics = Vec::new();
@@ -123,6 +124,7 @@ pub(crate) fn cook_validated_scene_with_resources(
             }
             if ![
                 "Text",
+                "UiNode",
                 "NavigationMesh",
                 "NavigationGrid",
                 "Transform",
@@ -154,6 +156,9 @@ pub(crate) fn cook_validated_scene_with_resources(
                     component: component.clone(),
                 });
             }
+        }
+        if let Some(node) = crate::ui::cook(project, entity, &mut font_assets)? {
+            ui.push(node);
         }
         if let Some(node) = crate::text::cook(project, entity, &mut font_assets)? {
             texts.push(node);
@@ -269,6 +274,7 @@ pub(crate) fn cook_validated_scene_with_resources(
                 project.settings.localization.clone(),
             )?)?
             .with_text(font_assets.into_values().collect(), texts)?
+            .with_ui(ui)?
             .to_bytes(),
     )
 }
