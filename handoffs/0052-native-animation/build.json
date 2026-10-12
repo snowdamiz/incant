@@ -1,0 +1,45 @@
+{
+  "source": "edfc443763a6850fda58607b317c4638608e1f1d",
+  "manifest": "/tmp/incant-native-animation-0052-bin-v1/manifest.json",
+  "manifest_sha256": "eba86ebe57c1ff904f8c36af4d121d0ab78f6e66fdfb19db168f6691c3cc799f",
+  "native_gpu_granted": true,
+  "grant_recorded_at": "2026-10-12T00:37:29.016904+00:00",
+  "grant_scope": "Exclusive native editor and owned capture helpers for0052 only; no unrelated GPU work",
+  "binaries": {
+    "incant_editor": {
+      "path": "/tmp/incant-native-animation-0052-bin-v1/incant_editor",
+      "sha256": "4c1bf1f00e14fd5a2a539b08f2cead1787c2da2d4dbf6cbefd47090e6e0b39a1",
+      "bytes": 63137680
+    },
+    "incant_headless": {
+      "path": "/tmp/incant-native-animation-0052-bin-v1/incant_headless",
+      "sha256": "02075c09236323bb54273243b63bad1f1de4dde2a52506c93c843f80905d31cf",
+      "bytes": 53022992
+    }
+  },
+  "fixture_manifest": "/tmp/incant-animation-native-review-v2-manifest.json",
+  "fixture_manifest_sha256": "069789bef712fa54c17ffab6a19415581f06bc18fb85ea7d84bc1449913056f2",
+  "fixture_project": "/tmp/incant-animation-native-review-v2/project.json",
+  "fixture_ids": {
+    "script": "00000000000000000000000001",
+    "entity": "00000000000000000000000002",
+    "camera": "00000000000000000000000003",
+    "table": "00000000000000000000000005",
+    "scene": "01M4PRJ6ZKCKPD0ZFEEVCTM5YQ",
+    "asset": "01M4PRJ7250N1KDH27C3D2DDVV"
+  },
+  "fixture_warning": "Use only v2 with editor-default journal; v1 superseded. One-joint numerical fixture, not final art.",
+  "prior_gpu_release": {
+    "path": "/tmp/incant-shader-main109-gpu-release.json",
+    "sha256": "8067a1cd237b77f9b3e8553a930c4ea5f06812f1bd8e1b07d281677ce29142a3",
+    "pids_rechecked_absent": [
+      "18539",
+      "18545",
+      "18578",
+      "20530"
+    ]
+  },
+  "provider_turns_authorized": 0,
+  "source_inputs_verified": 934,
+  "fixture_inputs_verified": 12
+}

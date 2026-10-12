@@ -28,19 +28,32 @@ exported-player checkpoints, packaged-font text shaping, and the browser rendere
 compile repair are merged into main, with skeletal asset foundations and font
 import/cooking added in PRs #107–108. The actual native editor Play/chat/budget
 review completed one real account-backed turn, Undo and reopen with retained
-login and usage. Both follow-up UI fixes passed focused native rechecking.
-Parallel work connects native animation clocks, scripting and rendering, and
-checks cooked shaders. Complete game UI/text input, remaining SDK/render features,
-the Core Sample and reference-device measurements still prevent a Phase 1
-completion claim. The feature merge queue is clear after PRs #107–108; the editor integration and
-locally checked animation integration are the next candidates.
+login and usage. Both follow-up UI fixes passed focused native rechecking; PR #109
+merged this editor/agent/budget integration into main.
+
+Skeletal animation is the current integration: authored clip metadata, native
+clocks, atomic TypeScript controls, retained deformation and save continuation
+are implemented locally. The combined runtime/cook/render suite passes 397 CPU
+tests; a separate frozen renderer passes all 70 numerical Metal tests. Independent
+review found two save-version admission defects, now corrected with actual world
+and script-session continuation regressions. The integrated editor/runtime/script
+suite passes 357 CPU tests, Clippy and a fresh native build with the current
+production UI. A fresh exported-player proof and Claude's native appearance review
+remain pending. [Integration evidence](docs/spikes/native-animation-integration.md).
+
+Cooked-shader validation and runtime glyph atlases proceed independently. Advanced
+rendering, animation blending/state machines/IK/root motion, complete game UI/text
+input, remaining SDK capabilities, and the Core Sample/2D sample with specified
+device performance checks still prevent a Phase 1 completion claim. The feature
+merge queue is clear after PR #109; cooked shaders and the animation integration
+are the next candidates.
 
 Progress reports are scheduled approximately every 30 minutes while the goal is
 active. Report merged work separately from local checks and unmet exit gates.
 The project is still early relative to the complete Engine 1.0 and Driftwake
 scope; no defensible percentage or completion date follows from the PR count.
 
-## Native editor agent integration — in progress
+## Native editor agent integration — merged, scoped validation complete
 
 The native session/bridge now connect streamed turns, approval/cancel, bounded
 account-scoped conversation and real edits to the editor's shared bus. Account
