@@ -16,7 +16,7 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Public authored Wasm route — locally verified
+## Public authored Wasm route — current-main integration verified
 
 One typed scene module now connects public bounded `.wasm` import/reimport,
 atomic selection/clear with provenance and Undo, durable editor-default journal
@@ -25,12 +25,14 @@ The exporter translates the exact validated/metered capture with pinned wasm2c;
 ordinary `--package` startup automatically selects the linked guest. A real Rust
 SDK guest and three fresh source/cache/build-deleted packaged processes agree on
 20 ticks of clock, controls, movement and committed logs. Malformed/stale/mixed
-inputs and forged cache identities refuse. Scoped 261 Rust tests, all-target
-Clippy, editor/wasm compilation, tooling/contracts and 936 UI tests pass locally.
+inputs and forged cache identities refuse. Current integration passes 278
+feature-enabled tests, five separate feature-disabled startup cases, all-target
+Clippy, supported wasm32 and tooling/contracts. A fresh current-lock shipping
+export repeats the three source/cache/build-deleted runs and refusal controls.
 The shipping graph excludes Wasmtime, cooker and authoring dependencies. Full
 guest checkpoints remain explicitly Unsupported, including active/paused
 crossfade sessions. Full SDK, routed UI ABI, other shipping platforms, device
-performance and phase gates remain open; this scoped work awaits integration.
+performance and phase gates remain open; this scope is ready for its fast main gate.
 [Contract and measured evidence](docs/spikes/authored-wasm-export.md).
 Independent review also corrected interrupted cache publication: private staged
 files now publish without clobber, with partial-write/concurrent/corrupt/symlink
@@ -154,7 +156,9 @@ integration checks (#124). Bounded text-editing state merged in #125; steering n
 merged in #126 after its corrected fast check passed. The reported mixed-bidi
 wrapping defect merged in #127 with reviewed current-main CPU checks;
 Claude0055 separately accepted the scoped frozen-build native rendered recheck.
-Connected Game UI and remaining public Wasm work continue separately.
+Connected Game UI and remaining Wasm capability parity continue separately;
+the public authored Wasm development/export route now passes its current-main
+integration and fresh ordinary shipping proof.
 No complete Game UI or phase gate is claimed.
 
 Progress reports are scheduled approximately every 30 minutes while the goal is

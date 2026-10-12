@@ -110,3 +110,25 @@ This changes publication only; the captured bytes, policy, validator, Wasmtime
 and linked-player implementations are unchanged, so the original shipping proof
 remains identified above rather than being relabeled as a new run.
 [Correction receipt](evidence/authored-wasm-cache-atomic.json).
+
+## Main127 integration and fresh export
+
+Both reviewed source commits are preserved. All 45 non-lock reviewed inputs
+remain exact; the lock carries accepted bidi vendoring and steering/text-editing
+edges. Current checks pass 278 feature-enabled cases, five separate
+feature-disabled startup cases, all-target Clippy, supported wasm32 compilation,
+223 Python cases (four platform skips), 22 Node cases and generated contracts.
+
+A new current-lock ordinary export passes public import/reimport, selection and
+Undo/reopen, captured Wasmtime development execution, cache-identity refusal,
+three fresh 20-tick shipping-player runs, and unsupported checkpoint refusal
+before output publication. Development/player logs, controls and clocks agree.
+Authoring/cache/private build inputs are deleted before packaged execution; no
+external maps remain. The player is 8,907,280 bytes with SHA-256
+`153d760cb149a9db6bdd279e7aac9bceef3b79a65a4a18da27d1cb0021ed7f56`.
+The original run above remains separate historical evidence.
+[Current integration, sources and proof receipts](evidence/authored-wasm-main127.json).
+
+Actual-main synchronization and the later Claude0055 wrapping packet change only
+docs/evidence after these checks. Its scoped native acceptance is independent of
+this CPU export and does not extend this feature to GPU, phones or full VM saves.
