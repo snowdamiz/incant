@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "/opt/homebrew/opt/python@3.14/bin/python3.14",
+    "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/tools/probes/native-hud-export.py",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-hud-export-001",
+    "--binary",
+    "/private/tmp/incant-font-atlas-target/ci/incant_headless",
+    "--author"
+  ],
+  "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+  "returncode": 0,
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

@@ -1,0 +1,30 @@
+{
+  "wabt": "1.0.42",
+  "modules": [
+    {
+      "name": "rust-hud",
+      "prefix": "m0",
+      "input_sha256": "354810fda6efcbf3c457d964c9661fa59ea3d47c4a2ba7eca2a0d1e636b6248b",
+      "prepared_sha256": "20015a06a9d17da7f5b45d37f7b5ee51e8c7e12017d9105c27d8cf8978b55e93"
+    },
+    {
+      "name": "hud",
+      "prefix": "m1",
+      "input_sha256": "22a80123b67c22ec5e27705f61c3cdaa8b23ee290d3d09f19ef9e26106317134",
+      "prepared_sha256": "85c7e18a75e70dda04337a5112941aad9f4ce5ec27abd6d7d1cb5f75203d2069"
+    }
+  ],
+  "files": {
+    "linked.rs": "4c748f199de5c8ef766cc0063d4eef459e55d0fb19e33e268c8fddd185cbdcfe",
+    "m0-facade.c": "8444facf73c4951689c89d5e6c3d2b38022e22ead1e4a20f4f6b3116743173f6",
+    "m0.c": "ce7947c68726b303a3a6d0da31490f23affa91d01727cb15166c472e72df1736",
+    "m0.h": "ad31a85bfc00032993a1d66ecd1425a5167e98d7a49fbca92f8458b37877b8e2",
+    "m0.original.wasm": "354810fda6efcbf3c457d964c9661fa59ea3d47c4a2ba7eca2a0d1e636b6248b",
+    "m0.wasm": "20015a06a9d17da7f5b45d37f7b5ee51e8c7e12017d9105c27d8cf8978b55e93",
+    "m1-facade.c": "779d2baa0745913777dc5e2db9eafa455234c62716e6a9bc85622d6d4840ca64",
+    "m1.c": "805cd58467802d7296366ba0bded8f53639fbb39950faf4a4744ed15c8f51160",
+    "m1.h": "5f9e12d88046e9c6afcb3463a90aed6e81df665eba1f8c39a858907dd69ccb37",
+    "m1.original.wasm": "22a80123b67c22ec5e27705f61c3cdaa8b23ee290d3d09f19ef9e26106317134",
+    "m1.wasm": "85c7e18a75e70dda04337a5112941aad9f4ce5ec27abd6d7d1cb5f75203d2069"
+  }
+}
