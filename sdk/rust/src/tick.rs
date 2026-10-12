@@ -1,3 +1,4 @@
+mod audio;
 mod compound;
 mod hud;
 mod ik;

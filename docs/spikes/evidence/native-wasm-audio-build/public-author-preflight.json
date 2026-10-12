@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "sources": {
+    "tools/probes/native-wasm-audio-export.py": "7f92befb7dc61f7790a32174a5d63e39a5daee04b0580e9735deff46132044e5",
+    "tools/probes/native-wasm-audio-export/behavior.rs": "d53115f2f8a90d52637f9bca1f28a2a69cbaa92ec9cfbbe72ca56de9629d77a5",
+    "crates/incant_cook/examples/audio_package_oracle.rs": "e57134e94237e48dae3b823edb887c64c53d5dc06a2d57f3a0244a5b91711e2c",
+    "crates/incant_wasm_runtime/tests/support/audio_transport.rs": "161e84e979dcb8f3be0dcbc6d67fa3c7e99048dce58e9a49169f0f94ddbdb391",
+    "tools/export_native.py": "a22f6431bb6db373982970e53a219f1f57633c538e08055bcafacefa887699a1",
+    "tools/rust_guest.py": "a01641b59eb8d39e9cd4de58d1a59e3aec97b19179ba52793623a42a725dd5cc",
+    "tools/probes/script-source-transactions.py": "78cd059dda61456f6a66a48151d3e5ccce7e7c812163b2b269f34ee1b0ca700b"
+  },
+  "headless_sha256": "37408ce1b9d82b16b9fc8cc19f9bbe96c7867db400af6c9ebc1eb84fc6488460",
+  "oracle_binary_sha256": "74c09524286ac707501b1c129b971e5a5a3d9d880d00d598d060a950a272aff8",
+  "oracle_scene_sha256": "91be0e44474c6b3b7fff044d2e867d34b11835d037403ccba4b516df9773263b",
+  "project_sha256": "5ec7e6ab4fc3be500c90a7c2dd5fa54109ac7b7be0ba303261c704ae27f6885e",
+  "authoring_unchanged": true,
+  "ticks": 96,
+  "complete_records": 576,
+  "record_scalars": 31,
+  "bounded_vector_checks": 248,
+  "source_deleted": true,
+  "journal": "/Users/andreyyurlov/.codex/incant-evidence/wasm-audio-package-001/authoring/project.journal.jsonl"
+}

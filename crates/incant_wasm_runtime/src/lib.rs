@@ -7,6 +7,7 @@ mod animation_ik_v2;
 mod animation_poses;
 mod animation_poses_v5;
 mod animations;
+mod audio;
 mod capability;
 mod flipbooks;
 mod generated;

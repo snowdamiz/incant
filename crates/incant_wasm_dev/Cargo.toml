@@ -25,6 +25,8 @@ incant_wasm_runtime = { path = "../incant_wasm_runtime", optional = true }
 incant_wasm_abi = { path = "../incant_wasm_abi" }
 
 [dev-dependencies]
+incant_audio_runtime = { path = "../incant_audio_runtime", features = ["scene"] }
+incant_assets_runtime = { path = "../incant_assets_runtime" }
 incant_game_runtime = { path = "../incant_game_runtime", features = ["ui"] }
 incant_render_game = { path = "../incant_render_game" }
 incant_render_native = { path = "../incant_render_native" }

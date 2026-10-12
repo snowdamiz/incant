@@ -1374,3 +1374,13 @@ ancestor. Whole-module checkpoints and visual/device gates remain open.
 See [scope and evidence](docs/spikes/native-wasm-compound.md).
 
 - Native Rust/Wasm HUD source checkpoint: additive ops56–58 preserve ops0–55/input-v1, expose routed outcomes and atomically control UI/world text through both actual module hosts. Focused parser/native/composed/generated checks pass; broad validation and ordinary source-deleted package proof remain pending. Module checkpoints, headless native-play UI viewport, native/GPU/device gates remain open. See `docs/spikes/native-wasm-hud.md`.
+
+- **Native Rust/Wasm audio transport (private execution checkpoint).** Additive
+  ops59–61 preserve all previous imports and expose copied desired declarations,
+  exact u64 transport epochs and atomic ordered controls. Independent source
+  review, ten focused tests, 483 actual-host tests in 87 groups, all-target
+  Clippy and three fresh development processes pass. Full 96-tick declarations
+  and real mixed PCM match the typed native oracle. Final evidence review and
+  ordinary public source-deleted shipping proof remain pending; no actual-cursor,
+  arbitrary guest checkpoint, physical-device or phase-gate claim. See
+  [contract and evidence](docs/spikes/native-wasm-audio.md).

@@ -25,6 +25,15 @@ const _: () = {
 /// Trusted host adapter operation; all integer arguments are guest offsets/indices.
 #[derive(Clone, Copy)]
 pub enum Call {
+    AudioLen,
+    ReadAudio {
+        ptr: i32,
+        capacity: i32,
+    },
+    CommandAudio {
+        ptr: i32,
+        len: i32,
+    },
     HudLen,
     ReadHud {
         ptr: i32,
@@ -198,6 +207,8 @@ pub enum Call {
 /// this state. No guest access or native pointer is retained by this type.
 #[derive(Default)]
 pub struct Capability {
+    audio: Vec<u8>,
+    audio_rejected: bool,
     identity: Option<WorldIdentity>,
     failed: bool,
     active: bool,
@@ -295,6 +306,11 @@ impl Capability {
             return Err(error);
         }
         self.commands.clear();
+        self.audio_rejected = false;
+        if let Err(error) = crate::audio::encode(world, &mut self.audio) {
+            self.abort();
+            return Err(error);
+        }
         self.hud_rejected = false;
         if let Err(error) = crate::hud::encode(world, ui, &mut self.hud) {
             self.abort();
@@ -406,6 +422,7 @@ impl Capability {
             .ok_or(Error::Abi("missing physics state"))
     }
     pub fn abort(&mut self) {
+        self.audio.clear();
         self.hud.clear();
         self.root_motion_rows.clear();
         self.root_motion.clear();
@@ -457,6 +474,11 @@ impl Capability {
             return Err(Error::Abi("rejected HUD transaction"));
         }
         self.hud.clear();
+        if self.audio_rejected {
+            self.abort();
+            return Err(Error::Abi("rejected audio transaction"));
+        }
+        self.audio.clear();
         if self.animation_rejected {
             self.abort();
             return Err(Error::Abi("rejected animation transaction"));
@@ -578,6 +600,12 @@ impl Capability {
                 call,
                 Call::HudLen | Call::ReadHud { .. } | Call::ControlHud { .. }
             );
+        let audio_authorized = self.active
+            && self.epoch == epoch
+            && matches!(
+                call,
+                Call::AudioLen | Call::ReadAudio { .. } | Call::CommandAudio { .. }
+            );
         let physics_authorized = self.active
             && self.epoch == epoch
             && matches!(
@@ -658,6 +686,9 @@ impl Capability {
         }
         if hud_authorized && result.is_err() {
             self.hud_rejected = true;
+        }
+        if audio_authorized && result.is_err() {
+            self.audio_rejected = true;
         }
         if animation_authorized && result.is_err() {
             self.animation_rejected = true;
@@ -757,6 +788,42 @@ impl Capability {
                 .ok_or(Error::Limit("navigation query quota"))?;
         }
         match call {
+            Call::AudioLen | Call::ReadAudio { .. } => {
+                let len = self.audio.len();
+                if let Call::ReadAudio { ptr, capacity } = call {
+                    let capacity = usize::try_from(capacity)
+                        .ok()
+                        .filter(|&n| n >= len)
+                        .ok_or(Error::Abi("audio destination capacity"))?;
+                    // Validate the complete declared destination before any copy.
+                    range(ptr, capacity, memory.len())?;
+                    let region = range(ptr, len, memory.len())?;
+                    self.transfer(len)?;
+                    memory[region].copy_from_slice(&self.audio);
+                }
+                return Ok(len as i32);
+            }
+            Call::CommandAudio { ptr, len } => {
+                let len = usize::try_from(len)
+                    .ok()
+                    .filter(|&n| {
+                        (incant_wasm_abi::AudioCommandHeader::SIZE
+                            ..=incant_wasm_abi::AUDIO_MAX_COMMAND_BYTES)
+                            .contains(&n)
+                    })
+                    .ok_or(Error::Abi("audio command length"))?;
+                let region = range(ptr, len, memory.len())?;
+                self.transfer(len)?;
+                let commands = incant_wasm_abi::audio::Commands::parse(&memory[region])
+                    .map_err(|_| Error::Abi("audio command values"))?;
+                if commands.iter().len() > limits::COMMANDS - self.commands.len() {
+                    return Err(Error::Limit("structural command quota"));
+                }
+                for row in commands.iter() {
+                    self.command(crate::audio::command(row))?;
+                }
+                return Ok(0);
+            }
             Call::HudLen | Call::ReadHud { .. } => {
                 let len = self.hud.len();
                 if let Call::ReadHud { ptr, capacity } = call {

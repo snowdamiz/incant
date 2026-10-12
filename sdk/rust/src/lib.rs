@@ -18,6 +18,12 @@ pub use animation_pose_v5::{
     AnimationPoseGroup, AnimationPoseKindV5, AnimationPosePlaybackV5, AnimationPoseSnapshotV5,
     PoseInterpolation,
 };
+pub mod audio;
+pub use audio::{
+    AudioBus, AudioCommand, AudioControl, AudioDeclaration, AudioDeclarations, AudioListener,
+    AudioSource, AudioSpatial,
+};
+pub use incant_wasm_abi::{AUDIO_MAX_BYTES, AUDIO_MAX_COMMAND_BYTES};
 pub mod flipbook;
 pub mod hud;
 pub mod input;
