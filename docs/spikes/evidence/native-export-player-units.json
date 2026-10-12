@@ -127,6 +127,10 @@
         "sha256": "5e32fee2967c8599d0bb78190e12a4862e3909382935fb7a91b84c4d06903542"
       }
     ],
-    "independent_review": "pending root final producer review"
+    "independent_review": {
+      "path": "docs/spikes/evidence/native-export-player-units/root-review.json",
+      "sha256": "ba901427c3410b82d49c0d9f215c73d9c414f8ff09d5ddeaffacce7ef9bd70da",
+      "decision": "accepted unchanged source with scoped current-main tooling checks"
+    }
   }
 }

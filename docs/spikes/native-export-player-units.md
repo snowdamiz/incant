@@ -26,5 +26,5 @@ still pending and will be recorded by the consuming Planar proof.
 
 The private main169 integration repeats the scoped tooling suite: 63 pass / four
 Windows-specific skips, with conventions and diff checks passing. Both changed
-source files remain byte-identical to the producer. Root final review and exact
-fast CI are still required before publication.
+source files remain byte-identical to the producer. [Root final source review](evidence/native-export-player-units/root-review.json)
+is accepted; exact-head fast CI remains required before merge.
