@@ -27,6 +27,10 @@ pre-startup refusal while preserving absolute checkpoint-resume bounds; its
 unchanged process regression, 36 scoped tests and Clippy pass.
 [Lock evidence](docs/spikes/checkpoint6-probe-lock.md),
 [routing evidence](docs/spikes/checkpoint6-player-routing.md).
+The separate Windows budget-test correction closes the journal owner before
+independent reads, then verifies recovered state. Seven local tests and Clippy
+pass; actual Windows confirmation remains pending.
+[Journal test evidence](docs/spikes/checkpoint6-budget-journal-tests.md).
 
 ## Current milestone
 
