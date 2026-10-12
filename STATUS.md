@@ -170,8 +170,8 @@ unchanged. Windows model receipt validation now requires all twelve exact
 geometry counters, and the macOS shipping helper expects the current explicit
 manual-input argument refusal. CPU regression checks and independent review
 pass; production behavior and rendering thresholds are unchanged. Linux UI
-numeric differences remain with Claude, and the next full checkpoint waits for
-that repair. See [retained failures and checks](docs/spikes/checkpoint11-probe-repairs.md).
+numeric differences now have a reviewed, locally CPU-verified candidate correction;
+actual Linux/adapter verification awaits the next full checkpoint after merge. See [retained failures and checks](docs/spikes/checkpoint11-probe-repairs.md).
 
 ## Hosted native UI session checkpoints — current-main CPU proof passed
 
@@ -360,17 +360,19 @@ and complete Game UI/IME gates remain open.
 
 ## Current milestone
 
-Main #147 includes the multi-pose sampler, bounded nested/2D animation numeric
-core, public Wasm physics queries and ordinary offline audio checkpoint
-continuation. The reviewed two-bone IK CPU integration is merged;
-authored IK controls and rendered acceptance remain open. Authored tree playback
-and complete-pose SDK now pass current-main integration: 793 affected CPU tests,
-401 overlapping dual-host tests, Clippy/platform/contracts and two fresh ordinary
-shipping exports. Publication follows exact-head review and the fast gate. The
-next reviewed queue is the native text-lifetime/pointer repair, qualified Linux
-UI reference correction, then the separate root-motion primitive.
-Checkpoint 11 remains failed and frozen; its Linux rendering repair is with
-Claude. No release or phase gate advances on these local feature results.
+Main #149 includes authored nested/2D animation trees and complete Wasm poses
+(#148), alongside offline audio/UI checkpoints, public physics queries and the
+bounded IK primitive. Current-lock tree exports and complete-pose observations
+pass their independent CPU/package checks. The macOS text-client lifetime and
+text-field click repairs are merged in #149; their visible native follow-up is
+reviewed separately. The qualified UI reference correction now passes 135 CPU
+cases (89 GPU tests intentionally ignored), Clippy and wasm32 on current main.
+Its actual Linux result and selected adapter are still pending; installed Mesa
+packages and emulation do not establish that result. The next queued slices are
+the separate root-motion primitive and connected authored IK, with its explicit
+legacy-pose refusal seam. Checkpoint 11 remains failed and frozen until the
+reviewed repair is merged and a new fixed snapshot passes all required checks.
+No release or phase gate advances on these local feature results.
 
 Native animation graphs now connect ordinary typed authoring, captured models,
 v14 cooking, deterministic native clip states and flat adjacent-pair 1D blends.

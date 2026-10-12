@@ -1,0 +1,32 @@
+{
+  "at": "2026-10-12T16:53:02.875025+00:00",
+  "reviewer": "astra",
+  "head": "27413c29d3b1a760f00b9a6e9e953b02bde17f99",
+  "packet_sha256": "39f69dfc6d70a80a16355c959476c9c4e1c53141889dede50ac946e5fc61393f",
+  "result": "accept scoped main149 integration; no findings",
+  "verified": {
+    "frozen_inputs": 1698,
+    "artifact_hashes_and_raw_originals": 17,
+    "source_reviews": 3,
+    "full_cpu": [
+      135,
+      0,
+      89
+    ],
+    "focused_cpu": [
+      9,
+      0,
+      5
+    ],
+    "groups": 15,
+    "final_commands": 7
+  },
+  "basis": "Prior source/provenance/adapter reviews preserved. Five accepted source files exact. Only later implementation delta is rustfmt wrapping of test eprintln; observed diff and final frozen inputs verified. Post-test changes are documentation only.",
+  "limits": [
+    "Actual corrected Linux execution and adapter identity are pending the next frozen full checkpoint. Installed Mesa and CPU emulation establish neither.",
+    "Reference requires at least8 sub-texel bits; Vulkan minimum4 devices remain outside this reference. No claim that wgpu AdapterInfo exposes that precision.",
+    "Original Claude macOS/Metal numerical, mutation and appearance evidence applies to its frozen original build. No GPU/window/pixel/provider work occurred in this integration.",
+    "Checkpoint11 remains failed and release unchanged; all23 required checks must succeed on the next exact candidate before promotion.",
+    "The original native review found Tao and pointer issues; they are corrected by separate main149 work. Claude0058 interactive acceptance is a separate packet."
+  ]
+}

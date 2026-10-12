@@ -1,0 +1,107 @@
+[
+  {
+    "mutation": "none (before)",
+    "exit": 0,
+    "failed": []
+  },
+  {
+    "mutation": "glyph pen one physical pixel right",
+    "file": "crates/incant_render/src/ui/ui.wgsl",
+    "exit": 101,
+    "failed": [
+      "ui::draw_tests::editor_viewport_region_offsets_scales_and_bounds_the_ui",
+      "ui::draw_tests::logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales",
+      "ui::draw_tests::nested_clips_cut_actual_glyph_bounds_including_negative_x_rtl_overflow",
+      "ui::draw_tests::ui_composites_over_the_finished_world_frame_and_leaves_uncovered_pixels"
+    ],
+    "caught": true
+  },
+  {
+    "mutation": "quarter-texel sampling shift",
+    "file": "crates/incant_render/src/ui/ui.wgsl",
+    "exit": 101,
+    "failed": [
+      "ui::draw_tests::editor_viewport_region_offsets_scales_and_bounds_the_ui",
+      "ui::draw_tests::logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales",
+      "ui::draw_tests::nested_clips_cut_actual_glyph_bounds_including_negative_x_rtl_overflow",
+      "ui::draw_tests::ui_composites_over_the_finished_world_frame_and_leaves_uncovered_pixels"
+    ],
+    "caught": true
+  },
+  {
+    "mutation": "no clip intersection",
+    "file": "crates/incant_render/src/ui/ui.wgsl",
+    "exit": 101,
+    "failed": [
+      "ui::draw_tests::editor_viewport_region_offsets_scales_and_bounds_the_ui",
+      "ui::draw_tests::logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales",
+      "ui::draw_tests::nested_clips_cut_actual_glyph_bounds_including_negative_x_rtl_overflow",
+      "ui::draw_tests::ui_composites_over_the_finished_world_frame_and_leaves_uncovered_pixels"
+    ],
+    "caught": true
+  },
+  {
+    "mutation": "90 % opacity",
+    "file": "crates/incant_render/src/ui/ui.wgsl",
+    "exit": 101,
+    "failed": [
+      "ui::draw_tests::editor_viewport_region_offsets_scales_and_bounds_the_ui",
+      "ui::draw_tests::logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales",
+      "ui::draw_tests::nested_clips_cut_actual_glyph_bounds_including_negative_x_rtl_overflow",
+      "ui::draw_tests::ui_composites_over_the_finished_world_frame_and_leaves_uncovered_pixels"
+    ],
+    "caught": true
+  },
+  {
+    "mutation": "straight instead of premultiplied output",
+    "file": "crates/incant_render/src/ui/ui.wgsl",
+    "exit": 101,
+    "failed": [
+      "ui::draw_tests::editor_viewport_region_offsets_scales_and_bounds_the_ui",
+      "ui::draw_tests::logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales",
+      "ui::draw_tests::nested_clips_cut_actual_glyph_bounds_including_negative_x_rtl_overflow",
+      "ui::draw_tests::ui_composites_over_the_finished_world_frame_and_leaves_uncovered_pixels"
+    ],
+    "caught": true
+  },
+  {
+    "mutation": "no sRGB decode on sRGB targets",
+    "file": "crates/incant_render/src/ui/ui.wgsl",
+    "exit": 101,
+    "failed": [
+      "ui::draw_tests::editor_viewport_region_offsets_scales_and_bounds_the_ui",
+      "ui::draw_tests::logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales",
+      "ui::draw_tests::nested_clips_cut_actual_glyph_bounds_including_negative_x_rtl_overflow",
+      "ui::draw_tests::ui_composites_over_the_finished_world_frame_and_leaves_uncovered_pixels"
+    ],
+    "caught": true
+  },
+  {
+    "mutation": "label shadow without its offset",
+    "file": "crates/incant_render/src/ui/geometry.rs",
+    "exit": 101,
+    "failed": [
+      "ui::draw_tests::editor_viewport_region_offsets_scales_and_bounds_the_ui",
+      "ui::draw_tests::logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales",
+      "ui::draw_tests::nested_clips_cut_actual_glyph_bounds_including_negative_x_rtl_overflow",
+      "ui::draw_tests::ui_composites_over_the_finished_world_frame_and_leaves_uncovered_pixels",
+      "ui::tests::plan_layers_each_widget_in_canonical_order_with_state_colours"
+    ],
+    "caught": true
+  },
+  {
+    "mutation": "caret one logical pixel right",
+    "file": "crates/incant_render/src/ui/geometry.rs",
+    "exit": 101,
+    "failed": [
+      "ui::tests::caret_accessor_returns_the_drawn_caret_and_only_for_a_focused_enabled_field",
+      "ui::tests::caret_and_composition_follow_the_supplied_edit_ranges_only"
+    ],
+    "caught": true
+  },
+  {
+    "mutation": "none (after)",
+    "exit": 0,
+    "failed": []
+  }
+]

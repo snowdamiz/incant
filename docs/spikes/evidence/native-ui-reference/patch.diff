@@ -1,0 +1,203 @@
+diff --git a/crates/incant_render/src/ui_draw_tests.rs b/crates/incant_render/src/ui_draw_tests.rs
+index dc549c9c..4a7883c5 100644
+--- a/crates/incant_render/src/ui_draw_tests.rs
++++ b/crates/incant_render/src/ui_draw_tests.rs
+@@ -44,8 +44,8 @@ enum Model {
+     Portable,
+     /// One candidate image: exact filtering and conversion, nearest storage.
+     Exact,
+-    /// One candidate image from a conformant backend, Mesa llvmpipe (the Linux
+-    /// CI device), emulated from its source: `lp_bld_sample_aos.c` (8-bit
++    /// One candidate image emulated from Mesa llvmpipe source; the failing
++    /// Linux CI adapter has not been identified. `lp_bld_sample_aos.c` (8-bit
+     /// fixed-point bilinear), `lp_bld_arit.c` (SSSE3/AVX2 rounded lerp) and
+     /// `lp_bld_format_srgb.c` (polynomial sRGB). sRGB targets only.
+     Llvmpipe,
+diff --git a/docs/spikes/native-ui-draw.md b/docs/spikes/native-ui-draw.md
+index b81fb29f..e35e5df9 100644
+--- a/docs/spikes/native-ui-draw.md
++++ b/docs/spikes/native-ui-draw.md
+@@ -103,12 +103,15 @@ composition over a finished world frame (with an order-sensitivity check) and
+ retention/refusal identity. On Apple Metal every case agrees within 1 code
+ value of exact arithmetic. The reference admits, per channel, only the codes
+ the backend precision allows: 8-bit fixed-point filtering of glyph taps between
+-texel centres and the sRGB read-back and store between blends. Mesa llvmpipe
+-(the Linux CI device) is within that precision but up to 7 codes from exact
+-near black at 2x, where the sRGB curve magnifies a 1/255 coverage step. A
+-CPU test emulates llvmpipe's documented arithmetic and shows that the
+-reference admits it, while text placed one pixel off, 90% text opacity and a
+-missing ancestor clip are rejected (handoff 0057). A hosted composed game
++texel centres and the sRGB read-back and store between blends. A CPU emulation
++of Mesa llvmpipe produces differences up to 7 codes from exact near black at
++2x, where the sRGB curve magnifies a 1/255 coverage step. This is a candidate
++explanation for the Linux failure: installed Mesa packages do not identify
++the adapter that executed the failed test, and the corrected test has not yet
++run on Linux. The reference admits this emulation while rejecting text placed
++one pixel off, 90% text opacity and a missing ancestor clip (handoff 0057).
++It requires at least 8 sub-texel bits; Vulkan's permitted minimum of 4 remains
++outside this reference. A hosted composed game
+ drives routed Tab/Enter, receipts for focus, commit and preedit, refresh and
+ relayout through the real consumer. Handoff 0056 records the review fixture,
+ offscreen captures and logs.
+diff --git a/handoffs/0057-native-window-game-ui/evidence/linux-ui-precision.json b/handoffs/0057-native-window-game-ui/evidence/linux-ui-precision.json
+index b73d0a9c..eefc1b41 100644
+--- a/handoffs/0057-native-window-game-ui/evidence/linux-ui-precision.json
++++ b/handoffs/0057-native-window-game-ui/evidence/linux-ui-precision.json
+@@ -22,7 +22,6 @@
+       }
+     ]
+   },
+-  "ci_device": "GitHub ubuntu-latest x86_64, mesa-vulkan-drivers (lavapipe on llvmpipe) through wgpu Vulkan (.github/workflows/desktop.yml)",
+   "ci_measurements_from_log": {
+     "scale 1 Rgba8UnormSrgb": {
+       "worst": 1,
+@@ -57,27 +56,7 @@
+     "srgb": "lp_bld_format_srgb.c: decode s<=15 ? s/(12.6*255) : 0.0023+0.0030x+0.6935x^2+0.3012x^3 (documented within +-0.35); encode a*x^0.375+b*x^0.5+c, a=0.675*1.0622*255, b=0.325*1.0622*255, c=-0.062*255, x<=0.0031308 linear 12.92*255, iround (documented +-0.17 before rounding)",
+     "read_via": "android.googlesource.com/platform/external/mesa3d/+/refs/heads/main (gitlab.freedesktop.org refused automated access)"
+   },
+-  "cpu_emulation_of_ci_configuration": {
+-    "note": "Model::Llvmpipe composed with the pre-fix shader semantics (zero-coverage fragments still blend), compared with exact arithmetic by the previous metric. rsqrt estimates in llvmpipe's encoder are not emulated.",
+-    "scale 1": {
+-      "worst": 2,
+-      "over_1": 1
+-    },
+-    "scale 2": {
+-      "worst": 7,
+-      "over_1": 303
+-    },
+-    "scale 1.5": {
+-      "worst": 6,
+-      "over_1": 179
+-    },
+-    "nested clips": {
+-      "worst": 2,
+-      "over_1": 2
+-    },
+-    "log": "checks/oracle-cpu-old-shader-emulation.txt"
+-  },
+-  "diagnosis": "Reference-test defect: the oracle assumed exact bilinear filtering and exact, unquantized sRGB blending and used a fixed code tolerance. llvmpipe filters the R8 atlas in 8-bit fixed point and converts sRGB with polynomials between blends; near black the sRGB curve magnifies a 1/255 coverage step to 4-8 codes. Geometry, clipping and opacity were not wrong. Secondary rendering issue: zero-coverage fragments still blended, so a non-identity sRGB round trip perturbed uncovered pixels on llvmpipe.",
++  "diagnosis": "Candidate reference limitation: the exact filtering/unquantized sRGB oracle cannot admit the documented llvmpipe arithmetic reproduced by CPU emulation. Near black, a 1/255 coverage step can become 4-8 stored codes. Local Metal and emulated geometry/clip/opacity controls pass, but actual failing Linux adapter identity and corrected Linux execution remain unverified. Zero-coverage fragments previously blended; a non-identity sRGB round trip can perturb uncovered pixels.",
+   "source_patch": {
+     "commit": "e2551dd273b9eaaf2b6097bd28102ae714d55eef",
+     "files": [
+@@ -137,8 +116,34 @@
+   },
+   "limits": [
+     "No Linux or lavapipe execution here: Docker Desktop is installed but not running and was not started; no CI run was made.",
+-    "The llvmpipe emulation omits the hardware rsqrt estimates of its sRGB encoder, so channel counts differ slightly from CI (303 vs 275 at 2x; 2 vs 1 nested).",
++    "The llvmpipe emulation omits encoder rsqrt estimates. Its counts differ from CI (303 vs275 at2x;2 vs1 nested); similarity is not proof that the failed run used this backend.",
+     "The reference covers backends with at least 8 sub-texel bits; Vulkan permits 4.",
+     "Root owns tools/probes/render-check.py and the Windows geometry-receipt failure; untouched."
+-  ]
++  ],
++  "ci_environment": {
++    "runner": "GitHub ubuntu-latest x86_64",
++    "installed_package": "mesa-vulkan-drivers",
++    "adapter_identity": "Not established by retained failure log; package installation is not selected-adapter evidence",
++    "corrected_linux_execution": "pending"
++  },
++  "cpu_candidate_emulation": {
++    "note": "Model::Llvmpipe composed with the pre-fix shader semantics (zero-coverage fragments still blend), compared with exact arithmetic by the previous metric. rsqrt estimates in llvmpipe's encoder are not emulated. This is a candidate model, not verified execution of the failing CI adapter.",
++    "scale 1": {
++      "worst": 2,
++      "over_1": 1
++    },
++    "scale 2": {
++      "worst": 7,
++      "over_1": 303
++    },
++    "scale 1.5": {
++      "worst": 6,
++      "over_1": 179
++    },
++    "nested clips": {
++      "worst": 2,
++      "over_1": 2
++    },
++    "log": "checks/oracle-cpu-old-shader-emulation.txt"
++  }
+ }
+diff --git a/handoffs/0057-native-window-game-ui/result.md b/handoffs/0057-native-window-game-ui/result.md
+index 09c4b498..528ce20b 100644
+--- a/handoffs/0057-native-window-game-ui/result.md
++++ b/handoffs/0057-native-window-game-ui/result.md
+@@ -4,10 +4,12 @@
+ 
+ Both parts of the packet are done.
+ 
+-**Priority Linux failure: diagnosed and fixed at the source.** Fixing the
+-reference showed nothing wrong in the renderer's geometry, clipping or
+-opacity. The 0056 reference test assumed exact arithmetic, but the Linux CI
+-device (Mesa llvmpipe) filters and blends at its documented 8-bit precision.
++**Priority Linux failure: candidate numerical correction, Linux validation pending.**
++The 0056 reference assumed exact arithmetic. A CPU emulation of Mesa llvmpipe
++reproduces similar precision differences without changing geometry, clipping or
++opacity. The failed CI log records installed Mesa packages, not the selected
++adapter; it does not establish that llvmpipe executed those failing tests.
++Actual Linux adapter identification and the corrected test result remain pending.
+ 
+ - The source patch corrects the reference. The shader now discards fragments
+   that add nothing.
+@@ -60,8 +62,9 @@ Sources:
+   (log SHA-256 `b344c86d…f4ac61`, candidate `82aa2bc3`).
+ - Full record: `evidence/linux-ui-precision.json`.
+ 
+-**What failed, and what didn't.** On `ubuntu-latest` with
+-`mesa-vulkan-drivers` (lavapipe on llvmpipe):
++**What failed, and what didn't.** The `ubuntu-latest` job installed
++`mesa-vulkan-drivers`. Its actual selected adapter was not captured in the
++retained failure log. These measurements are from that CI run:
+ 
+ | Case | Worst (codes) | Channels over 1 | Result |
+ | --- | --- | --- | --- |
+@@ -72,8 +75,8 @@ Sources:
+ On the same runner, the world-text tests measured bilinear coverage errors up
+ to 0.00551 (about 1.4/255), within their alpha-space bound of 0.01.
+ 
+-**Cause.** llvmpipe's arithmetic, read from Mesa source (through the Android
+-mirror; freedesktop GitLab refused automated access):
++**Candidate explanation.** llvmpipe's arithmetic, read from Mesa source
++(through the Android mirror; freedesktop GitLab refused automated access):
+ 
+ - **Sampler** (`lp_bld_sample_aos.c`). It filters the R8 atlas in 8-bit fixed
+   point: coordinates ×256 rounded, −128, then 8-bit weights.
+@@ -85,13 +88,15 @@ mirror; freedesktop GitLab refused automated access):
+ 
+ Near black, the sRGB encoding turns a 1/255 coverage step into 4–8 codes. The
+ 0056 reference assumed exact filtering and exact, unquantized blending under a
+-fixed code tolerance, so it could not express this precision. That was the
+-defect. There was a secondary rendering issue: zero-coverage fragments (glyph
++fixed code tolerance, so it could not express this precision. This demonstrates
++a reference limitation; it does not identify the actual failing CI backend.
++There was a secondary rendering issue: zero-coverage fragments (glyph
+ padding, outside rounded corners, the ring hole) still blended. On a
+ non-identity sRGB round trip this perturbs pixels that nothing covers.
+ 
+-**Emulation check.** A CPU emulation of exactly that arithmetic, run in CI's
+-configuration (old shader), compared with exact arithmetic by the old metric:
++**Emulation check.** A CPU candidate using that arithmetic and the old shader
++semantics, compared with exact arithmetic by the old metric. This is not an
++execution of the actual CI adapter:
+ 
+ | Case | Emulation (worst / channels over 1) | CI log |
+ | --- | --- | --- |
+@@ -99,7 +104,9 @@ configuration (old shader), compared with exact arithmetic by the old metric:
+ | Nested | 2 / 2 | 2 / 1 |
+ | 1x | 2 / 1 | 1 / 0 |
+ 
+-The emulation omits llvmpipe's hardware rsqrt estimates in the encoder.
++The emulation omits llvmpipe's hardware rsqrt estimates in the encoder. Similar
++magnitudes support this candidate diagnosis; differing channel counts do not
++establish that the CI run used the emulated backend.
+ 
+ **Fix (commit `e2551dd2`).**
+ 
+@@ -413,7 +420,7 @@ blank lines stripped; raw hashes in `raw-sha256.json`).
+ | Offscreen GPU | `test -p incant_render` (all, GPU included) | lib 90/90, `model_gpu` 50/50 (`test-render-full.txt`) |
+ | Offscreen GPU, hosted game | `test -p incant_render_gpu_host` | game 5/5, ui 2/2 (`test-gpu-host.txt`) |
+ | CPU | `ui::tests`, including the caret accessor | 8/8 (`ui-cpu-tests.txt`) |
+-| CPU | reference test, final and in CI configuration | pass; numbers above (`oracle-cpu-3.txt`, `oracle-cpu-old-shader-emulation.txt`) |
++| CPU | reference test, final and candidate old-shader emulation | pass; numbers above (`oracle-cpu-3.txt`, `oracle-cpu-old-shader-emulation.txt`) |
+ | GPU mutations | `tools/mutate.py` | 8/8 caught; unmutated before and after pass |
+ | Lint | `clippy -p incant_render -p incant_render_gpu_host --all-targets -D warnings` | clean |
+ | Lint | `fmt --all --check` | clean |

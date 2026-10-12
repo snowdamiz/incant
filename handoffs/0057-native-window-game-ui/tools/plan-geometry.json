@@ -1,0 +1,21 @@
+{
+  "cases": [
+    {
+      "name": "startup", "viewport": [320, 240], "scale": 2,
+      "steps": [
+        {"capture": "01-idle"},
+        {"keys": [["Tab", true], ["Tab", false]], "capture": "02-tab-resume"},
+        {"pointer": ["0000000000000000000000572B", true]},
+        {"pointer": ["0000000000000000000000572B", false], "capture": "03-name-focused"}
+      ]
+    },
+    {
+      "name": "wide", "viewport": [480, 300], "scale": 2,
+      "steps": [{"capture": "01-idle"}]
+    },
+    {
+      "name": "narrow", "viewport": [200, 240], "scale": 2,
+      "steps": [{"capture": "01-idle"}]
+    }
+  ]
+}

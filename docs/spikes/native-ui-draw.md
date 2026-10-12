@@ -50,7 +50,9 @@ Source of truth: `crates/incant_render/src/ui/mod.rs` and `theme.rs`.
 - **Colour.** Display-referred sRGB with straight alpha, never tone mapped.
   sRGB targets decode and blend premultiplied in linear light; UNORM targets
   blend the encoded values. Glyph texels are linear area coverage with the
-  world-text filter (one bilinear tap up to 1.25 texels, then ≤4×4 taps).
+  world-text filter (one bilinear tap up to 1.25 texels, then ≤4×4 taps), at
+  the backend's filtering precision. Zero-coverage fragments are discarded, so
+  pixels a quad does not cover keep their stored value on every backend.
 - **States.** Surfaces are opaque. Disabled: flatter surface, muted text.
   Focus: 2 px inset accent ring. Captured pointer press: darker button. Caret,
   selection and composition draw only in a focused, enabled field from `UiEdit`
@@ -94,14 +96,25 @@ and `ci` builds are not performance evidence.
 
 ## Evidence
 
-GPU tests (Metal, `--include-ignored`) compare actual draws with an independent
+GPU tests (`--include-ignored`) compare actual draws with an independent
 CPU compositor written from this contract: 1x, 2x and 1.5x, UNORM and sRGB
 targets, an offset editor region, nested clips with negative-x RTL overflow,
 composition over a finished world frame (with an order-sensitivity check) and
-retention/refusal identity; every case agreed within 1 code value. A hosted
-composed game drives routed Tab/Enter, receipts for focus, commit and preedit,
-refresh and relayout through the real consumer. Handoff 0056 records the
-review fixture, offscreen captures and logs.
+retention/refusal identity. On Apple Metal every case agrees within 1 code
+value of exact arithmetic. The reference admits, per channel, only the codes
+the backend precision allows: 8-bit fixed-point filtering of glyph taps between
+texel centres and the sRGB read-back and store between blends. A CPU emulation
+of Mesa llvmpipe produces differences up to 7 codes from exact near black at
+2x, where the sRGB curve magnifies a 1/255 coverage step. This is a candidate
+explanation for the Linux failure: installed Mesa packages do not identify
+the adapter that executed the failed test, and the corrected test has not yet
+run on Linux. The reference admits this emulation while rejecting text placed
+one pixel off, 90% text opacity and a missing ancestor clip (handoff 0057).
+It requires at least 8 sub-texel bits; Vulkan's permitted minimum of 4 remains
+outside this reference. A hosted composed game
+drives routed Tab/Enter, receipts for focus, commit and preedit, refresh and
+relayout through the real consumer. Handoff 0056 records the review fixture,
+offscreen captures and logs.
 
 ## Open work and requests
 
@@ -150,3 +163,18 @@ records of their exact tested source.
 [Independent integration closure](evidence/native-ui-draw-main138-root-review.json)
 verified all 1,474 frozen inputs, the three additive seams, seven command logs and
 the identical tested/ancestry tree with no actionable finding.
+
+## 0057 integration correction
+
+The original Claude commits are preserved. Their confirmed-Linux-backend wording
+is superseded by the corrected candidate diagnosis above and in the handoff
+result/JSON. Installed driver packages and numerical emulation do not identify
+the adapter used by the failed hosted run. Test-only logging now prints actual
+selected wgpu adapter information during the existing checkpoint tests. No
+reference arithmetic, shader logic or appearance changed in this correction.
+
+[Source review](evidence/native-ui-reference/native-ui-0057-source-20261012.json),
+[provenance correction review](evidence/native-ui-reference/native-ui-0057-provenance-final-20261012.json)
+and [adapter logging review](evidence/native-ui-reference/native-ui-adapter-logging-20261012.json)
+retain the exact reviewed boundaries. Integrated CPU checks and actual Linux
+checkpoint results remain pending.

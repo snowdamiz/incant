@@ -1,0 +1,42 @@
+    Finished `ci` profile [optimized] target(s) in 0.16s
+     Running unittests src/lib.rs (/Users/andreyyurlov/.codex/incant-native-target/ci/deps/incant_render-0b72bec43c7fffff)
+
+running 13 tests
+test ui::draw_tests::editor_viewport_region_offsets_scales_and_bounds_the_ui ... region: outside 0 by 0, widest 5 (51 channels > 2); vs exact worst 1, >1: 0
+ok
+test ui::draw_tests::logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales ... scale 1 Rgba8UnormSrgb: outside 0 by 0, widest 4 (44 channels > 2); vs exact worst 1, >1: 0, changed 4245
+scale 2 Rgba8UnormSrgb: outside 0 by 0, widest 21 (6535 channels > 2); vs exact worst 1, >1: 0, changed 17954
+scale 1.5 Rgba8UnormSrgb: outside 0 by 0, widest 29 (6114 channels > 2); vs exact worst 1, >1: 0, changed 10146
+scale 1 Rgba8Unorm: outside 0 by 0, widest 2 (0 channels > 2); vs exact worst 0, >1: 0, changed 4246
+ok
+test ui::draw_tests::nested_clips_cut_actual_glyph_bounds_including_negative_x_rtl_overflow ... nested clips: outside 0 by 0, widest 4 (16 channels > 2); vs exact worst 1, >1: 0
+ok
+test ui::draw_tests::reference_admits_backend_precision_but_not_wrong_geometry_clip_or_opacity ... scale 1: emulated llvmpipe vs exact worst 2, >1: 1; admitted outside 0, widest 4 (44 channels > 2)
+scale 1: text 1 px right rejected by Admission { outside: 3053, excess: 229.0, widest: 4.0, wide: 44 }
+scale 1: 90% text opacity rejected by Admission { outside: 2233, excess: 11.0, widest: 4.0, wide: 44 }
+scale 2: emulated llvmpipe vs exact worst 7, >1: 303; admitted outside 0, widest 21 (6535 channels > 2)
+scale 2: text 1 px right rejected by Admission { outside: 13562, excess: 159.0, widest: 21.0, wide: 6535 }
+scale 2: text 0.5 px right rejected by Admission { outside: 3460, excess: 106.0, widest: 21.0, wide: 6535 }
+scale 2: 90% text opacity rejected by Admission { outside: 10699, excess: 10.0, widest: 21.0, wide: 6535 }
+scale 1.5: emulated llvmpipe vs exact worst 6, >1: 179; admitted outside 0, widest 29 (6114 channels > 2)
+scale 1.5: text 1 px right rejected by Admission { outside: 8057, excess: 164.0, widest: 29.0, wide: 6114 }
+scale 1.5: 90% text opacity rejected by Admission { outside: 5558, excess: 10.0, widest: 29.0, wide: 6114 }
+scale 1: text 1 px right rejected by Admission { outside: 3119, excess: 223.0, widest: 2.0, wide: 0 }
+scale 1: 90% text opacity rejected by Admission { outside: 2255, excess: 23.0, widest: 2.0, wide: 0 }
+nested Exact vs exact worst 0, >1: 0
+nested Llvmpipe vs exact worst 2, >1: 2
+nested: label without its ancestor clip rejected by Admission { outside: 146, excess: 230.0, widest: 4.0, wide: 16 }
+ok
+test ui::draw_tests::retained_atlas_and_quads_follow_input_identity_and_survive_refused_stages ... ok
+test ui::draw_tests::ui_composites_over_the_finished_world_frame_and_leaves_uncovered_pixels ... over world: outside 0 by 0, widest 3 (7 channels > 2); vs exact worst 1, >1: 0
+over world, text under selection: outside 279 by 47
+ok
+test ui::tests::caret_and_composition_follow_the_supplied_edit_ranges_only ... ok
+test ui::tests::caret_follows_cluster_edges_bidi_levels_and_downstream_affinity ... ok
+test ui::tests::caret_on_empty_text_empty_paragraphs_and_every_line_ending ... ok
+test ui::tests::glyph_quads_use_exact_shaped_positions_and_keep_overflowing_rtl_glyphs ... ok
+test ui::tests::plan_layers_each_widget_in_canonical_order_with_state_colours ... ok
+test ui::tests::plan_refuses_foreign_reset_and_inconsistent_input_before_building ... ok
+test ui::tests::selection_spans_merge_per_line_and_split_mixed_direction_runs ... ok
+
+test result: ok. 13 passed; 0 failed; 0 ignored; 0 measured; 76 filtered out; finished in 0.43s
