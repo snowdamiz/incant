@@ -1,0 +1,79 @@
+{
+  "scope": "CPU-verified native skeletal model consumer; GPU numerical execution and Claude appearance acceptance pending",
+  "parent": "cc0f3263cce950eb771449dd135accf367a24f32",
+  "native_animation_parent": "dc383d8bf2260c81221a572f17408f92ec87fd16",
+  "foundation": "fd6afda85d8cd61a2a8bf38fce202893194edf88",
+  "source_files": {
+    "Cargo.lock": "a156801ee91b00dcecfa8042241b5c981d0b0d8bf69a090ef6f4fbd0100a5e13",
+    "crates/incant_assets/tests/skeletal.rs": "65cb6afc00f6d4cc909d3298d2cfd541f710182879e69e3461fa90dda92d8381",
+    "crates/incant_assets_runtime/src/animation/deform.rs": "4d2a64e7a99de6c9f9e1bce6a391308ca4da639333e9f6438480346700793b97",
+    "crates/incant_assets_runtime/src/animation/mod.rs": "8579e03da792727beda53752e96ca26a3b38d96b66042132424ec55ac6b041f6",
+    "crates/incant_assets_runtime/src/animation/player.rs": "613328d658dc3ef89acde2c441e78700bec2c25637b6b378874b7d0463f2c9ce",
+    "crates/incant_assets_runtime/src/version.rs": "f715c3c2a7f2cb32223f243fb5fd1c2f9332f68186c821d9df3ab2f41c09ee95",
+    "crates/incant_render/src/animation_tests.rs": "bcea4e2b3995829123f257ba01189c07456ccd643edb0b3cba9639c1caeb279e",
+    "crates/incant_render/src/flipbook_tests.rs": "fbe98b1e505916914446e1156d2590a88291e1a32876afcb705cf21826c02204",
+    "crates/incant_render/src/lib.rs": "dfdb17d1abb91d6a0d41de35bfaf394976bd1545ba445c288927baa01724f875",
+    "crates/incant_render/src/model_draw.rs": "cc09f0ee9c089673264e727f79eeffd2aabfd59da2eda53283837053e352c6a7",
+    "crates/incant_render/src/models.rs": "7f8be7bc023e3624678c375bf3a0eb3f26183f1983f5ee42ef357157671c508a",
+    "crates/incant_render/src/models/animation.rs": "154e121f4a892d97c27271322ac5919a08349720ac38381823a0357b96c8e476",
+    "crates/incant_render/src/retained.rs": "7bf981f9a55fd9219beeca2331b6e111c45d4da6c4772ae1abb54730df8013c8",
+    "crates/incant_render/src/retained_tests.rs": "9d387644ea59ea428f8922548e03adf558f476d693a206b21b968aa2eae809c1",
+    "crates/incant_render/src/retained_tilemap_tests.rs": "c8f44076d737119111c5ce72a458c46b4c12e679edbe1ad926cbac5d03f8de3d",
+    "crates/incant_render/src/scene.rs": "78b40d2709c0d6d244e43220d05a83ea0e9108c72167de70b3fd568c083c5672",
+    "crates/incant_render/src/shadow_draw.rs": "894acd54e6addca23b563d033cb6b794cee65c5b80890029c9beeee80a689cc3",
+    "crates/incant_render/src/version_tests.rs": "bbef4d81d22e01dee04cbf5a427027672c61d06fab6f9b21bdb18fbbc8009da1",
+    "crates/incant_render_authoring/Cargo.toml": "776e6e9d54c34e9ee36c6474e68c15061bb59fe50bb7facc0216bf18c1e3658d",
+    "crates/incant_render_authoring/src/lib.rs": "8b0aa5f3807ac6894d4294c1f7fd2cb85618cb5e98272ce05368b5e6cf74042c",
+    "crates/incant_render_data/src/lib.rs": "8cf98a31524586c434f6e363132e792830d8732e1d0da89493a3e1447e714d3c",
+    "crates/incant_render_native/src/animation.rs": "27e28c337e5a02dafdc84fdcde1645e0833ae3d2e9388f9c274bd6db19b21d9a",
+    "crates/incant_render_native/src/binding.rs": "384c8394edef09e9b1de5d2eae86a6ee019c19541adb218737d7638f4d43298f",
+    "crates/incant_render_native/src/lib.rs": "4e763e23de99f8ea28091ec70f6da56b0b139ae90c9fb9676c94ee81bb5ec860",
+    "crates/incant_render_native/src/update.rs": "eac3ab0a54b9ccdea872c8164338b6fb29340880cf3baae21515a45bf39ccc44",
+    "crates/incant_render_native/tests/animation.rs": "3e10dfced3ab31bc1110661492860bc61d240772846fc154c7103f0c39d2bb71"
+  },
+  "commands": [
+    "cargo test --locked -j2 --profile ci -p incant_render -p incant_render_native -p incant_render_authoring -p incant_assets -p incant_assets_runtime --features incant_assets_runtime/visual",
+    "cargo test --locked -j2 --profile ci -p incant_render_native --test animation",
+    "cargo clippy --locked -j2 --profile ci -p incant_assets -p incant_assets_runtime -p incant_render_data -p incant_render_native -p incant_render_authoring -p incant_render --all-targets --features incant_assets_runtime/visual -- -D warnings",
+    "python3 tools/check_runtime_dependencies.py incant_assets_runtime incant_render_data incant_render_native incant_render --features incant_assets_runtime/visual",
+    "cargo fmt --all -- --check",
+    "git diff --check"
+  ],
+  "results": {
+    "full_affected": {
+      "passed": 155,
+      "failed": 0,
+      "ignored_gpu": 70,
+      "groups": 30
+    },
+    "native_binding_subset": {
+      "passed": 3,
+      "failed": 0
+    },
+    "clippy": "pass; Cargo finished successfully, then shell wrapper exit1 from zsh read-only status assignment; subsequent graph/fmt invoked separately and passed",
+    "dependency_graph": "authoring-free including visual feature",
+    "fmt": "pass",
+    "gpu": "not executed; two new ignored numeric oracle tests compile",
+    "appearance": "pending Claude Opus5.5 Max"
+  },
+  "logs": {
+    "/tmp/incant-animation-render-tests-006.log": "4be8e5570ea6047dd71029f88246a42c0b49618e3226e6ac0b4b953e40f6ca82",
+    "/tmp/incant-animation-native-tests-001.log": "3a118d5542795aed1820d157efae2a2c569e4f3bc9295b5a45ec3c1a7080d9a2",
+    "/tmp/incant-animation-render-clippy-006.log": "9c8cb8e84246c1db43c5ee5ad08755f04ea46e26c6cb784663cb84d01aca1d58",
+    "/tmp/incant-animation-render-graph-006.log": "4e40ff6b9c994378aecf9821bb66c9045bc017e2fc17a0534283bb657274f3e3",
+    "/tmp/incant-animation-render-fmt-006.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/tmp/incant-animation-render-fmt-check-006.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "limits": [
+    "128MiB aggregate logical live/staging animation payload; allocator/Arc headers, startup plans, driver allocations, immutable source/GPU models and retained old candidates remain separate",
+    "Mixed per-vertex skin reflection within a primitive refuses; uniform reflection selects existing material/shadow culling variants",
+    "No per-frame native binding allocation measured across90 source/cache-deleted ticks;64 isolated geometry fill calls measured zero allocation. Complete renderer CPU stage allocation assertion is compiled but awaits GPU setup/test execution",
+    "No mobile/reference-device, full animation feature, rendered acceptance or whole-pipeline allocation claim"
+  ],
+  "compatibility": {
+    "static_format_recipe": "unchanged",
+    "supplied_shaders_and_pipelines": "unchanged",
+    "dependency_resolutions": "no new or changed third-party package; incant_render_authoring now directly names existing incant_types"
+  },
+  "processes": "all owned Cargo handles reaped; no GPU started"
+}

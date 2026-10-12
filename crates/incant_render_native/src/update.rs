@@ -11,7 +11,7 @@ impl NativeRenderInput {
     /// make that external consumer terminal on failure. This guard cannot undo
     /// GPU writes/device side effects. Return a newly prepared resource to publish
     /// alongside the accepted adapter, or use a transactional retained GPU path.
-    /// Ordinary motion and flipbook selection reuse a bounded numeric undo buffer: no Vec allocations,
+    /// Ordinary motion, model animation and flipbook selection reuse a bounded numeric undo buffer: no Vec allocations,
     /// String copies, Arc clones, source reads or model hierarchy expansion.
     pub fn try_sync<T, E>(
         &mut self,
@@ -50,6 +50,7 @@ impl NativeRenderInput {
             *old = NumericUndo {
                 world: node.world,
                 frame: node.sprite.as_ref().map_or(0, |s| s.frame),
+                animation: node.mesh.as_ref().and_then(|m| m.animation),
             };
         }
         let mut guard = MotionGuard {
@@ -60,6 +61,9 @@ impl NativeRenderInput {
         for node in view.nodes() {
             if let Some(slot) = self.slots[node.index] {
                 guard.input.nodes[slot].world = *node.global;
+                if let Some(mesh) = &mut guard.input.nodes[slot].mesh {
+                    mesh.animation = node.animation;
+                }
                 if let Some(sprite) = &mut guard.input.nodes[slot].sprite {
                     sprite.frame = node.flipbook.map_or(0, |p| p.frame());
                 }
@@ -86,6 +90,9 @@ impl Drop for MotionGuard<'_> {
         if !self.accepted {
             for (node, old) in self.input.nodes.iter_mut().zip(self.undo) {
                 node.world = old.world;
+                if let Some(mesh) = &mut node.mesh {
+                    mesh.animation = old.animation;
+                }
                 if let Some(sprite) = &mut node.sprite {
                     sprite.frame = old.frame;
                 }

@@ -119,7 +119,7 @@ impl RetainedScene {
         &self.live.stats
     }
 
-    fn stage(&mut self, input: &SceneInput) -> Result<()> {
+    pub(super) fn stage(&mut self, input: &SceneInput) -> Result<()> {
         if input.nodes.len() != self.bindings.len() || environment(input) != self.environment {
             return Err(SceneError::Input(
                 "retained scene bindings changed; prepare a replacement",
@@ -128,6 +128,10 @@ impl RetainedScene {
         }
         self.light_plan.clear();
         for (node, binding) in input.nodes.iter().zip(&self.bindings) {
+            if node.mesh.as_ref().is_some_and(|mesh| mesh.animation.is_some()
+                && matches!(mesh.source.data(), incant_assets_runtime::RuntimeAssetData::Model(model) if model.animation.is_none())) {
+                return Err(SceneError::Input("animation sample requires animated model").into());
+            }
             if node.id != binding.id
                 || node.camera != binding.camera
                 || node.light != binding.light
@@ -183,6 +187,7 @@ impl RetainedScene {
         self.staging
             .lights
             .validate_view(self.staging.camera.view)?;
+        super::animation::stage(&mut self.staging.animations, input)?;
         let mut draw_calls = 0;
         for batch in &mut self.staging.batches {
             // Only prepare_models/shadows borrow Arc copies, and their packets
@@ -190,33 +195,36 @@ impl RetainedScene {
             let batch = Arc::get_mut(batch).expect("private retained batch ownership");
             batch.updates.clear();
             batch.centers.clear();
-            let mesh = &batch.model.primitives[batch.primitive];
-            let mut minimum = glam::Vec3::splat(f32::INFINITY);
-            let mut maximum = glam::Vec3::splat(f32::NEG_INFINITY);
-            for placement in batch.placements.iter() {
-                let world = (input.nodes[placement.node].world * placement.local).as_mat4();
-                let instance = Instance::new(world)?;
-                if (instance.normal[0][3] < 0.) != batch.mirrored {
-                    continue;
-                }
-                for x in [mesh.minimum.x, mesh.maximum.x] {
-                    for y in [mesh.minimum.y, mesh.maximum.y] {
-                        for z in [mesh.minimum.z, mesh.maximum.z] {
-                            let point = world.transform_point3(glam::Vec3::new(x, y, z));
-                            if !point.is_finite() {
-                                return Err(crate::ResourceError::GeometryRange.into());
+            if !super::animation::stage_batch(batch, &self.staging.animations, input)? {
+                let mesh = &batch.model.primitives[batch.primitive];
+                let mut minimum = glam::Vec3::splat(f32::INFINITY);
+                let mut maximum = glam::Vec3::splat(f32::NEG_INFINITY);
+                for placement in batch.placements.iter() {
+                    let world = (input.nodes[placement.node].world * placement.local).as_mat4();
+                    let instance = Instance::new(world)?;
+                    if (instance.normal[0][3] < 0.) != batch.mirrored {
+                        continue;
+                    }
+                    for x in [mesh.minimum.x, mesh.maximum.x] {
+                        for y in [mesh.minimum.y, mesh.maximum.y] {
+                            for z in [mesh.minimum.z, mesh.maximum.z] {
+                                let point = world.transform_point3(glam::Vec3::new(x, y, z));
+                                if !point.is_finite() {
+                                    return Err(crate::ResourceError::GeometryRange.into());
+                                }
+                                minimum = minimum.min(point);
+                                maximum = maximum.max(point);
                             }
-                            minimum = minimum.min(point);
-                            maximum = maximum.max(point);
                         }
                     }
+                    batch.centers.push(world.transform_point3(mesh.center));
+                    batch.updates.push(instance);
                 }
-                batch.centers.push(world.transform_point3(mesh.center));
-                batch.updates.push(instance);
+                batch.count = batch.updates.len() as u32;
+                batch.bounds = crate::shadows::cascade::Bounds { minimum, maximum };
             }
-            batch.count = batch.updates.len() as u32;
-            batch.bounds = crate::shadows::cascade::Bounds { minimum, maximum };
             if batch.count > 0 {
+                let mesh = &batch.model.primitives[batch.primitive];
                 draw_calls += if batch.model.materials.materials[mesh.material].alpha
                     == incant_assets_runtime::AlphaMode::Blend
                 {
@@ -270,6 +278,7 @@ impl RetainedScene {
         self.staging
             .lights
             .write(&renderer.queue, &self.packed_lights);
+        super::animation::write(&self.staging.animations, &renderer.queue);
         if let Some(sprites) = &self.staging.sprites {
             sprites.write(&renderer.queue);
         }

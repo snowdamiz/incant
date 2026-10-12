@@ -479,14 +479,18 @@ changing its tested runtime/compiler/ABI inputs. Integrated verification include
 536 UI tests and 17 Node tests. The fresh bound-script embedding proof passed all16 copied-player processes after removing source/build storage. [Integrated evidence](docs/spikes/native-authored-sdk-integration.md).
 Actual main83 is now integrated without a tree change; the authored candidate is ready for direct-main publication.
 
-## Local skeletal-animation foundation (unpublished)
+## Native skeletal model consumer — CPU checkpoint, rendered acceptance pending
 
-The bounded glTF skin/TRS import, INCMOD04 cooked reader and retained CPU sampler
-are implemented and locally verified in `codex/gltf-skeletal-animation`; see
-[scope and evidence](docs/spikes/gltf-skeletal-animation.md). Static03 compatibility
-is preserved. Current static asset/render/navigation consumers explicitly refuse
-animated models. Native scene/GPU/SDK playback, blend/state/IK/root-motion and
-rendered acceptance remain outstanding; this does not complete Phase 1 animation.
+The corrected glTF skeletal foundation is preserved in actual main107. Native
+clock samples now bind to exact sealed clip-duration tables; retained CPU skinning
+feeds the canonical material/shadow vertex path with independent live/staging
+buffers. Source/cache-deleted clocks/extraction, rollback, normal/tangent basis,
+uniform reflection and mixed-sign refusal have CPU controls. The affected suite
+passes 155 tests, all-target Clippy and runtime dependency checks. Seventy GPU tests
+(including two new numerical animation oracles) remain unrun; Claude appearance
+acceptance and the complete authoring/export/native-Play union are pending.
+Blend/state/IK/root motion, GPU skinning and device budgets remain.
+[Scope/evidence](docs/spikes/native-animation-rendering.md).
 
 GameSession/exported-player checkpoint integration: reviewed source `0d841fcd` is preserved unchanged in main103 union `4661e254`; 34 integrated CPU tests and optional-GPU all-target Clippy pass. Original311-test/five-success/nine-refusal shipping evidence remains applicable; full-save limits are unchanged. See [integration evidence](docs/spikes/evidence/native-game-checkpoints-main103.json).
 

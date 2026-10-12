@@ -13,6 +13,8 @@ pub const MAX_INSTANCES: usize = 100_000;
 pub type Result<T> = std::result::Result<T, Box<dyn std::error::Error + Send + Sync>>;
 #[derive(Debug, Error)]
 pub enum SceneError {
+    #[error("animation data or pose: {0}")]
+    Animation(#[from] incant_assets_runtime::AssetError),
     #[error("invalid render input: {0}")]
     Input(&'static str),
     #[error("model asset {0} is not loaded at the document's current fingerprint")]
@@ -96,6 +98,9 @@ pub enum SceneLight {
 pub struct MeshInput {
     pub source: Arc<RuntimeAsset>,
     pub cast_shadows: bool,
+    /// Committed native time; absent uses an animated model's authored rest pose.
+    /// Supplying a sample for a static model is a binding error.
+    pub animation: Option<incant_types::AnimationSample>,
 }
 pub struct SpriteInput {
     pub source: Arc<RuntimeAsset>,
