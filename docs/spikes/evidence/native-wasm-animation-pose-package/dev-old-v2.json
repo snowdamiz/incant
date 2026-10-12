@@ -1,0 +1,20 @@
+{
+  "command": [
+    "/private/tmp/incant-agent-font-target/ci/incant_headless",
+    "native-play",
+    "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/authoring/project.json",
+    "--camera",
+    "0000000000000000000000009C",
+    "--ticks",
+    "20",
+    "--input-replay",
+    "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/old-v2-input.json",
+    "--pcm-output",
+    "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/dev-old-v2.pcm"
+  ],
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Error: native play startup/runtime failure: development Wasm rejected or trapped: Wasm ABI: animation graph blend requires graph snapshot ABI\n",
+  "output_absent": true,
+  "expected_stderr": "Error: native play startup/runtime failure: development Wasm rejected or trapped: Wasm ABI: animation graph blend requires graph snapshot ABI"
+}
