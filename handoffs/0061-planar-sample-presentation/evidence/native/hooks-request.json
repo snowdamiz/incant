@@ -1,0 +1,35 @@
+{
+  "width": 960,
+  "height": 540,
+  "ticks": [
+    0,
+    1,
+    2
+  ],
+  "controls": [
+    {
+      "tick": 1,
+      "entity": "01b65d50000000000000000000000001",
+      "action": {
+        "kind": "seek",
+        "frame": 1
+      }
+    },
+    {
+      "tick": 2,
+      "entity": "01b65d50000000000000000000000001",
+      "action": {
+        "kind": "seek",
+        "frame": 2
+      }
+    },
+    {
+      "tick": 2,
+      "entity": "01b65d50000000000000000000000005",
+      "action": {
+        "kind": "seek",
+        "frame": 1
+      }
+    }
+  ]
+}

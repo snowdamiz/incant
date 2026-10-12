@@ -1,0 +1,35 @@
+...........................................Claude session verified: Opus 5.5; thinking: max
+..................................Checking copied player after removal of private build storage...
+.............usage: python3.14 -m unittest [-h] [--rpc] [--script SCRIPT |
+                              --typescript TYPESCRIPT]
+                              [--script-root SCRIPT_ROOT]
+                              [--source-map SOURCE_MAP]
+                              project
+python3.14 -m unittest: error: argument --script: not allowed with argument --typescript
+usage: python3.14 -m unittest [-h] [--rpc] [--script SCRIPT |
+                              --typescript TYPESCRIPT]
+                              [--script-root SCRIPT_ROOT]
+                              [--source-map SOURCE_MAP]
+                              project
+python3.14 -m unittest: error: --source-map requires --script
+usage: python3.14 -m unittest [-h] [--rpc] [--script SCRIPT |
+                              --typescript TYPESCRIPT]
+                              [--script-root SCRIPT_ROOT]
+                              [--source-map SOURCE_MAP]
+                              project
+python3.14 -m unittest: error: --script-root requires --typescript
+..s........s...........s......s.....................Installing pinned wasm-bindgen: cache absent, unreadable or version mismatched
+Installing pinned wasm-bindgen: cache absent, unreadable or version mismatched
+..Installing pinned wasm-bindgen: cache absent, unreadable or version mismatched
+Installing pinned cargo-ndk: cache absent, unreadable or version mismatched
+.Installing pinned cargo-ndk: cache absent, unreadable or version mismatched
+.Reusing wasm-bindgen 0.2.126 from /var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/tmpyjgm2ad8/wasm-bindgen
+........................................................................./opt/homebrew/Cellar/python@3.14/3.14.8/Frameworks/Python.framework/Versions/3.14/lib/python3.14/tempfile.py:484: ResourceWarning: Implicitly cleaning up <HTTPError 403: 'Forbidden'>
+  _warnings.warn(self.warn_message, ResourceWarning)
+./opt/homebrew/Cellar/python@3.14/3.14.8/Frameworks/Python.framework/Versions/3.14/lib/python3.14/tempfile.py:484: ResourceWarning: Implicitly cleaning up <HTTPError 503: 'Service Unavailable'>
+  _warnings.warn(self.warn_message, ResourceWarning)
+.............................
+----------------------------------------------------------------------
+Ran 249 tests in 24.091s
+
+OK (skipped=4)

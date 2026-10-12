@@ -1,0 +1,36 @@
+{
+  "format": "incant-native-observation",
+  "version": 1,
+  "entities": [
+    "01PSEN00000000000000000001"
+  ],
+  "checks": [
+    {
+      "name": "pearl-01PSEN0000000000000000000B",
+      "tick": 450,
+      "expect": {
+        "type": "exists",
+        "entity": "01PSEN0000000000000000000B",
+        "value": false
+      }
+    },
+    {
+      "name": "pearl-01PSEN0000000000000000000C",
+      "tick": 450,
+      "expect": {
+        "type": "exists",
+        "entity": "01PSEN0000000000000000000C",
+        "value": false
+      }
+    },
+    {
+      "name": "pearl-01PSEN0000000000000000000D",
+      "tick": 450,
+      "expect": {
+        "type": "exists",
+        "entity": "01PSEN0000000000000000000D",
+        "value": true
+      }
+    }
+  ]
+}

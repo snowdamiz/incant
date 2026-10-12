@@ -1,0 +1,249 @@
+{
+  "adapter": "Apple M5 Pro",
+  "captures": [
+    {
+      "binding_generation": 0,
+      "flipbooks": [
+        {
+          "completed": false,
+          "entity": "01b65d50000000000000000000000001",
+          "frame": 0,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "01b65d50000000000000000000000005",
+          "frame": 0,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "01b65d5000000000000000000000000b",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01b65d5000000000000000000000000c",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01b65d5000000000000000000000000d",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01b65d50000000000000000000000015",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01b65d50000000000000000000000016",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01b65d50000000000000000000000017",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01b65d5000000000000000000000001f",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01b65d50000000000000000000000020",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01b65d50000000000000000000000021",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01b65d50000000000000000000000022",
+          "frame": 0,
+          "playing": true
+        }
+      ],
+      "png": "tick-00000.png",
+      "tick": 0,
+      "topology_generation": 0
+    },
+    {
+      "binding_generation": 0,
+      "flipbooks": [
+        {
+          "completed": false,
+          "entity": "01b65d50000000000000000000000001",
+          "frame": 1,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "01b65d50000000000000000000000005",
+          "frame": 0,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "01b65d5000000000000000000000000b",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01b65d5000000000000000000000000c",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01b65d5000000000000000000000000d",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01b65d50000000000000000000000015",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01b65d50000000000000000000000016",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01b65d50000000000000000000000017",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01b65d5000000000000000000000001f",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01b65d50000000000000000000000020",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01b65d50000000000000000000000021",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01b65d50000000000000000000000022",
+          "frame": 0,
+          "playing": true
+        }
+      ],
+      "png": "tick-00001.png",
+      "tick": 1,
+      "topology_generation": 0
+    },
+    {
+      "binding_generation": 0,
+      "flipbooks": [
+        {
+          "completed": false,
+          "entity": "01b65d50000000000000000000000001",
+          "frame": 2,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "01b65d50000000000000000000000005",
+          "frame": 1,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "01b65d5000000000000000000000000b",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01b65d5000000000000000000000000c",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01b65d5000000000000000000000000d",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01b65d50000000000000000000000015",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01b65d50000000000000000000000016",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01b65d50000000000000000000000017",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01b65d5000000000000000000000001f",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01b65d50000000000000000000000020",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01b65d50000000000000000000000021",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01b65d50000000000000000000000022",
+          "frame": 0,
+          "playing": true
+        }
+      ],
+      "png": "tick-00002.png",
+      "tick": 2,
+      "topology_generation": 0
+    }
+  ],
+  "height": 540,
+  "scope": "retained native scene frames; no scripts, audio or presentation",
+  "tick_rate": 60,
+  "width": 960
+}

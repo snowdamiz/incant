@@ -1,0 +1,3298 @@
+{
+  "format": "incant-0061-review",
+  "head": "2b6eabc4c433cdd808636888f548b0a0d3f3ce5b",
+  "headless_sha256": "e60b5132ceb6e3611f8c154acabbe4a57c0d307a05c24a48352a94160f909bba",
+  "native_frames_sha256": "8786a91ded93ce8d7343dfed5b8b027f13ef9a822678d4da62aba8ea3b2dbc16",
+  "scene_result": {
+    "passed": true,
+    "binary_sha256": "e60b5132ceb6e3611f8c154acabbe4a57c0d307a05c24a48352a94160f909bba",
+    "project": "/Users/andreyyurlov/.codex/worktrees/native-rust-sdk/incant/.worktrees/0061-planar-sample-presentation/artifacts/0061/review-5/build/project/planar.json",
+    "scene": "01M4RXRVHVMFGBG6NQZT6XGX41",
+    "camera": "01PSEN00000000000000000003",
+    "atlas": "01M4RXRVMN5JKAVWR7TZ12PR6X",
+    "gameplay_sha256": "ccd01284ad30ff4cc9d3070a8220890509af160f3aae4521f0954502fdf45e5e",
+    "art_files": {
+      "cove-tiles.png": "1fa33c43572d98a78e0c5eee8723604ecdfa44202d910aaf64f7aa9ab6f7fa85",
+      "cove-sprites.png": "44e37849f354e0b98df429395892d3c3a882fa2026b92b7a8b8c9c160009e3bd",
+      "cove.atlas.json": "fe87b37158af8bac9cf1d2739751e4cc368d20476ad3cdbb18f6e55f8b250cb2"
+    },
+    "tile_frames": 73,
+    "sprite_frames": 15,
+    "transactions": [
+      {
+        "description": "Add Planar Sample controller and input",
+        "id": "01M4RXRVNB3T9A2T9NHW81NPYP",
+        "commands": 3
+      },
+      {
+        "description": "Lay out Pearl Cove terrain and camera",
+        "id": "01M4RXRVPBM1ADV8PCEB6BPBMP",
+        "commands": 2
+      },
+      {
+        "description": "Place Pearl Cove actors and controller",
+        "id": "01M4RXRVPHJTJSPYRH998WK19B",
+        "commands": 13
+      }
+    ],
+    "history": [
+      {
+        "actor": {
+          "actor": "texture",
+          "conversation_id": null,
+          "model": null,
+          "origin": "import"
+        },
+        "commands": 1,
+        "description": "Import cove.atlas",
+        "id": "01M4RXRVMN4F0SWMQDMPQSQPEC"
+      },
+      {
+        "actor": {
+          "actor": "editor",
+          "conversation_id": null,
+          "model": null,
+          "origin": "user"
+        },
+        "commands": 3,
+        "description": "Add Planar Sample controller and input",
+        "id": "01M4RXRVNB3T9A2T9NHW81NPYP"
+      },
+      {
+        "actor": {
+          "actor": "editor",
+          "conversation_id": null,
+          "model": null,
+          "origin": "user"
+        },
+        "commands": 2,
+        "description": "Lay out Pearl Cove terrain and camera",
+        "id": "01M4RXRVPBM1ADV8PCEB6BPBMP"
+      },
+      {
+        "actor": {
+          "actor": "editor",
+          "conversation_id": null,
+          "model": null,
+          "origin": "user"
+        },
+        "commands": 13,
+        "description": "Place Pearl Cove actors and controller",
+        "id": "01M4RXRVPHJTJSPYRH998WK19B"
+      }
+    ],
+    "undo_redo_reopen": true,
+    "authored_files": {
+      ".incant-source-transactions/01M4RXRVQBS88DSNPFXE9BN7FR.old-receipt": "beabe0a1cdbab89c2e5d4f4ed9f8b01454c749aad18b11d04e7d8a11e8a6a55d",
+      ".incant-source-transactions/01M4RXRVQBS88DSNPFXE9BN7FR.previous": "ccd01284ad30ff4cc9d3070a8220890509af160f3aae4521f0954502fdf45e5e",
+      ".incant-source-transactions/01M4RXRVRGDC8PB74Y1F8BF2T6.old-receipt": "0f74699ca51f094b7490abc138c22b328a4b5d7aee1f8774e6294e0018d628c3",
+      ".incant-source-transactions/lock": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      ".incant-source-transactions/receipt": "6072f0e9c63f0d50101da06bb22d01f41b4fe1b60d1725c41565e923d49cbc6a",
+      "art/art.json": "6d1712d011b14d25bdad6da9ab64bbfaef7ddfe3a1beb70ec374698b73a20e7b",
+      "art/cove-sprites.png": "44e37849f354e0b98df429395892d3c3a882fa2026b92b7a8b8c9c160009e3bd",
+      "art/cove-tiles.png": "1fa33c43572d98a78e0c5eee8723604ecdfa44202d910aaf64f7aa9ab6f7fa85",
+      "art/cove.atlas.json": "fe87b37158af8bac9cf1d2739751e4cc368d20476ad3cdbb18f6e55f8b250cb2",
+      "gameplay.ts": "ccd01284ad30ff4cc9d3070a8220890509af160f3aae4521f0954502fdf45e5e",
+      "planar.journal.jsonl": "123018829747020ab32c7e744dfecf0ba91dbea883cfb56a99ef5605192b0eb6",
+      "planar.json": "abd3903a46f5744a6a8733cf464b8e02ded1deb9ad4ffc99e86a1b06a8908deb"
+    },
+    "scenarios": {
+      "keyboard-win": {
+        "tick": 781,
+        "pickups": 3,
+        "won": 1,
+        "lost": 0,
+        "final_translation": [
+          10.499939918518066,
+          2.6000022888183594
+        ]
+      },
+      "arrows-win": {
+        "tick": 781,
+        "pickups": 3,
+        "won": 1,
+        "lost": 0,
+        "final_translation": [
+          10.499939918518066,
+          2.6000022888183594
+        ]
+      },
+      "gamepad-win": {
+        "tick": 781,
+        "pickups": 3,
+        "won": 1,
+        "lost": 0,
+        "final_translation": [
+          10.499939918518066,
+          2.6000022888183594
+        ]
+      },
+      "dpad-win": {
+        "tick": 781,
+        "pickups": 3,
+        "won": 1,
+        "lost": 0,
+        "final_translation": [
+          10.499939918518066,
+          2.6000022888183594
+        ]
+      },
+      "urchin-loss": {
+        "tick": 201,
+        "pickups": 0,
+        "won": 0,
+        "lost": 1,
+        "final_translation": [
+          13.499893188476562,
+          4.100006103515625
+        ]
+      },
+      "locked-boat": {
+        "tick": 181,
+        "pickups": 0,
+        "won": 0,
+        "lost": 0,
+        "final_translation": [
+          10.49993896484375,
+          2.2999982833862305
+        ]
+      },
+      "shore-and-cliff": {
+        "tick": 221,
+        "pickups": 0,
+        "won": 0,
+        "lost": 0,
+        "final_translation": [
+          6.5,
+          9.700006484985352
+        ]
+      },
+      "route_metres": 37,
+      "route_seconds_at_speed": 13
+    },
+    "play_left_project_unchanged": true
+  },
+  "package": {
+    "bytes": 331063,
+    "files": {
+      "world.scene": "0beb6f127d853eac9e780b3859120132ce057c1cd33d7f17c1e7a4c6413c588f",
+      "input-actions.json": "617123f0cd018451a23ddc8e096249208484867db707e9041e76af832f1e1624",
+      "empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+      "textures/cddd1a4372b2acec4f16ee3518e4b352847c36b444f347917bf48cc65cd796c8.json": "cf199ec240559cd819e636309517628aff15285173dc6de0509cca99da201722",
+      "textures/5659be81eb017f846d46249eb76c81b518b80aa1e7a3f572b315b56abafa8450.ktx2": "5659be81eb017f846d46249eb76c81b518b80aa1e7a3f572b315b56abafa8450",
+      "textures/52b890c365b8a2121ee4256bdb7a514fcdf6f8083a2346669827908a4dd23394.ktx2": "52b890c365b8a2121ee4256bdb7a514fcdf6f8083a2346669827908a4dd23394",
+      "clips.bin": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+      "package.json": "64a5738923023f71b2841eea940d7e462d09792ac95da5223a313b542928628e"
+    }
+  },
+  "renders": {
+    "logical-320x180": {
+      "size": [
+        320,
+        180
+      ],
+      "adapter": "Apple M5 Pro",
+      "geometry": {
+        "diagnostic_entities": 0,
+        "model_draw_calls": 0,
+        "model_entities": 0,
+        "model_triangles": 0,
+        "primitive_instances": 0,
+        "sprite_entities": 12,
+        "text_entities": 0,
+        "text_glyph_quads": 0,
+        "text_gpu_bytes": 0,
+        "text_missing_glyphs": 0,
+        "tile_cells": 455,
+        "tilemap_entities": 1
+      },
+      "png_sha256": "377f7d9717f8c39c03494e224d001404d49a0255334648f6ee0fa1a9fc5cda96"
+    },
+    "desktop-16x9-1280x720": {
+      "size": [
+        1280,
+        720
+      ],
+      "adapter": "Apple M5 Pro",
+      "geometry": {
+        "diagnostic_entities": 0,
+        "model_draw_calls": 0,
+        "model_entities": 0,
+        "model_triangles": 0,
+        "primitive_instances": 0,
+        "sprite_entities": 12,
+        "text_entities": 0,
+        "text_glyph_quads": 0,
+        "text_gpu_bytes": 0,
+        "text_missing_glyphs": 0,
+        "tile_cells": 455,
+        "tilemap_entities": 1
+      },
+      "png_sha256": "8e92b4e9092414ae2c5365d82a138fcbfe6f08d0cefa00f8c20194e54f32b4db"
+    },
+    "desktop-16x9-1920x1080": {
+      "size": [
+        1920,
+        1080
+      ],
+      "adapter": "Apple M5 Pro",
+      "geometry": {
+        "diagnostic_entities": 0,
+        "model_draw_calls": 0,
+        "model_entities": 0,
+        "model_triangles": 0,
+        "primitive_instances": 0,
+        "sprite_entities": 12,
+        "text_entities": 0,
+        "text_glyph_quads": 0,
+        "text_gpu_bytes": 0,
+        "text_missing_glyphs": 0,
+        "tile_cells": 455,
+        "tilemap_entities": 1
+      },
+      "png_sha256": "2dabb33ef5afe3e768eeae42985eeeaacb263f8ba837a81fa4cfd898c98a1849"
+    },
+    "window-4x3-1280x960": {
+      "size": [
+        1280,
+        960
+      ],
+      "adapter": "Apple M5 Pro",
+      "geometry": {
+        "diagnostic_entities": 0,
+        "model_draw_calls": 0,
+        "model_entities": 0,
+        "model_triangles": 0,
+        "primitive_instances": 0,
+        "sprite_entities": 12,
+        "text_entities": 0,
+        "text_glyph_quads": 0,
+        "text_gpu_bytes": 0,
+        "text_missing_glyphs": 0,
+        "tile_cells": 455,
+        "tilemap_entities": 1
+      },
+      "png_sha256": "350ab4ca70a5f957b1c7149a514d52b5341b99706aea7c0e53702da3c6fa5ed8"
+    },
+    "phone-landscape-aspect-1920x887": {
+      "size": [
+        1920,
+        887
+      ],
+      "adapter": "Apple M5 Pro",
+      "geometry": {
+        "diagnostic_entities": 0,
+        "model_draw_calls": 0,
+        "model_entities": 0,
+        "model_triangles": 0,
+        "primitive_instances": 0,
+        "sprite_entities": 12,
+        "text_entities": 0,
+        "text_glyph_quads": 0,
+        "text_gpu_bytes": 0,
+        "text_missing_glyphs": 0,
+        "tile_cells": 455,
+        "tilemap_entities": 1
+      },
+      "png_sha256": "4777408ad890ed3f42efce0d12e19e5667cfc88e65ecd4c782cad5ea91229909"
+    }
+  },
+  "native": {
+    "motion": {
+      "adapter": "Apple M5 Pro",
+      "captures": [
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 0,
+              "playing": true
+            }
+          ],
+          "png": "tick-00000.png",
+          "tick": 0,
+          "topology_generation": 0
+        },
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 0,
+              "playing": true
+            }
+          ],
+          "png": "tick-00002.png",
+          "tick": 2,
+          "topology_generation": 0
+        },
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 0,
+              "playing": true
+            }
+          ],
+          "png": "tick-00004.png",
+          "tick": 4,
+          "topology_generation": 0
+        },
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 0,
+              "playing": true
+            }
+          ],
+          "png": "tick-00006.png",
+          "tick": 6,
+          "topology_generation": 0
+        },
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 0,
+              "playing": true
+            }
+          ],
+          "png": "tick-00008.png",
+          "tick": 8,
+          "topology_generation": 0
+        },
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 1,
+              "playing": true
+            }
+          ],
+          "png": "tick-00010.png",
+          "tick": 10,
+          "topology_generation": 0
+        },
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 1,
+              "playing": true
+            }
+          ],
+          "png": "tick-00012.png",
+          "tick": 12,
+          "topology_generation": 0
+        },
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 1,
+              "playing": true
+            }
+          ],
+          "png": "tick-00014.png",
+          "tick": 14,
+          "topology_generation": 0
+        },
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 2,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 2,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 2,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 1,
+              "playing": true
+            }
+          ],
+          "png": "tick-00016.png",
+          "tick": 16,
+          "topology_generation": 0
+        },
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 2,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 2,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 2,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 2,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 2,
+              "playing": true
+            }
+          ],
+          "png": "tick-00018.png",
+          "tick": 18,
+          "topology_generation": 0
+        },
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 2,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 2,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 2,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 2,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 2,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 2,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 2,
+              "playing": true
+            }
+          ],
+          "png": "tick-00020.png",
+          "tick": 20,
+          "topology_generation": 0
+        },
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 2,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 2,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 2,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 2,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 2,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 2,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 2,
+              "playing": true
+            }
+          ],
+          "png": "tick-00022.png",
+          "tick": 22,
+          "topology_generation": 0
+        },
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 3,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 3,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 3,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 2,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 2,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 2,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 2,
+              "playing": true
+            }
+          ],
+          "png": "tick-00024.png",
+          "tick": 24,
+          "topology_generation": 0
+        },
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 3,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 3,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 3,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 2,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 3,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 2,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 3,
+              "playing": true
+            }
+          ],
+          "png": "tick-00026.png",
+          "tick": 26,
+          "topology_generation": 0
+        },
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 3,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 3,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 3,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 2,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 3,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 2,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 3,
+              "playing": true
+            }
+          ],
+          "png": "tick-00028.png",
+          "tick": 28,
+          "topology_generation": 0
+        },
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 4,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 4,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 4,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 3,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 3,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 3,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 3,
+              "playing": true
+            }
+          ],
+          "png": "tick-00030.png",
+          "tick": 30,
+          "topology_generation": 0
+        },
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 4,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 4,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 4,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 3,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 3,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 3,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 3,
+              "playing": true
+            }
+          ],
+          "png": "tick-00032.png",
+          "tick": 32,
+          "topology_generation": 0
+        },
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 4,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 4,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 4,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 3,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 3,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 3,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 3,
+              "playing": true
+            }
+          ],
+          "png": "tick-00034.png",
+          "tick": 34,
+          "topology_generation": 0
+        },
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 4,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 4,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 4,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 3,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 4,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 3,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 4,
+              "playing": true
+            }
+          ],
+          "png": "tick-00036.png",
+          "tick": 36,
+          "topology_generation": 0
+        },
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 5,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 5,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 5,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 3,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 4,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 3,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 4,
+              "playing": true
+            }
+          ],
+          "png": "tick-00038.png",
+          "tick": 38,
+          "topology_generation": 0
+        },
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 5,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 5,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 5,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 4,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 4,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 4,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 4,
+              "playing": true
+            }
+          ],
+          "png": "tick-00040.png",
+          "tick": 40,
+          "topology_generation": 0
+        },
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 5,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 5,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 5,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 4,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 4,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 4,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 4,
+              "playing": true
+            }
+          ],
+          "png": "tick-00042.png",
+          "tick": 42,
+          "topology_generation": 0
+        },
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 5,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 5,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 5,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 4,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 5,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 4,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 5,
+              "playing": true
+            }
+          ],
+          "png": "tick-00044.png",
+          "tick": 44,
+          "topology_generation": 0
+        },
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 6,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 6,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 6,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 4,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 5,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 4,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 5,
+              "playing": true
+            }
+          ],
+          "png": "tick-00046.png",
+          "tick": 46,
+          "topology_generation": 0
+        },
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 6,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 6,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 6,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 4,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 5,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 4,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 5,
+              "playing": true
+            }
+          ],
+          "png": "tick-00048.png",
+          "tick": 48,
+          "topology_generation": 0
+        },
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 6,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 6,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 6,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 5,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 5,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 5,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 5,
+              "playing": true
+            }
+          ],
+          "png": "tick-00050.png",
+          "tick": 50,
+          "topology_generation": 0
+        },
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 6,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 6,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 6,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 5,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 6,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 5,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 6,
+              "playing": true
+            }
+          ],
+          "png": "tick-00052.png",
+          "tick": 52,
+          "topology_generation": 0
+        },
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 7,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 7,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 7,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 5,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 6,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 5,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 6,
+              "playing": true
+            }
+          ],
+          "png": "tick-00054.png",
+          "tick": 54,
+          "topology_generation": 0
+        },
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 7,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 7,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 7,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 5,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 6,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 5,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 6,
+              "playing": true
+            }
+          ],
+          "png": "tick-00056.png",
+          "tick": 56,
+          "topology_generation": 0
+        },
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 7,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 7,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 7,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 1,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 5,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 6,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 5,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 6,
+              "playing": true
+            }
+          ],
+          "png": "tick-00058.png",
+          "tick": 58,
+          "topology_generation": 0
+        },
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 6,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 7,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 6,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 7,
+              "playing": true
+            }
+          ],
+          "png": "tick-00060.png",
+          "tick": 60,
+          "topology_generation": 0
+        },
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 6,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 7,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 6,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 7,
+              "playing": true
+            }
+          ],
+          "png": "tick-00062.png",
+          "tick": 62,
+          "topology_generation": 0
+        }
+      ],
+      "height": 540,
+      "scope": "retained native scene frames; no scripts, audio or presentation",
+      "tick_rate": 60,
+      "width": 960
+    },
+    "hooks": {
+      "adapter": "Apple M5 Pro",
+      "captures": [
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 0,
+              "playing": true
+            }
+          ],
+          "png": "tick-00000.png",
+          "tick": 0,
+          "topology_generation": 0
+        },
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 1,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 0,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 0,
+              "playing": true
+            }
+          ],
+          "png": "tick-00001.png",
+          "tick": 1,
+          "topology_generation": 0
+        },
+        {
+          "binding_generation": 0,
+          "flipbooks": [
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000001",
+              "frame": 2,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000005",
+              "frame": 1,
+              "playing": false
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000b",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000c",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000000d",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000015",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000016",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000017",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d5000000000000000000000001f",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000020",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000021",
+              "frame": 0,
+              "playing": true
+            },
+            {
+              "completed": false,
+              "entity": "01b65d50000000000000000000000022",
+              "frame": 0,
+              "playing": true
+            }
+          ],
+          "png": "tick-00002.png",
+          "tick": 2,
+          "topology_generation": 0
+        }
+      ],
+      "height": 540,
+      "scope": "retained native scene frames; no scripts, audio or presentation",
+      "tick_rate": 60,
+      "width": 960
+    },
+    "ids": {
+      "pearls": [
+        "01b65d5000000000000000000000000b",
+        "01b65d5000000000000000000000000c",
+        "01b65d5000000000000000000000000d"
+      ],
+      "urchins": [
+        "01b65d50000000000000000000000015",
+        "01b65d50000000000000000000000016",
+        "01b65d50000000000000000000000017"
+      ]
+    }
+  },
+  "parity": {
+    "authoring": "native/authoring-960x540.png",
+    "native": "native/motion/tick-00000.png",
+    "differing_pixels": 0,
+    "pixels": 518400
+  },
+  "previews": {
+    "collecting": {
+      "png": "collecting-1280x720.png",
+      "translation": [
+        16.949913024902344,
+        8.49993896484375,
+        0.0
+      ],
+      "pearls_present": [
+        "01PSEN0000000000000000000D"
+      ],
+      "frames": {},
+      "label": "authoring-renderer still of an observed state; not a live frame"
+    },
+    "won-hooks": {
+      "png": "won-hooks-1280x720.png",
+      "translation": [
+        10.499939918518066,
+        2.6000022888183594,
+        0.0
+      ],
+      "pearls_present": [],
+      "frames": {
+        "01PSEN00000000000000000001": "beachcomber/2",
+        "01PSEN00000000000000000005": "boat/1"
+      },
+      "label": "authoring-renderer still of an observed state; not a live frame"
+    },
+    "lost-hook": {
+      "png": "lost-hook-1280x720.png",
+      "translation": [
+        13.499893188476562,
+        4.100006103515625,
+        0.0
+      ],
+      "pearls_present": [
+        "01PSEN0000000000000000000B",
+        "01PSEN0000000000000000000C",
+        "01PSEN0000000000000000000D"
+      ],
+      "frames": {
+        "01PSEN00000000000000000001": "beachcomber/1"
+      },
+      "label": "authoring-renderer still of an observed state; not a live frame"
+    }
+  },
+  "files": {
+    "build/arrows-win-input.json": "4ceeaa9760af8aaef6270f3463edb8e6a659e8ddb086d1f5a2c3f247ba334e98",
+    "build/arrows-win-observe.json": "d12487a03d2b6bf3f0be99799e3dea3c1f0a75fe772e524df462b5bf47b8e7c3",
+    "build/arrows-win.json": "30f6e2fc5c74a8552fb5c4e190ae6fb138ed7e5ba458a376107587a93bd943e9",
+    "build/authoring-calls.json": "8f21dbdb4d47057d30c252d0b31327753c38f8d7545f427e886a7c184f180356",
+    "build/dpad-win-input.json": "b3a60ccfd149c1721c6bd19593a99baf00eed6fe3bf250dac62768e13d28ad14",
+    "build/dpad-win-observe.json": "d12487a03d2b6bf3f0be99799e3dea3c1f0a75fe772e524df462b5bf47b8e7c3",
+    "build/dpad-win.json": "30f6e2fc5c74a8552fb5c4e190ae6fb138ed7e5ba458a376107587a93bd943e9",
+    "build/gamepad-win-input.json": "263f8e0bf0c2466c2f1a3d75f0c76b644d8257d845ca1ca7c31a770f0894df6d",
+    "build/gamepad-win-observe.json": "d12487a03d2b6bf3f0be99799e3dea3c1f0a75fe772e524df462b5bf47b8e7c3",
+    "build/gamepad-win.json": "30f6e2fc5c74a8552fb5c4e190ae6fb138ed7e5ba458a376107587a93bd943e9",
+    "build/keyboard-win-input.json": "3bee29c5cdf91b7bf634bc10d8d56c285b112f13f2822dff09c43dea0a3165e8",
+    "build/keyboard-win-observe.json": "d12487a03d2b6bf3f0be99799e3dea3c1f0a75fe772e524df462b5bf47b8e7c3",
+    "build/keyboard-win.json": "30f6e2fc5c74a8552fb5c4e190ae6fb138ed7e5ba458a376107587a93bd943e9",
+    "build/locked-boat-input.json": "73d5098255cb262d8610f555f0fc3eb5bd9b71f523660379c3cbbef4d2bc0230",
+    "build/locked-boat-observe.json": "afb3e2dba93051268eda7677968f46424ec0c536789838ac15550a9f14840e2a",
+    "build/locked-boat.json": "0253821d30addd28199bb3efc59df2cb8fa42b545e56b258cfc4f46b30e225bb",
+    "build/process-00.json": "3fe8d7c1a209b290c1ee5b045bc005182d4b95c0ef91c18ca6dfe6c99bfbc2e3",
+    "build/process-01.json": "b75ff2951e0d6bd8ebaf6fcb1c34890a43507924eb86ed6b1414471c158cbebd",
+    "build/process-02.json": "5b5b5e61aeeb5cbe328da58b9f219babad57dd0e0574bb71d3809f4487713be9",
+    "build/process-03.json": "d28ed711b704473c137a7fcb1c91c83c94c54e91d6092ee17ae8bf0ad5736e73",
+    "build/process-04.json": "610e45490607ba486b49fd4c1bdb843b018aeff727dc26bb636d0e6b6006380d",
+    "build/process-05.json": "0bc21cfc10836b31e6320ad11ee278fec444e1285d8d8bf3f0451300e4821541",
+    "build/process-06.json": "4fa946af3053d755871ac160ded3208fac5c45e2a070e1ca6219ea55104ea740",
+    "build/process-07.json": "ec9d87c0297d3e6a8bc87588dbea7c5c6c60dfea04e5873ca2c1286a465c4924",
+    "build/process-08.json": "9096c5edc4e64a6ecf997e537399665441f40ce226b64eeaabb83abbc7e93b6f",
+    "build/process-09.json": "aeb4a56790479482452c4e2a78fde2d73e5716d670dd9452e9bfc7750535d48e",
+    "build/project/art/art.json": "6d1712d011b14d25bdad6da9ab64bbfaef7ddfe3a1beb70ec374698b73a20e7b",
+    "build/project/art/cove-sprites.png": "44e37849f354e0b98df429395892d3c3a882fa2026b92b7a8b8c9c160009e3bd",
+    "build/project/art/cove-tiles.png": "1fa33c43572d98a78e0c5eee8723604ecdfa44202d910aaf64f7aa9ab6f7fa85",
+    "build/project/art/cove.atlas.json": "fe87b37158af8bac9cf1d2739751e4cc368d20476ad3cdbb18f6e55f8b250cb2",
+    "build/project/planar.json": "abd3903a46f5744a6a8733cf464b8e02ded1deb9ad4ffc99e86a1b06a8908deb",
+    "build/result.json": "e834adf887233b6b4ad22b863b762e3ae5615021783e767290c5f9513b2d6b4f",
+    "build/shore-and-cliff-input.json": "3d3786d42625b62f5fcc25f9e835f02d202b5c817744bd35327fd28ca1a75e72",
+    "build/shore-and-cliff-observe.json": "3f7684a71736561cf1ad9f70a3cc46b6276f78212f7e088afef3190761f9d7bf",
+    "build/shore-and-cliff.json": "cff3fbefae00f1847b2bdeeb3b61fdfaef2ac04e5be38c0eb0fe2c8a84c64cda",
+    "build/urchin-loss-input.json": "e5ff76fe8ece978d2a80b13179a0b69f226e25cae62c96c7f0842447799ba00b",
+    "build/urchin-loss-observe.json": "da8e16e1ad955e4e35ba168667d4ac884d2704163331ba4d0213d3aebd2759a5",
+    "build/urchin-loss.json": "2c6dd916acfe5405d5cdee0f57ff83b4ff3cf8897a1fd3b0b80ab94f87b8b664",
+    "native/authoring-960x540.png": "dbccedc6957a00abe0f709562a7ee3f7abe1ec35f91a6b2b5710caf414aa631a",
+    "native/hooks/report.json": "f1f2811e79e0594064242c4d079e33328a1c456845dee4f54116ea9089dc826f",
+    "native/hooks/tick-00000.png": "dbccedc6957a00abe0f709562a7ee3f7abe1ec35f91a6b2b5710caf414aa631a",
+    "native/hooks/tick-00001.png": "507cd0154fda453c18badcafa65bcc2484e312e98ba5aa642101f401849b0f8d",
+    "native/hooks/tick-00002.png": "c8cc89cdfc311185e0f033b6b6e539708d51eda2b919de69879d4ff7cfc60d33",
+    "native/hooks-request.json": "5342c6447055f1f7bd320db05013ad975e2e9f148b8f1e2eee57267706886757",
+    "native/hooks.log.json": "6dd5816d9cd7d77a28ac995bdba026b249a28bcb62bfdbb3e97309f94bcc1606",
+    "native/motion/report.json": "4d7e1b2c199a8e216222f13af50ba9e922841d41305bc525969cfd5f580d758c",
+    "native/motion/tick-00000.png": "dbccedc6957a00abe0f709562a7ee3f7abe1ec35f91a6b2b5710caf414aa631a",
+    "native/motion/tick-00002.png": "dbccedc6957a00abe0f709562a7ee3f7abe1ec35f91a6b2b5710caf414aa631a",
+    "native/motion/tick-00004.png": "dbccedc6957a00abe0f709562a7ee3f7abe1ec35f91a6b2b5710caf414aa631a",
+    "native/motion/tick-00006.png": "dbccedc6957a00abe0f709562a7ee3f7abe1ec35f91a6b2b5710caf414aa631a",
+    "native/motion/tick-00008.png": "d505234f5989d2ef4fbe479f2b8aa66a0bc4a4cde085f61f3e02f187c0988bce",
+    "native/motion/tick-00010.png": "647068b43a5b3442461295f2b5c70dadc2f4562e795070b9d8ba73e29cfa4f78",
+    "native/motion/tick-00012.png": "647068b43a5b3442461295f2b5c70dadc2f4562e795070b9d8ba73e29cfa4f78",
+    "native/motion/tick-00014.png": "647068b43a5b3442461295f2b5c70dadc2f4562e795070b9d8ba73e29cfa4f78",
+    "native/motion/tick-00016.png": "e0eaff7848a63b8e2ec7b763a279856a2a9a3ec9cdbf8abe37fad8375a266a28",
+    "native/motion/tick-00018.png": "90cf623ad191aebdff31fe9ec22862184a5a6f24109aeb85e27d545edd4c083f",
+    "native/motion/tick-00020.png": "52f0a4509d0316359863ca21455f3838a5e160424a8872569957c2bbe5c72606",
+    "native/motion/tick-00022.png": "52f0a4509d0316359863ca21455f3838a5e160424a8872569957c2bbe5c72606",
+    "native/motion/tick-00024.png": "2a75032c26bbdd0d6ffa05a5d3c73511d12f616e56ec04f8d7b25333e7d890db",
+    "native/motion/tick-00026.png": "7aeb246f8223e33bc83a4582885ac4c9f32cc9a3535c711016aa2db7bb79c5ed",
+    "native/motion/tick-00028.png": "7aeb246f8223e33bc83a4582885ac4c9f32cc9a3535c711016aa2db7bb79c5ed",
+    "native/motion/tick-00030.png": "61740a1788d1ad2b715c3e2700ea24b03c16c3f87649623e85233e7f88a3bf21",
+    "native/motion/tick-00032.png": "61740a1788d1ad2b715c3e2700ea24b03c16c3f87649623e85233e7f88a3bf21",
+    "native/motion/tick-00034.png": "61740a1788d1ad2b715c3e2700ea24b03c16c3f87649623e85233e7f88a3bf21",
+    "native/motion/tick-00036.png": "af841fc7767bed4c095a5e82f3c183f83d6740f018e59e09e319a9c866d7e81a",
+    "native/motion/tick-00038.png": "18b899a04654c09699aa5227856e0ce4b51084943d9c07894ebaeb89d9bfc749",
+    "native/motion/tick-00040.png": "4625aa9b4dfa3c0f1c434ef1e69a76ecaf319e2185c4a142a4d35184916cf234",
+    "native/motion/tick-00042.png": "4625aa9b4dfa3c0f1c434ef1e69a76ecaf319e2185c4a142a4d35184916cf234",
+    "native/motion/tick-00044.png": "aa88f8675a8ba34e62b971bbcffd18a7c6deee26998f1093228b75bbbd9bdc39",
+    "native/motion/tick-00046.png": "488d809d48400288fba4ab2c389f4b279e29fd5a9a3e93d26f0ab306ad997e38",
+    "native/motion/tick-00048.png": "488d809d48400288fba4ab2c389f4b279e29fd5a9a3e93d26f0ab306ad997e38",
+    "native/motion/tick-00050.png": "796e1f98abaf685d9e486d6d49feed048a046d219397b160246bf91cb08b2967",
+    "native/motion/tick-00052.png": "f245dca3efbededbace7b7c5e1c8c8d61f80b6f6c7a6cbbd05710cd95dc390db",
+    "native/motion/tick-00054.png": "b2db62cf2e3851f3986705486d6513624cc85f843a59d8dd5c15641572a87432",
+    "native/motion/tick-00056.png": "b2db62cf2e3851f3986705486d6513624cc85f843a59d8dd5c15641572a87432",
+    "native/motion/tick-00058.png": "b2db62cf2e3851f3986705486d6513624cc85f843a59d8dd5c15641572a87432",
+    "native/motion/tick-00060.png": "048e10b6d7d36468025bd116c5bcdd85a58d0b2c7fda562f62f4933a9f9b6f1e",
+    "native/motion/tick-00062.png": "048e10b6d7d36468025bd116c5bcdd85a58d0b2c7fda562f62f4933a9f9b6f1e",
+    "native/motion-request.json": "19dad04876dc921360cf55eee8edcd560f26e21aa7ac1ff596e9f59e19186194",
+    "native/motion.log.json": "dcb6f07bbb1cc3cd3d789012a6ec497127621d79cf8fe08729cd3f4192cd4dc8",
+    "package/package.json": "51bf8e64cb36486efdf4f3dac9a38b05b1da49a261b96e333865fa1e01b09226",
+    "package/player/data/empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+    "package/player/data/input-actions.json": "617123f0cd018451a23ddc8e096249208484867db707e9041e76af832f1e1624",
+    "package/player/data/package.json": "64a5738923023f71b2841eea940d7e462d09792ac95da5223a313b542928628e",
+    "package/player/data/textures/cddd1a4372b2acec4f16ee3518e4b352847c36b444f347917bf48cc65cd796c8.json": "cf199ec240559cd819e636309517628aff15285173dc6de0509cca99da201722",
+    "package.log.json": "04c537196331527a00a117390cac8a80dfb20352500b32a81d9a23cf681108f8",
+    "previews/collecting/art/art.json": "6d1712d011b14d25bdad6da9ab64bbfaef7ddfe3a1beb70ec374698b73a20e7b",
+    "previews/collecting/art/cove-sprites.png": "44e37849f354e0b98df429395892d3c3a882fa2026b92b7a8b8c9c160009e3bd",
+    "previews/collecting/art/cove-tiles.png": "1fa33c43572d98a78e0c5eee8723604ecdfa44202d910aaf64f7aa9ab6f7fa85",
+    "previews/collecting/art/cove.atlas.json": "fe87b37158af8bac9cf1d2739751e4cc368d20476ad3cdbb18f6e55f8b250cb2",
+    "previews/collecting/planar.json": "b3830efd73fc6a42a305399f45de93bb22147b12c9f7d1d0142be6ac89d7df35",
+    "previews/collecting-1280x720.png": "b31e5080e858fbf00a5f54c9e1736d6b5e254388efae328e2e526ea5505e3811",
+    "previews/collecting-observation.json": "091b69529154811a056d4492538af092c7531239f7fab340304c9536b8abc706",
+    "previews/collecting-observe.json": "01bee4d09c2865f4e24a047eb99093c078b41ebc038d7c3e842165926ad47650",
+    "previews/lost-hook/art/art.json": "6d1712d011b14d25bdad6da9ab64bbfaef7ddfe3a1beb70ec374698b73a20e7b",
+    "previews/lost-hook/art/cove-sprites.png": "44e37849f354e0b98df429395892d3c3a882fa2026b92b7a8b8c9c160009e3bd",
+    "previews/lost-hook/art/cove-tiles.png": "1fa33c43572d98a78e0c5eee8723604ecdfa44202d910aaf64f7aa9ab6f7fa85",
+    "previews/lost-hook/art/cove.atlas.json": "fe87b37158af8bac9cf1d2739751e4cc368d20476ad3cdbb18f6e55f8b250cb2",
+    "previews/lost-hook/planar.json": "01c7a2711ee9f6fbbaeec5fc3013b7e33f7169a953ca24c367aee2f2b701970a",
+    "previews/lost-hook-1280x720.png": "2d6f877e4ed90b233015d831a7378a46e6d942b034d0f157a8e375f838ee412a",
+    "previews/won-hooks/art/art.json": "6d1712d011b14d25bdad6da9ab64bbfaef7ddfe3a1beb70ec374698b73a20e7b",
+    "previews/won-hooks/art/cove-sprites.png": "44e37849f354e0b98df429395892d3c3a882fa2026b92b7a8b8c9c160009e3bd",
+    "previews/won-hooks/art/cove-tiles.png": "1fa33c43572d98a78e0c5eee8723604ecdfa44202d910aaf64f7aa9ab6f7fa85",
+    "previews/won-hooks/art/cove.atlas.json": "fe87b37158af8bac9cf1d2739751e4cc368d20476ad3cdbb18f6e55f8b250cb2",
+    "previews/won-hooks/planar.json": "f2ef3cf30010dd733942b7460d6b5306a8a5c2662e765f60224cf65ddf24682e",
+    "previews/won-hooks-1280x720.png": "bf2924fb4d10eb5c6a168e6764c08b4b8afe9f82751ebfecf3d1406ed9858d0a",
+    "renders/desktop-16x9-1280x720.png": "8e92b4e9092414ae2c5365d82a138fcbfe6f08d0cefa00f8c20194e54f32b4db",
+    "renders/desktop-16x9-1920x1080.png": "2dabb33ef5afe3e768eeae42985eeeaacb263f8ba837a81fa4cfd898c98a1849",
+    "renders/logical-320x180.png": "377f7d9717f8c39c03494e224d001404d49a0255334648f6ee0fa1a9fc5cda96",
+    "renders/phone-landscape-aspect-1920x887.png": "4777408ad890ed3f42efce0d12e19e5667cfc88e65ecd4c782cad5ea91229909",
+    "renders/window-4x3-1280x960.png": "350ab4ca70a5f957b1c7149a514d52b5341b99706aea7c0e53702da3c6fa5ed8",
+    "scene.log.json": "fabd61526bc2e5ca6b4fe69dc60d4e3f62f646d8c849076804676b8c6028713f"
+  }
+}

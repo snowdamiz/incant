@@ -1,0 +1,2 @@
+headless exit 0
+native_frames exit 0
