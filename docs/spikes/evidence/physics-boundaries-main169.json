@@ -737,5 +737,9 @@
     "Trusted typed solver clone only; no decoder, persisted graph, NativeWorld restore or PhysicsUnsupported relaxation.",
     "No unsafe code added; prior underlying dependency ownership obligations remain open."
   ],
-  "integration": "STATUS additive only; all nine accepted production/probe source inputs exact; root manifest/lock and runtime/script/session/save unchanged."
+  "integration": "STATUS additive only; all nine accepted production/probe source inputs exact; root manifest/lock and runtime/script/session/save unchanged.",
+  "main171_addendum": {
+    "path": "docs/spikes/evidence/physics-boundaries-main169/main171-addendum.json",
+    "sha256": "dbb25d02268f99652a791261886159187370612ca6b43e0eb481eb57242eaec8"
+  }
 }

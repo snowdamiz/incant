@@ -31,3 +31,11 @@ these are not thirty distinct cases, and diagnostic scenarios are not Rust tests
 is accepted; exact-head fast CI remains required. Project/process
 physics selection remains separate work. No performance, reference-phone,
 renderer, backend-adoption, exact production physics save or phase gate is claimed.
+
+Actual main171 is now preserved in the branch. Its compiler compatibility and
+desktop exporter changes are outside the checked physics dependency closure. All
+nine accepted inputs, both complete kernel package trees, root lock/config and
+the isolated diagnostic source/lock match the tested source exactly. The
+[main171 addendum](evidence/physics-boundaries-main169/main171-addendum.json)
+records changed unrelated inputs explicitly, repeats the new exporter parser
+cases and preserves the prior actual test/feature/diagnostic scope.
