@@ -28,6 +28,16 @@ and integration remain pending; automatic editor worker selection, physics saves
 reference-device performance and phase gates remain open.
 [Scope and retained evidence](docs/spikes/physics-process-selection.md).
 
+## Physics process/export selection — current main176 verified
+
+Developer Play and ordinary desktop export now choose the fixed matching kernel
+from the public project setting. Selected normal dependency audits replace the
+workspace-unified metadata false refusal seen in frozen checkpoint15. The current
+CPU integration passes 15 checks and two unchanged-package replays; all producer
+compile/cook inputs remain exact. Independent final closure is pending. Automatic
+editor workers, physics saves and device/performance gates remain separate.
+[Evidence](docs/spikes/physics-process-main176.md).
+
 ## Project physics selection — current main173 verified
 
 The public command bus atomically selects deterministic or fast physics, with
@@ -35,7 +45,7 @@ legacy deterministic defaults preserved. Cook/Play explicitly refuse a mismatche
 process before assets or source fallback. All 70 schemas and strict TypeScript
 contracts match. Current integration reuses byte-identical three-mode Rust checks
 and reruns schema/generation/guard checks; final independent review is accepted. Automatic editor
-process switching and mode-aware export remain separate follow-on work.
+process switching remains separate; developer/export selection is recorded above.
 [Integrated contract and evidence](docs/spikes/physics-project-main173.md).
 
 ## Pearl Cove presentation — current main173 verified
