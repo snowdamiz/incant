@@ -16,6 +16,16 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Native audio transport — fresh shipping playback verified
+
+Stop, restart and seek now pass the typed native transaction and retained mixer
+checks. The six-package suite passes 530 tests and scoped Clippy. A fresh ordinary
+export passes four separate player processes with byte-exact audio/save
+continuation and ten specific refusals after private inputs are removed. Independent
+execution review accepts the evidence; main integration remains pending. Physical audio,
+Wasm SDK parity, Core Sample integration and phone gates remain open.
+[Evidence and limits](docs/spikes/native-audio-transport.md).
+
 ## Connected root motion — native/TypeScript CPU checks passed
 
 Cooked17/18 root catalogs now drive independent exact graph/clip clocks,

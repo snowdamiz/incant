@@ -44,7 +44,7 @@ outer session format is unchanged. Static resampler history, streamed position,
 voice retirement order, bus state and fractional output clocks remain covered by
 the existing checked checkpoint representation.
 
-## Verification in progress
+## Verification
 
 The focused real-mixer tests pass for static and streamed clips, including
 completed one-shot restart, stop, paused seek, resumed playback, transport binding
@@ -65,6 +65,12 @@ was changed to bypass the boundary check.
 
 The opt-in `--transport` variant of the ordinary audio checkpoint export proof
 adds stop/paused-seek/restart, repeated one-shots and a checksummed wrong-epoch
-refusal. Its fresh shipping build and process proof are still pending. This record
-does not claim physical audio playback, browser/Wasm SDK parity, reference-phone
-performance, Core Sample music integration or a completed phase gate.
+refusal. The fresh ordinary shipping export passes in four separate processes:
+40 uninterrupted ticks, a 13-tick checkpoint, and two fresh 27-tick continuations.
+Their final save bytes match exactly, as does the concatenated PCM. Paused ticks
+are silent; resumed/restarted clips emit samples. Ten targeted refusals preserve
+the documented checkpoint and output boundaries. Authoring inputs, project cache,
+private build storage and source maps are absent before the copied player runs.
+The independent final execution audit accepts the retained package and results. This record does not claim
+physical audio playback, browser/Wasm SDK parity, reference-phone performance,
+Core Sample music integration or a completed phase gate.

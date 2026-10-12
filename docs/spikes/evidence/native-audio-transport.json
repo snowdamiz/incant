@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-12T19:04:47.810982+00:00",
+  "at": "2026-10-12T19:17:21.156787+00:00",
   "base": "2c2b22fd18b8f7492b8a8ea8e6502d2e4a37be4d",
   "source_hashes": {
     "crates/incant_audio_runtime/src/scene.rs": "82eb26a05c30c9a3c16ee43c22e4674d7f0e6818d7b3692df01a70de7844c59c",
@@ -476,6 +476,258 @@
       "sha256": "4275bb6fac1289d696ff7f460f19f8ee64705ccf07ee197b066660be0f48c1fc",
       "raw_sha256": "4315b42e81743d2dfd874f14f31c2f33fda2d303621a0ada63738baab7b9f491",
       "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-checks-003/wasm-audio.log"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/authoring-commands.json.gz",
+      "sha256": "7b2d3c59154f0d51552684d7a4f395fb9c9544c78bd1fb0d88993579e2e6465a",
+      "raw_sha256": "f49b9ff1050a4d6a320f55e8d1fa3b26529a182475ab332dcf6a41ab2b805c12",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/authoring-commands.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/baseline-receipt.json.gz",
+      "sha256": "e70f812d221b039d22c710ce534bf235fdb2aa49d9462ce270c3fd59627b01d2",
+      "raw_sha256": "26c56ba4f0c13192d1151d5b23c0bd2d9a5b2782eb0a9faf65e159d808c68ba5",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/baseline-receipt.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/preedit-receipt.json.gz",
+      "sha256": "b1c144474cf8d396b819ebcb05dff852dc33cf3e23174a787422a2c47e87121a",
+      "raw_sha256": "b2a22fa17229b8b7699797015f7de6e7b683751dca9533d7d2f7746102490cd2",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/preedit-receipt.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/no-clobber.pcm.gz",
+      "sha256": "6f7fa7b3a433eb7f3aae38a887443ed317fed59cedd87047756a7f3a6ec8599e",
+      "raw_sha256": "c857126e4e397b9b85feb90d9c073100b1eba8e98154a9c6b8e6c53a1b2aac87",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/no-clobber.pcm"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/repeated-observe.json.gz",
+      "sha256": "ce42b31706593a72c13f2b646f657f8e081c3459187584222760b8c7ef24fcfb",
+      "raw_sha256": "ae0e6529e4cf37eb01ba42caab946f07c365bf727623c0a7856a5c3ec4abf0d2",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/repeated-observe.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/middle.pcm.gz",
+      "sha256": "943f50a32e5e17432f7122b872aadeb7e7966873ee5b12eb2c04d7a98f169a5b",
+      "raw_sha256": "8a3ed463520a9c8af330b948971c10034ef5e6944f06dcae21426a29349648c5",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/middle.pcm"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/assertion-receipt.json.gz",
+      "sha256": "0d464760d1a80286b8f25ec9563fbf1e750389c77fbdbe771a02a00a574534ea",
+      "raw_sha256": "c01bb27d72ea7c7c633bc37f687f4b742166a04f686d959b016b4a847ff096f7",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/assertion-receipt.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/resumed.pcm.gz",
+      "sha256": "073ce947e99580ddfa79907e6847369f86e4b98df0b42cd8afd199754252fad7",
+      "raw_sha256": "fb5a4cc0da6d9efe7da2a500d9565e330a401ce192cb80dea873e6d0f1a94c23",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/resumed.pcm"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/neutral-input.json.gz",
+      "sha256": "bdcfdcd759253370e9beead87ba12137e5ff5a01b4b2e71496e9868f8d078f15",
+      "raw_sha256": "f45b1d87d06f2b419d978050acb868c0d60701587de8a10d8b01ef9a007e61de",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/neutral-input.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/result.json.gz",
+      "sha256": "944727de3d935d6419bf783327a18575162074ac41b34a261d37d5a6c52bf82e",
+      "raw_sha256": "ed331b8acd4a10426ff7354f8fd6bbd61f482cbafa0ef9763a9ccbfd2a7984c9",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/result.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/wrong-program-receipt.json.gz",
+      "sha256": "87532fc95b6e7f3268b7751b4530723ef992ad019e563c1d88a30997487bbe06",
+      "raw_sha256": "0f3121590c5ed21c5d31c39d375d25d5f6feab872704827a082d0d195d89ed07",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/wrong-program-receipt.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/resumed-observe.json.gz",
+      "sha256": "ce42b31706593a72c13f2b646f657f8e081c3459187584222760b8c7ef24fcfb",
+      "raw_sha256": "ae0e6529e4cf37eb01ba42caab946f07c365bf727623c0a7856a5c3ec4abf0d2",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/resumed-observe.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/export-call.json.gz",
+      "sha256": "f6e4a3c6670d5df124da210e43bf06459141300c2af92f84caae259e87e57e46",
+      "raw_sha256": "5119260a80d987e77504b3db178dc11ba1d3d79f3db727669fe4ef94b27c4af2",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/export-call.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/wrong-audio-clock-receipt.json.gz",
+      "sha256": "47365fa9d5053ea7359928740304a222ba20acd204d3a6c3c73916d3819aad2f",
+      "raw_sha256": "82e0835e0c9c2f8e20f3142e4d98f34672cd6fca8363f00bd040f2e0405c30e3",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/wrong-audio-clock-receipt.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/resumed-receipt.json.gz",
+      "sha256": "046917cfb33a76d2cb37a4d3293b5a869658c2a81a2388f1665afeccd286bc60",
+      "raw_sha256": "d676dff7e6ad8dad799983b346417a356d28e19376cebb6c2455ac0cff8dd436",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/resumed-receipt.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/initial-input.json.gz",
+      "sha256": "13c8b7b081e629c5b776adb0e435b7c07583561f7be618900a26eeec8a8b1a4a",
+      "raw_sha256": "3492b1779aa9edbff2f16264665afd5eff01fe142bbb0a3d8770e7797036648f",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/initial-input.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/baseline-observe.json.gz",
+      "sha256": "0e6b4e6dbc68ecd22d6839ee0d60e7ff7e9af01eeee0e3203abee4cea7419bd9",
+      "raw_sha256": "286b985d6d242f68e3bd95073a834cee08b5857f384cada047bb4206035ce47a",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/baseline-observe.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/no-clobber-receipt.json.gz",
+      "sha256": "b601920fe8700df54c59b39ef4018eb06a33abbe1131c4ea35456427f02bd59d",
+      "raw_sha256": "5a17ed54fe4aecd08f537bec7051815b173687f7690f58f8d49bd20c8c7fc2d3",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/no-clobber-receipt.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/repeated-receipt.json.gz",
+      "sha256": "5941ccc7db0e22a357c3e38596b44f078a90ada9586c49498d2cf925fa7080c1",
+      "raw_sha256": "34c427c6c0d7b1cecc4483a92a6fe749b9bd0ef1ffb3e25d10e86273e13fde06",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/repeated-receipt.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/authoring.json.gz",
+      "sha256": "a615233b12ed55cf7b36531b83ab36e90ef21bf1c9ee8cae8051568ea6b7efc3",
+      "raw_sha256": "615dbb3a26082a355560fb0fc927c1a0375435d091ca5d1b17ef13084f0c0128",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/authoring.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/assertion-observe.json.gz",
+      "sha256": "9a25fdfddf6a808a7220c2c51cf140435bf0c551c53576e67b59c5843aef340c",
+      "raw_sha256": "ef9a11353955d39b16a1a815c55b145447cc5e0b1473698bf5f27c4e465e3b79",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/assertion-observe.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/middle-observe.json.gz",
+      "sha256": "156611489bf2b801cc56b88c128de5ab1d0f72cf0fbdff684b6caa0bc1e9dd3e",
+      "raw_sha256": "3c3e2bd81bb4bc70be705f886e8ed48506e0ba2b5927e6258a1c11a327fed82b",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/middle-observe.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/repeated.pcm.gz",
+      "sha256": "073ce947e99580ddfa79907e6847369f86e4b98df0b42cd8afd199754252fad7",
+      "raw_sha256": "fb5a4cc0da6d9efe7da2a500d9565e330a401ce192cb80dea873e6d0f1a94c23",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/repeated.pcm"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/baseline.pcm.gz",
+      "sha256": "eae7fde01f0f6ea7d0cc48e894bfd3203327c2490cb418bab055d994739e7f4b",
+      "raw_sha256": "b5140b3e527d8a767c72332eb5e42ba690c23e59bc247d2c3541be18aeb6e87e",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/baseline.pcm"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/wrong-audio-catalog-receipt.json.gz",
+      "sha256": "037ea976b3b5eee54e96e00567d668129a4a023ae9b59af25714760165527c69",
+      "raw_sha256": "d6b7c3b64f3f64ee7eef97d608b135884fda368a13d153ba87535130adf8c804",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/wrong-audio-catalog-receipt.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/preedit-input.json.gz",
+      "sha256": "4b381f1db0e8e8fe6e1df6e3cf846f64a10a93ee19b281bddff74681d74a8a45",
+      "raw_sha256": "997c58b52d50b235ad5f447e722428052de49023f9e271d52ccf01e0e885a5b4",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/preedit-input.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/wrong-widget-receipt.json.gz",
+      "sha256": "620cc0429e57dcddca7d689aba1e5b72a2c8ac6e3d04d92ce6b7e7eeebcd1cd4",
+      "raw_sha256": "6c4a792202286528ffd6596906fad9e95a11cad4659bbd4fc973bfa60ed1b7c5",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/wrong-widget-receipt.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/oversized-receipt.json.gz",
+      "sha256": "4f10b37d2519ccb490e447c1106211746d2a30196bbaa49b69b87255264f6446",
+      "raw_sha256": "9b67ab32114f5c0a106a4ef201f260197812a1e9e6bbb98f1032668537fbfef8",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/oversized-receipt.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/middle-receipt.json.gz",
+      "sha256": "3a22fdb98d651d1e1ffe15572d76385410fda1d082b748ddcbe323a9cb7d1e80",
+      "raw_sha256": "0afdf4123c1949cbf2e4ad8c60be3a768cb3a743e72faa4eed33d213443a5c2a",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/middle-receipt.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/wrong-audio-transport-receipt.json.gz",
+      "sha256": "77379d111cf1cb665e2692bfef8a3abe9d0047e04172b3ae84e7ddf6fd3b4dd3",
+      "raw_sha256": "0c6d7d587bf82c7143564c640c8f521c48c424a886a003d41876a13beec4d453",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/wrong-audio-transport-receipt.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/corrupt-receipt.json.gz",
+      "sha256": "59f0404ffd52f6ca9ccae4044c403e6b2743e49c79bbeaed9cdefd126b4c2b67",
+      "raw_sha256": "3c8cf18211c331e8fabbee149e27d282cd233bfd152e2e0d07ac92ce85f10187",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/corrupt-receipt.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/baseline.save.gz",
+      "sha256": "e7baedd2a91feeaf98a8ee619add8c99ecdd22c15764e85976239cc66144fece",
+      "raw_sha256": "bbd58725b285b66cfc046223be31e20175e2262edf4f62fd28b470fc3b10395c",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/baseline.save"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/middle.save.gz",
+      "sha256": "6dc8c68d94c9c7a2cc7a97bed151ac50985186f68b9a0035b8db2c015e086f8e",
+      "raw_sha256": "da894900ae35faab0dcc2ea21495474c5e3be21a56e4924cb55998a28c645dcb",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/middle.save"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/resumed.save.gz",
+      "sha256": "e7baedd2a91feeaf98a8ee619add8c99ecdd22c15764e85976239cc66144fece",
+      "raw_sha256": "bbd58725b285b66cfc046223be31e20175e2262edf4f62fd28b470fc3b10395c",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/resumed.save"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/repeated.save.gz",
+      "sha256": "e7baedd2a91feeaf98a8ee619add8c99ecdd22c15764e85976239cc66144fece",
+      "raw_sha256": "bbd58725b285b66cfc046223be31e20175e2262edf4f62fd28b470fc3b10395c",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/repeated.save"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-export-001/export.log.gz",
+      "sha256": "79a1c767dee3823d918e98d8cb62d494ed486c56a29eeb125fe28899d6655dea",
+      "raw_sha256": "e8dcba29b54c37e3bd864a4adc8f313f68e6e37a59525e0957123f212dd4913b",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-export-001/export.log"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-export-001/terminal.json.gz",
+      "sha256": "9dd1a9c444fd1319c3645325fb31a9cdb94de4e885905f093044bc3a91b8e77c",
+      "raw_sha256": "8a6102f75671a691401746e2ee4586f3764bdb5e535c8bb014f3c5b8c3863dd7",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-export-001/terminal.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-export-001/run.json.gz",
+      "sha256": "40ab47bf29c268dc2459eff7d66d009f4fdf3004410df5f0db6ecfaa6165ee65",
+      "raw_sha256": "3781865350510d654d5f766cc7f4f731c99cd1b686183a600f8869b21da99d74",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-export-001/run.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-export-001/freeze.json.gz",
+      "sha256": "74db3453073abe83646b526cc407921293dacaeeafb1a32640e35ae234f0958d",
+      "raw_sha256": "c2641bcf50a13feaf1d3b150d899157e7fb963d9577ac7db1f0f8ef94d3947d4",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-export-001/freeze.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/package/export.json.gz",
+      "sha256": "6f1ef11ebcd94e529f4e64949873aa59289d567389f4ff7ad75b40783642b2d3",
+      "raw_sha256": "043e8b5282c62aa0532a8c6b80a80a3c7b9a96394be621986e7d631f4b0e845e",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/package/export.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/package/project-build.json.gz",
+      "sha256": "aa9535c4e8c8d1a643844ef4516278fceec2c2000b3f78c19bfe487f7518d45b",
+      "raw_sha256": "86fc9fe8a04d8dd2ce9408272b2b42af73bcf1e7fe33237522f47e989fe5f88a",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/package/project-build.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-shipping-001/package/build.log.gz",
+      "sha256": "a3c97d7360b640904e5cb63c98e3f0ab6acf008ef956ec1190a4efcea72c9e4a",
+      "raw_sha256": "69e680d330fa6701a421214d4c02840e45943184f97377f02c23fc5c5edcbb64",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001/package/build.log"
     }
   ],
   "freeze": {
@@ -484,9 +736,34 @@
     "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-002/freeze.json.gz"
   },
   "shipping": {
-    "status": "pending fresh ordinary transport export",
+    "status": "accepted independent final execution audit; main integration pending",
+    "producer_commit": "75503a642c082535376808f5184e87d018041561",
     "path": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001",
-    "handle": 94140
+    "terminal_exit": 0,
+    "runner_terminal_sha256": "8a6102f75671a691401746e2ee4586f3764bdb5e535c8bb014f3c5b8c3863dd7",
+    "result_sha256": "ed331b8acd4a10426ff7354f8fd6bbd61f482cbafa0ef9763a9ccbfd2a7984c9",
+    "player_sha256": "1bd62b6a95a005c9f3678488e6889a403a29f868fb5269558e32eb77d94151b4",
+    "fresh_processes": 4,
+    "ticks": [
+      40,
+      13,
+      27,
+      27
+    ],
+    "exact_concatenated_pcm": true,
+    "exact_final_save": true,
+    "refusals": 10,
+    "retained_shipping_artifacts": 42,
+    "limitations": [
+      "CPU hosted ordinary-load mixed static/streamed audio and UI; fresh owners and neutral input",
+      "Active preedit refuses; pointer capture is discarded",
+      "Physics/static/development-module and device-native audio saves still refuse",
+      "No GPU/window/native-IME or full-save gate claim; PCM and save are not a multi-file transaction"
+    ],
+    "final_review": {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-final-20261012.json",
+      "sha256": "daab6ba36a041d49dad6824b52f924ccc4bb9afeac8dc8be2a6e8398e85104ce"
+    }
   },
   "limits": [
     "No physical-device or phone performance gate",
