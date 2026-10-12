@@ -1,0 +1,10 @@
+{
+  "tested_head": "fff9253fe181f9737c47f85822db43be5a7d660b",
+  "tested_tree": "ce0b11e1047bb9481af89dd218b7709a904ba064",
+  "actual_main": "7aba4587fc89253bdca6f6d6fe8fbdeeb0b27cca",
+  "ancestry_head": "5f80d8171bae3ffef86196a90760d65b0f4b6b65",
+  "ancestry_tree": "ce0b11e1047bb9481af89dd218b7709a904ba064",
+  "source_count": 1533,
+  "source_hashes_unchanged": true,
+  "whole_tree_unchanged": true
+}
