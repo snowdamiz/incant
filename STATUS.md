@@ -32,7 +32,7 @@ export repeats the three source/cache/build-deleted runs and refusal controls.
 The shipping graph excludes Wasmtime, cooker and authoring dependencies. Full
 guest checkpoints remain explicitly Unsupported, including active/paused
 crossfade sessions. Full SDK, routed UI ABI, other shipping platforms, device
-performance and phase gates remain open; this scope is ready for its fast main gate.
+performance and phase gates remain open; this scope merged through its fast main gate in PR #128.
 [Contract and measured evidence](docs/spikes/authored-wasm-export.md).
 Independent review also corrected interrupted cache publication: private staged
 files now publish without clobber, with partial-write/concurrent/corrupt/symlink
@@ -166,16 +166,17 @@ active. Report merged work separately from local checks and unmet exit gates.
 The project is still early relative to the complete Engine 1.0 and Driftwake
 scope; no defensible percentage or completion date follows from the PR count.
 
-## Native Wasm local avoidance — locally verified
+## Native Wasm local avoidance — current-main integration checked
 
 The public Rust SDK now has copied bounded steering requests/results backed by
 native avoidance, with generated Wasmtime/wasm2c bindings and atomic rollback.
-Both real hosts pass the final 331-test conformance suite and Clippy. Independent
+Both real hosts pass the original 331-test suite and the integrated 335-test
+conformance suite, with all-target Clippy. Independent
 review caught an f64-to-f32 admission mismatch; original-value domain checks and
 causal rollback regressions now pass. The strict generated ABI, wasm32 guest
-compile and 228 Python cases (four platform skips) pass. This remains a
-reviewed local candidate awaiting main integration; public shipping steering, remaining navigation bindings and
-reference-device gates are not claimed. [Scope](docs/spikes/native-wasm-steering.md).
+compile and 228 Python cases (four platform skips) pass. The reviewed main128 union also passes wasm32, tooling and shipping dependency
+checks after correcting the audit feature selection. Public shipping steering,
+remaining navigation bindings and reference-device gates are not claimed. [Scope](docs/spikes/native-wasm-steering.md).
 
 ## Native local avoidance — current-main integration checked
 
@@ -185,7 +186,7 @@ and numerical avoidance behavior are preserved. Shared work limits, hostile
 getters, expired callbacks and caught failures retain the whole-update rollback
 contract. The 364 integrated scoped tests include strict authored TypeScript that
 continues moving after its source directory is deleted; Clippy, wasm32 compilation
-and authoring-free dependency checks pass. Wasm steering bindings, automatic
+and authoring-free dependency checks pass. Wasm steering bindings now have the reviewed dual-host path above; automatic
 obstacle gathering, debug draw, the Core Sample and real-device performance
 evidence remain open. [Scope and evidence](docs/spikes/native-steering.md).
 

@@ -1,0 +1,209 @@
+{
+  "recorded_at": "2026-10-12T04:46:48.114341+00:00",
+  "base_main": "62bf90d9fc5c5a9769b457312237e7c2da024b0c",
+  "accepted_source": "df7b6ed359bd37c92a35f82be6d26e00726ea05d",
+  "tested_integration": "840acfce4a496f3f20e561c29f40b9abb894f977",
+  "source_hashes": {
+    "Cargo.lock": "d9f55a62688072cfe8c44d7a959cdfaa0fc367743255c97225470d6c79b16188",
+    "crates/incant_wasm_abi/src/lib.rs": "1e9bc891100c15ee20f8b712986e3cfd4020a0eaea9b03705a500fd48f9b6fe3",
+    "crates/incant_wasm_abi/src/steering.rs": "06e6b3668577fbc26ceb39957e9f2ed448d7214e62737028c52c108646b27c41",
+    "crates/incant_wasm_abi/tests/steering.rs": "23e088df1192ada84ad32a0d4aa04f48598ffc2961756e5b26a02a87d21fe325",
+    "crates/incant_wasm_dev/src/generated.rs": "590813f5c5bac547181b817d544ce44062045c3f9a6e38697afe6c3b3836f5e1",
+    "crates/incant_wasm_dev/tests/steering_parity.rs": "76fe730e353ef6d751576dc91c87d66a4816bcf295f92d2b388ad247f14de315",
+    "crates/incant_wasm_runtime/Cargo.toml": "66fa018fd176c4b33e0fe7ff2302ad682e204bf86d4cd3c2760b617dcd20c6f8",
+    "crates/incant_wasm_runtime/c/generated.h": "5e34b5b3e70c480c54bbf93df09c3fb1ffe5969098e29c78d2bd0b6c0be258ff",
+    "crates/incant_wasm_runtime/c/generated.inc": "5f2d175ec115baf0022e64cf10748250391653b41f0a9fe090acec107ccb0a9b",
+    "crates/incant_wasm_runtime/fixtures/steering-start.wat": "394a226026e896f625fa17655fb3ec8d7396d08f28a1783b506b5d17e9d5479e",
+    "crates/incant_wasm_runtime/fixtures/steering.wat": "15966a71881fe51d198363634d050a1a8c37712949855d3da0dde6d0f9690856",
+    "crates/incant_wasm_runtime/src/capability.rs": "3631adb85e4da900dad45f20782a627ffced725f80222f81e0705b6d880bccfc",
+    "crates/incant_wasm_runtime/src/generated.rs": "9f291c1770d60aac8e430cc7cb491398d919fb54b28cd83d0864a8d1efbf1127",
+    "crates/incant_wasm_runtime/src/input_tags.rs": "014bff2b987a53ef012ddf2e87ff013d58dba65e2a35f4c279f280158a503515",
+    "crates/incant_wasm_runtime/src/lib.rs": "2e9fa08aee265c0bce26073a765c3ef6ee133b7dbb07d9b7bcf708ff08b68fb0",
+    "crates/incant_wasm_runtime/src/steering.rs": "11fdde85f41c3e8c7f71fe5fe69154dde1665a20999a8ed9535e1395129ef045",
+    "crates/incant_wasm_runtime/tests/steering.rs": "ca0295bf8808eaf23c8a04d97415431f47877f8ccc686565dedda7adba8aefaf",
+    "sdk/abi/native-v1.json": "c86be2c58b04ec5861dbe3746f4ee39d2839587fca72fd41eebe1268382caafd",
+    "sdk/rust/README.md": "115db269b44b80a48e91f9e538689bac195e12570dc833f8109b01f53e6506ff",
+    "sdk/rust/fixtures/steering_failure.rs": "a9a8998759077f5c3d4eb9689258d6cc96352e225a8a4c78da1862a9771f6e71",
+    "sdk/rust/samples/steering.rs": "97cdb55ee64da2fd8973c1bd5e0f6a815734088620529b34027c1a6c21499081",
+    "sdk/rust/src/lib.rs": "9a3e2be6d0cc60720cca742e7504a053477e7b72ce71913339b51b3f6cfcf60f",
+    "sdk/rust/src/raw.rs": "837619ece1c19e9bf5db537cea4cacfb672fdfab440e8927528d920594278f0d",
+    "sdk/rust/src/steering.rs": "6fa5caf31faa1291db6bb1048bdc689e01d681b36995ee4390c41bfc87bb3ef8",
+    "sdk/rust/src/tick.rs": "b18e2128714b11e087f6241023491ed89c0848db57951840b3b434909c55faee",
+    "tools/generate_wasm_sdk.py": "6ecae365e47c6b9ac55ea1fcf554d22b80901024b7e2ff51883cb60f727cc3cd",
+    "tools/probes/development-wasm.py": "12b990fd6cfe01adff0a556612f31f9954930bd6a2385e76a1b1132333b76098",
+    "tools/probes/shipping-wasm2c.py": "471d698761d5466139eab773b0dade249f28b5bb6a09ff3703b52077f9ca7eaf",
+    "tools/tests/test_wasm_sdk.py": "a03d7ec71c321fa522ce4b84a0816d416945087d342a63c6aa7273c5cbb703bf",
+    "tools/wasm_abi.py": "b1d70a95e95f3e4bbff974dd08aef55ac1343803cf0e8a01e6f81895b35cc1b9"
+  },
+  "tests": {
+    "passed": 335,
+    "groups": 57,
+    "failed": 0,
+    "ignored": 0,
+    "scope": "Actual Wasmtime and compiled wasm2c suite, not a shipping steering export"
+  },
+  "checks": [
+    {
+      "name": "actual-hosts",
+      "command": [
+        "python3",
+        "/tmp/incant-steering-child-retry.py",
+        "/tmp/incant-wasm-steering-main128-checks-003/conformance",
+        "--conformance-only",
+        "--profile",
+        "ci"
+      ],
+      "exit": 0,
+      "seconds": 46.41149224998662,
+      "log": "/tmp/incant-wasm-steering-main128-checks-003/actual-hosts.log",
+      "sha256": "3ad71691bd79d43d58279dbd26ce0320d64c8873a220c61fb214d84c968d3653"
+    },
+    {
+      "name": "wasm32",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "-j2",
+        "-p",
+        "incant_wasm_abi",
+        "-p",
+        "incant-module",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "exit": 0,
+      "seconds": 0.38654908299213275,
+      "log": "/tmp/incant-wasm-steering-main128-checks-003/wasm32.log",
+      "sha256": "52dff9035b21e3ce7c3aaf68d32578e45b7d6ea1d79f728e1f19c7290f805ff8"
+    },
+    {
+      "name": "graph",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_wasm_runtime",
+        "incant_game_runtime"
+      ],
+      "exit": 0,
+      "seconds": 0.33193283301079646,
+      "log": "/tmp/incant-wasm-steering-main128-checks-003/graph.log",
+      "sha256": "044085acb36ceb2b9c7b69e847b16af7b62788e8a891a9f11414e50f25c0a3d5"
+    },
+    {
+      "name": "tooling",
+      "command": [
+        "npm",
+        "run",
+        "test:tools"
+      ],
+      "exit": 0,
+      "seconds": 25.568296249984996,
+      "log": "/tmp/incant-wasm-steering-main128-checks-003/tooling.log",
+      "sha256": "7b11f3b6a3801b73b2f6bf93a8697d51aa34277d6f2ce06b03ccaa136772fa76"
+    },
+    {
+      "name": "wasm-sdk",
+      "command": [
+        "python3",
+        "tools/generate_wasm_sdk.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.14731116700568236,
+      "log": "/tmp/incant-wasm-steering-main128-checks-003/wasm-sdk.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.9856591249990743,
+      "log": "/tmp/incant-wasm-steering-main128-checks-003/fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.0374354170053266,
+      "log": "/tmp/incant-wasm-steering-main128-checks-003/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "retained_logs": {
+    "docs/spikes/evidence/wasm-steering-main128/actual-hosts.log.gz": {
+      "sha256": "0509d734c0d6e1b55f85f08f508af020dc8ef9416e49f2c7a81a252b94e4a0e3",
+      "uncompressed_sha256": "3ad71691bd79d43d58279dbd26ce0320d64c8873a220c61fb214d84c968d3653"
+    },
+    "docs/spikes/evidence/wasm-steering-main128/conformance-conformance-0.log.gz": {
+      "sha256": "09a4107d05fbea87b4059bd7aa4428824e8a4c523627c51b9cff32af9265bfbf",
+      "uncompressed_sha256": "3b6158dc60947576396bc24b6451bea0c2f58e9ef9268724cbd320018238cddb"
+    },
+    "docs/spikes/evidence/wasm-steering-main128/conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/wasm-steering-main128/fmt.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/wasm-steering-main128/graph.log.gz": {
+      "sha256": "3fc8ca53ba290cae1ab4b16863d603d974f89753d5b640e6a8f83665b1ce3f3f",
+      "uncompressed_sha256": "044085acb36ceb2b9c7b69e847b16af7b62788e8a891a9f11414e50f25c0a3d5"
+    },
+    "docs/spikes/evidence/wasm-steering-main128/tooling.log.gz": {
+      "sha256": "9c5a3dd07c5ea9a7608752e5a6dec403282a004ba8182784911a659ad4ff0b29",
+      "uncompressed_sha256": "7b11f3b6a3801b73b2f6bf93a8697d51aa34277d6f2ce06b03ccaa136772fa76"
+    },
+    "docs/spikes/evidence/wasm-steering-main128/wasm-sdk.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/wasm-steering-main128/wasm32.log.gz": {
+      "sha256": "284c5fa0924c010d64a69bd8b492abf7c24e6a60f21e00d2203c9cdc1fa26b4c",
+      "uncompressed_sha256": "52dff9035b21e3ce7c3aaf68d32578e45b7d6ea1d79f728e1f19c7290f805ff8"
+    },
+    "docs/spikes/evidence/wasm-steering-main128/accepted-suite-conformance-0.log.gz": {
+      "sha256": "161ed7b0fc4664b472d7839f8f7247b7fdf4064bdc526a8c5c77ead5791bc552",
+      "uncompressed_sha256": "774352767a5afe4e5e5cd7c6506ea8b8d364d242abdc3be3041635f94e6acd76"
+    },
+    "docs/spikes/evidence/wasm-steering-main128/accepted-suite-conformance-1.log.gz": {
+      "sha256": "8b732a879cb6d95bd08d4b50bb28a3f8eebf15aac46b0e508f556f9d1f8b3894",
+      "uncompressed_sha256": "d51bf2e195634e84af9de4bfa7d85bc09470e2ae54c53dc4b8ba0eff21a6dd27"
+    }
+  },
+  "retained_receipts": {
+    "docs/spikes/evidence/wasm-steering-main128/results.json": "a67338dc97725ea146657f8bde69775a55f8ebf756d67468eeec023ed31e7c85",
+    "docs/spikes/evidence/wasm-steering-main128/prepared-manifest.json": "b9b25b433bfcaf29d374a73072cc55f6c61da6f1e7a57171ac59a521a91cc062",
+    "docs/spikes/evidence/wasm-steering-main128/rust-sdk.json": "27350c75650bdc662a22bbb5670dd6ba2d95ea4bb62ccf76117dcbe4988a15e9",
+    "docs/spikes/evidence/wasm-steering-main128/result.json": "3b6158dc60947576396bc24b6451bea0c2f58e9ef9268724cbd320018238cddb",
+    "docs/spikes/evidence/wasm-steering-main128/incant-wasm-steering-prepared-artifacts-main128.json": "fb6ddc37ec6ff4ee33fcb481ab9aeb06831c8304284c33b763d4855e74de6265",
+    "docs/spikes/evidence/wasm-steering-main128/incant-steering-child-retry-verification.json": "b24c69f30943360cfb361d01700e34c758563f9419b9caa8f888cc0427b041d3",
+    "docs/spikes/evidence/wasm-steering-main128/incant-steering-child-retry-recipe.json": "69bc99b95f8e797b0561881ecdb902c635ceddd322973d3da12b20db8c562004",
+    "docs/spikes/evidence/wasm-steering-main128/incant-steering-child-retry.py": "3a7536633b97ee00264fb005283e3795efadac27fcdf878540c6d8a65ee15d34"
+  },
+  "integration": "Automatic main128 merge; original feature source unchanged except current accepted Cargo.lock. Independently reviewed metadata selection fix preserves shipping roots/denylist and actual dual-host commands.",
+  "prior_failures": [
+    "First integrated probe stopped at its dependency audit before tests; development feature selection exposed an optional Wasmtime compiler edge.",
+    "Second run passed335 actual tests/Clippy then its development child hit the analogous audit selection; only that child was repeated after repair.",
+    "Regenerated full-bundle comparison differed in111 unused C/Wasm files across37 modules; no whole-bundle byte identity claimed. Selected bulk.wasm bytes are identical, verified against original manifest."
+  ],
+  "verification_split": "Actual dual-host335tests/Clippy on ae8646; metadata-only child repair840acf runs3 fresh processes with byte-identical selected bulk module and unchanged example/toolchain/source/feature command.",
+  "limitations": [
+    "No new shipping steering export or phone/performance evidence",
+    "No automatic obstacle gathering, pathfinding or full navigation SDK",
+    "Full release matrix remains a separate frozen checkpoint"
+  ]
+}
