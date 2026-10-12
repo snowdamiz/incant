@@ -127,7 +127,7 @@ source audit identifies the private graph families a checked format must cover
 and the storage/load limits of deterministic replay. Independent source/evidence
 review accepted this bounded diagnostic; full physics saves remain open.
 [Diagnostic, source barrier and next options](docs/spikes/native-physics-snapshot-boundary.md).
-[Current-main kernel and diagnostic checks](docs/spikes/physics-boundaries-main169.md) pass; final integration review and fast CI remain pending.
+[Current-main kernel and diagnostic checks](docs/spikes/physics-boundaries-main169.md) pass; independent final integration review is accepted and fast CI remains required.
 
 ## Native audio transport — merged main163
 
