@@ -76,7 +76,7 @@ where
                     prepared.clips,
                     audio,
                     NativeRenderSettings {
-                        ui: None,
+                        ui: settings.ui,
                         text: settings.text,
                         model_cache: settings.model_cache,
                         texture_cache: settings.texture_cache,

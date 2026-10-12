@@ -1,0 +1,83 @@
+{
+  "reviewer": "astra /root/runtime_review",
+  "status": "accepted",
+  "findings": [],
+  "review_scope": "Independent read-only integration source and retained actual execution audit; no repeated build, runtime execution, branch or target mutation.",
+  "commit": "3297a57062b221273a5799ab2066d1d0de31b4bf",
+  "tested_source": "5da9fb4a9430a65a9b58f5624ad3f903b43989eb",
+  "manifest": "/Users/andreyyurlov/.codex/worktrees/native-fbx-import/incant/docs/spikes/evidence/headless-ui-mobile-integration.json",
+  "manifest_sha256": "2e0574f4968cb51097190d93adf960f0bdc615ae14bc41e83fcb3d71b512a7cc",
+  "verified": {
+    "frozen_source_files": 1875,
+    "accepted_source_rows": 34,
+    "accepted_exact_rows": 33,
+    "lock_exception": "963 complete package records compared against accepted audio union: only incant_headless adds incant_types and incant_render_game adds ulid. No version, checksum or third-party resolution change.",
+    "retained_integration_artifacts": 222,
+    "all_integration_originals_match": true,
+    "original_caller_artifacts": 176,
+    "successful_check_commands": 19,
+    "test_counts": {
+      "runtime": {
+        "passed": 74,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 21
+      },
+      "process": {
+        "passed": 16,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 3
+      },
+      "player": {
+        "passed": 13,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 5
+      },
+      "window-player": {
+        "passed": 60,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 5
+      }
+    },
+    "count_qualification": "Player13 and native-window/static60 overlap; these are command counts, not163 distinct tests. Runtime74 and headless process16 are separate suites.",
+    "macos_caller_commands": 39,
+    "macos_caller_controls": 32,
+    "archive": {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/headless-ui-mobile-audio-union/libincant_game_player.a",
+      "sha256": "0e758d6e839a36e8c4ab6cc0b5ccbb7cca74874a4ce0b0935274e82d16a8c23d",
+      "bytes": 86391344
+    },
+    "caller_result_sha256": "d8a6178930180093f3e7548a3affdb9cd2300ae33380c7ae8e48ce1603d4bd14",
+    "archive_receipt_sha256": "dc90f5f2820cbfc86ed6cf3c962f59556dff281e970357bd0515698e07b2c354",
+    "compiled_inputs_identical_tested_to_review_head": true
+  },
+  "source_review": [
+    "Accepted headless UI source identities and reusable player/mobile source identities match producer Git blobs; current tested-to-review source diff empty.",
+    "Recorded UI resolver validates packet counts, text bytes, tokens and viewport before presentation; text requires previously established focus; pointer tokens resolve after resize. Resize remains a separate presentation transaction, not a broad rollback promise.",
+    "PlaySession preserves explicitly configured UI settings; CLI, run and incremental RPC use the same composed tick resolver and bounded CPU retained host. No-UI defaults and explicit camera requirement remain.",
+    "CLI extraction preserves ordinary player control flow, output behavior and module/checkpoint dispatch. Library callback replaces completed stdout reports without a parallel simulation path.",
+    "Mobile wrapper forwards bounded absolute paths, ticks and optional viewport to ordinary --package execution; request parsing precedes output reservation; C pointer/length safety contract is explicit. Create-only result publication and status0/1/2/3 match actual callers.",
+    "Reviewed actual CLI/RPC process tests for preedit/cancel/commit/resize, filtered Enter, terminal trap/no prefix, prior candidate retention and unchanged authored files.",
+    "Retained original missing trusted Wasm bundle failure is correctly qualified and corrected static-feature run passes; no failure erased."
+  ],
+  "execution_review": [
+    "Rehashed all command stdout/stderr, caller/archive/header/fixture-generator binaries, fixture bytes and proof source hashes. Actual C and Swift linked the frozen same static archive.",
+    "Matched all 32 expected statuses to unique actual argv and abi_status output. Null/oversized/malformed, unknown fields, invalid paths/ticks/viewports, no-clobber and player-failure controls are separately retained.",
+    "For both languages, held/repeated runs end at x=0.1 and velocity3; release at tick2 ends x=0.05 and velocity0 at tick3; observation-failure reports retain actual x=0.1 with failed assertion. All eight completed game reports have 2400 frames and exact 19200-byte silent PCM; C/Swift reports and repeated runs equal.",
+    "Guest failure, missing input and corrupt package match exact diagnostics, game:null and no PCM. No-clobber returns3 while accepted output remains intact; completed observation-failure status1 deliberately retains report and PCM."
+  ],
+  "limits": [
+    "macOS CPU default trusted cooked fixture only; not authored-game mobile export",
+    "iOS/Android target cook refusal remains unchanged; independent later compatibility work is outside this slice",
+    "Native-window features are compile/unit-test coverage, no live window/GPU/IME/appearance claim",
+    "No reference-phone, physical audio, shipping size/performance or phase approval"
+  ],
+  "unchanged_contracts": [
+    "PhysicsUnsupported remains.",
+    "No cross-target cook admission change or authored-game mobile export is established by this packet.",
+    "No native-window/GPU/IME/device execution, shipping size/performance or phase-gate claim."
+  ]
+}

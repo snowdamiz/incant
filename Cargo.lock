@@ -4130,6 +4130,7 @@ dependencies = [
  "incant_render_game",
  "incant_runtime",
  "incant_script",
+ "incant_types",
  "rpassword",
  "schemars 1.2.2",
  "serde",
@@ -4389,6 +4390,7 @@ dependencies = [
  "serde_json",
  "tempfile",
  "thiserror 2.0.21",
+ "ulid",
 ]
 
 [[package]]

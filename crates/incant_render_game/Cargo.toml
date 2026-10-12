@@ -13,6 +13,7 @@ incant_render_native = { path = "../incant_render_native" }
 incant_render_data.workspace = true
 incant_runtime.workspace = true
 thiserror.workspace = true
+ulid.workspace = true
 
 [dev-dependencies]
 incant_audio_runtime = { workspace = true, features = ["scene"] }

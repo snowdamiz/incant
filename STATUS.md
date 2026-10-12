@@ -16,13 +16,41 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Rust/Wasm audio transport — current-main execution verified
+## Headless UI and reusable player — current integration verified
+
+The shared recorded UI route and optional mobile C ABI pass all 19 integrated
+checks on the accepted audio ABI union. Real C/Swift callers of the new immutable
+macOS archive pass 32 controls/39 commands, including native held/released movement,
+exact failures and no-clobber output behavior. Producer source bytes and dependency
+versions are unchanged; independent final integration review is accepted and
+exact-head fast CI remains required. iOS/Android compatibility stays separate; no GPU/window/device gate.
+[Integrated commands and actual callers](docs/spikes/headless-ui-mobile-integration.md).
+
+## Mobile runtime callers — macOS C/Swift CPU proof accepted
+
+Actual callers of the frozen native runtime archive pass 32 controls / 39
+commands with typed cooked input-driven movement, precise failure reports,
+repeat PCM and create-only outputs. Fixture Clippy and authoring-free graph
+checks pass; source/execution review is accepted. iOS target compatibility and
+simulator/device archives, Android NDK/CI, and physical-phone/render/device gates
+remain pending; the old document smoke is not reused as game execution evidence.
+[Source and measured scope](docs/spikes/mobile-runtime-callers.md).
+
+## Shared cooked-player library
+
+The ordinary packaged player now has a reusable Rust entry and optional bounded C
+ABI. Local macOS CPU/CLI tests and native-window/static-module compatibility pass;
+actual macOS C/Swift caller verification passes as recorded above. The first iOS simulator archive attempt
+hit the existing cross-target script-cook refusal. That guard remains intact while
+a separate compatibility route is developed; no mobile runtime/device/performance
+gate passes from this work. [Contract and evidence](docs/spikes/mobile-runtime-library.md).
+## Rust/Wasm audio transport — merged main168
 
 The accepted ops59–61 pass 483 actual-host cases and all 12 integration checks.
 A fresh ordinary exported player runs three source/map/build-deleted 96-tick cases
 with 17,856 declaration scalars and 248 observations each, exact native-oracle PCM,
 and thirteen precise no-output refusals. All accepted source inputs remain exact;
-independent integration review is accepted and exact-head fast CI remains required. Desired state
+independent integration review and exact-head fast CI passed before PR168 merged. Desired state
 snapshots do not expose mixer cursors; whole guest saves and device gates stay open.
 [Current integration evidence](docs/spikes/native-wasm-audio-main166.md).
 
@@ -673,12 +701,12 @@ and complete Game UI/IME gates remain open.
 
 ## Current milestone
 
-Main #166 includes compound native animation and Wasm snapshots, authored two-bone
+Main #168 includes compound native animation and Wasm snapshots, authored two-bone
 IK, complete native/TypeScript/Wasm root motion, native audio transport and HUD,
 Wasm HUD controls, offline audio/UI checkpoints, public physics queries, and the
-Core/Planar gameplay foundations. Wasm audio transport is under current-main
+Core/Planar gameplay foundations. Wasm audio transport is merged after current-main
 shipping validation; reviewed headless UI and the reusable player/mobile library
-remain in the local integration queue. Phase 1 and the finished game remain incomplete.
+with actual macOS C/Swift callers are ready for fast publication. Phase 1 and the finished game remain incomplete.
 
 Checkpoint14 promoted selected main160 `d1ef35ee` after all 23 exact-candidate
 required checks and eight push workflows succeeded. Release `2444d81f` has tested
@@ -1602,6 +1630,7 @@ tests remain ignored. [Receipt](docs/spikes/evidence/runtime-pose-blending-main1
 
 - Native Rust/Wasm HUD: additive ops56–58 preserve ops0–55/input-v1. 365 ordinary tests, three actual Wasmtime/wasm2c tests, all-target Clippy and scoped generation/wasm/runtime guards pass. Public source/cache/build/map-deleted package passes three fresh shaped-HUD/movement/PCM runs and six exact refusals; source and final evidence reviews accepted, publisher intake pending. Module checkpoints, headless native-play UI routing and native/GPU/device gates remain open. See `docs/spikes/native-wasm-hud.md`.
 
+- Native headless UI routing: explicit bounded viewport now reaches the retained host; CLI and native Play RPC replay the existing UI/resize format through the ordinary player's shared resolver. All 100 affected tests, scoped Clippy, input wasm32 and runtime/generation checks pass, including actual CLI/RPC parity and failure preservation. Independent source and final execution reviews accepted; publisher intake pending. No native-window/GPU/IME/device claim. See `docs/spikes/native-headless-ui.md`.
 - **Native Rust/Wasm audio transport (private execution checkpoint).** Additive
   ops59–61 preserve all previous imports and expose copied desired declarations,
   exact u64 transport epochs and atomic ordered controls. Independent source
