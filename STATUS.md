@@ -863,7 +863,9 @@ mode-aware developer/desktop export tools are merged; automatic editor worker
 selection and actual physics saves remain separate. Authored iOS archives are
 merged with actual simulator proof and qualified device-link evidence. The retained
 CPU worker and managed owner are merged with current-main proof and final review;
-whole-session restart and authored Android work remain local integration lanes. Phase 1 and the finished game
+whole-session restart is draining its frozen shipping proof for the requested pause;
+authored Android is merged privately onto main179 with exact producer source,
+paused before integration validation. Phase 1 and the finished game
 remain incomplete.
 
 Checkpoint14 promoted selected main160 `d1ef35ee` after all 23 exact-candidate
