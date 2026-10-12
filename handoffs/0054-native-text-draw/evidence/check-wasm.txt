@@ -1,0 +1,4 @@
+$ ./tools/cargo check --locked --offline -j2 -p incant_render --lib --target wasm32-unknown-unknown
+source 264fd08867c6d0bdf5fe236f37500b5e90b9f00f tree f0a72cd612523abd3702eab5014d79cd7addfa5c
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.18s
+exit 0

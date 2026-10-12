@@ -1,5 +1,6 @@
 //! Retained CPU text input. Layout coordinates are logical pixels, with no
-//! implied widget/viewport/appearance policy. GPU text drawing is not implemented.
+//! implied widget/viewport/appearance policy. The renderer's initial draw route
+//! (incant_render `text` module) defines its own explicit unit/placement contract.
 use glam::DMat4;
 use incant_text::{GlyphAtlas, GlyphHandle, ShapedText};
 use incant_types::StableId;
