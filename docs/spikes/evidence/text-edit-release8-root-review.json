@@ -1,0 +1,15 @@
+{
+  "reviewed_at": "2026-10-12T03:49:44.875199+00:00",
+  "reviewer": "astra root",
+  "scope": "Bounded releasecheckpoint8/current text-edit docs, not a new source or appearance review",
+  "patch_sha256": "624a82d2cf303039219680fc7fd99f9d4ee65b558e21603c8c27791e73dcae47",
+  "evidence_path": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/docs/spikes/evidence/release-checkpoint-8.json",
+  "evidence_sha256": "4f7ed83364d860667822d98f324eba92801eff3c1cdba5b956a8dcb25399fbdb",
+  "required_contexts_verified": 23,
+  "exact_candidate_runs": 8,
+  "receipt_hashes_verified": 6,
+  "tree_verified": "8602e6a8356a57156ef448bdb1fa2e7ff6f6c0ff",
+  "release_merge": "b614679a1d48aba6e4ff5387974351602de5c026",
+  "finding_count": 0,
+  "conclusion": "Accepted: tested release baseline, current-main scope and prior failures accurately separated; job durations explicitly single-run, not speedup claims."
+}

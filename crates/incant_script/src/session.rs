@@ -9,6 +9,8 @@ use thiserror::Error;
 
 #[derive(Debug, Error)]
 pub enum SessionError {
+    #[error("this program has no native UI snapshot capability")]
+    UiUnsupported,
     #[error(transparent)]
     Input(#[from] InputError),
     #[error(transparent)]
@@ -18,6 +20,9 @@ pub enum SessionError {
     #[cfg(feature = "static-module")]
     #[error(transparent)]
     Module(#[from] incant_wasm_runtime::StaticError),
+    #[cfg(feature = "wasmtime-host")]
+    #[error(transparent)]
+    DevelopmentModule(#[from] incant_wasm_dev::ModuleError),
     #[error("native session failed; recreate it before continuing or accessing saveable state")]
     Failed,
 }
@@ -118,9 +123,23 @@ impl NativeSession {
     }
 
     pub fn tick(&mut self, events: &[InputEvent]) -> Result<(), SessionError> {
+        self.tick_with_ui(events, incant_input::UiSnapshot::default())
+    }
+
+    /// Trusted composed UI host input. The host stages widget state before this
+    /// call and publishes it only with the successfully accepted native tick.
+    pub fn tick_with_ui(
+        &mut self,
+        events: &[InputEvent],
+        ui: incant_input::UiSnapshot,
+    ) -> Result<(), SessionError> {
         self.ready()?;
+        if !self.host.supports_ui() && !ui.is_empty() {
+            return Err(SessionError::UiUnsupported);
+        }
         let dt = 1. / f64::from(self.world.tick_rate());
-        self.input.advance_validated(events, dt, &self.bindings)?;
+        self.input
+            .advance_validated_with_ui(events, dt, &self.bindings, ui)?;
         // Any failure after packet acceptance is terminal. There is deliberately
         // no second whole-world/VM rollback or partially resumable session.
         self.failed = true;

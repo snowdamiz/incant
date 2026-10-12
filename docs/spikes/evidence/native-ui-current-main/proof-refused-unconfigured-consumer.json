@@ -1,0 +1,4 @@
+{
+  "returncode": 1,
+  "stderr": "Error: \"UI recording requires explicit CPU --ui-viewport settings\"\n"
+}

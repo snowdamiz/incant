@@ -7,6 +7,11 @@ use incant_types::{Animation, Transform};
 use sha2::{Digest, Sha256};
 use std::{collections::BTreeMap, sync::Arc, time::Duration};
 
+#[path = "animations/crossfade.rs"]
+mod crossfade;
+#[path = "animations/graph.rs"]
+mod graph;
+
 const ONE: &str = "00000000000000000000000001";
 fn id(n: u128) -> StableId {
     StableId(n.to_be_bytes())
@@ -35,6 +40,7 @@ fn plain_world() -> NativeWorld {
 }
 fn scene(count: usize) -> CookedScene {
     let definition = Arc::new(NativeAnimation {
+        graph: None,
         mesh_fingerprint: [4; 32],
         clip_durations: Arc::from([2., 4.]),
         initial: Animation {

@@ -5,10 +5,11 @@ mod gamepad;
 mod input;
 mod probe;
 mod surface;
+mod ui_input;
 use crate::{bounded, embedded, session, startup};
 use incant_audio_runtime::{AudioManagerSettings, DeviceBackend};
 use incant_game_runtime::HostedGameSession;
-use incant_render_game::{NativeRenderHost, NativeRenderSettings};
+use incant_render_game::{NativeRenderHost, NativeRenderSettings, RenderInputConsumer, UiSettings};
 use incant_render_gpu_host::{GpuRenderConsumer, GpuRenderSettings};
 use incant_runtime::{CookedScene, StableId};
 use std::{
@@ -50,6 +51,10 @@ pub enum Error {
     InputScale,
     #[error("native input event capacity exceeded")]
     InputCapacity,
+    #[error("native UI receipt count or text byte capacity exceeded")]
+    UiCapacity,
+    #[error("native window rendering has no screen-space UI consumer")]
+    UiUnsupported,
 }
 struct Options {
     scene: String,
@@ -62,34 +67,49 @@ struct Options {
 }
 impl Options {
     fn parse(args: &[String]) -> session::Result<Self> {
+        const USAGE: &str = "expected --window SCENE AUDIO_CACHE CLIPS ACTIONS MODEL_CACHE TEXTURE_CACHE CAMERA_HEX [--font-cache FONT_CACHE] [--stop-after TICKS]";
         let probe = args.last().is_some_and(|arg| arg == "--lifecycle-probe");
         let args = if probe { &args[..args.len() - 1] } else { args };
-        if args.len() != 7 && !(args.len() == 9 && args[7] == "--stop-after") {
-            return Err("expected --window SCENE AUDIO_CACHE CLIPS ACTIONS MODEL_CACHE TEXTURE_CACHE CAMERA_HEX [--stop-after TICKS]".into());
+        if args.len() < 7 {
+            return Err(USAGE.into());
         }
-        let text = &args[6];
-        if text.len() != 32 || !text.bytes().all(|b| b.is_ascii_hexdigit()) {
+        let (args, mut rest) = args.split_at(7);
+        // Explicit checked font catalog for the composed text binding; never
+        // inferred from another cache or the system.
+        let mut text = None;
+        if let [flag, path, tail @ ..] = rest
+            && flag == "--font-cache"
+        {
+            text = Some(incant_render_game::TextSettings::new(path.into()));
+            rest = tail;
+        }
+        let stop_after = match rest {
+            [] => None,
+            [flag, n] if flag == "--stop-after" => {
+                let n = n.parse()?;
+                if !(1..=36000).contains(&n) {
+                    return Err("window tick bound1..36000".into());
+                }
+                Some(n)
+            }
+            _ => return Err(USAGE.into()),
+        };
+        let hex = &args[6];
+        if hex.len() != 32 || !hex.bytes().all(|b| b.is_ascii_hexdigit()) {
             return Err("CAMERA_HEX must contain exactly32 hexadecimal digits".into());
         }
         let mut id = [0; 16];
         for (i, v) in id.iter_mut().enumerate() {
-            *v = u8::from_str_radix(&text[i * 2..i * 2 + 2], 16)?;
+            *v = u8::from_str_radix(&hex[i * 2..i * 2 + 2], 16)?;
         }
-        let stop_after = if args.len() == 9 {
-            let n = args[8].parse()?;
-            if !(1..=36000).contains(&n) {
-                return Err("window tick bound1..36000".into());
-            }
-            Some(n)
-        } else {
-            None
-        };
         Ok(Self {
             scene: args[0].clone(),
             cache: args[1].clone(),
             clips: args[2].clone(),
             actions: args[3].clone(),
             render: NativeRenderSettings {
+                ui: None,
+                text,
                 model_cache: args[4].clone().into(),
                 texture_cache: args[5].clone().into(),
                 camera: StableId(id),
@@ -103,6 +123,12 @@ impl Options {
 pub fn run(args: &[String]) -> session::Result<()> {
     let options = Options::parse(args)?;
     let scene = CookedScene::from_bytes(&bounded(&options.scene, 128 * 1024 * 1024)?)?;
+    let has_ui = scene.has_ui();
+    // Refuse before opening a window, audio backend or GPU. The rendering lane
+    // opts in only when its real canonical screen-space consumer is implemented.
+    if has_ui && !GpuRenderConsumer::<SurfaceTargets>::SUPPORTS_UI {
+        return Err(Error::UiUnsupported.into());
+    }
     let rate = scene.tick_rate();
     let actions = serde_json::from_slice(&bounded(&options.actions, 256 * 1024)?)?;
     input::validate_actions(&actions)?;
@@ -118,6 +144,7 @@ pub fn run(args: &[String]) -> session::Result<()> {
             .with_maximizable(false)
             .build(&event_loop)?,
     );
+    let ui_settings = has_ui.then(|| UiSettings::new(logical_viewport(&window)));
     let mut gamepads = gamepad::Gamepads::new()?;
     let (mut surface, renderer, targets) = SurfaceState::new(Arc::clone(&window))?;
     let mut game = Game::new(
@@ -127,6 +154,8 @@ pub fn run(args: &[String]) -> session::Result<()> {
         clips,
         AudioManagerSettings::default(),
         NativeRenderSettings {
+            ui: ui_settings,
+            text: options.render.text,
             model_cache: options.render.model_cache,
             texture_cache: options.render.texture_cache,
             camera: options.render.camera,
@@ -145,6 +174,9 @@ pub fn run(args: &[String]) -> session::Result<()> {
     let mut platform_suspended = false;
     let mut input = input::PendingInput::new();
     input.reset_focus(focused);
+    let mut ui_input = ui_input::UiInput::new();
+    ui_input.synchronize(game.host()?.ui(), &mut input)?;
+    let mut ui_resize = false;
     let mut clock = clock::Clock::new(rate, Instant::now());
     let mut retry = Instant::now();
     let mut redraw_pending = true;
@@ -166,6 +198,10 @@ pub fn run(args: &[String]) -> session::Result<()> {
                         exit = true;
                     }
                     WindowEvent::Resized(_) | WindowEvent::ScaleFactorChanged { .. } => {
+                        if has_ui {
+                            ui_input.layout_pending(game.host()?.ui(), &mut input)?;
+                            ui_resize = true;
+                        }
                         surface.invalidate();
                         redraw_pending = true;
                     }
@@ -177,10 +213,16 @@ pub fn run(args: &[String]) -> session::Result<()> {
                         }
                         focused = value;
                         input.reset_focus(value);
+                        ui_input.reset_focus();
                         gamepads.discard_pending();
                     }
                     WindowEvent::Suspended => {
                         platform_suspended = true;
+                        if has_ui {
+                            input.reset_focus(false);
+                            ui_input.reset_focus();
+                            gamepads.discard_pending();
+                        }
                         surface.invalidate();
                     }
                     WindowEvent::Resumed => {
@@ -188,9 +230,18 @@ pub fn run(args: &[String]) -> session::Result<()> {
                         surface.invalidate();
                         redraw_pending = true;
                     }
-                    ref event if focused && !suspended => {
+                    ref event if ui_input.accepts_delivery(focused, suspended) => {
                         // InputEvent uses logical pixels; query this window's current scale per event.
-                        input.window(event, window.scale_factor())?;
+                        if has_ui {
+                            ui_input.window(
+                                game.host()?.ui(),
+                                &mut input,
+                                event,
+                                window.scale_factor(),
+                            )?;
+                        } else {
+                            input.window(event, window.scale_factor())?;
+                        }
                     }
                     _ => {}
                 },
@@ -215,14 +266,53 @@ pub fn run(args: &[String]) -> session::Result<()> {
                         && !window.is_minimized()
                         && surface.has_supported_size();
                     let active = focused && presentable;
-                    // Drain even while paused, retaining only connection state.
-                    // Resume needs fresh OS control events, never cached holds.
-                    gamepads.poll(&mut input, active && !suspended)?;
+                    if has_ui && ui_resize && presentable {
+                        if now < retry {
+                            return Ok(());
+                        }
+                        if !surface.reserve(&renderer)? {
+                            if !suspended {
+                                game.set_suspended(true)?;
+                                suspended = true;
+                                ui_input.defer_surface();
+                            }
+                            clock.reset(now);
+                            retry = now + Duration::from_millis(50);
+                            return Ok(());
+                        }
+                        // Resize and actual consumption share this callback and
+                        // reservation, even when no simulation tick is due.
+                        let result = (|| -> session::Result<()> {
+                            game.resize_ui(logical_viewport(&window))?;
+                            ui_input.invalidate_pointer(game.host()?.ui(), &mut input)?;
+                            game.refresh_host()?;
+                            Ok(())
+                        })();
+                        let consumed = surface.consumed();
+                        surface.cancel();
+                        result?;
+                        if !consumed {
+                            return Err(Error::Reservation.into());
+                        }
+                        ui_input.presented(game.host()?.ui(), &mut input)?;
+                        ui_resize = false;
+                        redraw_pending = false;
+                        presentation_refreshes += 1;
+                    }
+                    // Actual inactivity retains only connection state. A temporary
+                    // UI surface wait preserves releases alongside queued presses.
+                    gamepads.poll(&mut input, ui_input.accepts_delivery(active, suspended))?;
                     if !active {
+                        if ui_input.awaiting_surface() {
+                            input.reset_focus(focused);
+                            ui_input.reset_focus();
+                            gamepads.discard_pending();
+                        }
                         if !suspended {
                             game.set_suspended(true)?;
                             suspended = true;
                             input.reset_focus(focused);
+                            ui_input.reset_focus();
                             gamepads.discard_pending();
                         }
                         clock.reset(now);
@@ -240,6 +330,7 @@ pub fn run(args: &[String]) -> session::Result<()> {
                             if !consumed {
                                 return Err(Error::Reservation.into());
                             }
+                            ui_input.presented(game.host()?.ui(), &mut input)?;
                             redraw_pending = false;
                             presentation_refreshes += 1;
                         }
@@ -250,8 +341,12 @@ pub fn run(args: &[String]) -> session::Result<()> {
                                 if !suspended {
                                     game.set_suspended(true)?;
                                     suspended = true;
-                                    input.reset_focus(focused);
-                                    gamepads.discard_pending();
+                                    if has_ui {
+                                        ui_input.defer_surface();
+                                    } else {
+                                        input.reset_focus(focused);
+                                        gamepads.discard_pending();
+                                    }
                                 }
                                 clock.reset(now);
                                 retry = now + Duration::from_millis(50);
@@ -262,9 +357,16 @@ pub fn run(args: &[String]) -> session::Result<()> {
                                 game.set_suspended(false)?;
                                 suspended = false;
                                 clock.reset(now);
+                                if has_ui {
+                                    ui_input.resume(&mut input, focused);
+                                }
                                 gamepads.synchronize(&mut input)?;
                             }
-                            let result = game.tick(input.events());
+                            let result = if has_ui {
+                                game.tick_with_ui(input.events(), ui_input.receipts())
+                            } else {
+                                game.tick(input.events())
+                            };
                             let consumed = surface.consumed();
                             surface.cancel(); // also releases reservation on retryable input failure
                             result?;
@@ -273,6 +375,8 @@ pub fn run(args: &[String]) -> session::Result<()> {
                             }
                             gamepads.commit();
                             input.clear();
+                            ui_input.accepted();
+                            ui_input.presented(game.host()?.ui(), &mut input)?;
                             redraw_pending = false;
                             if options
                                 .stop_after
@@ -317,4 +421,53 @@ pub fn run(args: &[String]) -> session::Result<()> {
     drop(game); // stop device audio before returning/closing the native surface
     println!("{report}");
     Ok(())
+}
+
+/// UI and uncaptured pointer delivery share logical pixels at the current DPI.
+fn logical_viewport(window: &tao::window::Window) -> [f32; 2] {
+    let size = window.inner_size().to_logical::<f64>(window.scale_factor());
+    [size.width as f32, size.height as f32]
+}
+
+#[cfg(test)]
+mod tests {
+    use super::Options;
+    fn args(tail: &[&str]) -> Vec<String> {
+        [
+            "scene",
+            "audio",
+            "clips",
+            "actions",
+            "models",
+            "textures",
+            "0123456789abcdef0123456789abcdef",
+        ]
+        .iter()
+        .chain(tail)
+        .map(|s| (*s).to_owned())
+        .collect()
+    }
+    #[test]
+    fn explicit_font_cache_and_tick_bound_parse_in_fixed_order() {
+        let plain = Options::parse(&args(&[])).unwrap();
+        assert!(plain.render.text.is_none() && plain.stop_after.is_none());
+        let text = Options::parse(&args(&["--font-cache", "fonts", "--stop-after", "3"])).unwrap();
+        assert_eq!(
+            text.render.text.unwrap().font_cache,
+            std::path::Path::new("fonts")
+        );
+        assert_eq!(text.stop_after, Some(3));
+        let probe = Options::parse(&args(&["--font-cache", "fonts", "--lifecycle-probe"])).unwrap();
+        assert!(probe.probe && probe.render.text.is_some());
+        assert_eq!(probe.stop_after, Some(40));
+        for bad in [
+            &["--stop-after", "3", "--font-cache", "fonts"][..],
+            &["--font-cache"],
+            &["--fonts", "fonts"],
+            &["--stop-after", "0"],
+            &["--font-cache", "a", "--font-cache", "b"],
+        ] {
+            assert!(Options::parse(&args(bad)).is_err(), "{bad:?}");
+        }
+    }
 }

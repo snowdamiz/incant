@@ -7,6 +7,7 @@ fn id(n: u8) -> StableId {
 }
 fn definition() -> Arc<NativeAnimation> {
     Arc::new(NativeAnimation {
+        graph: None,
         mesh_fingerprint: [4; 32],
         clip_durations: Arc::from([1.0, 0.0]),
         initial: Animation {
@@ -414,14 +415,14 @@ fn localized_v4_restore_keeps_legacy_and_wrong_binding_refusals_atomic() {
     assert_eq!(live.save_bytes().unwrap(), saved);
     assert_eq!(live.incarnation(), incarnation);
     let mut future = saved.clone();
-    future[8..12].copy_from_slice(&5u32.to_le_bytes());
+    future[8..12].copy_from_slice(&7u32.to_le_bytes());
     let mut h = Sha256::new();
     h.update(&future[..32]);
     h.update(&future[64..]);
     future[32..64].copy_from_slice(&h.finalize());
     assert!(matches!(
         live.restore_bytes(&future),
-        Err(SaveError::Version(5))
+        Err(SaveError::Version(7))
     ));
     assert_eq!(live.save_bytes().unwrap(), saved);
     assert_eq!(live.incarnation(), incarnation);
@@ -473,3 +474,6 @@ fn checksum_valid_malformed_animation_scene_and_save_data_refuse() {
         assert!(NativeWorld::from_save_bytes(&bytes).is_err());
     }
 }
+
+#[path = "animation/crossfade.rs"]
+mod crossfade;

@@ -1,5 +1,6 @@
 //! The text-native project format and validated CRDT projection. No filesystem or UI.
 mod agent_budget;
+mod animation_graph;
 mod audio;
 mod camera;
 #[cfg(feature = "crdt")]
@@ -8,6 +9,7 @@ mod lights;
 mod navigation;
 mod physics;
 mod physics_2d;
+mod ui;
 pub use agent_budget::{AgentBudgetSettings, DEFAULT_AGENT_TOKEN_CAP, MAX_AGENT_TOKEN_CAP};
 #[cfg(feature = "crdt")]
 pub use crdt::CollaborativeDocument;
@@ -18,6 +20,7 @@ pub use incant_2d::{
 pub use incant_input::InputActions;
 pub use incant_localization::{LocaleSettings, StringTable};
 pub use incant_nav::NavigationGrid;
+pub use incant_types::UiNode;
 pub use navigation::{NavigationMesh, NavigationSource, NavigationSourceKind};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
@@ -27,11 +30,11 @@ use thiserror::Error;
 
 pub const SCHEMA_VERSION: u32 = 1;
 pub use incant_types::{
-    AngularVelocity, AngularVelocity2D, Animation, AudioBus, AudioListener, AudioSource,
-    AudioSpatial, BodyMotion, Camera, CameraProjection, Collider, Collider2D, ColliderPart,
-    ColliderShape, ColliderShape2D, DirectionalLight, DirectionalShadows, EnvironmentLight, Id,
-    MeshRenderer, PointLight, PrimitiveColliderShape, RigidBody, SpotLight, TextureUsage,
-    Transform, Velocity,
+    AngularVelocity, AngularVelocity2D, Animation, AnimationGraph, AnimationMotion, AudioBus,
+    AudioListener, AudioSource, AudioSpatial, BodyMotion, Camera, CameraProjection, Collider,
+    Collider2D, ColliderPart, ColliderShape, ColliderShape2D, DirectionalLight, DirectionalShadows,
+    EnvironmentLight, Id, MeshRenderer, PointLight, PrimitiveColliderShape, RigidBody, SpotLight,
+    Text, TextureUsage, Transform, Velocity,
 };
 pub fn new_id() -> Id {
     ulid::Ulid::new().to_string()
@@ -70,6 +73,14 @@ pub struct Scene {
     pub id: Id,
     pub name: String,
     pub entities: BTreeMap<Id, Entity>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub program: Option<SceneProgram>,
+}
+/// One scene-wide native module; absent preserves authored TypeScript behavior.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
+#[serde(tag = "kind", rename_all = "snake_case", deny_unknown_fields)]
+pub enum SceneProgram {
+    Wasm { module: Id },
 }
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
@@ -321,6 +332,31 @@ impl Project {
             if scene.name.trim().is_empty() {
                 issue(format!("{path}/name"), "name cannot be empty");
             }
+            if let Some(SceneProgram::Wasm { module }) = &scene.program {
+                if self
+                    .assets
+                    .get(module)
+                    .is_none_or(|asset| asset.kind != "wasm")
+                {
+                    issue(
+                        format!("{path}/program/module"),
+                        "scene program requires an existing wasm asset",
+                    );
+                }
+                if scene
+                    .entities
+                    .values()
+                    .any(|entity| entity.components.contains_key("Script"))
+                {
+                    issue(
+                        format!("{path}/program"),
+                        "Wasm scene programs cannot mix with per-entity TypeScript scripts",
+                    );
+                }
+            }
+            if let Err(message) = ui::validate_scene(scene) {
+                issue(format!("{path}/entities"), &message);
+            }
             for (eid, entity) in &scene.entities {
                 let path = format!("{path}/entities/{eid}");
                 if eid != &entity.id {
@@ -361,6 +397,9 @@ impl Project {
                             "agent requires model and conversation ID",
                         );
                     }
+                }
+                if let Err(message) = animation_graph::validate(entity) {
+                    issue(format!("{path}/components/AnimationGraph"), &message);
                 }
                 if entity.components.contains_key("Animation")
                     && (!entity.components.contains_key("MeshRenderer")
@@ -536,6 +575,34 @@ fn validate_component(kind: &str, value: &Value, project: &Project) -> Result<()
                 return Err("tilemap requires a color atlas texture asset".into());
             }
         }
+        "UiNode" => {
+            let node: UiNode = decode(value)?;
+            node.validate().map_err(str::to_owned)?;
+            if let Some(text) = node.kind.text() {
+                for id in &text.fonts {
+                    if project.assets.get(id).is_none_or(|a| a.kind != "font") {
+                        return Err("UI text requires existing font assets".into());
+                    }
+                }
+            }
+        }
+        "Text" => {
+            let text: Text = decode(value)?;
+            text.validate().map_err(str::to_owned)?;
+            for id in &text.fonts {
+                if project
+                    .assets
+                    .get(id)
+                    .is_none_or(|asset| asset.kind != "font")
+                {
+                    return Err("text requires existing font assets".into());
+                }
+            }
+        }
+        "AnimationGraph" => {
+            let graph: AnimationGraph = decode(value)?;
+            graph.validate().map_err(str::to_owned)?;
+        }
         "Animation" => {
             let animation: Animation = decode(value)?;
             animation.validate().map_err(str::to_owned)?;
@@ -630,7 +697,13 @@ pub fn schema_registry() -> BTreeMap<String, Value> {
             "MeshRenderer".into(),
             json!(schemars::schema_for!(MeshRenderer)),
         ),
+        ("Text".into(), json!(schemars::schema_for!(Text))),
+        ("UiNode".into(), json!(schemars::schema_for!(UiNode))),
         ("Animation".into(), json!(schemars::schema_for!(Animation))),
+        (
+            "AnimationGraph".into(),
+            json!(schemars::schema_for!(AnimationGraph)),
+        ),
         ("Camera".into(), json!(schemars::schema_for!(Camera))),
         ("Tilemap".into(), json!(schemars::schema_for!(Tilemap))),
         (
@@ -728,6 +801,7 @@ impl Scene {
             id: new_id(),
             name: name.into(),
             entities: BTreeMap::new(),
+            program: None,
         }
     }
 }

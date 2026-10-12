@@ -434,6 +434,25 @@
           "maximum": 10000,
           "minimum": 1,
           "type": "integer"
+        },
+        "ui": {
+          "items": {
+            "$ref": "#/$defs/RecordedUiEvent"
+          },
+          "maxItems": 256,
+          "type": "array"
+        },
+        "viewport": {
+          "items": {
+            "format": "float",
+            "type": "number"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "type": [
+            "array",
+            "null"
+          ]
         }
       },
       "required": [
@@ -441,6 +460,156 @@
         "events"
       ],
       "type": "object"
+    },
+    "RecordedUiEvent": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "entity_id": {
+              "type": "string"
+            },
+            "type": {
+              "const": "focus",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "entity_id"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "const": "activate",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "reverse": {
+              "type": "boolean"
+            },
+            "type": {
+              "const": "traverse",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "reverse"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "entity_id": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "type": {
+              "const": "commit",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "entity_id",
+            "text"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "cursor": {
+              "items": {
+                "format": "uint",
+                "minimum": 0,
+                "type": "integer"
+              },
+              "maxItems": 2,
+              "minItems": 2,
+              "type": [
+                "array",
+                "null"
+              ]
+            },
+            "entity_id": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "type": {
+              "const": "preedit",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "entity_id",
+            "text"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "entity_id": {
+              "type": "string"
+            },
+            "type": {
+              "const": "cancel",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "entity_id"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "position": {
+              "items": {
+                "format": "float",
+                "type": "number"
+              },
+              "maxItems": 2,
+              "minItems": 2,
+              "type": "array"
+            },
+            "pressed": {
+              "type": "boolean"
+            },
+            "type": {
+              "const": "pointer",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "position",
+            "pressed"
+          ],
+          "type": "object"
+        }
+      ]
     },
     "TouchPhase": {
       "enum": [

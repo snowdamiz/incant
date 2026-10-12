@@ -10,6 +10,10 @@ use thiserror::Error;
 pub use codec::MAX_SAVE_BYTES;
 #[derive(Debug, Error, PartialEq)]
 pub enum SaveError {
+    #[error("UI widget state save/restore is not yet supported")]
+    UiUnsupported,
+    #[error("text bindings are unsupported in an unbound legacy save")]
+    TextUnsupported,
     #[error("localization is unsupported in a legacy v1/v2 save")]
     LocalizationUnsupported,
     #[error("invalid native world save: {0}")]
@@ -85,6 +89,21 @@ impl NativeWorld {
                     .iter()
                     .map(|n| (**n).clone())
                     .collect(),
+            )?
+            .with_text(
+                self.font_assets.clone(),
+                self.text_ids
+                    .iter()
+                    .map(|&id| crate::CookedText {
+                        entity: id,
+                        text: self
+                            .world
+                            .get::<crate::text::TextComponent>(self.entities[&id])
+                            .expect("text index")
+                            .0
+                            .clone(),
+                    })
+                    .collect(),
             )?;
         // Stable-ID order is independent of ECS table/archetype insertion order.
         let states = self
@@ -105,20 +124,30 @@ impl NativeWorld {
                     .map(|p| (id, p.state))
             })
             .collect::<Vec<_>>();
+        let graphs = self
+            .entities
+            .iter()
+            .filter_map(|(&id, &handle)| {
+                self.world
+                    .get::<crate::animation::Playback>(handle)
+                    .and_then(|p| p.graph.map(|g| (id, g)))
+            })
+            .collect::<Vec<_>>();
         codec::encode(
             self.tick,
             self.source_scene_fingerprint,
             &scene.to_bytes(),
             &states,
             &animations,
+            &graphs,
         )
     }
 
-    /// Load validated data without source/project/asset-cache access. V2–v4 retain
+    /// Load validated data without source/project/asset-cache access. V2–v6 retain
     /// the original cooked-scene fingerprint for later program pairing; it is not
     /// authentication and does not restore a VM. Legacy v1 has no original binding
     /// field: its fingerprint describes only the saved plain scene. V3 adds localized
-    /// scenes and v4 adds animation playback; older saves cannot silently clear
+    /// scenes, v4 adds animation playback, v5 adds active crossfades, and v6 adds exact graph state; older saves cannot silently clear
     /// an existing locale/catalog.
     pub fn from_save_bytes(bytes: &[u8]) -> Result<Self, SaveError> {
         let decoded = codec::decode(bytes)?;
@@ -127,6 +156,9 @@ impl NativeWorld {
             return Err(SaveError::LocalizationUnsupported);
         }
         if decoded.origin.is_none() {
+            if scene.has_text() {
+                return Err(SaveError::TextUnsupported);
+            }
             if !scene.navigation().is_empty() {
                 return Err(SaveError::NavigationUnsupported);
             }
@@ -150,8 +182,18 @@ impl NativeWorld {
             .iter()
             .filter(|n| n.animation.is_some())
             .count();
-        if decoded.animations.len() != expected_animations * codec::ANIMATION_BYTES {
+        if decoded.animations.len()
+            != expected_animations * codec::animation_stride(decoded.version)
+        {
             return Err(SaveError::Invalid("animation membership"));
+        }
+        let expected_graphs = scene
+            .spatial()
+            .iter()
+            .filter(|n| n.animation.as_ref().is_some_and(|a| a.graph.is_some()))
+            .count();
+        if decoded.graphs.len() != expected_graphs * codec::GRAPH_BYTES {
+            return Err(SaveError::Invalid("animation graph membership"));
         }
         let mut world = Self::new(scene);
         for row in decoded.states.as_chunks::<{ codec::STATE_BYTES }>().0 {
@@ -171,8 +213,7 @@ impl NativeWorld {
         }
         for row in decoded
             .animations
-            .as_chunks::<{ codec::ANIMATION_BYTES }>()
-            .0
+            .chunks_exact(codec::animation_stride(decoded.version))
         {
             let (id, state) = codec::animation(row)?;
             let entity = *world
@@ -188,6 +229,26 @@ impl NativeWorld {
                 .validate_state(state)
                 .map_err(|_| SaveError::Invalid("animation checkpoint"))?;
             playback.state = state;
+        }
+        for row in decoded.graphs.as_chunks::<{ codec::GRAPH_BYTES }>().0 {
+            let (id, graph) = codec::graph(row)?;
+            let entity = *world
+                .entities
+                .get(&id)
+                .ok_or(SaveError::Invalid("animation graph entity"))?;
+            let mut playback = world
+                .world
+                .get_mut::<crate::animation::Playback>(entity)
+                .ok_or(SaveError::Invalid("animation graph component"))?;
+            let definition = playback
+                .definition
+                .graph
+                .as_ref()
+                .ok_or(SaveError::Invalid("animation graph definition"))?;
+            definition
+                .validate_state(&graph, playback.state, &playback.definition)
+                .map_err(|_| SaveError::Invalid("animation graph checkpoint"))?;
+            playback.graph = Some(graph);
         }
         world.tick = decoded.tick;
         if let Some(origin) = decoded.origin {
@@ -214,6 +275,7 @@ impl NativeWorld {
             initial.id(),
             initial.tick_rate(),
             initial.localization(),
+            initial.font_assets(),
         )?;
         Ok(candidate)
     }
@@ -229,6 +291,7 @@ impl NativeWorld {
             self.scene_id(),
             self.tick_rate,
             &self.localization,
+            &self.font_assets,
         )
     }
 
@@ -238,8 +301,10 @@ impl NativeWorld {
         scene: crate::StableId,
         rate: u32,
         localization: &crate::NativeLocalization,
+        font_assets: &[crate::FontAssetRef],
     ) -> Result<(), SaveError> {
-        if self.localization.tables() != localization.tables()
+        if self.font_assets != font_assets
+            || self.localization.tables() != localization.tables()
             || self.scene_id() != scene
             || self.tick_rate != rate
             || origin.is_some_and(|origin| self.source_scene_fingerprint != origin)
@@ -266,6 +331,9 @@ impl NativeWorld {
         // Legacy data has no extended-state/origin contract. Do not let a plain
         // v1 payload silently clear a world's spatial/navigation capability.
         if !codec::is_bound(bytes) {
+            if !self.font_assets.is_empty() || !self.text_ids.is_empty() {
+                return Err(SaveError::TextUnsupported);
+            }
             if self.navigation_used {
                 return Err(SaveError::NavigationUnsupported);
             }
@@ -278,6 +346,7 @@ impl NativeWorld {
             self.scene_id(),
             self.tick_rate,
             &self.localization,
+            &self.font_assets,
         )?;
         // V1 never carried the origin fingerprint. A matching live destination
         // retains its own known origin; the restored data cannot replace it.
@@ -293,12 +362,19 @@ impl NativeWorld {
         candidate
             .navigation
             .invalidate_after_restore(&self.navigation)?;
+        candidate.text_generation = self
+            .text_generation
+            .checked_add(1)
+            .ok_or(SaveError::Invalid("text generation exhausted"))?;
         candidate.identity = self.identity.clone();
         *self = candidate;
         Ok(())
     }
 
     fn check_save_capabilities(&self) -> Result<(), SaveError> {
+        if self.ui_used {
+            return Err(SaveError::UiUnsupported);
+        }
         if self.audio_used {
             return Err(SaveError::AudioUnsupported);
         }
@@ -310,6 +386,9 @@ impl NativeWorld {
 }
 
 fn check_scene_capabilities(scene: &CookedScene) -> Result<(), SaveError> {
+    if scene.has_ui() {
+        return Err(SaveError::UiUnsupported);
+    }
     if !scene.audio().is_empty() {
         return Err(SaveError::AudioUnsupported);
     }

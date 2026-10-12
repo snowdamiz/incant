@@ -17,6 +17,9 @@ pub struct CookedEntity {
 /// entire scene before any running ECS world can be published.
 #[derive(Debug, Clone)]
 pub struct CookedScene {
+    pub(crate) font_assets: Vec<crate::FontAssetRef>,
+    pub(crate) texts: Vec<crate::CookedText>,
+    pub(crate) ui: Vec<crate::CookedUi>,
     pub(crate) localization: crate::NativeLocalization,
     pub(crate) id: StableId,
     pub(crate) tick_rate: u32,
@@ -79,6 +82,9 @@ impl CookedScene {
                 .map(|node| (indices[&node.id], node.parent))
                 .collect();
         Ok(Self {
+            font_assets: Vec::new(),
+            texts: Vec::new(),
+            ui: Vec::new(),
             localization: Default::default(),
             id,
             tick_rate,
@@ -110,6 +116,7 @@ impl CookedScene {
         }
         let entities: BTreeMap<_, _> = self.entities.iter().map(|e| (e.id, e)).collect();
         let mut size = 72
+            + self.text_bytes()
             + self.entities.len() * 128
             + 16
             + crate::navigation_binary::size(&self.navigation)
@@ -145,6 +152,7 @@ impl CookedScene {
         audio.sort_unstable_by_key(|node| node.entity);
         let size = 72
             + self.localization_bytes()
+            + self.text_bytes()
             + self.entities.len() * 128
             + 16
             + crate::navigation_binary::size(&self.navigation)
@@ -165,6 +173,44 @@ impl CookedScene {
         self.validate_physics_2d()?;
         self.prepare_navigation()?;
         Ok(self)
+    }
+    pub fn with_text(
+        mut self,
+        mut fonts: Vec<crate::FontAssetRef>,
+        mut nodes: Vec<crate::CookedText>,
+    ) -> Result<Self, SceneError> {
+        fonts.sort_unstable_by_key(|a| a.id);
+        nodes.sort_unstable_by_key(|n| n.entity);
+        self.font_assets = fonts;
+        self.texts = nodes;
+        self.validate_physics_2d()?;
+        Ok(self)
+    }
+    pub fn font_assets(&self) -> &[crate::FontAssetRef] {
+        &self.font_assets
+    }
+    pub fn texts(&self) -> &[crate::CookedText] {
+        &self.texts
+    }
+    pub fn has_text(&self) -> bool {
+        !self.font_assets.is_empty() || !self.texts.is_empty()
+    }
+    pub fn has_animation_graphs(&self) -> bool {
+        self.spatial
+            .iter()
+            .any(|n| n.animation.as_ref().is_some_and(|a| a.graph.is_some()))
+    }
+    fn text_bytes(&self) -> usize {
+        if self.has_text() || self.has_ui() || self.has_animation_graphs() {
+            crate::text_binary::size(&self.font_assets, &self.texts)
+                + if self.has_ui() || self.has_animation_graphs() {
+                    crate::ui_binary::size(&self.ui)
+                } else {
+                    0
+                }
+        } else {
+            0
+        }
     }
     pub fn audio(&self) -> &[crate::CookedAudio] {
         &self.audio
@@ -192,6 +238,7 @@ impl CookedScene {
         self.spatial = nodes;
         let size = 72
             + self.localization_bytes()
+            + self.text_bytes()
             + self.entities.len() * 128
             + 16
             + crate::navigation_binary::size(&self.navigation)
@@ -220,14 +267,16 @@ impl CookedScene {
         &self.visual_assets
     }
     fn spatial_bytes(&self) -> usize {
-        usize::from(
-            !self.navigation.is_empty()
-                || self
-                    .spatial
-                    .iter()
-                    .any(|n| n.flipbook.is_some() || n.animation.is_some()),
-        ) * 4
-            + usize::from(self.spatial.iter().any(|n| n.animation.is_some())) * 4
+        usize::from(self.has_animation_graphs()) * 4
+            + usize::from(
+                self.has_text()
+                    || !self.navigation.is_empty()
+                    || self
+                        .spatial
+                        .iter()
+                        .any(|n| n.flipbook.is_some() || n.animation.is_some()),
+            ) * 4
+            + usize::from(self.has_text() || self.spatial.iter().any(|n| n.animation.is_some())) * 4
             + self.visual_assets.len() * crate::spatial_binary::ASSET_BYTES
             + self
                 .spatial
@@ -255,8 +304,22 @@ impl CookedScene {
     pub fn physics_2d(&self) -> &[crate::CookedPhysics2D] {
         &self.physics_2d
     }
-    fn validate_physics_2d(&self) -> Result<(), SceneError> {
+    pub(crate) fn validate_physics_2d(&self) -> Result<(), SceneError> {
         let entities: BTreeMap<_, _> = self.entities.iter().map(|e| (e.id, e)).collect();
+        self.validate_ui(&entities)?;
+        crate::text::validate(
+            &self.font_assets,
+            self.texts.iter().map(|n| (n.entity, n.text.as_ref())),
+            self.id,
+            |id| entities.contains_key(&id),
+        )?;
+        if self.font_assets.iter().any(|f| {
+            self.visual_assets
+                .binary_search_by_key(&f.id, |a| a.id)
+                .is_ok()
+        }) {
+            return Err(SceneError::Invalid("font/visual asset ID collision"));
+        }
         let mut ids = std::collections::BTreeSet::new();
         let mut shapes = 0usize;
         for declaration in &self.physics_2d {
@@ -305,6 +368,7 @@ impl CookedScene {
         }
         let size = 72
             + self.localization_bytes()
+            + self.text_bytes()
             + self.entities.len() * 128
             + 20
             + crate::navigation_binary::size(&self.navigation)
@@ -331,7 +395,11 @@ impl CookedScene {
     }
 
     fn localization_bytes(&self) -> usize {
-        if self.localization.is_default() && !self.spatial.iter().any(|n| n.animation.is_some()) {
+        if !self.has_text()
+            && !self.has_ui()
+            && self.localization.is_default()
+            && !self.spatial.iter().any(|n| n.animation.is_some())
+        {
             0
         } else {
             crate::localization_binary::size(&self.localization) + 8

@@ -11,12 +11,13 @@ default = []
 project = ["incant_cook/typescript"]
 # Trusted build-linked descriptors only; does not enable a compiler or loader.
 static-module = ["incant_script/static-module", "dep:incant_wasm_runtime", "incant_wasm_runtime/embedded-fixture"]
-render-input = ["dep:incant_render_game", "dep:incant_render_native"]
+render-input = ["dep:incant_render_game", "dep:incant_render_native", "dep:incant_ui"]
 render-gpu = ["render-input", "dep:incant_render_gpu_host", "dep:incant_render", "dep:thiserror"]
 
 native-window = ["render-gpu", "incant_game_runtime/device", "dep:tao", "dep:pollster", "dep:gilrs"]
 
 [dependencies]
+incant_ui = { workspace = true, optional = true }
 tempfile = "3"
 incant_wasm_runtime = { path = "../incant_wasm_runtime", optional = true }
 incant_observe = { path = "../incant_observe" }

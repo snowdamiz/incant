@@ -21,6 +21,8 @@ pub enum CookError {
     MaterialOverrides(String),
     #[error("invalid visual asset binding {0}")]
     VisualAsset(String),
+    #[error("invalid font asset binding {0}")]
+    FontAsset(String),
     #[error("missing or stale cooked navigation geometry for model {0}")]
     NavigationResource(String),
     #[error("missing, invalid or stale cooked animation resource for model {0}")]
@@ -103,6 +105,9 @@ pub(crate) fn cook_validated_scene_with_resources(
         .scenes
         .get(scene_id)
         .ok_or_else(|| CookError::MissingScene(scene_id.into()))?;
+    let mut texts = Vec::new();
+    let mut ui = Vec::new();
+    let mut font_assets = std::collections::BTreeMap::new();
     let mut entities = Vec::with_capacity(scene.entities.len());
     let mut physics = Vec::new();
     let mut physics_2d = Vec::new();
@@ -118,6 +123,8 @@ pub(crate) fn cook_validated_scene_with_resources(
                 continue;
             }
             if ![
+                "Text",
+                "UiNode",
                 "NavigationMesh",
                 "NavigationGrid",
                 "Transform",
@@ -134,6 +141,7 @@ pub(crate) fn cook_validated_scene_with_resources(
                 "Camera",
                 "MeshRenderer",
                 "Animation",
+                "AnimationGraph",
                 "SpriteRenderer",
                 "SpriteFlipbook",
                 "Tilemap",
@@ -149,6 +157,12 @@ pub(crate) fn cook_validated_scene_with_resources(
                     component: component.clone(),
                 });
             }
+        }
+        if let Some(node) = crate::ui::cook(project, entity, &mut font_assets)? {
+            ui.push(node);
+        }
+        if let Some(node) = crate::text::cook(project, entity, &mut font_assets)? {
+            texts.push(node);
         }
         if let Some(node) = crate::navigation::cook(project, scene, entity, resources)? {
             navigation.push(node);
@@ -260,6 +274,8 @@ pub(crate) fn cook_validated_scene_with_resources(
                 project.string_tables.clone(),
                 project.settings.localization.clone(),
             )?)?
+            .with_text(font_assets.into_values().collect(), texts)?
+            .with_ui(ui)?
             .to_bytes(),
     )
 }

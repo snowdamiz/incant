@@ -1,0 +1,8 @@
+2026-10-12T03:12:37Z burst start, frontmost 2095
+2026-10-12T03:12:43Z burst end, exit 0, frontmost 2095
+2026-10-12T03:14:30Z burst start, frontmost 1866
+2026-10-12T03:14:35Z burst end, exit 0, frontmost 1866
+2026-10-12T03:14:54Z burst start, frontmost 1866
+2026-10-12T03:14:58Z burst end, exit 0, frontmost 1866
+2026-10-12T03:15:18Z burst start, frontmost 1866
+2026-10-12T03:15:21Z burst end, exit 0, frontmost 1866

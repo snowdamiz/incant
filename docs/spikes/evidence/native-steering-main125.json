@@ -1,0 +1,239 @@
+{
+  "recorded_at": "2026-10-12T03:57:05.758667+00:00",
+  "base": "6d44d8e702737b8dc97eccb826cd9a84a60f74a6",
+  "original_commits": [
+    "c474068da0de28f840d713251ae2b2e635dcff87",
+    "3bd5133a7bb37d1e17d21a3777e92bf81215bb2d"
+  ],
+  "tested_source": "a36ac950c5d1daec5e4f326a1a55753aacfebdb4",
+  "actual_main_sync": "452fd60492e3a97bba88a45f83081cac48da0d1d",
+  "tested_tree": "2fd3729c33e9da5afba3500e7da45a2d797b1996",
+  "synced_tree": "2fd3729c33e9da5afba3500e7da45a2d797b1996",
+  "source_manifest": {
+    "path": "/tmp/incant-steering-integration-checks/freeze.json",
+    "sha256": "24ff106fd3ff2277df2e99f2282c8d8e8296b9c233476c2cbf7b7719beb18eb6",
+    "entries": 1064
+  },
+  "reviewed_inputs": {
+    "Cargo.lock": "a2177dc5193554a874ae5d3ff4ca2fad9e46eb31cf8145a97418a911d6d327aa",
+    "crates/incant_cook/tests/steering.rs": "8e0d4ab181841d1582ad06fcab67947b8c5453c39416e4f5ef3355332438d8bc",
+    "crates/incant_nav/Cargo.toml": "7a5d3142db098c458d11c993c03742d2393be44b7519edcb1d0107d84b6e1234",
+    "crates/incant_nav/src/lib.rs": "bcae807cd23466cec608efba9f98e91b8706b8401aad43a918eba7639b40b831",
+    "crates/incant_nav/src/steering.rs": "38aed7e91a93c9daaa81458ee3f0937a4b75c06a96a9fdb2e4c3d1469d9e5fe2",
+    "crates/incant_nav/tests/native_steering.rs": "6a52f81e70f523b81dc0611b17d09c38e5fbf6ace3ea735c29286a791b16a39a",
+    "crates/incant_runtime/src/lib.rs": "ce2ab60e8981597ece2fbd76f6bd352174573a0a0e2ceff7b6e3c0c4dad6decb",
+    "crates/incant_runtime/src/physics_queries.rs": "bd81211907e74672c6679eab1b7c36c1e46c05f544d329f9ae02f479bb6ad971",
+    "crates/incant_runtime/tests/steering_queries.rs": "1d3bc195f7168d716803923ff247856e4d8519d3124ae7bd8329f1f1678f1487",
+    "crates/incant_script/src/lib.rs": "c5573147658032807b5f3b1ff69dbc5573a4f66fd5e01df98625a9ae5c7867fc",
+    "crates/incant_script/src/navigation_tests.rs": "80bffc63e4e8fe059302ebaa6562dbb3ba2d9d982e80ab8da1406bcd3d004325",
+    "crates/incant_script/src/queries.rs": "52fd7696239249efbd2c088b7ef5481e7481420d7590616ea7dfcaba6a6713c3",
+    "crates/incant_script/src/query_values.rs": "6e9fa5b66919c866191888532bf54a808f3558e08bbd3ba3294b25dc29edebee",
+    "crates/incant_script/src/steering_tests.rs": "edca53ad4d554b4cd2cc83f96752d621e68a62c80e118575ea1bb0dfe0a31d18",
+    "crates/incant_script/src/steering_values.rs": "fd8187fa6529bf85d4e97cd2c8aa605affc43fe5a600bccbe7a5bc81487517ac",
+    "sdk/templates/native-navigation/steering.ts": "220c0f8b454b731cad1a790c4164fc762d0d07d2e58de02228f0b28f67cc9438",
+    "sdk/ts/src/native.d.ts": "b68db59aef7dae6e484e5d9acfc1e1c999cfd576f0d33555b96fac5dab20ada1",
+    "crates/incant_script/build.rs": "c9a06880018326c69abcdd01f024173a10907b49cd9da6e91a5276377d5e74f0"
+  },
+  "integration_differences": {
+    "Cargo.lock": "Retains existing main shader/text edges; no steering dependency resolution change.",
+    "sdk/ts/src/native.d.ts": "Retains existing main crossfade overload and copied transition fields."
+  },
+  "other_reviewed_inputs_exact": 16,
+  "test_counts": {
+    "tests": 363,
+    "cook": 1
+  },
+  "checks": [
+    {
+      "name": "tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j2",
+        "-p",
+        "incant_nav",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_script",
+        "--features",
+        "incant_script/compiler"
+      ],
+      "exit": 0,
+      "seconds": 81.26982641700306,
+      "log": "/tmp/incant-steering-integration-checks/tests.log",
+      "sha256": "ecaae830d7469193c92c887970587a8983be2dc0ee4ba366e5820d378802b652"
+    },
+    {
+      "name": "cook",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j2",
+        "-p",
+        "incant_cook",
+        "--features",
+        "typescript",
+        "--test",
+        "steering"
+      ],
+      "exit": 0,
+      "seconds": 58.79819483298343,
+      "log": "/tmp/incant-steering-integration-checks/cook.log",
+      "sha256": "208638086548145c5b481a55463feb7c041e8c215aa1c72f61ef1aa807a441e8"
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j2",
+        "-p",
+        "incant_nav",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_cook",
+        "--features",
+        "incant_script/compiler,incant_cook/typescript",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 9.30191045801621,
+      "log": "/tmp/incant-steering-integration-checks/clippy.log",
+      "sha256": "3ab25ca32d2b8eaecd9c3db04647925bb4ee0afd2bc18421f919b3406efa4fa5"
+    },
+    {
+      "name": "wasm32",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "-p",
+        "incant_nav",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_script",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--locked",
+        "--offline",
+        "-j2"
+      ],
+      "exit": 0,
+      "seconds": 8.804094958002679,
+      "log": "/tmp/incant-steering-integration-checks/wasm32.log",
+      "sha256": "5e4ca69eb1c79914a279e1d1ccd528db788fcba114c95256fba0d2b3c15fc3b4"
+    },
+    {
+      "name": "graph",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_nav",
+        "incant_runtime",
+        "incant_script"
+      ],
+      "exit": 0,
+      "seconds": 0.44307158299488947,
+      "log": "/tmp/incant-steering-integration-checks/graph.log",
+      "sha256": "c93b0855f3506f4e6299ad651068d474938559a50bc09caf2322c9a092bd8cf6"
+    },
+    {
+      "name": "typescript-template",
+      "command": [
+        "node",
+        "node_modules/typescript/bin/tsc",
+        "--noEmit",
+        "--strict",
+        "--target",
+        "ES2022",
+        "--module",
+        "ESNext",
+        "--moduleResolution",
+        "bundler",
+        "sdk/ts/src/native.d.ts",
+        "sdk/templates/native-navigation/steering.ts"
+      ],
+      "exit": 0,
+      "seconds": 1.053172625019215,
+      "log": "/tmp/incant-steering-integration-checks/typescript-template.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "sdk-types",
+      "command": [
+        "node",
+        "node_modules/typescript/bin/tsc",
+        "--noEmit",
+        "-p",
+        "sdk/ts/tsconfig.json"
+      ],
+      "exit": 0,
+      "seconds": 0.2324381250073202,
+      "log": "/tmp/incant-steering-integration-checks/sdk-types.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "sdk",
+      "command": [
+        "node",
+        "tools/generate_sdk.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.043374708999181166,
+      "log": "/tmp/incant-steering-integration-checks/sdk.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.9700727090239525,
+      "log": "/tmp/incant-steering-integration-checks/fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.03248245798749849,
+      "log": "/tmp/incant-steering-integration-checks/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "limits": [
+    "No fresh standalone steering export.",
+    "wasm32 compilation is not a Wasm steering guest ABI test.",
+    "No graphics, device or performance gate claimed."
+  ]
+}

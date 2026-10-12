@@ -1,0 +1,89 @@
+{
+  "passed": true,
+  "commands": [
+    [
+      "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/tools/cargo",
+      "build",
+      "--locked",
+      "-j2",
+      "-p",
+      "incant_wasm_cook"
+    ],
+    [
+      "/tmp/incant-animation-graph-legacy-proof-001/wabt/bin/wat2wasm",
+      "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/crates/incant_wasm_runtime/fixtures/animation-graph-legacy.wat",
+      "-o",
+      "/tmp/incant-animation-graph-legacy-proof-001/animation-graph-legacy.wasm"
+    ],
+    [
+      "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/tools/cargo",
+      "test",
+      "--locked",
+      "-j2",
+      "-p",
+      "incant_wasm_dev",
+      "--features",
+      "static-conformance",
+      "--test",
+      "animation_graph_legacy"
+    ],
+    [
+      "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/tools/cargo",
+      "clippy",
+      "--locked",
+      "-j2",
+      "-p",
+      "incant_wasm_dev",
+      "--features",
+      "static-conformance",
+      "--test",
+      "animation_graph_legacy",
+      "--",
+      "-D",
+      "warnings"
+    ]
+  ],
+  "wabt": {
+    "release": "1.0.42",
+    "url": "https://github.com/WebAssembly/wabt/releases/download/1.0.42/wabt-1.0.42-macos-arm64.tar.gz",
+    "archive_sha256": "3f654779b436c628db3ca4323c51538815f5fbc887a6d5f3bb1c18d36281e240",
+    "download_attempts": 1
+  },
+  "manifest": {
+    "wabt": "1.0.42",
+    "modules": [
+      {
+        "name": "animation-graph-legacy",
+        "prefix": "m0",
+        "input_sha256": "10bf65731e8b2f9401dbf37b2770a3bcf4881f795db3b43bdab59fec9a8369b7",
+        "prepared_sha256": "a8341e65e975926a3d7a42b78d58954d4dd4fd5d3f6a8c0121979e20a633a961"
+      }
+    ],
+    "files": {
+      "linked.rs": "2f8b91626d506bc390759e260646cb3332755cd574324165303555f7be109d3b",
+      "m0-facade.c": "efc6db1ac1375893f4f6fc3441424fd48b435c3263bad0726a0bd06f1bf85c00",
+      "m0.c": "c3a4e2ec9007ed12919840838695d0323b2d511415bb823bcea25042c7255e92",
+      "m0.h": "8cf0b61197df116a33fd70751cfc5c948c4d7cf6ad6ec7393cafa7be727d8c2e",
+      "m0.original.wasm": "10bf65731e8b2f9401dbf37b2770a3bcf4881f795db3b43bdab59fec9a8369b7",
+      "m0.wasm": "a8341e65e975926a3d7a42b78d58954d4dd4fd5d3f6a8c0121979e20a633a961"
+    }
+  },
+  "files": {
+    "wabt.tar.gz": "3f654779b436c628db3ca4323c51538815f5fbc887a6d5f3bb1c18d36281e240",
+    "both-hosts-clippy.log": "6516fae8a3ed851c8b9ce1efb7e00c015f21e35335a5233a8b4ff17f9a74c670",
+    "both-hosts-test.log": "69e251f8925df1bd5817ec4cb1c98ce494029f6731ba94ca0a209f713ed62d31",
+    "animation-graph-legacy.wasm": "10bf65731e8b2f9401dbf37b2770a3bcf4881f795db3b43bdab59fec9a8369b7",
+    "cook-build.log": "db54afff6e337efa66c1a7f8179be88d71a3c8fdbca8905e541af1ce3f2cd3b8",
+    "wat.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bundle/m0.original.wasm": "10bf65731e8b2f9401dbf37b2770a3bcf4881f795db3b43bdab59fec9a8369b7",
+    "bundle/m0.h": "8cf0b61197df116a33fd70751cfc5c948c4d7cf6ad6ec7393cafa7be727d8c2e",
+    "bundle/m0-facade.c": "efc6db1ac1375893f4f6fc3441424fd48b435c3263bad0726a0bd06f1bf85c00",
+    "bundle/linked.rs": "2f8b91626d506bc390759e260646cb3332755cd574324165303555f7be109d3b",
+    "bundle/manifest.json": "6b0f5b5c20d65a886da13acaf0ae1ad5d00e6a6e99ba4080cc5eef5baf8c14fe",
+    "bundle/m0.wasm": "a8341e65e975926a3d7a42b78d58954d4dd4fd5d3f6a8c0121979e20a633a961",
+    "bundle/m0.c": "c3a4e2ec9007ed12919840838695d0323b2d511415bb823bcea25042c7255e92",
+    "wabt/bin/wat2wasm": "69117d2b10c1818cf6da921f96ab4e3c50e45a05a848d6c4c1788375aec4d250",
+    "wabt/bin/wasm2c": "4f1ba571063deca36e330ad67cf0414dbbaee944c7d920df7a338a30725570f2"
+  },
+  "scope": "actual Wasmtime and pinned wasm2c hosts; existing v1/v2 len/read imports refuse unrepresentable graph blends; endpoint and unrelated-import success controls; not graph SDK implementation"
+}

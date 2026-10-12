@@ -1,0 +1,55 @@
+{
+  "reviewer": "/root/integrate_runtime_prs",
+  "at": "2026-10-12T04:27:18.574774+00:00",
+  "outcome": "P2 CLOSED; corrected source accepted, final actual-host conformance003 and immutable intake evidence still pending",
+  "freeze": "/tmp/incant-wasm-steering-freeze-003.json",
+  "freeze_sha256": "53cf7cf7cca6d59fd8aca08f02ae27c752f661eacc8f1fabae6289478cab078a",
+  "sources": {
+    "Cargo.lock": "e3b38996c35515af571ffd2171e31c9430b29274b8013b8ad387ea05d7dfa3c2",
+    "crates/incant_wasm_abi/src/lib.rs": "1e9bc891100c15ee20f8b712986e3cfd4020a0eaea9b03705a500fd48f9b6fe3",
+    "crates/incant_wasm_abi/src/steering.rs": "06e6b3668577fbc26ceb39957e9f2ed448d7214e62737028c52c108646b27c41",
+    "crates/incant_wasm_abi/tests/steering.rs": "23e088df1192ada84ad32a0d4aa04f48598ffc2961756e5b26a02a87d21fe325",
+    "crates/incant_wasm_dev/src/generated.rs": "590813f5c5bac547181b817d544ce44062045c3f9a6e38697afe6c3b3836f5e1",
+    "crates/incant_wasm_dev/tests/steering_parity.rs": "76fe730e353ef6d751576dc91c87d66a4816bcf295f92d2b388ad247f14de315",
+    "crates/incant_wasm_runtime/Cargo.toml": "66fa018fd176c4b33e0fe7ff2302ad682e204bf86d4cd3c2760b617dcd20c6f8",
+    "crates/incant_wasm_runtime/c/generated.h": "5e34b5b3e70c480c54bbf93df09c3fb1ffe5969098e29c78d2bd0b6c0be258ff",
+    "crates/incant_wasm_runtime/c/generated.inc": "5f2d175ec115baf0022e64cf10748250391653b41f0a9fe090acec107ccb0a9b",
+    "crates/incant_wasm_runtime/fixtures/steering-start.wat": "394a226026e896f625fa17655fb3ec8d7396d08f28a1783b506b5d17e9d5479e",
+    "crates/incant_wasm_runtime/fixtures/steering.wat": "15966a71881fe51d198363634d050a1a8c37712949855d3da0dde6d0f9690856",
+    "crates/incant_wasm_runtime/src/capability.rs": "3631adb85e4da900dad45f20782a627ffced725f80222f81e0705b6d880bccfc",
+    "crates/incant_wasm_runtime/src/generated.rs": "9f291c1770d60aac8e430cc7cb491398d919fb54b28cd83d0864a8d1efbf1127",
+    "crates/incant_wasm_runtime/src/input_tags.rs": "014bff2b987a53ef012ddf2e87ff013d58dba65e2a35f4c279f280158a503515",
+    "crates/incant_wasm_runtime/src/lib.rs": "2e9fa08aee265c0bce26073a765c3ef6ee133b7dbb07d9b7bcf708ff08b68fb0",
+    "crates/incant_wasm_runtime/src/steering.rs": "11fdde85f41c3e8c7f71fe5fe69154dde1665a20999a8ed9535e1395129ef045",
+    "crates/incant_wasm_runtime/tests/steering.rs": "ca0295bf8808eaf23c8a04d97415431f47877f8ccc686565dedda7adba8aefaf",
+    "sdk/abi/native-v1.json": "c86be2c58b04ec5861dbe3746f4ee39d2839587fca72fd41eebe1268382caafd",
+    "sdk/rust/README.md": "115db269b44b80a48e91f9e538689bac195e12570dc833f8109b01f53e6506ff",
+    "sdk/rust/fixtures/steering_failure.rs": "a9a8998759077f5c3d4eb9689258d6cc96352e225a8a4c78da1862a9771f6e71",
+    "sdk/rust/samples/steering.rs": "97cdb55ee64da2fd8973c1bd5e0f6a815734088620529b34027c1a6c21499081",
+    "sdk/rust/src/lib.rs": "9a3e2be6d0cc60720cca742e7504a053477e7b72ce71913339b51b3f6cfcf60f",
+    "sdk/rust/src/raw.rs": "837619ece1c19e9bf5db537cea4cacfb672fdfab440e8927528d920594278f0d",
+    "sdk/rust/src/steering.rs": "6fa5caf31faa1291db6bb1048bdc689e01d681b36995ee4390c41bfc87bb3ef8",
+    "sdk/rust/src/tick.rs": "b18e2128714b11e087f6241023491ed89c0848db57951840b3b434909c55faee",
+    "tools/generate_wasm_sdk.py": "6ecae365e47c6b9ac55ea1fcf554d22b80901024b7e2ff51883cb60f727cc3cd",
+    "tools/probes/shipping-wasm2c.py": "4f35270d06bd6b785e66aad69c83a30dcf479a8394beec462a6e27c04ec83a06",
+    "tools/tests/test_wasm_sdk.py": "a03d7ec71c321fa522ce4b84a0816d416945087d342a63c6aa7273c5cbb703bf",
+    "tools/wasm_abi.py": "b1d70a95e95f3e4bbff974dd08aef55ac1343803cf0e8a01e6f81895b35cc1b9"
+  },
+  "original_review": {
+    "path": "/tmp/incant-wasm-steering-independent-review.json",
+    "sha256": "ffedc8fa359f33eedc817747e72d843c622baa0dfc1f52b64334a8073b4a5780"
+  },
+  "finding_closed": "All original f64 horizon/scalar/position/velocity/obstacle numeric domains now match steering_values.rs before any narrowing or solver allocation; original incant_nav f32 geometry/domain/solver checks remain unchanged.",
+  "reviewed_correction": [
+    "validate_numbers runs after bounded wire decode and aggregate charges but before construction of the f32 SteeringQuery. It uses the same finite/range and hypot bounds as TypeScript ingress.",
+    "Regression covers23 invalid near-boundary cases, with prior numeric write, structural despawn and log prefixes; rejection poisons finish and preserves exact save bytes. Case20 was already invalid in f32; baseline admits22 remaining cases.",
+    "New sdk_steering_rounding case passes invalid f64radius through SDK encode to the actual host, ignores the method error, and is included by both-host rollback test and trusted preparation loop.",
+    "README docs added and callback name corrected; generated prior ABI shapes retained."
+  ],
+  "logs": {
+    "/tmp/incant-wasm-steering-rounding-before.log": "c3b7e4d6dbd1d5196baf735bb0a471248e97e8406ea3c896ba01973d6578b874",
+    "/tmp/incant-wasm-steering-rounding-after.log": "005c090b46d70f6685bdb801ef7c2cdee88b3a6168f085a39a813b4a8c4c57ea"
+  },
+  "validation_scope": "Reviewer read source and red/green focused logs; all29 frozen003 source hashes matched. No extra build/GPU/provider execution. Final full003 remains owner-active56535.",
+  "remaining_findings": []
+}

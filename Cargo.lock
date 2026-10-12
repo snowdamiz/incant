@@ -1314,8 +1314,6 @@ dependencies = [
 [[package]]
 name = "cosmic-text"
 version = "0.14.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "da46a9d5a8905cc538a4a5bceb6a4510de7a51049c5588c0114efce102bcbbe8"
 dependencies = [
  "bitflags 2.13.2",
  "fontdb",
@@ -3965,11 +3963,17 @@ version = "0.0.1"
 dependencies = [
  "incant_assets",
  "incant_assets_runtime",
+ "incant_cmd",
  "incant_doc",
+ "incant_import",
  "incant_nav",
  "incant_runtime",
  "incant_script",
  "incant_source",
+ "incant_text",
+ "incant_types",
+ "incant_ui",
+ "incant_wasm_cook",
  "serde_json",
  "sha2 0.10.9",
  "tempfile",
@@ -4044,6 +4048,7 @@ dependencies = [
 name = "incant_game_player"
 version = "0.0.1"
 dependencies = [
+ "incant_ui",
  "gilrs",
  "incant_assets_runtime",
  "incant_audio_runtime",
@@ -4072,6 +4077,7 @@ dependencies = [
 name = "incant_game_runtime"
 version = "0.0.1"
 dependencies = [
+ "incant_ui",
  "incant_assets_runtime",
  "incant_audio_runtime",
  "incant_input",
@@ -4131,11 +4137,13 @@ dependencies = [
  "incant_cmd",
  "incant_doc",
  "incant_text",
+ "incant_wasm_cook",
  "schemars 1.2.2",
  "serde",
  "serde_json",
  "tempfile",
  "thiserror 2.0.21",
+ "wat",
 ]
 
 [[package]]
@@ -4173,6 +4181,7 @@ dependencies = [
  "getrandom 0.3.4",
  "glam 0.29.3",
  "glam 0.32.1",
+ "incant_types",
  "rerecast",
  "schemars 1.2.2",
  "serde",
@@ -4252,9 +4261,11 @@ version = "0.0.1"
 dependencies = [
  "incant_assets",
  "incant_audio_runtime",
+ "incant_cmd",
  "incant_cook",
  "incant_doc",
  "incant_game_runtime",
+ "incant_import",
  "incant_input",
  "incant_render_data",
  "incant_render_game",
@@ -4262,12 +4273,14 @@ dependencies = [
  "incant_runtime",
  "incant_script",
  "incant_types",
+ "incant_wasm_cook",
  "kira",
  "serde",
  "serde_json",
  "tempfile",
  "thiserror 2.0.21",
  "ulid",
+ "wat",
 ]
 
 [[package]]
@@ -4306,6 +4319,7 @@ dependencies = [
  "incant_render_native",
  "incant_runtime",
  "incant_shader_cook",
+ "incant_text",
  "incant_types",
  "png 0.18.1",
  "pollster",
@@ -4337,6 +4351,7 @@ dependencies = [
  "glam 0.32.1",
  "incant_2d",
  "incant_assets_runtime",
+ "incant_text",
  "incant_types",
  "serde",
  "thiserror 2.0.21",
@@ -4347,6 +4362,7 @@ dependencies = [
 name = "incant_render_game"
 version = "0.0.1"
 dependencies = [
+ "incant_ui",
  "incant_assets",
  "incant_assets_runtime",
  "incant_audio_runtime",
@@ -4397,6 +4413,7 @@ dependencies = [
  "incant_doc",
  "incant_render_data",
  "incant_runtime",
+ "incant_text",
  "incant_types",
  "png 0.18.1",
  "serde_json",
@@ -4432,6 +4449,7 @@ dependencies = [
  "incant_localization",
  "incant_runtime",
  "incant_types",
+ "incant_wasm_dev",
  "incant_wasm_runtime",
  "rquickjs",
  "serde",
@@ -4490,6 +4508,7 @@ dependencies = [
  "thiserror 2.0.21",
  "ulid",
  "unicode-script",
+ "unicode-segmentation",
  "zeno",
 ]
 
@@ -4502,6 +4521,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "incant_ui"
+version = "0.0.1"
+dependencies = [
+ "incant_input",
+ "incant_text",
+ "incant_types",
+ "taffy",
+ "tempfile",
+ "thiserror 2.0.21",
+ "ulid",
+]
+
+[[package]]
 name = "incant_wasm_abi"
 version = "0.0.1"
 
@@ -4510,6 +4542,10 @@ name = "incant_wasm_cook"
 version = "0.0.1"
 dependencies = [
  "incant_wasm_abi",
+ "serde",
+ "serde_json",
+ "sha2 0.10.9",
+ "tempfile",
  "thiserror 2.0.21",
  "wasm-encoder",
  "wasmparser",
@@ -4559,6 +4595,7 @@ dependencies = [
  "incant-module",
  "incant_input",
  "incant_localization",
+ "incant_nav",
  "incant_runtime",
  "incant_types",
  "incant_wasm_abi",
@@ -8372,6 +8409,17 @@ dependencies = [
  "pkg-config",
  "toml 0.8.2",
  "version-compare",
+]
+
+[[package]]
+name = "taffy"
+version = "0.14.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "639627c87f43b9181c811f40a6296409e093a17bc761214cba3c15df74f86b99"
+dependencies = [
+ "arrayvec",
+ "serde",
+ "slotmap",
 ]
 
 [[package]]

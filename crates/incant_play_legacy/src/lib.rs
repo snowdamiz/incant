@@ -65,6 +65,10 @@ pub enum ScriptError {
         "async/Promise and generator behavior callbacks are unsupported; use fixed-tick timers"
     )]
     UnsupportedAsync,
+    #[error(
+        "scene programs require native Play; the legacy document simulator cannot execute Wasm"
+    )]
+    UnsupportedProgram,
     #[error("a behavior with pending timers requires an onTimer handler")]
     TimerHandler,
     #[error(transparent)]

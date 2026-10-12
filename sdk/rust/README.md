@@ -3,7 +3,7 @@
 `incant-module` is a public, allocation-free `no_std` guest API for the native
 capabilities implemented so far. Add a path dependency on `sdk/rust`, compile a
 `cdylib` for `wasm32-unknown-unknown` with panic abort, provide a panic handler,
-and export a callback with `incant_module::module!(update)`.
+and export a callback with `incant_module::module!(simulate)`.
 
 ```rust,ignore
 #![no_std]
@@ -12,8 +12,8 @@ use incant_module::{Result, Tick, IDENTITY};
 fn panic(_: &core::panic::PanicInfo<'_>) -> ! {
     core::arch::wasm32::unreachable()
 }
-incant_module::module!(update);
-fn update(tick: &mut Tick<'_>, dt: f64) -> Result<()> {
+incant_module::module!(simulate);
+fn simulate(tick: &mut Tick<'_>, dt: f64) -> Result<()> {
     let mut scratch = [IDENTITY; 1024];
     for index in 0..tick.chunk_count()? {
         let chunk = tick.chunk(index)?;
@@ -65,6 +65,24 @@ source, raw Wasm or cached native modules at runtime.
   scratch. Their iterators need no per-entity host calls. Input is the accepted
   tick's immutable snapshot. Flipbook rows show committed state before queued
   commands; pause/play/restart/seek become visible after successful publication.
+- `animations(scratch)` returns a copied start-of-callback snapshot of authored
+  skeletal playback. Rows contain stable entity ID, optional clip index, seconds,
+  signed speed, playing/looping flags, completion and the optional full outgoing
+  transition (clip/time/speed/play/loop plus elapsed/duration). `control_animation`
+  queues typed Select/Crossfade/Seek/Playing/Looping/Speed changes in the same atomic
+  transaction as numeric edits, entity commands and logs. Selecting a clip keeps
+  speed/play/loop flags; `clip: None, seconds: 0` selects rest. Seek/Select reset
+  completion; native clip durations validate at commit. World clocks advance
+  before script execution, so controls affect the next simulation step and the
+  immediately committed render sample. Queued controls do not change this
+  callback's readback. Crossfade duration is finite 0..60 seconds; zero selects
+  immediately. A nonzero request cannot interrupt an active fade. Select/Seek
+  cancel it; playing pauses both clocks; later speed/loop changes affect only
+  destination. See [samples/crossfade.rs](samples/crossfade.rs).
+  `animations`/`control_animation` use explicit `incant_animation_v2` imports.
+  `legacy_animations`/`legacy_control_animation` remain available for v1-only hosts;
+  an active transition makes legacy length/read refuse instead of concealing a
+  blended pose. The parser accepts both exact layouts; old parsers reject v2.
 - `locale(result_scratch)` and `localize(request, request_scratch, result_scratch)`
   return copied committed-locale/message values. Text/Number/CalendarDate
   arguments and fallback/pseudo settings use the shared native ICU validation.
@@ -74,6 +92,14 @@ source, raw Wasm or cached native modules at runtime.
   `incant_module::localization`; smaller initialized scratch works when the whole
   frame fits. [samples/localization.rs](samples/localization.rs) is runnable with
   the same trusted compile helper and actual two-host conformance command.
+- `steer_agents(request, request_scratch, result_scratch)` computes local-avoidance
+  velocities over explicit world-space agent samples and obstacle polygons or
+  segments. It never gathers collision geometry or moves entities implicitly.
+  Results borrow initialized caller-owned scratch and are sorted by stable ID;
+  IDs correlate samples and need not name existing entities. The callback's fixed
+  step must be between 1/240 and 1 second. Reuse scratch across ticks, then apply
+  selected proposals through ordinary copied numeric writes. See
+  [samples/steering.rs](samples/steering.rs).
 - `tick.log(message, LogLevel::Info)` copies primitive UTF-8 diagnostics into the
   current update. `Debug`, `Warn` and `Error` are also supported. Messages accept
   at most 1,024 bytes, LF/TAB but no other controls; the host accepts at most 64
@@ -90,7 +116,7 @@ source, raw Wasm or cached native modules at runtime.
   guest globals/memory are not rolled back. The enclosing native session also
   remains terminal after a failure following accepted simulation. This does not
   undo simulation or device audio already advanced by an owning game session.
-- No source/asset/configuration mutation, timers, query/character APIs, authored
+- No source/asset/configuration mutation, timers, physics/pathfinding/character APIs, authored
   instance props, audio rendering, complete gameplay SDK, save/restore, device
   performance or distribution gate is implied by this slice.
 
@@ -103,8 +129,11 @@ Wasmtime bindings, static Rust/C dispatch, namespace contexts, host input tag
 mapping and shared endian codecs. Generated files are checked in. Run its
 `--check` mode after changes. Runtime crates never read this JSON.
 
-Additive `incant_log_v1` supplies logging and `incant_localization_v1` supplies
-copied locale/message queries and atomic settings; older hosts reject their imports explicitly.
+Additive `incant_animation_v1` supplies legacy skeletal playback snapshots/controls;
+`incant_animation_v2` adds complete transition observations and crossfade control,
+`incant_log_v1` supplies logging and `incant_localization_v1` supplies
+copied locale/message queries and atomic settings. `incant_navigation_v1` adds
+local-avoidance requests/results; older hosts reject these imports explicitly.
 Existing `incant_v1`, `incant_input_v1`, and `incant_flipbook_v1` layouts remain
 unchanged. Unknown namespaces, signatures and magic/layout versions fail closed.
 The host's native numeric layout is checked against generated sizes and offsets
@@ -115,7 +144,11 @@ not edits to generated output alone.
 
 Bounds remain the native host's v1 limits: 32 MiB guest memory/copied columns,
 128 MiB cumulative transfers, 65,536 calls, 1,024 commands, 4,096 chunks per tick;
-input scratch at most 128 KiB and playback at most 32,768 rows. The SDK exports
+input scratch at most 128 KiB and flipbook playback at most 32,768 rows.
+Skeletal playback has at most 100,000 rows (v1: 4,000,016 copied bytes;
+v2: 8,000,016 copied bytes), 256 clips
+per entity and finite speed in [-16, 16]. Snapshot row order is unspecified;
+use stable IDs. Callers should retain appropriately sized scratch across ticks. The SDK exports
 snapshot maximum sizes for reusable buffers. Host fuel and native validation
 remain authoritative even for guests bypassing the safe SDK. The full native
 scene's entity limit and script transaction rules still apply.
@@ -125,5 +158,26 @@ callback, at most 64 queries and 64 settings commands, with 64 arguments and 16
 fallbacks. Each query costs four of the 1,024 query units. Maximum wire buffers
 include extra lengths/tags; repeated result copies consume the existing transfer
 quota. Correct-epoch active localization ingress failures reject the entire
-batch. Standalone number/date formatting, catalog edits and report enumeration
-are not native Wasm capabilities in this slice.
+batch. `format_number(value, result_scratch)` and
+`format_date(CalendarDate, DateLength, result_scratch)` return copied UTF-8 text in
+the callback's committed locale. `DateLength::{Short, Medium, Long}` uses generated
+registry tags; Medium matches TypeScript's default. Values must be finite within
+the JS-safe integer magnitude; calendar years are -9999..9999 and actual Gregorian
+validity is checked natively. These calls do not pseudo-wrap their results. A
+queued locale change affects only later callbacks. Formatting shares existing
+query/output quotas, charges no logical input bytes (matching TypeScript), and
+charges its fixed 24-byte request and result copies to transfer limits. See
+[samples/formatting.rs](samples/formatting.rs). Catalog edits and report
+enumeration remain unsupported.
+
+Local avoidance is bounded per callback to 32 requests, 128 aggregate agent
+samples and 128 aggregate obstacle edges. Each request has at most 32 obstacles;
+closed polygons have 3..32 vertices and segments exactly two. The copied request
+and result maxima are 17,192 and 5,136 bytes. Scalar domains, duplicate IDs and
+geometry are validated by the same native solver as TypeScript. Each request
+charges one shared query unit, as well as the existing call and transfer budgets.
+A new request replaces the latest reply; replies never survive callback expiry.
+Correct-epoch ingress or output errors reject the complete update even when a
+caller ignores the error. Stale epochs are rejected without poisoning a different
+currently valid update. This is local avoidance only; navmesh path queries,
+automatic obstacle collection and debug drawing remain separate capabilities.

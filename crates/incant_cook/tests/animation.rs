@@ -1,6 +1,8 @@
 #![cfg(feature = "scene")]
 #[path = "../../incant_assets/tests/skeletal/fixture.rs"]
 mod fixture;
+#[path = "animation/graph.rs"]
+mod graph;
 use incant_cook::{
     cook_scene, cook_scene_with_resources, load_project_animation_resources, stable_id,
 };

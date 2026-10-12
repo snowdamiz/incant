@@ -37,7 +37,8 @@ fn prepared(body: &str) -> PreparedPlay {
         code: CompiledScript::compile(&format!(
             "exports.default={{update({{chunks}}){{{body}}}}};"
         ))
-        .unwrap(),
+        .unwrap()
+        .into(),
         actions: Default::default(),
         clips: vec![],
         sample_rate: 48000,
@@ -161,6 +162,8 @@ fn spatial(probe: Arc<Probe>) -> PlaySession<OfflineBackend, Consumer> {
     inputs.cooked = inputs.cooked.with_spatial(vec![], vec![spatial]).unwrap();
     let root = tempfile::tempdir().unwrap();
     inputs.render = Some(NativeRenderSettings {
+        ui: None,
+        text: None,
         model_cache: root.path().join("models"),
         texture_cache: root.path().join("textures"),
         camera: id(1),

@@ -26,7 +26,7 @@ struct NodeBinding {
 /// Private double staging prevents callers from keeping an unsubmitted command
 /// buffer or a scene snapshot that aliases mutable instance/light resources.
 /// Binding changes require preparing a replacement and accepting its first frame.
-/// This path accepts native camera/model/sprite/light/environment inputs.
+/// This path accepts native camera/model/sprite/text/light/environment inputs.
 /// Frame encoding still allocates bounded draw packets/uniform resources; this is
 /// not a claim that the complete renderer has reached its shipping budgets.
 pub struct RetainedScene {
@@ -65,11 +65,18 @@ impl Renderer {
         let mut staging_plan = crate::scene::resolve(input)?;
         staging_plan.sprites.clear();
         staging_plan.tilemaps.clear();
+        staging_plan.text = None;
         let mut staging = self.upload_scene(staging_plan, true)?.with_camera(camera)?;
         staging.sprites = live
             .sprites
             .as_ref()
             .map(|sprites| Arc::new(sprites.staging(&self.device)));
+        staging.text = live
+            .text
+            .as_ref()
+            .map(|text| Arc::new(text.staging(&self.text, &self.device)));
+        // Both frames report the same shared text resources after any swap.
+        staging.stats.text_gpu_bytes = live.stats.text_gpu_bytes;
         let directional = input
             .nodes
             .iter()
@@ -128,7 +135,7 @@ impl RetainedScene {
         }
         self.light_plan.clear();
         for (node, binding) in input.nodes.iter().zip(&self.bindings) {
-            if node.mesh.as_ref().is_some_and(|mesh| mesh.animation.is_some()
+            if node.mesh.as_ref().is_some_and(|mesh| (mesh.animation.is_some() || mesh.animation_blend.is_some())
                 && matches!(mesh.source.data(), incant_assets_runtime::RuntimeAssetData::Model(model) if model.animation.is_none())) {
                 return Err(SceneError::Input("animation sample requires animated model").into());
             }
@@ -239,6 +246,21 @@ impl RetainedScene {
                 .expect("private retained sprite ownership")
                 .stage(input)?;
         }
+        match (
+            &mut self.staging.text,
+            input.text.as_ref().filter(|text| !text.nodes.is_empty()),
+        ) {
+            (Some(text), Some(input)) => Arc::get_mut(text)
+                .expect("private retained text ownership")
+                .stage(input)?,
+            (None, None) => {}
+            _ => {
+                return Err(SceneError::Input(
+                    "retained text bindings changed; prepare a replacement",
+                )
+                .into());
+            }
+        }
         self.staging.stats.model_draw_calls = draw_calls;
         Ok(())
     }
@@ -282,6 +304,9 @@ impl RetainedScene {
         if let Some(sprites) = &self.staging.sprites {
             sprites.write(&renderer.queue);
         }
+        if let Some(text) = &self.staging.text {
+            text.write(&renderer.queue);
+        }
         let submission = renderer.queue.submit([commands]);
         std::mem::swap(&mut self.live, &mut self.staging);
         Ok(submission)
@@ -307,3 +332,11 @@ mod tilemap_tests;
 #[cfg(test)]
 #[path = "flipbook_tests.rs"]
 mod flipbook_tests;
+
+#[cfg(test)]
+#[path = "text_retained_tests.rs"]
+mod text_tests;
+
+#[cfg(test)]
+#[path = "text_native_tests.rs"]
+mod text_native_tests;

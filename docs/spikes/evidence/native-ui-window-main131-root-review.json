@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-12T05:12:15.674661+00:00",
+  "reviewer": "astra/root",
+  "head": "fecf2d1590495ddc4d3152a6dc8a57151944e355",
+  "source_receipt_sha256": "fffdbf8d136072c02e788f2431bceb29e122703f5ece9b812bb77078a3c26e50",
+  "verified_source_hashes": 5,
+  "verified_compiled_source_hashes": 1252,
+  "verified_logs": 6,
+  "independent_review_sha256": "8891d5aee7a381243f6a032536a67c4d4ed4196cd114a68dcc5380a4fa745753",
+  "acceptance": "Accept bounded UI input integration based on independently reviewed immutable5sourcefiles, same-tree main131 ancestry,72tests and scopedClippy/wasm32/graph checks. No new changed source to review. Exactfastgate required; actual OS/GPU/managedIME remain excluded.",
+  "compiled_source_freeze_path": "/tmp/incant-ui-window-main131-checks/freeze.json",
+  "compiled_source_freeze_sha256": "a1e26ffdb20c2d89f4d6a7fbbbcc4e5f01c2c45da224da0631132cb52c33a1f1",
+  "packaging_note": "Retain this compiled freeze durably before publication; current evidence folder has only log copies."
+}

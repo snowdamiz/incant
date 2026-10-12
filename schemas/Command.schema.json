@@ -624,6 +624,16 @@
         },
         "name": {
           "type": "string"
+        },
+        "program": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SceneProgram"
+            },
+            {
+              "type": "null"
+            }
+          ]
         }
       },
       "required": [
@@ -632,6 +642,28 @@
         "entities"
       ],
       "type": "object"
+    },
+    "SceneProgram": {
+      "description": "One scene-wide native module; absent preserves authored TypeScript behavior.",
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "wasm",
+              "type": "string"
+            },
+            "module": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "module"
+          ],
+          "type": "object"
+        }
+      ]
     },
     "ScriptSource": {
       "additionalProperties": false,
@@ -751,6 +783,33 @@
       "required": [
         "op",
         "scene"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "properties": {
+        "op": {
+          "const": "set_scene_program",
+          "type": "string"
+        },
+        "program": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SceneProgram"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "scene_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "op",
+        "scene_id"
       ],
       "type": "object"
     },

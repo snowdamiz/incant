@@ -1,8 +1,10 @@
 //! Shared copied `incant_v1` capability and native transaction boundary.
 //! Contains no compiler, parser, JIT, OS or authoring capability.
+mod animations;
 mod capability;
 mod flipbooks;
 mod generated;
+mod steering;
 pub use flipbooks::{
     MAGIC as FLIPBOOK_MAGIC, MAX_BYTES as MAX_FLIPBOOK_BYTES, ROW_BYTES as FLIPBOOK_ROW_BYTES,
 };

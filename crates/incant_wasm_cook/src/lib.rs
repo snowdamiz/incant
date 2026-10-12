@@ -1,5 +1,7 @@
 //! Build-time validation and private metering for the static wasm2c path.
 //! No native executable/cache input is accepted. No shipped host depends on this.
+mod captured;
+pub use captured::{CapturedModule, MAX_CAPTURE_BYTES, MAX_MODULE_BYTES, project_cache};
 use thiserror::Error;
 use wasm_encoder::{
     reencode::{self, Reencode},

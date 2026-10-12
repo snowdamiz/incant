@@ -57,3 +57,11 @@ impl AnimationSample {
         seconds: 0.0,
     };
 }
+
+/// Outgoing sample during a committed crossfade. The accompanying primary
+/// sample is the destination; `weight` is its contribution, in `[0, 1]`.
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub struct AnimationBlendSample {
+    pub sample: AnimationSample,
+    pub weight: f64,
+}

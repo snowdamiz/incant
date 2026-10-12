@@ -1,0 +1,122 @@
+{
+  "recorded_at": "2026-10-12T02:42:37.813232+00:00",
+  "reviewed_feature": "61326481f07c9ec409ba46f3e206a59d023bdd5c",
+  "tested_source": "4ca92b0f8c9c25e6606072dbb1cc099757ee64d9",
+  "integrated_source": "c85c2d8818ee8c88aab5abd0b6549d5299d3cc11",
+  "actual_main": "71ff6642487fda19ebe224a597a920231a538ac1",
+  "integration": "Original feature and author trailer preserved; STATUS-only additive conflict. All5 reviewed source/test hashes unchanged; actualmain120 merge changes no tested tree bytes.",
+  "source_hashes": {
+    "crates/incant_assets_runtime/src/animation/mod.rs": "c75b434c49e3639016f051d3446d8b88928f3421d28900ab31c2631c854b18a5",
+    "crates/incant_assets_runtime/src/animation/player.rs": "bba214a61d091ecf377b0ff6aa595569823f9d71e6397aa1275a5f96ee0cb8c2",
+    "crates/incant_assets_runtime/src/animation/sampling.rs": "7b89452f0aed14396b46ee2a884da7996e483f2e4fbdc25ea6aa70dfd91c66f3",
+    "crates/incant_assets/tests/skeletal.rs": "c0b47a3f8949a958044dfd9019af2988f81e6364c57c54374daaccd1dc455e40",
+    "crates/incant_assets/tests/skeletal/blending.rs": "c6aa210a6c96a1c898755bc68bcc2b192b59f03785bb4f5fa2d47bc61731ccb0"
+  },
+  "checks": [
+    {
+      "name": "tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j2",
+        "-p",
+        "incant_assets",
+        "-p",
+        "incant_assets_runtime",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_native"
+      ],
+      "exit": 0,
+      "seconds": 102.13290237498586,
+      "log": "/tmp/incant-pose-blend-union-checks/tests.log",
+      "sha256": "6dacec77195eaf42afd3c42d929ceb37f8de13f851ed4e10af6a08df4dd747fc"
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j2",
+        "-p",
+        "incant_assets",
+        "-p",
+        "incant_assets_runtime",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_native",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 10.11043395899469,
+      "log": "/tmp/incant-pose-blend-union-checks/clippy.log",
+      "sha256": "15c29d74cad3d7296d3db875e32120f16ccfcf9e7106c1a03e72492d0e46b569"
+    },
+    {
+      "name": "graph",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_assets_runtime",
+        "incant_render_native",
+        "--features",
+        "incant_assets_runtime/visual"
+      ],
+      "exit": 0,
+      "seconds": 0.8931135839957278,
+      "log": "/tmp/incant-pose-blend-union-checks/graph.log",
+      "sha256": "6e181febf67a555ab24a01e71d6983713b8f66773084f50e6ca4775254590fbf"
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 1.3326791250146925,
+      "log": "/tmp/incant-pose-blend-union-checks/fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.04118991698487662,
+      "log": "/tmp/incant-pose-blend-union-checks/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "rust": {
+    "passed": 166,
+    "failed": 0,
+    "ignored_gpu": 71,
+    "groups": 30
+  },
+  "independent_review_sha256": "089fa8dffc20623e2af33a539ebdec9d1eb75ca1fa2e85cf8e3a2b68477b94dc",
+  "scope": "Two-input CPU TRS sampler primitive, independent clip clocks/rest channels, exact endpoints and atomic failure staging. No native frame blend controls, authored graphs, IK or root motion.",
+  "limitations": [
+    "No GPU/window/provider execution or appearance acceptance.",
+    "Allocation assertions are bounded accepted-call regression checks on this host, not phone or overall performance gates."
+  ]
+}

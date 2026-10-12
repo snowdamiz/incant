@@ -1,4 +1,4 @@
-//! Versions 1–11, little-endian checked data (not executable code). SHA-256 detects
+//! Versions 1–14, little-endian checked data (not executable code). SHA-256 detects
 //! damage, not authorship. No casts, alignment assumptions or native-layout ABI.
 use crate::scene::MAX_ENTITIES;
 use crate::{CookedEntity, CookedScene, SceneError, StableId};
@@ -7,7 +7,7 @@ use sha2::{Digest, Sha256};
 use std::collections::BTreeMap;
 
 const MAGIC: &[u8; 8] = b"INCANTSC";
-const VERSION: u32 = 11;
+const VERSION: u32 = 14;
 const PREFIX: usize = 40;
 const HEADER: usize = 72;
 const MIN_RECORD: usize = 104;
@@ -24,8 +24,14 @@ impl CookedScene {
             .collect();
         let mut bytes = Vec::with_capacity(HEADER + self.entities.len() * MAX_RECORD);
         bytes.extend(MAGIC);
-        let version = if self.spatial.iter().any(|n| n.animation.is_some()) {
+        let version = if self.has_animation_graphs() {
             VERSION
+        } else if self.has_ui() {
+            13
+        } else if self.has_text() {
+            12
+        } else if self.spatial.iter().any(|n| n.animation.is_some()) {
+            11
         } else if !self.localization.is_default() {
             10
         } else if !self.navigation.is_empty() {
@@ -142,6 +148,15 @@ impl CookedScene {
                     crate::animation_binary::write(&mut bytes, node.entity, a);
                 }
             }
+        }
+        if version >= 12 {
+            crate::text_binary::write(&mut bytes, &self.font_assets, &self.texts);
+        }
+        if version >= 13 {
+            crate::ui_binary::write(&mut bytes, &self.ui);
+        }
+        if version >= 14 {
+            crate::animation_graph::binary::write(&mut bytes, &self.spatial);
         }
         let length = (bytes.len() - HEADER) as u32;
         bytes[36..40].copy_from_slice(&length.to_le_bytes());
@@ -363,7 +378,7 @@ impl CookedScene {
         }
         if version >= 11 {
             let n = reader.u32()? as usize;
-            if n == 0
+            if (version == 11 && n == 0)
                 || n > spatial.len()
                 || n > reader.remaining_len() / crate::animation_binary::MIN_BYTES
             {
@@ -384,6 +399,25 @@ impl CookedScene {
                     Some(crate::animation_binary::read(&mut reader, &mut budget)?);
             }
         }
+        let (font_assets, texts) = if version >= 12 {
+            crate::text_binary::read(&mut reader, count)?
+        } else {
+            (Vec::new(), Vec::new())
+        };
+        if version == 12 && font_assets.is_empty() && texts.is_empty() {
+            return Err(SceneError::Invalid("empty text suffix"));
+        }
+        let ui = if version >= 13 {
+            crate::ui_binary::read(&mut reader, count)?
+        } else {
+            Vec::new()
+        };
+        if version == 13 && ui.is_empty() {
+            return Err(SceneError::Invalid("empty UI suffix"));
+        }
+        if version >= 14 {
+            crate::animation_graph::binary::read(&mut reader, &mut spatial)?;
+        }
         if !reader.0.is_empty() {
             return Err(SceneError::Invalid("trailing payload"));
         }
@@ -396,13 +430,23 @@ impl CookedScene {
                 entities[i].parent = Some(id);
             }
         }
-        Self::new(id, tick_rate, entities)?
+        let candidate = Self::new(id, tick_rate, entities)?
             .with_physics(physics)?
             .with_audio(audio)?
             .with_spatial(assets, spatial)?
             .with_physics_2d(physics_2d)?
             .with_navigation(navigation)?
-            .with_localization(localization)
+            .with_localization(localization)?;
+        let candidate = if version >= 12 {
+            candidate.with_text(font_assets, texts)?
+        } else {
+            candidate
+        };
+        if version >= 13 {
+            candidate.with_ui(ui)
+        } else {
+            Ok(candidate)
+        }
     }
 }
 

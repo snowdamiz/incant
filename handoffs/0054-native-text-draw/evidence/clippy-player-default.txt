@@ -1,0 +1,4 @@
+$ ./tools/cargo clippy --locked --offline --profile ci -j2 -p incant_game_player --all-targets -- -D warnings
+source 264fd08867c6d0bdf5fe236f37500b5e90b9f00f tree f0a72cd612523abd3702eab5014d79cd7addfa5c
+    Finished `ci` profile [optimized] target(s) in 0.17s
+exit 0

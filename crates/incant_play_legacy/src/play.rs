@@ -38,6 +38,9 @@ impl PlaySession {
         resources: incant_core::NavigationResources,
         make_host: impl FnOnce() -> Result<ScriptHost, ScriptError>,
     ) -> Result<Self, ScriptError> {
+        if project.scenes.values().any(|scene| scene.program.is_some()) {
+            return Err(ScriptError::UnsupportedProgram);
+        }
         let engine = incant_core::Engine::with_navigation_resources(project, resources)?;
         let mut host = make_host()?;
         host.raycaster = Some(Arc::new(engine.raycaster()));

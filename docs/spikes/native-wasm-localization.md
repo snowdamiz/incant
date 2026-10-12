@@ -98,7 +98,7 @@ unchanged main102 helper and passes after this correction. The existing
 
 Exact frozen source, tool, compiled guest, prepared C and command/log hashes are
 in [the evidence](evidence/native-wasm-localization.json). These are local macOS
-CPU checks. Standalone number/date formatting, catalog editing, report paging,
+CPU checks for the original query/settings slice. Catalog editing, report paging,
 VM/checkpoint migration, complete SDK, Windows/Linux/browser execution,
 graphics, devices and performance gates remain outside this slice. Runtime
 source compilation and executable loading routes remain unchanged.
@@ -114,3 +114,69 @@ cases and five checkpoint integration tests. Twenty tooling tests, combined
 all-target Clippy, compiler-disabled static checking, generated SDK, normal
 dependency guards, formatting and conventions pass. Existing static checkpoint
 refusals remain in force. No GPU, provider or physical-device result is claimed.
+
+## Standalone formatting parity
+
+The additive opcode 25, `incant_localization_v1.format(epoch, ptr, len)`, formats
+numbers and calendar dates using the actual `incant_localization` ICU functions.
+Existing opcodes 0–24, old result kinds and all layouts remain unchanged. Older
+hosts reject the new import and old kind-specific SDK readers reject the new
+result kind explicitly. The no_std Rust methods are `Tick::format_number` and
+`Tick::format_date`; text borrows caller-owned result scratch. See the actual
+[formatting guest](../../sdk/rust/samples/formatting.rs).
+
+Requests are exactly 24 bytes: `INCLFM01`, little-endian u32 version 1 and kind,
+then eight payload bytes. Kind 0 is an f64 number. Kind 1 is a signed i32 year,
+u8 month/day, u8 date length and one zero reserved byte. Generated `DateLength`
+tags 0/1/2 mean Short/Medium/Long; Medium matches TypeScript's optional default.
+Results reuse `INCLRS01` version 1 with kind 2, then u32 byte length and exact
+UTF-8. Unknown kinds, lengths, tags, versions, reserved fields, trailing bytes,
+nonfinite numbers or unsafe magnitude fail. The native formatter checks actual
+Gregorian dates, including the 1900/2000 leap-year distinction, within years
+-9999..9999. No guest pointer or borrowed native string escapes an import.
+
+Formatting observes the same committed locale snapshot as message queries.
+Fallback and pseudo settings do not alter standalone formatting, matching
+TypeScript; queued locale changes stay invisible until successful publication.
+Each call consumes one of the shared 64 localization queries and four query
+units. Returned text consumes the existing 256 KiB output allowance, with the
+same 64 KiB per-text bound. Primitive requests cost no logical input bytes,
+matching TypeScript, while their 24-byte wire input and complete result copies
+consume the common transfer allowance. Calls, memory and transfer limits remain
+unchanged. A correct-epoch active error, including common ingress limits, rejects
+mixed numeric/entity/locale/log work. An ignored SDK error also rejects its
+callback. Short destinations receive no partial copy; latest-result storage is
+invalidated at existing epoch/error/reload boundaries.
+
+Frozen local checks pass 294 Rust tests/doctests in 52 groups, including 13 new
+codec, SDK, Capability and actual two-host formatting tests. Eight real no_std
+formatting guests and two raw WAT fixtures execute through both Wasmtime 49.0.2
+and WABT 1.0.42 generated C. Observations cover en/fr/ar/de-CH locales, signed
+number bounds, all date lengths, Gregorian validity, unaligned copies, queued
+locale invisibility, successful/failed reload, ordinary NativeSession logs,
+malformed/capacity/quota/trap failures and complete rollback. Combined all-target
+Clippy and default wasm32 ABI/SDK/runtime/development compilation pass. Actual
+prepared bytes for all 371 files in the 74-module combined bundle were verified
+before the helper deleted its temporary inputs.
+
+The existing three fresh development processes still run the bulk sample, not a
+new formatting shipping export. No GPU, browser execution, device performance or
+complete localization gate is claimed. Exact frozen inputs, command/log hashes
+and the prepared-byte receipt are in
+[formatting evidence](evidence/native-wasm-formatting.json). The bounded
+[independent review](evidence/native-wasm-formatting-root-review.json) found no
+actionable issue. Runtime compilation,
+source loading, dependencies and lock resolutions are unchanged.
+
+## Formatting integration on actual main119
+
+The original standalone-formatting commit is preserved with all 23 reviewed
+implementation hashes unchanged. The integrated current-source suite passes
+295 tests in 53 groups across actual Wasmtime and compiled wasm2c, all-target
+Clippy, default wasm32 compilation, 19 Wasm tooling tests, generated contracts,
+strict SDK/template types and normal runtime dependency guards. Three existing
+fresh development bulk processes pass separately; these are not a new formatting
+shipping-export proof. The actual main119 merge changes no tested tree bytes.
+[Exact integration evidence](evidence/native-wasm-formatting-main119.json) records
+commands, retained outputs and source hashes. No graphical, device or performance
+acceptance is claimed.

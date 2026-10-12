@@ -16,6 +16,8 @@ pub struct SpatialNode<'a> {
     pub tilemap: Option<&'a crate::PreparedTilemap>,
     pub flipbook: Option<crate::FlipbookState>,
     pub animation: Option<crate::AnimationSample>,
+    /// Outgoing sample and destination weight from the same committed state.
+    pub animation_blend: Option<incant_types::AnimationBlendSample>,
 }
 
 /// Scoped view at a committed boundary. Numeric/structural mutation cannot
@@ -61,6 +63,10 @@ impl<'a> SpatialView<'a> {
     pub fn binding_generation(&self) -> u64 {
         self.world.binding_generation
     }
+    /// Consumers without a text pipeline must refuse these declarations.
+    pub fn has_text(&self) -> bool {
+        !self.world.font_assets.is_empty() || !self.world.text_ids.is_empty()
+    }
     pub fn assets(&self) -> &'a [VisualAssetRef] {
         &self.world.visual_assets
     }
@@ -80,6 +86,9 @@ impl<'a> SpatialView<'a> {
                 animation: world
                     .get::<crate::animation::Playback>(entity)
                     .map(|p| p.state.sample),
+                animation_blend: world
+                    .get::<crate::animation::Playback>(entity)
+                    .and_then(|p| p.blend_sample()),
                 flipbook: world
                     .get::<crate::flipbook::Playback>(entity)
                     .map(|p| p.state),

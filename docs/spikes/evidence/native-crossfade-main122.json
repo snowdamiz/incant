@@ -1,0 +1,595 @@
+{
+  "recorded_at": "2026-10-12T03:29:20.525928+00:00",
+  "scope": "Combined native crossfade clocks, retained CPU blending, TypeScript and dual-host Wasm SDK, actual public QuickJS export",
+  "main_base": "e8f36cca86e77e13df87e9c44d0ddd5aee44e976",
+  "preserved_heads": [
+    "934af1b0f9c04d45588873369a4d69295c6380f3",
+    "1dce75ef76ae120bda4a819e0d9583919fdcc64c",
+    "84e7cc29c7ca1bf8da847fff431eff2199812a0b"
+  ],
+  "proof_original": "deaee702e5b7815e48512360498400196c8682d6",
+  "proof_cherry_pick": "a5bef630",
+  "tested_cpu_source": "e026c4a43b1b51704abb4ba019d5bbef67eceb70",
+  "actual_main_sync": "da0ef67bace626c385bf2b90cf9fb67999e867b3",
+  "fresh_export_source": "1d43531cfd0e1a50a8627a0dc01f51c357941057",
+  "all_compiled_runtime_sdk_cargo_inputs_unchanged_after_cpu_tests": true,
+  "only_tool_deltas_after_cpu_checks": [
+    "tools/probes/native-crossfade-export.py",
+    "tools/probes/native-crossfade-export/behavior.ts",
+    "tools/probes/native-text-export.py"
+  ],
+  "source_manifest": {
+    "path": "/tmp/incant-crossfade-main122-export-freeze.json",
+    "sha256": "76cda584824500bd44b8d0f6f56541aa698326ce5803847891b32b24cd1704ae",
+    "source_files": 1114
+  },
+  "independent_component_reviews": {
+    "native-animation-crossfade-sdk-review.json": "07fb32a57617c3c9ca519079531e36c6c524659c9145444e2c6a007a90019346",
+    "native-animation-crossfades-review.json": "53985f923576e321878711fb3fe26c1b01482a3108248696fd3d53daac4ed852",
+    "native-crossfade-export-source-map-review.json": "77e08a093867a8b81bfcaae8e64f0dff7d5e278aea592b957f22032bf4f1aaa0",
+    "native-animation-crossfade-consumer-review.json": "4ad8457e49b0680d4d00d5b6cd9cd3744470617c33ae35c80bcddbd82e81fba4"
+  },
+  "integration_resolution": "No production conflicts. STATUS and historical docs combined. A private overbroad STATUS resolver was corrected from complete actual main before publication; no tested source changed.",
+  "checks": [
+    {
+      "name": "tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j2",
+        "-p",
+        "incant_render_native",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_authoring",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_assets_runtime",
+        "-p",
+        "incant_assets",
+        "-p",
+        "incant_game_player",
+        "-p",
+        "incant_play",
+        "--features",
+        "incant_game_player/render-input"
+      ],
+      "exit": 0,
+      "seconds": 138.01534141699085,
+      "log": "/tmp/incant-crossfade-union-checks/tests.log",
+      "sha256": "05d1c23c773e37b56d2eeb6e383c8a54065b2cb8db14d432c58e109480049fcd"
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j2",
+        "-p",
+        "incant_render_native",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_authoring",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_assets_runtime",
+        "-p",
+        "incant_assets",
+        "-p",
+        "incant_game_player",
+        "-p",
+        "incant_play",
+        "--features",
+        "incant_game_player/native-window",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 15.47225870800321,
+      "log": "/tmp/incant-crossfade-union-checks/clippy.log",
+      "sha256": "ce8ae565b4b5735b80d463ba21b90c78c5a404ba928020e07e12dce6ed056c06"
+    },
+    {
+      "name": "conformance",
+      "command": [
+        "python3",
+        "tools/probes/shipping-wasm2c.py",
+        "/tmp/incant-crossfade-union-conformance",
+        "--profile",
+        "ci",
+        "--conformance-only"
+      ],
+      "exit": 0,
+      "seconds": 134.30720720798126,
+      "log": "/tmp/incant-crossfade-union-checks/conformance.log",
+      "sha256": "574af3621e3ea33f4f833844525fcf843cf3d6fd0f8b4c4cda3bea2cebb4805b"
+    },
+    {
+      "name": "wasm32",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "-p",
+        "incant_render_data",
+        "-p",
+        "incant_render_native",
+        "-p",
+        "incant-module",
+        "-p",
+        "incant_wasm_abi",
+        "-p",
+        "incant_wasm_runtime",
+        "-p",
+        "incant_wasm_dev",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--locked",
+        "--offline",
+        "-j2"
+      ],
+      "exit": 0,
+      "seconds": 2.3530755000247154,
+      "log": "/tmp/incant-crossfade-union-checks/wasm32.log",
+      "sha256": "a8482a35e1bb0fd44b5cba5e8ab6d6ba0a3996247295eced926b0d287f3638b3"
+    },
+    {
+      "name": "graph",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_runtime",
+        "incant_assets_runtime",
+        "incant_render_data",
+        "incant_render_native",
+        "incant_render",
+        "incant_wasm_runtime",
+        "incant_script",
+        "incant_game_runtime",
+        "--features",
+        "incant_script/static-module"
+      ],
+      "exit": 0,
+      "seconds": 0.5577474170131609,
+      "log": "/tmp/incant-crossfade-union-checks/graph.log",
+      "sha256": "9cc9ace2774a16fbe998e507a0188abf17ec3789190c5df34e16d3549224cd78"
+    },
+    {
+      "name": "wasm-sdk",
+      "command": [
+        "python3",
+        "tools/generate_wasm_sdk.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.1397262079990469,
+      "log": "/tmp/incant-crossfade-union-checks/wasm-sdk.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "tools",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "tools.tests.test_wasm_sdk",
+        "tools.tests.test_wasm2c_prepare",
+        "tools.tests.test_wasm2c_shipping",
+        "tools.tests.test_wasm_metadata"
+      ],
+      "exit": 0,
+      "seconds": 0.38371066699619405,
+      "log": "/tmp/incant-crossfade-union-checks/tools.log",
+      "sha256": "344fad22e8f29dff1e2acd3ae66aaba8ca7862c58b98d6f09db54da1db9b0e06"
+    },
+    {
+      "name": "typescript",
+      "command": [
+        "node",
+        "--test",
+        "tools/tests/native_script.test.mjs"
+      ],
+      "exit": 0,
+      "seconds": 3.7275884590053465,
+      "log": "/tmp/incant-crossfade-union-checks/typescript.log",
+      "sha256": "1ef18fb5bac05efbd47813dfbdfafaf4df08b1a8c9e1a1cc7704348fdfeb38a2"
+    },
+    {
+      "name": "types",
+      "command": [
+        "node",
+        "node_modules/typescript/bin/tsc",
+        "--noEmit",
+        "-p",
+        "sdk/ts/tsconfig.json"
+      ],
+      "exit": 0,
+      "seconds": 0.18724841700168326,
+      "log": "/tmp/incant-crossfade-union-checks/types.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "sdk",
+      "command": [
+        "node",
+        "tools/generate_sdk.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.042862583009991795,
+      "log": "/tmp/incant-crossfade-union-checks/sdk.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.9806812920141965,
+      "log": "/tmp/incant-crossfade-union-checks/fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.032089624990476295,
+      "log": "/tmp/incant-crossfade-union-checks/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "ordinary_tests": {
+    "passed": 367,
+    "failed": 0,
+    "ignored_gpu": 71,
+    "groups": 66
+  },
+  "actual_wasmtime_compiled_wasm2c_tests": {
+    "passed": 313,
+    "failed": 0,
+    "ignored": 0,
+    "groups": 54,
+    "overlap_with_ordinary_suite": "Counts are separate scopes, not additive distinct tests"
+  },
+  "logs": {
+    "/tmp/incant-crossfade-union-checks/clippy.log": {
+      "sha256": "ce8ae565b4b5735b80d463ba21b90c78c5a404ba928020e07e12dce6ed056c06",
+      "bytes": 4221
+    },
+    "/tmp/incant-crossfade-union-checks/conformance.log": {
+      "sha256": "574af3621e3ea33f4f833844525fcf843cf3d6fd0f8b4c4cda3bea2cebb4805b",
+      "bytes": 120
+    },
+    "/tmp/incant-crossfade-union-checks/conventions.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/incant-crossfade-union-checks/fmt.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/incant-crossfade-union-checks/graph.log": {
+      "sha256": "9cc9ace2774a16fbe998e507a0188abf17ec3789190c5df34e16d3549224cd78",
+      "bytes": 230
+    },
+    "/tmp/incant-crossfade-union-checks/sdk.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/incant-crossfade-union-checks/tests.log": {
+      "sha256": "05d1c23c773e37b56d2eeb6e383c8a54065b2cb8db14d432c58e109480049fcd",
+      "bytes": 59314
+    },
+    "/tmp/incant-crossfade-union-checks/tools.log": {
+      "sha256": "344fad22e8f29dff1e2acd3ae66aaba8ca7862c58b98d6f09db54da1db9b0e06",
+      "bytes": 119
+    },
+    "/tmp/incant-crossfade-union-checks/types.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/incant-crossfade-union-checks/typescript.log": {
+      "sha256": "1ef18fb5bac05efbd47813dfbdfafaf4df08b1a8c9e1a1cc7704348fdfeb38a2",
+      "bytes": 2181
+    },
+    "/tmp/incant-crossfade-union-checks/wasm-sdk.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/incant-crossfade-union-checks/wasm32.log": {
+      "sha256": "a8482a35e1bb0fd44b5cba5e8ab6d6ba0a3996247295eced926b0d287f3638b3",
+      "bytes": 1586
+    },
+    "/tmp/incant-crossfade-union-conformance/conformance-0.log": {
+      "sha256": "f9d3aa78e1eae78db811a53c020600f319f3a36b73facadcd2cd7e4f327de2e0",
+      "bytes": 41459
+    },
+    "/tmp/incant-crossfade-union-conformance/conformance-1.log": {
+      "sha256": "3970df40f204598483a380d43360fffb4aa62606c8a417d4cfc4eb719967f138",
+      "bytes": 1934
+    },
+    "/tmp/incant-crossfade-union-conformance/conformance-2.log": {
+      "sha256": "87b66f96e4e3597b6e432a05bb2e9d41c85ac65254d6ea6b769a84d76cc59177",
+      "bytes": 2495
+    },
+    "/tmp/incant-crossfade-union-conformance/cook-build.log": {
+      "sha256": "56880a0749089cfc6ee63ff9ad0c39aa06aeb2e9ba10abb400d125e14c0d95ed",
+      "bytes": 15042
+    },
+    "/tmp/incant-crossfade-union-headless.log": {
+      "sha256": "d470d5d7d1c6862b35ddeb12bf82ba90b4062b01dae9ea1f2b543f1c39db9216",
+      "bytes": 3526
+    },
+    "/tmp/incant-crossfade-main122-export.log": {
+      "sha256": "a3a5213119c81d2239f5079ab1caf9d02d22943d2535aa451778a21e3e1a9f38",
+      "bytes": 219
+    },
+    "/tmp/incant-crossfade-union-conformance/development/result.json": {
+      "sha256": "87b66f96e4e3597b6e432a05bb2e9d41c85ac65254d6ea6b769a84d76cc59177",
+      "bytes": 2495
+    },
+    "/tmp/incant-crossfade-union-conformance/prepared-manifest.json": {
+      "sha256": "316952b867feb577ef6dc59d6a6b55a930af1350abb8e7bc4f9d726e9fc57ac0",
+      "bytes": 57666
+    },
+    "/tmp/incant-crossfade-union-conformance/rust-sdk.json": {
+      "sha256": "59356b29728f752d1486edafcab1d093827a664f4a8873a38742dfb2f14061ab",
+      "bytes": 1317
+    }
+  },
+  "headless": {
+    "time": "2026-10-12T03:18:30.477928+00:00",
+    "head": "da0ef67bace626c385bf2b90cf9fb67999e867b3",
+    "binary": "/tmp/incant-animation-integration-target/ci/incant_headless",
+    "sha256": "a9e3a5bc54ce24a239d5a890ed57572439da25fd86f7490a1632fd064a3e3115",
+    "bytes": 54481856,
+    "log": "/tmp/incant-crossfade-union-headless.log",
+    "log_sha256": "d470d5d7d1c6862b35ddeb12bf82ba90b4062b01dae9ea1f2b543f1c39db9216",
+    "exit": 0,
+    "only_post_test_input_delta": {
+      "tools/probes/native-text-export.py": {
+        "tested": "3cdda7c56597a3a5b741e39482b324a38019956a06b068e9a3b136fa4fa72a65",
+        "current": "52bcdde712fd673281ddb12b56317d0d69ca4e9128564b463b049a38c9f384a6"
+      }
+    },
+    "scope": "Current headless build; no engine/runtime/compiler source difference from tested frozen crossfade union. Text probe and evidence followup dirty, not compiled inputs."
+  },
+  "fresh_export": {
+    "receipt": "native-crossfade-main122-process.json",
+    "sha256": "3a7daf53b66565da232c0ac6b14ae5e5b26f7460237a42d634dcf3f85170abb9",
+    "player_sha256": "84395a67203cf4c56405eba2cbef374135f4ec97cef9fb8a06772b848724c6cd",
+    "player_bytes": 8673056,
+    "target": "aarch64-apple-darwin",
+    "processes": 9,
+    "successful": 7,
+    "refusals": 2,
+    "full_replays": 3,
+    "ticks_per_full_replay": 100,
+    "independent_snapshot_cases": 62,
+    "continuations": [
+      "active world-save v5",
+      "paused world-save v5"
+    ],
+    "authoring_private_build_and_external_source_maps_removed": true,
+    "removed_maps": {
+      "symbols/behavior.js.map": "c0620526be781bb222c83d347f36d15f6a7b87ba49ddcc4dd0f5032fa766e96c"
+    },
+    "retained_receipts": {
+      "active-continued-observe.json": {
+        "sha256": "bfe1ee910b31e873c675a288a7aceb48146a5d9901bed9a61aa4dd01b73e72ad",
+        "bytes": 16382
+      },
+      "active-continued-receipt.json": {
+        "sha256": "cfa48d11d5034707037a2a15d93c30fc0880ed98692a814e2326b99ad38f4c22",
+        "bytes": 39782
+      },
+      "active-continued.json": {
+        "sha256": "4dae19f0cb73a5bf8a26fd9a46bed222dc6417a24ea833f8bd6ddb6a142a09e9",
+        "bytes": 55644
+      },
+      "active-continued.save": {
+        "sha256": "10f41f61d75fb35607e9885861e0afb08f3ebce51c56b3a5c841dfa5d60dc162",
+        "bytes": 1206
+      },
+      "active-first-observe.json": {
+        "sha256": "c7f28b5d6aa1360e71c80662aea9acd4faa0bc292f5d5f7ed5a6e519cd19c172",
+        "bytes": 4169
+      },
+      "active-first-receipt.json": {
+        "sha256": "b0e54292b7eeb0108532b50a09fa369515186026555656b91f9963a4298aeb60",
+        "bytes": 8365
+      },
+      "active-first.json": {
+        "sha256": "9eb699d8c26ffa08b523fc2b89e8b49580cfab66641a91745619e786f2258044",
+        "bytes": 12010
+      },
+      "active.save": {
+        "sha256": "340b880270322145f4587370fbda16cae69c873b5668bf793241a62bde5011d7",
+        "bytes": 1278
+      },
+      "authoring.json": {
+        "sha256": "4580bb5dd1e1452eafd016a033438a1562d08d246817b487e281bd731a84a78a",
+        "bytes": 34901
+      },
+      "baseline-observe.json": {
+        "sha256": "4847f88c19eb0439c964242fa541956a724ed798284c172cb890581995edda88",
+        "bytes": 20385
+      },
+      "baseline-receipt.json": {
+        "sha256": "f5483c63c736776cefea3f3b207cc71204316b0f67ee70328c3d53fe2da1097a",
+        "bytes": 45985
+      },
+      "baseline.json": {
+        "sha256": "fe67723af29a38e13b1f5b938b5918e795574889e967fd37ef8fcb34022ec407",
+        "bytes": 64935
+      },
+      "baseline.save": {
+        "sha256": "10f41f61d75fb35607e9885861e0afb08f3ebce51c56b3a5c841dfa5d60dc162",
+        "bytes": 1206
+      },
+      "corrupt-observe.json": {
+        "sha256": "30b5daec6df998201a829c3ff272dd117f2b7078b958e0afd3eedc4c1c10ce14",
+        "bytes": 164
+      },
+      "corrupt-receipt.json": {
+        "sha256": "985d65702fd6031a1974cb2605cebfe67fd4611af334375ff9c0447d20e6eaff",
+        "bytes": 656
+      },
+      "corrupt.save": {
+        "sha256": "8496b7cd1a8073a95df59d2c688b78c98af4e85f41aa7a1c617eec406a3dca42",
+        "bytes": 1278
+      },
+      "native-play.json": {
+        "sha256": "03992f8b872803bc7c7dfb2dda6991a48354dffcef69c91586bfedd07fb36b4e",
+        "bytes": 67196
+      },
+      "package/build.log": {
+        "sha256": "a0f1496aec420703b291cdff3bd2e48ef270e80d15a7645fa41895ec706a0f26",
+        "bytes": 1322344
+      },
+      "package/export.json": {
+        "sha256": "d967cb969ef5aacd0708f88196f2f2eac5e294dc063ed60bf6c9ffe37f1028fe",
+        "bytes": 8856
+      },
+      "package/player/data/empty-input.json": {
+        "sha256": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+        "bytes": 103
+      },
+      "package/player/data/input-actions.json": {
+        "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "bytes": 2
+      },
+      "package/player/data/package.json": {
+        "sha256": "fb607b54db618df5b0d1696d0ad5da3fc325e8916d12aaec7f95245deedfea21",
+        "bytes": 479
+      },
+      "package/project-build.json": {
+        "sha256": "0a15efb7eb572d87b093a0ba5e0bd6beba5bfa2930c224abb754fe0eaf4efd88",
+        "bytes": 1684
+      },
+      "package/symbols/script-symbols.json": {
+        "sha256": "3f0e7e295a289f3b74ba54265514a4db9f2c63d4ecae8d9b9c04ded2846bda7f",
+        "bytes": 1039
+      },
+      "paused-continued-observe.json": {
+        "sha256": "ba3a7b3a99898263d7686e69d64f1784da9c2d4df41c72a4194964cb2fc86ec5",
+        "bytes": 15034
+      },
+      "paused-continued-receipt.json": {
+        "sha256": "14e52584277faaa8319cb886012e4d2a9a9035b3f35350bbb4b2f95e20334dbe",
+        "bytes": 37751
+      },
+      "paused-continued.json": {
+        "sha256": "a111d3cd2a18c61ad5c67d789adc4091dfd10a6632b1473cca69e7b790349271",
+        "bytes": 52641
+      },
+      "paused-continued.save": {
+        "sha256": "10f41f61d75fb35607e9885861e0afb08f3ebce51c56b3a5c841dfa5d60dc162",
+        "bytes": 1206
+      },
+      "paused-first-observe.json": {
+        "sha256": "ebc793c48d64b5192017bdc0b76440abfa9499f1b47a8d3385fa8e6aad393e08",
+        "bytes": 5517
+      },
+      "paused-first-receipt.json": {
+        "sha256": "cea68e8fbadb32533efbe5cfd371a62ab967b9a2d283446310f34ae64e4c986d",
+        "bytes": 10368
+      },
+      "paused-first.json": {
+        "sha256": "dee1a64d87e7ccd1e35be2aab3a5293402b0aa03335e6655af4fe9ed7fe1cafa",
+        "bytes": 14985
+      },
+      "paused.save": {
+        "sha256": "e18dee19aa81b914980ce4e850b83f5ffc6fa6d4c415ee2bf63b790a23c729f4",
+        "bytes": 1278
+      },
+      "public-commands.json": {
+        "sha256": "b0d4301a1aebef02d031c27b4e9b8de913c84b7f5ddc93b9555e516d5ae1d525",
+        "bytes": 33686
+      },
+      "repeat-0-observe.json": {
+        "sha256": "4847f88c19eb0439c964242fa541956a724ed798284c172cb890581995edda88",
+        "bytes": 20385
+      },
+      "repeat-0-receipt.json": {
+        "sha256": "c4fc64f24821153bb286944791fa890b3d8ef7605cf951947ab88edd701e8ffb",
+        "bytes": 45985
+      },
+      "repeat-0.json": {
+        "sha256": "fe67723af29a38e13b1f5b938b5918e795574889e967fd37ef8fcb34022ec407",
+        "bytes": 64935
+      },
+      "repeat-0.save": {
+        "sha256": "10f41f61d75fb35607e9885861e0afb08f3ebce51c56b3a5c841dfa5d60dc162",
+        "bytes": 1206
+      },
+      "repeat-1-observe.json": {
+        "sha256": "4847f88c19eb0439c964242fa541956a724ed798284c172cb890581995edda88",
+        "bytes": 20385
+      },
+      "repeat-1-receipt.json": {
+        "sha256": "9b6cc539d487f89966a80242045da35d1419bfefebadcccce0867bf1210c6a24",
+        "bytes": 45985
+      },
+      "repeat-1.json": {
+        "sha256": "fe67723af29a38e13b1f5b938b5918e795574889e967fd37ef8fcb34022ec407",
+        "bytes": 64935
+      },
+      "repeat-1.save": {
+        "sha256": "10f41f61d75fb35607e9885861e0afb08f3ebce51c56b3a5c841dfa5d60dc162",
+        "bytes": 1206
+      },
+      "result.json": {
+        "sha256": "3a7daf53b66565da232c0ac6b14ae5e5b26f7460237a42d634dcf3f85170abb9",
+        "bytes": 51375
+      },
+      "wrong-observation-observe.json": {
+        "sha256": "f3a49c4aebd95764a1972119d5387ce3f78aa2d52c20ba12d1763515c2ad68b2",
+        "bytes": 795
+      },
+      "wrong-observation-receipt.json": {
+        "sha256": "a0acf0c69ea99eb587d9aee3aea696b827beef18e28e445b5c416c1f221de307",
+        "bytes": 2780
+      }
+    }
+  },
+  "text_proof_correction": {
+    "commit": "787505e51554ad752c5634fa59ba21072da2d8ae",
+    "review": "native-text-source-map-root-review.json",
+    "sha256": "e1f0c1dd643c82fd662e81dba2b697d0ffbe07545d2855c13b6f5227f077af05",
+    "replay": "native-text-input-map-free-replay.json",
+    "replay_sha256": "222e42c223114723f7e8ac051242b6b09c7ac73c084ac24272487e28a80a5ffb"
+  },
+  "limitations": [
+    "Local CPU render input and SDK observations, not deformed-vertex readback/GPU/window/appearance/device/performance acceptance",
+    "Public Wasm project selection/export remains unsupported; this is not static wasm2c shipping evidence",
+    "Existing combined SDK tests cover Wasmtime/static wasm2c separately; full static module-state checkpoints remain Unsupported",
+    "Ordinary checkpoints retain explicit script state; ephemeral VM globals/closures are not persisted",
+    "No phase gate or full blend graph/state machine/IK/root-motion claim",
+    "No new crossfade numerical GPU or Claude appearance gate; static-module session saves remain unsupported",
+    "Full release checkpoint8 is separately frozen to main117; current main feature checks do not promote it"
+  ]
+}

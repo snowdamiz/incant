@@ -19,7 +19,7 @@ def validate(data):
     if data['id_endianness'] != 'big' or data['optional_none'] != -1: raise ValueError('unsupported identity/optional representation')
     if not data['namespaces'] or data['namespaces'].get('incant_v1') != 'imports': raise ValueError('missing base namespace')
     for namespace, field in data['namespaces'].items():
-        if not re.fullmatch(r'incant(?:_[a-z]+)*_v1',namespace) or not re.fullmatch(r'[a-z]+',field): raise ValueError('invalid namespace')
+        if not re.fullmatch(r'incant(?:_[a-z]+)*_v[1-9][0-9]*',namespace) or not re.fullmatch(r'[a-z][a-z0-9]*',field): raise ValueError('invalid namespace')
     for f in data['functions']:
         if set(f) != {'namespace','name','opcode','params','result','call'} or f['namespace'] not in data['namespaces']: raise ValueError('unknown import definition')
         if f['params'][0] != ['epoch','i64'] or len(f['params']) > 5 or any(t != 'i32' for _,t in f['params'][1:]) or f['result'] not in (None,'i32'): raise ValueError('unsupported import signature')
@@ -45,9 +45,13 @@ def generate(data, digest):
     shared=[banner,'#![no_std]\n#![forbid(unsafe_code)]\n',f'pub const ABI_VERSION: i32 = {data["abi_version"]};\n']
     if 'incant_localization_v1' in data['namespaces']:
         shared.append('pub mod localization;\n')
+    if 'incant_navigation_v1' in data['namespaces']:
+        shared.append('pub mod steering;\n')
     shared += [f'pub const {name}: usize = {value};\n' for name,value in data['constants'].items()]
     shared += [f'pub const {name}: &[u8; 8] = b"{value}";\n' for name,value in data['magic'].items()]
-    shared += ['pub const FLIPBOOK_MAX_BYTES: usize = FlipbookHeader::SIZE + FLIPBOOK_MAX_ROWS * Flipbook::SIZE;\n',
+    shared += ['pub const ANIMATION_V2_MAX_BYTES: usize = AnimationHeader::SIZE + ANIMATION_MAX_ROWS * AnimationRowV2::SIZE;\n',
+               'pub const ANIMATION_MAX_BYTES: usize = AnimationHeader::SIZE + ANIMATION_MAX_ROWS * AnimationRow::SIZE;\n',
+               'pub const FLIPBOOK_MAX_BYTES: usize = FlipbookHeader::SIZE + FLIPBOOK_MAX_ROWS * Flipbook::SIZE;\n',
                '#[derive(Clone,Copy,Debug,PartialEq,Eq)] pub enum ValueType { I32, I64 }\n',
                '#[derive(Debug)] pub struct Import { pub namespace: &\'static str, pub name: &\'static str, pub opcode: u32, pub params: &\'static [ValueType], pub results: &\'static [ValueType] }\n',
                'pub const IMPORTS: &[Import] = &[\n']

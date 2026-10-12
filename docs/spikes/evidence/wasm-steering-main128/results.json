@@ -1,0 +1,100 @@
+[
+  {
+    "name": "actual-hosts",
+    "command": [
+      "python3",
+      "/tmp/incant-steering-child-retry.py",
+      "/tmp/incant-wasm-steering-main128-checks-003/conformance",
+      "--conformance-only",
+      "--profile",
+      "ci"
+    ],
+    "exit": 0,
+    "seconds": 46.41149224998662,
+    "log": "/tmp/incant-wasm-steering-main128-checks-003/actual-hosts.log",
+    "sha256": "3ad71691bd79d43d58279dbd26ce0320d64c8873a220c61fb214d84c968d3653"
+  },
+  {
+    "name": "wasm32",
+    "command": [
+      "./tools/cargo",
+      "check",
+      "--locked",
+      "--offline",
+      "-j2",
+      "-p",
+      "incant_wasm_abi",
+      "-p",
+      "incant-module",
+      "--target",
+      "wasm32-unknown-unknown"
+    ],
+    "exit": 0,
+    "seconds": 0.38654908299213275,
+    "log": "/tmp/incant-wasm-steering-main128-checks-003/wasm32.log",
+    "sha256": "52dff9035b21e3ce7c3aaf68d32578e45b7d6ea1d79f728e1f19c7290f805ff8"
+  },
+  {
+    "name": "graph",
+    "command": [
+      "python3",
+      "tools/check_runtime_dependencies.py",
+      "incant_wasm_runtime",
+      "incant_game_runtime"
+    ],
+    "exit": 0,
+    "seconds": 0.33193283301079646,
+    "log": "/tmp/incant-wasm-steering-main128-checks-003/graph.log",
+    "sha256": "044085acb36ceb2b9c7b69e847b16af7b62788e8a891a9f11414e50f25c0a3d5"
+  },
+  {
+    "name": "tooling",
+    "command": [
+      "npm",
+      "run",
+      "test:tools"
+    ],
+    "exit": 0,
+    "seconds": 25.568296249984996,
+    "log": "/tmp/incant-wasm-steering-main128-checks-003/tooling.log",
+    "sha256": "7b11f3b6a3801b73b2f6bf93a8697d51aa34277d6f2ce06b03ccaa136772fa76"
+  },
+  {
+    "name": "wasm-sdk",
+    "command": [
+      "python3",
+      "tools/generate_wasm_sdk.py",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.14731116700568236,
+    "log": "/tmp/incant-wasm-steering-main128-checks-003/wasm-sdk.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "fmt",
+    "command": [
+      "./tools/cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.9856591249990743,
+    "log": "/tmp/incant-wasm-steering-main128-checks-003/fmt.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "conventions",
+    "command": [
+      "python3",
+      "tools/generate_conventions.py",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.0374354170053266,
+    "log": "/tmp/incant-wasm-steering-main128-checks-003/conventions.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]
