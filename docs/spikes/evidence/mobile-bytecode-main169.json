@@ -2748,5 +2748,10 @@
     "Metadata hashes are compatibility checks, not authentication of project executable bytes",
     "Original producer proof is preserved separately; current integration uses new matching archives and caller executables"
   ],
-  "target_ownership": "Explicit checkout-owned target APFS-cloned from idle cache; only cloned local/path-package outputs cleaned for ci/release/dev before use. No shared target writes."
+  "target_ownership": "Explicit checkout-owned target APFS-cloned from idle cache; only cloned local/path-package outputs cleaned for ci/release/dev before use. No shared target writes.",
+  "main170_addendum": {
+    "path": "docs/spikes/evidence/mobile-bytecode-main169/main170-addendum.json",
+    "sha256": "15ce6256ee7964289876c03554df5a6662b392a537c0b813169e69854d974ec1",
+    "meaning": "Reviewed desktop exporter repair integrated after actual archive execution; archive/compiler/caller closure unchanged, six parser cases repeated."
+  }
 }

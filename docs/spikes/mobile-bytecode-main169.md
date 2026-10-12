@@ -42,3 +42,11 @@ fixture does not claim shipping-profile, phone performance, rendering, signing,
 Android admission or authored-project iOS export. A separate ordinary desktop
 export detected the player library/bin audit ambiguity after main169; that failed
 export is retained by its owner and is not part of this fixture's success claim.
+
+Actual main170 `743c4c0c` is now included. Its only code changes are the reviewed
+desktop exporter audit and six parser tests; 1,883 of 1,884 original frozen inputs
+remain exact, with only `tools/export_native.py` changed and the new test file
+added. All archive/compiler/dependency/caller inputs and eleven producer files
+are unchanged. The six new parser tests pass on the union. The
+[ancestry addendum](evidence/mobile-bytecode-main169/main170-addendum.json)
+records the exact changed path and preserves the original target execution scope.
