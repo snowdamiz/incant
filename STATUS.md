@@ -16,12 +16,36 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Native audio transport — main162 review accepted; fast check pending
+## Core presentation bindings — current-main integration verified
+
+The two reviewed sample/helper inputs are unchanged. Strict types, seven native
+scenarios and a fresh ordinary source/map/build-deleted win/loss/repeat proof pass
+on the integrated native HUD/audio engine. Actual text/locale/result parenting,
+repeat PCM and terminal silence are verified. Independent integration audit is accepted; fast CI/publication remain pending.
+Authored appearance/device gates remain separate.
+[Current integration evidence](docs/spikes/core-presentation-integration.md).
+
+## Core Sample presentation bindings — locally verified
+
+Optional authored role maps connect gameplay to localized health, collection and
+objective text, result labels, music and one-shot cues. The controller queues
+native commands only for state changes and leaves layout and media to the level
+builder. Seven original gameplay scenarios and strict typing pass. A fresh
+ordinary export passes win, loss and repeat processes after its source/cache
+inputs are removed; actual committed HUD text, French locale switching, result
+parenting, repeat PCM and terminal music silence are verified. Independent
+source and execution review is accepted. The initial helper's full-health win
+expectation was corrected against the same frozen player; game code was unchanged.
+This is a numerical fixture, not the finished authored level or device gate.
+Headless recorded UI routing and physics save support remain separate open work.
+[Contract and retained evidence](docs/spikes/core-presentation-bindings.md).
+
+## Native audio transport — merged main163
 
 541 affected CPU cases, Clippy and target/contracts checks pass. A fresh ordinary
 package passes four source/map/build-deleted playback/continuation processes with
 exact save and PCM equality plus ten precise refusal controls. Integration source
-seams and final evidence are independently accepted; exact-head fast CI/publication remain pending. Wasm
+seams, final evidence and exact-head fast CI passed before PR163 merged. Wasm
 transport, Core presentation and physical audio/device gates remain separate.
 [Current-main evidence](docs/spikes/native-audio-transport-main162.md).
 
