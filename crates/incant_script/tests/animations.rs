@@ -7,6 +7,9 @@ use incant_types::{Animation, Transform};
 use sha2::{Digest, Sha256};
 use std::{collections::BTreeMap, sync::Arc, time::Duration};
 
+#[path = "animations/crossfade.rs"]
+mod crossfade;
+
 const ONE: &str = "00000000000000000000000001";
 fn id(n: u128) -> StableId {
     StableId(n.to_be_bytes())

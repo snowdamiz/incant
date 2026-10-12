@@ -1,4 +1,5 @@
 //! Strict primitive controls share the tick-local structural queue and refusal.
+use incant_runtime::MAX_ANIMATION_TRANSITION_SECONDS;
 use incant_runtime::{AnimationControl, AnimationSample, StructuralCommand};
 use incant_types::{MAX_ANIMATION_CLIPS, MAX_ANIMATION_SPEED};
 use rquickjs::{Ctx, Exception, Value};
@@ -15,7 +16,7 @@ pub(crate) fn parse<'js>(
     // QuickJS owns this conversion under the VM memory quota. Check its length
     // before copying into a Rust string; no arbitrary native text allocation.
     let bytes = action.clone().to_cstring()?;
-    if bytes.is_empty() || bytes.len() > 7 {
+    if bytes.is_empty() || bytes.len() > 9 {
         return Err(invalid());
     }
     drop(bytes);
@@ -33,7 +34,7 @@ pub(crate) fn parse<'js>(
     }
     drop(entity_bytes);
     let control = match (action.as_str(), rest) {
-        ("select", [clip, time]) => {
+        ("select", [clip, time]) | ("crossfade", [clip, time, _]) => {
             let clip = if clip.is_null() {
                 None
             } else {
@@ -48,10 +49,25 @@ pub(crate) fn parse<'js>(
                         .ok_or_else(invalid)? as u16,
                 )
             };
-            AnimationControl::Select(AnimationSample {
+            let sample = AnimationSample {
                 clip,
                 seconds: seconds(time)?,
-            })
+            };
+            if sample.clip.is_none() && sample.seconds != 0. {
+                return Err(invalid());
+            }
+            if action == "crossfade" {
+                let duration = seconds(&rest[2])?;
+                if duration > MAX_ANIMATION_TRANSITION_SECONDS {
+                    return Err(invalid());
+                }
+                AnimationControl::Crossfade {
+                    target: sample,
+                    duration,
+                }
+            } else {
+                AnimationControl::Select(sample)
+            }
         }
         ("seek", [time]) => AnimationControl::Seek(seconds(time)?),
         ("playing", [playing]) => {

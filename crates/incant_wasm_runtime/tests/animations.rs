@@ -6,6 +6,9 @@ use incant_types::Transform;
 use incant_wasm_abi as abi;
 use incant_wasm_runtime::{BoundaryError, Call, Capability, limits};
 
+#[path = "animations/crossfade.rs"]
+mod crossfade;
+
 const DT: f64 = 1. / 60.;
 const ID: usize = 513;
 const COMMAND: usize = 533;
@@ -379,66 +382,76 @@ fn actual_shared_call_and_memory_limits_reject_authorized_animation_prefixes() {
 
 #[test]
 fn shared_transfer_limit_is_sticky_without_partial_animation_copy() {
-    let initial = scene();
-    let mut entities = initial.entities().to_vec();
-    for n in 0..4094u64 {
-        let mut raw = [0; 16];
-        raw[8..].copy_from_slice(&(n + 1).to_be_bytes());
-        entities.push(CookedEntity {
-            id: StableId(raw),
-            parent: None,
-            transform: Transform::default(),
-            velocity: None,
-        });
-    }
-    let initial = CookedScene::new(id(0), 60, entities)
-        .unwrap()
-        .with_spatial(initial.visual_assets().to_vec(), initial.spatial().to_vec())
-        .unwrap();
-    let mut world = NativeWorld::new(initial);
-    let before = world.save_bytes().unwrap();
-    let mut cap = Capability::default();
-    let mut memory = vec![0; 4096 * 80];
-    let epoch = cap.begin(&mut world, DT).unwrap();
-    prefix(&mut cap, &mut memory, epoch);
-    // Large unrelated numeric reads reach the real transfer boundary without
-    // exhausting CALLS. A rejected unrelated read retains its prior semantics.
-    while cap
-        .invoke(
-            &mut memory,
-            epoch,
-            Call::Column {
-                chunk: 0,
-                ptr: 0,
-                velocity: false,
-                write: false,
-            },
-        )
-        .is_ok()
-    {}
-    loop {
-        memory.fill(0xa5);
-        let copied = memory.clone();
-        match cap.invoke(
-            &mut memory,
-            epoch,
-            Call::ReadAnimations {
-                ptr: SNAPSHOT as i32,
-                capacity: LENGTH as i32,
-            },
-        ) {
-            Ok(length) => assert_eq!(length as usize, LENGTH),
-            Err(error) => {
-                assert!(
-                    matches!(error, BoundaryError::Limit("transfer quota")),
-                    "{error}"
-                );
-                assert_eq!(memory, copied);
-                break;
+    const V2_LENGTH: usize = abi::AnimationHeader::SIZE + 2 * abi::AnimationRowV2::SIZE;
+    for v2 in [false, true] {
+        let initial = scene();
+        let mut entities = initial.entities().to_vec();
+        for n in 0..4094u64 {
+            let mut raw = [0; 16];
+            raw[8..].copy_from_slice(&(n + 1).to_be_bytes());
+            entities.push(CookedEntity {
+                id: StableId(raw),
+                parent: None,
+                transform: Transform::default(),
+                velocity: None,
+            });
+        }
+        let initial = CookedScene::new(id(0), 60, entities)
+            .unwrap()
+            .with_spatial(initial.visual_assets().to_vec(), initial.spatial().to_vec())
+            .unwrap();
+        let mut world = NativeWorld::new(initial);
+        let before = world.save_bytes().unwrap();
+        let mut cap = Capability::default();
+        let mut memory = vec![0; 4096 * 80];
+        let epoch = cap.begin(&mut world, DT).unwrap();
+        prefix(&mut cap, &mut memory, epoch);
+        // Large unrelated numeric reads reach the real transfer boundary without
+        // exhausting CALLS. A rejected unrelated read retains its prior semantics.
+        while cap
+            .invoke(
+                &mut memory,
+                epoch,
+                Call::Column {
+                    chunk: 0,
+                    ptr: 0,
+                    velocity: false,
+                    write: false,
+                },
+            )
+            .is_ok()
+        {}
+        loop {
+            memory.fill(0xa5);
+            let copied = memory.clone();
+            match cap.invoke(
+                &mut memory,
+                epoch,
+                if v2 {
+                    Call::ReadAnimationsV2 {
+                        ptr: SNAPSHOT as i32,
+                        capacity: V2_LENGTH as i32,
+                    }
+                } else {
+                    Call::ReadAnimations {
+                        ptr: SNAPSHOT as i32,
+                        capacity: LENGTH as i32,
+                    }
+                },
+            ) {
+                Ok(length) => assert_eq!(length as usize, if v2 { V2_LENGTH } else { LENGTH }),
+                Err(error) => {
+                    assert!(
+                        matches!(error, BoundaryError::Limit("transfer quota")),
+                        "{error}"
+                    );
+                    assert_eq!(memory, copied);
+                    break;
+                }
             }
         }
+        rejected(&mut cap, &mut world, &before);
     }
-    rejected(&mut cap, &mut world, &before);
 }
 
 #[test]

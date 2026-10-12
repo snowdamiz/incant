@@ -13,6 +13,9 @@ export default {
       if (input.actions.animationSelect?.pressed) {
         commands.controlAnimation(id, 'select', 0, 0);
       }
+      if (input.actions.animationCrossfade?.pressed && (animations.transitionFlags[row] & 1) === 0) {
+        commands.controlAnimation(id, 'crossfade', 0, 0, 0.5);
+      }
       if (input.actions.animationToggle?.pressed) {
         commands.controlAnimation(id, 'playing', !playing);
       }

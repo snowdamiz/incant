@@ -11,7 +11,7 @@ pub mod input;
 pub mod localization;
 mod raw;
 mod tick;
-pub use animation::{AnimationControl, AnimationPlayback, AnimationSnapshot};
+pub use animation::{AnimationControl, AnimationPlayback, AnimationSnapshot, AnimationTransition};
 pub use flipbook::{FlipbookSnapshot, Playback};
 pub use incant_wasm_abi::{ActionKind, GamepadButton, Key, LogLevel, MouseButton, TouchPhase};
 pub use input::InputSnapshot;

@@ -513,6 +513,61 @@
       "result": "i32",
       "opcode": 25,
       "call": "Call::Format { ptr, len }"
+    },
+    {
+      "namespace": "incant_animation_v2",
+      "name": "snapshot_len",
+      "opcode": 26,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::AnimationLenV2"
+    },
+    {
+      "namespace": "incant_animation_v2",
+      "name": "read_snapshot",
+      "opcode": 27,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "capacity",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::ReadAnimationsV2 { ptr, capacity }"
+    },
+    {
+      "namespace": "incant_animation_v2",
+      "name": "control",
+      "opcode": 28,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "id",
+          "i32"
+        ],
+        [
+          "ptr",
+          "i32"
+        ]
+      ],
+      "result": null,
+      "call": "Call::ControlAnimationV2 { id, ptr }"
     }
   ],
   "enums": {
@@ -1453,6 +1508,53 @@
         "value",
         "f64"
       ]
+    ],
+    "AnimationRowV2": [
+      [
+        "id",
+        "u8",
+        16
+      ],
+      [
+        "clip",
+        "u32"
+      ],
+      [
+        "flags",
+        "u32"
+      ],
+      [
+        "seconds",
+        "f64"
+      ],
+      [
+        "speed",
+        "f64"
+      ],
+      [
+        "source_clip",
+        "u32"
+      ],
+      [
+        "transition_flags",
+        "u32"
+      ],
+      [
+        "source_seconds",
+        "f64"
+      ],
+      [
+        "source_speed",
+        "f64"
+      ],
+      [
+        "elapsed",
+        "f64"
+      ],
+      [
+        "duration",
+        "f64"
+      ]
     ]
   },
   "input_sections": [
@@ -1511,7 +1613,8 @@
     "ANIMATION_MAX_ROWS": 100000,
     "ANIMATION_MAX_CLIPS": 256,
     "ANIMATION_MAX_SPEED": 16,
-    "LOCALIZATION_FORMAT_BYTES": 24
+    "LOCALIZATION_FORMAT_BYTES": 24,
+    "ANIMATION_MAX_TRANSITION_SECONDS": 60
   },
   "magic": {
     "INPUT_MAGIC": "INPINP01",
@@ -1520,7 +1623,8 @@
     "LOCALIZATION_SETTINGS_MAGIC": "INCLST01",
     "LOCALIZATION_RESULT_MAGIC": "INCLRS01",
     "ANIMATION_MAGIC": "INCAN001",
-    "LOCALIZATION_FORMAT_MAGIC": "INCLFM01"
+    "LOCALIZATION_FORMAT_MAGIC": "INCLFM01",
+    "ANIMATION_V2_MAGIC": "INCAN002"
   },
   "optional_none": -1,
   "namespaces": {
@@ -1529,6 +1633,7 @@
     "incant_flipbook_v1": "flipbook",
     "incant_log_v1": "log",
     "incant_localization_v1": "localization",
-    "incant_animation_v1": "animation"
+    "incant_animation_v1": "animation",
+    "incant_animation_v2": "animationv2"
   }
 }

@@ -444,6 +444,28 @@ impl<'tick> Tick<'tick> {
     ) -> Result<crate::AnimationSnapshot<'a>> {
         self.ready()?;
         // SAFETY: scalar length query, then a checked initialized destination.
+        let len = unsafe { raw::incant_animation_v2_snapshot_len(self.epoch) };
+        let len = self.snapshot_length(len, scratch.len(), abi::ANIMATION_V2_MAX_BYTES)?;
+        let actual = unsafe {
+            raw::incant_animation_v2_read_snapshot(
+                self.epoch,
+                scratch.as_mut_ptr() as usize as i32,
+                len as i32,
+            )
+        };
+        if actual as usize != len {
+            return self.check(Err(Error::Malformed));
+        }
+        self.check(crate::AnimationSnapshot::parse(&scratch[..len]))
+    }
+    /// Explicit legacy snapshot. The unchanged v1 host refuses when any active
+    /// transition cannot be represented; an ignored refusal rejects this update.
+    pub fn legacy_animations<'a>(
+        &mut self,
+        scratch: &'a mut [u8],
+    ) -> Result<crate::AnimationSnapshot<'a>> {
+        self.ready()?;
+        // SAFETY: scalar length query followed by checked initialized scratch.
         let len = unsafe { raw::incant_animation_v1_snapshot_len(self.epoch) };
         let len = self.snapshot_length(len, scratch.len(), abi::ANIMATION_MAX_BYTES)?;
         let actual = unsafe {
@@ -469,6 +491,23 @@ impl<'tick> Tick<'tick> {
         let bytes = self.check(control.encode())?;
         // SAFETY: both fixed-size initialized records remain live for this copied
         // synchronous call; the host also checks epoch, ranges and every field.
+        unsafe {
+            raw::incant_animation_v2_control(self.epoch, ptr(id), bytes.as_ptr() as usize as i32);
+        }
+        Ok(())
+    }
+    /// Explicit old-host control path; crossfades require the v2 import.
+    pub fn legacy_control_animation(
+        &mut self,
+        id: &EntityId,
+        control: crate::AnimationControl,
+    ) -> Result<()> {
+        self.ready()?;
+        if matches!(control, crate::AnimationControl::Crossfade { .. }) {
+            return self.check(Err(Error::Malformed));
+        }
+        let bytes = self.check(control.encode())?;
+        // SAFETY: fixed initialized records remain live during the copied call.
         unsafe {
             raw::incant_animation_v1_control(self.epoch, ptr(id), bytes.as_ptr() as usize as i32);
         }
