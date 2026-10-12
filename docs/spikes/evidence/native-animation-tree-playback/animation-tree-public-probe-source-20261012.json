@@ -1,0 +1,20 @@
+{
+  "reviewer": "/root/integrate_runtime_prs",
+  "scope": "Read-only probe correctness; actual shipping process results remain pending",
+  "sources": {
+    "tools/probes/native-animation-tree-export.py": "9d0f580ea681bfc2775ebf671b8c71b7fe640b43072639289404bdce5c7017a3",
+    "tools/probes/native-animation-tree-export/behavior.ts": "5314c1fdb8aa2012a492e1fdf78f521b6da364d1a379413e120b13e1be88dba1"
+  },
+  "findings": [],
+  "reviewed": [
+    "Independent quarter-cycle/tensor-product oracle covers all eight weighted samples including rest, parameter narrowing/widening, reverse/zero speed, state resets, master pause and completed rest pause/resume. Reverse postorder is asserted separately from weights and times.",
+    "TS observes full copied sample arrays, representative consistency and persistent per-entity counters; subsequent writes into copied arrays must not change following observations. Actual authored edits use one transaction with Undo/Redo/reopen controls.",
+    "All56 ticks validated via two log rows/tick; 19 selected ticks have12 independent vector assertions each. Six split continuations compare exact final saves, concatenated PCM, logs and CPU render resource counts; repeated runs compare reports and saves.",
+    "Authoring fingerprints and source/binary hashes bind preflight to export; private build removal required, owned source maps and authoring removed before restricted-environment copied player launches. Corrupt save and incorrect observation use exact typed diagnostics/nooutput controls."
+  ],
+  "limits": [
+    "No proof execution or build performed by this reviewer. Parent must verify final actual receipts/package identities.",
+    "Pose/sample and CPU render-resource observations do not prove numerical rendered skinning, pixels, timed tree fades, IK or reference-device performance.",
+    "Repeated full-process PCM equality is not directly asserted; each of six split PCM continuations is compared to baseline."
+  ]
+}

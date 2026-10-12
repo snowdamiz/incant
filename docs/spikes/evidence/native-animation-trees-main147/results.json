@@ -1,0 +1,336 @@
+[
+  {
+    "name": "conformance",
+    "command": [
+      "python3",
+      "tools/probes/shipping-wasm2c.py",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/conformance",
+      "--rustup",
+      "/opt/homebrew/bin/rustup",
+      "--profile",
+      "ci",
+      "--conformance-only"
+    ],
+    "exit": 0,
+    "seconds": 247.87459891700018,
+    "sha256": "574af3621e3ea33f4f833844525fcf843cf3d6fd0f8b4c4cda3bea2cebb4805b"
+  },
+  {
+    "name": "affected-tests",
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_types",
+      "-p",
+      "incant_doc",
+      "-p",
+      "incant_cmd",
+      "-p",
+      "incant_cook",
+      "-p",
+      "incant_runtime",
+      "-p",
+      "incant_script",
+      "-p",
+      "incant_assets",
+      "-p",
+      "incant_assets_runtime",
+      "-p",
+      "incant_render_data",
+      "-p",
+      "incant_render_native",
+      "-p",
+      "incant_render_authoring",
+      "-p",
+      "incant_render",
+      "-p",
+      "incant_wasm_runtime",
+      "-p",
+      "incant_game_runtime",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "incant_script/ui,incant_script/audio,incant_game_runtime/ui,incant_assets_runtime/visual"
+    ],
+    "exit": 0,
+    "seconds": 429.3967936660001,
+    "sha256": "5c268335c69713c07abbaab03f55ee15fb422da28765a7cec6a691b512c4a899"
+  },
+  {
+    "name": "affected-clippy",
+    "command": [
+      "./tools/cargo",
+      "clippy",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_types",
+      "-p",
+      "incant_doc",
+      "-p",
+      "incant_cmd",
+      "-p",
+      "incant_cook",
+      "-p",
+      "incant_runtime",
+      "-p",
+      "incant_script",
+      "-p",
+      "incant_assets",
+      "-p",
+      "incant_assets_runtime",
+      "-p",
+      "incant_render_data",
+      "-p",
+      "incant_render_native",
+      "-p",
+      "incant_render_authoring",
+      "-p",
+      "incant_render",
+      "-p",
+      "incant_wasm_runtime",
+      "-p",
+      "incant_game_runtime",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "incant_script/ui,incant_script/audio,incant_game_runtime/ui,incant_assets_runtime/visual",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit": 0,
+    "seconds": 59.34992975000023,
+    "sha256": "728f01a2997037f0d3251ba0da349fdaf96548f7156bb446ef6f72693f3c4bb4"
+  },
+  {
+    "name": "headless",
+    "command": [
+      "./tools/cargo",
+      "build",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_headless",
+      "--features",
+      "wasmtime-host"
+    ],
+    "exit": 0,
+    "seconds": 53.000779208000495,
+    "sha256": "b68df89efd04be4d2c3a751309b10b4ef95c4051f1323aecfde4d4997edc3d37"
+  },
+  {
+    "name": "oracle",
+    "command": [
+      "./tools/cargo",
+      "build",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_cook",
+      "--example",
+      "animation_pose_package_oracle"
+    ],
+    "exit": 0,
+    "seconds": 92.82933029200012,
+    "sha256": "8ddd08816809e9007a1f35329424505207b701605b1fa23b29806bc28d439603"
+  },
+  {
+    "name": "wasm",
+    "command": [
+      "./tools/cargo",
+      "check",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "--lib",
+      "-p",
+      "incant_types",
+      "-p",
+      "incant_runtime",
+      "-p",
+      "incant_render_data",
+      "-p",
+      "incant_render_native",
+      "-p",
+      "incant_wasm_runtime",
+      "-p",
+      "incant-module",
+      "--target",
+      "wasm32-unknown-unknown"
+    ],
+    "exit": 0,
+    "seconds": 1.9917897909999738,
+    "sha256": "b6acb55e7da8014dc3af857b44e52ef1d2d9efd44e0a2179d5e692ad0c97b4f8"
+  },
+  {
+    "name": "graph",
+    "command": [
+      "python3",
+      "tools/check_runtime_dependencies.py",
+      "incant_runtime",
+      "incant_script",
+      "incant_assets_runtime",
+      "incant_render_data",
+      "incant_render_native",
+      "incant_render",
+      "incant_game_runtime",
+      "incant_wasm_runtime",
+      "incant_wasm_player",
+      "incant_game_player",
+      "--features",
+      "incant_game_player/static-module,incant_game_player/render-input"
+    ],
+    "exit": 0,
+    "seconds": 0.39477325000007113,
+    "sha256": "ee9ee3bac78124f0d702ddd2a88a0ab0a529600a649d5b8119e68a600f8b9c4a"
+  },
+  {
+    "name": "schema",
+    "command": [
+      "/Users/andreyyurlov/.codex/incant-integration-target/ci/incant_headless",
+      "schema",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/schemas"
+    ],
+    "exit": 0,
+    "seconds": 0.7193121670006803,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "schema-match",
+    "command": [
+      "python3",
+      "-c",
+      "from pathlib import Path; a=Path('schemas'); b=Path('/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/schemas'); assert {p.name:p.read_bytes() for p in a.glob('*.schema.json')}=={p.name:p.read_bytes() for p in b.glob('*.schema.json')}"
+    ],
+    "exit": 0,
+    "seconds": 0.021141500000339875,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "generated",
+    "command": [
+      "python3",
+      "tools/generate_wasm_sdk.py",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.1540802920007991,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "sdk",
+    "command": [
+      "node",
+      "tools/generate_sdk.mjs",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.0341353750000053,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "typescript",
+    "command": [
+      "node",
+      "node_modules/typescript/bin/tsc",
+      "-p",
+      "sdk/ts/tsconfig.json"
+    ],
+    "exit": 0,
+    "seconds": 0.2222216660002232,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "fmt",
+    "command": [
+      "./tools/cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.977352165999946,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "conventions",
+    "command": [
+      "python3",
+      "tools/generate_conventions.py",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.033509207999486534,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "tools",
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools/tests",
+      "-p",
+      "test_*.py"
+    ],
+    "exit": 0,
+    "seconds": 20.129722417000266,
+    "sha256": "dd9a1984647cb74a91d2b060655889f964fb360344a576ecf2c81b096a041da6"
+  },
+  {
+    "name": "diff",
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.018289791000825062,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "quickjs-export",
+    "command": [
+      "python3",
+      "tools/probes/native-animation-tree-export.py",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export",
+      "--binary",
+      "/Users/andreyyurlov/.codex/incant-integration-target/ci/incant_headless"
+    ],
+    "exit": 0,
+    "seconds": 351.34363683299944,
+    "sha256": "3995dac6e6786e0a4f9a50bdc08ab6626e75da377f918c12fd044d84ff461286"
+  },
+  {
+    "name": "wasm-export",
+    "command": [
+      "python3",
+      "tools/probes/native-wasm-animation-pose-export.py",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export",
+      "--binary",
+      "/Users/andreyyurlov/.codex/incant-integration-target/ci/incant_headless",
+      "--oracle",
+      "/Users/andreyyurlov/.codex/incant-integration-target/ci/examples/animation_pose_package_oracle"
+    ],
+    "exit": 0,
+    "seconds": 363.26633200000015,
+    "sha256": "6816cec47808d628463ad904b638ac54aa8ced1b2f11e4ed08303f9b7c63201c"
+  }
+]

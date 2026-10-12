@@ -1,0 +1,20 @@
+{
+  "command": [
+    "/Users/andreyyurlov/.codex/incant-integration-target/ci/incant_headless",
+    "native-play",
+    "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/authoring/project.json",
+    "--camera",
+    "0000000000000000000000009C",
+    "--ticks",
+    "20",
+    "--input-replay",
+    "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/old-v3-input.json",
+    "--pcm-output",
+    "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/dev-old-v3.pcm"
+  ],
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Error: native play startup/runtime failure: development Wasm rejected or trapped: Wasm ABI: animation v3 cannot represent weighted tree poses\n",
+  "output_absent": true,
+  "expected_stderr": "Error: native play startup/runtime failure: development Wasm rejected or trapped: Wasm ABI: animation v3 cannot represent weighted tree poses"
+}

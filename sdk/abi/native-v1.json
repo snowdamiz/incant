@@ -821,6 +821,40 @@
       ],
       "result": "i32",
       "call": "Call::ReadPhysics { ptr, capacity }"
+    },
+    {
+      "namespace": "incant_animation_v4",
+      "name": "snapshot_len",
+      "opcode": 42,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::AnimationLenV4"
+    },
+    {
+      "namespace": "incant_animation_v4",
+      "name": "read_snapshot",
+      "opcode": 43,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "capacity",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::ReadAnimationsV4 { ptr, capacity }"
     }
   ],
   "enums": {
@@ -1432,6 +1466,24 @@
       [
         "Long",
         2
+      ]
+    ],
+    "AnimationPoseKind": [
+      [
+        "Single",
+        0
+      ],
+      [
+        "SlerpTransition",
+        1
+      ],
+      [
+        "SlerpParameter",
+        2
+      ],
+      [
+        "WeightedQuaternionMean",
+        3
       ]
     ]
   },
@@ -2362,6 +2414,115 @@
         "dimension",
         "u32"
       ]
+    ],
+    "AnimationHeaderV4": [
+      [
+        "magic",
+        "u8",
+        8
+      ],
+      [
+        "scene",
+        "u8",
+        16
+      ],
+      [
+        "count",
+        "u32"
+      ],
+      [
+        "stride",
+        "u32"
+      ],
+      [
+        "sample_count",
+        "u32"
+      ],
+      [
+        "sample_stride",
+        "u32"
+      ]
+    ],
+    "AnimationRowV4": [
+      [
+        "id",
+        "u8",
+        16
+      ],
+      [
+        "clip",
+        "u32"
+      ],
+      [
+        "flags",
+        "u32"
+      ],
+      [
+        "seconds",
+        "f64"
+      ],
+      [
+        "speed",
+        "f64"
+      ],
+      [
+        "source_clip",
+        "u32"
+      ],
+      [
+        "transition_flags",
+        "u32"
+      ],
+      [
+        "source_seconds",
+        "f64"
+      ],
+      [
+        "source_speed",
+        "f64"
+      ],
+      [
+        "elapsed",
+        "f64"
+      ],
+      [
+        "duration",
+        "f64"
+      ],
+      [
+        "pose_kind",
+        "u32"
+      ],
+      [
+        "sample_offset",
+        "u32"
+      ],
+      [
+        "sample_count",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ]
+    ],
+    "AnimationPoseSample": [
+      [
+        "clip",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ],
+      [
+        "seconds",
+        "f64"
+      ],
+      [
+        "weight",
+        "f64"
+      ]
     ]
   },
   "input_sections": [
@@ -2448,7 +2609,9 @@
     "PHYSICS_MAX_EVENTS": 131072,
     "PHYSICS_MAX_REQUEST_BYTES": 7184,
     "PHYSICS_MAX_RESULT_BYTES": 71696,
-    "PHYSICS_MAX_EVENT_BYTES": 5242912
+    "PHYSICS_MAX_EVENT_BYTES": 5242912,
+    "ANIMATION_POSE_MAX_SAMPLES": 16,
+    "ANIMATION_POSE_MAX_SAMPLE_ROWS": 214336
   },
   "magic": {
     "INPUT_MAGIC": "INPINP01",
@@ -2469,7 +2632,8 @@
     "GRID_PATH_RESULT_MAGIC": "INCGRDR1",
     "PHYSICS_REQUEST_MAGIC": "INCPHYQ1",
     "PHYSICS_RESULT_MAGIC": "INCPHYR1",
-    "PHYSICS_EVENTS_MAGIC": "INCPHYE1"
+    "PHYSICS_EVENTS_MAGIC": "INCPHYE1",
+    "ANIMATION_V4_MAGIC": "INCAN004"
   },
   "optional_none": -1,
   "namespaces": {
@@ -2483,6 +2647,7 @@
     "incant_navigation_v1": "navigation",
     "incant_animation_v3": "animationv3",
     "incant_animation_graph_v1": "animationgraph",
-    "incant_physics_v1": "physics"
+    "incant_physics_v1": "physics",
+    "incant_animation_v4": "animationv4"
   }
 }

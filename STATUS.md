@@ -16,6 +16,62 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Authored trees and complete Wasm poses — current-main verified
+
+The accepted authoring, cooked v15 tree evaluator, retained weighted-pose consumer
+and v4 Wasm SDK are combined on actual main #147. All 81 changed implementation
+and build files match their independently reviewed producer bytes; current audio,
+UI checkpoints, two-bone IK and pinned dependencies are preserved. The union
+passes 793 affected CPU tests and 401 overlapping actual-host cases, all-target
+Clippy, wasm32, exact schemas/SDK and tooling checks. All 82 GPU tests stayed ignored.
+
+Two fresh shipping builds pass after deleting their private source/build/map
+inputs: QuickJS runs three full games and six save/resume pairs with exact final
+save and PCM equality, plus two precise refusals. The Rust v4 package runs three
+fresh games matching 3420 full-pose scalars and 228 bounded checks against the
+direct native oracle and captured-only development host, with eleven precise
+refusals. All 1696 frozen inputs remain unchanged. These are local CPU results;
+rendered/device/phase gates and full guest checkpoints remain open.
+[Integrated checks and proofs](docs/spikes/native-animation-trees-main147.md).
+
+## Public Wasm complete animation poses — local host and package proofs passed
+
+The Rust SDK now reads complete v4 pose frames with stable scene/entity identity,
+exact native contributions and explicit interpolation kinds. Legacy SLERP pairs
+retain their semantics; weighted tree poses use the native normalized quaternion
+mean. Old observations refuse weighted poses. Published operations 0–41 remain
+unchanged. Actual Wasmtime/wasm2c conformance passes 398 tests/doctests, Clippy and
+three generic development smoke processes; the new guest matches a direct native
+eight-pose oracle over twenty ticks. Source review accepts the frozen boundary.
+The original producer source and package reviews pass; the current-main union
+now also passes fresh package and combined checks, recorded below. The ordinary public Rust tree-game package proof now passes
+three fresh source/cache/build/map-deleted wasm2c processes. Each matches 60
+complete records (3420 scalars), 228 bounded checks, native clocks and PCM against
+captured Wasmtime play and a direct native oracle. All eleven exact refusals pass,
+including old snapshots and unsupported guest checkpoints. Independent package
+source and final evidence review accepts the proof without findings; current-main
+union validation also passes. [Package evidence](docs/spikes/native-wasm-animation-pose-package.md).
+Synthetic sixteen-sample coverage establishes wire capacity only; tree-state
+fades/composite operands, rendered/device gates and complete SDK remain open.
+[Contract and evidence](docs/spikes/native-animation-pose-sdk.md).
+
+## Authored nested animation trees — local and ordinary shipping checks passed
+
+Stable-ID nested 1D and rectangular 2D motions now cook into a bounded v15 node
+table and run on the native graph clock. Complete weighted samples travel through
+native/render snapshots and owned TypeScript columns; legacy Wasm pose snapshots
+explicitly refuse these unrepresentable states. Existing clip/flat-pair encodings
+and SLERP sampling remain unchanged. All 665 affected CPU tests, Clippy, wasm32,
+dependency guards and exact schemas/SDK checks pass; 82 renderer GPU tests stayed
+ignored. Public command authoring, Undo/Redo and fresh recovery pass 228 selected
+state checks plus complete 56-tick sample logs. An ordinary shipping player runs
+after deleting authoring/build inputs and external source maps: three full runs,
+six save/resume pairs and two exact refusals pass, with matching final saves,
+logs and PCM. Current-main integration now passes the combined checks below;
+rendered acceptance remains pending. Nonzero transitions involving blend states,
+layering, authored IK, root motion and device gates remain in progress; this is
+not animation or Phase 1 completion. [Contract and evidence](docs/spikes/native-animation-tree-playback.md).
+
 ## Ordinary offline audio session checkpoints — current-main verified
 
 World v8/session v3 resume real static and streamed Kira voices alongside existing
@@ -72,8 +128,9 @@ The native evaluator now supports bounded nested 1D and rectangular bilinear 2D
 blend trees, normalized clip phases and sixteen-contribution fades. Full runtime
 checks pass 200 cases; 4096 sampling/fade steps allocate nothing. Clippy, wasm32,
 dependency checks and independent source review pass. This is numerical core
-work: authored/cooked graphs, active runtime/renderer/SDK wiring and complete
-checkpoint continuation remain open. [Contract and evidence](docs/spikes/native-animation-tree-core.md).
+work; the separately reviewed authored/cooked/runtime/SDK connection and ordinary
+checkpoint continuation are now verified above. Timed transitions involving
+weighted tree states remain separate. [Contract and evidence](docs/spikes/native-animation-tree-core.md).
 
 ## Multi-pose animation sampling — current-main verified
 
@@ -83,8 +140,8 @@ unpublished pose storage supplies the scratch lanes, so retained memory and
 per-sample allocations do not increase. All 108 affected tests, Clippy, wasm32,
 dependency and formatting checks pass; independent source review accepts the
 scope. Combined integration on main #143 passes 310 CPU tests and Clippy.
-Authored nested/2D trees, blended-state transitions and their native/SDK
-wiring remain open. [Contract and evidence](docs/spikes/runtime-weighted-pose.md).
+The authored nested/2D connection and complete-pose native/SDK wiring now have
+the separate current-main proof above. Timed blended-state transitions remain open. [Contract and evidence](docs/spikes/runtime-weighted-pose.md).
 
 ## Checkpoint 11 — failed frozen batch, two probe contracts repaired
 
@@ -283,12 +340,15 @@ and complete Game UI/IME gates remain open.
 
 ## Current milestone
 
-Main #146 includes the multi-pose sampler, bounded nested/2D animation numeric
+Main #147 includes the multi-pose sampler, bounded nested/2D animation numeric
 core, public Wasm physics queries and ordinary offline audio checkpoint
-continuation. The reviewed two-bone IK CPU integration is current-main verified;
+continuation. The reviewed two-bone IK CPU integration is merged;
 authored IK controls and rendered acceptance remain open. Authored tree playback
-and complete-pose SDK work remain separately reviewed local lanes awaiting their
-ordinary shipping proofs.
+and complete-pose SDK now pass current-main integration: 793 affected CPU tests,
+401 overlapping dual-host tests, Clippy/platform/contracts and two fresh ordinary
+shipping exports. Publication follows exact-head review and the fast gate. The
+next reviewed queue is the native text-lifetime/pointer repair, qualified Linux
+UI reference correction, then the separate root-motion primitive.
 Checkpoint 11 remains failed and frozen; its Linux rendering repair is with
 Claude. No release or phase gate advances on these local feature results.
 
@@ -304,8 +364,9 @@ Active, paused, completed-paused and blended v6 continuations preserve exact fin
 save bytes, PCM and logs. Legacy Wasm v1/v2
 snapshots explicitly refuse unrepresentable graph blends. The additive guest
 graph SDK now carries bounded snapshots and atomic controls through both native
-Wasm hosts, with its current-main checks recorded above. Four-pose blended-state fades, nested/2D trees,
-layering, IK, root motion, rendered acceptance and device gates remain open.
+Wasm hosts, with its current-main checks recorded above. The newer nested/2D
+tree route is verified separately above. Timed blended-state fades, layering,
+authored IK, root motion, rendered acceptance and device gates remain open.
 [Scope and evidence](docs/spikes/native-animation-graphs.md).
 
 Connected native UI now composes typed UiNode authoring, v13 cooked scenes,
@@ -336,8 +397,8 @@ The current main122 integration passes 367 CPU tests, 313 actual dual-host tests
 and Clippy. A fresh current-lock QuickJS export removes authoring/build inputs
 and external debug maps before nine copied-player processes: three full replays,
 active/paused v5 continuations and two refusals all pass. The original export
-retaining an external map remains qualified historical evidence. Crossfade GPU/Claude acceptance, nested/2D blend trees, layering,
-IK and root motion remain open; bounded clip-state graphs are recorded above. See
+retaining an external map remains qualified historical evidence. Crossfade GPU/Claude acceptance, layering,
+authored IK and root motion remain open; nested/2D trees now have the separate proof above; bounded clip-state graphs are recorded above. See
 [the consumer evidence](docs/spikes/native-animation-crossfade-consumer.md),
 [the core evidence](docs/spikes/native-animation-crossfades.md) and
 [the SDK evidence](docs/spikes/native-animation-crossfade-sdk.md) and

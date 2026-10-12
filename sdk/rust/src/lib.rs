@@ -7,6 +7,7 @@
 #![no_std]
 pub mod animation;
 pub mod animation_graph;
+pub mod animation_pose;
 pub mod flipbook;
 pub mod input;
 pub mod localization;
@@ -22,6 +23,9 @@ pub use animation::{
 pub use animation_graph::{
     AnimationGraphControl, AnimationGraphKey, AnimationGraphParameter, AnimationGraphPlayback,
     AnimationGraphSnapshot,
+};
+pub use animation_pose::{
+    AnimationPoseKind, AnimationPosePlayback, AnimationPoseSample, AnimationPoseSnapshot,
 };
 pub use flipbook::{FlipbookSnapshot, Playback};
 pub use incant_wasm_abi::{ActionKind, GamepadButton, Key, LogLevel, MouseButton, TouchPhase};
@@ -53,7 +57,7 @@ pub type Velocity = [f64; incant_wasm_abi::VELOCITY_STRIDE];
 pub const IDENTITY: Transform = [0., 0., 0., 0., 0., 0., 1., 1., 1., 1.];
 pub use incant_wasm_abi::{
     ANIMATION_GRAPH_MAX_BYTES, ANIMATION_MAX_BYTES, ANIMATION_V2_MAX_BYTES, ANIMATION_V3_MAX_BYTES,
-    FLIPBOOK_MAX_BYTES, INPUT_MAX_BYTES,
+    ANIMATION_V4_MAX_BYTES, FLIPBOOK_MAX_BYTES, INPUT_MAX_BYTES,
 };
 
 /// Export the versioned entry points. The callback receives a non-escapable Tick

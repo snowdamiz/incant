@@ -1,0 +1,89 @@
+{
+  "at": "2026-10-12T15:57:46.521500+00:00",
+  "proof_root": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005",
+  "frozen_sources_checked": 5,
+  "package_files_checked": 14,
+  "removed_files_absence_checked": 17,
+  "command_count": 30,
+  "command_stream_hashes_checked": 60,
+  "reports": {
+    "development": {
+      "json_sha256": "1298d8d9e3d8f9742f0e757cf0e3218500f4db1aab70d90b31a769e500119674",
+      "pcm_sha256": "eec19bc6af0b3b6dfb97a08782c65f4bb3c3203e789a015d2008b0d689ad08be",
+      "pcm_bytes": 128000,
+      "complete_records": 60,
+      "scalars_checked": 3420
+    },
+    "run-0": {
+      "json_sha256": "4b1a1fc5f71f80c48abb993f555711b7f517e336e7a2bda645c3b75c225908a7",
+      "pcm_sha256": "eec19bc6af0b3b6dfb97a08782c65f4bb3c3203e789a015d2008b0d689ad08be",
+      "pcm_bytes": 128000,
+      "complete_records": 60,
+      "scalars_checked": 3420
+    },
+    "run-1": {
+      "json_sha256": "4b1a1fc5f71f80c48abb993f555711b7f517e336e7a2bda645c3b75c225908a7",
+      "pcm_sha256": "eec19bc6af0b3b6dfb97a08782c65f4bb3c3203e789a015d2008b0d689ad08be",
+      "pcm_bytes": 128000,
+      "complete_records": 60,
+      "scalars_checked": 3420
+    },
+    "run-2": {
+      "json_sha256": "4b1a1fc5f71f80c48abb993f555711b7f517e336e7a2bda645c3b75c225908a7",
+      "pcm_sha256": "eec19bc6af0b3b6dfb97a08782c65f4bb3c3203e789a015d2008b0d689ad08be",
+      "pcm_bytes": 128000,
+      "complete_records": 60,
+      "scalars_checked": 3420
+    }
+  },
+  "exact_refusals": [
+    {
+      "name": "dev-old-v1",
+      "exact_stderr": "Error: native play startup/runtime failure: development Wasm rejected or trapped: Wasm ABI: animation graph blend requires graph snapshot ABI"
+    },
+    {
+      "name": "dev-old-v2",
+      "exact_stderr": "Error: native play startup/runtime failure: development Wasm rejected or trapped: Wasm ABI: animation graph blend requires graph snapshot ABI"
+    },
+    {
+      "name": "dev-old-v3",
+      "exact_stderr": "Error: native play startup/runtime failure: development Wasm rejected or trapped: Wasm ABI: animation v3 cannot represent weighted tree poses"
+    },
+    {
+      "name": "dev-short-scratch",
+      "exact_stderr": "Error: native play startup/runtime failure: development Wasm rejected or trapped: wasm trap: wasm `unreachable` instruction executed"
+    },
+    {
+      "name": "dev-late-command",
+      "exact_stderr": "Error: native play startup/runtime failure: runtime entity StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 90]) does not exist"
+    },
+    {
+      "name": "package-old-v1",
+      "exact_stderr": "Error: Session(Module(Boundary(Abi(\"animation graph blend requires graph snapshot ABI\"))))"
+    },
+    {
+      "name": "package-old-v2",
+      "exact_stderr": "Error: Session(Module(Boundary(Abi(\"animation graph blend requires graph snapshot ABI\"))))"
+    },
+    {
+      "name": "package-old-v3",
+      "exact_stderr": "Error: Session(Module(Boundary(Abi(\"animation v3 cannot represent weighted tree poses\"))))"
+    },
+    {
+      "name": "package-short-scratch",
+      "exact_stderr": "Error: Session(Module(Trap(1)))"
+    },
+    {
+      "name": "package-late-command",
+      "exact_stderr": "Error: Session(Module(Boundary(Runtime(MissingEntity(StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 90]))))))"
+    },
+    {
+      "name": "checkpoint-refused",
+      "exact_stderr": "Error: Checkpoint(Unsupported(\"static module state ABI\"))"
+    }
+  ],
+  "player_sha256": "8e5a3ca16c0353dde682c28ea3083bb0b7530dcefe6a3dba712a119ad9456c0b",
+  "player_bytes": 9653488,
+  "scene_sha256": "6e89faa4def736162ffb83ef34f9bca37199fec2fb026d10a2d1a5278ed5dc9c",
+  "role": "Producer post-run direct retained-file verification, not independent review."
+}

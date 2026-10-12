@@ -1,0 +1,21 @@
+{
+  "at": "2026-10-12T15:30:48.667255+00:00",
+  "reviewer": "astra-root",
+  "accepted": true,
+  "scope": "v4 full pose observations source review; native/SDK encoder-parser, registry compatibility, capability lifetime and bounds, additive generated bridges",
+  "inventory_sha256": "dbf5e215add88b189df8ff80c8ec89e8b6dffec2cda38a7af5343197d023e328",
+  "reviewed_production_files": 17,
+  "all_frozen_files_verified": 28,
+  "old_registry_entries_unchanged": true,
+  "findings": [],
+  "notes": [
+    "Native tree constructors require separately reviewed underflow/tail correction; copied visible sample data unaffected by tail issue.",
+    "Future weighted state fades and grouped SLERP remain unsupported and are not established by synthetic16 capacity test.",
+    "Actual host final evidence review remains separate."
+  ],
+  "limitations": [
+    "connected runtime trees currently contribute at most8 samples;16 capacity is synthetic boundary coverage",
+    "nonzero tree-state fades remain explicitly unsupported",
+    "no GPU/rendered/native window/package/device or full SDK gate"
+  ]
+}

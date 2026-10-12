@@ -1,0 +1,19 @@
+{
+  "main": "bbe95b237e430d0657402c0bb9c83aa0516e2368",
+  "head": "4487c5ae92369c2a69a08dc53a02f25143eefe34",
+  "preserved_heads": [
+    "21e73c29e6ff97d0833b28ec1cedb66e7b56135f",
+    "3a3f7b12457f6ffb6ea77eff674e5237f1658ea5",
+    "144be370e7ebae74ea225d96a75411f53703092a"
+  ],
+  "resolutions": [
+    "Retain exact main147 asset IK modules/tests/player and render_game UI checkpoint implementation/tests.",
+    "Use accepted root canonical AnimationPoseSamples type and tree evaluator; retains568 underflow tail fix.",
+    "Use accepted v4 registry, generated dispatch, new calls and tests; prior physics39-41 unchanged.",
+    "Use accepted v4 conformance source which still builds/tests physics guests but retains focused v4 artifacts.",
+    "Preserve current main STATUS, checkpoint11 failures and historical integration docs; add accepted tree/v4 status.",
+    "Take newer accepted exporter HOME-omission review metadata; production exporter and actual child regression same across root/v4."
+  ],
+  "no_new_production_bytes": true,
+  "source_comparison_sha256": "d243fc9f5038bce463123f5a7f802c1aaffd8332feb7044d9b329df9e77ff305"
+}
