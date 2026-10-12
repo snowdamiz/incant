@@ -1,6 +1,8 @@
 #![cfg(feature = "scene")]
 #[path = "../../incant_assets_runtime/tests/support/mod.rs"]
 mod support;
+#[path = "checkpoints/transport.rs"]
+mod transport;
 use incant_audio_runtime::{
     ClipBinding, OfflineBackend, PendingAudioCheckpoint, SceneAudio, SourceState,
 };
@@ -18,6 +20,7 @@ fn node(n: u128, streaming: bool) -> CookedAudio {
         bus: None,
         listener: false,
         source: Some(NativeAudioSource {
+            transport_epoch: 0,
             clip: id(90),
             bus: Some(id(1)),
             gain_db: -4.,

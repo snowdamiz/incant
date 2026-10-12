@@ -8,7 +8,7 @@ pub(crate) fn encoded_size(node: &CookedAudio) -> usize {
         .as_ref()
         .map_or(0, |b| 5 + usize::from(b.parent.is_some()) * 16)
         + node.source.as_ref().map_or(0, |s| {
-            42 + usize::from(s.bus.is_some()) * 16 + usize::from(s.spatial.is_some()) * 8
+            50 + usize::from(s.bus.is_some()) * 16 + usize::from(s.spatial.is_some()) * 8
         })
 }
 fn id(bytes: &mut Vec<u8>, value: Option<StableId>) {
@@ -17,7 +17,7 @@ fn id(bytes: &mut Vec<u8>, value: Option<StableId>) {
         bytes.extend(value.0);
     }
 }
-pub(crate) fn write(bytes: &mut Vec<u8>, node: &CookedAudio) {
+pub(crate) fn write(bytes: &mut Vec<u8>, node: &CookedAudio, version: u32) {
     bytes.extend(node.entity.0);
     bytes.push(
         u8::from(node.bus.is_some())
@@ -29,6 +29,9 @@ pub(crate) fn write(bytes: &mut Vec<u8>, node: &CookedAudio) {
         bytes.extend(bus.gain_db.to_le_bytes());
     }
     if let Some(source) = &node.source {
+        if version >= 19 {
+            bytes.extend(source.transport_epoch.to_le_bytes());
+        }
         bytes.extend(source.clip.0);
         id(bytes, source.bus);
         bytes.extend(source.gain_db.to_le_bytes());
@@ -57,7 +60,7 @@ fn optional_id(reader: &mut Reader<'_>) -> Result<Option<StableId>, SceneError> 
 fn float(reader: &mut Reader<'_>) -> Result<f32, SceneError> {
     Ok(f32::from_le_bytes(reader.array()?))
 }
-pub(crate) fn read(reader: &mut Reader<'_>) -> Result<CookedAudio, SceneError> {
+pub(crate) fn read(reader: &mut Reader<'_>, version: u32) -> Result<CookedAudio, SceneError> {
     let entity = StableId(reader.array()?);
     let mask = reader.byte()?;
     if mask == 0 || mask > 7 {
@@ -72,6 +75,11 @@ pub(crate) fn read(reader: &mut Reader<'_>) -> Result<CookedAudio, SceneError> {
         None
     };
     let source = if mask & 2 != 0 {
+        let transport_epoch = if version >= 19 {
+            u64::from_le_bytes(reader.array()?)
+        } else {
+            0
+        };
         let clip = StableId(reader.array()?);
         let bus = optional_id(reader)?;
         let gain_db = float(reader)?;
@@ -90,6 +98,7 @@ pub(crate) fn read(reader: &mut Reader<'_>) -> Result<CookedAudio, SceneError> {
             None
         };
         Some(NativeAudioSource {
+            transport_epoch,
             clip,
             bus,
             gain_db,

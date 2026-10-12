@@ -322,6 +322,7 @@ fn host_error_and_unwind_terminalize_offline_session_and_silence_entire_output()
             bus: None,
             listener: false,
             source: Some(NativeAudioSource {
+                transport_epoch: 0,
                 clip: id(),
                 bus: None,
                 gain_db: 0.,
@@ -459,6 +460,7 @@ fn paused_refresh_preserves_tick_input_pose_and_exact_next_audio_samples() {
             bus: None,
             listener: false,
             source: Some(NativeAudioSource {
+                transport_epoch: 0,
                 clip: id(),
                 bus: None,
                 gain_db: 0.,
