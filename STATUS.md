@@ -16,25 +16,22 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Authored two-bone IK — connected CPU proof passed
+## Authored two-bone IK — main151 integration verified
 
-Bounded stable-ID constraints now bind actual cooked model topology/fingerprints,
+Bounded stable-ID constraints bind actual cooked model topology/fingerprints,
 travel through v16 scene/v9 world saves, and expose owned TypeScript columns and
-atomic controls. The canonical CPU consumer applies ordered IK after animation
-sampling; unsupported sampled chains explicitly refuse with retained-input
-rollback. Unchanged extraction and preallocated pose/deformation tests allocate
-nothing, while moving targets replace one immutable slice per affected owner;
-measured allocation counts/bytes are recorded separately. All 643 affected CPU
-tests pass (82 GPU cases ignored), with Clippy, schema/SDK and runtime graph/target
-checks. The ordinary public exporter produced four fresh source/map/build-deleted
-player runs with exact save/PCM/log continuation and seven diagnostic-bound
-refusals. Independent source and final evidence reviews are accepted;
-coordinator intake remains pending.
+atomic controls. The canonical CPU consumer applies ordered IK after sampling;
+unsupported chains explicitly refuse with retained-input rollback. The current
+main151 union passes 823 CPU cases (82 GPU cases intentionally ignored), scoped
+Clippy, target/dependency/schema/SDK checks and a fresh public shipping proof.
+Four source/map/build-deleted processes preserve exact checkpoint, PCM and log
+continuation; seven precise refusals pass. All eight legacy Wasm v1–v4 pose calls
+refuse committed IK atomically. Publication is pending its final review/fast gate.
 
 Renderer appearance/GPU/device budgets, edit-mode IK preview/authoring UI and
-Rust/Wasm IK controls remain open. All eight v1–v4 pose imports explicitly refuse IK in this pending
-current-main union; the focused whole-tick regression is retained.
-[Contract and evidence](docs/spikes/native-authored-ik.md).
+Rust/Wasm IK controls remain open. Allocation bounds and the original producer
+coverage remain in the [contract](docs/spikes/native-authored-ik.md); exact current
+source/proof identities are in the [integration record](docs/spikes/native-authored-ik-main151.md).
 
 ## Native input corrections — main148 integration verified
 
@@ -397,21 +394,22 @@ and complete Game UI/IME gates remain open.
 
 ## Current milestone
 
-Main #150 includes authored nested/2D animation trees and complete Wasm poses
-(#148), offline audio/UI checkpoints, public physics queries and the bounded IK
-primitive. Main149 repairs text-client lifetime and pointer focus; the qualified
-UI reference and caret correction is merged in main150. Its actual Linux result
-and selected adapter remain pending; installed Mesa packages and emulation do not
-establish either. Claude0058's separate native follow-up is retained with its
-frozen-build, dead-key and excluded-process limitations.
+Main #151 includes authored nested/2D animation trees and complete Wasm poses
+(#148), offline audio/UI checkpoints, public physics queries, bounded IK and
+root-motion numeric primitives. Main149 repairs text-client lifetime and pointer
+focus; main150 carries the qualified UI reference and caret correction.
+Claude0058's native follow-up retains its exact older-build, dead-key and
+excluded-process limitations. Connected authored IK now passes current-main151
+CPU integration and fresh shipping continuation; its feature merge remains pending.
 
-Checkpoint12 is frozen at actual main150 `58cca708`, candidate `10129769`, with
-the same tree and eight full push workflows. Failed checkpoint11 remains
+Checkpoint12 stays frozen at main150 `58cca708`, candidate `10129769`.
+Actual Linux llvmpipe (LLVM 20.1.2, Mesa 25.2.8, Vulkan) fails the linear RGBA8
+UI reference at scale 1; other required jobs were still active when recorded.
+Claude0059 owns the follow-up. The full failure and exact shader/source identities
+are retained with the IK integration evidence. Failed checkpoint11 remains
 historical and unpromoted. Release stays at checkpoint8 until all 23 exact-head
-required checks pass. Later main work does not change the candidate. The separate
-root-motion primitive passes its current-main CPU integration; connected authored
-IK remains queued with the explicit legacy-pose refusal seam. No release or phase
-gate advances on these local feature results.
+required checks pass. Feature merges do not move the candidate or approve a
+release/phase gate.
 
 Native animation graphs now connect ordinary typed authoring, captured models,
 v14 cooking, deterministic native clip states and flat adjacent-pair 1D blends.
