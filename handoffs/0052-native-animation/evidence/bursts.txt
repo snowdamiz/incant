@@ -1,0 +1,36 @@
+2026-10-12T00:54:16Z burst start, frontmost 1866
+{"d":0,"role":"AXWindow","sub":"AXStandardWindow","title":"Incant","x":0.0,"y":0.0,"w":1440.0,"h":875.0,"focused":true}
+2026-10-12T00:54:17Z burst end, exit 0, frontmost 1866
+2026-10-12T00:54:34Z burst start, frontmost 1866
+{"d":0,"role":"AXWindow","sub":"AXStandardWindow","title":"Incant","x":0.0,"y":0.0,"w":1440.0,"h":875.0,"focused":true}
+2026-10-12T00:54:36Z burst end, exit 0, frontmost 1866
+2026-10-12T00:57:19Z burst start, frontmost 1866
+{"focused":null}
+2026-10-12T00:57:21Z burst end, exit 0, frontmost 1866
+2026-10-12T00:59:02Z burst start, frontmost 1866
+{"focused":null}
+2026-10-12T00:59:06Z burst end, exit 1, frontmost 1866
+2026-10-12T01:00:09Z burst start, frontmost 1866
+{"focused":null}
+2026-10-12T01:00:16Z burst end, exit 0, frontmost 1866
+2026-10-12T01:00:51Z burst start, frontmost 1866
+{"focused":null}
+2026-10-12T01:00:58Z burst end, exit 0, frontmost 1866
+2026-10-12T01:01:46Z burst start, frontmost 1866
+{"focused":null}
+2026-10-12T01:01:49Z burst end, exit 0, frontmost 1866
+2026-10-12T01:02:51Z burst start, frontmost 1866
+{"focused":null}
+2026-10-12T01:02:55Z burst end, exit 0, frontmost 1866
+2026-10-12T01:04:10Z burst start, frontmost 2095
+{"focused":null}
+2026-10-12T01:04:13Z burst end, exit 0, frontmost 2095
+2026-10-12T01:05:09Z burst start, frontmost 1866
+{"focused":null}
+2026-10-12T01:05:13Z burst end, exit 0, frontmost 1866
+2026-10-12T01:08:01Z burst start, frontmost 1866
+{"focused":null}
+2026-10-12T01:08:27Z burst end, exit 0, frontmost 1866
+2026-10-12T01:09:03Z burst start, frontmost 1866
+{"focused":null}
+2026-10-12T01:09:05Z burst end, exit 0, frontmost 1866

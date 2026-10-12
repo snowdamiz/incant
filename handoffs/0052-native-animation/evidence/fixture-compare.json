@@ -1,0 +1,9 @@
+{
+ "from": "before-launch",
+ "to": "after-quit",
+ "named_equal": true,
+ "added": [],
+ "removed": [],
+ "changed": [],
+ "mtime_only": []
+}
