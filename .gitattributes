@@ -9,3 +9,7 @@ third_party/wabt/wasm-rt.h whitespace=-blank-at-eol
 # Preserve upstream FBX bytes, including ASCII CRLF and exporter trailing spaces.
 # The fixture hash test verifies these unmodified data files on every host.
 crates/incant_assets/tests/fixtures/fbx/*.fbx -text whitespace=-blank-at-eol,cr-at-eol
+
+# Preserve exact published cosmic-text license and CRLF regression fixture bytes.
+third_party/cosmic-text/fonts/Inter-LICENSE -text
+third_party/cosmic-text/sample/crlf.txt -text
