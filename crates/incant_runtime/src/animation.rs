@@ -17,6 +17,7 @@ pub struct NativeAnimation {
     pub mesh_fingerprint: [u8; 32],
     pub clip_durations: Arc<[f32]>,
     pub initial: Animation,
+    pub graph: Option<Arc<crate::NativeAnimationGraph>>,
 }
 impl NativeAnimation {
     pub fn validate(&self) -> Result<(), SceneError> {
@@ -32,7 +33,24 @@ impl NativeAnimation {
         self.validate_sample(AnimationSample {
             clip: self.initial.clip,
             seconds: self.initial.seconds,
-        })
+        })?;
+        if let Some(graph) = &self.graph {
+            graph.validate(&self.clip_durations)?;
+            let entry = &graph.states()[usize::from(graph.initial())];
+            let clip = match entry.motion {
+                crate::NativeAnimationMotion::Clip(clip) => clip,
+                crate::NativeAnimationMotion::Blend1d { .. } => None,
+            };
+            if self.initial.clip != clip
+                || self.initial.seconds != 0.0
+                || self.initial.looping != entry.looping
+            {
+                return Err(SceneError::Invalid(
+                    "animation graph initial playback must match its entry",
+                ));
+            }
+        }
+        Ok(())
     }
     pub fn validate_sample(&self, sample: AnimationSample) -> Result<(), SceneError> {
         let duration = match sample.clip {
@@ -85,7 +103,7 @@ impl NativeAnimation {
         Ok(())
     }
     pub(crate) fn initial_state(&self) -> AnimationState {
-        AnimationState {
+        let mut state = AnimationState {
             sample: AnimationSample {
                 clip: self.initial.clip,
                 seconds: self.initial.seconds,
@@ -95,13 +113,29 @@ impl NativeAnimation {
             looping: self.initial.looping,
             completed: false,
             transition: None,
+        };
+        if let Some(graph) = &self.graph {
+            state.sample = graph
+                .sample(&graph.initial_state(self.initial.playing), self)
+                .0;
         }
+        state
     }
     pub(crate) fn control(
         &self,
         state: &mut AnimationState,
         control: AnimationControl,
     ) -> Result<(), SceneError> {
+        if self.graph.is_some()
+            && !matches!(
+                control,
+                AnimationControl::SetPlaying(_) | AnimationControl::SetSpeed(_)
+            )
+        {
+            return Err(SceneError::Invalid(
+                "animation graph owns clip, seek, loop and transition controls",
+            ));
+        }
         let mut next = *state;
         match control {
             AnimationControl::Select(sample) => {
@@ -218,11 +252,31 @@ pub enum AnimationControl {
 pub struct AnimationSnapshot {
     pub id: StableId,
     pub state: AnimationState,
+    /// Actual second pose, including a graph blend without a timed transition.
+    pub blend: Option<AnimationBlendSample>,
 }
 #[derive(Component)]
 pub(crate) struct Playback {
     pub definition: Arc<NativeAnimation>,
     pub state: AnimationState,
+    pub graph: Option<crate::AnimationGraphState>,
+}
+impl Playback {
+    pub(crate) fn blend_sample(&self) -> Option<AnimationBlendSample> {
+        if let (Some(definition), Some(graph)) = (&self.definition.graph, &self.graph) {
+            definition
+                .sample(graph, &self.definition)
+                .1
+                .or_else(|| self.state.blend_sample())
+        } else {
+            self.state.blend_sample()
+        }
+    }
+}
+#[derive(Debug, Clone, Copy)]
+pub(crate) struct PreparedAnimationState {
+    state: AnimationState,
+    graph: Option<crate::AnimationGraphState>,
 }
 pub(crate) type PlaybackQuery = QueryState<(&'static crate::world::Identity, &'static Playback)>;
 
@@ -251,6 +305,7 @@ impl NativeWorld {
             rows.push(AnimationSnapshot {
                 id: id.0,
                 state: playback.state,
+                blend: playback.blend_sample(),
             });
         }
         Ok(())
@@ -260,11 +315,13 @@ impl NativeWorld {
         commands: &FrameCommands,
         changes: &BTreeMap<StableId, Option<CookedSpatial>>,
         exists: impl Fn(StableId) -> bool,
-    ) -> Result<BTreeMap<StableId, AnimationState>, RuntimeError> {
+    ) -> Result<BTreeMap<StableId, PreparedAnimationState>, RuntimeError> {
         let mut states = BTreeMap::new();
         for command in commands.iter() {
-            let crate::StructuralCommand::ControlAnimation { entity, control } = command else {
-                continue;
+            let entity = match command {
+                crate::StructuralCommand::ControlAnimation { entity, .. }
+                | crate::StructuralCommand::ControlAnimationGraph { entity, .. } => entity,
+                _ => continue,
             };
             if !exists(*entity) {
                 return Err(RuntimeError::MissingEntity(*entity));
@@ -282,64 +339,114 @@ impl NativeWorld {
                 ))?;
             let state = states.entry(*entity).or_insert_with(|| {
                 if old == Some(selected) {
-                    self.animation_state(*entity).expect("installed animation")
+                    let playback = self
+                        .world
+                        .get::<Playback>(self.entities[entity])
+                        .expect("installed animation");
+                    PreparedAnimationState {
+                        state: playback.state,
+                        graph: playback.graph,
+                    }
                 } else {
-                    selected.initial_state()
+                    PreparedAnimationState {
+                        state: selected.initial_state(),
+                        graph: selected
+                            .graph
+                            .as_ref()
+                            .map(|g| g.initial_state(selected.initial.playing)),
+                    }
                 }
             });
-            selected.control(state, *control)?;
+            match command {
+                crate::StructuralCommand::ControlAnimation { control, .. } => {
+                    selected.control(&mut state.state, *control)?;
+                    if let (Some(graph), AnimationControl::SetPlaying(playing)) =
+                        (&mut state.graph, control)
+                    {
+                        graph.paused = !playing;
+                    }
+                }
+                crate::StructuralCommand::ControlAnimationGraph { control, .. } => {
+                    let graph = selected.graph.as_ref().ok_or(SceneError::Invalid(
+                        "animation graph control requires final graph",
+                    ))?;
+                    graph.control(
+                        state.graph.as_mut().expect("prepared graph"),
+                        &mut state.state,
+                        selected,
+                        *control,
+                    )?;
+                }
+                _ => unreachable!("selected animation control"),
+            }
         }
         Ok(states)
     }
-    pub(crate) fn install_animation_states(&mut self, states: BTreeMap<StableId, AnimationState>) {
+    pub(crate) fn install_animation_states(
+        &mut self,
+        states: BTreeMap<StableId, PreparedAnimationState>,
+    ) {
         for (id, state) in states {
-            self.world
+            let mut playback = self
+                .world
                 .get_mut::<Playback>(self.entities[&id])
-                .expect("prepared animation")
-                .state = state;
+                .expect("prepared animation");
+            playback.state = state.state;
+            playback.graph = state.graph;
         }
     }
 }
 
 pub(crate) fn advance(step: Res<crate::world::Step>, mut query: Query<&mut Playback>) {
     for mut playback in &mut query {
-        if !playback.state.playing {
-            continue;
-        }
-        let Playback { definition, state } = &mut *playback;
-        let ended = advance_sample(
-            &mut state.sample,
-            state.speed,
-            state.looping,
-            step.0,
+        let Playback {
             definition,
-        );
-        if let Some(transition) = &mut state.transition {
-            if transition.playing
-                && advance_sample(
-                    &mut transition.source,
-                    transition.speed,
-                    transition.looping,
-                    step.0,
-                    definition,
-                )
-            {
-                transition.playing = false;
-            }
-            transition.elapsed += step.0;
-            // Bound accumulated addition roundoff by step count * epsilon *
-            // duration (under one nanosecond at the supported 60s/240Hz limits).
-            // An integral-tick fade must not gain an extra frame from rounding.
-            let roundoff =
-                f64::EPSILON * transition.duration * (transition.duration / step.0 + 1.0);
-            if transition.duration - transition.elapsed <= roundoff {
-                state.transition = None;
-            }
+            state,
+            graph,
+        } = &mut *playback;
+        if let (Some(definition_graph), Some(graph)) = (&definition.graph, graph) {
+            definition_graph.advance(graph, state, definition, step.0);
+        } else {
+            advance_state(state, definition, step.0);
         }
-        if ended && state.transition.is_none() {
-            state.playing = false;
-            state.completed = true;
+    }
+}
+
+pub(crate) fn advance_state(state: &mut AnimationState, definition: &NativeAnimation, dt: f64) {
+    if !state.playing {
+        return;
+    }
+    let ended = advance_sample(
+        &mut state.sample,
+        state.speed,
+        state.looping,
+        dt,
+        definition,
+    );
+    if let Some(transition) = &mut state.transition {
+        if transition.playing
+            && advance_sample(
+                &mut transition.source,
+                transition.speed,
+                transition.looping,
+                dt,
+                definition,
+            )
+        {
+            transition.playing = false;
         }
+        transition.elapsed += dt;
+        // Bound accumulated addition roundoff by step count * epsilon *
+        // duration (under one nanosecond at the supported 60s/240Hz limits).
+        // An integral-tick fade must not gain an extra frame from rounding.
+        let roundoff = f64::EPSILON * transition.duration * (transition.duration / dt + 1.0);
+        if transition.duration - transition.elapsed <= roundoff {
+            state.transition = None;
+        }
+    }
+    if ended && state.transition.is_none() {
+        state.playing = false;
+        state.completed = true;
     }
 }
 
@@ -354,22 +461,32 @@ fn advance_sample(
         return false;
     };
     let duration = f64::from(definition.clip_durations[usize::from(clip)]);
+    advance_clock(&mut sample.seconds, duration, speed, looping, seconds)
+}
+
+pub(crate) fn advance_clock(
+    time: &mut f64,
+    duration: f64,
+    speed: f64,
+    looping: bool,
+    seconds: f64,
+) -> bool {
     if duration == 0.0 {
-        sample.seconds = 0.0;
+        *time = 0.0;
         return !looping;
     }
     if speed == 0.0 {
         return false;
     }
-    let next = sample.seconds + seconds * speed;
+    let next = *time + seconds * speed;
     if looping {
         let wrapped = next.rem_euclid(duration);
-        sample.seconds = if wrapped >= duration { 0.0 } else { wrapped };
+        *time = if wrapped >= duration { 0.0 } else { wrapped };
     } else if (speed > 0.0 && next >= duration) || (speed < 0.0 && next <= 0.0) {
-        sample.seconds = next.clamp(0.0, duration);
+        *time = next.clamp(0.0, duration);
         return true;
     } else {
-        sample.seconds = next;
+        *time = next;
     }
     false
 }

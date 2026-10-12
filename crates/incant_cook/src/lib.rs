@@ -3,6 +3,8 @@
 #[cfg(feature = "scene")]
 mod animation;
 #[cfg(feature = "scene")]
+mod animation_graph;
+#[cfg(feature = "scene")]
 pub use animation::{AnimationResources, load_project_animation_resources};
 #[cfg(feature = "scene")]
 mod navigation;

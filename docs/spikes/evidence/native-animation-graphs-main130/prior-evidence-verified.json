@@ -1,0 +1,27 @@
+{
+  "verified": [
+    "native-animation-graphs-source-review.json",
+    "native-animation-graphs-export-review.json",
+    "/tmp/incant-animation-graph-final-all-tests.log",
+    "/tmp/incant-animation-graph-scoped-tests.log",
+    "/tmp/incant-animation-graph-clippy-final3.log",
+    "/tmp/incant-animation-graph-wasm-final.log",
+    "/tmp/incant-animation-graph-headless-final3.log",
+    "/tmp/incant-animation-graph-python-tests.log",
+    "/tmp/incant-animation-graph-node-tests.log",
+    "/tmp/incant-animation-graph-dependencies.log",
+    "/tmp/incant-animation-graph-followup-runtime.log",
+    "/tmp/incant-animation-graph-followup-script.log",
+    "/tmp/incant-animation-graph-followup-script-integration.log",
+    "/tmp/incant-animation-graph-legacy-capability-tests.log",
+    "/tmp/incant-animation-graph-followup-clippy.log",
+    "/tmp/incant-animation-graph-followup-wasm.log",
+    "/tmp/incant-animation-graph-followup-fmt.log",
+    "/tmp/incant-animation-graph-final-typescript.log",
+    "/tmp/incant-animation-graph-final-generated.log",
+    "/tmp/incant-animation-graph-final-schemas.log",
+    "native-animation-graphs-export.json",
+    "native-animation-graphs-legacy-wasm.json"
+  ],
+  "source": "1aabd8037460d40c2080359eac4a3eb028c586fc"
+}

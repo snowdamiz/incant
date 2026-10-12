@@ -1,0 +1,19 @@
+{
+  "recorded_at": "2026-10-12T04:50:48.309497+00:00",
+  "reviewer": "astra/root",
+  "source": "cc302120baa6130bc83e79c5dec00b8266b91fac",
+  "inventory_sha256": "905b5c266b8b1c62dad4427c24b1bab178b79a60d57950ea2a87460276263d74",
+  "proof_sha256": "006ba0f9f2622332db1006935382da403cd277cc32c71c950f5922613361b9a3",
+  "decision": "Accepted minimal native blend observation and legacy Wasm snapshot refusal follow-up after source review and actual dual-host evidence verification.",
+  "verified_proof_artifacts": 15,
+  "checks": [
+    "Read all production changes: native snapshot exposes actual second pose; both legacy buffers stay unavailable for parameter blends; both len/read versions refuse before output copy.",
+    "Reviewed four shared-boundary rejection cases with unchanged destination and caught-error transaction poison; endpoint and no-snapshot controls pass.",
+    "Reviewed actual WAT guest and both-host15cases each, including rollback/terminal rejection and representable successful controls.",
+    "Verified pinned WABT and prepared bundle/test/Clippy artifact hashes."
+  ],
+  "limitations": [
+    "Existing frozen003 packaged player predates this follow-up; publisher integrated recook remains required.",
+    "No graph SDK capability or full animation/phase gate claim."
+  ]
+}

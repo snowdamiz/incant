@@ -41,6 +41,7 @@ pub(crate) fn read(
         durations.push(f32::from_le_bytes(r.array()?));
     }
     let result = NativeAnimation {
+        graph: None,
         mesh_fingerprint,
         clip_durations: durations.into(),
         initial: Animation {

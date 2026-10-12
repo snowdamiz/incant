@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "/private/tmp/incant-animation-graphs-main130-proof/package/player/incant_game_player",
+    "--package",
+    "/private/tmp/incant-animation-graphs-main130-proof/package/player/data",
+    "--ticks",
+    "1",
+    "--output",
+    "/private/tmp/incant-animation-graphs-main130-proof/corrupt.pcm",
+    "--observe",
+    "/private/tmp/incant-animation-graphs-main130-proof/corrupt-observe.json",
+    "--load-checkpoint",
+    "/private/tmp/incant-animation-graphs-main130-proof/corrupt.save",
+    "--save-checkpoint",
+    "/private/tmp/incant-animation-graphs-main130-proof/corrupt-output.save"
+  ],
+  "returncode": 1,
+  "stdout": "",
+  "stderr": "Error: Checkpoint(Integrity)\n"
+}

@@ -22,6 +22,15 @@ pub(crate) fn encode(
     world.snapshot_animations(rows)?;
     bytes.clear();
     v2.clear();
+    // v2 describes timed transitions, not parameter-driven graph blends. Keep
+    // both unavailable until a representable committed snapshot exists; callers
+    // which do not request these imports can still use the scene normally.
+    if rows
+        .iter()
+        .any(|row| row.blend.is_some() && row.state.transition.is_none())
+    {
+        return Ok(());
+    }
     v2.extend_from_slice(
         &abi::AnimationHeader {
             magic: *abi::ANIMATION_V2_MAGIC,
@@ -32,7 +41,7 @@ pub(crate) fn encode(
     );
     // A legacy row cannot describe an active blend. Do not publish a projection
     // which misrepresents it as a single pose; length/read both refuse below.
-    let legacy = rows.iter().all(|row| row.state.transition.is_none());
+    let legacy = rows.iter().all(|row| row.blend.is_none());
     if legacy {
         bytes.extend_from_slice(
             &abi::AnimationHeader {

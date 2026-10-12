@@ -117,7 +117,7 @@ fn read_length(r: &mut Reader<'_>) -> Result<UiLength, SceneError> {
 }
 pub(crate) fn read(r: &mut Reader<'_>, entities: usize) -> Result<Vec<CookedUi>, SceneError> {
     let n = r.u32()? as usize;
-    if n == 0 || n > incant_types::MAX_UI_NODES || n > entities || n > r.remaining_len() / FIXED {
+    if n > incant_types::MAX_UI_NODES || n > entities || n > r.remaining_len() / FIXED {
         return Err(SceneError::Invalid("UI node count"));
     }
     let mut result: Vec<CookedUi> = Vec::with_capacity(n);
