@@ -15,7 +15,8 @@ journal reopening pass. The first typecheck attempt used an incorrect local
 node_modules path; its failure is retained separately from the corrected checks.
 
 [Source identities, exact commands and actual process/package receipts](evidence/core-presentation-integration.json)
-await independent current-main review. This numerical fixture does not approve
+passed independent current-main review. The final reopen assertion executes after
+the helper writes its call-list receipt, so that call is not directly retained. This numerical fixture does not approve
 the authored visual level, GPU/window behavior, physical audio, phone performance
 or full physics/session checkpoint support. Per-cue once behavior is source-
 reviewed; the public probe does not inspect each internal audio transport epoch.

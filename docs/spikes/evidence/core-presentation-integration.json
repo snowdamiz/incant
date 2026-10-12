@@ -680,11 +680,17 @@
     "findings": []
   },
   "prior_failure": "First integration typecheck launcher used nonexistent tools/node_modules path; changed only launcher to root node_modules, no source edits.",
-  "integration_review": "pending independent current-main audit",
+  "integration_review": {
+    "accepted": true,
+    "path": "docs/spikes/evidence/core-presentation-integration-review.json",
+    "sha256": "62f2ac060197dc602c23c3b4c519f9f01a11c9e2fa18faa3d3744371809e215f",
+    "reviewed_manifest_sha256": "7483d18d6651c2a2ffeef2e01d227431bb85e0a33b062bad86035a6a649e054e"
+  },
   "limitations": [
     "Numerical UI fixture, no visual approval",
     "Observed test wrapper; production gameplay preserved",
     "Ordinary CPU exported numerical fixture; authored visual level and physics saves remain separate",
-    "No new renderer/layout/art, native-window/device or physics checkpoint gate evidence."
+    "No new renderer/layout/art, native-window/device or physics checkpoint gate evidence.",
+    "Public helper asserts journal reopening after writing its call receipt; that final reopen call is not directly retained in the call-list file."
   ]
 }

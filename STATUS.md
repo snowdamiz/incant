@@ -21,8 +21,8 @@ visual work, and Astra owns correctness and integration.
 The two reviewed sample/helper inputs are unchanged. Strict types, seven native
 scenarios and a fresh ordinary source/map/build-deleted win/loss/repeat proof pass
 on the integrated native HUD/audio engine. Actual text/locale/result parenting,
-repeat PCM and terminal silence are verified. Independent integration audit and
-publication remain pending; authored appearance/device gates remain separate.
+repeat PCM and terminal silence are verified. Independent integration audit is accepted; fast CI/publication remain pending.
+Authored appearance/device gates remain separate.
 [Current integration evidence](docs/spikes/core-presentation-integration.md).
 
 ## Core Sample presentation bindings — locally verified
