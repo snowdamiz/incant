@@ -49,8 +49,9 @@ impl NativeWorld {
     /// This is NOT a game-session/VM checkpoint: input, timers, callbacks, script
     /// heap and external FrameCommands are not included. Hosts must discard old
     /// pending commands/path results and explicitly restore their own state.
-    /// Physics/audio-used worlds refuse, even after removing their declarations;
-    /// contacts, sleep, trigger history and audio cursors must never reset silently.
+    /// Physics-used worlds refuse, even after removing their declarations.
+    /// V8 audio declarations are data only: a composed session must additionally
+    /// save its exact retained mixer owner; world bytes never resume audio cursors.
     /// Dirty navigation refuses until committed apply/step. Numeric loans cannot
     /// overlap this shared borrow. Saving never mutates the running world.
     pub fn save_bytes(&self) -> Result<Vec<u8>, SaveError> {
@@ -83,6 +84,7 @@ impl NativeWorld {
             })
             .collect();
         let scene = CookedScene::new(self.scene_id(), self.tick_rate, entities)?
+            .with_audio(self.audio_nodes().map(|(node, _)| node.clone()).collect())?
             .with_localization(self.localization.clone())?
             .with_spatial(self.visual_assets.clone(), spatial)?
             .with_navigation(
@@ -152,6 +154,7 @@ impl NativeWorld {
             &animations,
             &graphs,
             self.ui_used,
+            self.audio_used,
         )
     }
 
@@ -180,6 +183,9 @@ impl NativeWorld {
             }
         }
         check_scene_capabilities(&scene)?;
+        if decoded.version < 8 && !scene.audio().is_empty() {
+            return Err(SaveError::AudioUnsupported);
+        }
         if decoded.version < 7 && scene.has_ui() {
             return Err(SaveError::UiUnsupported);
         }
@@ -267,7 +273,8 @@ impl NativeWorld {
             playback.graph = Some(graph);
         }
         world.tick = decoded.tick;
-        world.ui_used |= decoded.version == 7;
+        world.ui_used |= decoded.ui_used;
+        world.audio_used |= decoded.audio_used;
         if let Some(origin) = decoded.origin {
             world.source_scene_fingerprint = origin;
         }
@@ -284,6 +291,9 @@ impl NativeWorld {
     ) -> Result<Self, SaveError> {
         check_scene_capabilities(initial)?;
         let candidate = Self::from_save_bytes(bytes)?;
+        if !initial.audio().is_empty() && !candidate.audio_used {
+            return Err(SaveError::AudioUnsupported);
+        }
         if initial.has_ui() && !candidate.ui_used {
             return Err(SaveError::UiUnsupported);
         }
@@ -306,6 +316,9 @@ impl NativeWorld {
     pub fn validate_save_compatibility(&self, candidate: &Self) -> Result<(), SaveError> {
         self.check_save_capabilities()?;
         candidate.check_save_capabilities()?;
+        if self.audio_used && !candidate.audio_used {
+            return Err(SaveError::AudioUnsupported);
+        }
         if self.ui_used && !candidate.ui_used {
             return Err(SaveError::UiUnsupported);
         }
@@ -348,6 +361,9 @@ impl NativeWorld {
         // The complete candidate decode validated framing and the supported
         // version. Both v3 and v4 carry the localization contract.
         let version = u32::from_le_bytes(bytes[8..12].try_into().unwrap());
+        if self.audio_used && version < 8 {
+            return Err(SaveError::AudioUnsupported);
+        }
         if self.ui_used && version < 7 {
             return Err(SaveError::UiUnsupported);
         }
@@ -408,10 +424,11 @@ impl NativeWorld {
         self.ui_used
     }
 
+    /// Audio declarations/history require a separate retained mixer checkpoint.
+    pub fn requires_audio_checkpoint(&self) -> bool {
+        self.audio_used
+    }
     fn check_save_capabilities(&self) -> Result<(), SaveError> {
-        if self.audio_used {
-            return Err(SaveError::AudioUnsupported);
-        }
         if self.physics_failed || self.physics_used || self.physics_2d_used {
             return Err(SaveError::PhysicsUnsupported);
         }
@@ -420,9 +437,6 @@ impl NativeWorld {
 }
 
 fn check_scene_capabilities(scene: &CookedScene) -> Result<(), SaveError> {
-    if !scene.audio().is_empty() {
-        return Err(SaveError::AudioUnsupported);
-    }
     if !scene.physics().is_empty()
         || !scene.physics_2d().is_empty()
         || scene

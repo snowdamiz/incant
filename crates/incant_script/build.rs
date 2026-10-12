@@ -69,11 +69,15 @@ fn main() {
         "incant_localization",
         "incant_ui",
         "incant_text",
+        "incant_audio_runtime",
+        "incant_assets_runtime",
     ] {
         let dir = root.join("crates").join(name);
         hash_tree(&dir.join("src"), &mut runtime);
         hash_file(&dir.join("Cargo.toml"), &mut runtime);
     }
+    hash_tree(&root.join("third_party/kira/src"), &mut runtime);
+    hash_file(&root.join("third_party/kira/Cargo.toml"), &mut runtime);
     println!(
         "cargo:rustc-env=INCANT_CHECKPOINT_RUNTIME_ID={:x}",
         runtime.finalize()

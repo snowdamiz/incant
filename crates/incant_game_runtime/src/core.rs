@@ -133,6 +133,13 @@ where
         audio: impl FnOnce(&NativeWorld) -> incant_audio_runtime::Result<SceneAudio<B>>,
     ) -> Result<Self, H::Error> {
         let pending = PendingSessionCheckpoint::new(bytes, initial, program, actions)?;
+        if pending.audio().is_some() {
+            return Err(GameError::Audio(
+                incant_audio_runtime::AudioError::Unsupported(
+                    "backend-driven audio restore; use the offline composed session",
+                ),
+            ));
+        }
         if pending.world().requires_ui_checkpoint() && (!cfg!(feature = "ui") || !H::SUPPORTS_UI) {
             return Err(GameError::UiHost);
         }
@@ -157,6 +164,13 @@ where
     }
     pub fn checkpoint_bytes(&self) -> Result<Vec<u8>, H::Error> {
         let live = self.ready()?;
+        if live.native.world()?.requires_audio_checkpoint() {
+            return Ok(live.native.checkpoint_bytes_with_audio(
+                &live.audio,
+                #[cfg(feature = "ui")]
+                live.host.ui(),
+            )?);
+        }
         #[cfg(feature = "ui")]
         if live.native.world()?.requires_ui_checkpoint() {
             return Ok(live
@@ -311,5 +325,63 @@ impl<H: Hook> Core<incant_audio_runtime::DeviceBackend, H> {
         live.audio.check_device()?;
         self.live = Some(live);
         Ok(())
+    }
+}
+
+impl<H: Hook> Core<incant_audio_runtime::OfflineBackend, H> {
+    pub fn from_offline_checkpoint(
+        bytes: &[u8],
+        initial: &CookedScene,
+        program: impl Into<SessionProgram>,
+        actions: InputActions,
+        prepare: impl FnOnce(&PendingSessionCheckpoint) -> Result<H, H::Error>,
+        clips: Vec<incant_audio_runtime::ClipBinding>,
+        sample_rate: u32,
+    ) -> Result<Self, H::Error> {
+        let pending = PendingSessionCheckpoint::new(bytes, initial, program, actions)?;
+        if pending.world().requires_ui_checkpoint() && (!cfg!(feature = "ui") || !H::SUPPORTS_UI) {
+            return Err(GameError::UiHost);
+        }
+        if let Some(state) = pending.audio() {
+            // Catalog, every transport, and this exact world are checked before
+            // any guest initialization or external render consumer preparation.
+            let suspended = state.suspended();
+            let audio = state.restore(pending.world(), clips, sample_rate)?;
+            let host = prepare(&pending)?;
+            let native = pending.start_with_audio(
+                &audio,
+                #[cfg(feature = "ui")]
+                host.ui(),
+            )?;
+            Ok(Self {
+                suspended,
+                live: Some(Live {
+                    audio,
+                    host,
+                    native,
+                }),
+            })
+        } else {
+            // Preserve established host-before-VM/backend ordering for old
+            // audio-free checkpoints, including byte-for-byte v1/v2 framing.
+            let host = prepare(&pending)?;
+            #[cfg(feature = "ui")]
+            let native = if pending.ui().is_some() {
+                pending.start_with_ui(host.ui().ok_or(GameError::UiHost)?)?
+            } else {
+                pending.start()?
+            };
+            #[cfg(not(feature = "ui"))]
+            let native = pending.start()?;
+            let audio = SceneAudio::offline(native.world()?, clips, sample_rate)?;
+            Ok(Self {
+                suspended: false,
+                live: Some(Live {
+                    audio,
+                    host,
+                    native,
+                }),
+            })
+        }
     }
 }

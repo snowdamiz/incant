@@ -1,7 +1,7 @@
 [workspace]
 resolver = "3"
 members = ["crates/*", "editor/app", "sdk/rust"]
-exclude = ["third_party/rerecast", "third_party/cosmic-text", "third_party/tao"]
+exclude = ["third_party/rerecast", "third_party/cosmic-text", "third_party/tao", "third_party/kira"]
 default-members = ["crates/*"]
 
 [workspace.package]
@@ -76,6 +76,7 @@ strip = "none"
 split-debuginfo = "off"
 
 [patch.crates-io]
+kira = { path = "third_party/kira" }
 rerecast = { path = "third_party/rerecast" }
 cosmic-text = { path = "third_party/cosmic-text" }
 tao = { path = "third_party/tao" }
