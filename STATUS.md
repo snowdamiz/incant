@@ -22,8 +22,7 @@ After an error or explicit exit, the window host stops delivering game callbacks
 Surface and IME cleanup still run, while the original typed failure takes precedence
 rather than being replaced by a later generic failed-session or cleanup error.
 The current-main union passes 57 player tests, native-window Clippy, dependency
-and tooling checks with both reviewed source files unchanged. Final integration
-review and fast-gated publication remain pending. This does not diagnose the original instrumented-process
+and tooling checks with both reviewed source files unchanged. Independent current-main review is accepted; fast-gated publication remains pending. This does not diagnose the original instrumented-process
 failure or change audio-overload behavior. [Scope and evidence](docs/spikes/native-window-terminal-errors.md).
 
 
