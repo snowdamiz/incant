@@ -700,7 +700,7 @@
       "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-audit-005.json"
     }
   },
-  "review": "Final independent package source/evidence review pending. Export HOME removal d9747284 separately accepted.",
+  "review": "Independent final source and retained package evidence review accepted144be370 with no findings. Current-main union validation remains publisher-owned and pending.",
   "limitations": [
     "Actual local desktop CPU package; no GPU/rendered/device/performance or phase gate.",
     "Eight active weighted samples; nonzero tree fades/composite operands remain unsupported.",
@@ -709,5 +709,10 @@
     "Package failures prove exact diagnostics and absence of output publication; accepted host conformance separately proves staged prefix rollback.",
     "Metadata observes destination playback flags and timed elapsed/duration, not outgoing playback flags.",
     "One ordinary cold export, three new packaged processes; no cross-platform/current-main/release gate."
-  ]
+  ],
+  "independent_final_review": {
+    "path": "docs/spikes/evidence/native-wasm-animation-pose-package/independent-final-review.json",
+    "sha256": "9088eb973d2746f9b8948c96b5aaeabf2353e44bac824c3f34b5b30d9a83f91c",
+    "reviewed_evidence_sha256": "9b319150e0ded85da39153963617cac211cc63fb3cc5db10e2eee897c84a58e6"
+  }
 }
