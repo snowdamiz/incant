@@ -16,6 +16,62 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Complete root motion — main160 integration reviewed; fast check pending
+
+The native/TypeScript path and additive Wasm operations 53–55 now pass current-main native
+606-case and separate actual-host 453-case CPU suites, scoped checks and three
+fresh ordinary 32-tick source-deleted shipping processes. Each run matches 22,464
+oracle scalars and 256 selected vectors, exact logs/observations/PCM; 11 precise
+refusals publish no output. All 119 producer inputs remain byte exact. Independent
+current-main review is accepted; exact-head fast CI/publication remain pending; device, appearance,
+CUBICSPLINE root import and whole-module checkpoint limits remain explicit.
+[Current-main evidence](docs/spikes/native-root-motion-main160.md).
+
+## Connected root motion — native/TypeScript CPU checks passed
+
+Cooked17/18 root catalogs now drive independent exact graph/clip clocks,
+interval deltas, bodyless/kinematic/character policies and staged root-strip then
+IK sampling. World11 and QuickJS session continuation preserve active/paused
+reverse fades; owned TypeScript cycles/ticks remain exact BigInt arrays. The
+600-case CPU suite, scoped Clippy, wasm32, dependency and SDK checks pass.
+Independent production source and retained evidence reviews accept the native
+connection. The composed Wasm53–55 boundary now passes 453 actual-host cases,
+Clippy, wasm32 and 240 Python checks; independent source and actual-host final
+evidence reviews are accepted. Three fresh ordinary wasm2c package processes
+now each match 22,464 native-oracle scalars plus 256 public vector checks after
+private source/cache/build/map deletion. All eleven exact runtime refusals pass.
+Independent final review accepts the
+[public package packet](docs/spikes/native-root-motion-package.md); publisher
+integration remains pending.
+[Wasm contract and evidence](docs/spikes/native-root-motion-wasm.md). Physics saves,
+general affine/CUBICSPLINE roots, rendered/device and full Phase1 gates remain
+open. [Contract and measured limits](docs/spikes/native-root-motion-connected.md).
+
+## Root-motion captured catalogs — admission foundation verified
+
+A lean `incant_anim` crate now owns checked immutable root tracks and their bounded
+binary payload, sharing the existing full-pose interpolation arithmetic. Typed
+root selection uses normal command transactions, Undo/Redo and journal reopen;
+the captured-model loader validates topology and deduplicates catalogs. All 232
+affected tests, scoped Clippy, wasm32 and dependency checks pass. The catalog
+round-trips and samples after deleting source and cache data. Independent source
+and evidence review is accepted. The later connected native/TypeScript layer is
+recorded above; this historical admission result alone does not establish complete
+root motion. [Admission evidence](docs/spikes/native-root-motion-catalog.md).
+
+## Cooked root-motion numeric sampler — locally verified
+
+A bounded CPU sampler now reads rigid local translation/rotation deltas from
+immutable cooked tracks. Exact signed cycle cursors support forward/reverse, wrap
+and multiple-cycle motion, with ordered rotation/translation composition. Selected
+scale or matrix-only tracks refuse explicitly. All 128 assets/runtime cases,
+all-target Clippy, wasm32 visual and dependency checks pass; 4096 query iterations
+allocate nothing after admission. Independent source and retained evidence review
+accepts the implementation without findings; publisher integration remains pending.
+Authored root selection, graph/clock integration, pose extraction, body movement,
+save/SDK controls and rendered/device gates remain open; this is not complete
+root motion or Phase 1. [Contract and evidence](docs/spikes/native-root-motion-core.md).
+
 
 
 ## Complete compound Wasm — merged main159
@@ -496,10 +552,10 @@ and complete Game UI/IME gates remain open.
 
 ## Current milestone
 
-Main #159 includes compound native animation transitions and complete Wasm
+Main #160 includes compound native animation transitions and complete Wasm
 snapshots, authored two-bone IK, offline audio/UI checkpoints, public physics
 queries and the Core Sample gameplay slice. The reviewed complete root-motion
-integration is undergoing current-main CPU and ordinary package validation;
+integration passed current-main CPU and ordinary package validation plus final independent review;
 HUD and audio transport remain separate reviewed producer queues. Phase 1 and
 the finished game remain incomplete.
 
@@ -508,8 +564,9 @@ the general macOS retirement probe failed on a late callback, and Windows deskto
 was cancelled at its one-hour job cap after 53m27s of successful pre-export checks.
 Main158 contains the reviewed probe-only callback repair. The reviewed Windows
 workflow repair allows that job 120 minutes while Linux stays at 60, preserving
-all checks and fresh private shipping builds. It awaits the exact-head fast check;
-checkpoint14 will then freeze the repaired main tree. Release remains at
+all checks and fresh private shipping builds. The repair merged after its exact-head
+fast check passed. Checkpoint14 is frozen at main160 `d1ef35ee`, candidate
+`e9c0b288`; all 23 full checks remain required. Release remains at
 checkpoint8 until all 23 exact-head required checks succeed. Failed checkpoints
 remain historical, and later feature merges do not move an active candidate.
 [Windows timing and repair evidence](docs/spikes/windows-desktop-checkpoint-budget.md).
@@ -527,8 +584,9 @@ save bytes, PCM and logs. Legacy Wasm v1/v2
 snapshots explicitly refuse unrepresentable graph blends. The additive guest
 graph SDK now carries bounded snapshots and atomic controls through both native
 Wasm hosts, with its current-main checks recorded above. The newer nested/2D
-tree route is verified separately above. Timed blended-state fades, layering,
-authored IK, root motion, rendered acceptance and device gates remain open.
+tree route is verified separately above. The later compound transition and authored IK routes are separately verified
+above; layering, connected root-motion publication, rendered acceptance and
+device gates remain open.
 [Scope and evidence](docs/spikes/native-animation-graphs.md).
 
 Connected native UI now composes typed UiNode authoring, v13 cooked scenes,

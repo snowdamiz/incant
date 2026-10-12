@@ -28,6 +28,7 @@ mod program;
 mod queries;
 mod query_values;
 mod query_values_2d;
+mod root_motion;
 mod schedule;
 mod session;
 mod steering_values;

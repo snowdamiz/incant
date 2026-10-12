@@ -1,0 +1,45 @@
+[
+  {
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_wasm_runtime",
+      "--test",
+      "root_motion"
+    ],
+    "exit": 0,
+    "seconds": 2.1098473750007543,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-final-checks-001/0.log",
+    "sha256": "f93186fde6e199959bcae2d14a3eb8097e0c2fd915e7fcbc8280ca5f9d74448a"
+  },
+  {
+    "command": [
+      "./tools/cargo",
+      "clippy",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_wasm_runtime",
+      "--test",
+      "root_motion",
+      "-p",
+      "incant_cook",
+      "--example",
+      "root_motion_package_oracle",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit": 101,
+    "seconds": 11.429026582998631,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-final-checks-001/1.log",
+    "sha256": "b3ddb602429d354122cd7e89cf7331e19f3a0207be7f1c3088c93e92ce2de1dc"
+  }
+]

@@ -1,6 +1,6 @@
 //! Retained native playback. Only committed fixed steps advance these clocks.
 use crate::{CookedSpatial, FrameCommands, NativeWorld, RuntimeError, SceneError, StableId};
-use bevy_ecs::prelude::{Component, Query, QueryState, Res};
+use bevy_ecs::prelude::{Component, Query, QueryState, Res, Without};
 use incant_types::Animation;
 pub use incant_types::{
     AnimationBlendSample, AnimationSample, MAX_ANIMATION_CLIPS, MAX_ANIMATION_SPEED,
@@ -289,6 +289,7 @@ impl Playback {
 pub(crate) struct PreparedAnimationState {
     state: AnimationState,
     graph: Option<crate::AnimationGraphState>,
+    root: Option<crate::root_motion::RootMotionState>,
 }
 pub(crate) type PlaybackQuery = QueryState<(&'static crate::world::Identity, &'static Playback)>;
 
@@ -333,7 +334,8 @@ impl NativeWorld {
         for command in commands.iter() {
             let entity = match command {
                 crate::StructuralCommand::ControlAnimation { entity, .. }
-                | crate::StructuralCommand::ControlAnimationGraph { entity, .. } => entity,
+                | crate::StructuralCommand::ControlAnimationGraph { entity, .. }
+                | crate::StructuralCommand::ControlRootMotion { entity, .. } => entity,
                 _ => continue,
             };
             if !exists(*entity) {
@@ -359,6 +361,7 @@ impl NativeWorld {
                     PreparedAnimationState {
                         state: playback.state,
                         graph: playback.graph,
+                        root: None,
                     }
                 } else {
                     PreparedAnimationState {
@@ -367,9 +370,43 @@ impl NativeWorld {
                             .graph
                             .as_ref()
                             .map(|g| g.initial_state(selected.initial.playing)),
+                        root: None,
                     }
                 }
             });
+            let old_root = self
+                .entities
+                .get(entity)
+                .and_then(|h| self.world.get::<CookedSpatial>(*h))
+                .and_then(|s| s.root_motion.as_ref());
+            let selected_root = changes.get(entity).map_or(old_root, |s| {
+                s.as_ref().and_then(|s| s.root_motion.as_ref())
+            });
+            if state.root.is_none()
+                && let Some(root) = selected_root
+            {
+                state.root = Some(if old == Some(selected) && old_root == Some(root) {
+                    *self
+                        .world
+                        .get::<crate::root_motion::RootMotionState>(self.entities[entity])
+                        .expect("installed root state")
+                } else {
+                    crate::root_motion::RootMotionState::new(
+                        root,
+                        &Playback {
+                            definition: selected.clone(),
+                            state: state.state,
+                            graph: state.graph,
+                        },
+                        self.tick,
+                    )
+                });
+            }
+            let before = Playback {
+                definition: selected.clone(),
+                state: state.state,
+                graph: state.graph,
+            };
             match command {
                 crate::StructuralCommand::ControlAnimation { control, .. } => {
                     selected.control(&mut state.state, *control)?;
@@ -390,7 +427,39 @@ impl NativeWorld {
                         *control,
                     )?;
                 }
+                crate::StructuralCommand::ControlRootMotion { control, .. } => {
+                    let root = state.root.as_mut().ok_or(SceneError::Invalid(
+                        "root-motion control requires final root-motion binding",
+                    ))?;
+                    match control {
+                        crate::RootMotionControl::SetApplying(applying) => {
+                            root.applying = *applying
+                        }
+                        crate::RootMotionControl::ResetAccumulated => {
+                            root.requested = incant_anim::RootMotionDelta::IDENTITY;
+                            root.applied = incant_anim::RootMotionDelta::IDENTITY;
+                            root.accumulated_requested = incant_anim::RootMotionDelta::IDENTITY;
+                            root.accumulated_applied = incant_anim::RootMotionDelta::IDENTITY;
+                        }
+                    }
+                }
                 _ => unreachable!("selected animation control"),
+            }
+            if let Some(root) = &mut state.root {
+                let after = Playback {
+                    definition: selected.clone(),
+                    state: state.state,
+                    graph: state.graph,
+                };
+                match command {
+                    crate::StructuralCommand::ControlAnimation { control, .. } => {
+                        root.animation_control(&before, &after, *control)
+                    }
+                    crate::StructuralCommand::ControlAnimationGraph { control, .. } => {
+                        root.graph_control(&after, *control)
+                    }
+                    _ => {}
+                }
             }
         }
         Ok(states)
@@ -406,11 +475,20 @@ impl NativeWorld {
                 .expect("prepared animation");
             playback.state = state.state;
             playback.graph = state.graph;
+            if let Some(root) = state.root {
+                *self
+                    .world
+                    .get_mut::<crate::root_motion::RootMotionState>(self.entities[&id])
+                    .expect("prepared root") = root;
+            }
         }
     }
 }
 
-pub(crate) fn advance(step: Res<crate::world::Step>, mut query: Query<&mut Playback>) {
+pub(crate) fn advance(
+    step: Res<crate::world::Step>,
+    mut query: Query<&mut Playback, Without<crate::root_motion::RootMotionState>>,
+) {
     for mut playback in &mut query {
         let Playback {
             definition,

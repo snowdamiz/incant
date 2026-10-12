@@ -21,8 +21,35 @@ struct Resource {
 #[derive(Default)]
 pub struct AnimationResources {
     models: BTreeMap<StableId, Resource>,
+    root_motion: crate::RootMotionResources,
 }
 impl AnimationResources {
+    pub(crate) fn bind_root_motion(
+        &self,
+        asset: &VisualAssetRef,
+        entity: StableId,
+        authored: &incant_doc::AnimationRootMotion,
+        animation: &NativeAnimation,
+    ) -> Result<Arc<incant_runtime::NativeRootMotion>, CookError> {
+        let error = || CookError::RootMotionResource {
+            entity: ulid::Ulid::from_bytes(entity.0).to_string(),
+            reason: "missing or stale captured root catalog",
+        };
+        let catalog = self.root_motion.catalog(entity).ok_or_else(error)?;
+        if stable_id(&authored.model)? != asset.id
+            || catalog.fingerprint() != asset.fingerprint
+            || catalog.root() != authored.root
+        {
+            return Err(error());
+        }
+        let root = incant_runtime::NativeRootMotion {
+            catalog: Arc::clone(catalog),
+            application: authored.application,
+            applying: authored.applying,
+        };
+        root.validate(animation)?;
+        Ok(Arc::new(root))
+    }
     /// Validated cache inputs for build-system invalidation, never source paths.
     pub fn cache_paths(&self) -> impl Iterator<Item = &Path> {
         self.models.values().map(|r| r.path.as_path())
@@ -152,13 +179,14 @@ pub fn load_project_animation_resources(
             },
         );
     }
+    resources.root_motion = crate::load_project_root_motion_resources(project, scene_id, root)?;
     Ok(resources)
 }
 
 // The cook crate is a build-time dependency of shipped players. Keep its
 // directory check local rather than importing source importers/ufbx into builds.
 // As with asset project caches, every descended component must be a real folder.
-fn model_cache(root: &Path) -> std::io::Result<PathBuf> {
+pub(crate) fn model_cache(root: &Path) -> std::io::Result<PathBuf> {
     let root = root.canonicalize()?;
     let mut path = root.clone();
     for part in [".incant", "cache", "models"] {

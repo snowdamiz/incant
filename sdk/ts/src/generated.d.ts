@@ -35,6 +35,12 @@ export namespace AnimationIkSchema {
 }
 export type AnimationIk = AnimationIkSchema.Root;
 
+export namespace AnimationRootMotionSchema {
+  export type RootMotionApplication = "extract_only" | "transform" | "kinematic3d" | "character3d";
+  export type Root = { "application": RootMotionApplication; "applying": boolean; "fingerprint": string; "model": string; "root": number };
+}
+export type AnimationRootMotion = AnimationRootMotionSchema.Root;
+
 export namespace AudioBusSchema {
   export type Root = { "gain_db": number; "parent"?: string | null };
 }

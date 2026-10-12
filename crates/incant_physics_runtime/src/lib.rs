@@ -3,10 +3,14 @@
 mod navigation;
 pub use navigation::navigation_geometry;
 mod character;
+mod character_frame;
 mod character_queries;
 mod queries;
 mod shapes;
-pub use character::{CharacterMovement, CharacterOptions, CharacterQuery, CharacterStep};
+pub use character::{
+    CharacterMovement, CharacterOptions, CharacterQuery, CharacterStep, PreparedCharacterMovement,
+};
+pub use character_frame::MAX_CHARACTER_QUERY_COLLIDERS;
 use incant_types::{BodyMotion, Collider as DocCollider, RigidBody as DocBody};
 pub use queries::{RayHit, RayQuery};
 use rapier3d::prelude::*;
@@ -146,6 +150,7 @@ struct SceneWorld<I: Ord> {
     entries: BTreeMap<I, Entry>,
     ids: HashMap<ColliderHandle, I>,
     query_dirty: bool,
+    character: Option<character_frame::CharacterFrame>,
 }
 pub struct PhysicsRuntime<I: Ord> {
     scenes: BTreeMap<I, SceneWorld<I>>,
@@ -160,6 +165,7 @@ impl<I: Ord> Default for SceneWorld<I> {
             entries: BTreeMap::new(),
             ids: HashMap::new(),
             query_dirty: false,
+            character: None,
         }
     }
 }
@@ -263,6 +269,9 @@ impl<I: Ord + Clone> PhysicsRuntime<I> {
         }
         let mut overlaps = BTreeSet::new();
         for (scene_id, scene) in &mut self.scenes {
+            if let Some(cache) = &mut scene.character {
+                cache.ready = false;
+            }
             scene.world.integration_parameters.dt = dt as f32;
             scene.world.step();
             scene.query_dirty = false;
@@ -350,6 +359,9 @@ impl<I: Ord + Clone> PhysicsRuntime<I> {
 }
 impl<I: Ord + Clone> SceneWorld<I> {
     fn update_motion(&mut self, id: &I, state: &BodyState) -> Result<(), PhysicsError> {
+        if let Some(cache) = &mut self.character {
+            cache.ready = false;
+        }
         let entry = self
             .entries
             .get_mut(id)
@@ -383,6 +395,7 @@ impl<I: Ord + Clone> SceneWorld<I> {
     }
     fn remove(&mut self, id: &I) {
         if let Some(entry) = self.entries.remove(id) {
+            self.character = None;
             self.ids.remove(&entry.collider);
             if let Some(body) = entry.body {
                 self.world.remove_body(body);
@@ -392,6 +405,7 @@ impl<I: Ord + Clone> SceneWorld<I> {
         }
     }
     fn insert(&mut self, id: I, mut spec: PhysicsSpec) {
+        self.character = None;
         let shape = ColliderBuilder::new(shapes::build(&spec.collider.shape))
             .density(spec.collider.density as f32)
             .friction(spec.collider.friction as f32)

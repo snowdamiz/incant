@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-12T18:51:13.140277+00:00",
+  "reviewer": "astra root",
+  "decision": "accepted for actual-host slice",
+  "manifest_sha256": "876b0ab55220d9a00ff72c2f634b1513e028804937fb861dc94c94572efc3e0c",
+  "reviewed_commit": "2153a633",
+  "verified": {
+    "production_inputs": 21,
+    "test_probe_inputs": 9,
+    "raw_retained_logs": 26,
+    "raw_retained_receipts": 14,
+    "retained_compiled_artifacts": 330,
+    "retained_guest_sources": 12,
+    "root_specific_artifacts": 80,
+    "actual_host_tests": 453,
+    "actual_host_groups": 80,
+    "host_failures_ignored": 0
+  },
+  "additional_review": [
+    "Only two test-strengthening/public-fixture visibility deltas after actual-host freeze; supplemental direct tests retained",
+    "Isolated native-physics lock adds only incant_anim and native-runtime edge; previous version resolutions preserved"
+  ],
+  "limits": [
+    "Ordinary public package proof remains separate and pending",
+    "Producer rehash of1031 removed temporary inputs is separately qualified; reviewer verified retained artifacts only",
+    "No GPU, device, full-save or Phase1 acceptance"
+  ],
+  "findings": []
+}

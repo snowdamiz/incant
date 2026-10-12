@@ -44,9 +44,9 @@ impl PendingSessionCheckpoint {
             .world
             .get(8..12)
             .map(|bytes| u32::from_le_bytes(bytes.try_into().unwrap()));
-        if !matches!(version, Some(3..=10)) {
+        if !matches!(version, Some(3..=11)) {
             return Err(CheckpointError::Invalid(
-                "session requires world save v3-v10",
+                "session requires world save v3-v11",
             ));
         }
         let world = load_world(sections.world)?;
