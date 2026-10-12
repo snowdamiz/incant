@@ -57,12 +57,15 @@ CPU tests, Clippy and the wasm32 adapter check pass locally. TypeScript/Wasm
 crossfade APIs retain copied full transition snapshots, explicit v2 Wasm framing,
 atomic controls and actual guest continuation. The frozen SDK suite passed 313
 CPU tests/doctests, Clippy and wasm32 compilation with independent source review.
-The private union still requires integrated checks and a fresh source-deleted
-exported crossfade proof. Crossfade GPU/Claude acceptance, full blend trees,
+The current private union passes 367 CPU tests, 313 actual dual-host tests and
+Clippy. The original public QuickJS export passed authoring/build-deleted replay
+and active/paused continuation, retaining an external debug map. A fresh current-
+lock export with source maps removed before launches remains pending. Crossfade GPU/Claude acceptance, full blend trees,
 state machines, IK and root motion remain open. See
 [the consumer evidence](docs/spikes/native-animation-crossfade-consumer.md),
 [the core evidence](docs/spikes/native-animation-crossfades.md) and
-[the SDK evidence](docs/spikes/native-animation-crossfade-sdk.md).
+[the SDK evidence](docs/spikes/native-animation-crossfade-sdk.md) and
+[the public export evidence](docs/spikes/native-crossfade-export.md).
 
 The project is still building the Phase 1 core engine. Native simulation,
 authored scripting, imports, physics, audio, input and source-free exports have
