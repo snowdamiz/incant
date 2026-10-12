@@ -121,6 +121,26 @@ fn overflow_during_hierarchy_composition_cannot_publish_a_partial_blend() {
     assert_eq!(player.locals(), locals);
     assert_eq!(player.globals(), globals);
     assert_eq!(player.joint_palette(0).unwrap(), joints);
+    use incant_assets_runtime::animation::PoseSource;
+    let overflow = [WeightedClipSample {
+        sample: sample(0, 1.),
+        weight: 1.,
+    }];
+    for (from, to) in [
+        (
+            PoseSource::Weighted(&overflow),
+            PoseSource::Clip(ClipSample::REST),
+        ),
+        (
+            PoseSource::Clip(ClipSample::REST),
+            PoseSource::Weighted(&overflow),
+        ),
+    ] {
+        assert!(player.sample_pose_crossfade(from, to, 0.5).is_err());
+        assert_eq!(player.locals(), locals);
+        assert_eq!(player.globals(), globals);
+        assert_eq!(player.joint_palette(0).unwrap(), joints);
+    }
     player
         .sample_blend(sample(0, 0.), sample(1, 2.), 0.5)
         .unwrap();

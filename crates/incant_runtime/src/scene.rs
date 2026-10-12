@@ -203,6 +203,12 @@ impl CookedScene {
             .iter()
             .any(|n| n.animation.as_ref().is_some_and(|a| a.graph.is_some()))
     }
+    pub fn has_compound_animation_fades(&self) -> bool {
+        self.spatial
+            .iter()
+            .filter_map(|n| n.animation.as_ref()?.graph.as_ref())
+            .any(|g| g.has_compound_fades())
+    }
     pub fn has_animation_trees(&self) -> bool {
         self.spatial
             .iter()
@@ -281,7 +287,8 @@ impl CookedScene {
         &self.visual_assets
     }
     fn spatial_bytes(&self) -> usize {
-        usize::from(self.has_ik()) * 4
+        usize::from(self.has_compound_animation_fades()) * 8
+            + usize::from(self.has_ik() || self.has_compound_animation_fades()) * 4
             + usize::from(self.has_animation_graphs() || self.has_ik()) * 4
             + usize::from(
                 self.has_text()

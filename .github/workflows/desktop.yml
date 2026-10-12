@@ -18,9 +18,9 @@ jobs:
           - {runner: windows-latest, platform: Windows, suffix: '.exe'}
           - {runner: ubuntu-latest, platform: Linux, suffix: ''}
     runs-on: ${{ matrix.runner }}
-    # Cold Windows runs can exceed 45 minutes as shipping and saved-workflow
-    # coverage grows. Keep every check and allow a bounded recovery margin.
-    timeout-minutes: 60
+    # Observed cold Windows checks used 53m27s before either fresh shipping proof.
+    # Retain every check and private fresh build; Linux keeps its existing budget.
+    timeout-minutes: ${{ matrix.runner == 'windows-latest' && 120 || 60 }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
@@ -67,6 +67,11 @@ jobs:
       - run: cargo build --workspace --bin incant_editor --bin incant_headless --example cook_scene --profile ci --features incant_editor/custom-protocol,incant_audio_runtime/scene --locked --timings
       - name: Verify public source edits, native Play and journal recovery
         run: python tools/probes/script-source-transactions.py artifacts/script-source-transactions --binary target/ci/incant_headless${{ matrix.suffix }}
+      - name: Play Core Sample gameplay scenarios on the native runtime
+        run: python samples/core/verify.py artifacts/core-sample-gameplay --binary target/ci/incant_headless${{ matrix.suffix }}
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: ${{ !cancelled() }}
+        with: {name: 'core-sample-gameplay-${{ matrix.platform }}', path: artifacts/core-sample-gameplay, if-no-files-found: error}
       - name: Export committed sources and execute the copied shipping game
         timeout-minutes: 45
         run: python tools/probes/authored-native-export.py artifacts/authored-native-export --binary target/ci/incant_headless${{ matrix.suffix }}

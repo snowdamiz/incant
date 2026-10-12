@@ -1,0 +1,40 @@
+{
+  "at": "2026-10-12T17:10:08.524376+00:00",
+  "head": "21791d216877e79843d83e46a85397dd34e8ddf4",
+  "files": [
+    {
+      "path": "tools/probes/native-compound-animation-export.py",
+      "sha256": "ccec79b56236acf9910ef9d1c156d29a26540d75deb260f17a59f7d73867b60d",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/compound-export-source-freeze-001/files/tools/probes/native-compound-animation-export.py"
+    },
+    {
+      "path": "tools/probes/native-compound-animation-export/behavior.ts",
+      "sha256": "09a11a4eecc65a314c09cc611a38106ed912b490cb7051d8dc9e88282bf1ec05",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/compound-export-source-freeze-001/files/tools/probes/native-compound-animation-export/behavior.ts"
+    },
+    {
+      "path": "tools/probes/native-animation-tree-export.py",
+      "sha256": "9d0f580ea681bfc2775ebf671b8c71b7fe640b43072639289404bdce5c7017a3",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/compound-export-source-freeze-001/files/tools/probes/native-animation-tree-export.py"
+    },
+    {
+      "path": "tools/probes/native-animation-graph-export.py",
+      "sha256": "6e116c6ab103a6e40c64da6586160cd49336530854390986aa3850052d6a9f49",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/compound-export-source-freeze-001/files/tools/probes/native-animation-graph-export.py"
+    },
+    {
+      "path": "tools/export_native.py",
+      "sha256": "a22f6431bb6db373982970e53a219f1f57633c538e08055bcafacefa887699a1",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/compound-export-source-freeze-001/files/tools/export_native.py"
+    },
+    {
+      "path": "tools/native_process.py",
+      "sha256": "493c6e70e9045bf3b6e128b4392f47b7cac8a475969d715f26cd1eb7d9777ec3",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/compound-export-source-freeze-001/files/tools/native_process.py"
+    }
+  ],
+  "binary": "/Users/andreyyurlov/.codex/incant-animation-target/ci/incant_headless",
+  "binary_sha256": "90a655b53fd2a3b94e94d969707b7cc9abc35979d11fc253bdc0ff879fd2a03c",
+  "authoring_result": "/Users/andreyyurlov/.codex/incant-evidence/compound-export-001/authoring.json",
+  "production_core_evidence": "docs/spikes/evidence/native-compound-fades.json"
+}

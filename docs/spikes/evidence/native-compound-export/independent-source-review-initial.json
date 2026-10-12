@@ -1,0 +1,60 @@
+{
+  "at": "2026-10-12T17:11:48.023717+00:00",
+  "reviewer": "astra",
+  "kind": "independent read-only compound public proof source review",
+  "head": "21791d216877e79843d83e46a85397dd34e8ddf4",
+  "source_inventory_sha256": "d23866f6c159adaf20472540308e7eb85ebcb551d17b94c53d9fd03f1977ac72",
+  "files": [
+    {
+      "path": "tools/probes/native-compound-animation-export.py",
+      "sha256": "ccec79b56236acf9910ef9d1c156d29a26540d75deb260f17a59f7d73867b60d",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/compound-export-source-freeze-001/files/tools/probes/native-compound-animation-export.py"
+    },
+    {
+      "path": "tools/probes/native-compound-animation-export/behavior.ts",
+      "sha256": "09a11a4eecc65a314c09cc611a38106ed912b490cb7051d8dc9e88282bf1ec05",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/compound-export-source-freeze-001/files/tools/probes/native-compound-animation-export/behavior.ts"
+    },
+    {
+      "path": "tools/probes/native-animation-tree-export.py",
+      "sha256": "9d0f580ea681bfc2775ebf671b8c71b7fe640b43072639289404bdce5c7017a3",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/compound-export-source-freeze-001/files/tools/probes/native-animation-tree-export.py"
+    },
+    {
+      "path": "tools/probes/native-animation-graph-export.py",
+      "sha256": "6e116c6ab103a6e40c64da6586160cd49336530854390986aa3850052d6a9f49",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/compound-export-source-freeze-001/files/tools/probes/native-animation-graph-export.py"
+    },
+    {
+      "path": "tools/export_native.py",
+      "sha256": "a22f6431bb6db373982970e53a219f1f57633c538e08055bcafacefa887699a1",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/compound-export-source-freeze-001/files/tools/export_native.py"
+    },
+    {
+      "path": "tools/native_process.py",
+      "sha256": "493c6e70e9045bf3b6e128b4392f47b7cac8a475969d715f26cd1eb7d9777ec3",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/compound-export-source-freeze-001/files/tools/native_process.py"
+    }
+  ],
+  "result": "No core oracle or continuation blocker; one narrow negative-output assertion requested before final evidence acceptance",
+  "reviewed": [
+    "Closed-form integer-quarter-second clock timeline independently covers zero weight, pause/resume, reversed incoming with retained outgoing speed, completion, edge deferral and explicit cancellation",
+    "All ordered group operands, interpolation kinds, split/outer weight and captured source clock fields compare to independently constructed expected records",
+    "Immutable source instances opt in to persistence and require the per-instance accepted count to equal the absolute native tick after fresh process restore",
+    "Three complete fresh processes and ten checkpoint split pairs require exact final checkpoint bytes, concatenated PCM, logs and final CPU render-input identity",
+    "Public command bus authoring, source write, Undo/Redo, native Play authoring isolation, journal reopen, captured package source/map/build cleanup",
+    "Corrupt checkpoint and false observation controls bind exact errors and absence of PCM/save"
+  ],
+  "findings": [
+    {
+      "severity": "evidence correction",
+      "file": "tools/probes/native-compound-animation-export.py",
+      "symbol": "launch diagnostic branch",
+      "detail": "Also require not result.stdout; exact stderr and absent files alone do not establish absence of partial stdout publication. Preserve active shipping and reverify the two negatives against its unchanged player afterward."
+    }
+  ],
+  "limits": [
+    "No source edits or new builds/processes performed in this review. Root owns active shipping39312 and final executed receipts.",
+    "Rendering, native windows, device measurements and complete animation gate are outside this proof."
+  ]
+}

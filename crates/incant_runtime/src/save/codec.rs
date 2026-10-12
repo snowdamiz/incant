@@ -10,6 +10,14 @@ const EXTENSION: usize = 40;
 pub(super) const STATE_BYTES: usize = 28;
 pub(super) const ANIMATION_BYTES: usize = 36;
 pub(super) const GRAPH_BYTES: usize = 168;
+const FADE_GRAPH_BYTES: usize = GRAPH_BYTES + 40;
+pub(super) fn graph_stride(version: u32) -> usize {
+    if version >= 10 {
+        FADE_GRAPH_BYTES
+    } else {
+        GRAPH_BYTES
+    }
+}
 pub(super) const IK_BYTES: usize = 16 + crate::ik_binary::ROW;
 const TRANSITION_ANIMATION_BYTES: usize = 72;
 pub(super) fn animation_stride(version: u32) -> usize {
@@ -23,7 +31,7 @@ pub const MAX_SAVE_BYTES: usize = HEADER
     + EXTENSION
     + 12
     + crate::MAX_SCENE_ANIMATION_IK * IK_BYTES
-    + crate::MAX_ANIMATION_GRAPH_INSTANCES * GRAPH_BYTES
+    + crate::MAX_ANIMATION_GRAPH_INSTANCES * FADE_GRAPH_BYTES
     + crate::binary::MAX_SCENE_BYTES
     + crate::MAX_SPRITE_ENTITIES * STATE_BYTES
     + crate::MAX_MESH_ENTITIES * TRANSITION_ANIMATION_BYTES;
@@ -48,7 +56,9 @@ pub(super) fn encode(
     {
         return Err(SaveError::Invalid("save capacity"));
     }
-    let version = if !ik.is_empty() {
+    let version = if graphs.iter().any(|(_, graph)| graph.fade.is_some()) {
+        10u32
+    } else if !ik.is_empty() {
         9u32
     } else if audio_used {
         8u32
@@ -74,7 +84,7 @@ pub(super) fn encode(
         + scene.len()
         + states.len() * STATE_BYTES
         + animations.len() * animation_stride(version)
-        + graphs.len() * GRAPH_BYTES
+        + graphs.len() * graph_stride(version)
         + ik.len() * IK_BYTES;
     let mut bytes = Vec::with_capacity(HEADER + length);
     bytes.extend(MAGIC);
@@ -139,6 +149,9 @@ pub(super) fn encode(
         for value in graph.parameters {
             bytes.extend(value.to_le_bytes());
         }
+        if version >= 10 {
+            super::graph_fade::write(&mut bytes, graph.fade);
+        }
     }
     for row in ik {
         bytes.extend(row.entity.0);
@@ -161,7 +174,7 @@ pub(super) struct Decoded<'a> {
     pub ik: &'a [u8],
 }
 pub(super) fn is_bound(bytes: &[u8]) -> bool {
-    matches!(u32::from_le_bytes(bytes[8..12].try_into().unwrap()), 2..=9)
+    matches!(u32::from_le_bytes(bytes[8..12].try_into().unwrap()), 2..=10)
 }
 pub(super) fn decode(bytes: &[u8]) -> Result<Decoded<'_>, SaveError> {
     if !(HEADER..=MAX_SAVE_BYTES).contains(&bytes.len()) {
@@ -171,7 +184,7 @@ pub(super) fn decode(bytes: &[u8]) -> Result<Decoded<'_>, SaveError> {
         return Err(SaveError::Invalid("magic"));
     }
     let version = u32::from_le_bytes(bytes[8..12].try_into().unwrap());
-    if !(1..=9).contains(&version) {
+    if !(1..=10).contains(&version) {
         return Err(SaveError::Version(version));
     }
     let flags = u32::from_le_bytes(bytes[12..16].try_into().unwrap());
@@ -239,7 +252,7 @@ pub(super) fn decode(bytes: &[u8]) -> Result<Decoded<'_>, SaveError> {
             + scene_len
             + count * STATE_BYTES
             + animation_count * animation_stride(version)
-            + graph_count * GRAPH_BYTES
+            + graph_count * graph_stride(version)
             + ik_count * IK_BYTES
             != bytes.len() - HEADER
     {
@@ -248,7 +261,7 @@ pub(super) fn decode(bytes: &[u8]) -> Result<Decoded<'_>, SaveError> {
     let (scene, rest) = bytes[HEADER + extension..].split_at(scene_len);
     let (states, rest) = rest.split_at(count * STATE_BYTES);
     let (animations, rest) = rest.split_at(animation_count * animation_stride(version));
-    let (graphs, ik) = rest.split_at(graph_count * GRAPH_BYTES);
+    let (graphs, ik) = rest.split_at(graph_count * graph_stride(version));
     let mut previous = None;
     for row in states.as_chunks::<STATE_BYTES>().0 {
         let (id, _) = state(row)?;
@@ -271,12 +284,17 @@ pub(super) fn decode(bytes: &[u8]) -> Result<Decoded<'_>, SaveError> {
         return Err(SaveError::Invalid("animation transition membership"));
     }
     let mut previous = None;
-    for row in graphs.as_chunks::<GRAPH_BYTES>().0 {
-        let (id, _) = graph(row)?;
+    let mut has_fade = false;
+    for row in graphs.chunks_exact(graph_stride(version)) {
+        let (id, state) = graph(row)?;
+        has_fade |= state.fade.is_some();
         if previous.is_some_and(|p| p >= id) {
             return Err(SaveError::Invalid("animation graph canonical order"));
         }
         previous = Some(id);
+    }
+    if version == 10 && !has_fade {
+        return Err(SaveError::Invalid("animation graph fade membership"));
     }
     Ok(Decoded {
         version,
@@ -348,14 +366,18 @@ pub(super) fn animation(row: &[u8]) -> Result<(StableId, crate::AnimationState),
         },
     ))
 }
-pub(super) fn graph(
-    row: &[u8; GRAPH_BYTES],
-) -> Result<(StableId, crate::AnimationGraphState), SaveError> {
+pub(super) fn graph(row: &[u8]) -> Result<(StableId, crate::AnimationGraphState), SaveError> {
+    if !matches!(row.len(), GRAPH_BYTES | FADE_GRAPH_BYTES) {
+        return Err(SaveError::Invalid("animation graph row size"));
+    }
     if row[17] > 1 || row[18..24] != [0; 6] {
         return Err(SaveError::Invalid("animation graph reserved flags"));
     }
     let mut parameters = [0.0; incant_types::MAX_ANIMATION_GRAPH_PARAMETERS];
-    for (value, bytes) in parameters.iter_mut().zip(row[40..].as_chunks::<8>().0) {
+    for (value, bytes) in parameters
+        .iter_mut()
+        .zip(row[40..GRAPH_BYTES].as_chunks::<8>().0)
+    {
         *value = f64::from_le_bytes(*bytes);
     }
     Ok((
@@ -366,6 +388,11 @@ pub(super) fn graph(
             seconds: f64::from_le_bytes(row[24..32].try_into().unwrap()),
             elapsed: f64::from_le_bytes(row[32..40].try_into().unwrap()),
             parameters,
+            fade: if row.len() == FADE_GRAPH_BYTES {
+                super::graph_fade::read(&row[GRAPH_BYTES..])?
+            } else {
+                None
+            },
         },
     ))
 }

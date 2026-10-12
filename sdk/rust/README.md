@@ -268,3 +268,36 @@ Correct-epoch ingress or output errors reject the complete update even when a
 caller ignores the error. Stale epochs are rejected without poisoning a different
 currently valid update. This is local avoidance only; navmesh path queries,
 automatic obstacle collection and debug drawing remain separate capabilities.
+
+### Complete compound poses and outgoing graph clocks
+
+`Tick::animation_poses_v5(scratch)` returns ordinary clip/pair/weighted poses and
+compound poses. Each row contains one or two `AnimationPoseGroup` views with an
+explicit `PoseInterpolation` (`Clip`, `SphericalPair`, `Weighted`). A compound
+row has two independently evaluated groups and `outer_weight`, the destination
+contribution of their TRS crossfade. Do not flatten them: a weighted quaternion
+mean and pairwise SLERP have different numerical semantics. Inactive pair and
+outer endpoints remain present. Both compound groups contain at most eight
+samples. The general typed weighted-pose contract permits sixteen samples in
+one standalone mean, matching `AnimationPoseSamples::new` and `blend`; the
+authored graph-state limit remains eight.
+
+`Tick::animation_ik_v2(scratch)` contains that entire v5 frame and every ordered
+model-space constraint, with the same `set_animation_ik` controls. Standalone
+pose readers, including v5, refuse committed IK. `animation_graphs_v2(scratch)`
+returns current graph rows/parameters plus sorted outgoing state/clock records.
+Both groups use the captured current parameter values. Existing graph controls
+remain unchanged; they do not alter the current callback's captured frames.
+
+Operations 47–52 append these three length/read pairs. All earlier operations and
+wire layouts remain unchanged. Old graph/IK frames that cannot represent a
+compound pose refuse the whole callback, even after a complete-frame cache has
+been populated. Entire-frame validation checks sparse associations, canonical
+owner ordering, duplicate IDs, sample/group bounds and all numerical fields
+before exposing borrowed views. An invalid active call or caught SDK error
+rejects the callback's entire staged numeric/structural/log prefix.
+
+These copied observations do not grant chain-topology authority or persist Wasm
+memory. Whole-module checkpoints remain explicitly unsupported. See
+[samples/animation_compound.rs](samples/animation_compound.rs) for complete
+captured reads and controls through the real native host.

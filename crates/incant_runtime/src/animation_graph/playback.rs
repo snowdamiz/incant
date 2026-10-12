@@ -1,7 +1,5 @@
 use super::*;
-use crate::{
-    AnimationBlendSample, AnimationSample, AnimationState, NativeAnimation, SceneError, StableId,
-};
+use crate::{AnimationBlendSample, AnimationState, NativeAnimation, SceneError, StableId};
 use incant_types::{MAX_ANIMATION_GRAPH_PARAMETERS, MAX_ANIMATION_GRAPH_SECONDS};
 
 /// Retained numeric state only. Configuration and model data are never copied
@@ -13,6 +11,7 @@ pub struct AnimationGraphState {
     pub(crate) seconds: f64,
     pub(crate) elapsed: f64,
     pub(crate) parameters: [f64; MAX_ANIMATION_GRAPH_PARAMETERS],
+    pub(crate) fade: Option<super::fade::AnimationGraphFade>,
 }
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub enum AnimationGraphControl {
@@ -37,6 +36,7 @@ pub struct AnimationGraphSnapshot {
     pub parameter_ids: [StableId; MAX_ANIMATION_GRAPH_PARAMETERS],
     pub blend: Option<AnimationBlendSample>,
     pub pose: Option<incant_types::AnimationPoseSamples>,
+    pub fade: Option<super::fade::AnimationGraphFadeSnapshot>,
 }
 impl NativeAnimationGraph {
     pub(crate) fn initial_state(&self, playing: bool) -> AnimationGraphState {
@@ -50,75 +50,7 @@ impl NativeAnimationGraph {
             seconds: 0.0,
             elapsed: 0.0,
             parameters,
-        }
-    }
-    pub(crate) fn pose(
-        &self,
-        graph: &AnimationGraphState,
-    ) -> Option<incant_types::AnimationPoseSamples> {
-        let NativeAnimationMotion::Tree {
-            cycle_seconds,
-            tree,
-        } = &self.states[usize::from(graph.current)].motion
-        else {
-            return None;
-        };
-        Some(
-            tree.sample(
-                &graph.parameters[..self.parameters.len()],
-                graph.seconds / cycle_seconds,
-            )
-            .expect("validated graph tree state"),
-        )
-    }
-    pub(crate) fn sample(
-        &self,
-        graph: &AnimationGraphState,
-        definition: &NativeAnimation,
-    ) -> (AnimationSample, Option<AnimationBlendSample>) {
-        match &self.states[usize::from(graph.current)].motion {
-            NativeAnimationMotion::Tree { .. } => (
-                self.pose(graph).expect("tree motion").samples()[0].sample,
-                None,
-            ),
-            NativeAnimationMotion::Clip(clip) => (
-                AnimationSample {
-                    clip: *clip,
-                    seconds: graph.seconds,
-                },
-                None,
-            ),
-            NativeAnimationMotion::Blend1d {
-                parameter,
-                cycle_seconds,
-                points,
-            } => {
-                let value = graph.parameters[usize::from(*parameter)];
-                let upper = points.partition_point(|point| point.threshold <= value);
-                let sample = |point: &NativeAnimationBlendPoint| AnimationSample {
-                    clip: Some(point.clip),
-                    seconds: (graph.seconds / cycle_seconds)
-                        * f64::from(definition.clip_durations[usize::from(point.clip)]),
-                };
-                if upper == 0 {
-                    return (sample(&points[0]), None);
-                }
-                if upper == points.len() {
-                    return (sample(&points[upper - 1]), None);
-                }
-                let (left, right) = (&points[upper - 1], &points[upper]);
-                let weight = (value - left.threshold) / (right.threshold - left.threshold);
-                if weight == 0.0 {
-                    return (sample(left), None);
-                }
-                (
-                    sample(right),
-                    Some(AnimationBlendSample {
-                        sample: sample(left),
-                        weight,
-                    }),
-                )
-            }
+            fade: None,
         }
     }
     pub(crate) fn control(
@@ -159,7 +91,23 @@ impl NativeAnimationGraph {
         state: u8,
         fade: f64,
     ) {
-        let transition = (fade > 0.0).then_some(crate::AnimationTransition {
+        let compound = fade > 0.0
+            && (!matches!(
+                self.states[usize::from(graph.current)].motion,
+                NativeAnimationMotion::Clip(_)
+            ) || !matches!(
+                self.states[usize::from(state)].motion,
+                NativeAnimationMotion::Clip(_)
+            ));
+        graph.fade = compound.then_some(super::fade::AnimationGraphFade {
+            state: graph.current,
+            seconds: graph.seconds,
+            speed: playback.speed,
+            playing: playback.playing,
+            elapsed: 0.0,
+            duration: fade,
+        });
+        let transition = (fade > 0.0 && !compound).then_some(crate::AnimationTransition {
             source: playback.sample,
             speed: playback.speed,
             playing: playback.playing,
@@ -186,7 +134,7 @@ impl NativeAnimationGraph {
         if graph.paused {
             return;
         }
-        let transitioning = playback.transition.is_some();
+        let transitioning = playback.transition.is_some() || graph.fade.is_some();
         match &self.states[usize::from(graph.current)].motion {
             NativeAnimationMotion::Clip(_) => {
                 crate::animation::advance_state(playback, definition, dt);
@@ -211,6 +159,7 @@ impl NativeAnimationGraph {
                 }
             }
         }
+        self.advance_fade(graph, definition, dt);
         graph.elapsed = (graph.elapsed + dt).min(MAX_ANIMATION_GRAPH_SECONDS);
         // At most one automatic edge per committed step. An in-flight fade owns
         // its full step, even when it finishes; no interruption or cascade.
@@ -294,6 +243,7 @@ impl NativeAnimationGraph {
         {
             return Err(SceneError::Invalid("animation graph checkpoint transition"));
         }
+        self.validate_fade(graph, playback, definition)?;
         if self.sample(graph, definition).0 != playback.sample {
             return Err(SceneError::Invalid("animation graph checkpoint sample"));
         }
@@ -320,6 +270,14 @@ impl crate::animation::Playback {
             parameter_ids,
             blend: self.blend_sample(),
             pose: self.pose_sample(),
+            fade: state.fade.map(|f| super::fade::AnimationGraphFadeSnapshot {
+                state: definition.states[usize::from(f.state)].id,
+                seconds: f.seconds,
+                speed: f.speed,
+                playing: f.playing,
+                elapsed: f.elapsed,
+                duration: f.duration,
+            }),
         })
     }
 }

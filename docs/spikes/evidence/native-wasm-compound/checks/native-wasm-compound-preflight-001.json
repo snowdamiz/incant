@@ -1,0 +1,61 @@
+{
+  "passed": false,
+  "commands": [
+    {
+      "argv": [
+        "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+        "build",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_cook",
+        "--example",
+        "animation_compound_package_oracle"
+      ],
+      "exit_code": 0,
+      "seconds": 32.90238845800013,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-compound-oracle-build-001.log",
+      "sha256": "6c2d789fccf230cc60f1ea2a7ae20d7a4aa3f0b26e11627b310f29956007bfbf"
+    },
+    {
+      "argv": [
+        "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_cook",
+        "--example",
+        "animation_compound_package_oracle",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "seconds": 3.9913981249992503,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-compound-oracle-clippy-001.log",
+      "sha256": "66537c9a7cf7ad6d8746b752803d9e1eb66493e018d93421a89416c50b9f0fad"
+    },
+    {
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/tools/probes/native-wasm-compound-export.py",
+        "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-compound-shipping-001",
+        "--binary",
+        "/tmp/incant-font-atlas-target/ci/incant_headless",
+        "--oracle",
+        "/tmp/incant-font-atlas-target/ci/examples/animation_compound_package_oracle",
+        "--stage",
+        "author"
+      ],
+      "exit_code": 1,
+      "seconds": 2.447095375000572,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-compound-authoring-001.log",
+      "sha256": "809dc861bd1d95a48666ed91005f3c5c312c822e4b144868e4c2a5f44253a36d"
+    }
+  ]
+}

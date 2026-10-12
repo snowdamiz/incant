@@ -25,6 +25,21 @@ const _: () = {
 /// Trusted host adapter operation; all integer arguments are guest offsets/indices.
 #[derive(Clone, Copy)]
 pub enum Call {
+    AnimationLenV5,
+    ReadAnimationsV5 {
+        ptr: i32,
+        capacity: i32,
+    },
+    AnimationIkLenV2,
+    ReadAnimationIkV2 {
+        ptr: i32,
+        capacity: i32,
+    },
+    AnimationGraphLenV2,
+    ReadAnimationGraphsV2 {
+        ptr: i32,
+        capacity: i32,
+    },
     PhysicsQuery {
         ptr: i32,
         len: i32,
@@ -181,6 +196,9 @@ pub struct Capability {
     animations_v3: Vec<u8>,
     animation_scene: Option<StableId>,
     animations_v4: Vec<u8>,
+    animations_v5: Vec<u8>,
+    animation_ik_v2: Vec<u8>,
+    animation_graphs_v2: Vec<u8>,
     animation_graph_rows: Vec<incant_runtime::AnimationGraphSnapshot>,
     animation_graphs: Vec<u8>,
     animation_rejected: bool,
@@ -266,6 +284,9 @@ impl Capability {
         self.animation_scene = Some(world.scene_id());
         self.animations_v3.clear();
         self.animations_v4.clear();
+        self.animations_v5.clear();
+        self.animation_ik_v2.clear();
+        self.animation_graphs_v2.clear();
         self.animation_graphs.clear();
         if let Err(error) = world.snapshot_animation_graphs(&mut self.animation_graph_rows) {
             self.abort();
@@ -352,6 +373,9 @@ impl Capability {
         self.animations_v2.clear();
         self.animations_v3.clear();
         self.animations_v4.clear();
+        self.animations_v5.clear();
+        self.animation_ik_v2.clear();
+        self.animation_graphs_v2.clear();
         self.animation_graph_rows.clear();
         self.animation_graphs.clear();
         self.active = false;
@@ -396,6 +420,9 @@ impl Capability {
         self.animations_v2.clear();
         self.animations_v3.clear();
         self.animations_v4.clear();
+        self.animations_v5.clear();
+        self.animation_ik_v2.clear();
+        self.animation_graphs_v2.clear();
         self.animation_graph_rows.clear();
         self.animation_graphs.clear();
         if self.tick_logs.rejected {
@@ -521,6 +548,12 @@ impl Capability {
                     | Call::AnimationIkLen
                     | Call::ReadAnimationIk { .. }
                     | Call::ControlAnimationIk { .. }
+                    | Call::AnimationLenV5
+                    | Call::ReadAnimationsV5 { .. }
+                    | Call::AnimationIkLenV2
+                    | Call::ReadAnimationIkV2 { .. }
+                    | Call::AnimationGraphLenV2
+                    | Call::ReadAnimationGraphsV2 { .. }
                     | Call::AnimationLenV2
                     | Call::ReadAnimationsV2 { .. }
                     | Call::ControlAnimationV2 { .. }
@@ -580,6 +613,15 @@ impl Capability {
         if memory.len() > limits::MEMORY {
             return Err(Error::Limit("linear memory"));
         }
+        if matches!(
+            call,
+            Call::AnimationGraphLen | Call::ReadAnimationGraphs { .. }
+        ) && self.animation_graph_rows.iter().any(|g| g.fade.is_some())
+        {
+            return Err(Error::Abi(
+                "animation graph v1 cannot represent compound fades",
+            ));
+        }
         // These pose protocols have no post-sample IK payload. Refuse only
         // pose observations; other module capabilities and native rendering
         // remain usable. Every later pose ABI must preserve this admission.
@@ -594,6 +636,8 @@ impl Capability {
                     | Call::ReadAnimationsV3 { .. }
                     | Call::AnimationLenV4
                     | Call::ReadAnimationsV4 { .. }
+                    | Call::AnimationLenV5
+                    | Call::ReadAnimationsV5 { .. }
             )
         {
             return Err(Error::Abi(
@@ -681,6 +725,77 @@ impl Capability {
                 let region = range(ptr, len, memory.len())?;
                 self.transfer(len)?;
                 memory[region].copy_from_slice(self.navigation_state()?.reply()?);
+                return Ok(len as i32);
+            }
+            Call::AnimationLenV5
+            | Call::ReadAnimationsV5 { .. }
+            | Call::AnimationIkLenV2
+            | Call::ReadAnimationIkV2 { .. }
+            | Call::AnimationGraphLenV2
+            | Call::ReadAnimationGraphsV2 { .. } => {
+                let graph = matches!(
+                    call,
+                    Call::AnimationGraphLenV2 | Call::ReadAnimationGraphsV2 { .. }
+                );
+                let ik = matches!(
+                    call,
+                    Call::AnimationIkLenV2 | Call::ReadAnimationIkV2 { .. }
+                );
+                if graph {
+                    if self.animation_graphs_v2.is_empty() {
+                        self.prepare_animation_snapshot(true);
+                        crate::animation_graphs_v2::encode(
+                            &self.animation_graph_rows,
+                            &self.animation_graphs,
+                            &mut self.animation_graphs_v2,
+                        );
+                    }
+                } else {
+                    if self.animations_v5.is_empty() {
+                        crate::animation_poses_v5::encode(
+                            self.animation_scene
+                                .ok_or(Error::Abi("animation scene absent"))?,
+                            &mut self.animation_rows,
+                            &mut self.animations_v5,
+                        )?;
+                    }
+                    if ik && self.animation_ik_v2.is_empty() {
+                        crate::animation_ik_v2::encode(
+                            &self.animation_rows,
+                            &self.animations_v5,
+                            &self.ik_rows,
+                            &mut self.animation_ik_v2,
+                        )?;
+                    }
+                }
+                let len = if graph {
+                    self.animation_graphs_v2.len()
+                } else if ik {
+                    self.animation_ik_v2.len()
+                } else {
+                    self.animations_v5.len()
+                };
+                if let Call::ReadAnimationsV5 { ptr, capacity }
+                | Call::ReadAnimationIkV2 { ptr, capacity }
+                | Call::ReadAnimationGraphsV2 { ptr, capacity } = call
+                {
+                    let capacity = usize::try_from(capacity)
+                        .map_err(|_| Error::Abi("animation destination capacity"))?;
+                    if capacity < len {
+                        return Err(Error::Abi("animation destination capacity"));
+                    }
+                    range(ptr, capacity, memory.len())?;
+                    let region = range(ptr, len, memory.len())?;
+                    self.transfer(len)?;
+                    let bytes = if graph {
+                        &self.animation_graphs_v2
+                    } else if ik {
+                        &self.animation_ik_v2
+                    } else {
+                        &self.animations_v5
+                    };
+                    memory[region].copy_from_slice(bytes);
+                }
                 return Ok(len as i32);
             }
             Call::AnimationIkLen | Call::ReadAnimationIk { .. } => {

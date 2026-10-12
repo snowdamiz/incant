@@ -1,5 +1,7 @@
 //! Copied weighted local-pose observations shared by runtime and render hosts.
 use crate::AnimationSample;
+mod grouped;
+pub use grouped::{AnimationPoseGroup, PoseInterpolation};
 pub const MAX_ANIMATION_POSE_SAMPLES: usize = 16;
 
 #[derive(Debug, Clone, Copy, PartialEq)]
@@ -15,6 +17,9 @@ pub struct WeightedAnimationSample {
 pub struct AnimationPoseSamples {
     samples: [WeightedAnimationSample; MAX_ANIMATION_POSE_SAMPLES],
     len: u8,
+    split: u8,
+    kinds: [PoseInterpolation; 2],
+    outer_weight: f64,
 }
 
 impl AnimationPoseSamples {
@@ -59,8 +64,13 @@ impl AnimationPoseSamples {
             weight: 0.0,
         }; MAX_ANIMATION_POSE_SAMPLES],
         len: 0,
+        split: 0,
+        kinds: [PoseInterpolation::Weighted; 2],
+        outer_weight: 0.0,
     };
 
+    /// Packed contributions. A compound pose has independently normalized
+    /// groups; use `group` and `outer_weight` rather than flattening them.
     pub fn samples(&self) -> &[WeightedAnimationSample] {
         &self.samples[..usize::from(self.len)]
     }
@@ -69,6 +79,9 @@ impl AnimationPoseSamples {
     /// Endpoints preserve the input exactly. Equal clip/time entries coalesce;
     /// different phases of the same clip remain separate.
     pub fn blend(&self, destination: &Self, weight: f64) -> Result<Self, &'static str> {
+        if !self.is_weighted() || !destination.is_weighted() {
+            return Err("flattening grouped or spherical animation poses is unsupported");
+        }
         if !weight.is_finite() || !(0.0..=1.0).contains(&weight) {
             return Err("animation pose blend weight");
         }

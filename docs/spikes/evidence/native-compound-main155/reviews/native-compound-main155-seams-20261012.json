@@ -1,0 +1,15 @@
+{
+  "at": "2026-10-12T18:13:04.185599+00:00",
+  "reviewer": "astra",
+  "scope": "Six-file compound/current-main source seams only; full integration execution packet remains pending",
+  "patch_sha256": "34a2305a44a54ee6370577a825c35b30fe264d4a854779118c6a2f4854eacbcb",
+  "accepted": true,
+  "review": [
+    "Retains already reviewed native root-motion exports from main.",
+    "Retains current-main IK-v1 epoch/cache/control path without dropping compound refusal through nested v4 encoder.",
+    "Extends actual compound rollback/refusal test to IK-v1 len/read rather than exposing incomplete data.",
+    "Preserves all eight legacy pose read operations; reordering does not remove coverage.",
+    "Diagnostic3..10 now matches existing accepted version range; four exact-string expectations updated without weakening world/incarnation rollback assertions."
+  ],
+  "pending": "Recovered wasm/tool/actual-host/fresh ordinary export and final integrated source check"
+}

@@ -16,6 +16,9 @@ pub(crate) struct Scratch {
     pose_clips: Vec<i32>,
     pose_seconds: Vec<f64>,
     pose_weights: Vec<f64>,
+    pose_kinds: Vec<u8>,
+    pose_splits: Vec<u8>,
+    pose_outer_weights: Vec<f64>,
 
     transition_flags: Vec<u32>,
     source_clips: Vec<i32>,
@@ -38,6 +41,9 @@ impl Scratch {
         self.pose_clips.clear();
         self.pose_seconds.clear();
         self.pose_weights.clear();
+        self.pose_kinds.clear();
+        self.pose_splits.clear();
+        self.pose_outer_weights.clear();
         self.pose_offsets.push(0);
         self.transition_flags.clear();
         self.source_clips.clear();
@@ -46,6 +52,20 @@ impl Scratch {
         self.transition_elapsed.clear();
         self.transition_duration.clear();
         for row in &self.rows {
+            self.pose_kinds.extend([0, 1].map(|index| {
+                row.pose
+                    .and_then(|p| p.group(index).map(|g| g.interpolation as u8))
+                    .unwrap_or(255)
+            }));
+            self.pose_splits.push(
+                row.pose
+                    .filter(|p| p.outer_weight().is_some())
+                    .map_or(0, |p| {
+                        p.group(0).expect("retained group").samples.len() as u8
+                    }),
+            );
+            self.pose_outer_weights
+                .push(row.pose.and_then(|p| p.outer_weight()).unwrap_or(0.0));
             if let Some(pose) = row.pose {
                 for entry in pose.samples() {
                     self.pose_clips
@@ -152,6 +172,20 @@ impl Scratch {
             "poseSeconds",
             Property::from(TypedArray::new_copy(ctx.clone(), &self.pose_seconds)?).enumerable(),
         )?;
+        for (name, data) in [
+            ("poseKinds", &self.pose_kinds),
+            ("poseSplits", &self.pose_splits),
+        ] {
+            result.prop(
+                name,
+                Property::from(TypedArray::new_copy(ctx.clone(), data)?).enumerable(),
+            )?;
+        }
+        result.prop(
+            "poseOuterWeights",
+            Property::from(TypedArray::new_copy(ctx.clone(), &self.pose_outer_weights)?)
+                .enumerable(),
+        )?;
         result.prop(
             "poseWeights",
             Property::from(TypedArray::new_copy(ctx.clone(), &self.pose_weights)?).enumerable(),
@@ -196,6 +230,9 @@ mod tests {
             pose_clips: vec![],
             pose_seconds: vec![],
             pose_weights: vec![],
+            pose_kinds: vec![255, 255],
+            pose_splits: vec![0],
+            pose_outer_weights: vec![0.0],
             transition_flags: vec![0],
             source_clips: vec![0],
             source_seconds: vec![0.],

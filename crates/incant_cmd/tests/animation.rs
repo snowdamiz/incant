@@ -134,7 +134,7 @@ fn graph_atomic_dependencies_references_bounds_provenance_and_undo() {
     let state = new_id();
     let second = new_id();
     let transition = new_id();
-    let graph = json!({"initial":state,"parameters":{parameter.clone():{"initial":0,"min":0,"max":1}},"states":{state.clone():{"motion":{"kind":"clip","clip":0},"looping":true},second.clone():{"motion":{"kind":"blend1d","parameter":parameter,"cycle_seconds":2,"points":[{"threshold":0,"clip":0},{"threshold":1,"clip":1}]},"looping":true}},"transitions":{transition.clone():{"from":state,"to":second,"priority":0,"fade_seconds":0,"after_seconds":null,"conditions":[{"parameter":parameter,"comparison":"greater_equal","value":0.5}]}}});
+    let graph = json!({"initial":state,"parameters":{parameter.clone():{"initial":0,"min":0,"max":1}},"states":{state.clone():{"motion":{"kind":"clip","clip":0},"looping":true},second.clone():{"motion":{"kind":"blend1d","parameter":parameter,"cycle_seconds":2,"points":[{"threshold":0,"clip":0},{"threshold":1,"clip":1}]},"looping":true}},"transitions":{transition.clone():{"from":state,"to":second,"priority":0,"fade_seconds":0.5,"after_seconds":null,"conditions":[{"parameter":parameter,"comparison":"greater_equal","value":0.5}]}}});
     let animation = json!({"clip":0,"seconds":0,"speed":1,"playing":true,"looping":true});
     let mesh = json!({"mesh":aid,"materials":[],"cast_shadows":false});
     assert!(
@@ -151,7 +151,7 @@ fn graph_atomic_dependencies_references_bounds_provenance_and_undo() {
         match variant {
             0 => bad["initial"] = json!(new_id()),
             1 => bad["parameters"][&parameter]["initial"] = json!(2),
-            2 => bad["transitions"][&transition]["fade_seconds"] = json!(0.5),
+            2 => bad["transitions"][&transition]["fade_seconds"] = json!(-0.5),
             3 => bad["states"][&second]["motion"]["points"][1]["threshold"] = json!(0),
             4 => bad["states"][&second]["motion"]["kind"] = json!("blend2d"),
             5 => bad["parameters"][&parameter]["unknown"] = json!(true),

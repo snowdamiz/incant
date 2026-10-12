@@ -1,0 +1,15 @@
+{
+  "new_dependency_records": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-compound-integration-target/wasm32-unknown-unknown/ci/deps/incant_types-ec6c050e19351684.d",
+      "sha256": "03f696132f527c412b044a7b9530df0e561b0987ca60f22535c104f29e82343e",
+      "contains": "crates/incant_types/src/animation_pose/grouped.rs"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-compound-integration-target/wasm32-unknown-unknown/ci/deps/incant_assets_runtime-10a445557ad9ddc1.d",
+      "sha256": "55e1b0b475cf77cc251ddedbc0b44c6d81b30d2fedd9921a2e25771d0ba1b12d",
+      "contains": "crates/incant_assets_runtime/src/animation/pipeline.rs"
+    }
+  ],
+  "qualification": "Actual scoped clean followed by unchanged-source successful check; old records omitted these inputs. Cargo records use checkout-relative source paths. Initial receipt assertion incorrectly expected absolute checkout paths and animation/grouped.rs instead of animation_pose/grouped.rs; corrected metadata assertion only. No general Cargo cache correctness claim."
+}

@@ -1,0 +1,59 @@
+{
+  "audio_clips": {},
+  "cameras": [
+    "00000000000000000000000003"
+  ],
+  "compiler": {
+    "bundleBytes": 6037,
+    "bundleSha256": "2b88b7153aa2fee2bd6023ca69245310b1d5b2dbfa755f32548fcbbf729b1bd8",
+    "compilers": {
+      "swc": "1.16.13",
+      "typescript": "5.9.3"
+    },
+    "format": "incant-native-typescript-project",
+    "limits": {
+      "bundleBytes": 1000000,
+      "fileBytes": 262144,
+      "mapBytes": 4194304,
+      "modules": 64,
+      "sourceBytes": 1048576
+    },
+    "mapBytes": 9373,
+    "mapSha256": "88e380a873b8df1d841c43df0371be46109b0b9eaf69203772b7b89446efae21",
+    "modules": [
+      {
+        "bytes": 3860,
+        "path": "compound.ts",
+        "sha256": "09a11a4eecc65a314c09cc611a38106ed912b490cb7051d8dc9e88282bf1ec05"
+      }
+    ],
+    "sourceBytes": 3860,
+    "sources": [
+      {
+        "id": "00000000000000000000000001",
+        "path": "compound.ts"
+      }
+    ],
+    "trust": "fresh local source transform; no project code or configuration executed",
+    "version": 1
+  },
+  "font_assets": [],
+  "format": "incant-native-project-build",
+  "has_spatial_content": true,
+  "program": null,
+  "project_id": "01M4RHDYZ39MS53DSXKQ5N5JYA",
+  "project_sha256": "23cb63b473c1606d97683b9ee554e56c8921169137714ec3137191623f1a97e9",
+  "scene_id": "01M4RHDYZ370ABE13X65SP0YHS",
+  "scene_sha256": "bab89e542f41fea9a08ba16e6b8a0d12e63e433adb97d0229f2742df67ae50e8",
+  "startup_source_parsing": false,
+  "target": "aarch64-apple-darwin",
+  "tick_rate": 60,
+  "version": 1,
+  "visual_assets": [
+    {
+      "fingerprint": "3c2837b62f3091aff8acb89d90ea8f15bb1ec7787e603f34dcbfc7eac446c76d",
+      "id": "01M4RHDZ0H1H7T02ZKJDJYT6C2",
+      "kind": "model"
+    }
+  ]
+}
