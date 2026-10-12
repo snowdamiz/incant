@@ -4,7 +4,8 @@
 mod animation;
 mod animation_binary;
 pub use animation::{
-    AnimationControl, AnimationSample, AnimationSnapshot, AnimationState, MAX_ANIMATION_CLIPS,
+    AnimationBlendSample, AnimationControl, AnimationSample, AnimationSnapshot, AnimationState,
+    AnimationTransition, MAX_ANIMATION_CLIPS, MAX_ANIMATION_TRANSITION_SECONDS,
     MAX_SCENE_ANIMATION_CLIPS, NativeAnimation,
 };
 mod audio;

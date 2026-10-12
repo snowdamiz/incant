@@ -437,6 +437,82 @@
       "result": null,
       "opcode": 21,
       "call": "Call::SetLocale { ptr, len }"
+    },
+    {
+      "namespace": "incant_animation_v1",
+      "name": "snapshot_len",
+      "opcode": 22,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::AnimationLen"
+    },
+    {
+      "namespace": "incant_animation_v1",
+      "name": "read_snapshot",
+      "opcode": 23,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "capacity",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::ReadAnimations { ptr, capacity }"
+    },
+    {
+      "namespace": "incant_animation_v1",
+      "name": "control",
+      "opcode": 24,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "id",
+          "i32"
+        ],
+        [
+          "ptr",
+          "i32"
+        ]
+      ],
+      "result": null,
+      "call": "Call::ControlAnimation { id, ptr }"
+    },
+    {
+      "namespace": "incant_localization_v1",
+      "name": "format",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "len",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "opcode": 25,
+      "call": "Call::Format { ptr, len }"
     }
   ],
   "enums": {
@@ -1035,6 +1111,20 @@
         "Error",
         3
       ]
+    ],
+    "DateLength": [
+      [
+        "Short",
+        0
+      ],
+      [
+        "Medium",
+        1
+      ],
+      [
+        "Long",
+        2
+      ]
     ]
   },
   "records": {
@@ -1307,6 +1397,62 @@
         "f64",
         3
       ]
+    ],
+    "AnimationHeader": [
+      [
+        "magic",
+        "u8",
+        8
+      ],
+      [
+        "count",
+        "u32"
+      ],
+      [
+        "stride",
+        "u32"
+      ]
+    ],
+    "AnimationRow": [
+      [
+        "id",
+        "u8",
+        16
+      ],
+      [
+        "clip",
+        "u32"
+      ],
+      [
+        "flags",
+        "u32"
+      ],
+      [
+        "seconds",
+        "f64"
+      ],
+      [
+        "speed",
+        "f64"
+      ]
+    ],
+    "AnimationCommand": [
+      [
+        "kind",
+        "u32"
+      ],
+      [
+        "clip",
+        "u32"
+      ],
+      [
+        "seconds",
+        "f64"
+      ],
+      [
+        "value",
+        "f64"
+      ]
     ]
   },
   "input_sections": [
@@ -1361,14 +1507,20 @@
     "LOCALIZATION_MAX_COMMANDS": 64,
     "LOCALIZATION_MAX_REQUEST_BYTES": 66560,
     "LOCALIZATION_MAX_RESULT_BYTES": 66560,
-    "LOCALIZATION_MAX_SETTINGS_BYTES": 2364
+    "LOCALIZATION_MAX_SETTINGS_BYTES": 2364,
+    "ANIMATION_MAX_ROWS": 100000,
+    "ANIMATION_MAX_CLIPS": 256,
+    "ANIMATION_MAX_SPEED": 16,
+    "LOCALIZATION_FORMAT_BYTES": 24
   },
   "magic": {
     "INPUT_MAGIC": "INPINP01",
     "FLIPBOOK_MAGIC": "INCFB001",
     "LOCALIZATION_REQUEST_MAGIC": "INCLQR01",
     "LOCALIZATION_SETTINGS_MAGIC": "INCLST01",
-    "LOCALIZATION_RESULT_MAGIC": "INCLRS01"
+    "LOCALIZATION_RESULT_MAGIC": "INCLRS01",
+    "ANIMATION_MAGIC": "INCAN001",
+    "LOCALIZATION_FORMAT_MAGIC": "INCLFM01"
   },
   "optional_none": -1,
   "namespaces": {
@@ -1376,6 +1528,7 @@
     "incant_input_v1": "input",
     "incant_flipbook_v1": "flipbook",
     "incant_log_v1": "log",
-    "incant_localization_v1": "localization"
+    "incant_localization_v1": "localization",
+    "incant_animation_v1": "animation"
   }
 }

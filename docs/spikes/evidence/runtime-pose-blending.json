@@ -1,0 +1,50 @@
+{
+  "base": "f74379ef70a037a6705636d058d3eb876907815f",
+  "files": {
+    "crates/incant_assets_runtime/src/animation/mod.rs": "c75b434c49e3639016f051d3446d8b88928f3421d28900ab31c2631c854b18a5",
+    "crates/incant_assets_runtime/src/animation/player.rs": "bba214a61d091ecf377b0ff6aa595569823f9d71e6397aa1275a5f96ee0cb8c2",
+    "crates/incant_assets_runtime/src/animation/sampling.rs": "7b89452f0aed14396b46ee2a884da7996e483f2e4fbdc25ea6aa70dfd91c66f3",
+    "crates/incant_assets/tests/skeletal.rs": "c0b47a3f8949a958044dfd9019af2988f81e6364c57c54374daaccd1dc455e40",
+    "crates/incant_assets/tests/skeletal/blending.rs": "c6aa210a6c96a1c898755bc68bcc2b192b59f03785bb4f5fa2d47bc61731ccb0"
+  },
+  "logs": {
+    "assets": {
+      "path": "/tmp/incant-pose-blend-assets.log",
+      "sha256": "ae79d7f148db28694ec36b50128553f225f6010f15523ef28db234099f9a63e5",
+      "passed": 103,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 18
+    },
+    "clippy": {
+      "path": "/tmp/incant-pose-blend-clippy.log",
+      "sha256": "31c4522222e9194a02a31e1b4bc8a296b8182f8e95bcf9cbfc15f437ed3e95f1",
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 0
+    },
+    "render": {
+      "path": "/tmp/incant-pose-blend-render.log",
+      "sha256": "d4858249ef52c9247211e7edb81a5679a84581f7ce0a246d89679644acd08ee5",
+      "passed": 62,
+      "failed": 0,
+      "ignored": 70,
+      "groups": 11
+    },
+    "graph": {
+      "path": "/tmp/incant-pose-blend-graph.log",
+      "sha256": "6e181febf67a555ab24a01e71d6983713b8f66773084f50e6ca4775254590fbf",
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 0
+    }
+  },
+  "gpu_submitted": false,
+  "limits": [
+    "Two-input runtime sampler only; authored blend trees, transition clocks, SDK controls and native frame binding remain.",
+    "No graphics appearance or phone performance claim.",
+    "Zero allocations cover 1024 accepted blended pose/palette/deformation calls on this Mac."
+  ]
+}

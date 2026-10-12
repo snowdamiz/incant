@@ -18,6 +18,15 @@ visual work, and Astra owns correctness and integration.
 
 ## Current milestone
 
+Native two-input crossfade clocks and controls now retain independent outgoing
+playback, pause both inputs, finish at explicit endpoints and persist active
+transitions in world-save v5/session checkpoints. Older v4 animation saves keep
+their encoding. The local core passed 319 runtime/script tests and scoped Clippy;
+independent review accepted the exact sources. Canonical render binding and
+TypeScript/Wasm crossfade APIs remain active follow-ups; this is not full blend
+trees, state machines, IK or root motion. See
+[the crossfade evidence](docs/spikes/native-animation-crossfades.md).
+
 The project is still building the Phase 1 core engine. Native simulation,
 authored scripting, imports, physics, audio, input and source-free exports have
 working, tested paths, but the complete Core Sample and its device gates remain
@@ -85,6 +94,17 @@ tests, Clippy, wasm32 compilation and lean runtime graph checks pass. Renderer
 upload/draw consumption, widgets/input/IME, color/CFF support, Claude appearance
 acceptance and device evidence remain; this does not complete Game UI.
 [Scope and evidence](docs/spikes/native-font-atlas.md).
+
+## Skeletal pose blending — locally verified
+
+The retained animation player can blend two independently sampled clips in local
+TRS space before composing hierarchy and skinning. Exact endpoints, missing-channel
+rest values, antipodal quaternions, atomic failure recovery, source-deleted fresh
+loading and 1,024 allocation-free sampling/deformation calls pass. The 165 affected
+asset/renderer CPU tests and Clippy pass; 70 GPU tests stayed ignored. Independent
+review accepted the source. Authored blend trees, state machines, native frame/SDK
+blend controls, IK and root motion remain; no Phase 1 gate is claimed.
+[Evidence](docs/spikes/runtime-pose-blending.md).
 
 ## Native editor agent integration — merged, scoped validation complete
 
@@ -716,3 +736,30 @@ against the retained native clock. Actual QuickJS/NativeSession, multi-instance
 TypeScript cook, rollback and memory-bound tests pass; see
 [scope and evidence](docs/spikes/native-animation-script.md). Wasm control parity,
 rendered acceptance and the remaining animation systems are still outstanding.
+
+
+## Native Wasm skeletal playback — locally verified
+
+`incant_animation_v1` and the public no_std Rust SDK now copy native animation
+snapshots and queue select/seek/play/loop/speed controls in the ordinary atomic
+runtime transaction. Actual Wasmtime and compiled wasm2c guests agree on playback
+and reject mixed numeric/entity/animation/log prefixes on failure. The combined
+281-test suite, scoped Clippy, default wasm32 compile, generated contracts and
+20 tooling tests pass; independent boundary review accepted the frozen code.
+[Evidence and limits](docs/spikes/native-wasm-animation.md). Publication/integration
+against the next actual-main animation union is still pending. This does not add
+blending/state machines/IK/root motion or satisfy device/complete SDK/Phase1 gates.
+
+
+## Native Wasm standalone formatting
+
+Wasm modules now expose standalone ICU number/date formatting through additive
+opcode 25 and the public no_std Rust SDK. The actual committed locale, date
+lengths, Gregorian validation and number domain match TypeScript; queued locale
+changes remain invisible until atomic acceptance and pseudo settings do not wrap
+primitive text. Correct-epoch ingress and ignored SDK errors reject mixed work.
+Frozen local validation passes 294 tests/doctests, actual Wasmtime/wasm2c guests,
+all-target Clippy and default wasm32 compilation. See
+[formatting evidence](docs/spikes/evidence/native-wasm-formatting.json).
+Catalog editing/report paging, complete SDK and device/performance gates remain
+open; existing bulk fresh-process smoke is not a formatting shipping export.

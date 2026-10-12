@@ -83,6 +83,7 @@ mod tests {
                     playing: false,
                     looping: true,
                     completed: false,
+                    transition: None,
                 },
             }],
             clips: vec![-1],

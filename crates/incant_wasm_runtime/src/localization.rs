@@ -92,6 +92,32 @@ impl State {
             )
         })
     }
+    pub fn format(&mut self, bytes: &[u8]) -> Result<i32, Error> {
+        self.query()?;
+        let locale = &self.snapshot.settings().locale;
+        let result = match wire::decode_format(bytes).map_err(codec)? {
+            wire::FormatRequest::Number(value) => incant_localization::format_number(locale, value),
+            wire::FormatRequest::Date(date, length) => incant_localization::format_date(
+                locale,
+                &CalendarDate {
+                    year: date.year,
+                    month: date.month,
+                    day: date.day,
+                },
+                match length {
+                    abi::DateLength::Short => incant_localization::DateLength::Short,
+                    abi::DateLength::Medium => incant_localization::DateLength::Medium,
+                    abi::DateLength::Long => incant_localization::DateLength::Long,
+                },
+            ),
+        }
+        .map_err(|e| {
+            Error::Runtime(RuntimeError::Scene(SceneError::Localization(e.to_string())))
+        })?;
+        // Standalone TypeScript formatting charges returned text only: primitive
+        // inputs cost no logical input bytes, but ingress/copy transfer limits apply.
+        self.publish(result.len(), |bytes| wire::encode_formatted(&result, bytes))
+    }
     pub fn localize(&mut self, bytes: &[u8]) -> Result<i32, Error> {
         self.query()?;
         let input = wire::decode_request(bytes).map_err(codec)?;

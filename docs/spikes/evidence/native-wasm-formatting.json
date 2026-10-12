@@ -1,0 +1,241 @@
+{
+  "recorded_utc": "2026-10-12T01:22:31.048484+00:00",
+  "base": "619e850bf0da24b04cc494a5f350c7cb60b88814",
+  "branch": "codex/native-wasm-formatting",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "xhigh",
+  "author_role": "astra",
+  "scope": "Native Wasm standalone number/calendar-date formatting using existing ICU implementation, committed locale and atomic copied-result transaction; no GUI/GPU/device/export gate.",
+  "implementation_freeze": {
+    "path": "/tmp/incant-wasm-formatting-source-freeze-001.json",
+    "sha256": "d79b9c194e07df5b2667cfca31f2e332f45d466c01d248be14285ac064c1ccac",
+    "count": 23,
+    "all_final_hashes_match": true
+  },
+  "frozen_implementation_inputs": {
+    "crates/incant_wasm_abi/tests/formatting.rs": "ef2e0776cd340e75a321ea188a272d5d33e522c6d067439016c309bba3ff458a",
+    "crates/incant_wasm_dev/tests/formatting_parity.rs": "de94e7b2f5b8f7dd69e758eb8a08a6d8e5e0af87b2f220b3cba27ef7ae2af30b",
+    "crates/incant_wasm_runtime/fixtures/formatting-start.wat": "b70f42162d4a4a0480358765da33956ee259252f770c72a0368be55059fdb251",
+    "crates/incant_wasm_runtime/fixtures/formatting.wat": "2396c758c541c976103fc600b954112413c9d022fdff53cd74af23121ea34698",
+    "crates/incant_wasm_runtime/tests/formatting.rs": "e50fbb583e97b1c509a1802b395a8f87619060f098959e27a184304df2caa9e8",
+    "sdk/rust/fixtures/formatting_failure.rs": "603c38df6e23e7aadc33ff2ed9fb09aaea8495f5f84623aa78a13693041f1ba6",
+    "sdk/rust/samples/formatting.rs": "10e360be33d47fe94d27e9f956e78c089bde6b1c105c68538a0ec97366cd9f06",
+    "sdk/rust/tests/formatting.rs": "6a9ff70b15a1aff10a6dfbf4d1928acf6249769b82d4b21fb53311f620577c4c",
+    "crates/incant_wasm_abi/src/lib.rs": "e715238c6bef7db5fc15315c4e64dff90536813721cf5c9b8e4d3028d40e1d24",
+    "crates/incant_wasm_abi/src/localization.rs": "8192b4afdbec79000c2fa52fb54425a7e30cffd5a20e44a8d9ea10edaef2eb62",
+    "crates/incant_wasm_dev/src/generated.rs": "2e96ce4e03ad1d9e3bec366bc0e7ebaf7969159954481378250e31874f7fd6ed",
+    "crates/incant_wasm_runtime/c/generated.inc": "a2965657e2abca37a46f12fb333c880a3c02566139f26ae98db1cea743454d75",
+    "crates/incant_wasm_runtime/src/capability.rs": "1f3110c159c1ed69d89be20a7e3b9b01416448210459fd31bd9e2e3f1282b3d8",
+    "crates/incant_wasm_runtime/src/generated.rs": "b89ac3343adb2abe04e843e1859f95768f0ae2550bdee4f49966e61d131bd404",
+    "crates/incant_wasm_runtime/src/input_tags.rs": "efcf24e9b9d204581962415f3999e0d26a9cf0a7e0f3d2a48a9be7246d8a1f17",
+    "crates/incant_wasm_runtime/src/localization.rs": "9451f7c8f0ec6ae3102f48d8143344c379bac61eca6ee16acae0d68dddea7f7d",
+    "sdk/abi/native-v1.json": "e7eb769c95cf145118b4e181ceb707086d4446608320c72562cab342565b38b3",
+    "sdk/rust/src/localization.rs": "ce245273fc4d5bfef18067ca32c839ef971a3cfa299d6d22674e26386ec7c6f9",
+    "sdk/rust/src/raw.rs": "34c50afe7140c5854019533d6ddc5282033d301b5ecd3925efcd563e1c5b5df2",
+    "sdk/rust/src/tick.rs": "fb69a121ef241876aec03a19ca4ef64f66cad59b4379808abf63ce180290731c",
+    "tools/probes/shipping-wasm2c.py": "4e3d30e4d966c4c8e44d55c2d0ba30efb30f6d5e2ad707dbef7edf09bb75c3b3",
+    "tools/tests/test_wasm_sdk.py": "65d5a9c03fb0e64c3f5d5bd0d2351f36b122113a8ca636c34f0467cc456df482",
+    "tools/wasm_abi.py": "65a94661cbc51d05777e5f879eee64d703942af0ca16fa267e5b41fb988fe2a0"
+  },
+  "abi": {
+    "namespace": "incant_localization_v1",
+    "opcode": 25,
+    "import": "format(epoch: i64, ptr: i32, len: i32) -> i32",
+    "request_magic": "INCLFM01",
+    "version": 1,
+    "request_bytes": 24,
+    "request_kinds": {
+      "0": "f64 finite safe-magnitude number",
+      "1": "i32 year/u8 month/u8 day/u8 length/u8 reserved zero"
+    },
+    "date_length_tags": {
+      "0": "Short",
+      "1": "Medium",
+      "2": "Long"
+    },
+    "result_magic": "INCLRS01",
+    "result_kind": 2,
+    "prior_opcodes_0_to_24_unchanged": true,
+    "old_result_kinds_unchanged": true
+  },
+  "commands": [
+    "PATH=/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:$PATH CARGO_TARGET_DIR=/tmp/incant-agent-font-target cargo test --locked --offline --profile ci -j2 -p incant_wasm_abi -p incant-module -p incant_wasm_runtime --test formatting",
+    "PATH=/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:$PATH CARGO_TARGET_DIR=/tmp/incant-agent-font-target python3 tools/probes/shipping-wasm2c.py /tmp/incant-wasm-formatting-conformance-001 --conformance-only --profile ci",
+    "PATH=/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:$PATH CARGO_TARGET_DIR=/tmp/incant-agent-font-target cargo check --locked --offline --profile ci -j2 -p incant_wasm_abi -p incant-module -p incant_wasm_runtime -p incant_wasm_dev --lib --target wasm32-unknown-unknown",
+    "python3 -m unittest tools.tests.test_wasm_sdk tools.tests.test_rust_guest tools.tests.test_wasm2c_prepare tools.tests.test_wabt_download -v",
+    "python3 -m unittest tools.tests.test_wasm2c_shipping -v",
+    "python3 tools/generate_wasm_sdk.py --check",
+    "python3 tools/generate_conventions.py --check",
+    "cargo fmt --all --check",
+    "python3 tools/check_runtime_dependencies.py incant_wasm_runtime incant_runtime incant_script incant_game_runtime incant_script_player incant_game_player",
+    "git diff --check"
+  ],
+  "results": {
+    "focused_tests": 7,
+    "combined_tests_doctests": 294,
+    "combined_groups": 52,
+    "failed": 0,
+    "ignored": 0,
+    "new_rust_tests": 13,
+    "actual_formatting_dual_host_tests": 6,
+    "python_tools_tests": 23,
+    "all_target_clippy": "pass",
+    "wasm32_default_lib_check": "pass (23.05s)",
+    "generator_fmt_conventions_dependency_guards": "pass",
+    "fresh_development_processes": 3,
+    "fresh_process_fixture": "existing bulk sample, not formatting shipping export"
+  },
+  "toolchain": {
+    "rust": "1.99.0 aarch64-apple-darwin",
+    "wasmtime": "49.0.2",
+    "wabt": "1.0.42"
+  },
+  "prepared": {
+    "modules": 74,
+    "recorded_files": 371,
+    "actual_file_bytes_verified_before_cleanup": 371,
+    "receipt": {
+      "path": "/tmp/incant-wasm-formatting-conformance-001/prepared-byte-verification.json",
+      "sha256": "4a8e303ad0ad0e00c492eb9f09615406f4050098545135a69cedb982970b33dd"
+    },
+    "new_formatting_modules": [
+      {
+        "name": "formatting-start",
+        "prefix": "m16",
+        "input_sha256": "144d57d7bf01e50662d66c72775eb8f9674cb16d3966a70041c5591cfbfd701d",
+        "prepared_sha256": "96c1db872e909f25b887a3872322c54f7300e99d88ac6aa40c53de91660da5b8"
+      },
+      {
+        "name": "formatting",
+        "prefix": "m17",
+        "input_sha256": "b13aa8d961ede870126331b1d5666d26fa7639faf11500cbdb0c152dd9f335fd",
+        "prepared_sha256": "f427f87be544f7fc8a39e1c865d748b2692b93e0c9745176eaa4f3c62b617e77"
+      },
+      {
+        "name": "rust-formatting",
+        "prefix": "m62",
+        "input_sha256": "d9a6f17355aee65e269658943c0e3f03a812f70b9e3f0239928cba413210330c",
+        "prepared_sha256": "34c045f655d48c6aef737019f812b18558ab1bd8539b9d0333297e0ea8914e9c"
+      },
+      {
+        "name": "rust-formatting-capacity",
+        "prefix": "m63",
+        "input_sha256": "a5a19d242d74682ac6444b0fdab6903eb8458c4542b9ebe119d07ef3b69d1603",
+        "prepared_sha256": "346ec774cf9d88736b06a8dd0bd619da2375d6604327c9f2696b147352abf286"
+      },
+      {
+        "name": "rust-formatting-number",
+        "prefix": "m64",
+        "input_sha256": "a2a7ac73bce9e4f2a3d782c012be2f2cd2b80ec70b9189c4d8029937bdbaa56f",
+        "prepared_sha256": "49c29aa6b67c97d95877d9eb9c1511316fdafaf8c2712de734c5b635af367bef"
+      },
+      {
+        "name": "rust-formatting-range",
+        "prefix": "m65",
+        "input_sha256": "97cf7f601e1cd8229b8c267578474cf48fffb052d06c86b091d3b818311e154a",
+        "prepared_sha256": "17489ddac3c8e7753c3e65997be96915ddab394343fcad37a711b24dfa4e402a"
+      },
+      {
+        "name": "rust-formatting-date",
+        "prefix": "m66",
+        "input_sha256": "2e1cda71a673fed1d360c432ec7a1976690be7d0a20384716fccfe2ab4dcd25a",
+        "prepared_sha256": "e4c26bd58ce1e99c495253acdf00e0bdc98017ae4a5fd69912d7a3b5bd5ff0f3"
+      },
+      {
+        "name": "rust-formatting-year",
+        "prefix": "m67",
+        "input_sha256": "169af34f78f93850d05244f89c938ff6e10bf3584402875d413f0b79bb5f52f4",
+        "prepared_sha256": "8ac009c3fa90dedd480e39f9fc67e716c87c68606cfd271039f3825731827643"
+      },
+      {
+        "name": "rust-formatting-quota",
+        "prefix": "m68",
+        "input_sha256": "c3fb30d106348bfe4c96a1bc4c78d18c0899a88840dd3d7dee47d69728fa789d",
+        "prepared_sha256": "46d98933651f7d3b9bc61fd55797c1fac2ea541790a1f211262c9016af41213a"
+      },
+      {
+        "name": "rust-formatting-callback",
+        "prefix": "m69",
+        "input_sha256": "ef046c5305d607d6ae84c4e6fc25692ea6d8baa117e2ba229a0dff23124c1beb",
+        "prepared_sha256": "088e3e524a46b06103767fbfefc139e90582d4aded9b6fc337fd5cc75f880dd2"
+      }
+    ],
+    "temporary_inputs_deleted": true
+  },
+  "rust_sdk_provenance": {
+    "target": "wasm32-unknown-unknown",
+    "edition": "2024",
+    "panic": "abort",
+    "opt_level": 2,
+    "source_sha256": {
+      "sdk/abi/native-v1.json": "e7eb769c95cf145118b4e181ceb707086d4446608320c72562cab342565b38b3",
+      "tools/rust_guest.py": "a01641b59eb8d39e9cd4de58d1a59e3aec97b19179ba52793623a42a725dd5cc",
+      "crates/incant_wasm_abi/src/lib.rs": "e715238c6bef7db5fc15315c4e64dff90536813721cf5c9b8e4d3028d40e1d24",
+      "crates/incant_wasm_abi/src/localization.rs": "8192b4afdbec79000c2fa52fb54425a7e30cffd5a20e44a8d9ea10edaef2eb62",
+      "sdk/rust/src/animation.rs": "9ac7ab2ba5e4716b47bd46adad3d1f4a3531eaf14d64f487182fa4f9b7aea34f",
+      "sdk/rust/src/flipbook.rs": "4432747e8707e044aa63f6d22d679d1b88aec720805219d8d1f891c0e9969e65",
+      "sdk/rust/src/input.rs": "b088d9f4fe099abcf0247167e026193531bac854551103fff41b628be8bdbb63",
+      "sdk/rust/src/lib.rs": "1fb76c2fc3345b57356d875c66ee3db455407d00e048d28ca7b3446c95cd4cbd",
+      "sdk/rust/src/localization.rs": "ce245273fc4d5bfef18067ca32c839ef971a3cfa299d6d22674e26386ec7c6f9",
+      "sdk/rust/src/raw.rs": "34c50afe7140c5854019533d6ddc5282033d301b5ecd3925efcd563e1c5b5df2",
+      "sdk/rust/src/tick.rs": "fb69a121ef241876aec03a19ca4ef64f66cad59b4379808abf63ce180290731c"
+    },
+    "repository_sdk_sources_retained": true,
+    "build_scripts_or_proc_macros": false
+  },
+  "logs_and_receipts_sha256": {
+    "/tmp/incant-wasm-formatting-focused-001.log": "477621cde2d20c6603f5ef625bddd30ebb8d42b86fbbe49e0687c0c0d79e8287",
+    "/tmp/incant-wasm-formatting-conformance-001-launch.log": "574af3621e3ea33f4f833844525fcf843cf3d6fd0f8b4c4cda3bea2cebb4805b",
+    "/tmp/incant-wasm-formatting-conformance-001/conformance-0.log": "a64e410d426057e99080b9c3815c016628749daa00c196cc316055aa42a964d6",
+    "/tmp/incant-wasm-formatting-conformance-001/conformance-1.log": "6d29b6ef4bb76e14a66afd97f6cdf7ade7bb9c7a331ecbb9e0e87cbc8a2888c9",
+    "/tmp/incant-wasm-formatting-conformance-001/conformance-2.log": "762c17a0a91c6a206797a46ce49abe4524ea8215dc6c365150769969621204b3",
+    "/tmp/incant-wasm-formatting-conformance-001/cook-build.log": "435f0900e59d42ab46c8bd243f2ddefbeb2771c9c92d31980b5a761aee006f10",
+    "/tmp/incant-wasm-formatting-conformance-001/rust-sdk.json": "f95354d42447272cc8ae4a6d86953fd0f8de83494335c13bbdb491e1b29b357a",
+    "/tmp/incant-wasm-formatting-conformance-001/prepared-manifest.json": "2ce1fcb59a986726980d9340f7bb060ad8e33651ca4a8bd83927dddc94524db5",
+    "/tmp/incant-wasm-formatting-conformance-001/prepared-byte-verification.json": "4a8e303ad0ad0e00c492eb9f09615406f4050098545135a69cedb982970b33dd",
+    "/tmp/incant-wasm-formatting-conformance-001/development/result.json": "762c17a0a91c6a206797a46ce49abe4524ea8215dc6c365150769969621204b3",
+    "/tmp/incant-wasm-formatting-wasm32-001.log": "756857df5e5fc28f058564a644fa504ff02ea9c7269686446be5409e381a49ef",
+    "/tmp/incant-wasm-formatting-python-001.log": "14ac93e052f129c7d8fdc83b68c4745e085862b4a8cf1a22e0c35304c7b7486f",
+    "/tmp/incant-wasm-formatting-shipping-tools-001.log": "e76386456a75c85fdd4105d759e0ce7f47438617956c08ac3d60fb163237a649",
+    "/tmp/incant-wasm-formatting-generated-001.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/tmp/incant-wasm-formatting-conventions-001.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/tmp/incant-wasm-formatting-fmt-001.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/tmp/incant-wasm-formatting-dependencies-001.log": "96003913b027bdaf0e990833a812402beb94d01f5b3a0b8ea0fc1997092ab29c"
+  },
+  "semantics": [
+    "Callback-start committed locale shared with message queries; queued settings become visible only after ordinary atomic acceptance.",
+    "Standalone formatting ignores pseudo/fallback message processing, exactly like native TypeScript formatting.",
+    "Dates use native Gregorian validity and year bounds; finite fractional numbers and negative zero preserve native formatting behavior within the JS-safe magnitude.",
+    "Formatting shares query/unit/output quotas, costs zero logical input bytes and charges24 wire ingress bytes plus result copies to existing transfer limits.",
+    "Correct active epoch ingress/formatter/copy/quota errors poison mixed numeric/entity/locale/log work; ignored SDK local errors reject callbacks.",
+    "Short result copies do not partially write; exact versioned codecs reject invalid tags, trailing bytes and incompatible result kinds.",
+    "Committed NativeSession observers receive actual formatted guest logs and hide logs after terminal acceptance failure."
+  ],
+  "cargo_lock_sha256": "5f20234afb379a4aed411821719288a173c4c6959890bba065aa10c30e90c699",
+  "cargo_lock_unchanged": true,
+  "processes": {
+    "handles": [
+      58819,
+      52038,
+      70333,
+      23628
+    ],
+    "all_terminal_exit_0_and_reaped": true,
+    "owned_target": "/tmp/incant-agent-font-target"
+  },
+  "limitations": [
+    "Local CPU results on this Mac; no Windows/Linux/browser execution claim",
+    "Wasm32 compilation is not browser rendering/device acceptance",
+    "Existing bulk fresh processes are not a new source-deleted formatting shipping export",
+    "No GPU, rendered-pixel, phone-performance or complete SDK/localization/Phase1 gate",
+    "No new runtime compiler, executable loader, authoring mutation path or dependency"
+  ],
+  "review": {
+    "result": "Accepted without actionable findings in the bounded source/conformance scope",
+    "receipt": "docs/spikes/evidence/native-wasm-formatting-root-review.json",
+    "sha256": "b76a99e4c9f17fae5fea4b561562de5bbbb44dde1d728e5535c7efa3c35c89e8",
+    "reviewed_sources": 27,
+    "reviewed_logs_and_receipts": 17,
+    "compiled_inputs_unchanged_after_review": true
+  }
+}

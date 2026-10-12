@@ -123,6 +123,47 @@ impl<'tick> Tick<'tick> {
         let bytes = self.localization_result(result, result_scratch)?;
         self.check(abi::localization::decode_localized(bytes).map_err(crate::localization::error))
     }
+    fn format<'a>(
+        &mut self,
+        request: abi::localization::FormatRequest,
+        scratch: &'a mut [u8],
+    ) -> Result<&'a str> {
+        self.ready()?;
+        let mut input = [0; abi::LOCALIZATION_FORMAT_BYTES];
+        let len = self.check(
+            abi::localization::encode_format(request, &mut input)
+                .map_err(crate::localization::error),
+        )?;
+        // SAFETY: complete fixed-size initialized request, synchronously copied.
+        let result = unsafe {
+            raw::incant_localization_v1_format(
+                self.epoch,
+                input.as_ptr() as usize as i32,
+                len as i32,
+            )
+        };
+        let bytes = self.localization_result(result, scratch)?;
+        self.check(abi::localization::decode_formatted(bytes).map_err(crate::localization::error))
+    }
+    /// ICU number formatting in the callback's committed locale. Finite values
+    /// must be within JavaScript's safe integer magnitude. No pseudo wrapping.
+    pub fn format_number<'a>(&mut self, value: f64, scratch: &'a mut [u8]) -> Result<&'a str> {
+        self.format(abi::localization::FormatRequest::Number(value), scratch)
+    }
+    /// ICU calendar-date formatting in the callback's committed locale. Use
+    /// DateLength::Medium for the TypeScript API's default length. The native
+    /// formatter checks actual Gregorian validity, including leap years.
+    pub fn format_date<'a>(
+        &mut self,
+        date: crate::localization::CalendarDate,
+        length: crate::localization::DateLength,
+        scratch: &'a mut [u8],
+    ) -> Result<&'a str> {
+        self.format(
+            abi::localization::FormatRequest::Date(date, length),
+            scratch,
+        )
+    }
     /// Queue a validated locale/fallback/pseudo setting in the ordinary atomic
     /// structural transaction. This does not edit an authoring document.
     pub fn set_locale(
@@ -394,6 +435,44 @@ impl<'tick> Tick<'tick> {
             return self.check(Err(Error::Malformed));
         }
         self.check(FlipbookSnapshot::parse(&scratch[..len]))
+    }
+    /// Copy the start-of-callback playback snapshot. Queued controls stay private
+    /// until the entire callback commits; the returned data borrows only scratch.
+    pub fn animations<'a>(
+        &mut self,
+        scratch: &'a mut [u8],
+    ) -> Result<crate::AnimationSnapshot<'a>> {
+        self.ready()?;
+        // SAFETY: scalar length query, then a checked initialized destination.
+        let len = unsafe { raw::incant_animation_v1_snapshot_len(self.epoch) };
+        let len = self.snapshot_length(len, scratch.len(), abi::ANIMATION_MAX_BYTES)?;
+        let actual = unsafe {
+            raw::incant_animation_v1_read_snapshot(
+                self.epoch,
+                scratch.as_mut_ptr() as usize as i32,
+                len as i32,
+            )
+        };
+        if actual as usize != len {
+            return self.check(Err(Error::Malformed));
+        }
+        self.check(crate::AnimationSnapshot::parse(&scratch[..len]))
+    }
+    /// Queue one validated control on an existing authored animation declaration.
+    /// Clip-specific time bounds and entity existence are checked at atomic commit.
+    pub fn control_animation(
+        &mut self,
+        id: &EntityId,
+        control: crate::AnimationControl,
+    ) -> Result<()> {
+        self.ready()?;
+        let bytes = self.check(control.encode())?;
+        // SAFETY: both fixed-size initialized records remain live for this copied
+        // synchronous call; the host also checks epoch, ranges and every field.
+        unsafe {
+            raw::incant_animation_v1_control(self.epoch, ptr(id), bytes.as_ptr() as usize as i32);
+        }
+        Ok(())
     }
     fn snapshot_length(&mut self, len: i32, capacity: usize, limit: usize) -> Result<usize> {
         let len = self.check(
