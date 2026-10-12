@@ -16,7 +16,7 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Nested animation tree numeric core — locally verified
+## Nested animation tree numeric core — current-main verified
 
 The native evaluator now supports bounded nested 1D and rectangular bilinear 2D
 blend trees, normalized clip phases and sixteen-contribution fades. Full runtime
@@ -25,14 +25,15 @@ dependency checks and independent source review pass. This is numerical core
 work: authored/cooked graphs, active runtime/renderer/SDK wiring and complete
 checkpoint continuation remain open. [Contract and evidence](docs/spikes/native-animation-tree-core.md).
 
-## Multi-pose animation sampling — locally verified
+## Multi-pose animation sampling — current-main verified
 
 The retained numeric animation player now mixes up to sixteen clip samples with
 weighted local translation/scale and normalized quaternion averaging. Existing
 unpublished pose storage supplies the scratch lanes, so retained memory and
 per-sample allocations do not increase. All 108 affected tests, Clippy, wasm32,
 dependency and formatting checks pass; independent source review accepts the
-scope. Authored nested/2D trees, blended-state transitions and their native/SDK
+scope. Combined integration on main #143 passes 310 CPU tests and Clippy.
+Authored nested/2D trees, blended-state transitions and their native/SDK
 wiring remain open. [Contract and evidence](docs/spikes/runtime-weighted-pose.md).
 
 ## Checkpoint 11 — failed frozen batch, two probe contracts repaired

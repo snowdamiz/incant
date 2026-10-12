@@ -34,3 +34,12 @@ dependency guard, formatting and conventions passed.
 
 [Frozen source and checks](evidence/runtime-weighted-pose.json) record the scope.
 No rendered appearance, reference-phone timing or Phase 1 gate is claimed.
+
+## Current-main integration
+
+The combined sampler and tree core passes 310 CPU tests in 48 groups, all-target
+Clippy, wasm32 and both runtime dependency guards. Integration of actual main
+#143 preserves all 1487 tested build inputs and the twelve accepted source/test
+files byte-for-byte. [Retained checks and independent review](evidence/animation-core-main142.json)
+record that boundary; authored/runtime tree wiring and rendered/device acceptance
+remain separate.
