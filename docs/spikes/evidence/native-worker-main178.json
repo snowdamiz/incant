@@ -1,0 +1,972 @@
+{
+  "at": "2026-10-12T23:23:51.876204+00:00",
+  "tested_head": "cbfcbf29991c6c640006ad49aea67aedebc67f27",
+  "integration_head": "cbfcbf29991c6c640006ad49aea67aedebc67f27",
+  "actual_main": "15f31d0375983ac3eac82086cd6a2379ad6adb46",
+  "source_freeze": {
+    "path": "docs/spikes/evidence/native-worker-main178/freeze.json",
+    "sha256": "9b28a1116cb761a6094003344298abe5558e26935ad2b51cd70fe69a32b24e37",
+    "count": 1898
+  },
+  "source_comparison": [
+    {
+      "path": "crates/incant_headless/src/main.rs",
+      "sha256": "7015e1dc6c6c0523c0f92fdbc502c25bfd300fcc7182fbbfd669d9f37bd7f02f",
+      "producer": "native-play-worker",
+      "exact": true
+    },
+    {
+      "path": "crates/incant_headless/src/native_play.rs",
+      "sha256": "a35435e33020f0769e0e4b7040af902adbe92d7387da8623e4869a2dc7a3e326",
+      "producer": "native-play-worker",
+      "exact": true
+    },
+    {
+      "path": "crates/incant_headless/src/native_worker.rs",
+      "sha256": "86677a61ad4aa5cbb979dd9194644cd85acb6204c8a6f76b93e361efb2279dab",
+      "producer": "native-play-worker",
+      "exact": true
+    },
+    {
+      "path": "crates/incant_headless/src/native_worker/tests.rs",
+      "sha256": "707b31ffea2a46eea61c4f6d97420dc7bfb0d2c741550fd22285511b125cc0f9",
+      "producer": "native-play-worker",
+      "exact": true
+    },
+    {
+      "path": "tools/probes/native-play-worker.py",
+      "sha256": "59dbed71a4d06fc1e279185ed42880bb796f61f74410ce940fe7b657fe5d579b",
+      "producer": "native-play-worker",
+      "exact": true
+    },
+    {
+      "path": "tools/native_process.py",
+      "sha256": "5f7c07e0f8e79d8db807d0fa85016b86a241de164ff545826baf223f847ec6c6",
+      "producer": "native-worker-owner",
+      "exact": true
+    },
+    {
+      "path": "tools/play_native.py",
+      "sha256": "ced684f2e256e7966089dbc683f51ce07d1862a6bcc6470a3c5bcb4d4e4a3d86",
+      "producer": "native-worker-owner",
+      "exact": true
+    },
+    {
+      "path": "tools/play_worker.py",
+      "sha256": "bf01f9e01017e86816e5d4dcefe260fb5328ad8187faa9b4691711ac9e2d3750",
+      "producer": "native-worker-owner",
+      "exact": true
+    },
+    {
+      "path": "tools/tests/test_native_process.py",
+      "sha256": "56615130027cc79877a2e9697b61cfc0bf3315bc1fe53c58ae04fe161637ed96",
+      "producer": "native-worker-owner",
+      "exact": true
+    },
+    {
+      "path": "tools/tests/test_play_worker.py",
+      "sha256": "0933a10ac81cc83b354a9ef4e8a68f912388d57a90571c7f3b9d1010cd7b5d9a",
+      "producer": "native-worker-owner",
+      "exact": true
+    },
+    {
+      "path": "tools/probes/native-worker-owner.py",
+      "sha256": "e949346123c50971d8fe806e4d33b038d51510ca824a2a54bc96df03541110dd",
+      "producer": "native-worker-owner",
+      "exact": true
+    }
+  ],
+  "fixture_correction": {
+    "paths": {
+      "crates/incant_headless/tests/native_play.rs": "7456121d6c367c3e840c537bb4c811ad3930150a7e182869b6524c02abb0ea79",
+      "crates/incant_headless/tests/native_rpc.rs": "10c07fa61c0208d0f9a53294ec0dbe6ce953de6d4e9f8efb4d559e2d5155d932",
+      "crates/incant_headless/tests/native_ui.rs": "9d93f78b1454423395b844b97ddb9d276646033ac3e01bf7807059f0a2cd9a5e"
+    },
+    "patch_sha256": "41282410a688b68fe4af95e8cdcb4c399e3281deddc57fecf51fc7119cdcc005",
+    "original_red": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main177-001/results.json",
+    "additional_red": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-fixture-mode-red/result.json",
+    "targeted_green": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-fixture-mode-green/result.json",
+    "qualification": "Test-only public SetPhysicsMode in existing authoring transactions; explicit opposite-mode refusal. Targeted green preceded rustfmt-only assertion layout; both final full suites use the frozen formatted source."
+  },
+  "checks": [
+    {
+      "name": "deterministic-test",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "--target",
+        "aarch64-apple-darwin",
+        "-j2",
+        "-p",
+        "incant_headless",
+        "--message-format=json",
+        "--no-default-features",
+        "--features",
+        "physics-deterministic",
+        "--all-targets"
+      ],
+      "exit": 0,
+      "seconds": 7.940658833998896,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/deterministic-test.stdout",
+        "sha256": "57e5f8c0b681eae956a6df5cb2b037ed323ccaaf5368f8a38b2611344cce7f13"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/deterministic-test.stderr",
+        "sha256": "8e372ce5dc5881f2df3b0f744da364d482ced2474d8ebd5e6bda3cdcae957a3f"
+      },
+      "compiler_features": {
+        "mode": "deterministic",
+        "target": "aarch64-apple-darwin",
+        "profile": "ci",
+        "target_output": "/Users/andreyyurlov/.codex/incant-physics-foundation-integration-target/aarch64-apple-darwin/ci",
+        "features": {
+          "simba": [
+            "libm",
+            "libm_force",
+            "std",
+            "wide"
+          ],
+          "parry3d": [
+            "alloc",
+            "dim3",
+            "downcast-rs",
+            "ena",
+            "enhanced-determinism",
+            "f32",
+            "hashbrown",
+            "indexmap",
+            "parallel",
+            "rayon",
+            "required-features",
+            "rstar",
+            "slab",
+            "smallvec",
+            "std"
+          ],
+          "rapier3d": [
+            "alloc",
+            "default",
+            "dim3",
+            "enhanced-determinism",
+            "f32",
+            "parallel",
+            "std"
+          ],
+          "parry2d": [
+            "alloc",
+            "dim2",
+            "downcast-rs",
+            "ena",
+            "enhanced-determinism",
+            "f32",
+            "hashbrown",
+            "indexmap",
+            "parallel",
+            "rayon",
+            "required-features",
+            "slab",
+            "smallvec",
+            "spade",
+            "std"
+          ],
+          "rapier2d": [
+            "alloc",
+            "block-solver",
+            "default",
+            "dim2",
+            "enhanced-determinism",
+            "f32",
+            "parallel",
+            "std"
+          ]
+        },
+        "ignored_build_host": [
+          "parry2d",
+          "parry3d",
+          "rapier2d",
+          "rapier3d",
+          "simba"
+        ]
+      }
+    },
+    {
+      "name": "deterministic-clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "--target",
+        "aarch64-apple-darwin",
+        "-j2",
+        "-p",
+        "incant_headless",
+        "--message-format=json",
+        "--no-default-features",
+        "--features",
+        "physics-deterministic",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 0.841870750002272,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/deterministic-clippy.stdout",
+        "sha256": "59b18c58f3a78e3872e1ffc3ecd12494be8de2794632fa72a9d2fb5738b60798"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/deterministic-clippy.stderr",
+        "sha256": "847650c4e7f07b2e6f1d715b60456b44841515f3a7f945c967f0fa1693cbc223"
+      },
+      "compiler_features": {
+        "mode": "deterministic",
+        "target": "aarch64-apple-darwin",
+        "profile": "ci",
+        "target_output": "/Users/andreyyurlov/.codex/incant-physics-foundation-integration-target/aarch64-apple-darwin/ci",
+        "features": {
+          "simba": [
+            "libm",
+            "libm_force",
+            "std",
+            "wide"
+          ],
+          "parry3d": [
+            "alloc",
+            "dim3",
+            "downcast-rs",
+            "ena",
+            "enhanced-determinism",
+            "f32",
+            "hashbrown",
+            "indexmap",
+            "parallel",
+            "rayon",
+            "required-features",
+            "rstar",
+            "slab",
+            "smallvec",
+            "std"
+          ],
+          "rapier3d": [
+            "alloc",
+            "default",
+            "dim3",
+            "enhanced-determinism",
+            "f32",
+            "parallel",
+            "std"
+          ],
+          "parry2d": [
+            "alloc",
+            "dim2",
+            "downcast-rs",
+            "ena",
+            "enhanced-determinism",
+            "f32",
+            "hashbrown",
+            "indexmap",
+            "parallel",
+            "rayon",
+            "required-features",
+            "slab",
+            "smallvec",
+            "spade",
+            "std"
+          ],
+          "rapier2d": [
+            "alloc",
+            "block-solver",
+            "default",
+            "dim2",
+            "enhanced-determinism",
+            "f32",
+            "parallel",
+            "std"
+          ]
+        },
+        "ignored_build_host": [
+          "parry2d",
+          "parry3d",
+          "rapier2d",
+          "rapier3d",
+          "simba"
+        ]
+      }
+    },
+    {
+      "name": "deterministic-build",
+      "command": [
+        "./tools/cargo",
+        "build",
+        "--locked",
+        "--profile",
+        "ci",
+        "--target",
+        "aarch64-apple-darwin",
+        "-j2",
+        "-p",
+        "incant_headless",
+        "--message-format=json",
+        "--no-default-features",
+        "--features",
+        "physics-deterministic",
+        "--bin",
+        "incant_headless"
+      ],
+      "exit": 0,
+      "seconds": 0.49556699999811826,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/deterministic-build.stdout",
+        "sha256": "19884c7f2e07bf8fc2b61c77535fa91f43a4fac4f791ca57116dbc7e4644b45a"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/deterministic-build.stderr",
+        "sha256": "fee05f247620e8366416599ade80b59a98fbee5c5959e25384c35d9a52a88868"
+      },
+      "compiler_features": {
+        "mode": "deterministic",
+        "target": "aarch64-apple-darwin",
+        "profile": "ci",
+        "target_output": "/Users/andreyyurlov/.codex/incant-physics-foundation-integration-target/aarch64-apple-darwin/ci",
+        "features": {
+          "simba": [
+            "libm",
+            "libm_force",
+            "std",
+            "wide"
+          ],
+          "parry3d": [
+            "alloc",
+            "dim3",
+            "downcast-rs",
+            "ena",
+            "enhanced-determinism",
+            "f32",
+            "hashbrown",
+            "indexmap",
+            "parallel",
+            "rayon",
+            "required-features",
+            "rstar",
+            "slab",
+            "smallvec",
+            "std"
+          ],
+          "rapier3d": [
+            "alloc",
+            "default",
+            "dim3",
+            "enhanced-determinism",
+            "f32",
+            "parallel",
+            "std"
+          ],
+          "parry2d": [
+            "alloc",
+            "dim2",
+            "downcast-rs",
+            "ena",
+            "enhanced-determinism",
+            "f32",
+            "hashbrown",
+            "indexmap",
+            "parallel",
+            "rayon",
+            "required-features",
+            "slab",
+            "smallvec",
+            "spade",
+            "std"
+          ],
+          "rapier2d": [
+            "alloc",
+            "block-solver",
+            "default",
+            "dim2",
+            "enhanced-determinism",
+            "f32",
+            "parallel",
+            "std"
+          ]
+        },
+        "ignored_build_host": [
+          "parry2d",
+          "parry3d",
+          "rapier2d",
+          "rapier3d",
+          "simba"
+        ]
+      }
+    },
+    {
+      "name": "fast-test",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "--target",
+        "aarch64-apple-darwin",
+        "-j2",
+        "-p",
+        "incant_headless",
+        "--message-format=json",
+        "--no-default-features",
+        "--all-targets"
+      ],
+      "exit": 0,
+      "seconds": 8.152559124995605,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/fast-test.stdout",
+        "sha256": "7a134fcece2a64c01f49a279ed3cd1344ae22d75a783fa5a9757a4e73622e4b9"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/fast-test.stderr",
+        "sha256": "cfe54eb54613d9c20459a68aba8bc899305c8751d130a1a7c76f7e755321d889"
+      },
+      "compiler_features": {
+        "mode": "fast",
+        "target": "aarch64-apple-darwin",
+        "profile": "ci",
+        "target_output": "/Users/andreyyurlov/.codex/incant-physics-foundation-integration-target/aarch64-apple-darwin/ci",
+        "features": {
+          "simba": [
+            "libm",
+            "std",
+            "wide"
+          ],
+          "parry3d": [
+            "alloc",
+            "dim3",
+            "downcast-rs",
+            "ena",
+            "f32",
+            "hashbrown",
+            "parallel",
+            "rayon",
+            "required-features",
+            "rstar",
+            "slab",
+            "smallvec",
+            "std"
+          ],
+          "rapier3d": [
+            "alloc",
+            "default",
+            "dim3",
+            "f32",
+            "parallel",
+            "std"
+          ],
+          "parry2d": [
+            "alloc",
+            "dim2",
+            "downcast-rs",
+            "ena",
+            "f32",
+            "hashbrown",
+            "parallel",
+            "rayon",
+            "required-features",
+            "slab",
+            "smallvec",
+            "spade",
+            "std"
+          ],
+          "rapier2d": [
+            "alloc",
+            "block-solver",
+            "default",
+            "dim2",
+            "f32",
+            "parallel",
+            "std"
+          ]
+        },
+        "ignored_build_host": [
+          "parry2d",
+          "parry3d",
+          "rapier2d",
+          "rapier3d",
+          "simba"
+        ]
+      }
+    },
+    {
+      "name": "fast-clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "--target",
+        "aarch64-apple-darwin",
+        "-j2",
+        "-p",
+        "incant_headless",
+        "--message-format=json",
+        "--no-default-features",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 15.605464457999915,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/fast-clippy.stdout",
+        "sha256": "e16283547c5e31e1df2c58ee3f5beab33ac34a2391d552fdc6214cb52b1760e9"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/fast-clippy.stderr",
+        "sha256": "b467b823a7e1543e6e6a1e3a733f161156542a1331f41da548b872f0f246b341"
+      },
+      "compiler_features": {
+        "mode": "fast",
+        "target": "aarch64-apple-darwin",
+        "profile": "ci",
+        "target_output": "/Users/andreyyurlov/.codex/incant-physics-foundation-integration-target/aarch64-apple-darwin/ci",
+        "features": {
+          "simba": [
+            "libm",
+            "std",
+            "wide"
+          ],
+          "parry3d": [
+            "alloc",
+            "dim3",
+            "downcast-rs",
+            "ena",
+            "f32",
+            "hashbrown",
+            "parallel",
+            "rayon",
+            "required-features",
+            "rstar",
+            "slab",
+            "smallvec",
+            "std"
+          ],
+          "parry2d": [
+            "alloc",
+            "dim2",
+            "downcast-rs",
+            "ena",
+            "f32",
+            "hashbrown",
+            "parallel",
+            "rayon",
+            "required-features",
+            "slab",
+            "smallvec",
+            "spade",
+            "std"
+          ],
+          "rapier2d": [
+            "alloc",
+            "block-solver",
+            "default",
+            "dim2",
+            "f32",
+            "parallel",
+            "std"
+          ],
+          "rapier3d": [
+            "alloc",
+            "default",
+            "dim3",
+            "f32",
+            "parallel",
+            "std"
+          ]
+        },
+        "ignored_build_host": [
+          "parry2d",
+          "parry3d",
+          "rapier2d",
+          "rapier3d",
+          "simba"
+        ]
+      }
+    },
+    {
+      "name": "fast-build",
+      "command": [
+        "./tools/cargo",
+        "build",
+        "--locked",
+        "--profile",
+        "ci",
+        "--target",
+        "aarch64-apple-darwin",
+        "-j2",
+        "-p",
+        "incant_headless",
+        "--message-format=json",
+        "--no-default-features",
+        "--bin",
+        "incant_headless"
+      ],
+      "exit": 0,
+      "seconds": 0.3497675420003361,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/fast-build.stdout",
+        "sha256": "42b37c8af9e9f6ab97c68677b4cb645dde0bbf0a95f14c03d0a2ca5d0b7aaf12"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/fast-build.stderr",
+        "sha256": "ab661f1de7fc0d5ae9e479a38d3ff3586d4f0ddfefbf099383f526780b426c29"
+      },
+      "compiler_features": {
+        "mode": "fast",
+        "target": "aarch64-apple-darwin",
+        "profile": "ci",
+        "target_output": "/Users/andreyyurlov/.codex/incant-physics-foundation-integration-target/aarch64-apple-darwin/ci",
+        "features": {
+          "simba": [
+            "libm",
+            "std",
+            "wide"
+          ],
+          "parry3d": [
+            "alloc",
+            "dim3",
+            "downcast-rs",
+            "ena",
+            "f32",
+            "hashbrown",
+            "parallel",
+            "rayon",
+            "required-features",
+            "rstar",
+            "slab",
+            "smallvec",
+            "std"
+          ],
+          "rapier3d": [
+            "alloc",
+            "default",
+            "dim3",
+            "f32",
+            "parallel",
+            "std"
+          ],
+          "parry2d": [
+            "alloc",
+            "dim2",
+            "downcast-rs",
+            "ena",
+            "f32",
+            "hashbrown",
+            "parallel",
+            "rayon",
+            "required-features",
+            "slab",
+            "smallvec",
+            "spade",
+            "std"
+          ],
+          "rapier2d": [
+            "alloc",
+            "block-solver",
+            "default",
+            "dim2",
+            "f32",
+            "parallel",
+            "std"
+          ]
+        },
+        "ignored_build_host": [
+          "parry2d",
+          "parry3d",
+          "rapier2d",
+          "rapier3d",
+          "simba"
+        ]
+      }
+    },
+    {
+      "name": "python",
+      "command": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-v"
+      ],
+      "exit": 0,
+      "seconds": 22.373470082995482,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/python.stdout",
+        "sha256": "60e25dfe179163a0b249bd439ffca1aa5f25073cfafc5b5034765d2062068aed"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/python.stderr",
+        "sha256": "f3eaf943c202f9740eda81d1c6cd715f9c0c764458207210c09ffeb5a95307ee"
+      }
+    },
+    {
+      "name": "node",
+      "command": [
+        "node",
+        "--test",
+        "tools/tests/native_script.test.mjs"
+      ],
+      "exit": 0,
+      "seconds": 4.137227334002091,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/node.stdout",
+        "sha256": "8bf1139e37c83dc325d41638797893ca9a739e8a421433b1522c0959de20210b"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/node.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "protocol-process",
+      "command": [
+        "python3",
+        "tools/probes/native-play-worker.py",
+        "--deterministic",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/incant_headless-deterministic",
+        "--fast",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/incant_headless-fast",
+        "--output",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/protocol-proof"
+      ],
+      "exit": 0,
+      "seconds": 7.465089582998189,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/protocol-process.stdout",
+        "sha256": "7550096a781f1631b250a0d938aa5c129dc61f3b66ea679083472b48911b3f77"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/protocol-process.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "owner-process",
+      "command": [
+        "python3",
+        "tools/probes/native-worker-owner.py",
+        "--binary",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/incant_headless-deterministic",
+        "--authoring",
+        "/Users/andreyyurlov/.codex/incant-evidence/physics-project-play-002/project",
+        "--target-dir",
+        "/Users/andreyyurlov/.codex/incant-physics-foundation-integration-target",
+        "--output",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/owner-proof"
+      ],
+      "exit": 0,
+      "seconds": 5.842629624996334,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/owner-process.stdout",
+        "sha256": "e4182d6109ad2e2f997d4494438f529018dba26d9dab6015948b4589f6e4e948"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/owner-process.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "features",
+      "command": [
+        "python3",
+        "tools/physics_features.py",
+        "manifest"
+      ],
+      "exit": 0,
+      "seconds": 0.04098758300096961,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/features.stdout",
+        "sha256": "0d556e78cedbd66c0bc03fb2348db5b76642a7f33dc023342d5a00e4be691888"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/features.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 1.107372333004605,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/fmt.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/fmt.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.03278816700185416,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/conventions.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/conventions.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.01597237500391202,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/diff.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/diff.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "rust_counts": {
+    "deterministic": {
+      "passed": 65,
+      "ignored": 2,
+      "groups": 17,
+      "failed": 0
+    },
+    "fast": {
+      "passed": 65,
+      "ignored": 2,
+      "groups": 17,
+      "failed": 0
+    }
+  },
+  "python_summary": [
+    "Ran 308 tests in 22.228s",
+    "OK (skipped=4)"
+  ],
+  "node_summary": [
+    "1..22",
+    "# tests 22",
+    "# suites 0",
+    "# pass 22",
+    "# fail 0",
+    "# cancelled 0",
+    "# skipped 0",
+    "# todo 0",
+    "# duration_ms 4112.845541"
+  ],
+  "binaries": {
+    "deterministic": {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/incant_headless-deterministic",
+      "sha256": "70fc84cf78e7e389e1e2a1923868f0cb7ff78cee44208ecaef9068bed9198cee",
+      "bytes": 60465152
+    },
+    "fast": {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-worker-main178-002/incant_headless-fast",
+      "sha256": "5247f58bbc7065a383dc09ab23fe9fe4a097fda9859b0f33a3603c17038eeaf4",
+      "bytes": 60093760
+    }
+  },
+  "archive": {
+    "path": "docs/spikes/evidence/native-worker-main178/artifacts.json.gz",
+    "sha256": "bf3e3eb9ac2dbf417fd6aa98b9e084c32e06d1f68c8e87073b33a4b16a5d2569",
+    "artifacts": 109,
+    "unique_payloads": 74,
+    "bytes": 863769
+  },
+  "protocol": {
+    "cases": [
+      "deterministic:changed",
+      "deterministic:wrong-mode",
+      "deterministic:eof",
+      "deterministic:truncated",
+      "deterministic:oversized",
+      "deterministic:retained-source-deleted",
+      "fast:changed",
+      "fast:wrong-mode",
+      "fast:eof",
+      "fast:truncated",
+      "fast:oversized",
+      "fast:retained-source-deleted"
+    ],
+    "commands": 8,
+    "owned_children": 8,
+    "source_deleted": true,
+    "full_retained_state_matches_native": true
+  },
+  "owner": {
+    "selections": [
+      "deterministic",
+      "fast",
+      "one-shot-fast",
+      "caller-failure"
+    ],
+    "retained_ticks": [
+      12,
+      12
+    ],
+    "source_deleted": true,
+    "original_unchanged": true,
+    "private_executables_removed": true,
+    "full_selected_state_matches_native": true
+  },
+  "reviews": [
+    {
+      "path": "docs/spikes/evidence/native-worker-main178/native-play-worker-independent-20261012.json",
+      "sha256": "187a362eecf9a4ee9dc6a4a41f8269040ebbe019bf961dbf67556db82e0c1d43"
+    },
+    {
+      "path": "docs/spikes/evidence/native-worker-main178/native-worker-owner-independent-20261012.json",
+      "sha256": "e42ce4f9a8f21b6ead7ffbccbc203770dc5e882bdd8e8d9d7f76df37ea0a4d55"
+    },
+    {
+      "path": "docs/spikes/evidence/native-worker-main178/native-worker-fixture-mode-source-20261012.json",
+      "sha256": "04cad514d46dd9515de176801836897761016f701fe5d3e481da09d0bd5aef6f"
+    }
+  ],
+  "limits": [
+    "Developer ci-profile CPU execution only; no shipping, GPU, editor viewport, native-window, physical-device or performance acceptance.",
+    "Windows process-tree branch compiles/tests through existing fixtures; actual Windows execution remains pending.",
+    "Movement fixtures have no active solver bodies; this is process/kernel selection and protocol evidence, not numerical backend equivalence or speed.",
+    "Worker drops authoring state after startup but startup compiles native TypeScript. PCM is not exposed by the worker protocol.",
+    "Request/read/write deadlines and encoded response cap do not establish bounded allocator use or an untrusted process sandbox."
+  ],
+  "review_state": "Independent final current-main execution review accepted; required exact-head fast check and publication remain pending.",
+  "reviewed_manifest_sha256": "9334dcc6347dc8542446c4992e23d37773b337c6e6afbf412c314f67d5541a6b",
+  "final_review": {
+    "path": "docs/spikes/evidence/native-worker-main178/final-review.json",
+    "sha256": "1f63d53d4bdd544ecef6bf3ce8383480525181dcec249983901318d577fb9b02"
+  }
+}
