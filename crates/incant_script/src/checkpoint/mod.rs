@@ -35,6 +35,9 @@ pub enum CheckpointError {
     World(#[from] SaveError),
     #[error(transparent)]
     Input(#[from] InputError),
+    #[cfg(feature = "ui")]
+    #[error(transparent)]
+    Ui(#[from] incant_ui::UiCheckpointError),
 }
 type Result<T> = std::result::Result<T, CheckpointError>;
 
@@ -168,6 +171,24 @@ impl NativeSession {
     /// device audio, solver continuation or physical input is serialized.
     /// Existing world capability refusals remain in force.
     pub fn checkpoint_bytes(&self) -> Result<Vec<u8>> {
+        if self.world.requires_ui_checkpoint() {
+            return Err(CheckpointError::Unsupported("hosted UI state is required"));
+        }
+        self.encode_checkpoint(None)
+    }
+    /// Capture the exact committed hosted owner together with world and script
+    /// state. UI declarations alone never substitute for mutable widget state.
+    #[cfg(feature = "ui")]
+    pub fn checkpoint_bytes_with_ui(&self, ui: &incant_ui::UiRuntime) -> Result<Vec<u8>> {
+        let state = ui.checkpoint_for_world(&self.world)?;
+        state.validate_world(&self.world)?;
+        if !self.world.requires_ui_checkpoint() {
+            // Never-used, empty UI owners have no mutable widget state.
+            return self.checkpoint_bytes();
+        }
+        self.encode_checkpoint(Some(state.bytes()))
+    }
+    fn encode_checkpoint(&self, ui: Option<&[u8]>) -> Result<Vec<u8>> {
         let host = host(self)?;
         let active = host
             .project
@@ -197,6 +218,7 @@ impl NativeSession {
             &active,
             &store,
             &host.schedule,
+            ui,
         )
     }
 

@@ -1,0 +1,1133 @@
+{
+  "passed": true,
+  "authoring": {
+    "project_sha256": "c8c8947b8c260c9ce157b6ad5e61d61ed88815efd93edd2bd5a402b0190287ce",
+    "source_sha256": "ff0edf9e08491ef01b1504a8e7ce6143c308e65e996b05bd47f6b979a1c5ee5a",
+    "scene": "01M4QAVHTRJJ2F6R8MCDR5ER0K",
+    "tick_rate": 60,
+    "fonts": [
+      "01M4QAVHYNSHVPK3ZSMCBR18VP",
+      "01M4QAVHZRJKQ629JYXQCR8XA7",
+      "01M4QAVJ0W72DESEH6VTP4ZHK5"
+    ],
+    "revision": 7,
+    "command_bus_only": true,
+    "journal_reopened": true,
+    "ui_undo_redo": true,
+    "checkpoint_undo_redo": true
+  },
+  "export": {
+    "format": "incant-native-export",
+    "version": 1,
+    "target": "aarch64-apple-darwin",
+    "mode": "headless",
+    "project_sha256": "c8c8947b8c260c9ce157b6ad5e61d61ed88815efd93edd2bd5a402b0190287ce",
+    "scene_id": "01M4QAVHTRJJ2F6R8MCDR5ER0K",
+    "camera": "00000000000000000000000000000003",
+    "program": null,
+    "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+    "codegen": {
+      "incant_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort",
+        "debuginfo": "2",
+        "split-debuginfo": "packed"
+      },
+      "incant_script": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort",
+        "debuginfo": "2",
+        "split-debuginfo": "packed"
+      },
+      "incant_game_player": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort",
+        "debuginfo": "2",
+        "split-debuginfo": "packed",
+        "lto": "fat"
+      }
+    },
+    "normal_dependencies": [
+      "allocator-api2",
+      "anyhow",
+      "approx",
+      "arrayvec",
+      "assert_type_match",
+      "async-channel",
+      "async-executor",
+      "async-task",
+      "atomic-arena",
+      "atomic-waker",
+      "bevy_ecs",
+      "bevy_ecs_macro_logic",
+      "bevy_ecs_macros",
+      "bevy_macro_utils",
+      "bevy_platform",
+      "bevy_ptr",
+      "bevy_reflect",
+      "bevy_reflect_derive",
+      "bevy_tasks",
+      "bevy_utils",
+      "bitflags",
+      "block-buffer",
+      "block2",
+      "bumpalo",
+      "bytemuck",
+      "bytemuck_derive",
+      "byteorder",
+      "calendrical_calculations",
+      "cfg-if",
+      "concurrent-queue",
+      "const-oid",
+      "convert_case",
+      "convert_case",
+      "core_maths",
+      "coreaudio-rs",
+      "cosmic-text",
+      "cpal",
+      "cpu-time",
+      "cpufeatures",
+      "critical-section",
+      "crossbeam-deque",
+      "crossbeam-epoch",
+      "crossbeam-queue",
+      "crossbeam-utils",
+      "crypto-common",
+      "dasp_sample",
+      "derive_more",
+      "derive_more-impl",
+      "digest",
+      "dispatch2",
+      "displaydoc",
+      "disqualified",
+      "dodgy_2d",
+      "downcast-rs",
+      "dyn-clone",
+      "either",
+      "ena",
+      "equivalent",
+      "erased-serde",
+      "errno",
+      "event-listener",
+      "event-listener-strategy",
+      "fastrand",
+      "fixed_decimal",
+      "fixedbitset",
+      "float-cmp",
+      "foldhash",
+      "font-types",
+      "fontdb",
+      "futures-core",
+      "futures-io",
+      "futures-lite",
+      "generic-array",
+      "getrandom",
+      "getrandom",
+      "glam",
+      "glam",
+      "glam",
+      "glam",
+      "glam",
+      "glamx",
+      "hash32",
+      "hashbrown",
+      "hashbrown",
+      "heapless",
+      "icu_calendar",
+      "icu_calendar_data",
+      "icu_collections",
+      "icu_datetime",
+      "icu_datetime_data",
+      "icu_decimal",
+      "icu_decimal_data",
+      "icu_locale",
+      "icu_locale_core",
+      "icu_locale_fallback",
+      "icu_locale_fallback_data",
+      "icu_pattern",
+      "icu_plurals",
+      "icu_plurals_data",
+      "icu_provider",
+      "icu_time",
+      "icu_time_data",
+      "incant_2d",
+      "incant_assets_runtime",
+      "incant_audio_runtime",
+      "incant_game_player",
+      "incant_game_runtime",
+      "incant_input",
+      "incant_localization",
+      "incant_nav",
+      "incant_observe",
+      "incant_physics_2d_runtime",
+      "incant_physics_runtime",
+      "incant_render_data",
+      "incant_render_game",
+      "incant_render_native",
+      "incant_runtime",
+      "incant_script",
+      "incant_text",
+      "incant_types",
+      "incant_ui",
+      "incant_wasm_abi",
+      "incant_wasm_runtime",
+      "indexmap",
+      "itoa",
+      "kira",
+      "ktx2",
+      "libc",
+      "libm",
+      "litemap",
+      "log",
+      "mach2",
+      "matrixmultiply",
+      "memchr",
+      "memmap2",
+      "meshopt",
+      "mint",
+      "nalgebra",
+      "nalgebra-macros",
+      "nonmax",
+      "num-bigint",
+      "num-complex",
+      "num-derive",
+      "num-integer",
+      "num-rational",
+      "num-traits",
+      "objc2",
+      "objc2-audio-toolbox",
+      "objc2-core-audio",
+      "objc2-core-audio-types",
+      "objc2-core-foundation",
+      "objc2-encode",
+      "objc2-exception-helper",
+      "objc2-foundation",
+      "once_cell",
+      "ordered-float",
+      "parking",
+      "parry2d",
+      "parry3d",
+      "pastey",
+      "pin-project-lite",
+      "portable-atomic",
+      "potential_utf",
+      "ppv-lite86",
+      "proc-macro-crate",
+      "proc-macro2",
+      "profiling",
+      "profiling-procmacros",
+      "quick-xml",
+      "quote",
+      "rand",
+      "rand_chacha",
+      "rand_core",
+      "rand_core",
+      "rangemap",
+      "rapier2d",
+      "rapier3d",
+      "raw-window-handle",
+      "rawpointer",
+      "rayon",
+      "rayon-core",
+      "read-fonts",
+      "ref-cast",
+      "ref-cast-impl",
+      "relative-path",
+      "rerecast",
+      "robust",
+      "rquickjs",
+      "rquickjs-core",
+      "rquickjs-macro",
+      "rquickjs-sys",
+      "rstar",
+      "rtrb",
+      "rustc-hash",
+      "rustix",
+      "rustybuzz",
+      "schemars",
+      "schemars_derive",
+      "self_cell",
+      "serde",
+      "serde_core",
+      "serde_derive",
+      "serde_derive_internals",
+      "serde_json",
+      "sha2",
+      "simba",
+      "skrifa",
+      "slab",
+      "slotmap",
+      "smallvec",
+      "smol_str",
+      "spade",
+      "spin",
+      "stable_deref_trait",
+      "static_assertions",
+      "subtle",
+      "swash",
+      "syn",
+      "syn",
+      "synstructure",
+      "sys-locale",
+      "taffy",
+      "tempfile",
+      "thiserror",
+      "thiserror-impl",
+      "thread_local",
+      "tinystr",
+      "tinyvec",
+      "toml_datetime",
+      "toml_edit",
+      "toml_parser",
+      "tracing",
+      "tracing-attributes",
+      "tracing-core",
+      "triple_buffer",
+      "ttf-parser",
+      "ttf-parser",
+      "typeid",
+      "typenum",
+      "ulid",
+      "unicode-bidi",
+      "unicode-bidi-mirroring",
+      "unicode-ccc",
+      "unicode-ident",
+      "unicode-linebreak",
+      "unicode-properties",
+      "unicode-script",
+      "unicode-segmentation",
+      "unicode-xid",
+      "utf8_iter",
+      "uuid",
+      "variadics_please",
+      "wgpu-types",
+      "wide",
+      "winnow",
+      "writeable",
+      "yazi",
+      "yoke",
+      "yoke-derive",
+      "zeno",
+      "zerocopy",
+      "zerocopy-derive",
+      "zerofrom",
+      "zerofrom-derive",
+      "zeroize",
+      "zeroize_derive",
+      "zerotrie",
+      "zerovec",
+      "zerovec-derive",
+      "zmij"
+    ],
+    "symbols": {
+      "format": "Mach-O/dSYM",
+      "uuids": {
+        "arm64": "109ff18a-9c88-3d1b-9944-fa13e90740f7"
+      }
+    },
+    "symbol_audit": {
+      "source": "llvm-nm defined symbols",
+      "sha256": "20ccccb56d57080d8bb0f8710878dd1c080db01d076ba9199aeb6a7bedafb646"
+    },
+    "player_sha256": "697bb080d39dde8b7c152bad74ba643b7c2aae5768029405383f183677c01495",
+    "data": {
+      "bytes": 1328111,
+      "files": {
+        "world.scene": "6bf4ca81413b6a4e095c342dcc6a6d4bdd3e52d8cc7ad5b7b1cf45814e603167",
+        "input-actions.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+        "models/71fbcae82debc0236bda7576327733a6943d93ce7adb913cbe1d95fe931d511f.incmodel": "9be97471434742eb82eb6fe2de0287d618bce848a52fb6eb1cf7e428c6a908de",
+        "fonts/9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2.json": "e43c79c54c311c5759bdf686b43b9b112b0177bafd6938782ebb782d75018812",
+        "fonts/2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9.ifont": "92960e6b23eff12e1bf13361b2b94b490d723f8d93e6945ba34b9f9b3acd2081",
+        "fonts/6864e1444bc7002790e682360d3f93bd45fe51b7045a64ecbf0e76e19e6b758e.json": "167d0dc13b807552b06d0195e3a90ee24f5074206dd6d6f2106ad59e65b35fde",
+        "fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont": "8bd20a742cc19c0fe65b106d983ea1ed816c4cd5ca1c3d50bdc4d05aeb5f8e7a",
+        "fonts/1087d4bb69160e3e5955407294226ca3da11166a3188ada3c1a166ba14e55ceb.json": "c3fd206832637ec3ad354dee08b4c67012da904d34a3ce9ec9c97e30f70e07f0",
+        "fonts/3299d6ab8033fb1d163f892dfcb1b8838cf1c46935c329d82da6f7b9e27dad82.ifont": "49e09202aadc1c7463502004f791b596480a92d22e04b9948fabf8648a004814",
+        "clips.bin": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+        "package.json": "f354e6de058e0547f46117e5ecad8d590652f2883b408ab940c3257f4f963851"
+      }
+    },
+    "startup_source_parsing": false,
+    "signed": false,
+    "limits": [
+      "host==target desktop only",
+      "existing cooked caches required",
+      "window export GPU execution requires a desktop",
+      "no phone or performance gate"
+    ],
+    "startup": {
+      "flipbooks": [],
+      "frames": 800,
+      "logs": {
+        "dropped": 0,
+        "entries": []
+      },
+      "pcm_sha256": "56a43ef88ddfcd0f56f7dd973312c0e73d62f59655c01d7b4e59aaa3be8b3fb6",
+      "render_input": {
+        "binding_generation": 0,
+        "camera": "00000000000000000000000000000003",
+        "camera_position": [
+          0.0,
+          0.0,
+          8.0
+        ],
+        "decoded_payload_bytes": 1324488,
+        "first_model_position": [
+          2.0,
+          0.0,
+          0.0
+        ],
+        "first_sprite_position": null,
+        "first_text_position": [
+          2.0,
+          0.0,
+          0.0
+        ],
+        "gpu_submitted": false,
+        "mode": "cpu-only",
+        "model_count": 1,
+        "sprite_count": 0,
+        "text_atlas_bytes": 4194304,
+        "text_atlas_nonzero": 723,
+        "text_atlas_sha256": "6e87f09e32e6b19e258a160943bdbad889fabdba3f165aebb1f6641c835f3881",
+        "text_count": 1,
+        "text_font_count": 3,
+        "text_generation": 0,
+        "text_glyph_count": 8,
+        "text_missing_clusters": 0,
+        "text_rtl_glyphs": 3,
+        "tick": 1,
+        "topology_generation": 0,
+        "ui": {
+          "atlas_sha256": "5414c60c78c628f64810260016db17b11f2364ecf4b0f19c9a42999d311391f1",
+          "focus": null,
+          "glyphs": 7,
+          "values": {
+            "00000000000000000000000012": "Name"
+          },
+          "viewport": [
+            320.0,
+            200.0
+          ],
+          "widgets": 3
+        }
+      },
+      "sources": [],
+      "tick": 1
+    },
+    "build_storage_removed_before_startup": true,
+    "startup_backend": "CPU render input; no window or GPU device",
+    "startup_ui_viewport": "320x200"
+  },
+  "runs": [
+    {
+      "name": "baseline",
+      "report": {
+        "flipbooks": [],
+        "frames": 32000,
+        "logs": {
+          "dropped": 0,
+          "entries": []
+        },
+        "observations": {
+          "checks": [
+            {
+              "actual": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "expect": {
+                "entity": "00000000000000000000000002",
+                "property": "translation",
+                "tolerance": 0.0,
+                "type": "vector",
+                "value": [
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "name": "state-timer-ui-0",
+              "passed": true,
+              "tick": 0
+            },
+            {
+              "actual": [
+                31.0,
+                0.0,
+                0.0
+              ],
+              "expect": {
+                "entity": "00000000000000000000000002",
+                "property": "translation",
+                "tolerance": 0.0,
+                "type": "vector",
+                "value": [
+                  31.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "name": "state-timer-ui-13",
+              "passed": true,
+              "tick": 13
+            },
+            {
+              "actual": [
+                94.0,
+                0.0,
+                0.0
+              ],
+              "expect": {
+                "entity": "00000000000000000000000002",
+                "property": "translation",
+                "tolerance": 0.0,
+                "type": "vector",
+                "value": [
+                  94.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "name": "state-timer-ui-40",
+              "passed": true,
+              "tick": 40
+            }
+          ],
+          "entities": {
+            "00000000000000000000000002": {
+              "parent": null,
+              "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "translation": [
+                94.0,
+                0.0,
+                0.0
+              ],
+              "velocity": null,
+              "world_transform": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                [
+                  94.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            }
+          },
+          "passed": true,
+          "tick": 40,
+          "tick_rate": 60
+        },
+        "pcm_sha256": "24a046dc04fefdb652e4077b41162490b344a4dd45f918505477f84c592f3070",
+        "render_input": {
+          "binding_generation": 0,
+          "camera": "00000000000000000000000000000003",
+          "camera_position": [
+            0.0,
+            0.0,
+            8.0
+          ],
+          "decoded_payload_bytes": 1324488,
+          "first_model_position": [
+            94.0,
+            0.0,
+            0.0
+          ],
+          "first_sprite_position": null,
+          "first_text_position": [
+            94.0,
+            0.0,
+            0.0
+          ],
+          "gpu_submitted": false,
+          "mode": "cpu-only",
+          "model_count": 1,
+          "sprite_count": 0,
+          "text_atlas_bytes": 4194304,
+          "text_atlas_nonzero": 723,
+          "text_atlas_sha256": "6e87f09e32e6b19e258a160943bdbad889fabdba3f165aebb1f6641c835f3881",
+          "text_count": 1,
+          "text_font_count": 3,
+          "text_generation": 0,
+          "text_glyph_count": 8,
+          "text_missing_clusters": 0,
+          "text_rtl_glyphs": 3,
+          "tick": 40,
+          "topology_generation": 0,
+          "ui": {
+            "atlas_sha256": "e2092c1f9f51444d8b74148e3e19687d6b4a84123ee9b3e838d250332df582e4",
+            "focus": "00000000000000000000000012",
+            "glyphs": 10,
+            "values": {
+              "00000000000000000000000012": "Nameé日本"
+            },
+            "viewport": [
+              320.0,
+              200.0
+            ],
+            "widgets": 3
+          }
+        },
+        "sources": [],
+        "tick": 40
+      },
+      "save_sha256": "6d0ba9bf9c56786b89e16f1d71e737cab08815d43baf53136738d35e41041932",
+      "pcm_bytes": 256000
+    },
+    {
+      "name": "middle",
+      "report": {
+        "flipbooks": [],
+        "frames": 10400,
+        "logs": {
+          "dropped": 0,
+          "entries": []
+        },
+        "observations": {
+          "checks": [
+            {
+              "actual": [
+                31.0,
+                0.0,
+                0.0
+              ],
+              "expect": {
+                "entity": "00000000000000000000000002",
+                "property": "translation",
+                "tolerance": 0.0,
+                "type": "vector",
+                "value": [
+                  31.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "name": "state-timer-ui-13",
+              "passed": true,
+              "tick": 13
+            }
+          ],
+          "entities": {
+            "00000000000000000000000002": {
+              "parent": null,
+              "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "translation": [
+                31.0,
+                0.0,
+                0.0
+              ],
+              "velocity": null,
+              "world_transform": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                [
+                  31.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            }
+          },
+          "passed": true,
+          "tick": 13,
+          "tick_rate": 60
+        },
+        "pcm_sha256": "9b54dfbc92b4baf804aa3b0360cbc32e4d9ebe32c974c5131c52e3f375d3e25e",
+        "render_input": {
+          "binding_generation": 0,
+          "camera": "00000000000000000000000000000003",
+          "camera_position": [
+            0.0,
+            0.0,
+            8.0
+          ],
+          "decoded_payload_bytes": 1324488,
+          "first_model_position": [
+            31.0,
+            0.0,
+            0.0
+          ],
+          "first_sprite_position": null,
+          "first_text_position": [
+            31.0,
+            0.0,
+            0.0
+          ],
+          "gpu_submitted": false,
+          "mode": "cpu-only",
+          "model_count": 1,
+          "sprite_count": 0,
+          "text_atlas_bytes": 4194304,
+          "text_atlas_nonzero": 723,
+          "text_atlas_sha256": "6e87f09e32e6b19e258a160943bdbad889fabdba3f165aebb1f6641c835f3881",
+          "text_count": 1,
+          "text_font_count": 3,
+          "text_generation": 0,
+          "text_glyph_count": 8,
+          "text_missing_clusters": 0,
+          "text_rtl_glyphs": 3,
+          "tick": 13,
+          "topology_generation": 0,
+          "ui": {
+            "atlas_sha256": "e2092c1f9f51444d8b74148e3e19687d6b4a84123ee9b3e838d250332df582e4",
+            "focus": "00000000000000000000000012",
+            "glyphs": 10,
+            "values": {
+              "00000000000000000000000012": "Nameé日本"
+            },
+            "viewport": [
+              320.0,
+              200.0
+            ],
+            "widgets": 3
+          }
+        },
+        "sources": [],
+        "tick": 13
+      },
+      "save_sha256": "37f5913e3d8bdfefa889b891043e9df97e852fa5d2bdcd355fb812f28613c232",
+      "pcm_bytes": 83200
+    },
+    {
+      "name": "resumed",
+      "report": {
+        "flipbooks": [],
+        "frames": 21600,
+        "logs": {
+          "dropped": 0,
+          "entries": []
+        },
+        "observations": {
+          "checks": [
+            {
+              "actual": [
+                31.0,
+                0.0,
+                0.0
+              ],
+              "expect": {
+                "entity": "00000000000000000000000002",
+                "property": "translation",
+                "tolerance": 0.0,
+                "type": "vector",
+                "value": [
+                  31.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "name": "state-timer-ui-13",
+              "passed": true,
+              "tick": 13
+            },
+            {
+              "actual": [
+                94.0,
+                0.0,
+                0.0
+              ],
+              "expect": {
+                "entity": "00000000000000000000000002",
+                "property": "translation",
+                "tolerance": 0.0,
+                "type": "vector",
+                "value": [
+                  94.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "name": "state-timer-ui-40",
+              "passed": true,
+              "tick": 40
+            }
+          ],
+          "entities": {
+            "00000000000000000000000002": {
+              "parent": null,
+              "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "translation": [
+                94.0,
+                0.0,
+                0.0
+              ],
+              "velocity": null,
+              "world_transform": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                [
+                  94.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            }
+          },
+          "passed": true,
+          "tick": 40,
+          "tick_rate": 60
+        },
+        "pcm_sha256": "53853188f83a941e2f45ec1383293ae935106c5721918079000dcb2254fc550b",
+        "render_input": {
+          "binding_generation": 0,
+          "camera": "00000000000000000000000000000003",
+          "camera_position": [
+            0.0,
+            0.0,
+            8.0
+          ],
+          "decoded_payload_bytes": 1324488,
+          "first_model_position": [
+            94.0,
+            0.0,
+            0.0
+          ],
+          "first_sprite_position": null,
+          "first_text_position": [
+            94.0,
+            0.0,
+            0.0
+          ],
+          "gpu_submitted": false,
+          "mode": "cpu-only",
+          "model_count": 1,
+          "sprite_count": 0,
+          "text_atlas_bytes": 4194304,
+          "text_atlas_nonzero": 723,
+          "text_atlas_sha256": "6e87f09e32e6b19e258a160943bdbad889fabdba3f165aebb1f6641c835f3881",
+          "text_count": 1,
+          "text_font_count": 3,
+          "text_generation": 0,
+          "text_glyph_count": 8,
+          "text_missing_clusters": 0,
+          "text_rtl_glyphs": 3,
+          "tick": 40,
+          "topology_generation": 0,
+          "ui": {
+            "atlas_sha256": "e2092c1f9f51444d8b74148e3e19687d6b4a84123ee9b3e838d250332df582e4",
+            "focus": "00000000000000000000000012",
+            "glyphs": 10,
+            "values": {
+              "00000000000000000000000012": "Nameé日本"
+            },
+            "viewport": [
+              600.0,
+              300.0
+            ],
+            "widgets": 3
+          }
+        },
+        "sources": [],
+        "tick": 40
+      },
+      "save_sha256": "6d0ba9bf9c56786b89e16f1d71e737cab08815d43baf53136738d35e41041932",
+      "pcm_bytes": 172800
+    },
+    {
+      "name": "repeated",
+      "report": {
+        "flipbooks": [],
+        "frames": 21600,
+        "logs": {
+          "dropped": 0,
+          "entries": []
+        },
+        "observations": {
+          "checks": [
+            {
+              "actual": [
+                31.0,
+                0.0,
+                0.0
+              ],
+              "expect": {
+                "entity": "00000000000000000000000002",
+                "property": "translation",
+                "tolerance": 0.0,
+                "type": "vector",
+                "value": [
+                  31.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "name": "state-timer-ui-13",
+              "passed": true,
+              "tick": 13
+            },
+            {
+              "actual": [
+                94.0,
+                0.0,
+                0.0
+              ],
+              "expect": {
+                "entity": "00000000000000000000000002",
+                "property": "translation",
+                "tolerance": 0.0,
+                "type": "vector",
+                "value": [
+                  94.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "name": "state-timer-ui-40",
+              "passed": true,
+              "tick": 40
+            }
+          ],
+          "entities": {
+            "00000000000000000000000002": {
+              "parent": null,
+              "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "translation": [
+                94.0,
+                0.0,
+                0.0
+              ],
+              "velocity": null,
+              "world_transform": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                [
+                  94.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            }
+          },
+          "passed": true,
+          "tick": 40,
+          "tick_rate": 60
+        },
+        "pcm_sha256": "53853188f83a941e2f45ec1383293ae935106c5721918079000dcb2254fc550b",
+        "render_input": {
+          "binding_generation": 0,
+          "camera": "00000000000000000000000000000003",
+          "camera_position": [
+            0.0,
+            0.0,
+            8.0
+          ],
+          "decoded_payload_bytes": 1324488,
+          "first_model_position": [
+            94.0,
+            0.0,
+            0.0
+          ],
+          "first_sprite_position": null,
+          "first_text_position": [
+            94.0,
+            0.0,
+            0.0
+          ],
+          "gpu_submitted": false,
+          "mode": "cpu-only",
+          "model_count": 1,
+          "sprite_count": 0,
+          "text_atlas_bytes": 4194304,
+          "text_atlas_nonzero": 723,
+          "text_atlas_sha256": "6e87f09e32e6b19e258a160943bdbad889fabdba3f165aebb1f6641c835f3881",
+          "text_count": 1,
+          "text_font_count": 3,
+          "text_generation": 0,
+          "text_glyph_count": 8,
+          "text_missing_clusters": 0,
+          "text_rtl_glyphs": 3,
+          "tick": 40,
+          "topology_generation": 0,
+          "ui": {
+            "atlas_sha256": "e2092c1f9f51444d8b74148e3e19687d6b4a84123ee9b3e838d250332df582e4",
+            "focus": "00000000000000000000000012",
+            "glyphs": 10,
+            "values": {
+              "00000000000000000000000012": "Nameé日本"
+            },
+            "viewport": [
+              600.0,
+              300.0
+            ],
+            "widgets": 3
+          }
+        },
+        "sources": [],
+        "tick": 40
+      },
+      "save_sha256": "6d0ba9bf9c56786b89e16f1d71e737cab08815d43baf53136738d35e41041932",
+      "pcm_bytes": 172800
+    }
+  ],
+  "refusals": [
+    {
+      "name": "corrupt",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Error: Checkpoint(Integrity)\n"
+    },
+    {
+      "name": "wrong-program",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Error: Checkpoint(ProgramMismatch)\n"
+    },
+    {
+      "name": "wrong-widget",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Error: Checkpoint(Ui(Invalid(\"widget order or duplicate\")))\n"
+    },
+    {
+      "name": "oversized",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Error: \"runtime input size limit\"\n"
+    },
+    {
+      "name": "assertion",
+      "returncode": 1,
+      "stdout": "{\"flipbooks\":[],\"frames\":800,\"logs\":{\"dropped\":0,\"entries\":[]},\"observations\":{\"checks\":[{\"actual\":[33.0,0.0,0.0],\"expect\":{\"entity\":\"00000000000000000000000002\",\"property\":\"translation\",\"tolerance\":0.0,\"type\":\"vector\",\"value\":[34.0,0.0,0.0]},\"name\":\"state-timer-ui-14\",\"passed\":false,\"tick\":14}],\"entities\":{\"00000000000000000000000002\":{\"parent\":null,\"rotation\":[0.0,0.0,0.0,1.0],\"scale\":[1.0,1.0,1.0],\"translation\":[33.0,0.0,0.0],\"velocity\":null,\"world_transform\":[[1.0,0.0,0.0,0.0],[0.0,1.0,0.0,0.0],[0.0,0.0,1.0,0.0],[33.0,0.0,0.0,1.0]]}},\"passed\":false,\"tick\":14,\"tick_rate\":60},\"pcm_sha256\":\"56a43ef88ddfcd0f56f7dd973312c0e73d62f59655c01d7b4e59aaa3be8b3fb6\",\"render_input\":{\"binding_generation\":0,\"camera\":\"00000000000000000000000000000003\",\"camera_position\":[0.0,0.0,8.0],\"decoded_payload_bytes\":1324488,\"first_model_position\":[33.0,0.0,0.0],\"first_sprite_position\":null,\"first_text_position\":[33.0,0.0,0.0],\"gpu_submitted\":false,\"mode\":\"cpu-only\",\"model_count\":1,\"sprite_count\":0,\"text_atlas_bytes\":4194304,\"text_atlas_nonzero\":723,\"text_atlas_sha256\":\"6e87f09e32e6b19e258a160943bdbad889fabdba3f165aebb1f6641c835f3881\",\"text_count\":1,\"text_font_count\":3,\"text_generation\":0,\"text_glyph_count\":8,\"text_missing_clusters\":0,\"text_rtl_glyphs\":3,\"tick\":14,\"topology_generation\":0,\"ui\":{\"atlas_sha256\":\"e2092c1f9f51444d8b74148e3e19687d6b4a84123ee9b3e838d250332df582e4\",\"focus\":\"00000000000000000000000012\",\"glyphs\":10,\"values\":{\"00000000000000000000000012\":\"Nameé日本\"},\"viewport\":[600.0,300.0],\"widgets\":3}},\"sources\":[],\"tick\":14}\n",
+      "stderr": "Error: \"checkpoint withheld: native observation assertions failed\"\n"
+    },
+    {
+      "name": "preedit",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Error: Checkpoint(Ui(CompositionActive))\n"
+    },
+    {
+      "name": "no-clobber",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Error: Os { code: 17, kind: AlreadyExists, message: \"File exists\" }\n"
+    }
+  ],
+  "authoring_deleted": true,
+  "debug_source_maps_removed": [
+    {
+      "path": "symbols/behavior.js.map",
+      "sha256": "0eb185e5521a43147a0420ab91e0477b5cd119750b2993ea84d0fe154314783c"
+    }
+  ],
+  "player_sha256": "697bb080d39dde8b7c152bad74ba643b7c2aae5768029405383f183677c01495",
+  "limits": [
+    "CPU hosted ordinary-load UI only; new owner/router and neutral physical input",
+    "Active preedit refuses; pointer capture is discarded",
+    "Physics/audio/static/development-module saves still refuse",
+    "No GPU/window/native-IME or full-save gate claim; PCM and save are not a multi-file transaction"
+  ]
+}

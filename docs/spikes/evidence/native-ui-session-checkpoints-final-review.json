@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-12T13:16:21.142931+00:00",
+  "review": "Source review038b2983 unchanged. Public authoring/proof helper reviewed; four ordinary packaged-player continuations and seven refusal receipts physically checked, no finding. No GPU or window review.",
+  "evidence_sha256": "07122dab82591b373ba9fc1d4ada2f8f24b9cbbd41dd5244400af41083de597a",
+  "sources_verified": 32,
+  "build_player_inputs_verified": 10,
+  "archived_logs_verified": 16,
+  "public_package_files_verified": 12,
+  "fresh_successes": 4,
+  "refusals": 7,
+  "cpu_passed": 458,
+  "final_save_sha256": "6d0ba9bf9c56786b89e16f1d71e737cab08815d43baf53136738d35e41041932",
+  "limits": [
+    "Explicit opt-in typed script persistence; closures/globals and arbitrary external state are not checkpointed.",
+    "Active preedit refuses, pointer capture is discarded, physical input/router/context reset neutral.",
+    "Physics/audio/static/development-module save adapters remain unsupported.",
+    "Window/GPU CLI checkpoint routes remain unsupported; CPU --package route is exercised.",
+    "Checksums and origin/program identities are compatibility/corruption checks, not authentication.",
+    "PCM and checkpoint publication are not a multi-file atomic transaction.",
+    "macOS CPU evidence only; no rendered/native IME/phone/performance or complete Game UI/full-save gate.",
+    "Prior native-ui-export full mixed-audio proof not rerun here; its assertion now names the still-required audio refusal."
+  ]
+}

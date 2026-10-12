@@ -16,17 +16,22 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Native UI checkpoint state — CPU section locally verified
+## Hosted native UI session checkpoints — local CPU proof passed
 
-Committed widget text, grapheme selection and logical focus now have a bounded
-binary save/load section with fresh-owner receipt invalidation. Active preedit
-refuses saving; pointer capture, physical input and notifications remain
-transient. All 41 UI tests, Clippy, wasm32 and dependency checks pass again on
-the actual main135 integration, with all five reviewed source inputs unchanged.
-Independent source review accepts this section. Complete world/session/renderer
-integration remains open and existing UI-save refusals are unchanged. This is
-not a full save, native IME or Game UI gate.
-[Contract and evidence](docs/spikes/native-ui-checkpoint-state.md).
+The bounded widget codec now composes with native world v7 and session v2:
+committed UiNode declarations, text buffers, grapheme selection, logical focus,
+script persistent values and timers restore into one fresh world and UI owner.
+Non-UI encodings remain unchanged. Exact world/generation/tick authority and
+complete typed sections are checked before consumer/guest initialization;
+ordinary loads neutralize physical input and discard transient pointer capture.
+The affected suite passes 449 CPU tests plus nine player tests, scoped Clippy,
+feature-disabled/static/development-module builds, wasm32 and lean runtime checks.
+A fresh ordinary public export passes four map/source/build-deleted player runs
+and seven typed refusals; uninterrupted and resumed final saves match exactly.
+Active preedit, physics/audio state, static/development modules and window/GPU
+checkpoint routes remain unsupported. This is not a full-session, native IME,
+Game UI or device gate. Independent source and actual public proof review are accepted; publisher intake
+remains separate. [Contract and evidence](docs/spikes/native-ui-session-checkpoints.md).
 
 ## Public Wasm animation graphs — current-main integration verified
 
@@ -166,7 +171,7 @@ reviewed main129 integration passes 510 CPU cases plus 209 overlapping final
 script/Play/game cases, Clippy, compiler-disabled/wasm checks and 67 exact fresh
 schemas. A fresh current-lock shipping export deletes authoring/build storage
 and developer source maps before three 12-tick runs and five precise refusals.
-UI checkpoints and static/development Wasm UI remain explicitly unsupported.
+Hosted CPU UI checkpoints are locally verified above; static/development Wasm UI remains explicitly unsupported.
 Claude0056 owns the separate drawing review; platform input/IME and complete
 Game UI/device gates remain open. [CPU scope and evidence](docs/spikes/native-ui-layout.md).
 

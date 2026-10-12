@@ -467,7 +467,13 @@ fn graph_v14_preserves_ui_v13_suffix_and_its_explicit_checkpoint_refusal() {
     let mut world = NativeWorld::new(decoded);
     world.step().unwrap();
     assert!(world.animation_graph_state(id(1)).is_some());
-    assert!(matches!(world.save_bytes(), Err(SaveError::UiUnsupported)));
+    let saved = world.save_bytes().unwrap();
+    let restored = NativeWorld::from_save_bytes(&saved).unwrap();
+    assert_eq!(
+        restored.animation_graph_state(id(1)),
+        world.animation_graph_state(id(1))
+    );
+    assert_eq!(restored.save_bytes().unwrap(), saved);
 }
 
 #[test]

@@ -28,6 +28,8 @@ pub struct NativeRenderSettings<S = ()> {
 pub enum RenderHostError<E = Infallible> {
     #[error(transparent)]
     Ui(#[from] incant_ui::UiError),
+    #[error(transparent)]
+    UiCheckpoint(#[from] incant_ui::UiCheckpointError),
     #[error("this consumer has no screen-space UI support")]
     UiUnsupported,
     #[error(transparent)]
@@ -117,6 +119,51 @@ pub struct NativeRenderHost<C: RenderInputConsumer = CpuInputObserver> {
     ui: Option<ui::Binding>,
 }
 impl<C: RenderInputConsumer> NativeRenderHost<C> {
+    fn prepare_state(
+        world: &NativeWorld,
+        settings: NativeRenderSettings<C::Settings>,
+        checkpoint: Option<&incant_ui::PendingUiCheckpoint>,
+    ) -> Result<Self, RenderHostError<C::Error>> {
+        if (settings.ui.is_some() || world.requires_ui_checkpoint()) && !C::SUPPORTS_UI {
+            return Err(RenderHostError::UiUnsupported);
+        }
+        if (world.requires_ui_checkpoint() || checkpoint.is_some()) && settings.ui.is_none() {
+            return Err(RenderHostError::UiUnsupported);
+        }
+        let spatial = world.spatial_view()?;
+        let caches = VisualCaches {
+            models: &settings.model_cache,
+            textures: &settings.texture_cache,
+        };
+        let input = if let Some(text) = settings.text {
+            NativeRenderInput::load_with_text(
+                &spatial,
+                &world.text_view()?,
+                caches,
+                settings.camera,
+                text,
+            )?
+        } else {
+            NativeRenderInput::load(&spatial, caches, settings.camera)?
+        };
+        let ui = settings
+            .ui
+            .map(|settings| ui::Binding::load(world, &input, settings, checkpoint))
+            .transpose()?;
+        let consumer = C::prepare(
+            input.input(),
+            input.camera_label(),
+            ui.as_ref().map(|ui| &ui.input),
+            settings.consumer,
+        )
+        .map_err(RenderHostError::Consumer)?;
+        Ok(Self {
+            input,
+            consumer,
+            ui,
+        })
+    }
+
     pub fn ui(&self) -> Option<&incant_ui::UiRuntime> {
         self.ui.as_ref().map(|ui| &ui.runtime)
     }
@@ -165,50 +212,21 @@ impl<C: RenderInputConsumer> SceneHost for NativeRenderHost<C> {
         self.consumer
             .admit_ui(next.input())
             .map_err(RenderHostError::Consumer)?;
-        ui.commit(next)?;
+        ui.commit(next, world)?;
         Ok(())
     }
     type Settings = NativeRenderSettings<C::Settings>;
     type Error = RenderHostError<C::Error>;
     fn prepare(world: &NativeWorld, settings: Self::Settings) -> Result<Self, Self::Error> {
-        if (settings.ui.is_some() || world.ui_view()?.nodes().len() != 0) && !C::SUPPORTS_UI {
-            return Err(RenderHostError::UiUnsupported);
-        }
-        if world.ui_view()?.nodes().len() != 0 && settings.ui.is_none() {
-            return Err(RenderHostError::UiUnsupported);
-        }
-        let spatial = world.spatial_view()?;
-        let caches = VisualCaches {
-            models: &settings.model_cache,
-            textures: &settings.texture_cache,
-        };
-        let input = if let Some(text) = settings.text {
-            NativeRenderInput::load_with_text(
-                &spatial,
-                &world.text_view()?,
-                caches,
-                settings.camera,
-                text,
-            )?
-        } else {
-            NativeRenderInput::load(&spatial, caches, settings.camera)?
-        };
-        let ui = settings
-            .ui
-            .map(|settings| ui::Binding::load(world, &input, settings))
-            .transpose()?;
-        let consumer = C::prepare(
-            input.input(),
-            input.camera_label(),
-            ui.as_ref().map(|ui| &ui.input),
-            settings.consumer,
-        )
-        .map_err(RenderHostError::Consumer)?;
-        Ok(Self {
-            input,
-            consumer,
-            ui,
-        })
+        Self::prepare_state(world, settings, None)
+    }
+    fn prepare_checkpoint(
+        world: &NativeWorld,
+        settings: Self::Settings,
+        checkpoint: Option<&incant_ui::PendingUiCheckpoint>,
+    ) -> incant_game_runtime::Result<Self, Self::Error> {
+        Self::prepare_state(world, settings, checkpoint)
+            .map_err(incant_game_runtime::GameError::Host)
     }
     fn sync(&mut self, world: &NativeWorld) -> Result<(), Self::Error> {
         if world.ui_view()?.nodes().len() != 0 && self.ui.is_none() {
@@ -233,7 +251,7 @@ impl<C: RenderInputConsumer> SceneHost for NativeRenderHost<C> {
         match result {
             Ok(()) => {
                 if let Some(next) = ui_next {
-                    self.ui.as_mut().expect("UI owner").commit(next)?;
+                    self.ui.as_mut().expect("UI owner").commit(next, world)?;
                 }
                 Ok(())
             }

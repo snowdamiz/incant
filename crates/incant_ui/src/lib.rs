@@ -3,7 +3,11 @@
 //! filesystem, renderer, OS input method or provider dependency.
 #![forbid(unsafe_code)]
 mod checkpoint;
+#[cfg(feature = "native")]
+mod native;
 pub use checkpoint::{MAX_UI_CHECKPOINT_BYTES, UiCheckpointError};
+#[cfg(feature = "native")]
+pub use native::{NativeUiCheckpoint, PendingUiCheckpoint};
 mod focus;
 mod fonts;
 pub use fonts::{MAX_UI_FONT_CHAINS, UiFonts};

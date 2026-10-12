@@ -6,8 +6,8 @@ use incant_render_data::{UiEdit, UiInput, UiRect, UiRole, UiWidget};
 use incant_render_native::NativeRenderInput;
 use incant_runtime::{NativeWorld, UiView, WorldIdentity};
 use incant_ui::{
-    Rect, RoutedUi, UiError, UiEvent, UiFonts, UiKind, UiPaint, UiPending, UiRouter, UiRuntime,
-    UiVisual, Widget, WidgetVisual,
+    PendingUiCheckpoint, Rect, RoutedUi, UiCheckpointError, UiError, UiEvent, UiFonts, UiKind,
+    UiPaint, UiPending, UiRouter, UiRuntime, UiVisual, Widget, WidgetVisual,
 };
 use std::sync::Arc;
 
@@ -59,17 +59,21 @@ impl Binding {
         world: &NativeWorld,
         input: &NativeRenderInput,
         settings: UiSettings,
-    ) -> Result<Self, UiError> {
+        checkpoint: Option<&PendingUiCheckpoint>,
+    ) -> Result<Self, UiCheckpointError> {
         let view = world
             .ui_view()
             .map_err(|_| UiError::Invalid("unusable native world"))?;
-        let mut runtime = UiRuntime::new(widgets(&view))?;
+        let mut runtime = UiRuntime::for_world(world)?;
         let mut fonts = UiFonts::new(input.font_sources().cloned().collect(), runtime.widgets())?;
-        let first = runtime.prepare(&[], settings.viewport, &mut fonts)?;
+        if let Some(checkpoint) = checkpoint {
+            runtime = checkpoint.restore(world, settings.viewport, &mut fonts)?;
+        }
+        let first = runtime.prepare_refresh(settings.viewport, &mut fonts)?;
         let paint =
             incant_ui::UiPaint::prepare(&runtime, &first, &mut fonts, settings.atlas, None)?;
         let input = draw_input(&first.visual(&runtime)?, &paint, None)?;
-        runtime.commit(first)?;
+        runtime.commit_for_world(first, world)?;
         Ok(Self {
             paint,
             input,
@@ -181,10 +185,17 @@ impl Binding {
             state,
         })
     }
-    pub fn commit(&mut self, prepared: Prepared) -> Result<(), UiError> {
+    pub fn commit(
+        &mut self,
+        prepared: Prepared,
+        world: &NativeWorld,
+    ) -> Result<(), UiCheckpointError> {
         match prepared.state {
-            State::Input(pending) => self.router.commit(&mut self.runtime, *pending)?,
-            State::Refresh(pending) => self.runtime.commit(*pending)?,
+            State::Input(pending) => {
+                self.router
+                    .commit_for_world(&mut self.runtime, *pending, world)?
+            }
+            State::Refresh(pending) => self.runtime.commit_for_world(*pending, world)?,
         }
         if let Some(fonts) = prepared.fonts {
             self.fonts = fonts;

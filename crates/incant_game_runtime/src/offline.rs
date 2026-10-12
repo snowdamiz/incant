@@ -125,8 +125,8 @@ impl OfflineGameSession {
                     initial,
                     program,
                     actions,
-                    |world| {
-                        crate::require_nonspatial_world(world)?;
+                    |pending| {
+                        crate::require_nonspatial_world(pending.world())?;
                         Ok(NoHost)
                     },
                     |world| SceneAudio::offline(world, clips, sample_rate),
