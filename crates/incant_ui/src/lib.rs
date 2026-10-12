@@ -2,6 +2,8 @@
 //! declarations and explicitly supplied packaged fonts. No authoring document,
 //! filesystem, renderer, OS input method or provider dependency.
 #![forbid(unsafe_code)]
+mod checkpoint;
+pub use checkpoint::{MAX_UI_CHECKPOINT_BYTES, UiCheckpointError};
 mod focus;
 mod fonts;
 pub use fonts::{MAX_UI_FONT_CHAINS, UiFonts};

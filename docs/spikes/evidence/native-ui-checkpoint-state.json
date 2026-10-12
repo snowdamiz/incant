@@ -1,0 +1,54 @@
+{
+  "at": "2026-10-12T05:27:58.376641+00:00",
+  "base": "52bb80154ab91edfe49214b02221247f371ed717",
+  "files": {
+    "Cargo.lock": "a9d9fb195718e559ac3aa0984df100536609f1c842470245220ec5546076ea9b",
+    "crates/incant_ui/Cargo.toml": "ce9a547441f89385e2af82a68442d0baa0ae6cdb4832c348ce425f7c21c39d2d",
+    "crates/incant_ui/src/lib.rs": "846450fa9cb687fa59ae9da1875e63b717deac6d73bdc4a310a06fb9d0655c29",
+    "crates/incant_ui/src/checkpoint.rs": "ac3f641507581558e3086fbc5eddfd759d4e3b2af62976fa0af06e8d76a571b7",
+    "crates/incant_ui/tests/checkpoint.rs": "6338cdaa5b9f29e8fc487de8816db8fc2f4697a6368d22e8d4106fc45dd80a78"
+  },
+  "scope": "CPU widget checkpoint section; existing native world/session UI-save refusal remains unchanged",
+  "verification": {
+    "ui_tests": 41,
+    "new_checkpoint_tests": 14,
+    "failed": 0,
+    "ignored": 0,
+    "all_target_clippy": true,
+    "wasm32_compile": true,
+    "authoring_free_dependency_check": true,
+    "independent_source_review": "accepted"
+  },
+  "logs": {
+    "docs/spikes/evidence/native-ui-checkpoint-state/tests-001.log.gz": {
+      "sha256": "7af59099c887f7d461c9a832238ed7c2032d242b90677aa69919e0209c5d15e2",
+      "uncompressed_sha256": "2720fbff9b3f729b4dd4887dde386e2885ce70bd82d7540eef48bf68fa66c1a1"
+    },
+    "docs/spikes/evidence/native-ui-checkpoint-state/tests-002.log.gz": {
+      "sha256": "8e0d5e757a745c38cf4c7217d0519b5b39be514ea19279d2aa5b7ea1ebbc66ad",
+      "uncompressed_sha256": "50787cf0f2be3324fff1f55dd53198423b4709140954194f3791edf11c9a996d"
+    },
+    "docs/spikes/evidence/native-ui-checkpoint-state/clippy-001.log.gz": {
+      "sha256": "15ce76a35a10b57c211c3a42b4ea1999101cdc8459d6a76439ee89e3592af4b3",
+      "uncompressed_sha256": "9fcfe159f02eadd1b69f4d32efd231deea36f2a8a266b5cd06236e3b582cd998"
+    },
+    "docs/spikes/evidence/native-ui-checkpoint-state/wasm32-001.log.gz": {
+      "sha256": "810096661a165f38d97728161bc915b87fccfd3f4eec63f08b6838a4964c78f7",
+      "uncompressed_sha256": "1dcb7edf0b51b2afffb37a6c1cbda1dbd6aa1c9cd08228f974ac2c3bd624a76b"
+    },
+    "docs/spikes/evidence/native-ui-checkpoint-state/dependencies-001.log.gz": {
+      "sha256": "630884049ce9f0336639a4158de75af0a01e44ce44302053ec2e68d9c38bb2d3",
+      "uncompressed_sha256": "47f3c256282d407a0f90364992db88976c1766ce3dc26ff49272a391a5dc3a7a"
+    }
+  },
+  "receipts": {
+    "docs/spikes/evidence/native-ui-checkpoint-state/source-freeze.json": "2252761c9da7d9240b4ee2fd7c848bef37fee01110a631330073a29ab1426d60",
+    "docs/spikes/evidence/native-ui-checkpoint-state/independent-review.json": "168db63ae18b85350e2088df7628b2168bcdf7bb47c69f749c5c1efc9e68b613"
+  },
+  "prior_failure": "First synthetic maximum-text measurer returned above MAX_UI_EXTENT. Corrected fixture clamp; no production change, all41 tests then pass.",
+  "limitations": [
+    "No complete world/session/render-host checkpoint integration yet",
+    "No native IME, GPU or exported player execution in this slice",
+    "No shipping/device/performance or phase gate"
+  ]
+}

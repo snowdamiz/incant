@@ -1,0 +1,11 @@
+{
+  "at": "2026-10-12T05:26:49.081659+00:00",
+  "base": "52bb80154ab91edfe49214b02221247f371ed717",
+  "files": {
+    "Cargo.lock": "a9d9fb195718e559ac3aa0984df100536609f1c842470245220ec5546076ea9b",
+    "crates/incant_ui/Cargo.toml": "ce9a547441f89385e2af82a68442d0baa0ae6cdb4832c348ce425f7c21c39d2d",
+    "crates/incant_ui/src/lib.rs": "846450fa9cb687fa59ae9da1875e63b717deac6d73bdc4a310a06fb9d0655c29",
+    "crates/incant_ui/src/checkpoint.rs": "ac3f641507581558e3086fbc5eddfd759d4e3b2af62976fa0af06e8d76a571b7",
+    "crates/incant_ui/tests/checkpoint.rs": "6338cdaa5b9f29e8fc487de8816db8fc2f4697a6368d22e8d4106fc45dd80a78"
+  }
+}
