@@ -1,3 +1,16 @@
+## Priority revision — actual Windows failure also reproduced
+
+Checkpoint12 now has the same failed test on Windows DX12, not only Linux:
+`logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales`,
+scale1 Rgba8Unorm outside245/excess2/widest2, 31 cases pass. Actual adapter:
+Microsoft Basic Render Driver (CPU), vendor5140/device140, driver10.0.26100.33438,
+DX12 subgroup4. sRGB scales1/2/1.5 all pass (worst1).
+Read `evidence/checkpoint12-windows-failure.json` and the raw Windows log gzip.
+The raw log SHA256 is cec7da5a271729c47964244ce18e496ecd8383dc2e3c505a127e54b9b12a1ebb.
+Use this independent backend evidence in your diagnosis: do not assume this is
+Mesa-specific or claim Windows acceptance from Metal. Include Windows in pending
+hosted verification. Preserve the existing narrow scope and precision controls.
+
 # 0059 — Actual Linux UI numerical mismatch
 
 Claude Opus 5.5 over ACP, thinking explicitly Max, verified before prompting.
