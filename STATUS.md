@@ -16,6 +16,16 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Mobile runtime callers — macOS C/Swift CPU proof accepted
+
+Actual callers of the frozen native runtime archive pass 32 controls / 39
+commands with typed cooked input-driven movement, precise failure reports,
+repeat PCM and create-only outputs. Fixture Clippy and authoring-free graph
+checks pass; source/execution review is accepted. iOS target compatibility and
+simulator/device archives, Android NDK/CI, and physical-phone/render/device gates
+remain pending; the old document smoke is not reused as game execution evidence.
+[Source and measured scope](docs/spikes/mobile-runtime-callers.md).
+
 ## Shared cooked-player library
 
 The ordinary packaged player now has a reusable Rust entry and optional bounded C
