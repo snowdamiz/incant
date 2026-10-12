@@ -484,3 +484,214 @@ fn gamepad_release_during_preserved_surface_wait_cannot_leave_a_held_button() {
     input.reset_focus();
     assert!(!input.accepts_delivery(true, true));
 }
+
+fn focus_text(ui: &mut UiRuntime) {
+    let next = ui
+        .prepare(&[UiEvent::Focus(id(3))], [400., 100.], &mut Measure)
+        .unwrap();
+    ui.commit(next).unwrap();
+}
+#[test]
+fn managed_preedit_commit_and_cancel_use_the_exact_accepted_text_owner() {
+    use tao::text_input::TextInputEvent as Native;
+    let mut ui = runtime(true);
+    focus_text(&mut ui);
+    let mut input = UiInput::new();
+    let (serial, enabled) = input.text_session(Some(&ui), true).unwrap().unwrap();
+    assert!(enabled);
+    input
+        .native_text(
+            Some(&ui),
+            serial,
+            &Native::Preedit {
+                text: "a𝄞中".into(),
+                cursor: Some(1..5),
+            },
+        )
+        .unwrap();
+    accept(&mut ui, &mut input);
+    let buffer = ui.text(id(3)).unwrap();
+    assert_eq!(buffer.text(), "Name");
+    assert_eq!(buffer.preedit().unwrap().text, "a𝄞中");
+    assert_eq!(input.text_session(Some(&ui), true).unwrap(), None);
+    input
+        .native_text(Some(&ui), serial, &Native::Commit("日本".into()))
+        .unwrap();
+    accept(&mut ui, &mut input);
+    assert!(ui.text(id(3)).unwrap().text().contains("日本"));
+    assert!(ui.text(id(3)).unwrap().preedit().is_none());
+    input
+        .native_text(
+            Some(&ui),
+            serial,
+            &Native::Preedit {
+                text: "x".into(),
+                cursor: Some(1..1),
+            },
+        )
+        .unwrap();
+    accept(&mut ui, &mut input);
+    input
+        .native_text(Some(&ui), serial, &Native::Cancel)
+        .unwrap();
+    accept(&mut ui, &mut input);
+    assert!(ui.text(id(3)).unwrap().preedit().is_none());
+}
+#[test]
+fn native_callback_from_blurred_replaced_or_other_world_owner_is_never_retargeted() {
+    use tao::text_input::TextInputEvent as Native;
+    let mut ui = runtime(true);
+    focus_text(&mut ui);
+    let mut input = UiInput::new();
+    let (first, _) = input.text_session(Some(&ui), true).unwrap().unwrap();
+    let (disabled, on) = input.text_session(Some(&ui), false).unwrap().unwrap();
+    assert!(!on && disabled > first);
+    input
+        .native_text(Some(&ui), first, &Native::Commit("old".into()))
+        .unwrap();
+    let (second, _) = input.text_session(Some(&ui), true).unwrap().unwrap();
+    assert!(second > disabled);
+    input
+        .native_text(
+            Some(&ui),
+            first,
+            &Native::Preedit {
+                text: "old".into(),
+                cursor: None,
+            },
+        )
+        .unwrap();
+    let mut other = runtime(true);
+    focus_text(&mut other);
+    input
+        .native_text(Some(&other), second, &Native::Commit("other".into()))
+        .unwrap();
+    let (third, _) = input.text_session(Some(&other), true).unwrap().unwrap();
+    input
+        .native_text(Some(&other), second, &Native::Commit("replaced".into()))
+        .unwrap();
+    assert!(input.receipts().is_empty());
+    assert_eq!(input.stale_text_events(), 4);
+    input
+        .native_text(Some(&other), third, &Native::Commit("new".into()))
+        .unwrap();
+    accept(&mut other, &mut input);
+    assert!(other.text(id(3)).unwrap().text().contains("new"));
+    assert_eq!(ui.text(id(3)).unwrap().text(), "Name");
+}
+#[test]
+fn managed_text_refusal_does_not_publish_partial_queue_and_surface_wait_keeps_session() {
+    use tao::text_input::{TextInputError, TextInputEvent as Native};
+    let mut ui = runtime(true);
+    focus_text(&mut ui);
+    let mut input = UiInput::new();
+    let mut physical = PendingInput::new();
+    let (serial, _) = input.text_session(Some(&ui), true).unwrap().unwrap();
+    input
+        .native_text(
+            Some(&ui),
+            serial,
+            &Native::Preedit {
+                text: "中".into(),
+                cursor: Some(3..3),
+            },
+        )
+        .unwrap();
+    for bad in [
+        Native::Preedit {
+            text: "中".into(),
+            cursor: Some(1..2),
+        },
+        Native::Commit("x".repeat(incant_types::MAX_TEXT_BYTES + 1)),
+        Native::Refused(TextInputError::Replacement),
+    ] {
+        assert!(input.native_text(Some(&ui), serial, &bad).is_err());
+        assert_eq!(input.receipts().len(), 1);
+        assert_eq!(ui.text(id(3)).unwrap().text(), "Name");
+    }
+    input.layout_pending(Some(&ui), &mut physical).unwrap();
+    input.defer_surface();
+    assert_eq!(
+        input
+            .text_session(Some(&ui), input.accepts_delivery(true, true))
+            .unwrap(),
+        None
+    );
+    input.resume(&mut physical, true);
+    assert_eq!(input.text_session(Some(&ui), true).unwrap(), None);
+    accept(&mut ui, &mut input);
+    assert_eq!(ui.text(id(3)).unwrap().preedit().unwrap().text, "中");
+}
+
+#[test]
+fn ime_consumed_enter_never_submits_and_releases_prior_gameplay_hold() {
+    use incant_input::{InputRuntime, KeyCode};
+    let mut ui = runtime(true);
+    focus_text(&mut ui);
+    let input = UiInput::new();
+    let mut pending = PendingInput::new();
+    let mut physical = InputRuntime::default();
+    physical
+        .advance(
+            &[
+                InputEvent::Focus { focused: true },
+                InputEvent::Key {
+                    code: KeyCode::Enter,
+                    down: true,
+                },
+            ],
+            1. / 60.,
+        )
+        .unwrap();
+    input
+        .consumed_key(&mut pending, tao::keyboard::KeyCode::Enter, false)
+        .unwrap();
+    input
+        .consumed_key(&mut pending, tao::keyboard::KeyCode::Enter, true)
+        .unwrap();
+    assert_eq!(pending.events().len(), 1);
+    physical.advance(pending.events(), 1. / 60.).unwrap();
+    assert!(!physical.frame().keyboard.held.contains(&KeyCode::Enter));
+    // A consumed control generates no UI Activate or committed content receipt.
+    assert!(input.receipts().is_empty());
+    assert!(ui.actions().is_empty());
+}
+
+#[test]
+fn retired_native_payloads_are_discarded_before_semantic_validation() {
+    use tao::text_input::{TextInputError, TextInputEvent as Native};
+    let mut ui = runtime(true);
+    focus_text(&mut ui);
+    let mut input = UiInput::new();
+    let (old, _) = input.text_session(Some(&ui), true).unwrap().unwrap();
+    input.text_session(Some(&ui), false).unwrap();
+    let (current, _) = input.text_session(Some(&ui), true).unwrap().unwrap();
+    let bad = [
+        Native::Commit("x".repeat(incant_types::MAX_TEXT_BYTES + 1)),
+        Native::Commit("\n".into()),
+        Native::Preedit {
+            text: "中".into(),
+            cursor: Some(1..2),
+        },
+        Native::Preedit {
+            text: "x".into(),
+            cursor: Some(usize::MAX..usize::MAX),
+        },
+        Native::Refused(TextInputError::Replacement),
+    ];
+    for event in &bad {
+        input.native_text(Some(&ui), old, event).unwrap();
+        assert!(input.receipts().is_empty());
+        assert_eq!(ui.text(id(3)).unwrap().text(), "Name");
+    }
+    assert_eq!(input.stale_text_events(), bad.len() as u64);
+    for event in &bad {
+        assert!(input.native_text(Some(&ui), current, event).is_err());
+        assert!(input.receipts().is_empty());
+    }
+    input
+        .native_text(Some(&ui), current, &Native::Commit("accepted".into()))
+        .unwrap();
+    accept(&mut ui, &mut input);
+    assert!(ui.text(id(3)).unwrap().text().ends_with("accepted"));
+}

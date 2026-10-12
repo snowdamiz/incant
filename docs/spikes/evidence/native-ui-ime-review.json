@@ -1,0 +1,33 @@
+{
+  "at": "2026-10-12T05:31:08.175105+00:00",
+  "reviewer": "astra-root",
+  "freeze_sha256": "131fbdc66c638366d6dc232b33a0ae9c906fc275583445eab1fa0e387fd152e5",
+  "source_files_verified": 28,
+  "vendor_files_verified": 122,
+  "assessment": "Corrected source accepted for bounded opt-in managed desktop IME bridge; final execution evidence pending. No native IME/window/pixel acceptance implied.",
+  "reviewed": [
+    "Monotonically increasing opaque owner leases and late-callback tagging",
+    "Cocoa per-owner native client/context, weak window retention, retire-before-native-callback ordering",
+    "GTK separate IMMulticontext instances and immutable serial closures",
+    "Windows per-owner IMM contexts with context verification, retirement and bounded stale queue draining",
+    "UTF-16 scalar offsets, bounded text and strict malformed range/refusal handling",
+    "Consumed physical keys cannot submit or leak into gameplay",
+    "Legacy default behavior preserved until explicit opt-in"
+  ],
+  "findings_closed": [
+    {
+      "issue": "Cocoa unmark discarded composed text",
+      "fix": "Actual shared helper retains bounded marked contents and commits once on active unmark; insert and retire clear it without double commit",
+      "primary_contract": "https://developer.apple.com/documentation/appkit/nstextinputclient/unmarktext%28%29"
+    },
+    {
+      "issue": "Malformed stale text payload could fail replacement owner",
+      "fix": "Opaque lease target resolved before payload admission/scanning/copy; active-owner refusals retained"
+    }
+  ],
+  "outstanding": [
+    "Verify final combined checks and durable red/green evidence",
+    "Canonical caret geometry and real native-window/IME integration still pending Claude renderer coordination",
+    "Compile/CPU evidence does not substitute for native IME execution or phase gate"
+  ]
+}

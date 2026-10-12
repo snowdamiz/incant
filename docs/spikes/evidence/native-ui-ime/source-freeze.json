@@ -1,0 +1,738 @@
+{
+  "parent": "777e9a107442d2a0d4675516d7be53cd7967bc3b",
+  "status": "corrected freeze002; Cocoa unmark acceptance and stale-receipt admission fixed; scoped tests/Clippy active; no native/GPU execution",
+  "files": [
+    {
+      "path": "Cargo.toml",
+      "sha256": "98768e3ad77d7294049dddf94291d024f9065596e783ae06b84585cfb69d14e8"
+    },
+    {
+      "path": "Cargo.lock",
+      "sha256": "22d3e26d7b3ba28c588ba9e73120168af694552b5b314dfdaf00193c1a7a419c"
+    },
+    {
+      "path": "crates/incant_game_player/src/window/mod.rs",
+      "sha256": "e8453d6d4a2af3321225b28d23bf4065d53c269405fc4e4f7790af0a17d96ad4"
+    },
+    {
+      "path": "crates/incant_game_player/src/window/ui_input.rs",
+      "sha256": "3fede07cd57508339182cdc9708f033d86f6e8782b1e3ec707c78f14aabd0470"
+    },
+    {
+      "path": "crates/incant_game_player/src/window/ui_input/tests.rs",
+      "sha256": "2bc776403b2cc7b1147e1f81337030cae1616034b6b0da0990e326218d94b13f"
+    },
+    {
+      "path": "crates/incant_game_player/src/window/ime.rs",
+      "sha256": "90990c7e68de5ad287830a82b35f060d3535a1dcee15dec78f3c75237a56ab84"
+    },
+    {
+      "path": "third_party/tao/Cargo.toml",
+      "sha256": "0c7532197536ab91685090097e75de8cf38b84553f07f402d2f8d5e87d5a1961"
+    },
+    {
+      "path": "third_party/tao/src/event.rs",
+      "sha256": "13a2ab465ba0a0a61b526182526d6433c893c990fba81bc0fc2d00f7a10e4bf0"
+    },
+    {
+      "path": "third_party/tao/src/lib.rs",
+      "sha256": "99507f565ebce2fa11a5cff08005d762929883fc14f24f7b9b5ae4bcf3f50252"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/android/mod.rs",
+      "sha256": "aee14af3e0b166f206ca3929503a38425c183ea33e5d88c778395c6d2367c1d5"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/linux/event_loop.rs",
+      "sha256": "59850637e6bcf1c8ce1ef121e92d7097d5ab882bdc71c00bfe2f1bfbb433000e"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/linux/keyboard.rs",
+      "sha256": "57ef23a723171b23cc827d9a1132a7b46a1240077870ae4c44b7a8b33f9ca342"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/linux/mod.rs",
+      "sha256": "0d20e775a0cc22be426ce7b7fd545d5ec69e0606173583a9ce1f336edce54c8c"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/linux/text_input.rs",
+      "sha256": "b8854edab71ce2b707dfbf7dcfba171e062721c3ab76c847d5c6457704be7074"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/linux/window.rs",
+      "sha256": "9d9c146744ddff7ba902689ce227f042ca460a2751432808c3e4b38d55bf393d"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/macos/event.rs",
+      "sha256": "16c65224f2ecad26e2af2903678fcae9b1da3bfd99b68e825b200dd5037a81b5"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/macos/mod.rs",
+      "sha256": "eb042c6d1b71c743cbf35519a823d41085e4aaef0da627834d60fec13169209f"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/macos/text_input.rs",
+      "sha256": "6671bc9c25b30f2ebbee7a746a5745eab9802879b59f709b431df4af61bbebb2"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/macos/view.rs",
+      "sha256": "577461d0ac07740aefe0ff32c29afdf959f6e63543a3aff5524f79dbf71f093f"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/macos/window.rs",
+      "sha256": "ee33cbdbbac26c994f979a78a22e3f2d1201d6c18e0a08d8dcda7559d701eb5d"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/windows/event_loop.rs",
+      "sha256": "198b88217fcfe0faaaabbc33017028d536aace1a78c5fa261f6eb5126cd01757"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/windows/keyboard.rs",
+      "sha256": "563e1bb6034209e49ff8fa1c30cdf755be7699ed99d942c85f514dbf7f0d4297"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/windows/mod.rs",
+      "sha256": "049c0ef56617f217e27387d7085c03301e94e033a14e5db5cc8f36bf144c220b"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/windows/text_input.rs",
+      "sha256": "d587dffc4119322333de682dcfe99c62a59ec4ed382aa45eadc81efee1a36278"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/windows/window.rs",
+      "sha256": "4ee5217b8bcac5565a15d28b015049a2abedafeec4d6df83ea4d62eb35a7cfc9"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/windows/window_state.rs",
+      "sha256": "05339c583ed9432892878937d9b78a7cf6bda95ea0a11d4359944841ae4426db"
+    },
+    {
+      "path": "third_party/tao/src/text_input.rs",
+      "sha256": "fe9be03d71891d2c727a30ca172434b18f5bfafd3e85e76f13bbf3b592591854"
+    },
+    {
+      "path": "third_party/tao/src/window.rs",
+      "sha256": "fbcd77518b1de55068cb0ddaa064b61b7dd19b5e305539f470753f8fd7aa0ab7"
+    }
+  ],
+  "tao_registry_checksum": "f37f381f4e048e6cdf038b5705f8cf14ad108279d46eb968140a7b291aba9400",
+  "vendor": [
+    {
+      "path": "third_party/tao/.cargo_vcs_info.json",
+      "sha256": "d01ef5455755d654c00395cf231eada266898e3783eedfaac5222622f0f4e7d3",
+      "registry_sha256": "d01ef5455755d654c00395cf231eada266898e3783eedfaac5222622f0f4e7d3"
+    },
+    {
+      "path": "third_party/tao/Cargo.lock",
+      "sha256": "fa2b667719b40b19deb79e34fc5a977d4ca582a15bdd530cc3671d6cb1d420bc",
+      "registry_sha256": "fa2b667719b40b19deb79e34fc5a977d4ca582a15bdd530cc3671d6cb1d420bc"
+    },
+    {
+      "path": "third_party/tao/Cargo.toml",
+      "sha256": "0c7532197536ab91685090097e75de8cf38b84553f07f402d2f8d5e87d5a1961",
+      "registry_sha256": "198ae9a802ced9fcf7c1325bf36d89410a05530fd78219cc953195bb058f2460"
+    },
+    {
+      "path": "third_party/tao/Cargo.toml.orig",
+      "sha256": "e37cc562ee91b29ac9efac87dee05171326cd5044252aed87fe89336b1f2b5c3",
+      "registry_sha256": "e37cc562ee91b29ac9efac87dee05171326cd5044252aed87fe89336b1f2b5c3"
+    },
+    {
+      "path": "third_party/tao/LICENSE",
+      "sha256": "6dc0e068dcf3a5bc8e054205b85b7720e1d49265bbc64bf515d2cf79197df69a",
+      "registry_sha256": "6dc0e068dcf3a5bc8e054205b85b7720e1d49265bbc64bf515d2cf79197df69a"
+    },
+    {
+      "path": "third_party/tao/LICENSE.spdx",
+      "sha256": "02b6448337b757772d90e5f31caaa0f9e6afaad2221c01771d0a3deaa4d4196c",
+      "registry_sha256": "02b6448337b757772d90e5f31caaa0f9e6afaad2221c01771d0a3deaa4d4196c"
+    },
+    {
+      "path": "third_party/tao/README.md",
+      "sha256": "4e146f3b5b6997cb709a97b417f69516f43ff0c35cbb636c55158160ecfa5090",
+      "registry_sha256": "4e146f3b5b6997cb709a97b417f69516f43ff0c35cbb636c55158160ecfa5090"
+    },
+    {
+      "path": "third_party/tao/examples/background_color.rs",
+      "sha256": "b65943969a754a1a3f808c2b216c2af2ce74a369b89230d8d7299b73e643b7ff",
+      "registry_sha256": "b65943969a754a1a3f808c2b216c2af2ce74a369b89230d8d7299b73e643b7ff"
+    },
+    {
+      "path": "third_party/tao/examples/control_flow.rs",
+      "sha256": "53c1cd3e063ffa386475097a3b8c0e14a3392250c896567987f896b9fbca5a79",
+      "registry_sha256": "53c1cd3e063ffa386475097a3b8c0e14a3392250c896567987f896b9fbca5a79"
+    },
+    {
+      "path": "third_party/tao/examples/cursor.rs",
+      "sha256": "71aa0256191d6d8a7b1cf8e8e9de4de4dfe4a3e19e6b300a51df4439f1703182",
+      "registry_sha256": "71aa0256191d6d8a7b1cf8e8e9de4de4dfe4a3e19e6b300a51df4439f1703182"
+    },
+    {
+      "path": "third_party/tao/examples/cursor_grab.rs",
+      "sha256": "a42b58e7c02aeb4dd7f3d67ebd2c221fbeeaffc04495f140c2248088446297fc",
+      "registry_sha256": "a42b58e7c02aeb4dd7f3d67ebd2c221fbeeaffc04495f140c2248088446297fc"
+    },
+    {
+      "path": "third_party/tao/examples/custom_events.rs",
+      "sha256": "f30b1245e8ef838280462cd90d76e7c0cedeffdf22cf9ad014aafa07b72e4acc",
+      "registry_sha256": "f30b1245e8ef838280462cd90d76e7c0cedeffdf22cf9ad014aafa07b72e4acc"
+    },
+    {
+      "path": "third_party/tao/examples/decorations.rs",
+      "sha256": "1e1b55be6664797e1cd26093b5f5735d4329464b6e9b047c81aa3d0decca506b",
+      "registry_sha256": "1e1b55be6664797e1cd26093b5f5735d4329464b6e9b047c81aa3d0decca506b"
+    },
+    {
+      "path": "third_party/tao/examples/drag_window.rs",
+      "sha256": "e0213c177e8412dd2945de23edc840516216b368cccd896805f6f974b7cef81f",
+      "registry_sha256": "e0213c177e8412dd2945de23edc840516216b368cccd896805f6f974b7cef81f"
+    },
+    {
+      "path": "third_party/tao/examples/fullscreen.rs",
+      "sha256": "301b43054faed677d1532618686a542ec486604ada059f43f60f56a83d77a5fb",
+      "registry_sha256": "301b43054faed677d1532618686a542ec486604ada059f43f60f56a83d77a5fb"
+    },
+    {
+      "path": "third_party/tao/examples/handling_close.rs",
+      "sha256": "1b28873ecc56136e807cac19f2d67c62e5b8df8235d2ffaa911127f833df334b",
+      "registry_sha256": "1b28873ecc56136e807cac19f2d67c62e5b8df8235d2ffaa911127f833df334b"
+    },
+    {
+      "path": "third_party/tao/examples/min_max_size.rs",
+      "sha256": "f01bd4497688e168afc5857e191d06edbb7b32ddee2fa06df2ac191405b90228",
+      "registry_sha256": "f01bd4497688e168afc5857e191d06edbb7b32ddee2fa06df2ac191405b90228"
+    },
+    {
+      "path": "third_party/tao/examples/minimize.rs",
+      "sha256": "58a4ceae8a5dbefc8b3234df344a7731df269ddbfa3142e25e37c21cc6e33a51",
+      "registry_sha256": "58a4ceae8a5dbefc8b3234df344a7731df269ddbfa3142e25e37c21cc6e33a51"
+    },
+    {
+      "path": "third_party/tao/examples/monitor_list.rs",
+      "sha256": "7491f21d3d033e0d1a7e87c64160a0f9c00c2b508c63aa2dd35ef703b7cafae9",
+      "registry_sha256": "7491f21d3d033e0d1a7e87c64160a0f9c00c2b508c63aa2dd35ef703b7cafae9"
+    },
+    {
+      "path": "third_party/tao/examples/mouse_wheel.rs",
+      "sha256": "1920b96a74d2b995ff47109af154330a44e7e11974f2bc920e3c173115a21225",
+      "registry_sha256": "1920b96a74d2b995ff47109af154330a44e7e11974f2bc920e3c173115a21225"
+    },
+    {
+      "path": "third_party/tao/examples/multithreaded.rs",
+      "sha256": "38124c3ec67bafc38c1e799c3f604b989888d5a449fedc8953bd646f710cfc07",
+      "registry_sha256": "38124c3ec67bafc38c1e799c3f604b989888d5a449fedc8953bd646f710cfc07"
+    },
+    {
+      "path": "third_party/tao/examples/multiwindow.rs",
+      "sha256": "044d05dd2babb1bf8b4897ae9c34422cb5580b0e74bfb6ce10e350ce24a00ab4",
+      "registry_sha256": "044d05dd2babb1bf8b4897ae9c34422cb5580b0e74bfb6ce10e350ce24a00ab4"
+    },
+    {
+      "path": "third_party/tao/examples/overlay.rs",
+      "sha256": "3fa3359e19868c67539cbbb1e64e1edb64a65cce38ff145f984fbd63c9df07c4",
+      "registry_sha256": "3fa3359e19868c67539cbbb1e64e1edb64a65cce38ff145f984fbd63c9df07c4"
+    },
+    {
+      "path": "third_party/tao/examples/parentwindow.rs",
+      "sha256": "8f09ef706b688c5aff7b0c02312470037bfb0a608fea9d6c11c13affaf47809a",
+      "registry_sha256": "8f09ef706b688c5aff7b0c02312470037bfb0a608fea9d6c11c13affaf47809a"
+    },
+    {
+      "path": "third_party/tao/examples/progress_bar.rs",
+      "sha256": "d1b3b927b3394346c868e1d8d52456a02b1f183a2f223808da6d28505d8c3cac",
+      "registry_sha256": "d1b3b927b3394346c868e1d8d52456a02b1f183a2f223808da6d28505d8c3cac"
+    },
+    {
+      "path": "third_party/tao/examples/reopen_event.rs",
+      "sha256": "be071c4cfb5a1a1137c9c488fd490a7b0154323a91c3916a193e14b7c0fc6ace",
+      "registry_sha256": "be071c4cfb5a1a1137c9c488fd490a7b0154323a91c3916a193e14b7c0fc6ace"
+    },
+    {
+      "path": "third_party/tao/examples/request_redraw.rs",
+      "sha256": "028f97f519150c8941d3a883e7c8e6f090bfd347cfb64393df61234cab40118e",
+      "registry_sha256": "028f97f519150c8941d3a883e7c8e6f090bfd347cfb64393df61234cab40118e"
+    },
+    {
+      "path": "third_party/tao/examples/request_redraw_threaded.rs",
+      "sha256": "f850e57a8a9af9896dc8c51146721386e0e4fc9785d9837d5f4090fa55b7593d",
+      "registry_sha256": "f850e57a8a9af9896dc8c51146721386e0e4fc9785d9837d5f4090fa55b7593d"
+    },
+    {
+      "path": "third_party/tao/examples/resizable.rs",
+      "sha256": "ef07f975bf2472a7f37dbdb6b08c16f6873bc5089c13e1ae3310365522faadc4",
+      "registry_sha256": "ef07f975bf2472a7f37dbdb6b08c16f6873bc5089c13e1ae3310365522faadc4"
+    },
+    {
+      "path": "third_party/tao/examples/set_ime_position.rs",
+      "sha256": "573ebc222209cfc2b2298fcdef651e47c378652636cee98b111d780e648e4530",
+      "registry_sha256": "573ebc222209cfc2b2298fcdef651e47c378652636cee98b111d780e648e4530"
+    },
+    {
+      "path": "third_party/tao/examples/theme.rs",
+      "sha256": "985f7890f4a745011412ac080fc321d210145206add3564f5c62de88afba562d",
+      "registry_sha256": "985f7890f4a745011412ac080fc321d210145206add3564f5c62de88afba562d"
+    },
+    {
+      "path": "third_party/tao/examples/timer.rs",
+      "sha256": "a1f13e358a7283a7b8062e8840c23e1e8ace574712ea2d7f3099e2bd80577ec8",
+      "registry_sha256": "a1f13e358a7283a7b8062e8840c23e1e8ace574712ea2d7f3099e2bd80577ec8"
+    },
+    {
+      "path": "third_party/tao/examples/transparent.rs",
+      "sha256": "4089ac549dd7b7a9b86b0c523d098e0df49d5a63c08739bf6d289c63c3cfa552",
+      "registry_sha256": "4089ac549dd7b7a9b86b0c523d098e0df49d5a63c08739bf6d289c63c3cfa552"
+    },
+    {
+      "path": "third_party/tao/examples/video_modes.rs",
+      "sha256": "4fcd9044f87a7cffad79c2164f5170150566fb8822739b7dbb8b8eb1a3676cc2",
+      "registry_sha256": "4fcd9044f87a7cffad79c2164f5170150566fb8822739b7dbb8b8eb1a3676cc2"
+    },
+    {
+      "path": "third_party/tao/examples/window.rs",
+      "sha256": "0d96bb2f48b2bf65074e988c6cf8d43c5b95d88d651d7545a090bbb466ec3fb8",
+      "registry_sha256": "0d96bb2f48b2bf65074e988c6cf8d43c5b95d88d651d7545a090bbb466ec3fb8"
+    },
+    {
+      "path": "third_party/tao/examples/window_debug.rs",
+      "sha256": "7e3d6314ffd3e69967cc2b5a46e36aeb88e53aae02e55f42ccdc3dd9e6429201",
+      "registry_sha256": "7e3d6314ffd3e69967cc2b5a46e36aeb88e53aae02e55f42ccdc3dd9e6429201"
+    },
+    {
+      "path": "third_party/tao/examples/window_icon.rs",
+      "sha256": "19587bfe60a0589c09c30d694ffd439668fc1444c7370334b2788d6a4b731321",
+      "registry_sha256": "19587bfe60a0589c09c30d694ffd439668fc1444c7370334b2788d6a4b731321"
+    },
+    {
+      "path": "third_party/tao/examples/window_run_return.rs",
+      "sha256": "6c2590afafbabf64da2a2af31e3e91e54de53330b670a2421f738d7edf839493",
+      "registry_sha256": "6c2590afafbabf64da2a2af31e3e91e54de53330b670a2421f738d7edf839493"
+    },
+    {
+      "path": "third_party/tao/src/error.rs",
+      "sha256": "9b25813361acabf8db7244bb49a94c39c0cb8dd59162a82a3e490d4069bdedb5",
+      "registry_sha256": "9b25813361acabf8db7244bb49a94c39c0cb8dd59162a82a3e490d4069bdedb5"
+    },
+    {
+      "path": "third_party/tao/src/event.rs",
+      "sha256": "13a2ab465ba0a0a61b526182526d6433c893c990fba81bc0fc2d00f7a10e4bf0",
+      "registry_sha256": "c4e9f54b06dd5e67a2bbc0f2a1c6304e8a6e8bd0ded7c705c39216a2f6c25911"
+    },
+    {
+      "path": "third_party/tao/src/event_loop.rs",
+      "sha256": "ee258ba899e5b15746f2354c84cc62bc084e581e448eaba800af9a426cf45313",
+      "registry_sha256": "ee258ba899e5b15746f2354c84cc62bc084e581e448eaba800af9a426cf45313"
+    },
+    {
+      "path": "third_party/tao/src/icon.rs",
+      "sha256": "6f5295f2172fa8ff65907a6aa64da476848ca73d70c7737f6c45c4c0f9c54932",
+      "registry_sha256": "6f5295f2172fa8ff65907a6aa64da476848ca73d70c7737f6c45c4c0f9c54932"
+    },
+    {
+      "path": "third_party/tao/src/keyboard.rs",
+      "sha256": "15d617134e6bf5baf499c7e68bb29d5c268649ade44976bc3a22cb50580fc584",
+      "registry_sha256": "15d617134e6bf5baf499c7e68bb29d5c268649ade44976bc3a22cb50580fc584"
+    },
+    {
+      "path": "third_party/tao/src/lib.rs",
+      "sha256": "99507f565ebce2fa11a5cff08005d762929883fc14f24f7b9b5ae4bcf3f50252",
+      "registry_sha256": "f2a0b9d671520164a5b5d0f1f4473ec5d651cccd42ca6d9c2cd5d50ad8f9374f"
+    },
+    {
+      "path": "third_party/tao/src/monitor.rs",
+      "sha256": "fd1e62c8ad8b559836e585c9d1c715f79d645e3ad81960fa479c0579e2b1740f",
+      "registry_sha256": "fd1e62c8ad8b559836e585c9d1c715f79d645e3ad81960fa479c0579e2b1740f"
+    },
+    {
+      "path": "third_party/tao/src/platform/android.rs",
+      "sha256": "5aefb7ab80d5a8e66c89aac44990fbb8ced82703146af0b2813e6f512e115454",
+      "registry_sha256": "5aefb7ab80d5a8e66c89aac44990fbb8ced82703146af0b2813e6f512e115454"
+    },
+    {
+      "path": "third_party/tao/src/platform/ios.rs",
+      "sha256": "b71729db5e5414e9b48cb299b6b9e65b7704677b04ca3378468b8aa4b328c065",
+      "registry_sha256": "b71729db5e5414e9b48cb299b6b9e65b7704677b04ca3378468b8aa4b328c065"
+    },
+    {
+      "path": "third_party/tao/src/platform/linux.rs",
+      "sha256": "b9568e3b09217b00e1f5d2a01318e6f0b0da1a41d1c34aac94adba7ef1a61e95",
+      "registry_sha256": "b9568e3b09217b00e1f5d2a01318e6f0b0da1a41d1c34aac94adba7ef1a61e95"
+    },
+    {
+      "path": "third_party/tao/src/platform/macos.rs",
+      "sha256": "d1993f47ff4958ff98ba35a8560d7b0230e0ee527e8d01d54f28f3cb3b6c8c42",
+      "registry_sha256": "d1993f47ff4958ff98ba35a8560d7b0230e0ee527e8d01d54f28f3cb3b6c8c42"
+    },
+    {
+      "path": "third_party/tao/src/platform/mod.rs",
+      "sha256": "95e29649dbd5cd6b78645380452e5521579c68b4bd51214dbfb0d09c754e617f",
+      "registry_sha256": "95e29649dbd5cd6b78645380452e5521579c68b4bd51214dbfb0d09c754e617f"
+    },
+    {
+      "path": "third_party/tao/src/platform/run_return.rs",
+      "sha256": "295b76e76b34211442248d1d610bdcadecc08b7837df4fd5927afaba97293d91",
+      "registry_sha256": "295b76e76b34211442248d1d610bdcadecc08b7837df4fd5927afaba97293d91"
+    },
+    {
+      "path": "third_party/tao/src/platform/unix.rs",
+      "sha256": "019fa7e1b4c891c442545f32921e8c66602cd27712c54329bc9a6608482e4be5",
+      "registry_sha256": "019fa7e1b4c891c442545f32921e8c66602cd27712c54329bc9a6608482e4be5"
+    },
+    {
+      "path": "third_party/tao/src/platform/windows.rs",
+      "sha256": "13447d0e84dfb76d472cba917975c8c31c8d2bf24f08e3ab98ac27e8906d5f03",
+      "registry_sha256": "13447d0e84dfb76d472cba917975c8c31c8d2bf24f08e3ab98ac27e8906d5f03"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/android/mod.rs",
+      "sha256": "aee14af3e0b166f206ca3929503a38425c183ea33e5d88c778395c6d2367c1d5",
+      "registry_sha256": "2f8476da8c56005385374a70d3c743ce8c185156b6b6e7913d3db6c612615943"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/android/ndk_glue.rs",
+      "sha256": "0235cfe6f6c3f9d874d09c7b0093819b6f3589ebce8fd5acd2b166f4aede3da1",
+      "registry_sha256": "0235cfe6f6c3f9d874d09c7b0093819b6f3589ebce8fd5acd2b166f4aede3da1"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/ios/app_state.rs",
+      "sha256": "4864002c8c8d50ed54990d4c82e153ace2f9a351b6a3ba0b5c7fd9f1704ad2ba",
+      "registry_sha256": "4864002c8c8d50ed54990d4c82e153ace2f9a351b6a3ba0b5c7fd9f1704ad2ba"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/ios/badge.rs",
+      "sha256": "958253e8ddce825dd2ff8edb7a69176818997e60437e23ced8f1abb91b6095d3",
+      "registry_sha256": "958253e8ddce825dd2ff8edb7a69176818997e60437e23ced8f1abb91b6095d3"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/ios/event_loop.rs",
+      "sha256": "9982aa205ec0ceb338e13885a2bbecf3d6a41618be02ae469bd7bde0374051e1",
+      "registry_sha256": "9982aa205ec0ceb338e13885a2bbecf3d6a41618be02ae469bd7bde0374051e1"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/ios/ffi.rs",
+      "sha256": "487ccc0de6f0e0d24fd4e71b170fb4e9bbe54321eca24884fba5d70d20f78bd6",
+      "registry_sha256": "487ccc0de6f0e0d24fd4e71b170fb4e9bbe54321eca24884fba5d70d20f78bd6"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/ios/keycode.rs",
+      "sha256": "ea44358c77ec7ce425fd29f0568f564bb9d142af75d562ebced08c6a67da19af",
+      "registry_sha256": "ea44358c77ec7ce425fd29f0568f564bb9d142af75d562ebced08c6a67da19af"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/ios/mod.rs",
+      "sha256": "ccad41ab7e7f70bbcc69da70c7c6738da4d6fec2a29b98a64d29bb27a6ff5a78",
+      "registry_sha256": "ccad41ab7e7f70bbcc69da70c7c6738da4d6fec2a29b98a64d29bb27a6ff5a78"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/ios/monitor.rs",
+      "sha256": "cb15ddca19b76861bf88627ffc24b44c05c19583bb84c8f297cf3c47be288092",
+      "registry_sha256": "cb15ddca19b76861bf88627ffc24b44c05c19583bb84c8f297cf3c47be288092"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/ios/scene.rs",
+      "sha256": "500e62b379dfed5941cd2266e91ebe97e61da875671757690588d44d06f2cf81",
+      "registry_sha256": "500e62b379dfed5941cd2266e91ebe97e61da875671757690588d44d06f2cf81"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/ios/view.rs",
+      "sha256": "047356f7d5b9464e430940b2a4042bee764374759ce517be6d8dc8cd7fbea190",
+      "registry_sha256": "047356f7d5b9464e430940b2a4042bee764374759ce517be6d8dc8cd7fbea190"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/ios/window.rs",
+      "sha256": "6f5e70b1515a836eeafe089c380ae225b515e7e51336c68d2dc043e2ae5416e5",
+      "registry_sha256": "6f5e70b1515a836eeafe089c380ae225b515e7e51336c68d2dc043e2ae5416e5"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/linux/device.rs",
+      "sha256": "28dcda6b173c92eb3673bd64b6a2aac38b78224c34cd7480a28a9258992a1097",
+      "registry_sha256": "28dcda6b173c92eb3673bd64b6a2aac38b78224c34cd7480a28a9258992a1097"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/linux/event_loop.rs",
+      "sha256": "59850637e6bcf1c8ce1ef121e92d7097d5ab882bdc71c00bfe2f1bfbb433000e",
+      "registry_sha256": "7c06809b11dc8fa5daa676766773e782a02d17fe769c5fface1907f354604722"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/linux/icon.rs",
+      "sha256": "543205aae66b9321b2f375f4516c5f6996b5a1ab875549bbb667d24be8eda0c8",
+      "registry_sha256": "543205aae66b9321b2f375f4516c5f6996b5a1ab875549bbb667d24be8eda0c8"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/linux/keyboard.rs",
+      "sha256": "57ef23a723171b23cc827d9a1132a7b46a1240077870ae4c44b7a8b33f9ca342",
+      "registry_sha256": "d6dd09d3fd3993aab5e9172dfe8bdde78e7771dbeabe31020ac55eb238621b53"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/linux/keycode.rs",
+      "sha256": "4da52c38ac623aef850d55a321a5890a7b3ae3211abd22b4f15b6b5454653041",
+      "registry_sha256": "4da52c38ac623aef850d55a321a5890a7b3ae3211abd22b4f15b6b5454653041"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/linux/mod.rs",
+      "sha256": "0d20e775a0cc22be426ce7b7fd545d5ec69e0606173583a9ce1f336edce54c8c",
+      "registry_sha256": "151a497c996656eed00a12fda3c64973897edc2f78257fb4c5561f4ce9b19d9c"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/linux/monitor.rs",
+      "sha256": "e763bd0aa9e2168c2a3d93f2916fead57f2b6f4bddf965e10fd109037e1c4ce8",
+      "registry_sha256": "e763bd0aa9e2168c2a3d93f2916fead57f2b6f4bddf965e10fd109037e1c4ce8"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/linux/portal.rs",
+      "sha256": "06d04bf56d22327874a8b10bd93d5b18ffda1560f5605c153e542df96f7d14cc",
+      "registry_sha256": "06d04bf56d22327874a8b10bd93d5b18ffda1560f5605c153e542df96f7d14cc"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/linux/taskbar.rs",
+      "sha256": "26ce8560338b6ee13020cd7a130ace367f7c3e1cf49cf27903c746012651c1a6",
+      "registry_sha256": "26ce8560338b6ee13020cd7a130ace367f7c3e1cf49cf27903c746012651c1a6"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/linux/text_input.rs",
+      "sha256": "b8854edab71ce2b707dfbf7dcfba171e062721c3ab76c847d5c6457704be7074",
+      "registry_sha256": null
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/linux/util.rs",
+      "sha256": "3deb2f4f4883b4698415f553a3a90116d404739960d25c89dfcc56ae096164e8",
+      "registry_sha256": "3deb2f4f4883b4698415f553a3a90116d404739960d25c89dfcc56ae096164e8"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/linux/window.rs",
+      "sha256": "9d9c146744ddff7ba902689ce227f042ca460a2751432808c3e4b38d55bf393d",
+      "registry_sha256": "0532977ea20321f19e205f7c58d51077995b4f52878ca4979c5865c517625092"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/linux/x11/ffi.rs",
+      "sha256": "629a5aaf4973a8b7295623582b8c2c21ee1b13b8b5454f4e3c7a7de1be115f76",
+      "registry_sha256": "629a5aaf4973a8b7295623582b8c2c21ee1b13b8b5454f4e3c7a7de1be115f76"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/linux/x11/mod.rs",
+      "sha256": "8f576518fe12bb21c7ac3db0e75b969babc1035288bfd618cc85d354b362f964",
+      "registry_sha256": "8f576518fe12bb21c7ac3db0e75b969babc1035288bfd618cc85d354b362f964"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/linux/x11/xdisplay.rs",
+      "sha256": "fb64d39a851557b5f6a6e3e54c510473d62d13d3afd18c7be4d6f592824e9591",
+      "registry_sha256": "fb64d39a851557b5f6a6e3e54c510473d62d13d3afd18c7be4d6f592824e9591"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/macos/app.rs",
+      "sha256": "d0c1cc73e8b53a204913a2b2f03547b0c22b43a36fc20984b8418fd0af5ede10",
+      "registry_sha256": "d0c1cc73e8b53a204913a2b2f03547b0c22b43a36fc20984b8418fd0af5ede10"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/macos/app_delegate.rs",
+      "sha256": "86b98d1ef1b6bd7d7e251bda641a9c94234f80c5608ffb30695c30b9b9a8783d",
+      "registry_sha256": "86b98d1ef1b6bd7d7e251bda641a9c94234f80c5608ffb30695c30b9b9a8783d"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/macos/app_state.rs",
+      "sha256": "85bc2b8a1a0a76aa070c04a3957c0a05aa73ff89fe95577c7e2cb581931b7cad",
+      "registry_sha256": "85bc2b8a1a0a76aa070c04a3957c0a05aa73ff89fe95577c7e2cb581931b7cad"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/macos/badge.rs",
+      "sha256": "41943ee395e667104594d1e8c79515689e938a0b1dd0abdb7c4a8fe0d2dfc9ce",
+      "registry_sha256": "41943ee395e667104594d1e8c79515689e938a0b1dd0abdb7c4a8fe0d2dfc9ce"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/macos/dock.rs",
+      "sha256": "fb1a30c5e891465ecced4e1f78856e4e6b3b6a283032a48d378525242a4f5bea",
+      "registry_sha256": "fb1a30c5e891465ecced4e1f78856e4e6b3b6a283032a48d378525242a4f5bea"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/macos/event.rs",
+      "sha256": "16c65224f2ecad26e2af2903678fcae9b1da3bfd99b68e825b200dd5037a81b5",
+      "registry_sha256": "a9ab6410c401710201574b55cff6ec27c19389e5b5bff2d61470c9b467209a01"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/macos/event_loop.rs",
+      "sha256": "53a6a0b315527a233cf02160e2eda94f1158f95481c1119367b159cfddea05d6",
+      "registry_sha256": "53a6a0b315527a233cf02160e2eda94f1158f95481c1119367b159cfddea05d6"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/macos/ffi.rs",
+      "sha256": "6e85ece908839c2c9d58077ec32e2d7835f1cffad200969f871f05a0aacaae9c",
+      "registry_sha256": "6e85ece908839c2c9d58077ec32e2d7835f1cffad200969f871f05a0aacaae9c"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/macos/icon.rs",
+      "sha256": "8f5a7f00f96462683b4378702a61d78a30814d538a3111bad24ef4c556f35627",
+      "registry_sha256": "8f5a7f00f96462683b4378702a61d78a30814d538a3111bad24ef4c556f35627"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/macos/keycode.rs",
+      "sha256": "f4ba5a8948ab839eec2515586c48c41c9acc967f1a65d8ed7680ef231d0c1b63",
+      "registry_sha256": "f4ba5a8948ab839eec2515586c48c41c9acc967f1a65d8ed7680ef231d0c1b63"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/macos/mod.rs",
+      "sha256": "eb042c6d1b71c743cbf35519a823d41085e4aaef0da627834d60fec13169209f",
+      "registry_sha256": "a60a9bcf84c7bd51f744450674702e6bb88b3e17fc744751b4c4a202544423f8"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/macos/monitor.rs",
+      "sha256": "3ef62d6dc6902798fe31b8d57e07bfdfc0a530cdf9a321460e84e4dc62427963",
+      "registry_sha256": "3ef62d6dc6902798fe31b8d57e07bfdfc0a530cdf9a321460e84e4dc62427963"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/macos/observer.rs",
+      "sha256": "4d801f48b3badc805770b9cfe63114d4b03b8803d3b1f35eaf1538564516e52a",
+      "registry_sha256": "4d801f48b3badc805770b9cfe63114d4b03b8803d3b1f35eaf1538564516e52a"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/macos/progress_bar.rs",
+      "sha256": "baa49c76ca0b0914a5eadfab0b3b352f0f073d3daa6b1c933fa1d02a57470ed1",
+      "registry_sha256": "baa49c76ca0b0914a5eadfab0b3b352f0f073d3daa6b1c933fa1d02a57470ed1"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/macos/text_input.rs",
+      "sha256": "6671bc9c25b30f2ebbee7a746a5745eab9802879b59f709b431df4af61bbebb2",
+      "registry_sha256": null
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/macos/util/async.rs",
+      "sha256": "f53f5c3a4ec989fbe4126a38553328d3c03286ab9f29376b7854fb6feafdc5c8",
+      "registry_sha256": "f53f5c3a4ec989fbe4126a38553328d3c03286ab9f29376b7854fb6feafdc5c8"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/macos/util/cursor.rs",
+      "sha256": "481fe6a34e1547449d8ee7b1a8a1cd93c304f15c2b62f6a6a71aba6d995b903d",
+      "registry_sha256": "481fe6a34e1547449d8ee7b1a8a1cd93c304f15c2b62f6a6a71aba6d995b903d"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/macos/util/mod.rs",
+      "sha256": "e8df577333134debdc0731a5198f5876ffb41a70df75b10f1f732874daa8cc1a",
+      "registry_sha256": "e8df577333134debdc0731a5198f5876ffb41a70df75b10f1f732874daa8cc1a"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/macos/view.rs",
+      "sha256": "577461d0ac07740aefe0ff32c29afdf959f6e63543a3aff5524f79dbf71f093f",
+      "registry_sha256": "d88b0a8b10e8d1fbdced47ca193bfed1536dc51655b0621a75540273cf759fcd"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/macos/window.rs",
+      "sha256": "ee33cbdbbac26c994f979a78a22e3f2d1201d6c18e0a08d8dcda7559d701eb5d",
+      "registry_sha256": "c25dee37384af2ea72667f44e156bbea8aebed0cec12d2b064f3c84f38ce93ff"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/macos/window_delegate.rs",
+      "sha256": "f8112c9e5c3dba0404bddd29c700f00ad393e797b36954bf44fad930b4e074b0",
+      "registry_sha256": "f8112c9e5c3dba0404bddd29c700f00ad393e797b36954bf44fad930b4e074b0"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/mod.rs",
+      "sha256": "50486214dc0ed94d7b3e9e9b13016af8cdae8e2069f081081b2926602a99a81e",
+      "registry_sha256": "50486214dc0ed94d7b3e9e9b13016af8cdae8e2069f081081b2926602a99a81e"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/windows/dark_mode.rs",
+      "sha256": "f8dc0df5cec98e4a1bfc6debe75e639b555bb679007e53ec268eacaf5c19885b",
+      "registry_sha256": "f8dc0df5cec98e4a1bfc6debe75e639b555bb679007e53ec268eacaf5c19885b"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/windows/dpi.rs",
+      "sha256": "506105d9b1b67f347947712033d5aaccfc5f306009ecacdca395f3f592130b92",
+      "registry_sha256": "506105d9b1b67f347947712033d5aaccfc5f306009ecacdca395f3f592130b92"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/windows/drop_handler.rs",
+      "sha256": "b751798398859badaace1bda5820ae40b946d60f9c93c51c67cef525cb389395",
+      "registry_sha256": "b751798398859badaace1bda5820ae40b946d60f9c93c51c67cef525cb389395"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/windows/event.rs",
+      "sha256": "5e658dbc39645a312c3939a2ecf649ed3abcd9e222ea5bad6bbbcad38826e664",
+      "registry_sha256": "5e658dbc39645a312c3939a2ecf649ed3abcd9e222ea5bad6bbbcad38826e664"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/windows/event_loop/runner.rs",
+      "sha256": "03851663144985dd22b249ff3fcc58a6582ae19620dd665ac0b7325c979f8ffc",
+      "registry_sha256": "03851663144985dd22b249ff3fcc58a6582ae19620dd665ac0b7325c979f8ffc"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/windows/event_loop.rs",
+      "sha256": "198b88217fcfe0faaaabbc33017028d536aace1a78c5fa261f6eb5126cd01757",
+      "registry_sha256": "6b32446a660a21a88b1b9ff910327bdf597326830d0bb7a15dd3433b701fe99f"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/windows/icon.rs",
+      "sha256": "f91b8e79954ab25bae80d16cc0fc20e0bd3dc2d84c9a1cc5e7fb5e78578724e4",
+      "registry_sha256": "f91b8e79954ab25bae80d16cc0fc20e0bd3dc2d84c9a1cc5e7fb5e78578724e4"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/windows/ime.rs",
+      "sha256": "ddec49613d632f92ecade81ce0d5d4d9f2882bf04c295d910894bde818b3254b",
+      "registry_sha256": "ddec49613d632f92ecade81ce0d5d4d9f2882bf04c295d910894bde818b3254b"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/windows/keyboard.rs",
+      "sha256": "563e1bb6034209e49ff8fa1c30cdf755be7699ed99d942c85f514dbf7f0d4297",
+      "registry_sha256": "d938ba8f899fcf5d7af2c5ff92dcf578f4663f522ebaa3906844971fa368ed8a"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/windows/keyboard_layout.rs",
+      "sha256": "ed705d28fcb76a1f499c03cf4673085e8f5e3167e15c130d59bfe697d8a99b9f",
+      "registry_sha256": "ed705d28fcb76a1f499c03cf4673085e8f5e3167e15c130d59bfe697d8a99b9f"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/windows/keycode.rs",
+      "sha256": "addf12a3ecc7f8075b18cadbf1f82823170d8567a4a71555ac9c6a5bc626c172",
+      "registry_sha256": "addf12a3ecc7f8075b18cadbf1f82823170d8567a4a71555ac9c6a5bc626c172"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/windows/mod.rs",
+      "sha256": "049c0ef56617f217e27387d7085c03301e94e033a14e5db5cc8f36bf144c220b",
+      "registry_sha256": "3040f04ed6e832b1217f589864a0eae24d2143f3344c94a141a84cec7c67c431"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/windows/monitor.rs",
+      "sha256": "b96a3f8db1c2ac6397be535831c6c4ca9341505370176b4c90dc872930f65051",
+      "registry_sha256": "b96a3f8db1c2ac6397be535831c6c4ca9341505370176b4c90dc872930f65051"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/windows/raw_input.rs",
+      "sha256": "3fbd6ac35b1f068d1da2a30759a797d30af10e61d1ba7d1236d7afc75840466d",
+      "registry_sha256": "3fbd6ac35b1f068d1da2a30759a797d30af10e61d1ba7d1236d7afc75840466d"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/windows/text_input.rs",
+      "sha256": "d587dffc4119322333de682dcfe99c62a59ec4ed382aa45eadc81efee1a36278",
+      "registry_sha256": null
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/windows/util.rs",
+      "sha256": "d781786571f8ad7de9fc8e57b602f5373dfcf9965ee6221d3cc4f5e2aa58553f",
+      "registry_sha256": "d781786571f8ad7de9fc8e57b602f5373dfcf9965ee6221d3cc4f5e2aa58553f"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/windows/window.rs",
+      "sha256": "4ee5217b8bcac5565a15d28b015049a2abedafeec4d6df83ea4d62eb35a7cfc9",
+      "registry_sha256": "64daee6907e5e401165b39fc24254b63c25c04482a1cf6ea72cdeac4d65c5177"
+    },
+    {
+      "path": "third_party/tao/src/platform_impl/windows/window_state.rs",
+      "sha256": "05339c583ed9432892878937d9b78a7cf6bda95ea0a11d4359944841ae4426db",
+      "registry_sha256": "ae8ef28f97f03e093fab36525f808d92a65ad59a4e889e7e55555c409aabcc4d"
+    },
+    {
+      "path": "third_party/tao/src/text_input.rs",
+      "sha256": "fe9be03d71891d2c727a30ca172434b18f5bfafd3e85e76f13bbf3b592591854",
+      "registry_sha256": null
+    },
+    {
+      "path": "third_party/tao/src/window.rs",
+      "sha256": "fbcd77518b1de55068cb0ddaa064b61b7dd19b5e305539f470753f8fd7aa0ab7",
+      "registry_sha256": "6b3c2ffff49fe87ddbf9919d1558082b32fb18d166cd84631dd2c7a170f590ee"
+    }
+  ],
+  "changes_from_001": [
+    "crates/incant_game_player/src/window/ui_input.rs",
+    "crates/incant_game_player/src/window/ui_input/tests.rs",
+    "third_party/tao/src/platform_impl/macos/text_input.rs",
+    "third_party/tao/src/platform_impl/windows/text_input.rs",
+    "third_party/tao/src/text_input.rs"
+  ]
+}

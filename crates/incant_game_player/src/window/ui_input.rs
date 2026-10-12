@@ -29,6 +29,7 @@ pub struct UiInput {
     left: Left,
     pointer_ready: bool,
     surface_retry: bool,
+    ime: super::ime::Ime,
 }
 impl UiInput {
     pub fn new() -> Self {
@@ -40,7 +41,77 @@ impl UiInput {
             left: Left::Up,
             pointer_ready: true,
             surface_retry: false,
+            ime: Default::default(),
         }
+    }
+    pub fn text_session(
+        &mut self,
+        ui: Option<&UiRuntime>,
+        active: bool,
+    ) -> Result<Option<(u64, bool)>, Error> {
+        self.ime.synchronize(ui, active)
+    }
+    pub fn stale_text_events(&self) -> u64 {
+        self.ime.stale()
+    }
+    fn native_text(
+        &mut self,
+        ui: Option<&UiRuntime>,
+        serial: u64,
+        event: &tao::text_input::TextInputEvent,
+    ) -> Result<(), Error> {
+        use tao::text_input::TextInputEvent as Native;
+        // Retired native clients cannot poison the current owner even with an
+        // unrepresentable payload. Resolve authority before scanning or copying.
+        let Some(target) = self.ime.target(ui, serial) else {
+            return Ok(());
+        };
+        let (text, cursor) = match event {
+            Native::Preedit { text, cursor } => (Some(text), cursor.as_ref()),
+            Native::Commit(text) => (Some(text), None),
+            Native::Cancel => (None, None),
+            Native::Refused(error) => return Err(Error::Ime(*error)),
+        };
+        if let Some(text) = text {
+            if text.len() > incant_types::MAX_TEXT_BYTES {
+                return Err(Error::UiCapacity);
+            }
+            if text.chars().any(char::is_control) {
+                return Err(Error::Ime(tao::text_input::TextInputError::Unsupported));
+            }
+            if cursor.is_some_and(|r| {
+                r.start > r.end
+                    || r.end > text.len()
+                    || !text.is_char_boundary(r.start)
+                    || !text.is_char_boundary(r.end)
+            }) {
+                return Err(Error::Ime(tao::text_input::TextInputError::Range));
+            }
+        }
+        let bytes = text.map_or(0, |s| s.len());
+        // Reserve the complete receipt before cloning any native payload.
+        if self.receipts.len() == MAX_UI_EVENTS
+            || self
+                .bytes
+                .checked_add(bytes)
+                .is_none_or(|n| n > MAX_UI_PACKET_BYTES)
+        {
+            return Err(Error::UiCapacity);
+        }
+        let event = match event {
+            Native::Preedit { text, cursor } => UiEvent::Preedit {
+                target,
+                text: text.clone(),
+                cursor: cursor.clone(),
+            },
+            Native::Commit(text) => UiEvent::Commit {
+                target,
+                text: text.clone(),
+            },
+            Native::Cancel => UiEvent::Cancel { target },
+            Native::Refused(_) => unreachable!("handled refusal"),
+        };
+        self.push(event, bytes)
     }
     pub fn receipts(&self) -> &[UiEvent] {
         &self.receipts
@@ -288,6 +359,17 @@ impl UiInput {
             text.len(),
         )
     }
+    fn consumed_key(
+        &self,
+        physical: &mut PendingInput,
+        code: tao::keyboard::KeyCode,
+        repeat: bool,
+    ) -> Result<(), Error> {
+        if !repeat && let Some(code) = super::input::key(code) {
+            physical.push(InputEvent::Key { code, down: false })?;
+        }
+        Ok(())
+    }
     pub fn window(
         &mut self,
         ui: Option<&UiRuntime>,
@@ -315,15 +397,25 @@ impl UiInput {
             }
             // Tao macOS/GTK send ordinary and IME text here. Their KeyboardInput
             // text overlaps this stream and must not be inserted a second time.
+            WindowEvent::TextInput { session, event } => self.native_text(ui, *session, event),
+            WindowEvent::ReceivedImeText(_) if self.ime.managed() => Ok(()),
             WindowEvent::ReceivedImeText(text) => {
                 self.commit(ui.and_then(UiRuntime::text_focus), text)
             }
             WindowEvent::KeyboardInput { event: key, .. } => {
+                if key.text_input_session.is_some() && key.state == ElementState::Pressed {
+                    // A native IME-consumed Enter/arrows/space cannot also submit,
+                    // navigate or start gameplay. Neutral release also clears any
+                    // press that was accepted before text ownership changed.
+                    self.consumed_key(physical, key.physical_key, key.repeat)?;
+                    return Ok(());
+                }
                 physical.window(event, scale)?;
                 // Windows ordinary WM_CHAR text is attached to KeyEvent; its
                 // ReceivedImeText is the separate completed IME composition.
                 #[cfg(target_os = "windows")]
-                if key.state == ElementState::Pressed
+                if !self.ime.managed()
+                    && key.state == ElementState::Pressed
                     && let Some(text) = key.text
                 {
                     self.commit(ui.and_then(UiRuntime::text_focus), text)?;
