@@ -36,7 +36,8 @@ Current-main integration passes 418 actual-host tests, Clippy, three development
 processes and scoped target/dependency/generated checks. Three fresh ordinary
 source/cache/build/map-deleted players each match 252 public vector assertions,
 4,140 full scalar observations and exact development PCM/logs. Fifteen precise
-refusals pass. Final publisher review and fast gate remain pending.
+refusals pass. Final independent current-main review is accepted; publication
+awaits its exact-head fast check.
 Compound-pose SDK parity, static-module checkpoints, appearance and device gates
 remain open. [Integrated evidence](docs/spikes/native-wasm-ik-main152.md).
 
@@ -424,7 +425,7 @@ Main #152 includes connected authored two-bone IK and its ordinary checkpoint
 continuation, authored nested/2D animation trees with complete Wasm poses,
 offline audio/UI checkpoints, public physics queries and numeric root-motion.
 The native IK Rust/Wasm API now passes current-main actual-host and fresh ordinary
-package checks; its final review and fast-gated publication remain pending.
+package checks; its final review is accepted and fast-gated publication remains pending.
 Main149 repairs text-client lifetime/pointer focus; main150 has the earlier
 qualified UI reference and caret correction. Claude0058's native follow-up keeps
 its older-build, dead-key and excluded-process limitations.
