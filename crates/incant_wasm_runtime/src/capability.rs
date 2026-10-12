@@ -25,6 +25,14 @@ const _: () = {
 /// Trusted host adapter operation; all integer arguments are guest offsets/indices.
 #[derive(Clone, Copy)]
 pub enum Call {
+    Steer {
+        ptr: i32,
+        len: i32,
+    },
+    ReadSteering {
+        ptr: i32,
+        capacity: i32,
+    },
     AnimationLenV2,
     ReadAnimationsV2 {
         ptr: i32,
@@ -126,6 +134,8 @@ pub struct Capability {
     logs: crate::NativeLogs,
     tick_logs: crate::logging::TickLogs,
     localization: Option<crate::localization::State>,
+    steering: Option<crate::steering::State>,
+    query_units: usize,
 }
 impl Capability {
     pub fn is_failed(&self) -> bool {
@@ -191,6 +201,8 @@ impl Capability {
         self.localization = Some(crate::localization::State::new(
             world.localization().clone(),
         ));
+        self.steering = Some(crate::steering::State::new(dt));
+        self.query_units = 0;
         self.active = true;
         Ok(self.epoch)
     }
@@ -222,10 +234,15 @@ impl Capability {
         self.commands.clear();
         self.tick_logs.clear();
         self.localization = None;
+        self.steering = None;
     }
     pub fn finish(&mut self, world: &mut NativeWorld) -> Result<(), Error> {
         if !self.active {
             return Err(Error::Abi("inactive ECS transaction"));
+        }
+        if self.steering.as_ref().is_some_and(|s| s.rejected) {
+            self.abort();
+            return Err(Error::Abi("rejected steering transaction"));
         }
         if self.animation_rejected {
             self.abort();
@@ -243,6 +260,7 @@ impl Capability {
             return Err(Error::Abi("rejected localization transaction"));
         }
         self.localization = None;
+        self.steering = None;
         self.active = false;
         self.input_available = false;
         self.input.clear();
@@ -328,6 +346,9 @@ impl Capability {
     /// Synchronous import; memory contains initialized guest bytes only and is
     /// borrowed for this call. No world observation/publication occurs here.
     pub fn invoke(&mut self, memory: &mut [u8], epoch: i64, call: Call) -> Result<i32, Error> {
+        let steering_authorized = self.active
+            && self.epoch == epoch
+            && matches!(call, Call::Steer { .. } | Call::ReadSteering { .. });
         let animation_authorized = self.active
             && self.epoch == epoch
             && matches!(
@@ -353,6 +374,12 @@ impl Capability {
                     | Call::SetLocale { .. }
             );
         let result = self.invoke_inner(memory, epoch, call);
+        if steering_authorized
+            && result.is_err()
+            && let Some(state) = &mut self.steering
+        {
+            state.reject();
+        }
         if animation_authorized && result.is_err() {
             self.animation_rejected = true;
         }
@@ -369,7 +396,41 @@ impl Capability {
         if memory.len() > limits::MEMORY {
             return Err(Error::Limit("linear memory"));
         }
+        let units = match call {
+            Call::Locale | Call::Format { .. } | Call::Localize { .. } => {
+                incant_wasm_abi::LOCALIZATION_QUERY_UNITS
+            }
+            Call::Steer { .. } => 1,
+            _ => 0,
+        };
+        self.query_units = self
+            .query_units
+            .checked_add(units)
+            .filter(|v| *v <= incant_wasm_abi::NATIVE_MAX_QUERY_UNITS)
+            .ok_or(Error::Limit("query units"))?;
         match call {
+            Call::Steer { ptr, len } => {
+                let len = usize::try_from(len).map_err(|_| Error::Abi("steering byte length"))?;
+                if len > incant_wasm_abi::STEERING_MAX_REQUEST_BYTES {
+                    return Err(Error::Limit("steering frame bounds"));
+                }
+                let region = range(ptr, len, memory.len())?;
+                self.transfer(len)?;
+                return self.steering_state()?.steer(&memory[region]);
+            }
+            Call::ReadSteering { ptr, capacity } => {
+                let len = self.steering_state()?.reply()?.len();
+                let capacity = usize::try_from(capacity)
+                    .map_err(|_| Error::Abi("steering destination capacity"))?;
+                if capacity < len {
+                    return Err(Error::Abi("steering destination capacity"));
+                }
+                range(ptr, capacity, memory.len())?;
+                let region = range(ptr, len, memory.len())?;
+                self.transfer(len)?;
+                memory[region].copy_from_slice(self.steering_state()?.reply()?);
+                return Ok(len as i32);
+            }
             Call::AnimationLen | Call::AnimationLenV2 => {
                 let v2 = matches!(call, Call::AnimationLenV2);
                 if !v2 && self.animations.is_empty() {
@@ -614,6 +675,11 @@ impl Capability {
             }
         }
         Ok(0)
+    }
+    fn steering_state(&mut self) -> Result<&mut crate::steering::State, Error> {
+        self.steering
+            .as_mut()
+            .ok_or(Error::Abi("steering epoch unavailable"))
     }
     fn locale_state(&mut self) -> Result<&mut crate::localization::State, Error> {
         self.localization

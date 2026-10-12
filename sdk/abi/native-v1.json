@@ -568,6 +568,48 @@
       ],
       "result": null,
       "call": "Call::ControlAnimationV2 { id, ptr }"
+    },
+    {
+      "namespace": "incant_navigation_v1",
+      "name": "steer",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "len",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "opcode": 29,
+      "call": "Call::Steer { ptr, len }"
+    },
+    {
+      "namespace": "incant_navigation_v1",
+      "name": "read_steering",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "capacity",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "opcode": 30,
+      "call": "Call::ReadSteering { ptr, capacity }"
     }
   ],
   "enums": {
@@ -1555,6 +1597,124 @@
         "duration",
         "f64"
       ]
+    ],
+    "SteeringHeader": [
+      [
+        "agents",
+        "u32"
+      ],
+      [
+        "obstacles",
+        "u32"
+      ],
+      [
+        "time_horizon",
+        "f64"
+      ],
+      [
+        "obstacle_time_horizon",
+        "f64"
+      ],
+      [
+        "margin",
+        "f64"
+      ]
+    ],
+    "SteeringAgent": [
+      [
+        "id",
+        "u8",
+        16
+      ],
+      [
+        "position",
+        "f64",
+        3
+      ],
+      [
+        "velocity",
+        "f64",
+        2
+      ],
+      [
+        "preferred_velocity",
+        "f64",
+        2
+      ],
+      [
+        "radius",
+        "f64"
+      ],
+      [
+        "height",
+        "f64"
+      ],
+      [
+        "max_speed",
+        "f64"
+      ],
+      [
+        "responsibility",
+        "f64"
+      ]
+    ],
+    "SteeringObstacleHeader": [
+      [
+        "id",
+        "u8",
+        16
+      ],
+      [
+        "min_y",
+        "f64"
+      ],
+      [
+        "max_y",
+        "f64"
+      ],
+      [
+        "vertices",
+        "u32"
+      ],
+      [
+        "closed",
+        "u8"
+      ],
+      [
+        "reserved",
+        "u8",
+        3
+      ]
+    ],
+    "SteeringResultHeader": [
+      [
+        "agents",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ]
+    ],
+    "SteeringVelocity": [
+      [
+        "id",
+        "u8",
+        16
+      ],
+      [
+        "velocity",
+        "f64",
+        2
+      ],
+      [
+        "neighbors",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ]
     ]
   },
   "input_sections": [
@@ -1614,7 +1774,14 @@
     "ANIMATION_MAX_CLIPS": 256,
     "ANIMATION_MAX_SPEED": 16,
     "LOCALIZATION_FORMAT_BYTES": 24,
-    "ANIMATION_MAX_TRANSITION_SECONDS": 60
+    "ANIMATION_MAX_TRANSITION_SECONDS": 60,
+    "NAVIGATION_MAX_QUERIES": 32,
+    "STEERING_MAX_AGENTS": 128,
+    "STEERING_MAX_OBSTACLES": 32,
+    "STEERING_MAX_VERTICES": 32,
+    "STEERING_MAX_EDGES": 128,
+    "STEERING_MAX_REQUEST_BYTES": 17192,
+    "STEERING_MAX_RESULT_BYTES": 5136
   },
   "magic": {
     "INPUT_MAGIC": "INPINP01",
@@ -1624,7 +1791,9 @@
     "LOCALIZATION_RESULT_MAGIC": "INCLRS01",
     "ANIMATION_MAGIC": "INCAN001",
     "LOCALIZATION_FORMAT_MAGIC": "INCLFM01",
-    "ANIMATION_V2_MAGIC": "INCAN002"
+    "ANIMATION_V2_MAGIC": "INCAN002",
+    "STEERING_REQUEST_MAGIC": "INCSTR01",
+    "STEERING_RESULT_MAGIC": "INCSTV01"
   },
   "optional_none": -1,
   "namespaces": {
@@ -1634,6 +1803,7 @@
     "incant_log_v1": "log",
     "incant_localization_v1": "localization",
     "incant_animation_v1": "animation",
-    "incant_animation_v2": "animationv2"
+    "incant_animation_v2": "animationv2",
+    "incant_navigation_v1": "navigation"
   }
 }

@@ -10,6 +10,7 @@ pub mod flipbook;
 pub mod input;
 pub mod localization;
 mod raw;
+pub mod steering;
 mod tick;
 pub use animation::{AnimationControl, AnimationPlayback, AnimationSnapshot, AnimationTransition};
 pub use flipbook::{FlipbookSnapshot, Playback};
