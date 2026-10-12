@@ -1,5 +1,6 @@
 //! Retained CPU input for the native renderer. Bind checked cooked versions once;
 //! ordinary frames only copy committed f64 poses into existing typed slots.
+mod animation;
 mod binding;
 mod tilemap;
 pub use tilemap::TilemapAtlasBinding;
@@ -25,6 +26,11 @@ pub struct VisualCaches<'a> {
 pub enum NativeRenderError {
     #[error("spatial input belongs to a different native world")]
     DifferentWorld,
+    #[error("native animation {entity:?}: {reason}")]
+    Animation {
+        entity: StableId,
+        reason: &'static str,
+    },
     #[error("tilemap render binding failed: {0}")]
     TilemapRender(incant_render_data::SceneError),
     #[error("tilemap requires a matching checked color atlas descriptor and cache")]
@@ -77,6 +83,7 @@ pub enum UpdateKind {
 struct NumericUndo {
     world: DMat4,
     frame: u16,
+    animation: Option<incant_runtime::AnimationSample>,
 }
 
 pub struct NativeRenderInput {

@@ -1,4 +1,4 @@
-//! Versions 1–10, little-endian checked data (not executable code). SHA-256 detects
+//! Versions 1–11, little-endian checked data (not executable code). SHA-256 detects
 //! damage, not authorship. No casts, alignment assumptions or native-layout ABI.
 use crate::scene::MAX_ENTITIES;
 use crate::{CookedEntity, CookedScene, SceneError, StableId};
@@ -7,7 +7,7 @@ use sha2::{Digest, Sha256};
 use std::collections::BTreeMap;
 
 const MAGIC: &[u8; 8] = b"INCANTSC";
-const VERSION: u32 = 10;
+const VERSION: u32 = 11;
 const PREFIX: usize = 40;
 const HEADER: usize = 72;
 const MIN_RECORD: usize = 104;
@@ -24,8 +24,10 @@ impl CookedScene {
             .collect();
         let mut bytes = Vec::with_capacity(HEADER + self.entities.len() * MAX_RECORD);
         bytes.extend(MAGIC);
-        let version = if !self.localization.is_default() {
+        let version = if self.spatial.iter().any(|n| n.animation.is_some()) {
             VERSION
+        } else if !self.localization.is_default() {
+            10
         } else if !self.navigation.is_empty() {
             9
         } else if self.spatial.iter().any(|n| n.flipbook.is_some()) {
@@ -125,6 +127,21 @@ impl CookedScene {
         }
         if version >= 10 {
             crate::localization_binary::write(&mut bytes, &self.localization);
+        }
+        if version >= 11 {
+            bytes.extend(
+                (self
+                    .spatial
+                    .iter()
+                    .filter(|n| n.animation.is_some())
+                    .count() as u32)
+                    .to_le_bytes(),
+            );
+            for node in &self.spatial {
+                if let Some(a) = &node.animation {
+                    crate::animation_binary::write(&mut bytes, node.entity, a);
+                }
+            }
         }
         let length = (bytes.len() - HEADER) as u32;
         bytes[36..40].copy_from_slice(&length.to_le_bytes());
@@ -343,6 +360,29 @@ impl CookedScene {
         };
         if version == 10 && localization.is_default() {
             return Err(SceneError::Invalid("empty localization suffix"));
+        }
+        if version >= 11 {
+            let n = reader.u32()? as usize;
+            if n == 0
+                || n > spatial.len()
+                || n > reader.remaining_len() / crate::animation_binary::MIN_BYTES
+            {
+                return Err(SceneError::Invalid("animation record count"));
+            }
+            let mut previous = None;
+            let mut budget = 0;
+            for _ in 0..n {
+                let id = StableId(reader.array()?);
+                if previous.is_some_and(|p| p >= id) {
+                    return Err(SceneError::Invalid("noncanonical animation order"));
+                }
+                previous = Some(id);
+                let index = spatial
+                    .binary_search_by_key(&id, |n| n.entity)
+                    .map_err(|_| SceneError::Invalid("animation entity"))?;
+                spatial[index].animation =
+                    Some(crate::animation_binary::read(&mut reader, &mut budget)?);
+            }
         }
         if !reader.0.is_empty() {
             return Err(SceneError::Invalid("trailing payload"));

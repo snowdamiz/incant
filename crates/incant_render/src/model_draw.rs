@@ -155,7 +155,14 @@ impl ModelDraw {
             let material = &batch.model.materials.materials[primitive.material];
             pass.set_pipeline(&draw.pipeline);
             pass.set_bind_group(1, &material.bind_group, &[]);
-            pass.set_vertex_buffer(0, primitive.vertices.slice(..));
+            pass.set_vertex_buffer(
+                0,
+                batch
+                    .vertices
+                    .as_ref()
+                    .unwrap_or(&primitive.vertices)
+                    .slice(..),
+            );
             pass.set_vertex_buffer(1, batch.instances.slice(..));
             pass.set_index_buffer(primitive.indices.slice(..), wgpu::IndexFormat::Uint32);
             pass.draw_indexed(0..primitive.index_count, 0, draw.instances.clone());
