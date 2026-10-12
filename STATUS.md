@@ -45,6 +45,14 @@ pass; PR #113 merged the fixture correction. Checkpoint7 Windows desktop and
 Wasm conformance both pass.
 [Journal test evidence](docs/spikes/checkpoint6-budget-journal-tests.md).
 
+## Mixed-direction text wrapping — local CPU correction
+
+The native text review's dropped-space/overflow defect is corrected in pinned
+cosmic-text, with separate regressions for direction changes and narrow glyph
+wrapping. The affected CPU suites, Clippy, wasm32 and dependency checks pass;
+independent source review accepted. Claude's focused rendered recheck is pending.
+[Evidence](docs/spikes/text-bidi-wrap.md).
+
 ## Current milestone
 
 The project is still building the Phase 1 core engine. Native simulation,
