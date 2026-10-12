@@ -16,6 +16,7 @@ import time
 
 import ios_archive
 import native_process
+from physics_features import selected_graph_errors, validate_artifacts
 from native_package import data_package, publish, read, require, select_camera, sha256, write_json
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -69,12 +70,15 @@ def build(project, staging, storage, target, scene, camera):
     cargo = ROOT / 'tools/cargo'
     features = ','.join(ios_archive.FEATURES)
     project_hash = sha256(read(project, 64 * 1024**2))
-    metadata = json.loads(execute([cargo, 'metadata', '--locked', '--format-version=1', '--filter-platform', target,
-                                  '--features', ','.join(ios_archive.NAME + '/' + f for f in ios_archive.FEATURES)],
-                                 env=env).stdout)
-    graph = ios_archive.normal_dependencies(metadata)
+    selected_graph = execute([cargo, 'tree', '--locked', '--no-default-features', '-p', ios_archive.NAME,
+                              '--features', features, '--target', target, '-e', 'normal',
+                              '--prefix', 'none', '--format', '{p}|{f}'], env=env).stdout
+    graph = ios_archive.normal_dependencies(selected_graph)
+    errors = selected_graph_errors(selected_graph, 'deterministic', target)
+    require(not errors, 'Selected iOS physics graph differs from the fixed kernel: ' + '; '.join(errors))
+    (staging / 'normal-dependencies.txt').write_text(selected_graph, encoding='utf-8')
     command = [cargo, 'rustc', '--locked', '--profile', 'shipping', '-j2', '-p', ios_archive.NAME,
-               '--lib', '--features', features, '--crate-type', 'staticlib', '--target', target,
+               '--lib', '--no-default-features', '--features', features, '--crate-type', 'staticlib', '--target', target,
                '--target-dir', storage / 'target', '--config', 'profile.shipping.split-debuginfo="off"',
                '--message-format=json', '-vv']
     command_receipt = {'argv': list(map(str, command)), 'exit_code': None,
@@ -95,6 +99,8 @@ def build(project, staging, storage, target, scene, camera):
     flags = ios_archive.verify_codegen(log, target)
     physics = ios_archive.kernel_provenance(log, target)
     messages = [json.loads(line) for line in (staging / 'cargo.jsonl').read_text().splitlines() if line.startswith('{')]
+    physics['compiled_target'] = validate_artifacts(messages, 'deterministic', target_dir=storage / 'target',
+                                                    target=target, profile='shipping')
     artifacts = [m for m in messages if m.get('reason') == 'compiler-artifact'
                  and m['target']['name'] == ios_archive.NAME and 'staticlib' in m['target']['crate_types']]
     require(len(artifacts) == 1, 'Missing unique compiled mobile archive')

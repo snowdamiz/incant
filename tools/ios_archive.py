@@ -7,7 +7,7 @@ from native_package import read, require, sha256
 from shipping import codegen
 
 TARGETS = {'aarch64-apple-ios-sim': 'iphonesimulator', 'aarch64-apple-ios': 'iphoneos'}
-FEATURES = ['mobile-ffi', 'project', 'render-input']
+FEATURES = ['mobile-ffi', 'project', 'render-input', 'physics-deterministic']
 NAME = 'incant_game_player'
 FORBIDDEN = {'incant_doc', 'incant_cmd', 'incant_agent', 'incant_core', 'incant_cook',
              'incant_source', 'incant_play', 'incant_play_legacy', 'incant_wasm_cook',
@@ -26,6 +26,9 @@ def preflight_project(project, scene):
     import json
     document = json.loads(read(project, 64 * 1024**2))
     require(isinstance(document, dict) and isinstance(document.get('scenes'), dict), 'Missing project scenes')
+    settings = document.get('settings', {})
+    require(isinstance(settings, dict) and settings.get('physics_mode', 'deterministic') == 'deterministic',
+            'Authored iOS archive currently requires deterministic project physics')
     scenes = document['scenes']
     if scene is None:
         require(len(scenes) == 1, 'Choose --scene when the project does not contain exactly one scene')
@@ -49,21 +52,18 @@ def environment(source, rustc, project, scene):
     return env
 
 
-def normal_dependencies(metadata):
-    names = {p['id']: p['name'] for p in metadata['packages']}
-    nodes = {n['id']: n for n in metadata['resolve']['nodes']}
-    pending = [ident for ident, name in names.items() if name == NAME]
-    require(len(pending) == 1, 'Missing unique mobile player')
-    seen = set()
-    while pending:
-        ident = pending.pop()
-        if ident in seen:
-            continue
-        seen.add(ident)
-        require(names[ident] not in FORBIDDEN and not names[ident].startswith(('wasmtime', 'cranelift')),
-                f'Authoring/JIT normal dependency: {names[ident]}')
-        pending.extend(d['pkg'] for d in nodes[ident]['deps'] if any(k['kind'] is None for k in d['dep_kinds']))
-    return sorted(names[ident] for ident in seen)
+def normal_dependencies(graph):
+    """Audit only the selected target's normal graph, preserving compiler refusal."""
+    names = []
+    for line in graph.splitlines():
+        match = re.fullmatch(r'([A-Za-z0-9_-]+) v[^|]+\|([^|]*)', line.removesuffix(' (*)'))
+        require(match is not None, 'Malformed selected iOS dependency graph')
+        name = match.group(1)
+        require(name not in FORBIDDEN and not name.startswith(('wasmtime', 'cranelift')),
+                f'Authoring/JIT normal dependency: {name}')
+        names.append(name)
+    require(names and names[0] == NAME, 'Missing selected mobile player root')
+    return sorted(set(names))
 
 
 def verify_codegen(stderr, target):
@@ -113,6 +113,8 @@ def kernel_provenance(stderr, target):
 def producer_receipt(receipt, target, project_hash):
     require(receipt.get('format') == 'incant-native-project-build' and receipt.get('version') == 1,
             'Unsupported authored project producer receipt')
+    require(receipt.get('physics_mode') == 'deterministic' and receipt.get('physics_variant') == 'deterministic',
+            'Authored iOS cook physics differs from the fixed target kernel')
     require(receipt['target'] == target and receipt['producer_target'] == 'aarch64-apple-darwin'
             and receipt['producer_kind'] == 'ios-archive' and receipt['project_sha256'] == project_hash
             and receipt['startup_source_parsing'] is False and receipt['program'] is None,

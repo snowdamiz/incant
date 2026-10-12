@@ -40,16 +40,32 @@ class IosExport(unittest.TestCase):
                 export_ios.export(project, root / 'output', TARGET)
             self.assertEqual((root / 'output' / 'sentinel').read_text(), 'preserved')
 
-    def test_normal_graph_allows_build_cooker_but_refuses_runtime_authoring_or_jit(self):
-        metadata = {'packages': [{'id': 'player', 'name': 'incant_game_player'}, {'id': 'cook', 'name': 'incant_cook'}],
-                    'resolve': {'nodes': [{'id': 'player', 'deps': [{'pkg': 'cook', 'dep_kinds': [{'kind': 'build'}]}]},
-                                          {'id': 'cook', 'deps': []}]}}
-        self.assertEqual(ios_archive.normal_dependencies(metadata), ['incant_game_player'])
-        metadata['resolve']['nodes'][0]['deps'][0]['dep_kinds'] = [{'kind': None}]
+    def test_selected_normal_graph_refuses_runtime_authoring_jit_and_malformed_lines(self):
+        graph = 'incant_game_player v0.0.1 (/engine/player)|project\nincant_runtime v0.0.1|\n'
+        self.assertEqual(ios_archive.normal_dependencies(graph), ['incant_game_player', 'incant_runtime'])
+        self.assertEqual(ios_archive.normal_dependencies(graph + 'incant_runtime v0.0.1| (*)\n'),
+                         ['incant_game_player', 'incant_runtime'])
         for name in ('incant_cook', 'incant_doc', 'wasmtime', 'cranelift_codegen'):
-            metadata['packages'][1]['name'] = name
             with self.subTest(name=name), self.assertRaisesRegex(ValueError, 'Authoring/JIT'):
-                ios_archive.normal_dependencies(metadata)
+                ios_archive.normal_dependencies(graph + name + ' v1.0.0|\n')
+        for invalid in ('', 'incant_runtime v0.0.1|\n', graph + 'unrecognized output\n'):
+            with self.assertRaises(ValueError):
+                ios_archive.normal_dependencies(invalid)
+
+    def test_only_fixed_deterministic_projects_are_admitted_before_build(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory).resolve()
+            project = root / 'project'
+            for settings in ({}, {'physics_mode': 'deterministic'}):
+                project.write_text(json.dumps({'settings': settings, 'scenes': {'scene': {}}}))
+                ios_archive.preflight_project(project, None)
+            for mode in ('fast', 'fast-simd8', None, True, []):
+                project.write_text(json.dumps({'settings': {'physics_mode': mode}, 'scenes': {'scene': {}}}))
+                with self.subTest(mode=mode), patch.object(export_ios, 'build') as build:
+                    with self.assertRaisesRegex(ValueError, 'deterministic project physics'):
+                        export_ios.export(project, root / 'output', TARGET)
+                    build.assert_not_called()
+                    self.assertFalse((root / 'output').exists())
 
     def test_closed_destinations_refuse_before_project_or_output_io(self):
         for target in ('aarch64-linux-android', 'aarch64-apple-darwin', 'x86_64-apple-ios', TARGET + '\n'):
@@ -104,6 +120,7 @@ class IosExport(unittest.TestCase):
 
     def test_producer_requires_exact_abi_source_graph_and_binding(self):
         receipt = {'format': 'incant-native-project-build', 'version': 1, 'target': TARGET,
+                   'physics_mode': 'deterministic', 'physics_variant': 'deterministic',
                    'producer_target': 'aarch64-apple-darwin', 'producer_kind': 'ios-archive',
                    'project_sha256': 'p', 'startup_source_parsing': False, 'program': None,
                    'compiler': {'bundleSha256': 'a' * 64, 'mapSha256': 'm'},
@@ -117,6 +134,8 @@ class IosExport(unittest.TestCase):
                               'hardening_sha256': 'd' * 64, 'bindings_sha256': 'e' * 64, 'source_map_sha256': 'm'}}
         ios_archive.producer_receipt(receipt, TARGET, 'p')
         for path, value in [(('target',), 'aarch64-apple-darwin'), (('program',), {'kind': 'wasm'}),
+                            (('physics_mode',), 'fast'), (('physics_variant',), 'fast-simd8'),
+                            (('physics_variant',), None),
                             (('script', 'bindings_sha256'), None), (('script', 'target'), 'aarch64-apple-ios'),
                             (('script', 'bytecode_abi', 'pointer_bits'), 32), (('compiler', 'bundleSha256'), 'f' * 64),
                             (('script', 'source_map_sha256'), 'wrong')]:
