@@ -1,0 +1,14 @@
+head 0fe9dff97358a04b6ab077e4dc09e173be69d465 tree abe9b80e618decf72c96e2b20ab0454b630f86e5
+fmt exit 0: ./tools/cargo fmt --all -- --check
+clippy-render exit 0: ./tools/cargo clippy --locked --offline -j2 -p incant_ui -p incant_render_data -p incant_render -p incant_render_game -p incant_render_gpu_host -p incant_render_native -p incant_play --all-targets -- -D warnings
+clippy-player exit 0: ./tools/cargo clippy --locked --offline -j2 -p incant_game_player --all-targets -- -D warnings
+clippy-player-window exit 0: ./tools/cargo clippy --locked --offline -j2 -p incant_game_player --all-targets --features native-window -- -D warnings
+test-ui exit 0: ./tools/cargo test --locked --offline -j2 --profile ci -p incant_ui
+test-render-gpu exit 0: ./tools/cargo test --locked --offline -j2 --profile ci -p incant_render -- --include-ignored --test-threads=1
+test-render-game exit 0: ./tools/cargo test --locked --offline -j2 --profile ci -p incant_render_game -p incant_render_native -p incant_render_data
+test-gpu-host exit 0: ./tools/cargo test --locked --offline -j2 --profile ci -p incant_render_gpu_host -- --include-ignored --test-threads=1
+test-play exit 0: ./tools/cargo test --locked --offline -j2 --profile ci -p incant_play
+test-player-window exit 0: ./tools/cargo test --locked --offline -j2 --profile ci -p incant_game_player --features native-window
+check-downstream exit 0: ./tools/cargo check --locked --offline -j2 -p incant_headless -p incant_editor --all-targets
+check-wasm exit 0: ./tools/cargo check --locked --offline -j2 -p incant_render --lib --target wasm32-unknown-unknown
+done

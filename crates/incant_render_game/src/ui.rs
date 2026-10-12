@@ -2,9 +2,13 @@
 //! never changes the accepted widget frame, even if spatial consumption refuses.
 use incant_game_runtime::RoutedUiInput;
 use incant_input::InputEvent;
+use incant_render_data::{UiEdit, UiInput, UiRect, UiRole, UiWidget};
 use incant_render_native::NativeRenderInput;
 use incant_runtime::{NativeWorld, UiView, WorldIdentity};
-use incant_ui::{RoutedUi, UiError, UiEvent, UiFonts, UiPending, UiRouter, UiRuntime, Widget};
+use incant_ui::{
+    Rect, RoutedUi, UiError, UiEvent, UiFonts, UiKind, UiPaint, UiPending, UiRouter, UiRuntime,
+    UiVisual, Widget, WidgetVisual,
+};
 use std::sync::Arc;
 
 #[derive(Clone, Copy)]
@@ -27,6 +31,8 @@ impl UiSettings {
 }
 pub(crate) struct Binding {
     pub paint: Arc<incant_ui::UiPaint>,
+    /// Draw input of the accepted paint and widget state.
+    pub input: Arc<UiInput>,
     atlas: incant_ui::AtlasConfig,
     identity: WorldIdentity,
     generation: u64,
@@ -38,6 +44,7 @@ pub(crate) struct Binding {
 }
 pub(crate) struct Prepared {
     paint: Arc<incant_ui::UiPaint>,
+    input: Arc<UiInput>,
     viewport: [f32; 2],
     generation: u64,
     fonts: Option<UiFonts>,
@@ -61,9 +68,11 @@ impl Binding {
         let first = runtime.prepare(&[], settings.viewport, &mut fonts)?;
         let paint =
             incant_ui::UiPaint::prepare(&runtime, &first, &mut fonts, settings.atlas, None)?;
+        let input = draw_input(&first.visual(&runtime)?, &paint, None)?;
         runtime.commit(first)?;
         Ok(Self {
             paint,
+            input,
             atlas: settings.atlas,
             identity: view.identity().clone(),
             generation: view.generation(),
@@ -158,8 +167,14 @@ impl Binding {
             self.atlas,
             Some(&self.paint),
         )?;
+        let input = draw_input(
+            &pending.visual(&self.runtime)?,
+            &paint,
+            Some((&self.paint, &self.input)),
+        )?;
         Ok(Prepared {
             paint,
+            input,
             viewport,
             generation: view.generation(),
             fonts,
@@ -175,11 +190,110 @@ impl Binding {
             self.fonts = fonts;
         }
         self.paint = prepared.paint;
+        self.input = prepared.input;
         self.viewport = prepared.viewport;
         self.generation = prepared.generation;
         Ok(())
     }
 }
+impl Prepared {
+    pub fn input(&self) -> &Arc<UiInput> {
+        &self.input
+    }
+}
+
+fn ltrb(rect: Rect) -> UiRect {
+    [
+        rect.origin[0],
+        rect.origin[1],
+        rect.origin[0] + rect.size[0],
+        rect.origin[1] + rect.size[1],
+    ]
+}
+fn edit(node: &WidgetVisual<'_>) -> Option<UiEdit> {
+    node.text.map(|buffer| UiEdit {
+        selection: buffer.display_selection(),
+        preedit: buffer.preedit().map(|p| p.display_range),
+    })
+}
+/// Text-bearing widgets of `visual` in canonical paint order. Root/Container
+/// nodes have no appearance and no paint text.
+fn drawn<'a>(visual: &'a UiVisual<'a>) -> impl Iterator<Item = (usize, WidgetVisual<'a>)> + 'a {
+    (0..visual.len())
+        .filter_map(|position| visual.node(position).map(|node| (position, node)))
+        .filter(|(_, node)| node.widget.node.kind.text().is_some())
+}
+/// The renderer's input for one frame: the exact paint (layout, shaped glyphs,
+/// atlas) joined with the same frame's widget state. Nothing is re-shaped or
+/// inferred from text; an unchanged paint and state reuse the accepted Arc.
+fn draw_input(
+    visual: &UiVisual<'_>,
+    paint: &Arc<UiPaint>,
+    accepted: Option<(&Arc<UiPaint>, &Arc<UiInput>)>,
+) -> Result<Arc<UiInput>, UiError> {
+    if !std::ptr::eq(visual.layout, &*paint.layout) {
+        return Err(UiError::Invalid("paint belongs to another layout"));
+    }
+    if let Some((previous, input)) = accepted
+        && Arc::ptr_eq(previous, paint)
+        && drawn(visual).count() == input.widgets.len()
+        && drawn(visual)
+            .zip(&input.widgets)
+            .all(|((_, node), widget)| {
+                node.focused == widget.focused
+                    && node.pressed == widget.pressed
+                    && edit(&node) == widget.edit
+            })
+    {
+        return Ok(Arc::clone(input));
+    }
+    let mut texts = paint.texts.iter();
+    let mut widgets = Vec::with_capacity(paint.texts.len());
+    for (position, node) in drawn(visual) {
+        let layout = &visual.layout.nodes[position];
+        let text = texts
+            .next()
+            .filter(|t| t.id == node.widget.id && layout.id == node.widget.id)
+            .ok_or(UiError::Invalid("paint text order"))?;
+        let role = match &node.widget.node.kind {
+            UiKind::Label { .. } => UiRole::Label,
+            UiKind::Button { .. } => UiRole::Button,
+            UiKind::TextInput { .. } => UiRole::TextInput,
+            UiKind::Root | UiKind::Container => unreachable!("text-bearing widget"),
+        };
+        let edit = edit(&node);
+        if (role == UiRole::TextInput) != edit.is_some()
+            || node
+                .text
+                .is_some_and(|buffer| buffer.display_text() != text.layout.source())
+        {
+            return Err(UiError::Invalid("text input state and paint disagree"));
+        }
+        widgets.push(UiWidget {
+            id: node.widget.id,
+            role,
+            disabled: layout.disabled,
+            focused: node.focused,
+            pressed: node.pressed,
+            bounds: ltrb(layout.bounds),
+            visible: ltrb(layout.hit),
+            origin: text.origin,
+            clip: ltrb(text.clip),
+            layout: Arc::clone(&text.layout),
+            glyphs: Arc::clone(&text.glyphs),
+            edit,
+        });
+    }
+    if texts.next().is_some() {
+        return Err(UiError::Invalid("paint text order"));
+    }
+    Ok(Arc::new(UiInput {
+        viewport: visual.layout.viewport,
+        atlas: Arc::clone(&paint.atlas),
+        widgets,
+    }))
+}
+
 fn widgets(view: &UiView<'_>) -> Vec<Widget> {
     view.nodes()
         .map(|node| Widget {

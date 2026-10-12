@@ -1,0 +1,56 @@
+   Compiling zerocopy v0.8.62
+   Compiling zerofrom v0.1.8
+   Compiling yoke v0.8.3
+   Compiling zerovec v0.11.8
+   Compiling thiserror v2.0.21
+   Compiling tinystr v0.8.4
+    Checking bytemuck v1.25.2
+   Compiling icu_locale_core v2.3.0
+    Checking ppv-lite86 v0.2.21
+    Checking wide v1.7.1
+   Compiling potential_utf v0.1.6
+   Compiling zerotrie v0.2.5
+   Compiling serde v1.0.229
+   Compiling icu_provider v2.3.1
+   Compiling rand_chacha v0.9.0
+   Compiling ref-cast v1.0.27
+    Checking schemars v1.2.2
+    Checking simba v0.10.2
+   Compiling icu_locale_fallback v2.3.0
+    Checking rand v0.9.5
+   Compiling calendrical_calculations v0.2.4
+   Compiling fixed_decimal v0.7.2
+    Checking nalgebra v0.35.0
+   Compiling icu_calendar v2.3.0
+   Compiling ulid v1.2.1
+   Compiling incant_types v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0056-native-game-ui-draw/crates/incant_types)
+    Checking glamx v0.3.1
+   Compiling icu_collections v2.3.0
+    Checking dodgy_2d v0.5.5
+   Compiling rerecast v0.4.0 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0056-native-game-ui-draw/third_party/rerecast)
+   Compiling icu_plurals v2.3.0
+   Compiling icu_time v2.3.0
+   Compiling icu_decimal v2.3.0
+    Checking parry3d v0.31.1
+    Checking parry2d v0.31.1
+   Compiling icu_pattern v0.5.0
+   Compiling icu_datetime v2.3.0
+   Compiling rapier3d v0.36.0
+   Compiling rapier2d v0.36.0
+   Compiling incant_nav v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0056-native-game-ui-draw/crates/incant_nav)
+   Compiling icu_locale v2.3.0
+    Checking incant_2d v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0056-native-game-ui-draw/crates/incant_2d)
+    Checking bevy_ecs v0.19.1
+   Compiling incant_physics_2d_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0056-native-game-ui-draw/crates/incant_physics_2d_runtime)
+    Checking incant_localization v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0056-native-game-ui-draw/crates/incant_localization)
+    Checking incant_physics_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0056-native-game-ui-draw/crates/incant_physics_runtime)
+   Compiling incant_script v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0056-native-game-ui-draw/crates/incant_script)
+   Compiling incant_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0056-native-game-ui-draw/crates/incant_runtime)
+   Compiling incant_input v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0056-native-game-ui-draw/crates/incant_input)
+   Compiling incant_cook v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0056-native-game-ui-draw/crates/incant_cook)
+    Checking incant_assets_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0056-native-game-ui-draw/crates/incant_assets_runtime)
+    Checking incant_audio_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0056-native-game-ui-draw/crates/incant_audio_runtime)
+   Compiling incant_game_player v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0056-native-game-ui-draw/crates/incant_game_player)
+    Checking incant_game_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0056-native-game-ui-draw/crates/incant_game_runtime)
+    Checking incant_observe v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0056-native-game-ui-draw/crates/incant_observe)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 27.64s

@@ -410,6 +410,7 @@ impl incant_render_game::RenderInputConsumer for Consumer {
     fn prepare(
         input: &incant_render_data::SceneInput,
         camera: &str,
+        _: Option<&std::sync::Arc<incant_render_data::UiInput>>,
         settings: Self::Settings,
     ) -> Result<Self, Self::Error> {
         if matches!(settings.failure, Failure::Prepare) {
@@ -434,6 +435,7 @@ impl incant_render_game::RenderInputConsumer for Consumer {
         input: &incant_render_data::SceneInput,
         camera: &str,
         kind: incant_render_native::UpdateKind,
+        _: Option<&std::sync::Arc<incant_render_data::UiInput>>,
     ) -> Result<(), Self::Error> {
         self.0.observations.borrow_mut().push((
             camera.to_owned(),
@@ -452,6 +454,12 @@ impl incant_render_game::RenderInputConsumer for Consumer {
             Failure::Unwind => panic!("consumer unwind"),
             _ => Ok(()),
         }
+    }
+    fn admit_ui(
+        &mut self,
+        _: &std::sync::Arc<incant_render_data::UiInput>,
+    ) -> Result<(), Self::Error> {
+        unreachable!("this consumer has no UI support")
     }
 }
 fn consumer_settings(
