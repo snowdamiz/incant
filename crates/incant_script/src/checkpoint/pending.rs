@@ -15,6 +15,8 @@ pub struct PendingSessionCheckpoint {
     bindings: ValidatedActions,
     #[cfg(feature = "ui")]
     ui: Option<incant_ui::PendingUiCheckpoint>,
+    #[cfg(feature = "audio")]
+    audio: Option<incant_audio_runtime::PendingAudioCheckpoint>,
 }
 impl PendingSessionCheckpoint {
     pub fn new(
@@ -42,9 +44,9 @@ impl PendingSessionCheckpoint {
             .world
             .get(8..12)
             .map(|bytes| u32::from_le_bytes(bytes.try_into().unwrap()));
-        if !matches!(version, Some(3..=7)) {
+        if !matches!(version, Some(3..=8)) {
             return Err(CheckpointError::Invalid(
-                "session requires world save v3-v7",
+                "session requires world save v3-v8",
             ));
         }
         let world = load_world(sections.world)?;
@@ -65,6 +67,24 @@ impl PendingSessionCheckpoint {
         #[cfg(not(feature = "ui"))]
         if sections.ui.is_some() {
             return Err(CheckpointError::Unsupported("hosted UI checkpoint feature"));
+        }
+        if world.requires_audio_checkpoint() != sections.audio.is_some() {
+            return Err(CheckpointError::Invalid("world/audio section pairing"));
+        }
+        #[cfg(feature = "audio")]
+        let audio = sections
+            .audio
+            .map(|bytes| incant_audio_runtime::PendingAudioCheckpoint::new(&world, bytes))
+            .transpose()?;
+        #[cfg(feature = "audio")]
+        if let Some(audio) = &audio {
+            audio.validate_session(&world)?;
+        }
+        #[cfg(not(feature = "audio"))]
+        if sections.audio.is_some() {
+            return Err(CheckpointError::Unsupported(
+                "hosted audio checkpoint feature",
+            ));
         }
         let scope_known = |scope| match (&code.bindings, scope) {
             (None, Scope::Global) => true,
@@ -119,6 +139,8 @@ impl PendingSessionCheckpoint {
             bindings,
             #[cfg(feature = "ui")]
             ui,
+            #[cfg(feature = "audio")]
+            audio,
         })
     }
     pub fn world(&self) -> &NativeWorld {
@@ -127,6 +149,11 @@ impl PendingSessionCheckpoint {
     /// Run trusted module initialization; globals/closures are explicitly
     /// ephemeral. No tick occurs and the prepared world identity is preserved.
     pub fn start(self) -> Result<NativeSession> {
+        if self.world.requires_audio_checkpoint() {
+            return Err(CheckpointError::Unsupported(
+                "restored audio owner is required",
+            ));
+        }
         if self.world.requires_ui_checkpoint() {
             return Err(CheckpointError::Unsupported(
                 "restored hosted UI owner is required",
@@ -142,10 +169,39 @@ impl PendingSessionCheckpoint {
     /// guest initialization. A same-ID owner from another world cannot pass.
     #[cfg(feature = "ui")]
     pub fn start_with_ui(self, ui: &incant_ui::UiRuntime) -> Result<NativeSession> {
+        if self.world.requires_audio_checkpoint() {
+            return Err(CheckpointError::Unsupported(
+                "restored audio owner is required",
+            ));
+        }
         if let Some(state) = &self.ui {
             state.validate_restored(&self.world, ui)?;
         } else {
             ui.checkpoint_for_world(&self.world)?;
+        }
+        self.start_validated()
+    }
+    #[cfg(feature = "audio")]
+    pub fn audio(&self) -> Option<&incant_audio_runtime::PendingAudioCheckpoint> {
+        self.audio.as_ref()
+    }
+    #[cfg(feature = "audio")]
+    pub fn start_with_audio(
+        self,
+        audio: &incant_audio_runtime::SceneAudio<incant_audio_runtime::OfflineBackend>,
+        #[cfg(feature = "ui")] ui: Option<&incant_ui::UiRuntime>,
+    ) -> Result<NativeSession> {
+        if let Some(state) = &self.audio {
+            state.validate_restored(&self.world, audio)?;
+        }
+        #[cfg(feature = "ui")]
+        if let Some(state) = &self.ui {
+            state.validate_restored(
+                &self.world,
+                ui.ok_or(CheckpointError::Unsupported(
+                    "restored hosted UI owner is required",
+                ))?,
+            )?;
         }
         self.start_validated()
     }

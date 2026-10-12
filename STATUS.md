@@ -16,6 +16,21 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Ordinary offline audio session checkpoints — local CPU proof passed
+
+World v8/session v3 resume real static and streamed Kira voices alongside existing
+script state/timers and hosted UI. Exact fractional/resampler history, birth order,
+queued/retired voices, nested buses/listener state, tick-zero startup and master
+suspension are covered. The ordinary public exporter/player passed source/build/
+map-deleted continuation with identical saves and PCM; precise negative controls
+were rerun against the same frozen binary. Affected 410 tests, 99 Kira tests,
+scoped Clippy and lean/runtime target checks pass. Independent final source/process review is accepted;
+coordinator intake remains pending.
+
+Physics/module/device-native audio and native-window/GPU checkpoint routes remain
+unsupported; arbitrary VM heap/effects and full save/device gates are not claimed.
+[Contract and evidence](docs/spikes/native-audio-session-checkpoints.md).
+
 ## Hosted native UI session checkpoints — local CPU proof passed
 
 The bounded widget codec now composes with native world v7 and session v2:
@@ -28,8 +43,9 @@ The affected suite passes 449 CPU tests plus nine player tests, scoped Clippy,
 feature-disabled/static/development-module builds, wasm32 and lean runtime checks.
 A fresh ordinary public export passes four map/source/build-deleted player runs
 and seven typed refusals; uninterrupted and resumed final saves match exactly.
-Active preedit, physics/audio state, static/development modules and window/GPU
-checkpoint routes remain unsupported. This is not a full-session, native IME,
+Active preedit, physics state, static/development modules and window/GPU
+checkpoint routes remain unsupported. Offline audio continuation is covered by
+the subsequent local slice above. This is not a full-session, native IME,
 Game UI or device gate. Independent source and actual public proof review are accepted; publisher intake
 remains separate. [Contract and evidence](docs/spikes/native-ui-session-checkpoints.md).
 

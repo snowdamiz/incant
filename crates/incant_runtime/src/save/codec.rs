@@ -26,6 +26,7 @@ pub const MAX_SAVE_BYTES: usize = HEADER
     + crate::MAX_SPRITE_ENTITIES * STATE_BYTES
     + crate::MAX_MESH_ENTITIES * TRANSITION_ANIMATION_BYTES;
 
+#[allow(clippy::too_many_arguments)] // Explicit versioned section inputs.
 pub(super) fn encode(
     tick: u64,
     origin: [u8; 32],
@@ -34,6 +35,7 @@ pub(super) fn encode(
     animations: &[(StableId, crate::AnimationState)],
     graphs: &[(StableId, crate::AnimationGraphState)],
     ui_used: bool,
+    audio_used: bool,
 ) -> Result<Vec<u8>, SaveError> {
     if scene.len() > crate::binary::MAX_SCENE_BYTES
         || states.len() > crate::MAX_SPRITE_ENTITIES
@@ -42,7 +44,9 @@ pub(super) fn encode(
     {
         return Err(SaveError::Invalid("save capacity"));
     }
-    let version = if ui_used {
+    let version = if audio_used {
+        8u32
+    } else if ui_used {
         7u32
     } else if !graphs.is_empty() {
         6u32
@@ -65,7 +69,7 @@ pub(super) fn encode(
     let mut bytes = Vec::with_capacity(HEADER + length);
     bytes.extend(MAGIC);
     bytes.extend(version.to_le_bytes());
-    bytes.extend(u32::from(ui_used).to_le_bytes());
+    bytes.extend((u32::from(ui_used) | (u32::from(audio_used) << 1)).to_le_bytes());
     bytes.extend(tick.to_le_bytes());
     bytes.extend((length as u64).to_le_bytes());
     bytes.resize(HEADER, 0);
@@ -130,6 +134,8 @@ pub(super) fn encode(
 pub(super) struct Decoded<'a> {
     pub version: u32,
     pub tick: u64,
+    pub ui_used: bool,
+    pub audio_used: bool,
     pub origin: Option<[u8; 32]>,
     pub scene: &'a [u8],
     pub states: &'a [u8],
@@ -137,7 +143,7 @@ pub(super) struct Decoded<'a> {
     pub graphs: &'a [u8],
 }
 pub(super) fn is_bound(bytes: &[u8]) -> bool {
-    matches!(u32::from_le_bytes(bytes[8..12].try_into().unwrap()), 2..=7)
+    matches!(u32::from_le_bytes(bytes[8..12].try_into().unwrap()), 2..=8)
 }
 pub(super) fn decode(bytes: &[u8]) -> Result<Decoded<'_>, SaveError> {
     if !(HEADER..=MAX_SAVE_BYTES).contains(&bytes.len()) {
@@ -147,10 +153,13 @@ pub(super) fn decode(bytes: &[u8]) -> Result<Decoded<'_>, SaveError> {
         return Err(SaveError::Invalid("magic"));
     }
     let version = u32::from_le_bytes(bytes[8..12].try_into().unwrap());
-    if !(1..=7).contains(&version) {
+    if !(1..=8).contains(&version) {
         return Err(SaveError::Version(version));
     }
-    if bytes[12..16] != u32::from(version == 7).to_le_bytes() {
+    let flags = u32::from_le_bytes(bytes[12..16].try_into().unwrap());
+    if (version < 8 && flags != u32::from(version == 7))
+        || (version == 8 && !matches!(flags, 2 | 3))
+    {
         return Err(SaveError::Invalid("unsupported flags"));
     }
     let tick = u64::from_le_bytes(bytes[16..24].try_into().unwrap());
@@ -164,6 +173,8 @@ pub(super) fn decode(bytes: &[u8]) -> Result<Decoded<'_>, SaveError> {
         return Ok(Decoded {
             version,
             tick,
+            ui_used: false,
+            audio_used: false,
             origin: None,
             scene: &bytes[HEADER..],
             states: &[],
@@ -238,6 +249,8 @@ pub(super) fn decode(bytes: &[u8]) -> Result<Decoded<'_>, SaveError> {
     Ok(Decoded {
         version,
         tick,
+        ui_used: flags & 1 != 0,
+        audio_used: flags & 2 != 0,
         origin: Some(origin),
         scene,
         states,

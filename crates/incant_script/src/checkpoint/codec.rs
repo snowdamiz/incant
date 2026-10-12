@@ -14,11 +14,13 @@ use std::{collections::BTreeMap, sync::Arc};
 const MAGIC: &[u8; 8] = b"INCSES01";
 const HEADER: usize = 128;
 const UI_HEADER: usize = 132;
+const AUDIO_HEADER: usize = 136;
+const MAX_AUDIO_BYTES: usize = 176 + 128 * 92 + 128 * (25 + 8 + 240);
 // Same bound with or without the optional UI feature.
 const MAX_UI_BYTES: usize =
     80 + 48 * incant_types::MAX_UI_NODES + incant_types::MAX_SCENE_TEXT_BYTES;
 pub const MAX_CHECKPOINT_BYTES: usize =
-    incant_runtime::MAX_SAVE_BYTES + 2 * 1024 * 1024 + MAX_UI_BYTES;
+    incant_runtime::MAX_SAVE_BYTES + 2 * 1024 * 1024 + MAX_UI_BYTES + MAX_AUDIO_BYTES;
 const MAX_ACTIVE: usize = crate::MAX_SCRIPT_INSTANCES;
 
 pub(super) struct Sections<'a> {
@@ -28,6 +30,7 @@ pub(super) struct Sections<'a> {
     pub store: &'a [u8],
     pub schedule: &'a [u8],
     pub ui: Option<&'a [u8]>,
+    pub audio: Option<&'a [u8]>,
 }
 fn digest(bytes: &[u8], header: usize) -> [u8; 32] {
     let mut h = Sha256::new();
@@ -42,6 +45,7 @@ pub(super) fn sections<'a>(bytes: &'a [u8], program: [u8; 32]) -> Result<Section
     let header = match u32::from_le_bytes(bytes[8..12].try_into().unwrap()) {
         1 => HEADER,
         2 if bytes.len() >= UI_HEADER => UI_HEADER,
+        3 if bytes.len() >= AUDIO_HEADER => AUDIO_HEADER,
         _ => return Err(Error::Invalid("version")),
     };
     if bytes[12..16] != 1u32.to_le_bytes() {
@@ -53,9 +57,15 @@ pub(super) fn sections<'a>(bytes: &'a [u8], program: [u8; 32]) -> Result<Section
     if bytes[header - 32..header] != digest(bytes, header) {
         return Err(Error::Integrity);
     }
-    let mut lens = [0usize; 5];
+    let mut lens = [0usize; 6];
     let mut total = header;
-    let count = if header == HEADER { 4 } else { 5 };
+    let count = if header == HEADER {
+        4
+    } else if header == UI_HEADER {
+        5
+    } else {
+        6
+    };
     for (i, n) in lens[..count].iter_mut().enumerate() {
         *n = u32::from_le_bytes(bytes[80 + i * 4..84 + i * 4].try_into().unwrap()) as usize;
         total = total
@@ -69,22 +79,27 @@ pub(super) fn sections<'a>(bytes: &'a [u8], program: [u8; 32]) -> Result<Section
         || lens[3] > 20 + 128 * 97
         || lens[4] > MAX_UI_BYTES
         || (count == 5 && lens[4] == 0)
+        || lens[5] > MAX_AUDIO_BYTES
+        || (count == 6 && lens[5] == 0)
     {
         return Err(Error::Invalid("section lengths"));
     }
     let (world, rest) = bytes[header..].split_at(lens[0]);
     let (active, rest) = rest.split_at(lens[1]);
     let (store, rest) = rest.split_at(lens[2]);
-    let (schedule, ui) = rest.split_at(lens[3]);
+    let (schedule, tail) = rest.split_at(lens[3]);
+    let (ui, audio) = tail.split_at(lens[4]);
     Ok(Sections {
         origin: bytes[48..80].try_into().unwrap(),
         world,
         active,
         store,
         schedule,
-        ui: (count == 5).then_some(ui),
+        ui: (lens[4] != 0).then_some(ui),
+        audio: (count == 6).then_some(audio),
     })
 }
+#[allow(clippy::too_many_arguments)] // Explicit versioned section inputs.
 pub(super) fn encode(
     program: [u8; 32],
     origin: [u8; 32],
@@ -93,6 +108,7 @@ pub(super) fn encode(
     store: &Store,
     schedule: &schedule::Schedule,
     ui: Option<&[u8]>,
+    audio: Option<&[u8]>,
 ) -> Result<Vec<u8>> {
     let mut a = Vec::new();
     u32w(&mut a, active.len());
@@ -116,25 +132,52 @@ pub(super) fn encode(
         t.extend(v.due.to_le_bytes());
         t.extend(v.interval.unwrap_or(0).to_le_bytes());
     }
-    let header = if ui.is_some() { UI_HEADER } else { HEADER };
+    let header = if audio.is_some() {
+        AUDIO_HEADER
+    } else if ui.is_some() {
+        UI_HEADER
+    } else {
+        HEADER
+    };
+    if audio.is_some_and(|b| b.is_empty() || b.len() > MAX_AUDIO_BYTES) {
+        return Err(Error::Invalid("audio capacity"));
+    }
     if ui.is_some_and(|bytes| bytes.is_empty() || bytes.len() > MAX_UI_BYTES) {
         return Err(Error::Invalid("UI capacity"));
     }
-    let total = header + world.len() + a.len() + s.len() + t.len() + ui.map_or(0, <[u8]>::len);
+    let total = header
+        + world.len()
+        + a.len()
+        + s.len()
+        + t.len()
+        + ui.map_or(0, <[u8]>::len)
+        + audio.map_or(0, <[u8]>::len);
     if total > MAX_CHECKPOINT_BYTES {
         return Err(Error::Invalid("checkpoint capacity"));
     }
     let mut out = Vec::with_capacity(total);
     out.extend(MAGIC);
-    out.extend(if ui.is_some() { 2u32 } else { 1u32 }.to_le_bytes());
+    out.extend(
+        if audio.is_some() {
+            3u32
+        } else if ui.is_some() {
+            2u32
+        } else {
+            1u32
+        }
+        .to_le_bytes(),
+    );
     out.extend(1u32.to_le_bytes());
     out.extend(program);
     out.extend(origin);
     for n in [world.len(), a.len(), s.len(), t.len()] {
         u32w(&mut out, n);
     }
-    if let Some(ui) = ui {
-        u32w(&mut out, ui.len());
+    if header >= UI_HEADER {
+        u32w(&mut out, ui.map_or(0, <[u8]>::len));
+    }
+    if let Some(audio) = audio {
+        u32w(&mut out, audio.len());
     }
     out.extend([0; 32]);
     out.extend(world);
@@ -143,6 +186,9 @@ pub(super) fn encode(
     out.extend(t);
     if let Some(ui) = ui {
         out.extend(ui);
+    }
+    if let Some(audio) = audio {
+        out.extend(audio);
     }
     let h = digest(&out, header);
     out[header - 32..header].copy_from_slice(&h);

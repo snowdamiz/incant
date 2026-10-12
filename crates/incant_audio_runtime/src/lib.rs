@@ -4,7 +4,10 @@ mod config;
 #[cfg(feature = "scene")]
 mod scene;
 #[cfg(feature = "scene")]
-pub use scene::{ClipBinding, MAX_CLIP_METADATA_BYTES, MAX_SCENE_CLIPS, SceneAudio, SourceState};
+pub use scene::{
+    ClipBinding, MAX_AUDIO_CHECKPOINT_BYTES, MAX_CLIP_METADATA_BYTES, MAX_SCENE_CLIPS,
+    PendingAudioCheckpoint, SceneAudio, SourceState,
+};
 mod mixer;
 mod offline;
 mod offline_stream;
@@ -14,7 +17,7 @@ pub use config::position as validate_position;
 pub use config::{Bus, PlayOptions, Spatial};
 #[cfg(feature = "device")]
 pub use kira::backend::cpal::CpalBackend as DeviceBackend;
-pub use kira::{AudioManagerSettings, sound::PlaybackState};
+pub use kira::{AudioManagerSettings, backend::Backend as AudioBackend, sound::PlaybackState};
 pub use mixer::{MAX_BUSES, MAX_VOICES, Mixer, VoiceId};
 pub use offline::OfflineBackend;
 #[cfg(not(target_arch = "wasm32"))]

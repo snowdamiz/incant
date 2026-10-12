@@ -24,7 +24,7 @@ pub(super) fn options(
         }),
     }
 }
-fn position(matrix: [[f64; 4]; 4]) -> Result<[f32; 3]> {
+pub(super) fn position(matrix: [[f64; 4]; 4]) -> Result<[f32; 3]> {
     let value = [matrix[3][0], matrix[3][1], matrix[3][2]];
     if value.iter().any(|v| !v.is_finite() || v.abs() > 1_000_000.) {
         return Err(AudioError::Invalid(
@@ -38,7 +38,15 @@ where
     B::Error: Debug,
 {
     pub(super) fn prepare(&mut self, world: &NativeWorld) -> Result<Option<Listener>> {
-        if world.scene_id() != self.scene || world.tick() < self.tick {
+        if world.scene_id() != self.scene
+            || world.tick() < self.tick
+            || world.incarnation() != self.incarnation
+            || world
+                .spatial_view()
+                .map_err(|_| AudioError::Invalid("audio world unavailable"))?
+                .identity()
+                != &self.identity
+        {
             return Err(AudioError::Invalid("audio scene/clock changed"));
         }
         if world.audio_nodes().len() > incant_runtime::MAX_AUDIO_NODES {

@@ -38,6 +38,9 @@ pub enum CheckpointError {
     #[cfg(feature = "ui")]
     #[error(transparent)]
     Ui(#[from] incant_ui::UiCheckpointError),
+    #[cfg(feature = "audio")]
+    #[error(transparent)]
+    Audio(#[from] incant_audio_runtime::AudioError),
 }
 type Result<T> = std::result::Result<T, CheckpointError>;
 
@@ -174,7 +177,7 @@ impl NativeSession {
         if self.world.requires_ui_checkpoint() {
             return Err(CheckpointError::Unsupported("hosted UI state is required"));
         }
-        self.encode_checkpoint(None)
+        self.encode_checkpoint(None, None)
     }
     /// Capture the exact committed hosted owner together with world and script
     /// state. UI declarations alone never substitute for mutable widget state.
@@ -186,9 +189,46 @@ impl NativeSession {
             // Never-used, empty UI owners have no mutable widget state.
             return self.checkpoint_bytes();
         }
-        self.encode_checkpoint(Some(state.bytes()))
+        self.encode_checkpoint(Some(state.bytes()), None)
     }
-    fn encode_checkpoint(&self, ui: Option<&[u8]>) -> Result<Vec<u8>> {
+    #[cfg(feature = "audio")]
+    pub fn checkpoint_bytes_with_audio<B: incant_audio_runtime::AudioBackend>(
+        &self,
+        audio: &incant_audio_runtime::SceneAudio<B>,
+        #[cfg(feature = "ui")] ui: Option<&incant_ui::UiRuntime>,
+    ) -> Result<Vec<u8>>
+    where
+        B::Error: std::fmt::Debug,
+    {
+        let audio_state = audio.checkpoint_for_world(&self.world)?;
+        audio_state.validate_session(&self.world)?;
+        #[cfg(feature = "ui")]
+        let ui_state = ui
+            .map(|owner| owner.checkpoint_for_world(&self.world))
+            .transpose()?;
+        #[cfg(feature = "ui")]
+        let ui = ui_state
+            .as_ref()
+            .filter(|_| self.world.requires_ui_checkpoint())
+            .map(|state| state.bytes());
+        #[cfg(not(feature = "ui"))]
+        let ui = None;
+        self.encode_checkpoint(
+            ui,
+            self.world
+                .requires_audio_checkpoint()
+                .then_some(audio_state.bytes()),
+        )
+    }
+    fn encode_checkpoint(&self, ui: Option<&[u8]>, audio: Option<&[u8]>) -> Result<Vec<u8>> {
+        if self.world.requires_ui_checkpoint() != ui.is_some() {
+            return Err(CheckpointError::Unsupported("hosted UI state is required"));
+        }
+        if self.world.requires_audio_checkpoint() != audio.is_some() {
+            return Err(CheckpointError::Unsupported(
+                "retained audio owner is required",
+            ));
+        }
         let host = host(self)?;
         let active = host
             .project
@@ -219,6 +259,7 @@ impl NativeSession {
             &store,
             &host.schedule,
             ui,
+            audio,
         )
     }
 
