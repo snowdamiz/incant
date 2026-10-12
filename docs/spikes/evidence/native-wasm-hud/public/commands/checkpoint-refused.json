@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-hud-export-001/package/player/incant_game_player",
+    "--package",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-hud-export-001/package/player/data",
+    "--ui-viewport",
+    "320x200",
+    "--ticks",
+    "12",
+    "--input-recording",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-hud-export-001/input.json",
+    "--output",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-hud-export-001/checkpoint.pcm",
+    "--save-checkpoint",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-hud-export-001/module.save"
+  ],
+  "cwd": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-hud-export-001/package/player",
+  "returncode": 1,
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "8553d484ef61a5488bc165050a946d44ae606e41c8018ff857501df0ebb8122d"
+}

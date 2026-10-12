@@ -32,6 +32,7 @@ pub struct CookedSpatial {
     pub mesh: Option<NativeMeshRenderer>,
     pub animation: Option<std::sync::Arc<crate::NativeAnimation>>,
     pub ik: Option<std::sync::Arc<crate::NativeIk>>,
+    pub root_motion: Option<std::sync::Arc<crate::NativeRootMotion>>,
     /// Cold binding data stays indirect so every unrelated structural command
     /// and spatial node does not pay for a full sprite configuration.
     pub sprite: Option<Box<crate::NativeSpriteRenderer>>,
@@ -50,6 +51,7 @@ impl CookedSpatial {
             mesh: None,
             animation: None,
             ik: None,
+            root_motion: None,
             sprite: None,
             tilemap: None,
             flipbook: None,
@@ -64,6 +66,7 @@ impl CookedSpatial {
             && self.mesh.is_none()
             && self.animation.is_none()
             && self.ik.is_none()
+            && self.root_motion.is_none()
             && self.sprite.is_none()
             && self.tilemap.is_none()
             && self.flipbook.is_none()
@@ -112,7 +115,9 @@ pub(crate) fn validate<'a>(
             .binary_search_by_key(&id, |a| a.id)
             .is_ok_and(|i| assets[i].kind == kind)
     };
+    let mut roots = crate::root_motion::CatalogBudget::default();
     for node in nodes {
+        roots.admit(node)?;
         if !exists(node.entity)
             || !ids.insert(node.entity)
             || node.is_empty()

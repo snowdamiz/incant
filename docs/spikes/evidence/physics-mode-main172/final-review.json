@@ -1,0 +1,585 @@
+{
+  "at": "2026-10-12T22:20:04.033173+00:00",
+  "accepted": true,
+  "manifest_sha256": "efde77e32a773f9f153481abb433119c323b8cd72d863cb85d4effbd7aa9b5fb",
+  "tested_head": "bc5087be85b280f51fcd3f891bd7db60d7d06661",
+  "frozen_inputs": 1871,
+  "artifacts": 45,
+  "source_comparison": "66/71 exact; five current-main Cargo additions independently reviewed",
+  "tests": {
+    "deterministic": {
+      "passed": 353,
+      "groups": 66
+    },
+    "fast": {
+      "passed": 353,
+      "groups": 66
+    },
+    "fast-simd8": {
+      "passed": 353,
+      "groups": 66
+    }
+  },
+  "compiler_receipts": [
+    {
+      "name": "deterministic-tests",
+      "features": {
+        "simba": [
+          "libm",
+          "libm_force",
+          "std",
+          "wide"
+        ],
+        "parry3d": [
+          "alloc",
+          "dim3",
+          "downcast-rs",
+          "ena",
+          "enhanced-determinism",
+          "f32",
+          "hashbrown",
+          "indexmap",
+          "parallel",
+          "rayon",
+          "required-features",
+          "rstar",
+          "slab",
+          "smallvec",
+          "std"
+        ],
+        "parry2d": [
+          "alloc",
+          "dim2",
+          "downcast-rs",
+          "ena",
+          "enhanced-determinism",
+          "f32",
+          "hashbrown",
+          "indexmap",
+          "parallel",
+          "rayon",
+          "required-features",
+          "slab",
+          "smallvec",
+          "spade",
+          "std"
+        ],
+        "rapier2d": [
+          "alloc",
+          "block-solver",
+          "default",
+          "dim2",
+          "enhanced-determinism",
+          "f32",
+          "parallel",
+          "std"
+        ],
+        "rapier3d": [
+          "alloc",
+          "default",
+          "dim3",
+          "enhanced-determinism",
+          "f32",
+          "parallel",
+          "std"
+        ]
+      }
+    },
+    {
+      "name": "deterministic-clippy",
+      "features": {
+        "simba": [
+          "libm",
+          "libm_force",
+          "std",
+          "wide"
+        ],
+        "parry3d": [
+          "alloc",
+          "dim3",
+          "downcast-rs",
+          "ena",
+          "enhanced-determinism",
+          "f32",
+          "hashbrown",
+          "indexmap",
+          "parallel",
+          "rayon",
+          "required-features",
+          "rstar",
+          "slab",
+          "smallvec",
+          "std"
+        ],
+        "parry2d": [
+          "alloc",
+          "dim2",
+          "downcast-rs",
+          "ena",
+          "enhanced-determinism",
+          "f32",
+          "hashbrown",
+          "indexmap",
+          "parallel",
+          "rayon",
+          "required-features",
+          "slab",
+          "smallvec",
+          "spade",
+          "std"
+        ],
+        "rapier2d": [
+          "alloc",
+          "block-solver",
+          "default",
+          "dim2",
+          "enhanced-determinism",
+          "f32",
+          "parallel",
+          "std"
+        ],
+        "rapier3d": [
+          "alloc",
+          "default",
+          "dim3",
+          "enhanced-determinism",
+          "f32",
+          "parallel",
+          "std"
+        ]
+      }
+    },
+    {
+      "name": "deterministic-ancestry-resume",
+      "features": {
+        "simba": [
+          "libm",
+          "libm_force",
+          "std",
+          "wide"
+        ],
+        "parry3d": [
+          "alloc",
+          "dim3",
+          "downcast-rs",
+          "ena",
+          "enhanced-determinism",
+          "f32",
+          "hashbrown",
+          "indexmap",
+          "parallel",
+          "rayon",
+          "required-features",
+          "rstar",
+          "slab",
+          "smallvec",
+          "std"
+        ],
+        "rapier3d": [
+          "alloc",
+          "default",
+          "dim3",
+          "enhanced-determinism",
+          "f32",
+          "parallel",
+          "std"
+        ],
+        "parry2d": [
+          "alloc",
+          "dim2",
+          "downcast-rs",
+          "ena",
+          "enhanced-determinism",
+          "f32",
+          "hashbrown",
+          "indexmap",
+          "parallel",
+          "rayon",
+          "required-features",
+          "slab",
+          "smallvec",
+          "spade",
+          "std"
+        ],
+        "rapier2d": [
+          "alloc",
+          "block-solver",
+          "default",
+          "dim2",
+          "enhanced-determinism",
+          "f32",
+          "parallel",
+          "std"
+        ]
+      }
+    },
+    {
+      "name": "fast-tests",
+      "features": {
+        "simba": [
+          "libm",
+          "std",
+          "wide"
+        ],
+        "parry3d": [
+          "alloc",
+          "dim3",
+          "downcast-rs",
+          "ena",
+          "f32",
+          "hashbrown",
+          "parallel",
+          "rayon",
+          "required-features",
+          "rstar",
+          "slab",
+          "smallvec",
+          "std"
+        ],
+        "parry2d": [
+          "alloc",
+          "dim2",
+          "downcast-rs",
+          "ena",
+          "f32",
+          "hashbrown",
+          "parallel",
+          "rayon",
+          "required-features",
+          "slab",
+          "smallvec",
+          "spade",
+          "std"
+        ],
+        "rapier2d": [
+          "alloc",
+          "block-solver",
+          "default",
+          "dim2",
+          "f32",
+          "parallel",
+          "std"
+        ],
+        "rapier3d": [
+          "alloc",
+          "default",
+          "dim3",
+          "f32",
+          "parallel",
+          "std"
+        ]
+      }
+    },
+    {
+      "name": "fast-clippy",
+      "features": {
+        "simba": [
+          "libm",
+          "std",
+          "wide"
+        ],
+        "parry3d": [
+          "alloc",
+          "dim3",
+          "downcast-rs",
+          "ena",
+          "f32",
+          "hashbrown",
+          "parallel",
+          "rayon",
+          "required-features",
+          "rstar",
+          "slab",
+          "smallvec",
+          "std"
+        ],
+        "parry2d": [
+          "alloc",
+          "dim2",
+          "downcast-rs",
+          "ena",
+          "f32",
+          "hashbrown",
+          "parallel",
+          "rayon",
+          "required-features",
+          "slab",
+          "smallvec",
+          "spade",
+          "std"
+        ],
+        "rapier2d": [
+          "alloc",
+          "block-solver",
+          "default",
+          "dim2",
+          "f32",
+          "parallel",
+          "std"
+        ],
+        "rapier3d": [
+          "alloc",
+          "default",
+          "dim3",
+          "f32",
+          "parallel",
+          "std"
+        ]
+      }
+    },
+    {
+      "name": "fast-ancestry",
+      "features": {
+        "simba": [
+          "libm",
+          "std",
+          "wide"
+        ],
+        "parry3d": [
+          "alloc",
+          "dim3",
+          "downcast-rs",
+          "ena",
+          "f32",
+          "hashbrown",
+          "parallel",
+          "rayon",
+          "required-features",
+          "rstar",
+          "slab",
+          "smallvec",
+          "std"
+        ],
+        "rapier3d": [
+          "alloc",
+          "default",
+          "dim3",
+          "f32",
+          "parallel",
+          "std"
+        ],
+        "parry2d": [
+          "alloc",
+          "dim2",
+          "downcast-rs",
+          "ena",
+          "f32",
+          "hashbrown",
+          "parallel",
+          "rayon",
+          "required-features",
+          "slab",
+          "smallvec",
+          "spade",
+          "std"
+        ],
+        "rapier2d": [
+          "alloc",
+          "block-solver",
+          "default",
+          "dim2",
+          "f32",
+          "parallel",
+          "std"
+        ]
+      }
+    },
+    {
+      "name": "fast-simd8-tests",
+      "features": {
+        "simba": [
+          "libm",
+          "std",
+          "wide"
+        ],
+        "parry3d": [
+          "alloc",
+          "dim3",
+          "downcast-rs",
+          "ena",
+          "f32",
+          "hashbrown",
+          "parallel",
+          "rayon",
+          "required-features",
+          "rstar",
+          "simd8",
+          "slab",
+          "smallvec",
+          "std"
+        ],
+        "parry2d": [
+          "alloc",
+          "dim2",
+          "downcast-rs",
+          "ena",
+          "f32",
+          "hashbrown",
+          "parallel",
+          "rayon",
+          "required-features",
+          "simd8",
+          "slab",
+          "smallvec",
+          "spade",
+          "std"
+        ],
+        "rapier2d": [
+          "alloc",
+          "block-solver",
+          "default",
+          "dim2",
+          "f32",
+          "parallel",
+          "simd8",
+          "std"
+        ],
+        "rapier3d": [
+          "alloc",
+          "default",
+          "dim3",
+          "f32",
+          "parallel",
+          "simd8",
+          "std"
+        ]
+      }
+    },
+    {
+      "name": "fast-simd8-clippy",
+      "features": {
+        "simba": [
+          "libm",
+          "std",
+          "wide"
+        ],
+        "parry3d": [
+          "alloc",
+          "dim3",
+          "downcast-rs",
+          "ena",
+          "f32",
+          "hashbrown",
+          "parallel",
+          "rayon",
+          "required-features",
+          "rstar",
+          "simd8",
+          "slab",
+          "smallvec",
+          "std"
+        ],
+        "parry2d": [
+          "alloc",
+          "dim2",
+          "downcast-rs",
+          "ena",
+          "f32",
+          "hashbrown",
+          "parallel",
+          "rayon",
+          "required-features",
+          "simd8",
+          "slab",
+          "smallvec",
+          "spade",
+          "std"
+        ],
+        "rapier2d": [
+          "alloc",
+          "block-solver",
+          "default",
+          "dim2",
+          "f32",
+          "parallel",
+          "simd8",
+          "std"
+        ],
+        "rapier3d": [
+          "alloc",
+          "default",
+          "dim3",
+          "f32",
+          "parallel",
+          "simd8",
+          "std"
+        ]
+      }
+    },
+    {
+      "name": "fast-simd8-ancestry",
+      "features": {
+        "simba": [
+          "libm",
+          "std",
+          "wide"
+        ],
+        "parry3d": [
+          "alloc",
+          "dim3",
+          "downcast-rs",
+          "ena",
+          "f32",
+          "hashbrown",
+          "parallel",
+          "rayon",
+          "required-features",
+          "rstar",
+          "simd8",
+          "slab",
+          "smallvec",
+          "std"
+        ],
+        "rapier3d": [
+          "alloc",
+          "default",
+          "dim3",
+          "f32",
+          "parallel",
+          "simd8",
+          "std"
+        ],
+        "parry2d": [
+          "alloc",
+          "dim2",
+          "downcast-rs",
+          "ena",
+          "f32",
+          "hashbrown",
+          "parallel",
+          "rayon",
+          "required-features",
+          "simd8",
+          "slab",
+          "smallvec",
+          "spade",
+          "std"
+        ],
+        "rapier2d": [
+          "alloc",
+          "block-solver",
+          "default",
+          "dim2",
+          "f32",
+          "parallel",
+          "simd8",
+          "std"
+        ]
+      }
+    }
+  ],
+  "prior_failure": [
+    {
+      "name": "deterministic-ancestry",
+      "exit": 101,
+      "reason": "Tauri custom build refused because this checkout lacked ignored editor/ui/dist. Generated the existing frontend from locked dependencies, preserved extra frontend input/output identities, and resumed unchanged Rust compilation. No production source was altered."
+    }
+  ],
+  "limits": [
+    "CPU ci-profile tests and compile-only ancestry, no GPU/device/performance or backend adoption claim.",
+    "Same behavior suites run under three modes; counts are not three times as many distinct tests.",
+    "Project settings/process selection/export routing are later reviewed slices; default remains deterministic.",
+    "Production PhysicsUnsupported remains unchanged. Trusted clone diagnostic does not admit untrusted solver states.",
+    "Retained producer checks describe their immutable original source; these integration commands bind the current main172 union."
+  ]
+}

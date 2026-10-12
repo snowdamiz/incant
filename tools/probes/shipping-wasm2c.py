@@ -284,6 +284,42 @@ def compound_guests(rustc, inputs, guests, environment):
     return modules
 
 
+def root_motion_guests(rustc, inputs, guests, environment):
+    source=inputs/'sdk-root-motion.rs'
+    shutil.copy2(ROOT/'sdk/rust/samples/root_motion.rs',source)
+    failure=inputs/'root-motion-failure.rs'
+    shutil.copy2(ROOT/'sdk/rust/fixtures/root_motion_failure.rs',failure)
+    modules=[]
+    for kind in (None,'prefix','capacity','legacy','v2','v3','v4','v5','ik_v1','ik_v2','owner','quota','late','callback','trap'):
+        name='rust-root-motion'+('-'+kind.replace('_','-') if kind else '')
+        module=guests/(name+'.wasm')
+        rust_guest.compile(rustc,failure if kind else source,module,env=environment,cfg=['root_'+kind] if kind else ())
+        modules.append((name,module))
+    return modules
+
+
+def hud_guests(rustc, inputs, guests, environment):
+    source = inputs/'sdk-hud.rs'
+    shutil.copy2(ROOT/'sdk/rust/samples/hud.rs', source)
+    module = guests/'rust-hud.wasm'
+    rust_guest.compile(rustc, source, module, env=environment)
+    return [('rust-hud', module)]
+
+
+def audio_guests(rustc, inputs, guests, environment):
+    source = inputs/'sdk-audio-transport.rs'
+    shutil.copy2(ROOT/'sdk/rust/samples/audio_transport.rs', source)
+    failure = inputs/'audio-failure.rs'
+    shutil.copy2(ROOT/'sdk/rust/fixtures/audio_failure.rs', failure)
+    modules = []
+    for kind in (None, 'prefix', 'scratch', 'snapshot', 'seek', 'gain', 'owner', 'role', 'quota', 'late', 'callback', 'trap'):
+        name = 'rust-audio-' + (kind or 'transport')
+        module = guests/(name+'.wasm')
+        rust_guest.compile(rustc, failure if kind else source, module, env=environment, cfg=['audio_'+kind] if kind else ())
+        modules.append((name, module))
+    return modules
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
@@ -353,6 +389,9 @@ def main():
             modules.extend(animation_pose_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(animation_ik_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(compound_guests(rustc, inputs, sdk_guests, environment))
+            modules.extend(root_motion_guests(rustc, inputs, sdk_guests, environment))
+            modules.extend(hud_guests(rustc, inputs, sdk_guests, environment))
+            modules.extend(audio_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(navigation_path_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(physics_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(formatting_guests(rustc, inputs, sdk_guests, environment))
@@ -381,7 +420,7 @@ def main():
                 [sys.executable, ROOT/'tools/probes/development-wasm.py', out/'development', '--rustup', args.rustup, '--static-conformance', '--profile', args.profile],
             ]
             retained = out/'animation-pose-guests';retained.mkdir()
-            selected = [m for m in manifest['modules'] if m['name'].startswith(('rust-animation-poses','animation-poses','rust-animation-ik','animation-ik','rust-animation-compound','animation-compound'))]
+            selected = [m for m in manifest['modules'] if m['name'].startswith(('rust-animation-poses','animation-poses','rust-animation-ik','animation-ik','rust-animation-compound','animation-compound','rust-root-motion','root-motion','rust-hud','hud','rust-audio-','audio-transport'))]
             prefixes = tuple(m['prefix']+'.' for m in selected)+tuple(m['prefix']+'-' for m in selected)
             retained_hashes = {}
             for name,digest in manifest['files'].items():
@@ -389,7 +428,7 @@ def main():
                 if name.startswith(prefixes):
                     shutil.copy2(bundle/name,retained/name);retained_hashes[name]=digest
             source_hashes = {}
-            for name in ('animation_poses.rs','animation_poses_failure.rs','animation-poses.wat','animation_ik.rs','animation_ik_failure.rs','animation-ik.wat','sdk-animation-compound.rs','animation_compound_failure.rs','animation-compound.wat'):
+            for name in ('animation_poses.rs','animation_poses_failure.rs','animation-poses.wat','animation_ik.rs','animation_ik_failure.rs','animation-ik.wat','sdk-animation-compound.rs','animation_compound_failure.rs','animation-compound.wat','sdk-root-motion.rs','root-motion-failure.rs','root-motion.wat','sdk-hud.rs','hud.wat','sdk-audio-transport.rs','audio-failure.rs','audio-transport.wat'):
                 shutil.copy2(inputs/name,retained/name);source_hashes[name]=sha(retained/name)
             record = {'kind':'native-animation-pose-conformance','wabt':manifest['wabt'],
                       'module_count':len(manifest['modules']),'verified_prepared_files':len(manifest['files']),

@@ -23,6 +23,9 @@ impl TickCommands {
     pub fn expose<'js>(&self, ctx: &Ctx<'js>) -> rquickjs::Result<Object<'js>> {
         let object = Object::new_proto(ctx.clone(), None)?;
         for name in [
+            "setUiText",
+            "setUiDisabled",
+            "setText",
             "setLocale",
             "spawn",
             "despawn",
@@ -30,10 +33,14 @@ impl TickCommands {
             "setVelocity",
             "controlFlipbook",
             "controlAnimation",
+            "controlRootMotion",
             "setAnimationIk",
             "setAnimationParameter",
             "selectAnimationState",
             "setAudioPlaying",
+            "stopAudio",
+            "restartAudio",
+            "seekAudio",
             "setAudioGain",
             "setAudioBusGain",
         ] {
@@ -128,7 +135,18 @@ fn parse<'js>(
     name: &str,
     args: &[Value<'js>],
 ) -> rquickjs::Result<StructuralCommand> {
-    if matches!(name, "setAudioPlaying" | "setAudioGain" | "setAudioBusGain") {
+    if matches!(name, "setUiText" | "setUiDisabled" | "setText") {
+        return crate::hud::parse(ctx, name, args);
+    }
+    if matches!(
+        name,
+        "setAudioPlaying"
+            | "setAudioGain"
+            | "setAudioBusGain"
+            | "stopAudio"
+            | "restartAudio"
+            | "seekAudio"
+    ) {
         return crate::audio_commands::parse(ctx, name, args);
     }
     if matches!(name, "setAnimationParameter" | "selectAnimationState") {
@@ -136,6 +154,9 @@ fn parse<'js>(
     }
     if name == "setAnimationIk" {
         return crate::animation_ik::parse(ctx, args);
+    }
+    if name == "controlRootMotion" {
+        return crate::root_motion::parse(ctx, args);
     }
     if name == "controlAnimation" {
         return crate::animation_commands::parse(ctx, args);

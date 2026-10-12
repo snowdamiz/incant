@@ -10,6 +10,12 @@ pub enum AudioControl {
     /// Desired pause/resume state. An unchanged true value does not replay an
     /// ended voice; false then true at separate sync points creates a new edge.
     SetPlaying(bool),
+    /// Stop and reset to the beginning, even if already stopped or paused.
+    Stop,
+    /// Restart from the beginning, even if already playing or ended.
+    Restart,
+    /// Seek to a finite [0,3600] second position, preserving desired playing state.
+    Seek(f64),
     SourceGain(f32),
     BusGain(f32),
 }
@@ -56,6 +62,33 @@ impl NativeWorld {
                         .as_mut()
                         .ok_or(SceneError::Invalid("audio control requires final source"))?
                         .playing = playing;
+                }
+                AudioControl::Stop | AudioControl::Restart | AudioControl::Seek(_) => {
+                    let source = node
+                        .source
+                        .as_mut()
+                        .ok_or(SceneError::Invalid("audio control requires final source"))?;
+                    let seconds = if let AudioControl::Seek(seconds) = *control {
+                        seconds
+                    } else {
+                        0.
+                    };
+                    if !(0. ..=3600.).contains(&seconds) {
+                        return Err(SceneError::Invalid(
+                            "audio seek must be finite in [0,3600] seconds",
+                        )
+                        .into());
+                    }
+                    source.transport_epoch = source
+                        .transport_epoch
+                        .checked_add(1)
+                        .ok_or(RuntimeError::GenerationOverflow)?;
+                    source.start_seconds = seconds;
+                    match control {
+                        AudioControl::Stop => source.playing = false,
+                        AudioControl::Restart => source.playing = true,
+                        _ => {}
+                    }
                 }
                 AudioControl::SourceGain(db) => {
                     node.source

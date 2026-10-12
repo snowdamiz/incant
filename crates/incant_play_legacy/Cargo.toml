@@ -6,6 +6,13 @@ edition.workspace = true
 rust-version.workspace = true
 publish.workspace = true
 
+[features]
+default = ["physics-deterministic"]
+
+# Select one physics kernel for the entire process, including build/test hosts.
+physics-deterministic = ["incant_cmd/physics-deterministic", "incant_core/physics-deterministic"]
+physics-fast-simd8 = ["incant_cmd/physics-fast-simd8", "incant_core/physics-fast-simd8"]
+
 [dependencies]
 rquickjs = { workspace = true }
 serde = { workspace = true }

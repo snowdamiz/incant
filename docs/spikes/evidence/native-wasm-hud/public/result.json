@@ -1,0 +1,82 @@
+{
+  "passed": true,
+  "proof_root": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-hud-export-001",
+  "authoring": {
+    "project_sha256": "62e385dc261b7ae1d49112b48d0cda853584634f2bcf30a58efe99776713afd5",
+    "source_sha256": "3788911e9d70555bc653fc3b97737e73eb6ca0bfcca78ce29d49b222a2e9ce31",
+    "scene": "01M4RSFS4YVQATN9G0ZECP8N4E",
+    "tick_rate": 60,
+    "fonts": [
+      "01M4RSFSBA4YVM6BKF1B7Y1K7N",
+      "01M4RSFSCPG8DT5ATZ6P5W478C",
+      "01M4RSFSE13XD8ANSVH3W5QWJJ"
+    ],
+    "revision": 7,
+    "command_bus_only": true,
+    "journal_reopened": true,
+    "ui_undo_redo": true,
+    "headless_sha256": "0e68e478561f48218fe19b6b77909ef945ec2303bb633357fcebcc4d04513e21",
+    "hud_undo_redo_reopen": true,
+    "wasm_sha256": "99a79dea3853b97e505e8d7fcb48380f94390cf86a6a507354496e4384a84327",
+    "guest_source_sha256": "ddefce840470a27a7996b899482a634096af4516c5bf4f25e64af9079a39043b",
+    "module": "01M4RSFW7WGECM3V396SZKQM3D"
+  },
+  "player_sha256": "fb63e1c5c1303ad7ed63e67d678fe69b3d0aad84fe085f4e0acb11ec875ce550",
+  "player_bytes": 9818064,
+  "package_files": {
+    "build.log": "1a1a4652724495da29b5b2c9c6dfae762e9b7d51ceb7004b0a19c2ce004fbdde",
+    "export.json": "120128876d4f5de106dae7c527e91281acafabbbae4e5977a0e13854c8380f47",
+    "player/data/audio/6c2c72f3f439d27dfae5cd3ab7d07fed9aee5eea6e01ecf00f48d7f4a0065711.ipcm": "6c2c72f3f439d27dfae5cd3ab7d07fed9aee5eea6e01ecf00f48d7f4a0065711",
+    "player/data/audio/bb391cc186bb741011a9d500103383ccd8cdaf0164c06b379c91d77e94de9b35.json": "b0a2c95a6962d6b4447ea5d8af111e8521689276e14798a3048e2175a0367d6b",
+    "player/data/clips.bin": "ce56aaeb9cb5be8c8e718e98774dfbbcbd9aa2d5cb5e1a086a1aded688de880e",
+    "player/data/empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+    "player/data/fonts/1087d4bb69160e3e5955407294226ca3da11166a3188ada3c1a166ba14e55ceb.json": "c3fd206832637ec3ad354dee08b4c67012da904d34a3ce9ec9c97e30f70e07f0",
+    "player/data/fonts/2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9.ifont": "92960e6b23eff12e1bf13361b2b94b490d723f8d93e6945ba34b9f9b3acd2081",
+    "player/data/fonts/3299d6ab8033fb1d163f892dfcb1b8838cf1c46935c329d82da6f7b9e27dad82.ifont": "49e09202aadc1c7463502004f791b596480a92d22e04b9948fabf8648a004814",
+    "player/data/fonts/6864e1444bc7002790e682360d3f93bd45fe51b7045a64ecbf0e76e19e6b758e.json": "167d0dc13b807552b06d0195e3a90ee24f5074206dd6d6f2106ad59e65b35fde",
+    "player/data/fonts/9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2.json": "e43c79c54c311c5759bdf686b43b9b112b0177bafd6938782ebb782d75018812",
+    "player/data/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont": "8bd20a742cc19c0fe65b106d983ea1ed816c4cd5ca1c3d50bdc4d05aeb5f8e7a",
+    "player/data/input-actions.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "player/data/models/71fbcae82debc0236bda7576327733a6943d93ce7adb913cbe1d95fe931d511f.incmodel": "9be97471434742eb82eb6fe2de0287d618bce848a52fb6eb1cf7e428c6a908de",
+    "player/data/package.json": "aafafbbf43a0f5d56b50ecb9f119c8c385f1bd5850a0c73be6844a98533066c7",
+    "player/data/world.scene": "a961a01af9bb9d35a1046ed7cdc6f14771afa3de945a77d3663c806a5b0e83ce",
+    "player/incant_game_player": "fb63e1c5c1303ad7ed63e67d678fe69b3d0aad84fe085f4e0acb11ec875ce550",
+    "project-build.json": "50bc8c10bf29e91beebdf9d63807c0a0e921367e5537751631cd032f33bf61ab",
+    "symbols/incant_game_player.dSYM/Contents/Info.plist": "580f2041a1af4810f6608dc3b3be7c74105f8c000c39082aaee9fb9203b7b059",
+    "symbols/incant_game_player.dSYM/Contents/Resources/DWARF/incant_game_player-29aa888041f2c759": "7e6d6257ad8a4ea7b7481f30fb9e06bf9fc8f7a1d4c39e316c37756bd59ef55a",
+    "symbols/incant_game_player.dSYM/Contents/Resources/Relocations/aarch64/incant_game_player-29aa888041f2c759.yml": "b2b34422a38ebdce1cf6fe4a3e8666335241a3718112730ce57c775146835e42",
+    "symbols/script-symbols.json": "1b94575acbbfc4ab9d6fac63cd98df241c40b707ee60cef65dc0802d6ae834b8"
+  },
+  "positive_processes": 3,
+  "exact_refusals": [
+    {
+      "key": "F1",
+      "diagnostic": "Error: Session(Module(Boundary(Runtime(Scene(Invalid(\"HUD text requires a text widget\"))))))"
+    },
+    {
+      "key": "F2",
+      "diagnostic": "Error: Session(Module(Trap(1)))"
+    },
+    {
+      "key": "F3",
+      "diagnostic": "Error: Session(Module(Boundary(Runtime(Scene(Invalid(\"HUD command text or count limit\"))))))"
+    },
+    {
+      "key": "F4",
+      "diagnostic": "Error: Session(Module(Trap(1)))"
+    },
+    {
+      "key": "F5",
+      "diagnostic": "Error: Session(Module(Boundary(Runtime(MissingEntity(StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 33]))))))"
+    },
+    {
+      "kind": "module-checkpoint",
+      "diagnostic": "Error: Checkpoint(Unsupported(\"static module state ABI\"))"
+    }
+  ],
+  "source_cache_build_maps_deleted": true,
+  "limitations": [
+    "No module checkpoints",
+    "CPU canonical shaping only, no GPU/window/appearance or performance gate"
+  ]
+}

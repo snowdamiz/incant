@@ -1,0 +1,37 @@
+{
+  "at": "2026-10-12T19:41:15.327691+00:00",
+  "accepted": true,
+  "manifest_sha256": "e8981ec543985cef91095ecafe35a53e132e276d876f3adbcfa6ee1cadf6e9e0",
+  "head": "5641f2dec69bbd8b7c9d38a054922f8f7297ecb9",
+  "artifacts_verified": 487,
+  "frozen_inputs": 1817,
+  "only_frozen_change": [
+    ".github/workflows/desktop.yml"
+  ],
+  "accepted_producer_inputs": 119,
+  "checks": 15,
+  "actual_test_counts": [
+    {
+      "groups": 86,
+      "passed": 606,
+      "failed": 0,
+      "ignored": 0
+    },
+    {
+      "groups": 80,
+      "passed": 453,
+      "failed": 0,
+      "ignored": 0
+    }
+  ],
+  "fresh_processes": 3,
+  "scalars_each": 22464,
+  "vectors_each": 256,
+  "exact_development_parity": true,
+  "precise_refusals": 11,
+  "commands_verified": 31,
+  "package_files_verified": 14,
+  "source_removed": true,
+  "scope": "Independent read-only current-main source and retained actual execution audit; no rebuild/GPU/device/phase gate",
+  "findings": []
+}

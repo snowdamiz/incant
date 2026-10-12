@@ -1,5 +1,6 @@
 //! Mandatory native spatial hosting, composed with input/VM/physics/audio ticks.
 //! The default consumer exposes CPU input only; it does not submit a GPU frame.
+mod recorded_ui;
 mod ui;
 use incant_game_runtime::SceneHost;
 use incant_render_data::SceneInput;
@@ -9,6 +10,7 @@ use incant_render_native::{
     NativeRenderError, NativeRenderInput, SyncError, UpdateKind, VisualCaches,
 };
 use incant_runtime::{NativeWorld, RuntimeError, StableId};
+pub use recorded_ui::{RecordedUiError, tick_recorded_ui, validate_ui_recording};
 use std::{convert::Infallible, path::PathBuf, sync::Arc};
 use thiserror::Error;
 pub use ui::UiSettings;

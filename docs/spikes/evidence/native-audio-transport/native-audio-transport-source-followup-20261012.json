@@ -1,0 +1,22 @@
+{
+  "decision": "accepted test-only delta",
+  "prior_review_sha256": "f09a8e7a4fc2e899c6c4f99b97c56b1558fda071f1d70f53fac6ae10bb08ae7c",
+  "freeze": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-002/freeze.json",
+  "freeze_sha256": "c2641bcf50a13feaf1d3b150d899157e7fb963d9577ac7db1f0f8ef94d3947d4",
+  "changed_sources": {
+    "crates/incant_audio_runtime/tests/checkpoints/transport.rs": {
+      "before": "ecad7393de7fea0c0ffef64dce4eeb352bc6ec0b2518698a926fd8a4014a70fa",
+      "after": "3f1d5534b519f25806cc25208c5d47dc124b07e2b02a0c0f20614ce3d52e8197"
+    },
+    "crates/incant_script/tests/audio_controls.rs": {
+      "before": "f43f1536d46852c4a10eef0acea3ee8563c42f215688a4c0d5dd655f1be72c9c",
+      "after": "674a23ec8f5ef9ce69a5009842be708c69d453813ff841c4e7066290d6d8280d"
+    }
+  },
+  "findings": [],
+  "notes": [
+    "71 actual rendered frames bring queued stop to accepted capture boundary; original red result must remain in executed evidence.",
+    "Expired stop/restart now invoked with valid one-argument signatures, so refusal tests capability expiry rather than argument arity.",
+    "Other24 source identities unchanged; no execution performed by reviewer."
+  ]
+}

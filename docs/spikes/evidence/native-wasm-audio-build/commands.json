@@ -1,0 +1,106 @@
+[
+  {
+    "name": "headless",
+    "argv": [
+      "./tools/cargo",
+      "build",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_headless",
+      "--features",
+      "wasmtime-host"
+    ],
+    "exit_code": 0,
+    "seconds": 63.03458283299915,
+    "log": "headless.log",
+    "sha256": "db317db2fa500ded2e8b0a5849a8010abe9cfffceb4d125a6a6e7f21d1e363ff"
+  },
+  {
+    "name": "oracle",
+    "argv": [
+      "./tools/cargo",
+      "build",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_cook",
+      "--example",
+      "audio_package_oracle"
+    ],
+    "exit_code": 0,
+    "seconds": 92.7206496660001,
+    "log": "oracle.log",
+    "sha256": "30c5105dd4c1f1199b29b671bd6cb89f42b11c6c56bae300172c75995aac2e2e"
+  },
+  {
+    "name": "oracle-clippy",
+    "argv": [
+      "./tools/cargo",
+      "clippy",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_cook",
+      "--example",
+      "audio_package_oracle",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "seconds": 5.174697584003297,
+    "log": "oracle-clippy.log",
+    "sha256": "a84f9a78e208e16fda39cd925af8b09caef67898171175fd815d27189df6f371"
+  },
+  {
+    "name": "sdk-wasm32",
+    "argv": [
+      "./tools/cargo",
+      "check",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant-module",
+      "--target",
+      "wasm32-unknown-unknown"
+    ],
+    "exit_code": 0,
+    "seconds": 1.6729334580013528,
+    "log": "sdk-wasm32.log",
+    "sha256": "905737da029c5b52c48f9ab8d2e582e286a494fa0ee4399bc7c25831574b88dc"
+  },
+  {
+    "name": "fmt",
+    "argv": [
+      "./tools/cargo",
+      "fmt",
+      "--all",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 1.9221396659995662,
+    "log": "fmt.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "diff",
+    "argv": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 0.049010334001650335,
+    "log": "diff.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

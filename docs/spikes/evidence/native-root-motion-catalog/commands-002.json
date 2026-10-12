@@ -1,0 +1,119 @@
+[
+  {
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_cook",
+      "--no-default-features",
+      "--features",
+      "scene",
+      "--test",
+      "root_motion"
+    ],
+    "cwd": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-layer1-checks-002/00.log",
+    "status": "finished",
+    "exit_code": 0,
+    "elapsed_seconds": 7.959500290999131,
+    "sha256": "08e526299db996efdd95b794c341643e3993c0eac6912ec7665a1f2f7023c5a8"
+  },
+  {
+    "command": [
+      "./tools/cargo",
+      "clippy",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_cook",
+      "--no-default-features",
+      "--features",
+      "scene",
+      "--test",
+      "root_motion",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "cwd": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-layer1-checks-002/01.log",
+    "status": "finished",
+    "exit_code": 0,
+    "elapsed_seconds": 10.039387625000018,
+    "sha256": "7d5dd8ae456bdf7e6a61def7c9d819b297988d5632808272a3acb1bcfe448817"
+  },
+  {
+    "command": [
+      "node",
+      "tools/generate_sdk.mjs",
+      "--check"
+    ],
+    "cwd": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-layer1-checks-002/02.log",
+    "status": "finished",
+    "exit_code": 0,
+    "elapsed_seconds": 0.05586037500142993,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "command": [
+      "./node_modules/.bin/tsc",
+      "--noEmit",
+      "-p",
+      "sdk/ts/tsconfig.json"
+    ],
+    "cwd": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-layer1-checks-002/03.log",
+    "status": "finished",
+    "exit_code": 0,
+    "elapsed_seconds": 0.3072270840002602,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "command": [
+      "python3",
+      "tools/generate_conventions.py",
+      "--check"
+    ],
+    "cwd": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-layer1-checks-002/04.log",
+    "status": "finished",
+    "exit_code": 0,
+    "elapsed_seconds": 0.038051416999223875,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "command": [
+      "./tools/cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "cwd": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-layer1-checks-002/05.log",
+    "status": "finished",
+    "exit_code": 0,
+    "elapsed_seconds": 1.3040407080006844,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "cwd": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-layer1-checks-002/06.log",
+    "status": "finished",
+    "exit_code": 0,
+    "elapsed_seconds": 0.016821000001073116,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

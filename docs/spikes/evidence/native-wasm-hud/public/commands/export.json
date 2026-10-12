@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "/opt/homebrew/opt/python@3.14/bin/python3.14",
+    "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/tools/export_native.py",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-hud-export-001/authoring/project.json",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-hud-export-001/package",
+    "--camera",
+    "00000000000000000000000003",
+    "--ui-viewport",
+    "320x200",
+    "--wabt",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-compound-conformance-007/inputs/wabt"
+  ],
+  "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+  "returncode": 0,
+  "stdout_sha256": "7e27c87ab4e8b376a57cca16b6d98fbab6cc0dd7f525a96ce72d23f2543333f0",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

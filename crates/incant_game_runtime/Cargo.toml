@@ -6,10 +6,24 @@ rust-version.workspace = true
 publish.workspace = true
 
 [features]
-default = []
+default = ["physics-deterministic"]
 ui = ["dep:incant_ui", "incant_ui/native", "incant_script/ui"]
 static-module = ["incant_script/static-module"]
 device = ["incant_audio_runtime/device"]
+
+# Select one physics kernel for the entire process, including build/test hosts.
+physics-deterministic = [
+    "incant_audio_runtime/physics-deterministic",
+    "incant_runtime/physics-deterministic",
+    "incant_script/physics-deterministic",
+    "incant_ui?/physics-deterministic",
+]
+physics-fast-simd8 = [
+    "incant_audio_runtime/physics-fast-simd8",
+    "incant_runtime/physics-fast-simd8",
+    "incant_script/physics-fast-simd8",
+    "incant_ui?/physics-fast-simd8",
+]
 
 [dependencies]
 incant_ui = { workspace = true, optional = true }

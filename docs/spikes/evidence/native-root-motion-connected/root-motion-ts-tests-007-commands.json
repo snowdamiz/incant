@@ -1,0 +1,52 @@
+[
+  {
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_runtime",
+      "--lib",
+      "root_motion",
+      "--",
+      "--nocapture"
+    ],
+    "status": 0,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-ts-tests-007/00.log"
+  },
+  {
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_script",
+      "root_motion"
+    ],
+    "status": 0,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-ts-tests-007/01.log"
+  },
+  {
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_render_native",
+      "--test",
+      "animation",
+      "root_motion"
+    ],
+    "status": 101,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-ts-tests-007/02.log"
+  }
+]

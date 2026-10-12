@@ -1,5 +1,7 @@
 #[path = "../../incant_assets_runtime/tests/support/mod.rs"]
 mod pcm;
+#[path = "../../incant_runtime/tests/support/scene_format.rs"]
+mod scene_format;
 use incant_audio_runtime::{ClipBinding, SourceState};
 use incant_game_runtime::{GameError, HostedOfflineGameSession, OfflineGameSession};
 use incant_input::{GamepadAxis, InputActions, InputEvent, KeyCode};
@@ -129,6 +131,7 @@ impl Fixture {
                     bus: None,
                     listener: false,
                     source: Some(NativeAudioSource {
+                        transport_epoch: 0,
                         clip: id(90),
                         bus: None,
                         gain_db: 0.,
@@ -163,7 +166,7 @@ impl Fixture {
             .with_spatial(vec![asset], vec![mesh, view])
             .unwrap()
             .to_bytes();
-        assert_eq!(&bytes[8..12], &4u32.to_le_bytes());
+        assert_eq!(&bytes[8..12], &scene_format::scene_format(4).to_le_bytes());
         Self {
             temp,
             scene: CookedScene::from_bytes(&bytes).unwrap(),

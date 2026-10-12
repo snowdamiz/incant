@@ -1,0 +1,87 @@
+{
+  "at": "2026-10-12T20:26:06.108180+00:00",
+  "checkout": "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant",
+  "base": "4347bf0faa7e3b305f425ed4bb8bbf02b7c2a07f",
+  "target": "aarch64-apple-darwin",
+  "profile": "ci",
+  "features": [
+    "mobile-ffi"
+  ],
+  "fixture": "default trusted fixtures/game.js, no authored-game/mobile/device claim",
+  "archive": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-library-001/libincant_game_player.a",
+    "sha256": "1125911b72fc063d759f8db98f66e705296a65b9ec235dfd99092e0cae15122a",
+    "bytes": 86391472
+  },
+  "header": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-library-001/incant_game.h",
+    "sha256": "101c0a974c7b629f66f7d9e9e2d9c038d71a45ccb2a8fdc91739c2ae7fe649c5"
+  },
+  "sources": {
+    "Cargo.toml": "dd9a6d6ff626086e7e1bf2f6845dac09d94c60651d0f43efc1be0cc3b5d83b7c",
+    "Cargo.lock": "bb9f6bc5183813d1be0124986e00515864d4a45f45290a537d5b9e91c995a6f3",
+    ".cargo/config.toml": "0d3b42ee7bc4ef237cb8af440c47e506dcc9cc8b24d49d3cd3d3fea76ae5caa1",
+    "rust-toolchain.toml": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124",
+    "crates/incant_game_player/Cargo.toml": "38fd564984a89b1ceba7e46cc9ab9e7147e6d7c6027c94efdd82feb9502b2abb",
+    "crates/incant_game_player/build.rs": "9c2503ff557cbc15a17a42e3a8ace8759709013fb6cbe3b7f22974eb8224b058",
+    "crates/incant_game_player/include/incant_game.h": "101c0a974c7b629f66f7d9e9e2d9c038d71a45ccb2a8fdc91739c2ae7fe649c5",
+    "crates/incant_game_player/tests/arguments.rs": "16aa748b0fce58ae1b1bac4d83992ac3f02a6b1134996f9939e5fe1debb8b32c",
+    "crates/incant_game_player/tests/routing.rs": "45bef3a51c50ac8d03236461ab4ce8cde92dbbccab0687fe99146a0906d9a50a",
+    "crates/incant_game_player/examples/macos_text_retirement.rs": "56aa6b954c9f6e9f0e7e6e9eb11483d6729dc1fe950f895eb013948fd7941662",
+    "crates/incant_game_player/fixtures/game.js": "466a31676cda2862a9693ab76bc659be5ac3a3f7bece0c740d2024b7820dd90e",
+    "crates/incant_game_player/fixtures/flipbook.rs": "8986dd2c4e9e3d28fa65b1fd205a3df3ce8e3d910d6da9b6de023f2c7cb22081",
+    "crates/incant_game_player/src/session.rs": "b0912738c4c047c06bbb974efb46978e51de263e38ef8a216887f8bf752930dd",
+    "crates/incant_game_player/src/ui.rs": "eb11d2aebd174b5b3ae9d2c40fa94b57e44c5b6e89d9ca7520a5c4de41441ae9",
+    "crates/incant_game_player/src/mobile.rs": "2fefdd46d524a1bd20fad3b5ed65587c4838bcd2e662d5508443260d21382b0b",
+    "crates/incant_game_player/src/checkpoint.rs": "b320651e522fcedb42cec72cb92e162f25733826421669f4f0d3335100554b71",
+    "crates/incant_game_player/src/lib.rs": "097912eb497a659b7951cf10a6d94199e2b81c422daa3d8423e83d61a9c72fc8",
+    "crates/incant_game_player/src/package.rs": "c7d70da9643fee2ee134519ab87f4dfd3792f5386b0b3bd4109bc95820a91366",
+    "crates/incant_game_player/src/startup.rs": "d4723bbc4d1b07df9aa20b3935849e9800d507e94454eeae5da8b9f7fad65595",
+    "crates/incant_game_player/src/gpu.rs": "733fa6e7b825a37ed5b00e7c59e5689778a46a19e815534cc1f1ef0f862434e7",
+    "crates/incant_game_player/src/main.rs": "b389f69564c9e0c1ef6bdfd9786e4b57a32fb169febaba8f2b82adb9f3a06e7c",
+    "crates/incant_game_player/src/program.rs": "8f86e0fa443a36270839d956c06e9c85e9effbe11877d507c5de43978d3e4bc2",
+    "crates/incant_game_player/src/observe.rs": "5651029c68fe79bf7716b1c7ad794045ef219e7dab8093d627569a889c3c3ef9",
+    "crates/incant_game_player/src/mobile/tests.rs": "e6a859221cba5d681f61dccf57649d2fe8f7f45f4d268bd9233643d60f17fc74",
+    "crates/incant_game_player/src/window/termination.rs": "af723978fc8dcb560cf9f3a922f087fb5b3644632275001b16d8af0ca2a86812",
+    "crates/incant_game_player/src/window/ui_input.rs": "3fede07cd57508339182cdc9708f033d86f6e8782b1e3ec707c78f14aabd0470",
+    "crates/incant_game_player/src/window/clock.rs": "f19acd30cfb0a599f487a6f5811f7fc400a7df5d9b8b647f919a38df359f3461",
+    "crates/incant_game_player/src/window/ime.rs": "90990c7e68de5ad287830a82b35f060d3535a1dcee15dec78f3c75237a56ab84",
+    "crates/incant_game_player/src/window/surface.rs": "42eba11f0c95ea913ec6aac57e13b130a4d9f7a13ca898a9456c67c50eb4b8e6",
+    "crates/incant_game_player/src/window/mod.rs": "92e28ae8184dcdc337f81da9ab7c6ec12e6280dca25d977574379f071c172b6c",
+    "crates/incant_game_player/src/window/gamepad.rs": "c08863f2e1247989bd53b6c811baa4e6a00547c50bb5a503dda5209928796b8f",
+    "crates/incant_game_player/src/window/probe.rs": "cb20fa208a0eaad956c94a64f9d7a2715e018604d1c2621b1e58745a205816c7",
+    "crates/incant_game_player/src/window/input.rs": "981d9a43f00540b02cc6805a1b0a717db17154eab1a735f38579429ca8e05803",
+    "crates/incant_game_player/src/window/input/coordinate_tests.rs": "682bed941e66aef61bb057fabe1e08111a0f9a065a2abff06dcc2b0e1b8b7aa3",
+    "crates/incant_game_player/src/window/gamepad/tests.rs": "828113daf0fef2ec4db467055db976fb5736ad2fec61ef84f01a3660f315bd62",
+    "crates/incant_game_player/src/window/ui_input/tests.rs": "2bc776403b2cc7b1147e1f81337030cae1616034b6b0da0990e326218d94b13f",
+    "crates/incant_game_player/tests/fixtures/unsupported-observation.json": "b796450da6ae24ec5d32682af86267272f9fbb9d508e1b6f4fbced8b36069688"
+  },
+  "command": {
+    "argv": [
+      "./tools/cargo",
+      "rustc",
+      "--locked",
+      "--profile",
+      "ci",
+      "-p",
+      "incant_game_player",
+      "--lib",
+      "--features",
+      "mobile-ffi",
+      "--crate-type",
+      "staticlib"
+    ],
+    "exit_code": 0,
+    "seconds": 2.6407333339993784,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-build-002/command-3.log",
+    "sha256": "3d30abe059d6bc27b029015e8b816cec7cfe3a2303883f33be18f6d9fd4ff759"
+  },
+  "parent_freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-build-002/freeze.json",
+    "sha256": "9409a0346a710339648e548a6c354f6fce9e9bd3c63afaa5d81278f9ef70ddfb"
+  },
+  "runtime_graph_log": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-build-002/command-2.log",
+    "sha256": "846fef05f5fa37d05846b276942eee7310669af5904018e5870dcf7c385f7816"
+  }
+}

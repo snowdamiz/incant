@@ -1,0 +1,25 @@
+{
+  "at": "2026-10-12T19:51:13.898889+00:00",
+  "accepted": true,
+  "production_freeze": "36265152931cedd771eb0e3bdcc7ad08e8e08e67e227b6cfab1a8e4686ce5e07",
+  "probe_freeze": "0bc60c763fce632e755f4252e6ae0d4d98ff9eb546a11e96c1b6fadcc23cfc70",
+  "scope": "Source-only follow-up to accepted audio ABI freeze001 and read-only review of public probe/oracle/guest; no execution acceptance",
+  "production_review": "Only added native/ABI compile-time bounds and test-only SceneAudio dependency/lock edge; no wire, runtime publication or arithmetic changes.",
+  "probe_review": [
+    "Public captured WAV/module imports and atomic selection with Undo/Redo and journal reopen",
+    "Typed cook/native world and actual mixer independently emit declarations/PCM; guest uses generated SDK snapshot and ordered transport",
+    "96 ticks check 186 scalar words each, 248 selected vectors and exact actual native PCM; bounded words preserve identity/epoch integers",
+    "Failure diagnostics distinguish SDK poison/native rejection/audio-host seek rejection; guest checkpoint explicit refusal",
+    "Private source/cache/build/tool/map deletion, immutable package/source identities and development parity checked"
+  ],
+  "files": {
+    "tools/probes/native-wasm-audio-export.py": "7f92befb7dc61f7790a32174a5d63e39a5daee04b0580e9735deff46132044e5",
+    "tools/probes/native-wasm-audio-export/behavior.rs": "d53115f2f8a90d52637f9bca1f28a2a69cbaa92ec9cfbbe72ca56de9629d77a5",
+    "crates/incant_cook/examples/audio_package_oracle.rs": "e57134e94237e48dae3b823edb887c64c53d5dc06a2d57f3a0244a5b91711e2c",
+    "crates/incant_wasm_runtime/tests/support/audio_transport.rs": "161e84e979dcb8f3be0dcbc6d67fa3c7e99048dce58e9a49169f0f94ddbdb391",
+    "tools/export_native.py": "a22f6431bb6db373982970e53a219f1f57633c538e08055bcafacefa887699a1",
+    "tools/rust_guest.py": "a01641b59eb8d39e9cd4de58d1a59e3aec97b19179ba52793623a42a725dd5cc",
+    "tools/probes/script-source-transactions.py": "78cd059dda61456f6a66a48151d3e5ccce7e7c812163b2b269f34ee1b0ca700b"
+  },
+  "findings": []
+}

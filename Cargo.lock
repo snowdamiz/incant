@@ -3863,6 +3863,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "incant_anim"
+version = "0.0.1"
+dependencies = [
+ "glam 0.32.1",
+ "thiserror 2.0.21",
+]
+
+[[package]]
 name = "incant_assets"
 version = "0.0.1"
 dependencies = [
@@ -3897,6 +3905,7 @@ version = "0.0.1"
 dependencies = [
  "glam 0.32.1",
  "incant_2d",
+ "incant_anim",
  "incant_text",
  "incant_types",
  "ktx2",
@@ -3962,8 +3971,10 @@ dependencies = [
 name = "incant_cook"
 version = "0.0.1"
 dependencies = [
+ "incant_anim",
  "incant_assets",
  "incant_assets_runtime",
+ "incant_audio_runtime",
  "incant_cmd",
  "incant_doc",
  "incant_import",
@@ -4119,6 +4130,7 @@ dependencies = [
  "incant_render_game",
  "incant_runtime",
  "incant_script",
+ "incant_types",
  "rpassword",
  "schemars 1.2.2",
  "serde",
@@ -4378,6 +4390,7 @@ dependencies = [
  "serde_json",
  "tempfile",
  "thiserror 2.0.21",
+ "ulid",
 ]
 
 [[package]]
@@ -4432,6 +4445,7 @@ dependencies = [
  "bevy_ecs",
  "glam 0.32.1",
  "incant_2d",
+ "incant_anim",
  "incant_localization",
  "incant_nav",
  "incant_physics_2d_runtime",
@@ -4448,6 +4462,7 @@ name = "incant_script"
 version = "0.0.1"
 dependencies = [
  "cpu-time",
+ "incant_anim",
  "incant_audio_runtime",
  "incant_input",
  "incant_localization",
@@ -4563,15 +4578,24 @@ dependencies = [
 name = "incant_wasm_dev"
 version = "0.0.1"
 dependencies = [
+ "incant_anim",
+ "incant_assets",
+ "incant_assets_runtime",
+ "incant_audio_runtime",
+ "incant_game_runtime",
  "incant_input",
  "incant_localization",
+ "incant_render_game",
+ "incant_render_native",
  "incant_runtime",
  "incant_script",
  "incant_types",
+ "incant_ui",
  "incant_wasm_abi",
  "incant_wasm_cook",
  "incant_wasm_runtime",
  "serde_json",
+ "tempfile",
  "thiserror 2.0.21",
  "wasmparser",
  "wasmtime",
@@ -4600,6 +4624,7 @@ version = "0.0.1"
 dependencies = [
  "cc",
  "incant-module",
+ "incant_anim",
  "incant_input",
  "incant_localization",
  "incant_nav",

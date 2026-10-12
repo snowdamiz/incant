@@ -1,0 +1,35 @@
+{
+  "at": "2026-10-12T20:02:43.864831+00:00",
+  "decision": "accepted actual-host evidence, shipping remains separate",
+  "implementation": "b8d9447764f433d2b82d41f9b3a03212df4cf49f",
+  "manifest": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/docs/spikes/evidence/native-wasm-audio.json",
+  "manifest_sha256": "8602ceb0f4cee8e27826644db8f05dcb95233a05f621dfc81fef3e0434001ad9",
+  "verified": {
+    "production_sources": 21,
+    "test_probe_sources": 10,
+    "retained_logs": 20,
+    "retained_receipts": 15,
+    "retained_compiled_artifacts": 405,
+    "retained_guest_sources": 17,
+    "selected_original_and_prepared_module_pairs": 81,
+    "audio_artifact_subset": 65,
+    "sdk_source_inputs": 33,
+    "host_tests": 483,
+    "host_test_groups": 87,
+    "failed": 0,
+    "ignored": 0,
+    "successful_commands_with_matching_logs": 3
+  },
+  "observations": [
+    "Actual Wasmtime and wasm2c raw/SDK tests exercise declaration copies, transport order, bounds, shared quotas, stale capabilities, atomic prefix failures, native late refusal, PCM parity and composite terminal failure.",
+    "Host001 positive-row assertion was corrected only in the test; original failed result remains retained.",
+    "All current source and retained artifact hashes match the accepted production/test freezes and conformance records.",
+    "Lean runtime graph, scoped Clippy, actual Rust wasm32 guest compilation and development process evidence are retained."
+  ],
+  "limits": [
+    "Prepared221module/1106file inventory is producer-qualified before private cleanup; not a fresh rehash of removed storage. Retained405artifacts were independently rehashed.",
+    "The three generic development probe outputs do not alone demonstrate audio; dedicated actual-host PCM parity tests provide audio evidence.",
+    "Ordinary public package export is running separately; no shipping, physical playback, GPU, phone performance or Phase1 acceptance in this review.",
+    "Desired declarations are not live mixer cursors; audio synchronization may fail after native acceptance and terminalizes the composite."
+  ]
+}

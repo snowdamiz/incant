@@ -1,0 +1,36 @@
+{
+  "at": "2026-10-12T20:03:43.176351+00:00",
+  "decision": "accepted current-main integration evidence",
+  "head": "69b98e5d4aa5bf5a86af4c154f5946fff92930ba",
+  "tested_head": "ae013e20eb2b60a1440fe20cf7b92d1e481ab44e",
+  "integrated_head": "8a6d2eb7f2531ca854f8085f410e0a44641def94",
+  "main": "d4ba0a1e323d8f897a40dcb5ff7e91728f9d756e",
+  "manifest_sha256": "7fec32395ba40232c89af436a0d2764db5c506c248f55aaa6e014751ff446e4b",
+  "verified": {
+    "frozen_files": 1827,
+    "accepted_producer_inputs": 26,
+    "retained_artifacts": 82,
+    "zero_exit_matching_checks": 14,
+    "tests": 541,
+    "groups": 78,
+    "failed": 0,
+    "ignored": 0,
+    "package_files": 16,
+    "fresh_process_receipts": 4,
+    "observations": 8,
+    "exact_refusals": 10,
+    "player_sha256": "b99ee696c2bce7c299a89061a8f4823a6252746fd1962fae7ab02ac74505f95f",
+    "exact_pcm_and_save_continuation": true,
+    "paused_silence_and_restart_pcm": true
+  },
+  "source_review": "Prior accepted native audio implementation and HUD-additive seams2169a8 retained; integration beyond tested head changes only STATUS/docs.",
+  "limits": [
+    "CPU hosted ordinary-load mixed static/streamed audio and UI; fresh owners and neutral input",
+    "Active preedit refuses; pointer capture is discarded",
+    "Physics/static/development-module and device-native audio saves still refuse",
+    "No GPU/window/native-IME or full-save gate claim; PCM and save are not a multi-file transaction",
+    "Wasm transport ABI, Core presentation integration, physical playback and phone/phase gates are separate.",
+    "Fresh package/source/build deletion is producer execution evidence and accepted helper source; retained files, absence and receipts independently rechecked, not re-executed.",
+    "Assertion refusal deliberately produces diagnostic stdout; no-clobber deliberately leaves independently produced PCM while preserving existing checkpoint. No multi-file atomic publication claim."
+  ]
+}

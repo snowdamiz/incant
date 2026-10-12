@@ -13,19 +13,7 @@ pub struct WeightedClipSample {
 }
 
 fn quaternion(value: [f32; 4]) -> [f64; 4] {
-    let mut q = DQuat::from_array(value.map(f64::from))
-        .normalize()
-        .to_array();
-    // q and -q are the same rotation. Canonicalize even the exact orthogonal
-    // case, where a hemisphere dot product alone cannot choose between them.
-    if [3, 0, 1, 2]
-        .into_iter()
-        .find_map(|i| (q[i] != 0.).then_some(q[i] < 0.))
-        .unwrap_or(false)
-    {
-        q = q.map(|v| -v);
-    }
-    q
+    incant_anim::track::canonical_quaternion(value.map(f64::from))
 }
 
 impl AnimationPlayer {

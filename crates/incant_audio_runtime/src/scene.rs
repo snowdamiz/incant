@@ -318,7 +318,8 @@ where
 }
 
 fn restart(a: &NativeAudioSource, b: &NativeAudioSource) -> bool {
-    a.clip != b.clip
+    a.transport_epoch != b.transport_epoch
+        || a.clip != b.clip
         || a.bus != b.bus
         || a.start_seconds != b.start_seconds
         || a.looping != b.looping

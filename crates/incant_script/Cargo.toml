@@ -6,7 +6,7 @@ rust-version.workspace = true
 publish.workspace = true
 
 [features]
-default = ["compiler"]
+default = ["compiler", "physics-deterministic"]
 # Authoring/cook and the development runner only. Native players disable this.
 compiler = []
 # Typed hosted UI checkpoint sections; never enables a renderer or authoring.
@@ -17,10 +17,26 @@ static-module = ["dep:incant_wasm_runtime"]
 # Development-only raw Wasm host, explicitly absent from native exports.
 wasmtime-host = ["dep:incant_wasm_dev", "incant_wasm_dev/wasmtime-host"]
 
+# Select one physics kernel for the entire process, including build/test hosts.
+physics-deterministic = [
+    "incant_audio_runtime?/physics-deterministic",
+    "incant_runtime/physics-deterministic",
+    "incant_ui?/physics-deterministic",
+    "incant_wasm_dev?/physics-deterministic",
+    "incant_wasm_runtime?/physics-deterministic",
+]
+physics-fast-simd8 = [
+    "incant_audio_runtime?/physics-fast-simd8",
+    "incant_runtime/physics-fast-simd8",
+    "incant_ui?/physics-fast-simd8",
+    "incant_wasm_dev?/physics-fast-simd8",
+    "incant_wasm_runtime?/physics-fast-simd8",
+]
+
 [dependencies]
-incant_wasm_dev = { path = "../incant_wasm_dev", optional = true }
+incant_wasm_dev = { path = "../incant_wasm_dev", optional = true, default-features = false }
 incant_localization.workspace = true
-incant_wasm_runtime = { path = "../incant_wasm_runtime", optional = true }
+incant_wasm_runtime = { path = "../incant_wasm_runtime", optional = true, default-features = false }
 incant_runtime.workspace = true
 incant_audio_runtime = { workspace = true, optional = true }
 incant_ui = { workspace = true, optional = true }
@@ -33,6 +49,7 @@ sha2.workspace = true
 serde.workspace = true
 
 [dev-dependencies]
+incant_anim.workspace = true
 serde_json.workspace = true
 
 [build-dependencies]
