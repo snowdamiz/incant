@@ -131,7 +131,7 @@
       "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-broad-002/06.log"
     }
   ],
-  "review": "source accepted; final retained evidence review pending",
+  "review": "independent source and retained native evidence accepted; composed Wasm/public package work remains pending",
   "allocation_measurements": {
     "root_preparation_4096": 0,
     "retained_character_refresh_and_sweep_1024": 0,
@@ -427,6 +427,11 @@
       "source": "/Users/andreyyurlov/.codex/incant-reviews/native-root-motion-span-source-20261012.json",
       "retained": "docs/spikes/evidence/native-root-motion-connected/span-source-review.json",
       "sha256": "5dd3e7dbe44ac405b742b57fa865a2eabd9b2353f3841fc49e64513388e371a5"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-reviews/native-root-motion-connected-final-20261012.json",
+      "retained": "docs/spikes/evidence/native-root-motion-connected/final-review.json",
+      "sha256": "f9f6b3679e8815c352b21891fd35c3018cb12ae1b1401ce1d8ef1feb38794f40"
     }
   ],
   "residual": [

@@ -23,8 +23,8 @@ interval deltas, bodyless/kinematic/character policies and staged root-strip the
 IK sampling. World11 and QuickJS session continuation preserve active/paused
 reverse fades; owned TypeScript cycles/ticks remain exact BigInt arrays. The
 600-case CPU suite, scoped Clippy, wasm32, dependency and SDK checks pass.
-Independent production source review accepts the connection; final retained
-evidence review remains pending. Wasm53–55 and ordinary source-deleted public
+Independent production source and retained evidence reviews accept the native
+connection. Wasm53–55 and ordinary source-deleted public
 root gameplay export are the next connected work, not yet proved. Physics saves,
 general affine/CUBICSPLINE roots, rendered/device and full Phase1 gates remain
 open. [Contract and measured limits](docs/spikes/native-root-motion-connected.md).

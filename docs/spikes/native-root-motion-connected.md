@@ -50,7 +50,8 @@ groups), with no failures or ignored cases. Nine-package all-target Clippy,
 wasm32 runtime/anim compilation, lean dependency guards, strict SDK TypeScript,
 formatting and diff checks pass. The initial broad failure was an obsolete
 unknown-version test sentinel for now-supported world11; only that sentinel
-changed to12. Independent review accepts the production source without findings.
+changed to12. Independent source and retained evidence reviews accept the native connection
+without findings.
 [The evidence packet](evidence/native-root-motion-connected.json) retains both
 source freezes, review receipts, literal commands and compressed raw logs.
 
