@@ -145,6 +145,16 @@ pass; PR #113 merged the fixture correction. Checkpoint7 Windows desktop and
 Wasm conformance both pass.
 [Journal test evidence](docs/spikes/checkpoint6-budget-journal-tests.md).
 
+## Checkpoint10 replay fixture correction
+
+All eight frozen workflows finished: 20 required checks passed and three desktop
+checks failed the same outdated unknown-version fixture. Recording version 2 is
+intentionally supported. The test now refuses version 3 and compares accepted
+versions 1/2, preserving all prior refusal and no-output assertions with specific
+diagnostics. Three actual headless cases and scoped Clippy pass; independent
+source review accepted. Checkpoint10 remains failed and unpromoted; hosted repair
+confirmation awaits a new frozen candidate. [Evidence](docs/spikes/checkpoint10-input-fixture.md).
+
 ## Checkpoint9 agent fixture correction
 
 The frozen main132 release run reaches the same pre-provider test assertion in
@@ -168,7 +178,7 @@ failed attempts. Later main118+ work continues through reviewed local checks and
 fast PR gates. Checkpoint9 finished on frozen main132 with 17 required successes
 and six jobs failing at the same pre-provider fixture; no failed batch was
 promoted. The independently reviewed correction merged in PR #135. Checkpoint10
-now freezes main137 at `af3f84fdd60dda011d77295cbc21bcf55414b3f8` in PR #133,
+froze main137 at `af3f84fdd60dda011d77295cbc21bcf55414b3f8` in PR #133,
 with the same 23 required contexts. Navigation and later feature work are excluded.
 Release does not track moving main.
 [Promotion evidence](docs/spikes/evidence/release-checkpoint-8.json).
