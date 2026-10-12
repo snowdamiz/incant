@@ -1,0 +1,81 @@
+{
+  "at": "2026-10-12T19:22:36.568716+00:00",
+  "reviewer": "root astra",
+  "accepted": true,
+  "manifest_sha256": "9911e754532dcbdbb580508be02a2622205af399ee80f53763a0d640e8f7f3e5",
+  "source_sha256": "164b758d4386390e3b2a5816cd2933f17a0bd758234d1a2bd2181b7b655b81ff",
+  "patch_sha256": "117dc2ebb2bf713c3211e421eedc1d6746bf285a20e48bbd84c0cd8eef84087f",
+  "verified_artifacts": 11,
+  "checks": [
+    {
+      "name": "actionlint",
+      "command": [
+        "/Users/andreyyurlov/.codex/incant-tools/actionlint-1.7.12/actionlint",
+        ".github/workflows/desktop.yml"
+      ],
+      "exit": 0,
+      "seconds": 0.1885177090007346,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "policy",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_ci_*.py"
+      ],
+      "exit": 0,
+      "seconds": 2.997876458000974,
+      "sha256": "f862044839c44614c1cfc0a100ec237cbe7905f38c512c8e73552eae4a63880c"
+    },
+    {
+      "name": "release",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_release_policy.py"
+      ],
+      "exit": 0,
+      "seconds": 0.055237374999705935,
+      "sha256": "65378dcad145da2497120819bebfc3c46534dce9714ce064b3d809a56654aca2"
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.04123158299989882,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.019736041998839937,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "finding": "Confirmed Windows job cancellation at60min;53m27s preexport and6m40s of fresh export. Only Windows total budget changes to120min, Linux60 and allsteps/checks/requiredcontexts remain unchanged. No shipping-cache reuse or release success claim.",
+  "limitations": [
+    "The final shipping export and subsequent shipping/symbol/runtime checks did not run to completion on checkpoint13; no result is inferred for them.",
+    "120 minutes is an explicit bounded job allowance, not a measured completion time. Actual hosted successor must pass every required context.",
+    "No main fast-check budget or other platform/job/step timeout is changed."
+  ]
+}

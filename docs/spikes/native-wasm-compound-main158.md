@@ -30,3 +30,7 @@ ABI, lockfile and proof inputs are unchanged; four bounded integration checks pa
 The recovery is qualified evidence, not an uninterrupted original exporter run.
 Local CPU execution does not establish GPU, appearance, devices, performance,
 module checkpoints, release promotion or phase completion.
+
+Independent current-main review accepts the source, retained execution evidence
+and recovery qualification without findings. Publication still requires the exact
+head development check; release and phase gates remain separate.
