@@ -58,6 +58,10 @@ pub enum StructuralCommand {
         entity: StableId,
         control: crate::AnimationControl,
     },
+    ControlIk {
+        entity: StableId,
+        control: crate::IkControl,
+    },
     ControlAnimationGraph {
         entity: StableId,
         control: crate::AnimationGraphControl,
@@ -152,6 +156,7 @@ struct Staged {
     binding_generation: u64,
     flipbook_states: BTreeMap<StableId, crate::FlipbookState>,
     animation_states: BTreeMap<StableId, crate::animation::PreparedAnimationState>,
+    ik_states: BTreeMap<StableId, std::sync::Arc<[crate::AnimationIkSample]>>,
 }
 
 impl NativeWorld {
@@ -195,9 +200,13 @@ impl NativeWorld {
                 StructuralCommand::ControlFlipbook { .. }
                     | StructuralCommand::ControlAnimation { .. }
                     | StructuralCommand::ControlAnimationGraph { .. }
+                    | StructuralCommand::ControlIk { .. }
             )
         }) {
             let states = self.prepare_flipbook_controls(commands, &BTreeMap::new(), |id| {
+                self.entities.contains_key(&id)
+            })?;
+            let ik = self.prepare_ik_controls(commands, &BTreeMap::new(), |id| {
                 self.entities.contains_key(&id)
             })?;
             let animations = self.prepare_animation_controls(commands, &BTreeMap::new(), |id| {
@@ -206,6 +215,7 @@ impl NativeWorld {
             let navigation = self.navigation_motion()?;
             self.install_flipbook_states(states);
             self.install_animation_states(animations);
+            self.install_ik_states(ik);
             if let Some(next) = navigation {
                 self.navigation = next;
             }
@@ -259,6 +269,7 @@ impl NativeWorld {
                     | StructuralCommand::SetAngularVelocity2D { .. }
                     | StructuralCommand::ControlAnimation { .. }
                     | StructuralCommand::ControlAnimationGraph { .. }
+                    | StructuralCommand::ControlIk { .. }
                     | StructuralCommand::ControlFlipbook { .. }
                     | StructuralCommand::ControlAudio { .. }
             )
@@ -295,6 +306,7 @@ impl NativeWorld {
                     | StructuralCommand::SetUi { .. }
                     | StructuralCommand::ControlAnimation { .. }
                     | StructuralCommand::ControlAnimationGraph { .. }
+                    | StructuralCommand::ControlIk { .. }
                     | StructuralCommand::ControlFlipbook { .. }
                     | StructuralCommand::ControlAudio { .. } => continue,
                     _ => unreachable!(),
@@ -361,6 +373,9 @@ impl NativeWorld {
                     )?;
                 }
             }
+            let ik = self.prepare_ik_controls(commands, &BTreeMap::new(), |id| {
+                self.entities.contains_key(&id)
+            })?;
             let animations = self.prepare_animation_controls(commands, &BTreeMap::new(), |id| {
                 self.entities.contains_key(&id)
             })?;
@@ -390,6 +405,7 @@ impl NativeWorld {
             }
             self.install_flipbook_states(playback);
             self.install_animation_states(animations);
+            self.install_ik_states(ik);
             self.install_velocities(velocities);
             if let Some(next) = navigation {
                 self.navigation = next;
@@ -430,6 +446,7 @@ impl NativeWorld {
             }
             self.install_flipbook_states(staged.flipbook_states);
             self.install_animation_states(staged.animation_states);
+            self.install_ik_states(staged.ik_states);
             for (id, node) in staged.audio {
                 self.install_audio(id, node);
             }
@@ -590,6 +607,7 @@ impl NativeWorld {
                 | StructuralCommand::SetUi { .. }
                 | StructuralCommand::ControlAnimation { .. }
                 | StructuralCommand::ControlAnimationGraph { .. }
+                | StructuralCommand::ControlIk { .. }
                 | StructuralCommand::ControlFlipbook { .. }
                 | StructuralCommand::ControlAudio { .. } => {}
                 StructuralCommand::SetParent { entity, parent } => {
@@ -684,6 +702,8 @@ impl NativeWorld {
         let audio = self.prepare_audio_controls(commands, audio, |id| parents.contains_key(&id))?;
         self.validate_audio_changes(&audio, &parents)?;
         let binding_generation = self.validate_spatial_changes(&spatial, &parents)?;
+        let ik_states =
+            self.prepare_ik_controls(commands, &spatial, |id| parents.contains_key(&id))?;
         let animation_states =
             self.prepare_animation_controls(commands, &spatial, |id| parents.contains_key(&id))?;
         let flipbook_states =
@@ -965,6 +985,7 @@ impl NativeWorld {
             binding_generation,
             flipbook_states,
             animation_states,
+            ik_states,
         })
     }
 }

@@ -499,3 +499,6 @@ fn terminal_failure_hides_prior_logs_and_replacement_keeps_only_committed_histor
             .is_err()
     );
 }
+
+#[path = "animations/ik.rs"]
+mod ik;

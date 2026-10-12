@@ -11,6 +11,8 @@ use std::{collections::BTreeMap, sync::Arc, time::Duration};
 mod crossfade;
 #[path = "animations/graph.rs"]
 mod graph;
+#[path = "animations/ik.rs"]
+mod ik;
 
 const ONE: &str = "00000000000000000000000001";
 fn id(n: u128) -> StableId {

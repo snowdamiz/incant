@@ -31,6 +31,7 @@ pub struct CookedSpatial {
     pub camera: Option<Camera>,
     pub mesh: Option<NativeMeshRenderer>,
     pub animation: Option<std::sync::Arc<crate::NativeAnimation>>,
+    pub ik: Option<std::sync::Arc<crate::NativeIk>>,
     /// Cold binding data stays indirect so every unrelated structural command
     /// and spatial node does not pay for a full sprite configuration.
     pub sprite: Option<Box<crate::NativeSpriteRenderer>>,
@@ -48,6 +49,7 @@ impl CookedSpatial {
             camera: None,
             mesh: None,
             animation: None,
+            ik: None,
             sprite: None,
             tilemap: None,
             flipbook: None,
@@ -61,6 +63,7 @@ impl CookedSpatial {
         self.camera.is_none()
             && self.mesh.is_none()
             && self.animation.is_none()
+            && self.ik.is_none()
             && self.sprite.is_none()
             && self.tilemap.is_none()
             && self.flipbook.is_none()
@@ -101,6 +104,7 @@ pub(crate) fn validate<'a>(
     let mut flipbook_frames = 0usize;
     let mut animation_clips = 0usize;
     let mut graphs = 0usize;
+    let mut ik_constraints = 0usize;
     let (mut meshes, mut sprites, mut directional, mut local, mut shadows, mut environments) =
         (0, 0, 0, 0, 0, 0);
     let asset = |id, kind| {
@@ -149,6 +153,19 @@ pub(crate) fn validate<'a>(
                 .checked_add(animation.clip_durations.len())
                 .ok_or_else(invalid)?;
             if animation_clips > crate::MAX_SCENE_ANIMATION_CLIPS {
+                return Err(invalid());
+            }
+        }
+        if let Some(ik) = &node.ik {
+            ik.validate()?;
+            let animation = node.animation.as_ref().ok_or_else(invalid)?;
+            if ik.mesh_fingerprint != animation.mesh_fingerprint {
+                return Err(invalid());
+            }
+            ik_constraints = ik_constraints
+                .checked_add(ik.initial.len())
+                .ok_or_else(invalid)?;
+            if ik_constraints > crate::MAX_SCENE_ANIMATION_IK {
                 return Err(invalid());
             }
         }

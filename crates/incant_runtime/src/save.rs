@@ -1,6 +1,7 @@
 //! Explicit bounded world checkpoints, never the tick path. Hashes detect
 //! corruption, not origin or authorization. VM/host state is a separate boundary.
 mod codec;
+mod ik;
 use crate::flipbook::Playback;
 use crate::world::{Local, Motion};
 use crate::{CookedEntity, CookedScene, CookedSpatial, NativeWorld, SceneError};
@@ -146,6 +147,10 @@ impl NativeWorld {
                     .and_then(|p| p.graph.map(|g| (id, g)))
             })
             .collect::<Vec<_>>();
+        self.validate_ik_catalog(&self.ik_catalog)?;
+        let mut ik = Vec::new();
+        self.snapshot_ik(&mut ik)
+            .map_err(|_| SaveError::Invalid("IK snapshot"))?;
         codec::encode(
             self.tick,
             self.source_scene_fingerprint,
@@ -155,6 +160,7 @@ impl NativeWorld {
             &graphs,
             self.ui_used,
             self.audio_used,
+            &ik,
         )
     }
 
@@ -217,7 +223,9 @@ impl NativeWorld {
         if decoded.graphs.len() != expected_graphs * codec::GRAPH_BYTES {
             return Err(SaveError::Invalid("animation graph membership"));
         }
+        let ik_states = ik::decode(&scene, decoded.ik)?;
         let mut world = Self::new(scene);
+        world.install_ik_states(ik_states);
         for row in decoded.states.as_chunks::<{ codec::STATE_BYTES }>().0 {
             let (id, checkpoint) = codec::state(row)?;
             let entity = *world
@@ -290,7 +298,7 @@ impl NativeWorld {
         initial: &CookedScene,
     ) -> Result<Self, SaveError> {
         check_scene_capabilities(initial)?;
-        let candidate = Self::from_save_bytes(bytes)?;
+        let mut candidate = Self::from_save_bytes(bytes)?;
         if !initial.audio().is_empty() && !candidate.audio_used {
             return Err(SaveError::AudioUnsupported);
         }
@@ -307,6 +315,13 @@ impl NativeWorld {
             initial.localization(),
             initial.font_assets(),
         )?;
+        let catalog: std::sync::Arc<[_]> = initial
+            .spatial()
+            .iter()
+            .filter_map(|n| n.ik.clone())
+            .collect();
+        candidate.validate_ik_catalog(&catalog)?;
+        candidate.ik_catalog = catalog;
         Ok(candidate)
     }
 
@@ -316,6 +331,7 @@ impl NativeWorld {
     pub fn validate_save_compatibility(&self, candidate: &Self) -> Result<(), SaveError> {
         self.check_save_capabilities()?;
         candidate.check_save_capabilities()?;
+        candidate.validate_ik_catalog(&self.ik_catalog)?;
         if self.audio_used && !candidate.audio_used {
             return Err(SaveError::AudioUnsupported);
         }
@@ -390,6 +406,8 @@ impl NativeWorld {
             &self.localization,
             &self.font_assets,
         )?;
+        candidate.validate_ik_catalog(&self.ik_catalog)?;
+        candidate.ik_catalog = self.ik_catalog.clone();
         // V1 never carried the origin fingerprint. A matching live destination
         // retains its own known origin; the restored data cannot replace it.
         candidate.source_scene_fingerprint = self.source_scene_fingerprint;
