@@ -1,0 +1,151 @@
+{
+  "recorded_at": "2026-10-12T03:48:29.525676+00:00",
+  "original_commit": "37f61419d707cacb844a38abe2e048d3ffd1cd19",
+  "integrated_commit": "9855ecfba3e8b43ed9cfa8fd34ad562dec09b233",
+  "actual_main124": "afe38cd5c5ba0ecf805e825fde621cb57fdee2e9",
+  "synced_source": "5b50fcd68bd0095836372f818429ca32fd3ed812",
+  "tree_unchanged_by_actual_main_sync": true,
+  "conflicts": [
+    "STATUS only; preserve current main milestone and add independent text editing section"
+  ],
+  "source_hashes": {
+    "Cargo.lock": "a169595a254175bc7bbd57a4abc84b5cd1538a93bae8e0d1602b57eb2d8a712e",
+    "Cargo.toml": "7599f2f1c4bbfad1ebc8e0a10a467d1a7df0930bdade7962321b065f98911c3c",
+    "crates/incant_text/Cargo.toml": "be99373f05f096eba5b457fe7246033922d54d2b8b057613843b1d5511bb2a65",
+    "crates/incant_text/src/atlas.rs": "51e2345fe2ab35e6cecc506be8a94a32ad5275eabf53fd5628816c7acf7e2b45",
+    "crates/incant_text/src/editing.rs": "39ce9e49ffb37b17ceec71056de26af75560b8e7395c9b60dd56501726105e4f",
+    "crates/incant_text/src/fonts.rs": "dfad32f5ef441707376c651684a2455b84c5ba047bcf5a091368cda3bcb16ef4",
+    "crates/incant_text/src/layout.rs": "1e2bcc253af68e2ff0afeb286e1efcb4af0db1ee3893cc1c3423d48ee53b95b5",
+    "crates/incant_text/src/lib.rs": "dcd3eb0c06e4ebd1f16e53c52b30373e7b49aca4d16b026e25cfa8f335b440fa",
+    "crates/incant_text/src/raster.rs": "ad1c74af12beb67b47d5261344faf61c3d30bf50afd2e8e5fc3496fbaa14966e",
+    "crates/incant_text/src/raster/glyf.rs": "1ec0238d99988560090e500e2a34260681f2459f1951ea84562d92517a394026",
+    "crates/incant_text/tests/atlas.rs": "d82d69a5f5fc845237ed0cc8a0a1e7f3c567204f59589c23df0daec549e321fd",
+    "crates/incant_text/tests/editing.rs": "19a459375bfb75ff0b34dc1dcc8ee5b67fc1d830507daa44dea4f73ef9cc281f",
+    "crates/incant_text/tests/fonts/CJK-OFL.txt": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9",
+    "crates/incant_text/tests/fonts/IncantCJKFixture.ttf": "3299d6ab8033fb1d163f892dfcb1b8838cf1c46935c329d82da6f7b9e27dad82",
+    "crates/incant_text/tests/fonts/LICENSE": "5ec4347054089def6904da61d04f0360968f9ef36634b1fe007a5b6ec2f7aa96",
+    "crates/incant_text/tests/fonts/NotoSans-Regular.ttf": "2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9",
+    "crates/incant_text/tests/fonts/NotoSansArabic.ttf": "ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56",
+    "crates/incant_text/tests/fonts/NotoSansHebrew.ttf": "3d4fef85b449ade4d165de982969374fa30b2a5fe7bc679f5a3f5bfc047fb703",
+    "crates/incant_text/tests/fonts/cjk-provenance.json": "b9e2b7af5dccd297a38fdd14d8e9e9bc0c6106c35ca0f45f20d60e239b5d0763",
+    "crates/incant_text/tests/fonts/provenance.json": "dcf7c3810ec80ee28781a413985a1d2f65172fa63a95d5669ca0b1c6bd6bb664",
+    "crates/incant_text/tests/fonts/subset_cjk.py": "299ea70f7fd7fb1dbb7a4fe9a9de3e4cefbf6cc7d6b9e76adf9052a63b9caf76",
+    "crates/incant_text/tests/packaged_atlas.rs": "2ec17dfab8894c96f9ad8a104cf98662a30404fe3c36aec401f7b18d5ebbc7fe",
+    "crates/incant_text/tests/shaping.rs": "d25dc98ed1c72551c729821382ed731810fbc456807c950559851b35660311c3",
+    "tools/check_runtime_dependencies.py": "c9a79d1484a32bc12485eef2f1c5f79dd16991de1d3fb4789e1ee6e92e74c64f"
+  },
+  "original_editing_inputs_unchanged": {
+    "crates/incant_text/src/editing.rs": "39ce9e49ffb37b17ceec71056de26af75560b8e7395c9b60dd56501726105e4f",
+    "crates/incant_text/tests/editing.rs": "19a459375bfb75ff0b34dc1dcc8ee5b67fc1d830507daa44dea4f73ef9cc281f"
+  },
+  "checks": [
+    {
+      "name": "tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j2",
+        "-p",
+        "incant_text"
+      ],
+      "exit": 0,
+      "seconds": 10.847983959014527,
+      "log": "/tmp/incant-text-editing-integration-checks/tests.log",
+      "sha256": "6b5527447195f4999122665295cba53f7fc958f3107a32b6ef734931db4dbecc"
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j2",
+        "-p",
+        "incant_text",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 1.815915709012188,
+      "log": "/tmp/incant-text-editing-integration-checks/clippy.log",
+      "sha256": "ae219b401ddfce78aee9f63c4a5bbee766f672a38371e13e7d1cbe3f36069aab"
+    },
+    {
+      "name": "wasm32",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "-p",
+        "incant_text",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--locked",
+        "--offline",
+        "-j2"
+      ],
+      "exit": 0,
+      "seconds": 0.7842436659848318,
+      "log": "/tmp/incant-text-editing-integration-checks/wasm32.log",
+      "sha256": "119b2223f7f1f5e19a07d60e38df5350c1b3c794416f80d0775123c773bae110"
+    },
+    {
+      "name": "graph",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_text"
+      ],
+      "exit": 0,
+      "seconds": 0.8902022500114981,
+      "log": "/tmp/incant-text-editing-integration-checks/graph.log",
+      "sha256": "031b1e6f05967d0e88a7ed7c078988ceda4129020699fe11b3f2a07a020691b0"
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 1.8994836249912623,
+      "log": "/tmp/incant-text-editing-integration-checks/fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.06331766699440777,
+      "log": "/tmp/incant-text-editing-integration-checks/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "cpu_tests": {
+    "passed": 38,
+    "failed": 0,
+    "ignored": 0
+  },
+  "review": "native-text-editing-review.json",
+  "limits": [
+    "Bounded runtime committed selection and composition state only.",
+    "No OS event/widget/clipboard/live IME/GPU/native-window or visual acceptance claim.",
+    "Existing bidi shaping correction is a separate reviewed lane."
+  ]
+}

@@ -10,6 +10,7 @@ publish.workspace = true
 cosmic-text = { version = "=0.14.2", default-features = false, features = ["std"] }
 rustybuzz = { version = "=0.14.1", default-features = false, features = ["std"] }
 unicode-script = "=0.5.8"
+unicode-segmentation = "=1.13.3"
 thiserror.workspace = true
 sha2.workspace = true
 # Same mask rasterizer used by the pinned cosmic-text/Swash ecosystem.
