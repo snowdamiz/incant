@@ -53,6 +53,7 @@ fn input(sources: &[Arc<RuntimeAsset>]) -> SceneInput {
                 mesh: Some(MeshInput {
                     source: Arc::clone(source),
                     cast_shadows: true,
+                    animation: None,
                 }),
             })
             .collect(),

@@ -27,7 +27,7 @@ fn update(tick: &mut Tick<'_>, dt: f64) -> Result<()> {
 
 The complete runnable sample is [samples/gameplay.rs](samples/gameplay.rs). It
 uses accepted named input, numeric rows, spawn/parent/velocity/despawn commands,
-and bulk flipbook playback/controls. `tools/rust_guest.py::compile` builds the
+bulk flipbook playback/controls, and committed primitive diagnostics. `tools/rust_guest.py::compile` builds the
 trusted repository samples with pinned rustc and the two fixed library roots;
 it does not run project Cargo build scripts, dependency downloads or proc macros.
 The current helper is a trusted engine build tool, not an untrusted source sandbox.
@@ -65,6 +65,22 @@ source, raw Wasm or cached native modules at runtime.
   scratch. Their iterators need no per-entity host calls. Input is the accepted
   tick's immutable snapshot. Flipbook rows show committed state before queued
   commands; pause/play/restart/seek become visible after successful publication.
+- `locale(result_scratch)` and `localize(request, request_scratch, result_scratch)`
+  return copied committed-locale/message values. Text/Number/CalendarDate
+  arguments and fallback/pseudo settings use the shared native ICU validation.
+  `set_locale(settings, request_scratch)` queues an ordinary atomic runtime
+  setting change, visible to the next accepted callback. Missing records use the
+  enclosing result's requested/resolved locale. Maximum buffer constants are in
+  `incant_module::localization`; smaller initialized scratch works when the whole
+  frame fits. [samples/localization.rs](samples/localization.rs) is runnable with
+  the same trusted compile helper and actual two-host conformance command.
+- `tick.log(message, LogLevel::Info)` copies primitive UTF-8 diagnostics into the
+  current update. `Debug`, `Warn` and `Error` are also supported. Messages accept
+  at most 1,024 bytes, LF/TAB but no other controls; the host accepts at most 64
+  records/16 KiB per update. History retains a prefix of 1,024 records/256 KiB and
+  counts later drops without failing gameplay. Records publish only after the
+  entire numeric/structural update succeeds, carry its accepted update number,
+  and reach the native session/report log observer. Failed hosts hide logs.
 - Use `?` for SDK operations. Returning `Err` from the callback traps. An ignored
   error returned by an active SDK method also traps at callback exit, rejecting
   all its earlier numeric writes and queued commands. Pure snapshot `parse`
@@ -87,6 +103,8 @@ Wasmtime bindings, static Rust/C dispatch, namespace contexts, host input tag
 mapping and shared endian codecs. Generated files are checked in. Run its
 `--check` mode after changes. Runtime crates never read this JSON.
 
+Additive `incant_log_v1` supplies logging and `incant_localization_v1` supplies
+copied locale/message queries and atomic settings; older hosts reject their imports explicitly.
 Existing `incant_v1`, `incant_input_v1`, and `incant_flipbook_v1` layouts remain
 unchanged. Unknown namespaces, signatures and magic/layout versions fail closed.
 The host's native numeric layout is checked against generated sizes and offsets
@@ -101,3 +119,11 @@ input scratch at most 128 KiB and playback at most 32,768 rows. The SDK exports
 snapshot maximum sizes for reusable buffers. Host fuel and native validation
 remain authoritative even for guests bypassing the safe SDK. The full native
 scene's entity limit and script transaction rules still apply.
+
+Localization has separate logical input/output quotas of 64 KiB/256 KiB per
+callback, at most 64 queries and 64 settings commands, with 64 arguments and 16
+fallbacks. Each query costs four of the 1,024 query units. Maximum wire buffers
+include extra lengths/tags; repeated result copies consume the existing transfer
+quota. Correct-epoch active localization ingress failures reject the entire
+batch. Standalone number/date formatting, catalog edits and report enumeration
+are not native Wasm capabilities in this slice.

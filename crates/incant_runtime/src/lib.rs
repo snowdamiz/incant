@@ -1,6 +1,12 @@
 //! Native simulation loaded from checked binary scenes. This first migration
 //! slice supports spatial motion, typed physics/audio/render declarations and
 //! committed spatial extraction. Mixer/render hosts and authoring stay separate.
+mod animation;
+mod animation_binary;
+pub use animation::{
+    AnimationControl, AnimationSample, AnimationSnapshot, AnimationState, MAX_ANIMATION_CLIPS,
+    MAX_SCENE_ANIMATION_CLIPS, NativeAnimation,
+};
 mod audio;
 mod audio_binary;
 mod audio_controls;
@@ -8,6 +14,7 @@ pub use audio_controls::AudioControl;
 mod binary;
 mod localization;
 mod localization_binary;
+pub mod logging;
 pub use incant_localization::{
     CalendarDate, DateLength, LocaleSettings, LocalizationReport, LocalizationReportRequest,
     LocalizeRequest, LocalizedText,

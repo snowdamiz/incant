@@ -1,0 +1,49 @@
+{
+  "base": "4abd22f999ba5c03c6087c35922054863c3a78e5",
+  "recorded_at": "2026-10-12T01:54:33.840541+00:00",
+  "source_hashes": {
+    "crates/incant_agent/src/ledger.rs": "328a08ee9b856636214914e2fbfd880b91785b9c67564e504892b07f879122aa",
+    "crates/incant_agent/src/ledger/tests.rs": "c7c59f9bbc98dbfd63bf20fba3ede3c6d47e568f1dfdb92fda7fbec3ad3c9f3f"
+  },
+  "logs": {
+    "/tmp/incant-checkpoint7-general-failure.log": "fcd85d6d8f7fb4f388976f61cbfc423ee3bf047fd166159a916fb69fab01266a",
+    "/tmp/incant-ledger-lock-baseline-suite.log": "0e6a2a86ad0a7f55dba506aefb2fe97591bee9086ddea59b0c15bb90033a104e",
+    "/tmp/incant-ledger-lock-alias-red.log": "5e766ade5c77ddf7a0a35126f76041eed4068f65976e7eab8e410513ee6d5cf9",
+    "/tmp/incant-ledger-lock-green.log": "cde8b79525c58514c18609cb91e234ffaba6707b8aac299f5e17b60070564377",
+    "/tmp/incant-ledger-lock-clippy.log": "7e9e4d6c1ad9d2be2f5097db36e74cd02e61a96fac52e0b819ed6750f58b4815",
+    "/tmp/incant-ledger-fork-lock-model.json": "2cf248a5a9740e0a1a3cce52728ff5fc1b10329b4da74f18dfc71bb14eb959b0"
+  },
+  "failure": {
+    "candidate": "7b37692400dd1cc89ec621442c7569a77fc79b40",
+    "job": 114626943601,
+    "case": "ledger::tests::inconsistent_receipt_never_refunds_the_reservation",
+    "error": "Busy at next Ledger::open_at"
+  },
+  "verification": {
+    "unmodified_baseline_suite": {
+      "passed": 62,
+      "failed": 0
+    },
+    "deterministic_alias_red": {
+      "passed": 0,
+      "failed": 2
+    },
+    "corrected_agent_suite": {
+      "passed": 64,
+      "failed": 0
+    },
+    "all_target_clippy": true,
+    "native_windows_gpu_provider_work": false
+  },
+  "limits": [
+    "A shared open-file-description model reproduces the same refusal. The exact CI scheduling interleaving was not observed or claimed reproduced.",
+    "Actual fork/pipe-barrier model confirms close-only retains flock until the child alias closes and explicit unlock releases it; every child was reaped.",
+    "Hosted checkpoint7 remains failed; the correction requires the next frozen full candidate.",
+    "No automatic retry, lock bypass, budget refund or global test serialization introduced."
+  ],
+  "independent_review": {
+    "path": "docs/spikes/evidence/ledger-explicit-release-review.json",
+    "sha256": "0781f76c1a996d736781192603a12fcfaa0b0f263832234c9f235c35eec6ea01",
+    "result": "Accepted bounded implementation; hosted scheduler cause unproven"
+  }
+}

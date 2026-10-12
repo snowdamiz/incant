@@ -1,0 +1,52 @@
+{
+  "head": "ae69f7557ffc12254b14b31b3e14ba5546320d44",
+  "parents": [
+    "42f57fd26902a94dd95e345b137de5d08d61b954",
+    "94c4927abadb10d2203db2e1ab031de7853947fa"
+  ],
+  "reviewer": "astra runtime_review",
+  "recorded_at": "2026-10-12T00:28:01.629414+00:00",
+  "scope": "Read-only integrated native clock/control/render/editor-startup seams, not new broad package audit",
+  "verdict": "no new actionable finding",
+  "source_files": {
+    "crates/incant_types/src/animation.rs": "f138746f557d3c4bd08a7d255bb6a0471b801df13a1363fcf7948c776fed0070",
+    "crates/incant_runtime/src/animation.rs": "5ad665f1c7f58bdeb4fc42cc21fb4691c8d3e26735352814bd0d216692317aae",
+    "crates/incant_runtime/src/commands.rs": "1213194f4e605a4fb519e80cf3bdb09ae664a171851f0cf3ca43b9fea87bd28b",
+    "crates/incant_runtime/src/world.rs": "86c7e32959bc05b0f3f7065e02f4fe296378f8f0f3befceaa9f5874b85230828",
+    "crates/incant_runtime/src/spatial.rs": "75d25aee4e4f63c01bcfa667631c3e11ff37502e4f1749404e0476b9fd8784eb",
+    "crates/incant_runtime/src/spatial_view.rs": "5372a987c98530f3c9a3c39d465ac28903c599c09243b1e2f662e5d17893dcfa",
+    "crates/incant_runtime/src/save.rs": "003a5e2ddca7e990a56e10a28b5cd2336f2a3531e1f5b4ac3101ea7697c2a9fc",
+    "crates/incant_runtime/tests/animation.rs": "32b8898ca699f63639a3e4e421b5015abf3e17e9ae8f94e230a1caa03903d209",
+    "crates/incant_script/src/animations.rs": "47aef2c9ef635252039d7bb3de376b76ac44daa5418074072aca70e62cc48284",
+    "crates/incant_script/src/animation_commands.rs": "7c48f470958236341f9e5633008be3830e1a2791a3ed2d1a28da1233f46bbeeb",
+    "crates/incant_script/src/commands.rs": "33deede4e8d30a4c36d9af18cbf06c030f2c489f531bc56499cc3d03a79f16e1",
+    "crates/incant_script/src/compiler.rs": "02801aed60f414e04cc5acfad06c9a285c29f22776c3cf5cfed8479763bf4ba7",
+    "crates/incant_script/src/lib.rs": "fb64dc986364d676fdd58b8d1e60270b5f26d60ff10ec888804c04dc31524373",
+    "crates/incant_script/src/session.rs": "33d524e17071c151d53b251c744bc16aa14cb47feb7f1fce103624161a46819c",
+    "crates/incant_script/tests/animations.rs": "9307e400e508eba79bbff0fad206f2ebbf3c968cf90c35ea9a0f0b87ad4b7201",
+    "crates/incant_render_native/src/animation.rs": "27e28c337e5a02dafdc84fdcde1645e0833ae3d2e9388f9c274bd6db19b21d9a",
+    "crates/incant_render_native/src/binding.rs": "384c8394edef09e9b1de5d2eae86a6ee019c19541adb218737d7638f4d43298f",
+    "crates/incant_render_native/src/update.rs": "eac3ab0a54b9ccdea872c8164338b6fb29340880cf3baae21515a45bf39ccc44",
+    "crates/incant_render_native/tests/animation.rs": "3e10dfced3ab31bc1110661492860bc61d240772846fc154c7103f0c39d2bb71",
+    "crates/incant_render/src/models/animation.rs": "154e121f4a892d97c27271322ac5919a08349720ac38381823a0357b96c8e476",
+    "crates/incant_render/src/retained.rs": "7bf981f9a55fd9219beeca2331b6e111c45d4da6c4772ae1abb54730df8013c8",
+    "crates/incant_render_game/src/lib.rs": "1662d845c57cb560a3689faf11996c8993106a2dd13f8fa196a6058f96cd9c6e",
+    "crates/incant_render_gpu_host/src/lib.rs": "ab82479388753bd3fd8fa04899910a4cda4596d78cc7be7dd1f02e66014dcd98",
+    "crates/incant_game_runtime/src/core.rs": "0aad2fefc868473503e009ad215a997106c36aac6de95d71e431acda9fbecde4",
+    "crates/incant_play/src/lib.rs": "a8ecf5056359281ec188b5a06fb4b580858ffdf29f6ec3ce2b76c5149f753180",
+    "crates/incant_play/src/control.rs": "c11a7a3b3184d6728f13e83f4a0fe8ddade3268dc1e8c6f6b34f61fd78e729e2",
+    "editor/app/src/play/worker.rs": "124ecf452e04ea2f66b9f4ca355b6dcbc30ae59f680ebcf93b4b39ac402c8b40",
+    "crates/incant_game_player/src/gpu.rs": "b1b2a508442f2d777abd71635766cdb72aa437f9b3be0f02eb5316f00c3168c8",
+    "crates/incant_game_player/src/package.rs": "8bc986118821727285e7218cd53a12bdf243a59466312ae7edc5d865d7205d1a",
+    "tools/native_package.py": "a6ce11f1eeb62edc39b74846aa0341ec7f17689018f31114075d720e693f24a5",
+    "sdk/templates/native-animation/playback.ts": "422bb8917276055aa22fd5c9dd277c41e9d35e5ce1588dd72caafd37549a94e5"
+  },
+  "known_pending_correction": "Separately identified localized world-save v4 replacement guard fix remains pending; no claim that this head completes localized checkpoint replacement",
+  "execution": "No builds, GPU or native window run in this review. Earlier immutable cdd0903 numerical suite70/70 and authoring1c8e69790/0/0 are distinct receipts.",
+  "limitations": [
+    "Full source-free exported animated game and actual editor animated session still need integrated process evidence",
+    "Claude owns appearance acceptance; no image capture/review here",
+    "Whole-session failure after an accepted tick remains terminal; adapter/retained-renderer retry is not simulation rollback",
+    "Blends, IK, root motion, GPU skinning and device/performance gates remain outside scope"
+  ]
+}

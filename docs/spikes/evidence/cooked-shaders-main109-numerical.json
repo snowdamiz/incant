@@ -1,0 +1,1021 @@
+{
+  "started_at": "2026-10-12T00:32:07.259453+00:00",
+  "source_commit": "9a13f4b87813a4b1b8b79fb96792794052b4b6d8",
+  "packet_head": "9a13f4b87813a4b1b8b79fb96792794052b4b6d8",
+  "source_hash_count": 805,
+  "manifest_sha256": "14e72ad991bbc2ac18a61caf77f13722de0a5cb5d7df1ab383954bb379b10587",
+  "os": "macOS-26.6-arm64-arm-64bit-Mach-O",
+  "runs": [
+    {
+      "name": "default-incant_render",
+      "command": [
+        "/tmp/incant-geometry-main109-binaries-v1/default-incant_render",
+        "--ignored",
+        "--test-threads=1",
+        "--nocapture"
+      ],
+      "binary_sha256": "d5c50f83752417cdc354e8fc2b21fe85874e9df234ccdcf58656dd267fccde20",
+      "started_at": "2026-10-12T00:32:07.298098+00:00",
+      "pid": 18539,
+      "exit_code": 0,
+      "ended_at": "2026-10-12T00:32:08.851873+00:00",
+      "log_sha256": "12f84cd2f8d0b10973c37dcc4e6de1e3553311091698fb05d905cb56be4c652d",
+      "test_summary": [
+        "test result: ok. 19 passed; 0 failed; 0 ignored; 0 measured; 36 filtered out; finished in 1.54s"
+      ]
+    },
+    {
+      "name": "cooked-geometry-incant_render",
+      "command": [
+        "/tmp/incant-geometry-main109-binaries-v1/cooked-geometry-incant_render",
+        "--ignored",
+        "--test-threads=1",
+        "--nocapture"
+      ],
+      "binary_sha256": "87b34b67f545286f4a775d34c376f8ba5f9f48985c8bcb3a3bef188f39d58041",
+      "started_at": "2026-10-12T00:32:08.864411+00:00",
+      "pid": 18545,
+      "exit_code": 0,
+      "ended_at": "2026-10-12T00:32:10.428020+00:00",
+      "log_sha256": "e6069a83e9f1bbeeed279d5cb62f362df70dce0b9df2765325f8c848cedf945b",
+      "test_summary": [
+        "test result: ok. 19 passed; 0 failed; 0 ignored; 0 measured; 42 filtered out; finished in 1.51s"
+      ]
+    },
+    {
+      "name": "default-model_gpu",
+      "command": [
+        "/tmp/incant-geometry-main109-binaries-v1/default-model_gpu",
+        "--ignored",
+        "--test-threads=1",
+        "--nocapture"
+      ],
+      "binary_sha256": "ff99eca57eb7d250286e9ffc6eae0c2fdb5c6ab47a942d03997d00a926b548ac",
+      "started_at": "2026-10-12T00:32:10.436635+00:00",
+      "pid": 18578,
+      "exit_code": 0,
+      "ended_at": "2026-10-12T00:32:58.721247+00:00",
+      "log_sha256": "e4a4c590550ef456bd82e31e3bcf07609f627b89b05c91ff8c578c1bde2984df",
+      "test_summary": [
+        "test result: ok. 50 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 48.27s"
+      ]
+    },
+    {
+      "name": "cooked-geometry-model_gpu",
+      "command": [
+        "/tmp/incant-geometry-main109-binaries-v1/cooked-geometry-model_gpu",
+        "--ignored",
+        "--test-threads=1",
+        "--nocapture"
+      ],
+      "binary_sha256": "f8d25e8a2069e25290b2f414b9fb097257eb9f483d1d5e28fd4abb88e2bb61ba",
+      "started_at": "2026-10-12T00:32:58.731269+00:00",
+      "pid": 20530,
+      "exit_code": 0,
+      "ended_at": "2026-10-12T00:33:45.377505+00:00",
+      "log_sha256": "32a9c22eedb58f8acf4c57047b5dfff75b82ba9ce997e9146742fd53639f1a92",
+      "test_summary": [
+        "test result: ok. 50 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 46.60s"
+      ]
+    }
+  ],
+  "png_export": false,
+  "cases": [
+    {
+      "kind": "output",
+      "case": "hdr-swatches-Bgra8Unorm.json",
+      "width": 384,
+      "height": 128,
+      "sha256": "9f8f492c60954c350f8f450d18d1c43b0746129239184ebc77b07c7c95653d45",
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "exact": true
+    },
+    {
+      "kind": "output",
+      "case": "hdr-swatches-Bgra8UnormSrgb.json",
+      "width": 384,
+      "height": 128,
+      "sha256": "9f8f492c60954c350f8f450d18d1c43b0746129239184ebc77b07c7c95653d45",
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "exact": true
+    },
+    {
+      "kind": "output",
+      "case": "hdr-swatches-Rgba8Unorm.json",
+      "width": 384,
+      "height": 128,
+      "sha256": "9f8f492c60954c350f8f450d18d1c43b0746129239184ebc77b07c7c95653d45",
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "exact": true
+    },
+    {
+      "kind": "output",
+      "case": "hdr-swatches-Rgba8UnormSrgb.json",
+      "width": 384,
+      "height": 128,
+      "sha256": "9f8f492c60954c350f8f450d18d1c43b0746129239184ebc77b07c7c95653d45",
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "exact": true
+    },
+    {
+      "kind": "output",
+      "case": "resize-0-Bgra8Unorm.json",
+      "width": 96,
+      "height": 64,
+      "sha256": "de108d969f17cf5d77aedc8bca167a357c4b62dd3a7cbad435a89a6f95ed8821",
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "exact": true
+    },
+    {
+      "kind": "output",
+      "case": "resize-0-Bgra8UnormSrgb.json",
+      "width": 96,
+      "height": 64,
+      "sha256": "de108d969f17cf5d77aedc8bca167a357c4b62dd3a7cbad435a89a6f95ed8821",
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "exact": true
+    },
+    {
+      "kind": "output",
+      "case": "resize-0-Rgba8Unorm.json",
+      "width": 96,
+      "height": 64,
+      "sha256": "de108d969f17cf5d77aedc8bca167a357c4b62dd3a7cbad435a89a6f95ed8821",
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "exact": true
+    },
+    {
+      "kind": "output",
+      "case": "resize-0-Rgba8UnormSrgb.json",
+      "width": 96,
+      "height": 64,
+      "sha256": "de108d969f17cf5d77aedc8bca167a357c4b62dd3a7cbad435a89a6f95ed8821",
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "exact": true
+    },
+    {
+      "kind": "output",
+      "case": "resize-1-Bgra8Unorm.json",
+      "width": 80,
+      "height": 60,
+      "sha256": "308bb0d3c24eee0209ffaedac0e66722407dd70c1f4d2534d47e609e12d4714e",
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "exact": true
+    },
+    {
+      "kind": "output",
+      "case": "resize-1-Bgra8UnormSrgb.json",
+      "width": 80,
+      "height": 60,
+      "sha256": "308bb0d3c24eee0209ffaedac0e66722407dd70c1f4d2534d47e609e12d4714e",
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "exact": true
+    },
+    {
+      "kind": "output",
+      "case": "resize-1-Rgba8Unorm.json",
+      "width": 80,
+      "height": 60,
+      "sha256": "308bb0d3c24eee0209ffaedac0e66722407dd70c1f4d2534d47e609e12d4714e",
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "exact": true
+    },
+    {
+      "kind": "output",
+      "case": "resize-1-Rgba8UnormSrgb.json",
+      "width": 80,
+      "height": 60,
+      "sha256": "308bb0d3c24eee0209ffaedac0e66722407dd70c1f4d2534d47e609e12d4714e",
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "exact": true
+    },
+    {
+      "kind": "output",
+      "case": "resize-2-Bgra8Unorm.json",
+      "width": 96,
+      "height": 64,
+      "sha256": "de108d969f17cf5d77aedc8bca167a357c4b62dd3a7cbad435a89a6f95ed8821",
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "exact": true
+    },
+    {
+      "kind": "output",
+      "case": "resize-2-Bgra8UnormSrgb.json",
+      "width": 96,
+      "height": 64,
+      "sha256": "de108d969f17cf5d77aedc8bca167a357c4b62dd3a7cbad435a89a6f95ed8821",
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "exact": true
+    },
+    {
+      "kind": "output",
+      "case": "resize-2-Rgba8Unorm.json",
+      "width": 96,
+      "height": 64,
+      "sha256": "de108d969f17cf5d77aedc8bca167a357c4b62dd3a7cbad435a89a6f95ed8821",
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "exact": true
+    },
+    {
+      "kind": "output",
+      "case": "resize-2-Rgba8UnormSrgb.json",
+      "width": 96,
+      "height": 64,
+      "sha256": "de108d969f17cf5d77aedc8bca167a357c4b62dd3a7cbad435a89a6f95ed8821",
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "exact": true
+    },
+    {
+      "kind": "diagnostic",
+      "case": "diagnostic-base-Bgra8Unorm.json",
+      "width": 160,
+      "height": 96,
+      "sha256": "72d5dc5db09525812163a0cec39c5e59ec83f5dbece6f2da01b708b071386898",
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "exact": true
+    },
+    {
+      "kind": "diagnostic",
+      "case": "diagnostic-base-Bgra8UnormSrgb.json",
+      "width": 160,
+      "height": 96,
+      "sha256": "72d5dc5db09525812163a0cec39c5e59ec83f5dbece6f2da01b708b071386898",
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "exact": true
+    },
+    {
+      "kind": "diagnostic",
+      "case": "diagnostic-base-Rgba8Unorm.json",
+      "width": 160,
+      "height": 96,
+      "sha256": "72d5dc5db09525812163a0cec39c5e59ec83f5dbece6f2da01b708b071386898",
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "exact": true
+    },
+    {
+      "kind": "diagnostic",
+      "case": "diagnostic-base-Rgba8UnormSrgb.json",
+      "width": 160,
+      "height": 96,
+      "sha256": "72d5dc5db09525812163a0cec39c5e59ec83f5dbece6f2da01b708b071386898",
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "exact": true
+    },
+    {
+      "kind": "diagnostic",
+      "case": "diagnostic-empty-Bgra8Unorm.json",
+      "width": 160,
+      "height": 96,
+      "sha256": "d7829e4e4dbc2b4726bc693e4ab2fcbe1f9af921f9e059cfa9ef55c8f9e29f82",
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "exact": true
+    },
+    {
+      "kind": "diagnostic",
+      "case": "diagnostic-empty-Bgra8UnormSrgb.json",
+      "width": 160,
+      "height": 96,
+      "sha256": "d7829e4e4dbc2b4726bc693e4ab2fcbe1f9af921f9e059cfa9ef55c8f9e29f82",
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "exact": true
+    },
+    {
+      "kind": "diagnostic",
+      "case": "diagnostic-empty-Rgba8Unorm.json",
+      "width": 160,
+      "height": 96,
+      "sha256": "d7829e4e4dbc2b4726bc693e4ab2fcbe1f9af921f9e059cfa9ef55c8f9e29f82",
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "exact": true
+    },
+    {
+      "kind": "diagnostic",
+      "case": "diagnostic-empty-Rgba8UnormSrgb.json",
+      "width": 160,
+      "height": 96,
+      "sha256": "d7829e4e4dbc2b4726bc693e4ab2fcbe1f9af921f9e059cfa9ef55c8f9e29f82",
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "exact": true
+    },
+    {
+      "kind": "diagnostic",
+      "case": "diagnostic-raised-Bgra8Unorm.json",
+      "width": 160,
+      "height": 96,
+      "sha256": "297f944bfacf4627fca44039b61f9891a1efea386a3e2a788bd98d9b0007b58b",
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "exact": true
+    },
+    {
+      "kind": "diagnostic",
+      "case": "diagnostic-raised-Bgra8UnormSrgb.json",
+      "width": 160,
+      "height": 96,
+      "sha256": "297f944bfacf4627fca44039b61f9891a1efea386a3e2a788bd98d9b0007b58b",
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "exact": true
+    },
+    {
+      "kind": "diagnostic",
+      "case": "diagnostic-raised-Rgba8Unorm.json",
+      "width": 160,
+      "height": 96,
+      "sha256": "297f944bfacf4627fca44039b61f9891a1efea386a3e2a788bd98d9b0007b58b",
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "exact": true
+    },
+    {
+      "kind": "diagnostic",
+      "case": "diagnostic-raised-Rgba8UnormSrgb.json",
+      "width": 160,
+      "height": 96,
+      "sha256": "297f944bfacf4627fca44039b61f9891a1efea386a3e2a788bd98d9b0007b58b",
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "exact": true
+    }
+  ],
+  "prior_source_comparisons": [
+    {
+      "mode": "default",
+      "kind": "output",
+      "case": "hdr-swatches-Bgra8Unorm.json",
+      "exact": true
+    },
+    {
+      "mode": "default",
+      "kind": "output",
+      "case": "hdr-swatches-Bgra8UnormSrgb.json",
+      "exact": true
+    },
+    {
+      "mode": "default",
+      "kind": "output",
+      "case": "hdr-swatches-Rgba8Unorm.json",
+      "exact": true
+    },
+    {
+      "mode": "default",
+      "kind": "output",
+      "case": "hdr-swatches-Rgba8UnormSrgb.json",
+      "exact": true
+    },
+    {
+      "mode": "default",
+      "kind": "output",
+      "case": "resize-0-Bgra8Unorm.json",
+      "exact": true
+    },
+    {
+      "mode": "default",
+      "kind": "output",
+      "case": "resize-0-Bgra8UnormSrgb.json",
+      "exact": true
+    },
+    {
+      "mode": "default",
+      "kind": "output",
+      "case": "resize-0-Rgba8Unorm.json",
+      "exact": true
+    },
+    {
+      "mode": "default",
+      "kind": "output",
+      "case": "resize-0-Rgba8UnormSrgb.json",
+      "exact": true
+    },
+    {
+      "mode": "default",
+      "kind": "output",
+      "case": "resize-1-Bgra8Unorm.json",
+      "exact": true
+    },
+    {
+      "mode": "default",
+      "kind": "output",
+      "case": "resize-1-Bgra8UnormSrgb.json",
+      "exact": true
+    },
+    {
+      "mode": "default",
+      "kind": "output",
+      "case": "resize-1-Rgba8Unorm.json",
+      "exact": true
+    },
+    {
+      "mode": "default",
+      "kind": "output",
+      "case": "resize-1-Rgba8UnormSrgb.json",
+      "exact": true
+    },
+    {
+      "mode": "default",
+      "kind": "output",
+      "case": "resize-2-Bgra8Unorm.json",
+      "exact": true
+    },
+    {
+      "mode": "default",
+      "kind": "output",
+      "case": "resize-2-Bgra8UnormSrgb.json",
+      "exact": true
+    },
+    {
+      "mode": "default",
+      "kind": "output",
+      "case": "resize-2-Rgba8Unorm.json",
+      "exact": true
+    },
+    {
+      "mode": "default",
+      "kind": "output",
+      "case": "resize-2-Rgba8UnormSrgb.json",
+      "exact": true
+    },
+    {
+      "mode": "default",
+      "kind": "diagnostic",
+      "case": "diagnostic-base-Bgra8Unorm.json",
+      "exact": true
+    },
+    {
+      "mode": "default",
+      "kind": "diagnostic",
+      "case": "diagnostic-base-Bgra8UnormSrgb.json",
+      "exact": true
+    },
+    {
+      "mode": "default",
+      "kind": "diagnostic",
+      "case": "diagnostic-base-Rgba8Unorm.json",
+      "exact": true
+    },
+    {
+      "mode": "default",
+      "kind": "diagnostic",
+      "case": "diagnostic-base-Rgba8UnormSrgb.json",
+      "exact": true
+    },
+    {
+      "mode": "default",
+      "kind": "diagnostic",
+      "case": "diagnostic-empty-Bgra8Unorm.json",
+      "exact": true
+    },
+    {
+      "mode": "default",
+      "kind": "diagnostic",
+      "case": "diagnostic-empty-Bgra8UnormSrgb.json",
+      "exact": true
+    },
+    {
+      "mode": "default",
+      "kind": "diagnostic",
+      "case": "diagnostic-empty-Rgba8Unorm.json",
+      "exact": true
+    },
+    {
+      "mode": "default",
+      "kind": "diagnostic",
+      "case": "diagnostic-empty-Rgba8UnormSrgb.json",
+      "exact": true
+    },
+    {
+      "mode": "default",
+      "kind": "diagnostic",
+      "case": "diagnostic-raised-Bgra8Unorm.json",
+      "exact": true
+    },
+    {
+      "mode": "default",
+      "kind": "diagnostic",
+      "case": "diagnostic-raised-Bgra8UnormSrgb.json",
+      "exact": true
+    },
+    {
+      "mode": "default",
+      "kind": "diagnostic",
+      "case": "diagnostic-raised-Rgba8Unorm.json",
+      "exact": true
+    },
+    {
+      "mode": "default",
+      "kind": "diagnostic",
+      "case": "diagnostic-raised-Rgba8UnormSrgb.json",
+      "exact": true
+    },
+    {
+      "mode": "cooked-geometry",
+      "kind": "output",
+      "case": "hdr-swatches-Bgra8Unorm.json",
+      "exact": true
+    },
+    {
+      "mode": "cooked-geometry",
+      "kind": "output",
+      "case": "hdr-swatches-Bgra8UnormSrgb.json",
+      "exact": true
+    },
+    {
+      "mode": "cooked-geometry",
+      "kind": "output",
+      "case": "hdr-swatches-Rgba8Unorm.json",
+      "exact": true
+    },
+    {
+      "mode": "cooked-geometry",
+      "kind": "output",
+      "case": "hdr-swatches-Rgba8UnormSrgb.json",
+      "exact": true
+    },
+    {
+      "mode": "cooked-geometry",
+      "kind": "output",
+      "case": "resize-0-Bgra8Unorm.json",
+      "exact": true
+    },
+    {
+      "mode": "cooked-geometry",
+      "kind": "output",
+      "case": "resize-0-Bgra8UnormSrgb.json",
+      "exact": true
+    },
+    {
+      "mode": "cooked-geometry",
+      "kind": "output",
+      "case": "resize-0-Rgba8Unorm.json",
+      "exact": true
+    },
+    {
+      "mode": "cooked-geometry",
+      "kind": "output",
+      "case": "resize-0-Rgba8UnormSrgb.json",
+      "exact": true
+    },
+    {
+      "mode": "cooked-geometry",
+      "kind": "output",
+      "case": "resize-1-Bgra8Unorm.json",
+      "exact": true
+    },
+    {
+      "mode": "cooked-geometry",
+      "kind": "output",
+      "case": "resize-1-Bgra8UnormSrgb.json",
+      "exact": true
+    },
+    {
+      "mode": "cooked-geometry",
+      "kind": "output",
+      "case": "resize-1-Rgba8Unorm.json",
+      "exact": true
+    },
+    {
+      "mode": "cooked-geometry",
+      "kind": "output",
+      "case": "resize-1-Rgba8UnormSrgb.json",
+      "exact": true
+    },
+    {
+      "mode": "cooked-geometry",
+      "kind": "output",
+      "case": "resize-2-Bgra8Unorm.json",
+      "exact": true
+    },
+    {
+      "mode": "cooked-geometry",
+      "kind": "output",
+      "case": "resize-2-Bgra8UnormSrgb.json",
+      "exact": true
+    },
+    {
+      "mode": "cooked-geometry",
+      "kind": "output",
+      "case": "resize-2-Rgba8Unorm.json",
+      "exact": true
+    },
+    {
+      "mode": "cooked-geometry",
+      "kind": "output",
+      "case": "resize-2-Rgba8UnormSrgb.json",
+      "exact": true
+    },
+    {
+      "mode": "cooked-geometry",
+      "kind": "diagnostic",
+      "case": "diagnostic-base-Bgra8Unorm.json",
+      "exact": true
+    },
+    {
+      "mode": "cooked-geometry",
+      "kind": "diagnostic",
+      "case": "diagnostic-base-Bgra8UnormSrgb.json",
+      "exact": true
+    },
+    {
+      "mode": "cooked-geometry",
+      "kind": "diagnostic",
+      "case": "diagnostic-base-Rgba8Unorm.json",
+      "exact": true
+    },
+    {
+      "mode": "cooked-geometry",
+      "kind": "diagnostic",
+      "case": "diagnostic-base-Rgba8UnormSrgb.json",
+      "exact": true
+    },
+    {
+      "mode": "cooked-geometry",
+      "kind": "diagnostic",
+      "case": "diagnostic-empty-Bgra8Unorm.json",
+      "exact": true
+    },
+    {
+      "mode": "cooked-geometry",
+      "kind": "diagnostic",
+      "case": "diagnostic-empty-Bgra8UnormSrgb.json",
+      "exact": true
+    },
+    {
+      "mode": "cooked-geometry",
+      "kind": "diagnostic",
+      "case": "diagnostic-empty-Rgba8Unorm.json",
+      "exact": true
+    },
+    {
+      "mode": "cooked-geometry",
+      "kind": "diagnostic",
+      "case": "diagnostic-empty-Rgba8UnormSrgb.json",
+      "exact": true
+    },
+    {
+      "mode": "cooked-geometry",
+      "kind": "diagnostic",
+      "case": "diagnostic-raised-Bgra8Unorm.json",
+      "exact": true
+    },
+    {
+      "mode": "cooked-geometry",
+      "kind": "diagnostic",
+      "case": "diagnostic-raised-Bgra8UnormSrgb.json",
+      "exact": true
+    },
+    {
+      "mode": "cooked-geometry",
+      "kind": "diagnostic",
+      "case": "diagnostic-raised-Rgba8Unorm.json",
+      "exact": true
+    },
+    {
+      "mode": "cooked-geometry",
+      "kind": "diagnostic",
+      "case": "diagnostic-raised-Rgba8UnormSrgb.json",
+      "exact": true
+    }
+  ],
+  "prior_comparison_sha256": "2636fc588223b84ff145f8fb6fe1a235eff39f9e4250faa4b45b082b5df325b7",
+  "status": "passed",
+  "finished_at": "2026-10-12T00:33:45.497474+00:00",
+  "files": {
+    "cooked-geometry-model_gpu.log": "32a9c22eedb58f8acf4c57047b5dfff75b82ba9ce997e9146742fd53639f1a92",
+    "default-incant_render.log": "12f84cd2f8d0b10973c37dcc4e6de1e3553311091698fb05d905cb56be4c652d",
+    "cooked-geometry-incant_render.log": "e6069a83e9f1bbeeed279d5cb62f362df70dce0b9df2765325f8c848cedf945b",
+    "default-model_gpu.log": "e4a4c590550ef456bd82e31e3bcf07609f627b89b05c91ff8c578c1bde2984df",
+    "runs.json": "ffb367e8f4b734b180be9e8fc4a322df4de8b4e50fb66166afee295c439652e0",
+    "default/diagnostic/diagnostic-empty-Rgba8UnormSrgb.json": "a3ea836c49a7fce187aa7f0bd82f6be58c01311340b9a962364fe64f0c293981",
+    "default/diagnostic/diagnostic-empty-Bgra8Unorm.json": "5b0c4307b4c0ea3b226ed3a2d8164211551b48db9d7ed588d4a8678f5ee6732f",
+    "default/diagnostic/diagnostic-base-Rgba8Unorm.rgba": "72d5dc5db09525812163a0cec39c5e59ec83f5dbece6f2da01b708b071386898",
+    "default/diagnostic/diagnostic-raised-Bgra8UnormSrgb.json": "73346edf1dc97c5c742343080482efca42f6319f1f0c0089192df5c02ad45994",
+    "default/diagnostic/diagnostic-raised-Bgra8Unorm.json": "3bede100728f2eabef31793328f9aa6ab2af177cbfbc80050641ab1f66809b0a",
+    "default/diagnostic/diagnostic-base-Bgra8UnormSrgb.rgba": "72d5dc5db09525812163a0cec39c5e59ec83f5dbece6f2da01b708b071386898",
+    "default/diagnostic/diagnostic-raised-Rgba8UnormSrgb.json": "4a6d978839e3b4e8f7ab921236f57013610fe321307c122f3c818d5e75a82a6b",
+    "default/diagnostic/diagnostic-empty-Bgra8UnormSrgb.json": "96c35df41c4c6acd1b25132a3b894d1ec852ceadfa3aa716ad7fb6af0f3778da",
+    "default/diagnostic/diagnostic-raised-Rgba8Unorm.rgba": "297f944bfacf4627fca44039b61f9891a1efea386a3e2a788bd98d9b0007b58b",
+    "default/diagnostic/diagnostic-base-Rgba8UnormSrgb.rgba": "72d5dc5db09525812163a0cec39c5e59ec83f5dbece6f2da01b708b071386898",
+    "default/diagnostic/diagnostic-empty-Rgba8Unorm.rgba": "d7829e4e4dbc2b4726bc693e4ab2fcbe1f9af921f9e059cfa9ef55c8f9e29f82",
+    "default/diagnostic/diagnostic-base-Bgra8Unorm.json": "21e6aab0b33bab8041606d740610a3c9d192e3c06dc9bd31a808221a3b8dddf7",
+    "default/diagnostic/diagnostic-raised-Rgba8UnormSrgb.rgba": "297f944bfacf4627fca44039b61f9891a1efea386a3e2a788bd98d9b0007b58b",
+    "default/diagnostic/diagnostic-raised-Rgba8Unorm.json": "d2f15a6bed67e3cf797bdf2a2f4ec102bc94f5022439d8ba4e57f6c391638579",
+    "default/diagnostic/diagnostic-empty-Bgra8UnormSrgb.rgba": "d7829e4e4dbc2b4726bc693e4ab2fcbe1f9af921f9e059cfa9ef55c8f9e29f82",
+    "default/diagnostic/diagnostic-base-Rgba8UnormSrgb.json": "b96f8ac7736f04470d6d7b871aeece5b969ccba2e668d973a74c984932cbed33",
+    "default/diagnostic/diagnostic-base-Bgra8Unorm.rgba": "72d5dc5db09525812163a0cec39c5e59ec83f5dbece6f2da01b708b071386898",
+    "default/diagnostic/diagnostic-empty-Rgba8Unorm.json": "cb092868fe8872e5e253d5e5b9528351979a01593f49e54d5808558de51ebf76",
+    "default/diagnostic/diagnostic-empty-Rgba8UnormSrgb.rgba": "d7829e4e4dbc2b4726bc693e4ab2fcbe1f9af921f9e059cfa9ef55c8f9e29f82",
+    "default/diagnostic/diagnostic-raised-Bgra8UnormSrgb.rgba": "297f944bfacf4627fca44039b61f9891a1efea386a3e2a788bd98d9b0007b58b",
+    "default/diagnostic/diagnostic-base-Rgba8Unorm.json": "ddd4e25634470c56cb1e82af5765229ef5bfb66148933f3f7aff73dd0839e6fa",
+    "default/diagnostic/diagnostic-empty-Bgra8Unorm.rgba": "d7829e4e4dbc2b4726bc693e4ab2fcbe1f9af921f9e059cfa9ef55c8f9e29f82",
+    "default/diagnostic/diagnostic-base-Bgra8UnormSrgb.json": "7325aa5f55cba88e95201ce951295447f0c6fdf3cb1994ba34ab115a9192b89c",
+    "default/diagnostic/diagnostic-raised-Bgra8Unorm.rgba": "297f944bfacf4627fca44039b61f9891a1efea386a3e2a788bd98d9b0007b58b",
+    "default/output/hdr-swatches-Rgba8UnormSrgb.rgba": "9f8f492c60954c350f8f450d18d1c43b0746129239184ebc77b07c7c95653d45",
+    "default/output/resize-0-Rgba8UnormSrgb.json": "c7a67926c2e4577b6e7672b73ef4ebea8415481bd85e3e6511fcced63ebe2dd5",
+    "default/output/resize-0-Rgba8Unorm.rgba": "de108d969f17cf5d77aedc8bca167a357c4b62dd3a7cbad435a89a6f95ed8821",
+    "default/output/resize-2-Rgba8Unorm.json": "f292d156ea5711c6db79b128f1c791d831b9f36cf640df2281700abb5309940c",
+    "default/output/resize-1-Rgba8UnormSrgb.json": "38b61571ff3a6b29fa5c8b60460a44438278c5ea746e6ff8b10cee46abee2861",
+    "default/output/resize-1-Bgra8Unorm.json": "f7f589def929818b51c8730e4ba09988b942283553204132a27a021b3dcaf9ea",
+    "default/output/resize-2-Rgba8UnormSrgb.json": "6258a2dca61183dd127ef0221818d937d4b6e43aa5ed965da7471b50af5ad948",
+    "default/output/hdr-swatches-Bgra8Unorm.rgba": "9f8f492c60954c350f8f450d18d1c43b0746129239184ebc77b07c7c95653d45",
+    "default/output/resize-2-Bgra8UnormSrgb.json": "5d788b801e2560fee9174cd1d24d7e8009e1ce5557f21294d367c4e8c475ad3b",
+    "default/output/hdr-swatches-Bgra8UnormSrgb.rgba": "9f8f492c60954c350f8f450d18d1c43b0746129239184ebc77b07c7c95653d45",
+    "default/output/resize-0-Bgra8UnormSrgb.json": "d4b7b33da7c99251400de64d25a5a207f1cf224595212257f47df60b5989848f",
+    "default/output/resize-1-Bgra8UnormSrgb.json": "e9c7081438c0c0423e14e405bcd1df99f97195995f2ecfa121fecb6978dea594",
+    "default/output/resize-0-Bgra8Unorm.json": "59cb61c63f2a156d92e848ba8fb3d0d8fdde78f814a4c44094c9544540ef99ad",
+    "default/output/resize-2-Bgra8Unorm.rgba": "de108d969f17cf5d77aedc8bca167a357c4b62dd3a7cbad435a89a6f95ed8821",
+    "default/output/resize-1-Rgba8Unorm.rgba": "308bb0d3c24eee0209ffaedac0e66722407dd70c1f4d2534d47e609e12d4714e",
+    "default/output/hdr-swatches-Rgba8Unorm.json": "c53ac5cc1df7182777e1467c139056443c56f571debd966de8075a289f327f76",
+    "default/output/resize-2-Bgra8UnormSrgb.rgba": "de108d969f17cf5d77aedc8bca167a357c4b62dd3a7cbad435a89a6f95ed8821",
+    "default/output/resize-1-Bgra8UnormSrgb.rgba": "308bb0d3c24eee0209ffaedac0e66722407dd70c1f4d2534d47e609e12d4714e",
+    "default/output/resize-0-Bgra8UnormSrgb.rgba": "de108d969f17cf5d77aedc8bca167a357c4b62dd3a7cbad435a89a6f95ed8821",
+    "default/output/hdr-swatches-Bgra8UnormSrgb.json": "4fee2d480e6b9bc97a62a6027c5710bfa55dbbc194a97d035bca0950de1a3896",
+    "default/output/resize-2-Bgra8Unorm.json": "44a8461d1248a9edde854aadd9b6d93d728dad9b57854532e62042a42e128fc0",
+    "default/output/resize-1-Rgba8Unorm.json": "054aabf0ec10198c8a50822dc22513a25c16e91947b3d75fc668466717b54c1e",
+    "default/output/resize-0-Bgra8Unorm.rgba": "de108d969f17cf5d77aedc8bca167a357c4b62dd3a7cbad435a89a6f95ed8821",
+    "default/output/hdr-swatches-Rgba8Unorm.rgba": "9f8f492c60954c350f8f450d18d1c43b0746129239184ebc77b07c7c95653d45",
+    "default/output/resize-2-Rgba8Unorm.rgba": "de108d969f17cf5d77aedc8bca167a357c4b62dd3a7cbad435a89a6f95ed8821",
+    "default/output/resize-1-Rgba8UnormSrgb.rgba": "308bb0d3c24eee0209ffaedac0e66722407dd70c1f4d2534d47e609e12d4714e",
+    "default/output/resize-1-Bgra8Unorm.rgba": "308bb0d3c24eee0209ffaedac0e66722407dd70c1f4d2534d47e609e12d4714e",
+    "default/output/resize-0-Rgba8Unorm.json": "eda44e81a53f2fd14c30592fb95ef3c9e1e5f2c8a20fd8e04a73da7c994abebd",
+    "default/output/resize-0-Rgba8UnormSrgb.rgba": "de108d969f17cf5d77aedc8bca167a357c4b62dd3a7cbad435a89a6f95ed8821",
+    "default/output/hdr-swatches-Rgba8UnormSrgb.json": "51cc42f4644e9d0434a35fdcb2f1e760e33306d05b661926f85374bfcf58b425",
+    "default/output/hdr-swatches-Bgra8Unorm.json": "01cf6a3d976c091ad11193f09366f37c135cbf1e5624f9457e5423824c0bd1c3",
+    "default/output/resize-2-Rgba8UnormSrgb.rgba": "de108d969f17cf5d77aedc8bca167a357c4b62dd3a7cbad435a89a6f95ed8821",
+    "cooked-geometry/diagnostic/diagnostic-empty-Rgba8UnormSrgb.json": "dff7f0ae1ea5c47297df8bfc1dfca65ebee34e0bde73e8b8d0374a75840cb850",
+    "cooked-geometry/diagnostic/diagnostic-empty-Bgra8Unorm.json": "2afa379d41eefe0305e22f522c07ede0f5e9f7fa50f3f3babc65f58220e04d07",
+    "cooked-geometry/diagnostic/diagnostic-base-Rgba8Unorm.rgba": "72d5dc5db09525812163a0cec39c5e59ec83f5dbece6f2da01b708b071386898",
+    "cooked-geometry/diagnostic/diagnostic-raised-Bgra8UnormSrgb.json": "9b478876a4beb29bb0ca0fdc056a56406c6ec3c5206bd7e1a24b8174d2434bc3",
+    "cooked-geometry/diagnostic/diagnostic-raised-Bgra8Unorm.json": "393dd96ea776db1cd2fed67764cb5ab4a102249acd297492ad688d777373e5cf",
+    "cooked-geometry/diagnostic/diagnostic-base-Bgra8UnormSrgb.rgba": "72d5dc5db09525812163a0cec39c5e59ec83f5dbece6f2da01b708b071386898",
+    "cooked-geometry/diagnostic/diagnostic-raised-Rgba8UnormSrgb.json": "0554fe20b6ef4fdf35ddce6a3550105cceb6c8781d5b09c55086483af1d57292",
+    "cooked-geometry/diagnostic/diagnostic-empty-Bgra8UnormSrgb.json": "de51bfc300602d8f4563d2bca659f3bf5618cf606344a5fabd3eb92694e1b04a",
+    "cooked-geometry/diagnostic/diagnostic-raised-Rgba8Unorm.rgba": "297f944bfacf4627fca44039b61f9891a1efea386a3e2a788bd98d9b0007b58b",
+    "cooked-geometry/diagnostic/diagnostic-base-Rgba8UnormSrgb.rgba": "72d5dc5db09525812163a0cec39c5e59ec83f5dbece6f2da01b708b071386898",
+    "cooked-geometry/diagnostic/diagnostic-empty-Rgba8Unorm.rgba": "d7829e4e4dbc2b4726bc693e4ab2fcbe1f9af921f9e059cfa9ef55c8f9e29f82",
+    "cooked-geometry/diagnostic/diagnostic-base-Bgra8Unorm.json": "a483e539262f83d07d03e7e746e868f071d9452cf1659dcba82f320de41bb9ed",
+    "cooked-geometry/diagnostic/diagnostic-raised-Rgba8UnormSrgb.rgba": "297f944bfacf4627fca44039b61f9891a1efea386a3e2a788bd98d9b0007b58b",
+    "cooked-geometry/diagnostic/diagnostic-raised-Rgba8Unorm.json": "71e11b15c08948b66ab76f6dbfbedf7d672f822c9e90a75160d5f3478ed93da1",
+    "cooked-geometry/diagnostic/diagnostic-empty-Bgra8UnormSrgb.rgba": "d7829e4e4dbc2b4726bc693e4ab2fcbe1f9af921f9e059cfa9ef55c8f9e29f82",
+    "cooked-geometry/diagnostic/diagnostic-base-Rgba8UnormSrgb.json": "c329f244fce8668e632510510ef4f3f5b729d8d9b56bf290dd359fcb58433282",
+    "cooked-geometry/diagnostic/diagnostic-base-Bgra8Unorm.rgba": "72d5dc5db09525812163a0cec39c5e59ec83f5dbece6f2da01b708b071386898",
+    "cooked-geometry/diagnostic/diagnostic-empty-Rgba8Unorm.json": "e7285b25fe75fad04da50ef7dfa385ff63d8270c1261b30c272dabadfc9729a9",
+    "cooked-geometry/diagnostic/diagnostic-empty-Rgba8UnormSrgb.rgba": "d7829e4e4dbc2b4726bc693e4ab2fcbe1f9af921f9e059cfa9ef55c8f9e29f82",
+    "cooked-geometry/diagnostic/diagnostic-raised-Bgra8UnormSrgb.rgba": "297f944bfacf4627fca44039b61f9891a1efea386a3e2a788bd98d9b0007b58b",
+    "cooked-geometry/diagnostic/diagnostic-base-Rgba8Unorm.json": "ee288c54e7ec6685a52a9b207051fa6254016b82336a575588151c38e037d6b4",
+    "cooked-geometry/diagnostic/diagnostic-empty-Bgra8Unorm.rgba": "d7829e4e4dbc2b4726bc693e4ab2fcbe1f9af921f9e059cfa9ef55c8f9e29f82",
+    "cooked-geometry/diagnostic/diagnostic-base-Bgra8UnormSrgb.json": "e6be575abb1f8f80e3efab205b1fa57abb73fffa84f3d67bebab43d839a9b21c",
+    "cooked-geometry/diagnostic/diagnostic-raised-Bgra8Unorm.rgba": "297f944bfacf4627fca44039b61f9891a1efea386a3e2a788bd98d9b0007b58b",
+    "cooked-geometry/output/hdr-swatches-Rgba8UnormSrgb.rgba": "9f8f492c60954c350f8f450d18d1c43b0746129239184ebc77b07c7c95653d45",
+    "cooked-geometry/output/resize-0-Rgba8UnormSrgb.json": "89a1a3bc73c7318ab21f21e6d37b15af0b5251183ee0c175a0827d5962e7aa51",
+    "cooked-geometry/output/resize-0-Rgba8Unorm.rgba": "de108d969f17cf5d77aedc8bca167a357c4b62dd3a7cbad435a89a6f95ed8821",
+    "cooked-geometry/output/resize-2-Rgba8Unorm.json": "4f4e33b2e2cdd237a91dda7824f1b2a627a8b59d3c5bd536f6cdd2888eef35cd",
+    "cooked-geometry/output/resize-1-Rgba8UnormSrgb.json": "7ac767030a2496795d08d4ed8507362a1f1fe285c86871b972b06bc435e9ed00",
+    "cooked-geometry/output/resize-1-Bgra8Unorm.json": "a950c191eb6174a896b93b0512b7bf6211df633f46139e291db1ac614a1365ca",
+    "cooked-geometry/output/resize-2-Rgba8UnormSrgb.json": "87ae5a310daa0156483d9d2dc0525b29c8193eb6b29e02b9206466fe430ab62a",
+    "cooked-geometry/output/hdr-swatches-Bgra8Unorm.rgba": "9f8f492c60954c350f8f450d18d1c43b0746129239184ebc77b07c7c95653d45",
+    "cooked-geometry/output/resize-2-Bgra8UnormSrgb.json": "de7ee15bdd777a35fe34590f6bba78f0425b86bfc61a2f44aa81f59518cde48e",
+    "cooked-geometry/output/hdr-swatches-Bgra8UnormSrgb.rgba": "9f8f492c60954c350f8f450d18d1c43b0746129239184ebc77b07c7c95653d45",
+    "cooked-geometry/output/resize-0-Bgra8UnormSrgb.json": "24944b1eb2b62e4604f595e3c89e483ee938011d7d3c4a53a573e0ccb2455523",
+    "cooked-geometry/output/resize-1-Bgra8UnormSrgb.json": "ec059af1458f0de350dd1fd03851b91658f5332359155362c82c28ebf00cd3a0",
+    "cooked-geometry/output/resize-0-Bgra8Unorm.json": "fa793f3681dc361ee0f792d792c4bd9fbbe8dfc6133f3944854514a39600cbfd",
+    "cooked-geometry/output/resize-2-Bgra8Unorm.rgba": "de108d969f17cf5d77aedc8bca167a357c4b62dd3a7cbad435a89a6f95ed8821",
+    "cooked-geometry/output/resize-1-Rgba8Unorm.rgba": "308bb0d3c24eee0209ffaedac0e66722407dd70c1f4d2534d47e609e12d4714e",
+    "cooked-geometry/output/hdr-swatches-Rgba8Unorm.json": "7267e483bdf75003f73fc1842746ba1002e00906a89d4602f0f242f8eae12d09",
+    "cooked-geometry/output/resize-2-Bgra8UnormSrgb.rgba": "de108d969f17cf5d77aedc8bca167a357c4b62dd3a7cbad435a89a6f95ed8821",
+    "cooked-geometry/output/resize-1-Bgra8UnormSrgb.rgba": "308bb0d3c24eee0209ffaedac0e66722407dd70c1f4d2534d47e609e12d4714e",
+    "cooked-geometry/output/resize-0-Bgra8UnormSrgb.rgba": "de108d969f17cf5d77aedc8bca167a357c4b62dd3a7cbad435a89a6f95ed8821",
+    "cooked-geometry/output/hdr-swatches-Bgra8UnormSrgb.json": "eda879d7fe73141d064947451fcb8b1262e3a5dd93f383a0be3ebe13990c2de6",
+    "cooked-geometry/output/resize-2-Bgra8Unorm.json": "c2f341c3f56bf1503b74ef7a5176c13561a50073e2bf1e8915f5b2eff3edd12f",
+    "cooked-geometry/output/resize-1-Rgba8Unorm.json": "f25dd83c4a9448b8cf0e28dddb407b17f80727cf8f8238d81cd1b093a15f2664",
+    "cooked-geometry/output/resize-0-Bgra8Unorm.rgba": "de108d969f17cf5d77aedc8bca167a357c4b62dd3a7cbad435a89a6f95ed8821",
+    "cooked-geometry/output/hdr-swatches-Rgba8Unorm.rgba": "9f8f492c60954c350f8f450d18d1c43b0746129239184ebc77b07c7c95653d45",
+    "cooked-geometry/output/resize-2-Rgba8Unorm.rgba": "de108d969f17cf5d77aedc8bca167a357c4b62dd3a7cbad435a89a6f95ed8821",
+    "cooked-geometry/output/resize-1-Rgba8UnormSrgb.rgba": "308bb0d3c24eee0209ffaedac0e66722407dd70c1f4d2534d47e609e12d4714e",
+    "cooked-geometry/output/resize-1-Bgra8Unorm.rgba": "308bb0d3c24eee0209ffaedac0e66722407dd70c1f4d2534d47e609e12d4714e",
+    "cooked-geometry/output/resize-0-Rgba8Unorm.json": "d85f4756ac0c87b71a1a6ce94854d342db52c480b4ea0e722adee39c1ddd8a25",
+    "cooked-geometry/output/resize-0-Rgba8UnormSrgb.rgba": "de108d969f17cf5d77aedc8bca167a357c4b62dd3a7cbad435a89a6f95ed8821",
+    "cooked-geometry/output/hdr-swatches-Rgba8UnormSrgb.json": "c8f3dc8cc3e397557c62044a1d5f0bfbc44419e9a19588b9eda366312ea3db6d",
+    "cooked-geometry/output/hdr-swatches-Bgra8Unorm.json": "dc626e06801513045279d5054d65e46ce43a090c4379ae897d0a4553e929a3a0",
+    "cooked-geometry/output/resize-2-Rgba8UnormSrgb.rgba": "de108d969f17cf5d77aedc8bca167a357c4b62dd3a7cbad435a89a6f95ed8821"
+  }
+}

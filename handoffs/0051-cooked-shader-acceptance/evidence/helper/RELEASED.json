@@ -1,0 +1,16 @@
+{
+  "released_at": "2026-10-12T00:17:45.941527+00:00",
+  "reason": "all eight bounded children reaped",
+  "ledger_sha256": "65d90167e9fcc696f54cbcd80b6751f44f24a2ee7b37803ff09bfdb6fc3700a5",
+  "pids": [
+    8889,
+    8955,
+    9036,
+    9108,
+    9156,
+    9576,
+    9678,
+    9739
+  ],
+  "all_reaped": true
+}

@@ -89,6 +89,7 @@ fn ordinary_sprite_reference(world: &NativeWorld, input: &NativeRenderInput) -> 
                 mesh: node.mesh.as_ref().map(|m| incant_render_data::MeshInput {
                     source: Arc::clone(&m.source),
                     cast_shadows: m.cast_shadows,
+                    animation: m.animation,
                 }),
                 sprite: node.sprite.as_ref().map(|s| SpriteInput {
                     frames: None,

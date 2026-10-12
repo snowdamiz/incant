@@ -7,6 +7,8 @@ use crate::{
     provider::OpenAiProvider,
 };
 use serde::{Deserialize, Serialize};
+#[cfg(test)]
+mod fence_tests;
 use std::{
     fs,
     io::Write,
@@ -20,6 +22,25 @@ pub struct Accounts {
     pub active: Option<String>,
     pub accounts: Vec<AccountMetadata>,
     pub api_key_connected: bool,
+    #[serde(default)]
+    selection_generation: u64,
+}
+/// Opaque, non-secret registration receipt. Equality includes durable selection
+/// history, so switching away and back or reconnecting invalidates old turns.
+#[derive(Clone, PartialEq, Eq)]
+pub struct AccountSelection {
+    host_id: String,
+    generation: u64,
+    kind: SelectionKind,
+}
+#[derive(Clone, PartialEq, Eq)]
+enum SelectionKind {
+    OAuth {
+        id: String,
+        client_id: String,
+        subject: String,
+    },
+    ApiKey,
 }
 pub struct AccountStore {
     path: PathBuf,
@@ -91,7 +112,12 @@ impl AccountStore {
         }
         Ok(store)
     }
-    pub fn save(&self) -> Result<(), AgentError> {
+    pub fn save(&mut self) -> Result<(), AgentError> {
+        self.data.selection_generation = self
+            .data
+            .selection_generation
+            .checked_add(1)
+            .ok_or_else(|| error("Account selection generation exhausted"))?;
         let bytes = serde_json::to_vec_pretty(&self.data)
             .map_err(|_| error("Could not encode account metadata"))?;
         let parent = self.path.parent().expect("account parent");
@@ -104,6 +130,41 @@ impl AccountStore {
         file.persist(&self.path)
             .map_err(|_| error("Could not replace account metadata"))?;
         Ok(())
+    }
+    /// Persist invalidation before replacing/deleting a selected credential.
+    /// Failure must abort that operation; a later failure leaves old turns fenced
+    /// even when the prior account remains selected for retry.
+    pub fn invalidate_selection(&mut self) -> Result<(), AgentError> {
+        self.save()
+    }
+    /// Reads only already loaded metadata, never a credential store or network.
+    pub fn selection(&self) -> Option<AccountSelection> {
+        let kind = if self.data.active.is_some() {
+            let account = self.selected()?;
+            SelectionKind::OAuth {
+                id: account.id.clone(),
+                client_id: account.client_id.clone(),
+                subject: account.subject.clone(),
+            }
+        } else if self.data.api_key_connected {
+            SelectionKind::ApiKey
+        } else {
+            return None;
+        };
+        Some(AccountSelection {
+            host_id: self.data.host_id.clone(),
+            generation: self.data.selection_generation,
+            kind,
+        })
+    }
+    pub(crate) fn check_selection(&self, expected: &AccountSelection) -> Result<(), AgentError> {
+        if self.selection().as_ref() == Some(expected) {
+            Ok(())
+        } else {
+            Err(error(
+                "The active account changed or signed out; start a new agent request.",
+            ))
+        }
     }
     pub fn selected(&self) -> Option<&AccountMetadata> {
         self.data
@@ -167,14 +228,19 @@ impl AccountStore {
     /// Consumes the store so its lock is released before the provider needs to
     /// reopen it for a request. Retaining that lock would time out token renewal.
     pub fn provider(self, model: String) -> Result<OpenAiProvider, AgentError> {
+        let selection = self.selection().ok_or_else(|| {
+            error(
+                "No OpenAI connection. Continue with ChatGPT in Incant, or run incant auth login.",
+            )
+        })?;
         if let Some(account) = self.selected() {
             // Validate while this lock is held; the provider reloads/renews the
             // same active registration before each later network request.
             auth::access_token(account)?;
-            OpenAiProvider::for_account(account.id.clone(), model)
+            OpenAiProvider::for_account(account.id.clone(), selection, model)
         } else if self.data.api_key_connected {
             CredentialStore::load("api-key")?;
-            OpenAiProvider::for_saved_api_key(model)
+            OpenAiProvider::for_saved_api_key(selection, model)
         } else {
             Err(error(
                 "No OpenAI connection. Continue with ChatGPT in Incant, or run incant auth login.",
@@ -189,6 +255,7 @@ impl AccountStore {
         disconnect_oauth: impl FnOnce(&AccountMetadata) -> Result<bool, AgentError>,
         disconnect_key: impl FnOnce() -> Result<(), AgentError>,
     ) -> Result<RemoteRevocation, AgentError> {
+        self.invalidate_selection()?;
         let revoked = if let Some(account) = self.selected() {
             if disconnect_oauth(account)? {
                 RemoteRevocation::Confirmed

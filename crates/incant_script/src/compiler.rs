@@ -52,15 +52,23 @@ impl CompiledScript {
                 })
                 .collect::<Vec<_>>()
                 .join(",");
+            let persistent = bindings
+                .sources()
+                .iter()
+                .enumerate()
+                .map(|(i, _)| format!("opted(updates[{i}])"))
+                .collect::<Vec<_>>()
+                .join(",");
             format!(
                 "const expected = [{ids}];\n\
                 if (!behavior || !nativeIsArray(behavior.sources) || behavior.sources.length !== expected.length) throw new Error('native source catalog mismatch');\n\
                 function entry(i, id) {{ const item = behavior.sources[i]; if (!item || item.id !== id) throw new Error('native source identity mismatch'); const value = item.behavior; check(value); return value; }}\n\
                 const updates = [{entries}];\n\
-                export function update(chunks, dt, commands, input, physics, navigation, localization, clock, timers, log, flipbooks, group, instances) {{ return updates[group].update({{chunks, dt, commands, input, physics, navigation, localization, clock, timers, log, flipbooks, instances}}); }}\n"
+                export const persistent = [{persistent}];\n\
+                export function update(chunks, dt, commands, input, physics, navigation, localization, clock, timers, log, flipbooks, animations, group, instances, state) {{ return updates[group].update({{chunks, dt, commands, input, physics, navigation, localization, clock, timers, log, flipbooks, animations, instances, state}}); }}\n"
             )
         } else {
-            "check(behavior);\nexport function update(chunks, dt, commands, input, physics, navigation, localization, clock, timers, log, flipbooks, group, instances) { return behavior.update({chunks, dt, commands, input, physics, navigation, localization, clock, timers, log, flipbooks, instances}); }\n".into()
+            "check(behavior);\nexport const persistent = [opted(behavior)];\nexport function update(chunks, dt, commands, input, physics, navigation, localization, clock, timers, log, flipbooks, animations, group, instances, state) { return behavior.update({chunks, dt, commands, input, physics, navigation, localization, clock, timers, log, flipbooks, animations, instances, state}); }\n".into()
         };
         let wrapper = format!(
             "const defineBehavior = value => value; const nativeIsArray = Array.isArray;\n\
@@ -71,6 +79,7 @@ impl CompiledScript {
              }})({{}});\n\
              function check(value) {{ if (!value || typeof value.update !== 'function') throw new Error('default behavior.update required');\n\
              if ('initialState' in value || 'onTimer' in value) throw new Error('legacy initialState/onTimer are unsupported; handle native timers.events in update'); }}\n\
+             function opted(value) {{ const setting = value.persistence; if (setting === undefined) return false; if (!setting || setting.version !== 1) throw new Error('persistence version 1 required'); return true; }}\n\
              {dispatch}"
         );
         let (bytes, hardening) = context.with(|ctx| {

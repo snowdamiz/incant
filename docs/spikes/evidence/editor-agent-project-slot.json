@@ -1,0 +1,57 @@
+{
+  "recorded_at": "2026-10-11T18:28:25.553791+00:00",
+  "parent": "d50fb0b3a91ca27982ddcf1ce05fc8e2192e8f04",
+  "sources": [
+    {
+      "path": "crates/incant_agent/src/access.rs",
+      "sha256": "23c751b94e1db08414c4bf9e9fe25f1db0b965650c2ec39032a898ddd7134102"
+    },
+    {
+      "path": "crates/incant_agent/src/lib.rs",
+      "sha256": "2d54c7d6e6ebc240fb0426311c54345ea3e09791e87e0bc7c37b8b7f7d355e84"
+    },
+    {
+      "path": "crates/incant_agent/tests/shared.rs",
+      "sha256": "a85247edb828a4e2b52e120510e6ac60526884b093102cb840515030f0a7c0de"
+    },
+    {
+      "path": "editor/app/src/project.rs",
+      "sha256": "9705ad480d105eba2f10d71cb232b4cbf69ae70bc7f34ef63e34458fce94bc47"
+    }
+  ],
+  "logs": [
+    {
+      "path": "/tmp/incant-project-slot-tests.log",
+      "sha256": "9824e8ea9f16af38d8b794a2e1fea05093038db811039240d449688e46e9712a"
+    },
+    {
+      "path": "/tmp/incant-project-slot-editor-tests.log",
+      "sha256": "f13971258e70c225aac73816ac7c4818d4625de1c987299d8b2c898f47e8432b"
+    },
+    {
+      "path": "/tmp/incant-project-slot-clippy.log",
+      "sha256": "95802b872bc57e8672e92b2e453c2f4b8665fb7e15f23aecde3d7eecad22402b"
+    }
+  ],
+  "review": {
+    "path": "/tmp/incant-project-slot-review.md",
+    "sha256": "7202734b78d7a4aa242ebc2a5775cfa7a73a04e6c99e765011a95b832ea49aa8"
+  },
+  "commands": [
+    "./tools/cargo test --locked --profile ci -j2 -p incant_agent",
+    "./tools/cargo test --locked --profile ci -j2 -p incant_editor project::tests",
+    "./tools/cargo clippy --locked --profile ci -j2 -p incant_agent -p incant_editor --all-targets -- -D warnings",
+    "./tools/cargo fmt --all --check",
+    "git diff --check"
+  ],
+  "results": {
+    "agent_passed": 48,
+    "editor_loading_passed": 3,
+    "all_target_clippy": "passed"
+  },
+  "limitations": [
+    "No editor chat wiring yet",
+    "No live-provider or GPU evidence",
+    "Existing one-project-session-per-mutex contract still required"
+  ]
+}

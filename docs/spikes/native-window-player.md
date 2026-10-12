@@ -37,9 +37,65 @@ submitted GPU work and device audio cannot be rolled back.
   `CursorMoved` is the only uncaptured motion source: forwarding raw device
   motion as well would count movement twice. Nonfinite/out-of-range positions
   and genuine discrete-event overflow are rejected.
-- Keyboard and three-button mouse bindings are supported. Gamepad, gestures,
+- Keyboard, three-button mouse and mapped gamepad bindings are supported. Gestures,
   extra mouse buttons, captured-pointer mode, text/IME and haptics are outside
   this host. Unsupported declared action bindings fail at startup.
+
+## Native desktop gamepads
+
+The optional `native-window` feature pins Gilrs 0.11.2 / gilrs-core 0.6.8.
+Default, CPU-input and offscreen-GPU players have no Gilrs normal dependency.
+The shared `incant_input::gamepad` adapter has no OS dependency and keeps backend
+identities out of script state. It assigns player IDs0–15 in discovery order,
+retains a slot across a disconnect/reconnect recognized by the backend, and
+refuses a seventeenth distinct backend identity during that player session.
+This is a session identity, not a persistent hardware identifier or player-choice UI.
+Gamepad bindings outside IDs0–15 fail explicitly at startup.
+
+The window polls real Gilrs events during `MainEventsCleared`, including while
+focus, minimization, surface acquisition or platform suspension freezes ticks.
+Active connection/disconnection and button transitions retain their order in
+the existing 1,024-entry input queue. A discarded focus/suspend batch reconciles
+physical connection state against the last accepted tick; it cannot lose an
+unpublished connect/disconnect or replay stale held controls. Resume emits current
+connection differences before accepting a tick. Buttons and sticks stay neutral
+until a fresh OS event, matching the existing keyboard focus policy. Catch-up
+ticks consume a packet once, and connection publication commits only after a
+successful game tick. Paused hotplug can collapse to its current topology because
+no simulation or input tick runs in the paused interval.
+
+Gilrs +Y-up sticks are inverted to the input contract's +Y-down. Its first trigger
+pair maps to shoulders and its second to analog triggers. Only measured
+`ButtonChanged` values become button input: an analog `ButtonPressed` threshold
+event cannot fabricate a value of1.0. D-pad axes map to direction buttons with
+the opposite direction released first. Unknown controls and Z axes have no
+counterpart in the current normalized contract. Gilrs default jitter/dead-zone
+filters are disabled; Incant action settings own dead zones. Each poll reads at
+most1,024 raw events plus one overflow lookahead, including ignored events while
+paused. Raw or combined normalized queue overflow terminates the host explicitly.
+
+Returned backend initialization errors are terminal, including Gilrs's dummy
+`NotImplemented` backend. Zero connected controllers is valid and leaves keyboard
+and mouse usable. The pinned macOS backend starts its IOHID manager asynchronously;
+manager creation failures are logged internally and not returned to the caller.
+Successful construction or an empty poll is therefore not a liveness/availability
+proof. The backend's OS/thread buffers are outside the adapter's queue bound.
+Force feedback is disabled, no haptic API is connected, and haptics remain
+unsupported. [Pinned primary API documentation](https://docs.rs/gilrs/0.11.2/gilrs/)
+describes backend/platform support; physical-controller behavior is still unverified.
+
+Linux window builds require `pkg-config` and `libudev-dev` as well as the existing
+desktop packages; the desktop checkpoint workflow installs both. Access to evdev
+devices depends on host permissions. macOS uses IOHID; Windows uses Gilrs's
+default Windows Gaming Input backend, whose events require an associated focused
+window. No accounts or build-time service become a runtime dependency.
+
+Local macOS validation and exact source/backend/log hashes are recorded in
+[gamepad evidence](evidence/native-window-gamepad-2026-10-11.json). Synthetic
+normalized/backend events exercise the actual adapter and `InputRuntime`, not
+physical hardware. No native window, GPU, account or controller was used for this
+verification. Windows/Linux execution, physical-controller acceptance and the
+Phase1 haptics/touch/device gates remain outstanding.
 
 `Mixer` now owns one root subtrack below Kira's main track so master suspension
 does not rewrite individual source playback state. Paused sources remain paused;

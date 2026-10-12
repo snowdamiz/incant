@@ -2,6 +2,7 @@
 //! JSON is bounded and parsed once; ticks contain no document or JSON projection.
 //! Simulation failure creates no output. Output I/O itself is not atomic.
 use incant_assets_runtime::sha256;
+mod checkpoint;
 #[cfg(feature = "render-gpu")]
 mod gpu;
 mod observe;
@@ -35,7 +36,8 @@ fn bounded(path: &str, limit: usize) -> Result<Vec<u8>, Box<dyn std::error::Erro
     Ok(bytes)
 }
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let args = package::expand(std::env::args().skip(1).collect())?;
+    let (args, checkpoint) = checkpoint::Options::split(std::env::args().skip(1).collect())?;
+    let args = package::expand(args)?;
     if args.as_slice() == ["--build-info"] {
         let code = embedded::load()?;
         let m = code.metadata();
@@ -65,21 +67,26 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     if !(1..=3600).contains(&ticks) || !(8000..=192000).contains(&rate) {
         return Err("tick/sample-rate bounds".into());
     }
-    let mut observations = observation_path
-        .map(|path| -> Result<_, Box<dyn std::error::Error>> {
-            Ok(observe::Plan::parse(
-                &bounded(path, observe::MAX_PLAN_BYTES)?,
-                ticks,
-            )?)
-        })
-        .transpose()?;
+    let prepare_observations = |end_tick| {
+        observation_path
+            .map(|path| -> Result<_, Box<dyn std::error::Error>> {
+                Ok(observe::Plan::parse(
+                    &bounded(path, observe::MAX_PLAN_BYTES)?,
+                    end_tick,
+                )?)
+            })
+            .transpose()
+    };
+    // Fresh runs know their absolute end tick before scene/device setup. Resumed
+    // runs must first restore the world so plans retain absolute tick bounds.
+    let mut observations = if checkpoint.load.is_none() {
+        prepare_observations(ticks)?
+    } else {
+        None
+    };
     let scene = CookedScene::from_bytes(&bounded(&args[0], 128 * 1024 * 1024)?)?;
     if spatial.is_none() && (!scene.spatial().is_empty() || !scene.visual_assets().is_empty()) {
         return Err("this game player has no spatial host".into());
-    }
-    let frames = u128::from(ticks) * u128::from(rate) / u128::from(scene.tick_rate());
-    if frames > 1_000_000 {
-        return Err("output frame bound".into());
     }
     let replay = InputReplay::from_text(
         std::str::from_utf8(&bounded(&args[3], incant_input::MAX_RECORDING_BYTES)?)?,
@@ -91,15 +98,39 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
     let actions = serde_json::from_slice(&bounded(&args[4], 256 * 1024)?)?;
     let clips = startup::clips(&args[1], &args[2])?;
-    let mut game = Player::new(
-        scene,
-        program::load(module)?,
-        actions,
-        clips,
-        rate,
-        spatial,
-        ticks,
-    )?;
+    let mut game = if let Some(path) = &checkpoint.load {
+        Player::from_checkpoint(
+            &bounded(path, incant_script::MAX_CHECKPOINT_BYTES)?,
+            &scene,
+            program::load(module)?,
+            actions,
+            clips,
+            rate,
+            spatial,
+        )?
+    } else {
+        Player::new(
+            scene,
+            program::load(module)?,
+            actions,
+            clips,
+            rate,
+            spatial,
+            ticks,
+        )?
+    };
+    // A requested save must be supported before gameplay begins. The final save
+    // is checked again: a script may introduce an unsupported capability later.
+    if checkpoint.save.is_some() {
+        game.checkpoint_bytes()?;
+    }
+    let start_tick = game.world()?.tick();
+    let (end_tick, frames) =
+        checkpoint::frame_range(start_tick, ticks, rate, game.world()?.tick_rate())?;
+    let previous_frames = game.rendered_frames()?;
+    if checkpoint.load.is_some() {
+        observations = prepare_observations(end_tick)?;
+    }
     if let Some(plan) = &mut observations {
         plan.observe(game.world()?, game.input()?)?;
     }
@@ -113,7 +144,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
         offset = end;
     }
-    if offset != output.len() || game.rendered_frames()? != frames {
+    if offset != output.len() || game.rendered_frames()? - previous_frames != frames {
         return Err("sample clock invariant".into());
     }
     let world = game.world()?;
@@ -146,11 +177,23 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         passed = observed.passed;
         report["observations"] = serde_json::to_value(observed)?;
     }
+    let save = if checkpoint.save.is_some() {
+        if !passed {
+            println!("{report}");
+            return Err("checkpoint withheld: native observation assertions failed".into());
+        }
+        Some(game.checkpoint_bytes()?)
+    } else {
+        None
+    };
     OpenOptions::new()
         .write(true)
         .create_new(true)
         .open(&args[7])?
         .write_all(&bytes)?;
+    if let (Some(path), Some(bytes)) = (&checkpoint.save, save) {
+        checkpoint::publish(std::path::Path::new(path), &bytes)?;
+    }
     println!("{report}");
     if !passed {
         return Err("native observation assertions failed (see completed report)".into());

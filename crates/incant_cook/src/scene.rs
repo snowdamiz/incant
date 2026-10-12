@@ -23,6 +23,8 @@ pub enum CookError {
     VisualAsset(String),
     #[error("missing or stale cooked navigation geometry for model {0}")]
     NavigationResource(String),
+    #[error("missing, invalid or stale cooked animation resource for model {0}")]
+    AnimationResource(String),
     #[error("invalid stable ID {0}")]
     InvalidId(String),
     #[error("component decoding failed: {0}")]
@@ -64,6 +66,38 @@ pub(crate) fn cook_validated_scene_with_navigation(
     attached_scripts: &std::collections::BTreeSet<String>,
     resources: &incant_nav::NavigationResources,
 ) -> Result<Vec<u8>, CookError> {
+    cook_validated_scene_with_resources(
+        validated,
+        scene_id,
+        attached_scripts,
+        resources,
+        &Default::default(),
+    )
+}
+
+/// Cook one validated project snapshot with sealed startup animation metadata
+/// and checked navigation resources. Legacy entry points refuse missing data.
+pub fn cook_scene_with_resources(
+    project: &Project,
+    scene_id: &str,
+    navigation: &incant_nav::NavigationResources,
+    animations: &crate::AnimationResources,
+) -> Result<Vec<u8>, CookError> {
+    cook_validated_scene_with_resources(
+        project.validated()?,
+        scene_id,
+        &Default::default(),
+        navigation,
+        animations,
+    )
+}
+pub(crate) fn cook_validated_scene_with_resources(
+    validated: incant_doc::ValidatedProject<'_>,
+    scene_id: &str,
+    attached_scripts: &std::collections::BTreeSet<String>,
+    resources: &incant_nav::NavigationResources,
+    animations: &crate::AnimationResources,
+) -> Result<Vec<u8>, CookError> {
     let project = validated.project();
     let scene = project
         .scenes
@@ -99,6 +133,7 @@ pub(crate) fn cook_validated_scene_with_navigation(
                 "AudioListener",
                 "Camera",
                 "MeshRenderer",
+                "Animation",
                 "SpriteRenderer",
                 "SpriteFlipbook",
                 "Tilemap",
@@ -118,7 +153,7 @@ pub(crate) fn cook_validated_scene_with_navigation(
         if let Some(node) = crate::navigation::cook(project, scene, entity, resources)? {
             navigation.push(node);
         }
-        if let Some(node) = crate::spatial::cook(project, entity, &mut visual_assets)? {
+        if let Some(node) = crate::spatial::cook(project, entity, &mut visual_assets, animations)? {
             spatial.push(node);
         }
         let transform: Transform = entity

@@ -1,0 +1,52 @@
+{
+  "scope": "test-only diagnostic actual-draw fixture, GPU execution still pending",
+  "patch": {
+    "path": "/tmp/incant-diagnostic-output-review-v2.patch",
+    "sha256": "e6782408cb27c87622c03ad992572ec2d87f757286acc4ff99e578b241758d40"
+  },
+  "source_files": [
+    {
+      "path": "crates/incant_render/src/lib.rs",
+      "sha256": "e379470bb06d9566e9dc480c8136c6499d0f28e1fd28036ab6d482d6f176830d"
+    },
+    {
+      "path": "crates/incant_render/tests/diagnostic_output/mod.rs",
+      "sha256": "8f863c455bf264e89c85683197eb9d813c06a72879bba058636101dfc208e9d6"
+    }
+  ],
+  "checks": [
+    {
+      "path": "/tmp/incant-diagnostic-readback-build-final.log",
+      "sha256": "1ec8a7db60b25b5a322749d680723d9e328253515eb9c72dc8642c1bec51ed97"
+    },
+    {
+      "path": "/tmp/incant-diagnostic-readback-clippy-final.log",
+      "sha256": "1950b61c8b765c5b20908220896d30555769a177f654a136bb05693c92766c5a"
+    }
+  ],
+  "historical_failed_setup_logs": [
+    {
+      "path": "/tmp/incant-diagnostic-readback-build.log",
+      "sha256": "d0cf3d63d908281a4ae037438dc3db5addd050368847ff32bc0529d5b318dd87"
+    },
+    {
+      "path": "/tmp/incant-diagnostic-readback-clippy.log",
+      "sha256": "1ec1ce9ef8417d0c5f48bfe6c95931bfcdfab8a1ed07ca389e55dab120c54790"
+    },
+    {
+      "path": "/tmp/incant-diagnostic-readback-clippy-fixed.log",
+      "sha256": "a57ade0a5cf2f29295680f022365e22fa9b29c3d11b9eb6c4791acf7d57e5e1a"
+    }
+  ],
+  "failures_corrected": [
+    "Explicit Option element types",
+    "Rust1.99 as_chunks lint",
+    "Move test module into subdirectory to avoid Cargo integration auto-discovery"
+  ],
+  "gpu_executed": false,
+  "pair_status": "New default/cooked pair copied and rehashed in binaries-v2; ignored listings confirm test presence; no GPU execution",
+  "pair_manifest": {
+    "path": "/tmp/incant-geometry-acceptance-binaries-v2/manifest.json",
+    "sha256": "b063b8b10888725b9f533f189ad665e8ec9fce04e9ef81c20ac1dbdfed5c5806"
+  }
+}

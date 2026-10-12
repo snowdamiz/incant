@@ -1,0 +1,24 @@
+{
+  "source": "8325797dc67fa34e069a2eff949a356fef3c0fd1",
+  "actual_main": "adab5de3ee878c3b003014966e1409bd521aca36",
+  "changed_paths_from_fresh_proof": [
+    "STATUS.md",
+    "crates/incant_agent/src/ledger.rs",
+    "crates/incant_agent/src/ledger/tests.rs",
+    "docs/spikes/evidence/ledger-explicit-release-review.json",
+    "docs/spikes/evidence/ledger-explicit-release.json",
+    "docs/spikes/evidence/native-animation-main114-export.json",
+    "docs/spikes/ledger-explicit-release.md",
+    "docs/spikes/native-animation-integration.md"
+  ],
+  "unchanged_player_runtime_cook_root_lock": true,
+  "tests": 64,
+  "clippy": true,
+  "logs": {
+    "/tmp/incant-animation-main115-agent-tests.log": "5fd3eee4843a98ea97f5fb90a92bd484b3f99c4692b820420376543506436d1f",
+    "/tmp/incant-animation-main115-agent-clippy.log": "b95664537e682e4b156629e92f67c63ba86e70789e82e2c449d363b1b3775efc"
+  },
+  "source_fresh_proof": "5d98ee2130cff8b1bbcd6456f924bae0f39d49d2",
+  "fresh_proof_sha256": "ba11ab0c5d6c05e102a8bf33dca4a0ecb56ca2eef3684e2799dda193b0f9f53e",
+  "scope": "No shipping rerun: only independently reviewed authoring-side lock ownership change and docs since exact fresh player proof; native0053 acceptance remains pending."
+}

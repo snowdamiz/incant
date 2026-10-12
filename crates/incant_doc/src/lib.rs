@@ -1,4 +1,5 @@
 //! The text-native project format and validated CRDT projection. No filesystem or UI.
+mod agent_budget;
 mod audio;
 mod camera;
 #[cfg(feature = "crdt")]
@@ -7,6 +8,7 @@ mod lights;
 mod navigation;
 mod physics;
 mod physics_2d;
+pub use agent_budget::{AgentBudgetSettings, DEFAULT_AGENT_TOKEN_CAP, MAX_AGENT_TOKEN_CAP};
 #[cfg(feature = "crdt")]
 pub use crdt::CollaborativeDocument;
 pub use incant_2d::atlas::{AtlasLayout, SpriteAtlas};
@@ -25,10 +27,11 @@ use thiserror::Error;
 
 pub const SCHEMA_VERSION: u32 = 1;
 pub use incant_types::{
-    AngularVelocity, AngularVelocity2D, AudioBus, AudioListener, AudioSource, AudioSpatial,
-    BodyMotion, Camera, CameraProjection, Collider, Collider2D, ColliderPart, ColliderShape,
-    ColliderShape2D, DirectionalLight, DirectionalShadows, EnvironmentLight, Id, MeshRenderer,
-    PointLight, PrimitiveColliderShape, RigidBody, SpotLight, TextureUsage, Transform, Velocity,
+    AngularVelocity, AngularVelocity2D, Animation, AudioBus, AudioListener, AudioSource,
+    AudioSpatial, BodyMotion, Camera, CameraProjection, Collider, Collider2D, ColliderPart,
+    ColliderShape, ColliderShape2D, DirectionalLight, DirectionalShadows, EnvironmentLight, Id,
+    MeshRenderer, PointLight, PrimitiveColliderShape, RigidBody, SpotLight, TextureUsage,
+    Transform, Velocity,
 };
 pub fn new_id() -> Id {
     ulid::Ulid::new().to_string()
@@ -57,6 +60,9 @@ pub struct ProjectSettings {
     pub input_actions: InputActions,
     #[serde(default, skip_serializing_if = "LocaleSettings::is_default")]
     pub localization: LocaleSettings,
+    #[serde(default, skip_serializing_if = "AgentBudgetSettings::is_default")]
+    #[schemars(extend("default" = AgentBudgetSettings::default()))]
+    pub agent_budget: AgentBudgetSettings,
 }
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
@@ -164,6 +170,7 @@ impl Project {
                 tick_rate: 60,
                 input_actions: InputActions::new(),
                 localization: LocaleSettings::default(),
+                agent_budget: AgentBudgetSettings::default(),
             },
             memory: BTreeMap::new(),
         }
@@ -248,6 +255,12 @@ impl Project {
         }
         if let Err(error) = self.settings.localization.validate() {
             issue("/settings/localization".into(), &error.to_string());
+        }
+        if self.settings.agent_budget.max_tokens > MAX_AGENT_TOKEN_CAP {
+            issue(
+                "/settings/agent_budget/max_tokens".into(),
+                "must be between 0 and 9007199254740991",
+            );
         }
         if let Err(error) = incant_localization::Catalog::compile(&self.string_tables) {
             let path = match &error {
@@ -348,6 +361,16 @@ impl Project {
                             "agent requires model and conversation ID",
                         );
                     }
+                }
+                if entity.components.contains_key("Animation")
+                    && (!entity.components.contains_key("MeshRenderer")
+                        || entity.components.contains_key("SpriteRenderer")
+                        || entity.components.contains_key("Tilemap"))
+                {
+                    issue(
+                        format!("{path}/components/Animation"),
+                        "Animation requires MeshRenderer without SpriteRenderer or Tilemap",
+                    );
                 }
                 if let Some(flipbook) = entity.components.get("SpriteFlipbook") {
                     let checked = (|| -> Result<(), String> {
@@ -513,6 +536,10 @@ fn validate_component(kind: &str, value: &Value, project: &Project) -> Result<()
                 return Err("tilemap requires a color atlas texture asset".into());
             }
         }
+        "Animation" => {
+            let animation: Animation = decode(value)?;
+            animation.validate().map_err(str::to_owned)?;
+        }
         "SpriteFlipbook" => {
             let flipbook: SpriteFlipbook = decode(value)?;
             flipbook.rate.validate().map_err(|e| e.to_string())?;
@@ -603,6 +630,7 @@ pub fn schema_registry() -> BTreeMap<String, Value> {
             "MeshRenderer".into(),
             json!(schemars::schema_for!(MeshRenderer)),
         ),
+        ("Animation".into(), json!(schemars::schema_for!(Animation))),
         ("Camera".into(), json!(schemars::schema_for!(Camera))),
         ("Tilemap".into(), json!(schemars::schema_for!(Tilemap))),
         (

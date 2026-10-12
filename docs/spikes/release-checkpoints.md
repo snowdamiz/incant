@@ -15,9 +15,9 @@ release contract. The full engine build/test/probe bodies remain present; changi
 triggers does not count as rerunning their correctness or performance proofs.
 
 All feasible scoped engine tests and review are still required before development
-merges. The first fast job and deployed branch rules are recorded below; the first successful full
-candidate promotion remains pending. This
-local verification does not claim hosted success, physical-device performance,
+merges. The first fast job and deployed branch rules are recorded below. The historical
+local policy verification is separate from the first successful full checkpoint
+promotion, now recorded below; neither establishes physical-device performance,
 phase completion, or a signed/published distribution release.
 
 ## Integrated PR83 transition
@@ -37,8 +37,9 @@ formatting and workflow lint. The policy's earlier 17-Node result was on a priva
 authored-script union; this PR preserves its separate 12-test source scope.
 The root created the active `incant-release-checkpoints` heartbeat at the agreed
 three-hour cadence. Repository settings and exact final fast-check success are recorded below. The
-first successful full candidate promotion remains pending; neither
-the historical failure nor local verification is presented as full hosted success.
+original transition receipt records what was pending at that point; checkpoint 5
+closes full promotion below. Neither the historical failure nor local verification
+is presented as full hosted success.
 [Machine-readable evidence](evidence/release-checkpoint-transition.json).
 
 ## Deployed development gate
@@ -56,8 +57,8 @@ only the GitHub Actions `development-checks` context, with strict up-to-date off
 release required all 22 listed GitHub Actions contexts with strict up-to-date on.
 Both require PRs, enforce the rules for administrators, and prohibit force pushes
 and deletion. No extra approval count is imposed. The active three-hour thread
-heartbeat is `incant-release-checkpoints`. No candidate has yet been promoted;
-release remains on its known baseline until the complete frozen suite succeeds.
+heartbeat is `incant-release-checkpoints`. That baseline was retained through four failed checkpoints; checkpoint 5 was
+promoted only after the complete frozen suite succeeded.
 [Deployment and first-run identities](evidence/release-checkpoint-deployment.json).
 
 ## Recent fast main checks
@@ -73,5 +74,62 @@ The reviewed local-service workflow increased release protection from the initia
 recorded platform failures. Checkpoint 3 confirmed the Linux private-service and
 macOS process-tooling repairs, then exposed a Windows restricted-TypeScript-host
 lookup failure; PR91 fixes that on main, with real Windows confirmation assigned
-to the next snapshot. Release stays on its fully checked bootstrap until every
-required context succeeds.
+to the next snapshot. Checkpoint 4 confirmed that Windows regression, but found isolated physics-lock
+and PE symbol-audit failures. Each failed checkpoint remained unpromoted.
+
+## Checkpoint 5 — first verified promotion
+
+[PR85](https://github.com/snowdamiz/incant/pull/85) merged into `release` at
+**2026-10-11 20:33:01 UTC** after all **23 required contexts** succeeded on the
+exact candidate push across eight comprehensive workflows. The candidate
+`04f8d9b18a4b29893c63a346841fffd41ce437c7` equals selected main97. Release merge
+`c603ca07bbe1e6e1ad46b2fd3aa2f70aaec07f50` has the bootstrap release and that
+candidate as parents; its tree `438e65c9165372e45681d40c910d6bb05b056832` exactly
+matches the tested tree. Strict required checks, GitHub Actions app identity,
+administrator enforcement and the `Built-by: astra` merge trailer were verified.
+[Complete check identities, timestamps, audits and failure history](evidence/release-checkpoint-5.json).
+
+| Required job | Execution | Wait from workflow creation |
+| --- | --- | --- |
+| Windows desktop | 54m06s | 3s |
+| macOS general | 44m48s | 4m13s |
+| Linux desktop | 16m42s | 3s |
+
+The Windows critical path includes 10m52s workspace tests/build, 5m08s optional
+native-window tests/build, 12m09s authored export, 7m28s standalone shipping proof
+and 5m27s cache cleanup/packaging/upload. These changed-graph observations do not
+establish a controlled cache or profile speedup. Main development checks remain
+a separate roughly two-minute gate; full checkpoint cost has not disappeared.
+
+All three native physics jobs and their strict comparison now pass with the
+repaired isolated lock. Actual Windows authored export passed three source/build-
+deleted 20-tick runs. Its 9,251,328-byte player, matching PE/PDB identity, fresh
+link-map bytecode/parser audit, shipping flags, cooked data and PCM hashes were
+independently rechecked from the hosted artifact. macOS passed the four-player
+shared fresh session in 1,401.486s: 282 unique fresh target units and 371 reuse
+events within that session. All eight raw build-log hashes and 3,417 frozen source
+hashes match; source/build deletion preceded every player launch.
+
+The verified Windows cache replacement uploaded 2,011,726,110 bytes in full.
+Only obsolete main cache `8800194134` was retired after confirming replacement
+`8806499881`, exact family/version and successful producer completion. All other
+entries were preserved: 12 entries total 8,701,264,445 bytes afterward. Future
+consumption of that exact Windows cache is still unmeasured. No failed earlier
+batch was promoted, and no test context, shipping assertion or gate was removed.
+
+## Checkpoint 7 — failed, repaired on main
+
+Frozen main113 candidate `7b376924` completed all eight workflows with 22 of 23
+required contexts successful. Windows desktop passed in 33m06s and Windows Wasm
+conformance in 34m12s, confirming the earlier journal fixture repair. General
+macOS failed reopening a ledger with Busy. PR115 repairs explicit acquired-lock
+release, preserving exclusive ownership and conservative usage accounting; 64
+local agent tests and Clippy pass. The precise hosted descriptor interleaving
+was not observed. This failed candidate was never promoted, and its historical
+failure remains recorded in the [terminal receipt](evidence/release-checkpoint-7.json).
+
+PR116 subsequently merged reviewed native animation after its 114-second fast
+check and scoped native acceptance. The next deliberately frozen repair-validation
+checkpoint will select actual main after Console integration; later development
+merges will not move that candidate. Full hosted confirmation of the lock repair
+remains pending, without waiving any of the 23 contexts.

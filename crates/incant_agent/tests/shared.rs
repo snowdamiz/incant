@@ -580,3 +580,271 @@ fn unchecked_play_hosts_are_not_advertised_or_dispatched_for_shared_projects() {
     assert!(!report.tool_calls[0].succeeded);
     assert_eq!(bus.lock().unwrap().revision(), 0);
 }
+
+#[test]
+fn loading_project_container_uses_one_bus_and_refuses_a_failed_reload() {
+    use incant_agent::ProjectSlot;
+    struct Slot(Option<CommandBus>);
+    impl ProjectSlot for Slot {
+        fn command_bus(&mut self) -> Result<&mut CommandBus, AgentError> {
+            self.0.as_mut().ok_or(AgentError::ProjectUnavailable)
+        }
+    }
+    let slot = Mutex::new(Slot(None));
+    let cancel = AtomicBool::new(false);
+    let mut provider = Responses {
+        count: 0,
+        respond: Box::new(|_, _, _, _| panic!("loading project must not call provider")),
+    };
+    assert!(matches!(
+        agent().run_shared(
+            &mut provider,
+            &slot,
+            &mut NoViewport,
+            "Edit",
+            "turn",
+            &cancel,
+            &mut |_, _| true,
+            &mut |_| {},
+        ),
+        Err(AgentError::ProjectUnavailable)
+    ));
+    slot.lock().unwrap().0 = Some(CommandBus::new(Project::empty("Loaded")).unwrap());
+    let mut provider = Responses {
+        count: 0,
+        respond: Box::new(|step, _, _, _| {
+            assert!(slot.try_lock().is_ok());
+            match step {
+                0 => completion(vec![patch(0)]),
+                1 => {
+                    let mut state = slot.lock().unwrap();
+                    let bus = state.command_bus().unwrap();
+                    assert_eq!(bus.revision(), 1);
+                    assert_eq!(bus.history().len(), 1);
+                    assert_eq!(bus.project().memory["agent"], "accepted");
+                    bus.undo().unwrap();
+                    assert!(!bus.project().memory.contains_key("agent"));
+                    state.0 = None; // A failed reload invalidates this turn.
+                    completion(vec![patch(2)])
+                }
+                _ => panic!("unexpected provider call"),
+            }
+        }),
+    };
+    assert!(matches!(
+        agent().run_shared(
+            &mut provider,
+            &slot,
+            &mut NoViewport,
+            "Edit",
+            "turn",
+            &cancel,
+            &mut |_, _| true,
+            &mut |_| {},
+        ),
+        Err(AgentError::ProjectUnavailable)
+    ));
+    assert_eq!(provider.count, 2);
+}
+
+#[test]
+fn conversation_retains_completed_protocol_and_requeries_after_manual_edit() {
+    let bus = Mutex::new(CommandBus::new(Project::empty("Conversation")).unwrap());
+    let mut history = incant_agent::Conversation::default();
+    let mut first = Responses {
+        count: 0,
+        respond: Box::new(|step, _, _, _| match step {
+            0 => completion(vec![patch(0)]),
+            1 => completion(vec![
+                json!({"type":"message","role":"assistant","content":[{"type":"output_text","text":"Remember completed marker"}]}),
+            ]),
+            _ => panic!("unexpected step"),
+        }),
+    };
+    let mut runner = agent();
+    let first_report = runner
+        .run_shared_in_conversation(
+            &mut first,
+            &bus,
+            &mut NoViewport,
+            "Save my marker",
+            "turn-one",
+            &AtomicBool::new(false),
+            &mut |_, _| true,
+            &mut |_| {},
+            &mut history,
+        )
+        .unwrap();
+    assert_eq!(history.retained_turns(), 1);
+    edit(&mut bus.lock().unwrap(), "manual");
+    let mut next = Responses {
+        count: 0,
+        respond: Box::new(|step, input, _, _| match step {
+            0 => {
+                assert!(bus.try_lock().is_ok());
+                let text = serde_json::to_string(input).unwrap();
+                assert!(text.contains("Save my marker"));
+                assert!(text.contains("Remember completed marker"));
+                assert!(text.contains(&first_report.transaction_ids[0]));
+                assert_eq!(
+                    input.last().unwrap()["content"],
+                    "Continue with my manual change"
+                );
+                completion(vec![call("doc_query", json!({"path":"/memory"}))])
+            }
+            1 => {
+                let query = output(input, "doc_query");
+                assert_eq!(query["revision"], 2);
+                assert_eq!(query["untrusted_project_data"]["manual"], "user value");
+                completion(vec![call(
+                    "doc_patch",
+                    json!({
+                        "ops":[{"op":"set_memory","section":"followup","text":"done"}],
+                        "description":"Follow-up", "expected_revision":2
+                    }),
+                )])
+            }
+            2 => completion(vec![]),
+            _ => panic!("unexpected step"),
+        }),
+    };
+    let second = runner
+        .run_shared_in_conversation(
+            &mut next,
+            &bus,
+            &mut NoViewport,
+            "Continue with my manual change",
+            "turn-two",
+            &AtomicBool::new(false),
+            &mut |_, _| true,
+            &mut |_| {},
+            &mut history,
+        )
+        .unwrap();
+    assert_eq!(history.retained_turns(), 2);
+    assert_ne!(first_report.transaction_ids, second.transaction_ids);
+    assert_eq!(
+        bus.lock().unwrap().history()[0]
+            .actor
+            .conversation_id
+            .as_deref(),
+        Some("turn-one")
+    );
+    assert_eq!(
+        bus.lock().unwrap().history()[2]
+            .actor
+            .conversation_id
+            .as_deref(),
+        Some("turn-two")
+    );
+    assert_eq!(bus.lock().unwrap().project().memory["followup"], "done");
+    *bus.lock().unwrap() = CommandBus::new(Project::empty("Different project")).unwrap();
+    let mut no_provider = Responses {
+        count: 0,
+        respond: Box::new(|_, _, _, _| panic!("project switch")),
+    };
+    assert!(matches!(
+        runner.run_shared_in_conversation(
+            &mut no_provider,
+            &bus,
+            &mut NoViewport,
+            "Continue",
+            "turn-three",
+            &AtomicBool::new(false),
+            &mut |_, _| true,
+            &mut |_| {},
+            &mut history,
+        ),
+        Err(AgentError::ProjectChanged)
+    ));
+}
+
+#[test]
+fn interrupted_conversation_retains_warning_and_committed_edit_without_unmatched_calls() {
+    let bus = Mutex::new(CommandBus::new(Project::empty("Interrupted conversation")).unwrap());
+    let mut history = incant_agent::Conversation::default();
+    let cancel = AtomicBool::new(false);
+    let mut provider = Responses {
+        count: 0,
+        respond: Box::new(|_, _, _, _| {
+            let mut second = patch(1);
+            second["call_id"] = json!("second");
+            completion(vec![patch(0), second])
+        }),
+    };
+    let mut approved = 0;
+    let result = agent().run_shared_in_conversation(
+        &mut provider,
+        &bus,
+        &mut NoViewport,
+        "Two operations",
+        "partial-turn",
+        &cancel,
+        &mut |_, _| {
+            approved += 1;
+            if approved == 2 {
+                cancel.store(true, Ordering::Relaxed);
+            }
+            true
+        },
+        &mut |_| {},
+        &mut history,
+    );
+    assert!(matches!(result, Err(AgentError::Interrupted)));
+    assert_eq!(bus.lock().unwrap().history().len(), 1);
+    assert_eq!(bus.lock().unwrap().project().memory["agent"], "accepted");
+    let mut next =
+        Responses {
+            count: 0,
+            respond: Box::new(|_, input, _, _| {
+                assert!(!input.iter().any(|item| item["type"] == "function_call"
+                    || item["type"] == "function_call_output"));
+                let text = serde_json::to_string(input).unwrap();
+                assert!(text.contains("Two operations"));
+                assert!(text.contains("may already have committed"));
+                completion(vec![])
+            }),
+        };
+    agent()
+        .run_shared_in_conversation(
+            &mut next,
+            &bus,
+            &mut NoViewport,
+            "Continue",
+            "next-turn",
+            &AtomicBool::new(false),
+            &mut |_, _| true,
+            &mut |_| {},
+            &mut history,
+        )
+        .unwrap();
+    assert_eq!(history.retained_turns(), 2);
+}
+
+#[test]
+fn oversized_provider_context_is_refused_before_network_or_budget_charge() {
+    let bus = Mutex::new(CommandBus::new(Project::empty("Context cap")).unwrap());
+    let mut runner = agent();
+    let mut history = incant_agent::Conversation::default();
+    let mut provider = Responses {
+        count: 0,
+        respond: Box::new(|_, _, _, _| panic!("oversized context must not reach provider")),
+    };
+    assert!(matches!(
+        runner.run_shared_in_conversation(
+            &mut provider,
+            &bus,
+            &mut NoViewport,
+            &"x".repeat(16 * 1024 * 1024),
+            "oversized",
+            &AtomicBool::new(false),
+            &mut |_, _| true,
+            &mut |_| {},
+            &mut history,
+        ),
+        Err(AgentError::ContextLimit)
+    ));
+    assert_eq!(runner.budget.used_tokens, 0);
+    assert_eq!(history.retained_bytes(), 0);
+    assert!(bus.lock().unwrap().history().is_empty());
+}

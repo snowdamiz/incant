@@ -362,3 +362,39 @@ test('project CLI accepts only bounded catalog data and publishes no failed arti
     }
   });
 });
+
+test('actual strict animation guest cook stays identical to the QuickJS test input', async () => {
+  const cooked = await cookNativeScript(path.join(REPO, 'crates/incant_script/tests/fixtures'), 'animation.ts');
+  assert.equal(cooked.code, await fs.readFile(path.join(REPO, 'crates/incant_script/tests/fixtures/animation.cjs'), 'utf8'));
+});
+
+test('animation SDK refuses wrong overload types and readonly ID mutation', async () => {
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'incant-animation-types-'));
+  try {
+    const entry = body => `import type { NativeBehavior } from '@incant/runtime/native';
+export default {update({animations,commands}){const id=animations.ids[0];${body};return undefined;}} satisfies NativeBehavior;`;
+    for (const bad of [
+      "commands.controlAnimation(id,'select',0)",
+      "commands.controlAnimation(id,'select','0',0)",
+      "commands.controlAnimation(id,'seek',false)",
+      "commands.controlAnimation(id,'playing',1)",
+      "commands.controlAnimation(id,'looping',true,0)",
+      "commands.controlAnimation(id,'speed','1')",
+      "commands.controlAnimation(id,'unknown')",
+      "animations.ids[0]='changed'",
+    ]) {
+      await fs.writeFile(path.join(root, 'entry.ts'), entry(bad));
+      await assert.rejects(cookNativeScript(root, 'entry.ts'), /strict typecheck failed/u, bad);
+    }
+    await fs.writeFile(path.join(root, 'entry.ts'), entry(`
+commands.controlAnimation(id,'select',null,0);
+commands.controlAnimation(id,'select',255,0);
+commands.controlAnimation(id,'seek',0.5);
+commands.controlAnimation(id,'playing',false);
+commands.controlAnimation(id,'looping',true);
+commands.controlAnimation(id,'speed',-16)`));
+    assert.ok((await cookNativeScript(root, 'entry.ts')).code.includes('controlAnimation'));
+  } finally {
+    await fs.rm(root, { recursive: true, force: true });
+  }
+});

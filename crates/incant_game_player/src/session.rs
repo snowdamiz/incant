@@ -103,6 +103,47 @@ impl Player {
             scene, script, actions, clips, rate,
         )?)))
     }
+    pub fn from_checkpoint(
+        bytes: &[u8],
+        initial: &CookedScene,
+        script: impl Into<SessionProgram>,
+        actions: InputActions,
+        clips: Vec<ClipBinding>,
+        rate: u32,
+        settings: Option<Settings>,
+    ) -> Result<Self> {
+        let script = script.into();
+        #[cfg(feature = "render-input")]
+        if let Some(settings) = settings {
+            return Ok(match settings {
+                Settings::Cpu(settings) => {
+                    Self::Spatial(Box::new(HostedOfflineGameSession::from_checkpoint_bytes(
+                        bytes, initial, script, actions, clips, rate, settings,
+                    )?))
+                }
+                #[cfg(feature = "render-gpu")]
+                Settings::Gpu(_) => return Err("GPU checkpoint loading is unsupported".into()),
+            });
+        }
+        #[cfg(not(feature = "render-input"))]
+        if let Some(settings) = settings {
+            match settings {}
+        }
+        Ok(Self::Plain(Box::new(
+            OfflineGameSession::from_checkpoint_bytes(
+                bytes, initial, script, actions, clips, rate,
+            )?,
+        )))
+    }
+    pub fn checkpoint_bytes(&self) -> Result<Vec<u8>> {
+        Ok(match self {
+            Self::Plain(game) => game.checkpoint_bytes()?,
+            #[cfg(feature = "render-input")]
+            Self::Spatial(game) => game.checkpoint_bytes()?,
+            #[cfg(feature = "render-gpu")]
+            Self::Gpu(_) => return Err("GPU checkpoint saving is unsupported".into()),
+        })
+    }
     pub fn next_output_frames(&self) -> Result<usize> {
         Ok(match self {
             Self::Plain(game) => game.next_output_frames()?,

@@ -29,11 +29,11 @@ pub enum SessionError {
 /// input access is returned. Each guest retains its own bounded write transaction;
 /// there is no rollback of the already accepted input or native simulation step.
 pub struct NativeSession {
-    world: NativeWorld,
-    host: SessionVm,
-    input: InputRuntime,
-    bindings: ValidatedActions,
-    failed: bool,
+    pub(crate) world: NativeWorld,
+    pub(crate) host: SessionVm,
+    pub(crate) input: InputRuntime,
+    pub(crate) bindings: ValidatedActions,
+    pub(crate) failed: bool,
 }
 
 /// A fresh native world and validated input bindings, before guest execution.

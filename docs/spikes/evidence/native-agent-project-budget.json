@@ -1,0 +1,189 @@
+{
+  "at": "2026-10-11T20:08:55.733478+00:00",
+  "base_head": "5c3eab55f5f6c3b972b1046e65f77fa7107ad014",
+  "scope": "Native durable per-project agent budget adapter and opt-in live harness extension",
+  "source_sha256": {
+    "editor/app/src/agent.rs": "316e57f0dbe4f5c5c8a0dd59d1c6d38bd5331f73232498f76ab0f64b038a99da",
+    "editor/app/src/agent/budget.rs": "39115f95d514de084969f36489e86daa005201e617d6d9ddd8a751555304304f",
+    "editor/app/src/agent/budget/tests.rs": "63f11c5a24fdf3a039c7dfc8b012f71a418c8b9d99ba5f28c3708884022af515",
+    "editor/app/src/agent/worker.rs": "ad6b45cbc28a4d8e90392bed481764acfdd87538901c7a49a908fbbacc9d23ae",
+    "editor/app/src/agent/worker/tests.rs": "81176700be885fd4c1afdb4ead9cdd89b81ee23618fd1ecc41c9aca07dfba954",
+    "editor/app/src/agent_probe.rs": "3f3ac3267f0789c0f0a44afbc19b67cf5376f65674d795cfc9dceb7e9955ae07",
+    "editor/app/src/main.rs": "9a1dc8f20d3e0a8f1d63e3db9958102529991a11233c05c14fb47ebdcc1d1e12",
+    "tools/probes/native-editor-agent.py": "ee49a3ecdcee53f401bc1c5759021139eb149d08034562e3e40e0e9e230250b0"
+  },
+  "validation": {
+    "rust_tests_passed": 152,
+    "existing_native_gpu_tests_ignored": 1,
+    "explanation": "106 incant_agent plus8 incant_agent_native tests from the union run;38 editor tests rerun after worker cases and explicit capability metadata. All pass.",
+    "clippy": "4 packages, all targets, agent-probe/play-probe, passed",
+    "conventions": "generated files current",
+    "python_probe": "syntax parsed",
+    "live_or_native_pixels": "Not run for the budget adapter; earlier live handler receipts predate this change."
+  },
+  "closed_review_findings": [
+    "Delayed cancellation now targets its observed turn ID, never a later worker.",
+    "Project/cap guard survives through Session installation/admission; storage stays outside locks.",
+    "Worker fixture allowance raised to1m so provider response path is reached;0and17token outcomes are observed."
+  ],
+  "behavior": [
+    "Usage opens under stable project identity before admission and survives a fresh Service.",
+    "A user cap edit cancels a pending approval and does not reset measured usage.",
+    "Before-provider cap0 yields zero calls/charge; in-flight cap0 yields one call/17tokens and no document patch.",
+    "Other-window ledger ownership refuses rather than resetting allowance.",
+    "The live probe extension requires exact post-Undo usage and fresh-process restore; execution remains pending."
+  ],
+  "log_sha256": {
+    "/tmp/incant-native-budget-union-tests.log": "ba84d048f18b0d003abe774dfc09bebdb02de4e67d85b467073304d5e3c56384",
+    "/tmp/incant-native-budget-editor-final-tests.log": "242aa7f68226f31dd38de7bda80d0eb96899a400c90c39fcafa504f2bd4be752",
+    "/tmp/incant-native-budget-final-clippy.log": "e16f1b269ec821cc7e79b620cf890518b78dc079084e0e18f501f64bd2fa3430",
+    "/tmp/incant-native-budget-union-compile-error.log": "62d61855d6546ea9981200d5663a44f4258e4843b1bc71e9ab8f69644e0ce2d8",
+    "/tmp/incant-native-budget-worker-test-compile-error.log": "fcc2e4a424020463aa92451c8c7a872650823d03ae63437ff55ebc10160b3940",
+    "/tmp/incant-native-budget-worker-test-small-cap.log": "43c698aa4073d1d29d546e320f06445f6f0815d31ab597fc623a57b2f7555982"
+  },
+  "independent_reviews": {
+    "/tmp/incant-native-budget-adapter-review.json": {
+      "review": "native durable-budget adapter, source-only",
+      "model_routing": {
+        "model": "gpt-6.1-sol",
+        "effort": "xhigh",
+        "role": "astra"
+      },
+      "base_head": "5c3eab55f5f6c3b972b1046e65f77fa7107ad014",
+      "source_sha256": {
+        "editor/app/src/agent.rs": "316e57f0dbe4f5c5c8a0dd59d1c6d38bd5331f73232498f76ab0f64b038a99da",
+        "editor/app/src/agent/budget.rs": "39115f95d514de084969f36489e86daa005201e617d6d9ddd8a751555304304f",
+        "editor/app/src/agent/budget/tests.rs": "63f11c5a24fdf3a039c7dfc8b012f71a418c8b9d99ba5f28c3708884022af515",
+        "editor/app/src/agent/worker.rs": "e86823aa82909f40f50e61d4c4c708883ca35bcc59ba6e85401556f1b4719191",
+        "editor/app/src/agent_probe.rs": "3f3ac3267f0789c0f0a44afbc19b67cf5376f65674d795cfc9dceb7e9955ae07",
+        "tools/probes/native-editor-agent.py": "ee49a3ecdcee53f401bc1c5759021139eb149d08034562e3e40e0e9e230250b0"
+      },
+      "session_api_source": {
+        "checkout": "/Users/andreyyurlov/.codex/worktrees/native-fbx-import/incant",
+        "head": "f1d6a0ab9d7b0e59a305ba4b8a6f7ed079c49690"
+      },
+      "findings": [],
+      "resolved_findings": [
+        {
+          "priority": "P2",
+          "issue": "A delayed active-budget read could cancel a newer valid worker.",
+          "correction": "cancel_changed_cap cancels the observed turn ID; the delayed-read regression checks B remains running and completes."
+        },
+        {
+          "priority": "P2",
+          "issue": "Project/cap checking released its mutex before snapshot installation or durable admission.",
+          "correction": "Scope::guard retains the project mutex through restore_budget_if_idle; Service::start_with retains its readiness guard through Session start_durable."
+        }
+      ],
+      "accepted_source_observations": [
+        "Ledger open and storage reads occur in spawn_blocking paths before service/project admission guards.",
+        "The owned Ledger remains live through restore installation; its guard is not reduced to a detached stale snapshot.",
+        "Session start_durable snapshots in memory during admission; accepted worker reserve/settle I/O runs outside service/project locks.",
+        "Active restoration does not replace the worker budget or reopen its ledger; cap-change cancellation wakes pending approval and retains settlement ownership.",
+        "Worker Scope and BoundProvider check project ID and cap at provider/tool boundaries; account checks run before taking the short project mutex.",
+        "Account operations cancel admission-serialized active work; persistent accounting keys only project ID and is not reset by account switching.",
+        "The probe checks positive measured turn charges, exact cumulative usage after Undo, and equal budget with false uncertainty on a separate restore-only process; saved project/source hashes and journal recovery are also checked.",
+        "Native errors and proof diagnostics remain fixed credential-safe strings; captured provider/model/browser process output is not copied into evidence.",
+        "Final scope-read coercion uses &*MutexGuard; the actual admission lifetime regression observes worker_running and matching cap before releasing the project guard, then confirms authoring/admission locks are immediately available."
+      ],
+      "limitations": [
+        "No build/test/probe/native/GPU/account execution performed by this reviewer; root owns currently running compilation and validation.",
+        "Source-only acceptance applies only to listed hashes and does not establish live-provider, UI, device or phase acceptance.",
+        "Project identity changes during a pending approval are fenced before subsequent provider/tool work; no new dynamic project-reload UI path is introduced by this adapter."
+      ],
+      "root_reported_validation": {
+        "tests_passed": 151,
+        "existing_gpu_tests_ignored": 1,
+        "clippy": "in progress at review handoff; not executed by reviewer"
+      }
+    },
+    "/tmp/incant-native-budget-scope-review.json": {
+      "reviewed_at": "2026-10-11T20:03:12.318016+00:00",
+      "reviewer": "/root/integrate_runtime_prs",
+      "head": "5c3eab55f5f6c3b972b1046e65f77fa7107ad014",
+      "verdict": "accepted_no_actionable_findings",
+      "scope": "Corrected project/cap scope guard retention and lock ordering for native durable Session admission/idle restoration",
+      "source_hashes": {
+        "editor/app/src/agent.rs": "316e57f0dbe4f5c5c8a0dd59d1c6d38bd5331f73232498f76ab0f64b038a99da",
+        "editor/app/src/agent/budget.rs": "39115f95d514de084969f36489e86daa005201e617d6d9ddd8a751555304304f",
+        "editor/app/src/agent/budget/tests.rs": "63f11c5a24fdf3a039c7dfc8b012f71a418c8b9d99ba5f28c3708884022af515",
+        "editor/app/src/agent/worker.rs": "e86823aa82909f40f50e61d4c4c708883ca35bcc59ba6e85401556f1b4719191",
+        "editor/app/src/agent/owner.rs": "22bff7e6aca85c7926bf5da1ccf5c3aea7135e33eb074db9681cb5fb3b52a7b6",
+        "editor/app/src/provider.rs": "5fcc1e95d06162815a8a27276523c0909fd0d0e6d9d930d9d9e3d6e5328b0bf5",
+        "editor/app/src/main.rs": "2949cbb57b5b72a14ab2f07483d6871dfb43a5d9d1b044ce006dabed489aa539",
+        "editor/app/src/project.rs": "9705ad480d105eba2f10d71cb232b4cbf69ae70bc7f34ef63e34458fce94bc47",
+        "crates/incant_agent/src/session.rs": "d7b1e0946fcbbc64ee47d7b5eac7e691d0a4e410a576a5ef7bbc5bd2e68f8b15",
+        "crates/incant_agent/src/session/durable.rs": "886b6ab3573ff485868b9df110eb9d781fad9422002ab19a0588e3d058053984",
+        "crates/incant_agent/src/access.rs": "23c751b94e1db08414c4bf9e9fe25f1db0b965650c2ec39032a898ddd7134102"
+      },
+      "findings": [],
+      "limitations": [
+        "Source-only review; no builds, tests, provider calls or graphics were run by reviewer. Owner validation69575 was still active when review began.",
+        "This review does not approve unfinished UI/native budget acceptance."
+      ]
+    },
+    "/tmp/incant-native-budget-worker-test-review.json": {
+      "reviewed_at": "2026-10-11T20:07:03.566993+00:00",
+      "reviewer": "/root/integrate_runtime_prs",
+      "verdict": "accepted_after_fixture_allowance_correction",
+      "source_hashes": {
+        "editor/app/src/agent/worker.rs": "ad6b45cbc28a4d8e90392bed481764acfdd87538901c7a49a908fbbacc9d23ae",
+        "editor/app/src/agent/worker/tests.rs": "81176700be885fd4c1afdb4ead9cdd89b81ee23618fd1ecc41c9aca07dfba954"
+      },
+      "scope": "Two-scenario real Session+owner+worker+on-disk ledger cap-change regression. Synthetic provider; no live account/GPU claim.",
+      "checks": [
+        "Sufficient1_000_000-token fixture allowance reaches provider without changing production limits.",
+        "Before-provider cap-to-zero must make zero provider calls and charge zero.",
+        "In-provider cap-to-zero returns measured10input+7output tokens and a revision-valid doc_patch; expected one call/17charge and no patch publication.",
+        "Exactly the cap command accounts for revision1; forbidden memory remains absent.",
+        "After worker reaping, reopening actual ledger confirms usage0/17 and no uncertainty.",
+        "worker.rs changes only cfg(test) module declaration relative to previously reviewed production hash."
+      ],
+      "closed_findings": [
+        {
+          "initial": "/tmp/incant-native-budget-worker-test-review-initial.json",
+          "observed_red_log": "/tmp/incant-native-budget-worker-test-small-cap.log",
+          "resolution": "Both fixture project allowance and durable admission set to1_000_000;expected actual usage remains0/17."
+        }
+      ],
+      "limitations": [
+        "Source-only reviewer; owner corrected editor test run63411 pending at review time."
+      ]
+    },
+    "/tmp/incant-native-budget-capability-review.json": {
+      "reviewed_at": "2026-10-11T20:08:11.356632+00:00",
+      "reviewer": "/root/integrate_runtime_prs",
+      "verdict": "accepted_no_actionable_findings",
+      "file": "editor/app/src/main.rs",
+      "sha256": "9a1dc8f20d3e0a8f1d63e3db9958102529991a11233c05c14fb47ebdcc1d1e12",
+      "scope": "Single Ready engine_read capability field agent_budget.available=true; all remaining bytes equal prior scope-lock-reviewed source.",
+      "rationale": [
+        "Native app unconditionally registers durable engine_agent_read/start transport and compiles typed command-bus cap support.",
+        "Field is emitted only after Ready project match, so loading/failed states do not advertise readiness.",
+        "Capability advertises implementation availability, not successful ledger access, connected account, budget remaining, or completed acceptance. Runtime failures remain explicit."
+      ],
+      "limitations": [
+        "Read-only review; owner metadata regression run59804 pending at review time."
+      ]
+    }
+  },
+  "limitations": [
+    "Local CPU and synthetic provider verification only; no hosted platform execution, current live provider or native UI budget proof.",
+    "Bridge command, Claude budget controls, cost estimates and phase gates remain open."
+  ],
+  "main_integration": {
+    "head": "a8eb6bb00ca5e0d5ce1e451a5c50ec52a8e3c30a",
+    "main": "04f8d9b18a4b29893c63a346841fffd41ce437c7",
+    "merged_without_conflicts": true,
+    "tests_passed": 152,
+    "existing_native_gpu_tests_ignored": 1,
+    "clippy": "four packages, all targets, passed",
+    "bridge_sdk_conventions": "generated checks passed; SDK strict types passed",
+    "editor_build": "strict types and Vite build passed",
+    "logs_sha256": {
+      "/tmp/incant-native-budget-main97-tests.log": "b38500d2ba2bc3b1c5cc85001f90c860248dd9bb64cc222db6964b8d36151a7e",
+      "/tmp/incant-native-budget-main97-clippy.log": "0f8291489c075953c7df767968a90878d44145e5cff04db479acb45e40715e74",
+      "/tmp/incant-native-budget-main97-ui-build.log": "6b927964b9dc4160312ff042c34afc2f17bf93e9b6bbc5cd66150b2bb86fb7b9"
+    }
+  }
+}

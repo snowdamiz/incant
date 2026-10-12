@@ -21,3 +21,19 @@ class RegistryTests(unittest.TestCase):
         def size(name):return sum(generator.SIZES[t]*(n[0] if n else 1) for _,t,*n in self.data['records'][name])
         self.assertEqual([size(n) for n in ('InputHeader','Keyboard','Mouse','Gamepad','Touch','TouchChange','FlipbookHeader','Flipbook','TransformRow','VelocityRow')],[24,48,68,188,36,24,16,24,80,24])
         self.assertEqual(self.data['enums']['Key'][-1],['F12',103])
+
+    def test_additive_logging_namespace_has_explicit_signature_tags_and_bounds(self):
+        log=self.data['functions'][17]
+        self.assertEqual((log['namespace'],log['name'],log['opcode']),('incant_log_v1','write',17))
+        self.assertEqual(log['params'],[['epoch','i64'],['level','i32'],['ptr','i32'],['len','i32']])
+        self.assertIsNone(log['result'])
+        self.assertEqual(self.data['enums']['LogLevel'],[['Debug',0],['Info',1],['Warn',2],['Error',3]])
+        self.assertEqual([self.data['constants'][n] for n in ('LOG_MAX_MESSAGE_BYTES','LOG_MAX_TICK_ENTRIES','LOG_MAX_TICK_BYTES','LOG_MAX_RETAINED_ENTRIES','LOG_MAX_RETAINED_BYTES')],[1024,64,16384,1024,262144])
+
+    def test_localization_has_four_versioned_copied_imports_and_separate_wire_bounds(self):
+        self.assertEqual([(f['namespace'], f['name'], f['opcode']) for f in self.data['functions'][18:]], [
+            ('incant_localization_v1', 'locale', 18), ('incant_localization_v1', 'localize', 19),
+            ('incant_localization_v1', 'read_result', 20), ('incant_localization_v1', 'set_locale', 21)])
+        self.assertEqual([self.data['constants'][n] for n in ('LOCALIZATION_MAX_QUERIES', 'LOCALIZATION_MAX_INPUT_BYTES', 'LOCALIZATION_MAX_OUTPUT_BYTES', 'LOCALIZATION_MAX_COMMANDS')], [64, 65536, 262144, 64])
+        self.assertGreater(self.data['constants']['LOCALIZATION_MAX_REQUEST_BYTES'], self.data['constants']['LOCALIZATION_MAX_INPUT_BYTES'])
+        self.assertIn('pub mod localization;', generator.outputs()['crates/incant_wasm_abi/src/lib.rs'])

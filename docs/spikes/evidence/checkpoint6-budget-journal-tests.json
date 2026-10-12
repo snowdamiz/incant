@@ -1,0 +1,65 @@
+{
+  "recorded_at": "2026-10-12T01:24:19.668582+00:00",
+  "base": "8531bfee06fa7ca7aabbfa043e84317db2012ae5",
+  "failed_candidate": "1b6629183ea39d0e7caa4778549c932ae79f1d90",
+  "failed_job": 114620777942,
+  "diagnosis": "Two budget tests independently read the journal while CommandBus holds its exclusive lock. Windows rejects those reads with OS error33.",
+  "source": {
+    "crates/incant_cmd/tests/agent_budget.rs": "1bed179067b54704ba605a2e2d9e14aa134a92441b33c4e5c1703cc9f0dd478c"
+  },
+  "patch": {
+    "path": "/tmp/incant-budget-journal-lifetimes-final.patch",
+    "sha256": "a987411a3152eba8c08297b3f23b73adb71946cdee957a8471a709f8d246a4ec"
+  },
+  "invariants": [
+    "Exact AgentBudgetUserOnly errors for every nonuser origin and mixed commands",
+    "Exact CRDT bytes immediately before/after each refused operation on the same live bus",
+    "Exact journal bytes after closing owner and before reopening",
+    "Recovered project, revision, history and redo state after every reopening",
+    "Successful user merge, Undo/Redo and fresh journal recovery remain tested"
+  ],
+  "logs": [
+    {
+      "path": "/tmp/incant-checkpoint6-114620777942.log",
+      "sha256": "86d07c1d268bed7ff383bd3c2f7be604a11e2abad76115f043b041a15f08a125"
+    },
+    {
+      "path": "/tmp/incant-budget-journal-lifetimes-tests.log",
+      "sha256": "ab1eadb5df8e617b012e0f30f0ed0afe149eeec3e0a3eeb781a99dfe3609cadf"
+    },
+    {
+      "path": "/tmp/incant-budget-journal-lifetimes-clippy-unused-mut.log",
+      "sha256": "e72867d590deb709a1a3cf2a1a9e5647261dd2d18f57f5443566f75059ad9bda"
+    },
+    {
+      "path": "/tmp/incant-budget-journal-lifetimes-cross-reopen-red.log",
+      "sha256": "8e872a883e3ddbae9760f43b4c14f7b163738c261d96f8ef1f3dcfeb541e6dfd"
+    },
+    {
+      "path": "/tmp/incant-budget-journal-lifetimes-final-tests.log",
+      "sha256": "0d70d14a3621f9a4ceb61bb2c9708e1b274498bd02f21eb7eca856c47d8f5513"
+    },
+    {
+      "path": "/tmp/incant-budget-journal-lifetimes-final-clippy.log",
+      "sha256": "236cc378f453b4720741884d843e6360ba140de30ae713840a92d5c367c0867b"
+    }
+  ],
+  "checks": [
+    {
+      "command": "./tools/cargo test -p incant_cmd --test agent_budget --profile ci --locked -j2",
+      "exit_code": 0,
+      "passed": 7,
+      "ignored": 0
+    },
+    {
+      "command": "./tools/cargo clippy -p incant_cmd --test agent_budget --profile ci --locked -j2 -- -D warnings",
+      "exit_code": 0
+    }
+  ],
+  "intermediate_failures": "First lifetime change passed7 tests but Clippy found now-unnecessary mut. Next rerun exposed invalid added exact-CRDT-across-reopen comparison: serialization byte order is not stable across restored instances. Final patch retains original per-operation same-instance equality and durable journal/state equality across reopening. Both failed logs retained; production code unchanged.",
+  "limitations": "Local macOS CPU tests only. Actual Windows confirmation awaits next frozen full checkpoint; existing checkpoint6 remains failed/unpromoted.",
+  "independent_review": {
+    "path": "docs/spikes/evidence/checkpoint6-budget-journal-root-review.json",
+    "sha256": "97556bca87dc4989a5ccbc5fc290d92ddb3a4f004a483ed1b93ca03cb4adf52a"
+  }
+}

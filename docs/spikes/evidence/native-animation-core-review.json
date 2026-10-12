@@ -1,0 +1,42 @@
+{
+  "reviewed_commit": "dc383d8bf2260c81221a572f17408f92ec87fd16",
+  "reviewed_tree": "a385f92b2634a5861e5df733a13c76d007b46e39",
+  "source_and_prior_test_hashes": {
+    "path": "/tmp/incant-native-animation-core-hash-verification.json",
+    "sha256": "2f45df4a46878f2ed0729c0e7c6b7259ad717ffd43f559ce67523dfed83efef0"
+  },
+  "verified_entries": 20,
+  "scope": [
+    "animation control preparation/install fast paths and final structural-batch semantics",
+    "failed native numeric/structural update publication",
+    "scene-v11 ordered decoding and preallocation/count/size bounds",
+    "world-save-v4 membership/state replay and bytecode/session/game load compatibility"
+  ],
+  "findings": [
+    {
+      "priority": 2,
+      "path": "crates/incant_runtime/src/save.rs",
+      "line_at_core": 259,
+      "problem": "Exact-v3 localization guard rejects a valid animation-bearing v4 save during in-place restoration",
+      "disposition": "Corrected separately after4183af8; standalone red/green repro and native fresh/in-place continuation/atomic-refusal tests"
+    },
+    {
+      "priority": 2,
+      "path": "crates/incant_script/src/checkpoint/pending.rs",
+      "line_at_core": 39,
+      "problem": "Animation-bearing NativeSession checkpoints write world-save v4 but pending loader requires exactv3",
+      "disposition": "Corrected separately after4183af8; actual NativeSession checkpoint/load/resume and legacy/wrong-binding refusal tests"
+    }
+  ],
+  "other_findings": [],
+  "status": "Bounded source review complete, findings corrected in separate followup; no complete runtime/save/identity adoption claim",
+  "nonclaims": [
+    "No full unsafe solver audit, formal proof, heap/device/performance measurement, renderer acceptance or save authentication"
+  ],
+  "correction_evidence": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/docs/spikes/evidence/native-animation-checkpoint-compatibility.json",
+    "sha256": "337a407de2ae7417de6f9c0306dddf0b1b3e1a24b89333650e2cb11f072c736f"
+  },
+  "correction_commit": "430972705160795fd131b0ebaa0eaf3499fd7a55",
+  "correction_branch": "codex/native-animation-checkpoint-compatibility"
+}

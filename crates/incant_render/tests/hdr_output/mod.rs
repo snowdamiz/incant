@@ -108,6 +108,57 @@ fn near(actual: &[u8], expected: &[u8]) {
     }
 }
 
+// Optional numerical evidence only. Separate default/cooked runs use fresh
+// directories; create_new prevents a stale or duplicate case from being hidden.
+fn record_numerical(case: &str, renderer: &Renderer, target: &wgpu::Texture, pixels: &[u8]) {
+    use sha2::{Digest, Sha256};
+    use std::io::Write as _;
+    let Some(directory) = std::env::var_os("INCANT_OUTPUT_NUMERICAL_EVIDENCE") else {
+        return;
+    };
+    assert_eq!(
+        pixels.len(),
+        (target.width() * target.height() * 4) as usize
+    );
+    let info = renderer.adapter.get_info();
+    let adapter = serde_json::json!({
+        "name": info.name, "vendor": info.vendor, "device": info.device,
+        "device_type": format!("{:?}", info.device_type),
+        "backend": format!("{:?}", info.backend),
+        "driver": info.driver, "driver_info": info.driver_info,
+    });
+    let source = concat!(
+        include_str!("../../src/output.wgsl"),
+        "\n",
+        include_str!("../../src/tone_map.wgsl")
+    );
+    let name = format!("{case}-{:?}", target.format());
+    let record = serde_json::json!({
+        "case": case, "format": format!("{:?}", target.format()),
+        "width": target.width(), "height": target.height(),
+        "normalization": "row-major RGBA8, padding removed, BGRA channels swapped",
+        "shader_path": if cfg!(feature = "cooked-output") { "cooked-output" } else { "wgsl" },
+        "source_sha256": format!("{:x}", Sha256::digest(source.as_bytes())),
+        "adapter_sha256": format!("{:x}", Sha256::digest(serde_json::to_vec(&adapter).unwrap())),
+        "adapter": adapter,
+        "readback_sha256": format!("{:x}", Sha256::digest(pixels)),
+        "readback_file": format!("{name}.rgba"), "readback_bytes": pixels.len(),
+    });
+    std::fs::create_dir_all(&directory).unwrap();
+    for (suffix, bytes) in [
+        ("rgba", pixels.to_vec()),
+        ("json", serde_json::to_vec_pretty(&record).unwrap()),
+    ] {
+        std::fs::OpenOptions::new()
+            .write(true)
+            .create_new(true)
+            .open(std::path::Path::new(&directory).join(format!("{name}.{suffix}")))
+            .unwrap()
+            .write_all(&bytes)
+            .unwrap();
+    }
+}
+
 #[test]
 #[ignore = "requires a native GPU; run by all desktop workflows"]
 fn hdr_values_survive_until_tone_mapping_and_transfer_runs_once() {
@@ -171,6 +222,7 @@ fn hdr_values_survive_until_tone_mapping_and_transfer_runs_once() {
             .encode(&mut encoder);
         renderer.queue.submit([encoder.finish()]);
         let pixels = read(&renderer, &target);
+        record_numerical("hdr-swatches", &renderer, &target, &pixels);
         for (i, (_, expected)) in signals.iter().enumerate() {
             let offset = ((height / 2 * width) as usize + i * 32 + 16) * 4;
             near(&pixels[offset..offset + 3], expected);
@@ -201,10 +253,12 @@ fn output_composes_display_colors_and_reuses_bounded_resize_targets() {
         .diagnostic_scene(&incant_doc::Project::empty("Empty"))
         .unwrap();
     let mut jobs = Vec::new();
-    for (width, height) in [(96, 64), (80, 60), (96, 64)] {
+    for (index, (width, height)) in [(96, 64), (80, 60), (96, 64)].into_iter().enumerate() {
         for format in [
             wgpu::TextureFormat::Rgba8UnormSrgb,
             wgpu::TextureFormat::Rgba8Unorm,
+            wgpu::TextureFormat::Bgra8UnormSrgb,
+            wgpu::TextureFormat::Bgra8Unorm,
         ] {
             let target = texture(&renderer, format, width, height);
             let viewport = Viewport {
@@ -222,13 +276,14 @@ fn output_composes_display_colors_and_reuses_bounded_resize_targets() {
                     Some(viewport),
                 )
                 .unwrap();
-            jobs.push((target, command));
+            jobs.push((index, target, command));
         }
     }
     let mut previous = None;
-    for (target, command) in jobs {
+    for (index, target, command) in jobs {
         renderer.queue.submit([command]);
         let pixels = read(&renderer, &target);
+        record_numerical(&format!("resize-{index}"), &renderer, &target, &pixels);
         near(&pixels[..4], &[8, 85, 204, 255]);
         let offset = ((20 * target.width() + 30) * 4) as usize;
         near(&pixels[offset..offset + 4], &[20, 21, 25, 255]);

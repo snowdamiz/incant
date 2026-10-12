@@ -1,0 +1,22 @@
+{
+  "upstream": "https://github.com/pop-os/cosmic-text/tree/9e7a56f083db15f67510df4396351464df2e64bd/fonts",
+  "purpose": "unmodified OFL-1.1 numerical shaping fixtures, not chosen game typography",
+  "fonts": [
+    {
+      "file": "NotoSans-Regular.ttf",
+      "sha256": "2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9",
+      "bytes": 556216
+    },
+    {
+      "file": "NotoSansArabic.ttf",
+      "sha256": "ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56",
+      "bytes": 765740
+    },
+    {
+      "file": "NotoSansHebrew.ttf",
+      "sha256": "3d4fef85b449ade4d165de982969374fa30b2a5fe7bc679f5a3f5bfc047fb703",
+      "bytes": 183688
+    }
+  ],
+  "license_sha256": "5ec4347054089def6904da61d04f0360968f9ef36634b1fe007a5b6ec2f7aa96"
+}

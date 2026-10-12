@@ -1,0 +1,4944 @@
+{
+  "set": "final",
+  "generated": "2026-10-11T21:32:49.088Z",
+  "browser": "155.0.8059.40",
+  "data": "deterministic allowance fixture (tools/fake-host.js + real native.generated.js); not live, not native WebKit",
+  "captures": [
+    {
+      "file": "ready-default-w1440-s380",
+      "state": "ready-default",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 575,
+          "width": 380,
+          "height": 297
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 1060,
+          "y": 611,
+          "width": 380,
+          "height": 157,
+          "scrollHeight": 157,
+          "clientHeight": 157
+        },
+        "composer": {
+          "x": 1072,
+          "y": 768,
+          "width": 356,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 1060,
+            "y": 846,
+            "width": 380,
+            "height": 26
+          },
+          "line": "0 of 1,000,000 tokens used",
+          "level": "agent-usage--normal",
+          "editing": false,
+          "value": null,
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": null,
+          "valueFits": null,
+          "rows": 1
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 56,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "ready-default-w1440-s280",
+      "state": "ready-default",
+      "size": "w1440-s280",
+      "width": 1440,
+      "height": 900,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1160,
+          "y": 40,
+          "width": 280,
+          "height": 832
+        },
+        "pane": {
+          "x": 1160,
+          "y": 575,
+          "width": 280,
+          "height": 297
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 1160,
+          "y": 611,
+          "width": 280,
+          "height": 157,
+          "scrollHeight": 157,
+          "clientHeight": 157
+        },
+        "composer": {
+          "x": 1172,
+          "y": 768,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 1160,
+            "y": 846,
+            "width": 280,
+            "height": 26
+          },
+          "line": "0 of 1,000,000 tokens used",
+          "level": "agent-usage--normal",
+          "editing": false,
+          "value": null,
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": null,
+          "valueFits": null,
+          "rows": 1
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 56,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "ready-default-w1000-s280",
+      "state": "ready-default",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 362,
+          "width": 280,
+          "height": 260
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 720,
+          "y": 398,
+          "width": 280,
+          "height": 120,
+          "scrollHeight": 120,
+          "clientHeight": 120
+        },
+        "composer": {
+          "x": 732,
+          "y": 518,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 720,
+            "y": 596,
+            "width": 280,
+            "height": 26
+          },
+          "line": "0 of 1,000,000 tokens used",
+          "level": "agent-usage--normal",
+          "editing": false,
+          "value": null,
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": null,
+          "valueFits": null,
+          "rows": 1
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent__toggle",
+          "name": "Agent, Ready",
+          "focusVisible": false
+        },
+        "words": 56,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "ready-default-w1000-s380",
+      "state": "ready-default",
+      "size": "w1000-s380",
+      "width": 1000,
+      "height": 650,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 620,
+          "y": 40,
+          "width": 380,
+          "height": 582
+        },
+        "pane": {
+          "x": 620,
+          "y": 362,
+          "width": 380,
+          "height": 260
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 620,
+          "y": 398,
+          "width": 380,
+          "height": 120,
+          "scrollHeight": 120,
+          "clientHeight": 120
+        },
+        "composer": {
+          "x": 632,
+          "y": 518,
+          "width": 356,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 620,
+            "y": 596,
+            "width": 380,
+            "height": 26
+          },
+          "line": "0 of 1,000,000 tokens used",
+          "level": "agent-usage--normal",
+          "editing": false,
+          "value": null,
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": null,
+          "valueFits": null,
+          "rows": 1
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent__toggle",
+          "name": "Agent, Ready",
+          "focusVisible": false
+        },
+        "words": 56,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "ready-w1440-s380",
+      "state": "ready",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 575,
+          "width": 380,
+          "height": 297
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 1060,
+          "y": 611,
+          "width": 380,
+          "height": 157,
+          "scrollHeight": 345,
+          "clientHeight": 157
+        },
+        "composer": {
+          "x": 1072,
+          "y": 768,
+          "width": 356,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 1060,
+            "y": 846,
+            "width": 380,
+            "height": 26
+          },
+          "line": "7,712 of 250,000 tokens used (some estimated)",
+          "level": "agent-usage--normal",
+          "editing": false,
+          "value": null,
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": null,
+          "valueFits": null,
+          "rows": 1
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 145,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "ready-w1440-s280",
+      "state": "ready",
+      "size": "w1440-s280",
+      "width": 1440,
+      "height": 900,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1160,
+          "y": 40,
+          "width": 280,
+          "height": 832
+        },
+        "pane": {
+          "x": 1160,
+          "y": 575,
+          "width": 280,
+          "height": 297
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 1160,
+          "y": 611,
+          "width": 280,
+          "height": 141,
+          "scrollHeight": 385,
+          "clientHeight": 141
+        },
+        "composer": {
+          "x": 1172,
+          "y": 752,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 1160,
+            "y": 830,
+            "width": 280,
+            "height": 42
+          },
+          "line": "7,712 of 250,000 tokens used (some estimated)",
+          "level": "agent-usage--normal",
+          "editing": false,
+          "value": null,
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": null,
+          "valueFits": null,
+          "rows": 1
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 145,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "ready-w1000-s280",
+      "state": "ready",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 362,
+          "width": 280,
+          "height": 260
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 720,
+          "y": 398,
+          "width": 280,
+          "height": 104,
+          "scrollHeight": 385,
+          "clientHeight": 104
+        },
+        "composer": {
+          "x": 732,
+          "y": 502,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 720,
+            "y": 580,
+            "width": 280,
+            "height": 42
+          },
+          "line": "7,712 of 250,000 tokens used (some estimated)",
+          "level": "agent-usage--normal",
+          "editing": false,
+          "value": null,
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": null,
+          "valueFits": null,
+          "rows": 1
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent__toggle",
+          "name": "Agent, Ready",
+          "focusVisible": false
+        },
+        "words": 145,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "ready-w1000-s380",
+      "state": "ready",
+      "size": "w1000-s380",
+      "width": 1000,
+      "height": 650,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 620,
+          "y": 40,
+          "width": 380,
+          "height": 582
+        },
+        "pane": {
+          "x": 620,
+          "y": 362,
+          "width": 380,
+          "height": 260
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 620,
+          "y": 398,
+          "width": 380,
+          "height": 120,
+          "scrollHeight": 345,
+          "clientHeight": 120
+        },
+        "composer": {
+          "x": 632,
+          "y": 518,
+          "width": 356,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 620,
+            "y": 596,
+            "width": 380,
+            "height": 26
+          },
+          "line": "7,712 of 250,000 tokens used (some estimated)",
+          "level": "agent-usage--normal",
+          "editing": false,
+          "value": null,
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": null,
+          "valueFits": null,
+          "rows": 1
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent__toggle",
+          "name": "Agent, Ready",
+          "focusVisible": false
+        },
+        "words": 145,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "change-focused-w1440-s280",
+      "state": "change-focused",
+      "size": "w1440-s280",
+      "width": 1440,
+      "height": 900,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1160,
+          "y": 40,
+          "width": 280,
+          "height": 832
+        },
+        "pane": {
+          "x": 1160,
+          "y": 575,
+          "width": 280,
+          "height": 297
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 1160,
+          "y": 611,
+          "width": 280,
+          "height": 141,
+          "scrollHeight": 385,
+          "clientHeight": 141
+        },
+        "composer": {
+          "x": 1172,
+          "y": 752,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 1160,
+            "y": 830,
+            "width": 280,
+            "height": 42
+          },
+          "line": "7,712 of 250,000 tokens used (some estimated)",
+          "level": "agent-usage--normal",
+          "editing": false,
+          "value": null,
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": null,
+          "valueFits": null,
+          "rows": 1
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent-link agent-allowance__change",
+          "name": "Change allowance",
+          "focusVisible": true
+        },
+        "words": 145,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "change-focused-w1000-s380",
+      "state": "change-focused",
+      "size": "w1000-s380",
+      "width": 1000,
+      "height": 650,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 620,
+          "y": 40,
+          "width": 380,
+          "height": 582
+        },
+        "pane": {
+          "x": 620,
+          "y": 362,
+          "width": 380,
+          "height": 260
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 620,
+          "y": 398,
+          "width": 380,
+          "height": 120,
+          "scrollHeight": 345,
+          "clientHeight": 120
+        },
+        "composer": {
+          "x": 632,
+          "y": 518,
+          "width": 356,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 620,
+            "y": 596,
+            "width": 380,
+            "height": 26
+          },
+          "line": "7,712 of 250,000 tokens used (some estimated)",
+          "level": "agent-usage--normal",
+          "editing": false,
+          "value": null,
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": null,
+          "valueFits": null,
+          "rows": 1
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent-link agent-allowance__change",
+          "name": "Change allowance",
+          "focusVisible": true
+        },
+        "words": 145,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "editing-w1440-s380",
+      "state": "editing",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 575,
+          "width": 380,
+          "height": 297
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 1060,
+          "y": 611,
+          "width": 380,
+          "height": 123,
+          "scrollHeight": 345,
+          "clientHeight": 123
+        },
+        "composer": {
+          "x": 1072,
+          "y": 734,
+          "width": 356,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 1060,
+            "y": 812,
+            "width": 380,
+            "height": 60
+          },
+          "line": null,
+          "level": null,
+          "editing": true,
+          "value": "250000",
+          "invalid": null,
+          "feedback": "7,712 used (some estimated)",
+          "inputWidth": 50.4,
+          "valueFits": true,
+          "rows": 4
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "INPUT",
+          "className": "agent-allowance__input",
+          "name": "Allowance in tokens for this project",
+          "focusVisible": true
+        },
+        "words": 124,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "editing-w1440-s280",
+      "state": "editing",
+      "size": "w1440-s280",
+      "width": 1440,
+      "height": 900,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1160,
+          "y": 40,
+          "width": 280,
+          "height": 832
+        },
+        "pane": {
+          "x": 1160,
+          "y": 575,
+          "width": 280,
+          "height": 297
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 1160,
+          "y": 611,
+          "width": 280,
+          "height": 107,
+          "scrollHeight": 385,
+          "clientHeight": 107
+        },
+        "composer": {
+          "x": 1172,
+          "y": 718,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 1160,
+            "y": 796,
+            "width": 280,
+            "height": 76
+          },
+          "line": null,
+          "level": null,
+          "editing": true,
+          "value": "250000",
+          "invalid": null,
+          "feedback": "7,712 used (some estimated)",
+          "inputWidth": 50.4,
+          "valueFits": true,
+          "rows": 4
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "INPUT",
+          "className": "agent-allowance__input",
+          "name": "Allowance in tokens for this project",
+          "focusVisible": true
+        },
+        "words": 124,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "editing-w1000-s280",
+      "state": "editing",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 362,
+          "width": 280,
+          "height": 260
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 720,
+          "y": 398,
+          "width": 280,
+          "height": 70,
+          "scrollHeight": 385,
+          "clientHeight": 70
+        },
+        "composer": {
+          "x": 732,
+          "y": 468,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 720,
+            "y": 546,
+            "width": 280,
+            "height": 76
+          },
+          "line": null,
+          "level": null,
+          "editing": true,
+          "value": "250000",
+          "invalid": null,
+          "feedback": "7,712 used (some estimated)",
+          "inputWidth": 50.4,
+          "valueFits": true,
+          "rows": 4
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "INPUT",
+          "className": "agent-allowance__input",
+          "name": "Allowance in tokens for this project",
+          "focusVisible": true
+        },
+        "words": 124,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "editing-w1000-s380",
+      "state": "editing",
+      "size": "w1000-s380",
+      "width": 1000,
+      "height": 650,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 620,
+          "y": 40,
+          "width": 380,
+          "height": 582
+        },
+        "pane": {
+          "x": 620,
+          "y": 362,
+          "width": 380,
+          "height": 260
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 620,
+          "y": 398,
+          "width": 380,
+          "height": 86,
+          "scrollHeight": 345,
+          "clientHeight": 86
+        },
+        "composer": {
+          "x": 632,
+          "y": 484,
+          "width": 356,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 620,
+            "y": 562,
+            "width": 380,
+            "height": 60
+          },
+          "line": null,
+          "level": null,
+          "editing": true,
+          "value": "250000",
+          "invalid": null,
+          "feedback": "7,712 used (some estimated)",
+          "inputWidth": 50.4,
+          "valueFits": true,
+          "rows": 4
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "INPUT",
+          "className": "agent-allowance__input",
+          "name": "Allowance in tokens for this project",
+          "focusVisible": true
+        },
+        "words": 124,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "editing-invalid-w1440-s380",
+      "state": "editing-invalid",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 575,
+          "width": 380,
+          "height": 297
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 1060,
+          "y": 611,
+          "width": 380,
+          "height": 123,
+          "scrollHeight": 345,
+          "clientHeight": 123
+        },
+        "composer": {
+          "x": 1072,
+          "y": 734,
+          "width": 356,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 1060,
+            "y": 812,
+            "width": 380,
+            "height": 60
+          },
+          "line": null,
+          "level": null,
+          "editing": true,
+          "value": "1.5",
+          "invalid": "true",
+          "feedback": "Enter a whole number of tokens.",
+          "inputWidth": 28.8,
+          "valueFits": true,
+          "rows": 4
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "INPUT",
+          "className": "agent-allowance__input",
+          "name": "Allowance in tokens for this project",
+          "focusVisible": true
+        },
+        "words": 126,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "editing-invalid-w1440-s280",
+      "state": "editing-invalid",
+      "size": "w1440-s280",
+      "width": 1440,
+      "height": 900,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1160,
+          "y": 40,
+          "width": 280,
+          "height": 832
+        },
+        "pane": {
+          "x": 1160,
+          "y": 575,
+          "width": 280,
+          "height": 297
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 1160,
+          "y": 611,
+          "width": 280,
+          "height": 107,
+          "scrollHeight": 385,
+          "clientHeight": 107
+        },
+        "composer": {
+          "x": 1172,
+          "y": 718,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 1160,
+            "y": 796,
+            "width": 280,
+            "height": 76
+          },
+          "line": null,
+          "level": null,
+          "editing": true,
+          "value": "1.5",
+          "invalid": "true",
+          "feedback": "Enter a whole number of tokens.",
+          "inputWidth": 28.8,
+          "valueFits": true,
+          "rows": 4
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "INPUT",
+          "className": "agent-allowance__input",
+          "name": "Allowance in tokens for this project",
+          "focusVisible": true
+        },
+        "words": 126,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "editing-invalid-w1000-s280",
+      "state": "editing-invalid",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 362,
+          "width": 280,
+          "height": 260
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 720,
+          "y": 398,
+          "width": 280,
+          "height": 70,
+          "scrollHeight": 385,
+          "clientHeight": 70
+        },
+        "composer": {
+          "x": 732,
+          "y": 468,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 720,
+            "y": 546,
+            "width": 280,
+            "height": 76
+          },
+          "line": null,
+          "level": null,
+          "editing": true,
+          "value": "1.5",
+          "invalid": "true",
+          "feedback": "Enter a whole number of tokens.",
+          "inputWidth": 28.8,
+          "valueFits": true,
+          "rows": 4
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "INPUT",
+          "className": "agent-allowance__input",
+          "name": "Allowance in tokens for this project",
+          "focusVisible": true
+        },
+        "words": 126,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "editing-below-w1440-s280",
+      "state": "editing-below",
+      "size": "w1440-s280",
+      "width": 1440,
+      "height": 900,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1160,
+          "y": 40,
+          "width": 280,
+          "height": 832
+        },
+        "pane": {
+          "x": 1160,
+          "y": 575,
+          "width": 280,
+          "height": 297
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 1160,
+          "y": 611,
+          "width": 280,
+          "height": 107,
+          "scrollHeight": 385,
+          "clientHeight": 107
+        },
+        "composer": {
+          "x": 1172,
+          "y": 718,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 1160,
+            "y": 796,
+            "width": 280,
+            "height": 76
+          },
+          "line": null,
+          "level": null,
+          "editing": true,
+          "value": "5000",
+          "invalid": null,
+          "feedback": "No new requests: 7,712 already used.",
+          "inputWidth": 36,
+          "valueFits": true,
+          "rows": 4
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "INPUT",
+          "className": "agent-allowance__input",
+          "name": "Allowance in tokens for this project",
+          "focusVisible": true
+        },
+        "words": 126,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "editing-below-w1000-s380",
+      "state": "editing-below",
+      "size": "w1000-s380",
+      "width": 1000,
+      "height": 650,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 620,
+          "y": 40,
+          "width": 380,
+          "height": 582
+        },
+        "pane": {
+          "x": 620,
+          "y": 362,
+          "width": 380,
+          "height": 260
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 620,
+          "y": 398,
+          "width": 380,
+          "height": 86,
+          "scrollHeight": 345,
+          "clientHeight": 86
+        },
+        "composer": {
+          "x": 632,
+          "y": 484,
+          "width": 356,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 620,
+            "y": 562,
+            "width": 380,
+            "height": 60
+          },
+          "line": null,
+          "level": null,
+          "editing": true,
+          "value": "5000",
+          "invalid": null,
+          "feedback": "No new requests: 7,712 already used.",
+          "inputWidth": 36,
+          "valueFits": true,
+          "rows": 4
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "INPUT",
+          "className": "agent-allowance__input",
+          "name": "Allowance in tokens for this project",
+          "focusVisible": true
+        },
+        "words": 126,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "editing-zero-w1440-s380",
+      "state": "editing-zero",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 575,
+          "width": 380,
+          "height": 297
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 1060,
+          "y": 611,
+          "width": 380,
+          "height": 123,
+          "scrollHeight": 345,
+          "clientHeight": 123
+        },
+        "composer": {
+          "x": 1072,
+          "y": 734,
+          "width": 356,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 1060,
+            "y": 812,
+            "width": 380,
+            "height": 60
+          },
+          "line": null,
+          "level": null,
+          "editing": true,
+          "value": "0",
+          "invalid": null,
+          "feedback": "0 turns the agent off.",
+          "inputWidth": 14.4,
+          "valueFits": true,
+          "rows": 4
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "INPUT",
+          "className": "agent-allowance__input",
+          "name": "Allowance in tokens for this project",
+          "focusVisible": true
+        },
+        "words": 125,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "editing-zero-w1000-s280",
+      "state": "editing-zero",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 362,
+          "width": 280,
+          "height": 260
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 720,
+          "y": 398,
+          "width": 280,
+          "height": 78,
+          "scrollHeight": 385,
+          "clientHeight": 78
+        },
+        "composer": {
+          "x": 732,
+          "y": 476,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 720,
+            "y": 554,
+            "width": 280,
+            "height": 68
+          },
+          "line": null,
+          "level": null,
+          "editing": true,
+          "value": "0",
+          "invalid": null,
+          "feedback": "0 turns the agent off.",
+          "inputWidth": 14.4,
+          "valueFits": true,
+          "rows": 4
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "INPUT",
+          "className": "agent-allowance__input",
+          "name": "Allowance in tokens for this project",
+          "focusVisible": true
+        },
+        "words": 125,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "editing-running-w1440-s380",
+      "state": "editing-running",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 352,
+          "width": 380,
+          "height": 520
+        },
+        "status": "Needs approval",
+        "transcript": {
+          "x": 1060,
+          "y": 388,
+          "width": 380,
+          "height": 346,
+          "scrollHeight": 578,
+          "clientHeight": 346
+        },
+        "composer": {
+          "x": 1072,
+          "y": 734,
+          "width": 356,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 1060,
+            "y": 812,
+            "width": 380,
+            "height": 60
+          },
+          "line": null,
+          "level": null,
+          "editing": true,
+          "value": "250000",
+          "invalid": null,
+          "feedback": "Saving stops the current request.",
+          "inputWidth": 50.4,
+          "valueFits": true,
+          "rows": 4
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "INPUT",
+          "className": "agent-allowance__input",
+          "name": "Allowance in tokens for this project",
+          "focusVisible": true
+        },
+        "words": 186,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "editing-running-w1440-s280",
+      "state": "editing-running",
+      "size": "w1440-s280",
+      "width": 1440,
+      "height": 900,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1160,
+          "y": 40,
+          "width": 280,
+          "height": 832
+        },
+        "pane": {
+          "x": 1160,
+          "y": 352,
+          "width": 280,
+          "height": 520
+        },
+        "status": "Needs approval",
+        "transcript": {
+          "x": 1160,
+          "y": 388,
+          "width": 280,
+          "height": 330,
+          "scrollHeight": 654,
+          "clientHeight": 330
+        },
+        "composer": {
+          "x": 1172,
+          "y": 718,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 1160,
+            "y": 796,
+            "width": 280,
+            "height": 76
+          },
+          "line": null,
+          "level": null,
+          "editing": true,
+          "value": "250000",
+          "invalid": null,
+          "feedback": "Saving stops the current request.",
+          "inputWidth": 50.4,
+          "valueFits": true,
+          "rows": 4
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "INPUT",
+          "className": "agent-allowance__input",
+          "name": "Allowance in tokens for this project",
+          "focusVisible": true
+        },
+        "words": 186,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "editing-running-w1000-s280",
+      "state": "editing-running",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 272,
+          "width": 280,
+          "height": 350
+        },
+        "status": "Needs approval",
+        "transcript": {
+          "x": 720,
+          "y": 308,
+          "width": 280,
+          "height": 160,
+          "scrollHeight": 654,
+          "clientHeight": 160
+        },
+        "composer": {
+          "x": 732,
+          "y": 468,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 720,
+            "y": 546,
+            "width": 280,
+            "height": 76
+          },
+          "line": null,
+          "level": null,
+          "editing": true,
+          "value": "250000",
+          "invalid": null,
+          "feedback": "Saving stops the current request.",
+          "inputWidth": 50.4,
+          "valueFits": true,
+          "rows": 4
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "INPUT",
+          "className": "agent-allowance__input",
+          "name": "Allowance in tokens for this project",
+          "focusVisible": true
+        },
+        "words": 186,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "saving-w1440-s380",
+      "state": "saving",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 575,
+          "width": 380,
+          "height": 297
+        },
+        "status": "Updating…",
+        "transcript": {
+          "x": 1060,
+          "y": 611,
+          "width": 380,
+          "height": 139,
+          "scrollHeight": 345,
+          "clientHeight": 139
+        },
+        "composer": {
+          "x": 1072,
+          "y": 750,
+          "width": 356,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 1060,
+            "y": 828,
+            "width": 380,
+            "height": 44
+          },
+          "line": null,
+          "level": null,
+          "editing": true,
+          "value": "500000",
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": 50.4,
+          "valueFits": true,
+          "rows": 3
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "INPUT",
+          "className": "agent-allowance__input",
+          "name": "Allowance in tokens for this project",
+          "focusVisible": true
+        },
+        "words": 120,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "saving-w1000-s280",
+      "state": "saving",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 362,
+          "width": 280,
+          "height": 260
+        },
+        "status": "Updating…",
+        "transcript": {
+          "x": 720,
+          "y": 398,
+          "width": 280,
+          "height": 78,
+          "scrollHeight": 385,
+          "clientHeight": 78
+        },
+        "composer": {
+          "x": 732,
+          "y": 476,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 720,
+            "y": 554,
+            "width": 280,
+            "height": 68
+          },
+          "line": null,
+          "level": null,
+          "editing": true,
+          "value": "500000",
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": 50.4,
+          "valueFits": true,
+          "rows": 3
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "INPUT",
+          "className": "agent-allowance__input",
+          "name": "Allowance in tokens for this project",
+          "focusVisible": true
+        },
+        "words": 120,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "save-failed-w1440-s280",
+      "state": "save-failed",
+      "size": "w1440-s280",
+      "width": 1440,
+      "height": 900,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1160,
+          "y": 40,
+          "width": 280,
+          "height": 832
+        },
+        "pane": {
+          "x": 1160,
+          "y": 575,
+          "width": 280,
+          "height": 297
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 1160,
+          "y": 611,
+          "width": 280,
+          "height": 107,
+          "scrollHeight": 385,
+          "clientHeight": 107
+        },
+        "composer": {
+          "x": 1172,
+          "y": 718,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 1160,
+            "y": 796,
+            "width": 280,
+            "height": 76
+          },
+          "line": null,
+          "level": null,
+          "editing": true,
+          "value": "300000",
+          "invalid": null,
+          "feedback": "Project revision changed.",
+          "inputWidth": 50.4,
+          "valueFits": true,
+          "rows": 4
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "INPUT",
+          "className": "agent-allowance__input",
+          "name": "Allowance in tokens for this project",
+          "focusVisible": true
+        },
+        "words": 123,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "save-failed-w1000-s280",
+      "state": "save-failed",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 362,
+          "width": 280,
+          "height": 260
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 720,
+          "y": 398,
+          "width": 280,
+          "height": 70,
+          "scrollHeight": 385,
+          "clientHeight": 70
+        },
+        "composer": {
+          "x": 732,
+          "y": 468,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 720,
+            "y": 546,
+            "width": 280,
+            "height": 76
+          },
+          "line": null,
+          "level": null,
+          "editing": true,
+          "value": "300000",
+          "invalid": null,
+          "feedback": "Project revision changed.",
+          "inputWidth": 50.4,
+          "valueFits": true,
+          "rows": 4
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "INPUT",
+          "className": "agent-allowance__input",
+          "name": "Allowance in tokens for this project",
+          "focusVisible": true
+        },
+        "words": 123,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "exhausted-w1440-s380",
+      "state": "exhausted",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 575,
+          "width": 380,
+          "height": 297
+        },
+        "status": "Allowance used up",
+        "transcript": {
+          "x": 1060,
+          "y": 611,
+          "width": 380,
+          "height": 199,
+          "scrollHeight": 345,
+          "clientHeight": 199
+        },
+        "composer": null,
+        "note": "Raise the allowance to send new requests.",
+        "allowance": {
+          "box": {
+            "x": 1060,
+            "y": 846,
+            "width": 380,
+            "height": 26
+          },
+          "line": "250,000 of 250,000 tokens used (some estimated)",
+          "level": "agent-usage--out",
+          "editing": false,
+          "value": null,
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": null,
+          "valueFits": null,
+          "rows": 1
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 125,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "exhausted-w1440-s280",
+      "state": "exhausted",
+      "size": "w1440-s280",
+      "width": 1440,
+      "height": 900,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1160,
+          "y": 40,
+          "width": 280,
+          "height": 832
+        },
+        "pane": {
+          "x": 1160,
+          "y": 575,
+          "width": 280,
+          "height": 297
+        },
+        "status": "Allowance used up",
+        "transcript": {
+          "x": 1160,
+          "y": 611,
+          "width": 280,
+          "height": 183,
+          "scrollHeight": 385,
+          "clientHeight": 183
+        },
+        "composer": null,
+        "note": "Raise the allowance to send new requests.",
+        "allowance": {
+          "box": {
+            "x": 1160,
+            "y": 830,
+            "width": 280,
+            "height": 42
+          },
+          "line": "250,000 of 250,000 tokens used (some estimated)",
+          "level": "agent-usage--out",
+          "editing": false,
+          "value": null,
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": null,
+          "valueFits": null,
+          "rows": 1
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 125,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "exhausted-w1000-s280",
+      "state": "exhausted",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 362,
+          "width": 280,
+          "height": 260
+        },
+        "status": "Allowance used up",
+        "transcript": {
+          "x": 720,
+          "y": 398,
+          "width": 280,
+          "height": 146,
+          "scrollHeight": 385,
+          "clientHeight": 146
+        },
+        "composer": null,
+        "note": "Raise the allowance to send new requests.",
+        "allowance": {
+          "box": {
+            "x": 720,
+            "y": 580,
+            "width": 280,
+            "height": 42
+          },
+          "line": "250,000 of 250,000 tokens used (some estimated)",
+          "level": "agent-usage--out",
+          "editing": false,
+          "value": null,
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": null,
+          "valueFits": null,
+          "rows": 1
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent__toggle",
+          "name": "Agent, Allowance used up",
+          "focusVisible": false
+        },
+        "words": 125,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "exhausted-w1000-s380",
+      "state": "exhausted",
+      "size": "w1000-s380",
+      "width": 1000,
+      "height": 650,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 620,
+          "y": 40,
+          "width": 380,
+          "height": 582
+        },
+        "pane": {
+          "x": 620,
+          "y": 362,
+          "width": 380,
+          "height": 260
+        },
+        "status": "Allowance used up",
+        "transcript": {
+          "x": 620,
+          "y": 398,
+          "width": 380,
+          "height": 162,
+          "scrollHeight": 345,
+          "clientHeight": 162
+        },
+        "composer": null,
+        "note": "Raise the allowance to send new requests.",
+        "allowance": {
+          "box": {
+            "x": 620,
+            "y": 596,
+            "width": 380,
+            "height": 26
+          },
+          "line": "250,000 of 250,000 tokens used (some estimated)",
+          "level": "agent-usage--out",
+          "editing": false,
+          "value": null,
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": null,
+          "valueFits": null,
+          "rows": 1
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent__toggle",
+          "name": "Agent, Allowance used up",
+          "focusVisible": false
+        },
+        "words": 125,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "exhausted-editing-w1440-s280",
+      "state": "exhausted-editing",
+      "size": "w1440-s280",
+      "width": 1440,
+      "height": 900,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1160,
+          "y": 40,
+          "width": 280,
+          "height": 832
+        },
+        "pane": {
+          "x": 1160,
+          "y": 575,
+          "width": 280,
+          "height": 297
+        },
+        "status": "Allowance used up",
+        "transcript": {
+          "x": 1160,
+          "y": 611,
+          "width": 280,
+          "height": 149,
+          "scrollHeight": 385,
+          "clientHeight": 149
+        },
+        "composer": null,
+        "note": "Raise the allowance to send new requests.",
+        "allowance": {
+          "box": {
+            "x": 1160,
+            "y": 796,
+            "width": 280,
+            "height": 76
+          },
+          "line": null,
+          "level": null,
+          "editing": true,
+          "value": "500000",
+          "invalid": null,
+          "feedback": "250,000 used (some estimated)",
+          "inputWidth": 50.4,
+          "valueFits": true,
+          "rows": 4
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "INPUT",
+          "className": "agent-allowance__input",
+          "name": "Allowance in tokens for this project",
+          "focusVisible": true
+        },
+        "words": 104,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "exhausted-editing-w1000-s280",
+      "state": "exhausted-editing",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 362,
+          "width": 280,
+          "height": 260
+        },
+        "status": "Allowance used up",
+        "transcript": {
+          "x": 720,
+          "y": 398,
+          "width": 280,
+          "height": 112,
+          "scrollHeight": 385,
+          "clientHeight": 112
+        },
+        "composer": null,
+        "note": "Raise the allowance to send new requests.",
+        "allowance": {
+          "box": {
+            "x": 720,
+            "y": 546,
+            "width": 280,
+            "height": 76
+          },
+          "line": null,
+          "level": null,
+          "editing": true,
+          "value": "500000",
+          "invalid": null,
+          "feedback": "250,000 used (some estimated)",
+          "inputWidth": 50.4,
+          "valueFits": true,
+          "rows": 4
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "INPUT",
+          "className": "agent-allowance__input",
+          "name": "Allowance in tokens for this project",
+          "focusVisible": true
+        },
+        "words": 104,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "over-cap-w1440-s380",
+      "state": "over-cap",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 575,
+          "width": 380,
+          "height": 297
+        },
+        "status": "Allowance used up",
+        "transcript": {
+          "x": 1060,
+          "y": 611,
+          "width": 380,
+          "height": 199,
+          "scrollHeight": 345,
+          "clientHeight": 199
+        },
+        "composer": null,
+        "note": "Raise the allowance to send new requests.",
+        "allowance": {
+          "box": {
+            "x": 1060,
+            "y": 846,
+            "width": 380,
+            "height": 26
+          },
+          "line": "7,712 of 5,000 tokens used (some estimated)",
+          "level": "agent-usage--out",
+          "editing": false,
+          "value": null,
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": null,
+          "valueFits": null,
+          "rows": 1
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 125,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "over-cap-w1000-s280",
+      "state": "over-cap",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 362,
+          "width": 280,
+          "height": 260
+        },
+        "status": "Allowance used up",
+        "transcript": {
+          "x": 720,
+          "y": 398,
+          "width": 280,
+          "height": 146,
+          "scrollHeight": 385,
+          "clientHeight": 146
+        },
+        "composer": null,
+        "note": "Raise the allowance to send new requests.",
+        "allowance": {
+          "box": {
+            "x": 720,
+            "y": 580,
+            "width": 280,
+            "height": 42
+          },
+          "line": "7,712 of 5,000 tokens used (some estimated)",
+          "level": "agent-usage--out",
+          "editing": false,
+          "value": null,
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": null,
+          "valueFits": null,
+          "rows": 1
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent__toggle",
+          "name": "Agent, Allowance used up",
+          "focusVisible": false
+        },
+        "words": 125,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "zero-w1440-s380",
+      "state": "zero",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 575,
+          "width": 380,
+          "height": 297
+        },
+        "status": "Off",
+        "transcript": {
+          "x": 1060,
+          "y": 611,
+          "width": 380,
+          "height": 199,
+          "scrollHeight": 345,
+          "clientHeight": 199
+        },
+        "composer": null,
+        "note": "Raise the allowance to turn the agent on.",
+        "allowance": {
+          "box": {
+            "x": 1060,
+            "y": 846,
+            "width": 380,
+            "height": 26
+          },
+          "line": "7,712 of 0 tokens used (some estimated)",
+          "level": "agent-usage--off",
+          "editing": false,
+          "value": null,
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": null,
+          "valueFits": null,
+          "rows": 1
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 124,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "zero-w1440-s280",
+      "state": "zero",
+      "size": "w1440-s280",
+      "width": 1440,
+      "height": 900,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1160,
+          "y": 40,
+          "width": 280,
+          "height": 832
+        },
+        "pane": {
+          "x": 1160,
+          "y": 575,
+          "width": 280,
+          "height": 297
+        },
+        "status": "Off",
+        "transcript": {
+          "x": 1160,
+          "y": 611,
+          "width": 280,
+          "height": 183,
+          "scrollHeight": 385,
+          "clientHeight": 183
+        },
+        "composer": null,
+        "note": "Raise the allowance to turn the agent on.",
+        "allowance": {
+          "box": {
+            "x": 1160,
+            "y": 830,
+            "width": 280,
+            "height": 42
+          },
+          "line": "7,712 of 0 tokens used (some estimated)",
+          "level": "agent-usage--off",
+          "editing": false,
+          "value": null,
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": null,
+          "valueFits": null,
+          "rows": 1
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 124,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "zero-w1000-s280",
+      "state": "zero",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 362,
+          "width": 280,
+          "height": 260
+        },
+        "status": "Off",
+        "transcript": {
+          "x": 720,
+          "y": 398,
+          "width": 280,
+          "height": 146,
+          "scrollHeight": 385,
+          "clientHeight": 146
+        },
+        "composer": null,
+        "note": "Raise the allowance to turn the agent on.",
+        "allowance": {
+          "box": {
+            "x": 720,
+            "y": 580,
+            "width": 280,
+            "height": 42
+          },
+          "line": "7,712 of 0 tokens used (some estimated)",
+          "level": "agent-usage--off",
+          "editing": false,
+          "value": null,
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": null,
+          "valueFits": null,
+          "rows": 1
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent__toggle",
+          "name": "Agent, Off",
+          "focusVisible": false
+        },
+        "words": 124,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "reserved-w1440-s380",
+      "state": "reserved",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 575,
+          "width": 380,
+          "height": 297
+        },
+        "status": "Allowance used up",
+        "transcript": {
+          "x": 1060,
+          "y": 611,
+          "width": 380,
+          "height": 183,
+          "scrollHeight": 345,
+          "clientHeight": 183
+        },
+        "composer": null,
+        "note": "Raise the allowance to send new requests.",
+        "allowance": {
+          "box": {
+            "x": 1060,
+            "y": 830,
+            "width": 380,
+            "height": 42
+          },
+          "line": "1,000,000 of 1,000,000 tokens used (some estimated)",
+          "level": "agent-usage--out",
+          "editing": false,
+          "value": null,
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": null,
+          "valueFits": null,
+          "rows": 1
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 125,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "reserved-w1440-s280",
+      "state": "reserved",
+      "size": "w1440-s280",
+      "width": 1440,
+      "height": 900,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1160,
+          "y": 40,
+          "width": 280,
+          "height": 832
+        },
+        "pane": {
+          "x": 1160,
+          "y": 575,
+          "width": 280,
+          "height": 297
+        },
+        "status": "Allowance used up",
+        "transcript": {
+          "x": 1160,
+          "y": 611,
+          "width": 280,
+          "height": 183,
+          "scrollHeight": 385,
+          "clientHeight": 183
+        },
+        "composer": null,
+        "note": "Raise the allowance to send new requests.",
+        "allowance": {
+          "box": {
+            "x": 1160,
+            "y": 830,
+            "width": 280,
+            "height": 42
+          },
+          "line": "1,000,000 of 1,000,000 tokens used (some estimated)",
+          "level": "agent-usage--out",
+          "editing": false,
+          "value": null,
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": null,
+          "valueFits": null,
+          "rows": 1
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 125,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "signed-out-w1440-s380",
+      "state": "signed-out",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 575,
+          "width": 380,
+          "height": 297
+        },
+        "status": "Not signed in",
+        "transcript": {
+          "x": 1060,
+          "y": 611,
+          "width": 380,
+          "height": 165,
+          "scrollHeight": 345,
+          "clientHeight": 165
+        },
+        "composer": null,
+        "note": "Connect an OpenAI account to use the agent.",
+        "allowance": {
+          "box": {
+            "x": 1060,
+            "y": 846,
+            "width": 380,
+            "height": 26
+          },
+          "line": "7,712 of 250,000 tokens used (some estimated)",
+          "level": "agent-usage--normal",
+          "editing": false,
+          "value": null,
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": null,
+          "valueFits": null,
+          "rows": 1
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 129,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "signed-out-w1000-s280",
+      "state": "signed-out",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 362,
+          "width": 280,
+          "height": 260
+        },
+        "status": "Not signed in",
+        "transcript": {
+          "x": 720,
+          "y": 398,
+          "width": 280,
+          "height": 95,
+          "scrollHeight": 385,
+          "clientHeight": 95
+        },
+        "composer": null,
+        "note": "Connect an OpenAI account to use the agent.",
+        "allowance": {
+          "box": {
+            "x": 720,
+            "y": 580,
+            "width": 280,
+            "height": 42
+          },
+          "line": "7,712 of 250,000 tokens used (some estimated)",
+          "level": "agent-usage--normal",
+          "editing": false,
+          "value": null,
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": null,
+          "valueFits": null,
+          "rows": 1
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent__toggle",
+          "name": "Agent, Not signed in",
+          "focusVisible": false
+        },
+        "words": 129,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "signed-out-editing-w1440-s280",
+      "state": "signed-out-editing",
+      "size": "w1440-s280",
+      "width": 1440,
+      "height": 900,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1160,
+          "y": 40,
+          "width": 280,
+          "height": 832
+        },
+        "pane": {
+          "x": 1160,
+          "y": 575,
+          "width": 280,
+          "height": 297
+        },
+        "status": "Not signed in",
+        "transcript": {
+          "x": 1160,
+          "y": 611,
+          "width": 280,
+          "height": 98,
+          "scrollHeight": 385,
+          "clientHeight": 98
+        },
+        "composer": null,
+        "note": "Connect an OpenAI account to use the agent.",
+        "allowance": {
+          "box": {
+            "x": 1160,
+            "y": 796,
+            "width": 280,
+            "height": 76
+          },
+          "line": null,
+          "level": null,
+          "editing": true,
+          "value": "250000",
+          "invalid": null,
+          "feedback": "7,712 used (some estimated)",
+          "inputWidth": 50.4,
+          "valueFits": true,
+          "rows": 4
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "INPUT",
+          "className": "agent-allowance__input",
+          "name": "Allowance in tokens for this project",
+          "focusVisible": true
+        },
+        "words": 108,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "signed-out-editing-w1000-s280",
+      "state": "signed-out-editing",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 362,
+          "width": 280,
+          "height": 260
+        },
+        "status": "Not signed in",
+        "transcript": {
+          "x": 720,
+          "y": 398,
+          "width": 280,
+          "height": 61,
+          "scrollHeight": 385,
+          "clientHeight": 61
+        },
+        "composer": null,
+        "note": "Connect an OpenAI account to use the agent.",
+        "allowance": {
+          "box": {
+            "x": 720,
+            "y": 546,
+            "width": 280,
+            "height": 76
+          },
+          "line": null,
+          "level": null,
+          "editing": true,
+          "value": "250000",
+          "invalid": null,
+          "feedback": "7,712 used (some estimated)",
+          "inputWidth": 50.4,
+          "valueFits": true,
+          "rows": 4
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "INPUT",
+          "className": "agent-allowance__input",
+          "name": "Allowance in tokens for this project",
+          "focusVisible": true
+        },
+        "words": 108,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "older-host-w1440-s380",
+      "state": "older-host",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 575,
+          "width": 380,
+          "height": 297
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 1060,
+          "y": 611,
+          "width": 380,
+          "height": 157,
+          "scrollHeight": 345,
+          "clientHeight": 157
+        },
+        "composer": {
+          "x": 1072,
+          "y": 768,
+          "width": 356,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 1060,
+            "y": 846,
+            "width": 380,
+            "height": 26
+          },
+          "line": "7,712 of 200,000 tokens used (some estimated)",
+          "level": "agent-usage--normal",
+          "editing": false,
+          "value": null,
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": null,
+          "valueFits": null,
+          "rows": 1
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 143,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "older-host-w1000-s280",
+      "state": "older-host",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 362,
+          "width": 280,
+          "height": 260
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 720,
+          "y": 398,
+          "width": 280,
+          "height": 104,
+          "scrollHeight": 385,
+          "clientHeight": 104
+        },
+        "composer": {
+          "x": 732,
+          "y": 502,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 720,
+            "y": 580,
+            "width": 280,
+            "height": 42
+          },
+          "line": "7,712 of 200,000 tokens used (some estimated)",
+          "level": "agent-usage--normal",
+          "editing": false,
+          "value": null,
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": null,
+          "valueFits": null,
+          "rows": 1
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent__toggle",
+          "name": "Agent, Ready",
+          "focusVisible": false
+        },
+        "words": 143,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "older-exhausted-w1440-s380",
+      "state": "older-exhausted",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 575,
+          "width": 380,
+          "height": 297
+        },
+        "status": "Allowance used up",
+        "transcript": {
+          "x": 1060,
+          "y": 611,
+          "width": 380,
+          "height": 199,
+          "scrollHeight": 345,
+          "clientHeight": 199
+        },
+        "composer": null,
+        "note": "This session’s token allowance is used up.",
+        "allowance": {
+          "box": {
+            "x": 1060,
+            "y": 846,
+            "width": 380,
+            "height": 26
+          },
+          "line": "200,000 of 200,000 tokens used (some estimated)",
+          "level": "agent-usage--out",
+          "editing": false,
+          "value": null,
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": null,
+          "valueFits": null,
+          "rows": 1
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 123,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "older-exhausted-w1000-s280",
+      "state": "older-exhausted",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 362,
+          "width": 280,
+          "height": 260
+        },
+        "status": "Allowance used up",
+        "transcript": {
+          "x": 720,
+          "y": 398,
+          "width": 280,
+          "height": 146,
+          "scrollHeight": 385,
+          "clientHeight": 146
+        },
+        "composer": null,
+        "note": "This session’s token allowance is used up.",
+        "allowance": {
+          "box": {
+            "x": 720,
+            "y": 580,
+            "width": 280,
+            "height": 42
+          },
+          "line": "200,000 of 200,000 tokens used (some estimated)",
+          "level": "agent-usage--out",
+          "editing": false,
+          "value": null,
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": null,
+          "valueFits": null,
+          "rows": 1
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent__toggle",
+          "name": "Agent, Allowance used up",
+          "focusVisible": false
+        },
+        "words": 123,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "ready-max-w1440-s280",
+      "state": "ready-max",
+      "size": "w1440-s280",
+      "width": 1440,
+      "height": 900,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1160,
+          "y": 40,
+          "width": 280,
+          "height": 832
+        },
+        "pane": {
+          "x": 1160,
+          "y": 575,
+          "width": 280,
+          "height": 297
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 1160,
+          "y": 611,
+          "width": 280,
+          "height": 141,
+          "scrollHeight": 385,
+          "clientHeight": 141
+        },
+        "composer": {
+          "x": 1172,
+          "y": 752,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 1160,
+            "y": 830,
+            "width": 280,
+            "height": 42
+          },
+          "line": "7,712 of 9,007,199,254,740,991 tokens used (some estimated)",
+          "level": "agent-usage--normal",
+          "editing": false,
+          "value": null,
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": null,
+          "valueFits": null,
+          "rows": 1
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 145,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "ready-max-w1000-s280",
+      "state": "ready-max",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 362,
+          "width": 280,
+          "height": 260
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 720,
+          "y": 398,
+          "width": 280,
+          "height": 104,
+          "scrollHeight": 385,
+          "clientHeight": 104
+        },
+        "composer": {
+          "x": 732,
+          "y": 502,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 720,
+            "y": 580,
+            "width": 280,
+            "height": 42
+          },
+          "line": "7,712 of 9,007,199,254,740,991 tokens used (some estimated)",
+          "level": "agent-usage--normal",
+          "editing": false,
+          "value": null,
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": null,
+          "valueFits": null,
+          "rows": 1
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent__toggle",
+          "name": "Agent, Ready",
+          "focusVisible": false
+        },
+        "words": 145,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "editing-max-w1440-s280",
+      "state": "editing-max",
+      "size": "w1440-s280",
+      "width": 1440,
+      "height": 900,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1160,
+          "y": 40,
+          "width": 280,
+          "height": 832
+        },
+        "pane": {
+          "x": 1160,
+          "y": 575,
+          "width": 280,
+          "height": 297
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 1160,
+          "y": 611,
+          "width": 280,
+          "height": 107,
+          "scrollHeight": 385,
+          "clientHeight": 107
+        },
+        "composer": {
+          "x": 1172,
+          "y": 718,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 1160,
+            "y": 796,
+            "width": 280,
+            "height": 76
+          },
+          "line": null,
+          "level": null,
+          "editing": true,
+          "value": "9007199254740991",
+          "invalid": null,
+          "feedback": "7,712 used (some estimated)",
+          "inputWidth": 122.4,
+          "valueFits": true,
+          "rows": 4
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "INPUT",
+          "className": "agent-allowance__input",
+          "name": "Allowance in tokens for this project",
+          "focusVisible": true
+        },
+        "words": 124,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "editing-max-w1000-s380",
+      "state": "editing-max",
+      "size": "w1000-s380",
+      "width": 1000,
+      "height": 650,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 620,
+          "y": 40,
+          "width": 380,
+          "height": 582
+        },
+        "pane": {
+          "x": 620,
+          "y": 362,
+          "width": 380,
+          "height": 260
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 620,
+          "y": 398,
+          "width": 380,
+          "height": 78,
+          "scrollHeight": 345,
+          "clientHeight": 78
+        },
+        "composer": {
+          "x": 632,
+          "y": 476,
+          "width": 356,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 620,
+            "y": 554,
+            "width": 380,
+            "height": 68
+          },
+          "line": null,
+          "level": null,
+          "editing": true,
+          "value": "9007199254740991",
+          "invalid": null,
+          "feedback": "7,712 used (some estimated)",
+          "inputWidth": 122.4,
+          "valueFits": true,
+          "rows": 4
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "INPUT",
+          "className": "agent-allowance__input",
+          "name": "Allowance in tokens for this project",
+          "focusVisible": true
+        },
+        "words": 124,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "collapsed-exhausted-w1440-s280",
+      "state": "collapsed-exhausted",
+      "size": "w1440-s280",
+      "width": 1440,
+      "height": 900,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1160,
+          "y": 40,
+          "width": 280,
+          "height": 832
+        },
+        "pane": {
+          "x": 1160,
+          "y": 835,
+          "width": 280,
+          "height": 37
+        },
+        "status": "Allowance used up",
+        "transcript": null,
+        "composer": null,
+        "note": null,
+        "allowance": null,
+        "bottomGap": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent__toggle",
+          "name": "Agent, Allowance used up",
+          "focusVisible": false
+        },
+        "words": 5,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "stalled-w1440-s380",
+      "state": "stalled",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 575,
+          "width": 380,
+          "height": 297
+        },
+        "status": "Unavailable",
+        "transcript": {
+          "x": 1060,
+          "y": 611,
+          "width": 380,
+          "height": 117,
+          "scrollHeight": 345,
+          "clientHeight": 117
+        },
+        "composer": {
+          "x": 1072,
+          "y": 768,
+          "width": 356,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 1060,
+            "y": 846,
+            "width": 380,
+            "height": 26
+          },
+          "line": "7,712 of 400,000 tokens used (some estimated)",
+          "level": "agent-usage--normal",
+          "editing": false,
+          "value": null,
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": null,
+          "valueFits": null,
+          "rows": 1
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent-link agent-allowance__change",
+          "name": "Change allowance",
+          "focusVisible": true
+        },
+        "words": 157,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "stalled-w1000-s280",
+      "state": "stalled",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 362,
+          "width": 280,
+          "height": 260
+        },
+        "status": "Unavailable",
+        "transcript": {
+          "x": 720,
+          "y": 398,
+          "width": 280,
+          "height": 48,
+          "scrollHeight": 385,
+          "clientHeight": 48
+        },
+        "composer": {
+          "x": 732,
+          "y": 502,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "allowance": {
+          "box": {
+            "x": 720,
+            "y": 580,
+            "width": 280,
+            "height": 42
+          },
+          "line": "7,712 of 400,000 tokens used (some estimated)",
+          "level": "agent-usage--normal",
+          "editing": false,
+          "value": null,
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": null,
+          "valueFits": null,
+          "rows": 1
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent-link agent-allowance__change",
+          "name": "Change allowance",
+          "focusVisible": true
+        },
+        "words": 157,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "refresh-failed-w1440-s380",
+      "state": "refresh-failed",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 575,
+          "width": 380,
+          "height": 297
+        },
+        "status": "Unavailable",
+        "transcript": {
+          "x": 1060,
+          "y": 611,
+          "width": 380,
+          "height": 148,
+          "scrollHeight": 345,
+          "clientHeight": 148
+        },
+        "composer": null,
+        "note": "Could not contact the native agent. Refresh the session to retry.",
+        "allowance": {
+          "box": {
+            "x": 1060,
+            "y": 846,
+            "width": 380,
+            "height": 26
+          },
+          "line": "7,712 of 400,000 tokens used (some estimated)",
+          "level": "agent-usage--normal",
+          "editing": false,
+          "value": null,
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": null,
+          "valueFits": null,
+          "rows": 1
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent-link agent-allowance__change",
+          "name": "Change allowance",
+          "focusVisible": true
+        },
+        "words": 128,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "refresh-failed-w1000-s280",
+      "state": "refresh-failed",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 362,
+          "width": 280,
+          "height": 260
+        },
+        "status": "Unavailable",
+        "transcript": {
+          "x": 720,
+          "y": 398,
+          "width": 280,
+          "height": 95,
+          "scrollHeight": 385,
+          "clientHeight": 95
+        },
+        "composer": null,
+        "note": "Could not contact the native agent. Refresh the session to retry.",
+        "allowance": {
+          "box": {
+            "x": 720,
+            "y": 580,
+            "width": 280,
+            "height": 42
+          },
+          "line": "7,712 of 400,000 tokens used (some estimated)",
+          "level": "agent-usage--normal",
+          "editing": false,
+          "value": null,
+          "invalid": null,
+          "feedback": null,
+          "inputWidth": null,
+          "valueFits": null,
+          "rows": 1
+        },
+        "bottomGap": 0,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent-link agent-allowance__change",
+          "name": "Change allowance",
+          "focusVisible": true
+        },
+        "words": 128,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    }
+  ],
+  "flows": [
+    {
+      "name": "raise-from-exhausted",
+      "scenario": "flow-save",
+      "size": {
+        "width": 1000,
+        "height": 650,
+        "side": 280
+      },
+      "errors": [],
+      "requests": [],
+      "checks": {
+        "noteBefore": "Raise the allowance to send new requests.",
+        "changeFocused": {
+          "tag": "BUTTON",
+          "className": "agent-link agent-allowance__change",
+          "text": "Change",
+          "label": "Change allowance",
+          "focusVisible": true
+        },
+        "fieldFocused": {
+          "tag": "INPUT",
+          "className": "agent-allowance__input",
+          "text": "",
+          "label": "Allowance in tokens for this project",
+          "focusVisible": true
+        },
+        "selected": [
+          0,
+          6,
+          "250000"
+        ],
+        "focusAfter": {
+          "tag": "BUTTON",
+          "className": "agent-link agent-allowance__change",
+          "text": "Change",
+          "label": "Change allowance",
+          "focusVisible": true
+        },
+        "line": "250,000 of 500,000 tokens used (some estimated)",
+        "composer": 1,
+        "statusLine": "Token allowance set to 500,000."
+      },
+      "error": null,
+      "calls": [
+        {
+          "name": "engine_read",
+          "args": null
+        },
+        {
+          "name": "engine_execute",
+          "args": {
+            "commands": [
+              {
+                "op": "set_agent_budget",
+                "settings": {
+                  "max_tokens": 500000
+                }
+              }
+            ],
+            "description": "Set project agent token cap",
+            "expectedRevision": 7
+          }
+        }
+      ],
+      "watched": {
+        "statuses": [
+          "Allowance used up",
+          "Updating…",
+          "Ready"
+        ],
+        "notes": [
+          "Raise the allowance to send new requests."
+        ]
+      }
+    },
+    {
+      "name": "undo-redo",
+      "scenario": "flow-undo",
+      "size": {
+        "width": 1440,
+        "height": 900,
+        "side": 380
+      },
+      "errors": [],
+      "requests": [],
+      "checks": {
+        "afterUndo": "7,712 of 250,000 tokens used (some estimated)",
+        "afterRedo": "7,712 of 400,000 tokens used (some estimated)",
+        "watchedDuringHistory": {
+          "statuses": [
+            "Ready",
+            "Updating…",
+            "Ready",
+            "Updating…",
+            "Ready"
+          ],
+          "notes": []
+        },
+        "history": [
+          "Rename Lantern",
+          "Raise Crate Stack and hang Lantern above it",
+          "Set project agent token cap"
+        ]
+      },
+      "error": null,
+      "calls": [
+        {
+          "name": "engine_read",
+          "args": null
+        },
+        {
+          "name": "engine_execute",
+          "args": {
+            "commands": [
+              {
+                "op": "set_agent_budget",
+                "settings": {
+                  "max_tokens": 400000
+                }
+              }
+            ],
+            "description": "Set project agent token cap",
+            "expectedRevision": 7
+          }
+        },
+        {
+          "name": "engine_history",
+          "args": {
+            "redo": false
+          }
+        },
+        {
+          "name": "engine_history",
+          "args": {
+            "redo": true
+          }
+        }
+      ],
+      "watched": {
+        "statuses": [
+          "Ready",
+          "Updating…",
+          "Ready",
+          "Updating…",
+          "Ready"
+        ],
+        "notes": []
+      }
+    },
+    {
+      "name": "lower-while-running",
+      "scenario": "flow-running",
+      "size": {
+        "width": 1440,
+        "height": 900,
+        "side": 380
+      },
+      "errors": [],
+      "requests": [],
+      "checks": {
+        "warning": "Saving stops the current request.",
+        "whileSaving": {
+          "decisionNote": "Waiting for the agent to apply the new allowance. You can still stop the agent.",
+          "allowDisabled": "true",
+          "stopDisabled": null
+        },
+        "failure": "The project changed while the agent was working.",
+        "line": "6,532 of 100,000 tokens used"
+      },
+      "error": null,
+      "calls": [
+        {
+          "name": "engine_read",
+          "args": null
+        },
+        {
+          "name": "engine_execute",
+          "args": {
+            "commands": [
+              {
+                "op": "set_agent_budget",
+                "settings": {
+                  "max_tokens": 100000
+                }
+              }
+            ],
+            "description": "Set project agent token cap",
+            "expectedRevision": 7
+          }
+        }
+      ],
+      "watched": {
+        "statuses": [
+          "Needs approval",
+          "Finishing…",
+          "Ready"
+        ],
+        "notes": []
+      }
+    },
+    {
+      "name": "escape-cancel",
+      "scenario": "ready",
+      "size": {
+        "width": 1440,
+        "height": 900,
+        "side": 380
+      },
+      "errors": [],
+      "requests": [],
+      "checks": {
+        "focusAfter": {
+          "tag": "BUTTON",
+          "className": "agent-link agent-allowance__change",
+          "text": "Change",
+          "label": "Change allowance",
+          "focusVisible": true
+        },
+        "editorGone": true
+      },
+      "error": null,
+      "calls": [
+        {
+          "name": "engine_read",
+          "args": null
+        }
+      ],
+      "watched": {
+        "statuses": [
+          "Ready"
+        ],
+        "notes": []
+      }
+    },
+    {
+      "name": "duplicate-submit",
+      "scenario": "flow-slow-save",
+      "size": {
+        "width": 1440,
+        "height": 900,
+        "side": 380
+      },
+      "errors": [],
+      "requests": [],
+      "checks": {
+        "saveLabel": "Saving…",
+        "saveDisabled": "true",
+        "header": ",\nUpdating…",
+        "headerAfterGrace": "Updating…",
+        "composerAfterGrace": 1,
+        "refreshOffered": 0
+      },
+      "error": null,
+      "calls": [
+        {
+          "name": "engine_read",
+          "args": null
+        },
+        {
+          "name": "engine_execute",
+          "args": {
+            "commands": [
+              {
+                "op": "set_agent_budget",
+                "settings": {
+                  "max_tokens": 500000
+                }
+              }
+            ],
+            "description": "Set project agent token cap",
+            "expectedRevision": 7
+          }
+        }
+      ],
+      "watched": {
+        "statuses": [
+          "Ready",
+          "Updating…"
+        ],
+        "notes": []
+      }
+    },
+    {
+      "name": "save-failed",
+      "scenario": "flow-save-fails",
+      "size": {
+        "width": 1000,
+        "height": 650,
+        "side": 280
+      },
+      "errors": [],
+      "requests": [],
+      "checks": {
+        "value": "300000",
+        "focus": {
+          "tag": "INPUT",
+          "className": "agent-allowance__input",
+          "text": "",
+          "label": "Allowance in tokens for this project",
+          "focusVisible": true
+        },
+        "statusLine": "agent.budget.set failed: Project revision changed.",
+        "after": "7,712 of 300,000 tokens used (some estimated)"
+      },
+      "error": null,
+      "calls": [
+        {
+          "name": "engine_read",
+          "args": null
+        },
+        {
+          "name": "engine_execute",
+          "args": {
+            "commands": [
+              {
+                "op": "set_agent_budget",
+                "settings": {
+                  "max_tokens": 300000
+                }
+              }
+            ],
+            "description": "Set project agent token cap",
+            "expectedRevision": 7
+          }
+        },
+        {
+          "name": "engine_read",
+          "args": null
+        },
+        {
+          "name": "engine_execute",
+          "args": {
+            "commands": [
+              {
+                "op": "set_agent_budget",
+                "settings": {
+                  "max_tokens": 300000
+                }
+              }
+            ],
+            "description": "Set project agent token cap",
+            "expectedRevision": 7
+          }
+        }
+      ],
+      "watched": {
+        "statuses": [
+          "Ready",
+          "Updating…",
+          "Ready",
+          "Updating…",
+          "Ready"
+        ],
+        "notes": []
+      }
+    },
+    {
+      "name": "stalled",
+      "scenario": "flow-lag",
+      "size": {
+        "width": 1440,
+        "height": 900,
+        "side": 380
+      },
+      "errors": [],
+      "requests": [],
+      "checks": {
+        "composerWhileUpdating": 1,
+        "notice": "Refresh the native agent session after account or project settings changes.",
+        "header": "Unavailable",
+        "draftWhileStalled": "Add fog over the water.",
+        "line": "7,712 of 400,000 tokens used (some estimated)",
+        "statusLine": "Agent session refreshed."
+      },
+      "error": null,
+      "calls": [
+        {
+          "name": "engine_read",
+          "args": null
+        },
+        {
+          "name": "engine_execute",
+          "args": {
+            "commands": [
+              {
+                "op": "set_agent_budget",
+                "settings": {
+                  "max_tokens": 400000
+                }
+              }
+            ],
+            "description": "Set project agent token cap",
+            "expectedRevision": 7
+          }
+        }
+      ],
+      "watched": {
+        "statuses": [
+          "Ready",
+          "Updating…",
+          "Unavailable",
+          "Ready"
+        ],
+        "notes": []
+      }
+    },
+    {
+      "name": "offline",
+      "scenario": "flow-offline",
+      "size": {
+        "width": 1000,
+        "height": 650,
+        "side": 280
+      },
+      "errors": [],
+      "requests": [],
+      "checks": {
+        "line": "7,712 of 120,000 tokens used (some estimated)",
+        "header": ",\nNot signed in"
+      },
+      "error": null,
+      "calls": [
+        {
+          "name": "engine_read",
+          "args": null
+        },
+        {
+          "name": "engine_execute",
+          "args": {
+            "commands": [
+              {
+                "op": "set_agent_budget",
+                "settings": {
+                  "max_tokens": 120000
+                }
+              }
+            ],
+            "description": "Set project agent token cap",
+            "expectedRevision": 7
+          }
+        }
+      ],
+      "watched": {
+        "statuses": [
+          "Not signed in"
+        ],
+        "notes": [
+          "Connect an OpenAI account to use the agent."
+        ]
+      }
+    },
+    {
+      "name": "latest-only-for-output",
+      "scenario": "ready",
+      "size": {
+        "width": 1000,
+        "height": 650,
+        "side": 280
+      },
+      "errors": [],
+      "requests": [],
+      "checks": {
+        "scrolledUp": {
+          "top": 0,
+          "end": 281,
+          "latest": false
+        },
+        "afterAllowanceChange": {
+          "top": 0,
+          "end": 281,
+          "latest": false
+        },
+        "afterNewOutput": {
+          "top": 0,
+          "end": 321,
+          "latest": true
+        }
+      },
+      "error": null,
+      "calls": [
+        {
+          "name": "engine_read",
+          "args": null
+        },
+        {
+          "name": "engine_read",
+          "args": null
+        },
+        {
+          "name": "engine_read",
+          "args": null
+        }
+      ],
+      "watched": {
+        "statuses": [
+          "Ready",
+          "Updating…",
+          "Ready",
+          "Updating…",
+          "Ready"
+        ],
+        "notes": []
+      }
+    },
+    {
+      "name": "external-change",
+      "scenario": "ready",
+      "size": {
+        "width": 1440,
+        "height": 900,
+        "side": 380
+      },
+      "errors": [],
+      "requests": [],
+      "checks": {
+        "line": "7,712 of 400,000 tokens used (some estimated)",
+        "watched": {
+          "statuses": [
+            "Updating…",
+            "Ready"
+          ],
+          "notes": []
+        }
+      },
+      "error": null,
+      "calls": [
+        {
+          "name": "engine_read",
+          "args": null
+        },
+        {
+          "name": "engine_read",
+          "args": null
+        }
+      ],
+      "watched": {
+        "statuses": [
+          "Updating…",
+          "Ready"
+        ],
+        "notes": []
+      }
+    }
+  ]
+}

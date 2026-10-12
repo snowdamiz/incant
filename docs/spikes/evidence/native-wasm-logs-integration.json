@@ -1,0 +1,36 @@
+{
+  "recorded_at": "2026-10-11T22:36:12.364574+00:00",
+  "tested_source": "c5f25be64974b60f141fb08b485f09bd5f521b8d",
+  "base": "39f5e40a793e57757af9ae79cb6a5a1ec27369d1",
+  "scope": "source-identical serialized intake; only this receipt and root review added",
+  "root_review": {
+    "path": "docs/spikes/evidence/native-wasm-logs-root-review.json",
+    "sha256": "ccc36c62571ada3a3a4c1cb4d509b99de43fa18634609cfac47a32e39558d1c6"
+  },
+  "verified_changed_file_hashes": 37,
+  "verified_original_logs": 13,
+  "local_intake_checks": {
+    "python": {
+      "path": "/tmp/incant-wasm-logs-intake-python.log",
+      "sha256": "9813ed1bc3546437b1a1351846d32368b90bb7c263d3aa3da0893de4239c41e3"
+    },
+    "generated": {
+      "path": "/tmp/incant-wasm-logs-intake-generated.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "conventions": {
+      "path": "/tmp/incant-wasm-logs-intake-conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "fmt": {
+      "path": "/tmp/incant-wasm-logs-intake-fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "historical_validation": "57 combined native Wasm/runtime/SDK tests,8 QuickJS logging regressions,16 Python checks, four-package Clippy and normal graphs; exact source identities preserved",
+  "limitations": [
+    "No GPU/window/controller/provider call in this intake",
+    "Cross-platform comprehensive checkpoint follows the ordinary release cadence",
+    "No complete SDK/session persistence/device/performance gate claim"
+  ]
+}

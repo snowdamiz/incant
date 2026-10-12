@@ -1,0 +1,317 @@
+{
+  "schema": 1,
+  "recorded_utc": "2026-10-12T00:45:54.388101+00:00",
+  "base": "94c4927abadb10d2203db2e1ab031de7853947fa",
+  "branch": "codex/native-font-atlas",
+  "scope": "CPU monochrome default TrueType glyph rasterization and retained atlas; no renderer integration or visual acceptance",
+  "host": {
+    "system": "Darwin",
+    "release": "25.6.0",
+    "machine": "arm64"
+  },
+  "toolchain": "rustc 1.99.0 (b940084d7 2026-09-28)",
+  "target_dir": "/tmp/incant-font-atlas-target",
+  "frozen_sources": {
+    "Cargo.lock": "4ba59808148f7574d65432b41505fa5d4ad2fda74a7031efc67c41e88ad4e3e7",
+    "crates/incant_text/Cargo.toml": "0720e2ff184cc0297f1c5d73a899be90fe85303332bcabbb2666726dc2070afa",
+    "crates/incant_text/src/atlas.rs": "5cff1e27cd19349d225b831559d809446295bec5c94ab6fec587664a9b8beb28",
+    "crates/incant_text/src/fonts.rs": "a8275a6548ecbcbd66970194320262e6ffcf09838c6dd77f4f1d20376c05c2fb",
+    "crates/incant_text/src/layout.rs": "b4b0b152cf1f4a3b49bc7260655f640aaf32466536f2c1c7c7757de8912b27b7",
+    "crates/incant_text/src/lib.rs": "9780ff676ea5df4ef5d3068018b1add6cfd94be1f44f2a305e87f53f486a75b2",
+    "crates/incant_text/src/raster.rs": "ad1c74af12beb67b47d5261344faf61c3d30bf50afd2e8e5fc3496fbaa14966e",
+    "crates/incant_text/src/raster/glyf.rs": "1ec0238d99988560090e500e2a34260681f2459f1951ea84562d92517a394026",
+    "crates/incant_text/tests/atlas.rs": "d82d69a5f5fc845237ed0cc8a0a1e7f3c567204f59589c23df0daec549e321fd",
+    "crates/incant_text/tests/fonts/CJK-OFL.txt": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9",
+    "crates/incant_text/tests/fonts/IncantCJKFixture.ttf": "3299d6ab8033fb1d163f892dfcb1b8838cf1c46935c329d82da6f7b9e27dad82",
+    "crates/incant_text/tests/fonts/cjk-provenance.json": "b9e2b7af5dccd297a38fdd14d8e9e9bc0c6106c35ca0f45f20d60e239b5d0763",
+    "crates/incant_text/tests/fonts/subset_cjk.py": "299ea70f7fd7fb1dbb7a4fe9a9de3e4cefbf6cc7d6b9e76adf9052a63b9caf76",
+    "crates/incant_text/tests/packaged_atlas.rs": "2ec17dfab8894c96f9ad8a104cf98662a30404fe3c36aec401f7b18d5ebbc7fe"
+  },
+  "checks": [
+    {
+      "name": "tests",
+      "command": "cargo test --locked --offline -j2 --profile ci -p incant_text -p incant_assets_runtime --features incant_assets_runtime/font",
+      "status": "passed",
+      "log": {
+        "path": "/tmp/incant-font-atlas-tests-006.log",
+        "sha256": "4712e96f1b1ae4d667c6b840de60aae8b6ea17827a4c4e0363cf928b856cdb02",
+        "bytes": 4502
+      }
+    },
+    {
+      "name": "clippy",
+      "command": "cargo clippy --locked --offline -j2 --profile ci -p incant_text -p incant_assets_runtime --features incant_assets_runtime/font --all-targets -- -D warnings",
+      "status": "passed",
+      "log": {
+        "path": "/tmp/incant-font-atlas-clippy-002.log",
+        "sha256": "88afa0e8738f695576eb74c404ec3ecd63d55d2ebe71ffda12f2f76db501a891",
+        "bytes": 170
+      }
+    },
+    {
+      "name": "wasm32_compile",
+      "command": "cargo check --locked --offline -j2 --target wasm32-unknown-unknown -p incant_text -p incant_assets_runtime --features incant_assets_runtime/font",
+      "status": "passed",
+      "log": {
+        "path": "/tmp/incant-font-atlas-wasm-001.log",
+        "sha256": "c34f19b99760b5908e3347d850f6824f8e8ae9fe0d30b9df1dc308a0f0a743d2",
+        "bytes": 2317
+      }
+    },
+    {
+      "name": "dependency_guard",
+      "command": "python3 tools/check_runtime_dependencies.py incant_text incant_assets_runtime --features incant_assets_runtime/font",
+      "status": "passed",
+      "log": {
+        "path": "/tmp/incant-font-atlas-graph-001.log",
+        "sha256": "95899910726884b4242a1471151a72b2bcca313e1e6f73ea8e23a5442a5debc4",
+        "bytes": 112
+      }
+    },
+    {
+      "name": "normal_dependency_tree",
+      "command": "cargo tree --locked --offline -p incant_text --edges normal",
+      "status": "passed",
+      "log": {
+        "path": "/tmp/incant-font-atlas-normal-tree-001.log",
+        "sha256": "9987572b5f65aee92a5c08824f5e17afb67acea105d495b0fa3d00a2c80c7ff8",
+        "bytes": 2177
+      }
+    },
+    {
+      "name": "format",
+      "command": "cargo fmt -p incant_text -- --check",
+      "status": "passed",
+      "log": {
+        "path": "/tmp/incant-font-atlas-format-002.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "name": "conventions",
+      "command": "python3 tools/generate_conventions.py --check",
+      "status": "passed",
+      "log": {
+        "path": "/tmp/incant-font-atlas-conventions-001.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "name": "source_lock_identity",
+      "command": "independent Python comparison of frozen inputs, every lock package, recipe and fixture hashes",
+      "status": "passed",
+      "log": {
+        "path": "/tmp/incant-font-atlas-integrity-001.log",
+        "sha256": "68ddeefe85ad57c614f43997045fd15015a1f594f98d831ef37ee96900e777d1",
+        "bytes": 229
+      }
+    },
+    {
+      "name": "final_identity_count",
+      "command": "independent Python comparison of frozen sources, normal tree, parsed test counts",
+      "status": "passed",
+      "log": {
+        "path": "/tmp/incant-font-atlas-final-integrity-002.log",
+        "sha256": "7af11e4cd3a69c434081730c351d13e65e90e44872b18f1188c3fb0fc858ce40",
+        "bytes": 130
+      }
+    },
+    {
+      "name": "fixture_reproduction",
+      "command": "fonttools4.60.1 subset recipe followed by byte-for-byte comparison",
+      "status": "passed",
+      "log": {
+        "path": "/tmp/incant-font-atlas-reproduce-002.log",
+        "sha256": "6eb1e8c171eb2ca714caa7d8b3eb3e97ce5fa2818e4f3f0c21ef7babe724f508",
+        "bytes": 99
+      }
+    },
+    {
+      "name": "diff",
+      "command": "git diff --check",
+      "status": "passed",
+      "log": {
+        "path": "/tmp/incant-font-atlas-diff-002.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    }
+  ],
+  "test_result": {
+    "passed": 31,
+    "failed": 0,
+    "ignored": 0,
+    "result_groups": 10,
+    "new_tests": 10,
+    "existing_text_tests": 15,
+    "existing_asset_font_tests": 6
+  },
+  "normal_graph": {
+    "no_authoring": true,
+    "text_has_no_json_or_renderer_or_asset_reader_normal_edge": true,
+    "packaged_reader_test_is_dev_only": true
+  },
+  "lock": {
+    "package_count": 958,
+    "third_party_records_unchanged": true,
+    "only_changed_package": "incant_text",
+    "added_normal_edges": [
+      "sha2 0.10.9",
+      "zeno"
+    ],
+    "added_dev_edges": [
+      "incant_assets_runtime",
+      "serde_json",
+      "tempfile"
+    ]
+  },
+  "fixture": {
+    "provenance": "crates/incant_text/tests/fonts/cjk-provenance.json",
+    "bytes": 2376,
+    "sha256": "3299d6ab8033fb1d163f892dfcb1b8838cf1c46935c329d82da6f7b9e27dad82",
+    "reproduced_bit_identically": true
+  },
+  "retained_behavior": {
+    "unchanged_glyph_repetitions": 100,
+    "pixel_pointer_and_revision_unchanged_on_hits": true,
+    "reset_invalidates_all_old_handles": true,
+    "foreign_atlas_and_font_engine_refused": true,
+    "failed_insert_keeps_pixels_entries_revision": true,
+    "packaged_font_cache_deleted_before_shape_and_raster": true,
+    "same_font_glyph_size_different_content_has_distinct_coverage": true
+  },
+  "numeric_oracle": {
+    "kind": "independent analytic line/quadratic Bezier contour area versus integrated alpha",
+    "relative_tolerance": 0.015,
+    "signed_y_down_bearing_checked": true,
+    "scripts": [
+      "Latin",
+      "Arabic RTL",
+      "Hebrew RTL",
+      "CJK"
+    ]
+  },
+  "limits": {
+    "font_count": 32,
+    "font_bytes_each": 33554432,
+    "font_bytes_total": 67108864,
+    "atlas_bytes": 4194304,
+    "atlas_keys": 8192,
+    "expanded_points": 8192,
+    "expanded_glyph_visits": 1024,
+    "stack_entries": 32,
+    "outline_commands": 17408,
+    "mask_bytes": 1048576,
+    "mask_side": 1024,
+    "maximum_abs_pixel_coordinate": 65536,
+    "size_pixels": [
+      1,
+      512
+    ]
+  },
+  "earlier_attempts": [
+    {
+      "log": {
+        "path": "/tmp/incant-font-atlas-check-001.log",
+        "sha256": "6b7ecc9e6bc0966d3feb693fa16d2a649580b09de053b01ec48357294d933872",
+        "bytes": 2119
+      },
+      "disposition": "Missing Zeno eval feature in initial manifest; corrected before final validation."
+    },
+    {
+      "log": {
+        "path": "/tmp/incant-font-atlas-tests-001.log",
+        "sha256": "bc07a448637092f19af39af7830ae4798fd82decf612de45d3368e903721fed7",
+        "bytes": 3710
+      },
+      "disposition": "Earlier 20-test pass on initial implementation; not substituted for final source."
+    },
+    {
+      "log": {
+        "path": "/tmp/incant-font-atlas-tests-002.log",
+        "sha256": "7b9f4e64b76569f2481014b9049bce07ebcf4c6f962e212c934fb884a8432763",
+        "bytes": 1206
+      },
+      "disposition": "Test oracle incorrectly assumed line-only A contour; corrected with independent analytic quadratic integration."
+    },
+    {
+      "log": {
+        "path": "/tmp/incant-font-atlas-tests-003.log",
+        "sha256": "fde06420ec5cbc026cbc0a98274c57cb445aacfadd2997a4ee88c5f4786fba75",
+        "bytes": 850
+      },
+      "disposition": "Test-only tempfile workspace inheritance used an absent workspace entry; pinned existing3.27.0 instead."
+    },
+    {
+      "log": {
+        "path": "/tmp/incant-font-atlas-tests-004.log",
+        "sha256": "6ef8ae5269441ca450735ea89b5971f03096f5f2efc09e1910fb02919364e6ab",
+        "bytes": 2732
+      },
+      "disposition": "Packaged fixture incorrectly named blob by recipe hash; corrected to public reader content digest."
+    },
+    {
+      "log": {
+        "path": "/tmp/incant-font-atlas-reproduce-001.log",
+        "sha256": "7c3ea2828faca95eb0fc186fe8ce83fc75b2a2d85a6d304ac4106f868406e8c7",
+        "bytes": 480
+      },
+      "disposition": "Reproduction command used wrong local upstream filename; second command reproduced exact bytes."
+    },
+    {
+      "log": {
+        "path": "/tmp/incant-font-atlas-tests-005.log",
+        "sha256": "eab632f4b6db2f7c4fb648e1b0bcd9a896847aa52261a29dd9ed84c10f08843c",
+        "bytes": 4635
+      },
+      "disposition": "Passed previous freeze; repeated after same-glyph-ID/content-change cache regression, production13 other inputs unchanged."
+    },
+    {
+      "log": {
+        "path": "/tmp/incant-font-atlas-clippy-001.log",
+        "sha256": "e6a7d82f1f0bc88fe5795fba8b001ddcc6c356580666c2564ea0f7c042a42908",
+        "bytes": 1800
+      },
+      "disposition": "Passed previous freeze; repeated after same-glyph-ID/content-change cache regression, production13 other inputs unchanged."
+    },
+    {
+      "log": {
+        "path": "/tmp/incant-font-atlas-format-001.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "disposition": "Passed before test-only same-ID collision control; repeated on final freeze."
+    },
+    {
+      "log": {
+        "path": "/tmp/incant-font-atlas-final-integrity-001.log",
+        "sha256": "3384dbb10286891e5657c8d1304e87ee2d366a8cc2491176c315c32e9fdd56ca",
+        "bytes": 164
+      },
+      "disposition": "Passed before test-only same-ID collision control; repeated on final freeze."
+    },
+    {
+      "log": {
+        "path": "/tmp/incant-font-atlas-diff-001.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "disposition": "Passed before test-only same-ID collision control; repeated on final freeze."
+    }
+  ],
+  "limitations": [
+    "Monochrome unhinted base/default glyf outlines only; no custom axes or subpixel raster phases.",
+    "CFF-only, color/bitmap/SVG fonts and point-matched/scaled-offset compounds explicitly refuse.",
+    "Transient dependency allocations and shaping are not a universal heap/RSS/work-duration guarantee.",
+    "The packaged test constructs the documented cache envelope and uses the real reader; it does not add or prove exported-game font inclusion.",
+    "Wasm32 is compile evidence, not actual browser execution.",
+    "No GPU, screenshot, native window, provider, appearance approval, reference-device performance or completed Game UI claim."
+  ],
+  "review": {
+    "status": "accepted bounded CPU scope, no actionable findings",
+    "receipt": "docs/spikes/evidence/native-font-atlas-root-review.json",
+    "sha256": "26f09dfba70306f70201eb727f0d45c609b9b000541f673c1911c72bb70dde7d"
+  }
+}

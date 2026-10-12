@@ -1,0 +1,61 @@
+{
+  "native_followup_review": {
+    "reviewer": "/root/integrate_runtime_prs",
+    "reviewed_at": "2026-10-11T20:32:36.081413+00:00",
+    "base_head": "dc5e620b0b216e81190e85df7e3996346e24ff1e",
+    "scope": "Read-only review of frozen native gameplay-focus follow-up plus comment-only UI change; no tests or native execution by reviewer.",
+    "verdict": "accepted",
+    "actionable_findings": [],
+    "reasoning": [
+      "Load, Pause, unavailable hold and frame focus transitions retain a reset queue containing only Focus(false); old queued presses or Focus(true) cannot survive that boundary.",
+      "Hold-to-run no longer derives gameplay Focus(true) from native window focus. Native Action::Input remains refused while held; DOM accepts only after running and unsuspended state, then its explicit focus cycle may reopen gameplay input.",
+      "Simulation/window suspension and tick scheduling remain unchanged. The actual InputRuntime regression covers release of held key/button, rejection of unfocused keys and explicit view-focus reopening.",
+      "input.ts change only corrects the comment to include older native hosts; UI behavior is unchanged from independently reviewed Claude0044 fix."
+    ],
+    "pending": "Root owns current scoped tests/Clippy and exact combined native acceptance after final Claude UI changes.",
+    "source_sha256": {
+      "editor/app/src/play/worker.rs": "124ecf452e04ea2f66b9f4ca355b6dcbc30ae59f680ebcf93b4b39ac402c8b40",
+      "editor/ui/src/play/input.ts": "045e374df91f2e424456960834ef78cfc1e5c223fa4c4f34f8fbd11ac2167da9"
+    }
+  },
+  "claude_ui_review": {
+    "reviewer": "/root/integrate_runtime_prs",
+    "reviewed_at": "2026-10-11T20:30:26.734688+00:00",
+    "source_commit": "11e59f062fdbe36d8766d47793a0eec2f58debe5",
+    "scope": "Read-only nonvisual review of Claude0044 two UI focus fixes, matching integrated root files; no captures, native launch or tests by reviewer.",
+    "verdict": "accepted",
+    "actionable_findings": [],
+    "reviewed_behavior": [
+      "GameInput publishes Focus(false) once when a session begins accepting without viewport focus, including same-generation Resume and new-generation starts; repeated unchanged state does not requeue the notice.",
+      "Non-accepting state drops the pending notice and held-input bookkeeping; existing generation fences, pending-packet handling and deliberate viewport Focus(false/true) opening remain intact.",
+      "Keyboard dismissal restores focus only if Dismiss currently owns it, before its removal; pointer dismissal from an independently focused editor control preserves that control focus.",
+      "Control-request assertions now filter input packets explicitly; separate sent/input assertions retain the input behavior coverage."
+    ],
+    "integration_required": [
+      "Root has separately identified native frame hold-to-run implicit Focus(true). These UI corrections do not prove that backend race absent; root will remove implicit true and validate native semantics. Comments describing the old implicit-focus behavior can be reconciled with that backend fix.",
+      "The reviewed immutable native binary predates these UI corrections; native acceptance of the final combined binary remains pending. Splitter fix is a separate Claude-owned scope."
+    ],
+    "source_sha256": {
+      "editor/ui/src/play/input.ts": "86ca10f401a7812480a56da3221eec53741f097b39eecec7158d4bcbcbf6571a",
+      "editor/ui/src/play/input.test.ts": "aa60a299d4b0d51a666c5142387be868a62cbe6b6ed9f10b6a39766e928021c3",
+      "editor/ui/src/components/play/PlayControls.tsx": "9e6bc871b484b73e08d0eb46b1e6cbd16dc99a5fbeeb7110f7e6aa35d7837691",
+      "editor/ui/src/components/play/Play.test.tsx": "a3f984636a31dc27a67e44b9e930cf825bb7950d8aff5dc1cb4481dc69b2c81a"
+    }
+  },
+  "validation": {
+    "editor": "39 tests pass,1existingGPUignored; all-target Clippy pass",
+    "combined_ui": "782 tests pass in40files",
+    "historical_failure": "Test helper used key instead of the actual code field; corrected before successful run."
+  },
+  "logs_sha256": {
+    "/tmp/incant-editor-game-focus-tests.log": "7c9b7c6b5fb8302e512e07006b3e523fd75c160b062b5f7046e1dabd6ac23ca4",
+    "/tmp/incant-editor-game-focus-clippy.log": "3cf226871dbfb97898cc5a0c5c85acd79593958dee84e9e6d583f34e82b78458",
+    "/tmp/incant-editor-game-focus-test-compile-error.log": "c8aadf0c9cfb7b74e557f542aabed54fe1538cbe4602db9586d5075ea72168f3",
+    "/tmp/incant-native-focus-ui-union-tests.log": "1972fd7d62af387742a851fbbe8ac15e95bd5a4bc2853f7e84ea7dd6943b3316"
+  },
+  "limits": [
+    "Native0044 review found the defects on the previous immutable binary.",
+    "This correction needs combined native window acceptance after0046/0047 UI integration.",
+    "No device, performance, model quality or phase gate result."
+  ]
+}

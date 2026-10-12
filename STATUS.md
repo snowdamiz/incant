@@ -16,6 +16,255 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Durable budget lock release — correction validated locally
+
+Checkpoint7 exposed Busy when reopening a completed ledger. A private lock guard
+now explicitly releases ownership before descriptor close; two deterministic
+shared-description regressions fail old source and pass fixed. All 64 agent
+tests and Clippy pass, retaining live exclusion and conservative reservations.
+Exact hosted scheduling cause and the next full candidate remain unverified.
+[Evidence](docs/spikes/ledger-explicit-release.md).
+
+## Release checkpoint6 correction
+
+Failed checkpoint6 selected main110 and was never promoted. Three native physics jobs
+exposed a stale isolated probe lock edge; the reviewed one-edge correction and
+required-dependency guard pass local locked Cargo/Clippy and tooling checks.
+The fixes are merged in PR #112; checkpoint7 now verifies frozen repaired
+main113 through the same 23 required contexts in PR #111. Checkpoint7 finished
+with 22 successful contexts and one macOS ledger failure; it is not promoted.
+PR #115 repairs that failure locally, pending the next full candidate.
+The independent fresh observation-routing correction restores the precise
+pre-startup refusal while preserving absolute checkpoint-resume bounds; its
+unchanged process regression, 36 scoped tests and Clippy pass.
+[Lock evidence](docs/spikes/checkpoint6-probe-lock.md),
+[routing evidence](docs/spikes/checkpoint6-player-routing.md).
+The separate Windows budget-test correction closes the journal owner before
+independent reads, then verifies recovered state. Seven local tests and Clippy
+pass; PR #113 merged the fixture correction. Checkpoint7 Windows desktop and
+Wasm conformance both pass.
+[Journal test evidence](docs/spikes/checkpoint6-budget-journal-tests.md).
+
+## Current milestone
+
+The project is still building the Phase 1 core engine. Native simulation,
+authored scripting, imports, physics, audio, input and source-free exports have
+working, tested paths, but the complete Core Sample and its device gates remain
+ahead. Editor and agent work overlaps later phases without completing their gates.
+
+Native Wasm logging/localization, desktop gamepad input, session and
+exported-player checkpoints, packaged-font text shaping, and the browser renderer
+compile repair are merged into main, with skeletal asset foundations and font
+import/cooking added in PRs #107–108. The actual native editor Play/chat/budget
+review completed one real account-backed turn, Undo and reopen with retained
+login and usage. Both follow-up UI fixes passed focused native rechecking; PR #109
+merged this editor/agent/budget integration into main.
+
+Skeletal animation merged in PR #116: authored clip metadata, native
+clocks, atomic TypeScript controls, retained deformation and save continuation
+are implemented locally. The combined runtime/cook/render suite passes 397 CPU
+tests; a separate frozen renderer passes all 70 numerical Metal tests. Independent
+review found two save-version admission defects, now corrected with actual world
+and script-session continuation regressions. The integrated editor/runtime/script
+suite passes 357 CPU tests, Clippy and a fresh native build with the current
+production UI. The final main110 union passes 519 ordinary tests, 57 cooker/cooked-geometry CPU
+tests (overlapping scope), Clippy and a fresh source-free export proof with exact
+replay/checkpoint continuation and refusal controls. Claude0052 passed native playback/transport/resize/authoring checks, then found
+the nullable clip field was unsupported in the Inspector. A bounded bridge
+correction and focused Claude0053 native recheck now pass. The main114 fresh
+export repeats exact source-free continuation after the atlas lockfile change;
+main115 adds only the reviewed authoring ledger repair with 64 agent tests/Clippy.
+Two adjacent Runtime focus/transient-layout observations remain scoped followups. [Integration evidence](docs/spikes/native-animation-integration.md).
+
+Opt-in cooked output/diagnostic/shadow shaders merged in PR #110 after scoped
+Metal numerical and Claude appearance acceptance; both features stay off.
+Runtime glyph atlases proceed independently. Advanced
+rendering, animation blending/state machines/IK/root motion, complete game UI/text
+input, remaining SDK capabilities, and the Core Sample/2D sample with specified
+device performance checks still prevent a Phase 1 completion claim. The feature queue is clear after repairs #112–113; animation is next, with
+reviewed font atlas and Wasm animation parity queued separately.
+
+Progress reports are scheduled approximately every 30 minutes while the goal is
+active. Report merged work separately from local checks and unmet exit gates.
+The project is still early relative to the complete Engine 1.0 and Driftwake
+scope; no defensible percentage or completion date follows from the PR count.
+
+## Runtime font atlas — integrated CPU foundation
+
+A retained CPU alpha atlas now rasterizes actual packaged TrueType glyphs with
+content-bound keys, stable placements, explicit reset/invalidation and bounded
+outline/mask admission. Latin, Arabic, Hebrew and a real CJK subset pass numerical
+coverage tests, including a cache-deleted cooked-font reader route. Scoped 31
+tests, Clippy, wasm32 compilation and lean runtime graph checks pass on the
+main113 integration. Renderer
+upload/draw consumption, widgets/input/IME, color/CFF support, Claude appearance
+acceptance and device evidence remain; this does not complete Game UI.
+[Scope and evidence](docs/spikes/native-font-atlas.md).
+
+
+## Opt-in cooked output, diagnostic and shadow shaders — scoped Metal acceptance
+
+The build-only cooker emits actual native MSL/SPIR-V/HLSL for output, diagnostic
+geometry and all eight shadow variants. `cooked-output` and `cooked-geometry`
+remain disabled by default. Private fixed-family consumption validates the full
+vertex/resource contract before native shader calls. CPU cooker/renderer tests,
+Clippy, default/feature Web compilation and build-only dependency guards pass.
+The frozen v2 default/cooked pair passes all 138 existing/new numerical renderer
+tests on Apple M5 Pro/Metal: all 16 output and 12 actual-diagnostic readbacks are
+byte-identical. The actual main109 integration repeats all 138 tests successfully,
+with identical paired and prior raw results. Claude0051 inspected 24 bounded PNGs
+from eight successful/reaped processes and reports scoped Metal appearance passes;
+all 12 pairs are identical. Shared thin-wall contact leakage, low-sun aliasing,
+far thin-caster breakup and subtle receiver modulation remain renderer follow-ups;
+the shadow fixture does not establish main-pass caster visibility. Vulkan/DX12
+drivers, phones/performance, remaining shader families, caches and whole-renderer
+translation removal remain open. Both features stay disabled by default.
+[Contract and evidence](docs/spikes/cooked-geometry-shaders.md).
+
+## Native editor agent integration — merged in PR #109
+
+The native session/bridge now connect streamed turns, approval/cancel, bounded
+account-scoped conversation and real edits to the editor's shared bus. Account
+receipt fences cover reconnect/switch and delayed approvals; repeated browser
+opening runs off the admission path. One dedicated worker now retains the native
+Play host and conversation across same-account/project turns without moving its
+QuickJS state between threads. Actual cross-turn query, failed candidate and
+replacement controls pass alongside cancellation/shutdown/panic checks. The
+provider invalidation listener is integrated with its intervening-read race fixed.
+The current editor/script/native-agent union passes 180 scoped Rust tests and
+all-target Clippy after integrating main104 exported-player checkpoints. Claude’s chat UI is integrated with retained
+conversation resizing, accurate denial/failure messages and cause-neutral uncertain
+usage. The current combined UI suite passes 904 tests; strict app/test types and the
+editor build pass. The corrected native cap-change and gameplay-focus fences pass 39 editor tests and Clippy. Four real native-handler turns used
+the saved ChatGPT login for approved edits, native Play and a later retained-state
+query; Undo and exact journal/account recovery passed after reopening. Claude's
+Play, chat and project-budget controls are integrated. Independent review found
+an approval-button hold missing during Undo/Redo: the native admission remains
+safe, and both the explicit readiness metadata and UI consumer are now corrected.
+Twelve deferred-IPC regressions and the combined 902-test UI suite pass; combined
+native visual/WebView acceptance passed on the separately identified main100
+build. Actual unsaved/saved Play, input focus, splitters, allowance edits and a
+real approved agent rename were checked, including Undo and reopening with the
+same account and 22,044 charged tokens. Two new source fixes address picker
+focus loss and a clipped model field; both pass the rebuilt main104 native check
+([follow-up](handoffs/0050-native-editor-focus-fit/result.md)). Account and usage
+were retained. That run recorded an HTTPS exchange before user input; the latest
+backend now restores account presence locally and leaves renewal to agent
+requests. Main108 integration passes scoped Rust tests and Clippy, with no UI
+source change or new provider turn.
+No completed Phase 3 gate is claimed.
+[Binding evidence](docs/spikes/native-editor-agent.md),
+[persistent owner evidence](docs/spikes/persistent-native-agent-host.md),
+[chat integration review](docs/spikes/agent-chat-integration-review.json).
+
+## Per-project agent budget — in progress
+
+Typed user-authored caps, the durable usage ledger and Session accounting are
+now connected to native admission and reads. Usage survives new service instances,
+cap changes and account changes without being part of Undo. Independent reviews
+closed cancellation and cap-installation races. The verified bridge cap command and
+dynamic shell capabilities are integrated, including offline edits and unchanged
+usage across cap/history recovery. The integrated controls and shared bridge pass
+902 UI tests, including the independently reviewed approval-readiness correction
+and its 12 deferred-IPC regressions.
+A fresh live native check completed four saved-account turns and retained all
+73,259 measured tokens through Undo and a separate app process, with the same
+login and exact journal restored. The headless command now shares the durable
+ledger and recovered authored cap; invocation limits cannot refund usage or raise
+the project cap. Its 16 tests, scoped Clippy and independent integration review
+pass ([headless evidence](docs/spikes/headless-agent-budgets.md)). Claude-owned
+controls and the approval-readiness correction are integrated; combined native
+WebView/appearance acceptance passed on its main100 build, with 22,044 tokens
+retained after Undo, reopen and a lowered cap. Rechecking the two UI fixes on
+the rebuilt main104 union remains.
+[Control integration review](docs/spikes/evidence/native-agent-allowance-integration.json).
+[Budget accounting evidence](docs/spikes/agent-project-budget.md).
+
+## Agent conversation context — locally verified
+
+The shared agent loop now retains bounded, project-bound completed exchanges
+across turns. Interrupted batches cannot leave unmatched calls in the next
+request; partial commits remain explicitly acknowledged. All 53 agent tests,
+Clippy and independent review pass. Native session, account and chat integration
+remain outstanding; no live multi-turn provider gate is claimed.
+[Evidence](docs/spikes/agent-conversation-context.md).
+
+## Reusable native agent host — locally verified
+
+The existing headless native Play controller/session and lazy authored viewport
+provider now live in authoring-only `incant_agent_native`. Trusted host fallback
+selection preserves the embedded headless behavior; authored source failures
+never fall back, and checked candidate publication keeps its original atomic
+boundary. Independent review, 102 scoped tests and matching all-target Clippy
+pass; 62 schemas are unchanged and shipped dependency guards stay clean.
+[Evidence](docs/spikes/native-agent-host.md). Editor wiring and native Play-frame
+capture are separate work; no new GPU or live-provider gate is claimed.
+
+## Native agent worker controller — locally verified
+
+Account-backed turns now carry a durable non-secret selection receipt and check
+it after responses/approvals and before tools, retaining actual response usage
+when a stale account is refused. The 73-test agent suite and agent/headless
+Clippy pass. [Account fence evidence](docs/spikes/agent-account-fence.md).
+Native start/account/shutdown admission remains part of editor integration;
+these checks do not atomically combine account changes with project commits.
+
+The provider-independent session controller now supports one physical native
+worker, immediate cancellation of stream/approval publication, stale-decision
+rejection and bounded versioned snapshots. Session token accounting survives
+errors and cancellation; uncertain accounting exhausts the allowance explicitly.
+All 62 agent tests and scoped Clippy pass, including 15 new controller cases and
+real agent/command-bus integration with a deterministic provider.
+[Evidence](docs/spikes/native-agent-session.md). Actual editor/account/native-host
+binding, conversation-context integration, persistent budget settings and visual
+chat/approval/history remain separate work. This is not a live-provider gate.
+
+## Packaged-font game text shaping — locally verified
+
+`incant_text` now shapes real packaged fonts with explicit fallback order,
+Unicode bidi and wrapping, absolute UTF-8 clusters and reusable immutable glyph
+geometry. Fifteen numerical tests, all-target Clippy, independent font-ingress
+review and standalone wasm compilation pass. The review's malformed-face panic,
+metadata priority and name-allocation amplification findings are fixed. Runtime
+fonts never come from host discovery. Project font import/cooking now retains
+stable asset IDs through reimport/Undo and supplies bounded checked cooked bytes
+to the shaper after original source deletion. The optional runtime reader keeps
+the default audio-only dependency graph unchanged; 124 affected CPU tests and
+scoped Clippy/compile checks pass. [Font asset evidence](docs/spikes/packaged-font-assets.md).
+Font atlases, actual drawing,
+widgets/IME, broader script coverage and device gates remain; this does not
+complete game UI. [Evidence](docs/spikes/native-game-text.md).
+
+## Opt-in native session checkpoints — locally verified
+
+Bytecode behaviors can explicitly opt into bounded typed persistent data and
+ordinary-load checkpoints containing committed world state, live authored
+attachments and source-scoped timers. Trusted initial scene/program bindings are
+checked before VM execution; invalid replacement preserves the live session.
+Integrated main101 passes 324 affected tests/doctests, scoped Clippy/contracts and four successful fresh
+source/build-deleted processes plus a corruption refusal pass. Whole checkpoint
+bytes match uninterrupted execution. Module globals/closures remain explicitly
+ephemeral and physical input restarts neutral. Physics/audio/static continuation
+and platform durability remain unsupported; this does not complete Phase1 saves. [Contract and evidence](docs/spikes/native-session-checkpoints.md).
+Animation-bearing world-save v4 now passes the same ordinary-load boundary,
+including nondefault locale restoration and exact script-state/timer continuation;
+legacy and wrong-binding refusals stay atomic.
+[Correction evidence](docs/spikes/evidence/native-animation-checkpoint-compatibility.json).
+
+## Native game and exported-player checkpoints — locally verified
+
+The existing GameSession families can create ordinary checkpoints and construct a
+validated candidate on its exact restored WorldIdentity before VM/audio startup.
+The public exported offline player accepts create-only `--save-checkpoint` and
+`--load-checkpoint`, retains rational sample phase, uses new neutral relative input
+and absolute observations, and refuses unsupported window/GPU/static routes.
+311 affected tests, scoped Clippy and a fresh shipping export pass. After source
+and private build deletion, five successful processes and nine refusal controls
+pass; uninterrupted and twice-resumed final checkpoint bytes match. This remains
+opt-in typed gameplay persistence, not arbitrary VM, physics/audio or complete
+Phase1 saves. PCM/checkpoint are not a multifile atomic transaction, and full
+power-loss durability is not claimed. [Contract/evidence](docs/spikes/native-game-checkpoints.md).
+
 ## Shared agent project access — locally verified
 
 The agent loop can share the editor command bus without holding its mutex during
@@ -25,6 +274,10 @@ the captured revision after immutable startup and before candidate ticks, so a
 concurrent script write cannot publish a mixed scene/source revision. All 47 agent
 tests, five native agent Play cases and scoped Clippy pass; independent review
 accepted the corrected source-race boundary. [Evidence](docs/spikes/shared-agent-project-access.md).
+The editor loading container now implements the same shared-access contract:
+loading/failed states refuse, and ready state uses its existing bus and journal.
+The adapter passes all 48 agent tests, three editor loading/recovery cases and
+scoped Clippy; independent review accepted it. No duplicate bus is created.
 This is backend work; chat-panel wiring, visual approval/history and budget UI
 remain outstanding. It does not complete Phase 3 or a live-provider gate.
 
@@ -35,10 +288,10 @@ with comprehensive cross-platform CI on one frozen release checkpoint approximat
 every three hours. [ADR 0014](docs/adr/0014-ci.md) defines integration, cache and
 failure handling. The integrated policy passes 138 Python, 12 Node and 536 UI tests, strict types/build,
 formatting, generated checks and actionlint; [evidence](docs/spikes/release-checkpoints.md).
-PR83 merged after its exact-head fast check passed: 2s queue and119s execution. Main requires that fast check; release was bootstrapped at fully checked main82 and now requires all 23 full contexts, including local-service protocols. Both enforce administrators and prohibit force pushes/deletion. The three-hour heartbeat is active; the first three checkpoints remain unpromoted after diagnosed failures. The historical missing-Wasm-target failure remains recorded separately.
+PR83 merged after its exact-head fast check passed: 2s queue and119s execution. Main requires that fast check; release was bootstrapped at fully checked main82 and now requires all 23 full contexts, including local-service protocols. Both enforce administrators and prohibit force pushes/deletion. The three-hour heartbeat is active; checkpoints 1–4 remained unpromoted after diagnosed failures. Checkpoint 5 promoted exact main97 into release at `c603ca07bbe1e6e1ad46b2fd3aa2f70aaec07f50` after all 23 required contexts passed. [Promotion and timing evidence](docs/spikes/evidence/release-checkpoint-5.json). The historical missing-Wasm-target failure remains recorded separately.
 No phase, live-provider or physical-device performance gate is waived.
 
-The initial frozen checkpoint PR85 found a Windows-only journal test lock violation. A reviewed test-only lifetime correction passes all six scoped cases and Clippy locally; Checkpoint 2 confirmed these Windows cases; complete release promotion remains pending. [Failure and repair evidence](docs/spikes/script-journal-test-portability.md).
+The initial frozen checkpoint PR85 found a Windows-only journal test lock violation. A reviewed test-only lifetime correction passes all six scoped cases and Clippy locally; checkpoint 2 confirmed these Windows cases; checkpoint 5 subsequently completed release promotion. [Failure and repair evidence](docs/spikes/script-journal-test-portability.md).
 
 The second frozen checkpoint includes the Windows journal repair and all 23 release
 contexts. Its local-service job exposed a Linux private S3 config UID mismatch;
@@ -62,19 +315,20 @@ validation took 49m39s plus 4m37s queue. Its failed result remains historical,
 and checkpoint 4 confirmed that exact authored TypeScript native-agent regression on Windows.
 [Evidence](docs/spikes/windows-native-compiler-entry.md#checkpoint-3-restricted-typescript-host-lookup).
 
-Checkpoint 4 is frozen at reviewed main94. All three native physics jobs exposed
+Historical checkpoint 4 was frozen at reviewed main94. All three native physics jobs exposed
 a stale isolated probe lock missing navigation/localization dependencies. The
 reviewed repair preserves existing pins and the engine's vendored source patch;
 the fast structural regression adds no Rust compilation or new check context.
-The candidate remains unchanged while the repair is validated on main.
+Main95/96 carried the reviewed repairs; checkpoint 5 passed all three native
+physics jobs and strict comparison.
 [Failure and repair scope](docs/spikes/checkpoint-4-probe-lock.md).
 
 A later checkpoint 4 Windows export audit failed after the fresh shipping build:
 PE bytecode symbols were incorrectly read with llvm-nm. The reviewed correction
 uses a fresh final-link map and preserves parser/codegen checks and matched PDB
 packaging. Local PE/PDB fixture validation, 206 Python tests (four skipped), and
-a fresh macOS export with three source-deleted runs pass; complete Windows export
-confirmation is required in the next frozen checkpoint.
+a fresh macOS export with three source-deleted runs pass; checkpoint 5 completed the actual Windows export
+with three source/build-deleted runs and independently verified PE/PDB/map identities.
 [Exact failure and repair evidence](docs/spikes/checkpoint-4-export-symbols.md).
 
 ## Authored source and native package — locally integrated
@@ -102,14 +356,26 @@ private authoring fixture. 786 workspace, 75 GPU, 15 optional window/project,
 build/generation and shipping audits. Independent review removed a resurrected
 old workflow and duplicate tests. [Evidence](docs/spikes/native-project-package.md).
 Existing full checkpoint jobs include the export probe. Checkpoint 4 passed hosted
-Linux and macOS export execution; Windows symbol-audit correction, window package
-execution and complete UI/export/device gates remain open.
+Linux and macOS export execution; checkpoint 5 also passed the repaired Windows
+export. Window package execution and complete UI/export/device gates remain open.
 
 The shared-agent backend's actual main92 integration preserves all nine reviewed
 source identities and passes95 Agent/headless tests, scoped Clippy,62 exact
 contracts and the public32-request/two-process source/Play proof. The stale
 source-cook regression rejects a mixed candidate and retains the previous run.
 Editor chat wiring remains separate. [Evidence](docs/spikes/shared-agent-project-access.md).
+
+## Native editor Play transport — local, UI integration pending
+
+The real editor worker now owns disposable native Play, Pause, Step, Stop and
+selected-entity inspection. Cooking stays off the window thread and no authoring
+state enters ticks. 21 scoped Rust tests, 545 UI tests, strict types and Clippy pass.
+Actual macOS native-window numerical acceptance confirms paused GPU redraws,
+one-tick stepping, minimize/resume, discarded Stop state, fresh restart and
+unchanged project/script/journal bytes plus revision/history. Visible controls,
+desktop input routing and inspector presentation remain Claude handoff 0044 work; this is
+not a completed Play UI, pixel review, phone/performance or phase gate.
+[Evidence](docs/spikes/native-editor-play.md).
 
 ## Current integration and parallel work
 
@@ -126,7 +392,8 @@ Python tests (four Windows-only skips).
 - Checkpoint 2 Windows native TypeScript startup has a reviewed local path adapter
   correction: fixed engine-relative entry and canonical-equivalent ordinary launch
   cwd; the scrubbed environment remains unchanged. Nine local tests and scoped
-  Clippy pass; actual Windows helper/workspace execution remains required.
+  Clippy pass; checkpoint 5 passed the actual Windows helper/workspace and export
+  execution after the additional restricted-host correction.
   [Diagnosis and evidence](docs/spikes/windows-native-compiler-entry.md).
 
 - Local native TypeScript navigation queries are implemented and independently reviewed:
@@ -197,6 +464,13 @@ CI cadence transition. Authored native Play is merged through PR84. PR86 adds lo
 Further work remains local; this queue does not waive any phase or device gate. [Verified ancestry and queue evidence](docs/spikes/foundation-integration-queue.md).
 
 ## Implemented boundaries and evidence
+
+The standalone native-window player now connects desktop gamepad events through
+a shared bounded input adapter. Stable session IDs, analog/stick/D-pad mapping,
+focus/suspend hotplug recovery and queue refusal have local synthetic tests;
+default/CPU/offscreen dependency boundaries remain intact. Physical-controller
+and Windows/Linux execution, haptics and touch remain unverified or unsupported.
+[Evidence](docs/spikes/native-window-player.md#native-desktop-gamepads).
 
 The native v1 save reader now rejects unsupported 2D solver state consistently
 with its writer and in-place restore. A rehashed-payload regression fails before
@@ -320,8 +594,21 @@ with primitive Unicode validation, fixed per-update limits, bounded retained
 history and dropped-message counts. Native/game observers hide logs after
 terminal failure; the source-free player reports them once at completion.
 585 ordinary workspace tests and 47 fresh CPU-mode process controls pass.
-[Evidence](docs/spikes/native-script-logs.md). This is the QuickJS path; Wasm logs,
-full native SDK, session saves and editor/headless Play migration remain open.
+[QuickJS evidence](docs/spikes/native-script-logs.md). Additive native Wasm logs
+now share its data/history contract and reach the actual static NativeSession
+observer. 57 combined actual-host/runtime/SDK tests, eight QuickJS logging cases,
+scoped Clippy and 16 generator/preparer cases pass locally.
+[Wasm evidence](docs/spikes/native-wasm-logs.md). Full native SDK, session saves,
+platform/device conformance and remaining editor/headless integration stay open.
+
+Native Wasm localization now exposes copied locale/message queries and ordinary
+atomic runtime locale settings, using the existing native catalog/ICU rules.
+Actual Wasmtime, linked wasm2c and no_std Rust guest checks cover rich arguments,
+fallback/pseudo/missing metadata, next-callback visibility, quota refusal, mixed
+rollback, reload and static session log observation. Shared ingress failures on
+active correct-epoch locale calls reject the entire batch. Standalone formatting,
+reports, catalog editing, static checkpoints and platform/device gates remain
+open. [Contract and evidence](docs/spikes/native-wasm-localization.md).
 
 
 The reviewed native script/input stack is now tested together with the static
@@ -378,6 +665,16 @@ applicable checks passed; its actual-main tree equals the tested head. [Integrat
   and release scope in PLAN.md. Phase 1 progress is not Engine 1.0 or Driftwake
   release completion.
 
+## WebGPU renderer compile portability
+
+The default renderer library compiles for wasm32 with explicit browser
+NonSend graph ownership and copied GPU error diagnostics. Desktop Send/Sync
+resources and typed errors remain intact. Local 36 CPU tests, scoped Clippy,
+formatting, actionlint and 12 workflow-policy cases pass; 18 GPU tests stayed ignored.
+The existing web checkpoint job now checks the renderer library. Browser
+rendering acceptance and device/performance gates remain open.
+[Evidence](docs/spikes/web-renderer-portability.md).
+
 ## Deferred gates and human-owned actions
 
 The [Phase 0 ledger](docs/gates/phase0-review.md) remains unapproved: live
@@ -409,3 +706,62 @@ changing its tested runtime/compiler/ABI inputs. Integrated verification include
 761 ordinary tests, 75 GPU tests, 178 actual-host conformance tests, full Clippy,
 536 UI tests and 17 Node tests. The fresh bound-script embedding proof passed all16 copied-player processes after removing source/build storage. [Integrated evidence](docs/spikes/native-authored-sdk-integration.md).
 Actual main83 is now integrated without a tree change; the authored candidate is ready for direct-main publication.
+
+## Native skeletal model consumer — numerical GPU verified, appearance pending
+
+The corrected glTF skeletal foundation is preserved in actual main107. Native
+clock samples now bind to exact sealed clip-duration tables; retained CPU skinning
+feeds the canonical material/shadow vertex path with independent live/staging
+buffers. Source/cache-deleted clocks/extraction, rollback, normal/tangent basis,
+uniform reflection and mixed-sign refusal have CPU controls. The affected suite
+passes 155 tests, all-target Clippy and runtime dependency checks. All 70 affected
+GPU tests pass on Apple M5 Pro/Metal, including independent pose, single-sided
+reflection and shadow oracles. Claude appearance acceptance and the complete
+authoring/export/native-Play union remain pending.
+Blend/state/IK/root motion, GPU skinning and device budgets remain.
+[Scope/evidence](docs/spikes/native-animation-rendering.md).
+
+GameSession/exported-player checkpoint integration: reviewed source `0d841fcd` is preserved unchanged in main103 union `4661e254`; 34 integrated CPU tests and optional-GPU all-target Clippy pass. Original311-test/five-success/nine-refusal shipping evidence remains applicable; full-save limits are unchanged. See [integration evidence](docs/spikes/evidence/native-game-checkpoints-main103.json).
+
+## Native Wasm localization integration
+
+Actual main104 integration is clean: 74 development/static/SDK, 106 session library
+and five GameSession checkpoint cases pass, with 20 tooling tests, Clippy,
+compiler-disabled/static and dependency checks. Static checkpoints remain refused.
+[Integration evidence](docs/spikes/evidence/native-wasm-localization-main104.json).
+
+Packaged-font text integration against actual main105 passes all 15 actual-font
+tests, Clippy, standalone wasm32 and runtime dependency checks, preserving all
+935 prior lock records. [Integrated evidence](docs/spikes/evidence/native-game-text-main105.json).
+## Cooked skeletal-animation foundation
+
+The bounded glTF skin/TRS import, INCMOD04 cooked reader and retained CPU sampler
+are implemented with reviewed clip-only root validation; see
+[scope and evidence](docs/spikes/gltf-skeletal-animation.md). Static03 compatibility
+is preserved. At that foundation merge, static consumers explicitly refused
+animated models; the local native consumer integration is described above.
+Navigation still refuses deformed geometry. Blend/state/IK/root-motion and
+rendered acceptance remain outstanding; this does not complete Phase 1 animation.
+
+Skeletal foundation main106 union passes 90 integrated CPU tests, Clippy, audio-only/wasm32 compilation and dependency checks, with reviewed source unchanged. [Integration evidence](docs/spikes/evidence/gltf-skeletal-main106.json).
+
+Packaged-font backend/CLI import main107 integration passes affected CPU tests, Clippy, font/default-reader, wasm32 and consumer checks while preserving skeletal registration. Editor font import form and rendering remain unfinished. [Evidence](docs/spikes/evidence/packaged-font-assets-main107.json).
+Native TypeScript animation snapshots and atomic playback controls are implemented
+against the retained native clock. Actual QuickJS/NativeSession, multi-instance
+TypeScript cook, rollback and memory-bound tests pass; see
+[scope and evidence](docs/spikes/native-animation-script.md). Wasm control parity,
+rendered acceptance and the remaining animation systems are still outstanding.
+
+The public authored animation/source-free CPU export proof passes 23 numerical
+checks over 160 ticks, three identical fresh shipping replays and byte-identical
+41+119 checkpoint continuation including state/timers/locale/logs/PCM. Private
+source/build storage is removed; refusal controls withhold save and PCM. The
+separate retained fixture uses the editor-default journal and recovered Undo/Redo.
+No window/GPU/device or appearance acceptance is claimed.
+[Scope and evidence](docs/spikes/native-animation-export.md).
+
+Native Play committed script logs now reach the existing Console through bounded
+incremental copied tails, with generation/project fences, stable row IDs and an
+explicit truncation warning across restarts. Local CPU host, bridge race/bounds,
+strict types and Clippy checks pass; native window/rendered Console acceptance
+remains separate. [Scope and evidence](docs/spikes/native-editor-play.md#committed-script-logs-in-console).

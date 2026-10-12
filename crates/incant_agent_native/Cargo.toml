@@ -1,0 +1,30 @@
+[package]
+name = "incant_agent_native"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+incant_agent.workspace = true
+incant_cmd.workspace = true
+incant_doc.workspace = true
+incant_play = { path = "../incant_play" }
+incant_script.workspace = true
+incant_runtime.workspace = true
+incant_game_runtime = { path = "../incant_game_runtime" }
+incant_audio_runtime = { workspace = true, features = ["scene"] }
+incant_assets = { path = "../incant_assets" }
+incant_render = { path = "../incant_render" }
+incant_render_authoring.workspace = true
+base64 = "0.22"
+incant_render_game = { path = "../incant_render_game" }
+incant_input.workspace = true
+incant_observe = { path = "../incant_observe" }
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+ulid.workspace = true
+
+[dev-dependencies]
+tempfile = "3"

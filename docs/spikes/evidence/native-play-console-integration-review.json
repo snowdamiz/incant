@@ -1,0 +1,29 @@
+{
+  "reviewer": "astra integration owner",
+  "at": "2026-10-12T02:11:27.914344+00:00",
+  "original": "34dc2af497114f0dd5f19da8327616eaa5dc0cfc",
+  "private_union": "29b114e",
+  "base": "05bc7e8",
+  "source_hashes": {
+    "editor/app/src/main.rs": "be4238abaf4483fec42cee29106c615ca8cc7de8739c7344cfcf4775b64a6bbe",
+    "editor/app/src/play/logs.rs": "38c5346df022bafcaae38f57f936cb54fb54933e42bfda15f51ef19d3bb6bca9",
+    "editor/app/src/play/mod.rs": "fcb67d3d8abeb2491d922c8645faddd65c2dffa936a6891f90b7f9d305c49c6c",
+    "editor/app/src/play/tests.rs": "4121c057cc7aa4ce669b4c3d5443e5202e8a8953c8990220d687bca1f4791271",
+    "editor/app/src/play/worker.rs": "d9c45395615c2a0351e076890801d0e44d62714f29d838c779d6b54d4869529c",
+    "editor/bridge/contract.ts": "2a8a14afe93b295e5ab777e502266b33732895373069c03a817f9835967df635",
+    "editor/bridge/native.generated.js": "e452a26b24435471b8933dd82fcc537ead62b28a36ed664211af0607327fa74b",
+    "editor/bridge/native.ts": "2378b6307880209e5e162b2f5e8db8d497ab3e194eb097398d2e3c44a2e44b93",
+    "editor/bridge/play-logs.test.ts": "ce4910f92aacc40448349f9feef63952e87fe174c0a913dc5bf72b96f8bc7b6d"
+  },
+  "root_review_sha256": "b6382fcb4f2ec3336bac70b5e173eaaa1405269fb4c7e6114cd816d8df5b6943",
+  "findings": [],
+  "review": [
+    "Read native Store/Service/worker publication and IPC registration; accepted NativeLogs prefix copied only after accepted game operation, one status/prefix lock and generation/terminal refusal.",
+    "Read entire bridge delta and race/bounds tests; whole packet validated before cursor/publication, project/generation/error fencing, bounded retention and fixed safe errors; older hosts remain compatible.",
+    "Only STATUS conflict resolved; nine production/test/generated files byte-identical to accepted source. No runtime/authoring mutation path or dependency change."
+  ],
+  "limitations": [
+    "CPU integrated tests pending; no live native Console/pixel acceptance.",
+    "Previously delivered accepted history is retained after Stop/error; unread terminal tails explicitly unavailable."
+  ]
+}

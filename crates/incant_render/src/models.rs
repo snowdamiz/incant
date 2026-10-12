@@ -17,6 +17,7 @@ pub(crate) use drawing::{ModelDraw, ModelTarget};
 #[path = "shadow_draw.rs"]
 mod shadow_drawing;
 pub(crate) use shadow_drawing::ShadowDraw;
+pub(crate) mod animation;
 
 struct Primitive {
     vertices: wgpu::Buffer,
@@ -48,6 +49,8 @@ struct Batch {
     bounds: crate::shadows::cascade::Bounds,
     placements: Arc<[crate::scene::Placement]>,
     updates: Vec<crate::scene::Instance>,
+    animated: Option<animation::Binding>,
+    vertices: Option<wgpu::Buffer>,
 }
 /// Immutable scene ready for rendering. A failed replacement never changes it.
 /// Source bytes are not needed after AssetStore has loaded the cooked model.
@@ -55,6 +58,7 @@ pub struct RenderScene {
     pub(crate) diagnostics: Vec<glam::Mat4>,
     pub(crate) sprites: Option<Arc<crate::sprites::SpriteScene>>,
     batches: Vec<Arc<Batch>>,
+    animations: Vec<animation::Instance>,
     stats: SceneStats,
     environment: Option<crate::environment::Binding>,
     lights: crate::lighting::GpuLights,
@@ -116,6 +120,7 @@ impl Renderer {
             .map_err(|_| ResourceError::CacheLock("GPU model"))?;
         cache.retain(|_, model| model.strong_count() != 0);
         let mut batches = Vec::new();
+        let mut loaded = BTreeMap::new();
         for ((_, key), plan) in resolved.models {
             let model = match cache.get(&key).and_then(Weak::upgrade) {
                 Some(model) => model,
@@ -172,6 +177,7 @@ impl Renderer {
                     model
                 }
             };
+            loaded.insert(key, Arc::clone(&model));
             for ((primitive, casts_shadows), transforms) in plan.primitives {
                 let capacity = transforms.len();
                 let placements: Arc<[crate::scene::Placement]> = if retained {
@@ -249,10 +255,13 @@ impl Renderer {
                         },
                         casts_shadows,
                         bounds: crate::shadows::cascade::Bounds { minimum, maximum },
+                        animated: None,
+                        vertices: None,
                     }));
                 }
             }
         }
+        let animations = animation::upload(self, resolved.animations, &loaded, &mut batches)?;
         resolved.stats.model_draw_calls = batches
             .iter()
             .map(|b| {
@@ -286,6 +295,7 @@ impl Renderer {
             retained,
         )?;
         Ok(RenderScene {
+            animations,
             sprites,
             lights,
             light_selection: crate::LocalLightSelection::Clustered,

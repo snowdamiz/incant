@@ -29,6 +29,7 @@ impl TickCommands {
             "setParent",
             "setVelocity",
             "controlFlipbook",
+            "controlAnimation",
             "setAudioPlaying",
             "setAudioGain",
             "setAudioBusGain",
@@ -126,6 +127,9 @@ fn parse<'js>(
 ) -> rquickjs::Result<StructuralCommand> {
     if matches!(name, "setAudioPlaying" | "setAudioGain" | "setAudioBusGain") {
         return crate::audio_commands::parse(ctx, name, args);
+    }
+    if name == "controlAnimation" {
+        return crate::animation_commands::parse(ctx, args);
     }
     Ok(match (name, args) {
         ("setLocale", [settings]) => {

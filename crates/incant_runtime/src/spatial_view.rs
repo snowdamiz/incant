@@ -15,6 +15,7 @@ pub struct SpatialNode<'a> {
     /// Immutable cell placements/collision union prepared at binding changes.
     pub tilemap: Option<&'a crate::PreparedTilemap>,
     pub flipbook: Option<crate::FlipbookState>,
+    pub animation: Option<crate::AnimationSample>,
 }
 
 /// Scoped view at a committed boundary. Numeric/structural mutation cannot
@@ -76,6 +77,9 @@ impl<'a> SpatialView<'a> {
                     .expect("committed spatial global")
                     .0,
                 declaration: world.get::<CookedSpatial>(entity),
+                animation: world
+                    .get::<crate::animation::Playback>(entity)
+                    .map(|p| p.state.sample),
                 flipbook: world
                     .get::<crate::flipbook::Playback>(entity)
                     .map(|p| p.state),

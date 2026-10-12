@@ -291,3 +291,48 @@ fn semantic_invalid_merge_is_atomic() {
     assert!(left.merge(&right.export().unwrap()).is_err());
     assert_eq!(left.project().unwrap(), pl);
 }
+
+#[test]
+fn animation_cannot_be_hidden_by_sprite_or_tilemap_preview_precedence() {
+    let mut p = sample();
+    let id = new_id();
+    p.assets.insert(
+        id.clone(),
+        Asset {
+            id: id.clone(),
+            name: "Rig".into(),
+            path: "rig.gltf".into(),
+            kind: "model".into(),
+            sha256: "ab".repeat(32),
+            import_settings: None,
+        },
+    );
+    let scene = p.scenes.values_mut().next().unwrap();
+    let entity = scene.entities.values_mut().next().unwrap();
+    entity.components.insert(
+        "MeshRenderer".into(),
+        json!({"mesh":id,"materials":[],"cast_shadows":true}),
+    );
+    entity.components.insert(
+        "Animation".into(),
+        json!({"clip":null,"seconds":0,"speed":0,"playing":false,"looping":false}),
+    );
+    p.validate().unwrap();
+    for component in ["SpriteRenderer", "Tilemap"] {
+        let mut bad = p.clone();
+        let entity = bad
+            .scenes
+            .values_mut()
+            .next()
+            .unwrap()
+            .entities
+            .values_mut()
+            .next()
+            .unwrap();
+        entity.components.insert(component.into(), json!({}));
+        assert!(bad.diagnostics().iter().any(|d| {
+            d.message
+                .contains("Animation requires MeshRenderer without")
+        }));
+    }
+}

@@ -1,0 +1,72 @@
+{
+ "label": "after-quit",
+ "at": "2026-10-12T01:56:53.538+00:00",
+ "root": "/tmp/incant-animation-native-review-v2",
+ "named": {
+  "project.json": "5af5a8bbc625051091ee6f2ff008379bed01a3a6be71885ef50ab6cf30b35834",
+  "project.journal.jsonl": "f1ef98359a1a0d4a4407044ac83b44c5c822fb64607bda422a37b41679c5d2fe",
+  "animation.ts": "f16ead4a7fe2251d4c804d0598b8ac0ecab1f4977c29467c96115c16a77049a5"
+ },
+ "files": {
+  ".incant-source-transactions/01M4PRJ744SCPFWYPDQV12SX6F.old-receipt": {
+   "sha256": "3fda7055b13c2ab7778478af0b1870a039d39b7c8ec362b65f4ac8990fa35f0e",
+   "bytes": 26,
+   "mtime_ns": 1791765322872816822
+  },
+  ".incant-source-transactions/01M4PRJ744SCPFWYPDQV12SX6F.previous": {
+   "sha256": "f16ead4a7fe2251d4c804d0598b8ac0ecab1f4977c29467c96115c16a77049a5",
+   "bytes": 948,
+   "mtime_ns": 1791765322844827503
+  },
+  ".incant-source-transactions/01M4PRJ757CS7SJSX5SWTSQRWW.old-receipt": {
+   "sha256": "21ec06a9667627c7a210e3bf19c1c5f93c793d2bea592eeed79661976cd86690",
+   "bytes": 26,
+   "mtime_ns": 1791765322903787019
+  },
+  ".incant-source-transactions/lock": {
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "bytes": 0,
+   "mtime_ns": 1791765322816812017
+  },
+  ".incant-source-transactions/receipt": {
+   "sha256": "425cdfb08ed70e22331411ab5770ae2c7c38154e92b93b4fc8bcad08e1e65318",
+   "bytes": 26,
+   "mtime_ns": 1791765322940873513
+  },
+  ".incant/cache/models/dd3cba5627cb4d1e028126f4f00f84b4f95712f835fc78fb7b866132278b2cf9.incmodel": {
+   "sha256": "e02aab0c14a6c2c6ef38561db241e97bb15d43d727318f76ecfcae4aa9cdbe4f",
+   "bytes": 1294,
+   "mtime_ns": 1791765322818070310
+  },
+  "animation.ts": {
+   "sha256": "f16ead4a7fe2251d4c804d0598b8ac0ecab1f4977c29467c96115c16a77049a5",
+   "bytes": 948,
+   "mtime_ns": 1791765322919454242
+  },
+  "authoring-result.json": {
+   "sha256": "d6fe598eab814557eade0c987cec84105fdae38f9d3e0544965ce11559a5a2af",
+   "bytes": 3157,
+   "mtime_ns": 1791765323672103016
+  },
+  "project.journal.jsonl": {
+   "sha256": "f1ef98359a1a0d4a4407044ac83b44c5c822fb64607bda422a37b41679c5d2fe",
+   "bytes": 50438,
+   "mtime_ns": 1791765322937765385
+  },
+  "project.json": {
+   "sha256": "5af5a8bbc625051091ee6f2ff008379bed01a3a6be71885ef50ab6cf30b35834",
+   "bytes": 3236,
+   "mtime_ns": 1791765323634589313
+  },
+  "rig.bin": {
+   "sha256": "2f712c8c77c452501530084781af183c7e176f46281ca7f1e8273a2b01c8c236",
+   "bytes": 272,
+   "mtime_ns": 1791765322794476912
+  },
+  "rig.gltf": {
+   "sha256": "7d86c22ec2b7efb9a6302eb5e39384fb02384cecc1c72989cdc442b3a00ce1b7",
+   "bytes": 2997,
+   "mtime_ns": 1791765322794652162
+  }
+ }
+}

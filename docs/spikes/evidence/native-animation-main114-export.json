@@ -1,0 +1,126 @@
+{
+  "tested_source": "5d98ee2130cff8b1bbcd6456f924bae0f39d49d2",
+  "main_base": "4abd22f999ba5c03c6087c35922054863c3a78e5",
+  "recorded_at": "2026-10-12T01:56:52.666002+00:00",
+  "merge_resolution": "No manual source or STATUS resolution; atlas merged cleanly.",
+  "compatibility": "Entire Cargo.lock changed; fresh public cook and source/build-deleted CPU export repeated.",
+  "frozen_source_count": 1038,
+  "source_freeze_sha256": "249aa154c08ff4421711c720f5566295ae157c60f64d406a59f1b06a773dec36",
+  "headless_sha256": "80aae039f0e96b8938b050a7cac9ea9cee32ab0c9d6df5eb825d317124717e7e",
+  "result_sha256": "ba11ab0c5d6c05e102a8bf33dca4a0ecb56ca2eef3684e2799dda193b0f9f53e",
+  "result": {
+    "passed": true,
+    "fresh_source_free_runs": 3,
+    "ticks": 160,
+    "numeric_cases": 23,
+    "checkpoint_continuation": true,
+    "checkpoint_sha256": "d95db18195958a9d4a1e0cf7ba0bbfd4683443bbf5c5cd6b3c8e0071505656d5",
+    "pcm_sha256": "7b331c02e313c7599d5a90212e17e6d3cb729bd2e1c9b873c302a63c95a2f9bf",
+    "source_deleted": true,
+    "private_build_deleted": true,
+    "player_sha256": "ad79a8149a13c7a74759cddcd92d57268ad084c4f76237bcb2750bdfe535ca21",
+    "target": "aarch64-apple-darwin",
+    "refusal_controls": [
+      "corrupt checkpoint",
+      "wrong observation with withheld save/PCM"
+    ],
+    "limitations": [
+      "Local CPU functional proof; no GPU/window/device/performance/visual or phase gate claim"
+    ]
+  },
+  "public_authoring": {
+    "command_bus_only": true,
+    "undo_redo_and_reopen": true,
+    "authoring_unchanged_by_play": true,
+    "review_fixture_retained": false,
+    "ids": {
+      "script": "00000000000000000000000001",
+      "entity": "00000000000000000000000002",
+      "camera": "00000000000000000000000003",
+      "table": "00000000000000000000000005",
+      "scene": "01M4PWT2F5HHDDS8DYY449FAHX",
+      "asset": "01M4PWT2J5H6A6GQNB3FS19HSD"
+    },
+    "tick_rate": 60,
+    "project_sha256": "f9d81727c22f9b9932ffde79cbe430ad21f04dc23af3e48a47c2343a9a7dc957",
+    "journal_sha256": "ad76d0a8332fd481582443b727e781b164756a84c0f10f96afd9c37cefcc210d",
+    "source_sha256": "3ccd28212d689c51df07a19e95043cb2cd005aa5522fa9c44a0643f2bb15c508",
+    "gltf_sha256": "7d86c22ec2b7efb9a6302eb5e39384fb02384cecc1c72989cdc442b3a00ce1b7",
+    "buffer_sha256": "2f712c8c77c452501530084781af183c7e176f46281ca7f1e8273a2b01c8c236",
+    "binary_sha256": "80aae039f0e96b8938b050a7cac9ea9cee32ab0c9d6df5eb825d317124717e7e",
+    "queried_translation": [
+      0.4333333333333331,
+      2.0,
+      213.0
+    ]
+  },
+  "runs": [
+    {
+      "name": "headless-build",
+      "command": [
+        "./tools/cargo",
+        "build",
+        "--profile",
+        "ci",
+        "--locked",
+        "-j2",
+        "-p",
+        "incant_headless"
+      ],
+      "exit_code": 0,
+      "seconds": 31.00480580329895,
+      "log": "/tmp/incant-animation-main114-checks/headless-build.log",
+      "sha256": "12c11ae0d12242ceba714878635a7a54321cb9b2396384a96d3d0d8fea108932"
+    },
+    {
+      "name": "fresh-export-proof",
+      "command": [
+        "python3",
+        "tools/probes/native-animation.py",
+        "/tmp/incant-native-animation-main114-proof",
+        "--binary",
+        "/tmp/incant-animation-integration-target/ci/incant_headless"
+      ],
+      "exit_code": 0,
+      "seconds": 291.6069700717926,
+      "log": "/tmp/incant-animation-main114-checks/fresh-export-proof.log",
+      "sha256": "3d69c22e274f7ed93290894ef264d85c506cad37e696733581ff7da56f5dd7fc"
+    }
+  ],
+  "retained_output_hashes": {
+    "authoring-result.json": "a282919c02c9ee06d3c52cd63739e7d799f9dea84153bd7ca019aa6d3e164773",
+    "baseline-observe.json": "0a9e37a63bfb2f2613dac20ac0b87147d6ca4c4580294f86017b8b2da5a390b8",
+    "baseline-receipt.json": "73ef4c178bb4a532b920077826c0a8d2fd2755098e1982e21a923fcef9125e88",
+    "baseline.json": "da4eb4d1182fc8e47ad7e23577a04ba0e1eaa8552f3652b10e0636abff134689",
+    "baseline.pcm": "7b331c02e313c7599d5a90212e17e6d3cb729bd2e1c9b873c302a63c95a2f9bf",
+    "baseline.save": "d95db18195958a9d4a1e0cf7ba0bbfd4683443bbf5c5cd6b3c8e0071505656d5",
+    "continued-observe.json": "880f3e0a9ef0ef47372766567e22d30f487880c0bd92622e2aef200385f0489a",
+    "continued-receipt.json": "1de23d89c0a10a00e3c0c6e68f855104791ce08035388023dd9073ea143b3d9c",
+    "continued.json": "fa24cda9119ec2e03e06152ed4f8a66d28909a517db088be45fc1dfbcbb97204",
+    "continued.pcm": "cc717c5052b5ad14e8b3d305cb9d8f081fcd019517bce8539a49beb3e793bd3c",
+    "continued.save": "d95db18195958a9d4a1e0cf7ba0bbfd4683443bbf5c5cd6b3c8e0071505656d5",
+    "corrupt-observe.json": "314186bd609b9d6c2a1ad4df09e4bd793628fb7089562c80587e39a5a4ea5f2a",
+    "corrupt-receipt.json": "09ab4fd0ebbb0e11fdd554291513357a0187d3c36876c175019e89011573b7f8",
+    "corrupt.save": "156579fa88730886a44e8b2d68623e373ce86dd3b8efb1c08f7cc6cd57bf7f1b",
+    "first-observe.json": "91b3c96ce57c4f6d7592888b4397a25d0cdf3e264f3acbfac5dda0156f84a638",
+    "first-receipt.json": "8af5aa632032f974ef5da155b5a520f0acc336122dfdfef08ca6e83557923068",
+    "first.json": "e2a7a7807f2361e2b521dffc7ca0b330c9ccd18088b1850a8351db2cb27baeb3",
+    "first.pcm": "0249c5b2b4116c7167909be4b4ec87c5f9972cd2b1ba7b8d1dd457ebfddba085",
+    "mid.save": "68ddbd3142dfb9306f3a434f3e2339c80cb4779085364850a05c2785a0f92b52",
+    "native-play-result.json": "818e5eb8911ce724b281a091229bdfad9eff58a3d6f67e27862fe881c8e337f9",
+    "repeat-0-observe.json": "0a9e37a63bfb2f2613dac20ac0b87147d6ca4c4580294f86017b8b2da5a390b8",
+    "repeat-0-receipt.json": "73ef4c178bb4a532b920077826c0a8d2fd2755098e1982e21a923fcef9125e88",
+    "repeat-0.json": "da4eb4d1182fc8e47ad7e23577a04ba0e1eaa8552f3652b10e0636abff134689",
+    "repeat-0.pcm": "7b331c02e313c7599d5a90212e17e6d3cb729bd2e1c9b873c302a63c95a2f9bf",
+    "repeat-0.save": "d95db18195958a9d4a1e0cf7ba0bbfd4683443bbf5c5cd6b3c8e0071505656d5",
+    "repeat-1-observe.json": "0a9e37a63bfb2f2613dac20ac0b87147d6ca4c4580294f86017b8b2da5a390b8",
+    "repeat-1-receipt.json": "73ef4c178bb4a532b920077826c0a8d2fd2755098e1982e21a923fcef9125e88",
+    "repeat-1.json": "da4eb4d1182fc8e47ad7e23577a04ba0e1eaa8552f3652b10e0636abff134689",
+    "repeat-1.pcm": "7b331c02e313c7599d5a90212e17e6d3cb729bd2e1c9b873c302a63c95a2f9bf",
+    "repeat-1.save": "d95db18195958a9d4a1e0cf7ba0bbfd4683443bbf5c5cd6b3c8e0071505656d5",
+    "result.json": "ba11ab0c5d6c05e102a8bf33dca4a0ecb56ca2eef3684e2799dda193b0f9f53e",
+    "wrong-observation-observe.json": "7122a693fc728b702fc1bb28beb5acb1096b1eec04c7003d721680aaa591ada6",
+    "wrong-observation-receipt.json": "516b09b622389bb9a3089af70e0c4d3456f23befc29784f2cd53232b507769de"
+  },
+  "native_acceptance": "Earlier0052 remains bound to its immutable editor. Focused0053 nullable Inspector acceptance pending; no GPU/window/provider work in this run."
+}

@@ -1,0 +1,1069 @@
+{
+  "passed": true,
+  "authoring": {
+    "project_sha256": "94b6871cc320adc7e5472b5eeb7d18e79c477f9a008a0dcd0ce6b85a29e4c789",
+    "source_sha256": "032ce637ade65cbdbd3b16e63061fcf13442a269c46a52c46e8440a6ad1f49ff",
+    "scene": "01M4PK1T2WZ45GJ2ATMMY7ZKT9",
+    "tick_rate": 60,
+    "revision": 1,
+    "command_bus_only": true,
+    "journal_reopened": true
+  },
+  "export": {
+    "format": "incant-native-export",
+    "version": 1,
+    "target": "aarch64-apple-darwin",
+    "mode": "headless",
+    "project_sha256": "94b6871cc320adc7e5472b5eeb7d18e79c477f9a008a0dcd0ce6b85a29e4c789",
+    "scene_id": "01M4PK1T2WZ45GJ2ATMMY7ZKT9",
+    "camera": "00000000000000000000000000000003",
+    "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+    "codegen": {
+      "incant_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort",
+        "debuginfo": "2",
+        "split-debuginfo": "packed"
+      },
+      "incant_script": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort",
+        "debuginfo": "2",
+        "split-debuginfo": "packed"
+      },
+      "incant_game_player": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort",
+        "debuginfo": "2",
+        "split-debuginfo": "packed",
+        "lto": "fat"
+      }
+    },
+    "normal_dependencies": [
+      "allocator-api2",
+      "anyhow",
+      "approx",
+      "arrayvec",
+      "assert_type_match",
+      "async-channel",
+      "async-executor",
+      "async-task",
+      "atomic-arena",
+      "atomic-waker",
+      "bevy_ecs",
+      "bevy_ecs_macro_logic",
+      "bevy_ecs_macros",
+      "bevy_macro_utils",
+      "bevy_platform",
+      "bevy_ptr",
+      "bevy_reflect",
+      "bevy_reflect_derive",
+      "bevy_tasks",
+      "bevy_utils",
+      "bitflags",
+      "block-buffer",
+      "bumpalo",
+      "bytemuck",
+      "bytemuck_derive",
+      "byteorder",
+      "calendrical_calculations",
+      "cfg-if",
+      "concurrent-queue",
+      "const-oid",
+      "convert_case",
+      "convert_case",
+      "core_maths",
+      "cpu-time",
+      "cpufeatures",
+      "critical-section",
+      "crossbeam-deque",
+      "crossbeam-epoch",
+      "crossbeam-queue",
+      "crossbeam-utils",
+      "crypto-common",
+      "derive_more",
+      "derive_more-impl",
+      "digest",
+      "displaydoc",
+      "disqualified",
+      "dodgy_2d",
+      "downcast-rs",
+      "dyn-clone",
+      "either",
+      "ena",
+      "equivalent",
+      "erased-serde",
+      "errno",
+      "event-listener",
+      "event-listener-strategy",
+      "fastrand",
+      "fixed_decimal",
+      "fixedbitset",
+      "float-cmp",
+      "foldhash",
+      "futures-core",
+      "futures-io",
+      "futures-lite",
+      "generic-array",
+      "getrandom",
+      "getrandom",
+      "glam",
+      "glam",
+      "glam",
+      "glam",
+      "glam",
+      "glamx",
+      "hash32",
+      "hashbrown",
+      "hashbrown",
+      "heapless",
+      "icu_calendar",
+      "icu_calendar_data",
+      "icu_collections",
+      "icu_datetime",
+      "icu_datetime_data",
+      "icu_decimal",
+      "icu_decimal_data",
+      "icu_locale",
+      "icu_locale_core",
+      "icu_locale_fallback",
+      "icu_locale_fallback_data",
+      "icu_pattern",
+      "icu_plurals",
+      "icu_plurals_data",
+      "icu_provider",
+      "icu_time",
+      "icu_time_data",
+      "incant_2d",
+      "incant_assets_runtime",
+      "incant_audio_runtime",
+      "incant_game_player",
+      "incant_game_runtime",
+      "incant_input",
+      "incant_localization",
+      "incant_nav",
+      "incant_observe",
+      "incant_physics_2d_runtime",
+      "incant_physics_runtime",
+      "incant_render_data",
+      "incant_render_game",
+      "incant_render_native",
+      "incant_runtime",
+      "incant_script",
+      "incant_types",
+      "incant_wasm_abi",
+      "incant_wasm_runtime",
+      "indexmap",
+      "itoa",
+      "kira",
+      "ktx2",
+      "libc",
+      "libm",
+      "litemap",
+      "log",
+      "matrixmultiply",
+      "memchr",
+      "meshopt",
+      "mint",
+      "nalgebra",
+      "nalgebra-macros",
+      "nonmax",
+      "num-bigint",
+      "num-complex",
+      "num-derive",
+      "num-integer",
+      "num-rational",
+      "num-traits",
+      "once_cell",
+      "ordered-float",
+      "parking",
+      "parry2d",
+      "parry3d",
+      "pastey",
+      "pin-project-lite",
+      "portable-atomic",
+      "potential_utf",
+      "ppv-lite86",
+      "proc-macro-crate",
+      "proc-macro2",
+      "profiling",
+      "profiling-procmacros",
+      "quick-xml",
+      "quote",
+      "rand",
+      "rand_chacha",
+      "rand_core",
+      "rand_core",
+      "rapier2d",
+      "rapier3d",
+      "raw-window-handle",
+      "rawpointer",
+      "rayon",
+      "rayon-core",
+      "ref-cast",
+      "ref-cast-impl",
+      "relative-path",
+      "rerecast",
+      "robust",
+      "rquickjs",
+      "rquickjs-core",
+      "rquickjs-macro",
+      "rquickjs-sys",
+      "rstar",
+      "rtrb",
+      "rustix",
+      "schemars",
+      "schemars_derive",
+      "serde",
+      "serde_core",
+      "serde_derive",
+      "serde_derive_internals",
+      "serde_json",
+      "sha2",
+      "simba",
+      "slab",
+      "slotmap",
+      "smallvec",
+      "smol_str",
+      "spade",
+      "spin",
+      "stable_deref_trait",
+      "static_assertions",
+      "subtle",
+      "syn",
+      "syn",
+      "synstructure",
+      "tempfile",
+      "thiserror",
+      "thiserror-impl",
+      "thread_local",
+      "tinystr",
+      "toml_datetime",
+      "toml_edit",
+      "toml_parser",
+      "tracing",
+      "tracing-attributes",
+      "tracing-core",
+      "triple_buffer",
+      "typeid",
+      "typenum",
+      "ulid",
+      "unicode-ident",
+      "unicode-segmentation",
+      "unicode-xid",
+      "utf8_iter",
+      "uuid",
+      "variadics_please",
+      "wgpu-types",
+      "wide",
+      "winnow",
+      "writeable",
+      "yoke",
+      "yoke-derive",
+      "zerocopy",
+      "zerocopy-derive",
+      "zerofrom",
+      "zerofrom-derive",
+      "zeroize",
+      "zeroize_derive",
+      "zerotrie",
+      "zerovec",
+      "zerovec-derive",
+      "zmij"
+    ],
+    "symbols": {
+      "format": "Mach-O/dSYM",
+      "uuids": {
+        "arm64": "1622460c-9319-3258-a76e-549f31711d34"
+      }
+    },
+    "symbol_audit": {
+      "source": "llvm-nm defined symbols",
+      "sha256": "b30d4b6c6f1e9e3a66b821addd6574733e4e5b9c08dd1dee1553924e89dc582f"
+    },
+    "player_sha256": "0ad959629a8cc33e75f5af94d5574192341c0bcc30c4b1d1b652bfae44d1b453",
+    "data": {
+      "bytes": 1689,
+      "files": {
+        "world.scene": "2648c434c5eadffdb08a2234c70f8e31c008490b0519a75208ddd5cbc22d20a2",
+        "input-actions.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+        "models/71fbcae82debc0236bda7576327733a6943d93ce7adb913cbe1d95fe931d511f.incmodel": "9be97471434742eb82eb6fe2de0287d618bce848a52fb6eb1cf7e428c6a908de",
+        "clips.bin": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+        "package.json": "c38a1cc5c4927bcb31049820e9da303120a4d03f2483afe129db7c09f5826648"
+      }
+    },
+    "startup_source_parsing": false,
+    "signed": false,
+    "limits": [
+      "host==target desktop only",
+      "existing cooked caches required",
+      "window export GPU execution requires a desktop",
+      "no phone or performance gate"
+    ],
+    "startup": {
+      "flipbooks": [],
+      "frames": 800,
+      "logs": {
+        "dropped": 0,
+        "entries": []
+      },
+      "pcm_sha256": "56a43ef88ddfcd0f56f7dd973312c0e73d62f59655c01d7b4e59aaa3be8b3fb6",
+      "render_input": {
+        "binding_generation": 0,
+        "camera": "00000000000000000000000000000003",
+        "camera_position": [
+          0.0,
+          0.0,
+          8.0
+        ],
+        "decoded_payload_bytes": 156,
+        "first_model_position": [
+          2.0,
+          0.0,
+          0.0
+        ],
+        "first_sprite_position": null,
+        "gpu_submitted": false,
+        "mode": "cpu-only",
+        "model_count": 1,
+        "sprite_count": 0,
+        "tick": 1,
+        "topology_generation": 0
+      },
+      "sources": [],
+      "tick": 1
+    },
+    "build_storage_removed_before_startup": true,
+    "startup_backend": "CPU render input; no window or GPU device"
+  },
+  "runs": [
+    {
+      "name": "baseline",
+      "report": {
+        "flipbooks": [],
+        "frames": 32000,
+        "logs": {
+          "dropped": 0,
+          "entries": []
+        },
+        "observations": {
+          "checks": [
+            {
+              "actual": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "expect": {
+                "entity": "00000000000000000000000002",
+                "property": "translation",
+                "tolerance": 0.0,
+                "type": "vector",
+                "value": [
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "name": "persistent-state-timer-0",
+              "passed": true,
+              "tick": 0
+            },
+            {
+              "actual": [
+                30.0,
+                0.0,
+                0.0
+              ],
+              "expect": {
+                "entity": "00000000000000000000000002",
+                "property": "translation",
+                "tolerance": 0.0,
+                "type": "vector",
+                "value": [
+                  30.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "name": "persistent-state-timer-13",
+              "passed": true,
+              "tick": 13
+            },
+            {
+              "actual": [
+                93.0,
+                0.0,
+                0.0
+              ],
+              "expect": {
+                "entity": "00000000000000000000000002",
+                "property": "translation",
+                "tolerance": 0.0,
+                "type": "vector",
+                "value": [
+                  93.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "name": "persistent-state-timer-40",
+              "passed": true,
+              "tick": 40
+            }
+          ],
+          "entities": {
+            "00000000000000000000000002": {
+              "parent": null,
+              "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "translation": [
+                93.0,
+                0.0,
+                0.0
+              ],
+              "velocity": null,
+              "world_transform": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                [
+                  93.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            }
+          },
+          "passed": true,
+          "tick": 40,
+          "tick_rate": 60
+        },
+        "pcm_sha256": "24a046dc04fefdb652e4077b41162490b344a4dd45f918505477f84c592f3070",
+        "render_input": {
+          "binding_generation": 0,
+          "camera": "00000000000000000000000000000003",
+          "camera_position": [
+            0.0,
+            0.0,
+            8.0
+          ],
+          "decoded_payload_bytes": 156,
+          "first_model_position": [
+            93.0,
+            0.0,
+            0.0
+          ],
+          "first_sprite_position": null,
+          "gpu_submitted": false,
+          "mode": "cpu-only",
+          "model_count": 1,
+          "sprite_count": 0,
+          "tick": 40,
+          "topology_generation": 0
+        },
+        "sources": [],
+        "tick": 40
+      },
+      "save_sha256": "b4b6ff05a695d9ac22969278e85e1bd701abe5d1b756eb8f83f7b87ac876da65",
+      "pcm_bytes": 256000
+    },
+    {
+      "name": "first",
+      "report": {
+        "flipbooks": [],
+        "frames": 10400,
+        "logs": {
+          "dropped": 0,
+          "entries": []
+        },
+        "observations": {
+          "checks": [
+            {
+              "actual": [
+                30.0,
+                0.0,
+                0.0
+              ],
+              "expect": {
+                "entity": "00000000000000000000000002",
+                "property": "translation",
+                "tolerance": 0.0,
+                "type": "vector",
+                "value": [
+                  30.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "name": "persistent-state-timer-13",
+              "passed": true,
+              "tick": 13
+            }
+          ],
+          "entities": {
+            "00000000000000000000000002": {
+              "parent": null,
+              "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "translation": [
+                30.0,
+                0.0,
+                0.0
+              ],
+              "velocity": null,
+              "world_transform": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                [
+                  30.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            }
+          },
+          "passed": true,
+          "tick": 13,
+          "tick_rate": 60
+        },
+        "pcm_sha256": "9b54dfbc92b4baf804aa3b0360cbc32e4d9ebe32c974c5131c52e3f375d3e25e",
+        "render_input": {
+          "binding_generation": 0,
+          "camera": "00000000000000000000000000000003",
+          "camera_position": [
+            0.0,
+            0.0,
+            8.0
+          ],
+          "decoded_payload_bytes": 156,
+          "first_model_position": [
+            30.0,
+            0.0,
+            0.0
+          ],
+          "first_sprite_position": null,
+          "gpu_submitted": false,
+          "mode": "cpu-only",
+          "model_count": 1,
+          "sprite_count": 0,
+          "tick": 13,
+          "topology_generation": 0
+        },
+        "sources": [],
+        "tick": 13
+      },
+      "save_sha256": "7e29c5bd0aaa9ec04c143f194c4c913f63acfd54e1910329950ee87c34dcd4d9",
+      "pcm_bytes": 83200
+    },
+    {
+      "name": "resume",
+      "report": {
+        "flipbooks": [],
+        "frames": 21600,
+        "logs": {
+          "dropped": 0,
+          "entries": []
+        },
+        "observations": {
+          "checks": [
+            {
+              "actual": [
+                30.0,
+                0.0,
+                0.0
+              ],
+              "expect": {
+                "entity": "00000000000000000000000002",
+                "property": "translation",
+                "tolerance": 0.0,
+                "type": "vector",
+                "value": [
+                  30.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "name": "persistent-state-timer-13",
+              "passed": true,
+              "tick": 13
+            },
+            {
+              "actual": [
+                93.0,
+                0.0,
+                0.0
+              ],
+              "expect": {
+                "entity": "00000000000000000000000002",
+                "property": "translation",
+                "tolerance": 0.0,
+                "type": "vector",
+                "value": [
+                  93.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "name": "persistent-state-timer-40",
+              "passed": true,
+              "tick": 40
+            }
+          ],
+          "entities": {
+            "00000000000000000000000002": {
+              "parent": null,
+              "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "translation": [
+                93.0,
+                0.0,
+                0.0
+              ],
+              "velocity": null,
+              "world_transform": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                [
+                  93.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            }
+          },
+          "passed": true,
+          "tick": 40,
+          "tick_rate": 60
+        },
+        "pcm_sha256": "53853188f83a941e2f45ec1383293ae935106c5721918079000dcb2254fc550b",
+        "render_input": {
+          "binding_generation": 0,
+          "camera": "00000000000000000000000000000003",
+          "camera_position": [
+            0.0,
+            0.0,
+            8.0
+          ],
+          "decoded_payload_bytes": 156,
+          "first_model_position": [
+            93.0,
+            0.0,
+            0.0
+          ],
+          "first_sprite_position": null,
+          "gpu_submitted": false,
+          "mode": "cpu-only",
+          "model_count": 1,
+          "sprite_count": 0,
+          "tick": 40,
+          "topology_generation": 0
+        },
+        "sources": [],
+        "tick": 40
+      },
+      "save_sha256": "b4b6ff05a695d9ac22969278e85e1bd701abe5d1b756eb8f83f7b87ac876da65",
+      "pcm_bytes": 172800
+    },
+    {
+      "name": "repeat",
+      "report": {
+        "flipbooks": [],
+        "frames": 21600,
+        "logs": {
+          "dropped": 0,
+          "entries": []
+        },
+        "observations": {
+          "checks": [
+            {
+              "actual": [
+                30.0,
+                0.0,
+                0.0
+              ],
+              "expect": {
+                "entity": "00000000000000000000000002",
+                "property": "translation",
+                "tolerance": 0.0,
+                "type": "vector",
+                "value": [
+                  30.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "name": "persistent-state-timer-13",
+              "passed": true,
+              "tick": 13
+            },
+            {
+              "actual": [
+                93.0,
+                0.0,
+                0.0
+              ],
+              "expect": {
+                "entity": "00000000000000000000000002",
+                "property": "translation",
+                "tolerance": 0.0,
+                "type": "vector",
+                "value": [
+                  93.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "name": "persistent-state-timer-40",
+              "passed": true,
+              "tick": 40
+            }
+          ],
+          "entities": {
+            "00000000000000000000000002": {
+              "parent": null,
+              "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "translation": [
+                93.0,
+                0.0,
+                0.0
+              ],
+              "velocity": null,
+              "world_transform": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                [
+                  93.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            }
+          },
+          "passed": true,
+          "tick": 40,
+          "tick_rate": 60
+        },
+        "pcm_sha256": "53853188f83a941e2f45ec1383293ae935106c5721918079000dcb2254fc550b",
+        "render_input": {
+          "binding_generation": 0,
+          "camera": "00000000000000000000000000000003",
+          "camera_position": [
+            0.0,
+            0.0,
+            8.0
+          ],
+          "decoded_payload_bytes": 156,
+          "first_model_position": [
+            93.0,
+            0.0,
+            0.0
+          ],
+          "first_sprite_position": null,
+          "gpu_submitted": false,
+          "mode": "cpu-only",
+          "model_count": 1,
+          "sprite_count": 0,
+          "tick": 40,
+          "topology_generation": 0
+        },
+        "sources": [],
+        "tick": 40
+      },
+      "save_sha256": "b4b6ff05a695d9ac22969278e85e1bd701abe5d1b756eb8f83f7b87ac876da65",
+      "pcm_bytes": 172800
+    },
+    {
+      "name": "fresh-input",
+      "report": {
+        "flipbooks": [],
+        "frames": 21600,
+        "logs": {
+          "dropped": 0,
+          "entries": []
+        },
+        "observations": {
+          "checks": [
+            {
+              "actual": [
+                32.0,
+                1.0,
+                0.0
+              ],
+              "expect": {
+                "entity": "00000000000000000000000002",
+                "property": "translation",
+                "tolerance": 0.0,
+                "type": "vector",
+                "value": [
+                  32.0,
+                  1.0,
+                  0.0
+                ]
+              },
+              "name": "persistent-state-timer-14",
+              "passed": true,
+              "tick": 14
+            },
+            {
+              "actual": [
+                93.0,
+                1.0,
+                0.0
+              ],
+              "expect": {
+                "entity": "00000000000000000000000002",
+                "property": "translation",
+                "tolerance": 0.0,
+                "type": "vector",
+                "value": [
+                  93.0,
+                  1.0,
+                  0.0
+                ]
+              },
+              "name": "persistent-state-timer-40",
+              "passed": true,
+              "tick": 40
+            }
+          ],
+          "entities": {
+            "00000000000000000000000002": {
+              "parent": null,
+              "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "translation": [
+                93.0,
+                1.0,
+                0.0
+              ],
+              "velocity": null,
+              "world_transform": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                [
+                  93.0,
+                  1.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            }
+          },
+          "passed": true,
+          "tick": 40,
+          "tick_rate": 60
+        },
+        "pcm_sha256": "53853188f83a941e2f45ec1383293ae935106c5721918079000dcb2254fc550b",
+        "render_input": {
+          "binding_generation": 0,
+          "camera": "00000000000000000000000000000003",
+          "camera_position": [
+            0.0,
+            0.0,
+            8.0
+          ],
+          "decoded_payload_bytes": 156,
+          "first_model_position": [
+            93.0,
+            1.0,
+            0.0
+          ],
+          "first_sprite_position": null,
+          "gpu_submitted": false,
+          "mode": "cpu-only",
+          "model_count": 1,
+          "sprite_count": 0,
+          "tick": 40,
+          "topology_generation": 0
+        },
+        "sources": [],
+        "tick": 40
+      },
+      "save_sha256": "ac4ad23aeada4267ef5e2865efb70b6b1f0b797751ede7aa9a3d51d646ea383d",
+      "pcm_bytes": 172800
+    }
+  ],
+  "refusals": [
+    {
+      "name": "corrupt",
+      "stderr": "Error: Checkpoint(Integrity)\n"
+    },
+    {
+      "name": "oversized",
+      "stderr": "Error: \"runtime input size limit\"\n"
+    },
+    {
+      "name": "mismatched-program",
+      "stderr": "Error: Checkpoint(ProgramMismatch)\n"
+    },
+    {
+      "name": "assertion",
+      "stderr": "Error: \"checkpoint withheld: native observation assertions failed\"\n"
+    },
+    {
+      "name": "past-observation",
+      "stderr": "Error: Invalid(\"missed requested native observation tick\")\n"
+    },
+    {
+      "name": "no-clobber",
+      "stderr": "Error: Os { code: 17, kind: AlreadyExists, message: \"File exists\" }\n"
+    },
+    {
+      "name": "unsupported-window",
+      "stderr": "Error: \"checkpoints require the offline bytecode plain/CPU-render-input player\"\n"
+    },
+    {
+      "name": "unsupported-gpu-offscreen",
+      "stderr": "Error: \"checkpoints require the offline bytecode plain/CPU-render-input player\"\n"
+    },
+    {
+      "name": "unsupported-static-module",
+      "stderr": "Error: \"checkpoints require the offline bytecode plain/CPU-render-input player\"\n"
+    }
+  ],
+  "authoring_deleted": true,
+  "build_storage_removed": true,
+  "cpu_retained_host": true,
+  "player_sha256": "0ad959629a8cc33e75f5af94d5574192341c0bcc30c4b1d1b652bfae44d1b453",
+  "final_save_sha256": "b4b6ff05a695d9ac22969278e85e1bd701abe5d1b756eb8f83f7b87ac876da65",
+  "limitations": [
+    "Ordinary neutral-input load; ephemeral module globals/closures",
+    "No physics/audio/static checkpoints",
+    "No GPU/window/device/performance or full-save completion claim",
+    "PCM and checkpoint are not a multifile atomic transaction"
+  ]
+}

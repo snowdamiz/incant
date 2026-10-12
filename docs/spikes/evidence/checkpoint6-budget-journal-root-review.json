@@ -1,0 +1,7 @@
+{
+  "reviewer": "astra",
+  "patch_sha256": "a987411a3152eba8c08297b3f23b73adb71946cdee957a8471a709f8d246a4ec",
+  "findings": [],
+  "supersedes": "/tmp/incant-budget-journal-lifetimes-root-review.json",
+  "scope": "Final test-only lifetime fix retains exact CRDT bytes immediately around each refused operation in one live bus. Durable project/revision/history/redo and journal comparisons remain across each drop/read/reopen. This avoids the invalid new cross-reopen CRDT-byte identity assertion without weakening original per-operation invariant. Production locking unchanged; real Windows confirmation pending CI."
+}

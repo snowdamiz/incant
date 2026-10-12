@@ -1,0 +1,14 @@
+{
+  "recorded_at": "2026-10-11T22:54:02.826824+00:00",
+  "reviewer": "astra",
+  "commit": "550b5635ac04d47ea9eee2f8baacc25ae88b4652",
+  "pairing_sha256": "f4458bf11ec22c998c3aececa0abedca41a348bb609c55196d7df9b9425a43bf",
+  "verified_source_hashes": 16,
+  "verified_binary_hashes": 2,
+  "verified_logs": 3,
+  "findings": [],
+  "scope": "Test-only four-format normalized readback extension, unchanged analytical expectations; CPU build only",
+  "next_acceptance": "After native0048 releases GPU ownership, serial default/cooked runs on same adapter; exact normalized bytes expected, any difference diagnosed before tolerance change. Claude owns pixel review.",
+  "gpu_granted": false,
+  "feature_default": false
+}

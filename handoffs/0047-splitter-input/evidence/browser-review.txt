@@ -1,0 +1,47 @@
+chromium 156.0.8078.4 (headless)
+PASS after: harness vertical: a primary press starts no text selection (no selectstart)
+PASS after: harness vertical: no selection during or after a primary drag
+PASS after: harness vertical: the drag resizes and clamps at 560
+PASS after: harness vertical: the press focuses the separator without a focus ring
+PASS after: harness vertical: after a keyboard-focused field, the press still focuses the separator without a ring
+PASS after: harness vertical: the pointer is captured and released
+PASS after: harness vertical: hovering back without a button does not resize
+PASS after: harness vertical: the keyboard continues from the separator, with a ring
+PASS after: harness vertical: a drag on text still selects it
+PASS after: harness vertical: a secondary-button drag does not resize or capture
+PASS after: harness vertical: a Control-click drag does not resize or capture, nor start a selection
+PASS after: harness vertical: losing capture ends the drag
+PASS after: harness vertical: no selection after capture is lost mid-drag
+PASS after: harness horizontal: a primary press starts no text selection (no selectstart)
+PASS after: harness horizontal: no selection during or after a primary drag
+PASS after: harness horizontal: the drag resizes and clamps at 420
+PASS after: harness horizontal: the press focuses the separator without a focus ring
+PASS after: harness horizontal: after a keyboard-focused field, the press still focuses the separator without a ring
+PASS after: harness horizontal: the pointer is captured and released
+PASS after: harness horizontal: hovering back without a button does not resize
+PASS after: harness horizontal: the keyboard continues from the separator, with a ring
+PASS after: harness horizontal: a drag on text still selects it
+PASS after: harness horizontal: a secondary-button drag does not resize or capture
+PASS after: harness horizontal: a Control-click drag does not resize or capture, nor start a selection
+PASS after: harness horizontal: losing capture ends the drag
+PASS after: harness horizontal: no selection after capture is lost mid-drag
+PASS after: editor: pressing the Inspector separator starts no text selection (no selectstart)
+PASS after: editor: no selection while dragging the Inspector separator
+PASS after: editor: the Inspector separator resizes and takes focus without a ring
+PASS after: editor: pressing the output dock separator starts no text selection (no selectstart)
+PASS after: editor: no selection while dragging the output dock separator
+PASS after: editor: the output dock separator resizes and takes focus without a ring
+PASS after: editor: a separator press closes an open menu
+PASS after: editor: a drag on Inspector text still selects it
+before fails: harness vertical: a primary press starts no text selection (no selectstart)
+before fails: harness vertical: a secondary-button drag does not resize or capture
+before fails: harness vertical: a Control-click drag does not resize or capture, nor start a selection
+before fails: harness vertical: losing capture ends the drag
+before fails: harness vertical: no selection after capture is lost mid-drag
+before fails: harness horizontal: a primary press starts no text selection (no selectstart)
+before fails: harness horizontal: a secondary-button drag does not resize or capture
+before fails: harness horizontal: a Control-click drag does not resize or capture, nor start a selection
+before fails: harness horizontal: losing capture ends the drag
+before fails: harness horizontal: no selection after capture is lost mid-drag
+before fails: editor: pressing the Inspector separator starts no text selection (no selectstart)
+before fails: editor: pressing the output dock separator starts no text selection (no selectstart)

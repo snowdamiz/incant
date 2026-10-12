@@ -14,9 +14,10 @@ static-module = ["incant_script/static-module", "dep:incant_wasm_runtime", "inca
 render-input = ["dep:incant_render_game", "dep:incant_render_native"]
 render-gpu = ["render-input", "dep:incant_render_gpu_host", "dep:incant_render", "dep:thiserror"]
 
-native-window = ["render-gpu", "incant_game_runtime/device", "dep:tao", "dep:pollster"]
+native-window = ["render-gpu", "incant_game_runtime/device", "dep:tao", "dep:pollster", "dep:gilrs"]
 
 [dependencies]
+tempfile = "3"
 incant_wasm_runtime = { path = "../incant_wasm_runtime", optional = true }
 incant_observe = { path = "../incant_observe" }
 incant_render_gpu_host = { path = "../incant_render_gpu_host", optional = true }
@@ -38,6 +39,7 @@ ulid = { version = "1.2", default-features = false }
 [target.'cfg(any(target_os = "macos", target_os = "windows", target_os = "linux"))'.dependencies]
 tao = { version = "=0.37.1", optional = true, default-features = false, features = ["rwh_06", "x11"] }
 pollster = { version = "=0.4.0", optional = true }
+gilrs = { version = "=0.11.2", optional = true }
 
 [build-dependencies]
 incant_cook = { path = "../incant_cook", default-features = false, features = ["script"] }

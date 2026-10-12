@@ -1,0 +1,125 @@
+{
+  "base": "1d7fc5b0920e291057b1a2ddd1002efcfdc64bbf",
+  "source": "927b86f27842d9a1a47703679d6efc3a58069ac4",
+  "feature": "3f38add6fdef28d001b772665aa04b43f8a5047c",
+  "integration": "74c85564a2d55b1bcde0ad43c5313d0bf64d68f6",
+  "source_sha256": {
+    "Cargo.lock": "ad84f71af295a1d264a2ffb016816437d42faab8c5825d9810993501f4b84976",
+    "Cargo.toml": "7599f2f1c4bbfad1ebc8e0a10a467d1a7df0930bdade7962321b065f98911c3c",
+    "crates/incant_assets/Cargo.toml": "dc00b7455e5a48b8d1283dd256eda0971cb607ab71bb206077e1347ed1ea1d83",
+    "crates/incant_assets/src/font_cook.rs": "841798098a0707de4e4e41e5fe69849d6ab0319e6ace30baec08ed25ff25e92b",
+    "crates/incant_assets/src/lib.rs": "27f914019f216a75509d134cceb63cd8a0f778c1e3bac92f1ae8e4c53a330c40",
+    "crates/incant_assets/src/project_cache.rs": "e62c81dc6a5787f79f2b41700719e13cbb39f75e7dfb6ad166a253195361f790",
+    "crates/incant_assets/src/runtime.rs": "2d41101d866fddd3c6a24fce132fb4fe2549cb1c951d6acd7be00e2a05023ef0",
+    "crates/incant_assets/src/source.rs": "3c4dcc6ba9bf18f63fc2b0317c5395494c9dbdd175b5d96e7bd971848f63a93b",
+    "crates/incant_assets/tests/fonts.rs": "d7ef87a550effff5f736fa50493123302f488d5c65d3e5bedd6d7ea22411e0a1",
+    "crates/incant_assets_runtime/Cargo.toml": "9091d131c3435c1a294601a2b75a9d36672ca25c9db63739f8a6e06b9205c1d2",
+    "crates/incant_assets_runtime/src/font.rs": "9b7a9a0f6bb0c8cf25faca821b1cd90dd85b19b89d8566a4a203a06942ac32d9",
+    "crates/incant_assets_runtime/src/lib.rs": "2884b5c82d8f7c49b711a900c33320bba5e95d22fe13d12c86b3aebec6fc766b",
+    "crates/incant_assets_runtime/src/version.rs": "4d2d117c89286115c20307a53d611018a06d61aa0c94aa1f5e87f33a281ddd6f",
+    "crates/incant_assets_runtime/tests/fonts.rs": "7cdd379f660c3f73a0bd9ec405c8244d3af12395b617d09e90a0e9e808bc7d07",
+    "crates/incant_import/Cargo.toml": "51554caa95d34f6219d1c6b7ae11dcf1a9db023dbd273aae5f3edc44d5e023d8",
+    "crates/incant_import/src/lib.rs": "de4a86f24b460505fcbbd9a929f9010a570ea80eae7df5d4e180b9df2d0cfb86",
+    "crates/incant_import/src/watch.rs": "d36278f63b4fd347b083301f66ff148611c668367a9bd6d806bc3a74732f444b",
+    "crates/incant_import/tests/fonts.rs": "72cf29da5b6066edc3bfd2b763c18ebca655ab72bd744c09b58d63e2ac66dc64",
+    "crates/incant_text/Cargo.toml": "5b6c17c5381464d3e3ea969f2fc975c87eb782acde236ac0c7fb090a8381b745",
+    "crates/incant_text/src/fonts.rs": "021b1913d9c7ff446b47181936e3a57762a91d24e072e8c442cf2c31db4ae060",
+    "crates/incant_text/src/lib.rs": "90b785dd5f82d94a495f33e8ec654f3c32aed3593fc07fff01e11a17a5ad3cc0"
+  },
+  "unchanged_source_files": 16,
+  "additive_skeletal_seams": [
+    "Cargo.lock",
+    "crates/incant_assets/src/lib.rs",
+    "crates/incant_assets_runtime/Cargo.toml",
+    "crates/incant_assets_runtime/src/lib.rs",
+    "crates/incant_assets_runtime/src/version.rs"
+  ],
+  "existing_lock_records": 957,
+  "only_added_internal_edges": {
+    "incant_assets": [
+      "incant_text"
+    ],
+    "incant_assets_runtime": [
+      "incant_text",
+      "ulid"
+    ],
+    "incant_import": [
+      "incant_text"
+    ],
+    "incant_text": [
+      "rustybuzz"
+    ]
+  },
+  "resolution_versions_unchanged": true,
+  "recorded_at": "2026-10-11T23:59:55.099858+00:00",
+  "checks": {
+    "tests": {
+      "path": "/tmp/incant-font-main107-tests.log",
+      "sha256": "8c7a738abf31c8f03be3645306005538b9698ab77c211d79be8fcfd92fb2a683",
+      "exit_code": 0,
+      "counts": {
+        "passed": 139,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 30
+      }
+    },
+    "clippy": {
+      "path": "/tmp/incant-font-main107-clippy.log",
+      "sha256": "71de17ad28a55af338b8369c89f74d858cf7e701efe6b420ebe3d0fae7c06110",
+      "exit_code": 0
+    },
+    "font-only": {
+      "path": "/tmp/incant-font-main107-font-only.log",
+      "sha256": "5260fefe39f777a80f25913f4686179e7f6748794fcda90e641e30000c68568c",
+      "exit_code": 0,
+      "counts": {
+        "passed": 6,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 5
+      }
+    },
+    "audio-only": {
+      "path": "/tmp/incant-font-main107-audio-only.log",
+      "sha256": "ecc0f3de082609a811eff52e5099764314c43c56a8845af5ad30ecee7030b502",
+      "exit_code": 0,
+      "counts": {
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 5
+      }
+    },
+    "wasm": {
+      "path": "/tmp/incant-font-main107-wasm.log",
+      "sha256": "61cff53449a840662ffb9c80431cf870aa971204b3f5536b594f6f9a06950f4c",
+      "exit_code": 0
+    },
+    "consumers": {
+      "path": "/tmp/incant-font-main107-consumers.log",
+      "sha256": "527742d5d6bc1a449ea14217288f94a3a904bbd8b89a2f01da84a0511c132dab",
+      "exit_code": 0
+    },
+    "graph": {
+      "path": "/tmp/incant-font-main107-graph.log",
+      "sha256": "614a23b8f12a2891fd73e22290f0153be0b48bc9212bbe6bb453bb8aad367029",
+      "exit_code": 0
+    },
+    "fmt": {
+      "path": "/tmp/incant-font-main107-fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exit_code": 0
+    },
+    "conventions": {
+      "path": "/tmp/incant-font-main107-conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exit_code": 0
+    }
+  },
+  "limits": [
+    "Editor import form still excludes TTF/OTF; backend/CLI import path only",
+    "No font scene/archive binding, atlas/draw/widget/IME or visual/device completion",
+    "No CFF-outline numerical or universal peak-memory claim"
+  ]
+}

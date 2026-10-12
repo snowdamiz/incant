@@ -1,0 +1,19 @@
+{
+  "original_claude_commit": "3bacba7f5466563012e4c92b8fdc6b22636e1e32",
+  "cherry_pick": "283f8ab27e6ecf96971dd8b4b6930d8d2d5ec02a",
+  "tested_production": "8325797dc67fa34e069a2eff949a356fef3c0fd1",
+  "actual_main": "adab5de3ee878c3b003014966e1409bd521aca36",
+  "original_packet_inputs": "3bacba7^:handoffs/0053-nullable-inspector/{brief.md,build.json}",
+  "verified_files": {
+    "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/handoffs/0053-nullable-inspector/build.json": "5b92610710a5e441586358de19f44c620ab2b11ee414b21ec20620a70e212fe6",
+    "/tmp/incant-nullable-inspector-0053-bin-v1/manifest.json": "67f60a8e882011deb18288f8b470cc50abe4642096f1d5014ba9822a716ddd62",
+    "/tmp/incant-nullable-inspector-0053-bin-v1/incant_editor": "677f3955970e5f63621dbc4a5ac0df09dce2c90d520b5278918da6ffcd3ae5f4",
+    "/tmp/incant-animation-native-review-v2-manifest.json": "069789bef712fa54c17ffab6a19415581f06bc18fb85ea7d84bc1449913056f2",
+    "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/handoffs/0053-nullable-inspector/screenshots/native/01-authoring-1440x875-clip-0.png": "fe4b79a4d5ac1447530d1bc8c06a174300f7e7eb1e1021da30b926f8daca7afe",
+    "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/handoffs/0053-nullable-inspector/screenshots/native/02-paused-tick10-1440x875-runtime-and-animation.png": "b75d0de6a54b2f20509a9614a93db39d32fa56af6e46c0119acf1d62c51f14fb",
+    "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/handoffs/0053-nullable-inspector/screenshots/native/03-paused-tick195-1000x650.png": "65c640b8d3abb4daa8bb5599367d19b41946d7bee17978a6309093e73fad20a8",
+    "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/handoffs/0053-nullable-inspector/screenshots/native/04-crop-clip-before-after-1440-and-1000.png": "36c219cd65da0d3ed0f441913f9a736fe35b75abfa4f51fd26b46db9c8636172",
+    "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/handoffs/0052-native-animation/screenshots/native/01-authoring-1440x875-rig-selected.png": "cf79269df03b2b94b3157b821649d31076c85400332005786fad1f4cea8921e5"
+  },
+  "review": "Text/hash/source review only by integrator; native pixels reviewed by Claude Opus5.5 Max. No new builds or native launches needed for evidence-only closeout."
+}

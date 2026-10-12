@@ -7,6 +7,7 @@ publish.workspace = true
 
 [dependencies]
 incant_render_data.workspace = true
+incant_types.workspace = true
 incant_assets = { path = "../incant_assets" }
 incant_core.workspace = true
 incant_doc.workspace = true

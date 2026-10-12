@@ -1,0 +1,294 @@
+{
+  "recorded_at": "2026-10-11T20:45:49.870995+00:00",
+  "manifest": {
+    "source_head": "da8a5b5b9c65ad8f2c977c39f4d395b4fa4a3580",
+    "uncommitted_probe_patch_sha256": "4122d9d02472fcfc7af312e57dff54159128c5ba91fd22329d780e180f1f5210",
+    "binaries": {
+      "incant_editor": "f9a34352d6a2433dcb4d4b3d88493e9c62ab1803dcd3acd433e774bd5ea8b020",
+      "incant_headless": "4c4cb80869e6b2ceb6c26d70217b0571dbec495701dfe39eb9e4ce09f1c5ae3e"
+    },
+    "source_sha256": {
+      "tools/probes/native-editor-play.py": "a0914f96527ec033843ec39a737c67d3e0591a2df26173bb47e02da448f04d69",
+      "editor/app/src/play/probe.rs": "242b7c5a5a2a9be371c1d441d647ed922164da3e150bc6145659c2637d7751f4",
+      "editor/app/src/play/worker.rs": "124ecf452e04ea2f66b9f4ca355b6dcbc30ae59f680ebcf93b4b39ac402c8b40",
+      "editor/ui/src/play/input.ts": "045e374df91f2e424456960834ef78cfc1e5c223fa4c4f34f8fbd11ac2167da9",
+      "editor/ui/src/components/play/PlayControls.tsx": "9e6bc871b484b73e08d0eb46b1e6cbd16dc99a5fbeeb7110f7e6aa35d7837691"
+    },
+    "build_log_sha256": "55743bb48a3a0ae0efd81440969bc80fe0e8d7d8c834ec2de061a2ed372a54ae",
+    "purpose": "Actual numerical native Play probe; not pixel acceptance or live provider execution",
+    "manifest_note": "Initial manifest generation failed on an incorrect PlayControls source path after copying both binaries. Corrected path and verified both binaries against unchanged target outputs after successful probe; no rebuild or binary replacement."
+  },
+  "manifest_sha256": "89fe9f1ecdc4f347b37b64b58cbe9d4deb4844fed24e6ec7a28bccc1946eea8d",
+  "result": {
+    "passed": true,
+    "window": {
+      "limits": [
+        "Numerical native window proof on this host, not pixel review or physical-phone measurement",
+        "Device audio commands apply at callback boundaries, not sample-exact stepping"
+      ],
+      "minimized": {
+        "discardedTicks": 0,
+        "error": null,
+        "generation": 1,
+        "phase": "running",
+        "preparing": false,
+        "presentedFrames": 48,
+        "scene": "01M4PBCVM5QC7QPADDNFKZ1PSY",
+        "sequence": 54,
+        "sourceRevision": 1,
+        "spatial": true,
+        "suspended": true,
+        "tick": 7
+      },
+      "passed": true,
+      "paused": {
+        "discardedTicks": 0,
+        "error": null,
+        "generation": 1,
+        "phase": "paused",
+        "preparing": false,
+        "presentedFrames": 14,
+        "scene": "01M4PBCVM5QC7QPADDNFKZ1PSY",
+        "sequence": 18,
+        "sourceRevision": 1,
+        "spatial": true,
+        "suspended": true,
+        "tick": 5
+      },
+      "paused_entity": {
+        "entity": "00000000000000000000000002",
+        "generation": 1,
+        "parent": null,
+        "tick": 5,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            10.0,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "worldTransform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            10.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "platform": "macos",
+      "project_revision_history_unchanged": true,
+      "redraw": {
+        "discardedTicks": 0,
+        "error": null,
+        "generation": 1,
+        "phase": "paused",
+        "preparing": false,
+        "presentedFrames": 39,
+        "scene": "01M4PBCVM5QC7QPADDNFKZ1PSY",
+        "sequence": 43,
+        "sourceRevision": 1,
+        "spatial": true,
+        "suspended": false,
+        "tick": 5
+      },
+      "restarted_entity": {
+        "entity": "00000000000000000000000002",
+        "generation": 3,
+        "parent": null,
+        "tick": 2,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            4.0,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "worldTransform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            4.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "running": {
+        "discardedTicks": 0,
+        "error": null,
+        "generation": 1,
+        "phase": "running",
+        "preparing": false,
+        "presentedFrames": 13,
+        "scene": "01M4PBCVM5QC7QPADDNFKZ1PSY",
+        "sequence": 16,
+        "sourceRevision": 1,
+        "spatial": true,
+        "suspended": false,
+        "tick": 5
+      },
+      "stepped": {
+        "discardedTicks": 0,
+        "error": null,
+        "generation": 1,
+        "phase": "paused",
+        "preparing": false,
+        "presentedFrames": 42,
+        "scene": "01M4PBCVM5QC7QPADDNFKZ1PSY",
+        "sequence": 46,
+        "sourceRevision": 1,
+        "spatial": true,
+        "suspended": false,
+        "tick": 6
+      },
+      "stepped_entity": {
+        "entity": "00000000000000000000000002",
+        "generation": 1,
+        "parent": null,
+        "tick": 6,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            12.0,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "worldTransform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            12.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "authoring_sha256": {
+      "project.json": "b649fe8bfee363a44be56c9711bafc7bab068912a3e8706bf93d6394b9e9f5c6",
+      "project.journal.jsonl": "c1e3ce55b2ad5d241b09d805ae851811c73ab5d5b847cdc23f6f39fd3700a8f7",
+      "move.ts": "88d926e6c9a05c1cfe3e5c5387fdbcac21e8197036a216192726a6b7342902a2"
+    },
+    "editor_sha256": "f9a34352d6a2433dcb4d4b3d88493e9c62ab1803dcd3acd433e774bd5ea8b020",
+    "headless_sha256": "4c4cb80869e6b2ceb6c26d70217b0571dbec495701dfe39eb9e4ce09f1c5ae3e",
+    "authored_bytes_unchanged": true,
+    "fixture_authored_through_incant_cmd": true
+  },
+  "result_sha256": "c6f201ad990a9fc6937361f1de036bf412b5a626f41c25b942ce3034ce715617",
+  "independent_review": {
+    "reviewer": "/root/integrate_runtime_prs",
+    "verdict": "accepted; no actionable correctness finding",
+    "reviewed_at": "2026-10-11T20:45:20.030620+00:00",
+    "patch_sha256": "4122d9d02472fcfc7af312e57dff54159128c5ba91fd22329d780e180f1f5210",
+    "sources": {
+      "tools/probes/native-editor-play.py": "a0914f96527ec033843ec39a737c67d3e0591a2df26173bb47e02da448f04d69",
+      "editor/app/src/play/probe.rs": "242b7c5a5a2a9be371c1d441d647ed922164da3e150bc6145659c2637d7751f4"
+    },
+    "evidence": [
+      "Fixture attaches the script only to the mover; camera id matches the fixed StartOptions camera and is authored at origin.",
+      "Script filters world chunks by the current program instances before adding +2, retaining the exact mover single-step assertion.",
+      "Camera is inspected while paused at the same generation after one accepted step; whole translation must remain exact origin.",
+      "Existing pause/redraw/resume/minimize/stop/restart and authoring-byte preservation controls remain."
+    ],
+    "limits": "Source-only review; actual native numerical run pending root. No pixel, device or performance assessment; no production runtime semantics changed."
+  },
+  "independent_review_sha256": "6f7e13259d037dc9bed2d33fd9c6c31cd20112e63b46a566abe63fd4d5884178",
+  "command": "python3 tools/probes/native-editor-play.py /tmp/incant-native-play-instance-1 --editor /tmp/incant-native-instance-bin-v1/incant_editor --headless /tmp/incant-native-instance-bin-v1/incant_headless",
+  "exit_code": 0,
+  "check_log_sha256": "29ed0eed6bd365c7cf8b8ae5391bcdc2b242ad132dd5d37dedf6659a5e7c6a23",
+  "run_log_sha256": "7441ce8752fa852f74f5280c8e053b23062095c02ea73ff105f95dd06cd034e9",
+  "limits": [
+    "Actual native numerical lifecycle and attached-script/camera isolation, not rendered-pixel/WebView-interaction acceptance",
+    "No provider calls or live account gate; final budget/splitter UI not yet integrated",
+    "No phone/performance/phase gate"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "reviewer": "astra",
+  "recorded_at": "2026-10-11T23:29:45.466572+00:00",
+  "source_commit": "c5268ae05236e5836f04a6098ac0eef31ca6ad43",
+  "packet_sha256": "a2c4c8f012955da75d0935e62f05d8b701272ada4fce03b3fc13de56bda3a656",
+  "verified": {
+    "source": 18,
+    "pinned_sources": 7,
+    "logs": 12,
+    "prior_failures": 4,
+    "patch": 1,
+    "metal_receipt": 1,
+    "cooked_artifacts": 21,
+    "metal_compiled": 8
+  },
+  "findings": [],
+  "acceptance": "CPU source review accepted. Keep feature opt-in; actual default/cooked output comparison and diagnostic/shadow native numerical plus Claude review remain required before default enablement. No Vulkan/DX12 actual-driver or performance claim.",
+  "reviewed_contracts": [
+    "private embedded artifacts only; no project passthrough input",
+    "exact host vertex/camera/material layouts and pre-driver descriptors",
+    "Metal hal29 vertex pulling stream15/14 and per-stage sizes buffers",
+    "full DX12 material layout texture/sampler-index register contract",
+    "unchanged eight alpha/mirror/double-sided shadow variants",
+    "explicit diagnostic empty layout",
+    "shared output boundary preserves all six generated payloads"
+  ],
+  "test_results": {
+    "cooker": 10,
+    "renderer_cooked_cpu": 42,
+    "renderer_default_cpu": 36,
+    "gpu_ignored_per_renderer_run": 18,
+    "clippy": [
+      "default all-targets",
+      "cooked geometry all-targets + cooker"
+    ],
+    "wasm32": [
+      "default lib",
+      "cooked-geometry lib"
+    ],
+    "metal_compile_link_stages": 4,
+    "existing_output_payloads_unchanged": 6,
+    "runtime_dependency_guard": "passed: cooker build-only"
+  }
+}

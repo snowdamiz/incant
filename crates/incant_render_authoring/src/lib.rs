@@ -131,13 +131,30 @@ pub fn project_input(project: &Project, assets: Option<&AssetStore>) -> Result<S
             }
             let source = asset(project, assets, &binding.mesh, "model")
                 .ok_or_else(|| SceneError::MissingModel(binding.mesh.clone()))?;
+            let animation = components
+                .get("Animation")
+                .map(|value| {
+                    let animation: incant_types::Animation = serde_json::from_value(value.clone())?;
+                    animation.validate().map_err(SceneError::Input)?;
+                    Ok::<_, Box<dyn std::error::Error + Send + Sync>>(
+                        incant_types::AnimationSample {
+                            clip: animation.clip,
+                            seconds: animation.seconds,
+                        },
+                    )
+                })
+                .transpose()?;
             Some(MeshInput {
                 source,
                 cast_shadows: binding.cast_shadows,
+                animation,
             })
         } else {
             None
         };
+        if components.contains_key("Animation") && mesh.is_none() {
+            return Err(SceneError::Input("Animation requires a MeshRenderer").into());
+        }
         let diagnostic = sprite.is_none()
             && tilemap.is_none()
             && mesh.is_none()

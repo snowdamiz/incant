@@ -1,0 +1,52 @@
+# 0052 input and output hashes (sha256). Local paths: <worktree> = this handoff worktree, <checkout> = its parent checkout.
+
+## Packet inputs, verified before launch (2026-10-12T00:40Z) and the editor again by launch.sh at 00:50:44Z
+f0ae4171a425241095e707d00a7b241d5c161638cbf86bf5b672aaa4edb52f57  <worktree>/handoffs/0052-native-animation/build.json
+eba86ebe57c1ff904f8c36af4d121d0ab78f6e66fdfb19db168f6691c3cc799f  /tmp/incant-native-animation-0052-bin-v1/manifest.json
+4c1bf1f00e14fd5a2a539b08f2cead1787c2da2d4dbf6cbefd47090e6e0b39a1  /tmp/incant-native-animation-0052-bin-v1/incant_editor
+02075c09236323bb54273243b63bad1f1de4dde2a52506c93c843f80905d31cf  /tmp/incant-native-animation-0052-bin-v1/incant_headless
+069789bef712fa54c17ffab6a19415581f06bc18fb85ea7d84bc1449913056f2  /tmp/incant-animation-native-review-v2-manifest.json
+8067a1cd237b77f9b3e8553a930c4ea5f06812f1bd8e1b07d281677ce29142a3  /tmp/incant-shader-main109-gpu-release.json
+bytes: incant_editor 63137680, incant_headless 53022992 (both match build.json; headless verified, never launched)
+manifest source_commit edfc443763a6850fda58607b317c4638608e1f1d: all 934 source_sha256 entries match this worktree (HEAD f74379e); dist_sha256 entries are build outputs absent from the worktree
+
+## Play-time TypeScript cook inputs (engine path compiled into the editor resolves to <checkout>, clean at f74379e)
+543e3b8f9a20ac0d84f3466c9176dbd638a2f9c3dced367f48d6cb75a8f5849b  <checkout>/tools/build_native_script.mjs (equals the build manifest entry)
+cbea068b7d9182270271319a7a77d24805b9c9c66ed5e9eb3e188d60e5337c60  <checkout>/package-lock.json (equals the build manifest entry)
+node: ~/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node v24.19.0 (first in the editor's PATH; package.json engines node >=22)
+
+## Fixture /tmp/incant-animation-native-review-v2: before launch and after quit (full listings in fixture-before.json, fixture-after.json)
+3fda7055b13c2ab7778478af0b1870a039d39b7c8ec362b65f4ac8990fa35f0e .incant-source-transactions/01M4PRJ744SCPFWYPDQV12SX6F.old-receipt unchanged
+f16ead4a7fe2251d4c804d0598b8ac0ecab1f4977c29467c96115c16a77049a5 .incant-source-transactions/01M4PRJ744SCPFWYPDQV12SX6F.previous unchanged
+21ec06a9667627c7a210e3bf19c1c5f93c793d2bea592eeed79661976cd86690 .incant-source-transactions/01M4PRJ757CS7SJSX5SWTSQRWW.old-receipt unchanged
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 .incant-source-transactions/lock unchanged
+425cdfb08ed70e22331411ab5770ae2c7c38154e92b93b4fc8bcad08e1e65318 .incant-source-transactions/receipt unchanged
+e02aab0c14a6c2c6ef38561db241e97bb15d43d727318f76ecfcae4aa9cdbe4f .incant/cache/models/dd3cba5627cb4d1e028126f4f00f84b4f95712f835fc78fb7b866132278b2cf9.incmodel unchanged
+f16ead4a7fe2251d4c804d0598b8ac0ecab1f4977c29467c96115c16a77049a5 animation.ts unchanged
+d6fe598eab814557eade0c987cec84105fdae38f9d3e0544965ce11559a5a2af authoring-result.json unchanged
+f1ef98359a1a0d4a4407044ac83b44c5c822fb64607bda422a37b41679c5d2fe project.journal.jsonl unchanged
+5af5a8bbc625051091ee6f2ff008379bed01a3a6be71885ef50ab6cf30b35834 project.json unchanged
+2f712c8c77c452501530084781af183c7e176f46281ca7f1e8273a2b01c8c236 rig.bin unchanged
+7d86c22ec2b7efb9a6302eb5e39384fb02384cecc1c72989cdc442b3a00ce1b7 rig.gltf unchanged
+
+## Raw window captures (local, git-ignored: <worktree>/artifacts/0052/raw)
+3e7ed40bd66905091ad542a426f56c4de0b5ae85b7cf8994d2267c0f9587aa75  <worktree>/artifacts/0052/raw/01-authoring.png
+600840f588289a8966deaa91043af969038e0caa9d39e1665e5a40c86f576070  <worktree>/artifacts/0052/raw/02-paused.png
+51272e143ecbb1b4b966400ac01c39733ff213768c695cec0884161dc281afb1  <worktree>/artifacts/0052/raw/03-paused-later.png
+f37837db1ef096e96572d336a1ebcb3b73303ede785e67716ed1147b4c7ffd72  <worktree>/artifacts/0052/raw/04-stepped.png
+d56378e24c9f9d85aebfc497fe16f23768c4b2c6b1fa7e8caea489c71b45af59  <worktree>/artifacts/0052/raw/05-1000x650-paused.png
+9a1fb810a6a529b59abfa6e28c82323782f39b8b7247089177ef9b97eb454f07  <worktree>/artifacts/0052/raw/06-rotate-1440.png
+9fa412f8e3fe3a1414d02e6d1f06896bf1467ef2713fcbeca52581872a859249  <worktree>/artifacts/0052/raw/07-stopped.png
+f6913355bb45d29ad8783b006835fc4a5a6208713c6c930515c3e4b05580d552  <worktree>/artifacts/0052/raw/08-fresh-run.png
+
+## Committed images (avatar redacted in 01-08; 09-10 are crops of the committed images)
+cf79269df03b2b94b3157b821649d31076c85400332005786fad1f4cea8921e5  <worktree>/handoffs/0052-native-animation/screenshots/native/01-authoring-1440x875-rig-selected.png
+1aababdc7f944c2194cf624fb06eb06738f5157a1e4e112fbf64c0e177bb54b7  <worktree>/handoffs/0052-native-animation/screenshots/native/02-play-paused-tick39-1440x875.png
+c07a2b5ac6f184de35a8d2ad5431bd2c5df8c8459f5d2cee8ecaca8b2bb14598  <worktree>/handoffs/0052-native-animation/screenshots/native/03-paused-tick39-70s-later-1440x875.png
+ef850aa8c8d0aa110a95f172ee91b6ccde8d6c091bc6ca5aec7224041705df95  <worktree>/handoffs/0052-native-animation/screenshots/native/04-stepped-tick49-1440x875-step-focused.png
+617c85c0ae97f6eccb73322449aed112e24db278703c729d8a52cb75501661d2  <worktree>/handoffs/0052-native-animation/screenshots/native/05-resized-1000x650-paused-tick139.png
+8dab02f9769bc275d20f57b93623d741511a8b06ead6d2279e38fb57a65ba624  <worktree>/handoffs/0052-native-animation/screenshots/native/06-rotate-tick209-1440x874-after-resize.png
+7b7342931c8a63734c05f32e476c8016d25a590a8a7737d90158e3455d73be69  <worktree>/handoffs/0052-native-animation/screenshots/native/07-stopped-authored-pose-1440x874.png
+b43a72db927028bd1815a86d6ab05c2d9bfdbb991300926007f1dcbd32985b0e  <worktree>/handoffs/0052-native-animation/screenshots/native/08-fresh-run-tick209-1440x874.png
+517cb977134d42f725022be75c85d2e55c83e333e3b5262c4b223cd893a01738  <worktree>/handoffs/0052-native-animation/screenshots/native/09-crop-viewport-timeline.png
+1692a3cb748d81a693455fb73969d0725a4005624db43e13a090c6465b017f65  <worktree>/handoffs/0052-native-animation/screenshots/native/10-crop-animation-component-1440-and-1000.png

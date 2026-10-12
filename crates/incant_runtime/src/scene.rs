@@ -221,8 +221,13 @@ impl CookedScene {
     }
     fn spatial_bytes(&self) -> usize {
         usize::from(
-            !self.navigation.is_empty() || self.spatial.iter().any(|n| n.flipbook.is_some()),
+            !self.navigation.is_empty()
+                || self
+                    .spatial
+                    .iter()
+                    .any(|n| n.flipbook.is_some() || n.animation.is_some()),
         ) * 4
+            + usize::from(self.spatial.iter().any(|n| n.animation.is_some())) * 4
             + self.visual_assets.len() * crate::spatial_binary::ASSET_BYTES
             + self
                 .spatial
@@ -326,7 +331,7 @@ impl CookedScene {
     }
 
     fn localization_bytes(&self) -> usize {
-        if self.localization.is_default() {
+        if self.localization.is_default() && !self.spatial.iter().any(|n| n.animation.is_some()) {
             0
         } else {
             crate::localization_binary::size(&self.localization) + 8
