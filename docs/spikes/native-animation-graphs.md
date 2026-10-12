@@ -136,3 +136,6 @@ evidence digest precedes a packaging-only change: the source seam diff is now
 stored as gzip with its original uncompressed hash, preserving every reviewed
 byte while avoiding patch-context whitespace diagnostics. The final evidence
 digest is `c806075c0479228b77f37201ee91af661d59a3d2d85c38b359e3e22a88b04907`.
+
+The [final review receipt](evidence/native-animation-graphs-main130-root-review-final.json)
+binds that gzip-packaged evidence digest; the original receipt remains preserved.
