@@ -1,0 +1,28 @@
+{
+  "at": "2026-10-12T17:54:30.091247+00:00",
+  "reviewer": "astra",
+  "head": "de73103df4d11e317e5fb9d33119206348568cc8",
+  "base": "a37191ba9a982e8294d045b4ae5fb99b251e6b83",
+  "result": "accepted for scoped integration and hosted rerun; no cross-platform or phase acceptance",
+  "verified_logs": 24,
+  "negative_controls": 7,
+  "raw_and_committed_logs_verified": true,
+  "restored_mutation_source_hashes_verified": true,
+  "exhaustive_product_error": "128/255",
+  "review": [
+    "Source change confined to independent UI test model plus explanatory renderer comment; runtime/shader unchanged.",
+    "Fixed point bounds propagate source, alpha and destination multiplication separately and retain exact opaque/untouched pixels.",
+    "Old float-only model reproduces actual checkpoint 12 failure counts; seven intentional output/reference mutations fail and before/after baseline passes.",
+    "No blanket pixel tolerance increase; the supported arithmetic excludes truncating/coarser blends explicitly.",
+    "Hosted Linux/WARP still required. Keep 2x/1.5x UNORM extension as separate followup, not a release-blocking expansion."
+  ],
+  "checks": {
+    "ui": 14,
+    "render_cpu": 59,
+    "render_gpu_metal": 32
+  },
+  "limitations": [
+    "WARP arithmetic inferred from matching aggregate statistics, not pixel capture.",
+    "Metal checks cannot certify Linux or Windows."
+  ]
+}

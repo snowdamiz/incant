@@ -163,10 +163,14 @@
     "path": "docs/spikes/evidence/native-window-terminal-errors/source-review.json",
     "sha256": "70dcaff3dc13108c3a42c42c36aa637cdea3d8488e1ae9271f99ef60a7e2e68b"
   },
-  "integration": "Both accepted source files byte-identical d24f7c63; producer conflicts only STATUS. Reviewed lifecycle policy and whole event callback/teardown seams. All later main source preserved. Independent current-main closure pending.",
+  "integration": "Both accepted source files byte-identical d24f7c63; producer conflicts only STATUS. Reviewed lifecycle policy and whole event callback/teardown seams. All later main source preserved. Independent current-main closure accepted; no blocking findings.",
   "limitations": [
     "CPU unit/CLI tests and native-window compile only; no native window, GPU, capture or device execution.",
     "Preserves original typed error; does not diagnose the historical excluded heap-instrumented failure or change audio-overload behavior.",
     "Source review and lifecycle tests do not establish new native IME or appearance acceptance."
-  ]
+  ],
+  "final_review": {
+    "path": "docs/spikes/evidence/native-window-terminal-errors-main153/root-final-review.json",
+    "sha256": "081f7c324bdbe3b7831f34249b13f962621800d2c104b30f67ad9f3a9f58144d"
+  }
 }

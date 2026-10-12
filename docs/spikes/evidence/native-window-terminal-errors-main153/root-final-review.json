@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-12T17:46:05.818684+00:00",
+  "decision": "accepted scoped current-main native window terminal-error repair",
+  "head": "98190c858417de4577a8347d9dd59e67587bc070",
+  "manifest_sha256": "b20d28b3562813a859be815b92bfe810aecb81d7944aecb774a501f367e5c4e1",
+  "source_files_exact_producer": 2,
+  "frozen_inputs": 1728,
+  "artifacts_verified": 9,
+  "checks_zero_exit": 6,
+  "tests": {
+    "passed": 57,
+    "failed": 0,
+    "ignored": 0,
+    "groups": 3
+  },
+  "post_test_delta": "Only documented STATUS/evidence changes; both actual production Git blobs match accepted producer.",
+  "limits": [
+    "CPU unit/CLI tests and native-window compile only; no native window, GPU, capture or device execution.",
+    "Preserves original typed error; does not diagnose the historical excluded heap-instrumented failure or change audio-overload behavior.",
+    "Source review and lifecycle tests do not establish new native IME or appearance acceptance."
+  ],
+  "blocking_findings": []
+}

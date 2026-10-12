@@ -18,3 +18,5 @@ pin the two sources, six commands, raw/compressed logs and full frozen inventory
 No window, GPU, capture, provider or device execution occurred in this integration.
 This does not diagnose the historical excluded heap-instrumented failure, change
 audio policy or establish new live IME/appearance acceptance.
+
+[Independent current-main review](evidence/native-window-terminal-errors-main153/root-final-review.json) accepted the frozen sources, checks and evidence without findings.

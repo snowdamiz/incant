@@ -1,0 +1,260 @@
+{
+  "at": "2026-10-12T18:00:22.006973+00:00",
+  "scope": "Independent fixed-point UNORM blend test reference on current main154",
+  "main": "edb1508789cf984746bc69a57079c8e1152d7b2c",
+  "tested_head": "75cd55596f94b71e686d0409309d6fa8e1474af5",
+  "all_frozen_inputs_unchanged": true,
+  "source_count": 1728,
+  "accepted_sources": {
+    "crates/incant_render/src/ui/mod.rs": "fd6e4a2f4cd36d13d66ea0ab2c183b6144672242031c646a1c1881b13be11824",
+    "crates/incant_render/src/ui_draw_tests.rs": "ca4f9afb2449e66792ae089fc5cff5870d156b7fdabca8db809ca6b568b508b2"
+  },
+  "accepted_packet_files_exact": 40,
+  "checks": [
+    {
+      "name": "tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--all-targets"
+      ],
+      "exit": 0,
+      "seconds": 161.95116575000065,
+      "sha256": "7a7f6d2270771122a0df13d9eaccd9df18a7a392e10a18298c39ed7069de344c"
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 33.32649220799976,
+      "sha256": "59d238d82d55bb2ce8c1376094cb9c462bb0a848623ff4ca487786000ede2f96"
+    },
+    {
+      "name": "wasm",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "exit": 0,
+      "seconds": 3.34504008300064,
+      "sha256": "0c609e69371f6feb5783e0eb97809a096e459f93c9dc256e1f96d995d8b30615"
+    },
+    {
+      "name": "graph",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_render"
+      ],
+      "exit": 0,
+      "seconds": 0.6712818340001832,
+      "sha256": "0e939375a2ee0c02747eab24f6ed306a2a719db840a27bf58fcca0b8c38973cd"
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 1.663236667000092,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.0606120419997751,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.039860167000369984,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "test_counts": {
+    "passed": 64,
+    "failed": 0,
+    "ignored": 82,
+    "groups": 4
+  },
+  "artifacts": {
+    "docs/spikes/evidence/native-ui-unorm-main154/freeze.json": {
+      "sha256": "3450cc85ce84056d5d6be07ea47b3fd780628bc64564ccfa1678c8968a14eddc",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/ui-unorm-main154-001/freeze.json",
+      "uncompressed_sha256": "3450cc85ce84056d5d6be07ea47b3fd780628bc64564ccfa1678c8968a14eddc"
+    },
+    "docs/spikes/evidence/native-ui-unorm-main154/results.json": {
+      "sha256": "046f32e0912aad93e28d5ea16b63b569e37bc757168834f9fc9ebe152a49a613",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/ui-unorm-main154-001/results.json",
+      "uncompressed_sha256": "046f32e0912aad93e28d5ea16b63b569e37bc757168834f9fc9ebe152a49a613"
+    },
+    "docs/spikes/evidence/native-ui-unorm-main154/accepted-source-comparison.json": {
+      "sha256": "a0c642e5aa2ff4b3be099f9cb08907c5fd2cf9302debef6eb54f17eda13d1740",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/ui-unorm-main154-001/accepted-source-comparison.json",
+      "uncompressed_sha256": "a0c642e5aa2ff4b3be099f9cb08907c5fd2cf9302debef6eb54f17eda13d1740"
+    },
+    "docs/spikes/evidence/native-ui-unorm-main154/tests.log.gz": {
+      "sha256": "9989008409f999b286157d70f09340f763494a1afe345e1dd094680d6a8ce427",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/ui-unorm-main154-001/tests.log",
+      "uncompressed_sha256": "7a7f6d2270771122a0df13d9eaccd9df18a7a392e10a18298c39ed7069de344c"
+    },
+    "docs/spikes/evidence/native-ui-unorm-main154/clippy.log.gz": {
+      "sha256": "4731b2b46a7a86b1e06b7ae6acb49eb6b4f81172862d64331e10de9199af4ebb",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/ui-unorm-main154-001/clippy.log",
+      "uncompressed_sha256": "59d238d82d55bb2ce8c1376094cb9c462bb0a848623ff4ca487786000ede2f96"
+    },
+    "docs/spikes/evidence/native-ui-unorm-main154/wasm.log.gz": {
+      "sha256": "45297b3fb74a238fd2bc99459213186275f6ec08e0e1306a3fb29dc0e6ddbd05",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/ui-unorm-main154-001/wasm.log",
+      "uncompressed_sha256": "0c609e69371f6feb5783e0eb97809a096e459f93c9dc256e1f96d995d8b30615"
+    },
+    "docs/spikes/evidence/native-ui-unorm-main154/graph.log.gz": {
+      "sha256": "71a3be3cb8e79325860da89dd71212b740e96b62701ba382f0d9995ad0d42848",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/ui-unorm-main154-001/graph.log",
+      "uncompressed_sha256": "0e939375a2ee0c02747eab24f6ed306a2a719db840a27bf58fcca0b8c38973cd"
+    },
+    "docs/spikes/evidence/native-ui-unorm-main154/fmt.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/ui-unorm-main154-001/fmt.log",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/native-ui-unorm-main154/conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/ui-unorm-main154-001/conventions.log",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/native-ui-unorm-main154/diff.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/ui-unorm-main154-001/diff.log",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/native-ui-unorm-main154/workflow.patch.gz": {
+      "sha256": "8bf2af94313b428aa823ea7b8b6f2b29e20aba9ea3c876531843bffe1716da2a",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/ui-unorm-main154-001/workflow.patch",
+      "uncompressed_sha256": "cbf48041f6ab4f07d61c58740243f89dd028f925397ef2c2faf215cd3b059305"
+    },
+    "docs/spikes/evidence/native-ui-unorm-main154/workflow-checks.json": {
+      "sha256": "9bc4e4f4027605d350c588bd3c9402872c33654faa346bd909360c9dbd2c0303",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/ui-unorm-main154-001/workflow-checks.json",
+      "uncompressed_sha256": "9bc4e4f4027605d350c588bd3c9402872c33654faa346bd909360c9dbd2c0303"
+    },
+    "docs/spikes/evidence/native-ui-unorm-main154/actionlint.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/ui-unorm-main154-001/actionlint.log",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/native-ui-unorm-main154/release-policy.log.gz": {
+      "sha256": "90e727e928243a1723e744429b9245fdde0ede43f374964fa0e2184485fbb2c7",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/ui-unorm-main154-001/release-policy.log",
+      "uncompressed_sha256": "c6b9b1f09add0403cc07e90bfdf272129b1ddfa2f8f7675ea8218862f2516371"
+    },
+    "docs/spikes/evidence/native-ui-unorm-main154/windows-conformance-timeout.log.gz": {
+      "sha256": "14bfc597d2d30fed845f1de677b8b1148558a7ad8d1ba7ed0f628ff1f87ee7ca",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint12/windows-conformance-failure.log",
+      "uncompressed_sha256": "46fbb1cf36495333422fa9902a263f993a342521ac1723f343984eaf94339513"
+    },
+    "docs/spikes/evidence/native-ui-unorm-main154/windows-conformance-job.json": {
+      "sha256": "c4339abc32a0675e16e48e656e4295fecb7709c4180cd915e1003aa380277a24",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint12/windows-conformance-job.json",
+      "uncompressed_sha256": "c4339abc32a0675e16e48e656e4295fecb7709c4180cd915e1003aa380277a24"
+    },
+    "docs/spikes/evidence/native-ui-unorm-main154/windows-conformance-annotations.json": {
+      "sha256": "97fba03f5df65e15128ae139223a20d4ef8f3b8eae18cc4c525f5dde65834b7f",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint12/windows-conformance-annotations.json",
+      "uncompressed_sha256": "97fba03f5df65e15128ae139223a20d4ef8f3b8eae18cc4c525f5dde65834b7f"
+    },
+    "docs/spikes/evidence/native-ui-unorm-main154/actionlint-tool.json": {
+      "sha256": "ba7fe12472e61e5ce1eee605e9769d0f5d75060439ed59bb1ff97a8c04ba9377",
+      "source": "/Users/andreyyurlov/.codex/incant-tools/actionlint-1.7.12/verified.json",
+      "uncompressed_sha256": "ba7fe12472e61e5ce1eee605e9769d0f5d75060439ed59bb1ff97a8c04ba9377"
+    }
+  },
+  "producer_review": {
+    "path": "docs/spikes/evidence/claude-0059-unorm-final-review.json",
+    "sha256": "d7db13b4e292ecc71c668c05f6408d47684d23668a96e1c174301a6d24013713"
+  },
+  "integration": "Both source files and all 40 accepted changed packet files are exact de73103d. Directory-rename heuristic was corrected to retain original handoffs paths and bytes. Original Linux and Windows checkpoint12 failures and parent brief retained. No shader or runtime behavior changes. Independent current-main closure pending.",
+  "limitations": [
+    "No GPU, native window, capture or device execution in this integration; ignored GPU tests are not passing gates.",
+    "Claude original Metal checks and seven caught mutations retain their exact producer scope. Emulated WARP arithmetic is inferred from aggregate statistics, not Windows pixel capture.",
+    "Actual hosted Linux and WARP checks and all 23 required release contexts still required before promotion.",
+    "Truncating/coarser blend arithmetic and expanded UNORM scale coverage remain separate work."
+  ],
+  "workflow_correction": {
+    "source": ".github/workflows/development-wasm.yml",
+    "sha256": "4fd16ed414730d81b4a59884be881d0859aaebb084660a1773587d612b3714b9",
+    "patch_sha256": "cbf48041f6ab4f07d61c58740243f89dd028f925397ef2c2faf215cd3b059305",
+    "reason": "GitHub annotation explicitly reports maximum execution time40m0s. Prior dual-host16m10s and optimized MSVC22m38s stages succeeded, leaving no shipping window. Windows timeout90min; macOS/Linux40min unchanged. No event/job/context/check removed or added.",
+    "checks": [
+      {
+        "name": "actionlint",
+        "command": [
+          "/Users/andreyyurlov/.codex/incant-tools/actionlint-1.7.12/actionlint",
+          ".github/workflows/development-wasm.yml"
+        ],
+        "exit": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "release-policy",
+        "command": [
+          "python3",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tools/tests",
+          "-p",
+          "test_release_policy.py"
+        ],
+        "exit": 0,
+        "sha256": "c6b9b1f09add0403cc07e90bfdf272129b1ddfa2f8f7675ea8218862f2516371"
+      }
+    ],
+    "policy_tests": 6,
+    "after_frozen_renderer_checks": true
+  }
+}
