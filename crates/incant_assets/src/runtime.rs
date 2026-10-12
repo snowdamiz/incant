@@ -162,6 +162,7 @@ fn category(asset: &Asset) -> crate::Result<CacheKind> {
         "model" => Ok(CacheKind::Models),
         "texture" => Ok(CacheKind::Textures),
         "audio" => Ok(CacheKind::Audio),
+        "font" => Ok(CacheKind::Fonts),
         kind => Err(AssetError::Unsupported(format!(
             "runtime asset kind {kind}"
         ))),
@@ -188,6 +189,7 @@ fn load(asset: &Asset, generation: u64, cache: &Path) -> crate::Result<RuntimeAs
             RuntimeAsset::load_texture(&asset.id, generation, cache, &asset.sha256, usage(asset))
         }
         "audio" => RuntimeAsset::load_audio(&asset.id, generation, cache, &asset.sha256),
+        "font" => RuntimeAsset::load_font(&asset.id, generation, cache, &asset.sha256),
         kind => {
             return Err(AssetError::Unsupported(format!(
                 "runtime asset kind {kind}"

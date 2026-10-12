@@ -71,6 +71,7 @@ fn cook_imported(imported: ImportedModel, cache: &Path) -> Result<CookedModel> {
     crate::material::resolve(&metadata.materials, &metadata.textures, &imported.images)?;
     if let Ok(mut model) = load_model(cache, &metadata.fingerprint)
         && model.metadata == metadata
+        && model.animation == imported.animation
     {
         model.cache_hit = true;
         return Ok(model);
@@ -79,12 +80,21 @@ fn cook_imported(imported: ImportedModel, cache: &Path) -> Result<CookedModel> {
     if json.len() > 8 * 1024 * 1024 {
         return Err(AssetError::Limit("model metadata"));
     }
-    let mut bytes = b"INCMOD03".to_vec();
+    let mut bytes = if imported.animation.is_some() {
+        b"INCMOD04"
+    } else {
+        b"INCMOD03"
+    }
+    .to_vec();
     bytes.extend_from_slice(&(json.len() as u32).to_le_bytes());
     bytes.extend(json);
     bytes.extend_from_slice(&(imported.meshes.len() as u32).to_le_bytes());
     for mesh in &imported.meshes {
-        let cooked = cook_mesh(mesh)?;
+        let cooked = if imported.animation.is_some() {
+            crate::mesh::cook_mesh_ordered(mesh)?
+        } else {
+            cook_mesh(mesh)?
+        };
         bytes.extend_from_slice(&(cooked.len() as u32).to_le_bytes());
         bytes.extend(cooked);
         if bytes.len() > MAX_SOURCE_BYTES - 32 {
@@ -99,6 +109,18 @@ fn cook_imported(imported: ImportedModel, cache: &Path) -> Result<CookedModel> {
         if bytes.len() > MAX_SOURCE_BYTES - 32 {
             return Err(AssetError::Limit("cooked model bytes"));
         }
+    }
+    if let Some(animation) = &imported.animation {
+        let encoded = crate::animation_cook::encode(animation)?;
+        if bytes
+            .len()
+            .checked_add(4 + encoded.len())
+            .is_none_or(|n| n > MAX_SOURCE_BYTES - 32)
+        {
+            return Err(AssetError::Limit("cooked model bytes"));
+        }
+        bytes.extend_from_slice(&(encoded.len() as u32).to_le_bytes());
+        bytes.extend(encoded);
     }
     let digest = Sha256::digest(&bytes);
     bytes.extend_from_slice(&digest);
