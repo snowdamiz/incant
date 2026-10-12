@@ -1,0 +1,272 @@
+{
+  "at": "2026-10-12T17:56:49.767753+00:00",
+  "scope": "Seven actual native development processes; numerical collider room only; shipping and presentation pending",
+  "source": {
+    "gameplay.ts": "58d7007de2cb942de4bf4c254b4d514deb07df15a88cb1b057cac30fbca393a5",
+    "tsconfig.json": "869922e94ccde7a4c5d023dcc15dc661034031b34d42cbfaa41a4a354abc625b",
+    "verify.py": "a2351e2ce97667b59449ec2e28b1633562c006559e1305b2c4d1305fe3a04788"
+  },
+  "runs_sha256": "0b763396ec94ba76cf15eac5f80302aee16964b52ff1d079cfc9b0ac39294cf1",
+  "binary_sha256": "21837be0bb66ec6341b908e98c47a7a92e088e0b2f048bb5b34058e932f8d92b",
+  "authoring_undo_redo_reopen": true,
+  "authoring_unchanged": true,
+  "passed": true,
+  "runs": {
+    "win": {
+      "ticks": 300,
+      "checks": 9,
+      "entity_count": 8,
+      "events": [
+        {
+          "level": "info",
+          "message": "core.route 00000000000000000000000010 corners=3",
+          "tick": 1
+        },
+        {
+          "level": "info",
+          "message": "core.route 00000000000000000000000011 corners=3",
+          "tick": 2
+        },
+        {
+          "level": "info",
+          "message": "core.pickup 00000000000000000000000012 1/2",
+          "tick": 50
+        },
+        {
+          "level": "info",
+          "message": "core.damage health=2",
+          "tick": 126
+        },
+        {
+          "level": "info",
+          "message": "core.pickup 00000000000000000000000013 2/2",
+          "tick": 130
+        },
+        {
+          "level": "info",
+          "message": "core.won tick=165 health=2 pickups=2",
+          "tick": 165
+        }
+      ]
+    },
+    "gamepad": {
+      "ticks": 300,
+      "checks": 9,
+      "entity_count": 8,
+      "events": [
+        {
+          "level": "info",
+          "message": "core.route 00000000000000000000000010 corners=3",
+          "tick": 1
+        },
+        {
+          "level": "info",
+          "message": "core.route 00000000000000000000000011 corners=3",
+          "tick": 2
+        },
+        {
+          "level": "info",
+          "message": "core.pickup 00000000000000000000000012 1/2",
+          "tick": 50
+        },
+        {
+          "level": "info",
+          "message": "core.damage health=2",
+          "tick": 126
+        },
+        {
+          "level": "info",
+          "message": "core.pickup 00000000000000000000000013 2/2",
+          "tick": 130
+        },
+        {
+          "level": "info",
+          "message": "core.won tick=165 health=2 pickups=2",
+          "tick": 165
+        }
+      ]
+    },
+    "jump": {
+      "ticks": 300,
+      "checks": 10,
+      "entity_count": 8,
+      "events": [
+        {
+          "level": "info",
+          "message": "core.route 00000000000000000000000010 corners=3",
+          "tick": 1
+        },
+        {
+          "level": "info",
+          "message": "core.route 00000000000000000000000011 corners=3",
+          "tick": 2
+        },
+        {
+          "level": "info",
+          "message": "core.jump 1",
+          "tick": 5
+        },
+        {
+          "level": "info",
+          "message": "core.pickup 00000000000000000000000012 1/2",
+          "tick": 53
+        },
+        {
+          "level": "info",
+          "message": "core.pickup 00000000000000000000000013 2/2",
+          "tick": 130
+        },
+        {
+          "level": "info",
+          "message": "core.damage health=2",
+          "tick": 134
+        },
+        {
+          "level": "info",
+          "message": "core.won tick=174 health=2 pickups=2",
+          "tick": 174
+        }
+      ]
+    },
+    "lose": {
+      "ticks": 900,
+      "checks": 9,
+      "entity_count": 10,
+      "events": [
+        {
+          "level": "info",
+          "message": "core.route 00000000000000000000000010 corners=3",
+          "tick": 1
+        },
+        {
+          "level": "info",
+          "message": "core.route 00000000000000000000000011 corners=3",
+          "tick": 2
+        },
+        {
+          "level": "info",
+          "message": "core.damage health=2",
+          "tick": 322
+        },
+        {
+          "level": "info",
+          "message": "core.damage health=1",
+          "tick": 367
+        },
+        {
+          "level": "info",
+          "message": "core.damage health=0",
+          "tick": 412
+        },
+        {
+          "level": "info",
+          "message": "core.lost tick=412",
+          "tick": 412
+        }
+      ]
+    },
+    "repeat-win": {
+      "ticks": 300,
+      "checks": 9,
+      "entity_count": 8,
+      "events": [
+        {
+          "level": "info",
+          "message": "core.route 00000000000000000000000010 corners=3",
+          "tick": 1
+        },
+        {
+          "level": "info",
+          "message": "core.route 00000000000000000000000011 corners=3",
+          "tick": 2
+        },
+        {
+          "level": "info",
+          "message": "core.pickup 00000000000000000000000012 1/2",
+          "tick": 50
+        },
+        {
+          "level": "info",
+          "message": "core.damage health=2",
+          "tick": 126
+        },
+        {
+          "level": "info",
+          "message": "core.pickup 00000000000000000000000013 2/2",
+          "tick": 130
+        },
+        {
+          "level": "info",
+          "message": "core.won tick=165 health=2 pickups=2",
+          "tick": 165
+        }
+      ]
+    },
+    "skip-pickup": {
+      "ticks": 300,
+      "checks": 3,
+      "entity_count": 9,
+      "events": [
+        {
+          "level": "info",
+          "message": "core.route 00000000000000000000000010 corners=3",
+          "tick": 1
+        },
+        {
+          "level": "info",
+          "message": "core.route 00000000000000000000000011 corners=3",
+          "tick": 2
+        },
+        {
+          "level": "info",
+          "message": "core.jump 1",
+          "tick": 35
+        },
+        {
+          "level": "info",
+          "message": "core.pickup 00000000000000000000000013 1/2",
+          "tick": 130
+        },
+        {
+          "level": "info",
+          "message": "core.damage health=2",
+          "tick": 134
+        }
+      ]
+    },
+    "wall": {
+      "ticks": 210,
+      "checks": 3,
+      "entity_count": 9,
+      "events": [
+        {
+          "level": "info",
+          "message": "core.route 00000000000000000000000010 corners=3",
+          "tick": 1
+        },
+        {
+          "level": "info",
+          "message": "core.route 00000000000000000000000011 corners=3",
+          "tick": 2
+        },
+        {
+          "level": "info",
+          "message": "core.pickup 00000000000000000000000012 1/2",
+          "tick": 50
+        }
+      ]
+    }
+  },
+  "earlier_failures": [
+    "run002 attempted jump collected first pickup; scenario invalid, actual gameplay correct.",
+    "run003 detour collided with enemies and lost before reaching exit; scenario invalid.",
+    "run004 uses authored jumpSpeed8 and earlier jump to clear first sensor; both missing-pickup and wall scenarios pass."
+  ],
+  "not_claimed": [
+    "cooked source-free shipping execution",
+    "finished Core Sample terrain/art/UI/music",
+    "real device performance",
+    "physics save continuation",
+    "phase gate"
+  ]
+}
