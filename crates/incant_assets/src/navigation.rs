@@ -33,6 +33,9 @@ impl AssetStore {
 pub fn model_navigation_geometry(
     model: &CookedModel,
 ) -> Result<NavigationGeometry, NavigationError> {
+    if model.animation.is_some() {
+        return Err(invalid("animated navigation geometry is not implemented"));
+    }
     let roots = model
         .metadata
         .scenes

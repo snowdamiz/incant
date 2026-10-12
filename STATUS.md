@@ -23,7 +23,12 @@ Unicode bidi and wrapping, absolute UTF-8 clusters and reusable immutable glyph
 geometry. Fifteen numerical tests, all-target Clippy, independent font-ingress
 review and standalone wasm compilation pass. The review's malformed-face panic,
 metadata priority and name-allocation amplification findings are fixed. Runtime
-fonts never come from host discovery. Font cooking/atlases, actual drawing,
+fonts never come from host discovery. Project font import/cooking now retains
+stable asset IDs through reimport/Undo and supplies bounded checked cooked bytes
+to the shaper after original source deletion. The optional runtime reader keeps
+the default audio-only dependency graph unchanged; 124 affected CPU tests and
+scoped Clippy/compile checks pass. [Font asset evidence](docs/spikes/packaged-font-assets.md).
+Font atlases, actual drawing,
 widgets/IME, broader script coverage and device gates remain; this does not
 complete game UI. [Evidence](docs/spikes/native-game-text.md).
 
@@ -491,3 +496,15 @@ compiler-disabled/static and dependency checks. Static checkpoints remain refuse
 Packaged-font text integration against actual main105 passes all 15 actual-font
 tests, Clippy, standalone wasm32 and runtime dependency checks, preserving all
 935 prior lock records. [Integrated evidence](docs/spikes/evidence/native-game-text-main105.json).
+## Cooked skeletal-animation foundation
+
+The bounded glTF skin/TRS import, INCMOD04 cooked reader and retained CPU sampler
+are implemented with reviewed clip-only root validation; see
+[scope and evidence](docs/spikes/gltf-skeletal-animation.md). Static03 compatibility
+is preserved. Current static asset/render/navigation consumers explicitly refuse
+animated models. Native scene/GPU/SDK playback, blend/state/IK/root-motion and
+rendered acceptance remain outstanding; this does not complete Phase 1 animation.
+
+Skeletal foundation main106 union passes 90 integrated CPU tests, Clippy, audio-only/wasm32 compilation and dependency checks, with reviewed source unchanged. [Integration evidence](docs/spikes/evidence/gltf-skeletal-main106.json).
+
+Packaged-font backend/CLI import main107 integration passes affected CPU tests, Clippy, font/default-reader, wasm32 and consumer checks while preserving skeletal registration. Editor font import form and rendering remain unfinished. [Evidence](docs/spikes/evidence/packaged-font-assets-main107.json).

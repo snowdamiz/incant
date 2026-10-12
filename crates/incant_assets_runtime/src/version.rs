@@ -25,6 +25,8 @@ pub enum RuntimeAssetData {
     Model(CookedModel),
     Texture(CookedTexture),
     Audio(Arc<CookedAudio>),
+    #[cfg(feature = "font")]
+    Font(crate::CookedFont),
 }
 impl RuntimeAssetData {
     /// Decoded vertex/index/mip payload, excluding Rust metadata and allocator
@@ -53,6 +55,8 @@ impl RuntimeAssetData {
                 .map(crate::Texture::payload_bytes)
                 .sum(),
             Self::Audio(audio) => audio.resident_bytes(),
+            #[cfg(feature = "font")]
+            Self::Font(font) => font.bytes().len(),
         }
     }
 
@@ -71,6 +75,8 @@ impl RuntimeAssetData {
                 std::iter::once(&texture.texture).chain(texture.color_unweighted.as_ref()),
             ),
             Self::Audio(audio) => audio.resident_bytes(),
+            #[cfg(feature = "font")]
+            Self::Font(font) => font.bytes().len(),
         }
     }
 }
@@ -125,6 +131,8 @@ impl RuntimeAsset {
             RuntimeAssetData::Model(_) => ("model", None),
             RuntimeAssetData::Texture(texture) => ("texture", Some(texture.metadata.usage)),
             RuntimeAssetData::Audio(_) => ("audio", None),
+            #[cfg(feature = "font")]
+            RuntimeAssetData::Font(_) => ("font", None),
         };
         let version = NEXT_VERSION
             .try_update(Ordering::Relaxed, Ordering::Relaxed, |v| v.checked_add(1))
@@ -151,12 +159,13 @@ impl RuntimeAsset {
     }
     pub fn load_model(id: &str, generation: u64, cache: &Path, fingerprint: &str) -> Result<Self> {
         Self::check_id(id)?;
-        Self::create(
-            id,
-            generation,
-            fingerprint,
-            RuntimeAssetData::Model(crate::load_model(cache, fingerprint)?),
-        )
+        let model = crate::load_model(cache, fingerprint)?;
+        if model.animation.is_some() {
+            return Err(crate::AssetError::Unsupported(
+                "animated model rendering is not implemented; use the CPU AnimationPlayer".into(),
+            ));
+        }
+        Self::create(id, generation, fingerprint, RuntimeAssetData::Model(model))
     }
     pub fn load_texture(
         id: &str,
@@ -184,6 +193,16 @@ impl RuntimeAsset {
             generation,
             fingerprint,
             RuntimeAssetData::Audio(Arc::new(crate::load_audio(cache, fingerprint)?)),
+        )
+    }
+    #[cfg(feature = "font")]
+    pub fn load_font(id: &str, generation: u64, cache: &Path, fingerprint: &str) -> Result<Self> {
+        Self::check_id(id)?;
+        Self::create(
+            id,
+            generation,
+            fingerprint,
+            RuntimeAssetData::Font(crate::load_font(cache, fingerprint)?),
         )
     }
     /// Startup-only adapter from a binary package declaration. The caller retains
