@@ -62,3 +62,30 @@ scripting suites check older formats and the shared transaction paths.
 
 These are local CPU tests. No rendered appearance, graphics/device benchmark,
 IME, phone, frame-pacing or whole-phase completion is claimed.
+
+## Combined actual-main122 integration
+
+The original core, retained consumer and SDK commits are preserved in one current-
+main union. Production sources merge without conflicts. The integrated checks
+pass 367 ordinary CPU tests (71 GPU cases ignored) and 313 actual Wasmtime/compiled
+wasm2c tests in 54 groups, with all-target Clippy, wasm32, generated contracts,
+tooling, strict SDK types, formatting and dependency guards. These test scopes
+overlap; their counts are not summed as distinct tests.
+
+The current-lock public QuickJS export is rebuilt once with the reviewed probe.
+After removing authoring/private build inputs and the proof-owned external debug
+source map, seven successful player processes cover three identical 100-tick
+replays and active/paused world-save-v5 continuations. Two failures withhold both
+PCM and save output. All 62 clock/snapshot checks, final save bytes, accepted logs
+and PCM continuations pass. [The integration receipt](evidence/native-crossfade-main122.json)
+retains exact sources, independent reviews, logs and shipping-player identity.
+
+The original proof's external debug-map limitation remains in its historical
+receipt. The text export probe receives the same narrow map-removal correction,
+with separately reviewed same-player replay evidence. No production behavior or
+phase gate is inferred from those tooling corrections. Crossfade GPU appearance,
+public Wasm project export, full static VM checkpoints, blend graphs/state machines,
+IK/root motion and device/performance acceptance remain open.
+
+The [final independent integration review](evidence/native-crossfade-main122-root-review.json)
+accepted the frozen source and exact current-lock process receipts without findings.

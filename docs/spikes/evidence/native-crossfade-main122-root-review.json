@@ -1,0 +1,26 @@
+{
+  "reviewer": "astra /root",
+  "recorded_at": "2026-10-12T03:30:11.663181+00:00",
+  "accepted": true,
+  "packet_sha256": "96eb5d817c0ad31d1ac1ec96d8971ce5c1765bb7400b2cfa31a9b4949cc557c0",
+  "scope": "Final crossfade current-main CPU/SDK union and strengthened source-deleted public export",
+  "source": "1d43531cfd0e1a50a8627a0dc01f51c357941057",
+  "findings": [],
+  "verified": [
+    "1114 frozen source hashes",
+    "21 retained check logs and4 independent component reviews",
+    "44 proof receipts,7 package files andall7 successful report/PCM outputs",
+    "Three identical100tick runs; active/pausedv5 continuations return baseline final save",
+    "Source maps absent in actual new package; authoring/build removal recorded",
+    "Negative runs withheld PCM; expected reasons retained"
+  ],
+  "limits": [
+    "Local CPU render input and SDK observations, not deformed-vertex readback/GPU/window/appearance/device/performance acceptance",
+    "Public Wasm project selection/export remains unsupported; this is not static wasm2c shipping evidence",
+    "Existing combined SDK tests cover Wasmtime/static wasm2c separately; full static module-state checkpoints remain Unsupported",
+    "Ordinary checkpoints retain explicit script state; ephemeral VM globals/closures are not persisted",
+    "No phase gate or full blend graph/state machine/IK/root-motion claim",
+    "No new crossfade numerical GPU or Claude appearance gate; static-module session saves remain unsupported",
+    "Full release checkpoint8 is separately frozen to main117; current main feature checks do not promote it"
+  ]
+}

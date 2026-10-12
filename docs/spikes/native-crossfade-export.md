@@ -68,3 +68,14 @@ with it has not yet run and remains part of publisher integration validation.
 
 No window, graphics, appearance, device/performance, full animation graph/state
 machine/IK/root motion or phase-gate acceptance is claimed.
+
+## Current-lock integration repeat
+
+The main122 union runs the strengthened probe on a new actual shipping export.
+It removes the recorded external debug map before all nine subsequent player
+processes; seven successes and two output-withholding refusals pass. Three full
+100-tick runs match, and both active and paused v5 continuation match final save,
+logs and PCM exactly. [Integrated receipt](evidence/native-crossfade-main122.json)
+and [process report](evidence/native-crossfade-main122-process.json) retain the
+current executable, source, lock, compiler/codegen and package identities. The
+original001 evidence remains unchanged with its explicit sidecar limitation.
