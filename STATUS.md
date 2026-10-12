@@ -709,3 +709,30 @@ against the retained native clock. Actual QuickJS/NativeSession, multi-instance
 TypeScript cook, rollback and memory-bound tests pass; see
 [scope and evidence](docs/spikes/native-animation-script.md). Wasm control parity,
 rendered acceptance and the remaining animation systems are still outstanding.
+
+
+## Native Wasm skeletal playback — locally verified
+
+`incant_animation_v1` and the public no_std Rust SDK now copy native animation
+snapshots and queue select/seek/play/loop/speed controls in the ordinary atomic
+runtime transaction. Actual Wasmtime and compiled wasm2c guests agree on playback
+and reject mixed numeric/entity/animation/log prefixes on failure. The combined
+281-test suite, scoped Clippy, default wasm32 compile, generated contracts and
+20 tooling tests pass; independent boundary review accepted the frozen code.
+[Evidence and limits](docs/spikes/native-wasm-animation.md). Publication/integration
+against the next actual-main animation union is still pending. This does not add
+blending/state machines/IK/root motion or satisfy device/complete SDK/Phase1 gates.
+
+
+## Native Wasm standalone formatting
+
+Wasm modules now expose standalone ICU number/date formatting through additive
+opcode 25 and the public no_std Rust SDK. The actual committed locale, date
+lengths, Gregorian validation and number domain match TypeScript; queued locale
+changes remain invisible until atomic acceptance and pseudo settings do not wrap
+primitive text. Correct-epoch ingress and ignored SDK errors reject mixed work.
+Frozen local validation passes 294 tests/doctests, actual Wasmtime/wasm2c guests,
+all-target Clippy and default wasm32 compilation. See
+[formatting evidence](docs/spikes/evidence/native-wasm-formatting.json).
+Catalog editing/report paging, complete SDK and device/performance gates remain
+open; existing bulk fresh-process smoke is not a formatting shipping export.
