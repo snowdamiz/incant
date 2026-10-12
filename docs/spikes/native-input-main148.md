@@ -20,3 +20,5 @@ approve complete IME, appearance, device or phase gates. The failed checkpoint11
 remains frozen while its separate Linux numerical correction is prepared.
 
 [Exact frozen sources, commands and retained logs](evidence/native-input-main148.json).
+
+[Independent final integration review](evidence/native-input-main148/root-final-review.json) accepted the source identities and completed CPU checks.
