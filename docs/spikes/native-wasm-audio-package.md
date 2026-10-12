@@ -35,8 +35,10 @@ synchronization after native command acceptance and has no rollback claim.
 [Evidence](evidence/native-wasm-audio-package.json) retains 110 exact raw records
 in a lossless archive, 33 command receipts and hashes of the surviving actual
 player, PCM, reports and cooked data. The first authoring/development and shipping
-attempts passed without source or fixture correction. Independent final package
-review is pending; the [host evidence](native-wasm-audio.md) is independently accepted.
+attempts passed without source or fixture correction. The [independent final package review](evidence/native-wasm-audio/package-final-review.json)
+accepts all 110 archived records and directly rehashes 109 surviving originals.
+The original mapping for `author-001.log` was not located; its retained archive
+is verified. The [host evidence](native-wasm-audio.md) is independently accepted.
 
 Copied declarations describe desired committed state, never an actual mixer
 cursor or voice status. Arbitrary guest checkpoints remain unsupported. The

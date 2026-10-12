@@ -56,7 +56,8 @@ earlier test-only failures and qualifies the removed prepared inputs separately
 from the 405 retained compiled artifacts and 17 guest sources. The
 [independent final host review](evidence/native-wasm-audio/final-review.json)
 accepts this evidence. The ordinary public source-free package proof also passes;
-its separate independent final review is pending.
+its [independent final review](evidence/native-wasm-audio/package-final-review.json)
+accepts the retained evidence.
 
 The public authoring/development preflight also passes: real WAV and Rust module
 imports, atomic scene selection, Undo/Redo and journal reopen, then deletion of
