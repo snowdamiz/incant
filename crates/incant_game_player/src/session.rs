@@ -260,7 +260,17 @@ impl Player {
                             .map(|b| (ulid::Ulid::from_bytes(w.id.0).to_string(), b.text()))
                     })
                     .collect();
-                report["ui"] = serde_json::json!({"widgets":ui.widgets().len(),"viewport":ui.layout().ok_or("UI layout invariant")?.viewport,"focus":ui.focus().map(|f|ulid::Ulid::from_bytes(f.widget().0).to_string()),"values":values,"glyphs":paint.texts.iter().map(|t|t.glyphs.len()).sum::<usize>(),"atlas_sha256":incant_assets_runtime::sha256(paint.atlas.pixels())});
+                let sources: std::collections::BTreeMap<_, _> = paint
+                    .texts
+                    .iter()
+                    .map(|t| {
+                        (
+                            ulid::Ulid::from_bytes(t.id.0).to_string(),
+                            t.layout.source(),
+                        )
+                    })
+                    .collect();
+                report["ui"] = serde_json::json!({"widgets":ui.widgets().len(),"viewport":ui.layout().ok_or("UI layout invariant")?.viewport,"focus":ui.focus().map(|f|ulid::Ulid::from_bytes(f.widget().0).to_string()),"values":values,"sources":sources,"glyphs":paint.texts.iter().map(|t|t.glyphs.len()).sum::<usize>(),"atlas_sha256":incant_assets_runtime::sha256(paint.atlas.pixels())});
             }
             return Ok(Some(report));
         }
@@ -289,7 +299,18 @@ pub(crate) fn input_report(
         .flat_map(|n| n.layout.glyphs())
         .map(|g| g.font)
         .collect();
+    let sources: std::collections::BTreeMap<_, _> = text
+        .into_iter()
+        .flat_map(|t| &t.nodes)
+        .map(|n| {
+            (
+                ulid::Ulid::from_bytes(n.id.0).to_string(),
+                n.layout.source(),
+            )
+        })
+        .collect();
     Ok(serde_json::json!({
+        "text_sources": sources,
         "text_count":text.map_or(0, |t|t.nodes.len()), "text_generation":input.text_generation(),
         "text_glyph_count":glyph_count,"text_font_count":text_fonts.len(),
         "text_missing_clusters":text.map_or(0,|t|t.nodes.iter().map(|n|n.layout.missing_clusters().len()).sum::<usize>()),

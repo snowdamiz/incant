@@ -16,14 +16,39 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Complete root motion — main160 integration reviewed; fast check pending
+## Native HUD controls — main161 integration reviewed; fast check pending
+
+All 20 accepted inputs remain exact. Current-main CPU checks pass 444 affected
+and 10 player cases plus Clippy/target/contracts/dependency checks. A fresh
+ordinary package passes five source/map/build-deleted processes with canonical
+shaped text/focus and exact save/PCM continuation, plus three precise refusals.
+Independent integration review is accepted; exact-head fast CI/publication remain pending. Wasm parity,
+window/IME/appearance and device gates remain separate.
+[Current-main evidence](docs/spikes/native-hud-main161.md).
+
+## Native HUD controls — CPU and public shipping proof verified
+
+Typed native/TypeScript controls now update existing widget text/disabled state
+and world Text content through the atomic gameplay transaction. Readonly
+pre-command declarations, role/lifetime validation, aggregate quotas, localized
+literal results and composed input/shaping reconciliation are tested. The 444
+affected cases plus 10 player tests, all-target Clippy, strict typing, wasm32 and
+normal-runtime dependency guards pass. Independent source and final execution
+reviews are accepted.
+Five fresh source/map/build-deleted player processes verify changed shaped text,
+pre-command reads, exact save/PCM continuation; three exact refusals publish no
+outputs. Final independent execution audit is accepted.
+Wasm HUD parity, native/GPU appearance and complete Game UI remain open.
+[Contract and limits](docs/spikes/native-hud-controls.md).
+
+## Complete root motion — merged main161
 
 The native/TypeScript path and additive Wasm operations 53–55 now pass current-main native
 606-case and separate actual-host 453-case CPU suites, scoped checks and three
 fresh ordinary 32-tick source-deleted shipping processes. Each run matches 22,464
 oracle scalars and 256 selected vectors, exact logs/observations/PCM; 11 precise
 refusals publish no output. All 119 producer inputs remain byte exact. Independent
-current-main review is accepted; exact-head fast CI/publication remain pending; device, appearance,
+current-main review and exact-head fast CI passed; merged main161; device, appearance,
 CUBICSPLINE root import and whole-module checkpoint limits remain explicit.
 [Current-main evidence](docs/spikes/native-root-motion-main160.md).
 
@@ -552,11 +577,12 @@ and complete Game UI/IME gates remain open.
 
 ## Current milestone
 
-Main #160 includes compound native animation transitions and complete Wasm
+Main #161 includes compound native animation transitions and complete Wasm
 snapshots, authored two-bone IK, offline audio/UI checkpoints, public physics
-queries and the Core Sample gameplay slice. The reviewed complete root-motion
-integration passed current-main CPU and ordinary package validation plus final independent review;
-HUD and audio transport remain separate reviewed producer queues. Phase 1 and
+queries and the Core Sample gameplay slice. Complete native/TypeScript/Wasm root-motion integration merged after current-main
+CPU, ordinary package, independent review and fast checks passed. HUD current-main
+validation and independent final review are complete; audio transport
+remains a separate reviewed producer queue. Phase 1 and
 the finished game remain incomplete.
 
 Checkpoint13 is terminal and unpromoted: 21 of 23 required contexts succeeded,

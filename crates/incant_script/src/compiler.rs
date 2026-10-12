@@ -65,10 +65,10 @@ impl CompiledScript {
                 function entry(i, id) {{ const item = behavior.sources[i]; if (!item || item.id !== id) throw new Error('native source identity mismatch'); const value = item.behavior; check(value); return value; }}\n\
                 const updates = [{entries}];\n\
                 export const persistent = [{persistent}];\n\
-                export function update(chunks, dt, commands, input, physics, navigation, localization, clock, timers, log, flipbooks, animations, group, instances, state) {{ return updates[group].update({{chunks, dt, commands, input, physics, navigation, localization, clock, timers, log, flipbooks, animations, instances, state}}); }}\n"
+                export function update(chunks, dt, commands, input, physics, navigation, localization, clock, timers, log, flipbooks, animations, group, instances, state, hud) {{ return updates[group].update({{chunks, dt, commands, input, physics, navigation, localization, clock, timers, log, flipbooks, animations, instances, state, hud}}); }}\n"
             )
         } else {
-            "check(behavior);\nexport const persistent = [opted(behavior)];\nexport function update(chunks, dt, commands, input, physics, navigation, localization, clock, timers, log, flipbooks, animations, group, instances, state) { return behavior.update({chunks, dt, commands, input, physics, navigation, localization, clock, timers, log, flipbooks, animations, instances, state}); }\n".into()
+            "check(behavior);\nexport const persistent = [opted(behavior)];\nexport function update(chunks, dt, commands, input, physics, navigation, localization, clock, timers, log, flipbooks, animations, group, instances, state, hud) { return behavior.update({chunks, dt, commands, input, physics, navigation, localization, clock, timers, log, flipbooks, animations, instances, state, hud}); }\n".into()
         };
         let wrapper = format!(
             "const defineBehavior = value => value; const nativeIsArray = Array.isArray;\n\
