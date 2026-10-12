@@ -1,0 +1,19 @@
+{
+  "at": "2026-10-12T23:09:33.887951+00:00",
+  "result": "accepted",
+  "freeze_sha256": "68eb9606aecfb909578f7cb7504f957d1ef738e6b056c2433500801f135cfefb",
+  "source_hashes": {
+    "tools/android_archive.py": "18e3894f9ad8774bcaceafced9ca77c553f62461b783ccaa266983f0b7111a97",
+    "tools/export_android.py": "bdf67e98a388473abbd18d6a6186018ad0addfdcc6d7e2504cb257eadce5793d",
+    "tools/tests/test_android_export.py": "1421aa640630c5c1714cf9a67535d90f29b00384304ddc989a4b9fa63aa9e1f0"
+  },
+  "checks": [
+    "Read complete three-file delta against accepted source",
+    "Verified canonical NDK root containment and original multi-call invocation paths",
+    "Strict project/package symlink policy unchanged",
+    "Independent eight Android export tests passed including real tool symlink, escape, and package refusal"
+  ],
+  "limitations": [
+    "Fresh corrected shipping archive and Android execution pending; prior build failure retained"
+  ]
+}

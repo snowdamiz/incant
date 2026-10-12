@@ -1,0 +1,86 @@
+{
+  "source_commit": "06d534cb",
+  "composition_commit": "074bd373",
+  "probe_commit": "ad5ececb",
+  "trusted_tool_fix_commit": "8c6bc7c3",
+  "archive": {
+    "path": "docs/spikes/evidence/authored-android-project/completed-evidence.json.gz",
+    "sha256": "5d632d44abded73671f1fb18cc906810ac0fcb18ff6f0d6de7fe6631741c510e",
+    "bytes": 16331788
+  },
+  "records": 869,
+  "payloads": 335,
+  "external_binaries": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-android-native-build-001/incant-headless-deterministic",
+      "sha256": "d7264571915a8056b349ffb27f95d701ec03d60ff8a704613dc82c12f33145cb",
+      "bytes": 60232176
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-android-native-build-001/incant-headless-fast",
+      "sha256": "b9a0393b8201ea92971599e9a8643254925b165b315bcd9639152496921a451c",
+      "bytes": 59864768
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-android-shipping-002/deterministic-callers/caller-c",
+      "sha256": "589e19ab19e7529a06eb2ebd96692b1dbb109024e675fd4c63b3fe52aef207b4",
+      "bytes": 12860016
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-android-shipping-002/deterministic-export/runtime/libincant_game_player.a",
+      "sha256": "ec28150a5244603dfda993dad14a548b9809191f7485a6915c0c41ccaf096f6a",
+      "bytes": 23857828
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-android-shipping-002/deterministic-export/symbols/libincant_game_player.unstripped.a",
+      "sha256": "9a8cf7e7e5521134d831430f9730491725b4cce90dcc25939541fafb052e90f5",
+      "bytes": 390754732
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-android-shipping-002/fast-callers/caller-c",
+      "sha256": "3cf4582c549a13ec44c01080bf86dbe3406d892cc4426de8f4bc8b159da11247",
+      "bytes": 12853928
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-android-shipping-002/fast-export/runtime/libincant_game_player.a",
+      "sha256": "b8a0b66477b8629839e5f603ddbe8857ee55858b4c89689dccbfdcb2cc4f49c4",
+      "bytes": 23849196
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-android-shipping-002/fast-export/symbols/libincant_game_player.unstripped.a",
+      "sha256": "ac45e0d05ea2f50f7a4afb7a40dcda7b822165a18d822d6f009d027eff05e572",
+      "bytes": 391950796
+    }
+  ],
+  "source_and_probe_review": "accepted",
+  "final_execution_review": "pending",
+  "limits": [
+    "local Android17/API37 ARM emulator CPU only",
+    "NDK API24 compiler identity is not minimum OS execution",
+    "no phone/performance/rendering/mobile platform host/signing/store/phase gate",
+    "static Wasm mobile export unsupported"
+  ],
+  "source_inputs": {
+    "crates/incant_cook/src/project_build.rs": "26af2fd4152f8536638b76df6f4deb22e47846f1d9f7891f1faaea1519ffa4e5",
+    "crates/incant_cook/tests/android_probe.rs": "cd519b686d4970fb9b66bf34677c63297399e54bb3e38c51ef2d6a9f1948634e",
+    "crates/incant_cook/tests/mobile_project.rs": "3a72b31032056a2255bf39ef01469fa226538cdbf8477a77ab62453a08adab24",
+    "crates/incant_game_player/build.rs": "753fbb393cc5aa760b966de3ec1905bea1d80ea15a0ed0ee2aea95c86b4e06f2",
+    "crates/incant_script/src/artifact/compatibility.rs": "728e9df0dd3e626ae1a43fc59d492742246981b2d34aea60a3ff7b13d4f385a9",
+    "crates/incant_script/src/artifact/mobile_tests.rs": "80ef35a62dcc6bc605d963b60d63d43fb749fc0e248862d6212eebd371b25adf",
+    "tools/android_archive.py": "18e3894f9ad8774bcaceafced9ca77c553f62461b783ccaa266983f0b7111a97",
+    "tools/export_android.py": "bdf67e98a388473abbd18d6a6186018ad0addfdcc6d7e2504cb257eadce5793d",
+    "tools/tests/test_android_export.py": "1421aa640630c5c1714cf9a67535d90f29b00384304ddc989a4b9fa63aa9e1f0",
+    "tools/probes/authored-android-project/mover.ts": "2242c18284807105155244d1dcf5da54e5002d6a647bca86c22f3572b10413b5",
+    "tools/probes/authored-android-project/other.ts": "6178c2ffd3d8911077741b243140bfc20c765d94d01435d5f23068b5cb308633",
+    "tools/probes/authored-android-project/prepare.py": "a90d4cf916773609358da83636dafd64c59bdc314c0fd069be431407a96d59e3",
+    "tools/probes/authored-android-project/shared.ts": "971968b5b3ffb96ae1ddc3705bc2784dbd6ec3407c8a6201e4ca2e056585f6a2",
+    "tools/probes/authored-android-project/verify.py": "505f834745c2e9eb0e8c35f2d5d83a1adb29fbeb3e83253c4f9001c821c4af70"
+  },
+  "frozen_inputs_exact_at_terminal": 13405,
+  "post_proof_document_updates": [
+    "STATUS.md",
+    "docs/spikes/authored-android-project.md"
+  ],
+  "frozen_git_commit": "8c6bc7c313ba338e009bca309954429dcd43fe3f",
+  "archive_payloads_redecoded_and_verified": true
+}
