@@ -1724,3 +1724,13 @@ complete; current-main integration remains separate. Per-project settings,
 automatic matching Play processes and export selection are the next work, and
 physics-world saves, performance/device measurements and eight-lane adoption
 remain open. [Scope and retained evidence](docs/spikes/physics-mode-admission.md).
+
+## Authored physics mode — locally verified
+
+The document now has a strict fast/deterministic setting with preserved legacy
+canonical bytes and a public, undoable `set_physics_mode` command. Cook and Play
+startup refuse a mismatched process before assets or scripts; export producer
+receipts identify the selected family and exact kernel. All three builds passed
+134 document/command/cook/Play tests and Clippy with frozen inputs. Actual matching
+launcher/export execution and editor process switching remain in progress.
+[Contract and evidence](docs/spikes/physics-project-setting.md).

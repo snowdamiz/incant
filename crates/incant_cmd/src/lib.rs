@@ -96,6 +96,11 @@ pub enum Command {
     SetInputActions {
         actions: incant_doc::InputActions,
     },
+    /// Select the separately compiled solver family for the next Play/export.
+    /// Existing simulation processes keep their original immutable kernel.
+    SetPhysicsMode {
+        mode: incant_doc::PhysicsMode,
+    },
     /// Replace the project token allowance. Only user-origin transactions may
     /// issue this command, including when the allowance would remain unchanged.
     SetAgentBudget {
@@ -602,6 +607,9 @@ fn apply(
         }
         Command::SetInputActions { actions } => {
             project.settings.input_actions = actions.clone();
+        }
+        Command::SetPhysicsMode { mode } => {
+            project.settings.physics_mode = *mode;
         }
         Command::SetAgentBudget { settings } => {
             if provenance.origin != Origin::User {

@@ -7,6 +7,7 @@ use serde_json::json;
 fn strict_authored_steering_cooks_and_moves_after_all_source_is_deleted() {
     let root = tempfile::tempdir().unwrap();
     let mut project = Project::empty("Native avoidance");
+    project.settings.physics_mode = incant_runtime::PHYSICS_VARIANT.mode();
     let mut scene = Scene::new("Main");
     let mut entity = Entity::new("Mover");
     let source = new_id();

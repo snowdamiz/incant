@@ -1,0 +1,207 @@
+{
+  "at": "2026-10-12T21:55:03.350461+00:00",
+  "base": "c9fe9fa319bc750f81d1de4bfcd3905b45bf529d",
+  "source_sha256": {
+    "crates/incant_cmd/src/lib.rs": "ad9b4304900422608202d39337161a4f3039ac28b60d494d0139e31ad4d3d289",
+    "crates/incant_cmd/tests/physics_mode.rs": "87b3824de47b1ff6e1fadf616c1e1b78db0046a91204918d6f270cdb0b4981e6",
+    "crates/incant_cook/src/project_build.rs": "1462f61c4c4688ab877e5ba81f2613eaa5bccb954a3c2746c3972f0390615188",
+    "crates/incant_cook/src/project_script.rs": "dd20d2a2ba14cbcefa8662680939372f19f4e3b1280828f7fd5fc0222ecac9cc",
+    "crates/incant_cook/src/scene.rs": "245a48b82ba8258945cf728d9345192a7526fd8222ef370744d8f979b88f65ec",
+    "crates/incant_cook/tests/animation.rs": "95e07a9fa6a229a306355c07eae2fe2f73fea6c8efb4a06e8adeffb656a27632",
+    "crates/incant_cook/tests/localization.rs": "06c8fcfdd7fc93a066ffe1008b0e5dde84b49a834518c9131008e57642fee0ab",
+    "crates/incant_cook/tests/navigation.rs": "2f5dff661b59360746009ab5ea2d7b068e65641fcee98f81c36f1317a07f84aa",
+    "crates/incant_cook/tests/physics_2d.rs": "7a010b0565b9f879697c681ab83af60beeb5311e6ec065f2484d4cb0786d86cd",
+    "crates/incant_cook/tests/physics_mode.rs": "6aa0e2588a9f20060007c3fa309cd897b3b3559b695b07f778e7b8cc79bd5522",
+    "crates/incant_cook/tests/project_scripts.rs": "e7a34cb49173252f31e61874acfd32657f67ab856f4894532f1e282d125e4a67",
+    "crates/incant_cook/tests/root_motion.rs": "cff5848430b959d55e1a18fb6ebf0d383c6765733b217a429ef526f378c97271",
+    "crates/incant_cook/tests/runtime.rs": "16c1592384d62c90269eded09b1dc6f595ef1c47a40a856ce56b9e882de20415",
+    "crates/incant_cook/tests/spatial.rs": "3e163fdec847874e634135cd47a82d4869bf27324dd4bc72932e489813fdc4d4",
+    "crates/incant_cook/tests/steering.rs": "d04ad38bf1ed621589ead1143a10eb33ed70917fac92909954fdb24073257943",
+    "crates/incant_cook/tests/text.rs": "4e2131c608a25fc556a1718acfcf843bd5d7941591c880d37f99d37e627bb337",
+    "crates/incant_cook/tests/typescript.rs": "cbd8108e0dd5b1e0a6f21d4997b65b490609b6c725f1fc0f403df1e72268a5bc",
+    "crates/incant_cook/tests/ui.rs": "60350e57ef6eb41e0972a13b8991e48ae28df671b2e767d9f7d6086dabd3c102",
+    "crates/incant_doc/src/lib.rs": "dc888c5a1ed238f2351bbd0c77f686f715b20d2a706b1bb59d51b37d16e286c1",
+    "crates/incant_doc/tests/physics_mode.rs": "424f639d92179754525519d5fa2d332921c0f0fa5a08a4b9e95f9f736de5dc8c",
+    "crates/incant_play/src/lib.rs": "1e0df4f8ad771d72dd954d2ad829a11078b5392800e5e25588d20683254e6744",
+    "crates/incant_play/tests/animation.rs": "1d39149750130d47c88d30a28ba5381c27fd323530512d187206b065af350611",
+    "crates/incant_play/tests/startup.rs": "de3ce75ef8d443c077cd0c9e288d177e57ebe1827c2360bb7b5729f030e61e27",
+    "crates/incant_play/tests/wasm.rs": "2f0570271515f967fc1aacd01033abc42352ad64aab46a3345788793d9fc5320",
+    "crates/incant_types/src/physics_mode.rs": "dbab1d4439fd5c171d18b241cb7132c21cc213bdcee76a5fe699382cba60504c"
+  },
+  "terminal": {
+    "exit_code": 0,
+    "changed": [],
+    "frozen_files": 1378
+  },
+  "outcomes": [
+    {
+      "name": "deterministic-project-tests",
+      "exit_code": 0,
+      "seconds": 285.07211458299935
+    },
+    {
+      "name": "deterministic-project-clippy",
+      "exit_code": 0,
+      "seconds": 31.71206758400149
+    },
+    {
+      "name": "fast-project-tests",
+      "exit_code": 0,
+      "seconds": 180.8062108330014
+    },
+    {
+      "name": "fast-project-clippy",
+      "exit_code": 0,
+      "seconds": 12.636008375000529
+    },
+    {
+      "name": "fast-simd8-project-tests",
+      "exit_code": 0,
+      "seconds": 110.67508220899981
+    },
+    {
+      "name": "fast-simd8-project-clippy",
+      "exit_code": 0,
+      "seconds": 10.922880042002362
+    }
+  ],
+  "test_totals": {
+    "deterministic-project-tests": {
+      "groups": 49,
+      "passed": 134,
+      "failed": 0,
+      "ignored": 0
+    },
+    "fast-project-tests": {
+      "groups": 49,
+      "passed": 134,
+      "failed": 0,
+      "ignored": 0
+    },
+    "fast-simd8-project-tests": {
+      "groups": 49,
+      "passed": 134,
+      "failed": 0,
+      "ignored": 0
+    }
+  },
+  "artifacts": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-selection-001/commands.json",
+      "path": "docs/spikes/evidence/physics-project-setting/commands.json.gz",
+      "sha256": "9406281b714a264c85c685691ebad579b9efd207d6ff9e681916f72795cdde3c",
+      "compressed_sha256": "5156dbac753626476d4fdc6bbe421fe36dde8935d68da8f8250579ba0c9c60e4",
+      "bytes": 14912
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-selection-001/deterministic-project-clippy.stderr",
+      "path": "docs/spikes/evidence/physics-project-setting/deterministic-project-clippy.stderr.gz",
+      "sha256": "1aa26e189571d104a6e638f1ddf8ed1e648b98e56ff06789dc5632c1c999bd51",
+      "compressed_sha256": "bc3031e536f40a155ad23ce6d9d254ae6f13b6bf5dc116c15886e3740a85d799",
+      "bytes": 5143
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-selection-001/deterministic-project-clippy.stdout",
+      "path": "docs/spikes/evidence/physics-project-setting/deterministic-project-clippy.stdout.gz",
+      "sha256": "497f63da36f5be25db8e4257eb16f9e03c3e1a5d833e49b3b107189518f6e829",
+      "compressed_sha256": "72c023822a5e6d37f97e24e2e570b6b9c8066e51cd67ef4908f6bd76eda44ee6",
+      "bytes": 414801
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-selection-001/deterministic-project-tests.stderr",
+      "path": "docs/spikes/evidence/physics-project-setting/deterministic-project-tests.stderr.gz",
+      "sha256": "58a2ec704c8be003699ccd61a905374265b2953921af2ec59c72a00eeca83f79",
+      "compressed_sha256": "a041c6dd28ee4234bc6448ea23e9ac619e44bc0d48e6f3fef4b4a8c725b1a70a",
+      "bytes": 13085
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-selection-001/deterministic-project-tests.stdout",
+      "path": "docs/spikes/evidence/physics-project-setting/deterministic-project-tests.stdout.gz",
+      "sha256": "375d7d31c10e20d3d5055a3ab5af1508b5f68c00806e6658c4f4df64ea254e9d",
+      "compressed_sha256": "8ae0e9ef4882816dc1473f698bb0174cb7fd83dc96c559a0aa6c4dfb6f620882",
+      "bytes": 476879
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-selection-001/fast-project-clippy.stderr",
+      "path": "docs/spikes/evidence/physics-project-setting/fast-project-clippy.stderr.gz",
+      "sha256": "9962fe10504c1d5cb557a2d8fc1272bac0e8df63f8299a04d2bb2fda03665cfd",
+      "compressed_sha256": "8589b9bec1185730622b93a0b86d57284a71dd612d0dbb539a0c20b0100da1fe",
+      "bytes": 2379
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-selection-001/fast-project-clippy.stdout",
+      "path": "docs/spikes/evidence/physics-project-setting/fast-project-clippy.stdout.gz",
+      "sha256": "7ce0a2be732605e198d43124afd8c8df9523c06272399d25260c944a12236657",
+      "compressed_sha256": "f866745690ec98889fcdc34a189f4f545d880d77f65f6970e9ac3423cf7b43f7",
+      "bytes": 412656
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-selection-001/fast-project-tests.stderr",
+      "path": "docs/spikes/evidence/physics-project-setting/fast-project-tests.stderr.gz",
+      "sha256": "467ab4c1414cf583e24427a8adeac893a76a4c251315f8a0f43250a0b1f57dbb",
+      "compressed_sha256": "b4a8c9041084ec5453fc3182fe8983e77133a98b5769d158397cc2f33336e97c",
+      "bytes": 9895
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-selection-001/fast-project-tests.stdout",
+      "path": "docs/spikes/evidence/physics-project-setting/fast-project-tests.stdout.gz",
+      "sha256": "624634b1447e40e2e0b0b85f440b25b8650ceaf5af769ec62929db4c640046dd",
+      "compressed_sha256": "b4b72d1f81da57134770dc7c95d7f57b40e5f2ca75dd603588a0a72b5184c0b7",
+      "bytes": 474720
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-selection-001/fast-simd8-project-clippy.stderr",
+      "path": "docs/spikes/evidence/physics-project-setting/fast-simd8-project-clippy.stderr.gz",
+      "sha256": "9dd5b4239e50140e616e15e3a01816c61eec43fab519675d933be899d526ded9",
+      "compressed_sha256": "05d77f32e68b51d2565ca3be1931886e749704fc0131f2432dc8de02df21bd2d",
+      "bytes": 2150
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-selection-001/fast-simd8-project-clippy.stdout",
+      "path": "docs/spikes/evidence/physics-project-setting/fast-simd8-project-clippy.stdout.gz",
+      "sha256": "109bb58e5ebd150103b34bf21eb35b55b89b6a67a9742775725a25979265d490",
+      "compressed_sha256": "d987f11b0a1527899f3d9c24a22edcdc2fcd8e391866fba3d349f6ed913ce094",
+      "bytes": 413865
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-selection-001/fast-simd8-project-tests.stderr",
+      "path": "docs/spikes/evidence/physics-project-setting/fast-simd8-project-tests.stderr.gz",
+      "sha256": "34f00ca6fdc7d409dfd8b468d23eba23780412bf7a5e583d7d7dfc573580f3a5",
+      "compressed_sha256": "f5f94d77ee049daa4af25892f856098e6b1d5ab9a38e280d7d525bbbf431eb50",
+      "bytes": 9666
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-selection-001/fast-simd8-project-tests.stdout",
+      "path": "docs/spikes/evidence/physics-project-setting/fast-simd8-project-tests.stdout.gz",
+      "sha256": "0b5a27e5bc691d9f2ef4c99a25581f879684b740b09458bb126130a87fc19dbd",
+      "compressed_sha256": "2a38ba3cbcf7007f4422a468ef8c5d9f458c57429061f17ed120c9016761c036",
+      "bytes": 475929
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-selection-001/freeze.json",
+      "path": "docs/spikes/evidence/physics-project-setting/freeze.json.gz",
+      "sha256": "3a16a3a03095ba4d574b04d3918c13fb24c42d3ae37acfe0b6d073a0de585217",
+      "compressed_sha256": "e38cb09db9e88ff0e771d49f3e853ed74d62ce9b07b07c54c2878842c5380fe4",
+      "bytes": 158368
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-selection-001/run.py",
+      "path": "docs/spikes/evidence/physics-project-setting/run.py.gz",
+      "sha256": "e29b9cb6b97e2ba428dedbc8bbe66289b0c61847e77f1269abdaed11662c09b4",
+      "compressed_sha256": "55c9de30ae90dd40bb83e357b8856e5a94a594dc20fb97c51ed1974e144b1553",
+      "bytes": 2441
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-selection-001/terminal.json",
+      "path": "docs/spikes/evidence/physics-project-setting/terminal.json.gz",
+      "sha256": "10fcea34f265ecea30bf407e20ef6d408e371344fb6748e2e81b0e43602eb373",
+      "compressed_sha256": "a54c33de6076429b0a7034b04839cc65756cab13c3a2e46cb5555ff770ba674b",
+      "bytes": 62
+    }
+  ],
+  "limits": [
+    "Typed authoring setting and cook/Play admission only.",
+    "Developer matching launcher, mode-aware actual export and editor process selection are separate follow-on work.",
+    "Local ci-profile evidence, not shipping performance or reference-device gates."
+  ]
+}

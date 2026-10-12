@@ -43,6 +43,7 @@ pub fn embed_project(project_path: &Path, selected_scene: Option<&str>) -> Resul
         return Err("project text exceeds native export limit".into());
     }
     let project = Project::from_text(&text)?;
+    incant_runtime::require_physics_mode(project.settings.physics_mode)?;
     let scene_id = match selected_scene {
         Some(id) => id.to_owned(),
         None if project.scenes.len() == 1 => project.scenes.keys().next().unwrap().clone(),
@@ -190,6 +191,8 @@ pub fn embed_project(project_path: &Path, selected_scene: Option<&str>) -> Resul
     let manifest = serde_json::json!({
         "format": "incant-native-project-build", "version": 1,
         "project_id": project.id, "scene_id": scene_id, "tick_rate": scene.tick_rate(),
+        "physics_mode": project.settings.physics_mode,
+        "physics_variant": scene.physics_variant(),
         "target": target, "scene_sha256": hex(&Sha256::digest(&scene_bytes)),
         "project_sha256": hex(&Sha256::digest(text.as_bytes())), "visual_assets": visual,
         "audio_clips": audio, "compiler": compiler_manifest,

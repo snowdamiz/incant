@@ -17,6 +17,7 @@ fn actual_editor_and_headless_startup_binds_animation_for_both_script_routes() {
         )
         .unwrap();
         let mut p = Project::empty("Prepared animation");
+        p.settings.physics_mode = incant_runtime::PHYSICS_VARIANT.mode();
         let aid = new_id();
         p.assets.insert(
             aid.clone(),

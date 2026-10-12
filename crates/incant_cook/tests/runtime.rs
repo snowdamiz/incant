@@ -7,6 +7,7 @@ use std::collections::BTreeMap;
 
 fn fixture() -> (Project, String, String) {
     let mut project = Project::empty("Cooked motion");
+    project.settings.physics_mode = incant_runtime::PHYSICS_VARIANT.mode();
     let scene_id = new_id();
     let entity_id = new_id();
     let entity = Entity {
