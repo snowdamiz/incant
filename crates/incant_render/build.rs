@@ -1,5 +1,6 @@
 fn main() {
     println!("cargo:rerun-if-changed=src/fixture.wgsl");
+    println!("cargo:rerun-if-changed=src/ui/ui.wgsl");
     println!("cargo:rerun-if-changed=src/sprites/sprite.wgsl");
     println!("cargo:rerun-if-changed=src/shadows/caster.wgsl");
     println!("cargo:rerun-if-changed=src/output.wgsl");
@@ -43,5 +44,15 @@ fn main() {
                 .join("sprite-shaders");
         geometry::write_bundle(Kind::Sprite, &bundle, &output)
             .expect("write cooked sprite shaders");
+    }
+    #[cfg(feature = "cooked-ui")]
+    if std::env::var("CARGO_CFG_TARGET_ARCH").as_deref() != Ok("wasm32") {
+        use incant_shader_cook::geometry::{self, Kind};
+        let source = std::fs::read_to_string("src/ui/ui.wgsl").expect("engine-owned UI shader");
+        let bundle = geometry::cook(Kind::Ui, &source).expect("fixed UI shader contract");
+        let output =
+            std::path::PathBuf::from(std::env::var_os("OUT_DIR").expect("Cargo output directory"))
+                .join("ui-shaders");
+        geometry::write_bundle(Kind::Ui, &bundle, &output).expect("write cooked UI shaders");
     }
 }

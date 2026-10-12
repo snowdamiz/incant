@@ -1,0 +1,111 @@
+{
+  "format": "incant-independent-source-review",
+  "version": 1,
+  "reviewer": "astra/runtime_review",
+  "status": "accepted_within_source_scope",
+  "findings": [],
+  "base": "ca7f4521b141d112530a2f2811cc995d52d6cd67",
+  "freeze": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/freeze.json",
+  "freeze_sha256": "11b5f0bf294f17844ba9892c9a4e8ec64176ff09a1a933c95ef5be37b886407c",
+  "reviewed_sources": [
+    {
+      "path": "crates/incant_render/Cargo.toml",
+      "sha256": "5d2cd162cc39007a5db38376ecb26c808cd261661978246fb0a1388b9a0d1116"
+    },
+    {
+      "path": "crates/incant_render/build.rs",
+      "sha256": "52ee4fdd02cde2f5e51c769d1e004484044d846f699e65c2086b8bd64e18ac70"
+    },
+    {
+      "path": "crates/incant_render/src/lib.rs",
+      "sha256": "b64d3e202c6411428d66d62f2ff13341c1023afc1501d613e4ade5b09fe532bc"
+    },
+    {
+      "path": "crates/incant_render/src/resource_error.rs",
+      "sha256": "ef370d932b681db882a92e68c3e68e8c94775274b2427fa5e3f426d5d28d6c33"
+    },
+    {
+      "path": "crates/incant_render/src/shader/native.rs",
+      "sha256": "6fb9c9c23991f0c60b784ee03663dcb3daa098eb48a194c58455c9f7dd54972a"
+    },
+    {
+      "path": "crates/incant_render/src/ui/mod.rs",
+      "sha256": "d139c277697f76aa251a47d4b27cb084864240d197467b54763dc2ec143df866"
+    },
+    {
+      "path": "crates/incant_render/src/ui/shader.rs",
+      "sha256": "b5126f0be567125744898352c772e2e6842bb78d4749cc46372f90e566cca4ce"
+    },
+    {
+      "path": "crates/incant_render/src/ui/shader/cooked.rs",
+      "sha256": "d91ae311cacbee6662e3357da94f4c994b411173b5673b4f3d8fa3c87c6379d1"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/contract.rs",
+      "sha256": "43eaab1824a337b0da21a58ffe88849d531d38fc56fec47ac3c2dc805512f8c3"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/emit.rs",
+      "sha256": "b474a91e34d5b0444f41c532f28479e272bf5dfc95f2bc54e296083e4a9e1904"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/mod.rs",
+      "sha256": "b3e9a40276cb6d06cf5d9772b43bfee56ccb777d8faf25aec72bf6b2d52aca4e"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/sprite.rs",
+      "sha256": "5061d2d170a76b384763474ffefcec65b934d2a28ad086e58981373992d4dcb2"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/ui.rs",
+      "sha256": "7a5c0786befbc4a78f3b3d70f56ed552898e9c723315925b52d1e37526bcc933"
+    },
+    {
+      "path": "crates/incant_shader_cook/tests/geometry.rs",
+      "sha256": "89f8a2c886ba7a1952f5866e54628adaa4b87d4e66a164a8114043533ce919d9"
+    },
+    {
+      "path": "crates/incant_shader_cook/tests/ui.rs",
+      "sha256": "2deb4c141220b03b90ba8946499ba78eaed00d211121737fe85c202773febb73"
+    }
+  ],
+  "unchanged_visual_inputs": [
+    {
+      "path": "crates/incant_render/src/ui/ui.wgsl",
+      "sha256": "f67e4982b038833e87ed84861d5be3018f5f0d6587ff8da6faf8bfd840c33c39"
+    },
+    {
+      "path": "crates/incant_render/src/ui/theme.rs",
+      "sha256": "d8b7e0c7861a6c6d77a867d7fc0127c26dfef2c76f901e0d2597011d08779858"
+    },
+    {
+      "path": "crates/incant_render/src/ui/geometry.rs",
+      "sha256": "47bd7838b52a46e0034b05cf5458f8b12bf70c475889ba30848078dcb15d352b"
+    }
+  ],
+  "pinned_hal_sources_consulted": [
+    {
+      "path": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wgpu-hal-29.0.4/src/metal/device.rs",
+      "sha256": "c34d2bd9fe2a547f5cb28106c07ed22c99aa5891c0ad6a75f08ec6d70a1f6864"
+    },
+    {
+      "path": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wgpu-hal-29.0.4/src/dx12/device.rs",
+      "sha256": "77db671eb1302646d1ff9f257413858bc23038578ecc36e0fe3c3a26b0e696dc"
+    }
+  ],
+  "scope": [
+    "Reviewed all 15 frozen sources and exact base diff; current files equal immutable source002 copies.",
+    "Confirmed source001 to source002 only hoists the six vertex attributes into QUAD_ATTRIBUTES, preserving formats/offsets and giving the returned layout static lifetime.",
+    "Traced exact UI IR entry IO, flat uint/varyings, vertex-index admission, 48-byte uniform members/visibility and atlas resource contracts.",
+    "Checked instance stride64 and packed color fields against actual UiQuad offsets, static descriptors, six-vertex instanced draw and pinned HAL mapping.",
+    "Checked Metal frame0 in both stages, vertex pull15 and lengths1; Vulkan image-query binding; DX12 frame b0, texture t0, sampler-index t1 and special b1 mappings.",
+    "Checked private build-generated artifact selection/hash admission and typed UI initialization error propagation. Default and wasm32 paths retain original WGSL, shader math/theme/geometry unchanged."
+  ],
+  "execution": "Read-only source/hash review only. No builds, shader compiler runs, tests, player launches, GPU or screenshot operations executed by reviewer. Root-owned CPU chain4391 remains separate evidence.",
+  "limits": [
+    "Acceptance is for reviewed work in progress, not native shader execution or appearance.",
+    "Actual Metal UI compiler execution and Metal/Vulkan/DX12 GPU numerical/pixel validation remain deferred.",
+    "No device/performance/mobile or complete shader migration claim."
+  ],
+  "pause_boundary": "Review complete. PCM49e18 remains untouched; reviewer stops without starting new work."
+}

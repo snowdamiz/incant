@@ -41,6 +41,7 @@
 //! when the target region changes. A refused stage never touches accepted
 //! resources, which stay drawable.
 mod geometry;
+mod shader;
 pub mod theme;
 use crate::{Renderer, ResourceError, Result, RetainedTarget, SceneError};
 pub use geometry::{MAX_UI_GLYPHS, MAX_UI_QUADS, MAX_UI_WIDGETS, UiCaret, ui_caret};
@@ -115,40 +116,14 @@ pub(crate) struct UiSystem {
     frame_writes: AtomicU64,
 }
 impl UiSystem {
-    pub fn new(device: &wgpu::Device, queue: &wgpu::Queue) -> Self {
+    pub fn new(device: &wgpu::Device, queue: &wgpu::Queue, backend: wgpu::Backend) -> Result<Self> {
         let frame = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("UI frame region"),
-            entries: &[wgpu::BindGroupLayoutEntry {
-                binding: 0,
-                visibility: wgpu::ShaderStages::VERTEX_FRAGMENT,
-                ty: wgpu::BindingType::Buffer {
-                    ty: wgpu::BufferBindingType::Uniform,
-                    has_dynamic_offset: false,
-                    min_binding_size: std::num::NonZeroU64::new(size_of::<FrameUniform>() as u64),
-                },
-                count: None,
-            }],
+            entries: &[frame_entry()],
         });
         let atlas = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("UI coverage atlas"),
-            entries: &[
-                wgpu::BindGroupLayoutEntry {
-                    binding: 0,
-                    visibility: wgpu::ShaderStages::FRAGMENT,
-                    ty: wgpu::BindingType::Texture {
-                        sample_type: wgpu::TextureSampleType::Float { filterable: true },
-                        view_dimension: wgpu::TextureViewDimension::D2,
-                        multisampled: false,
-                    },
-                    count: None,
-                },
-                wgpu::BindGroupLayoutEntry {
-                    binding: 1,
-                    visibility: wgpu::ShaderStages::FRAGMENT,
-                    ty: wgpu::BindingType::Sampler(wgpu::SamplerBindingType::Filtering),
-                    count: None,
-                },
-            ],
+            entries: &atlas_entries(),
         });
         let sampler = device.create_sampler(&wgpu::SamplerDescriptor {
             label: Some("UI coverage bilinear"),
@@ -161,10 +136,7 @@ impl UiSystem {
             bind_group_layouts: &[Some(&frame), Some(&atlas)],
             immediate_size: 0,
         });
-        let shader = device.create_shader_module(wgpu::ShaderModuleDescriptor {
-            label: Some("Screen-space UI placement, coverage and colour"),
-            source: wgpu::ShaderSource::Wgsl(include_str!("ui.wgsl").into()),
-        });
+        let shader = shader::stages(device, backend)?;
         // The same fixed output catalogue as the display transform.
         let pipelines = [
             wgpu::TextureFormat::Rgba8Unorm,
@@ -176,7 +148,7 @@ impl UiSystem {
         .map(|format| (format, pipeline(device, &layout, &shader, format)))
         .collect();
         let empty = upload_texture(device, queue, &atlas, &sampler, None, [1, 1]);
-        Self {
+        Ok(Self {
             frame,
             atlas,
             sampler,
@@ -187,7 +159,7 @@ impl UiSystem {
             quad_buffers: AtomicU64::new(0),
             quad_bytes: AtomicU64::new(0),
             frame_writes: AtomicU64::new(0),
-        }
+        })
     }
     pub fn uploads(&self) -> UiUploads {
         UiUploads {
@@ -200,31 +172,68 @@ impl UiSystem {
     }
 }
 
+fn frame_entry() -> wgpu::BindGroupLayoutEntry {
+    wgpu::BindGroupLayoutEntry {
+        binding: 0,
+        visibility: wgpu::ShaderStages::VERTEX_FRAGMENT,
+        ty: wgpu::BindingType::Buffer {
+            ty: wgpu::BufferBindingType::Uniform,
+            has_dynamic_offset: false,
+            min_binding_size: std::num::NonZeroU64::new(size_of::<FrameUniform>() as u64),
+        },
+        count: None,
+    }
+}
+fn atlas_entries() -> [wgpu::BindGroupLayoutEntry; 2] {
+    [
+        wgpu::BindGroupLayoutEntry {
+            binding: 0,
+            visibility: wgpu::ShaderStages::FRAGMENT,
+            ty: wgpu::BindingType::Texture {
+                sample_type: wgpu::TextureSampleType::Float { filterable: true },
+                view_dimension: wgpu::TextureViewDimension::D2,
+                multisampled: false,
+            },
+            count: None,
+        },
+        wgpu::BindGroupLayoutEntry {
+            binding: 1,
+            visibility: wgpu::ShaderStages::FRAGMENT,
+            ty: wgpu::BindingType::Sampler(wgpu::SamplerBindingType::Filtering),
+            count: None,
+        },
+    ]
+}
+const QUAD_ATTRIBUTES: [wgpu::VertexAttribute; 6] = wgpu::vertex_attr_array![
+    0 => Float32x4, 1 => Float32x4, 2 => Float32x4,
+    3 => Float32x2, 4 => Unorm8x4, 5 => Uint32
+];
+fn vertex_buffers() -> [wgpu::VertexBufferLayout<'static>; 1] {
+    [wgpu::VertexBufferLayout {
+        array_stride: QUAD_BYTES,
+        step_mode: wgpu::VertexStepMode::Instance,
+        attributes: &QUAD_ATTRIBUTES,
+    }]
+}
+
 fn pipeline(
     device: &wgpu::Device,
     layout: &wgpu::PipelineLayout,
-    shader: &wgpu::ShaderModule,
+    shader: &crate::shader::Stages,
     format: wgpu::TextureFormat,
 ) -> wgpu::RenderPipeline {
     device.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
         label: Some("Screen-space UI over display output"),
         layout: Some(layout),
         vertex: wgpu::VertexState {
-            module: shader,
-            entry_point: Some("vertex"),
+            module: &shader.vertex,
+            entry_point: Some(shader.vertex_entry),
             compilation_options: Default::default(),
-            buffers: &[wgpu::VertexBufferLayout {
-                array_stride: QUAD_BYTES,
-                step_mode: wgpu::VertexStepMode::Instance,
-                attributes: &wgpu::vertex_attr_array![
-                    0 => Float32x4, 1 => Float32x4, 2 => Float32x4,
-                    3 => Float32x2, 4 => Unorm8x4, 5 => Uint32
-                ],
-            }],
+            buffers: &vertex_buffers(),
         },
         fragment: Some(wgpu::FragmentState {
-            module: shader,
-            entry_point: Some("fragment"),
+            module: &shader.fragment,
+            entry_point: Some(shader.fragment_entry),
             compilation_options: Default::default(),
             targets: &[Some(wgpu::ColorTargetState {
                 format,

@@ -11,8 +11,8 @@ fn require(ok: bool, reason: &'static str) -> Result<()> {
 }
 
 // Location, scalar kind, lane count, flat interpolation. Position has no location.
-type Io = (Option<u32>, K, u8, bool);
-fn io(
+pub(super) type Io = (Option<u32>, K, u8, bool);
+pub(super) fn io(
     m: &naga::Module,
     ty: naga::Handle<naga::Type>,
     binding: Option<&Binding>,

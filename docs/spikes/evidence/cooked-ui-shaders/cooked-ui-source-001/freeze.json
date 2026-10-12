@@ -1,0 +1,66 @@
+{
+  "root": "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant",
+  "base": "ca7f4521b141d112530a2f2811cc995d52d6cd67",
+  "sources": [
+    {
+      "path": "crates/incant_render/Cargo.toml",
+      "sha256": "5d2cd162cc39007a5db38376ecb26c808cd261661978246fb0a1388b9a0d1116"
+    },
+    {
+      "path": "crates/incant_render/build.rs",
+      "sha256": "52ee4fdd02cde2f5e51c769d1e004484044d846f699e65c2086b8bd64e18ac70"
+    },
+    {
+      "path": "crates/incant_render/src/lib.rs",
+      "sha256": "b64d3e202c6411428d66d62f2ff13341c1023afc1501d613e4ade5b09fe532bc"
+    },
+    {
+      "path": "crates/incant_render/src/resource_error.rs",
+      "sha256": "ef370d932b681db882a92e68c3e68e8c94775274b2427fa5e3f426d5d28d6c33"
+    },
+    {
+      "path": "crates/incant_render/src/shader/native.rs",
+      "sha256": "6fb9c9c23991f0c60b784ee03663dcb3daa098eb48a194c58455c9f7dd54972a"
+    },
+    {
+      "path": "crates/incant_render/src/ui/mod.rs",
+      "sha256": "13b19bad6d93cc63f581bc40884457fb549842166948864078ed08d34ebb9d16"
+    },
+    {
+      "path": "crates/incant_render/src/ui/shader.rs",
+      "sha256": "b5126f0be567125744898352c772e2e6842bb78d4749cc46372f90e566cca4ce"
+    },
+    {
+      "path": "crates/incant_render/src/ui/shader/cooked.rs",
+      "sha256": "d91ae311cacbee6662e3357da94f4c994b411173b5673b4f3d8fa3c87c6379d1"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/contract.rs",
+      "sha256": "43eaab1824a337b0da21a58ffe88849d531d38fc56fec47ac3c2dc805512f8c3"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/emit.rs",
+      "sha256": "b474a91e34d5b0444f41c532f28479e272bf5dfc95f2bc54e296083e4a9e1904"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/mod.rs",
+      "sha256": "b3e9a40276cb6d06cf5d9772b43bfee56ccb777d8faf25aec72bf6b2d52aca4e"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/sprite.rs",
+      "sha256": "5061d2d170a76b384763474ffefcec65b934d2a28ad086e58981373992d4dcb2"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/ui.rs",
+      "sha256": "7a5c0786befbc4a78f3b3d70f56ed552898e9c723315925b52d1e37526bcc933"
+    },
+    {
+      "path": "crates/incant_shader_cook/tests/geometry.rs",
+      "sha256": "89f8a2c886ba7a1952f5866e54628adaa4b87d4e66a164a8114043533ce919d9"
+    },
+    {
+      "path": "crates/incant_shader_cook/tests/ui.rs",
+      "sha256": "2deb4c141220b03b90ba8946499ba78eaed00d211121737fe85c202773febb73"
+    }
+  ]
+}

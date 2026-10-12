@@ -72,6 +72,19 @@ fn vertex_mappings(kind: Kind) -> Vec<msl::VertexBufferMapping> {
                     .collect(),
             },
         ],
+        Kind::Ui => vec![B {
+            id: 15,
+            stride: 64,
+            step_mode: S::ByInstance,
+            attributes: vec![
+                attribute(0, 0, F::Float32x4),
+                attribute(1, 16, F::Float32x4),
+                attribute(2, 32, F::Float32x4),
+                attribute(3, 48, F::Float32x2),
+                attribute(4, 56, F::Unorm8x4),
+                attribute(5, 60, F::Uint32),
+            ],
+        }],
         Kind::Sprite => vec![
             B {
                 id: 15,
@@ -122,6 +135,15 @@ pub(super) fn emit(
                     );
                 }
             } else if textured {
+                if kind == Kind::Ui {
+                    resources.resources.insert(
+                        resource(0, 0),
+                        msl::BindTarget {
+                            buffer: Some(0),
+                            ..Default::default()
+                        },
+                    );
+                }
                 if shadow {
                     resources.resources.insert(
                         resource(1, 0),
@@ -202,7 +224,9 @@ pub(super) fn emit(
                 capabilities: Some(
                     [spv::Capability::Shader, spv::Capability::ImageQuery]
                         .into_iter()
-                        .filter(|c| kind == Kind::Sprite || *c == spv::Capability::Shader)
+                        .filter(|c| {
+                            matches!(kind, Kind::Sprite | Kind::Ui) || *c == spv::Capability::Shader
+                        })
                         .collect(),
                 ),
                 bounds_check_policies: bounds(),
@@ -236,7 +260,7 @@ pub(super) fn emit(
                 fake_missing_bindings: false,
                 special_constants_binding: Some(binding(match kind {
                     Kind::Shadow => 2,
-                    Kind::Sprite => 1,
+                    Kind::Sprite | Kind::Ui => 1,
                     Kind::Diagnostic => 0,
                 })),
                 restrict_indexing: true,
@@ -267,7 +291,7 @@ pub(super) fn emit(
                     standard_samplers: binding(0),
                     comparison_samplers: binding(2048),
                 };
-            } else if kind == Kind::Sprite {
+            } else if matches!(kind, Kind::Sprite | Kind::Ui) {
                 options.binding_map = [
                     (resource(0, 0), binding(0)),
                     (resource(1, 0), binding(0)),

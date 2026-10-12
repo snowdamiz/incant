@@ -1,0 +1,119 @@
+[
+  {
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_shader_cook",
+      "-p",
+      "incant_render",
+      "--all-targets",
+      "--features",
+      "incant_render/cooked-output,incant_render/cooked-geometry,incant_render/cooked-sprites,incant_render/cooked-ui"
+    ],
+    "exit": 0,
+    "seconds": 18.30595600000379,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-00.log",
+    "sha256": "6d8f3155c719b4afe462e8cc10cfa844463db446cef32e4c1129b1e13a45ac01"
+  },
+  {
+    "command": [
+      "./tools/cargo",
+      "clippy",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_shader_cook",
+      "-p",
+      "incant_render",
+      "--all-targets",
+      "--features",
+      "incant_render/cooked-output,incant_render/cooked-geometry,incant_render/cooked-sprites,incant_render/cooked-ui",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit": 0,
+    "seconds": 2.9300821669967263,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-01.log",
+    "sha256": "27b3e4c7034411eb534ad7be2673813151e528929e2a9a195771a376470af8aa"
+  },
+  {
+    "command": [
+      "./tools/cargo",
+      "check",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "--target",
+      "wasm32-unknown-unknown",
+      "-p",
+      "incant_render",
+      "--features",
+      "cooked-output,cooked-geometry,cooked-sprites,cooked-ui"
+    ],
+    "exit": 0,
+    "seconds": 1.8442183749939431,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-02.log",
+    "sha256": "c7d8ede83213e2816aaf5fce44bd2f22b05b2fa5deedac472596f891b150db60"
+  },
+  {
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_render",
+      "--lib"
+    ],
+    "exit": 0,
+    "seconds": 8.957515292000608,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-03.log",
+    "sha256": "3fc60114f5700958e16a667448719caa18420bd81a4643d8bb70461af58ad789"
+  },
+  {
+    "command": [
+      "./tools/cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 1.3369082919962239,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-04.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "command": [
+      "python3",
+      "tools/generate_conventions.py",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.036797917004150804,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-05.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.020385499999974854,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-06.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]
