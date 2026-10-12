@@ -33,6 +33,7 @@ pub(super) fn encode(
     states: &[(StableId, FlipbookCheckpoint)],
     animations: &[(StableId, crate::AnimationState)],
     graphs: &[(StableId, crate::AnimationGraphState)],
+    ui_used: bool,
 ) -> Result<Vec<u8>, SaveError> {
     if scene.len() > crate::binary::MAX_SCENE_BYTES
         || states.len() > crate::MAX_SPRITE_ENTITIES
@@ -41,7 +42,9 @@ pub(super) fn encode(
     {
         return Err(SaveError::Invalid("save capacity"));
     }
-    let version = if !graphs.is_empty() {
+    let version = if ui_used {
+        7u32
+    } else if !graphs.is_empty() {
         6u32
     } else if animations.is_empty() {
         3u32
@@ -62,7 +65,7 @@ pub(super) fn encode(
     let mut bytes = Vec::with_capacity(HEADER + length);
     bytes.extend(MAGIC);
     bytes.extend(version.to_le_bytes());
-    bytes.extend(0u32.to_le_bytes());
+    bytes.extend(u32::from(ui_used).to_le_bytes());
     bytes.extend(tick.to_le_bytes());
     bytes.extend((length as u64).to_le_bytes());
     bytes.resize(HEADER, 0);
@@ -134,7 +137,7 @@ pub(super) struct Decoded<'a> {
     pub graphs: &'a [u8],
 }
 pub(super) fn is_bound(bytes: &[u8]) -> bool {
-    matches!(u32::from_le_bytes(bytes[8..12].try_into().unwrap()), 2..=6)
+    matches!(u32::from_le_bytes(bytes[8..12].try_into().unwrap()), 2..=7)
 }
 pub(super) fn decode(bytes: &[u8]) -> Result<Decoded<'_>, SaveError> {
     if !(HEADER..=MAX_SAVE_BYTES).contains(&bytes.len()) {
@@ -144,10 +147,10 @@ pub(super) fn decode(bytes: &[u8]) -> Result<Decoded<'_>, SaveError> {
         return Err(SaveError::Invalid("magic"));
     }
     let version = u32::from_le_bytes(bytes[8..12].try_into().unwrap());
-    if !(1..=6).contains(&version) {
+    if !(1..=7).contains(&version) {
         return Err(SaveError::Version(version));
     }
-    if bytes[12..16] != [0; 4] {
+    if bytes[12..16] != u32::from(version == 7).to_le_bytes() {
         return Err(SaveError::Invalid("unsupported flags"));
     }
     let tick = u64::from_le_bytes(bytes[16..24].try_into().unwrap());
@@ -186,9 +189,9 @@ pub(super) fn decode(bytes: &[u8]) -> Result<Decoded<'_>, SaveError> {
         0
     };
     if graph_count > crate::MAX_ANIMATION_GRAPH_INSTANCES
-        || (version >= 6 && graph_count == 0)
+        || (version == 6 && graph_count == 0)
         || animation_count > crate::MAX_MESH_ENTITIES
-        || (version >= 4 && animation_count == 0)
+        || ((4..=6).contains(&version) && animation_count == 0)
         || scene_len > crate::binary::MAX_SCENE_BYTES
         || count > crate::MAX_SPRITE_ENTITIES
         || extension

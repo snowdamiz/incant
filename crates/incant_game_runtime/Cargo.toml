@@ -7,7 +7,7 @@ publish.workspace = true
 
 [features]
 default = []
-ui = ["dep:incant_ui"]
+ui = ["dep:incant_ui", "incant_ui/native", "incant_script/ui"]
 static-module = ["incant_script/static-module"]
 device = ["incant_audio_runtime/device"]
 

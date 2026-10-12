@@ -7,7 +7,7 @@ publish.workspace = true
 
 [dependencies]
 incant_game_runtime = { path = "../incant_game_runtime", features = ["ui"] }
-incant_ui.workspace = true
+incant_ui = { workspace = true, features = ["native"] }
 incant_input.workspace = true
 incant_render_native = { path = "../incant_render_native" }
 incant_render_data.workspace = true

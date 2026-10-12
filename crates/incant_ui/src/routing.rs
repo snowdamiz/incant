@@ -320,6 +320,21 @@ impl UiRouter {
         self.revision = routed.revision;
         Ok(())
     }
+    #[cfg(feature = "native")]
+    pub fn commit_for_world(
+        &mut self,
+        ui: &mut UiRuntime,
+        routed: RoutedUi,
+        world: &incant_runtime::NativeWorld,
+    ) -> Result<(), crate::UiCheckpointError> {
+        if !Arc::ptr_eq(&self.owner, &routed.owner) || self.revision != routed.previous_revision {
+            return Err(UiError::Stale.into());
+        }
+        ui.commit_for_world(routed.pending, world)?;
+        self.state = routed.state;
+        self.revision = routed.revision;
+        Ok(())
+    }
 }
 fn push(out: &mut Vec<InputEvent>, event: InputEvent) -> Result<(), UiError> {
     if out.len() == incant_input::MAX_EVENTS_PER_TICK {

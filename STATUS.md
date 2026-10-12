@@ -26,6 +26,23 @@ pass; production behavior and rendering thresholds are unchanged. Linux UI
 numeric differences remain with Claude, and the next full checkpoint waits for
 that repair. See [retained failures and checks](docs/spikes/checkpoint11-probe-repairs.md).
 
+## Hosted native UI session checkpoints — current-main CPU proof passed
+
+The bounded widget codec now composes with native world v7 and session v2:
+committed UiNode declarations, text buffers, grapheme selection, logical focus,
+script persistent values and timers restore into one fresh world and UI owner.
+Non-UI encodings remain unchanged. Exact world/generation/tick authority and
+complete typed sections are checked before consumer/guest initialization;
+ordinary loads neutralize physical input and discard transient pointer capture.
+The current-main suite passes 450 CPU tests plus nine player tests, scoped Clippy,
+feature-disabled/static/development-module builds, wasm32 and lean runtime checks.
+A fresh ordinary public export passes four map/source/build-deleted player runs
+and seven typed refusals; uninterrupted and resumed final saves match exactly.
+Active preedit, physics/audio state, static/development modules and window/GPU
+checkpoint routes remain unsupported. This is not a full-session, native IME,
+Game UI or device gate. The fresh current-lock public proof passes again; source and evidence review
+remain scoped to this CPU ordinary-load route. [Contract and evidence](docs/spikes/native-ui-session-checkpoints.md).
+
 ## Native game UI reserved-frame connection — current-main verified
 
 Managed native input and Claude's accepted screen-space consumer compose in the
@@ -53,17 +70,6 @@ source; PR #138 passed the fast gate and merged. An ordinary source-deleted navi
 guest checkpoints, devices and phase gates remain open.
 [Contract and evidence](docs/spikes/native-wasm-navigation-paths.md).
 
-## Native UI checkpoint state — CPU section merged
-
-Committed widget text, grapheme selection and logical focus now have a bounded
-binary save/load section with fresh-owner receipt invalidation. Active preedit
-refuses saving; pointer capture, physical input and notifications remain
-transient. All 41 UI tests, Clippy, wasm32 and dependency checks pass again on
-the actual main135 integration, with all five reviewed source inputs unchanged.
-Independent source review accepts this section, merged in PR #136. Complete world/session/renderer
-integration remains open and existing UI-save refusals are unchanged. This is
-not a full save, native IME or Game UI gate.
-[Contract and evidence](docs/spikes/native-ui-checkpoint-state.md).
 
 ## Public Wasm animation graphs — current-main integration verified
 
@@ -228,7 +234,7 @@ reviewed main129 integration passes 510 CPU cases plus 209 overlapping final
 script/Play/game cases, Clippy, compiler-disabled/wasm checks and 67 exact fresh
 schemas. A fresh current-lock shipping export deletes authoring/build storage
 and developer source maps before three 12-tick runs and five precise refusals.
-UI checkpoints and static/development Wasm UI remain explicitly unsupported.
+Hosted CPU UI checkpoints are locally verified above; static/development Wasm UI remains explicitly unsupported.
 Claude0056's reviewed offscreen drawing implementation now has current-main
 CPU/compile validation: 206 cases, Clippy, downstream and wasm32 checks pass;
 89 GPU tests remain ignored in this integration. Its original frozen Metal
