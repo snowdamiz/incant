@@ -1,0 +1,20 @@
+{
+  "at": "2026-10-12T18:57:52.544651+00:00",
+  "verdict": "accepted",
+  "manifest": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/docs/spikes/evidence/macos-retirement-late-events.json",
+  "manifest_sha256": "ce5658d4a7296f9b625f2cf326f8c3b5715af1783e443c79b5b5ebdde78ea852",
+  "sources_verified": {
+    "crates/incant_game_player/examples/macos_text_retirement.rs": "56aa6b954c9f6e9f0e7e6e9eb11483d6729dc1fe950f895eb013948fd7941662"
+  },
+  "artifacts_verified": 24,
+  "checks_verified": 6,
+  "binary_verified": "cc3dead50b353b4edbb27c37dd3b5580b2a9e7c2f01d410087bb88b3da4f1d6e",
+  "review": [
+    "The native cycle retains original operation order and all256 cycles. Completion clears owner exactly once; error preserves first typed error. Late callbacks exit without further native calls.",
+    "Final source differs from initial reviewed patch only by explicit error type and equivalent clippy let-chain cleanup.",
+    "Two deterministic original-red/fixed-green regressions and feature-enabled compile/test/Clippy receipts retained."
+  ],
+  "limitations": [
+    "Actual local AppKit execution not performed because user idle gate did not permit launch. Comprehensive hosted native probe must pass before release; this acceptance is not native runtime evidence."
+  ]
+}

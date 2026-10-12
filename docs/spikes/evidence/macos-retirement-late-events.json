@@ -271,5 +271,14 @@
     "The copied native-feature binary was built but not launched locally: no20-second real user-idle interval occurred.",
     "Actual AppKit execution in the comprehensive checkpoint remains required before release; deterministic tests are not live-native acceptance."
   ],
-  "review": "Probe source mechanism accepted independently; final source/log closure pending."
+  "review": {
+    "decision": "accepted",
+    "receipt": "docs/spikes/evidence/macos-retirement-late-events-review.json",
+    "sha256": "f9e4c953106248864e78874314b4f2e468a0c0679e9643f3eacac4c809d0a63f",
+    "reviewed_manifest_sha256": "ce5658d4a7296f9b625f2cf326f8c3b5715af1783e443c79b5b5ebdde78ea852"
+  },
+  "main_integration": {
+    "main": "57d66f545f83fc54f8378b522ade900b0f75f350",
+    "resolution": "STATUS only; all reviewed probe and helper source bytes unchanged; Core adds no compiled engine source."
+  }
 }

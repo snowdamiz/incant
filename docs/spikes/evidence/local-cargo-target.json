@@ -34,5 +34,12 @@
     "receipt": "docs/spikes/evidence/local-cargo-target-review.json",
     "sha256": "82ce566f747b9553648b5f0fbf9b8ea720c9b97ef79d3143233b9df76b52a8fa",
     "decision": "accepted"
+  },
+  "composition_check": {
+    "log": "docs/spikes/evidence/local-cargo-target-union-tests.log.gz",
+    "sha256": "9afb49b881fc6767d4cac70b61334cab6d8bcc8e1fe44c3ce25285fa4a540956",
+    "uncompressed_sha256": "326ec1006fe0860424d6c3dd6d4f2871650ccd52eebfa260203b375b11336066",
+    "tests": 6,
+    "failed": 0
   }
 }
