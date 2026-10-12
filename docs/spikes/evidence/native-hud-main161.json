@@ -1,0 +1,807 @@
+{
+  "scope": "Native/TypeScript HUD declaration controls on current main161, CPU composed text/input and fresh ordinary package continuation.",
+  "tested_head": "33fc77c3f0a7fecee0bd48c2611c200d45376558",
+  "integrated_head": "c0016b18ba627171ac90947121e4241082863d48",
+  "main": "f66f5d9fa4c813dee5600168f5411bfe3100c2ae",
+  "producer": "78fae9a10795622b89dbbd20c69382455c1343f8",
+  "source_comparison": {
+    "head": "c0016b18ba627171ac90947121e4241082863d48",
+    "main": "f66f5d9fa4c813dee5600168f5411bfe3100c2ae",
+    "tested_head": "33fc77c3f0a7fecee0bd48c2611c200d45376558",
+    "changed_frozen_inputs": {},
+    "unchanged_count": 1825,
+    "accepted_producer_inputs": 20,
+    "all_accepted_inputs_exact": true,
+    "lock_identical": true,
+    "only_new_changes": "Retained root-motion docs/evidence, additive STATUS resolution and actual main merge ancestry; no implementation/build differences."
+  },
+  "accepted_inputs": {
+    "crates/incant_game_player/src/session.rs": "b0912738c4c047c06bbb974efb46978e51de263e38ef8a216887f8bf752930dd",
+    "crates/incant_render_game/tests/ui.rs": "848be3005b7084d0ec2ecf023b221c0d54161d7f0f240d22fb74260497a5c86f",
+    "crates/incant_render_game/tests/ui/hud.rs": "51a1d6e6af40871b1a27847fc539348b052f1149ebdc0b5a259a39c4c51e4aad",
+    "crates/incant_runtime/src/commands.rs": "c85cef7899206542eac66b00e5f3bdfc478e93e3ec7102c86b19addc3f9f64fb",
+    "crates/incant_runtime/src/hud.rs": "a8f69f7ee4793cbe74a9b1bdc4e5667fd73539037711a23ff411f795af2ed545",
+    "crates/incant_runtime/src/lib.rs": "0edc132f9fc26ed18563bde5d540c93065ca61060bf6a7526a897f2e33d595d0",
+    "crates/incant_runtime/src/text.rs": "9ef656f41702d7feee41f00e3888d283b562268acbc32639368743c989425198",
+    "crates/incant_runtime/src/ui.rs": "872140176a400d1a81f33f443b713b32126be3c6cb4693579d45bbbbfb5eba96",
+    "crates/incant_runtime/tests/hud.rs": "c68b19e4cd88f9f83cbf06a2627ee9d82de241594a29af616dc816de6b090436",
+    "crates/incant_runtime/tests/support/hud.rs": "d616f47fa36feab4213402f2a0563a87e34cf53a95e531e882aaefdd390cfa3e",
+    "crates/incant_script/build.rs": "2ca24f5a310d6ff935423689d477a58f7d9f0b1cdad7ade0c170b31a25c6ba16",
+    "crates/incant_script/src/commands.rs": "d53cc6ccf5e6bb423eca00d97492277485df92363fc7dfaab0dfa6aa7ac5c4dd",
+    "crates/incant_script/src/compiler.rs": "71a3ea29026428f387966d600e2afabb117748091fbaadc08b2688a1ad4273a5",
+    "crates/incant_script/src/hud.rs": "1c7a3f885b766022e6562ea48e85a6aaae8810fed1361da3583807fe25d47a3c",
+    "crates/incant_script/src/hud_tests.rs": "5309adcf386220fa37f17294c6d2ab18d88a43cd8feee8eaa72a3364ab49d8c6",
+    "crates/incant_script/src/input.rs": "050cc183c80f2f23caa31c08126ef6aa8c7a7bb0991719820908cd02ad476d69",
+    "crates/incant_script/src/lib.rs": "babbd7a64d089a9e5cf3ea3e83993c0593f607e8ee70964d905d4b5b8b209745",
+    "crates/incant_script/tests/hud.rs": "d7ab32b509d39a1ca9e92cb69ebd1c316709f00f2eb6882b6534fee604ab15a6",
+    "sdk/ts/src/native.d.ts": "cb680f4c5c77c30124da7401f9332d39de8d93eada3f22f47d032fda4685a474",
+    "tools/probes/native-hud-export.py": "f60dc8f975c0bc6f5c07fd4ebf5f0246fce360683ae48956fb23a277970ccda4"
+  },
+  "checks": [
+    {
+      "name": "affected-tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_render_game",
+        "--features",
+        "incant_script/compiler"
+      ],
+      "exit": 0,
+      "seconds": 118.17201441699945,
+      "sha256": "38579f25bb5db8d5dfe740bec724e20466334d3e16ef33db93fbf0120a93bea8"
+    },
+    {
+      "name": "player-tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "render-input"
+      ],
+      "exit": 0,
+      "seconds": 45.57764445799694,
+      "sha256": "f07566c6ac1e1e2dc16e9590df55a2a027381c24738b4a92aa0b819649ec9132"
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_render_game",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "incant_script/compiler,incant_game_player/render-input",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 19.562736500000028,
+      "sha256": "bea54a008e2d488a9e1d9518e80edb545e8bc8ce2589b17cd9cd49b4438c7362"
+    },
+    {
+      "name": "no-compiler",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_script",
+        "--no-default-features",
+        "--features",
+        "ui,audio,static-module"
+      ],
+      "exit": 0,
+      "seconds": 5.5297145409967925,
+      "sha256": "8955939ca4d6d1b5528b91ebb31e49a6394bda998f1f92896a74fe61b566eabd"
+    },
+    {
+      "name": "wasm32",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_runtime",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "exit": 0,
+      "seconds": 4.07327479200103,
+      "sha256": "1178cbe11a2fcd5367427de792bc6229f993b04d643e0b6a64a60aa68b1e603d"
+    },
+    {
+      "name": "strict-sdk",
+      "command": [
+        "node",
+        "node_modules/typescript/bin/tsc",
+        "--noEmit",
+        "-p",
+        "sdk/ts/tsconfig.json"
+      ],
+      "exit": 0,
+      "seconds": 0.4247415829995589,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "generated-sdk",
+      "command": [
+        "node",
+        "tools/generate_sdk.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.08813749999899301,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "bridge",
+      "command": [
+        "node",
+        "tools/build_bridge.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.13686208299986902,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "graph",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_runtime",
+        "incant_script",
+        "incant_game_runtime",
+        "incant_render_game",
+        "incant_game_player",
+        "--features",
+        "incant_game_player/render-input"
+      ],
+      "exit": 0,
+      "seconds": 0.8428980419994332,
+      "sha256": "f049663938110444a9194eff62e79e1966eac54ba99d9ccb2ddccee5eeec9d5d"
+    },
+    {
+      "name": "headless",
+      "command": [
+        "./tools/cargo",
+        "build",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_headless"
+      ],
+      "exit": 0,
+      "seconds": 83.42907424999794,
+      "sha256": "59a5c1d294dd2254d13bbcf413de122fa0d21f0bbf2f9929f784653788eeb473"
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 2.3248759159978363,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.06116058300176519,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.03143462500156602,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "public-export",
+      "command": [
+        "python3",
+        "tools/probes/native-hud-export.py",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export",
+        "--binary",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/incant_headless"
+      ],
+      "exit": 0,
+      "seconds": 424.23903987499943,
+      "sha256": "4db2b495a904714b53b3f38d5de0dc3b833d6dc669662ff7408b1fe4d3e6943d"
+    }
+  ],
+  "affected_tests": {
+    "groups": 45,
+    "passed": 444,
+    "failed": 0,
+    "ignored": 0
+  },
+  "player_tests": {
+    "groups": 3,
+    "passed": 10,
+    "failed": 0,
+    "ignored": 0
+  },
+  "verified_public": {
+    "fresh_runs": 3,
+    "continuation_processes": 2,
+    "exact_refusals": 3,
+    "package_files": 22,
+    "reports": [
+      {
+        "name": "run-0",
+        "report": "54b4ee9ec79d29972395d78d2b7d6ea382b55fe5ba015bfbd263fddecd0a9491",
+        "pcm": "d41a7fd4da2a77ec53c03f5e0323523448a6270d5b69152ec6a49ebbefbdd695",
+        "save": "402c8e16d5bb49befb7c30e211737f436f3a73d961d795bbe383ca0c25d47b26"
+      },
+      {
+        "name": "run-1",
+        "report": "54b4ee9ec79d29972395d78d2b7d6ea382b55fe5ba015bfbd263fddecd0a9491",
+        "pcm": "d41a7fd4da2a77ec53c03f5e0323523448a6270d5b69152ec6a49ebbefbdd695",
+        "save": "402c8e16d5bb49befb7c30e211737f436f3a73d961d795bbe383ca0c25d47b26"
+      },
+      {
+        "name": "run-2",
+        "report": "54b4ee9ec79d29972395d78d2b7d6ea382b55fe5ba015bfbd263fddecd0a9491",
+        "pcm": "d41a7fd4da2a77ec53c03f5e0323523448a6270d5b69152ec6a49ebbefbdd695",
+        "save": "402c8e16d5bb49befb7c30e211737f436f3a73d961d795bbe383ca0c25d47b26"
+      },
+      {
+        "name": "first",
+        "report": "ae9a4803e1ef4f8e0135099bd6bd270258311244000169340ed86ecbdde5d34d",
+        "pcm": "5b56247519b8491df3a436068c468b5a491e38456331cf488dff3c556c2fba5c",
+        "save": "07ab0926a116c470b080b2cbdbedee348c83f524d521c10ccc314c315e0c5031"
+      },
+      {
+        "name": "second",
+        "report": "2f94988fed9636b11e5f1ddbfcbf286f7d1ca8794385de213acd266e9026ec5c",
+        "pcm": "5b56247519b8491df3a436068c468b5a491e38456331cf488dff3c556c2fba5c",
+        "save": "402c8e16d5bb49befb7c30e211737f436f3a73d961d795bbe383ca0c25d47b26"
+      }
+    ],
+    "player_sha256": "3723c920ecc353036a5f84cbbbcb74a2b415ae3a3d8d66f430baeb727d305f8e",
+    "exact_final_save_pcm_continuation": true,
+    "authoring_maps_deleted": true,
+    "exporter_build_storage_removed": true
+  },
+  "artifacts": {
+    "accepted-sources.json.gz": {
+      "sha256": "a6c4949389d713fe85e635ed6f6e16b440796f752fdff88850f928ad547b017d",
+      "uncompressed_sha256": "9ce91d9cf54825224f2dd3690d5f94630691cdda7719e8c0f83d1d11b120db72",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/accepted-sources.json"
+    },
+    "affected-tests.log.gz": {
+      "sha256": "a4b940d09eabf4f2706912a40b6bc902e98d1a2fc0e17e21a89b90d47e82c559",
+      "uncompressed_sha256": "38579f25bb5db8d5dfe740bec724e20466334d3e16ef33db93fbf0120a93bea8",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/affected-tests.log"
+    },
+    "bridge.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/bridge.log"
+    },
+    "clippy.log.gz": {
+      "sha256": "2acbec0b7ef3ea6494f69a6e2c5cb6eb14b1ea8c5e29d14c47ba55f47ada345f",
+      "uncompressed_sha256": "bea54a008e2d488a9e1d9518e80edb545e8bc8ce2589b17cd9cd49b4438c7362",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/clippy.log"
+    },
+    "conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/conventions.log"
+    },
+    "diff.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/diff.log"
+    },
+    "fmt.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/fmt.log"
+    },
+    "freeze.json.gz": {
+      "sha256": "283c3b75c552814a5c796aafba39f314a33c4ba127fcbceba961c4a94ddf8b2e",
+      "uncompressed_sha256": "2add94de804e3ae4f5ff8f02328e82a23529b444d35fa77c4bc92fddcee59889",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/freeze.json"
+    },
+    "generated-sdk.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/generated-sdk.log"
+    },
+    "graph.log.gz": {
+      "sha256": "640b1e464e24e347cf28619b985f4ea2b15860ec5e18515c9821b4984f842010",
+      "uncompressed_sha256": "f049663938110444a9194eff62e79e1966eac54ba99d9ccb2ddccee5eeec9d5d",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/graph.log"
+    },
+    "headless-binary.json.gz": {
+      "sha256": "45cdeea1e1f00ac75e83eebcb9f908703d44cab9d60701deb363f0ae96888047",
+      "uncompressed_sha256": "7f0b73fd0e666d884075fc4cc6b7e59b7d1bc0370bc463cdd83990dd4b152be3",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/headless-binary.json"
+    },
+    "headless.log.gz": {
+      "sha256": "8b4f6eb179b1b4aa52ea4f6b37e1905d55842a4baae9925d69ac94889d8acdbc",
+      "uncompressed_sha256": "59a5c1d294dd2254d13bbcf413de122fa0d21f0bbf2f9929f784653788eeb473",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/headless.log"
+    },
+    "no-compiler.log.gz": {
+      "sha256": "682d26d895a9b80d74ff3ace08c706db26f245abfc6fd2687c386a8b3a78a1f2",
+      "uncompressed_sha256": "8955939ca4d6d1b5528b91ebb31e49a6394bda998f1f92896a74fe61b566eabd",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/no-compiler.log"
+    },
+    "player-tests.log.gz": {
+      "sha256": "400b3937efc005cd46809248024dd293b543bad81817d1d04cc7aa303edefa72",
+      "uncompressed_sha256": "f07566c6ac1e1e2dc16e9590df55a2a027381c24738b4a92aa0b819649ec9132",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/player-tests.log"
+    },
+    "public-export.log.gz": {
+      "sha256": "8f628439fdc782b181f75e40eb2541ed65b9d206d3ec863a6280f1ee65d54237",
+      "uncompressed_sha256": "4db2b495a904714b53b3f38d5de0dc3b833d6dc669662ff7408b1fe4d3e6943d",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export.log"
+    },
+    "results.json.gz": {
+      "sha256": "cf677a79002015bb61746037c446c1bb2d8a0064e72d483e86a8b7a79fac21e5",
+      "uncompressed_sha256": "d4e8ec96f821aba530ea50cc82b8cf6b1452c872e49d0d411caf6a0fbf0063c4",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/results.json"
+    },
+    "strict-sdk.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/strict-sdk.log"
+    },
+    "wasm32.log.gz": {
+      "sha256": "60fcef50de2235c5f41008ed6bd85fd0ee03fc738a0311e17923ddf64158af6e",
+      "uncompressed_sha256": "1178cbe11a2fcd5367427de792bc6229f993b04d643e0b6a64a60aa68b1e603d",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/wasm32.log"
+    },
+    "public-export/authoring-rpc.json.gz": {
+      "sha256": "817009bcf68c777fc0875284497943266ac9ef08e22a0b67245096d5bce28780",
+      "uncompressed_sha256": "ccb0ac1878a14fb51379a8258fd2466dee7b1c951baa42985460ce7fc935e436",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/authoring-rpc.json"
+    },
+    "public-export/authoring.json.gz": {
+      "sha256": "80cea7d947f2165a61807a50e0aab3a13540b8e3cd4f6a7a110f7c863160a1f3",
+      "uncompressed_sha256": "faf50bd5292e4d4890bf900153560203f8182be81cbdfb1e858f4a20fae4d460",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/authoring.json"
+    },
+    "public-export/bad-role-input.json.gz": {
+      "sha256": "080636443b850eb12bfd6c56499794674d46c566fc766d9fbe9d21717bb354ba",
+      "uncompressed_sha256": "4b8508e99cf17977977b6dcb503c408855c6ac7de6783d75b40072b953a139e4",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/bad-role-input.json"
+    },
+    "public-export/commands/bad-role.json.gz": {
+      "sha256": "60a163e368d45f466c8bf67b138c899017fde2ae8bfe785841ac6a56b28329d9",
+      "uncompressed_sha256": "ac9bfd33aa510ef4d2c78ac98737bf4b5f4cc1a98c54cad6b631e84c4d49eabf",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/commands/bad-role.json"
+    },
+    "public-export/commands/bad-role.stderr.gz": {
+      "sha256": "5b4d36636d8c7bd7a26fcd011fb9e07082c1e0a90d0dcf650e139686113cfb2a",
+      "uncompressed_sha256": "ee1cec40e8f866407f8619ff3544e7f610a90afc1ef2f8b040a5081b5a26abc1",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/commands/bad-role.stderr"
+    },
+    "public-export/commands/bad-role.stdout.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/commands/bad-role.stdout"
+    },
+    "public-export/commands/export.json.gz": {
+      "sha256": "ea4c136f1561d34e85a12011ebbecbc3ecd7fc347d0ba72ef48873b97532e392",
+      "uncompressed_sha256": "df926f7940fe7ad7c09acc7711ec1450d6f986d3d1046cba6e75a9abac968a05",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/commands/export.json"
+    },
+    "public-export/commands/export.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/commands/export.stderr"
+    },
+    "public-export/commands/export.stdout.gz": {
+      "sha256": "0b34c64128d9f8ed1883c12f8f45cc60f339077283d6255f28ebcc38a2128200",
+      "uncompressed_sha256": "f57526df56978584a58a00d6caa7a00f88cfd70c836592e1cf641d786ba08bf6",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/commands/export.stdout"
+    },
+    "public-export/commands/first.json.gz": {
+      "sha256": "d5a324601866228f3bf27cdd4f39e2e72def8cf4b60cdfb903ec40b67458a3d7",
+      "uncompressed_sha256": "11c2b68e06f89c43697e079c38b0726d4c0e5243fb6e8db5a1d33414e237bf66",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/commands/first.json"
+    },
+    "public-export/commands/first.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/commands/first.stderr"
+    },
+    "public-export/commands/first.stdout.gz": {
+      "sha256": "449c7f6513999dfce120a2048cd80a2d1eb9a82cc35e61346b2cc980dc9eb2ce",
+      "uncompressed_sha256": "913a4013d7ee6986808f116a034dac11b7e4411d7bbf5047561de10bbb1492f8",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/commands/first.stdout"
+    },
+    "public-export/commands/init.json.gz": {
+      "sha256": "fc66c52ef142e8b5123af5ada969c9be2239f002c57a4916c4335e0ea3777e79",
+      "uncompressed_sha256": "841ce77ee0482ccbdab2a12a52cd1d9d844710ffb95b40f819430ebad2bfe889",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/commands/init.json"
+    },
+    "public-export/commands/init.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/commands/init.stderr"
+    },
+    "public-export/commands/init.stdout.gz": {
+      "sha256": "8531b922b565f2388cec5348ded0c78ab9a45f6c6c1825e9b1da712fcf8d4527",
+      "uncompressed_sha256": "59fc2efa947f0d6d69db2aa985c7e3b0d8b3d9eecebf004774d9ffbe6805c9dd",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/commands/init.stdout"
+    },
+    "public-export/commands/mixed-fixture.json.gz": {
+      "sha256": "020460228446ee422212b15e1d6c6fd796d6ff0ecb77124ac08b3ff5d0d3ea0d",
+      "uncompressed_sha256": "59b5e63dca29a08d68433ae462ee199a9c3bbefe5e074dc8970cace6e79b566f",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/commands/mixed-fixture.json"
+    },
+    "public-export/commands/mixed-fixture.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/commands/mixed-fixture.stderr"
+    },
+    "public-export/commands/mixed-fixture.stdout.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/commands/mixed-fixture.stdout"
+    },
+    "public-export/commands/quota.json.gz": {
+      "sha256": "abb6199097625318208d4a0d02660a67f2aba044df9b92f88529da4cce231537",
+      "uncompressed_sha256": "2affe80bb98f76e408721bd275d2a90a122583b9535f0172f3a6ad6420c32e11",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/commands/quota.json"
+    },
+    "public-export/commands/quota.stderr.gz": {
+      "sha256": "06ca312bb4901dff6c5f9f758ee326fa6b687aeac5f75f8c8e970d25c58c5000",
+      "uncompressed_sha256": "e454b603b232788411a50f1c7dd26648bbf4f7dec58c5f759d76660f0e948013",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/commands/quota.stderr"
+    },
+    "public-export/commands/quota.stdout.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/commands/quota.stdout"
+    },
+    "public-export/commands/run-0.json.gz": {
+      "sha256": "1620e82cbd093edfa28629ba7809a0575e90cf3dc6315b25a843977cdfc5c5c7",
+      "uncompressed_sha256": "b54ea18e4005fe8eaa5566f99fdb4e1955a2ff04020ec72d2fd160066fac6abb",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/commands/run-0.json"
+    },
+    "public-export/commands/run-0.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/commands/run-0.stderr"
+    },
+    "public-export/commands/run-0.stdout.gz": {
+      "sha256": "8d366c9b3f3105a138492f9411f10a9b8a4b053b317b24bc5cbbd1c6488775ef",
+      "uncompressed_sha256": "09dd1227035115abfcfd34a867791e6398c55c3cf18289d74be590050750ef4f",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/commands/run-0.stdout"
+    },
+    "public-export/commands/run-1.json.gz": {
+      "sha256": "dd33f99f8dd985c62a210247a660a394f34d4886375a3bcb0afeaa8a96189319",
+      "uncompressed_sha256": "648cfa558ed89b3a54793c94853a1bc939fe471ad4d77307cbb911c637066e6d",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/commands/run-1.json"
+    },
+    "public-export/commands/run-1.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/commands/run-1.stderr"
+    },
+    "public-export/commands/run-1.stdout.gz": {
+      "sha256": "8d366c9b3f3105a138492f9411f10a9b8a4b053b317b24bc5cbbd1c6488775ef",
+      "uncompressed_sha256": "09dd1227035115abfcfd34a867791e6398c55c3cf18289d74be590050750ef4f",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/commands/run-1.stdout"
+    },
+    "public-export/commands/run-2.json.gz": {
+      "sha256": "58d952cfdc22850ab48f483d10888ae4b443a8a2bc4268e5732f060c5aeadfbe",
+      "uncompressed_sha256": "cd91149185f834bec8ea63a6ee3d614aaa841b646c06be96b067ea8ba6d0ca76",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/commands/run-2.json"
+    },
+    "public-export/commands/run-2.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/commands/run-2.stderr"
+    },
+    "public-export/commands/run-2.stdout.gz": {
+      "sha256": "8d366c9b3f3105a138492f9411f10a9b8a4b053b317b24bc5cbbd1c6488775ef",
+      "uncompressed_sha256": "09dd1227035115abfcfd34a867791e6398c55c3cf18289d74be590050750ef4f",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/commands/run-2.stdout"
+    },
+    "public-export/commands/second.json.gz": {
+      "sha256": "89ff34557f1de472ede8caf8f97bf37ee9cdb9cff13dcc5212591b781e75206d",
+      "uncompressed_sha256": "712f86d4e13408acb75f61fd609e96cf35e597e77f2014318afc2f1cb85bc368",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/commands/second.json"
+    },
+    "public-export/commands/second.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/commands/second.stderr"
+    },
+    "public-export/commands/second.stdout.gz": {
+      "sha256": "d5400ff2f6ddb430d849721ebad11f169ffce99e4e6b6f0d1eddf76c8f850159",
+      "uncompressed_sha256": "da11a4b2b224a70bf9ac3c285e59516231a22d374b62524dcda963f87296fcf0",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/commands/second.stdout"
+    },
+    "public-export/commands/trap.json.gz": {
+      "sha256": "ff96c48e201d8de2c8af3a1523e47fc26d6cf3ac2bf331f035a01492456a183f",
+      "uncompressed_sha256": "6b07a696bcea60471f8d9b31d5be85217670248445968b01017148422a3d63a9",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/commands/trap.json"
+    },
+    "public-export/commands/trap.stderr.gz": {
+      "sha256": "84a66ed163b71666813cfec2d60b02e8c10de808599a664cc6b16732773d8287",
+      "uncompressed_sha256": "c695a953b7f2b6384aaad9d265d32caba687e1ea43cbd6c99bad053e2cd063ba",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/commands/trap.stderr"
+    },
+    "public-export/commands/trap.stdout.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/commands/trap.stdout"
+    },
+    "public-export/deleted-authoring.json.gz": {
+      "sha256": "5f7f1361425fcade8b05497804f07d101463be439610026c1efb398583258036",
+      "uncompressed_sha256": "d984380433a0c4482c04005247e1a5bdf7556a03b1dbfaf84eee2b8ae22de4a8",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/deleted-authoring.json"
+    },
+    "public-export/deleted-maps.json.gz": {
+      "sha256": "d8f1b3b259957142bfde6bc6088125bd7ad6658a502e911ac80d8382a14eb051",
+      "uncompressed_sha256": "63534a894793f810a469a0d3b6f39a6d81deef66faca6f1cae07d39542e0f38b",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/deleted-maps.json"
+    },
+    "public-export/first.json.gz": {
+      "sha256": "6626306c9c830f01b94d384c7cfac3372251554992bed04b242d37b0544fd2cd",
+      "uncompressed_sha256": "ae9a4803e1ef4f8e0135099bd6bd270258311244000169340ed86ecbdde5d34d",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/first.json"
+    },
+    "public-export/first.pcm.gz": {
+      "sha256": "e03d4fe27dca9bf3f635568af4472934b5f5de327eacf09f65f5e353821e6141",
+      "uncompressed_sha256": "5b56247519b8491df3a436068c468b5a491e38456331cf488dff3c556c2fba5c",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/first.pcm"
+    },
+    "public-export/first.save.gz": {
+      "sha256": "18c231980b7323abedf65d3d6ec155841c5f12edfa0f58ed7e914ce639525b0a",
+      "uncompressed_sha256": "07ab0926a116c470b080b2cbdbedee348c83f524d521c10ccc314c315e0c5031",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/first.save"
+    },
+    "public-export/input-first.json.gz": {
+      "sha256": "e270b3b41c758f050d720f9b3cab598d9842c6f50f06aea0645480505ecfb427",
+      "uncompressed_sha256": "d4a3c20489ee0e6a610d8c68b0f6bed376f96cf7e664b092ace17761e7dd15aa",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/input-first.json"
+    },
+    "public-export/input.json.gz": {
+      "sha256": "429b0402bae708df54737409b207cfffc31e92ddf45698744100fa7d4f477d70",
+      "uncompressed_sha256": "ad60b1763f63a52629dd85bbaf7900755f431983c1fb079f006dcdc3cba153c8",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/input.json"
+    },
+    "public-export/observe.json.gz": {
+      "sha256": "b2688321416d294c5da6f5f966ce4a09da840bf46894f9231b0bd2abcbd975a7",
+      "uncompressed_sha256": "9e2c744aa0b793c72a3bf054b0b463d5cc48163a495f531bd5967e333da37f9f",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/observe.json"
+    },
+    "public-export/package/build.log.gz": {
+      "sha256": "69c536a9f7fe7a0af8304b6984a1205b58c6a9da079095564d38866e5ad580d0",
+      "uncompressed_sha256": "813eef2e5522879e5d58490c6ae973861eec0aa3ba1f4ba6f5bce8c4ff713aa2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/package/build.log"
+    },
+    "public-export/package/export.json.gz": {
+      "sha256": "28dd0080f44691ee107811455636f2e628fdb02c21575f73cd97dc247000a79a",
+      "uncompressed_sha256": "e5cc4f61f714dd3622f0bd14b23032aaec83ceeb64b2e1c42c8422735d071a08",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/package/export.json"
+    },
+    "public-export/package/player/data/audio/bb391cc186bb741011a9d500103383ccd8cdaf0164c06b379c91d77e94de9b35.json.gz": {
+      "sha256": "be092910b90cacbd308da8250e8028d14f1e03f0011de586ee0f0b375c0eb8ac",
+      "uncompressed_sha256": "b0a2c95a6962d6b4447ea5d8af111e8521689276e14798a3048e2175a0367d6b",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/package/player/data/audio/bb391cc186bb741011a9d500103383ccd8cdaf0164c06b379c91d77e94de9b35.json"
+    },
+    "public-export/package/player/data/clips.bin.gz": {
+      "sha256": "f0a58e4a7b52609ecaa0270e66fbbab66da2261954257f75e469329354676824",
+      "uncompressed_sha256": "62646e85a4dd0a13c656341856bbfc048d2081f4ed9456fe3516b74cca4f7aed",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/package/player/data/clips.bin"
+    },
+    "public-export/package/player/data/empty-input.json.gz": {
+      "sha256": "438100c9c52fd35517bc237cb9289ac1088282ab6f2b851a4878fd0ecc79abcc",
+      "uncompressed_sha256": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/package/player/data/empty-input.json"
+    },
+    "public-export/package/player/data/fonts/1087d4bb69160e3e5955407294226ca3da11166a3188ada3c1a166ba14e55ceb.json.gz": {
+      "sha256": "b96ba7a4d72d1083036c6b7aa2c829ad77ed895ca374c21a280fa1a99c0598bf",
+      "uncompressed_sha256": "c3fd206832637ec3ad354dee08b4c67012da904d34a3ce9ec9c97e30f70e07f0",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/package/player/data/fonts/1087d4bb69160e3e5955407294226ca3da11166a3188ada3c1a166ba14e55ceb.json"
+    },
+    "public-export/package/player/data/fonts/6864e1444bc7002790e682360d3f93bd45fe51b7045a64ecbf0e76e19e6b758e.json.gz": {
+      "sha256": "9b9332407c7cf3c8962cb04c5e9babae373bddcbb6cd9069bc624adb52467b47",
+      "uncompressed_sha256": "167d0dc13b807552b06d0195e3a90ee24f5074206dd6d6f2106ad59e65b35fde",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/package/player/data/fonts/6864e1444bc7002790e682360d3f93bd45fe51b7045a64ecbf0e76e19e6b758e.json"
+    },
+    "public-export/package/player/data/fonts/9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2.json.gz": {
+      "sha256": "48d551dc911877a7bfaa0caeeb8187d8b67c15e3271edb0fc58c61d62a3c95c4",
+      "uncompressed_sha256": "e43c79c54c311c5759bdf686b43b9b112b0177bafd6938782ebb782d75018812",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/package/player/data/fonts/9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2.json"
+    },
+    "public-export/package/player/data/input-actions.json.gz": {
+      "sha256": "c14bfcf1832a180081ce0abd2061eeb1dc780074f0c2cdfd923be805f2407368",
+      "uncompressed_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/package/player/data/input-actions.json"
+    },
+    "public-export/package/player/data/models/71fbcae82debc0236bda7576327733a6943d93ce7adb913cbe1d95fe931d511f.incmodel.gz": {
+      "sha256": "6185fd3dddae981f2095b710c67187410ad5899632fe042b83ccc834ac5fa603",
+      "uncompressed_sha256": "9be97471434742eb82eb6fe2de0287d618bce848a52fb6eb1cf7e428c6a908de",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/package/player/data/models/71fbcae82debc0236bda7576327733a6943d93ce7adb913cbe1d95fe931d511f.incmodel"
+    },
+    "public-export/package/player/data/package.json.gz": {
+      "sha256": "2a074df5745258b22eb8de8b805edad13a974eb437ebd1d9fce7572a0545a81d",
+      "uncompressed_sha256": "cc0902c1c84dd8c279d1d499eee4972926e858ad8c1915cf0f9e4d3d4636ab73",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/package/player/data/package.json"
+    },
+    "public-export/package/player/data/world.scene.gz": {
+      "sha256": "f0e71bd20a7139a9aac89637d14118f257d8f7606e08ebf232e4f90fc4a30f78",
+      "uncompressed_sha256": "400466aca4a3a1cfda32f2c276f6ab3f8c175b477b1867a5f61564ba4ac7fd3b",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/package/player/data/world.scene"
+    },
+    "public-export/package/project-build.json.gz": {
+      "sha256": "cc9fea839b7c1a5f4e4951a04083371a6b3f6b294b678fbdc4e4c12b158f2c5f",
+      "uncompressed_sha256": "5d033fdf3d1e28b811cd8d6b6e9686228dc959cd02ae4d33cebe2b0061a1fa87",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/package/project-build.json"
+    },
+    "public-export/package/symbols/script-symbols.json.gz": {
+      "sha256": "154524b36b38ea0579eb1419a7580c5f2f15adddd512c22e5115427ea9d7fbd8",
+      "uncompressed_sha256": "97a8ca083b1b6dfbd4ec97a873315504f775f44f21b796db2a212f3a251c55ee",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/package/symbols/script-symbols.json"
+    },
+    "public-export/quota-input.json.gz": {
+      "sha256": "910285afa6cce24085d4c4b4b6c2c1e2d1cdaab9d1a63857b60ea42e8b26fdf6",
+      "uncompressed_sha256": "0907d89a70aa3a910958dc4abbcff8999639f940d40b9f1162dbc77f283261bb",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/quota-input.json"
+    },
+    "public-export/result.json.gz": {
+      "sha256": "904f989b0e8d5291e5d50af301b3446ab354e2bc2a59316cfb86d530b66bea85",
+      "uncompressed_sha256": "05df416e4f186c8a236c720c2dcf13079bf5f3e7b10b280fd2ab1e192e3ec6f1",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/result.json"
+    },
+    "public-export/run-0.json.gz": {
+      "sha256": "acfc97ffb97792514772d0996246c1cd4ab8fbe85b7cb075b7ea901feff7f1eb",
+      "uncompressed_sha256": "54b4ee9ec79d29972395d78d2b7d6ea382b55fe5ba015bfbd263fddecd0a9491",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/run-0.json"
+    },
+    "public-export/run-0.pcm.gz": {
+      "sha256": "5bfc29e393eb234bacabc41810969c34bf1193f38d55e31d2052b88d1bb1de1b",
+      "uncompressed_sha256": "d41a7fd4da2a77ec53c03f5e0323523448a6270d5b69152ec6a49ebbefbdd695",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/run-0.pcm"
+    },
+    "public-export/run-0.save.gz": {
+      "sha256": "e10bd383613cb64a0be7856360da960d85fac5d7e443d28a928d4ad0d0e50b44",
+      "uncompressed_sha256": "402c8e16d5bb49befb7c30e211737f436f3a73d961d795bbe383ca0c25d47b26",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/run-0.save"
+    },
+    "public-export/run-1.json.gz": {
+      "sha256": "acfc97ffb97792514772d0996246c1cd4ab8fbe85b7cb075b7ea901feff7f1eb",
+      "uncompressed_sha256": "54b4ee9ec79d29972395d78d2b7d6ea382b55fe5ba015bfbd263fddecd0a9491",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/run-1.json"
+    },
+    "public-export/run-1.pcm.gz": {
+      "sha256": "5bfc29e393eb234bacabc41810969c34bf1193f38d55e31d2052b88d1bb1de1b",
+      "uncompressed_sha256": "d41a7fd4da2a77ec53c03f5e0323523448a6270d5b69152ec6a49ebbefbdd695",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/run-1.pcm"
+    },
+    "public-export/run-1.save.gz": {
+      "sha256": "e10bd383613cb64a0be7856360da960d85fac5d7e443d28a928d4ad0d0e50b44",
+      "uncompressed_sha256": "402c8e16d5bb49befb7c30e211737f436f3a73d961d795bbe383ca0c25d47b26",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/run-1.save"
+    },
+    "public-export/run-2.json.gz": {
+      "sha256": "acfc97ffb97792514772d0996246c1cd4ab8fbe85b7cb075b7ea901feff7f1eb",
+      "uncompressed_sha256": "54b4ee9ec79d29972395d78d2b7d6ea382b55fe5ba015bfbd263fddecd0a9491",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/run-2.json"
+    },
+    "public-export/run-2.pcm.gz": {
+      "sha256": "5bfc29e393eb234bacabc41810969c34bf1193f38d55e31d2052b88d1bb1de1b",
+      "uncompressed_sha256": "d41a7fd4da2a77ec53c03f5e0323523448a6270d5b69152ec6a49ebbefbdd695",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/run-2.pcm"
+    },
+    "public-export/run-2.save.gz": {
+      "sha256": "e10bd383613cb64a0be7856360da960d85fac5d7e443d28a928d4ad0d0e50b44",
+      "uncompressed_sha256": "402c8e16d5bb49befb7c30e211737f436f3a73d961d795bbe383ca0c25d47b26",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/run-2.save"
+    },
+    "public-export/second.json.gz": {
+      "sha256": "9329b548fbe2c0af78e54fe418261cf72688659d1d07b1a9b73ffe495c7ffebc",
+      "uncompressed_sha256": "2f94988fed9636b11e5f1ddbfcbf286f7d1ca8794385de213acd266e9026ec5c",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/second.json"
+    },
+    "public-export/second.pcm.gz": {
+      "sha256": "e03d4fe27dca9bf3f635568af4472934b5f5de327eacf09f65f5e353821e6141",
+      "uncompressed_sha256": "5b56247519b8491df3a436068c468b5a491e38456331cf488dff3c556c2fba5c",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/second.pcm"
+    },
+    "public-export/second.save.gz": {
+      "sha256": "e10bd383613cb64a0be7856360da960d85fac5d7e443d28a928d4ad0d0e50b44",
+      "uncompressed_sha256": "402c8e16d5bb49befb7c30e211737f436f3a73d961d795bbe383ca0c25d47b26",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/second.save"
+    },
+    "public-export/trap-input.json.gz": {
+      "sha256": "480ece96112bf0e95e44c3c34b4cc2fe754c9da2dae7792e1bc06baf2f43ff40",
+      "uncompressed_sha256": "8a023ef9799cf4b358408f78f0986c0b61d2b75855d22b7401f0244a04e4611e",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001/public-export/trap-input.json"
+    },
+    "closeout/conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main161-closeout/conventions.log"
+    },
+    "closeout/diff.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main161-closeout/diff.log"
+    },
+    "closeout/results.json.gz": {
+      "sha256": "828631eb3779635b618e06630e0900375625b6810d0d179bb7852920cbf031f5",
+      "uncompressed_sha256": "c05a204885864ddfbd96b3201bd9070a1908262fad0ef6935c24b2bd79e54e81",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main161-closeout/results.json"
+    },
+    "closeout/source-comparison.json.gz": {
+      "sha256": "13191ebeeb3f8fe51786a342e1c7b0d55aa5bde745f6885d5e489d5587af09b8",
+      "uncompressed_sha256": "f760f80afa838026003b11359c453203781158c035b82af8ac2ca65e72c2fbe3",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main161-closeout/source-comparison.json"
+    },
+    "validation-runner.py.gz": {
+      "sha256": "b1fe7965994701e5cce824ddd655652280359be8635c22b9cfbf099c0d5a362f",
+      "uncompressed_sha256": "e3cfac0369b0eb9b00131cc7c7698fd793b14130b1de8ac735463a6b0d6cb8ca",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-run.py"
+    }
+  },
+  "evidence_directory": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001",
+  "integration_review": "pending independent final current-main review",
+  "limitations": [
+    "CPU canonical shaped text; no GPU/window/appearance",
+    "Wasm HUD commands/snapshots not implemented",
+    "No device or performance gate",
+    "PCM and save publication are separate files, not a multifile transaction",
+    "Publication waits for independent review and exact-head development check; checkpoint14 remains frozen separately at main160."
+  ]
+}
