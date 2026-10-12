@@ -796,7 +796,12 @@
     }
   },
   "evidence_directory": "/Users/andreyyurlov/.codex/incant-integration-evidence/hud-main160-001",
-  "integration_review": "pending independent final current-main review",
+  "integration_review": {
+    "status": "accepted without findings",
+    "path": "docs/spikes/evidence/native-hud-main161-review.json",
+    "sha256": "08f4e3e9dee6a678a3eb562b9ca487776f5dc05cb84f1b63bcee77cb1e13ccbe",
+    "reviewed_packet_sha256": "f9cdd9b3a115bcde191c363100b1e4a4dda777a4ea1e26b5be59014703b4fd0f"
+  },
   "limitations": [
     "CPU canonical shaped text; no GPU/window/appearance",
     "Wasm HUD commands/snapshots not implemented",

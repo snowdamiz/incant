@@ -15,7 +15,7 @@ Three exact role/trap/quota refusals leave empty stdout and no PCM/save output.
 Public command-bus authoring, Undo/Redo and journal reopening are exercised.
 
 The [retained source, commands, outputs and package receipts](evidence/native-hud-main161.json)
-await independent final integration review. Main161 adds only root-motion evidence
+are accepted by the [independent final integration review](evidence/native-hud-main161-review.json). Exact-head fast CI remains required for publication. Main161 adds only root-motion evidence
 to the tested union; all frozen implementation/build inputs remain unchanged.
 Wasm HUD parity, native-window/IME behavior, GPU appearance, physical audio,
 reference-device performance and phase gates are separate. PCM and save files
