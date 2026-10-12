@@ -1,3 +1,5 @@
+#[path = "support/scene_format.rs"]
+mod scene_format;
 use incant_runtime::*;
 use incant_types::{Transform, UiKind, UiNode, UiStyle, UiText, Velocity};
 use sha2::{Digest, Sha256};
@@ -89,7 +91,10 @@ fn checksum(mut bytes: Vec<u8>) -> Vec<u8> {
 fn actual_v13_roundtrip_and_legacy_emission_are_exact() {
     let s = scene();
     let bytes = s.to_bytes();
-    assert_eq!(&bytes[8..12], &13_u32.to_le_bytes());
+    assert_eq!(
+        &bytes[8..12],
+        &crate::scene_format::scene_format(13).to_le_bytes()
+    );
     let loaded = CookedScene::from_bytes(&bytes).unwrap();
     assert_eq!(loaded.ui(), s.ui());
     assert_eq!(loaded.to_bytes(), bytes);

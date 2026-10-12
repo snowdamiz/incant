@@ -6,19 +6,63 @@ rust-version.workspace = true
 publish.workspace = true
 
 [features]
+default = ["physics-deterministic"]
+
 wasmtime-host = ["incant_play/wasmtime-host"]
 
+# Select one physics kernel for the entire process, including build/test hosts.
+physics-deterministic = [
+    "incant_agent/physics-deterministic",
+    "incant_agent_native/physics-deterministic",
+    "incant_assets/physics-deterministic",
+    "incant_audio/physics-deterministic",
+    "incant_audio_runtime/physics-deterministic",
+    "incant_cmd/physics-deterministic",
+    "incant_cook/physics-deterministic",
+    "incant_core/physics-deterministic",
+    "incant_game_runtime/physics-deterministic",
+    "incant_import/physics-deterministic",
+    "incant_observe/physics-deterministic",
+    "incant_play/physics-deterministic",
+    "incant_play_legacy/physics-deterministic",
+    "incant_render/physics-deterministic",
+    "incant_render_authoring/physics-deterministic",
+    "incant_render_game/physics-deterministic",
+    "incant_runtime/physics-deterministic",
+    "incant_script/physics-deterministic",
+]
+physics-fast-simd8 = [
+    "incant_agent/physics-fast-simd8",
+    "incant_agent_native/physics-fast-simd8",
+    "incant_assets/physics-fast-simd8",
+    "incant_audio/physics-fast-simd8",
+    "incant_audio_runtime/physics-fast-simd8",
+    "incant_cmd/physics-fast-simd8",
+    "incant_cook/physics-fast-simd8",
+    "incant_core/physics-fast-simd8",
+    "incant_game_runtime/physics-fast-simd8",
+    "incant_import/physics-fast-simd8",
+    "incant_observe/physics-fast-simd8",
+    "incant_play/physics-fast-simd8",
+    "incant_play_legacy/physics-fast-simd8",
+    "incant_render/physics-fast-simd8",
+    "incant_render_authoring/physics-fast-simd8",
+    "incant_render_game/physics-fast-simd8",
+    "incant_runtime/physics-fast-simd8",
+    "incant_script/physics-fast-simd8",
+]
+
 [dependencies]
-incant_agent_native = { path = "../incant_agent_native" }
-incant_play = { path = "../incant_play" }
+incant_agent_native = { path = "../incant_agent_native", default-features = false }
+incant_play = { path = "../incant_play", default-features = false }
 incant_cook = { path = "../incant_cook", default-features = false, features = ["scene", "script", "typescript"] }
 incant_script.workspace = true
 incant_runtime.workspace = true
-incant_game_runtime = { path = "../incant_game_runtime" }
+incant_game_runtime = { path = "../incant_game_runtime", default-features = false }
 incant_audio_runtime = { workspace = true, features = ["scene"] }
-incant_render_game = { path = "../incant_render_game" }
+incant_render_game = { path = "../incant_render_game", default-features = false }
 ulid.workspace = true
-incant_observe = { path = "../incant_observe" }
+incant_observe = { path = "../incant_observe", default-features = false }
 incant_render_authoring.workspace = true
 serde = { workspace = true }
 serde_json = { workspace = true }
@@ -29,15 +73,15 @@ incant_play_legacy = { workspace = true }
 incant_input.workspace = true
 incant_localization.workspace = true
 incant_agent = { workspace = true }
-incant_assets = { path = "../incant_assets" }
-incant_audio = { path = "../incant_audio" }
+incant_assets = { path = "../incant_assets", default-features = false }
+incant_audio = { path = "../incant_audio", default-features = false }
 sha2.workspace = true
-incant_import = { path = "../incant_import" }
+incant_import = { path = "../incant_import", default-features = false }
 clap = { version = "4.5", features = ["derive"] }
 dirs = "6"
 rpassword = "7"
 tempfile = "3"
-incant_render = { path = "../incant_render" }
+incant_render = { path = "../incant_render", default-features = false }
 base64 = "0.22"
 schemars = { workspace = true }
 thiserror = { workspace = true }

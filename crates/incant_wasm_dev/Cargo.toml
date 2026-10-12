@@ -6,10 +6,22 @@ rust-version.workspace = true
 publish.workspace = true
 
 [features]
-default = []
+default = ["physics-deterministic"]
 static-conformance = ["wasmtime-host", "incant_wasm_runtime/embedded-fixture", "incant_script/static-module"]
 # Explicit desktop development dependency; never enabled by shipped players.
 wasmtime-host = ["dep:incant_input", "dep:wasmtime", "dep:incant_runtime", "dep:incant_types", "dep:thiserror", "dep:wasmparser", "dep:incant_wasm_runtime"]
+
+# Select one physics kernel for the entire process, including build/test hosts.
+physics-deterministic = [
+    "incant_runtime?/physics-deterministic",
+    "incant_script/physics-deterministic",
+    "incant_wasm_runtime?/physics-deterministic",
+]
+physics-fast-simd8 = [
+    "incant_runtime?/physics-fast-simd8",
+    "incant_script/physics-fast-simd8",
+    "incant_wasm_runtime?/physics-fast-simd8",
+]
 
 [target.'cfg(any(target_os = "macos", target_os = "linux", target_os = "windows"))'.dependencies]
 wasmtime = { version = "=49.0.2", default-features = false, features = ["std", "runtime", "cranelift"], optional = true }
@@ -19,7 +31,7 @@ incant_input = { workspace = true, optional = true }
 incant_types = { workspace = true, optional = true }
 thiserror = { workspace = true, optional = true }
 
-incant_wasm_runtime = { path = "../incant_wasm_runtime", optional = true }
+incant_wasm_runtime = { path = "../incant_wasm_runtime", optional = true, default-features = false }
 
 [dependencies]
 incant_wasm_abi = { path = "../incant_wasm_abi" }

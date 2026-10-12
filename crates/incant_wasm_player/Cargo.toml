@@ -6,13 +6,29 @@ rust-version.workspace = true
 publish.workspace = true
 
 [features]
-default = []
+default = ["physics-deterministic"]
 # Trusted repository fixture only; the caller prepares the reviewed static bundle.
 fixture = ["incant_wasm_runtime/embedded-fixture"]
 
+# Select one physics kernel for the entire process, including build/test hosts.
+physics-deterministic = [
+    "incant_audio_runtime/physics-deterministic",
+    "incant_game_runtime/physics-deterministic",
+    "incant_runtime/physics-deterministic",
+    "incant_script/physics-deterministic",
+    "incant_wasm_runtime/physics-deterministic",
+]
+physics-fast-simd8 = [
+    "incant_audio_runtime/physics-fast-simd8",
+    "incant_game_runtime/physics-fast-simd8",
+    "incant_runtime/physics-fast-simd8",
+    "incant_script/physics-fast-simd8",
+    "incant_wasm_runtime/physics-fast-simd8",
+]
+
 [dependencies]
-incant_wasm_runtime = { path = "../incant_wasm_runtime" }
-incant_game_runtime = { path = "../incant_game_runtime", features = ["static-module"] }
+incant_wasm_runtime = { path = "../incant_wasm_runtime", default-features = false }
+incant_game_runtime = { path = "../incant_game_runtime", features = ["static-module"], default-features = false }
 incant_script = { workspace = true, features = ["static-module"] }
 incant_runtime.workspace = true
 incant_input.workspace = true

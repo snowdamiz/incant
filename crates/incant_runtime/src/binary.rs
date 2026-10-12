@@ -1,4 +1,4 @@
-//! Versions 1–19, little-endian checked data (not executable code). SHA-256 detects
+//! Layouts 1–19, little-endian checked data (not executable code). SHA-256 detects
 //! damage, not authorship. No casts, alignment assumptions or native-layout ABI.
 use crate::scene::MAX_ENTITIES;
 use crate::{CookedEntity, CookedScene, SceneError, StableId};
@@ -8,6 +8,9 @@ use std::collections::BTreeMap;
 
 const MAGIC: &[u8; 8] = b"INCANTSC";
 const VERSION: u32 = 19;
+// Low 16 bits identify the record layout; high 16 identify the physics kernel.
+// Legacy version words have zero high bits and retain deterministic semantics.
+const LAYOUT_MASK: u32 = 0xffff;
 const PREFIX: usize = 40;
 const HEADER: usize = 72;
 const MIN_RECORD: usize = 104;
@@ -29,7 +32,7 @@ impl CookedScene {
             .iter()
             .any(|node| node.source.as_ref().is_some_and(|s| s.transport_epoch != 0))
         {
-            VERSION
+            19
         } else if self.has_compound_animation_fades() {
             18
         } else if self.has_root_motion() {
@@ -67,7 +70,8 @@ impl CookedScene {
         } else {
             1
         };
-        bytes.extend(version.to_le_bytes());
+        let format = version | (u32::from(self.physics_variant().tag()) << 16);
+        bytes.extend(format.to_le_bytes());
         bytes.extend(self.tick_rate.to_le_bytes());
         bytes.extend(self.id.0);
         bytes.extend((self.entities.len() as u32).to_le_bytes());
@@ -193,9 +197,10 @@ impl CookedScene {
         if &header.array::<8>()? != MAGIC {
             return Err(SceneError::Invalid("magic"));
         }
-        let version = header.u32()?;
-        if !(1..=VERSION).contains(&version) {
-            return Err(SceneError::Version(version));
+        let format = header.u32()?;
+        let version = format & LAYOUT_MASK;
+        if !(1..=VERSION).contains(&version) || format >> 16 > 2 {
+            return Err(SceneError::Version(format));
         }
         let tick_rate = header.u32()?;
         let id = StableId(header.array()?);
@@ -212,6 +217,9 @@ impl CookedScene {
             return Err(SceneError::Integrity);
         }
         let mut reader = Reader(&bytes[HEADER..]);
+        // Refuse a mismatched process before allocating records or solver state.
+        let variant = crate::PhysicsVariant::from_tag((format >> 16) as u8)?;
+        variant.admit()?;
         let mut entities = Vec::with_capacity(count);
         let mut parents = Vec::with_capacity(count);
         let mut previous = None;

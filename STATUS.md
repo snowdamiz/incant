@@ -1584,3 +1584,16 @@ checks; the three fresh bulk processes remain a separate development-only smoke.
 Retained CPU pose blending integration against actual main120 preserves all five
 reviewed source hashes and passes 166 CPU tests plus Clippy/graph checks; 71 GPU
 tests remain ignored. [Receipt](docs/spikes/evidence/runtime-pose-blending-main120.json).
+
+## Compiled physics selection — locally verified
+
+Native deterministic, fast and optional eight-lane builds now forward their
+kernel choice through 32 affected packages. Cooked scenes and embedded save
+scenes refuse a foreign exact variant before world creation; legacy deterministic
+bytes are preserved. All three builds passed the complete 249-test runtime suite,
+105 consumer tests, five focused admission/save tests, actual headless/player/editor
+all-target checks and applicable Clippy. Independent production source review is
+complete; current-main integration remains separate. Per-project settings,
+automatic matching Play processes and export selection are the next work, and
+physics-world saves, performance/device measurements and eight-lane adoption
+remain open. [Scope and retained evidence](docs/spikes/physics-mode-admission.md).

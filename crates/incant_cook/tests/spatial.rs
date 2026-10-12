@@ -1,4 +1,7 @@
 #![cfg(feature = "scene")]
+#[path = "support/scene_format.rs"]
+mod format;
+use format::scene_format;
 use incant_cook::{CookError, cook_scene, stable_id};
 use incant_doc::{Asset, Entity, Project, Scene, new_id};
 use incant_runtime::{CookedScene, NativeWorld, VisualAssetKind};
@@ -269,7 +272,10 @@ fn tilemap_cook_preserves_binary_ids_local_cells_and_native_solid_collision() {
     let before = project.clone();
     let bytes = cook_scene(&project, &sid).unwrap();
     assert_eq!(project, before);
-    assert_eq!(u32::from_le_bytes(bytes[8..12].try_into().unwrap()), 6);
+    assert_eq!(
+        u32::from_le_bytes(bytes[8..12].try_into().unwrap()),
+        scene_format(6)
+    );
     drop(project);
     let mut world = NativeWorld::from_bytes(&bytes).unwrap();
     let view = world.spatial_view().unwrap();
@@ -318,7 +324,7 @@ fn flipbook_cook_validates_authoring_contract_and_preserves_exact_rational_frame
     let before = project.clone();
     let bytes = cook_scene(&project, &sid).unwrap();
     assert_eq!(project, before);
-    assert_eq!(&bytes[8..12], &8u32.to_le_bytes());
+    assert_eq!(&bytes[8..12], &scene_format(8).to_le_bytes());
     let scene = CookedScene::from_bytes(&bytes).unwrap();
     let f = scene
         .spatial()

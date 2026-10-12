@@ -1,3 +1,5 @@
+#[path = "support/scene_format.rs"]
+mod scene_format;
 use incant_runtime::*;
 use incant_types::Transform;
 use sha2::{Digest, Sha256};
@@ -67,7 +69,10 @@ fn binary_v5_preserves_sprite_numeric_values_and_binary_frame_ids() {
             s.mode = mode;
             let expected = scene(s.clone()).unwrap();
             let bytes = expected.to_bytes();
-            assert_eq!(&bytes[8..12], &5u32.to_le_bytes());
+            assert_eq!(
+                &bytes[8..12],
+                &crate::scene_format::scene_format(5).to_le_bytes()
+            );
             let loaded = CookedScene::from_bytes(&bytes).unwrap();
             assert_eq!(loaded.spatial()[0].sprite.as_deref(), Some(&s));
             assert_eq!(loaded.to_bytes(), bytes);
@@ -102,7 +107,7 @@ fn binary_sprite_tags_flags_ranges_and_truncations_are_checked() {
         assert!(CookedScene::from_bytes(&bytes).is_err(), "offset {offset}");
     }
     let mut bytes = original.clone();
-    bytes[8..12].copy_from_slice(&4u32.to_le_bytes());
+    bytes[8..12].copy_from_slice(&crate::scene_format::scene_format(4).to_le_bytes());
     rehash(&mut bytes);
     assert!(CookedScene::from_bytes(&bytes).is_err());
     let mut bytes = original.clone();

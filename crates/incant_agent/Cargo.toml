@@ -5,15 +5,30 @@ edition.workspace = true
 rust-version.workspace = true
 publish.workspace = true
 
+[features]
+default = ["physics-deterministic"]
+
+# Select one physics kernel for the entire process, including build/test hosts.
+physics-deterministic = [
+    "incant_cmd/physics-deterministic",
+    "incant_import/physics-deterministic",
+    "incant_observe/physics-deterministic",
+]
+physics-fast-simd8 = [
+    "incant_cmd/physics-fast-simd8",
+    "incant_import/physics-fast-simd8",
+    "incant_observe/physics-fast-simd8",
+]
+
 [dependencies]
 serde = { workspace = true }
 serde_json = { workspace = true }
 thiserror = { workspace = true }
 incant_doc = { workspace = true }
 incant_input.workspace = true
-incant_observe = { path = "../incant_observe" }
+incant_observe = { path = "../incant_observe", default-features = false }
 incant_cmd = { workspace = true }
-incant_import = { path = "../incant_import" }
+incant_import = { path = "../incant_import", default-features = false }
 schemars = { workspace = true }
 reqwest = { version = "0.13", default-features = false, features = ["blocking", "json", "form", "rustls"] }
 zeroize = { version = "1.8", features = ["derive"] }
