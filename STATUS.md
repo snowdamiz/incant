@@ -26,8 +26,8 @@ requested-search budget; authorized failures reject the complete staged native
 transaction. Actual Wasmtime/wasm2c conformance passes 369 tests/doctests, Clippy
 and three development processes. A separate 190 native runtime tests, supported
 wasm32/tooling checks and the authoring-free dependency check pass. Independent
-source review accepted the frozen implementation; main integration remains
-pending. An ordinary source-deleted navigation guest shipping proof, full SDK,
+source and final evidence review accepted the implementation; main integration
+remains pending. An ordinary source-deleted navigation guest shipping proof, full SDK,
 guest checkpoints, devices and phase gates remain open.
 [Contract and evidence](docs/spikes/native-wasm-navigation-paths.md).
 
