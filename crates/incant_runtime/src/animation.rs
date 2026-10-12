@@ -252,6 +252,8 @@ pub enum AnimationControl {
 pub struct AnimationSnapshot {
     pub id: StableId,
     pub state: AnimationState,
+    /// Actual second pose, including a graph blend without a timed transition.
+    pub blend: Option<AnimationBlendSample>,
 }
 #[derive(Component)]
 pub(crate) struct Playback {
@@ -303,6 +305,7 @@ impl NativeWorld {
             rows.push(AnimationSnapshot {
                 id: id.0,
                 state: playback.state,
+                blend: playback.blend_sample(),
             });
         }
         Ok(())

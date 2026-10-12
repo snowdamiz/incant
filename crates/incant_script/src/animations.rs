@@ -135,6 +135,7 @@ mod tests {
             graphs: Default::default(),
             rows: vec![AnimationSnapshot {
                 id: StableId([0; 16]),
+                blend: None,
                 state: AnimationState {
                     sample: AnimationSample {
                         clip: None,
