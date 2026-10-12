@@ -86,6 +86,19 @@ source, raw Wasm or cached native modules at runtime.
   Active timed blends make v1 length/read refuse; parameter blends make both v1
   and v2 refuse. The parser accepts all three exact layouts. Old hosts/parsers
   reject the new namespace/magic instead of silently dropping the second pose.
+  All three versions explicitly refuse native weighted tree poses.
+- `animation_poses(scratch)` uses `incant_animation_v4` for complete copied
+  poses, including nested animation trees. It returns scene identity and sorted
+  stable entity IDs; each row exposes `samples()` and an explicit pose kind.
+  `Single` is one sample. `SlerpTransition` and `SlerpParameter` retain ordered
+  source/destination operands and the existing exact two-pose SLERP semantics.
+  `WeightedQuaternionMean` carries the native positive normalized weights for
+  local translation/scale blending and normalized quaternion averaging. These
+  kinds are not interchangeable. The row clip/time is representative only; use
+  all samples for a weighted pose. Unknown kinds or reserved metadata fail
+  explicitly. Copied clocks, flags and timed-transition metadata remain available.
+  Queued controls do not change the current callback snapshot. See
+  [samples/animation_poses.rs](samples/animation_poses.rs).
 - `animation_graphs(scratch)` returns sorted entity/state IDs, the explicit master
   pause bit, state clocks, and sorted stable parameter IDs with captured values.
   `control_animation_graph` queues SetParameter/SelectState commands through the
@@ -175,6 +188,8 @@ copied locale/message queries and atomic settings. `incant_navigation_v1` adds
 local-avoidance requests/results and committed navmesh/grid path queries. The
 path imports append at opcodes 36–38; all previous operations remain unchanged.
 `incant_physics_v1` appends bounded batch/event/result operations at 39–41.
+`incant_animation_v4` appends complete pose snapshot length/read at 42–43; all
+previous operations and layouts remain unchanged.
 Older hosts reject unsupported imports explicitly.
 Existing `incant_v1`, `incant_input_v1`, and `incant_flipbook_v1` layouts remain
 unchanged. Unknown namespaces, signatures and magic/layout versions fail closed.
@@ -192,7 +207,14 @@ v2: 8,000,016; v3: 10,400,016 copied bytes), 256 clips
 per entity and finite speed in [-16, 16]. Snapshot row order is unspecified;
 use stable IDs. Callers should retain appropriately sized scratch across ticks. The SDK exports
 snapshot maximum sizes for reusable buffers; `ANIMATION_MAX_BYTES` remains the
-v1 bound, and v2/v3 have explicit versioned constants. Graph snapshots hold at
+v1 bound, and v2/v3 have explicit versioned constants. V4 has sorted entity IDs,
+at most 16 samples per row and at most 1,024 weighted graph rows. Its complete
+frame is bounded to 14,744,104 bytes (`ANIMATION_V4_MAX_BYTES`), including at most
+214,336 samples. Native sample order and f64 weights/times are retained exactly;
+the parser validates the complete frame before exposing any iterator. The
+connected standalone tree currently supplies up to eight active samples;
+sixteen-sample wire capacity does not imply connected tree-state fades. Future
+composite/grouped pose kinds require an explicit compatible version. Graph snapshots hold at
 most 1,024 entities with 16 parameters each (458,776 bytes). Parameter values
 are finite within ±1,000,000 and the narrower authored range. Elapsed state time
 is bounded to 3,600 seconds; clip time may exceed this for longer clips. Host fuel and native validation

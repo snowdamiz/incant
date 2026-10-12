@@ -191,7 +191,7 @@ fn raw_versioned_unaligned_frames_and_late_errors_match_both_hosts() {
 #[test]
 fn additive_import_versions_and_signatures_refuse_unsupported_contracts() {
     for import in [
-        r#"(import "incant_animation_v4" "snapshot_len" (func (param i64)(result i32)))"#,
+        r#"(import "incant_animation_v5" "snapshot_len" (func (param i64)(result i32)))"#,
         r#"(import "incant_animation_v2" "read_snapshot" (func (param i64 i32)(result i32)))"#,
         r#"(import "incant_animation_v2" "control" (func (param i64 i32 i32)(result i32)))"#,
     ] {

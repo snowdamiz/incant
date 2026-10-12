@@ -277,7 +277,7 @@ fn validate_pose_blend(row: abi::AnimationRowV3) -> Result<()> {
     Ok(())
 }
 
-fn validate_transition(row: abi::AnimationRowV2) -> Result<()> {
+pub(crate) fn validate_transition(row: abi::AnimationRowV2) -> Result<()> {
     if !row.is_finite() || row.transition_flags & !7 != 0 {
         return Err(Error::Malformed);
     }

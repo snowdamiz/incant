@@ -48,6 +48,11 @@ pub enum Call {
         ptr: i32,
         capacity: i32,
     },
+    AnimationLenV4,
+    ReadAnimationsV4 {
+        ptr: i32,
+        capacity: i32,
+    },
     AnimationLenV3,
     ReadAnimationsV3 {
         ptr: i32,
@@ -165,6 +170,8 @@ pub struct Capability {
     animations: Vec<u8>,
     animations_v2: Vec<u8>,
     animations_v3: Vec<u8>,
+    animation_scene: Option<StableId>,
+    animations_v4: Vec<u8>,
     animation_graph_rows: Vec<incant_runtime::AnimationGraphSnapshot>,
     animation_graphs: Vec<u8>,
     animation_rejected: bool,
@@ -238,7 +245,9 @@ impl Capability {
             return Err(error);
         }
         self.animation_rejected = false;
+        self.animation_scene = Some(world.scene_id());
         self.animations_v3.clear();
+        self.animations_v4.clear();
         self.animation_graphs.clear();
         if let Err(error) = world.snapshot_animation_graphs(&mut self.animation_graph_rows) {
             self.abort();
@@ -322,6 +331,7 @@ impl Capability {
         self.animations.clear();
         self.animations_v2.clear();
         self.animations_v3.clear();
+        self.animations_v4.clear();
         self.animation_graph_rows.clear();
         self.animation_graphs.clear();
         self.active = false;
@@ -363,6 +373,7 @@ impl Capability {
         self.animations.clear();
         self.animations_v2.clear();
         self.animations_v3.clear();
+        self.animations_v4.clear();
         self.animation_graph_rows.clear();
         self.animation_graphs.clear();
         if self.tick_logs.rejected {
@@ -488,6 +499,8 @@ impl Capability {
                     | Call::AnimationLenV2
                     | Call::ReadAnimationsV2 { .. }
                     | Call::ControlAnimationV2 { .. }
+                    | Call::AnimationLenV4
+                    | Call::ReadAnimationsV4 { .. }
                     | Call::AnimationLenV3
                     | Call::ReadAnimationsV3 { .. }
                     | Call::AnimationGraphLen
@@ -623,6 +636,29 @@ impl Capability {
                 let region = range(ptr, len, memory.len())?;
                 self.transfer(len)?;
                 memory[region].copy_from_slice(self.navigation_state()?.reply()?);
+                return Ok(len as i32);
+            }
+            Call::AnimationLenV4 | Call::ReadAnimationsV4 { .. } => {
+                if self.animations_v4.is_empty() {
+                    crate::animation_poses::encode(
+                        self.animation_scene
+                            .ok_or(Error::Abi("animation scene absent"))?,
+                        &mut self.animation_rows,
+                        &mut self.animations_v4,
+                    )?;
+                }
+                let len = self.animations_v4.len();
+                if let Call::ReadAnimationsV4 { ptr, capacity } = call {
+                    let capacity = usize::try_from(capacity)
+                        .map_err(|_| Error::Abi("animation pose destination capacity"))?;
+                    if capacity < len {
+                        return Err(Error::Abi("animation pose destination capacity"));
+                    }
+                    range(ptr, capacity, memory.len())?;
+                    let region = range(ptr, len, memory.len())?;
+                    self.transfer(len)?;
+                    memory[region].copy_from_slice(&self.animations_v4);
+                }
                 return Ok(len as i32);
             }
             Call::AnimationLenV3 | Call::AnimationGraphLen => {

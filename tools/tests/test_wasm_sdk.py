@@ -92,6 +92,19 @@ class RegistryTests(unittest.TestCase):
             value=self.data[name]
             prefix=value[:length] if isinstance(value,list) else dict(list(value.items())[:length])
             self.assertEqual(hashlib.sha256(json.dumps(prefix,sort_keys=True).encode()).hexdigest(),digest,name)
-        self.assertEqual([(f['name'],f['opcode']) for f in self.data['functions'][39:]], [('query_batch',39),('trigger_events',40),('read_result',41)])
+        self.assertEqual([(f['name'],f['opcode']) for f in self.data['functions'][39:42]], [('query_batch',39),('trigger_events',40),('read_result',41)])
         size=lambda name: sum(generator.SIZES[t]*(n[0] if n else 1) for _,t,*n in self.data['records'][name])
         self.assertEqual([size(n) for n in ('PhysicsHeader','PhysicsQuery','PhysicsRow','PhysicsEvent','PhysicsEventHeader')],[16,112,96,40,32])
+
+    def test_weighted_pose_v4_preserves_all_prior_contracts(self):
+        import hashlib
+        prior = {'functions': (42, '6e4b7168e0fa1d68539dcd81135698c2a1d0928a8401fbc264565ef0a7e3394f'), 'constants': (73, '004d9eda78ce436e0e829a38ddc1731cf3e923591f4c26dcf6105abbec105a19'), 'magic': (19, '5865239dc8d99fc89e9b7ca7c4f5cee7fd7c4bbbfeddd0cc67d038960aa0e8e9'), 'enums': (9, '8af90a2e8f963fee749b2c02742ef375ee6c1c522f823534b44d79f86560dcae'), 'records': (41, 'f6e19fbae8390a07534db3626163d84f4e529e44bd5de231f0573e77ae622964'), 'namespaces': (11, '5257fdbf89a4558c57169c73a59520e26f5ccd408be8941ec2201512f52cef0f')}
+        for name, (length, digest) in prior.items():
+            value=self.data[name]
+            prefix=value[:length] if isinstance(value,list) else dict(list(value.items())[:length])
+            self.assertEqual(hashlib.sha256(json.dumps(prefix,sort_keys=True).encode()).hexdigest(),digest,name)
+        self.assertEqual([(f['name'],f['opcode']) for f in self.data['functions'][42:]], [('snapshot_len',42),('read_snapshot',43)])
+        size=lambda name: sum(generator.SIZES[t]*(n[0] if n else 1) for _,t,*n in self.data['records'][name])
+        self.assertEqual([size(n) for n in ('AnimationHeaderV4','AnimationRowV4','AnimationPoseSample')], [40,96,24])
+        self.assertEqual(self.data['records']['AnimationRowV4'][:-4], self.data['records']['AnimationRowV2'])
+        self.assertLess(40+100000*96+214336*24,self.data['constants']['MEMORY'])
