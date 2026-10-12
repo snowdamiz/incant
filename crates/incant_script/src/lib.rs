@@ -2,6 +2,7 @@
 //! command bus, JSON projection or filesystem/network capability is installed.
 //! The prior document-backed host lives temporarily in incant_play_legacy.
 mod animation_commands;
+mod animation_graphs;
 mod animations;
 pub mod artifact;
 mod audio_commands;

@@ -76,6 +76,10 @@ export interface NativeCommands {
   controlAnimation(id: NativeId, control: 'playing' | 'looping', enabled: boolean): void;
   /** Finite [-16,16]; negative speed plays backward, zero holds the sample. */
   controlAnimation(id: NativeId, control: 'speed', speed: number): void;
+  /** Set a declared graph parameter within its authored range. */
+  setAnimationParameter(id: NativeId, parameter: NativeId, value: number): void;
+  /** Immediately select a declared graph state; preserves play/pause and speed. */
+  selectAnimationState(id: NativeId, state: NativeId): void;
   spawn(id: NativeId, transform: NativeTransform, parent: NativeId | null, velocity: NativeVector3 | null): void;
   /** No cascading deletion. Reparent/remove children in the same batch. */
   despawn(id: NativeId): void;
@@ -160,7 +164,27 @@ export interface NativeFlipbooks {
  * bit 0 = playing, bit 1 = looping, bit 2 = completed; other bits zero.
  * VM-owned copies within its memory budget. Retention/mutation cannot change
  * native playback or a later snapshot; order is unspecified. */
+/** Committed graph rows, a subset of animations.ids. Parameters for row i occupy
+ * [parameterOffsets[i], parameterOffsets[i+1]) in both parameter columns.
+ * Source sample/weight represents the same two-input pose as the renderer.
+ * All arrays are owned snapshots; controls become visible after acceptance. */
+export interface NativeAnimationGraphs {
+  readonly ids: readonly NativeId[];
+  readonly states: readonly NativeId[];
+  /** Explicit master pause; completed poses may still evaluate transitions. */
+  readonly paused: Uint8Array;
+  readonly seconds: Float64Array;
+  readonly elapsed: Float64Array;
+  readonly parameterIds: readonly NativeId[];
+  readonly parameterOffsets: Uint32Array;
+  readonly parameterValues: Float64Array;
+  readonly blending: Uint8Array;
+  readonly sourceClips: Int32Array;
+  readonly sourceSeconds: Float64Array;
+  readonly weights: Float64Array;
+}
 export interface NativeAnimations {
+  readonly graphs: NativeAnimationGraphs;
   readonly ids: readonly NativeId[];
   readonly clips: Int32Array;
   readonly seconds: Float64Array;
