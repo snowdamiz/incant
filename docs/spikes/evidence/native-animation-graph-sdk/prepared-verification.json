@@ -1,0 +1,143 @@
+{
+  "time": "2026-10-12T05:08:19.822074+00:00",
+  "manifest_sha256": "27122c5b8430165a5e80e47d0a954de0e03c79c66b50c0552b09e09516f32439",
+  "wabt": "1.0.42",
+  "module_count": 109,
+  "verified_file_count": 546,
+  "selected": [
+    {
+      "name": "rust-animation-graph",
+      "prefix": "m76",
+      "input_sha256": "6c8b8dff3e9d7ca4603ad80a8e35d868accf26875065b7162f901acbe47b8d27",
+      "prepared_sha256": "cfca0547ceabadc982bb0828a51a4a602048af5a18d7412b9f3dc0c58aa5d3d4"
+    },
+    {
+      "name": "rust-animation-graph-capacity",
+      "prefix": "m77",
+      "input_sha256": "5de90c0c825d37aa863305a7dedd7f8bd5cef7b6655c57f0baea3da8f31e7739",
+      "prepared_sha256": "5b3f8d4e70743e42fd4d7320439b4e58a8252b4f8ba74b1d69b7b6edf0850742"
+    },
+    {
+      "name": "rust-animation-graph-pose-capacity",
+      "prefix": "m78",
+      "input_sha256": "1f8dec3dc2b70ec28f1934650af19ca9fd99a2f4a3fc43ac5a930e75a9a314f1",
+      "prepared_sha256": "3057357fdd85cf6c91464a271f9c79a472b63a393c7db6ada5e5c86976129fca"
+    },
+    {
+      "name": "rust-animation-graph-number",
+      "prefix": "m79",
+      "input_sha256": "d241fbaf151c68de644ad4da6d9244da0c9512f9d79f51a9a33e1bf269cbcd24",
+      "prepared_sha256": "dde5dc2d51c2e1c01f53bc3ef691b7e6dc2a952c64aa4491621c11a78c00f029"
+    },
+    {
+      "name": "rust-animation-graph-range",
+      "prefix": "m80",
+      "input_sha256": "7f7821c4797bc92519980f917e7bd56b7cf98a986a3a518b4cb414fb5ccc04d2",
+      "prepared_sha256": "76b23523c8c442080b69d8c61c9dfdfad3b6e0c90fcf351b8f42bd3a0e5a14df"
+    },
+    {
+      "name": "rust-animation-graph-authored-range",
+      "prefix": "m81",
+      "input_sha256": "fb8cd3c017a25e71ff0de85b14bd2a496aacde2719465a4b1d7502028ccbf336",
+      "prepared_sha256": "926057e68bc36a1896ad9ae4211b9fb9eb61fbdfe7e38218059f62b0f12d3ea3"
+    },
+    {
+      "name": "rust-animation-graph-parameter",
+      "prefix": "m82",
+      "input_sha256": "678459219435c67c8b86b04ef1f10d43aad831257326e75aafc0b0ee0eb0b9f1",
+      "prepared_sha256": "b63947c173544599fc6fe52e3fe2a4ad84b69a2eca383b1ce19def341a611bf6"
+    },
+    {
+      "name": "rust-animation-graph-state",
+      "prefix": "m83",
+      "input_sha256": "f96956f2b7ac8cd702649ead02e2663522d6e0f62e3e27c74bd0d086b321f325",
+      "prepared_sha256": "c0a1103122aafdbf1016bd94c6aa4a02aacbeba8178ac2e1bbf359db385e5099"
+    },
+    {
+      "name": "rust-animation-graph-entity",
+      "prefix": "m84",
+      "input_sha256": "79a98c76ad79a7792306a52a22725a706ca34dc3fa79a2b7730b524289655464",
+      "prepared_sha256": "79b052f994ff5426cf3fca5d5a254728c80fcdf4f3100850b8975dedc8c9602d"
+    },
+    {
+      "name": "rust-animation-graph-quota",
+      "prefix": "m85",
+      "input_sha256": "eb571358fde7c1898e5076e8b89e4e67cf1c25d249235676d0e9e31b1718b1ab",
+      "prepared_sha256": "4dfeee7776d76c9ca5a3fa8b2ce1d312caba5b0bc7fa8a1c48a192c1ac908e28"
+    },
+    {
+      "name": "rust-animation-graph-callback",
+      "prefix": "m86",
+      "input_sha256": "da641085d977bbf274c30071116c3900df097d5850ce3f5835ed1da1a5fca593",
+      "prepared_sha256": "b11138420ae2affd0c42aa9cfdbd73e878a1f2e46a721b246472a42c039c16c8"
+    },
+    {
+      "name": "rust-animation-graph-trap",
+      "prefix": "m87",
+      "input_sha256": "7f778f42f496d248c8081a4fc9d82c6a12bd2f3cb89389eabf5e1bfadd9aa41a",
+      "prepared_sha256": "8aa7929809e66793d7ce9652a58f18460c5fff48d31d6847fda05f02ca7ee3e4"
+    }
+  ],
+  "retained_files": {
+    "m77.original.wasm": "5de90c0c825d37aa863305a7dedd7f8bd5cef7b6655c57f0baea3da8f31e7739",
+    "m76.h": "b8883e75d1b262ee2b1092f2faf7d9f45c5f9b1b4af1b2e44e6a589b44b6f8a0",
+    "m77.wasm": "5b3f8d4e70743e42fd4d7320439b4e58a8252b4f8ba74b1d69b7b6edf0850742",
+    "m83.original.wasm": "f96956f2b7ac8cd702649ead02e2663522d6e0f62e3e27c74bd0d086b321f325",
+    "m78.h": "70276a3b80fc7d64a3074d945242466331543efabf4519afa902a346966dd166",
+    "m82.wasm": "b63947c173544599fc6fe52e3fe2a4ad84b69a2eca383b1ce19def341a611bf6",
+    "m87.original.wasm": "7f778f42f496d248c8081a4fc9d82c6a12bd2f3cb89389eabf5e1bfadd9aa41a",
+    "m76-facade.c": "571f68b284e912ee98986afcdf030d412ba5c8c8475256f8b2d7ee6d3f03320f",
+    "m77-facade.c": "45b8db8bb1e4bd55a84dd5009cf63e81425eea89969214b3a2eed0859441e630",
+    "m83.wasm": "c0a1103122aafdbf1016bd94c6aa4a02aacbeba8178ac2e1bbf359db385e5099",
+    "m80.original.wasm": "7f7821c4797bc92519980f917e7bd56b7cf98a986a3a518b4cb414fb5ccc04d2",
+    "m83.c": "6cb41b216af7764b41219aa6a64c7d49f134d5ec66a9a89b955859eaa77e95e7",
+    "m84.original.wasm": "79a98c76ad79a7792306a52a22725a706ca34dc3fa79a2b7730b524289655464",
+    "m85.h": "9086c46f0a136d05f95bc37f5ccd869e96cb0c18e9ff42c73cbfb1faf92b73f0",
+    "m81.h": "a76fef8b86f9f82f3b41301a3dd590b48122432426639e1f2956f432adc643f0",
+    "m76.wasm": "cfca0547ceabadc982bb0828a51a4a602048af5a18d7412b9f3dc0c58aa5d3d4",
+    "m84-facade.c": "cdc7ce192f6e666d627e68fa70b84bbbd50c2a0bde558a1fe9acd9c00a67b36b",
+    "m85-facade.c": "34c179649b01f11b271841ffb5a6c3edaee2f7703c8e50bffd7e03d6d0011dd5",
+    "m87.c": "78c3d3bf9884a49c06cb18ab923c5d5d542a2e1ab74ea8ada1032f30fe96ac5a",
+    "m79.c": "2c2b79ec64e7e80ff601c8014a6ed221bf9f698181f83fa883475832474efdd7",
+    "m84.wasm": "79b052f994ff5426cf3fca5d5a254728c80fcdf4f3100850b8975dedc8c9602d",
+    "m83-facade.c": "cd753fbb81e7e21e100ae6eb2e0d638178ece571ef7ac0f8cc3259ae77cf0795",
+    "m82-facade.c": "76b075b5fb9f9f7fe2914e6b35dc5063984e3cc04a37c8797b04d7de81210456",
+    "m77.c": "d22932f80a5645c98392b8305a99a312a32ca6fa3d482310ba0aa7b68a643150",
+    "m86.h": "766cb5b450708ba076a92a654e5169617cfedf80969c4c35ecbfc711eb98ad3f",
+    "m80.c": "c54a0d6af1313467ce6d470ed54feacf5396264ab9c9e1e2dc9dee72b353644b",
+    "m79.original.wasm": "d241fbaf151c68de644ad4da6d9244da0c9512f9d79f51a9a33e1bf269cbcd24",
+    "m84.c": "ed2dc6b7a2c95270f594f2eebe22046c2b47a373e98bfb37c52e80bdc53873ec",
+    "m85.wasm": "4dfeee7776d76c9ca5a3fa8b2ce1d312caba5b0bc7fa8a1c48a192c1ac908e28",
+    "m82.h": "25009aa87719750bb70cccfdbae8de7d4abfb96b515f7510f460d3806de56927",
+    "m78.c": "19fb7cd226c307c0e13f4701c5f24778a9e9b460b2fba6f105a42e90688146f7",
+    "m86.wasm": "b11138420ae2affd0c42aa9cfdbd73e878a1f2e46a721b246472a42c039c16c8",
+    "m87-facade.c": "7b80573577043e47407aae588baa41ef5472fcd5e6db6dfacb76410d35f746b1",
+    "m86-facade.c": "c42a34fadcb5e6eebceeddcd8eab458e9a4c9495051d62396c423d62db4cdcf2",
+    "m76.c": "223f985d856abb87a0eb7b3f80e74754ea047a6119618d460d264b7e82a3b13c",
+    "m78.original.wasm": "1f8dec3dc2b70ec28f1934650af19ca9fd99a2f4a3fc43ac5a930e75a9a314f1",
+    "m87.h": "c1f75dc055cfa16aa243b3a61f2a210f032653c37b2edae759a8c77f7e494dee",
+    "m81.c": "2d66183ffd733db520c082affcdfcc30e9c8994298e6183a9e96cd931e8120cc",
+    "m85.c": "0083d4917aca9eb624caec85c1ac80821f0a23d00fdd35b5aae021bd8b32c235",
+    "m87.wasm": "8aa7929809e66793d7ce9652a58f18460c5fff48d31d6847fda05f02ca7ee3e4",
+    "m83.h": "e6c0d26c2a3d8fd847c9bc5568cad318b35e5f6ee290a143674c887b69494c6e",
+    "m85.original.wasm": "eb571358fde7c1898e5076e8b89e4e67cf1c25d249235676d0e9e31b1718b1ab",
+    "m77.h": "a7dbafba034cc357c0f7082202d3efab1cc27f0dd61e92f790d1d9814cbfe8e8",
+    "m81.original.wasm": "fb8cd3c017a25e71ff0de85b14bd2a496aacde2719465a4b1d7502028ccbf336",
+    "m79.wasm": "dde5dc2d51c2e1c01f53bc3ef691b7e6dc2a952c64aa4491621c11a78c00f029",
+    "m80.wasm": "76b23523c8c442080b69d8c61c9dfdfad3b6e0c90fcf351b8f42bd3a0e5a14df",
+    "m78-facade.c": "fb0012ddecc5219e0068914443009f2d937d328c6570e4b97b5ab7987ba341ea",
+    "m79-facade.c": "5d0adb1c9443ac7b26e1cc63cfdbe2124053ea8788cf2cc4841c1ac3603270ee",
+    "m79.h": "559061fdfe4ff21c7fb3a7f24dc26684201b3cfe03b4abae6ad3b267170acffc",
+    "m82.c": "41b3a236307f52eb99c1fb3c07f12d784e2147c6721b45528722851d8e5789ab",
+    "m80-facade.c": "0f29d5db2c28c06fe99df42464475ab92c6712e1195ab0d0dcb2581b07bfd029",
+    "m81-facade.c": "a33dc8e6f1e11988994c84d4c85a849bf29b20af4549be3b4f8411304d3c9632",
+    "m84.h": "60ab7ce4c62f6d4247c7145a453aa6d121155ef0f04dddbefa33479120ae72e0",
+    "m81.wasm": "926057e68bc36a1896ad9ae4211b9fb9eb61fbdfe7e38218059f62b0f12d3ea3",
+    "m78.wasm": "3057357fdd85cf6c91464a271f9c79a472b63a393c7db6ada5e5c86976129fca",
+    "m76.original.wasm": "6c8b8dff3e9d7ca4603ad80a8e35d868accf26875065b7162f901acbe47b8d27",
+    "m86.original.wasm": "da641085d977bbf274c30071116c3900df097d5850ce3f5835ed1da1a5fca593",
+    "m80.h": "d1a585e8b68cdd690987ee82a0c5b9ef0e8fb74b7ead1f642d3dabf62e58cf09",
+    "m82.original.wasm": "678459219435c67c8b86b04ef1f10d43aad831257326e75aafc0b0ee0eb0b9f1",
+    "m86.c": "ad25b7631f2c12996cf1d30d27b1f9ae8532a4eab294f93d755e0e20b5e16551"
+  }
+}

@@ -170,6 +170,22 @@ def crossfade_guests(rustc, inputs, sdk_guests, environment):
     return modules
 
 
+def animation_graph_guests(rustc, inputs, sdk_guests, environment):
+    """Actual graph snapshots/controls with SDK and native atomic refusals."""
+    sample = inputs/'animation_graph.rs'
+    shutil.copy2(ROOT/'sdk/rust/samples/animation_graph.rs', sample)
+    failure = inputs/'animation_graph_failure.rs'
+    shutil.copy2(ROOT/'sdk/rust/fixtures/animation_graph_failure.rs', failure)
+    modules = []
+    for kind in (None, 'capacity', 'pose_capacity', 'number', 'range', 'authored_range', 'parameter', 'state', 'entity', 'quota', 'callback', 'trap'):
+        name = 'rust-animation-graph'+('-'+kind.replace('_', '-') if kind else '')
+        module = sdk_guests/(name+'.wasm')
+        rust_guest.compile(rustc, failure if kind else sample, module,
+                           env=environment, cfg=['sdk_graph_'+kind] if kind else ())
+        modules.append((name, module))
+    return modules
+
+
 def formatting_guests(rustc, inputs, sdk_guests, environment):
     """Actual no_std primitive ICU formatting and ignored-error controls."""
     sample = inputs/'formatting.rs'
@@ -267,6 +283,7 @@ def main():
             modules.extend(localization_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(animation_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(crossfade_guests(rustc, inputs, sdk_guests, environment))
+            modules.extend(animation_graph_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(formatting_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(steering_guests(rustc, inputs, sdk_guests, environment))
             environment['INCANT_RUST_SDK_GUESTS']=str(sdk_guests)

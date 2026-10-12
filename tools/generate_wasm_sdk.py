@@ -49,7 +49,9 @@ def generate(data, digest):
         shared.append('pub mod steering;\n')
     shared += [f'pub const {name}: usize = {value};\n' for name,value in data['constants'].items()]
     shared += [f'pub const {name}: &[u8; 8] = b"{value}";\n' for name,value in data['magic'].items()]
-    shared += ['pub const ANIMATION_V2_MAX_BYTES: usize = AnimationHeader::SIZE + ANIMATION_MAX_ROWS * AnimationRowV2::SIZE;\n',
+    shared += ['pub const ANIMATION_V3_MAX_BYTES: usize = AnimationHeader::SIZE + ANIMATION_MAX_ROWS * AnimationRowV3::SIZE;\n',
+               'pub const ANIMATION_GRAPH_MAX_BYTES: usize = AnimationGraphHeader::SIZE + ANIMATION_GRAPH_MAX_ROWS * AnimationGraphRow::SIZE + ANIMATION_GRAPH_MAX_PARAMETER_ROWS * AnimationGraphParameter::SIZE;\n',
+               'pub const ANIMATION_V2_MAX_BYTES: usize = AnimationHeader::SIZE + ANIMATION_MAX_ROWS * AnimationRowV2::SIZE;\n',
                'pub const ANIMATION_MAX_BYTES: usize = AnimationHeader::SIZE + ANIMATION_MAX_ROWS * AnimationRow::SIZE;\n',
                'pub const FLIPBOOK_MAX_BYTES: usize = FlipbookHeader::SIZE + FLIPBOOK_MAX_ROWS * Flipbook::SIZE;\n',
                '#[derive(Clone,Copy,Debug,PartialEq,Eq)] pub enum ValueType { I32, I64 }\n',
