@@ -1,0 +1,17 @@
+# Build and fixture hashes: before the launch and after the editor quit (fixture paths relative to /tmp/incant-native-0048-fixtures/saved)
+## before launch
+2026-10-11T23:42:04Z
+2d69d15cdffdb7ac7fcb9543c08c7e932affcd96c4a4f3fcb2005325467b70a3  /tmp/incant-native-review-0050-bin-v1/manifest.json
+89f6b0d990cbaf1f275b8b0e7d3c448a543ef7b4199239ec7e57c419c27623fd  /tmp/incant-native-review-0050-bin-v1/incant_editor
+3ff0ded175bc0c39b5a909234665a2ef12509aa8847726b34442873860fc7374  project.json
+0fd36d3eca6f5cf15d0c6d9c0cc07833a924f1bd4991b953191d867e60fe15df  project.journal.jsonl
+91cecc821692d0e478ef453384f00ca5daf3a5157c7ec441319d97d939d4ce09  ~/Library/Application Support/Incant/agent-usage/01M4PEJQNPMDQYEDGT0PRWN78X.json
+      23
+## after quit
+2026-10-11T23:58:49Z
+2d69d15cdffdb7ac7fcb9543c08c7e932affcd96c4a4f3fcb2005325467b70a3  /tmp/incant-native-review-0050-bin-v1/manifest.json
+89f6b0d990cbaf1f275b8b0e7d3c448a543ef7b4199239ec7e57c419c27623fd  /tmp/incant-native-review-0050-bin-v1/incant_editor
+3ff0ded175bc0c39b5a909234665a2ef12509aa8847726b34442873860fc7374  project.json
+0fd36d3eca6f5cf15d0c6d9c0cc07833a924f1bd4991b953191d867e60fe15df  project.journal.jsonl
+91cecc821692d0e478ef453384f00ca5daf3a5157c7ec441319d97d939d4ce09  ~/Library/Application Support/Incant/agent-usage/01M4PEJQNPMDQYEDGT0PRWN78X.json
+      23
