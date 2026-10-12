@@ -16,6 +16,15 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Native game UI window delivery — CPU adapter
+
+The ordinary desktop host now queues bounded opaque pointer/text receipts into
+its composed UI tick, with logical-DPI relayout, exclusive pointer ownership and
+transactional cancellation.72 affected CPU tests and scoped Clippy pass. The
+managed native preedit/activation bridge and Claude0056 real screen-space draw
+integration remain pending; no OS/GPU/device acceptance is claimed.
+[Evidence](docs/spikes/native-ui-window-input.md).
+
 ## Durable budget lock release — validated in checkpoint8
 
 Checkpoint7 exposed Busy when reopening a completed ledger. A private lock guard

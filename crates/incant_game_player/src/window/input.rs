@@ -1,5 +1,5 @@
-//! Explicit physical input mapping. Text/IME, touch and haptics are
-//! not connected by this desktop host; unrecognized physical keys are ignored.
+//! Physical mapping shared by the desktop gameplay and UI receipt adapters.
+//! Unrecognized physical keys, touch and haptics are ignored.
 use super::Error;
 use incant_input::{InputEvent, KeyCode, MAX_EVENTS_PER_TICK, MouseButton, WheelUnit};
 use tao::{
@@ -113,7 +113,10 @@ impl PendingInput {
         Ok(())
     }
 }
-fn logical_position(position: PhysicalPosition<f64>, scale_factor: f64) -> Result<[f64; 2], Error> {
+pub(super) fn logical_position(
+    position: PhysicalPosition<f64>,
+    scale_factor: f64,
+) -> Result<[f64; 2], Error> {
     if !validate_scale_factor(scale_factor) {
         return Err(Error::InputScale);
     }
