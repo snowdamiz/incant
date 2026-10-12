@@ -1,0 +1,75 @@
+[
+  {
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_wasm_runtime",
+      "--test",
+      "root_motion"
+    ],
+    "exit": 0,
+    "seconds": 2.1700820830010343,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-final-checks-002/0.log",
+    "sha256": "2672bb3466cbd6ee2ce415cc2126f3221478775ac7a78edc9f160175a869b448"
+  },
+  {
+    "command": [
+      "./tools/cargo",
+      "clippy",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_wasm_runtime",
+      "--test",
+      "root_motion",
+      "-p",
+      "incant_cook",
+      "--example",
+      "root_motion_package_oracle",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit": 0,
+    "seconds": 1.266998084000079,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-final-checks-002/1.log",
+    "sha256": "51bd78f85f6fc4fcf0e791478497761ea3ede37fe2da9ec3ffa63016870d6967"
+  },
+  {
+    "command": [
+      "./tools/cargo",
+      "check",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant-module",
+      "-p",
+      "incant_runtime",
+      "--target",
+      "wasm32-unknown-unknown"
+    ],
+    "exit": 0,
+    "seconds": 1.598929791000046,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-final-checks-002/2.log",
+    "sha256": "2eba08a71a7fabd47f31a5fbd6359814cfa57f7db71da78fa35e3f2b89998d29"
+  },
+  {
+    "command": [
+      "python3",
+      "tools/check_runtime_dependencies.py"
+    ],
+    "exit": 2,
+    "seconds": 0.10999500000070839,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-final-checks-002/3.log",
+    "sha256": "35292a5f5492e2ab73a3e68192c2936675664dc340eb5f1e74a33f853e13946f"
+  }
+]

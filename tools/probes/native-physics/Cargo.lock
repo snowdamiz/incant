@@ -982,6 +982,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "incant_anim"
+version = "0.0.1"
+dependencies = [
+ "glam 0.32.1",
+ "thiserror",
+]
+
+[[package]]
 name = "incant_localization"
 version = "0.0.1"
 dependencies = [
@@ -1045,6 +1053,7 @@ dependencies = [
  "bevy_ecs",
  "glam 0.32.1",
  "incant_2d",
+ "incant_anim",
  "incant_localization",
  "incant_nav",
  "incant_physics_2d_runtime",

@@ -1,0 +1,50 @@
+{
+  "files": [
+    {
+      "path": "crates/incant_wasm_runtime/tests/root_motion.rs",
+      "sha256": "4823b8219d9611754a7229d2bc930f41a4286f2c19201653a518c2aa0ff9b1e8",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-guests-freeze-002/crates/incant_wasm_runtime/tests/root_motion.rs"
+    },
+    {
+      "path": "crates/incant_wasm_runtime/tests/support/root_motion.rs",
+      "sha256": "2b6f40ddbff8f29a996b822a18935e04d12cdb9b08ea9a69a40ab4c5619e0641",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-guests-freeze-002/crates/incant_wasm_runtime/tests/support/root_motion.rs"
+    },
+    {
+      "path": "crates/incant_wasm_runtime/fixtures/root-motion.wat",
+      "sha256": "10a087493f953b86162e3f59ddb7267a927a54f9fe1337b86c179ac2fd931f3a",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-guests-freeze-002/crates/incant_wasm_runtime/fixtures/root-motion.wat"
+    },
+    {
+      "path": "crates/incant_wasm_dev/tests/root_motion_parity.rs",
+      "sha256": "71013e5aa799f82a17f6ab76b3d397ea69f8c3dc2d9b0f62a92178c5c5ad348f",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-guests-freeze-002/crates/incant_wasm_dev/tests/root_motion_parity.rs"
+    },
+    {
+      "path": "sdk/rust/samples/root_motion.rs",
+      "sha256": "7c86dd899683e9f34f9d0ff1a003d3b65377d849b37eb28ecb7b1fb487579c20",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-guests-freeze-002/sdk/rust/samples/root_motion.rs"
+    },
+    {
+      "path": "sdk/rust/fixtures/root_motion_failure.rs",
+      "sha256": "998fae3604707011d7bdbaa014490eda3d0ae6e1688d6c4d0dfa54669cb9bf11",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-guests-freeze-002/sdk/rust/fixtures/root_motion_failure.rs"
+    },
+    {
+      "path": "sdk/rust/tests/root_motion.rs",
+      "sha256": "68a2583aa2138ee071c84532f1c2283efeedab34c9ab974d157adb7274dc2ef5",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-guests-freeze-002/sdk/rust/tests/root_motion.rs"
+    },
+    {
+      "path": "tools/probes/shipping-wasm2c.py",
+      "sha256": "52e73572a8ab87d7ef6c7063ed7f291d5ceda909bb2be32a3117f044eface739",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-guests-freeze-002/tools/probes/shipping-wasm2c.py"
+    },
+    {
+      "path": "tools/tests/test_wasm_sdk.py",
+      "sha256": "4cacb9548817a6c323e09c8ade8d314599bcafaa4a4da7e96fb8ffdf1fd489f3",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-guests-freeze-002/tools/tests/test_wasm_sdk.py"
+    }
+  ],
+  "scope": "After successful frozen host002: extend existing direct legacy-guard test to a single inactive ExtractOnly binding; expose shared native test-oracle module to avoid duplicate inclusion in public example. No ABI/production change."
+}

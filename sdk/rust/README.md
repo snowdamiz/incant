@@ -301,3 +301,21 @@ These copied observations do not grant chain-topology authority or persist Wasm
 memory. Whole-module checkpoints remain explicitly unsupported. See
 [samples/animation_compound.rs](samples/animation_compound.rs) for complete
 captured reads and controls through the real native host.
+
+`Tick::root_motion` copies the complete `incant_root_motion_v1` frame: unchanged
+pose-v5 and ordered IK-v2 data followed by canonical root owner rows. Evaluate
+the native pose, strip the selected root translation/rotation to its fingerprint-
+bound cooked rest (preserving sampled scale), then apply the ordered IK rows.
+The rows also expose movement policy, applying flag, exact `u64` ticks and signed
+`i64` cycles with stable current/outgoing clock owners, plus requested/applied
+interval and accumulated rigid deltas. Application toggles never disable root
+stripping or replay past movement. `control_root_motion` participates in the same
+atomic command quota and sticky callback-error boundary as other native controls.
+
+Every older pose/IK snapshot import explicitly refuses a world with committed
+root stripping, including ExtractOnly and disabled application. Graph-only
+observations remain available. The new complete frame accepts ordinary worlds
+with an empty root table. Callers supply bounded scratch; no native pointer,
+model loader or per-tick source/document parser is introduced. Physics and static
+guest checkpoint limitations are unchanged. Actual dual-host and public root
+package evidence is recorded separately; API availability alone is not that proof.

@@ -1012,6 +1012,61 @@
       ],
       "result": "i32",
       "call": "Call::ReadAnimationGraphsV2 { ptr, capacity }"
+    },
+    {
+      "namespace": "incant_root_motion_v1",
+      "name": "snapshot_len",
+      "opcode": 53,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::RootMotionLen"
+    },
+    {
+      "namespace": "incant_root_motion_v1",
+      "name": "read_snapshot",
+      "opcode": 54,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "capacity",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::ReadRootMotion { ptr, capacity }"
+    },
+    {
+      "namespace": "incant_root_motion_v1",
+      "name": "control",
+      "opcode": 55,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "len",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::ControlRootMotion { ptr, len }"
     }
   ],
   "enums": {
@@ -1676,6 +1731,38 @@
       ],
       [
         "Weighted",
+        2
+      ]
+    ],
+    "RootMotionPolicy": [
+      [
+        "ExtractOnly",
+        0
+      ],
+      [
+        "Transform",
+        1
+      ],
+      [
+        "Kinematic3d",
+        2
+      ],
+      [
+        "Character3d",
+        3
+      ]
+    ],
+    "RootMotionClockKind": [
+      [
+        "Rest",
+        0
+      ],
+      [
+        "Clip",
+        1
+      ],
+      [
+        "State",
         2
       ]
     ]
@@ -2922,6 +3009,143 @@
         "reserved",
         "u32"
       ]
+    ],
+    "RootMotionHeader": [
+      [
+        "magic",
+        "u8",
+        8
+      ],
+      [
+        "scene",
+        "u8",
+        16
+      ],
+      [
+        "pose_bytes",
+        "u32"
+      ],
+      [
+        "count",
+        "u32"
+      ],
+      [
+        "stride",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ]
+    ],
+    "RootMotionRow": [
+      [
+        "entity",
+        "u8",
+        16
+      ],
+      [
+        "fingerprint",
+        "u8",
+        32
+      ],
+      [
+        "root",
+        "u32"
+      ],
+      [
+        "policy",
+        "u32"
+      ],
+      [
+        "flags",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ],
+      [
+        "tick",
+        "u64"
+      ],
+      [
+        "current_kind",
+        "u32"
+      ],
+      [
+        "current_clip",
+        "u32"
+      ],
+      [
+        "current_state",
+        "u8",
+        16
+      ],
+      [
+        "current_cycle",
+        "i64"
+      ],
+      [
+        "current_seconds",
+        "f64"
+      ],
+      [
+        "outgoing_kind",
+        "u32"
+      ],
+      [
+        "outgoing_clip",
+        "u32"
+      ],
+      [
+        "outgoing_state",
+        "u8",
+        16
+      ],
+      [
+        "outgoing_cycle",
+        "i64"
+      ],
+      [
+        "outgoing_seconds",
+        "f64"
+      ],
+      [
+        "requested",
+        "f64",
+        7
+      ],
+      [
+        "applied",
+        "f64",
+        7
+      ],
+      [
+        "accumulated_requested",
+        "f64",
+        7
+      ],
+      [
+        "accumulated_applied",
+        "f64",
+        7
+      ]
+    ],
+    "RootMotionCommand": [
+      [
+        "entity",
+        "u8",
+        16
+      ],
+      [
+        "kind",
+        "u32"
+      ],
+      [
+        "value",
+        "u32"
+      ]
     ]
   },
   "input_sections": [
@@ -3015,7 +3239,10 @@
     "ANIMATION_IK_MAX_PER_OWNER": 32,
     "ANIMATION_IK_MAX_MODEL_NODES": 4096,
     "ANIMATION_IK_MAX_COORDINATE": 1000000000,
-    "ANIMATION_COMPOUND_MAX_ROWS": 1024
+    "ANIMATION_COMPOUND_MAX_ROWS": 1024,
+    "ROOT_MOTION_MAX_ROWS": 1024,
+    "ROOT_MOTION_MAX_MODEL_NODES": 4096,
+    "ROOT_MOTION_MAX_SECONDS": 86400
   },
   "magic": {
     "INPUT_MAGIC": "INPINP01",
@@ -3041,7 +3268,8 @@
     "ANIMATION_IK_MAGIC": "INCIK001",
     "ANIMATION_V5_MAGIC": "INCANI05",
     "ANIMATION_IK_V2_MAGIC": "INCIK002",
-    "ANIMATION_GRAPH_V2_MAGIC": "INCAGR02"
+    "ANIMATION_GRAPH_V2_MAGIC": "INCAGR02",
+    "ROOT_MOTION_MAGIC": "INCRTM01"
   },
   "optional_none": -1,
   "namespaces": {
@@ -3060,6 +3288,7 @@
     "incant_animation_ik_v1": "animationik",
     "incant_animation_v5": "animation5",
     "incant_animation_ik_v2": "animationik2",
-    "incant_animation_graph_v2": "animationgraph2"
+    "incant_animation_graph_v2": "animationgraph2",
+    "incant_root_motion_v1": "rootmotion"
   }
 }

@@ -24,7 +24,12 @@ pub mod localization;
 pub mod navigation;
 pub mod physics;
 mod raw;
+pub mod root_motion;
 pub mod steering;
+pub use root_motion::{
+    RootMotionClock, RootMotionClockOwner, RootMotionControl, RootMotionDelta, RootMotionPlayback,
+    RootMotionPolicy, RootMotionSnapshot,
+};
 mod tick;
 pub use animation::{
     AnimationBlendKind, AnimationControl, AnimationPlayback, AnimationPoseBlend, AnimationSnapshot,
@@ -70,6 +75,7 @@ pub use incant_wasm_abi::{
     ANIMATION_GRAPH_MAX_BYTES, ANIMATION_GRAPH_V2_MAX_BYTES, ANIMATION_IK_MAX_BYTES,
     ANIMATION_IK_V2_MAX_BYTES, ANIMATION_MAX_BYTES, ANIMATION_V2_MAX_BYTES, ANIMATION_V3_MAX_BYTES,
     ANIMATION_V4_MAX_BYTES, ANIMATION_V5_MAX_BYTES, FLIPBOOK_MAX_BYTES, INPUT_MAX_BYTES,
+    ROOT_MOTION_MAX_BYTES,
 };
 
 /// Export the versioned entry points. The callback receives a non-escapable Tick

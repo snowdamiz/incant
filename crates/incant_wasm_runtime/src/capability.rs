@@ -25,6 +25,15 @@ const _: () = {
 /// Trusted host adapter operation; all integer arguments are guest offsets/indices.
 #[derive(Clone, Copy)]
 pub enum Call {
+    RootMotionLen,
+    ReadRootMotion {
+        ptr: i32,
+        capacity: i32,
+    },
+    ControlRootMotion {
+        ptr: i32,
+        len: i32,
+    },
     AnimationLenV5,
     ReadAnimationsV5 {
         ptr: i32,
@@ -203,6 +212,8 @@ pub struct Capability {
     animation_graphs: Vec<u8>,
     animation_rejected: bool,
     animation_ik_present: bool,
+    root_motion_rows: Vec<incant_runtime::RootMotionSnapshot>,
+    root_motion: Vec<u8>,
     ik_rows: Vec<incant_runtime::IkSnapshot>,
     animation_ik: Vec<u8>,
     transferred: usize,
@@ -279,6 +290,11 @@ impl Capability {
             self.abort();
             return Err(error.into());
         }
+        if let Err(error) = world.snapshot_root_motion(&mut self.root_motion_rows) {
+            self.abort();
+            return Err(error.into());
+        }
+        self.root_motion.clear();
         self.animation_ik_present = !self.ik_rows.is_empty();
         self.animation_ik.clear();
         self.animation_scene = Some(world.scene_id());
@@ -366,6 +382,8 @@ impl Capability {
             .ok_or(Error::Abi("missing physics state"))
     }
     pub fn abort(&mut self) {
+        self.root_motion_rows.clear();
+        self.root_motion.clear();
         self.animation_rows.clear();
         self.ik_rows.clear();
         self.animation_ik.clear();
@@ -413,6 +431,8 @@ impl Capability {
             self.abort();
             return Err(Error::Abi("rejected animation transaction"));
         }
+        self.root_motion_rows.clear();
+        self.root_motion.clear();
         self.animation_rows.clear();
         self.ik_rows.clear();
         self.animation_ik.clear();
@@ -542,7 +562,10 @@ impl Capability {
             && self.epoch == epoch
             && matches!(
                 call,
-                Call::AnimationLen
+                Call::RootMotionLen
+                    | Call::ReadRootMotion { .. }
+                    | Call::ControlRootMotion { .. }
+                    | Call::AnimationLen
                     | Call::ReadAnimations { .. }
                     | Call::ControlAnimation { .. }
                     | Call::AnimationIkLen
@@ -622,6 +645,31 @@ impl Capability {
                 "animation graph v1 cannot represent compound fades",
             ));
         }
+        // Root stripping is active even when movement is disabled or extract-only.
+        // Guard before any shared-cache read: older complete frames cannot carry it.
+        if !self.root_motion_rows.is_empty()
+            && matches!(
+                call,
+                Call::AnimationLen
+                    | Call::ReadAnimations { .. }
+                    | Call::AnimationLenV2
+                    | Call::ReadAnimationsV2 { .. }
+                    | Call::AnimationLenV3
+                    | Call::ReadAnimationsV3 { .. }
+                    | Call::AnimationLenV4
+                    | Call::ReadAnimationsV4 { .. }
+                    | Call::AnimationLenV5
+                    | Call::ReadAnimationsV5 { .. }
+                    | Call::AnimationIkLen
+                    | Call::ReadAnimationIk { .. }
+                    | Call::AnimationIkLenV2
+                    | Call::ReadAnimationIkV2 { .. }
+            )
+        {
+            return Err(Error::Abi(
+                "animation snapshots cannot represent root stripping",
+            ));
+        }
         // These pose protocols have no post-sample IK payload. Refuse only
         // pose observations; other module capabilities and native rendering
         // remain usable. Every later pose ABI must preserve this admission.
@@ -670,6 +718,56 @@ impl Capability {
                 .ok_or(Error::Limit("navigation query quota"))?;
         }
         match call {
+            Call::RootMotionLen | Call::ReadRootMotion { .. } => {
+                if self.root_motion.is_empty() {
+                    let scene = self
+                        .animation_scene
+                        .ok_or(Error::Abi("animation scene absent"))?;
+                    if self.animations_v5.is_empty() {
+                        crate::animation_poses_v5::encode(
+                            scene,
+                            &mut self.animation_rows,
+                            &mut self.animations_v5,
+                        )?;
+                    }
+                    if self.animation_ik_v2.is_empty() {
+                        crate::animation_ik_v2::encode(
+                            &self.animation_rows,
+                            &self.animations_v5,
+                            &self.ik_rows,
+                            &mut self.animation_ik_v2,
+                        )?;
+                    }
+                    crate::root_motion::encode(
+                        scene,
+                        &self.animation_rows,
+                        &self.animation_ik_v2,
+                        &self.root_motion_rows,
+                        &mut self.root_motion,
+                    )?;
+                }
+                let len = self.root_motion.len();
+                if let Call::ReadRootMotion { ptr, capacity } = call {
+                    let capacity = usize::try_from(capacity)
+                        .map_err(|_| Error::Abi("root-motion destination capacity"))?;
+                    if capacity < len {
+                        return Err(Error::Abi("root-motion destination capacity"));
+                    }
+                    range(ptr, capacity, memory.len())?;
+                    let region = range(ptr, len, memory.len())?;
+                    self.transfer(len)?;
+                    memory[region].copy_from_slice(&self.root_motion);
+                }
+                return Ok(len as i32);
+            }
+            Call::ControlRootMotion { ptr, len } => {
+                if usize::try_from(len).ok() != Some(incant_wasm_abi::RootMotionCommand::SIZE) {
+                    return Err(Error::Abi("root-motion command length"));
+                }
+                let bytes =
+                    self.read::<{ incant_wasm_abi::RootMotionCommand::SIZE }>(memory, ptr)?;
+                self.command(crate::root_motion::command(&bytes)?)?;
+            }
             Call::PhysicsQuery { ptr, len } => {
                 let len = usize::try_from(len)
                     .ok()

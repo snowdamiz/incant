@@ -1,0 +1,50 @@
+[
+  {
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant-module",
+      "-p",
+      "incant_wasm_runtime",
+      "--test",
+      "root_motion"
+    ],
+    "status": 0,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-boundary-003/00.log"
+  },
+  {
+    "command": [
+      "./tools/cargo",
+      "clippy",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant-module",
+      "-p",
+      "incant_wasm_runtime",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "status": 0,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-boundary-003/01.log"
+  },
+  {
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "tools.tests.test_wasm_sdk"
+    ],
+    "status": 0,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-boundary-003/02.log"
+  }
+]

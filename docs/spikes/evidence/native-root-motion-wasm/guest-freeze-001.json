@@ -1,0 +1,51 @@
+{
+  "base": "826ec80cb7d2782658af1cddc755c0b29b23860a",
+  "production_unchanged": true,
+  "files": [
+    {
+      "path": "crates/incant_wasm_runtime/tests/root_motion.rs",
+      "sha256": "72b3dccf8419414d376499888cd1820f8ff4047922e2e9061bcba22e6efcf205",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-guests-freeze-001/files/crates/incant_wasm_runtime/tests/root_motion.rs"
+    },
+    {
+      "path": "crates/incant_wasm_runtime/tests/support/root_motion.rs",
+      "sha256": "0aaf3123cca51c39fb266d3f9b3eff5b18d847a1125015e9f408aa539a230a12",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-guests-freeze-001/files/crates/incant_wasm_runtime/tests/support/root_motion.rs"
+    },
+    {
+      "path": "crates/incant_wasm_runtime/fixtures/root-motion.wat",
+      "sha256": "10a087493f953b86162e3f59ddb7267a927a54f9fe1337b86c179ac2fd931f3a",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-guests-freeze-001/files/crates/incant_wasm_runtime/fixtures/root-motion.wat"
+    },
+    {
+      "path": "crates/incant_wasm_dev/tests/root_motion_parity.rs",
+      "sha256": "71013e5aa799f82a17f6ab76b3d397ea69f8c3dc2d9b0f62a92178c5c5ad348f",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-guests-freeze-001/files/crates/incant_wasm_dev/tests/root_motion_parity.rs"
+    },
+    {
+      "path": "sdk/rust/samples/root_motion.rs",
+      "sha256": "7c86dd899683e9f34f9d0ff1a003d3b65377d849b37eb28ecb7b1fb487579c20",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-guests-freeze-001/files/sdk/rust/samples/root_motion.rs"
+    },
+    {
+      "path": "sdk/rust/fixtures/root_motion_failure.rs",
+      "sha256": "998fae3604707011d7bdbaa014490eda3d0ae6e1688d6c4d0dfa54669cb9bf11",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-guests-freeze-001/files/sdk/rust/fixtures/root_motion_failure.rs"
+    },
+    {
+      "path": "sdk/rust/tests/root_motion.rs",
+      "sha256": "68a2583aa2138ee071c84532f1c2283efeedab34c9ab974d157adb7274dc2ef5",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-guests-freeze-001/files/sdk/rust/tests/root_motion.rs"
+    },
+    {
+      "path": "tools/probes/shipping-wasm2c.py",
+      "sha256": "52e73572a8ab87d7ef6c7063ed7f291d5ceda909bb2be32a3117f044eface739",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-guests-freeze-001/files/tools/probes/shipping-wasm2c.py"
+    },
+    {
+      "path": "tools/tests/test_wasm_sdk.py",
+      "sha256": "4cacb9548817a6c323e09c8ade8d314599bcafaa4a4da7e96fb8ffdf1fd489f3",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-guests-freeze-001/files/tools/tests/test_wasm_sdk.py"
+    }
+  ]
+}

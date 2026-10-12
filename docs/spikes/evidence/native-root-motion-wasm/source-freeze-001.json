@@ -1,0 +1,162 @@
+{
+  "base": "2c2b22fd18b8f7492b8a8ea8e6502d2e4a37be4d",
+  "native_connection": "9943db0a",
+  "ancestor": "fd3eded63053ed13c8edb56255733cfc412beb67",
+  "scope": "Composed root_motion_v1 53-55; legacy pose/IK refusal; copied SDK parser/atomic controls. Actual guest/public package evidence pending.",
+  "files": [
+    {
+      "path": "Cargo.lock",
+      "bytes": 251744,
+      "sha256": "bb9f6bc5183813d1be0124986e00515864d4a45f45290a537d5b9e91c995a6f3",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-source-freeze-001/files/Cargo.lock"
+    },
+    {
+      "path": "crates/incant_wasm_abi/src/lib.rs",
+      "bytes": 220235,
+      "sha256": "daa1f753ee35bc11e985aab74aac6ccae38c543dce95e6dff31141b3f81ae80d",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-source-freeze-001/files/crates/incant_wasm_abi/src/lib.rs"
+    },
+    {
+      "path": "crates/incant_wasm_dev/Cargo.toml",
+      "bytes": 1577,
+      "sha256": "1f30d5721113db231020930936f9c992f277887a407f2fb6c8fb626169d9bafe",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-source-freeze-001/files/crates/incant_wasm_dev/Cargo.toml"
+    },
+    {
+      "path": "crates/incant_wasm_dev/src/generated.rs",
+      "bytes": 13151,
+      "sha256": "9c43a309a7f1bc28f23685e30bb8e39978202ae4624317c19b2cab5c9d465191",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-source-freeze-001/files/crates/incant_wasm_dev/src/generated.rs"
+    },
+    {
+      "path": "crates/incant_wasm_runtime/Cargo.toml",
+      "bytes": 724,
+      "sha256": "2361702de4cd4f9c9db2bc147f9d1ad2613b758933972177398fc8aea1bb21bb",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-source-freeze-001/files/crates/incant_wasm_runtime/Cargo.toml"
+    },
+    {
+      "path": "crates/incant_wasm_runtime/c/generated.h",
+      "bytes": 1220,
+      "sha256": "7516240eee6a017371566b64e70115b48a593511e001621f51d1beb74ffdf24e",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-source-freeze-001/files/crates/incant_wasm_runtime/c/generated.h"
+    },
+    {
+      "path": "crates/incant_wasm_runtime/c/generated.inc",
+      "bytes": 9463,
+      "sha256": "bc309de4f9556199951bf157fe0433f7d809165d75a722c9eae4a6b4a2a18460",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-source-freeze-001/files/crates/incant_wasm_runtime/c/generated.inc"
+    },
+    {
+      "path": "crates/incant_wasm_runtime/src/capability.rs",
+      "bytes": 54038,
+      "sha256": "8c48f7f84092303af2680597f33acbf88cb1b3f1489368e7bdf4f88354ecbbd3",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-source-freeze-001/files/crates/incant_wasm_runtime/src/capability.rs"
+    },
+    {
+      "path": "crates/incant_wasm_runtime/src/generated.rs",
+      "bytes": 6983,
+      "sha256": "a02eaa0251e17adc8ea6ba09c592da2dc2849f9110a6ed4d480bc0a6f098431f",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-source-freeze-001/files/crates/incant_wasm_runtime/src/generated.rs"
+    },
+    {
+      "path": "crates/incant_wasm_runtime/src/input_tags.rs",
+      "bytes": 9300,
+      "sha256": "3d5e45cf7f7c4b53cc7e48f8f6990f72d85a6626de51cf7af5d91c3a15bf0ba1",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-source-freeze-001/files/crates/incant_wasm_runtime/src/input_tags.rs"
+    },
+    {
+      "path": "crates/incant_wasm_runtime/src/lib.rs",
+      "bytes": 1405,
+      "sha256": "2db6b05a63449b77d8f3a940adf04ecd5b0b7e1de04db43a832a5e96710d8eb0",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-source-freeze-001/files/crates/incant_wasm_runtime/src/lib.rs"
+    },
+    {
+      "path": "crates/incant_wasm_runtime/src/root_motion.rs",
+      "bytes": 4292,
+      "sha256": "32d397d6c68a1ec87a1217cec1d6ae018ccc988d3bd4cb19efd0da70576f066c",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-source-freeze-001/files/crates/incant_wasm_runtime/src/root_motion.rs"
+    },
+    {
+      "path": "sdk/abi/native-v1.json",
+      "bytes": 49630,
+      "sha256": "e5291d1110e5e6b5b734f4f6f817355046bb83e2f507d9e215636b520a30b2c7",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-source-freeze-001/files/sdk/abi/native-v1.json"
+    },
+    {
+      "path": "sdk/rust/README.md",
+      "bytes": 21611,
+      "sha256": "706058fadad8dbd0e8499532ddd2b11a269b7f98e34074ce586f7d11a17550ee",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-source-freeze-001/files/sdk/rust/README.md"
+    },
+    {
+      "path": "sdk/rust/src/lib.rs",
+      "bytes": 4234,
+      "sha256": "300220d493582529dbbe890f745e5d1d4ca757a0e6cfdd216c7184c34a18d260",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-source-freeze-001/files/sdk/rust/src/lib.rs"
+    },
+    {
+      "path": "sdk/rust/src/raw.rs",
+      "bytes": 23871,
+      "sha256": "21770dbb369398bb28769e363514b3511c24c05135725795efcb20ef7d1b8262",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-source-freeze-001/files/sdk/rust/src/raw.rs"
+    },
+    {
+      "path": "sdk/rust/src/root_motion.rs",
+      "bytes": 8120,
+      "sha256": "efc059dac0da6d6f617e225b1ed2bac6bd49062839719daf6df320975ca355e7",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-source-freeze-001/files/sdk/rust/src/root_motion.rs"
+    },
+    {
+      "path": "sdk/rust/src/tick.rs",
+      "bytes": 32368,
+      "sha256": "05bf4dfea57df31a8771e7acaa7a5a23dfc3b4b6bc373ee5d1e73608dcaf2ca4",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-source-freeze-001/files/sdk/rust/src/tick.rs"
+    },
+    {
+      "path": "sdk/rust/src/tick/root_motion.rs",
+      "bytes": 2504,
+      "sha256": "87d402516e73b43f6763ab639b38aa0743fc816576b207cc5159788a9e3abd76",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-source-freeze-001/files/sdk/rust/src/tick/root_motion.rs"
+    },
+    {
+      "path": "tools/generate_wasm_sdk.py",
+      "bytes": 13053,
+      "sha256": "4eda5077c20400a47bf2e8dcbcfc1208ca36eb4dfe779e525ab8cd0c24a8e885",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-source-freeze-001/files/tools/generate_wasm_sdk.py"
+    },
+    {
+      "path": "tools/wasm_abi.py",
+      "bytes": 887,
+      "sha256": "558b6870a7a6205008f45b58bb05b4f1d3db3a43bda4b77cddfad06fe85993a1",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-source-freeze-001/files/tools/wasm_abi.py"
+    }
+  ],
+  "additive_registry": {
+    "functions": {
+      "prior_count": 53,
+      "unchanged": true
+    },
+    "records": {
+      "prior_count": 51,
+      "unchanged": true
+    },
+    "enums": {
+      "prior_count": 12,
+      "unchanged": true
+    },
+    "constants": {
+      "prior_count": 80,
+      "unchanged": true
+    },
+    "magic": {
+      "prior_count": 24,
+      "unchanged": true
+    },
+    "namespaces": {
+      "prior_count": 16,
+      "unchanged": true
+    }
+  },
+  "boundary_tests": "root-motion-wasm-boundary-003:8passed Clippy and15registrytests passed",
+  "complete_max_bytes": 15596144
+}

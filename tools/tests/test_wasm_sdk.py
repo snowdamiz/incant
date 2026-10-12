@@ -109,6 +109,18 @@ class RegistryTests(unittest.TestCase):
         self.assertEqual(self.data['records']['AnimationRowV4'][:-4], self.data['records']['AnimationRowV2'])
         self.assertLess(40+100000*96+214336*24,self.data['constants']['MEMORY'])
 
+    def test_root_motion_is_additive_and_composes_bounded_complete_pose(self):
+        import hashlib
+        prior = {'functions': (53, 'd27012c3cbb5d955fc95e016a6b81aea45aa2c2723370cf3d26add863b642844'), 'constants': (80, '7bf1f9c9967a0a4b08d2f0c9f4cefa77f54598f08a6bd3a7231d739bb8d21eec'), 'magic': (24, '30df319d481b60150961bac7dc576a196ab8c0a9dd7309c26b99865b89a028ae'), 'enums': (12, 'b4b4ead339d515212605318268308bcf4628cc3b172efabf02997638b20d1629'), 'records': (51, '170b465881f84eee24becf739d8a69162f41bbc7bb46b276ae51dd6cb41e0715'), 'namespaces': (16, '7c6db52d1444153c7b74e3de9ee4d9b13297611693068ab46d6afb8a76f02292')}
+        for name, (length, digest) in prior.items():
+            value = self.data[name]
+            prefix = value[:length] if isinstance(value, list) else dict(list(value.items())[:length])
+            self.assertEqual(hashlib.sha256(json.dumps(prefix, sort_keys=True).encode()).hexdigest(), digest, name)
+        self.assertEqual([(f['name'], f['opcode']) for f in self.data['functions'][53:56]], [('snapshot_len',53),('read_snapshot',54),('control',55)])
+        size=lambda name: sum(generator.SIZES[t]*(n[0] if n else 1) for _,t,*n in self.data['records'][name])
+        self.assertEqual([size(n) for n in ('RootMotionHeader','RootMotionRow','RootMotionCommand')], [40,376,24])
+        self.assertLess(40+24+48+100000*96+214336*24+1024*40+4096*104+1024*376,self.data['constants']['MEMORY'])
+
     def test_compound_v5_preserves_all_ik_v1_and_older_contracts(self):
         import hashlib
         prior = {'functions': (47, '24a4f20a4824173fd34ccfe146ffdd4bc02d5a223254e9b8e9d2c22532ac59eb'), 'constants': (79, 'b3dd8bc360f94f28cf8f201757612eb4db3ab78e8802cda823fdcb086591b0b4'), 'magic': (21, '9fda2c34d213c5f6e47d7f19894f5c50c35980082dce3940211807837e41fcc5'), 'enums': (10, 'ee8f597e5d8ac45fbb2156428d197fb24e7c00d1df7891ad529a7a5062024ed2'), 'records': (47, '03e7330e3a13a870f3ef1ca2a0bf7dbd55a1625b2db309c6a9e54bb4f2827858'), 'namespaces': (13, '63726804aa625d91daaa4292808840540e23f7512c0886dc656e30dfc0eadf82')}
