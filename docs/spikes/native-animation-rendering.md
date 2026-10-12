@@ -3,9 +3,10 @@
 This slice connects cooked INCMOD04 data to the canonical model renderer and the
 retained native input adapter. Simulation owns playback; the renderer receives
 only a committed `AnimationSample`. It does not implement blend trees, state
-machines, IK, root motion, retargeting, or GPU skinning. Numerical GPU execution
-and Claude appearance acceptance are pending; CPU checks alone do not establish
-rendered acceptance or device performance.
+machines, IK, root motion, retargeting, or GPU skinning. Numerical GPU comparisons
+now pass on the frozen consumer; Claude appearance
+acceptance and the integrated authored-player proof remain pending. Neither
+desktop check establishes reference-device performance.
 
 ## Binding and lifetime
 
@@ -72,7 +73,8 @@ separately; GPU/driver work is outside those counters.
 ## CPU checkpoint verification
 
 The affected five-package suite passes 155 tests in 30 result groups, with 70
-GPU tests deliberately unrun. Six-package all-target Clippy, formatting and
+GPU tests initially unrun at that CPU checkpoint. Six-package all-target Clippy,
+formatting and
 explicit visual-feature normal dependency guards pass. The native source/cache
 deleted test advances two independent clocks for 90 frames while numeric input
 extraction records zero allocations; rejected/unwinding callbacks retain the
@@ -83,7 +85,8 @@ uniform reflected skin and mixed-sign refusal.
 
 Two ignored numerical GPU tests are compiled: independent mathematical static
 pose parity and single-sided reflected-skin/static-transform parity with an
-observable shadow receiver. They have not run in this checkpoint. The latter
+observable shadow receiver. They were initially unrun at the CPU checkpoint.
+The latter
 was added for independent review's reflected-skin culling finding; the source
 correction combines skin and outer-entity signs for both existing cull paths.
 
@@ -93,3 +96,34 @@ and passed. No test or Cargo failure is represented as success. Original
 foundation and scene-root correction evidence remains unchanged.
 
 [Exact CPU source/log receipt](evidence/native-animation-rendering-cpu.json).
+
+## Numerical GPU follow-up
+
+The unchanged consumer `cdd090324285c9822119ee2340ae00f56e94e375` passes all
+70 affected GPU regressions: 20 unit and 50 integration tests, serialized on
+Apple M5 Pro with the Metal backend. Both new animation cases also passed
+individually before the complete run. All 3,521 tracked source hashes were
+verified unchanged before release, and the executed copies have pinned binary
+hashes. The earlier CPU evidence is preserved unchanged.
+
+Independent static-geometry references match five sampled skin poses including
+outer reflection. A separate single-sided uniformly reflected skin matches a
+static transform reference under both outer orientations, with explicit controls
+showing the skin is visible and casts a nonempty shadow onto the receiver. The
+sources and cache are deleted before these retained checks. Invalid sample/target
+refusal preserves previous output and retry succeeds. After GPU setup, 64
+complete accepted retained CPU staging calls record zero heap allocations; this
+excludes submission, frame encoding and driver work.
+
+No capture images were exported or reviewed. Existing regressions also compare
+in-memory PNG codec output; the new animation oracles compare raw readback. This
+is numerical rendering evidence,
+not Claude appearance acceptance, a public exported animation-game proof, or a
+reference-phone/performance gate. Both test processes exited successfully and
+were verified absent before the exclusive GPU interval was released.
+
+[Exact source, binary, log and release receipt](evidence/native-animation-rendering-gpu.json).
+
+The separate authored startup/cook boundary at `1c8e697` also received a
+[read-only independent review](native-animation-authoring-review.md). Its scoped
+acceptance does not replace the upcoming integrated player proof.
