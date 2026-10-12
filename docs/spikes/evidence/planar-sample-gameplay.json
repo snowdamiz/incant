@@ -1,0 +1,528 @@
+{
+  "at": "2026-10-12T19:55:17.992621+00:00",
+  "source_commit": "151616cb087d203b8a2ffbd86ee684fbdf409cdc",
+  "engine_base": "d1ef35ee32b92e6756b528463ab092fdc79c7ef4",
+  "sources": {
+    "samples/planar/gameplay.ts": "ccd01284ad30ff4cc9d3070a8220890509af160f3aae4521f0954502fdf45e5e",
+    "samples/planar/verify.py": "f26d5d2441e840e1dfa87744ce339ed9af731268757540bbc44e809815f38396",
+    "samples/planar/export_verify.py": "0e19662fbee6bd10e6070ea607428eaf23ce77d077d37c9cdae89bfc796672b0",
+    "samples/planar/tsconfig.json": "869922e94ccde7a4c5d023dcc15dc661034031b34d42cbfaa41a4a354abc625b",
+    ".github/workflows/desktop.yml": "b9942e4333403d578dc0096c66c4504d338a1635b82462da32b187439da9ecc7"
+  },
+  "source_review": {
+    "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-source-20261012.json",
+    "sha256": "f029511f2e2c4e5422005982078bcb28ac94ece36343d6a4cf38c4227b8c82a3",
+    "accepted": true
+  },
+  "native_scenarios": 7,
+  "shipping_scenarios": 7,
+  "shipping_runner": {
+    "command": [
+      "python3",
+      "samples/planar/export_verify.py",
+      "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-gameplay-002",
+      "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001"
+    ],
+    "started": "2026-10-12T19:44:58.361050+00:00",
+    "exit": 0,
+    "seconds": 485.756916833001,
+    "changed_sources": []
+  },
+  "source_removed_shipping": true,
+  "exact_development_logs_observations_pcm": true,
+  "player_sha256": "782c2c4fb77f689233db43fed00ab211dc9ff45c645e0961df227b4a5042ffa5",
+  "artifacts": [
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-build-001/headless.log.gz",
+      "sha256": "0c5c6f5f6f07f5e3abbe0f3dc4fe4cbce58b7d40aa5a7a7648e4c14ecb6b5b77",
+      "raw_sha256": "696d240991392b297133e062e7f4cd532126e62bdc6c06f547052df272e70854",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-build-001/headless.log"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-build-001/result.json.gz",
+      "sha256": "0f9ada45539e57a4d7564958965f847857ad1aaaa4a0c42369dcbb761d57ef81",
+      "raw_sha256": "65cc37ed492650fcf8fe1f831cca9ee1fb1d2dd49f1b7141fafff79062b8418f",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-build-001/result.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-build-001/source.json.gz",
+      "sha256": "c865ab366ba9d4c102436901e90c989e422188ca79a65574fbcae9ddcfab2665",
+      "raw_sha256": "e0e087b78ff64a7a8c55d491e2c0a666a82d3ff2c81887559b140b221fa4444b",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-build-001/source.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-gameplay-002/authoring-calls.json.gz",
+      "sha256": "86912678071e8106481a4ea417c845126f142ce451aa0e5ecb5c317eea6798b6",
+      "raw_sha256": "7b32391f956f1aae27aad8410f68ec78dca19e128351fec19644f50e7a3ed7f5",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-gameplay-002/authoring-calls.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-gameplay-002/diagonal-input.json.gz",
+      "sha256": "9171a3a78d164df4f75fb9931f6d042fa76e4e363dc799fadb3e37c1c5a0e924",
+      "raw_sha256": "dab40ff34829f2274d142e6a8b59d2077ebfc3f46e5ca19276c44c101924e564",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-gameplay-002/diagonal-input.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-gameplay-002/diagonal-observe.json.gz",
+      "sha256": "cf9173637166c655ba9d11c9493b35f1d7f9d3a8d796ac925284d62c4e6bd40a",
+      "raw_sha256": "c8c058c55dc303980b1ba46dad77d9946b44d129fec726ac07e241fc1dbbfce7",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-gameplay-002/diagonal-observe.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-gameplay-002/diagonal.json.gz",
+      "sha256": "d05fb3fd7fc9e0f412af25623287657c8e2f8fdd2ebfa9e3d9dab1373b8e1933",
+      "raw_sha256": "d2881d6b6abe7cfedbbee0dd4c39760175c52b70841aebca068f203592b242c6",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-gameplay-002/diagonal.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-gameplay-002/gamepad-input.json.gz",
+      "sha256": "7522a7dff829ea672ce3ac59b29fadd49e747fe872533ca4c8ba73ec4f66ffb8",
+      "raw_sha256": "d40f93f9a92b9164a460f61a1ba9816187d761ede7bb526c9710b5c38023ea82",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-gameplay-002/gamepad-input.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-gameplay-002/gamepad-observe.json.gz",
+      "sha256": "73256dc626444af60f328261080f3f5e53ed1f9675563e6406efff6080d2530c",
+      "raw_sha256": "2085c417c78dd54ed09bf6344b6ed35d38dd5df9a5f89bd91b22e39cfd26b83f",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-gameplay-002/gamepad-observe.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-gameplay-002/gamepad.json.gz",
+      "sha256": "cc3c21c686e4dbe9a5e0b67d63bb116668a9aa95376703a63b29d1222399ea98",
+      "raw_sha256": "d2227675dd665e4762c2866c43ba7953e21fbe8963b0ab8ab1062070dc9dd155",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-gameplay-002/gamepad.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-gameplay-002/locked-exit-input.json.gz",
+      "sha256": "cd9ee8ccdbd23a217f06953b911154c49023d9de7464ce251cd1fdcd803af3ed",
+      "raw_sha256": "15c29da8390f459f3a5afa5918a8499b6bcaf6937b1b7c659ab9e0b125f33b33",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-gameplay-002/locked-exit-input.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-gameplay-002/locked-exit-observe.json.gz",
+      "sha256": "583ac662c4c885b477add8715d6f00871f4afbd3778c44e89d237529a3fff3b5",
+      "raw_sha256": "5e3742a9c37b7fe3556e4c7e1c8532642a256a987b628b38407aef602b14e46c",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-gameplay-002/locked-exit-observe.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-gameplay-002/locked-exit.json.gz",
+      "sha256": "aac8f039af11d9ff609f4fe53ef087beb23c5bdd3cb6aedc70d57fa969a283d0",
+      "raw_sha256": "4ac9445cd97aae6866d143591b6128f48585c02d39cbe34fb10838816352bd8d",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-gameplay-002/locked-exit.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-gameplay-002/lose-input.json.gz",
+      "sha256": "5ea8729f1d874999815ec6f3ff5d91fa0ac03544d733f446baa3f5b1075e23a1",
+      "raw_sha256": "2cbd99ee77f98d9ce4f01501f7decabf04baae615a94f906468711471259e2cd",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-gameplay-002/lose-input.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-gameplay-002/lose-observe.json.gz",
+      "sha256": "3c4d2292270957561f7a3a2c6ef2303d6d71ce9fc329c1d7203f1bb259732d4d",
+      "raw_sha256": "8aee4dd1c2a2d7318d5051e0e62f3423896c541b7ab31291230abca0168a6793",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-gameplay-002/lose-observe.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-gameplay-002/lose.json.gz",
+      "sha256": "87ece853b2de5e85c3cbf9008de26a840b7c747c5e515713647b2d6d240f3016",
+      "raw_sha256": "6aa503d18ab47c3f0b240de347fc69f72ff7733e5bfe30504ee945acf2e5f491",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-gameplay-002/lose.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-gameplay-002/process-00.json.gz",
+      "sha256": "26d8b5d12b2409f3230c1a2f961fadf35cb78f06465f91ab8dfb22a140ea0033",
+      "raw_sha256": "754fc08c88e8655eac522b09cdd4568650d52627bd45fa8f2e0bc1e496b6c823",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-gameplay-002/process-00.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-gameplay-002/process-01.json.gz",
+      "sha256": "2023345a290073fb77c892cb1314eba65fd0177cb62be23e131bb4f1da9a2b1b",
+      "raw_sha256": "bc4c356a0461869bae31cbfc1f6c6eb280cd9517bdc58bf9cda5f435c5d7fe66",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-gameplay-002/process-01.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-gameplay-002/process-02.json.gz",
+      "sha256": "c22d2b9b31c4972c543c2725735918bad3da58266e90f02838084de3696a275c",
+      "raw_sha256": "084b07faf341a6a8c8a01158d3b0222b0ca825151a85b89fa16bc656bfa11a70",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-gameplay-002/process-02.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-gameplay-002/process-03.json.gz",
+      "sha256": "1781f03459c53db4fb7bb5f2f141827c002d673d2b1b030f0c2105ced3764d43",
+      "raw_sha256": "235e85315e836981c6527d93c8ea38524015c0180acb5eeebc23cdcc7923408f",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-gameplay-002/process-03.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-gameplay-002/process-04.json.gz",
+      "sha256": "a66c9c0761ff1efd5611ec9fdfb791477a5e4152d62d93a114a5e0a757f747d3",
+      "raw_sha256": "e00164c39d25de523260d088b09f406cc7aeaed253f12244fd57a2e8b5ec8655",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-gameplay-002/process-04.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-gameplay-002/process-05.json.gz",
+      "sha256": "6fc12272490caae33d9ff73de1e977c98b90ddcb4d7b3c753ba2881e26065b47",
+      "raw_sha256": "34401a2505262230ec0065aad2ddc73ffb937d25e120d554beb98a17ec57f265",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-gameplay-002/process-05.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-gameplay-002/process-06.json.gz",
+      "sha256": "82c2a3f7e6c90cf703637e9c488a90aece45dc2360d15065676a79f6828900d7",
+      "raw_sha256": "f5a35653dedc4bcf56254a6c618c5877e368f83483d3e4aba51e710ebd38862f",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-gameplay-002/process-06.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-gameplay-002/process-07.json.gz",
+      "sha256": "6734bdf076d4a4e1d8eaf19e242024bd43976b73e5f67f8ffb7e78c8b483ee16",
+      "raw_sha256": "83d302244213b01c4c717af50b2295298ff3bed1e98b543258d6bbf376348f60",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-gameplay-002/process-07.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-gameplay-002/process-08.json.gz",
+      "sha256": "16f4958a781081ec757831247b69702c869fd501efc30e2d09ac13af9118415c",
+      "raw_sha256": "47d472dc84face2a11f19d34e3878a4e6f7f91ed6fa3a0ace7c24424be71c71c",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-gameplay-002/process-08.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-gameplay-002/repeat-win-input.json.gz",
+      "sha256": "e420b5e1f1e5b9ed42083c3dde71964471c6f701f5a52c23d8830cdf2c2cc6e9",
+      "raw_sha256": "12507f1135e300f8ddb26a9c810cd5d67e18775bc1a88f4d6e2beb596d1491db",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-gameplay-002/repeat-win-input.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-gameplay-002/repeat-win-observe.json.gz",
+      "sha256": "73256dc626444af60f328261080f3f5e53ed1f9675563e6406efff6080d2530c",
+      "raw_sha256": "2085c417c78dd54ed09bf6344b6ed35d38dd5df9a5f89bd91b22e39cfd26b83f",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-gameplay-002/repeat-win-observe.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-gameplay-002/repeat-win.json.gz",
+      "sha256": "cc3c21c686e4dbe9a5e0b67d63bb116668a9aa95376703a63b29d1222399ea98",
+      "raw_sha256": "d2227675dd665e4762c2866c43ba7953e21fbe8963b0ab8ab1062070dc9dd155",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-gameplay-002/repeat-win.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-gameplay-002/result.json.gz",
+      "sha256": "f7b953ec35fad5546fe3fa0f2f8d30ae6441a7f70cb18b089a62ea5b61bcd564",
+      "raw_sha256": "96bd1ae2340851fbee33d769ee595520ba7a10c22798616151aca4a94b985a0a",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-gameplay-002/result.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-gameplay-002/wall-input.json.gz",
+      "sha256": "e41b8660a2afa15cafccbe1a9e0eddc7ad684d2d499bb655844fa190700b05b5",
+      "raw_sha256": "29e406638309e4f87c434439d2e838df8b4a67a2e4d234c6c926f1616d3e2bc3",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-gameplay-002/wall-input.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-gameplay-002/wall-observe.json.gz",
+      "sha256": "e38f3d83ced605ecc1cca64f1cbe4c78bd4dff56a11ee8c417ba9dc22950dca3",
+      "raw_sha256": "731818f451ef829d1ef9f1eb7dc388150eef9a6d17913d17ccd94b4f4a90f565",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-gameplay-002/wall-observe.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-gameplay-002/wall.json.gz",
+      "sha256": "357f0c109da5662c6aef3f0e2f1cbc948ae23c7858c5be3d89a3b7d63bad4f92",
+      "raw_sha256": "a3fb593bf4bf68824bfbda09abca4cfb711c6f0da1b7e2f61704d9d4b2dc184e",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-gameplay-002/wall.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-gameplay-002/win-input.json.gz",
+      "sha256": "e420b5e1f1e5b9ed42083c3dde71964471c6f701f5a52c23d8830cdf2c2cc6e9",
+      "raw_sha256": "12507f1135e300f8ddb26a9c810cd5d67e18775bc1a88f4d6e2beb596d1491db",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-gameplay-002/win-input.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-gameplay-002/win-observe.json.gz",
+      "sha256": "73256dc626444af60f328261080f3f5e53ed1f9675563e6406efff6080d2530c",
+      "raw_sha256": "2085c417c78dd54ed09bf6344b6ed35d38dd5df9a5f89bd91b22e39cfd26b83f",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-gameplay-002/win-observe.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-gameplay-002/win.json.gz",
+      "sha256": "cc3c21c686e4dbe9a5e0b67d63bb116668a9aa95376703a63b29d1222399ea98",
+      "raw_sha256": "d2227675dd665e4762c2866c43ba7953e21fbe8963b0ab8ab1062070dc9dd155",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-gameplay-002/win.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-runner-001/export.log.gz",
+      "sha256": "6b787f10b6e9f9ab7285000cdd2bc8d43f3a3253fae1095b15673036186c450e",
+      "raw_sha256": "166286e3bb5dd7238e90e3c543649b68d8f71b8fe1bea121233ee823aa984614",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-runner-001/export.log"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-runner-001/freeze.json.gz",
+      "sha256": "96cd58b73c0a2061a810216bc66c1673fc1fe2716e81cc8e3467d19f4fbcdff2",
+      "raw_sha256": "214e6a66c0389991938340dbc6c1a0c9041806d8838e3f42702066d4db93f85d",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-runner-001/freeze.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-runner-001/terminal.json.gz",
+      "sha256": "dd647954b746e6f8289315110308037c1918cdf438a75187eb8fd7dc5a22d4e2",
+      "raw_sha256": "0949d43cd863d20b1337481e81fa326616b0f0c4a732c4e553d4cbeaaa655b3f",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-runner-001/terminal.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/diagonal-input.json.gz",
+      "sha256": "9171a3a78d164df4f75fb9931f6d042fa76e4e363dc799fadb3e37c1c5a0e924",
+      "raw_sha256": "dab40ff34829f2274d142e6a8b59d2077ebfc3f46e5ca19276c44c101924e564",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/diagonal-input.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/diagonal-observe.json.gz",
+      "sha256": "cf9173637166c655ba9d11c9493b35f1d7f9d3a8d796ac925284d62c4e6bd40a",
+      "raw_sha256": "c8c058c55dc303980b1ba46dad77d9946b44d129fec726ac07e241fc1dbbfce7",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/diagonal-observe.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/diagonal-process.json.gz",
+      "sha256": "48b6796b3b72ac79d4a4369d9d87ae2c34bd9a6920d154d97f5c5a31b3f3a782",
+      "raw_sha256": "b713e246f3d416e18a98b8b1f3f97fe51f2d32eaafe2ef2a837c866be9b7679e",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/diagonal-process.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/diagonal.json.gz",
+      "sha256": "22c65ea564f9f5c7a4b8aeb9fa8d89dcc5893c5daa9117a634226df4b3e257d5",
+      "raw_sha256": "d44128c2bfbaadfef9181bd20811983410c1858821cb6acd89097bbf8966f8a8",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/diagonal.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/diagonal.pcm.gz",
+      "sha256": "0d93427291eb9a1ae0d310b550f2a2a5c0a0e96c81e7e7baa2aa8d6e9f5ee981",
+      "raw_sha256": "fec9afb531a8e036eba1d81651896e1b2c1f78b0234dbadc8e7549563f09407b",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/diagonal.pcm"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/gamepad-input.json.gz",
+      "sha256": "7522a7dff829ea672ce3ac59b29fadd49e747fe872533ca4c8ba73ec4f66ffb8",
+      "raw_sha256": "d40f93f9a92b9164a460f61a1ba9816187d761ede7bb526c9710b5c38023ea82",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/gamepad-input.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/gamepad-observe.json.gz",
+      "sha256": "73256dc626444af60f328261080f3f5e53ed1f9675563e6406efff6080d2530c",
+      "raw_sha256": "2085c417c78dd54ed09bf6344b6ed35d38dd5df9a5f89bd91b22e39cfd26b83f",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/gamepad-observe.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/gamepad-process.json.gz",
+      "sha256": "c5bf2321595bf6dca320b79d2afe537db9a283d5122205b5cfd8f5d21a7ea0f4",
+      "raw_sha256": "a89c9d5a4070d7b841b0001da390fd8bcc9d6492b8479bbfe91cc63593d12bc8",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/gamepad-process.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/gamepad.json.gz",
+      "sha256": "89a11593ecb442a14c542cb1c25b45b144103712f51b771d12b1e6650533376e",
+      "raw_sha256": "f4e8fff6f3e761e019b69ada9fcab6126b74801b67b17abab850f3ffa64bd42d",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/gamepad.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/gamepad.pcm.gz",
+      "sha256": "c87758fc095a0657c5049a8fa408a5ccec4fedc1e568be46e3dd413d02a1339c",
+      "raw_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/gamepad.pcm"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/locked-exit-input.json.gz",
+      "sha256": "cd9ee8ccdbd23a217f06953b911154c49023d9de7464ce251cd1fdcd803af3ed",
+      "raw_sha256": "15c29da8390f459f3a5afa5918a8499b6bcaf6937b1b7c659ab9e0b125f33b33",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/locked-exit-input.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/locked-exit-observe.json.gz",
+      "sha256": "583ac662c4c885b477add8715d6f00871f4afbd3778c44e89d237529a3fff3b5",
+      "raw_sha256": "5e3742a9c37b7fe3556e4c7e1c8532642a256a987b628b38407aef602b14e46c",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/locked-exit-observe.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/locked-exit-process.json.gz",
+      "sha256": "1c2eaa2bd777a13d44bafaf668fac159be8bedd541c82bbc665e64b38e590b03",
+      "raw_sha256": "1935b9dbd4e39f7d4d9814ef11bfb13fcee32ccfbe907c5c1a4296aed4a14ff9",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/locked-exit-process.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/locked-exit.json.gz",
+      "sha256": "c0a3f5ca98a391bf47267aee121ebfa21b93bfc25206ae616d5422059f516b75",
+      "raw_sha256": "92d4eed01bab84959294fcaf8f24d8b72252d6cd95d9c847d35e508cd7441f13",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/locked-exit.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/locked-exit.pcm.gz",
+      "sha256": "c87758fc095a0657c5049a8fa408a5ccec4fedc1e568be46e3dd413d02a1339c",
+      "raw_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/locked-exit.pcm"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/lose-input.json.gz",
+      "sha256": "5ea8729f1d874999815ec6f3ff5d91fa0ac03544d733f446baa3f5b1075e23a1",
+      "raw_sha256": "2cbd99ee77f98d9ce4f01501f7decabf04baae615a94f906468711471259e2cd",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/lose-input.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/lose-observe.json.gz",
+      "sha256": "3c4d2292270957561f7a3a2c6ef2303d6d71ce9fc329c1d7203f1bb259732d4d",
+      "raw_sha256": "8aee4dd1c2a2d7318d5051e0e62f3423896c541b7ab31291230abca0168a6793",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/lose-observe.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/lose-process.json.gz",
+      "sha256": "561c0f9035df631311c7f4cdbaa31dcc1be93a21afd57fc789dd68e30b2226dd",
+      "raw_sha256": "a52b1409b5acf7f6f4770ff066fc0438cf2af9d5b40004db5f46cef6acab8f32",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/lose-process.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/lose.json.gz",
+      "sha256": "db9254db54d15e7bebe7556f9460795fbb0a07df0b709b1f273182e477f3781e",
+      "raw_sha256": "4699a2ce11073bf220c1c03094b2939fca2de33f9f47abf511b707666f4a2f31",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/lose.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/lose.pcm.gz",
+      "sha256": "c87758fc095a0657c5049a8fa408a5ccec4fedc1e568be46e3dd413d02a1339c",
+      "raw_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/lose.pcm"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/package/build.log.gz",
+      "sha256": "254df3cfa7112cb8ea2ff047221af25be05a25f075aaa2844be471594e73a5e1",
+      "raw_sha256": "1853d91a2bb41277efbfacb4d82c0b01fa288c85f45e340eca0645f1bc915369",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/package/build.log"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/package/export.json.gz",
+      "sha256": "b36b854831d92fee441b3d1f101c19c0f4c9a300ec1864b7a6b26801d5f3684b",
+      "raw_sha256": "42ee2105644fca0775487a0c7158be871e7b4d6829c924b2791eb77d836dc35d",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/package/export.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/package/project-build.json.gz",
+      "sha256": "e73de934018068ca841275c61a21df8250f4789b88481166fce9568f0c5ecca2",
+      "raw_sha256": "0bc30aa6f46abf33a7cf5b0d68ca2da0598352ef439e2a70387276f6aaa41b40",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/package/project-build.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/repeat-win-input.json.gz",
+      "sha256": "e420b5e1f1e5b9ed42083c3dde71964471c6f701f5a52c23d8830cdf2c2cc6e9",
+      "raw_sha256": "12507f1135e300f8ddb26a9c810cd5d67e18775bc1a88f4d6e2beb596d1491db",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/repeat-win-input.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/repeat-win-observe.json.gz",
+      "sha256": "73256dc626444af60f328261080f3f5e53ed1f9675563e6406efff6080d2530c",
+      "raw_sha256": "2085c417c78dd54ed09bf6344b6ed35d38dd5df9a5f89bd91b22e39cfd26b83f",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/repeat-win-observe.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/repeat-win-process.json.gz",
+      "sha256": "83f4202c6ccd375ca989b1036e8bef135b85d7875cf7449b00c20ccf40131c29",
+      "raw_sha256": "6d8de3074271605c69289502ec2db1b29dd3a891af1d6309365424a38f43d6f8",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/repeat-win-process.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/repeat-win.json.gz",
+      "sha256": "89a11593ecb442a14c542cb1c25b45b144103712f51b771d12b1e6650533376e",
+      "raw_sha256": "f4e8fff6f3e761e019b69ada9fcab6126b74801b67b17abab850f3ffa64bd42d",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/repeat-win.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/repeat-win.pcm.gz",
+      "sha256": "c87758fc095a0657c5049a8fa408a5ccec4fedc1e568be46e3dd413d02a1339c",
+      "raw_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/repeat-win.pcm"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/result.json.gz",
+      "sha256": "d6ce5761f000ea9de2a02489642b57f38d75366dad0a378d39bc40650f19765d",
+      "raw_sha256": "fdef5d87f0e2cbabac477313ff8cb9cecb9bdcd02f660558f6846d6a76e6f34a",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/result.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/wall-input.json.gz",
+      "sha256": "e41b8660a2afa15cafccbe1a9e0eddc7ad684d2d499bb655844fa190700b05b5",
+      "raw_sha256": "29e406638309e4f87c434439d2e838df8b4a67a2e4d234c6c926f1616d3e2bc3",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/wall-input.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/wall-observe.json.gz",
+      "sha256": "e38f3d83ced605ecc1cca64f1cbe4c78bd4dff56a11ee8c417ba9dc22950dca3",
+      "raw_sha256": "731818f451ef829d1ef9f1eb7dc388150eef9a6d17913d17ccd94b4f4a90f565",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/wall-observe.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/wall-process.json.gz",
+      "sha256": "3ad6973da6f348c6d46f47a3870246a2963bc6b23827077fa2692d509b968dbf",
+      "raw_sha256": "577e5c5e89667b17e81eb0b99658316736ed804f1256fdb796988b63ff79fda9",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/wall-process.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/wall.json.gz",
+      "sha256": "1f43415c64a1b41c536e272d3f69b8863bcb9f63c86f68428f1498964278df96",
+      "raw_sha256": "ece4eeb4d94d3bf38ed41521888a0cc4e25c7547a2ab433daa2b2956096eb02a",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/wall.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/wall.pcm.gz",
+      "sha256": "c87758fc095a0657c5049a8fa408a5ccec4fedc1e568be46e3dd413d02a1339c",
+      "raw_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/wall.pcm"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/win-input.json.gz",
+      "sha256": "e420b5e1f1e5b9ed42083c3dde71964471c6f701f5a52c23d8830cdf2c2cc6e9",
+      "raw_sha256": "12507f1135e300f8ddb26a9c810cd5d67e18775bc1a88f4d6e2beb596d1491db",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/win-input.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/win-observe.json.gz",
+      "sha256": "73256dc626444af60f328261080f3f5e53ed1f9675563e6406efff6080d2530c",
+      "raw_sha256": "2085c417c78dd54ed09bf6344b6ed35d38dd5df9a5f89bd91b22e39cfd26b83f",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/win-observe.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/win-process.json.gz",
+      "sha256": "da5cbc17e2576210ff6a940dd1b416d6e5e4713d45e54f6027180c45f2ab0912",
+      "raw_sha256": "8fe9c40cd1e4cfd135ad43ec58e486669d8639a2916882961cae65a239f040a6",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/win-process.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/win.json.gz",
+      "sha256": "89a11593ecb442a14c542cb1c25b45b144103712f51b771d12b1e6650533376e",
+      "raw_sha256": "f4e8fff6f3e761e019b69ada9fcab6126b74801b67b17abab850f3ffa64bd42d",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/win.json"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-001/win.pcm.gz",
+      "sha256": "c87758fc095a0657c5049a8fa408a5ccec4fedc1e568be46e3dd413d02a1339c",
+      "raw_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/win.pcm"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-ci.log.gz",
+      "sha256": "7e12d589cd236b87def1076fe05ab6dec90f613289f6a286479fb1b45af0e367",
+      "raw_sha256": "9425e6228663723035d634ea9f94ed8f1cb4fb8090ccdab57a8785d5ab8678ca",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-ci.log"
+    },
+    {
+      "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-release-policy.log.gz",
+      "sha256": "f09362b88aec8e73e4b678d28c478a0f26a19c4bbcff5350c2a22f5d0b70ac7c",
+      "raw_sha256": "065c7d15facfd20f14fb9182747be315f3349fa1d5e1a0e966047509f4bfa9b1",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-release-policy.log"
+    }
+  ],
+  "final_review": {
+    "accepted": true,
+    "path": "docs/spikes/evidence/planar-sample-gameplay/planar-sample-export-final-20261012.json",
+    "sha256": "ec88e1b92906b897ea103d6319c7a28742d6cd2043f96bd3b1b4aa62f65f75b1"
+  },
+  "experiments": [
+    {
+      "output": "planar-sample-gameplay-001",
+      "result": "Public validation rejected the initial fixture using 3D RigidBody with Collider2D. Fixture corrected to documented RigidBody2D; no engine change. Successful fresh run002 retained."
+    }
+  ],
+  "limits": [
+    "Numerical white atlas and room, no finished art or rendered review",
+    "Host desktop CPU only; no reference-device or performance gate",
+    "Optional following camera and simultaneous hazard/exit are source-reviewed, not exercised by these seven cases",
+    "Physics checkpoint continuation remains unsupported; persistent gameplay declaration does not close that requirement",
+    "PCM is silent: exact hash comparison measures frame clock/sample count consistency, not audible audio behavior."
+  ]
+}

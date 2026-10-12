@@ -16,6 +16,24 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Planar gameplay — current-main integration reviewed
+
+All five reviewed sample/workflow inputs remain exact. Seven native gameplay
+scenarios, strict types, 28 policy cases and actionlint pass with a matching engine
+binary. Independent review accepts the source/receipts. Original shipping proof
+remains explicitly based on main160; fast CI/publication are pending. The
+numerical room does not establish authored visuals, device or physics-save gates.
+[Current integration evidence](docs/spikes/planar-sample-main163.md).
+
+## Core presentation bindings — merged main164
+
+The two reviewed sample/helper inputs are unchanged. Strict types, seven native
+scenarios and a fresh ordinary source/map/build-deleted win/loss/repeat proof pass
+on the integrated native HUD/audio engine. Actual text/locale/result parenting,
+repeat PCM and terminal silence are verified. Independent integration audit and exact-head fast CI passed before PR164 merged.
+Authored appearance/device gates remain separate.
+[Current integration evidence](docs/spikes/core-presentation-integration.md).
+
 ## Core Sample presentation bindings — locally verified
 
 Optional authored role maps connect gameplay to localized health, collection and
@@ -31,13 +49,22 @@ This is a numerical fixture, not the finished authored level or device gate.
 Headless recorded UI routing and physics save support remain separate open work.
 [Contract and retained evidence](docs/spikes/core-presentation-bindings.md).
 
-## Native HUD controls — main161 integration reviewed; fast check pending
+## Native audio transport — merged main163
+
+541 affected CPU cases, Clippy and target/contracts checks pass. A fresh ordinary
+package passes four source/map/build-deleted playback/continuation processes with
+exact save and PCM equality plus ten precise refusal controls. Integration source
+seams, final evidence and exact-head fast CI passed before PR163 merged. Wasm
+transport, Core presentation and physical audio/device gates remain separate.
+[Current-main evidence](docs/spikes/native-audio-transport-main162.md).
+
+## Native HUD controls — merged main162
 
 All 20 accepted inputs remain exact. Current-main CPU checks pass 444 affected
 and 10 player cases plus Clippy/target/contracts/dependency checks. A fresh
 ordinary package passes five source/map/build-deleted processes with canonical
 shaped text/focus and exact save/PCM continuation, plus three precise refusals.
-Independent integration review is accepted; exact-head fast CI/publication remain pending. Wasm parity,
+Independent integration review and exact-head fast CI passed before PR162 merged. Wasm parity,
 window/IME/appearance and device gates remain separate.
 [Current-main evidence](docs/spikes/native-hud-main161.md).
 
@@ -123,6 +150,21 @@ save/SDK controls and rendered/device gates remain open; this is not complete
 root motion or Phase 1. [Contract and evidence](docs/spikes/native-root-motion-core.md).
 
 
+
+## Planar Sample gameplay — native and exported checks verified
+
+The top-down 2D controller uses native planar sensors, solid tilemap collision
+and bulk velocity updates. Public atlas import and command authoring pass
+Undo/Redo and journal reopening. Seven native scenarios and seven fresh ordinary
+shipping processes pass: keyboard/gamepad win, hazard loss, blocked wall, locked
+exit, normalized diagonal motion and repeatability. Source/cache/build/map inputs
+are removed from the exported proof; logs, observations and silent PCM match
+native development exactly. Independent source and execution reviews are accepted.
+The 2D presentation is now assigned to Claude Opus 5.5 at explicitly verified Max.
+The numerical white atlas is not sample art; rendered/device/performance and
+physics checkpoint gates remain open. Optional follow camera and simultaneous
+hazard/exit branches are source-reviewed but not in these seven scenarios.
+[Contract](samples/planar/README.md) and [evidence](docs/spikes/evidence/planar-sample-gameplay.json).
 
 ## Complete compound Wasm — merged main159
 
