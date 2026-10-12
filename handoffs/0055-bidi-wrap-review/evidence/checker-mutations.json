@@ -1,0 +1,62 @@
+{
+ "results": {
+  "unmutated": {
+   "max_abs": 1,
+   "over2": 0,
+   "ratio_min": [
+    0.998,
+    "W",
+    0
+   ],
+   "stray": 0
+  },
+  "lost-glyph": {
+   "max_abs": 223,
+   "over2": 186,
+   "ratio_min": [
+    0.0,
+    "a",
+    19
+   ],
+   "stray": 0
+  },
+  "dropped-space": {
+   "max_abs": 223,
+   "over2": 2066,
+   "ratio_min": [
+    0.246,
+    "s",
+    22
+   ],
+   "stray": 253
+  },
+  "wrong-break": {
+   "max_abs": 222,
+   "over2": 204,
+   "ratio_min": [
+    0.0,
+    "ש",
+    17
+   ],
+   "stray": 168
+  },
+  "extra-glyph": {
+   "max_abs": 1,
+   "over2": 0,
+   "ratio_min": [
+    0.998,
+    "r",
+    1
+   ],
+   "stray": 285
+  }
+ },
+ "verdict": {
+  "unmutated": "pass",
+  "lost-glyph": "caught",
+  "dropped-space": "caught",
+  "wrong-break": "caught",
+  "extra-glyph": "caught"
+ },
+ "checker_discriminates": true
+}
