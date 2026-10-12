@@ -2492,5 +2492,10 @@
     "Module checkpoint state and connected root-motion gameplay remain unsupported.",
     "Checkpoint13 independently evaluates frozen main155; later compound merge does not change its selected tree."
   ],
-  "review": "Six source seams independently accepted. Final integrated source/log/package closure pending."
+  "review": {
+    "decision": "accepted",
+    "receipt": "native-compound-main155-final-review.json",
+    "sha256": "5ecd59d14670fc1cc7743825c7d5e3e7ba898fa7039637edd62e36a9811b1a1c",
+    "reviewed_manifest_sha256": "7c99385beaee4a05813131b9186c4424a94add47f1a40d69241f746b2c9d760c"
+  }
 }

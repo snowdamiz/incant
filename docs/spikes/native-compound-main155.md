@@ -20,4 +20,4 @@ A later wasm compile reused stale metadata from a target previously shared acros
 
 No GPU, native-window, appearance, phone or performance acceptance is claimed here. Existing Wasm v1–v4 and IK-v1 explicitly refuse compound snapshots; the reviewed complete compound ABI is a later integration. Whole guest checkpoints and connected root-motion gameplay remain open. Checkpoint13 independently evaluates frozen main155; this feature does not move that candidate or approve a phase gate.
 
-[Source, command, failure and package evidence](evidence/native-compound-main155.json). Final integrated closure review is pending.
+[Source, command, failure and package evidence](evidence/native-compound-main155.json). [Final independent integrated closure review](evidence/native-compound-main155-final-review.json) accepted the frozen source, retained checks and package continuation.
