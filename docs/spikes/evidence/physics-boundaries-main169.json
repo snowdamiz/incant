@@ -726,7 +726,11 @@
     "path": "docs/spikes/evidence/physics-boundaries-main169/leaf-review.json",
     "sha256": "8302de7a11badf8de622cef712711850fd18f93224428e22c0e8fea2aefb3657"
   },
-  "independent_review": "pending integrated final audit",
+  "independent_review": {
+    "decision": "accepted bounded current-main169 integration",
+    "path": "docs/spikes/evidence/physics-boundaries-main169/final-review.json",
+    "sha256": "93154aec9ed156d8ed32bfcfa1f541c8aff54bdbd667a0e0a32a72bf66f94416"
+  },
   "limits": [
     "Deterministic defaults unchanged; project/process feature selection remains separate local work.",
     "No renderer, GPU, phone, performance or numerical backend adoption claim.",

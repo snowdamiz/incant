@@ -27,6 +27,7 @@ actual feature records and the copied diagnostic executable. It also verifies
 46 retained producer artifacts. The same ten tests run under three builds;
 these are not thirty distinct cases, and diagnostic scenarios are not Rust tests.
 
-Integrated final review and exact-head fast CI are pending. Project/process
+[Independent integrated final review](evidence/physics-boundaries-main169/final-review.json)
+is accepted; exact-head fast CI remains required. Project/process
 physics selection remains separate work. No performance, reference-phone,
 renderer, backend-adoption, exact production physics save or phase gate is claimed.
