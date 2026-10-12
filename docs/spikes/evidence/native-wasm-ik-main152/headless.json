@@ -1,0 +1,10 @@
+{
+  "source_head": "c8115289af04ab82f74667400d79da31988c33be",
+  "features": [
+    "wasmtime-host"
+  ],
+  "profile": "ci",
+  "sha256": "0effb96594afebbe7947c0bc3bde03ff4c5f8c9f4b41e0823b7d7a00c1a94a05",
+  "bytes": 71963520,
+  "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/incant_headless"
+}
