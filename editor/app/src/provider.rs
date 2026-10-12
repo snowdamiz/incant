@@ -93,10 +93,10 @@ impl ProviderRuntime {
             let result = this.perform(&app, &action, account_id.as_deref(), add);
             let state = match result {
                 Ok(state) => state,
-                Err(AgentError::Interrupted) => public_state(false).unwrap_or_else(error_state),
+                Err(AgentError::Interrupted) => public_state().unwrap_or_else(error_state),
                 Err(error) => {
                     let mut state = error_state(error);
-                    if let Ok(saved) = public_state(false) {
+                    if let Ok(saved) = public_state() {
                         state["accounts"] = saved["accounts"].clone();
                         if let Some(id) = saved.get("activeAccount") {
                             state["activeAccount"] = id.clone();
@@ -119,11 +119,13 @@ impl ProviderRuntime {
         add: bool,
     ) -> Result<Value, AgentError> {
         if action == "restore" {
-            return public_state(true);
+            // Startup restores local account presence even offline. The provider
+            // refreshes expired credentials only when an agent request needs them.
+            return public_state();
         }
         if action == "disconnect" {
             let revoked = AccountStore::open()?.disconnect()?;
-            let mut state = public_state(false)?;
+            let mut state = public_state()?;
             if revoked == RemoteRevocation::Unconfirmed {
                 state["message"] = json!(
                     "Signed out on this computer. Remote revocation could not be confirmed; you can also disconnect Incant in ChatGPT Settings."
@@ -136,10 +138,10 @@ impl ProviderRuntime {
                 account_id.ok_or_else(|| AgentError::Provider("Choose a saved account".into()))?,
             )?
         {
-            return public_state(false);
+            return public_state();
         }
         let (attempt, subject) = AccountStore::open()?.prepare_login(add, account_id)?;
-        let mut pending = public_state(false)?;
+        let mut pending = public_state()?;
         pending["status"] = json!("connecting");
         pending["method"] = json!("oauth");
         pending["phase"] = json!("browser");
@@ -159,7 +161,7 @@ impl ProviderRuntime {
         // Publication follows durable credential and metadata writes. Closing the
         // app after success does not discard its selected account.
         AccountStore::open()?.activate(account)?;
-        public_state(false)
+        public_state()
     }
     /// Reopening an existing browser attempt can block in the OS launcher. Only
     /// the bounded worker holds it; neither admission nor the browser/state locks
@@ -216,15 +218,12 @@ impl ProviderRuntime {
 fn error_state(error: AgentError) -> Value {
     json!({"status":"error","provider":"openai","error":{"code":"provider.auth","message":error.to_string()}})
 }
-fn public_state(refresh: bool) -> Result<Value, AgentError> {
+fn public_state() -> Result<Value, AgentError> {
     let store = AccountStore::open()?;
     let mut state = json!({"status":"not-connected","provider":"openai","accounts":store.data.accounts.iter().map(|a| json!({"id":a.id,"label":if a.label.is_empty() { format!("ChatGPT · {}", &a.id[a.id.len().saturating_sub(6)..]) } else { a.label.clone() }})).collect::<Vec<_>>()});
     if let Some(account) = store.selected() {
         if CredentialStore::load_optional(&account.id)?.is_none() {
             return Ok(state);
-        }
-        if refresh {
-            auth::access_token(account)?;
         }
         state["status"] = json!("connected");
         state["method"] = json!("oauth");

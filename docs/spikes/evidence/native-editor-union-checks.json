@@ -190,5 +190,46 @@
     "merge_conflicts": "STATUS.md additive sections retained; no source conflicts",
     "scope": "CPU integration of merged Wasm localization and packaged text with editor/agent. Native0050 remains on immutable4589c2b/main104 binary; no additional UI source changes. Full phase/device gates remain open.",
     "inherited_whitespace": "Full staged diff check reported upstream font LICENSE trailing whitespace and Cargo.toml blank final line already in main106. Font license preserved byte-identically; edited STATUS.md passes scoped whitespace check."
+  },
+  "main108_integration": {
+    "recorded_at": "2026-10-12T00:16:16.353796+00:00",
+    "parent": "d4b4345e32ebc646d11b22424424d1d963b2fc0f",
+    "main": "724ae24813041f2430f2b40e8aaab3dabc80316a",
+    "provider_source_sha256": "10e977c026668253ba797b401483dc4b62ad4c58865121dc182f5993c4a7fc04",
+    "change": "Restore saved account locally; OAuth refresh stays on agent-request path. No UI source change.",
+    "tests": {
+      "passed": 180,
+      "failed": 0,
+      "ignored": 1,
+      "groups": 11
+    },
+    "clippy": "passed all targets -D warnings",
+    "logs": {
+      "tests": {
+        "path": "/tmp/incant-editor-main108-tests.log",
+        "sha256": "2385b3ca3909352d0588f06b841d4a04a6a7a22274c75b6142ff768534a38fdb"
+      },
+      "clippy": {
+        "path": "/tmp/incant-editor-main108-clippy.log",
+        "sha256": "6464b9e2dbc0ca6ed77870886d2f20a327aeb3505453bb9b57381b6050e54495"
+      }
+    },
+    "native_review": {
+      "claude_commit": "ab27325",
+      "model": "Opus 5.5",
+      "thinking": "Max",
+      "source": "4589c2ba5edf2d89587fef8b815bdca1cd4af01e",
+      "metadata_sha256": "139b4bb4b89e4da75c945263a0790fa4bbcabd67442a41a8260c9acf920f40c9",
+      "committed_images_rehashed": 6,
+      "focus_and_composer": "passed",
+      "account_and_usage": "retained; one startup HTTPS exchange recorded, no inference or usage change",
+      "owned_processes": "exited/reaped; grant released",
+      "reviewer_role": "Claude reviewed all pixels; Astra reviewed evidence/source only"
+    },
+    "limitations": [
+      "Native visual observations apply to frozen main104 binary, not latest source",
+      "Lazy auth restore fix verified by source and CPU integration; no renewed live account flow",
+      "Device/cross-platform/phase gates remain open"
+    ]
   }
 }

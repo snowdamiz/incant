@@ -25,15 +25,15 @@ ahead. Editor and agent work overlaps later phases without completing their gate
 
 Native Wasm logging/localization, desktop gamepad input, session and
 exported-player checkpoints, packaged-font text shaping, and the browser renderer
-compile repair are merged into main through PR #106. The actual native editor
-Play/chat/budget review completed one real account-backed turn, Undo and reopen
-with retained login and usage. Two discovered UI defects are fixed and built
-locally; focused native rechecking remains. Parallel work covers skeletal
-animation and its native consumer integration, public font import/cooking, and
-shader cooking. Complete game UI/text input, remaining SDK/render features,
+compile repair are merged into main, with skeletal asset foundations and font
+import/cooking added in PRs #107–108. The actual native editor Play/chat/budget
+review completed one real account-backed turn, Undo and reopen with retained
+login and usage. Both follow-up UI fixes passed focused native rechecking.
+Parallel work connects native animation clocks, scripting and rendering, and
+checks cooked shaders. Complete game UI/text input, remaining SDK/render features,
 the Core Sample and reference-device measurements still prevent a Phase 1
-completion claim. The feature merge queue is clear after PRs #104–106; locally
-reviewed animation and the editor integration are the next candidates.
+completion claim. The feature merge queue is clear after PRs #107–108; the editor integration and
+locally checked animation integration are the next candidates.
 
 Progress reports are scheduled approximately every 30 minutes while the goal is
 active. Report merged work separately from local checks and unmet exit gates.
@@ -65,8 +65,12 @@ native visual/WebView acceptance passed on the separately identified main100
 build. Actual unsaved/saved Play, input focus, splitters, allowance edits and a
 real approved agent rename were checked, including Undo and reopening with the
 same account and 22,044 charged tokens. Two new source fixes address picker
-focus loss and a clipped model field; the rebuilt main104 union awaits focused
-native acceptance ([review](handoffs/0048-native-editor-integration/result.md)).
+focus loss and a clipped model field; both pass the rebuilt main104 native check
+([follow-up](handoffs/0050-native-editor-focus-fit/result.md)). Account and usage
+were retained. That run recorded an HTTPS exchange before user input; the latest
+backend now restores account presence locally and leaves renewal to agent
+requests. Main108 integration passes scoped Rust tests and Clippy, with no UI
+source change or new provider turn.
 No completed Phase 3 gate is claimed.
 [Binding evidence](docs/spikes/native-editor-agent.md),
 [persistent owner evidence](docs/spikes/persistent-native-agent-host.md),
