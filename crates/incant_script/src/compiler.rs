@@ -181,17 +181,37 @@ impl CompiledScript {
 
 /// A fresh trusted build product for an explicitly admitted destination. Unlike
 /// CompiledScript, it cannot be executed by the producer's runtime or retargeted.
-/// The sole constructor recompiles source; it never accepts executable caches.
+/// Every constructor recompiles source; none accepts executable caches.
 pub struct ScriptBuild {
     compiled: CompiledScript,
     metadata: ScriptMetadata,
 }
 impl ScriptBuild {
     pub fn compile(name: &str, source: &str, target: &str) -> Result<Self, ScriptError> {
+        Self::compile_inner(name, source, None, target)
+    }
+
+    /// Fresh project source and checked attachments are compiled together. The
+    /// scene binding survives destination admission and generated embedding.
+    pub fn compile_project(
+        name: &str,
+        source: &str,
+        bindings: crate::ScriptBindings,
+        target: &str,
+    ) -> Result<Self, ScriptError> {
+        Self::compile_inner(name, source, Some(bindings), target)
+    }
+
+    fn compile_inner(
+        name: &str,
+        source: &str,
+        bindings: Option<crate::ScriptBindings>,
+        target: &str,
+    ) -> Result<Self, ScriptError> {
         if !compatibility::admits(TARGET, target, BytecodeAbi::current()) {
             return Err(ScriptError::ArtifactCompatibility);
         }
-        let compiled = CompiledScript::compile_named(name, source)?;
+        let compiled = CompiledScript::compile_inner(name, source, bindings)?;
         if compiled.bytes.first() != Some(&28) || compiled.hardening.first() != Some(&28) {
             return Err(ScriptError::ArtifactCompatibility);
         }

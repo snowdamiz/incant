@@ -3,7 +3,9 @@
 use crate::{CookError, scene::cook_validated_scene_with_resources, stable_id};
 use incant_doc::Project;
 use incant_runtime::CookedScene;
-use incant_script::{CompiledScript, ScriptBindings, ScriptError, ScriptInstance, ScriptValue};
+use incant_script::{
+    CompiledScript, ScriptBindings, ScriptBuild, ScriptError, ScriptInstance, ScriptValue,
+};
 use serde_json::{Value, json};
 use sha2::{Digest, Sha256};
 use std::collections::{BTreeMap, BTreeSet};
@@ -29,6 +31,11 @@ pub struct CookedProjectProgram {
     scene: CookedScene,
     script: CompiledScript,
 }
+/// Destination-bound trusted build output, distinct from a development program.
+pub struct CookedProjectBuild {
+    scene: CookedScene,
+    script: ScriptBuild,
+}
 impl PreparedScriptScene {
     /// Data for the fixed trusted TypeScript cook; not flags or executable paths.
     pub fn source_catalog(&self) -> &Value {
@@ -42,9 +49,31 @@ impl PreparedScriptScene {
             script,
         })
     }
+
+    pub fn compile_for_target(
+        self,
+        commonjs: &str,
+        target: &str,
+    ) -> Result<CookedProjectBuild, ProjectScriptError> {
+        let script = ScriptBuild::compile_project(
+            "incant-project-behaviors",
+            commonjs,
+            self.bindings,
+            target,
+        )?;
+        Ok(CookedProjectBuild {
+            scene: self.scene,
+            script,
+        })
+    }
 }
 impl CookedProjectProgram {
     pub fn into_parts(self) -> (CookedScene, CompiledScript) {
+        (self.scene, self.script)
+    }
+}
+impl CookedProjectBuild {
+    pub fn into_parts(self) -> (CookedScene, ScriptBuild) {
         (self.scene, self.script)
     }
 }
