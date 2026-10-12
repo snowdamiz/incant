@@ -1,0 +1,363 @@
+{
+  "recorded_at": "2026-10-12T03:48:29.525676+00:00",
+  "checkpoint": 8,
+  "pr": "https://github.com/snowdamiz/incant/pull/111",
+  "selected_main": "100b26eb30b614c5850e60c47a1495e86627f4ef",
+  "candidate": "ac29628cca2d3dc5b8650bffcf1c0687f6526f44",
+  "release_merge": "b614679a1d48aba6e4ff5387974351602de5c026",
+  "release_parents": [
+    "c603ca07bbe1e6e1ad46b2fd3aa2f70aaec07f50",
+    "ac29628cca2d3dc5b8650bffcf1c0687f6526f44"
+  ],
+  "tree": "8602e6a8356a57156ef448bdb1fa2e7ff6f6c0ff",
+  "merged_at": "2026-10-12T03:46:03Z",
+  "all_23_required_checks_success": true,
+  "all_eight_push_workflows_success": true,
+  "tree_and_trailer_verified": true,
+  "checks": [
+    {
+      "name": "storage (macos-latest)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-12T02:26:48Z",
+      "completedAt": "2026-10-12T02:30:53Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38195232338/job/114636303386"
+    },
+    {
+      "name": "desktop (windows-latest, Windows, .exe)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-12T02:18:02Z",
+      "completedAt": "2026-10-12T03:10:05Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38195232337/job/114636303311"
+    },
+    {
+      "name": "conformance (macos-latest)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-12T02:18:08Z",
+      "completedAt": "2026-10-12T02:37:01Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38195232310/job/114636303271"
+    },
+    {
+      "name": "classify",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-12T02:18:01Z",
+      "completedAt": "2026-10-12T02:18:12Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38195232329/job/114636303398"
+    },
+    {
+      "name": "local-service-protocols",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-12T02:18:01Z",
+      "completedAt": "2026-10-12T02:19:24Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38195232348/job/114636303091"
+    },
+    {
+      "name": "native (macos-latest)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-12T02:31:00Z",
+      "completedAt": "2026-10-12T02:44:04Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38195232327/job/114636310436"
+    },
+    {
+      "name": "desktop (macos, macos-latest, incant_platform_smoke)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-12T02:28:40Z",
+      "completedAt": "2026-10-12T02:37:09Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38195232302/job/114636303381"
+    },
+    {
+      "name": "build",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-12T02:18:01Z",
+      "completedAt": "2026-10-12T02:19:00Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38195232369/job/114636303569"
+    },
+    {
+      "name": "storage (windows-latest)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-12T02:18:13Z",
+      "completedAt": "2026-10-12T02:25:39Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38195232338/job/114636303513"
+    },
+    {
+      "name": "desktop (ubuntu-latest, Linux)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-12T02:18:01Z",
+      "completedAt": "2026-10-12T02:40:03Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38195232337/job/114636303373"
+    },
+    {
+      "name": "conformance (ubuntu-latest)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-12T02:18:01Z",
+      "completedAt": "2026-10-12T02:31:47Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38195232310/job/114636303458"
+    },
+    {
+      "name": "native (ubuntu-latest)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-12T02:19:02Z",
+      "completedAt": "2026-10-12T02:29:08Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38195232327/job/114636310394"
+    },
+    {
+      "name": "desktop (windows, windows-latest, incant_platform_smoke.exe)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-12T02:18:01Z",
+      "completedAt": "2026-10-12T02:32:01Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38195232302/job/114636303456"
+    },
+    {
+      "name": "storage (ubuntu-latest)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-12T02:18:01Z",
+      "completedAt": "2026-10-12T02:20:37Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38195232338/job/114636303547"
+    },
+    {
+      "name": "conformance (windows-latest)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-12T02:19:26Z",
+      "completedAt": "2026-10-12T02:57:29Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38195232310/job/114636303501"
+    },
+    {
+      "name": "native (windows-latest)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-12T02:19:54Z",
+      "completedAt": "2026-10-12T02:33:29Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38195232327/job/114636310374"
+    },
+    {
+      "name": "desktop (linux, ubuntu-latest, incant_platform_smoke)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-12T02:18:01Z",
+      "completedAt": "2026-10-12T02:24:29Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38195232302/job/114636303363"
+    },
+    {
+      "name": "checks",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-12T02:37:07Z",
+      "completedAt": "2026-10-12T03:44:12Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38195232329/job/114636342383"
+    },
+    {
+      "name": "portability",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-12T02:32:56Z",
+      "completedAt": "2026-10-12T02:37:59Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38195232327/job/114636310293"
+    },
+    {
+      "name": "web",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-12T02:18:01Z",
+      "completedAt": "2026-10-12T02:22:02Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38195232302/job/114636303082"
+    },
+    {
+      "name": "compare",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-12T02:44:06Z",
+      "completedAt": "2026-10-12T02:44:22Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38195232327/job/114641612782"
+    },
+    {
+      "name": "ios",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-12T02:18:06Z",
+      "completedAt": "2026-10-12T02:26:41Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38195232302/job/114636303356"
+    },
+    {
+      "name": "android",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "startedAt": "2026-10-12T02:18:01Z",
+      "completedAt": "2026-10-12T02:26:14Z",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38195232302/job/114636303370"
+    }
+  ],
+  "runs": [
+    {
+      "id": 38195232310,
+      "path": ".github/workflows/development-wasm.yml",
+      "head_sha": "ac29628cca2d3dc5b8650bffcf1c0687f6526f44",
+      "head_branch": "codex/release-candidate",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-12T02:17:59Z",
+      "updated_at": "2026-10-12T02:57:30Z"
+    },
+    {
+      "id": 38195232302,
+      "path": ".github/workflows/nightly.yml",
+      "head_sha": "ac29628cca2d3dc5b8650bffcf1c0687f6526f44",
+      "head_branch": "codex/release-candidate",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-12T02:17:59Z",
+      "updated_at": "2026-10-12T02:37:10Z"
+    },
+    {
+      "id": 38195232338,
+      "path": ".github/workflows/credentials.yml",
+      "head_sha": "ac29628cca2d3dc5b8650bffcf1c0687f6526f44",
+      "head_branch": "codex/release-candidate",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-12T02:17:59Z",
+      "updated_at": "2026-10-12T02:30:54Z"
+    },
+    {
+      "id": 38195232327,
+      "path": ".github/workflows/physics-candidates.yml",
+      "head_sha": "ac29628cca2d3dc5b8650bffcf1c0687f6526f44",
+      "head_branch": "codex/release-candidate",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-12T02:17:59Z",
+      "updated_at": "2026-10-12T02:44:23Z"
+    },
+    {
+      "id": 38195232348,
+      "path": ".github/workflows/local-services.yml",
+      "head_sha": "ac29628cca2d3dc5b8650bffcf1c0687f6526f44",
+      "head_branch": "codex/release-candidate",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-12T02:17:59Z",
+      "updated_at": "2026-10-12T02:19:25Z"
+    },
+    {
+      "id": 38195232369,
+      "path": ".github/workflows/website.yml",
+      "head_sha": "ac29628cca2d3dc5b8650bffcf1c0687f6526f44",
+      "head_branch": "codex/release-candidate",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-12T02:17:59Z",
+      "updated_at": "2026-10-12T02:19:01Z"
+    },
+    {
+      "id": 38195232337,
+      "path": ".github/workflows/desktop.yml",
+      "head_sha": "ac29628cca2d3dc5b8650bffcf1c0687f6526f44",
+      "head_branch": "codex/release-candidate",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-12T02:17:59Z",
+      "updated_at": "2026-10-12T03:10:06Z"
+    },
+    {
+      "id": 38195232329,
+      "path": ".github/workflows/ci.yml",
+      "head_sha": "ac29628cca2d3dc5b8650bffcf1c0687f6526f44",
+      "head_branch": "codex/release-candidate",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-12T02:17:59Z",
+      "updated_at": "2026-10-12T03:44:13Z"
+    }
+  ],
+  "protection": {
+    "strict": true,
+    "enforce_admins": true,
+    "required_contexts": [
+      "android",
+      "build",
+      "checks",
+      "classify",
+      "compare",
+      "conformance (macos-latest)",
+      "conformance (ubuntu-latest)",
+      "conformance (windows-latest)",
+      "desktop (linux, ubuntu-latest, incant_platform_smoke)",
+      "desktop (macos, macos-latest, incant_platform_smoke)",
+      "desktop (ubuntu-latest, Linux)",
+      "desktop (windows, windows-latest, incant_platform_smoke.exe)",
+      "desktop (windows-latest, Windows, .exe)",
+      "ios",
+      "local-service-protocols",
+      "native (macos-latest)",
+      "native (ubuntu-latest)",
+      "native (windows-latest)",
+      "portability",
+      "storage (macos-latest)",
+      "storage (ubuntu-latest)",
+      "storage (windows-latest)",
+      "web"
+    ],
+    "required_app_id": 15368
+  },
+  "macos_checks": {
+    "job_id": 114636342383,
+    "run_id": 38195232329,
+    "created_at": "2026-10-12T02:18:12Z",
+    "started_at": "2026-10-12T02:37:07Z",
+    "completed_at": "2026-10-12T03:44:12Z",
+    "queue_seconds": 1135.0,
+    "execution_seconds": 4025.0,
+    "log": {
+      "path": "/tmp/incant-release-checkpoint8-macos.log",
+      "sha256": "60ec463cd58f2984ea9bedc3e68c235b66bf809105a89848a3947174d0b2050d"
+    }
+  },
+  "audit_receipts": [
+    {
+      "path": "/tmp/incant-release-checkpoint-8.json",
+      "sha256": "7c2a747d64352f144c70a278632d61c55ecd1798e117a9a4f819fde95f44691b"
+    },
+    {
+      "path": "/tmp/incant-release-checkpoint-8-terminal.json",
+      "sha256": "509515be739e09e642c6edd23ea9df9daaf20bdd5ba26b3674ba2f49c78740ec"
+    },
+    {
+      "path": "/tmp/incant-release-checkpoint-8-promotion-premerge.json",
+      "sha256": "f4a6e30a76ef742501b1614ab89b9598c09ede91c392a83d5fbc9f609d58da95"
+    },
+    {
+      "path": "/tmp/incant-release-checkpoint-8-promotion-promoted.json",
+      "sha256": "4b01722687c7ec5ee317456a5268d9c9b3f6370028448384e04720fa6c716128"
+    },
+    {
+      "path": "/tmp/incant-release-checkpoint8-macos-job.json",
+      "sha256": "b5569620a1d485937aac58c2c48e01d42b0a2c469f393ad4527bfb43e5b8ff9f"
+    }
+  ],
+  "history": "Checkpoints6 and7 remain unpromoted failed attempts; reviewed main repairs112/113/115 and accepted animation116/Console117 are included in this frozen repair-validation snapshot. Later main features118+ are outside this candidate.",
+  "limits": [
+    "Comprehensive CI integration baseline only; no phase approval, physical-phone performance, signing, release package or distribution claim.",
+    "Single observed job durations include its current workload/cache conditions; no matched performance or speedup claim."
+  ]
+}

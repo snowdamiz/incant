@@ -16,13 +16,14 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Durable budget lock release — correction validated locally
+## Durable budget lock release — validated in checkpoint8
 
 Checkpoint7 exposed Busy when reopening a completed ledger. A private lock guard
 now explicitly releases ownership before descriptor close; two deterministic
 shared-description regressions fail old source and pass fixed. All 64 agent
 tests and Clippy pass, retaining live exclusion and conservative reservations.
-Exact hosted scheduling cause and the next full candidate remain unverified.
+The exact earlier hosted scheduling cause remains unconfirmed. Checkpoint8 now
+passes all 23 required contexts, including the actual macOS tests, and is promoted.
 [Evidence](docs/spikes/ledger-explicit-release.md).
 
 ## Release checkpoint6 correction
@@ -30,10 +31,10 @@ Exact hosted scheduling cause and the next full candidate remain unverified.
 Failed checkpoint6 selected main110 and was never promoted. Three native physics jobs
 exposed a stale isolated probe lock edge; the reviewed one-edge correction and
 required-dependency guard pass local locked Cargo/Clippy and tooling checks.
-The fixes are merged in PR #112; checkpoint7 now verifies frozen repaired
+The fixes merged in PR #112; checkpoint7 checked frozen repaired
 main113 through the same 23 required contexts in PR #111. Checkpoint7 finished
 with 22 successful contexts and one macOS ledger failure; it is not promoted.
-PR #115 repairs that failure locally, pending the next full candidate.
+PR #115 repairs that failure; checkpoint8 passes and promotes frozen main117.
 The independent fresh observation-routing correction restores the precise
 pre-startup refusal while preserving absolute checkpoint-resume bounds; its
 unchanged process regression, 36 scoped tests and Clippy pass.
@@ -44,6 +45,16 @@ independent reads, then verifies recovered state. Seven local tests and Clippy
 pass; PR #113 merged the fixture correction. Checkpoint7 Windows desktop and
 Wasm conformance both pass.
 [Journal test evidence](docs/spikes/checkpoint6-budget-journal-tests.md).
+
+## Latest comprehensive release baseline
+
+Checkpoint8 promoted frozen main117 into release at
+`b614679a1d48aba6e4ff5387974351602de5c026` after all 23 required checks and eight
+exact-candidate push workflows succeeded. Its tree is exactly the selected main117
+tree; parents and Built-by trailer are verified. Checkpoints6–7 remain historical
+failed attempts. Later main118+ work continues through reviewed local checks and
+fast PR gates until the next frozen checkpoint; release does not track moving main.
+[Promotion evidence](docs/spikes/evidence/release-checkpoint-8.json).
 
 ## Current milestone
 
@@ -108,7 +119,7 @@ native animation (#116), Console logs (#117), Wasm animation (#118), typed text
 packaging (#119), Wasm formatting (#120), pose blending (#121) and the composed CPU
 text consumer (#122) and crossfades (#123). Canonical world-space text drawing
 now has scoped Claude appearance/Metal numerical acceptance and current-main CPU
-integration checks. Reviewed text-editing and steering remain separate next scopes;
+integration checks. Bounded text-editing state is integrated locally; steering remains a next scope;
 the reported mixed-bidi wrapping defect has a separately reviewed local repair.
 Connected Game UI and remaining public Wasm work continue separately.
 No complete Game UI or phase gate is claimed.
@@ -124,7 +135,7 @@ The runtime text buffer now supports bounded committed text, directional
 grapheme selection/deletion and transient IME composition. Focus loss cancels
 preedit; rejected input preserves text and selection. A real packaged-font test
 shapes the composed Latin/CJK string and preserves its retained layout through
-commit. All 37 text tests, Clippy, wasm32 and lean dependency checks pass, with
+commit. All 38 integrated text tests, Clippy, wasm32 and lean dependency checks pass, with
 independent review of the exact source. Widget layout/focus ownership, OS event
 delivery and IME activation, visual caret/hit testing and mobile keyboard remain
 open. This is not a completed text widget or live platform gate.

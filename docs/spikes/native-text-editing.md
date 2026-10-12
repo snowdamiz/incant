@@ -54,3 +54,17 @@ suppress duplicate key text during composition and fence delayed events across
 focus-owner changes. Synthetic events here do not establish those OS behaviors.
 Desktop IME and real-device on-screen keyboard checks remain explicit Phase 1
 requirements; no performance or appearance gate is claimed.
+
+## Actual main124 integration
+
+The original reviewed editing implementation and observable tests are unchanged.
+Only STATUS conflicted; the integration retains main's current milestone and adds
+the bounded editing section. The existing pinned unicode-segmentation dependency
+receives one normal incant_text edge without changing its version. All 38 current
+text tests, all-target Clippy, wasm32, lean dependency checks, fmt and conventions
+pass. The actual main124 ancestry merge leaves the tested tree unchanged.
+[Integrated receipt](evidence/native-text-editing-main124.json). OS/widget/live IME
+and visual acceptance remain separate.
+
+[Independent closeout review](evidence/text-edit-release8-root-review.json)
+accepted the integration documentation and frozen checkpoint8 receipts.
