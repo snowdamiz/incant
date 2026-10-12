@@ -2,6 +2,25 @@
 //! from the documented contract: physical mapping, snapping, clips, rounded
 //! coverage, bilinear glyph taps and premultiplied over. Ignored without a
 //! granted native GPU; numeric agreement, not appearance approval.
+//!
+//! The reference gives every channel the stored codes the contract admits.
+//! Geometry, clips, layering, colours and rounded coverage are exact; only the
+//! precision the contract leaves to the backend widens a channel:
+//! * `TAP`, the coverage of a glyph tap between texel centres. The R8 atlas is
+//!   filtered in fixed point with at least 8 sub-texel bits (Mesa llvmpipe:
+//!   weights rounded to 1/256, then two 8-bit rounded lerp stages): at most
+//!   1/255 from the lerps, plus 1/255 when a position is not a multiple of
+//!   1/256 texel (each weight then moves by at most 1/512). A tap exactly on a
+//!   texel centre returns that texel. Backends below 8 sub-texel bits (Vulkan
+//!   allows 4) are outside this reference.
+//! * `DECODE`/`ENCODE`, the conversions of an 8-bit sRGB target that is read
+//!   back and stored between blends: the decoded destination within 0.5 code
+//!   and the stored code within 0.67 code of exact, rounding included
+//!   (llvmpipe documents ±0.35 for decode and ±0.17 before rounding for
+//!   encode). UNORM targets read back exactly.
+//!
+//! Near black the sRGB encoding magnifies a coverage step of 1/255 to several
+//! codes, so a fixed code tolerance cannot express the contract there.
 use super::tests::Fixture;
 use super::*;
 use crate::{
@@ -14,6 +33,60 @@ use std::sync::Weak;
 
 const SRGB: wgpu::TextureFormat = wgpu::TextureFormat::Rgba8UnormSrgb;
 const UNORM: wgpu::TextureFormat = wgpu::TextureFormat::Rgba8Unorm;
+const TAP: f64 = 1. / 255.;
+const DECODE: f64 = 0.5;
+const ENCODE: f64 = 0.67;
+
+/// How a reference composes.
+#[derive(Clone, Copy, Debug, PartialEq)]
+enum Model {
+    /// The admitted codes per channel under the backend precision above.
+    Portable,
+    /// One candidate image: exact filtering and conversion, nearest storage.
+    Exact,
+    /// One candidate image from a conformant backend, Mesa llvmpipe (the Linux
+    /// CI device), emulated from its source: `lp_bld_sample_aos.c` (8-bit
+    /// fixed-point bilinear), `lp_bld_arit.c` (SSSE3/AVX2 rounded lerp) and
+    /// `lp_bld_format_srgb.c` (polynomial sRGB). sRGB targets only.
+    Llvmpipe,
+}
+mod llvmpipe {
+    use incant_text::GlyphAtlas;
+    /// One bilinear tap of an R8 texture at texel position `(u, v)`.
+    pub fn tap(atlas: &GlyphAtlas, u: f64, v: f64) -> f64 {
+        let [width, _] = atlas.size();
+        let texel = |x: i64, y: i64| i64::from(atlas.pixels()[(y * i64::from(width) + x) as usize]);
+        // Coordinates to 8 fractional bits, rounded, less half a texel.
+        let fixed = |p: f64| (p * 256.).round_ties_even() as i64 - 128;
+        let (s, t) = (fixed(u), fixed(v));
+        let (i, j, ws, wt) = (s >> 8, t >> 8, s & 255, t & 255);
+        // pmulhrsw(w, delta << 7): v0 + floor((w * delta + 128) / 256).
+        let lerp = |a: i64, b: i64, w: i64| a + (w * (b - a) + 128).div_euclid(256);
+        let top = lerp(texel(i, j), texel(i + 1, j), ws);
+        let bottom = lerp(texel(i, j + 1), texel(i + 1, j + 1), ws);
+        lerp(top, bottom, wt) as f64 / 255.
+    }
+    pub fn decode(code: f64) -> f32 {
+        let s = code as f32;
+        if s <= 15. {
+            s * (1. / (12.6 * 255.))
+        } else {
+            let x = s / 255.;
+            0.0023 + 0.0030 * x + 0.6935 * x * x + 0.3012 * x * x * x
+        }
+    }
+    /// The stored code. llvmpipe's reciprocal square roots are taken exactly.
+    pub fn encode(linear: f32) -> f64 {
+        let x = linear.clamp(0., 1.);
+        let v = if x <= 0.003_130_8 {
+            x * (12.92 * 255.)
+        } else {
+            (0.675 * 1.0622 * 255.) * x.powf(0.375) + (0.325 * 1.0622 * 255.) * x.sqrt()
+                - 0.062 * 255.
+        };
+        f64::from(v.round_ties_even())
+    }
+}
 
 fn decode(byte: f64) -> f64 {
     let s = byte / 255.;
@@ -49,21 +122,37 @@ fn background(size: [u32; 2]) -> Vec<u8> {
         .collect()
 }
 
-/// Reference compositor in the target's blending space: linear light for sRGB
-/// targets, encoded values for UNORM targets.
+/// Reference compositor in the target's blending space (linear light for sRGB
+/// targets, encoded values for UNORM targets) over stored 8-bit codes: every
+/// blend reads the stored destination and stores a code again, as the target
+/// does. Each channel holds its lowest and highest admitted code; the
+/// candidate models hold one code.
 struct Canvas {
     size: [u32; 2],
     srgb: bool,
+    model: Model,
     /// Physical region origin and per-axis scale.
     region: [f64; 4],
     scale: [f64; 2],
-    pixels: Vec<[f64; 3]>,
+    pixels: Vec<[[f64; 2]; 3]>,
 }
 impl Canvas {
-    fn new(bytes: &[u8], size: [u32; 2], srgb: bool, region: [f64; 4], viewport: [f32; 2]) -> Self {
+    fn new(
+        bytes: &[u8],
+        size: [u32; 2],
+        srgb: bool,
+        region: [f64; 4],
+        viewport: [f32; 2],
+        model: Model,
+    ) -> Self {
+        assert!(
+            srgb || model != Model::Llvmpipe,
+            "emulated for sRGB targets"
+        );
         Self {
             size,
             srgb,
+            model,
             region,
             scale: [
                 region[2] / f64::from(viewport[0]),
@@ -73,29 +162,57 @@ impl Canvas {
                 .as_chunks::<4>()
                 .0
                 .iter()
-                .map(|p| std::array::from_fn(|c| self_space(srgb, f64::from(p[c]))))
+                .map(|p| std::array::from_fn(|c| [f64::from(p[c]); 2]))
                 .collect(),
         }
     }
-    fn bytes(&self) -> Vec<u8> {
+    /// A candidate model's image (the lowest admitted code otherwise).
+    fn image(&self) -> Vec<u8> {
         self.pixels
             .iter()
-            .flat_map(|p| {
-                let v = |c: f64| {
-                    if self.srgb { encode(c) } else { c * 255. }
-                        .round()
-                        .clamp(0., 255.) as u8
-                };
-                [v(p[0]), v(p[1]), v(p[2]), 255]
-            })
+            .flat_map(|p| [p[0][0] as u8, p[1][0] as u8, p[2][0] as u8, 255])
             .collect()
     }
-    fn over(&mut self, x: u32, y: u32, color: [u8; 4], coverage: f64) {
-        let a = f64::from(color[3]) / 255. * coverage;
+    /// `coverage` is the lowest and highest coverage the backend may produce.
+    /// A fragment adding nothing is discarded and stores nothing.
+    fn over(&mut self, x: u32, y: u32, color: [u8; 4], coverage: [f64; 2]) {
+        let alpha = coverage.map(|c| f64::from(color[3]) / 255. * c);
+        if alpha == [0.; 2] {
+            return;
+        }
+        let (srgb, model) = (self.srgb, self.model);
         let pixel = &mut self.pixels[(y * self.size[0] + x) as usize];
         for c in 0..3 {
-            let src = self_space(self.srgb, f64::from(color[c]));
-            pixel[c] = src * a + pixel[c] * (1. - a);
+            let src = self_space(srgb, f64::from(color[c]));
+            let [low, high] = pixel[c];
+            if model == Model::Llvmpipe {
+                // A zero llvmpipe tap was discarded above.
+                let a = alpha[0] as f32;
+                let stored = llvmpipe::encode(src as f32 * a + llvmpipe::decode(low) * (1. - a));
+                pixel[c] = [stored; 2];
+                continue;
+            }
+            let (read, write) = match model {
+                Model::Portable => (DECODE, ENCODE),
+                _ => (0., 0.5),
+            };
+            let destination = if srgb {
+                [
+                    decode((low - read).max(0.)),
+                    decode((high + read).min(255.)),
+                ]
+            } else {
+                [low / 255., high / 255.]
+            };
+            let blended = alpha
+                .into_iter()
+                .flat_map(|a| destination.map(|d| src * a + d * (1. - a)));
+            let (min, max) = blended.fold((f64::MAX, f64::MIN), |(l, h), v| (l.min(v), h.max(v)));
+            let stored = |v: f64| if srgb { encode(v) } else { v * 255. };
+            pixel[c] = [
+                (stored(min) - write).ceil().max(0.),
+                (stored(max) + write).floor().min(255.),
+            ];
         }
     }
     fn physical(&self, x: f64, axis: usize) -> f64 {
@@ -165,7 +282,7 @@ impl Canvas {
                     coverage = (coverage - hole).max(0.);
                 }
             }
-            self.over(x, y, color, coverage);
+            self.over(x, y, color, [coverage; 2]);
         }
     }
     /// Glyph coverage: snapped pen, padded rectangle at `scale` pixels per
@@ -198,8 +315,33 @@ impl Canvas {
             let (i, j) = (x.floor(), y.floor());
             let (fx, fy) = (x - i, y - j);
             let (i, j) = (i as i64, j as i64);
-            (texel(i, j) * (1. - fx) + texel(i + 1, j) * fx) * (1. - fy)
-                + (texel(i, j + 1) * (1. - fx) + texel(i + 1, j + 1) * fx) * fy
+            let corners = [
+                texel(i, j),
+                texel(i + 1, j),
+                texel(i, j + 1),
+                texel(i + 1, j + 1),
+            ];
+            let value = (corners[0] * (1. - fx) + corners[1] * fx) * (1. - fy)
+                + (corners[2] * (1. - fx) + corners[3] * fx) * fy;
+            (value, corners.iter().all(|c| *c == corners[0]))
+        };
+        // Exact on a texel centre or between equal texels, else within TAP
+        // (twice TAP when a position is not a multiple of 1/256 texel).
+        let model = self.model;
+        let coverage = |u: f64, v: f64| {
+            if model == Model::Llvmpipe {
+                return [llvmpipe::tap(atlas, u, v); 2];
+            }
+            let (exact, flat) = bilinear(u, v);
+            let weights = [u, v].map(|p| (p - 0.5).fract());
+            let e = if model != Model::Portable || flat || weights == [0.; 2] {
+                0.
+            } else if weights.iter().all(|w| (w * 256.).fract() == 0.) {
+                TAP
+            } else {
+                2. * TAP
+            };
+            [(exact - e).max(0.), (exact + e).min(1.)]
         };
         let c = self.clip(widget.clip);
         for (glyph, handle) in widget.layout.glyphs().iter().zip(widget.glyphs.iter()) {
@@ -235,7 +377,7 @@ impl Canvas {
             for (px, py, cx, cy) in points {
                 let u = (x - 1. + (cx - p0[0]) / self.scale[0]).clamp(x - 0.5, x + w + 0.5);
                 let v = (y - 1. + (cy - p0[1]) / self.scale[1]).clamp(y - 0.5, y + h + 0.5);
-                self.over(px, py, color, bilinear(u, v));
+                self.over(px, py, color, coverage(u, v));
             }
         }
     }
@@ -291,6 +433,42 @@ fn run(
         pixels: read(renderer, &target),
         background,
     }
+}
+/// How an image compares with a reference's admitted codes.
+#[derive(Debug)]
+struct Admission {
+    /// Channels outside their admitted codes (or alpha other than 255).
+    outside: usize,
+    /// Largest distance outside, in codes.
+    excess: f64,
+    /// Widest admitted span and the number of channels wider than two codes.
+    widest: f64,
+    wide: usize,
+}
+fn admitted(image: &[u8], reference: &Canvas) -> Admission {
+    let mut result = Admission {
+        outside: 0,
+        excess: 0.,
+        widest: 0.,
+        wide: 0,
+    };
+    for (pixel, allowed) in image.as_chunks::<4>().0.iter().zip(&reference.pixels) {
+        for c in 0..3 {
+            let [low, high] = allowed[c];
+            let value = f64::from(pixel[c]);
+            let distance = (low - value).max(value - high);
+            if distance > 0. {
+                result.outside += 1;
+                result.excess = result.excess.max(distance);
+            }
+            result.widest = result.widest.max(high - low);
+            result.wide += usize::from(high - low > 2.);
+        }
+        if pixel[3] != 255 {
+            result.outside += 1;
+        }
+    }
+    result
 }
 /// Largest per-channel difference, and how many channels differ by more than 1.
 fn difference(gpu: &[u8], expected: &[u8]) -> (u8, usize) {
@@ -351,8 +529,9 @@ fn panel() -> Arc<UiInput> {
     f.finish([160., 90.], vec![button, label, field])
 }
 /// The reference picture of `panel()`: surfaces, selection, glyphs, ring.
-/// `swapped` draws the field's text under its selection (a wrong order).
-fn reference_order(input: &UiInput, canvas: &mut Canvas, swapped: bool) {
+/// `swapped` draws the field's text under its selection (a wrong order);
+/// `text` is the glyph colour (a wrong opacity in candidates).
+fn reference_order(input: &UiInput, canvas: &mut Canvas, swapped: bool, text: [u8; 4]) {
     let [button, label, field] = &input.widgets[..] else {
         panic!("panel")
     };
@@ -363,8 +542,8 @@ fn reference_order(input: &UiInput, canvas: &mut Canvas, swapped: bool) {
         None,
         theme::BUTTON,
     );
-    canvas.glyphs(&input.atlas, button, theme::TEXT);
-    canvas.glyphs(&input.atlas, label, theme::TEXT);
+    canvas.glyphs(&input.atlas, button, text);
+    canvas.glyphs(&input.atlas, label, text);
     canvas.rect(
         field.bounds,
         field.visible,
@@ -373,7 +552,7 @@ fn reference_order(input: &UiInput, canvas: &mut Canvas, swapped: bool) {
         theme::FIELD,
     );
     if swapped {
-        canvas.glyphs(&input.atlas, field, theme::TEXT);
+        canvas.glyphs(&input.atlas, field, text);
     }
     // Selection 1..3 of "abc": from the left edge of "b" to the right of "c".
     let glyphs = field.layout.glyphs();
@@ -392,7 +571,7 @@ fn reference_order(input: &UiInput, canvas: &mut Canvas, swapped: bool) {
         theme::SELECTION,
     );
     if !swapped {
-        canvas.glyphs(&input.atlas, field, theme::TEXT);
+        canvas.glyphs(&input.atlas, field, text);
     }
     canvas.rect(
         field.bounds,
@@ -403,7 +582,20 @@ fn reference_order(input: &UiInput, canvas: &mut Canvas, swapped: bool) {
     );
 }
 fn reference(input: &UiInput, canvas: &mut Canvas) {
-    reference_order(input, canvas, false);
+    reference_order(input, canvas, false, theme::TEXT);
+}
+/// `panel()` composed over `background`, filling a target of `size`.
+fn panel_canvas(
+    input: &UiInput,
+    background: &[u8],
+    size: [u32; 2],
+    srgb: bool,
+    model: Model,
+) -> Canvas {
+    let full = [0., 0., f64::from(size[0]), f64::from(size[1])];
+    let mut canvas = Canvas::new(background, size, srgb, full, input.viewport, model);
+    reference(input, &mut canvas);
+    canvas
 }
 
 #[test]
@@ -415,29 +607,24 @@ fn logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales() {
         let size = [(160. * scale) as u32, (90. * scale) as u32];
         let mut layer = renderer.ui_layer();
         let run = run(&renderer, &mut layer, &input, format, size, None);
-        let full = [0., 0., f64::from(size[0]), f64::from(size[1])];
-        let mut canvas = Canvas::new(
-            &run.background,
-            size,
-            format.is_srgb(),
-            full,
-            input.viewport,
-        );
-        reference(&input, &mut canvas);
-        let expected = canvas.bytes();
+        let srgb = format.is_srgb();
+        let portable = panel_canvas(&input, &run.background, size, srgb, Model::Portable);
+        let expected = panel_canvas(&input, &run.background, size, srgb, Model::Exact).image();
+        let admission = admitted(&run.pixels, &portable);
         let (worst, over) = difference(&run.pixels, &expected);
         let changed = ink(&run.pixels, &run.background);
-        eprintln!("scale {scale} {format:?}: worst {worst}, >1: {over}, changed {changed}");
+        eprintln!(
+            "scale {scale} {format:?}: outside {} by {}, widest {} ({} channels > 2); \
+             vs exact worst {worst}, >1: {over}, changed {changed}",
+            admission.outside, admission.excess, admission.widest, admission.wide
+        );
         save(
             &format!("ui-panel-{scale}x-{format:?}"),
             &run.pixels,
             size[0],
             size[1],
         );
-        assert!(
-            worst <= 2 && over * 1000 <= expected.len(),
-            "{scale}: {worst}/{over}"
-        );
+        assert_eq!(admission.outside, 0, "{scale}: {admission:?}");
         // Nothing outside every widget's snapped visible box changes at all.
         let boxes: Vec<_> = input
             .widgets
@@ -486,10 +673,15 @@ fn logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales() {
     }
 }
 
-#[test]
-#[ignore = "requires a native GPU; run by desktop workflows"]
-fn nested_clips_cut_actual_glyph_bounds_including_negative_x_rtl_overflow() {
-    let renderer = Renderer::headless().unwrap();
+/// An overflowing RTL label, open and under a narrower ancestor clip, and a
+/// button partly hidden by the same ancestor, in a 120x90 target at 1x.
+struct Nested {
+    atlas: Arc<GlyphAtlas>,
+    label: UiWidget,
+    clipped: UiWidget,
+    button: UiWidget,
+}
+fn nested() -> Nested {
     let mut f = Fixture::new();
     let token = "سلامعليكم";
     let mut label = f.widget(1, UiRole::Label, [40., 10., 80., 40.], 0., token, 20.);
@@ -502,7 +694,6 @@ fn nested_clips_cut_actual_glyph_bounds_including_negative_x_rtl_overflow() {
     let mut clipped = label.clone();
     clipped.clip = ancestor;
     clipped.visible = ancestor;
-    // A button partly hidden by the same ancestor.
     let mut button = f.widget(
         2,
         UiRole::Button,
@@ -513,36 +704,64 @@ fn nested_clips_cut_actual_glyph_bounds_including_negative_x_rtl_overflow() {
     );
     button.visible = [44., 50., 74., 76.];
     button.clip = [44., 56., 74., 70.];
-    let atlas = Arc::new(f.atlas);
-    let make = |widgets| {
+    Nested {
+        atlas: Arc::new(f.atlas),
+        label,
+        clipped,
+        button,
+    }
+}
+impl Nested {
+    const SIZE: [u32; 2] = [120, 90];
+    fn input(&self, widgets: Vec<UiWidget>) -> Arc<UiInput> {
         Arc::new(UiInput {
             viewport: [120., 90.],
-            atlas: Arc::clone(&atlas),
+            atlas: Arc::clone(&self.atlas),
             widgets,
         })
-    };
-    let size = [120, 90];
-    let open = make(vec![label.clone()]);
-    let nested = make(vec![clipped.clone(), button.clone()]);
+    }
+    /// `label` (normally the clipped one), then the button.
+    fn canvas(&self, background: &[u8], label: &UiWidget, model: Model) -> Canvas {
+        let region = [0., 0., 120., 90.];
+        let mut canvas = Canvas::new(background, Self::SIZE, true, region, [120., 90.], model);
+        canvas.glyphs(&self.atlas, label, theme::TEXT);
+        canvas.rect(
+            self.button.bounds,
+            self.button.visible,
+            theme::RADIUS,
+            None,
+            theme::BUTTON,
+        );
+        canvas.glyphs(&self.atlas, &self.button, theme::TEXT);
+        canvas
+    }
+}
+
+#[test]
+#[ignore = "requires a native GPU; run by desktop workflows"]
+fn nested_clips_cut_actual_glyph_bounds_including_negative_x_rtl_overflow() {
+    let renderer = Renderer::headless().unwrap();
+    let n = nested();
+    let size = Nested::SIZE;
+    let open = n.input(vec![n.label.clone()]);
+    let nested = n.input(vec![n.clipped.clone(), n.button.clone()]);
     let mut layer = renderer.ui_layer();
     let open_run = run(&renderer, &mut layer, &open, SRGB, size, None);
     let nested_run = run(&renderer, &mut layer, &nested, SRGB, size, None);
     save("ui-clip-open", &open_run.pixels, size[0], size[1]);
     save("ui-clip-nested", &nested_run.pixels, size[0], size[1]);
-    let region = [0., 0., 120., 90.];
-    let mut canvas = Canvas::new(&nested_run.background, size, true, region, nested.viewport);
-    canvas.glyphs(&atlas, &clipped, theme::TEXT);
-    canvas.rect(
-        button.bounds,
-        button.visible,
-        theme::RADIUS,
-        None,
-        theme::BUTTON,
+    let background = &nested_run.background;
+    let admission = admitted(
+        &nested_run.pixels,
+        &n.canvas(background, &n.clipped, Model::Portable),
     );
-    canvas.glyphs(&atlas, &button, theme::TEXT);
-    let (worst, over) = difference(&nested_run.pixels, &canvas.bytes());
-    eprintln!("nested clips: worst {worst}, >1: {over}");
-    assert!(worst <= 2 && over == 0, "{worst}/{over}");
+    let exact = n.canvas(background, &n.clipped, Model::Exact).image();
+    let (worst, over) = difference(&nested_run.pixels, &exact);
+    eprintln!(
+        "nested clips: outside {} by {}, widest {} ({} channels > 2); vs exact worst {worst}, >1: {over}",
+        admission.outside, admission.excess, admission.widest, admission.wide
+    );
+    assert_eq!(admission.outside, 0, "{admission:?}");
     // The overflowing RTL token really inks left of its own box when unclipped
     // by an ancestor, and nothing outside either clip changes when nested.
     let inked = |run: &Run, x: std::ops::Range<u32>, y: std::ops::Range<u32>| {
@@ -618,15 +837,17 @@ fn ui_composites_over_the_finished_world_frame_and_leaves_uncovered_pixels() {
     let mut layer = renderer.ui_layer();
     let composed = frame(Some((&mut layer, &input)));
     save("ui-over-world", &composed, size[0], size[1]);
-    let full = [0., 0., 160., 90.];
-    let mut canvas = Canvas::new(&world_only, size, true, full, input.viewport);
-    reference(&input, &mut canvas);
-    let (worst, over) = difference(&composed, &canvas.bytes());
-    eprintln!("over world: worst {worst}, >1: {over}");
-    assert!(
-        worst <= 2 && over * 1000 <= composed.len(),
-        "{worst}/{over}"
+    let admission = admitted(
+        &composed,
+        &panel_canvas(&input, &world_only, size, true, Model::Portable),
     );
+    let exact = panel_canvas(&input, &world_only, size, true, Model::Exact).image();
+    let (worst, over) = difference(&composed, &exact);
+    eprintln!(
+        "over world: outside {} by {}, widest {} ({} channels > 2); vs exact worst {worst}, >1: {over}",
+        admission.outside, admission.excess, admission.widest, admission.wide
+    );
+    assert_eq!(admission.outside, 0, "{admission:?}");
     // The world really shows through outside the UI and under translucent
     // surfaces: world text pixels differ from the backdrop there.
     let backdrop = [20u8, 21, 25];
@@ -638,10 +859,25 @@ fn ui_composites_over_the_finished_world_frame_and_leaves_uncovered_pixels() {
         .count();
     assert!(world_ink > 100, "{world_ink}");
     // The comparison distinguishes layering: text under its selection is wrong.
-    let mut swapped = Canvas::new(&world_only, size, true, full, input.viewport);
-    reference_order(&input, &mut swapped, true);
-    let (wrong, _) = difference(&composed, &swapped.bytes());
-    assert!(wrong > 2, "selection/text order is not observable: {wrong}");
+    let full = [0., 0., 160., 90.];
+    let mut swapped = Canvas::new(
+        &world_only,
+        size,
+        true,
+        full,
+        input.viewport,
+        Model::Portable,
+    );
+    reference_order(&input, &mut swapped, true, theme::TEXT);
+    let wrong = admitted(&composed, &swapped);
+    eprintln!(
+        "over world, text under selection: outside {} by {}",
+        wrong.outside, wrong.excess
+    );
+    assert!(
+        wrong.outside > 20 && wrong.excess > 8.,
+        "selection/text order is not observable: {wrong:?}"
+    );
 }
 
 #[test]
@@ -718,20 +954,25 @@ fn editor_viewport_region_offsets_scales_and_bounds_the_ui() {
     let mut layer = renderer.ui_layer();
     let run = run(&renderer, &mut layer, &input, SRGB, size, Some(region));
     save("ui-region", &run.pixels, size[0], size[1]);
-    let mut canvas = Canvas::new(
-        &run.background,
-        size,
-        true,
-        region.map(f64::from),
-        input.viewport,
+    let compose = |model| {
+        let mut canvas = Canvas::new(
+            &run.background,
+            size,
+            true,
+            region.map(f64::from),
+            input.viewport,
+            model,
+        );
+        reference(&input, &mut canvas);
+        canvas
+    };
+    let admission = admitted(&run.pixels, &compose(Model::Portable));
+    let (worst, over) = difference(&run.pixels, &compose(Model::Exact).image());
+    eprintln!(
+        "region: outside {} by {}, widest {} ({} channels > 2); vs exact worst {worst}, >1: {over}",
+        admission.outside, admission.excess, admission.widest, admission.wide
     );
-    reference(&input, &mut canvas);
-    let (worst, over) = difference(&run.pixels, &canvas.bytes());
-    eprintln!("region: worst {worst}, >1: {over}");
-    assert!(
-        worst <= 2 && over * 1000 <= run.pixels.len(),
-        "{worst}/{over}"
-    );
+    assert_eq!(admission.outside, 0, "{admission:?}");
     for py in 0..size[1] {
         for px in 0..size[0] {
             if !(21..181).contains(&px) || !(15..105).contains(&py) {
@@ -740,4 +981,88 @@ fn editor_viewport_region_offsets_scales_and_bounds_the_ui() {
             }
         }
     }
+}
+
+/// CPU only: the admitted codes accept exact arithmetic and an emulated
+/// conformant backend, yet still reject wrong geometry, clipping, opacity and
+/// layering by wide margins. Prints the emulated backend's distance from exact
+/// arithmetic, which the previous fixed code tolerance could not express.
+#[test]
+fn reference_admits_backend_precision_but_not_wrong_geometry_clip_or_opacity() {
+    let input = panel();
+    for (scale, srgb) in [(1., true), (2., true), (1.5, true), (1., false)] {
+        let size = [(160. * scale) as u32, (90. * scale) as u32];
+        let background = background(size);
+        let candidate = |input: &UiInput, model, text| {
+            let full = [0., 0., f64::from(size[0]), f64::from(size[1])];
+            let mut canvas = Canvas::new(&background, size, srgb, full, input.viewport, model);
+            reference_order(input, &mut canvas, false, text);
+            canvas.image()
+        };
+        let portable = panel_canvas(&input, &background, size, srgb, Model::Portable);
+        let exact = candidate(&input, Model::Exact, theme::TEXT);
+        assert_eq!(admitted(&exact, &portable).outside, 0, "{scale} exact");
+        if srgb {
+            let emulated = candidate(&input, Model::Llvmpipe, theme::TEXT);
+            let (worst, over) = difference(&emulated, &exact);
+            let admission = admitted(&emulated, &portable);
+            eprintln!(
+                "scale {scale}: emulated llvmpipe vs exact worst {worst}, >1: {over}; \
+                 admitted outside {}, widest {} ({} channels > 2)",
+                admission.outside, admission.widest, admission.wide
+            );
+            assert_eq!(admission.outside, 0, "{scale} llvmpipe: {admission:?}");
+        }
+        // Text one physical pixel right, or half a pixel at 2x.
+        for shift in [1., 0.5] {
+            if shift * scale < 1. && scale != 2. {
+                continue;
+            }
+            let mut widgets = input.widgets.clone();
+            for widget in &mut widgets {
+                widget.origin[0] += (shift / scale) as f32;
+            }
+            let moved = UiInput {
+                viewport: input.viewport,
+                atlas: Arc::clone(&input.atlas),
+                widgets,
+            };
+            let wrong = admitted(&candidate(&moved, Model::Exact, theme::TEXT), &portable);
+            eprintln!("scale {scale}: text {shift} px right rejected by {wrong:?}");
+            assert!(
+                wrong.outside > 100 && wrong.excess > 30.,
+                "{scale}/{shift}: {wrong:?}"
+            );
+        }
+        // Text at 90 % opacity.
+        let faint = theme::alpha(theme::TEXT, 0.9);
+        let wrong = admitted(&candidate(&input, Model::Exact, faint), &portable);
+        eprintln!("scale {scale}: 90% text opacity rejected by {wrong:?}");
+        assert!(
+            wrong.outside > 100 && wrong.excess > 5.,
+            "{scale}: {wrong:?}"
+        );
+    }
+    // A label drawn to its own content box instead of the ancestor clip.
+    let n = nested();
+    let background = background(Nested::SIZE);
+    let portable = n.canvas(&background, &n.clipped, Model::Portable);
+    for model in [Model::Exact, Model::Llvmpipe] {
+        let image = n.canvas(&background, &n.clipped, model).image();
+        let (worst, over) = difference(
+            &image,
+            &n.canvas(&background, &n.clipped, Model::Exact).image(),
+        );
+        eprintln!("nested {model:?} vs exact worst {worst}, >1: {over}");
+        assert_eq!(admitted(&image, &portable).outside, 0, "nested {model:?}");
+    }
+    let mut unclipped = n.clipped.clone();
+    unclipped.clip = n.label.clip;
+    unclipped.visible = n.label.visible;
+    let wrong = admitted(
+        &n.canvas(&background, &unclipped, Model::Exact).image(),
+        &portable,
+    );
+    eprintln!("nested: label without its ancestor clip rejected by {wrong:?}");
+    assert!(wrong.outside > 50 && wrong.excess > 30., "{wrong:?}");
 }
