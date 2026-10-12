@@ -16,14 +16,14 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Headless UI and reusable player — current integration verified
+## Headless UI and reusable player — merged main169
 
 The shared recorded UI route and optional mobile C ABI pass all 19 integrated
 checks on the accepted audio ABI union. Real C/Swift callers of the new immutable
 macOS archive pass 32 controls/39 commands, including native held/released movement,
 exact failures and no-clobber output behavior. Producer source bytes and dependency
-versions are unchanged; independent final integration review is accepted and
-exact-head fast CI remains required. iOS/Android compatibility stays separate; no GPU/window/device gate.
+versions are unchanged; independent final integration review and exact-head fast CI
+passed before PR169 merged. iOS/Android compatibility stays separate; no GPU/window/device gate.
 [Integrated commands and actual callers](docs/spikes/headless-ui-mobile-integration.md).
 
 ## Mobile runtime callers — macOS C/Swift CPU proof accepted
@@ -91,11 +91,11 @@ repeat PCM and terminal silence are verified. Independent integration audit and 
 Authored appearance/device gates remain separate.
 [Current integration evidence](docs/spikes/core-presentation-integration.md).
 
-## Physics build variants — kernels locally verified
+## Physics build variants — current-main kernel checks passed
 
 The 2D/3D physics crates build separately with deterministic math, hardware math,
 or the opt-in eight-lane candidate; native parallel stepping stays enabled.
-Ten behavior tests and Clippy pass in each variant, and actual compiler records
+The same ten behavior tests and Clippy pass in each variant on main169, and actual compiler records
 confirm the intended features. Both base variants compile for wasm32 without
 parallel features. Existing callers retain deterministic defaults; per-project
 selection, matching play/export processes, device measurements and exact-replay
@@ -127,6 +127,7 @@ source audit identifies the private graph families a checked format must cover
 and the storage/load limits of deterministic replay. Independent source/evidence
 review accepted this bounded diagnostic; full physics saves remain open.
 [Diagnostic, source barrier and next options](docs/spikes/native-physics-snapshot-boundary.md).
+[Current-main kernel and diagnostic checks](docs/spikes/physics-boundaries-main169.md) pass; final integration review and fast CI remain pending.
 
 ## Native audio transport — merged main163
 
@@ -723,12 +724,13 @@ and complete Game UI/IME gates remain open.
 
 ## Current milestone
 
-Main #168 includes compound native animation and Wasm snapshots, authored two-bone
+Main #169 includes compound native animation and Wasm snapshots, authored two-bone
 IK, complete native/TypeScript/Wasm root motion, native audio transport and HUD,
 Wasm HUD controls, offline audio/UI checkpoints, public physics queries, and the
 Core/Planar gameplay foundations. Wasm audio transport is merged after current-main
-shipping validation; reviewed headless UI and the reusable player/mobile library
-with actual macOS C/Swift callers are ready for fast publication. Phase 1 and the finished game remain incomplete.
+shipping validation; headless UI and the reusable player/mobile library
+with actual macOS C/Swift callers are merged. Reviewed mobile bytecode and physics
+boundary increments are being validated separately for publication. Phase 1 and the finished game remain incomplete.
 
 Checkpoint14 promoted selected main160 `d1ef35ee` after all 23 exact-candidate
 required checks and eight push workflows succeeded. Release `2444d81f` has tested

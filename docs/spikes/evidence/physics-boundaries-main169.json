@@ -1,0 +1,737 @@
+{
+  "scope": "Accepted separately compiled 2D/3D kernel features plus trusted typed physics snapshot diagnostic on actual main169.",
+  "tested_source": "bc85c676d4c5722f9751fdb5c03b698125f4926c",
+  "main": "4fc128f9aba4d5992b9dfd5476d998db7a9a4b7a",
+  "source_inputs": 1827,
+  "accepted_source_comparisons": [
+    {
+      "commit": "a468be2a",
+      "path": "crates/incant_physics_2d_runtime/Cargo.toml",
+      "sha256": "55374eaa95580308e01e63fbe35014f9d2e4d0507dab06152db0aefae635282d"
+    },
+    {
+      "commit": "a468be2a",
+      "path": "crates/incant_physics_2d_runtime/src/lib.rs",
+      "sha256": "6e8a98b14b80c3cd8a0254d34db7fb3b223f1e6e975ba6be3ce6637a6b69db5b"
+    },
+    {
+      "commit": "a468be2a",
+      "path": "crates/incant_physics_runtime/Cargo.toml",
+      "sha256": "9578d60e44a752a404eaa01c2c05a5b5dec4a01d3e9a6d3c445457d24a5426e4"
+    },
+    {
+      "commit": "a468be2a",
+      "path": "crates/incant_physics_runtime/src/lib.rs",
+      "sha256": "5bd035a5e0a1723800deee56d51393bfe96b1242d025db6d1c57de52ab7d5b15"
+    },
+    {
+      "commit": "08185b27",
+      "path": "tools/probes/physics-snapshot-boundary/Cargo.lock",
+      "sha256": "56a9ed34419a8a51cc54edd9f4422484d8d19a0916f3a69e70820580cfdfdcb0"
+    },
+    {
+      "commit": "08185b27",
+      "path": "tools/probes/physics-snapshot-boundary/Cargo.toml",
+      "sha256": "02e7a75a59b7882b4e54d177e6ac562ec8f6a4da139fe9db15b18bf51b0f3364"
+    },
+    {
+      "commit": "08185b27",
+      "path": "tools/probes/physics-snapshot-boundary/README.md",
+      "sha256": "e487540790f390919fb6f4b0c823212581de25ad1fbd8f5892e3b61d3b82090c"
+    },
+    {
+      "commit": "08185b27",
+      "path": "tools/probes/physics-snapshot-boundary/src/main.rs",
+      "sha256": "56cb054477ffae1b7a5fed823063a9e08681ff6dfafd5a70c80beee1bb7293c3"
+    },
+    {
+      "commit": "08185b27",
+      "path": "tools/probes/physics-snapshot-boundary/src/probe.rs",
+      "sha256": "b2d9f5492e83f9c73f4be4307b9f239d0f46dade393634acb357ebe05f3f85df"
+    }
+  ],
+  "checks": [
+    {
+      "name": "deterministic-test",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_runtime",
+        "-p",
+        "incant_physics_2d_runtime",
+        "--message-format=json"
+      ],
+      "exit": 0,
+      "expected_exit": 0,
+      "seconds": 65.5518582500008,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/deterministic-test.stdout",
+        "sha256": "d7be2d685ea8354d9bf31ca75fbd0ff8895c4c7e26c4fee8347d3a3b8a602a6d"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/deterministic-test.stderr",
+        "sha256": "5b60260d2fad875fa630073694171197fa25005c9bd34600ec2b37aa8a4a5486"
+      }
+    },
+    {
+      "name": "deterministic-clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_runtime",
+        "-p",
+        "incant_physics_2d_runtime",
+        "--message-format=json",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "expected_exit": 0,
+      "seconds": 9.673073416997795,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/deterministic-clippy.stdout",
+        "sha256": "d4732c6232c6cc9bf8a08dd741b41191611b6e81c2dbd89b1cea394aa9158bfd"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/deterministic-clippy.stderr",
+        "sha256": "ded3da223e62cfd16e8d4fa2e48b4bcb51b6d61424bb781da9d29e4d7053e42d"
+      }
+    },
+    {
+      "name": "fast-test",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_runtime",
+        "-p",
+        "incant_physics_2d_runtime",
+        "--message-format=json",
+        "--no-default-features"
+      ],
+      "exit": 0,
+      "expected_exit": 0,
+      "seconds": 55.20612766699924,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/fast-test.stdout",
+        "sha256": "babb656e3a1bb8e74cfad67b05da7076d6df666f3714839a3f334ce58a2cc149"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/fast-test.stderr",
+        "sha256": "7563a207d43ac2bbd228fc56e2f6a8d54899f7d39721f81a60b34d5ec78ba79a"
+      }
+    },
+    {
+      "name": "fast-clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_runtime",
+        "-p",
+        "incant_physics_2d_runtime",
+        "--message-format=json",
+        "--no-default-features",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "expected_exit": 0,
+      "seconds": 10.061285583000426,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/fast-clippy.stdout",
+        "sha256": "7c284eb7721e27bf15353b5135f950d346595e6c6877241423ff7b5568a8e241"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/fast-clippy.stderr",
+        "sha256": "b894d83e0ff423eda657f579b9f69bf715748bd6d2a2db1024281daa35d555b8"
+      }
+    },
+    {
+      "name": "fast-simd8-test",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_runtime",
+        "-p",
+        "incant_physics_2d_runtime",
+        "--message-format=json",
+        "--no-default-features",
+        "--features",
+        "incant_physics_runtime/fast-simd8,incant_physics_2d_runtime/fast-simd8"
+      ],
+      "exit": 0,
+      "expected_exit": 0,
+      "seconds": 61.908850209001685,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/fast-simd8-test.stdout",
+        "sha256": "ed7ecc4c0245103531b9beca6789cdbabde705ef9e3f4eed461a120f3826afe9"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/fast-simd8-test.stderr",
+        "sha256": "56a956650a9d57a8f8f2e20049698fa6faaffe95d3f01386f7ddfc1f63d32085"
+      }
+    },
+    {
+      "name": "fast-simd8-clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_runtime",
+        "-p",
+        "incant_physics_2d_runtime",
+        "--message-format=json",
+        "--no-default-features",
+        "--features",
+        "incant_physics_runtime/fast-simd8,incant_physics_2d_runtime/fast-simd8",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "expected_exit": 0,
+      "seconds": 9.065727083998354,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/fast-simd8-clippy.stdout",
+        "sha256": "3c99e8af7ede17af3d65c034ba7f486631963704ea5e7a1ff2ea0abe8455f2ce"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/fast-simd8-clippy.stderr",
+        "sha256": "b531c3ee88158ca2c95b59e58839e5095ef1054fdeea0247b86a788e927e2745"
+      }
+    },
+    {
+      "name": "wasm-deterministic",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_runtime",
+        "-p",
+        "incant_physics_2d_runtime",
+        "--message-format=json",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "exit": 0,
+      "expected_exit": 0,
+      "seconds": 15.277663083001244,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/wasm-deterministic.stdout",
+        "sha256": "5e9d0e89e3a7f145a0621fc873e90f1c767af8ea8b94aa0dc6db1259e3dfb336"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/wasm-deterministic.stderr",
+        "sha256": "e511ead2fce384f04964c1e21886e05144dce978a680fb7b0cfeaf66a84f3c37"
+      }
+    },
+    {
+      "name": "wasm-fast",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_runtime",
+        "-p",
+        "incant_physics_2d_runtime",
+        "--message-format=json",
+        "--no-default-features",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "exit": 0,
+      "expected_exit": 0,
+      "seconds": 26.39080599999943,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/wasm-fast.stdout",
+        "sha256": "f1983bc4786d390f627fe89aa46c7c2d67f0a3a4296e4941d82630eb4acbf49a"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/wasm-fast.stderr",
+        "sha256": "f0bb5bdb18973d810dbe77250e8da764f7d64161a6c51f54e452dc92d24d6eb2"
+      }
+    },
+    {
+      "name": "conflicting-modes",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_runtime",
+        "-p",
+        "incant_physics_2d_runtime",
+        "--message-format=json",
+        "--features",
+        "incant_physics_runtime/fast-simd8,incant_physics_2d_runtime/fast-simd8"
+      ],
+      "exit": 101,
+      "expected_exit": 101,
+      "seconds": 5.809566666997853,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/conflicting-modes.stdout",
+        "sha256": "d7307a528ff162515f7201c1c4b31f7019bcdfd59e52dacf85bfb0867dece00c"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/conflicting-modes.stderr",
+        "sha256": "e71ccb75cd90549c6934edbd99cba13fab975e8f0c18761963b89a9a751c8ed8"
+      }
+    },
+    {
+      "name": "diagnostic",
+      "command": [
+        "./tools/cargo",
+        "run",
+        "--locked",
+        "--release",
+        "-j2",
+        "--manifest-path",
+        "tools/probes/physics-snapshot-boundary/Cargo.toml"
+      ],
+      "exit": 0,
+      "expected_exit": 0,
+      "seconds": 114.93782000000283,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/diagnostic.stdout",
+        "sha256": "8ad722961ecd210898f4e945ddd6fbe1a97065f4aba512ba60dcd5a97b3d0781"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/diagnostic.stderr",
+        "sha256": "471e87a1c14462f0427f6364ec3469559432254229b53a33e2ea6ce3c6951d0b"
+      }
+    },
+    {
+      "name": "diagnostic-clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--release",
+        "-j2",
+        "--manifest-path",
+        "tools/probes/physics-snapshot-boundary/Cargo.toml",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "expected_exit": 0,
+      "seconds": 19.608057666002424,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/diagnostic-clippy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/diagnostic-clippy.stderr",
+        "sha256": "4cd9c055ee3e35d869d37403701549515240b3c4b36b8de7bc61d2e70b42b922"
+      }
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "expected_exit": 0,
+      "seconds": 2.1864420419988164,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/fmt.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/fmt.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "diagnostic-fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--manifest-path",
+        "tools/probes/physics-snapshot-boundary/Cargo.toml",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "expected_exit": 0,
+      "seconds": 0.12130245799926342,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/diagnostic-fmt.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/diagnostic-fmt.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "expected_exit": 0,
+      "seconds": 0.0686327919975156,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/conventions.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/conventions.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "expected_exit": 0,
+      "seconds": 0.08007274999908987,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/diff.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/diff.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "test_counts": {
+    "deterministic-test": {
+      "passed": 10,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 6
+    },
+    "fast-test": {
+      "passed": 10,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 6
+    },
+    "fast-simd8-test": {
+      "passed": 10,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 6
+    }
+  },
+  "count_qualification": "Same ten behavior cases in each of three independently compiled variants; not thirty distinct cases. Diagnostic eight scenarios are not Rust test count.",
+  "features_equal_original": true,
+  "diagnostic": {
+    "cases": 8,
+    "continuation_ticks": 960,
+    "full_result_equal_original": true,
+    "binary": {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/incant-physics-snapshot-boundary-probe",
+      "sha256": "7b75e0370e40c34a7997bea537054a1b428545ee2f1bc9884ba03ace2295f69a",
+      "bytes": 8050032
+    }
+  },
+  "artifacts": {
+    "binary.json.gz": {
+      "sha256": "b135d892d1ca1ef83b8ca2b6febc62bec401c09236607fea0e0ca5f2b9465919",
+      "raw_sha256": "724908b70e48a48c79a4824d84814a27529692fab10a991cc8b585b08de22969",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/binary.json",
+      "bytes": 241
+    },
+    "conflicting-modes.stderr.gz": {
+      "sha256": "1304417540c5b6f693063a021aedc9aba9fb3f95f2a27f34ec7209b4de292b6e",
+      "raw_sha256": "e71ccb75cd90549c6934edbd99cba13fab975e8f0c18761963b89a9a751c8ed8",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/conflicting-modes.stderr",
+      "bytes": 364
+    },
+    "conflicting-modes.stdout.gz": {
+      "sha256": "f91d7dd45d120f14b7fa0c4bcf267e6546f1114bf9afe5ec1451349e2f9097d3",
+      "raw_sha256": "d7307a528ff162515f7201c1c4b31f7019bcdfd59e52dacf85bfb0867dece00c",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/conflicting-modes.stdout",
+      "bytes": 97529
+    },
+    "conventions.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/conventions.stderr",
+      "bytes": 0
+    },
+    "conventions.stdout.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/conventions.stdout",
+      "bytes": 0
+    },
+    "deterministic-clippy.stderr.gz": {
+      "sha256": "b7f775ec2d14ec9f29d66cc1353611f18b0772ca3d26f0a6114020cb91e3e38d",
+      "raw_sha256": "ded3da223e62cfd16e8d4fa2e48b4bcb51b6d61424bb781da9d29e4d7053e42d",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/deterministic-clippy.stderr",
+      "bytes": 1409
+    },
+    "deterministic-clippy.stdout.gz": {
+      "sha256": "19553d852dffc557acb6680153c5c85263d83f5fb6ea1a67d51b53e36cc83052",
+      "raw_sha256": "d4732c6232c6cc9bf8a08dd741b41191611b6e81c2dbd89b1cea394aa9158bfd",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/deterministic-clippy.stdout",
+      "bytes": 104635
+    },
+    "deterministic-test.stderr.gz": {
+      "sha256": "cf43bf8da39b55524a0c673d529b9ce78d1b1903b9c2583c1b0bfdcd9377cdf6",
+      "raw_sha256": "5b60260d2fad875fa630073694171197fa25005c9bd34600ec2b37aa8a4a5486",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/deterministic-test.stderr",
+      "bytes": 2245
+    },
+    "deterministic-test.stdout.gz": {
+      "sha256": "c7a6bcbb08e815fd2944717b63fa0b858a3f05b1419afaa416d294e33e24d51e",
+      "raw_sha256": "d7be2d685ea8354d9bf31ca75fbd0ff8895c4c7e26c4fee8347d3a3b8a602a6d",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/deterministic-test.stdout",
+      "bytes": 115856
+    },
+    "diagnostic-clippy.stderr.gz": {
+      "sha256": "9df9fd2ff270360ec914be9c60fa2bd380d0c5916f881e51a748afaa57ca23cf",
+      "raw_sha256": "4cd9c055ee3e35d869d37403701549515240b3c4b36b8de7bc61d2e70b42b922",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/diagnostic-clippy.stderr",
+      "bytes": 1083
+    },
+    "diagnostic-clippy.stdout.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/diagnostic-clippy.stdout",
+      "bytes": 0
+    },
+    "diagnostic-comparison.json.gz": {
+      "sha256": "5f1e298ec881768eb47d7f35f2e281ca213efa98a0bcd6a4379d1e9572b69b86",
+      "raw_sha256": "9c41b5fe6ab89e3a8412bc0e97ab8289c6619ac71a5eba2f0ca8887b4c0b30eb",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/diagnostic-comparison.json",
+      "bytes": 90
+    },
+    "diagnostic-fmt.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/diagnostic-fmt.stderr",
+      "bytes": 0
+    },
+    "diagnostic-fmt.stdout.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/diagnostic-fmt.stdout",
+      "bytes": 0
+    },
+    "diagnostic.stderr.gz": {
+      "sha256": "85638e956c1c1cdd8af3364fc908cb6c7f4f250bb466b501e4a6f43ea894a67c",
+      "raw_sha256": "471e87a1c14462f0427f6364ec3469559432254229b53a33e2ea6ce3c6951d0b",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/diagnostic.stderr",
+      "bytes": 1442
+    },
+    "diagnostic.stdout.gz": {
+      "sha256": "c1910d46637cdff8feba5bbdac70411051b645bec63716f80f714504e4582ed1",
+      "raw_sha256": "8ad722961ecd210898f4e945ddd6fbe1a97065f4aba512ba60dcd5a97b3d0781",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/diagnostic.stdout",
+      "bytes": 7132
+    },
+    "diff.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/diff.stderr",
+      "bytes": 0
+    },
+    "diff.stdout.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/diff.stdout",
+      "bytes": 0
+    },
+    "fast-clippy.stderr.gz": {
+      "sha256": "56e6b090de0df46de52a595c2a7a6bdb78fff2d28c7b72d3f26cb85349d5479e",
+      "raw_sha256": "b894d83e0ff423eda657f579b9f69bf715748bd6d2a2db1024281daa35d555b8",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/fast-clippy.stderr",
+      "bytes": 565
+    },
+    "fast-clippy.stdout.gz": {
+      "sha256": "a6c5ab84dc7acfd21bb95043ea53f367327bd1b51df6679909503dfd2948f35d",
+      "raw_sha256": "7c284eb7721e27bf15353b5135f950d346595e6c6877241423ff7b5568a8e241",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/fast-clippy.stdout",
+      "bytes": 103533
+    },
+    "fast-simd8-clippy.stderr.gz": {
+      "sha256": "faeeb8829e0156563a0720ac1f75d227347eeceb12e8dc06d5c265f5a1dc1dcb",
+      "raw_sha256": "b531c3ee88158ca2c95b59e58839e5095ef1054fdeea0247b86a788e927e2745",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/fast-simd8-clippy.stderr",
+      "bytes": 455
+    },
+    "fast-simd8-clippy.stdout.gz": {
+      "sha256": "68854ec60536b92a9b3a76ad2a09d746a842c9c90f467ccaa6514bf52a6ff56f",
+      "raw_sha256": "3c99e8af7ede17af3d65c034ba7f486631963704ea5e7a1ff2ea0abe8455f2ce",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/fast-simd8-clippy.stdout",
+      "bytes": 103633
+    },
+    "fast-simd8-test.stderr.gz": {
+      "sha256": "9f563b1fda7e98db30de266a25f0bc2be4679dbf056790e4d88207d630ea5ee0",
+      "raw_sha256": "56a956650a9d57a8f8f2e20049698fa6faaffe95d3f01386f7ddfc1f63d32085",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/fast-simd8-test.stderr",
+      "bytes": 1098
+    },
+    "fast-simd8-test.stdout.gz": {
+      "sha256": "4bb8d939c49c417a3b3bd3266daabeac62ee7bce05ab431edc7f4378c6e2f762",
+      "raw_sha256": "ed7ecc4c0245103531b9beca6789cdbabde705ef9e3f4eed461a120f3826afe9",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/fast-simd8-test.stdout",
+      "bytes": 114736
+    },
+    "fast-test.stderr.gz": {
+      "sha256": "24765e28ceb6d77af1447694ec186d12840e4668be97e71349df59733ea4fb4a",
+      "raw_sha256": "7563a207d43ac2bbd228fc56e2f6a8d54899f7d39721f81a60b34d5ec78ba79a",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/fast-test.stderr",
+      "bytes": 1208
+    },
+    "fast-test.stdout.gz": {
+      "sha256": "4e1727d245fcd16ff449f70d9ae953757827e00eddcb06d9a24fac6b4b5ec789",
+      "raw_sha256": "babb656e3a1bb8e74cfad67b05da7076d6df666f3714839a3f334ce58a2cc149",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/fast-test.stdout",
+      "bytes": 114636
+    },
+    "feature-comparison.json.gz": {
+      "sha256": "5525c6191f5e5d9b91feb03a7ebb0408f7f4ed05ab2d364e3cdff491af905615",
+      "raw_sha256": "8f9730234a23e0e013b1a8b21bbf146bc136a19904655bd5302f50d8d9e204ee",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/feature-comparison.json",
+      "bytes": 4885
+    },
+    "fmt.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/fmt.stderr",
+      "bytes": 0
+    },
+    "fmt.stdout.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/fmt.stdout",
+      "bytes": 0
+    },
+    "freeze.json.gz": {
+      "sha256": "e4d49b079581b1620cb85405ce51187ce97bac9aff822e04223563750072a204",
+      "raw_sha256": "df8719fd3b090a413843ead8b5f2075ec3a9cb06a6fde9d81583b3a05b4d2f70",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/freeze.json",
+      "bytes": 212697
+    },
+    "producer-artifacts.json.gz": {
+      "sha256": "ef2a1de174554edfec8aa35a48c15fb65f1e65a9231b80311ee0236fc6de55fc",
+      "raw_sha256": "973685484aa2f2fa16872fedb78ba01b04dc0a714884656019160f0d1f9af1ee",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/producer-artifacts.json",
+      "bytes": 12087
+    },
+    "producer.json.gz": {
+      "sha256": "8af54c8ece9906521d2c6376c82fbcc902676f943ad9aa2a4efcd59cfaf67d2d",
+      "raw_sha256": "b244bd2e832638e9fce22a583f4fcc6c8bafd6c556bff97912ec21619fd10340",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/producer.json",
+      "bytes": 1604
+    },
+    "results.json.gz": {
+      "sha256": "b353e285d4069d751438d99c6547fdd73fe5d7a1e0b01769113a6cf5e7435864",
+      "raw_sha256": "d2b8adf0b13de2f0b845e113a04df0cdad84579cdb4112ed3c36386606940784",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/results.json",
+      "bytes": 12408
+    },
+    "wasm-deterministic.stderr.gz": {
+      "sha256": "f4c8db461a27d0026f19cda332f92b332f7f62c2be5c5cf8dfd113c69929d7c4",
+      "raw_sha256": "e511ead2fce384f04964c1e21886e05144dce978a680fb7b0cfeaf66a84f3c37",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/wasm-deterministic.stderr",
+      "bytes": 1348
+    },
+    "wasm-deterministic.stdout.gz": {
+      "sha256": "e4b05db01586a3fa95aab0367c1a67c4f5332974f712ad2a20779d9c10f4927d",
+      "raw_sha256": "5e9d0e89e3a7f145a0621fc873e90f1c767af8ea8b94aa0dc6db1259e3dfb336",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/wasm-deterministic.stdout",
+      "bytes": 108487
+    },
+    "wasm-fast.stderr.gz": {
+      "sha256": "8c044f6953df4fae30d9abab6b4279bb9d3e9093e8bb26257056dce7e9b57f1f",
+      "raw_sha256": "f0bb5bdb18973d810dbe77250e8da764f7d64161a6c51f54e452dc92d24d6eb2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/wasm-fast.stderr",
+      "bytes": 670
+    },
+    "wasm-fast.stdout.gz": {
+      "sha256": "fd0ded103dec0cef064bccac7933e3fc1c17e82173570d9fe22c931eb3f974b2",
+      "raw_sha256": "f1983bc4786d390f627fe89aa46c7c2d67f0a3a4296e4941d82630eb4acbf49a",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-001/wasm-fast.stdout",
+      "bytes": 107464
+    },
+    "runners/physics-boundaries-main169-run.py.gz": {
+      "sha256": "104779330993dccc38e75cde04cc2b510e0a18fbeb61ea82b836c82ead796cf5",
+      "raw_sha256": "da50dfea9ff161142621d1b11798a3eb50d547184655437ae1a6c634bea5dd32",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-boundaries-main169-run.py",
+      "bytes": 3986
+    },
+    "runners/retain-physics-boundaries-main169.py.gz": {
+      "sha256": "ef2391f189bd9d006094f7428edf6458d7f8d9f184cbb899957a6fa80d962b90",
+      "raw_sha256": "a89f612e3c01757a83d28d2e84a37673289e7c1fca36b932f6f60cef0f3e4ee1",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/retain-physics-boundaries-main169.py",
+      "bytes": 5509
+    }
+  },
+  "producer_artifacts_verified": 46,
+  "leaf_review": {
+    "path": "docs/spikes/evidence/physics-boundaries-main169/leaf-review.json",
+    "sha256": "8302de7a11badf8de622cef712711850fd18f93224428e22c0e8fea2aefb3657"
+  },
+  "independent_review": "pending integrated final audit",
+  "limits": [
+    "Deterministic defaults unchanged; project/process feature selection remains separate local work.",
+    "No renderer, GPU, phone, performance or numerical backend adoption claim.",
+    "Trusted typed solver clone only; no decoder, persisted graph, NativeWorld restore or PhysicsUnsupported relaxation.",
+    "No unsafe code added; prior underlying dependency ownership obligations remain open."
+  ],
+  "integration": "STATUS additive only; all nine accepted production/probe source inputs exact; root manifest/lock and runtime/script/session/save unchanged."
+}
