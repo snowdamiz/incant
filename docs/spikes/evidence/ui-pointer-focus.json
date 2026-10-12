@@ -146,5 +146,12 @@
   "limitations": [
     "CPU input behavior only; actual native interaction verification pending.",
     "Separate from managed AppKit lifetime correction and logical focus/overflow followups."
-  ]
+  ],
+  "independent_source_review": {
+    "decision": "accepted",
+    "path": "docs/spikes/evidence/ui-pointer-focus/independent-review.json.gz",
+    "raw_sha256": "b6ee173fe9d7da90d0cf3f279a72679b1bdf5d6feb5f2f86b62b672e1e68fcf5",
+    "gzip_sha256": "387791fb5d9c5f7c2600aa66ecf907e89ffbef9eecace095c778b09a8b66216f",
+    "scope": "two frozen source files; no fresh test/GPU execution"
+  }
 }
