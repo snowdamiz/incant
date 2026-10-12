@@ -316,3 +316,91 @@ fn expired_epochs_do_not_poison_new_updates_but_command_exhaustion_does() {
     assert!(graph_control(&mut cap, &mut memory, e, id(1), graph_command(0, 10, 0.75)).is_err());
     rejected(&mut cap, &mut world, &before);
 }
+
+#[test]
+fn weighted_tree_refuses_all_legacy_pose_versions_without_publishing_or_committing_prefix() {
+    use std::sync::Arc;
+    let base = graph_fixture::scene(0.25);
+    let mut nodes = base.spatial().to_vec();
+    for node in &mut nodes {
+        if let Some(animation) = node.animation.as_mut() {
+            let a = Arc::make_mut(animation);
+            let old = a.graph.as_ref().unwrap();
+            let tree = NativeAnimationBlendTree::new(
+                vec![
+                    NativeBlendTreeNode::Clip(Some(0)),
+                    NativeBlendTreeNode::Clip(Some(1)),
+                    NativeBlendTreeNode::Blend1d {
+                        parameter: 0,
+                        points: Arc::from([
+                            NativeBlendTreePoint {
+                                threshold: 0.0,
+                                child: 0,
+                            },
+                            NativeBlendTreePoint {
+                                threshold: 1.0,
+                                child: 1,
+                            },
+                        ]),
+                    },
+                ],
+                Arc::from(old.parameters()),
+                a.clip_durations.clone(),
+            )
+            .unwrap();
+            a.initial.clip = None;
+            a.initial.looping = true;
+            a.graph = Some(Arc::new(
+                NativeAnimationGraph::new(
+                    0,
+                    old.parameters().to_vec(),
+                    vec![NativeAnimationGraphState {
+                        id: id(20),
+                        motion: NativeAnimationMotion::Tree {
+                            cycle_seconds: 2.0,
+                            tree: Arc::new(tree),
+                        },
+                        looping: true,
+                    }],
+                    vec![],
+                    &a.clip_durations,
+                )
+                .unwrap(),
+            ));
+        }
+    }
+    let scene = base
+        .clone()
+        .with_spatial(base.visual_assets().to_vec(), nodes)
+        .unwrap();
+    for call in [
+        Call::AnimationLen,
+        Call::AnimationLenV2,
+        Call::AnimationLenV3,
+        Call::ReadAnimations {
+            ptr: 7,
+            capacity: 1024,
+        },
+        Call::ReadAnimationsV2 {
+            ptr: 7,
+            capacity: 1024,
+        },
+        Call::ReadAnimationsV3 {
+            ptr: 7,
+            capacity: 1024,
+        },
+    ] {
+        let mut world = NativeWorld::new(scene.clone());
+        let before = world.save_bytes().unwrap();
+        let mut cap = Capability::default();
+        let mut memory = vec![0xa5; 2048];
+        let epoch = cap.begin(&mut world, DT).unwrap();
+        // Graph identity and parameter observations remain representable.
+        assert!(!read_snapshot(&mut cap, &mut memory, epoch, true).is_empty());
+        prefix(&mut cap, &mut memory, epoch);
+        let untouched = memory.clone();
+        assert!(cap.invoke(&mut memory, epoch, call).is_err());
+        assert_eq!(memory, untouched);
+        rejected(&mut cap, &mut world, &before);
+    }
+}

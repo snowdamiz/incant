@@ -16,6 +16,7 @@ pub(crate) struct Scratch {
     source_seconds: Vec<f64>,
     weights: Vec<f64>,
     blending: Vec<u8>,
+    weighted: Vec<u8>,
 }
 impl Scratch {
     pub fn capture(&mut self, world: &mut NativeWorld) -> Result<(), incant_runtime::RuntimeError> {
@@ -29,6 +30,7 @@ impl Scratch {
         self.source_seconds.clear();
         self.weights.clear();
         self.blending.clear();
+        self.weighted.clear();
         self.offsets.push(0);
         for row in &self.rows {
             self.seconds.push(row.seconds);
@@ -37,6 +39,7 @@ impl Scratch {
             self.values
                 .extend_from_slice(&row.parameters[..usize::from(row.parameter_count)]);
             self.offsets.push(self.values.len() as u32);
+            self.weighted.push(u8::from(row.pose.is_some()));
             self.blending.push(u8::from(row.blend.is_some()));
             self.source_clips
                 .push(row.blend.and_then(|b| b.sample.clip).map_or(-1, i32::from));
@@ -88,6 +91,7 @@ impl Scratch {
         column!("sourceSeconds", source_seconds);
         column!("weights", weights);
         column!("blending", blending);
+        column!("weighted", weighted);
         Ok(result)
     }
 }

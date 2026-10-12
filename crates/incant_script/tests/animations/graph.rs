@@ -185,3 +185,95 @@ fn actual_guest_graph_controls_resume_active_paused_and_blended_sessions_exactly
         }
     }
 }
+
+#[test]
+fn weighted_tree_columns_are_complete_owned_and_match_committed_graph_control() {
+    let base = scene(2);
+    let mut nodes = base.spatial().to_vec();
+    let parameters: Arc<[_]> = [10, 11]
+        .map(|n| NativeAnimationParameter {
+            id: id(n),
+            initial: 0.5,
+            min: 0.0,
+            max: 1.0,
+        })
+        .into();
+    let tree = NativeAnimationBlendTree::new(
+        vec![
+            NativeBlendTreeNode::Clip(Some(0)),
+            NativeBlendTreeNode::Clip(Some(1)),
+            NativeBlendTreeNode::Clip(None),
+            NativeBlendTreeNode::Blend2d {
+                parameters: [0, 1],
+                x: Arc::from([0.0, 1.0]),
+                y: Arc::from([0.0, 1.0]),
+                children: Arc::from([0, 1, 2, 0]),
+            },
+        ],
+        parameters.clone(),
+        Arc::from([2.0, 4.0]),
+    )
+    .unwrap();
+    let graph = NativeAnimationGraph::new(
+        0,
+        parameters.to_vec(),
+        vec![NativeAnimationGraphState {
+            id: id(20),
+            motion: NativeAnimationMotion::Tree {
+                cycle_seconds: 2.0,
+                tree: Arc::new(tree),
+            },
+            looping: false,
+        }],
+        vec![],
+        &[2.0, 4.0],
+    )
+    .unwrap();
+    for node in &mut nodes {
+        let a = Arc::make_mut(node.animation.as_mut().unwrap());
+        a.initial.clip = None;
+        a.graph = Some(Arc::new(graph.clone()));
+    }
+    let scene = base
+        .with_spatial(
+            vec![VisualAssetRef {
+                id: id(u128::MAX),
+                kind: VisualAssetKind::Model,
+                fingerprint: [4; 32],
+            }],
+            nodes,
+        )
+        .unwrap();
+    let mut world = NativeWorld::new(scene);
+    let mut host = host(&format!(
+        r#"let old,n=0;exports.default={{update({{animations:a,commands}}){{
+        const i=a.ids.indexOf('{ONE}'),g=a.graphs,j=g.ids.indexOf('{ONE}'),begin=a.poseOffsets[i],end=a.poseOffsets[i+1];
+        if(a.poseOffsets.length!==3||g.weighted[j]!==1||g.blending[j]!==0)throw Error('tree alignment');
+        if(n===0){{
+            if(end-begin!==3)throw Error('three coalesced leaves');
+            let total=0;for(let k=begin;k<end;k++){{const c=a.poseClips[k],w=a.poseWeights[k];if(w!==(c===0?0.5:0.25)||a.poseSeconds[k]!==0)throw Error('initial values');total+=w;}}
+            if(total!==1)throw Error('normalization');old=a;commands.setAnimationParameter('{ONE}','{PARAMETER}',1);
+        }}else{{
+            if(end-begin!==2||old.poseOffsets[i+1]-old.poseOffsets[i]!==3)throw Error('stale snapshot');
+            for(let k=begin;k<end;k++)if(a.poseWeights[k]!==0.5||a.poseSeconds[k]!==(a.poseClips[k]===0?0.125:0.25))throw Error('committed phase');
+            old.poseWeights.fill(99);old.poseClips.fill(99);old.poseOffsets.fill(0);a.poseWeights.fill(88);
+        }}n++;
+    }}}};"#
+    ));
+    host.tick(&mut world, 0.125).unwrap();
+    world.step().unwrap();
+    host.tick(&mut world, 0.125).unwrap();
+    let pose = world.animation_graph_state(id(1)).unwrap().pose.unwrap();
+    assert_eq!(pose.samples().len(), 2);
+    assert!(pose.samples().iter().all(|p| p.weight == 0.5));
+    assert_eq!(
+        world
+            .animation_graph_state(id(2))
+            .unwrap()
+            .pose
+            .unwrap()
+            .samples()
+            .len(),
+        3
+    );
+}

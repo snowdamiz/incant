@@ -1,0 +1,36 @@
+{
+  "recorded_at": "2026-10-12T04:40:35.206125+00:00",
+  "reviewer": "astra/root",
+  "source_base": "068dc974799cce34b3689ffe510690b46dd285b3",
+  "inventory": "/tmp/incant-animation-graph-freeze-003/inventory.json",
+  "inventory_sha256": "7d707ab408b536ad8ee97152a11b37551086babc87fbfd7c5191348cd78bcd37",
+  "verified_frozen_files": 49,
+  "decision": "Scoped source review accepted after separate-master-pause correction; packaged proof and final checks remain required before publication.",
+  "reviewed_paths": [
+    "typed/doc graph validation and cold cook resolution",
+    "bounded graph definition/binary tables, v14 with unchanged earlier versions and UI suffix",
+    "retained numeric graph playback/adjacent blending/priority transitions, graph master pause",
+    "atomic animation/graph command preparation and strict shared script command ingress",
+    "owned bulk TS snapshots and readonly ID columns",
+    "v6 framing/membership/state validation and ordinary session restore",
+    "observable graph/script/rollback/codec regressions",
+    "public command-bus authoring, independent snapshot expectations and copied-player/checkpoint export helper"
+  ],
+  "resolved_findings": [
+    {
+      "priority": 2,
+      "issue": "Completed nonlooping playback stopped the entire state machine, preventing later parameter/time transitions.",
+      "correction": "Retained graph paused bit is independent of clip completed/playing. Natural endpoint keeps pose frozen while elapsed/edges continue; explicit pause freezes graph; selection honors master pause. V6 records pause and tests cover completed/paused restoration.",
+      "first_snapshot": "/tmp/incant-animation-graph-freeze-002/inventory.json"
+    }
+  ],
+  "pending": [
+    "Verify final full checks against this frozen source and fresh shipping-player result with source/maps/private-build removed.",
+    "Publisher must integrate reviewed current main and preserve exact evidence; no visual result reviewed here."
+  ],
+  "limits": [
+    "Flat bounded adjacent-pair 1D blend and clip-to-clip graph fades only; blend-state fades, nested/2D trees, IK/root motion remain open.",
+    "Graph controls currently native/TypeScript; no new Rust/Wasm ABI parity claim.",
+    "No GPU appearance, reference-phone performance, full animation or phase completion claim."
+  ]
+}

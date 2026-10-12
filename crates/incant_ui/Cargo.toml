@@ -11,6 +11,7 @@ incant_text.workspace = true
 incant_input.workspace = true
 ulid = { version = "=1.2.1", default-features = false }
 thiserror.workspace = true
+sha2.workspace = true
 taffy = { version = "=0.14.0", default-features = false, features = ["std", "taffy_tree", "flexbox", "content_size"] }
 
 [dev-dependencies]

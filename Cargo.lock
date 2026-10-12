@@ -4048,7 +4048,6 @@ dependencies = [
 name = "incant_game_player"
 version = "0.0.1"
 dependencies = [
- "incant_ui",
  "gilrs",
  "incant_assets_runtime",
  "incant_audio_runtime",
@@ -4063,6 +4062,7 @@ dependencies = [
  "incant_runtime",
  "incant_script",
  "incant_types",
+ "incant_ui",
  "incant_wasm_runtime",
  "pollster",
  "serde",
@@ -4077,13 +4077,13 @@ dependencies = [
 name = "incant_game_runtime"
 version = "0.0.1"
 dependencies = [
- "incant_ui",
  "incant_assets_runtime",
  "incant_audio_runtime",
  "incant_input",
  "incant_runtime",
  "incant_script",
  "incant_types",
+ "incant_ui",
  "kira",
  "serde_json",
  "tempfile",
@@ -4362,7 +4362,6 @@ dependencies = [
 name = "incant_render_game"
 version = "0.0.1"
 dependencies = [
- "incant_ui",
  "incant_assets",
  "incant_assets_runtime",
  "incant_audio_runtime",
@@ -4373,6 +4372,7 @@ dependencies = [
  "incant_runtime",
  "incant_script",
  "incant_types",
+ "incant_ui",
  "kira",
  "serde_json",
  "tempfile",
@@ -4396,6 +4396,8 @@ dependencies = [
  "incant_runtime",
  "incant_script",
  "incant_types",
+ "incant_ui",
+ "png 0.18.1",
  "serde_json",
  "tempfile",
  "thiserror 2.0.21",
@@ -4527,6 +4529,7 @@ dependencies = [
  "incant_input",
  "incant_text",
  "incant_types",
+ "sha2 0.10.9",
  "taffy",
  "tempfile",
  "thiserror 2.0.21",
@@ -8425,8 +8428,6 @@ dependencies = [
 [[package]]
 name = "tao"
 version = "0.37.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f37f381f4e048e6cdf038b5705f8cf14ad108279d46eb968140a7b291aba9400"
 dependencies = [
  "bitflags 2.13.2",
  "block2",

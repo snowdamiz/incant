@@ -1,0 +1,106 @@
+[
+  {
+    "name": "tests",
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--offline",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_script",
+      "-p",
+      "incant_game_runtime",
+      "-p",
+      "incant_game_player",
+      "-p",
+      "incant_play",
+      "--features",
+      "incant_play/wasmtime-host,incant_game_runtime/ui,incant_game_player/render-input"
+    ],
+    "exit": 0,
+    "seconds": 153.6551421250042,
+    "log": "/tmp/incant-ui-steering-union-checks/tests.log",
+    "sha256": "eb97ddb03ea39654e9906ba36bc90b87a6eaaa7417f8acf4421eec7c035b0934"
+  },
+  {
+    "name": "clippy",
+    "command": [
+      "./tools/cargo",
+      "clippy",
+      "--locked",
+      "--offline",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_script",
+      "-p",
+      "incant_game_runtime",
+      "-p",
+      "incant_game_player",
+      "-p",
+      "incant_play",
+      "-p",
+      "incant_headless",
+      "--features",
+      "incant_play/wasmtime-host,incant_game_runtime/ui,incant_game_player/render-input,incant_headless/wasmtime-host",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit": 0,
+    "seconds": 20.511002624989487,
+    "log": "/tmp/incant-ui-steering-union-checks/clippy.log",
+    "sha256": "ef36d4a8610dd436efb241cd83714879385ab5e6d6467575e8bb3099c8495755"
+  },
+  {
+    "name": "headless",
+    "command": [
+      "./tools/cargo",
+      "build",
+      "--locked",
+      "--offline",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_headless",
+      "--features",
+      "wasmtime-host"
+    ],
+    "exit": 0,
+    "seconds": 37.85203908299445,
+    "log": "/tmp/incant-ui-steering-union-checks/headless.log",
+    "sha256": "3187fb25443268795b044fb4905726c6dc9a2c1765eeedb9e11c9ad01d4ac172"
+  },
+  {
+    "name": "tooling",
+    "command": [
+      "npm",
+      "run",
+      "test:tools"
+    ],
+    "exit": 0,
+    "seconds": 23.321430915995734,
+    "log": "/tmp/incant-ui-steering-union-checks/tooling.log",
+    "sha256": "f516cd93b1d24bad7d03792171df5cf74d2cb2ea9020e412b3b715145f7cae05"
+  },
+  {
+    "name": "export",
+    "command": [
+      "python3",
+      "tools/probes/native-ui-export.py",
+      "/tmp/incant-ui-current-main-proof",
+      "--binary",
+      "/tmp/incant-animation-integration-target/ci/incant_headless"
+    ],
+    "exit": 0,
+    "seconds": 244.1160053339845,
+    "log": "/tmp/incant-ui-steering-union-checks/export.log",
+    "sha256": "9b8e7969abfdf0d21e0120ef5052b5331a9020445b6cf0f13b7b1ccf6120a086"
+  }
+]

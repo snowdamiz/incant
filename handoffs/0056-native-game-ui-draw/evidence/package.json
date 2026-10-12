@@ -1,0 +1,162 @@
+{
+  "format": "incant-0056-ci-cpu-package",
+  "source_head": "0fe9dff97358a04b6ab077e4dc09e173be69d465",
+  "source_tree": "abe9b80e618decf72c96e2b20ab0454b630f86e5",
+  "worktree_clean_outside_handoff": false,
+  "cargo_lock_sha256": "e3494a906806a976bddd11620b83af14d800ff6eac94afd5f98004164af42577",
+  "command": [
+    "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0056-native-game-ui-draw/tools/cargo",
+    "build",
+    "--locked",
+    "--offline",
+    "-j2",
+    "-p",
+    "incant_game_player",
+    "--bin",
+    "incant_game_player",
+    "--features",
+    "project,render-input",
+    "--profile",
+    "ci",
+    "--message-format=json"
+  ],
+  "profile": "ci (inherits release, opt-level 1)",
+  "features": "project,render-input",
+  "cargo_target_dir": "/tmp/incant-agent-native-target",
+  "project_sha256": "50048d2a61f360056ba767ed51c4d90939939a411dd46cf90f1ad91f07f7aff5",
+  "scene_id": "01M4Q97G4QSVS83VP2TEKSWFFG",
+  "producer_receipt": {
+    "audio_clips": {},
+    "cameras": [
+      "00000000000000000000000010"
+    ],
+    "compiler": null,
+    "font_assets": [
+      {
+        "fingerprint": "9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2",
+        "id": "01M4Q97G5WNAGG032KNM5RV35W"
+      },
+      {
+        "fingerprint": "6864e1444bc7002790e682360d3f93bd45fe51b7045a64ecbf0e76e19e6b758e",
+        "id": "01M4Q97G6PXW5KVNKB63H7DVX2"
+      },
+      {
+        "fingerprint": "1087d4bb69160e3e5955407294226ca3da11166a3188ada3c1a166ba14e55ceb",
+        "id": "01M4Q97G7DY0C85B229Q9ARCT7"
+      }
+    ],
+    "format": "incant-native-project-build",
+    "has_spatial_content": true,
+    "project_id": "01M4Q97G4QM9G50ZDGJA2KVBSJ",
+    "project_sha256": "50048d2a61f360056ba767ed51c4d90939939a411dd46cf90f1ad91f07f7aff5",
+    "scene_id": "01M4Q97G4QSVS83VP2TEKSWFFG",
+    "scene_sha256": "08b4cd10f1895e95535a487d62d955023a7b18e89e1995502d5698ce4df6f44c",
+    "startup_source_parsing": false,
+    "target": "aarch64-apple-darwin",
+    "tick_rate": 60,
+    "version": 1,
+    "visual_assets": [
+      {
+        "fingerprint": "f33ebd7453f8eb05d87dda6a5b461df1b0df17ed34531f8471dedd67d736b581",
+        "id": "01M4Q97G80R02SQKTBDCM4TPWZ",
+        "kind": "model"
+      },
+      {
+        "fingerprint": "b49e72aa085f4e6c54e6c15a2c83bc0db1f31957498f129a63c8bf60cc3142d8",
+        "id": "01M4Q97G8KE28M4H6YANYMT708",
+        "kind": "model"
+      },
+      {
+        "fingerprint": "3392abe5a4a27b39d6c0d8379834d254143125a09824187e820f458afbac5dba",
+        "id": "01M4Q97G956X68HSMKCFV35C59",
+        "kind": "model"
+      }
+    ]
+  },
+  "player_sha256": "df31e695b0b266041b97b52dfbc3840bdb823e1a543e7ab96e804414a1fa9678",
+  "player_bytes": 22049536,
+  "built_executable": "/tmp/incant-agent-native-target/ci/incant_game_player",
+  "camera": "00000000000000000000000000000020",
+  "data": {
+    "bytes": 1334624,
+    "files": {
+      "world.scene": "08b4cd10f1895e95535a487d62d955023a7b18e89e1995502d5698ce4df6f44c",
+      "input-actions.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+      "models/f33ebd7453f8eb05d87dda6a5b461df1b0df17ed34531f8471dedd67d736b581.incmodel": "35120e0bbce9d1db9292b2924b66e279ff7818607bcb38a6ead83781504382b9",
+      "models/b49e72aa085f4e6c54e6c15a2c83bc0db1f31957498f129a63c8bf60cc3142d8.incmodel": "240fb0a7301bb55ecab3f817ed6da061cf11eb601b468b5a626b771579f3d934",
+      "models/3392abe5a4a27b39d6c0d8379834d254143125a09824187e820f458afbac5dba.incmodel": "27d2e0d8fd444eb98e9c0aac2e173dd65649307dcf64fc00fcb014da150b8c21",
+      "fonts/9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2.json": "e43c79c54c311c5759bdf686b43b9b112b0177bafd6938782ebb782d75018812",
+      "fonts/2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9.ifont": "92960e6b23eff12e1bf13361b2b94b490d723f8d93e6945ba34b9f9b3acd2081",
+      "fonts/6864e1444bc7002790e682360d3f93bd45fe51b7045a64ecbf0e76e19e6b758e.json": "167d0dc13b807552b06d0195e3a90ee24f5074206dd6d6f2106ad59e65b35fde",
+      "fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont": "8bd20a742cc19c0fe65b106d983ea1ed816c4cd5ca1c3d50bdc4d05aeb5f8e7a",
+      "fonts/1087d4bb69160e3e5955407294226ca3da11166a3188ada3c1a166ba14e55ceb.json": "c3fd206832637ec3ad354dee08b4c67012da904d34a3ce9ec9c97e30f70e07f0",
+      "fonts/3299d6ab8033fb1d163f892dfcb1b8838cf1c46935c329d82da6f7b9e27dad82.ifont": "49e09202aadc1c7463502004f791b596480a92d22e04b9948fabf8648a004814",
+      "clips.bin": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+      "package.json": "c5e19f478de24f47c283e035fa53f6e123fef6bb7aad9298e97bb2f6ac51f2ea"
+    }
+  },
+  "startup": {
+    "flipbooks": [],
+    "frames": 800,
+    "logs": {
+      "dropped": 0,
+      "entries": []
+    },
+    "pcm_sha256": "56a43ef88ddfcd0f56f7dd973312c0e73d62f59655c01d7b4e59aaa3be8b3fb6",
+    "render_input": {
+      "binding_generation": 0,
+      "camera": "00000000000000000000000000000020",
+      "camera_position": [
+        0.0,
+        0.9,
+        7.0
+      ],
+      "decoded_payload_bytes": 1328220,
+      "first_model_position": [
+        0.0,
+        -1.25,
+        -2.0
+      ],
+      "first_sprite_position": null,
+      "first_text_position": null,
+      "gpu_submitted": false,
+      "mode": "cpu-only",
+      "model_count": 3,
+      "sprite_count": 0,
+      "text_atlas_bytes": 0,
+      "text_atlas_nonzero": 0,
+      "text_atlas_sha256": null,
+      "text_count": 0,
+      "text_font_count": 0,
+      "text_generation": 0,
+      "text_glyph_count": 0,
+      "text_missing_clusters": 0,
+      "text_rtl_glyphs": 0,
+      "tick": 1,
+      "topology_generation": 0,
+      "ui": {
+        "atlas_sha256": "2b9561c0ae47f10f9ee279518851b51523f08b3fb1db36971ec6dcc90bd44101",
+        "focus": null,
+        "glyphs": 157,
+        "values": {
+          "0000000000000000000000002A": "Ada Lovelace",
+          "0000000000000000000000002C": "سلام عليكم",
+          "0000000000000000000000002E": "日本"
+        },
+        "viewport": [
+          960.0,
+          540.0
+        ],
+        "widgets": 18
+      }
+    },
+    "sources": [],
+    "tick": 1
+  },
+  "limits": [
+    "ci profile, not shipping",
+    "CPU render-input package; no window or GPU device",
+    "no phone, performance or phase gate"
+  ]
+}

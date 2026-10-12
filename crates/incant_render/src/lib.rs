@@ -32,6 +32,7 @@ mod studio;
 #[path = "../tests/support/mod.rs"]
 mod test_support;
 mod text;
+mod ui;
 #[cfg(test)]
 mod version_tests;
 #[cfg(any(target_arch = "wasm32", test))]
@@ -47,6 +48,10 @@ use std::{collections::HashMap, error::Error, sync::Mutex, time::Duration};
 pub use text::{
     MAX_TEXT_GLYPHS, MAX_TEXT_NODES, TEXT_COLOR, TEXT_LOGICAL_PIXELS_PER_UNIT, TextUploads,
     text_layout_to_local,
+};
+pub use ui::{
+    MAX_UI_GLYPHS, MAX_UI_QUADS, MAX_UI_WIDGETS, UiLayer, UiStage, UiStats, UiUploads,
+    theme as ui_theme,
 };
 #[cfg(target_arch = "wasm32")]
 pub use web_error::PreparationErrorKind;
@@ -80,6 +85,7 @@ pub struct Renderer {
     materials: materials::MaterialSystem,
     sprites: sprites::SpriteSystem,
     text: text::TextSystem,
+    ui: ui::UiSystem,
     environments: environment::EnvironmentSystem,
     lighting: lighting::LightingSystem,
     shadows: shadows::ShadowSystem,
@@ -126,6 +132,7 @@ impl Renderer {
         let output = output::OutputPass::new(&device, adapter.get_info().backend)?;
         let sprites = sprites::SpriteSystem::new(&device);
         let text = text::TextSystem::new(&device);
+        let ui = ui::UiSystem::new(&device, &queue);
         if let Some(error) = validation.pop().await {
             #[cfg(target_arch = "wasm32")]
             let error = error.into();
@@ -136,6 +143,7 @@ impl Renderer {
             device_lost,
             sprites,
             text,
+            ui,
             device,
             queue,
             adapter,

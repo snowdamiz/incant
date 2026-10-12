@@ -3,6 +3,9 @@ use crate::CookedModel;
 #[path = "deform.rs"]
 mod deform;
 pub use deform::SkinPose;
+#[path = "weighted.rs"]
+mod weighted;
+pub use weighted::{MAX_POSE_SAMPLES, WeightedClipSample};
 
 /// One retained, immutable model animation copy and two preallocated pose buffers.
 /// Sampling performs no allocation, source IO or JSON. There is no implicit clock:

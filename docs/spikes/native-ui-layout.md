@@ -32,8 +32,9 @@ The old legacy gameplay path explicitly refuses UiNode.
 bytes with world Text, but owns separate screen-space shaping, widget values and
 atlas data. It requires the exact `WorldIdentity`, UI generation and native
 incarnation set. A missing UI-capable host/consumer refuses before VM/audio
-preparation or GPU submission. The existing CPU observer accepts the canonical
-data; GPU/window consumers deliberately do not yet accept UI.
+preparation or GPU submission. The CPU observer and the GPU consumer accept the
+canonical data ([GPU drawing](native-ui-draw.md)); the native window host does
+not yet configure UI.
 
 ## Input and transaction contract
 
@@ -120,9 +121,10 @@ ordinary packaged games. It observes keyboard/gamepad activation, preedit/commit
 submit, resize/pointer, native motion, world Text and PCM. Negative controls cover
 missing configuration, malformed receipts, font integrity and unsupported saves.
 
-QuickJS receives the routed UI contract. Static Wasm and development Wasm must
-refuse UI until their input ABI supports it (the separate DevelopmentWasm branch
-requires the same guard during integration). UI-used worlds explicitly refuse
+QuickJS receives the routed UI contract. Static Wasm and development Wasm
+refuse UI until their input ABI supports it. The integrated DevelopmentWasm guard
+runs before module initialization; a malformed-module regression confirms that
+UI refusal takes precedence. UI-used worlds explicitly refuse
 world/session checkpoints; this is a temporary missing state adapter, not the
 final save contract. Rendering, OS IME behavior, pixel acceptance and devices
 must be validated separately.
@@ -161,3 +163,32 @@ No rendered pixels, OS IME behavior or complete Game UI acceptance is claimed.
 
 See [the draw-consumer handoff](native-ui-draw-handoff.md) for the exact canonical
 input and transaction seam reserved for Claude's subsequent implementation.
+
+## Actual main129 integration
+
+The main128 composition passed 510 CPU tests in 87 groups plus scoped all-target
+Clippy, native-window compilation, compiler-disabled/static and wasm32 checks.
+Adding the reviewed Wasm steering source passed another 209 overlapping script,
+Play and game-runtime cases, all-target Clippy and the matching headless build.
+Its 67 freshly generated schemas match the committed bytes.
+
+The current-lock public export now removes its own authoring/cache inputs, private
+build storage and debug source maps before any copied-player replay. Three fresh
+12-tick runs pass exact UI events, native motion, world Text and matching PCM;
+five controls reject at the intended configuration/input/UI-checkpoint/font
+boundaries. The shipping player is 9,053,504 bytes, SHA-256
+`4e4b58b8511936639d5365c46f7e2500c731a47b01f4e708691a5ffe3f86a889`.
+Actual main129 merged without conflict afterward; only docs and the independently
+reviewed development-probe metadata selector changed, outside this export's
+source/build closure. Source and proof identities are in the
+[integrated receipt](evidence/native-ui-current-main.json).
+
+The initial integrated compile used unstable iterator `is_empty`; the existing
+stable `len() != 0` form fixes that compile error without changing the refusal.
+The failure log is retained. No rendered UI, native input/IME, device or full
+checkpoint gate follows from these CPU results.
+
+Independent final integration review accepted all 84 changed source identities,
+20 retained logs, 19 receipts and the actual package/replay bytes. The
+[review receipt](evidence/native-ui-current-main-root-review.json) binds the
+CPU scope and preserves the outstanding drawing/platform gates.

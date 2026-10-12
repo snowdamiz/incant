@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-12T05:48:44.837001+00:00",
+  "reviewer": "/root/integrate_runtime_prs",
+  "base": "8160b5ac303f7f30bf11bb4fcd95155fe9b9fee9",
+  "diff_sha256": "d6d88a8e522567622285eb5301cdc5521c5a9318d73597ca86f221629d9a4bf5",
+  "files": {
+    "crates/incant_game_player/src/window/mod.rs": "d4e3a5339241cbcebcb8935d1a18fddf3f9e629e4ad2f4dd459ccf559bd15b07",
+    "crates/incant_game_player/src/window/surface.rs": "42eba11f0c95ea913ec6aac57e13b130a4d9f7a13ca898a9456c67c50eb4b8e6"
+  },
+  "status": "accepted bounded source review",
+  "findings": [],
+  "reviewed": [
+    "All three presentation/tick paths reserve before fitting, refresh/consume before publishing hit coordinates, and cancel reservation after consumption; callback error exits and final cleanup cancels outstanding reservation.",
+    "fit_ui does not change unchanged viewports; a real change fences old pointer receipts before resize, preserves focused text receipts through existing independent tokens and invalidates the replacement pointer token before delivery.",
+    "Suspended refresh remains separate from native tick/audio resume. Surface timeout preserves existing retry semantics; fit uses reserved dimensions rather than a later window-size read.",
+    "Logical viewport uses the same current scale division as pointer coordinates; invalid and unsupported dimensions refuse rather than silently clamp. Resource report reads committed UI state/counters only."
+  ],
+  "limits": [
+    "Read-only source review; did not run root tests or open native/GPU window.",
+    "New CPU test covers exact logical scale/range; actual resize, composition, hit coordinates and candidate caret placement require combined native acceptance.",
+    "Frame dimensions are the existing surface reservation metadata configured by SurfaceState; this review does not assert an independent driver texture-size measurement."
+  ]
+}

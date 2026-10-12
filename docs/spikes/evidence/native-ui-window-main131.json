@@ -1,0 +1,171 @@
+{
+  "recorded_at": "2026-10-12T05:11:16.988796+00:00",
+  "base": "48c946ad1cc42699b1cbfaad84d067c440eee821",
+  "head": "fecf2d1590495ddc4d3152a6dc8a57151944e355",
+  "tested_source": "df28ba15b5e7c0fd99cb18abd19503f855bee8d8",
+  "source_commit": "88ad9d8892e81857deefb98929c32366c64d73c0",
+  "reviewed_tip": "777e9a107442d2a0d4675516d7be53cd7967bc3b",
+  "source_hashes": {
+    "crates/incant_ui/src/focus.rs": "ba7bdbee17b957eeba6e18aa80c2d4002ce0e84f05c427052ed893ebfdb55523",
+    "crates/incant_game_player/src/window/input.rs": "981d9a43f00540b02cc6805a1b0a717db17154eab1a735f38579429ca8e05803",
+    "crates/incant_game_player/src/window/mod.rs": "a119d60a5f5e8d4f5a1de9caac31f4fe8590af3f5f42455585f8b7db45052b18",
+    "crates/incant_game_player/src/window/ui_input.rs": "4e3351319edcb18340700fe590f83db1ed133afe1fa4d5d047fe10242d49bac4",
+    "crates/incant_game_player/src/window/ui_input/tests.rs": "096750a4c7d2b0f6198015716bb83e8e83c2b45d594441c1b73a2f05e6bc9a61"
+  },
+  "all_five_accepted_sources_identical": true,
+  "compiled_source_freeze_sha256": "a1e26ffdb20c2d89f4d6a7fbbbcc4e5f01c2c45da224da0631132cb52c33a1f1",
+  "compiled_source_count": 1252,
+  "source_drift": [],
+  "integration": "Only STATUS text conflict; current window text/font settings retained. Actual main131 ancestry merge changes no tested file.",
+  "checks": [
+    {
+      "name": "tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_ui",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "incant_game_player/native-window"
+      ],
+      "exit": 0,
+      "seconds": 40.3362639999832,
+      "log": "/tmp/incant-ui-window-main131-checks/tests.log",
+      "sha256": "0404ee6f48ab2ece28911159a1975c20b8284e64519beef7c3cc341600fcd445"
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_ui",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "incant_game_player/native-window",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 7.551625374995638,
+      "log": "/tmp/incant-ui-window-main131-checks/clippy.log",
+      "sha256": "5a4388df5cea7a450e517e9942a0cdccd5c28ca00a084d5e714984f2fbebfa80"
+    },
+    {
+      "name": "wasm32",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "-j2",
+        "-p",
+        "incant_ui",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "exit": 0,
+      "seconds": 1.7900920410174876,
+      "log": "/tmp/incant-ui-window-main131-checks/wasm32.log",
+      "sha256": "6fe0a81c9a81c9c904fe059652d33b3bb36b9373eb721c6e693aab566026728b"
+    },
+    {
+      "name": "graph",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_game_player",
+        "incant_ui",
+        "--features",
+        "incant_game_player/native-window"
+      ],
+      "exit": 0,
+      "seconds": 0.364090707997093,
+      "log": "/tmp/incant-ui-window-main131-checks/graph.log",
+      "sha256": "b3fe40601e0ec65e2fc9a15abacf89e34cfc3267b8b4560f950740b74fadbe33"
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.8969617919938173,
+      "log": "/tmp/incant-ui-window-main131-checks/fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.02968637502635829,
+      "log": "/tmp/incant-ui-window-main131-checks/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "tests": {
+    "passed": 72,
+    "groups": 9,
+    "failed": 0,
+    "ignored": 0
+  },
+  "logs": {
+    "docs/spikes/evidence/native-ui-window-main131/fmt.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/native-ui-window-main131/conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/native-ui-window-main131/wasm32.log.gz": {
+      "sha256": "d656ca6558593e8b5c857f4694e4944a2e47164f4f1225991e7890d0af032b05",
+      "uncompressed_sha256": "6fe0a81c9a81c9c904fe059652d33b3bb36b9373eb721c6e693aab566026728b"
+    },
+    "docs/spikes/evidence/native-ui-window-main131/graph.log.gz": {
+      "sha256": "af016ccbcb8b527bc137e197b310ecddaf9eb0675a271622d7fd7395f5157e87",
+      "uncompressed_sha256": "b3fe40601e0ec65e2fc9a15abacf89e34cfc3267b8b4560f950740b74fadbe33"
+    },
+    "docs/spikes/evidence/native-ui-window-main131/clippy.log.gz": {
+      "sha256": "476a59b01921e94dcc5ff5a4820ea918eda62655626666d11df1add233b46293",
+      "uncompressed_sha256": "5a4388df5cea7a450e517e9942a0cdccd5c28ca00a084d5e714984f2fbebfa80"
+    },
+    "docs/spikes/evidence/native-ui-window-main131/tests.log.gz": {
+      "sha256": "7d18cda42cc49ab47c85850ec9d1bc5e458e2d96c799035d5a4c524eb1e104ff",
+      "uncompressed_sha256": "0404ee6f48ab2ece28911159a1975c20b8284e64519beef7c3cc341600fcd445"
+    }
+  },
+  "independent_review": {
+    "path": "docs/spikes/evidence/native-ui-window-input-review.json",
+    "sha256": "8891d5aee7a381243f6a032536a67c4d4ed4196cd114a68dcc5380a4fa745753"
+  },
+  "publisher_source_review": "Read the entire receipt adapter plus physical/window/focus diff. Canonical token owner/layout/epoch checking, bounded text-copy admission, reserve-before-resize publication, retry queues and no-UI path remain intact. No new source finding.",
+  "limits": [
+    "The compiled renderer still lacks the separate Claude0056 UI consumer, so UI startup explicitly refuses before window/audio/GPU.",
+    "No OS/native-window/GPU/IME/provider/hardware execution; synthetic CPU tests only.",
+    "Managed composition, rendered acceptance and complete Game UI/phase gates remain open."
+  ]
+}

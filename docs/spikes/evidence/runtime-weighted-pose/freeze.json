@@ -1,0 +1,14 @@
+{
+  "head": "5399dcd4cad0265dcc0448ccd1f848518f76bf9f",
+  "files": {
+    "crates/incant_assets_runtime/src/animation/mod.rs": "e3a3cf56679f0215853cf862fe07442a36cd642e4f31cf56bc5234755a15595d",
+    "crates/incant_assets_runtime/src/animation/player.rs": "e2a9ac32f04a9cd2f84a5f8dfe4d57bbf4d30315cc9aedd15930ad8e0aee663a",
+    "crates/incant_assets_runtime/src/animation/weighted.rs": "de7c35a35da0f68bc0e2bd5cdedab512ec9fef51ffce35951094bafb0f693b52",
+    "crates/incant_assets/tests/skeletal.rs": "848465395b8e861c52761cf69d28cda858364a79434a26cefe238a71c2f014fe",
+    "crates/incant_assets/tests/skeletal/blending.rs": "096ba511881cbb9c399bf282e413baf154446a1121c9ed1a4d8b0c9012b2fe6f",
+    "crates/incant_assets/tests/skeletal/weighted.rs": "397b2c6b37af1e98bed6207d4b7e614db9829e5e729c9ad4e3cf032a0f080328",
+    "Cargo.toml": "98768e3ad77d7294049dddf94291d024f9065596e783ae06b84585cfb69d14e8",
+    "Cargo.lock": "6d574acc59d671f8adc2f3ea40c749b5f0562526fb96e5b978c52fc856132016",
+    "rust-toolchain.toml": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124"
+  }
+}

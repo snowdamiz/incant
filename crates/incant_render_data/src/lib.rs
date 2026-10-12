@@ -2,6 +2,8 @@
 //! command bus, importer, GPU or agent dependency. Construct/replace at sync points.
 mod text;
 pub use text::{TextInput, TextNode};
+mod ui;
+pub use ui::{UiEdit, UiInput, UiRect, UiRole, UiWidget};
 mod flipbook;
 mod tilemap;
 pub use flipbook::SpriteFrames;
@@ -37,6 +39,8 @@ pub enum SceneError {
     TilemapFrame(incant_types::StableId),
     #[error("text node {0:?} has a glyph handle from another or reset atlas")]
     TextGlyph(incant_types::StableId),
+    #[error("UI widget {0:?} has a glyph handle from another or reset atlas")]
+    UiGlyph(incant_types::StableId),
     #[error("authored material asset overrides are not supported by the imported preview")]
     MaterialOverrides,
     #[error("model {0} has no scene to instantiate")]
@@ -119,6 +123,7 @@ pub struct MeshInput {
     /// Optional outgoing pose; its weight is the primary sample contribution.
     /// Both samples and the weight are validated even at an endpoint.
     pub animation_blend: Option<incant_types::AnimationBlendSample>,
+    pub animation_pose: Option<incant_types::AnimationPoseSamples>,
 }
 pub struct SpriteInput {
     pub source: Arc<RuntimeAsset>,

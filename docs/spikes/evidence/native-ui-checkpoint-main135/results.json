@@ -1,0 +1,100 @@
+[
+  {
+    "name": "tests",
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--profile",
+      "ci",
+      "--locked",
+      "--offline",
+      "-j2",
+      "-p",
+      "incant_ui"
+    ],
+    "exit": 0,
+    "seconds": 11.043701332993805,
+    "log": "/tmp/incant-ui-checkpoint-main135-checks/tests.log",
+    "sha256": "a33e4f463fe955ad96338f4a895eaf8b32834e91eedf310a32ce75af6a04a207"
+  },
+  {
+    "name": "clippy",
+    "command": [
+      "./tools/cargo",
+      "clippy",
+      "--profile",
+      "ci",
+      "--locked",
+      "--offline",
+      "-j2",
+      "-p",
+      "incant_ui",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit": 0,
+    "seconds": 1.3749498749966733,
+    "log": "/tmp/incant-ui-checkpoint-main135-checks/clippy.log",
+    "sha256": "9b3c2a54680af45d8a3a1358ef1fae3f549475149370a55fa80a20f14132e98f"
+  },
+  {
+    "name": "wasm32",
+    "command": [
+      "./tools/cargo",
+      "check",
+      "--locked",
+      "--offline",
+      "-j2",
+      "-p",
+      "incant_ui",
+      "--target",
+      "wasm32-unknown-unknown"
+    ],
+    "exit": 0,
+    "seconds": 0.5583762080059387,
+    "log": "/tmp/incant-ui-checkpoint-main135-checks/wasm32.log",
+    "sha256": "79a2a59b1bb5e425228943ef791d824e531a9884253a90e3433065d85b339c65"
+  },
+  {
+    "name": "graph",
+    "command": [
+      "python3",
+      "tools/check_runtime_dependencies.py",
+      "incant_ui",
+      "incant_game_runtime",
+      "incant_game_player"
+    ],
+    "exit": 0,
+    "seconds": 0.3533258749812376,
+    "log": "/tmp/incant-ui-checkpoint-main135-checks/graph.log",
+    "sha256": "ca7a3912a214f9427157d4b28fa756d204b5acfdaaad3b0776e58dddfb622993"
+  },
+  {
+    "name": "fmt",
+    "command": [
+      "./tools/cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.9238399160094559,
+    "log": "/tmp/incant-ui-checkpoint-main135-checks/fmt.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "conventions",
+    "command": [
+      "python3",
+      "tools/generate_conventions.py",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.03216924998559989,
+    "log": "/tmp/incant-ui-checkpoint-main135-checks/conventions.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

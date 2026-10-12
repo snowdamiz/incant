@@ -1,0 +1,1390 @@
+[
+  {
+    "method": "project.read",
+    "params": null
+  },
+  {
+    "method": "command.execute",
+    "params": {
+      "expected_revision": 1,
+      "description": "Author public animation graph export proof",
+      "commands": [
+        {
+          "op": "write_script",
+          "script_id": "00000000000000000000000001",
+          "expected_source": {
+            "state": "missing"
+          },
+          "source": "import type { NativeBehavior } from '@incant/runtime/native';\nconst parameter = '00000000000000000000000010';\nconst states = ['00000000000000000000000020', '00000000000000000000000021', '00000000000000000000000022'];\nexport default {\n  persistence: { version: 1 },\n  update(t) {\n    const a=t.animations,g=a.graphs,c=t.commands,tick=t.clock.tick;\n    if(g.ids.length!==3||g.parameterOffsets.length!==4||g.parameterOffsets[3]!==3)throw Error('graph alignment');\n    for(const instance of t.instances){\n      const id=instance.entity,first=instance.props.first===true,i=g.ids.indexOf(id),j=a.ids.indexOf(id),p=g.parameterOffsets[i];\n      if(i<0||j<0||g.parameterIds[p]!==parameter)throw Error('graph membership');\n      const count=Number(t.state.get(id)??0)+1;if(count!==tick)throw Error('persistent clock');t.state.set(count,id);\n      const before=[states.indexOf(g.states[i]),g.seconds[i],g.elapsed[i],g.parameterValues[p],a.clips[j],a.seconds[j],a.flags[j],g.sourceSeconds[i],g.weights[i]];\n      for(const chunk of t.chunks)for(let n=0;n<chunk.ids.length;n++)if(chunk.ids[n]===id){const k=n*chunk.transformStride;chunk.transforms[k]=before[0]+before[3];chunk.transforms[k+1]=before[1];chunk.transforms[k+2]=tick+before[8];}\n      if(instance.props.completed===true){\n        if(g.paused[i]!==Number(tick>=10&&tick<=12))throw Error('master pause');\n        if(tick===9)c.controlAnimation(id,'playing',false);\n        if(tick===10)c.setAnimationParameter(id,parameter,0.5);\n        if(tick===12)c.controlAnimation(id,'playing',true);\n        if(tick===13)c.controlAnimation(id,'speed',1);\n        if(tick===50)c.setAnimationParameter(id,parameter,0.25);\n        if(tick===60)c.selectAnimationState(id,states[2]);\n        if(tick===70)c.setAnimationParameter(id,parameter,0.75);\n        t.log(JSON.stringify([tick,id,...before]));continue;\n      }\n      if(tick===1)c.setAnimationParameter(id,parameter,0.5);\n      if(tick===3&&!first)c.controlAnimation(id,'playing',true);\n      if((tick===6||tick===50)&&first)c.controlAnimation(id,'playing',false);\n      if((tick===9||tick===53)&&first)c.controlAnimation(id,'playing',true);\n      if(tick===40)c.setAnimationParameter(id,parameter,first?0.25:0.75);\n      if(tick===45)c.controlAnimation(id,'speed',first?-1:2);\n      if(tick===60)c.selectAnimationState(id,states[2]);\n      if(tick===70)c.setAnimationParameter(id,parameter,first?-1:2);\n      if(tick===75){c.setAnimationParameter(id,parameter,0);c.selectAnimationState(id,states[0]);}\n      if(g.seconds[i]!==before[1]||g.parameterValues[p]!==before[3])throw Error('queued control leaked');\n      t.log(JSON.stringify([tick,id,...before]));\n    }\n  },\n} satisfies NativeBehavior;\n"
+        },
+        {
+          "op": "upsert_script",
+          "script": {
+            "id": "00000000000000000000000001",
+            "name": "Native animation graph",
+            "path": "graph.ts"
+          }
+        },
+        {
+          "op": "create_entity",
+          "scene_id": "01M4Q7REKWEFTZHT2WEDB03QYQ",
+          "entity": {
+            "id": "00000000000000000000000002",
+            "name": "Running source",
+            "parent": null,
+            "provenance": null,
+            "components": {
+              "Transform": {
+                "translation": [
+                  0,
+                  0,
+                  0
+                ],
+                "rotation": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ]
+              },
+              "MeshRenderer": {
+                "mesh": "01M4Q7REP27TH8KAR51SHQ3EG1",
+                "materials": [],
+                "cast_shadows": false
+              },
+              "Animation": {
+                "clip": 0,
+                "seconds": 0,
+                "speed": 1,
+                "playing": true,
+                "looping": true
+              },
+              "AnimationGraph": {
+                "initial": "00000000000000000000000020",
+                "parameters": {
+                  "00000000000000000000000010": {
+                    "initial": 0,
+                    "min": -1,
+                    "max": 2
+                  }
+                },
+                "states": {
+                  "00000000000000000000000020": {
+                    "motion": {
+                      "kind": "clip",
+                      "clip": 0
+                    },
+                    "looping": true
+                  },
+                  "00000000000000000000000021": {
+                    "motion": {
+                      "kind": "clip",
+                      "clip": 1
+                    },
+                    "looping": true
+                  },
+                  "00000000000000000000000022": {
+                    "motion": {
+                      "kind": "blend1d",
+                      "parameter": "00000000000000000000000010",
+                      "cycle_seconds": 2,
+                      "points": [
+                        {
+                          "threshold": 0,
+                          "clip": 0
+                        },
+                        {
+                          "threshold": 1,
+                          "clip": 1
+                        }
+                      ]
+                    },
+                    "looping": true
+                  }
+                },
+                "transitions": {
+                  "00000000000000000000000030": {
+                    "from": "00000000000000000000000020",
+                    "to": "00000000000000000000000021",
+                    "priority": 0,
+                    "fade_seconds": 0.5,
+                    "after_seconds": null,
+                    "conditions": [
+                      {
+                        "parameter": "00000000000000000000000010",
+                        "comparison": "greater_equal",
+                        "value": 0.5
+                      }
+                    ]
+                  },
+                  "00000000000000000000000031": {
+                    "from": "00000000000000000000000021",
+                    "to": "00000000000000000000000022",
+                    "priority": 0,
+                    "fade_seconds": 0,
+                    "after_seconds": 0.5,
+                    "conditions": [
+                      {
+                        "parameter": "00000000000000000000000010",
+                        "comparison": "greater_equal",
+                        "value": 0.5
+                      }
+                    ]
+                  }
+                }
+              },
+              "Script": {
+                "source": "00000000000000000000000001",
+                "props": {
+                  "first": true,
+                  "completed": false
+                }
+              }
+            }
+          }
+        },
+        {
+          "op": "create_entity",
+          "scene_id": "01M4Q7REKWEFTZHT2WEDB03QYQ",
+          "entity": {
+            "id": "00000000000000000000000004",
+            "name": "Paused source",
+            "parent": null,
+            "provenance": null,
+            "components": {
+              "Transform": {
+                "translation": [
+                  0,
+                  0,
+                  0
+                ],
+                "rotation": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ]
+              },
+              "MeshRenderer": {
+                "mesh": "01M4Q7REP27TH8KAR51SHQ3EG1",
+                "materials": [],
+                "cast_shadows": false
+              },
+              "Animation": {
+                "clip": 0,
+                "seconds": 0,
+                "speed": 1,
+                "playing": false,
+                "looping": true
+              },
+              "AnimationGraph": {
+                "initial": "00000000000000000000000020",
+                "parameters": {
+                  "00000000000000000000000010": {
+                    "initial": 0,
+                    "min": -1,
+                    "max": 2
+                  }
+                },
+                "states": {
+                  "00000000000000000000000020": {
+                    "motion": {
+                      "kind": "clip",
+                      "clip": 0
+                    },
+                    "looping": true
+                  },
+                  "00000000000000000000000021": {
+                    "motion": {
+                      "kind": "clip",
+                      "clip": 1
+                    },
+                    "looping": true
+                  },
+                  "00000000000000000000000022": {
+                    "motion": {
+                      "kind": "blend1d",
+                      "parameter": "00000000000000000000000010",
+                      "cycle_seconds": 2,
+                      "points": [
+                        {
+                          "threshold": 0,
+                          "clip": 0
+                        },
+                        {
+                          "threshold": 1,
+                          "clip": 1
+                        }
+                      ]
+                    },
+                    "looping": true
+                  }
+                },
+                "transitions": {
+                  "00000000000000000000000030": {
+                    "from": "00000000000000000000000020",
+                    "to": "00000000000000000000000021",
+                    "priority": 0,
+                    "fade_seconds": 0.5,
+                    "after_seconds": null,
+                    "conditions": [
+                      {
+                        "parameter": "00000000000000000000000010",
+                        "comparison": "greater_equal",
+                        "value": 0.5
+                      }
+                    ]
+                  },
+                  "00000000000000000000000031": {
+                    "from": "00000000000000000000000021",
+                    "to": "00000000000000000000000022",
+                    "priority": 0,
+                    "fade_seconds": 0,
+                    "after_seconds": 0.5,
+                    "conditions": [
+                      {
+                        "parameter": "00000000000000000000000010",
+                        "comparison": "greater_equal",
+                        "value": 0.5
+                      }
+                    ]
+                  }
+                }
+              },
+              "Script": {
+                "source": "00000000000000000000000001",
+                "props": {
+                  "first": false,
+                  "completed": false
+                }
+              }
+            }
+          }
+        },
+        {
+          "op": "create_entity",
+          "scene_id": "01M4Q7REKWEFTZHT2WEDB03QYQ",
+          "entity": {
+            "id": "00000000000000000000000005",
+            "name": "Paused source",
+            "parent": null,
+            "provenance": null,
+            "components": {
+              "Transform": {
+                "translation": [
+                  0,
+                  0,
+                  0
+                ],
+                "rotation": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ]
+              },
+              "MeshRenderer": {
+                "mesh": "01M4Q7REP27TH8KAR51SHQ3EG1",
+                "materials": [],
+                "cast_shadows": false
+              },
+              "Animation": {
+                "clip": 0,
+                "seconds": 0,
+                "speed": 16,
+                "playing": true,
+                "looping": false
+              },
+              "AnimationGraph": {
+                "initial": "00000000000000000000000020",
+                "parameters": {
+                  "00000000000000000000000010": {
+                    "initial": 0,
+                    "min": -1,
+                    "max": 2
+                  }
+                },
+                "states": {
+                  "00000000000000000000000020": {
+                    "motion": {
+                      "kind": "clip",
+                      "clip": 0
+                    },
+                    "looping": false
+                  },
+                  "00000000000000000000000021": {
+                    "motion": {
+                      "kind": "clip",
+                      "clip": 1
+                    },
+                    "looping": true
+                  },
+                  "00000000000000000000000022": {
+                    "motion": {
+                      "kind": "blend1d",
+                      "parameter": "00000000000000000000000010",
+                      "cycle_seconds": 2,
+                      "points": [
+                        {
+                          "threshold": 0,
+                          "clip": 0
+                        },
+                        {
+                          "threshold": 1,
+                          "clip": 1
+                        }
+                      ]
+                    },
+                    "looping": true
+                  }
+                },
+                "transitions": {
+                  "00000000000000000000000030": {
+                    "from": "00000000000000000000000020",
+                    "to": "00000000000000000000000021",
+                    "priority": 0,
+                    "fade_seconds": 0.5,
+                    "after_seconds": null,
+                    "conditions": [
+                      {
+                        "parameter": "00000000000000000000000010",
+                        "comparison": "greater_equal",
+                        "value": 0.5
+                      }
+                    ]
+                  },
+                  "00000000000000000000000031": {
+                    "from": "00000000000000000000000021",
+                    "to": "00000000000000000000000022",
+                    "priority": 0,
+                    "fade_seconds": 0,
+                    "after_seconds": 0.5,
+                    "conditions": [
+                      {
+                        "parameter": "00000000000000000000000010",
+                        "comparison": "greater_equal",
+                        "value": 0.5
+                      }
+                    ]
+                  }
+                }
+              },
+              "Script": {
+                "source": "00000000000000000000000001",
+                "props": {
+                  "first": false,
+                  "completed": true
+                }
+              }
+            }
+          }
+        },
+        {
+          "op": "create_entity",
+          "scene_id": "01M4Q7REKWEFTZHT2WEDB03QYQ",
+          "entity": {
+            "id": "00000000000000000000000003",
+            "name": "Stationary camera",
+            "parent": null,
+            "provenance": null,
+            "components": {
+              "Transform": {
+                "translation": [
+                  0,
+                  0,
+                  8
+                ],
+                "rotation": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ]
+              },
+              "Camera": {
+                "fov_degrees": 60,
+                "near": 0.1,
+                "far": 200,
+                "projection": {
+                  "kind": "perspective"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "method": "history.undo",
+    "params": null
+  },
+  {
+    "method": "project.read",
+    "params": null
+  },
+  {
+    "method": "history.redo",
+    "params": null
+  },
+  {
+    "method": "project.read",
+    "params": null
+  },
+  {
+    "method": "play.run",
+    "params": {
+      "seconds": 1.5,
+      "camera": "00000000000000000000000003",
+      "observe": {
+        "format": "incant-native-observation",
+        "version": 1,
+        "entities": [
+          "00000000000000000000000002",
+          "00000000000000000000000004",
+          "00000000000000000000000005"
+        ],
+        "checks": [
+          {
+            "name": "00000000000000000000000002-1",
+            "tick": 1,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000002",
+              "property": "translation",
+              "value": [
+                0,
+                0.016666666666666666,
+                1
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000004-1",
+            "tick": 1,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000004",
+              "property": "translation",
+              "value": [
+                0,
+                0.0,
+                1
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000005-1",
+            "tick": 1,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000005",
+              "property": "translation",
+              "value": [
+                0,
+                0.26666666666666666,
+                1
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000002-2",
+            "tick": 2,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000002",
+              "property": "translation",
+              "value": [
+                1.5,
+                0.0,
+                2
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000004-2",
+            "tick": 2,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000004",
+              "property": "translation",
+              "value": [
+                0.5,
+                0.0,
+                2
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000005-2",
+            "tick": 2,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000005",
+              "property": "translation",
+              "value": [
+                0,
+                0.5333333333333333,
+                2
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000002-3",
+            "tick": 3,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000002",
+              "property": "translation",
+              "value": [
+                1.5,
+                0.016666666666666666,
+                3.033333333333333
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000004-3",
+            "tick": 3,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000004",
+              "property": "translation",
+              "value": [
+                0.5,
+                0.0,
+                3
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000005-3",
+            "tick": 3,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000005",
+              "property": "translation",
+              "value": [
+                0,
+                0.8,
+                3
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000002-4",
+            "tick": 4,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000002",
+              "property": "translation",
+              "value": [
+                1.5,
+                0.03333333333333333,
+                4.066666666666666
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000004-4",
+            "tick": 4,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000004",
+              "property": "translation",
+              "value": [
+                1.5,
+                0.0,
+                4
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000005-4",
+            "tick": 4,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000005",
+              "property": "translation",
+              "value": [
+                0,
+                1.0666666666666667,
+                4
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000002-6",
+            "tick": 6,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000002",
+              "property": "translation",
+              "value": [
+                1.5,
+                0.06666666666666667,
+                6.133333333333334
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000004-6",
+            "tick": 6,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000004",
+              "property": "translation",
+              "value": [
+                1.5,
+                0.03333333333333333,
+                6.066666666666666
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000005-6",
+            "tick": 6,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000005",
+              "property": "translation",
+              "value": [
+                0,
+                1.6,
+                6
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000002-7",
+            "tick": 7,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000002",
+              "property": "translation",
+              "value": [
+                1.5,
+                0.06666666666666667,
+                7.133333333333334
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000004-7",
+            "tick": 7,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000004",
+              "property": "translation",
+              "value": [
+                1.5,
+                0.05,
+                7.1
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000005-7",
+            "tick": 7,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000005",
+              "property": "translation",
+              "value": [
+                0,
+                1.8666666666666667,
+                7
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000002-9",
+            "tick": 9,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000002",
+              "property": "translation",
+              "value": [
+                1.5,
+                0.06666666666666667,
+                9.133333333333333
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000004-9",
+            "tick": 9,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000004",
+              "property": "translation",
+              "value": [
+                1.5,
+                0.08333333333333333,
+                9.166666666666666
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000005-9",
+            "tick": 9,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000005",
+              "property": "translation",
+              "value": [
+                0,
+                2.0,
+                9
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000002-10",
+            "tick": 10,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000002",
+              "property": "translation",
+              "value": [
+                1.5,
+                0.08333333333333333,
+                10.166666666666666
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000004-10",
+            "tick": 10,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000004",
+              "property": "translation",
+              "value": [
+                1.5,
+                0.1,
+                10.2
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000005-10",
+            "tick": 10,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000005",
+              "property": "translation",
+              "value": [
+                0,
+                2.0,
+                10
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000002-34",
+            "tick": 34,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000002",
+              "property": "translation",
+              "value": [
+                1.5,
+                0.48333333333333334,
+                34.96666666666667
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000004-34",
+            "tick": 34,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000004",
+              "property": "translation",
+              "value": [
+                1.5,
+                0.5,
+                34
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000005-34",
+            "tick": 34,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000005",
+              "property": "translation",
+              "value": [
+                1.5,
+                0.35,
+                34.7
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000002-35",
+            "tick": 35,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000002",
+              "property": "translation",
+              "value": [
+                1.5,
+                0.5,
+                35
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000004-35",
+            "tick": 35,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000004",
+              "property": "translation",
+              "value": [
+                2.5,
+                0.0,
+                35.5
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000005-35",
+            "tick": 35,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000005",
+              "property": "translation",
+              "value": [
+                1.5,
+                0.36666666666666664,
+                35.733333333333334
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000002-36",
+            "tick": 36,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000002",
+              "property": "translation",
+              "value": [
+                2.5,
+                0.0,
+                36.5
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000004-36",
+            "tick": 36,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000004",
+              "property": "translation",
+              "value": [
+                2.5,
+                0.016666666666666666,
+                36.5
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000005-36",
+            "tick": 36,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000005",
+              "property": "translation",
+              "value": [
+                1.5,
+                0.38333333333333336,
+                36.766666666666666
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000002-40",
+            "tick": 40,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000002",
+              "property": "translation",
+              "value": [
+                2.5,
+                0.06666666666666667,
+                40.5
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000004-40",
+            "tick": 40,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000004",
+              "property": "translation",
+              "value": [
+                2.5,
+                0.08333333333333333,
+                40.5
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000005-40",
+            "tick": 40,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000005",
+              "property": "translation",
+              "value": [
+                1.5,
+                0.45,
+                40.9
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000002-41",
+            "tick": 41,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000002",
+              "property": "translation",
+              "value": [
+                2.25,
+                0.08333333333333333,
+                41.25
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000004-41",
+            "tick": 41,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000004",
+              "property": "translation",
+              "value": [
+                2.75,
+                0.1,
+                41.75
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000005-41",
+            "tick": 41,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000005",
+              "property": "translation",
+              "value": [
+                1.5,
+                0.4666666666666667,
+                41.93333333333333
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000002-46",
+            "tick": 46,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000002",
+              "property": "translation",
+              "value": [
+                2.25,
+                0.13333333333333333,
+                46.25
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000004-46",
+            "tick": 46,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000004",
+              "property": "translation",
+              "value": [
+                2.75,
+                0.2,
+                46.75
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000005-46",
+            "tick": 46,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000005",
+              "property": "translation",
+              "value": [
+                2.5,
+                0.03333333333333333,
+                46.5
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000002-51",
+            "tick": 51,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000002",
+              "property": "translation",
+              "value": [
+                2.25,
+                0.06666666666666667,
+                51.25
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000004-51",
+            "tick": 51,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000004",
+              "property": "translation",
+              "value": [
+                2.75,
+                0.36666666666666664,
+                51.75
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000005-51",
+            "tick": 51,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000005",
+              "property": "translation",
+              "value": [
+                2.25,
+                0.11666666666666667,
+                51.25
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000002-54",
+            "tick": 54,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000002",
+              "property": "translation",
+              "value": [
+                2.25,
+                0.05,
+                54.25
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000004-54",
+            "tick": 54,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000004",
+              "property": "translation",
+              "value": [
+                2.75,
+                0.4666666666666667,
+                54.75
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000005-54",
+            "tick": 54,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000005",
+              "property": "translation",
+              "value": [
+                2.25,
+                0.16666666666666666,
+                54.25
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000002-61",
+            "tick": 61,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000002",
+              "property": "translation",
+              "value": [
+                2.25,
+                1.9833333333333334,
+                61.25
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000004-61",
+            "tick": 61,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000004",
+              "property": "translation",
+              "value": [
+                2.75,
+                0.03333333333333333,
+                61.75
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000005-61",
+            "tick": 61,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000005",
+              "property": "translation",
+              "value": [
+                2.25,
+                0.016666666666666666,
+                61.25
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000002-71",
+            "tick": 71,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000002",
+              "property": "translation",
+              "value": [
+                1,
+                1.8166666666666667,
+                71
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000004-71",
+            "tick": 71,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000004",
+              "property": "translation",
+              "value": [
+                4,
+                0.36666666666666664,
+                71
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000005-71",
+            "tick": 71,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000005",
+              "property": "translation",
+              "value": [
+                2.75,
+                0.18333333333333332,
+                71.75
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000002-76",
+            "tick": 76,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000002",
+              "property": "translation",
+              "value": [
+                0,
+                1.9833333333333334,
+                76
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000004-76",
+            "tick": 76,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000004",
+              "property": "translation",
+              "value": [
+                0,
+                0.03333333333333333,
+                76
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000005-76",
+            "tick": 76,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000005",
+              "property": "translation",
+              "value": [
+                2.75,
+                0.26666666666666666,
+                76.75
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000002-90",
+            "tick": 90,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000002",
+              "property": "translation",
+              "value": [
+                0,
+                1.75,
+                90
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000004-90",
+            "tick": 90,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000004",
+              "property": "translation",
+              "value": [
+                0,
+                0.5,
+                90
+              ],
+              "tolerance": 1e-08
+            }
+          },
+          {
+            "name": "00000000000000000000000005-90",
+            "tick": 90,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000005",
+              "property": "translation",
+              "value": [
+                2.75,
+                0.5,
+                90.75
+              ],
+              "tolerance": 1e-08
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "method": "project.read",
+    "params": null
+  },
+  {
+    "method": "project.save",
+    "params": null
+  },
+  {
+    "method": "project.read",
+    "params": null
+  },
+  {
+    "method": "script.read",
+    "params": {
+      "script_id": "00000000000000000000000001"
+    }
+  }
+]

@@ -1,0 +1,2 @@
+2026-10-12T04:56:15Z created worktree-root node_modules -> ../../node_modules (identical package-lock sha256 cbea068b...); remove at cleanup
+2026-10-12T05:26:12Z other lane: git merge + cargo test -p incant_agent (ci) in /Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant; CPU only, not this worktree; left alone

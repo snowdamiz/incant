@@ -15,6 +15,14 @@ pub struct FocusToken {
     pub(crate) epoch: u64,
     pub(crate) widget: StableId,
 }
+impl PartialEq for FocusToken {
+    fn eq(&self, other: &Self) -> bool {
+        Arc::ptr_eq(&self.owner, &other.owner)
+            && self.epoch == other.epoch
+            && self.widget == other.widget
+    }
+}
+impl Eq for FocusToken {}
 impl FocusToken {
     pub fn widget(&self) -> StableId {
         self.widget
@@ -32,6 +40,15 @@ pub struct PointerToken {
     generation: u64,
     delivery_epoch: u64,
 }
+
+impl PartialEq for PointerToken {
+    fn eq(&self, other: &Self) -> bool {
+        Arc::ptr_eq(&self.owner, &other.owner)
+            && self.generation == other.generation
+            && self.delivery_epoch == other.delivery_epoch
+    }
+}
+impl Eq for PointerToken {}
 
 #[derive(Clone, Copy, Debug)]
 pub enum Direction {
@@ -53,6 +70,10 @@ pub enum UiEvent {
     Pointer {
         position: [f32; 2],
         pressed: bool,
+        target: PointerToken,
+    },
+    /// Cancel a platform capture without treating cancellation as a release hit.
+    CancelPointer {
         target: PointerToken,
     },
     WindowFocus(bool),
@@ -208,6 +229,26 @@ impl UiRuntime {
             delivery_epoch: self.state.delivery_epoch,
         })
     }
+    /// Focus eligible for native text delivery; buttons never receive text.
+    pub fn text_focus(&self) -> Option<FocusToken> {
+        let i = self.state.focus?;
+        (self.state.window_focused && self.state.buffers[i].is_some())
+            .then(|| self.focus().expect("checked focus"))
+    }
+    /// Topmost eligible widget, using the same clipped hit boxes and canonical
+    /// order as accepted pointer routing. This does not acquire focus/capture.
+    pub fn pointer_hit(&self, position: [f32; 2]) -> Option<StableId> {
+        if !self.state.window_focused || !position.iter().all(|v| v.is_finite()) {
+            return None;
+        }
+        let context = Context {
+            owner: &self.owner,
+            widgets: self.widgets(),
+            layout: self.layout()?,
+            pointer_current: true,
+        };
+        context.hit(position).map(|i| self.widgets()[i].id)
+    }
     pub fn widgets(&self) -> &[Widget] {
         self.layout.widgets()
     }
@@ -361,6 +402,26 @@ impl Context<'_> {
         self.widgets[i].node.kind.is_focusable()
             && !node.disabled
             && node.hit.size.iter().all(|v| *v > 0.0)
+    }
+    fn hit(&self, position: [f32; 2]) -> Option<usize> {
+        self.layout
+            .nodes
+            .iter()
+            .enumerate()
+            .rev()
+            .filter(|(_, node)| node.hit.contains(position))
+            .map(|(position, _)| self.layout.widget_index(position))
+            .find(|&i| self.eligible(i))
+    }
+    fn pointer_target(&self, state: &State, target: &PointerToken) -> Result<(), UiError> {
+        if !self.pointer_current
+            || !Arc::ptr_eq(self.owner, &target.owner)
+            || target.generation != self.layout.generation
+            || target.delivery_epoch != state.delivery_epoch
+        {
+            return Err(UiError::Stale);
+        }
+        Ok(())
     }
     fn focus(&self, state: &mut State, next: Option<usize>) -> Result<(), UiError> {
         if next.is_some_and(|i| !state.window_focused || !self.eligible(i)) {
@@ -530,25 +591,11 @@ impl Context<'_> {
                 pressed,
                 target,
             } => {
-                if !self.pointer_current
-                    || !Arc::ptr_eq(self.owner, &target.owner)
-                    || target.generation != self.layout.generation
-                    || target.delivery_epoch != state.delivery_epoch
-                {
-                    return Err(UiError::Stale);
-                }
+                self.pointer_target(state, target)?;
                 if !state.window_focused {
                     return Ok(());
                 }
-                let hit = self
-                    .layout
-                    .nodes
-                    .iter()
-                    .enumerate()
-                    .rev()
-                    .filter(|(_, n)| n.hit.contains(*position))
-                    .map(|(position, _)| self.layout.widget_index(position))
-                    .find(|&i| self.eligible(i));
+                let hit = self.hit(*position);
                 if *pressed {
                     self.focus(state, hit)?;
                     state.pointer = hit;
@@ -558,6 +605,10 @@ impl Context<'_> {
                 {
                     self.activate(state, actions)?;
                 }
+            }
+            UiEvent::CancelPointer { target } => {
+                self.pointer_target(state, target)?;
+                state.pointer = None;
             }
             _ => {
                 let target = match event {

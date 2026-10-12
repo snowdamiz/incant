@@ -66,3 +66,15 @@ parameters, pause/resume, state selection, both blend endpoints and captured pos
 values. Failure guests cover ignored buffer/value errors, authored range/key/entity
 errors, command quotas, callback failure and traps, preserving the complete world
 and withholding logs. Prior v1/v2 WAT controls and transition suites remain active.
+
+## Actual main132 integration
+
+The accepted source was cherry-picked without implementation conflicts; all 31
+reviewed source hashes remain exact. The private union passes 355 actual
+Wasmtime/wasm2c tests across 61 groups, all-target Clippy, three fresh development
+processes, supported wasm32, normal dependency guards and tooling/generators. All
+109 prepared modules and 546 files were rehashed before their private bundle was
+removed. The later merge of actual main132 changes ancestry only and preserves
+the tested tree. [Integrated receipt](evidence/native-animation-graph-sdk-main132.json)
+retains the complete compiled-input freeze, checks and logs. This is CPU host
+conformance, not a new ordinary copied-player graph-Wasm export or device result.

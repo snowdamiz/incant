@@ -1,0 +1,132 @@
+{
+  "at": "2026-10-12T05:21:19.810415+00:00",
+  "accepted_source": "52bb80154ab91edfe49214b02221247f371ed717",
+  "tested_source": "84185efa8596bb11bc647bb8d6636e78fd5d7444",
+  "integrated_actual_main": "65212b74130dcf70a0a0822b4a8363c59c1b700a",
+  "ancestry_merge": "a236379a8b546b9158ab295400baa69cb8aca8ad",
+  "tested_tree": "1547b12c8bbd643d23d155f4e5cb569eba873412",
+  "same_tree_after_ancestry_merge": true,
+  "source_hashes": {
+    "crates/incant_wasm_abi/src/lib.rs": "242cc8f3bb2eed6900949ca0e144259cf1b983d239cad7361bff0d62d5f4813b",
+    "crates/incant_wasm_dev/src/generated.rs": "2ba64784f8e86476fc2d05a98b979e665b073ecde3a4fe85f07f2bdb4b83b503",
+    "crates/incant_wasm_dev/tests/animation_graph_parity.rs": "c016203cf918e8fb4729c62efc4dcd009ba2532758c699f5d68b6c1efd3fb483",
+    "crates/incant_wasm_dev/tests/animation_parity.rs": "7d2af6cc4aa5ecb0ad37e42b0e2e73239ee8754f066514f724bb37d370469403",
+    "crates/incant_wasm_dev/tests/crossfade_parity.rs": "7ca9710bad0cfa8658cca39805a79434ad525dd838d9e2bd7c2c499614650a20",
+    "crates/incant_wasm_runtime/c/generated.h": "bcef09bd00685ea13e0c14faff3777e126c63c199fc192ee1a3b9e4e2c56da40",
+    "crates/incant_wasm_runtime/c/generated.inc": "92c4d05aa774f8232d42f33e348c8b8676baad6924085af4a64f014bffdada73",
+    "crates/incant_wasm_runtime/src/animation_graphs.rs": "ab9fd018930258640d65ae3551d2078386bd7077871ceaab1b3f9b79df7e1462",
+    "crates/incant_wasm_runtime/src/animations.rs": "42b45667ca93a8db21486dee0530934263015ccf2f6e824e173e6e29b2bbeb2f",
+    "crates/incant_wasm_runtime/src/capability.rs": "f6102de664658344c1aa488764281685a1d494a657531abee82e9c4aafb99155",
+    "crates/incant_wasm_runtime/src/generated.rs": "a7a25803b6284f63a05af37060c7f64957f9c24959f8238b37288c231eaca856",
+    "crates/incant_wasm_runtime/src/input_tags.rs": "ceb6b13a8a5c607c336473f1554aecea9fbb4cc2a03c18df80b91f8e43ee23f3",
+    "crates/incant_wasm_runtime/src/lib.rs": "2493d669150f3760020b5f3beebaf0dc0f017f38c9cda8c54561a2ebe5b3c20b",
+    "crates/incant_wasm_runtime/tests/animations.rs": "8a4cb4c1da9302f55ddff3e3d110ff5b9e3953d59d642db67eb471905276ff88",
+    "crates/incant_wasm_runtime/tests/animations/graph.rs": "1e78bf26597a50550d35f0c49fab2724bbeec28e4dc24d638be082f9ab38782b",
+    "crates/incant_wasm_runtime/tests/animations/graph_sdk.rs": "86e61ea93c10d69f3901a81a97406937646ce31f2b0e1a9713231f75dc81b639",
+    "sdk/abi/native-v1.json": "84b2458a8d00a4a1c73e899cd10f46bfd8792e9756f9fc37c216fa2893789d79",
+    "sdk/rust/README.md": "42a8848d0758696213d5549e07b8254765a9cc2b19be8183bfda82d7bf9664df",
+    "sdk/rust/fixtures/animation_graph_failure.rs": "1fe6e2ba1fa82970aaec888fdeea2a4dadf79e32a679a6f00a6292d500e84cf6",
+    "sdk/rust/samples/animation_graph.rs": "631c6cbdaf65a190809dde0a87c86be8c18354dd666caa8e79c70e50abf2842a",
+    "sdk/rust/src/animation.rs": "7227268d705c8f4c54e8cf9cf533ef23b6346e9d1ce7be26da8c2aed94302b0d",
+    "sdk/rust/src/animation_graph.rs": "b2a742fcd9730f744fd378dbd38b8e2bab46d546dfb3c49daa5411bf7ed8c7f0",
+    "sdk/rust/src/lib.rs": "183744864db569cd54d4a0a114a27f588b7eb03daa8e92e0931b1b8aef3ae47d",
+    "sdk/rust/src/raw.rs": "40e3a189e0f7a870e95b44b8bb7c09777bd3294b895b674e56f9124bcd26ed7c",
+    "sdk/rust/src/tick.rs": "67be99402dfd85c40db60a482a53d188e6744c4c839c8b663bda718d196acd36",
+    "sdk/rust/tests/animation_graph.rs": "37dda8eb71c73a3ffb63c8f15d9fd2996715cdcbec4f7e85653004a06ddca7c6",
+    "sdk/rust/tests/animation_v3.rs": "aa316761a257b7146d1cc5ef3d86da7ef5536eef4c6e296064ff24c9c1772e56",
+    "tools/generate_wasm_sdk.py": "82f79e6422a1b6e0e5943ff30722f355565ccf9a7aec26f721605c0e5f6a5d7f",
+    "tools/probes/shipping-wasm2c.py": "4c810d8a9fc6ed8b4948fe01f24abf1688394dd41f6fe680fbc4c50e167e069d",
+    "tools/tests/test_wasm_sdk.py": "3a611c5b9c5452984c1940f6df3ce40879b0dc02cd101d5ddbdecd3f3689766d",
+    "tools/wasm_abi.py": "1c02ca646444f847ecf2be4149edf5e2720b096ad79acb5f852287ac48a11d72"
+  },
+  "frozen_inputs_count": 1328,
+  "source_review": "Original independently accepted31 source bytes preserved exactly; cherry-pick had no production conflicts; actual main132 merge changed ancestry only. Copied buffers, authorization poisoning, bounded snapshots, v1/v2 refusal and native atomic commit boundaries remain intact.",
+  "checks": {
+    "actual_host_tests": 355,
+    "groups": 61,
+    "failed": 0,
+    "ignored": 0,
+    "all_target_clippy": true,
+    "development_processes": 3,
+    "wasm32": true,
+    "normal_dependency_graph": true,
+    "tooling": true,
+    "generators_fmt_conventions": true
+  },
+  "prepared": {
+    "source": "84185efa8596bb11bc647bb8d6636e78fd5d7444",
+    "modules": 109,
+    "files": 546,
+    "manifest_sha256": "0744e7c0792586d329239fe24dea3f08fa0bfecf0cfbb93149a82569051d8efc",
+    "all_file_hashes_verified": true
+  },
+  "logs": {
+    "docs/spikes/evidence/native-animation-graph-sdk-main132/check-actual-hosts.log.gz": {
+      "sha256": "1da3ae640d1d5b56e48252081c725236b9535bafb8259d62cba4a2f1bb27d33a",
+      "uncompressed_sha256": "574af3621e3ea33f4f833844525fcf843cf3d6fd0f8b4c4cda3bea2cebb4805b"
+    },
+    "docs/spikes/evidence/native-animation-graph-sdk-main132/check-bridge.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/native-animation-graph-sdk-main132/check-conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/native-animation-graph-sdk-main132/check-fmt.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/native-animation-graph-sdk-main132/check-graph.log.gz": {
+      "sha256": "503455af41ca0d5dfffeaf562a8aa9926073249af244e6bcc6bf70ef5b1eb637",
+      "uncompressed_sha256": "986b5bfb2fea4628f08f6696ec606cf033fffdedb1d20c81218c0bcd9503244b"
+    },
+    "docs/spikes/evidence/native-animation-graph-sdk-main132/check-sdk.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/native-animation-graph-sdk-main132/check-tools.log.gz": {
+      "sha256": "201f31dcaf12d248f2db50ac7fffa58abaed2dd137eff8074924a2a555426e4f",
+      "uncompressed_sha256": "24306c8f6bdbc6fab13d317cc70148b50229703b67c9fb627f9d0b2f656f821a"
+    },
+    "docs/spikes/evidence/native-animation-graph-sdk-main132/check-wasm-sdk.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/native-animation-graph-sdk-main132/check-wasm32.log.gz": {
+      "sha256": "2618a5468b53fa4f783a6058307cdd3c7dcef32cc4c6080d4a6b67b8e9191221",
+      "uncompressed_sha256": "69471615ff2348ec8fe869e8ad8e7ff5e16b960cfe80d7d6170fb97f11ba8ec8"
+    },
+    "docs/spikes/evidence/native-animation-graph-sdk-main132/host-conformance-0.log.gz": {
+      "sha256": "53b94c1b592a2ff34eaf9aabca6c5c132e2d075a308affb26439f0c211f0bd38",
+      "uncompressed_sha256": "d536be9a4664548f9eb20b389e1769c29d1c2beb9b475be34463d36de3057031"
+    },
+    "docs/spikes/evidence/native-animation-graph-sdk-main132/host-conformance-1.log.gz": {
+      "sha256": "92a1de55412525f3646888a6b3e970eebc5300ffbbbc09ab5ad865e4c5c44054",
+      "uncompressed_sha256": "d16d66de525e17e54d4df3f591ec2a6b12e4d75529a34ad81a6e84ccae6415e5"
+    },
+    "docs/spikes/evidence/native-animation-graph-sdk-main132/host-conformance-2.log.gz": {
+      "sha256": "b230c476c10c1a02f64455096904915e1643e4557cba07332635346dc71460e0",
+      "uncompressed_sha256": "7910836a9f583fe7028c6305ff5518d97a3a7436e7f36dea4f4449b8567fb1d5"
+    },
+    "docs/spikes/evidence/native-animation-graph-sdk-main132/host-cook-build.log.gz": {
+      "sha256": "bbf16f36ad598aba6a86d89ca79704f7869807b428f15996dc4d98b243fe9e15",
+      "uncompressed_sha256": "453d37d533d0b7e1a2201007a6bc7c6085ba39a9bf08479a678fe2ae5d63e09d"
+    }
+  },
+  "receipts": {
+    "docs/spikes/evidence/native-animation-graph-sdk-main132/freeze.json": "bed1de5052e74f9a84104f576938bab2447d81025821e35d2784cbb45d210606",
+    "docs/spikes/evidence/native-animation-graph-sdk-main132/checks.json": "3f6a88a3b65c42258747edf68ef56788dd770ffe149e0b11b7b429f466cb1c0f",
+    "docs/spikes/evidence/native-animation-graph-sdk-main132/prepared-verification.json": "9e2cdd69c76a1e1b1a489a68078dfe204a97ef9a0c935dd36559368efe7ca5c0",
+    "docs/spikes/evidence/native-animation-graph-sdk-main132/prepared-manifest.json": "0744e7c0792586d329239fe24dea3f08fa0bfecf0cfbb93149a82569051d8efc",
+    "docs/spikes/evidence/native-animation-graph-sdk-main132/rust-sdk.json": "a0a0181e9749c71f2104a4528e838d14aca758fcf4fb01c562971b3cf5a29281",
+    "docs/spikes/evidence/native-animation-graph-sdk-main132/development-result.json": "7910836a9f583fe7028c6305ff5518d97a3a7436e7f36dea4f4449b8567fb1d5"
+  },
+  "limitations": [
+    "Actual host conformance on aarch64 macOS ci profile, no device or shipping performance gate",
+    "No ordinary copied-player graph-Wasm export proof in this slice; native graph export and authored Wasm export have separate receipts",
+    "Full guest checkpoints and routed UI ABI remain unsupported",
+    "No full animation, SDK or phase-gate acceptance"
+  ],
+  "processes": "Runner57517 terminal0 and reaped; no owned compiler/test/probe children remain."
+}

@@ -1,0 +1,48 @@
+{
+  "head": "2b5ebcd9e3443813226f19943f89e572fe436ef8",
+  "sources": {
+    "crates/incant_ui/src/focus.rs": "ba7bdbee17b957eeba6e18aa80c2d4002ce0e84f05c427052ed893ebfdb55523",
+    "crates/incant_game_player/src/window/input.rs": "981d9a43f00540b02cc6805a1b0a717db17154eab1a735f38579429ca8e05803",
+    "crates/incant_game_player/src/window/mod.rs": "a119d60a5f5e8d4f5a1de9caac31f4fe8590af3f5f42455585f8b7db45052b18",
+    "crates/incant_game_player/src/window/ui_input.rs": "4e3351319edcb18340700fe590f83db1ed133afe1fa4d5d047fe10242d49bac4",
+    "crates/incant_game_player/src/window/ui_input/tests.rs": "096750a4c7d2b0f6198015716bb83e8e83c2b45d594441c1b73a2f05e6bc9a61"
+  },
+  "scope": "CPU native window pointer/committed-text receipt adapter; managed OS preedit bridge and actual consumer integration remain pending",
+  "checks": {
+    "tests_passed": 72,
+    "test_groups": 9,
+    "failed": 0,
+    "ignored": 0,
+    "all_target_clippy": "passed after unchanged helper moved above test module",
+    "native_gpu_executed": false,
+    "new_adapter_cases": 12
+  },
+  "logs": {
+    "/tmp/incant-native-ui-window-tests-001.log": "7a7f9017e3341d9d8c0cbc4373a43a8f4f49470195133c44edcaf329747c7379",
+    "/tmp/incant-native-ui-window-tests-002.log": "9137059812e75c7aadc6e082e96615714c42a0c2ddda63345c1aa86201f40952",
+    "/tmp/incant-native-ui-window-clippy-001.log": "72a1848c5dfd81e710609d75437f4042acf87068d6ad15489d04bfeb5cd117f6",
+    "/tmp/incant-native-ui-window-clippy-002.log": "8abbe5ea19cac56ddd6513901a2f88ecb66ce0bdbfe0fcc33041d46495ed9ed9",
+    "/tmp/incant-native-ui-window-graph-001.log": "80996582341caf51824c0862d84343565204789381ee6e73a38f4d67d52bf1ba",
+    "/tmp/incant-native-ui-window-fmt-002.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/tmp/incant-native-ui-window-conventions-001.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/tmp/incant-native-ui-window-tests-003.log": "905dceff6b3d1750ba68ffefcf07fa23db223f41e36461548873a27a7a4c2907",
+    "/tmp/incant-native-ui-window-tests-004.log": "517733d3c5a2ad57caceb5d404f710571d1eec3fc781d0ba92f3efcf94d8e1b7",
+    "/tmp/incant-native-ui-window-tests-005.log": "04cbff4c839f17eff2c099ffb1e1701c01e2f9ccae1295bd35bdabcdb6ee28d1",
+    "/tmp/incant-native-ui-window-clippy-003.log": "995c798fd5e22034f20015533fa608afe392534a41350540c8f92658a1632c92",
+    "/tmp/incant-native-ui-window-clippy-004.log": "b6d2eda3d6bd01eef2f91e2a389d6e12ed6a794423c7e0101869a811f5c919af",
+    "/tmp/incant-native-ui-window-clippy-005.log": "55d8abebe1489fc5e21609f510c579c794e785682ddaf430c484e6912df15434",
+    "/tmp/incant-native-ui-window-fmt-005.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/tmp/incant-native-ui-window-tests-006.log": "91bad10c4527e923495cf9e26653947e6319acdf4fbacb67d17da0fb2f5c006f",
+    "/tmp/incant-native-ui-window-clippy-006.log": "f0474aaf975b37f06fe294a8f429b76ff80ae8b4404cc09474437f27f3d438aa"
+  },
+  "limitations": [
+    "No managed native preedit/IME activation yet; pinned Tao exposes commits only.",
+    "Native GPU consumer remains an explicit pre-window refusal until Claude0056 provides real rendering.",
+    "No native OS, appearance, mobile, device or performance acceptance claimed."
+  ],
+  "review_corrections": [
+    "Reserve/consume resize presentation before exposing new hit-test layout; fence pointer delivery and unknown cursor presses.",
+    "Preserve delivered text/focus across temporary surface retry; actual OS blur/suspend/minimize remains a neutral transition.",
+    "Use the same surface-wait admission for gamepad releases, with actual adapter/runtime held-button regression."
+  ]
+}
