@@ -1,0 +1,5 @@
+{
+  "command": "python3 tools/generate_wasm_sdk.py --check; python3 tools/check_dependency_graph.py",
+  "exit_code": 2,
+  "detail": "Generation check passed; dependency guard filename did not exist. Correct guard is tools/check_runtime_dependencies.py; this discovery failure is not a runtime/source defect."
+}

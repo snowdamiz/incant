@@ -50,6 +50,9 @@ def generate(data, digest):
     if 'incant_physics_v1' in data['namespaces']:
         shared.append('pub mod physics;\n')
     shared.append('pub mod hud;\n')
+    if 'incant_audio_v1' in data['namespaces']:
+        shared.append('pub mod audio;\n')
+        shared += ['pub const AUDIO_MAX_BYTES: usize = AudioHeader::SIZE + AUDIO_MAX_NODES * AudioRow::SIZE;\n', 'pub const AUDIO_MAX_COMMAND_BYTES: usize = AudioCommandHeader::SIZE + AUDIO_MAX_COMMANDS * AudioCommand::SIZE;\n']
     shared += [f'pub const {name}: usize = {value};\n' for name,value in data['constants'].items()]
     shared += [f'pub const {name}: &[u8; 8] = b"{value}";\n' for name,value in data['magic'].items()]
     shared += ['pub const HUD_MAX_BYTES: usize = HudHeader::SIZE + HUD_MAX_WIDGETS * HudWidget::SIZE + HUD_MAX_TEXTS * HudText::SIZE + HUD_MAX_EVENTS * HudEvent::SIZE + HUD_MAX_DECLARATION_BYTES + HUD_MAX_EVENT_BYTES;\n']

@@ -16,6 +16,16 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Rust/Wasm audio transport — current-main execution verified
+
+The accepted ops59–61 pass 483 actual-host cases and all 12 integration checks.
+A fresh ordinary exported player runs three source/map/build-deleted 96-tick cases
+with 17,856 declaration scalars and 248 observations each, exact native-oracle PCM,
+and thirteen precise no-output refusals. All accepted source inputs remain exact;
+independent integration review is accepted and exact-head fast CI remains required. Desired state
+snapshots do not expose mixer cursors; whole guest saves and device gates stay open.
+[Current integration evidence](docs/spikes/native-wasm-audio-main166.md).
+
 ## Release checkpoint 14 — promoted main160 baseline
 
 All 23 required contexts and eight exact-candidate push workflows passed.
@@ -1591,3 +1601,17 @@ reviewed source hashes and passes 166 CPU tests plus Clippy/graph checks; 71 GPU
 tests remain ignored. [Receipt](docs/spikes/evidence/runtime-pose-blending-main120.json).
 
 - Native Rust/Wasm HUD: additive ops56–58 preserve ops0–55/input-v1. 365 ordinary tests, three actual Wasmtime/wasm2c tests, all-target Clippy and scoped generation/wasm/runtime guards pass. Public source/cache/build/map-deleted package passes three fresh shaped-HUD/movement/PCM runs and six exact refusals; source and final evidence reviews accepted, publisher intake pending. Module checkpoints, headless native-play UI routing and native/GPU/device gates remain open. See `docs/spikes/native-wasm-hud.md`.
+
+- **Native Rust/Wasm audio transport (private execution checkpoint).** Additive
+  ops59–61 preserve all previous imports and expose copied desired declarations,
+  exact u64 transport epochs and atomic ordered controls. Independent source
+  review, ten focused tests, 483 actual-host tests in 87 groups, all-target
+  Clippy and three fresh development processes pass. Full 96-tick declarations
+  and real mixed PCM match the typed native oracle. Independent final host review
+  accepts the retained evidence. The public import/select/Undo/Redo/reopen and
+  captured-only development route passes; three fresh ordinary wasm2c players
+  match every declaration field and exact PCM after private source/cache/build/map
+  deletion, with 13 exact refusals. Independent final package review accepts the
+  retained evidence; publisher integration remains pending. No actual-cursor,
+  arbitrary guest checkpoint, physical-device or phase-gate claim. See
+  [contract and evidence](docs/spikes/native-wasm-audio.md).
