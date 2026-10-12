@@ -2,7 +2,7 @@
   "at": "2026-10-12T19:57:09.511694+00:00",
   "scope": "Copied desired native audio declarations and atomic transport through ops59-61; unchanged prior0-58 ABI. Actual Wasmtime/wasm2c and native mixed-PCM parity. Ordinary public shipping proof remains separate and pending.",
   "source_review": "accepted; retained source and follow-up receipts",
-  "final_evidence_review": "pending independent review",
+  "final_evidence_review": "accepted by independent root review; ordinary public shipping remains separate",
   "production": {
     "Cargo.lock": "3c84e2c5c2a4eab893cefc52ccf2e41e7a63ef8107d154b22e1b4bb279e2345d",
     "crates/incant_cook/Cargo.toml": "efd226d73ae8d3f4f6dc4824cd55bb3bd4ff8510612df5868b93fa8b8b3815ed",
@@ -820,6 +820,13 @@
       "original": "/Users/andreyyurlov/.codex/incant-reviews/native-wasm-audio-followup-and-probe-20261012.json",
       "raw_sha256": "0bf08e8b953eb9a2da39983ff39165967bd723c8f564d87b5f9bff4141373fe7",
       "raw_bytes": 2055
+    },
+    {
+      "path": "docs/spikes/evidence/native-wasm-audio/final-review.json",
+      "sha256": "51263165e8b12a3331dcd2415e11dcf40fc3e1706e3ced9252c6e2ae5923da69",
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/native-wasm-audio-host-final-20261012.json",
+      "raw_sha256": "51263165e8b12a3331dcd2415e11dcf40fc3e1706e3ced9252c6e2ae5923da69",
+      "raw_bytes": 2109
     }
   ],
   "limits": [

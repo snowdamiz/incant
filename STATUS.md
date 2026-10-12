@@ -1591,7 +1591,11 @@ tests remain ignored. [Receipt](docs/spikes/evidence/runtime-pose-blending-main1
   exact u64 transport epochs and atomic ordered controls. Independent source
   review, ten focused tests, 483 actual-host tests in 87 groups, all-target
   Clippy and three fresh development processes pass. Full 96-tick declarations
-  and real mixed PCM match the typed native oracle. Final evidence review and
-  ordinary public source-deleted shipping proof remain pending; no actual-cursor,
+  and real mixed PCM match the typed native oracle. Independent final host review
+  accepts the retained evidence. The public import/select/Undo/Redo/reopen and
+  captured-only development route passes; three fresh ordinary wasm2c players
+  match every declaration field and exact PCM after private source/cache/build/map
+  deletion, with 13 exact refusals. Independent final package review is pending.
+  No actual-cursor,
   arbitrary guest checkpoint, physical-device or phase-gate claim. See
   [contract and evidence](docs/spikes/native-wasm-audio.md).

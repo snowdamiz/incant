@@ -53,8 +53,10 @@ stale epochs and caught errors with complete numeric/structural/log rollback.
 The positive raw controls preserve epochs above 2^53, including 1024 ordered
 restarts. The [durable host packet](evidence/native-wasm-audio.json) preserves
 earlier test-only failures and qualifies the removed prepared inputs separately
-from the 405 retained compiled artifacts and 17 guest sources. Final independent
-execution review and the ordinary public source-free package proof are pending.
+from the 405 retained compiled artifacts and 17 guest sources. The
+[independent final host review](evidence/native-wasm-audio/final-review.json)
+accepts this evidence. The ordinary public source-free package proof also passes;
+its separate independent final review is pending.
 
 The public authoring/development preflight also passes: real WAV and Rust module
 imports, atomic scene selection, Undo/Redo and journal reopen, then deletion of
@@ -63,7 +65,9 @@ matches all 17,856 declaration scalars, 248 bounded vector checks and exact nati
 PCM over 96 ticks. Six specific refusal diagnostics produce no public output.
 The separate native oracle and headless runner build, oracle Clippy, SDK wasm32,
 formatting and diff checks pass; [supplemental receipts](evidence/native-wasm-audio-build.json)
-bind those inputs. The fresh ordinary shipping export is the remaining route.
+bind those inputs. Three fresh ordinary shipping processes now match the same
+full records and PCM after private source/cache/build/map deletion, with all
+13 exact refusals passing. See the [public package proof](native-wasm-audio-package.md).
 
 Arbitrary guest checkpoints remain explicitly unsupported. This is local CPU
 work; it provides no rendered approval, physical audio-device or hosted-phone
