@@ -116,6 +116,18 @@ This is a numerical fixture, not the finished authored level or device gate.
 Headless recorded UI routing and physics save support remain separate open work.
 [Contract and retained evidence](docs/spikes/core-presentation-bindings.md).
 
+## Native physics saves — checked persistent boundary still open
+
+A bounded Rapier 0.36 diagnostic preserves trusted typed 2D/3D solver state and
+subsequent overlap events across eight cases / 960 continuation ticks. Rebuilding
+only current poses, velocities and sleep state diverges at nonzero checkpoints,
+including changed trigger events. Production `PhysicsUnsupported` remains intact;
+no untrusted solver graph decoder or world-v12 section has been adopted. The
+source audit identifies the private graph families a checked format must cover
+and the storage/load limits of deterministic replay. Independent source/evidence
+review accepted this bounded diagnostic; full physics saves remain open.
+[Diagnostic, source barrier and next options](docs/spikes/native-physics-snapshot-boundary.md).
+
 ## Native audio transport — merged main163
 
 541 affected CPU cases, Clippy and target/contracts checks pass. A fresh ordinary

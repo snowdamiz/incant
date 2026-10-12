@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-12T20:27:41.819981+00:00",
+  "verdict": "accepted bounded feasibility evidence",
+  "reviewer": "astra root",
+  "manifest_sha256": "6efc4bc20476bd1aa22931048316ac286f8fe4c3d1baf4b34f7df33ced778a0e",
+  "inventory_sha256": "5ee702a6d5a360df70899596c57ee42dd79e178f899b5856d56fd8d03c92e474",
+  "inventory_files_rehashed": 29,
+  "retained_raw_and_original_artifacts": 21,
+  "unchanged_production_files": 14,
+  "cases": 8,
+  "trusted_clone_continuation_ticks": 960,
+  "source_review": "Reviewed shared 2D/3D fixture, trusted full typed clones into fresh pipelines, exact bytes/handles/visible state/events every tick, lossy public builder comparison and retained explicit guard. No untrusted deserialization or production load path introduced.",
+  "limitations": [
+    "Trusted live-state cloning only; serde-skipped caches may be retained by Clone.",
+    "No untrusted data decoded or malformed solver stepped.",
+    "No NativeWorld, packaged save/load, new process restoration, GPU, device or performance gate.",
+    "Tile-box compound shape fixture is not a tilemap cook integration test.",
+    "No production source, dependency, PhysicsUnsupported guard or version framing changed.",
+    "The pinned upstream snapshot_roundtrip source was read, not executed.",
+    "Existing parallel dependency soundness obligations are not closed by this diagnostic."
+  ],
+  "decision": "Use this as evidence against silent pose-only exact restore. Complete checked persistent solver decoder and bounded replay remain unimplemented alternatives, not adopted APIs."
+}
