@@ -775,5 +775,5 @@ and reject mixed numeric/entity/animation/log prefixes on failure. The combined
 281-test suite, scoped Clippy, default wasm32 compile, generated contracts and
 20 tooling tests pass; independent boundary review accepted the frozen code.
 [Evidence and limits](docs/spikes/native-wasm-animation.md). Publication/integration
-against the next actual-main animation union is still pending. This does not add
+against actual main117 now repeats all 281 actual-host tests and affected checks. This does not add
 blending/state machines/IK/root motion or satisfy device/complete SDK/Phase1 gates.

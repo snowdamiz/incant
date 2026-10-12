@@ -102,3 +102,20 @@ Animation blending, state machines, IK, root motion, complete gameplay SDK,
 arbitrary-source build sandboxing, reference-phone performance and Phase 1
 completion remain separate work. This slice requires no rendered appearance
 change or new screenshot. Native rendering acceptance remains with Claude.
+
+## Actual main117 integration
+
+Frozen `ca82e3f` preserves the accepted original `619e850` ancestry on main116.
+The actual combined Wasmtime/static suite again passes 281 tests in 48 groups,
+zero ignored or failed, plus all-target Clippy and three fresh development bulk
+processes. Default wasm32 compilation, 18 relevant tooling tests, generated SDK equality,
+normal runtime dependency checks, formatting and conventions pass. A follow-on
+compile invocation initially named a nonexistent SDK package; correcting the
+command to `incant-module` passes without changing source or repeating conformance.
+
+Main117 then merges with only additive STATUS resolution. Every tested runtime,
+script, SDK, helper and Cargo input remains identical; the Console changes affect
+only editor/bridge code and documentation. All 27 accepted implementation hashes
+are preserved. [Integrated logs and process receipts](evidence/native-wasm-animation-main117.json)
+record exact source boundaries. No new graphics, native-window, shipping-animation
+export, browser or device acceptance is claimed by this CPU SDK integration.
