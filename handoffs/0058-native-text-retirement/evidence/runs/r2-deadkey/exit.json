@@ -1,0 +1,44 @@
+{
+  "run": "r2-deadkey",
+  "pid": 30776,
+  "exit_status": 0,
+  "signal": null,
+  "ended_at": "2026-10-12T16:33:11Z",
+  "native_report_printed": true,
+  "report": {
+    "accepted_frames": 770,
+    "adapter": "Apple M5 Pro",
+    "backend": "Metal",
+    "discarded_stale_text_events": 0,
+    "dropped_wall_ticks": "0",
+    "lifecycle_probe": null,
+    "mode": "native-window",
+    "on_screen": true,
+    "presentation_refreshes": 0,
+    "surface_reconfigurations": 1,
+    "surface_recreations": 0,
+    "surface_skipped": 1,
+    "tick": 770,
+    "ui": {
+      "focus": "0000000000000000000000582B",
+      "glyph_quads": 100,
+      "gpu_bytes": 21418,
+      "quads": 162,
+      "relayouts": 0,
+      "scale_factor": 1.0,
+      "uploads": {
+        "atlas_bytes": 172193,
+        "atlas_textures": 16,
+        "frame_writes": 1,
+        "quad_buffers": 29,
+        "quad_bytes": 290432
+      },
+      "viewport": [
+        640.0,
+        480.0
+      ],
+      "widgets": 12
+    }
+  },
+  "new_crash_reports": []
+}

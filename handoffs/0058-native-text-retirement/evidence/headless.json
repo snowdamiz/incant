@@ -1,0 +1,28 @@
+{
+  "format": "incant-0058-headless",
+  "source_head": "b583c82c78216ad81a548fe5a6bcbe21be4810fb",
+  "source_tree": "549885bf9a2e4898a1d9dca2ae613ed7d27c26e4",
+  "worktree_clean_outside_handoff": true,
+  "cargo_lock_sha256": "ac059d1a2493d570bd202515e729830c56ecc7758cd808ccd0f245d06abcac7f",
+  "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)",
+  "cargo": "cargo 1.99.0 (5f94df478 2026-08-27)",
+  "command": [
+    "/Users/andreyyurlov/.codex/worktrees/cooked-native-scripts/incant/.worktrees/0058-native-text-retirement/tools/cargo",
+    "build",
+    "--locked",
+    "--offline",
+    "-j2",
+    "-p",
+    "incant_headless",
+    "--bin",
+    "incant_headless",
+    "--profile",
+    "ci",
+    "--message-format=json"
+  ],
+  "profile": "ci (inherits release, opt-level 1)",
+  "cargo_target_dir": "/Users/andreyyurlov/.codex/incant-native-target",
+  "built_executable": "/Users/andreyyurlov/.codex/incant-native-target/ci/incant_headless",
+  "sha256": "043e1aa8134ae5c5c52e91a67af6da9d8dcb204c3e6d2b26891d60e97645e06b",
+  "bytes": 59215568
+}
