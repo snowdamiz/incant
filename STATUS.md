@@ -16,13 +16,26 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+
+## UI fixed-point blend reference — main154 integration verified
+
+The independent reference now admits bounded 8-bit fixed-point UNORM blending
+while retaining exact geometry, clip, opacity and untouched-pixel controls.
+Shader/runtime behavior is unchanged. Current-main CPU tests, Clippy and wasm32
+compile pass; independent producer review and seven caught mutations are retained.
+Hosted Linux/WARP validation and all 23 required release checks remain pending.
+The Windows conformance job also exceeded its 40-minute limit after successful
+conformance stages; only that existing job now permits 90 minutes for the remaining
+shipping checks. Workflow lint and all six release-policy tests pass.
+Checkpoint12 is still failed/frozen. [Scope and evidence](docs/spikes/native-ui-unorm-main154.md).
+
 ## Native window error preservation — main153 integration verified
 
 After an error or explicit exit, the window host stops delivering game callbacks.
 Surface and IME cleanup still run, while the original typed failure takes precedence
 rather than being replaced by a later generic failed-session or cleanup error.
 The current-main union passes 57 player tests, native-window Clippy, dependency
-and tooling checks with both reviewed source files unchanged. Independent current-main review is accepted; fast-gated publication remains pending. This does not diagnose the original instrumented-process
+and tooling checks with both reviewed source files unchanged. Independent current-main review and the exact fast check passed; this repair is merged in main #154. This does not diagnose the original instrumented-process
 failure or change audio-overload behavior. [Scope and evidence](docs/spikes/native-window-terminal-errors.md).
 
 
