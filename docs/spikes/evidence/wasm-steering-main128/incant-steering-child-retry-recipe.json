@@ -1,0 +1,10 @@
+{
+  "production_helper_sha256": "471d698761d5466139eab773b0dade249f28b5bb6a09ff3703b52077f9ca7eaf",
+  "private_launcher_sha256": "3a7536633b97ee00264fb005283e3795efadac27fcdf878540c6d8a65ee15d34",
+  "changes": [
+    "Set ROOT to exact integration checkout, because launcher is in /tmp",
+    "Select only commands[-1], the failed development subprocess, after exact original fixture/bundle preparation",
+    "Qualify terminal message to avoid claiming repeated tests/Clippy"
+  ],
+  "scope": "No production source/engine fixture/math/actual child command alteration"
+}

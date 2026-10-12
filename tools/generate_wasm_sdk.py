@@ -45,6 +45,8 @@ def generate(data, digest):
     shared=[banner,'#![no_std]\n#![forbid(unsafe_code)]\n',f'pub const ABI_VERSION: i32 = {data["abi_version"]};\n']
     if 'incant_localization_v1' in data['namespaces']:
         shared.append('pub mod localization;\n')
+    if 'incant_navigation_v1' in data['namespaces']:
+        shared.append('pub mod steering;\n')
     shared += [f'pub const {name}: usize = {value};\n' for name,value in data['constants'].items()]
     shared += [f'pub const {name}: &[u8; 8] = b"{value}";\n' for name,value in data['magic'].items()]
     shared += ['pub const ANIMATION_V2_MAX_BYTES: usize = AnimationHeader::SIZE + ANIMATION_MAX_ROWS * AnimationRowV2::SIZE;\n',

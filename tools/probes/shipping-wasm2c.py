@@ -186,6 +186,22 @@ def formatting_guests(rustc, inputs, sdk_guests, environment):
     return modules
 
 
+def steering_guests(rustc, inputs, sdk_guests, environment):
+    """Actual allocation-free avoidance queries and ignored-error controls."""
+    sample = inputs/'steering.rs'
+    shutil.copy2(ROOT/'sdk/rust/samples/steering.rs', sample)
+    failure = inputs/'steering-failure.rs'
+    shutil.copy2(ROOT/'sdk/rust/fixtures/steering_failure.rs', failure)
+    modules = []
+    for kind in (None, 'capacity', 'number', 'domain', 'rounding', 'duplicate', 'count', 'quota', 'callback'):
+        name = 'rust-steering'+('-'+kind if kind else '')
+        module = sdk_guests/(name+'.wasm')
+        rust_guest.compile(rustc, failure if kind else sample, module,
+                           env=environment, cfg=['sdk_steering_'+kind] if kind else ())
+        modules.append((name, module))
+    return modules
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
@@ -213,7 +229,10 @@ def main():
     cook = next(Path(record['executable']) for record in map(json.loads, built.stdout.splitlines())
                 if record.get('reason') == 'compiler-artifact' and record.get('executable')
                 and record['target']['name'] == 'incant_wasm_cook')
-    metadata = cargo_metadata([str(cargo), 'metadata', '--locked', '--format-version=1', '--features', 'incant_wasm_dev/wasmtime-host,incant_wasm_runtime/embedded-fixture'], cwd=ROOT, env=environment)
+    # Audit the shipping feature selection. Resolving the optional development
+    # host here unifies its compiler edges into the workspace metadata graph;
+    # actual JIT/static conformance explicitly enables that host below.
+    metadata = cargo_metadata([str(cargo), 'metadata', '--locked', '--format-version=1', '--features', 'incant_wasm_runtime/embedded-fixture'], cwd=ROOT, env=environment)
     names = {p['id']: p['name'] for p in metadata['packages']}; nodes = {n['id']: n for n in metadata['resolve']['nodes']}
     roots = ['incant_wasm_runtime', 'incant_runtime', 'incant_script', 'incant_game_runtime', 'incant_script_player', 'incant_game_player']
     for root in roots:
@@ -249,6 +268,7 @@ def main():
             modules.extend(animation_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(crossfade_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(formatting_guests(rustc, inputs, sdk_guests, environment))
+            modules.extend(steering_guests(rustc, inputs, sdk_guests, environment))
             environment['INCANT_RUST_SDK_GUESTS']=str(sdk_guests)
             flipbook = inputs/'flipbook.rs'; shutil.copy2(ROOT/'crates/incant_game_player/fixtures/flipbook.rs', flipbook)
             flipbook_module = inputs/'flipbook.wasm'
