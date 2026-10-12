@@ -65,13 +65,15 @@ controls; the original source-free shipping proof remains separately recorded.
 
 ## Native game UI window delivery — CPU adapter
 
-The ordinary desktop host now queues bounded opaque pointer/text receipts into
-its composed UI tick, with logical-DPI relayout, exclusive pointer ownership and
-transactional cancellation. The main131 integration passes 72 affected CPU
-tests, scoped Clippy, wasm32 and normal runtime dependency checks. The
-managed native preedit/activation bridge and Claude0056 real screen-space draw
-integration remain pending; no OS/GPU/device acceptance is claimed.
-[Evidence](docs/spikes/native-ui-window-input.md).
+The ordinary desktop host queues bounded opaque pointer/text receipts into its
+composed UI tick, with logical-DPI relayout, exclusive pointer ownership and
+transactional cancellation. The new opt-in Tao 0.37.1 managed bridge binds native
+Cocoa/GTK/IMM contexts to exact text-owner leases, supplies preedit/commit/cancel,
+and discards retired callbacks. 105 affected CPU tests, 8 native protocol tests,
+scoped Clippy, Windows/Linux Tao compile checks and runtime graph checks pass.
+Actual OS IME interaction, canonical caret geometry and combined Claude0056 draw
+acceptance remain open. The source branch retains its unsupported draw guard;
+no native/GPU/device gate is claimed. See [managed IME evidence](docs/spikes/native-ui-ime.md).
 
 ## Durable budget lock release — validated in checkpoint8
 
