@@ -578,6 +578,14 @@
       ],
       "type": "string"
     },
+    "PhysicsMode": {
+      "description": "Authoring choice for a separately built simulation process. Fast mode does\nnot promise bit-identical results across hardware or solver variants.",
+      "enum": [
+        "fast",
+        "deterministic"
+      ],
+      "type": "string"
+    },
     "Provenance": {
       "additionalProperties": false,
       "properties": {
@@ -1164,6 +1172,24 @@
       "required": [
         "op",
         "actions"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "description": "Select the separately compiled solver family for the next Play/export.\nExisting simulation processes keep their original immutable kernel.",
+      "properties": {
+        "mode": {
+          "$ref": "#/$defs/PhysicsMode"
+        },
+        "op": {
+          "const": "set_physics_mode",
+          "type": "string"
+        }
+      },
+      "required": [
+        "op",
+        "mode"
       ],
       "type": "object"
     },
