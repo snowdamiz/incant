@@ -1953,7 +1953,12 @@
     }
   },
   "producer_artifacts_verified": 176,
-  "independent_review": "pending integration audit",
+  "independent_review": {
+    "accepted": true,
+    "path": "docs/spikes/evidence/headless-ui-mobile-integration-review.json",
+    "sha256": "93ac58c9207416c855e1e1d0fb9cf21c39408e335aa1e0bb96722bb1272bb55f",
+    "reviewed_manifest_sha256": "2e0574f4968cb51097190d93adf960f0bdc615ae14bc41e83fcb3d71b512a7cc"
+  },
   "prior_failure": "Initial main166 native-window/static command omitted required INCANT_WASM_BUNDLE and failed before testing. No source change; rerun used a hash-verified copy of the accepted trusted producer bundle. Original failed command and complete original+corrected checks retained. Final audio union repeats the whole relevant chain with the explicit bundle.",
   "limitations": [
     "macOS CPU default trusted cooked fixture only; not authored-game mobile export",
@@ -1961,5 +1966,11 @@
     "Native-window features are compile/unit-test coverage, no live window/GPU/IME/appearance claim",
     "No reference-phone, physical audio, shipping size/performance or phase approval"
   ],
-  "lock_seam": "Only accepted local dependency edges combine; no dependency versions/checksums move. Physics diagnostic08185 is deliberately not included."
+  "lock_seam": "Only accepted local dependency edges combine; no dependency versions/checksums move. Physics diagnostic08185 is deliberately not included.",
+  "actual_main168_ancestry": {
+    "head": "52e3125bfbcabe03f620f544f763b03f15f1812d",
+    "main": "c5e7e36baa63f0500664b9eab36d6a5fbfa97e30",
+    "all_1875_compiled_inputs_unchanged": true,
+    "only_documentation_changed_since_tested_head": true
+  }
 }

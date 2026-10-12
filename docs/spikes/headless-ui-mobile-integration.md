@@ -34,8 +34,9 @@ the accepted producer bundle corrected only the harness environment; the complet
 current audio union chain then passed with that explicit input. Both prior attempts
 and their exact source/log identities remain in the [evidence manifest](evidence/headless-ui-mobile-integration.json), alongside
 1,875 frozen inputs, 222 retained integration artifacts and the independently
-rehashed 176 original caller artifacts. Independent final integration audit and
-fast CI remain pending.
+rehashed 176 original caller artifacts. Independent final integration audit is accepted. Actual main168 ancestry adds
+only documentation with all 1,875 compiled inputs unchanged; exact-head fast CI
+remains required.
 
 The existing cross-target cook refusal remains intact. Later iOS compatibility,
 simulator execution and device link experiments belong to their separate producer;
