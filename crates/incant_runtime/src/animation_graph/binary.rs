@@ -251,5 +251,11 @@ fn read_graph(
             conditions: conditions.into(),
         });
     }
-    NativeAnimationGraph::new(initial, parameters, states, transitions, durations)
+    let graph = NativeAnimationGraph::new(initial, parameters, states, transitions, durations)?;
+    if version < 18 && graph.has_compound_fades() {
+        return Err(SceneError::Invalid(
+            "compound animation fades require version 18",
+        ));
+    }
+    Ok(graph)
 }

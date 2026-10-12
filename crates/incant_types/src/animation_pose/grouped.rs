@@ -68,6 +68,15 @@ impl AnimationPoseSamples {
         Ok(result)
     }
 
+    /// Scalar observation of the incoming state. A pair uses its destination;
+    /// a weighted tree uses its first canonical contribution.
+    pub fn representative(&self) -> AnimationSample {
+        let group = self
+            .group(usize::from(self.split != 0))
+            .expect("retained pose group");
+        group.samples[usize::from(group.interpolation == PoseInterpolation::SphericalPair)].sample
+    }
+
     pub fn is_weighted(&self) -> bool {
         self.split == 0 && self.kinds[0] == PoseInterpolation::Weighted
     }

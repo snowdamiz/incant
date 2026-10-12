@@ -12,6 +12,9 @@ pub use grouped::PoseSource;
 #[path = "ik.rs"]
 mod ik;
 pub use ik::{MAX_TWO_BONE_IK, TwoBoneIk, TwoBoneIkError};
+#[path = "pipeline.rs"]
+mod pipeline;
+pub use pipeline::AnimationPoseError;
 
 /// One retained, immutable model animation copy and two preallocated pose buffers.
 /// Sampling performs no allocation, source IO or JSON. There is no implicit clock:
@@ -287,6 +290,11 @@ impl AnimationPlayer {
         self.publish()
     }
     fn publish(&mut self) -> Result<()> {
+        self.stage_trs()?;
+        std::mem::swap(&mut self.live, &mut self.staged);
+        Ok(())
+    }
+    fn stage_trs(&mut self) -> Result<()> {
         for &i in &self.order {
             let local = self.trs[i]
                 .as_ref()
@@ -295,8 +303,6 @@ impl AnimationPlayer {
         }
         self.staged
             .rebuild(&self.parents, &self.order, &self.data, &self.offsets)
-            .map_err(invalid)?;
-        std::mem::swap(&mut self.live, &mut self.staged);
-        Ok(())
+            .map_err(invalid)
     }
 }

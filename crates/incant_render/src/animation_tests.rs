@@ -619,3 +619,6 @@ fn weighted_tree_consumer_uses_full_local_pose_and_refuses_inconsistent_bindings
 
 #[path = "animation_ik_tests.rs"]
 mod ik;
+
+#[path = "animation_grouped_tests.rs"]
+mod grouped;

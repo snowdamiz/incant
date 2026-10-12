@@ -58,6 +58,15 @@ impl AnimationPlayer {
     /// or the first bone if the tip is also coincident; equal bones fully fold.
     /// Subsequent ordinary sampling resets IK to that sample's authored pose.
     pub fn apply_two_bone_ik(&mut self, constraints: &[TwoBoneIk]) -> IkResult<()> {
+        self.validate_ik_constraints(constraints)?;
+        self.staged.local.copy_from_slice(&self.live.local);
+        self.staged.global.copy_from_slice(&self.live.global);
+        self.staged.joints.copy_from_slice(&self.live.joints);
+        self.solve_staged_ik(constraints)?;
+        std::mem::swap(&mut self.live, &mut self.staged);
+        Ok(())
+    }
+    pub(super) fn validate_ik_constraints(&self, constraints: &[TwoBoneIk]) -> IkResult<()> {
         if constraints.len() > MAX_TWO_BONE_IK {
             return Err(TwoBoneIkError::Limit);
         }
@@ -79,9 +88,9 @@ impl AnimationPlayer {
                 return Err(TwoBoneIkError::Chain);
             }
         }
-        self.staged.local.copy_from_slice(&self.live.local);
-        self.staged.global.copy_from_slice(&self.live.global);
-        self.staged.joints.copy_from_slice(&self.live.joints);
+        Ok(())
+    }
+    pub(super) fn solve_staged_ik(&mut self, constraints: &[TwoBoneIk]) -> IkResult<()> {
         for c in constraints {
             let parent = self.parents[c.root].map_or(DMat4::IDENTITY, |p| self.staged.global[p]);
             let rotations = math::solve(
@@ -107,7 +116,6 @@ impl AnimationPlayer {
                     .map_err(|_| TwoBoneIkError::Numeric)?;
             }
         }
-        std::mem::swap(&mut self.live, &mut self.staged);
         Ok(())
     }
 }
