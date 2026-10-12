@@ -1,0 +1,20 @@
+{
+  "source": "2841c242a4b9d118e4b7e5f13f9c59e0f0ed0041",
+  "manifest": "/tmp/incant-nullable-inspector-0053-bin-v1/manifest.json",
+  "manifest_sha256": "67f60a8e882011deb18288f8b470cc50abe4642096f1d5014ba9822a716ddd62",
+  "native_gpu_granted": true,
+  "grant_recorded_at": "2026-10-12T01:24:20.027189+00:00",
+  "grant_scope": "Exclusive native editor and owned capture helpers for0053 only; prior0052 exited and relinquished at01:09:47Z",
+  "binaries": {
+    "incant_editor": {
+      "path": "/tmp/incant-nullable-inspector-0053-bin-v1/incant_editor",
+      "sha256": "677f3955970e5f63621dbc4a5ac0df09dce2c90d520b5278918da6ffcd3ae5f4",
+      "bytes": 63194672
+    }
+  },
+  "fixture_manifest": "/tmp/incant-animation-native-review-v2-manifest.json",
+  "fixture_manifest_sha256": "069789bef712fa54c17ffab6a19415581f06bc18fb85ea7d84bc1449913056f2",
+  "fixture_project": "/tmp/incant-animation-native-review-v2/project.json",
+  "prior_result": "handoffs/0052-native-animation/result.md",
+  "provider_turns_authorized": 0
+}
