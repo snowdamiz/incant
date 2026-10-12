@@ -16,6 +16,21 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Native HUD controls — CPU and public shipping proof verified
+
+Typed native/TypeScript controls now update existing widget text/disabled state
+and world Text content through the atomic gameplay transaction. Readonly
+pre-command declarations, role/lifetime validation, aggregate quotas, localized
+literal results and composed input/shaping reconciliation are tested. The 444
+affected cases plus 10 player tests, all-target Clippy, strict typing, wasm32 and
+normal-runtime dependency guards pass. Independent source and final execution
+reviews are accepted.
+Five fresh source/map/build-deleted player processes verify changed shaped text,
+pre-command reads, exact save/PCM continuation; three exact refusals publish no
+outputs. Final independent execution audit is accepted.
+Wasm HUD parity, native/GPU appearance and complete Game UI remain open.
+[Contract and limits](docs/spikes/native-hud-controls.md).
+
 ## Connected root motion — native/TypeScript CPU checks passed
 
 Cooked17/18 root catalogs now drive independent exact graph/clip clocks,
@@ -1339,10 +1354,14 @@ Retained CPU pose blending integration against actual main120 preserves all five
 reviewed source hashes and passes 166 CPU tests plus Clippy/graph checks; 71 GPU
 tests remain ignored. [Receipt](docs/spikes/evidence/runtime-pose-blending-main120.json).
 
-## Complete compound Wasm source (2026-10-12)
+## Complete compound Wasm — CPU/package checks passed (2026-10-12)
 
-Additive operations 47–52 are independently source-reviewed and locally frozen;
-final broad conformance and ordinary source-deleted exported-player proof are
-pending. Root-motion may append reserved 53–55 from this immutable ancestor.
-Whole-module checkpoints and visual/device gates remain open.
+Additive operations 47–52 preserve 0–46 and all older definitions. The final
+actual Wasmtime/wasm2c suite passes 436 tests plus all-target Clippy; the ordinary
+public exported player passes three fresh 56-tick runs after deleting its
+authoring/cache/build inputs and debug maps. All 64,512 scalar oracle comparisons,
+report/PCM parity and 23 exact refusal controls pass. Source, public execution and
+the final durable evidence packet are independently accepted; publisher intake
+remains pending. Root-motion may append reserved 53–55 from the immutable source
+ancestor. Whole-module checkpoints and visual/device gates remain open.
 See [scope and evidence](docs/spikes/native-wasm-compound.md).

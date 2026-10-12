@@ -138,7 +138,7 @@ fn actual_sdk_caught_and_native_errors_leave_no_partial_graph_numeric_entity_or_
 #[test]
 fn graph_versions_signatures_and_nonexistent_v3_control_import_fail_closed() {
     for import in [
-        r#"(import "incant_animation_graph_v2" "snapshot_len" (func (param i64)(result i32)))"#,
+        r#"(import "incant_animation_graph_v3" "snapshot_len" (func (param i64)(result i32)))"#,
         r#"(import "incant_animation_graph_v1" "read_snapshot" (func (param i64 i32)(result i32)))"#,
         r#"(import "incant_animation_graph_v1" "control" (func (param i64 i32 i32)(result i32)))"#,
         r#"(import "incant_animation_v3" "control" (func (param i64 i32 i32)))"#,

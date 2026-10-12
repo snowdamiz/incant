@@ -18,6 +18,7 @@ mod compiled;
 mod compiler;
 mod diagnostics;
 mod flipbooks;
+mod hud;
 mod input;
 mod loan;
 mod localization_values;
@@ -347,6 +348,7 @@ impl ScriptHost {
                 .restore(&ctx)
                 .map_err(diagnostics::allocation)?;
             let commands = commands::TickCommands::default();
+            let hud = hud::expose(&ctx, world)?;
             let api = commands.expose(&ctx).map_err(|error| {
                 diagnostics::javascript(&ctx, error, "command bindings", &self.deadline)
             })?;
@@ -412,6 +414,7 @@ impl ScriptHost {
                             index as u32,
                             instances,
                             state_api,
+                            hud.clone(),
                         ));
                         timers.revoke();
                         persistent.revoke();
@@ -557,3 +560,6 @@ mod timer_tests;
 
 #[cfg(all(test, feature = "compiler"))]
 mod localization_tests;
+
+#[cfg(test)]
+mod hud_tests;

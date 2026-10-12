@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "sources": {
+    "tools/probes/native-wasm-compound-export.py": "fbd313297590b078a0bec7e1ed74dda0f6921b244b6359e6c4b98a1ecc9e75be",
+    "tools/probes/native-wasm-compound-export/behavior.rs": "98f85d1ab78c4f02aa743bd9ba13c7bc0f435b90aa28e1da7122f57f69397ca1",
+    "crates/incant_cook/examples/animation_compound_package_oracle.rs": "e8e6893dc95cef0fd41d23fec6d2b9215f621c82509214bf9d368ca2a6ad9789",
+    "crates/incant_wasm_runtime/tests/support/animation_compound.rs": "f3ebe4ae3c73d14efba413960f9a4bebcba9230f98a8f7d53225709b64dad2ca",
+    "tools/probes/native-wasm-animation-pose-export.py": "e582e7c23e127456f11820392dced4cf49b5d11a11467fd37fc58e077589174b",
+    "tools/probes/native-animation-graph-export.py": "6e116c6ab103a6e40c64da6586160cd49336530854390986aa3850052d6a9f49",
+    "tools/export_native.py": "a22f6431bb6db373982970e53a219f1f57633c538e08055bcafacefa887699a1"
+  },
+  "headless_sha256": "0eafebbaa92abb9ee700e53312e3a7dd46402b393534727429ac81700eb7ab4e",
+  "oracle_binary_sha256": "cc43816781704bad891d88fd2a9dec776712443b50f060c17ce61120a3db0045",
+  "oracle_scene_sha256": "121bff66ee0ecfa59045ca39d20c8733a53176f6b56d4fc2d70b945760c21b88",
+  "project_sha256": "546c7f9a4d99f53467110c180ef2b7504d8a8939fe793535b3953ea92704f485",
+  "ticks": 56,
+  "complete_records": 896,
+  "record_scalars": 24,
+  "bounded_vector_checks": 256,
+  "source_deleted": true,
+  "journal": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-compound-shipping-002/authoring/project.journal.jsonl"
+}

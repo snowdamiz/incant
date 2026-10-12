@@ -102,14 +102,14 @@ impl NativeWorld {
     ) -> Result<Option<PendingText>, RuntimeError> {
         use crate::StructuralCommand as C;
         if !commands.iter().any(|c| {
-            matches!(c, C::SetText { .. })
+            matches!(c, C::SetText { .. } | C::ControlText { .. })
                 || matches!(c,C::Despawn(id) if self.text_ids.contains(id))
         }) {
             return Ok(None);
         }
         let mut spawned = BTreeSet::new();
         let mut removed = BTreeSet::new();
-        let mut changes = BTreeMap::new();
+        let mut changes: BTreeMap<StableId, Option<Arc<NativeText>>> = BTreeMap::new();
         // Track command-order lifetime; full structural staging additionally
         // rejects duplicate spawn/despawn and invalid unrelated components.
         for command in commands.iter() {
@@ -120,6 +120,26 @@ impl NativeWorld {
                 C::Despawn(id) => {
                     removed.insert(*id);
                     changes.insert(*id, None);
+                }
+                C::ControlText {
+                    entity,
+                    control: crate::TextControl::Content(content),
+                } => {
+                    if removed.contains(entity) {
+                        return Err(RuntimeError::MissingEntity(*entity));
+                    }
+                    let node = changes.entry(*entity).or_insert_with(|| {
+                        self.entities
+                            .get(entity)
+                            .and_then(|&e| self.world.get::<TextComponent>(e))
+                            .map(|t| Arc::clone(&t.0))
+                    });
+                    let node = node.as_mut().ok_or(SceneError::Invalid(
+                        "text control requires existing world text",
+                    ))?;
+                    if node.content != *content {
+                        Arc::make_mut(node).content = Arc::clone(content);
+                    }
                 }
                 C::SetText { entity, text } => {
                     if removed.contains(entity)

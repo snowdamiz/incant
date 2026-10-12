@@ -1,0 +1,27 @@
+{
+  "asset": {
+    "id": "01M4RM3F3XRR7TBPJWTK7C4EYP",
+    "kind": "model",
+    "name": "rig",
+    "path": "rig.gltf",
+    "sha256": "b744b3412da8391f5c6d683ac023f79609d62ea1a1a49b06392b22a4a861b282"
+  },
+  "cache_hit": false,
+  "changed": true,
+  "details": {
+    "dependencies": [
+      {
+        "path": "rig.bin",
+        "sha256": "46e5187bf111d665549dad2b4a9a6ca0e79a8e8b4e1f1c4280f5a764736a4625"
+      },
+      {
+        "path": "rig.gltf",
+        "sha256": "053fca5c2057f9114282476cf461b474c144d839319bc5ca0a36351efae4af73"
+      }
+    ],
+    "meshes": 1,
+    "textures": 0,
+    "vertices": 3
+  },
+  "revision": 1
+}
