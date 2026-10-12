@@ -38,9 +38,14 @@ impl SessionProgram {
                 script, world,
             )?))),
             #[cfg(feature = "static-module")]
-            Self::Static(module) => Ok(SessionVm::Static(Box::new(
-                incant_wasm_runtime::StaticModule::new(module)?,
-            ))),
+            Self::Static(module) => {
+                if world.ui_view()?.nodes().len() != 0 {
+                    return Err(SessionError::UiUnsupported);
+                }
+                Ok(SessionVm::Static(Box::new(
+                    incant_wasm_runtime::StaticModule::new(module)?,
+                )))
+            }
         }
     }
 }
@@ -52,6 +57,14 @@ pub(crate) enum SessionVm {
     Static(Box<incant_wasm_runtime::StaticModule>),
 }
 impl SessionVm {
+    pub(crate) fn supports_ui(&self) -> bool {
+        match self {
+            Self::Bytecode(_) => true,
+            #[cfg(feature = "static-module")]
+            Self::Static(_) => false,
+        }
+    }
+
     pub fn logs(&self) -> Result<&crate::NativeLogs, SessionError> {
         match self {
             Self::Bytecode(host) => Ok(host.logs()?),

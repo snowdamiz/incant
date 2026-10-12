@@ -1,4 +1,4 @@
-//! Versions 1–12, little-endian checked data (not executable code). SHA-256 detects
+//! Versions 1–13, little-endian checked data (not executable code). SHA-256 detects
 //! damage, not authorship. No casts, alignment assumptions or native-layout ABI.
 use crate::scene::MAX_ENTITIES;
 use crate::{CookedEntity, CookedScene, SceneError, StableId};
@@ -7,7 +7,7 @@ use sha2::{Digest, Sha256};
 use std::collections::BTreeMap;
 
 const MAGIC: &[u8; 8] = b"INCANTSC";
-const VERSION: u32 = 12;
+const VERSION: u32 = 13;
 const PREFIX: usize = 40;
 const HEADER: usize = 72;
 const MIN_RECORD: usize = 104;
@@ -24,8 +24,10 @@ impl CookedScene {
             .collect();
         let mut bytes = Vec::with_capacity(HEADER + self.entities.len() * MAX_RECORD);
         bytes.extend(MAGIC);
-        let version = if self.has_text() {
+        let version = if self.has_ui() {
             VERSION
+        } else if self.has_text() {
+            12
         } else if self.spatial.iter().any(|n| n.animation.is_some()) {
             11
         } else if !self.localization.is_default() {
@@ -147,6 +149,9 @@ impl CookedScene {
         }
         if version >= 12 {
             crate::text_binary::write(&mut bytes, &self.font_assets, &self.texts);
+        }
+        if version >= 13 {
+            crate::ui_binary::write(&mut bytes, &self.ui);
         }
         let length = (bytes.len() - HEADER) as u32;
         bytes[36..40].copy_from_slice(&length.to_le_bytes());
@@ -394,6 +399,14 @@ impl CookedScene {
         } else {
             (Vec::new(), Vec::new())
         };
+        if version == 12 && font_assets.is_empty() && texts.is_empty() {
+            return Err(SceneError::Invalid("empty text suffix"));
+        }
+        let ui = if version >= 13 {
+            crate::ui_binary::read(&mut reader, count)?
+        } else {
+            Vec::new()
+        };
         if !reader.0.is_empty() {
             return Err(SceneError::Invalid("trailing payload"));
         }
@@ -413,8 +426,13 @@ impl CookedScene {
             .with_physics_2d(physics_2d)?
             .with_navigation(navigation)?
             .with_localization(localization)?;
-        if version >= 12 {
-            candidate.with_text(font_assets, texts)
+        let candidate = if version >= 12 {
+            candidate.with_text(font_assets, texts)?
+        } else {
+            candidate
+        };
+        if version >= 13 {
+            candidate.with_ui(ui)
         } else {
             Ok(candidate)
         }

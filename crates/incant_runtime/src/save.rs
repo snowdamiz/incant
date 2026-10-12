@@ -10,6 +10,8 @@ use thiserror::Error;
 pub use codec::MAX_SAVE_BYTES;
 #[derive(Debug, Error, PartialEq)]
 pub enum SaveError {
+    #[error("UI widget state save/restore is not yet supported")]
+    UiUnsupported,
     #[error("text bindings are unsupported in an unbound legacy save")]
     TextUnsupported,
     #[error("localization is unsupported in a legacy v1/v2 save")]
@@ -332,6 +334,9 @@ impl NativeWorld {
     }
 
     fn check_save_capabilities(&self) -> Result<(), SaveError> {
+        if self.ui_used {
+            return Err(SaveError::UiUnsupported);
+        }
         if self.audio_used {
             return Err(SaveError::AudioUnsupported);
         }
@@ -343,6 +348,9 @@ impl NativeWorld {
 }
 
 fn check_scene_capabilities(scene: &CookedScene) -> Result<(), SaveError> {
+    if scene.has_ui() {
+        return Err(SaveError::UiUnsupported);
+    }
     if !scene.audio().is_empty() {
         return Err(SaveError::AudioUnsupported);
     }

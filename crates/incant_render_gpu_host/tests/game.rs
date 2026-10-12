@@ -230,6 +230,7 @@ fn game_with(text: bool) -> (Game, Probe) {
         vec![clip],
         48000,
         NativeRenderSettings {
+            ui: None,
             text: text.then(|| incant_render_native::TextSettings::new(temp.path().join("fonts"))),
             model_cache: temp.path().join(".incant/cache/models"),
             texture_cache: temp.path().join("textures"),

@@ -51,7 +51,7 @@ fn seeking_preserves_held_controls_and_gesture_age_without_replaying_the_game() 
 fn the_entire_clip_is_validated_before_play_with_order_limits_and_compatibility() {
     for (path, value) in [
         ("/format", json!("other")),
-        ("/version", json!(2)),
+        ("/version", json!(3)),
         ("/tick_rate", json!(120)),
         ("/ticks", json!(10001)),
         ("/start_tick", json!(u64::MAX)),

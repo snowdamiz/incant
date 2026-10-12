@@ -2,7 +2,7 @@
 """Build a native desktop player from an authored project with a fresh shipping target.
 
 Usage: python3 tools/export_native.py PROJECT OUTPUT [--scene ULID] [--camera ULID]
-       [--mode headless|window]
+       [--mode headless|window] [--ui-viewport WIDTHxHEIGHT]
 
 Only the trusted engine is compiled. Project JSON/TypeScript is bounded compiler
 input, never Cargo configuration or a native build script. Existing cooked data
@@ -167,8 +167,19 @@ def build(project, staging, storage, scene, camera, mode):
                                'window export GPU execution requires a desktop', 'no phone or performance gate']}
 
 
-def export(project, output, scene=None, camera=None, mode='headless'):
+def ui_startup_options(mode, viewport):
+    if viewport is None:
+        return []
+    require(mode == 'headless', 'Screen-space UI drawing in native windows is not implemented')
+    require(isinstance(viewport, str) and re.fullmatch(r'[1-9][0-9]{0,4}x[1-9][0-9]{0,4}', viewport),
+            'UI viewport must be WIDTHxHEIGHT logical pixels')
+    require(all(int(n) <= 65536 for n in viewport.split('x')), 'UI viewport exceeds bounds')
+    return ['--ui-viewport', viewport]
+
+
+def export(project, output, scene=None, camera=None, mode='headless', ui_viewport=None):
     require(mode in ('headless', 'window'), 'Unknown native export mode')
+    ui_options = ui_startup_options(mode, ui_viewport)
     project = project.resolve(strict=True)
     output = output.absolute()
     require(not output.exists() and not output.is_symlink(), 'Output already exists; choose a new directory')
@@ -186,11 +197,13 @@ def export(project, output, scene=None, camera=None, mode='headless'):
         runtime_env = {'PATH': str(player.parent), 'HOME': str(staging / 'absent-home'),
                        'TMPDIR': str(staging), 'TEMP': str(staging), 'TMP': str(staging)}
         runtime_env.update({key: os.environ[key] for key in ('SystemRoot', 'SystemDrive', 'WINDIR') if key in os.environ})
-        result = execute([player, '--package', player.parent / 'data', '--ticks', '1', '--output', staging / 'startup.pcm'],
+        result = execute([player, '--package', player.parent / 'data', '--ticks', '1', '--output', staging / 'startup.pcm'] + ui_options,
                          cwd=player.parent, env=runtime_env, timeout=60)
         report['startup'] = json.loads(result.stdout)
         report['build_storage_removed_before_startup'] = True
         report['startup_backend'] = 'CPU render input; no window or GPU device'
+        if ui_viewport is not None:
+            report['startup_ui_viewport'] = ui_viewport
         (staging / 'startup.pcm').unlink()
         # Keep detailed compiler diagnostics beside evidence, outside player.
         write_json(staging / 'export.json', report)
@@ -205,9 +218,10 @@ def main():
     parser.add_argument('--scene')
     parser.add_argument('--camera')
     parser.add_argument('--mode', choices=('headless', 'window'), default='headless')
+    parser.add_argument('--ui-viewport', help='Explicit CPU UI startup viewport in logical pixels; no GPU UI drawing')
     args = parser.parse_args()
     try:
-        result = export(args.project, args.output, args.scene, args.camera, args.mode)
+        result = export(args.project, args.output, args.scene, args.camera, args.mode, args.ui_viewport)
     except (OSError, ValueError, subprocess.SubprocessError) as error:
         parser.exit(1, f'Native export failed: {error}\n')
     print(json.dumps({'output': str(args.output.absolute()), 'target': result['target'], 'player_sha256': result['player_sha256']}))

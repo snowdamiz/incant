@@ -203,6 +203,50 @@ fn snapshot_construction_does_not_call_guest_prototype_accessors() {
 }
 
 #[test]
+fn ui_notifications_are_exact_immutable_own_data_without_guest_prototype_calls() {
+    let host = host();
+    let mut input = InputRuntime::default();
+    let id = "00000000000000000000000001".to_owned();
+    let ui = UiSnapshot {
+        focused: Some(id.clone()),
+        text_input: true,
+        events: vec![UiNotification::ValueChanged {
+            entity_id: id,
+            value: "שלום 中文".into(),
+        }],
+        discarded_events: 2,
+    };
+    input
+        .advance_validated_with_ui(
+            &[],
+            1. / 60.,
+            &ValidatedActions::new(Default::default()).unwrap(),
+            ui,
+        )
+        .unwrap();
+    assert_snapshot(&host, &input);
+    host.context.with(|ctx| {
+        ctx.eval::<(), _>(r#"
+            globalThis.accesses = 0;
+            for (const key of ['ui','events','kind','entity_id','value','0'])
+                Object.defineProperty(Object.prototype,key,{__proto__:null,get(){++accesses;throw Error('get')},set(){++accesses;throw Error('set')}});
+            Object.defineProperty(Array.prototype,'0',{__proto__:null,get(){++accesses;throw Error('get')},set(){++accesses;throw Error('set')}});
+        "#).unwrap();
+        ctx.globals().set("snapshot", input::expose(&ctx, input.frame()).unwrap()).unwrap();
+        ctx.eval::<(), _>(r#"
+            'use strict';
+            let refused = 0;
+            try { snapshot.ui.focused = null; } catch (_) { ++refused; }
+            try { snapshot.ui.events[0].value = 'changed'; } catch (_) { ++refused; }
+            try { snapshot.ui.events[0] = null; } catch (_) { ++refused; }
+            try { snapshot.ui.events.length = 3; } catch (_) { ++refused; }
+            try { snapshot.ui.events.push(null); } catch (_) { ++refused; }
+            if (accesses || refused !== 5 || snapshot.ui.events.length !== 1 || snapshot.ui.events[0].value !== 'שלום 中文') throw Error('mutable UI');
+        "#).unwrap();
+    });
+}
+
+#[test]
 fn expired_snapshot_budget_never_publishes_component_views() {
     let mut host = ScriptHost::new(CompiledScript::compile(r#"
         globalThis.published=0;

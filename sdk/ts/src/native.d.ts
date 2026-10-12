@@ -225,6 +225,12 @@ export interface NativeContext {
   readonly chunks: readonly NativeChunk[];
   readonly dt: number;
   readonly commands: NativeCommands;
+  /** Immutable post-routing input. input.ui contains accepted button/value/submit
+   * outcomes (<=256, <=64KiB of value bytes), current focus and a bounded stale
+   * receipt count. Keys/buttons captured by widgets are absent from gameplay
+   * edges/actions; controls held before capture are released and suppressed
+   * until their physical release. UI outcomes and script/world changes share
+   * one accepted tick. This does not expose OS IME, widget mutation or save APIs. */
   readonly input: NativeInput;
   readonly physics: NativePhysics;
   readonly navigation: NativeNavigation;
