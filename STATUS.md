@@ -16,6 +16,16 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Headless UI and reusable player — current integration verified
+
+The shared recorded UI route and optional mobile C ABI pass all 19 integrated
+checks on the accepted audio ABI union. Real C/Swift callers of the new immutable
+macOS archive pass 32 controls/39 commands, including native held/released movement,
+exact failures and no-clobber output behavior. Producer source bytes and dependency
+versions are unchanged; independent final integration review and fast publication
+remain pending. iOS/Android compatibility stays separate; no GPU/window/device gate.
+[Integrated commands and actual callers](docs/spikes/headless-ui-mobile-integration.md).
+
 ## Mobile runtime callers — macOS C/Swift CPU proof accepted
 
 Actual callers of the frozen native runtime archive pass 32 controls / 39
@@ -30,7 +40,7 @@ remain pending; the old document smoke is not reused as game execution evidence.
 
 The ordinary packaged player now has a reusable Rust entry and optional bounded C
 ABI. Local macOS CPU/CLI tests and native-window/static-module compatibility pass;
-C/Swift caller verification is underway. The first iOS simulator archive attempt
+Actual macOS C/Swift caller verification passes as recorded above. The first iOS simulator archive attempt
 hit the existing cross-target script-cook refusal. That guard remains intact while
 a separate compatibility route is developed; no mobile runtime/device/performance
 gate passes from this work. [Contract and evidence](docs/spikes/mobile-runtime-library.md).
