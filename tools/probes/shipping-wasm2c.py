@@ -229,7 +229,10 @@ def main():
     cook = next(Path(record['executable']) for record in map(json.loads, built.stdout.splitlines())
                 if record.get('reason') == 'compiler-artifact' and record.get('executable')
                 and record['target']['name'] == 'incant_wasm_cook')
-    metadata = cargo_metadata([str(cargo), 'metadata', '--locked', '--format-version=1', '--features', 'incant_wasm_dev/wasmtime-host,incant_wasm_runtime/embedded-fixture'], cwd=ROOT, env=environment)
+    # Audit the shipping feature selection. Resolving the optional development
+    # host here unifies its compiler edges into the workspace metadata graph;
+    # actual JIT/static conformance explicitly enables that host below.
+    metadata = cargo_metadata([str(cargo), 'metadata', '--locked', '--format-version=1', '--features', 'incant_wasm_runtime/embedded-fixture'], cwd=ROOT, env=environment)
     names = {p['id']: p['name'] for p in metadata['packages']}; nodes = {n['id']: n for n in metadata['resolve']['nodes']}
     roots = ['incant_wasm_runtime', 'incant_runtime', 'incant_script', 'incant_game_runtime', 'incant_script_player', 'incant_game_player']
     for root in roots:

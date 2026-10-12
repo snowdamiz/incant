@@ -70,3 +70,17 @@ Final command/log/source identities are retained in
 fresh processes exercise its existing bulk fixture, not a new source-deleted
 shipping steering package. No phone, shipping steering performance, automatic
 obstacle collection, pathfinding, debug draw, full SDK or Phase1 gate is claimed.
+
+## Main128 integration: shipping graph selection
+
+The first integrated dual-host probe stopped before conformance execution because
+its workspace metadata request also enabled the development Wasmtime host. With
+the new optional script development host in main, this feature selection exposed
+that compiler edge to the shipping-root traversal. The audit now requests only
+the embedded shipping fixture; all six shipping roots, normal edges and the
+compiler denylist remain unchanged. The actual JIT/static conformance and Clippy
+commands still select the development host explicitly. Independent review
+accepted the correction; three real subprocess metadata regressions pass.
+The original failure, exact red/green metadata hashes and review are retained in
+[evidence](evidence/wasm-steering-main128-graph-selection.json). Full integrated
+conformance is rerun on the frozen corrected source.
