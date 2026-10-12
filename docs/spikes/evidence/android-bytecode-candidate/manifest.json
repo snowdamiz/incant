@@ -1,5 +1,5 @@
 {
-  "status": "candidate source and harness accepted; actual Android emulator proof passed; independent final execution review pending",
+  "status": "candidate source, harness and actual Android execution independently accepted; production admission remains separate",
   "source_review_sha256": "6676451e91d67e0e208ea04d90534efd4ff4b426ed1b86ad9f4ee95bc57ec749",
   "native_tests": {
     "passed": 22,
@@ -86,5 +86,9 @@
     "CI profile trusted numeric fixture only; no ordinary authored/shipping export",
     "Actual local ARM Android17/API37 emulator; no x86/other producer target admission",
     "No physical phone, rendered, touch/audio host or performance gate"
-  ]
+  ],
+  "final_review": {
+    "path": "docs/spikes/evidence/android-bytecode-candidate/final-review.json",
+    "sha256": "4baaa296526ae5c8a8b240af5bcee8a893338ba923c2979bf27e5b6999b79448"
+  }
 }

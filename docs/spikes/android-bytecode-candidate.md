@@ -39,7 +39,7 @@ The 133 recorded execution/AVD commands include explicit owned-name checks,
 graceful emulator exit 0 and AVD delete 0. Unrelated AVD metadata is unchanged.
 All 282 build/execution raw command streams were rehashed. Three-package candidate
 Clippy, formatting and diff checks pass. Independent final execution review is
-pending; default production and authored Android admission remain denied.
+accepted; production and authored Android admission remain a separate change.
 The actual archive is 119,411,916 bytes and the C caller is 25,219,240 bytes under
 `ci`; these are neither shipping size nor phone performance measurements.
 

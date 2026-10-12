@@ -21,8 +21,8 @@ visual work, and Astra owns correctness and integration.
 The default-off trusted numeric probe has accepted source, 22 admission tests and
 nine harness cases. An actual local Android 17/API 37 ARM emulator passes all 16
 C ABI controls; complete numeric/game/PCM records match prior macOS/iOS callers.
-Independent final execution review is pending. Default and authored Android
-admission stay denied; no phone, shipping or performance gate is claimed.
+Independent final execution review is accepted. Default and authored Android
+admission stay denied until the separate connected exporter lands; no phone, shipping or performance gate is claimed.
 [Candidate contract and retained attempts](docs/spikes/android-bytecode-candidate.md).
 
 ## Authored iOS project archives — simulator proof passed
