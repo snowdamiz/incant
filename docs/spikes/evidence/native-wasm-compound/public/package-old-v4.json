@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-compound-shipping-002/package/player/incant_game_player",
+    "--package",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-compound-shipping-002/package/player/data",
+    "--ticks",
+    "56",
+    "--input-recording",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-compound-shipping-002/old-v4-input.json",
+    "--output",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-compound-shipping-002/package-old-v4.pcm"
+  ],
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Error: Session(Module(Boundary(Abi(\"animation snapshots cannot represent IK constraints\"))))\n",
+  "output_absent": true,
+  "expected_stderr": "Error: Session(Module(Boundary(Abi(\"animation snapshots cannot represent IK constraints\"))))"
+}

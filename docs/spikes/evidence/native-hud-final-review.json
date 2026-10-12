@@ -1,0 +1,22 @@
+{
+  "at": "2026-10-12T19:00:44.509548+00:00",
+  "verdict": "accepted",
+  "commit": "a16491d7788d2d5890377a3b714e4e978b3ad955",
+  "manifest_sha256": "7c071253036e649ddf3bc0ad95e44274ec4a7ab78b26ffdc44f965e447ce37eb",
+  "source_inputs": 20,
+  "engine_inputs": 1434,
+  "retained_artifacts": 134,
+  "package_files": 22,
+  "passing_tests": 454,
+  "passing_groups": 48,
+  "positive_processes": 5,
+  "exact_refusal_processes": 3,
+  "review": [
+    "Final public helper uses ordinary authoring/export and preserves role/trap/quota exact refusal diagnostics. Final helper correction aligns quota diagnostic with existing precise HUD failure.",
+    "Verified every retained source/build input and archived artifact hash, actual package files, command stream hashes, pre-command logs, shaped HUD/world source text, native movement checks, and exact PCM/checkpoint continuation.",
+    "Production source covered by prior independent accepted receipt258fccf0."
+  ],
+  "limitations": [
+    "Actual local CPU results only; no window/GPU/pixel/device/performance acceptance. Wasm HUD parity pending."
+  ]
+}

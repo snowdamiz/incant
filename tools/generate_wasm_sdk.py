@@ -49,8 +49,10 @@ def generate(data, digest):
         shared.append('pub mod steering;\npub mod navigation_paths;\n')
     if 'incant_physics_v1' in data['namespaces']:
         shared.append('pub mod physics;\n')
+    shared.append('pub mod hud;\n')
     shared += [f'pub const {name}: usize = {value};\n' for name,value in data['constants'].items()]
     shared += [f'pub const {name}: &[u8; 8] = b"{value}";\n' for name,value in data['magic'].items()]
+    shared += ['pub const HUD_MAX_BYTES: usize = HudHeader::SIZE + HUD_MAX_WIDGETS * HudWidget::SIZE + HUD_MAX_TEXTS * HudText::SIZE + HUD_MAX_EVENTS * HudEvent::SIZE + HUD_MAX_DECLARATION_BYTES + HUD_MAX_EVENT_BYTES;\n']
     shared += ['pub const ROOT_MOTION_MAX_BYTES: usize = RootMotionHeader::SIZE + ANIMATION_IK_V2_MAX_BYTES + ROOT_MOTION_MAX_ROWS * RootMotionRow::SIZE;\n']
     shared += ['pub const ANIMATION_V5_MAX_BYTES: usize = AnimationHeaderV5::SIZE + ANIMATION_MAX_ROWS * AnimationRowV4::SIZE + ANIMATION_POSE_MAX_SAMPLE_ROWS * AnimationPoseSample::SIZE + ANIMATION_COMPOUND_MAX_ROWS * AnimationPoseGroups::SIZE;\n',
                'pub const ANIMATION_IK_V2_MAX_BYTES: usize = AnimationIkHeader::SIZE + ANIMATION_V5_MAX_BYTES + ANIMATION_IK_MAX_ROWS * AnimationIkRow::SIZE;\n',

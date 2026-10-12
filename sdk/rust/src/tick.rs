@@ -1,4 +1,5 @@
 mod compound;
+mod hud;
 mod ik;
 mod root_motion;
 use crate::{EntityId, Error, FlipbookSnapshot, InputSnapshot, Result, Transform, Velocity, raw};

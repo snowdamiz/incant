@@ -1,0 +1,84 @@
+{
+  "scope": "Immutable implementation ancestor; broad Clippy and ordinary public export remain pending",
+  "source_inventory": "docs/spikes/evidence/native-wasm-hud-source/inventory.json",
+  "source_inventory_sha256": "ca692560b3f9d9e42928335bff7b1b8b4d93fa94e601aab222ee681af88b6813",
+  "root_review": {
+    "path": "docs/spikes/evidence/native-wasm-hud-source/root-review.json",
+    "sha256": "992e0d6d40c069110440d4e116d10f1e80fa7f990c54b174b2a70f02c99bb408",
+    "scope": "26 reviewed implementation/test inputs; final raw fixture and legacy-identity regression are additive check inputs"
+  },
+  "checks": {
+    "sdk_native_boundaries": 6,
+    "actual_host_tests": 3,
+    "actual_hosts": [
+      "Wasmtime",
+      "wasm2c"
+    ],
+    "raw_modes_per_host": 11,
+    "composed_failures_per_host": 5,
+    "python_generation_tests": 16
+  },
+  "logs": {
+    "native-wasm-hud-boundary-002.log": {
+      "raw_sha256": "934d0acfb24fa32c83d38b70f23582f45e19b83f10db09d843fd20625a76086d",
+      "retained": "docs/spikes/evidence/native-wasm-hud-source/native-wasm-hud-boundary-002.log.gz",
+      "retained_sha256": "8eb83d4ad870217848f0ec1412f80f7ac183cd83d4a853a4902fedd2843a1764"
+    },
+    "native-wasm-hud-composed-004.log": {
+      "raw_sha256": "15df5354528e2b6f5b37483ec87364723dd73326c8fb11c9531db798cdf637a2",
+      "retained": "docs/spikes/evidence/native-wasm-hud-source/native-wasm-hud-composed-004.log.gz",
+      "retained_sha256": "eff6ad6a534ec3663380b65f590f72cc728060c7acf01d72261e60475a7f01b0"
+    },
+    "native-wasm-hud-composed-005.log": {
+      "raw_sha256": "f97edaf190e4e520a4d4c40efde0ea90c1bdec221ea06f665148295d71913282",
+      "retained": "docs/spikes/evidence/native-wasm-hud-source/native-wasm-hud-composed-005.log.gz",
+      "retained_sha256": "5c41688a479a8fae1e623a3007194591f6824af1fe424c581df2a8e21021238c"
+    },
+    "native-wasm-hud-composed-006.log": {
+      "raw_sha256": "9ea13e08766fbbb604ae8d563e8d6649141b896a143e796102902cf526cbf01e",
+      "retained": "docs/spikes/evidence/native-wasm-hud-source/native-wasm-hud-composed-006.log.gz",
+      "retained_sha256": "70fb7cfdce5fbcaf925493fdbdd9766d13b1467802f1e906bfb5d82cc1347fac"
+    },
+    "native-wasm-hud-generation-001.log": {
+      "raw_sha256": "51cde924c00da1e10d7be7f6d6485dd9b5d1c9690cdb5f6e7d14d591d2228ab4",
+      "retained": "docs/spikes/evidence/native-wasm-hud-source/native-wasm-hud-generation-001.log.gz",
+      "retained_sha256": "154df6912c07d442d5e0c9ff19d0e84e30a831dc4294a971e3e2a735363f0bbe"
+    }
+  },
+  "prepared": {
+    "wabt": "1.0.42",
+    "modules": [
+      {
+        "name": "rust-hud",
+        "prefix": "m0",
+        "input_sha256": "354810fda6efcbf3c457d964c9661fa59ea3d47c4a2ba7eca2a0d1e636b6248b",
+        "prepared_sha256": "20015a06a9d17da7f5b45d37f7b5ee51e8c7e12017d9105c27d8cf8978b55e93"
+      },
+      {
+        "name": "hud",
+        "prefix": "m1",
+        "input_sha256": "22a80123b67c22ec5e27705f61c3cdaa8b23ee290d3d09f19ef9e26106317134",
+        "prepared_sha256": "85c7e18a75e70dda04337a5112941aad9f4ce5ec27abd6d7d1cb5f75203d2069"
+      }
+    ],
+    "files": {
+      "linked.rs": "4c748f199de5c8ef766cc0063d4eef459e55d0fb19e33e268c8fddd185cbdcfe",
+      "m0-facade.c": "8444facf73c4951689c89d5e6c3d2b38022e22ead1e4a20f4f6b3116743173f6",
+      "m0.c": "ce7947c68726b303a3a6d0da31490f23affa91d01727cb15166c472e72df1736",
+      "m0.h": "ad31a85bfc00032993a1d66ecd1425a5167e98d7a49fbca92f8458b37877b8e2",
+      "m0.original.wasm": "354810fda6efcbf3c457d964c9661fa59ea3d47c4a2ba7eca2a0d1e636b6248b",
+      "m0.wasm": "20015a06a9d17da7f5b45d37f7b5ee51e8c7e12017d9105c27d8cf8978b55e93",
+      "m1-facade.c": "779d2baa0745913777dc5e2db9eafa455234c62716e6a9bc85622d6d4840ca64",
+      "m1.c": "805cd58467802d7296366ba0bded8f53639fbb39950faf4a4744ed15c8f51160",
+      "m1.h": "5f9e12d88046e9c6afcb3463a90aed6e81df665eba1f8c39a858907dd69ccb37",
+      "m1.original.wasm": "22a80123b67c22ec5e27705f61c3cdaa8b23ee290d3d09f19ef9e26106317134",
+      "m1.wasm": "85c7e18a75e70dda04337a5112941aad9f4ce5ec27abd6d7d1cb5f75203d2069"
+    }
+  },
+  "limitations": [
+    "Public package proof and broad checks pending",
+    "Module checkpoints remain unsupported",
+    "No native window, GPU, appearance or phone performance claim"
+  ],
+  "prior_fixture_failure": "composed-005 incorrectly expected caught stale epoch to succeed. Existing actual hosts retain every import error; corrected fixture requires rejection without changing production."
+}
