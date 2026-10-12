@@ -1,3 +1,5 @@
+#[path = "support/scene_format.rs"]
+mod scene_format;
 use incant_runtime::{
     CookedEntity, CookedScene, CookedSpatial, FrameCommands, NativeEnvironmentLight,
     NativeMeshRenderer, NativeWorld, SaveError, StableId, StructuralCommand as Cmd,
@@ -141,9 +143,15 @@ fn source_free_v4_roundtrip_is_canonical_and_preserves_all_typed_declarations() 
         scene().with_spatial(vec![], vec![]).unwrap().to_bytes(),
         plain
     );
-    assert_eq!(&plain[8..12], &1u32.to_le_bytes());
+    assert_eq!(
+        &plain[8..12],
+        &crate::scene_format::scene_format(1).to_le_bytes()
+    );
     let expected = scene().with_spatial(assets(), nodes()).unwrap().to_bytes();
-    assert_eq!(&expected[8..12], &4u32.to_le_bytes());
+    assert_eq!(
+        &expected[8..12],
+        &crate::scene_format::scene_format(4).to_le_bytes()
+    );
     let mut a = assets();
     a.reverse();
     let mut n = nodes();

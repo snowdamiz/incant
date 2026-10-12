@@ -5,22 +5,49 @@ edition.workspace = true
 rust-version.workspace = true
 publish.workspace = true
 
+[features]
+default = ["physics-deterministic"]
+
+# Select one physics kernel for the entire process, including build/test hosts.
+physics-deterministic = [
+    "incant_assets/physics-deterministic",
+    "incant_audio_runtime/physics-deterministic",
+    "incant_game_runtime/physics-deterministic",
+    "incant_render/physics-deterministic",
+    "incant_render_game/physics-deterministic",
+    "incant_render_native/physics-deterministic",
+    "incant_runtime/physics-deterministic",
+    "incant_script/physics-deterministic",
+    "incant_ui/physics-deterministic",
+]
+physics-fast-simd8 = [
+    "incant_assets/physics-fast-simd8",
+    "incant_audio_runtime/physics-fast-simd8",
+    "incant_game_runtime/physics-fast-simd8",
+    "incant_render/physics-fast-simd8",
+    "incant_render_game/physics-fast-simd8",
+    "incant_render_native/physics-fast-simd8",
+    "incant_runtime/physics-fast-simd8",
+    "incant_script/physics-fast-simd8",
+    "incant_ui/physics-fast-simd8",
+]
+
 [dependencies]
-incant_render = { path = "../incant_render" }
+incant_render = { path = "../incant_render", default-features = false }
 incant_render_data.workspace = true
-incant_render_native = { path = "../incant_render_native" }
-incant_render_game = { path = "../incant_render_game" }
+incant_render_native = { path = "../incant_render_native", default-features = false }
+incant_render_game = { path = "../incant_render_game", default-features = false }
 thiserror.workspace = true
 
 [dev-dependencies]
 incant_doc.workspace = true
 incant_audio_runtime = { workspace = true, features = ["scene"] }
-incant_game_runtime = { path = "../incant_game_runtime" }
+incant_game_runtime = { path = "../incant_game_runtime", default-features = false }
 incant_runtime.workspace = true
 incant_types.workspace = true
 incant_script = { workspace = true, features = ["compiler"] }
 incant_input.workspace = true
-incant_assets = { path = "../incant_assets" }
+incant_assets = { path = "../incant_assets", default-features = false }
 incant_assets_runtime = { workspace = true, features = ["visual"] }
 serde_json.workspace = true
 tempfile = "3"

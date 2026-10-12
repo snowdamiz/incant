@@ -1,5 +1,7 @@
 #[path = "support/localization.rs"]
 mod fixture;
+#[path = "support/scene_format.rs"]
+mod scene_format;
 use fixture::*;
 use incant_localization::{LocalizationReportRequest, MessageArgument, MissingKind};
 use incant_runtime::{
@@ -21,7 +23,10 @@ fn locale(world: &mut NativeWorld, value: incant_localization::LocaleSettings) {
 #[test]
 fn cooked_localization_round_trips_and_old_plain_scenes_keep_defaults() {
     let bytes = scene().to_bytes();
-    assert_eq!(&bytes[8..12], &10u32.to_le_bytes());
+    assert_eq!(
+        &bytes[8..12],
+        &crate::scene_format::scene_format(10).to_le_bytes()
+    );
     let loaded = CookedScene::from_bytes(&bytes).unwrap();
     assert_eq!(loaded.to_bytes(), bytes);
     let mut world = NativeWorld::new(loaded);
@@ -35,7 +40,10 @@ fn cooked_localization_round_trips_and_old_plain_scenes_keep_defaults() {
     let plain = CookedScene::new(StableId([99; 16]), 60, vec![])
         .unwrap()
         .to_bytes();
-    assert_eq!(&plain[8..12], &1u32.to_le_bytes());
+    assert_eq!(
+        &plain[8..12],
+        &crate::scene_format::scene_format(1).to_le_bytes()
+    );
     assert_eq!(
         NativeWorld::from_bytes(&plain)
             .unwrap()

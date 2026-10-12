@@ -5,10 +5,17 @@ edition.workspace = true
 rust-version.workspace = true
 publish.workspace = true
 
+[features]
+default = ["physics-deterministic"]
+
+# Select one physics kernel for the entire process, including build/test hosts.
+physics-deterministic = ["incant_assets/physics-deterministic", "incant_core/physics-deterministic"]
+physics-fast-simd8 = ["incant_assets/physics-fast-simd8", "incant_core/physics-fast-simd8"]
+
 [dependencies]
 incant_render_data.workspace = true
 incant_types.workspace = true
-incant_assets = { path = "../incant_assets" }
+incant_assets = { path = "../incant_assets", default-features = false }
 incant_core.workspace = true
 incant_doc.workspace = true
 glam = "0.32"

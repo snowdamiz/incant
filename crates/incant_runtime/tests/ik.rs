@@ -1,3 +1,5 @@
+#[path = "support/scene_format.rs"]
+mod scene_format;
 use incant_runtime::*;
 use incant_types::{Animation, Transform};
 use sha2::{Digest, Sha256};
@@ -99,7 +101,10 @@ fn checksum(bytes: &mut [u8], prefix: usize, header: usize) {
 fn v16_and_v9_roundtrip_exact_targets_and_older_non_ik_bytes() {
     let initial = scene(2, 2);
     let bytes = initial.to_bytes();
-    assert_eq!(&bytes[8..12], &16u32.to_le_bytes());
+    assert_eq!(
+        &bytes[8..12],
+        &crate::scene_format::scene_format(16).to_le_bytes()
+    );
     assert_eq!(CookedScene::from_bytes(&bytes).unwrap().to_bytes(), bytes);
     let mut world = NativeWorld::new(initial.clone());
     apply(&mut world, [control(1, 100, 1.5), control(2, 101, -3.)]).unwrap();
@@ -122,7 +127,10 @@ fn v16_and_v9_roundtrip_exact_targets_and_older_non_ik_bytes() {
         .unwrap()
         .with_spatial(initial.visual_assets().to_vec(), vec![plain])
         .unwrap();
-    assert_eq!(&no_ik.to_bytes()[8..12], &11u32.to_le_bytes());
+    assert_eq!(
+        &no_ik.to_bytes()[8..12],
+        &crate::scene_format::scene_format(11).to_le_bytes()
+    );
     let plain = NativeWorld::new(no_ik).save_bytes().unwrap();
     assert_eq!(&plain[8..12], &4u32.to_le_bytes());
     assert_eq!(

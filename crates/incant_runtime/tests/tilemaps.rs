@@ -1,3 +1,5 @@
+#[path = "support/scene_format.rs"]
+mod scene_format;
 use incant_runtime::*;
 use incant_types::{Transform, Velocity};
 use sha2::{Digest, Sha256};
@@ -63,7 +65,10 @@ fn rehash(bytes: &mut [u8]) {
 fn v6_round_trip_preserves_binary_frames_and_retained_local_preparation() {
     let input = scene(map(false)).unwrap();
     let bytes = input.to_bytes();
-    assert_eq!(&bytes[8..12], &6u32.to_le_bytes());
+    assert_eq!(
+        &bytes[8..12],
+        &crate::scene_format::scene_format(6).to_le_bytes()
+    );
     let loaded = CookedScene::from_bytes(&bytes).unwrap();
     assert_eq!(loaded.spatial(), input.spatial());
     assert_eq!(loaded.to_bytes(), bytes);
@@ -268,7 +273,7 @@ fn aggregate_cell_cap_is_checked_at_scene_and_structural_boundaries() {
 }
 
 #[test]
-fn frozen_source_free_v1_through_v5_scenes_reencode_byte_for_byte_and_still_step() {
+fn frozen_source_free_v1_through_v5_scenes_preserve_their_original_physics_variant() {
     for bytes in [
         include_bytes!("fixtures/tilemap-compat/v1.scene").as_slice(),
         include_bytes!("fixtures/tilemap-compat/v2.scene"),
@@ -276,6 +281,13 @@ fn frozen_source_free_v1_through_v5_scenes_reencode_byte_for_byte_and_still_step
         include_bytes!("fixtures/tilemap-compat/v4.scene"),
         include_bytes!("fixtures/tilemap-compat/v5.scene"),
     ] {
+        if incant_runtime::PHYSICS_VARIANT != incant_runtime::PhysicsVariant::Deterministic {
+            assert!(matches!(CookedScene::from_bytes(bytes),
+                Err(SceneError::PhysicsVariant { requested: incant_runtime::PhysicsVariant::Deterministic, compiled })
+                if compiled == incant_runtime::PHYSICS_VARIANT));
+            assert!(NativeWorld::from_bytes(bytes).is_err());
+            continue;
+        }
         let scene = CookedScene::from_bytes(bytes).unwrap();
         assert_eq!(scene.to_bytes(), bytes);
         let mut first = NativeWorld::new(scene.clone());

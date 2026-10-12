@@ -1,3 +1,5 @@
+#[path = "support/scene_format.rs"]
+mod scene_format;
 use incant_runtime::{
     BodyState, CookedEntity, CookedPhysics, CookedScene, FrameCommands, NativeWorld, RuntimeError,
     SaveError, SceneError, StableId, StructuralCommand,
@@ -61,7 +63,10 @@ fn rehash(bytes: &mut [u8]) {
 #[test]
 fn cooked_physics_round_trip_is_canonical_and_version_one_is_retained() {
     let plain = scene(vec![entity(1, [0.; 3])], vec![]).to_bytes();
-    assert_eq!(&plain[8..12], &1_u32.to_le_bytes());
+    assert_eq!(
+        &plain[8..12],
+        &crate::scene_format::scene_format(1).to_le_bytes()
+    );
     assert_eq!(CookedScene::from_bytes(&plain).unwrap().to_bytes(), plain);
     let mut compound = physics(2, Some(BodyMotion::Kinematic));
     compound.angular_velocity = Some(AngularVelocity {
@@ -91,7 +96,10 @@ fn cooked_physics_round_trip_is_canonical_and_version_one_is_retained() {
         vec![compound, physics(1, None)],
     );
     let bytes = cooked.to_bytes();
-    assert_eq!(&bytes[8..12], &2_u32.to_le_bytes());
+    assert_eq!(
+        &bytes[8..12],
+        &crate::scene_format::scene_format(2).to_le_bytes()
+    );
     let loaded = CookedScene::from_bytes(&bytes).unwrap();
     assert_eq!(loaded.physics(), cooked.physics());
     assert_eq!(loaded.to_bytes(), bytes);

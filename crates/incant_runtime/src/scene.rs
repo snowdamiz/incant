@@ -38,6 +38,18 @@ pub const MAX_ENTITIES: usize = 1_000_000;
 
 #[derive(Debug, Error, PartialEq)]
 pub enum SceneError {
+    #[error(
+        "project physics mode {requested} requires a matching process; compiled kernel is {compiled}"
+    )]
+    PhysicsMode {
+        requested: crate::PhysicsMode,
+        compiled: crate::PhysicsVariant,
+    },
+    #[error("cooked physics kernel {requested} does not match compiled kernel {compiled}")]
+    PhysicsVariant {
+        requested: crate::PhysicsVariant,
+        compiled: crate::PhysicsVariant,
+    },
     #[error("native localization: {0}")]
     Localization(String),
     #[error("native navigation: {0}")]
@@ -57,6 +69,12 @@ pub enum SceneError {
 }
 
 impl CookedScene {
+    /// Constructors create data for this build; the binary loader admits the
+    /// serialized variant before returning this runtime-ready type.
+    pub const fn physics_variant(&self) -> crate::PhysicsVariant {
+        crate::PHYSICS_VARIANT
+    }
+
     pub fn new(
         id: StableId,
         tick_rate: u32,
@@ -115,7 +133,7 @@ impl CookedScene {
             ));
         }
         let entities: BTreeMap<_, _> = self.entities.iter().map(|e| (e.id, e)).collect();
-        let mut size = 72
+        let mut size = 72_usize
             + self.text_bytes()
             + self.entities.len() * 128
             + 16
@@ -150,7 +168,7 @@ impl CookedScene {
         let ids: std::collections::BTreeSet<_> = self.entities.iter().map(|e| e.id).collect();
         crate::audio::validate(&audio, |id| ids.contains(&id))?;
         audio.sort_unstable_by_key(|node| node.entity);
-        let size = 72
+        let size = 72_usize
             + self.localization_bytes()
             + self.text_bytes()
             + self.entities.len() * 128
@@ -268,7 +286,7 @@ impl CookedScene {
         }
         self.visual_assets = assets;
         self.spatial = nodes;
-        let size = 72
+        let size = 72_usize
             + self.localization_bytes()
             + self.text_bytes()
             + self.entities.len() * 128
@@ -407,7 +425,7 @@ impl CookedScene {
                 "2D and 3D colliders require separate entities",
             ));
         }
-        let size = 72
+        let size = 72_usize
             + self.localization_bytes()
             + self.text_bytes()
             + self.entities.len() * 128
