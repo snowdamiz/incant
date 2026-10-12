@@ -260,12 +260,10 @@ fn foreign_physics_mode_still_refuses_without_output_or_authoring_changes() {
     let output = run(root, &command);
     assert!(!output.status.success());
     assert!(output.stdout.is_empty());
-    assert!(
-        String::from_utf8_lossy(&output.stderr).contains(&format!(
-            "project physics mode {mode} requires a matching process; compiled kernel is {}",
-            incant_runtime::PHYSICS_VARIANT
-        ))
-    );
+    assert!(String::from_utf8_lossy(&output.stderr).contains(&format!(
+        "project physics mode {mode} requires a matching process; compiled kernel is {}",
+        incant_runtime::PHYSICS_VARIANT
+    )));
     assert!(!root.join("refused.pcm").exists());
     unchanged(root, &before);
 }
