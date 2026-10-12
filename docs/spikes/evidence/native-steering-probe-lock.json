@@ -1,0 +1,70 @@
+{
+  "recorded_at": "2026-10-12T04:00:25.747459+00:00",
+  "failed_pr": 126,
+  "failed_head": "a02cc257c663caca538a8aa330ba4e68057c97c8",
+  "failed_run": 38201794993,
+  "failed_job": 114656599319,
+  "cause": "New incant_nav -> incant_types local dependency was absent from the standalone physics probe lockfile.",
+  "change": "Add only the required local dependency edge; package versions, sources and checks unchanged.",
+  "preserved_hosted_log": {
+    "path": "/tmp/incant-pr126-fast-failure.log",
+    "sha256": "e23f218d6575b05c7dd97eb3f8555235afa13aadd78c350c1ce637c1ea24cd45"
+  },
+  "receipts": {
+    "native-metadata.json": {
+      "path": "/tmp/incant-steering-probe-lock-fix/native-metadata.json",
+      "sha256": "1b476b6ac18b564e8e10a0eccd5358c34d19f5e208366e85586f39c4787e098f"
+    },
+    "patch.diff": {
+      "path": "/tmp/incant-steering-probe-lock-fix/patch.diff",
+      "sha256": "e5f15108b720598bdab327a65a37adc6f2a684993b1abe962278b715d16531b2"
+    },
+    "green-guard.log": {
+      "path": "/tmp/incant-steering-probe-lock-fix/green-guard.log",
+      "sha256": "5e6b4e5a704eb400035eeb77b916ea6955b464475d363d3fc3c69f7523a9a9a2"
+    },
+    "red-cargo.log": {
+      "path": "/tmp/incant-steering-probe-lock-fix/red-cargo.log",
+      "sha256": "694c654b1ebe4fae3dd367ca58c9004fb0dc004a9f988152ce1df87c11498472"
+    },
+    "native-cargo.log": {
+      "path": "/tmp/incant-steering-probe-lock-fix/native-cargo.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "wasm32-cargo.log": {
+      "path": "/tmp/incant-steering-probe-lock-fix/wasm32-cargo.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tools.log": {
+      "path": "/tmp/incant-steering-probe-lock-fix/tools.log",
+      "sha256": "9e8da6b23d80d62ea9696e05e0a6d15461a1ab6b9204b0204cd70941a5e91987"
+    },
+    "wasm32-metadata.json": {
+      "path": "/tmp/incant-steering-probe-lock-fix/wasm32-metadata.json",
+      "sha256": "3d5c8c6254fa738f621955cb14eb84b45530942ff072fb32d031f10d43c0ee5f"
+    },
+    "red-guard.log": {
+      "path": "/tmp/incant-steering-probe-lock-fix/red-guard.log",
+      "sha256": "7c0ec08c6535a74c01a15c4b1b90ad588f4d60c51100df4eb21b3f99646634d9"
+    }
+  },
+  "validation": {
+    "red": "Locked offline Cargo metadata and structural probe-lock guard fail on old source.",
+    "green": "Locked offline native and wasm32-filtered Cargo metadata and all nine lock guards pass.",
+    "full_tooling": {
+      "python_passed": 223,
+      "python_skipped": 4,
+      "node_passed": 22
+    },
+    "runtime": "Original 364 scoped CPU checks remain applicable; no runtime source changed."
+  },
+  "independent_review": {
+    "reviewer": "astra /root",
+    "decision": "accepted",
+    "method": "Read exact one-edge diff, both red reproductions, green guard and native/wasm32 metadata. No package resolution movement."
+  },
+  "limits": [
+    "Metadata validates dependency resolution, not an actual native/browser physics execution.",
+    "Required hosted fast gate still must pass on the corrected head."
+  ]
+}
