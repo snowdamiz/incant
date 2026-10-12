@@ -1,4 +1,4 @@
-//! Versions 1–13, little-endian checked data (not executable code). SHA-256 detects
+//! Versions 1–14, little-endian checked data (not executable code). SHA-256 detects
 //! damage, not authorship. No casts, alignment assumptions or native-layout ABI.
 use crate::scene::MAX_ENTITIES;
 use crate::{CookedEntity, CookedScene, SceneError, StableId};
@@ -7,7 +7,7 @@ use sha2::{Digest, Sha256};
 use std::collections::BTreeMap;
 
 const MAGIC: &[u8; 8] = b"INCANTSC";
-const VERSION: u32 = 13;
+const VERSION: u32 = 14;
 const PREFIX: usize = 40;
 const HEADER: usize = 72;
 const MIN_RECORD: usize = 104;
@@ -24,8 +24,10 @@ impl CookedScene {
             .collect();
         let mut bytes = Vec::with_capacity(HEADER + self.entities.len() * MAX_RECORD);
         bytes.extend(MAGIC);
-        let version = if self.has_ui() {
+        let version = if self.has_animation_graphs() {
             VERSION
+        } else if self.has_ui() {
+            13
         } else if self.has_text() {
             12
         } else if self.spatial.iter().any(|n| n.animation.is_some()) {
@@ -152,6 +154,9 @@ impl CookedScene {
         }
         if version >= 13 {
             crate::ui_binary::write(&mut bytes, &self.ui);
+        }
+        if version >= 14 {
+            crate::animation_graph::binary::write(&mut bytes, &self.spatial);
         }
         let length = (bytes.len() - HEADER) as u32;
         bytes[36..40].copy_from_slice(&length.to_le_bytes());
@@ -407,6 +412,12 @@ impl CookedScene {
         } else {
             Vec::new()
         };
+        if version == 13 && ui.is_empty() {
+            return Err(SceneError::Invalid("empty UI suffix"));
+        }
+        if version >= 14 {
+            crate::animation_graph::binary::read(&mut reader, &mut spatial)?;
+        }
         if !reader.0.is_empty() {
             return Err(SceneError::Invalid("trailing payload"));
         }

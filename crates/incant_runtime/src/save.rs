@@ -124,20 +124,30 @@ impl NativeWorld {
                     .map(|p| (id, p.state))
             })
             .collect::<Vec<_>>();
+        let graphs = self
+            .entities
+            .iter()
+            .filter_map(|(&id, &handle)| {
+                self.world
+                    .get::<crate::animation::Playback>(handle)
+                    .and_then(|p| p.graph.map(|g| (id, g)))
+            })
+            .collect::<Vec<_>>();
         codec::encode(
             self.tick,
             self.source_scene_fingerprint,
             &scene.to_bytes(),
             &states,
             &animations,
+            &graphs,
         )
     }
 
-    /// Load validated data without source/project/asset-cache access. V2–v5 retain
+    /// Load validated data without source/project/asset-cache access. V2–v6 retain
     /// the original cooked-scene fingerprint for later program pairing; it is not
     /// authentication and does not restore a VM. Legacy v1 has no original binding
     /// field: its fingerprint describes only the saved plain scene. V3 adds localized
-    /// scenes, v4 adds animation playback, and v5 adds active crossfades; older saves cannot silently clear
+    /// scenes, v4 adds animation playback, v5 adds active crossfades, and v6 adds exact graph state; older saves cannot silently clear
     /// an existing locale/catalog.
     pub fn from_save_bytes(bytes: &[u8]) -> Result<Self, SaveError> {
         let decoded = codec::decode(bytes)?;
@@ -177,6 +187,14 @@ impl NativeWorld {
         {
             return Err(SaveError::Invalid("animation membership"));
         }
+        let expected_graphs = scene
+            .spatial()
+            .iter()
+            .filter(|n| n.animation.as_ref().is_some_and(|a| a.graph.is_some()))
+            .count();
+        if decoded.graphs.len() != expected_graphs * codec::GRAPH_BYTES {
+            return Err(SaveError::Invalid("animation graph membership"));
+        }
         let mut world = Self::new(scene);
         for row in decoded.states.as_chunks::<{ codec::STATE_BYTES }>().0 {
             let (id, checkpoint) = codec::state(row)?;
@@ -211,6 +229,26 @@ impl NativeWorld {
                 .validate_state(state)
                 .map_err(|_| SaveError::Invalid("animation checkpoint"))?;
             playback.state = state;
+        }
+        for row in decoded.graphs.as_chunks::<{ codec::GRAPH_BYTES }>().0 {
+            let (id, graph) = codec::graph(row)?;
+            let entity = *world
+                .entities
+                .get(&id)
+                .ok_or(SaveError::Invalid("animation graph entity"))?;
+            let mut playback = world
+                .world
+                .get_mut::<crate::animation::Playback>(entity)
+                .ok_or(SaveError::Invalid("animation graph component"))?;
+            let definition = playback
+                .definition
+                .graph
+                .as_ref()
+                .ok_or(SaveError::Invalid("animation graph definition"))?;
+            definition
+                .validate_state(&graph, playback.state, &playback.definition)
+                .map_err(|_| SaveError::Invalid("animation graph checkpoint"))?;
+            playback.graph = Some(graph);
         }
         world.tick = decoded.tick;
         if let Some(origin) = decoded.origin {

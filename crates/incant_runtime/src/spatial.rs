@@ -100,6 +100,7 @@ pub(crate) fn validate<'a>(
     let (mut tilemaps, mut tile_slots) = (0, 0usize);
     let mut flipbook_frames = 0usize;
     let mut animation_clips = 0usize;
+    let mut graphs = 0usize;
     let (mut meshes, mut sprites, mut directional, mut local, mut shadows, mut environments) =
         (0, 0, 0, 0, 0, 0);
     let asset = |id, kind| {
@@ -138,6 +139,10 @@ pub(crate) fn validate<'a>(
                 .binary_search_by_key(&mesh.mesh, |a| a.id)
                 .map_err(|_| invalid())?;
             if assets[reference].fingerprint != animation.mesh_fingerprint {
+                return Err(invalid());
+            }
+            graphs += usize::from(animation.graph.is_some());
+            if graphs > crate::MAX_ANIMATION_GRAPH_INSTANCES {
                 return Err(invalid());
             }
             animation_clips = animation_clips

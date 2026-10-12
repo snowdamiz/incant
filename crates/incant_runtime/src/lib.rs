@@ -3,11 +3,13 @@
 //! committed spatial extraction. Mixer/render hosts and authoring stay separate.
 mod animation;
 mod animation_binary;
+mod animation_graph;
 pub use animation::{
     AnimationBlendSample, AnimationControl, AnimationSample, AnimationSnapshot, AnimationState,
     AnimationTransition, MAX_ANIMATION_CLIPS, MAX_ANIMATION_TRANSITION_SECONDS,
     MAX_SCENE_ANIMATION_CLIPS, NativeAnimation,
 };
+pub use animation_graph::*;
 mod audio;
 mod audio_binary;
 mod audio_controls;

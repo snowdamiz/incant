@@ -88,7 +88,7 @@ impl<'a> SpatialView<'a> {
                     .map(|p| p.state.sample),
                 animation_blend: world
                     .get::<crate::animation::Playback>(entity)
-                    .and_then(|p| p.state.blend_sample()),
+                    .and_then(|p| p.blend_sample()),
                 flipbook: world
                     .get::<crate::flipbook::Playback>(entity)
                     .map(|p| p.state),
