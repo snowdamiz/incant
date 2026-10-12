@@ -2,6 +2,7 @@
 //! game session and retained GPU consumer remain the sole simulation path.
 mod clock;
 mod gamepad;
+mod ime;
 mod input;
 mod probe;
 mod surface;
@@ -53,6 +54,10 @@ pub enum Error {
     InputCapacity,
     #[error("native UI receipt count or text byte capacity exceeded")]
     UiCapacity,
+    #[error("native IME session counter exhausted")]
+    ImeSession,
+    #[error("native IME operation refused: {0}")]
+    Ime(#[from] tao::text_input::TextInputError),
     #[error("native window rendering has no screen-space UI consumer")]
     UiUnsupported,
 }
@@ -176,6 +181,11 @@ pub fn run(args: &[String]) -> session::Result<()> {
     input.reset_focus(focused);
     let mut ui_input = ui_input::UiInput::new();
     ui_input.synchronize(game.host()?.ui(), &mut input)?;
+    if has_ui && let Some((serial, enabled)) = ui_input.text_session(game.host()?.ui(), false)? {
+        window
+            .set_text_input_session(serial, enabled)
+            .map_err(Error::Ime)?;
+    }
     let mut ui_resize = false;
     let mut clock = clock::Clock::new(rate, Instant::now());
     let mut retry = Instant::now();
@@ -390,6 +400,18 @@ pub fn run(args: &[String]) -> session::Result<()> {
                 }
                 _ => {}
             }
+            if has_ui {
+                let active = focused
+                    && !platform_suspended
+                    && !window.is_minimized()
+                    && surface.has_supported_size()
+                    && (!suspended || ui_input.awaiting_surface());
+                if let Some((serial, enabled)) = ui_input.text_session(game.host()?.ui(), active)? {
+                    window
+                        .set_text_input_session(serial, enabled)
+                        .map_err(Error::Ime)?;
+                }
+            }
             Ok(())
         })();
         if let Err(error) = result {
@@ -407,6 +429,11 @@ pub fn run(args: &[String]) -> session::Result<()> {
         };
     });
     surface.cancel();
+    if has_ui && let Some((serial, enabled)) = ui_input.text_session(None, false)? {
+        window
+            .set_text_input_session(serial, enabled)
+            .map_err(Error::Ime)?;
+    }
     if let Some(error) = failure {
         drop(game);
         return Err(error);
@@ -417,7 +444,7 @@ pub fn run(args: &[String]) -> session::Result<()> {
     if let Some(probe) = &probe {
         probe.validate()?;
     }
-    let report = serde_json::json!({"mode":"native-window","tick":game.world()?.tick(),"accepted_frames":game.host()?.consumer().accepted_frames(),"presentation_refreshes":presentation_refreshes,"adapter":renderer.adapter_name,"backend":format!("{:?}",renderer.adapter.get_info().backend),"on_screen":true,"dropped_wall_ticks":clock.dropped.to_string(),"surface_reconfigurations":surface.reconfigurations,"surface_recreations":surface.recreations,"surface_skipped":surface.skipped,"lifecycle_probe":probe.as_ref().map(|p|p.report())});
+    let report = serde_json::json!({"mode":"native-window","tick":game.world()?.tick(),"accepted_frames":game.host()?.consumer().accepted_frames(),"presentation_refreshes":presentation_refreshes,"adapter":renderer.adapter_name,"backend":format!("{:?}",renderer.adapter.get_info().backend),"on_screen":true,"dropped_wall_ticks":clock.dropped.to_string(),"surface_reconfigurations":surface.reconfigurations,"surface_recreations":surface.recreations,"surface_skipped":surface.skipped,"discarded_stale_text_events":ui_input.stale_text_events(),"lifecycle_probe":probe.as_ref().map(|p|p.report())});
     drop(game); // stop device audio before returning/closing the native surface
     println!("{report}");
     Ok(())

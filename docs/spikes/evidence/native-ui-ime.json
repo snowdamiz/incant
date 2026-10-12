@@ -1,0 +1,179 @@
+{
+  "parent": "777e9a107442d2a0d4675516d7be53cd7967bc3b",
+  "branch": "codex/native-ui-ime",
+  "scope": "Opt-in desktop native text contexts and bounded receipt bridge; no native execution/appearance acceptance",
+  "source_freeze": {
+    "path": "docs/spikes/evidence/native-ui-ime/source-freeze.json",
+    "sha256": "131fbdc66c638366d6dc232b33a0ae9c906fc275583445eab1fa0e387fd152e5"
+  },
+  "review": {
+    "path": "docs/spikes/evidence/native-ui-ime-review.json",
+    "sha256": "d80c8df04a09d6e6e0a6d3c35fad583f865d90f9c2dda362118ceee14b7e0247"
+  },
+  "checks": {
+    "cpu_tests": 105,
+    "result_groups": 17,
+    "failed": 0,
+    "ignored": 0,
+    "native_protocol_tests": 8,
+    "scoped_all_target_clippy": "passed",
+    "macos": "aarch64-apple-darwin native-window player compiled and CPU tests executed",
+    "windows": "x86_64-pc-windows-gnu Tao compile check only",
+    "linux": "aarch64-unknown-linux-gnu Tao GTK compile check only; GTK3.24.41",
+    "format_conventions_diff": "passed",
+    "lean_runtime_graph": "passed",
+    "native_window_gpu_provider_calls": false
+  },
+  "toolchain": "Rust1.99.0 b940084d7eb6a299eb4bfeb8e34901bc051e7ac4; ci profile -j2; /tmp/incant-font-atlas-target",
+  "lock": {
+    "packages": 962,
+    "changes": "Only Tao0.37.1 registry source/checksum replaced with exact vendored path; all package versions/dependency arrays unchanged"
+  },
+  "vendor": {
+    "registry_checksum": "f37f381f4e048e6cdf038b5705f8cf14ad108279d46eb968140a7b291aba9400",
+    "files": 122,
+    "changed_or_added": 22,
+    "licenses": "upstream Apache-2.0/MIT license files retained",
+    "reviewed_file_hashes": "source-freeze.json",
+    "baseline_file_hashes": "tao-registry-files.json",
+    "package_vcs_metadata": "upstream .cargo_vcs_info preserved, including its dirty:true flag; not a claim of a pristine Git checkout"
+  },
+  "container": {
+    "name": "incant-ime-gtk-001",
+    "id": "ab8765fddb4a23e02320e6ae787be28fa8aaf8a4129a3a141f818d1913fa3949",
+    "image": "sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55",
+    "status": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-12T05:30:54.595101385Z",
+      "FinishedAt": "2026-10-12T05:30:55.880995636Z"
+    },
+    "cpus": 2000000000,
+    "memory": 4294967296,
+    "source_mount_read_only": true,
+    "display_gpu_ports": "none",
+    "rust_install": "exact installed rustup manifest SHA-verified rustc/cargo/std archives, recorded linux-toolchain.json"
+  },
+  "commands": [
+    "cargo test --locked --offline --profile ci -j2 -p incant_game_player -p incant_ui -p incant_input --features incant_game_player/native-window",
+    "cargo clippy --locked --offline --profile ci -j2 -p incant_game_player -p incant_ui -p incant_input --features incant_game_player/native-window --all-targets -- -D warnings",
+    "rustc --edition=2021 --test third_party/tao/src/text_input.rs; run resulting exact-source test executable",
+    "cargo check --locked --offline --profile ci -j2 -p tao --target x86_64-pc-windows-gnu",
+    "container linux-check.sh: cargo check --locked --profile ci -j2 -p tao",
+    "python3 tools/check_runtime_dependencies.py incant_types incant_runtime incant_script incant_assets_runtime incant_input incant_ui incant_game_runtime incant_game_player --features incant_game_player/native-window",
+    "cargo fmt --all -- --check; python3 tools/generate_conventions.py --check; git diff --check"
+  ],
+  "review_regressions": [
+    {
+      "prior": "old malformed/oversized retired-owner payload fails current adapter with UiCapacity",
+      "red": "incant-native-ui-ime-stale-red.log",
+      "green": "105-test final suite including retired_native_payloads_are_discarded_before_semantic_validation"
+    },
+    {
+      "prior": "Cocoa unmark cancels marked content; pure extracted prior state machine fails2/8 assertions",
+      "red": "incant-native-ui-ime-unmark-red.log",
+      "green": "exact actual corrected helper passes8/8 incl replacement, empty preedit, insert/unmark and retire/late callback"
+    }
+  ],
+  "earlier_failures": [
+    "Cocoa define_class method selector return ownership and NonNull buffer API compile corrections",
+    "Test fixture used obsolete text_buffer method; corrected to actual text observer",
+    "First Windows crosscheck exposed accidental unrelated cfg expansion; corrected before freeze001",
+    "First Linux setup failed checksum filename due shell printf quoting, before Rust compilation; corrected installer only",
+    "cargo test -p tao cannot run non-workspace dependency dev tests; exact common source compiled directly with rustc --test",
+    "An exploratory cargo update changed unrelated resolutions; discarded, final lock verified exact package records as above"
+  ],
+  "warnings": "Vendored Tao emits21macOS and8Linux warnings (upstream deprecated/unused items and cfg-only new common helpers); scoped engine -Dwarnings succeeds; no claim all Tao upstream warnings repaired",
+  "logs": {
+    "/tmp/incant-native-ui-ime-adapter-tests-001.log": "178afe4c3b6866e26d7ad23346f533bb47badab47ed67d84dd515507c0fbf563",
+    "/tmp/incant-native-ui-ime-adapter-tests-002.log": "49a78a35506b59c1ffc2486c02429336aee3dd4787bff7bd2d8648a261298fb2",
+    "/tmp/incant-native-ui-ime-conventions-001.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/tmp/incant-native-ui-ime-diff-001.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/tmp/incant-native-ui-ime-final-clippy-001.log": "dee2457d17d21aaa23b825cb295cdce263958d868b171a299ad47e43df3961b9",
+    "/tmp/incant-native-ui-ime-final-tests-001.log": "53388beef4baa25c3cf1e06dce6313e8184f0dfea3aed3372b694d77f069b7f9",
+    "/tmp/incant-native-ui-ime-format-002.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/tmp/incant-native-ui-ime-graph-001.log": "edeb76e68c24a8b7aa02ee4735e60eaa53b17fd7ca90e8f4f53ab243e6b74cb8",
+    "/tmp/incant-native-ui-ime-linux-check-001.log": "32d78556acae9ce14641defce37b0c6f49b2d9073ebbb8f9193334cf91c406ce",
+    "/tmp/incant-native-ui-ime-linux-check-002.log": "e14e4620679b40d13a6926ba3a7083cfc6630a9e0798cfcb10d5c9ed30573597",
+    "/tmp/incant-native-ui-ime-linux-check-003.log": "60a80b8679e43249e9c0cfce56fd29f2c711ce7b2d2fb5ddbdafed0b73e8ad2f",
+    "/tmp/incant-native-ui-ime-lock-001.log": "8e0ad3a3ca1e8d8f5749a376a38e43ab37279950fb940cae8a8a24b7295aed91",
+    "/tmp/incant-native-ui-ime-macos-check-001.log": "60f421a990584c5f8c28e023c4440fefd431ae722c1a8b7b1a4c5afbc93a7215",
+    "/tmp/incant-native-ui-ime-macos-check-002.log": "b2b73697a755f07debef4fc69503e427e5a89d346e2c6fc0cd058eeeb9da2738",
+    "/tmp/incant-native-ui-ime-macos-check-003.log": "6b88b0e3528c9c1070c0874e5d071408d4a918ced20e8fee1c335e89fe345cc0",
+    "/tmp/incant-native-ui-ime-protocol-build-002.log": "628fa69829c45fe77967cbe79dd4fb13bf35373fa56e932dd5cc9539eae57247",
+    "/tmp/incant-native-ui-ime-protocol-build-003.log": "628fa69829c45fe77967cbe79dd4fb13bf35373fa56e932dd5cc9539eae57247",
+    "/tmp/incant-native-ui-ime-protocol-tests-001.log": "6a401b0aa9eaa272f0d7741d43a611644d4af62c382220d0f1ce12ec836f29bc",
+    "/tmp/incant-native-ui-ime-protocol-tests-002.log": "d77835e1e290b185c1a1c0c59357edc718977917ab3a830eee2678d1dc5f2656",
+    "/tmp/incant-native-ui-ime-protocol-tests-003.log": "582167b624c3159fee47267c3dad198f49917597846c9ffda293c90c5f31b870",
+    "/tmp/incant-native-ui-ime-stale-red.log": "1719d7cb8dc31b9a6eb0c7466a037788d13ac4c9f98575aca917b676c969da31",
+    "/tmp/incant-native-ui-ime-tao-tests-001.log": "6b69e5311af2d7463ee12bcf231cebfefc1677af31d2422d10d535c3ada71e59",
+    "/tmp/incant-native-ui-ime-unmark-red.log": "1c32816fc2c85d71fc5c41e5e322a0a515d8e5084994345a356e6bda06fc992c",
+    "/tmp/incant-native-ui-ime-window-clippy-001.log": "fd1ec3ba50498fc4a2a9b3df544546c5465cbb6b763b9aceb69b30c1afea35c7",
+    "/tmp/incant-native-ui-ime-window-tests-001.log": "51f9ba70852ee9d772d8f369d173cf1b71f2de7d523bea24c89a31cec615cbc2",
+    "/tmp/incant-native-ui-ime-window-tests-002.log": "c4d459f03c59f61476d5aefdd531172ce03639ee12a7500991f59cc41a60f185",
+    "/tmp/incant-native-ui-ime-windows-check-001.log": "3ba0c4b78dd63cbf2475983dc76ae24294b51708ef4a8c0e0de08fce4de0999c",
+    "/tmp/incant-native-ui-ime-windows-check-002.log": "ec4e7356cf3584f3a4e478ca6f2a573c479ebeb1748cdc5e641f3aea278b6482",
+    "/tmp/incant-native-ui-ime-windows-check-003.log": "406c4f7324e910bedaddae5aa0b3bb9a892bc20800eaab8bfb4f481347a61ba8",
+    "/tmp/incant-native-ui-ime-windows-check-004.log": "08db37323c6efbf0f017a1e5c87b3e5dcacd26caef13c821e536d70b13452086",
+    "/tmp/incant-native-ui-ime-windows-std.log": "831ad8906cd548d1be0b512110752469e0a5b4f23e8ea459eb4bf438761bef31"
+  },
+  "retained_logs": {
+    "docs/spikes/evidence/native-ui-ime/incant-native-ui-ime-final-clippy-001.log.gz": {
+      "sha256": "ddc6af5bafeb175a74096afb59faa34b412aaa2bbfec356776ae110c16d32449",
+      "decoded_sha256": "dee2457d17d21aaa23b825cb295cdce263958d868b171a299ad47e43df3961b9",
+      "decoded_bytes": 7581
+    },
+    "docs/spikes/evidence/native-ui-ime/incant-native-ui-ime-final-tests-001.log.gz": {
+      "sha256": "391fb371aea5f1c016e2ce8b08f9d01e60b8329e5e3a0b2a9a323586f9709649",
+      "decoded_sha256": "53388beef4baa25c3cf1e06dce6313e8184f0dfea3aed3372b694d77f069b7f9",
+      "decoded_bytes": 20544
+    },
+    "docs/spikes/evidence/native-ui-ime/incant-native-ui-ime-graph-001.log.gz": {
+      "sha256": "e480ba03e7faf0164f2b401877534016d15a0d1c715f5e483a57f994e3614c5e",
+      "decoded_sha256": "edeb76e68c24a8b7aa02ee4735e60eaa53b17fd7ca90e8f4f53ab243e6b74cb8",
+      "decoded_bytes": 216
+    },
+    "docs/spikes/evidence/native-ui-ime/incant-native-ui-ime-linux-check-003.log.gz": {
+      "sha256": "a3ffa4d01b9928b3136ecca2dce8e15e4e46c7c62166bec93d3ad052323182b0",
+      "decoded_sha256": "60a80b8679e43249e9c0cfce56fd29f2c711ce7b2d2fb5ddbdafed0b73e8ad2f",
+      "decoded_bytes": 3082
+    },
+    "docs/spikes/evidence/native-ui-ime/incant-native-ui-ime-protocol-tests-003.log.gz": {
+      "sha256": "a78eaca1a987998794bea3a30daec4f44df93f0126b9e419182648f3dd32ab14",
+      "decoded_sha256": "582167b624c3159fee47267c3dad198f49917597846c9ffda293c90c5f31b870",
+      "decoded_bytes": 797
+    },
+    "docs/spikes/evidence/native-ui-ime/incant-native-ui-ime-stale-red.log.gz": {
+      "sha256": "6db1cd27650313719336c4dbd2fa68515b7591625527f3ff5270af0940f71bd9",
+      "decoded_sha256": "1719d7cb8dc31b9a6eb0c7466a037788d13ac4c9f98575aca917b676c969da31",
+      "decoded_bytes": 8192
+    },
+    "docs/spikes/evidence/native-ui-ime/incant-native-ui-ime-unmark-red.log.gz": {
+      "sha256": "c93aa51de466d1c540c9a5d6f84f3b73a10ca6035a63c62c43e0eb6f3c61664c",
+      "decoded_sha256": "1c32816fc2c85d71fc5c41e5e322a0a515d8e5084994345a356e6bda06fc992c",
+      "decoded_bytes": 1736
+    },
+    "docs/spikes/evidence/native-ui-ime/incant-native-ui-ime-windows-check-004.log.gz": {
+      "sha256": "496dda8d362051cd5f9fc63be813d74bd1c9ccb0f4940fa1b2b09941095a634c",
+      "decoded_sha256": "08db37323c6efbf0f017a1e5c87b3e5dcacd26caef13c821e536d70b13452086",
+      "decoded_bytes": 160
+    }
+  },
+  "limits": [
+    "No actual NS/GTK/IMM input method interaction, native windows, screenshots, GPU, phone or timing acceptance",
+    "Precise caret rectangle from canonical positioned glyphs is not yet integrated; existing native IME position hook preserved, default origin fallback explicit",
+    "No bound on native OS/input-method allocations or the preexisting Tao queue; own text payload/state copies and accepted UI receipt packet are bounded",
+    "Surrounding-text reconversion/replacement beyond exact current marked range is explicitly unsupported",
+    "Ordinary no-UI Tao behavior stays default; mobile managed text-session API refuses unsupported",
+    "Existing UiUnsupported draw guard retained until reviewed Claude0056 consumer integrates",
+    "IME context/serial/preedit are transient and not serialized; new restored UiRuntime owner requires new native lease; viewport-only surface retry preserves current lease"
+  ],
+  "log_retention": "Exact original log bytes gzip-compressed deterministically to preserve output without source whitespace lint changes."
+}
