@@ -1,0 +1,7 @@
+# Project physics setting on main173
+
+Projects can choose deterministic or fast physics through the ordinary atomic command bus. The default is omitted from legacy documents. Cook and Play reject a mismatched process before reading assets or falling back to source compilation. Exact SIMD/kernel identity remains enforced in cooked scenes. The generated Rust/agent/TypeScript schemas expose the same contract.
+
+[The integrated manifest](evidence/physics-project-main173.json) binds current checks and reused evidence. Every linked engine, compiler, manifest and schema input is identical to the independently accepted producer; the only tool difference is an excluded trusted physics diagnostic. Both 1,411-input producer freezes match current bytes. The existing source-bound Rust tests and Clippy are reused explicitly, not relabeled as current executions. Current validation reruns all 70 schemas using the immutable matching headless binary, generation checks, strict SDK typing, feature guards, formatting and conventions.
+
+The additive startup test resolution retains the current UI controls and the new early mismatch refusal. No numerical or runtime implementation changed during integration. Automatic editor process switching and mode-aware export are separate work. Physics saves, actual devices, GPU, performance and phase gates remain open. Final current-main review is pending.

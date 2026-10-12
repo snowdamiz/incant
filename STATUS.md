@@ -16,6 +16,16 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Project physics selection — current main173 verified
+
+The public command bus atomically selects deterministic or fast physics, with
+legacy deterministic defaults preserved. Cook/Play explicitly refuse a mismatched
+process before assets or source fallback. All 70 schemas and strict TypeScript
+contracts match. Current integration reuses byte-identical three-mode Rust checks
+and reruns schema/generation/guard checks; final review is pending. Automatic editor
+process switching and mode-aware export remain separate follow-on work.
+[Integrated contract and evidence](docs/spikes/physics-project-main173.md).
+
 ## Physics-mode foundation — current main172 verified
 
 The full process graph forwards deterministic, fast and explicit eight-lane
