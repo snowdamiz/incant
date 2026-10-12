@@ -35,6 +35,9 @@ fn setup(root: &Path) -> (String, String) {
         .insert("Velocity".into(), json!({"linear":[2.,0.,0.]}));
     bus.execute(
         vec![
+            Command::SetPhysicsMode {
+                mode: incant_runtime::PHYSICS_VARIANT.mode(),
+            },
             Command::CreateEntity {
                 scene_id: sid.clone(),
                 entity,
@@ -239,6 +242,32 @@ fn edit(root: &Path, commands: Vec<Command>) {
     bus.execute(commands, Actor::user("test"), "fixture edit", None)
         .unwrap();
     fs::write(path, bus.project().canonical_text().unwrap()).unwrap();
+}
+
+#[test]
+fn foreign_physics_mode_still_refuses_without_output_or_authoring_changes() {
+    let temp = tempfile::tempdir().unwrap();
+    let root = temp.path();
+    setup(root);
+    let mode = match incant_runtime::PHYSICS_VARIANT.mode() {
+        incant_doc::PhysicsMode::Deterministic => incant_doc::PhysicsMode::Fast,
+        incant_doc::PhysicsMode::Fast => incant_doc::PhysicsMode::Deterministic,
+    };
+    edit(root, vec![Command::SetPhysicsMode { mode }]);
+    let before = fs::read(root.join("game.incant.json")).unwrap();
+    let mut command = args();
+    command.extend(["--pcm-output", "refused.pcm"]);
+    let output = run(root, &command);
+    assert!(!output.status.success());
+    assert!(output.stdout.is_empty());
+    assert!(
+        String::from_utf8_lossy(&output.stderr).contains(&format!(
+            "project physics mode {mode} requires a matching process; compiled kernel is {}",
+            incant_runtime::PHYSICS_VARIANT
+        ))
+    );
+    assert!(!root.join("refused.pcm").exists());
+    unchanged(root, &before);
 }
 
 #[test]
