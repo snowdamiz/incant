@@ -23,6 +23,6 @@ This is local CPU shipping evidence, not GPU appearance, device performance or
 phase approval. The separate frozen checkpoint14 remains the release boundary.
 
 The [full source, raw/compressed command logs and package receipts](evidence/native-root-motion-main160.json)
-remain available for independent final review. Later main159–160 contributes
+are accepted by the [independent final review](evidence/native-root-motion-main160-review.json). Exact-head fast CI remains required for publication. Later main159–160 contributes
 only documentation and the separately reviewed Windows desktop job budget;
 reviewed production/build/proof bytes remain unchanged.

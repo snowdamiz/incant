@@ -16,14 +16,14 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Complete root motion — main160 integration verified; final review pending
+## Complete root motion — main160 integration reviewed; fast check pending
 
 The native/TypeScript path and additive Wasm operations 53–55 now pass current-main native
 606-case and separate actual-host 453-case CPU suites, scoped checks and three
 fresh ordinary 32-tick source-deleted shipping processes. Each run matches 22,464
 oracle scalars and 256 selected vectors, exact logs/observations/PCM; 11 precise
 refusals publish no output. All 119 producer inputs remain byte exact. Independent
-current-main review and fast publication remain pending; device, appearance,
+current-main review is accepted; exact-head fast CI/publication remain pending; device, appearance,
 CUBICSPLINE root import and whole-module checkpoint limits remain explicit.
 [Current-main evidence](docs/spikes/native-root-motion-main160.md).
 
@@ -555,7 +555,7 @@ and complete Game UI/IME gates remain open.
 Main #160 includes compound native animation transitions and complete Wasm
 snapshots, authored two-bone IK, offline audio/UI checkpoints, public physics
 queries and the Core Sample gameplay slice. The reviewed complete root-motion
-integration passed current-main CPU and ordinary package validation and awaits final review;
+integration passed current-main CPU and ordinary package validation plus final independent review;
 HUD and audio transport remain separate reviewed producer queues. Phase 1 and
 the finished game remain incomplete.
 

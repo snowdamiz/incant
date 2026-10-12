@@ -2874,7 +2874,12 @@
     }
   },
   "evidence_directory": "/Users/andreyyurlov/.codex/incant-integration-evidence/root-motion-main158-001",
-  "integration_review": "pending independent final current-main review",
+  "integration_review": {
+    "status": "accepted without findings",
+    "path": "docs/spikes/evidence/native-root-motion-main160-review.json",
+    "sha256": "39f9f84b9934fa5aa26ee2562453981c5d98097e5c5a9b2477cc4257f5a3d05c",
+    "reviewed_packet_sha256": "e8981ec543985cef91095ecafe35a53e132e276d876f3adbcfa6ee1cadf6e9e0"
+  },
   "limitations": [
     "Local desktop CPU package only; no GPU/rendered/device/performance or phase gate.",
     "Four native root policies, exact clock words, LINEAR/STEP tracks, compound interpolation and ordered IK; CUBICSPLINE import explicitly refuses.",
