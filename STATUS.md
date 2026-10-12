@@ -131,6 +131,10 @@ The current main121 union passes 120 CPU tests, all-target Clippy and three fres
 source/build-deleted exported runs with matching atlas and audible PCM. Missing or
 tampered fonts refuse; 75 GPU tests remain ignored.
 [Integration receipt](docs/spikes/evidence/native-text-input-main121.json).
+The original package retained an external debug source map; an exact-player
+replay after removing only that map passes all three runs and two refusals with
+all remaining package bytes unchanged. Future probes remove these sidecars.
+[Replay evidence](docs/spikes/evidence/native-text-input-map-free-replay.json).
 
 ## Runtime font atlas — integrated CPU foundation
 
@@ -832,28 +836,14 @@ and reject mixed numeric/entity/animation/log prefixes on failure. The combined
 against actual main117 now repeats all 281 actual-host tests and affected checks. This does not add
 blending/state machines/IK/root motion or satisfy device/complete SDK/Phase1 gates.
 
-## Native text scene and font packaging — reviewed main integration
+## Native text data/package foundation — historical verification
 
-Typed Text declarations now cook into bounded v12 binary scene data with explicit
-ordered font chains and immutable recipe bindings. Structural edits and
-save/restore retain/check the same font catalog and invalidate retained consumers
-by world identity/generation. Font loading and export data packaging preflight a
-64 MiB aggregate before payload reads. The actual public command/import/cook,
-export producer and data packager feed a fresh source-deleted numerical
-Latin/Arabic/CJK shaping/atlas test. This is not a successful exported game or
-rendered text claim: plain game, legacy Play and canonical render input explicitly
-refuse Text while the composed consumer is absent. No second CLI mode was added.
-The retained composed CPU text input, actual renderer consumption/Claude
-acceptance, widget layout/IME/focus and reference-phone gates remain open.
-Evidence: [native text bindings](docs/spikes/native-text-bindings.md).
-
-
-Typed text foundation integration against actual main118 preserves all reviewed
-implementation inputs and passes 320 scoped Rust tests, Clippy, wasm32, 11 Python
-package/font controls and actual schema/generated/strict SDK checks.
-[Integration receipt](docs/spikes/evidence/native-text-bindings-main118.json).
-Composed Text startup and drawing remain separate queued work; existing consumers
-explicitly refuse Text in this foundation.
+The earlier v12/font packaging foundation is merged with 320 scoped tests,
+Clippy, wasm32, package/font controls and schema/SDK checks. Its then-explicit
+consumer refusals remain historical evidence in
+[native text bindings](docs/spikes/native-text-bindings.md). The composed CPU
+consumer and current shipping-player observations are described above; GPU text
+drawing, widgets and input/IME acceptance remain separate unfinished work.
 
 ## Native Wasm standalone formatting
 

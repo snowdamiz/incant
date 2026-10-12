@@ -124,6 +124,14 @@ def main():
     require(exported['build_storage_removed_before_startup'], 'Export build storage survived')
     shutil.rmtree(inputs)  # Only the newly created disposable authoring fixture.
     require(not inputs.exists(), 'Authoring survived')
+    # Debug maps may embed original TypeScript; remove proof-owned sidecars before
+    # claiming that the copied player ran without source text anywhere in its package.
+    removed_maps = []
+    for source_map in sorted((output / 'package/symbols').glob('*.map')):
+        removed_maps.append({'path': str(source_map.relative_to(output / 'package')),
+                             'sha256': digest(source_map)})
+        source_map.unlink()
+    require(not list((output / 'package').rglob('*.map')), 'Packaged source map survived')
     player = output / 'package/player' / ('incant_game_player.exe' if os.name == 'nt' else 'incant_game_player')
     data_root = player.parent / 'data'
     env = {'PATH': str(player.parent), 'HOME': str(output / 'absent-home'),
@@ -173,6 +181,7 @@ def main():
         blob.write_bytes(original)
     write(output / 'result.json', {'passed': True, 'authoring': authored, 'fresh_exported_runs': runs,
         'refusals': rejected, 'authoring_deleted': True, 'build_storage_removed': True,
+        'external_debug_source_maps_removed': removed_maps,
         'player_sha256': exported['player_sha256'], 'target': exported['target'],
         'limitations': ['CPU composed host proof only', 'No GPU text drawing, visual, IME, phone or performance gate']})
     print((output / 'result.json').read_text(encoding='utf-8'))

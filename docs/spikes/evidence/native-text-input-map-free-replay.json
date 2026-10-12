@@ -1,0 +1,100 @@
+{
+  "passed": true,
+  "recorded_at": "2026-10-12T03:14:05.838346+00:00",
+  "binary_sha256": "ec4d2935dfe57d6136289038ebb78f1e65d48915462bd04a29d498d75c7d5ba8",
+  "original_result_sha256": "2cdb198c1bd0015df86c93e44d7501fce3dad6ecb00a92b09bf59d956fcd0d0f",
+  "archived_map_sha256": "f5532b9475d1910cd232381e8dc5c5352c4653ed0856e3769d42e1ee046c5f13",
+  "archive_receipt_sha256": "0aec923a713d37ac763486397c733bdc82a3ba8592a51b124a614f1eb69ec3f9",
+  "removed_only": "symbols/behavior.js.map",
+  "package_files_before": {
+    "export.json": "0ef06afd0264b076e85fbb577cb2f47218b771fe0bdd5813715aa0ae4d59e5de",
+    "project-build.json": "71872711c455ff69b13f3eda038b6daf7b7d9825285adcc310c706560cf24f77",
+    "build.log": "c59f07eb9334c661e847f0630ccf0d971d773619a77085e3058e1d763e57d670",
+    "symbols/script-symbols.json": "3d0dcb4505f68cca2bea895b70bb3c7dd2405d553f3e1a101692164b1ce28474",
+    "symbols/behavior.js.map": "f5532b9475d1910cd232381e8dc5c5352c4653ed0856e3769d42e1ee046c5f13",
+    "player/incant_game_player": "ec4d2935dfe57d6136289038ebb78f1e65d48915462bd04a29d498d75c7d5ba8",
+    "player/data/empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+    "player/data/clips.bin": "d0fcfa6bb66ad4279a3090c4e7202b9c38bd76bfcdc54f5102a8c0663c6bf03d",
+    "player/data/package.json": "e0a89b47333c232f6774f7ad96f74d1e937934188a05de2b539c36ec83a724de",
+    "player/data/world.scene": "89c3055106f0c0a0e70df84fa94c505a79310f1494e29892d466e331531181dd",
+    "player/data/input-actions.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "player/data/models/71fbcae82debc0236bda7576327733a6943d93ce7adb913cbe1d95fe931d511f.incmodel": "9be97471434742eb82eb6fe2de0287d618bce848a52fb6eb1cf7e428c6a908de",
+    "player/data/audio/6c2c72f3f439d27dfae5cd3ab7d07fed9aee5eea6e01ecf00f48d7f4a0065711.ipcm": "6c2c72f3f439d27dfae5cd3ab7d07fed9aee5eea6e01ecf00f48d7f4a0065711",
+    "player/data/audio/bb391cc186bb741011a9d500103383ccd8cdaf0164c06b379c91d77e94de9b35.json": "b0a2c95a6962d6b4447ea5d8af111e8521689276e14798a3048e2175a0367d6b",
+    "player/data/fonts/3299d6ab8033fb1d163f892dfcb1b8838cf1c46935c329d82da6f7b9e27dad82.ifont": "49e09202aadc1c7463502004f791b596480a92d22e04b9948fabf8648a004814",
+    "player/data/fonts/9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2.json": "e43c79c54c311c5759bdf686b43b9b112b0177bafd6938782ebb782d75018812",
+    "player/data/fonts/6864e1444bc7002790e682360d3f93bd45fe51b7045a64ecbf0e76e19e6b758e.json": "167d0dc13b807552b06d0195e3a90ee24f5074206dd6d6f2106ad59e65b35fde",
+    "player/data/fonts/1087d4bb69160e3e5955407294226ca3da11166a3188ada3c1a166ba14e55ceb.json": "c3fd206832637ec3ad354dee08b4c67012da904d34a3ce9ec9c97e30f70e07f0",
+    "player/data/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont": "8bd20a742cc19c0fe65b106d983ea1ed816c4cd5ca1c3d50bdc4d05aeb5f8e7a",
+    "player/data/fonts/2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9.ifont": "92960e6b23eff12e1bf13361b2b94b490d723f8d93e6945ba34b9f9b3acd2081",
+    "symbols/incant_game_player.dSYM/Contents/Info.plist": "04f364b360df4ccce4ac2bc22e87d395fed5a648a6324a4916ee33486be2eb51",
+    "symbols/incant_game_player.dSYM/Contents/Resources/DWARF/incant_game_player-e26022d30bea71ca": "4de11c55faf24b5fdbb39da46b23de568b6a7ded2f2d3085f5e369b4a3bdd54a",
+    "symbols/incant_game_player.dSYM/Contents/Resources/Relocations/aarch64/incant_game_player-e26022d30bea71ca.yml": "b64fc0ac02987ea844d7020d09b25647e50957ca72d55da6b9703ad6f4a5b594"
+  },
+  "package_files_after": {
+    "export.json": "0ef06afd0264b076e85fbb577cb2f47218b771fe0bdd5813715aa0ae4d59e5de",
+    "project-build.json": "71872711c455ff69b13f3eda038b6daf7b7d9825285adcc310c706560cf24f77",
+    "build.log": "c59f07eb9334c661e847f0630ccf0d971d773619a77085e3058e1d763e57d670",
+    "symbols/script-symbols.json": "3d0dcb4505f68cca2bea895b70bb3c7dd2405d553f3e1a101692164b1ce28474",
+    "player/incant_game_player": "ec4d2935dfe57d6136289038ebb78f1e65d48915462bd04a29d498d75c7d5ba8",
+    "player/data/empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+    "player/data/clips.bin": "d0fcfa6bb66ad4279a3090c4e7202b9c38bd76bfcdc54f5102a8c0663c6bf03d",
+    "player/data/package.json": "e0a89b47333c232f6774f7ad96f74d1e937934188a05de2b539c36ec83a724de",
+    "player/data/world.scene": "89c3055106f0c0a0e70df84fa94c505a79310f1494e29892d466e331531181dd",
+    "player/data/input-actions.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "player/data/models/71fbcae82debc0236bda7576327733a6943d93ce7adb913cbe1d95fe931d511f.incmodel": "9be97471434742eb82eb6fe2de0287d618bce848a52fb6eb1cf7e428c6a908de",
+    "player/data/audio/6c2c72f3f439d27dfae5cd3ab7d07fed9aee5eea6e01ecf00f48d7f4a0065711.ipcm": "6c2c72f3f439d27dfae5cd3ab7d07fed9aee5eea6e01ecf00f48d7f4a0065711",
+    "player/data/audio/bb391cc186bb741011a9d500103383ccd8cdaf0164c06b379c91d77e94de9b35.json": "b0a2c95a6962d6b4447ea5d8af111e8521689276e14798a3048e2175a0367d6b",
+    "player/data/fonts/3299d6ab8033fb1d163f892dfcb1b8838cf1c46935c329d82da6f7b9e27dad82.ifont": "49e09202aadc1c7463502004f791b596480a92d22e04b9948fabf8648a004814",
+    "player/data/fonts/9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2.json": "e43c79c54c311c5759bdf686b43b9b112b0177bafd6938782ebb782d75018812",
+    "player/data/fonts/6864e1444bc7002790e682360d3f93bd45fe51b7045a64ecbf0e76e19e6b758e.json": "167d0dc13b807552b06d0195e3a90ee24f5074206dd6d6f2106ad59e65b35fde",
+    "player/data/fonts/1087d4bb69160e3e5955407294226ca3da11166a3188ada3c1a166ba14e55ceb.json": "c3fd206832637ec3ad354dee08b4c67012da904d34a3ce9ec9c97e30f70e07f0",
+    "player/data/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont": "8bd20a742cc19c0fe65b106d983ea1ed816c4cd5ca1c3d50bdc4d05aeb5f8e7a",
+    "player/data/fonts/2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9.ifont": "92960e6b23eff12e1bf13361b2b94b490d723f8d93e6945ba34b9f9b3acd2081",
+    "symbols/incant_game_player.dSYM/Contents/Info.plist": "04f364b360df4ccce4ac2bc22e87d395fed5a648a6324a4916ee33486be2eb51",
+    "symbols/incant_game_player.dSYM/Contents/Resources/DWARF/incant_game_player-e26022d30bea71ca": "4de11c55faf24b5fdbb39da46b23de568b6a7ded2f2d3085f5e369b4a3bdd54a",
+    "symbols/incant_game_player.dSYM/Contents/Resources/Relocations/aarch64/incant_game_player-e26022d30bea71ca.yml": "b64fc0ac02987ea844d7020d09b25647e50957ca72d55da6b9703ad6f4a5b594"
+  },
+  "all_remaining_package_bytes_unchanged": true,
+  "fresh_runs": [
+    {
+      "report_sha256": "0e66ac91cea6dd7df81d381fd9f997c8a8ee30129cfb3afa8e27a5422093dc97",
+      "pcm_sha256": "37f0b316b2b5a435470a8294cd8197c1a39b174cb1ad0bf7ae3c5de21802f57c",
+      "matches_original": true,
+      "exit": 0
+    },
+    {
+      "report_sha256": "0e66ac91cea6dd7df81d381fd9f997c8a8ee30129cfb3afa8e27a5422093dc97",
+      "pcm_sha256": "37f0b316b2b5a435470a8294cd8197c1a39b174cb1ad0bf7ae3c5de21802f57c",
+      "matches_original": true,
+      "exit": 0
+    },
+    {
+      "report_sha256": "0e66ac91cea6dd7df81d381fd9f997c8a8ee30129cfb3afa8e27a5422093dc97",
+      "pcm_sha256": "37f0b316b2b5a435470a8294cd8197c1a39b174cb1ad0bf7ae3c5de21802f57c",
+      "matches_original": true,
+      "exit": 0
+    }
+  ],
+  "refusals": [
+    {
+      "mode": "missing",
+      "exit": 1,
+      "receipt_sha256": "eedaa1ba29250c82fc3f10f947d67af3c597f95e8d2f8fcb4f62e0e29b59df93",
+      "output_absent": true
+    },
+    {
+      "mode": "tampered",
+      "exit": 1,
+      "receipt_sha256": "ca213cd3920d82029b03fedd66f2481ca1861cf5df467143fc70857696dc94fe",
+      "output_absent": true
+    }
+  ],
+  "authoring_absent": true,
+  "source_maps_absent_from_package": true,
+  "limitations": [
+    "Same already-built shipping player; no rebuild or new compilation measurement",
+    "CPU-only text/mesh/audio observations; no GPU or appearance gate",
+    "Original receipt remains unchanged and qualified by its retained debug map"
+  ]
+}
