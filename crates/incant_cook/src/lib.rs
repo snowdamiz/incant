@@ -33,8 +33,9 @@ pub use script::{CookedScriptArtifact, ScriptCookError, cook_script};
 mod project_script;
 #[cfg(all(feature = "scene", feature = "script"))]
 pub use project_script::{
-    CookedProjectProgram, PreparedScriptScene, ProjectScriptError, prepare_script_scene,
-    prepare_script_scene_with_navigation, prepare_script_scene_with_resources,
+    CookedProjectBuild, CookedProjectProgram, PreparedScriptScene, ProjectScriptError,
+    prepare_script_scene, prepare_script_scene_with_navigation,
+    prepare_script_scene_with_resources,
 };
 
 #[cfg(feature = "script")]
@@ -45,9 +46,12 @@ pub use build_script::embed_script;
 #[cfg(feature = "typescript")]
 mod typescript;
 #[cfg(feature = "typescript")]
-pub use typescript::{ProjectCompilation, TypeScriptCookError, compile_project_sources};
+pub use typescript::{
+    ProjectBuildCompilation, ProjectCompilation, TypeScriptCookError, compile_project_sources,
+    compile_project_sources_for_target,
+};
 
 #[cfg(feature = "typescript")]
 mod project_build;
 #[cfg(feature = "typescript")]
-pub use project_build::{PROJECT_ENV, SCENE_ENV, embed_project};
+pub use project_build::{PROJECT_ENV, SCENE_ENV, embed_mobile_project, embed_project};

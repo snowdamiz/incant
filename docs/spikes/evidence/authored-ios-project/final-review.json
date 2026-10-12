@@ -1,0 +1,31 @@
+{
+  "at": "2026-10-12T22:23:40.965033+00:00",
+  "accepted": true,
+  "commit": "3aa28ec2bfa4284d7ea77b072a992f652dc191d8",
+  "manifest_sha256": "bf6395e9c624a844f4a005ac00316341c28b6d7c457745463b66d45dd18e0af4",
+  "lossless_artifacts": 479,
+  "unique_payloads": 217,
+  "originals_removed_as_proof": 0,
+  "external_binaries": 10,
+  "freeze_inputs": 11856,
+  "checked_immutable_git_blobs": 9,
+  "post_proof_documentation_changes": [
+    "STATUS.md",
+    "docs/spikes/mobile-bytecode-compatibility.md"
+  ],
+  "actual_commands": 41,
+  "simulator_positives": 6,
+  "exact_refusals": 14,
+  "simulator_shutdown_deleted": true,
+  "shipping_codegen_and_target_physics_verified": true,
+  "limits": [
+    "actual iPhone18 Pro / iOS27.0 simulator CPU execution only; no physical phone or performance gate",
+    "iOS device archive compiled and callers linked unsigned; no device execution",
+    "observed object minimum versions include27.0; no older-iOS compatibility claim",
+    "desktop cross-target export, Android admission and mobile static Wasm remain denied",
+    "no Xcode app, window/touch/device-audio host, signing or store upload",
+    "fixed enhanced-determinism+parallel kernels from frozen base; per-project variant integration separate",
+    "final linked caller parser absence audited separately from unused definitions in static archive",
+    "package late failure establishes exact no-success-game/no-PCM publication; whole-prefix atomicity belongs to native host tests"
+  ]
+}

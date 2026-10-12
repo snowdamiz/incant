@@ -16,6 +16,22 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Authored iOS project archives — current main177 simulator proof passed
+
+The separate trusted-source iOS exporter cooks public-authored TypeScript imports,
+props and scene bindings into fresh shipping archives plus captured data. The
+current main177 union passes 205 affected Rust cases, Clippy and ten exporter
+checks. Both fresh target archives pass exact shipping codegen and five actual
+physics dependency audits. Six C/Swift simulator processes reproduce 432
+observations, 216 log records and exact nonzero PCM after private source, cache,
+build and maps are removed; fourteen precise refusal controls pass. Device
+archives and unsigned caller links pass, without device execution. Independent
+producer, integration-source and final execution reviews are accepted; the
+exact-head fast check and publication are pending. Fast iOS projects, desktop cross-target
+export, Android and mobile static Wasm remain denied in this slice. No signing,
+mobile window/audio host, phone performance or phase gate is claimed.
+[Current source and evidence](docs/spikes/authored-ios-main177.md).
+
 ## Physics process selection — local execution passed
 
 The developer launcher builds the authored physics variant and runs a private
@@ -23,8 +39,8 @@ executable copy. Public setting edits, Undo/Redo and native execution pass in
 deterministic, fast and deterministic again. Fresh ordinary shipping exports
 of both modes run after source/cache/map/build removal with exact native
 observations and PCM; five actual solver feature sets and shipping codegen are
-audited. The full tools suite passes with four Python skips. Independent review
-and integration remain pending; automatic editor worker selection, physics saves,
+audited. The full tools suite passes with four Python skips. This process/export path is now merged through main177; automatic editor worker
+selection, physics saves,
 reference-device performance and phase gates remain open.
 [Scope and retained evidence](docs/spikes/physics-process-selection.md).
 
@@ -78,7 +94,8 @@ Actual C and Swift callers each pass the same complete numeric/input/failure
 records on macOS and an iOS 27.0 ARM simulator (32 controls per platform). iOS
 device archives compile and link only. Native script/cooker tests, union Clippy
 and lean dependency checks pass; independent final source/execution review is accepted. Android
-cross-target admission and authored-project cross-export remain denied. No
+cross-target admission remains denied; the authored iOS route above is a separate
+shipping-profile proof. No
 physical-phone or performance gate is claimed.
 Current main169 integration passes all 16 checks with new matching archives and
 64 actual C/Swift controls; final integrated audit and exact-head fast CI passed
@@ -122,7 +139,7 @@ The ordinary packaged player now has a reusable Rust entry and optional bounded 
 ABI. Local macOS CPU/CLI tests and native-window/static-module compatibility pass;
 actual macOS C/Swift caller verification passes as recorded above. The first iOS
 archive refusal remains retained; the separately verified trusted-source route is
-described above. Authored-project cross-export stays denied. No physical-device
+described above. The separate authored iOS archive route is recorded above. No physical-device
 or performance gate passes from the library extraction. [Contract and evidence](docs/spikes/mobile-runtime-library.md).
 ## Rust/Wasm audio transport — merged main168
 
@@ -804,18 +821,17 @@ and complete Game UI/IME gates remain open.
 
 ## Current milestone
 
-Main #171 includes compound native animation and Wasm snapshots, authored two-bone
-IK, complete native/TypeScript/Wasm root motion, native audio transport and HUD,
-Wasm HUD controls, offline audio/UI checkpoints, public physics queries, and the
-Core/Planar gameplay foundations. Wasm audio transport is merged after current-main
-shipping validation. Headless UI and the reusable player/mobile library with
-actual macOS C/Swift callers are merged. Trusted-source iOS bytecode compatibility
-is merged after current-main CPU/simulator checks, final review and fast CI.
-Reviewed physics kernel features and the trusted-state save diagnostic are next;
-process/project selection and actual physics saves remain separate work.
-The desktop exporter lib/bin audit repair is merged after scoped checks and
-review; fresh Planar packaging is still being verified, and no failed export is
-counted as shipping success. Phase 1 and the finished game
+Main #177 includes compound native animation and Wasm snapshots, authored two-bone
+IK, native/TypeScript/Wasm root motion, audio transport and HUD, offline audio/UI
+checkpoints, public physics queries, and the Core/Planar gameplay foundations.
+Pearl Cove's authored art/HUD and runtime hooks are merged with their scoped
+producer visual and shipping evidence. Headless UI, the reusable player library,
+macOS C/Swift callers and trusted-source iOS bytecode compatibility are merged.
+Reviewed physics kernel forwarding, cooked/save identity, project selection and
+mode-aware developer/desktop export tools are merged; automatic editor worker
+selection and actual physics saves remain separate. The authored iOS current-main
+simulator proof and final review have passed and await publication; Android and
+retained CPU worker work are local parallel lanes. Phase 1 and the finished game
 remain incomplete.
 
 Checkpoint14 promoted selected main160 `d1ef35ee` after all 23 exact-candidate
@@ -826,6 +842,13 @@ historical: its general macOS probe failed and Windows desktop exceeded its old
 one-hour allowance. The main158 probe repair and main160 Windows job allowance
 were verified by this successful batch, without removing checks or reusing private
 shipping builds. [Promotion and evidence](docs/spikes/release-checkpoint-14.md).
+
+Checkpoint15 remains frozen at selected main173, candidate `a2cae856`. Its Linux,
+Windows desktop and general macOS jobs reached the old workspace-wide exporter
+graph false refusal after preceding tests passed. Main177 contains the reviewed
+selected-graph repair. The final Windows conformance job is still running; this
+failed candidate is not a release approval, and a repaired successor remains
+subject to all 23 exact-head requirements.
 
 Native animation graphs now connect ordinary typed authoring, captured models,
 v14 cooking, deterministic native clip states and flat adjacent-pair 1D blends.

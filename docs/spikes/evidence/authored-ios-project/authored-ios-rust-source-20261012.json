@@ -1,0 +1,29 @@
+{
+  "reviewer": "astra root",
+  "at": "2026-10-12T21:20:56.487591+00:00",
+  "source_manifest_sha256": "268e4e7848a1b9cd4f9c2347332543bfa98c5a6cc4be4bb4ce21d2d2bd60406b",
+  "files": {
+    "crates/incant_cook/src/lib.rs": "685ce5c8f8e2b49adbb64aa41c8731d1bd83ef0a185bdfb0f17932fd840b4498",
+    "crates/incant_cook/src/project_build.rs": "6a887e6e71602ea8750703f3380d211ce652c78f88691f2214496238a8cf9c22",
+    "crates/incant_cook/src/project_script.rs": "55d73108542cd3e0eaa98453031cf33d3f6f002fa92fc74ace1c513378453fec",
+    "crates/incant_cook/src/script.rs": "519137b70669a234847612e4f6bc5193bafe93af85b1f0bb474884ef06ab2ece",
+    "crates/incant_cook/src/typescript.rs": "0b3d63a698e1fb251865fd2f9d936a87d1a655021567b8ea9904fd540b196dd9",
+    "crates/incant_game_player/build.rs": "6a2020028dabbdf2cf3809c2ee77afa7baee9b548eb7f68ebbab3210642a923d",
+    "crates/incant_script/src/compiler.rs": "1de5c6bd1207c571b21cbdcb425cd9d1026e6c156e60cbaa5c4d00c8b8134f87",
+    "crates/incant_cook/tests/mobile_project.rs": "d8722dce5e80cb4c9c287dadb2cd00fbab6047e21c6208554c23cf335bdf8220"
+  },
+  "decision": "accepted source slice; execution and exporter review pending",
+  "findings": [],
+  "checked": [
+    "Fresh CommonJS and checked binding constructor; compiled development program cannot be retargeted",
+    "Native host == target guard preserved; explicit mobile gate limited to reviewed arm64 macOS to iOS destinations",
+    "Source epoch checks and transitive compiler inputs retained through shared source pipeline",
+    "Mobile Wasm and mixed standalone/desktop selectors explicitly refused",
+    "Exact binding and source-map receipts preserved; no new runtime input API"
+  ],
+  "limitations": [
+    "No independent iOS execution or shipping export accepted by this source review",
+    "Static archive retains unreferenced parser definitions; final dead-stripped caller executable needs separate runtime-only symbol audit",
+    "Physics build-mode binding to be integrated separately"
+  ]
+}

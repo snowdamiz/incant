@@ -2,7 +2,8 @@
 //! compiled alongside validated, metered Wasm through the trusted translator;
 //! project input is bounded data, never native build configuration.
 use crate::{
-    compile_project_sources, prepare_script_scene_with_resources, script::artifact_from_compiled,
+    compile_project_sources_for_target, prepare_script_scene_with_resources,
+    script::artifact_from_build,
 };
 use incant_doc::Project;
 use incant_runtime::CookedScene;
@@ -20,6 +21,39 @@ pub fn embed_project(project_path: &Path, selected_scene: Option<&str>) -> Resul
     if env::var("HOST")? != target || target != incant_script::artifact::TARGET {
         return Err("authored project export requires native host == target".into());
     }
+    embed(project_path, selected_scene, &target, false)
+}
+
+/// Explicit unsigned iOS archive producer. The desktop entry point retains its
+/// host==target guard; this route freshly compiles checked source and bindings.
+pub fn embed_mobile_project(project_path: &Path, selected_scene: Option<&str>) -> Result<()> {
+    let host = env::var("HOST")?;
+    let target = env::var("TARGET")?;
+    if host != incant_script::artifact::TARGET || !mobile_destination(&host, &target) {
+        return Err(
+            "authored mobile project requires the reviewed macOS arm64 to iOS bytecode route"
+                .into(),
+        );
+    }
+    embed(project_path, selected_scene, &target, true)
+}
+
+fn mobile_destination(host: &str, target: &str) -> bool {
+    host == "aarch64-apple-darwin"
+        && matches!(target, "aarch64-apple-ios" | "aarch64-apple-ios-sim")
+        && incant_script::artifact::compatibility::admits(
+            host,
+            target,
+            incant_script::artifact::BytecodeAbi::current(),
+        )
+}
+
+fn embed(
+    project_path: &Path,
+    selected_scene: Option<&str>,
+    target: &str,
+    mobile: bool,
+) -> Result<()> {
     for key in [
         "INCANT_NATIVE_SCRIPT_SOURCE",
         "INCANT_NATIVE_SCRIPT_MAP",
@@ -53,6 +87,22 @@ pub fn embed_project(project_path: &Path, selected_scene: Option<&str>) -> Resul
         .scenes
         .get(&scene_id)
         .ok_or("selected scene is missing")?;
+    if mobile && authored.program.is_some() {
+        return Err("authored iOS archive currently requires TypeScript; static Wasm mobile export is unsupported".into());
+    }
+    if mobile
+        && [
+            "INCANT_NATIVE_WASM_FINGERPRINT",
+            "INCANT_NATIVE_WASM_INPUT",
+            "INCANT_NATIVE_WASM_PREPARED",
+            "INCANT_NATIVE_WASM_REGISTRY",
+            "INCANT_WASM_BUNDLE",
+        ]
+        .iter()
+        .any(|key| env::var_os(key).is_some())
+    {
+        return Err("authored iOS archive cannot select a static Wasm build input".into());
+    }
     let wasm = if let Some(incant_doc::SceneProgram::Wasm { module }) = &authored.program {
         if env::var_os("CARGO_FEATURE_STATIC_MODULE").is_none() {
             return Err("authored Wasm export requires the static-module player feature".into());
@@ -95,7 +145,7 @@ pub fn embed_project(project_path: &Path, selected_scene: Option<&str>) -> Resul
         changed(path)?;
     }
     let (scene, artifact, compiler_manifest) = if attached {
-        let compiled = compile_project_sources(
+        let compiled = compile_project_sources_for_target(
             prepare_script_scene_with_resources(
                 &project,
                 &scene_id,
@@ -103,6 +153,7 @@ pub fn embed_project(project_path: &Path, selected_scene: Option<&str>) -> Resul
                 &animations,
             )?,
             root,
+            target,
         )?;
         let (scene, program) = compiled.program.into_parts();
         // Changes to either an entry or a transitive helper rerun the producer.
@@ -124,7 +175,7 @@ pub fn embed_project(project_path: &Path, selected_scene: Option<&str>) -> Resul
         }
         (
             scene,
-            artifact_from_compiled(&program, Some(&compiled.source_map)),
+            artifact_from_build(&program, Some(&compiled.source_map)),
             compiled.compiler_manifest,
         )
     } else {
@@ -138,7 +189,7 @@ pub fn embed_project(project_path: &Path, selected_scene: Option<&str>) -> Resul
             "incant-empty-project",
             "exports.default={update(){}};",
             None,
-            &target,
+            target,
         )?;
         (scene, artifact, serde_json::Value::Null)
     };
@@ -151,6 +202,7 @@ pub fn embed_project(project_path: &Path, selected_scene: Option<&str>) -> Resul
         changed(&engine.join(path))?;
     }
     let out = std::path::PathBuf::from(env::var_os("OUT_DIR").ok_or("OUT_DIR missing")?);
+    let script_manifest: serde_json::Value = serde_json::from_str(&artifact.symbol_manifest)?;
     let scene_bytes = scene.to_bytes();
     fs::write(out.join("world.scene"), &scene_bytes)?;
     fs::write(out.join("behavior.rs"), artifact.rust_module)?;
@@ -194,6 +246,9 @@ pub fn embed_project(project_path: &Path, selected_scene: Option<&str>) -> Resul
         "physics_mode": project.settings.physics_mode,
         "physics_variant": scene.physics_variant(),
         "target": target, "scene_sha256": hex(&Sha256::digest(&scene_bytes)),
+        "producer_target": incant_script::artifact::TARGET,
+        "producer_kind": if mobile { "ios-archive" } else { "native-desktop" },
+        "script": script_manifest,
         "project_sha256": hex(&Sha256::digest(text.as_bytes())), "visual_assets": visual,
         "audio_clips": audio, "compiler": compiler_manifest,
         "font_assets": scene.font_assets().iter().map(|a| serde_json::json!({
