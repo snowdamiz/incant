@@ -1,0 +1,355 @@
+{
+  "at": "2026-10-12T18:46:18.914658+00:00",
+  "tested_head": "fb718fef552dcf2c5e013a43e9ae0aa34bf791e5",
+  "main": "d8738ff91fd75b7e6fa05a0d78e650eddf70adcc",
+  "source": {
+    "samples/core/gameplay.ts": "58d7007de2cb942de4bf4c254b4d514deb07df15a88cb1b057cac30fbca393a5",
+    "samples/core/verify.py": "63830ec6225ddf9bc82dceed2c1791912fd30c6fd2db5426f07095ab329974ca",
+    "samples/core/export_verify.py": "8fd9915071b8cc3aeb40297acfb3ddb152d8d98a04ce61d659c244fbf28580fa",
+    "samples/core/tsconfig.json": "869922e94ccde7a4c5d023dcc15dc661034031b34d42cbfaa41a4a354abc625b",
+    ".github/workflows/ci.yml": "1c14b1b1450e5a136823ea406cc0e1d05c5e2f6319d631faba22bb2fe3e306ed",
+    ".github/workflows/desktop.yml": "b962d5a128792aae8224c05145abb027cac69754eca67d8c4b8ef8fb47ee8868"
+  },
+  "engine_input_count": 1740,
+  "checks": [
+    {
+      "name": "typescript",
+      "command": [
+        "/Users/andreyyurlov/Documents/dev/incant/node_modules/.bin/tsc",
+        "--noEmit",
+        "-p",
+        "samples/core/tsconfig.json"
+      ],
+      "exit": 0,
+      "seconds": 0.4072614579999936,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "actionlint",
+      "command": [
+        "/Users/andreyyurlov/.codex/incant-tools/actionlint-1.7.12/actionlint",
+        ".github/workflows/ci.yml",
+        ".github/workflows/desktop.yml"
+      ],
+      "exit": 0,
+      "seconds": 0.3210953750021872,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "policy",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_ci*.py"
+      ],
+      "exit": 0,
+      "seconds": 3.6320803339986014,
+      "sha256": "3c24d0703b295de8027752a65b6bf83e37aded7d60bf8e61bb660eb0065d6030"
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.0556210419999843,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.02431816700118361,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "native-play",
+      "command": [
+        "python3",
+        "samples/core/verify.py",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play",
+        "--binary",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/incant_headless"
+      ],
+      "exit": 0,
+      "seconds": 9.651664499997423,
+      "sha256": "121816a6e357ff174e56e4a682fa35efe5c98a37fe52ca955c45c18418d05bec"
+    }
+  ],
+  "headless": {
+    "source_head": "ca08565e961700bb0b6884fad1dce927c36ac329",
+    "features": [
+      "wasmtime-host"
+    ],
+    "profile": "ci",
+    "sha256": "be93c40adab51f4553cf8298fc59f64d13793ebdb05c2fadc22faf53b59471e5",
+    "bytes": 71983184,
+    "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/incant_headless"
+  },
+  "native_play": {
+    "reports": 7,
+    "observations": 53,
+    "authoring_unchanged": true,
+    "undo_redo_reopen": true,
+    "runs_sha256": "1a7614f386baf8c5bdb3d0644277ea4ed30531ab18e476b7bdf989b9292aeebb"
+  },
+  "artifacts": {
+    "docs/spikes/evidence/core-sample-main156/actionlint.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/actionlint.log"
+    },
+    "docs/spikes/evidence/core-sample-main156/conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/conventions.log"
+    },
+    "docs/spikes/evidence/core-sample-main156/diff.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/diff.log"
+    },
+    "docs/spikes/evidence/core-sample-main156/freeze.json.gz": {
+      "sha256": "0225a51d0f8515489329168d4bef179791ee81e728a82c56d80be06911954d81",
+      "uncompressed_sha256": "3e5c4dcb8c2156cafd37840b2d0635ebb09fde508b68bd22e87c5b6c3fec389e",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/freeze.json"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/authoring/.incant-source-transactions/01M4RPXJK3RVCY61BKWGNBWHZ8.old-receipt.gz": {
+      "sha256": "a95979213858dc67f2b3499188f94dd8ebf8c903dc0785927081317440caac5c",
+      "uncompressed_sha256": "47532b8b012aa9a972da81b11ad97d270481a8c7fa619378f814da1f3faa2ccf",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/authoring/.incant-source-transactions/01M4RPXJK3RVCY61BKWGNBWHZ8.old-receipt"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/authoring/.incant-source-transactions/01M4RPXJK3RVCY61BKWGNBWHZ8.previous.gz": {
+      "sha256": "033d01976a05071c8c235d62adac4b896e35b237a5c38367d120781fdd9fa021",
+      "uncompressed_sha256": "58d7007de2cb942de4bf4c254b4d514deb07df15a88cb1b057cac30fbca393a5",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/authoring/.incant-source-transactions/01M4RPXJK3RVCY61BKWGNBWHZ8.previous"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/authoring/.incant-source-transactions/01M4RPXJMH5BPBZ6H99S2D1S8P.old-receipt.gz": {
+      "sha256": "c0d504daf2d0e86c62693116091cc172df08dcb2e8ca4d83c8fa971b941bff81",
+      "uncompressed_sha256": "4b2e7ef2a1c7657bbd3eed82e462edac8d743279480db163a8b5b29a9519bde6",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/authoring/.incant-source-transactions/01M4RPXJMH5BPBZ6H99S2D1S8P.old-receipt"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/authoring/.incant-source-transactions/lock.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/authoring/.incant-source-transactions/lock"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/authoring/.incant-source-transactions/receipt.gz": {
+      "sha256": "0bebefb3b19ee3868bbe7a398d3433069c30e9db82915ca9cf2bfd04113aba6e",
+      "uncompressed_sha256": "f40c648a77bd4150b41322405092171a4ebf9125677e88bb413f7372ebc30c33",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/authoring/.incant-source-transactions/receipt"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/authoring/core.journal.jsonl.gz": {
+      "sha256": "2a10dc1b775ea18d30a717f2b750af28bc8c08360c929fbd2803e5849fa99a15",
+      "uncompressed_sha256": "7306d5e3fe1fbbe434b1b1f7c4bd8b836e65b36a3d840a92d8c50863b921b456",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/authoring/core.journal.jsonl"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/authoring/core.json.gz": {
+      "sha256": "ec633cd5015ef796e2dbe09c07659b32acd82b7fb7487bf857fabacd260d36da",
+      "uncompressed_sha256": "79ae216a92d33288054aa29f7f672a39b65cb1d9ac8bb8c5d1126d1dfbe44fc3",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/authoring/core.json"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/authoring/gameplay.ts.gz": {
+      "sha256": "033d01976a05071c8c235d62adac4b896e35b237a5c38367d120781fdd9fa021",
+      "uncompressed_sha256": "58d7007de2cb942de4bf4c254b4d514deb07df15a88cb1b057cac30fbca393a5",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/authoring/gameplay.ts"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/authoring-calls.json.gz": {
+      "sha256": "2143407792024cc99f88c00f0c4bf1c45e725a9318a9cc1135942228baf42f75",
+      "uncompressed_sha256": "8a3f9e01d49da31404e92392b5790206b78498441bc8ea868362f9d5039eebf2",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/authoring-calls.json"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/gamepad-input.json.gz": {
+      "sha256": "6c756bce334389eec29985ae7e73bc8200e3c91f3087da34e2df71d7ed4b88fc",
+      "uncompressed_sha256": "2cacb813c6bd3521150dca137d8adc649e6039c12ad0fb349f27a309e78a3b1c",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/gamepad-input.json"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/gamepad-observe.json.gz": {
+      "sha256": "9ac5d87aa95a97caa3383abb52cabb7fdde96579dfce6f0eff8afe23c53a6323",
+      "uncompressed_sha256": "6c73c23f0de6297b049a189cb34697364590bc51cb3db671275b1bf6f19806d5",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/gamepad-observe.json"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/gamepad.json.gz": {
+      "sha256": "40175c4133f96781d7b7b4f0732f40a8749455415e467b92d4234c93b652346e",
+      "uncompressed_sha256": "2273181fa9e8e92a40b9fe5825353a6db2147e7bb973bb64b4d1a5cdbed9684a",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/gamepad.json"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/jump-input.json.gz": {
+      "sha256": "f5ef8d8bc00fa972dc2d4632d0fb76cf14daf846c22b908336cfafc488b30f85",
+      "uncompressed_sha256": "aea85027dc03cc63b99bf611716ad775ced10cdef0a7b8c6e1c7abe5c1e37cbb",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/jump-input.json"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/jump-observe.json.gz": {
+      "sha256": "76922546fc99ee7402f16061b496f44f6a48a4cedd7878583337d5fa6ecf88b3",
+      "uncompressed_sha256": "2c4fa46a4369c9ad5e9b66ed301a44821dccfce46531628586fc481b2eba6315",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/jump-observe.json"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/jump.json.gz": {
+      "sha256": "eaf062c5609cee71c7ac60957e50339dfc889521d1ea9a2c739e0d39dbc3d88b",
+      "uncompressed_sha256": "85eaef9b747b7c47e267f306b57c03a6f3a11932a1e37b7d10ca55eeff96263d",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/jump.json"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/lose-input.json.gz": {
+      "sha256": "cb81adeb43532701eedf372d1d963e33ade64d8b5fe24f46b6ad175e2d7ca8a1",
+      "uncompressed_sha256": "e4707335c2d5116ef604c1976dbd864eeafab305cecd583a20795dd0d2976227",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/lose-input.json"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/lose-observe.json.gz": {
+      "sha256": "89e8988f10098585f07776083566792e302a0db662dff96b2a88f3c10b2ad287",
+      "uncompressed_sha256": "5efea284d7ae848427f533b38fcf503109298be762ea9aefd5f8148903385689",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/lose-observe.json"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/lose.json.gz": {
+      "sha256": "37a5b3103680b6535556cee5ef9f6ab811c70dfd5ba36546d24ae1136b825e8f",
+      "uncompressed_sha256": "1218a31cfae27748cdc2bb43a3dfb070cb0c4f646e9287fbff3446fb1481889c",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/lose.json"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/process-00.json.gz": {
+      "sha256": "e2dbf60ea88e403de8ca6e757f3cb402f4382e9429879ca4c6c88e91a921abb5",
+      "uncompressed_sha256": "27012fe75eca4fab27fe6028e0ca7acd08bb721e0e5ef9200e51110292f2717a",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/process-00.json"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/process-01.json.gz": {
+      "sha256": "ed44e01028b8a04344740621e8513db0664e2acc03e8526cfd738072e0928ceb",
+      "uncompressed_sha256": "42e31a9578cfc0e7cf0c977d2f1fc309ea2f294027d2776f9a54204573899979",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/process-01.json"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/process-02.json.gz": {
+      "sha256": "fc2981e25002eb6b2ab8ad10fe3a69d7519c260a5747dc326a41868744e8cc8d",
+      "uncompressed_sha256": "3deb903c5e1ca02e53f3df12d8da7e7e80b174077a6fa82ba0e2b8aa509fae7d",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/process-02.json"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/process-03.json.gz": {
+      "sha256": "b88ab9e45335b68c97f4f3d7ac26f5f146a66a488cf546e4c023ad981ccd74d2",
+      "uncompressed_sha256": "cfaf008b25c9baba46304d8cd577bb77b6764256ec448b45ba0670ea7728aa12",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/process-03.json"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/process-04.json.gz": {
+      "sha256": "cb89af9dc2b6f9f35ce998631f8b9cf8ff59fdb3aed54d900ea655a296fb5b95",
+      "uncompressed_sha256": "e8b2617942cca98f701d9fe5899ea25f8750fa137b8b79e23a8da18f4ce6f9d5",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/process-04.json"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/process-05.json.gz": {
+      "sha256": "51fd7b471d7835bf8b9dd61f78b8fa1b6e0f5d90402f1960200fb9078d0244b5",
+      "uncompressed_sha256": "376c96888df0cae4e640beba156ac3d378dda5ff7fb8cc27744b80e232a09425",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/process-05.json"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/process-06.json.gz": {
+      "sha256": "85cac2816df5849fc49e44edce1d92cccf118a500f6198e0ae843690ff6e393a",
+      "uncompressed_sha256": "0eefc40cb92aa1ce46e87660fdecbaeae79a03bae1480602f0871291415e3115",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/process-06.json"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/process-07.json.gz": {
+      "sha256": "beacfd3db9fe4db6edfb874e3c33b7689f55b8341a418d30bc88385a115cb7c3",
+      "uncompressed_sha256": "eb31ff12d6fceb31077802a299544660fe91f6dd2ff2516f66d64a9f576b7eaa",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/process-07.json"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/repeat-win-input.json.gz": {
+      "sha256": "1fd02f62fe580dd92dd698b4bfbe94f1f6a0d5d2217dce6f5f66c904ae1cd3c6",
+      "uncompressed_sha256": "aedbc57164dcdd45652c98f5c67e5f3987472eed5625f56ac0af0f9fea0cc731",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/repeat-win-input.json"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/repeat-win-observe.json.gz": {
+      "sha256": "9ac5d87aa95a97caa3383abb52cabb7fdde96579dfce6f0eff8afe23c53a6323",
+      "uncompressed_sha256": "6c73c23f0de6297b049a189cb34697364590bc51cb3db671275b1bf6f19806d5",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/repeat-win-observe.json"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/repeat-win.json.gz": {
+      "sha256": "40175c4133f96781d7b7b4f0732f40a8749455415e467b92d4234c93b652346e",
+      "uncompressed_sha256": "2273181fa9e8e92a40b9fe5825353a6db2147e7bb973bb64b4d1a5cdbed9684a",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/repeat-win.json"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/runs.json.gz": {
+      "sha256": "9f4cdf41fae4faccd54458e1dbccd93ae78edcc9bad4619cd8ff9308bea4253b",
+      "uncompressed_sha256": "1a7614f386baf8c5bdb3d0644277ea4ed30531ab18e476b7bdf989b9292aeebb",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/runs.json"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/skip-pickup-input.json.gz": {
+      "sha256": "8b60e456536167676774dbbcb02e32a1a69bbc25877a84741f274a05daa49cbf",
+      "uncompressed_sha256": "10bf77b346b66beacea785e2f2ac095f57512b8784397bec4756b77d1c491110",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/skip-pickup-input.json"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/skip-pickup-observe.json.gz": {
+      "sha256": "1e338b08b200cd52ffc7607cd5c3a6378a89b9b317398042dadd290e7bbb8f78",
+      "uncompressed_sha256": "ae8aee17d141bcf67aafdeb7c49b1b6410d08412befc578900777302aa6356d4",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/skip-pickup-observe.json"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/skip-pickup.json.gz": {
+      "sha256": "d37a9ed92f19f0f2f0a81e209435a5eeab131fadfee02af5db1099b9d59c8341",
+      "uncompressed_sha256": "7cc38f26300a12c5a8bea8cca5193e35aedd65c87c3c117a91831b918a723d69",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/skip-pickup.json"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/wall-input.json.gz": {
+      "sha256": "99bfbc7d5e8df6c57e1fb9f4b8a7efbbf010b0e74db57b4455a975ebeb927bb6",
+      "uncompressed_sha256": "4ac0e3cdb046ee14ea7fa9fe234f123bcc32b5e0b95f3e592aa97ddbd7a63f68",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/wall-input.json"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/wall-observe.json.gz": {
+      "sha256": "bc56a62ee5c0309e840c75ecb99ada1dabd62fd17e0b237a31967d97474fef0e",
+      "uncompressed_sha256": "1a41c16c67de45d54f75522338b59b9a722bb6dfe902078dc2dda1fd15e16a1e",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/wall-observe.json"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/wall.json.gz": {
+      "sha256": "04b74cf47219295f8e0b27dc31847f883b91e086082e75631a022729ccd677d0",
+      "uncompressed_sha256": "809e54c43b1814a39e7040b59fd387eb4e7044deff52aa441c2b215e23ac1f8a",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/wall.json"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/win-input.json.gz": {
+      "sha256": "1fd02f62fe580dd92dd698b4bfbe94f1f6a0d5d2217dce6f5f66c904ae1cd3c6",
+      "uncompressed_sha256": "aedbc57164dcdd45652c98f5c67e5f3987472eed5625f56ac0af0f9fea0cc731",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/win-input.json"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/win-observe.json.gz": {
+      "sha256": "9ac5d87aa95a97caa3383abb52cabb7fdde96579dfce6f0eff8afe23c53a6323",
+      "uncompressed_sha256": "6c73c23f0de6297b049a189cb34697364590bc51cb3db671275b1bf6f19806d5",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/win-observe.json"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play/win.json.gz": {
+      "sha256": "40175c4133f96781d7b7b4f0732f40a8749455415e467b92d4234c93b652346e",
+      "uncompressed_sha256": "2273181fa9e8e92a40b9fe5825353a6db2147e7bb973bb64b4d1a5cdbed9684a",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play/win.json"
+    },
+    "docs/spikes/evidence/core-sample-main156/native-play.log.gz": {
+      "sha256": "e85463b3791f978af0bee4de4f33de671fd9dd408211408a16807f42789fec54",
+      "uncompressed_sha256": "121816a6e357ff174e56e4a682fa35efe5c98a37fe52ca955c45c18418d05bec",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/native-play.log"
+    },
+    "docs/spikes/evidence/core-sample-main156/policy.log.gz": {
+      "sha256": "192d1b0c083aa4e740aa53019d9f391f8795016aa7eaef97e6f70100c45d0f47",
+      "uncompressed_sha256": "3c24d0703b295de8027752a65b6bf83e37aded7d60bf8e61bb660eb0065d6030",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/policy.log"
+    },
+    "docs/spikes/evidence/core-sample-main156/results.json.gz": {
+      "sha256": "acf99c81c5c2f12519c7612c8cb22e208bc3da88cab48c4740ccf02648d1f4b2",
+      "uncompressed_sha256": "e4a875d6c1f40b63f47c8788323c58b124963feaa52dbf22cd0873b93b7c5f43",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/results.json"
+    },
+    "docs/spikes/evidence/core-sample-main156/typescript.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main156-001/typescript.log"
+    }
+  },
+  "limitations": [
+    "Current-main verification reused the immutable matching main156 headless binary with all 1740 frozen non-workflow input hashes equal; there is no new shipping export here.",
+    "The seven source-deleted ordinary shipping runs remain the accepted producer evidence, not relabeled current-main runs.",
+    "Gameplay in a numerical fixture only; Claude presentation, dynamic HUD, device and phase gates remain open."
+  ],
+  "review": {
+    "decision": "accepted",
+    "receipt": "docs/spikes/evidence/core-sample-main156-review.json",
+    "sha256": "7b0d143b70b4c39f7e6a965c71ab8c2c021fa2176a1e7beba9644ce0f09d4dca",
+    "reviewed_manifest_sha256": "6509e7c176bedfc82c97a9cad839d35ef7a6ef6dc595717655e3f667c8c243dd"
+  }
+}

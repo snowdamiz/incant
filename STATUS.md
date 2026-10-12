@@ -32,6 +32,35 @@ See [scope and evidence](docs/spikes/native-wasm-compound.md).
 
 
 
+## macOS retirement probe — callback repair verified; native run pending
+
+Checkpoint13's general macOS job failed when the probe received a queued callback
+following final window destruction. A probe-only terminal guard now preserves all
+256 cycles and the first typed error while refusing later native work. Two red-to-green
+regressions, native-feature build and Clippy pass. A bounded real-idle check did not
+launch the executable because user input remained active. The comprehensive native
+probe must still pass before release; checkpoint13 remains frozen and blocked.
+[Scope and preserved failure](docs/spikes/macos-retirement-late-events.md).
+
+
+
+## Core Sample gameplay — main156 integration verified
+
+A native TypeScript controller now covers movement, jumping, navmesh enemies,
+pickups, damage cooldown and terminal game states. Seven actual development
+scenarios and seven ordinary source-free shipping runs pass, with identical
+observations, logs and PCM; an additional exit-proximity control confirms that
+a missing pickup prevents winning. Public authoring, Undo/Redo and reopening
+pass, and Play leaves the project unchanged. Existing desktop checkpoint jobs
+now include the seven cheap headless scenarios; their hosted results are pending.
+Current-main integration also passes seven native-play scenarios with 53 checks,
+strict sample types, workflow lint and 25 CI policy tests. Independent integration
+review and the exact fast check passed; merged main157.
+The numerical room is a test fixture. Claude is assembling the finished level
+and presentation; dynamic HUD bindings, music and reference-device performance
+remain open. [Scope and evidence](docs/spikes/core-sample-gameplay.md).
+
+
 ## Compound animation transitions — current-main integration verified
 
 Reviewed grouped-pose transitions now integrate with actual main155, retaining
@@ -42,8 +71,7 @@ and 238 Python cases (4 existing skips); suite counts overlap and remain separat
 A fresh current-lock shipping package passes 3 complete runs and 10 save/resume
 pairs after authoring/build/debug-map deletion, with 112 full pose rows and 224
 vector checks per full run and exact save/PCM/log continuation. Two precise
-negative controls refuse without checkpoint/PCM publication. Final independent integrated review is accepted; publication awaits the exact
-fast check. Complete compound Wasm ABI is a separate queued slice. Root-motion gameplay and device/appearance/phase gates remain open.
+negative controls refuse without checkpoint/PCM publication. Final independent integrated review and the exact fast check passed; merged main156. Complete compound Wasm ABI is a separate queued slice. Root-motion gameplay and device/appearance/phase gates remain open.
 [Integration and preserved failures](docs/spikes/native-compound-main155.md).
 
 ## UI fixed-point blend reference — merged main155; checkpoint13 pending
