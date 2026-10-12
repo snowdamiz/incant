@@ -38,7 +38,7 @@ impl SessionProgram {
         match self {
             #[cfg(feature = "wasmtime-host")]
             Self::DevelopmentWasm(bytes) => {
-                if !world.ui_view()?.nodes().is_empty() {
+                if world.ui_view()?.nodes().len() != 0 {
                     return Err(SessionError::UiUnsupported);
                 }
                 Ok(SessionVm::DevelopmentWasm(Box::new(
