@@ -18,6 +18,7 @@ pub struct SpatialNode<'a> {
     pub animation: Option<crate::AnimationSample>,
     /// Outgoing sample and destination weight from the same committed state.
     pub animation_blend: Option<incant_types::AnimationBlendSample>,
+    pub animation_pose: Option<incant_types::AnimationPoseSamples>,
 }
 
 /// Scoped view at a committed boundary. Numeric/structural mutation cannot
@@ -86,6 +87,9 @@ impl<'a> SpatialView<'a> {
                 animation: world
                     .get::<crate::animation::Playback>(entity)
                     .map(|p| p.state.sample),
+                animation_pose: world
+                    .get::<crate::animation::Playback>(entity)
+                    .and_then(|p| p.pose_sample()),
                 animation_blend: world
                     .get::<crate::animation::Playback>(entity)
                     .and_then(|p| p.blend_sample()),

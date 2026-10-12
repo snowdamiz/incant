@@ -1,0 +1,9 @@
+{
+  "status": "failed before development/export",
+  "reason": "Harness checked completed rest on tick12; direct native endpoint occurs tick13 (existing host regression turn12).",
+  "source_hashes": {
+    "tools/probes/native-wasm-animation-pose-export.py": "47cb1df026a6adb63059acd70bf3cc61028e24f8f3daebdd3c70ce3eeb9ce328",
+    "tools/probes/native-wasm-animation-pose-export/behavior.rs": "3e09c29a579676dcf2b34c753ae9c41c7c0ec14fde8edd7e7164bda784d712df",
+    "crates/incant_cook/examples/animation_pose_package_oracle.rs": "3900b876fd2ebd917d537fa35f041c2a8d79408743773040f386a9df19ae4b65"
+  }
+}

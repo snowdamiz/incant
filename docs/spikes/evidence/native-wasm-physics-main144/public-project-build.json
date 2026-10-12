@@ -1,0 +1,26 @@
+{
+  "audio_clips": {},
+  "cameras": [],
+  "compiler": null,
+  "font_assets": [],
+  "format": "incant-native-project-build",
+  "has_spatial_content": false,
+  "program": {
+    "fingerprint": "57d74a89adfc0f151834b917213508026717d73ca25f2f6579a226ffc0af7ac1",
+    "input_sha256": "dbe9d00267c77566e1c912420057b6d6370594b96c67bcffc2bdbfe3097ecbd8",
+    "kind": "wasm",
+    "module": "01M4RAV7VCG9D46VFTY12BP3YZ",
+    "prepared_sha256": "7114bef41a9aa95ae12d235caaeb28b1b425f3581ee62ba645ab6f51f738c183",
+    "registry_sha256": "5176cdc3d29c1b8184e1a69f8bd4fdf44caaa8d7d282378596351410fbf25eaf",
+    "translator": "wasm2c-1.0.42"
+  },
+  "project_id": "01M4RAV6K348TAKFVBCP23S48V",
+  "project_sha256": "4b70f0c312d794a68dac5e8420a3b835885eb77a2ded8b74202233d58c17790f",
+  "scene_id": "00000000000000000000000033",
+  "scene_sha256": "90e10da52c67f467aecbb30188c36e781d46be9415f75d646472f3e672328342",
+  "startup_source_parsing": false,
+  "target": "aarch64-apple-darwin",
+  "tick_rate": 60,
+  "version": 1,
+  "visual_assets": []
+}

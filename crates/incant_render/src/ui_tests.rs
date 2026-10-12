@@ -457,6 +457,144 @@ fn caret_and_composition_follow_the_supplied_edit_ranges_only() {
 }
 
 #[test]
+fn caret_accessor_returns_the_drawn_caret_and_only_for_a_focused_enabled_field() {
+    let mut f = Fixture::new();
+    let mut latin = f.widget(
+        1,
+        UiRole::TextInput,
+        [10., 10., 210., 40.],
+        6.,
+        "Hello",
+        16.,
+    );
+    let mut arabic = f.widget(2, UiRole::TextInput, [10., 50., 210., 80.], 6., "سلام", 16.);
+    let mut cjk = f.widget(
+        3,
+        UiRole::TextInput,
+        [10., 90., 210., 120.],
+        6.,
+        "ab中文",
+        16.,
+    );
+    for field in [&mut latin, &mut arabic, &mut cjk] {
+        field.focused = true;
+    }
+    // The input method's caret inside a composition is the drawn text cursor.
+    cjk.edit = Some(UiEdit {
+        selection: Some(Selection::caret(5)),
+        preedit: Some(2.."ab中文".len()),
+    });
+    let input = f.finish(
+        [300., 130.],
+        vec![latin.clone(), arabic.clone(), cjk.clone()],
+    );
+    let drawn = plan(&input).unwrap();
+    for widget in &input.widgets {
+        let shown = ui_caret(widget).unwrap();
+        let focus = widget.edit.as_ref().unwrap().selection.unwrap().focus;
+        let expected = caret(&widget.layout, focus).unwrap();
+        let half = theme::CARET_WIDTH / 2.;
+        assert_eq!(
+            shown.rect,
+            [
+                widget.origin[0] + expected.x - half,
+                widget.origin[1] + expected.top,
+                widget.origin[0] + expected.x + half,
+                widget.origin[1] + expected.bottom
+            ]
+        );
+        assert!(shown.visible);
+        // Exactly the rectangle the layer draws, as a caret-coloured fill.
+        assert_eq!(
+            drawn
+                .quads
+                .iter()
+                .filter(|q| q.kind == KIND_FILL && q.rect == shown.rect && q.color == theme::TEXT)
+                .count(),
+            1
+        );
+    }
+    // The RTL logical end is the visual left edge of the run.
+    let left = arabic
+        .layout
+        .glyphs()
+        .iter()
+        .map(|g| g.position[0])
+        .fold(f32::MAX, f32::min);
+    let shown = ui_caret(&arabic).unwrap();
+    assert_eq!(
+        (shown.rect[0] + shown.rect[2]) / 2.,
+        arabic.origin[0] + left
+    );
+
+    // No caret is drawn, so none is reported: unfocused, disabled, a range
+    // selection, a converted clause, an input method hiding its cursor, and
+    // widgets other than text inputs.
+    let mut cases = Vec::new();
+    let mut unfocused = latin.clone();
+    unfocused.focused = false;
+    cases.push(unfocused);
+    let mut disabled = latin.clone();
+    disabled.disabled = true;
+    cases.push(disabled);
+    let mut range = latin.clone();
+    range.edit = Some(UiEdit {
+        selection: Some(Selection {
+            anchor: 1,
+            focus: 4,
+        }),
+        preedit: None,
+    });
+    cases.push(range);
+    let mut clause = cjk.clone();
+    clause.edit = Some(UiEdit {
+        selection: Some(Selection {
+            anchor: 2,
+            focus: 5,
+        }),
+        preedit: Some(2.."ab中文".len()),
+    });
+    cases.push(clause);
+    let mut hidden = cjk.clone();
+    hidden.edit = Some(UiEdit {
+        selection: None,
+        preedit: Some(2.."ab中文".len()),
+    });
+    cases.push(hidden);
+    for role in [UiRole::Label, UiRole::Button] {
+        let mut other = latin.clone();
+        other.role = role;
+        other.edit = None;
+        cases.push(other);
+    }
+    for case in &cases {
+        assert_eq!(ui_caret(case), None, "{:?} {:?}", case.role, case.edit);
+    }
+
+    // A caret past the visible box is reported, but as not visible: text
+    // overflowing a narrow field, and an ancestor clip short of the caret.
+    let mut f = Fixture::new();
+    let text = "Ada Lovelace, Countess";
+    let mut long = f.widget(4, UiRole::TextInput, [10., 10., 70., 40.], 6., text, 16.);
+    let (layout, glyphs) = f.shape(text, 16., 48., Wrap::None);
+    long.layout = layout;
+    long.glyphs = glyphs;
+    long.focused = true;
+    let past = ui_caret(&long).unwrap();
+    assert!(past.rect[2] > long.visible[2] && !past.visible);
+    long.edit = Some(UiEdit {
+        selection: Some(Selection::caret(0)),
+        preedit: None,
+    });
+    assert!(ui_caret(&long).unwrap().visible);
+    let mut clipped = latin.clone();
+    let shown = ui_caret(&clipped).unwrap();
+    clipped.visible[2] = shown.rect[0];
+    assert_eq!(ui_caret(&clipped).unwrap().rect, shown.rect);
+    assert!(!ui_caret(&clipped).unwrap().visible);
+}
+
+#[test]
 fn glyph_quads_use_exact_shaped_positions_and_keep_overflowing_rtl_glyphs() {
     let mut f = Fixture::new();
     // An RTL-base unbreakable token wider than its 40 px box starts at negative x.

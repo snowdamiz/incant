@@ -1,0 +1,10 @@
+{
+  "time": "2026-10-12T14:47:08.100837+00:00",
+  "base": "8a329939d3fc43095001a4bf3cfb5853ec86944b",
+  "source_hashes": {
+    "tools/probes/native-wasm-physics-export.py": "120ee8cdafbc88ef4ea1bba06ec6b7bd219376b66785220f077507dfed4c1a27",
+    "tools/probes/native-wasm-physics-export/behavior.rs": "bf8374956da896902960634bf80be86b9d6835ff2ca5a6ea07bed669131b0814",
+    "crates/incant_runtime/examples/physics_package_oracle.rs": "92a106f5a20572d8f749c7d1e6a2716cbfc692374c0c80171ed2212f885715f0"
+  },
+  "scope": "Public authored Rust/Wasm physics ordinary package proof only; no production/ABI/session/world codec changes."
+}

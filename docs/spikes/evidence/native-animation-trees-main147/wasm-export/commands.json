@@ -1,0 +1,694 @@
+[
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-target/ci/incant_headless",
+      "init",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/authoring/project.json",
+      "--entities",
+      "0"
+    ],
+    "at": "2026-10-12T16:24:30.582354+00:00",
+    "exit_code": 0,
+    "seconds": 0.03769662499962578,
+    "stdout": {
+      "file": "command-000-stdout.txt",
+      "sha256": "c15b9f8875c071f9827105b2ad6f4db2b6ab1d771d6c3554e009184a86b63615"
+    },
+    "stderr": {
+      "file": "command-000-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-target/ci/incant_headless",
+      "import",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/authoring/project.json",
+      "rig.gltf"
+    ],
+    "at": "2026-10-12T16:24:30.621853+00:00",
+    "exit_code": 0,
+    "seconds": 0.0513846250005372,
+    "stdout": {
+      "file": "command-001-stdout.txt",
+      "sha256": "b7adcdb899b08dde08def588fdd6224ae55d597047b3adbede9b79f138251ab1"
+    },
+    "stderr": {
+      "file": "command-001-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "/Users/andreyyurlov/.codex/worktrees/native-fbx-import/incant/tools/rust_guest.py",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/guest-build/behavior.rs",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/guest-build/behavior.wasm",
+      "--rustup",
+      "/opt/homebrew/bin/rustup"
+    ],
+    "at": "2026-10-12T16:24:30.673900+00:00",
+    "exit_code": 0,
+    "seconds": 1.7087186660000953,
+    "stdout": {
+      "file": "command-002-stdout.txt",
+      "sha256": "7e46a77dbcaf6108abb69571d1ecd68aa84deb604a7eeb2955a55f4940448224"
+    },
+    "stderr": {
+      "file": "command-002-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-target/ci/incant_headless",
+      "import",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/authoring/project.json",
+      "behavior.wasm"
+    ],
+    "at": "2026-10-12T16:24:32.383930+00:00",
+    "exit_code": 0,
+    "seconds": 0.06645866700000624,
+    "stdout": {
+      "file": "command-003-stdout.txt",
+      "sha256": "041068759475034585319b7090105b6d14fe85bced4da61d95be4cc6be4e2806"
+    },
+    "stderr": {
+      "file": "command-003-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-target/ci/incant_headless",
+      "validate",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/authoring/project.json"
+    ],
+    "at": "2026-10-12T16:24:32.605622+00:00",
+    "exit_code": 0,
+    "seconds": 0.01443870799994329,
+    "stdout": {
+      "file": "command-004-stdout.txt",
+      "sha256": "c61f6b63278d6c95e4e86b6037bfac70e0fe82244c50e1f8cea516f287675ce5"
+    },
+    "stderr": {
+      "file": "command-004-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-target/ci/examples/animation_pose_package_oracle",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/authoring/project.json",
+      "00000000000000000000000033",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/oracle.scene",
+      "20"
+    ],
+    "at": "2026-10-12T16:24:32.625247+00:00",
+    "exit_code": 0,
+    "seconds": 0.23332283299987466,
+    "stdout": {
+      "file": "command-005-stdout.txt",
+      "sha256": "9b181ecd1b832cc75917a24e8eee69510a17f5c1405bcb4145906cba135d3436"
+    },
+    "stderr": {
+      "file": "command-005-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-target/ci/incant_headless",
+      "native-play",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/authoring/project.json",
+      "--camera",
+      "0000000000000000000000009C",
+      "--ticks",
+      "20",
+      "--input-replay",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/positive-input.json",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/observe.json",
+      "--pcm-output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/development.pcm"
+    ],
+    "at": "2026-10-12T16:24:32.863338+00:00",
+    "exit_code": 0,
+    "seconds": 0.18647524999960297,
+    "stdout": {
+      "file": "command-006-stdout.txt",
+      "sha256": "70e569ee4ce9124d623a18aaf3886eb81f9c2d33d084dceae7ec8c114f1b4f26"
+    },
+    "stderr": {
+      "file": "command-006-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-target/ci/incant_headless",
+      "native-play",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/authoring/project.json",
+      "--camera",
+      "0000000000000000000000009C",
+      "--ticks",
+      "20",
+      "--input-replay",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/old-v1-input.json",
+      "--pcm-output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/dev-old-v1.pcm"
+    ],
+    "at": "2026-10-12T16:24:33.053538+00:00",
+    "exit_code": 1,
+    "seconds": 0.11551658299958945,
+    "stdout": {
+      "file": "command-007-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-007-stderr.txt",
+      "sha256": "c370a25877044f0dff0ac867421c32b8d4c868c2f25805660d7aeb9742061af5"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-target/ci/incant_headless",
+      "native-play",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/authoring/project.json",
+      "--camera",
+      "0000000000000000000000009C",
+      "--ticks",
+      "20",
+      "--input-replay",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/old-v2-input.json",
+      "--pcm-output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/dev-old-v2.pcm"
+    ],
+    "at": "2026-10-12T16:24:33.170655+00:00",
+    "exit_code": 1,
+    "seconds": 0.1257622920002177,
+    "stdout": {
+      "file": "command-008-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-008-stderr.txt",
+      "sha256": "c370a25877044f0dff0ac867421c32b8d4c868c2f25805660d7aeb9742061af5"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-target/ci/incant_headless",
+      "native-play",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/authoring/project.json",
+      "--camera",
+      "0000000000000000000000009C",
+      "--ticks",
+      "20",
+      "--input-replay",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/old-v3-input.json",
+      "--pcm-output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/dev-old-v3.pcm"
+    ],
+    "at": "2026-10-12T16:24:33.297613+00:00",
+    "exit_code": 1,
+    "seconds": 0.12780879199999617,
+    "stdout": {
+      "file": "command-009-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-009-stderr.txt",
+      "sha256": "8df86a61d26d3b44a6eb1a330dce6c1ec8c5653890ad5eb1236d4e3fc0d913b8"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-target/ci/incant_headless",
+      "native-play",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/authoring/project.json",
+      "--camera",
+      "0000000000000000000000009C",
+      "--ticks",
+      "20",
+      "--input-replay",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/short-scratch-input.json",
+      "--pcm-output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/dev-short-scratch.pcm"
+    ],
+    "at": "2026-10-12T16:24:33.426561+00:00",
+    "exit_code": 1,
+    "seconds": 0.12118499999996857,
+    "stdout": {
+      "file": "command-010-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-010-stderr.txt",
+      "sha256": "8438ab8be63ad4646f0bcbd24f4fb8bdfc3cf459bb8306b4f85fb7d59a32994c"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-target/ci/incant_headless",
+      "native-play",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/authoring/project.json",
+      "--camera",
+      "0000000000000000000000009C",
+      "--ticks",
+      "20",
+      "--input-replay",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/late-command-input.json",
+      "--pcm-output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/dev-late-command.pcm"
+    ],
+    "at": "2026-10-12T16:24:33.548884+00:00",
+    "exit_code": 1,
+    "seconds": 0.18136704199969245,
+    "stdout": {
+      "file": "command-011-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-011-stderr.txt",
+      "sha256": "278865c4ee58003d56c3fded05d4ff45064eb235f74852a3f391a1f8626db98c"
+    }
+  },
+  {
+    "argv": [
+      "rustup",
+      "which",
+      "rustc"
+    ],
+    "at": "2026-10-12T16:24:34.386688+00:00",
+    "exit_code": 0,
+    "seconds": 0.06287858300038351,
+    "stdout": {
+      "file": "command-012-stdout.txt",
+      "sha256": "1dc5ff25a027f5c0a04ac183e96b6665181272c327130fb0663c5c1be8aad81d"
+    },
+    "stderr": {
+      "file": "command-012-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/rustc",
+      "-vV"
+    ],
+    "at": "2026-10-12T16:24:34.451349+00:00",
+    "exit_code": 0,
+    "seconds": 0.027528542000254674,
+    "stdout": {
+      "file": "command-013-stdout.txt",
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    "stderr": {
+      "file": "command-013-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/rustc",
+      "--print",
+      "sysroot"
+    ],
+    "at": "2026-10-12T16:24:34.479804+00:00",
+    "exit_code": 0,
+    "seconds": 0.038387499999771535,
+    "stdout": {
+      "file": "command-014-stdout.txt",
+      "sha256": "b22adee5ac5a93ade5d52f11392360e1c1a95ef2add2bd03365e896e8f1688e1"
+    },
+    "stderr": {
+      "file": "command-014-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/worktrees/native-fbx-import/incant/tools/cargo",
+      "build",
+      "--locked",
+      "-j2",
+      "-p",
+      "incant_wasm_cook",
+      "--target-dir",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/private-builds/incant-project-build-f0w9tp0l/cook-target"
+    ],
+    "at": "2026-10-12T16:24:34.521060+00:00",
+    "exit_code": 0,
+    "seconds": 16.42385424999975,
+    "stdout": {
+      "file": "command-015-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-015-stderr.txt",
+      "sha256": "f392dd00d72999269eabedf48834381b036371b39df65e550555a888f3933184"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/private-builds/incant-project-build-f0w9tp0l/cook-target/debug/incant_wasm_cook",
+      "--capture",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/authoring",
+      "7340ae6d3a5826c6d4108e10f4a096ea160ee43076df380bdf2c219d1cd09143",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/private-builds/incant-project-build-f0w9tp0l/captured"
+    ],
+    "at": "2026-10-12T16:24:50.946340+00:00",
+    "exit_code": 0,
+    "seconds": 0.42431266699986736,
+    "stdout": {
+      "file": "command-016-stdout.txt",
+      "sha256": "5f04cd06eba87cce5a52a48661b4b3ba99154ec29f964087d1631bc398bae54e"
+    },
+    "stderr": {
+      "file": "command-016-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/worktrees/native-fbx-import/incant/tools/cargo",
+      "metadata",
+      "--locked",
+      "--format-version=1",
+      "--filter-platform",
+      "aarch64-apple-darwin",
+      "--features",
+      "incant_game_player/project,incant_game_player/render-input,incant_game_player/static-module"
+    ],
+    "at": "2026-10-12T16:24:51.504231+00:00",
+    "exit_code": 0,
+    "seconds": 0.42965483399984805,
+    "stdout": {
+      "file": "command-017-stdout.txt",
+      "sha256": "62975fb760157a1574a7ae08f0c92865927449034ea3e21c024d9b06c407980c"
+    },
+    "stderr": {
+      "file": "command-017-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/worktrees/native-fbx-import/incant/tools/cargo",
+      "build",
+      "-j2",
+      "-p",
+      "incant_game_player",
+      "--bin",
+      "incant_game_player",
+      "--features",
+      "project,render-input,static-module",
+      "--profile",
+      "shipping",
+      "--locked",
+      "--target",
+      "aarch64-apple-darwin",
+      "--target-dir",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/private-builds/incant-project-build-f0w9tp0l/target",
+      "--config",
+      "profile.shipping.split-debuginfo=\"packed\"",
+      "--message-format=json",
+      "-vv"
+    ],
+    "at": "2026-10-12T16:24:51.958537+00:00",
+    "exit_code": 0,
+    "seconds": 336.40424274999987,
+    "stdout": {
+      "file": "command-018-stdout.txt",
+      "sha256": "912c3c74d1859b9f07c6b07288b2c3fe679db37632243ca74316f9ab7a251ed1"
+    },
+    "stderr": {
+      "file": "command-018-stderr.txt",
+      "sha256": "7d8b475239b4c66adee8c8e0a2de9a321f9d46ea38c6fb174df850f1a1c99336"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/lib/rustlib/aarch64-apple-darwin/bin/llvm-nm",
+      "--defined-only",
+      "--demangle",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/private-builds/incant-project-build-f0w9tp0l/target/aarch64-apple-darwin/shipping/incant_game_player"
+    ],
+    "at": "2026-10-12T16:30:28.582536+00:00",
+    "exit_code": 0,
+    "seconds": 0.04507670900056837,
+    "stdout": {
+      "file": "command-019-stdout.txt",
+      "sha256": "f291d54ed8f31eff4ebbf3e6cf2b54aae16268055bed53a3dc6c6b7d534228af"
+    },
+    "stderr": {
+      "file": "command-019-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/private-builds/incant-native-export-nch_02fu/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/private-builds/incant-native-export-nch_02fu/player/data",
+      "--ticks",
+      "1",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/private-builds/incant-native-export-nch_02fu/startup.pcm"
+    ],
+    "at": "2026-10-12T16:30:33.189283+00:00",
+    "exit_code": 0,
+    "seconds": 0.11651529100163316,
+    "stdout": {
+      "file": "command-020-stdout.txt",
+      "sha256": "0612654b62b849ffe63dab20c1c86cb521b88c8ff2821f66f70b91a0864c4eba"
+    },
+    "stderr": {
+      "file": "command-020-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/package/player/data",
+      "--ticks",
+      "20",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/positive-input.json",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/observe.json",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/run-0.pcm"
+    ],
+    "at": "2026-10-12T16:30:33.366311+00:00",
+    "exit_code": 0,
+    "seconds": 0.12342549999993935,
+    "stdout": {
+      "file": "command-021-stdout.txt",
+      "sha256": "58ae8953a77d6a3487fe6f6b59b64daa1832b58567ff9dfab07d81832b00beef"
+    },
+    "stderr": {
+      "file": "command-021-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/package/player/data",
+      "--ticks",
+      "20",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/positive-input.json",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/observe.json",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/run-1.pcm"
+    ],
+    "at": "2026-10-12T16:30:33.492219+00:00",
+    "exit_code": 0,
+    "seconds": 0.02903775000049791,
+    "stdout": {
+      "file": "command-022-stdout.txt",
+      "sha256": "58ae8953a77d6a3487fe6f6b59b64daa1832b58567ff9dfab07d81832b00beef"
+    },
+    "stderr": {
+      "file": "command-022-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/package/player/data",
+      "--ticks",
+      "20",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/positive-input.json",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/observe.json",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/run-2.pcm"
+    ],
+    "at": "2026-10-12T16:30:33.524128+00:00",
+    "exit_code": 0,
+    "seconds": 0.027219708999837167,
+    "stdout": {
+      "file": "command-023-stdout.txt",
+      "sha256": "58ae8953a77d6a3487fe6f6b59b64daa1832b58567ff9dfab07d81832b00beef"
+    },
+    "stderr": {
+      "file": "command-023-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/package/player/data",
+      "--ticks",
+      "20",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/old-v1-input.json",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/package-old-v1.pcm"
+    ],
+    "at": "2026-10-12T16:30:33.554215+00:00",
+    "exit_code": 1,
+    "seconds": 0.018103958000210696,
+    "stdout": {
+      "file": "command-024-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-024-stderr.txt",
+      "sha256": "e2d21e0e9fbada020e5bbd1486929a7eadfc6d6fa179799e8bb2eb985536dd7c"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/package/player/data",
+      "--ticks",
+      "20",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/old-v2-input.json",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/package-old-v2.pcm"
+    ],
+    "at": "2026-10-12T16:30:33.573169+00:00",
+    "exit_code": 1,
+    "seconds": 0.016218665999986115,
+    "stdout": {
+      "file": "command-025-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-025-stderr.txt",
+      "sha256": "e2d21e0e9fbada020e5bbd1486929a7eadfc6d6fa179799e8bb2eb985536dd7c"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/package/player/data",
+      "--ticks",
+      "20",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/old-v3-input.json",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/package-old-v3.pcm"
+    ],
+    "at": "2026-10-12T16:30:33.590292+00:00",
+    "exit_code": 1,
+    "seconds": 0.014286582998465747,
+    "stdout": {
+      "file": "command-026-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-026-stderr.txt",
+      "sha256": "6b1831a4729b365d23e581958724f5f9c159053718f3c27e5a1231b6df9fee2b"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/package/player/data",
+      "--ticks",
+      "20",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/short-scratch-input.json",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/package-short-scratch.pcm"
+    ],
+    "at": "2026-10-12T16:30:33.605375+00:00",
+    "exit_code": 1,
+    "seconds": 0.01482883300013782,
+    "stdout": {
+      "file": "command-027-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-027-stderr.txt",
+      "sha256": "c503f6ae0ef932ea9309837945d0ff26605c3dbf9daf4bbec9192ad0506c34b3"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/package/player/data",
+      "--ticks",
+      "20",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/late-command-input.json",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/package-late-command.pcm"
+    ],
+    "at": "2026-10-12T16:30:33.621492+00:00",
+    "exit_code": 1,
+    "seconds": 0.015400542000861606,
+    "stdout": {
+      "file": "command-028-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-028-stderr.txt",
+      "sha256": "c8c6ca15839ccad282f656a5a1277d4ca7dd2a15f6579a216c65b3788644216e"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/package/player/data",
+      "--ticks",
+      "1",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/checkpoint-refused.pcm",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/checkpoint-refused.bin"
+    ],
+    "at": "2026-10-12T16:30:33.637821+00:00",
+    "exit_code": 1,
+    "seconds": 0.014899499999955879,
+    "stdout": {
+      "file": "command-029-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-029-stderr.txt",
+      "sha256": "8553d484ef61a5488bc165050a946d44ae606e41c8018ff857501df0ebb8122d"
+    }
+  }
+]

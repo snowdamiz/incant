@@ -1,0 +1,31 @@
+diff --git a/Cargo.lock b/Cargo.lock
+index e892df0a..f6ea27c3 100644
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -8430,8 +8430,6 @@ dependencies = [
+ [[package]]
+ name = "tao"
+ version = "0.37.1"
+-source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "f37f381f4e048e6cdf038b5705f8cf14ad108279d46eb968140a7b291aba9400"
+ dependencies = [
+  "bitflags 2.13.2",
+  "block2",
+diff --git a/Cargo.toml b/Cargo.toml
+index 0161aace..209ae4ae 100644
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -1,7 +1,7 @@
+ [workspace]
+ resolver = "3"
+ members = ["crates/*", "editor/app", "sdk/rust"]
+-exclude = ["third_party/rerecast", "third_party/cosmic-text", "third_party/kira"]
++exclude = ["third_party/rerecast", "third_party/cosmic-text", "third_party/tao", "third_party/kira"]
+ default-members = ["crates/*"]
+ 
+ [workspace.package]
+@@ -79,3 +79,4 @@ split-debuginfo = "off"
+ kira = { path = "third_party/kira" }
+ rerecast = { path = "third_party/rerecast" }
+ cosmic-text = { path = "third_party/cosmic-text" }
++tao = { path = "third_party/tao" }

@@ -139,6 +139,28 @@
         },
         {
           "additionalProperties": false,
+          "properties": {
+            "cycle_seconds": {
+              "format": "double",
+              "type": "number"
+            },
+            "kind": {
+              "const": "tree",
+              "type": "string"
+            },
+            "tree": {
+              "$ref": "#/$defs/AnimationTree"
+            }
+          },
+          "required": [
+            "kind",
+            "cycle_seconds",
+            "tree"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
           "description": "Adjacent threshold clips share one normalized clock. Values outside the\npoint interval clamp to its endpoints; no extrapolation or hidden child.",
           "properties": {
             "cycle_seconds": {
@@ -191,6 +213,146 @@
         "initial",
         "min",
         "max"
+      ],
+      "type": "object"
+    },
+    "AnimationTree": {
+      "additionalProperties": false,
+      "properties": {
+        "nodes": {
+          "additionalProperties": {
+            "$ref": "#/$defs/AnimationTreeNode"
+          },
+          "type": "object"
+        },
+        "root": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "root",
+        "nodes"
+      ],
+      "type": "object"
+    },
+    "AnimationTreeNode": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "clip": {
+              "format": "uint16",
+              "maximum": 65535,
+              "minimum": 0,
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "kind": {
+              "const": "clip",
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "blend1d",
+              "type": "string"
+            },
+            "parameter": {
+              "type": "string"
+            },
+            "points": {
+              "items": {
+                "$ref": "#/$defs/AnimationTreePoint"
+              },
+              "maxItems": 8,
+              "minItems": 2,
+              "type": "array"
+            }
+          },
+          "required": [
+            "kind",
+            "parameter",
+            "points"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "children": {
+              "description": "Row-major children: y * x.len() + x.",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 64,
+              "minItems": 4,
+              "type": "array"
+            },
+            "kind": {
+              "const": "blend2d",
+              "type": "string"
+            },
+            "parameters": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 2,
+              "minItems": 2,
+              "type": "array"
+            },
+            "x": {
+              "items": {
+                "format": "double",
+                "type": "number"
+              },
+              "maxItems": 8,
+              "minItems": 2,
+              "type": "array"
+            },
+            "y": {
+              "items": {
+                "format": "double",
+                "type": "number"
+              },
+              "maxItems": 8,
+              "minItems": 2,
+              "type": "array"
+            }
+          },
+          "required": [
+            "kind",
+            "parameters",
+            "x",
+            "y",
+            "children"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "AnimationTreePoint": {
+      "additionalProperties": false,
+      "properties": {
+        "node": {
+          "type": "string"
+        },
+        "threshold": {
+          "format": "double",
+          "type": "number"
+        }
+      },
+      "required": [
+        "threshold",
+        "node"
       ],
       "type": "object"
     }

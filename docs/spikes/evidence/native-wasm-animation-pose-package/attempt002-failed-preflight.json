@@ -1,0 +1,9 @@
+{
+  "status": "development refused before export",
+  "reason": "Guest full-tick log exceeded existing1024-byte per-message SDK limit. Split complete fields into3 bounded per-entity records; no limit change.",
+  "source_hashes": {
+    "tools/probes/native-wasm-animation-pose-export.py": "12f292257ed6f97554bb4d226e5733947607f5cda6c7d87abbb06c1261d6c1c3",
+    "tools/probes/native-wasm-animation-pose-export/behavior.rs": "3e09c29a579676dcf2b34c753ae9c41c7c0ec14fde8edd7e7164bda784d712df",
+    "crates/incant_cook/examples/animation_pose_package_oracle.rs": "3900b876fd2ebd917d537fa35f041c2a8d79408743773040f386a9df19ae4b65"
+  }
+}

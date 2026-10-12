@@ -1,0 +1,13 @@
+{
+  "at": "2026-10-12T16:42:07.195813+00:00",
+  "reviewer": "astra root",
+  "accepted": true,
+  "patch_sha256": "9e01b1021cf1f09648aca62f08066c85dbaca849c74c341bf6b35dbd3d1361aa",
+  "scope": "Four-file provenance correction of prior conditional source acceptance. Read complete patch; explicitly separates installed packages, CPU candidate emulation and unverified actual Linux adapter. Preserves numbers, eight-bit precision limit and four-bit Vulkan exclusion. No shader/reference arithmetic changes.",
+  "prior_review": "native-ui-0057-source-20261012.json",
+  "remaining": [
+    "Current-main affected checks",
+    "Actual Linux test and adapter identity",
+    "Additional test-only adapter logging must be reviewed as its own small diff before publication"
+  ]
+}

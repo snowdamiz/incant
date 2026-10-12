@@ -1,0 +1,37 @@
+{
+  "at": "2026-10-12T15:40:21.718455+00:00",
+  "reviewer": "astra-root",
+  "accepted": true,
+  "evidence_sha256": "bfa169bf9b90bb998a70e28dd244a531d58a6c53f5a10f1817eacfddaac7ceb2",
+  "source_files_verified": 1672,
+  "retained_artifacts_verified": 49,
+  "runtime_package_files_verified": 16,
+  "actual_output_files_verified": 15,
+  "actual_main_ancestry": true,
+  "tests": {
+    "affected-tests": {
+      "groups": 50,
+      "passed": 422,
+      "failed": 0,
+      "ignored": 0
+    },
+    "kira-tests": {
+      "groups": 1,
+      "passed": 99,
+      "failed": 0,
+      "ignored": 0
+    }
+  },
+  "successful_processes": 4,
+  "exact_refusals": 9,
+  "exact_save_and_pcm_continuation": true,
+  "integration_review": "Retains current-main Tao vendoring beside Kira; Cargo-only production delta accepted, source hashes stable through docs-only main merge",
+  "limitations": [
+    "CPU hosted ordinary-load mixed static/streamed audio and UI; fresh owners and neutral input",
+    "Active preedit refuses; pointer capture is discarded",
+    "Physics/static/development-module and device-native audio saves still refuse",
+    "No GPU/window/native-IME or full-save gate claim; PCM and save are not a multi-file transaction",
+    "The refusal proof intentionally permits PCM before no-clobber save refusal; PCM and checkpoint publication are not one atomic operation.",
+    "Original producer evidence remains preserved; this is a new current-lock build and real ordinary package continuation."
+  ]
+}

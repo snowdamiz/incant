@@ -25,6 +25,17 @@ const _: () = {
 /// Trusted host adapter operation; all integer arguments are guest offsets/indices.
 #[derive(Clone, Copy)]
 pub enum Call {
+    PhysicsQuery {
+        ptr: i32,
+        len: i32,
+    },
+    PhysicsEvents {
+        dimension: i32,
+    },
+    ReadPhysics {
+        ptr: i32,
+        capacity: i32,
+    },
     FindPath {
         ptr: i32,
         len: i32,
@@ -34,6 +45,11 @@ pub enum Call {
         len: i32,
     },
     ReadPath {
+        ptr: i32,
+        capacity: i32,
+    },
+    AnimationLenV4,
+    ReadAnimationsV4 {
         ptr: i32,
         capacity: i32,
     },
@@ -154,6 +170,8 @@ pub struct Capability {
     animations: Vec<u8>,
     animations_v2: Vec<u8>,
     animations_v3: Vec<u8>,
+    animation_scene: Option<StableId>,
+    animations_v4: Vec<u8>,
     animation_graph_rows: Vec<incant_runtime::AnimationGraphSnapshot>,
     animation_graphs: Vec<u8>,
     animation_rejected: bool,
@@ -167,6 +185,7 @@ pub struct Capability {
     query_units: usize,
     navigation_queries: usize,
     navigation: Option<crate::navigation_paths::State>,
+    physics: Option<crate::physics_queries::State>,
 }
 impl Capability {
     pub fn is_failed(&self) -> bool {
@@ -226,7 +245,9 @@ impl Capability {
             return Err(error);
         }
         self.animation_rejected = false;
+        self.animation_scene = Some(world.scene_id());
         self.animations_v3.clear();
+        self.animations_v4.clear();
         self.animation_graphs.clear();
         if let Err(error) = world.snapshot_animation_graphs(&mut self.animation_graph_rows) {
             self.abort();
@@ -242,6 +263,7 @@ impl Capability {
         self.steering = Some(crate::steering::State::new(dt));
         self.query_units = 0;
         self.navigation_queries = 0;
+        self.physics = Some(crate::physics_queries::State::new(dt));
         match world.navigation_snapshot() {
             Ok(snapshot) => self.navigation = Some(crate::navigation_paths::State::new(snapshot)),
             Err(error) => {
@@ -267,11 +289,49 @@ impl Capability {
         self.input_available = true;
         Ok(epoch)
     }
+    /// Bind the exact owning world's synchronous query loan once per callback.
+    /// A stale token cannot poison the current callback. Active misuse is sticky.
+    pub fn bind_physics(
+        &mut self,
+        epoch: i64,
+        queries: incant_runtime::NativeQueries,
+    ) -> Result<(), Error> {
+        if !self.active || self.epoch != epoch {
+            return Err(Error::Abi("expired physics epoch"));
+        }
+        let result = if Some(queries.identity()) != self.identity.as_ref() {
+            Err(Error::Abi("different physics world"))
+        } else {
+            self.physics
+                .as_mut()
+                .ok_or(Error::Abi("missing physics state"))?
+                .bind(queries)
+        };
+        if result.is_err()
+            && let Some(state) = &mut self.physics
+        {
+            state.reject();
+        }
+        result
+    }
+    /// Must run after the guest returns and before native commit. The owning
+    /// native loan independently revokes retained query capabilities on unwind.
+    pub fn revoke_physics(&mut self) {
+        if let Some(state) = &mut self.physics {
+            state.revoke();
+        }
+    }
+    fn physics_state(&mut self) -> Result<&mut crate::physics_queries::State, Error> {
+        self.physics
+            .as_mut()
+            .ok_or(Error::Abi("missing physics state"))
+    }
     pub fn abort(&mut self) {
         self.animation_rows.clear();
         self.animations.clear();
         self.animations_v2.clear();
         self.animations_v3.clear();
+        self.animations_v4.clear();
         self.animation_graph_rows.clear();
         self.animation_graphs.clear();
         self.active = false;
@@ -285,10 +345,19 @@ impl Capability {
         self.localization = None;
         self.steering = None;
         self.navigation = None;
+        self.physics = None;
     }
     pub fn finish(&mut self, world: &mut NativeWorld) -> Result<(), Error> {
         if !self.active {
             return Err(Error::Abi("inactive ECS transaction"));
+        }
+        if self
+            .physics
+            .as_ref()
+            .is_some_and(|s| s.rejected || s.bound())
+        {
+            self.abort();
+            return Err(Error::Abi("rejected or unrevoked physics loan"));
         }
         if self.steering.as_ref().is_some_and(|s| s.rejected)
             || self.navigation.as_ref().is_some_and(|s| s.rejected)
@@ -304,6 +373,7 @@ impl Capability {
         self.animations.clear();
         self.animations_v2.clear();
         self.animations_v3.clear();
+        self.animations_v4.clear();
         self.animation_graph_rows.clear();
         self.animation_graphs.clear();
         if self.tick_logs.rejected {
@@ -317,6 +387,7 @@ impl Capability {
         self.localization = None;
         self.steering = None;
         self.navigation = None;
+        self.physics = None;
         self.active = false;
         self.input_available = false;
         self.input.clear();
@@ -402,6 +473,12 @@ impl Capability {
     /// Synchronous import; memory contains initialized guest bytes only and is
     /// borrowed for this call. No world observation/publication occurs here.
     pub fn invoke(&mut self, memory: &mut [u8], epoch: i64, call: Call) -> Result<i32, Error> {
+        let physics_authorized = self.active
+            && self.epoch == epoch
+            && matches!(
+                call,
+                Call::PhysicsQuery { .. } | Call::PhysicsEvents { .. } | Call::ReadPhysics { .. }
+            );
         let steering_authorized = self.active
             && self.epoch == epoch
             && matches!(
@@ -422,6 +499,8 @@ impl Capability {
                     | Call::AnimationLenV2
                     | Call::ReadAnimationsV2 { .. }
                     | Call::ControlAnimationV2 { .. }
+                    | Call::AnimationLenV4
+                    | Call::ReadAnimationsV4 { .. }
                     | Call::AnimationLenV3
                     | Call::ReadAnimationsV3 { .. }
                     | Call::AnimationGraphLen
@@ -442,6 +521,12 @@ impl Capability {
                     | Call::SetLocale { .. }
             );
         let result = self.invoke_inner(memory, epoch, call);
+        if physics_authorized
+            && result.is_err()
+            && let Some(state) = &mut self.physics
+        {
+            state.reject();
+        }
         if steering_authorized
             && result.is_err()
             && let Some(state) = &mut self.steering
@@ -474,7 +559,10 @@ impl Capability {
             Call::Locale | Call::Format { .. } | Call::Localize { .. } => {
                 incant_wasm_abi::LOCALIZATION_QUERY_UNITS
             }
-            Call::Steer { .. } | Call::FindPath { .. } | Call::FindGridPath { .. } => 1,
+            Call::Steer { .. }
+            | Call::FindPath { .. }
+            | Call::FindGridPath { .. }
+            | Call::PhysicsEvents { .. } => 1,
             _ => 0,
         };
         self.query_units = self
@@ -493,6 +581,36 @@ impl Capability {
                 .ok_or(Error::Limit("navigation query quota"))?;
         }
         match call {
+            Call::PhysicsQuery { ptr, len } => {
+                let len = usize::try_from(len)
+                    .ok()
+                    .filter(|n| *n <= incant_wasm_abi::PHYSICS_MAX_REQUEST_BYTES)
+                    .ok_or(Error::Abi("physics request length"))?;
+                let region = range(ptr, len, memory.len())?;
+                self.transfer(len)?;
+                let batch = incant_wasm_abi::physics::decode_batch(&memory[region])
+                    .map_err(|_| Error::Abi("physics request"))?;
+                self.query_units = self
+                    .query_units
+                    .checked_add(batch.len())
+                    .filter(|n| *n <= incant_wasm_abi::NATIVE_MAX_QUERY_UNITS)
+                    .ok_or(Error::Limit("query units"))?;
+                return self.physics_state()?.query(batch);
+            }
+            Call::PhysicsEvents { dimension } => return self.physics_state()?.events(dimension),
+            Call::ReadPhysics { ptr, capacity } => {
+                let len = self.physics_state()?.reply()?.len();
+                let capacity = usize::try_from(capacity)
+                    .map_err(|_| Error::Abi("physics destination capacity"))?;
+                if capacity < len {
+                    return Err(Error::Abi("physics destination capacity"));
+                }
+                range(ptr, capacity, memory.len())?;
+                let region = range(ptr, len, memory.len())?;
+                self.transfer(len)?;
+                memory[region].copy_from_slice(self.physics_state()?.reply()?);
+                return Ok(len as i32);
+            }
             Call::FindPath { ptr, len } | Call::FindGridPath { ptr, len } => {
                 let grid = matches!(call, Call::FindGridPath { .. });
                 let expected = if grid {
@@ -520,9 +638,37 @@ impl Capability {
                 memory[region].copy_from_slice(self.navigation_state()?.reply()?);
                 return Ok(len as i32);
             }
+            Call::AnimationLenV4 | Call::ReadAnimationsV4 { .. } => {
+                if self.animations_v4.is_empty() {
+                    crate::animation_poses::encode(
+                        self.animation_scene
+                            .ok_or(Error::Abi("animation scene absent"))?,
+                        &mut self.animation_rows,
+                        &mut self.animations_v4,
+                    )?;
+                }
+                let len = self.animations_v4.len();
+                if let Call::ReadAnimationsV4 { ptr, capacity } = call {
+                    let capacity = usize::try_from(capacity)
+                        .map_err(|_| Error::Abi("animation pose destination capacity"))?;
+                    if capacity < len {
+                        return Err(Error::Abi("animation pose destination capacity"));
+                    }
+                    range(ptr, capacity, memory.len())?;
+                    let region = range(ptr, len, memory.len())?;
+                    self.transfer(len)?;
+                    memory[region].copy_from_slice(&self.animations_v4);
+                }
+                return Ok(len as i32);
+            }
             Call::AnimationLenV3 | Call::AnimationGraphLen => {
                 let graph = matches!(call, Call::AnimationGraphLen);
                 self.prepare_animation_snapshot(graph);
+                if !graph && self.animations_v3.is_empty() {
+                    return Err(Error::Abi(
+                        "animation v3 cannot represent weighted tree poses",
+                    ));
+                }
                 return Ok(if graph {
                     self.animation_graphs.len()
                 } else {
@@ -533,6 +679,11 @@ impl Capability {
             | Call::ReadAnimationGraphs { ptr, capacity } => {
                 let graph = matches!(call, Call::ReadAnimationGraphs { .. });
                 self.prepare_animation_snapshot(graph);
+                if !graph && self.animations_v3.is_empty() {
+                    return Err(Error::Abi(
+                        "animation v3 cannot represent weighted tree poses",
+                    ));
+                }
                 let len = if graph {
                     self.animation_graphs.len()
                 } else {

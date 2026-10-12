@@ -1,0 +1,222 @@
+{
+  "at": "2026-10-12T16:23:53.718182+00:00",
+  "reviewer": "astra root",
+  "decision": "source accepted conditional on evidence wording correction; integration checks pending",
+  "commits": [
+    "e2551dd273b9eaaf2b6097bd28102ae714d55eef",
+    "ca111ccf616c660ca3abba83e94b1b2de4630ba1"
+  ],
+  "source_sha256": {
+    "crates/incant_render/src/ui/ui.wgsl": "f67e4982b038833e87ed84861d5be3018f5f0d6587ff8da6faf8bfd840c33c39",
+    "crates/incant_render/src/ui_draw_tests.rs": "3f097b8c550f2d06a89127ebec34475c88fc4f1f0ef231cdab0f6d2278b78b21",
+    "crates/incant_render/src/ui/mod.rs": "275028849806cb6bdf541ea1150639d9081fffd405a31b32a5831bf73b97fa0d",
+    "crates/incant_render/src/ui/geometry.rs": "47bd7838b52a46e0034b05cf5458f8b12bf70c475889ba30848078dcb15d352b",
+    "crates/incant_render/src/ui_tests.rs": "74e2513b61a6602299a63ab5e8b6d427d66ebf47663318dd27c437ae01c57569",
+    "crates/incant_render/src/lib.rs": "f813f30566c5ee94084151aed95c917c152b00e63b49d6095c95c1654b335763"
+  },
+  "review": [
+    "Read zero-alpha discard after glyph/shape coverage evaluation, preserving premultiplied color and exact stored uncovered pixels.",
+    "Read per-channel interval composition in stored sRGB/UNORM code space; only glyph filtering and per-blend conversion precision widen intervals. Geometry and clipping remain exact.",
+    "Read exact and emulated candidate checks, geometric/opacity/clipping controls and retained eight shader/geometry mutation failures with unmutated before/after successes.",
+    "Read readonly canonical caret accessor and tests for drawn-quad equality, RTL edge, CJK preedit, no-caret states and overflow. No ownership mutation or new input path.",
+    "Rehashed all25 raw logs against retained index and compared available trimmed repository copies. Independently counted scoped Metal/host test results. Root did not execute or judge pixels."
+  ],
+  "test_counts": {
+    "test-render-full.txt": [
+      [
+        "ok",
+        "90",
+        "0",
+        "0"
+      ],
+      [
+        "ok",
+        "50",
+        "0",
+        "0"
+      ],
+      [
+        "ok",
+        "0",
+        "0",
+        "0"
+      ]
+    ],
+    "test-gpu-host.txt": [
+      [
+        "ok",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "ok",
+        "5",
+        "0",
+        "0"
+      ],
+      [
+        "ok",
+        "2",
+        "0",
+        "0"
+      ],
+      [
+        "ok",
+        "0",
+        "0",
+        "0"
+      ]
+    ],
+    "fixed-ui-tests-1.txt": [
+      [
+        "ok",
+        "13",
+        "0",
+        "0"
+      ]
+    ],
+    "ui-cpu-tests.txt": [
+      [
+        "ok",
+        "8",
+        "0",
+        "0"
+      ]
+    ]
+  },
+  "verified_logs": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0057/logs/baseline-ui-tests.txt",
+      "sha256": "8439bc9e2efe474dcd0e608f27910876eba76693113e80252b8cbd16797ca934",
+      "retained": true
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0057/logs/fixed-ui-tests-1.txt",
+      "sha256": "9ca34a03f0b0975ac7f34610d4442124f6350c5e6e4e18395bb375a7b8048c83",
+      "retained": true
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0057/logs/test-render-full.txt",
+      "sha256": "abd0310a15c1faf413e08c01170a86b8e93dad9a6fca757d1452e03c9c8464b1",
+      "retained": true
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0057/logs/test-gpu-host.txt",
+      "sha256": "d590233d88a0731e2f53af9f62ceee89c2b6fc45cb8aa12c2f19a7cbec75dabf",
+      "retained": true
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0057/logs/ui-cpu-tests.txt",
+      "sha256": "bb8f985d90fd77546ec10c3e45251a4bbe0ac7b59d1e76c389c9cb2f3ad7a164",
+      "retained": true
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0057/logs/oracle-cpu-3.txt",
+      "sha256": "9f5c2fa470e20a31a178c72ee4a2d5fa38544483aa631768e5d4edf036e8f322",
+      "retained": true
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0057/logs/oracle-cpu-old-shader-emulation.txt",
+      "sha256": "8a2001178d8474c3e4372905f61f500c412848904852d686abb42219e569fc6f",
+      "retained": true
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0057/logs/clippy-render-2.txt",
+      "sha256": "fd0fe14403b28f52d13f8cd4c2b7730d468555f9f1bb706b55b4f468f2273d01",
+      "retained": true
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0057/logs/fmt-3.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": true
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0057/logs/check-wasm.txt",
+      "sha256": "df67d8f17d8783e89e1d480d7bcf14c27fc0e6777d3d5ecc05ee169773588970",
+      "retained": true
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0057/logs/mutate-run.txt",
+      "sha256": "7a3a7e0d6bdcab1a1f3aafaaacbf25bba076e4ab30db6551c43ff73af2587088",
+      "retained": true
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0057/logs/build-headless.txt",
+      "sha256": "6792c786ecc0ff0e31a0287985df7ac40828b875e5b242538388214f66a2e254",
+      "retained": true
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0057/logs/package-1.txt",
+      "sha256": "08d8703e857ec3fd0180bc726a44894fe079d7e35c90e30084a1afda62826316",
+      "retained": true
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0057/logs/offscreen-1.txt",
+      "sha256": "c29195999fe666ea8d4e4e673e58c51d741a8bdd2f0d6f3df4cdb6b0dbe5a8ff",
+      "retained": true
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0057/logs/offscreen-2.txt",
+      "sha256": "86fa27c6fc6195e83b0a52f6440f41e681b9e2e30540283d72691e587b5a4801",
+      "retained": true
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0057/logs/mutations/mutation-0.txt",
+      "sha256": "7c7cd34f670001acf8c54e02cdaf8f5b2b9ead70b11d5c518838c1567e9bbc11",
+      "retained": false
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0057/logs/mutations/mutation-1.txt",
+      "sha256": "6363da577dfc71aec4e0c992c28aba038d74bad36d59e340e8e9bdcf9e0a7fe4",
+      "retained": false
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0057/logs/mutations/mutation-2.txt",
+      "sha256": "f2159afb006dff86f1537deacc48bf705c4a6474f6ef0eab53160491f895b20d",
+      "retained": false
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0057/logs/mutations/mutation-3.txt",
+      "sha256": "0f171ebf650d0d6e17e77547055971a248dcd84401e65b8b1c980da269c93025",
+      "retained": false
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0057/logs/mutations/mutation-4.txt",
+      "sha256": "f32a2310e3de6e48a4dc242f9f2461aeb5dd0d7fc1c91af8907731b79afd19e1",
+      "retained": false
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0057/logs/mutations/mutation-5.txt",
+      "sha256": "59f2c4c1579e75b945f7d98410d15f1b1818e0e15d9a44c7337060ca026840aa",
+      "retained": false
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0057/logs/mutations/mutation-6.txt",
+      "sha256": "42726f736ecd987de8130c3338ded8c8d18dd1f1f183370b6266f1d7ed0db347",
+      "retained": false
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0057/logs/mutations/mutation-7.txt",
+      "sha256": "8f65945e113e4a835e2e6540ee6a214b9bbf5ea4b46cefb663ff1b675ecb954f",
+      "retained": false
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0057/logs/mutations/unmutated-after.txt",
+      "sha256": "76c1d4d6f0d4fb292e9a2cc26c07719e45800427d6327f75a0cfd490e8dedf80",
+      "retained": false
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0057/logs/mutations/unmutated-before.txt",
+      "sha256": "cd6ba1c4a96264b69d4f220d27bc70f738418083d2f1512ca1d2a588d6ffcc3f",
+      "retained": false
+    }
+  ],
+  "required_correction": "Installed mesa-vulkan-drivers and numerical emulation do not establish actual failing CI adapter identity. Qualify Model comment, native-ui-draw docs, result and evidence JSON as candidate diagnosis; Linux execution remains unverified.",
+  "limitations": [
+    "No actual Linux or Windows execution for this patch; next frozen full checkpoint must validate actual backend and pass all required contexts.",
+    "Reference assumes at least8 subtexel bits; Vulkan minimum4 remains outside this reference.",
+    "Claude owns appearance judgment; root source review does not approve complete Game UI/device/phase gates.",
+    "Current-main CPU compilation/integration checks still required."
+  ]
+}

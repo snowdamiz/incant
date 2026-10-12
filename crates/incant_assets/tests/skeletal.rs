@@ -2,6 +2,10 @@
 mod blending;
 #[path = "skeletal/fixture.rs"]
 mod fixture;
+#[path = "skeletal/ik.rs"]
+mod ik;
+#[path = "skeletal/weighted.rs"]
+mod weighted;
 use incant_assets::{cook_gltf, import_gltf};
 use incant_assets_runtime::{
     animation::{AnimationPlayer, Interpolation, Property},
@@ -364,6 +368,7 @@ fn fresh_process_loads_only_cooked_animation_data() {
         String::from_utf8_lossy(&output.stdout).contains("SKELETAL_NUMERIC_OK [12.0, 1.0, 0.0]")
     );
     assert!(String::from_utf8_lossy(&output.stdout).contains("SKELETAL_BLEND_OK"));
+    assert!(String::from_utf8_lossy(&output.stdout).contains("SKELETAL_WEIGHTED_OK"));
 }
 #[test]
 fn source_deleted_process_child() {
@@ -399,6 +404,8 @@ fn source_deleted_process_child() {
         [13., 2., 0.],
     );
     println!("SKELETAL_BLEND_OK");
+    weighted::four_pose_oracle(&model);
+    println!("SKELETAL_WEIGHTED_OK");
 }
 #[test]
 fn source_buffers_refuse_bad_key_times_weights_and_aggregate_channels() {

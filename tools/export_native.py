@@ -200,7 +200,7 @@ def export(project, output, scene=None, camera=None, mode='headless', wabt=None,
             player, report = build(project, staging, storage, scene, camera, mode, wabt)
         require(not storage.exists(), 'Private build storage was not removed')
         print('Checking copied player after removal of private build storage...', flush=True)
-        runtime_env = {'PATH': str(player.parent), 'HOME': str(staging / 'absent-home'),
+        runtime_env = {'PATH': str(player.parent),
                        'TMPDIR': str(staging), 'TEMP': str(staging), 'TMP': str(staging)}
         runtime_env.update({key: os.environ[key] for key in ('SystemRoot', 'SystemDrive', 'WINDIR') if key in os.environ})
         result = execute([player, '--package', player.parent / 'data', '--ticks', '1', '--output', staging / 'startup.pcm'] + ui_options,

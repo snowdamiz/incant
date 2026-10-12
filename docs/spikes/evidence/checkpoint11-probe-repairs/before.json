@@ -1,0 +1,12 @@
+{
+  "command": [
+    "python3",
+    "-m",
+    "unittest",
+    "tools.tests.test_render_geometry",
+    "-v"
+  ],
+  "exit": 1,
+  "scope": "Old exact geometry predicate mechanically extracted unchanged; actual hosted Windows receipt tested without GPU.",
+  "source_sha256": "fe08bd798ad1379fdb27b851e93a527fbaedbb3c75eddf069c2864b82d6ae29f"
+}

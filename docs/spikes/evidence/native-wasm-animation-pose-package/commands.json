@@ -1,0 +1,694 @@
+[
+  {
+    "argv": [
+      "/private/tmp/incant-agent-font-target/ci/incant_headless",
+      "init",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/authoring/project.json",
+      "--entities",
+      "0"
+    ],
+    "at": "2026-10-12T15:49:52.639003+00:00",
+    "exit_code": 0,
+    "seconds": 0.05439845900036744,
+    "stdout": {
+      "file": "command-000-stdout.txt",
+      "sha256": "6aff69416ab8edddc68a7cba67e6a12437747810b6916302dc9a9bb7ca6abf4a"
+    },
+    "stderr": {
+      "file": "command-000-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/private/tmp/incant-agent-font-target/ci/incant_headless",
+      "import",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/authoring/project.json",
+      "rig.gltf"
+    ],
+    "at": "2026-10-12T15:49:52.695303+00:00",
+    "exit_code": 0,
+    "seconds": 0.0787058749992866,
+    "stdout": {
+      "file": "command-001-stdout.txt",
+      "sha256": "8e95b80dfb2ff622a7a92c3ec70fd34cbb8a73def84355c3359e3fe35cbad1ed"
+    },
+    "stderr": {
+      "file": "command-001-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/tools/rust_guest.py",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/guest-build/behavior.rs",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/guest-build/behavior.wasm",
+      "--rustup",
+      "/opt/homebrew/bin/rustup"
+    ],
+    "at": "2026-10-12T15:49:52.782479+00:00",
+    "exit_code": 0,
+    "seconds": 2.4189793329996974,
+    "stdout": {
+      "file": "command-002-stdout.txt",
+      "sha256": "832bbc7bbab8438fff3cf1d931bd0561b01c99b6b9af837318abecea11bb6fa0"
+    },
+    "stderr": {
+      "file": "command-002-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/private/tmp/incant-agent-font-target/ci/incant_headless",
+      "import",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/authoring/project.json",
+      "behavior.wasm"
+    ],
+    "at": "2026-10-12T15:49:55.202582+00:00",
+    "exit_code": 0,
+    "seconds": 0.08487554200019076,
+    "stdout": {
+      "file": "command-003-stdout.txt",
+      "sha256": "56f8972cccd59e74fedd844e34d158cf19c8719896dfc6ed2bcccf761367bf16"
+    },
+    "stderr": {
+      "file": "command-003-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/private/tmp/incant-agent-font-target/ci/incant_headless",
+      "validate",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/authoring/project.json"
+    ],
+    "at": "2026-10-12T15:49:55.456402+00:00",
+    "exit_code": 0,
+    "seconds": 0.02599520800049504,
+    "stdout": {
+      "file": "command-004-stdout.txt",
+      "sha256": "7d1fb76f481d7a449108341f91a4be8f146e6e51e3c5cd0db2fd6ef89a751176"
+    },
+    "stderr": {
+      "file": "command-004-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/private/tmp/incant-agent-font-target/ci/examples/animation_pose_package_oracle",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/authoring/project.json",
+      "00000000000000000000000033",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/oracle.scene",
+      "20"
+    ],
+    "at": "2026-10-12T15:49:55.488002+00:00",
+    "exit_code": 0,
+    "seconds": 0.09499475000029634,
+    "stdout": {
+      "file": "command-005-stdout.txt",
+      "sha256": "9b181ecd1b832cc75917a24e8eee69510a17f5c1405bcb4145906cba135d3436"
+    },
+    "stderr": {
+      "file": "command-005-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/private/tmp/incant-agent-font-target/ci/incant_headless",
+      "native-play",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/authoring/project.json",
+      "--camera",
+      "0000000000000000000000009C",
+      "--ticks",
+      "20",
+      "--input-replay",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/positive-input.json",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/observe.json",
+      "--pcm-output",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/development.pcm"
+    ],
+    "at": "2026-10-12T15:49:55.586281+00:00",
+    "exit_code": 0,
+    "seconds": 0.2068280000003142,
+    "stdout": {
+      "file": "command-006-stdout.txt",
+      "sha256": "1298d8d9e3d8f9742f0e757cf0e3218500f4db1aab70d90b31a769e500119674"
+    },
+    "stderr": {
+      "file": "command-006-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/private/tmp/incant-agent-font-target/ci/incant_headless",
+      "native-play",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/authoring/project.json",
+      "--camera",
+      "0000000000000000000000009C",
+      "--ticks",
+      "20",
+      "--input-replay",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/old-v1-input.json",
+      "--pcm-output",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/dev-old-v1.pcm"
+    ],
+    "at": "2026-10-12T15:49:55.802089+00:00",
+    "exit_code": 1,
+    "seconds": 0.13153087499995308,
+    "stdout": {
+      "file": "command-007-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-007-stderr.txt",
+      "sha256": "c370a25877044f0dff0ac867421c32b8d4c868c2f25805660d7aeb9742061af5"
+    }
+  },
+  {
+    "argv": [
+      "/private/tmp/incant-agent-font-target/ci/incant_headless",
+      "native-play",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/authoring/project.json",
+      "--camera",
+      "0000000000000000000000009C",
+      "--ticks",
+      "20",
+      "--input-replay",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/old-v2-input.json",
+      "--pcm-output",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/dev-old-v2.pcm"
+    ],
+    "at": "2026-10-12T15:49:55.936317+00:00",
+    "exit_code": 1,
+    "seconds": 0.2971429580002223,
+    "stdout": {
+      "file": "command-008-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-008-stderr.txt",
+      "sha256": "c370a25877044f0dff0ac867421c32b8d4c868c2f25805660d7aeb9742061af5"
+    }
+  },
+  {
+    "argv": [
+      "/private/tmp/incant-agent-font-target/ci/incant_headless",
+      "native-play",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/authoring/project.json",
+      "--camera",
+      "0000000000000000000000009C",
+      "--ticks",
+      "20",
+      "--input-replay",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/old-v3-input.json",
+      "--pcm-output",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/dev-old-v3.pcm"
+    ],
+    "at": "2026-10-12T15:49:56.234492+00:00",
+    "exit_code": 1,
+    "seconds": 0.1516025000000809,
+    "stdout": {
+      "file": "command-009-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-009-stderr.txt",
+      "sha256": "8df86a61d26d3b44a6eb1a330dce6c1ec8c5653890ad5eb1236d4e3fc0d913b8"
+    }
+  },
+  {
+    "argv": [
+      "/private/tmp/incant-agent-font-target/ci/incant_headless",
+      "native-play",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/authoring/project.json",
+      "--camera",
+      "0000000000000000000000009C",
+      "--ticks",
+      "20",
+      "--input-replay",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/short-scratch-input.json",
+      "--pcm-output",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/dev-short-scratch.pcm"
+    ],
+    "at": "2026-10-12T15:49:56.390515+00:00",
+    "exit_code": 1,
+    "seconds": 0.17665637500067533,
+    "stdout": {
+      "file": "command-010-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-010-stderr.txt",
+      "sha256": "8438ab8be63ad4646f0bcbd24f4fb8bdfc3cf459bb8306b4f85fb7d59a32994c"
+    }
+  },
+  {
+    "argv": [
+      "/private/tmp/incant-agent-font-target/ci/incant_headless",
+      "native-play",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/authoring/project.json",
+      "--camera",
+      "0000000000000000000000009C",
+      "--ticks",
+      "20",
+      "--input-replay",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/late-command-input.json",
+      "--pcm-output",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/dev-late-command.pcm"
+    ],
+    "at": "2026-10-12T15:49:56.576247+00:00",
+    "exit_code": 1,
+    "seconds": 0.1821693330002745,
+    "stdout": {
+      "file": "command-011-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-011-stderr.txt",
+      "sha256": "278865c4ee58003d56c3fded05d4ff45064eb235f74852a3f391a1f8626db98c"
+    }
+  },
+  {
+    "argv": [
+      "rustup",
+      "which",
+      "rustc"
+    ],
+    "at": "2026-10-12T15:51:23.339668+00:00",
+    "exit_code": 0,
+    "seconds": 0.02764762500009965,
+    "stdout": {
+      "file": "command-012-stdout.txt",
+      "sha256": "1dc5ff25a027f5c0a04ac183e96b6665181272c327130fb0663c5c1be8aad81d"
+    },
+    "stderr": {
+      "file": "command-012-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/rustc",
+      "-vV"
+    ],
+    "at": "2026-10-12T15:51:23.368454+00:00",
+    "exit_code": 0,
+    "seconds": 0.026501958000153536,
+    "stdout": {
+      "file": "command-013-stdout.txt",
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    "stderr": {
+      "file": "command-013-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/rustc",
+      "--print",
+      "sysroot"
+    ],
+    "at": "2026-10-12T15:51:23.395723+00:00",
+    "exit_code": 0,
+    "seconds": 0.0278184170001623,
+    "stdout": {
+      "file": "command-014-stdout.txt",
+      "sha256": "b22adee5ac5a93ade5d52f11392360e1c1a95ef2add2bd03365e896e8f1688e1"
+    },
+    "stderr": {
+      "file": "command-014-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/tools/cargo",
+      "build",
+      "--locked",
+      "-j2",
+      "-p",
+      "incant_wasm_cook",
+      "--target-dir",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/private-builds/incant-project-build-h0rhz9oi/cook-target"
+    ],
+    "at": "2026-10-12T15:51:23.425347+00:00",
+    "exit_code": 0,
+    "seconds": 8.423426958999698,
+    "stdout": {
+      "file": "command-015-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-015-stderr.txt",
+      "sha256": "525e0f5a01bd86dd4c55571f4153b08d367ea94898be2b89e42602827218b587"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/private-builds/incant-project-build-h0rhz9oi/cook-target/debug/incant_wasm_cook",
+      "--capture",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/authoring",
+      "63b49d3c7d8d58cd5cece5d75423b2c4d07e398724704d8c58085a2cdc6b8dc5",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/private-builds/incant-project-build-h0rhz9oi/captured"
+    ],
+    "at": "2026-10-12T15:51:31.849705+00:00",
+    "exit_code": 0,
+    "seconds": 0.3861407499998677,
+    "stdout": {
+      "file": "command-016-stdout.txt",
+      "sha256": "f51a3c26897915c9f728e9931b72146b3b73efae2a8fe65e3db9ecef98cb7bce"
+    },
+    "stderr": {
+      "file": "command-016-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/tools/cargo",
+      "metadata",
+      "--locked",
+      "--format-version=1",
+      "--filter-platform",
+      "aarch64-apple-darwin",
+      "--features",
+      "incant_game_player/project,incant_game_player/render-input,incant_game_player/static-module"
+    ],
+    "at": "2026-10-12T15:51:32.354790+00:00",
+    "exit_code": 0,
+    "seconds": 0.47381333300018014,
+    "stdout": {
+      "file": "command-017-stdout.txt",
+      "sha256": "da7ba81270d9765002350a5a52d38d34e84f477f0175f1ae405ad716dfda1371"
+    },
+    "stderr": {
+      "file": "command-017-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/tools/cargo",
+      "build",
+      "-j2",
+      "-p",
+      "incant_game_player",
+      "--bin",
+      "incant_game_player",
+      "--features",
+      "project,render-input,static-module",
+      "--profile",
+      "shipping",
+      "--locked",
+      "--target",
+      "aarch64-apple-darwin",
+      "--target-dir",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/private-builds/incant-project-build-h0rhz9oi/target",
+      "--config",
+      "profile.shipping.split-debuginfo=\"packed\"",
+      "--message-format=json",
+      "-vv"
+    ],
+    "at": "2026-10-12T15:51:32.848573+00:00",
+    "exit_code": 0,
+    "seconds": 340.87280770899997,
+    "stdout": {
+      "file": "command-018-stdout.txt",
+      "sha256": "f9d9f5b4fcab146ac3b69c6e0a1c321f1ed7eada9967319d4a5b90442cf33afa"
+    },
+    "stderr": {
+      "file": "command-018-stderr.txt",
+      "sha256": "11b088f3ac60c0d2302ab54dbef6947f194ab2c1378d49a35c4ef3b16776ac9b"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/lib/rustlib/aarch64-apple-darwin/bin/llvm-nm",
+      "--defined-only",
+      "--demangle",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/private-builds/incant-project-build-h0rhz9oi/target/aarch64-apple-darwin/shipping/incant_game_player"
+    ],
+    "at": "2026-10-12T15:57:13.937153+00:00",
+    "exit_code": 0,
+    "seconds": 0.12376870800017059,
+    "stdout": {
+      "file": "command-019-stdout.txt",
+      "sha256": "16b15635c204663d9710cfa01e14c6002cdfdea0a9c209764ff279fa7b3a789d"
+    },
+    "stderr": {
+      "file": "command-019-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/private-builds/incant-native-export-pgecb2ll/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/private-builds/incant-native-export-pgecb2ll/player/data",
+      "--ticks",
+      "1",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/private-builds/incant-native-export-pgecb2ll/startup.pcm"
+    ],
+    "at": "2026-10-12T15:57:18.858104+00:00",
+    "exit_code": 0,
+    "seconds": 0.1397856249996039,
+    "stdout": {
+      "file": "command-020-stdout.txt",
+      "sha256": "0612654b62b849ffe63dab20c1c86cb521b88c8ff2821f66f70b91a0864c4eba"
+    },
+    "stderr": {
+      "file": "command-020-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/package/player/data",
+      "--ticks",
+      "20",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/positive-input.json",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/observe.json",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/run-0.pcm"
+    ],
+    "at": "2026-10-12T15:57:19.066378+00:00",
+    "exit_code": 0,
+    "seconds": 0.12013800000022457,
+    "stdout": {
+      "file": "command-021-stdout.txt",
+      "sha256": "58ae8953a77d6a3487fe6f6b59b64daa1832b58567ff9dfab07d81832b00beef"
+    },
+    "stderr": {
+      "file": "command-021-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/package/player/data",
+      "--ticks",
+      "20",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/positive-input.json",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/observe.json",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/run-1.pcm"
+    ],
+    "at": "2026-10-12T15:57:19.189042+00:00",
+    "exit_code": 0,
+    "seconds": 0.015995292000297923,
+    "stdout": {
+      "file": "command-022-stdout.txt",
+      "sha256": "58ae8953a77d6a3487fe6f6b59b64daa1832b58567ff9dfab07d81832b00beef"
+    },
+    "stderr": {
+      "file": "command-022-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/package/player/data",
+      "--ticks",
+      "20",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/positive-input.json",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/observe.json",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/run-2.pcm"
+    ],
+    "at": "2026-10-12T15:57:19.208009+00:00",
+    "exit_code": 0,
+    "seconds": 0.016196583000237297,
+    "stdout": {
+      "file": "command-023-stdout.txt",
+      "sha256": "58ae8953a77d6a3487fe6f6b59b64daa1832b58567ff9dfab07d81832b00beef"
+    },
+    "stderr": {
+      "file": "command-023-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/package/player/data",
+      "--ticks",
+      "20",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/old-v1-input.json",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/package-old-v1.pcm"
+    ],
+    "at": "2026-10-12T15:57:19.227056+00:00",
+    "exit_code": 1,
+    "seconds": 0.01625658300054056,
+    "stdout": {
+      "file": "command-024-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-024-stderr.txt",
+      "sha256": "e2d21e0e9fbada020e5bbd1486929a7eadfc6d6fa179799e8bb2eb985536dd7c"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/package/player/data",
+      "--ticks",
+      "20",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/old-v2-input.json",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/package-old-v2.pcm"
+    ],
+    "at": "2026-10-12T15:57:19.244235+00:00",
+    "exit_code": 1,
+    "seconds": 0.013683832999959122,
+    "stdout": {
+      "file": "command-025-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-025-stderr.txt",
+      "sha256": "e2d21e0e9fbada020e5bbd1486929a7eadfc6d6fa179799e8bb2eb985536dd7c"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/package/player/data",
+      "--ticks",
+      "20",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/old-v3-input.json",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/package-old-v3.pcm"
+    ],
+    "at": "2026-10-12T15:57:19.258857+00:00",
+    "exit_code": 1,
+    "seconds": 0.016173499999240448,
+    "stdout": {
+      "file": "command-026-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-026-stderr.txt",
+      "sha256": "6b1831a4729b365d23e581958724f5f9c159053718f3c27e5a1231b6df9fee2b"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/package/player/data",
+      "--ticks",
+      "20",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/short-scratch-input.json",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/package-short-scratch.pcm"
+    ],
+    "at": "2026-10-12T15:57:19.276123+00:00",
+    "exit_code": 1,
+    "seconds": 0.015256249999765714,
+    "stdout": {
+      "file": "command-027-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-027-stderr.txt",
+      "sha256": "c503f6ae0ef932ea9309837945d0ff26605c3dbf9daf4bbec9192ad0506c34b3"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/package/player/data",
+      "--ticks",
+      "20",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/late-command-input.json",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/package-late-command.pcm"
+    ],
+    "at": "2026-10-12T15:57:19.292657+00:00",
+    "exit_code": 1,
+    "seconds": 0.01633004199993593,
+    "stdout": {
+      "file": "command-028-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-028-stderr.txt",
+      "sha256": "c8c6ca15839ccad282f656a5a1277d4ca7dd2a15f6579a216c65b3788644216e"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/package/player/data",
+      "--ticks",
+      "1",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/checkpoint-refused.pcm",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/checkpoint-refused.bin"
+    ],
+    "at": "2026-10-12T15:57:19.309931+00:00",
+    "exit_code": 1,
+    "seconds": 0.016027042000132496,
+    "stdout": {
+      "file": "command-029-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-029-stderr.txt",
+      "sha256": "8553d484ef61a5488bc165050a946d44ae606e41c8018ff857501df0ebb8122d"
+    }
+  }
+]

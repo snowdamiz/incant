@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-12T14:43:49.413403+00:00",
+  "verdict": "Accepted focused Windows render receipt correction",
+  "patch_sha256": "c959786d1a46eced48b688d288ace6743e543a3e3976a4c875370552540963dd",
+  "reviewer": "astra /root",
+  "findings": [],
+  "scope": [
+    "Strict expected model-only geometry dictionary gains four required zero text counters; eight existing counts remain unchanged.",
+    "PNG, source removal, reimport, errors and actual render route remain unchanged.",
+    "Changed/missing/extra field controls retain rejection rather than accepting arbitrary additions."
+  ],
+  "limitations": [
+    "CPU receipt/helper validation; not a new rendered test or Linux pixel acceptance.",
+    "Any additional macOS helper fix requires its own review."
+  ]
+}

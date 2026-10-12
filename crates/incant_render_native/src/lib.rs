@@ -99,6 +99,7 @@ struct NumericUndo {
     frame: u16,
     animation: Option<incant_runtime::AnimationSample>,
     animation_blend: Option<incant_runtime::AnimationBlendSample>,
+    animation_pose: Option<incant_runtime::AnimationPoseSamples>,
 }
 
 pub struct NativeRenderInput {

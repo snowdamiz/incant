@@ -211,8 +211,8 @@ def main():
     write(invalid, malformed)
     refuse('malformed-preedit', ['--ui-viewport', '320x200', '--input-recording', invalid], 'source: Ui')
     save = output / 'unsupported.save'
-    refuse('unsupported-checkpoint', ['--ui-viewport', '320x200', '--save-checkpoint', save], 'UiUnsupported')
-    require(not save.exists(), 'Unsupported UI checkpoint published')
+    refuse('unsupported-audio-checkpoint', ['--ui-viewport', '320x200', '--save-checkpoint', save], 'AudioUnsupported')
+    require(not save.exists(), 'Unsupported audio checkpoint published')
     blob = next((data / 'fonts').glob('*.ifont'))
     original = blob.read_bytes()
     try:
@@ -228,7 +228,7 @@ def main():
     write(output / 'result.json', {'passed': True, 'authoring': authored, 'runs': runs, 'refusals': refusals,
         'authoring_deleted': not inputs.exists(), 'build_storage_removed': True, 'player_sha256': exported['player_sha256'],
         'debug_source_maps_removed': removed_maps,
-        'limitations': ['CPU canonical UI only; GPU consumer explicitly unsupported', 'No OS input/IME, visual, phone or performance gate', 'UI checkpoint state remains unsupported']})
+        'limitations': ['CPU canonical UI only; no GPU execution in this proof', 'No OS input/IME, visual, phone or performance gate', 'Audio playback checkpoint state remains unsupported']})
     print((output / 'result.json').read_text(encoding='utf-8'))
 
 

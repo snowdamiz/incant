@@ -1,0 +1,6 @@
+{
+  "release": "1.0.42",
+  "url": "https://github.com/WebAssembly/wabt/releases/download/1.0.42/wabt-1.0.42-macos-arm64.tar.gz",
+  "archive_sha256": "3f654779b436c628db3ca4323c51538815f5fbc887a6d5f3bb1c18d36281e240",
+  "download_attempts": 1
+}

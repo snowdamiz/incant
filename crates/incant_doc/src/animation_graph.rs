@@ -16,7 +16,7 @@ pub(crate) fn validate(entity: &Entity) -> Result<(), String> {
     let entry = &graph.states[&graph.initial];
     let clip = match entry.motion {
         AnimationMotion::Clip { clip } => clip,
-        AnimationMotion::Blend1d { .. } => None,
+        AnimationMotion::Blend1d { .. } | AnimationMotion::Tree { .. } => None,
     };
     if animation.clip != clip || animation.seconds != 0.0 || animation.looping != entry.looping {
         return Err("AnimationGraph initial Animation must match its entry clip/loop, with zero seconds; blend entry uses a null initial clip".into());

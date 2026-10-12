@@ -1,0 +1,130 @@
+[
+  {
+    "name": "native-tests",
+    "command": [
+      "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_runtime"
+    ],
+    "exit_code": 0,
+    "log": "/tmp/incant-wasm-physics-native-tests-final.log"
+  },
+  {
+    "name": "native-clippy",
+    "command": [
+      "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/tools/cargo",
+      "clippy",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_runtime",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "log": "/tmp/incant-wasm-physics-native-clippy-final.log"
+  },
+  {
+    "name": "wasm32",
+    "command": [
+      "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/tools/cargo",
+      "check",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_wasm_runtime",
+      "-p",
+      "incant-module",
+      "--target",
+      "wasm32-unknown-unknown"
+    ],
+    "exit_code": 0,
+    "log": "/tmp/incant-wasm-physics-wasm32-final.log"
+  },
+  {
+    "name": "graph",
+    "command": [
+      "python3",
+      "tools/check_runtime_dependencies.py",
+      "incant_runtime",
+      "incant_wasm_runtime",
+      "incant_wasm_player",
+      "incant_game_player",
+      "--features",
+      "incant_game_player/static-module"
+    ],
+    "exit_code": 0,
+    "log": "/tmp/incant-wasm-physics-graph-final.log"
+  },
+  {
+    "name": "shipping-tree",
+    "command": [
+      "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/tools/cargo",
+      "tree",
+      "--locked",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "static-module",
+      "--edges",
+      "normal",
+      "--prefix",
+      "none"
+    ],
+    "exit_code": 0,
+    "log": "/tmp/incant-wasm-physics-shipping-tree-final.log"
+  },
+  {
+    "name": "fmt",
+    "command": [
+      "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/tools/cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit_code": 0,
+    "log": "/tmp/incant-wasm-physics-fmt-final.log"
+  },
+  {
+    "name": "generated",
+    "command": [
+      "python3",
+      "tools/generate_wasm_sdk.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "log": "/tmp/incant-wasm-physics-generated-final.log"
+  },
+  {
+    "name": "conventions",
+    "command": [
+      "python3",
+      "tools/generate_conventions.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "log": "/tmp/incant-wasm-physics-conventions-final.log"
+  },
+  {
+    "name": "diff",
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit_code": 0,
+    "log": "/tmp/incant-wasm-physics-diff-final.log"
+  }
+]

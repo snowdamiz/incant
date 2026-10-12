@@ -1,0 +1,16 @@
+diff --git a/crates/incant_render/src/ui_draw_tests.rs b/crates/incant_render/src/ui_draw_tests.rs
+index 0ed7bc94..3391f0db 100644
+--- a/crates/incant_render/src/ui_draw_tests.rs
++++ b/crates/incant_render/src/ui_draw_tests.rs
+@@ -41,7 +41,10 @@ const ENCODE: f64 = 0.67;
+ // rather than inferring a backend from installed driver packages.
+ fn renderer_with_adapter_receipt() -> Renderer {
+     let renderer = Renderer::headless().unwrap();
+-    eprintln!("UI draw selected adapter: {:?}", renderer.adapter.get_info());
++    eprintln!(
++        "UI draw selected adapter: {:?}",
++        renderer.adapter.get_info()
++    );
+     renderer
+ }
+ 

@@ -1,0 +1,86 @@
+--- original-accepted-probe.py
++++ private-continuation.py
+@@ -13,7 +13,8 @@
+ import sys
+ import tempfile
+ 
+-ROOT = Path(__file__).resolve().parents[2]
++ROOT = Path('/Users/andreyyurlov/.codex/worktrees/native-fbx-import/incant')
++PROBE_SOURCE = ROOT / "tools/probes/native-wasm-physics-export.py"
+ TICKS = 20
+ 
+ DEV_ERRORS = {'bad-owner': 'Error: native play startup/runtime failure: development Wasm rejected or trapped: invalid physics query: character requires a nonsensor kinematic body with zero angular velocity', 'short-scratch': 'Error: native play startup/runtime failure: development Wasm rejected or trapped: wasm trap: wasm `unreachable` instruction executed', 'bad-number': 'Error: native play startup/runtime failure: development Wasm rejected or trapped: wasm trap: wasm `unreachable` instruction executed', 'late-command': 'Error: native play startup/runtime failure: runtime entity StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 123]) does not exist'}
+@@ -71,11 +72,11 @@
+     from native_package import require,sha256,write_json
+     provision=runpy.run_path(str(ROOT/'tools/probes/shipping-wasm2c.py'))['provision']
+     Rpc=runpy.run_path(str(ROOT/'tools/probes/script-source-transactions.py'))['Rpc']
+-    out=args.output.resolve();out.mkdir(parents=True,exist_ok=False)
+-    inputs=out/'authoring';inputs.mkdir()
+-    build=out/'guest-build';build.mkdir()
+-    trusted=out/'trusted-tools';trusted.mkdir()
+-    scratch=out/'private-builds';scratch.mkdir();tempfile.tempdir=str(scratch)
++    out=args.output.resolve();require(out.is_dir(), 'Missing interrupted proof output')
++    inputs=out/'authoring';require(inputs.is_dir(), 'Missing captured project')
++    build=out/'guest-build';require(not build.exists(), 'Guest build must remain deleted')
++    trusted=out/'trusted-tools';require(trusted.is_dir(), 'Missing owned trusted tools')
++    scratch=out/'private-builds';require(scratch.is_dir() and not any(scratch.iterdir()), 'Private shipping build survived');tempfile.tempdir=str(scratch)
+     project=inputs/'project.json';journal=inputs/'project.journal.jsonl'
+     binary=args.binary.resolve(strict=True);oracle=args.oracle.resolve(strict=True)
+     removed={}
+@@ -97,37 +98,16 @@
+         record={'command':list(map(str,argv)),'exit_code':p.returncode,'stdout':p.stdout,'stderr':p.stderr,'output_absent':True,'expected_stderr':expected}
+         command_receipts.append(record);write_json(out/'commands.json',command_receipts)
+         write_json(out/f'{name}.json',record);return record
+-    execute([binary,'init',project,'--entities','0'])
+-    rustc=execute(['rustup','which','--toolchain','1.99.0','rustc']).stdout.strip()
+-    source=build/'behavior.rs';source.write_bytes((ROOT/'tools/probes/native-wasm-physics-export/behavior.rs').read_bytes())
+-    rust_guest.compile(rustc,source,build/'behavior.wasm')
+-    write_json(out/'guest-compile.json',{'compiler':execute([rustc,'-vV']).stdout,'wasm_sha256':sha256((build/'behavior.wasm').read_bytes()),'sdk':rust_guest.provenance()})
+-    shutil.copy2(build/'behavior.wasm',inputs/'behavior.wasm')
+-    imported=value([binary,'import',project,'behavior.wasm']);require(imported['asset']['kind']=='wasm','Public Wasm import')
+-    write_json(out/'import.json',imported)
+-    scene=ulid(99);rpc=Rpc(binary,project,journal)
+-    try:
+-        before=rpc.call('project.read')
+-        transaction_commands=[{'op':'delete_scene','scene_id':s} for s in before['project']['scenes']]
+-        transaction_commands += [{'op':'create_scene','scene':{'id':scene,'name':'Physics queries','entities':entities()}},
+-            {'op':'set_scene_program','scene_id':scene,'program':{'kind':'wasm','module':imported['asset']['id']}},
+-            {'op':'set_input_actions','actions':{name:{'kind':'button','bindings':[{'type':'key','code':key}]} for name,key in [('bad_owner','KeyA'),('short_scratch','KeyB'),('bad_number','KeyC'),('late_command','KeyD')]}}]
+-        receipt=rpc.call('command.execute',{'expected_revision':before['revision'],'description':'Author public physics query game','commands':transaction_commands})
+-        selected=rpc.call('project.read')['project'];rpc.call('history.undo');require(rpc.call('project.read')['project']==before['project'],'Atomic authoring Undo')
+-        rpc.call('history.redo');require(rpc.call('project.read')['project']==selected,'Atomic authoring Redo')
+-        rpc.call('project.save');saved=rpc.call('project.read');write_json(out/'authoring-receipt.json',receipt)
+-    finally:rpc.close()
+-    rpc=Rpc(binary,project,journal)
+-    try:require(rpc.call('project.read')==saved,'Public journal reopen')
+-    finally:rpc.close()
+-    execute([binary,'validate',project])
+-    removed[str((inputs/'behavior.wasm').relative_to(out))]=sha256((inputs/'behavior.wasm').read_bytes());(inputs/'behavior.wasm').unlink()
+-    remove_tree(build)
+-    # The ordinary exporter consumes only the captured cooked module.
+-    wabt,provenance=provision(trusted);write_json(out/'wabt.json',provenance)
+-    print('Public authoring, Undo/Redo and journal reopen passed; source removed. Starting ordinary export.',flush=True)
+-    report=export_native.export(project,out/'package',wabt=wabt)
+-    require(report['program']['kind']=='wasm' and report['build_storage_removed_before_startup'],'Ordinary static module export')
++    # Reviewed continuation: initial public authoring/export already succeeded.
++    # Keep its failed runner and commands separately; this ledger covers only the
++    # resumed oracle/development/refusal/deletion/static phases below.
++    before=json.loads((out.parent/'continuation-before.json').read_text())
++    require(sha256(PROBE_SOURCE.read_bytes())==before['source_sha256'], 'Probe source changed')
++    require(hashes(out/'package')==before['package_files'], 'Immutable package changed')
++    require(not (inputs/'behavior.wasm').exists(), 'Original Wasm source returned')
++    imported=json.loads((out/'import.json').read_text())
++    report=json.loads((out/'package/export.json').read_text())
++    require(report['program']['kind']=='wasm' and report['build_storage_removed_before_startup'], 'Initial shipping export incomplete')
+     player=out/'package/player'/('incant_game_player.exe' if os.name=='nt' else 'incant_game_player')
+     data=player.parent/'data'
+     raw=execute([oracle,data/'world.scene',TICKS]).stdout
+@@ -163,7 +143,7 @@
+         pcm=out/f'package-{name}.pcm';failures['package-'+name]=refusal('package-'+name,[player,'--package',data,'--ticks',TICKS,'--input-recording',out/f'{name}-input.json','--output',pcm],pcm,expected=PACKAGE_ERRORS[name],cwd=player.parent,env=environment)
+     pcm=out/'checkpoint-refused.pcm';save=out/'checkpoint-refused.bin';failures['checkpoint']=refusal('checkpoint-refused',[player,'--package',data,'--ticks',1,'--output',pcm,'--save-checkpoint',save],pcm,expected='Error: Checkpoint(Unsupported("static module state ABI"))',cwd=player.parent,env=environment)
+     require(not save.exists() and 'static module state ABI' in failures['checkpoint']['stderr'],'Explicit module checkpoint refusal')
+-    write_json(out/'result.json',{'passed':True,'target':report['target'],'player_sha256':report['player_sha256'],'program':report['program'],'ticks_each':TICKS,'fresh_ordinary_package_runs':len(runs),'native_oracle_checks':3*TICKS,'successful_same_input_replay_routes':True,'command_receipts_sha256':sha256((out/'commands.json').read_bytes()),'package_refusal_boundary':'exact runtime diagnostic and no PCM/stdout publication; not a session-step rollback claim','native_event_enter_exit_counts':[sum(r['events'][i] for r in rows) for i in range(4)],'public_import_atomic_select_undo_redo_journal_reopen':True,'source_deleted_before_development_and_export':True,'authoring_cache_build_maps_deleted_before_three_runs':True,'no_static_module_fixture_flag':True,'refusals':list(failures),'removed_private_files':removed,'retained_package_hashes':hashes(out/'package'),'oracle_binary_sha256':sha256(oracle.read_bytes()),'headless_binary_sha256':sha256(binary.read_bytes()),'proof_source_hashes':{str(p.relative_to(ROOT)):sha256(p.read_bytes()) for p in [Path(__file__),ROOT/'tools/probes/native-wasm-physics-export/behavior.rs',ROOT/'crates/incant_runtime/examples/physics_package_oracle.rs']},'limits':['local desktop CPU package proof, no GPU or pixel acceptance','no phone/performance/phase gate','whole guest and physics checkpoints remain unsupported','repository engine and SDK source intentionally retained; only private project inputs/build/maps removed']})
++    write_json(out/'result.json',{'passed':True,'target':report['target'],'player_sha256':report['player_sha256'],'program':report['program'],'ticks_each':TICKS,'fresh_ordinary_package_runs':len(runs),'native_oracle_checks':3*TICKS,'successful_same_input_replay_routes':True,'command_receipts_sha256':sha256((out/'commands.json').read_bytes()),'package_refusal_boundary':'exact runtime diagnostic and no PCM/stdout publication; not a session-step rollback claim','native_event_enter_exit_counts':[sum(r['events'][i] for r in rows) for i in range(4)],'public_import_atomic_select_undo_redo_journal_reopen':True,'source_deleted_before_development_and_export':True,'authoring_cache_build_maps_deleted_before_three_runs':True,'no_static_module_fixture_flag':True,'refusals':list(failures),'removed_private_files':removed,'retained_package_hashes':hashes(out/'package'),'oracle_binary_sha256':sha256(oracle.read_bytes()),'headless_binary_sha256':sha256(binary.read_bytes()),'proof_source_hashes':{str(p.relative_to(ROOT)):sha256(p.read_bytes()) for p in [PROBE_SOURCE,ROOT/'tools/probes/native-wasm-physics-export/behavior.rs',ROOT/'crates/incant_runtime/examples/physics_package_oracle.rs']},'limits':['local desktop CPU package proof, no GPU or pixel acceptance','no phone/performance/phase gate','whole guest and physics checkpoints remain unsupported','repository engine and SDK source intentionally retained; only private project inputs/build/maps removed']})
+     print(json.dumps({'passed':True,'output':str(out),'runs':len(runs),'refusals':len(failures)},indent=2))
+ 
+ if __name__=='__main__':main()

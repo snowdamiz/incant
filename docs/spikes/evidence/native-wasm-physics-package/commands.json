@@ -1,0 +1,316 @@
+[
+  {
+    "argv": [
+      "/private/tmp/incant-agent-font-target/ci/incant_headless",
+      "init",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/authoring/project.json",
+      "--entities",
+      "0"
+    ],
+    "exit_code": 0,
+    "stdout_sha256": "650621526f80799dc11371817bcdd7663fb650dc5c614e5157d0dfa2c19b4018",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "rustup",
+      "which",
+      "--toolchain",
+      "1.99.0",
+      "rustc"
+    ],
+    "exit_code": 0,
+    "stdout_sha256": "1dc5ff25a027f5c0a04ac183e96b6665181272c327130fb0663c5c1be8aad81d",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/rustc",
+      "-vV"
+    ],
+    "exit_code": 0,
+    "stdout_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "/private/tmp/incant-agent-font-target/ci/incant_headless",
+      "import",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/authoring/project.json",
+      "behavior.wasm"
+    ],
+    "exit_code": 0,
+    "stdout_sha256": "dc8fbf6622d331700ff54bbc8a71e9caaaf2a02280afa5dda4a2dcc69ff75d29",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "/private/tmp/incant-agent-font-target/ci/incant_headless",
+      "validate",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/authoring/project.json"
+    ],
+    "exit_code": 0,
+    "stdout_sha256": "421ca038ce31a7e6b50786fb9af4620f0dc61ff0f436d436205d41f6133bacb6",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-preflight/physics_package_oracle",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package/player/data/world.scene",
+      "20"
+    ],
+    "exit_code": 0,
+    "stdout_sha256": "bc46a670e9e07047379a195b3ac860ef3f85152f8835b9518aeda1e570412089",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "/private/tmp/incant-agent-font-target/ci/incant_headless",
+      "native-play",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/authoring/project.json",
+      "--ticks",
+      "20",
+      "--input-replay",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/positive-input.json",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/observe.json",
+      "--pcm-output",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/development.pcm"
+    ],
+    "exit_code": 0,
+    "stdout_sha256": "bdfd5be8e2b87ec5e53842b646e49434021d969ba20a843de77ca07b1f71174e",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "command": [
+      "/private/tmp/incant-agent-font-target/ci/incant_headless",
+      "native-play",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/authoring/project.json",
+      "--ticks",
+      "20",
+      "--input-replay",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/bad-owner-input.json",
+      "--pcm-output",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/dev-bad-owner.pcm"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Error: native play startup/runtime failure: development Wasm rejected or trapped: invalid physics query: character requires a nonsensor kinematic body with zero angular velocity\n",
+    "output_absent": true,
+    "expected_stderr": "Error: native play startup/runtime failure: development Wasm rejected or trapped: invalid physics query: character requires a nonsensor kinematic body with zero angular velocity"
+  },
+  {
+    "command": [
+      "/private/tmp/incant-agent-font-target/ci/incant_headless",
+      "native-play",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/authoring/project.json",
+      "--ticks",
+      "20",
+      "--input-replay",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/short-scratch-input.json",
+      "--pcm-output",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/dev-short-scratch.pcm"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Error: native play startup/runtime failure: development Wasm rejected or trapped: wasm trap: wasm `unreachable` instruction executed\n",
+    "output_absent": true,
+    "expected_stderr": "Error: native play startup/runtime failure: development Wasm rejected or trapped: wasm trap: wasm `unreachable` instruction executed"
+  },
+  {
+    "command": [
+      "/private/tmp/incant-agent-font-target/ci/incant_headless",
+      "native-play",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/authoring/project.json",
+      "--ticks",
+      "20",
+      "--input-replay",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/bad-number-input.json",
+      "--pcm-output",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/dev-bad-number.pcm"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Error: native play startup/runtime failure: development Wasm rejected or trapped: wasm trap: wasm `unreachable` instruction executed\n",
+    "output_absent": true,
+    "expected_stderr": "Error: native play startup/runtime failure: development Wasm rejected or trapped: wasm trap: wasm `unreachable` instruction executed"
+  },
+  {
+    "command": [
+      "/private/tmp/incant-agent-font-target/ci/incant_headless",
+      "native-play",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/authoring/project.json",
+      "--ticks",
+      "20",
+      "--input-replay",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/late-command-input.json",
+      "--pcm-output",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/dev-late-command.pcm"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Error: native play startup/runtime failure: runtime entity StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 123]) does not exist\n",
+    "output_absent": true,
+    "expected_stderr": "Error: native play startup/runtime failure: runtime entity StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 123]) does not exist"
+  },
+  {
+    "command": [
+      "/private/tmp/incant-agent-font-target/ci/incant_headless",
+      "native-play",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/authoring/project.json",
+      "--ticks",
+      "1",
+      "--pcm-output",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/dev-cache-mismatch.pcm"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Error: native play startup/runtime failure: native play startup failure: static Wasm preparation: captured module identity mismatch\n",
+    "output_absent": true,
+    "expected_stderr": "Error: native play startup/runtime failure: native play startup failure: static Wasm preparation: captured module identity mismatch"
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package/player/data",
+      "--ticks",
+      "20",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/positive-input.json",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/observe.json",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/run-0.pcm"
+    ],
+    "exit_code": 0,
+    "stdout_sha256": "e0832d3e9df242b04dee29a3603ecdf5bfd8e86ce6e309e82c3b7a8042752cb2",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package/player/data",
+      "--ticks",
+      "20",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/positive-input.json",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/observe.json",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/run-1.pcm"
+    ],
+    "exit_code": 0,
+    "stdout_sha256": "e0832d3e9df242b04dee29a3603ecdf5bfd8e86ce6e309e82c3b7a8042752cb2",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package/player/data",
+      "--ticks",
+      "20",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/positive-input.json",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/observe.json",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/run-2.pcm"
+    ],
+    "exit_code": 0,
+    "stdout_sha256": "e0832d3e9df242b04dee29a3603ecdf5bfd8e86ce6e309e82c3b7a8042752cb2",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "command": [
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package/player/data",
+      "--ticks",
+      "20",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/bad-owner-input.json",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package-bad-owner.pcm"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Error: Session(Module(Boundary(Query(Physics(Query(\"character requires a nonsensor kinematic body with zero angular velocity\"))))))\n",
+    "output_absent": true,
+    "expected_stderr": "Error: Session(Module(Boundary(Query(Physics(Query(\"character requires a nonsensor kinematic body with zero angular velocity\"))))))"
+  },
+  {
+    "command": [
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package/player/data",
+      "--ticks",
+      "20",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/short-scratch-input.json",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package-short-scratch.pcm"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Error: Session(Module(Trap(1)))\n",
+    "output_absent": true,
+    "expected_stderr": "Error: Session(Module(Trap(1)))"
+  },
+  {
+    "command": [
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package/player/data",
+      "--ticks",
+      "20",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/bad-number-input.json",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package-bad-number.pcm"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Error: Session(Module(Trap(1)))\n",
+    "output_absent": true,
+    "expected_stderr": "Error: Session(Module(Trap(1)))"
+  },
+  {
+    "command": [
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package/player/data",
+      "--ticks",
+      "20",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/late-command-input.json",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package-late-command.pcm"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Error: Session(Module(Boundary(Runtime(MissingEntity(StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 123]))))))\n",
+    "output_absent": true,
+    "expected_stderr": "Error: Session(Module(Boundary(Runtime(MissingEntity(StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 123]))))))"
+  },
+  {
+    "command": [
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package/player/data",
+      "--ticks",
+      "1",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/checkpoint-refused.pcm",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/checkpoint-refused.bin"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Error: Checkpoint(Unsupported(\"static module state ABI\"))\n",
+    "output_absent": true,
+    "expected_stderr": "Error: Checkpoint(Unsupported(\"static module state ABI\"))"
+  }
+]

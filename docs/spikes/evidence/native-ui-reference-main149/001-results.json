@@ -1,0 +1,102 @@
+[
+  {
+    "name": "tests",
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_render",
+      "-p",
+      "incant_render_gpu_host",
+      "-p",
+      "incant_render_game",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "incant_game_player/native-window",
+      "--all-targets"
+    ],
+    "exit": 0,
+    "seconds": 171.6089033340013,
+    "sha256": "924156d9b96a6d5f4d3eb267cd58fec994e5b4795655a3461935c8822da21245"
+  },
+  {
+    "name": "clippy",
+    "command": [
+      "./tools/cargo",
+      "clippy",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_render",
+      "-p",
+      "incant_render_gpu_host",
+      "-p",
+      "incant_render_game",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "incant_game_player/native-window",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit": 0,
+    "seconds": 28.340863416999127,
+    "sha256": "7e35baa137f531efab492790e545cc91523397bb269d613bde93247000980692"
+  },
+  {
+    "name": "wasm",
+    "command": [
+      "./tools/cargo",
+      "check",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_render",
+      "--lib",
+      "--target",
+      "wasm32-unknown-unknown"
+    ],
+    "exit": 0,
+    "seconds": 14.048886124999626,
+    "sha256": "65e4121ff9d6e17bf8c31db07e162198e755f7db8f78437ee58c2e92a591106f"
+  },
+  {
+    "name": "graph",
+    "command": [
+      "python3",
+      "tools/check_runtime_dependencies.py",
+      "incant_render",
+      "incant_render_gpu_host",
+      "incant_render_game",
+      "incant_game_player",
+      "--features",
+      "incant_game_player/native-window"
+    ],
+    "exit": 0,
+    "seconds": 0.77384741700007,
+    "sha256": "51d15577a402e80557ce0d00656a5d9bf09bfe4d1e79bb6a2496de66849e8d63"
+  },
+  {
+    "name": "fmt",
+    "command": [
+      "./tools/cargo",
+      "fmt",
+      "--all",
+      "--check"
+    ],
+    "exit": 1,
+    "seconds": 1.7359652079994703,
+    "sha256": "12bc0f9fd8a086e758c1449d56bfd45582a3f7d54519ee429ae68d8650ae3656"
+  }
+]

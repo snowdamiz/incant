@@ -50,8 +50,8 @@ pub use text::{
     text_layout_to_local,
 };
 pub use ui::{
-    MAX_UI_GLYPHS, MAX_UI_QUADS, MAX_UI_WIDGETS, UiLayer, UiStage, UiStats, UiUploads,
-    theme as ui_theme,
+    MAX_UI_GLYPHS, MAX_UI_QUADS, MAX_UI_WIDGETS, UiCaret, UiLayer, UiStage, UiStats, UiUploads,
+    theme as ui_theme, ui_caret,
 };
 #[cfg(target_arch = "wasm32")]
 pub use web_error::PreparationErrorKind;

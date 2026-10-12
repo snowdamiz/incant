@@ -56,6 +56,19 @@ pub trait SceneHost: Sized {
         world: &NativeWorld,
         settings: Self::Settings,
     ) -> std::result::Result<Self, Self::Error>;
+    /// Restore the typed widget owner and its drawable before preparing external
+    /// consumers. Default hosts refuse UI data rather than silently resetting it.
+    #[cfg(feature = "ui")]
+    fn prepare_checkpoint(
+        world: &NativeWorld,
+        settings: Self::Settings,
+        ui: Option<&incant_ui::PendingUiCheckpoint>,
+    ) -> Result<Self, Self::Error> {
+        if ui.is_some() {
+            return Err(GameError::UiHost);
+        }
+        Self::prepare(world, settings).map_err(GameError::Host)
+    }
     fn sync(&mut self, world: &NativeWorld) -> std::result::Result<(), Self::Error>;
 }
 
@@ -109,10 +122,18 @@ where
                 initial,
                 program,
                 actions,
-                |world| {
-                    H::prepare(world, host_settings)
-                        .map(WithHost)
-                        .map_err(GameError::Host)
+                |pending| {
+                    #[cfg(feature = "ui")]
+                    {
+                        H::prepare_checkpoint(pending.world(), host_settings, pending.ui())
+                            .map(WithHost)
+                    }
+                    #[cfg(not(feature = "ui"))]
+                    {
+                        H::prepare(pending.world(), host_settings)
+                            .map(WithHost)
+                            .map_err(GameError::Host)
+                    }
                 },
                 |world| SceneAudio::new(world, clips, audio_settings),
             )?,
@@ -205,8 +226,9 @@ impl<H: SceneHost> HostedOfflineGameSession<H> {
             },
         })
     }
-    /// Ordinary load; a fresh retained host is prepared before VM/mixer setup.
-    /// Only data supported by NativeSession checkpoints can be loaded.
+    /// Ordinary load. Audio data and its trusted PCM are validated first; a fresh
+    /// retained host is then prepared on the exact restored world before guest
+    /// initialization. Offline mixer construction creates no physical device.
     pub fn from_checkpoint_bytes(
         bytes: &[u8],
         initial: &CookedScene,
@@ -219,17 +241,26 @@ impl<H: SceneHost> HostedOfflineGameSession<H> {
         validate_rate(sample_rate)?;
         Ok(Self {
             inner: OfflineCore {
-                core: Core::from_checkpoint(
+                core: Core::from_offline_checkpoint(
                     bytes,
                     initial,
                     program,
                     actions,
-                    |world| {
-                        H::prepare(world, host_settings)
-                            .map(WithHost)
-                            .map_err(GameError::Host)
+                    |pending| {
+                        #[cfg(feature = "ui")]
+                        {
+                            H::prepare_checkpoint(pending.world(), host_settings, pending.ui())
+                                .map(WithHost)
+                        }
+                        #[cfg(not(feature = "ui"))]
+                        {
+                            H::prepare(pending.world(), host_settings)
+                                .map(WithHost)
+                                .map_err(GameError::Host)
+                        }
                     },
-                    |world| SceneAudio::offline(world, clips, sample_rate),
+                    clips,
+                    sample_rate,
                 )?,
                 sample_rate,
             },

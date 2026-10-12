@@ -1,0 +1,31 @@
+[
+  {
+    "name": "tools-final",
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools/tests",
+      "-p",
+      "test_*.py"
+    ],
+    "exit": 0,
+    "seconds": 20.898150041000008,
+    "sha256": "9dcd7c46953936e0bcc590bbcc9c1ec46db9bc8fa1cdfdd984749e694f43baac"
+  },
+  {
+    "name": "fmt-final",
+    "command": [
+      "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit": 101,
+    "seconds": 0.01563774999999623,
+    "sha256": "5bbfcd19b27f01f543e3c97ab1de71b6db4ab93dd04ef53edcc85d0056b2a3d7"
+  }
+]

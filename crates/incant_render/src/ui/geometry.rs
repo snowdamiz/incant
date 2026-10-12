@@ -244,14 +244,10 @@ fn build(
         }
         match edit.selection {
             Some(s) if s.anchor == s.focus => {
-                if let Some(caret) = caret(layout, s.focus) {
-                    let half = theme::CARET_WIDTH * 0.5;
+                if let Some(caret) = ui_caret(widget) {
                     out.quads.push(quad(
                         KIND_FILL,
-                        translate(
-                            [caret.x - half, caret.top, caret.x + half, caret.bottom],
-                            widget.origin,
-                        ),
+                        caret.rect,
                         widget.visible,
                         [0.; 2],
                         theme::TEXT,
@@ -274,6 +270,45 @@ fn build(
         ));
     }
     Ok(())
+}
+
+/// The text cursor a TextInput shows: the caret of a collapsed selection, or
+/// the input method's cursor inside a composition.
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct UiCaret {
+    /// Logical viewport `[left, top, right, bottom]`, the exact rectangle this
+    /// layer draws before physical snapping: the caret's line box,
+    /// `theme::CARET_WIDTH` wide and centred on the insertion edge.
+    pub rect: UiRect,
+    /// Whether the widget's visible border box (after ancestor clips) contains
+    /// the whole rectangle. False when overflowing text or a clip cuts or hides
+    /// the drawn caret.
+    pub visible: bool,
+}
+/// Read-only: the caret this layer draws for `widget`, or None when it draws
+/// none (not a focused, enabled TextInput; a non-collapsed selection or
+/// converted clause; an input method hiding its cursor). It reads only the
+/// supplied focus and edit state: the caller chooses the widget from the UI
+/// owner's text focus, and nothing here decides or changes ownership.
+pub fn ui_caret(widget: &UiWidget) -> Option<UiCaret> {
+    if widget.role != UiRole::TextInput || !widget.focused || widget.disabled {
+        return None;
+    }
+    let selection = widget.edit.as_ref()?.selection?;
+    if selection.anchor != selection.focus {
+        return None;
+    }
+    let caret = caret(&widget.layout, selection.focus)?;
+    let half = theme::CARET_WIDTH * 0.5;
+    let rect = translate(
+        [caret.x - half, caret.top, caret.x + half, caret.bottom],
+        widget.origin,
+    );
+    let [left, top, right, bottom] = widget.visible;
+    Some(UiCaret {
+        rect,
+        visible: rect[0] >= left && rect[1] >= top && rect[2] <= right && rect[3] <= bottom,
+    })
 }
 
 /// One quad per glyph with coverage, at `offset` logical pixels from its pen.

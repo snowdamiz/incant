@@ -1,4 +1,8 @@
+pub(crate) mod checkpoint;
 use crate::{AudioError, Bus, PlayOptions, Result, config};
+#[cfg(feature = "scene")]
+pub(crate) use checkpoint::MixerCheckpoint;
+pub(crate) use checkpoint::TransportCheckpoint;
 use incant_assets_runtime::CookedAudio;
 #[cfg(not(target_arch = "wasm32"))]
 use kira::sound::streaming::{StreamingSoundData, StreamingSoundHandle};
@@ -8,7 +12,10 @@ use kira::{
     listener::ListenerHandle,
     sound::{
         PlaybackState, SoundData,
-        static_sound::{StaticSoundData, StaticSoundHandle, StaticSoundSettings},
+        static_sound::{
+            CheckpointData, CheckpointHandle, StaticSoundData, StaticSoundHandle,
+            StaticSoundSettings,
+        },
     },
     track::{SpatialTrackBuilder, SpatialTrackHandle, TrackBuilder, TrackHandle},
 };
@@ -28,13 +35,30 @@ pub struct Mixer<B: Backend> {
     samples: BTreeMap<String, Arc<[Frame]>>,
     errors: std::collections::VecDeque<(VoiceId, String)>,
     synchronous_streams: bool,
+    definitions: Vec<Bus>,
+    listener_pose: ([f32; 3], [f32; 4]),
+    main_gain: f32,
+    suspended: bool,
+    settled: bool,
+    startup: bool,
+    pause_pending: bool,
+    resume_pending: bool,
+    sample_rate: u32,
+    rendered_frames: u64,
 }
 struct Voice {
+    #[cfg(any(feature = "scene", test))]
+    clip: Arc<CookedAudio>,
+    options: PlayOptions,
     sound: VoiceSound,
     spatial: Option<SpatialTrackHandle>,
 }
 enum VoiceSound {
     Static(StaticSoundHandle),
+    OfflineStatic(CheckpointHandle),
+    // Only scene checkpoints reconstruct removed transport tombstones.
+    #[cfg_attr(not(any(feature = "scene", test)), allow(dead_code))]
+    Removed(TransportCheckpoint),
     Offline(crate::offline_stream::Handle),
     #[cfg(not(target_arch = "wasm32"))]
     Streaming(StreamingSoundHandle<incant_assets_runtime::AssetError>),
@@ -43,6 +67,8 @@ impl VoiceSound {
     fn state(&self) -> PlaybackState {
         match self {
             Self::Static(h) => h.state(),
+            Self::OfflineStatic(h) => h.state(),
+            Self::Removed(_) => PlaybackState::Stopped,
             Self::Offline(h) => h.state(),
             #[cfg(not(target_arch = "wasm32"))]
             Self::Streaming(h) => h.state(),
@@ -62,7 +88,22 @@ impl<B: Backend> Mixer<B>
 where
     B::Error: Debug,
 {
-    pub fn new(mut settings: AudioManagerSettings<B>, definitions: &[Bus]) -> Result<Self> {
+    pub fn new(settings: AudioManagerSettings<B>, definitions: &[Bus]) -> Result<Self> {
+        Self::new_at(
+            settings,
+            definitions,
+            ([0.; 3], [0., 0., 0., 1.]),
+            None,
+            false,
+        )
+    }
+    fn new_at(
+        mut settings: AudioManagerSettings<B>,
+        definitions: &[Bus],
+        pose: ([f32; 3], [f32; 4]),
+        main_gain: Option<f32>,
+        master_paused: bool,
+    ) -> Result<Self> {
         if definitions.len() > MAX_BUSES {
             return Err(AudioError::Capacity);
         }
@@ -92,17 +133,19 @@ where
         }
         settings.capacities.sub_track_capacity = 1;
         settings.capacities.listener_capacity = 1;
+        if let Some(gain) = main_gain {
+            settings.main_track_builder = settings.main_track_builder.volume(gain);
+        }
         let mut manager = AudioManager::<B>::new(settings).map_err(resource)?;
         let mut master = manager
             .add_sub_track(
                 TrackBuilder::new()
+                    .offline_initial_paused(master_paused)
                     .sound_capacity(MAX_VOICES)
                     .sub_track_capacity(MAX_BUSES + MAX_VOICES),
             )
             .map_err(resource)?;
-        let listener = manager
-            .add_listener([0., 0., 0.], [0., 0., 0., 1.])
-            .map_err(resource)?;
+        let listener = manager.add_listener(pose.0, pose.1).map_err(resource)?;
         let mut buses: BTreeMap<String, TrackHandle> = BTreeMap::new();
         for bus in order {
             let builder = TrackBuilder::new()
@@ -127,6 +170,16 @@ where
             samples: BTreeMap::new(),
             errors: std::collections::VecDeque::new(),
             synchronous_streams: false,
+            definitions: definitions.to_vec(),
+            listener_pose: pose,
+            main_gain: main_gain.unwrap_or(0.),
+            suspended: false,
+            settled: false,
+            startup: true,
+            pause_pending: false,
+            resume_pending: false,
+            sample_rate: 0,
+            rendered_frames: 0,
         })
     }
     pub fn backend_mut(&mut self) -> &mut B {
@@ -135,9 +188,12 @@ where
     /// Freeze all child transports without changing individual source state.
     /// The device applies this command at its next processing boundary.
     pub fn set_suspended(&mut self, suspended: bool) {
+        self.suspended = suspended;
         if suspended {
+            self.pause_pending = true;
             self.master.pause(immediate());
         } else {
+            self.resume_pending = true;
             self.master.resume(immediate());
         }
     }
@@ -148,9 +204,17 @@ where
                 .get_mut(id)
                 .ok_or(AudioError::UnknownBus)?
                 .set_volume(db, immediate());
+            self.definitions
+                .iter_mut()
+                .find(|b| b.id == id)
+                .unwrap()
+                .gain_db = db;
         } else {
             self.manager.main_track().set_volume(db, immediate());
+            self.main_gain = db;
         }
+        self.settled = false;
+        self.startup = false;
         Ok(())
     }
     pub fn set_listener(&mut self, position: [f32; 3], rotation: [f32; 4]) -> Result<()> {
@@ -162,10 +226,12 @@ where
         }
         self.listener.set_position(position, immediate());
         self.listener.set_orientation(rotation, immediate());
+        self.listener_pose = (position, rotation);
+        self.settled = false;
         Ok(())
     }
     pub fn play(&mut self, clip: Arc<CookedAudio>, options: PlayOptions) -> Result<VoiceId> {
-        self.play_inner(clip, options, true)
+        self.play_inner(clip, options, true, None)
     }
     #[cfg(feature = "scene")]
     pub(crate) fn play_owned(
@@ -175,13 +241,14 @@ where
     ) -> Result<VoiceId> {
         // The scene host owns every handle until explicit acknowledgement. A
         // device can finish a different voice concurrently with this call.
-        self.play_inner(clip, options, false)
+        self.play_inner(clip, options, false, None)
     }
     fn play_inner(
         &mut self,
         clip: Arc<CookedAudio>,
         options: PlayOptions,
         reap: bool,
+        resume: Option<(TransportCheckpoint, bool)>,
     ) -> Result<VoiceId> {
         options.validate(clip.metadata.frames as f64 / f64::from(clip.metadata.sample_rate))?;
         if options
@@ -209,8 +276,10 @@ where
         let static_data = if options.streaming {
             None
         } else {
-            self.samples
-                .retain(|_, frames| Arc::strong_count(frames) > 1);
+            if resume.is_none() {
+                self.samples
+                    .retain(|_, frames| Arc::strong_count(frames) > 1);
+            }
             let frames = if let Some(frames) = self.samples.get(&clip.metadata.content_sha256) {
                 Arc::clone(frames)
             } else {
@@ -264,13 +333,36 @@ where
         } else {
             None
         };
-        let sound = if let Some(data) = static_data {
-            VoiceSound::Static(self.route(data, options.bus.as_deref(), spatial.as_mut())?)
+        let sound = if let Some((state, false)) = resume {
+            VoiceSound::Removed(state)
+        } else if let Some(data) = static_data {
+            if self.synchronous_streams {
+                let data = match resume {
+                    Some((TransportCheckpoint::Static(state), true)) => {
+                        CheckpointData::resume(data, state)
+                    }
+                    None => CheckpointData::new(data),
+                    _ => return Err(AudioError::Invalid("static transport kind")),
+                }
+                .map_err(resource)?;
+                VoiceSound::OfflineStatic(self.route(
+                    data,
+                    options.bus.as_deref(),
+                    spatial.as_mut(),
+                )?)
+            } else {
+                VoiceSound::Static(self.route(data, options.bus.as_deref(), spatial.as_mut())?)
+            }
         } else if self.synchronous_streams {
             VoiceSound::Offline(self.route(
                 crate::offline_stream::Data {
-                    clip,
+                    clip: Arc::clone(&clip),
                     options: options.clone(),
+                    resume: match resume {
+                        Some((TransportCheckpoint::Stream(state), true)) => Some(state),
+                        None => None,
+                        _ => return Err(AudioError::Invalid("stream transport kind")),
+                    },
                 },
                 options.bus.as_deref(),
                 spatial.as_mut(),
@@ -278,11 +370,12 @@ where
         } else {
             #[cfg(not(target_arch = "wasm32"))]
             {
-                let mut data = StreamingSoundData::from_decoder(crate::ClipDecoder::new(clip))
-                    .volume(options.gain_db)
-                    .panning(options.pan)
-                    .playback_rate(options.rate)
-                    .start_position(options.start_seconds);
+                let mut data =
+                    StreamingSoundData::from_decoder(crate::ClipDecoder::new(Arc::clone(&clip)))
+                        .volume(options.gain_db)
+                        .panning(options.pan)
+                        .playback_rate(options.rate)
+                        .start_position(options.start_seconds);
                 if options.looping {
                     data = data.loop_region(..);
                 }
@@ -297,7 +390,17 @@ where
         };
         let id = self.next;
         self.next += 1;
-        self.voices.insert(id, Voice { sound, spatial });
+        self.voices.insert(
+            id,
+            Voice {
+                sound,
+                spatial,
+                #[cfg(any(feature = "scene", test))]
+                clip,
+                options,
+            },
+        );
+        self.settled = false;
         Ok(id)
     }
     fn route<D: SoundData>(
@@ -323,13 +426,15 @@ where
     }
     pub fn set_position(&mut self, id: VoiceId, position: [f32; 3]) -> Result<()> {
         config::position(position)?;
-        self.voices
-            .get_mut(&id)
-            .ok_or(AudioError::UnknownVoice)?
+        let voice = self.voices.get_mut(&id).ok_or(AudioError::UnknownVoice)?;
+        voice
             .spatial
             .as_mut()
             .ok_or(AudioError::Invalid("voice is not spatial"))?
             .set_position(position, immediate());
+        voice.options.spatial.as_mut().unwrap().position = position;
+        self.settled = false;
+        self.startup = false;
         Ok(())
     }
     pub fn stop(&mut self, id: VoiceId) -> Result<()> {
@@ -340,10 +445,14 @@ where
             .sound
         {
             VoiceSound::Static(h) => h.stop(immediate()),
+            VoiceSound::OfflineStatic(h) => h.stop(),
+            VoiceSound::Removed(_) => {}
             VoiceSound::Offline(h) => h.stop(),
             #[cfg(not(target_arch = "wasm32"))]
             VoiceSound::Streaming(h) => h.stop(immediate()),
         }
+        self.settled = false;
+        self.startup = false;
         Ok(())
     }
     pub fn set_paused(&mut self, id: VoiceId, paused: bool) -> Result<()> {
@@ -354,6 +463,8 @@ where
             .sound
         {
             VoiceSound::Offline(h) => h.pause(paused),
+            VoiceSound::OfflineStatic(h) => h.pause(paused),
+            VoiceSound::Removed(_) => {}
             VoiceSound::Static(h) => {
                 if paused {
                     h.pause(immediate())
@@ -370,6 +481,8 @@ where
                 }
             }
         }
+        self.settled = false;
+        self.startup = false;
         Ok(())
     }
     pub fn state(&self, id: VoiceId) -> Result<PlaybackState> {
@@ -405,6 +518,8 @@ where
                 h.set_panning(pan, immediate());
                 h.set_playback_rate(rate, immediate());
             }
+            VoiceSound::OfflineStatic(h) => h.configure(gain_db, pan, rate).map_err(resource)?,
+            VoiceSound::Removed(_) => {}
             VoiceSound::Offline(h) => h.configure(gain_db, pan, rate),
             #[cfg(not(target_arch = "wasm32"))]
             VoiceSound::Streaming(h) => {
@@ -413,6 +528,12 @@ where
                 h.set_playback_rate(rate, immediate());
             }
         }
+        let voice = self.voices.get_mut(&id).unwrap();
+        voice.options.gain_db = gain_db;
+        voice.options.pan = pan;
+        voice.options.rate = rate;
+        self.settled = false;
+        self.startup = false;
         Ok(())
     }
     fn collect_stream_errors(&mut self) -> Result<()> {
@@ -477,7 +598,7 @@ where
         // preceded the error. Never silently discard it with its last handle.
         let voice = self.voices.get_mut(&id).ok_or(AudioError::UnknownVoice)?;
         let error = match &mut voice.sound {
-            VoiceSound::Static(_) => None,
+            VoiceSound::Static(_) | VoiceSound::OfflineStatic(_) | VoiceSound::Removed(_) => None,
             VoiceSound::Offline(h) => h.pop_error(),
             #[cfg(not(target_arch = "wasm32"))]
             VoiceSound::Streaming(h) => h.pop_error().map(|error| error.to_string()),
@@ -506,13 +627,26 @@ impl Mixer<crate::OfflineBackend> {
             buses,
         )?;
         mixer.synchronous_streams = true;
+        mixer.sample_rate = sample_rate;
         Ok(mixer)
     }
     pub fn render(&mut self, output: &mut [f32]) -> Result<()> {
+        let frames = self
+            .rendered_frames
+            .checked_add((output.len() / 2) as u64)
+            .ok_or(AudioError::Capacity)?;
         self.manager
             .backend_mut()
             .render(output)
-            .map_err(|e| AudioError::Backend(e.into()))
+            .map_err(|e| AudioError::Backend(e.into()))?;
+        if !output.is_empty() {
+            self.settled = true;
+            self.startup = false;
+            self.pause_pending = false;
+            self.resume_pending = false;
+        }
+        self.rendered_frames = frames;
+        Ok(())
     }
 }
 

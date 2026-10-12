@@ -24,6 +24,9 @@
 //!   linear light; UNORM targets blend the encoded values. Glyph texels are
 //!   linear area coverage; minification averages an N×N (N ≤ 4) tap grid
 //!   clamped to the glyph's padded texels, as the world text pass does.
+//!   Filtering precision is the backend's (8-bit fixed point on some). A
+//!   fragment with zero coverage is discarded, so pixels a quad does not cover
+//!   keep their stored value on every backend.
 //! * States. Surfaces are opaque. Disabled uses a flatter surface and muted
 //!   text; focus adds an inset accent ring; a captured pointer press darkens a
 //!   button. Labels sit on the scene and get a hard one-pixel shadow. The caret
@@ -38,7 +41,7 @@
 mod geometry;
 pub mod theme;
 use crate::{Renderer, ResourceError, Result, RetainedTarget, SceneError};
-pub use geometry::{MAX_UI_GLYPHS, MAX_UI_QUADS, MAX_UI_WIDGETS};
+pub use geometry::{MAX_UI_GLYPHS, MAX_UI_QUADS, MAX_UI_WIDGETS, UiCaret, ui_caret};
 use geometry::{QUAD_BYTES, UiPlan, plan};
 #[cfg(test)]
 use geometry::{caret, spans_for};

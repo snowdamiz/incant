@@ -108,10 +108,15 @@ fn decode(c: vec3f) -> vec3f {
             }
         }
     }
+    let alpha = input.color.a * coverage;
+    // A fragment that adds nothing leaves the stored value untouched, even
+    // where a backend's sRGB read-back and store do not round-trip exactly.
+    if alpha <= 0.0 {
+        discard;
+    }
     var color = input.color.rgb;
     if frame.encode.x == 0.0 {
         color = decode(color);
     }
-    let alpha = input.color.a * coverage;
     return vec4f(color * alpha, alpha);
 }

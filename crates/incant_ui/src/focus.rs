@@ -131,6 +131,8 @@ pub(crate) struct State {
 /// Starting a new/rebuilt owner expires every prior focus token. Public mutation
 /// is prepare/commit only; dropping a candidate preserves all accepted state.
 pub struct UiRuntime {
+    #[cfg(feature = "native")]
+    pub(crate) native: Option<crate::native::Binding>,
     pub(crate) owner: Arc<()>,
     pub(crate) layout: LayoutEngine,
     pub(crate) state: State,
@@ -189,6 +191,8 @@ impl UiRuntime {
             })
             .collect::<Result<Vec<_>, UiError>>()?;
         Ok(Self {
+            #[cfg(feature = "native")]
+            native: None,
             owner: Arc::new(()),
             layout,
             state: State {
@@ -602,7 +606,10 @@ impl Context<'_> {
                 } else if let Some(captured) = state.pointer.take()
                     && hit == Some(captured)
                     && state.focus == Some(captured)
+                    && matches!(self.widgets[captured].node.kind, UiKind::Button { .. })
                 {
+                    // Releasing a field click only focuses it. Submission is
+                    // an explicit keyboard/gamepad action, never a pointer hit.
                     self.activate(state, actions)?;
                 }
             }

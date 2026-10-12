@@ -1,0 +1,187 @@
+[
+  {
+    "name": "conformance",
+    "command": [
+      "python3",
+      "tools/probes/shipping-wasm2c.py",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-main144-001/conformance",
+      "--rustup",
+      "/opt/homebrew/bin/rustup",
+      "--profile",
+      "ci",
+      "--conformance-only"
+    ],
+    "exit": 0,
+    "seconds": 352.9786779590004,
+    "sha256": "574af3621e3ea33f4f833844525fcf843cf3d6fd0f8b4c4cda3bea2cebb4805b"
+  },
+  {
+    "name": "native-tests",
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_runtime"
+    ],
+    "exit": 0,
+    "seconds": 77.55838529199991,
+    "sha256": "a5823a73f9feeddd99479e36ed35ef61545c19013a17a9b871a2dc70c45727d4"
+  },
+  {
+    "name": "native-clippy",
+    "command": [
+      "./tools/cargo",
+      "clippy",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_runtime",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit": 0,
+    "seconds": 9.836919625000064,
+    "sha256": "f0ab3d16eff55814194c40896e905082f460a535a47d8698f3ed714488a00012"
+  },
+  {
+    "name": "headless-oracle",
+    "command": [
+      "./tools/cargo",
+      "build",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_headless",
+      "-p",
+      "incant_runtime",
+      "--bins",
+      "--examples"
+    ],
+    "exit": 0,
+    "seconds": 39.958301250000204,
+    "sha256": "b58e156fcc138177aa47778db78201ff8e21803e4dcc9d4509b605853dbcd547"
+  },
+  {
+    "name": "wasm",
+    "command": [
+      "./tools/cargo",
+      "check",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_wasm_runtime",
+      "-p",
+      "incant-module",
+      "--target",
+      "wasm32-unknown-unknown"
+    ],
+    "exit": 0,
+    "seconds": 11.322495249999974,
+    "sha256": "29378afb45942fe1b0b4026b48b1afd19ed438ff94ef20414a19a5dd38ce4591"
+  },
+  {
+    "name": "graph",
+    "command": [
+      "python3",
+      "tools/check_runtime_dependencies.py",
+      "incant_runtime",
+      "incant_wasm_runtime",
+      "incant_wasm_player",
+      "incant_game_player",
+      "--features",
+      "incant_game_player/static-module"
+    ],
+    "exit": 0,
+    "seconds": 0.4796249579999312,
+    "sha256": "4819cd767b786d453665aa411520368623f23374d113cb0595aff968e31ea7e4"
+  },
+  {
+    "name": "generated",
+    "command": [
+      "python3",
+      "tools/generate_wasm_sdk.py",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.17902083400031188,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "fmt",
+    "command": [
+      "./tools/cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 1.123734667000008,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "conventions",
+    "command": [
+      "python3",
+      "tools/generate_conventions.py",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.04387129199994888,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "tools",
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools/tests",
+      "-p",
+      "test_*.py"
+    ],
+    "exit": 0,
+    "seconds": 21.710480207999808,
+    "sha256": "48db730df5ada681dc41535a5cb9767a5f7dc9152744559791909717317d8d46"
+  },
+  {
+    "name": "diff",
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.02413529200021003,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "public-export",
+    "command": [
+      "python3",
+      "tools/probes/native-wasm-physics-export.py",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-main144-001/public-export",
+      "--binary",
+      "/Users/andreyyurlov/.codex/incant-integration-target/ci/incant_headless",
+      "--oracle",
+      "/Users/andreyyurlov/.codex/incant-integration-target/ci/examples/physics_package_oracle"
+    ],
+    "exit": 1,
+    "seconds": 342.1571656250003,
+    "sha256": "0a0450f021de391d15de97cd424427a2b78a07d51f55672ebcc8c6c7d9715a44"
+  }
+]

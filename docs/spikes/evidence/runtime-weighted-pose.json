@@ -1,0 +1,79 @@
+{
+  "at": "2026-10-12T13:19:23.075082+00:00",
+  "base": "5399dcd4cad0265dcc0448ccd1f848518f76bf9f",
+  "source_hashes": {
+    "crates/incant_assets_runtime/src/animation/mod.rs": "e3a3cf56679f0215853cf862fe07442a36cd642e4f31cf56bc5234755a15595d",
+    "crates/incant_assets_runtime/src/animation/player.rs": "e2a9ac32f04a9cd2f84a5f8dfe4d57bbf4d30315cc9aedd15930ad8e0aee663a",
+    "crates/incant_assets_runtime/src/animation/weighted.rs": "de7c35a35da0f68bc0e2bd5cdedab512ec9fef51ffce35951094bafb0f693b52",
+    "crates/incant_assets/tests/skeletal.rs": "848465395b8e861c52761cf69d28cda858364a79434a26cefe238a71c2f014fe",
+    "crates/incant_assets/tests/skeletal/blending.rs": "096ba511881cbb9c399bf282e413baf154446a1121c9ed1a4d8b0c9012b2fe6f",
+    "crates/incant_assets/tests/skeletal/weighted.rs": "397b2c6b37af1e98bed6207d4b7e614db9829e5e729c9ad4e3cf032a0f080328",
+    "Cargo.toml": "98768e3ad77d7294049dddf94291d024f9065596e783ae06b84585cfb69d14e8",
+    "Cargo.lock": "6d574acc59d671f8adc2f3ea40c749b5f0562526fb96e5b978c52fc856132016",
+    "rust-toolchain.toml": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124"
+  },
+  "checks": {
+    "tests": 108,
+    "groups": 18,
+    "failed": 0,
+    "ignored": 0,
+    "allocation_probe": "1024 calls at16inputs plus palette/deformation: zeroallocations",
+    "fresh_process": "cooked model only after glTF and buffer deletion; independent fourpose numeric oracle",
+    "clippy": "incant_assets +incant_assets_runtime alltargets -Dwarnings passed",
+    "wasm32": "visual assets reader compiled",
+    "dependency_guard": true,
+    "fmt_conventions": true
+  },
+  "logs": {
+    "docs/spikes/evidence/runtime-weighted-pose/tests.log.gz": {
+      "sha256": "821d69408dc474b2ce36a6c8571eee464bb7a1ac3b87bec692007155eff9d714",
+      "uncompressed_sha256": "4cfe033eee6ca73dc0055dff6c63ce0fbc58bbd7a65c7e5e21a0a2603490c07c",
+      "outcome": "passed"
+    },
+    "docs/spikes/evidence/runtime-weighted-pose/wasm.log.gz": {
+      "sha256": "6302935a6ec5a76a1156cf4d08e6b2fe382f37bffbc761ed7136096c2c90d50d",
+      "uncompressed_sha256": "cf493aada0dac653f173631b7385f44dbd611bab0288c709d29c885e5c52b35b",
+      "outcome": "passed"
+    },
+    "docs/spikes/evidence/runtime-weighted-pose/graph.log.gz": {
+      "sha256": "c47f7c849e70472779f3b4dae6f07b5e01dd29c7207e905f4fa4e4dcff3ee951",
+      "uncompressed_sha256": "466c27957bec6177e21911180caffd16c9a78482761e9fad8fb9622eb2023499",
+      "outcome": "passed"
+    },
+    "docs/spikes/evidence/runtime-weighted-pose/fmt.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outcome": "passed"
+    },
+    "docs/spikes/evidence/runtime-weighted-pose/conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outcome": "passed"
+    },
+    "docs/spikes/evidence/runtime-weighted-pose/incant-weighted-pose-clippy-002.log.gz": {
+      "sha256": "f0f5f5a6e82f3f20fe521c046e4f5ce6c36ed4d6484fd900aab5219ed21d81be",
+      "uncompressed_sha256": "ceda6036540be2caa69f7611669cbf6a480ba691419a3ab5a8b89de6ef29b534",
+      "outcome": "passed"
+    },
+    "docs/spikes/evidence/runtime-weighted-pose/incant-weighted-pose-tests-001.log.gz": {
+      "sha256": "992c2b6ebbf9c17281c16385bb9caba3d89565247263b7d3b6b215c2404061e1",
+      "uncompressed_sha256": "6cb65364a46cd7dd5f9f44e5e13fa5f6c9659337aca75b56a46e85de53267187",
+      "outcome": "superseded test-only compile failure"
+    }
+  },
+  "receipts": {
+    "docs/spikes/evidence/runtime-weighted-pose/freeze.json": "ebaf4305431e80c928ce7ea817c728bccaebe7485d493982003f33963b9a1a84",
+    "docs/spikes/evidence/runtime-weighted-pose/results.json": "f6c788e889f43c97b52bc47dc7eed352045488f73f8d7b3da3cd77b4d23e2b4d"
+  },
+  "limits": [
+    "Bounded numeric primitive, not complete authored nested/2D animation trees, graph transitions, SDK or editor wiring.",
+    "Weighted quaternion mean is nlerp; existing two-pose sample_blend retains SLERP semantics.",
+    "CPU correctness/allocation evidence only; no rendered appearance, shipping-profile phone measurement or phase gate."
+  ],
+  "interruptions": "First Clippy run interrupted with unknowntoolhandle and no remaining process; resumed as002 and reaped exit0. First test compile assumed CookedModel Clone; fixedtest torecook equivalentfixture; production unchanged.",
+  "independent_review": {
+    "path": "docs/spikes/evidence/runtime-weighted-pose-review.json",
+    "sha256": "1e47c3c82f158d89eb2f077e690c0778218eb94a0b6a3d964fefcc59bd24de2a",
+    "verdict": "ACCEPTED_SCOPED"
+  }
+}

@@ -1,0 +1,225 @@
+{
+  "kind": "native-animation-pose-conformance",
+  "wabt": "1.0.42",
+  "module_count": 151,
+  "verified_prepared_files": 756,
+  "selected": [
+    {
+      "name": "animation-poses",
+      "prefix": "m2",
+      "input_sha256": "d73b9dcd7fa7062ee2de57db4166d41a6491e52d7e2a2b2716321756d0e995e2",
+      "prepared_sha256": "2fe5117e69d99c4e198fb54cdb8f09c8ede5fa5113c1282c0686a909682276bc"
+    },
+    {
+      "name": "rust-animation-poses",
+      "prefix": "m91",
+      "input_sha256": "bbf43bbb56a18768b91a75c20b63dd42056aaf8b7a0893ea24bb09d2854ca6fe",
+      "prepared_sha256": "a58b2bd8012f83f88c01624516a0644baa3d3c5b5505f1bd4ecc8cc1c5d17c39"
+    },
+    {
+      "name": "rust-animation-poses-capacity",
+      "prefix": "m92",
+      "input_sha256": "9d9476c19f4e46e5e78d2a6d46dd5d978490149d82c1adc7aa1609e5daa35984",
+      "prepared_sha256": "3c52d0377fc69813e316d10e5e0b38e379a8ef147ba30bcbad7d8d2265353503"
+    },
+    {
+      "name": "rust-animation-poses-legacy",
+      "prefix": "m93",
+      "input_sha256": "5a15a77eaa4d6053b871417e8eb3a360df5ab82971ae4e28c5fd5730b3f2aea7",
+      "prepared_sha256": "ced145a74758c29c507b90465678f5c60c5b7cdaae0c981a6011bee02fa2bdde"
+    },
+    {
+      "name": "rust-animation-poses-v2",
+      "prefix": "m94",
+      "input_sha256": "59d767fc2953e25e8539fdeeaaa371e6a3fc862e5ac2611ed02cf03827ffc62b",
+      "prepared_sha256": "6034b708f4d056c3b975381df6f1c3df4ae0ff04bfd9d054cfac83283faad936"
+    },
+    {
+      "name": "rust-animation-poses-v3",
+      "prefix": "m95",
+      "input_sha256": "44b58ff362b3868973ba89b15dae12cafa1222af1818afd08171eef291cc5a56",
+      "prepared_sha256": "5b5f0bb633c585f49d742fe0c6c9e01211e70c570b472bc5cf8b459162f56f07"
+    },
+    {
+      "name": "rust-animation-poses-number",
+      "prefix": "m96",
+      "input_sha256": "a762b11e26c619df4104adcceb578a98d48740886c3b8c20a6ce3097153c1d62",
+      "prepared_sha256": "42f707d080ce2b98bcf87aeb80cb155b2b6464b90ef25c4a55389638c8b079cb"
+    },
+    {
+      "name": "rust-animation-poses-parameter",
+      "prefix": "m97",
+      "input_sha256": "5ce34072f600eb2bb06c148454d5f3cfd54496a4a80b3ee195b8b3dfd4128d14",
+      "prepared_sha256": "a6659d281b0defecb4fc74c751d82f6f53dc1a1ad1b367f87ba208b6764820c9"
+    },
+    {
+      "name": "rust-animation-poses-late",
+      "prefix": "m98",
+      "input_sha256": "66d01d324947dbc5c6c27e4035cc68d1046018c849ffddc9fd93bca8c410db4c",
+      "prepared_sha256": "988b22734b53ebc666560e8342edd511f83a7f171bd3d8798542c82ec959fe78"
+    },
+    {
+      "name": "rust-animation-poses-callback",
+      "prefix": "m99",
+      "input_sha256": "3c1b733e4750b32dc712a32b4a77771a73d0a1cce32787647a25ea9c8192bd4b",
+      "prepared_sha256": "6fc2633823d072e8818744b7ed1bfe72ae53a1e587a6f337a756b43f1178fddc"
+    },
+    {
+      "name": "rust-animation-poses-trap",
+      "prefix": "m100",
+      "input_sha256": "9801a58aa48eccb2b8f123cac2c1b8687e126616d0c8635228cc4f4e3278e0ac",
+      "prepared_sha256": "ad7d8554a7cf3b53f8e78d4fb94992de652f8be6442c3b14fb459c209c018e07"
+    }
+  ],
+  "retained_hashes": {
+    "m100-facade.c": "9717b2888af689ed5d70f866aaebc0da8b8c385387ab708d539e4beb9a127bd1",
+    "m100.c": "35fd1aa937ed79a1fc607fa148b42594b9dc18df7c4c4e4adf1c52b2227e3c8f",
+    "m100.h": "dccafcfe2759518a0e377f3fa908d3374e8879918fbceff44812482cbfcb8f14",
+    "m100.original.wasm": "9801a58aa48eccb2b8f123cac2c1b8687e126616d0c8635228cc4f4e3278e0ac",
+    "m100.wasm": "ad7d8554a7cf3b53f8e78d4fb94992de652f8be6442c3b14fb459c209c018e07",
+    "m2-facade.c": "d352eac8d56b3716baceaf6e1a498be7ef87c488bf81ff09ea98bb11939c72e1",
+    "m2.c": "0bc8011e026cfa2f36496d8b46b8f24251c698827d886d9d52273132c1922bc5",
+    "m2.h": "f7ee2233d0edf3b0868c1290a4e39d1057468b058e7b3039288f1a02d2c52386",
+    "m2.original.wasm": "d73b9dcd7fa7062ee2de57db4166d41a6491e52d7e2a2b2716321756d0e995e2",
+    "m2.wasm": "2fe5117e69d99c4e198fb54cdb8f09c8ede5fa5113c1282c0686a909682276bc",
+    "m91-facade.c": "8a86917d15b3eaf252bf4f7a4882fdb68b600456bb6414321de2d67ea4a08328",
+    "m91.c": "0108b79eb8d5abd247691c493a428a77f51d4e6215dd04b947c39caa29636a1c",
+    "m91.h": "d23abce470a1f4a95605167011234f7c7f5be32c22deb0b2aba0bab8033e5445",
+    "m91.original.wasm": "bbf43bbb56a18768b91a75c20b63dd42056aaf8b7a0893ea24bb09d2854ca6fe",
+    "m91.wasm": "a58b2bd8012f83f88c01624516a0644baa3d3c5b5505f1bd4ecc8cc1c5d17c39",
+    "m92-facade.c": "7651fcfd357c4b666685ecdbf9bcae0fdc845190ae17eebf7c585d9710ddad2b",
+    "m92.c": "79aaa87e4c9c85b5bba68cfbe4e8f7c6cc71a30fa474a9bd4a892cd3d704f601",
+    "m92.h": "6befdf86eef17fd6c82ce8f274e2d6336cb7fef07c2fceccf9bc22cf186860bb",
+    "m92.original.wasm": "9d9476c19f4e46e5e78d2a6d46dd5d978490149d82c1adc7aa1609e5daa35984",
+    "m92.wasm": "3c52d0377fc69813e316d10e5e0b38e379a8ef147ba30bcbad7d8d2265353503",
+    "m93-facade.c": "196a3d096b144ebdeaed8c98a608b8cea4405a8d71b47b8f9a9815992e0c2147",
+    "m93.c": "f7d6c1716452e68a597dc8e33761651defb84dedf6567888c2fc2b27cdd42615",
+    "m93.h": "76f8b7c14a1de8394231b041bc3629f338407072c43e412c669361e3bb65975d",
+    "m93.original.wasm": "5a15a77eaa4d6053b871417e8eb3a360df5ab82971ae4e28c5fd5730b3f2aea7",
+    "m93.wasm": "ced145a74758c29c507b90465678f5c60c5b7cdaae0c981a6011bee02fa2bdde",
+    "m94-facade.c": "e7455cb61a370352178fc026020847e4514c97765863cf282ebf7aa759891dfa",
+    "m94.c": "4eb66dc9ced2be6c636854f4c687bca36ff8773b3ac8d109389f4ef7af1a3671",
+    "m94.h": "9ad830d77d347091dcb99c6230cea8115cc23434263c67dbd4d912d2444b505a",
+    "m94.original.wasm": "59d767fc2953e25e8539fdeeaaa371e6a3fc862e5ac2611ed02cf03827ffc62b",
+    "m94.wasm": "6034b708f4d056c3b975381df6f1c3df4ae0ff04bfd9d054cfac83283faad936",
+    "m95-facade.c": "48442bdd35d5c64a5a95878723b72fac076f17215ad89f71c724d951bcce4c32",
+    "m95.c": "7afb509712bac3a0d38827b878582b6b9b72ce9c539ed624c29fef635bf1f3b1",
+    "m95.h": "5c70778120a2df8a9fb90a1943307d548328ced12774d112323d31efc62293a3",
+    "m95.original.wasm": "44b58ff362b3868973ba89b15dae12cafa1222af1818afd08171eef291cc5a56",
+    "m95.wasm": "5b5f0bb633c585f49d742fe0c6c9e01211e70c570b472bc5cf8b459162f56f07",
+    "m96-facade.c": "0b2f3f4de81168e8bf22392624dd53e09337feb6b37709196106252ab4c0a653",
+    "m96.c": "47f7e51f0e938dc90eb6208d68ee826b4a74cf51f6f021d849097b09d7ab90ef",
+    "m96.h": "04673ee8d2547e8c59ae13bd6b13d7ce1d2986bcf334c91b0a6aeca703a9cc03",
+    "m96.original.wasm": "a762b11e26c619df4104adcceb578a98d48740886c3b8c20a6ce3097153c1d62",
+    "m96.wasm": "42f707d080ce2b98bcf87aeb80cb155b2b6464b90ef25c4a55389638c8b079cb",
+    "m97-facade.c": "b2467be6f3498532948822bd5f3332cb58a7cd1533fe0faaf63edbc7fe712cd8",
+    "m97.c": "f9ccbec845fd86f7a94edadc492f29aafa8102c2cd1ce90e86bd8fb0e4d6b579",
+    "m97.h": "b3db1cdb78203bf5ea06ed2411223e4cb4b152fefe0653f50d9438bba3efa3de",
+    "m97.original.wasm": "5ce34072f600eb2bb06c148454d5f3cfd54496a4a80b3ee195b8b3dfd4128d14",
+    "m97.wasm": "a6659d281b0defecb4fc74c751d82f6f53dc1a1ad1b367f87ba208b6764820c9",
+    "m98-facade.c": "9e8cf6ed3a12bfcf7991182fbdf89acad0dbc7ff487b9f50eaade5c1da45156c",
+    "m98.c": "6012bedace46e181f3166f3505e881bc03fd33bb550e1759776c732ba453c6a2",
+    "m98.h": "64f1fc70f6e167502b16802cb834e87d894bf66d73e23a6e06985ad953c2b292",
+    "m98.original.wasm": "66d01d324947dbc5c6c27e4035cc68d1046018c849ffddc9fd93bca8c410db4c",
+    "m98.wasm": "988b22734b53ebc666560e8342edd511f83a7f171bd3d8798542c82ec959fe78",
+    "m99-facade.c": "51dec2313a75c73969ae04fee17468913009b8f9f5abe8156612f7d46c8515c4",
+    "m99.c": "2ab2bfdd7a7173c9749bb8f7944b744b4ea45a086e7990d10ab43d837927c7dd",
+    "m99.h": "259622b137827a7f77834c7631c1b03671f4cb12eaf9fefe09b7f40ff78d6da6",
+    "m99.original.wasm": "3c1b733e4750b32dc712a32b4a77771a73d0a1cce32787647a25ea9c8192bd4b",
+    "m99.wasm": "6fc2633823d072e8818744b7ed1bfe72ae53a1e587a6f337a756b43f1178fddc"
+  },
+  "guest_source_hashes": {
+    "animation_poses.rs": "2ddc93843e7bb6cf5cc0053333b6b926667cc730c46ad5776c84c96516bc5286",
+    "animation_poses_failure.rs": "6fb74d598219ff665f1d1bde05133193ac7bf550204f03bd535d011e1e5dbf25",
+    "animation-poses.wat": "b2eb5ca87b550aea8b78b8387e391bca8bcbda71a19f656283a1dc5c253a0ea4"
+  },
+  "rust_sdk_sha256": "c3b4cea7feb36365a0487caa2fa68600412bf279da3d9fca43bb4e5bad846e82",
+  "commands": [
+    {
+      "command": [
+        "/Users/andreyyurlov/.codex/worktrees/native-fbx-import/incant/tools/cargo",
+        "test",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant-module",
+        "-p",
+        "incant_wasm_abi",
+        "-p",
+        "incant_wasm_runtime",
+        "-p",
+        "incant_wasm_cook",
+        "-p",
+        "incant_wasm_dev",
+        "-p",
+        "incant_wasm_player",
+        "-p",
+        "incant_game_runtime",
+        "-p",
+        "incant_script",
+        "--features",
+        "incant_wasm_dev/static-conformance,incant_wasm_player/fixture,incant_script/compiler",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": "conformance-0.log",
+      "sha256": "a0a4d598e4ea31971c27e56118549b183eee0e8524e98b29ec91f403b1d3a598"
+    },
+    {
+      "command": [
+        "/Users/andreyyurlov/.codex/worktrees/native-fbx-import/incant/tools/cargo",
+        "clippy",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant-module",
+        "-p",
+        "incant_wasm_abi",
+        "-p",
+        "incant_wasm_runtime",
+        "-p",
+        "incant_wasm_cook",
+        "-p",
+        "incant_wasm_dev",
+        "-p",
+        "incant_wasm_player",
+        "-p",
+        "incant_game_runtime",
+        "-p",
+        "incant_script",
+        "--features",
+        "incant_wasm_dev/static-conformance,incant_wasm_player/fixture,incant_script/compiler",
+        "--all-targets",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": "conformance-1.log",
+      "sha256": "719844bf2b99e27233f9d1fa7d260131484b1dab1a80e0e5ca0e85bd4d23b386"
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/andreyyurlov/.codex/worktrees/native-fbx-import/incant/tools/probes/development-wasm.py",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/conformance/development",
+        "--rustup",
+        "/opt/homebrew/bin/rustup",
+        "--static-conformance",
+        "--profile",
+        "ci"
+      ],
+      "exit_code": 0,
+      "log": "conformance-2.log",
+      "sha256": "1a81cc4f0b49a00f78c333fa93c1f427892b323844d074bb5d03f9182415de68"
+    }
+  ],
+  "passed": true,
+  "limitations": [
+    "local CPU conformance, not a shipping package or device gate",
+    "existing full guest checkpoints remain unsupported"
+  ]
+}

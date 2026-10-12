@@ -105,6 +105,19 @@ impl UiRuntime {
         viewport: [f32; 2],
         measure: &mut impl TextMeasure,
     ) -> Result<Self> {
+        let (mut candidate, focus) = Self::checkpoint_state(widgets, bytes)?;
+        let layout = candidate.prepare(&[], viewport, measure)?;
+        candidate.commit(layout)?;
+        if let Some(focus) = focus {
+            let focused = candidate.prepare(&[UiEvent::Focus(focus)], viewport, measure)?;
+            candidate.commit(focused)?;
+        }
+        Ok(candidate)
+    }
+    pub(crate) fn checkpoint_state(
+        widgets: Vec<Widget>,
+        bytes: &[u8],
+    ) -> Result<(Self, Option<StableId>)> {
         let decoded = decode(bytes)?;
         let mut candidate = Self::new(widgets)?;
         let mut indices: Vec<_> = (0..candidate.widgets().len()).collect();
@@ -133,13 +146,17 @@ impl UiRuntime {
         if total_text > incant_types::MAX_SCENE_TEXT_BYTES {
             return Err(UiCheckpointError::Invalid("combined widget text capacity"));
         }
-        let layout = candidate.prepare(&[], viewport, measure)?;
-        candidate.commit(layout)?;
         if let Some(focus) = decoded.focus {
-            let focused = candidate.prepare(&[UiEvent::Focus(focus)], viewport, measure)?;
-            candidate.commit(focused)?;
+            let widget = candidate
+                .widgets()
+                .iter()
+                .find(|w| w.id == focus)
+                .ok_or(UiCheckpointError::Invalid("focus membership"))?;
+            if !widget.node.kind.is_focusable() {
+                return Err(UiCheckpointError::Invalid("focus kind"));
+            }
         }
-        Ok(candidate)
+        Ok((candidate, decoded.focus))
     }
 }
 

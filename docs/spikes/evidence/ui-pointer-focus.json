@@ -1,0 +1,157 @@
+{
+  "scope": "A released text-field pointer capture focuses without submitting; buttons and explicit Submit/Activate preserve existing behavior.",
+  "source_sha256": {
+    "crates/incant_ui/src/focus.rs": "c3db6d4caf37550e78c825d230142aa24b668f16fed7befd8a955f48a6090778",
+    "crates/incant_ui/tests/focus.rs": "890241ab347ecee57ed48f15a041798e60daae44cce89d2fe23b91aadbe349bf"
+  },
+  "baseline": {
+    "exit": 101,
+    "assertion": "a field click must not submit",
+    "test_filtered": 7
+  },
+  "checks": [
+    {
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_ui",
+        "--all-features",
+        "--all-targets"
+      ],
+      "returncode": 0,
+      "stdout": "check-0.stdout",
+      "stderr": "check-0.stderr"
+    },
+    {
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_ui",
+        "--all-features",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "returncode": 0,
+      "stdout": "check-1.stdout",
+      "stderr": "check-1.stderr"
+    },
+    {
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "returncode": 0,
+      "stdout": "check-2.stdout",
+      "stderr": "check-2.stderr"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "returncode": 0,
+      "stdout": "check-3.stdout",
+      "stderr": "check-3.stderr"
+    }
+  ],
+  "tests": {
+    "passed": 47,
+    "failed": 0,
+    "ignored": 0,
+    "groups": 8
+  },
+  "artifacts": {
+    "baseline.json": {
+      "path": "docs/spikes/evidence/ui-pointer-focus/baseline.json.gz",
+      "raw_sha256": "9781eda05db7f20202ec76eae34ae278486aa9f00b8d075e1a91e8562e9a7959",
+      "gzip_sha256": "3a21b035956dd3deae8b8a856e3db4500c4c1ab3673bcb2194124ae13a7bbc97"
+    },
+    "baseline.stderr": {
+      "path": "docs/spikes/evidence/ui-pointer-focus/baseline.stderr.gz",
+      "raw_sha256": "8be561babf826fba9815e5980ce7472b739b3efc4e86c8d5fc67601834b1516c",
+      "gzip_sha256": "d22f86f00d5d40a31e95baa2b9acfe6fb98fe6762ddd2bd55401cbfeb1440de8"
+    },
+    "baseline.stdout": {
+      "path": "docs/spikes/evidence/ui-pointer-focus/baseline.stdout.gz",
+      "raw_sha256": "b461d89b63e9b6333fb6be1b30a336a0c5990fa27415afa675317ddbc8fa2457",
+      "gzip_sha256": "b097a6c65da977bac46f9c68355185855fee2876bd0edc9d8be9d54c2b7c5600"
+    },
+    "check-0.stderr": {
+      "path": "docs/spikes/evidence/ui-pointer-focus/check-0.stderr.gz",
+      "raw_sha256": "8263e778b59e6644154928df1a6576e5261a7eb4f54d749255235064ce3ecb39",
+      "gzip_sha256": "fbfb959eb9ca7402a1a4f83f3c253cfd0d661eb8037f01b91ff91b756a6eabd7"
+    },
+    "check-0.stdout": {
+      "path": "docs/spikes/evidence/ui-pointer-focus/check-0.stdout.gz",
+      "raw_sha256": "342375d4c51ae0e0c7db65398fcc567c796138995716a402d38a3be549db348d",
+      "gzip_sha256": "cf20ef2141b18be251fad5fb75e03e9e2f7070b14af51fbade3343776b19b2de"
+    },
+    "check-1.stderr": {
+      "path": "docs/spikes/evidence/ui-pointer-focus/check-1.stderr.gz",
+      "raw_sha256": "6bd8edb0caf17e712086037f4ed8cb2ae8ba61c74141dd91b9c2dea02014ece5",
+      "gzip_sha256": "68ede8071423e878e6e4a1074a00a4bfe994904f6a0d246d27fc8f59c3d1bb51"
+    },
+    "check-1.stdout": {
+      "path": "docs/spikes/evidence/ui-pointer-focus/check-1.stdout.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    "check-2.stderr": {
+      "path": "docs/spikes/evidence/ui-pointer-focus/check-2.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    "check-2.stdout": {
+      "path": "docs/spikes/evidence/ui-pointer-focus/check-2.stdout.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    "check-3.stderr": {
+      "path": "docs/spikes/evidence/ui-pointer-focus/check-3.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    "check-3.stdout": {
+      "path": "docs/spikes/evidence/ui-pointer-focus/check-3.stdout.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    "checks.json": {
+      "path": "docs/spikes/evidence/ui-pointer-focus/checks.json.gz",
+      "raw_sha256": "a2a8904a466fbc0e42c9cfb554b13142e956fc643310a783dfe58c696d43232a",
+      "gzip_sha256": "51c99d0bfe685ab4fd2572768eda27dd6b6b3613cf4eeb0545eb0402ca4bb52d"
+    },
+    "source-freeze.json": {
+      "path": "docs/spikes/evidence/ui-pointer-focus/source-freeze.json.gz",
+      "raw_sha256": "998fe0aaebfced5447439dd7c5d2a34fa58517e230c11faabb3622c02d82fdec",
+      "gzip_sha256": "5763ae4950e84af768fbdaae20259f78f467a44bc25296c64558a589b4c6e947"
+    }
+  },
+  "limitations": [
+    "CPU input behavior only; actual native interaction verification pending.",
+    "Separate from managed AppKit lifetime correction and logical focus/overflow followups."
+  ],
+  "independent_source_review": {
+    "decision": "accepted",
+    "path": "docs/spikes/evidence/ui-pointer-focus/independent-review.json.gz",
+    "raw_sha256": "b6ee173fe9d7da90d0cf3f279a72679b1bdf5d6feb5f2f86b62b672e1e68fcf5",
+    "gzip_sha256": "387791fb5d9c5f7c2600aa66ecf907e89ffbef9eecace095c778b09a8b66216f",
+    "scope": "two frozen source files; no fresh test/GPU execution"
+  }
+}

@@ -1,0 +1,378 @@
+{
+  "at": "2026-10-12T16:51:49.792298+00:00",
+  "scope": "Qualified Claude0057 numerical reference and readonly caret integrated with actual main149, CPU checks only",
+  "main": "c126a706ccba508cbc623c38b228ee274f5090cb",
+  "initial_head": "35354e7489d8dde7e184a5793e9702f79daab930",
+  "tested_head": "fa3670da59405621686d959abd78df1b8dff6d4d",
+  "frozen_count": 1698,
+  "accepted_source_comparison": {
+    "crates/incant_render/src/ui/ui.wgsl": {
+      "accepted_sha256": "f67e4982b038833e87ed84861d5be3018f5f0d6587ff8da6faf8bfd840c33c39",
+      "integrated_sha256": "f67e4982b038833e87ed84861d5be3018f5f0d6587ff8da6faf8bfd840c33c39",
+      "unchanged": true
+    },
+    "crates/incant_render/src/ui_draw_tests.rs": {
+      "accepted_sha256": "3f097b8c550f2d06a89127ebec34475c88fc4f1f0ef231cdab0f6d2278b78b21",
+      "integrated_sha256": "1f51d53d0deb8705dfd61780913c7241dd7b77a0603970de3dec94aa79978f3a",
+      "unchanged": false
+    },
+    "crates/incant_render/src/ui/mod.rs": {
+      "accepted_sha256": "275028849806cb6bdf541ea1150639d9081fffd405a31b32a5831bf73b97fa0d",
+      "integrated_sha256": "275028849806cb6bdf541ea1150639d9081fffd405a31b32a5831bf73b97fa0d",
+      "unchanged": true
+    },
+    "crates/incant_render/src/ui/geometry.rs": {
+      "accepted_sha256": "47bd7838b52a46e0034b05cf5458f8b12bf70c475889ba30848078dcb15d352b",
+      "integrated_sha256": "47bd7838b52a46e0034b05cf5458f8b12bf70c475889ba30848078dcb15d352b",
+      "unchanged": true
+    },
+    "crates/incant_render/src/ui_tests.rs": {
+      "accepted_sha256": "74e2513b61a6602299a63ab5e8b6d427d66ebf47663318dd27c437ae01c57569",
+      "integrated_sha256": "74e2513b61a6602299a63ab5e8b6d427d66ebf47663318dd27c437ae01c57569",
+      "unchanged": true
+    },
+    "crates/incant_render/src/lib.rs": {
+      "accepted_sha256": "f813f30566c5ee94084151aed95c917c152b00e63b49d6095c95c1654b335763",
+      "integrated_sha256": "f813f30566c5ee94084151aed95c917c152b00e63b49d6095c95c1654b335763",
+      "unchanged": true
+    }
+  },
+  "checks_before_format": [
+    {
+      "name": "tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "-p",
+        "incant_render_game",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "incant_game_player/native-window",
+        "--all-targets"
+      ],
+      "exit": 0,
+      "seconds": 171.6089033340013,
+      "sha256": "924156d9b96a6d5f4d3eb267cd58fec994e5b4795655a3461935c8822da21245"
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "-p",
+        "incant_render_game",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "incant_game_player/native-window",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 28.340863416999127,
+      "sha256": "7e35baa137f531efab492790e545cc91523397bb269d613bde93247000980692"
+    },
+    {
+      "name": "wasm",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "exit": 0,
+      "seconds": 14.048886124999626,
+      "sha256": "65e4121ff9d6e17bf8c31db07e162198e755f7db8f78437ee58c2e92a591106f"
+    },
+    {
+      "name": "graph",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_render",
+        "incant_render_gpu_host",
+        "incant_render_game",
+        "incant_game_player",
+        "--features",
+        "incant_game_player/native-window"
+      ],
+      "exit": 0,
+      "seconds": 0.77384741700007,
+      "sha256": "51d15577a402e80557ce0d00656a5d9bf09bfe4d1e79bb6a2496de66849e8d63"
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit": 1,
+      "seconds": 1.7359652079994703,
+      "sha256": "12bc0f9fd8a086e758c1449d56bfd45582a3f7d54519ee429ae68d8650ae3656"
+    }
+  ],
+  "final_checks": [
+    {
+      "name": "focused-tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "-p",
+        "incant_render_game",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "incant_game_player/native-window",
+        "--all-targets",
+        "ui::"
+      ],
+      "exit": 0,
+      "seconds": 14.232384334000017,
+      "sha256": "95466a65feae2542b6a0dfdf5821e73004f239a215943591d15decc773bc788c"
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "-p",
+        "incant_render_game",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "incant_game_player/native-window",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 2.778949208000995,
+      "sha256": "7a67f00aae4b4ea1bc233605204708a7e2d32647792077c0b14c1e83c433eb29"
+    },
+    {
+      "name": "wasm",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "exit": 0,
+      "seconds": 0.4100477089996275,
+      "sha256": "a70f3588456f4a8c7b8ed37e6e1d882787b29d0c86bd87b7af957e194268954e"
+    },
+    {
+      "name": "graph",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_render",
+        "incant_render_gpu_host",
+        "incant_render_game",
+        "incant_game_player",
+        "--features",
+        "incant_game_player/native-window"
+      ],
+      "exit": 0,
+      "seconds": 0.6387976660007553,
+      "sha256": "51d15577a402e80557ce0d00656a5d9bf09bfe4d1e79bb6a2496de66849e8d63"
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 1.5128099169996858,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.05499462500119989,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.032257541999570094,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "full_test_counts": {
+    "groups": 15,
+    "passed": 135,
+    "failed": 0,
+    "ignored": 89
+  },
+  "focused_final_counts": {
+    "groups": 15,
+    "passed": 9,
+    "failed": 0,
+    "ignored": 5
+  },
+  "initial_failure": "rustfmt requested wrapping only the new test-only adapter eprintln. Original failure retained; exact replacement reconstructs initial tested source. No shader/reference arithmetic changed.",
+  "integration": "Claude commits cherry-picked cleanly. Actual main149 merge carries documentation only; current Cargo/other implementation preserved. Five of six accepted source files exactly match, the remaining test file adds only accepted provenance correction, adapter logging and rustfmt.",
+  "artifact_hashes": {
+    "docs/spikes/evidence/native-ui-reference-main149/001-freeze.json": {
+      "sha256": "c57fe5b93be7bd28bbd52fbe88f9f9d705e52baf66a90ce4a56cb3c52a06f33c",
+      "uncompressed_sha256": "c57fe5b93be7bd28bbd52fbe88f9f9d705e52baf66a90ce4a56cb3c52a06f33c",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-ui-reference-main148-001/freeze.json"
+    },
+    "docs/spikes/evidence/native-ui-reference-main149/001-results.json": {
+      "sha256": "f8eed8482dfaa1e88e825e93b872a21ffe9a3ea434ae106e17f427edffee9b15",
+      "uncompressed_sha256": "f8eed8482dfaa1e88e825e93b872a21ffe9a3ea434ae106e17f427edffee9b15",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-ui-reference-main148-001/results.json"
+    },
+    "docs/spikes/evidence/native-ui-reference-main149/001-tests.log.gz": {
+      "sha256": "21266c24e126721c5b654a14d64777e91de23a0ce7742be93713c6db9f4afe9c",
+      "uncompressed_sha256": "924156d9b96a6d5f4d3eb267cd58fec994e5b4795655a3461935c8822da21245",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-ui-reference-main148-001/tests.log"
+    },
+    "docs/spikes/evidence/native-ui-reference-main149/001-clippy.log.gz": {
+      "sha256": "45edeebf44a9fede58704ea5a046cbab2d81499a914d2776bac1df9a4ef98be9",
+      "uncompressed_sha256": "7e35baa137f531efab492790e545cc91523397bb269d613bde93247000980692",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-ui-reference-main148-001/clippy.log"
+    },
+    "docs/spikes/evidence/native-ui-reference-main149/001-wasm.log.gz": {
+      "sha256": "86e2c1cb302598897ccfc93af559e6f2dbdd2e47072712d98f5c95b54581b246",
+      "uncompressed_sha256": "65e4121ff9d6e17bf8c31db07e162198e755f7db8f78437ee58c2e92a591106f",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-ui-reference-main148-001/wasm.log"
+    },
+    "docs/spikes/evidence/native-ui-reference-main149/001-graph.log.gz": {
+      "sha256": "7acc19126c7fe7ed803e66391ed933d961790ea65fcbe88ec6a2cb1589f90b8a",
+      "uncompressed_sha256": "51d15577a402e80557ce0d00656a5d9bf09bfe4d1e79bb6a2496de66849e8d63",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-ui-reference-main148-001/graph.log"
+    },
+    "docs/spikes/evidence/native-ui-reference-main149/001-fmt.log.gz": {
+      "sha256": "f805bd5b7c1d6cf4601acc3514b081a6c214624ec73ff6cf0640a3a65f786ed8",
+      "uncompressed_sha256": "12bc0f9fd8a086e758c1449d56bfd45582a3f7d54519ee429ae68d8650ae3656",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-ui-reference-main148-001/fmt.log"
+    },
+    "docs/spikes/evidence/native-ui-reference-main149/002-freeze.json": {
+      "sha256": "bd386f9421821a66944dd3b380b6775f4295430fb5ff87388e18de64c3adc293",
+      "uncompressed_sha256": "bd386f9421821a66944dd3b380b6775f4295430fb5ff87388e18de64c3adc293",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-ui-reference-main149-002/freeze.json"
+    },
+    "docs/spikes/evidence/native-ui-reference-main149/002-results.json": {
+      "sha256": "4c8d25ba82c19e9733bc8f9c3223aafd3870e3d55921c5912f939e1f27bd3cfc",
+      "uncompressed_sha256": "4c8d25ba82c19e9733bc8f9c3223aafd3870e3d55921c5912f939e1f27bd3cfc",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-ui-reference-main149-002/results.json"
+    },
+    "docs/spikes/evidence/native-ui-reference-main149/002-focused-tests.log.gz": {
+      "sha256": "69129e7246fe32ef6380cb1d8c244168eae23f379088e43315d53b3872cd0412",
+      "uncompressed_sha256": "95466a65feae2542b6a0dfdf5821e73004f239a215943591d15decc773bc788c",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-ui-reference-main149-002/focused-tests.log"
+    },
+    "docs/spikes/evidence/native-ui-reference-main149/002-clippy.log.gz": {
+      "sha256": "95556897ff590a1cce69605aa78c7b964e4055c13402ab94efe58330057dfd74",
+      "uncompressed_sha256": "7a67f00aae4b4ea1bc233605204708a7e2d32647792077c0b14c1e83c433eb29",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-ui-reference-main149-002/clippy.log"
+    },
+    "docs/spikes/evidence/native-ui-reference-main149/002-wasm.log.gz": {
+      "sha256": "234ba1a321d88b379494db158b0f9b3f8d080a5b63f027908df21bcc9f8befb4",
+      "uncompressed_sha256": "a70f3588456f4a8c7b8ed37e6e1d882787b29d0c86bd87b7af957e194268954e",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-ui-reference-main149-002/wasm.log"
+    },
+    "docs/spikes/evidence/native-ui-reference-main149/002-graph.log.gz": {
+      "sha256": "7acc19126c7fe7ed803e66391ed933d961790ea65fcbe88ec6a2cb1589f90b8a",
+      "uncompressed_sha256": "51d15577a402e80557ce0d00656a5d9bf09bfe4d1e79bb6a2496de66849e8d63",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-ui-reference-main149-002/graph.log"
+    },
+    "docs/spikes/evidence/native-ui-reference-main149/002-fmt.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-ui-reference-main149-002/fmt.log"
+    },
+    "docs/spikes/evidence/native-ui-reference-main149/002-conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-ui-reference-main149-002/conventions.log"
+    },
+    "docs/spikes/evidence/native-ui-reference-main149/002-diff.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-ui-reference-main149-002/diff.log"
+    },
+    "docs/spikes/evidence/native-ui-reference-main149/format-only.patch": {
+      "sha256": "fbfd9cadfe208b611577f14ab1cd2c131ba056bad6bc85b03b1293938ed3db93"
+    }
+  },
+  "source_reviews": {
+    "native-ui-0057-provenance-final-20261012.json": "28b0b0ec00ff27474552febc775996089199af859cccef14f1cfceb1c73716aa",
+    "native-ui-0057-source-20261012.json": "f706add2244a43d591dc11af4adfe2f2bf8c81fa239c68ae0f49e6e1204c000e",
+    "native-ui-adapter-logging-20261012.json": "b283df3339b2277900cfe695d62691b70e89ce625c9b8a5bf177c388db5ab2a0"
+  },
+  "limits": [
+    "Actual corrected Linux execution and adapter identity are pending the next frozen full checkpoint. Installed Mesa and CPU emulation establish neither.",
+    "Reference requires at least8 sub-texel bits; Vulkan minimum4 devices remain outside this reference. No claim that wgpu AdapterInfo exposes that precision.",
+    "Original Claude macOS/Metal numerical, mutation and appearance evidence applies to its frozen original build. No GPU/window/pixel/provider work occurred in this integration.",
+    "Checkpoint11 remains failed and release unchanged; all23 required checks must succeed on the next exact candidate before promotion.",
+    "The original native review found Tao and pointer issues; they are corrected by separate main149 work. Claude0058 interactive acceptance is a separate packet."
+  ]
+}

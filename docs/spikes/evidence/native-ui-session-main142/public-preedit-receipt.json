@@ -1,0 +1,6 @@
+{
+  "name": "preedit",
+  "returncode": 1,
+  "stdout": "",
+  "stderr": "Error: Checkpoint(Ui(CompositionActive))\n"
+}
