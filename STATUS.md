@@ -16,6 +16,17 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Compound animation transitions — private focused verification
+
+Transitions involving authored blend states now retain independent state clocks,
+inner interpolation and exact world-save continuation. The TypeScript snapshot
+and CPU renderer consume the grouped pose; a single staged sampling/IK boundary
+preserves the last complete pose on a late refusal. Focused tests pass. Full
+checks, independent review, ordinary exported continuation and complete compound
+Wasm bindings remain open. Root-motion integration continues separately; this
+private revision does not claim complete animation or a Phase 1 gate.
+[Contract](docs/spikes/native-compound-animation-fades.md).
+
 ## Authored two-bone IK — connected CPU proof passed
 
 Bounded stable-ID constraints now bind actual cooked model topology/fingerprints,

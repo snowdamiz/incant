@@ -101,6 +101,18 @@ impl NativeAnimationGraph {
     pub fn initial(&self) -> u8 {
         self.initial
     }
+    pub(crate) fn has_compound_fades(&self) -> bool {
+        self.transitions.iter().any(|t| {
+            t.fade_seconds > 0.0
+                && (!matches!(
+                    self.states[usize::from(t.from)].motion,
+                    NativeAnimationMotion::Clip(_)
+                ) || !matches!(
+                    self.states[usize::from(t.to)].motion,
+                    NativeAnimationMotion::Clip(_)
+                ))
+        })
+    }
     pub fn validate(&self, clip_durations: &[f32]) -> Result<(), SceneError> {
         let error = SceneError::Invalid;
         if clip_durations.len() > crate::MAX_ANIMATION_CLIPS
@@ -190,12 +202,10 @@ impl NativeAnimationGraph {
             }
         }
         for t in self.transitions.iter() {
-            let from = self
-                .states
+            self.states
                 .get(usize::from(t.from))
                 .ok_or_else(|| error("animation graph transition source"))?;
-            let to = self
-                .states
+            self.states
                 .get(usize::from(t.to))
                 .ok_or_else(|| error("animation graph transition destination"))?;
             if t.from == t.to
@@ -207,12 +217,6 @@ impl NativeAnimationGraph {
                 || t.conditions.len() > MAX_ANIMATION_GRAPH_CONDITIONS
             {
                 return Err(error("animation graph transition duration or conditions"));
-            }
-            if t.fade_seconds != 0.0
-                && (!matches!(from.motion, NativeAnimationMotion::Clip(_))
-                    || !matches!(to.motion, NativeAnimationMotion::Clip(_)))
-            {
-                return Err(error("fades involving blend-tree states are unsupported"));
             }
             for condition in t.conditions.iter() {
                 let p = self

@@ -69,6 +69,15 @@ impl AnimationPlayer {
         to: PoseSource<'_>,
         weight: f64,
     ) -> Result<()> {
+        self.sample_pose_crossfade_trs(from, to, weight)?;
+        self.publish()
+    }
+    pub(super) fn sample_pose_crossfade_trs(
+        &mut self,
+        from: PoseSource<'_>,
+        to: PoseSource<'_>,
+        weight: f64,
+    ) -> Result<()> {
         self.validate_pose_source(from)?;
         self.validate_pose_source(to)?;
         if !weight.is_finite() || !(0. ..=1.).contains(&weight) {
@@ -83,6 +92,6 @@ impl AnimationPlayer {
             sampling::blend(&mut self.group_trs, &self.trs, weight);
             std::mem::swap(&mut self.trs, &mut self.group_trs);
         }
-        self.publish()
+        Ok(())
     }
 }
