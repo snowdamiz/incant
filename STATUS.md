@@ -23,7 +23,7 @@ Current matching-headless verification passes seven original, seven presentation
 and seven authored Cove scenarios, public Undo/Redo/reopen and four precise binding
 refusals. Source, art and test bytes stay unchanged; Claude's offscreen appearance
 approval remains scoped to its frozen packet. Original two shipping exports remain
-separately accepted producer evidence. Final integration review is pending; native
+separately accepted producer evidence. Final independent integration review is accepted; native
 window, restart, audio and physical-device/performance/physics-save gates stay open.
 [Integrated source and evidence](docs/spikes/planar-presentation-main173.md).
 

@@ -3052,5 +3052,9 @@
     "Native-window acceptance pending, restart/localized terminal-headline bindings/audio/physical device/performance/physics-save gates remain open.",
     "Historical Claude text saying Wasm HUD parity is open describes that packet era; engine capability mergedmain166, but this authored sample has no public Wasm proof."
   ],
-  "review_status": "current-main final independent review pending"
+  "review_status": "current-main final independently accepted",
+  "final_review": {
+    "path": "docs/spikes/evidence/planar-presentation-main173/final-review.json",
+    "sha256": "e63ade44b37c40ad6fa371d42036aec17e7394c5546491470338b59dc045dc40"
+  }
 }
