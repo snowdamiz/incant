@@ -65,6 +65,18 @@ active. Report merged work separately from local checks and unmet exit gates.
 The project is still early relative to the complete Engine 1.0 and Driftwake
 scope; no defensible percentage or completion date follows from the PR count.
 
+## Native text editing — locally checked
+
+The runtime text buffer now supports bounded committed text, directional
+grapheme selection/deletion and transient IME composition. Focus loss cancels
+preedit; rejected input preserves text and selection. A real packaged-font test
+shapes the composed Latin/CJK string and preserves its retained layout through
+commit. All 37 text tests, Clippy, wasm32 and lean dependency checks pass, with
+independent review of the exact source. Widget layout/focus ownership, OS event
+delivery and IME activation, visual caret/hit testing and mobile keyboard remain
+open. This is not a completed text widget or live platform gate.
+[Evidence](docs/spikes/native-text-editing.md).
+
 ## Native text scene, packaging and composed CPU input — locally checked
 
 Typed Text declarations now cook into bounded v12 binary scene data with explicit

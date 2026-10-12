@@ -1,0 +1,84 @@
+{
+  "scope": "Bounded runtime text-edit and preedit state; no OS/widget integration",
+  "recorded_at": "2026-10-12T02:33:20.103952+00:00",
+  "base": "934af1b0f9c04d45588873369a4d69295c6380f3",
+  "source_freeze": {
+    "path": "/tmp/incant-text-edit-source-freeze-001.json",
+    "sha256": "f560682922255cea16b41463197dc833ea2e1b81164b1c7158369491c46201b1",
+    "files": {
+      "Cargo.lock": "6b69761a8e171cd4811bbd2a68f3c03e1a0b0c84132d0f6dd85f3e31e8cb695d",
+      "crates/incant_text/Cargo.toml": "be99373f05f096eba5b457fe7246033922d54d2b8b057613843b1d5511bb2a65",
+      "crates/incant_text/src/lib.rs": "843537f87ec33223f7e331cea7759a3655884308eec1888c6ebdda988cca552a",
+      "crates/incant_text/src/editing.rs": "39ce9e49ffb37b17ceec71056de26af75560b8e7395c9b60dd56501726105e4f",
+      "crates/incant_text/tests/editing.rs": "19a459375bfb75ff0b34dc1dcc8ee5b67fc1d830507daa44dea4f73ef9cc281f"
+    }
+  },
+  "validation": {
+    "tests-002": {
+      "path": "/tmp/incant-text-edit-tests-002.log",
+      "sha256": "ed4da9ba75a20bdac21caa2c04186871b4b9a0130650ec0aa154d64d5a0870bb",
+      "bytes": 4372,
+      "command": "CARGO_TARGET_DIR=/tmp/incant-native-navigation-target ./tools/cargo test --locked --offline --profile ci -j2 -p incant_text",
+      "exit_code": 0,
+      "groups": 6,
+      "passed": 37,
+      "failed": 0,
+      "ignored": 0
+    },
+    "clippy-001": {
+      "path": "/tmp/incant-text-edit-clippy-001.log",
+      "sha256": "ae3d91ba5df34637c92a58d7ca1ddad530cc0ccc186e6dc1e2505c73272c541a",
+      "bytes": 1305,
+      "command": "CARGO_TARGET_DIR=/tmp/incant-native-navigation-target ./tools/cargo clippy --locked --offline --profile ci -j2 -p incant_text --all-targets -- -D warnings",
+      "exit_code": 0
+    },
+    "wasm-001": {
+      "path": "/tmp/incant-text-edit-wasm-001.log",
+      "sha256": "3405ebcfdaeb01f55898f06ccc14f04f2ed3c65b0e49898d4e83ea7754d3a550",
+      "bytes": 1119,
+      "command": "CARGO_TARGET_DIR=/tmp/incant-native-navigation-target ./tools/cargo check --locked --offline --profile ci -j2 -p incant_text --target wasm32-unknown-unknown",
+      "exit_code": 0
+    },
+    "fmt-001": {
+      "path": "/tmp/incant-text-edit-fmt-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "command": "./tools/cargo fmt --all --check",
+      "exit_code": 0
+    },
+    "conventions-001": {
+      "path": "/tmp/incant-text-edit-conventions-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "command": "python3 tools/generate_conventions.py --check",
+      "exit_code": 0
+    },
+    "graph-001": {
+      "path": "/tmp/incant-text-edit-graph-001.log",
+      "sha256": "031b1e6f05967d0e88a7ed7c078988ceda4129020699fe11b3f2a07a020691b0",
+      "bytes": 50,
+      "command": "python3 tools/check_runtime_dependencies.py incant_text",
+      "exit_code": 0
+    }
+  },
+  "limits": {
+    "committed_bytes": 16384,
+    "display_bytes": 16384,
+    "persistent_string_payload_bytes": 32768,
+    "peak_string_payload_bytes": 49152
+  },
+  "new_tests": 12,
+  "all_owned_check_handles_reaped": true,
+  "dependency_resolutions_changed": false,
+  "limitations": [
+    "Logical grapheme movement only, not visual bidi caret movement or hit testing.",
+    "OS event delivery, IME activation/candidate placement, owner generations and duplicate key-text suppression are not integrated.",
+    "No widget layout/appearance, clipboard or mobile keyboard implementation.",
+    "No screenshots, GPU work, live desktop IME or reference-phone gate."
+  ],
+  "independent_review": {
+    "path": "docs/spikes/evidence/native-text-editing-review.json",
+    "sha256": "7a5381fb0f3effae77ebb599ca4cfce13b75fa4ac07525a08552d0d2ec50a137",
+    "decision": "accepted with no actionable findings; runtime editing state only"
+  }
+}
