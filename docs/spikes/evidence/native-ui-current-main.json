@@ -1,0 +1,1232 @@
+{
+  "recorded_at": "2026-10-12T04:50:09.119850+00:00",
+  "integrated_head": "1dcce6229e415e8610ccb8a655951848d897e86d",
+  "tested_source": "9a01123109c36ff5720eb4f1f153cdece74ffb7a",
+  "accepted_foundation": "15aeb891d8f3c8125afc5fea3615079953499d64",
+  "accepted_helper": "02290953416c86220ffe0bf977bec7eab6d5b0ac",
+  "source_hashes": {
+    "Cargo.lock": "77809a6a0b2ee2f932a12c62abf242bb109885ed320f1f26d263c5b82c7e72c1",
+    "Cargo.toml": "3d4228361045ff29e5fcfde55f3ab4769f71b8d3805f69301428af0eaddb3e52",
+    "crates/incant_cook/Cargo.toml": "9e55a51b748f08046f975418b02b6079e6abda03de9762b763f28eb141e7cc57",
+    "crates/incant_cook/src/lib.rs": "282613de681944c0a7baf3d4031ed87b6fb70ed3011a06c2d62413fb0b8cd03c",
+    "crates/incant_cook/src/scene.rs": "40a81721df1b8ae945dea66328d1260bb65fc646f9471ee52fdca1a8b1f262b9",
+    "crates/incant_cook/src/text.rs": "ce34c1ad29ac31b2841b682fc411a45b0f1117b5d7012bff32f6b52395ce7c61",
+    "crates/incant_cook/src/ui.rs": "5961561e7c9fa548d6a3f4acc27352d6dca729e163dc5b5cf66d7ae78b7db808",
+    "crates/incant_cook/tests/ui.rs": "a6c345aed531a708ee65599b0d47144d4ebcd02d9238ee5e5b9962fb570da14e",
+    "crates/incant_core/src/scene.rs": "261a8435604cde9374a5ddc73011dbd31d2f035bcba76f33933b2015c91a460c",
+    "crates/incant_doc/src/lib.rs": "e8593144092aff5d6fc20a9320fe2ac34f35b6ec7e7d9f790c704502ec76f38f",
+    "crates/incant_doc/src/ui.rs": "3efd4b68a72c8e6bc6e93aa299201315cb6cedc7c9a007a2b3e045146058c346",
+    "crates/incant_game_player/Cargo.toml": "28056082e89b012c1c6c976bb349d8dace821bd26d535ec0b53cbb55b778d401",
+    "crates/incant_game_player/src/gpu.rs": "733fa6e7b825a37ed5b00e7c59e5689778a46a19e815534cc1f1ef0f862434e7",
+    "crates/incant_game_player/src/main.rs": "71a39e60435979e4a83f1601fa050698a35853ad5b5bc825665e07094bbadc50",
+    "crates/incant_game_player/src/observe.rs": "5651029c68fe79bf7716b1c7ad794045ef219e7dab8093d627569a889c3c3ef9",
+    "crates/incant_game_player/src/package.rs": "c7d70da9643fee2ee134519ab87f4dfd3792f5386b0b3bd4109bc95820a91366",
+    "crates/incant_game_player/src/session.rs": "a67e9d780c3a66dab1d0f8fb05d4e649884d4785a1962c327bd48bb5446674b4",
+    "crates/incant_game_player/src/ui.rs": "eb11d2aebd174b5b3ae9d2c40fa94b57e44c5b6e89d9ca7520a5c4de41441ae9",
+    "crates/incant_game_player/src/window/mod.rs": "43164a566972136944b4e703a7c99ae3f157d7572afcf03cb353b917502d47f1",
+    "crates/incant_game_runtime/Cargo.toml": "7256b7137d8501f2321a3c4e9133c7ab700085cce7a5230ad28bbf892f8bb31c",
+    "crates/incant_game_runtime/src/core.rs": "6ef2d18bcdf1dd40856c47787451f512e4017f1cf48a0e58d9996d4c0ca5181a",
+    "crates/incant_game_runtime/src/hosted.rs": "5205cc7abfd3466325522bf4242ec2309c0dec16957a18ce5aaf268afef0f9aa",
+    "crates/incant_game_runtime/src/lib.rs": "adb06745d38efea2294539fcf7207ea283b62f432ab1218a160622879efe264b",
+    "crates/incant_game_runtime/src/offline.rs": "4eb6ef65425cb6be076cf670c0591f2a1cedae2caa5c2d55fa24539096911d32",
+    "crates/incant_input/src/lib.rs": "f9dad7ef6ce6b65972ecfd59257e22cc93c22d22eaab17627f18c6ce4af85d56",
+    "crates/incant_input/src/recording.rs": "f2f8fc240d0d39bdd58a8381cca83c8da1b979affa0f83398322dea4f6941035",
+    "crates/incant_input/src/recording_ui.rs": "3630363e621731d944332ad7237fe42e2339fb84c378115d85a1ab0b427df45d",
+    "crates/incant_input/src/types.rs": "79bdc7cdd836d2e9df56369914b2222d2e93c4ff8915b0172ef8e947699847f7",
+    "crates/incant_input/src/ui.rs": "d7ab30066055272245dc7735799e74a506faff0738b3fd313f7ff84554dc8d4c",
+    "crates/incant_input/tests/recording.rs": "1e884556f423c3f82bea4e839bc0373b75d2feec12be5af8d206dff3feff3b35",
+    "crates/incant_input/tests/ui_recording.rs": "44e7a964a440bd3573074b103e7768e73d9cbb3d1df25895c759749e49f57632",
+    "crates/incant_play/src/control.rs": "9a4d77c877a2107486a23bc77fcfa1e5ce783271e97cd6d3e15acc84623dc941",
+    "crates/incant_play/src/lib.rs": "5b2a97c847e03459b1bc3ba4fd72fcd817288e13085f7f353d300dae2ba01b8b",
+    "crates/incant_play/tests/control.rs": "bd6bdcfa46c09197127cd4aac4833fa3bb17e3063dc406fc0e6b48d3652998f7",
+    "crates/incant_render_game/Cargo.toml": "cc0af6a984a41a33cf2e3ce369d7a7a480ab56a08fa3832ceecb7839ff4e1bba",
+    "crates/incant_render_game/src/lib.rs": "caa89282734d4ebe7d1d63534aad435c46b573b405d237c1f63018a73d6e6b10",
+    "crates/incant_render_game/src/ui.rs": "2ef8dac93372ed80d70d2288348bdcb32de1212aa8ea7ff8cd78b70c7753e304",
+    "crates/incant_render_game/tests/hosted.rs": "7b4b28453db43b0e9465aef46e7d615de7e4260cf394694837c69a05c50e83cf",
+    "crates/incant_render_game/tests/ui.rs": "26638f288ae8626b9d2307d6093552aa99923c8093d3bb76401469a19eec2c55",
+    "crates/incant_render_gpu_host/tests/game.rs": "c6102a46336900aec5c98e9f9288668df17021476a5eb41f87c674b04ccdb694",
+    "crates/incant_render_native/src/lib.rs": "fb93982a5b1db9cac14726db0e8e282deb48ff9322d0692d01fbaf12c3f3b830",
+    "crates/incant_render_native/src/text.rs": "b45a27516c0961e2160ebb025ea457c7ade0e94322056051d7c174eb34918b0a",
+    "crates/incant_runtime/src/binary.rs": "5bb4cfa7b03be070c1a7af288a382a228e1123f018c7eceee364bbbc1401d328",
+    "crates/incant_runtime/src/commands.rs": "fad608b765793f82bec47067dae7aad5c097e9315449e857175fdf0fea5930c2",
+    "crates/incant_runtime/src/lib.rs": "02d98f6d09c05f374f6638e48fae6dade02e4476214477106e3857cedb86bcb7",
+    "crates/incant_runtime/src/save.rs": "b59b258c1815407d7bb16a3a95c34c03f486ab3df56a063d1e98644b37ff7d8d",
+    "crates/incant_runtime/src/scene.rs": "eb566170e1d5a2b31b34080069d128ea04ebf6836b48eddbe8e8ea1dbbba9d33",
+    "crates/incant_runtime/src/text_binary.rs": "961c2be77164cab8d6e640f1317ff16420cd1dca5ba88d61dde24a61b54c7d3d",
+    "crates/incant_runtime/src/ui.rs": "545bbd18cd723551a68775e41504482a98a23e0a90f34de850e8c13948e0cfd8",
+    "crates/incant_runtime/src/ui_binary.rs": "2ec5106f3b520dac1e053bef7016892c2a129feaa9984df0bd461e81b61369d3",
+    "crates/incant_runtime/src/world.rs": "a5b52a0cc85b75e5297471200fb9350816164624fba254e5a71bce393bad8be9",
+    "crates/incant_runtime/tests/physics.rs": "c0b690f201e90c31fc265a4666b8170a4fe801da6d070193a9fdac9cc03267e8",
+    "crates/incant_runtime/tests/physics_2d.rs": "aaed7d2961e3c590457839764ff06f99a3a7b649756411a845269840b776b645",
+    "crates/incant_runtime/tests/scenes.rs": "e1deb8a2ba38d95d7496dbe7975938a1f015e3bf10e59ffea77626d704137ff4",
+    "crates/incant_runtime/tests/ui.rs": "f26935af567cefcb144180285f7f618db7311d3f656443c1a57ac99d9eff7f88",
+    "crates/incant_script/src/input.rs": "814b621e57e0f46da7b48abc06ad97dd5d06efe175c38b0e6d6d750ac7689f35",
+    "crates/incant_script/src/input_tests.rs": "957369ac8a34f67b2921908796f72687fd2a02fca7492631bd81c22584988467",
+    "crates/incant_script/src/program.rs": "1acc69fb4cc8b6994359da54226d575cfea5ac634b733a4a6b4f1b22ba7ce45f",
+    "crates/incant_script/src/session.rs": "94f091c8e13bf8d6b72e078728086c466961498205d554caa67b224e451442ad",
+    "crates/incant_types/src/lib.rs": "2376fc5d7ed5e74c61872b51890ccb3c9bfcc063f02c46b1861176b8d783b8f5",
+    "crates/incant_types/src/ui.rs": "c2060827de3987101b6f8c996bfdcb1f2bf301dcb9c45f57e2f1fdd02a295ab1",
+    "crates/incant_ui/Cargo.toml": "9f38a898be79073efa4b99070317f106e380ad5a1bd6dcd6136eedb848ede405",
+    "crates/incant_ui/src/focus.rs": "7cce5add21e0ba0d9f75947740f40224adb276cae1055ecc6e087d47445e0963",
+    "crates/incant_ui/src/fonts.rs": "ff2cd4f31a1a0676d1c126ad287489c9d735ed20e21f15c727fdc5a950fd3d4a",
+    "crates/incant_ui/src/layout.rs": "0dcb1355a62debe55e856c64844f96f5a67569ccbd2523c32c93fa1d90843cce",
+    "crates/incant_ui/src/lib.rs": "0971219c7aa9c4351ff2ee9ed7d02070b13d26ce91f3030723054b672532f7f0",
+    "crates/incant_ui/src/paint.rs": "7fead5608cbd493230134b8b47042433fe34055b50ad78fe4ec52fbf50e46ca9",
+    "crates/incant_ui/src/reconcile.rs": "5c8bd5f3b8b46ed554173be1aceaa63ac8490dfcb47b0c37e33357dab7899ff9",
+    "crates/incant_ui/src/routing.rs": "329537b34641a9892c71f3468cbfa4ed5e25e9769c8ea9a57fa106d73da11df6",
+    "crates/incant_ui/src/style.rs": "67a270b315504d086073785f2c438f62ec4617c3ccf164e9e09c87fd219d992b",
+    "crates/incant_ui/tests/focus.rs": "0e4a885303296bf5344bbe22df31052faa7e732ce421d3e944ca338b6a1cf89c",
+    "crates/incant_ui/tests/fonts.rs": "7eeb016026e25a86a3d97067e8faf70957e78e3e0914bca23dd667c00c79faa0",
+    "crates/incant_ui/tests/layout.rs": "ffc06e5840401b0721a94d1d7bb134823a7b4083917bd706b748cb5fe90eaaa1",
+    "crates/incant_ui/tests/reconcile.rs": "c9f25da75fcebf505e80bce86ae6f134978d49fc6f48a60332aaf6f28e3ec812",
+    "crates/incant_ui/tests/routing.rs": "1c962e17660f507c777f8ea9dbe63278bde0f7df5cc438d6a2b027b04a1f3b92",
+    "schemas/InputFrame.schema.json": "3536d19aa2f176d592854de017ccdb6dcafb659630e0a0de6a76ee8dd3012587",
+    "schemas/InputRecording.schema.json": "ad61b731ada1948998900ba8878f7620449ea5d14423b776fb46743fc6b362b5",
+    "schemas/UiNode.schema.json": "fe907bca284ea8630b954b04dd5722813ac983315222178f23f1b5c4ca654c5d",
+    "schemas/agent-tools.json": "8c00dbcffd09d635761b7a603aa934ec57d4c0bdc5c62c0d4489afa5d16a4e58",
+    "sdk/ts/src/generated.d.ts": "adf0d47a35e1d5c2060a901ab9edf809f066f14b72074f12d0769bb521ca0b20",
+    "sdk/ts/src/native.d.ts": "7108c888ae5dc80220a8dd57b86f6192251aab5fd1d7f9f5baac505c8815724a",
+    "tools/export_native.py": "14f64b270a3728b58ce1e2cd99ff52dd826cdfbbb4dda5734bd48da3e40184cb",
+    "tools/probes/native-ui-export.py": "c71f82f673c0275aa240a78c0d066927842b64f4a13d110c618bcf672887ce8d",
+    "tools/tests/test_native_ui_export.py": "e237cf450169ebf1af25dd770125ecc7ea1ff150ea59ff4c0f5ebf0d747fcbf8"
+  },
+  "post_proof_source_drift": [
+    "tools/probes/development-wasm.py"
+  ],
+  "source_drift_scope": "Only reviewed development probe shipping-metadata selection; unused by UI cook/export and no engine/build identity inputs changed.",
+  "checks": {
+    "initial_source": "6635a0e38b420c4a41716530755eb7f08721b1a7",
+    "initial_tests": 510,
+    "initial_groups": 87,
+    "initial_commands": [
+      {
+        "name": "tests",
+        "command": [
+          "./tools/cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant_ui",
+          "-p",
+          "incant_input",
+          "-p",
+          "incant_runtime",
+          "-p",
+          "incant_cook",
+          "-p",
+          "incant_doc",
+          "-p",
+          "incant_script",
+          "-p",
+          "incant_game_runtime",
+          "-p",
+          "incant_render_game",
+          "-p",
+          "incant_game_player",
+          "-p",
+          "incant_play",
+          "--features",
+          "incant_play/wasmtime-host,incant_game_runtime/ui,incant_game_player/render-input,incant_cook/typescript"
+        ],
+        "exit": 0,
+        "seconds": 178.1612560839858,
+        "log": "/tmp/incant-ui-main128-checks-002/tests.log",
+        "sha256": "305bb5fd8eedda3d3c3e989626e286bc7ee7fca6e7f9ff5c49bccab776cf83a9"
+      },
+      {
+        "name": "clippy",
+        "command": [
+          "./tools/cargo",
+          "clippy",
+          "--locked",
+          "--offline",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant_ui",
+          "-p",
+          "incant_input",
+          "-p",
+          "incant_runtime",
+          "-p",
+          "incant_cook",
+          "-p",
+          "incant_doc",
+          "-p",
+          "incant_script",
+          "-p",
+          "incant_game_runtime",
+          "-p",
+          "incant_render_game",
+          "-p",
+          "incant_game_player",
+          "-p",
+          "incant_play",
+          "--features",
+          "incant_play/wasmtime-host,incant_game_runtime/ui,incant_game_player/render-input,incant_cook/typescript",
+          "--all-targets",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "exit": 0,
+        "seconds": 25.12513612501789,
+        "log": "/tmp/incant-ui-main128-checks-002/clippy.log",
+        "sha256": "539b89d05beb430fa511702c079dd1842acf4cedf953a62ebd7ccdc677e5d163"
+      },
+      {
+        "name": "window-compile",
+        "command": [
+          "./tools/cargo",
+          "check",
+          "--locked",
+          "--offline",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant_game_player",
+          "--features",
+          "native-window",
+          "--all-targets"
+        ],
+        "exit": 0,
+        "seconds": 6.756295958010014,
+        "log": "/tmp/incant-ui-main128-checks-002/window-compile.log",
+        "sha256": "11587c9b02bd5fb8e630d8930cd49421eae0593b14408828cb606ef75c22a933"
+      },
+      {
+        "name": "static-compile",
+        "command": [
+          "./tools/cargo",
+          "check",
+          "--locked",
+          "--offline",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant_script",
+          "--no-default-features",
+          "--features",
+          "static-module"
+        ],
+        "exit": 0,
+        "seconds": 2.047488208016148,
+        "log": "/tmp/incant-ui-main128-checks-002/static-compile.log",
+        "sha256": "8bb75938293c0f9add0fd23b9a142efad35d154e4c02e0bd942cd0f6e09c1810"
+      },
+      {
+        "name": "wasm32",
+        "command": [
+          "./tools/cargo",
+          "check",
+          "--locked",
+          "--offline",
+          "-j2",
+          "-p",
+          "incant_ui",
+          "-p",
+          "incant_runtime",
+          "-p",
+          "incant_render_game",
+          "--target",
+          "wasm32-unknown-unknown"
+        ],
+        "exit": 0,
+        "seconds": 7.582226124999579,
+        "log": "/tmp/incant-ui-main128-checks-002/wasm32.log",
+        "sha256": "7f73efff907652ec2046f763440dc265bce66d620f50f5e9fc24bbe2f4d68758"
+      },
+      {
+        "name": "graph",
+        "command": [
+          "python3",
+          "tools/check_runtime_dependencies.py",
+          "incant_ui",
+          "incant_game_player",
+          "incant_game_runtime",
+          "incant_render_game",
+          "incant_script",
+          "--features",
+          "incant_game_player/render-input"
+        ],
+        "exit": 0,
+        "seconds": 0.3850432909966912,
+        "log": "/tmp/incant-ui-main128-checks-002/graph.log",
+        "sha256": "664b2f4fb4756198abfeb38c00718f1ee618a53344a37a0155ab5a04efdda010"
+      },
+      {
+        "name": "tooling",
+        "command": [
+          "npm",
+          "run",
+          "test:tools"
+        ],
+        "exit": 0,
+        "seconds": 23.863168374984525,
+        "log": "/tmp/incant-ui-main128-checks-002/tooling.log",
+        "sha256": "2be4e7634a9034bbb0ff707e2c38977591f9c2f92c500f58962b6298cb2f0cc5"
+      },
+      {
+        "name": "types",
+        "command": [
+          "node",
+          "node_modules/typescript/bin/tsc",
+          "--noEmit",
+          "-p",
+          "sdk/ts/tsconfig.json"
+        ],
+        "exit": 0,
+        "seconds": 0.2021768339909613,
+        "log": "/tmp/incant-ui-main128-checks-002/types.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "sdk",
+        "command": [
+          "node",
+          "tools/generate_sdk.mjs",
+          "--check"
+        ],
+        "exit": 0,
+        "seconds": 0.04037608299404383,
+        "log": "/tmp/incant-ui-main128-checks-002/sdk.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "bridge",
+        "command": [
+          "node",
+          "tools/build_bridge.mjs",
+          "--check"
+        ],
+        "exit": 0,
+        "seconds": 0.04172429197933525,
+        "log": "/tmp/incant-ui-main128-checks-002/bridge.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "wasm-sdk",
+        "command": [
+          "python3",
+          "tools/generate_wasm_sdk.py",
+          "--check"
+        ],
+        "exit": 0,
+        "seconds": 0.10498974999063648,
+        "log": "/tmp/incant-ui-main128-checks-002/wasm-sdk.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "fmt",
+        "command": [
+          "./tools/cargo",
+          "fmt",
+          "--all",
+          "--",
+          "--check"
+        ],
+        "exit": 0,
+        "seconds": 0.8437425419979263,
+        "log": "/tmp/incant-ui-main128-checks-002/fmt.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "conventions",
+        "command": [
+          "python3",
+          "tools/generate_conventions.py",
+          "--check"
+        ],
+        "exit": 0,
+        "seconds": 0.027837708999868482,
+        "log": "/tmp/incant-ui-main128-checks-002/conventions.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "final_tests": 209,
+    "final_groups": 22,
+    "final_commands": [
+      {
+        "name": "tests",
+        "command": [
+          "./tools/cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant_script",
+          "-p",
+          "incant_game_runtime",
+          "-p",
+          "incant_game_player",
+          "-p",
+          "incant_play",
+          "--features",
+          "incant_play/wasmtime-host,incant_game_runtime/ui,incant_game_player/render-input"
+        ],
+        "exit": 0,
+        "seconds": 153.6551421250042,
+        "log": "/tmp/incant-ui-steering-union-checks/tests.log",
+        "sha256": "eb97ddb03ea39654e9906ba36bc90b87a6eaaa7417f8acf4421eec7c035b0934"
+      },
+      {
+        "name": "clippy",
+        "command": [
+          "./tools/cargo",
+          "clippy",
+          "--locked",
+          "--offline",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant_script",
+          "-p",
+          "incant_game_runtime",
+          "-p",
+          "incant_game_player",
+          "-p",
+          "incant_play",
+          "-p",
+          "incant_headless",
+          "--features",
+          "incant_play/wasmtime-host,incant_game_runtime/ui,incant_game_player/render-input,incant_headless/wasmtime-host",
+          "--all-targets",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "exit": 0,
+        "seconds": 20.511002624989487,
+        "log": "/tmp/incant-ui-steering-union-checks/clippy.log",
+        "sha256": "ef36d4a8610dd436efb241cd83714879385ab5e6d6467575e8bb3099c8495755"
+      },
+      {
+        "name": "headless",
+        "command": [
+          "./tools/cargo",
+          "build",
+          "--locked",
+          "--offline",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant_headless",
+          "--features",
+          "wasmtime-host"
+        ],
+        "exit": 0,
+        "seconds": 37.85203908299445,
+        "log": "/tmp/incant-ui-steering-union-checks/headless.log",
+        "sha256": "3187fb25443268795b044fb4905726c6dc9a2c1765eeedb9e11c9ad01d4ac172"
+      },
+      {
+        "name": "tooling",
+        "command": [
+          "npm",
+          "run",
+          "test:tools"
+        ],
+        "exit": 0,
+        "seconds": 23.321430915995734,
+        "log": "/tmp/incant-ui-steering-union-checks/tooling.log",
+        "sha256": "f516cd93b1d24bad7d03792171df5cf74d2cb2ea9020e412b3b715145f7cae05"
+      },
+      {
+        "name": "export",
+        "command": [
+          "python3",
+          "tools/probes/native-ui-export.py",
+          "/tmp/incant-ui-current-main-proof",
+          "--binary",
+          "/tmp/incant-animation-integration-target/ci/incant_headless"
+        ],
+        "exit": 0,
+        "seconds": 244.1160053339845,
+        "log": "/tmp/incant-ui-steering-union-checks/export.log",
+        "sha256": "9b8e7969abfdf0d21e0120ef5052b5331a9020445b6cf0f13b7b1ccf6120a086"
+      }
+    ],
+    "note": "Initial and final suites overlap; not a combined distinct test total. Native-window compile only; no GPU execution."
+  },
+  "fresh_export": {
+    "passed": true,
+    "authoring": {
+      "project_sha256": "059571491ed49dd49f07e24055e4a9008f3f30d09103866a9b2728a364d346b5",
+      "source_sha256": "c7f5019b17490ce016f1d75c9e36960b1d73be90ec971d13cb2ed2d093ab479c",
+      "scene": "01M4Q6T9VQDEZV51GN2Q9WW0WX",
+      "tick_rate": 60,
+      "fonts": [
+        "01M4Q6T9ZYXC0EDWDWEDTNJXF4",
+        "01M4Q6TA16KTG1DZ73CT2HGNQT",
+        "01M4Q6TA22D2HR52SN8E0WHPBR"
+      ],
+      "revision": 4,
+      "command_bus_only": true,
+      "journal_reopened": true,
+      "ui_undo_redo": true
+    },
+    "runs": [
+      {
+        "report": {
+          "flipbooks": [],
+          "frames": 9600,
+          "logs": {
+            "dropped": 0,
+            "entries": [
+              {
+                "level": "info",
+                "message": "activated",
+                "tick": 1
+              },
+              {
+                "level": "info",
+                "message": "value_changed:Name\u4e2d\u6587",
+                "tick": 4
+              },
+              {
+                "level": "info",
+                "message": "submitted:Name\u4e2d\u6587",
+                "tick": 5
+              },
+              {
+                "level": "info",
+                "message": "activated",
+                "tick": 7
+              },
+              {
+                "level": "info",
+                "message": "activated",
+                "tick": 10
+              },
+              {
+                "level": "info",
+                "message": "submitted:Name\u4e2d\u6587",
+                "tick": 12
+              }
+            ]
+          },
+          "observations": {
+            "checks": [
+              {
+                "actual": [
+                  1.2,
+                  0.0,
+                  0.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000002",
+                  "property": "translation",
+                  "tolerance": 1e-09,
+                  "type": "vector",
+                  "value": [
+                    1.2,
+                    0.0,
+                    0.0
+                  ]
+                },
+                "name": "mixed-native-motion",
+                "passed": true,
+                "tick": 12
+              }
+            ],
+            "entities": {
+              "00000000000000000000000002": {
+                "parent": null,
+                "rotation": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ],
+                "translation": [
+                  1.2,
+                  0.0,
+                  0.0
+                ],
+                "velocity": null,
+                "world_transform": [
+                  [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                  ],
+                  [
+                    1.2,
+                    0.0,
+                    0.0,
+                    1.0
+                  ]
+                ]
+              }
+            },
+            "passed": true,
+            "tick": 12,
+            "tick_rate": 60
+          },
+          "pcm_sha256": "d41a7fd4da2a77ec53c03f5e0323523448a6270d5b69152ec6a49ebbefbdd695",
+          "render_input": {
+            "binding_generation": 0,
+            "camera": "00000000000000000000000000000003",
+            "camera_position": [
+              0.0,
+              0.0,
+              8.0
+            ],
+            "decoded_payload_bytes": 1324488,
+            "first_model_position": [
+              1.2,
+              0.0,
+              0.0
+            ],
+            "first_sprite_position": null,
+            "first_text_position": [
+              1.2,
+              0.0,
+              0.0
+            ],
+            "gpu_submitted": false,
+            "mode": "cpu-only",
+            "model_count": 1,
+            "sprite_count": 0,
+            "text_atlas_bytes": 4194304,
+            "text_atlas_nonzero": 723,
+            "text_atlas_sha256": "6e87f09e32e6b19e258a160943bdbad889fabdba3f165aebb1f6641c835f3881",
+            "text_count": 1,
+            "text_font_count": 3,
+            "text_generation": 0,
+            "text_glyph_count": 8,
+            "text_missing_clusters": 0,
+            "text_rtl_glyphs": 3,
+            "tick": 12,
+            "topology_generation": 0,
+            "ui": {
+              "atlas_sha256": "0d46d6308e3ac7d113e3a56c10ad4ef18c829ae0f5828e9c67496a3a96892387",
+              "focus": "00000000000000000000000012",
+              "glyphs": 9,
+              "values": {
+                "00000000000000000000000012": "Name\u4e2d\u6587"
+              },
+              "viewport": [
+                640.0,
+                300.0
+              ],
+              "widgets": 3
+            }
+          },
+          "sources": [
+            {
+              "id": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                2
+              ],
+              "physics": null,
+              "position": [
+                1.2,
+                0.0,
+                0.0
+              ]
+            }
+          ],
+          "tick": 12
+        },
+        "pcm_sha256": "d41a7fd4da2a77ec53c03f5e0323523448a6270d5b69152ec6a49ebbefbdd695"
+      },
+      {
+        "report": {
+          "flipbooks": [],
+          "frames": 9600,
+          "logs": {
+            "dropped": 0,
+            "entries": [
+              {
+                "level": "info",
+                "message": "activated",
+                "tick": 1
+              },
+              {
+                "level": "info",
+                "message": "value_changed:Name\u4e2d\u6587",
+                "tick": 4
+              },
+              {
+                "level": "info",
+                "message": "submitted:Name\u4e2d\u6587",
+                "tick": 5
+              },
+              {
+                "level": "info",
+                "message": "activated",
+                "tick": 7
+              },
+              {
+                "level": "info",
+                "message": "activated",
+                "tick": 10
+              },
+              {
+                "level": "info",
+                "message": "submitted:Name\u4e2d\u6587",
+                "tick": 12
+              }
+            ]
+          },
+          "observations": {
+            "checks": [
+              {
+                "actual": [
+                  1.2,
+                  0.0,
+                  0.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000002",
+                  "property": "translation",
+                  "tolerance": 1e-09,
+                  "type": "vector",
+                  "value": [
+                    1.2,
+                    0.0,
+                    0.0
+                  ]
+                },
+                "name": "mixed-native-motion",
+                "passed": true,
+                "tick": 12
+              }
+            ],
+            "entities": {
+              "00000000000000000000000002": {
+                "parent": null,
+                "rotation": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ],
+                "translation": [
+                  1.2,
+                  0.0,
+                  0.0
+                ],
+                "velocity": null,
+                "world_transform": [
+                  [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                  ],
+                  [
+                    1.2,
+                    0.0,
+                    0.0,
+                    1.0
+                  ]
+                ]
+              }
+            },
+            "passed": true,
+            "tick": 12,
+            "tick_rate": 60
+          },
+          "pcm_sha256": "d41a7fd4da2a77ec53c03f5e0323523448a6270d5b69152ec6a49ebbefbdd695",
+          "render_input": {
+            "binding_generation": 0,
+            "camera": "00000000000000000000000000000003",
+            "camera_position": [
+              0.0,
+              0.0,
+              8.0
+            ],
+            "decoded_payload_bytes": 1324488,
+            "first_model_position": [
+              1.2,
+              0.0,
+              0.0
+            ],
+            "first_sprite_position": null,
+            "first_text_position": [
+              1.2,
+              0.0,
+              0.0
+            ],
+            "gpu_submitted": false,
+            "mode": "cpu-only",
+            "model_count": 1,
+            "sprite_count": 0,
+            "text_atlas_bytes": 4194304,
+            "text_atlas_nonzero": 723,
+            "text_atlas_sha256": "6e87f09e32e6b19e258a160943bdbad889fabdba3f165aebb1f6641c835f3881",
+            "text_count": 1,
+            "text_font_count": 3,
+            "text_generation": 0,
+            "text_glyph_count": 8,
+            "text_missing_clusters": 0,
+            "text_rtl_glyphs": 3,
+            "tick": 12,
+            "topology_generation": 0,
+            "ui": {
+              "atlas_sha256": "0d46d6308e3ac7d113e3a56c10ad4ef18c829ae0f5828e9c67496a3a96892387",
+              "focus": "00000000000000000000000012",
+              "glyphs": 9,
+              "values": {
+                "00000000000000000000000012": "Name\u4e2d\u6587"
+              },
+              "viewport": [
+                640.0,
+                300.0
+              ],
+              "widgets": 3
+            }
+          },
+          "sources": [
+            {
+              "id": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                2
+              ],
+              "physics": null,
+              "position": [
+                1.2,
+                0.0,
+                0.0
+              ]
+            }
+          ],
+          "tick": 12
+        },
+        "pcm_sha256": "d41a7fd4da2a77ec53c03f5e0323523448a6270d5b69152ec6a49ebbefbdd695"
+      },
+      {
+        "report": {
+          "flipbooks": [],
+          "frames": 9600,
+          "logs": {
+            "dropped": 0,
+            "entries": [
+              {
+                "level": "info",
+                "message": "activated",
+                "tick": 1
+              },
+              {
+                "level": "info",
+                "message": "value_changed:Name\u4e2d\u6587",
+                "tick": 4
+              },
+              {
+                "level": "info",
+                "message": "submitted:Name\u4e2d\u6587",
+                "tick": 5
+              },
+              {
+                "level": "info",
+                "message": "activated",
+                "tick": 7
+              },
+              {
+                "level": "info",
+                "message": "activated",
+                "tick": 10
+              },
+              {
+                "level": "info",
+                "message": "submitted:Name\u4e2d\u6587",
+                "tick": 12
+              }
+            ]
+          },
+          "observations": {
+            "checks": [
+              {
+                "actual": [
+                  1.2,
+                  0.0,
+                  0.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000002",
+                  "property": "translation",
+                  "tolerance": 1e-09,
+                  "type": "vector",
+                  "value": [
+                    1.2,
+                    0.0,
+                    0.0
+                  ]
+                },
+                "name": "mixed-native-motion",
+                "passed": true,
+                "tick": 12
+              }
+            ],
+            "entities": {
+              "00000000000000000000000002": {
+                "parent": null,
+                "rotation": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ],
+                "translation": [
+                  1.2,
+                  0.0,
+                  0.0
+                ],
+                "velocity": null,
+                "world_transform": [
+                  [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                  ],
+                  [
+                    1.2,
+                    0.0,
+                    0.0,
+                    1.0
+                  ]
+                ]
+              }
+            },
+            "passed": true,
+            "tick": 12,
+            "tick_rate": 60
+          },
+          "pcm_sha256": "d41a7fd4da2a77ec53c03f5e0323523448a6270d5b69152ec6a49ebbefbdd695",
+          "render_input": {
+            "binding_generation": 0,
+            "camera": "00000000000000000000000000000003",
+            "camera_position": [
+              0.0,
+              0.0,
+              8.0
+            ],
+            "decoded_payload_bytes": 1324488,
+            "first_model_position": [
+              1.2,
+              0.0,
+              0.0
+            ],
+            "first_sprite_position": null,
+            "first_text_position": [
+              1.2,
+              0.0,
+              0.0
+            ],
+            "gpu_submitted": false,
+            "mode": "cpu-only",
+            "model_count": 1,
+            "sprite_count": 0,
+            "text_atlas_bytes": 4194304,
+            "text_atlas_nonzero": 723,
+            "text_atlas_sha256": "6e87f09e32e6b19e258a160943bdbad889fabdba3f165aebb1f6641c835f3881",
+            "text_count": 1,
+            "text_font_count": 3,
+            "text_generation": 0,
+            "text_glyph_count": 8,
+            "text_missing_clusters": 0,
+            "text_rtl_glyphs": 3,
+            "tick": 12,
+            "topology_generation": 0,
+            "ui": {
+              "atlas_sha256": "0d46d6308e3ac7d113e3a56c10ad4ef18c829ae0f5828e9c67496a3a96892387",
+              "focus": "00000000000000000000000012",
+              "glyphs": 9,
+              "values": {
+                "00000000000000000000000012": "Name\u4e2d\u6587"
+              },
+              "viewport": [
+                640.0,
+                300.0
+              ],
+              "widgets": 3
+            }
+          },
+          "sources": [
+            {
+              "id": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                2
+              ],
+              "physics": null,
+              "position": [
+                1.2,
+                0.0,
+                0.0
+              ]
+            }
+          ],
+          "tick": 12
+        },
+        "pcm_sha256": "d41a7fd4da2a77ec53c03f5e0323523448a6270d5b69152ec6a49ebbefbdd695"
+      }
+    ],
+    "refusals": [
+      "unconfigured-consumer",
+      "malformed-preedit",
+      "unsupported-checkpoint",
+      "missing-font",
+      "tampered-font"
+    ],
+    "authoring_deleted": true,
+    "build_storage_removed": true,
+    "player_sha256": "4e4b58b8511936639d5365c46f7e2500c731a47b01f4e708691a5ffe3f86a889",
+    "debug_source_maps_removed": [
+      {
+        "path": "symbols/behavior.js.map",
+        "sha256": "cc03bad028da2243f2e56bdbe5ff0f202b4290898e5f49033b74397a2b20cc9d"
+      }
+    ],
+    "limitations": [
+      "CPU canonical UI only; GPU consumer explicitly unsupported",
+      "No OS input/IME, visual, phone or performance gate",
+      "UI checkpoint state remains unsupported"
+    ]
+  },
+  "player_bytes": 9053504,
+  "runtime_package": {
+    "player/incant_game_player": "4e4b58b8511936639d5365c46f7e2500c731a47b01f4e708691a5ffe3f86a889",
+    "player/data/empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+    "player/data/clips.bin": "ce416bddcc42d416d411ffbb02341bd36c21919773f3d26f56ca7c4eaec2762f",
+    "player/data/package.json": "59ec658e63952f17e3995002f722a4dbb0d98481af92e8fb3696b9bfb3a1acbe",
+    "player/data/world.scene": "840678bf8a40572be4f6975467d1d69ad42aa97856138cc0c3cfa8335caf9e24",
+    "player/data/input-actions.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "player/data/models/71fbcae82debc0236bda7576327733a6943d93ce7adb913cbe1d95fe931d511f.incmodel": "9be97471434742eb82eb6fe2de0287d618bce848a52fb6eb1cf7e428c6a908de",
+    "player/data/audio/6c2c72f3f439d27dfae5cd3ab7d07fed9aee5eea6e01ecf00f48d7f4a0065711.ipcm": "6c2c72f3f439d27dfae5cd3ab7d07fed9aee5eea6e01ecf00f48d7f4a0065711",
+    "player/data/audio/bb391cc186bb741011a9d500103383ccd8cdaf0164c06b379c91d77e94de9b35.json": "b0a2c95a6962d6b4447ea5d8af111e8521689276e14798a3048e2175a0367d6b",
+    "player/data/fonts/3299d6ab8033fb1d163f892dfcb1b8838cf1c46935c329d82da6f7b9e27dad82.ifont": "49e09202aadc1c7463502004f791b596480a92d22e04b9948fabf8648a004814",
+    "player/data/fonts/9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2.json": "e43c79c54c311c5759bdf686b43b9b112b0177bafd6938782ebb782d75018812",
+    "player/data/fonts/6864e1444bc7002790e682360d3f93bd45fe51b7045a64ecbf0e76e19e6b758e.json": "167d0dc13b807552b06d0195e3a90ee24f5074206dd6d6f2106ad59e65b35fde",
+    "player/data/fonts/1087d4bb69160e3e5955407294226ca3da11166a3188ada3c1a166ba14e55ceb.json": "c3fd206832637ec3ad354dee08b4c67012da904d34a3ce9ec9c97e30f70e07f0",
+    "player/data/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont": "8bd20a742cc19c0fe65b106d983ea1ed816c4cd5ca1c3d50bdc4d05aeb5f8e7a",
+    "player/data/fonts/2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9.ifont": "92960e6b23eff12e1bf13361b2b94b490d723f8d93e6945ba34b9f9b3acd2081"
+  },
+  "logs": {
+    "docs/spikes/evidence/native-ui-current-main/export-build.log.gz": {
+      "sha256": "61e3d81abdfb8da325f3f3bf6c66dcef2448b0cb6336527eb71b2ee77afe50f9",
+      "uncompressed_sha256": "282b1df64805bf0fd7e26ef8bc1b2b3b93b048007fca6ce3efa35484da51622f"
+    },
+    "docs/spikes/evidence/native-ui-current-main/initial-compile-failure.log.gz": {
+      "sha256": "b32a4786725ebbbf2bc00de731ffd26578e7367a894893846e5085a152ea3f6b",
+      "uncompressed_sha256": "f7e96225e6338e15a749170dbc1c40fcdfc4a935a5950917023528337d99a68b"
+    },
+    "docs/spikes/evidence/native-ui-current-main/initial-bridge.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/native-ui-current-main/initial-clippy.log.gz": {
+      "sha256": "6e1897652b2e49d5bfb80e674eaced3b0553d8183b847a0220026803780ca5fa",
+      "uncompressed_sha256": "539b89d05beb430fa511702c079dd1842acf4cedf953a62ebd7ccdc677e5d163"
+    },
+    "docs/spikes/evidence/native-ui-current-main/initial-conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/native-ui-current-main/initial-fmt.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/native-ui-current-main/initial-graph.log.gz": {
+      "sha256": "377c12b921ca7cc93500060c8ffa3eb03f0bedf0525379f5144823e21b80d2ef",
+      "uncompressed_sha256": "664b2f4fb4756198abfeb38c00718f1ee618a53344a37a0155ab5a04efdda010"
+    },
+    "docs/spikes/evidence/native-ui-current-main/initial-sdk.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/native-ui-current-main/initial-static-compile.log.gz": {
+      "sha256": "6f256e6073dea038b9bbd4f293dd04fff814c68722eff39e58880a78ca55aee2",
+      "uncompressed_sha256": "8bb75938293c0f9add0fd23b9a142efad35d154e4c02e0bd942cd0f6e09c1810"
+    },
+    "docs/spikes/evidence/native-ui-current-main/initial-tests.log.gz": {
+      "sha256": "4c8bcc6c059af821cfbcd44fd76723a3930d4b4cbeadaa737ea245ceb8ce1515",
+      "uncompressed_sha256": "305bb5fd8eedda3d3c3e989626e286bc7ee7fca6e7f9ff5c49bccab776cf83a9"
+    },
+    "docs/spikes/evidence/native-ui-current-main/initial-tooling.log.gz": {
+      "sha256": "fa0ec2d88012c0e86d5794f791a601989f312fcee960adccf1e3ed9d0a294359",
+      "uncompressed_sha256": "2be4e7634a9034bbb0ff707e2c38977591f9c2f92c500f58962b6298cb2f0cc5"
+    },
+    "docs/spikes/evidence/native-ui-current-main/initial-types.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/native-ui-current-main/initial-wasm-sdk.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/native-ui-current-main/initial-wasm32.log.gz": {
+      "sha256": "76df82fef4d10b493c6eb4190363341046dc6e7ec834845103e4bcc811f097af",
+      "uncompressed_sha256": "7f73efff907652ec2046f763440dc265bce66d620f50f5e9fc24bbe2f4d68758"
+    },
+    "docs/spikes/evidence/native-ui-current-main/initial-window-compile.log.gz": {
+      "sha256": "0da176d89be11a20f56969376c8c53a0aed58970abc8941672518e3e90aa9e4c",
+      "uncompressed_sha256": "11587c9b02bd5fb8e630d8930cd49421eae0593b14408828cb606ef75c22a933"
+    },
+    "docs/spikes/evidence/native-ui-current-main/final-clippy.log.gz": {
+      "sha256": "42a327b6d5d54b6ffaa341cec5c5fc84b8e7459a6eabeb86bf6c86d9a5cde2e4",
+      "uncompressed_sha256": "ef36d4a8610dd436efb241cd83714879385ab5e6d6467575e8bb3099c8495755"
+    },
+    "docs/spikes/evidence/native-ui-current-main/final-export.log.gz": {
+      "sha256": "64ab55583519ff402b2909f0d4ee27f3bae5d936976b9f77700c6a167c0d0f3d",
+      "uncompressed_sha256": "9b8e7969abfdf0d21e0120ef5052b5331a9020445b6cf0f13b7b1ccf6120a086"
+    },
+    "docs/spikes/evidence/native-ui-current-main/final-headless.log.gz": {
+      "sha256": "5aee17b74853948a3b30cf9be66550fea6dc7b8ba0ab94a448f45040ceca9983",
+      "uncompressed_sha256": "3187fb25443268795b044fb4905726c6dc9a2c1765eeedb9e11c9ad01d4ac172"
+    },
+    "docs/spikes/evidence/native-ui-current-main/final-tests.log.gz": {
+      "sha256": "461dee132f4774f18413740dce3026cbfc9c26c7bcaa58b711e33922a795930f",
+      "uncompressed_sha256": "eb97ddb03ea39654e9906ba36bc90b87a6eaaa7417f8acf4421eec7c035b0934"
+    },
+    "docs/spikes/evidence/native-ui-current-main/final-tooling.log.gz": {
+      "sha256": "019acc5705003023f4d4a73fa51d450a47b0e15d2140698d9a203ff89b8a720c",
+      "uncompressed_sha256": "f516cd93b1d24bad7d03792171df5cf74d2cb2ea9020e412b3b715145f7cae05"
+    }
+  },
+  "receipts": {
+    "docs/spikes/evidence/native-ui-current-main/export-result.json": "6db18328818e27d999dbe98ce7c4f843f846b7271593869dbf7a1cc31271b4b7",
+    "docs/spikes/evidence/native-ui-current-main/package-export.json": "d5dc4b0863920358d103c6020ae5f632a5de1df38b6d4dd225f62c496fb4bc64",
+    "docs/spikes/evidence/native-ui-current-main/checks-results.json": "8646b645f850cc85ac6d8dbe77029d66948e5e233eed0562d1818c6f975ab8c8",
+    "docs/spikes/evidence/native-ui-current-main/incant-ui-union-schema.json": "9487ee0df57d00aa0e78cc1fecfbf1d98abd4b3d03b4e19dda6ff413e30b7d72",
+    "docs/spikes/evidence/native-ui-current-main/native-ui-final-root-review.json": "720a0c0c72f18667c7fecab66e770cc434bd5d3651e6d78c266baa634d7d9743",
+    "docs/spikes/evidence/native-ui-current-main/native-ui-cpu-root-review.json": "2058ac49e0bee1b7d14d67584bbcbac98559d33f4a6da50d75d701fe67ac3328",
+    "docs/spikes/evidence/native-ui-current-main/proof-authoring.json": "c71b86f27203d641901b1b27740c0a8c664def70eb4cbcb6587eb57f950c1e99",
+    "docs/spikes/evidence/native-ui-current-main/proof-input.json": "e66e56b87cc653ad5ed5385b3f68f0528aa97d954daaeff721c311ad0b007435",
+    "docs/spikes/evidence/native-ui-current-main/proof-invalid-input.json": "26647036c7475bf6e450100062029514aa399d674b62590d236aae9ecc2d50b8",
+    "docs/spikes/evidence/native-ui-current-main/proof-observe.json": "9e2c744aa0b793c72a3bf054b0b463d5cc48163a495f531bd5967e333da37f9f",
+    "docs/spikes/evidence/native-ui-current-main/proof-refused-malformed-preedit.json": "d3f61d7bf2f8ae076680b2d3caa2c627c239ff32f08a1e7a511bed6588a42e7e",
+    "docs/spikes/evidence/native-ui-current-main/proof-refused-missing-font.json": "701771be7b35c57deb65f0a9b6059c61b2cd75d7db0e5e9c2bc3d5cd1456b949",
+    "docs/spikes/evidence/native-ui-current-main/proof-refused-tampered-font.json": "2622ada53ba27afbb20793696cfe271bb7a9894d8744e9b65dc1cff2678416a4",
+    "docs/spikes/evidence/native-ui-current-main/proof-refused-unconfigured-consumer.json": "21565dca4738f2f8d39b3248a548a1226b7299c0eceb13e1855bb7d05f8fa8a2",
+    "docs/spikes/evidence/native-ui-current-main/proof-refused-unsupported-checkpoint.json": "0af2b1fda9eb582cc15674a998dd7d8b07d28ec5750aea6416f56daefb4ad716",
+    "docs/spikes/evidence/native-ui-current-main/proof-result.json": "6db18328818e27d999dbe98ce7c4f843f846b7271593869dbf7a1cc31271b4b7",
+    "docs/spikes/evidence/native-ui-current-main/proof-run-0.json": "762b24b9b266797ea1127f365d84a52cdce331b244644cbf0b17704d2a177528",
+    "docs/spikes/evidence/native-ui-current-main/proof-run-1.json": "762b24b9b266797ea1127f365d84a52cdce331b244644cbf0b17704d2a177528",
+    "docs/spikes/evidence/native-ui-current-main/proof-run-2.json": "762b24b9b266797ea1127f365d84a52cdce331b244644cbf0b17704d2a177528"
+  },
+  "integration_review": {
+    "reviewer": "/root",
+    "patch_sha256": "148866ce531bebb012f204c0e6a2e9c398da3dfd96436064e2e26c18db1422d5",
+    "accepted": "Source review message accepts additive public-Wasm/UI scene and package argument seams, DevelopmentWasm refusal before initialization; later stable iterator len predicate accepted separately."
+  },
+  "prior_failure": "Initial combined compile used unstable ExactSizeIterator.is_empty; changed to existing len()!=0 predicate, retained failure. Earlier owner export-map and checkpoint-refusal limitations remain separately preserved.",
+  "limitations": [
+    "Canonical CPU UI only; Claude0056 owns separate rendering/platform work",
+    "Wasm UI ABI and UI checkpoints explicitly unsupported",
+    "No native/GPU/device/IME/appearance or Phase1 completion claim"
+  ],
+  "pcm_files": {
+    "run-0.pcm": "d41a7fd4da2a77ec53c03f5e0323523448a6270d5b69152ec6a49ebbefbdd695",
+    "run-1.pcm": "d41a7fd4da2a77ec53c03f5e0323523448a6270d5b69152ec6a49ebbefbdd695",
+    "run-2.pcm": "d41a7fd4da2a77ec53c03f5e0323523448a6270d5b69152ec6a49ebbefbdd695"
+  }
+}

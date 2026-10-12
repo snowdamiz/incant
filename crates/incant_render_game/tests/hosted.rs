@@ -172,6 +172,7 @@ impl Fixture {
     }
     fn settings(&self) -> NativeRenderSettings {
         NativeRenderSettings {
+            ui: None,
             text: None,
             model_cache: self.temp.path().join("models"),
             texture_cache: self.temp.path().join("textures"),
@@ -458,6 +459,7 @@ fn consumer_settings(
     failure: Failure,
 ) -> NativeRenderSettings<ConsumerSettings> {
     NativeRenderSettings {
+        ui: None,
         text: None,
         model_cache: fixture.temp.path().join("models"),
         texture_cache: fixture.temp.path().join("textures"),

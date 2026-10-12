@@ -40,7 +40,7 @@ pub(crate) fn prepare_gameplay(
 ) -> Result<Vec<PreparedEntity>, incant_doc::DocumentError> {
     for (scene_id, scene) in &validated.project().scenes {
         for (entity_id, entity) in &scene.entities {
-            if let Some(kind) = ["Tilemap", "SpriteFlipbook", "Text"]
+            if let Some(kind) = ["Tilemap", "SpriteFlipbook", "Text", "UiNode"]
                 .into_iter()
                 .find(|kind| entity.components.contains_key(*kind))
             {

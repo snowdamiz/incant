@@ -91,6 +91,16 @@ and complete Game UI/IME gates remain open.
 
 ## Current milestone
 
+Connected native UI now composes typed UiNode authoring, v13 cooked scenes,
+Taffy layout, focus/edit/activation routing and canonical CPU gameplay. The
+reviewed main129 integration passes 510 CPU cases plus 209 overlapping final
+script/Play/game cases, Clippy, compiler-disabled/wasm checks and 67 exact fresh
+schemas. A fresh current-lock shipping export deletes authoring/build storage
+and developer source maps before three 12-tick runs and five precise refusals.
+UI checkpoints and static/development Wasm UI remain explicitly unsupported.
+Claude0056 owns the separate drawing review; platform input/IME and complete
+Game UI/device gates remain open. [CPU scope and evidence](docs/spikes/native-ui-layout.md).
+
 Native two-input crossfade clocks and controls now retain independent outgoing
 playback, pause both inputs, finish at explicit endpoints and persist active
 transitions in world-save v5/session checkpoints. Older v4 animation saves keep

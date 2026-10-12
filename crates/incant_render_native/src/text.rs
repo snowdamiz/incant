@@ -43,6 +43,9 @@ pub(crate) struct Prepared {
     pub undo: Vec<glam::DMat4>,
 }
 impl Binding {
+    pub fn sources(&self) -> impl Iterator<Item = &SharedFontSource> {
+        self.fonts.values()
+    }
     pub fn load(view: &TextView<'_>, settings: TextSettings) -> Result<Self, NativeRenderError> {
         settings.atlas.validate()?;
         let catalog = FontCatalog::load(&settings.font_cache, view.fonts())?;

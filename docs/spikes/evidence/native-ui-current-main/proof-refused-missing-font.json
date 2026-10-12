@@ -1,0 +1,4 @@
+{
+  "returncode": 1,
+  "stderr": "Error: Host(Input(Font(Io(Os { code: 2, kind: NotFound, message: \"No such file or directory\" }))))\n"
+}

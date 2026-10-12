@@ -1,0 +1,23 @@
+{
+  "recorded_at": "2026-10-12T04:51:26.431492+00:00",
+  "reviewer": "astra/root",
+  "integration_head": "1dcce6229e415e8610ccb8a655951848d897e86d",
+  "tested_source": "9a01123109c36ff5720eb4f1f153cdece74ffb7a",
+  "evidence_sha256": "7d701152c9b7af7e3fea3bac2de529f5a2661e10d5456c73afa94ce4c880859f",
+  "decision": "Accepted connected CPU UI current-main integration and fresh shipping export; ready to publish subject to exact fast gate.",
+  "verified_sources": 84,
+  "verified_logs": 20,
+  "verified_receipts": 19,
+  "verified_runtime_files": 15,
+  "checks": [
+    "Reviewed additive integration and stable len predicate, preserving publicWasm validation and fail-before-initialization unsupportedUI guard.",
+    "Independently confirmed only development-wasm.py differs after tested9a in implementation/build paths; no exported player/cook/lock source changes.",
+    "Verified all bound source/log/receipt/package/PCM hashes, three identical12tick reports and typed refusal receipts.",
+    "Actual copied9,053,504B player and source-map deletion checked."
+  ],
+  "limits": [
+    "Canonical CPU UI only; Claude0056 owns separate rendering/platform work",
+    "Wasm UI ABI and UI checkpoints explicitly unsupported",
+    "No native/GPU/device/IME/appearance or Phase1 completion claim"
+  ]
+}

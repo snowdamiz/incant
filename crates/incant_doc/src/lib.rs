@@ -8,6 +8,7 @@ mod lights;
 mod navigation;
 mod physics;
 mod physics_2d;
+mod ui;
 pub use agent_budget::{AgentBudgetSettings, DEFAULT_AGENT_TOKEN_CAP, MAX_AGENT_TOKEN_CAP};
 #[cfg(feature = "crdt")]
 pub use crdt::CollaborativeDocument;
@@ -18,6 +19,7 @@ pub use incant_2d::{
 pub use incant_input::InputActions;
 pub use incant_localization::{LocaleSettings, StringTable};
 pub use incant_nav::NavigationGrid;
+pub use incant_types::UiNode;
 pub use navigation::{NavigationMesh, NavigationSource, NavigationSourceKind};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
@@ -351,6 +353,9 @@ impl Project {
                     );
                 }
             }
+            if let Err(message) = ui::validate_scene(scene) {
+                issue(format!("{path}/entities"), &message);
+            }
             for (eid, entity) in &scene.entities {
                 let path = format!("{path}/entities/{eid}");
                 if eid != &entity.id {
@@ -566,6 +571,17 @@ fn validate_component(kind: &str, value: &Value, project: &Project) -> Result<()
                 return Err("tilemap requires a color atlas texture asset".into());
             }
         }
+        "UiNode" => {
+            let node: UiNode = decode(value)?;
+            node.validate().map_err(str::to_owned)?;
+            if let Some(text) = node.kind.text() {
+                for id in &text.fonts {
+                    if project.assets.get(id).is_none_or(|a| a.kind != "font") {
+                        return Err("UI text requires existing font assets".into());
+                    }
+                }
+            }
+        }
         "Text" => {
             let text: Text = decode(value)?;
             text.validate().map_err(str::to_owned)?;
@@ -674,6 +690,7 @@ pub fn schema_registry() -> BTreeMap<String, Value> {
             json!(schemars::schema_for!(MeshRenderer)),
         ),
         ("Text".into(), json!(schemars::schema_for!(Text))),
+        ("UiNode".into(), json!(schemars::schema_for!(UiNode))),
         ("Animation".into(), json!(schemars::schema_for!(Animation))),
         ("Camera".into(), json!(schemars::schema_for!(Camera))),
         ("Tilemap".into(), json!(schemars::schema_for!(Tilemap))),

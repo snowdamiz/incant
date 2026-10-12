@@ -37,16 +37,26 @@ impl SessionProgram {
     pub(crate) fn start(self, world: &NativeWorld) -> Result<SessionVm, SessionError> {
         match self {
             #[cfg(feature = "wasmtime-host")]
-            Self::DevelopmentWasm(bytes) => Ok(SessionVm::DevelopmentWasm(Box::new(
-                incant_wasm_dev::DevModuleHost::new(&bytes)?,
-            ))),
+            Self::DevelopmentWasm(bytes) => {
+                if world.ui_view()?.nodes().len() != 0 {
+                    return Err(SessionError::UiUnsupported);
+                }
+                Ok(SessionVm::DevelopmentWasm(Box::new(
+                    incant_wasm_dev::DevModuleHost::new(&bytes)?,
+                )))
+            }
             Self::Bytecode(script) => Ok(SessionVm::Bytecode(Box::new(ScriptHost::for_world(
                 script, world,
             )?))),
             #[cfg(feature = "static-module")]
-            Self::Static(module) => Ok(SessionVm::Static(Box::new(
-                incant_wasm_runtime::StaticModule::new(module)?,
-            ))),
+            Self::Static(module) => {
+                if world.ui_view()?.nodes().len() != 0 {
+                    return Err(SessionError::UiUnsupported);
+                }
+                Ok(SessionVm::Static(Box::new(
+                    incant_wasm_runtime::StaticModule::new(module)?,
+                )))
+            }
         }
     }
 }
@@ -60,6 +70,16 @@ pub(crate) enum SessionVm {
     Static(Box<incant_wasm_runtime::StaticModule>),
 }
 impl SessionVm {
+    pub(crate) fn supports_ui(&self) -> bool {
+        match self {
+            Self::Bytecode(_) => true,
+            #[cfg(feature = "wasmtime-host")]
+            Self::DevelopmentWasm(_) => false,
+            #[cfg(feature = "static-module")]
+            Self::Static(_) => false,
+        }
+    }
+
     pub fn logs(&self) -> Result<&crate::NativeLogs, SessionError> {
         match self {
             Self::Bytecode(host) => Ok(host.logs()?),
@@ -83,5 +103,46 @@ impl SessionVm {
             #[cfg(feature = "static-module")]
             Self::Static(host) => Ok(host.tick_with_input(world, dt, input)?),
         }
+    }
+}
+
+#[cfg(all(test, feature = "wasmtime-host"))]
+mod tests {
+    use super::*;
+    use incant_runtime::{CookedEntity, CookedScene, CookedUi, StableId};
+    use incant_types::{UiKind, UiNode, UiStyle};
+    use std::sync::Arc;
+
+    #[test]
+    fn development_module_refuses_ui_before_module_initialization() {
+        let entity = StableId([1; 16]);
+        let scene = CookedScene::new(
+            StableId([0; 16]),
+            64,
+            vec![CookedEntity {
+                id: entity,
+                parent: None,
+                transform: Default::default(),
+                velocity: None,
+            }],
+        )
+        .unwrap()
+        .with_ui(vec![CookedUi {
+            entity,
+            node: Arc::new(UiNode {
+                kind: UiKind::Root,
+                style: UiStyle::default(),
+                order: 0,
+                disabled: false,
+            }),
+        }])
+        .unwrap();
+        let world = NativeWorld::new(scene);
+        // These are not Wasm bytes. UI admission must refuse before the module
+        // parser, compiler or any guest start function can be invoked.
+        assert!(matches!(
+            SessionProgram::DevelopmentWasm(vec![]).start(&world),
+            Err(SessionError::UiUnsupported)
+        ));
     }
 }
