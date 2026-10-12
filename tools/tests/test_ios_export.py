@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 import sys
 import tempfile
+from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
 
@@ -11,6 +12,21 @@ import export_ios
 import ios_archive
 
 TARGET = 'aarch64-apple-ios-sim'
+
+
+def solver_features(mode):
+    common = ['parallel'] + (['enhanced-determinism'] if mode == 'deterministic' else [])
+    return {name: (['libm_force'] if mode == 'deterministic' else []) if name == 'simba'
+            else common + (['rayon'] if name.startswith('parry') else [])
+            for name in ('rapier2d', 'rapier3d', 'parry2d', 'parry3d', 'simba')}
+
+
+def kernel_commands(mode, target):
+    lines = []
+    for name, flags in solver_features(mode).items():
+        cfg = ' '.join("--cfg 'feature=\"" + flag + "\"'" for flag in flags)
+        lines.append(f'Running `rustc --crate-name {name} --target {target} {cfg}`')
+    return '\n'.join(lines)
 
 
 class IosExport(unittest.TestCase):
@@ -29,7 +45,7 @@ class IosExport(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             project = root / 'project'
-            project.write_text(json.dumps({'scenes': {'scene': {'program': {'kind': 'wasm', 'module': 'id'}}}}))
+            project.write_text(json.dumps({'settings': {}, 'scenes': {'scene': {'program': {'kind': 'wasm', 'module': 'id'}}}}))
             with patch.object(export_ios, 'build') as build, self.assertRaisesRegex(ValueError, 'static Wasm'):
                 export_ios.export(project, root / 'output', TARGET)
             build.assert_not_called()
@@ -52,20 +68,50 @@ class IosExport(unittest.TestCase):
             with self.assertRaises(ValueError):
                 ios_archive.normal_dependencies(invalid)
 
-    def test_only_fixed_deterministic_projects_are_admitted_before_build(self):
+    def test_only_fixed_project_families_are_admitted_before_build(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory).resolve()
             project = root / 'project'
-            for settings in ({}, {'physics_mode': 'deterministic'}):
+            for settings in ({}, {'physics_mode': 'deterministic'}, {'physics_mode': 'fast'}):
                 project.write_text(json.dumps({'settings': settings, 'scenes': {'scene': {}}}))
-                ios_archive.preflight_project(project, None)
-            for mode in ('fast', 'fast-simd8', None, True, []):
+                self.assertEqual(ios_archive.preflight_project(project, None), settings.get('physics_mode', 'deterministic'))
+            for mode in ('fast-simd8', 'fast_simd8', None, True, []):
                 project.write_text(json.dumps({'settings': {'physics_mode': mode}, 'scenes': {'scene': {}}}))
                 with self.subTest(mode=mode), patch.object(export_ios, 'build') as build:
-                    with self.assertRaisesRegex(ValueError, 'deterministic project physics'):
+                    with self.assertRaisesRegex(ValueError, 'Unsupported project physics mode'):
                         export_ios.export(project, root / 'output', TARGET)
                     build.assert_not_called()
                     self.assertFalse((root / 'output').exists())
+
+    def test_each_target_selects_only_its_authored_fixed_features_before_cargo(self):
+        for target in ios_archive.TARGETS:
+            for mode in ('deterministic', 'fast'):
+                with self.subTest(target=target, mode=mode), tempfile.TemporaryDirectory() as directory:
+                    root = Path(directory).resolve()
+                    project = root / 'project'
+                    project.write_text(json.dumps({'settings': {'physics_mode': mode}, 'scenes': {'scene': {}}}))
+                    graph = 'incant_game_player v0.0.1|mobile-ffi,project,render-input\nincant_script v0.0.1|\n'
+                    graph += '\n'.join(f'{name} v1.0.0|' + ','.join(flags) for name, flags in solver_features(mode).items())
+                    commands = []
+                    class Audit:
+                        def __init__(self, _):
+                            pass
+                        def execute(self, argv, **_):
+                            argv = list(map(str, argv)); commands.append(argv)
+                            result = graph if 'tree' in argv else '/trusted/rustc\n' if argv[0] == 'rustup' else (
+                                'host: aarch64-apple-darwin\n' if '-vV' in argv else '/trusted/sdk\n')
+                            return SimpleNamespace(stdout=result)
+                    with patch.object(export_ios, 'CommandAudit', Audit), \
+                         patch.dict(export_ios.os.environ, {'PATH': '/normal'}, clear=True), \
+                         patch.object(export_ios.native_process, 'run', side_effect=RuntimeError('reached Cargo')) as run:
+                        with self.assertRaisesRegex(RuntimeError, 'reached Cargo'):
+                            export_ios.build(project, root, root / 'storage', target, None, None)
+                    argv = run.call_args.args[0]
+                    self.assertEqual(argv[argv.index('--target') + 1], target)
+                    self.assertEqual(argv[argv.index('--features') + 1].split(','),
+                                     ios_archive.CAPABILITIES + (['physics-deterministic'] if mode == 'deterministic' else []))
+                    self.assertIn('--no-default-features', argv)
+                    self.assertIn('normal', commands[-1])
 
     def test_closed_destinations_refuse_before_project_or_output_io(self):
         for target in ('aarch64-linux-android', 'aarch64-apple-darwin', 'x86_64-apple-ios', TARGET + '\n'):
@@ -102,13 +148,30 @@ class IosExport(unittest.TestCase):
                     text + f'\nRunning `rustc --crate-name incant_doc --target {TARGET}`'):
             with self.subTest(bad=bad), self.assertRaises(ValueError):
                 ios_archive.verify_codegen(bad, TARGET)
-        kernel = '\n'.join(f'Running `rustc --crate-name {name} --target {TARGET} --cfg \'feature="parallel"\' --cfg \'feature="enhanced-determinism"\'`'
-                           for name in ('rapier2d', 'rapier3d'))
-        self.assertEqual(ios_archive.kernel_provenance(kernel, TARGET)['mode'], 'fixed deterministic parallel kernel')
-        for bad in (kernel.replace(TARGET, 'aarch64-apple-darwin'), kernel.replace('parallel', 'simd-nightly'),
-                    kernel + '\n' + kernel, kernel.replace('enhanced-determinism', 'default')):
-            with self.subTest(bad=bad), self.assertRaises(ValueError):
-                ios_archive.kernel_provenance(bad, TARGET)
+        for mode in ('deterministic', 'fast'):
+            kernel = kernel_commands(mode, TARGET)
+            self.assertEqual(ios_archive.kernel_provenance(kernel, TARGET, mode)['mode'], mode)
+            opposite = 'fast' if mode == 'deterministic' else 'deterministic'
+            with self.assertRaises(ValueError):
+                ios_archive.kernel_provenance(kernel, TARGET, opposite)
+            for bad in (kernel.replace(TARGET, 'aarch64-apple-darwin'), kernel.replace('parallel', 'simd8'),
+                        kernel + '\n' + kernel, '\n'.join(kernel.splitlines()[:-1]),
+                        kernel.replace('--crate-name parry2d', '--crate-name wrong')):
+                with self.subTest(mode=mode, bad=bad), self.assertRaises(ValueError):
+                    ios_archive.kernel_provenance(bad, TARGET, mode)
+
+    def test_device_target_cannot_be_satisfied_by_simulator_prefix(self):
+        simulator = 'aarch64-apple-ios-sim'
+        device = 'aarch64-apple-ios'
+        flags = '-C opt-level=3 -C codegen-units=1 -C panic=abort -C debuginfo=2 -C split-debuginfo=off'
+        text = '\n'.join(f'Running `rustc --crate-name {name} --target {simulator} {flags}'
+                         + (' --crate-type staticlib -C lto=fat' if name == 'incant_game_player' else '') + '`'
+                         for name in ('incant_runtime', 'incant_script', 'incant_game_player'))
+        with self.assertRaisesRegex(ValueError, 'Missing fresh target invocation'):
+            ios_archive.verify_codegen(text, device)
+        for mode in ('deterministic', 'fast'):
+            with self.assertRaisesRegex(ValueError, 'Missing fresh target physics invocation'):
+                ios_archive.kernel_provenance(kernel_commands(mode, simulator), device, mode)
 
     def test_archive_headers_are_checked_independently_of_receipt_target(self):
         headers = 'Arch: aarch64\n  Platform: iossimulator\n  Version: 15.0\n'
@@ -133,6 +196,13 @@ class IosExport(unittest.TestCase):
                               'build_id': 'b' * 64, 'source_sha256': 'a' * 64, 'bytecode_sha256': 'c' * 64,
                               'hardening_sha256': 'd' * 64, 'bindings_sha256': 'e' * 64, 'source_map_sha256': 'm'}}
         ios_archive.producer_receipt(receipt, TARGET, 'p')
+        for mode in ('deterministic', 'fast'):
+            matching = copy.deepcopy(receipt)
+            matching.update(physics_mode=mode, physics_variant=mode)
+            ios_archive.producer_receipt(matching, TARGET, 'p', mode)
+            opposite = 'fast' if mode == 'deterministic' else 'deterministic'
+            with self.assertRaisesRegex(ValueError, 'selected export kernel'):
+                ios_archive.producer_receipt(matching, TARGET, 'p', opposite)
         for path, value in [(('target',), 'aarch64-apple-darwin'), (('program',), {'kind': 'wasm'}),
                             (('physics_mode',), 'fast'), (('physics_variant',), 'fast-simd8'),
                             (('physics_variant',), None),
@@ -151,7 +221,7 @@ class IosExport(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             project = root / 'project'
-            project.write_text('{"scenes":{"scene":{}}}')
+            project.write_text('{"settings":{},"scenes":{"scene":{}}}')
             evidence = root / 'evidence'
             output = root / 'archive'
 
