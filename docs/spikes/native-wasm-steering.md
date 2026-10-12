@@ -84,3 +84,12 @@ accepted the correction; three real subprocess metadata regressions pass.
 The original failure, exact red/green metadata hashes and review are retained in
 [evidence](evidence/wasm-steering-main128-graph-selection.json). Full integrated
 conformance is rerun on the frozen corrected source.
+
+The first corrected run passed all 335 actual dual-host tests and all-target
+Clippy. Its final development process helper then stopped at the same optional
+feature selection in its own shipping-root audit. That helper now audits the
+default shipping graph; its five roots, denylist and explicitly selected actual
+development build remain intact. The accepted child-only retry recreates and
+verifies the same prepared bundle, retaining the completed test/Clippy results.
+The separate failure and [review](evidence/development-graph-selection-root-review.json)
+are preserved.
