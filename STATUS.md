@@ -16,6 +16,18 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Two-bone IK retained CPU integration — locally verified
+
+The cooked-model animation player applies up to 32 ordered model-space constraints
+to sampled or blended local poses and publishes the complete hierarchy/palettes
+atomically. Both reach limits, weighted rotations, degenerate/refused chains,
+source-deleted cooked skinning and allocation-free repeated solving are covered
+by ten new cases; 118 affected tests and scoped Clippy pass. Existing cooked
+formats, normal sampling and renderer paths stay unchanged. Authored/native/SDK
+control integration, general affine chains and Claude rendered/animation-feel
+acceptance remain open; this is not the complete Phase 1 animation gate.
+[Contract and evidence](docs/spikes/native-two-bone-ik.md).
+
 ## Public Wasm physics queries — current-main verified
 
 The Rust SDK now batches native 3D/2D rays and character movement queries and

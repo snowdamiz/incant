@@ -1,0 +1,150 @@
+{
+  "base": "bc1e39657adf259cd6ada4d7c1bf70935984531b",
+  "sources": [
+    {
+      "path": "crates/incant_assets/tests/skeletal.rs",
+      "sha256": "500d4cb6f2a559813f4cc231024892f73bde1e6cc11f6399fd4cf2043251e534"
+    },
+    {
+      "path": "crates/incant_assets/tests/skeletal/ik.rs",
+      "sha256": "cf9066279ce5a84add4ff6c92f0b80c2e6740761e86a465dc31fff166fad8756"
+    },
+    {
+      "path": "crates/incant_assets_runtime/src/animation/ik.rs",
+      "sha256": "bff63b1a978f6bab5b5aa3c74660a18e60ceda8ccdb05c060e608d32e95790b9"
+    },
+    {
+      "path": "crates/incant_assets_runtime/src/animation/ik_math.rs",
+      "sha256": "75a2ae5cb770bad08dd81ccfb0a8802e7633a6a8ddb2d838f4e05b2a1d0e386f"
+    },
+    {
+      "path": "crates/incant_assets_runtime/src/animation/mod.rs",
+      "sha256": "f8ffea67017eb26572650d0bc0a9ad8424bf75841c399c86e3ae96dfeb78c12f"
+    },
+    {
+      "path": "crates/incant_assets_runtime/src/animation/player.rs",
+      "sha256": "cf5d7a751fc19d4d94f46f1b6b0c533f967c40a0b71cf0f7dd068be5ff59b375"
+    }
+  ],
+  "unchanged_build_inputs": [
+    {
+      "path": "Cargo.toml",
+      "sha256": "98768e3ad77d7294049dddf94291d024f9065596e783ae06b84585cfb69d14e8"
+    },
+    {
+      "path": "Cargo.lock",
+      "sha256": "f4457a3751bdfc3635a482578fd42a5455035ecd9c8277f0b5453673564a3faf"
+    },
+    {
+      "path": "crates/incant_assets_runtime/Cargo.toml",
+      "sha256": "1b8dabdd797ac786935d503e041429f6b0b75aaa5daab04a6ac7089683aca8cb"
+    },
+    {
+      "path": "crates/incant_assets/Cargo.toml",
+      "sha256": "dc00b7455e5a48b8d1283dd256eda0971cb607ab71bb206077e1347ed1ea1d83"
+    }
+  ],
+  "logs": [
+    {
+      "path": "docs/spikes/evidence/native-two-bone-ik-logs/native-two-bone-ik-test-001.log.gz",
+      "sha256": "117341a2efeedfd34d0c164326b09136ab8295c9a6e43a9373841d4523dadaee",
+      "uncompressed_sha256": "9f9a066ce24f6e474e08e664db265a8ad6bc9c382db6b7cca6123ce70c76acbc"
+    },
+    {
+      "path": "docs/spikes/evidence/native-two-bone-ik-logs/native-two-bone-ik-test-002.log.gz",
+      "sha256": "49bbeaee293953ad3345e718b12379903ecc817275a32bfac826c17dd0130c12",
+      "uncompressed_sha256": "146670a8d69baf959dbe7d5635380725a07e262de6b75a5320d359563753392b"
+    },
+    {
+      "path": "docs/spikes/evidence/native-two-bone-ik-logs/native-two-bone-ik-test-003.log.gz",
+      "sha256": "74f8856913be393e150144de3049b8666544cc4099aa63ed824eb24bef77caa0",
+      "uncompressed_sha256": "403aae64b99e47210c69d71295ab75934109ab05b9b4806e3082593f43b9979e"
+    },
+    {
+      "path": "docs/spikes/evidence/native-two-bone-ik-logs/native-two-bone-ik-test-004.log.gz",
+      "sha256": "65f9741ae3d04d2299e5bb465f60cae3c9a466ca55c81242c762e7dab86f66c7",
+      "uncompressed_sha256": "ff6c5f70fc0a6ddd6bf54d52dc307d6b6d996b4f294da467f77bc9305145c041"
+    },
+    {
+      "path": "docs/spikes/evidence/native-two-bone-ik-logs/native-two-bone-ik-tests-005.log.gz",
+      "sha256": "4cc82cfb8ec20cf29fca8745a5da81ca12e41e746f4856676911dae850988726",
+      "uncompressed_sha256": "49aa4ed27abb628738c3838d4a3f11bb20ca3ed5bc7127ee4db823b5768b2051"
+    },
+    {
+      "path": "docs/spikes/evidence/native-two-bone-ik-logs/native-two-bone-ik-clippy-001.log.gz",
+      "sha256": "b941491ada9b21c60b7daa7305769247551bee8fce33b8f6393de70a2c21c746",
+      "uncompressed_sha256": "38c89da54933d0979348fab5812d572f0cb26f1203e22b12d7c85666dd03b9db"
+    },
+    {
+      "path": "docs/spikes/evidence/native-two-bone-ik-logs/native-two-bone-ik-default.log.gz",
+      "sha256": "2b8595c0b1fad0cb17414b751b4247a213e6bb5b1a003e82cbc8fcd344b517c9",
+      "uncompressed_sha256": "73de32d3b30f513b02847dd5eb135670de0f4778ab6cfa9cdda957dcbb981ad7"
+    },
+    {
+      "path": "docs/spikes/evidence/native-two-bone-ik-logs/native-two-bone-ik-wasm.log.gz",
+      "sha256": "4d65d046da019a199d431970ca0c09a2c551b0903e0b464a2ca15661eac0d6d9",
+      "uncompressed_sha256": "50194bf6d0480439f374243b151e9aac83491fbf2ca979a39c64e52997286325"
+    },
+    {
+      "path": "docs/spikes/evidence/native-two-bone-ik-logs/native-two-bone-ik-graph.log.gz",
+      "sha256": "c47f7c849e70472779f3b4dae6f07b5e01dd29c7207e905f4fa4e4dcff3ee951",
+      "uncompressed_sha256": "466c27957bec6177e21911180caffd16c9a78482761e9fad8fb9622eb2023499"
+    },
+    {
+      "path": "docs/spikes/evidence/native-two-bone-ik-logs/native-two-bone-ik-hygiene.log.gz",
+      "sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e",
+      "uncompressed_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    }
+  ],
+  "commands": [
+    {
+      "command": "cargo test -p incant_assets -p incant_assets_runtime --all-features --profile ci -j2",
+      "exit": 0,
+      "passed": 118,
+      "failed": 0,
+      "ignored": 0,
+      "result_groups": 18
+    },
+    {
+      "command": "cargo clippy -p incant_assets -p incant_assets_runtime --all-targets --all-features --profile ci -j2 -- -D warnings",
+      "exit": 0
+    },
+    {
+      "command": "cargo check -p incant_assets_runtime --no-default-features --profile ci -j2",
+      "exit": 0
+    },
+    {
+      "command": "cargo check -p incant_assets_runtime --no-default-features --features visual --target wasm32-unknown-unknown --profile ci -j2",
+      "exit": 0
+    },
+    {
+      "command": "python3 tools/check_runtime_dependencies.py incant_assets_runtime --features incant_assets_runtime/visual",
+      "exit": 0
+    },
+    {
+      "command": "cargo fmt --all --check; python3 tools/generate_conventions.py --check; git diff --check",
+      "exit": 0
+    }
+  ],
+  "new_behavior": {
+    "tests": 10,
+    "spatial_reach_cases": 620,
+    "measured_iterations": 512,
+    "iteration": "weighted sample, two ordered solves, actual skin deformation, typed refusal",
+    "measured_allocations": 0,
+    "retained_heap_added_bytes": 0,
+    "source_boundary": "Each fixture deletes model.gltf/model.bin and drops importer result before runtime load_model; cache exists only for startup. In-process numeric proof, not a shipping executable or pixel test."
+  },
+  "historical_failures": [
+    "001: test-only type inference and partial-move compile errors; no production compile error",
+    "002/003: incorrect test oracle for halfway local rotations; corrected expected folded tip. Explicit deterministic quaternion half-turn tie handling and near-tie tests added during investigation, not claimed as a proven prior failure.",
+    "004: test tried importing an explicitly sheared matrix already refused by importer; replaced with valid TRS hierarchy producing inherited shear."
+  ],
+  "limits": [
+    "No authored/cooked IK declaration, native clock/control, SDK or checkpoint integration",
+    "No general nonuniform/reflected/sheared/fixed-matrix joint solution, stretch or joint limits",
+    "No GPU/visual/animation-feel/device timing/RSS acceptance",
+    "Current batch operates on already accepted pose; a prior sample call is a separate transaction"
+  ],
+  "review": "pending root independent receipt"
+}
