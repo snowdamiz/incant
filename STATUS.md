@@ -16,14 +16,14 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Native UI checkpoint state — CPU section locally verified
+## Native UI checkpoint state — CPU section merged
 
 Committed widget text, grapheme selection and logical focus now have a bounded
 binary save/load section with fresh-owner receipt invalidation. Active preedit
 refuses saving; pointer capture, physical input and notifications remain
 transient. All 41 UI tests, Clippy, wasm32 and dependency checks pass again on
 the actual main135 integration, with all five reviewed source inputs unchanged.
-Independent source review accepts this section. Complete world/session/renderer
+Independent source review accepts this section, merged in PR #136. Complete world/session/renderer
 integration remains open and existing UI-save refusals are unchanged. This is
 not a full save, native IME or Game UI gate.
 [Contract and evidence](docs/spikes/native-ui-checkpoint-state.md).
@@ -69,10 +69,11 @@ The ordinary desktop host queues bounded opaque pointer/text receipts into its
 composed UI tick, with logical-DPI relayout, exclusive pointer ownership and
 transactional cancellation. The new opt-in Tao 0.37.1 managed bridge binds native
 Cocoa/GTK/IMM contexts to exact text-owner leases, supplies preedit/commit/cancel,
-and discards retired callbacks. 105 affected CPU tests, 8 native protocol tests,
-scoped Clippy, Windows/Linux Tao compile checks and runtime graph checks pass.
-Actual OS IME interaction, canonical caret geometry and combined Claude0056 draw
-acceptance remain open. The source branch retains its unsupported draw guard;
+and discards retired callbacks. The actual main136 integration passes 119 CPU
+tests, 8 exact protocol tests, scoped Clippy, editor/Windows compile and runtime
+graph checks. Prior Linux compile evidence retains identical Tao sources and its
+entire dependency closure. Actual OS IME interaction, canonical caret geometry
+and combined window/draw acceptance remain open. This integration retains its unsupported draw guard;
 no native/GPU/device gate is claimed. See [managed IME evidence](docs/spikes/native-ui-ime.md).
 
 ## Durable budget lock release — validated in checkpoint8
@@ -127,9 +128,10 @@ tree; parents and Built-by trailer are verified. Checkpoints6–7 remain histori
 failed attempts. Later main118+ work continues through reviewed local checks and
 fast PR gates. Checkpoint9 now freezes main132 at candidate
 `7b908b38a9f2b984285b7de310dc1d2c6aa702b9` in PR #133; its comprehensive
-checks are active, with a Linux agent test failing before its intended provider
-fixture because the fixed allowance is smaller than the current tool input. The
-failure is preserved for a reviewed correction; checkpoint9 is not promoted.
+checks are active, with six jobs reaching the same pre-provider agent fixture
+failure because its fixed allowance is smaller than the current tool input. The
+reviewed test-only correction is merged in PR #135; checkpoint9 remains frozen
+and unpromoted, and full repair validation needs a later batch.
 Release does not track moving main.
 [Promotion evidence](docs/spikes/evidence/release-checkpoint-8.json).
 
@@ -169,7 +171,9 @@ script/Play/game cases, Clippy, compiler-disabled/wasm checks and 67 exact fresh
 schemas. A fresh current-lock shipping export deletes authoring/build storage
 and developer source maps before three 12-tick runs and five precise refusals.
 UI checkpoints and static/development Wasm UI remain explicitly unsupported.
-Claude0056 owns the separate drawing review; platform input/IME and complete
+Claude0056's separate offscreen drawing implementation is accepted locally and
+queued after navigation; it has not yet been integrated here. Managed IME has
+CPU/platform compilation evidence, while actual window interaction and complete
 Game UI/device gates remain open. [CPU scope and evidence](docs/spikes/native-ui-layout.md).
 
 Native two-input crossfade clocks and controls now retain independent outgoing
