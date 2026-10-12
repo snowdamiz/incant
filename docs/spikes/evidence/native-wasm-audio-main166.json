@@ -3246,12 +3246,23 @@
       "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-audio-target-adoption/retry.json"
     }
   },
-  "independent_review": "pending integration audit",
+  "independent_review": {
+    "accepted": true,
+    "path": "docs/spikes/evidence/native-wasm-audio-main166-review.json",
+    "sha256": "bf238d72f5fbcf736d3d2c1728e8fe9ca29629e800a822a84195518c86f64e42",
+    "reviewed_manifest_sha256": "51669d09ac764587064d6d4a2df69f2bf38c7c41e1f39c94d66b206986e806af"
+  },
   "limitations": [
     "Public exported guest is freshly compiled by the ordinary helper; no byte-identity claim against the distinct conformance guest build",
     "Snapshots expose desired committed declarations, never mixer cursors; actual audio behavior is checked by exact offline PCM",
     "Whole guest checkpoints remain explicitly refused",
     "No GPU/window/appearance/physical audio device/performance approval"
   ],
-  "prior_preparation_failure": "Private cloned Cargo cache lacked CACHEDIR.TAG; standard marker restored after path validation. Default-profile cargo clean left old ci products, so exact local/path package products were removed from the private clone before builds; shared target/dependencies unchanged."
+  "prior_preparation_failure": "Private cloned Cargo cache lacked CACHEDIR.TAG; standard marker restored after path validation. Default-profile cargo clean left old ci products, so exact local/path package products were removed from the private clone before builds; shared target/dependencies unchanged.",
+  "main167_ancestry": {
+    "head": "98e8c6257105dab141dd4c220dee25f5cd7c77d1",
+    "main": "4f50eb14342f8c05d460a0afe6e73445ecf67f18",
+    "all_1859_compiled_inputs_unchanged": true,
+    "only_documentation_changed_since_tested_head": true
+  }
 }

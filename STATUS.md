@@ -22,7 +22,7 @@ The accepted ops59–61 pass 483 actual-host cases and all 12 integration checks
 A fresh ordinary exported player runs three source/map/build-deleted 96-tick cases
 with 17,856 declaration scalars and 248 observations each, exact native-oracle PCM,
 and thirteen precise no-output refusals. All accepted source inputs remain exact;
-independent integration review and fast publication are pending. Desired state
+independent integration review is accepted and exact-head fast CI remains required. Desired state
 snapshots do not expose mixer cursors; whole guest saves and device gates stay open.
 [Current integration evidence](docs/spikes/native-wasm-audio-main166.md).
 

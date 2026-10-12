@@ -32,5 +32,6 @@ and complete cleanup inventory are retained. No shared/dependency cache was purg
 
 [Source, commands and full retained evidence](evidence/native-wasm-audio-main166.json)
 bind the 1,859-input freeze, copied tools, actual packages and reports. Independent
-integration audit and exact-head fast CI are pending. Whole-module checkpoints,
+integration audit is accepted; actual main167 adds release documentation with all
+1,859 compiled inputs unchanged. Exact-head fast CI remains required. Whole-module checkpoints,
 GPU/window/appearance, hardware audio, phone/performance and phase gates remain open.
