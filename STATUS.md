@@ -703,3 +703,11 @@ against the retained native clock. Actual QuickJS/NativeSession, multi-instance
 TypeScript cook, rollback and memory-bound tests pass; see
 [scope and evidence](docs/spikes/native-animation-script.md). Wasm control parity,
 rendered acceptance and the remaining animation systems are still outstanding.
+
+The public authored animation/source-free CPU export proof passes 23 numerical
+checks over 160 ticks, three identical fresh shipping replays and byte-identical
+41+119 checkpoint continuation including state/timers/locale/logs/PCM. Private
+source/build storage is removed; refusal controls withhold save and PCM. The
+separate retained fixture uses the editor-default journal and recovered Undo/Redo.
+No window/GPU/device or appearance acceptance is claimed.
+[Scope and evidence](docs/spikes/native-animation-export.md).
