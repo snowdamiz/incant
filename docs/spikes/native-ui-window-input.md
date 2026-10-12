@@ -58,3 +58,17 @@ Independent read-only source/CPU review accepted the exact five implementation
 inputs at88ad9d88 after the presentation, retry and gamepad corrections. The
 [review receipt](evidence/native-ui-window-input-review.json) preserves findings,
 verified hashes and excluded native IME/appearance gates.
+
+## Current main131 integration
+
+All five accepted implementation/test files remain byte-identical in the
+animation-graph/current-main union; only STATUS needed conflict resolution. The
+actual main131 ancestry merge changes no tested file. The integrated 72 CPU tests
+in 9 groups, native-window all-target Clippy, wasm32 UI compile, normal runtime
+graph, formatting and conventions pass. No native window, GPU or platform IME
+service ran. The explicit pre-window consumer refusal remains in force.
+[Integrated source and log receipt](evidence/native-ui-window-main131.json).
+
+The [final independent integration review](evidence/native-ui-window-main131-root-review.json)
+verified the unchanged source and log identities, with the complete
+[checked source freeze](evidence/native-ui-window-main131/freeze.json) retained.

@@ -42,7 +42,8 @@ controls; the original source-free shipping proof remains separately recorded.
 
 The ordinary desktop host now queues bounded opaque pointer/text receipts into
 its composed UI tick, with logical-DPI relayout, exclusive pointer ownership and
-transactional cancellation. 72 affected CPU tests and scoped Clippy pass. The
+transactional cancellation. The main131 integration passes 72 affected CPU
+tests, scoped Clippy, wasm32 and normal runtime dependency checks. The
 managed native preedit/activation bridge and Claude0056 real screen-space draw
 integration remain pending; no OS/GPU/device acceptance is claimed.
 [Evidence](docs/spikes/native-ui-window-input.md).
