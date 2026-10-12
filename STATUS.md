@@ -38,6 +38,10 @@ source/build-deleted processes plus a corruption refusal pass. Whole checkpoint
 bytes match uninterrupted execution. Module globals/closures remain explicitly
 ephemeral and physical input restarts neutral. Physics/audio/static continuation
 and platform durability remain unsupported; this does not complete Phase1 saves. [Contract and evidence](docs/spikes/native-session-checkpoints.md).
+Animation-bearing world-save v4 now passes the same ordinary-load boundary,
+including nondefault locale restoration and exact script-state/timer continuation;
+legacy and wrong-binding refusals stay atomic.
+[Correction evidence](docs/spikes/evidence/native-animation-checkpoint-compatibility.json).
 
 ## Native game and exported-player checkpoints — locally verified
 
