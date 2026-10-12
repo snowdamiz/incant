@@ -1,0 +1,5 @@
+{
+  "cases": [
+    {"name": "external-1x", "viewport": [640, 480], "scale": 1, "steps": [{"capture": "01-idle"}]}
+  ]
+}

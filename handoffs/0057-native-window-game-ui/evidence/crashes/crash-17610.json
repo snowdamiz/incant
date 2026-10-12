@@ -1,0 +1,176 @@
+{
+  "source": "macOS DiagnosticReports incant_game_player-2026-10-12-113923.ips (excerpt; full report not committed)",
+  "timestamp": "2026-10-12 11:39:23.00 -0400",
+  "os_version": "macOS 27.0.1 (26A434)",
+  "pid": 17610,
+  "exception": {
+    "codes": "0x0000000000000000, 0x0000000000000000",
+    "rawCodes": [
+      0,
+      0
+    ],
+    "type": "EXC_CRASH",
+    "signal": "SIGABRT"
+  },
+  "termination": {
+    "flags": 0,
+    "code": 6,
+    "namespace": "SIGNAL",
+    "indicator": "Abort trap: 6",
+    "byProc": "incant_game_player",
+    "byPid": 17610
+  },
+  "asi": {
+    "libsystem_c.dylib": [
+      "abort() called"
+    ]
+  },
+  "faulting_thread": 0,
+  "frames": [
+    {
+      "image": "libsystem_kernel.dylib",
+      "symbol": "__pthread_kill",
+      "offset": 8
+    },
+    {
+      "image": "libsystem_pthread.dylib",
+      "symbol": "pthread_kill",
+      "offset": 296
+    },
+    {
+      "image": "libsystem_c.dylib",
+      "symbol": "abort",
+      "offset": 148
+    },
+    {
+      "image": "incant_game_player",
+      "symbol": "_RNvNtNtNtCs1SSuMAdGM58_3std3sys3pal4unix14abort_internal",
+      "offset": 12
+    },
+    {
+      "image": "incant_game_player",
+      "symbol": "_RNvNtCs1SSuMAdGM58_3std7process5abort",
+      "offset": 12
+    },
+    {
+      "image": "incant_game_player",
+      "symbol": "_RNvCsdtSMxSA38aw_7___rustc24___rust_foreign_exception",
+      "offset": 56
+    },
+    {
+      "image": "incant_game_player",
+      "symbol": "_RNvCsdtSMxSA38aw_7___rustc20___rust_panic_cleanup",
+      "offset": 104
+    },
+    {
+      "image": "incant_game_player",
+      "symbol": "_RNvNvNtCs1SSuMAdGM58_3std9panicking12catch_unwind7cleanup",
+      "offset": 12
+    },
+    {
+      "image": "incant_game_player",
+      "symbol": "_RNvNtNtNtCs39uZS8SNBja_3tao13platform_impl8platform8observer24control_flow_end_handler",
+      "offset": 860
+    },
+    {
+      "image": "CoreFoundation",
+      "symbol": "__CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__",
+      "offset": 36
+    },
+    {
+      "image": "CoreFoundation",
+      "symbol": "__CFRunLoopDoObservers",
+      "offset": 648
+    },
+    {
+      "image": "CoreFoundation",
+      "symbol": "__CFRunLoopRun",
+      "offset": 908
+    },
+    {
+      "image": "CoreFoundation",
+      "symbol": "_CFRunLoopRunSpecificWithOptions",
+      "offset": 536
+    },
+    {
+      "image": "HIToolbox",
+      "symbol": "RunCurrentEventLoopInMode",
+      "offset": 320
+    },
+    {
+      "image": "HIToolbox",
+      "symbol": "ReceiveNextEventCommon",
+      "offset": 492
+    },
+    {
+      "image": "HIToolbox",
+      "symbol": "_BlockUntilNextEventMatchingListInMode",
+      "offset": 48
+    },
+    {
+      "image": "AppKit",
+      "symbol": "_DPSBlockUntilNextEventMatchingListInMode",
+      "offset": 292
+    },
+    {
+      "image": "AppKit",
+      "symbol": "_DPSNextEvent",
+      "offset": 580
+    },
+    {
+      "image": "AppKit",
+      "symbol": "-[NSApplication(NSEventRouting) _nextEventMatchingEventMask:untilDate:inMode:dequeue:]",
+      "offset": 780
+    },
+    {
+      "image": "AppKit",
+      "symbol": "-[NSApplication(NSEventRouting) nextEventMatchingMask:untilDate:inMode:dequeue:]",
+      "offset": 292
+    },
+    {
+      "image": "AppKit",
+      "symbol": "-[NSApplication run]",
+      "offset": 396
+    },
+    {
+      "image": "incant_game_player",
+      "symbol": "_RINvMs3_NtNtNtCs39uZS8SNBja_3tao13platform_impl8platform10event_loopINtB6_9EventLoopuE10run_returnNCNvNtCs7F6eIqbaLLy_18incant_game_player6window3runs_0EB1E_",
+      "offset": 344
+    },
+    {
+      "image": "incant_game_player",
+      "symbol": "_RNvNtCs7F6eIqbaLLy_18incant_game_player6window3run",
+      "offset": 6724
+    },
+    {
+      "image": "incant_game_player",
+      "symbol": "_RNvCs7F6eIqbaLLy_18incant_game_player4main",
+      "offset": 772
+    },
+    {
+      "image": "incant_game_player",
+      "symbol": "_RINvNtNtCs1SSuMAdGM58_3std3sys9backtrace28___rust_begin_short_backtraceFEINtNtCsjIpoRzUjyHQ_4core6result6ResultuINtNtCs6zY7rJBZy9D_5alloc5boxed3BoxDNtNtB1e_5error5ErrorEL_EEB19_ECs7F6eIqbaLLy_18incant_game_player",
+      "offset": 12
+    },
+    {
+      "image": "incant_game_player",
+      "symbol": "_RNCINvNtCs1SSuMAdGM58_3std2rt10lang_startINtNtCsjIpoRzUjyHQ_4core6result6ResultuINtNtCs6zY7rJBZy9D_5alloc5boxed3BoxDNtNtBI_5error5ErrorEL_EEE0Cs7F6eIqbaLLy_18incant_game_player",
+      "offset": 16
+    },
+    {
+      "image": "incant_game_player",
+      "symbol": "_RNvNtCs1SSuMAdGM58_3std2rt19lang_start_internal",
+      "offset": 936
+    },
+    {
+      "image": "incant_game_player",
+      "symbol": "main",
+      "offset": 52
+    },
+    {
+      "image": "dyld",
+      "symbol": "start",
+      "offset": 6688
+    }
+  ]
+}
