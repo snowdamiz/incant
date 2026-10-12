@@ -1,0 +1,233 @@
+{
+  "at": "2026-10-12T16:44:09.214196+00:00",
+  "scope": "Reviewed macOS text client retirement and text-field pointer focus integrated onto actual main148",
+  "tested_head": "e60da54fc9546767adb3d1331ee60753743e3b09",
+  "main": "c97d16095aa179c3da151a483962d6b9772467f9",
+  "accepted_sources": {
+    "third_party/tao/src/platform_impl/macos/text_input.rs": {
+      "accepted_commit": "f830f496",
+      "sha256": "84135a47c8767ac4a7d3bb295d80f896d50e0861eb4fcf105ad804a84e1e623c"
+    },
+    "crates/incant_game_player/examples/macos_text_retirement.rs": {
+      "accepted_commit": "f830f496",
+      "sha256": "f6d852fef8dda530af062446ac53645a421bb8fdc70fd339bbb8e36133c6be15"
+    },
+    ".github/workflows/ci.yml": {
+      "accepted_commit": "f830f496",
+      "sha256": "933b3f10cc03606476cf973484f6a493f9d0762a004e33fcb915bcbd4f7911c2"
+    },
+    "crates/incant_ui/src/focus.rs": {
+      "accepted_commit": "28e868e0",
+      "sha256": "c3db6d4caf37550e78c825d230142aa24b668f16fed7befd8a955f48a6090778"
+    },
+    "crates/incant_ui/tests/focus.rs": {
+      "accepted_commit": "28e868e0",
+      "sha256": "890241ab347ecee57ed48f15a041798e60daae44cce89d2fe23b91aadbe349bf"
+    }
+  },
+  "source_count": 1698,
+  "checks": [
+    {
+      "name": "tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_ui",
+        "-p",
+        "incant_input",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "incant_game_player/native-window,incant_ui/native",
+        "--all-targets"
+      ],
+      "exit": 0,
+      "seconds": 169.64665983300074,
+      "sha256": "b221240be6831a3ac4febc6c1455d6805ee8fd973b5949235b4a84d57c1181af"
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_ui",
+        "-p",
+        "incant_input",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "incant_game_player/native-window,incant_ui/native",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 30.534899209000287,
+      "sha256": "23c1623bfbf059f60aebe5773e8eda5d07319b28c293b967bdd5b85bb24d9ecd"
+    },
+    {
+      "name": "wasm",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_ui",
+        "--all-features",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "exit": 0,
+      "seconds": 3.462693916999342,
+      "sha256": "34095b71e392f08410df21ca7db6d9700a0ef2e56e09422633b6573d11db22aa"
+    },
+    {
+      "name": "graph",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_ui",
+        "incant_game_player",
+        "--features",
+        "incant_game_player/native-window,incant_ui/native"
+      ],
+      "exit": 0,
+      "seconds": 0.5717916249996051,
+      "sha256": "ba5a1f7aae5d25a189111a5752052d47b4bb7ccf2b89c0a333aa33f549a80550"
+    },
+    {
+      "name": "tools",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_*.py"
+      ],
+      "exit": 0,
+      "seconds": 21.88503325000056,
+      "sha256": "8fc50a50d0e5a85281a409e397f9b1d3f91ed562dfafeb0856573aab387a6df9"
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 1.2408639170007518,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.043796791000204394,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.013305124999533291,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "test_counts": {
+    "passed": 127,
+    "failed": 0,
+    "ignored": 0,
+    "result_groups": 20
+  },
+  "integration": "STATUS-only merge; all five implementation/workflow inputs byte-identical to accepted producer commits; Cargo manifests/lock and other implementation unchanged from main148",
+  "reviews": {
+    "docs/spikes/evidence/macos-text-retirement/source-review.json": "c523403372d5ab3313e3851f6f09f70273be92531e4a5748da974c5c7d2cae6e",
+    "docs/spikes/evidence/ui-pointer-focus/independent-review.json.gz": "387791fb5d9c5f7c2600aa66ecf907e89ffbef9eecace095c778b09a8b66216f"
+  },
+  "artifacts": {
+    "docs/spikes/evidence/native-input-main148/freeze.json": {
+      "sha256": "d6971b9533f53b49d8f5668b6e516cd70279a697d802a587d18c1ee4aab85e9b",
+      "uncompressed_sha256": "d6971b9533f53b49d8f5668b6e516cd70279a697d802a587d18c1ee4aab85e9b",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-input-main148-001/freeze.json"
+    },
+    "docs/spikes/evidence/native-input-main148/results.json": {
+      "sha256": "7fbfdb52341a0b652134774bb4de79216b9cd9a5c71ccaa6744d82bf23fc4272",
+      "uncompressed_sha256": "7fbfdb52341a0b652134774bb4de79216b9cd9a5c71ccaa6744d82bf23fc4272",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-input-main148-001/results.json"
+    },
+    "docs/spikes/evidence/native-input-main148/tests.log.gz": {
+      "sha256": "6f7ad7fb5564f2a8eeb715ca0f01e431ee67fa473df8f1a09a8bb9c409ee0b98",
+      "uncompressed_sha256": "b221240be6831a3ac4febc6c1455d6805ee8fd973b5949235b4a84d57c1181af",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-input-main148-001/tests.log"
+    },
+    "docs/spikes/evidence/native-input-main148/clippy.log.gz": {
+      "sha256": "4ffe3e9835283d7ca68b14332ff5b720ee70946e1b555ce5a1dbf277acd2aaa5",
+      "uncompressed_sha256": "23c1623bfbf059f60aebe5773e8eda5d07319b28c293b967bdd5b85bb24d9ecd",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-input-main148-001/clippy.log"
+    },
+    "docs/spikes/evidence/native-input-main148/wasm.log.gz": {
+      "sha256": "4a2d60be4db790ddd7f636eb0001332842aeea085f35e8416d91fe4d012ebdcb",
+      "uncompressed_sha256": "34095b71e392f08410df21ca7db6d9700a0ef2e56e09422633b6573d11db22aa",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-input-main148-001/wasm.log"
+    },
+    "docs/spikes/evidence/native-input-main148/graph.log.gz": {
+      "sha256": "3e7dcaee0e6909cdf1ee2e9033d63d4839107d31463f755c96e443b18287caf1",
+      "uncompressed_sha256": "ba5a1f7aae5d25a189111a5752052d47b4bb7ccf2b89c0a333aa33f549a80550",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-input-main148-001/graph.log"
+    },
+    "docs/spikes/evidence/native-input-main148/tools.log.gz": {
+      "sha256": "61ce9a6784ad4b49683e93abf9989a4aaa3797f1eaabc2f50dcbd8d11705af0e",
+      "uncompressed_sha256": "8fc50a50d0e5a85281a409e397f9b1d3f91ed562dfafeb0856573aab387a6df9",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-input-main148-001/tools.log"
+    },
+    "docs/spikes/evidence/native-input-main148/fmt.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-input-main148-001/fmt.log"
+    },
+    "docs/spikes/evidence/native-input-main148/conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-input-main148-001/conventions.log"
+    },
+    "docs/spikes/evidence/native-input-main148/diff.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-input-main148-001/diff.log"
+    }
+  },
+  "limits": [
+    "No GPU, native-window, input injection or provider execution in these integration checks. The AppKit example compiles as a test harness, not executed as its main.",
+    "Original actual hidden AppKit baseline/fixed lifetime proof remains source-bound producer evidence. Fresh visible typing/IME review remains the separate Claude0058 task.",
+    "No Windows/Linux runtime result or complete IME/appearance/device/phase gate claimed.",
+    "Checkpoint11 remains failed/frozen. The separate0057 numerical-reference correction must pass actual future Linux and all required release checks."
+  ]
+}
