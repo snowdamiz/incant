@@ -1,0 +1,3 @@
+Promote frozen checkpoint14 after all 23 exact-head required contexts and eight push workflows succeeded. Independently reviewed candidate e9c0b288 matches selected main160 and tree c0137be6. Failed checkpoints remain historical; later main161+ features are excluded. This advances the comprehensively tested integration baseline, not a phase or device gate.
+
+Built-by: astra

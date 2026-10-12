@@ -133,3 +133,12 @@ check and scoped native acceptance. The next deliberately frozen repair-validati
 checkpoint will select actual main after Console integration; later development
 merges will not move that candidate. Full hosted confirmation of the lock repair
 remains pending, without waiving any of the 23 contexts.
+
+## Checkpoint 14 — main160 promoted
+
+The repaired frozen candidate passed all 23 required contexts and eight exact-head
+push workflows. PR133 promoted release `2444d81f` at 2026-10-12 20:49:50 UTC, with
+exact selected/tested tree `c0137be6`. Hosted logs confirm the AppKit lifecycle
+regression and numerical UI checks pass on identified adapters. Earlier failed
+batches remain historical, and main161+ integrations are excluded.
+[Full receipt, durations and limitations](release-checkpoint-14.md).
