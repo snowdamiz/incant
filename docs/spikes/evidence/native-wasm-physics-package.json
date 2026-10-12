@@ -277,7 +277,7 @@
       "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-001/result.json"
     }
   },
-  "review": "Corrected source and final package evidence review pending. Preliminary source review found probe ledger/refusal weaknesses, corrected only after run001 terminated.",
+  "review": "Independent final source and package002 evidence review accepted f410be95 with no findings; current-main integration remains pending. Preliminary ledger/refusal weaknesses were corrected only after run001 terminated.",
   "limitations": [
     "local desktop CPU package proof, no GPU or pixel acceptance",
     "no phone/performance/phase gate",
@@ -285,5 +285,10 @@
     "repository engine and SDK source intentionally retained; only private project inputs/build/maps removed",
     "Package refusal evidence is exact terminal diagnostics/no-output publication; prior actual-host suite separately proves in-memory callback transaction rollback.",
     "Desktop unsigned host-target export; no current-main or release/device gate inferred."
-  ]
+  ],
+  "independent_final_review": {
+    "path": "docs/spikes/evidence/native-wasm-physics-package/independent-final-review.json",
+    "sha256": "4a754c0b5fa843504e1ca98eba84c13abef1ce6f89fc08b82ed18830adad321f",
+    "reviewed_evidence_sha256": "f85e39f463eb758081e26042b51b5f5282b63f630d93aa438b27ec0e6610b5e5"
+  }
 }

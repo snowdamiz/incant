@@ -30,7 +30,8 @@ integration is pending. Private `/tmp` artifacts were lost after restart, so
 new review verifies retained repository logs/receipts rather than those files. A separate ordinary
 Rust physics package proof now passes three fresh source/cache/build/map-deleted
 shipping processes, 60 native-oracle assertions per run and ten exact runtime
-refusals; its final review is pending. The actual package is retained outside
+refusals; independent final source and evidence review accepted it with no findings.
+Current-main integration remains pending. The actual package is retained outside
 `/tmp`. Full SDK, physics/guest checkpoints, device measurements and phase gates
 remain open. [Package proof](docs/spikes/native-wasm-physics-package.md).
 [Contract and evidence](docs/spikes/native-wasm-physics-queries.md).
