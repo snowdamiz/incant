@@ -60,7 +60,7 @@ review completed one real account-backed turn, Undo and reopen with retained
 login and usage. Both follow-up UI fixes passed focused native rechecking; PR #109
 merged this editor/agent/budget integration into main.
 
-Skeletal animation is the current integration: authored clip metadata, native
+Skeletal animation merged in PR #116: authored clip metadata, native
 clocks, atomic TypeScript controls, retained deformation and save continuation
 are implemented locally. The combined runtime/cook/render suite passes 397 CPU
 tests; a separate frozen renderer passes all 70 numerical Metal tests. Independent

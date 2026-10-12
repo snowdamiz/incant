@@ -162,3 +162,19 @@ Clippy, 185 bridge tests, strict app/test TypeScript, and generated bridge check
 The existing native GPU test remains ignored. Bridge race tests use synthetic IPC;
 there was no native window/GPU launch or rendered Console review in this slice.
 [Exact sources, logs and limitations](evidence/native-play-console-logs.json).
+
+### Main116 Console integration
+
+Only the accepted Console commit `34dc2af` is applied to actual main116; its older
+parent's separately queued Wasm changes are excluded. STATUS required additive
+resolution. All nine editor/bridge implementation, test and generated files match
+the independent source review exactly. The integrated 42 CPU editor tests and
+185 bridge tests pass, alongside all-target Clippy, strict app/test types,
+generated bridge, formatting and conventions. One existing GPU test remains
+ignored. The actual main merge changes ancestry only, preserving tested source.
+
+[Integrated commands and identities](evidence/native-play-console-main116.json),
+[root review](evidence/native-play-console-root-review.json), and
+[integration review](evidence/native-play-console-integration-review.json).
+Native Console appearance and live window evidence remain separate from these
+CPU/transport checks; no new provider or graphical operation was performed.
