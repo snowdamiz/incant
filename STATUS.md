@@ -101,8 +101,12 @@ Metal numerical and Claude appearance acceptance; both features stay off.
 Runtime glyph atlases proceed independently. Advanced
 rendering, animation blending/state machines/IK/root motion, complete game UI/text
 input, remaining SDK capabilities, and the Core Sample/2D sample with specified
-device performance checks still prevent a Phase 1 completion claim. The feature queue is clear after repairs #112–113; animation is next, with
-reviewed font atlas and Wasm animation parity queued separately.
+device performance checks still prevent a Phase 1 completion claim. Main now includes
+native animation (#116), Console logs (#117), Wasm animation (#118), typed text
+packaging (#119), Wasm formatting (#120), pose blending (#121) and the composed CPU
+text consumer (#122). The next private integration combines crossfade core,
+consumer and SDK; reviewed text-editing and steering work follow. Claude's text
+drawing return remains a separate source/appearance review, not a merged gate.
 
 Progress reports are scheduled approximately every 30 minutes while the goal is
 active. Report merged work separately from local checks and unmet exit gates.
@@ -146,9 +150,10 @@ content-bound keys, stable placements, explicit reset/invalidation and bounded
 outline/mask admission. Latin, Arabic, Hebrew and a real CJK subset pass numerical
 coverage tests, including a cache-deleted cooked-font reader route. Scoped 31
 tests, Clippy, wasm32 compilation and lean runtime graph checks pass on the
-main113 integration. Renderer
-upload/draw consumption, widgets/input/IME, color/CFF support, Claude appearance
-acceptance and device evidence remain; this does not complete Game UI.
+main113 integration. Main122 adds the retained composed CPU text consumer and
+actual packaged-player observations above. Text upload/draw is in Claude's returned
+implementation and independent review; it is not yet merged here. Widgets/input/IME,
+color/CFF support and device evidence remain; this does not complete Game UI.
 [Scope and evidence](docs/spikes/native-font-atlas.md).
 
 
