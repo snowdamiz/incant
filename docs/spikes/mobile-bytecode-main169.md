@@ -36,7 +36,8 @@ proof and its independent review remain separately preserved. The private target
 was cloned from an idle cache, assigned to this checkout, and only cloned local
 package outputs were cleaned before validation.
 
-Final independent integrated audit and exact-head fast CI are pending. This CPU
+[Final independent integrated audit](evidence/mobile-bytecode-main169/final-review.json)
+is accepted; exact-head fast CI remains required before merge. This CPU
 fixture does not claim shipping-profile, phone performance, rendering, signing,
 Android admission or authored-project iOS export. A separate ordinary desktop
 export detected the player library/bin audit ambiguity after main169; that failed

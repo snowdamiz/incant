@@ -2736,7 +2736,11 @@
     }
   },
   "cross_runtime": "Exact game reports and PCM for four cases across both C and Swift on macOS and iOS simulator; bytecode/hardening arrays generated freshly and identical across all three archive targets.",
-  "independent_review": "pending current-main final audit",
+  "independent_review": {
+    "decision": "accepted current-main169 source and actual execution",
+    "path": "docs/spikes/evidence/mobile-bytecode-main169/final-review.json",
+    "sha256": "ef707332407062fe7fc3742acba5e8f93bd77fc70ff623014a0c7c93359eb180"
+  },
   "limitations": [
     "ci profile CPU fixture only, not shipping-profile or phone performance",
     "iOS device compile/link only; no physical-device execution",

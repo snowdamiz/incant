@@ -26,7 +26,7 @@ and lean dependency checks pass; independent final source/execution review is ac
 cross-target admission and authored-project cross-export remain denied. No
 physical-phone or performance gate is claimed.
 Current main169 integration passes all 16 checks with new matching archives and
-64 actual C/Swift controls; final integrated audit is pending.
+64 actual C/Swift controls; final integrated audit is accepted.
 [Contract and evidence](docs/spikes/mobile-bytecode-compatibility.md);
 [current integration](docs/spikes/mobile-bytecode-main169.md).
 
@@ -722,7 +722,7 @@ Wasm HUD controls, offline audio/UI checkpoints, public physics queries, and the
 Core/Planar gameplay foundations. Wasm audio transport is merged after current-main
 shipping validation. Headless UI and the reusable player/mobile library with
 actual macOS C/Swift callers are merged. Trusted-source iOS bytecode compatibility
-has passed current-main CPU/simulator checks and awaits final integration review.
+has passed current-main CPU/simulator checks and final integration review.
 A separately reproduced desktop exporter lib/bin audit defect is being corrected;
 no failed export is counted as shipping success. Phase 1 and the finished game
 remain incomplete.
