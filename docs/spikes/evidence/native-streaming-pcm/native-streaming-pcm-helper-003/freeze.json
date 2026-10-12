@@ -1,0 +1,9 @@
+{
+  "sources": [
+    {
+      "path": "tools/probes/native-streaming-pcm.py",
+      "sha256": "3acc9997b5e73910004f4e4bb993b2bf337c76099ae5556d710aab200278afb9"
+    }
+  ],
+  "correction": "Exact Rust Termination Debug diagnostic formatting only; original fresh export success and initial helper failure retained."
+}

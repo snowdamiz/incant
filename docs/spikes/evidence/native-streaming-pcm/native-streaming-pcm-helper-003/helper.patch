@@ -1,0 +1,35 @@
+--- helper002
++++ helper003
+@@ -116,7 +116,7 @@
+                    'expect': {'type': 'exists', 'entity': p, 'value': False}} for p in pickups]]}
+     # The prior ordinary package refuses this same duration before any output.
+     run('old-bound', old / 'player/incant_game_player', old / 'player/data', replay, plan,
+-        diagnostic='Error: output frame bound\n')
++        diagnostic='Error: "output frame bound"\n')
+     assert not (out / 'old-bound.pcm').exists()
+     full = run('full', player, player.parent / 'data', replay, plan)
+     assert full['frames'] == 1_724_800 and full['tick'] == 2156
+@@ -138,18 +138,19 @@
+     # Completed failed assertions keep diagnostic PCM without a checkpoint request.
+     bad = json.loads(json.dumps(plan)); bad['checks'][0]['expect']['value'] = False
+     failed = run('failed-observation', player, player.parent / 'data', replay, bad,
+-                 diagnostic='Error: native observation assertions failed (see completed report)\n',
++                 diagnostic='Error: "native observation assertions failed (see completed report)"\n',
+                  failed_report=True)
+     assert failed['pcm_sha256'] == full['pcm_sha256'] and failed['tick'] == full['tick']
+     sentinel = out / 'existing.pcm'; sentinel.write_bytes(b'existing accepted output')
+     run('no-clobber', player, player.parent / 'data', replay, plan, output=sentinel,
+-        diagnostic='Error: File exists (os error 17)\n')
++        diagnostic='Error: Os { code: 17, kind: AlreadyExists, message: "File exists" }\n')
+     assert sentinel.read_bytes() == b'existing accepted output'
+     missing = out / 'absent/audio.pcm'
+     run('output-io', player, player.parent / 'data', replay, plan, output=missing,
+-        diagnostic=re.compile(r'Error: No such file or directory \(os error 2\) at path \"'
++        diagnostic=re.compile(r'Error: Custom \{ kind: NotFound, error: PathError \{ path: "'
+                               + re.escape(str(missing.parent / '.incant-pcm-'))
+-                              + r'[A-Za-z0-9]{6}\"\n'))
++                              + r'[A-Za-z0-9]{6}", err: Os \{ code: 2, kind: NotFound, '
++                              + r'message: "No such file or directory" \} \} \}\n'))
+     assert not missing.exists() and not list(out.glob('.incant-pcm-*'))
+     assert inventory(fixture) == original and inventory(old) == old_hashes
+     assert inventory(proof / 'package') == package_before
