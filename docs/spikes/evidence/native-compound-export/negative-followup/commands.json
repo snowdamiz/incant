@@ -1,0 +1,58 @@
+[
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/compound-export-001/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/compound-export-001/package/player/data",
+      "--ticks",
+      "1",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/compound-export-001/negative-output-followup-002/corrupt.pcm",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-evidence/compound-export-001/corrupt-observe.json",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-evidence/compound-export-001/negative-output-followup-002/corrupt.save",
+      "--load-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-evidence/compound-export-001/corrupt-input.save"
+    ],
+    "returncode": 1,
+    "seconds": 0.016014917000575224,
+    "diagnostic": "Error: Checkpoint(Integrity)",
+    "stdout": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/compound-export-001/negative-output-followup-002/corrupt-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/compound-export-001/negative-output-followup-002/corrupt-stderr.txt",
+      "sha256": "0f8649dba037ac2235d7b2e5e7d408388e0b5d58d9120a33dba0847cb18e8212"
+    },
+    "stdout_contract": "empty admission refusal",
+    "output_files_absent": true
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/compound-export-001/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/compound-export-001/package/player/data",
+      "--ticks",
+      "1",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/compound-export-001/negative-output-followup-002/wrong-observation.pcm",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-evidence/compound-export-001/wrong-observation-observe.json",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-evidence/compound-export-001/negative-output-followup-002/wrong-observation.save"
+    ],
+    "returncode": 1,
+    "seconds": 0.01378354199914611,
+    "diagnostic": "Error: \"checkpoint withheld: native observation assertions failed\"",
+    "stdout": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/compound-export-001/negative-output-followup-002/wrong-observation-stdout.txt",
+      "sha256": "a6d0306ed12bb855aa4653ae3fc8ffad2be92d3976c486fe9cde656158330483"
+    },
+    "stderr": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/compound-export-001/negative-output-followup-002/wrong-observation-stderr.txt",
+      "sha256": "ce997e587c1fc5e235c094e21f03ccada4c19ab929e504f2b0263e3e5969e038"
+    }
+  }
+]

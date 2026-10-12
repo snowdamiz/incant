@@ -1,0 +1,519 @@
+{
+  "flipbooks": [],
+  "frames": 2400,
+  "logs": {
+    "dropped": 0,
+    "entries": [
+      {
+        "level": "info",
+        "message": "{\"tick\":54,\"entity\":\"00000000000000000000000002\",\"state\":0,\"seconds\":0.75,\"elapsed\":0.05,\"flags\":3,\"paused\":0,\"sample\":[-1,0],\"blend\":[0,-1,0,0],\"kinds\":[0,2],\"split\":1,\"outer\":0.5,\"fade\":[3,0.5,15,3,0.05,0.1],\"poses\":[[0,0.5,1],[-1,0,0.0625],[6,2.625,0.0625],[5,2.25,0.1875],[4,1.875,0.1875],[3,1.5,0.0625],[2,1.125,0.0625],[1,0.75,0.1875],[0,0.375,0.1875]],\"parameters\":[0.5,0.25,0.5,4]}",
+        "tick": 54
+      },
+      {
+        "level": "info",
+        "message": "{\"tick\":54,\"entity\":\"00000000000000000000000004\",\"state\":4,\"seconds\":0.25,\"elapsed\":0.7666666666666674,\"flags\":4,\"paused\":0,\"sample\":[-1,0],\"blend\":[0,-1,0,0],\"kinds\":[2,255],\"split\":0,\"outer\":0,\"fade\":[-1,0,0,0,0,0],\"poses\":[[-1,0,1]],\"parameters\":[]}",
+        "tick": 54
+      },
+      {
+        "level": "info",
+        "message": "{\"tick\":55,\"entity\":\"00000000000000000000000002\",\"state\":0,\"seconds\":1,\"elapsed\":0.06666666666666667,\"flags\":3,\"paused\":0,\"sample\":[-1,0],\"blend\":[0,-1,0,0],\"kinds\":[0,2],\"split\":1,\"outer\":0.6666666666666666,\"fade\":[3,0.75,15,3,0.06666666666666667,0.1],\"poses\":[[0,0.75,1],[-1,0,0.0625],[6,3.5,0.0625],[5,3,0.1875],[4,2.5,0.1875],[3,2,0.0625],[2,1.5,0.0625],[1,1,0.1875],[0,0.5,0.1875]],\"parameters\":[0.5,0.25,0.5,4]}",
+        "tick": 55
+      },
+      {
+        "level": "info",
+        "message": "{\"tick\":55,\"entity\":\"00000000000000000000000004\",\"state\":4,\"seconds\":0.25,\"elapsed\":0.7833333333333341,\"flags\":4,\"paused\":0,\"sample\":[-1,0],\"blend\":[0,-1,0,0],\"kinds\":[2,255],\"split\":0,\"outer\":0,\"fade\":[-1,0,0,0,0,0],\"poses\":[[-1,0,1]],\"parameters\":[]}",
+        "tick": 55
+      },
+      {
+        "level": "info",
+        "message": "{\"tick\":56,\"entity\":\"00000000000000000000000002\",\"state\":0,\"seconds\":1.25,\"elapsed\":0.08333333333333333,\"flags\":3,\"paused\":0,\"sample\":[-1,0],\"blend\":[0,-1,0,0],\"kinds\":[0,2],\"split\":1,\"outer\":0.8333333333333333,\"fade\":[3,0,15,3,0.08333333333333333,0.1],\"poses\":[[0,0,1],[-1,0,0.0625],[6,4.375,0.0625],[5,3.75,0.1875],[4,3.125,0.1875],[3,2.5,0.0625],[2,1.875,0.0625],[1,1.25,0.1875],[0,0.625,0.1875]],\"parameters\":[0.5,0.25,0.5,4]}",
+        "tick": 56
+      },
+      {
+        "level": "info",
+        "message": "{\"tick\":56,\"entity\":\"00000000000000000000000004\",\"state\":4,\"seconds\":0.25,\"elapsed\":0.8000000000000008,\"flags\":4,\"paused\":0,\"sample\":[-1,0],\"blend\":[0,-1,0,0],\"kinds\":[2,255],\"split\":0,\"outer\":0,\"fade\":[-1,0,0,0,0,0],\"poses\":[[-1,0,1]],\"parameters\":[]}",
+        "tick": 56
+      }
+    ]
+  },
+  "observations": {
+    "checks": [
+      {
+        "actual": [
+          1.0,
+          0.5,
+          9.0
+        ],
+        "expect": {
+          "entity": "00000000000000000000000220",
+          "property": "translation",
+          "tolerance": 1e-09,
+          "type": "vector",
+          "value": [
+            1.0,
+            0.5,
+            9.0
+          ]
+        },
+        "name": "54-00000000000000000000000220",
+        "passed": true,
+        "tick": 54
+      },
+      {
+        "actual": [
+          0.0,
+          0.75,
+          3.0
+        ],
+        "expect": {
+          "entity": "00000000000000000000000221",
+          "property": "translation",
+          "tolerance": 1e-09,
+          "type": "vector",
+          "value": [
+            0.0,
+            0.75,
+            3.0
+          ]
+        },
+        "name": "54-00000000000000000000000221",
+        "passed": true,
+        "tick": 54
+      },
+      {
+        "actual": [
+          3.0,
+          0.05,
+          0.0
+        ],
+        "expect": {
+          "entity": "00000000000000000000000222",
+          "property": "translation",
+          "tolerance": 1e-09,
+          "type": "vector",
+          "value": [
+            3.0,
+            0.05,
+            0.0
+          ]
+        },
+        "name": "54-00000000000000000000000222",
+        "passed": true,
+        "tick": 54
+      },
+      {
+        "actual": [
+          0.25,
+          4.0,
+          0.0
+        ],
+        "expect": {
+          "entity": "00000000000000000000000230",
+          "property": "translation",
+          "tolerance": 1e-09,
+          "type": "vector",
+          "value": [
+            0.25,
+            4.0,
+            0.0
+          ]
+        },
+        "name": "54-00000000000000000000000230",
+        "passed": true,
+        "tick": 54
+      },
+      {
+        "actual": [
+          1.0,
+          0.6666666666666666,
+          9.0
+        ],
+        "expect": {
+          "entity": "00000000000000000000000220",
+          "property": "translation",
+          "tolerance": 1e-09,
+          "type": "vector",
+          "value": [
+            1.0,
+            0.6666666666666666,
+            9.0
+          ]
+        },
+        "name": "55-00000000000000000000000220",
+        "passed": true,
+        "tick": 55
+      },
+      {
+        "actual": [
+          0.0,
+          1.0,
+          3.0
+        ],
+        "expect": {
+          "entity": "00000000000000000000000221",
+          "property": "translation",
+          "tolerance": 1e-09,
+          "type": "vector",
+          "value": [
+            0.0,
+            1.0,
+            3.0
+          ]
+        },
+        "name": "55-00000000000000000000000221",
+        "passed": true,
+        "tick": 55
+      },
+      {
+        "actual": [
+          3.0,
+          0.06666666666666667,
+          0.0
+        ],
+        "expect": {
+          "entity": "00000000000000000000000222",
+          "property": "translation",
+          "tolerance": 1e-09,
+          "type": "vector",
+          "value": [
+            3.0,
+            0.06666666666666667,
+            0.0
+          ]
+        },
+        "name": "55-00000000000000000000000222",
+        "passed": true,
+        "tick": 55
+      },
+      {
+        "actual": [
+          0.25,
+          4.0,
+          0.0
+        ],
+        "expect": {
+          "entity": "00000000000000000000000230",
+          "property": "translation",
+          "tolerance": 1e-09,
+          "type": "vector",
+          "value": [
+            0.25,
+            4.0,
+            0.0
+          ]
+        },
+        "name": "55-00000000000000000000000230",
+        "passed": true,
+        "tick": 55
+      },
+      {
+        "actual": [
+          1.0,
+          0.8333333333333333,
+          9.0
+        ],
+        "expect": {
+          "entity": "00000000000000000000000220",
+          "property": "translation",
+          "tolerance": 1e-09,
+          "type": "vector",
+          "value": [
+            1.0,
+            0.8333333333333334,
+            9.0
+          ]
+        },
+        "name": "56-00000000000000000000000220",
+        "passed": true,
+        "tick": 56
+      },
+      {
+        "actual": [
+          0.0,
+          1.25,
+          3.0
+        ],
+        "expect": {
+          "entity": "00000000000000000000000221",
+          "property": "translation",
+          "tolerance": 1e-09,
+          "type": "vector",
+          "value": [
+            0.0,
+            1.25,
+            3.0
+          ]
+        },
+        "name": "56-00000000000000000000000221",
+        "passed": true,
+        "tick": 56
+      },
+      {
+        "actual": [
+          3.0,
+          0.08333333333333333,
+          0.0
+        ],
+        "expect": {
+          "entity": "00000000000000000000000222",
+          "property": "translation",
+          "tolerance": 1e-09,
+          "type": "vector",
+          "value": [
+            3.0,
+            0.08333333333333333,
+            0.0
+          ]
+        },
+        "name": "56-00000000000000000000000222",
+        "passed": true,
+        "tick": 56
+      },
+      {
+        "actual": [
+          0.25,
+          4.0,
+          0.0
+        ],
+        "expect": {
+          "entity": "00000000000000000000000230",
+          "property": "translation",
+          "tolerance": 1e-09,
+          "type": "vector",
+          "value": [
+            0.25,
+            4.0,
+            0.0
+          ]
+        },
+        "name": "56-00000000000000000000000230",
+        "passed": true,
+        "tick": 56
+      }
+    ],
+    "entities": {
+      "00000000000000000000000220": {
+        "parent": null,
+        "rotation": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "translation": [
+          1.0,
+          0.8333333333333333,
+          9.0
+        ],
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            1.0,
+            0.8333333333333333,
+            9.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000221": {
+        "parent": null,
+        "rotation": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "translation": [
+          0.0,
+          1.25,
+          3.0
+        ],
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.25,
+            3.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000222": {
+        "parent": null,
+        "rotation": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "translation": [
+          3.0,
+          0.08333333333333333,
+          0.0
+        ],
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            3.0,
+            0.08333333333333333,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000230": {
+        "parent": null,
+        "rotation": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "translation": [
+          0.25,
+          4.0,
+          0.0
+        ],
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.25,
+            4.0,
+            0.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "passed": true,
+    "tick": 56,
+    "tick_rate": 60
+  },
+  "pcm_sha256": "17744bb6a4ed1d9d51d85d7eb645cde30352530d494233c434027f9e3193bae4",
+  "render_input": {
+    "binding_generation": 0,
+    "camera": "00000000000000000000000000000003",
+    "camera_position": [
+      0.0,
+      0.0,
+      8.0
+    ],
+    "decoded_payload_bytes": 1638,
+    "first_model_position": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "first_sprite_position": null,
+    "first_text_position": null,
+    "gpu_submitted": false,
+    "mode": "cpu-only",
+    "model_count": 2,
+    "sprite_count": 0,
+    "text_atlas_bytes": 0,
+    "text_atlas_nonzero": 0,
+    "text_atlas_sha256": null,
+    "text_count": 0,
+    "text_font_count": 0,
+    "text_generation": 0,
+    "text_glyph_count": 0,
+    "text_missing_clusters": 0,
+    "text_rtl_glyphs": 0,
+    "tick": 56,
+    "topology_generation": 0
+  },
+  "sources": [],
+  "tick": 56
+}

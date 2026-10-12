@@ -19,9 +19,9 @@ validated extension. The root-motion work owns world revision 11.
 The TypeScript bulk snapshot exposes ordered groups, interpolation kinds, outer
 weight and outgoing state clocks as owned columns. Existing Wasm pose v1-v4 and
 graph v1 readers explicitly refuse active compound fades without writing guest
-memory or committing a command prefix. A complete compound Wasm protocol and
-ordinary source-free export proof remain required; rejection is a compatibility
-boundary, not completed public SDK parity.
+memory or committing a command prefix. A complete compound Wasm protocol remains
+required; rejection is a compatibility boundary, not completed public SDK parity.
+The ordinary QuickJS export proof now passes as described below.
 
 The CPU animation player now offers one staged sample, optional root-translation/
 rotation removal, ordered IK solve and final pose publication. Scale is preserved;
@@ -40,4 +40,38 @@ lean runtime dependency checks, strict SDK TypeScript and formatting/conventions
 pass on the frozen inputs. Independent source review accepted the 389481c7 core
 with no correctness blocker; the later authoring-test correction changes no
 production code. [Raw logs and identities](evidence/native-compound-fades.json)
-retain the earlier failures and their corrections. Full package continuation and current-main integration remain pending.
+retain the earlier failures and their corrections. Current-main integration remains pending.
+
+## Ordinary exported game and save continuation
+
+`tools/probes/native-compound-animation-export.py` authors the project through
+public commands, including the persistent TypeScript behavior, then checks Undo,
+Redo, journal reopen and Play isolation. A closed-form integer-quarter-second
+timeline independently checks every incoming/outgoing sample, inner interpolation,
+outer weight, captured speed, shared parameter and clock. It covers eight-to-eight
+tree fades, weighted-to-pair, pair-to-clip and clip-to-weighted transitions; zero
+outer weight, master pause, opposite incoming/outgoing speeds, natural completion,
+automatic edge deferral and explicit state-selection cancellation.
+
+The ordinary exporter produces a fresh shipping-profile player. Private build
+storage, authored project and caches, and external source maps are removed before
+three complete 56-tick runs and ten checkpoint split/continuation pairs. Each full
+run checks 112 complete log records and 224 public vector assertions. Every split
+matches exact final save bytes, concatenated PCM, complete logs and final CPU
+render input; per-instance persistent script counters survive reopening. Active
+compound saves use world10, while the noncompound manual-cancel split retains
+world6. All 1,126 engine inputs are unchanged from the accepted full core checks.
+
+Two negative controls bind exact diagnostics and absent PCM/save files. A corrupt
+checkpoint refuses before any stdout. An observation assertion failure emits its
+complete failed diagnostic report before withholding output files, as designed.
+An initial review follow-up incorrectly required empty stdout for that second
+case. The final helper instead checks all four false assertions, tick and complete
+logs; both controls passed again on the unchanged player. No engine change or
+recook was used to satisfy the corrected evidence requirement.
+
+[Public package identities, raw logs and continuation saves](evidence/native-compound-export.json)
+retain the original complete run and the precise output-contract follow-up.
+This proves local CPU behavior through the ordinary QuickJS export path; combined
+authored IK/root-motion and Wasm continuation, GPU appearance, device performance
+and phase gates remain separate work.
