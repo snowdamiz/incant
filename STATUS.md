@@ -18,7 +18,7 @@ visual work, and Astra owns correctness and integration.
 
 
 
-## Core Sample gameplay — local development and shipping checks passed
+## Core Sample gameplay — main156 integration verified
 
 A native TypeScript controller now covers movement, jumping, navmesh enemies,
 pickups, damage cooldown and terminal game states. Seven actual development
@@ -27,6 +27,8 @@ observations, logs and PCM; an additional exit-proximity control confirms that
 a missing pickup prevents winning. Public authoring, Undo/Redo and reopening
 pass, and Play leaves the project unchanged. Existing desktop checkpoint jobs
 now include the seven cheap headless scenarios; their hosted results are pending.
+Current-main integration also passes seven native-play scenarios with 53 checks,
+strict sample types, workflow lint and 25 CI policy tests; final publication is pending.
 The numerical room is a test fixture. Claude is assembling the finished level
 and presentation; dynamic HUD bindings, music and reference-device performance
 remain open. [Scope and evidence](docs/spikes/core-sample-gameplay.md).
