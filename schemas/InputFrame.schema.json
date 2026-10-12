@@ -639,6 +639,97 @@
         "delta"
       ],
       "type": "object"
+    },
+    "UiNotification": {
+      "oneOf": [
+        {
+          "properties": {
+            "entity_id": {
+              "type": "string"
+            },
+            "kind": {
+              "const": "activated",
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "entity_id"
+          ],
+          "type": "object"
+        },
+        {
+          "properties": {
+            "entity_id": {
+              "type": "string"
+            },
+            "kind": {
+              "const": "value_changed",
+              "type": "string"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "entity_id",
+            "value"
+          ],
+          "type": "object"
+        },
+        {
+          "properties": {
+            "entity_id": {
+              "type": "string"
+            },
+            "kind": {
+              "const": "submitted",
+              "type": "string"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "entity_id",
+            "value"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "UiSnapshot": {
+      "properties": {
+        "discarded_events": {
+          "format": "uint16",
+          "maximum": 65535,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "events": {
+          "items": {
+            "$ref": "#/$defs/UiNotification"
+          },
+          "type": "array"
+        },
+        "focused": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "text_input": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "text_input",
+        "events",
+        "discarded_events"
+      ],
+      "type": "object"
     }
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -705,9 +796,13 @@
         }
       },
       "type": "object"
+    },
+    "ui": {
+      "$ref": "#/$defs/UiSnapshot"
     }
   },
   "required": [
+    "ui",
     "actions",
     "focused",
     "keyboard",

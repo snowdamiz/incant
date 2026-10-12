@@ -207,6 +207,7 @@ fn game() -> (Game, Probe) {
         vec![clip],
         48000,
         NativeRenderSettings {
+            ui: None,
             text: None,
             model_cache: temp.path().join(".incant/cache/models"),
             texture_cache: temp.path().join("textures"),

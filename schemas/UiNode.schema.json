@@ -1,0 +1,316 @@
+{
+  "$defs": {
+    "TextWrap": {
+      "enum": [
+        "none",
+        "word",
+        "word_or_glyph"
+      ],
+      "type": "string"
+    },
+    "UiAlign": {
+      "enum": [
+        "start",
+        "end",
+        "center",
+        "stretch"
+      ],
+      "type": "string"
+    },
+    "UiDirection": {
+      "enum": [
+        "row",
+        "row_reverse",
+        "column",
+        "column_reverse"
+      ],
+      "type": "string"
+    },
+    "UiJustify": {
+      "enum": [
+        "start",
+        "end",
+        "center",
+        "space_between",
+        "space_around",
+        "space_evenly"
+      ],
+      "type": "string"
+    },
+    "UiKind": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "role": {
+              "const": "root",
+              "type": "string"
+            }
+          },
+          "required": [
+            "role"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "role": {
+              "const": "container",
+              "type": "string"
+            }
+          },
+          "required": [
+            "role"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "role": {
+              "const": "label",
+              "type": "string"
+            },
+            "text": {
+              "$ref": "#/$defs/UiText"
+            }
+          },
+          "required": [
+            "role",
+            "text"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "role": {
+              "const": "button",
+              "type": "string"
+            },
+            "text": {
+              "$ref": "#/$defs/UiText"
+            }
+          },
+          "required": [
+            "role",
+            "text"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "role": {
+              "const": "text_input",
+              "type": "string"
+            },
+            "text": {
+              "$ref": "#/$defs/UiText"
+            }
+          },
+          "required": [
+            "role",
+            "text"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "UiLength": {
+      "oneOf": [
+        {
+          "enum": [
+            "auto"
+          ],
+          "type": "string"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "pixels": {
+              "format": "float",
+              "type": "number"
+            }
+          },
+          "required": [
+            "pixels"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "Fraction of the containing block's dimension, from zero through one.",
+          "properties": {
+            "fraction": {
+              "format": "float",
+              "type": "number"
+            }
+          },
+          "required": [
+            "fraction"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "UiStyle": {
+      "additionalProperties": false,
+      "description": "Small typed flexbox subset. All lengths use logical pixels. No CSS strings,\nimplicit physical-pixel rounding, absolute positioning or scroll state.",
+      "properties": {
+        "align": {
+          "$ref": "#/$defs/UiAlign"
+        },
+        "basis": {
+          "$ref": "#/$defs/UiLength"
+        },
+        "direction": {
+          "$ref": "#/$defs/UiDirection"
+        },
+        "gap": {
+          "description": "Horizontal and vertical gaps.",
+          "items": {
+            "format": "float",
+            "type": "number"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "grow": {
+          "format": "float",
+          "type": "number"
+        },
+        "justify": {
+          "$ref": "#/$defs/UiJustify"
+        },
+        "max_size": {
+          "items": {
+            "format": "float",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "min_size": {
+          "items": {
+            "format": "float",
+            "type": "number"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "padding": {
+          "description": "Left, top, right, bottom, in logical pixels.",
+          "items": {
+            "format": "float",
+            "type": "number"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "type": "array"
+        },
+        "shrink": {
+          "format": "float",
+          "type": "number"
+        },
+        "size": {
+          "items": {
+            "$ref": "#/$defs/UiLength"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "wrap": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "size",
+        "min_size",
+        "max_size",
+        "padding",
+        "gap",
+        "direction",
+        "wrap",
+        "align",
+        "justify",
+        "grow",
+        "shrink",
+        "basis"
+      ],
+      "type": "object"
+    },
+    "UiText": {
+      "additionalProperties": false,
+      "description": "UI text has no authored width: the flexbox content box is its sole width\nauthority. IDs are authoring strings or already checked native StableIds.",
+      "properties": {
+        "content": {
+          "maxLength": 16384,
+          "type": "string"
+        },
+        "font_size": {
+          "format": "float",
+          "type": "number"
+        },
+        "fonts": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 32,
+          "minItems": 1,
+          "type": "array"
+        },
+        "line_height": {
+          "format": "float",
+          "type": "number"
+        },
+        "wrap": {
+          "$ref": "#/$defs/TextWrap"
+        }
+      },
+      "required": [
+        "content",
+        "fonts",
+        "font_size",
+        "line_height",
+        "wrap"
+      ],
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "disabled": {
+      "description": "Disabled subtrees do not accept focus or input; layout is retained.",
+      "type": "boolean"
+    },
+    "kind": {
+      "$ref": "#/$defs/UiKind"
+    },
+    "order": {
+      "description": "Siblings sort by (order, StableId), independent of map/insertion order.",
+      "format": "int32",
+      "type": "integer"
+    },
+    "style": {
+      "$ref": "#/$defs/UiStyle"
+    }
+  },
+  "required": [
+    "kind",
+    "style",
+    "order",
+    "disabled"
+  ],
+  "title": "UiNode",
+  "type": "object"
+}

@@ -12,7 +12,12 @@ pub mod physics_2d_validation;
 pub mod physics_validation;
 mod render;
 mod transform;
+mod ui;
 mod visual_asset;
+pub use ui::{
+    MAX_UI_DEPTH, MAX_UI_EXTENT, MAX_UI_NODES, UiAlign, UiDirection, UiJustify, UiKind, UiLength,
+    UiLink, UiNode, UiStyle, UiText, UiTopology, validate_ui_tree,
+};
 
 /// Stable project/runtime identifier; allocation and reference validation belong
 /// to the boundary that constructs or loads the data.

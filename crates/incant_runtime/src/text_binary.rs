@@ -60,11 +60,7 @@ pub(crate) fn read(
         fonts.push(a);
     }
     let n = r.u32()? as usize;
-    if n > crate::MAX_TEXT_NODES
-        || n > entities
-        || n > r.remaining_len() / 50
-        || (n == 0 && fonts.is_empty())
-    {
+    if n > crate::MAX_TEXT_NODES || n > entities || n > r.remaining_len() / 50 {
         return Err(SceneError::Invalid("text node count"));
     }
     let mut nodes: Vec<CookedText> = Vec::with_capacity(n);

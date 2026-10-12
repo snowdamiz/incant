@@ -10,6 +10,7 @@ mod package;
 mod program;
 mod session;
 mod startup;
+mod ui;
 #[cfg(all(
     feature = "native-window",
     any(target_os = "macos", target_os = "windows", target_os = "linux")
@@ -76,6 +77,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         0,
         scene.tick_rate(),
     )?;
+    session::validate_ui_settings(&spatial, replay.has_ui())?;
     if ticks > replay.end_tick() {
         return Err("recording does not cover requested ticks".into());
     }
@@ -102,6 +104,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             ticks,
         )?
     };
+    game.validate_ui_recording(replay.has_ui())?;
     // A requested save must be supported before gameplay begins. The final save
     // is checked again: a script may introduce an unsupported capability later.
     if checkpoint.save.is_some() {
@@ -126,7 +129,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut offset = 0;
     for tick in 1..=ticks {
         let end = offset + game.next_output_frames()? * 2;
-        game.tick(replay.events_at(tick)?, &mut output[offset..end])?;
+        game.tick_recorded(
+            replay.events_at(tick)?,
+            replay.ui_at(tick)?,
+            replay.viewport_at(tick)?,
+            &mut output[offset..end],
+        )?;
         if let Some(plan) = &mut observations {
             plan.observe(game.world()?, game.input()?)?;
         }

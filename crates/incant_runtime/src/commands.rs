@@ -14,6 +14,11 @@ pub const MAX_FRAME_COMMANDS: usize = 65_536;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum StructuralCommand {
+    /// Replace/remove UI configuration against the same final native hierarchy.
+    SetUi {
+        entity: StableId,
+        node: Option<std::sync::Arc<crate::NativeUi>>,
+    },
     /// Replace/remove text against the immutable startup font catalog.
     SetText {
         entity: StableId,
@@ -151,6 +156,7 @@ impl NativeWorld {
     /// Validation reads native values only; it never constructs a Project.
     pub fn apply(&mut self, commands: &mut FrameCommands) -> Result<(), RuntimeError> {
         self.ensure_usable()?;
+        let ui = self.prepare_ui(commands)?;
         let localization = self.prepare_locale(commands)?;
         if commands
             .iter()
@@ -242,6 +248,7 @@ impl NativeWorld {
                 c,
                 StructuralCommand::SetLocale(_)
                     | StructuralCommand::SetText { .. }
+                    | StructuralCommand::SetUi { .. }
                     | StructuralCommand::SetVelocity { .. }
                     | StructuralCommand::SetAngularVelocity { .. }
                     | StructuralCommand::SetAngularVelocity2D { .. }
@@ -279,6 +286,7 @@ impl NativeWorld {
                     }
                     StructuralCommand::SetLocale(_)
                     | StructuralCommand::SetText { .. }
+                    | StructuralCommand::SetUi { .. }
                     | StructuralCommand::ControlAnimation { .. }
                     | StructuralCommand::ControlFlipbook { .. }
                     | StructuralCommand::ControlAudio { .. } => continue,
@@ -470,6 +478,7 @@ impl NativeWorld {
             self.world.insert_resource(hierarchy);
         }
         self.publish_text(text);
+        self.publish_ui(ui);
         if let Some(localization) = localization {
             self.localization = localization;
         }
@@ -571,6 +580,7 @@ impl NativeWorld {
                 }
                 StructuralCommand::SetLocale(_)
                 | StructuralCommand::SetText { .. }
+                | StructuralCommand::SetUi { .. }
                 | StructuralCommand::ControlAnimation { .. }
                 | StructuralCommand::ControlFlipbook { .. }
                 | StructuralCommand::ControlAudio { .. } => {}
