@@ -1,0 +1,8 @@
+{
+  "at": "2026-10-12T15:06:53.901929+00:00",
+  "manifest_sha256": "cd596c6f017b5fb306390111182bbb851e570a53e430d4752f03e3a48d3c4f10",
+  "verified_files": 701,
+  "modules": 140,
+  "bundle": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-main144-001/conformance/static-wasm-inputs-8xsv7xns/bundle",
+  "status": "Verified during immutable actual-host run before helper-owned cleanup; final command outcomes remain pending."
+}

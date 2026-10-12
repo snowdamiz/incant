@@ -1,0 +1,79 @@
+{
+  "passed": true,
+  "target": "aarch64-apple-darwin",
+  "player_sha256": "339143206187f3a5003856378be759c6fc42429789e43b667592c133c19a735f",
+  "program": {
+    "fingerprint": "57d74a89adfc0f151834b917213508026717d73ca25f2f6579a226ffc0af7ac1",
+    "input_sha256": "dbe9d00267c77566e1c912420057b6d6370594b96c67bcffc2bdbfe3097ecbd8",
+    "kind": "wasm",
+    "module": "01M4RAV7VCG9D46VFTY12BP3YZ",
+    "prepared_sha256": "7114bef41a9aa95ae12d235caaeb28b1b425f3581ee62ba645ab6f51f738c183",
+    "registry_sha256": "5176cdc3d29c1b8184e1a69f8bd4fdf44caaa8d7d282378596351410fbf25eaf",
+    "translator": "wasm2c-1.0.42"
+  },
+  "ticks_each": 20,
+  "fresh_ordinary_package_runs": 3,
+  "native_oracle_checks": 60,
+  "successful_same_input_replay_routes": true,
+  "command_receipts_sha256": "9539b798681dc4de43281e7bd8359685d973f3cf27050267a3dccb55b0da83d6",
+  "package_refusal_boundary": "exact runtime diagnostic and no PCM/stdout publication; not a session-step rollback claim",
+  "native_event_enter_exit_counts": [
+    1,
+    1,
+    3,
+    1
+  ],
+  "public_import_atomic_select_undo_redo_journal_reopen": true,
+  "source_deleted_before_development_and_export": true,
+  "authoring_cache_build_maps_deleted_before_three_runs": true,
+  "no_static_module_fixture_flag": true,
+  "refusals": [
+    "dev-bad-owner",
+    "dev-short-scratch",
+    "dev-bad-number",
+    "dev-late-command",
+    "dev-cache-mismatch",
+    "package-bad-owner",
+    "package-short-scratch",
+    "package-bad-number",
+    "package-late-command",
+    "checkpoint"
+  ],
+  "removed_private_files": {
+    "authoring/.incant/cache/wasm/57d74a89adfc0f151834b917213508026717d73ca25f2f6579a226ffc0af7ac1.wasm.json": "8dc714053e617b78b20f312e0b3dd5876b9312d9bd30de837e24f558d255c082",
+    "authoring/.incant-source-transactions/lock": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "authoring/project.journal.jsonl": "fbd8f9df62d0aa0e29c65bb546c92ac0afac5002aa028846ae7c115b178680cb",
+    "authoring/project.json": "4b70f0c312d794a68dac5e8420a3b835885eb77a2ded8b74202233d58c17790f",
+    "trusted-tools/wabt/bin/wasm2c": "4f1ba571063deca36e330ad67cf0414dbbaee944c7d920df7a338a30725570f2",
+    "trusted-tools/wabt/bin/wat2wasm": "69117d2b10c1818cf6da921f96ab4e3c50e45a05a848d6c4c1788375aec4d250",
+    "trusted-tools/wabt.tar.gz": "3f654779b436c628db3ca4323c51538815f5fbc887a6d5f3bb1c18d36281e240"
+  },
+  "retained_package_hashes": {
+    "package/build.log": "aaf89be917f886a2b38a777a5299cb99d2f6996d8d6ec791fb68b44884003b72",
+    "package/export.json": "2680e7c4f4a7d78f2187bf2e31e6c458aec41453fb15d3d88e0dfee788959f8c",
+    "package/player/data/clips.bin": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+    "package/player/data/empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+    "package/player/data/input-actions.json": "6f900cc261940d23e72c440d5e847b3ba7f3ff4570dfcb1aec4852ff4ebe874f",
+    "package/player/data/package.json": "f9effad2c87783812fc53598ddb72068f80446ee53fd49e06a20ae30b71d7fec",
+    "package/player/data/world.scene": "90e10da52c67f467aecbb30188c36e781d46be9415f75d646472f3e672328342",
+    "package/player/incant_game_player": "339143206187f3a5003856378be759c6fc42429789e43b667592c133c19a735f",
+    "package/project-build.json": "c6176ff614beb1813392311d407b03ba1b53bcace96ed2429028dcb68a2943ce",
+    "package/symbols/incant_game_player.dSYM/Contents/Info.plist": "37b5d3d6e393054bcdc632bec0e7926520d78b92c9a80550615df4f9297fb7ce",
+    "package/symbols/incant_game_player.dSYM/Contents/Resources/DWARF/incant_game_player-9d1b5d22c3875eea": "a6778360f30290cf607d5424525fedf79815110af904e7ead2a6104f4ad587cd",
+    "package/symbols/incant_game_player.dSYM/Contents/Resources/Relocations/aarch64/incant_game_player-9d1b5d22c3875eea.yml": "e23ac5e629e564ce79e7844b6591a78aa135db6f6d7e8586bcbe2958dcd683ae",
+    "package/symbols/script-symbols.json": "1066c321e65b569275fb1011a167a54e668d15f6639d80fac0934815f8355b50"
+  },
+  "oracle_binary_sha256": "4bc321ca6c42ec43f65a5c2f4d44d47ed1339367b57b6395b4ca9d5e17805889",
+  "headless_binary_sha256": "1b8387e505d2ecc248aefbf8a50ce122a61151012b979a4ec3cc074cea3c5879",
+  "proof_source_hashes": {
+    "tools/probes/native-wasm-physics-export.py": "bfb5d3baa6ffaf02f807c8c432689244307c1ebe86e0656b9b9b0c6b441ade36",
+    "tools/probes/native-wasm-physics-export/behavior.rs": "bf8374956da896902960634bf80be86b9d6835ff2ca5a6ea07bed669131b0814",
+    "crates/incant_runtime/examples/physics_package_oracle.rs": "92a106f5a20572d8f749c7d1e6a2716cbfc692374c0c80171ed2212f885715f0"
+  },
+  "limits": [
+    "local desktop CPU package proof, no GPU or pixel acceptance",
+    "no phone/performance/phase gate",
+    "whole guest and physics checkpoints remain unsupported",
+    "repository engine and SDK source intentionally retained; only private project inputs/build/maps removed"
+  ]
+}

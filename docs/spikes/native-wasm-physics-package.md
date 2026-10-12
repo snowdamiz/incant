@@ -5,7 +5,7 @@ queries. It builds on the independently accepted [physics SDK](native-wasm-physi
 without changing production ABI, physics algorithms, session or world codecs.
 The new proof is stored outside `/tmp` so its package and receipts can survive a
 machine restart. Corrected proof002 passed independent final source and evidence
-review with no findings; main integration remains pending.
+review with no findings; the later current-main integration is recorded below.
 
 ## Connected path
 
@@ -109,3 +109,40 @@ Node after restart. Node 22.23.3 was found in the user's fnm installation; rerun
 the unchanged suite with Node available passed 233 tests with 4 existing skips.
 Both outcomes remain recorded. The oracle's scoped Clippy and the actual no_std
 Wasm guest compilation passed before either package run.
+
+## Integration on main #144
+
+The accepted SDK and package-probe commits compose with actual main #144 without
+production changes. The tested and actual-main ancestry trees are identical;
+all 1533 frozen source/build inputs match. The integrated suite passes 382 actual
+Wasmtime/wasm2c cases in 67 groups and 202 native cases in 30 groups, with no
+failures or ignored tests. All-target Clippy, wasm32, generated files, lean
+dependency checks and 235 Python tooling cases (four existing skips) pass.
+
+A fresh ordinary shipping export produced player SHA-256
+`339143206187f3a5003856378be759c6fc42429789e43b667592c133c19a735f`.
+The first runner then failed because the comparison headless executable lacked
+its optional `wasmtime-host` feature. This did not invalidate the completed
+shipping export. The failed runner and original command ledger are retained.
+Only the comparison host was rebuilt with the required feature; a separately
+reviewed continuation resumed the original oracle/development/refusal/deletion
+and static-run phases. No second shipping build was performed.
+
+All thirteen package files match exactly before and after continuation. Captured
+Wasmtime and three fresh ordinary shipping processes pass the same sixty native
+oracle assertions, twenty logs and exact PCM comparison. Ten refusal controls
+match their expected diagnostic and publish no output. Private authoring/cache,
+tools and build storage are absent before shipping launches; no source maps
+remain. The final removal inventory covers continuation cleanup only. Original
+guest source/build absence and its compilation receipt are separately retained;
+the interrupted runner's lost in-memory removal inventory was not reconstructed.
+
+The [current integration evidence](evidence/native-wasm-physics-main144.json)
+binds all retained logs, the private continuation diff and review, new development
+host identity, unchanged package hashes and exact main ancestry. The actual
+package remains in `~/.codex/incant-integration-evidence/physics-main144-001/public-export`.
+This remains local CPU evidence with the refusal and coverage limits above.
+
+The [independent integration review](evidence/native-wasm-physics-main144/root-final-review.json)
+reverified the complete frozen inputs, retained logs and actual unchanged package
+files, reports and exact refusal outputs before publication.

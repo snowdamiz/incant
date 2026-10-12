@@ -31,24 +31,23 @@ Physics/module/device-native audio and native-window/GPU checkpoint routes remai
 unsupported; arbitrary VM heap/effects and full save/device gates are not claimed.
 [Contract and evidence](docs/spikes/native-audio-session-checkpoints.md).
 
-## Public Wasm physics queries — locally verified
+## Public Wasm physics queries — current-main verified
 
 The Rust SDK now batches native 3D/2D rays and character movement queries and
 copies nondraining sensor enter/exit observations. Callback-scoped native solver
 loans preserve committed-state visibility, exact world/epoch authority and atomic
 rollback. Event frames retain scene identity and dimension. Published operations
-0–38 and old layouts remain unchanged. Actual Wasmtime/wasm2c conformance passes
-382 tests/doctests, all-target Clippy and three development processes; 190 native
-runtime tests, wasm32/tooling and lean dependency checks also pass. Independent
-source and durable final evidence review accepted the implementation; main
-integration is pending. Private `/tmp` artifacts were lost after restart, so
-new review verifies retained repository logs/receipts rather than those files. A separate ordinary
-Rust physics package proof now passes three fresh source/cache/build/map-deleted
-shipping processes, 60 native-oracle assertions per run and ten exact runtime
-refusals; independent final source and evidence review accepted it with no findings.
-Current-main integration remains pending. The actual package is retained outside
-`/tmp`. Full SDK, physics/guest checkpoints, device measurements and phase gates
-remain open. [Package proof](docs/spikes/native-wasm-physics-package.md).
+0–38 and old layouts remain unchanged. Integration on main #144 passes 382 actual
+Wasmtime/wasm2c cases, 202 native cases, all-target Clippy, wasm32/tooling and lean
+dependency checks. All 1533 frozen inputs remain unchanged after main integration.
+A fresh ordinary shipping package passes three source/cache/build/map-deleted
+processes, 60 native-oracle assertions per run and ten exact runtime refusals.
+The initial comparison host omitted its optional Wasmtime feature; its successful
+shipping package was preserved byte-for-byte while the host was rebuilt and the
+reviewed remaining proof resumed. The original failure stays recorded. Full SDK,
+physics/guest checkpoints, device measurements and phase gates remain open.
+[Package proof](docs/spikes/native-wasm-physics-package.md) and
+[current integration](docs/spikes/evidence/native-wasm-physics-main144.json).
 [Contract and evidence](docs/spikes/native-wasm-physics-queries.md).
 
 ## Nested animation tree numeric core — current-main verified
@@ -267,6 +266,14 @@ and complete Game UI/IME gates remain open.
 [Evidence](docs/spikes/text-bidi-wrap.md).
 
 ## Current milestone
+
+Main #144 includes the multi-pose sampler and bounded nested/2D animation numeric
+core; authored tree playback and its complete SDK/render route remain separate
+local work. The current public Wasm physics integration adds real query/event
+capabilities and an ordinary source-deleted package proof, as recorded above.
+Offline audio checkpoint continuation is reviewed locally and queued separately.
+Checkpoint 11 remains failed and frozen; its Linux rendering repair is with
+Claude. No release or phase gate advances on these local feature results.
 
 Native animation graphs now connect ordinary typed authoring, captured models,
 v14 cooking, deterministic native clip states and flat adjacent-pair 1D blends.

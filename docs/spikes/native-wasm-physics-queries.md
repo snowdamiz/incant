@@ -76,8 +76,10 @@ generated files, formatting and lean dependency checks pass. The static-player
 normal dependency graph excludes Wasmtime, the Wasm cooker and authoring crates.
 
 Independent source review accepted the exact 20 production hashes and unchanged
-published ABI prefixes. Final durable evidence review accepted the scoped implementation; main
-integration remains pending.
+published ABI prefixes. Final durable evidence review accepted the scoped implementation. The subsequent
+[current-main integration](evidence/native-wasm-physics-main144.json) passes the
+same 382 actual-host cases plus 202 current native cases and the ordinary public
+package proof. Historical producer counts below retain their original scope.
 The [durable evidence](evidence/native-wasm-physics-queries.json) binds all source
 and test inputs, literal commands, compressed logs, manifests and source-review
 receipt. Final proof003 prepared 140 modules; all 701 files were independently

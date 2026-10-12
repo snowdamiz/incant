@@ -1,0 +1,10 @@
+{
+  "at": "2026-10-12T15:25:17.855971+00:00",
+  "reviewer": "/root",
+  "scope": "Private continuation of the successful shipping export after adding wasmtime-host to the development comparison headless build.",
+  "patch_sha256": "a9c8b69587792637b40c7279d2709c705cfa489596f99a3dbea0911a85824386",
+  "before_receipt_sha256": "702a1e0ff5c9a11e7a324b07aa2fad87218d3ff475ca356e8fbb51a48193b7bd",
+  "verdict": "accepted",
+  "review_text": "Reviewed continuation.patch and before receipt: accepted narrow continuation. It preserves the actual initial shipping package, verifies identities/guest absence and resumes unchanged oracle/development/refusal/static phases. Keep final report inventory caveat that removed_private_files covers continuation cleanup, with initial missing guest/build separately evidenced. Continue to completion and ordinary merge after final evidence review/checks.",
+  "source": "Parent collaboration message in this task; recorded locally without a separate parent-generated file."
+}
