@@ -16,7 +16,7 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Pinned mobile bytecode compatibility — independently accepted
+## Pinned mobile bytecode compatibility — current-main checks passed
 
 Fresh source cooks bind exact producer/destination and the pinned QuickJS ABI.
 Actual C and Swift callers each pass the same complete numeric/input/failure
@@ -25,16 +25,19 @@ device archives compile and link only. Native script/cooker tests, union Clippy
 and lean dependency checks pass; independent final source/execution review is accepted. Android
 cross-target admission and authored-project cross-export remain denied. No
 physical-phone or performance gate is claimed.
-[Contract and evidence](docs/spikes/mobile-bytecode-compatibility.md).
+Current main169 integration passes all 16 checks with new matching archives and
+64 actual C/Swift controls; final integrated audit is pending.
+[Contract and evidence](docs/spikes/mobile-bytecode-compatibility.md);
+[current integration](docs/spikes/mobile-bytecode-main169.md).
 
-## Headless UI and reusable player — current integration verified
+## Headless UI and reusable player — merged main169
 
 The shared recorded UI route and optional mobile C ABI pass all 19 integrated
 checks on the accepted audio ABI union. Real C/Swift callers of the new immutable
 macOS archive pass 32 controls/39 commands, including native held/released movement,
 exact failures and no-clobber output behavior. Producer source bytes and dependency
-versions are unchanged; independent final integration review is accepted and
-exact-head fast CI remains required. iOS/Android compatibility stays separate; no GPU/window/device gate.
+versions are unchanged; independent final integration review and exact-head
+fast CI passed before PR169 merged. iOS/Android compatibility stays separate; no GPU/window/device gate.
 [Integrated commands and actual callers](docs/spikes/headless-ui-mobile-integration.md).
 
 ## Mobile runtime callers — macOS C/Swift CPU proof accepted
@@ -42,9 +45,10 @@ exact-head fast CI remains required. iOS/Android compatibility stays separate; n
 Actual callers of the frozen native runtime archive pass 32 controls / 39
 commands with typed cooked input-driven movement, precise failure reports,
 repeat PCM and create-only outputs. Fixture Clippy and authoring-free graph
-checks pass; source/execution review is accepted. iOS target compatibility and
-simulator/device archives, Android NDK/CI, and physical-phone/render/device gates
-remain pending; the old document smoke is not reused as game execution evidence.
+checks pass; source/execution review is accepted. The later trusted-source
+compatibility route above adds iOS simulator execution and device archive links.
+Android NDK/CI and physical-phone/render/device gates remain pending; the old
+document smoke is not reused as game execution evidence.
 [Source and measured scope](docs/spikes/mobile-runtime-callers.md).
 
 ## Shared cooked-player library
@@ -712,12 +716,16 @@ and complete Game UI/IME gates remain open.
 
 ## Current milestone
 
-Main #168 includes compound native animation and Wasm snapshots, authored two-bone
+Main #169 includes compound native animation and Wasm snapshots, authored two-bone
 IK, complete native/TypeScript/Wasm root motion, native audio transport and HUD,
 Wasm HUD controls, offline audio/UI checkpoints, public physics queries, and the
 Core/Planar gameplay foundations. Wasm audio transport is merged after current-main
-shipping validation; reviewed headless UI and the reusable player/mobile library
-with actual macOS C/Swift callers are ready for fast publication. Phase 1 and the finished game remain incomplete.
+shipping validation. Headless UI and the reusable player/mobile library with
+actual macOS C/Swift callers are merged. Trusted-source iOS bytecode compatibility
+has passed current-main CPU/simulator checks and awaits final integration review.
+A separately reproduced desktop exporter lib/bin audit defect is being corrected;
+no failed export is counted as shipping success. Phase 1 and the finished game
+remain incomplete.
 
 Checkpoint14 promoted selected main160 `d1ef35ee` after all 23 exact-candidate
 required checks and eight push workflows succeeded. Release `2444d81f` has tested
