@@ -69,9 +69,14 @@ jobs:
         run: python tools/probes/script-source-transactions.py artifacts/script-source-transactions --binary target/ci/incant_headless${{ matrix.suffix }}
       - name: Play Core Sample gameplay scenarios on the native runtime
         run: python samples/core/verify.py artifacts/core-sample-gameplay --binary target/ci/incant_headless${{ matrix.suffix }}
+      - name: Play planar tilemap and 2D physics scenarios on the native runtime
+        run: python samples/planar/verify.py artifacts/planar-sample-gameplay --binary target/ci/incant_headless${{ matrix.suffix }}
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: ${{ !cancelled() }}
         with: {name: 'core-sample-gameplay-${{ matrix.platform }}', path: artifacts/core-sample-gameplay, if-no-files-found: error}
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: ${{ !cancelled() }}
+        with: {name: 'planar-sample-gameplay-${{ matrix.platform }}', path: artifacts/planar-sample-gameplay, if-no-files-found: error}
       - name: Export committed sources and execute the copied shipping game
         timeout-minutes: 45
         run: python tools/probes/authored-native-export.py artifacts/authored-native-export --binary target/ci/incant_headless${{ matrix.suffix }}
