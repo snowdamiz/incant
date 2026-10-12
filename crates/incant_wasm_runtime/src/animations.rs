@@ -132,6 +132,56 @@ pub(crate) fn command(
     })
 }
 
+/// Encode only on first v3 access in this callback. Legacy-only modules do not
+/// allocate a third complete animation byte buffer.
+pub(crate) fn encode_v3(rows: &[AnimationSnapshot], bytes: &mut Vec<u8>) {
+    bytes.clear();
+    bytes.extend(
+        abi::AnimationHeader {
+            magic: *abi::ANIMATION_V3_MAGIC,
+            count: rows.len() as u32,
+            stride: abi::AnimationRowV3::SIZE as u32,
+        }
+        .encode(),
+    );
+    for row in rows {
+        let state = row.state;
+        let transition = state.transition;
+        let blend = row.blend;
+        bytes.extend(
+            abi::AnimationRowV3 {
+                id: row.id.0,
+                clip: state.sample.clip.map_or(u32::MAX, u32::from),
+                flags: u32::from(state.playing)
+                    | (u32::from(state.looping) << 1)
+                    | (u32::from(state.completed) << 2),
+                seconds: state.sample.seconds,
+                speed: state.speed,
+                source_clip: transition.map_or(0, |t| t.source.clip.map_or(u32::MAX, u32::from)),
+                transition_flags: transition.map_or(0, |t| {
+                    1 | (u32::from(t.playing) << 1) | (u32::from(t.looping) << 2)
+                }),
+                source_seconds: transition.map_or(0.0, |t| t.source.seconds),
+                source_speed: transition.map_or(0.0, |t| t.speed),
+                elapsed: transition.map_or(0.0, |t| t.elapsed),
+                duration: transition.map_or(0.0, |t| t.duration),
+                blend_kind: if blend.is_none() {
+                    0
+                } else if transition.is_some() {
+                    1
+                } else {
+                    2
+                },
+                blend_source_clip: blend.map_or(0, |b| b.sample.clip.map_or(u32::MAX, u32::from)),
+                blend_source_seconds: blend.map_or(0.0, |b| b.sample.seconds),
+                blend_weight: blend.map_or(0.0, |b| b.weight),
+            }
+            .encode(),
+        );
+    }
+    debug_assert!(bytes.len() <= abi::ANIMATION_V3_MAX_BYTES);
+}
+
 /// v2 preserves v1 controls and adds a crossfade with a copied target/duration.
 pub(crate) fn command_v2(
     bytes: &[u8; abi::AnimationCommand::SIZE],

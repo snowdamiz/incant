@@ -1,0 +1,84 @@
+{
+  "reviewer": "astra /root/native_wasm_export",
+  "time_utc": "2026-10-12T05:05:02.839275+00:00",
+  "scope": "Independent nonvisual source and CPU review of additive Wasm animation graph/v3 copied snapshot boundary.",
+  "base_commit": "24064ab467f185e0cacc96dbd32040705d480806",
+  "production_inventory": "/tmp/incant-wasm-animation-graph-production-freeze-001/inventory.json",
+  "production_inventory_sha256": "b0474ea69a59e35f2af1760d404e9472f07d2a96b0481b1c78f14521a2299863",
+  "production_source_hashes": {
+    "crates/incant_wasm_abi/src/lib.rs": "242cc8f3bb2eed6900949ca0e144259cf1b983d239cad7361bff0d62d5f4813b",
+    "crates/incant_wasm_dev/src/generated.rs": "2ba64784f8e86476fc2d05a98b979e665b073ecde3a4fe85f07f2bdb4b83b503",
+    "crates/incant_wasm_runtime/c/generated.h": "bcef09bd00685ea13e0c14faff3777e126c63c199fc192ee1a3b9e4e2c56da40",
+    "crates/incant_wasm_runtime/c/generated.inc": "92c4d05aa774f8232d42f33e348c8b8676baad6924085af4a64f014bffdada73",
+    "crates/incant_wasm_runtime/src/animation_graphs.rs": "ab9fd018930258640d65ae3551d2078386bd7077871ceaab1b3f9b79df7e1462",
+    "crates/incant_wasm_runtime/src/animations.rs": "42b45667ca93a8db21486dee0530934263015ccf2f6e824e173e6e29b2bbeb2f",
+    "crates/incant_wasm_runtime/src/capability.rs": "f6102de664658344c1aa488764281685a1d494a657531abee82e9c4aafb99155",
+    "crates/incant_wasm_runtime/src/generated.rs": "a7a25803b6284f63a05af37060c7f64957f9c24959f8238b37288c231eaca856",
+    "crates/incant_wasm_runtime/src/input_tags.rs": "ceb6b13a8a5c607c336473f1554aecea9fbb4cc2a03c18df80b91f8e43ee23f3",
+    "crates/incant_wasm_runtime/src/lib.rs": "2493d669150f3760020b5f3beebaf0dc0f017f38c9cda8c54561a2ebe5b3c20b",
+    "sdk/abi/native-v1.json": "84b2458a8d00a4a1c73e899cd10f46bfd8792e9756f9fc37c216fa2893789d79",
+    "sdk/rust/src/animation.rs": "a0335fb9804262323fe9fee748f9da1b925cdda23b4de76410940c7f13000463",
+    "sdk/rust/src/animation_graph.rs": "350613b51d40fff87561de8c8d4d9f60eee4a4aea1480e1c0ab086bbeb29eac2",
+    "sdk/rust/src/lib.rs": "183744864db569cd54d4a0a114a27f588b7eb03daa8e92e0931b1b8aef3ae47d",
+    "sdk/rust/src/raw.rs": "40e3a189e0f7a870e95b44b8bb7c09777bd3294b895b674e56f9124bcd26ed7c",
+    "sdk/rust/src/tick.rs": "67be99402dfd85c40db60a482a53d188e6744c4c839c8b663bda718d196acd36",
+    "tools/generate_wasm_sdk.py": "82f79e6422a1b6e0e5943ff30722f355565ccf9a7aec26f721605c0e5f6a5d7f",
+    "tools/wasm_abi.py": "1c02ca646444f847ecf2be4149edf5e2720b096ad79acb5f852287ac48a11d72"
+  },
+  "verdict": "One P3 parser robustness correction requested; no other source finding.",
+  "findings": [
+    {
+      "id": "graph-v3-rest-destination",
+      "priority": 3,
+      "file": "sdk/rust/src/animation.rs",
+      "symbol": "validate_pose_blend",
+      "description": "A Parameter pose blend rejects a rest source but permits destination clip=u32::MAX with seconds=0 and a valid positive-weight concrete source. Current native Blend1d permits only clip-to-clip parameter blends, so this accepts an impossible v3 frame. The native encoder cannot emit it.",
+      "requested_fix": "Reject rest destination for blend_kind=2 and add malformed SDK frame regression.",
+      "reproducer": "/tmp/incant-wasm-animation-graph-rest-destination-review.rs",
+      "reproducer_sha256": "fa45ebebaf956ec01e2a4e253dfd3f7778cd59e519ebb074416db89ac16b6825",
+      "owner_acknowledged": true
+    }
+  ],
+  "reviewed_properties": [
+    "All previous registry opcodes 0 through 30, records, constants, magic, namespace mappings, enum values and ABI metadata preserved; five new operations appended.",
+    "Generated Wasmtime and wasm2c namespace dispatch maps the same five typed calls and parameter positions.",
+    "Graph frames use canonical entity/key order, contiguous owned parameter slices, exact framing/strides, bounded finite values, and reserved-field checks.",
+    "V3 reads actual native second-pose blend distinct from timed-transition metadata; v1/v2 retain explicit refusal for unsupported blends.",
+    "Snapshots captured before callback stay unchanged by queued graph controls, and neither host retains guest memory.",
+    "Read imports validate full destination and transfer quota before copying. Same-epoch failures poison commit; stale epochs do not poison a current transaction.",
+    "Graph controls queue through existing atomic numeric/structural/log transaction and deferred native membership/range validation.",
+    "SDK borrowed parsers expose no rows until validating whole frames; ignored Tick operation errors poison guest callback.",
+    "Actual guest parity sources use complete native world-save oracle, committed log parity, pause/endpoints/select-state/reload and mixed-prefix rollback cases."
+  ],
+  "independent_checks": [
+    {
+      "command": "env PATH=/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/usr/bin:/bin:/usr/sbin:/sbin CARGO_TARGET_DIR=/tmp/incant-agent-font-target ./tools/cargo test --locked --profile ci -j2 -p incant-module --test animation_graph --test animation_v3",
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant",
+      "exit_code": 0,
+      "passed_tests": 4,
+      "log": "/tmp/incant-wasm-animation-graph-independent-sdk-review-001.log",
+      "log_sha256": "aec12b27c2f5595dc01fb1df144cc97a463b5b6a9c92db25182e4fb9a71b5f69"
+    },
+    {
+      "command": "python3 tools/generate_wasm_sdk.py --check",
+      "exit_code": 0
+    }
+  ],
+  "owner_cpu_log_verified": {
+    "path": "/tmp/incant-wasm-animation-graphs-boundary-final.log",
+    "sha256": "7ff2a37477ab016834c41f05eeb1bd54a33ddbde020e7d166f2f0f86e9a8e630",
+    "passed_tests_and_doctests": 74,
+    "failed": 0
+  },
+  "pending": [
+    "P3 correction and refreshed production freeze",
+    "Final actual Wasmtime/wasm2c proof and final checks/evidence"
+  ],
+  "excluded": [
+    "GPU/native-window execution and rendered interpretation",
+    "Public source-deleted ordinary export rerun for this additive ABI",
+    "Full static-module checkpoint support",
+    "Full blend-tree/IK/root-motion completion",
+    "Device/phase gates"
+  ]
+}

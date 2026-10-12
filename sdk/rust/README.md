@@ -68,7 +68,8 @@ source, raw Wasm or cached native modules at runtime.
 - `animations(scratch)` returns a copied start-of-callback snapshot of authored
   skeletal playback. Rows contain stable entity ID, optional clip index, seconds,
   signed speed, playing/looping flags, completion and the optional full outgoing
-  transition (clip/time/speed/play/loop plus elapsed/duration). `control_animation`
+  transition (clip/time/speed/play/loop plus elapsed/duration), plus the actual
+  second pose and destination weight for both timed and parameter-driven blends. `control_animation`
   queues typed Select/Crossfade/Seek/Playing/Looping/Speed changes in the same atomic
   transaction as numeric edits, entity commands and logs. Selecting a clip keeps
   speed/play/loop flags; `clip: None, seconds: 0` selects rest. Seek/Select reset
@@ -79,10 +80,20 @@ source, raw Wasm or cached native modules at runtime.
   immediately. A nonzero request cannot interrupt an active fade. Select/Seek
   cancel it; playing pauses both clocks; later speed/loop changes affect only
   destination. See [samples/crossfade.rs](samples/crossfade.rs).
-  `animations`/`control_animation` use explicit `incant_animation_v2` imports.
-  `legacy_animations`/`legacy_control_animation` remain available for v1-only hosts;
-  an active transition makes legacy length/read refuse instead of concealing a
-  blended pose. The parser accepts both exact layouts; old parsers reject v2.
+  `animations` uses explicit `incant_animation_v3` snapshot imports; controls
+  still use v2. `transition_animations` provides the older v2 snapshot, and
+  `legacy_animations`/`legacy_control_animation` remain available for v1-only hosts.
+  Active timed blends make v1 length/read refuse; parameter blends make both v1
+  and v2 refuse. The parser accepts all three exact layouts. Old hosts/parsers
+  reject the new namespace/magic instead of silently dropping the second pose.
+- `animation_graphs(scratch)` returns sorted entity/state IDs, the explicit master
+  pause bit, state clocks, and sorted stable parameter IDs with captured values.
+  `control_animation_graph` queues SetParameter/SelectState commands through the
+  same atomic native transaction; authored parameter ranges and state/parameter
+  IDs validate at commit. State selection resets its clocks but preserves the
+  master pause. Parameter changes and manual selection do not alter the current
+  callback snapshot. Definitions, asset tables and native handles stay private.
+  See [samples/animation_graph.rs](samples/animation_graph.rs).
 - `locale(result_scratch)` and `localize(request, request_scratch, result_scratch)`
   return copied committed-locale/message values. Text/Number/CalendarDate
   arguments and fallback/pseudo settings use the shared native ICU validation.
@@ -131,6 +142,8 @@ mapping and shared endian codecs. Generated files are checked in. Run its
 
 Additive `incant_animation_v1` supplies legacy skeletal playback snapshots/controls;
 `incant_animation_v2` adds complete transition observations and crossfade control,
+`incant_animation_v3` adds actual pose-blend observations, and
+`incant_animation_graph_v1` adds copied graph state/parameters and atomic controls.
 `incant_log_v1` supplies logging and `incant_localization_v1` supplies
 copied locale/message queries and atomic settings. `incant_navigation_v1` adds
 local-avoidance requests/results; older hosts reject these imports explicitly.
@@ -146,10 +159,14 @@ Bounds remain the native host's v1 limits: 32 MiB guest memory/copied columns,
 128 MiB cumulative transfers, 65,536 calls, 1,024 commands, 4,096 chunks per tick;
 input scratch at most 128 KiB and flipbook playback at most 32,768 rows.
 Skeletal playback has at most 100,000 rows (v1: 4,000,016 copied bytes;
-v2: 8,000,016 copied bytes), 256 clips
+v2: 8,000,016; v3: 10,400,016 copied bytes), 256 clips
 per entity and finite speed in [-16, 16]. Snapshot row order is unspecified;
 use stable IDs. Callers should retain appropriately sized scratch across ticks. The SDK exports
-snapshot maximum sizes for reusable buffers. Host fuel and native validation
+snapshot maximum sizes for reusable buffers; `ANIMATION_MAX_BYTES` remains the
+v1 bound, and v2/v3 have explicit versioned constants. Graph snapshots hold at
+most 1,024 entities with 16 parameters each (458,776 bytes). Parameter values
+are finite within ±1,000,000 and the narrower authored range. Elapsed state time
+is bounded to 3,600 seconds; clip time may exceed this for longer clips. Host fuel and native validation
 remain authoritative even for guests bypassing the safe SDK. The full native
 scene's entity limit and script transaction rules still apply.
 

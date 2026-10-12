@@ -1,5 +1,7 @@
 #[path = "support/animations.rs"]
 mod fixture;
+#[path = "support/animation_graph.rs"]
+mod graph_fixture;
 use fixture::{id, scene};
 use incant_runtime::*;
 use incant_types::Transform;
@@ -10,6 +12,8 @@ use incant_wasm_runtime::{BoundaryError, Call, Capability, limits};
 mod crossfade;
 #[path = "animations/graph.rs"]
 mod graph;
+#[path = "animations/graph_sdk.rs"]
+mod graph_sdk;
 
 const DT: f64 = 1. / 60.;
 const ID: usize = 513;
