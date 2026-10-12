@@ -43,5 +43,5 @@ artifacts (121 unique payloads), nine preserved external archive/executable
 identities, eighteen successful top-level checks, exact source comparison, both
 accepted reviews and all actual caller streams/reports/PCM. Original producer
 evidence remains separately scoped. Final independent integration review is
-pending; no physical-device, GPU, window, signing, mobile host or performance/phase
+accepted without findings; no physical-device, GPU, window, signing, mobile host or performance/phase
 gate is claimed.
