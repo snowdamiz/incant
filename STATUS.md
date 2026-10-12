@@ -26,8 +26,8 @@ physics dependency audits. Six C/Swift simulator processes reproduce 432
 observations, 216 log records and exact nonzero PCM after private source, cache,
 build and maps are removed; fourteen precise refusal controls pass. Device
 archives and unsigned caller links pass, without device execution. Independent
-producer and integration-source reviews are accepted; final integrated evidence
-review and publication are pending. Fast iOS projects, desktop cross-target
+producer, integration-source and final execution reviews are accepted; the
+exact-head fast check and publication are pending. Fast iOS projects, desktop cross-target
 export, Android and mobile static Wasm remain denied in this slice. No signing,
 mobile window/audio host, phone performance or phase gate is claimed.
 [Current source and evidence](docs/spikes/authored-ios-main177.md).
@@ -849,7 +849,7 @@ macOS C/Swift callers and trusted-source iOS bytecode compatibility are merged.
 Reviewed physics kernel forwarding, cooked/save identity, project selection and
 mode-aware developer/desktop export tools are merged; automatic editor worker
 selection and actual physics saves remain separate. The authored iOS current-main
-simulator proof has passed and is awaiting final review/publication; Android and
+simulator proof and final review have passed and await publication; Android and
 retained CPU worker work are local parallel lanes. Phase 1 and the finished game
 remain incomplete.
 
