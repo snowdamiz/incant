@@ -1,0 +1,127 @@
+[
+  {
+    "name": "actual-hosts",
+    "command": [
+      "python3",
+      "tools/probes/shipping-wasm2c.py",
+      "/tmp/incant-animation-graph-sdk-main132-conformance",
+      "--conformance-only",
+      "--profile",
+      "ci"
+    ],
+    "exit": 0,
+    "seconds": 126.78227262501605,
+    "log": "/tmp/incant-animation-graph-sdk-main132-checks/actual-hosts.log",
+    "sha256": "574af3621e3ea33f4f833844525fcf843cf3d6fd0f8b4c4cda3bea2cebb4805b"
+  },
+  {
+    "name": "wasm32",
+    "command": [
+      "./tools/cargo",
+      "check",
+      "--locked",
+      "--offline",
+      "-j2",
+      "-p",
+      "incant-module",
+      "-p",
+      "incant_wasm_abi",
+      "--target",
+      "wasm32-unknown-unknown"
+    ],
+    "exit": 0,
+    "seconds": 0.43545495899161324,
+    "log": "/tmp/incant-animation-graph-sdk-main132-checks/wasm32.log",
+    "sha256": "69471615ff2348ec8fe869e8ad8e7ff5e16b960cfe80d7d6170fb97f11ba8ec8"
+  },
+  {
+    "name": "graph",
+    "command": [
+      "python3",
+      "tools/check_runtime_dependencies.py",
+      "incant_wasm_runtime",
+      "incant_runtime",
+      "incant_script",
+      "incant_game_runtime",
+      "incant_game_player"
+    ],
+    "exit": 0,
+    "seconds": 0.3771524580079131,
+    "log": "/tmp/incant-animation-graph-sdk-main132-checks/graph.log",
+    "sha256": "986b5bfb2fea4628f08f6696ec606cf033fffdedb1d20c81218c0bcd9503244b"
+  },
+  {
+    "name": "tools",
+    "command": [
+      "npm",
+      "run",
+      "test:tools"
+    ],
+    "exit": 0,
+    "seconds": 24.251654792024055,
+    "log": "/tmp/incant-animation-graph-sdk-main132-checks/tools.log",
+    "sha256": "24306c8f6bdbc6fab13d317cc70148b50229703b67c9fb627f9d0b2f656f821a"
+  },
+  {
+    "name": "wasm-sdk",
+    "command": [
+      "python3",
+      "tools/generate_wasm_sdk.py",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.14084779200493358,
+    "log": "/tmp/incant-animation-graph-sdk-main132-checks/wasm-sdk.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "sdk",
+    "command": [
+      "node",
+      "tools/generate_sdk.mjs",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.0419417500088457,
+    "log": "/tmp/incant-animation-graph-sdk-main132-checks/sdk.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "bridge",
+    "command": [
+      "node",
+      "tools/build_bridge.mjs",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.07991800000309013,
+    "log": "/tmp/incant-animation-graph-sdk-main132-checks/bridge.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "fmt",
+    "command": [
+      "./tools/cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.9094144999980927,
+    "log": "/tmp/incant-animation-graph-sdk-main132-checks/fmt.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "conventions",
+    "command": [
+      "python3",
+      "tools/generate_conventions.py",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.04732754098949954,
+    "log": "/tmp/incant-animation-graph-sdk-main132-checks/conventions.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

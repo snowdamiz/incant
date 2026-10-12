@@ -496,6 +496,27 @@ impl<'tick> Tick<'tick> {
     ) -> Result<crate::AnimationSnapshot<'a>> {
         self.ready()?;
         // SAFETY: scalar length query, then a checked initialized destination.
+        let len = unsafe { raw::incant_animation_v3_snapshot_len(self.epoch) };
+        let len = self.snapshot_length(len, scratch.len(), abi::ANIMATION_V3_MAX_BYTES)?;
+        let actual = unsafe {
+            raw::incant_animation_v3_read_snapshot(
+                self.epoch,
+                scratch.as_mut_ptr() as usize as i32,
+                len as i32,
+            )
+        };
+        if actual as usize != len {
+            return self.check(Err(Error::Malformed));
+        }
+        self.check(crate::AnimationSnapshot::parse(&scratch[..len]))
+    }
+    /// Explicit v2 snapshot, which refuses parameter blends it cannot represent.
+    pub fn transition_animations<'a>(
+        &mut self,
+        scratch: &'a mut [u8],
+    ) -> Result<crate::AnimationSnapshot<'a>> {
+        self.ready()?;
+        // SAFETY: scalar length query followed by checked initialized scratch.
         let len = unsafe { raw::incant_animation_v2_snapshot_len(self.epoch) };
         let len = self.snapshot_length(len, scratch.len(), abi::ANIMATION_V2_MAX_BYTES)?;
         let actual = unsafe {
@@ -562,6 +583,47 @@ impl<'tick> Tick<'tick> {
         // SAFETY: fixed initialized records remain live during the copied call.
         unsafe {
             raw::incant_animation_v1_control(self.epoch, ptr(id), bytes.as_ptr() as usize as i32);
+        }
+        Ok(())
+    }
+    /// Copy canonical graph state and parameter rows at callback start. This
+    /// snapshot has no native references and queued controls do not change it.
+    pub fn animation_graphs<'a>(
+        &mut self,
+        scratch: &'a mut [u8],
+    ) -> Result<crate::AnimationGraphSnapshot<'a>> {
+        self.ready()?;
+        // SAFETY: scalar length query followed by a checked initialized slice.
+        let len = unsafe { raw::incant_animation_graph_v1_snapshot_len(self.epoch) };
+        let len = self.snapshot_length(len, scratch.len(), abi::ANIMATION_GRAPH_MAX_BYTES)?;
+        let actual = unsafe {
+            raw::incant_animation_graph_v1_read_snapshot(
+                self.epoch,
+                scratch.as_mut_ptr() as usize as i32,
+                len as i32,
+            )
+        };
+        if actual as usize != len {
+            return self.check(Err(Error::Malformed));
+        }
+        self.check(crate::AnimationGraphSnapshot::parse(&scratch[..len]))
+    }
+    /// Queue a graph parameter or state selection in the shared transaction.
+    /// Authored key membership and parameter ranges are checked at commit.
+    pub fn control_animation_graph(
+        &mut self,
+        id: &EntityId,
+        control: crate::AnimationGraphControl,
+    ) -> Result<()> {
+        self.ready()?;
+        let bytes = self.check(control.encode())?;
+        // SAFETY: both fixed initialized records remain live for this copied call.
+        unsafe {
+            raw::incant_animation_graph_v1_control(
+                self.epoch,
+                ptr(id),
+                bytes.as_ptr() as usize as i32,
+            );
         }
         Ok(())
     }

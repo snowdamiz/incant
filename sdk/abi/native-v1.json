@@ -610,6 +610,95 @@
       "result": "i32",
       "opcode": 30,
       "call": "Call::ReadSteering { ptr, capacity }"
+    },
+    {
+      "namespace": "incant_animation_v3",
+      "name": "snapshot_len",
+      "opcode": 31,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::AnimationLenV3"
+    },
+    {
+      "namespace": "incant_animation_v3",
+      "name": "read_snapshot",
+      "opcode": 32,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "capacity",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::ReadAnimationsV3 { ptr, capacity }"
+    },
+    {
+      "namespace": "incant_animation_graph_v1",
+      "name": "snapshot_len",
+      "opcode": 33,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::AnimationGraphLen"
+    },
+    {
+      "namespace": "incant_animation_graph_v1",
+      "name": "read_snapshot",
+      "opcode": 34,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "capacity",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::ReadAnimationGraphs { ptr, capacity }"
+    },
+    {
+      "namespace": "incant_animation_graph_v1",
+      "name": "control",
+      "opcode": 35,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "id",
+          "i32"
+        ],
+        [
+          "ptr",
+          "i32"
+        ]
+      ],
+      "result": null,
+      "call": "Call::ControlAnimationGraph { id, ptr }"
     }
   ],
   "enums": {
@@ -1715,6 +1804,158 @@
         "reserved",
         "u32"
       ]
+    ],
+    "AnimationRowV3": [
+      [
+        "id",
+        "u8",
+        16
+      ],
+      [
+        "clip",
+        "u32"
+      ],
+      [
+        "flags",
+        "u32"
+      ],
+      [
+        "seconds",
+        "f64"
+      ],
+      [
+        "speed",
+        "f64"
+      ],
+      [
+        "source_clip",
+        "u32"
+      ],
+      [
+        "transition_flags",
+        "u32"
+      ],
+      [
+        "source_seconds",
+        "f64"
+      ],
+      [
+        "source_speed",
+        "f64"
+      ],
+      [
+        "elapsed",
+        "f64"
+      ],
+      [
+        "duration",
+        "f64"
+      ],
+      [
+        "blend_kind",
+        "u32"
+      ],
+      [
+        "blend_source_clip",
+        "u32"
+      ],
+      [
+        "blend_source_seconds",
+        "f64"
+      ],
+      [
+        "blend_weight",
+        "f64"
+      ]
+    ],
+    "AnimationGraphHeader": [
+      [
+        "magic",
+        "u8",
+        8
+      ],
+      [
+        "count",
+        "u32"
+      ],
+      [
+        "stride",
+        "u32"
+      ],
+      [
+        "parameter_count",
+        "u32"
+      ],
+      [
+        "parameter_stride",
+        "u32"
+      ]
+    ],
+    "AnimationGraphRow": [
+      [
+        "id",
+        "u8",
+        16
+      ],
+      [
+        "state",
+        "u8",
+        16
+      ],
+      [
+        "seconds",
+        "f64"
+      ],
+      [
+        "elapsed",
+        "f64"
+      ],
+      [
+        "flags",
+        "u32"
+      ],
+      [
+        "parameter_offset",
+        "u32"
+      ],
+      [
+        "parameter_count",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ]
+    ],
+    "AnimationGraphParameter": [
+      [
+        "id",
+        "u8",
+        16
+      ],
+      [
+        "value",
+        "f64"
+      ]
+    ],
+    "AnimationGraphCommand": [
+      [
+        "kind",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ],
+      [
+        "id",
+        "u8",
+        16
+      ],
+      [
+        "value",
+        "f64"
+      ]
     ]
   },
   "input_sections": [
@@ -1781,7 +2022,12 @@
     "STEERING_MAX_VERTICES": 32,
     "STEERING_MAX_EDGES": 128,
     "STEERING_MAX_REQUEST_BYTES": 17192,
-    "STEERING_MAX_RESULT_BYTES": 5136
+    "STEERING_MAX_RESULT_BYTES": 5136,
+    "ANIMATION_GRAPH_MAX_ROWS": 1024,
+    "ANIMATION_GRAPH_MAX_PARAMETERS": 16,
+    "ANIMATION_GRAPH_MAX_PARAMETER_ROWS": 16384,
+    "ANIMATION_GRAPH_MAX_SECONDS": 3600,
+    "ANIMATION_GRAPH_MAX_VALUE": 1000000
   },
   "magic": {
     "INPUT_MAGIC": "INPINP01",
@@ -1793,7 +2039,9 @@
     "LOCALIZATION_FORMAT_MAGIC": "INCLFM01",
     "ANIMATION_V2_MAGIC": "INCAN002",
     "STEERING_REQUEST_MAGIC": "INCSTR01",
-    "STEERING_RESULT_MAGIC": "INCSTV01"
+    "STEERING_RESULT_MAGIC": "INCSTV01",
+    "ANIMATION_V3_MAGIC": "INCAN003",
+    "ANIMATION_GRAPH_MAGIC": "INCAGR01"
   },
   "optional_none": -1,
   "namespaces": {
@@ -1804,6 +2052,8 @@
     "incant_localization_v1": "localization",
     "incant_animation_v1": "animation",
     "incant_animation_v2": "animationv2",
-    "incant_navigation_v1": "navigation"
+    "incant_navigation_v1": "navigation",
+    "incant_animation_v3": "animationv3",
+    "incant_animation_graph_v1": "animationgraph"
   }
 }

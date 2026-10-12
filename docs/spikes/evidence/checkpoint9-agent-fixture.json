@@ -1,0 +1,63 @@
+{
+  "at": "2026-10-12T05:23:50.826734+00:00",
+  "base": "65212b74130dcf70a0a0822b4a8363c59c1b700a",
+  "failed_checkpoint": "7b908b38a9f2b984285b7de310dc1d2c6aa702b9",
+  "failed_jobs": {
+    "storage (ubuntu-latest)": 114673438051,
+    "storage (macos-latest)": 114673438104
+  },
+  "diagnosis": "Current generated tool input exceeds the test-only fixed20,000 allowance; admission returns Budget before the intended response.failed provider fixture. Reproduced on unchanged main132 locally. No production admission defect.",
+  "correction": "Derive test allowance from complete current tools catalog plus16KiB fixed prompt/output headroom. Set maximum output to total allowance so admission must reduce it; assert nonzero admitted request, exact redacted failure, exact full allowance charge, zero remaining and unchanged revision. Dedicated budget-blocks-before-network test remains unchanged.",
+  "changed_source": {
+    "crates/incant_agent/tests/agent.rs": "a819f3773a32f10948be2c4d80b41ff9247251ca4fc7cc85ba75db41c372f61c"
+  },
+  "patch_sha256": "bf233a49b02b1189974ee929ca0126da6a7ab62fe40c9515c9a5169ec2143cb2",
+  "verification": {
+    "targeted_before": {
+      "failed": 1,
+      "exit": 101
+    },
+    "agent_integration_after": {
+      "passed": 8,
+      "failed": 0
+    },
+    "full_agent": {
+      "passed": 108,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 9
+    },
+    "all_target_clippy": true,
+    "production_changed": false
+  },
+  "logs": {
+    "docs/spikes/evidence/checkpoint9-agent-fixture/incant-checkpoint9-agent-fixture-before.log.gz": {
+      "sha256": "c246cb9fedcdd094337de530acbd3cccab2acafd9279cf4c50553b53d02d95d5",
+      "uncompressed_sha256": "f4a031edfc6fbfedace893fcca87850bdddf2170921f95285dc2b5a1212d5128"
+    },
+    "docs/spikes/evidence/checkpoint9-agent-fixture/incant-checkpoint9-agent-fixture-after.log.gz": {
+      "sha256": "38a3d61a14dfdd093517e295d760e6c38fc156472de787237e3157df8c2a19d3",
+      "uncompressed_sha256": "317c2db5e6e277a38012618d3a748e2858f41a3f46e349bc2b21dcf7e17795b1"
+    },
+    "docs/spikes/evidence/checkpoint9-agent-fixture/incant-checkpoint9-agent-all-tests.log.gz": {
+      "sha256": "32e588960cbea4d1d48095db6ce059a3d35d710ce7f08da814f5ce86048642e2",
+      "uncompressed_sha256": "67c97b757a0967c8b93322d725681ee2537f91fd672c10aec6b06463e4d480cd"
+    },
+    "docs/spikes/evidence/checkpoint9-agent-fixture/incant-checkpoint9-agent-clippy.log.gz": {
+      "sha256": "8930aea72280bc4742a11d739c2b7acd59e67339520288faafa9627cd6b9a680",
+      "uncompressed_sha256": "de57179fcb6b48b5ce81833cc018384983152bd43b757f13ac59898fe2f21562"
+    },
+    "docs/spikes/evidence/checkpoint9-agent-fixture/incant-checkpoint9-storage-linux-failure.clean.log.gz": {
+      "sha256": "08fe48d2793ca7676670045060006f3a81c90df976c6ecba63a6f8044f38dba8",
+      "uncompressed_sha256": "fc5666dbe443c6a990b1c7e812662ee399ea34c3d4541f5ec5916e463588fd46"
+    },
+    "docs/spikes/evidence/checkpoint9-agent-fixture/incant-checkpoint9-storage-macos-failure.clean.log.gz": {
+      "sha256": "fd966d338dafbbbf53839f8b2bcfc64e55e4e81886c0c2bb3b8d1eecb212f570",
+      "uncompressed_sha256": "891b0329edcf09a68ef93c2bec8d70a2ed91361fbe25940d2ab7d015d15345f3"
+    }
+  },
+  "limits": [
+    "Local macOS ci profile; hosted cross-platform repair validation remains pending a later frozen checkpoint.",
+    "Checkpoint9 remains failed and unpromoted; no blind rerun or release advancement."
+  ]
+}

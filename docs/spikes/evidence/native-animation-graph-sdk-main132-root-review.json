@@ -1,0 +1,15 @@
+{
+  "at": "2026-10-12T05:24:22.102847+00:00",
+  "reviewer": "astra-root",
+  "accepted_source": "52bb80154ab91edfe49214b02221247f371ed717",
+  "integration": "a236379a8b546b9158ab295400baa69cb8aca8ad",
+  "evidence_sha256": "7d4ef0cd09eae163e8832277c3f5946968b4b6567cb35b069052160eef4ce1c9",
+  "accepted_source_hashes_verified": 31,
+  "frozen_inputs_verified": 1328,
+  "gzip_logs_verified": 13,
+  "receipts_verified": 6,
+  "tests": 355,
+  "groups": 61,
+  "same_ancestry_tree": true,
+  "assessment": "Accept independently reviewed same-source integration; no new player/device/phase claim."
+}

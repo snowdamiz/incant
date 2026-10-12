@@ -1,6 +1,4 @@
 use super::*;
-#[path = "../support/animation_graph.rs"]
-mod graph_fixture;
 
 #[test]
 fn graph_blend_v1_v2_length_and_read_refuse_without_copy_and_poison_caught_errors() {
