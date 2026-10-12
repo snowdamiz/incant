@@ -88,6 +88,14 @@
     "docs/spikes/evidence/checkpoint10-input-fixture/clippy.log.gz": {
       "sha256": "4dec8f44c78a35401e4d5b6dbc8f83446c4fcacd6a8d6426d1dafee852862ad8",
       "uncompressed_sha256": "bd20031ecee36e9c7595509266827d82d1ce21716f2426a7cd19a8c760f95a5f"
+    },
+    "docs/spikes/evidence/checkpoint10-input-fixture/desktop-failure-excerpt.log.gz": {
+      "sha256": "7c48fa4c67a510466acda3e815b5a54ad620bc90f5ae3713ce93da0632463edc",
+      "uncompressed_sha256": "db8849d6f5732546db84acb7a1b9ebb5b06b0161319b25b4b4232ed527cab464"
+    },
+    "docs/spikes/evidence/checkpoint10-input-fixture/checks-failure-excerpt.log.gz": {
+      "sha256": "0ca97dfe9a040cb41277c165354c979d7d7fc20e3e5164ae40c7b986667bea34",
+      "uncompressed_sha256": "56461535fc9140b020c0b24bd2fb24304259f91ded497adb7449ec9ea193c925"
     }
   },
   "receipts": {
@@ -97,9 +105,7 @@
     "docs/spikes/evidence/checkpoint10-input-fixture/patch.diff": "3f07e15695118578786738a598213c3a1bea8341a4a7329c2091cd0c2f4b7313",
     "docs/spikes/evidence/checkpoint10-input-fixture/incant-checkpoint10-input-fixture-root-review.json": "4accdaf5a01bf5043c555ea76296be74184df6b60d311dd76d09b9cb69f25fef",
     "docs/spikes/evidence/checkpoint10-input-fixture/incant-release-checkpoint-10.json": "1c26c7f51abb6bc282fe5b95336a1605099475681cc41a7e5a224c6fb6d6a7d6",
-    "docs/spikes/evidence/checkpoint10-input-fixture/incant-release-checkpoint-10-terminal.json": "fefcbbec0b212937290a4a814821056fe3c3c0e00b82cbd1fa02294343bb9f27",
-    "docs/spikes/evidence/checkpoint10-input-fixture/desktop-failure-excerpt.log": "db8849d6f5732546db84acb7a1b9ebb5b06b0161319b25b4b4232ed527cab464",
-    "docs/spikes/evidence/checkpoint10-input-fixture/checks-failure-excerpt.log": "56461535fc9140b020c0b24bd2fb24304259f91ded497adb7449ec9ea193c925"
+    "docs/spikes/evidence/checkpoint10-input-fixture/incant-release-checkpoint-10-terminal.json": "fefcbbec0b212937290a4a814821056fe3c3c0e00b82cbd1fa02294343bb9f27"
   },
   "original_hosted_logs": {
     "/tmp/incant-checkpoint10-desktop-failure.log": "62554b7d46c7c4b6fe7da2007346b70021aa4d6f749a67ce30a1cda6d50967b9",
