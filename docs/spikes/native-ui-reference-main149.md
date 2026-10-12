@@ -29,3 +29,5 @@ Claude0058 visible follow-up reviewed separately. No complete IME/Game UI or pha
 gate is claimed.
 
 [Source identities, commands, original formatting failure and final checks](evidence/native-ui-reference-main149.json).
+
+[Independent final integration review](evidence/native-ui-reference-main149/root-final-review.json) accepted the exact source and CPU checks. Actual Linux/full-checkpoint acceptance remains pending.
