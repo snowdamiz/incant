@@ -131,6 +131,8 @@ pub(crate) struct State {
 /// Starting a new/rebuilt owner expires every prior focus token. Public mutation
 /// is prepare/commit only; dropping a candidate preserves all accepted state.
 pub struct UiRuntime {
+    #[cfg(feature = "native")]
+    pub(crate) native: Option<crate::native::Binding>,
     pub(crate) owner: Arc<()>,
     pub(crate) layout: LayoutEngine,
     pub(crate) state: State,
@@ -189,6 +191,8 @@ impl UiRuntime {
             })
             .collect::<Result<Vec<_>, UiError>>()?;
         Ok(Self {
+            #[cfg(feature = "native")]
+            native: None,
             owner: Arc::new(()),
             layout,
             state: State {

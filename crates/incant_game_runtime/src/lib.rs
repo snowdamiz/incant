@@ -127,8 +127,8 @@ where
                 initial,
                 program,
                 actions,
-                |world| {
-                    require_nonspatial_world(world)?;
+                |pending| {
+                    require_nonspatial_world(pending.world())?;
                     Ok(NoHost)
                 },
                 |world| SceneAudio::new(world, clips, settings),

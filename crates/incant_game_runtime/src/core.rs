@@ -129,11 +129,21 @@ where
         initial: &CookedScene,
         program: impl Into<SessionProgram>,
         actions: InputActions,
-        prepare: impl FnOnce(&NativeWorld) -> Result<H, H::Error>,
+        prepare: impl FnOnce(&PendingSessionCheckpoint) -> Result<H, H::Error>,
         audio: impl FnOnce(&NativeWorld) -> incant_audio_runtime::Result<SceneAudio<B>>,
     ) -> Result<Self, H::Error> {
         let pending = PendingSessionCheckpoint::new(bytes, initial, program, actions)?;
-        let host = prepare(pending.world())?;
+        if pending.world().requires_ui_checkpoint() && (!cfg!(feature = "ui") || !H::SUPPORTS_UI) {
+            return Err(GameError::UiHost);
+        }
+        let host = prepare(&pending)?;
+        #[cfg(feature = "ui")]
+        let native = if pending.ui().is_some() {
+            pending.start_with_ui(host.ui().ok_or(GameError::UiHost)?)?
+        } else {
+            pending.start()?
+        };
+        #[cfg(not(feature = "ui"))]
         let native = pending.start()?;
         let audio = audio(native.world()?)?;
         Ok(Self {
@@ -146,7 +156,14 @@ where
         })
     }
     pub fn checkpoint_bytes(&self) -> Result<Vec<u8>, H::Error> {
-        Ok(self.ready()?.native.checkpoint_bytes()?)
+        let live = self.ready()?;
+        #[cfg(feature = "ui")]
+        if live.native.world()?.requires_ui_checkpoint() {
+            return Ok(live
+                .native
+                .checkpoint_bytes_with_ui(live.host.ui().ok_or(GameError::UiHost)?)?);
+        }
+        Ok(live.native.checkpoint_bytes()?)
     }
     pub fn ready(&self) -> Result<&Live<B, H>, H::Error> {
         self.live.as_ref().ok_or(GameError::Failed)

@@ -13,7 +13,12 @@ use sha2::{Digest, Sha256};
 use std::{collections::BTreeMap, sync::Arc};
 const MAGIC: &[u8; 8] = b"INCSES01";
 const HEADER: usize = 128;
-pub const MAX_CHECKPOINT_BYTES: usize = incant_runtime::MAX_SAVE_BYTES + 2 * 1024 * 1024;
+const UI_HEADER: usize = 132;
+// Same bound with or without the optional UI feature.
+const MAX_UI_BYTES: usize =
+    80 + 48 * incant_types::MAX_UI_NODES + incant_types::MAX_SCENE_TEXT_BYTES;
+pub const MAX_CHECKPOINT_BYTES: usize =
+    incant_runtime::MAX_SAVE_BYTES + 2 * 1024 * 1024 + MAX_UI_BYTES;
 const MAX_ACTIVE: usize = crate::MAX_SCRIPT_INSTANCES;
 
 pub(super) struct Sections<'a> {
@@ -22,32 +27,36 @@ pub(super) struct Sections<'a> {
     pub active: &'a [u8],
     pub store: &'a [u8],
     pub schedule: &'a [u8],
+    pub ui: Option<&'a [u8]>,
 }
-fn digest(bytes: &[u8]) -> [u8; 32] {
+fn digest(bytes: &[u8], header: usize) -> [u8; 32] {
     let mut h = Sha256::new();
-    h.update(&bytes[..96]);
-    h.update(&bytes[HEADER..]);
+    h.update(&bytes[..header - 32]);
+    h.update(&bytes[header..]);
     h.finalize().into()
 }
 pub(super) fn sections<'a>(bytes: &'a [u8], program: [u8; 32]) -> Result<Sections<'a>> {
     if !(HEADER..=MAX_CHECKPOINT_BYTES).contains(&bytes.len()) || &bytes[..8] != MAGIC {
         return Err(Error::Invalid("framing"));
     }
-    if bytes[8..12] != 1u32.to_le_bytes() {
-        return Err(Error::Invalid("version"));
-    }
+    let header = match u32::from_le_bytes(bytes[8..12].try_into().unwrap()) {
+        1 => HEADER,
+        2 if bytes.len() >= UI_HEADER => UI_HEADER,
+        _ => return Err(Error::Invalid("version")),
+    };
     if bytes[12..16] != 1u32.to_le_bytes() {
         return Err(Error::Invalid("ordinary-load input policy"));
     }
     if bytes[16..48] != program {
         return Err(Error::ProgramMismatch);
     }
-    if bytes[96..128] != digest(bytes) {
+    if bytes[header - 32..header] != digest(bytes, header) {
         return Err(Error::Integrity);
     }
-    let mut lens = [0usize; 4];
-    let mut total = HEADER;
-    for (i, n) in lens.iter_mut().enumerate() {
+    let mut lens = [0usize; 5];
+    let mut total = header;
+    let count = if header == HEADER { 4 } else { 5 };
+    for (i, n) in lens[..count].iter_mut().enumerate() {
         *n = u32::from_le_bytes(bytes[80 + i * 4..84 + i * 4].try_into().unwrap()) as usize;
         total = total
             .checked_add(*n)
@@ -58,18 +67,22 @@ pub(super) fn sections<'a>(bytes: &'a [u8], program: [u8; 32]) -> Result<Section
         || lens[1] > 4 + 16 * MAX_ACTIVE
         || lens[2] > MAX_BYTES + 4
         || lens[3] > 20 + 128 * 97
+        || lens[4] > MAX_UI_BYTES
+        || (count == 5 && lens[4] == 0)
     {
         return Err(Error::Invalid("section lengths"));
     }
-    let (world, rest) = bytes[HEADER..].split_at(lens[0]);
+    let (world, rest) = bytes[header..].split_at(lens[0]);
     let (active, rest) = rest.split_at(lens[1]);
-    let (store, schedule) = rest.split_at(lens[2]);
+    let (store, rest) = rest.split_at(lens[2]);
+    let (schedule, ui) = rest.split_at(lens[3]);
     Ok(Sections {
         origin: bytes[48..80].try_into().unwrap(),
         world,
         active,
         store,
         schedule,
+        ui: (count == 5).then_some(ui),
     })
 }
 pub(super) fn encode(
@@ -79,6 +92,7 @@ pub(super) fn encode(
     active: &[StableId],
     store: &Store,
     schedule: &schedule::Schedule,
+    ui: Option<&[u8]>,
 ) -> Result<Vec<u8>> {
     let mut a = Vec::new();
     u32w(&mut a, active.len());
@@ -102,26 +116,36 @@ pub(super) fn encode(
         t.extend(v.due.to_le_bytes());
         t.extend(v.interval.unwrap_or(0).to_le_bytes());
     }
-    let total = HEADER + world.len() + a.len() + s.len() + t.len();
+    let header = if ui.is_some() { UI_HEADER } else { HEADER };
+    if ui.is_some_and(|bytes| bytes.is_empty() || bytes.len() > MAX_UI_BYTES) {
+        return Err(Error::Invalid("UI capacity"));
+    }
+    let total = header + world.len() + a.len() + s.len() + t.len() + ui.map_or(0, <[u8]>::len);
     if total > MAX_CHECKPOINT_BYTES {
         return Err(Error::Invalid("checkpoint capacity"));
     }
     let mut out = Vec::with_capacity(total);
     out.extend(MAGIC);
-    out.extend(1u32.to_le_bytes());
+    out.extend(if ui.is_some() { 2u32 } else { 1u32 }.to_le_bytes());
     out.extend(1u32.to_le_bytes());
     out.extend(program);
     out.extend(origin);
     for n in [world.len(), a.len(), s.len(), t.len()] {
         u32w(&mut out, n);
     }
+    if let Some(ui) = ui {
+        u32w(&mut out, ui.len());
+    }
     out.extend([0; 32]);
     out.extend(world);
     out.extend(a);
     out.extend(s);
     out.extend(t);
-    let h = digest(&out);
-    out[96..128].copy_from_slice(&h);
+    if let Some(ui) = ui {
+        out.extend(ui);
+    }
+    let h = digest(&out, header);
+    out[header - 32..header].copy_from_slice(&h);
     Ok(out)
 }
 fn u32w(out: &mut Vec<u8>, n: usize) {

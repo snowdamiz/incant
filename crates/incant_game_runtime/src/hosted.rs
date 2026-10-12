@@ -56,6 +56,19 @@ pub trait SceneHost: Sized {
         world: &NativeWorld,
         settings: Self::Settings,
     ) -> std::result::Result<Self, Self::Error>;
+    /// Restore the typed widget owner and its drawable before preparing external
+    /// consumers. Default hosts refuse UI data rather than silently resetting it.
+    #[cfg(feature = "ui")]
+    fn prepare_checkpoint(
+        world: &NativeWorld,
+        settings: Self::Settings,
+        ui: Option<&incant_ui::PendingUiCheckpoint>,
+    ) -> Result<Self, Self::Error> {
+        if ui.is_some() {
+            return Err(GameError::UiHost);
+        }
+        Self::prepare(world, settings).map_err(GameError::Host)
+    }
     fn sync(&mut self, world: &NativeWorld) -> std::result::Result<(), Self::Error>;
 }
 
@@ -109,10 +122,18 @@ where
                 initial,
                 program,
                 actions,
-                |world| {
-                    H::prepare(world, host_settings)
-                        .map(WithHost)
-                        .map_err(GameError::Host)
+                |pending| {
+                    #[cfg(feature = "ui")]
+                    {
+                        H::prepare_checkpoint(pending.world(), host_settings, pending.ui())
+                            .map(WithHost)
+                    }
+                    #[cfg(not(feature = "ui"))]
+                    {
+                        H::prepare(pending.world(), host_settings)
+                            .map(WithHost)
+                            .map_err(GameError::Host)
+                    }
                 },
                 |world| SceneAudio::new(world, clips, audio_settings),
             )?,
@@ -224,10 +245,18 @@ impl<H: SceneHost> HostedOfflineGameSession<H> {
                     initial,
                     program,
                     actions,
-                    |world| {
-                        H::prepare(world, host_settings)
-                            .map(WithHost)
-                            .map_err(GameError::Host)
+                    |pending| {
+                        #[cfg(feature = "ui")]
+                        {
+                            H::prepare_checkpoint(pending.world(), host_settings, pending.ui())
+                                .map(WithHost)
+                        }
+                        #[cfg(not(feature = "ui"))]
+                        {
+                            H::prepare(pending.world(), host_settings)
+                                .map(WithHost)
+                                .map_err(GameError::Host)
+                        }
                     },
                     |world| SceneAudio::offline(world, clips, sample_rate),
                 )?,

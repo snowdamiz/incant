@@ -67,6 +67,8 @@ fn main() {
         "incant_2d",
         "incant_nav",
         "incant_localization",
+        "incant_ui",
+        "incant_text",
     ] {
         let dir = root.join("crates").join(name);
         hash_tree(&dir.join("src"), &mut runtime);

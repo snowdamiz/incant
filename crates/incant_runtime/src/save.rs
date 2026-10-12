@@ -10,7 +10,7 @@ use thiserror::Error;
 pub use codec::MAX_SAVE_BYTES;
 #[derive(Debug, Error, PartialEq)]
 pub enum SaveError {
-    #[error("UI widget state save/restore is not yet supported")]
+    #[error("UI declarations require a bound v7 save and a separate hosted widget checkpoint")]
     UiUnsupported,
     #[error("text bindings are unsupported in an unbound legacy save")]
     TextUnsupported,
@@ -44,6 +44,8 @@ impl NativeWorld {
     /// the fixed-step clock. Navigation geometry is
     /// saved; bounded query caches are rebuilt on load. No asset files are read.
     ///
+    /// V7 includes UI declarations, not mutable hosted widget state. Composed
+    /// sessions must separately include every widget buffer, selection and focus.
     /// This is NOT a game-session/VM checkpoint: input, timers, callbacks, script
     /// heap and external FrameCommands are not included. Hosts must discard old
     /// pending commands/path results and explicitly restore their own state.
@@ -104,6 +106,15 @@ impl NativeWorld {
                             .clone(),
                     })
                     .collect(),
+            )?
+            .with_ui(
+                self.ui
+                    .iter()
+                    .map(|(&entity, node)| crate::CookedUi {
+                        entity,
+                        node: std::sync::Arc::clone(node),
+                    })
+                    .collect(),
             )?;
         // Stable-ID order is independent of ECS table/archetype insertion order.
         let states = self
@@ -140,15 +151,17 @@ impl NativeWorld {
             &states,
             &animations,
             &graphs,
+            self.ui_used,
         )
     }
 
-    /// Load validated data without source/project/asset-cache access. V2–v6 retain
+    /// Load validated data without source/project/asset-cache access. V2–v7 retain
     /// the original cooked-scene fingerprint for later program pairing; it is not
     /// authentication and does not restore a VM. Legacy v1 has no original binding
     /// field: its fingerprint describes only the saved plain scene. V3 adds localized
     /// scenes, v4 adds animation playback, v5 adds active crossfades, and v6 adds exact graph state; older saves cannot silently clear
-    /// an existing locale/catalog.
+    /// an existing locale/catalog. V7 additionally retains committed UI
+    /// declarations and sticky UI history; widget buffers/focus are separate.
     pub fn from_save_bytes(bytes: &[u8]) -> Result<Self, SaveError> {
         let decoded = codec::decode(bytes)?;
         let scene = CookedScene::from_bytes(decoded.scene)?;
@@ -167,6 +180,9 @@ impl NativeWorld {
             }
         }
         check_scene_capabilities(&scene)?;
+        if decoded.version < 7 && scene.has_ui() {
+            return Err(SaveError::UiUnsupported);
+        }
         // Exact membership is required: no missing/extra/duplicate playback row
         // may silently install a default cursor after a valid nested scene load.
         let expected = scene
@@ -251,6 +267,7 @@ impl NativeWorld {
             playback.graph = Some(graph);
         }
         world.tick = decoded.tick;
+        world.ui_used |= decoded.version == 7;
         if let Some(origin) = decoded.origin {
             world.source_scene_fingerprint = origin;
         }
@@ -267,6 +284,9 @@ impl NativeWorld {
     ) -> Result<Self, SaveError> {
         check_scene_capabilities(initial)?;
         let candidate = Self::from_save_bytes(bytes)?;
+        if initial.has_ui() && !candidate.ui_used {
+            return Err(SaveError::UiUnsupported);
+        }
         if !codec::is_bound(bytes) {
             return Err(SaveError::Invalid("original scene binding required"));
         }
@@ -286,6 +306,9 @@ impl NativeWorld {
     pub fn validate_save_compatibility(&self, candidate: &Self) -> Result<(), SaveError> {
         self.check_save_capabilities()?;
         candidate.check_save_capabilities()?;
+        if self.ui_used && !candidate.ui_used {
+            return Err(SaveError::UiUnsupported);
+        }
         candidate.check_save_binding(
             Some(self.source_scene_fingerprint),
             self.scene_id(),
@@ -325,6 +348,9 @@ impl NativeWorld {
         // The complete candidate decode validated framing and the supported
         // version. Both v3 and v4 carry the localization contract.
         let version = u32::from_le_bytes(bytes[8..12].try_into().unwrap());
+        if self.ui_used && version < 7 {
+            return Err(SaveError::UiUnsupported);
+        }
         if version < 3 && !self.localization.is_default() {
             return Err(SaveError::LocalizationUnsupported);
         }
@@ -366,15 +392,23 @@ impl NativeWorld {
             .text_generation
             .checked_add(1)
             .ok_or(SaveError::Invalid("text generation exhausted"))?;
+        candidate.ui_generation = self
+            .ui_generation
+            .checked_add(1)
+            .ok_or(SaveError::Invalid("UI generation exhausted"))?;
         candidate.identity = self.identity.clone();
         *self = candidate;
         Ok(())
     }
 
+    /// A composed save must also capture its retained UI widget owner, even
+    /// after the last UI declaration was removed. World bytes alone do not
+    /// represent text edits, selection, focus or any native input context.
+    pub fn requires_ui_checkpoint(&self) -> bool {
+        self.ui_used
+    }
+
     fn check_save_capabilities(&self) -> Result<(), SaveError> {
-        if self.ui_used {
-            return Err(SaveError::UiUnsupported);
-        }
         if self.audio_used {
             return Err(SaveError::AudioUnsupported);
         }
@@ -386,9 +420,6 @@ impl NativeWorld {
 }
 
 fn check_scene_capabilities(scene: &CookedScene) -> Result<(), SaveError> {
-    if scene.has_ui() {
-        return Err(SaveError::UiUnsupported);
-    }
     if !scene.audio().is_empty() {
         return Err(SaveError::AudioUnsupported);
     }

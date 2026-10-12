@@ -5,7 +5,12 @@ edition.workspace = true
 rust-version.workspace = true
 publish.workspace = true
 
+[features]
+default = []
+native = ["dep:incant_runtime"]
+
 [dependencies]
+incant_runtime = { workspace = true, optional = true }
 incant_types.workspace = true
 incant_text.workspace = true
 incant_input.workspace = true

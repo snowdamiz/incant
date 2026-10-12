@@ -13,6 +13,8 @@ pub struct PendingSessionCheckpoint {
     store: Store,
     schedule: Schedule,
     bindings: ValidatedActions,
+    #[cfg(feature = "ui")]
+    ui: Option<incant_ui::PendingUiCheckpoint>,
 }
 impl PendingSessionCheckpoint {
     pub fn new(
@@ -40,9 +42,9 @@ impl PendingSessionCheckpoint {
             .world
             .get(8..12)
             .map(|bytes| u32::from_le_bytes(bytes.try_into().unwrap()));
-        if !matches!(version, Some(3..=6)) {
+        if !matches!(version, Some(3..=7)) {
             return Err(CheckpointError::Invalid(
-                "session requires world save v3-v6",
+                "session requires world save v3-v7",
             ));
         }
         let world = load_world(sections.world)?;
@@ -51,6 +53,18 @@ impl PendingSessionCheckpoint {
         }
         if schedule.tick != world.tick() {
             return Err(CheckpointError::Invalid("world/script tick pairing"));
+        }
+        if world.requires_ui_checkpoint() != sections.ui.is_some() {
+            return Err(CheckpointError::Invalid("world/UI section pairing"));
+        }
+        #[cfg(feature = "ui")]
+        let ui = sections
+            .ui
+            .map(|bytes| incant_ui::PendingUiCheckpoint::new(&world, bytes))
+            .transpose()?;
+        #[cfg(not(feature = "ui"))]
+        if sections.ui.is_some() {
+            return Err(CheckpointError::Unsupported("hosted UI checkpoint feature"));
         }
         let scope_known = |scope| match (&code.bindings, scope) {
             (None, Scope::Global) => true,
@@ -103,6 +117,8 @@ impl PendingSessionCheckpoint {
             store,
             schedule,
             bindings,
+            #[cfg(feature = "ui")]
+            ui,
         })
     }
     pub fn world(&self) -> &NativeWorld {
@@ -111,6 +127,29 @@ impl PendingSessionCheckpoint {
     /// Run trusted module initialization; globals/closures are explicitly
     /// ephemeral. No tick occurs and the prepared world identity is preserved.
     pub fn start(self) -> Result<NativeSession> {
+        if self.world.requires_ui_checkpoint() {
+            return Err(CheckpointError::Unsupported(
+                "restored hosted UI owner is required",
+            ));
+        }
+        self.start_validated()
+    }
+    #[cfg(feature = "ui")]
+    pub fn ui(&self) -> Option<&incant_ui::PendingUiCheckpoint> {
+        self.ui.as_ref()
+    }
+    /// The owner must be reconstructed for this exact fresh world before any
+    /// guest initialization. A same-ID owner from another world cannot pass.
+    #[cfg(feature = "ui")]
+    pub fn start_with_ui(self, ui: &incant_ui::UiRuntime) -> Result<NativeSession> {
+        if let Some(state) = &self.ui {
+            state.validate_restored(&self.world, ui)?;
+        } else {
+            ui.checkpoint_for_world(&self.world)?;
+        }
+        self.start_validated()
+    }
+    fn start_validated(self) -> Result<NativeSession> {
         let mut host = ScriptHost::for_checkpoint(self.code, &self.world, &self.active)?;
         validate(
             &host,
