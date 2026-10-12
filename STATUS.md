@@ -21,7 +21,7 @@ visual work, and Astra owns correctness and integration.
 The unchanged accepted ABI passes 469 actual-host cases, Clippy and target/tooling
 checks. A fresh ordinary shipping player passes three source/map/build-deleted
 12-tick runs with exact report/PCM equality and six precise no-output refusals.
-Independent integration review and publication remain pending. Module checkpoints,
+Independent integration review is accepted; fast CI/publication remain pending. Module checkpoints,
 GPU/window/appearance, device and full SDK gates remain open.
 [Current integration evidence](docs/spikes/native-wasm-hud-integration.md).
 

@@ -23,7 +23,7 @@ same reviewed source; this packet does not claim byte identity between them.
 Final main165 ancestry adds only the reviewed Planar workflow/sample and evidence
 files. All compiled source/cook inputs remain identical to the tested freeze.
 [Exact sources, commands, raw receipts and package identities](evidence/native-wasm-hud-integration.json)
-await independent integration review.
+passed independent integration review.
 
 Module checkpoints, GPU/window/appearance acceptance, physical devices and full
 SDK/phase completion remain open. This CPU proof does not replace those gates.

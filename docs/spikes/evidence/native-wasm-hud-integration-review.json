@@ -1,0 +1,27 @@
+{
+  "at": "2026-10-12T20:29:01.909931+00:00",
+  "verdict": "accepted",
+  "reviewer": "astra root",
+  "manifest_sha256": "3f02b65e246494f5385d8e4fb467438508fcf9a4f40bc3fa9d85b91a1af2d09d",
+  "producer": "67174c3a8a6e05b4966ce8570921fe20f4675dfe",
+  "integrated": "553c420443d2851d561649123bb46e27884198d5",
+  "accepted_producer_inputs": 30,
+  "frozen_inputs": 1844,
+  "qualified_changed_input": "Only previously accepted five desktop CI lines; all compiled input hashes unchanged",
+  "retained_raw_original_artifacts": 466,
+  "passing_checks": 10,
+  "actual_host_tests": 469,
+  "groups": 84,
+  "package_files": 22,
+  "command_receipts": 15,
+  "fresh_runs": 3,
+  "ticks_per_run": 12,
+  "pcm_bytes_per_run": 76800,
+  "exact_refusals": 6,
+  "source_review": "Already accepted HUD producer inputs exact; independently inspected ordinary public helper and reran retained output assertions for generated SDK/log/focus/edit/submit, actual canonical shaping, movement and mixed PCM.",
+  "limitations": [
+    "Public exported guest is freshly compiled by the ordinary helper; no byte-identity claim against the distinct conformance guest build",
+    "Module checkpoints remain explicitly refused",
+    "No GPU/window/appearance/physical device/performance approval"
+  ]
+}
