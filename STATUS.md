@@ -16,6 +16,18 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Public Wasm animation graphs — locally verified
+
+The Rust SDK and native Wasmtime/wasm2c hosts now expose copied graph state,
+parameters and atomic controls, with an additive v3 snapshot for actual timed
+and parameter-driven pose blends. Published opcodes 0–30 and old layouts remain
+unchanged; old snapshots explicitly refuse blends they cannot represent. The
+corrected implementation passes 355 actual-host tests/doctests, Clippy and three
+development processes, plus supported wasm32/tooling checks. Independent source
+review closed a forged-rest-destination parser case. Main integration and its
+fast gate are pending. Complete animation/SDK, guest checkpoints, device and
+phase requirements remain open. [Contract/evidence](docs/spikes/native-animation-graph-sdk.md).
+
 ## Public authored Wasm route — current-main integration verified
 
 One typed scene module now connects public bounded `.wasm` import/reimport,

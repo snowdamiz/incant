@@ -12,6 +12,21 @@ pub struct AnimationPlayback {
     pub looping: bool,
     pub completed: bool,
     pub transition: Option<AnimationTransition>,
+    /// Actual second pose and destination contribution, including parameter
+    /// blends that have no timed transition. Available from the v3 snapshot.
+    pub pose_blend: Option<AnimationPoseBlend>,
+}
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum AnimationBlendKind {
+    Transition,
+    Parameter,
+}
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub struct AnimationPoseBlend {
+    pub kind: AnimationBlendKind,
+    pub clip: Option<u16>,
+    pub seconds: f64,
+    pub weight: f64,
 }
 /// Captured outgoing state; elapsed/duration is destination contribution.
 #[derive(Debug, Clone, Copy, PartialEq)]
@@ -100,12 +115,16 @@ pub struct AnimationSnapshot<'a> {
     rows: &'a [u8],
     stride: usize,
     v2: bool,
+    v3: bool,
 }
 impl<'a> AnimationSnapshot<'a> {
     pub fn parse(bytes: &'a [u8]) -> Result<Self> {
         let header = abi::AnimationHeader::decode(bytes).ok_or(Error::Malformed)?;
-        let v2 = &header.magic == abi::ANIMATION_V2_MAGIC;
-        let stride = if v2 {
+        let v3 = &header.magic == abi::ANIMATION_V3_MAGIC;
+        let v2 = v3 || &header.magic == abi::ANIMATION_V2_MAGIC;
+        let stride = if v3 {
+            abi::AnimationRowV3::SIZE
+        } else if v2 {
             abi::AnimationRowV2::SIZE
         } else {
             abi::AnimationRow::SIZE
@@ -142,8 +161,16 @@ impl<'a> AnimationSnapshot<'a> {
             if v2 {
                 validate_transition(abi::AnimationRowV2::decode(bytes).ok_or(Error::Malformed)?)?;
             }
+            if v3 {
+                validate_pose_blend(abi::AnimationRowV3::decode(bytes).ok_or(Error::Malformed)?)?;
+            }
         }
-        Ok(Self { rows, stride, v2 })
+        Ok(Self {
+            rows,
+            stride,
+            v2,
+            v3,
+        })
     }
     pub fn len(&self) -> usize {
         self.rows.len() / self.stride
@@ -153,6 +180,7 @@ impl<'a> AnimationSnapshot<'a> {
     }
     pub fn iter(&self) -> impl Iterator<Item = AnimationPlayback> + 'a {
         let v2 = self.v2;
+        let v3 = self.v3;
         self.rows.chunks_exact(self.stride).map(move |bytes| {
             let row = abi::AnimationRow::decode(bytes).expect("validated animation row");
             AnimationPlayback {
@@ -185,9 +213,68 @@ impl<'a> AnimationSnapshot<'a> {
                 } else {
                     None
                 },
+                pose_blend: if v3 {
+                    let blend = abi::AnimationRowV3::decode(bytes).expect("validated pose blend");
+                    (blend.blend_kind != 0).then_some(AnimationPoseBlend {
+                        kind: if blend.blend_kind == 1 {
+                            AnimationBlendKind::Transition
+                        } else {
+                            AnimationBlendKind::Parameter
+                        },
+                        clip: if blend.blend_source_clip == u32::MAX {
+                            None
+                        } else {
+                            Some(blend.blend_source_clip as u16)
+                        },
+                        seconds: blend.blend_source_seconds,
+                        weight: blend.blend_weight,
+                    })
+                } else {
+                    None
+                },
             }
         })
     }
+}
+
+fn validate_pose_blend(row: abi::AnimationRowV3) -> Result<()> {
+    if !row.is_finite() || row.blend_kind > 2 {
+        return Err(Error::Malformed);
+    }
+    if row.blend_kind == 0 {
+        if row.transition_flags != 0
+            || row.blend_source_clip != 0
+            || row.blend_source_seconds.to_bits() != 0
+            || row.blend_weight.to_bits() != 0
+        {
+            return Err(Error::Malformed);
+        }
+    } else {
+        if row.blend_source_seconds < 0.0
+            || !(0.0..=1.0).contains(&row.blend_weight)
+            || (row.blend_source_clip == u32::MAX && row.blend_source_seconds != 0.0)
+            || (row.blend_source_clip != u32::MAX
+                && row.blend_source_clip as usize >= abi::ANIMATION_MAX_CLIPS)
+        {
+            return Err(Error::Malformed);
+        }
+        if row.blend_kind == 1 {
+            if row.transition_flags & 1 == 0
+                || row.blend_source_clip != row.source_clip
+                || row.blend_source_seconds != row.source_seconds
+                || row.blend_weight != row.elapsed / row.duration
+            {
+                return Err(Error::Malformed);
+            }
+        } else if row.transition_flags != 0
+            || row.clip == u32::MAX
+            || row.blend_weight == 0.0
+            || row.blend_source_clip == u32::MAX
+        {
+            return Err(Error::Malformed);
+        }
+    }
+    Ok(())
 }
 
 fn validate_transition(row: abi::AnimationRowV2) -> Result<()> {

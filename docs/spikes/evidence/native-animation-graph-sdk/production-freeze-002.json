@@ -1,0 +1,27 @@
+{
+  "time": "2026-10-12T05:06:04.785801+00:00",
+  "root": "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant",
+  "head": "24064ab467f185e0cacc96dbd32040705d480806",
+  "source_hashes": {
+    "crates/incant_wasm_abi/src/lib.rs": "242cc8f3bb2eed6900949ca0e144259cf1b983d239cad7361bff0d62d5f4813b",
+    "crates/incant_wasm_dev/src/generated.rs": "2ba64784f8e86476fc2d05a98b979e665b073ecde3a4fe85f07f2bdb4b83b503",
+    "crates/incant_wasm_runtime/c/generated.h": "bcef09bd00685ea13e0c14faff3777e126c63c199fc192ee1a3b9e4e2c56da40",
+    "crates/incant_wasm_runtime/c/generated.inc": "92c4d05aa774f8232d42f33e348c8b8676baad6924085af4a64f014bffdada73",
+    "crates/incant_wasm_runtime/src/animation_graphs.rs": "ab9fd018930258640d65ae3551d2078386bd7077871ceaab1b3f9b79df7e1462",
+    "crates/incant_wasm_runtime/src/animations.rs": "42b45667ca93a8db21486dee0530934263015ccf2f6e824e173e6e29b2bbeb2f",
+    "crates/incant_wasm_runtime/src/capability.rs": "f6102de664658344c1aa488764281685a1d494a657531abee82e9c4aafb99155",
+    "crates/incant_wasm_runtime/src/generated.rs": "a7a25803b6284f63a05af37060c7f64957f9c24959f8238b37288c231eaca856",
+    "crates/incant_wasm_runtime/src/input_tags.rs": "ceb6b13a8a5c607c336473f1554aecea9fbb4cc2a03c18df80b91f8e43ee23f3",
+    "crates/incant_wasm_runtime/src/lib.rs": "2493d669150f3760020b5f3beebaf0dc0f017f38c9cda8c54561a2ebe5b3c20b",
+    "sdk/abi/native-v1.json": "84b2458a8d00a4a1c73e899cd10f46bfd8792e9756f9fc37c216fa2893789d79",
+    "sdk/rust/src/animation.rs": "7227268d705c8f4c54e8cf9cf533ef23b6346e9d1ce7be26da8c2aed94302b0d",
+    "sdk/rust/src/animation_graph.rs": "b2a742fcd9730f744fd378dbd38b8e2bab46d546dfb3c49daa5411bf7ed8c7f0",
+    "sdk/rust/src/lib.rs": "183744864db569cd54d4a0a114a27f588b7eb03daa8e92e0931b1b8aef3ae47d",
+    "sdk/rust/src/raw.rs": "40e3a189e0f7a870e95b44b8bb7c09777bd3294b895b674e56f9124bcd26ed7c",
+    "sdk/rust/src/tick.rs": "67be99402dfd85c40db60a482a53d188e6744c4c839c8b663bda718d196acd36",
+    "tools/generate_wasm_sdk.py": "82f79e6422a1b6e0e5943ff30722f355565ccf9a7aec26f721605c0e5f6a5d7f",
+    "tools/wasm_abi.py": "1c02ca646444f847ecf2be4149edf5e2720b096ad79acb5f852287ac48a11d72"
+  },
+  "scope": "Production frozen for independent review; tests, probes, samples and docs still evolve.",
+  "correction": "Reject forged parameter blend with rest destination; use statically sized chunks per Clippy. Only animation.rs and animation_graph.rs production changed."
+}

@@ -1,0 +1,137 @@
+{
+  "at": "2026-10-12T05:11:38.871270+00:00",
+  "base": "30b33bf66788801c8b6ecfe09f65f307a81f51c1",
+  "source_hashes": {
+    "crates/incant_wasm_abi/src/lib.rs": "242cc8f3bb2eed6900949ca0e144259cf1b983d239cad7361bff0d62d5f4813b",
+    "crates/incant_wasm_dev/src/generated.rs": "2ba64784f8e86476fc2d05a98b979e665b073ecde3a4fe85f07f2bdb4b83b503",
+    "crates/incant_wasm_dev/tests/animation_graph_parity.rs": "c016203cf918e8fb4729c62efc4dcd009ba2532758c699f5d68b6c1efd3fb483",
+    "crates/incant_wasm_dev/tests/animation_parity.rs": "7d2af6cc4aa5ecb0ad37e42b0e2e73239ee8754f066514f724bb37d370469403",
+    "crates/incant_wasm_dev/tests/crossfade_parity.rs": "7ca9710bad0cfa8658cca39805a79434ad525dd838d9e2bd7c2c499614650a20",
+    "crates/incant_wasm_runtime/c/generated.h": "bcef09bd00685ea13e0c14faff3777e126c63c199fc192ee1a3b9e4e2c56da40",
+    "crates/incant_wasm_runtime/c/generated.inc": "92c4d05aa774f8232d42f33e348c8b8676baad6924085af4a64f014bffdada73",
+    "crates/incant_wasm_runtime/src/animation_graphs.rs": "ab9fd018930258640d65ae3551d2078386bd7077871ceaab1b3f9b79df7e1462",
+    "crates/incant_wasm_runtime/src/animations.rs": "42b45667ca93a8db21486dee0530934263015ccf2f6e824e173e6e29b2bbeb2f",
+    "crates/incant_wasm_runtime/src/capability.rs": "f6102de664658344c1aa488764281685a1d494a657531abee82e9c4aafb99155",
+    "crates/incant_wasm_runtime/src/generated.rs": "a7a25803b6284f63a05af37060c7f64957f9c24959f8238b37288c231eaca856",
+    "crates/incant_wasm_runtime/src/input_tags.rs": "ceb6b13a8a5c607c336473f1554aecea9fbb4cc2a03c18df80b91f8e43ee23f3",
+    "crates/incant_wasm_runtime/src/lib.rs": "2493d669150f3760020b5f3beebaf0dc0f017f38c9cda8c54561a2ebe5b3c20b",
+    "crates/incant_wasm_runtime/tests/animations.rs": "8a4cb4c1da9302f55ddff3e3d110ff5b9e3953d59d642db67eb471905276ff88",
+    "crates/incant_wasm_runtime/tests/animations/graph.rs": "1e78bf26597a50550d35f0c49fab2724bbeec28e4dc24d638be082f9ab38782b",
+    "crates/incant_wasm_runtime/tests/animations/graph_sdk.rs": "86e61ea93c10d69f3901a81a97406937646ce31f2b0e1a9713231f75dc81b639",
+    "sdk/abi/native-v1.json": "84b2458a8d00a4a1c73e899cd10f46bfd8792e9756f9fc37c216fa2893789d79",
+    "sdk/rust/README.md": "42a8848d0758696213d5549e07b8254765a9cc2b19be8183bfda82d7bf9664df",
+    "sdk/rust/fixtures/animation_graph_failure.rs": "1fe6e2ba1fa82970aaec888fdeea2a4dadf79e32a679a6f00a6292d500e84cf6",
+    "sdk/rust/samples/animation_graph.rs": "631c6cbdaf65a190809dde0a87c86be8c18354dd666caa8e79c70e50abf2842a",
+    "sdk/rust/src/animation.rs": "7227268d705c8f4c54e8cf9cf533ef23b6346e9d1ce7be26da8c2aed94302b0d",
+    "sdk/rust/src/animation_graph.rs": "b2a742fcd9730f744fd378dbd38b8e2bab46d546dfb3c49daa5411bf7ed8c7f0",
+    "sdk/rust/src/lib.rs": "183744864db569cd54d4a0a114a27f588b7eb03daa8e92e0931b1b8aef3ae47d",
+    "sdk/rust/src/raw.rs": "40e3a189e0f7a870e95b44b8bb7c09777bd3294b895b674e56f9124bcd26ed7c",
+    "sdk/rust/src/tick.rs": "67be99402dfd85c40db60a482a53d188e6744c4c839c8b663bda718d196acd36",
+    "sdk/rust/tests/animation_graph.rs": "37dda8eb71c73a3ffb63c8f15d9fd2996715cdcbec4f7e85653004a06ddca7c6",
+    "sdk/rust/tests/animation_v3.rs": "aa316761a257b7146d1cc5ef3d86da7ef5536eef4c6e296064ff24c9c1772e56",
+    "tools/generate_wasm_sdk.py": "82f79e6422a1b6e0e5943ff30722f355565ccf9a7aec26f721605c0e5f6a5d7f",
+    "tools/probes/shipping-wasm2c.py": "4c810d8a9fc6ed8b4948fe01f24abf1688394dd41f6fe680fbc4c50e167e069d",
+    "tools/tests/test_wasm_sdk.py": "3a611c5b9c5452984c1940f6df3ce40879b0dc02cd101d5ddbdecd3f3689766d",
+    "tools/wasm_abi.py": "1c02ca646444f847ecf2be4149edf5e2720b096ad79acb5f852287ac48a11d72"
+  },
+  "checks": {
+    "actual_hosts": {
+      "passed": 355,
+      "groups": 61,
+      "failed": 0,
+      "ignored": 0,
+      "wasmtime": "49.0.2",
+      "wasm2c": "WABT1.0.42"
+    },
+    "all_target_clippy": true,
+    "development_processes": 3,
+    "python_tests": 231,
+    "python_skipped": 4,
+    "sdk_wasm32": true,
+    "node_tool_tests": true,
+    "generated_registry_and_conventions": true,
+    "fmt_and_diff": true
+  },
+  "prepared_modules": 109,
+  "prepared_files_independently_verified": 546,
+  "new_guest_modules": 12,
+  "review": "Independent corrected-source and actual-host review accepted; final supported wasm32/Node/fmt/diff checks completed successfully.",
+  "logs": {
+    "docs/spikes/evidence/native-animation-graph-sdk/conformance-0.log.gz": {
+      "sha256": "ca7c31c3b6dc68542865e6c9a8c42ab85e04c3f3a45dc5b134df073017530590",
+      "uncompressed_sha256": "82b556698b94e3ddd205e1f329f3964aa6b783738c39f9d22872698d07fd41a3"
+    },
+    "docs/spikes/evidence/native-animation-graph-sdk/conformance-1.log.gz": {
+      "sha256": "513940a9845d7d2ccf2bf5b8b9226f144f5817d2b84a9e88ab19a99a4912df0b",
+      "uncompressed_sha256": "f37dc0547f2ab6cdba45c4e0878294f45cd5c2f07dba5f523229e5ab3f0cc089"
+    },
+    "docs/spikes/evidence/native-animation-graph-sdk/conformance-2.log.gz": {
+      "sha256": "ef2c1c14e8b883a0e3abd6a1e44c498b65e613b5004acda7ad3ba3e626f37160",
+      "uncompressed_sha256": "e23978be95fec45066f6f931350338de06b1c1815b4dda10c06526e1b6663136"
+    },
+    "docs/spikes/evidence/native-animation-graph-sdk/cook-build.log.gz": {
+      "sha256": "3e9c173a06971cc9ba98c06f749f0abb9f46a39c1a1ef920914e538c422cc50b",
+      "uncompressed_sha256": "90f7f2b7c04fec514a579202694afce9fd0502055bf4cec374ec91acb28d6bd9"
+    },
+    "docs/spikes/evidence/native-animation-graph-sdk/boundary-tests.log.gz": {
+      "sha256": "cc18517fcb315d0ab3928436ca68c01fbf40f15d4b876b4b9c5e37ccca40dc7c",
+      "uncompressed_sha256": "7ff2a37477ab016834c41f05eeb1bd54a33ddbde020e7d166f2f0f86e9a8e630"
+    },
+    "docs/spikes/evidence/native-animation-graph-sdk/tools.log.gz": {
+      "sha256": "b9f98d1c61ac0d2b9c525ec68645be4d324236f1d7f5ab89ab67a6daed3129c8",
+      "uncompressed_sha256": "29de6d2a416bf291b400e96c20e5b21435d0eb1387d75dfbcfa117e4589e4235"
+    },
+    "docs/spikes/evidence/native-animation-graph-sdk/wasm32.log.gz": {
+      "sha256": "0c7915cd16eceac90610032c6d6335d70a40db921b248f78058074f391fb38dc",
+      "uncompressed_sha256": "2e6382a2d8f5aa13e54c47c5efd60744216133ae787222f3e55b184581440d55"
+    },
+    "docs/spikes/evidence/native-animation-graph-sdk/node.log.gz": {
+      "sha256": "21ab07b45d3e3b655e6dfd1052ecc6bdc3937b3a4cf7223554e34d5f313f5940",
+      "uncompressed_sha256": "bb1044c79ab495fbbb68e2a80afc95c1c3b3e337426ad4cf345cf6b5e3c6df43"
+    },
+    "docs/spikes/evidence/native-animation-graph-sdk/old-boundary-setup-failure.log.gz": {
+      "sha256": "6a8119e0d489ff1e285066b79f5cc58f1f2ee0cc358b187053767a6864243005",
+      "uncompressed_sha256": "c12bb64cf3ca1ff23363070db975122cb47aa68da689cfaeebbc6bd4c4acc33d"
+    },
+    "docs/spikes/evidence/native-animation-graph-sdk/old-fixture-name-failure.log.gz": {
+      "sha256": "8f5e06d5b205a00889b2a40bffa351fec5505411910a90d703431f36fbce29ce",
+      "uncompressed_sha256": "9a4ff7791026a83026847d52c1f91d511fc863a4be5d685ca1d5489c960bec65"
+    },
+    "docs/spikes/evidence/native-animation-graph-sdk/old-clippy-failure.log.gz": {
+      "sha256": "1886033048ada617ce981ae5f062736c0b0e68887ea0a045e7cc1704f263653c",
+      "uncompressed_sha256": "a99e959e633e4db4e31853ecc6a39b5788325e8bbbebcfb93b6026cfbd837967"
+    },
+    "docs/spikes/evidence/native-animation-graph-sdk/old-tests-before-parser-fix.log.gz": {
+      "sha256": "ae6592691bd0e377eaacb1f02aa6e8f8fb70fcff7cac95c480d33e9bf5f26917",
+      "uncompressed_sha256": "85b829ef4dfce6e103185b4bc0c1010ba3fc6803566dee54be84a3497f3f6f80"
+    },
+    "docs/spikes/evidence/native-animation-graph-sdk/test-lint-digits.log.gz": {
+      "sha256": "5d630d3a2d0129aefc0d1899aafd20fc16218f356853261050865db6d2b7200d",
+      "uncompressed_sha256": "72213626bf46f70aa13d229bf823431a07c44ee8e6f4fae1da7a6e6f4a7d2b6f"
+    },
+    "docs/spikes/evidence/native-animation-graph-sdk/test-lint-duplicate.log.gz": {
+      "sha256": "3999c82533519d6531eadb0f412dc375c078cce70c88406afc4efb95fe0f1e46",
+      "uncompressed_sha256": "8ab37f9dfbab51d95f0b5f480a4a2f89aa0d69483cc98140b8106a8f004d03b6"
+    },
+    "docs/spikes/evidence/native-animation-graph-sdk/clippy-passed.log.gz": {
+      "sha256": "63a27c01d4eb43204a5fd801d048430de310ae68ff727025b9c924aac84efe59",
+      "uncompressed_sha256": "7b430a19356303f1f9e433ca5f26a24caf9a2b6dfc919df8b571cf0073d83129"
+    }
+  },
+  "receipts": {
+    "docs/spikes/evidence/native-animation-graph-sdk/production-freeze-001.json": "b0474ea69a59e35f2af1760d404e9472f07d2a96b0481b1c78f14521a2299863",
+    "docs/spikes/evidence/native-animation-graph-sdk/production-freeze-002.json": "a30a77170856bbf224df573f15862efd3cd90a2ff5d1cc001ee89b2260018c71",
+    "docs/spikes/evidence/native-animation-graph-sdk/source-review-001.json": "346293ab407849dbde906a171872c79f7fcf4c100205dacc69d127c259fc2139",
+    "docs/spikes/evidence/native-animation-graph-sdk/source-review-002.json": "4dfae59f38a18d9a75db2d73f6c82fdfad1a3b95b8ed601e53b224af2567917b",
+    "docs/spikes/evidence/native-animation-graph-sdk/prepared-manifest.json": "27122c5b8430165a5e80e47d0a954de0e03c79c66b50c0552b09e09516f32439",
+    "docs/spikes/evidence/native-animation-graph-sdk/prepared-verification.json": "0a90ed2f48726b6ded77e4cb4c496e5c9d4c16fb5b54855a1cafbca01a4d3a7c",
+    "docs/spikes/evidence/native-animation-graph-sdk/rust-sdk.json": "a0a0181e9749c71f2104a4528e838d14aca758fcf4fb01c562971b3cf5a29281",
+    "docs/spikes/evidence/native-animation-graph-sdk/final-independent-review.json": "54b1fea191110c74bff1a83a9f3ef74b94061a7f77f85944af59a179784cf9d6"
+  },
+  "limitations": [
+    "Actual host conformance on aarch64 macOS ci profile, no device or shipping performance gate",
+    "No ordinary copied-player graph-Wasm export proof in this slice; native graph export and authored Wasm export have separate receipts",
+    "Full guest checkpoints and routed UI ABI remain unsupported",
+    "No full animation, SDK or phase-gate acceptance"
+  ]
+}
