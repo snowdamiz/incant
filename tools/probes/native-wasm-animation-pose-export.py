@@ -37,7 +37,7 @@ def ulid(n):
     return ''.join(alphabet[(n>>(5*i))&31] for i in reversed(range(26)))
 
 
-def fixture(root):
+def fixture(root, ik=False):
     BASE['fixture'](root)
     model=json.loads((root/'rig.gltf').read_text());data=bytearray((root/'rig.bin').read_bytes())
     originals=model['animations'];model['animations']=[]
@@ -48,6 +48,10 @@ def fixture(root):
         model['accessors'].append({'bufferView':view,'componentType':5126,'type':'SCALAR','count':2,'min':[0],'max':[n+1]})
         animation=json.loads(json.dumps(originals[n%2]));animation['name']=f'clip-{n}'
         animation['samplers'][0]['input']=accessor;model['animations'].append(animation)
+    if ik:
+        model['nodes']=[{'children':[1]},{'translation':[1,0,0],'children':[2]},
+                        {'translation':[0,1,0],'children':[3]},{'translation':[1,0,0]},{'mesh':0,'skin':0}]
+        model['scenes']=[{'nodes':[0,4]}];model['skins'][0].update(joints=[3],skeleton=0)
     model['buffers'][0]['byteLength']=len(data);(root/'rig.bin').write_bytes(data)
     (root/'rig.gltf').write_text(json.dumps(model,indent=2)+'\n')
 
@@ -67,33 +71,42 @@ def graph(pair=False):
     return {'initial':ulid(20),'parameters':params,'states':states,'transitions':{}}
 
 
-def entities(model):
+def entities(model, ik=False):
     result={}
-    for n in [1,2,3,4,*range(100,148),*range(200,209),300]:
+    for n in [1,2,3,4,*range(100,148),*range(200,209),300,*(range(1000,1012) if ik else [])]:
         components={'Transform':BASE['transform']([0,0,8] if n==300 else [0,0,0])}
         if n in (1,2,3):
             components['MeshRenderer']={'mesh':model,'materials':[],'cast_shadows':False}
             components['Animation']={'clip':0 if n==2 else None,'seconds':0,'speed':1,'playing':True,'looping':True}
             if n!=2:components['AnimationGraph']=graph(n==3)
+            if ik and n in (1,2):
+                components['AnimationIk']={'constraints':[
+                    {'id':ulid(9),'chain':[0,1,2],'target':[1,1,0],'pole':[0,1,0],'weight':1},
+                    {'id':ulid(8),'chain':[1,2,3],'target':[2,1,0],'pole':[0,1,0],'weight':.5}]}
         if n==300:components['Camera']={'fov_degrees':60,'near':.1,'far':200,'projection':{'kind':'perspective'}}
         result[ulid(n)]={'id':ulid(n),'name':f'Pose game {n}','parent':None,'provenance':None,'components':components}
     return result
 
 
 def fields(row):
-    return {**{ulid(100+i):v for i,v in enumerate(row['samples'])},**{ulid(200+i):v for i,v in enumerate(row['metadata'])}}
+    return {**{ulid(100+i):v for i,v in enumerate(row['samples'])},**{ulid(200+i):v for i,v in enumerate(row['metadata'])},**{ulid(1000+i):v for i,v in enumerate(row.get('ik',[]))}}
 
 
 def observation(rows):
     return {'format':'incant-native-observation','version':1,'entities':list(fields(rows[0])),
             'checks':[{'name':f'{row["tick"]}-{entity}','tick':row['tick'],'expect':{'type':'vector','entity':entity,'property':'translation','value':value,'tolerance':1e-12}}
-                      for row in rows if row['tick'] in (1,6,13,20) for entity,value in fields(row).items()]}
+                      for row in rows if row['tick'] in (1,6,13,20) for entity,value in fields(row).items()
+                      if entity < ulid(1000) or row['tick'] in (1,20)]}
 
 
-def check_logs(logs,expected,require):
-    require(logs['dropped']==0 and len(logs['entries'])==TICKS*3,'Full per-entity record count')
+def check_logs(logs,expected,require,ik=False):
+    require(logs['dropped']==0 and len(logs['entries'])==TICKS*(5 if ik else 3),'Full per-entity record count')
     for offset,entry in enumerate(logs['entries']):
-        row=expected[offset//3];index=offset%3;actual=json.loads(entry['message'])
+        row=expected[offset//(5 if ik else 3)];index=offset%(5 if ik else 3);actual=json.loads(entry['message'])
+        if ik and index>=3:
+            require(entry['level']=='info' and entry['tick']==row['tick']==actual['tick'] and actual['entity']==index-2,'IK record identity')
+            require(set(actual)=={'tick','entity','constraints'} and actual['constraints']==row['ik'][(index-3)*6:(index-2)*6],'Exact ordered IK observations')
+            continue
         require(entry['level']=='info' and entry['tick']==row['tick']==actual['tick'] and actual['entity']==index+1,'Record tick/level/entity')
         require(set(actual)=={'tick','entity','samples','metadata'} and len(actual['samples'])==16 and len(actual['metadata'])==3,'Complete per-field record layout')
         for kind,size in [('samples',16),('metadata',3)]:
@@ -106,6 +119,7 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output',type=Path);parser.add_argument('--binary',type=Path,required=True)
     parser.add_argument('--oracle',type=Path,required=True);parser.add_argument('--stage',choices=('author','export','all'),default='all')
+    parser.add_argument('--ik',action='store_true',help='Include complete ordered IK snapshot/control parity')
     args=parser.parse_args();sys.path.insert(0,str(ROOT/'tools'))
     import native_process
     import export_native
@@ -113,7 +127,15 @@ def main():
     out=args.output.resolve();binary=args.binary.resolve(strict=True);oracle=args.oracle.resolve(strict=True)
     if args.stage!='export':out.mkdir(parents=True,exist_ok=False)
     require(out.is_dir() and not out.is_symlink(),'Missing private proof directory')
-    sources=[Path(__file__),ROOT/'tools/probes/native-wasm-animation-pose-export/behavior.rs',ROOT/'crates/incant_cook/examples/animation_pose_package_oracle.rs',ROOT/'tools/probes/native-animation-graph-export.py',ROOT/'tools/export_native.py']
+    actions=ACTIONS;dev_errors=DEV_ERRORS;package_errors=PACKAGE_ERRORS
+    if args.ik:
+        actions=[('old-v1','old_v1','KeyA'),('old-v2','old_v2','KeyB'),('old-v3','old_v3','KeyC'),('old-v4','old_v4','KeyD'),('short-scratch','short_scratch','KeyE'),('late-command','late_command','KeyF'),('bad-constraint','bad_constraint','KeyG')]
+        message='animation snapshots cannot represent IK constraints'
+        dev_errors={**DEV_ERRORS,**{n:'Error: native play startup/runtime failure: development Wasm rejected or trapped: Wasm ABI: '+message for n in ['old-v1','old-v2','old-v3','old-v4']}}
+        package_errors={**PACKAGE_ERRORS,**{n:'Error: Session(Module(Boundary(Abi("'+message+'"))))' for n in ['old-v1','old-v2','old-v3','old-v4']}}
+        dev_errors['bad-constraint']='Error: native play startup/runtime failure: invalid scene data: IK constraint identity'
+        package_errors['bad-constraint']='Error: Session(Module(Boundary(Runtime(Scene(Invalid("IK constraint identity"))))))'
+    sources=[Path(__file__),ROOT/('tools/probes/native-wasm-animation-pose-export/ik.rs' if args.ik else 'tools/probes/native-wasm-animation-pose-export/behavior.rs'),ROOT/'crates/incant_cook/examples/animation_pose_package_oracle.rs',ROOT/'tools/probes/native-animation-graph-export.py',ROOT/'tools/export_native.py']
     source_hashes={str(p.relative_to(ROOT)):sha256(p.read_bytes()) for p in sources}
     command_path=out/'commands.json';commands=json.loads(command_path.read_text()) if command_path.exists() else []
     run=native_process.run
@@ -149,7 +171,7 @@ def main():
         return receipt
     inputs=out/'authoring';project=inputs/'project.json';journal=project.with_suffix('.journal.jsonl');plan=out/'observe.json';positive=out/'positive-input.json'
     if args.stage!='export':
-        inputs.mkdir();build=out/'guest-build';build.mkdir();execute([binary,'init',project,'--entities',0]);fixture(inputs)
+        inputs.mkdir();build=out/'guest-build';build.mkdir();execute([binary,'init',project,'--entities',0]);fixture(inputs,args.ik)
         model=value([binary,'import',project,'rig.gltf']);write_json(out/'model-import.json',model)
         source=build/'behavior.rs';source.write_bytes(sources[1].read_bytes())
         compiled=value([sys.executable,ROOT/'tools/rust_guest.py',source,build/'behavior.wasm','--rustup','/opt/homebrew/bin/rustup']);write_json(out/'guest-compile.json',compiled)
@@ -159,9 +181,9 @@ def main():
             result=rpc.call(method,params);calls.append({'method':method,'params':params,'result':result});write_json(out/'public-commands.json',calls);return result
         try:
             before=call('project.read');batch=[{'op':'delete_scene','scene_id':s} for s in before['project']['scenes']]
-            batch += [{'op':'create_scene','scene':{'id':ulid(99),'name':'Complete native poses','entities':entities(model['asset']['id'])}},
+            batch += [{'op':'create_scene','scene':{'id':ulid(99),'name':'Complete native poses','entities':entities(model['asset']['id'],args.ik)}},
                       {'op':'set_scene_program','scene_id':ulid(99),'program':{'kind':'wasm','module':module['asset']['id']}},
-                      {'op':'set_input_actions','actions':{name:{'kind':'button','bindings':[{'type':'key','code':key}]} for _,name,key in ACTIONS}}]
+                      {'op':'set_input_actions','actions':{name:{'kind':'button','bindings':[{'type':'key','code':key}]} for _,name,key in actions}}]
             call('command.execute',{'expected_revision':before['revision'],'description':'Author complete pose game','commands':batch})
             selected=call('project.read')['project'];call('history.undo');require(call('project.read')['project']==before['project'],'Atomic Undo')
             call('history.redo');require(call('project.read')['project']==selected,'Atomic Redo')
@@ -173,18 +195,18 @@ def main():
         execute([binary,'validate',project])
         for name in ('rig.gltf','rig.bin','behavior.wasm'):remove_file(inputs/name)
         remove_tree(build)
-        raw=execute([oracle,project,ulid(99),out/'oracle.scene',TICKS]).stdout;rows=[json.loads(line) for line in raw.splitlines()]
+        raw=execute([oracle,project,ulid(99),out/'oracle.scene',TICKS,*(['--ik'] if args.ik else [])]).stdout;rows=[json.loads(line) for line in raw.splitlines()]
         require(len(rows)==TICKS and [r['tick'] for r in rows]==list(range(1,TICKS+1)),'Native oracle clock')
         require(rows[0]['metadata'][0][0]==8 and rows[12]['metadata'][1][2]==1,'Eight active samples and completed rest exercised')
-        write_json(out/'oracle.json',rows);write_json(plan,observation(rows));require(len(observation(rows)['checks'])==228,'Bounded public vector assertions')
+        write_json(out/'oracle.json',rows);write_json(plan,observation(rows));require(len(observation(rows)['checks'])==(252 if args.ik else 228),'Bounded public vector assertions')
         write_json(positive,{'format':'incant-input','version':1,'tick_rate':60,'start_tick':0,'ticks':TICKS,'frames':[]})
         dev=value([binary,'native-play',project,'--camera',ulid(300),'--ticks',TICKS,'--input-replay',positive,'--observe',plan,'--pcm-output',out/'development.pcm'])
         require(dev['passed'] and dev['observations']['passed'] and not dev['script_source_parsing'] and dev['cpu_render_input'] and not dev['gpu_submitted'],'Captured-only development path')
-        check_logs(dev['logs'],rows,require);write_json(out/'development.json',dev)
-        for name,_,key in ACTIONS:
+        check_logs(dev['logs'],rows,require,args.ik);write_json(out/'development.json',dev)
+        for name,_,key in actions:
             replay=out/f'{name}-input.json';write_json(replay,{'format':'incant-input','version':1,'tick_rate':60,'start_tick':0,'ticks':TICKS,'frames':[{'tick':5,'events':[{'type':'key','code':key,'down':True}]}]})
-            pcm=out/f'dev-{name}.pcm';refusal('dev-'+name,[binary,'native-play',project,'--camera',ulid(300),'--ticks',TICKS,'--input-replay',replay,'--pcm-output',pcm],pcm,DEV_ERRORS[name])
-        write_json(out/'preflight.json',{'passed':True,'sources':source_hashes,'headless_sha256':sha256(binary.read_bytes()),'oracle_binary_sha256':sha256(oracle.read_bytes()),'oracle_scene_sha256':sha256((out/'oracle.scene').read_bytes()),'project_sha256':sha256(project.read_bytes()),'ticks':TICKS,'complete_records':60,'records_per_tick':3,'sample_vectors_per_record':16,'metadata_vectors_per_record':3,'sample_vectors_per_tick':48,'metadata_vectors_per_tick':9,'bounded_vector_checks':228,'source_deleted':True,'journal':str(journal)})
+            pcm=out/f'dev-{name}.pcm';refusal('dev-'+name,[binary,'native-play',project,'--camera',ulid(300),'--ticks',TICKS,'--input-replay',replay,'--pcm-output',pcm],pcm,dev_errors[name])
+        write_json(out/'preflight.json',{'passed':True,'sources':source_hashes,'headless_sha256':sha256(binary.read_bytes()),'oracle_binary_sha256':sha256(oracle.read_bytes()),'oracle_scene_sha256':sha256((out/'oracle.scene').read_bytes()),'project_sha256':sha256(project.read_bytes()),'ticks':TICKS,'complete_records':100 if args.ik else 60,'records_per_tick':5 if args.ik else 3,'ik_constraints_per_tick':4 if args.ik else 0,'sample_vectors_per_record':16,'metadata_vectors_per_record':3,'sample_vectors_per_tick':48,'metadata_vectors_per_tick':9,'bounded_vector_checks':252 if args.ik else 228,'source_deleted':True,'journal':str(journal)})
         print('Public authoring/Undo/reopen and source-deleted development/native oracle/refusals passed.',flush=True)
         if args.stage=='author':return
     pre=json.loads((out/'preflight.json').read_text());require(pre['passed'] and pre['sources']==source_hashes,'Frozen preflight inputs changed')
@@ -207,14 +229,14 @@ def main():
     for i in range(3):
         pcm=out/f'run-{i}.pcm';r=value([player,'--package',data,'--ticks',TICKS,'--input-recording',positive,'--observe',plan,'--output',pcm],cwd=player.parent,env=environment)
         require(r['observations']==dev['observations'] and r['logs']==dev['logs'] and r['tick']==dev['tick'] and r['frames']==dev['frames'] and r['pcm_sha256']==dev['pcm_sha256'],'Exact development/package observable parity')
-        check_logs(r['logs'],rows,require);write_json(out/f'run-{i}.json',r);runs.append(r)
-    for name,_,_ in ACTIONS:
-        pcm=out/f'package-{name}.pcm';refusal('package-'+name,[player,'--package',data,'--ticks',TICKS,'--input-recording',out/f'{name}-input.json','--output',pcm],pcm,PACKAGE_ERRORS[name],cwd=player.parent,env=environment)
+        check_logs(r['logs'],rows,require,args.ik);write_json(out/f'run-{i}.json',r);runs.append(r)
+    for name,_,_ in actions:
+        pcm=out/f'package-{name}.pcm';refusal('package-'+name,[player,'--package',data,'--ticks',TICKS,'--input-recording',out/f'{name}-input.json','--output',pcm],pcm,package_errors[name],cwd=player.parent,env=environment)
     pcm=out/'checkpoint-refused.pcm';save=out/'checkpoint-refused.bin'
     refusal('checkpoint-refused',[player,'--package',data,'--ticks',1,'--output',pcm,'--save-checkpoint',save],pcm,'Error: Checkpoint(Unsupported("static module state ABI"))',cwd=player.parent,env=environment)
     require(not save.exists(),'Unsupported checkpoint published output')
-    write_json(out/'result.json',{'passed':True,'target':report['target'],'player_sha256':report['player_sha256'],'program':report['program'],'fresh_ordinary_package_runs':3,'ticks_each':TICKS,'per_tick_records':3,'per_tick_full_sample_vectors':48,'per_tick_full_metadata_vectors':9,'public_vector_checks_per_run':228,'record_scalars_checked_per_run':3420,'source_deleted_before_development_and_export':True,'project_cache_build_maps_deleted_before_runs':True,'public_import_atomic_select_undo_redo_journal_reopen':True,'no_static_module_fixture_flag':True,'refusals':[f'{host}-{name}' for host in ['dev','package'] for name,_,_ in ACTIONS]+['checkpoint-refused'],'refusal_scope':'Exact runtime diagnostic and no stdout/PCM/save publication; not a fresh proof of per-step rollback. Host suite separately tests atomic prefixes.','removed_private_files':removed,'package_hashes':hashes(out/'package'),'proof_source_hashes':source_hashes,'commands_sha256':sha256(command_path.read_bytes()),'limits':['Actual local desktop CPU package; no GPU/rendered/device/performance or phase gate.','Eight active weighted samples; nonzero tree fades/composite operands remain unsupported.','Whole guest checkpoints explicitly unsupported; gameplay counter lives in native ECS, not module global state.','Only newly created proof source/cache/build/maps are removed; repository and shared engine build storage are retained.']})
-    print(json.dumps({'passed':True,'output':str(out),'fresh_runs':len(runs),'full_scalar_observations_each':3420},indent=2))
+    write_json(out/'result.json',{'passed':True,'target':report['target'],'player_sha256':report['player_sha256'],'program':report['program'],'fresh_ordinary_package_runs':3,'ticks_each':TICKS,'per_tick_records':5 if args.ik else 3,'ik_constraints_per_tick':4 if args.ik else 0,'ik_scalar_observations_each':720 if args.ik else 0,'per_tick_full_sample_vectors':48,'per_tick_full_metadata_vectors':9,'public_vector_checks_per_run':252 if args.ik else 228,'record_scalars_checked_per_run':4140 if args.ik else 3420,'source_deleted_before_development_and_export':True,'project_cache_build_maps_deleted_before_runs':True,'public_import_atomic_select_undo_redo_journal_reopen':True,'no_static_module_fixture_flag':True,'refusals':[f'{host}-{name}' for host in ['dev','package'] for name,_,_ in actions]+['checkpoint-refused'],'refusal_scope':'Exact runtime diagnostic and no stdout/PCM/save publication; not a fresh proof of per-step rollback. Host suite separately tests atomic prefixes.','removed_private_files':removed,'package_hashes':hashes(out/'package'),'proof_source_hashes':source_hashes,'commands_sha256':sha256(command_path.read_bytes()),'limits':['Actual local desktop CPU package; no GPU/rendered/device/performance or phase gate.','Eight active weighted samples; nonzero tree fades/composite operands remain unsupported.','Whole guest checkpoints explicitly unsupported; gameplay counter lives in native ECS, not module global state.','Only newly created proof source/cache/build/maps are removed; repository and shared engine build storage are retained.']})
+    print(json.dumps({'passed':True,'output':str(out),'fresh_runs':len(runs),'full_scalar_observations_each':4140 if args.ik else 3420},indent=2))
 
 
 if __name__=='__main__':main()

@@ -11,3 +11,4 @@ struct w2c_incant__animation__v3 { struct w2c_incant__v1 core; };
 struct w2c_incant__animation__graph__v1 { struct w2c_incant__v1 core; };
 struct w2c_incant__physics__v1 { struct w2c_incant__v1 core; };
 struct w2c_incant__animation__v4 { struct w2c_incant__v1 core; };
+struct w2c_incant__animation__ik__v1 { struct w2c_incant__v1 core; };

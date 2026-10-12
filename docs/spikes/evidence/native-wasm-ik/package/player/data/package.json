@@ -1,0 +1,11 @@
+{
+  "format": "incant-native-package",
+  "version": 1,
+  "camera": "0000000000000000000000000000012c",
+  "files": {
+    "world.scene": "d96b938d77d37dcbc0dc7e9aa7ea579345fb6fd80f7b4e84df9e11de1814046d",
+    "input-actions.json": "c9c9808aecf251d085d334003963f2bac22aa2464b8453d024bf73802ae9747a",
+    "clips.bin": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+    "empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5"
+  }
+}
