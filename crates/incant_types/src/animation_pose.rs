@@ -123,6 +123,7 @@ impl AnimationPoseSamples {
                 retained += 1;
             }
         }
+        entries[retained..].fill(Self::EMPTY.samples[0]);
         self.len = retained as u8;
     }
 }
@@ -161,6 +162,9 @@ mod tests {
         let pose = AnimationPoseSamples::new(&wide).unwrap();
         assert_eq!(pose.samples().len(), 15);
         assert!(pose.samples().iter().all(|v| v.weight > 0.0));
+        assert_eq!(pose, AnimationPoseSamples::new(&wide[..15]).unwrap());
+        wide.rotate_right(1);
+        assert_eq!(pose, AnimationPoseSamples::new(&wide).unwrap());
     }
 
     #[test]
