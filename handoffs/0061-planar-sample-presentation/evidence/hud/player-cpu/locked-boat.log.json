@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0061-hud/review-2/player/incant_game_player",
+    "--package",
+    "/Users/andreyyurlov/.codex/incant-evidence/0061-hud/review-2/player/data",
+    "--ui-viewport",
+    "640x360",
+    "--ticks",
+    "181",
+    "--input-recording",
+    "/Users/andreyyurlov/.codex/incant-evidence/0061-hud/review-2/build/locked-boat-input.json",
+    "--output",
+    "/Users/andreyyurlov/.codex/incant-evidence/0061-hud/review-2/player/locked-boat.pcm"
+  ],
+  "exit": 0,
+  "stdout": "{\"flipbooks\":[{\"completed\":false,\"frame\":0,\"id\":[1,182,93,80,0,0,0,0,0,0,0,0,0,0,0,1],\"playing\":false},{\"completed\":false,\"frame\":0,\"id\":[1,182,93,80,0,0,0,0,0,0,0,0,0,0,0,5],\"playing\":false},{\"completed\":false,\"frame\":0,\"id\":[1,182,93,80,0,0,0,0,0,0,0,0,0,0,0,11],\"playing\":true},{\"completed\":false,\"frame\":0,\"id\":[1,182,93,80,0,0,0,0,0,0,0,0,0,0,0,12],\"playing\":true},{\"completed\":false,\"frame\":0,\"id\":[1,182,93,80,0,0,0,0,0,0,0,0,0,0,0,13],\"playing\":true},{\"completed\":false,\"frame\":0,\"id\":[1,182,93,80,0,0,0,0,0,0,0,0,0,0,0,21],\"playing\":true},{\"completed\":false,\"frame\":0,\"id\":[1,182,93,80,0,0,0,0,0,0,0,0,0,0,0,22],\"playing\":true},{\"completed\":false,\"frame\":0,\"id\":[1,182,93,80,0,0,0,0,0,0,0,0,0,0,0,23],\"playing\":true},{\"completed\":false,\"frame\":7,\"id\":[1,182,93,80,0,0,0,0,0,0,0,0,0,0,0,31],\"playing\":true},{\"completed\":false,\"frame\":10,\"id\":[1,182,93,80,0,0,0,0,0,0,0,0,0,0,0,32],\"playing\":true},{\"completed\":false,\"frame\":7,\"id\":[1,182,93,80,0,0,0,0,0,0,0,0,0,0,0,33],\"playing\":true},{\"completed\":false,\"frame\":10,\"id\":[1,182,93,80,0,0,0,0,0,0,0,0,0,0,0,34],\"playing\":true}],\"frames\":144800,\"logs\":{\"dropped\":0,\"entries\":[]},\"pcm_sha256\":\"ada44509a41581ca7433d8b202e631afe8ee86a149cbfe18787ba4e6bd1c7b12\",\"render_input\":{\"binding_generation\":0,\"camera\":\"01b65d50000000000000000000000003\",\"camera_position\":[10.0,6.0,20.0],\"decoded_payload_bytes\":637460,\"first_model_position\":null,\"first_sprite_position\":[10.49993896484375,2.2999982833862305,0.0],\"first_text_position\":null,\"gpu_submitted\":false,\"mode\":\"cpu-only\",\"model_count\":0,\"sprite_count\":12,\"text_atlas_bytes\":0,\"text_atlas_nonzero\":0,\"text_atlas_sha256\":null,\"text_count\":0,\"text_font_count\":0,\"text_generation\":0,\"text_glyph_count\":0,\"text_missing_clusters\":0,\"text_rtl_glyphs\":0,\"text_sources\":{},\"tick\":181,\"topology_generation\":0,\"ui\":{\"atlas_sha256\":\"957b7d4ce6e4ed8a902483db578ab88435184e349626e72293e1ea528c95c843\",\"focus\":null,\"glyphs\":13,\"sources\":{\"01PSHD00000000000000000002\":\"Pearls 0 of 3\",\"01PSHD00000000000000000003\":\"\"},\"values\":{},\"viewport\":[640.0,360.0],\"widgets\":3}},\"sources\":[],\"tick\":181}\n",
+  "stderr": ""
+}

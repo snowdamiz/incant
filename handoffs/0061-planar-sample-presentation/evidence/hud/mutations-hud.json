@@ -1,0 +1,85 @@
+{
+  "mutations": [
+    {
+      "mutation": "urchin on the route",
+      "file": "samples/planar/art/cove.py",
+      "detected": true,
+      "failures": [
+        "FAIL: test_roles_and_routes_fit_the_layout (tools.tests.test_planar_presentation.PearlCoveTests.test_roles_and_routes_fit_the_layout)"
+      ]
+    },
+    {
+      "mutation": "pearl inside a boulder",
+      "file": "samples/planar/art/cove.py",
+      "detected": true,
+      "failures": [
+        "FAIL: test_roles_and_routes_fit_the_layout (tools.tests.test_planar_presentation.PearlCoveTests.test_roles_and_routes_fit_the_layout)"
+      ]
+    },
+    {
+      "mutation": "color above the tone-map identity range",
+      "file": "samples/planar/art/palette.py",
+      "detected": true,
+      "failures": [
+        "FAIL: test_sheets_are_pixel_deterministic_bounded_and_in_tone_map_identity (tools.tests.test_planar_presentation.PearlCoveTests.test_sheets_are_pixel_deterministic_bounded_and_in_tone_map_identity)"
+      ]
+    },
+    {
+      "mutation": "gravity on the player body",
+      "file": "samples/planar/scene.py",
+      "detected": true,
+      "failures": [
+        "FAIL: test_authored_entities_honour_the_controller_contract (tools.tests.test_planar_presentation.PearlCoveTests.test_authored_entities_honour_the_controller_contract)"
+      ]
+    },
+    {
+      "mutation": "pickup rendered as a solid",
+      "file": "samples/planar/scene.py",
+      "detected": true,
+      "failures": [
+        "FAIL: test_authored_entities_honour_the_controller_contract (tools.tests.test_planar_presentation.PearlCoveTests.test_authored_entities_honour_the_controller_contract)"
+      ]
+    },
+    {
+      "mutation": "static result labels bound",
+      "file": "samples/planar/hud.py",
+      "detected": true,
+      "failures": [
+        "FAIL: test_hud_binds_authored_widgets_and_complete_strings (tools.tests.test_planar_presentation.PearlCoveTests.test_hud_binds_authored_widgets_and_complete_strings)"
+      ]
+    },
+    {
+      "mutation": "a translation missing",
+      "file": "samples/planar/hud.py",
+      "detected": true,
+      "failures": [
+        "FAIL: test_hud_binds_authored_widgets_and_complete_strings (tools.tests.test_planar_presentation.PearlCoveTests.test_hud_binds_authored_widgets_and_complete_strings)"
+      ]
+    },
+    {
+      "mutation": "non-canonical HUD identity",
+      "file": "samples/planar/hud.py",
+      "detected": true,
+      "failures": [
+        "FAIL: test_identities_are_canonical_unique_ulids (tools.tests.test_planar_presentation.PearlCoveTests.test_identities_are_canonical_unique_ulids)"
+      ]
+    },
+    {
+      "mutation": "static text in a live label",
+      "file": "samples/planar/hud.py",
+      "detected": true,
+      "failures": [
+        "FAIL: test_hud_binds_authored_widgets_and_complete_strings (tools.tests.test_planar_presentation.PearlCoveTests.test_hud_binds_authored_widgets_and_complete_strings)"
+      ]
+    },
+    {
+      "mutation": "unknown message argument",
+      "file": "samples/planar/hud.py",
+      "detected": true,
+      "failures": [
+        "FAIL: test_hud_binds_authored_widgets_and_complete_strings (tools.tests.test_planar_presentation.PearlCoveTests.test_hud_binds_authored_widgets_and_complete_strings)"
+      ]
+    }
+  ],
+  "unmutated_passes": true
+}
