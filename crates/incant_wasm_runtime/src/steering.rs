@@ -5,7 +5,6 @@ use incant_wasm_abi::{self as abi, steering as wire};
 
 pub(crate) struct State {
     dt: f64,
-    queries: usize,
     agents: usize,
     edges: usize,
     reply: Option<Vec<u8>>,
@@ -15,7 +14,6 @@ impl State {
     pub fn new(dt: f64) -> Self {
         Self {
             dt,
-            queries: 0,
             agents: 0,
             edges: 0,
             reply: None,
@@ -39,7 +37,6 @@ impl State {
         if self.rejected {
             return Err(Error::Abi("rejected steering transaction"));
         }
-        charge(&mut self.queries, 1, abi::NAVIGATION_MAX_QUERIES)?;
         // Check f64 before conversion so a sub-minimum clock cannot round into
         // the accepted f32 domain. This matches the TypeScript native boundary.
         if !self.dt.is_finite() || !(1. / 240. ..=1.).contains(&self.dt) {

@@ -1,0 +1,39 @@
+{
+  "time": "2026-10-12T05:31:33.608793+00:00",
+  "root": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+  "base": "52bb80154ab91edfe49214b02221247f371ed717",
+  "source_hashes": {
+    "crates/incant_runtime/src/lib.rs": "8a40ffb82a12ac6f2955a087d83ef07d848df394d25c27ae23772239050f2228",
+    "crates/incant_runtime/src/navigation_runtime.rs": "9945df566a125c0216d8a55635eade907f49943df7454eb5a3a6c40e3a1544ee",
+    "crates/incant_wasm_abi/src/lib.rs": "41518c2c4341905259f4f18fba8594dbdca38e20dc6af3548052728028da6b0f",
+    "crates/incant_wasm_abi/src/navigation_paths.rs": "b4cad03e82af1644bf4b6ad536e9addf298e8da8268ffa5b4d5e98320d5a3c87",
+    "crates/incant_wasm_dev/src/generated.rs": "64d4de13079b188e3fbad4e73432f298fb416068eff430309fd6f01fc18748f5",
+    "crates/incant_wasm_runtime/c/generated.inc": "e2e7c633c3404ab754298548dbd17bca03577e5db16d9ab236ed1a169b999953",
+    "crates/incant_wasm_runtime/src/capability.rs": "d2b5f4db698cefc078683f37675c030607d06afeb3b6b153c9512a1304c54643",
+    "crates/incant_wasm_runtime/src/generated.rs": "b691caa19545265751ec2e8ae20c0cba9cd0fd6e5a0cacee6549046bd569f983",
+    "crates/incant_wasm_runtime/src/input_tags.rs": "34886b96b777ac59ae48318607898419b8daa0354d75f3a53662a59b4c20feb1",
+    "crates/incant_wasm_runtime/src/lib.rs": "6db89a6c9facb661da725387637331028f70c32ee086a2cf6756cc8131f95fb0",
+    "crates/incant_wasm_runtime/src/navigation_paths.rs": "97f87251189e2eddeb2f751333f71d7cabfa3f3203659870bbc99948ab7d9cfa",
+    "crates/incant_wasm_runtime/src/steering.rs": "46e80454e85518532580a82cde5def0351b80c4507801c3036dd30cfea4cfb7e",
+    "sdk/abi/native-v1.json": "e510865a706e09e440f82003d36def13b9daca92a8c1da7b7e35cd86f0d5d7ac",
+    "sdk/rust/src/lib.rs": "777e8d58ab754922ee0dce2388639b8d74e83a901ef248ff2d7d05d5fbf68060",
+    "sdk/rust/src/navigation.rs": "09fe00fa737c1aa4e066a25b63c9a0be2fc3c108188fc3b288faffa6c7698de4",
+    "sdk/rust/src/raw.rs": "fbffa7124f47fae6041e99895185afa87f6702ea9ade5bd6f56b5e8b68825c34",
+    "sdk/rust/src/tick.rs": "b682c2ccbbc3e81609cb1ff2798166ccff23c322ec59e007e16668165a3481cd",
+    "tools/generate_wasm_sdk.py": "976a337c9464e55685aa76450161610278f049a3e113361ebc383714d251f1cf",
+    "tools/wasm_abi.py": "ba0e21964558dadf0437ecf3c37430608cdf905655070b5546a6229b90e4cde6"
+  },
+  "test_probe_hashes": {
+    "tools/probes/shipping-wasm2c.py": "9b2ac1f31450348172fa95d6f45b38b649213d583169f6585fbaa0ae95894ddf",
+    "tools/tests/test_wasm_sdk.py": "40d5a993c4d9e1adb0b26cf246ae420e7e672a486b1424d4d0fa5d1a8b5dd103",
+    "crates/incant_runtime/tests/navigation_snapshots.rs": "6219e014849914f3defcc0080dc15269baa6db2f35ce85a0d7de32050a772dc7",
+    "crates/incant_wasm_abi/tests/navigation_paths.rs": "da4eeaa415d1f393f76b5ef696fb71862278f076f8d099d7aa8b80c8970e844f",
+    "crates/incant_wasm_dev/tests/navigation_paths_parity.rs": "bc2575d61bda51dd8216a21b113d4b1830ca7b3b4e0434e5a7c415bc3b13f8cc",
+    "crates/incant_wasm_runtime/fixtures/navigation-paths.wat": "25bc169eb5d0bbae43c8f1487d493cb05d95b297bc31dd2c944d43a7b63a49d2",
+    "crates/incant_wasm_runtime/tests/navigation_paths.rs": "27f6b383527d69da9ec390b144e4a7f284f0bc2fdf21341d62287f0e521f6ada",
+    "sdk/rust/fixtures/navigation_paths_failure.rs": "5a0d79ed28b1cd2b11739f9ee8ea26541447898e0603a751e2f7d0822547c980",
+    "sdk/rust/samples/navigation_paths.rs": "89b98d14984d644954dcb2a5728a324f15aae30d65019a0528267173c5a93c20"
+  },
+  "production_delta": "Only capability finish diagnostic now says rejected navigation transaction for both steering and path refusals.",
+  "scope": "Final production/tests/guests/probe frozen during actual host proof003."
+}

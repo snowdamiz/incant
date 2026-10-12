@@ -25,6 +25,18 @@ const _: () = {
 /// Trusted host adapter operation; all integer arguments are guest offsets/indices.
 #[derive(Clone, Copy)]
 pub enum Call {
+    FindPath {
+        ptr: i32,
+        len: i32,
+    },
+    FindGridPath {
+        ptr: i32,
+        len: i32,
+    },
+    ReadPath {
+        ptr: i32,
+        capacity: i32,
+    },
     AnimationLenV3,
     ReadAnimationsV3 {
         ptr: i32,
@@ -153,6 +165,8 @@ pub struct Capability {
     localization: Option<crate::localization::State>,
     steering: Option<crate::steering::State>,
     query_units: usize,
+    navigation_queries: usize,
+    navigation: Option<crate::navigation_paths::State>,
 }
 impl Capability {
     pub fn is_failed(&self) -> bool {
@@ -227,6 +241,14 @@ impl Capability {
         ));
         self.steering = Some(crate::steering::State::new(dt));
         self.query_units = 0;
+        self.navigation_queries = 0;
+        match world.navigation_snapshot() {
+            Ok(snapshot) => self.navigation = Some(crate::navigation_paths::State::new(snapshot)),
+            Err(error) => {
+                self.abort();
+                return Err(error.into());
+            }
+        }
         self.active = true;
         Ok(self.epoch)
     }
@@ -262,14 +284,17 @@ impl Capability {
         self.tick_logs.clear();
         self.localization = None;
         self.steering = None;
+        self.navigation = None;
     }
     pub fn finish(&mut self, world: &mut NativeWorld) -> Result<(), Error> {
         if !self.active {
             return Err(Error::Abi("inactive ECS transaction"));
         }
-        if self.steering.as_ref().is_some_and(|s| s.rejected) {
+        if self.steering.as_ref().is_some_and(|s| s.rejected)
+            || self.navigation.as_ref().is_some_and(|s| s.rejected)
+        {
             self.abort();
-            return Err(Error::Abi("rejected steering transaction"));
+            return Err(Error::Abi("rejected navigation transaction"));
         }
         if self.animation_rejected {
             self.abort();
@@ -291,6 +316,7 @@ impl Capability {
         }
         self.localization = None;
         self.steering = None;
+        self.navigation = None;
         self.active = false;
         self.input_available = false;
         self.input.clear();
@@ -378,7 +404,14 @@ impl Capability {
     pub fn invoke(&mut self, memory: &mut [u8], epoch: i64, call: Call) -> Result<i32, Error> {
         let steering_authorized = self.active
             && self.epoch == epoch
-            && matches!(call, Call::Steer { .. } | Call::ReadSteering { .. });
+            && matches!(
+                call,
+                Call::Steer { .. }
+                    | Call::ReadSteering { .. }
+                    | Call::FindPath { .. }
+                    | Call::FindGridPath { .. }
+                    | Call::ReadPath { .. }
+            );
         let animation_authorized = self.active
             && self.epoch == epoch
             && matches!(
@@ -415,6 +448,12 @@ impl Capability {
         {
             state.reject();
         }
+        if steering_authorized
+            && result.is_err()
+            && let Some(state) = &mut self.navigation
+        {
+            state.reject();
+        }
         if animation_authorized && result.is_err() {
             self.animation_rejected = true;
         }
@@ -435,7 +474,7 @@ impl Capability {
             Call::Locale | Call::Format { .. } | Call::Localize { .. } => {
                 incant_wasm_abi::LOCALIZATION_QUERY_UNITS
             }
-            Call::Steer { .. } => 1,
+            Call::Steer { .. } | Call::FindPath { .. } | Call::FindGridPath { .. } => 1,
             _ => 0,
         };
         self.query_units = self
@@ -443,7 +482,44 @@ impl Capability {
             .checked_add(units)
             .filter(|v| *v <= incant_wasm_abi::NATIVE_MAX_QUERY_UNITS)
             .ok_or(Error::Limit("query units"))?;
+        if matches!(
+            call,
+            Call::Steer { .. } | Call::FindPath { .. } | Call::FindGridPath { .. }
+        ) {
+            self.navigation_queries = self
+                .navigation_queries
+                .checked_add(1)
+                .filter(|&n| n <= incant_wasm_abi::NAVIGATION_MAX_QUERIES)
+                .ok_or(Error::Limit("navigation query quota"))?;
+        }
         match call {
+            Call::FindPath { ptr, len } | Call::FindGridPath { ptr, len } => {
+                let grid = matches!(call, Call::FindGridPath { .. });
+                let expected = if grid {
+                    incant_wasm_abi::navigation_paths::GRID_REQUEST_BYTES
+                } else {
+                    incant_wasm_abi::navigation_paths::PATH_REQUEST_BYTES
+                };
+                if usize::try_from(len).ok() != Some(expected) {
+                    return Err(Error::Abi("navigation request length"));
+                }
+                let region = range(ptr, expected, memory.len())?;
+                self.transfer(expected)?;
+                return self.navigation_state()?.query(&memory[region], grid);
+            }
+            Call::ReadPath { ptr, capacity } => {
+                let len = self.navigation_state()?.reply()?.len();
+                let capacity = usize::try_from(capacity)
+                    .map_err(|_| Error::Abi("navigation destination capacity"))?;
+                if capacity < len {
+                    return Err(Error::Abi("navigation destination capacity"));
+                }
+                range(ptr, capacity, memory.len())?;
+                let region = range(ptr, len, memory.len())?;
+                self.transfer(len)?;
+                memory[region].copy_from_slice(self.navigation_state()?.reply()?);
+                return Ok(len as i32);
+            }
             Call::AnimationLenV3 | Call::AnimationGraphLen => {
                 let graph = matches!(call, Call::AnimationGraphLen);
                 self.prepare_animation_snapshot(graph);
@@ -772,6 +848,11 @@ impl Capability {
         } else if self.animations_v3.is_empty() {
             crate::animations::encode_v3(&self.animation_rows, &mut self.animations_v3);
         }
+    }
+    fn navigation_state(&mut self) -> Result<&mut crate::navigation_paths::State, Error> {
+        self.navigation
+            .as_mut()
+            .ok_or(Error::Abi("navigation capability absent"))
     }
     fn steering_state(&mut self) -> Result<&mut crate::steering::State, Error> {
         self.steering
