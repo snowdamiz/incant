@@ -1,0 +1,25 @@
+{
+  "recorded_at": "2026-10-12T03:41:40.209976+00:00",
+  "source": "69f740e0bb3e46d03619fbb479b635572e69a944",
+  "purpose": "Focused actual native review of repaired mixed-direction wrap on accepted canonical text draw",
+  "native_gpu_granted": true,
+  "exclusive_to": "0055-bidi-wrap-review",
+  "builds_allowed": true,
+  "cargo_target_dir": "/tmp/incant-agent-native-target",
+  "cargo_target_exclusive": true,
+  "previous_0054_released": true,
+  "previous_acp_handle": {
+    "id": 93339,
+    "state": "terminal exit0 and reaped"
+  },
+  "provider_turns": false,
+  "account_actions": false,
+  "source_profile_binary_fixture_capture_identities": "Record fresh actual hashes/profile; do not reuse0054 binary or fixtures.",
+  "root_review_references": {
+    "/tmp/incant-text-bidi-wrap-freeze.json": "1c61dc336d81581fbb6167f7fe26f04000a65d0b924075e2d9f38d7cf34a724e",
+    "/tmp/incant-text-bidi-wrap-independent-review.json": "18d509c4e91baec07323ff36b70364df5531bf69c77e2c790cd65634ea6beb78",
+    "/tmp/incant-text-bidi-wrap-checks/result.json": "9c1d75b83d05a6cffacb55f9e010091e8d9727e739dbc8c252c713b871d65479",
+    "/tmp/incant-text-bidi-wrap-committed-bytes.json": "6821da354aefdd34b1c3c05c7dccb048d19c1cecf5da2e741f0aaf58662457fd",
+    "/tmp/incant-native-text-draw-root-review.json": "5af7d05c2a0e0e17a74dc05cea51810d1b009334ac8f6ebc3f165c20394fa30b"
+  }
+}
