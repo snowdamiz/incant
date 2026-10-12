@@ -1,0 +1,45 @@
+{
+  "parents": [
+    "59ef80dd8ae85da5beb0a1fe484d46120feedc3b",
+    "4487c5ae92369c2a69a08dc53a02f25143eefe34"
+  ],
+  "source_changes": {
+    "crates/incant_wasm_runtime/src/capability.rs": "f71a8a10a8ca2a452de8ba5a00f5d4556a58c77334020b1ceacc0b896862bd45",
+    "crates/incant_wasm_runtime/tests/animations/ik.rs": "7a6c5756438f19bc1960e596e1a859b8f8c9e54c498f65d83d1fd580ae2961f7"
+  },
+  "unchanged_from_connected_ik": {
+    "crates/incant_runtime/src/save.rs": "879901dd273bc01c6d402cab52b2340bcf2c1de17b7df32bb6b7b6a6f5bcab7a",
+    "crates/incant_runtime/src/save/codec.rs": "00954b7b6c2245e5d738e7adbb269e0f4255cd6cff61346977ed9a0142dbfdbb",
+    "crates/incant_runtime/src/save/ik.rs": "02c6b934b02800179177580da1b8a88cb43a75e49645b2e5fee567066d285cc6",
+    "crates/incant_script/src/checkpoint/pending.rs": "bc9c92e2bf200447d70d7ee3c1354bc74bff9c537c279db02c123fe01d84fd73"
+  },
+  "resolutions": [
+    "Cargo vendor ordering adopts current-main order; same excluded vendors",
+    "STATUS preserves current-main evidence plus connected IK section",
+    "World/save/session conflicts retain accepted v9 IK additions unchanged",
+    "Capability keeps both v4 scene capture and committed IK presence; central guard and regression add v4 len/read",
+    "Three evidence documentation conflicts retain additive current-main integration receipts"
+  ],
+  "logs": [
+    {
+      "path": "docs/spikes/evidence/native-ik-v4-union/native-wasm-ik-v4-union-001.log.gz",
+      "sha256": "9ed181ff9358cc2baf616c4ac6e848efc59b5d18f28a1eb6b4457c239eaa533c",
+      "raw_sha256": "0314a8d05f078fe93cd433eac16189e837453b58300e314209d87584a5876b4c",
+      "counts": [
+        29,
+        0,
+        0
+      ]
+    },
+    {
+      "path": "docs/spikes/evidence/native-ik-v4-union/native-wasm-ik-v4-clippy-001.log.gz",
+      "sha256": "a8d18b4d8305581c5f630d6905e2160625e7cd36ce623fd2f549b536ac650972",
+      "raw_sha256": "1507d4f3f9476b8f3a9732c3d01de4f405ba9c144d56e463973219a60d175cb6"
+    }
+  ],
+  "limitations": [
+    "Scoped local union checks, not another fresh public export or full-matrix claim",
+    "Inherited docs/spikes/evidence/native-audio-main145/integration-cargo.patch retains its exact whitespace-only patch line",
+    "New IK API and rendered/device acceptance remain open"
+  ]
+}
