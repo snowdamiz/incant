@@ -22,8 +22,8 @@ Text-field pointer release now focuses without submitting its value. Buttons
 still activate on matching release; explicit submit and IME ownership remain
 unchanged. The original regression fails, and all 47 UI tests plus Clippy pass
 after the correction. The combined current-main148 union passes 127 CPU tests,
-all-target Clippy, wasm32 and dependency/tooling checks. Native interaction
-confirmation remains the separate Claude0058 task.
+all-target Clippy, wasm32 and dependency/tooling checks. The separately accepted Claude0058 native follow-up is limited to its frozen
+older build; see [qualifications](docs/spikes/native-text-0058-acceptance.md).
 [Integrated evidence](docs/spikes/native-input-main148.md).
 [Evidence](docs/spikes/ui-pointer-focus.md).
 
@@ -33,7 +33,9 @@ The managed input client now avoids an AppKit view-destructor callback into
 already-dropped Rust state. The original invisible-window probe aborts; the
 fixed source passes 768 actual contexts and 256 stale-owner checks, all 126
 affected CPU tests, Clippy and independent source review. Current-main CPU
-integration now passes; fresh visible typing/IME acceptance remains pending. The same regression is added to
+integration now passes; three ordinary visible processes also pass the scoped
+Claude0058 follow-up. Live U.S. dead-key composition is covered, while CJK/Arabic
+IME and the excluded heap-attempt diagnostic remain open. The same regression is added to
 comprehensive macOS CI. [Repair and evidence](docs/spikes/macos-text-retirement.md).
 
 ## Authored trees and complete Wasm poses — current-main verified
@@ -54,7 +56,7 @@ refusals. All 1696 frozen inputs remain unchanged. These are local CPU results;
 rendered/device/phase gates and full guest checkpoints remain open.
 [Integrated checks and proofs](docs/spikes/native-animation-trees-main147.md).
 
-## Cooked root-motion numeric sampler — locally verified
+## Cooked root-motion numeric sampler — main150 integration verified
 
 A bounded CPU sampler now reads rigid local translation/rotation deltas from
 immutable cooked tracks. Exact signed cycle cursors support forward/reverse, wrap
@@ -62,7 +64,9 @@ and multiple-cycle motion, with ordered rotation/translation composition. Select
 scale or matrix-only tracks refuse explicitly. All 128 assets/runtime cases,
 all-target Clippy, wasm32 visual and dependency checks pass; 4096 query iterations
 allocate nothing after admission. Independent source and retained evidence review
-accepts the implementation without findings; publisher integration remains pending.
+accepts the implementation without findings. The actual-main150 integration
+passes all 128 affected CPU cases, Clippy, wasm32 and dependency/tooling checks;
+[its source and logs are retained](docs/spikes/native-root-motion-main150.md).
 Authored root selection, graph/clock integration, pose extraction, body movement,
 save/SDK controls and rendered/device gates remain open; this is not complete
 root motion or Phase 1. [Contract and evidence](docs/spikes/native-root-motion-core.md).
@@ -373,19 +377,21 @@ and complete Game UI/IME gates remain open.
 
 ## Current milestone
 
-Main #149 includes authored nested/2D animation trees and complete Wasm poses
-(#148), alongside offline audio/UI checkpoints, public physics queries and the
-bounded IK primitive. Current-lock tree exports and complete-pose observations
-pass their independent CPU/package checks. The macOS text-client lifetime and
-text-field click repairs are merged in #149; their visible native follow-up is
-reviewed separately. The qualified UI reference correction now passes 135 CPU
-cases (89 GPU tests intentionally ignored), Clippy and wasm32 on current main.
-Its actual Linux result and selected adapter are still pending; installed Mesa
-packages and emulation do not establish that result. The next queued slices are
-the separate root-motion primitive and connected authored IK, with its explicit
-legacy-pose refusal seam. Checkpoint 11 remains failed and frozen until the
-reviewed repair is merged and a new fixed snapshot passes all required checks.
-No release or phase gate advances on these local feature results.
+Main #150 includes authored nested/2D animation trees and complete Wasm poses
+(#148), offline audio/UI checkpoints, public physics queries and the bounded IK
+primitive. Main149 repairs text-client lifetime and pointer focus; the qualified
+UI reference and caret correction is merged in main150. Its actual Linux result
+and selected adapter remain pending; installed Mesa packages and emulation do not
+establish either. Claude0058's separate native follow-up is retained with its
+frozen-build, dead-key and excluded-process limitations.
+
+Checkpoint12 is frozen at actual main150 `58cca708`, candidate `10129769`, with
+the same tree and eight full push workflows. Failed checkpoint11 remains
+historical and unpromoted. Release stays at checkpoint8 until all 23 exact-head
+required checks pass. Later main work does not change the candidate. The separate
+root-motion primitive passes its current-main CPU integration; connected authored
+IK remains queued with the explicit legacy-pose refusal seam. No release or phase
+gate advances on these local feature results.
 
 Native animation graphs now connect ordinary typed authoring, captured models,
 v14 cooking, deterministic native clip states and flat adjacent-pair 1D blends.

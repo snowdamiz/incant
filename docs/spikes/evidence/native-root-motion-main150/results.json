@@ -1,0 +1,111 @@
+[
+  {
+    "name": "tests",
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_assets",
+      "-p",
+      "incant_assets_runtime",
+      "--all-features"
+    ],
+    "exit": 0,
+    "seconds": 40.08201504200042,
+    "sha256": "07a7bd00028f114837ff7e53ce92f8c0854492a42bdaf9ab3505fd0255582bf4"
+  },
+  {
+    "name": "clippy",
+    "command": [
+      "./tools/cargo",
+      "clippy",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_assets",
+      "-p",
+      "incant_assets_runtime",
+      "--all-features",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit": 0,
+    "seconds": 3.8023376659984933,
+    "sha256": "3fb244aac77baa53533110a10cf26645415a177fe41e4588e83dba0204f98197"
+  },
+  {
+    "name": "wasm",
+    "command": [
+      "./tools/cargo",
+      "check",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_assets_runtime",
+      "--features",
+      "visual",
+      "--target",
+      "wasm32-unknown-unknown"
+    ],
+    "exit": 0,
+    "seconds": 0.8719843750004657,
+    "sha256": "3dfa60578af3fc18108520cd9b83fc0c1e3a86aaf54400e3f5deab83fbe3a232"
+  },
+  {
+    "name": "graph",
+    "command": [
+      "python3",
+      "tools/check_runtime_dependencies.py",
+      "incant_assets_runtime",
+      "--features",
+      "incant_assets_runtime/visual"
+    ],
+    "exit": 0,
+    "seconds": 0.5750332919997163,
+    "sha256": "466c27957bec6177e21911180caffd16c9a78482761e9fad8fb9622eb2023499"
+  },
+  {
+    "name": "fmt",
+    "command": [
+      "./tools/cargo",
+      "fmt",
+      "--all",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 1.3416019159994903,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "conventions",
+    "command": [
+      "python3",
+      "tools/generate_conventions.py",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.04309866599942325,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "diff",
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.015520625000135624,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

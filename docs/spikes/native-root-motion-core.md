@@ -49,7 +49,9 @@ commands, frozen source hashes and logs. The first test build failed on a fixtur
 callback signature before executing tests; that failed log is preserved. The
 corrected fixture and added basis control pass focused and broad runs. Independent
 source and retained evidence review accepts the frozen implementation without
-findings. Current-main integration remains publisher-owned and pending.
+findings. Current-main150 integration now passes the same 128 affected CPU cases and
+scoped checks; [the integration record](native-root-motion-main150.md) preserves
+the unchanged source identities and exact logs.
 
 This is a CPU numerical foundation. Authored root selection, native graph and
 clock integration, full pose motion extraction, physics/body movement, blending,
