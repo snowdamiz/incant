@@ -5,7 +5,7 @@ mod deform;
 pub use deform::SkinPose;
 
 /// One retained, immutable model animation copy and two preallocated pose buffers.
-/// `sample` performs no allocation, source IO or JSON. It has no implicit clock:
+/// Sampling performs no allocation, source IO or JSON. There is no implicit clock:
 /// finite seconds clamp independently to each channel's authored key interval.
 /// Module is CPU-only; it makes no cross-device bit-exact or performance claim.
 pub struct AnimationPlayer {
@@ -18,6 +18,7 @@ pub struct AnimationPlayer {
     live: Pose,
     staged: Pose,
     trs: Vec<Option<NodeTrs>>,
+    blend_trs: Vec<Option<NodeTrs>>,
 }
 struct Pose {
     local: Vec<DMat4>,
@@ -36,7 +37,7 @@ impl Pose {
 impl AnimationPlayer {
     /// Logical owned allocation payload for one player, excluding allocator
     /// headers and validation scratch. Counts cloned keys/topology as well as
-    /// both pose buffers. Callers can charge many instances before constructing
+    /// both pose buffers and both TRS scratch arrays. Callers can charge instances before constructing
     /// them. Shared source pixels/geometry are not copied by a player.
     pub fn retained_bytes(model: &CookedModel) -> Result<usize> {
         let data = model
@@ -60,7 +61,7 @@ impl AnimationPlayer {
         }
         charge(
             nodes,
-            size_of::<Option<usize>>() + size_of::<usize>() + size_of::<Option<NodeTrs>>(),
+            size_of::<Option<usize>>() + size_of::<usize>() + 2 * size_of::<Option<NodeTrs>>(),
         )?;
         charge(
             data.skins
@@ -111,6 +112,7 @@ impl AnimationPlayer {
         let mut out = Self {
             data: data.clone(),
             trs: data.rest.clone(),
+            blend_trs: data.rest.clone(),
             live: Pose::new(nodes.len(), count),
             staged: Pose::new(nodes.len(), count),
             nodes,
@@ -218,46 +220,36 @@ impl AnimationPlayer {
     /// None evaluates the authored rest pose. Invalid clip/time or nonfinite
     /// composed values leave the previously published complete pose unchanged.
     pub fn sample(&mut self, clip: Option<usize>, seconds: f64) -> Result<()> {
-        if !seconds.is_finite() {
-            return Err(invalid("nonfinite animation time"));
+        let sample = ClipSample { clip, seconds };
+        sample.validate(&self.data)?;
+        sampling::sample(&self.data, sample, &mut self.trs);
+        self.publish()
+    }
+    /// Blend two independently sampled clips in local TRS space, then compose
+    /// the complete hierarchy and palettes. Translation and scale interpolate
+    /// linearly; rotation uses normalized shortest-arc spherical interpolation.
+    /// Weight is finite and in [0,1]. Both clocks/clip indices are validated even
+    /// at exact endpoints; endpoints preserve the single-sample result exactly.
+    /// Any refusal preserves every previously published pose/palette. This is a
+    /// two-input runtime primitive, not an authored graph or transition clock.
+    pub fn sample_blend(&mut self, from: ClipSample, to: ClipSample, weight: f64) -> Result<()> {
+        from.validate(&self.data)?;
+        to.validate(&self.data)?;
+        if !weight.is_finite() || !(0. ..=1.).contains(&weight) {
+            return Err(invalid("animation blend weight"));
         }
-        let clip = clip
-            .map(|i| self.data.clips.get(i).ok_or_else(|| invalid("clip index")))
-            .transpose()?;
-        self.trs.clone_from_slice(&self.data.rest);
-        if let Some(clip) = clip {
-            for ch in &clip.channels {
-                let upper = ch.times.partition_point(|&t| f64::from(t) <= seconds);
-                let a = upper.saturating_sub(1).min(ch.times.len() - 1);
-                let b = upper.min(ch.times.len() - 1);
-                let alpha = if a == b || ch.interpolation == Interpolation::Step {
-                    0.
-                } else {
-                    ((seconds - f64::from(ch.times[a])) / f64::from(ch.times[b] - ch.times[a]))
-                        .clamp(0., 1.)
-                };
-                let first = ch.values[a];
-                let next = ch.values[b];
-                let trs = self.trs[ch.node].as_mut().unwrap();
-                match ch.property {
-                    Property::Rotation => {
-                        let q = DQuat::from_array(first.map(f64::from)).normalize();
-                        let r = DQuat::from_array(next.map(f64::from)).normalize();
-                        trs.rotation = q.slerp(r, alpha).normalize().to_array().map(|v| v as f32);
-                    }
-                    Property::Translation | Property::Scale => {
-                        let value = std::array::from_fn(|i| {
-                            (f64::from(first[i]) * (1. - alpha) + f64::from(next[i]) * alpha) as f32
-                        });
-                        if ch.property == Property::Translation {
-                            trs.translation = value;
-                        } else {
-                            trs.scale = value;
-                        }
-                    }
-                }
-            }
+        if weight == 0. {
+            return self.sample(from.clip, from.seconds);
         }
+        if weight == 1. {
+            return self.sample(to.clip, to.seconds);
+        }
+        sampling::sample(&self.data, from, &mut self.trs);
+        sampling::sample(&self.data, to, &mut self.blend_trs);
+        sampling::blend(&mut self.trs, &self.blend_trs, weight);
+        self.publish()
+    }
+    fn publish(&mut self) -> Result<()> {
         for &i in &self.order {
             let local = self.trs[i]
                 .as_ref()

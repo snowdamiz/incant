@@ -121,6 +121,17 @@ drivers, phones/performance, remaining shader families, caches and whole-rendere
 translation removal remain open. Both features stay disabled by default.
 [Contract and evidence](docs/spikes/cooked-geometry-shaders.md).
 
+## Skeletal pose blending — locally verified
+
+The retained animation player can blend two independently sampled clips in local
+TRS space before composing hierarchy and skinning. Exact endpoints, missing-channel
+rest values, antipodal quaternions, atomic failure recovery, source-deleted fresh
+loading and 1,024 allocation-free sampling/deformation calls pass. The 165 affected
+asset/renderer CPU tests and Clippy pass; 70 GPU tests stayed ignored. Independent
+review accepted the source. Authored blend trees, state machines, native frame/SDK
+blend controls, IK and root motion remain; no Phase 1 gate is claimed.
+[Evidence](docs/spikes/runtime-pose-blending.md).
+
 ## Native editor agent integration — merged in PR #109
 
 The native session/bridge now connect streamed turns, approval/cancel, bounded
