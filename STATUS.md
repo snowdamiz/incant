@@ -16,10 +16,30 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Native input corrections — main148 integration verified
+
+Text-field pointer release now focuses without submitting its value. Buttons
+still activate on matching release; explicit submit and IME ownership remain
+unchanged. The original regression fails, and all 47 UI tests plus Clippy pass
+after the correction. The combined current-main148 union passes 127 CPU tests,
+all-target Clippy, wasm32 and dependency/tooling checks. Native interaction
+confirmation remains the separate Claude0058 task.
+[Integrated evidence](docs/spikes/native-input-main148.md).
+[Evidence](docs/spikes/ui-pointer-focus.md).
+
+## macOS native text retirement — local crash regression repaired
+
+The managed input client now avoids an AppKit view-destructor callback into
+already-dropped Rust state. The original invisible-window probe aborts; the
+fixed source passes 768 actual contexts and 256 stale-owner checks, all 126
+affected CPU tests, Clippy and independent source review. Current-main CPU
+integration now passes; fresh visible typing/IME acceptance remains pending. The same regression is added to
+comprehensive macOS CI. [Repair and evidence](docs/spikes/macos-text-retirement.md).
+
 ## Authored trees and complete Wasm poses — current-main verified
 
 The accepted authoring, cooked v15 tree evaluator, retained weighted-pose consumer
-and v4 Wasm SDK are combined on actual main #147. All 81 changed implementation
+and v4 Wasm SDK are merged in main #148 after current-main147 verification. All 81 changed implementation
 and build files match their independently reviewed producer bytes; current audio,
 UI checkpoints, two-bone IK and pinned dependencies are preserved. The union
 passes 793 affected CPU tests and 401 overlapping actual-host cases, all-target
