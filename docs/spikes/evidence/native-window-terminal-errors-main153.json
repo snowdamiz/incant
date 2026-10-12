@@ -1,0 +1,176 @@
+{
+  "at": "2026-10-12T17:44:52.474020+00:00",
+  "scope": "Preserve native window terminal errors and stop subsequent game delivery",
+  "main": "71559622a13826f7aa4454277fb19b4c73534ff0",
+  "tested_head": "9e8dbf46ca7eba647aad553e74b09bb088ef6784",
+  "ancestry_head": "0c69f3f0709415d97508c071c8dcf4641b4d71d0",
+  "post_test_ancestry_delta": [
+    "STATUS.md",
+    "docs/spikes/evidence/native-wasm-ik-main152.json",
+    "docs/spikes/evidence/native-wasm-ik-main152/root-final-review.json",
+    "docs/spikes/native-wasm-ik-main152.md"
+  ],
+  "all_frozen_inputs_unchanged": true,
+  "source_count": 1728,
+  "accepted_sources": {
+    "crates/incant_game_player/src/window/mod.rs": "92e28ae8184dcdc337f81da9ab7c6ec12e6280dca25d977574379f071c172b6c",
+    "crates/incant_game_player/src/window/termination.rs": "af723978fc8dcb560cf9f3a922f087fb5b3644632275001b16d8af0ca2a86812"
+  },
+  "checks": [
+    {
+      "name": "tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "native-window"
+      ],
+      "exit": 0,
+      "seconds": 35.25806804200147,
+      "sha256": "bedf0ff04ff356b1203c94ea473def3eaaffddf5f096a76964dccf85820685f3"
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "native-window",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 8.606417458000578,
+      "sha256": "26e4f32ab03993864311a69b75d5f7f7ecf9444a0f46578458e76d312288d7c5"
+    },
+    {
+      "name": "graph",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_game_player",
+        "--features",
+        "incant_game_player/native-window"
+      ],
+      "exit": 0,
+      "seconds": 0.6986255840001832,
+      "sha256": "07d87a62d54ea4bd4f630d421b90904510f782b795c04820a194e18835a118dc"
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 1.2905115000012302,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.052823624999291496,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.01400116599870671,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "test_counts": {
+    "passed": 57,
+    "failed": 0,
+    "ignored": 0,
+    "groups": 3
+  },
+  "artifacts": {
+    "docs/spikes/evidence/native-window-terminal-errors-main153/freeze.json": {
+      "sha256": "2e85a039131154701ab9ab5ee46ee3f3fc656750d0a1ee56f1a1375c4cd26fde",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/terminal-errors-main153-001/freeze.json",
+      "uncompressed_sha256": "2e85a039131154701ab9ab5ee46ee3f3fc656750d0a1ee56f1a1375c4cd26fde"
+    },
+    "docs/spikes/evidence/native-window-terminal-errors-main153/results.json": {
+      "sha256": "1589c3dc509fc7bde3074584837184335b041577e159ca41a231432d9b947da3",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/terminal-errors-main153-001/results.json",
+      "uncompressed_sha256": "1589c3dc509fc7bde3074584837184335b041577e159ca41a231432d9b947da3"
+    },
+    "docs/spikes/evidence/native-window-terminal-errors-main153/accepted-source-comparison.json": {
+      "sha256": "5192701d17f4677461ddb606f506108329c29d7f918a596fea88405fb15b9d23",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/terminal-errors-main153-001/accepted-source-comparison.json",
+      "uncompressed_sha256": "5192701d17f4677461ddb606f506108329c29d7f918a596fea88405fb15b9d23"
+    },
+    "docs/spikes/evidence/native-window-terminal-errors-main153/tests.log.gz": {
+      "sha256": "5313fe0488f482342af61dcdf64d06667da478507d2ae8be3fb65b4852f1c90f",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/terminal-errors-main153-001/tests.log",
+      "uncompressed_sha256": "bedf0ff04ff356b1203c94ea473def3eaaffddf5f096a76964dccf85820685f3"
+    },
+    "docs/spikes/evidence/native-window-terminal-errors-main153/clippy.log.gz": {
+      "sha256": "cddc9773adf3b7c2f520d7222ae6827fcdfd5cf1787fbdc97f22230bd07e6066",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/terminal-errors-main153-001/clippy.log",
+      "uncompressed_sha256": "26e4f32ab03993864311a69b75d5f7f7ecf9444a0f46578458e76d312288d7c5"
+    },
+    "docs/spikes/evidence/native-window-terminal-errors-main153/graph.log.gz": {
+      "sha256": "a1453519251971c8187d2004dc510036ddccc25f7b16d4983f14a1f2191913da",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/terminal-errors-main153-001/graph.log",
+      "uncompressed_sha256": "07d87a62d54ea4bd4f630d421b90904510f782b795c04820a194e18835a118dc"
+    },
+    "docs/spikes/evidence/native-window-terminal-errors-main153/fmt.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/terminal-errors-main153-001/fmt.log",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/native-window-terminal-errors-main153/conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/terminal-errors-main153-001/conventions.log",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/native-window-terminal-errors-main153/diff.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/terminal-errors-main153-001/diff.log",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "producer_review": {
+    "path": "docs/spikes/evidence/native-window-terminal-errors/source-review.json",
+    "sha256": "70dcaff3dc13108c3a42c42c36aa637cdea3d8488e1ae9271f99ef60a7e2e68b"
+  },
+  "integration": "Both accepted source files byte-identical d24f7c63; producer conflicts only STATUS. Reviewed lifecycle policy and whole event callback/teardown seams. All later main source preserved. Independent current-main closure accepted; no blocking findings.",
+  "limitations": [
+    "CPU unit/CLI tests and native-window compile only; no native window, GPU, capture or device execution.",
+    "Preserves original typed error; does not diagnose the historical excluded heap-instrumented failure or change audio-overload behavior.",
+    "Source review and lifecycle tests do not establish new native IME or appearance acceptance."
+  ],
+  "final_review": {
+    "path": "docs/spikes/evidence/native-window-terminal-errors-main153/root-final-review.json",
+    "sha256": "081f7c324bdbe3b7831f34249b13f962621800d2c104b30f67ad9f3a9f58144d"
+  }
+}

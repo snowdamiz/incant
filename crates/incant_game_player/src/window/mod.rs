@@ -6,6 +6,7 @@ mod ime;
 mod input;
 mod probe;
 mod surface;
+mod termination;
 mod ui_input;
 use crate::{bounded, embedded, session, startup};
 use incant_audio_runtime::{AudioManagerSettings, DeviceBackend};
@@ -201,21 +202,20 @@ pub fn run(args: &[String]) -> session::Result<()> {
     let mut redraw_pending = true;
     let mut presentation_refreshes = 0u64;
     let mut ui_relayouts = 0u64;
-    let mut failure: Option<Box<dyn std::error::Error>> = None;
-    let mut exit = false;
+    let mut termination = termination::Termination::default();
     let mut last_audio_poll = Instant::now();
     let mut probe = options.probe.then(probe::Probe::new);
     if options.probe {
         window.set_focus();
     }
     let code = event_loop.run_return(|event, _, flow| {
-        let result = (|| -> session::Result<()> {
+        termination.event(|exit| {
             match event {
                 Event::WindowEvent {
                     window_id, event, ..
                 } if window_id == window.id() => match event {
                     WindowEvent::CloseRequested | WindowEvent::Destroyed => {
-                        exit = true;
+                        *exit = true;
                     }
                     WindowEvent::Resized(_) | WindowEvent::ScaleFactorChanged { .. } => {
                         if has_ui {
@@ -428,7 +428,7 @@ pub fn run(args: &[String]) -> session::Result<()> {
                                 .stop_after
                                 .is_some_and(|n| game.world().is_ok_and(|w| w.tick() >= n))
                             {
-                                exit = true;
+                                *exit = true;
                                 break;
                             }
                         }
@@ -436,7 +436,7 @@ pub fn run(args: &[String]) -> session::Result<()> {
                 }
                 _ => {}
             }
-            if has_ui {
+            if has_ui && !*exit {
                 let active = focused
                     && !platform_suspended
                     && !window.is_minimized()
@@ -449,12 +449,8 @@ pub fn run(args: &[String]) -> session::Result<()> {
                 }
             }
             Ok(())
-        })();
-        if let Err(error) = result {
-            failure = Some(error);
-            exit = true;
-        }
-        *flow = if exit {
+        });
+        *flow = if termination.requested() {
             ControlFlow::Exit
         } else {
             ControlFlow::WaitUntil(if suspended {
@@ -465,18 +461,14 @@ pub fn run(args: &[String]) -> session::Result<()> {
         };
     });
     surface.cancel();
-    if has_ui && let Some((serial, enabled)) = ui_input.text_session(None, false)? {
-        window
-            .set_text_input_session(serial, enabled)
-            .map_err(Error::Ime)?;
-    }
-    if let Some(error) = failure {
-        drop(game);
-        return Err(error);
-    }
-    if code != 0 {
-        return Err(format!("native event loop failed with code{code}").into());
-    }
+    termination.finish(code, || {
+        if has_ui && let Some((serial, enabled)) = ui_input.text_session(None, false)? {
+            window
+                .set_text_input_session(serial, enabled)
+                .map_err(Error::Ime)?;
+        }
+        Ok(())
+    })?;
     if let Some(probe) = &probe {
         probe.validate()?;
     }

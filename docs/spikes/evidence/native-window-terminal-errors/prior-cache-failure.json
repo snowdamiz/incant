@@ -1,0 +1,8 @@
+{
+  "at": "2026-10-12T17:32:16.996457+00:00",
+  "failure": "Shared warm target executed a stale incant_script build-script from a newer producer checkout. Its output requests src/animation_ik.rs, absent from both current build.rs and this main151 checkout.",
+  "stale_binary_sha256": "64007d09f68c71ed16159121528c8368b09f3a2451506f1e871cddbb960365fd",
+  "current_build_source_sha256": "3c5b34982a3c79f94880a3e679272f92a6f5a446f5eb7671cf4c9a16e20b2d1a",
+  "source_changed": false,
+  "remediation": "Retain failure and stale binary, clean only all workspace package artifacts in exclusively root-owned ci target, preserve external dependencies, rerun current-source suite."
+}

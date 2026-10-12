@@ -1,0 +1,65 @@
+[
+  {
+    "name": "native-window-tests",
+    "argv": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "native-window"
+    ],
+    "exit": 0,
+    "seconds": 58.8927385829993,
+    "sha256": "5c256f282f396f617d2bb7a788af11b0b3141fab06428025d2b9f6eb18049450"
+  },
+  {
+    "name": "native-window-clippy",
+    "argv": [
+      "./tools/cargo",
+      "clippy",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "native-window",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit": 0,
+    "seconds": 28.98977087499952,
+    "sha256": "72b358621f794cf1d73bf60878bf1009652782cabf219ff656032045456bc869"
+  },
+  {
+    "name": "fmt",
+    "argv": [
+      "./tools/cargo",
+      "fmt",
+      "--all",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 1.3089350840000407,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "conventions",
+    "argv": [
+      "python3",
+      "tools/generate_conventions.py",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.04287812499933352,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]
