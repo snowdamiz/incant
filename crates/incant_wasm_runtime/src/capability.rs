@@ -580,6 +580,15 @@ impl Capability {
         if memory.len() > limits::MEMORY {
             return Err(Error::Limit("linear memory"));
         }
+        if matches!(
+            call,
+            Call::AnimationGraphLen | Call::ReadAnimationGraphs { .. }
+        ) && self.animation_graph_rows.iter().any(|g| g.fade.is_some())
+        {
+            return Err(Error::Abi(
+                "animation graph v1 cannot represent compound fades",
+            ));
+        }
         // These pose protocols have no post-sample IK payload. Refuse only
         // pose observations; other module capabilities and native rendering
         // remain usable. Every later pose ABI must preserve this admission.

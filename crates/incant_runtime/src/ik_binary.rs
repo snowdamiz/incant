@@ -53,9 +53,13 @@ pub(crate) fn read_sample(r: &mut Reader<'_>) -> Result<AnimationIkSample, Scene
     sample.validate().map_err(SceneError::Invalid)?;
     Ok(sample)
 }
-pub(crate) fn read(r: &mut Reader<'_>, nodes: &mut [CookedSpatial]) -> Result<(), SceneError> {
+pub(crate) fn read(
+    r: &mut Reader<'_>,
+    nodes: &mut [CookedSpatial],
+    allow_empty: bool,
+) -> Result<(), SceneError> {
     let n = r.u32()? as usize;
-    if n == 0
+    if (n == 0 && !allow_empty)
         || n > nodes.len()
         || n > crate::MAX_SCENE_ANIMATION_IK
         || n > r.remaining_len() / (PREFIX + ROW)

@@ -30,6 +30,18 @@ coordinator intake remains pending. Compound-pose SDK
 parity, static-module checkpoints, rendered acceptance and device gates remain
 open. [Contract/evidence](docs/spikes/native-wasm-ik.md).
 
+## Compound animation transitions — private focused verification
+
+Transitions involving authored blend states now retain independent state clocks,
+inner interpolation and exact world-save continuation. The TypeScript snapshot
+and CPU renderer consume the grouped pose; a single staged sampling/IK boundary
+preserves the last complete pose on a late refusal. The affected suite passes
+749 CPU tests, Clippy, wasm32 and SDK TypeScript; independent source review passes.
+Ordinary exported continuation and complete compound
+Wasm bindings remain open. Root-motion integration continues separately; this
+private revision does not claim complete animation or a Phase 1 gate.
+[Contract](docs/spikes/native-compound-animation-fades.md).
+
 ## Authored two-bone IK — connected CPU proof passed
 
 Bounded stable-ID constraints now bind actual cooked model topology/fingerprints,
@@ -49,6 +61,23 @@ Renderer appearance/GPU/device budgets, edit-mode IK preview/authoring UI and
 Wasm compound-pose integration remain open. The current-v4 union preserves all
 eight legacy pose-import refusals; the additive IK API is recorded above.
 [Contract and evidence](docs/spikes/native-authored-ik.md).
+
+
+Rust/Wasm IK controls remain open. Existing v1–v3 pose imports explicitly refuse
+IK; current-main integration must extend that guard and regression to v4.
+[Contract and evidence](docs/spikes/native-authored-ik.md).
+
+## Grouped animation pose sampling — local CPU checks passed
+
+
+The retained model player crossfades finished single, spherical-pair or weighted
+poses without flattening their rotation rules. Exact endpoints and one atomic
+publication are preserved. All 113 affected tests, Clippy, supported wasm32,
+dependency checks and independent source review pass. Accepted updates allocate
+nothing; existing refusal diagnostics may allocate. This is a numeric foundation
+only: authored graph fades, clocks, cooked/save and SDK/render integration remain
+in progress. [Contract and evidence](docs/spikes/grouped-animation-pose.md).
+
 
 ## Public Wasm complete animation poses — local host and package proofs passed
 

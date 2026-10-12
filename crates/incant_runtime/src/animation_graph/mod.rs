@@ -2,7 +2,10 @@
 pub(crate) mod binary;
 mod definition;
 pub use definition::*;
+pub(crate) mod fade;
+mod motion;
 mod playback;
+pub use fade::AnimationGraphFadeSnapshot;
 pub use playback::{AnimationGraphControl, AnimationGraphSnapshot, AnimationGraphState};
 mod tree;
 pub use tree::*;

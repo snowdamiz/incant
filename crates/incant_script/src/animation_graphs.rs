@@ -2,7 +2,7 @@
 use incant_runtime::{
     AnimationGraphControl, AnimationGraphSnapshot, NativeWorld, StructuralCommand,
 };
-use rquickjs::{Array, Ctx, Exception, Object, TypedArray, Value, object::Property};
+use rquickjs::{Array, Ctx, Exception, IntoJs, Object, TypedArray, Value, object::Property};
 
 #[derive(Default)]
 pub(crate) struct Scratch {
@@ -17,6 +17,11 @@ pub(crate) struct Scratch {
     weights: Vec<f64>,
     blending: Vec<u8>,
     weighted: Vec<u8>,
+    fade_flags: Vec<u8>,
+    fade_seconds: Vec<f64>,
+    fade_speeds: Vec<f64>,
+    fade_elapsed: Vec<f64>,
+    fade_duration: Vec<f64>,
 }
 impl Scratch {
     pub fn capture(&mut self, world: &mut NativeWorld) -> Result<(), incant_runtime::RuntimeError> {
@@ -31,6 +36,11 @@ impl Scratch {
         self.weights.clear();
         self.blending.clear();
         self.weighted.clear();
+        self.fade_flags.clear();
+        self.fade_seconds.clear();
+        self.fade_speeds.clear();
+        self.fade_elapsed.clear();
+        self.fade_duration.clear();
         self.offsets.push(0);
         for row in &self.rows {
             self.seconds.push(row.seconds);
@@ -39,7 +49,15 @@ impl Scratch {
             self.values
                 .extend_from_slice(&row.parameters[..usize::from(row.parameter_count)]);
             self.offsets.push(self.values.len() as u32);
-            self.weighted.push(u8::from(row.pose.is_some()));
+            self.weighted
+                .push(u8::from(row.pose.is_some_and(|p| p.is_weighted())));
+            self.fade_flags
+                .push(row.fade.map_or(0, |f| 1 | (u8::from(f.playing) << 1)));
+            self.fade_seconds.push(row.fade.map_or(0.0, |f| f.seconds));
+            self.fade_speeds.push(row.fade.map_or(0.0, |f| f.speed));
+            self.fade_elapsed.push(row.fade.map_or(0.0, |f| f.elapsed));
+            self.fade_duration
+                .push(row.fade.map_or(0.0, |f| f.duration));
             self.blending.push(u8::from(row.blend.is_some()));
             self.source_clips
                 .push(row.blend.and_then(|b| b.sample.clip).map_or(-1, i32::from));
@@ -53,9 +71,18 @@ impl Scratch {
         let result = Object::new_proto(ctx.clone(), None)?;
         let ids = Array::new(ctx.clone())?;
         let states = Array::new(ctx.clone())?;
+        let fade_states = Array::new(ctx.clone())?;
         let parameters = Array::new(ctx.clone())?;
         let text = |id: incant_runtime::StableId| ulid::Ulid::from_bytes(id.0).to_string();
         for (index, row) in self.rows.iter().enumerate() {
+            fade_states.as_object().prop(
+                index as u32,
+                Property::from(match row.fade {
+                    Some(fade) => text(fade.state).into_js(ctx)?,
+                    None => Value::new_null(ctx.clone()),
+                })
+                .enumerable(),
+            )?;
             ids.as_object()
                 .prop(index as u32, Property::from(text(row.entity)).enumerable())?;
             states
@@ -73,6 +100,7 @@ impl Scratch {
         }
         result.prop("ids", Property::from(ids).enumerable())?;
         result.prop("states", Property::from(states).enumerable())?;
+        result.prop("fadeStates", Property::from(fade_states).enumerable())?;
         result.prop("parameterIds", Property::from(parameters).enumerable())?;
         macro_rules! column {
             ($key:literal,$field:ident) => {
@@ -92,6 +120,11 @@ impl Scratch {
         column!("weights", weights);
         column!("blending", blending);
         column!("weighted", weighted);
+        column!("fadeFlags", fade_flags);
+        column!("fadeSeconds", fade_seconds);
+        column!("fadeSpeeds", fade_speeds);
+        column!("fadeElapsed", fade_elapsed);
+        column!("fadeDuration", fade_duration);
         Ok(result)
     }
 }

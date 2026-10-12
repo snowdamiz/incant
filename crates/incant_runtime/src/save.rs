@@ -1,6 +1,7 @@
 //! Explicit bounded world checkpoints, never the tick path. Hashes detect
 //! corruption, not origin or authorization. VM/host state is a separate boundary.
 mod codec;
+mod graph_fade;
 mod ik;
 use crate::flipbook::Playback;
 use crate::world::{Local, Motion};
@@ -220,7 +221,7 @@ impl NativeWorld {
             .iter()
             .filter(|n| n.animation.as_ref().is_some_and(|a| a.graph.is_some()))
             .count();
-        if decoded.graphs.len() != expected_graphs * codec::GRAPH_BYTES {
+        if decoded.graphs.len() != expected_graphs * codec::graph_stride(decoded.version) {
             return Err(SaveError::Invalid("animation graph membership"));
         }
         let ik_states = ik::decode(&scene, decoded.ik)?;
@@ -260,7 +261,10 @@ impl NativeWorld {
                 .map_err(|_| SaveError::Invalid("animation checkpoint"))?;
             playback.state = state;
         }
-        for row in decoded.graphs.as_chunks::<{ codec::GRAPH_BYTES }>().0 {
+        for row in decoded
+            .graphs
+            .chunks_exact(codec::graph_stride(decoded.version))
+        {
             let (id, graph) = codec::graph(row)?;
             let entity = *world
                 .entities

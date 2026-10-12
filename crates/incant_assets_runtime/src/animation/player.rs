@@ -6,9 +6,15 @@ pub use deform::SkinPose;
 #[path = "weighted.rs"]
 mod weighted;
 pub use weighted::{MAX_POSE_SAMPLES, WeightedClipSample};
+#[path = "grouped.rs"]
+mod grouped;
+pub use grouped::PoseSource;
 #[path = "ik.rs"]
 mod ik;
 pub use ik::{MAX_TWO_BONE_IK, TwoBoneIk, TwoBoneIkError};
+#[path = "pipeline.rs"]
+mod pipeline;
+pub use pipeline::AnimationPoseError;
 
 /// One retained, immutable model animation copy and two preallocated pose buffers.
 /// Sampling performs no allocation, source IO or JSON. There is no implicit clock:
@@ -25,6 +31,7 @@ pub struct AnimationPlayer {
     staged: Pose,
     trs: Vec<Option<NodeTrs>>,
     blend_trs: Vec<Option<NodeTrs>>,
+    group_trs: Vec<Option<NodeTrs>>,
 }
 struct Pose {
     local: Vec<DMat4>,
@@ -69,7 +76,7 @@ impl Pose {
 impl AnimationPlayer {
     /// Logical owned allocation payload for one player, excluding allocator
     /// headers and validation scratch. Counts cloned keys/topology as well as
-    /// both pose buffers and both TRS scratch arrays. Callers can charge instances before constructing
+    /// both pose buffers and three TRS scratch arrays. Callers can charge instances before constructing
     /// them. Shared source pixels/geometry are not copied by a player.
     pub fn retained_bytes(model: &CookedModel) -> Result<usize> {
         let data = model
@@ -93,7 +100,7 @@ impl AnimationPlayer {
         }
         charge(
             nodes,
-            size_of::<Option<usize>>() + size_of::<usize>() + 2 * size_of::<Option<NodeTrs>>(),
+            size_of::<Option<usize>>() + size_of::<usize>() + 3 * size_of::<Option<NodeTrs>>(),
         )?;
         charge(
             data.skins
@@ -145,6 +152,7 @@ impl AnimationPlayer {
             data: data.clone(),
             trs: data.rest.clone(),
             blend_trs: data.rest.clone(),
+            group_trs: data.rest.clone(),
             live: Pose::new(nodes.len(), count),
             staged: Pose::new(nodes.len(), count),
             nodes,
@@ -282,6 +290,11 @@ impl AnimationPlayer {
         self.publish()
     }
     fn publish(&mut self) -> Result<()> {
+        self.stage_trs()?;
+        std::mem::swap(&mut self.live, &mut self.staged);
+        Ok(())
+    }
+    fn stage_trs(&mut self) -> Result<()> {
         for &i in &self.order {
             let local = self.trs[i]
                 .as_ref()
@@ -290,8 +303,6 @@ impl AnimationPlayer {
         }
         self.staged
             .rebuild(&self.parents, &self.order, &self.data, &self.offsets)
-            .map_err(invalid)?;
-        std::mem::swap(&mut self.live, &mut self.staged);
-        Ok(())
+            .map_err(invalid)
     }
 }
