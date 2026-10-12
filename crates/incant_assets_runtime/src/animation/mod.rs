@@ -5,7 +5,7 @@ mod player;
 use crate::{AssetError, Mesh, ModelNode, Result, invalid};
 pub use binary::decode_animation;
 use glam::{DMat4, DQuat, DVec3};
-pub use player::AnimationPlayer;
+pub use player::{AnimationPlayer, SkinPose};
 use std::collections::BTreeSet;
 
 pub const MAX_ANIMATION_BYTES: usize = 32 * 1024 * 1024;
@@ -110,6 +110,39 @@ pub(crate) fn matrix(m: &[[f32; 4]; 4]) -> DMat4 {
     DMat4::from_cols_array_2d(&m.map(|c| c.map(f64::from)))
 }
 impl AnimationData {
+    /// Logical heap payload copied when retaining this bounded typed data.
+    pub fn retained_bytes(&self) -> Result<usize> {
+        let mut bytes = 0usize;
+        let mut charge = |count: usize, size: usize| -> Result<()> {
+            bytes = count
+                .checked_mul(size)
+                .and_then(|n| bytes.checked_add(n))
+                .ok_or(AssetError::Limit("retained animation bytes"))?;
+            Ok(())
+        };
+        charge(self.rest.len(), size_of::<Option<NodeTrs>>())?;
+        charge(self.node_skins.len(), size_of::<Option<usize>>())?;
+        charge(self.skins.len(), size_of::<Skin>())?;
+        for skin in &self.skins {
+            charge(skin.name.as_ref().map_or(0, String::len), 1)?;
+            charge(skin.joints.len(), size_of::<usize>())?;
+            charge(skin.inverse_bind.len(), size_of::<[[f32; 4]; 4]>())?;
+        }
+        charge(self.influences.len(), size_of::<Vec<Influences>>())?;
+        for influences in &self.influences {
+            charge(influences.len(), size_of::<Influences>())?;
+        }
+        charge(self.clips.len(), size_of::<Clip>())?;
+        for clip in &self.clips {
+            charge(clip.name.as_ref().map_or(0, String::len), 1)?;
+            charge(clip.channels.len(), size_of::<Channel>())?;
+            for channel in &clip.channels {
+                charge(channel.times.len(), size_of::<f32>())?;
+                charge(channel.values.len(), size_of::<[f32; 4]>())?;
+            }
+        }
+        Ok(bytes)
+    }
     /// Shared importer/decoder/startup validation. Public mutable cooked structs
     /// are never treated as already validated by the retained AnimationPlayer.
     pub fn validate(

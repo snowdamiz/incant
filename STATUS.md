@@ -16,6 +16,128 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Current milestone
+
+The project is still building the Phase 1 core engine. Native simulation,
+authored scripting, imports, physics, audio, input and source-free exports have
+working, tested paths, but the complete Core Sample and its device gates remain
+ahead. Editor and agent work overlaps later phases without completing their gates.
+
+Native Wasm logging/localization, desktop gamepad input, session and
+exported-player checkpoints, packaged-font text shaping, and the browser renderer
+compile repair are merged into main, with skeletal asset foundations and font
+import/cooking added in PRs #107–108. The actual native editor Play/chat/budget
+review completed one real account-backed turn, Undo and reopen with retained
+login and usage. Both follow-up UI fixes passed focused native rechecking.
+Parallel work connects native animation clocks, scripting and rendering, and
+checks cooked shaders. Complete game UI/text input, remaining SDK/render features,
+the Core Sample and reference-device measurements still prevent a Phase 1
+completion claim. The feature merge queue is clear after PRs #107–108; the editor integration and
+locally checked animation integration are the next candidates.
+
+Progress reports are scheduled approximately every 30 minutes while the goal is
+active. Report merged work separately from local checks and unmet exit gates.
+The project is still early relative to the complete Engine 1.0 and Driftwake
+scope; no defensible percentage or completion date follows from the PR count.
+
+## Native editor agent integration — in progress
+
+The native session/bridge now connect streamed turns, approval/cancel, bounded
+account-scoped conversation and real edits to the editor's shared bus. Account
+receipt fences cover reconnect/switch and delayed approvals; repeated browser
+opening runs off the admission path. One dedicated worker now retains the native
+Play host and conversation across same-account/project turns without moving its
+QuickJS state between threads. Actual cross-turn query, failed candidate and
+replacement controls pass alongside cancellation/shutdown/panic checks. The
+provider invalidation listener is integrated with its intervening-read race fixed.
+The current editor/script/native-agent union passes 180 scoped Rust tests and
+all-target Clippy after integrating main104 exported-player checkpoints. Claude’s chat UI is integrated with retained
+conversation resizing, accurate denial/failure messages and cause-neutral uncertain
+usage. The current combined UI suite passes 904 tests; strict app/test types and the
+editor build pass. The corrected native cap-change and gameplay-focus fences pass 39 editor tests and Clippy. Four real native-handler turns used
+the saved ChatGPT login for approved edits, native Play and a later retained-state
+query; Undo and exact journal/account recovery passed after reopening. Claude's
+Play, chat and project-budget controls are integrated. Independent review found
+an approval-button hold missing during Undo/Redo: the native admission remains
+safe, and both the explicit readiness metadata and UI consumer are now corrected.
+Twelve deferred-IPC regressions and the combined 902-test UI suite pass; combined
+native visual/WebView acceptance passed on the separately identified main100
+build. Actual unsaved/saved Play, input focus, splitters, allowance edits and a
+real approved agent rename were checked, including Undo and reopening with the
+same account and 22,044 charged tokens. Two new source fixes address picker
+focus loss and a clipped model field; both pass the rebuilt main104 native check
+([follow-up](handoffs/0050-native-editor-focus-fit/result.md)). Account and usage
+were retained. That run recorded an HTTPS exchange before user input; the latest
+backend now restores account presence locally and leaves renewal to agent
+requests. Main108 integration passes scoped Rust tests and Clippy, with no UI
+source change or new provider turn.
+No completed Phase 3 gate is claimed.
+[Binding evidence](docs/spikes/native-editor-agent.md),
+[persistent owner evidence](docs/spikes/persistent-native-agent-host.md),
+[chat integration review](docs/spikes/agent-chat-integration-review.json).
+
+## Per-project agent budget — in progress
+
+Typed user-authored caps, the durable usage ledger and Session accounting are
+now connected to native admission and reads. Usage survives new service instances,
+cap changes and account changes without being part of Undo. Independent reviews
+closed cancellation and cap-installation races. The verified bridge cap command and
+dynamic shell capabilities are integrated, including offline edits and unchanged
+usage across cap/history recovery. The integrated controls and shared bridge pass
+902 UI tests, including the independently reviewed approval-readiness correction
+and its 12 deferred-IPC regressions.
+A fresh live native check completed four saved-account turns and retained all
+73,259 measured tokens through Undo and a separate app process, with the same
+login and exact journal restored. The headless command now shares the durable
+ledger and recovered authored cap; invocation limits cannot refund usage or raise
+the project cap. Its 16 tests, scoped Clippy and independent integration review
+pass ([headless evidence](docs/spikes/headless-agent-budgets.md)). Claude-owned
+controls and the approval-readiness correction are integrated; combined native
+WebView/appearance acceptance passed on its main100 build, with 22,044 tokens
+retained after Undo, reopen and a lowered cap. Rechecking the two UI fixes on
+the rebuilt main104 union remains.
+[Control integration review](docs/spikes/evidence/native-agent-allowance-integration.json).
+[Budget accounting evidence](docs/spikes/agent-project-budget.md).
+
+## Agent conversation context — locally verified
+
+The shared agent loop now retains bounded, project-bound completed exchanges
+across turns. Interrupted batches cannot leave unmatched calls in the next
+request; partial commits remain explicitly acknowledged. All 53 agent tests,
+Clippy and independent review pass. Native session, account and chat integration
+remain outstanding; no live multi-turn provider gate is claimed.
+[Evidence](docs/spikes/agent-conversation-context.md).
+
+## Reusable native agent host — locally verified
+
+The existing headless native Play controller/session and lazy authored viewport
+provider now live in authoring-only `incant_agent_native`. Trusted host fallback
+selection preserves the embedded headless behavior; authored source failures
+never fall back, and checked candidate publication keeps its original atomic
+boundary. Independent review, 102 scoped tests and matching all-target Clippy
+pass; 62 schemas are unchanged and shipped dependency guards stay clean.
+[Evidence](docs/spikes/native-agent-host.md). Editor wiring and native Play-frame
+capture are separate work; no new GPU or live-provider gate is claimed.
+
+## Native agent worker controller — locally verified
+
+Account-backed turns now carry a durable non-secret selection receipt and check
+it after responses/approvals and before tools, retaining actual response usage
+when a stale account is refused. The 73-test agent suite and agent/headless
+Clippy pass. [Account fence evidence](docs/spikes/agent-account-fence.md).
+Native start/account/shutdown admission remains part of editor integration;
+these checks do not atomically combine account changes with project commits.
+
+The provider-independent session controller now supports one physical native
+worker, immediate cancellation of stream/approval publication, stale-decision
+rejection and bounded versioned snapshots. Session token accounting survives
+errors and cancellation; uncertain accounting exhausts the allowance explicitly.
+All 62 agent tests and scoped Clippy pass, including 15 new controller cases and
+real agent/command-bus integration with a deterministic provider.
+[Evidence](docs/spikes/native-agent-session.md). Actual editor/account/native-host
+binding, conversation-context integration, persistent budget settings and visual
+chat/approval/history remain separate work. This is not a live-provider gate.
+
 ## Packaged-font game text shaping — locally verified
 
 `incant_text` now shapes real packaged fonts with explicit fallback order,
@@ -23,7 +145,12 @@ Unicode bidi and wrapping, absolute UTF-8 clusters and reusable immutable glyph
 geometry. Fifteen numerical tests, all-target Clippy, independent font-ingress
 review and standalone wasm compilation pass. The review's malformed-face panic,
 metadata priority and name-allocation amplification findings are fixed. Runtime
-fonts never come from host discovery. Font cooking/atlases, actual drawing,
+fonts never come from host discovery. Project font import/cooking now retains
+stable asset IDs through reimport/Undo and supplies bounded checked cooked bytes
+to the shaper after original source deletion. The optional runtime reader keeps
+the default audio-only dependency graph unchanged; 124 affected CPU tests and
+scoped Clippy/compile checks pass. [Font asset evidence](docs/spikes/packaged-font-assets.md).
+Font atlases, actual drawing,
 widgets/IME, broader script coverage and device gates remain; this does not
 complete game UI. [Evidence](docs/spikes/native-game-text.md).
 
@@ -66,6 +193,10 @@ the captured revision after immutable startup and before candidate ticks, so a
 concurrent script write cannot publish a mixed scene/source revision. All 47 agent
 tests, five native agent Play cases and scoped Clippy pass; independent review
 accepted the corrected source-race boundary. [Evidence](docs/spikes/shared-agent-project-access.md).
+The editor loading container now implements the same shared-access contract:
+loading/failed states refuse, and ready state uses its existing bus and journal.
+The adapter passes all 48 agent tests, three editor loading/recovery cases and
+scoped Clippy; independent review accepted it. No duplicate bus is created.
 This is backend work; chat-panel wiring, visual approval/history and budget UI
 remain outstanding. It does not complete Phase 3 or a live-provider gate.
 
@@ -152,6 +283,18 @@ source identities and passes95 Agent/headless tests, scoped Clippy,62 exact
 contracts and the public32-request/two-process source/Play proof. The stale
 source-cook regression rejects a mixed candidate and retains the previous run.
 Editor chat wiring remains separate. [Evidence](docs/spikes/shared-agent-project-access.md).
+
+## Native editor Play transport — local, UI integration pending
+
+The real editor worker now owns disposable native Play, Pause, Step, Stop and
+selected-entity inspection. Cooking stays off the window thread and no authoring
+state enters ticks. 21 scoped Rust tests, 545 UI tests, strict types and Clippy pass.
+Actual macOS native-window numerical acceptance confirms paused GPU redraws,
+one-tick stepping, minimize/resume, discarded Stop state, fresh restart and
+unchanged project/script/journal bytes plus revision/history. Visible controls,
+desktop input routing and inspector presentation remain Claude handoff 0044 work; this is
+not a completed Play UI, pixel review, phone/performance or phase gate.
+[Evidence](docs/spikes/native-editor-play.md).
 
 ## Current integration and parallel work
 
@@ -483,6 +626,19 @@ changing its tested runtime/compiler/ABI inputs. Integrated verification include
 536 UI tests and 17 Node tests. The fresh bound-script embedding proof passed all16 copied-player processes after removing source/build storage. [Integrated evidence](docs/spikes/native-authored-sdk-integration.md).
 Actual main83 is now integrated without a tree change; the authored candidate is ready for direct-main publication.
 
+## Native skeletal model consumer — CPU checkpoint, rendered acceptance pending
+
+The corrected glTF skeletal foundation is preserved in actual main107. Native
+clock samples now bind to exact sealed clip-duration tables; retained CPU skinning
+feeds the canonical material/shadow vertex path with independent live/staging
+buffers. Source/cache-deleted clocks/extraction, rollback, normal/tangent basis,
+uniform reflection and mixed-sign refusal have CPU controls. The affected suite
+passes 155 tests, all-target Clippy and runtime dependency checks. Seventy GPU tests
+(including two new numerical animation oracles) remain unrun; Claude appearance
+acceptance and the complete authoring/export/native-Play union are pending.
+Blend/state/IK/root motion, GPU skinning and device budgets remain.
+[Scope/evidence](docs/spikes/native-animation-rendering.md).
+
 GameSession/exported-player checkpoint integration: reviewed source `0d841fcd` is preserved unchanged in main103 union `4661e254`; 34 integrated CPU tests and optional-GPU all-target Clippy pass. Original311-test/five-success/nine-refusal shipping evidence remains applicable; full-save limits are unchanged. See [integration evidence](docs/spikes/evidence/native-game-checkpoints-main103.json).
 
 ## Native Wasm localization integration
@@ -500,12 +656,14 @@ tests, Clippy, standalone wasm32 and runtime dependency checks, preserving all
 The bounded glTF skin/TRS import, INCMOD04 cooked reader and retained CPU sampler
 are implemented with reviewed clip-only root validation; see
 [scope and evidence](docs/spikes/gltf-skeletal-animation.md). Static03 compatibility
-is preserved. Current static asset/render/navigation consumers explicitly refuse
-animated models. Native scene/GPU/SDK playback, blend/state/IK/root-motion and
+is preserved. At that foundation merge, static consumers explicitly refused
+animated models; the local native consumer integration is described above.
+Navigation still refuses deformed geometry. Blend/state/IK/root-motion and
 rendered acceptance remain outstanding; this does not complete Phase 1 animation.
 
 Skeletal foundation main106 union passes 90 integrated CPU tests, Clippy, audio-only/wasm32 compilation and dependency checks, with reviewed source unchanged. [Integration evidence](docs/spikes/evidence/gltf-skeletal-main106.json).
 
+Packaged-font backend/CLI import main107 integration passes affected CPU tests, Clippy, font/default-reader, wasm32 and consumer checks while preserving skeletal registration. Editor font import form and rendering remain unfinished. [Evidence](docs/spikes/evidence/packaged-font-assets-main107.json).
 Native TypeScript animation snapshots and atomic playback controls are implemented
 against the retained native clock. Actual QuickJS/NativeSession, multi-instance
 TypeScript cook, rollback and memory-bound tests pass; see

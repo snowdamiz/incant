@@ -66,7 +66,7 @@ impl Fonts {
             }
             // Collections may declare very many faces before fontdb allocates.
             // Only a single sfnt face is currently supported; do not flatten TTC.
-            if !matches!(font.bytes.get(..4), Some(b"\0\x01\0\0" | b"OTTO" | b"true")) {
+            if crate::validate_font(&font.bytes).is_err() {
                 return Err(TextError::Font(font.id));
             }
         }

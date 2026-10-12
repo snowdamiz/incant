@@ -1,0 +1,74 @@
+{
+  "tests": "src/components/agent/AgentApprovalReadiness.test.tsx",
+  "results": [
+    {
+      "mutation": "no hold: the decision chain without approvalReady (the uncorrected behaviour)",
+      "file": "editor/ui/src/components/AgentPanel.tsx",
+      "tests": 12,
+      "failed": 4,
+      "failedTests": [
+        "Approval readiness on the real native bridge (deferred IPC) holds Allow and Deny through history.undo and the fresh session read, then sends the real decision",
+        "Approval readiness on the real native bridge (deferred IPC) holds Allow and Deny through history.redo and the fresh session read, then sends the real decision",
+        "Approval readiness on the real native bridge (deferred IPC) keeps Stop usable while decisions wait, and stops the turn by its ID",
+        "Approval readiness reported by the host (test double) holds Allow and Deny while the host is not ready, even with matching allowances, until it is"
+      ],
+      "restored": true
+    },
+    {
+      "mutation": "hold first: approvalReady before every other reason",
+      "file": "editor/ui/src/components/AgentPanel.tsx",
+      "tests": 12,
+      "failed": 8,
+      "failedTests": [
+        "Approval readiness on the real native bridge (deferred IPC) keeps Stop usable while decisions wait, and stops the turn by its ID",
+        "Approval readiness on the real native bridge (deferred IPC) keeps the more precise reason after the pane’s own allowance save",
+        "Approval readiness on the real native bridge (deferred IPC) keeps the more precise reason after a sign-out",
+        "Approval readiness on the real native bridge (deferred IPC) keeps the more precise reason after a failed session read",
+        "Approval readiness reported by the host (test double) keeps the more precise reason when the host is also not ready: signed out",
+        "Approval readiness reported by the host (test double) keeps the more precise reason when the host is also not ready: after a transport failure",
+        "Approval readiness reported by the host (test double) keeps the more precise reason when the host is also not ready: while the session’s allowance lags the project’s",
+        "Approval readiness reported by the host (test double) keeps naming a decision this host cannot make at all"
+      ],
+      "restored": true
+    },
+    {
+      "mutation": "hold before the allowance reason",
+      "file": "editor/ui/src/components/AgentPanel.tsx",
+      "tests": 12,
+      "failed": 2,
+      "failedTests": [
+        "Approval readiness on the real native bridge (deferred IPC) keeps the more precise reason after the pane’s own allowance save",
+        "Approval readiness reported by the host (test double) keeps the more precise reason when the host is also not ready: while the session’s allowance lags the project’s"
+      ],
+      "restored": true
+    },
+    {
+      "mutation": "omission holds: an older host without the field treated as not ready",
+      "file": "editor/ui/src/components/AgentPanel.tsx",
+      "tests": 12,
+      "failed": 1,
+      "failedTests": [
+        "Approval readiness reported by the host (test double) keeps decisions usable on an older host that does not report readiness"
+      ],
+      "restored": true
+    },
+    {
+      "mutation": "buttons ignore the hold: activation no longer checks it (marking unchanged)",
+      "file": "editor/ui/src/components/agent/AgentTurn.tsx",
+      "tests": 12,
+      "failed": 9,
+      "failedTests": [
+        "Approval readiness on the real native bridge (deferred IPC) holds Allow and Deny through history.undo and the fresh session read, then sends the real decision",
+        "Approval readiness on the real native bridge (deferred IPC) holds Allow and Deny through history.redo and the fresh session read, then sends the real decision",
+        "Approval readiness on the real native bridge (deferred IPC) keeps the more precise reason after the pane’s own allowance save",
+        "Approval readiness on the real native bridge (deferred IPC) keeps the more precise reason after a sign-out",
+        "Approval readiness on the real native bridge (deferred IPC) keeps the more precise reason after a failed session read",
+        "Approval readiness reported by the host (test double) holds Allow and Deny while the host is not ready, even with matching allowances, until it is",
+        "Approval readiness reported by the host (test double) keeps the more precise reason when the host is also not ready: signed out",
+        "Approval readiness reported by the host (test double) keeps the more precise reason when the host is also not ready: after a transport failure",
+        "Approval readiness reported by the host (test double) keeps the more precise reason when the host is also not ready: while the session’s allowance lags the project’s"
+      ],
+      "restored": true
+    }
+  ]
+}

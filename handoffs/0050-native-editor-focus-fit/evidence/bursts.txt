@@ -1,0 +1,24 @@
+2026-10-11T23:44:42Z burst start, frontmost 1866
+{"d":0,"role":"AXWindow","sub":"AXStandardWindow","title":"Incant","x":0.0,"y":0.0,"w":1440.0,"h":875.0,"focused":true}
+2026-10-11T23:44:44Z burst end, exit 0, frontmost 1866
+2026-10-11T23:45:42Z burst start, frontmost 1866
+{"focused":null}
+2026-10-11T23:45:49Z burst end, exit 0, frontmost 1866
+2026-10-11T23:46:58Z burst start, frontmost 1866
+{"focused":null}
+2026-10-11T23:47:10Z burst end, exit 0, frontmost 1866
+2026-10-11T23:47:33Z burst start, frontmost 1866
+{"focused":null}
+2026-10-11T23:47:42Z burst end, exit 0, frontmost 1866
+2026-10-11T23:48:19Z burst start, frontmost 1866
+{"focused":null}
+2026-10-11T23:48:22Z burst end, exit 0, frontmost 1866
+2026-10-11T23:52:24Z burst start, frontmost 1866
+{"focused":null}
+2026-10-11T23:52:27Z burst end, exit 0, frontmost 1866
+2026-10-11T23:52:59Z burst start, frontmost 1866
+{"focused":null}
+2026-10-11T23:53:02Z burst end, exit 0, frontmost 1866
+2026-10-11T23:58:35Z burst start, frontmost 1866
+{"focused":null}
+2026-10-11T23:58:35Z burst end, exit 0, frontmost 1866

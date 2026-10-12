@@ -2,7 +2,8 @@
 //! are inspected; cache writes and unrelated project files cannot trigger edits.
 use crate::{ImportDetails, ImportOutcome, ImportRequest, ImportSnapshot, PreparedImports, Result};
 use incant_assets::{
-    CacheKind, Dependency, SourceSet, load_audio, load_model, load_texture, project_cache_directory,
+    CacheKind, Dependency, SourceSet, load_audio, load_font, load_model, load_texture,
+    project_cache_directory,
 };
 use incant_cmd::{Actor, CommandBus};
 use incant_doc::Asset;
@@ -200,7 +201,12 @@ impl SourceWatcher {
                 );
             }
             let entry = self.entries.get_mut(id).unwrap();
-            let observation = observe(&self.root, &entry.baseline);
+            let max_bytes = if entry.asset.kind == "font" {
+                incant_assets::MAX_FONT_BYTES
+            } else {
+                incant_assets::MAX_SOURCE_BYTES
+            };
+            let observation = observe(&self.root, &entry.baseline, max_bytes);
             if entry.observed.as_ref() != Some(&observation) {
                 entry.observed = Some(observation.clone());
                 entry.since = now;
@@ -230,7 +236,10 @@ impl SourceWatcher {
         for (_, id) in ready {
             let entry = self.entries.get_mut(&id).unwrap();
             entry.attempted = Some(now);
-            let result = if matches!(entry.asset.kind.as_str(), "model" | "texture" | "audio") {
+            let result = if matches!(
+                entry.asset.kind.as_str(),
+                "model" | "texture" | "audio" | "font"
+            ) {
                 snapshot.clone().prepare(
                     &self.root,
                     None,
@@ -269,7 +278,8 @@ fn clear(entry: &mut Entry, report: &mut WatchReport) {
 
 fn dependencies(details: &ImportDetails) -> &[Dependency] {
     match details {
-        ImportDetails::Audio { dependencies, .. }
+        ImportDetails::Font { dependencies, .. }
+        | ImportDetails::Audio { dependencies, .. }
         | ImportDetails::Model { dependencies, .. }
         | ImportDetails::Texture { dependencies, .. } => dependencies,
     }
@@ -295,6 +305,16 @@ fn cached_dependencies(root: &Path, asset: &Asset) -> Option<Vec<Dependency>> {
             .ok()?
             .metadata
             .dependency,
+        ],
+        "font" => vec![
+            load_font(
+                &project_cache_directory(root, CacheKind::Fonts).ok()?,
+                &asset.sha256,
+            )
+            .ok()?
+            .metadata()
+            .dependency
+            .clone(),
         ],
         "texture" => {
             let texture = load_texture(
@@ -326,12 +346,12 @@ fn cached_dependencies(root: &Path, asset: &Asset) -> Option<Vec<Dependency>> {
     Some(deps)
 }
 
-fn observe(root: &Path, dependencies: &[Dependency]) -> Observation {
+fn observe(root: &Path, dependencies: &[Dependency], max_bytes: usize) -> Observation {
     (|| -> std::result::Result<_, Box<dyn std::error::Error>> {
         let mut sources = SourceSet::new(root)?;
         for dep in dependencies {
             crate::validate_path(&dep.path)?;
-            sources.read(Path::new(&dep.path))?;
+            sources.read_limited(Path::new(&dep.path), max_bytes)?;
         }
         Ok(sources.dependencies())
     })()

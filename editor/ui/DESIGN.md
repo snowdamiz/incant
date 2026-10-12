@@ -21,6 +21,7 @@ Tokens: `src/styles/tokens.css`. Styles, one file per area:
 | `agent.css` | Agent pane and composer |
 | `dialogs.css` | Dialog frame, keyboard shortcuts, ChatGPT account |
 | `assets.css` | Left-column tabs, asset list and asset details |
+| `play.css` | Play state and transport in the viewport header, the Play notice, the focused game view, the Inspector's runtime block |
 
 Titlebar host contract: `TITLEBAR.md`. Native viewport: `NATIVE_VIEWPORT.md`.
 
@@ -55,7 +56,7 @@ Titlebar host contract: `TITLEBAR.md`. Native viewport: `NATIVE_VIEWPORT.md`.
 ```
 ┌ titlebar 40 ─ ◆ Project / Scene  Sample data ·· ↶ ↷  ◧ ⬓ ◨ ·············· Ⓢ ⌨ ┐
 ├──────────────────┬──────────────────────────────┬─────────────────────────────┤ ← one ruled header line
-│ Hierarchy 25 Assets 7 │ Viewport ● Live         │ ▭ Close-up Camera      🔒 ⧉ │   (36 px, all three)
+│ Hierarchy 25 Assets 7 │ Viewport ● Live   ▶ ⏭ ■ │ ▭ Close-up Camera      🔒 ⧉ │   (36 px, all three)
 ├──────────────────┼──────────────────────────────┼─────────────────────────────┤
 │ ⌕ Filter      ⇕  │                              │ ▾ ✥ Transform               │ sticky 34 px headers
 │ ▾ ◈ Scene        │   native surface             │   Translation [X 0│Y 2│Z 10]│ 28 px values, 6 px apart
@@ -71,9 +72,10 @@ Titlebar host contract: `TITLEBAR.md`. Native viewport: `NATIVE_VIEWPORT.md`.
 - **Defaults** (`src/shell/layout.ts`): hierarchy 17 % of width (232–296 px), inspector
   25 % (340–420 px; 360 px at 1440 px), dock 27 % of height (160–340 px). The viewport
   never drops below 360 × 200. The Inspector's minimum is 280 px.
-- **Agent pane.** Only an open, ready agent is a resizable pane with a separator
-  (default 33 % of height, 260–340 px). Otherwise the pane is as tall as its content:
-  a 36 px status line when collapsed, or the line plus one sentence when open.
+- **Agent pane.** An open agent that is ready, re-reading its session, or holding turns
+  is a resizable pane with a separator (default 33 % of height, 260–340 px). Otherwise the
+  pane is as tall as its content: a 36 px status line when collapsed, or the line, one
+  sentence and the allowance line when open.
 - **The window never scrolls.** `.app` contains and clips its descendants, and every
   scroller is a containing block, so `scrollIntoView`, focus and visually hidden text
   cannot shift the titlebar off screen.
@@ -142,6 +144,53 @@ in full; panels show a short state of their own (or, while opening, keep it spok
 The header says Live, Not attached, Waiting, Error or No engine with a tone dot. The
 empty area shows only what the header does not: the host's reason or a render error's
 message, in one quiet paragraph. No illustration, grid or vignette.
+
+## Play
+
+Native Play runs the game in a disposable native world, shown in the viewport (handoff
+0044). It lives in the viewport header and the Inspector, without a new panel, colour or
+frame.
+
+**Header line.** The state replaces the viewport's own word while a session exists:
+Preparing… and Stopping… (a small spinner instead of the dot), Playing (green), Suspended
+(amber, only once a hold lasts 400 ms; tooltip: the window is in the background or the
+viewport is hidden), Paused · tick 1,204 (blue, the tick in quiet numerals) and Play failed
+or Play unavailable (red). With several scenes the playing scene follows Playing. At the
+trailing edge are three plain 28 px buttons, always in the same place: Play (Resume while
+paused, Pause while running), Step and Stop. A button that cannot act stays focusable, is
+marked unavailable, and says why when pressed. Generation, sequence and frame counters are
+not shown.
+
+**Scene and camera.** Shown only when there is a choice: a quiet button before the transport
+naming the target ("Harbor · Player Camera", or "Choose scene") that opens one radio list of
+every scene and camera. A single scene and a scene's only camera are used without asking. Play
+without a needed choice opens the list, and choosing starts Play. Choices are remembered per
+scene for the editor session. The button hides while a session exists; if it had focus, focus
+moves to Play.
+
+**Notice.** A failed session's message is one strip under the header, the engine's words
+after "Play could not start." or "Play stopped at tick 812.", with Dismiss; an unreadable
+status says so in the same strip, without Dismiss. It is the one place the failure is stated;
+it is an alert, and Play's earlier status-line message is cleared. Dismissed from the
+keyboard, focus moves to Play rather than leaving with the strip.
+
+**Game view.** While a session exists the viewport host is a focusable application region,
+"Game view". A click or keyboard navigation focuses it (that press is not sent) and draws the
+2 px focus ring inside its edge, whichever way it was focused. Keys and the pointer then go
+to the game while it runs, including keys such as ? that are editor shortcuts elsewhere; F6
+and Shift+F6 leave the view, and the Play shortcuts and ⌘ combinations stay the editor's.
+Losing focus releases held input, and input that resumes releases whatever the game still
+held first. The game has focus only while the view has: when Play starts or resumes, or the
+window comes back, with focus in another panel, the game is told it has none. A session that
+ends with focus in the view moves focus to Play.
+
+**Runtime block.** While a session runs or is paused, an entity of the playing scene shows a
+sunken block above its authored components: "Runtime", the tick it was read at, and a
+refresh button; then Translation, Rotation, Scale and, when the entity has one, Velocity, in
+the authored rows' own presentation. It is read on selection, after Pause and after each
+Step, and never polled. An entity the game removed says "No runtime state." with the
+engine's reason; an entity of another scene says "Not in the running scene." Authored
+values are never shown in its place, and nothing in it is written to the project.
 
 ## Hierarchy
 
@@ -258,14 +307,76 @@ count every entry, and a list that fits one page shows no pager at all.
 
 ## Agent pane
 
-The header is a disclosure: chevron, wisp mark, "Agent", and a status with a dot
-(Ready, Working…, Signing in…, Sign-in problem, Unavailable, Not signed in, No engine).
+The header is a disclosure: chevron, wisp mark, "Agent", and a status (Ready, Starting…,
+Working…, Needs approval, Stopping…, Finishing…, Updating…, Signing in…, Sign-in problem,
+Unavailable, Allowance used up, Off, Not signed in, No engine). Work in progress shows the
+small spinner in place of the dot; "Needs approval" is a steady amber dot. Files:
+`components/AgentPanel.tsx`, `components/agent/`, `styles/agent.css`.
 
-- **Ready:** transcript (one line: "Describe a change. Every edit lands in History and
-  can be undone.") and composer, in a resizable pane.
-- **Cannot run:** one sentence (why, or the host's reason) and its single next step.
-  A reason that names an internal milestone is shown in plain words ("The agent is not
-  available in the editor yet.") without a sign-in invitation that would not help.
+- **Conversation.** The native session's turns (`snapshot.agentSession`), oldest first,
+  divided by hairlines. A turn is the prompt (the one filled block, so a conversation
+  scans by request; past 8 lines it clamps with Show all), the reply exactly as streamed
+  (plain text, never markup), one quiet line per decided approval, and how it ended: a
+  failure sentence after the error icon, then Stopped, the edits ("No edits" only when
+  the report says so), the allowance charged ("(estimated)" when exact usage could not be
+  confirmed or saved, "Token use unknown" when nothing was charged) and Show in History.
+  A send adds nothing until the session lists its turn. The conversation is a log but not
+  a live region: approval requests and outcomes are said once in the status line, streamed
+  text never. It follows new output only while the reader is at its end; otherwise a
+  floating Latest returns there.
+- **Allowance line.** The open pane's last line, under the composer or the note, outside
+  the conversation so it never scrolls or moves with it: "7,712 of 250,000 tokens used",
+  then, where the project has an authored allowance (`projectAgentBudget`), a quiet
+  Change at the trailing edge of the first line. The allowance is the project's authored
+  cap; usage is the session's recorded total, "(some estimated)" where part of it is a
+  conservative charge. While the session catches up with a changed cap its own copy is
+  never shown. The numbers turn amber at 80 %, red when used up, and stay muted at 0 (off
+  on purpose). Usage above a lowered cap stays visible; only what is left (spoken and in
+  the tooltip) stops at zero. There is no reset and no money: tokens only. Older hosts
+  without a project allowance show their session's allowance without Change.
+- **Changing it.** Change edits in place, as a rename does: "Allowance", the Inspector's
+  28 px value box (monospace digits, "tokens" following them, all selected), Cancel and
+  Save. Enter saves, Escape cancels, and focus returns to Change. Digits with one
+  consistent group separator are read exactly; fractions, signs, exponents and values past
+  9,007,199,254,740,991 are refused inline. One quiet line under the box says the single
+  most important thing: why it cannot be saved, the host's reason a save failed (what was
+  typed stays), "Saving stops the current request." while one runs (native hosts end it),
+  that another edit changed the allowance meanwhile, "0 turns the agent off.",
+  "No new requests: 7,712 already used.", or else the usage it is weighed against. A save
+  is one `agent.budget.set` through the command bus: journaled, undoable, offline, and
+  sent once however often Enter is pressed. Save is the raised button; Send or Stop keeps
+  the one accent. A narrow pane, or a very long value, puts the actions beside the note.
+- **Updating.** After an allowance edit, Undo or Redo, or an account read, the host holds
+  new requests until it re-reads the session. The pane keeps the composer (its action a
+  quiet wait) and says Updating… instead of swapping in a note; decisions wait with a
+  reason while the session's cap lags the project's or the host says it is not ready for
+  them ("Waiting for the agent to update its session."), and Stop stays usable. A refresh
+  the host never finishes says Unavailable after 4 s (counted from the end of the pane's
+  own save) and shows the host's reason and Refresh in the notice line above the same
+  composer and draft, as a transport failure does while a worker runs.
+- **Approvals.** A bordered card at the end of its turn: the request as a question read
+  from the exact arguments ("Apply 4 changes to the project?"), the agent's own
+  description in quotes, one row per operation marked like a diff (+ add, − remove,
+  ~ change, ! unreadable), the exact arguments on request (wrapped, 64 KB until Show
+  all) and Deny / Allow in a footer that sticks to the bottom of a short pane, where the
+  question is kept in view. Untrusted names are isolated; hidden direction characters
+  are shown as escapes. Nothing is focused or decided by itself; after a decision its
+  row takes focus.
+- **Composer.** One line that grows with the text; then the model (monospace, editable,
+  default gpt-6-astra; no model list is invented), the approval mode (Ask before edits,
+  Ask every time, Never ask in amber) and one action: Send, Stop while a turn can be
+  cancelled, or a spinner while sending, stopping or finishing. It is one element, so
+  focus stays on it, and the draft stays editable while the agent works.
+- **Cannot run:** one sentence (why, or the host's reason) and its single next step
+  (Continue with ChatGPT, the account dialog, or Retry after a transport failure; Retry
+  then says the same sentence if the agent is still unavailable). Turns the session still
+  holds stay readable above it, and the
+  allowance line stays below it, so the allowance can be changed without an account. A
+  used-up allowance says "Raise the allowance to send new requests." ("…to turn the agent
+  on." at 0), its next step being the line's Change; an older host says "This session’s
+  token allowance is used up." A reason that names an internal milestone is shown in plain
+  words ("The agent is not available in the editor yet.") without a sign-in invitation
+  that would not help.
 - **Collapsed:** the 36 px status line. A window shorter than 720 px starts collapsed.
 
 ## Dialogs
@@ -276,7 +387,7 @@ trapped, Escape closes and focus returns to the opener.
 - **Keyboard shortcuts.** One searchable reference table, 600 px wide. The header holds
   the title, the filter (focused on open; it matches actions, groups and key names,
   shows "N of M", and Escape clears it before closing) and Close. Sections (General,
-  Hierarchy, Panels and layout, Lists, assets and inspector, Agent) are caption rows;
+  Play, Hierarchy, Panels and layout, Lists, assets and inspector, Agent) are caption rows;
   each row is the action (with a quiet "where" when needed) and, right-aligned, the
   current platform's keys as plain text: "⇧⌘Z" on macOS, "Ctrl+Shift+Z" elsewhere, "or"
   between alternatives and "/" between paired directions. Hairlines between rows; no
@@ -329,6 +440,9 @@ A rename stays mounted and keeps focus while its row scrolls out of view.
   twin for WebKit script focus). Value boxes ring on `:focus-within`; vector cells, list
   rows and menu items ring inside their box.
 - F6 / Shift+F6 cycle visible panels; `?` or ⌘/ opens the shortcut reference.
+- Play by physical key, from anywhere outside a dialog (the game view included): ⌘P
+  plays or stops, ⇧⌘P pauses or resumes, ⌥⌘P steps while paused (Ctrl elsewhere). F6
+  lands on the game view while a session exists.
 
 ## Motion
 
@@ -342,7 +456,7 @@ the only continuous motion, and they stop under reduced motion.
 - No application menu (File/Edit/View) on Windows/Linux. See TITLEBAR.md.
 - Editing: value boxes are shaped for future editing, but every field is read-only
   until the bridge offers a component command.
-- Live runtime values during play (PLAN.md 2.6) will need a visible distinction from
-  authored values; nothing in this revision implies play is available.
+- Runtime values are shown only for Transform and Velocity, the fields native inspection
+  returns. Other runtime components would need the same read-only block.
 - Engine messages number compound parts from 0 ("compound part 41") while the Inspector
   numbers them from 1 ("Part 42 of 64"); the message text comes from Rust validation.

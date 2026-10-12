@@ -561,6 +561,18 @@ kbd {
   color: var(--color-danger);
 }
 
+/* A one-of-many choice: the chosen item's check sits where an icon would. */
+.menu__check {
+  color: var(--color-text);
+}
+
+/* Quiet words at the trailing edge of an item ("No camera"). */
+.menu__note {
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+  white-space: nowrap;
+}
+
 /* The shortcut as plain text at the trailing edge, as in native menus. */
 .menu__shortcut {
   min-width: 0;

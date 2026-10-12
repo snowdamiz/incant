@@ -1,0 +1,295 @@
+{
+  "recorded_at": "2026-10-11T17:44:18.327701+00:00",
+  "base": "fec59089b93b7496d967f1c8f6844c40e54023f8",
+  "plan_sha256": "c60adc7457e6f5929b3430876f6b8ea02acffce5bf55fbaae9090933fe4aab6c",
+  "source_sha256": {
+    "Cargo.lock": "c9a718c7039fad4badbaccc10bb9d247da190758b5285000c3788f462b203f6e",
+    "crates/incant_play/Cargo.toml": "346de54ba81371615bdad6539bad042281362666cd7bf768534117533d293d88",
+    "crates/incant_play/src/control.rs": "c11a7a3b3184d6728f13e83f4a0fe8ddade3268dc1e8c6f6b34f61fd78e729e2",
+    "crates/incant_play/src/lib.rs": "930a20c987a548b8e38712b2c3937fa23ac2fcac64bc55d5246eeca86b053056",
+    "crates/incant_play/tests/control.rs": "c8d0193924fab7c15b91e39f81dabd97650ef5e0156d7ee8ee9ba87fa342371c",
+    "editor/app/Cargo.toml": "b457defb4fc4ef2e8ff02ad3706754b14595e23f2e7721bf4fac5d11dd962243",
+    "editor/app/src/main.rs": "915c3db782a4bb6c09de5f9a5302dbdb1286850e8fce04e63612e2245ae431cc",
+    "editor/app/src/play/clock.rs": "76480f1594e37e9451c41e9524c6ec822398c2f8e5ffd372ba7f2124cb6d0b56",
+    "editor/app/src/play/mod.rs": "b53fb61d23cd8618e0bdd77946101f46278aa8f95a0543d63dfb56333ba72e5b",
+    "editor/app/src/play/probe.rs": "babd793815421891cd0d5b14f26e18e620cf11b067f6c782db406835d99dce83",
+    "editor/app/src/play/tests.rs": "91312c5d4a6e210e9053a607dce0f3060010c86320e8eecc482fff907b514abb",
+    "editor/app/src/play/worker.rs": "f3afe54b5facdfac136b02eda56cc51bc99378c5fec840eaa4edde1168d5c75b",
+    "editor/bridge/contract.ts": "99222baec04650f5edc5a86167707f0ad02aaf2339c84a81a9bbf34e99341e01",
+    "editor/bridge/native.generated.js": "ec3282ffa59c9cbd28b504ffca1f00b755d32a0eb46d314f21e4350a176b3bd5",
+    "editor/bridge/native.test.ts": "696adfb3044b7fcfab346a22f6d9b35f76c41f8f8c9afa550ea4dcb2bc314d0f",
+    "editor/bridge/native.ts": "6bc21b317f9fa36a018d85277ae1d6443eeaf4fad3bb29f0d166afaec2a8614a",
+    "editor/ui/src/bridge/resolve.ts": "2047dc024688967f4bfabb28a354ed0848bdac893f9b1388853a68ce4b44ac32",
+    "editor/ui/src/shell/ShellContext.tsx": "bffae222e2918002f2852fdd91c70e99ddf06ac63e022d1aeaa028c66e623c73",
+    "tools/probes/native-editor-play.py": "6c4278f776ca1f1a8795a129ebbb54006268154d098d07b3c3659a538977da43"
+  },
+  "logs_sha256": {
+    "/tmp/incant-editor-play-final-tests.log": "38473a966d3ab04f556c8f5ade58e0741e341eee9ab5da91d67cdd7bd1965b79",
+    "/tmp/incant-editor-play-final-clippy.log": "cd2b3993ef5b1af1bbb7295d2e1c38d38fc17515edc4ce8fec5aa8345ad37f50",
+    "/tmp/incant-editor-play-ui-tests.log": "e48fa8541bf255bb17fbf588eff6300781e274b84bc8e72355b42206ec23b46f",
+    "/tmp/incant-editor-play-types.log": "5e05d0271a5a922a5b1639a75c386f68b84dc6f16fa9c31d0ca3992328a98dc3",
+    "/tmp/incant-editor-play-probe-clippy.log": "58a956656ad7dc2422a863b5fba9563a6c377e9d9872bb3ab18aa67b56f419b7",
+    "/tmp/incant-editor-play-probe-build.log": "23d26faaa09fc794bc537d7cac0af5e204487e771e3c91a24331c3d042bd2b4e"
+  },
+  "rust_tests": {
+    "passed": 21,
+    "ignored_gpu_case": 1,
+    "note": "Existing ignored render_scene test not rerun in this scope; actual native-window proof separately exercises this new Play host."
+  },
+  "ui_tests": 545,
+  "native_window": {
+    "passed": true,
+    "window": {
+      "limits": [
+        "Numerical native window proof on this host, not pixel review or physical-phone measurement",
+        "Device audio commands apply at callback boundaries, not sample-exact stepping"
+      ],
+      "minimized": {
+        "discardedTicks": 0,
+        "error": null,
+        "generation": 1,
+        "phase": "running",
+        "preparing": false,
+        "presentedFrames": 48,
+        "scene": "01M4P0XCRNMJCBJ51GGM8VDRT0",
+        "sequence": 54,
+        "sourceRevision": 1,
+        "spatial": true,
+        "suspended": true,
+        "tick": 7
+      },
+      "passed": true,
+      "paused": {
+        "discardedTicks": 0,
+        "error": null,
+        "generation": 1,
+        "phase": "paused",
+        "preparing": false,
+        "presentedFrames": 14,
+        "scene": "01M4P0XCRNMJCBJ51GGM8VDRT0",
+        "sequence": 18,
+        "sourceRevision": 1,
+        "spatial": true,
+        "suspended": true,
+        "tick": 5
+      },
+      "paused_entity": {
+        "entity": "00000000000000000000000002",
+        "generation": 1,
+        "parent": null,
+        "tick": 5,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            10.0,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "worldTransform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            10.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "platform": "macos",
+      "project_revision_history_unchanged": true,
+      "redraw": {
+        "discardedTicks": 0,
+        "error": null,
+        "generation": 1,
+        "phase": "paused",
+        "preparing": false,
+        "presentedFrames": 39,
+        "scene": "01M4P0XCRNMJCBJ51GGM8VDRT0",
+        "sequence": 43,
+        "sourceRevision": 1,
+        "spatial": true,
+        "suspended": false,
+        "tick": 5
+      },
+      "restarted_entity": {
+        "entity": "00000000000000000000000002",
+        "generation": 3,
+        "parent": null,
+        "tick": 2,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            4.0,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "worldTransform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            4.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "running": {
+        "discardedTicks": 0,
+        "error": null,
+        "generation": 1,
+        "phase": "running",
+        "preparing": false,
+        "presentedFrames": 13,
+        "scene": "01M4P0XCRNMJCBJ51GGM8VDRT0",
+        "sequence": 16,
+        "sourceRevision": 1,
+        "spatial": true,
+        "suspended": false,
+        "tick": 5
+      },
+      "stepped": {
+        "discardedTicks": 0,
+        "error": null,
+        "generation": 1,
+        "phase": "paused",
+        "preparing": false,
+        "presentedFrames": 42,
+        "scene": "01M4P0XCRNMJCBJ51GGM8VDRT0",
+        "sequence": 46,
+        "sourceRevision": 1,
+        "spatial": true,
+        "suspended": false,
+        "tick": 6
+      },
+      "stepped_entity": {
+        "entity": "00000000000000000000000002",
+        "generation": 1,
+        "parent": null,
+        "tick": 6,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            12.0,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "worldTransform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            12.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "authoring_sha256": {
+      "project.json": "5e7303c3d97089224b2917bfb3bd9f7c014a62056f89a0348a80f294510ef29a",
+      "project.journal.jsonl": "72a1fb104f087f39c4b50e666a73d041eb3140b79d55bade5180102cc7aef3e1",
+      "move.ts": "e86e92defb88e4eb157a52078475647f45456c64b9ead82a0cd5091a08275304"
+    },
+    "editor_sha256": "0674dc3393817afe4e2490ef3090c0ee63298756ca3c3551de444125db512238",
+    "headless_sha256": "3aba2791402019538c444ba28c2e2bd1711f91285baf707f65be8f4740453fb5",
+    "authored_bytes_unchanged": true,
+    "fixture_authored_through_incant_cmd": true
+  },
+  "prior_probe_refusal": {
+    "error": "native play: spatial content requires an explicit --camera and native render host",
+    "passed": false
+  },
+  "limitations": [
+    "Visual controls/input routing/runtime inspector still require Claude0044; this commit does not expose a finished Play UI.",
+    "Numerical macOS actual-window functional evidence only; no rendered-pixel approval, hosted cross-platform or physical-phone/performance gate.",
+    "Device audio pause/step uses callback-boundary commands, not sample-exact device output.",
+    "Window surface Lost/Validation and device failure stop the worker and require reopening; transient Timeout/Occluded pause and Outdated reconfigures.",
+    "Desktop input queue/protocol tested; physical keyboard/pointer routing awaits UI work."
+  ]
+}

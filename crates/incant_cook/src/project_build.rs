@@ -1,6 +1,8 @@
 //! Trusted native-build producer for an authored project. Only engine Rust is
 //! compiled; project input is bounded JSON and TypeScript source data.
-use crate::{compile_project_sources, prepare_script_scene, script::artifact_from_compiled};
+use crate::{
+    compile_project_sources, prepare_script_scene_with_resources, script::artifact_from_compiled,
+};
 use incant_doc::Project;
 use incant_runtime::CookedScene;
 use sha2::{Digest, Sha256};
@@ -53,8 +55,20 @@ pub fn embed_project(project_path: &Path, selected_scene: Option<&str>) -> Resul
         .entities
         .values()
         .any(|e| e.components.contains_key("Script"));
+    let animations = crate::load_project_animation_resources(&project, &scene_id, root)?;
+    for path in animations.cache_paths() {
+        changed(path)?;
+    }
     let (scene, artifact, compiler_manifest) = if attached {
-        let compiled = compile_project_sources(prepare_script_scene(&project, &scene_id)?, root)?;
+        let compiled = compile_project_sources(
+            prepare_script_scene_with_resources(
+                &project,
+                &scene_id,
+                &Default::default(),
+                &animations,
+            )?,
+            root,
+        )?;
         let (scene, program) = compiled.program.into_parts();
         // Changes to either an entry or a transitive helper rerun the producer.
         // These names come from the fixed compiler's validated graph snapshot.
@@ -79,7 +93,12 @@ pub fn embed_project(project_path: &Path, selected_scene: Option<&str>) -> Resul
             compiled.compiler_manifest,
         )
     } else {
-        let scene = CookedScene::from_bytes(&crate::cook_scene(&project, &scene_id)?)?;
+        let scene = CookedScene::from_bytes(&crate::cook_scene_with_resources(
+            &project,
+            &scene_id,
+            &Default::default(),
+            &animations,
+        )?)?;
         let artifact = crate::cook_script(
             "incant-empty-project",
             "exports.default={update(){}};",

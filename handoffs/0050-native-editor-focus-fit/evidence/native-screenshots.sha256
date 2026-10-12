@@ -1,0 +1,13 @@
+# Committed images (screenshots/native/), Display P3 as captured
+6ec358a1b6102e6eb4b700a5f832acb7be2b48dfcc86ea360dbbe54fa6859f93  composer-01-1440x875-column-280.png
+4eb86005c94b45016fac580d40420a0e73a594575e5995122bf073e00f8ae9b7  composer-02-1000x650-column-280.png
+08ee2536a90c06e78348778c034aa297199e808967b06b42c790666151579d97  composer-03-1000x650-column-380.png
+e9be0ae22dac0328a58060968c735932112a5f07883128302c46c477a5bbb316  composer-04-crop-four-layouts-2x.png
+2ca4ed635e2350c4f3180cdf51f2eb85a0159e3ed51008a7e625786f33e7361c  play-01-1440x875-cmd-p-from-picker-focus-on-pause.png
+33c958c6305e8bb7bc7a90a1b0f022beaa2e7e654c541f967cc638c66894997d  play-02-1440x875-no-camera-refusal-focus-on-play.png
+# Raw window captures they derive from (artifacts/0050/, git-ignored, kept locally; the titlebar avatar is not redacted in these)
+7c5fab480a5c02269566e9c991de2d7f30d7bf8133ccf58d6aea3ca3e007c430  raw-c1-1440x875-380-playing-pause-focus.png
+69d2a029659913ec447b30e01301ad449ff6275d4816aa07b469e890ce5f9ec2  raw-c2-1440x875-380-no-camera-refusal-focus.png
+7472536540e679bdc0de6d87a0f54cb83c1b437371a39f248968d16babba1497  raw-c3-1440x875-280-composer.png
+0af95b722fc24642154e219c5e232ac24405b31fcab7811cbf092c9c323a5012  raw-c4-1000x650-280-composer.png
+8c5289b76707dc28f71c12e8317150b7b92ded7e06ef338bc523bb685a2a87d1  raw-c5-1000x650-380-composer.png

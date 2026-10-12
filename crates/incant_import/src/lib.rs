@@ -4,7 +4,8 @@ mod sprites;
 mod tilemaps;
 mod watch;
 use incant_assets::{
-    AssetError, Dependency, TextureFormat, TextureUsage, cook_audio, cook_model, cook_texture,
+    AssetError, Dependency, TextureFormat, TextureUsage, cook_audio, cook_font, cook_model,
+    cook_texture,
 };
 use incant_cmd::{Actor, Command, CommandBus, CommandError};
 use incant_doc::{Asset, AssetImportSettings, Project, new_id};
@@ -33,7 +34,7 @@ pub enum ImportError {
     #[error("multiple assets use source {0}; resolve their identities before reimport")]
     AmbiguousSource(String),
     #[error(
-        "unsupported import source: {0}; expected glTF, GLB, FBX, PNG, JPEG, EXR, .atlas.json, WAV or OGG"
+        "unsupported import source: {0}; expected glTF, GLB, FBX, PNG, JPEG, EXR, .atlas.json, WAV, OGG, TTF or OTF"
     )]
     Unsupported(String),
     #[error("texture usage applies only to standalone images: {0}")]
@@ -64,6 +65,10 @@ pub struct ImportRequest {
 #[derive(Debug, Serialize)]
 #[serde(untagged)]
 pub enum ImportDetails {
+    Font {
+        bytes: u32,
+        dependencies: Vec<Dependency>,
+    },
     Audio {
         sample_rate: u32,
         channels: u8,
@@ -156,6 +161,7 @@ impl ImportSnapshot {
                 "gltf" | "glb" | "fbx" => ImportKind::Model,
                 "png" | "jpg" | "jpeg" | "exr" => ImportKind::Texture,
                 "wav" | "ogg" => ImportKind::Audio,
+                "ttf" | "otf" => ImportKind::Font,
                 "json" if request.source.to_ascii_lowercase().ends_with(".atlas.json") => {
                     ImportKind::Texture
                 }
@@ -255,6 +261,7 @@ enum ImportKind {
     Model,
     Texture,
     Audio,
+    Font,
 }
 
 fn cook(
@@ -278,6 +285,20 @@ fn cook(
                 textures: cooked.images.len(),
                 vertices: cooked.meshes.iter().map(|m| m.vertices.len()).sum(),
                 dependencies: cooked.metadata.dependencies,
+            },
+        )
+    } else if kind == ImportKind::Font {
+        let cache = cache_directory(root, cache_override, "fonts")?;
+        let cooked = cook_font(root, source, &cache)?;
+        let metadata = cooked.metadata();
+        (
+            "font",
+            metadata.fingerprint.clone(),
+            cooked.cache_hit,
+            None,
+            ImportDetails::Font {
+                bytes: metadata.bytes,
+                dependencies: vec![metadata.dependency.clone()],
             },
         )
     } else if kind == ImportKind::Audio {

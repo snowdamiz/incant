@@ -1,0 +1,1029 @@
+{
+  "set": "before",
+  "generated": "2026-10-11T21:57:22.192Z",
+  "browser": "156.0.8078.4",
+  "dist": "<worktree>/handoffs/0049-agent-approval-readiness/artifacts/dist-before",
+  "data": "deterministic fixture (0046 fake-host.js + 0049 readiness-host.js + real native.generated.js); not live, not native WebKit",
+  "captures": [
+    {
+      "file": "pending-w1440-s380",
+      "state": "pending",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "bridge": {
+          "agent": {
+            "status": "running",
+            "conversation": "3",
+            "approvalReady": false
+          },
+          "projectCap": 250000,
+          "sessionCap": 250000,
+          "applied": 2
+        },
+        "status": "Needs approval",
+        "note": null,
+        "noteIsError": null,
+        "deny": null,
+        "allow": null,
+        "stop": null,
+        "refusedShown": false,
+        "draft": "Then add fog over the water.",
+        "replyShown": true,
+        "geometry": {
+          "pane": {
+            "x": 1060,
+            "y": 575,
+            "width": 380,
+            "height": 297
+          },
+          "transcript": {
+            "x": 1060,
+            "y": 611,
+            "width": 380,
+            "height": 157
+          },
+          "card": {
+            "x": 1072,
+            "y": 617,
+            "width": 356,
+            "height": 233
+          },
+          "footer": {
+            "x": 1073,
+            "y": 723,
+            "width": 354,
+            "height": 45
+          },
+          "note": null
+        },
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "text": "",
+          "focusVisible": false
+        },
+        "decideCalls": []
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "pressed-w1440-s380",
+      "state": "pressed",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "bridge": {
+          "agent": {
+            "status": "running",
+            "conversation": "3",
+            "approvalReady": false
+          },
+          "projectCap": 250000,
+          "sessionCap": 250000,
+          "applied": 2
+        },
+        "status": "Needs approval",
+        "note": "Connect an OpenAI account and refresh the native session before deciding an approval.",
+        "noteIsError": true,
+        "deny": null,
+        "allow": null,
+        "stop": null,
+        "refusedShown": true,
+        "draft": "Then add fog over the water.",
+        "replyShown": true,
+        "geometry": {
+          "pane": {
+            "x": 1060,
+            "y": 575,
+            "width": 380,
+            "height": 297
+          },
+          "transcript": {
+            "x": 1060,
+            "y": 611,
+            "width": 380,
+            "height": 157
+          },
+          "card": {
+            "x": 1072,
+            "y": 485,
+            "width": 356,
+            "height": 271
+          },
+          "footer": {
+            "x": 1073,
+            "y": 672,
+            "width": 354,
+            "height": 83
+          },
+          "note": {
+            "x": 1085,
+            "y": 681,
+            "width": 330,
+            "height": 32
+          }
+        },
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "text": "Allow",
+          "focusVisible": false
+        },
+        "decideCalls": []
+      },
+      "axe": null,
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "reading-w1440-s380",
+      "state": "reading",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "bridge": {
+          "agent": {
+            "status": "running",
+            "conversation": "3",
+            "approvalReady": false
+          },
+          "projectCap": 250000,
+          "sessionCap": 250000,
+          "applied": 1
+        },
+        "status": "Needs approval",
+        "note": "Connect an OpenAI account and refresh the native session before deciding an approval.",
+        "noteIsError": true,
+        "deny": null,
+        "allow": null,
+        "stop": null,
+        "refusedShown": true,
+        "draft": "Then add fog over the water.",
+        "replyShown": true,
+        "geometry": {
+          "pane": {
+            "x": 1060,
+            "y": 575,
+            "width": 380,
+            "height": 297
+          },
+          "transcript": {
+            "x": 1060,
+            "y": 611,
+            "width": 380,
+            "height": 157
+          },
+          "card": {
+            "x": 1072,
+            "y": 485,
+            "width": 356,
+            "height": 271
+          },
+          "footer": {
+            "x": 1073,
+            "y": 672,
+            "width": 354,
+            "height": 83
+          },
+          "note": {
+            "x": 1085,
+            "y": 681,
+            "width": 330,
+            "height": 32
+          }
+        },
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "text": "Allow",
+          "focusVisible": false
+        },
+        "decideCalls": []
+      },
+      "axe": null,
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "recovered-w1440-s380",
+      "state": "recovered",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "bridge": {
+          "agent": {
+            "status": "running",
+            "conversation": "3",
+            "approvalReady": true
+          },
+          "projectCap": 250000,
+          "sessionCap": 250000,
+          "applied": 1
+        },
+        "status": "Needs approval",
+        "note": "Connect an OpenAI account and refresh the native session before deciding an approval.",
+        "noteIsError": true,
+        "deny": null,
+        "allow": null,
+        "stop": null,
+        "refusedShown": true,
+        "draft": "Then add fog over the water.",
+        "replyShown": true,
+        "geometry": {
+          "pane": {
+            "x": 1060,
+            "y": 575,
+            "width": 380,
+            "height": 297
+          },
+          "transcript": {
+            "x": 1060,
+            "y": 611,
+            "width": 380,
+            "height": 157
+          },
+          "card": {
+            "x": 1072,
+            "y": 485,
+            "width": 356,
+            "height": 271
+          },
+          "footer": {
+            "x": 1073,
+            "y": 672,
+            "width": 354,
+            "height": 83
+          },
+          "note": {
+            "x": 1085,
+            "y": 681,
+            "width": 330,
+            "height": 32
+          }
+        },
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "text": "Allow",
+          "focusVisible": false
+        },
+        "decideCalls": []
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "pending-w1440-s280",
+      "state": "pending",
+      "size": "w1440-s280",
+      "width": 1440,
+      "height": 900,
+      "side": 280,
+      "measured": {
+        "bridge": {
+          "agent": {
+            "status": "running",
+            "conversation": "3",
+            "approvalReady": false
+          },
+          "projectCap": 250000,
+          "sessionCap": 250000,
+          "applied": 2
+        },
+        "status": "Needs approval",
+        "note": null,
+        "noteIsError": null,
+        "deny": null,
+        "allow": null,
+        "stop": null,
+        "refusedShown": false,
+        "draft": "Then add fog over the water.",
+        "replyShown": true,
+        "geometry": {
+          "pane": {
+            "x": 1160,
+            "y": 575,
+            "width": 280,
+            "height": 297
+          },
+          "transcript": {
+            "x": 1160,
+            "y": 611,
+            "width": 280,
+            "height": 157
+          },
+          "card": {
+            "x": 1172,
+            "y": 617,
+            "width": 256,
+            "height": 249
+          },
+          "footer": {
+            "x": 1173,
+            "y": 723,
+            "width": 254,
+            "height": 45
+          },
+          "note": null
+        },
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "text": "",
+          "focusVisible": false
+        },
+        "decideCalls": []
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "pressed-w1440-s280",
+      "state": "pressed",
+      "size": "w1440-s280",
+      "width": 1440,
+      "height": 900,
+      "side": 280,
+      "measured": {
+        "bridge": {
+          "agent": {
+            "status": "running",
+            "conversation": "3",
+            "approvalReady": false
+          },
+          "projectCap": 250000,
+          "sessionCap": 250000,
+          "applied": 2
+        },
+        "status": "Needs approval",
+        "note": "Connect an OpenAI account and refresh the native session before deciding an approval.",
+        "noteIsError": true,
+        "deny": null,
+        "allow": null,
+        "stop": null,
+        "refusedShown": true,
+        "draft": "Then add fog over the water.",
+        "replyShown": true,
+        "geometry": {
+          "pane": {
+            "x": 1160,
+            "y": 575,
+            "width": 280,
+            "height": 297
+          },
+          "transcript": {
+            "x": 1160,
+            "y": 611,
+            "width": 280,
+            "height": 157
+          },
+          "card": {
+            "x": 1172,
+            "y": 453,
+            "width": 256,
+            "height": 303
+          },
+          "footer": {
+            "x": 1173,
+            "y": 656,
+            "width": 254,
+            "height": 99
+          },
+          "note": {
+            "x": 1185,
+            "y": 665,
+            "width": 230,
+            "height": 48
+          }
+        },
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "text": "Allow",
+          "focusVisible": false
+        },
+        "decideCalls": []
+      },
+      "axe": null,
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "reading-w1440-s280",
+      "state": "reading",
+      "size": "w1440-s280",
+      "width": 1440,
+      "height": 900,
+      "side": 280,
+      "measured": {
+        "bridge": {
+          "agent": {
+            "status": "running",
+            "conversation": "3",
+            "approvalReady": false
+          },
+          "projectCap": 250000,
+          "sessionCap": 250000,
+          "applied": 1
+        },
+        "status": "Needs approval",
+        "note": "Connect an OpenAI account and refresh the native session before deciding an approval.",
+        "noteIsError": true,
+        "deny": null,
+        "allow": null,
+        "stop": null,
+        "refusedShown": true,
+        "draft": "Then add fog over the water.",
+        "replyShown": true,
+        "geometry": {
+          "pane": {
+            "x": 1160,
+            "y": 575,
+            "width": 280,
+            "height": 297
+          },
+          "transcript": {
+            "x": 1160,
+            "y": 611,
+            "width": 280,
+            "height": 157
+          },
+          "card": {
+            "x": 1172,
+            "y": 453,
+            "width": 256,
+            "height": 303
+          },
+          "footer": {
+            "x": 1173,
+            "y": 656,
+            "width": 254,
+            "height": 99
+          },
+          "note": {
+            "x": 1185,
+            "y": 665,
+            "width": 230,
+            "height": 48
+          }
+        },
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "text": "Allow",
+          "focusVisible": false
+        },
+        "decideCalls": []
+      },
+      "axe": null,
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "recovered-w1440-s280",
+      "state": "recovered",
+      "size": "w1440-s280",
+      "width": 1440,
+      "height": 900,
+      "side": 280,
+      "measured": {
+        "bridge": {
+          "agent": {
+            "status": "running",
+            "conversation": "3",
+            "approvalReady": true
+          },
+          "projectCap": 250000,
+          "sessionCap": 250000,
+          "applied": 1
+        },
+        "status": "Needs approval",
+        "note": "Connect an OpenAI account and refresh the native session before deciding an approval.",
+        "noteIsError": true,
+        "deny": null,
+        "allow": null,
+        "stop": null,
+        "refusedShown": true,
+        "draft": "Then add fog over the water.",
+        "replyShown": true,
+        "geometry": {
+          "pane": {
+            "x": 1160,
+            "y": 575,
+            "width": 280,
+            "height": 297
+          },
+          "transcript": {
+            "x": 1160,
+            "y": 611,
+            "width": 280,
+            "height": 157
+          },
+          "card": {
+            "x": 1172,
+            "y": 453,
+            "width": 256,
+            "height": 303
+          },
+          "footer": {
+            "x": 1173,
+            "y": 656,
+            "width": 254,
+            "height": 99
+          },
+          "note": {
+            "x": 1185,
+            "y": 665,
+            "width": 230,
+            "height": 48
+          }
+        },
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "text": "Allow",
+          "focusVisible": false
+        },
+        "decideCalls": []
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    }
+  ],
+  "flows": [
+    {
+      "name": "keyboard-undo",
+      "size": "w1440-s380",
+      "errors": [],
+      "requests": [],
+      "checks": {
+        "focusedHeld": {
+          "tag": "BUTTON",
+          "text": "Allow",
+          "focusVisible": true
+        },
+        "afterKeysWhileHistoryHeld": {
+          "bridge": {
+            "agent": {
+              "status": "running",
+              "conversation": "3",
+              "approvalReady": false
+            },
+            "projectCap": 250000,
+            "sessionCap": 250000,
+            "applied": 2
+          },
+          "status": "Needs approval",
+          "note": "Connect an OpenAI account and refresh the native session before deciding an approval.",
+          "noteIsError": true,
+          "deny": null,
+          "allow": null,
+          "stop": null,
+          "refusedShown": true,
+          "draft": "Then add fog over the water.",
+          "replyShown": true,
+          "geometry": {
+            "pane": {
+              "x": 1060,
+              "y": 575,
+              "width": 380,
+              "height": 297
+            },
+            "transcript": {
+              "x": 1060,
+              "y": 611,
+              "width": 380,
+              "height": 157
+            },
+            "card": {
+              "x": 1072,
+              "y": 530,
+              "width": 356,
+              "height": 271
+            },
+            "footer": {
+              "x": 1073,
+              "y": 685,
+              "width": 354,
+              "height": 83
+            },
+            "note": {
+              "x": 1085,
+              "y": 694,
+              "width": 330,
+              "height": 32
+            }
+          },
+          "escaping": [],
+          "horizontalScrollers": [],
+          "active": {
+            "tag": "BUTTON",
+            "text": "Allow",
+            "focusVisible": true
+          },
+          "decideCalls": []
+        },
+        "afterEnterWhileReadHeld": {
+          "bridge": {
+            "agent": {
+              "status": "running",
+              "conversation": "3",
+              "approvalReady": false
+            },
+            "projectCap": 250000,
+            "sessionCap": 250000,
+            "applied": 1
+          },
+          "status": "Needs approval",
+          "note": "Connect an OpenAI account and refresh the native session before deciding an approval.",
+          "noteIsError": true,
+          "deny": null,
+          "allow": null,
+          "stop": null,
+          "refusedShown": true,
+          "draft": "Then add fog over the water.",
+          "replyShown": true,
+          "geometry": {
+            "pane": {
+              "x": 1060,
+              "y": 575,
+              "width": 380,
+              "height": 297
+            },
+            "transcript": {
+              "x": 1060,
+              "y": 611,
+              "width": 380,
+              "height": 157
+            },
+            "card": {
+              "x": 1072,
+              "y": 530,
+              "width": 356,
+              "height": 271
+            },
+            "footer": {
+              "x": 1073,
+              "y": 685,
+              "width": 354,
+              "height": 83
+            },
+            "note": {
+              "x": 1085,
+              "y": 694,
+              "width": 330,
+              "height": 32
+            }
+          },
+          "escaping": [],
+          "horizontalScrollers": [],
+          "active": {
+            "tag": "BUTTON",
+            "text": "Allow",
+            "focusVisible": true
+          },
+          "decideCalls": []
+        },
+        "recovered": {
+          "bridge": {
+            "agent": {
+              "status": "running",
+              "conversation": "3",
+              "approvalReady": true
+            },
+            "projectCap": 250000,
+            "sessionCap": 250000,
+            "applied": 1
+          },
+          "status": "Needs approval",
+          "note": "Connect an OpenAI account and refresh the native session before deciding an approval.",
+          "noteIsError": true,
+          "deny": null,
+          "allow": null,
+          "stop": null,
+          "refusedShown": true,
+          "draft": "Then add fog over the water.",
+          "replyShown": true,
+          "geometry": {
+            "pane": {
+              "x": 1060,
+              "y": 575,
+              "width": 380,
+              "height": 297
+            },
+            "transcript": {
+              "x": 1060,
+              "y": 611,
+              "width": 380,
+              "height": 157
+            },
+            "card": {
+              "x": 1072,
+              "y": 530,
+              "width": 356,
+              "height": 271
+            },
+            "footer": {
+              "x": 1073,
+              "y": 685,
+              "width": 354,
+              "height": 83
+            },
+            "note": {
+              "x": 1085,
+              "y": 694,
+              "width": 330,
+              "height": 32
+            }
+          },
+          "escaping": [],
+          "horizontalScrollers": [],
+          "active": {
+            "tag": "BUTTON",
+            "text": "Allow",
+            "focusVisible": true
+          },
+          "decideCalls": []
+        },
+        "decided": {
+          "bridge": {
+            "agent": {
+              "status": "running",
+              "conversation": "3",
+              "approvalReady": true
+            },
+            "projectCap": 250000,
+            "sessionCap": 250000,
+            "applied": 1
+          },
+          "status": "Working…",
+          "note": null,
+          "noteIsError": null,
+          "deny": "missing",
+          "allow": "missing",
+          "stop": null,
+          "refusedShown": true,
+          "draft": "Then add fog over the water.",
+          "replyShown": true,
+          "geometry": {
+            "pane": {
+              "x": 1060,
+              "y": 575,
+              "width": 380,
+              "height": 297
+            },
+            "transcript": {
+              "x": 1060,
+              "y": 611,
+              "width": 380,
+              "height": 157
+            },
+            "card": null,
+            "footer": null,
+            "note": null
+          },
+          "escaping": [],
+          "horizontalScrollers": [],
+          "active": {
+            "tag": "LI",
+            "text": "AllowedApply 4 changes to the project",
+            "focusVisible": true
+          },
+          "decideCalls": [
+            {
+              "name": "engine_agent_decide",
+              "args": {
+                "turnId": 3,
+                "approvalId": 4,
+                "approved": true
+              }
+            }
+          ]
+        },
+        "decideCalls": [
+          {
+            "name": "engine_agent_decide",
+            "args": {
+              "turnId": 3,
+              "approvalId": 4,
+              "approved": true
+            }
+          }
+        ]
+      },
+      "error": null,
+      "calls": [
+        {
+          "name": "engine_history",
+          "args": {
+            "redo": false
+          }
+        },
+        {
+          "name": "engine_agent_decide",
+          "args": {
+            "turnId": 3,
+            "approvalId": 4,
+            "approved": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "redo-then-stop",
+      "size": "w1440-s280",
+      "errors": [],
+      "requests": [],
+      "checks": {
+        "focusedHeld": {
+          "tag": "BUTTON",
+          "text": "Allow",
+          "focusVisible": true
+        },
+        "afterEnterWhileRedoHeld": {
+          "bridge": {
+            "agent": {
+              "status": "running",
+              "conversation": "3",
+              "approvalReady": false
+            },
+            "projectCap": 250000,
+            "sessionCap": 250000,
+            "applied": 1
+          },
+          "status": "Needs approval",
+          "note": "Connect an OpenAI account and refresh the native session before deciding an approval.",
+          "noteIsError": true,
+          "deny": null,
+          "allow": null,
+          "stop": null,
+          "refusedShown": true,
+          "draft": "",
+          "replyShown": true,
+          "geometry": {
+            "pane": {
+              "x": 1160,
+              "y": 575,
+              "width": 280,
+              "height": 297
+            },
+            "transcript": {
+              "x": 1160,
+              "y": 611,
+              "width": 280,
+              "height": 157
+            },
+            "card": {
+              "x": 1172,
+              "y": 530,
+              "width": 256,
+              "height": 303
+            },
+            "footer": {
+              "x": 1173,
+              "y": 669,
+              "width": 254,
+              "height": 99
+            },
+            "note": {
+              "x": 1185,
+              "y": 678,
+              "width": 230,
+              "height": 48
+            }
+          },
+          "escaping": [],
+          "horizontalScrollers": [],
+          "active": {
+            "tag": "BUTTON",
+            "text": "Allow",
+            "focusVisible": true
+          },
+          "decideCalls": []
+        },
+        "stopFocused": {
+          "tag": "BUTTON",
+          "text": "",
+          "focusVisible": true
+        },
+        "afterStop": {
+          "bridge": {
+            "agent": {
+              "status": "running",
+              "conversation": "3",
+              "approvalReady": false
+            },
+            "projectCap": 250000,
+            "sessionCap": 250000,
+            "applied": 1
+          },
+          "status": "Stopping…",
+          "note": "Connect an OpenAI account and refresh the native session before deciding an approval.",
+          "noteIsError": true,
+          "deny": "true",
+          "allow": "true",
+          "stop": "missing",
+          "refusedShown": true,
+          "draft": "",
+          "replyShown": true,
+          "geometry": {
+            "pane": {
+              "x": 1160,
+              "y": 575,
+              "width": 280,
+              "height": 297
+            },
+            "transcript": {
+              "x": 1160,
+              "y": 611,
+              "width": 280,
+              "height": 157
+            },
+            "card": {
+              "x": 1172,
+              "y": 530,
+              "width": 256,
+              "height": 303
+            },
+            "footer": {
+              "x": 1173,
+              "y": 669,
+              "width": 254,
+              "height": 99
+            },
+            "note": {
+              "x": 1185,
+              "y": 678,
+              "width": 230,
+              "height": 48
+            }
+          },
+          "escaping": [],
+          "horizontalScrollers": [],
+          "active": {
+            "tag": "BUTTON",
+            "text": "",
+            "focusVisible": true
+          },
+          "decideCalls": []
+        },
+        "agent": {
+          "status": "running",
+          "conversation": "3",
+          "approvalReady": false
+        }
+      },
+      "error": null,
+      "calls": [
+        {
+          "name": "engine_history",
+          "args": {
+            "redo": false
+          }
+        },
+        {
+          "name": "engine_history",
+          "args": {
+            "redo": true
+          }
+        },
+        {
+          "name": "engine_agent_cancel",
+          "args": {
+            "turnId": 3
+          }
+        }
+      ]
+    }
+  ]
+}

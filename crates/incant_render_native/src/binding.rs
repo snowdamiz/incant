@@ -79,9 +79,11 @@ pub(crate) fn prepare(
                 if !matches!(source.data(), RuntimeAssetData::Model(_)) {
                     return Err(NativeRenderError::MissingAsset(mesh.mesh));
                 }
+                super::animation::validate(node.id, source, decl.animation.as_deref())?;
                 Ok::<_, NativeRenderError>(MeshInput {
                     source: Arc::clone(source),
                     cast_shadows: mesh.cast_shadows,
+                    animation: node.animation,
                 })
             })
             .transpose()?;
@@ -201,7 +203,8 @@ pub(crate) fn prepare(
     let undo = vec![
         super::NumericUndo {
             world: DMat4::IDENTITY,
-            frame: 0
+            frame: 0,
+            animation: None,
         };
         input.nodes.len()
     ];

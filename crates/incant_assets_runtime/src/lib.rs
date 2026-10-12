@@ -4,7 +4,11 @@
 //! The optional `visual` feature enables model/texture readers; default audio-only
 //! consumers do not compile the geometry codecs or 2D component dependency graph.
 pub mod audio;
+#[cfg(feature = "font")]
+pub mod font;
 pub use audio::{AUDIO_CHUNK_FRAMES, AudioMetadata, CookedAudio, MAX_AUDIO_PCM_BYTES, load_audio};
+#[cfg(feature = "font")]
+pub use font::{CookedFont, FontMetadata, MAX_FONT_BYTES, load_font};
 #[cfg(feature = "visual")]
 mod ktx;
 #[cfg(feature = "visual")]
