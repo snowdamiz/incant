@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-12T22:43:09.535441+00:00",
+  "accepted": true,
+  "commit": "7239b49dddf914c8d4167bdb992982d64cd646b5",
+  "manifest_sha256": "8398c1c7e583577aab7ec33dcb5a459565032dc996a178398ed2efd7f37b7cd0",
+  "artifacts": 422,
+  "payloads": 181,
+  "external_binaries": 4,
+  "source_freeze_inputs": 11871,
+  "post_proof_docs": [
+    "STATUS.md",
+    "docs/spikes/android-bytecode-candidate.md",
+    "docs/spikes/evidence/android-bytecode-candidate/manifest.json"
+  ],
+  "missing_originals": [],
+  "actual_build_commands": 8,
+  "actual_emulator_commands": 133,
+  "controls": 16,
+  "full_game_error_pcm_comparisons": 16,
+  "execution": "Android17/API37 ARM64 headless emulator, local CPU only",
+  "cleanup": "owned emulator exited0 and isolated AVD deleted0",
+  "limits": [
+    "Production and authored Android admission still denied pending separate reviewed change",
+    "CI profile trusted numeric fixture only; no ordinary authored/shipping export",
+    "Actual local ARM Android17/API37 emulator; no x86/other producer target admission",
+    "No physical phone, rendered, touch/audio host or performance gate"
+  ],
+  "review": "Exact compile-time numeric probe accepted. Source compiler absent from target incant_script feature and final C caller symbols; pinned ABI and bytecode hashes match. Production Android and authored export require separate reviewed implementation."
+}

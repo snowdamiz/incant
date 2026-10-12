@@ -19,7 +19,12 @@ fn closed_cross_target_contract_rejects_every_abi_and_unverified_target_change()
             | rquickjs::qjs::JS_WRITE_OBJ_STRIP_SOURCE,
         default_c_flags: true,
     };
-    for target in ["aarch64-apple-ios", "aarch64-apple-ios-sim"] {
+    let targets = [
+        "aarch64-apple-ios",
+        "aarch64-apple-ios-sim",
+        "aarch64-linux-android",
+    ];
+    for target in targets {
         assert!(compatibility::admits("aarch64-apple-darwin", target, abi));
         let actual = BytecodeAbi::current();
         assert_eq!(
@@ -53,11 +58,9 @@ fn closed_cross_target_contract_rejects_every_abi_and_unverified_target_change()
             abi
         ));
     }
-    assert!(!compatibility::admits(
-        "aarch64-apple-darwin",
-        "aarch64-linux-android",
-        abi
-    ));
+    for target in ["x86_64-linux-android", "armv7-linux-androideabi"] {
+        assert!(!compatibility::admits("aarch64-apple-darwin", target, abi));
+    }
     assert!(!compatibility::admits(
         "aarch64-apple-ios-sim",
         "aarch64-apple-ios",

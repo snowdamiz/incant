@@ -32,25 +32,35 @@ export, Android and mobile static Wasm remain denied in this slice. No signing,
 mobile window/audio host, phone performance or phase gate is claimed.
 [Current source and evidence](docs/spikes/authored-ios-main177.md).
 
-## Native worker owner — current main178 CPU integration passed
+## Native worker owner — merged in main179
 
 The trusted developer owner builds the selected kernel, verifies worker identity,
 and enforces request deadlines and complete process-tree cleanup. Actual sessions
 preserve their original kernel while public authoring changes the next mode;
 state matches ordinary native Play after private source removal. Both compiled modes pass all-target tests and Clippy; actual owned-process proofs
-and full tools checks pass on main178. Independent final integration review is accepted; required fast check and
-publication are pending. Editor GPU embedding and Windows execution remain separate.
+and full tools checks pass on main178. Independent final integration review and the required fast check passed; PR179 is merged. Editor GPU embedding and Windows execution remain separate.
 [Contract and evidence](docs/spikes/native-worker-owner.md).
 
-## Retained native CPU worker — current main178 checks passed
+## Retained native CPU worker — merged in main179
 
 A native worker drops authoring state after startup and retains only its disposable
 runtime composition. Both matching physics binaries pass 65 all-target headless tests each,
 Clippy and real source-deleted process checks, including duplicate-step fencing,
 strict protocol refusals and disconnect cleanup. The three mode-aware test fixtures
-use public commands and preserve explicit foreign-mode refusal. Independent final review is accepted; fast check and
-publication are pending; [integrated evidence](docs/spikes/native-worker-main178.md). Automatic editor process selection and GPU viewport
+use public commands and preserve explicit foreign-mode refusal. Independent final review and the required fast check passed; PR179 is merged; [integrated evidence](docs/spikes/native-worker-main178.md). Automatic editor process selection and GPU viewport
 embedding remain open. [Contract and evidence](docs/spikes/native-play-worker.md).
+
+## ARM Android bytecode candidate — experiment accepted
+
+The default-off trusted numeric probe has accepted source, 22 admission tests and
+nine harness cases. An actual local Android 17/API 37 ARM emulator passes all 16
+C ABI controls; complete numeric/game/PCM records match prior macOS/iOS callers.
+Independent final execution review is accepted. That immutable candidate keeps default
+and authored admission denied. The separate authored Android implementation below
+now has independently accepted shipping/emulator evidence; no phone or performance
+gate is claimed by either slice.
+[Candidate contract and retained attempts](docs/spikes/android-bytecode-candidate.md).
+
 
 ## Physics process selection — local execution passed
 
@@ -114,7 +124,8 @@ Actual C and Swift callers each pass the same complete numeric/input/failure
 records on macOS and an iOS 27.0 ARM simulator (32 controls per platform). iOS
 device archives compile and link only. Native script/cooker tests, union Clippy
 and lean dependency checks pass; independent final source/execution review is accepted. Android
-cross-target admission remains denied; the authored iOS route above is a separate
+cross-target admission stayed denied in that immutable slice; the later Android
+route below is separately reviewed. The authored iOS route above is a separate
 shipping-profile proof. No
 physical-phone or performance gate is claimed.
 Current main169 integration passes all 16 checks with new matching archives and
@@ -841,7 +852,7 @@ and complete Game UI/IME gates remain open.
 
 ## Current milestone
 
-Main #178 includes compound native animation and Wasm snapshots, authored two-bone
+Main #179 includes compound native animation and Wasm snapshots, authored two-bone
 IK, native/TypeScript/Wasm root motion, audio transport and HUD, offline audio/UI
 checkpoints, public physics queries, and the Core/Planar gameplay foundations.
 Pearl Cove's authored art/HUD and runtime hooks are merged with their scoped
@@ -851,7 +862,7 @@ Reviewed physics kernel forwarding, cooked/save identity, project selection and
 mode-aware developer/desktop export tools are merged; automatic editor worker
 selection and actual physics saves remain separate. Authored iOS archives are
 merged with actual simulator proof and qualified device-link evidence. The retained
-CPU worker current-main proof and final review pass, awaiting the fast PR check;
+CPU worker and managed owner are merged with current-main proof and final review;
 whole-session restart and authored Android work remain local integration lanes. Phase 1 and the finished game
 remain incomplete.
 
@@ -1830,3 +1841,5 @@ Rust binary; strict consumer checks and the editor build pass. The integrated
 cook/Play suite passes 65 tests and Clippy in each of three compiled variants.
 Mode-aware launch/export and editor process switching remain separate follow-on
 work. [Evidence](docs/spikes/physics-project-setting.md).
+
+- Authored Android CPU archive route: reviewed fresh-source admission and separate physics-aware exporter pass focused Rust/Python/Clippy checks. Both deterministic and fast ordinary shipping archives pass three source/cache/build/map-deleted ARM Android17/API37 processes each, exact per-field/native/PCM parity and fourteen boundary refusals; owned emulators cleanly removed. Independent final execution review is accepted; publisher integration remains pending. No minimum-OS/phone/performance/platform-host claim. See `docs/spikes/authored-android-project.md`.

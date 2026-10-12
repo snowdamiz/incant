@@ -1,0 +1,17 @@
+{
+  "at": "2026-10-12T23:01:37.984377+00:00",
+  "accepted": true,
+  "inventory_sha256": "e420d6f1cf694148f2654fe571e255658d04aa734cf93008730fe33e150ebebb",
+  "files": 5,
+  "review": [
+    "Public project/source/import/bindings and per-project mode edits, complete Undo/Redo/reopen; three native reference runs per mode and independent previous-velocity numerical oracle.",
+    "Fresh shipping receipt, exact ABI/physics/data/NDK identities, final C caller gc-sections/parser exclusion/ELF architecture and separate archive DWARF evidence.",
+    "Removes only private authored source/cache/map; exactly three positives with full logs/72checks/nonzeroPCM and seven precise error/no-clobber controls.",
+    "Reuses accepted Android transport/owned-AVD lifetime, revalidates AVD identity before kill, reaps child and separately deletes unique AVD; all actual command outputs retained."
+  ],
+  "findings": [],
+  "limits": [
+    "Source/helper review only; public preflight/build/emulator runs not yet claimed.",
+    "API24 target compile identity is distinct from actual API37 emulator OS; no phone/performance/window/signing gate."
+  ]
+}
