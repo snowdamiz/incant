@@ -1,0 +1,26 @@
+{
+  "at": "2026-10-12T05:40:59.227994+00:00",
+  "status": "accepted for scoped integration",
+  "reviewed_commit": "c9fb4436b787c7ff34586666e640fbb19f7df0c5",
+  "evidence_sha256": "0b2ec6b30e9aaf535e0e422b9b121af3ec2fb79d6f17c685f62b4d4f5d8240c7",
+  "source_review_sha256": "4bac7efb12d7b8ba14257d87d29b55d91456da5e75295a8fa521af4ce5dba8b8",
+  "source_files_verified": 19,
+  "test_probe_files_verified": 9,
+  "compressed_and_raw_logs_verified": 17,
+  "receipt_hashes_verified": 8,
+  "retained_guest_artifacts_verified": 80,
+  "retained_guest_sources_verified": 3,
+  "prepared_module_manifest_verified": 125,
+  "counts": {
+    "conformance-0.log.gz": {
+      "passed": 369,
+      "groups": 64
+    },
+    "native-tests.log.gz": {
+      "passed": 190,
+      "groups": 29
+    }
+  },
+  "nested_commands_all_exit_zero": true,
+  "scope": "Read source plus independently verify evidence and retained artifacts; no new root execution of full host suites. The 626 prepared-file check is the pre-cleanup probe receipt, not a fresh root read after cleanup. No phone, full SDK, ordinary source-deleted package, visual or phase acceptance."
+}

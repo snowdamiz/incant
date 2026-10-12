@@ -71,6 +71,10 @@ wasm32 checks, 232 Python tests (four existing skips), 22 Node tests, generated
 contracts, formatting and the authoring-free shipping dependency check pass.
 See [durable evidence](evidence/native-wasm-navigation-paths.json) for source
 identities, commands, logs, review receipts and preserved earlier failed attempts.
+Independent root review accepted the frozen source and final evidence for scoped
+integration. It rechecked retained artifacts and logs; the 626 prepared-file
+validation remains the recorded pre-cleanup probe check. Main integration and
+its required fast gates remain pending.
 
 Collider fixtures intentionally compare complete entity snapshots and retained
 native routes instead of claiming unsupported physics checkpoint support. This

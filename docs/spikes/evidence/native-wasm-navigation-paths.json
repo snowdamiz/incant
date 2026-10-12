@@ -270,7 +270,7 @@
       "method": "For each of four recorded runtime roots, traverse every normal dependency edge (dep_kind null), retaining all target-specific normal edges; assert each recorded forbidden package absent. Exact closure names retained in shipping-graph.json."
     }
   },
-  "review": "Root independently accepted frozen production002 and additive old-ABI preservation; final actual-host evidence review pending.",
+  "review": "Root independently accepted frozen source002 and final actual-host evidence for scoped integration. Root reverified retained artifacts and logs; the 626 prepared-file validation is the recorded pre-cleanup probe check, not a fresh root read after cleanup.",
   "logs": {
     "docs/spikes/evidence/native-wasm-navigation-paths/conformance-0.log.gz": {
       "sha256": "7458c3d7b4924571ccd87edd6348687d8d1b67e497810b3c8f835739dbf3c6c0",
@@ -390,6 +390,10 @@
     "docs/spikes/evidence/native-wasm-navigation-paths/shipping-graph.json": {
       "source": "/tmp/incant-wasm-navigation-paths-shipping-graph.json",
       "sha256": "87d89db70603327de7848e9857e0525f641a830acba675999546d92651587603"
+    },
+    "docs/spikes/evidence/native-wasm-navigation-paths/root-final-review.json": {
+      "source": "/tmp/incant-wasm-navigation-paths-root-final-review.json",
+      "sha256": "1fe2b8124921cdd9114a5b1a564b533b6822c736b21e6d0e48955da4db1b1bc4"
     }
   },
   "earlier_attempts": [
@@ -417,5 +421,6 @@
     "Navmesh/grid authoring and canonical solvers are reused; movement, off-mesh execution and grid-to-world mapping remain gameplay responsibilities.",
     "No complete SDK claim.",
     "Main integration and required fast PR gates remain the publisher responsibility."
-  ]
+  ],
+  "reviewed_implementation_commit": "c9fb4436b787c7ff34586666e640fbb19f7df0c5"
 }
