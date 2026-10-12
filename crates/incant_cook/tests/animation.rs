@@ -1,4 +1,7 @@
 #![cfg(feature = "scene")]
+#[path = "support/scene_format.rs"]
+mod format;
+use format::scene_format;
 #[path = "../../incant_assets/tests/skeletal/fixture.rs"]
 mod fixture;
 #[path = "animation/graph.rs"]

@@ -467,7 +467,10 @@ fn observation(world: &NativeWorld) -> RootMotionSnapshot {
 fn native_step_cooks_loads_moves_once_and_atomic_controls_preserve_clock_provenance() {
     let scene = native_scene(RootMotionApplication::Transform, true);
     let bytes = scene.to_bytes();
-    assert_eq!(&bytes[8..12], &18u32.to_le_bytes());
+    assert_eq!(
+        u32::from_le_bytes(bytes[8..12].try_into().unwrap()),
+        18 | (u32::from(PHYSICS_VARIANT.tag()) << 16)
+    );
     let mut world = NativeWorld::from_bytes(&bytes).unwrap();
     let node = &scene.spatial()[0];
     let mut p = Playback {

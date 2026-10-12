@@ -28,6 +28,17 @@ owns the separate Pearl Cove art/HUD branch and native-window appearance; whole-
 session restart, physics save/load and device gates remain open.
 [Contract and retained evidence](docs/spikes/planar-presentation-bindings.md).
 
+## Physics-mode foundation — current main172 verified
+
+The full process graph forwards deterministic, fast and explicit eight-lane
+physics choices without changing defaults. Cooked scenes retain their header
+size and bind the exact compiled kernel before world allocation. Current main172
+passes 353 CPU tests in each mode, Clippy and headless/player/mobile-library/editor
+compilation with actual target feature receipts. Five additive Cargo seams preserve
+current mobile and host capabilities; production Rust source matches the reviewed
+foundation. Independent final integrated review is accepted. Project settings and automatic
+process/export selection remain separate work; physics-save refusal stays closed.
+[Integrated source and checks](docs/spikes/physics-mode-main172.md).
 
 ## Pinned mobile bytecode compatibility — merged main171
 
@@ -1712,3 +1723,16 @@ tests remain ignored. [Receipt](docs/spikes/evidence/runtime-pose-blending-main1
   retained evidence; publisher integration remains pending. No actual-cursor,
   arbitrary guest checkpoint, physical-device or phase-gate claim. See
   [contract and evidence](docs/spikes/native-wasm-audio.md).
+
+## Compiled physics selection — locally verified
+
+Native deterministic, fast and optional eight-lane builds now forward their
+kernel choice through 32 affected packages. Cooked scenes and embedded save
+scenes refuse a foreign exact variant before world creation; legacy deterministic
+bytes are preserved. All three builds passed the complete 249-test runtime suite,
+105 consumer tests, five focused admission/save tests, actual headless/player/editor
+all-target checks and applicable Clippy. Independent production source review is
+complete; current-main integration remains separate. Per-project settings,
+automatic matching Play processes and export selection are the next work, and
+physics-world saves, performance/device measurements and eight-lane adoption
+remain open. [Scope and retained evidence](docs/spikes/physics-mode-admission.md).

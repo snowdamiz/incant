@@ -17,6 +17,8 @@ mod camera;
 mod collider_shapes;
 mod lights;
 mod physics;
+mod physics_mode;
+pub use physics_mode::PhysicsMode;
 mod physics_2d;
 pub mod physics_2d_validation;
 pub mod physics_validation;

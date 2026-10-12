@@ -1,4 +1,7 @@
 #![cfg(feature = "scene")]
+#[path = "support/scene_format.rs"]
+mod format;
+use format::scene_format;
 use incant_cmd::{Actor, Command, CommandBus};
 use incant_doc::{Entity, Project, Scene};
 use incant_import::{ImportRequest, ImportSnapshot};
@@ -78,7 +81,7 @@ fn command_bus_cooked_world_and_packaged_fonts_drive_actual_layout_and_input_aft
     let (mut bus, sid, _, eid) = fixture(temp.path());
     let authored = bus.project().canonical_text().unwrap();
     let bytes = incant_cook::cook_scene(bus.project(), &sid).unwrap();
-    assert_eq!(&bytes[8..12], &13u32.to_le_bytes());
+    assert_eq!(&bytes[8..12], &scene_format(13).to_le_bytes());
     bus.undo().unwrap();
     assert!(bus.project().scenes.is_empty());
     bus.redo().unwrap();

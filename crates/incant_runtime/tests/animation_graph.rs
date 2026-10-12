@@ -1,3 +1,5 @@
+#[path = "support/scene_format.rs"]
+mod scene_format;
 use incant_runtime::*;
 use incant_types::{Animation, AnimationComparison, Transform};
 use std::sync::Arc;
@@ -319,7 +321,10 @@ fn invalid_tables_and_oversized_graphs_refuse() {
 fn v14_v6_source_free_roundtrip_and_exact_active_paused_blend_continuation() {
     let scene = scene(graph(vec![edge(30, 0, 1, 0, 0.5), edge(31, 1, 2, 0, 0.0)]));
     let bytes = scene.to_bytes();
-    assert_eq!(&bytes[8..12], &14u32.to_le_bytes());
+    assert_eq!(
+        &bytes[8..12],
+        &crate::scene_format::scene_format(14).to_le_bytes()
+    );
     assert_eq!(CookedScene::from_bytes(&bytes).unwrap().to_bytes(), bytes);
     let mut world = NativeWorld::from_bytes(&bytes).unwrap();
     parameter(&mut world, 0.25);

@@ -1,0 +1,11 @@
+{
+  "at": "2026-10-12T22:11:27.411840+00:00",
+  "accepted": true,
+  "patch_sha256": "ddf7d6ed30e5e1bd06b95436f614095451ccc01b672fc39063f487b1274a68c9",
+  "sources": {
+    "crates/incant_cook/Cargo.toml": "d2689c32e5f3462f1d6756783fb7916a3a4476ebd49acff92849f4cd2a1614e6",
+    "crates/incant_wasm_dev/Cargo.toml": "1f34f1afd2286157652818bfd6cd8496c628db3a6283fd90d35c9aa24f4e268d",
+    "crates/incant_game_player/Cargo.toml": "6535ce2f9be0c098f785281c8c823543006b0a53934c6acac848d5aab86c7c26"
+  },
+  "review": "Both mode forwards cover new cook audio and wasm_dev dev dependency edges; physics-bearing edges default off; default deterministic and mobile-ffi/static conformance host capabilities preserved. Exact match with root d830 independently tested65cook/play cases and Clippy in all three modes. Execution of broader integrated consumers remains producer-owned pending."
+}

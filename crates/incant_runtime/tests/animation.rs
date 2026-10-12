@@ -1,3 +1,5 @@
+#[path = "support/scene_format.rs"]
+mod scene_format;
 use incant_runtime::*;
 use incant_types::{Animation, Transform};
 use std::sync::Arc;
@@ -74,7 +76,10 @@ fn close(a: f64, b: f64) {
 #[test]
 fn v11_scene_and_independent_native_clocks_round_trip_without_binding_changes() {
     let bytes = scene().to_bytes();
-    assert_eq!(u32::from_le_bytes(bytes[8..12].try_into().unwrap()), 11);
+    assert_eq!(
+        u32::from_le_bytes(bytes[8..12].try_into().unwrap()),
+        crate::scene_format::scene_format(11)
+    );
     assert_eq!(CookedScene::from_bytes(&bytes).unwrap().to_bytes(), bytes);
     let mut world = NativeWorld::from_bytes(&bytes).unwrap();
     let mut rows = Vec::with_capacity(2);

@@ -6,7 +6,10 @@ fn compound_fade_retains_both_motion_clocks_shared_parameters_pause_and_exact_re
     let g = graph(vec![edge(30, 0, 2, 0, 0.5), edge(31, 2, 1, 0, 0.5)]);
     let scene = scene(g);
     let bytes = scene.to_bytes();
-    assert_eq!(&bytes[8..12], &18u32.to_le_bytes());
+    assert_eq!(
+        &bytes[8..12],
+        &crate::scene_format::scene_format(18).to_le_bytes()
+    );
     assert_eq!(CookedScene::from_bytes(&bytes).unwrap().to_bytes(), bytes);
     let mut world = NativeWorld::from_bytes(&bytes).unwrap();
     parameter(&mut world, 0.5);

@@ -1,3 +1,5 @@
+#[path = "support/scene_format.rs"]
+mod scene_format;
 use incant_runtime::*;
 use incant_types::{AngularVelocity2D, BodyMotion, Collider2D, RigidBody, Transform, Velocity};
 fn id(n: u8) -> StableId {
@@ -76,7 +78,10 @@ fn apply(world: &mut NativeWorld, items: Vec<StructuralCommand>) -> Result<(), R
 fn v7_round_trip_real_tile_collision_sleep_and_no_double_integration() {
     let input = scene();
     let bytes = input.to_bytes();
-    assert_eq!(&bytes[8..12], &7u32.to_le_bytes());
+    assert_eq!(
+        &bytes[8..12],
+        &crate::scene_format::scene_format(7).to_le_bytes()
+    );
     let loaded = CookedScene::from_bytes(&bytes).unwrap();
     assert_eq!(loaded.to_bytes(), bytes);
     assert_eq!(loaded.physics_2d(), input.physics_2d());
@@ -318,7 +323,10 @@ fn accepted_solver_failure_preserves_public_ecs_clock_and_terminalizes_world() {
 fn cooked_rejects_malformed_and_unsupported_planar_data_and_preserves_v1() {
     let plain = CookedScene::new(id(99), 64, vec![entity(1, [0.; 3], None)]).unwrap();
     let bytes = plain.to_bytes();
-    assert_eq!(&bytes[8..12], &1u32.to_le_bytes());
+    assert_eq!(
+        &bytes[8..12],
+        &crate::scene_format::scene_format(1).to_le_bytes()
+    );
     assert_eq!(CookedScene::from_bytes(&bytes).unwrap().to_bytes(), bytes);
     let mut bad = declaration(1, BodyMotion::Dynamic);
     bad.angular_velocity = Some(AngularVelocity2D { angular: f64::NAN });
