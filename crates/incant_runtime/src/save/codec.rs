@@ -10,6 +10,7 @@ const EXTENSION: usize = 40;
 pub(super) const STATE_BYTES: usize = 28;
 pub(super) const ANIMATION_BYTES: usize = 36;
 pub(super) const GRAPH_BYTES: usize = 168;
+pub(super) const IK_BYTES: usize = 16 + crate::ik_binary::ROW;
 const TRANSITION_ANIMATION_BYTES: usize = 72;
 pub(super) fn animation_stride(version: u32) -> usize {
     if version >= 5 {
@@ -20,7 +21,8 @@ pub(super) fn animation_stride(version: u32) -> usize {
 }
 pub const MAX_SAVE_BYTES: usize = HEADER
     + EXTENSION
-    + 8
+    + 12
+    + crate::MAX_SCENE_ANIMATION_IK * IK_BYTES
     + crate::MAX_ANIMATION_GRAPH_INSTANCES * GRAPH_BYTES
     + crate::binary::MAX_SCENE_BYTES
     + crate::MAX_SPRITE_ENTITIES * STATE_BYTES
@@ -36,15 +38,19 @@ pub(super) fn encode(
     graphs: &[(StableId, crate::AnimationGraphState)],
     ui_used: bool,
     audio_used: bool,
+    ik: &[crate::IkSnapshot],
 ) -> Result<Vec<u8>, SaveError> {
     if scene.len() > crate::binary::MAX_SCENE_BYTES
         || states.len() > crate::MAX_SPRITE_ENTITIES
         || animations.len() > crate::MAX_MESH_ENTITIES
+        || ik.len() > crate::MAX_SCENE_ANIMATION_IK
         || graphs.len() > crate::MAX_ANIMATION_GRAPH_INSTANCES
     {
         return Err(SaveError::Invalid("save capacity"));
     }
-    let version = if audio_used {
+    let version = if !ik.is_empty() {
+        9u32
+    } else if audio_used {
         8u32
     } else if ui_used {
         7u32
@@ -60,12 +66,16 @@ pub(super) fn encode(
     } else {
         4
     };
-    let extension = EXTENSION + usize::from(version >= 4) * 4 + usize::from(version >= 6) * 4;
+    let extension = EXTENSION
+        + usize::from(version >= 4) * 4
+        + usize::from(version >= 6) * 4
+        + usize::from(version >= 9) * 4;
     let length = extension
         + scene.len()
         + states.len() * STATE_BYTES
         + animations.len() * animation_stride(version)
-        + graphs.len() * GRAPH_BYTES;
+        + graphs.len() * GRAPH_BYTES
+        + ik.len() * IK_BYTES;
     let mut bytes = Vec::with_capacity(HEADER + length);
     bytes.extend(MAGIC);
     bytes.extend(version.to_le_bytes());
@@ -81,6 +91,9 @@ pub(super) fn encode(
     }
     if version >= 6 {
         bytes.extend((graphs.len() as u32).to_le_bytes());
+    }
+    if version >= 9 {
+        bytes.extend((ik.len() as u32).to_le_bytes());
     }
     bytes.extend(scene);
     for (id, value) in states {
@@ -127,6 +140,10 @@ pub(super) fn encode(
             bytes.extend(value.to_le_bytes());
         }
     }
+    for row in ik {
+        bytes.extend(row.entity.0);
+        crate::ik_binary::write_sample(&mut bytes, &row.sample);
+    }
     let digest = checksum(&bytes);
     bytes[32..HEADER].copy_from_slice(&digest);
     Ok(bytes)
@@ -141,9 +158,10 @@ pub(super) struct Decoded<'a> {
     pub states: &'a [u8],
     pub animations: &'a [u8],
     pub graphs: &'a [u8],
+    pub ik: &'a [u8],
 }
 pub(super) fn is_bound(bytes: &[u8]) -> bool {
-    matches!(u32::from_le_bytes(bytes[8..12].try_into().unwrap()), 2..=8)
+    matches!(u32::from_le_bytes(bytes[8..12].try_into().unwrap()), 2..=9)
 }
 pub(super) fn decode(bytes: &[u8]) -> Result<Decoded<'_>, SaveError> {
     if !(HEADER..=MAX_SAVE_BYTES).contains(&bytes.len()) {
@@ -153,12 +171,13 @@ pub(super) fn decode(bytes: &[u8]) -> Result<Decoded<'_>, SaveError> {
         return Err(SaveError::Invalid("magic"));
     }
     let version = u32::from_le_bytes(bytes[8..12].try_into().unwrap());
-    if !(1..=8).contains(&version) {
+    if !(1..=9).contains(&version) {
         return Err(SaveError::Version(version));
     }
     let flags = u32::from_le_bytes(bytes[12..16].try_into().unwrap());
     if (version < 8 && flags != u32::from(version == 7))
         || (version == 8 && !matches!(flags, 2 | 3))
+        || (version >= 9 && flags > 3)
     {
         return Err(SaveError::Invalid("unsupported flags"));
     }
@@ -180,9 +199,13 @@ pub(super) fn decode(bytes: &[u8]) -> Result<Decoded<'_>, SaveError> {
             states: &[],
             animations: &[],
             graphs: &[],
+            ik: &[],
         });
     }
-    let extension = EXTENSION + usize::from(version >= 4) * 4 + usize::from(version >= 6) * 4;
+    let extension = EXTENSION
+        + usize::from(version >= 4) * 4
+        + usize::from(version >= 6) * 4
+        + usize::from(version >= 9) * 4;
     if bytes.len() < HEADER + extension {
         return Err(SaveError::Invalid("bound save header"));
     }
@@ -199,7 +222,14 @@ pub(super) fn decode(bytes: &[u8]) -> Result<Decoded<'_>, SaveError> {
     } else {
         0
     };
-    if graph_count > crate::MAX_ANIMATION_GRAPH_INSTANCES
+    let ik_count = if version >= 9 {
+        u32::from_le_bytes(bytes[112..116].try_into().unwrap()) as usize
+    } else {
+        0
+    };
+    if ik_count > crate::MAX_SCENE_ANIMATION_IK
+        || (version == 9 && ik_count == 0)
+        || graph_count > crate::MAX_ANIMATION_GRAPH_INSTANCES
         || (version == 6 && graph_count == 0)
         || animation_count > crate::MAX_MESH_ENTITIES
         || ((4..=6).contains(&version) && animation_count == 0)
@@ -210,13 +240,15 @@ pub(super) fn decode(bytes: &[u8]) -> Result<Decoded<'_>, SaveError> {
             + count * STATE_BYTES
             + animation_count * animation_stride(version)
             + graph_count * GRAPH_BYTES
+            + ik_count * IK_BYTES
             != bytes.len() - HEADER
     {
         return Err(SaveError::Invalid("bound section lengths"));
     }
     let (scene, rest) = bytes[HEADER + extension..].split_at(scene_len);
     let (states, rest) = rest.split_at(count * STATE_BYTES);
-    let (animations, graphs) = rest.split_at(animation_count * animation_stride(version));
+    let (animations, rest) = rest.split_at(animation_count * animation_stride(version));
+    let (graphs, ik) = rest.split_at(graph_count * GRAPH_BYTES);
     let mut previous = None;
     for row in states.as_chunks::<STATE_BYTES>().0 {
         let (id, _) = state(row)?;
@@ -256,6 +288,7 @@ pub(super) fn decode(bytes: &[u8]) -> Result<Decoded<'_>, SaveError> {
         states,
         animations,
         graphs,
+        ik,
     })
 }
 pub(super) fn state(row: &[u8; STATE_BYTES]) -> Result<(StableId, FlipbookCheckpoint), SaveError> {

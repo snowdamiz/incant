@@ -124,6 +124,8 @@ pub struct MeshInput {
     /// Both samples and the weight are validated even at an endpoint.
     pub animation_blend: Option<incant_types::AnimationBlendSample>,
     pub animation_pose: Option<incant_types::AnimationPoseSamples>,
+    /// Ordered model-space IK after the complete animation pose. Immutable across consumers.
+    pub animation_ik: Option<Arc<[incant_types::AnimationIkSample]>>,
 }
 pub struct SpriteInput {
     pub source: Arc<RuntimeAsset>,

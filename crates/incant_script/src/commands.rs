@@ -30,6 +30,7 @@ impl TickCommands {
             "setVelocity",
             "controlFlipbook",
             "controlAnimation",
+            "setAnimationIk",
             "setAnimationParameter",
             "selectAnimationState",
             "setAudioPlaying",
@@ -132,6 +133,9 @@ fn parse<'js>(
     }
     if matches!(name, "setAnimationParameter" | "selectAnimationState") {
         return crate::animation_graphs::parse(ctx, name, args);
+    }
+    if name == "setAnimationIk" {
+        return crate::animation_ik::parse(ctx, args);
     }
     if name == "controlAnimation" {
         return crate::animation_commands::parse(ctx, args);

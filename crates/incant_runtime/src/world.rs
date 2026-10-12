@@ -79,6 +79,7 @@ pub struct NativeWorld {
     schedule: Schedule,
     pub(crate) flipbook_query: crate::flipbook::PlaybackQuery,
     pub(crate) animation_query: crate::animation::PlaybackQuery,
+    pub(crate) ik_catalog: std::sync::Arc<[std::sync::Arc<crate::NativeIk>]>,
     pub(crate) physics: incant_physics_runtime::PhysicsRuntime<StableId>,
     pub(crate) physics_2d: incant_physics_2d_runtime::PhysicsWorld2D,
     pub(crate) physics_2d_used: bool,
@@ -116,6 +117,7 @@ impl NativeWorld {
         let physics = scene.physics.clone();
         let physics_2d = scene.physics_2d.clone();
         let audio = scene.audio.clone();
+        let ik_catalog = scene.spatial.iter().filter_map(|n| n.ik.clone()).collect();
         let spatial = scene.spatial;
         let visual_assets = scene.visual_assets;
         let mut solver = incant_physics_runtime::PhysicsRuntime::default();
@@ -199,6 +201,7 @@ impl NativeWorld {
             schedule,
             flipbook_query,
             animation_query,
+            ik_catalog,
             entities,
             parents,
             scene_id: scene.id,
@@ -283,6 +286,13 @@ impl NativeWorld {
                 .as_ref()
                 .map(|graph| graph.initial_state(definition.initial.playing)),
         });
+        let previous_ik = self
+            .world
+            .get::<crate::CookedSpatial>(self.entities[&id])
+            .and_then(|n| n.ik.as_ref());
+        let next_ik = node.as_ref().and_then(|n| n.ik.as_ref());
+        let ik_changed = previous_ik != next_ik;
+        let next_ik_state = next_ik.map(|n| crate::ik::IkState(n.initial.clone()));
         let previous_flipbook = self
             .world
             .get::<crate::CookedSpatial>(self.entities[&id])
@@ -306,6 +316,13 @@ impl NativeWorld {
             self.tilemap_collision_ids.remove(&id);
         }
         let mut entity = self.world.entity_mut(self.entities[&id]);
+        if ik_changed {
+            if let Some(state) = next_ik_state {
+                entity.insert(state);
+            } else {
+                entity.remove::<crate::ik::IkState>();
+            }
+        }
         if animation_changed {
             if let Some(playback) = next_animation_playback {
                 entity.insert(playback);
