@@ -245,22 +245,23 @@ def dome(x, y, open_):
     return (-0.62 * nx - 0.62 * ny + 0.48 * nz) / length
 
 
-def cap(tile, top_end, variant, moss, open_):
-    """The top of a rock: moss on cliffs, bare stone on boulders."""
+def cap(tile, top_end, variant, moss, open_, quiet=False):
+    """The top of a rock: moss on cliffs, bare stone on boulders. Quiet moss has
+    no light patches or tufts; it is the calm ground under the HUD line."""
     for y in range(top_end):
         for x in range(T):
             n = noise(x, y, 51 + variant)
             if moss:
                 patch = patches(x, y, variant, 53)
-                color = P.MOSS_DARK if patch > 0.6 else P.MOSS_LIGHT if patch < 0.2 else P.MOSS
-                if n > 0.965:
+                color = P.MOSS_DARK if patch > 0.6 else P.MOSS_LIGHT if patch < 0.2 and not quiet else P.MOSS
+                if n > 0.965 and not quiet:
                     color = P.MOSS_LIGHT
             else:  # one dome per boulder, lit from the upper left
                 light = dome(x, y, open_) + (n - 0.5) * 0.08
                 color = (P.STONE_LIGHT if light > 0.62 else P.STONE if light > 0.4
                          else P.ROCK_LIGHT if light > 0.2 else P.ROCK)
             tile.set(x, y, color)
-    if moss:  # grass tufts, each with a one-pixel shadow
+    if moss and not quiet:  # grass tufts, each with a one-pixel shadow
         for y in range(top_end - 1):
             for x in range(1, T - 1):
                 n = noise(x, y, 55 + variant)
@@ -294,9 +295,11 @@ def cap(tile, top_end, variant, moss, open_):
 
 def rock(solid, variant, kind='moss'):
     """Rock seen in three-quarter view. `solid` lists rock neighbours. A south
-    edge shows a cliff face inside this cell, so the collider and art agree."""
+    edge shows a cliff face inside this cell, so the collider and art agree.
+    Kinds: 'moss' cliff, 'quiet' moss cliff without tufts, 'stone' boulder."""
     tile = Canvas(T, T)
-    moss = kind == 'moss'
+    quiet = kind == 'quiet'
+    moss = kind in ('moss', 'quiet')
     open_ = {d: d not in solid for d in DIRECTIONS}
     face = 0
     if open_['s']:
@@ -304,7 +307,7 @@ def rock(solid, variant, kind='moss'):
     top_end = T - face
     if face:
         cliff_face(tile, top_end, variant, open_, moss)
-    cap(tile, top_end, variant, moss, open_)
+    cap(tile, top_end, variant, moss, open_, quiet)
     # Rounded convex corners reveal the ground layer beneath.
     sides = {d for d in ('n', 'e', 's', 'w') if open_[d]}
     radius = 3 if moss else 5

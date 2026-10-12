@@ -125,7 +125,8 @@ def assignments():
                     lambda l=land, v=v, s=style: terrain.water(l, v, s))
             if c in ROCK:
                 solid = terrain.reduce(around(x, y, ROCK))
-                cap = 'moss' if c == '#' else 'stone'
+                # The top two cliff rows are the HUD's ground: quiet moss.
+                cap = 'stone' if c == 'b' else 'quiet' if y >= HEIGHT - 2 else 'moss'
                 v = variant(x, y, 3)
                 key = '-'.join(sorted(solid))
                 use('rock', cell, f'rock/{cap}/{key}/{v}',

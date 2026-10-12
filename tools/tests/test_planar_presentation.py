@@ -5,6 +5,7 @@ transactions and native-play scenarios run through samples/planar/scene.py.
 """
 import json
 import math
+import re
 from pathlib import Path
 import runpy
 import struct
@@ -16,6 +17,7 @@ import zlib
 PLANAR = Path(__file__).resolve().parents[2] / 'samples/planar'
 sys.path.insert(0, str(PLANAR))
 from art import build, cove, palette  # noqa: E402
+import hud  # noqa: E402
 
 CROCKFORD = set('0123456789ABCDEFGHJKMNPQRSTVWXYZ')
 
@@ -55,6 +57,7 @@ class PearlCoveTests(unittest.TestCase):
         ids = list(self.manifest['frames'].values()) + [cove.ATLAS, cove.SCRIPT, cove.PLAYER, cove.TERRAIN,
                                                          cove.CAMERA, cove.CONTROLLER, cove.BOAT]
         ids += cove.PEARLS + cove.URCHINS + cove.GLINTS + list(cove.LAYERS.values())
+        ids += [hud.ROOT, hud.STATUS, hud.PROMPT, hud.TABLE]
         self.assertTrue(all(canonical(i) for i in ids))
         self.assertEqual(len(ids), len(set(ids)))
         self.assertEqual(set(self.descriptor['frames']), set(self.manifest['frames'].values()))
@@ -128,6 +131,35 @@ class PearlCoveTests(unittest.TestCase):
             self.assertEqual(entity['components']['Transform']['scale'], [1, 1, 1])
         self.assertFalse(any(e['parent'] in props['pickups'] for e in entities.values()))
         self.assertNotIn('Transform', entities[cove.CONTROLLER]['components'])
+
+    def test_hud_binds_authored_widgets_and_complete_strings(self):
+        scene = runpy.run_path(str(PLANAR / 'scene.py'))
+        commands = hud.commands('S', 'FONT', scene['controller']())
+        table = next(c['table'] for c in commands if c['op'] == 'upsert_string_table')
+        self.assertEqual(table['id'], hud.TABLE)
+        self.assertEqual(set(table['messages']), {'hud.collecting', 'hud.ready', 'hud.won', 'hud.lost'})
+        for key, translations in table['messages'].items():
+            self.assertEqual(set(translations), set(hud.LOCALES), key)
+            for text in translations.values():
+                names = set(re.findall(r'{(\w+)\s*[,}]', text))
+                self.assertLessEqual(names, {'collected', 'total'}, (key, text))
+                if 'plural' in text:
+                    self.assertRegex(text, r'^{total, plural, one {[^{}]*#[^{}]*} other {[^{}]*#[^{}]*}}$')
+        nodes = {c['entity']['id']: c['entity'] for c in commands if c['op'] == 'create_entity'}
+        self.assertEqual(nodes[hud.ROOT]['components']['UiNode']['kind'], {'role': 'root'})
+        self.assertIsNone(nodes[hud.ROOT]['parent'])
+        for widget in (hud.STATUS, hud.PROMPT):
+            kind = nodes[widget]['components']['UiNode']['kind']
+            self.assertEqual((nodes[widget]['parent'], kind['role'], kind['text']['content']),
+                             (hud.ROOT, 'label', ''))
+            self.assertEqual(kind['text']['fonts'], ['FONT'])
+        binding = next(c for c in commands if c['op'] == 'set_component')
+        props = binding['value']['props']
+        self.assertEqual(props['flipbooks'], {'player': cove.PLAYER, 'boat': cove.BOAT})
+        self.assertEqual(props['hud'], {'table': hud.TABLE, 'status': hud.STATUS, 'prompt': hud.PROMPT})
+        self.assertNotIn('results', props)  # no static terminal text that could miss the locale
+        self.assertEqual({k: v for k, v in props.items() if k not in ('flipbooks', 'hud')},
+                         scene['controller']()['props'])
 
 
 if __name__ == '__main__':

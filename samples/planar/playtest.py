@@ -3,7 +3,8 @@
 
 Routes are axis-aligned segments of whole metres from the authored start, so
 every turn happens at a cell centre with at least one metre of clearance from
-each urchin's trigger radius. CPU native Play only; no GPU or device claim.
+each urchin's trigger radius. Runs carry a logical UI viewport because the scene
+has an authored HUD. CPU native Play only; no GPU or device claim.
 """
 import json
 import math
@@ -33,6 +34,7 @@ SCENARIOS = [('keyboard-win', 'win', 'wasd'), ('arrows-win', 'win', 'arrows'),
              ('urchin-loss', 'urchin-loss', 'wasd'),
              ('locked-boat', 'locked-boat', 'wasd'), ('shore-and-cliff', 'shore-and-cliff', 'wasd')]
 SETTLE = 40  # ticks after the last segment, so stopping and sensors resolve
+UI_VIEWPORT = '640x360'  # the authored HUD needs a logical UI viewport
 
 
 def segments(route):
@@ -117,8 +119,8 @@ def run_all(out, runner, project):
         replay_path.write_text(json.dumps(timeline, indent=2) + '\n')
         plan_path.write_text(json.dumps(observe(name, timeline['ticks']), indent=2) + '\n')
         report = runner.run('native-play', project, '--camera', cove.CAMERA,
-                            '--ticks', timeline['ticks'], '--input-replay', replay_path,
-                            '--observe', plan_path)
+                            '--ui-viewport', UI_VIEWPORT, '--ticks', timeline['ticks'],
+                            '--input-replay', replay_path, '--observe', plan_path)
         (out / f'{name}.json').write_text(json.dumps(report, indent=2) + '\n')
         reports[name] = report
         results[name] = verify(name, report)
