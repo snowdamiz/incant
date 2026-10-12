@@ -183,13 +183,13 @@ fn v4_load_refuses_legacy_and_wrong_bindings_without_replacing_live_session() {
         assert!(matches!(
             live.restore_checkpoint_bytes(&bad),
             Err(CheckpointError::Invalid(
-                "session requires world save v3-v9"
+                "session requires world save v3-v10"
             ))
         ));
         assert!(matches!(
             NativeSession::from_checkpoint_bytes(&bad, &initial, code.clone(), Default::default()),
             Err(CheckpointError::Invalid(
-                "session requires world save v3-v9"
+                "session requires world save v3-v10"
             ))
         ));
         assert_eq!(live.checkpoint_bytes().unwrap(), saved);
@@ -204,7 +204,7 @@ fn v4_load_refuses_legacy_and_wrong_bindings_without_replacing_live_session() {
         assert!(matches!(
             live.restore_checkpoint_bytes(&bad),
             Err(CheckpointError::Invalid(
-                "session requires world save v3-v9"
+                "session requires world save v3-v10"
             ))
         ));
         assert_eq!(live.checkpoint_bytes().unwrap(), saved);
@@ -215,7 +215,7 @@ fn v4_load_refuses_legacy_and_wrong_bindings_without_replacing_live_session() {
         assert!(matches!(
             live.restore_checkpoint_bytes(&bad),
             Err(CheckpointError::Invalid(
-                "session requires world save v3-v9"
+                "session requires world save v3-v10"
             ))
         ));
         assert_eq!(live.checkpoint_bytes().unwrap(), saved);
