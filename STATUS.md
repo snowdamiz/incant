@@ -22,8 +22,10 @@ Native two-input crossfade clocks and controls now retain independent outgoing
 playback, pause both inputs, finish at explicit endpoints and persist active
 transitions in world-save v5/session checkpoints. Older v4 animation saves keep
 their encoding. The local core passed 319 runtime/script tests and scoped Clippy;
-independent review accepted the exact sources. Canonical render binding and
-TypeScript/Wasm crossfade APIs remain active follow-ups; this is not full blend
+independent review accepted the exact sources. Canonical render binding has also
+passed CPU checks and independent review; TypeScript/Wasm crossfade APIs are
+finishing their separately reviewed checks. Native GPU acceptance remains open;
+this is not full blend
 trees, state machines, IK or root motion. See
 [the crossfade evidence](docs/spikes/native-animation-crossfades.md).
 
@@ -61,6 +63,18 @@ Progress reports are scheduled approximately every 30 minutes while the goal is
 active. Report merged work separately from local checks and unmet exit gates.
 The project is still early relative to the complete Engine 1.0 and Driftwake
 scope; no defensible percentage or completion date follows from the PR count.
+
+## Native text editing — locally checked
+
+The runtime text buffer now supports bounded committed text, directional
+grapheme selection/deletion and transient IME composition. Focus loss cancels
+preedit; rejected input preserves text and selection. A real packaged-font test
+shapes the composed Latin/CJK string and preserves its retained layout through
+commit. All 37 text tests, Clippy, wasm32 and lean dependency checks pass, with
+independent review of the exact source. Widget layout/focus ownership, OS event
+delivery and IME activation, visual caret/hit testing and mobile keyboard remain
+open. This is not a completed text widget or live platform gate.
+[Evidence](docs/spikes/native-text-editing.md).
 
 ## Native text scene and font packaging — locally checked foundation
 

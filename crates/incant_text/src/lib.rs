@@ -2,6 +2,7 @@
 #![forbid(unsafe_code)]
 
 mod atlas;
+pub mod editing;
 mod fonts;
 mod layout;
 mod raster;
