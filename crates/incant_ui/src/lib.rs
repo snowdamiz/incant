@@ -12,6 +12,7 @@ mod reconcile;
 mod routing;
 pub use routing::{RoutedUi, UiRouter};
 mod style;
+mod visual;
 pub use focus::{
     Direction, FocusToken, MAX_UI_EVENTS, MAX_UI_PACKET_BYTES, PointerToken, UiAction, UiEvent,
     UiPending, UiRuntime,
@@ -20,6 +21,7 @@ pub use layout::{
     LayoutCandidate, LayoutEngine, LayoutFrame, MAX_MEASURE_CALLS, MeasureSpace, Rect, TextMeasure,
     Widget, WidgetLayout,
 };
+pub use visual::{UiVisual, WidgetVisual};
 
 pub use incant_text::AtlasConfig;
 pub use incant_types::{
