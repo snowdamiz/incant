@@ -1,0 +1,9 @@
+# label: before-ui-draw-tests
+# cwd: /Users/andreyyurlov/.codex/worktrees/cooked-native-scripts/incant/.worktrees/0059-linux-ui-reference
+# CARGO_TARGET_DIR=/Users/andreyyurlov/.codex/incant-native-target rustup run 1.99.0 cargo test -p incant_render --profile ci --locked -j2 --lib ui::draw_tests -- --include-ignored --test-threads=1 --nocapture
+# start: 2026-10-12T17:26:21Z
+error: could not execute process `rustc -vV` (never executed)
+
+Caused by:
+  No such file or directory (os error 2)
+# exit: 101 at 2026-10-12T17:26:21Z

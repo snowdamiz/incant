@@ -1,0 +1,159 @@
+[
+ {
+  "mutation": "none (before)",
+  "exit": 0,
+  "failed": [],
+  "log_label": "mutation-0-unmutated-before",
+  "log_sha256": "c14f840dada3d939ef4d4eafe31ca74a46ac3f2487dc751d7b76560e5ff228bd"
+ },
+ {
+  "mutation": "UNORM targets blend decoded (linear-light) colours",
+  "file": "crates/incant_render/src/ui/ui.wgsl",
+  "anchor": "if frame.encode.x == 0.0 {",
+  "replacement": "if frame.encode.x >= 0.0 {",
+  "exit": 101,
+  "failed": [
+   "ui::draw_tests::logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales"
+  ],
+  "caught": true,
+  "lines": [
+   "scale 1 Rgba8Unorm: outside 12045 by 73, widest 2 (0 channels > 2); vs exact worst 73, >1: 11975, changed 4246",
+   "assertion `left == right` failed: 1: Admission { outside: 12045, excess: 73.0, widest: 2.0, wide: 0 }",
+   "scale 1 Rgba8Unorm: emulated llvmpipe outside 0 by 0, widest 2 (0 channels > 2); vs exact worst 2, >1: 5, changed 4248"
+  ],
+  "restored_sha256": "f67e4982b038833e87ed84861d5be3018f5f0d6587ff8da6faf8bfd840c33c39",
+  "log_label": "mutation-1-unorm-linear",
+  "log_sha256": "f646fa84f3c1ae5b51a8cf52f817770dc23fe8938eafa360232e2616ed1552bd"
+ },
+ {
+  "mutation": "UNORM colour 2 % dark",
+  "file": "crates/incant_render/src/ui/ui.wgsl",
+  "anchor": "var color = input.color.rgb;",
+  "replacement": "var color = input.color.rgb * select(1.0, 0.98, frame.encode.x == 1.0);",
+  "exit": 101,
+  "failed": [
+   "ui::draw_tests::logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales"
+  ],
+  "caught": true,
+  "lines": [
+   "scale 1 Rgba8Unorm: outside 10367 by 5, widest 2 (0 channels > 2); vs exact worst 5, >1: 2969, changed 4246",
+   "assertion `left == right` failed: 1: Admission { outside: 10367, excess: 5.0, widest: 2.0, wide: 0 }",
+   "scale 1 Rgba8Unorm: emulated llvmpipe outside 0 by 0, widest 2 (0 channels > 2); vs exact worst 2, >1: 5, changed 4248"
+  ],
+  "restored_sha256": "f67e4982b038833e87ed84861d5be3018f5f0d6587ff8da6faf8bfd840c33c39",
+  "log_label": "mutation-2-unorm-colour-98",
+  "log_sha256": "01b9b6845094be4c1902a9b83e6cd4bb86802009d43c4be4714f0d5d73f977fb"
+ },
+ {
+  "mutation": "UNORM colour 1 % dark",
+  "file": "crates/incant_render/src/ui/ui.wgsl",
+  "anchor": "var color = input.color.rgb;",
+  "replacement": "var color = input.color.rgb * select(1.0, 0.99, frame.encode.x == 1.0);",
+  "exit": 101,
+  "failed": [
+   "ui::draw_tests::logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales"
+  ],
+  "caught": true,
+  "lines": [
+   "scale 1 Rgba8Unorm: outside 5390 by 3, widest 2 (0 channels > 2); vs exact worst 3, >1: 1560, changed 4246",
+   "assertion `left == right` failed: 1: Admission { outside: 5390, excess: 3.0, widest: 2.0, wide: 0 }",
+   "scale 1 Rgba8Unorm: emulated llvmpipe outside 0 by 0, widest 2 (0 channels > 2); vs exact worst 2, >1: 5, changed 4248"
+  ],
+  "restored_sha256": "f67e4982b038833e87ed84861d5be3018f5f0d6587ff8da6faf8bfd840c33c39",
+  "log_label": "mutation-3-unorm-colour-99",
+  "log_sha256": "90e4adfac41167c62ff438346de106e6584b5459e5322d7d760468be0d184c5c"
+ },
+ {
+  "mutation": "UNORM opacity 97 %",
+  "file": "crates/incant_render/src/ui/ui.wgsl",
+  "anchor": "let alpha = input.color.a * coverage;",
+  "replacement": "let alpha = input.color.a * coverage * select(1.0, 0.97, frame.encode.x == 1.0);",
+  "exit": 101,
+  "failed": [
+   "ui::draw_tests::logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales"
+  ],
+  "caught": true,
+  "lines": [
+   "scale 1 Rgba8Unorm: outside 10604 by 7, widest 2 (0 channels > 2); vs exact worst 7, >1: 8027, changed 4246",
+   "assertion `left == right` failed: 1: Admission { outside: 10604, excess: 7.0, widest: 2.0, wide: 0 }",
+   "scale 1 Rgba8Unorm: emulated llvmpipe outside 0 by 0, widest 2 (0 channels > 2); vs exact worst 2, >1: 5, changed 4248"
+  ],
+  "restored_sha256": "f67e4982b038833e87ed84861d5be3018f5f0d6587ff8da6faf8bfd840c33c39",
+  "log_label": "mutation-4-unorm-opacity-97",
+  "log_sha256": "dcd762d611e4cbc1837b3e025159b6258b05b1953d86605d4b10b7f4e94c8ff6"
+ },
+ {
+  "mutation": "glyph pen one physical pixel right",
+  "file": "crates/incant_render/src/ui/ui.wgsl",
+  "anchor": "let pen = snap(physical(quad.pen));",
+  "replacement": "let pen = snap(physical(quad.pen)) + vec2f(1.0, 0.0);",
+  "exit": 101,
+  "failed": [
+   "ui::draw_tests::editor_viewport_region_offsets_scales_and_bounds_the_ui",
+   "ui::draw_tests::logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales",
+   "ui::draw_tests::nested_clips_cut_actual_glyph_bounds_including_negative_x_rtl_overflow",
+   "ui::draw_tests::ui_composites_over_the_finished_world_frame_and_leaves_uncovered_pixels"
+  ],
+  "caught": true,
+  "lines": [
+   "assertion `left == right` failed: Admission { outside: 2999, excess: 227.0, widest: 5.0, wide: 51 }",
+   "assertion `left == right` failed: 1: Admission { outside: 2965, excess: 229.0, widest: 4.0, wide: 44 }",
+   "assertion `left == right` failed: Admission { outside: 1290, excess: 208.0, widest: 4.0, wide: 16 }",
+   "scale 1 Rgba8Unorm: emulated llvmpipe outside 0 by 0, widest 2 (0 channels > 2); vs exact worst 2, >1: 5, changed 4248",
+   "assertion `left == right` failed: Admission { outside: 2988, excess: 223.0, widest: 3.0, wide: 7 }"
+  ],
+  "restored_sha256": "f67e4982b038833e87ed84861d5be3018f5f0d6587ff8da6faf8bfd840c33c39",
+  "log_label": "mutation-5-pen-right",
+  "log_sha256": "8df1e827ddd2b023067eefabb8c969e22e0a7ebaa6eb852ccbfeac0911bec148"
+ },
+ {
+  "mutation": "no clip intersection",
+  "file": "crates/incant_render/src/ui/ui.wgsl",
+  "anchor": "let low = max(p0, c0);\n    let high = max(min(p1, c1), low);",
+  "replacement": "let low = p0;\n    let high = max(p1, low);",
+  "exit": 101,
+  "failed": [
+   "ui::draw_tests::editor_viewport_region_offsets_scales_and_bounds_the_ui",
+   "ui::draw_tests::logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales",
+   "ui::draw_tests::nested_clips_cut_actual_glyph_bounds_including_negative_x_rtl_overflow",
+   "ui::draw_tests::ui_composites_over_the_finished_world_frame_and_leaves_uncovered_pixels"
+  ],
+  "caught": true,
+  "lines": [
+   "assertion `left == right` failed: Admission { outside: 419, excess: 190.0, widest: 5.0, wide: 51 }",
+   "assertion `left == right` failed: 1: Admission { outside: 419, excess: 190.0, widest: 4.0, wide: 44 }",
+   "assertion `left == right` failed: Admission { outside: 4057, excess: 235.0, widest: 4.0, wide: 16 }",
+   "scale 1 Rgba8Unorm: emulated llvmpipe outside 0 by 0, widest 2 (0 channels > 2); vs exact worst 2, >1: 5, changed 4248",
+   "assertion `left == right` failed: Admission { outside: 419, excess: 190.0, widest: 3.0, wide: 7 }"
+  ],
+  "restored_sha256": "f67e4982b038833e87ed84861d5be3018f5f0d6587ff8da6faf8bfd840c33c39",
+  "log_label": "mutation-6-no-clip",
+  "log_sha256": "8833586de69709d8811ddd535c6cb89c31a0f105fa55b3b6118c9f438b19e65f"
+ },
+ {
+  "mutation": "reference without the UNORM fixed-point admission (checkpoint 12)",
+  "file": "crates/incant_render/src/ui_draw_tests.rs",
+  "anchor": "pixel[c] = if model == Model::Portable && !srgb {",
+  "replacement": "pixel[c] = if false && !srgb {",
+  "exit": 101,
+  "failed": [
+   "ui::draw_tests::reference_admits_backend_precision_but_not_wrong_geometry_clip_or_opacity"
+  ],
+  "caught": true,
+  "lines": [
+   "scale 1 Rgba8Unorm: outside 0 by 0, widest 2 (0 channels > 2); vs exact worst 0, >1: 0, changed 4246",
+   "scale 1 Rgba8Unorm: emulated llvmpipe outside 245 by 2, widest 2 (0 channels > 2); vs exact worst 2, >1: 5, changed 4248",
+   "assertion `left == right` failed: scale 1 Rgba8Unorm llvmpipe: Admission { outside: 245, excess: 2.0, widest: 2.0, wide: 0 }"
+  ],
+  "restored_sha256": "ca4f9afb2449e66792ae089fc5cff5870d156b7fdabca8db809ca6b568b508b2",
+  "log_label": "mutation-7-reference-float-only",
+  "log_sha256": "53877f97f6fc78609994cc182e3619ed9b8000e7f5210f17b33114c023d70de2"
+ },
+ {
+  "mutation": "none (after)",
+  "exit": 0,
+  "failed": [],
+  "log_label": "mutation-9-unmutated-after",
+  "log_sha256": "ba7f63e360809c754661f786ad5002724647cc9d196d092b6d54636fb3233671"
+ }
+]

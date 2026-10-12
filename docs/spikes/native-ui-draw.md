@@ -51,8 +51,10 @@ Source of truth: `crates/incant_render/src/ui/mod.rs` and `theme.rs`.
   sRGB targets decode and blend premultiplied in linear light; UNORM targets
   blend the encoded values. Glyph texels are linear area coverage with the
   world-text filter (one bilinear tap up to 1.25 texels, then ≤4×4 taps), at
-  the backend's filtering precision. Zero-coverage fragments are discarded, so
-  pixels a quad does not cover keep their stored value on every backend.
+  the backend's filtering precision. Blending precision is also the backend's:
+  a UNORM target may blend at its own 8-bit precision. Zero-coverage fragments
+  are discarded, so pixels a quad does not cover keep their stored value on
+  every backend.
 - **States.** Surfaces are opaque. Disabled: flatter surface, muted text.
   Focus: 2 px inset accent ring. Captured pointer press: darker button. Caret,
   selection and composition draw only in a focused, enabled field from `UiEdit`
@@ -101,20 +103,29 @@ CPU compositor written from this contract: 1x, 2x and 1.5x, UNORM and sRGB
 targets, an offset editor region, nested clips with negative-x RTL overflow,
 composition over a finished world frame (with an order-sensitivity check) and
 retention/refusal identity. On Apple Metal every case agrees within 1 code
-value of exact arithmetic. The reference admits, per channel, only the codes
-the backend precision allows: 8-bit fixed-point filtering of glyph taps between
-texel centres and the sRGB read-back and store between blends. A CPU emulation
-of Mesa llvmpipe produces differences up to 7 codes from exact near black at
-2x, where the sRGB curve magnifies a 1/255 coverage step. This is a candidate
-explanation for the Linux failure: installed Mesa packages do not identify
-the adapter that executed the failed test, and the corrected test has not yet
-run on Linux. The reference admits this emulation while rejecting text placed
-one pixel off, 90% text opacity and a missing ancestor clip (handoff 0057).
-It requires at least 8 sub-texel bits; Vulkan's permitted minimum of 4 remains
-outside this reference. A hosted composed game
-drives routed Tab/Enter, receipts for focus, commit and preedit, refresh and
-relayout through the real consumer. Handoff 0056 records the review fixture,
-offscreen captures and logs.
+value of exact arithmetic (1x UNORM exactly). The reference admits, per
+channel, only the codes the backend precision allows: 8-bit fixed-point
+filtering of glyph taps between texel centres, the sRGB read-back and store
+between blends, and a UNORM target blended at its own 8-bit precision, which
+Vulkan and D3D11.3 §17.5 permit (source and alpha codes within 0.6 code, the
+destination product within 128/255 code, a saturating sum: at most 1.71 codes
+from exact per blend, exact for opaque fragments). Checkpoint 12's hosted
+runs printed their adapters: llvmpipe (LLVM 20.1.2, Mesa 25.2.8) on Linux and
+WARP (Microsoft Basic Render Driver) on Windows. Both failed only the 1x UNORM
+case of the float-only reference, with identical statistics that an emulation
+of llvmpipe's 8-bit integer blend reproduces exactly, as do correctly rounded
+8-bit blends with nearest or half-up conversion; float blending and coarser
+integer arithmetic do not (handoff 0059). A CPU emulation of llvmpipe's sRGB
+path differs from exact by up to 7 codes near black at 2x, where the sRGB curve
+magnifies a 1/255 coverage step (handoff 0057). The reference admits both
+emulations while rejecting text placed one pixel off, 90% text opacity,
+blending in the other colour space and a missing ancestor clip. It requires at
+least 8 sub-texel bits and nearest-rounding blends; Vulkan's permitted minimum
+of 4 sub-texel bits and truncating blends remain outside this reference. Hosted
+Linux and Windows runs of the corrected reference are pending. A hosted
+composed game drives routed Tab/Enter, receipts for focus, commit and preedit,
+refresh and relayout through the real consumer. Handoff 0056 records the
+review fixture, offscreen captures and logs.
 
 ## Open work and requests
 

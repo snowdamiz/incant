@@ -1,0 +1,162 @@
+{
+ "format": "incant-0059-ui-unorm-precision",
+ "packet": "0059-linux-ui-reference",
+ "model": "Claude Opus 5.5 (claude-opus-5-5)",
+ "thinking_effort": "max",
+ "brief": {
+  "routing_commit_sha256": "f40355ed590470eb1545058703c874ebf6dfc594f8706bd672b5735608823740",
+  "with_root_windows_revision_sha256": "15b2f7f68987bd89839cfaf280607409170b3f241ffa1bd52c0422b97807f2b7",
+  "note": "root revision applied (Windows WARP failure); brief left uncommitted and unchanged"
+ },
+ "source": {
+  "start_head": "a37191ba9a982e8294d045b4ae5fb99b251e6b83 (main151 routing commit)",
+  "frozen_candidate": "10129769b82a5a6dd7b075f0d8f42bfcc33e9ae5",
+  "main150": "58cca708545eb494868e18469fd4de98f47eb2da",
+  "receipt_source_hashes_matched_before_diagnosis": true,
+  "renderer_diff_main150_to_start": "none (only incant_assets root-motion and docs changed)",
+  "fix_commit": "5186268876a7f651c462921eca143b34fb4e09cc",
+  "after_fix_hashes": {
+   "crates/incant_render/src/ui/ui.wgsl": "f67e4982b038833e87ed84861d5be3018f5f0d6587ff8da6faf8bfd840c33c39 (unchanged)",
+   "crates/incant_render/src/ui/geometry.rs": "47bd7838b52a46e0034b05cf5458f8b12bf70c475889ba30848078dcb15d352b (unchanged)",
+   "crates/incant_render/src/ui/mod.rs": "fd6e4a2f4cd36d13d66ea0ab2c183b6144672242031c646a1c1881b13be11824 (contract comment only)",
+   "crates/incant_render/src/ui_draw_tests.rs": "ca4f9afb2449e66792ae089fc5cff5870d156b7fdabca8db809ca6b568b508b2",
+   "Cargo.lock": "ac059d1a2493d570bd202515e729830c56ecc7758cd808ccd0f245d06abcac7f (unchanged)"
+  }
+ },
+ "observed_failures": {
+  "linux": {
+   "receipt": "evidence/checkpoint12-linux-failure.json",
+   "receipt_sha256": "bf042458e43175f30e4337f290296dd90a9bdfa64628cd08019445955d083293",
+   "log_gz_sha256": "9759d8aeea5132a55fcb89aa8e40b57571b957f3783b9650da21de77b0b6083a",
+   "raw_log_sha256": "fb5e35036590be9364d210d1541c4b8d9b8255b56544bb7f70a1e7009db137eb",
+   "run": 38281150114,
+   "job": 114918474850,
+   "adapter_printed": "llvmpipe (LLVM 20.1.2, 256 bits), vendor 65541, Cpu, driver llvmpipe, Mesa 25.2.8-0ubuntu0.24.04.4 (LLVM 20.1.2), Vulkan",
+   "unorm_line": "scale 1 Rgba8Unorm: outside 245 by 2, widest 2 (0 channels > 2); vs exact worst 2, >1: 5, changed 4248",
+   "srgb_lines": [
+    "scale 1 Rgba8UnormSrgb: outside 0 by 0, widest 4 (44 channels > 2); vs exact worst 2, >1: 1, changed 4246",
+    "scale 2 Rgba8UnormSrgb: outside 0 by 0, widest 21 (6535 channels > 2); vs exact worst 7, >1: 310, changed 17961",
+    "scale 1.5 Rgba8UnormSrgb: outside 0 by 0, widest 29 (6114 channels > 2); vs exact worst 6, >1: 183, changed 10154"
+   ],
+   "subset": "31 passed, 1 failed (incant_render lib --ignored)"
+  },
+  "windows": {
+   "receipt": "evidence/checkpoint12-windows-failure.json (root, uncommitted)",
+   "receipt_sha256": "d1e982c0cf0f7924219d80ffe2ec020c3672c809a48f3583c5ee62070ddcb555",
+   "log_gz_sha256": "e6549406d4004312481528820021ea2c87a0a3ca0eda7a98b6b241b725f9651c",
+   "raw_log_sha256": "cec7da5a271729c47964244ce18e496ecd8383dc2e3c505a127e54b9b12a1ebb",
+   "run": 38281150114,
+   "job": 114918474729,
+   "adapter_printed": "Microsoft Basic Render Driver (WARP), vendor 5140, device 140, Cpu, driver 10.0.26100.33438, Dx12, subgroup 4",
+   "unorm_line": "scale 1 Rgba8Unorm: outside 245 by 2, widest 2 (0 channels > 2); vs exact worst 2, >1: 5, changed 4248",
+   "srgb_lines": [
+    "scale 1 Rgba8UnormSrgb: ... vs exact worst 1, >1: 0, changed 4245",
+    "scale 2 Rgba8UnormSrgb: ... vs exact worst 1, >1: 0, changed 17954",
+    "scale 1.5 Rgba8UnormSrgb: ... vs exact worst 1, >1: 0, changed 10145"
+   ],
+   "subset": "31 passed, 1 failed"
+  }
+ },
+ "root_cause": "The independent reference was wrong, not the implementation. It modelled a UNORM target as a float blend with only the stored code rounded (ENCODE 0.67, read back exactly). Vulkan and D3D11.3 both let a fixed-point target blend at its own precision, and llvmpipe and WARP blend UNORM8 targets in 8-bit integers: the premultiplied source and the alpha are converted to codes, the destination product d*(255-a)/255 is rounded, and the sum saturates. Each step rounds by up to half a code, so one blend moves up to 1.5 codes from the float blend; two partial blends (a label shadow, then its text) reach 2 codes outside the float-only interval. The shader cannot set output-merger precision; its output already follows the contract, and Metal stores the exact model bit for bit.",
+ "mesa_source": {
+  "package": "Ubuntu mesa 25.2.8-0ubuntu0.24.04.4 (the CI driver_info version)",
+  "orig_tarball": "launchpadlibrarian mesa_25.2.8.orig.tar.xz",
+  "orig_sha256": "097842f3e49d996868b38688db87b006f7d4541e93ce86d2f341d8b3e7be7c93",
+  "debian_tarball_sha256": "b2fe9e714f7824fb763b693ffd170ba9af3982a970273bc8bae6edf380f51af3",
+  "dsc_checksums_match": true,
+  "ubuntu_patches_touch_llvmpipe_gallivm_lavapipe": false,
+  "arithmetic": {
+   "blend_type": "lp_state_fs.c lp_blend_type_from_format_desc: R8G8B8A8_UNORM blends as 8-bit unsigned norm; sRGB formats (format_expands_to_float_soa) blend as float32",
+   "conversion": "lp_state_fs.c generate_unswizzled_blend -> lp_build_conv_auto -> lp_bld_conv.c special case 2x8x32->16x8 (AVX): min(1,x)*255, lp_build_iround (llvm.x86.avx.cvt.ps2dq.256, round half to even), saturating packs; RGBA8 has_alpha, so the blend alpha is the converted alpha channel",
+   "blend": "lp_bld_blend_aos.c: factors ONE / INV_SRC_ALPHA (comp = bitwise not); lp_bld_blend.c lp_build_blend generic path (not complementary): lp_build_mul(src, one)=src, lp_build_mul(dst, ~a) via lp_build_mul_norm, lp_build_add = llvm.uadd.sat",
+   "mul_norm": "lp_bld_arit.c lp_build_mul_norm: (t + (t >> 8) + 128) >> 8; exhaustively: correctly rounded except 24 of 65,536 8-bit products (fraction 128/255, rounded down), max error 128/255 code",
+   "fetch": "lp_bld_conv.c lp_build_unsigned_norm_to_float: UNORM8 * f32(1/255)"
+  }
+ },
+ "specifications": {
+  "vulkan_blending": "\"Blending computations are treated as if carried out in floating-point, and basic blend operations are performed with a precision and dynamic range no lower than that used to represent destination components.\" (docs.vulkan.org framebuffer chapter, Blending)",
+  "d3d11_3_17_5": "\"When a RenderTarget is has a fixed point format, ... blending operations may be performed at equal or more (e.g up to float32) precision/range than the output format.\"",
+  "d3d11_3_3_2_3_6": "\"Convert from float scale to integer scale: c = c * (2^n-1). Convert to integer: c = c + 0.5f. Drop the decimal fraction ... This conversion is permitted tolerance of 0.6f ULP (on the integer side).\"",
+  "d3d_spec_html_sha256": "b3eeee598d3d0737f6aaff7121cd0fff9a2265e35b682ab7f6e62b4b45f476f9",
+  "d3d_spec_url": "https://microsoft.github.io/DirectX-Specs/d3d/archive/D3D11_3_FunctionalSpec.htm"
+ },
+ "reproduction": {
+  "cpu_emulation_vs_float_only_reference": "scale 1 srgb false: emulated llvmpipe outside 245 by 2, widest 2 (0 channels > 2); vs exact worst 2, >1: 5, changed 4248",
+  "equals_ci_unorm_line_for_llvmpipe_and_warp": true,
+  "emulation_srgb_1x_equals_ci_llvmpipe_line": true,
+  "log": "evidence/checks/diag-unorm-emulation-vs-base-reference.txt",
+  "reference_mutation_reproduces_ci_assertion": "scale 1 Rgba8Unorm llvmpipe: Admission { outside: 245, excess: 2.0, widest: 2.0, wide: 0 } (evidence/checks/mutation-7-reference-float-only.txt)"
+ },
+ "fingerprint_replay": {
+  "tool": "tools/unorm_fingerprint.py over evidence/unorm-1x-trace.txt.gz (from tools/diag-trace.patch)",
+  "trace_sha256_uncompressed": "6c1b7cd1852cef9657bddd5ac124069f4ed3f7100e6b74a0d3ed881bd89b1714",
+  "trace_gz_sha256": "58bd42510f6dd036f6ba06ad673bf80d53a4b9ab1196216c405d79946befb2ef",
+  "output": "evidence/checks/unorm-fingerprint-2.txt",
+  "matches_ci": [
+   "llvmpipe: cvtps2dq, Blinn product",
+   "8-bit: nearest-even, exact product",
+   "8-bit: D3D half-up, exact product"
+  ],
+  "differs": {
+   "8-bit truncated conversions and product": "outside 2739 by 4",
+   "8-bit nearest-even, a*(b+1)>>8": "outside 1338",
+   "8-bit nearest-even, (t+(t>>8))>>8": "outside 1707",
+   "float blend, nearest store (Metal-like)": "outside 0, worst 0",
+   "float blend, truncated store": "outside 1635"
+  },
+  "corrected_reference_admits": "the three matching variants (outside 0); rejects truncation 2533, a*(b+1)>>8 1210, geometric 1592, float truncated store 1428",
+  "sample_2_code_refusal": "pixel (33,59) R: background 231; label shadow (opacity 150, coverage 8/255): A 4.71->5, P 226.47->226, stored 226 (float 226.74); text (236, coverage 48/255): S 44.42->44, P 183.46->183, stored 227 vs exact 229; float-only [229,229], corrected [227,229]",
+  "worst_single_blend_distance_llvmpipe": 1.0486,
+  "stated_bound_per_blend": "0.6 + 0.6*d/255 + 128/255 <= 1.702 codes",
+  "exactness": "392 pixels gain codes, all with a partial-alpha blend; 3014 opaque-only and 10150 untouched pixels admit exactly one code",
+  "admitted_width_1x_unorm": "widest 2 (0 channels > 2) before and after; 508 of 43,200 channels gain codes"
+ },
+ "local_adapter": "Apple M5 Pro, Metal, IntegratedGpu (wgpu AdapterInfo printed by every UI GPU test)",
+ "local_results": {
+  "before": {
+   "log": "evidence/checks/before-ui-draw-tests.txt",
+   "result": "6 passed",
+   "unorm": "scale 1 Rgba8Unorm: outside 0 by 0, widest 2 (0 channels > 2); vs exact worst 0, >1: 0, changed 4246"
+  },
+  "after": {
+   "log": "evidence/checks/after-ui-draw-tests.txt",
+   "result": "6 passed",
+   "unorm": "same line"
+  },
+  "images": {
+   "dir_before": "/Users/andreyyurlov/.codex/incant-evidence/0059/gpu-before",
+   "dir_after": "/Users/andreyyurlov/.codex/incant-evidence/0059/gpu-after",
+   "identical_before_after": true,
+   "sha256": {
+    "ui-clip-nested.png": "023c08b66efec2480427cfb4c7817776a1543e644bab71a15cebcc41adb71e72",
+    "ui-clip-open.png": "be598bb503e4e39e7b2a550eae832550acde24c0170c50bf215208fec7a63d62",
+    "ui-over-world.png": "1cdf3664a4be1eafb2c267a1dde7b1e5140db49105f3079d70b5ac2995f60294",
+    "ui-panel-1.5x-Rgba8UnormSrgb.png": "2caea7cf72c8900f3f5f28fae5e407c4d89f4eab943665fce3b65bee3c709f2b",
+    "ui-panel-1x-Rgba8Unorm.png": "24b37d610c8c7322f0bc333fd3e06a7a7f1f6d67fcc305143e0e03d10ce0789b",
+    "ui-panel-1x-Rgba8UnormSrgb.png": "5385d99d495b4501d87a3ba15bd346ea3cf0a27cb8c0eda5f0009875d0b5392e",
+    "ui-panel-2x-Rgba8UnormSrgb.png": "9530c710dcee5a4e10c0c22fbb2e729e81c523dc9c44a5691619799ff0a03dfb",
+    "ui-region.png": "30e067c930abfb7054772eee1048e40e10b330e933578053cd398185189dcf4f"
+   }
+  },
+  "all_ui_tests": "ui:: 14 passed (evidence/checks/final-ui-all-tests.txt)",
+  "incant_render_cpu": "59 passed, 32 ignored (evidence/checks/final-render-cpu-tests.txt)",
+  "incant_render_gpu_subset_like_ci": "32 passed (evidence/checks/final-render-gpu-subset.txt)"
+ },
+ "checks": {
+  "cargo fmt --all --check": "exit 0, no output",
+  "clippy -p incant_render --all-targets --profile ci -D warnings": "exit 0",
+  "check -p incant_render --lib --target wasm32-unknown-unknown (nightly command)": "exit 0",
+  "same with --profile ci": "exit 0"
+ },
+ "mutations": "evidence/mutations.json: 7 of 7 caught on Apple M5 Pro/Metal; unmutated suite passes before and after; every file restored by hash",
+ "performance": "No shader, renderer, allocation or runtime change; ui.wgsl and geometry.rs byte-identical, mod.rs comment only, Metal output byte-identical. The CPU reference test adds the UNORM emulation and blend-space controls (UI draw tests 0.29 s before, 0.31 s after on Metal, ci profile; not performance evidence).",
+ "pending": [
+  "Hosted Linux (llvmpipe) and Windows (WARP) runs of the corrected reference: Astra integration owner; not run here",
+  "No local Linux software-Vulkan or WARP: Docker daemon not running and not started, no x86 VM; Metal does not prove Linux or Windows"
+ ],
+ "limitations": [
+  "WARP arithmetic is inferred from its printed statistics (identical to correctly rounded 8-bit blending); its images were not available",
+  "The reference covers 8-bit blends whose conversions are within 0.6 code and products within 128/255 code; truncating or coarser blend arithmetic, which Vulkan permits, remains outside it, as do backends below 8 sub-texel bits",
+  "The 1x UNORM fixture lands every glyph tap on a texel centre, so the fixed-point term is exercised with exact coverage; the CPU test covers UNORM at 1x only, like the GPU test"
+ ]
+}

@@ -1,0 +1,21 @@
+trace: 5684 blends over 160x90; Rust corrected reference reproduced exactly
+float-only reference (checkpoint 12): widest 2 (0 channels > 2)
+corrected reference: widest 2 (0 channels > 2); 508 of 43200 channels gain codes
+exactness: 392 pixels gain codes, all with a partial-alpha blend; 3014 opaque-only and 10150 untouched pixels admit exactly one code
+CI llvmpipe and WARP printed: {'outside': 245, 'excess': 2, 'worst': 2, 'over': 5, 'changed': 4248}
+- llvmpipe: cvtps2dq, Blinn product: {'outside': 245, 'excess': 2, 'worst': 2, 'over': 5, 'changed': 4248} MATCHES CI; corrected reference outside 0
+- 8-bit: nearest-even, exact product: {'outside': 245, 'excess': 2, 'worst': 2, 'over': 5, 'changed': 4248} MATCHES CI; corrected reference outside 0
+- 8-bit: D3D half-up, exact product: {'outside': 245, 'excess': 2, 'worst': 2, 'over': 5, 'changed': 4248} MATCHES CI; corrected reference outside 0
+- 8-bit: truncated conversions and product: {'outside': 2739, 'excess': 4, 'worst': 4, 'over': 737, 'changed': 4248} differs; corrected reference outside 2533
+- 8-bit: nearest-even, a*(b+1)>>8 product: {'outside': 1338, 'excess': 2, 'worst': 2, 'over': 108, 'changed': 4246} differs; corrected reference outside 1210
+- 8-bit: nearest-even, (t+(t>>8))>>8 product: {'outside': 1707, 'excess': 2, 'worst': 2, 'over': 152, 'changed': 4248} differs; corrected reference outside 1592
+- float blend, nearest store: {'outside': 0, 'excess': 0, 'worst': 0, 'over': 0, 'changed': 4246} differs; corrected reference outside 0
+- float blend, truncated store: {'outside': 1635, 'excess': 2, 'worst': 2, 'over': 107, 'changed': 4250} differs; corrected reference outside 1428
+
+samples refused by the float-only reference by 2 codes (llvmpipe replay):
+  pixel (33,59) channel R: background 231, exact 229, llvmpipe 227, float-only [229,229], corrected [227,229]
+    over colour 0 opacity 150 coverage 0.031373: S 0.0000 -> 0, A 4.7059 -> 5, d 231: P 226.4706 -> 226; stored 226 (exact float chain 226.7370)
+    over colour 236 opacity 255 coverage 0.188235: S 44.4235 -> 44, A 48.0000 -> 48, d 226: P 183.4588 -> 183; stored 227 (exact float chain 228.4806)
+  (1 channels)
+
+llvmpipe replay, worst single-blend distance from the float blend: 1.0486 codes (bound 0.6 + 0.6*d/255 + 0.5020 <= 1.7020)

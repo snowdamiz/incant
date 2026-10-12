@@ -1,0 +1,9 @@
+{
+ "packet": "0059-linux-ui-reference",
+ "released_at": "2026-10-12T17:46:38+00:00",
+ "lease_started_at": "2026-10-12T17:25:52+00:00",
+ "cargo_target_dir": "/Users/andreyyurlov/.codex/incant-native-target",
+ "owned_processes_at_release": "none: all 23 guarded cargo runs exited (ledger commands.jsonl, last pid 23481); the mutation driver and Python replays exited; no window or screen capture was taken; root ACP runner (tools/handoff/main.py) is not owned and left running",
+ "cache": "~/.codex/incant-native-target kept as warm cache; nothing deleted",
+ "tools_refuse_after": "handoffs/0059-linux-ui-reference/tools/cargo.sh (and mutate.py through it)"
+}

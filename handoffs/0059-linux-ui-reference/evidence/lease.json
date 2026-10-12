@@ -1,0 +1,11 @@
+{
+ "packet": "0059-linux-ui-reference",
+ "owner": "Claude Opus 5.5 (claude-opus-5-5), thinking effort max, ACP handoff session",
+ "cargo_target_dir": "/Users/andreyyurlov/.codex/incant-native-target",
+ "exclusive": true,
+ "previous_owner_release": "/Users/andreyyurlov/.codex/incant-evidence/0058/release.json (released_at 2026-10-12T16:38:42+00:00)",
+ "toolchain": "1.99.0 (rust-toolchain.toml), profile ci, -j2, --locked",
+ "lease_started_at": "2026-10-12T17:25:52+00:00",
+ "gpu": "offscreen UI draw tests only; no window or screen capture",
+ "worktree": "/Users/andreyyurlov/.codex/worktrees/cooked-native-scripts/incant/.worktrees/0059-linux-ui-reference"
+}

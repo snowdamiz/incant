@@ -1,0 +1,25 @@
+pid 21223 -> /Users/andreyyurlov/.codex/incant-evidence/0059/logs/mutation-0-unmutated-before.log
+exit 0; log sha256 c14f840dada3d939ef4d4eafe31ca74a46ac3f2487dc751d7b76560e5ff228bd
+pid 21237 -> /Users/andreyyurlov/.codex/incant-evidence/0059/logs/mutation-1-unorm-linear.log
+exit 101; log sha256 f646fa84f3c1ae5b51a8cf52f817770dc23fe8938eafa360232e2616ed1552bd
+UNORM targets blend decoded (linear-light) colours: exit 101, failed []
+pid 21362 -> /Users/andreyyurlov/.codex/incant-evidence/0059/logs/mutation-2-unorm-colour-98.log
+exit 101; log sha256 01b9b6845094be4c1902a9b83e6cd4bb86802009d43c4be4714f0d5d73f977fb
+UNORM colour 2 % dark: exit 101, failed []
+pid 21402 -> /Users/andreyyurlov/.codex/incant-evidence/0059/logs/mutation-3-unorm-colour-99.log
+exit 101; log sha256 90e4adfac41167c62ff438346de106e6584b5459e5322d7d760468be0d184c5c
+UNORM colour 1 % dark: exit 101, failed []
+pid 22127 -> /Users/andreyyurlov/.codex/incant-evidence/0059/logs/mutation-4-unorm-opacity-97.log
+exit 101; log sha256 dcd762d611e4cbc1837b3e025159b6258b05b1953d86605d4b10b7f4e94c8ff6
+UNORM opacity 97 %: exit 101, failed []
+pid 22240 -> /Users/andreyyurlov/.codex/incant-evidence/0059/logs/mutation-5-pen-right.log
+exit 101; log sha256 8df1e827ddd2b023067eefabb8c969e22e0a7ebaa6eb852ccbfeac0911bec148
+glyph pen one physical pixel right: exit 101, failed []
+pid 22384 -> /Users/andreyyurlov/.codex/incant-evidence/0059/logs/mutation-6-no-clip.log
+exit 101; log sha256 8833586de69709d8811ddd535c6cb89c31a0f105fa55b3b6118c9f438b19e65f
+no clip intersection: exit 101, failed []
+pid 22601 -> /Users/andreyyurlov/.codex/incant-evidence/0059/logs/mutation-7-reference-float-only.log
+exit 101; log sha256 53877f97f6fc78609994cc182e3619ed9b8000e7f5210f17b33114c023d70de2
+reference without the UNORM fixed-point admission (checkpoint 12): exit 101, failed []
+pid 22713 -> /Users/andreyyurlov/.codex/incant-evidence/0059/logs/mutation-9-unmutated-after.log
+exit 0; log sha256 ba7f63e360809c754661f786ad5002724647cc9d196d092b6d54636fb3233671

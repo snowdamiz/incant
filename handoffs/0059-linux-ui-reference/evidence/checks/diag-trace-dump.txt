@@ -1,0 +1,21 @@
+# label: diag-trace-dump
+# cwd: /Users/andreyyurlov/.codex/worktrees/cooked-native-scripts/incant/.worktrees/0059-linux-ui-reference
+# CARGO_TARGET_DIR=/Users/andreyyurlov/.codex/incant-native-target cargo test -p incant_render --profile ci --locked -j2 --lib ui::draw_tests::diag_0059 -- --test-threads=1 --nocapture
+# rustc 1.99.0 (b940084d7 2026-09-28)
+# binary: rustc
+# commit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4
+# commit-date: 2026-09-28
+# host: aarch64-apple-darwin
+# release: 1.99.0
+# LLVM version: 23.1.1
+# start: 2026-10-12T17:36:22Z
+   Compiling incant_render v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-native-scripts/incant/.worktrees/0059-linux-ui-reference/crates/incant_render)
+    Finished `ci` profile [optimized] target(s) in 9.57s
+     Running unittests src/lib.rs (/Users/andreyyurlov/.codex/incant-native-target/ci/deps/incant_render-0b72bec43c7fffff)
+
+running 1 test
+test ui::draw_tests::diag_0059_unorm_trace ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 91 filtered out; finished in 0.02s
+
+# exit: 0 at 2026-10-12T17:36:32Z

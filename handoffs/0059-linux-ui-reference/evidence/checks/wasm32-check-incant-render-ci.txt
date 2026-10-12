@@ -1,0 +1,20 @@
+# label: wasm32-check-incant-render-ci
+# cwd: /Users/andreyyurlov/.codex/worktrees/cooked-native-scripts/incant/.worktrees/0059-linux-ui-reference
+# CARGO_TARGET_DIR=/Users/andreyyurlov/.codex/incant-native-target cargo check -p incant_render --lib --target wasm32-unknown-unknown --profile ci --locked -j2
+# rustc 1.99.0 (b940084d7 2026-09-28)
+# binary: rustc
+# commit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4
+# commit-date: 2026-09-28
+# host: aarch64-apple-darwin
+# release: 1.99.0
+# LLVM version: 23.1.1
+# start: 2026-10-12T17:40:31Z
+    Checking cosmic-text v0.14.2 (/Users/andreyyurlov/.codex/worktrees/cooked-native-scripts/incant/.worktrees/0059-linux-ui-reference/third_party/cosmic-text)
+    Checking incant_2d v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-native-scripts/incant/.worktrees/0059-linux-ui-reference/crates/incant_2d)
+    Checking incant_types v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-native-scripts/incant/.worktrees/0059-linux-ui-reference/crates/incant_types)
+    Checking incant_text v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-native-scripts/incant/.worktrees/0059-linux-ui-reference/crates/incant_text)
+   Compiling incant_render v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-native-scripts/incant/.worktrees/0059-linux-ui-reference/crates/incant_render)
+    Checking incant_assets_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-native-scripts/incant/.worktrees/0059-linux-ui-reference/crates/incant_assets_runtime)
+    Checking incant_render_data v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-native-scripts/incant/.worktrees/0059-linux-ui-reference/crates/incant_render_data)
+    Finished `ci` profile [optimized] target(s) in 2.64s
+# exit: 0 at 2026-10-12T17:40:34Z
