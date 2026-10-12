@@ -26,8 +26,9 @@ requested-search budget; authorized failures reject the complete staged native
 transaction. Actual Wasmtime/wasm2c conformance passes 369 tests/doctests, Clippy
 and three development processes. A separate 190 native runtime tests, supported
 wasm32/tooling checks and the authoring-free dependency check pass. Independent
-source and final evidence review accepted the implementation; main integration
-remains pending. An ordinary source-deleted navigation guest shipping proof, full SDK,
+source and final evidence review accepted the implementation. Current-main
+integration repeats all 369 actual-host and 190 native cases with unchanged
+source; PR #138 passed the fast gate and merged. An ordinary source-deleted navigation guest shipping proof, full SDK,
 guest checkpoints, devices and phase gates remain open.
 [Contract and evidence](docs/spikes/native-wasm-navigation-paths.md).
 
@@ -77,6 +78,18 @@ performance and phase gates remain open; this scope merged through its fast main
 Independent review also corrected interrupted cache publication: private staged
 files now publish without clobber, with partial-write/concurrent/corrupt/symlink
 controls; the original source-free shipping proof remains separately recorded.
+
+## Native screen-space UI drawing — scoped integration
+
+The canonical UI candidate now reaches the retained GPU consumer, drawing labels,
+buttons, text fields, focus, selection and preedit over the world. Candidate
+refusal preserves accepted owner/resources; unchanged frames reuse their UI
+resources. Claude0056 supplied and reviewed the visuals on its frozen offscreen
+Metal build. Current-main CPU/compile checks preserve all renderer/shader source.
+The capability also admits the existing desktop UI startup route; reserved-frame
+correction and actual window/IME acceptance remain separately queued with
+Claude0057. No current-main GPU, phone or complete Game UI gate is claimed.
+[Contract and evidence](docs/spikes/native-ui-draw.md).
 
 ## Native game UI window delivery — CPU adapter
 
@@ -185,10 +198,12 @@ script/Play/game cases, Clippy, compiler-disabled/wasm checks and 67 exact fresh
 schemas. A fresh current-lock shipping export deletes authoring/build storage
 and developer source maps before three 12-tick runs and five precise refusals.
 UI checkpoints and static/development Wasm UI remain explicitly unsupported.
-Claude0056's separate offscreen drawing implementation is accepted locally and
-queued after navigation; it has not yet been integrated here. Managed IME has
-CPU/platform compilation evidence, while actual window interaction and complete
-Game UI/device gates remain open. [CPU scope and evidence](docs/spikes/native-ui-layout.md).
+Claude0056's reviewed offscreen drawing implementation now has current-main
+CPU/compile validation: 206 cases, Clippy, downstream and wasm32 checks pass;
+89 GPU tests remain ignored in this integration. Its original frozen Metal
+numerical and appearance acceptance stays separately recorded. Managed IME has
+CPU/platform compilation evidence. Actual window interaction, reserved-frame
+geometry, HiDPI glyphs and complete Game UI/device gates remain open. [CPU scope and evidence](docs/spikes/native-ui-layout.md).
 
 Native two-input crossfade clocks and controls now retain independent outgoing
 playback, pause both inputs, finish at explicit endpoints and persist active
