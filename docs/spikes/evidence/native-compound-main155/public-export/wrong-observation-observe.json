@@ -1,0 +1,72 @@
+{
+  "format": "incant-native-observation",
+  "version": 1,
+  "entities": [
+    "00000000000000000000000220",
+    "00000000000000000000000221",
+    "00000000000000000000000222",
+    "00000000000000000000000230"
+  ],
+  "checks": [
+    {
+      "name": "1-00000000000000000000000220",
+      "tick": 1,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          1,
+          0,
+          8
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "1-00000000000000000000000221",
+      "tick": 1,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          1,
+          0.25,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "1-00000000000000000000000222",
+      "tick": 1,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          0,
+          0,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "1-00000000000000000000000230",
+      "tick": 1,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          1,
+          0,
+          1
+        ],
+        "tolerance": 1e-09
+      }
+    }
+  ]
+}

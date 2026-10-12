@@ -1,0 +1,857 @@
+[
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/incant_headless",
+      "init",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/authoring/project.json",
+      "--entities",
+      "0"
+    ],
+    "at": "2026-10-12T18:21:44.558159+00:00",
+    "returncode": 0,
+    "seconds": 0.6355490419991838,
+    "stdout": {
+      "file": "command-000-stdout.txt",
+      "sha256": "8abacd18946c31c343a724e2806b3cfe27df380a1378eee758152f7f96c244be"
+    },
+    "stderr": {
+      "file": "command-000-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/incant_headless",
+      "import",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/authoring/project.json",
+      "rig.gltf"
+    ],
+    "at": "2026-10-12T18:21:45.196310+00:00",
+    "returncode": 0,
+    "seconds": 0.04028033400027198,
+    "stdout": {
+      "file": "command-001-stdout.txt",
+      "sha256": "db8bad3415670a61e93172eab7fb1eaeb34829403e318d523bd398e479fadc73"
+    },
+    "stderr": {
+      "file": "command-001-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "rustup",
+      "which",
+      "rustc"
+    ],
+    "at": "2026-10-12T18:21:46.564394+00:00",
+    "returncode": 0,
+    "seconds": 0.041703916000187746,
+    "stdout": {
+      "file": "command-002-stdout.txt",
+      "sha256": "1dc5ff25a027f5c0a04ac183e96b6665181272c327130fb0663c5c1be8aad81d"
+    },
+    "stderr": {
+      "file": "command-002-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/rustc",
+      "-vV"
+    ],
+    "at": "2026-10-12T18:21:46.606863+00:00",
+    "returncode": 0,
+    "seconds": 0.04124483300074644,
+    "stdout": {
+      "file": "command-003-stdout.txt",
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    "stderr": {
+      "file": "command-003-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/rustc",
+      "--print",
+      "sysroot"
+    ],
+    "at": "2026-10-12T18:21:46.649204+00:00",
+    "returncode": 0,
+    "seconds": 0.0441328329998214,
+    "stdout": {
+      "file": "command-004-stdout.txt",
+      "sha256": "b22adee5ac5a93ade5d52f11392360e1c1a95ef2add2bd03365e896e8f1688e1"
+    },
+    "stderr": {
+      "file": "command-004-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/tools/cargo",
+      "metadata",
+      "--locked",
+      "--format-version=1",
+      "--filter-platform",
+      "aarch64-apple-darwin",
+      "--features",
+      "incant_game_player/project,incant_game_player/render-input"
+    ],
+    "at": "2026-10-12T18:21:46.698867+00:00",
+    "returncode": 0,
+    "seconds": 0.46799354100039636,
+    "stdout": {
+      "file": "command-005-stdout.txt",
+      "sha256": "2e5dcdb4da623c963aa3d5f9ed4e47f00e319c89b1ca91c127fc86333504d85b"
+    },
+    "stderr": {
+      "file": "command-005-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/tools/cargo",
+      "build",
+      "-j2",
+      "-p",
+      "incant_game_player",
+      "--bin",
+      "incant_game_player",
+      "--features",
+      "project,render-input",
+      "--profile",
+      "shipping",
+      "--locked",
+      "--target",
+      "aarch64-apple-darwin",
+      "--target-dir",
+      "/private/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-project-build-3nm57wxm/target",
+      "--config",
+      "profile.shipping.split-debuginfo=\"packed\"",
+      "--message-format=json",
+      "-vv"
+    ],
+    "at": "2026-10-12T18:21:47.198220+00:00",
+    "returncode": 0,
+    "seconds": 407.1440444590007
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/lib/rustlib/aarch64-apple-darwin/bin/llvm-nm",
+      "--defined-only",
+      "--demangle",
+      "/private/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-project-build-3nm57wxm/target/aarch64-apple-darwin/shipping/incant_game_player"
+    ],
+    "at": "2026-10-12T18:28:34.592678+00:00",
+    "returncode": 0,
+    "seconds": 0.14635495900074602,
+    "stdout": {
+      "file": "command-007-stdout.txt",
+      "sha256": "0a353b4ceec73b33fc22a9af743cb4933f056227d52dd40b2fc11195bd1996ef"
+    },
+    "stderr": {
+      "file": "command-007-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/private/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-native-export-7pceg2bp/player/incant_game_player",
+      "--package",
+      "/private/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-native-export-7pceg2bp/player/data",
+      "--ticks",
+      "1",
+      "--output",
+      "/private/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-native-export-7pceg2bp/startup.pcm"
+    ],
+    "at": "2026-10-12T18:28:41.536321+00:00",
+    "returncode": 0,
+    "seconds": 0.1678974170008587,
+    "stdout": {
+      "file": "command-008-stdout.txt",
+      "sha256": "773c4038a261139b84faf35030d7a9fc86e26c10ef6adcecdf85f6534efdf2a8"
+    },
+    "stderr": {
+      "file": "command-008-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/data",
+      "--ticks",
+      "56",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/baseline.pcm",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/baseline-observe.json",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/baseline.save"
+    ],
+    "at": "2026-10-12T18:28:41.834248+00:00",
+    "returncode": 0,
+    "seconds": 0.13739499999974214,
+    "stdout": {
+      "file": "command-009-stdout.txt",
+      "sha256": "5678523b7c63830a8a8b0f7193f9f1439194cfd70998b03f2925c9723f6ee218"
+    },
+    "stderr": {
+      "file": "command-009-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/data",
+      "--ticks",
+      "56",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/repeat-0.pcm",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/repeat-0-observe.json",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/repeat-0.save"
+    ],
+    "at": "2026-10-12T18:28:41.983585+00:00",
+    "returncode": 0,
+    "seconds": 0.04306062499927066,
+    "stdout": {
+      "file": "command-010-stdout.txt",
+      "sha256": "5678523b7c63830a8a8b0f7193f9f1439194cfd70998b03f2925c9723f6ee218"
+    },
+    "stderr": {
+      "file": "command-010-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/data",
+      "--ticks",
+      "56",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/repeat-1.pcm",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/repeat-1-observe.json",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/repeat-1.save"
+    ],
+    "at": "2026-10-12T18:28:42.034725+00:00",
+    "returncode": 0,
+    "seconds": 0.052809750000960776,
+    "stdout": {
+      "file": "command-011-stdout.txt",
+      "sha256": "5678523b7c63830a8a8b0f7193f9f1439194cfd70998b03f2925c9723f6ee218"
+    },
+    "stderr": {
+      "file": "command-011-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/data",
+      "--ticks",
+      "5",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/zero-weight.pcm",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/zero-weight-observe.json",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/zero-weight.save"
+    ],
+    "at": "2026-10-12T18:28:42.095675+00:00",
+    "returncode": 0,
+    "seconds": 0.030425124999965192,
+    "stdout": {
+      "file": "command-012-stdout.txt",
+      "sha256": "2e54f263ff56ac9c74d81d32c63f54a6ad3bf5f25b6fe18320e71bdb35c071cd"
+    },
+    "stderr": {
+      "file": "command-012-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/data",
+      "--ticks",
+      "51",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/zero-weight-continued.pcm",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/zero-weight-continued-observe.json",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/zero-weight-continued.save",
+      "--load-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/zero-weight.save"
+    ],
+    "at": "2026-10-12T18:28:42.128952+00:00",
+    "returncode": 0,
+    "seconds": 0.040552583001044695,
+    "stdout": {
+      "file": "command-013-stdout.txt",
+      "sha256": "85eeb5bbfe7e123276f988246333fcad74ed481e86efea3347a9ea3123c822e3"
+    },
+    "stderr": {
+      "file": "command-013-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/data",
+      "--ticks",
+      "9",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/paused.pcm",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/paused-observe.json",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/paused.save"
+    ],
+    "at": "2026-10-12T18:28:42.175604+00:00",
+    "returncode": 0,
+    "seconds": 0.04012624999995751,
+    "stdout": {
+      "file": "command-014-stdout.txt",
+      "sha256": "2cc7b2fd490e524740e6e9667fae2f5e199ddb427bbcb7eb22b45d90658f4729"
+    },
+    "stderr": {
+      "file": "command-014-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/data",
+      "--ticks",
+      "47",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/paused-continued.pcm",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/paused-continued-observe.json",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/paused-continued.save",
+      "--load-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/paused.save"
+    ],
+    "at": "2026-10-12T18:28:42.219013+00:00",
+    "returncode": 0,
+    "seconds": 0.04308462500011956,
+    "stdout": {
+      "file": "command-015-stdout.txt",
+      "sha256": "8370aaa82eb9f986cc3b263f233abae4ed0d38451c0b9efdc4e35b250ab65e80"
+    },
+    "stderr": {
+      "file": "command-015-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/data",
+      "--ticks",
+      "13",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/reverse.pcm",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/reverse-observe.json",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/reverse.save"
+    ],
+    "at": "2026-10-12T18:28:42.268676+00:00",
+    "returncode": 0,
+    "seconds": 0.03278099999988626,
+    "stdout": {
+      "file": "command-016-stdout.txt",
+      "sha256": "3bbc774697308f85da8a1d084991bc7ac69c00e76c06d005d5ff37224bd7d0d1"
+    },
+    "stderr": {
+      "file": "command-016-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/data",
+      "--ticks",
+      "43",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/reverse-continued.pcm",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/reverse-continued-observe.json",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/reverse-continued.save",
+      "--load-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/reverse.save"
+    ],
+    "at": "2026-10-12T18:28:42.305068+00:00",
+    "returncode": 0,
+    "seconds": 0.029189832999691134,
+    "stdout": {
+      "file": "command-017-stdout.txt",
+      "sha256": "baefcd28d40d6345fd3b769d43fa0e3653d5134b9e9f0cfb63c5f6192d85cf5f"
+    },
+    "stderr": {
+      "file": "command-017-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/data",
+      "--ticks",
+      "21",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/weighted-to-pair.pcm",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/weighted-to-pair-observe.json",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/weighted-to-pair.save"
+    ],
+    "at": "2026-10-12T18:28:42.340938+00:00",
+    "returncode": 0,
+    "seconds": 0.028546624998853076,
+    "stdout": {
+      "file": "command-018-stdout.txt",
+      "sha256": "f11f9d75944a64596409d5c4b36b94d370ca7df9889c7dd8d0e33fcc38c81854"
+    },
+    "stderr": {
+      "file": "command-018-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/data",
+      "--ticks",
+      "35",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/weighted-to-pair-continued.pcm",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/weighted-to-pair-continued-observe.json",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/weighted-to-pair-continued.save",
+      "--load-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/weighted-to-pair.save"
+    ],
+    "at": "2026-10-12T18:28:42.374211+00:00",
+    "returncode": 0,
+    "seconds": 0.030191541998647153,
+    "stdout": {
+      "file": "command-019-stdout.txt",
+      "sha256": "83b3c9bd2b0d6f287c9e3e3269f3fe9aa6affbe3aa7daf2a13e2191655df7b44"
+    },
+    "stderr": {
+      "file": "command-019-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/data",
+      "--ticks",
+      "24",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/completed-incoming.pcm",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/completed-incoming-observe.json",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/completed-incoming.save"
+    ],
+    "at": "2026-10-12T18:28:42.409267+00:00",
+    "returncode": 0,
+    "seconds": 0.045900707998953294,
+    "stdout": {
+      "file": "command-020-stdout.txt",
+      "sha256": "e85523582c2a163d716a2b8c1570182fd55c5399b1faf044350507075b3fc296"
+    },
+    "stderr": {
+      "file": "command-020-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/data",
+      "--ticks",
+      "32",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/completed-incoming-continued.pcm",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/completed-incoming-continued-observe.json",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/completed-incoming-continued.save",
+      "--load-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/completed-incoming.save"
+    ],
+    "at": "2026-10-12T18:28:42.459908+00:00",
+    "returncode": 0,
+    "seconds": 0.043647417000101996,
+    "stdout": {
+      "file": "command-021-stdout.txt",
+      "sha256": "c1aa3c04676b40ce10b1b54bcf2f4d546a185d157f625394c6e836699f2b67d7"
+    },
+    "stderr": {
+      "file": "command-021-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/data",
+      "--ticks",
+      "29",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/pair-to-clip.pcm",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/pair-to-clip-observe.json",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/pair-to-clip.save"
+    ],
+    "at": "2026-10-12T18:28:42.509671+00:00",
+    "returncode": 0,
+    "seconds": 0.04362866699921142,
+    "stdout": {
+      "file": "command-022-stdout.txt",
+      "sha256": "cc16699e8dc22dc59dae40ced36c0bb16e0aca3905f088bc639bfb81427e4989"
+    },
+    "stderr": {
+      "file": "command-022-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/data",
+      "--ticks",
+      "27",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/pair-to-clip-continued.pcm",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/pair-to-clip-continued-observe.json",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/pair-to-clip-continued.save",
+      "--load-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/pair-to-clip.save"
+    ],
+    "at": "2026-10-12T18:28:42.558342+00:00",
+    "returncode": 0,
+    "seconds": 0.03199141699951724,
+    "stdout": {
+      "file": "command-023-stdout.txt",
+      "sha256": "a99aaaaca2d6b617b02691e9c0687dd627c7da4355a94082cee8815ab4031179"
+    },
+    "stderr": {
+      "file": "command-023-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/data",
+      "--ticks",
+      "31",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/manual-cancel.pcm",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/manual-cancel-observe.json",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/manual-cancel.save"
+    ],
+    "at": "2026-10-12T18:28:42.595646+00:00",
+    "returncode": 0,
+    "seconds": 0.029814000001351815,
+    "stdout": {
+      "file": "command-024-stdout.txt",
+      "sha256": "58411babdcd5487e5f7120834475da53bf46f6a6484fca4fdb6b6a9b31a48b9f"
+    },
+    "stderr": {
+      "file": "command-024-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/data",
+      "--ticks",
+      "25",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/manual-cancel-continued.pcm",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/manual-cancel-continued-observe.json",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/manual-cancel-continued.save",
+      "--load-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/manual-cancel.save"
+    ],
+    "at": "2026-10-12T18:28:42.630436+00:00",
+    "returncode": 0,
+    "seconds": 0.03151458399952389,
+    "stdout": {
+      "file": "command-025-stdout.txt",
+      "sha256": "55c971e3efcb0f7891a0fd4c8201a7b66f9f3cefe081313b861db772483aa0a0"
+    },
+    "stderr": {
+      "file": "command-025-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/data",
+      "--ticks",
+      "38",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/restarted-fade.pcm",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/restarted-fade-observe.json",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/restarted-fade.save"
+    ],
+    "at": "2026-10-12T18:28:42.666242+00:00",
+    "returncode": 0,
+    "seconds": 0.02953762499964796,
+    "stdout": {
+      "file": "command-026-stdout.txt",
+      "sha256": "fb375b5d4a4c929ffd6a538f7bdb1e0c019a05ff6075e0d451c6da5878ea16ea"
+    },
+    "stderr": {
+      "file": "command-026-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/data",
+      "--ticks",
+      "18",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/restarted-fade-continued.pcm",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/restarted-fade-continued-observe.json",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/restarted-fade-continued.save",
+      "--load-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/restarted-fade.save"
+    ],
+    "at": "2026-10-12T18:28:42.701448+00:00",
+    "returncode": 0,
+    "seconds": 0.03265112500048417,
+    "stdout": {
+      "file": "command-027-stdout.txt",
+      "sha256": "2be32293b14458ebfae77329abcf40dd3aedefaf8309781257a03d8ccd81f178"
+    },
+    "stderr": {
+      "file": "command-027-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/data",
+      "--ticks",
+      "45",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/completed-outgoing.pcm",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/completed-outgoing-observe.json",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/completed-outgoing.save"
+    ],
+    "at": "2026-10-12T18:28:42.739748+00:00",
+    "returncode": 0,
+    "seconds": 0.040816292001181864,
+    "stdout": {
+      "file": "command-028-stdout.txt",
+      "sha256": "9a44092aab8b41d984ade22308c47cdaa21d120b3f5d6e356f9187963fbce65f"
+    },
+    "stderr": {
+      "file": "command-028-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/data",
+      "--ticks",
+      "11",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/completed-outgoing-continued.pcm",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/completed-outgoing-continued-observe.json",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/completed-outgoing-continued.save",
+      "--load-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/completed-outgoing.save"
+    ],
+    "at": "2026-10-12T18:28:42.786277+00:00",
+    "returncode": 0,
+    "seconds": 0.030850707998979487,
+    "stdout": {
+      "file": "command-029-stdout.txt",
+      "sha256": "df59557fb20627a839db674f387482727ff19bd2c5235b4d231fba09c0a0fa3d"
+    },
+    "stderr": {
+      "file": "command-029-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/data",
+      "--ticks",
+      "53",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/clip-to-weighted.pcm",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/clip-to-weighted-observe.json",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/clip-to-weighted.save"
+    ],
+    "at": "2026-10-12T18:28:42.822334+00:00",
+    "returncode": 0,
+    "seconds": 0.034029125001325156,
+    "stdout": {
+      "file": "command-030-stdout.txt",
+      "sha256": "73739ae162b86afb752b195b7474bcb949140955724b77b7cc2e145efeeec318"
+    },
+    "stderr": {
+      "file": "command-030-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/data",
+      "--ticks",
+      "3",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/clip-to-weighted-continued.pcm",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/clip-to-weighted-continued-observe.json",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/clip-to-weighted-continued.save",
+      "--load-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/clip-to-weighted.save"
+    ],
+    "at": "2026-10-12T18:28:42.862840+00:00",
+    "returncode": 0,
+    "seconds": 0.030074416999923415,
+    "stdout": {
+      "file": "command-031-stdout.txt",
+      "sha256": "b2de0d210632dc94aad0f6cb3c7ca596f81ff3084ab6fbdee57aee750c1a1f87"
+    },
+    "stderr": {
+      "file": "command-031-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/data",
+      "--ticks",
+      "1",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/corrupt.pcm",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/corrupt-observe.json",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/corrupt.save",
+      "--load-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/corrupt-input.save"
+    ],
+    "at": "2026-10-12T18:28:42.895532+00:00",
+    "returncode": 1,
+    "seconds": 0.017291000000113854,
+    "stdout": {
+      "file": "command-032-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "command-032-stderr.txt",
+      "sha256": "0f8649dba037ac2235d7b2e5e7d408388e0b5d58d9120a33dba0847cb18e8212"
+    }
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/player/data",
+      "--ticks",
+      "1",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/wrong-observation.pcm",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/wrong-observation-observe.json",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/wrong-observation.save"
+    ],
+    "at": "2026-10-12T18:28:42.914075+00:00",
+    "returncode": 1,
+    "seconds": 0.017725833000440616,
+    "stdout": {
+      "file": "command-033-stdout.txt",
+      "sha256": "a6d0306ed12bb855aa4653ae3fc8ffad2be92d3976c486fe9cde656158330483"
+    },
+    "stderr": {
+      "file": "command-033-stderr.txt",
+      "sha256": "ce997e587c1fc5e235c094e21f03ccada4c19ab929e504f2b0263e3e5969e038"
+    }
+  }
+]

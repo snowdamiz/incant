@@ -1,0 +1,37 @@
+{
+  "prior_results": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main154-002/results.json",
+  "prior_results_sha256": "397e57dbfc16fecff437003bcf0abe594a0c3ba0a7398df0c1f4aa7bd069b67b",
+  "prior_freeze_sha256": "a1d9cdd5de095799da966b5f44c674078fd5533ae18279e74b12c8ce022e3fc8",
+  "unchanged_inputs": 1754,
+  "reused_successes": [
+    "tests",
+    "clippy"
+  ],
+  "prior_failure": "wasm stale cross-checkout metadata; preserved prior artifacts, scoped three-package wasm cleanup on new isolated clone",
+  "cleanup": {
+    "at": "2026-10-12T18:08:38.672409+00:00",
+    "command": [
+      "./tools/cargo",
+      "clean",
+      "--target",
+      "wasm32-unknown-unknown",
+      "--profile",
+      "ci",
+      "-p",
+      "incant_types",
+      "-p",
+      "incant_assets_runtime",
+      "-p",
+      "incant_render"
+    ],
+    "target": "/Users/andreyyurlov/.codex/incant-compound-integration-target",
+    "exit": 0,
+    "source_unchanged": true,
+    "log_sha256": "5892b87c9f0caefce8894fca1a116057d9fd2babdf8d3fa15ca534f8564ca971"
+  },
+  "checkout_owner": {
+    "checkout": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+    "purpose": "Compound integration private target; do not reuse across checkouts",
+    "at": "2026-10-12T18:08:38.673018+00:00"
+  }
+}

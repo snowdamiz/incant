@@ -1,0 +1,2712 @@
+{
+  "format": "incant-native-observation",
+  "version": 1,
+  "entities": [
+    "00000000000000000000000220",
+    "00000000000000000000000221",
+    "00000000000000000000000222",
+    "00000000000000000000000230"
+  ],
+  "checks": [
+    {
+      "name": "1-00000000000000000000000220",
+      "tick": 1,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          0,
+          0,
+          8
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "1-00000000000000000000000221",
+      "tick": 1,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          0,
+          0.25,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "1-00000000000000000000000222",
+      "tick": 1,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          -1,
+          0,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "1-00000000000000000000000230",
+      "tick": 1,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0,
+          0,
+          1
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "2-00000000000000000000000220",
+      "tick": 2,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          0,
+          0,
+          8
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "2-00000000000000000000000221",
+      "tick": 2,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          0,
+          0.5,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "2-00000000000000000000000222",
+      "tick": 2,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          -1,
+          0,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "2-00000000000000000000000230",
+      "tick": 2,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0,
+          0,
+          1
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "3-00000000000000000000000220",
+      "tick": 3,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          0,
+          0,
+          8
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "3-00000000000000000000000221",
+      "tick": 3,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          0,
+          0.75,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "3-00000000000000000000000222",
+      "tick": 3,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          -1,
+          0,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "3-00000000000000000000000230",
+      "tick": 3,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0,
+          0,
+          1
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "4-00000000000000000000000220",
+      "tick": 4,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          0,
+          0,
+          8
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "4-00000000000000000000000221",
+      "tick": 4,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          0,
+          1.0,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "4-00000000000000000000000222",
+      "tick": 4,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          -1,
+          0,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "4-00000000000000000000000230",
+      "tick": 4,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0,
+          0,
+          1
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "5-00000000000000000000000220",
+      "tick": 5,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          8,
+          0.0,
+          16
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "5-00000000000000000000000221",
+      "tick": 5,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          1,
+          0.0,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "5-00000000000000000000000222",
+      "tick": 5,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          0,
+          0.0,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "5-00000000000000000000000230",
+      "tick": 5,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0,
+          0,
+          1
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "6-00000000000000000000000220",
+      "tick": 6,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          8,
+          0.08333333333333333,
+          16
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "6-00000000000000000000000221",
+      "tick": 6,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          1,
+          0.25,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "6-00000000000000000000000222",
+      "tick": 6,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          0,
+          0.016666666666666666,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "6-00000000000000000000000230",
+      "tick": 6,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "7-00000000000000000000000220",
+      "tick": 7,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          8,
+          0.16666666666666666,
+          16
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "7-00000000000000000000000221",
+      "tick": 7,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          1,
+          0.5,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "7-00000000000000000000000222",
+      "tick": 7,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          0,
+          0.03333333333333333,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "7-00000000000000000000000230",
+      "tick": 7,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "8-00000000000000000000000220",
+      "tick": 8,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          8,
+          0.16666666666666666,
+          16
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "8-00000000000000000000000221",
+      "tick": 8,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          1,
+          0.5,
+          2
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "8-00000000000000000000000222",
+      "tick": 8,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          0,
+          0.03333333333333333,
+          1
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "8-00000000000000000000000230",
+      "tick": 8,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "9-00000000000000000000000220",
+      "tick": 9,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          8,
+          0.16666666666666666,
+          16
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "9-00000000000000000000000221",
+      "tick": 9,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          1,
+          0.5,
+          2
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "9-00000000000000000000000222",
+      "tick": 9,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          0,
+          0.03333333333333333,
+          1
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "9-00000000000000000000000230",
+      "tick": 9,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          1
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "10-00000000000000000000000220",
+      "tick": 10,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          8,
+          0.16666666666666666,
+          16
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "10-00000000000000000000000221",
+      "tick": 10,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          1,
+          0.5,
+          2
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "10-00000000000000000000000222",
+      "tick": 10,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          0,
+          0.03333333333333333,
+          1
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "10-00000000000000000000000230",
+      "tick": 10,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          1
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "11-00000000000000000000000220",
+      "tick": 11,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          8,
+          0.25,
+          16
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "11-00000000000000000000000221",
+      "tick": 11,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          1,
+          0.25,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "11-00000000000000000000000222",
+      "tick": 11,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          0,
+          0.05,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "11-00000000000000000000000230",
+      "tick": 11,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          1
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "12-00000000000000000000000220",
+      "tick": 12,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          8,
+          0.3333333333333333,
+          16
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "12-00000000000000000000000221",
+      "tick": 12,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          1,
+          0.0,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "12-00000000000000000000000222",
+      "tick": 12,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          0,
+          0.06666666666666667,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "12-00000000000000000000000230",
+      "tick": 12,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "13-00000000000000000000000220",
+      "tick": 13,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          8,
+          0.4166666666666667,
+          16
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "13-00000000000000000000000221",
+      "tick": 13,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          1,
+          0.75,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "13-00000000000000000000000222",
+      "tick": 13,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          0,
+          0.08333333333333333,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "13-00000000000000000000000230",
+      "tick": 13,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "14-00000000000000000000000220",
+      "tick": 14,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          8,
+          0.5,
+          16
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "14-00000000000000000000000221",
+      "tick": 14,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          1,
+          0.5,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "14-00000000000000000000000222",
+      "tick": 14,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          0,
+          0.1,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "14-00000000000000000000000230",
+      "tick": 14,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "15-00000000000000000000000220",
+      "tick": 15,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          8,
+          0.5833333333333334,
+          16
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "15-00000000000000000000000221",
+      "tick": 15,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          1,
+          0.25,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "15-00000000000000000000000222",
+      "tick": 15,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          0,
+          0.11666666666666667,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "15-00000000000000000000000230",
+      "tick": 15,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "16-00000000000000000000000220",
+      "tick": 16,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          8,
+          0.6666666666666666,
+          16
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "16-00000000000000000000000221",
+      "tick": 16,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          1,
+          0.0,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "16-00000000000000000000000222",
+      "tick": 16,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          0,
+          0.13333333333333333,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "16-00000000000000000000000230",
+      "tick": 16,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "17-00000000000000000000000220",
+      "tick": 17,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          8,
+          0.75,
+          16
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "17-00000000000000000000000221",
+      "tick": 17,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          1,
+          0.75,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "17-00000000000000000000000222",
+      "tick": 17,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          0,
+          0.15,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "17-00000000000000000000000230",
+      "tick": 17,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "18-00000000000000000000000220",
+      "tick": 18,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          8,
+          0.8333333333333334,
+          16
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "18-00000000000000000000000221",
+      "tick": 18,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          1,
+          0.5,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "18-00000000000000000000000222",
+      "tick": 18,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          0,
+          0.16666666666666666,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "18-00000000000000000000000230",
+      "tick": 18,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "19-00000000000000000000000220",
+      "tick": 19,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          8,
+          0.9166666666666666,
+          16
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "19-00000000000000000000000221",
+      "tick": 19,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          1,
+          0.25,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "19-00000000000000000000000222",
+      "tick": 19,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          0,
+          0.18333333333333332,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "19-00000000000000000000000230",
+      "tick": 19,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "20-00000000000000000000000220",
+      "tick": 20,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          0,
+          0,
+          8
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "20-00000000000000000000000221",
+      "tick": 20,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          1,
+          0.0,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "20-00000000000000000000000222",
+      "tick": 20,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          -1,
+          0,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "20-00000000000000000000000230",
+      "tick": 20,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "21-00000000000000000000000220",
+      "tick": 21,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          8,
+          0.0,
+          10
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "21-00000000000000000000000221",
+      "tick": 21,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          2,
+          0.0,
+          1
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "21-00000000000000000000000222",
+      "tick": 21,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          1,
+          0.0,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "21-00000000000000000000000230",
+      "tick": 21,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "22-00000000000000000000000220",
+      "tick": 22,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          8,
+          0.16666666666666666,
+          10
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "22-00000000000000000000000221",
+      "tick": 22,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          2,
+          0.0,
+          4
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "22-00000000000000000000000222",
+      "tick": 22,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          1,
+          0.016666666666666666,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "22-00000000000000000000000230",
+      "tick": 22,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "23-00000000000000000000000220",
+      "tick": 23,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          8,
+          0.3333333333333333,
+          10
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "23-00000000000000000000000221",
+      "tick": 23,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          2,
+          0.0,
+          4
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "23-00000000000000000000000222",
+      "tick": 23,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          1,
+          0.03333333333333333,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "23-00000000000000000000000230",
+      "tick": 23,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "24-00000000000000000000000220",
+      "tick": 24,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          8,
+          0.5,
+          10
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "24-00000000000000000000000221",
+      "tick": 24,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          2,
+          0.0,
+          4
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "24-00000000000000000000000222",
+      "tick": 24,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          1,
+          0.05,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "24-00000000000000000000000230",
+      "tick": 24,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "25-00000000000000000000000220",
+      "tick": 25,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          8,
+          0.6666666666666666,
+          10
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "25-00000000000000000000000221",
+      "tick": 25,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          2,
+          0.0,
+          4
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "25-00000000000000000000000222",
+      "tick": 25,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          1,
+          0.06666666666666667,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "25-00000000000000000000000230",
+      "tick": 25,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "26-00000000000000000000000220",
+      "tick": 26,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          8,
+          0.8333333333333334,
+          10
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "26-00000000000000000000000221",
+      "tick": 26,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          2,
+          0.0,
+          4
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "26-00000000000000000000000222",
+      "tick": 26,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          1,
+          0.08333333333333333,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "26-00000000000000000000000230",
+      "tick": 26,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "27-00000000000000000000000220",
+      "tick": 27,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          0,
+          0,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "27-00000000000000000000000221",
+      "tick": 27,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          2,
+          0.0,
+          4
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "27-00000000000000000000000222",
+      "tick": 27,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          -1,
+          0,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "27-00000000000000000000000230",
+      "tick": 27,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "28-00000000000000000000000220",
+      "tick": 28,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          2,
+          0.0,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "28-00000000000000000000000221",
+      "tick": 28,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          3,
+          0.0,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "28-00000000000000000000000222",
+      "tick": 28,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          2,
+          0.0,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "28-00000000000000000000000230",
+      "tick": 28,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "29-00000000000000000000000220",
+      "tick": 29,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          2,
+          0.16666666666666666,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "29-00000000000000000000000221",
+      "tick": 29,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          3,
+          0.75,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "29-00000000000000000000000222",
+      "tick": 29,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          2,
+          0.016666666666666666,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "29-00000000000000000000000230",
+      "tick": 29,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "30-00000000000000000000000220",
+      "tick": 30,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          2,
+          0.3333333333333333,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "30-00000000000000000000000221",
+      "tick": 30,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          3,
+          0.5,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "30-00000000000000000000000222",
+      "tick": 30,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          2,
+          0.03333333333333333,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "30-00000000000000000000000230",
+      "tick": 30,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "31-00000000000000000000000220",
+      "tick": 31,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          0,
+          0,
+          8
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "31-00000000000000000000000221",
+      "tick": 31,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          0,
+          1.75,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "31-00000000000000000000000222",
+      "tick": 31,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          -1,
+          0,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "31-00000000000000000000000230",
+      "tick": 31,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "32-00000000000000000000000220",
+      "tick": 32,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          0,
+          0,
+          8
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "32-00000000000000000000000221",
+      "tick": 32,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          0,
+          1.5,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "32-00000000000000000000000222",
+      "tick": 32,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          -1,
+          0,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "32-00000000000000000000000230",
+      "tick": 32,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "33-00000000000000000000000220",
+      "tick": 33,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          0,
+          0,
+          8
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "33-00000000000000000000000221",
+      "tick": 33,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          0,
+          1.25,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "33-00000000000000000000000222",
+      "tick": 33,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          -1,
+          0,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "33-00000000000000000000000230",
+      "tick": 33,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "34-00000000000000000000000220",
+      "tick": 34,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          0,
+          0,
+          8
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "34-00000000000000000000000221",
+      "tick": 34,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          0,
+          1.0,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "34-00000000000000000000000222",
+      "tick": 34,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          -1,
+          0,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "34-00000000000000000000000230",
+      "tick": 34,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "35-00000000000000000000000220",
+      "tick": 35,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          0,
+          0,
+          8
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "35-00000000000000000000000221",
+      "tick": 35,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          0,
+          0.75,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "35-00000000000000000000000222",
+      "tick": 35,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          -1,
+          0,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "35-00000000000000000000000230",
+      "tick": 35,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "36-00000000000000000000000220",
+      "tick": 36,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          0,
+          0,
+          8
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "36-00000000000000000000000221",
+      "tick": 36,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          0,
+          0.5,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "36-00000000000000000000000222",
+      "tick": 36,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          -1,
+          0,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "36-00000000000000000000000230",
+      "tick": 36,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "37-00000000000000000000000220",
+      "tick": 37,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          8,
+          0.0,
+          16
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "37-00000000000000000000000221",
+      "tick": 37,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          1,
+          0.0,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "37-00000000000000000000000222",
+      "tick": 37,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          0,
+          0.0,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "37-00000000000000000000000230",
+      "tick": 37,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "38-00000000000000000000000220",
+      "tick": 38,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          8,
+          0.08333333333333333,
+          16
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "38-00000000000000000000000221",
+      "tick": 38,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          1,
+          0.25,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "38-00000000000000000000000222",
+      "tick": 38,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          0,
+          0.016666666666666666,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "38-00000000000000000000000230",
+      "tick": 38,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "39-00000000000000000000000220",
+      "tick": 39,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          8,
+          0.16666666666666666,
+          16
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "39-00000000000000000000000221",
+      "tick": 39,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          1,
+          0.5,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "39-00000000000000000000000222",
+      "tick": 39,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          0,
+          0.03333333333333333,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "39-00000000000000000000000230",
+      "tick": 39,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "40-00000000000000000000000220",
+      "tick": 40,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          0,
+          0,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "40-00000000000000000000000221",
+      "tick": 40,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          2,
+          0.25,
+          1
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "40-00000000000000000000000222",
+      "tick": 40,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          -1,
+          0,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "40-00000000000000000000000230",
+      "tick": 40,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "41-00000000000000000000000220",
+      "tick": 41,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          0,
+          0,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "41-00000000000000000000000221",
+      "tick": 41,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          2,
+          0.5,
+          4
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "41-00000000000000000000000222",
+      "tick": 41,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          -1,
+          0,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "41-00000000000000000000000230",
+      "tick": 41,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "42-00000000000000000000000220",
+      "tick": 42,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          0,
+          0,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "42-00000000000000000000000221",
+      "tick": 42,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          2,
+          0.5,
+          4
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "42-00000000000000000000000222",
+      "tick": 42,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          -1,
+          0,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "42-00000000000000000000000230",
+      "tick": 42,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "43-00000000000000000000000220",
+      "tick": 43,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          0,
+          0,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "43-00000000000000000000000221",
+      "tick": 43,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          2,
+          0.5,
+          4
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "43-00000000000000000000000222",
+      "tick": 43,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          -1,
+          0,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "43-00000000000000000000000230",
+      "tick": 43,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "44-00000000000000000000000220",
+      "tick": 44,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          2,
+          0.0,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "44-00000000000000000000000221",
+      "tick": 44,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          3,
+          0.0,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "44-00000000000000000000000222",
+      "tick": 44,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          2,
+          0.0,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "44-00000000000000000000000230",
+      "tick": 44,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "45-00000000000000000000000220",
+      "tick": 45,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000220",
+        "property": "translation",
+        "value": [
+          2,
+          0.16666666666666666,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "45-00000000000000000000000221",
+      "tick": 45,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000221",
+        "property": "translation",
+        "value": [
+          3,
+          0.25,
+          3
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "45-00000000000000000000000222",
+      "tick": 45,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000222",
+        "property": "translation",
+        "value": [
+          2,
+          0.016666666666666666,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    },
+    {
+      "name": "45-00000000000000000000000230",
+      "tick": 45,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000230",
+        "property": "translation",
+        "value": [
+          0.25,
+          4,
+          0
+        ],
+        "tolerance": 1e-09
+      }
+    }
+  ]
+}

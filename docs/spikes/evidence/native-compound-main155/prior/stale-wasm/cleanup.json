@@ -1,0 +1,21 @@
+{
+  "at": "2026-10-12T18:08:38.672409+00:00",
+  "command": [
+    "./tools/cargo",
+    "clean",
+    "--target",
+    "wasm32-unknown-unknown",
+    "--profile",
+    "ci",
+    "-p",
+    "incant_types",
+    "-p",
+    "incant_assets_runtime",
+    "-p",
+    "incant_render"
+  ],
+  "target": "/Users/andreyyurlov/.codex/incant-compound-integration-target",
+  "exit": 0,
+  "source_unchanged": true,
+  "log_sha256": "5892b87c9f0caefce8894fca1a116057d9fd2babdf8d3fa15ca534f8564ca971"
+}
