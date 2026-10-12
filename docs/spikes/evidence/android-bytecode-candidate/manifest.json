@@ -1,0 +1,23 @@
+{
+  "status": "core source accepted; corrected harness and actual Android execution pending",
+  "source_review_sha256": "6676451e91d67e0e208ea04d90534efd4ff4b426ed1b86ad9f4ee95bc57ec749",
+  "native_tests": {
+    "passed": 22,
+    "failed": 0
+  },
+  "harness_tests": {
+    "passed": 9,
+    "failed": 0
+  },
+  "first_target_build": {
+    "exit_code": 1,
+    "reason": "NDK libclang lacked target sysroot during bindgen",
+    "source_unchanged": true
+  },
+  "retained": {
+    "path": "docs/spikes/evidence/android-bytecode-candidate/initial-evidence.json.gz",
+    "sha256": "5c61cd65a32297dba08a04218d62e35ba92918f7572ba5d46ff0c3ab2b9c4c99",
+    "entries": 21
+  },
+  "claims": "compile-time trusted numeric probe only; default Android and authored Android remain denied"
+}

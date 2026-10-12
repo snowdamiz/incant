@@ -9,6 +9,8 @@ publish.workspace = true
 default = ["compiler"]
 # Authoring/cook and the development runner only. Native players disable this.
 compiler = []
+# Experimental trusted numeric probe only; default Android admission stays closed.
+probe-android-bytecode = []
 # Typed hosted UI checkpoint sections; never enables a renderer or authoring.
 ui = ["dep:incant_ui", "incant_ui/native"]
 audio = ["dep:incant_audio_runtime", "incant_audio_runtime/scene"]

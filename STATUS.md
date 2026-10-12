@@ -16,6 +16,14 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## ARM Android bytecode candidate — production remains denied
+
+The default-off trusted numeric probe has reviewed source and 22 admission tests;
+its transport/lifecycle harness has nine CPU controls. Actual target compilation
+and emulator execution remain pending. Default and authored Android admission
+stay denied; no phone, shipping or performance claim follows from the experiment.
+[Candidate contract and retained attempts](docs/spikes/android-bytecode-candidate.md).
+
 ## Authored iOS project archives — simulator proof passed
 
 The separate trusted-source iOS exporter cooks public-authored TypeScript imports,

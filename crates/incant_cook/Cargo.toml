@@ -9,6 +9,8 @@ publish.workspace = true
 default = ["scene", "script"]
 scene = ["dep:incant_types", "dep:incant_assets_runtime", "dep:incant_anim", "dep:incant_nav", "dep:incant_doc", "dep:incant_runtime", "dep:ulid"]
 script = ["dep:incant_script", "dep:sha2"]
+# Explicit candidate fixture route; never enables authored Android project export.
+probe-android-bytecode = ["script", "incant_script/probe-android-bytecode"]
 # Fixed host-side Node invocation; never a normal runtime dependency.
 typescript = ["scene", "script", "dep:tempfile", "dep:incant_source", "dep:incant_wasm_cook"]
 

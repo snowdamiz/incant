@@ -9,6 +9,8 @@ publish.workspace = true
 default = []
 # Thin platform ABI for bounded offline CPU package execution, not a UI host.
 mobile-ffi = ["dep:thiserror"]
+# Trusted, fresh numeric bytecode compatibility experiment; not production admission.
+probe-android-bytecode = ["mobile-ffi", "incant_script/probe-android-bytecode", "incant_cook/probe-android-bytecode"]
 # Project source is compiled exclusively by the trusted build-time producer.
 project = ["incant_cook/typescript"]
 # Trusted build-linked descriptors only; does not enable a compiler or loader.
