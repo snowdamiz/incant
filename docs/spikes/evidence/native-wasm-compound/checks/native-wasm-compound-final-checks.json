@@ -1,0 +1,154 @@
+{
+  "passed": true,
+  "head": "fd3eded63053ed13c8edb56255733cfc412beb67",
+  "commands": [
+    {
+      "name": "render-cpu",
+      "argv": [
+        "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib"
+      ],
+      "exit_code": 0,
+      "seconds": 73.3583141250001,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-compound-render-cpu-final.log",
+      "sha256": "65db04b8fc7fef02d050b36f98cfa5a6031219b6accd70d4bd8f976816ba1526"
+    },
+    {
+      "name": "render-clippy",
+      "argv": [
+        "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "seconds": 39.96860349999952,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-compound-render-clippy-final.log",
+      "sha256": "9cbbe108c14f447e200ff5d8248944c26fe68ca6aa15012b3bdbf7532a164e61"
+    },
+    {
+      "name": "wasm32",
+      "argv": [
+        "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "--target",
+        "wasm32-unknown-unknown",
+        "-p",
+        "incant-module",
+        "-p",
+        "incant_wasm_abi",
+        "-p",
+        "incant_wasm_runtime",
+        "--no-default-features"
+      ],
+      "exit_code": 0,
+      "seconds": 4.495565708000868,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-compound-wasm32-final.log",
+      "sha256": "79d4d0226907b38ad5037ff8837f77690e889b4a4306e93f881525468a5d3738"
+    },
+    {
+      "name": "graph",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/tools/check_runtime_dependencies.py",
+        "incant_wasm_runtime",
+        "incant_runtime",
+        "incant_script",
+        "incant_game_runtime",
+        "incant_game_player",
+        "--features",
+        "incant_game_player/static-module"
+      ],
+      "exit_code": 0,
+      "seconds": 0.9503501250001136,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-compound-graph-final.log",
+      "sha256": "8c07445a004f1fc2c971002478187aeb15e4cb669a2fee63611d743a3b92cd78"
+    },
+    {
+      "name": "generated",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/tools/generate_wasm_sdk.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.3347297090003849,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-compound-generated-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "tools",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_wasm*.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.8732323749991338,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-compound-tools-final.log",
+      "sha256": "4e975929167c60825c5729520c1c13c71093fe056c32598291b40b47de06ae6c"
+    },
+    {
+      "name": "fmt",
+      "argv": [
+        "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 2.167198291999739,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-compound-fmt-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.06972795899855555,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-compound-conventions-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.05187262499930512,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-compound-diff-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

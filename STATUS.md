@@ -18,6 +18,19 @@ visual work, and Astra owns correctness and integration.
 
 
 
+## Complete compound Wasm — producer reviewed; integration pending
+
+Additive operations 47–52 preserve 0–46 and all older definitions. The final
+actual Wasmtime/wasm2c suite passes 436 tests plus all-target Clippy; the ordinary
+public exported player passes three fresh 56-tick runs after deleting its
+authoring/cache/build inputs and debug maps. All 64,512 scalar oracle comparisons,
+report/PCM parity and 23 exact refusal controls pass. Source, public execution and
+the final durable evidence packet are independently accepted; publisher intake
+remains pending. Root-motion may append reserved 53–55 from the immutable source
+ancestor. Whole-module checkpoints and visual/device gates remain open.
+See [scope and evidence](docs/spikes/native-wasm-compound.md).
+
+
 ## Compound animation transitions — local and ordinary export checks passed
 
 Transitions involving authored blend states now retain independent state clocks,

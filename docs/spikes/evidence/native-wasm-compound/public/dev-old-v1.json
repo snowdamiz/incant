@@ -1,0 +1,20 @@
+{
+  "command": [
+    "/private/tmp/incant-font-atlas-target/ci/incant_headless",
+    "native-play",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-compound-shipping-002/authoring/project.json",
+    "--camera",
+    "0000000000000000000000009C",
+    "--ticks",
+    "56",
+    "--input-replay",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-compound-shipping-002/old-v1-input.json",
+    "--pcm-output",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-compound-shipping-002/dev-old-v1.pcm"
+  ],
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Error: native play startup/runtime failure: development Wasm rejected or trapped: Wasm ABI: animation snapshots cannot represent IK constraints\n",
+  "output_absent": true,
+  "expected_stderr": "Error: native play startup/runtime failure: development Wasm rejected or trapped: Wasm ABI: animation snapshots cannot represent IK constraints"
+}
