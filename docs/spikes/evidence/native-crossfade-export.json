@@ -1,0 +1,579 @@
+{
+  "recorded_at_utc": "2026-10-12T03:08:21.159322+00:00",
+  "author": {
+    "role": "astra",
+    "task": "/root/agent_bridge",
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "xhigh",
+    "scope": "nonvisual CPU public-export proof"
+  },
+  "minimum_production_union": {
+    "commit": "0cf0a17b791db7c2c72e6567fe965690999f33dc",
+    "tree": "44808ee52a084a7169c8ce97f7103e5fba582513",
+    "parents": [
+      "84e7cc29c7ca1bf8da847fff431eff2199812a0b",
+      "1dce75ef76ae120bda4a819e0d9583919fdcc64c"
+    ],
+    "lock_sha256": "0a3df3be7c79b7cb536557cd7ce44e31ba20a0ac484633612f0257c08cd1bbe9",
+    "production_changes_in_proof": false
+  },
+  "source_freeze": {
+    "path": "/tmp/incant-crossfade-export-source-freeze-001.json",
+    "bytes": 501,
+    "sha256": "9c8c35253a4a6e40715b14a45c0431d5fa18fac563d327b8d109d9cff3965505",
+    "production_union": "0cf0a17b791db7c2c72e6567fe965690999f33dc",
+    "production_tree": "44808ee52a084a7169c8ce97f7103e5fba582513",
+    "probe_sources": {
+      "tools/probes/native-crossfade-export.py": "ad3661e3588d7ffa1243e7a196613baf5dcb7036b602249916382d728a8c7e39",
+      "tools/probes/native-crossfade-export/behavior.ts": "de1437baf1c5d502581ebedc2b476264ed38044932d0090c80387332aa98cb5f"
+    },
+    "unchanged_rig_function_sha256": "b335eba41c840a952cccbd2fc9d6c9bb7a42381bb2ea6e3705b00fcfbb204931"
+  },
+  "unchanged_numerical_rig": {
+    "origin": "43400d475be5e8335281df27c6598f7005065263:tools/probes/native-animation.py fixture(root)",
+    "function_sha256": "b335eba41c840a952cccbd2fc9d6c9bb7a42381bb2ea6e3705b00fcfbb204931",
+    "gltf_sha256": "7d86c22ec2b7efb9a6302eb5e39384fb02384cecc1c72989cdc442b3a00ce1b7",
+    "bin_sha256": "2f712c8c77c452501530084781af183c7e176f46281ca7f1e8273a2b01c8c236",
+    "source_fingerprint": "dd3cba5627cb4d1e028126f4f00f84b4f95712f835fc78fb7b866132278b2cf9",
+    "cooked_model_sha256": "e02aab0c14a6c2c6ef38561db241e97bb15d43d727318f76ecfcae4aa9cdbe4f"
+  },
+  "matching_authoring_build": {
+    "path": "/tmp/incant-crossfade-export-headless.json",
+    "bytes": 958,
+    "sha256": "1c4cfcc7c98cad47c2be4633ae1d12a6316844e2e0e3a61d67752e2fba2cf69e",
+    "manifest": {
+      "source_commit": "0cf0a17b791db7c2c72e6567fe965690999f33dc",
+      "source_tree": "44808ee52a084a7169c8ce97f7103e5fba582513",
+      "minimum_parents": [
+        "84e7cc29c7ca1bf8da847fff431eff2199812a0b",
+        "1dce75ef76ae120bda4a819e0d9583919fdcc64c"
+      ],
+      "binary": "/tmp/incant-agent-font-target/ci/incant_headless",
+      "sha256": "89fd962388d7c3b791e0f2326d679072e33c686c73433a965bc772feced0ed38",
+      "bytes": 54480752,
+      "cargo_lock_sha256": "0a3df3be7c79b7cb536557cd7ce44e31ba20a0ac484633612f0257c08cd1bbe9",
+      "command": "CARGO_TARGET_DIR=/tmp/incant-agent-font-target cargo build --profile ci -j2 -p incant_headless --locked",
+      "build_log": {
+        "path": "/tmp/incant-crossfade-export-headless-build.log",
+        "sha256": "9847978ba356ab59fc88ecd831defd198f37caaadae6a37f1c29a19c5ea2f01d"
+      },
+      "result": "Build finished successfully in1m27s; no source changes during build except new probe files not included by build. Native app/GPU/provider not invoked."
+    }
+  },
+  "commands": [
+    "PATH=/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:$PATH CARGO_TARGET_DIR=/tmp/incant-agent-font-target cargo build --profile ci -j2 -p incant_headless --locked",
+    "PATH=/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:$PATH CARGO_TARGET_DIR=/tmp/incant-agent-font-target python3 tools/probes/native-crossfade-export.py /tmp/incant-crossfade-export-001 --binary /tmp/incant-agent-font-target/ci/incant_headless",
+    "python3 tools/probes/native-crossfade-export.py --help",
+    "Python compile(source, filename, exec)",
+    "git diff --check",
+    "python3 tools/generate_conventions.py --check"
+  ],
+  "public_command_sequence": [
+    "init project.json --entities 0",
+    "import project.json rig.gltf",
+    "project.read; atomic command.execute expected_revision: write_script, upsert_script, create two MeshRenderer/Animation/Script entities and explicit Camera",
+    "history.undo; assert imported project and removed behavior source; history.redo",
+    "play.run seconds=100/60, camera, independent numerical observations; assert authoring unchanged",
+    "project.save; close; reopen editor-default project.journal.jsonl; project.read/script.read equality",
+    "existing export_native.export project with camera; fresh shipping project,render-input player and cooked data packaging",
+    "delete only newly-created private authoring directory; ordinary packaged player options for repeats/continuations/refusals"
+  ],
+  "shipping_export": {
+    "format": "incant-native-export",
+    "version": 1,
+    "target": "aarch64-apple-darwin",
+    "mode": "headless",
+    "project_sha256": "a22cd791410b69926b2e699910105b66a282b6a7aab926d6bd4085cecf8a5e5a",
+    "scene_id": "01M4Q0JPTP1E7H3KW5EKWMFDNG",
+    "camera": "00000000000000000000000000000003",
+    "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+    "codegen": {
+      "incant_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort",
+        "debuginfo": "2",
+        "split-debuginfo": "packed"
+      },
+      "incant_script": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort",
+        "debuginfo": "2",
+        "split-debuginfo": "packed"
+      },
+      "incant_game_player": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort",
+        "debuginfo": "2",
+        "split-debuginfo": "packed",
+        "lto": "fat"
+      }
+    },
+    "symbols": {
+      "format": "Mach-O/dSYM",
+      "uuids": {
+        "arm64": "b5e898b1-edd8-361e-a12d-be153e445d9f"
+      }
+    },
+    "symbol_audit": {
+      "source": "llvm-nm defined symbols",
+      "sha256": "c63e7d96608cff0b6355a8f0424ec621311c2eaf41cecda0dee931f7cd7a2d49"
+    },
+    "player_sha256": "6ba06914df72f50453ecd8e5ea4a8df0d9100a7ac7cb5b032b8a0782efe7077c",
+    "data": {
+      "bytes": 2642,
+      "files": {
+        "world.scene": "f5a9c84a2e5e4ee8b155239dcb8baffbd9f3bd86e028f027d9bb0181800a2ef4",
+        "input-actions.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+        "models/dd3cba5627cb4d1e028126f4f00f84b4f95712f835fc78fb7b866132278b2cf9.incmodel": "e02aab0c14a6c2c6ef38561db241e97bb15d43d727318f76ecfcae4aa9cdbe4f",
+        "clips.bin": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+        "package.json": "450738fa463461c7fd1ce546abab4a38b9daf3e8269ddece129448dc6990b336"
+      }
+    },
+    "startup_source_parsing": false,
+    "signed": false,
+    "limits": [
+      "host==target desktop only",
+      "existing cooked caches required",
+      "window export GPU execution requires a desktop",
+      "no phone or performance gate"
+    ],
+    "build_storage_removed_before_startup": true,
+    "startup_backend": "CPU render input; no window or GPU device"
+  },
+  "actual_result": {
+    "passed": true,
+    "implementation": "QuickJS compiled project bytecode",
+    "fresh_full_runs": 3,
+    "ticks_each": 100,
+    "independent_snapshot_cases": 62,
+    "runs": [
+      {
+        "name": "baseline",
+        "ticks": 100,
+        "start": 0,
+        "report_sha256": "fe67723af29a38e13b1f5b938b5918e795574889e967fd37ef8fcb34022ec407",
+        "pcm_sha256": "3d00ed86b663cd1b8ac82b105257cd109412f92dca442048532439f920a7f645",
+        "save_sha256": "7de8aa3c50ea9d6d26e2ecde6b5cccac57d495f7a5dc9b721b64c25997ee39c8",
+        "world_save_version": 4
+      },
+      {
+        "name": "repeat-0",
+        "ticks": 100,
+        "start": 0,
+        "report_sha256": "fe67723af29a38e13b1f5b938b5918e795574889e967fd37ef8fcb34022ec407",
+        "pcm_sha256": "3d00ed86b663cd1b8ac82b105257cd109412f92dca442048532439f920a7f645",
+        "save_sha256": "7de8aa3c50ea9d6d26e2ecde6b5cccac57d495f7a5dc9b721b64c25997ee39c8",
+        "world_save_version": 4
+      },
+      {
+        "name": "repeat-1",
+        "ticks": 100,
+        "start": 0,
+        "report_sha256": "fe67723af29a38e13b1f5b938b5918e795574889e967fd37ef8fcb34022ec407",
+        "pcm_sha256": "3d00ed86b663cd1b8ac82b105257cd109412f92dca442048532439f920a7f645",
+        "save_sha256": "7de8aa3c50ea9d6d26e2ecde6b5cccac57d495f7a5dc9b721b64c25997ee39c8",
+        "world_save_version": 4
+      },
+      {
+        "name": "active-first",
+        "ticks": 10,
+        "start": 0,
+        "report_sha256": "9eb699d8c26ffa08b523fc2b89e8b49580cfab66641a91745619e786f2258044",
+        "pcm_sha256": "4f7988030a00d082fe445e00a2ac5dab502300ff1b80e8592dd569867b60ef74",
+        "save_sha256": "487fc806fa7677408c898f7e02bb906deed821c300fbd54090448a7014c9174b",
+        "world_save_version": 5
+      },
+      {
+        "name": "active-continued",
+        "ticks": 90,
+        "start": 10,
+        "report_sha256": "4dae19f0cb73a5bf8a26fd9a46bed222dc6417a24ea833f8bd6ddb6a142a09e9",
+        "pcm_sha256": "30fafbdc0facf210a26498db982f7ff8ad1e0b9a805816731c72e356a768c162",
+        "save_sha256": "7de8aa3c50ea9d6d26e2ecde6b5cccac57d495f7a5dc9b721b64c25997ee39c8",
+        "world_save_version": 4
+      },
+      {
+        "name": "paused-first",
+        "ticks": 13,
+        "start": 0,
+        "report_sha256": "dee1a64d87e7ccd1e35be2aab3a5293402b0aa03335e6655af4fe9ed7fe1cafa",
+        "pcm_sha256": "9b54dfbc92b4baf804aa3b0360cbc32e4d9ebe32c974c5131c52e3f375d3e25e",
+        "save_sha256": "2ca249b5efd9d8834ac515758cafe653cb3cd698579efa22cdf34a0e0db991b1",
+        "world_save_version": 5
+      },
+      {
+        "name": "paused-continued",
+        "ticks": 87,
+        "start": 13,
+        "report_sha256": "a111d3cd2a18c61ad5c67d789adc4091dfd10a6632b1473cca69e7b790349271",
+        "pcm_sha256": "d85006683da2f0792472f8282eb4664d662cc391d78f64c08b8fe8765f70e01e",
+        "save_sha256": "7de8aa3c50ea9d6d26e2ecde6b5cccac57d495f7a5dc9b721b64c25997ee39c8",
+        "world_save_version": 4
+      }
+    ],
+    "checkpoint_continuations": [
+      "active v5",
+      "paused v5"
+    ],
+    "authoring_deleted": true,
+    "private_export_build_deleted": true,
+    "package_files": {
+      "data/clips.bin": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+      "data/empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+      "data/input-actions.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "data/models/dd3cba5627cb4d1e028126f4f00f84b4f95712f835fc78fb7b866132278b2cf9.incmodel": "e02aab0c14a6c2c6ef38561db241e97bb15d43d727318f76ecfcae4aa9cdbe4f",
+      "data/package.json": "450738fa463461c7fd1ce546abab4a38b9daf3e8269ddece129448dc6990b336",
+      "data/world.scene": "f5a9c84a2e5e4ee8b155239dcb8baffbd9f3bd86e028f027d9bb0181800a2ef4",
+      "incant_game_player": "6ba06914df72f50453ecd8e5ea4a8df0d9100a7ac7cb5b032b8a0782efe7077c"
+    },
+    "probe_source_sha256": "ad3661e3588d7ffa1243e7a196613baf5dcb7036b602249916382d728a8c7e39",
+    "behavior_source_sha256": "de1437baf1c5d502581ebedc2b476264ed38044932d0090c80387332aa98cb5f",
+    "refusal_controls": [
+      "corrupt checkpoint: no PCM/save",
+      "wrong observation: no PCM/save"
+    ],
+    "limitations": [
+      "Local CPU render input and SDK observations, not deformed-vertex readback/GPU/window/appearance/device/performance acceptance",
+      "Public Wasm project selection/export remains unsupported; this is not static wasm2c shipping evidence",
+      "Existing combined SDK tests cover Wasmtime/static wasm2c separately; full static module-state checkpoints remain Unsupported",
+      "Ordinary checkpoints retain explicit script state; ephemeral VM globals/closures are not persisted",
+      "No phase gate or full blend graph/state machine/IK/root-motion claim"
+    ],
+    "public_authoring": {
+      "command_bus_only": true,
+      "undo_redo_save_default_journal_reopen": true,
+      "ids": {
+        "script": "00000000000000000000000001",
+        "entities": [
+          "00000000000000000000000002",
+          "00000000000000000000000004"
+        ],
+        "camera": "00000000000000000000000003",
+        "scene": "01M4Q0JPTP1E7H3KW5EKWMFDNG",
+        "asset": "01M4Q0JPZX7QETRS56MQEABEA0"
+      },
+      "imported_asset": {
+        "id": "01M4Q0JPZX7QETRS56MQEABEA0",
+        "kind": "model",
+        "name": "rig",
+        "path": "rig.gltf",
+        "sha256": "dd3cba5627cb4d1e028126f4f00f84b4f95712f835fc78fb7b866132278b2cf9"
+      },
+      "project_sha256": "a22cd791410b69926b2e699910105b66a282b6a7aab926d6bd4085cecf8a5e5a",
+      "binary_sha256": "89fd962388d7c3b791e0f2326d679072e33c686c73433a965bc772feced0ed38",
+      "files": {
+        ".incant/cache/models/dd3cba5627cb4d1e028126f4f00f84b4f95712f835fc78fb7b866132278b2cf9.incmodel": "e02aab0c14a6c2c6ef38561db241e97bb15d43d727318f76ecfcae4aa9cdbe4f",
+        ".incant-source-transactions/01M4Q0JQ348XF4WWEDAZ4HVSJF.old-receipt": "78ec8f119cc79b4d82c30ebec576cc780c39dbad695d0995c8fe8272736fc60d",
+        ".incant-source-transactions/01M4Q0JQ348XF4WWEDAZ4HVSJF.previous": "de1437baf1c5d502581ebedc2b476264ed38044932d0090c80387332aa98cb5f",
+        ".incant-source-transactions/01M4Q0JQ52XYP0GCBYE3YZN0EB.old-receipt": "6cce60151869922a28e8dfcd538c3200df3cd34acba5617e472a8c6105ce8961",
+        ".incant-source-transactions/lock": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        ".incant-source-transactions/receipt": "08c0c66a07923d92b5e79e7d7de147ff8244fb8756cce7f8459925cc4b90e954",
+        "crossfade.ts": "de1437baf1c5d502581ebedc2b476264ed38044932d0090c80387332aa98cb5f",
+        "project.journal.jsonl": "d621a1d63867ec23aa2a28e7391e2e3b639290ea7fdebb73f23beed856166451",
+        "project.json": "a22cd791410b69926b2e699910105b66a282b6a7aab926d6bd4085cecf8a5e5a",
+        "rig.bin": "2f712c8c77c452501530084781af183c7e176f46281ca7f1e8273a2b01c8c236",
+        "rig.gltf": "7d86c22ec2b7efb9a6302eb5e39384fb02384cecc1c72989cdc442b3a00ce1b7"
+      }
+    },
+    "logs": {
+      "entries": 200,
+      "message_bytes": 15627,
+      "dropped": 0
+    }
+  },
+  "artifact_verification": {
+    "path": "/tmp/incant-crossfade-export-artifact-verification.json",
+    "bytes": 995,
+    "sha256": "375e39650df35b82961d621f8113bb39a6620cd2dfe4a050e47246996dad5015",
+    "result": {
+      "recorded_at_utc": "2026-10-12T03:07:21.252215+00:00",
+      "passed": true,
+      "source_freeze_sha256": "9c8c35253a4a6e40715b14a45c0431d5fa18fac563d327b8d109d9cff3965505",
+      "result_sha256": "1994933080407a507287ffc2992b89c88fe4471c5a148efbda454df1e3f16220",
+      "package_hashes_checked": 7,
+      "run_hashes_checked": 21,
+      "probe_and_behavior_unchanged": true,
+      "authoring_absent": true,
+      "private_build_roots_absent": [
+        "/private/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-project-build-i_4zc1fg"
+      ],
+      "exact_negative_errors": {
+        "corrupt": "Error: Checkpoint(Integrity)\n",
+        "wrong_observation": "Error: \"checkpoint withheld: native observation assertions failed\"\n"
+      },
+      "no_negative_pcm_or_save": true,
+      "full_pcm_bytes": 640000,
+      "pcm_is_silent": true,
+      "accepted_entries": 200,
+      "accepted_message_bytes": 15627,
+      "dropped": 0,
+      "owned_compile_or_player_processes": [],
+      "export_exec_handle": {
+        "id": 25202,
+        "reaped": true,
+        "exit_code": 0
+      }
+    }
+  },
+  "logs": [
+    {
+      "path": "/tmp/incant-crossfade-export-001.log",
+      "bytes": 215,
+      "sha256": "ddbda768436621c2d4459b804488ff0396950afe6016fb2b8e1734ca5b37abae"
+    },
+    {
+      "path": "/tmp/incant-crossfade-export-headless-build.log",
+      "bytes": 3663,
+      "sha256": "9847978ba356ab59fc88ecd831defd198f37caaadae6a37f1c29a19c5ea2f01d"
+    },
+    {
+      "path": "/tmp/incant-crossfade-author-check-001.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/tmp/incant-crossfade-export-help.log",
+      "bytes": 397,
+      "sha256": "94a12d5da45f5188eff97df710937b927e91dba0c912dc83871e0efdaee22a2f"
+    }
+  ],
+  "artifact_receipts": [
+    {
+      "path": "/tmp/incant-crossfade-export-001/active-continued-observe.json",
+      "bytes": 16382,
+      "sha256": "bfe1ee910b31e873c675a288a7aceb48146a5d9901bed9a61aa4dd01b73e72ad"
+    },
+    {
+      "path": "/tmp/incant-crossfade-export-001/active-continued-receipt.json",
+      "bytes": 39758,
+      "sha256": "58a6b42ca9826f7f60b53131ccac3b6469825c6a8ca2c86c19b7cc441ab777e3"
+    },
+    {
+      "path": "/tmp/incant-crossfade-export-001/active-first-observe.json",
+      "bytes": 4169,
+      "sha256": "c7f28b5d6aa1360e71c80662aea9acd4faa0bc292f5d5f7ed5a6e519cd19c172"
+    },
+    {
+      "path": "/tmp/incant-crossfade-export-001/active-first-receipt.json",
+      "bytes": 8345,
+      "sha256": "84bd10209134957dbb0993f45bd3675425f78e54b2ba87810f307d9af9321a43"
+    },
+    {
+      "path": "/tmp/incant-crossfade-export-001/authoring.json",
+      "bytes": 34901,
+      "sha256": "ea82f9f851b849560d980f246a79fb0d3887c6457d3a165fe023c93891bf49ce"
+    },
+    {
+      "path": "/tmp/incant-crossfade-export-001/baseline-observe.json",
+      "bytes": 20385,
+      "sha256": "4847f88c19eb0439c964242fa541956a724ed798284c172cb890581995edda88"
+    },
+    {
+      "path": "/tmp/incant-crossfade-export-001/baseline-receipt.json",
+      "bytes": 45965,
+      "sha256": "21aed1ae6daf293fbe743c0cdd7f00116cbabb4f1e1a9c7d39a07d5eec11409e"
+    },
+    {
+      "path": "/tmp/incant-crossfade-export-001/corrupt-observe.json",
+      "bytes": 164,
+      "sha256": "30b5daec6df998201a829c3ff272dd117f2b7078b958e0afd3eedc4c1c10ce14"
+    },
+    {
+      "path": "/tmp/incant-crossfade-export-001/corrupt-receipt.json",
+      "bytes": 632,
+      "sha256": "3f24a9b467da74173a1866a304bbc502c6e3e005f439a406a5b01a4c54f25f57"
+    },
+    {
+      "path": "/tmp/incant-crossfade-export-001/native-play.json",
+      "bytes": 67196,
+      "sha256": "04385e9d397b97554ad8ec1d2febcbbe1fbed7d07e59c3a1b5a888b5fde61a3b"
+    },
+    {
+      "path": "/tmp/incant-crossfade-export-001/package/build.log",
+      "bytes": 1322744,
+      "sha256": "3b147beb11f9a87256b0fcb63dd278986cdce8ba734cdc930e2b70b570c4a10b"
+    },
+    {
+      "path": "/tmp/incant-crossfade-export-001/package/export.json",
+      "bytes": 8856,
+      "sha256": "65418db9ab98bcb89cfc634ce529ae70cd57b73f81a2ff782a2bf18ec0cd72a7"
+    },
+    {
+      "path": "/tmp/incant-crossfade-export-001/package/project-build.json",
+      "bytes": 1684,
+      "sha256": "3e432b0398b7f7580d13204041090d60b047bd379fd64ecc350e80bbc69f4a44"
+    },
+    {
+      "path": "/tmp/incant-crossfade-export-001/paused-continued-observe.json",
+      "bytes": 15034,
+      "sha256": "ba3a7b3a99898263d7686e69d64f1784da9c2d4df41c72a4194964cb2fc86ec5"
+    },
+    {
+      "path": "/tmp/incant-crossfade-export-001/paused-continued-receipt.json",
+      "bytes": 37727,
+      "sha256": "99ce03c4bb4e069fd42d9b1d5134f63ab08fde14961f3bea56d84192b28fd140"
+    },
+    {
+      "path": "/tmp/incant-crossfade-export-001/paused-first-observe.json",
+      "bytes": 5517,
+      "sha256": "ebc793c48d64b5192017bdc0b76440abfa9499f1b47a8d3385fa8e6aad393e08"
+    },
+    {
+      "path": "/tmp/incant-crossfade-export-001/paused-first-receipt.json",
+      "bytes": 10348,
+      "sha256": "d01c9971c7d78f7475997e3bd30569f8813e41772d8c8a78f92b3598629aef54"
+    },
+    {
+      "path": "/tmp/incant-crossfade-export-001/public-commands.json",
+      "bytes": 33686,
+      "sha256": "c586d35d51e60b0c55730ac0045805ac31c0d1786724df6bc54b40a3d5ed3d70"
+    },
+    {
+      "path": "/tmp/incant-crossfade-export-001/repeat-0-observe.json",
+      "bytes": 20385,
+      "sha256": "4847f88c19eb0439c964242fa541956a724ed798284c172cb890581995edda88"
+    },
+    {
+      "path": "/tmp/incant-crossfade-export-001/repeat-0-receipt.json",
+      "bytes": 45965,
+      "sha256": "8bab2b88a5a325675055b8d4c17a43c92deaf687159f0ce103c82f867450852e"
+    },
+    {
+      "path": "/tmp/incant-crossfade-export-001/repeat-1-observe.json",
+      "bytes": 20385,
+      "sha256": "4847f88c19eb0439c964242fa541956a724ed798284c172cb890581995edda88"
+    },
+    {
+      "path": "/tmp/incant-crossfade-export-001/repeat-1-receipt.json",
+      "bytes": 45965,
+      "sha256": "c644dce0a89b4ec6b35f1863d462034a2680c7e797346acf5ee57276d4b3ef4b"
+    },
+    {
+      "path": "/tmp/incant-crossfade-export-001/result.json",
+      "bytes": 51236,
+      "sha256": "1994933080407a507287ffc2992b89c88fe4471c5a148efbda454df1e3f16220"
+    },
+    {
+      "path": "/tmp/incant-crossfade-export-001/wrong-observation-observe.json",
+      "bytes": 795,
+      "sha256": "f3a49c4aebd95764a1972119d5387ce3f78aa2d52c20ba12d1763515c2ad68b2"
+    },
+    {
+      "path": "/tmp/incant-crossfade-export-001/wrong-observation-receipt.json",
+      "bytes": 2760,
+      "sha256": "78c0aa9716e2fe891bb5decdb5a4362f75723553d0c6fe41a7fa32577f3270c4"
+    }
+  ],
+  "checks": {
+    "fresh_shipping_build": "passed, shipping profile in 5m25s; actual compiler/codegen/symbol/authoring-free dependency checks enforced by existing exporter",
+    "strict_TypeScript": "passed by actual project cook; module manifest pins TypeScript5.9.3/SWC1.16.13/source and compiled bundle",
+    "public_native_play": "100 ticks/2 entities/62 complete independently expected rows; 200 committed logs; zero dropped",
+    "post_deletion_player_processes": {
+      "complete": 3,
+      "continuation_parts": 4,
+      "refusals": 2
+    },
+    "active_paused_continuation": "Logs/selected transforms/PCM bytes/final CPU render-input/final save bytes match uninterrupted execution",
+    "negative_controls": "Checkpoint(Integrity) and observation assertions failed; neither creates PCM/save; no staging leak",
+    "source_and_output_hashes": "2 unchanged source hashes +7 package files +21 run hashes verified after actual run",
+    "owned_processes": "Export handle25202 reaped exit0; no remaining matching compiler/headless/player process",
+    "Python_compile_and_help": "passed"
+  },
+  "limitations": [
+    "Local CPU render input and SDK observations, not deformed-vertex readback/GPU/window/appearance/device/performance acceptance",
+    "Public Wasm project selection/export remains unsupported; this is not static wasm2c shipping evidence",
+    "Existing combined SDK tests cover Wasmtime/static wasm2c separately; full static module-state checkpoints remain Unsupported",
+    "Ordinary checkpoints retain explicit script state; ephemeral VM globals/closures are not persisted",
+    "No phase gate or full blend graph/state machine/IK/root-motion claim",
+    "PCM is silent in this no-audio fixture; equality validates bytes and sample clock, not added audible-content behavior",
+    "Final render-input report has two models, no GPU; no deformed-vertex or rendered-pixel assertion",
+    "Existing exporter one-tick startup after build deletion occurs before authoring deletion and is not counted among the three full fresh source-deleted runs",
+    "No runtime/player/export API, CLI bypass or new dependency added",
+    "Original001 retained external developer source map with original TS; strengthened removal change has only focused helper validation until full publisher recook/export"
+  ],
+  "original001_external_debug_artifact": {
+    "path": "/tmp/incant-crossfade-export-001/package/symbols/behavior.js.map",
+    "bytes": 6076,
+    "sha256": "c0620526be781bb222c83d347f36d15f6a7b87ba49ddcc4dd0f5032fa766e96c",
+    "location": "Outside player/; exporter intentionally retains developer crash symbols",
+    "contains_original_TS_sourcesContent": true,
+    "source_content_bytes": 2781,
+    "unchanged": true,
+    "claim": "Original001 authoring/cache/build inputs absent; not absence of all external debug-source copies"
+  },
+  "strengthened_probe": {
+    "source_sha256": "fc43503031a73c8bddde406054797240fee153d8b4e1d02c61843ac5c988eefb",
+    "change": "After normal export, hash and remove only *.js.map in this newly-created private package/symbols before launching players; preserve all other artifacts and original001",
+    "focused_test": {
+      "path": "/tmp/incant-crossfade-source-map-removal-test.json",
+      "bytes": 541,
+      "sha256": "5348c8f1653ae9d9fd007e15d52f0a6b7bbd7e6ea843694326683c8c26024f99",
+      "result": {
+        "recorded_at_utc": "2026-10-12T03:13:55.418494+00:00",
+        "passed": true,
+        "source_sha256": "fc43503031a73c8bddde406054797240fee153d8b4e1d02c61843ac5c988eefb",
+        "cases": [
+          "Actual helper removes source-bearing *.js.map and records exact hashes",
+          "Other developer symbols and player data unchanged",
+          "Already removed maps produce an empty result",
+          "Symlink leaf refuses without touching target",
+          "Original001 result/source-map unchanged",
+          "Python source compiles"
+        ],
+        "full_strengthened_export_rerun": false
+      }
+    },
+    "full_fresh_recook_export_rerun": false,
+    "next_validation": "Publisher runs complete proof on current integrated lock; original001 executed pre-strengthening source remains explicitly separate"
+  },
+  "independent_review_original001": {
+    "path": "/tmp/incant-crossfade-export-independent-review.json",
+    "bytes": 1855,
+    "sha256": "c8a2ea8243917ec4f649f17f1d3fa90784db65905e840d79d9971298d81b20c9",
+    "receipt": {
+      "reviewer": "astra /root",
+      "recorded_at": "2026-10-12T03:11:27.740158+00:00",
+      "accepted": true,
+      "scope": "Public QuickJS crossfade proof only; current integration lock still needs a fresh trusted recook",
+      "packet_sha256": "89b0eef7d1c2f93c99847f38a06d7bc7ce2f9f1d214e79d16b98a22dc4816308",
+      "files": {
+        "STATUS.md": "2ca25e0e9f120a807c3d4aea4da3fa96fc7620a942adf43ba512445eda007be1",
+        "docs/spikes/evidence/native-crossfade-export.json": "3d8059fbee780d9f5aa05a425550e042c1186a0f18f37e9b770467b69257ecef",
+        "docs/spikes/native-crossfade-export.md": "b266471df7907796a2715d4ef139dbe223a97b8872015d5809ea0bb8c9ccfb18",
+        "tools/probes/native-crossfade-export.py": "ad3661e3588d7ffa1243e7a196613baf5dcb7036b602249916382d728a8c7e39",
+        "tools/probes/native-crossfade-export/behavior.ts": "de1437baf1c5d502581ebedc2b476264ed38044932d0090c80387332aa98cb5f"
+      },
+      "result": {
+        "path": "/tmp/incant-crossfade-export-001/result.json",
+        "sha256": "1994933080407a507287ffc2992b89c88fe4471c5a148efbda454df1e3f16220"
+      },
+      "source_review": [
+        "Complete probe, strict behavior, independent expectation rows and normal public authoring/export routing",
+        "No runtime/CLI bypass or dependencies",
+        "Scope limitations correctly retain Wasm export/static module checkpoints/GPU/device gates"
+      ],
+      "verification": [
+        "Frozen files and artifact receipts match",
+        "Actual packaged binary/data match",
+        "All 7 report/PCM hashes match and copied SDK logs satisfy complete expected rows",
+        "Active/paused v5 continuation matches final saves and split PCM",
+        "Exact negative reasons refuse outputs; source fixture absent"
+      ],
+      "findings": [],
+      "negative_errors": {
+        "corrupt": "Error: Checkpoint(Integrity)\n",
+        "wrong-observation": "Error: \"checkpoint withheld: native observation assertions failed\"\n"
+      }
+    }
+  },
+  "independent_review_strengthened_probe": {
+    "path": "native-crossfade-export-source-map-review.json",
+    "sha256": "77e08a093867a8b81bfcaae8e64f0dff7d5e278aea592b957f22032bf4f1aaa0",
+    "accepted": true,
+    "scope": "Bounded source-map correction only; full current-lock fresh recook/export remains publisher integration"
+  }
+}

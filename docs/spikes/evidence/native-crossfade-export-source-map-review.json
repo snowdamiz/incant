@@ -1,0 +1,25 @@
+{
+  "reviewer": "astra /root",
+  "recorded_at": "2026-10-12T03:19:36.129814+00:00",
+  "accepted": true,
+  "scope": "Narrow crossfade proof source-map removal and historical claim qualification",
+  "packet_sha256": "dc8e44b7000cc2834630ebeb9f4ed0a97a154ca83640366e2ce261cc5ba28ff5",
+  "frozen_files": {
+    "STATUS.md": "26d24f63876d8a1020d4639b3ef7cc9599f0594701dcb5c3209bf5b51a0abf60",
+    "docs/spikes/evidence/native-crossfade-export.json": "57a46e0c593e4a081a6718cc218d487a58d4341d9aa6ade8afe1f5429bf41cc0",
+    "docs/spikes/native-crossfade-export.md": "1c7f7ffc1e9b8aad836337328920123b413fe89530561951ad070b9c5db44336",
+    "tools/probes/native-crossfade-export.py": "fc43503031a73c8bddde406054797240fee153d8b4e1d02c61843ac5c988eefb",
+    "tools/probes/native-crossfade-export/behavior.ts": "de1437baf1c5d502581ebedc2b476264ed38044932d0090c80387332aa98cb5f"
+  },
+  "findings": [],
+  "verification": [
+    "Entire source follow-up read",
+    "All frozen files and patch receipts verified",
+    "Focused actual-helper removal/retention/idempotence/symlink checks passed",
+    "Original001 preserved with explicit retained debug map limitation"
+  ],
+  "limits": [
+    "Full strengthened proof still required on current integration lock",
+    "No production exporter change or GPU/device acceptance"
+  ]
+}
