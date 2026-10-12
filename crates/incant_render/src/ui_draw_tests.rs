@@ -41,7 +41,10 @@ const ENCODE: f64 = 0.67;
 // rather than inferring a backend from installed driver packages.
 fn renderer_with_adapter_receipt() -> Renderer {
     let renderer = Renderer::headless().unwrap();
-    eprintln!("UI draw selected adapter: {:?}", renderer.adapter.get_info());
+    eprintln!(
+        "UI draw selected adapter: {:?}",
+        renderer.adapter.get_info()
+    );
     renderer
 }
 
