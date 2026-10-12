@@ -1,0 +1,14 @@
+{
+  "reviewer": "astra /root",
+  "accepted": true,
+  "recorded_at": "2026-10-12T03:15:46.387065+00:00",
+  "patch_sha256": "5db35c8784f95c2f64b39e3768e8449295c80d4909d9edf33f550cd92b6f5a8c",
+  "replay_receipt_sha256": "222e42c223114723f7e8ac051242b6b09c7ac73c084ac24272487e28a80a5ffb",
+  "scope": "Narrow probe and historical documentation qualification; same frozen executable replay after removal of only proof-owned debug map",
+  "verification": "All remaining package hashes unchanged and verified; maps absent; three successful matching reports/PCM and two font refusals recorded; old evidence preserved",
+  "findings": [],
+  "limits": [
+    "No new production source or compilation",
+    "No GPU/appearance/device gate"
+  ]
+}

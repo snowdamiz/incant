@@ -7,38 +7,77 @@ const _: () = {
     assert!(incant_runtime::MAX_MESH_ENTITIES == abi::ANIMATION_MAX_ROWS);
     assert!(incant_runtime::MAX_ANIMATION_CLIPS == abi::ANIMATION_MAX_CLIPS);
     assert!(incant_types::MAX_ANIMATION_SPEED == abi::ANIMATION_MAX_SPEED as f64);
+    assert!(
+        incant_runtime::MAX_ANIMATION_TRANSITION_SECONDS
+            == abi::ANIMATION_MAX_TRANSITION_SECONDS as f64
+    );
 };
 
 pub(crate) fn encode(
     world: &mut NativeWorld,
     rows: &mut Vec<AnimationSnapshot>,
     bytes: &mut Vec<u8>,
+    v2: &mut Vec<u8>,
 ) -> Result<(), Error> {
     world.snapshot_animations(rows)?;
     bytes.clear();
-    bytes.extend_from_slice(
+    v2.clear();
+    v2.extend_from_slice(
         &abi::AnimationHeader {
-            magic: *abi::ANIMATION_MAGIC,
+            magic: *abi::ANIMATION_V2_MAGIC,
             count: rows.len() as u32,
-            stride: abi::AnimationRow::SIZE as u32,
+            stride: abi::AnimationRowV2::SIZE as u32,
         }
         .encode(),
     );
-    for row in rows {
-        let state = row.state;
+    // A legacy row cannot describe an active blend. Do not publish a projection
+    // which misrepresents it as a single pose; length/read both refuse below.
+    let legacy = rows.iter().all(|row| row.state.transition.is_none());
+    if legacy {
         bytes.extend_from_slice(
-            &abi::AnimationRow {
-                id: row.id.0,
-                clip: state.sample.clip.map_or(u32::MAX, u32::from),
-                flags: u32::from(state.playing)
-                    | (u32::from(state.looping) << 1)
-                    | (u32::from(state.completed) << 2),
-                seconds: state.sample.seconds,
-                speed: state.speed,
+            &abi::AnimationHeader {
+                magic: *abi::ANIMATION_MAGIC,
+                count: rows.len() as u32,
+                stride: abi::AnimationRow::SIZE as u32,
             }
             .encode(),
         );
     }
+    for row in rows {
+        let state = row.state;
+        let prefix = abi::AnimationRow {
+            id: row.id.0,
+            clip: state.sample.clip.map_or(u32::MAX, u32::from),
+            flags: u32::from(state.playing)
+                | (u32::from(state.looping) << 1)
+                | (u32::from(state.completed) << 2),
+            seconds: state.sample.seconds,
+            speed: state.speed,
+        };
+        if legacy {
+            bytes.extend_from_slice(&prefix.encode());
+        }
+        let transition = state.transition;
+        v2.extend_from_slice(
+            &abi::AnimationRowV2 {
+                id: prefix.id,
+                clip: prefix.clip,
+                flags: prefix.flags,
+                seconds: prefix.seconds,
+                speed: prefix.speed,
+                source_clip: transition.map_or(0, |t| t.source.clip.map_or(u32::MAX, u32::from)),
+                transition_flags: transition.map_or(0, |t| {
+                    1 | (u32::from(t.playing) << 1) | (u32::from(t.looping) << 2)
+                }),
+                source_seconds: transition.map_or(0., |t| t.source.seconds),
+                source_speed: transition.map_or(0., |t| t.speed),
+                elapsed: transition.map_or(0., |t| t.elapsed),
+                duration: transition.map_or(0., |t| t.duration),
+            }
+            .encode(),
+        );
+    }
+    debug_assert!(v2.len() <= abi::ANIMATION_V2_MAX_BYTES);
     debug_assert!(bytes.len() <= abi::ANIMATION_MAX_BYTES);
     Ok(())
 }
@@ -81,5 +120,33 @@ pub(crate) fn command(
             AnimationControl::SetSpeed(row.value)
         }
         _ => return Err(Error::Abi("animation command tag/reserved field/value")),
+    })
+}
+
+/// v2 preserves v1 controls and adds a crossfade with a copied target/duration.
+pub(crate) fn command_v2(
+    bytes: &[u8; abi::AnimationCommand::SIZE],
+) -> Result<AnimationControl, Error> {
+    let row = abi::AnimationCommand::decode(bytes).ok_or(Error::Abi("animation command frame"))?;
+    if row.kind != 5 {
+        return command(bytes);
+    }
+    if !row.is_finite()
+        || row.seconds < 0.
+        || !(0.0..=abi::ANIMATION_MAX_TRANSITION_SECONDS as f64).contains(&row.value)
+    {
+        return Err(Error::Abi("animation crossfade time/duration"));
+    }
+    let clip = match row.clip {
+        u32::MAX if row.seconds == 0. => None,
+        n if n < abi::ANIMATION_MAX_CLIPS as u32 => Some(n as u16),
+        _ => return Err(Error::Abi("animation clip/rest sample")),
+    };
+    Ok(AnimationControl::Crossfade {
+        target: AnimationSample {
+            clip,
+            seconds: row.seconds,
+        },
+        duration: row.value,
     })
 }

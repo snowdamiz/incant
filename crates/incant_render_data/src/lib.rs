@@ -105,6 +105,9 @@ pub struct MeshInput {
     /// Committed native time; absent uses an animated model's authored rest pose.
     /// Supplying a sample for a static model is a binding error.
     pub animation: Option<incant_types::AnimationSample>,
+    /// Optional outgoing pose; its weight is the primary sample contribution.
+    /// Both samples and the weight are validated even at an endpoint.
+    pub animation_blend: Option<incant_types::AnimationBlendSample>,
 }
 pub struct SpriteInput {
     pub source: Arc<RuntimeAsset>,

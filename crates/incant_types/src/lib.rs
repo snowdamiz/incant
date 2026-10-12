@@ -34,7 +34,9 @@ pub type Id = String;
 )]
 pub struct StableId(pub [u8; 16]);
 
-pub use animation::{Animation, AnimationSample, MAX_ANIMATION_CLIPS, MAX_ANIMATION_SPEED};
+pub use animation::{
+    Animation, AnimationBlendSample, AnimationSample, MAX_ANIMATION_CLIPS, MAX_ANIMATION_SPEED,
+};
 pub use audio::{AudioBus, AudioListener, AudioSource, AudioSpatial};
 pub use camera::{Camera, CameraProjection};
 pub use collider_shapes::{ColliderPart, ColliderShape, PrimitiveColliderShape};

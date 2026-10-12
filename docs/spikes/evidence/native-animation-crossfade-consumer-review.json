@@ -1,0 +1,59 @@
+{
+  "reviewer": "astra",
+  "reviewed_at": "2026-10-12T02:28:34.731690+00:00",
+  "decision": "accepted for CPU-scoped integration",
+  "base": "265a8ac3571da8883d36b92d11a2f107e5f990bf",
+  "freeze": "/tmp/incant-crossfade-consumer-freeze-004.json",
+  "freeze_sha256": "2be7645167d6eb6c2621f5b08fa675c976faf5342aabbcb4047657898cf25f44",
+  "source_files": {
+    "crates/incant_render/src/animation_tests.rs": "8c6591b5f82a2f6f15e5aaa56b9588b6ba067075241f1f78668a5f6c76de9429",
+    "crates/incant_render/src/flipbook_tests.rs": "1ac07251e0fc248274979701c5ad1d75ceb4314d67259e51e1d1f9c35632ed7b",
+    "crates/incant_render/src/models/animation.rs": "544605592e1b512e95e6e941a582c4bcb87c19cc0716374bb43eb1aba13dcb99",
+    "crates/incant_render/src/retained.rs": "9fa552cf05f4e24b27f4ac6f27c21203520548e508c7c3219d7860c9fca5fade",
+    "crates/incant_render/src/retained_tilemap_tests.rs": "1e5af8f04a1517f05e0511cf6c8bd3a8cca40b6f64a0039f7ba3b6be8513defc",
+    "crates/incant_render/src/scene.rs": "f7e11c74e00157c64ae73acb668215ca0023d41a3889f23b424ca488d19c98bd",
+    "crates/incant_render/src/version_tests.rs": "71c1e707b5b2ac2ceffc820693898cec0ac3b52e37f294a85d5fb927d3a2798c",
+    "crates/incant_render_authoring/src/lib.rs": "bdc9fc1ebf598708e6fe745bd600f99e5c080fb47e5e2b15cdc20ccdf95850ed",
+    "crates/incant_render_data/src/lib.rs": "1c9000c5ec9a184cd5a2697d8306395436e875596dbeede81a1820b41c4853e0",
+    "crates/incant_render_native/src/binding.rs": "5966a2f5fef47b5d56f1567b06460670b95b1be401eec49236337b97bace10e5",
+    "crates/incant_render_native/src/lib.rs": "a44c6b0223a1ad5394d606a0bff263a0e58f344bd453833c17b49087f2a3d3d7",
+    "crates/incant_render_native/src/update.rs": "35a25532527bd2e5e6548c00c7de761a2be7f114ce47c97784094cae786b5d23",
+    "crates/incant_render_native/tests/animation.rs": "5ce316411f04a6fcbdd0dec46a7dbd543a839408b80274ec7d48bf1461f8ef3e",
+    "crates/incant_runtime/src/spatial_view.rs": "4965204c0696d42113a804fb2025c09bc95916bff1b627664c677ab03aa78930",
+    "crates/incant_render/src/animation_crossfade_tests.rs": "05677546247386972a58d432d53b89c2ccf02e0c3a805a6d2c6d380deb5468b4",
+    "crates/incant_render_native/tests/animation/crossfade.rs": "21b1613ee156151f3eff88415ea37e6cd546aeacfd41167e8504b85ab24430c6"
+  },
+  "findings": [],
+  "review": [
+    "Primary/outgoing sample times and blend weight validated before sampler publication, including zero/one endpoints.",
+    "Spatial view and cold/motion adapter propagate both samples; preallocated undo restores previous outgoing state after consumer rejection or unwind.",
+    "Static model guard covers initial resolution and retained staging.",
+    "Independent TRS/skin and source-deleted native oracles, reflected normal orientation/refusal, active transition rollback and retry checked in source.",
+    "Final source and all recorded log hashes independently matched; test-only failed singular-pose assumption preserved and corrected at actual Geometry boundary."
+  ],
+  "limitations": [
+    "No GPU run or appearance acceptance; canonical retained GPU rollback remains to execute after Claude releases native/GPU ownership.",
+    "No blend graph, state machine, IK or root motion claim."
+  ],
+  "checks": {
+    "unique_passed_tests": 350,
+    "new_tests": 6,
+    "full_run_passed": 349,
+    "full_run_groups": 59,
+    "full_run_gpu_ignored": 70,
+    "final_focused_passed": 17,
+    "final_focused_groups": 52,
+    "final_focused_failed": 0,
+    "eight_package_all_target_clippy": "pass; native-window feature compiled only",
+    "wasm32_unknown_unknown_render_data_native_check": "pass",
+    "lean_normal_graph_roots": [
+      "incant_runtime",
+      "incant_assets_runtime",
+      "incant_render_data",
+      "incant_render_native",
+      "incant_render"
+    ],
+    "fmt_conventions_diff": "pass",
+    "all_owned_handles_reaped": true
+  }
+}

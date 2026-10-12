@@ -139,3 +139,24 @@ remaining checks passed with frozen source. No cache deletion occurred in this
 resumed turn. Actual-main ancestry
 synchronization changes no tested tree bytes. Text drawing and the other visual,
 widget/input and device gates above remain open.
+
+## External debug-map qualification and same-player replay
+
+The original export receipts removed the authoring tree and private build storage
+but retained `package/symbols/behavior.js.map`, an external debug sidecar containing
+266 source characters. Those original receipts remain unchanged. Their broad
+source-free wording excludes that retained sidecar and should be read with this
+qualification. Compiler-free codegen and symbol checks still describe the original
+executable; they did not establish the absence of every external source-text file.
+
+The exact main121 player was replayed after preserving the map and original
+receipts in a separate evidence archive and removing only that proof-owned map
+from the package. All remaining package bytes and the executable hash stayed
+identical. Three fresh runs matched every original observation and PCM hash; both
+missing/tampered font controls again refused without output. No rebuild or GPU
+execution occurred. [The replay receipt](evidence/native-text-input-map-free-replay.json)
+pins both before/after package inventories and all five process results. The future
+probe now removes external debug maps before launches and records their hashes.
+
+[Independent map-removal review](evidence/native-text-source-map-root-review.json)
+verified the exact replay and narrow future-probe correction.

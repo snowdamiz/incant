@@ -1,0 +1,292 @@
+{
+  "recorded_at_utc": "2026-10-12T02:37:45.497664+00:00",
+  "author": {
+    "role": "astra",
+    "task": "/root/agent_bridge",
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "xhigh",
+    "scope": "nonvisual CPU implementation"
+  },
+  "base": "934af1b0f9c04d45588873369a4d69295c6380f3",
+  "scope": [
+    "TypeScript copied transition snapshots and strict crossfade structural controls",
+    "Additive incant_animation_v2 imports/opcodes26\u201328, unchanged old0\u201325 wire contracts",
+    "Copied bounded v2 host frames and Rust no_std parser/control APIs",
+    "Actual QuickJS/Rust/raw-WAT tests with Wasmtime and compiled pinned wasm2c, atomic rollback and v5 continuation"
+  ],
+  "source_freeze": {
+    "path": "/tmp/incant-crossfade-sdk-source-freeze-003.json",
+    "sha256": "86edb80c01664b247c7b7291feebb4c5ebcd9a89bcae8ccf70fef6be3268b739",
+    "files": {
+      "crates/incant_script/src/animation_commands.rs": "6c090fbffe6f0d2b4d7adc14e08da07654d981002df450726b429a191d74b7f3",
+      "crates/incant_script/src/animations.rs": "a9fa3c09e415e604df1665b22139116c1bf410327bd820cd5f0f8b5c54592b9e",
+      "crates/incant_script/tests/animations.rs": "4d104bff58a6ad9d0c3e1c2e6f09223eb8a21ae929d55d79d527c1a50941ac15",
+      "crates/incant_wasm_abi/src/lib.rs": "216f050ccbaf7e25650f79ffc60160a983e36849c3443780004e1451fb599fae",
+      "crates/incant_wasm_dev/src/generated.rs": "7740b86da79b5e0a7439d77d025c3f3e6462ad1f40154df6bcc2ef46288c9a19",
+      "crates/incant_wasm_dev/tests/animation_parity.rs": "4037e587c09f900baacbe3914a7b73973f2a0e437d498f6f26356d3654d2234b",
+      "crates/incant_wasm_runtime/c/generated.h": "9b0db4af032d03cdfbf95b258935c2153deb9a354ef89366262b5c83859cbef2",
+      "crates/incant_wasm_runtime/c/generated.inc": "563da81e99cc20f94ba6283341f551ab09d456516473678be5daf9da376263d5",
+      "crates/incant_wasm_runtime/src/animations.rs": "50848a4f9b535d09b664377e45d106a83def83977d834802d62dd4b6ca30ba0e",
+      "crates/incant_wasm_runtime/src/capability.rs": "f465ad1ddb8df20a4b09132c10e56763df43715911d793548df902994287bcd3",
+      "crates/incant_wasm_runtime/src/generated.rs": "fdfb69491a7705fa950561e42ea6406ce01262748afb6f58954cad7186d6a5a4",
+      "crates/incant_wasm_runtime/src/input_tags.rs": "4fe5fdcf163893bc3ff221b62528d3c650b058210ba3f249b455688e38411ab7",
+      "crates/incant_wasm_runtime/tests/animations.rs": "6175c87e8942d0afbb6780708f8c3091da1ae8eb6521e04f22cb80db2d01c910",
+      "sdk/abi/native-v1.json": "5534381afd1e5735446215deae604617b384747af2f64e0be27b0259e59c9aa5",
+      "sdk/rust/src/animation.rs": "6ee66e63cc5792e4d2dfddaf9ee8e1cbfa688f9a9264a2964a78f13d3aeb5bcc",
+      "sdk/rust/src/lib.rs": "ed48a002b9c21a0246621e0cef956fed8f4cff71d0e1867a44879e890a56d9e3",
+      "sdk/rust/src/raw.rs": "b2e237abf57b3fa2df9f1fe1c2b775f7319bde5518cb3fb30f5aed6c6ab5484f",
+      "sdk/rust/src/tick.rs": "55217b5358ecfcc608e4e6da30be20648fde0a80aef600ce320616fdb565a7ba",
+      "sdk/rust/tests/animation.rs": "7e107584b1fc61779a96fe45c805c23432cb5aa857681eecb0bcaf291cc07ce6",
+      "sdk/templates/native-animation/playback.ts": "a7b5665dbd32aafeee013e3daed55de4f5fdd9e4b6a0c70fbfeea4d19be310b1",
+      "sdk/ts/src/native.d.ts": "723a6641637af35bf45ed90bc7fc4c9bf53226c15370a0fd3937e4657fecc088",
+      "tools/generate_wasm_sdk.py": "87b6a185a021b0103ab75387166aacb315f4a9cc3fcd7fb068832560671604df",
+      "tools/probes/shipping-wasm2c.py": "0820ddbfd66c83444456b237926b0298459fbdc8fbd6bcd5d5471ed62e377068",
+      "tools/tests/native_script.test.mjs": "00454dc4b743248f7f654c74dd3925fc2695e4c484acec5f206bb354ddaf0e6a",
+      "tools/tests/test_wasm_sdk.py": "bc52ea0566534f0123fa6ecfbc9b14b0d5bdd3a81b8e03fc540caa322835bdb8",
+      "tools/wasm_abi.py": "2b56aa74318af357338046beac2c061cfc555870af304e502996a3424aec669a",
+      "crates/incant_script/tests/animations/crossfade.rs": "9446b852336558c6805644e4b085358d8ac76342f3f77d4cdbb841e26788d81b",
+      "crates/incant_script/tests/fixtures/crossfade.cjs": "4ab30848acdc503e1408a07e03eb21b13bf62e9a26955b8e8e243f6069c3d154",
+      "crates/incant_script/tests/fixtures/crossfade.ts": "3d7a33ff81964c97794df8b4efda208fd93324b5f645375d1da2760734d76253",
+      "crates/incant_wasm_dev/tests/crossfade_parity.rs": "ce65036c2c2910a31f472c3673f0464fd4d2511e9cae2f4c370fa651c9eba2aa",
+      "crates/incant_wasm_runtime/fixtures/crossfades.wat": "4d0b9cc8da4f352b35041642d48ba1d4138396485aaac7d108f81b1b25c1f366",
+      "crates/incant_wasm_runtime/tests/animations/crossfade.rs": "72d3dfc050b5c8210b0ea87caa8d47e3aff22ccbd636990dfaec5e4b056f216d",
+      "sdk/rust/fixtures/crossfade_failure.rs": "2cdad912a657c807c42fe69595d80004a1f747dfe15335a5b239382df03a5ed4",
+      "sdk/rust/samples/crossfade.rs": "738776695454cecfa9ffe8b9bf3b0f0bb4db6949c9c7e5143b21a575926392ec"
+    }
+  },
+  "commands": [
+    "CARGO_TARGET_DIR=/tmp/incant-agent-font-target python3 tools/probes/shipping-wasm2c.py /tmp/incant-crossfade-sdk-conformance-003 --profile ci --conformance-only",
+    "CARGO_TARGET_DIR=/tmp/incant-agent-font-target cargo check --profile ci -j2 -p incant-module -p incant_wasm_abi -p incant_wasm_runtime -p incant_wasm_dev --lib --target wasm32-unknown-unknown --locked",
+    "python3 tools/check_runtime_dependencies.py incant_wasm_runtime incant_runtime incant_script incant_game_runtime --features incant_script/static-module",
+    "cargo fmt --all --check",
+    "git diff --check",
+    "python3 tools/generate_wasm_sdk.py --check",
+    "python3 -m unittest tools.tests.test_wasm_sdk tools.tests.test_wasm2c_prepare tools.tests.test_wasm2c_shipping tools.tests.test_wasm_metadata",
+    "node --test tools/tests/native_script.test.mjs",
+    "node node_modules/typescript/bin/tsc --noEmit -p sdk/ts/tsconfig.json",
+    "python3 tools/generate_conventions.py --check",
+    "node tools/generate_sdk.mjs --check"
+  ],
+  "compiler_path": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+  "target": "/tmp/incant-agent-font-target",
+  "max_compile_jobs": 2,
+  "results": {
+    "combined_tests": {
+      "passed": 313,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 54
+    },
+    "all_target_clippy": "passed -D warnings,32.12s; existing cc clang -? capability probe diagnostics retained in log",
+    "wasm32_libraries": "passed,1.90s",
+    "strict_typescript_and_cook_tests": 22,
+    "python_tools_tests": 20,
+    "generated_types_and_graph_checks": "passed",
+    "fresh_existing_development_bulk_processes": 3,
+    "all_owned_processes": "terminal/reaped; private target idle"
+  },
+  "prepared_artifacts": {
+    "wabt": "1.0.42",
+    "modules": 85,
+    "verified_files": 426,
+    "receipt": {
+      "path": "/tmp/incant-crossfade-sdk-prepared-artifacts-003.json",
+      "sha256": "f14169acb9f73d172381770394624a4169403ed285a6356ec9df5e726551161c"
+    },
+    "crossfade_modules": [
+      {
+        "name": "crossfades",
+        "prefix": "m6",
+        "input_sha256": "b7bb2e469a466f09eb0faef579b4c3a9fa0f19147ee21bd92cae2ba408506079",
+        "prepared_sha256": "889345d6fc0649fd8356a9cbfbb068d21ac6544d8649f6cbb08535644b6efde8"
+      },
+      {
+        "name": "rust-crossfade",
+        "prefix": "m63",
+        "input_sha256": "c273ddf3e3101d3629a0838a7a781dead64b263d02a42a78c100473d8f77c115",
+        "prepared_sha256": "3972b44d1fadd2af7bd5711e809cea5ea5d281acb1a2426c9cfeb02d1c269488"
+      },
+      {
+        "name": "rust-crossfade-capacity",
+        "prefix": "m64",
+        "input_sha256": "af58cd0bed3f5cd5d53036efa3811f34228f52e83431060b889a43dc3ee64fd4",
+        "prepared_sha256": "4436b6749f66ee6bab7ec0ab793f7dd9e29ff78425ad71e15a04075ffb2b61a4"
+      },
+      {
+        "name": "rust-crossfade-number",
+        "prefix": "m65",
+        "input_sha256": "e97a70990c22cf34e3db54960ab5ab0e4891a6575f34972425a22daa1e79c10a",
+        "prepared_sha256": "fcc5f33587b2a440a5312e6986879302e3e101cadb961f6fea5fd1f71eddb310"
+      },
+      {
+        "name": "rust-crossfade-duration",
+        "prefix": "m66",
+        "input_sha256": "16035f46452f9f068a06f4a629c8db4de9ac910f34b0a5cae58ce0a4bf25eb9e",
+        "prepared_sha256": "83b900f73f1ea9f6207b8363bdbd84d362c29b2f683143071342b42eb783235a"
+      },
+      {
+        "name": "rust-crossfade-rest",
+        "prefix": "m67",
+        "input_sha256": "a119207bb5b39bdf4d98ee2031f54e3b0e8797b3bbfc63e0c708c71fcc840b98",
+        "prepared_sha256": "40adf002fb03587b58c9db3849d0b336fb191a76f06a77e312688c601dd108a0"
+      },
+      {
+        "name": "rust-crossfade-retarget",
+        "prefix": "m68",
+        "input_sha256": "81e61ed1281c0d833808a03f1acf2bc79f7e717ea1c7b006f77063305dd52671",
+        "prepared_sha256": "3db9df246980badeb5b6f211c73c1e74ec89f90602fe0a88b2e292e4cbdf359b"
+      },
+      {
+        "name": "rust-crossfade-clip",
+        "prefix": "m69",
+        "input_sha256": "783add2fb61a73fc0a0c8a017e11796c96bb8309c190ac36889d609175812ba6",
+        "prepared_sha256": "867fdc9facc30a00ca36f057e0ac3f1886d7a0480194e830dc9a49cdbb7c4aa8"
+      },
+      {
+        "name": "rust-crossfade-quota",
+        "prefix": "m70",
+        "input_sha256": "285eb10ecb8c4be2701058f43112cd5ad31feeb5c59865b14e3378a9a188f82f",
+        "prepared_sha256": "dda6b30335349c2643354b07bed8f038504419be1a61a260ccb2fbb7ab5b67ca"
+      },
+      {
+        "name": "rust-crossfade-callback",
+        "prefix": "m71",
+        "input_sha256": "00c509a89e569bb8da12b848cbf65f3844702a21f4df330f107ddd79de616d1d",
+        "prepared_sha256": "084abad613befdf52e61bf02609b4f861089d4b700e314475da0c0c1c03fd908"
+      },
+      {
+        "name": "rust-crossfade-trap",
+        "prefix": "m72",
+        "input_sha256": "63144daeacf82fa29cc10d0b40419a037d68e9eba1b7e3a50377ddc17cf68c4c",
+        "prepared_sha256": "2cedd2f89e12b3c79bf9fb9ec2e53d6e8a09d45b797379095ae40064ff5b19a0"
+      }
+    ],
+    "verification": "All426 files matched retained manifest while temporary bundle existed; conformance helper subsequently removed it. No deterministic build/complete numerical identity authority claim."
+  },
+  "compiled_sdk_provenance": {
+    "target": "wasm32-unknown-unknown",
+    "edition": "2024",
+    "panic": "abort",
+    "opt_level": 2,
+    "source_sha256": {
+      "sdk/abi/native-v1.json": "5534381afd1e5735446215deae604617b384747af2f64e0be27b0259e59c9aa5",
+      "tools/rust_guest.py": "a01641b59eb8d39e9cd4de58d1a59e3aec97b19179ba52793623a42a725dd5cc",
+      "crates/incant_wasm_abi/src/lib.rs": "216f050ccbaf7e25650f79ffc60160a983e36849c3443780004e1451fb599fae",
+      "crates/incant_wasm_abi/src/localization.rs": "8192b4afdbec79000c2fa52fb54425a7e30cffd5a20e44a8d9ea10edaef2eb62",
+      "sdk/rust/src/animation.rs": "6ee66e63cc5792e4d2dfddaf9ee8e1cbfa688f9a9264a2964a78f13d3aeb5bcc",
+      "sdk/rust/src/flipbook.rs": "4432747e8707e044aa63f6d22d679d1b88aec720805219d8d1f891c0e9969e65",
+      "sdk/rust/src/input.rs": "b088d9f4fe099abcf0247167e026193531bac854551103fff41b628be8bdbb63",
+      "sdk/rust/src/lib.rs": "ed48a002b9c21a0246621e0cef956fed8f4cff71d0e1867a44879e890a56d9e3",
+      "sdk/rust/src/localization.rs": "ce245273fc4d5bfef18067ca32c839ef971a3cfa299d6d22674e26386ec7c6f9",
+      "sdk/rust/src/raw.rs": "b2e237abf57b3fa2df9f1fe1c2b775f7319bde5518cb3fb30f5aed6c6ab5484f",
+      "sdk/rust/src/tick.rs": "55217b5358ecfcc608e4e6da30be20648fde0a80aef600ce320616fdb565a7ba"
+    },
+    "repository_sdk_sources_retained": true,
+    "build_scripts_or_proc_macros": false
+  },
+  "logs": {
+    "/tmp/incant-crossfade-sdk-conformance-003.log": {
+      "sha256": "574af3621e3ea33f4f833844525fcf843cf3d6fd0f8b4c4cda3bea2cebb4805b",
+      "bytes": 120
+    },
+    "/tmp/incant-crossfade-sdk-conformance-003/cook-build.log": {
+      "sha256": "5066e63ad75f06047af03386a7a9554207256b3b723050b900d98ed6ff141122",
+      "bytes": 14464
+    },
+    "/tmp/incant-crossfade-sdk-conformance-003/conformance-0.log": {
+      "sha256": "5e5ff47c0615b2feb9bed6444c6b1ecdd5c49c21566d7ce4fb9caf2a2633a5a1",
+      "bytes": 39868
+    },
+    "/tmp/incant-crossfade-sdk-conformance-003/conformance-1.log": {
+      "sha256": "3b3579936ecb627f297a7a7e2a1498ce194fbe745631b0924c9c29063b0e2df4",
+      "bytes": 849
+    },
+    "/tmp/incant-crossfade-sdk-conformance-003/conformance-2.log": {
+      "sha256": "086605a5f4b6b42ee0d4cae788ef2c95bfed727826884311a36fca02e5d82b66",
+      "bytes": 2495
+    },
+    "/tmp/incant-crossfade-sdk-conformance-003/development/result.json": {
+      "sha256": "086605a5f4b6b42ee0d4cae788ef2c95bfed727826884311a36fca02e5d82b66",
+      "bytes": 2495
+    },
+    "/tmp/incant-crossfade-sdk-conformance-003/prepared-manifest.json": {
+      "sha256": "fd28301333ba3e74b4ac48a97e7e86e01281bef0e22f817b2a426dd7b00fc464",
+      "bytes": 57666
+    },
+    "/tmp/incant-crossfade-sdk-conformance-003/rust-sdk.json": {
+      "sha256": "59356b29728f752d1486edafcab1d093827a664f4a8873a38742dfb2f14061ab",
+      "bytes": 1317
+    },
+    "/tmp/incant-crossfade-sdk-wasm32.log": {
+      "sha256": "061b260eaa38cf8c66614310ebee0d6d97250153bc5f34a4d18b40a226797054",
+      "bytes": 1091
+    },
+    "/tmp/incant-crossfade-sdk-graph.log": {
+      "sha256": "6293ef140df7a21199da2afbcbe8691b3063448952de1b0247acd9d7844072de",
+      "bytes": 150
+    },
+    "/tmp/incant-crossfade-sdk-fmt.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/incant-crossfade-sdk-diff-check.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/incant-crossfade-sdk-generated-002.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/incant-crossfade-sdk-python-002.log": {
+      "sha256": "8f8319b2869de9bfd926af0e15fab667a099afa579c0fc02cce54d77a04b56e4",
+      "bytes": 119
+    },
+    "/tmp/incant-crossfade-sdk-types-001.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/incant-crossfade-sdk-typescript-001.log": {
+      "sha256": "88608c730fc46d5055711f4600e254514d82c7d1ecefecf8292e4a5a7eee26f9",
+      "bytes": 5025
+    },
+    "/tmp/incant-crossfade-sdk-conventions.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/incant-crossfade-sdk-schema.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/incant-crossfade-sdk-conformance-001/conformance-0.log": {
+      "sha256": "3cff94d346771008451b8c96fc395f8860651644e6a948ade04ce317f8c5be4d",
+      "bytes": 2755
+    },
+    "/tmp/incant-crossfade-sdk-focused-001.log": {
+      "sha256": "fc3eb1aafa6ffb07558f9a2b9380c6023f23c61aa9a7eefa19c40f518ece0384",
+      "bytes": 1431
+    }
+  },
+  "prior_failures": [
+    {
+      "path": "/tmp/incant-crossfade-sdk-conformance-001/conformance-0.log",
+      "reason": "Test-only public API spelling restore_save_bytes corrected to restore_bytes before freeze002; retained log."
+    },
+    {
+      "reason": "Initial focused check caught a missing brace in added legacy control convenience; corrected before focused002. No failing input is claimed as validated.",
+      "path": "/tmp/incant-crossfade-sdk-focused-001.log"
+    }
+  ],
+  "final_rebuild": "Freeze002 to003 formats only actual Rust sample/failure guest source. Final003 freshly compiled those exact bytes and reran full combined suite/Clippy. Guest build paths may affect module bytes; no reproducible identity claim.",
+  "independent_review": {
+    "path": "docs/spikes/evidence/native-animation-crossfade-sdk-review.json",
+    "sha256": "07fb32a57617c3c9ca519079531e36c6c524659c9145444e2c6a007a90019346",
+    "findings": [],
+    "scope": "Accepted all34 compiled source hashes and final313/54 dual-host results; subsequent wasm/generated/graph/fmt closeout recorded here."
+  },
+  "limitations": [
+    "No GPU/window/rendered appearance or device/performance acceptance.",
+    "Three fresh processes are existing development bulk controls, not new source-deleted exported crossfade gameplay.",
+    "Full static NativeSession module-state checkpoints remain Unsupported; real Rust stateless world-save continuation does not fabricate Wasm memory/global persistence.",
+    "Canonical render binding is a separate lane; no general blend graph,IK/root motion,complete game UI or phase gate claim."
+  ]
+}

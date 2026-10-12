@@ -262,3 +262,6 @@ fn complete_duration_table_checked_on_startup_and_atomic_rebinding() {
     assert_eq!(binding(&input, 1).animation, None); // Explicit rest-pose consumer.
     assert!(binding(&input, 3).animation.is_some());
 }
+
+#[path = "animation/crossfade.rs"]
+mod crossfade;

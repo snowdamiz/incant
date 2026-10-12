@@ -119,3 +119,12 @@ only editor/bridge code and documentation. All 27 accepted implementation hashes
 are preserved. [Integrated logs and process receipts](evidence/native-wasm-animation-main117.json)
 record exact source boundaries. No new graphics, native-window, shipping-animation
 export, browser or device acceptance is claimed by this CPU SDK integration.
+
+## Crossfade extension
+
+The preceding v1 evidence describes its original frozen implementation. The
+additive [crossfade SDK](native-animation-crossfade-sdk.md) now uses explicit
+`incant_animation_v2` imports, preserving opcodes 0–25 and all v1 records. Current
+`Tick::animations` exposes full transitions through v2; explicit legacy methods
+remain available for older hosts. An active crossfade makes both v1 length/read
+refuse rather than hiding one side of a blend. No v1 row grew silently.
