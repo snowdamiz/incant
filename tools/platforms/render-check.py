@@ -49,6 +49,15 @@ def edit(executable, project, commands, revision=0, journal=None):
         raise ValueError('Renderer probe command transaction failed')
 
 
+def validate_model_geometry(geometry):
+    """Require all model-only counters, including absence of retained text."""
+    if geometry != {'diagnostic_entities': 0, 'model_entities': 2, 'primitive_instances': 2,
+                    'model_triangles': 2, 'model_draw_calls': 1, 'sprite_entities': 0,
+                    'tilemap_entities': 0, 'tile_cells': 0, 'text_entities': 0,
+                    'text_glyph_quads': 0, 'text_gpu_bytes': 0, 'text_missing_glyphs': 0}:
+        raise ValueError(f'Unexpected imported geometry projection: {geometry!r}')
+
+
 def model_probe(executable, output):
     """Public CLI import, command binding and cache-only GPU rendering."""
     root = output / 'models'
@@ -78,10 +87,7 @@ def model_probe(executable, output):
         pixels = path.read_bytes()
         validate_png(pixels, 640, 360)
         geometry = response['geometry']
-        if geometry != {'diagnostic_entities': 0, 'model_entities': 2, 'primitive_instances': 2,
-                        'model_triangles': 2, 'model_draw_calls': 1, 'sprite_entities': 0,
-                        'tilemap_entities': 0, 'tile_cells': 0}:
-            raise ValueError(f'Unexpected imported geometry projection: {geometry!r}')
+        validate_model_geometry(geometry)
         return pixels, response
     source(0)
     imported = import_model()

@@ -1,0 +1,9 @@
+{
+  "binary_sha256": "3f0aa604ae3c60f8e9271b897a1926cbb4a753c763bf8a7a20e76555914813ad",
+  "binary_source_head": "a24d485bf1b2b87c5622e8f49e7429cb3db0d9bb",
+  "source_checkout": "/Users/andreyyurlov/.codex/worktrees/native-fbx-import/incant",
+  "repair_base": "89c6180b3ba57cc86652f1f3b3e838ee72f21836",
+  "parser_prefix_sha256": "eadebd370e4c7558cba9ff719f5e6fd36e25a30528c778d01c9a51d8b761bfb9",
+  "args_test_sha256": "16aa748b0fce58ae1b1bac4d83992ac3f02a6b1134996f9939e5fe1debb8b32c",
+  "note": "Existing actual CPU/render-input player; copied only after player Cargo command terminal. No GPU initialization. Standalone std-only integration test compiled with rustc to avoid writing to active target."
+}

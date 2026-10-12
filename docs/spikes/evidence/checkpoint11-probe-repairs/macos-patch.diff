@@ -1,0 +1,72 @@
+diff --git a/tools/probes/native-game.py b/tools/probes/native-game.py
+index c91d4bb4..a237c662 100644
+--- a/tools/probes/native-game.py
++++ b/tools/probes/native-game.py
+@@ -332,7 +332,9 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
+     bad_command = command(fixtures[0]['path'], record_path, 48000, dest); bad_command[5] = oversized
+     reject('oversized-startup-actions', bad_command, dest, 'runtime input size limit')
+     dest = out / 'manual-input.pcm'
+-    reject('manual-input-route', command(fixtures[0]['path'], record_path, 48000, dest)+['--input', 'KeyD'], dest, 'manual input/source paths are unsupported')
++    manual_boundary = ('unknown or duplicate spatial option' if args.render_input else
++                       'expected SCENE CACHE CLIPS RECORDING ACTIONS TICKS SAMPLE_RATE OUTPUT')
++    reject('manual-input-route', command(fixtures[0]['path'], record_path, 48000, dest)+['--input', 'KeyD'], dest, manual_boundary)
+     refusal_dir = out / 'refusal-scenes'; run([fixture_tool, refusal_dir])
+     refusal_results = []
+     for name in ('camera-only', 'manifest-only'):
+diff --git a/crates/incant_game_player/tests/arguments.rs b/crates/incant_game_player/tests/arguments.rs
+new file mode 100644
+index 00000000..4450fc09
+--- /dev/null
++++ b/crates/incant_game_player/tests/arguments.rs
+@@ -0,0 +1,51 @@
++//! Unknown/manual inputs refuse before scene, audio or graphics setup.
++use std::process::Command;
++
++#[test]
++fn manual_and_unknown_options_refuse_before_startup_without_output() {
++    let root = std::env::temp_dir().join(format!(
++        "incant-player-arguments-{}-{}",
++        std::process::id(),
++        std::time::SystemTime::now()
++            .duration_since(std::time::UNIX_EPOCH)
++            .unwrap()
++            .as_nanos()
++    ));
++    std::fs::create_dir(&root).unwrap();
++    for mode in [None, Some("--cpu-render-input"), Some("--gpu-offscreen")] {
++        for option in ["--input", "--unknown"] {
++            let dest = root.join("must-not-exist.pcm");
++            let mut command = Command::new(env!("CARGO_BIN_EXE_incant_game_player"));
++            command.current_dir(&root).args([
++                "missing-scene",
++                "missing-cache",
++                "missing-clips",
++                "missing-recording",
++                "missing-actions",
++                "1",
++                "48000",
++            ]);
++            command.arg(&dest);
++            if let Some(mode) = mode {
++                command.args([
++                    mode,
++                    "missing-models",
++                    "missing-textures",
++                    "00000000000000000000000000000001",
++                ]);
++            }
++            let result = command.args([option, "KeyD"]).output().unwrap();
++            assert!(!result.status.success(), "{mode:?} {option}");
++            assert!(result.stdout.is_empty(), "{mode:?} {option}");
++            assert!(!dest.exists(), "{mode:?} {option}");
++            let error = String::from_utf8(result.stderr).unwrap();
++            let expected = if mode.is_some() {
++                "unknown or duplicate spatial option"
++            } else {
++                "expected SCENE CACHE CLIPS RECORDING ACTIONS TICKS SAMPLE_RATE OUTPUT"
++            };
++            assert!(error.contains(expected), "{mode:?} {option}: {error}");
++        }
++    }
++    std::fs::remove_dir(root).unwrap();
++}
