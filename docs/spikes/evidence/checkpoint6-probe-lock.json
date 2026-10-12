@@ -1,0 +1,144 @@
+{
+  "base": "e716f216f9daa5f69362f4e501ed0d10e9408bbc",
+  "failed_candidate": "1b6629183ea39d0e7caa4778549c932ae79f1d90",
+  "release_pr": 111,
+  "physics_workflow": 38190091036,
+  "failed_jobs": [
+    114620777552,
+    114620777662,
+    114620777730
+  ],
+  "diagnosis": "Cargo --locked fails before native-physics compilation because its incant_runtime entry lacks the now-required existing serde dependency. All selected packages/versions/checksums remain unchanged.",
+  "files": {
+    "tools/probes/native-physics/Cargo.lock": "fdef2c745fd3ce82a20e4275760314ad3bc751a98919e5db0fe77450a5034289",
+    "tools/tests/test_probe_locks.py": "efa6ed0ce870e2cece70a2b24203ff0e5bcae6c9324226d8908c9ea4986db550"
+  },
+  "checks": [
+    {
+      "name": "metadata-native-physics",
+      "command": [
+        "./tools/cargo",
+        "metadata",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/worktrees/native-fbx-import/incant/tools/probes/native-physics/Cargo.toml",
+        "--locked",
+        "--offline",
+        "--format-version",
+        "1"
+      ],
+      "exit_code": 0,
+      "seconds": 0.38219499588012695,
+      "path": "/tmp/incant-checkpoint6-lock-checks/metadata-native-physics.log",
+      "sha256": "8a9a4230fad03cac5fa30dc64785735ff4f17041dfb060a2318082cf1bc83c87"
+    },
+    {
+      "name": "metadata-physics",
+      "command": [
+        "./tools/cargo",
+        "metadata",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/worktrees/native-fbx-import/incant/tools/probes/physics/Cargo.toml",
+        "--locked",
+        "--offline",
+        "--format-version",
+        "1"
+      ],
+      "exit_code": 0,
+      "seconds": 0.12058401107788086,
+      "path": "/tmp/incant-checkpoint6-lock-checks/metadata-physics.log",
+      "sha256": "928978a2ac1b4b655ef7b557a4d3530f7e2cf4840c5d32d14888d9f2223f0a17"
+    },
+    {
+      "name": "metadata-physics-parity",
+      "command": [
+        "./tools/cargo",
+        "metadata",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/worktrees/native-fbx-import/incant/tools/probes/physics-parity/Cargo.toml",
+        "--locked",
+        "--offline",
+        "--format-version",
+        "1"
+      ],
+      "exit_code": 0,
+      "seconds": 0.11052608489990234,
+      "path": "/tmp/incant-checkpoint6-lock-checks/metadata-physics-parity.log",
+      "sha256": "2c863b70fe52d1ec8fb14a3fcee8e21a077b61d16a05c0fb32d8a43bc5428aec"
+    },
+    {
+      "name": "metadata-shader-cook",
+      "command": [
+        "./tools/cargo",
+        "metadata",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/worktrees/native-fbx-import/incant/tools/probes/shader-cook/Cargo.toml",
+        "--locked",
+        "--offline",
+        "--format-version",
+        "1"
+      ],
+      "exit_code": 0,
+      "seconds": 0.11414504051208496,
+      "path": "/tmp/incant-checkpoint6-lock-checks/metadata-shader-cook.log",
+      "sha256": "6f75ec7fbb5b555caea3f2c0a50c22e26b88cc093c9c27a22e949ef88af9082b"
+    },
+    {
+      "name": "native-physics-clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "-j2",
+        "--manifest-path",
+        "tools/probes/native-physics/Cargo.toml",
+        "--release",
+        "--all-targets",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "seconds": 35.24049520492554,
+      "path": "/tmp/incant-checkpoint6-lock-checks/native-physics-clippy.log",
+      "sha256": "7d3eb64e3286759513bd98edfb768d4148f0f9222d342b12dc5dd1580c38e39d"
+    },
+    {
+      "name": "tools",
+      "command": [
+        "npm",
+        "run",
+        "test:tools"
+      ],
+      "exit_code": 0,
+      "seconds": 26.927397966384888,
+      "path": "/tmp/incant-checkpoint6-lock-checks/tools.log",
+      "sha256": "e627afe858beb195d2548c578372b3dca19afdc26487b3b706a67543c2696fc4"
+    }
+  ],
+  "logs": {
+    "/tmp/incant-checkpoint6-physics-114620777552.log": "5b3a9f74aea0987e6988ac3bd04f151f715b0668069952883dd7d6003ef2ac18",
+    "/tmp/incant-checkpoint6-physics-114620777662.log": "14cf07c24624769bc463ee904b9969b3624f44e1ac64f226467b5e4525323cf4",
+    "/tmp/incant-checkpoint6-114620777730.log": "ec12355055f543dcbde630b620a815d9844a9a71e69e21b5c5cac5fdd56feea9",
+    "/tmp/incant-checkpoint6-native-physics-before.log": "694c654b1ebe4fae3dd367ca58c9004fb0dc004a9f988152ce1df87c11498472",
+    "/tmp/incant-probe-registry-edge-red.log": "17b825550ddedb7afb6438aeff9d7ded4852f884c5802804c5421e6347531de5",
+    "/tmp/incant-probe-registry-edge-green.log": "81d401273eac6244125bc35c7424898c58f8c5560475dfdcb2c612354b37b419"
+  },
+  "regression": {
+    "old_guard_failed": 3,
+    "final_guard_passed": 9
+  },
+  "tools": {
+    "python_passed": 218,
+    "python_skipped": 4,
+    "node_passed": 19
+  },
+  "review": {
+    "file": "checkpoint6-probe-lock-root-review.json",
+    "sha256": "0130eb227ab66c68441bd3e5caf8916f1537dc33c18d37a41ca5935731801aa7"
+  },
+  "limits": [
+    "Required nonoptional dependency-name presence only; Cargo remains authoritative for feature/version/source/target resolution.",
+    "Candidate6 remains frozen and failed; no rerun, cancellation or promotion. Actual hosted platform repair confirmation awaits next deliberately refreshed batch.",
+    "Separately diagnosed desktop observation routing failure is not repaired by this change."
+  ]
+}

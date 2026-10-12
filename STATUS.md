@@ -16,6 +16,24 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Release checkpoint6 correction
+
+Failed checkpoint6 selected main110 and was never promoted. Three native physics jobs
+exposed a stale isolated probe lock edge; the reviewed one-edge correction and
+required-dependency guard pass local locked Cargo/Clippy and tooling checks.
+The fixes are merged in PR #112; checkpoint7 now verifies frozen repaired
+main113 through the same 23 required contexts in PR #111.
+The independent fresh observation-routing correction restores the precise
+pre-startup refusal while preserving absolute checkpoint-resume bounds; its
+unchanged process regression, 36 scoped tests and Clippy pass.
+[Lock evidence](docs/spikes/checkpoint6-probe-lock.md),
+[routing evidence](docs/spikes/checkpoint6-player-routing.md).
+The separate Windows budget-test correction closes the journal owner before
+independent reads, then verifies recovered state. Seven local tests and Clippy
+pass; PR #113 merged the fixture correction. Actual Windows confirmation
+remains pending checkpoint7.
+[Journal test evidence](docs/spikes/checkpoint6-budget-journal-tests.md).
+
 ## Current milestone
 
 The project is still building the Phase 1 core engine. Native simulation,
@@ -40,16 +58,17 @@ and script-session continuation regressions. The integrated editor/runtime/scrip
 suite passes 357 CPU tests, Clippy and a fresh native build with the current
 production UI. The final main110 union passes 519 ordinary tests, 57 cooker/cooked-geometry CPU
 tests (overlapping scope), Clippy and a fresh source-free export proof with exact
-replay/checkpoint continuation and refusal controls. Claude’s native appearance
-review remains pending. [Integration evidence](docs/spikes/native-animation-integration.md).
+replay/checkpoint continuation and refusal controls. Claude0052 passed native playback/transport/resize/authoring checks, then found
+the nullable clip field was unsupported in the Inspector. A bounded bridge
+correction and focused Claude0053 recheck remain in progress. [Integration evidence](docs/spikes/native-animation-integration.md).
 
 Opt-in cooked output/diagnostic/shadow shaders merged in PR #110 after scoped
 Metal numerical and Claude appearance acceptance; both features stay off.
 Runtime glyph atlases proceed independently. Advanced
 rendering, animation blending/state machines/IK/root motion, complete game UI/text
 input, remaining SDK capabilities, and the Core Sample/2D sample with specified
-device performance checks still prevent a Phase 1 completion claim. The feature merge queue is clear after PR #110; the animation integration is
-next, with the reviewed font atlas and Wasm animation parity queued separately.
+device performance checks still prevent a Phase 1 completion claim. The feature queue is clear after repairs #112–113; animation is next, with
+reviewed font atlas and Wasm animation parity queued separately.
 
 Progress reports are scheduled approximately every 30 minutes while the goal is
 active. Report merged work separately from local checks and unmet exit gates.

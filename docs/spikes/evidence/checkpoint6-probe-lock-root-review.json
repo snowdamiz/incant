@@ -1,0 +1,22 @@
+{
+  "reviewer": "astra",
+  "recorded_at": "2026-10-12T01:11:19.701843+00:00",
+  "base": "e716f216f9daa5f69362f4e501ed0d10e9408bbc",
+  "patch": {
+    "path": "/tmp/incant-checkpoint6-lock-review.patch",
+    "sha256": "2cef43bc4e5e33f1261dcf54a2dd1d15936569e35b51eb8770c4a47a342a6f32"
+  },
+  "files": {
+    "tools/probes/native-physics/Cargo.lock": "fdef2c745fd3ce82a20e4275760314ad3bc751a98919e5db0fe77450a5034289",
+    "tools/tests/test_probe_locks.py": "efa6ed0ce870e2cece70a2b24203ff0e5bcae6c9324226d8908c9ea4986db550"
+  },
+  "checks": {
+    "command": "python3 -m unittest tools.tests.test_probe_locks -v",
+    "exit_code": 0,
+    "tests": 9,
+    "log": "/tmp/incant-checkpoint6-lock-root-tests.log",
+    "sha256": "35f6e5ced87a25e27ea76038cf76f03aaf1e048177cb102921d6749a177c26f8"
+  },
+  "findings": [],
+  "scope": "Independent source review and nine structural-guard tests. Required path/registry dependencies, inherited strings/tables, renamed package names and target sections checked. Lock mutation is one existing serde edge, no version/checksum changes. Full Cargo resolution remains Cargo-owned; optional dependencies deliberately excluded. No cross-platform or whole-release acceptance inferred."
+}

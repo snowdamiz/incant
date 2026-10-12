@@ -67,6 +67,23 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     if !(1..=3600).contains(&ticks) || !(8000..=192000).contains(&rate) {
         return Err("tick/sample-rate bounds".into());
     }
+    let prepare_observations = |end_tick| {
+        observation_path
+            .map(|path| -> Result<_, Box<dyn std::error::Error>> {
+                Ok(observe::Plan::parse(
+                    &bounded(path, observe::MAX_PLAN_BYTES)?,
+                    end_tick,
+                )?)
+            })
+            .transpose()
+    };
+    // Fresh runs know their absolute end tick before scene/device setup. Resumed
+    // runs must first restore the world so plans retain absolute tick bounds.
+    let mut observations = if checkpoint.load.is_none() {
+        prepare_observations(ticks)?
+    } else {
+        None
+    };
     let scene = CookedScene::from_bytes(&bounded(&args[0], 128 * 1024 * 1024)?)?;
     if spatial.is_none() && (!scene.spatial().is_empty() || !scene.visual_assets().is_empty()) {
         return Err("this game player has no spatial host".into());
@@ -111,14 +128,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let (end_tick, frames) =
         checkpoint::frame_range(start_tick, ticks, rate, game.world()?.tick_rate())?;
     let previous_frames = game.rendered_frames()?;
-    let mut observations = observation_path
-        .map(|path| -> Result<_, Box<dyn std::error::Error>> {
-            Ok(observe::Plan::parse(
-                &bounded(path, observe::MAX_PLAN_BYTES)?,
-                end_tick,
-            )?)
-        })
-        .transpose()?;
+    if checkpoint.load.is_some() {
+        observations = prepare_observations(end_tick)?;
+    }
     if let Some(plan) = &mut observations {
         plan.observe(game.world()?, game.input()?)?;
     }

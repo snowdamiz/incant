@@ -1,0 +1,105 @@
+{
+  "recorded_at": "2026-10-12T01:19:04.725142+00:00",
+  "base": "37713d6833a3d3c7f23c97b17c6a1755a2769bfa",
+  "failed_candidate": "1b6629183ea39d0e7caa4778549c932ae79f1d90",
+  "failed_jobs": [
+    114620778057,
+    114620834300
+  ],
+  "diagnosis": "Fresh headless observation plans were parsed after opening the scene when checkpoint resume support moved parsing to the restored absolute end tick. Unsupported fresh plan therefore produced missing-scene error instead of the precise pre-startup refusal.",
+  "repair": "Parse fresh plans before scene startup using ticks; retain post-restore parsing for checkpoint loads using frame_range absolute end_tick. The parse implementation is shared and existing routing assertion remains byte-identical.",
+  "source": {
+    "crates/incant_game_player/src/main.rs": "af5291578d33e6c0acf1199f452f8efcefade4fae82a00c971c45c750161d584",
+    "crates/incant_game_player/tests/routing.rs": "45bef3a51c50ac8d03236461ab4ce8cde92dbbccab0687fe99146a0906d9a50a",
+    "crates/incant_game_player/src/checkpoint.rs": "b320651e522fcedb42cec72cb92e162f25733826421669f4f0d3335100554b71",
+    "crates/incant_observe/src/lib.rs": "3d87b82c98920b227cfc385cc23ecf0ddf9c1f6a2203dbc0f9c858a123cb2488"
+  },
+  "patch": {
+    "path": "/tmp/incant-player-routing-review.patch",
+    "sha256": "a512f719fb21602728946da945322c2e5da8d508d9363520a9c5b0b2408c6fa9"
+  },
+  "logs": [
+    {
+      "path": "/tmp/incant-player-routing-red.log",
+      "sha256": "207e07c372287f8e2ed3ea1d1761147c6d118ec1d9570823de0c11b48dcf6989"
+    },
+    {
+      "path": "/tmp/incant-player-routing-green.log",
+      "sha256": "38b98d6eb916db1d30106e710376f273b727781806cc62d2e75cfa8020dccee9"
+    },
+    {
+      "path": "/tmp/incant-checkpoint6-114620778057.log",
+      "sha256": "c82cbfd22e7f4e430137d3dd9ce079d9e0756bbbdb3aa2e8a712062736deea8a"
+    },
+    {
+      "path": "/tmp/incant-checkpoint6-114620834300.log",
+      "sha256": "e6ac54a8c6973465329c77899d2f27be779366af36bae28e01021146a855eefe"
+    }
+  ],
+  "checks": [
+    {
+      "name": "player-observe",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "-p",
+        "incant_game_player",
+        "-p",
+        "incant_observe",
+        "--profile",
+        "ci",
+        "--features",
+        "incant_game_player/native-window",
+        "--locked",
+        "-j2"
+      ],
+      "exit_code": 0,
+      "seconds": 3.696502923965454,
+      "path": "/tmp/incant-player-routing-checks/player-observe.log",
+      "sha256": "decb389352fb21e7ee2817390d03834d4e2840aa7715164d342c294f642af676"
+    },
+    {
+      "name": "player-observe-clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "-p",
+        "incant_game_player",
+        "-p",
+        "incant_observe",
+        "--profile",
+        "ci",
+        "--features",
+        "incant_game_player/native-window",
+        "--all-targets",
+        "--locked",
+        "-j2",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "seconds": 7.49881386756897,
+      "path": "/tmp/incant-player-routing-checks/player-observe-clippy.log",
+      "sha256": "cd173f0f3ab2ee22dd37a1ef449f14407307a38a9c3fbdbd2822a9866367501b"
+    }
+  ],
+  "results": {
+    "existing_routing_before": {
+      "failed": 1,
+      "passed": 0
+    },
+    "existing_routing_after": {
+      "failed": 0,
+      "passed": 1
+    },
+    "scoped_tests": 36,
+    "ignored": 0,
+    "all_target_clippy": true
+  },
+  "limitations": "Local macOS CPU/process checks only. No window/GPU/provider work. Hosted Linux/macOS repair confirmation remains pending next frozen full candidate; failed checkpoint6 is never promoted. Absolute checkpoint end-tick semantics and existing arithmetic regression are unchanged.",
+  "independent_review": {
+    "path": "docs/spikes/evidence/checkpoint6-player-routing-root-review.json",
+    "sha256": "1c71384f22ce18fdc36e7047642ce3b85deb10d8a7609de10c9626353e0cbc1f"
+  }
+}
