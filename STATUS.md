@@ -16,6 +16,15 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Release checkpoint6 correction
+
+Frozen PR #111 selects main110 and remains unpromoted. Three native physics jobs
+exposed a stale isolated probe lock edge; the reviewed one-edge correction and
+required-dependency guard pass local locked Cargo/Clippy and tooling checks.
+Actual hosted confirmation is pending the next deliberate candidate refresh.
+A separate desktop observation-routing failure is being repaired independently.
+[Retained failure and correction evidence](docs/spikes/checkpoint6-probe-lock.md).
+
 ## Current milestone
 
 The project is still building the Phase 1 core engine. Native simulation,
