@@ -39,6 +39,7 @@ pub use incant_nav::{
     GridPath, GridPathRequest, NavigationGeometry, NavigationGrid, NavigationPath,
     NavigationSettings, PathRequest, RebuildReport,
 };
+pub use navigation_runtime::NavigationSnapshot;
 pub type SteeringAgent = incant_nav::SteeringAgent<incant_types::StableId>;
 pub type SteeringObstacle = incant_nav::SteeringObstacle<incant_types::StableId>;
 pub type SteeringQuery = incant_nav::SteeringQuery<incant_types::StableId>;

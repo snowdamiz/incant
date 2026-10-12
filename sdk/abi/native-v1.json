@@ -699,6 +699,69 @@
       ],
       "result": null,
       "call": "Call::ControlAnimationGraph { id, ptr }"
+    },
+    {
+      "namespace": "incant_navigation_v1",
+      "name": "find_path",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "len",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "opcode": 36,
+      "call": "Call::FindPath { ptr, len }"
+    },
+    {
+      "namespace": "incant_navigation_v1",
+      "name": "find_grid_path",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "len",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "opcode": 37,
+      "call": "Call::FindGridPath { ptr, len }"
+    },
+    {
+      "namespace": "incant_navigation_v1",
+      "name": "read_path",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "capacity",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "opcode": 38,
+      "call": "Call::ReadPath { ptr, capacity }"
     }
   ],
   "enums": {
@@ -1956,6 +2019,145 @@
         "value",
         "f64"
       ]
+    ],
+    "PathRequest": [
+      [
+        "owner",
+        "u8",
+        16
+      ],
+      [
+        "start",
+        "f64",
+        3
+      ],
+      [
+        "end",
+        "f64",
+        3
+      ],
+      [
+        "snap_distance",
+        "f64"
+      ],
+      [
+        "max_visited",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ]
+    ],
+    "GridPathRequest": [
+      [
+        "owner",
+        "u8",
+        16
+      ],
+      [
+        "start",
+        "u32",
+        2
+      ],
+      [
+        "end",
+        "u32",
+        2
+      ],
+      [
+        "max_expansions",
+        "u32"
+      ],
+      [
+        "flags",
+        "u32"
+      ]
+    ],
+    "PathResultHeader": [
+      [
+        "found",
+        "u32"
+      ],
+      [
+        "visited",
+        "u32"
+      ],
+      [
+        "generation",
+        "u64"
+      ],
+      [
+        "points",
+        "u32"
+      ],
+      [
+        "corridor",
+        "u32"
+      ],
+      [
+        "traversals",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ]
+    ],
+    "PathPoint": [
+      [
+        "position",
+        "f64",
+        3
+      ]
+    ],
+    "PathTraversal": [
+      [
+        "link_id",
+        "u8",
+        16
+      ],
+      [
+        "from_index",
+        "u32"
+      ],
+      [
+        "to_index",
+        "u32"
+      ],
+      [
+        "reversed",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ]
+    ],
+    "GridPathResultHeader": [
+      [
+        "found",
+        "u32"
+      ],
+      [
+        "cells",
+        "u32"
+      ],
+      [
+        "generation",
+        "u64"
+      ],
+      [
+        "cost",
+        "u64"
+      ]
+    ],
+    "GridPathCell": [
+      [
+        "position",
+        "u32",
+        2
+      ]
     ]
   },
   "input_sections": [
@@ -2027,7 +2229,15 @@
     "ANIMATION_GRAPH_MAX_PARAMETERS": 16,
     "ANIMATION_GRAPH_MAX_PARAMETER_ROWS": 16384,
     "ANIMATION_GRAPH_MAX_SECONDS": 3600,
-    "ANIMATION_GRAPH_MAX_VALUE": 1000000
+    "ANIMATION_GRAPH_MAX_VALUE": 1000000,
+    "NAVIGATION_MAX_EXPANSIONS": 65536,
+    "PATH_MAX_VISITED": 32768,
+    "PATH_MAX_POINTS": 4096,
+    "PATH_MAX_CORRIDOR": 4096,
+    "PATH_MAX_TRAVERSALS": 4096,
+    "GRID_PATH_MAX_CELLS": 4096,
+    "PATH_MAX_RESULT_BYTES": 245800,
+    "GRID_PATH_MAX_RESULT_BYTES": 32800
   },
   "magic": {
     "INPUT_MAGIC": "INPINP01",
@@ -2041,7 +2251,11 @@
     "STEERING_REQUEST_MAGIC": "INCSTR01",
     "STEERING_RESULT_MAGIC": "INCSTV01",
     "ANIMATION_V3_MAGIC": "INCAN003",
-    "ANIMATION_GRAPH_MAGIC": "INCAGR01"
+    "ANIMATION_GRAPH_MAGIC": "INCAGR01",
+    "PATH_REQUEST_MAGIC": "INCPTHQ1",
+    "GRID_PATH_REQUEST_MAGIC": "INCGRDQ1",
+    "PATH_RESULT_MAGIC": "INCPTHR1",
+    "GRID_PATH_RESULT_MAGIC": "INCGRDR1"
   },
   "optional_none": -1,
   "namespaces": {
