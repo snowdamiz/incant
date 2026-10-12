@@ -1,0 +1,24 @@
+{
+  "at": "2026-10-12T21:41:07.624600+00:00",
+  "reviewer": "astra root",
+  "source_sha256": {
+    "shared.ts": "81c7812aa7eb77ea34c5ff8fa593d20d400bd27784d7cce6e2007b4120a3f7f9",
+    "other.ts": "6178c2ffd3d8911077741b243140bfc20c765d94d01435d5f23068b5cb308633",
+    "verify.py": "f21d0c42b2c8a4beb4b94e0285f896db5145dbe9418de7392c2e97d44b0ecfae",
+    "mover.ts": "2242c18284807105155244d1dcf5da54e5002d6a647bca86c22f3572b10413b5",
+    "prepare.py": "8031648b17ba5da138835b56447af79de6caf66ca105787265670efbc707e7b7"
+  },
+  "decision": "accepted authored iOS probe source; actual shipping and caller evidence pending",
+  "findings": [],
+  "review": [
+    "Public project import and commands only; one write per atomic source transaction plus binding transaction; four undo/redo and journal reopen.",
+    "Independent binary64 oracle uses prior accepted velocity during world step, with held/released/repeated inputs, full logs and exact PCM comparison.",
+    "C and Swift callers require matching receipt, target, source-deleted project/cache and maps; actual dead-stripped executable parser absence audited.",
+    "Late script failure, ABI/checksum rejection and no-clobber assert exact status and absent PCM/output without accepting arbitrary refusal.",
+    "Simulator boot/shutdown/delete guarded by finally; device build correctly reports unsigned link-only."
+  ],
+  "limitations": [
+    "No actual shipping archive or caller execution reviewed by this source receipt.",
+    "No rendering, device execution or performance claim."
+  ]
+}

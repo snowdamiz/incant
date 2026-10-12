@@ -16,6 +16,19 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Authored iOS project archives — simulator proof passed
+
+The separate trusted-source iOS exporter cooks public-authored TypeScript imports,
+props and scene bindings into fresh shipping archives plus captured data. Actual
+C/Swift callers pass six source/cache/build/map-deleted simulator runs with full
+logs, 432 observations and exact nonzero PCM, plus fourteen exact failure controls.
+Unsigned device archives and both caller links pass; no device execution is claimed.
+Source reviews, 192 affected Rust cases, nine exporter cases, strict TS, Clippy and
+lean checks pass. Final independent execution review and current-main integration
+are pending. Desktop cross-target export, Android and mobile static Wasm stay denied;
+no signing, mobile window/audio host, phone performance or phase gate is claimed.
+[Contract and complete evidence](docs/spikes/authored-ios-project-export.md).
+
 ## Pinned mobile bytecode compatibility — independently accepted
 
 Fresh source cooks bind exact producer/destination and the pinned QuickJS ABI.
@@ -23,7 +36,8 @@ Actual C and Swift callers each pass the same complete numeric/input/failure
 records on macOS and an iOS 27.0 ARM simulator (32 controls per platform). iOS
 device archives compile and link only. Native script/cooker tests, union Clippy
 and lean dependency checks pass; independent final source/execution review is accepted. Android
-cross-target admission and authored-project cross-export remain denied. No
+cross-target admission remains denied; the authored iOS route above is a separate
+shipping-profile proof. No
 physical-phone or performance gate is claimed.
 [Contract and evidence](docs/spikes/mobile-bytecode-compatibility.md).
 
@@ -53,7 +67,7 @@ The ordinary packaged player now has a reusable Rust entry and optional bounded 
 ABI. Local macOS CPU/CLI tests and native-window/static-module compatibility pass;
 actual macOS C/Swift caller verification passes as recorded above. The first iOS
 archive refusal remains retained; the separately verified trusted-source route is
-described above. Authored-project cross-export stays denied. No physical-device
+described above. The separate authored iOS archive route is recorded above. No physical-device
 or performance gate passes from the library extraction. [Contract and evidence](docs/spikes/mobile-runtime-library.md).
 ## Rust/Wasm audio transport — merged main168
 

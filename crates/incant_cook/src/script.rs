@@ -1,6 +1,4 @@
 //! Trusted local source compilation. Supplied executable caches are never read.
-#[cfg(feature = "typescript")]
-use incant_script::CompiledScript;
 use incant_script::{ScriptBuild, ScriptError, ScriptMetadata, artifact};
 use serde_json::{Value, json};
 use sha2::{Digest, Sha256};
@@ -72,8 +70,8 @@ pub fn cook_script(
 /// The program has already been freshly compiled by this trusted producer.
 /// Project source maps originate in the fixed, hash-checked Node compiler.
 #[cfg(feature = "typescript")]
-pub(crate) fn artifact_from_compiled(
-    compiled: &CompiledScript,
+pub(crate) fn artifact_from_build(
+    compiled: &ScriptBuild,
     source_map: Option<&str>,
 ) -> CookedScriptArtifact {
     artifact_from_parts(

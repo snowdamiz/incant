@@ -1,6 +1,6 @@
 //! Authoring-only fixed TypeScript compiler shared by developer Play and trusted
 //! native builds. Project data never chooses the executable, flags or environment.
-use crate::{CookedProjectProgram, PreparedScriptScene, ProjectScriptError};
+use crate::{CookedProjectBuild, CookedProjectProgram, PreparedScriptScene, ProjectScriptError};
 use sha2::{Digest, Sha256};
 use std::{
     fs::{self, File},
@@ -23,6 +23,37 @@ pub fn compile_project_sources(
     prepared: PreparedScriptScene,
     root: &Path,
 ) -> Result<ProjectCompilation> {
+    let (program, source_map, compiler_manifest) =
+        compile_sources(prepared, root, PreparedScriptScene::compile)?;
+    Ok(ProjectCompilation {
+        program,
+        source_map,
+        compiler_manifest,
+    })
+}
+
+/// Fresh source compilation into a build-only, destination-bound program. This
+/// never accepts a compiled development program or a supplied executable cache.
+pub fn compile_project_sources_for_target(
+    prepared: PreparedScriptScene,
+    root: &Path,
+    target: &str,
+) -> Result<ProjectBuildCompilation> {
+    let (program, source_map, compiler_manifest) = compile_sources(prepared, root, |p, source| {
+        p.compile_for_target(source, target)
+    })?;
+    Ok(ProjectBuildCompilation {
+        program,
+        source_map,
+        compiler_manifest,
+    })
+}
+
+fn compile_sources<T>(
+    prepared: PreparedScriptScene,
+    root: &Path,
+    compile: impl FnOnce(PreparedScriptScene, &str) -> std::result::Result<T, ProjectScriptError>,
+) -> Result<(T, String, serde_json::Value)> {
     let root = root.canonicalize()?;
     let source_epoch = incant_source::check_recovery(&root)?;
     let engine = Path::new(env!("CARGO_MANIFEST_DIR"))
@@ -133,11 +164,11 @@ pub fn compile_project_sources(
     }
     // Compile fresh text only. Never deserialize a supplied executable cache.
     let source = std::str::from_utf8(&bytes)?;
-    let compiled = ProjectCompilation {
-        program: prepared.compile(source)?,
-        source_map: String::from_utf8(map)?,
-        compiler_manifest: manifest,
-    };
+    let compiled = (
+        compile(prepared, source)?,
+        String::from_utf8(map)?,
+        manifest,
+    );
     if incant_source::check_recovery(&root)? != source_epoch {
         return Err(TypeScriptCookError::SourcesChanged);
     }
@@ -148,6 +179,12 @@ pub fn compile_project_sources(
 /// Source maps are authoring symbols and must not be embedded in the player.
 pub struct ProjectCompilation {
     pub program: CookedProjectProgram,
+    pub source_map: String,
+    pub compiler_manifest: serde_json::Value,
+}
+
+pub struct ProjectBuildCompilation {
+    pub program: CookedProjectBuild,
     pub source_map: String,
     pub compiler_manifest: serde_json::Value,
 }

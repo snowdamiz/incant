@@ -1,0 +1,542 @@
+{
+  "status": "actual shipping archive and simulator caller proof passed; final independent execution review pending",
+  "base": "b46d351a81613a18dd0fec7af3a1b78b3678309a",
+  "source_freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-shipping-001/source-freeze.json",
+    "sha256": "f039733bde719831f1ba55d6023cceaa20e62fab4ce031531abff1a135b3023b",
+    "files": 11856,
+    "unchanged": true
+  },
+  "archive": {
+    "path": "proof.json.gz",
+    "sha256": "c88a23c2640052f45a06ddfe7bc3dec544c6e8003ba3c4070cbbc85aab00ba95",
+    "bytes": 6248986,
+    "records": 479,
+    "unique_payloads": 217
+  },
+  "retained_external_binary_artifacts": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-project-001/archive-tools/stripped.a",
+      "name": "authored-ios-project-001/archive-tools/stripped.a",
+      "sha256": "d2ee64a679858e459c28b3f269007ac5d9d4bce84f445fc3e5b4043a0cb5333c",
+      "bytes": 67792240
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-shipping-001/device-interrupted/libincant_game_player.a",
+      "name": "authored-ios-shipping-001/device-interrupted/libincant_game_player.a",
+      "sha256": "548315b91153ade70d201d3ce11a0ae0893226c3b3f78d37b2df660416bb523a",
+      "bytes": 224960504
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-shipping-001/simulator/runtime/libincant_game_player.a",
+      "name": "authored-ios-shipping-001/simulator/runtime/libincant_game_player.a",
+      "sha256": "aac979bdf88c8d3a9c93cb3c01158a187a21d2bb6f12c17aa3225335713230d7",
+      "bytes": 14512272
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-shipping-001/simulator/symbols/libincant_game_player.unstripped.a",
+      "name": "authored-ios-shipping-001/simulator/symbols/libincant_game_player.unstripped.a",
+      "sha256": "d886a23be91603f2dd3b2fdf503f6936e4303ad56474d914baa8e66a7c931789",
+      "bytes": 225274888
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-shipping-002/device/runtime/libincant_game_player.a",
+      "name": "authored-ios-shipping-002/device/runtime/libincant_game_player.a",
+      "sha256": "5c880b42a8544bcc13c606a3599ae6d02432e58ed39d2d60cf5a84e15b3afa36",
+      "bytes": 14507608
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-shipping-002/device/symbols/libincant_game_player.unstripped.a",
+      "name": "authored-ios-shipping-002/device/symbols/libincant_game_player.unstripped.a",
+      "sha256": "322e5bf4da5f457824d45cece1f0f5e316c70c309acec883b1c9ed58ae56dde1",
+      "bytes": 224960504
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-simulator-callers-001/caller-c",
+      "name": "authored-ios-simulator-callers-001/caller-c",
+      "sha256": "5b096089630298a9de881aa87b1d881e32a153acb43c9cb984986113c0634f32",
+      "bytes": 10973688
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-simulator-callers-001/caller-swift",
+      "name": "authored-ios-simulator-callers-001/caller-swift",
+      "sha256": "ef54b3edbe0bc601167a30e50666c76feb877ab0e041ed1dd80acff768f51f9d",
+      "bytes": 11003456
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-device-callers-001/caller-c",
+      "name": "authored-ios-device-callers-001/caller-c",
+      "sha256": "afc939f8af80d298816a66304ec976ead217a0b344ed42a6af1aa43cec496349",
+      "bytes": 10921392
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-device-callers-001/caller-swift",
+      "name": "authored-ios-device-callers-001/caller-swift",
+      "sha256": "203fdd485a1262e927b21ac55bcd156891d4d923a99db290231cad1ed55d3910",
+      "bytes": 10950944
+    }
+  ],
+  "source_reviews": {
+    "authored-ios-project-probe-source-20261012.json": "f1351ce5f5213094f7bc82299b84a702bc2ba21b8a90fa291f8bbbd7d2f8d7da",
+    "authored-ios-export-source-20261012.json": "3de4811237ec082667192c13d23fb1b675d9190a51ba4954113fff9d30faa064",
+    "authored-ios-rust-source-20261012.json": "a27b60fd50ed6182b06a77b15744baa17f851cc5ae7d0aa5e0e99e28ed3c6c31"
+  },
+  "exports": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-shipping-001/simulator/export.json",
+      "sha256": "0033f8819cadd045e68a3164d3a721e2c7337294bf1d05df407440610c9bdcbb",
+      "target": "aarch64-apple-ios-sim",
+      "archive": {
+        "path": "runtime/libincant_game_player.a",
+        "sha256": "aac979bdf88c8d3a9c93cb3c01158a187a21d2bb6f12c17aa3225335713230d7",
+        "bytes": 14512272
+      },
+      "scene_sha256": "c5abce88a05ee1652aec9ac4081aa383426c73252a17106d10db5f547cff65a5",
+      "script": {
+        "bindings_sha256": "c243848d74348188235c3b8c7e5f2a9a1771b55d0bef88612eb4ab06dcad19bd",
+        "build_id": "0f48cb385e1f63d46895e255dba8abb6d9ed2f86b2c23990b814e18d000d3665",
+        "bytecode_abi": {
+          "atom_bytes": 4,
+          "default_c_flags": true,
+          "float_mantissa": 53,
+          "float_max_exponent": 1024,
+          "little_endian": true,
+          "pointer_bits": 64,
+          "value_alignment": 8,
+          "value_bytes": 16,
+          "version": 28,
+          "write_flags": 17
+        },
+        "bytecode_bytes": 7127,
+        "bytecode_sha256": "8cf8277083f508706691235fdff1198df4d667dc498f819f599498d26c5e787d",
+        "debug_line_tables": true,
+        "embedded_source": false,
+        "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+        "format": 3,
+        "hardening_sha256": "971716e2f49f08f91ffd7ab3d3f9701f08c1d20ec46670a906875621e2659708",
+        "producer_target": "aarch64-apple-darwin",
+        "source_map_sha256": "bcc6eef872500d85c13a0c4bfa66afc2f9cc90531778044ffe843bea2ce1f900",
+        "source_name": "incant-project-behaviors",
+        "source_sha256": "92f1d69263db1117a22a678407f92361f716754d6eddc4875ded56a9d21be70b",
+        "symbolication": "map CommonJS locations after subtracting wrapper_prefix_lines; automatic runtime stack remapping remains unsupported",
+        "target": "aarch64-apple-ios-sim",
+        "trust": "fresh compiler output embedded by trusted native build; hashes are not authentication",
+        "wrapper_prefix_lines": 3
+      },
+      "sdk": {
+        "name": "iphonesimulator",
+        "version": "27.0"
+      },
+      "symbols": {
+        "format": "object-dwarf-archive",
+        "platform": {
+          "architecture": "aarch64",
+          "platform": "iossimulator",
+          "object_minimum_versions": [
+            "14.0",
+            "27.0"
+          ],
+          "headers_sha256": "b62377adc37a9dffe32472b9aa045caf54607f9ea0d2b9ee5030e924c92a4ea7"
+        },
+        "unstripped_sha256": "d886a23be91603f2dd3b2fdf503f6936e4303ad56474d914baa8e66a7c931789",
+        "runtime_sha256": "aac979bdf88c8d3a9c93cb3c01158a187a21d2bb6f12c17aa3225335713230d7",
+        "debug_sections_removed": true,
+        "before_sections_sha256": "392b10bf25baaa6bf4c54749779cc620646c67b17f392e9450ed118a5e17b74a",
+        "after_sections_sha256": "b9928ab6a7117d0c8ad2b3d6ff0309a7db78b1b3663c6cb64e4433b29839e75a",
+        "defined_symbols_sha256": "bb1cbfd15f3cd86ba622563a4fd5c53a086e0289fa9e8e5d2629875c42f88781",
+        "unused_parser_definitions": [
+          "JS_AddIntrinsicEval",
+          "__JS_EvalInternal",
+          "js_parse_function_decl"
+        ],
+        "final_link_requirements": [
+          "dead_strip",
+          "independent executable symbol audit",
+          "application dSYM generation"
+        ]
+      },
+      "codegen": {
+        "incant_runtime": {
+          "opt-level": "3",
+          "panic": "abort",
+          "codegen-units": "1",
+          "debuginfo": "2",
+          "split-debuginfo": "off",
+          "metadata": "17037911e4ae1160",
+          "extra-filename": "-1c52b3b5742c4c86"
+        },
+        "incant_script": {
+          "opt-level": "3",
+          "panic": "abort",
+          "codegen-units": "1",
+          "debuginfo": "2",
+          "split-debuginfo": "off",
+          "metadata": "281fbe822f0583b8",
+          "extra-filename": "-db6840e1ead48d0f"
+        },
+        "incant_game_player": {
+          "opt-level": "3",
+          "panic": "abort",
+          "lto": "fat",
+          "codegen-units": "1",
+          "debuginfo": "2",
+          "split-debuginfo": "off",
+          "metadata": "6c0963a5ba432458",
+          "extra-filename": "-d30b0ff44e15193b"
+        }
+      },
+      "physics": {
+        "mode": "fixed deterministic parallel kernel",
+        "target": "aarch64-apple-ios-sim",
+        "crates": {
+          "rapier2d": {
+            "features": [
+              "alloc",
+              "block-solver",
+              "default",
+              "dim2",
+              "enhanced-determinism",
+              "f32",
+              "parallel",
+              "std"
+            ],
+            "command_sha256": "292dec538479de1e3e31c3c7d62243d67a330937d9a173d6bc5d5c7b96f736a1"
+          },
+          "rapier3d": {
+            "features": [
+              "alloc",
+              "default",
+              "dim3",
+              "enhanced-determinism",
+              "f32",
+              "parallel",
+              "std"
+            ],
+            "command_sha256": "f7f45dc3f1577ed312727e415ba314c9ca97f44aee65d42a1315ee38528e0703"
+          }
+        }
+      },
+      "audit_commands": 11
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-shipping-002/device/export.json",
+      "sha256": "5c5da2d6480b5f8e03c1bebaf80dedd470372e3c662ca0338432f65ebc3abb3e",
+      "target": "aarch64-apple-ios",
+      "archive": {
+        "path": "runtime/libincant_game_player.a",
+        "sha256": "5c880b42a8544bcc13c606a3599ae6d02432e58ed39d2d60cf5a84e15b3afa36",
+        "bytes": 14507608
+      },
+      "scene_sha256": "c5abce88a05ee1652aec9ac4081aa383426c73252a17106d10db5f547cff65a5",
+      "script": {
+        "bindings_sha256": "c243848d74348188235c3b8c7e5f2a9a1771b55d0bef88612eb4ab06dcad19bd",
+        "build_id": "0f48cb385e1f63d46895e255dba8abb6d9ed2f86b2c23990b814e18d000d3665",
+        "bytecode_abi": {
+          "atom_bytes": 4,
+          "default_c_flags": true,
+          "float_mantissa": 53,
+          "float_max_exponent": 1024,
+          "little_endian": true,
+          "pointer_bits": 64,
+          "value_alignment": 8,
+          "value_bytes": 16,
+          "version": 28,
+          "write_flags": 17
+        },
+        "bytecode_bytes": 7127,
+        "bytecode_sha256": "8cf8277083f508706691235fdff1198df4d667dc498f819f599498d26c5e787d",
+        "debug_line_tables": true,
+        "embedded_source": false,
+        "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+        "format": 3,
+        "hardening_sha256": "971716e2f49f08f91ffd7ab3d3f9701f08c1d20ec46670a906875621e2659708",
+        "producer_target": "aarch64-apple-darwin",
+        "source_map_sha256": "bcc6eef872500d85c13a0c4bfa66afc2f9cc90531778044ffe843bea2ce1f900",
+        "source_name": "incant-project-behaviors",
+        "source_sha256": "92f1d69263db1117a22a678407f92361f716754d6eddc4875ded56a9d21be70b",
+        "symbolication": "map CommonJS locations after subtracting wrapper_prefix_lines; automatic runtime stack remapping remains unsupported",
+        "target": "aarch64-apple-ios",
+        "trust": "fresh compiler output embedded by trusted native build; hashes are not authentication",
+        "wrapper_prefix_lines": 3
+      },
+      "sdk": {
+        "name": "iphoneos",
+        "version": "27.0"
+      },
+      "symbols": {
+        "format": "object-dwarf-archive",
+        "platform": {
+          "architecture": "aarch64",
+          "platform": "ios",
+          "object_minimum_versions": [
+            "10.0",
+            "27.0"
+          ],
+          "headers_sha256": "2c3a245f4d4909213cea250f3b8aeaeab14fc9f42ba5e7f4c83fbcb904651bf7"
+        },
+        "unstripped_sha256": "322e5bf4da5f457824d45cece1f0f5e316c70c309acec883b1c9ed58ae56dde1",
+        "runtime_sha256": "5c880b42a8544bcc13c606a3599ae6d02432e58ed39d2d60cf5a84e15b3afa36",
+        "debug_sections_removed": true,
+        "before_sections_sha256": "8525a3c1b52876b3fab6ddd2267ebfd27099bd963e94a5d546d270f24621241e",
+        "after_sections_sha256": "6f03000a02ed36792ea2cd6e4be0dbadb9bf913dedbc5d4e4f8c857700021281",
+        "defined_symbols_sha256": "e315052ca3881e2a13d8213809083596d4f35f88446dfdafa40a163f8ea4d08b",
+        "unused_parser_definitions": [
+          "JS_AddIntrinsicEval",
+          "__JS_EvalInternal",
+          "js_parse_function_decl"
+        ],
+        "final_link_requirements": [
+          "dead_strip",
+          "independent executable symbol audit",
+          "application dSYM generation"
+        ]
+      },
+      "codegen": {
+        "incant_runtime": {
+          "opt-level": "3",
+          "panic": "abort",
+          "codegen-units": "1",
+          "debuginfo": "2",
+          "split-debuginfo": "off",
+          "metadata": "32f900e83ee1b454",
+          "extra-filename": "-16790aa6bbb4cb6d"
+        },
+        "incant_script": {
+          "opt-level": "3",
+          "panic": "abort",
+          "codegen-units": "1",
+          "debuginfo": "2",
+          "split-debuginfo": "off",
+          "metadata": "f7e66593df384a28",
+          "extra-filename": "-5a996d0c627d2910"
+        },
+        "incant_game_player": {
+          "opt-level": "3",
+          "panic": "abort",
+          "lto": "fat",
+          "codegen-units": "1",
+          "debuginfo": "2",
+          "split-debuginfo": "off",
+          "metadata": "2be43520dbfe8e88",
+          "extra-filename": "-5ced0bb647ed73e9"
+        }
+      },
+      "physics": {
+        "mode": "fixed deterministic parallel kernel",
+        "target": "aarch64-apple-ios",
+        "crates": {
+          "rapier2d": {
+            "features": [
+              "alloc",
+              "block-solver",
+              "default",
+              "dim2",
+              "enhanced-determinism",
+              "f32",
+              "parallel",
+              "std"
+            ],
+            "command_sha256": "1ddc4c3bcd1a29571822e2b0563e0cce591c8caed188dfcf485abe4d2cf3d5f2"
+          },
+          "rapier3d": {
+            "features": [
+              "alloc",
+              "default",
+              "dim3",
+              "enhanced-determinism",
+              "f32",
+              "parallel",
+              "std"
+            ],
+            "command_sha256": "55cf35acca27840d8cbb17c9ed4e85b40b3884b72c23ed3479f22d29ba726f90"
+          }
+        }
+      },
+      "audit_commands": 11
+    }
+  ],
+  "results": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-simulator-callers-001/result.json",
+      "sha256": "0906ed324c03b47714975a1ad8c34355e850f499c90fdb0c409b2b12b3ae460b",
+      "target": "aarch64-apple-ios-sim",
+      "execution": "actual_ios_simulator_cpu",
+      "commands": 33,
+      "controls": 20
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-device-callers-001/result.json",
+      "sha256": "0f23062670da7951357de92c4dcee5d73bc191dac3047805002e82f787f14f5a",
+      "target": "aarch64-apple-ios",
+      "execution": "unsigned_device_build_and_link_only",
+      "commands": 8,
+      "controls": 0
+    }
+  ],
+  "preflight": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-preflight-005/result.json",
+    "sha256": "89ae402ffb864843068ab207b4d395f9c0e95e974023f2c9874cd264f5a2fd83",
+    "runs": 3,
+    "checks_per_run": 72,
+    "full_log_records_per_run": 36
+  },
+  "affected_checks": [
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_cook",
+        "--features",
+        "typescript",
+        "--test",
+        "scripts",
+        "--test",
+        "project_scripts",
+        "--test",
+        "typescript",
+        "--test",
+        "mobile_project"
+      ],
+      "exit_code": 0,
+      "seconds": 11.177436292000493,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-project-001/affected-00.log",
+      "sha256": "95f0087172a5883851fce20bfd86976184904f1a52620527f6d171be3a1defa5"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_script",
+        "--features",
+        "compiler"
+      ],
+      "exit_code": 0,
+      "seconds": 21.928040542003146,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-project-001/affected-01.log",
+      "sha256": "36425ef7953106a68f1013511ba1656050a89d23bd5b0af9812113ff071fd6eb"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_cook",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_game_player",
+        "--all-targets",
+        "--features",
+        "incant_cook/typescript,incant_script/compiler,incant_game_player/project,incant_game_player/mobile-ffi,incant_game_player/render-input",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "seconds": 30.315663166002196,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-project-001/affected-02.log",
+      "sha256": "5ffbdb89314b53199df2e82b5d0b0769e6b4133b0d50355cf95cabc2f06a9af8"
+    }
+  ],
+  "post_checks": [
+    {
+      "argv": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_script",
+        "incant_game_player",
+        "--features",
+        "incant_game_player/project,incant_game_player/mobile-ffi,incant_game_player/render-input"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+      "exit_code": 0,
+      "seconds": 0.932872249999491,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-project-001/final-lean.log",
+      "sha256": "298ec79670c644a30d57a9892a62886a121644cea81c044ce9c0f87cb4d24911"
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+      "exit_code": 0,
+      "seconds": 0.05227408299833769,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-project-001/final-conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+      "exit_code": 0,
+      "seconds": 2.1482260419979866,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-project-001/final-format.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+      "exit_code": 0,
+      "seconds": 0.06685045899939723,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-project-001/final-diff.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "strict_typescript": {
+    "argv": [
+      "/Users/andreyyurlov/.local/share/fnm/node-versions/v22.23.3/installation/bin/node",
+      "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/node_modules/typescript/bin/tsc",
+      "-p",
+      "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-project-001/probe-tsconfig.json"
+    ],
+    "cwd": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+    "exit_code": 0,
+    "seconds": 0.3321717079998052,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-project-001/probe-typescript.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "config_sha256": "8796a4796dcbb56536aa84498dd9afee3e0a313b46088d6404781c8cecb6f5b1"
+  },
+  "metadata_comparison": "Both freshly compiled destination scripts differ only in exact target; generated bytecode/hardening arrays independently rehashed; identical cooked scene and bindings",
+  "prior_attempts": [
+    "preflight001 nonexistent headless path before authoring",
+    "preflight002 missing required streaming fixture field",
+    "preflight003 three source writes exceeded one-write transaction constraint",
+    "preflight004 oracle integrated current rather than prior committed velocity; full raw native records retained",
+    "device001 Cargo completed successfully but wrapper interrupted before audited export publication; exit remains unknown, no successful export claimed"
+  ],
+  "limits": [
+    "actual iPhone18 Pro / iOS27.0 simulator CPU execution only; no physical phone or performance gate",
+    "iOS device archive compiled and callers linked unsigned; no device execution",
+    "observed object minimum versions include27.0; no older-iOS compatibility claim",
+    "desktop cross-target export, Android admission and mobile static Wasm remain denied",
+    "no Xcode app, window/touch/device-audio host, signing or store upload",
+    "fixed enhanced-determinism+parallel kernels from frozen base; per-project variant integration separate",
+    "final linked caller parser absence audited separately from unused definitions in static archive",
+    "package late failure establishes exact no-success-game/no-PCM publication; whole-prefix atomicity belongs to native host tests"
+  ]
+}

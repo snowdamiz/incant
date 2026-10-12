@@ -2,8 +2,9 @@
 
 This slice adds a closed trusted-source cook from `aarch64-apple-darwin` to
 `aarch64-apple-ios` and `aarch64-apple-ios-sim`. It does not admit arbitrary
-retargeting, project-supplied executable caches, Android cross-target execution, or authored
-project cross-target export. Local native checks and actual iOS simulator execution pass on the retained
+retargeting, project-supplied executable caches or Android cross-target execution.
+Authored project export was outside this checkpoint; the separate
+[authored iOS archive route](authored-ios-project-export.md) records its later proof. Local native checks and actual iOS simulator execution pass on the retained
 immutable source. iOS device archives also compile and link to both callers, but
 were not executed on a device. Independent final execution review is accepted.
 These results do not establish physical-device performance or a phone gate.
@@ -69,8 +70,8 @@ for its C and Swift callers, retaining archive/build/source identities and compa
 all fixture messages. Its trusted build uses `INCANT_NATIVE_SCRIPT_SOURCE` with
 this fixture's absolute path and `INCANT_NATIVE_SCRIPT_NAME=mobile-compat.js`.
 
-The existing `embed_project` and authored exporter host-equals-target guards stay
-in place. Android cross-target production admission stays closed until an actual matching
+The existing `embed_project` and desktop exporter host-equals-target guards stay
+in place; the later authored iOS route uses a separate explicit producer. Android cross-target production admission stays closed until an actual matching
 emulator execution has been independently reviewed. iOS simulator execution,
 iOS device archive compilation, ordinary game packaging, signing and hosted
 physical-phone measurements remain distinct evidence categories.
