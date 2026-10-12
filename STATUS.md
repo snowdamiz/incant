@@ -22,7 +22,7 @@ The public command bus atomically selects deterministic or fast physics, with
 legacy deterministic defaults preserved. Cook/Play explicitly refuse a mismatched
 process before assets or source fallback. All 70 schemas and strict TypeScript
 contracts match. Current integration reuses byte-identical three-mode Rust checks
-and reruns schema/generation/guard checks; final review is pending. Automatic editor
+and reruns schema/generation/guard checks; final independent review is accepted. Automatic editor
 process switching and mode-aware export remain separate follow-on work.
 [Integrated contract and evidence](docs/spikes/physics-project-main173.md).
 

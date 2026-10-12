@@ -560,5 +560,9 @@
     "Settings atomically select requested family; mismatched processes explicitly refuse. Automatic editor/mode-aware process/export execution remains separately pending.",
     "No GPU/device/performance/physics save claim."
   ],
-  "review_status": "current-main final independent review pending"
+  "review_status": "current-main final independently accepted",
+  "final_review": {
+    "path": "docs/spikes/evidence/physics-project-main173/final-review.json",
+    "sha256": "444c785440ae512785f5ca8270fa74dbd1f4961341925354b04105d07b36ccac"
+  }
 }
