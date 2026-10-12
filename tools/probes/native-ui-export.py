@@ -36,9 +36,25 @@ def require(condition, message):
         raise ValueError(message)
 
 
+def remove_debug_source_maps(package):
+    """Remove only source maps produced in this proof's disposable export."""
+    package = package.resolve(strict=True)
+    maps = sorted((package / 'symbols').rglob('*.js.map'))
+    require(maps, 'Expected authored TypeScript debug source map')
+    receipts = []
+    for path in maps:
+        require(not path.is_symlink() and path.is_file() and path.resolve().is_relative_to(package),
+                'Unexpected debug source map path')
+        receipts.append({'path': str(path.relative_to(package)), 'sha256': digest(path)})
+    for path in maps:
+        path.unlink()
+    require(not list((package / 'symbols').rglob('*.js.map')), 'Source map survived removal')
+    return receipts
+
+
 def source():
     return f"""import type {{ NativeBehavior }} from '@incant/runtime/native';
-export default {{ update({{ chunks, dt, input, log }}) {{
+export default {{ persistence: {{ version: 1 }}, update({{ chunks, dt, input, log }}) {{
   let readonly = false;
   try {{ (input.ui.events as unknown as unknown[]).push(null); }} catch (_) {{ readonly = true; }}
   if (!readonly) throw Error('mutable UI notification sequence');
@@ -134,8 +150,9 @@ def main():
             require(rpc.call('project.read') == accepted, 'UI journal reopen differs')
         finally:
             rpc.close()
-        authored.update(project_sha256=digest(project), original_fixture_source_sha256=digest(inputs / 'move.ts'),
-                        source_sha256=hashlib.sha256(source().encode('utf-8')).hexdigest(),
+        final_source = hashlib.sha256(source().encode('utf-8')).hexdigest()
+        require(digest(inputs / 'move.ts') == final_source, 'Accepted script source differs')
+        authored.update(project_sha256=digest(project), source_sha256=final_source,
                         revision=accepted['revision'], ui_undo_redo=True)
         write(output / 'authoring.json', authored)
         return
@@ -148,6 +165,7 @@ def main():
     exported = export_native.export(project, output / 'package', camera=CAMERA, ui_viewport='320x200')
     require(exported['project_sha256'] == authored['project_sha256'] and exported['build_storage_removed_before_startup'], 'Export identity/storage mismatch')
     shutil.rmtree(inputs)  # Only this newly created disposable fixture.
+    removed_maps = remove_debug_source_maps(output / 'package')
     player = output / 'package/player' / ('incant_game_player.exe' if os.name == 'nt' else 'incant_game_player')
     data = player.parent / 'data'
     env = {'PATH': str(player.parent), 'HOME': str(output / 'absent-home'), 'TMPDIR': str(output), 'TMP': str(output), 'TEMP': str(output)}
@@ -178,20 +196,22 @@ def main():
         runs.append({'report': value, 'pcm_sha256': digest(pcm)})
     require(len({r['pcm_sha256'] for r in runs}) == 1 and len({r['report']['render_input']['ui']['atlas_sha256'] for r in runs}) == 1, 'Fresh process state differs')
     refusals = []
-    def refuse(name, extra):
+    def refuse(name, extra, expected_error):
         pcm = output / f'refused-{name}.pcm'
         result = native_process.run(list(map(str, prefix + ['--output', pcm] + extra)), cwd=player.parent, env=env, timeout=90)
         require(result.returncode != 0 and not pcm.exists(), f'{name} was accepted/published')
+        require(expected_error in result.stderr, f'{name} refused at an unintended boundary: {result.stderr}')
         write(output / f'refused-{name}.json', {'returncode': result.returncode, 'stderr': result.stderr})
         refusals.append(name)
-    refuse('unconfigured-consumer', ['--input-recording', record])
+    refuse('unconfigured-consumer', ['--input-recording', record], 'UI recording requires explicit CPU')
     invalid = output / 'invalid-input.json'
     malformed = recording()
     malformed['frames'][2]['ui'][0]['cursor'] = [1, 2]
+    malformed['tick_rate'] = authored['tick_rate']
     write(invalid, malformed)
-    refuse('malformed-preedit', ['--ui-viewport', '320x200', '--input-recording', invalid])
+    refuse('malformed-preedit', ['--ui-viewport', '320x200', '--input-recording', invalid], 'source: Ui')
     save = output / 'unsupported.save'
-    refuse('unsupported-checkpoint', ['--ui-viewport', '320x200', '--save-checkpoint', save])
+    refuse('unsupported-checkpoint', ['--ui-viewport', '320x200', '--save-checkpoint', save], 'UiUnsupported')
     require(not save.exists(), 'Unsupported UI checkpoint published')
     blob = next((data / 'fonts').glob('*.ifont'))
     original = blob.read_bytes()
@@ -201,12 +221,13 @@ def main():
                 blob.unlink()
             else:
                 blob.write_bytes(original[:-1] + bytes([original[-1] ^ 1]))
-            refuse(name, ['--ui-viewport', '320x200'])
+            refuse(name, ['--ui-viewport', '320x200'], 'Font(')
             blob.write_bytes(original)
     finally:
         blob.write_bytes(original)
     write(output / 'result.json', {'passed': True, 'authoring': authored, 'runs': runs, 'refusals': refusals,
         'authoring_deleted': not inputs.exists(), 'build_storage_removed': True, 'player_sha256': exported['player_sha256'],
+        'debug_source_maps_removed': removed_maps,
         'limitations': ['CPU canonical UI only; GPU consumer explicitly unsupported', 'No OS input/IME, visual, phone or performance gate', 'UI checkpoint state remains unsupported']})
     print((output / 'result.json').read_text(encoding='utf-8'))
 

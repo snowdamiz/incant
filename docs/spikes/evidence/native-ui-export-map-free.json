@@ -1,0 +1,640 @@
+{
+  "passed": true,
+  "original_proof_sha256": "14a983925a5ac640c86dc1bee06bb613030b9a5785b7166b9368105c779fad92",
+  "player_sha256": "b54cf5005750be18b2b8fd9c3897805799dbc0242f6ccbd1ab60732d1f309455",
+  "removed_debug_source_maps": [
+    {
+      "path": "symbols/behavior.js.map",
+      "sha256": "cc03bad028da2243f2e56bdbe5ff0f202b4290898e5f49033b74397a2b20cc9d"
+    }
+  ],
+  "authoring_deleted": true,
+  "build_storage_removed": true,
+  "new_build": false,
+  "runs": [
+    {
+      "report": {
+        "flipbooks": [],
+        "frames": 9600,
+        "logs": {
+          "dropped": 0,
+          "entries": [
+            {
+              "level": "info",
+              "message": "activated",
+              "tick": 1
+            },
+            {
+              "level": "info",
+              "message": "value_changed:Name中文",
+              "tick": 4
+            },
+            {
+              "level": "info",
+              "message": "submitted:Name中文",
+              "tick": 5
+            },
+            {
+              "level": "info",
+              "message": "activated",
+              "tick": 7
+            },
+            {
+              "level": "info",
+              "message": "activated",
+              "tick": 10
+            },
+            {
+              "level": "info",
+              "message": "submitted:Name中文",
+              "tick": 12
+            }
+          ]
+        },
+        "observations": {
+          "checks": [
+            {
+              "actual": [
+                1.2,
+                0.0,
+                0.0
+              ],
+              "expect": {
+                "entity": "00000000000000000000000002",
+                "property": "translation",
+                "tolerance": 1e-09,
+                "type": "vector",
+                "value": [
+                  1.2,
+                  0.0,
+                  0.0
+                ]
+              },
+              "name": "mixed-native-motion",
+              "passed": true,
+              "tick": 12
+            }
+          ],
+          "entities": {
+            "00000000000000000000000002": {
+              "parent": null,
+              "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "translation": [
+                1.2,
+                0.0,
+                0.0
+              ],
+              "velocity": null,
+              "world_transform": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                [
+                  1.2,
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            }
+          },
+          "passed": true,
+          "tick": 12,
+          "tick_rate": 60
+        },
+        "pcm_sha256": "d41a7fd4da2a77ec53c03f5e0323523448a6270d5b69152ec6a49ebbefbdd695",
+        "render_input": {
+          "binding_generation": 0,
+          "camera": "00000000000000000000000000000003",
+          "camera_position": [
+            0.0,
+            0.0,
+            8.0
+          ],
+          "decoded_payload_bytes": 1324488,
+          "first_model_position": [
+            1.2,
+            0.0,
+            0.0
+          ],
+          "first_sprite_position": null,
+          "first_text_position": [
+            1.2,
+            0.0,
+            0.0
+          ],
+          "gpu_submitted": false,
+          "mode": "cpu-only",
+          "model_count": 1,
+          "sprite_count": 0,
+          "text_atlas_bytes": 4194304,
+          "text_atlas_nonzero": 723,
+          "text_atlas_sha256": "6e87f09e32e6b19e258a160943bdbad889fabdba3f165aebb1f6641c835f3881",
+          "text_count": 1,
+          "text_font_count": 3,
+          "text_generation": 0,
+          "text_glyph_count": 8,
+          "text_missing_clusters": 0,
+          "text_rtl_glyphs": 3,
+          "tick": 12,
+          "topology_generation": 0,
+          "ui": {
+            "atlas_sha256": "0d46d6308e3ac7d113e3a56c10ad4ef18c829ae0f5828e9c67496a3a96892387",
+            "focus": "00000000000000000000000012",
+            "glyphs": 9,
+            "values": {
+              "00000000000000000000000012": "Name中文"
+            },
+            "viewport": [
+              640.0,
+              300.0
+            ],
+            "widgets": 3
+          }
+        },
+        "sources": [
+          {
+            "id": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              2
+            ],
+            "physics": null,
+            "position": [
+              1.2,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "tick": 12
+      },
+      "pcm_sha256": "d41a7fd4da2a77ec53c03f5e0323523448a6270d5b69152ec6a49ebbefbdd695"
+    },
+    {
+      "report": {
+        "flipbooks": [],
+        "frames": 9600,
+        "logs": {
+          "dropped": 0,
+          "entries": [
+            {
+              "level": "info",
+              "message": "activated",
+              "tick": 1
+            },
+            {
+              "level": "info",
+              "message": "value_changed:Name中文",
+              "tick": 4
+            },
+            {
+              "level": "info",
+              "message": "submitted:Name中文",
+              "tick": 5
+            },
+            {
+              "level": "info",
+              "message": "activated",
+              "tick": 7
+            },
+            {
+              "level": "info",
+              "message": "activated",
+              "tick": 10
+            },
+            {
+              "level": "info",
+              "message": "submitted:Name中文",
+              "tick": 12
+            }
+          ]
+        },
+        "observations": {
+          "checks": [
+            {
+              "actual": [
+                1.2,
+                0.0,
+                0.0
+              ],
+              "expect": {
+                "entity": "00000000000000000000000002",
+                "property": "translation",
+                "tolerance": 1e-09,
+                "type": "vector",
+                "value": [
+                  1.2,
+                  0.0,
+                  0.0
+                ]
+              },
+              "name": "mixed-native-motion",
+              "passed": true,
+              "tick": 12
+            }
+          ],
+          "entities": {
+            "00000000000000000000000002": {
+              "parent": null,
+              "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "translation": [
+                1.2,
+                0.0,
+                0.0
+              ],
+              "velocity": null,
+              "world_transform": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                [
+                  1.2,
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            }
+          },
+          "passed": true,
+          "tick": 12,
+          "tick_rate": 60
+        },
+        "pcm_sha256": "d41a7fd4da2a77ec53c03f5e0323523448a6270d5b69152ec6a49ebbefbdd695",
+        "render_input": {
+          "binding_generation": 0,
+          "camera": "00000000000000000000000000000003",
+          "camera_position": [
+            0.0,
+            0.0,
+            8.0
+          ],
+          "decoded_payload_bytes": 1324488,
+          "first_model_position": [
+            1.2,
+            0.0,
+            0.0
+          ],
+          "first_sprite_position": null,
+          "first_text_position": [
+            1.2,
+            0.0,
+            0.0
+          ],
+          "gpu_submitted": false,
+          "mode": "cpu-only",
+          "model_count": 1,
+          "sprite_count": 0,
+          "text_atlas_bytes": 4194304,
+          "text_atlas_nonzero": 723,
+          "text_atlas_sha256": "6e87f09e32e6b19e258a160943bdbad889fabdba3f165aebb1f6641c835f3881",
+          "text_count": 1,
+          "text_font_count": 3,
+          "text_generation": 0,
+          "text_glyph_count": 8,
+          "text_missing_clusters": 0,
+          "text_rtl_glyphs": 3,
+          "tick": 12,
+          "topology_generation": 0,
+          "ui": {
+            "atlas_sha256": "0d46d6308e3ac7d113e3a56c10ad4ef18c829ae0f5828e9c67496a3a96892387",
+            "focus": "00000000000000000000000012",
+            "glyphs": 9,
+            "values": {
+              "00000000000000000000000012": "Name中文"
+            },
+            "viewport": [
+              640.0,
+              300.0
+            ],
+            "widgets": 3
+          }
+        },
+        "sources": [
+          {
+            "id": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              2
+            ],
+            "physics": null,
+            "position": [
+              1.2,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "tick": 12
+      },
+      "pcm_sha256": "d41a7fd4da2a77ec53c03f5e0323523448a6270d5b69152ec6a49ebbefbdd695"
+    },
+    {
+      "report": {
+        "flipbooks": [],
+        "frames": 9600,
+        "logs": {
+          "dropped": 0,
+          "entries": [
+            {
+              "level": "info",
+              "message": "activated",
+              "tick": 1
+            },
+            {
+              "level": "info",
+              "message": "value_changed:Name中文",
+              "tick": 4
+            },
+            {
+              "level": "info",
+              "message": "submitted:Name中文",
+              "tick": 5
+            },
+            {
+              "level": "info",
+              "message": "activated",
+              "tick": 7
+            },
+            {
+              "level": "info",
+              "message": "activated",
+              "tick": 10
+            },
+            {
+              "level": "info",
+              "message": "submitted:Name中文",
+              "tick": 12
+            }
+          ]
+        },
+        "observations": {
+          "checks": [
+            {
+              "actual": [
+                1.2,
+                0.0,
+                0.0
+              ],
+              "expect": {
+                "entity": "00000000000000000000000002",
+                "property": "translation",
+                "tolerance": 1e-09,
+                "type": "vector",
+                "value": [
+                  1.2,
+                  0.0,
+                  0.0
+                ]
+              },
+              "name": "mixed-native-motion",
+              "passed": true,
+              "tick": 12
+            }
+          ],
+          "entities": {
+            "00000000000000000000000002": {
+              "parent": null,
+              "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "translation": [
+                1.2,
+                0.0,
+                0.0
+              ],
+              "velocity": null,
+              "world_transform": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                [
+                  1.2,
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            }
+          },
+          "passed": true,
+          "tick": 12,
+          "tick_rate": 60
+        },
+        "pcm_sha256": "d41a7fd4da2a77ec53c03f5e0323523448a6270d5b69152ec6a49ebbefbdd695",
+        "render_input": {
+          "binding_generation": 0,
+          "camera": "00000000000000000000000000000003",
+          "camera_position": [
+            0.0,
+            0.0,
+            8.0
+          ],
+          "decoded_payload_bytes": 1324488,
+          "first_model_position": [
+            1.2,
+            0.0,
+            0.0
+          ],
+          "first_sprite_position": null,
+          "first_text_position": [
+            1.2,
+            0.0,
+            0.0
+          ],
+          "gpu_submitted": false,
+          "mode": "cpu-only",
+          "model_count": 1,
+          "sprite_count": 0,
+          "text_atlas_bytes": 4194304,
+          "text_atlas_nonzero": 723,
+          "text_atlas_sha256": "6e87f09e32e6b19e258a160943bdbad889fabdba3f165aebb1f6641c835f3881",
+          "text_count": 1,
+          "text_font_count": 3,
+          "text_generation": 0,
+          "text_glyph_count": 8,
+          "text_missing_clusters": 0,
+          "text_rtl_glyphs": 3,
+          "tick": 12,
+          "topology_generation": 0,
+          "ui": {
+            "atlas_sha256": "0d46d6308e3ac7d113e3a56c10ad4ef18c829ae0f5828e9c67496a3a96892387",
+            "focus": "00000000000000000000000012",
+            "glyphs": 9,
+            "values": {
+              "00000000000000000000000012": "Name中文"
+            },
+            "viewport": [
+              640.0,
+              300.0
+            ],
+            "widgets": 3
+          }
+        },
+        "sources": [
+          {
+            "id": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              2
+            ],
+            "physics": null,
+            "position": [
+              1.2,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "tick": 12
+      },
+      "pcm_sha256": "d41a7fd4da2a77ec53c03f5e0323523448a6270d5b69152ec6a49ebbefbdd695"
+    }
+  ],
+  "scope": "Incremental actual copied-player replay after deleting exported authored-source maps; same executable and reports/PCM as original proof003. Current-main fresh recook remains coordinator-owned.",
+  "refusals": [
+    {
+      "name": "unconfigured-consumer",
+      "returncode": 1,
+      "stderr": "Error: \"UI recording requires explicit CPU --ui-viewport settings\"\n",
+      "output_absent": true
+    },
+    {
+      "name": "malformed-preedit",
+      "returncode": 1,
+      "stderr": "Error: Input { tick: 3, source: Ui }\n",
+      "output_absent": true
+    },
+    {
+      "name": "unsupported-checkpoint",
+      "returncode": 1,
+      "stderr": "Error: Checkpoint(World(UiUnsupported))\n",
+      "output_absent": true
+    },
+    {
+      "name": "missing-font",
+      "returncode": 1,
+      "stderr": "Error: Host(Input(Font(Io(Os { code: 2, kind: NotFound, message: \"No such file or directory\" }))))\n",
+      "output_absent": true
+    },
+    {
+      "name": "tampered-font",
+      "returncode": 1,
+      "stderr": "Error: Host(Input(Font(Invalid(\"font cache checksum mismatch\"))))\n",
+      "output_absent": true
+    }
+  ]
+}
