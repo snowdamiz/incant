@@ -1,0 +1,21 @@
+{
+  "recorded_at": "2026-10-12T03:44:27.928915+00:00",
+  "commit": "fdce108d30475ed5c3e6387d88f2e6b54cb41a5a",
+  "original_freeze": "/tmp/incant-text-bidi-wrap-freeze.json",
+  "changed_frozen_paths": [
+    "third_party/cosmic-text/.gitattributes",
+    "third_party/cosmic-text/INCANT_PATCH.diff",
+    "third_party/cosmic-text/INCANT_PATCH.md"
+  ],
+  "unchanged_reviewed_inputs": 88,
+  "patch": "/tmp/incant-text-bidi-git-portability.patch",
+  "patch_sha256": "6f4d2425a92a23568d525d20a6743af5bc1b5a4d2ae28c7912a95ddd6a06effd",
+  "checks": {
+    "fresh_index_checkout": true,
+    "core_autocrlf": true,
+    "configured_lfs_clean_and_smudge": "Both deliberately failing; filter.required=true",
+    "verified_committed_bytes": 91,
+    "git_diff_exit": 0
+  },
+  "scope": "Repository attributes and provenance only; no Rust source or included font/image/fixture bytes changed from reviewed freeze."
+}

@@ -41,3 +41,11 @@ included fonts/images. Narrow whitespace attributes preserve upstream inputs
 and the raw patch. This changes no Rust source or font bytes; the original
 source review and all numerical checks remain applicable. The vendor manifest
 records the additional attributes delta.
+The final committed-blob and CPU-log review is retained in
+[evidence/text-bidi-wrap-final-review.json](evidence/text-bidi-wrap-final-review.json).
+A fresh isolated checkout with CRLF conversion enabled and deliberately failing
+required LFS filters preserved all 91 committed source/vendor files exactly and
+had a clean diff. The [portability receipt](evidence/text-bidi-wrap-portability.json)
+and [independent review](evidence/text-bidi-wrap-portability-review.json) cover
+that metadata-only follow-up; 88 original frozen inputs remain byte-identical,
+and the three differences are attributes and patch documentation.

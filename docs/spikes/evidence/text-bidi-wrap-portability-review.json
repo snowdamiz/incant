@@ -1,0 +1,24 @@
+{
+  "reviewer": "astra /root/integrate_runtime_prs",
+  "recorded_at": "2026-10-12T03:45:18.001943+00:00",
+  "head": "fdce108d30475ed5c3e6387d88f2e6b54cb41a5a",
+  "accepted": true,
+  "findings": [],
+  "patch_sha256": "6f4d2425a92a23568d525d20a6743af5bc1b5a4d2ae28c7912a95ddd6a06effd",
+  "prior_final_review_sha256": "368764f854bd866b1a8d53f12ae62eef678f5eea2a2f8fb09a6de06d929cca57",
+  "unchanged_reviewed_files": 88,
+  "changed_frozen_metadata": {
+    "third_party/cosmic-text/.gitattributes": "8008c588e812145ac420aaeb942deb693633e4ebab79642dd3059999c24b9035",
+    "third_party/cosmic-text/INCANT_PATCH.diff": "455c7d8550ba22fec5499f8d8d4a6ce3550e7e4c35ab38e998dc1d4578e4b4f2",
+    "third_party/cosmic-text/INCANT_PATCH.md": "0ce6046e18c142c0a497a4cc366eae99e3169cc8cbcbeca74a9aa46506ae7258"
+  },
+  "reviewed": [
+    "Explicit -filter/-diff/-merge on vendor png/ttf prevents configured upstream LFS filters from treating published raw bytes as LFS objects. Binary -text preserved.",
+    "Root CRLF rules remain file-specific; whitespace exemptions are narrow published fixture/license/raw-diff paths, not general source suppression.",
+    "Only attributes/provenance changed; all library, font, image and regression inputs unchanged.",
+    "Author retained fresh-index checkout with autocrlf and deliberately failing required LFS filters as passing integration evidence; no additional test execution by reviewer."
+  ],
+  "limitations": [
+    "No new pixel or device evidence; Claude0055 remains independently scoped."
+  ]
+}
