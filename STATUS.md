@@ -16,6 +16,21 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Native Rust/Wasm IK — actual hosts and ordinary package passed
+
+Additive operations 44–46 expose the complete pre-command v4 pose plus ordered
+IK constraints and atomic target/pole/weight controls. Existing operations 0–43
+and layouts are unchanged; all eight old pose readers explicitly refuse IK.
+Actual Wasmtime/wasm2c checks passed 418 tests, with final formatted fixture
+reexecution, scoped Clippy, wasm32, generated registry and lean graph checks.
+Three fresh source/cache/build/map-deleted ordinary players each matched 252
+public vector assertions, 4,140 full scalar records, native-oracle clocks and
+PCM. All fifteen exact refusals passed. Independent source and final execution/package reviews are accepted;
+coordinator intake remains pending. Compound-pose SDK
+parity, static-module checkpoints, rendered acceptance and device gates remain
+open. [Contract/evidence](docs/spikes/native-wasm-ik.md).
+
+
 ## Authored two-bone IK — main151 integration verified
 
 Bounded stable-ID constraints bind actual cooked model topology/fingerprints,

@@ -1,0 +1,63 @@
+{
+  "old_base": "7eb3db1a6cf5535b307d2966170ec6aafeca0593",
+  "existing_operations": 44,
+  "new_operations": [
+    {
+      "namespace": "incant_animation_ik_v1",
+      "name": "snapshot_len",
+      "opcode": 44,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::AnimationIkLen"
+    },
+    {
+      "namespace": "incant_animation_ik_v1",
+      "name": "read_snapshot",
+      "opcode": 45,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "capacity",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::ReadAnimationIk { ptr, capacity }"
+    },
+    {
+      "namespace": "incant_animation_ik_v1",
+      "name": "control",
+      "opcode": 46,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "len",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::ControlAnimationIk { ptr, len }"
+    }
+  ],
+  "old_operations_records_enums_constants_magic_namespaces_preserved": true,
+  "registry_sha256": "6f8cd9ef213d162af67fd2a69c5fd8a16e60907890d09345cb9aa0f6822fd6d7"
+}

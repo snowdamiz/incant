@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "sources": {
+    "tools/probes/native-wasm-animation-pose-export.py": "e582e7c23e127456f11820392dced4cf49b5d11a11467fd37fc58e077589174b",
+    "tools/probes/native-wasm-animation-pose-export/ik.rs": "02651fc5ade43f73f742fbfa0e5607da20a407ce4164c3224f80a454ae42ec43",
+    "crates/incant_cook/examples/animation_pose_package_oracle.rs": "5d8e9164d9ecfc78561e8a58dfbe9288e9fb56d327e66c18a1dc17502d1cb8d1",
+    "tools/probes/native-animation-graph-export.py": "6e116c6ab103a6e40c64da6586160cd49336530854390986aa3850052d6a9f49",
+    "tools/export_native.py": "a22f6431bb6db373982970e53a219f1f57633c538e08055bcafacefa887699a1"
+  },
+  "headless_sha256": "d27f57db173411bd2ebfcb6ad4499298348d1330c9d78ed1ad6a42b3e377b3eb",
+  "oracle_binary_sha256": "4ded458ea1a4b4a61d4ec16dc36d944046b02e88150a77f60cb0879d49d1df77",
+  "oracle_scene_sha256": "d96b938d77d37dcbc0dc7e9aa7ea579345fb6fd80f7b4e84df9e11de1814046d",
+  "project_sha256": "9510bfcc27461bdd1d1798a10ee415d74bb96502ffdb9463c23dff3586575529",
+  "ticks": 20,
+  "complete_records": 100,
+  "records_per_tick": 5,
+  "ik_constraints_per_tick": 4,
+  "sample_vectors_per_record": 16,
+  "metadata_vectors_per_record": 3,
+  "sample_vectors_per_tick": 48,
+  "metadata_vectors_per_tick": 9,
+  "bounded_vector_checks": 252,
+  "source_deleted": true,
+  "journal": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-ik-shipping-003/authoring/project.journal.jsonl"
+}

@@ -48,6 +48,15 @@ pub enum Call {
         ptr: i32,
         capacity: i32,
     },
+    AnimationIkLen,
+    ReadAnimationIk {
+        ptr: i32,
+        capacity: i32,
+    },
+    ControlAnimationIk {
+        ptr: i32,
+        len: i32,
+    },
     AnimationLenV4,
     ReadAnimationsV4 {
         ptr: i32,
@@ -176,6 +185,8 @@ pub struct Capability {
     animation_graphs: Vec<u8>,
     animation_rejected: bool,
     animation_ik_present: bool,
+    ik_rows: Vec<incant_runtime::IkSnapshot>,
+    animation_ik: Vec<u8>,
     transferred: usize,
     calls: usize,
     tick: u64,
@@ -246,10 +257,12 @@ impl Capability {
             return Err(error);
         }
         self.animation_rejected = false;
-        self.animation_ik_present = self
-            .animation_rows
-            .iter()
-            .any(|row| world.ik_state(row.id).is_some());
+        if let Err(error) = world.snapshot_ik(&mut self.ik_rows) {
+            self.abort();
+            return Err(error.into());
+        }
+        self.animation_ik_present = !self.ik_rows.is_empty();
+        self.animation_ik.clear();
         self.animation_scene = Some(world.scene_id());
         self.animations_v3.clear();
         self.animations_v4.clear();
@@ -333,6 +346,8 @@ impl Capability {
     }
     pub fn abort(&mut self) {
         self.animation_rows.clear();
+        self.ik_rows.clear();
+        self.animation_ik.clear();
         self.animations.clear();
         self.animations_v2.clear();
         self.animations_v3.clear();
@@ -375,6 +390,8 @@ impl Capability {
             return Err(Error::Abi("rejected animation transaction"));
         }
         self.animation_rows.clear();
+        self.ik_rows.clear();
+        self.animation_ik.clear();
         self.animations.clear();
         self.animations_v2.clear();
         self.animations_v3.clear();
@@ -501,6 +518,9 @@ impl Capability {
                 Call::AnimationLen
                     | Call::ReadAnimations { .. }
                     | Call::ControlAnimation { .. }
+                    | Call::AnimationIkLen
+                    | Call::ReadAnimationIk { .. }
+                    | Call::ControlAnimationIk { .. }
                     | Call::AnimationLenV2
                     | Call::ReadAnimationsV2 { .. }
                     | Call::ControlAnimationV2 { .. }
@@ -662,6 +682,45 @@ impl Capability {
                 self.transfer(len)?;
                 memory[region].copy_from_slice(self.navigation_state()?.reply()?);
                 return Ok(len as i32);
+            }
+            Call::AnimationIkLen | Call::ReadAnimationIk { .. } => {
+                if self.animation_ik.is_empty() {
+                    if self.animations_v4.is_empty() {
+                        crate::animation_poses::encode(
+                            self.animation_scene
+                                .ok_or(Error::Abi("animation scene absent"))?,
+                            &mut self.animation_rows,
+                            &mut self.animations_v4,
+                        )?;
+                    }
+                    crate::animation_ik::encode(
+                        &self.animation_rows,
+                        &self.animations_v4,
+                        &self.ik_rows,
+                        &mut self.animation_ik,
+                    )?;
+                }
+                let len = self.animation_ik.len();
+                if let Call::ReadAnimationIk { ptr, capacity } = call {
+                    let capacity = usize::try_from(capacity)
+                        .map_err(|_| Error::Abi("animation IK destination capacity"))?;
+                    if capacity < len {
+                        return Err(Error::Abi("animation IK destination capacity"));
+                    }
+                    range(ptr, capacity, memory.len())?;
+                    let region = range(ptr, len, memory.len())?;
+                    self.transfer(len)?;
+                    memory[region].copy_from_slice(&self.animation_ik);
+                }
+                return Ok(len as i32);
+            }
+            Call::ControlAnimationIk { ptr, len } => {
+                if usize::try_from(len).ok() != Some(incant_wasm_abi::AnimationIkCommand::SIZE) {
+                    return Err(Error::Abi("animation IK command length"));
+                }
+                let bytes =
+                    self.read::<{ incant_wasm_abi::AnimationIkCommand::SIZE }>(memory, ptr)?;
+                self.command(crate::animation_ik::command(&bytes)?)?;
             }
             Call::AnimationLenV4 | Call::ReadAnimationsV4 { .. } => {
                 if self.animations_v4.is_empty() {

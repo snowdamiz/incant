@@ -121,7 +121,8 @@ fn observe(world: &mut NativeWorld) -> ([[f64; 3]; 48], [[f64; 3]; 9]) {
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args: Vec<_> = std::env::args().skip(1).collect();
-    if args.len() != 4 {
+    let ik = args.get(4).is_some_and(|s| s == "--ik");
+    if args.len() != 4 && !(args.len() == 5 && ik) {
         return Err("usage: animation_pose_package_oracle PROJECT SCENE OUTPUT_SCENE TICKS".into());
     }
     let path = std::path::Path::new(&args[0]);
@@ -151,13 +152,43 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     for turn in 0..ticks {
         world.step()?;
         let (samples, metadata) = observe(&mut world);
-        println!(
-            "{}",
-            serde_json::json!({"tick":turn+1,"samples":samples.as_slice(),"metadata":metadata})
-        );
+        let mut ik_rows = Vec::new();
+        let mut record =
+            serde_json::json!({"tick":turn+1,"samples":samples.as_slice(),"metadata":metadata});
+        if ik {
+            world.snapshot_ik(&mut ik_rows)?;
+            if ik_rows.len() != 4 {
+                return Err("oracle constraint count".into());
+            }
+            let mut values = Vec::new();
+            for row in &ik_rows {
+                values.extend([
+                    row.sample.target,
+                    row.sample.pole,
+                    [
+                        row.sample.weight,
+                        u128::from_be_bytes(row.sample.id.0) as f64,
+                        f64::from(row.sample.chain[1]),
+                    ],
+                ]);
+            }
+            record["ik"] = serde_json::json!(values);
+        }
+        println!("{record}");
         let mut commands = FrameCommands::default();
         for command in controls(turn) {
             commands.push(command)?;
+        }
+        for (index, row) in ik_rows.iter().enumerate() {
+            commands.push(StructuralCommand::ControlIk {
+                entity: row.entity,
+                control: IkControl {
+                    constraint: row.sample.id,
+                    target: [(f64::from(turn) + 1.) / 8., index as f64, 0.],
+                    pole: [0., 1., (f64::from(turn) + 1.) / 64.],
+                    weight: f64::from(turn % 3) / 2.,
+                },
+            })?;
         }
         world.apply(&mut commands)?;
     }
