@@ -79,6 +79,17 @@ upload/draw consumption, widgets/input/IME, color/CFF support, Claude appearance
 acceptance and device evidence remain; this does not complete Game UI.
 [Scope and evidence](docs/spikes/native-font-atlas.md).
 
+## Skeletal pose blending — locally verified
+
+The retained animation player can blend two independently sampled clips in local
+TRS space before composing hierarchy and skinning. Exact endpoints, missing-channel
+rest values, antipodal quaternions, atomic failure recovery, source-deleted fresh
+loading and 1,024 allocation-free sampling/deformation calls pass. The 165 affected
+asset/renderer CPU tests and Clippy pass; 70 GPU tests stayed ignored. Independent
+review accepted the source. Authored blend trees, state machines, native frame/SDK
+blend controls, IK and root motion remain; no Phase 1 gate is claimed.
+[Evidence](docs/spikes/runtime-pose-blending.md).
+
 ## Native editor agent integration — merged, scoped validation complete
 
 The native session/bridge now connect streamed turns, approval/cancel, bounded
