@@ -25,10 +25,11 @@ use thiserror::Error;
 
 pub const SCHEMA_VERSION: u32 = 1;
 pub use incant_types::{
-    AngularVelocity, AngularVelocity2D, AudioBus, AudioListener, AudioSource, AudioSpatial,
-    BodyMotion, Camera, CameraProjection, Collider, Collider2D, ColliderPart, ColliderShape,
-    ColliderShape2D, DirectionalLight, DirectionalShadows, EnvironmentLight, Id, MeshRenderer,
-    PointLight, PrimitiveColliderShape, RigidBody, SpotLight, TextureUsage, Transform, Velocity,
+    AngularVelocity, AngularVelocity2D, Animation, AudioBus, AudioListener, AudioSource,
+    AudioSpatial, BodyMotion, Camera, CameraProjection, Collider, Collider2D, ColliderPart,
+    ColliderShape, ColliderShape2D, DirectionalLight, DirectionalShadows, EnvironmentLight, Id,
+    MeshRenderer, PointLight, PrimitiveColliderShape, RigidBody, SpotLight, TextureUsage,
+    Transform, Velocity,
 };
 pub fn new_id() -> Id {
     ulid::Ulid::new().to_string()
@@ -349,6 +350,16 @@ impl Project {
                         );
                     }
                 }
+                if entity.components.contains_key("Animation")
+                    && (!entity.components.contains_key("MeshRenderer")
+                        || entity.components.contains_key("SpriteRenderer")
+                        || entity.components.contains_key("Tilemap"))
+                {
+                    issue(
+                        format!("{path}/components/Animation"),
+                        "Animation requires MeshRenderer without SpriteRenderer or Tilemap",
+                    );
+                }
                 if let Some(flipbook) = entity.components.get("SpriteFlipbook") {
                     let checked = (|| -> Result<(), String> {
                         let flipbook: SpriteFlipbook =
@@ -513,6 +524,10 @@ fn validate_component(kind: &str, value: &Value, project: &Project) -> Result<()
                 return Err("tilemap requires a color atlas texture asset".into());
             }
         }
+        "Animation" => {
+            let animation: Animation = decode(value)?;
+            animation.validate().map_err(str::to_owned)?;
+        }
         "SpriteFlipbook" => {
             let flipbook: SpriteFlipbook = decode(value)?;
             flipbook.rate.validate().map_err(|e| e.to_string())?;
@@ -603,6 +618,7 @@ pub fn schema_registry() -> BTreeMap<String, Value> {
             "MeshRenderer".into(),
             json!(schemars::schema_for!(MeshRenderer)),
         ),
+        ("Animation".into(), json!(schemars::schema_for!(Animation))),
         ("Camera".into(), json!(schemars::schema_for!(Camera))),
         ("Tilemap".into(), json!(schemars::schema_for!(Tilemap))),
         (

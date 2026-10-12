@@ -9,6 +9,11 @@ export namespace AngularVelocity2DSchema {
 }
 export type AngularVelocity2D = AngularVelocity2DSchema.Root;
 
+export namespace AnimationSchema {
+  export type Root = { "clip"?: number | null; "looping": boolean; "playing": boolean; "seconds": number; "speed": number };
+}
+export type Animation = AnimationSchema.Root;
+
 export namespace AudioBusSchema {
   export type Root = { "gain_db": number; "parent"?: string | null };
 }
