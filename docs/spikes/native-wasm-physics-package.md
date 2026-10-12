@@ -4,8 +4,8 @@ This follow-up exercises the ordinary public authored Wasm route with physics
 queries. It builds on the independently accepted [physics SDK](native-wasm-physics-queries.md)
 without changing production ABI, physics algorithms, session or world codecs.
 The new proof is stored outside `/tmp` so its package and receipts can survive a
-machine restart. Corrected proof002 passed; independent final review and main
-integration are pending.
+machine restart. Corrected proof002 passed independent final source and evidence
+review with no findings; main integration remains pending.
 
 ## Connected path
 
@@ -81,6 +81,10 @@ four successful process reports, ten refusal reports, input fixtures, eight
 compressed logs and 37 receipts. The actual package remains under
 `~/.codex/incant-evidence/physics-package-002` for direct audit. No lost `/tmp`
 artifacts from the earlier SDK conformance are required for this package result.
+The [independent review receipt](evidence/native-wasm-physics-package/independent-final-review.json)
+binds the immutable implementation and directly audited package files. The reviewer
+read all three probe sources and verified the reports and exact failure boundaries;
+this review did not run new processes or claim current-main integration.
 
 The guest compiled for `wasm32-unknown-unknown`; the native oracle built and
 passed scoped Clippy. Formatting, Python compilation and the corrected tooling
