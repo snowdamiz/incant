@@ -110,3 +110,12 @@ bridge/SDK checks. The actual-main merge changes no tested tree bytes.
 [Integration evidence](evidence/native-text-bindings-main118.json) retains exact
 commands and log hashes. This remains the data/package foundation with explicit
 Text consumer refusals; no rendering or mixed-game export acceptance is inferred.
+
+## Composed CPU consumer integration
+
+The earlier foundation refusal statements describe that historical source. The
+[composed CPU text input](native-text-input.md#actual-main121-integration) now loads
+packaged fonts through the existing game host and passes the actual mixed shipping
+export after deleting source and private build storage. Plain unsupported routes
+and GPU text rendering retain explicit refusals. This does not claim text draw,
+widget, IME or visual acceptance.

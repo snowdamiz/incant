@@ -115,3 +115,27 @@ Independent read-only acceptance and exact source/process identities are retaine
 [evidence/native-text-input-independent-review.json](evidence/native-text-input-independent-review.json).
 The review found no actionable issue within the stated CPU preparation, rollback,
 admission and public export scope; drawing and complete game UI remain pending.
+
+## Actual main121 integration
+
+The original reviewed commit is preserved. All 33 non-manifest reviewed inputs are
+unchanged; the two manifest/lock seams retain both the current build-only shader
+cooker and the text dev dependency. The existing diagnostic output test explicitly
+sets its new text field to `None`. The integrated run passes 120 CPU tests in 31
+groups, with 75 GPU tests ignored, plus all-target Clippy, wasm32 compile checks,
+normal dependency guards, formatting and conventions.
+
+The current headless executable recooks the actual fresh shipping export against
+the integrated lock and compiler identity. Three source/build-deleted 20-tick
+player runs again match the multilingual atlas, native mesh/text motion and audible
+PCM. Missing and tampered packaged fonts refuse before PCM publication. Exact
+player identity and the compiler-free/codegen/export receipts are retained in the
+[integration evidence](evidence/native-text-input-main121.json). No GPU is used.
+
+The first integrated compile caught the older diagnostic fixture's missing field.
+After its correction, the CPU tests passed; the first Clippy attempt then ran out
+of local disk space. Both logs are retained. Once disk space became available, the
+remaining checks passed with frozen source. No cache deletion occurred in this
+resumed turn. Actual-main ancestry
+synchronization changes no tested tree bytes. Text drawing and the other visual,
+widget/input and device gates above remain open.
