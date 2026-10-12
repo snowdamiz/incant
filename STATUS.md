@@ -16,6 +16,18 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Physics process selection — local execution passed
+
+The developer launcher builds the authored physics variant and runs a private
+executable copy. Public setting edits, Undo/Redo and native execution pass in
+deterministic, fast and deterministic again. Fresh ordinary shipping exports
+of both modes run after source/cache/map/build removal with exact native
+observations and PCM; five actual solver feature sets and shipping codegen are
+audited. The full tools suite passes with four Python skips. Independent review
+and integration remain pending; automatic editor worker selection, physics saves,
+reference-device performance and phase gates remain open.
+[Scope and retained evidence](docs/spikes/physics-process-selection.md).
+
 ## Project physics selection — current main173 verified
 
 The public command bus atomically selects deterministic or fast physics, with
