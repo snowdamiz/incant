@@ -988,7 +988,7 @@
       "uncompressed_bytes": 5125
     }
   },
-  "integration_review": "Only STATUS and additive capability capture/refusal seams resolved. The exact two accepted v4 guard/test files preserve main v4 captures and reject eight legacy pose calls atomically when IK is present. All other producer implementation and build inputs are unchanged. Independent final current-main closure pending.",
+  "integration_review": "Only STATUS and additive capability capture/refusal seams resolved. The exact two accepted v4 guard/test files preserve main v4 captures and reject eight legacy pose calls atomically when IK is present. All other producer implementation and build inputs are unchanged. Independent final current-main closure accepted; exact root receipt retained.",
   "prior_verification_failure": {
     "scope": "External receipt audit, not engine or probe execution",
     "old": "verification-001.log.gz",
@@ -1005,5 +1005,9 @@
     "Edit-mode IK preview and authored visual controls remain open.",
     "Rust/Wasm IK controls are a separate future ABI; all legacy pose snapshots explicitly refuse committed IK.",
     "Shipping proof covers canonical CPU input/control/checkpoint outputs; no GPU deformation or visual acceptance claimed."
-  ]
+  ],
+  "final_review": {
+    "path": "docs/spikes/evidence/native-authored-ik-main151/root-final-review.json",
+    "sha256": "7f96ec7a93dc6070560f08310823d0198ead483b36a191d773b4163e7f7526c3"
+  }
 }

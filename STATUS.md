@@ -26,7 +26,8 @@ main151 union passes 823 CPU cases (82 GPU cases intentionally ignored), scoped
 Clippy, target/dependency/schema/SDK checks and a fresh public shipping proof.
 Four source/map/build-deleted processes preserve exact checkpoint, PCM and log
 continuation; seven precise refusals pass. All eight legacy Wasm v1–v4 pose calls
-refuse committed IK atomically. Publication is pending its final review/fast gate.
+refuse committed IK atomically. Final independent review is accepted; publication
+awaits the required fast check.
 
 Renderer appearance/GPU/device budgets, edit-mode IK preview/authoring UI and
 Rust/Wasm IK controls remain open. Allocation bounds and the original producer
