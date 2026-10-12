@@ -16,6 +16,23 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Authored nested animation trees — local and ordinary shipping checks passed
+
+Stable-ID nested 1D and rectangular 2D motions now cook into a bounded v15 node
+table and run on the native graph clock. Complete weighted samples travel through
+native/render snapshots and owned TypeScript columns; legacy Wasm pose snapshots
+explicitly refuse these unrepresentable states. Existing clip/flat-pair encodings
+and SLERP sampling remain unchanged. All 665 affected CPU tests, Clippy, wasm32,
+dependency guards and exact schemas/SDK checks pass; 82 renderer GPU tests stayed
+ignored. Public command authoring, Undo/Redo and fresh recovery pass 228 selected
+state checks plus complete 56-tick sample logs. An ordinary shipping player runs
+after deleting authoring/build inputs and external source maps: three full runs,
+six save/resume pairs and two exact refusals pass, with matching final saves,
+logs and PCM. Current-main integration and rendered acceptance remain pending.
+Nonzero transitions involving blend states, layering, IK, root motion, the
+separate Wasm weighted SDK proof and device gates remain in progress; this is
+not animation or Phase 1 completion. [Contract and evidence](docs/spikes/native-animation-tree-playback.md).
+
 ## Ordinary offline audio session checkpoints — current-main verified
 
 World v8/session v3 resume real static and streamed Kira voices alongside existing
@@ -283,9 +300,9 @@ and complete Game UI/IME gates remain open.
 
 ## Current milestone
 
-Main #146 includes the multi-pose sampler, bounded nested/2D animation numeric
+Main #147 includes the multi-pose sampler, bounded nested/2D animation numeric
 core, public Wasm physics queries and ordinary offline audio checkpoint
-continuation. The reviewed two-bone IK CPU integration is current-main verified;
+continuation. The reviewed two-bone IK CPU integration is merged;
 authored IK controls and rendered acceptance remain open. Authored tree playback
 and complete-pose SDK work remain separately reviewed local lanes awaiting their
 ordinary shipping proofs.

@@ -201,12 +201,23 @@ export interface NativeAnimationGraphs {
   readonly parameterOffsets: Uint32Array;
   readonly parameterValues: Float64Array;
   readonly blending: Uint8Array;
+  /** 1 for a weighted tree; full samples are in animations.pose* for the same ID.
+   * sourceClips/sourceSeconds/weights describe only the legacy two-pose path. */
+  readonly weighted: Uint8Array;
   readonly sourceClips: Int32Array;
   readonly sourceSeconds: Float64Array;
   readonly weights: Float64Array;
 }
 export interface NativeAnimations {
   readonly graphs: NativeAnimationGraphs;
+  /** For row i, [poseOffsets[i], poseOffsets[i+1]) contains its complete tree
+   * pose (up to 16 normalized weights). Empty means the legacy clip/two-pose path.
+   * With a nonempty span, clips/seconds are representative only. Weighted TRS
+   * blending happens before hierarchy matrices; weights sum to one. */
+  readonly poseOffsets: Uint32Array;
+  readonly poseClips: Int32Array;
+  readonly poseSeconds: Float64Array;
+  readonly poseWeights: Float64Array;
   readonly ids: readonly NativeId[];
   readonly clips: Int32Array;
   readonly seconds: Float64Array;

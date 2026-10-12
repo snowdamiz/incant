@@ -20,8 +20,11 @@ export namespace AnimationGraphSchema {
   export type AnimationCondition = { "comparison": AnimationComparison; "parameter": string; "value": number };
   export type AnimationGraphState = { "looping": boolean; "motion": AnimationMotion };
   export type AnimationGraphTransition = { "after_seconds"?: number | null; "conditions": Array<AnimationCondition>; "fade_seconds": number; "from": string; "priority": number; "to": string };
-  export type AnimationMotion = ({ "clip"?: number | null; "kind": "clip" }) | ({ "cycle_seconds": number; "kind": "blend1d"; "parameter": string; "points": Array<AnimationBlendPoint> });
+  export type AnimationMotion = ({ "clip"?: number | null; "kind": "clip" }) | ({ "cycle_seconds": number; "kind": "tree"; "tree": AnimationTree }) | ({ "cycle_seconds": number; "kind": "blend1d"; "parameter": string; "points": Array<AnimationBlendPoint> });
   export type AnimationParameter = { "initial": number; "max": number; "min": number };
+  export type AnimationTree = { "nodes": { [key: string]: AnimationTreeNode }; "root": string };
+  export type AnimationTreeNode = ({ "clip"?: number | null; "kind": "clip" }) | ({ "kind": "blend1d"; "parameter": string; "points": Array<AnimationTreePoint> }) | ({ "children": Array<string>; "kind": "blend2d"; "parameters": [string, string]; "x": Array<number>; "y": Array<number> });
+  export type AnimationTreePoint = { "node": string; "threshold": number };
   export type Root = { "initial": string; "parameters": { [key: string]: AnimationParameter }; "states": { [key: string]: AnimationGraphState }; "transitions": { [key: string]: AnimationGraphTransition } };
 }
 export type AnimationGraph = AnimationGraphSchema.Root;

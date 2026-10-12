@@ -375,3 +375,80 @@ fn source_deleted_graph_blend_drives_real_cpu_skin_pose_without_rebinding() {
     }
     assert!(Arc::ptr_eq(&source, &binding(&input, 1).source));
 }
+
+#[test]
+fn tree_pose_sync_retains_complete_weights_and_rolls_back_consumer_rejection() {
+    let (dir, scene, definition) = prepare();
+    let mut nodes = scene.spatial().to_vec();
+    let parameters: Arc<[_]> = vec![NativeAnimationParameter {
+        id: id(100),
+        initial: 0.25,
+        min: 0.0,
+        max: 1.0,
+    }]
+    .into();
+    let tree = NativeAnimationBlendTree::new(
+        vec![
+            NativeBlendTreeNode::Clip(Some(0)),
+            NativeBlendTreeNode::Clip(Some(1)),
+            NativeBlendTreeNode::Blend1d {
+                parameter: 0,
+                points: Arc::from([
+                    NativeBlendTreePoint {
+                        threshold: 0.0,
+                        child: 0,
+                    },
+                    NativeBlendTreePoint {
+                        threshold: 1.0,
+                        child: 1,
+                    },
+                ]),
+            },
+        ],
+        parameters.clone(),
+        definition.clip_durations.clone(),
+    )
+    .unwrap();
+    let graph = NativeAnimationGraph::new(
+        0,
+        parameters.to_vec(),
+        vec![NativeAnimationGraphState {
+            id: id(101),
+            motion: NativeAnimationMotion::Tree {
+                cycle_seconds: 2.0,
+                tree: Arc::new(tree),
+            },
+            looping: true,
+        }],
+        vec![],
+        &definition.clip_durations,
+    )
+    .unwrap();
+    let a = Arc::make_mut(nodes[0].animation.as_mut().unwrap());
+    a.initial.clip = None;
+    a.graph = Some(Arc::new(graph));
+    let scene = scene
+        .clone()
+        .with_spatial(scene.visual_assets().to_vec(), nodes)
+        .unwrap();
+    let mut world = NativeWorld::new(scene);
+    let mut input = load(&dir, &world).unwrap();
+    let before = binding(&input, 1).animation_pose.unwrap();
+    assert_eq!(before.samples().len(), 2);
+    world.step().unwrap();
+    let result = input.try_sync(&world.spatial_view().unwrap(), |_, _, _| {
+        Err::<(), _>("consumer refused")
+    });
+    assert!(result.is_err());
+    assert_eq!(binding(&input, 1).animation_pose, Some(before));
+    input
+        .try_sync(&world.spatial_view().unwrap(), |_, _, _| Ok::<_, ()>(()))
+        .unwrap();
+    let after = binding(&input, 1).animation_pose.unwrap();
+    assert_ne!(after, before);
+    assert_eq!(
+        after,
+        world.animation_graph_state(id(1)).unwrap().pose.unwrap()
+    );
+    assert!(binding(&input, 1).animation_blend.is_none());
+}

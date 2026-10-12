@@ -85,6 +85,7 @@ pub(crate) fn prepare(
                     cast_shadows: mesh.cast_shadows,
                     animation: node.animation,
                     animation_blend: node.animation_blend,
+                    animation_pose: node.animation_pose,
                 })
             })
             .transpose()?;
@@ -207,6 +208,7 @@ pub(crate) fn prepare(
             frame: 0,
             animation: None,
             animation_blend: None,
+            animation_pose: None,
         };
         input.nodes.len()
     ];

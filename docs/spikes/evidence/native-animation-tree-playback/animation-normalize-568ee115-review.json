@@ -1,0 +1,19 @@
+{
+  "reviewer": "Astra /root/runtime_review",
+  "commit": "568ee1156f27f7858c139182563e4292a66f12c9",
+  "verdict": "accepted; no remaining scoped finding",
+  "source": {
+    "path": "crates/incant_types/src/animation_pose.rs",
+    "sha256": "cb56b5ec69667dc76432ea53c762b3c07e4308003e90094aa84c1881b87dfbc3"
+  },
+  "scope": "Four added lines only after reviewed215c7afd. Tail fill restores EMPTY for every inactive slot; two full PartialEq controls cover discarded tail and leading discarded entry before survivors. Fill operates after compaction and does not alter active values/order.",
+  "checks": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-tail-fixed.log",
+    "sha256": "c2eb00587480498f2faacb7a4a95302c2a758cbb1e442ba2e1632d4fa3dacd47",
+    "result": "Parent executed2types tests,0failed; independently read, no duplicate Cargo run"
+  },
+  "limitations": [
+    "Not acceptance of broader authored tree pipeline",
+    "No GPU or visual execution"
+  ]
+}

@@ -628,6 +628,11 @@ impl Capability {
             Call::AnimationLenV3 | Call::AnimationGraphLen => {
                 let graph = matches!(call, Call::AnimationGraphLen);
                 self.prepare_animation_snapshot(graph);
+                if !graph && self.animations_v3.is_empty() {
+                    return Err(Error::Abi(
+                        "animation v3 cannot represent weighted tree poses",
+                    ));
+                }
                 return Ok(if graph {
                     self.animation_graphs.len()
                 } else {
@@ -638,6 +643,11 @@ impl Capability {
             | Call::ReadAnimationGraphs { ptr, capacity } => {
                 let graph = matches!(call, Call::ReadAnimationGraphs { .. });
                 self.prepare_animation_snapshot(graph);
+                if !graph && self.animations_v3.is_empty() {
+                    return Err(Error::Abi(
+                        "animation v3 cannot represent weighted tree poses",
+                    ));
+                }
                 let len = if graph {
                     self.animation_graphs.len()
                 } else {

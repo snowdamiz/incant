@@ -1,0 +1,40 @@
+{
+  "reviewer": "/root/integrate_runtime_prs",
+  "accepted": true,
+  "scope": "Original authored-tree CPU and ordinary QuickJS shipping proof; current-main and v4 union remain pending",
+  "evidence_sha256": "be3a47d7d2cbb6d87be6ff75043fa98d30b96885a94601d9a2e0fd5508f44b74",
+  "production_head": "568ee1156f27f7858c139182563e4292a66f12c9",
+  "export_head": "3dad39b3701253bd6fd2cbe98481276f484f3064",
+  "verified": {
+    "retained_artifacts": 158,
+    "frozen_inputs": 1170,
+    "checks_zero_exit": 12,
+    "affected_tests": 665,
+    "affected_groups": 117,
+    "separate_renderer_cpu_regression": 1,
+    "ignored_gpu": 82,
+    "runtime_files": 7,
+    "player_sha256": "55cd376ce6212b2ba8bb5562cd031765ff58608993108f179bcc747f61b833a9",
+    "fresh_full_processes": 3,
+    "continuation_pairs": 6,
+    "typed_refusals": 2,
+    "retained_commands": 26,
+    "full_run_vector_assertions": 228,
+    "full_pose_ticks": 56,
+    "repeat_reports_saves_pcm_equal": true,
+    "split_logs_pcm_final_saves_equal": true,
+    "source_maps_authoring_private_build_absence": true
+  },
+  "findings": [],
+  "source_reviews": [
+    "64d64ec0339b691ef5b6852f1d05cd0fe25ceacbf9f4df51e70936699f835bda",
+    "74f394a589b7cb7fc187b9288f8b9dcae4d89104509a0206040292478403e453",
+    "d187e3e9511a48ade55c1b1463ac44a32abbbae712525465ae01a7f47e22d28d"
+  ],
+  "limitations": [
+    "CPU render-input and complete sample observations, not GPU pixels or device/performance gate",
+    "Tree-to-tree timed fades, IK, root motion and module checkpoint state remain separate unfinished work",
+    "Current-main integration pending; accepted Wasm v4 SDK remains a separate proof"
+  ],
+  "note": "No code changes, engine execution, GPU or pixels by reviewer. Earlier probe-order/schema/version failures remain historical. Reviewer script first referenced checkpoint_version at outer namespace; corrected to existing BASE helper and repeated all process checks."
+}

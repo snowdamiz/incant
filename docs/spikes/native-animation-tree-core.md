@@ -68,3 +68,7 @@ Clippy, wasm32 and both runtime dependency guards. Integration of actual main
 files byte-for-byte. [Retained checks and independent review](evidence/animation-core-main142.json)
 record that boundary; authored/runtime tree wiring and rendered/device acceptance
 remain separate.
+
+The subsequent [authored-tree playback integration](native-animation-tree-playback.md)
+connects the numeric core to typed authoring and complete copied observations.
+Its current-main validation is separate from this original numeric-core receipt.

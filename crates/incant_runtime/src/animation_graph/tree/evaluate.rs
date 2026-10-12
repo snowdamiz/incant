@@ -1,4 +1,5 @@
 use super::*;
+use crate::AnimationSample;
 
 impl NativeAnimationBlendTree {
     /// All leaves share normalized phase, but retain their own clip durations.
@@ -22,22 +23,29 @@ impl NativeAnimationBlendTree {
         let phase = if phase == 0.0 { 0.0 } else { phase };
         let mut weights = [0.0; MAX_BLEND_TREE_NODES];
         weights[self.nodes.len() - 1] = 1.0;
-        let mut result = AnimationPoseSamples::EMPTY;
+        let mut result = [WeightedAnimationSample {
+            sample: AnimationSample::REST,
+            weight: 0.0,
+        }; MAX_BLEND_TREE_POSES];
+        let mut count = 0;
         for (index, node) in self.nodes.iter().enumerate().rev() {
             let weight = weights[index];
             if weight == 0.0 {
                 continue;
             }
             match node {
-                NativeBlendTreeNode::Clip(clip) => result.push(
-                    AnimationSample {
-                        clip: *clip,
-                        seconds: clip.map_or(0.0, |clip| {
-                            phase * f64::from(self.clip_durations[usize::from(clip)])
-                        }),
-                    },
-                    weight,
-                )?,
+                NativeBlendTreeNode::Clip(clip) => {
+                    result[count] = WeightedAnimationSample {
+                        sample: AnimationSample {
+                            clip: *clip,
+                            seconds: clip.map_or(0.0, |clip| {
+                                phase * f64::from(self.clip_durations[usize::from(clip)])
+                            }),
+                        },
+                        weight,
+                    };
+                    count += 1;
+                }
                 NativeBlendTreeNode::Blend1d { parameter, points } => {
                     let (lo, hi, t) = bracket(
                         points.len(),
@@ -63,8 +71,7 @@ impl NativeAnimationBlendTree {
                 }
             }
         }
-        result.normalize();
-        Ok(result)
+        AnimationPoseSamples::new(&result[..count]).map_err(SceneError::Invalid)
     }
 }
 
