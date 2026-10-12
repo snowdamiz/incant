@@ -30,6 +30,7 @@ pub struct CookedSpatial {
     pub entity: StableId,
     pub camera: Option<Camera>,
     pub mesh: Option<NativeMeshRenderer>,
+    pub animation: Option<std::sync::Arc<crate::NativeAnimation>>,
     /// Cold binding data stays indirect so every unrelated structural command
     /// and spatial node does not pay for a full sprite configuration.
     pub sprite: Option<Box<crate::NativeSpriteRenderer>>,
@@ -46,6 +47,7 @@ impl CookedSpatial {
             entity,
             camera: None,
             mesh: None,
+            animation: None,
             sprite: None,
             tilemap: None,
             flipbook: None,
@@ -58,6 +60,7 @@ impl CookedSpatial {
     pub fn is_empty(&self) -> bool {
         self.camera.is_none()
             && self.mesh.is_none()
+            && self.animation.is_none()
             && self.sprite.is_none()
             && self.tilemap.is_none()
             && self.flipbook.is_none()
@@ -96,6 +99,7 @@ pub(crate) fn validate<'a>(
     let mut ids = BTreeSet::new();
     let (mut tilemaps, mut tile_slots) = (0, 0usize);
     let mut flipbook_frames = 0usize;
+    let mut animation_clips = 0usize;
     let (mut meshes, mut sprites, mut directional, mut local, mut shadows, mut environments) =
         (0, 0, 0, 0, 0, 0);
     let asset = |id, kind| {
@@ -124,6 +128,22 @@ pub(crate) fn validate<'a>(
         if let Some(mesh) = &node.mesh {
             meshes += 1;
             if !asset(mesh.mesh, VisualAssetKind::Model) {
+                return Err(invalid());
+            }
+        }
+        if let Some(animation) = &node.animation {
+            animation.validate()?;
+            let mesh = node.mesh.as_ref().ok_or_else(invalid)?;
+            let reference = assets
+                .binary_search_by_key(&mesh.mesh, |a| a.id)
+                .map_err(|_| invalid())?;
+            if assets[reference].fingerprint != animation.mesh_fingerprint {
+                return Err(invalid());
+            }
+            animation_clips = animation_clips
+                .checked_add(animation.clip_durations.len())
+                .ok_or_else(invalid)?;
+            if animation_clips > crate::MAX_SCENE_ANIMATION_CLIPS {
                 return Err(invalid());
             }
         }

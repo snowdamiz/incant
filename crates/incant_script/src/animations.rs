@@ -1,0 +1,103 @@
+//! Committed playback copied before numeric loans. Native scratch is retained;
+//! published arrays own VM memory and cannot mutate playback or later snapshots.
+use incant_runtime::{AnimationSnapshot, NativeWorld};
+use rquickjs::{Array, Ctx, Object, TypedArray, object::Property};
+
+#[derive(Default)]
+pub(crate) struct Scratch {
+    rows: Vec<AnimationSnapshot>,
+    clips: Vec<i32>,
+    seconds: Vec<f64>,
+    speeds: Vec<f64>,
+    flags: Vec<u32>,
+}
+
+impl Scratch {
+    pub fn capture(&mut self, world: &mut NativeWorld) -> Result<(), incant_runtime::RuntimeError> {
+        world.snapshot_animations(&mut self.rows)?;
+        self.clips.clear();
+        self.seconds.clear();
+        self.speeds.clear();
+        self.flags.clear();
+        for row in &self.rows {
+            let state = row.state;
+            self.clips.push(state.sample.clip.map_or(-1, i32::from));
+            self.seconds.push(state.sample.seconds);
+            self.speeds.push(state.speed);
+            self.flags.push(
+                u32::from(state.playing)
+                    | (u32::from(state.looping) << 1)
+                    | (u32::from(state.completed) << 2),
+            );
+        }
+        Ok(())
+    }
+    pub fn expose<'js>(&self, ctx: &Ctx<'js>) -> rquickjs::Result<Object<'js>> {
+        let result = Object::new_proto(ctx.clone(), None)?;
+        let ids = Array::new(ctx.clone())?;
+        for (index, row) in self.rows.iter().enumerate() {
+            ids.as_object().prop(
+                index as u32,
+                Property::from(ulid::Ulid::from_bytes(row.id.0).to_string()).enumerable(),
+            )?;
+        }
+        result.prop("ids", Property::from(ids).enumerable())?;
+        result.prop(
+            "clips",
+            Property::from(TypedArray::new_copy(ctx.clone(), &self.clips)?).enumerable(),
+        )?;
+        result.prop(
+            "seconds",
+            Property::from(TypedArray::new_copy(ctx.clone(), &self.seconds)?).enumerable(),
+        )?;
+        result.prop(
+            "speeds",
+            Property::from(TypedArray::new_copy(ctx.clone(), &self.speeds)?).enumerable(),
+        )?;
+        result.prop(
+            "flags",
+            Property::from(TypedArray::new_copy(ctx.clone(), &self.flags)?).enumerable(),
+        )?;
+        Ok(result)
+    }
+}
+
+#[cfg(all(test, feature = "compiler"))]
+mod tests {
+    use super::*;
+    use incant_runtime::{AnimationSample, AnimationState, StableId};
+
+    #[test]
+    fn owned_aligned_arrays_preserve_rest_pose_reverse_speed_and_bypass_guest_setters() {
+        let runtime = rquickjs::Runtime::new().unwrap();
+        let context = rquickjs::Context::full(&runtime).unwrap();
+        let scratch = Scratch {
+            rows: vec![AnimationSnapshot {
+                id: StableId([0; 16]),
+                state: AnimationState {
+                    sample: AnimationSample {
+                        clip: None,
+                        seconds: 0.,
+                    },
+                    speed: -2.,
+                    playing: false,
+                    looping: true,
+                    completed: false,
+                },
+            }],
+            clips: vec![-1],
+            seconds: vec![0.],
+            speeds: vec![-2.],
+            flags: vec![2],
+        };
+        context.with(|ctx| {
+            ctx.eval::<(), _>("Object.defineProperty(Array.prototype,'0',{set(){throw Error('array setter')}});for(const key of ['clips','seconds','speeds','flags'])Object.defineProperty(Object.prototype,key,{set(){throw Error('object setter')}});").unwrap();
+            ctx.globals().set("snapshot", scratch.expose(&ctx).unwrap()).unwrap();
+            ctx.eval::<(), _>("if(snapshot.ids[0]!=='00000000000000000000000000'||snapshot.clips[0]!==-1||snapshot.seconds[0]!==0||snapshot.speeds[0]!==-2||snapshot.flags[0]!==2)throw Error('snapshot');snapshot.clips[0]=55;snapshot.seconds[0]=9;snapshot.speeds[0]=9;snapshot.flags[0]=9;").unwrap();
+        });
+        assert_eq!(scratch.clips, [-1]);
+        assert_eq!(scratch.seconds, [0.]);
+        assert_eq!(scratch.speeds, [-2.]);
+        assert_eq!(scratch.flags, [2]);
+    }
+}

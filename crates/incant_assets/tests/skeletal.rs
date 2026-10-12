@@ -28,7 +28,12 @@ fn source_deleted_skin_sampling_preserves_hierarchy_weights_and_mesh_instances()
     fs::remove_file(dir.path().join("model.gltf")).unwrap();
     fs::remove_file(dir.path().join("model.bin")).unwrap();
     let cooked = incant_assets_runtime::load_model(&cache, &key).unwrap();
-    assert!(incant_assets_runtime::RuntimeAsset::load_model("animated", 1, &cache, &key).is_err());
+    let version =
+        incant_assets_runtime::RuntimeAsset::load_model("animated", 1, &cache, &key).unwrap();
+    assert!(
+        version.info().payload_bytes
+            >= cooked.animation.as_ref().unwrap().retained_bytes().unwrap()
+    );
     assert!(incant_assets::model_navigation_geometry(&cooked).is_err());
     // Missing normals expand in index order 2,0,1. Weights must follow exactly.
     assert_eq!(

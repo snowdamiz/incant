@@ -4325,6 +4325,7 @@ dependencies = [
  "incant_core",
  "incant_doc",
  "incant_render_data",
+ "incant_types",
  "serde_json",
 ]
 

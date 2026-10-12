@@ -1,6 +1,8 @@
 //! Native QuickJS host over borrowed ECS numeric columns. No authoring model,
 //! command bus, JSON projection or filesystem/network capability is installed.
 //! The prior document-backed host lives temporarily in incant_play_legacy.
+mod animation_commands;
+mod animations;
 pub mod artifact;
 mod audio_commands;
 mod bindings;
@@ -99,7 +101,7 @@ pub enum ScriptError {
 /// private, compiler-produced bytecode. Ticks borrow real numeric ECS columns;
 /// they neither parse code nor serialize project/component values.
 ///
-/// This native host exposes `update({chunks, dt, commands, input, physics, navigation, clock, timers, log, flipbooks})`. Each chunk has stable
+/// This native host exposes `update({chunks, dt, commands, input, physics, navigation, localization, clock, timers, log, flipbooks, animations})`. Each chunk has stable
 /// ID strings, Transform stride 10, and optional Velocity stride 3. Views are
 /// detached on every exit. A failed callback restores its component writes and
 /// permanently fails this host. Tick-local structural commands apply only after
@@ -126,6 +128,7 @@ pub struct ScriptHost {
     schedule: schedule::Schedule,
     logs: NativeLogs,
     flipbooks: flipbooks::Scratch,
+    animations: animations::Scratch,
     failed: bool,
 }
 
@@ -215,6 +218,7 @@ impl ScriptHost {
             schedule: schedule::Schedule::default(),
             logs: NativeLogs::default(),
             flipbooks: flipbooks::Scratch::default(),
+            animations: animations::Scratch::default(),
             failed: false,
         })
     }
@@ -259,6 +263,10 @@ impl ScriptHost {
             self.flipbooks.capture(world)?;
             let flipbooks = self.flipbooks.expose(&ctx).map_err(|error| {
                 diagnostics::javascript(&ctx, error, "flipbook snapshot", &self.deadline)
+            })?;
+            self.animations.capture(world)?;
+            let animations = self.animations.expose(&ctx).map_err(|error| {
+                diagnostics::javascript(&ctx, error, "animation snapshot", &self.deadline)
             })?;
             let freeze = self
                 .freeze
@@ -392,8 +400,11 @@ impl ScriptHost {
                                 localization.clone(),
                             )),
                             rquickjs::function::Flat((clock.clone(), timer_api)),
-                            log_api.clone(),
-                            flipbooks.clone(),
+                            rquickjs::function::Flat((
+                                log_api.clone(),
+                                flipbooks.clone(),
+                                animations.clone(),
+                            )),
                             index as u32,
                             instances,
                             state_api,

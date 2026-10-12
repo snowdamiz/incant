@@ -12,6 +12,9 @@ pub(crate) fn encoded_size(n: &CookedSpatial) -> usize {
     n.flipbook
         .as_deref()
         .map_or(0, crate::flipbook_binary::encoded_size)
+        + n.animation
+            .as_deref()
+            .map_or(0, crate::animation_binary::encoded_size)
         + 17
         + n.camera.as_ref().map_or(0, |c| {
             25 + match c.projection {

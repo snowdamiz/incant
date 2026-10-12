@@ -1,0 +1,61 @@
+{
+  "recorded_at": "2026-10-12T00:20:00.140768+00:00",
+  "base": "81ee9bf51bfd5609097c0ecb36177f0169b79639",
+  "scope": "Typed animation authoring; sealed cooked asset resources; PreparedPlay and actual embed_project both script routes",
+  "sources": {
+    "crates/incant_cook/Cargo.toml": "8f839f2e34696ddc05c4f44028c2965ac66a7266708e8e07ee6b549deda8de1d",
+    "crates/incant_cook/src/lib.rs": "85114f3b730df1daede63ec83cc4048edf39e930ddfaaeaad811d5a82f0ef796",
+    "crates/incant_cook/src/project_build.rs": "afa51ad974ba5465e6526fd7dbe95c03e485fa77359393aef072b59a0f3d60e7",
+    "crates/incant_cook/src/project_script.rs": "b9d104988fe47cf9a36f528d4ffc987307c178b7070ba85beb09de7d7bfc5e8a",
+    "crates/incant_cook/src/scene.rs": "dc44b1ab00334f1deba30b2b5bac5b3430696f8b78afda50fdd3cfed33d74e8f",
+    "crates/incant_cook/src/spatial.rs": "ad78245036e071658f5a0f688520d2b7988cdf0f82a5c178ef82c79c01979667",
+    "crates/incant_doc/src/lib.rs": "3ce6a54976155b11d3d120487fd5c72a85e14559f493f2f9e19ed6da14e24f7c",
+    "crates/incant_doc/tests/document.rs": "2e087d51524e66e41559acaaed605d4e1577f220830563fbda0956f298c8f02e",
+    "crates/incant_play/src/lib.rs": "3533b52ba72fd59a2ba7e92b8a757cb58ee5e3f278c619fde7ad4e97a77858eb",
+    "sdk/ts/src/generated.d.ts": "b45501b6732e781e3c250b411677fe1d0e11ff088338d811ec481d8d9d7ea445",
+    "crates/incant_cmd/tests/animation.rs": "859d0a27ec68b2f755e36a35ee8dc7916fa9147d4882d6608f99fc027d77d653",
+    "crates/incant_cook/src/animation.rs": "293835fb3a3c8b694e36052949167cea9bfbc7ccf1e1647efd05eed63de0ae34",
+    "crates/incant_cook/tests/animation.rs": "4c7e0fc0ffd979706cfbdd8ff13cc92f4a1e1016349447005bcde55af44612dd",
+    "crates/incant_doc/examples/schema.rs": "cfb41703ade8fb52eb48677f6d2356359d4c38d40385d883094642a05c6f4047",
+    "crates/incant_play/tests/animation.rs": "ea84b364bdec739f8d26078443874044a034fccdf1ed91399550856d54cb476a",
+    "docs/spikes/native-animation-authoring.md": "8e014b3b64587c85279f18998db4648edc7b126c730c03d9e36eba5f4ba5fb9a",
+    "schemas/Animation.schema.json": "a16e38ba70ab375434e29fd22331b65cc2e09dc8e8dc6705715022e54fbb897a"
+  },
+  "checks": {
+    "tests": {
+      "path": "/tmp/incant-animation-authoring-tests-003.log",
+      "sha256": "67c912e6c1e9203c54cc9c591c002bb73ba9e1ff881ddacdd7d990eee1853787",
+      "groups": 34,
+      "passed": 90,
+      "failed": 0,
+      "ignored": 0
+    },
+    "clippy": {
+      "path": "/tmp/incant-animation-authoring-clippy-003.log",
+      "sha256": "be0dcf3e9b489c55ee28407f9ff1020d18d188639419cfdc965c10aa0a668585"
+    },
+    "runtime_graph": {
+      "path": "/tmp/incant-animation-runtime-graph.log",
+      "sha256": "3d51afb2b3eef13c2c3f65792d78fe8d3cf1b296bb3601298382c4a12b7b52fb"
+    },
+    "schema_generation": {
+      "path": "/tmp/incant-animation-schema-generation.log",
+      "sha256": "1534219af1d68421b0060d4ff148f15e01cbe8b50e4442d77f600f77498f6b7f"
+    },
+    "sdk": {
+      "path": "/tmp/incant-animation-authoring-sdk.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "generated": "Rust document registry + tools/generate_sdk.mjs; conventions check passed",
+  "limitations": [
+    "No GPU or visual acceptance in this scope",
+    "No new shipping-profile executable/device benchmark",
+    "Scripting/render union and independent reviews pending"
+  ],
+  "attempts": [
+    "initial check wrong module path key_path corrected",
+    "initial focused PreparedPlay test incorrectly chose spatial-refusing OfflineGameSession; corrected to NativeSession",
+    "full tests002 passed; final format/schema tests003 and Clippy003 passed"
+  ]
+}
