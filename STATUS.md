@@ -16,7 +16,7 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Public Wasm navigation paths — locally verified
+## Public Wasm navigation paths — current-main integration verified
 
 The Rust SDK now queries the committed native navmesh and prepared-grid solvers
 through bounded copied request/results. Existing opcodes 0–35 remain unchanged;
@@ -141,12 +141,11 @@ Checkpoint8 promoted frozen main117 into release at
 exact-candidate push workflows succeeded. Its tree is exactly the selected main117
 tree; parents and Built-by trailer are verified. Checkpoints6–7 remain historical
 failed attempts. Later main118+ work continues through reviewed local checks and
-fast PR gates. Checkpoint9 now freezes main132 at candidate
-`7b908b38a9f2b984285b7de310dc1d2c6aa702b9` in PR #133; its comprehensive
-checks are active, with six jobs reaching the same pre-provider agent fixture
-failure because its fixed allowance is smaller than the current tool input. The
-reviewed test-only correction is merged in PR #135; checkpoint9 remains frozen
-and unpromoted, and full repair validation needs a later batch.
+fast PR gates. Checkpoint9 finished on frozen main132 with 17 required successes
+and six jobs failing at the same pre-provider fixture; no failed batch was
+promoted. The independently reviewed correction merged in PR #135. Checkpoint10
+now freezes main137 at `af3f84fdd60dda011d77295cbc21bcf55414b3f8` in PR #133,
+with the same 23 required contexts. Navigation and later feature work are excluded.
 Release does not track moving main.
 [Promotion evidence](docs/spikes/evidence/release-checkpoint-8.json).
 

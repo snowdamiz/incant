@@ -73,11 +73,31 @@ See [durable evidence](evidence/native-wasm-navigation-paths.json) for source
 identities, commands, logs, review receipts and preserved earlier failed attempts.
 Independent root review accepted the frozen source and final evidence for scoped
 integration. It rechecked retained artifacts and logs; the 626 prepared-file
-validation remains the recorded pre-cleanup probe check. Main integration and
-its required fast gates remain pending.
+validation remains the recorded pre-cleanup probe check. Current-main integration is recorded below; its publication requires the exact fast gate.
 
 Collider fixtures intentionally compare complete entity snapshots and retained
 native routes instead of claiming unsupported physics checkpoint support. This
 is local CPU capability conformance. It does not establish a fresh ordinary
 source-deleted shipping package, full guest checkpoint continuation, reference
 phone performance, rendered debug-draw acceptance or a phase gate.
+
+
+## Actual main137 integration
+
+The reviewed implementation and final receipt are integrated on actual main137
+`98e972c4bf2239279e937091c835890389b77a51`. Only STATUS needed an additive
+conflict resolution; all 28 accepted implementation/test/probe inputs are exact.
+The actual-main ancestry merge was made after all checks terminated, preserving
+the tested tree exactly.
+
+[Integration evidence](evidence/native-wasm-navigation-main137.json) binds 1,463
+frozen inputs, 16 compressed logs and eight receipts. The current union repeats
+369 actual-host cases across 64 groups and 190 native cases across 29 groups,
+with zero failed or ignored cases, both all-target Clippy suites and three fresh
+development processes. Supported wasm32, 232 Python tests (four existing skips),
+22 Node tests, generators, dependency guards and formatting pass. All 626
+prepared files for 125 modules were verified before cleanup; 80 navigation
+artifacts and three guest source copies remain hashed and independently checked.
+[Independent integration review](evidence/native-wasm-navigation-main137-root-review.json)
+accepted the unchanged source and exact evidence. No ordinary navigation shipping
+package, native window, GPU, provider or device run is added by this integration.

@@ -1,0 +1,27 @@
+{
+  "at": "2026-10-12T05:54:20.629547+00:00",
+  "status": "accepted integrated source/evidence closure",
+  "evidence_sha256": "b7d5b5f8e2c2aa190b9c8dfe499a1098433636f122d947c7555e07b5a911da15",
+  "source": "8da6e5f0d1008dce6e38256e79442501a8045f63",
+  "main": "98e972c4bf2239279e937091c835890389b77a51",
+  "frozen_inputs_verified": 1463,
+  "accepted_source_inputs_verified": 28,
+  "compressed_raw_logs_verified": 16,
+  "receipts_verified": 8,
+  "retained_navigation_files_verified": 83,
+  "checks": {
+    "actual_hosts_passed": 369,
+    "actual_host_groups": 64,
+    "native_passed": 190,
+    "native_groups": 29,
+    "failed": 0,
+    "ignored": 0,
+    "actual_host_and_native_all_target_clippy": true,
+    "development_processes": 3,
+    "wasm32_runtime_abi_sdk": true,
+    "generators_tools_graph_fmt": true
+  },
+  "commands_all_zero": 12,
+  "same_tree_verified": true,
+  "scope": "Exact source/hash/numerical evidence closure. Retained83files rehashed directly;626prepared-fileverification is pre-cleanup producer receipt. No ordinary source-deletedshipping,deviceperformance orphasegate claim."
+}
