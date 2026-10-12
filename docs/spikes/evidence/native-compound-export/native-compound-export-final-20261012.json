@@ -1,0 +1,43 @@
+{
+  "at": "2026-10-12T17:22:08.917434+00:00",
+  "reviewer": "astra runtime_review",
+  "result": "accepted scoped CPU execution and ordinary public export/continuation evidence; no remaining finding",
+  "manifest": "/Users/andreyyurlov/.codex/worktrees/native-rust-sdk/incant/docs/spikes/evidence/native-compound-export.json",
+  "manifest_sha256": "da51132e781905fedadfcaedb2361ad497ae173aece53278949e7d826fba9383",
+  "verified": {
+    "raw_durable_artifacts": 159,
+    "core_inputs": 1126,
+    "core_tests": 749,
+    "core_groups": 113,
+    "core_ignored_gpu": 82,
+    "core_failed": 0,
+    "player_sha256": "041bbf3452a6b322adc463b773cd3cfe249be827ba5db3f460e5981b61d4f1cb",
+    "player_bytes": 9268576,
+    "package_files": 7,
+    "complete_reports": 23,
+    "fresh_full_runs": 3,
+    "continuation_pairs": 10,
+    "full_records_each": 112,
+    "public_vector_checks_each": 224,
+    "precise_refusals": 2
+  },
+  "reviewed": [
+    "All original/durable artifact identities and actual core logs",
+    "Every report full native pose record against previously source-reviewed closed-form oracle",
+    "Every split final save byte identity, PCM concatenation and log concatenation; final render input equality",
+    "Active world-v10 and canceled nonfade-v6 checkpoint framing",
+    "Three actual full report/save/PCM repetitions, public authoring logs equality and command stream hashes",
+    "Private authoring inputs and debug maps absent; package hashes exact"
+  ],
+  "diagnostic_contract_review": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/native-compound-export-source-followup-20261012.json",
+    "sha256": "d1e908acba45ebbe997e98c5c2ff7fcf8293bd886c770b63788a1c1ba29e902e"
+  },
+  "limits": [
+    "No new builds or player launches by reviewer; execution evidence is retained root run.",
+    "No GPU/window/device/performance or Phase1 gate claim.",
+    "Module guest checkpoint, root-motion combination and rendered compound appearance remain outside this proof."
+  ],
+  "prior_receipt_sha256": "b905100c00260f92edce71e89f78693eb710ef5f0ad78e8dc5c12b1b5df6f657",
+  "retention_update": "Reverified all159 durable compressed/raw artifacts and originals after lossless gzip retention of46large JSONs; source/executed proof unchanged."
+}

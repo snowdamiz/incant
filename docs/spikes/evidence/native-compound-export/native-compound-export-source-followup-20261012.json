@@ -1,0 +1,27 @@
+{
+  "at": "2026-10-12T17:19:54.585011+00:00",
+  "reviewer": "astra runtime_review",
+  "result": "accepted clarified admission and failed-observation output contracts; no remaining source finding",
+  "prior_review": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/native-compound-export-source-20261012.json",
+    "sha256": "a6047a11f4c4e89211d197ba85d177bd6f836832b8f53bc800205004e86d353c"
+  },
+  "helper": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/native-rust-sdk/incant/tools/probes/native-compound-animation-export.py",
+    "sha256": "d2ceddf70347cd4c7c9d7d35b9070c88174e7cb84c6c521bab003dbe26172aff"
+  },
+  "executed_followup": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/compound-export-001/negative-output-followup-002/result.json",
+    "sha256": "b01242ab0776686a9c0f696d8b55088ffd2f6f6728d5dc7378d2a2c75a15e843"
+  },
+  "correction": "The earlier blanket empty-stdout request was too broad. main.rs intentionally emits the complete failed-observation report before refusing PCM/save publication. Admission failures must emit no stdout; observation failures must emit the complete failed report with exact tick, false checks and closed-form expected logs. Both remain exit 1 with exact diagnostics and no output files.",
+  "verified": [
+    "Exact helper source change and player main.rs report-before-refusal behavior",
+    "Both preserved stdout/stderr hashes and diagnostics; no PCM/save paths",
+    "Failed report tick1, four false checks and both full native sample log records against independent closed-form oracle",
+    "Same retained player hash; no recook or new launches by reviewer"
+  ],
+  "limits": [
+    "Original source review scope retained; no GPU, native window, device or phase gate claim."
+  ]
+}

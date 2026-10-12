@@ -2,6 +2,8 @@
 mod blending;
 #[path = "skeletal/fixture.rs"]
 mod fixture;
+#[path = "skeletal/grouped.rs"]
+mod grouped;
 #[path = "skeletal/ik.rs"]
 mod ik;
 #[path = "skeletal/weighted.rs"]

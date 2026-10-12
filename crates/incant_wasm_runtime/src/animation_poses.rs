@@ -29,6 +29,10 @@ pub(crate) fn encode(
     let mut weighted = 0usize;
     for row in rows.iter() {
         let count = if let Some(pose) = row.pose {
+            if !pose.is_weighted() {
+                return Err(Error::Abi("animation v4 cannot represent compound poses"));
+            }
+
             if row.blend.is_some() || row.state.transition.is_some() {
                 return Err(Error::Abi("ambiguous native animation pose"));
             }

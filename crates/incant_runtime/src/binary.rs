@@ -1,4 +1,4 @@
-//! Versions 1–16, little-endian checked data (not executable code). SHA-256 detects
+//! Versions 1–16 and18, little-endian checked data (not executable code). SHA-256 detects
 //! damage, not authorship. No casts, alignment assumptions or native-layout ABI.
 use crate::scene::MAX_ENTITIES;
 use crate::{CookedEntity, CookedScene, SceneError, StableId};
@@ -7,7 +7,7 @@ use sha2::{Digest, Sha256};
 use std::collections::BTreeMap;
 
 const MAGIC: &[u8; 8] = b"INCANTSC";
-const VERSION: u32 = 16;
+const VERSION: u32 = 18;
 const PREFIX: usize = 40;
 const HEADER: usize = 72;
 const MIN_RECORD: usize = 104;
@@ -24,8 +24,10 @@ impl CookedScene {
             .collect();
         let mut bytes = Vec::with_capacity(HEADER + self.entities.len() * MAX_RECORD);
         bytes.extend(MAGIC);
-        let version = if self.has_ik() {
+        let version = if self.has_compound_animation_fades() {
             VERSION
+        } else if self.has_ik() {
+            16
         } else if self.has_animation_trees() {
             15
         } else if self.has_animation_graphs() {
@@ -165,6 +167,11 @@ impl CookedScene {
         if version >= 16 {
             crate::ik_binary::write(&mut bytes, &self.spatial);
         }
+        // Reserved v17 root-motion catalogs and bindings. This producer does
+        // not yet construct them; its decoder refuses nonempty sections.
+        if version >= 17 {
+            bytes.extend([0; 8]);
+        }
         let length = (bytes.len() - HEADER) as u32;
         bytes[36..40].copy_from_slice(&length.to_le_bytes());
         let checksum = checksum(&bytes);
@@ -181,7 +188,7 @@ impl CookedScene {
             return Err(SceneError::Invalid("magic"));
         }
         let version = header.u32()?;
-        if !(1..=VERSION).contains(&version) {
+        if !(1..=VERSION).contains(&version) || version == 17 {
             return Err(SceneError::Version(version));
         }
         let tick_rate = header.u32()?;
@@ -426,7 +433,12 @@ impl CookedScene {
             crate::animation_graph::binary::read(&mut reader, &mut spatial, version)?;
         }
         if version >= 16 {
-            crate::ik_binary::read(&mut reader, &mut spatial)?;
+            crate::ik_binary::read(&mut reader, &mut spatial, version >= 17)?;
+        }
+        if version >= 17 && (reader.u32()? != 0 || reader.u32()? != 0) {
+            return Err(SceneError::Invalid(
+                "root-motion catalogs unsupported by this decoder",
+            ));
         }
         if !reader.0.is_empty() {
             return Err(SceneError::Invalid("trailing payload"));
@@ -452,6 +464,11 @@ impl CookedScene {
         } else {
             candidate
         };
+        if version == 18 && !candidate.has_compound_animation_fades() {
+            return Err(SceneError::Invalid(
+                "version 18 requires compound animation fades",
+            ));
+        }
         if version == 15 && !candidate.has_animation_trees() {
             return Err(SceneError::Invalid("version 15 requires animation trees"));
         }

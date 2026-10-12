@@ -212,6 +212,15 @@ export interface NativeAnimationGraphs {
   /** 1 for a weighted tree; full samples are in animations.pose* for the same ID.
    * sourceClips/sourceSeconds/weights describe only the legacy two-pose path. */
   readonly weighted: Uint8Array;
+  /** Compound-state transition: active bit0, outgoing playing bit1. Source
+   * state is null and numeric fields zero when absent. Both states read the
+   * same committed parameters; outgoing speed is captured on transition. */
+  readonly fadeStates: readonly (NativeId | null)[];
+  readonly fadeFlags: Uint8Array;
+  readonly fadeSeconds: Float64Array;
+  readonly fadeSpeeds: Float64Array;
+  readonly fadeElapsed: Float64Array;
+  readonly fadeDuration: Float64Array;
   readonly sourceClips: Int32Array;
   readonly sourceSeconds: Float64Array;
   readonly weights: Float64Array;
@@ -231,10 +240,17 @@ export interface NativeAnimationIk {
 export interface NativeAnimations {
   readonly ik: NativeAnimationIk;
   readonly graphs: NativeAnimationGraphs;
-  /** For row i, [poseOffsets[i], poseOffsets[i+1]) contains its complete tree
-   * pose (up to 16 normalized weights). Empty means the legacy clip/two-pose path.
-   * With a nonempty span, clips/seconds are representative only. Weighted TRS
-   * blending happens before hierarchy matrices; weights sum to one. */
+  /** Packed complete poses. Empty span means legacy clip/two-pose playback.
+   * poseKinds[2*i..2*i+2] uses 0=clip, 1=ordered spherical pair, 2=weighted
+   * quaternion mean, 255=absent. poseSplits[i] is zero for one group, otherwise
+   * the number of samples in the outgoing group. Compound fades have at most
+   * eight samples per group; a single weighted pose has at most sixteen.
+   * Weights normalize within each group, never across an outer transition.
+   * poseOuterWeights[i] applies one final TRS crossfade between the two groups.
+   * clips/seconds remain the incoming state's representative scalar sample. */
+  readonly poseKinds: Uint8Array;
+  readonly poseSplits: Uint8Array;
+  readonly poseOuterWeights: Float64Array;
   readonly poseOffsets: Uint32Array;
   readonly poseClips: Int32Array;
   readonly poseSeconds: Float64Array;

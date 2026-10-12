@@ -1,0 +1,135 @@
+[
+  {
+    "name": "tests",
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_types",
+      "-p",
+      "incant_assets_runtime",
+      "-p",
+      "incant_assets",
+      "-p",
+      "incant_doc",
+      "-p",
+      "incant_cmd",
+      "-p",
+      "incant_cook",
+      "-p",
+      "incant_runtime",
+      "-p",
+      "incant_script",
+      "-p",
+      "incant_wasm_runtime",
+      "-p",
+      "incant_render",
+      "--all-targets"
+    ],
+    "exit": 0,
+    "seconds": 48.98102617263794
+  },
+  {
+    "name": "clippy",
+    "command": [
+      "./tools/cargo",
+      "clippy",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_types",
+      "-p",
+      "incant_assets_runtime",
+      "-p",
+      "incant_assets",
+      "-p",
+      "incant_doc",
+      "-p",
+      "incant_cmd",
+      "-p",
+      "incant_cook",
+      "-p",
+      "incant_runtime",
+      "-p",
+      "incant_script",
+      "-p",
+      "incant_wasm_runtime",
+      "-p",
+      "incant_render",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit": 0,
+    "seconds": 22.986066818237305
+  },
+  {
+    "name": "wasm",
+    "command": [
+      "./tools/cargo",
+      "check",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_render",
+      "--lib",
+      "--target",
+      "wasm32-unknown-unknown"
+    ],
+    "exit": 0,
+    "seconds": 11.685617923736572
+  },
+  {
+    "name": "dependencies",
+    "command": [
+      "python3",
+      "tools/check_runtime_dependencies.py",
+      "incant_runtime",
+      "incant_render",
+      "incant_wasm_runtime"
+    ],
+    "exit": 0,
+    "seconds": 0.5720341205596924
+  },
+  {
+    "name": "fmt",
+    "command": [
+      "./tools/cargo",
+      "fmt",
+      "--all",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 1.4260742664337158
+  },
+  {
+    "name": "conventions",
+    "command": [
+      "python3",
+      "tools/generate_conventions.py",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.04405379295349121
+  },
+  {
+    "name": "typescript",
+    "command": [
+      "/Users/andreyyurlov/Documents/dev/incant/node_modules/.bin/tsc",
+      "--noEmit",
+      "-p",
+      "sdk/ts/tsconfig.json"
+    ],
+    "exit": 0,
+    "seconds": 0.4295647144317627
+  }
+]

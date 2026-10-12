@@ -280,11 +280,9 @@ fn mixed_control_failure_rolls_back_and_legacy_clock_owners_refuse() {
     }
 }
 #[test]
-fn unsupported_blend_fades_invalid_tables_and_oversized_graphs_refuse() {
+fn invalid_tables_and_oversized_graphs_refuse() {
     let g = graph(vec![]);
     for transitions in [
-        vec![edge(30, 0, 2, 0, 0.5)],
-        vec![edge(30, 2, 1, 0, 0.5)],
         vec![edge(31, 0, 1, 0, 0.0), edge(30, 0, 2, 0, 0.0)],
         vec![edge(30, 0, 1, 0, 0.0); 129],
     ] {
@@ -610,3 +608,6 @@ fn manual_state_selection_uses_master_pause_after_natural_completion() {
     assert!(!world.animation_state(id(1)).unwrap().playing);
     assert!(snapshot(&world).paused);
 }
+
+#[path = "animation_graph/fades.rs"]
+mod fades;

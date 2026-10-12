@@ -1,0 +1,38 @@
+[
+  {
+    "argv": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_assets",
+      "-p",
+      "incant_assets_runtime",
+      "--all-features"
+    ],
+    "exit_code": 0
+  },
+  {
+    "argv": [
+      "./tools/cargo",
+      "clippy",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_assets",
+      "-p",
+      "incant_assets_runtime",
+      "--all-features",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0
+  }
+]
