@@ -1,0 +1,84 @@
+{
+  "format": "incant-input",
+  "version": 1,
+  "tick_rate": 60,
+  "start_tick": 0,
+  "ticks": 221,
+  "frames": [
+    {
+      "tick": 1,
+      "events": [
+        {
+          "type": "key",
+          "code": "KeyD",
+          "down": false
+        },
+        {
+          "type": "key",
+          "code": "KeyA",
+          "down": false
+        },
+        {
+          "type": "key",
+          "code": "KeyW",
+          "down": false
+        },
+        {
+          "type": "key",
+          "code": "KeyS",
+          "down": true
+        }
+      ]
+    },
+    {
+      "tick": 41,
+      "events": [
+        {
+          "type": "key",
+          "code": "KeyD",
+          "down": false
+        },
+        {
+          "type": "key",
+          "code": "KeyA",
+          "down": false
+        },
+        {
+          "type": "key",
+          "code": "KeyW",
+          "down": true
+        },
+        {
+          "type": "key",
+          "code": "KeyS",
+          "down": false
+        }
+      ]
+    },
+    {
+      "tick": 181,
+      "events": [
+        {
+          "type": "key",
+          "code": "KeyD",
+          "down": false
+        },
+        {
+          "type": "key",
+          "code": "KeyA",
+          "down": false
+        },
+        {
+          "type": "key",
+          "code": "KeyW",
+          "down": false
+        },
+        {
+          "type": "key",
+          "code": "KeyS",
+          "down": false
+        }
+      ]
+    }
+  ]
+}

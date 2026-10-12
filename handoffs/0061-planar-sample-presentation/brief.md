@@ -1,3 +1,46 @@
+## Priority revision — actual HUD and current runtime, 2026-10-12
+
+Resume with Opus 5.5 and explicitly verified Max. This revision supersedes older
+statements below that HUD bindings and native-play UI are unavailable. Your private
+branch now includes main169 (4fc128f9), actual native HUD APIs, localized runtime
+text, and headless native-play UI viewport support. Astra independently reran your
+first art/builder commit: public transactions, Undo/Redo/reopen and all seven native
+scenarios passed. This is correctness acceptance, not native-window acceptance.
+
+Astra has supplied source-reviewed optional presentation bindings in gameplay.ts.
+Strict TypeScript passed; the separate numerical runtime/export proof is running.
+Do not edit that file, verify.py, export_verify.py, tsconfig.json or presentation.py.
+Build on your original Pearl Cove art and level with a restrained, polished actual
+engine HUD, readable live progress and clear terminal states. Own the artwork,
+scene.py, localization copy, widget layout and rendered critique. No static labels
+masquerading as live state and no baked text textures. Use ordinary imported fonts,
+UI documents and atomic public authoring commands.
+
+Optional props: flipbooks {player?, boat?}; hud {table, status, prompt}; results
+{won, lost, active, inactive}. Use distinct canonical ULIDs. Inspect the supplied
+source for exact validation. The controller pauses bound state flipbooks at first
+bind; player frames are 0 playing, 2 won, 1 lost; boat is 1 when all pickups are
+collected and 0 otherwise. HUD keys are hud.collecting (collected,total), hud.ready,
+hud.won (total), hud.lost. Supply localized StringTable entries. Runtime locale,
+pseudo-localization and fallback refresh are supported. Terminal label nodes use
+the supplied active/inactive parent bindings to expose the matching result. The
+prompt is deliberately blank: whole-session restart has not been implemented, so
+do not advertise a nonfunctional restart control. Report restart as open.
+
+Build a fresh matching headless from this updated branch before runtime evidence.
+The exclusive incant-core-presentation-target is still assigned to you and idle.
+Do not reuse the old released lease or permit guard. Acquire fresh lease/markers
+under ~/.codex/incant-evidence/0061-hud, retain source hashes and actual commands,
+and use at most two cargo jobs. Preserve prior evidence as historical. Exercise
+keyboard/gamepad win, loss and locked exit with the authored HUD and review actual
+engine offscreen renders, localized text and result states. Native window review
+still waits for ~/.codex/incant-evidence/0060/released and at least 20 seconds real
+user idle, fresh capture lease and window-only capture; yield on any user input.
+Do not wait idly if this is unavailable: complete offscreen/art/correctness work
+and explicitly return that remaining native review. No phone/performance claim.
+Update result.md/PRESENTATION.md with exact new scope, real evidence and remaining
+gates. Commit your own changes Built-by: claude. Never merge shared branches.
+
 # 0061 — Playable 2D sample presentation
 
 Use Claude Opus 5.5 over ACP with thinking explicitly Max, verified before the

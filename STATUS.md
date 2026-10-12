@@ -50,6 +50,28 @@ integration remains pending. Desktop cross-target export, Android and mobile sta
 no signing, mobile window/audio host, phone performance or phase gate is claimed.
 [Contract and complete evidence](docs/spikes/authored-ios-project-export.md).
 
+## Physics process selection — local execution passed
+
+The developer launcher builds the authored physics variant and runs a private
+executable copy. Public setting edits, Undo/Redo and native execution pass in
+deterministic, fast and deterministic again. Fresh ordinary shipping exports
+of both modes run after source/cache/map/build removal with exact native
+observations and PCM; five actual solver feature sets and shipping codegen are
+audited. The full tools suite passes with four Python skips. Independent review
+and integration remain pending; automatic editor worker selection, physics saves,
+reference-device performance and phase gates remain open.
+[Scope and retained evidence](docs/spikes/physics-process-selection.md).
+
+## Physics process/export selection — current main176 verified
+
+Developer Play and ordinary desktop export now choose the fixed matching kernel
+from the public project setting. Selected normal dependency audits replace the
+workspace-unified metadata false refusal seen in frozen checkpoint15. The current
+CPU integration passes 15 checks and two unchanged-package replays; all producer
+compile/cook inputs remain exact. Independent final closure is pending. Automatic
+editor workers, physics saves and device/performance gates remain separate.
+[Evidence](docs/spikes/physics-process-main176.md).
+
 ## Project physics selection — current main173 verified
 
 The public command bus atomically selects deterministic or fast physics, with
@@ -57,8 +79,19 @@ legacy deterministic defaults preserved. Cook/Play explicitly refuse a mismatche
 process before assets or source fallback. All 70 schemas and strict TypeScript
 contracts match. Current integration reuses byte-identical three-mode Rust checks
 and reruns schema/generation/guard checks; final independent review is accepted. Automatic editor
-process switching and mode-aware export remain separate follow-on work.
+process switching remains separate; developer/export selection is recorded above.
 [Integrated contract and evidence](docs/spikes/physics-project-main173.md).
+
+## Pearl Cove presentation — current main173 verified
+
+Accepted gameplay hooks, original Claude art and localized HUD are composed.
+Current matching-headless verification passes seven original, seven presentation
+and seven authored Cove scenarios, public Undo/Redo/reopen and four precise binding
+refusals. Source, art and test bytes stay unchanged; Claude's offscreen appearance
+approval remains scoped to its frozen packet. Original two shipping exports remain
+separately accepted producer evidence. Final independent integration review is accepted; native
+window, restart, audio and physical-device/performance/physics-save gates stay open.
+[Integrated source and evidence](docs/spikes/planar-presentation-main173.md).
 
 ## Physics-mode foundation — current main172 verified
 
@@ -94,8 +127,8 @@ The player library and thin executable share a crate name. The shipping audit
 now checks both target units independently, preserving required optimization,
 source-compiler exclusion and final executable fat LTO. Six parser regressions
 and 63 scoped tools tests pass; root source review is accepted. The original
-failed export remains retained and corrected fresh packaging is pending in the
-Planar proof. [Evidence](docs/spikes/native-export-player-units.md).
+failed export remains retained; two corrected fresh Planar packages now pass
+the four-unit codegen audit. [Evidence](docs/spikes/native-export-player-units.md).
 
 ## Headless UI and reusable player — merged main169
 

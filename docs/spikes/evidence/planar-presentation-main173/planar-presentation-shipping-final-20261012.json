@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-12T22:15:54.708324+00:00",
+  "accepted": true,
+  "manifest_sha256": "33f17219d4d2a2d7ca4ad61be3cb6e112df7908a21720ceb9a0a444f3b08c11b",
+  "sources_rehashed": 5,
+  "frozen_inputs_rehashed": 1759,
+  "lossless_artifacts_rehashed": 233,
+  "actual_shipping_processes": 14,
+  "totals": {
+    "default": {
+      "ticks": 1860,
+      "stereo_frames": 1488000
+    },
+    "presentation": {
+      "ticks": 1860,
+      "stereo_frames": 1488000
+    }
+  },
+  "four_unit_shipping_codegen": true,
+  "source_map_project_removal": true,
+  "native_logs_observations_pcm_exact": true,
+  "limits": [
+    "CPU numerical fixture only; no art, layout, window, GPU or appearance acceptance",
+    "Original development evidence remains outside isolated player path; own export authoring/cache, build directory and script maps removed",
+    "PCM is silent and verifies clock/repeat parity, not audible cues",
+    "Physics save/load and genuine whole-session restart remain unsupported",
+    "Camera follow and simultaneous hazard/exit priority remain outside these seven scenarios"
+  ]
+}

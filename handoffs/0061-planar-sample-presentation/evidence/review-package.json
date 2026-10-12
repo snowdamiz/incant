@@ -1,0 +1,402 @@
+{
+  "format": "incant-0061-review-package",
+  "profile": "ci",
+  "features": "project,native-window",
+  "project": "/Users/andreyyurlov/.codex/worktrees/native-rust-sdk/incant/.worktrees/0061-planar-sample-presentation/artifacts/0061/review-5/build/project/planar.json",
+  "project_sha256": "abd3903a46f5744a6a8733cf464b8e02ded1deb9ad4ffc99e86a1b06a8908deb",
+  "camera_hex": "01b65d50000000000000000000000003",
+  "player_sha256": "569c6973a91da687965924b0ff92c7808f49b70329f23d2f6782edf3b96926d9",
+  "producer": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/build/incant_game_player-d5a1df9bb517f0b2/out",
+  "receipt": {
+    "audio_clips": {},
+    "cameras": [
+      "01PSEN00000000000000000003"
+    ],
+    "compiler": {
+      "bundleBytes": 7023,
+      "bundleSha256": "d32bc8a47fc826eef9d3a028d2ec1dc4c51b42e8340dbe91d843c34837ecab73",
+      "compilers": {
+        "swc": "1.16.13",
+        "typescript": "5.9.3"
+      },
+      "format": "incant-native-typescript-project",
+      "limits": {
+        "bundleBytes": 1000000,
+        "fileBytes": 262144,
+        "mapBytes": 4194304,
+        "modules": 64,
+        "sourceBytes": 1048576
+      },
+      "mapBytes": 12922,
+      "mapSha256": "dad9cbe781e40cc5057a82f95e85f6a93ec9f1d0cc50b0ec6b41287b1b438f7e",
+      "modules": [
+        {
+          "bytes": 6441,
+          "path": "gameplay.ts",
+          "sha256": "ccd01284ad30ff4cc9d3070a8220890509af160f3aae4521f0954502fdf45e5e"
+        }
+      ],
+      "sourceBytes": 6441,
+      "sources": [
+        {
+          "id": "01PSSC00000000000000000001",
+          "path": "gameplay.ts"
+        }
+      ],
+      "trust": "fresh local source transform; no project code or configuration executed",
+      "version": 1
+    },
+    "font_assets": [],
+    "format": "incant-native-project-build",
+    "has_spatial_content": true,
+    "program": null,
+    "project_id": "01M4RXRVHVX1FFVWA9HZGMFCF8",
+    "project_sha256": "abd3903a46f5744a6a8733cf464b8e02ded1deb9ad4ffc99e86a1b06a8908deb",
+    "scene_id": "01M4RXRVHVMFGBG6NQZT6XGX41",
+    "scene_sha256": "0beb6f127d853eac9e780b3859120132ce057c1cd33d7f17c1e7a4c6413c588f",
+    "startup_source_parsing": false,
+    "target": "aarch64-apple-darwin",
+    "tick_rate": 60,
+    "version": 1,
+    "visual_assets": [
+      {
+        "fingerprint": "cddd1a4372b2acec4f16ee3518e4b352847c36b444f347917bf48cc65cd796c8",
+        "id": "01M4RXRVMN5JKAVWR7TZ12PR6X",
+        "kind": "texture"
+      }
+    ]
+  },
+  "data": {
+    "bytes": 331063,
+    "files": {
+      "world.scene": "0beb6f127d853eac9e780b3859120132ce057c1cd33d7f17c1e7a4c6413c588f",
+      "input-actions.json": "617123f0cd018451a23ddc8e096249208484867db707e9041e76af832f1e1624",
+      "empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+      "textures/cddd1a4372b2acec4f16ee3518e4b352847c36b444f347917bf48cc65cd796c8.json": "cf199ec240559cd819e636309517628aff15285173dc6de0509cca99da201722",
+      "textures/5659be81eb017f846d46249eb76c81b518b80aa1e7a3f572b315b56abafa8450.ktx2": "5659be81eb017f846d46249eb76c81b518b80aa1e7a3f572b315b56abafa8450",
+      "textures/52b890c365b8a2121ee4256bdb7a514fcdf6f8083a2346669827908a4dd23394.ktx2": "52b890c365b8a2121ee4256bdb7a514fcdf6f8083a2346669827908a4dd23394",
+      "clips.bin": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+      "package.json": "64a5738923023f71b2841eea940d7e462d09792ac95da5223a313b542928628e"
+    }
+  },
+  "startup": {
+    "flipbooks": [
+      {
+        "completed": false,
+        "frame": 0,
+        "id": [
+          1,
+          182,
+          93,
+          80,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "playing": false
+      },
+      {
+        "completed": false,
+        "frame": 0,
+        "id": [
+          1,
+          182,
+          93,
+          80,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          5
+        ],
+        "playing": false
+      },
+      {
+        "completed": false,
+        "frame": 0,
+        "id": [
+          1,
+          182,
+          93,
+          80,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          11
+        ],
+        "playing": true
+      },
+      {
+        "completed": false,
+        "frame": 0,
+        "id": [
+          1,
+          182,
+          93,
+          80,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          12
+        ],
+        "playing": true
+      },
+      {
+        "completed": false,
+        "frame": 0,
+        "id": [
+          1,
+          182,
+          93,
+          80,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          13
+        ],
+        "playing": true
+      },
+      {
+        "completed": false,
+        "frame": 0,
+        "id": [
+          1,
+          182,
+          93,
+          80,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          21
+        ],
+        "playing": true
+      },
+      {
+        "completed": false,
+        "frame": 0,
+        "id": [
+          1,
+          182,
+          93,
+          80,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          22
+        ],
+        "playing": true
+      },
+      {
+        "completed": false,
+        "frame": 0,
+        "id": [
+          1,
+          182,
+          93,
+          80,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          23
+        ],
+        "playing": true
+      },
+      {
+        "completed": false,
+        "frame": 0,
+        "id": [
+          1,
+          182,
+          93,
+          80,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          31
+        ],
+        "playing": true
+      },
+      {
+        "completed": false,
+        "frame": 0,
+        "id": [
+          1,
+          182,
+          93,
+          80,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          32
+        ],
+        "playing": true
+      },
+      {
+        "completed": false,
+        "frame": 0,
+        "id": [
+          1,
+          182,
+          93,
+          80,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          33
+        ],
+        "playing": true
+      },
+      {
+        "completed": false,
+        "frame": 0,
+        "id": [
+          1,
+          182,
+          93,
+          80,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          34
+        ],
+        "playing": true
+      }
+    ],
+    "frames": 800,
+    "logs": {
+      "dropped": 0,
+      "entries": []
+    },
+    "pcm_sha256": "56a43ef88ddfcd0f56f7dd973312c0e73d62f59655c01d7b4e59aaa3be8b3fb6",
+    "render_input": {
+      "binding_generation": 0,
+      "camera": "01b65d50000000000000000000000003",
+      "camera_position": [
+        10.0,
+        6.0,
+        20.0
+      ],
+      "decoded_payload_bytes": 307112,
+      "first_model_position": null,
+      "first_sprite_position": [
+        6.5,
+        4.5,
+        0.0
+      ],
+      "first_text_position": null,
+      "gpu_submitted": false,
+      "mode": "cpu-only",
+      "model_count": 0,
+      "sprite_count": 12,
+      "text_atlas_bytes": 0,
+      "text_atlas_nonzero": 0,
+      "text_atlas_sha256": null,
+      "text_count": 0,
+      "text_font_count": 0,
+      "text_generation": 0,
+      "text_glyph_count": 0,
+      "text_missing_clusters": 0,
+      "text_rtl_glyphs": 0,
+      "tick": 1,
+      "topology_generation": 0
+    },
+    "sources": [],
+    "tick": 1
+  }
+}
