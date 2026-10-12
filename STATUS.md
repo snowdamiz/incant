@@ -75,6 +75,19 @@ active. Report merged work separately from local checks and unmet exit gates.
 The project is still early relative to the complete Engine 1.0 and Driftwake
 scope; no defensible percentage or completion date follows from the PR count.
 
+## Runtime font atlas — integrated CPU foundation
+
+A retained CPU alpha atlas now rasterizes actual packaged TrueType glyphs with
+content-bound keys, stable placements, explicit reset/invalidation and bounded
+outline/mask admission. Latin, Arabic, Hebrew and a real CJK subset pass numerical
+coverage tests, including a cache-deleted cooked-font reader route. Scoped 31
+tests, Clippy, wasm32 compilation and lean runtime graph checks pass on the
+main113 integration. Renderer
+upload/draw consumption, widgets/input/IME, color/CFF support, Claude appearance
+acceptance and device evidence remain; this does not complete Game UI.
+[Scope and evidence](docs/spikes/native-font-atlas.md).
+
+
 ## Opt-in cooked output, diagnostic and shadow shaders — scoped Metal acceptance
 
 The build-only cooker emits actual native MSL/SPIR-V/HLSL for output, diagnostic

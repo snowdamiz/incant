@@ -1,0 +1,49 @@
+{
+  "reviewer": "astra-root",
+  "accepted": true,
+  "scope": "independent source review of retained CPU glyph atlas; no visual/device acceptance",
+  "source_freeze": {
+    "base": "94c4927abadb10d2203db2e1ab031de7853947fa",
+    "branch": "codex/native-font-atlas",
+    "sources": {
+      "Cargo.lock": "4ba59808148f7574d65432b41505fa5d4ad2fda74a7031efc67c41e88ad4e3e7",
+      "crates/incant_text/Cargo.toml": "0720e2ff184cc0297f1c5d73a899be90fe85303332bcabbb2666726dc2070afa",
+      "crates/incant_text/src/atlas.rs": "5cff1e27cd19349d225b831559d809446295bec5c94ab6fec587664a9b8beb28",
+      "crates/incant_text/src/fonts.rs": "a8275a6548ecbcbd66970194320262e6ffcf09838c6dd77f4f1d20376c05c2fb",
+      "crates/incant_text/src/layout.rs": "b4b0b152cf1f4a3b49bc7260655f640aaf32466536f2c1c7c7757de8912b27b7",
+      "crates/incant_text/src/lib.rs": "9780ff676ea5df4ef5d3068018b1add6cfd94be1f44f2a305e87f53f486a75b2",
+      "crates/incant_text/src/raster.rs": "ad1c74af12beb67b47d5261344faf61c3d30bf50afd2e8e5fc3496fbaa14966e",
+      "crates/incant_text/src/raster/glyf.rs": "1ec0238d99988560090e500e2a34260681f2459f1951ea84562d92517a394026",
+      "crates/incant_text/tests/atlas.rs": "d82d69a5f5fc845237ed0cc8a0a1e7f3c567204f59589c23df0daec549e321fd",
+      "crates/incant_text/tests/fonts/CJK-OFL.txt": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9",
+      "crates/incant_text/tests/fonts/IncantCJKFixture.ttf": "3299d6ab8033fb1d163f892dfcb1b8838cf1c46935c329d82da6f7b9e27dad82",
+      "crates/incant_text/tests/fonts/cjk-provenance.json": "b9e2b7af5dccd297a38fdd14d8e9e9bc0c6106c35ca0f45f20d60e239b5d0763",
+      "crates/incant_text/tests/fonts/subset_cjk.py": "299ea70f7fd7fb1dbb7a4fe9a9de3e4cefbf6cc7d6b9e76adf9052a63b9caf76",
+      "crates/incant_text/tests/packaged_atlas.rs": "2ec17dfab8894c96f9ad8a104cf98662a30404fe3c36aec401f7b18d5ebbc7fe"
+    }
+  },
+  "verified_identity_count": 36,
+  "tests": {
+    "passed": 31,
+    "failed": 0,
+    "ignored": 0
+  },
+  "findings": [],
+  "reviewed_behaviors": [
+    "bounded preflight before outline allocation; cycles/points/visits/depth and unsupported capabilities",
+    "mask limits and finite coordinates before alpha storage",
+    "append-only shelf placements and atomic refusal; padded rectangles",
+    "immutable font digest and engine identity; stale/foreign handles",
+    "actual script coverage and independent analytic area oracle",
+    "real checked packaged reader after cache deletion; limited fixture envelope scope",
+    "all958 lock package records unchanged except additive internal text dependency edges"
+  ],
+  "limitations": [
+    "Monochrome unhinted base/default glyf outlines only; no custom axes or subpixel raster phases.",
+    "CFF-only, color/bitmap/SVG fonts and point-matched/scaled-offset compounds explicitly refuse.",
+    "Transient dependency allocations and shaping are not a universal heap/RSS/work-duration guarantee.",
+    "The packaged test constructs the documented cache envelope and uses the real reader; it does not add or prove exported-game font inclusion.",
+    "Wasm32 is compile evidence, not actual browser execution.",
+    "No GPU, screenshot, native window, provider, appearance approval, reference-device performance or completed Game UI claim."
+  ]
+}
