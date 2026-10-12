@@ -71,7 +71,8 @@
   "proof": {
     "root": "/tmp/incant-wasm-physics-host-proof-003",
     "report": "docs/spikes/evidence/native-wasm-physics-queries/conformance-result.json",
-    "private_build_cleanup": "TemporaryDirectory removed after conformance. Retained physics-guests intentionally preserved for independent audit. Interrupted proof002 inputs remain preserved. Not an ordinary shipping package deletion proof."
+    "private_build_cleanup": "TemporaryDirectory removed after conformance. Retained physics-guests intentionally preserved for independent audit. Interrupted proof002 inputs remain preserved. Not an ordinary shipping package deletion proof.",
+    "post_restart_recovery": "Private proof artifacts under /tmp are absent. Durable repository receipts/logs remain; no post-restart direct artifact verification claimed."
   },
   "commands": {
     "environment": {
@@ -303,7 +304,10 @@
     ]
   },
   "review": {
-    "status": "production freeze002 accepted by independent root review; final evidence review pending"
+    "status": "source and durable final evidence independently accepted for scoped integration",
+    "receipt": "docs/spikes/evidence/native-wasm-physics-queries/root-final-review.json",
+    "sha256": "48b434fdf4c48c4b090ee30d38b2ae4e2ffd5765ddc52ca4e4b5a3dc89a5baa0",
+    "retained_artifact_recovery": "The75 retained private physics artifacts and3 private source copies under /tmp were lost after restart. Root freshly verified durable source/log/receipt data only;701 prepared-file verification and75/3 retained checks are historical producer evidence."
   },
   "logs": {
     "docs/spikes/evidence/native-wasm-physics-queries/conformance-0.log.gz": {
@@ -452,6 +456,10 @@
     "docs/spikes/evidence/native-wasm-physics-queries/old-interrupted-recovery.json": {
       "sha256": "1927d980d388799b50c481454cd0b14158e3060416ffed4abf02d1822395d2d8",
       "source": "/tmp/incant-wasm-physics-host-proof-002/recovery-verification.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-queries/root-final-review.json": {
+      "sha256": "48b434fdf4c48c4b090ee30d38b2ae4e2ffd5765ddc52ca4e4b5a3dc89a5baa0",
+      "source": "/Users/andreyyurlov/.codex/incant-reviews/wasm-physics-final-20261012.json"
     }
   },
   "earlier_attempts": [
@@ -466,5 +474,6 @@
     "Full guest/physics/session checkpoints remain outside this slice.",
     "No physics debug-draw or rendered acceptance.",
     "Full SDK, complete engine and game-release requirements remain open."
-  ]
+  ],
+  "reviewed_implementation_commit": "712d5d1cb05dfcea241b139ba63d8bf35754c192"
 }

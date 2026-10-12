@@ -25,8 +25,9 @@ rollback. Event frames retain scene identity and dimension. Published operations
 0–38 and old layouts remain unchanged. Actual Wasmtime/wasm2c conformance passes
 382 tests/doctests, all-target Clippy and three development processes; 190 native
 runtime tests, wasm32/tooling and lean dependency checks also pass. Independent
-source review accepted freeze002; final evidence review and main integration
-are pending. Full SDK, physics/guest checkpoints, an ordinary source-deleted
+source and durable final evidence review accepted the implementation; main
+integration is pending. Private `/tmp` artifacts were lost after restart, so
+new review verifies retained repository logs/receipts rather than those files. Full SDK, physics/guest checkpoints, an ordinary source-deleted
 physics guest shipping proof, device measurements and phase gates remain open.
 [Contract and evidence](docs/spikes/native-wasm-physics-queries.md).
 

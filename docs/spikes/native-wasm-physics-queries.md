@@ -76,18 +76,24 @@ generated files, formatting and lean dependency checks pass. The static-player
 normal dependency graph excludes Wasmtime, the Wasm cooker and authoring crates.
 
 Independent source review accepted the exact 20 production hashes and unchanged
-published ABI prefixes. Final evidence review and main integration are pending.
+published ABI prefixes. Final durable evidence review accepted the scoped implementation; main
+integration remains pending.
 The [durable evidence](evidence/native-wasm-physics-queries.json) binds all source
 and test inputs, literal commands, compressed logs, manifests and source-review
 receipt. Final proof003 prepared 140 modules; all 701 files were independently
-rehashed before scoped temporary-input cleanup. Fifteen physics guests retain
-75 Wasm/C artifacts and three source copies for independent audit.
+rehashed before scoped temporary-input cleanup. At proof completion, fifteen physics guests retained
+75 Wasm/C artifacts and three source copies. Those private `/tmp` artifacts
+were lost after a restart. The final review freshly verified the durable sources,
+21 compressed/raw logs and ten original receipts; the 701-file preparation and
+75/3 retained-file checks are historical producer evidence, not fresh artifact
+verification after restart. The final review receipt is now retained in the
+repository.
 
-Earlier runs remain preserved. Proof001 exposed a test assumption about numeric
+Earlier run logs and receipts remain preserved in the repository. Proof001 exposed a test assumption about numeric
 chunk order after physics changed archetypes; the assertion now checks the actual
 changed row. Proof002 passed 382 tests/doctests in 67 groups and all-target Clippy
 but was interrupted before its final development probe returned. Its result
-remains incomplete. Recovery rehashed all 701 prepared artifacts for 140 modules,
+remains incomplete. Before the restart, recovery rehashed all 701 prepared artifacts for 140 modules,
 75 retained physics artifacts, three guest sources and both completed logs.
 The final proof uses the scene-bearing event contract.
 
