@@ -4389,6 +4389,8 @@ dependencies = [
  "incant_runtime",
  "incant_script",
  "incant_types",
+ "incant_ui",
+ "png 0.18.1",
  "serde_json",
  "tempfile",
  "thiserror 2.0.21",
