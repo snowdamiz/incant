@@ -1,0 +1,182 @@
+{
+  "at": "2026-10-12T17:35:15.526797+00:00",
+  "scope": "Native window terminal callback suppression and original typed error preservation",
+  "tested_base": "b6331b5577a178b583c007021875b65e0320afe4",
+  "source": {
+    "crates/incant_game_player/src/window/mod.rs": "92e28ae8184dcdc337f81da9ab7c6ec12e6280dca25d977574379f071c172b6c",
+    "crates/incant_game_player/src/window/termination.rs": "af723978fc8dcb560cf9f3a922f087fb5b3644632275001b16d8af0ca2a86812"
+  },
+  "review_sha256": "70dcaff3dc13108c3a42c42c36aa637cdea3d8488e1ae9271f99ef60a7e2e68b",
+  "frozen_inputs_verified": 1354,
+  "checks": [
+    {
+      "name": "native-window-tests",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "native-window"
+      ],
+      "exit": 0,
+      "seconds": 58.8927385829993,
+      "sha256": "5c256f282f396f617d2bb7a788af11b0b3141fab06428025d2b9f6eb18049450"
+    },
+    {
+      "name": "native-window-clippy",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "native-window",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 28.98977087499952,
+      "sha256": "72b358621f794cf1d73bf60878bf1009652782cabf219ff656032045456bc869"
+    },
+    {
+      "name": "fmt",
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 1.3089350840000407,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.04287812499933352,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "tests": {
+    "passed": 57,
+    "failed": 0,
+    "ignored": 0,
+    "groups": 3,
+    "new_regressions": 4
+  },
+  "artifacts": {
+    "docs/spikes/evidence/native-window-terminal-errors/native-window-tests.log.gz": {
+      "sha256": "af7f3fc4396034ad02b8ec7ba05c80934c2b9415a8600920bd3851f749157973",
+      "bytes": 4615,
+      "raw_sha256": "5c256f282f396f617d2bb7a788af11b0b3141fab06428025d2b9f6eb18049450",
+      "raw_bytes": 17807,
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-window-terminal-errors-002/native-window-tests.log"
+    },
+    "docs/spikes/evidence/native-window-terminal-errors/fmt.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-window-terminal-errors-002/fmt.log"
+    },
+    "docs/spikes/evidence/native-window-terminal-errors/conventions.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-window-terminal-errors-002/conventions.log"
+    },
+    "docs/spikes/evidence/native-window-terminal-errors/results.json": {
+      "sha256": "92ea34ac034cc0b8bbb5aee013af06879d996d0538dfe1824a52df986f1c6dd5",
+      "bytes": 1330,
+      "raw_sha256": "92ea34ac034cc0b8bbb5aee013af06879d996d0538dfe1824a52df986f1c6dd5",
+      "raw_bytes": 1330,
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-window-terminal-errors-002/results.json"
+    },
+    "docs/spikes/evidence/native-window-terminal-errors/native-window-clippy.log.gz": {
+      "sha256": "5128c46423d7857137ab4800c944060a6109304cebd4494172a613bdfd7d3920",
+      "bytes": 3063,
+      "raw_sha256": "72b358621f794cf1d73bf60878bf1009652782cabf219ff656032045456bc869",
+      "raw_bytes": 13408,
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-window-terminal-errors-002/native-window-clippy.log"
+    },
+    "docs/spikes/evidence/native-window-terminal-errors/freeze.json.gz": {
+      "sha256": "06ac9f944f889e4e899d9234f2427088ceda2b21418b598decc312b90a559929",
+      "bytes": 63402,
+      "raw_sha256": "4122fd8cd29e330b601aad9887125a4f37b70e6968c250906cf7611a20c43659",
+      "raw_bytes": 159545,
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-window-terminal-errors-002/freeze.json"
+    },
+    "docs/spikes/evidence/native-window-terminal-errors/prior-freeze.json": {
+      "sha256": "811e07b79849a880a14b7273887f7a19e55e73cd4beb777598f1d49fa6b6160f",
+      "bytes": 743,
+      "raw_sha256": "811e07b79849a880a14b7273887f7a19e55e73cd4beb777598f1d49fa6b6160f",
+      "raw_bytes": 743,
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-window-terminal-errors-001/freeze.json"
+    },
+    "docs/spikes/evidence/native-window-terminal-errors/prior-results.json": {
+      "sha256": "c9e0eb1981d44d30af5f373a5e55ac9a14c0f6f1139e195251029c0a0545d90d",
+      "bytes": 382,
+      "raw_sha256": "c9e0eb1981d44d30af5f373a5e55ac9a14c0f6f1139e195251029c0a0545d90d",
+      "raw_bytes": 382,
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-window-terminal-errors-001/results.json"
+    },
+    "docs/spikes/evidence/native-window-terminal-errors/prior-native-window-tests.log.gz": {
+      "sha256": "3cfd6e4c2338dad89be4638788f3427e21c535924c29367084e2499989244128",
+      "bytes": 1390,
+      "raw_sha256": "2371be1d6e0bc6e0af6ee37d088e8e37de8ecd95aa33e37418dce8e821001b35",
+      "raw_bytes": 4965,
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-window-terminal-errors-001/native-window-tests.log"
+    },
+    "docs/spikes/evidence/native-window-terminal-errors/prior-cache-failure.json": {
+      "sha256": "8a78c9f23772907d4648db46fca219f415634a108362d78e496af46add0a43c0",
+      "bytes": 674,
+      "raw_sha256": "8a78c9f23772907d4648db46fca219f415634a108362d78e496af46add0a43c0",
+      "raw_bytes": 674,
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-window-terminal-errors-001/cache-failure.json"
+    },
+    "docs/spikes/evidence/native-window-terminal-errors/prior-workspace-clean.log": {
+      "sha256": "8efd18e4263e1365765c1fc22f2ee180ca8955b8d40762e6b34a13d6de231ccf",
+      "bytes": 38,
+      "raw_sha256": "8efd18e4263e1365765c1fc22f2ee180ca8955b8d40762e6b34a13d6de231ccf",
+      "raw_bytes": 38,
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-window-terminal-errors-001/workspace-clean.log"
+    },
+    "docs/spikes/evidence/native-window-terminal-errors/prior-workspace-clean.json": {
+      "sha256": "0bd9c3204e5037d4133a5407534b7d1ac3f745f011462110985966968b6947eb",
+      "bytes": 1651,
+      "raw_sha256": "0bd9c3204e5037d4133a5407534b7d1ac3f745f011462110985966968b6947eb",
+      "raw_bytes": 1651,
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-window-terminal-errors-001/workspace-clean.json"
+    },
+    "docs/spikes/evidence/native-window-terminal-errors/source-review.json": {
+      "sha256": "70dcaff3dc13108c3a42c42c36aa637cdea3d8488e1ae9271f99ef60a7e2e68b",
+      "bytes": 1357,
+      "raw_sha256": "70dcaff3dc13108c3a42c42c36aa637cdea3d8488e1ae9271f99ef60a7e2e68b",
+      "raw_bytes": 1357,
+      "source": "/Users/andreyyurlov/.codex/incant-reviews/native-window-termination-source-20261012.json"
+    }
+  },
+  "earlier_failure": "Attempt001 reused a stale shared-target build-script from the newer compound-animation checkout. Retained log and binary hash identify nonexistent animation_ik.rs lookup. No production sources changed; all46 workspace packages were cleaned from the exclusively owned target before successful attempt002. Stale executable retained outside repository.",
+  "limitations": [
+    "CPU behavioral tests and native-window compilation on macOS; no new native interaction or GPU execution.",
+    "The original instrumented-process failure remains unknown; audio overload policy is unchanged.",
+    "Publication and current-main integration remain pending."
+  ]
+}

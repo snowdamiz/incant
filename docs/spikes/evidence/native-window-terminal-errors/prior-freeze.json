@@ -1,0 +1,12 @@
+{
+  "at": "2026-10-12T17:29:39.905348+00:00",
+  "head": "b6331b5577a178b583c007021875b65e0320afe4",
+  "files": {
+    "crates/incant_game_player/src/window/mod.rs": "92e28ae8184dcdc337f81da9ab7c6ec12e6280dca25d977574379f071c172b6c",
+    "crates/incant_game_player/src/window/termination.rs": "af723978fc8dcb560cf9f3a922f087fb5b3644632275001b16d8af0ca2a86812",
+    "Cargo.lock": "ac059d1a2493d570bd202515e729830c56ecc7758cd808ccd0f245d06abcac7f",
+    "Cargo.toml": "efe21e9c7f9f01ee5a207180dd6f0dc1fc2e2c0014b674bc07d8fefc1a0937c2",
+    "rust-toolchain.toml": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124",
+    "crates/incant_game_player/Cargo.toml": "28056082e89b012c1c6c976bb349d8dace821bd26d535ec0b53cbb55b778d401"
+  }
+}

@@ -1,0 +1,20 @@
+[
+  {
+    "name": "native-window-tests",
+    "argv": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "native-window"
+    ],
+    "exit": 101,
+    "seconds": 106.42034849999982,
+    "sha256": "2371be1d6e0bc6e0af6ee37d088e8e37de8ecd95aa33e37418dce8e821001b35"
+  }
+]
