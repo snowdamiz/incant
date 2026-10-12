@@ -1,0 +1,33 @@
+{
+  "recorded_at": "2026-10-12T04:22:57.891990+00:00",
+  "reviewer": "astra root",
+  "commit": "15aeb891d8f3c8125afc5fea3615079953499d64",
+  "evidence_sha256": "3b80f8c6031ea7c02120cb1cda471b675cfada8045f32b08c490d36ce5b3a40c",
+  "source_inputs_verified": 84,
+  "retained_logs_verified": 13,
+  "outcome": "CPU source accepted for visual implementation; publication waits final export/optional-host verification and main integration. No appearance acceptance.",
+  "reviewed": [
+    "Typed document/schema validation and canonical v13 binary admission with old-version preservation",
+    "Owner/epoch/incarnation focus and pointer receipts, malformed atomic refusal and stale discard",
+    "NativeSession route/prepare/consume/commit failure lifetimes and unsupported UI save state",
+    "Keyboard/gamepad capture handoff and held-control neutralization",
+    "Indexed layout and navigation, retained font/paint resource bounds and accepted atlas preservation",
+    "Immutable script UI notifications without guest-prototype calls",
+    "Public version2 recording, replay and player/export options; source-deleted proof implementation"
+  ],
+  "corrected_findings": [
+    "Gamepad UI consumed controls without an eligible widget and could leave gameplay held; observable before/after controls verify repair",
+    "Nested eligibility scans in routing/navigation replaced with cached eligibility and index mapping"
+  ],
+  "other_corrected_defects": [
+    "Explicit array length descriptor prevents append/resize",
+    "Observe-option extraction composes with UI/font/package options"
+  ],
+  "limitations": [
+    "Final-source public export proof002 still active",
+    "wasm32/optional module compile and actual-main integration pending",
+    "No GPU drawing or OS IME delivery/activation acceptance",
+    "No full UI checkpoints, mobile keyboard, reference-device or Phase1 completion claim"
+  ],
+  "source_provenance_clarification": "Parent queried whether move.ts was an original fixture. Public write_script updates it; the initial final-file hash was valid. The optional original fixture label added during review needs the inherited pre-write hash or removal. This is reporting only, not an engine defect."
+}
