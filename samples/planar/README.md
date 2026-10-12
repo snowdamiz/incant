@@ -33,8 +33,10 @@ and independent final execution reviews are accepted. PCM is silent in this
 fixture, so matching it verifies the sample clock rather than audible behavior. The optional follow camera and simultaneous
 hazard/exit priority are source-reviewed but are not covered by these seven runs.
 
-The numerical room and white atlas are test fixtures. Finished sample art,
-rendered acceptance, device performance and physics save/load remain open.
+The numerical room and white atlas are test fixtures. `scene.py` authors the
+Pearl Cove presentation of this controller with original tiles and sprites; see
+[PRESENTATION.md](PRESENTATION.md). Native-window acceptance, the HUD and
+restart hooks, device performance and physics save/load remain open.
 Gameplay persistence declarations do not make solver checkpointing supported.
 
 [Retained local evidence](../../docs/spikes/evidence/planar-sample-gameplay.json).
