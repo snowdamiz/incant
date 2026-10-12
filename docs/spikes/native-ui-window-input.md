@@ -53,3 +53,8 @@ player proof remain immutable at02290953; its final root review is retained in
 [the receipt](evidence/native-ui-layout-final-root-review.json). This input slice
 is not the full Game UI, desktop IME, checkpoint, flex-widget styling or device
 acceptance gate.
+
+Independent read-only source/CPU review accepted the exact five implementation
+inputs at88ad9d88 after the presentation, retry and gamepad corrections. The
+[review receipt](evidence/native-ui-window-input-review.json) preserves findings,
+verified hashes and excluded native IME/appearance gates.
