@@ -69,6 +69,9 @@ export interface NativeCommands {
    * controls share the structural quota, tick lifetime and atomic rollback;
    * the committed snapshot does not reflect queued changes. */
   controlAnimation(id: NativeId, control: 'select', clip: number | null, seconds: number): void;
+  /** Duration is finite 0..60 seconds; zero selects immediately. A nonzero
+   * fade cannot interrupt an active fade. Select/Seek cancel it. */
+  controlAnimation(id: NativeId, control: 'crossfade', clip: number | null, seconds: number, duration: number): void;
   controlAnimation(id: NativeId, control: 'seek', seconds: number): void;
   controlAnimation(id: NativeId, control: 'playing' | 'looping', enabled: boolean): void;
   /** Finite [-16,16]; negative speed plays backward, zero holds the sample. */
@@ -163,6 +166,16 @@ export interface NativeAnimations {
   readonly seconds: Float64Array;
   readonly speeds: Float64Array;
   readonly flags: Uint32Array;
+  /** Active = bit 0, captured outgoing playing = bit 1, looping = bit 2.
+   * All source/time fields are zero when inactive; active sourceClips uses
+   * -1 for rest. Destination contribution is elapsed / duration. Master
+   * playing pauses both clocks; speed/loop controls affect only destination. */
+  readonly transitionFlags: Uint32Array;
+  readonly sourceClips: Int32Array;
+  readonly sourceSeconds: Float64Array;
+  readonly sourceSpeeds: Float64Array;
+  readonly transitionElapsed: Float64Array;
+  readonly transitionDuration: Float64Array;
 }
 /** Read-only committed locale/catalog. Each call costs four of the shared
  * 1,024 native query units, at most 64 localization calls per whole tick.

@@ -45,3 +45,14 @@ class RegistryTests(unittest.TestCase):
         self.assertEqual(self.data['magic']['LOCALIZATION_FORMAT_MAGIC'],'INCLFM01')
         self.assertEqual(self.data['constants']['LOCALIZATION_FORMAT_BYTES'],24)
         self.assertEqual(self.data['enums']['DateLength'],[['Short',0],['Medium',1],['Long',2]])
+
+    def test_crossfade_v2_is_additive_and_legacy_layout_stays_exact(self):
+        import hashlib
+        self.assertEqual(hashlib.sha256(json.dumps(self.data['functions'][:25],sort_keys=True).encode()).hexdigest(),'903c7c0779e48a38bb08aa28adedc2af37f5900f59935aa26b27fef692c7f59f')
+        self.assertEqual([(f['namespace'],f['name'],f['opcode']) for f in self.data['functions'][26:]], [('incant_animation_v2','snapshot_len',26),('incant_animation_v2','read_snapshot',27),('incant_animation_v2','control',28)])
+        size=lambda name: sum(generator.SIZES[t]*(n[0] if n else 1) for _,t,*n in self.data['records'][name])
+        self.assertEqual((size('AnimationHeader'),size('AnimationRow'),size('AnimationCommand'),size('AnimationRowV2')),(16,40,24,80))
+        self.assertEqual(self.data['records']['AnimationRowV2'][:5],self.data['records']['AnimationRow'])
+        self.assertEqual(self.data['magic']['ANIMATION_MAGIC'],'INCAN001')
+        self.assertEqual(self.data['magic']['ANIMATION_V2_MAGIC'],'INCAN002')
+        self.assertEqual(self.data['constants']['ANIMATION_MAX_TRANSITION_SECONDS'],60)

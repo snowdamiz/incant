@@ -1,0 +1,99 @@
+{
+  "reviewer": "/root/integrate_runtime_prs",
+  "reviewed_at": "2026-10-12T02:32:47.058432+00:00",
+  "base": "934af1b0f9c04d45588873369a4d69295c6380f3",
+  "decision": "accepted bounded source and observed final dual-host results; final author wasm/guard closeout and immutable commit pending",
+  "findings": [],
+  "freeze": {
+    "path": "/tmp/incant-crossfade-sdk-source-freeze-003.json",
+    "sha256": "86edb80c01664b247c7b7291feebb4c5ebcd9a89bcae8ccf70fef6be3268b739"
+  },
+  "source_hashes": {
+    "crates/incant_script/src/animation_commands.rs": "6c090fbffe6f0d2b4d7adc14e08da07654d981002df450726b429a191d74b7f3",
+    "crates/incant_script/src/animations.rs": "a9fa3c09e415e604df1665b22139116c1bf410327bd820cd5f0f8b5c54592b9e",
+    "crates/incant_script/tests/animations.rs": "4d104bff58a6ad9d0c3e1c2e6f09223eb8a21ae929d55d79d527c1a50941ac15",
+    "crates/incant_wasm_abi/src/lib.rs": "216f050ccbaf7e25650f79ffc60160a983e36849c3443780004e1451fb599fae",
+    "crates/incant_wasm_dev/src/generated.rs": "7740b86da79b5e0a7439d77d025c3f3e6462ad1f40154df6bcc2ef46288c9a19",
+    "crates/incant_wasm_dev/tests/animation_parity.rs": "4037e587c09f900baacbe3914a7b73973f2a0e437d498f6f26356d3654d2234b",
+    "crates/incant_wasm_runtime/c/generated.h": "9b0db4af032d03cdfbf95b258935c2153deb9a354ef89366262b5c83859cbef2",
+    "crates/incant_wasm_runtime/c/generated.inc": "563da81e99cc20f94ba6283341f551ab09d456516473678be5daf9da376263d5",
+    "crates/incant_wasm_runtime/src/animations.rs": "50848a4f9b535d09b664377e45d106a83def83977d834802d62dd4b6ca30ba0e",
+    "crates/incant_wasm_runtime/src/capability.rs": "f465ad1ddb8df20a4b09132c10e56763df43715911d793548df902994287bcd3",
+    "crates/incant_wasm_runtime/src/generated.rs": "fdfb69491a7705fa950561e42ea6406ce01262748afb6f58954cad7186d6a5a4",
+    "crates/incant_wasm_runtime/src/input_tags.rs": "4fe5fdcf163893bc3ff221b62528d3c650b058210ba3f249b455688e38411ab7",
+    "crates/incant_wasm_runtime/tests/animations.rs": "6175c87e8942d0afbb6780708f8c3091da1ae8eb6521e04f22cb80db2d01c910",
+    "sdk/abi/native-v1.json": "5534381afd1e5735446215deae604617b384747af2f64e0be27b0259e59c9aa5",
+    "sdk/rust/src/animation.rs": "6ee66e63cc5792e4d2dfddaf9ee8e1cbfa688f9a9264a2964a78f13d3aeb5bcc",
+    "sdk/rust/src/lib.rs": "ed48a002b9c21a0246621e0cef956fed8f4cff71d0e1867a44879e890a56d9e3",
+    "sdk/rust/src/raw.rs": "b2e237abf57b3fa2df9f1fe1c2b775f7319bde5518cb3fb30f5aed6c6ab5484f",
+    "sdk/rust/src/tick.rs": "55217b5358ecfcc608e4e6da30be20648fde0a80aef600ce320616fdb565a7ba",
+    "sdk/rust/tests/animation.rs": "7e107584b1fc61779a96fe45c805c23432cb5aa857681eecb0bcaf291cc07ce6",
+    "sdk/templates/native-animation/playback.ts": "a7b5665dbd32aafeee013e3daed55de4f5fdd9e4b6a0c70fbfeea4d19be310b1",
+    "sdk/ts/src/native.d.ts": "723a6641637af35bf45ed90bc7fc4c9bf53226c15370a0fd3937e4657fecc088",
+    "tools/generate_wasm_sdk.py": "87b6a185a021b0103ab75387166aacb315f4a9cc3fcd7fb068832560671604df",
+    "tools/probes/shipping-wasm2c.py": "0820ddbfd66c83444456b237926b0298459fbdc8fbd6bcd5d5471ed62e377068",
+    "tools/tests/native_script.test.mjs": "00454dc4b743248f7f654c74dd3925fc2695e4c484acec5f206bb354ddaf0e6a",
+    "tools/tests/test_wasm_sdk.py": "bc52ea0566534f0123fa6ecfbc9b14b0d5bdd3a81b8e03fc540caa322835bdb8",
+    "tools/wasm_abi.py": "2b56aa74318af357338046beac2c061cfc555870af304e502996a3424aec669a",
+    "crates/incant_script/tests/animations/crossfade.rs": "9446b852336558c6805644e4b085358d8ac76342f3f77d4cdbb841e26788d81b",
+    "crates/incant_script/tests/fixtures/crossfade.cjs": "4ab30848acdc503e1408a07e03eb21b13bf62e9a26955b8e8e243f6069c3d154",
+    "crates/incant_script/tests/fixtures/crossfade.ts": "3d7a33ff81964c97794df8b4efda208fd93324b5f645375d1da2760734d76253",
+    "crates/incant_wasm_dev/tests/crossfade_parity.rs": "ce65036c2c2910a31f472c3673f0464fd4d2511e9cae2f4c370fa651c9eba2aa",
+    "crates/incant_wasm_runtime/fixtures/crossfades.wat": "4d0b9cc8da4f352b35041642d48ba1d4138396485aaac7d108f81b1b25c1f366",
+    "crates/incant_wasm_runtime/tests/animations/crossfade.rs": "72d3dfc050b5c8210b0ea87caa8d47e3aff22ccbd636990dfaec5e4b056f216d",
+    "sdk/rust/fixtures/crossfade_failure.rs": "2cdad912a657c807c42fe69595d80004a1f747dfe15335a5b239382df03a5ed4",
+    "sdk/rust/samples/crossfade.rs": "738776695454cecfa9ffe8b9bf3b0f0bb4db6949c9c7e5143b21a575926392ec"
+  },
+  "review_scope": [
+    "QuickJS copied transition arrays, strict argument framing, caught refusal latch and mixed transaction rollback",
+    "Versioned v1/v2 snapshot and control wire contracts, exact complete frames, finite ranges, reserved fields, unaligned copies and epoch/transfer/command bounds",
+    "Generated Wasmtime and static C imports/opcode mapping; trusted registry generation and actual Rust/WAT guest preparation",
+    "Public Rust borrowed parser and command APIs, old-version refusal when transitions cannot be represented, independent master/source clocks and core native validation",
+    "Actual parity/save continuation/retarget/trap/callback/quota controls and source-level typed per-instance QuickJS cases"
+  ],
+  "observed_tests": {
+    "passed": 313,
+    "failed": 0,
+    "ignored": 0,
+    "groups": 54,
+    "fresh_development_bulk_processes": 3
+  },
+  "retained_logs": {
+    "/tmp/incant-crossfade-sdk-conformance-003/conformance-0.log": {
+      "sha256": "5e5ff47c0615b2feb9bed6444c6b1ecdd5c49c21566d7ce4fb9caf2a2633a5a1",
+      "bytes": 39868
+    },
+    "/tmp/incant-crossfade-sdk-conformance-003/conformance-1.log": {
+      "sha256": "3b3579936ecb627f297a7a7e2a1498ce194fbe745631b0924c9c29063b0e2df4",
+      "bytes": 849
+    },
+    "/tmp/incant-crossfade-sdk-conformance-003/conformance-2.log": {
+      "sha256": "086605a5f4b6b42ee0d4cae788ef2c95bfed727826884311a36fca02e5d82b66",
+      "bytes": 2495
+    },
+    "/tmp/incant-crossfade-sdk-conformance-003/development/result.json": {
+      "sha256": "086605a5f4b6b42ee0d4cae788ef2c95bfed727826884311a36fca02e5d82b66",
+      "bytes": 2495
+    },
+    "/tmp/incant-crossfade-sdk-conformance-003/prepared-manifest.json": {
+      "sha256": "fd28301333ba3e74b4ac48a97e7e86e01281bef0e22f817b2a426dd7b00fc464",
+      "bytes": 57666
+    },
+    "/tmp/incant-crossfade-sdk-conformance-003/rust-sdk.json": {
+      "sha256": "59356b29728f752d1486edafcab1d093827a664f4a8873a38742dfb2f14061ab",
+      "bytes": 1317
+    }
+  },
+  "prepared_artifact_receipt": {
+    "path": "/tmp/incant-crossfade-sdk-prepared-artifacts-003.json",
+    "sha256": "f14169acb9f73d172381770394624a4169403ed285a6356ec9df5e726551161c",
+    "verification": "Author verified 426 files/85 modules while private storage existed; reviewer binds retained receipt, not a second post-deletion rehash"
+  },
+  "limitations": [
+    "No reviewer-run compilation or graphics/provider calls.",
+    "No GPU, rendered appearance, device or performance acceptance.",
+    "Fresh bulk processes are existing development JIT controls, not a new source-free shipping crossfade player proof.",
+    "World-save continuation does not serialize Wasm VM memory/globals; static session checkpoint refusal is retained.",
+    "Bounded two-input crossfade controls do not complete authored blend graphs, root motion or IK."
+  ]
+}

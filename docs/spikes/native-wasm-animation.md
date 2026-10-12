@@ -102,3 +102,12 @@ Animation blending, state machines, IK, root motion, complete gameplay SDK,
 arbitrary-source build sandboxing, reference-phone performance and Phase 1
 completion remain separate work. This slice requires no rendered appearance
 change or new screenshot. Native rendering acceptance remains with Claude.
+
+## Crossfade extension
+
+The preceding v1 evidence describes its original frozen implementation. The
+additive [crossfade SDK](native-animation-crossfade-sdk.md) now uses explicit
+`incant_animation_v2` imports, preserving opcodes 0–25 and all v1 records. Current
+`Tick::animations` exposes full transitions through v2; explicit legacy methods
+remain available for older hosts. An active crossfade makes both v1 length/read
+refuse rather than hiding one side of a blend. No v1 row grew silently.

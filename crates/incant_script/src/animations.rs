@@ -10,6 +10,12 @@ pub(crate) struct Scratch {
     seconds: Vec<f64>,
     speeds: Vec<f64>,
     flags: Vec<u32>,
+    transition_flags: Vec<u32>,
+    source_clips: Vec<i32>,
+    source_seconds: Vec<f64>,
+    source_speeds: Vec<f64>,
+    transition_elapsed: Vec<f64>,
+    transition_duration: Vec<f64>,
 }
 
 impl Scratch {
@@ -19,6 +25,12 @@ impl Scratch {
         self.seconds.clear();
         self.speeds.clear();
         self.flags.clear();
+        self.transition_flags.clear();
+        self.source_clips.clear();
+        self.source_seconds.clear();
+        self.source_speeds.clear();
+        self.transition_elapsed.clear();
+        self.transition_duration.clear();
         for row in &self.rows {
             let state = row.state;
             self.clips.push(state.sample.clip.map_or(-1, i32::from));
@@ -29,6 +41,19 @@ impl Scratch {
                     | (u32::from(state.looping) << 1)
                     | (u32::from(state.completed) << 2),
             );
+            let transition = state.transition;
+            self.transition_flags.push(transition.map_or(0, |t| {
+                1 | (u32::from(t.playing) << 1) | (u32::from(t.looping) << 2)
+            }));
+            self.source_clips
+                .push(transition.map_or(0, |t| t.source.clip.map_or(-1, i32::from)));
+            self.source_seconds
+                .push(transition.map_or(0., |t| t.source.seconds));
+            self.source_speeds.push(transition.map_or(0., |t| t.speed));
+            self.transition_elapsed
+                .push(transition.map_or(0., |t| t.elapsed));
+            self.transition_duration
+                .push(transition.map_or(0., |t| t.duration));
         }
         Ok(())
     }
@@ -57,6 +82,35 @@ impl Scratch {
         result.prop(
             "flags",
             Property::from(TypedArray::new_copy(ctx.clone(), &self.flags)?).enumerable(),
+        )?;
+        result.prop(
+            "transitionFlags",
+            Property::from(TypedArray::new_copy(ctx.clone(), &self.transition_flags)?).enumerable(),
+        )?;
+        result.prop(
+            "sourceClips",
+            Property::from(TypedArray::new_copy(ctx.clone(), &self.source_clips)?).enumerable(),
+        )?;
+        result.prop(
+            "sourceSeconds",
+            Property::from(TypedArray::new_copy(ctx.clone(), &self.source_seconds)?).enumerable(),
+        )?;
+        result.prop(
+            "sourceSpeeds",
+            Property::from(TypedArray::new_copy(ctx.clone(), &self.source_speeds)?).enumerable(),
+        )?;
+        result.prop(
+            "transitionElapsed",
+            Property::from(TypedArray::new_copy(ctx.clone(), &self.transition_elapsed)?)
+                .enumerable(),
+        )?;
+        result.prop(
+            "transitionDuration",
+            Property::from(TypedArray::new_copy(
+                ctx.clone(),
+                &self.transition_duration,
+            )?)
+            .enumerable(),
         )?;
         Ok(result)
     }
@@ -90,15 +144,27 @@ mod tests {
             seconds: vec![0.],
             speeds: vec![-2.],
             flags: vec![2],
+            transition_flags: vec![0],
+            source_clips: vec![0],
+            source_seconds: vec![0.],
+            source_speeds: vec![0.],
+            transition_elapsed: vec![0.],
+            transition_duration: vec![0.],
         };
         context.with(|ctx| {
-            ctx.eval::<(), _>("Object.defineProperty(Array.prototype,'0',{set(){throw Error('array setter')}});for(const key of ['clips','seconds','speeds','flags'])Object.defineProperty(Object.prototype,key,{set(){throw Error('object setter')}});").unwrap();
+            ctx.eval::<(), _>("Object.defineProperty(Array.prototype,'0',{set(){throw Error('array setter')}});for(const key of ['clips','seconds','speeds','flags','transitionFlags','sourceClips','sourceSeconds','sourceSpeeds','transitionElapsed','transitionDuration'])Object.defineProperty(Object.prototype,key,{set(){throw Error('object setter')}});").unwrap();
             ctx.globals().set("snapshot", scratch.expose(&ctx).unwrap()).unwrap();
-            ctx.eval::<(), _>("if(snapshot.ids[0]!=='00000000000000000000000000'||snapshot.clips[0]!==-1||snapshot.seconds[0]!==0||snapshot.speeds[0]!==-2||snapshot.flags[0]!==2)throw Error('snapshot');snapshot.clips[0]=55;snapshot.seconds[0]=9;snapshot.speeds[0]=9;snapshot.flags[0]=9;").unwrap();
+            ctx.eval::<(), _>("if(snapshot.ids[0]!=='00000000000000000000000000'||snapshot.clips[0]!==-1||snapshot.seconds[0]!==0||snapshot.speeds[0]!==-2||snapshot.flags[0]!==2)throw Error('snapshot');snapshot.clips[0]=55;snapshot.seconds[0]=9;snapshot.speeds[0]=9;snapshot.flags[0]=9;for(const key of ['transitionFlags','sourceClips','sourceSeconds','sourceSpeeds','transitionElapsed','transitionDuration']){if(snapshot[key][0]!==0)throw Error('inactive');snapshot[key][0]=9;}").unwrap();
         });
         assert_eq!(scratch.clips, [-1]);
         assert_eq!(scratch.seconds, [0.]);
         assert_eq!(scratch.speeds, [-2.]);
         assert_eq!(scratch.flags, [2]);
+        assert_eq!(scratch.transition_flags, [0]);
+        assert_eq!(scratch.source_clips, [0]);
+        assert_eq!(scratch.source_seconds, [0.]);
+        assert_eq!(scratch.source_speeds, [0.]);
+        assert_eq!(scratch.transition_elapsed, [0.]);
+        assert_eq!(scratch.transition_duration, [0.]);
     }
 }

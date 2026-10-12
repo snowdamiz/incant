@@ -374,6 +374,8 @@ test('animation SDK refuses wrong overload types and readonly ID mutation', asyn
     const entry = body => `import type { NativeBehavior } from '@incant/runtime/native';
 export default {update({animations,commands}){const id=animations.ids[0];${body};return undefined;}} satisfies NativeBehavior;`;
     for (const bad of [
+      "commands.controlAnimation(id,'crossfade',0,0)",
+      "commands.controlAnimation(id,'crossfade',0,0,'1')",
       "commands.controlAnimation(id,'select',0)",
       "commands.controlAnimation(id,'select','0',0)",
       "commands.controlAnimation(id,'seek',false)",
@@ -397,4 +399,10 @@ commands.controlAnimation(id,'speed',-16)`));
   } finally {
     await fs.rm(root, { recursive: true, force: true });
   }
+});
+
+test('strict crossfade guest cook matches the actual multi-instance QuickJS input', async () => {
+  const root = path.join(REPO, 'crates/incant_script/tests/fixtures');
+  const cooked = await cookNativeScript(root, 'crossfade.ts');
+  assert.equal(cooked.code, await fs.readFile(path.join(root, 'crossfade.cjs'), 'utf8'));
 });

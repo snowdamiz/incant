@@ -67,14 +67,22 @@ source, raw Wasm or cached native modules at runtime.
   commands; pause/play/restart/seek become visible after successful publication.
 - `animations(scratch)` returns a copied start-of-callback snapshot of authored
   skeletal playback. Rows contain stable entity ID, optional clip index, seconds,
-  signed speed, playing/looping flags and completion state. `control_animation`
-  queues typed Select/Seek/Playing/Looping/Speed changes in the same atomic
+  signed speed, playing/looping flags, completion and the optional full outgoing
+  transition (clip/time/speed/play/loop plus elapsed/duration). `control_animation`
+  queues typed Select/Crossfade/Seek/Playing/Looping/Speed changes in the same atomic
   transaction as numeric edits, entity commands and logs. Selecting a clip keeps
   speed/play/loop flags; `clip: None, seconds: 0` selects rest. Seek/Select reset
   completion; native clip durations validate at commit. World clocks advance
   before script execution, so controls affect the next simulation step and the
   immediately committed render sample. Queued controls do not change this
-  callback's readback. See [samples/animation.rs](samples/animation.rs).
+  callback's readback. Crossfade duration is finite 0..60 seconds; zero selects
+  immediately. A nonzero request cannot interrupt an active fade. Select/Seek
+  cancel it; playing pauses both clocks; later speed/loop changes affect only
+  destination. See [samples/crossfade.rs](samples/crossfade.rs).
+  `animations`/`control_animation` use explicit `incant_animation_v2` imports.
+  `legacy_animations`/`legacy_control_animation` remain available for v1-only hosts;
+  an active transition makes legacy length/read refuse instead of concealing a
+  blended pose. The parser accepts both exact layouts; old parsers reject v2.
 - `locale(result_scratch)` and `localize(request, request_scratch, result_scratch)`
   return copied committed-locale/message values. Text/Number/CalendarDate
   arguments and fallback/pseudo settings use the shared native ICU validation.
@@ -113,7 +121,8 @@ Wasmtime bindings, static Rust/C dispatch, namespace contexts, host input tag
 mapping and shared endian codecs. Generated files are checked in. Run its
 `--check` mode after changes. Runtime crates never read this JSON.
 
-Additive `incant_animation_v1` supplies skeletal playback snapshots/controls,
+Additive `incant_animation_v1` supplies legacy skeletal playback snapshots/controls;
+`incant_animation_v2` adds complete transition observations and crossfade control,
 `incant_log_v1` supplies logging and `incant_localization_v1` supplies
 copied locale/message queries and atomic settings; older hosts reject their imports explicitly.
 Existing `incant_v1`, `incant_input_v1`, and `incant_flipbook_v1` layouts remain
@@ -127,7 +136,8 @@ not edits to generated output alone.
 Bounds remain the native host's v1 limits: 32 MiB guest memory/copied columns,
 128 MiB cumulative transfers, 65,536 calls, 1,024 commands, 4,096 chunks per tick;
 input scratch at most 128 KiB and flipbook playback at most 32,768 rows.
-Skeletal playback has at most 100,000 rows (4,000,016 copied bytes), 256 clips
+Skeletal playback has at most 100,000 rows (v1: 4,000,016 copied bytes;
+v2: 8,000,016 copied bytes), 256 clips
 per entity and finite speed in [-16, 16]. Snapshot row order is unspecified;
 use stable IDs. Callers should retain appropriately sized scratch across ticks. The SDK exports
 snapshot maximum sizes for reusable buffers. Host fuel and native validation

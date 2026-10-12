@@ -25,6 +25,15 @@ const _: () = {
 /// Trusted host adapter operation; all integer arguments are guest offsets/indices.
 #[derive(Clone, Copy)]
 pub enum Call {
+    AnimationLenV2,
+    ReadAnimationsV2 {
+        ptr: i32,
+        capacity: i32,
+    },
+    ControlAnimationV2 {
+        id: i32,
+        ptr: i32,
+    },
     AnimationLen,
     ReadAnimations {
         ptr: i32,
@@ -109,6 +118,7 @@ pub struct Capability {
     flipbooks: Vec<u8>,
     animation_rows: Vec<AnimationSnapshot>,
     animations: Vec<u8>,
+    animations_v2: Vec<u8>,
     animation_rejected: bool,
     transferred: usize,
     calls: usize,
@@ -165,9 +175,12 @@ impl Capability {
             return Err(error);
         }
         self.commands.clear();
-        if let Err(error) =
-            crate::animations::encode(world, &mut self.animation_rows, &mut self.animations)
-        {
+        if let Err(error) = crate::animations::encode(
+            world,
+            &mut self.animation_rows,
+            &mut self.animations,
+            &mut self.animations_v2,
+        ) {
             self.abort();
             return Err(error);
         }
@@ -199,6 +212,7 @@ impl Capability {
     pub fn abort(&mut self) {
         self.animation_rows.clear();
         self.animations.clear();
+        self.animations_v2.clear();
         self.active = false;
         self.input_available = false;
         self.input.clear();
@@ -219,6 +233,7 @@ impl Capability {
         }
         self.animation_rows.clear();
         self.animations.clear();
+        self.animations_v2.clear();
         if self.tick_logs.rejected {
             self.abort();
             return Err(Error::Abi("rejected log transaction"));
@@ -317,7 +332,12 @@ impl Capability {
             && self.epoch == epoch
             && matches!(
                 call,
-                Call::AnimationLen | Call::ReadAnimations { .. } | Call::ControlAnimation { .. }
+                Call::AnimationLen
+                    | Call::ReadAnimations { .. }
+                    | Call::ControlAnimation { .. }
+                    | Call::AnimationLenV2
+                    | Call::ReadAnimationsV2 { .. }
+                    | Call::ControlAnimationV2 { .. }
             );
         // Only an authorized localization call can poison its active epoch. This
         // wraps enter/memory/transfer checks as well as parsing/query dispatch;
@@ -350,9 +370,27 @@ impl Capability {
             return Err(Error::Limit("linear memory"));
         }
         match call {
-            Call::AnimationLen => return Ok(self.animations.len() as i32),
-            Call::ReadAnimations { ptr, capacity } => {
-                let len = self.animations.len();
+            Call::AnimationLen | Call::AnimationLenV2 => {
+                let v2 = matches!(call, Call::AnimationLenV2);
+                if !v2 && self.animations.is_empty() {
+                    return Err(Error::Abi("active transitions require animation v2"));
+                }
+                return Ok(if v2 {
+                    self.animations_v2.len()
+                } else {
+                    self.animations.len()
+                } as i32);
+            }
+            Call::ReadAnimations { ptr, capacity } | Call::ReadAnimationsV2 { ptr, capacity } => {
+                let v2 = matches!(call, Call::ReadAnimationsV2 { .. });
+                if !v2 && self.animations.is_empty() {
+                    return Err(Error::Abi("active transitions require animation v2"));
+                }
+                let len = if v2 {
+                    self.animations_v2.len()
+                } else {
+                    self.animations.len()
+                };
                 let capacity = usize::try_from(capacity)
                     .map_err(|_| Error::Abi("animation destination capacity"))?;
                 if capacity < len {
@@ -361,13 +399,21 @@ impl Capability {
                 range(ptr, capacity, memory.len())?;
                 let region = range(ptr, len, memory.len())?;
                 self.transfer(len)?;
-                memory[region].copy_from_slice(&self.animations);
+                memory[region].copy_from_slice(if v2 {
+                    &self.animations_v2
+                } else {
+                    &self.animations
+                });
                 return Ok(len as i32);
             }
-            Call::ControlAnimation { id, ptr } => {
+            Call::ControlAnimation { id, ptr } | Call::ControlAnimationV2 { id, ptr } => {
                 let bytes =
                     self.read::<{ incant_wasm_abi::AnimationCommand::SIZE }>(memory, ptr)?;
-                let control = crate::animations::command(&bytes)?;
+                let control = if matches!(call, Call::ControlAnimationV2 { .. }) {
+                    crate::animations::command_v2(&bytes)?
+                } else {
+                    crate::animations::command(&bytes)?
+                };
                 let entity = self.stable(memory, id)?;
                 self.command(StructuralCommand::ControlAnimation { entity, control })?;
             }
