@@ -16,13 +16,14 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Native window error preservation — locally verified
+## Native window error preservation — main153 integration verified
 
 After an error or explicit exit, the window host stops delivering game callbacks.
 Surface and IME cleanup still run, while the original typed failure takes precedence
 rather than being replaced by a later generic failed-session or cleanup error.
-The 57 player tests, native-window Clippy and source review pass; current-main
-integration is pending. This does not diagnose the original instrumented-process
+The current-main union passes 57 player tests, native-window Clippy, dependency
+and tooling checks with both reviewed source files unchanged. Final integration
+review and fast-gated publication remain pending. This does not diagnose the original instrumented-process
 failure or change audio-overload behavior. [Scope and evidence](docs/spikes/native-window-terminal-errors.md).
 
 
@@ -36,8 +37,8 @@ Current-main integration passes 418 actual-host tests, Clippy, three development
 processes and scoped target/dependency/generated checks. Three fresh ordinary
 source/cache/build/map-deleted players each match 252 public vector assertions,
 4,140 full scalar observations and exact development PCM/logs. Fifteen precise
-refusals pass. Final independent current-main review is accepted; publication
-awaits its exact-head fast check.
+refusals pass. This IK-v1 API is merged in main #153 after independent
+current-main review and its exact-head fast check.
 Compound-pose SDK parity, static-module checkpoints, appearance and device gates
 remain open. [Integrated evidence](docs/spikes/native-wasm-ik-main152.md).
 
@@ -421,11 +422,12 @@ and complete Game UI/IME gates remain open.
 
 ## Current milestone
 
-Main #152 includes connected authored two-bone IK and its ordinary checkpoint
+Main #153 includes connected authored two-bone IK and its ordinary checkpoint
 continuation, authored nested/2D animation trees with complete Wasm poses,
 offline audio/UI checkpoints, public physics queries and numeric root-motion.
-The native IK Rust/Wasm API now passes current-main actual-host and fresh ordinary
-package checks; its final review is accepted and fast-gated publication remains pending.
+The complete native IK Rust/Wasm API is merged after current-main actual-host
+and fresh ordinary package checks. A narrow native-window shutdown correction
+now passes 57 CPU tests and scoped checks; final publication remains pending.
 Main149 repairs text-client lifetime/pointer focus; main150 has the earlier
 qualified UI reference and caret correction. Claude0058's native follow-up keeps
 its older-build, dead-key and excluded-process limitations.

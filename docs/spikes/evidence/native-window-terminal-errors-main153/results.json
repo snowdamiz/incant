@@ -1,0 +1,90 @@
+[
+  {
+    "name": "tests",
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "native-window"
+    ],
+    "exit": 0,
+    "seconds": 35.25806804200147,
+    "sha256": "bedf0ff04ff356b1203c94ea473def3eaaffddf5f096a76964dccf85820685f3"
+  },
+  {
+    "name": "clippy",
+    "command": [
+      "./tools/cargo",
+      "clippy",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "native-window",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit": 0,
+    "seconds": 8.606417458000578,
+    "sha256": "26e4f32ab03993864311a69b75d5f7f7ecf9444a0f46578458e76d312288d7c5"
+  },
+  {
+    "name": "graph",
+    "command": [
+      "python3",
+      "tools/check_runtime_dependencies.py",
+      "incant_game_player",
+      "--features",
+      "incant_game_player/native-window"
+    ],
+    "exit": 0,
+    "seconds": 0.6986255840001832,
+    "sha256": "07d87a62d54ea4bd4f630d421b90904510f782b795c04820a194e18835a118dc"
+  },
+  {
+    "name": "fmt",
+    "command": [
+      "./tools/cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 1.2905115000012302,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "conventions",
+    "command": [
+      "python3",
+      "tools/generate_conventions.py",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.052823624999291496,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "diff",
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.01400116599870671,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]
