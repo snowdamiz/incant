@@ -1,0 +1,121 @@
+{
+  "at": "2026-10-12T13:25:57.094123+00:00",
+  "scope": "Test-only unknown-version fixture correction; production replay admission unchanged.",
+  "source_hashes": {
+    "crates/incant_headless/tests/play_input.rs": "0e1d527255072ba9440a52b0bef210687285ec6a08d192001ca5a70adfd5d81e"
+  },
+  "baseline": {
+    "base": "3b316029d664d56e445a7823c888d04b174389a3",
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--offline",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_headless",
+      "--test",
+      "play_input",
+      "invalid_future_events_ranges_and_oversized_files_fail_before_output_is_published",
+      "--",
+      "--exact"
+    ],
+    "source_sha256": "8a3eab9dcead19a2831ba8e01f19a512c4c8371733652f1e77f56878d2f69443",
+    "log_sha256": "ba63d2f5652739bd7127d8e454a20c744f86c4e47f5f8960571ff288c035458a",
+    "exit": 101,
+    "seconds": 44.54481733305147
+  },
+  "checks": [
+    {
+      "name": "tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_headless",
+        "--test",
+        "play_input",
+        "-p",
+        "incant_input"
+      ],
+      "exit": 0,
+      "sha256": "3d177b6e163d8e35319369c8bbaee8086d025b6d51517154397b7e6def7df52b",
+      "seconds": 1.7580715829972178
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_headless",
+        "--test",
+        "play_input",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "sha256": "bd20031ecee36e9c7595509266827d82d1ce21716f2426a7cd19a8c760f95a5f",
+      "seconds": 5.719700333022047
+    }
+  ],
+  "passed": 3,
+  "groups": 1,
+  "failed": 0,
+  "ignored": 0,
+  "logs": {
+    "docs/spikes/evidence/checkpoint10-input-fixture/baseline.log.gz": {
+      "sha256": "73b954e3a1fc41634c0caa09f6e3bead188b40d48961b603705cee236be9861b",
+      "uncompressed_sha256": "ba63d2f5652739bd7127d8e454a20c744f86c4e47f5f8960571ff288c035458a"
+    },
+    "docs/spikes/evidence/checkpoint10-input-fixture/tests.log.gz": {
+      "sha256": "43fad85ac0dfe06b9ad45769983b8770ea9d9b3b5d8a530ecbf3df3f006ab43f",
+      "uncompressed_sha256": "3d177b6e163d8e35319369c8bbaee8086d025b6d51517154397b7e6def7df52b"
+    },
+    "docs/spikes/evidence/checkpoint10-input-fixture/clippy.log.gz": {
+      "sha256": "4dec8f44c78a35401e4d5b6dbc8f83446c4fcacd6a8d6426d1dafee852862ad8",
+      "uncompressed_sha256": "bd20031ecee36e9c7595509266827d82d1ce21716f2426a7cd19a8c760f95a5f"
+    }
+  },
+  "receipts": {
+    "docs/spikes/evidence/checkpoint10-input-fixture/baseline.json": "98012a9b5962079e6046b347c8465586b024f9598bd404733a77698973d29080",
+    "docs/spikes/evidence/checkpoint10-input-fixture/results.json": "244b7b977d4fa4d234e49a1b931703733d164c15d18299f7b2d5cb2a66d2c191",
+    "docs/spikes/evidence/checkpoint10-input-fixture/review.json": "ae320a5c6dd9c9d4cc1e013343cd4cb89f6de6aa39f8a06565ce2d4af975ae2b",
+    "docs/spikes/evidence/checkpoint10-input-fixture/patch.diff": "3f07e15695118578786738a598213c3a1bea8341a4a7329c2091cd0c2f4b7313",
+    "docs/spikes/evidence/checkpoint10-input-fixture/incant-checkpoint10-input-fixture-root-review.json": "4accdaf5a01bf5043c555ea76296be74184df6b60d311dd76d09b9cb69f25fef",
+    "docs/spikes/evidence/checkpoint10-input-fixture/incant-release-checkpoint-10.json": "1c26c7f51abb6bc282fe5b95336a1605099475681cc41a7e5a224c6fb6d6a7d6",
+    "docs/spikes/evidence/checkpoint10-input-fixture/incant-release-checkpoint-10-terminal.json": "fefcbbec0b212937290a4a814821056fe3c3c0e00b82cbd1fa02294343bb9f27",
+    "docs/spikes/evidence/checkpoint10-input-fixture/desktop-failure-excerpt.log": "db8849d6f5732546db84acb7a1b9ebb5b06b0161319b25b4b4232ed527cab464",
+    "docs/spikes/evidence/checkpoint10-input-fixture/checks-failure-excerpt.log": "56461535fc9140b020c0b24bd2fb24304259f91ded497adb7449ec9ea193c925"
+  },
+  "original_hosted_logs": {
+    "/tmp/incant-checkpoint10-desktop-failure.log": "62554b7d46c7c4b6fe7da2007346b70021aa4d6f749a67ce30a1cda6d50967b9",
+    "/tmp/incant-checkpoint10-checks-failure.log": "b57cd96b3288fd31237ef404bdba560f7e7b359f220194056f7e72f68f2b1ae1"
+  },
+  "checkpoint10": {
+    "candidate": "af3f84fdd60dda011d77295cbc21bcf55414b3f8",
+    "required_success": 20,
+    "failures": 3,
+    "all8_workflows_terminal": true,
+    "promoted": false,
+    "cause": "The legacy refusal table labels2 unknown after UIrecording version2 became supported; Linux,Windows,macOS all fail same assertion."
+  },
+  "integration": "Actual main140 changes only window source/docs versus tested main139; headless/input source and dependency manifests unchanged. Corrected fixture bytes match independent reviewed source.",
+  "limits": [
+    "Local actual headless child processes only; hosted repair confirmation awaits a new deliberately frozen candidate.",
+    "No parser weakening or runtime behavior changes. Both supported versions compared; all prior refusal/no-output controls preserved with exact diagnostic assertions."
+  ]
+}

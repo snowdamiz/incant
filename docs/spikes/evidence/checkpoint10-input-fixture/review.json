@@ -1,0 +1,74 @@
+{
+  "source": "0e1d527255072ba9440a52b0bef210687285ec6a08d192001ca5a70adfd5d81e",
+  "patch": "3f07e15695118578786738a598213c3a1bea8341a4a7329c2091cd0c2f4b7313",
+  "baseline": {
+    "base": "3b316029d664d56e445a7823c888d04b174389a3",
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--offline",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_headless",
+      "--test",
+      "play_input",
+      "invalid_future_events_ranges_and_oversized_files_fail_before_output_is_published",
+      "--",
+      "--exact"
+    ],
+    "source_sha256": "8a3eab9dcead19a2831ba8e01f19a512c4c8371733652f1e77f56878d2f69443",
+    "log_sha256": "ba63d2f5652739bd7127d8e454a20c744f86c4e47f5f8960571ff288c035458a",
+    "exit": 101,
+    "seconds": 44.54481733305147
+  },
+  "green": [
+    {
+      "name": "tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_headless",
+        "--test",
+        "play_input",
+        "-p",
+        "incant_input"
+      ],
+      "exit": 0,
+      "sha256": "3d177b6e163d8e35319369c8bbaee8086d025b6d51517154397b7e6def7df52b",
+      "seconds": 1.7580715829972178
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_headless",
+        "--test",
+        "play_input",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "sha256": "bd20031ecee36e9c7595509266827d82d1ce21716f2426a7cd19a8c760f95a5f",
+      "seconds": 5.719700333022047
+    }
+  ],
+  "cause": "Production InputReplay intentionally supports versions1|2 since15aeb891; old test wrongly labeled2 invalid. Version3 preserves unknown-version refusal. Known1/2 control uses same60tick fixture and matches state/input/logs.",
+  "scope": "Test-only; future device lifetime/rate/start/range/oversize and output-absence controls retained, now labeled and exact-error checked. No production parser changes."
+}
