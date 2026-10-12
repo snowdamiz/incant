@@ -118,6 +118,21 @@ root motion or Phase 1. [Contract and evidence](docs/spikes/native-root-motion-c
 
 
 
+## Planar Sample gameplay — native and exported checks verified
+
+The top-down 2D controller uses native planar sensors, solid tilemap collision
+and bulk velocity updates. Public atlas import and command authoring pass
+Undo/Redo and journal reopening. Seven native scenarios and seven fresh ordinary
+shipping processes pass: keyboard/gamepad win, hazard loss, blocked wall, locked
+exit, normalized diagonal motion and repeatability. Source/cache/build/map inputs
+are removed from the exported proof; logs, observations and silent PCM match
+native development exactly. Independent source and execution reviews are accepted.
+The 2D presentation is now assigned to Claude Opus 5.5 at explicitly verified Max.
+The numerical white atlas is not sample art; rendered/device/performance and
+physics checkpoint gates remain open. Optional follow camera and simultaneous
+hazard/exit branches are source-reviewed but not in these seven scenarios.
+[Contract](samples/planar/README.md) and [evidence](docs/spikes/evidence/planar-sample-gameplay.json).
+
 ## Complete compound Wasm — merged main159
 
 Additive operations 47–52 preserve 0–46 and all older definitions. The final

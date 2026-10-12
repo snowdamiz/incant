@@ -28,10 +28,13 @@ locked exit, normalized diagonal movement and exact replay. All seven pass local
 `python3 samples/planar/export_verify.py <development-output> <new-export-output>`
 builds an ordinary shipping player, removes its copied project/cache, private
 build storage and external script maps, and compares seven fresh processes with
-the development observations, logs and PCM. Source review is accepted; the first
-shipping run is in progress. The optional follow camera and simultaneous
+the development observations, logs and PCM. All seven shipping processes pass locally with exact development parity. Source
+and independent final execution reviews are accepted. PCM is silent in this
+fixture, so matching it verifies the sample clock rather than audible behavior. The optional follow camera and simultaneous
 hazard/exit priority are source-reviewed but are not covered by these seven runs.
 
 The numerical room and white atlas are test fixtures. Finished sample art,
 rendered acceptance, device performance and physics save/load remain open.
 Gameplay persistence declarations do not make solver checkpointing supported.
+
+[Retained local evidence](../../docs/spikes/evidence/planar-sample-gameplay.json).
