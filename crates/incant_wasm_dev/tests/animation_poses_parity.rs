@@ -81,7 +81,7 @@ fn actual_caught_errors_and_old_snapshot_refusals_discard_the_entire_staged_pref
 #[test]
 fn weighted_snapshot_unknown_versions_wrong_signatures_and_control_import_are_refused() {
     for import in [
-        r#"(import "incant_animation_v5" "snapshot_len" (func(param i64)(result i32)))"#,
+        r#"(import "incant_animation_v6" "snapshot_len" (func(param i64)(result i32)))"#,
         r#"(import "incant_animation_v4" "read_snapshot" (func(param i64 i32)(result i32)))"#,
         r#"(import "incant_animation_v4" "control" (func(param i64 i32 i32)))"#,
     ] {

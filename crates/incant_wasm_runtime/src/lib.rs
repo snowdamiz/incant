@@ -1,8 +1,11 @@
 //! Shared copied `incant_v1` capability and native transaction boundary.
 //! Contains no compiler, parser, JIT, OS or authoring capability.
 mod animation_graphs;
+mod animation_graphs_v2;
 mod animation_ik;
+mod animation_ik_v2;
 mod animation_poses;
+mod animation_poses_v5;
 mod animations;
 mod capability;
 mod flipbooks;

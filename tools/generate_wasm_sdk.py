@@ -51,6 +51,9 @@ def generate(data, digest):
         shared.append('pub mod physics;\n')
     shared += [f'pub const {name}: usize = {value};\n' for name,value in data['constants'].items()]
     shared += [f'pub const {name}: &[u8; 8] = b"{value}";\n' for name,value in data['magic'].items()]
+    shared += ['pub const ANIMATION_V5_MAX_BYTES: usize = AnimationHeaderV5::SIZE + ANIMATION_MAX_ROWS * AnimationRowV4::SIZE + ANIMATION_POSE_MAX_SAMPLE_ROWS * AnimationPoseSample::SIZE + ANIMATION_COMPOUND_MAX_ROWS * AnimationPoseGroups::SIZE;\n',
+               'pub const ANIMATION_IK_V2_MAX_BYTES: usize = AnimationIkHeader::SIZE + ANIMATION_V5_MAX_BYTES + ANIMATION_IK_MAX_ROWS * AnimationIkRow::SIZE;\n',
+               'pub const ANIMATION_GRAPH_V2_MAX_BYTES: usize = AnimationGraphHeaderV2::SIZE + ANIMATION_GRAPH_MAX_BYTES + ANIMATION_GRAPH_MAX_ROWS * AnimationGraphFade::SIZE;\n']
     shared += ['pub const ANIMATION_IK_MAX_BYTES: usize = AnimationIkHeader::SIZE + ANIMATION_V4_MAX_BYTES + ANIMATION_IK_MAX_ROWS * AnimationIkRow::SIZE;\n',
                'pub const ANIMATION_V4_MAX_BYTES: usize = AnimationHeaderV4::SIZE + ANIMATION_MAX_ROWS * AnimationRowV4::SIZE + ANIMATION_POSE_MAX_SAMPLE_ROWS * AnimationPoseSample::SIZE;\n',
                'pub const ANIMATION_V3_MAX_BYTES: usize = AnimationHeader::SIZE + ANIMATION_MAX_ROWS * AnimationRowV3::SIZE;\n',

@@ -157,7 +157,7 @@ fn kind(value: u32) -> Result<AnimationPoseKind> {
         .and_then(AnimationPoseKind::from_tag)
         .ok_or(Error::Malformed)
 }
-fn valid_sample(clip: u32, seconds: f64) -> bool {
+pub(crate) fn valid_sample(clip: u32, seconds: f64) -> bool {
     seconds.is_finite()
         && seconds >= 0.0
         && if clip == u32::MAX {
@@ -166,7 +166,7 @@ fn valid_sample(clip: u32, seconds: f64) -> bool {
             (clip as usize) < abi::ANIMATION_MAX_CLIPS
         }
 }
-fn validate_state(r: abi::AnimationRowV4, kind: AnimationPoseKind) -> Result<()> {
+pub(crate) fn validate_state(r: abi::AnimationRowV4, kind: AnimationPoseKind) -> Result<()> {
     if !r.is_finite()
         || !valid_sample(r.clip, r.seconds)
         || r.speed.abs() > abi::ANIMATION_MAX_SPEED as f64

@@ -1,0 +1,28 @@
+{
+  "at": "2026-10-12T18:11:54.998729+00:00",
+  "reviewer": "astra",
+  "scope": "Independent retained ordinary shipping execution audit; final broad/durable packet audit pending",
+  "result_sha256": "14d41dd57924c8d88b7c0403f10ad8e769e95804bcf38b706ad12be8fba44097",
+  "player_sha256": "83df5231e36e89523f7b5ab3bc57431cbb9ba8171b1ee171c6b8ef91b8bae37c",
+  "commands_verified": 42,
+  "package_files_verified": 14,
+  "ordinary_source_free_processes": 3,
+  "scalar_comparisons_rerun": 64512,
+  "vector_assertions_per_process": 256,
+  "exact_native_development_parity": [
+    "observations",
+    "logs",
+    "tick",
+    "frames",
+    "pcm_sha256"
+  ],
+  "exact_refusals_and_no_output": 23,
+  "deleted_source_cache_build_maps_verified": true,
+  "source_and_package_hashes_verified": true,
+  "limitations": [
+    "Local desktop CPU package only; no GPU/rendered/device/performance or phase gate.",
+    "Complete inner groups and outgoing clocks, ordered IK; no module heap/checkpoint persistence.",
+    "Whole guest checkpoints explicitly unsupported.",
+    "Only this new proof source/cache/build/maps removed; shared engine build storage and repository retained."
+  ]
+}

@@ -86,7 +86,7 @@ fn actual_caught_errors_and_old_snapshot_refusals_discard_the_entire_staged_pref
 #[test]
 fn ik_unknown_versions_and_wrong_signatures_are_refused() {
     for import in [
-        r#"(import "incant_animation_ik_v2" "snapshot_len" (func(param i64)(result i32)))"#,
+        r#"(import "incant_animation_ik_v3" "snapshot_len" (func(param i64)(result i32)))"#,
         r#"(import "incant_animation_ik_v1" "read_snapshot" (func(param i64 i32)(result i32)))"#,
         r#"(import "incant_animation_ik_v1" "control" (func(param i64 i32 i32)))"#,
     ] {
