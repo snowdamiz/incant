@@ -1,0 +1,2757 @@
+{
+  "scope": "Trusted-source mobile bytecode route on actual main169; fresh macOS and iOS archives with real C/Swift numerical callers.",
+  "tested_source": "c6bb65f05a68caab6ea9d219e25d3e137ca2c9bc",
+  "main": "4fc128f9aba4d5992b9dfd5476d998db7a9a4b7a",
+  "source_inputs": 1884,
+  "producer_source": "a54a9da5bc620e0dc9e489cc531ddf6c350109be",
+  "accepted_source_comparisons": [
+    {
+      "path": "crates/incant_cook/src/build_script.rs",
+      "sha256": "5e41bb377bb55cb7cc3e77d8cd5d663dde350767f596711e7f9930918a797863"
+    },
+    {
+      "path": "crates/incant_cook/src/script.rs",
+      "sha256": "cc3cce8b49bdc39ab4661d461cdd62a9e0cff6eba92b49adbb802b04914604e2"
+    },
+    {
+      "path": "crates/incant_cook/tests/scripts.rs",
+      "sha256": "64c592a27ae0641ebe4f61dc6ea276b48f340fbfcae89eddf38fcc59f25522d0"
+    },
+    {
+      "path": "crates/incant_script/build.rs",
+      "sha256": "4a592581860180d2689f4583ff676a596817526f1caf78056f5d7217cdb8977e"
+    },
+    {
+      "path": "crates/incant_script/src/artifact.rs",
+      "sha256": "af5f82dea89b8e1e96f68264b4413606e90ece9b07caf9564d2b816a217c52ac"
+    },
+    {
+      "path": "crates/incant_script/src/artifact/compatibility.rs",
+      "sha256": "aa7548c658a85ee664316fe636fe290026b146a4863bd96b4ca6cfd45f161f35"
+    },
+    {
+      "path": "crates/incant_script/src/artifact/mobile_tests.rs",
+      "sha256": "9c5070fe5548500fe14ef0d162dc48f4998641b692df55cb4aa1433e48e1bcb5"
+    },
+    {
+      "path": "crates/incant_script/src/compiler.rs",
+      "sha256": "7ee38efe4df269ce7723d87a79ac98bae3ef010567449918e616c81ce96d74f4"
+    },
+    {
+      "path": "crates/incant_script/src/lib.rs",
+      "sha256": "0e79a3bb3e9fd5d3f3e489fe4ef0aab06a0a4391ab206b216a3284bd7ce9dc71"
+    },
+    {
+      "path": "crates/incant_script/tests/fixtures/mobile_compat.expected.json",
+      "sha256": "9c4295810f5e50750dcfc99c44b677da45d164fbe7167312c1aca4d644dce612"
+    },
+    {
+      "path": "crates/incant_script/tests/fixtures/mobile_compat.js",
+      "sha256": "acc5c78fe7c2eb9f28d2bf45c7d43e61a98486cc2509f1d69aff02be54f8f032"
+    }
+  ],
+  "checks": [
+    {
+      "name": "script",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_script"
+      ],
+      "exit": 0,
+      "seconds": 87.8020964999996,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/script.log",
+      "sha256": "d9696830385d7406818705d6cbe4c37fb98d5023595265dfcb38b83dc76a4358"
+    },
+    {
+      "name": "cook",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_cook",
+        "--features",
+        "typescript",
+        "--test",
+        "scripts",
+        "--test",
+        "typescript",
+        "--test",
+        "project_scripts"
+      ],
+      "exit": 0,
+      "seconds": 108.463713541998,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/cook.log",
+      "sha256": "5d914bfda00336f0676c31e5bee416a776886e344fb411cfa15aa293942fe157"
+    },
+    {
+      "name": "player",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "mobile-ffi,render-input"
+      ],
+      "exit": 0,
+      "seconds": 43.00707112500095,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/player.log",
+      "sha256": "00120ca35f4b66356c736a2d245d77258913fdd162a87de3492845c630b392af"
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_cook",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "incant_cook/typescript,incant_game_player/mobile-ffi",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 89.81813066700124,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/clippy.log",
+      "sha256": "0f44c9e9acaafc7931d3a544c923d40402d35d8098ad8213340a87c8be907e32"
+    },
+    {
+      "name": "graph",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_script",
+        "incant_game_player",
+        "--features",
+        "incant_game_player/mobile-ffi"
+      ],
+      "exit": 0,
+      "seconds": 0.998878333997709,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/graph.log",
+      "sha256": "197d2c3375bb79ab3d36a3fa0f62baed27d7f80092cef9815788fb7a1001463d"
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 4.161838750002062,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.0600269999995362,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.08249570800035144,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/diff.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "caller-tests",
+      "command": [
+        "python3",
+        "tools/probes/mobile-runtime-library/test_verify.py"
+      ],
+      "exit": 0,
+      "seconds": 0.08994299999903888,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/caller-tests.log",
+      "sha256": "af55efa5c3ceb122f8184c380aa405d3f3b4e7e0c1e892773d0eff31d0645c8a"
+    },
+    {
+      "name": "fixture",
+      "command": [
+        "./tools/cargo",
+        "build",
+        "--locked",
+        "--release",
+        "-j2",
+        "--manifest-path",
+        "tools/probes/mobile-runtime-library/fixture/Cargo.toml"
+      ],
+      "exit": 0,
+      "seconds": 53.62668720899819,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/fixture.log",
+      "sha256": "835c6c26fd87bc711d81fc06a54b3357900675fbd5bed21b2957f7f67c37f6b5"
+    },
+    {
+      "name": "archive-aarch64-apple-darwin",
+      "command": [
+        "./tools/cargo",
+        "rustc",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--lib",
+        "--features",
+        "mobile-ffi",
+        "--crate-type",
+        "staticlib"
+      ],
+      "exit": 0,
+      "seconds": 36.585432625000976,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/archive-aarch64-apple-darwin.log",
+      "sha256": "38c9160f52a8fea0dc274523bf5dba6c40f8d97f4ed98dc06d125e90f0f51dd9"
+    },
+    {
+      "name": "archive-aarch64-apple-ios-sim",
+      "command": [
+        "./tools/cargo",
+        "rustc",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--lib",
+        "--features",
+        "mobile-ffi",
+        "--crate-type",
+        "staticlib",
+        "--target",
+        "aarch64-apple-ios-sim"
+      ],
+      "exit": 0,
+      "seconds": 174.47312062499986,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/archive-aarch64-apple-ios-sim.log",
+      "sha256": "56ad2f0ab533b48561461679e14f33ff9fdcbfa1eb63634ddbdd414426fd7be8"
+    },
+    {
+      "name": "archive-aarch64-apple-ios",
+      "command": [
+        "./tools/cargo",
+        "rustc",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--lib",
+        "--features",
+        "mobile-ffi",
+        "--crate-type",
+        "staticlib",
+        "--target",
+        "aarch64-apple-ios"
+      ],
+      "exit": 0,
+      "seconds": 158.74315379200198,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/archive-aarch64-apple-ios.log",
+      "sha256": "eb24ddf7ad6a7b0411b3c0179d2d1b24fcb634ff24acc76f84ecc70b57be83a3"
+    },
+    {
+      "name": "callers-aarch64-apple-darwin",
+      "command": [
+        "python3",
+        "tools/probes/mobile-runtime-library/verify.py",
+        "--archive-receipt",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/archive-receipt.json",
+        "--receipt-sha256",
+        "39588ef13bfd544149d1067dfdf6842cfc9009fdd7103978b40f451e1f3894e7",
+        "--fixture-generator",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/incant-mobile-runtime-fixture",
+        "--output",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers"
+      ],
+      "exit": 0,
+      "seconds": 4.655065957998886,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/callers-aarch64-apple-darwin.log",
+      "sha256": "eca31d5c0574572394ab34dcee25a00ac3c2574645952c841c999baed61c9258"
+    },
+    {
+      "name": "callers-aarch64-apple-ios-sim",
+      "command": [
+        "python3",
+        "tools/probes/mobile-runtime-library/verify.py",
+        "--archive-receipt",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/archive-receipt.json",
+        "--receipt-sha256",
+        "609f69b5b63534d59f590b381c7f13403d633272475d73fc0f863d97416aefce",
+        "--fixture-generator",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/incant-mobile-runtime-fixture",
+        "--output",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers"
+      ],
+      "exit": 0,
+      "seconds": 69.01826312499907,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/callers-aarch64-apple-ios-sim.log",
+      "sha256": "9a7ff0f096cc9c8737f05a4334dbc66059521211614465cff16883f1c91d6e91"
+    },
+    {
+      "name": "callers-aarch64-apple-ios",
+      "command": [
+        "python3",
+        "tools/probes/mobile-runtime-library/verify.py",
+        "--archive-receipt",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios/archive-receipt.json",
+        "--receipt-sha256",
+        "af91aa12eeaf8cfa18a3af412964341fae9f29a9fdab7a992c175235190cebf5",
+        "--fixture-generator",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/incant-mobile-runtime-fixture",
+        "--output",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios/callers"
+      ],
+      "exit": 0,
+      "seconds": 2.0525241670002288,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/callers-aarch64-apple-ios.log",
+      "sha256": "d35852fd6c3734d5e5c6d0780311bac6d9176e7f37f6b4c92e8441171e784540"
+    }
+  ],
+  "test_counts": {
+    "script": {
+      "passed": 181,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 8
+    },
+    "cook": {
+      "passed": 8,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 3
+    },
+    "player": {
+      "passed": 13,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 5
+    }
+  },
+  "callers": {
+    "aarch64-apple-darwin": {
+      "passed": true,
+      "controls": 32,
+      "commands": 39,
+      "execution": "macos_cpu",
+      "simulator": null
+    },
+    "aarch64-apple-ios-sim": {
+      "passed": true,
+      "controls": 32,
+      "commands": 44,
+      "execution": "ios_simulator_cpu",
+      "simulator": {
+        "udid": "564D567B-850D-45A3-974D-F91F4A4F9F02",
+        "type": "com.apple.CoreSimulator.SimDeviceType.iPhone-18-Pro",
+        "runtime": "com.apple.CoreSimulator.SimRuntime.iOS-27-0"
+      }
+    },
+    "aarch64-apple-ios": {
+      "passed": true,
+      "controls": 0,
+      "commands": 7,
+      "execution": "build_and_link_only_no_device",
+      "simulator": null
+    }
+  },
+  "binaries": {
+    "aarch64-apple-darwin/archive": {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/libincant_game_player.a",
+      "sha256": "a6a84a2a9391b72bd26fd65cf03a1d1f461afdb1dc8be37680c3b6742e999f32",
+      "bytes": 86403720
+    },
+    "aarch64-apple-darwin/header": {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/incant_game.h",
+      "sha256": "101c0a974c7b629f66f7d9e9e2d9c038d71a45ccb2a8fdc91739c2ae7fe649c5"
+    },
+    "aarch64-apple-darwin/fixture_generator": {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/incant-mobile-runtime-fixture",
+      "sha256": "21b94c327addc50a158627a970e2e72aee6a673e9a05f3fe6f104c3e045eddd4"
+    },
+    "aarch64-apple-darwin/c": {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/caller-c",
+      "sha256": "65546572280a043b483cb4cfdf7c2312f3330daad15088e3bed4f2368a35afb9"
+    },
+    "aarch64-apple-darwin/swift": {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/caller-swift",
+      "sha256": "d948961f21fa05d4d6fe84b41d2e0433e036371e389affc713fd8ce8d4478568"
+    },
+    "aarch64-apple-ios-sim/archive": {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/libincant_game_player.a",
+      "sha256": "6e0b65153f893669297f235ca413ea009faa32bd4bfe66ea8e93f30983519ef4",
+      "bytes": 86021544
+    },
+    "aarch64-apple-ios-sim/header": {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/incant_game.h",
+      "sha256": "101c0a974c7b629f66f7d9e9e2d9c038d71a45ccb2a8fdc91739c2ae7fe649c5"
+    },
+    "aarch64-apple-ios-sim/fixture_generator": {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/incant-mobile-runtime-fixture",
+      "sha256": "21b94c327addc50a158627a970e2e72aee6a673e9a05f3fe6f104c3e045eddd4"
+    },
+    "aarch64-apple-ios-sim/c": {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/caller-c",
+      "sha256": "99b62bc803f963a41116dcdab2fabb2984e82de4a185d8334c7554e3cc384527"
+    },
+    "aarch64-apple-ios-sim/swift": {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/caller-swift",
+      "sha256": "72405712fd88d1ae6c4ae8e4f0b65a132e14049b7623335ff9d39637f095748b"
+    },
+    "aarch64-apple-ios/archive": {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios/libincant_game_player.a",
+      "sha256": "ebf4e5436ab5d9a7e11720b28a6e44506d72770925e8fe381e4d5afbad4ba0e2",
+      "bytes": 86063000
+    },
+    "aarch64-apple-ios/header": {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/incant_game.h",
+      "sha256": "101c0a974c7b629f66f7d9e9e2d9c038d71a45ccb2a8fdc91739c2ae7fe649c5"
+    },
+    "aarch64-apple-ios/fixture_generator": {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/incant-mobile-runtime-fixture",
+      "sha256": "21b94c327addc50a158627a970e2e72aee6a673e9a05f3fe6f104c3e045eddd4"
+    },
+    "aarch64-apple-ios/c": {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios/callers/caller-c",
+      "sha256": "a5afbf16d670bee10c1d6de525577a9684d3d2af068ef731ff11722ff5f13a89"
+    },
+    "aarch64-apple-ios/swift": {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios/callers/caller-swift",
+      "sha256": "4f76e779c6b2d56fe92171e254e8101164fea77615be1dfcad53bc1e73faad8f"
+    }
+  },
+  "artifacts": {
+    "aarch64-apple-darwin/archive-receipt.json.gz": {
+      "sha256": "f0933493ee3962f0a0295b20d17c390b55a8b6c5253687f2081c6125e97c55f7",
+      "raw_sha256": "39588ef13bfd544149d1067dfdf6842cfc9009fdd7103978b40f451e1f3894e7",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/archive-receipt.json",
+      "bytes": 222680
+    },
+    "aarch64-apple-darwin/behavior.rs.gz": {
+      "sha256": "ed5fb897423aa6898608411afe9eaa34dab163abce3dfbd09bb605ac6627c8af",
+      "raw_sha256": "59b54420efef2c352884bfefd778d1220ddd312b6dbfd68efc8f94fa98d608d1",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/behavior.rs",
+      "bytes": 52434
+    },
+    "aarch64-apple-darwin/callers/c-accepted/audio.pcm.gz": {
+      "sha256": "c0389124b8cba4084a4c0385590bad81bfa9cb91dee130493fa212227ece5afe",
+      "raw_sha256": "17744bb6a4ed1d9d51d85d7eb645cde30352530d494233c434027f9e3193bae4",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/c-accepted/audio.pcm",
+      "bytes": 19200
+    },
+    "aarch64-apple-darwin/callers/c-accepted/result.json.gz": {
+      "sha256": "943285480a3373036426ab030ad94ba3d9c8a0c5ba8e338f91d459d414a45f34",
+      "raw_sha256": "c5667c784d535e91ba0390d5d8db7fdb04cd6c811c0e9319a15715eca0070050",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/c-accepted/result.json",
+      "bytes": 2527
+    },
+    "aarch64-apple-darwin/callers/c-accepted.request.json.gz": {
+      "sha256": "62ec87403259d151e9e418f000137fc3d64846b0e42d8170f768ab854444ec3c",
+      "raw_sha256": "9bf8aec8898eabb4a021f51c2eb9e64134a0ee83e98b3af1f2ff11417230ac28",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/c-accepted.request.json",
+      "bytes": 466
+    },
+    "aarch64-apple-darwin/callers/c-corrupt/result.json.gz": {
+      "sha256": "3622b67d865b0dda3ee689172ac7135e203f8fdb726c16217ce3dc02d3878e8f",
+      "raw_sha256": "0f81e02bb7f8febb54cad5abc5afc49622bb37e79f5ad4f51f986e69ea9b3959",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/c-corrupt/result.json",
+      "bytes": 230
+    },
+    "aarch64-apple-darwin/callers/c-corrupt-package/clips.bin.gz": {
+      "sha256": "a568799ca294ca001efc2c864c9c7b660e1fb03c4811c7160b752a87361d378d",
+      "raw_sha256": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/c-corrupt-package/clips.bin",
+      "bytes": 12
+    },
+    "aarch64-apple-darwin/callers/c-corrupt-package/empty-input.json.gz": {
+      "sha256": "76f7eda7bc4a8814969085a4bf31de1a07c9b20a6501a45ed1704eef5c167b1d",
+      "raw_sha256": "d767a52a17be2f33794c6bf0b6fd13fc6f0d63952e404e98e263a311ccfc8a89",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/c-corrupt-package/empty-input.json",
+      "bytes": 151
+    },
+    "aarch64-apple-darwin/callers/c-corrupt-package/input-actions.json.gz": {
+      "sha256": "f44373f3e67a4448f1ea47d6bd25b338f5014522f1492ccb502e71e4cb6ce0fe",
+      "raw_sha256": "e7cc15bec3e65e1f4039a9431bffa6c0b485ac3d0ce49dca2a1c55c222be6ea6",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/c-corrupt-package/input-actions.json",
+      "bytes": 136
+    },
+    "aarch64-apple-darwin/callers/c-corrupt-package/package.json.gz": {
+      "sha256": "cb5599a6c0815d83c3af729f38671ae07e15e1f302286fde7adf8acb5ac98157",
+      "raw_sha256": "f832f6ec5f8f6da9329fbb5bd7e30a5fa46845aed21d945b708381a43a6d3282",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/c-corrupt-package/package.json",
+      "bytes": 404
+    },
+    "aarch64-apple-darwin/callers/c-corrupt-package/world.scene.gz": {
+      "sha256": "941310f3e3366dbe4e18a6f6fde0a201fbc3962ef7c44f6ac361f8c5f5c9bf30",
+      "raw_sha256": "11d510e067d2cdcd7559bd86d27a2f4c20babd43670346b97af99b522c1f0075",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/c-corrupt-package/world.scene",
+      "bytes": 7
+    },
+    "aarch64-apple-darwin/callers/c-empty.request.json.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/c-empty.request.json",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/c-failure/result.json.gz": {
+      "sha256": "964ba29e12f91ee41e2568f3f4d4196ef1759ac0f1e49f01421fe8b7b4c09dc9",
+      "raw_sha256": "91739f97444bab097ba30696da8d4708a26c738477ec9ab468c073cdc54792e7",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/c-failure/result.json",
+      "bytes": 244
+    },
+    "aarch64-apple-darwin/callers/c-guest-failure.request.json.gz": {
+      "sha256": "63873846623b534fa89f439aff0d3ab3be78d7bb4cb9945ba01d6f53c8dcd470",
+      "raw_sha256": "30a341002a786482bbac43c12ef20bf5d7ae05e5964003c13a3f961364593ce6",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/c-guest-failure.request.json",
+      "bytes": 620
+    },
+    "aarch64-apple-darwin/callers/c-input-io-failure/result.json.gz": {
+      "sha256": "7dbdf9ed34ec70a3a3f73f3c150d54c0e9487de0f189cbc3cb3d4b58396ae4e8",
+      "raw_sha256": "aaf7f7721e6e1750d678f3fd625f7acf582ab7346a25d06fbaaa19c4a90aba31",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/c-input-io-failure/result.json",
+      "bytes": 228
+    },
+    "aarch64-apple-darwin/callers/c-input-io-failure.request.json.gz": {
+      "sha256": "a4ebb446a1e22c4a82b38328847141472a9317b7ff478d709917934bfa0f235e",
+      "raw_sha256": "1d15d33c858be02dc4f2d7f856fef0ce46f7b1641718185a82c30bb06a6c4426",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/c-input-io-failure.request.json",
+      "bytes": 634
+    },
+    "aarch64-apple-darwin/callers/c-invalid-relative.request.json.gz": {
+      "sha256": "7161cf3588db36c1311a7f8ed6c7abd9dc28faa0afd87254a56211e127e66314",
+      "raw_sha256": "e5c2d04b6fbd34e67b0d31add96be0856a27ab372c1dfaa98dd357f5a249be2a",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/c-invalid-relative.request.json",
+      "bytes": 347
+    },
+    "aarch64-apple-darwin/callers/c-invalid-ticks.request.json.gz": {
+      "sha256": "64e78055e9dacb284f4e590cec97708034029e43495ace2a33eadf95887cb28d",
+      "raw_sha256": "d7f81409458664a2283cb1320c2e9711e369669aa9999ee88988a275b1b49913",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/c-invalid-ticks.request.json",
+      "bytes": 463
+    },
+    "aarch64-apple-darwin/callers/c-invalid-unknown.request.json.gz": {
+      "sha256": "35aecb89238b8edb808f5b5465149dad535a9b93c3c363ebe8486b611c53b315",
+      "raw_sha256": "2ed0870cfb658cdfa914fa279e3107eded95a9e75c2f56d3816c26b8d921fd61",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/c-invalid-unknown.request.json",
+      "bytes": 481
+    },
+    "aarch64-apple-darwin/callers/c-invalid-version.request.json.gz": {
+      "sha256": "e8dbf3fc634e9f98871ed51c4d5224e8a2d23d755200c4f1d67b8d53a671679d",
+      "raw_sha256": "fc31a0ea424f5846ef562db3993434c98b717b9a763f0d4cf65998dfde776b77",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/c-invalid-version.request.json",
+      "bytes": 465
+    },
+    "aarch64-apple-darwin/callers/c-invalid-viewport.request.json.gz": {
+      "sha256": "d7fe4b3d78326de6eef028ee960cb6247ad9d27925b8a82507ad0431861c92a6",
+      "raw_sha256": "e99b97723cb2cd4fbf637692fb95b08b9116ab5aec8bb2bb58b1767d1d2a23e9",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/c-invalid-viewport.request.json",
+      "bytes": 491
+    },
+    "aarch64-apple-darwin/callers/c-no-clobber.request.json.gz": {
+      "sha256": "62ec87403259d151e9e418f000137fc3d64846b0e42d8170f768ab854444ec3c",
+      "raw_sha256": "9bf8aec8898eabb4a021f51c2eb9e64134a0ee83e98b3af1f2ff11417230ac28",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/c-no-clobber.request.json",
+      "bytes": 466
+    },
+    "aarch64-apple-darwin/callers/c-observation-failure/audio.pcm.gz": {
+      "sha256": "c0389124b8cba4084a4c0385590bad81bfa9cb91dee130493fa212227ece5afe",
+      "raw_sha256": "17744bb6a4ed1d9d51d85d7eb645cde30352530d494233c434027f9e3193bae4",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/c-observation-failure/audio.pcm",
+      "bytes": 19200
+    },
+    "aarch64-apple-darwin/callers/c-observation-failure/result.json.gz": {
+      "sha256": "65624d0daf99397e2e15cb9500521c674bec56234a8e9279b4905a7166345688",
+      "raw_sha256": "d001904296d3ae00ff4174de2ee4672b03e624bdda5b841abacbb41282d6d7e0",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/c-observation-failure/result.json",
+      "bytes": 2589
+    },
+    "aarch64-apple-darwin/callers/c-observation-failure.request.json.gz": {
+      "sha256": "0b9fad4e50f1782eb59bbc74570e07e9aa0a8aa5a20b4db12cddc63f966509b4",
+      "raw_sha256": "9f84755f88e9a89bdfe1e4718de1cdc842c8c2a1a1219cdfa5bb948532aec892",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/c-observation-failure.request.json",
+      "bytes": 483
+    },
+    "aarch64-apple-darwin/callers/c-oversized.request.json.gz": {
+      "sha256": "1290af172a81dd1a0ef790f48acee1e58bf04ca0f751900f9bd96e374ecc9734",
+      "raw_sha256": "76c002eec0c9da854ca2ee5dae9fb0069a622274b6638ab712fcb70384304899",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/c-oversized.request.json",
+      "bytes": 65537
+    },
+    "aarch64-apple-darwin/callers/c-package-failure.request.json.gz": {
+      "sha256": "f6d88c36d4ae58c75fd1404003a398614c13f6748bb3c221917549bbf78fb700",
+      "raw_sha256": "5a2b3e03a59c725708824df45a0d1a095a0fd690c48b83852b85e1ff5350606a",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/c-package-failure.request.json",
+      "bytes": 467
+    },
+    "aarch64-apple-darwin/callers/c-release/audio.pcm.gz": {
+      "sha256": "c0389124b8cba4084a4c0385590bad81bfa9cb91dee130493fa212227ece5afe",
+      "raw_sha256": "17744bb6a4ed1d9d51d85d7eb645cde30352530d494233c434027f9e3193bae4",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/c-release/audio.pcm",
+      "bytes": 19200
+    },
+    "aarch64-apple-darwin/callers/c-release/result.json.gz": {
+      "sha256": "70f065727f373b03ee52a46b24061b8cf4cbf29224f6bb6695b9c5d8ad9041e8",
+      "raw_sha256": "9539067d69875a9c56c0ec4a9d90e35e9322a1be62bb6bdc6a92eb5a418b6fc1",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/c-release/result.json",
+      "bytes": 2531
+    },
+    "aarch64-apple-darwin/callers/c-release.request.json.gz": {
+      "sha256": "23ea004b325325e95f7f68f7929f8adec62d839eb7f29a9055cabb025b6ad2a0",
+      "raw_sha256": "cedf5a3a2e08306cbdbd30b4cde521ec4588a6f4832a5e4e33539eadae9ceb8e",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/c-release.request.json",
+      "bytes": 628
+    },
+    "aarch64-apple-darwin/callers/c-repeat/audio.pcm.gz": {
+      "sha256": "c0389124b8cba4084a4c0385590bad81bfa9cb91dee130493fa212227ece5afe",
+      "raw_sha256": "17744bb6a4ed1d9d51d85d7eb645cde30352530d494233c434027f9e3193bae4",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/c-repeat/audio.pcm",
+      "bytes": 19200
+    },
+    "aarch64-apple-darwin/callers/c-repeat/result.json.gz": {
+      "sha256": "943285480a3373036426ab030ad94ba3d9c8a0c5ba8e338f91d459d414a45f34",
+      "raw_sha256": "c5667c784d535e91ba0390d5d8db7fdb04cd6c811c0e9319a15715eca0070050",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/c-repeat/result.json",
+      "bytes": 2527
+    },
+    "aarch64-apple-darwin/callers/c-repeat.request.json.gz": {
+      "sha256": "ef2781588efee7f06d7d2dd915b3410e7025f3f259cc68ca206b98c0efac3144",
+      "raw_sha256": "789b46572671273787d56955927df0940dc3d32bc1fa2b0ff17486540eb084e9",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/c-repeat.request.json",
+      "bytes": 464
+    },
+    "aarch64-apple-darwin/callers/command-000.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-000.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-000.stdout.gz": {
+      "sha256": "eec9c45fca79e231ac224d91981750ea52f51f4486e1ff0d09940a936e5237b9",
+      "raw_sha256": "f4a66fe254ea9c9e1f89504f443328475b9ca38a1fc484a06b1efd56296f8b62",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-000.stdout",
+      "bytes": 377
+    },
+    "aarch64-apple-darwin/callers/command-001.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-001.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-001.stdout.gz": {
+      "sha256": "e06fe0914af1256b42a7c89a16b72b0edbe5ca59c1e8964381e795ab1d80a731",
+      "raw_sha256": "7da0fd6d11521838939c36a6c45bfaeb893ecd0f8db281f9093f2c93af465ed1",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-001.stdout",
+      "bytes": 99
+    },
+    "aarch64-apple-darwin/callers/command-002.stderr.gz": {
+      "sha256": "37d1360851a8144147231153760a71082794d2340dbdc3f596306e5dcb32aa47",
+      "raw_sha256": "b204efef04e73776849b842f89788a5f5bad2dedb7b90b787357867e544e0988",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-002.stderr",
+      "bytes": 1022
+    },
+    "aarch64-apple-darwin/callers/command-002.stdout.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-002.stdout",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-003.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-003.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-003.stdout.gz": {
+      "sha256": "6980f9f241a534562db52411446b0ad2e0f6b2bf426190527a71a7ad0722843f",
+      "raw_sha256": "5a76352a6e6dc7a99acb7ba3257f5530c604d411957e95e9cc2ed38e57759621",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-003.stdout",
+      "bytes": 11615273
+    },
+    "aarch64-apple-darwin/callers/command-004.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-004.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-004.stdout.gz": {
+      "sha256": "e06fe0914af1256b42a7c89a16b72b0edbe5ca59c1e8964381e795ab1d80a731",
+      "raw_sha256": "7da0fd6d11521838939c36a6c45bfaeb893ecd0f8db281f9093f2c93af465ed1",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-004.stdout",
+      "bytes": 99
+    },
+    "aarch64-apple-darwin/callers/command-005.stderr.gz": {
+      "sha256": "37d1360851a8144147231153760a71082794d2340dbdc3f596306e5dcb32aa47",
+      "raw_sha256": "b204efef04e73776849b842f89788a5f5bad2dedb7b90b787357867e544e0988",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-005.stderr",
+      "bytes": 1022
+    },
+    "aarch64-apple-darwin/callers/command-005.stdout.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-005.stdout",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-006.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-006.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-006.stdout.gz": {
+      "sha256": "b9180ede51507537bde47d6057e8d26812bef1bce6e930ae335d18991f84fe37",
+      "raw_sha256": "acd7582b0c5c16527f7b3ae3fe7438a6988c09758a05493f2cc3f256bb552133",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-006.stdout",
+      "bytes": 11615273
+    },
+    "aarch64-apple-darwin/callers/command-007.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-007.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-007.stdout.gz": {
+      "sha256": "7f626384e48c4ba396e349810f4cee64ad13f9d1df33d3f1cc98e6bd9cbe3614",
+      "raw_sha256": "7bd0f259f147ca479c0500e5e513a987679125b8dd6be3d5fdb80a09780687ba",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-007.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-darwin/callers/command-008.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-008.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-008.stdout.gz": {
+      "sha256": "3f820091045356618ce126cb61405874dc54e557df180cd6b41627248a160358",
+      "raw_sha256": "56e2f4b9067d0a2e78c0e90f7a003fdcf230022ed702a0edeafbde61d469d5b3",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-008.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-darwin/callers/command-009.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-009.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-009.stdout.gz": {
+      "sha256": "7f626384e48c4ba396e349810f4cee64ad13f9d1df33d3f1cc98e6bd9cbe3614",
+      "raw_sha256": "7bd0f259f147ca479c0500e5e513a987679125b8dd6be3d5fdb80a09780687ba",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-009.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-darwin/callers/command-010.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-010.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-010.stdout.gz": {
+      "sha256": "7f626384e48c4ba396e349810f4cee64ad13f9d1df33d3f1cc98e6bd9cbe3614",
+      "raw_sha256": "7bd0f259f147ca479c0500e5e513a987679125b8dd6be3d5fdb80a09780687ba",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-010.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-darwin/callers/command-011.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-011.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-011.stdout.gz": {
+      "sha256": "adeacf280f0a2727727bf5762f0851976c56bbe9ce6b4d007832570cf9abdaea",
+      "raw_sha256": "8c9ea83017e20b6439c73a3160495e44e01d40e4b4c74948d42d90c4107a7a4e",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-011.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-darwin/callers/command-012.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-012.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-012.stdout.gz": {
+      "sha256": "adeacf280f0a2727727bf5762f0851976c56bbe9ce6b4d007832570cf9abdaea",
+      "raw_sha256": "8c9ea83017e20b6439c73a3160495e44e01d40e4b4c74948d42d90c4107a7a4e",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-012.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-darwin/callers/command-013.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-013.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-013.stdout.gz": {
+      "sha256": "adeacf280f0a2727727bf5762f0851976c56bbe9ce6b4d007832570cf9abdaea",
+      "raw_sha256": "8c9ea83017e20b6439c73a3160495e44e01d40e4b4c74948d42d90c4107a7a4e",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-013.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-darwin/callers/command-014.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-014.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-014.stdout.gz": {
+      "sha256": "adeacf280f0a2727727bf5762f0851976c56bbe9ce6b4d007832570cf9abdaea",
+      "raw_sha256": "8c9ea83017e20b6439c73a3160495e44e01d40e4b4c74948d42d90c4107a7a4e",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-014.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-darwin/callers/command-015.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-015.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-015.stdout.gz": {
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-015.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-darwin/callers/command-016.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-016.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-016.stdout.gz": {
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-016.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-darwin/callers/command-017.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-017.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-017.stdout.gz": {
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-017.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-darwin/callers/command-018.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-018.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-018.stdout.gz": {
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-018.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-darwin/callers/command-019.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-019.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-019.stdout.gz": {
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-019.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-darwin/callers/command-020.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-020.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-020.stdout.gz": {
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-020.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-darwin/callers/command-021.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-021.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-021.stdout.gz": {
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-021.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-darwin/callers/command-022.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-022.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-022.stdout.gz": {
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-022.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-darwin/callers/command-023.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-023.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-023.stdout.gz": {
+      "sha256": "7f626384e48c4ba396e349810f4cee64ad13f9d1df33d3f1cc98e6bd9cbe3614",
+      "raw_sha256": "7bd0f259f147ca479c0500e5e513a987679125b8dd6be3d5fdb80a09780687ba",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-023.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-darwin/callers/command-024.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-024.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-024.stdout.gz": {
+      "sha256": "3f820091045356618ce126cb61405874dc54e557df180cd6b41627248a160358",
+      "raw_sha256": "56e2f4b9067d0a2e78c0e90f7a003fdcf230022ed702a0edeafbde61d469d5b3",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-024.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-darwin/callers/command-025.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-025.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-025.stdout.gz": {
+      "sha256": "7f626384e48c4ba396e349810f4cee64ad13f9d1df33d3f1cc98e6bd9cbe3614",
+      "raw_sha256": "7bd0f259f147ca479c0500e5e513a987679125b8dd6be3d5fdb80a09780687ba",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-025.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-darwin/callers/command-026.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-026.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-026.stdout.gz": {
+      "sha256": "7f626384e48c4ba396e349810f4cee64ad13f9d1df33d3f1cc98e6bd9cbe3614",
+      "raw_sha256": "7bd0f259f147ca479c0500e5e513a987679125b8dd6be3d5fdb80a09780687ba",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-026.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-darwin/callers/command-027.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-027.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-027.stdout.gz": {
+      "sha256": "adeacf280f0a2727727bf5762f0851976c56bbe9ce6b4d007832570cf9abdaea",
+      "raw_sha256": "8c9ea83017e20b6439c73a3160495e44e01d40e4b4c74948d42d90c4107a7a4e",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-027.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-darwin/callers/command-028.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-028.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-028.stdout.gz": {
+      "sha256": "adeacf280f0a2727727bf5762f0851976c56bbe9ce6b4d007832570cf9abdaea",
+      "raw_sha256": "8c9ea83017e20b6439c73a3160495e44e01d40e4b4c74948d42d90c4107a7a4e",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-028.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-darwin/callers/command-029.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-029.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-029.stdout.gz": {
+      "sha256": "adeacf280f0a2727727bf5762f0851976c56bbe9ce6b4d007832570cf9abdaea",
+      "raw_sha256": "8c9ea83017e20b6439c73a3160495e44e01d40e4b4c74948d42d90c4107a7a4e",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-029.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-darwin/callers/command-030.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-030.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-030.stdout.gz": {
+      "sha256": "adeacf280f0a2727727bf5762f0851976c56bbe9ce6b4d007832570cf9abdaea",
+      "raw_sha256": "8c9ea83017e20b6439c73a3160495e44e01d40e4b4c74948d42d90c4107a7a4e",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-030.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-darwin/callers/command-031.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-031.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-031.stdout.gz": {
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-031.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-darwin/callers/command-032.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-032.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-032.stdout.gz": {
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-032.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-darwin/callers/command-033.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-033.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-033.stdout.gz": {
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-033.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-darwin/callers/command-034.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-034.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-034.stdout.gz": {
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-034.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-darwin/callers/command-035.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-035.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-035.stdout.gz": {
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-035.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-darwin/callers/command-036.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-036.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-036.stdout.gz": {
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-036.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-darwin/callers/command-037.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-037.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-037.stdout.gz": {
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-037.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-darwin/callers/command-038.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-038.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/command-038.stdout.gz": {
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/command-038.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-darwin/callers/fixture/failure.json.gz": {
+      "sha256": "d061e8d9c4ea79494d7219455b0773935e6c286fa878dab47505bc1fa237e3ba",
+      "raw_sha256": "c5968a7e94d4d5626463f43ccc453d64476d364c69dcf99c785aa0f33514d839",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/fixture/failure.json",
+      "bytes": 151
+    },
+    "aarch64-apple-darwin/callers/fixture/observe-release.json.gz": {
+      "sha256": "1a79863537a7c522271723f65d729f0b68b1c5f4d8ddaf097f8f4c9ba655f818",
+      "raw_sha256": "c7b894450799670998dacf7f824aa20b16d4b29c0f11060f78204ecb229032cd",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/fixture/observe-release.json",
+      "bytes": 280
+    },
+    "aarch64-apple-darwin/callers/fixture/observe-wrong.json.gz": {
+      "sha256": "60a8ea65d478af59ae8ff5a78b9a2988841376b7f9866d2157d2b7366d164169",
+      "raw_sha256": "e75e4767bfa8f95e0689e19d2f96b91e3ca8a0c970926f1e3f2264699103125d",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/fixture/observe-wrong.json",
+      "bytes": 281
+    },
+    "aarch64-apple-darwin/callers/fixture/observe.json.gz": {
+      "sha256": "3d166285f8cd20b89cd490aca4f8ba1baff6e50ff5e594fe8c2db10029058e51",
+      "raw_sha256": "42ff37b835c9d3f35082b7f9ec7e17f1736b91757700b74a693be97116e2018f",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/fixture/observe.json",
+      "bytes": 279
+    },
+    "aarch64-apple-darwin/callers/fixture/package/clips.bin.gz": {
+      "sha256": "a568799ca294ca001efc2c864c9c7b660e1fb03c4811c7160b752a87361d378d",
+      "raw_sha256": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/fixture/package/clips.bin",
+      "bytes": 12
+    },
+    "aarch64-apple-darwin/callers/fixture/package/empty-input.json.gz": {
+      "sha256": "76f7eda7bc4a8814969085a4bf31de1a07c9b20a6501a45ed1704eef5c167b1d",
+      "raw_sha256": "d767a52a17be2f33794c6bf0b6fd13fc6f0d63952e404e98e263a311ccfc8a89",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/fixture/package/empty-input.json",
+      "bytes": 151
+    },
+    "aarch64-apple-darwin/callers/fixture/package/input-actions.json.gz": {
+      "sha256": "f44373f3e67a4448f1ea47d6bd25b338f5014522f1492ccb502e71e4cb6ce0fe",
+      "raw_sha256": "e7cc15bec3e65e1f4039a9431bffa6c0b485ac3d0ce49dca2a1c55c222be6ea6",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/fixture/package/input-actions.json",
+      "bytes": 136
+    },
+    "aarch64-apple-darwin/callers/fixture/package/package.json.gz": {
+      "sha256": "cb5599a6c0815d83c3af729f38671ae07e15e1f302286fde7adf8acb5ac98157",
+      "raw_sha256": "f832f6ec5f8f6da9329fbb5bd7e30a5fa46845aed21d945b708381a43a6d3282",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/fixture/package/package.json",
+      "bytes": 404
+    },
+    "aarch64-apple-darwin/callers/fixture/package/world.scene.gz": {
+      "sha256": "91bb2b0bfe554f4cf35948b751d9327ce5e14bc28baf8b2ae160fe125958a5ba",
+      "raw_sha256": "dfb5c21d9b9857390a4c607df760d06c94951a108f59230c3893b800119385c8",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/fixture/package/world.scene",
+      "bytes": 200
+    },
+    "aarch64-apple-darwin/callers/fixture/release.json.gz": {
+      "sha256": "897d9cac2ccbd20e54551b11079065d76d841e532bafb6d06111a17cd644e101",
+      "raw_sha256": "448d09e5988acec3dd9fcb016820b41e737db0a5df736e800585c8d92f34dc0e",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/fixture/release.json",
+      "bytes": 215
+    },
+    "aarch64-apple-darwin/callers/result.json.gz": {
+      "sha256": "30dc003552df4c2a8f14e08e766f7fbf3e18b344731ff4c0f42ac0be88806c1b",
+      "raw_sha256": "b6e242848b29af7f1f9c35f46f8573673208ec01466418cdf8884a05dfd20b0c",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/result.json",
+      "bytes": 95193
+    },
+    "aarch64-apple-darwin/callers/swift-accepted/audio.pcm.gz": {
+      "sha256": "c0389124b8cba4084a4c0385590bad81bfa9cb91dee130493fa212227ece5afe",
+      "raw_sha256": "17744bb6a4ed1d9d51d85d7eb645cde30352530d494233c434027f9e3193bae4",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/swift-accepted/audio.pcm",
+      "bytes": 19200
+    },
+    "aarch64-apple-darwin/callers/swift-accepted/result.json.gz": {
+      "sha256": "943285480a3373036426ab030ad94ba3d9c8a0c5ba8e338f91d459d414a45f34",
+      "raw_sha256": "c5667c784d535e91ba0390d5d8db7fdb04cd6c811c0e9319a15715eca0070050",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/swift-accepted/result.json",
+      "bytes": 2527
+    },
+    "aarch64-apple-darwin/callers/swift-accepted.request.json.gz": {
+      "sha256": "db91eafdad1ae9449cccffa0b925c9639f3890397abac36bf2d964cf2b646e31",
+      "raw_sha256": "b51c1aa558e9298a427033b967807061be2d0a228dd6b774fc58aee31e647589",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/swift-accepted.request.json",
+      "bytes": 470
+    },
+    "aarch64-apple-darwin/callers/swift-corrupt/result.json.gz": {
+      "sha256": "3622b67d865b0dda3ee689172ac7135e203f8fdb726c16217ce3dc02d3878e8f",
+      "raw_sha256": "0f81e02bb7f8febb54cad5abc5afc49622bb37e79f5ad4f51f986e69ea9b3959",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/swift-corrupt/result.json",
+      "bytes": 230
+    },
+    "aarch64-apple-darwin/callers/swift-corrupt-package/clips.bin.gz": {
+      "sha256": "a568799ca294ca001efc2c864c9c7b660e1fb03c4811c7160b752a87361d378d",
+      "raw_sha256": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/swift-corrupt-package/clips.bin",
+      "bytes": 12
+    },
+    "aarch64-apple-darwin/callers/swift-corrupt-package/empty-input.json.gz": {
+      "sha256": "76f7eda7bc4a8814969085a4bf31de1a07c9b20a6501a45ed1704eef5c167b1d",
+      "raw_sha256": "d767a52a17be2f33794c6bf0b6fd13fc6f0d63952e404e98e263a311ccfc8a89",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/swift-corrupt-package/empty-input.json",
+      "bytes": 151
+    },
+    "aarch64-apple-darwin/callers/swift-corrupt-package/input-actions.json.gz": {
+      "sha256": "f44373f3e67a4448f1ea47d6bd25b338f5014522f1492ccb502e71e4cb6ce0fe",
+      "raw_sha256": "e7cc15bec3e65e1f4039a9431bffa6c0b485ac3d0ce49dca2a1c55c222be6ea6",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/swift-corrupt-package/input-actions.json",
+      "bytes": 136
+    },
+    "aarch64-apple-darwin/callers/swift-corrupt-package/package.json.gz": {
+      "sha256": "cb5599a6c0815d83c3af729f38671ae07e15e1f302286fde7adf8acb5ac98157",
+      "raw_sha256": "f832f6ec5f8f6da9329fbb5bd7e30a5fa46845aed21d945b708381a43a6d3282",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/swift-corrupt-package/package.json",
+      "bytes": 404
+    },
+    "aarch64-apple-darwin/callers/swift-corrupt-package/world.scene.gz": {
+      "sha256": "941310f3e3366dbe4e18a6f6fde0a201fbc3962ef7c44f6ac361f8c5f5c9bf30",
+      "raw_sha256": "11d510e067d2cdcd7559bd86d27a2f4c20babd43670346b97af99b522c1f0075",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/swift-corrupt-package/world.scene",
+      "bytes": 7
+    },
+    "aarch64-apple-darwin/callers/swift-empty.request.json.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/swift-empty.request.json",
+      "bytes": 0
+    },
+    "aarch64-apple-darwin/callers/swift-failure/result.json.gz": {
+      "sha256": "964ba29e12f91ee41e2568f3f4d4196ef1759ac0f1e49f01421fe8b7b4c09dc9",
+      "raw_sha256": "91739f97444bab097ba30696da8d4708a26c738477ec9ab468c073cdc54792e7",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/swift-failure/result.json",
+      "bytes": 244
+    },
+    "aarch64-apple-darwin/callers/swift-guest-failure.request.json.gz": {
+      "sha256": "0adf7cbcb87f8f7c5ec8ab83ccaea3742dca48b733730c027f7db547978b6f35",
+      "raw_sha256": "21876f5030a7b4cf3cb4da7ac248a8484cfef9c7b6245c1d0385c84530fe4323",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/swift-guest-failure.request.json",
+      "bytes": 624
+    },
+    "aarch64-apple-darwin/callers/swift-input-io-failure/result.json.gz": {
+      "sha256": "7dbdf9ed34ec70a3a3f73f3c150d54c0e9487de0f189cbc3cb3d4b58396ae4e8",
+      "raw_sha256": "aaf7f7721e6e1750d678f3fd625f7acf582ab7346a25d06fbaaa19c4a90aba31",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/swift-input-io-failure/result.json",
+      "bytes": 228
+    },
+    "aarch64-apple-darwin/callers/swift-input-io-failure.request.json.gz": {
+      "sha256": "996f44388430cce63f923df92f73def9cc1172f29889e053d094b7ad1c991961",
+      "raw_sha256": "f1d14cc54327df65d1c3ce9a9af8a9a2440739f00526afb2e9f3aa1d743971af",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/swift-input-io-failure.request.json",
+      "bytes": 638
+    },
+    "aarch64-apple-darwin/callers/swift-invalid-relative.request.json.gz": {
+      "sha256": "381d6af33bc971126af930cf19e2a6be8bdfbc7693f8505fcdfcb26ba4c568f2",
+      "raw_sha256": "160a354554ccec1f868524be7678043344c1ccf3f1378288e136303d09b42df1",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/swift-invalid-relative.request.json",
+      "bytes": 351
+    },
+    "aarch64-apple-darwin/callers/swift-invalid-ticks.request.json.gz": {
+      "sha256": "5f28c7f1efe501b80f41b3aa6145d25ed1bbe5d93e7a5ea0a8ea05f66140e3c1",
+      "raw_sha256": "82f83e47765b70c1ad089e872738e0cca350f998a600f9b784aae8b9bab7d38f",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/swift-invalid-ticks.request.json",
+      "bytes": 467
+    },
+    "aarch64-apple-darwin/callers/swift-invalid-unknown.request.json.gz": {
+      "sha256": "f0367ea70ccdbfe70c83d32ba102b747d3eadab16ec2090a18b0ef42fddfff72",
+      "raw_sha256": "9b09aab03e2ecbf0631183efe491e2e73fbf2b5edd7d9ff8aed4f4c2fa8034c1",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/swift-invalid-unknown.request.json",
+      "bytes": 485
+    },
+    "aarch64-apple-darwin/callers/swift-invalid-version.request.json.gz": {
+      "sha256": "86f07fab05417ca8ba532337238cddfe9d8ff0fdfa831819b8ca3ea9036b5658",
+      "raw_sha256": "676cd4a7fa57b20380e85c1960d7097cc2635e7519d7fcc832652ffaacffec7f",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/swift-invalid-version.request.json",
+      "bytes": 469
+    },
+    "aarch64-apple-darwin/callers/swift-invalid-viewport.request.json.gz": {
+      "sha256": "9e4059890fc381997fda4d80c89af7005c431c5cca2da553529805ccdd2d8134",
+      "raw_sha256": "5f73ab3c499fab3f0a4a65d5d1efde2bcc095fb162526e59dbd346d899580666",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/swift-invalid-viewport.request.json",
+      "bytes": 495
+    },
+    "aarch64-apple-darwin/callers/swift-no-clobber.request.json.gz": {
+      "sha256": "db91eafdad1ae9449cccffa0b925c9639f3890397abac36bf2d964cf2b646e31",
+      "raw_sha256": "b51c1aa558e9298a427033b967807061be2d0a228dd6b774fc58aee31e647589",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/swift-no-clobber.request.json",
+      "bytes": 470
+    },
+    "aarch64-apple-darwin/callers/swift-observation-failure/audio.pcm.gz": {
+      "sha256": "c0389124b8cba4084a4c0385590bad81bfa9cb91dee130493fa212227ece5afe",
+      "raw_sha256": "17744bb6a4ed1d9d51d85d7eb645cde30352530d494233c434027f9e3193bae4",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/swift-observation-failure/audio.pcm",
+      "bytes": 19200
+    },
+    "aarch64-apple-darwin/callers/swift-observation-failure/result.json.gz": {
+      "sha256": "65624d0daf99397e2e15cb9500521c674bec56234a8e9279b4905a7166345688",
+      "raw_sha256": "d001904296d3ae00ff4174de2ee4672b03e624bdda5b841abacbb41282d6d7e0",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/swift-observation-failure/result.json",
+      "bytes": 2589
+    },
+    "aarch64-apple-darwin/callers/swift-observation-failure.request.json.gz": {
+      "sha256": "f8b4498ea9d6a098b15d45e5c60c84c2c4309bdabcaf6d8939b4a3ec9ceefc67",
+      "raw_sha256": "83f14da6d4020b8b1ada2b565eebf1a34cfd50bf6e53f0037cb1180631148c99",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/swift-observation-failure.request.json",
+      "bytes": 487
+    },
+    "aarch64-apple-darwin/callers/swift-oversized.request.json.gz": {
+      "sha256": "1290af172a81dd1a0ef790f48acee1e58bf04ca0f751900f9bd96e374ecc9734",
+      "raw_sha256": "76c002eec0c9da854ca2ee5dae9fb0069a622274b6638ab712fcb70384304899",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/swift-oversized.request.json",
+      "bytes": 65537
+    },
+    "aarch64-apple-darwin/callers/swift-package-failure.request.json.gz": {
+      "sha256": "a8f9da7161276106c172552e14733e21a73a5adf4ef127eafd5cbcda0be96f8d",
+      "raw_sha256": "0df447c487dd1621e12ca08cf9134d2b2879ca8c911f8ed84caf906343c9881f",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/swift-package-failure.request.json",
+      "bytes": 475
+    },
+    "aarch64-apple-darwin/callers/swift-release/audio.pcm.gz": {
+      "sha256": "c0389124b8cba4084a4c0385590bad81bfa9cb91dee130493fa212227ece5afe",
+      "raw_sha256": "17744bb6a4ed1d9d51d85d7eb645cde30352530d494233c434027f9e3193bae4",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/swift-release/audio.pcm",
+      "bytes": 19200
+    },
+    "aarch64-apple-darwin/callers/swift-release/result.json.gz": {
+      "sha256": "70f065727f373b03ee52a46b24061b8cf4cbf29224f6bb6695b9c5d8ad9041e8",
+      "raw_sha256": "9539067d69875a9c56c0ec4a9d90e35e9322a1be62bb6bdc6a92eb5a418b6fc1",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/swift-release/result.json",
+      "bytes": 2531
+    },
+    "aarch64-apple-darwin/callers/swift-release.request.json.gz": {
+      "sha256": "b488792294e6d41e649d6f4a79e7983c7f224d89d7af0a52cd5c74806393ecb3",
+      "raw_sha256": "6ed7b1fce007ccf93e67fd23e3b990e128cbb68a0c7c65f3a0af6ed03e1aee82",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/swift-release.request.json",
+      "bytes": 632
+    },
+    "aarch64-apple-darwin/callers/swift-repeat/audio.pcm.gz": {
+      "sha256": "c0389124b8cba4084a4c0385590bad81bfa9cb91dee130493fa212227ece5afe",
+      "raw_sha256": "17744bb6a4ed1d9d51d85d7eb645cde30352530d494233c434027f9e3193bae4",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/swift-repeat/audio.pcm",
+      "bytes": 19200
+    },
+    "aarch64-apple-darwin/callers/swift-repeat/result.json.gz": {
+      "sha256": "943285480a3373036426ab030ad94ba3d9c8a0c5ba8e338f91d459d414a45f34",
+      "raw_sha256": "c5667c784d535e91ba0390d5d8db7fdb04cd6c811c0e9319a15715eca0070050",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/swift-repeat/result.json",
+      "bytes": 2527
+    },
+    "aarch64-apple-darwin/callers/swift-repeat.request.json.gz": {
+      "sha256": "9d7259a7998ff69e18b412c49a7cde5453329ffa4f46918d661831d9c22eba46",
+      "raw_sha256": "1674213a91d77850553c9f80720535c8fc5474f7fce7606b5097f1c724d5ff36",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/callers/swift-repeat.request.json",
+      "bytes": 468
+    },
+    "aarch64-apple-darwin/script-symbols.json.gz": {
+      "sha256": "6a38a12b831d742d61226a12398d450742b4ba697886e89ff0286e35c6120a3e",
+      "raw_sha256": "915325a7353e3ce1a71d9efbfad79561e4c15a02f1ad92c6ac5010ab76d0d8fb",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-darwin/script-symbols.json",
+      "bytes": 1227
+    },
+    "aarch64-apple-ios/archive-receipt.json.gz": {
+      "sha256": "fdadd6f20a93c8c6858413bc849a9ecf54ce933da2762d44a9ad4860f643100a",
+      "raw_sha256": "af91aa12eeaf8cfa18a3af412964341fae9f29a9fdab7a992c175235190cebf5",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios/archive-receipt.json",
+      "bytes": 222707
+    },
+    "aarch64-apple-ios/behavior.rs.gz": {
+      "sha256": "b474123e4a3e4c6895daa8e892c77998f35db3d88415e3c83a3d00d2486db5e3",
+      "raw_sha256": "418d6e22c49e9a92b25b255f1385649ebd0798f01838930a740e97be4c16c5a4",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios/behavior.rs",
+      "bytes": 52431
+    },
+    "aarch64-apple-ios/callers/command-000.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios/callers/command-000.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios/callers/command-000.stdout.gz": {
+      "sha256": "35724c4321564d74b850f8f36d17b4f366f92d25f850881aa69327507af1b783",
+      "raw_sha256": "d873cf543b14a2f9e725b750df30da17aad37e4bc4e357d54e2bc0ebc9d8bfcb",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios/callers/command-000.stdout",
+      "bytes": 374
+    },
+    "aarch64-apple-ios/callers/command-001.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios/callers/command-001.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios/callers/command-001.stdout.gz": {
+      "sha256": "d82225143d13850ab11f85aab1f13892d9520a0bb951c7adb09f20c134908bfb",
+      "raw_sha256": "ffcbea11fb5317677bae3d9ee86f5b79f5528f5e672317b9fb9aa38b755566bb",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios/callers/command-001.stdout",
+      "bytes": 103
+    },
+    "aarch64-apple-ios/callers/command-002.stderr.gz": {
+      "sha256": "f1a49cf90494e401d88065a03bc63dff445eec9f6491fa2ebe434c2e86f8d994",
+      "raw_sha256": "01ea756d7d08f5232bdfb336144b53813e432065ac0d61f6e620b1dae0b74ac1",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios/callers/command-002.stderr",
+      "bytes": 1002
+    },
+    "aarch64-apple-ios/callers/command-002.stdout.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios/callers/command-002.stdout",
+      "bytes": 0
+    },
+    "aarch64-apple-ios/callers/command-003.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios/callers/command-003.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios/callers/command-003.stdout.gz": {
+      "sha256": "5d1dfef0946641ba309b14b8c5894d003b77a8742e76043c1c240ed9f4520fa9",
+      "raw_sha256": "962609dcb87d346ff1d683593a757d047d4577dcdcd80a70808966ae66391f5b",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios/callers/command-003.stdout",
+      "bytes": 11614833
+    },
+    "aarch64-apple-ios/callers/command-004.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios/callers/command-004.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios/callers/command-004.stdout.gz": {
+      "sha256": "d82225143d13850ab11f85aab1f13892d9520a0bb951c7adb09f20c134908bfb",
+      "raw_sha256": "ffcbea11fb5317677bae3d9ee86f5b79f5528f5e672317b9fb9aa38b755566bb",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios/callers/command-004.stdout",
+      "bytes": 103
+    },
+    "aarch64-apple-ios/callers/command-005.stderr.gz": {
+      "sha256": "f1a49cf90494e401d88065a03bc63dff445eec9f6491fa2ebe434c2e86f8d994",
+      "raw_sha256": "01ea756d7d08f5232bdfb336144b53813e432065ac0d61f6e620b1dae0b74ac1",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios/callers/command-005.stderr",
+      "bytes": 1002
+    },
+    "aarch64-apple-ios/callers/command-005.stdout.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios/callers/command-005.stdout",
+      "bytes": 0
+    },
+    "aarch64-apple-ios/callers/command-006.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios/callers/command-006.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios/callers/command-006.stdout.gz": {
+      "sha256": "fcaecc179276b7370c7de58ec125f7e5cc8f013b0929874af63fee7e9a3fa036",
+      "raw_sha256": "a54b0cc8601d9f18c059ca98f05cc60d594b7d65290b129353e0dc1db809fe76",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios/callers/command-006.stdout",
+      "bytes": 11614833
+    },
+    "aarch64-apple-ios/callers/fixture/failure.json.gz": {
+      "sha256": "d061e8d9c4ea79494d7219455b0773935e6c286fa878dab47505bc1fa237e3ba",
+      "raw_sha256": "c5968a7e94d4d5626463f43ccc453d64476d364c69dcf99c785aa0f33514d839",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios/callers/fixture/failure.json",
+      "bytes": 151
+    },
+    "aarch64-apple-ios/callers/fixture/observe-release.json.gz": {
+      "sha256": "1a79863537a7c522271723f65d729f0b68b1c5f4d8ddaf097f8f4c9ba655f818",
+      "raw_sha256": "c7b894450799670998dacf7f824aa20b16d4b29c0f11060f78204ecb229032cd",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios/callers/fixture/observe-release.json",
+      "bytes": 280
+    },
+    "aarch64-apple-ios/callers/fixture/observe-wrong.json.gz": {
+      "sha256": "60a8ea65d478af59ae8ff5a78b9a2988841376b7f9866d2157d2b7366d164169",
+      "raw_sha256": "e75e4767bfa8f95e0689e19d2f96b91e3ca8a0c970926f1e3f2264699103125d",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios/callers/fixture/observe-wrong.json",
+      "bytes": 281
+    },
+    "aarch64-apple-ios/callers/fixture/observe.json.gz": {
+      "sha256": "3d166285f8cd20b89cd490aca4f8ba1baff6e50ff5e594fe8c2db10029058e51",
+      "raw_sha256": "42ff37b835c9d3f35082b7f9ec7e17f1736b91757700b74a693be97116e2018f",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios/callers/fixture/observe.json",
+      "bytes": 279
+    },
+    "aarch64-apple-ios/callers/fixture/package/clips.bin.gz": {
+      "sha256": "a568799ca294ca001efc2c864c9c7b660e1fb03c4811c7160b752a87361d378d",
+      "raw_sha256": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios/callers/fixture/package/clips.bin",
+      "bytes": 12
+    },
+    "aarch64-apple-ios/callers/fixture/package/empty-input.json.gz": {
+      "sha256": "76f7eda7bc4a8814969085a4bf31de1a07c9b20a6501a45ed1704eef5c167b1d",
+      "raw_sha256": "d767a52a17be2f33794c6bf0b6fd13fc6f0d63952e404e98e263a311ccfc8a89",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios/callers/fixture/package/empty-input.json",
+      "bytes": 151
+    },
+    "aarch64-apple-ios/callers/fixture/package/input-actions.json.gz": {
+      "sha256": "f44373f3e67a4448f1ea47d6bd25b338f5014522f1492ccb502e71e4cb6ce0fe",
+      "raw_sha256": "e7cc15bec3e65e1f4039a9431bffa6c0b485ac3d0ce49dca2a1c55c222be6ea6",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios/callers/fixture/package/input-actions.json",
+      "bytes": 136
+    },
+    "aarch64-apple-ios/callers/fixture/package/package.json.gz": {
+      "sha256": "cb5599a6c0815d83c3af729f38671ae07e15e1f302286fde7adf8acb5ac98157",
+      "raw_sha256": "f832f6ec5f8f6da9329fbb5bd7e30a5fa46845aed21d945b708381a43a6d3282",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios/callers/fixture/package/package.json",
+      "bytes": 404
+    },
+    "aarch64-apple-ios/callers/fixture/package/world.scene.gz": {
+      "sha256": "91bb2b0bfe554f4cf35948b751d9327ce5e14bc28baf8b2ae160fe125958a5ba",
+      "raw_sha256": "dfb5c21d9b9857390a4c607df760d06c94951a108f59230c3893b800119385c8",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios/callers/fixture/package/world.scene",
+      "bytes": 200
+    },
+    "aarch64-apple-ios/callers/fixture/release.json.gz": {
+      "sha256": "897d9cac2ccbd20e54551b11079065d76d841e532bafb6d06111a17cd644e101",
+      "raw_sha256": "448d09e5988acec3dd9fcb016820b41e737db0a5df736e800585c8d92f34dc0e",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios/callers/fixture/release.json",
+      "bytes": 215
+    },
+    "aarch64-apple-ios/callers/result.json.gz": {
+      "sha256": "a54b7f227a8a7ca503afc77240ab51a591f2aff27bcc09d8c9268cb45bdf8519",
+      "raw_sha256": "36c988e2a0338ffeb699fe99556dc0783a2eee7a90885fe34098755153162099",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios/callers/result.json",
+      "bytes": 10693
+    },
+    "aarch64-apple-ios/script-symbols.json.gz": {
+      "sha256": "fa96cae4f054fffefaa2e2aec205f54baaeab64df9661999eb4a59e11c27a020",
+      "raw_sha256": "47bd23f17da3650b7d645486ebc1fed849616c951471c3caf4cae0dc94888af3",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios/script-symbols.json",
+      "bytes": 1224
+    },
+    "aarch64-apple-ios-sim/archive-receipt.json.gz": {
+      "sha256": "49d0185156eff27cb69bdf48168b1c33439a4dbce10dcec056cb3a014e078371",
+      "raw_sha256": "609f69b5b63534d59f590b381c7f13403d633272475d73fc0f863d97416aefce",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/archive-receipt.json",
+      "bytes": 222735
+    },
+    "aarch64-apple-ios-sim/behavior.rs.gz": {
+      "sha256": "81562fb30353ff65d538d9f953327f46f41cf761c2ead4c960f06d0ea3883164",
+      "raw_sha256": "5553eff8d8b644dc50c31787bf6421ed059a740fb94a257e4ae324668875f7d1",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/behavior.rs",
+      "bytes": 52435
+    },
+    "aarch64-apple-ios-sim/callers/c-accepted/audio.pcm.gz": {
+      "sha256": "c0389124b8cba4084a4c0385590bad81bfa9cb91dee130493fa212227ece5afe",
+      "raw_sha256": "17744bb6a4ed1d9d51d85d7eb645cde30352530d494233c434027f9e3193bae4",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/c-accepted/audio.pcm",
+      "bytes": 19200
+    },
+    "aarch64-apple-ios-sim/callers/c-accepted/result.json.gz": {
+      "sha256": "3062ef2da4577b22fbb3aa22ecaa9d5d8ec8f736233b97d72c7f84513ddcf62c",
+      "raw_sha256": "d85f344a50bd1bc9bd0daaecfd5dcb13ca3c2c2e3d3a7cd52bf3262a33c28787",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/c-accepted/result.json",
+      "bytes": 2525
+    },
+    "aarch64-apple-ios-sim/callers/c-accepted.request.json.gz": {
+      "sha256": "dcdebecb52c37c23e59667a584a631cfb1b3fccb887fa57e41911f92d8e7c51a",
+      "raw_sha256": "ec0d23e68721ed16b59ca903d5d0366109aee7685df854b68df80efb39634778",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/c-accepted.request.json",
+      "bytes": 469
+    },
+    "aarch64-apple-ios-sim/callers/c-corrupt/result.json.gz": {
+      "sha256": "15fb706c74172bb4b5396b5862bba506cba14ca5c1e1fb34878e9c84c0b4d121",
+      "raw_sha256": "c669f72b48d1796bcce0bd99a30015a025578fe81ca2839892cca06057482791",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/c-corrupt/result.json",
+      "bytes": 228
+    },
+    "aarch64-apple-ios-sim/callers/c-corrupt-package/clips.bin.gz": {
+      "sha256": "a568799ca294ca001efc2c864c9c7b660e1fb03c4811c7160b752a87361d378d",
+      "raw_sha256": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/c-corrupt-package/clips.bin",
+      "bytes": 12
+    },
+    "aarch64-apple-ios-sim/callers/c-corrupt-package/empty-input.json.gz": {
+      "sha256": "76f7eda7bc4a8814969085a4bf31de1a07c9b20a6501a45ed1704eef5c167b1d",
+      "raw_sha256": "d767a52a17be2f33794c6bf0b6fd13fc6f0d63952e404e98e263a311ccfc8a89",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/c-corrupt-package/empty-input.json",
+      "bytes": 151
+    },
+    "aarch64-apple-ios-sim/callers/c-corrupt-package/input-actions.json.gz": {
+      "sha256": "f44373f3e67a4448f1ea47d6bd25b338f5014522f1492ccb502e71e4cb6ce0fe",
+      "raw_sha256": "e7cc15bec3e65e1f4039a9431bffa6c0b485ac3d0ce49dca2a1c55c222be6ea6",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/c-corrupt-package/input-actions.json",
+      "bytes": 136
+    },
+    "aarch64-apple-ios-sim/callers/c-corrupt-package/package.json.gz": {
+      "sha256": "cb5599a6c0815d83c3af729f38671ae07e15e1f302286fde7adf8acb5ac98157",
+      "raw_sha256": "f832f6ec5f8f6da9329fbb5bd7e30a5fa46845aed21d945b708381a43a6d3282",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/c-corrupt-package/package.json",
+      "bytes": 404
+    },
+    "aarch64-apple-ios-sim/callers/c-corrupt-package/world.scene.gz": {
+      "sha256": "941310f3e3366dbe4e18a6f6fde0a201fbc3962ef7c44f6ac361f8c5f5c9bf30",
+      "raw_sha256": "11d510e067d2cdcd7559bd86d27a2f4c20babd43670346b97af99b522c1f0075",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/c-corrupt-package/world.scene",
+      "bytes": 7
+    },
+    "aarch64-apple-ios-sim/callers/c-empty.request.json.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/c-empty.request.json",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/c-failure/result.json.gz": {
+      "sha256": "64b20fcdbebf233398fc245778238a3eb4760b54aeaff2bee2d54cdad07d4fb9",
+      "raw_sha256": "8ee6aa60beaaf373d8f8844c6b6b3d8b596d8fd2e0cf04ba8450d9dbd1a297de",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/c-failure/result.json",
+      "bytes": 242
+    },
+    "aarch64-apple-ios-sim/callers/c-guest-failure.request.json.gz": {
+      "sha256": "a4050d32bf47c165f74fe803bfca782e03ddc38f52981c66c0f45789821f3680",
+      "raw_sha256": "c54ff081460a1103eb3d4db8e5f8cdf31cdb590604be2bb76f6aba6d7fbd6bd0",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/c-guest-failure.request.json",
+      "bytes": 624
+    },
+    "aarch64-apple-ios-sim/callers/c-input-io-failure/result.json.gz": {
+      "sha256": "b3136622dfabd4e093c9e0dd814793b8b99ebd899c2093c79dec27eceb8a332d",
+      "raw_sha256": "1dc360239fdd3d26322e1f2f86cc47c7137dcd5fee2f00e733cc152e0adcb02a",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/c-input-io-failure/result.json",
+      "bytes": 226
+    },
+    "aarch64-apple-ios-sim/callers/c-input-io-failure.request.json.gz": {
+      "sha256": "ecd04de3b5a69f606903d9f3de526032ae85aface246bd3b56670f3bb8b7fded",
+      "raw_sha256": "dc18f1cce4e1f5f30dc27c92888c45313a8b549c8b2d1966eb708cfea807d97b",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/c-input-io-failure.request.json",
+      "bytes": 638
+    },
+    "aarch64-apple-ios-sim/callers/c-invalid-relative.request.json.gz": {
+      "sha256": "bbf472e53dcd0e9443ad5d60bcefd8d8874eafcf936041c6169452dcd7716963",
+      "raw_sha256": "9c338fe32abb6c091a80d573e4755fac57aa19dcba8b33d431a596c5cd9b69ad",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/c-invalid-relative.request.json",
+      "bytes": 349
+    },
+    "aarch64-apple-ios-sim/callers/c-invalid-ticks.request.json.gz": {
+      "sha256": "1c6500f4049023c706e102874fc94392cbcc3bf44478213d64779340e267f97d",
+      "raw_sha256": "9c8aecbcbb4d0a8d1406059c7c735ffd673d8d41b3efa0daa28efe341ac38029",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/c-invalid-ticks.request.json",
+      "bytes": 466
+    },
+    "aarch64-apple-ios-sim/callers/c-invalid-unknown.request.json.gz": {
+      "sha256": "e1e18577b29aa3b0facca2ef8e850ac84d225842fbab93371efc3d9cee1f4505",
+      "raw_sha256": "129fe3892695425f56a3a8a357afdf1de464ac4e4ca619fe3d36f46274409116",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/c-invalid-unknown.request.json",
+      "bytes": 484
+    },
+    "aarch64-apple-ios-sim/callers/c-invalid-version.request.json.gz": {
+      "sha256": "20f27be946dbbf7c577623b25cd36db6e8d8d0f2507dbb9e02d7773fb052a0eb",
+      "raw_sha256": "6627615eb216de82901eaf81f448f92a74121bc1c20e644ea70a7ec8a4731c0e",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/c-invalid-version.request.json",
+      "bytes": 468
+    },
+    "aarch64-apple-ios-sim/callers/c-invalid-viewport.request.json.gz": {
+      "sha256": "d61f2613ba4cd9427cbf344ecfa896c073fd1fa8a3ed0a62b21247e357b8c21a",
+      "raw_sha256": "fa02d846fc87db53159002ee86c7e6016a53d0cbbc0209c1411e0e775289fcc1",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/c-invalid-viewport.request.json",
+      "bytes": 494
+    },
+    "aarch64-apple-ios-sim/callers/c-no-clobber.request.json.gz": {
+      "sha256": "dcdebecb52c37c23e59667a584a631cfb1b3fccb887fa57e41911f92d8e7c51a",
+      "raw_sha256": "ec0d23e68721ed16b59ca903d5d0366109aee7685df854b68df80efb39634778",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/c-no-clobber.request.json",
+      "bytes": 469
+    },
+    "aarch64-apple-ios-sim/callers/c-observation-failure/audio.pcm.gz": {
+      "sha256": "c0389124b8cba4084a4c0385590bad81bfa9cb91dee130493fa212227ece5afe",
+      "raw_sha256": "17744bb6a4ed1d9d51d85d7eb645cde30352530d494233c434027f9e3193bae4",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/c-observation-failure/audio.pcm",
+      "bytes": 19200
+    },
+    "aarch64-apple-ios-sim/callers/c-observation-failure/result.json.gz": {
+      "sha256": "6c61828cfc94a13d727e856a2eb5a761b616f1e9ee3614fff58ee640741dd9ed",
+      "raw_sha256": "9a8ca52de5f9db9ef5b712b2d7ceb3ea42e44ca27eea55dd7181670f793c7323",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/c-observation-failure/result.json",
+      "bytes": 2587
+    },
+    "aarch64-apple-ios-sim/callers/c-observation-failure.request.json.gz": {
+      "sha256": "3fc79eb59a16e3280a29753b29f7d08f643316511364865bc00e731c5e01f590",
+      "raw_sha256": "8490e3b20f90292993706d763a0738b979371f817439efdb53d2d7272c36395d",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/c-observation-failure.request.json",
+      "bytes": 486
+    },
+    "aarch64-apple-ios-sim/callers/c-oversized.request.json.gz": {
+      "sha256": "1290af172a81dd1a0ef790f48acee1e58bf04ca0f751900f9bd96e374ecc9734",
+      "raw_sha256": "76c002eec0c9da854ca2ee5dae9fb0069a622274b6638ab712fcb70384304899",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/c-oversized.request.json",
+      "bytes": 65537
+    },
+    "aarch64-apple-ios-sim/callers/c-package-failure.request.json.gz": {
+      "sha256": "0e264871c761e5569c8e1ba25b53284d8df78497f3f4026c3504ea0c858fb795",
+      "raw_sha256": "d51062376c543859a5fa5b854b860683a6bf327517b084cbd416f93fc511d9dd",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/c-package-failure.request.json",
+      "bytes": 470
+    },
+    "aarch64-apple-ios-sim/callers/c-release/audio.pcm.gz": {
+      "sha256": "c0389124b8cba4084a4c0385590bad81bfa9cb91dee130493fa212227ece5afe",
+      "raw_sha256": "17744bb6a4ed1d9d51d85d7eb645cde30352530d494233c434027f9e3193bae4",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/c-release/audio.pcm",
+      "bytes": 19200
+    },
+    "aarch64-apple-ios-sim/callers/c-release/result.json.gz": {
+      "sha256": "430612b0586e33ad24306b7da44dafe0154aac7efd5b55891d3f1e2810a8e40f",
+      "raw_sha256": "64bea37963323b452e150bf68e64e8fbfb95f67bc7e2b901ec24b7776a423e2d",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/c-release/result.json",
+      "bytes": 2529
+    },
+    "aarch64-apple-ios-sim/callers/c-release.request.json.gz": {
+      "sha256": "28298484e7142cf35441887c0c7cab246ce66a6f0389c05438d6b292644aefe3",
+      "raw_sha256": "0159b21401896b760253fbdb2c6837ea3c22d4b6a691c29288945204f19c92ac",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/c-release.request.json",
+      "bytes": 632
+    },
+    "aarch64-apple-ios-sim/callers/c-repeat/audio.pcm.gz": {
+      "sha256": "c0389124b8cba4084a4c0385590bad81bfa9cb91dee130493fa212227ece5afe",
+      "raw_sha256": "17744bb6a4ed1d9d51d85d7eb645cde30352530d494233c434027f9e3193bae4",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/c-repeat/audio.pcm",
+      "bytes": 19200
+    },
+    "aarch64-apple-ios-sim/callers/c-repeat/result.json.gz": {
+      "sha256": "3062ef2da4577b22fbb3aa22ecaa9d5d8ec8f736233b97d72c7f84513ddcf62c",
+      "raw_sha256": "d85f344a50bd1bc9bd0daaecfd5dcb13ca3c2c2e3d3a7cd52bf3262a33c28787",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/c-repeat/result.json",
+      "bytes": 2525
+    },
+    "aarch64-apple-ios-sim/callers/c-repeat.request.json.gz": {
+      "sha256": "b2927fe33899e055232c99de68315c998a29d8a81e1ddbab0e052644b6290289",
+      "raw_sha256": "226b3bb4e74efd84f52819cc1259906c300cbd3cb2ac6d290ea00d2e7e7a7b9d",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/c-repeat.request.json",
+      "bytes": 467
+    },
+    "aarch64-apple-ios-sim/callers/command-000.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-000.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-000.stdout.gz": {
+      "sha256": "e367b0e8ac9f9978bd66870fda8aea05d52bcba82602bbd7ff9911219fa3ec73",
+      "raw_sha256": "33687d71fa017f6feceb06fa60c6800977d2fde2c7270030383636d68d9cdb7a",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-000.stdout",
+      "bytes": 378
+    },
+    "aarch64-apple-ios-sim/callers/command-001.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-001.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-001.stdout.gz": {
+      "sha256": "5134aa6510d3e5bc7e03dea98bcb028d1b8e3b8497b36bfbb9c63473a0bf6c6c",
+      "raw_sha256": "3ba87c09483737cf52e0f24936936ae207e4e5f433bc120069330c02d39a0cec",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-001.stdout",
+      "bytes": 117
+    },
+    "aarch64-apple-ios-sim/callers/command-002.stderr.gz": {
+      "sha256": "1bfb8a7f4e04fe61e129c4bed50a7ac0df64643d2968240080b98770fdcbd2ad",
+      "raw_sha256": "e7ff69e68db1af4732936cc4f7ce7f4e1d2847abd099f77fe8208b6ea0b2f248",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-002.stderr",
+      "bytes": 1058
+    },
+    "aarch64-apple-ios-sim/callers/command-002.stdout.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-002.stdout",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-003.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-003.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-003.stdout.gz": {
+      "sha256": "416fc01d8e51443a5dc89e99733b43e0b95ee82a1beb11e9082925e49d6e16ed",
+      "raw_sha256": "33b4c7c446a8cab09f7dfbc26212dd09fb68fd9897cd32620b6754d69088e203",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-003.stdout",
+      "bytes": 11614919
+    },
+    "aarch64-apple-ios-sim/callers/command-004.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-004.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-004.stdout.gz": {
+      "sha256": "5134aa6510d3e5bc7e03dea98bcb028d1b8e3b8497b36bfbb9c63473a0bf6c6c",
+      "raw_sha256": "3ba87c09483737cf52e0f24936936ae207e4e5f433bc120069330c02d39a0cec",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-004.stdout",
+      "bytes": 117
+    },
+    "aarch64-apple-ios-sim/callers/command-005.stderr.gz": {
+      "sha256": "1bfb8a7f4e04fe61e129c4bed50a7ac0df64643d2968240080b98770fdcbd2ad",
+      "raw_sha256": "e7ff69e68db1af4732936cc4f7ce7f4e1d2847abd099f77fe8208b6ea0b2f248",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-005.stderr",
+      "bytes": 1058
+    },
+    "aarch64-apple-ios-sim/callers/command-005.stdout.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-005.stdout",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-006.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-006.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-006.stdout.gz": {
+      "sha256": "437834309b31df36db74ae4c3a778efbe30ad71d11c00cc70317c1cccb252111",
+      "raw_sha256": "77d19858b492669905485af3645f43518d2143ef6e7eb84fb2dd5ccf3ef119fc",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-006.stdout",
+      "bytes": 11614919
+    },
+    "aarch64-apple-ios-sim/callers/command-007.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-007.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-007.stdout.gz": {
+      "sha256": "a85f1c66d19eaf471b281d6dcb9147ee4682612f88c9b998ed6fd7014ffa52e2",
+      "raw_sha256": "29bd4c3b9580b675bf55667414a14e94944a74d03a5411a0f214caae812be2b6",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-007.stdout",
+      "bytes": 37
+    },
+    "aarch64-apple-ios-sim/callers/command-008.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-008.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-008.stdout.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-008.stdout",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-009.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-009.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-009.stdout.gz": {
+      "sha256": "68a629e327e2354c9daf6893269a69b40de0bdffadc5c1cb5fa15ed1f9aca4f0",
+      "raw_sha256": "67cef1e7a8e55e46f2aa1895dda2f0a64ca6b991fee9305f227c0476b98a918c",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-009.stdout",
+      "bytes": 1572
+    },
+    "aarch64-apple-ios-sim/callers/command-010.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-010.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-010.stdout.gz": {
+      "sha256": "7f626384e48c4ba396e349810f4cee64ad13f9d1df33d3f1cc98e6bd9cbe3614",
+      "raw_sha256": "7bd0f259f147ca479c0500e5e513a987679125b8dd6be3d5fdb80a09780687ba",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-010.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-ios-sim/callers/command-011.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-011.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-011.stdout.gz": {
+      "sha256": "3f820091045356618ce126cb61405874dc54e557df180cd6b41627248a160358",
+      "raw_sha256": "56e2f4b9067d0a2e78c0e90f7a003fdcf230022ed702a0edeafbde61d469d5b3",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-011.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-ios-sim/callers/command-012.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-012.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-012.stdout.gz": {
+      "sha256": "7f626384e48c4ba396e349810f4cee64ad13f9d1df33d3f1cc98e6bd9cbe3614",
+      "raw_sha256": "7bd0f259f147ca479c0500e5e513a987679125b8dd6be3d5fdb80a09780687ba",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-012.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-ios-sim/callers/command-013.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-013.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-013.stdout.gz": {
+      "sha256": "7f626384e48c4ba396e349810f4cee64ad13f9d1df33d3f1cc98e6bd9cbe3614",
+      "raw_sha256": "7bd0f259f147ca479c0500e5e513a987679125b8dd6be3d5fdb80a09780687ba",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-013.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-ios-sim/callers/command-014.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-014.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-014.stdout.gz": {
+      "sha256": "adeacf280f0a2727727bf5762f0851976c56bbe9ce6b4d007832570cf9abdaea",
+      "raw_sha256": "8c9ea83017e20b6439c73a3160495e44e01d40e4b4c74948d42d90c4107a7a4e",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-014.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-ios-sim/callers/command-015.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-015.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-015.stdout.gz": {
+      "sha256": "adeacf280f0a2727727bf5762f0851976c56bbe9ce6b4d007832570cf9abdaea",
+      "raw_sha256": "8c9ea83017e20b6439c73a3160495e44e01d40e4b4c74948d42d90c4107a7a4e",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-015.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-ios-sim/callers/command-016.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-016.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-016.stdout.gz": {
+      "sha256": "adeacf280f0a2727727bf5762f0851976c56bbe9ce6b4d007832570cf9abdaea",
+      "raw_sha256": "8c9ea83017e20b6439c73a3160495e44e01d40e4b4c74948d42d90c4107a7a4e",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-016.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-ios-sim/callers/command-017.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-017.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-017.stdout.gz": {
+      "sha256": "adeacf280f0a2727727bf5762f0851976c56bbe9ce6b4d007832570cf9abdaea",
+      "raw_sha256": "8c9ea83017e20b6439c73a3160495e44e01d40e4b4c74948d42d90c4107a7a4e",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-017.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-ios-sim/callers/command-018.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-018.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-018.stdout.gz": {
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-018.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-ios-sim/callers/command-019.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-019.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-019.stdout.gz": {
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-019.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-ios-sim/callers/command-020.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-020.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-020.stdout.gz": {
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-020.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-ios-sim/callers/command-021.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-021.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-021.stdout.gz": {
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-021.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-ios-sim/callers/command-022.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-022.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-022.stdout.gz": {
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-022.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-ios-sim/callers/command-023.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-023.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-023.stdout.gz": {
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-023.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-ios-sim/callers/command-024.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-024.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-024.stdout.gz": {
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-024.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-ios-sim/callers/command-025.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-025.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-025.stdout.gz": {
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-025.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-ios-sim/callers/command-026.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-026.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-026.stdout.gz": {
+      "sha256": "7f626384e48c4ba396e349810f4cee64ad13f9d1df33d3f1cc98e6bd9cbe3614",
+      "raw_sha256": "7bd0f259f147ca479c0500e5e513a987679125b8dd6be3d5fdb80a09780687ba",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-026.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-ios-sim/callers/command-027.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-027.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-027.stdout.gz": {
+      "sha256": "3f820091045356618ce126cb61405874dc54e557df180cd6b41627248a160358",
+      "raw_sha256": "56e2f4b9067d0a2e78c0e90f7a003fdcf230022ed702a0edeafbde61d469d5b3",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-027.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-ios-sim/callers/command-028.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-028.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-028.stdout.gz": {
+      "sha256": "7f626384e48c4ba396e349810f4cee64ad13f9d1df33d3f1cc98e6bd9cbe3614",
+      "raw_sha256": "7bd0f259f147ca479c0500e5e513a987679125b8dd6be3d5fdb80a09780687ba",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-028.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-ios-sim/callers/command-029.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-029.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-029.stdout.gz": {
+      "sha256": "7f626384e48c4ba396e349810f4cee64ad13f9d1df33d3f1cc98e6bd9cbe3614",
+      "raw_sha256": "7bd0f259f147ca479c0500e5e513a987679125b8dd6be3d5fdb80a09780687ba",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-029.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-ios-sim/callers/command-030.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-030.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-030.stdout.gz": {
+      "sha256": "adeacf280f0a2727727bf5762f0851976c56bbe9ce6b4d007832570cf9abdaea",
+      "raw_sha256": "8c9ea83017e20b6439c73a3160495e44e01d40e4b4c74948d42d90c4107a7a4e",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-030.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-ios-sim/callers/command-031.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-031.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-031.stdout.gz": {
+      "sha256": "adeacf280f0a2727727bf5762f0851976c56bbe9ce6b4d007832570cf9abdaea",
+      "raw_sha256": "8c9ea83017e20b6439c73a3160495e44e01d40e4b4c74948d42d90c4107a7a4e",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-031.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-ios-sim/callers/command-032.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-032.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-032.stdout.gz": {
+      "sha256": "adeacf280f0a2727727bf5762f0851976c56bbe9ce6b4d007832570cf9abdaea",
+      "raw_sha256": "8c9ea83017e20b6439c73a3160495e44e01d40e4b4c74948d42d90c4107a7a4e",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-032.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-ios-sim/callers/command-033.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-033.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-033.stdout.gz": {
+      "sha256": "adeacf280f0a2727727bf5762f0851976c56bbe9ce6b4d007832570cf9abdaea",
+      "raw_sha256": "8c9ea83017e20b6439c73a3160495e44e01d40e4b4c74948d42d90c4107a7a4e",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-033.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-ios-sim/callers/command-034.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-034.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-034.stdout.gz": {
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-034.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-ios-sim/callers/command-035.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-035.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-035.stdout.gz": {
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-035.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-ios-sim/callers/command-036.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-036.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-036.stdout.gz": {
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-036.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-ios-sim/callers/command-037.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-037.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-037.stdout.gz": {
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-037.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-ios-sim/callers/command-038.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-038.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-038.stdout.gz": {
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-038.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-ios-sim/callers/command-039.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-039.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-039.stdout.gz": {
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-039.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-ios-sim/callers/command-040.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-040.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-040.stdout.gz": {
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-040.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-ios-sim/callers/command-041.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-041.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-041.stdout.gz": {
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-041.stdout",
+      "bytes": 17
+    },
+    "aarch64-apple-ios-sim/callers/command-042.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-042.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-042.stdout.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-042.stdout",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-043.stderr.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-043.stderr",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/command-043.stdout.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/command-043.stdout",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/fixture/failure.json.gz": {
+      "sha256": "d061e8d9c4ea79494d7219455b0773935e6c286fa878dab47505bc1fa237e3ba",
+      "raw_sha256": "c5968a7e94d4d5626463f43ccc453d64476d364c69dcf99c785aa0f33514d839",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/fixture/failure.json",
+      "bytes": 151
+    },
+    "aarch64-apple-ios-sim/callers/fixture/observe-release.json.gz": {
+      "sha256": "1a79863537a7c522271723f65d729f0b68b1c5f4d8ddaf097f8f4c9ba655f818",
+      "raw_sha256": "c7b894450799670998dacf7f824aa20b16d4b29c0f11060f78204ecb229032cd",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/fixture/observe-release.json",
+      "bytes": 280
+    },
+    "aarch64-apple-ios-sim/callers/fixture/observe-wrong.json.gz": {
+      "sha256": "60a8ea65d478af59ae8ff5a78b9a2988841376b7f9866d2157d2b7366d164169",
+      "raw_sha256": "e75e4767bfa8f95e0689e19d2f96b91e3ca8a0c970926f1e3f2264699103125d",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/fixture/observe-wrong.json",
+      "bytes": 281
+    },
+    "aarch64-apple-ios-sim/callers/fixture/observe.json.gz": {
+      "sha256": "3d166285f8cd20b89cd490aca4f8ba1baff6e50ff5e594fe8c2db10029058e51",
+      "raw_sha256": "42ff37b835c9d3f35082b7f9ec7e17f1736b91757700b74a693be97116e2018f",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/fixture/observe.json",
+      "bytes": 279
+    },
+    "aarch64-apple-ios-sim/callers/fixture/package/clips.bin.gz": {
+      "sha256": "a568799ca294ca001efc2c864c9c7b660e1fb03c4811c7160b752a87361d378d",
+      "raw_sha256": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/fixture/package/clips.bin",
+      "bytes": 12
+    },
+    "aarch64-apple-ios-sim/callers/fixture/package/empty-input.json.gz": {
+      "sha256": "76f7eda7bc4a8814969085a4bf31de1a07c9b20a6501a45ed1704eef5c167b1d",
+      "raw_sha256": "d767a52a17be2f33794c6bf0b6fd13fc6f0d63952e404e98e263a311ccfc8a89",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/fixture/package/empty-input.json",
+      "bytes": 151
+    },
+    "aarch64-apple-ios-sim/callers/fixture/package/input-actions.json.gz": {
+      "sha256": "f44373f3e67a4448f1ea47d6bd25b338f5014522f1492ccb502e71e4cb6ce0fe",
+      "raw_sha256": "e7cc15bec3e65e1f4039a9431bffa6c0b485ac3d0ce49dca2a1c55c222be6ea6",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/fixture/package/input-actions.json",
+      "bytes": 136
+    },
+    "aarch64-apple-ios-sim/callers/fixture/package/package.json.gz": {
+      "sha256": "cb5599a6c0815d83c3af729f38671ae07e15e1f302286fde7adf8acb5ac98157",
+      "raw_sha256": "f832f6ec5f8f6da9329fbb5bd7e30a5fa46845aed21d945b708381a43a6d3282",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/fixture/package/package.json",
+      "bytes": 404
+    },
+    "aarch64-apple-ios-sim/callers/fixture/package/world.scene.gz": {
+      "sha256": "91bb2b0bfe554f4cf35948b751d9327ce5e14bc28baf8b2ae160fe125958a5ba",
+      "raw_sha256": "dfb5c21d9b9857390a4c607df760d06c94951a108f59230c3893b800119385c8",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/fixture/package/world.scene",
+      "bytes": 200
+    },
+    "aarch64-apple-ios-sim/callers/fixture/release.json.gz": {
+      "sha256": "897d9cac2ccbd20e54551b11079065d76d841e532bafb6d06111a17cd644e101",
+      "raw_sha256": "448d09e5988acec3dd9fcb016820b41e737db0a5df736e800585c8d92f34dc0e",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/fixture/release.json",
+      "bytes": 215
+    },
+    "aarch64-apple-ios-sim/callers/result.json.gz": {
+      "sha256": "2a1891ba188b9777eb1d24ea1e6095f2b9aa1860e4329d1de0ac2d27953cf6a4",
+      "raw_sha256": "89f19201528512aa094a6d345d43bb09c3db663ec3c602bc4c86021858f88987",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/result.json",
+      "bytes": 102320
+    },
+    "aarch64-apple-ios-sim/callers/swift-accepted/audio.pcm.gz": {
+      "sha256": "c0389124b8cba4084a4c0385590bad81bfa9cb91dee130493fa212227ece5afe",
+      "raw_sha256": "17744bb6a4ed1d9d51d85d7eb645cde30352530d494233c434027f9e3193bae4",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/swift-accepted/audio.pcm",
+      "bytes": 19200
+    },
+    "aarch64-apple-ios-sim/callers/swift-accepted/result.json.gz": {
+      "sha256": "3062ef2da4577b22fbb3aa22ecaa9d5d8ec8f736233b97d72c7f84513ddcf62c",
+      "raw_sha256": "d85f344a50bd1bc9bd0daaecfd5dcb13ca3c2c2e3d3a7cd52bf3262a33c28787",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/swift-accepted/result.json",
+      "bytes": 2525
+    },
+    "aarch64-apple-ios-sim/callers/swift-accepted.request.json.gz": {
+      "sha256": "ccdca75280f0454ac60265804e91e5c1c881f22dc7ff4f78d5228ebc0a189e52",
+      "raw_sha256": "a956282b45b7a9410ab6cafdfb24469f79f9ca4d8746e66655818e6a5389a092",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/swift-accepted.request.json",
+      "bytes": 473
+    },
+    "aarch64-apple-ios-sim/callers/swift-corrupt/result.json.gz": {
+      "sha256": "15fb706c74172bb4b5396b5862bba506cba14ca5c1e1fb34878e9c84c0b4d121",
+      "raw_sha256": "c669f72b48d1796bcce0bd99a30015a025578fe81ca2839892cca06057482791",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/swift-corrupt/result.json",
+      "bytes": 228
+    },
+    "aarch64-apple-ios-sim/callers/swift-corrupt-package/clips.bin.gz": {
+      "sha256": "a568799ca294ca001efc2c864c9c7b660e1fb03c4811c7160b752a87361d378d",
+      "raw_sha256": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/swift-corrupt-package/clips.bin",
+      "bytes": 12
+    },
+    "aarch64-apple-ios-sim/callers/swift-corrupt-package/empty-input.json.gz": {
+      "sha256": "76f7eda7bc4a8814969085a4bf31de1a07c9b20a6501a45ed1704eef5c167b1d",
+      "raw_sha256": "d767a52a17be2f33794c6bf0b6fd13fc6f0d63952e404e98e263a311ccfc8a89",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/swift-corrupt-package/empty-input.json",
+      "bytes": 151
+    },
+    "aarch64-apple-ios-sim/callers/swift-corrupt-package/input-actions.json.gz": {
+      "sha256": "f44373f3e67a4448f1ea47d6bd25b338f5014522f1492ccb502e71e4cb6ce0fe",
+      "raw_sha256": "e7cc15bec3e65e1f4039a9431bffa6c0b485ac3d0ce49dca2a1c55c222be6ea6",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/swift-corrupt-package/input-actions.json",
+      "bytes": 136
+    },
+    "aarch64-apple-ios-sim/callers/swift-corrupt-package/package.json.gz": {
+      "sha256": "cb5599a6c0815d83c3af729f38671ae07e15e1f302286fde7adf8acb5ac98157",
+      "raw_sha256": "f832f6ec5f8f6da9329fbb5bd7e30a5fa46845aed21d945b708381a43a6d3282",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/swift-corrupt-package/package.json",
+      "bytes": 404
+    },
+    "aarch64-apple-ios-sim/callers/swift-corrupt-package/world.scene.gz": {
+      "sha256": "941310f3e3366dbe4e18a6f6fde0a201fbc3962ef7c44f6ac361f8c5f5c9bf30",
+      "raw_sha256": "11d510e067d2cdcd7559bd86d27a2f4c20babd43670346b97af99b522c1f0075",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/swift-corrupt-package/world.scene",
+      "bytes": 7
+    },
+    "aarch64-apple-ios-sim/callers/swift-empty.request.json.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/swift-empty.request.json",
+      "bytes": 0
+    },
+    "aarch64-apple-ios-sim/callers/swift-failure/result.json.gz": {
+      "sha256": "64b20fcdbebf233398fc245778238a3eb4760b54aeaff2bee2d54cdad07d4fb9",
+      "raw_sha256": "8ee6aa60beaaf373d8f8844c6b6b3d8b596d8fd2e0cf04ba8450d9dbd1a297de",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/swift-failure/result.json",
+      "bytes": 242
+    },
+    "aarch64-apple-ios-sim/callers/swift-guest-failure.request.json.gz": {
+      "sha256": "180d96b81ce423ac125e406803360ae3af199a9b8a9c127435473bb122989015",
+      "raw_sha256": "67d752215af1ab18e2c76b444a4c29888fae034476df7662139e1bd601aabafb",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/swift-guest-failure.request.json",
+      "bytes": 628
+    },
+    "aarch64-apple-ios-sim/callers/swift-input-io-failure/result.json.gz": {
+      "sha256": "b3136622dfabd4e093c9e0dd814793b8b99ebd899c2093c79dec27eceb8a332d",
+      "raw_sha256": "1dc360239fdd3d26322e1f2f86cc47c7137dcd5fee2f00e733cc152e0adcb02a",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/swift-input-io-failure/result.json",
+      "bytes": 226
+    },
+    "aarch64-apple-ios-sim/callers/swift-input-io-failure.request.json.gz": {
+      "sha256": "dd6ffd86ca26436a90aee8d7c7d043ed3c9c3dc5a33d917715440cf5cd6f92ad",
+      "raw_sha256": "790dac0a756c7813d2feffc379d72bd716f55890288cce4496a677e28bd71c73",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/swift-input-io-failure.request.json",
+      "bytes": 642
+    },
+    "aarch64-apple-ios-sim/callers/swift-invalid-relative.request.json.gz": {
+      "sha256": "d396b69fbcf82b50a1488c8ee29fc6b0f399f267609420e8e45a75bbd0414648",
+      "raw_sha256": "103968ccc99dba25663da8a782361d6e940527b42a6f37f3a4695536ac12ac7e",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/swift-invalid-relative.request.json",
+      "bytes": 353
+    },
+    "aarch64-apple-ios-sim/callers/swift-invalid-ticks.request.json.gz": {
+      "sha256": "4e7c4917b9c5123143d7057f77ddd48e9dad74aa683e1ef5b7003b76646906c8",
+      "raw_sha256": "27f9cdc413cc672d2fbf4d3d39dd82a7620de77477d7f910ed3505632733a6e4",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/swift-invalid-ticks.request.json",
+      "bytes": 470
+    },
+    "aarch64-apple-ios-sim/callers/swift-invalid-unknown.request.json.gz": {
+      "sha256": "f7b595eca57364738b470f77d0a62daeed30935c28219138dc16d032b8d8a2bc",
+      "raw_sha256": "66da2d968e93c712bcdf27379e663339e2fafc5f63b005acd3987429031a7f4c",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/swift-invalid-unknown.request.json",
+      "bytes": 488
+    },
+    "aarch64-apple-ios-sim/callers/swift-invalid-version.request.json.gz": {
+      "sha256": "8b061145b5d177843f2a67228ab04c114fc0f64eab2daf59b8aadb2215fbc99a",
+      "raw_sha256": "cbb0621e65c8b4d5ba89e6924beacae12601dea6de1ca4e4843f9d2ed1a1c43c",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/swift-invalid-version.request.json",
+      "bytes": 472
+    },
+    "aarch64-apple-ios-sim/callers/swift-invalid-viewport.request.json.gz": {
+      "sha256": "29431407bffbdbd2bc91a1ce357bad7d64d30512f840f3ec65dc3f8912be2a9a",
+      "raw_sha256": "3c80f9601f7d171c15b61a6c43713702c6112c92b71954a70d633b34ef3c07a3",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/swift-invalid-viewport.request.json",
+      "bytes": 498
+    },
+    "aarch64-apple-ios-sim/callers/swift-no-clobber.request.json.gz": {
+      "sha256": "ccdca75280f0454ac60265804e91e5c1c881f22dc7ff4f78d5228ebc0a189e52",
+      "raw_sha256": "a956282b45b7a9410ab6cafdfb24469f79f9ca4d8746e66655818e6a5389a092",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/swift-no-clobber.request.json",
+      "bytes": 473
+    },
+    "aarch64-apple-ios-sim/callers/swift-observation-failure/audio.pcm.gz": {
+      "sha256": "c0389124b8cba4084a4c0385590bad81bfa9cb91dee130493fa212227ece5afe",
+      "raw_sha256": "17744bb6a4ed1d9d51d85d7eb645cde30352530d494233c434027f9e3193bae4",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/swift-observation-failure/audio.pcm",
+      "bytes": 19200
+    },
+    "aarch64-apple-ios-sim/callers/swift-observation-failure/result.json.gz": {
+      "sha256": "6c61828cfc94a13d727e856a2eb5a761b616f1e9ee3614fff58ee640741dd9ed",
+      "raw_sha256": "9a8ca52de5f9db9ef5b712b2d7ceb3ea42e44ca27eea55dd7181670f793c7323",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/swift-observation-failure/result.json",
+      "bytes": 2587
+    },
+    "aarch64-apple-ios-sim/callers/swift-observation-failure.request.json.gz": {
+      "sha256": "4ea6b5b5cc625ef3b5088bfa41d6eb606b8c777cc46007170015523ebc9320d5",
+      "raw_sha256": "e529b088a1833250f05fb98a48dd2b72fb58ad45c5a4eee583fc6133fa8f02af",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/swift-observation-failure.request.json",
+      "bytes": 490
+    },
+    "aarch64-apple-ios-sim/callers/swift-oversized.request.json.gz": {
+      "sha256": "1290af172a81dd1a0ef790f48acee1e58bf04ca0f751900f9bd96e374ecc9734",
+      "raw_sha256": "76c002eec0c9da854ca2ee5dae9fb0069a622274b6638ab712fcb70384304899",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/swift-oversized.request.json",
+      "bytes": 65537
+    },
+    "aarch64-apple-ios-sim/callers/swift-package-failure.request.json.gz": {
+      "sha256": "80b80fb20838cb910beda5e49207c47fc6b2ad91519f556d8201442dc866badf",
+      "raw_sha256": "5475f6a70f87b0915c7f86388245918fc55ce43595ff199109ed43d6364f0e4e",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/swift-package-failure.request.json",
+      "bytes": 478
+    },
+    "aarch64-apple-ios-sim/callers/swift-release/audio.pcm.gz": {
+      "sha256": "c0389124b8cba4084a4c0385590bad81bfa9cb91dee130493fa212227ece5afe",
+      "raw_sha256": "17744bb6a4ed1d9d51d85d7eb645cde30352530d494233c434027f9e3193bae4",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/swift-release/audio.pcm",
+      "bytes": 19200
+    },
+    "aarch64-apple-ios-sim/callers/swift-release/result.json.gz": {
+      "sha256": "430612b0586e33ad24306b7da44dafe0154aac7efd5b55891d3f1e2810a8e40f",
+      "raw_sha256": "64bea37963323b452e150bf68e64e8fbfb95f67bc7e2b901ec24b7776a423e2d",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/swift-release/result.json",
+      "bytes": 2529
+    },
+    "aarch64-apple-ios-sim/callers/swift-release.request.json.gz": {
+      "sha256": "d6b246e574d53dec841e8f701092ecf878b2293aebc5ce9b96f53be18dc23ba4",
+      "raw_sha256": "8c6b4c7c8fcdaeb0baeff0cc6ad1ea139acbdbeb44e4ab44e308e72781a2a3c9",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/swift-release.request.json",
+      "bytes": 636
+    },
+    "aarch64-apple-ios-sim/callers/swift-repeat/audio.pcm.gz": {
+      "sha256": "c0389124b8cba4084a4c0385590bad81bfa9cb91dee130493fa212227ece5afe",
+      "raw_sha256": "17744bb6a4ed1d9d51d85d7eb645cde30352530d494233c434027f9e3193bae4",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/swift-repeat/audio.pcm",
+      "bytes": 19200
+    },
+    "aarch64-apple-ios-sim/callers/swift-repeat/result.json.gz": {
+      "sha256": "3062ef2da4577b22fbb3aa22ecaa9d5d8ec8f736233b97d72c7f84513ddcf62c",
+      "raw_sha256": "d85f344a50bd1bc9bd0daaecfd5dcb13ca3c2c2e3d3a7cd52bf3262a33c28787",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/swift-repeat/result.json",
+      "bytes": 2525
+    },
+    "aarch64-apple-ios-sim/callers/swift-repeat.request.json.gz": {
+      "sha256": "51eeea19f77c9dc38fdb4f8250da0df1b3942f67cca85a4a88d77414ab930874",
+      "raw_sha256": "fe5db7d687ae7af797a440bad31709a43e5037fc6206910853d725690ad3101f",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/callers/swift-repeat.request.json",
+      "bytes": 471
+    },
+    "aarch64-apple-ios-sim/script-symbols.json.gz": {
+      "sha256": "35bc68b802f931c7d53ecd57d13ee639a60be553411252f6c083cf5c4947a424",
+      "raw_sha256": "5807e60690a2a5a9052145b835b0bb96e331645058d95fc71f6db62438a802c5",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/aarch64-apple-ios-sim/script-symbols.json",
+      "bytes": 1228
+    },
+    "archive-aarch64-apple-darwin.log.gz": {
+      "sha256": "e9a5b0ea6cb213140657c05ac0cdfcf2926f825be59f2a73361a310b2aaf17ab",
+      "raw_sha256": "38c9160f52a8fea0dc274523bf5dba6c40f8d97f4ed98dc06d125e90f0f51dd9",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/archive-aarch64-apple-darwin.log",
+      "bytes": 1200
+    },
+    "archive-aarch64-apple-ios-sim.log.gz": {
+      "sha256": "f19d94de4b74ebb36b24992be1f320d70e05f99aec1d6a9de32d6fcf2dfe8c3e",
+      "raw_sha256": "56ad2f0ab533b48561461679e14f33ff9fdcbfa1eb63634ddbdd414426fd7be8",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/archive-aarch64-apple-ios-sim.log",
+      "bytes": 7221
+    },
+    "archive-aarch64-apple-ios.log.gz": {
+      "sha256": "11f5df7327342b96aec38be5f6bea83fb602e7a9b88441fb7d622029e3cbb1b2",
+      "raw_sha256": "eb24ddf7ad6a7b0411b3c0179d2d1b24fcb634ff24acc76f84ecc70b57be83a3",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/archive-aarch64-apple-ios.log",
+      "bytes": 6676
+    },
+    "caller-tests.log.gz": {
+      "sha256": "0ad5f4cfe1092764a6acaf35c473ebdb45984ec04e206bf1759fc26d7762a8ed",
+      "raw_sha256": "af55efa5c3ceb122f8184c380aa405d3f3b4e7e0c1e892773d0eff31d0645c8a",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/caller-tests.log",
+      "bytes": 102
+    },
+    "callers-aarch64-apple-darwin.log.gz": {
+      "sha256": "b966e1da63b94eb3e1d20095129d23b2b3415b6f1927cf5173b67c3734659780",
+      "raw_sha256": "eca31d5c0574572394ab34dcee25a00ac3c2574645952c841c999baed61c9258",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/callers-aarch64-apple-darwin.log",
+      "bytes": 124
+    },
+    "callers-aarch64-apple-ios-sim.log.gz": {
+      "sha256": "78877dac9a21cd97a2e02df897760889a959ec7ea8ee9ffaec7e0559f1d960ab",
+      "raw_sha256": "9a7ff0f096cc9c8737f05a4334dbc66059521211614465cff16883f1c91d6e91",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/callers-aarch64-apple-ios-sim.log",
+      "bytes": 125
+    },
+    "callers-aarch64-apple-ios.log.gz": {
+      "sha256": "6a01b53a66bd277cb1231cbf4a17656b4f091e8c28b43eefb95432f9635ebbf6",
+      "raw_sha256": "d35852fd6c3734d5e5c6d0780311bac6d9176e7f37f6b4c92e8441171e784540",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/callers-aarch64-apple-ios.log",
+      "bytes": 121
+    },
+    "clippy.log.gz": {
+      "sha256": "0646ab4e46825922f5688c9b5850246ea8e689ea8cd1aba9d80e4f4613129451",
+      "raw_sha256": "0f44c9e9acaafc7931d3a544c923d40402d35d8098ad8213340a87c8be907e32",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/clippy.log",
+      "bytes": 6524
+    },
+    "conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/conventions.log",
+      "bytes": 0
+    },
+    "cook.log.gz": {
+      "sha256": "082a89010c396bce506d9d1b36570922bd7a84356f61333e55a0e56a8eb91d1b",
+      "raw_sha256": "5d914bfda00336f0676c31e5bee416a776886e344fb411cfa15aa293942fe157",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/cook.log",
+      "bytes": 4550
+    },
+    "cross-runtime.json.gz": {
+      "sha256": "69a7ced435197008b77fe009f50dbe83439aabeea944024d7f81cf3b60497ffa",
+      "raw_sha256": "5fcfc86b842f90494f4822c3bc5e42834fb6ba85f4b45d4f04d2e8963177a0dc",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/cross-runtime.json",
+      "bytes": 5863
+    },
+    "diff.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/diff.log",
+      "bytes": 0
+    },
+    "fixture-binary.json.gz": {
+      "sha256": "6f653a9de8a38b26d1a72fa5fce777205a2d7b0262163def076f0b7a313f644b",
+      "raw_sha256": "b1ec27b614f0a3824feb2062a35e7c336de023f4e1925d6cb30218027c059a63",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/fixture-binary.json",
+      "bytes": 182
+    },
+    "fixture.log.gz": {
+      "sha256": "61ef772b5c7da695276965b26ff6bc7cd4ce3e36eb4474c84e5fd3323d69132d",
+      "raw_sha256": "835c6c26fd87bc711d81fc06a54b3357900675fbd5bed21b2957f7f67c37f6b5",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/fixture.log",
+      "bytes": 1425
+    },
+    "fmt.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/fmt.log",
+      "bytes": 0
+    },
+    "freeze.json.gz": {
+      "sha256": "3c68e1074b46e967f1ee636bded8ed0dc1e4aba373151e62763b951c39c28da8",
+      "raw_sha256": "349d936efe46e4c10deccbe6fb4b6c8280c6aa7a2ceee758fd6f709fe52d8711",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/freeze.json",
+      "bytes": 218644
+    },
+    "graph.log.gz": {
+      "sha256": "5dc4bc5bf07f30ecdfb6b63bf31e6434dde718c8259ecca25b23a9649c1516ce",
+      "raw_sha256": "197d2c3375bb79ab3d36a3fa0f62baed27d7f80092cef9815788fb7a1001463d",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/graph.log",
+      "bytes": 114
+    },
+    "incant_game.h.gz": {
+      "sha256": "ea1774882c20d354edebbeea13a57ee47de42e530db496bb3b6b4f1e44fb2d8a",
+      "raw_sha256": "101c0a974c7b629f66f7d9e9e2d9c038d71a45ccb2a8fdc91739c2ae7fe649c5",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/incant_game.h",
+      "bytes": 495
+    },
+    "mobile_compat.expected.json.gz": {
+      "sha256": "bd196808c36abdadde007fc2282c261dde7d792eda9d0570c0f056c311dd72a8",
+      "raw_sha256": "9c4295810f5e50750dcfc99c44b677da45d164fbe7167312c1aca4d644dce612",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/mobile_compat.expected.json",
+      "bytes": 3367
+    },
+    "mobile_compat.js.gz": {
+      "sha256": "064c5b432b58c9ae8ab8dd4157d9192e7c16c3e6caa2ec50bdba30ce3eb25dda",
+      "raw_sha256": "acc5c78fe7c2eb9f28d2bf45c7d43e61a98486cc2509f1d69aff02be54f8f032",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/mobile_compat.js",
+      "bytes": 2170
+    },
+    "player.log.gz": {
+      "sha256": "006f0c1520427bcba109f233fb1327a140db18852edd941c906af5258b5b71e0",
+      "raw_sha256": "00120ca35f4b66356c736a2d245d77258913fdd162a87de3492845c630b392af",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/player.log",
+      "bytes": 5394
+    },
+    "producer.json.gz": {
+      "sha256": "8d8fe418a1bd206e45ea43fe8f6a1024d1eee21bd9a968ec0d7186fb0fba7ffc",
+      "raw_sha256": "d664980f5d3fb7c042b2f3f37c394cbe68165df2f854ef36f58dff2bbed544ab",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/producer.json",
+      "bytes": 1620
+    },
+    "results.json.gz": {
+      "sha256": "9d675ebe12f9173e0431ee541189e93b4c3bb3a69a0e09ce801ee026b904588d",
+      "raw_sha256": "0ca18cf92b9818e1a9d145d0fdac67d7ee323e86acb64a3d31383cfdd7c687b7",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/results.json",
+      "bytes": 9200
+    },
+    "script.log.gz": {
+      "sha256": "6a8212b8edf3992632af9fdc60926c257263103d7777294ff79922aee2cf6b3a",
+      "raw_sha256": "d9696830385d7406818705d6cbe4c37fb98d5023595265dfcb38b83dc76a4358",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-001/script.log",
+      "bytes": 20830
+    },
+    "runners/mobile-bytecode-main169-run.py.gz": {
+      "sha256": "2a9147f9daa538a6e944012057b547927e98672c5b996825aae4293959672ae7",
+      "raw_sha256": "043c7f3e933782420280d1398a70272efbca01dbf133958caf7e84ef22548752",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-main169-run.py",
+      "bytes": 6197
+    },
+    "runners/mobile-bytecode-target.py.gz": {
+      "sha256": "bad0dc626b21937953ccd31d5915a99cdff4b25712b0330ff0cc6fb3be222e3a",
+      "raw_sha256": "0f9a87eb069ac8eb1f10643ca5ef1bcdc4922ecc6ddc2ac07677cf94165a3abc",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-target.py",
+      "bytes": 2153
+    },
+    "runners/retain-mobile-bytecode-main169.py.gz": {
+      "sha256": "1d89d7ec7a4be6a7bc247cd7d9c0fc4113832b027f9d7fd20ef928a0cc46230c",
+      "raw_sha256": "ed6c1cca5ddba333878f2aadefc9c25519ca1b4ff6d915ebc0d16b5ebe75abc3",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/retain-mobile-bytecode-main169.py",
+      "bytes": 6003
+    },
+    "target-adoption/ci.log.gz": {
+      "sha256": "d2a0b160f124ec8e443a961a86a3bdc194886e273959180c298bf183ab9ac56e",
+      "raw_sha256": "e3e3af5a010d26329e48e7ea04fb47fc900d3c09d6e78c46cf6f3d0fba79f0dc",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-target/ci.log",
+      "bytes": 40
+    },
+    "target-adoption/clone.json.gz": {
+      "sha256": "01d20631eaa62a97b47a69b26200fc682cf7477058f46e08136440d5778171b4",
+      "raw_sha256": "67c823865cba5fdcd5298cf2b350e9faa383bbda2e9596953a04e087fe138d29",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-target/clone.json",
+      "bytes": 337
+    },
+    "target-adoption/dev.log.gz": {
+      "sha256": "4461d0967218788aeb2f040feace19e08260858e39e03adfd209b8c9daf09cf1",
+      "raw_sha256": "cda3542b735cdbf411eac2215df3c10aea7bb111203f32045092f7d50b0003b8",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-target/dev.log",
+      "bytes": 38
+    },
+    "target-adoption/metadata.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-target/metadata.log",
+      "bytes": 0
+    },
+    "target-adoption/release.log.gz": {
+      "sha256": "0002816f113350f20cb02dbd8eadd2a3aecb1187c074d2bbeb4109e0fdeffae2",
+      "raw_sha256": "86935c1de3b9bd5aeddcc7ad54fabe35fabd9b16ed41dc1116b6dfc5a1c1e84e",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-target/release.log",
+      "bytes": 38
+    },
+    "target-adoption/result.json.gz": {
+      "sha256": "04905921f392193bd4c910410cd2f96d6384dd8d17041ba62b07f5e89eef2589",
+      "raw_sha256": "539158c9f345a69abf15cdc0d702a4c67b8b09ac45719d3e01217dd0cf23ffba",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-bytecode-target/result.json",
+      "bytes": 8084
+    }
+  },
+  "cross_runtime": "Exact game reports and PCM for four cases across both C and Swift on macOS and iOS simulator; bytecode/hardening arrays generated freshly and identical across all three archive targets.",
+  "independent_review": {
+    "decision": "accepted current-main169 source and actual execution",
+    "path": "docs/spikes/evidence/mobile-bytecode-main169/final-review.json",
+    "sha256": "ef707332407062fe7fc3742acba5e8f93bd77fc70ff623014a0c7c93359eb180"
+  },
+  "limitations": [
+    "ci profile CPU fixture only, not shipping-profile or phone performance",
+    "iOS device compile/link only; no physical-device execution",
+    "No Android admission, authored-project cross-export, renderer/window/GPU or signing changes",
+    "Metadata hashes are compatibility checks, not authentication of project executable bytes",
+    "Original producer proof is preserved separately; current integration uses new matching archives and caller executables"
+  ],
+  "target_ownership": "Explicit checkout-owned target APFS-cloned from idle cache; only cloned local/path-package outputs cleaned for ci/release/dev before use. No shared target writes.",
+  "main170_addendum": {
+    "path": "docs/spikes/evidence/mobile-bytecode-main169/main170-addendum.json",
+    "sha256": "15ce6256ee7964289876c03554df5a6662b392a537c0b813169e69854d974ec1",
+    "meaning": "Reviewed desktop exporter repair integrated after actual archive execution; archive/compiler/caller closure unchanged, six parser cases repeated."
+  }
+}

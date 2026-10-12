@@ -2,8 +2,9 @@
 
 Date: 2026-10-08. Updated: 2026-10-10. Status: per-project modes adopted by
 the director in PLAN.md revision 4; feature selection and the backend rule fixed
-by the revision 5 decision record. Only the original deterministic variant is
-implemented. Phase 1 remains in progress.
+by the revision 5 decision record. Separately compiled deterministic and fast
+physics kernels are implemented; per-project runtime/process selection remains
+open. Phase 1 remains in progress.
 
 ## Decision
 
@@ -12,8 +13,9 @@ mode. The default fast variant uses supported vector instructions and parallel
 stepping; the rollback/exact-replay variant uses `enhanced-determinism`. Export
 and play-test processes select a separately built compatible runtime. Cargo
 feature unification means this cannot be a runtime toggle in one linked Rapier
-build. The current unconditional `enhanced-determinism` dependency is migration
-work, not evidence that both variants already exist.
+build. The physics crates preserve deterministic defaults while exposing fast
+kernel builds explicitly; existing dependent crates still select that default.
+This does not yet implement per-project selection.
 
 Select features against the pinned version and target capabilities: 0.36 exposes
 `parallel` and `simd8`; do not assume older `simd-stable` flags or force x86-only
@@ -45,8 +47,9 @@ so the deterministic variant runs 4-lane SIMD. `parallel` is independent:
 Rapier's `parallel_path_parity` test pins one golden hash that builds with and
 without `parallel` must both match under `enhanced-determinism`. That is the
 upstream contract; Incant's own checksum test must confirm it on its workloads.
-The current build enables `enhanced-determinism` without `parallel`, so it pays
-for software math and steps serially.
+The original build enabled `enhanced-determinism` without `parallel`. The current
+native build enables parallel stepping, and the explicit fast kernel build
+removes forced software math. Browser builds remain serial.
 
 Maintaining a new portable C++ shim is possible. The plan already permits a pure
 Rust fallback, and the measured Rapier workload fits the available local budget.
@@ -76,8 +79,9 @@ and a maintained C shim builds for all six targets; if both hold, switch behind
 this boundary before Phase 6. A binding failure or a microbenchmark alone does
 not establish which solver is faster.
 
-First migration step: enable `parallel` in the existing deterministic build and
-require exact equality with the current serial regression evidence before
-relying on it. Then add the separately built fast variant.
+Native parallel stepping and the separately built fast kernel are implemented.
+See [kernel build evidence](../spikes/physics-runtime-variants.md). Project-level
+selection and matching export/play processes remain the next integration step;
+the kernel tests alone do not close that requirement.
 
 Source: [PLAN.md](../../PLAN.md), sections 2, 3, 5 and 6.

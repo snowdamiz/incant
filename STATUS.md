@@ -28,6 +28,21 @@ owns the separate Pearl Cove art/HUD branch and native-window appearance; whole-
 session restart, physics save/load and device gates remain open.
 [Contract and retained evidence](docs/spikes/planar-presentation-bindings.md).
 
+## Pinned mobile bytecode compatibility — merged main171
+
+Fresh source cooks bind exact producer/destination and the pinned QuickJS ABI.
+Actual C and Swift callers each pass the same complete numeric/input/failure
+records on macOS and an iOS 27.0 ARM simulator (32 controls per platform). iOS
+device archives compile and link only. Native script/cooker tests, union Clippy
+and lean dependency checks pass; independent final source/execution review is accepted. Android
+cross-target admission and authored-project cross-export remain denied. No
+physical-phone or performance gate is claimed.
+Current main169 integration passes all 16 checks with new matching archives and
+64 actual C/Swift controls; final integrated audit and exact-head fast CI passed
+before PR171 merged.
+[Contract and evidence](docs/spikes/mobile-bytecode-compatibility.md);
+[current integration](docs/spikes/mobile-bytecode-main169.md).
+
 ## Ordinary desktop exporter — library audit corrected
 
 The player library and thin executable share a crate name. The shipping audit
@@ -52,19 +67,20 @@ fast CI passed before PR169 merged. iOS/Android compatibility stays separate; no
 Actual callers of the frozen native runtime archive pass 32 controls / 39
 commands with typed cooked input-driven movement, precise failure reports,
 repeat PCM and create-only outputs. Fixture Clippy and authoring-free graph
-checks pass; source/execution review is accepted. iOS target compatibility and
-simulator/device archives, Android NDK/CI, and physical-phone/render/device gates
-remain pending; the old document smoke is not reused as game execution evidence.
+checks pass; source/execution review is accepted. The later trusted-source
+compatibility route above adds iOS simulator execution and device archive links.
+Android NDK/CI and physical-phone/render/device gates remain pending; the old
+document smoke is not reused as game execution evidence.
 [Source and measured scope](docs/spikes/mobile-runtime-callers.md).
 
 ## Shared cooked-player library
 
 The ordinary packaged player now has a reusable Rust entry and optional bounded C
 ABI. Local macOS CPU/CLI tests and native-window/static-module compatibility pass;
-actual macOS C/Swift caller verification passes as recorded above. The first iOS simulator archive attempt
-hit the existing cross-target script-cook refusal. That guard remains intact while
-a separate compatibility route is developed; no mobile runtime/device/performance
-gate passes from this work. [Contract and evidence](docs/spikes/mobile-runtime-library.md).
+actual macOS C/Swift caller verification passes as recorded above. The first iOS
+archive refusal remains retained; the separately verified trusted-source route is
+described above. Authored-project cross-export stays denied. No physical-device
+or performance gate passes from the library extraction. [Contract and evidence](docs/spikes/mobile-runtime-library.md).
 ## Rust/Wasm audio transport — merged main168
 
 The accepted ops59–61 pass 483 actual-host cases and all 12 integration checks.
@@ -112,6 +128,16 @@ repeat PCM and terminal silence are verified. Independent integration audit and 
 Authored appearance/device gates remain separate.
 [Current integration evidence](docs/spikes/core-presentation-integration.md).
 
+## Physics build variants — current-main kernel checks passed
+
+The 2D/3D physics crates build separately with deterministic math, hardware math,
+or the opt-in eight-lane candidate; native parallel stepping stays enabled.
+The same ten behavior tests and Clippy pass in each variant on main169, and actual compiler records
+confirm the intended features. Both base variants compile for wasm32 without
+parallel features. Existing callers retain deterministic defaults; per-project
+selection, matching play/export processes, device measurements and exact-replay
+gates remain open. [Evidence](docs/spikes/physics-runtime-variants.md).
+
 ## Core Sample presentation bindings — locally verified
 
 Optional authored role maps connect gameplay to localized health, collection and
@@ -126,6 +152,19 @@ expectation was corrected against the same frozen player; game code was unchange
 This is a numerical fixture, not the finished authored level or device gate.
 Headless recorded UI routing and physics save support remain separate open work.
 [Contract and retained evidence](docs/spikes/core-presentation-bindings.md).
+
+## Native physics saves — checked persistent boundary still open
+
+A bounded Rapier 0.36 diagnostic preserves trusted typed 2D/3D solver state and
+subsequent overlap events across eight cases / 960 continuation ticks. Rebuilding
+only current poses, velocities and sleep state diverges at nonzero checkpoints,
+including changed trigger events. Production `PhysicsUnsupported` remains intact;
+no untrusted solver graph decoder or world-v12 section has been adopted. The
+source audit identifies the private graph families a checked format must cover
+and the storage/load limits of deterministic replay. Independent source/evidence
+review accepted this bounded diagnostic; full physics saves remain open.
+[Diagnostic, source barrier and next options](docs/spikes/native-physics-snapshot-boundary.md).
+[Current-main kernel and diagnostic checks](docs/spikes/physics-boundaries-main169.md) pass; independent final integration review is accepted and fast CI remains required.
 
 ## Native audio transport — merged main163
 
@@ -722,12 +761,19 @@ and complete Game UI/IME gates remain open.
 
 ## Current milestone
 
-Main #168 includes compound native animation and Wasm snapshots, authored two-bone
+Main #171 includes compound native animation and Wasm snapshots, authored two-bone
 IK, complete native/TypeScript/Wasm root motion, native audio transport and HUD,
 Wasm HUD controls, offline audio/UI checkpoints, public physics queries, and the
 Core/Planar gameplay foundations. Wasm audio transport is merged after current-main
-shipping validation; reviewed headless UI and the reusable player/mobile library
-with actual macOS C/Swift callers are ready for fast publication. Phase 1 and the finished game remain incomplete.
+shipping validation. Headless UI and the reusable player/mobile library with
+actual macOS C/Swift callers are merged. Trusted-source iOS bytecode compatibility
+is merged after current-main CPU/simulator checks, final review and fast CI.
+Reviewed physics kernel features and the trusted-state save diagnostic are next;
+process/project selection and actual physics saves remain separate work.
+The desktop exporter lib/bin audit repair is merged after scoped checks and
+review; fresh Planar packaging is still being verified, and no failed export is
+counted as shipping success. Phase 1 and the finished game
+remain incomplete.
 
 Checkpoint14 promoted selected main160 `d1ef35ee` after all 23 exact-candidate
 required checks and eight push workflows succeeded. Release `2444d81f` has tested

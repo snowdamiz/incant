@@ -1,0 +1,123 @@
+{
+  "main": "becde2626b990498e52df9c24f70f3c3fae87c78",
+  "tested_source": "bc85c676d4c5722f9751fdb5c03b698125f4926c",
+  "integrated_source": "6e66ced6998b4b592f07bd521f6fe5d2173fb312",
+  "source_inputs": 1827,
+  "unchanged_frozen_inputs": 1819,
+  "changed_frozen_inputs": {
+    "crates/incant_cook/src/build_script.rs": {
+      "frozen": "8a41075b7ada230a7bba3f27ca454203b80a390d425107af89d0d4b11b885d87",
+      "actual": "5e41bb377bb55cb7cc3e77d8cd5d663dde350767f596711e7f9930918a797863"
+    },
+    "crates/incant_cook/src/script.rs": {
+      "frozen": "cee7491beb859a1b5816c200ca8672df5b658833f412676a97d203adff6abdc0",
+      "actual": "cc3cce8b49bdc39ab4661d461cdd62a9e0cff6eba92b49adbb802b04914604e2"
+    },
+    "crates/incant_cook/tests/scripts.rs": {
+      "frozen": "1cf01a02707c9617f9d2b07ede894ee5ca4065eb35fa67e499df818c46697dc8",
+      "actual": "64c592a27ae0641ebe4f61dc6ea276b48f340fbfcae89eddf38fcc59f25522d0"
+    },
+    "crates/incant_script/build.rs": {
+      "frozen": "2ca24f5a310d6ff935423689d477a58f7d9f0b1cdad7ade0c170b31a25c6ba16",
+      "actual": "4a592581860180d2689f4583ff676a596817526f1caf78056f5d7217cdb8977e"
+    },
+    "crates/incant_script/src/artifact.rs": {
+      "frozen": "1ebcd08372283253ef643cb65ef26ea8a5a6d57f7e4a612323efa449626c014b",
+      "actual": "af5f82dea89b8e1e96f68264b4413606e90ece9b07caf9564d2b816a217c52ac"
+    },
+    "crates/incant_script/src/compiler.rs": {
+      "frozen": "71a3ea29026428f387966d600e2afabb117748091fbaadc08b2688a1ad4273a5",
+      "actual": "7ee38efe4df269ce7723d87a79ac98bae3ef010567449918e616c81ce96d74f4"
+    },
+    "crates/incant_script/src/lib.rs": {
+      "frozen": "babbd7a64d089a9e5cf3ea3e83993c0593f607e8ee70964d905d4b5b8b209745",
+      "actual": "0e79a3bb3e9fd5d3f3e489fe4ef0aab06a0a4391ab206b216a3284bd7ce9dc71"
+    },
+    "tools/export_native.py": {
+      "frozen": "a22f6431bb6db373982970e53a219f1f57633c538e08055bcafacefa887699a1",
+      "actual": "15f74de2f69a8b2d7a3b1e48e62a9dae9aa153784de0ff7b5c64096c377814b6"
+    }
+  },
+  "main_implementation_delta": [
+    "crates/incant_cook/src/build_script.rs",
+    "crates/incant_cook/src/script.rs",
+    "crates/incant_cook/tests/scripts.rs",
+    "crates/incant_script/build.rs",
+    "crates/incant_script/src/artifact.rs",
+    "crates/incant_script/src/artifact/compatibility.rs",
+    "crates/incant_script/src/artifact/mobile_tests.rs",
+    "crates/incant_script/src/compiler.rs",
+    "crates/incant_script/src/lib.rs",
+    "crates/incant_script/tests/fixtures/mobile_compat.expected.json",
+    "crates/incant_script/tests/fixtures/mobile_compat.js",
+    "tools/export_native.py",
+    "tools/tests/test_native_codegen.py"
+  ],
+  "protected_physics_and_dependency_files": {
+    "Cargo.toml": "dd9a6d6ff626086e7e1bf2f6845dac09d94c60651d0f43efc1be0cc3b5d83b7c",
+    "Cargo.lock": "7eec85df8c7e53e760cb088e23f94e99502dc72792e8ac1c935cf432825ae383",
+    ".cargo/config.toml": "0d3b42ee7bc4ef237cb8af440c47e506dcc9cc8b24d49d3cd3d3fea76ae5caa1",
+    "crates/incant_physics_2d_runtime/Cargo.toml": "55374eaa95580308e01e63fbe35014f9d2e4d0507dab06152db0aefae635282d",
+    "crates/incant_physics_2d_runtime/src/config.rs": "7872f6c540dec7af30b703daa442c0940e6340e31edd28fc708ec02f7a277494",
+    "crates/incant_physics_2d_runtime/src/lib.rs": "6e8a98b14b80c3cd8a0254d34db7fb3b223f1e6e975ba6be3ce6637a6b69db5b",
+    "crates/incant_physics_2d_runtime/src/query.rs": "3d0026bca040b22aacec283af9fa923c28ded1c0fdabf40652b5db0540d2a491",
+    "crates/incant_physics_2d_runtime/tests/behavior.rs": "b9bc3c1672bd670b9674a76cd3d0ededfd6a3de09e6a79216b2ae9fe4ac5b0d8",
+    "crates/incant_physics_runtime/Cargo.toml": "9578d60e44a752a404eaa01c2c05a5b5dec4a01d3e9a6d3c445457d24a5426e4",
+    "crates/incant_physics_runtime/src/character.rs": "539c479aa3f1ae5c031e24f5964a91d80b38006e05ea034730b826ffe4ae2f1c",
+    "crates/incant_physics_runtime/src/character_frame.rs": "97252c4b7ecf9b68ba9e33d5b94dd9c9b512069bf223adedca846732d26de98d",
+    "crates/incant_physics_runtime/src/character_queries.rs": "c7548822eede48b93ab6e822e1da563f2c319a606a491f06159c61a95dd7e3bd",
+    "crates/incant_physics_runtime/src/lib.rs": "5bd035a5e0a1723800deee56d51393bfe96b1242d025db6d1c57de52ab7d5b15",
+    "crates/incant_physics_runtime/src/navigation.rs": "57157ad54bc96f51cd0965c78862f1119dd12ca04bb92d04ada21bc7a7e7b378",
+    "crates/incant_physics_runtime/src/queries.rs": "675914573c124551692b043dca98902c4efef98eda602b1023c1da3d032eafe6",
+    "crates/incant_physics_runtime/src/shapes.rs": "17fc238d7cbc9ab5ffc6eba0e6a59e55d8d29f1f1e29d587927a7f1ce2a3eb87",
+    "crates/incant_physics_runtime/tests/typed.rs": "99ccbb278d09d655e65c3123efd2c13e12cb112f77a10d666837aa2e9a71e2bb",
+    "tools/probes/physics-snapshot-boundary/Cargo.lock": "56a9ed34419a8a51cc54edd9f4422484d8d19a0916f3a69e70820580cfdfdcb0",
+    "tools/probes/physics-snapshot-boundary/Cargo.toml": "02e7a75a59b7882b4e54d177e6ac562ec8f6a4da139fe9db15b18bf51b0f3364",
+    "tools/probes/physics-snapshot-boundary/README.md": "e487540790f390919fb6f4b0c823212581de25ad1fbd8f5892e3b61d3b82090c",
+    "tools/probes/physics-snapshot-boundary/src/main.rs": "56cb054477ffae1b7a5fed823063a9e08681ff6dfafd5a70c80beee1bb7293c3",
+    "tools/probes/physics-snapshot-boundary/src/probe.rs": "b2d9f5492e83f9c73f4be4307b9f239d0f46dade393634acb357ebe05f3f85df"
+  },
+  "commands": [
+    {
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "log": "docs/spikes/evidence/physics-boundaries-main169/conventions-main171.log.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "log": "docs/spikes/evidence/physics-boundaries-main169/diff-main171.log.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_native_codegen.py",
+        "-v"
+      ],
+      "exit": 0,
+      "log": "docs/spikes/evidence/physics-boundaries-main169/new-codegen-tests-main171.log.gz",
+      "raw_sha256": "c871434ba3f7746ba350ca6d862bda848f095faa3d414422c39740467441f2c7",
+      "gzip_sha256": "47d66f085b13cdc58e04a07b8f626e934466a62b7ded8523ae58754df4144470"
+    }
+  ],
+  "basis": "Accepted physics sources/tests, root lock/config and standalone probe source/lock remain exact. Later main170 exporter and main171 compiler changes are outside these dependency closures; earlier three-mode actual compiler/test and standalone diagnostic results remain applicable, not new runs.",
+  "limitations": "Future ancestor/process forwarding and project selection are separate; no physics save decoder or device/performance claim."
+}

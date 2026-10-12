@@ -1,0 +1,34 @@
+{
+  "main": "743c4c0cee35a100191d856c050e395ddf1b0976",
+  "source_tested": "c6bb65f05a68caab6ea9d219e25d3e137ca2c9bc",
+  "frozen_inputs": 1884,
+  "unchanged_frozen_inputs": 1883,
+  "changed_frozen_inputs": {
+    "tools/export_native.py": {
+      "frozen": "a22f6431bb6db373982970e53a219f1f57633c538e08055bcafacefa887699a1",
+      "actual": "15f74de2f69a8b2d7a3b1e48e62a9dae9aa153784de0ff7b5c64096c377814b6"
+    }
+  },
+  "new_tool_test": "tools/tests/test_native_codegen.py",
+  "producer_inputs_exact": 11,
+  "main_delta_source_paths": [
+    "tools/export_native.py",
+    "tools/tests/test_native_codegen.py"
+  ],
+  "command": [
+    "python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tools/tests",
+    "-p",
+    "test_native_codegen.py",
+    "-v"
+  ],
+  "exit": 0,
+  "log": "docs/spikes/evidence/mobile-bytecode-main169/main170-codegen-tests.log.gz",
+  "gzip_sha256": "70313ed9309483d1c77798db3035ef294bdab0ab39f64357868268fca505f781",
+  "raw_sha256": "213fae21ab89e5d754843537cb150fed20450b6b83c4236281704f10d7dcda8e",
+  "relevance": "Only desktop exporter codegen-audit helper and its tests changed. Archive builds/caller helper/compiler/dependency/source inputs are unchanged; new parser tests rerun on this union. Original mobile execution is preserved rather than claimed to be a new target run."
+}

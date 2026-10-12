@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-12T21:33:55.604119+00:00",
+  "reviewer": "astra root",
+  "manifest_sha256": "9897cb11e31a9d0873fa495afaebf327aacc4c44b09ce37f7f86db7a25198ab3",
+  "tested_source": "c6bb65f05a68caab6ea9d219e25d3e137ca2c9bc",
+  "decision": "accepted bounded trusted-source mobile bytecode integration",
+  "retained_artifacts": 379,
+  "frozen_git_inputs": 1884,
+  "exact_producer_inputs": 11,
+  "command_outcomes": 16,
+  "actual_controls": 64,
+  "cross_runtime_reports": 8,
+  "fresh_bytecode_and_hardening_verified": true,
+  "independent_exact_numeric_logs_clock_motion_pcm": true,
+  "limitations": [
+    "ci profile CPU fixture only, not shipping-profile or phone performance",
+    "iOS device compile/link only; no physical-device execution",
+    "No Android admission, authored-project cross-export, renderer/window/GPU or signing changes",
+    "Metadata hashes are compatibility checks, not authentication of project executable bytes",
+    "Original producer proof is preserved separately; current integration uses new matching archives and caller executables"
+  ],
+  "findings": []
+}

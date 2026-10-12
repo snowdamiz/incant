@@ -32,8 +32,14 @@ pub fn embed_script(default_source: &str) -> Result<(), Box<dyn std::error::Erro
     }
     let host = env::var("HOST")?;
     let target = env::var("TARGET")?;
-    if host != target {
-        return Err("embedded game player currently requires native host == target; cross-target export is unverified".into());
+    if host != incant_script::artifact::TARGET
+        || !incant_script::artifact::compatibility::admits(
+            &host,
+            &target,
+            incant_script::artifact::BytecodeAbi::current(),
+        )
+    {
+        return Err("embedded script producer/destination bytecode ABI is not admitted".into());
     }
     let path = env::var_os("INCANT_NATIVE_SCRIPT_SOURCE")
         .map(PathBuf::from)

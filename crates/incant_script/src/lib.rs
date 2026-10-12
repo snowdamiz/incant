@@ -42,6 +42,8 @@ pub use bindings::{
 };
 pub use checkpoint::{CheckpointError, MAX_CHECKPOINT_BYTES, PendingSessionCheckpoint};
 pub use compiled::CompiledScript;
+#[cfg(feature = "compiler")]
+pub use compiler::ScriptBuild;
 use incant_runtime::NativeWorld;
 pub use logging::{LogLevel, NativeLog, NativeLogs};
 pub use program::SessionProgram;

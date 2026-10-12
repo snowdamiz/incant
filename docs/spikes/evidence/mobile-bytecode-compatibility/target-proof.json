@@ -1,0 +1,337 @@
+{
+  "status": "independent final source and execution review accepted",
+  "source_commit": "a54a9da5bc620e0dc9e489cc531ddf6c350109be",
+  "tested_union": "24363a100143b938599d8567753b36a8d2564b63",
+  "caller_commit": "270294e51cc194bf8e3bd9ee30f35ef72f7da5fe",
+  "archive": {
+    "path": "target-proof.json.gz",
+    "sha256": "e0d5775d5362aa797fe9ae0164cbbc1e604d456e73f6f4e2435ed6e512c55001",
+    "bytes": 8700402,
+    "records": 364,
+    "unique_payloads": 123
+  },
+  "retained_external_binary_artifacts": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-bytecode-archives-001/aarch64-apple-darwin/libincant_game_player.a",
+      "name": "mobile-bytecode-archives-001/aarch64-apple-darwin/libincant_game_player.a",
+      "sha256": "028596be9ef6ad78cba057ec102fdc518574a3650d7431d5d2727ca859c31d0d",
+      "bytes": 86403592
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-bytecode-archives-001/aarch64-apple-ios/libincant_game_player.a",
+      "name": "mobile-bytecode-archives-001/aarch64-apple-ios/libincant_game_player.a",
+      "sha256": "e6a6c09892e090324f881de713da6fc69d729e6d9aeb9a27401b1b11a81528e4",
+      "bytes": 86063248
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-bytecode-archives-001/aarch64-apple-ios-sim/libincant_game_player.a",
+      "name": "mobile-bytecode-archives-001/aarch64-apple-ios-sim/libincant_game_player.a",
+      "sha256": "c6a71ab122479de1bdd0af62e6c5693ba187e7ca36c98e91c23d4fd4562bc0c6",
+      "bytes": 86021560
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-bytecode-macos-callers-001/caller-c",
+      "name": "mobile-bytecode-macos-callers-001/caller-c",
+      "sha256": "3ff7bde5cddac3b385d614f2fc2a1963632e97f83dbfef19f2950cc9ae9a5778",
+      "bytes": 46070200
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-bytecode-macos-callers-001/caller-swift",
+      "name": "mobile-bytecode-macos-callers-001/caller-swift",
+      "sha256": "d69b0fb61c5d0922cc22291f71f4582f3af7925cf2b7a271fd22045b4a0b3082",
+      "bytes": 46078320
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-bytecode-ios-simulator-callers-001/caller-c",
+      "name": "mobile-bytecode-ios-simulator-callers-001/caller-c",
+      "sha256": "895d80d982fcc056994bf8e6fab8731d95a9ecf71da11373b33736ba55e96e64",
+      "bytes": 45899928
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-bytecode-ios-simulator-callers-001/caller-swift",
+      "name": "mobile-bytecode-ios-simulator-callers-001/caller-swift",
+      "sha256": "2b6d2d1b29c63e8a66c7739512dcd748021bc4598d3149c2ad074de0b1452fed",
+      "bytes": 45934256
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-bytecode-ios-device-callers-001/caller-c",
+      "name": "mobile-bytecode-ios-device-callers-001/caller-c",
+      "sha256": "4f857066f4985d18571a0003218c6d70aa13ec019a1222337e09169c0027d3ed",
+      "bytes": 45608176
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-bytecode-ios-device-callers-001/caller-swift",
+      "name": "mobile-bytecode-ios-device-callers-001/caller-swift",
+      "sha256": "1f8e2dbf1a0b3238e0878b3cef2f2688a9c99ee8f0c4448799dfb0704451b00b",
+      "bytes": 45642256
+    }
+  ],
+  "results": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mobile-bytecode-macos-callers-001/result.json",
+      "sha256": "598ab341bfd7c7b72c4d3c0a18481f911fcf76c6dbd6d27718582ce98315b0ad",
+      "target": "aarch64-apple-darwin",
+      "execution": "macos_cpu",
+      "commands": 39,
+      "controls": 32
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mobile-bytecode-ios-simulator-callers-001/result.json",
+      "sha256": "87b39ecc24ae0794bbf55ad1b98472de6b1677fbaf897cd053acde402e4cf363",
+      "target": "aarch64-apple-ios-sim",
+      "execution": "ios_simulator_cpu",
+      "commands": 44,
+      "controls": 32
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mobile-bytecode-ios-device-callers-001/result.json",
+      "sha256": "9ef5394434784dcbb7aa7722a3732d4189e31fc6150de08816f54637f59bf448",
+      "target": "aarch64-apple-ios",
+      "execution": "build_and_link_only_no_device",
+      "commands": 7,
+      "controls": 0
+    }
+  ],
+  "archive_commands": [
+    {
+      "argv": [
+        "./tools/cargo",
+        "rustc",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--lib",
+        "--features",
+        "mobile-ffi",
+        "--crate-type",
+        "staticlib"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/Users/andreyyurlov/.local/share/fnm/node-versions/v22.23.3/installation/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "CARGO_TARGET_DIR": "/tmp/incant-agent-font-target",
+        "INCANT_NATIVE_SCRIPT_SOURCE": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/crates/incant_script/tests/fixtures/mobile_compat.js",
+        "INCANT_NATIVE_SCRIPT_NAME": "mobile-compat.js"
+      },
+      "exit_code": 0,
+      "seconds": 14.774760246276855,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/mobile-bytecode-archives-001/aarch64-apple-darwin/build.log",
+      "sha256": "180711aa604a038b6f9b9caee6d3483db2112ed59d789e961cf8ffde72844e49"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "rustc",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--lib",
+        "--features",
+        "mobile-ffi",
+        "--crate-type",
+        "staticlib",
+        "--target",
+        "aarch64-apple-ios-sim"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/Users/andreyyurlov/.local/share/fnm/node-versions/v22.23.3/installation/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "CARGO_TARGET_DIR": "/tmp/incant-agent-font-target",
+        "INCANT_NATIVE_SCRIPT_SOURCE": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/crates/incant_script/tests/fixtures/mobile_compat.js",
+        "INCANT_NATIVE_SCRIPT_NAME": "mobile-compat.js"
+      },
+      "exit_code": 0,
+      "seconds": 148.76450514793396,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/mobile-bytecode-archives-001/aarch64-apple-ios-sim/build.log",
+      "sha256": "ffa11b63393690a58be1eef00c099e68f493df9e980c869e10958ea349c59305"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "rustc",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--lib",
+        "--features",
+        "mobile-ffi",
+        "--crate-type",
+        "staticlib",
+        "--target",
+        "aarch64-apple-ios"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/Users/andreyyurlov/.local/share/fnm/node-versions/v22.23.3/installation/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "CARGO_TARGET_DIR": "/tmp/incant-agent-font-target",
+        "INCANT_NATIVE_SCRIPT_SOURCE": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/crates/incant_script/tests/fixtures/mobile_compat.js",
+        "INCANT_NATIVE_SCRIPT_NAME": "mobile-compat.js"
+      },
+      "exit_code": 0,
+      "seconds": 202.00148797035217,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/mobile-bytecode-archives-001/aarch64-apple-ios/build.log",
+      "sha256": "73b437a2b1729b8d93968efdecb0d681f4e9afa4805c7945c958c582d3070fbb"
+    }
+  ],
+  "post_checks": [
+    {
+      "name": "union-clippy",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_cook",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "incant_cook/typescript,incant_game_player/mobile-ffi",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "seconds": 53.156909227371216,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/mobile-bytecode-archives-001/union-clippy.log",
+      "sha256": "edcf35480c5967a52a0d935878561fb0d84f796e84ddefe735dcc66f02b4e23d"
+    },
+    {
+      "name": "mobile-lean",
+      "argv": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_script",
+        "incant_game_player",
+        "--features",
+        "incant_game_player/mobile-ffi"
+      ],
+      "exit_code": 0,
+      "seconds": 0.6141669750213623,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/mobile-bytecode-archives-001/mobile-lean.log",
+      "sha256": "197d2c3375bb79ab3d36a3fa0f62baed27d7f80092cef9815788fb7a1001463d"
+    },
+    {
+      "name": "fmt",
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 1.897110939025879,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/mobile-bytecode-archives-001/fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.017596006393432617,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/mobile-bytecode-archives-001/diff.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "source_review": {
+    "path": "source-review.json",
+    "sha256": "bc2568b5114b36203cd7ac68f44a137a080bde188b7ba76a99dd9d1c9817f1e0"
+  },
+  "frozen_tracked_files": 10754,
+  "frozen_files_unchanged": true,
+  "metadata_comparison": "All three exact destination manifests differ only target; fresh captured bytecode/hardening arrays rehashed to metadata identities",
+  "cross_runtime": {
+    "macos_result_sha256": "598ab341bfd7c7b72c4d3c0a18481f911fcf76c6dbd6d27718582ce98315b0ad",
+    "ios_result_sha256": "87b39ecc24ae0794bbf55ad1b98472de6b1677fbaf897cd053acde402e4cf363",
+    "pairs": [
+      {
+        "control": "c-accepted",
+        "game_equal": true,
+        "log_entries": 15,
+        "pcm_sha256": "17744bb6a4ed1d9d51d85d7eb645cde30352530d494233c434027f9e3193bae4",
+        "game_sha256": "7f72c624c83c3fb85a9fad786059e8a019d94822033dd8032cba3d9732768a04"
+      },
+      {
+        "control": "c-repeat",
+        "game_equal": true,
+        "log_entries": 15,
+        "pcm_sha256": "17744bb6a4ed1d9d51d85d7eb645cde30352530d494233c434027f9e3193bae4",
+        "game_sha256": "7f72c624c83c3fb85a9fad786059e8a019d94822033dd8032cba3d9732768a04"
+      },
+      {
+        "control": "c-release",
+        "game_equal": true,
+        "log_entries": 15,
+        "pcm_sha256": "17744bb6a4ed1d9d51d85d7eb645cde30352530d494233c434027f9e3193bae4",
+        "game_sha256": "9a4600cd3d01add397f94856b369d48e43ada77f6b0481ae3a47f6da75e142e1"
+      },
+      {
+        "control": "c-observation-failure",
+        "game_equal": true,
+        "log_entries": 15,
+        "pcm_sha256": "17744bb6a4ed1d9d51d85d7eb645cde30352530d494233c434027f9e3193bae4",
+        "game_sha256": "4593e1ebfefaed541fd5bc86023c203778287e32701b610899059ec905463f02"
+      },
+      {
+        "control": "swift-accepted",
+        "game_equal": true,
+        "log_entries": 15,
+        "pcm_sha256": "17744bb6a4ed1d9d51d85d7eb645cde30352530d494233c434027f9e3193bae4",
+        "game_sha256": "7f72c624c83c3fb85a9fad786059e8a019d94822033dd8032cba3d9732768a04"
+      },
+      {
+        "control": "swift-repeat",
+        "game_equal": true,
+        "log_entries": 15,
+        "pcm_sha256": "17744bb6a4ed1d9d51d85d7eb645cde30352530d494233c434027f9e3193bae4",
+        "game_sha256": "7f72c624c83c3fb85a9fad786059e8a019d94822033dd8032cba3d9732768a04"
+      },
+      {
+        "control": "swift-release",
+        "game_equal": true,
+        "log_entries": 15,
+        "pcm_sha256": "17744bb6a4ed1d9d51d85d7eb645cde30352530d494233c434027f9e3193bae4",
+        "game_sha256": "9a4600cd3d01add397f94856b369d48e43ada77f6b0481ae3a47f6da75e142e1"
+      },
+      {
+        "control": "swift-observation-failure",
+        "game_equal": true,
+        "log_entries": 15,
+        "pcm_sha256": "17744bb6a4ed1d9d51d85d7eb645cde30352530d494233c434027f9e3193bae4",
+        "game_sha256": "4593e1ebfefaed541fd5bc86023c203778287e32701b610899059ec905463f02"
+      }
+    ]
+  },
+  "limits": [
+    "iOS device archives linked only; no physical device execution",
+    "Android cross-target remains denied pending actual emulator proof",
+    "No authored-project mobile export, signing, runtime window/rendering or device-performance gate",
+    "Trusted embedded bytes only; metadata hashes do not authenticate project-provided executable caches",
+    "Proof uses ci profile, not shipping-profile device measurements"
+  ],
+  "final_review": {
+    "path": "final-review.json",
+    "sha256": "0a84d45e90a9f51e22080866876e247fa9746253b56fde71b4745e35ab7ffd96",
+    "reviewed_packet_commit": "e2a9bbd45efed5c6e929b9b33561f945e453f082",
+    "reviewed_packet_sha256": "dfafd71aaa34fca7165111726c71384c439f0e1ec8a6b1983004559cad9f9375"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "scope": "independent read-only leaf source/evidence acceptance plus next-step forwarding design",
+  "commit": "a468be2a6ce22c11a0e4fbdeddfd2c44b7b79245",
+  "accepted": true,
+  "findings": [],
+  "verified_frozen_sources": 1435,
+  "verified_explicit_sources": 4,
+  "verified_artifacts": 25,
+  "parsed_tests": {
+    "deterministic": 10,
+    "fast": 10,
+    "fast-simd8": 10
+  },
+  "reran_builds_or_tests": false,
+  "evidence": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/docs/spikes/evidence/physics-runtime-variants.json",
+    "sha256": "0135a68a29beb06cfe079e54235961263aaecbd41d9674124ab82a354d9748fa"
+  },
+  "graph": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/physics-runtime-forwarding-20261012.json",
+    "sha256": "05214e96ceff86c8ca025372396177db51324b53e8e04ba9692ac7ce0f82a3f0"
+  },
+  "design": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/physics-runtime-forwarding-20261012.md",
+    "sha256": "4f9fc3c270ed3f382d632409ac8b96b231927949d9be03e754c528686b0224cd"
+  },
+  "limits": [
+    "leaf scope only; forwarding/project/process work remains",
+    "wasm compile only",
+    "no numerical performance or device/save gate"
+  ]
+}

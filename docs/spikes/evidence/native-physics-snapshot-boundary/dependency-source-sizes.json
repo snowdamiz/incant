@@ -1,0 +1,26 @@
+{
+  "families": {
+    "rapier2d-0.36.0": {
+      "rust_files": 239,
+      "bytes": 3216052,
+      "lines": 80268
+    },
+    "rapier3d-0.36.0": {
+      "rust_files": 239,
+      "bytes": 3216052,
+      "lines": 80268
+    },
+    "parry2d-0.31.1": {
+      "rust_files": 344,
+      "bytes": 2796497,
+      "lines": 79506
+    },
+    "parry3d-0.31.1": {
+      "rust_files": 344,
+      "bytes": 2796497,
+      "lines": 79506
+    }
+  },
+  "inspected_family_count": 34,
+  "inspected_family_lines": 29095
+}
