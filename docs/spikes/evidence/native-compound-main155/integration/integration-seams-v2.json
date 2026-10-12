@@ -1,0 +1,14 @@
+{
+  "head": "a249d2009e02f40ea6370a380e566dbbf2640749",
+  "previous_patch_sha256": "4553900d83c20b352f9fb820116b69a15422f83449cac8dd670b2b778cd3e5e5",
+  "patch_sha256": "34a2305a44a54ee6370577a825c35b30fe264d4a854779118c6a2f4854eacbcb",
+  "files": {
+    "crates/incant_assets_runtime/src/animation/mod.rs": "322fbef0d5c6f18c2bb4c5fe735237923fd25dcb8c31201aed6982311e163b79",
+    "crates/incant_wasm_runtime/src/capability.rs": "ca033c5b71ea34423ad1bfdf623ea4eb7ae01d82d3a8d086c5b10bdd7f38f090",
+    "crates/incant_wasm_runtime/tests/animations/ik.rs": "7a6c5756438f19bc1960e596e1a859b8f8c9e54c498f65d83d1fd580ae2961f7",
+    "crates/incant_wasm_runtime/tests/animations/grouped.rs": "9424fb4a16480e4824b23abf306afa615c9708bbb64858dd7be01d25e9532e89",
+    "crates/incant_script/src/checkpoint/pending.rs": "efcd62372ec3cafd8033ce378da6a4374e14f21058126865f9d46e4e80eca0d5",
+    "crates/incant_script/src/checkpoint/tests/animation.rs": "e58812275861e559c22a243d8cbf65d584e19024ed1ec6f3c5c77b052d5b941a"
+  },
+  "correction": "One existing regression has four exact-string assertions for rejected older/future/truncated checkpoints. They now match the admitted v3-v10 diagnostic. Byte/state/incarnation invariants unchanged. Initial test failure retained."
+}

@@ -1,0 +1,18 @@
+from pathlib import Path
+import os,subprocess,json,time,hashlib,shutil
+r=Path('/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant');o=Path('/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main153-001');o.mkdir(exist_ok=False)
+e=dict(os.environ,CARGO_TARGET_DIR='/Users/andreyyurlov/.codex/incant-integration-target');e['PATH']='/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/Users/andreyyurlov/.local/share/fnm/node-versions/v22.23.3/installation/bin:/opt/homebrew/opt/llvm/bin:/opt/homebrew/bin:'+e['PATH'];h=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+assert not subprocess.check_output(['git','status','--porcelain'],cwd=r,text=True)
+paths=subprocess.check_output(['git','ls-files','-z','crates','editor/app','tools','sdk','schemas','third_party','Cargo.toml','Cargo.lock','rust-toolchain.toml','.cargo','.gitattributes'],cwd=r).decode().split('\0');freeze={p:h(r/p) for p in paths if p and (r/p).is_file()};head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=r,text=True).strip();(o/'freeze.json').write_text(json.dumps({'head':head,'files':freeze},indent=2)+'\n')
+common=['--locked','--profile','ci','-j2'];pkgs=['incant_types','incant_assets_runtime','incant_assets','incant_doc','incant_cmd','incant_cook','incant_runtime','incant_script','incant_wasm_runtime','incant_render'];ps=[x for p in pkgs for x in ['-p',p]]
+cmds=[('tests',['./tools/cargo','test']+common+ps+['--all-targets']),('clippy',['./tools/cargo','clippy']+common+ps+['--all-targets','--','-D','warnings']),('wasm',['./tools/cargo','check']+common+['-p','incant_render','--lib','--target','wasm32-unknown-unknown']),('graph',['python3','tools/check_runtime_dependencies.py','incant_runtime','incant_render','incant_wasm_runtime','incant_game_player','--features','incant_game_player/static-module,incant_game_player/render-input']),('generated',['python3','tools/generate_wasm_sdk.py','--check']),('sdk',['node','tools/generate_sdk.mjs','--check']),('bridge',['node','tools/build_bridge.mjs','--check']),('typescript',['/Users/andreyyurlov/Documents/dev/incant/node_modules/.bin/tsc','--noEmit','-p','sdk/ts/tsconfig.json']),('fmt',['./tools/cargo','fmt','--all','--','--check']),('conventions',['python3','tools/generate_conventions.py','--check']),('tools',['python3','-m','unittest','discover','-s','tools/tests','-p','test_*.py']),('conformance',['python3','tools/probes/shipping-wasm2c.py',str(o/'conformance'),'--rustup','/opt/homebrew/bin/rustup','--profile','ci','--conformance-only']),('headless',['./tools/cargo','build']+common+['-p','incant_headless','--features','wasmtime-host']),('diff',['git','diff','--check']),('public-export',['python3','tools/probes/native-compound-animation-export.py',str(o/'public-export'),'--binary',str(o/'incant_headless')])]
+results=[]
+for name,cmd in cmds:
+ assert all(h(r/p)==v for p,v in freeze.items())
+ print('starting',name,flush=True);t=time.monotonic()
+ with (o/(name+'.log')).open('w') as log:rc=subprocess.run(cmd,cwd=r,env=e,stdout=log,stderr=subprocess.STDOUT).returncode
+ results.append({'name':name,'command':cmd,'exit':rc,'seconds':time.monotonic()-t,'sha256':h(o/(name+'.log'))});(o/'results.json').write_text(json.dumps(results,indent=2)+'\n');print(name,rc,flush=True)
+ if rc:raise SystemExit(rc)
+ if name=='headless':
+  src=Path(e['CARGO_TARGET_DIR'])/'ci/incant_headless';dst=o/src.name;shutil.copy2(src,dst);(o/'headless.json').write_text(json.dumps({'source_head':head,'features':['wasmtime-host'],'profile':'ci','sha256':h(dst),'bytes':dst.stat().st_size,'path':str(dst)},indent=2)+'\n')
+ assert all(h(r/p)==v for p,v in freeze.items())

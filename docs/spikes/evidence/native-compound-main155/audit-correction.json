@@ -1,0 +1,6 @@
+{
+  "initial_verifier_sha256": "f915f9d25ac7584fcbb24b0bc6514d9a29b94b3b6702a0de8cf2edf7b58d7033",
+  "initial_failure": "Verifier counted exporter startup smoke among the 25 checkpoint proof processes; actual package launches26 =1successful startup +23successful proof +2expected refusals.",
+  "corrected_verifier_sha256": "3248bca9f192f54caddb790a87e09d672f961271ac0315fca5dc7ccbcaf17c1f",
+  "production_or_probe_change": false
+}

@@ -31,24 +31,22 @@ ancestor. Whole-module checkpoints and visual/device gates remain open.
 See [scope and evidence](docs/spikes/native-wasm-compound.md).
 
 
-## Compound animation transitions — local and ordinary export checks passed
 
-Transitions involving authored blend states now retain independent state clocks,
-inner interpolation and exact world-save continuation. The TypeScript snapshot
-and CPU renderer consume the grouped pose; a single staged sampling/IK boundary
-preserves the last complete pose on a late refusal. The affected suite passes
-749 CPU tests, Clippy, wasm32 and SDK TypeScript; independent source review passes.
-An ordinary shipping player now passes three full runs and ten fresh-process
-save/resume pairs after deleting project/source/build/debug-map inputs. Each full
-run matches 112 complete records and 224 independent vector checks; continued
-saves, PCM and logs match exactly. Precise corrupt-save and failed-observation
-controls preserve their distinct diagnostic behavior and withhold output files.
-Complete compound Wasm bindings and current-main integration remain open.
-Root-motion integration continues separately; this private revision does not
-claim complete animation or a Phase 1 gate.
-[Contract](docs/spikes/native-compound-animation-fades.md).
+## Compound animation transitions — current-main integration verified
 
-## UI fixed-point blend reference — main154 integration verified
+Reviewed grouped-pose transitions now integrate with actual main155, retaining
+independent clocks/interpolation, staged sampling/IK publication and exact
+world-save continuation. The current union passes 766 CPU tests (82 GPU ignored)
+and 420 real Wasmtime/wasm2c tests, all-target Clippy, wasm32, generated contracts
+and 238 Python cases (4 existing skips); suite counts overlap and remain separate.
+A fresh current-lock shipping package passes 3 complete runs and 10 save/resume
+pairs after authoring/build/debug-map deletion, with 112 full pose rows and 224
+vector checks per full run and exact save/PCM/log continuation. Two precise
+negative controls refuse without checkpoint/PCM publication. Final independent integrated review is accepted; publication awaits the exact
+fast check. Complete compound Wasm ABI is a separate queued slice. Root-motion gameplay and device/appearance/phase gates remain open.
+[Integration and preserved failures](docs/spikes/native-compound-main155.md).
+
+## UI fixed-point blend reference — merged main155; checkpoint13 pending
 
 The independent reference now admits bounded 8-bit fixed-point UNORM blending
 while retaining exact geometry, clip, opacity and untouched-pixel controls.
