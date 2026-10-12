@@ -24,6 +24,8 @@ fn main() {
         Path::new("src/lib.rs").into(),
         Path::new("src/input.rs").into(),
         Path::new("src/flipbooks.rs").into(),
+        Path::new("src/animations.rs").into(),
+        Path::new("src/animation_commands.rs").into(),
         Path::new("src/commands.rs").into(),
         Path::new("src/audio_commands.rs").into(),
         Path::new("src/queries.rs").into(),

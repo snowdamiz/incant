@@ -522,3 +522,8 @@ rendered acceptance remain outstanding; this does not complete Phase 1 animation
 Skeletal foundation main106 union passes 90 integrated CPU tests, Clippy, audio-only/wasm32 compilation and dependency checks, with reviewed source unchanged. [Integration evidence](docs/spikes/evidence/gltf-skeletal-main106.json).
 
 Packaged-font backend/CLI import main107 integration passes affected CPU tests, Clippy, font/default-reader, wasm32 and consumer checks while preserving skeletal registration. Editor font import form and rendering remain unfinished. [Evidence](docs/spikes/evidence/packaged-font-assets-main107.json).
+Native TypeScript animation snapshots and atomic playback controls are implemented
+against the retained native clock. Actual QuickJS/NativeSession, multi-instance
+TypeScript cook, rollback and memory-bound tests pass; see
+[scope and evidence](docs/spikes/native-animation-script.md). Wasm control parity,
+rendered acceptance and the remaining animation systems are still outstanding.
