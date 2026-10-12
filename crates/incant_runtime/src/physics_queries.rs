@@ -16,6 +16,8 @@ pub enum QueryError {
     #[error(transparent)]
     Navigation(#[from] crate::SceneError),
     #[error(transparent)]
+    Avoidance(#[from] incant_nav::NavigationError),
+    #[error(transparent)]
     Physics(#[from] PhysicsError),
     #[error(transparent)]
     Physics2D(#[from] incant_physics_2d_runtime::PhysicsError),
@@ -110,6 +112,24 @@ impl NativeQueries {
             .as_ref()
             .ok_or(QueryError::Expired)?
             .grid_path(entity, request)?)
+    }
+
+    /// Stateless world-XZ avoidance proposals for a caller-supplied bulk sample.
+    /// IDs correlate input/output; they need not name entities in this world.
+    /// Geometry, movement and physical collision remain the caller's concern.
+    /// The capability still expires with its numeric loan, even for empty input.
+    pub fn steer_agents(
+        &self,
+        request: &crate::SteeringQuery,
+        dt: f64,
+    ) -> Result<Vec<crate::SteeringVelocity>, QueryError> {
+        if self.navigation.borrow().is_none() {
+            return Err(QueryError::Expired);
+        }
+        if !dt.is_finite() || !(1. / 240. ..=1.).contains(&dt) {
+            return Err(incant_nav::NavigationError::Invalid("steering time step".into()).into());
+        }
+        Ok(incant_nav::steer(request, dt as f32)?)
     }
 
     /// Raycast the committed planar solver; pending numeric/structural writes

@@ -12,7 +12,9 @@ pub use resources::{NavigationAsset, NavigationResources};
 mod shortcut;
 mod steering;
 mod surface;
-pub use steering::{SteeringAgent, SteeringObstacle, SteeringQuery, SteeringVelocity, steer};
+pub use steering::{
+    SteeringAgent, SteeringId, SteeringObstacle, SteeringQuery, SteeringVelocity, steer,
+};
 mod types;
 pub use build::{NavigationMesh, RebuildReport};
 pub use path::{NavigationPath, PathRequest};

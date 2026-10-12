@@ -10,6 +10,7 @@ serde.workspace = true
 schemars.workspace = true
 thiserror.workspace = true
 sha2.workspace = true
+incant_types = { path = "../incant_types" }
 rerecast = { version = "=0.4.0", default-features = false, features = ["std", "libm"] }
 glam = { version = "=0.32.1", features = ["libm"] }
 dodgy_2d = "=0.5.5"

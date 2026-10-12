@@ -20,6 +20,7 @@ pub(super) enum Kind {
     Triggers2D,
     Navigation,
     Grid,
+    Steering,
 }
 pub(super) enum Request {
     Localize(incant_localization::LocalizeRequest),
@@ -37,6 +38,7 @@ pub(super) enum Request {
     Triggers2D,
     Navigation(StableId, incant_runtime::PathRequest),
     Grid(StableId, incant_runtime::GridPathRequest),
+    Steering(incant_runtime::SteeringQuery),
 }
 pub(super) enum ResultData {
     Localized(incant_localization::LocalizedText),
@@ -50,12 +52,14 @@ pub(super) enum ResultData {
     Triggers2D(Vec<incant_runtime::TriggerEvent2D>),
     Navigation(Option<incant_runtime::NavigationPath>),
     Grid(Option<incant_runtime::GridPath>),
+    Steering(Vec<incant_runtime::SteeringVelocity>),
 }
 pub(super) fn parse<'js>(
     kind: Kind,
     ctx: &Ctx<'js>,
     args: &[Value<'js>],
     scene: StableId,
+    dt: f64,
 ) -> rquickjs::Result<Request> {
     match kind {
         Kind::Localize | Kind::Locale | Kind::Number | Kind::Date | Kind::Report => {
@@ -63,6 +67,7 @@ pub(super) fn parse<'js>(
         }
         Kind::Navigation => crate::navigation_values::path(ctx, args),
         Kind::Grid => crate::navigation_values::grid(ctx, args),
+        Kind::Steering => crate::steering_values::parse(ctx, args, dt),
         Kind::Ray2D => crate::query_values_2d::ray(ctx, args).map(Request::Ray2D),
         Kind::Triggers2D if args.is_empty() => Ok(Request::Triggers2D),
         Kind::Triggers2D => Err(Exception::throw_type(
@@ -168,6 +173,7 @@ pub(super) fn materialize<'js>(ctx: &Ctx<'js>, data: ResultData) -> rquickjs::Re
         | ResultData::Report(_)) => crate::localization_values::materialize(ctx, data),
         ResultData::Navigation(path) => crate::navigation_values::path_value(ctx, path),
         ResultData::Grid(path) => crate::navigation_values::grid_value(ctx, path),
+        ResultData::Steering(velocities) => crate::steering_values::materialize(ctx, velocities),
         ResultData::Ray2D(hit) => crate::query_values_2d::hit(ctx, hit),
         ResultData::Triggers2D(events) => crate::query_values_2d::events(ctx, events),
         ResultData::Ray(Some(hit)) => ray_value(ctx, hit),

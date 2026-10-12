@@ -1,6 +1,6 @@
 use super::*;
 #[path = "../../incant_runtime/tests/support/navigation_queries.rs"]
-mod fixture;
+pub(super) mod fixture;
 use fixture::*;
 const OWNER: &str = "00000000000000000000000001";
 const MESH: &str = "{start:[-8,0,0],end:[8,0,0],snap_distance:1,max_visited:1000}";

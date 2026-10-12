@@ -37,6 +37,10 @@ pub use incant_nav::{
     GridPath, GridPathRequest, NavigationGeometry, NavigationGrid, NavigationPath,
     NavigationSettings, PathRequest, RebuildReport,
 };
+pub type SteeringAgent = incant_nav::SteeringAgent<incant_types::StableId>;
+pub type SteeringObstacle = incant_nav::SteeringObstacle<incant_types::StableId>;
+pub type SteeringQuery = incant_nav::SteeringQuery<incant_types::StableId>;
+pub type SteeringVelocity = incant_nav::SteeringVelocity<incant_types::StableId>;
 pub use navigation::{
     CookedNavigation, MAX_NAVIGATION_DEPENDENCIES, MAX_NAVIGATION_GRIDS, MAX_NAVIGATION_LINKS,
     MAX_NAVIGATION_MESHES, MAX_NAVIGATION_SOURCES, NativeNavigationGeometry, NativeNavigationLink,
