@@ -2958,7 +2958,12 @@
       "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-hud-preparation-main162.json"
     }
   },
-  "independent_review": "pending integration audit",
+  "independent_review": {
+    "accepted": true,
+    "path": "docs/spikes/evidence/native-wasm-hud-integration-review.json",
+    "sha256": "8d88200d04a471606349823f78550fd901da3927952e9379f5b1ec9f2a01510a",
+    "reviewed_manifest_sha256": "3f02b65e246494f5385d8e4fb467438508fcf9a4f40bc3fa9d85b91a1af2d09d"
+  },
   "limitations": [
     "Public exported guest is freshly compiled by the ordinary helper; no byte-identity claim against the distinct conformance guest build",
     "Module checkpoints remain explicitly refused",
