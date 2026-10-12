@@ -1,0 +1,93 @@
+[
+  {
+    "argv": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_ui",
+      "-p",
+      "incant_input",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "incant_game_player/native-window",
+      "--all-targets"
+    ],
+    "exit_code": 0
+  },
+  {
+    "argv": [
+      "./tools/cargo",
+      "clippy",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "native-window",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0
+  },
+  {
+    "argv": [
+      "./tools/cargo",
+      "run",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "native-window",
+      "--example",
+      "macos_text_retirement"
+    ],
+    "exit_code": 0
+  },
+  {
+    "argv": [
+      "python3",
+      "tools/check_runtime_dependencies.py",
+      "incant_game_player",
+      "--features",
+      "incant_game_player/native-window"
+    ],
+    "exit_code": 0
+  },
+  {
+    "argv": [
+      "./tools/cargo",
+      "fmt",
+      "--all",
+      "--check"
+    ],
+    "exit_code": 0
+  },
+  {
+    "argv": [
+      "python3",
+      "tools/generate_conventions.py",
+      "--check"
+    ],
+    "exit_code": 0
+  },
+  {
+    "argv": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit_code": 0
+  }
+]

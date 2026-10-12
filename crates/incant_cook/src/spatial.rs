@@ -114,7 +114,11 @@ pub(crate) fn cook(
             .mesh
             .as_ref()
             .ok_or_else(|| CookError::AnimationResource(entity.id.clone()))?;
-        node.animation = Some(animations.bind(&assets[&mesh.mesh], initial)?);
+        let graph = decode!("AnimationGraph", incant_doc::AnimationGraph);
+        node.animation = Some(animations.bind(&assets[&mesh.mesh], initial, graph.as_ref())?);
+        if let Some(ik) = decode!("AnimationIk", incant_doc::AnimationIk) {
+            node.ik = Some(animations.bind_ik(&assets[&mesh.mesh], node.entity, &ik)?);
+        }
     }
     if let Some(env) = decode!("EnvironmentLight", incant_doc::EnvironmentLight) {
         let texture = bind(project, &env.texture, VisualAssetKind::Texture, assets)?;

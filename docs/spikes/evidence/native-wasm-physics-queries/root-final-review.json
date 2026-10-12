@@ -1,0 +1,37 @@
+{
+  "at": "2026-10-12T14:39:33.326709+00:00",
+  "reviewer": "astra /root",
+  "verdict": "Accepted scoped production and historical actual-host evidence; integrate with current-main checks. Ordinary public physics-game shipping proof remains separate and in progress.",
+  "commit": "712d5d1cb05dfcea241b139ba63d8bf35754c192",
+  "evidence_sha256": "6f0cf06fee05af8b99fe4c9ab5afa7b0500dea4ac11c953d0be068cbb4b6a2a1",
+  "verified_now": {
+    "source_hashes": 20,
+    "test_probe_hashes": 9,
+    "logs": 21,
+    "receipts": 10
+  },
+  "tests_from_preserved_logs": {
+    "actual_hosts": {
+      "passed": 382,
+      "groups": 67,
+      "failed": 0,
+      "ignored": 0
+    },
+    "native": {
+      "passed": 190,
+      "groups": 29,
+      "failed": 0,
+      "ignored": 0
+    }
+  },
+  "source_review": "root-source-review-002.json",
+  "review_notes": [
+    "Previously reviewed ownership/epoch/solver-loan, atomic failure, ABI compatibility, scene-bearing events and quota invariants match all20 current production hashes.",
+    "Checked preserved guest tests cover both actual Wasmtime and wasm2c adapters, copied canonical native query oracles, failed-prefix rollback, guest traps and quota failures.",
+    "All21 compressed and decompressed log hashes and10 receipt hashes match; final checks and3 actual-host commands have exit0."
+  ],
+  "limitations": [
+    "After host restart /tmp artifacts are absent. 701 prepared-file and75 retained-artifact/3 private-source hashes are historical producer verification, not new independent direct artifact verification.",
+    "No full module/physics checkpoint, GPU/native pixel, phone performance, complete SDK or phase completion claim."
+  ]
+}

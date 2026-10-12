@@ -2,6 +2,7 @@
 #![forbid(unsafe_code)]
 
 mod atlas;
+pub mod editing;
 mod fonts;
 mod layout;
 mod raster;
@@ -10,7 +11,7 @@ pub use atlas::{
     AtlasConfig, AtlasEntry, GlyphAtlas, GlyphHandle, GlyphKey, MAX_ATLAS_BYTES, MAX_ATLAS_GLYPHS,
 };
 
-pub use fonts::{FontSource, MAX_FONT_BYTES, MAX_FONTS, MAX_TOTAL_FONT_BYTES};
+pub use fonts::{FontSource, MAX_FONT_BYTES, MAX_FONTS, MAX_TOTAL_FONT_BYTES, SharedFontSource};
 pub use layout::{Glyph, Line, MAX_TEXT_BYTES, ShapedText, TextEngine, TextStyle, Wrap};
 
 /// Borrowed admission check for one packaged sfnt face. No font names, system

@@ -124,27 +124,40 @@ impl StaticModule {
         self.run(world, dt, epoch)
     }
     fn run(&mut self, world: &mut NativeWorld, dt: f64, epoch: i64) -> Result<(), StaticError> {
-        let mut context = Context {
-            capability: &mut self.capability,
-            error: None,
-        };
-        // SAFETY: same live instance and call-local exclusive context; C catches
-        // all traps and only invokes Rust callbacks synchronously.
-        let status = unsafe {
-            (self.exports.update)(
-                self.instance.as_ptr(),
-                dispatch,
-                (&mut context as *mut Context<'_>).cast(),
-                epoch,
-                dt,
-            )
-        };
-        if status != 0 || context.error.is_some() {
-            let error = context.error.take().unwrap_or(if status == -3 {
-                StaticError::Fuel
-            } else {
-                StaticError::Trap(status)
-            });
+        let result = world
+            .with_numeric_physics(|_, queries| -> Result<(), StaticError> {
+                self.capability.bind_physics(epoch, queries)?;
+                let mut context = Context {
+                    capability: &mut self.capability,
+                    error: None,
+                };
+                // SAFETY: same live instance and call-local exclusive context; C catches
+                // all traps and only invokes Rust callbacks synchronously.
+                let status = unsafe {
+                    (self.exports.update)(
+                        self.instance.as_ptr(),
+                        dispatch,
+                        (&mut context as *mut Context<'_>).cast(),
+                        epoch,
+                        dt,
+                    )
+                };
+                let error = context.error.take();
+                self.capability.revoke_physics();
+                if status != 0 || error.is_some() {
+                    let error = error.unwrap_or(if status == -3 {
+                        StaticError::Fuel
+                    } else {
+                        StaticError::Trap(status)
+                    });
+                    self.capability.abort();
+                    return Err(error);
+                }
+                Ok(())
+            })
+            .map_err(|e| StaticError::Boundary(e.into()))
+            .and_then(|r| r);
+        if let Err(error) = result {
             self.capability.abort();
             return Err(error);
         }

@@ -1,0 +1,84 @@
+{
+  "reviewer": "/root/integrate_runtime_prs",
+  "at": "2026-10-12T04:26:26.365345+00:00",
+  "state": "CHANGES_REQUESTED_ON_FREEZE002; OWNER_CORRECTION_PENDING_REVIEW",
+  "freeze": "/tmp/incant-wasm-steering-freeze-002.json",
+  "freeze_sha256": "7114418cdf7a0a21007900435ab6704401ea7a1a7810cf826fe15517f9b090dd",
+  "reviewed_sources": {
+    "Cargo.lock": "e3b38996c35515af571ffd2171e31c9430b29274b8013b8ad387ea05d7dfa3c2",
+    "crates/incant_wasm_abi/src/lib.rs": "1e9bc891100c15ee20f8b712986e3cfd4020a0eaea9b03705a500fd48f9b6fe3",
+    "crates/incant_wasm_abi/src/steering.rs": "06e6b3668577fbc26ceb39957e9f2ed448d7214e62737028c52c108646b27c41",
+    "crates/incant_wasm_abi/tests/steering.rs": "23e088df1192ada84ad32a0d4aa04f48598ffc2961756e5b26a02a87d21fe325",
+    "crates/incant_wasm_dev/src/generated.rs": "590813f5c5bac547181b817d544ce44062045c3f9a6e38697afe6c3b3836f5e1",
+    "crates/incant_wasm_dev/tests/steering_parity.rs": "7f19b0a32890e871331fa4155c132c903fe62060bd8ce229d057e423ccb3be2f",
+    "crates/incant_wasm_runtime/Cargo.toml": "66fa018fd176c4b33e0fe7ff2302ad682e204bf86d4cd3c2760b617dcd20c6f8",
+    "crates/incant_wasm_runtime/c/generated.h": "5e34b5b3e70c480c54bbf93df09c3fb1ffe5969098e29c78d2bd0b6c0be258ff",
+    "crates/incant_wasm_runtime/c/generated.inc": "5f2d175ec115baf0022e64cf10748250391653b41f0a9fe090acec107ccb0a9b",
+    "crates/incant_wasm_runtime/fixtures/steering-start.wat": "394a226026e896f625fa17655fb3ec8d7396d08f28a1783b506b5d17e9d5479e",
+    "crates/incant_wasm_runtime/fixtures/steering.wat": "15966a71881fe51d198363634d050a1a8c37712949855d3da0dde6d0f9690856",
+    "crates/incant_wasm_runtime/src/capability.rs": "3631adb85e4da900dad45f20782a627ffced725f80222f81e0705b6d880bccfc",
+    "crates/incant_wasm_runtime/src/generated.rs": "9f291c1770d60aac8e430cc7cb491398d919fb54b28cd83d0864a8d1efbf1127",
+    "crates/incant_wasm_runtime/src/input_tags.rs": "014bff2b987a53ef012ddf2e87ff013d58dba65e2a35f4c279f280158a503515",
+    "crates/incant_wasm_runtime/src/lib.rs": "2e9fa08aee265c0bce26073a765c3ef6ee133b7dbb07d9b7bcf708ff08b68fb0",
+    "crates/incant_wasm_runtime/src/steering.rs": "2ed7763aeb6be59b5b089526315b439b7c4f7d8357ce7a6747300feea5932f88",
+    "crates/incant_wasm_runtime/tests/steering.rs": "93dd07fef363754d5dca8885e6ba1f362e21328b015941c4c1e76ffdf9ef656a",
+    "sdk/abi/native-v1.json": "c86be2c58b04ec5861dbe3746f4ee39d2839587fca72fd41eebe1268382caafd",
+    "sdk/rust/fixtures/steering_failure.rs": "46d36bb0d7b472090fa6452ae40813059606ddc1d64f6db704575e8b20b3a66b",
+    "sdk/rust/samples/steering.rs": "97cdb55ee64da2fd8973c1bd5e0f6a815734088620529b34027c1a6c21499081",
+    "sdk/rust/src/lib.rs": "9a3e2be6d0cc60720cca742e7504a053477e7b72ce71913339b51b3f6cfcf60f",
+    "sdk/rust/src/raw.rs": "837619ece1c19e9bf5db537cea4cacfb672fdfab440e8927528d920594278f0d",
+    "sdk/rust/src/steering.rs": "6fa5caf31faa1291db6bb1048bdc689e01d681b36995ee4390c41bfc87bb3ef8",
+    "sdk/rust/src/tick.rs": "b18e2128714b11e087f6241023491ed89c0848db57951840b3b434909c55faee",
+    "tools/generate_wasm_sdk.py": "6ecae365e47c6b9ac55ea1fcf554d22b80901024b7e2ff51883cb60f727cc3cd",
+    "tools/probes/shipping-wasm2c.py": "a5fee914f9e0ce3bfff919675131fa920301f0f4c64e1b134950e6a96a19c98c",
+    "tools/tests/test_wasm_sdk.py": "a03d7ec71c321fa522ce4b84a0816d416945087d342a63c6aa7273c5cbb703bf",
+    "tools/wasm_abi.py": "b1d70a95e95f3e4bbff974dd08aef55ac1343803cf0e8a01e6f81895b35cc1b9"
+  },
+  "identity_check": "All28 matched on independent reread before owner started the correction. This receipt binds original frozen002; current source is changing after owner reaped002.",
+  "scope": "Source review: copied steering frame codec, generated Wasmtime/wasm2c dispatch, capability quotas/lifetime/atomic rollback, no_std SDK wrappers, real-host tests, registry/generator and proof preparation. Read-only; no extra build/GPU/provider.",
+  "findings": [
+    {
+      "priority": 2,
+      "file": "crates/incant_wasm_runtime/src/steering.rs",
+      "line": 55,
+      "title": "Validate original f64 domains before narrowing",
+      "detail": "Only dt is range-checked before conversion. Finite request numbers are narrowed to f32 before native solver validation, admitting near-boundary values which the established TypeScript boundary refuses. Examples include negative margin rounding to -0.0, horizon just below dt rounding to dt, radius below0.05 rounding to accepted minimum and position above10000 rounding to10000.",
+      "remedy": "Validate all original f64 scalar/vector/horizon/obstacle domains before narrowing, then retain native geometry checks and solver arithmetic. Test rollback after ignored boundary errors.",
+      "owner_followup": "Root reproduced22 accepted invalid cases in /tmp/incant-wasm-steering-rounding-before.log, then added23case rollback control and dual-host rounding fixture. Updated source/tests not accepted by this historical receipt."
+    }
+  ],
+  "conversion_examples": {
+    "negative_margin": {
+      "f64": -1e-50,
+      "f32": -0.0
+    },
+    "below_dt": {
+      "f64": 0.016666666665666668,
+      "f32": 0.01666666753590107
+    },
+    "dt": {
+      "f64": 0.016666666666666666,
+      "f32": 0.01666666753590107
+    },
+    "radius_below_min": {
+      "f64": 0.0499999999,
+      "f32": 0.05000000074505806
+    },
+    "position_above_max": {
+      "f64": 10000.00001,
+      "f32": 10000.0
+    }
+  },
+  "no_other_actionable_findings_in": [
+    "Exact-length/count/reserved-byte/finite/edge scans before bounded allocations",
+    "Host-owned encoded replies and complete destination-capacity/transfer checks",
+    "Authorized errors poison finish before numeric/structural/log publication; SDK errors poison callbacks",
+    "Registry namespace/opcode parity and unchanged prior layouts",
+    "Actual Rust/WAT test sources and bounded fresh guest preparation",
+    "README callback rename update-to-simulate avoids module! export collision"
+  ],
+  "limits": [
+    "Original002 conformance330tests/Clippy/3processes passed per owner; reviewer did not rerun. Corrected003 remains pending.",
+    "No world gathering/pathfinding/full SDK, graphics or device acceptance."
+  ]
+}

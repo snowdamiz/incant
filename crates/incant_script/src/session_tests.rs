@@ -9,6 +9,8 @@ use serde_json::json;
 fn check(vm: &SessionVm, source: &str) {
     match vm {
         SessionVm::Bytecode(host) => check_script(host, source),
+        #[cfg(feature = "wasmtime-host")]
+        SessionVm::DevelopmentWasm(_) => unreachable!(),
         #[cfg(feature = "static-module")]
         SessionVm::Static(_) => panic!("this regression expects a bytecode session"),
     }

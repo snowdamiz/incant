@@ -1,5 +1,5 @@
 use crate::{
-    FontSource, TextError,
+    FontSource, SharedFontSource, TextError,
     fonts::{Fonts, primary_family},
 };
 use cosmic_text::{Attrs, AttrsList, Buffer, BufferLine, LineEnding, LineIter, Metrics, Shaping};
@@ -108,6 +108,10 @@ pub struct TextEngine {
 
 impl TextEngine {
     pub fn new(fonts: Vec<FontSource>) -> Result<Self, TextError> {
+        Self::new_shared(fonts.into_iter().map(SharedFontSource::from).collect())
+    }
+    /// Shares immutable packaged bytes across bounded ordered font chains.
+    pub fn new_shared(fonts: Vec<SharedFontSource>) -> Result<Self, TextError> {
         let fonts = Fonts::new(fonts)?;
         Ok(Self {
             fonts,

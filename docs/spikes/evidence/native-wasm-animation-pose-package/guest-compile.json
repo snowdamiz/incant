@@ -1,0 +1,33 @@
+{
+  "wasm": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/guest-build/behavior.wasm",
+  "wasm_sha256": "b6a855796d51d2e6e05c3f1c78ceb17fcdfcc72e14615c978f4af77c2c969ac4",
+  "sdk": {
+    "target": "wasm32-unknown-unknown",
+    "edition": "2024",
+    "panic": "abort",
+    "opt_level": 2,
+    "source_sha256": {
+      "sdk/abi/native-v1.json": "3bc656e792ed9d84e934cd94eddacd91f275ec01e97cb0c74e33c28126874006",
+      "tools/rust_guest.py": "a01641b59eb8d39e9cd4de58d1a59e3aec97b19179ba52793623a42a725dd5cc",
+      "crates/incant_wasm_abi/src/lib.rs": "3300e0e1e130ae30031eeadea78265221ff2381d4c6f83f72994a7c7d25926be",
+      "crates/incant_wasm_abi/src/localization.rs": "8192b4afdbec79000c2fa52fb54425a7e30cffd5a20e44a8d9ea10edaef2eb62",
+      "crates/incant_wasm_abi/src/navigation_paths.rs": "b4cad03e82af1644bf4b6ad536e9addf298e8da8268ffa5b4d5e98320d5a3c87",
+      "crates/incant_wasm_abi/src/physics.rs": "e37093d0c5b0532888f1f356d6f1cdfa1339e83a2fa7dfbc3fd48e874ba58064",
+      "crates/incant_wasm_abi/src/steering.rs": "06e6b3668577fbc26ceb39957e9f2ed448d7214e62737028c52c108646b27c41",
+      "sdk/rust/src/animation.rs": "289cae8d4665c2ab66ab0884622393fe594ce0d13116209acecd5e61e3ec5ad2",
+      "sdk/rust/src/animation_graph.rs": "b2a742fcd9730f744fd378dbd38b8e2bab46d546dfb3c49daa5411bf7ed8c7f0",
+      "sdk/rust/src/animation_pose.rs": "f634be6ad26fc8e34f18b5424b66d95716929053f847653f032f8761c4c53206",
+      "sdk/rust/src/flipbook.rs": "4432747e8707e044aa63f6d22d679d1b88aec720805219d8d1f891c0e9969e65",
+      "sdk/rust/src/input.rs": "b088d9f4fe099abcf0247167e026193531bac854551103fff41b628be8bdbb63",
+      "sdk/rust/src/lib.rs": "4d156d2c9b18091082f850f623c8295e7b70a0359bc03ac8d34257ac8d35e7b6",
+      "sdk/rust/src/localization.rs": "ce245273fc4d5bfef18067ca32c839ef971a3cfa299d6d22674e26386ec7c6f9",
+      "sdk/rust/src/navigation.rs": "09fe00fa737c1aa4e066a25b63c9a0be2fc3c108188fc3b288faffa6c7698de4",
+      "sdk/rust/src/physics.rs": "9daecf44e1046dbfb34c7f124dc882c471afb0d0b980ebc9724ba2e1d1b79cbc",
+      "sdk/rust/src/raw.rs": "e78dfee830db5fc8a41af651333cf72246865ec5244a5561762cdadbf0ebc3da",
+      "sdk/rust/src/steering.rs": "6fa5caf31faa1291db6bb1048bdc689e01d681b36995ee4390c41bfc87bb3ef8",
+      "sdk/rust/src/tick.rs": "47297dfb684c4f0e83bd0f7933ceca2c0e5adcbdc8f3106e6310124d4573d004"
+    },
+    "repository_sdk_sources_retained": true,
+    "build_scripts_or_proc_macros": false
+  }
+}

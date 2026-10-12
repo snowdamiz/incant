@@ -4,6 +4,29 @@
 use incant_input::*;
 use rquickjs::{Array, Ctx, IntoJs, Object, Value, object::Property};
 
+// Property::from omits HAS_WRITABLE, which preserves an existing Array.length
+// descriptor. Explicitly clear writable through the safe descriptor trait.
+struct ReadonlyLength(u32);
+impl<'js> rquickjs::object::AsProperty<'js, u32> for ReadonlyLength {
+    fn config(
+        self,
+        ctx: &Ctx<'js>,
+    ) -> rquickjs::Result<(
+        rquickjs::object::PropertyFlags,
+        Value<'js>,
+        Value<'js>,
+        Value<'js>,
+    )> {
+        Ok((
+            (rquickjs::qjs::JS_PROP_HAS_VALUE | rquickjs::qjs::JS_PROP_HAS_WRITABLE)
+                as rquickjs::object::PropertyFlags,
+            self.0.into_js(ctx)?,
+            rquickjs::Undefined.into_js(ctx)?,
+            rquickjs::Undefined.into_js(ctx)?,
+        ))
+    }
+}
+
 fn object<'js>(ctx: &Ctx<'js>) -> rquickjs::Result<Object<'js>> {
     Object::new_proto(ctx.clone(), None)
 }
@@ -83,6 +106,49 @@ fn pad(value: GamepadButton) -> String {
 pub(crate) fn expose<'js>(ctx: &Ctx<'js>, frame: &InputFrame) -> rquickjs::Result<Object<'js>> {
     let result = object(ctx)?;
     field(&result, "focused", frame.focused)?;
+    let ui = object(ctx)?;
+    field(
+        &ui,
+        "focused",
+        match frame.ui.focused.as_deref() {
+            Some(id) => id.into_js(ctx)?,
+            None => Value::new_null(ctx.clone()),
+        },
+    )?;
+    field(&ui, "text_input", frame.ui.text_input)?;
+    field(&ui, "discarded_events", frame.ui.discarded_events)?;
+    let events = frame
+        .ui
+        .events
+        .iter()
+        .map(|event| {
+            let entry = object(ctx)?;
+            let (kind, id, value) = match event {
+                UiNotification::Activated { entity_id } => ("activated", entity_id, None),
+                UiNotification::ValueChanged { entity_id, value } => {
+                    ("value_changed", entity_id, Some(value))
+                }
+                UiNotification::Submitted { entity_id, value } => {
+                    ("submitted", entity_id, Some(value))
+                }
+            };
+            field(&entry, "kind", kind)?;
+            field(&entry, "entity_id", id.as_str())?;
+            if let Some(value) = value {
+                field(&entry, "value", value.as_str())?;
+            }
+            Ok(entry)
+        })
+        .collect::<rquickjs::Result<Vec<_>>>()?;
+    let events = array(ctx, events)?;
+    // The notification sequence is readonly too, including empty snapshots.
+    // A non-writable native length prevents append/resize without calling any
+    // guest-replaceable Object.freeze or introducing captured VM roots.
+    events
+        .as_object()
+        .prop("length", ReadonlyLength(events.len() as u32))?;
+    field(&ui, "events", events)?;
+    field(&result, "ui", ui)?;
     // KeyCode's public physical key spelling is its Rust/DOM variant name.
     field(
         &result,

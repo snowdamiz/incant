@@ -3,8 +3,8 @@ use crate::{
     transaction::{self, Chunk},
 };
 use incant_runtime::{
-    CookedEntity, FlipbookControl, FlipbookSnapshot, FrameCommands, NativeWorld, StableId,
-    StructuralCommand, WorldIdentity,
+    AnimationSnapshot, CookedEntity, FlipbookControl, FlipbookSnapshot, FrameCommands, NativeWorld,
+    StableId, StructuralCommand, WorldIdentity,
 };
 use incant_types::{Transform, Velocity};
 
@@ -25,7 +25,103 @@ const _: () = {
 /// Trusted host adapter operation; all integer arguments are guest offsets/indices.
 #[derive(Clone, Copy)]
 pub enum Call {
+    AnimationLenV5,
+    ReadAnimationsV5 {
+        ptr: i32,
+        capacity: i32,
+    },
+    AnimationIkLenV2,
+    ReadAnimationIkV2 {
+        ptr: i32,
+        capacity: i32,
+    },
+    AnimationGraphLenV2,
+    ReadAnimationGraphsV2 {
+        ptr: i32,
+        capacity: i32,
+    },
+    PhysicsQuery {
+        ptr: i32,
+        len: i32,
+    },
+    PhysicsEvents {
+        dimension: i32,
+    },
+    ReadPhysics {
+        ptr: i32,
+        capacity: i32,
+    },
+    FindPath {
+        ptr: i32,
+        len: i32,
+    },
+    FindGridPath {
+        ptr: i32,
+        len: i32,
+    },
+    ReadPath {
+        ptr: i32,
+        capacity: i32,
+    },
+    AnimationIkLen,
+    ReadAnimationIk {
+        ptr: i32,
+        capacity: i32,
+    },
+    ControlAnimationIk {
+        ptr: i32,
+        len: i32,
+    },
+    AnimationLenV4,
+    ReadAnimationsV4 {
+        ptr: i32,
+        capacity: i32,
+    },
+    AnimationLenV3,
+    ReadAnimationsV3 {
+        ptr: i32,
+        capacity: i32,
+    },
+    AnimationGraphLen,
+    ReadAnimationGraphs {
+        ptr: i32,
+        capacity: i32,
+    },
+    ControlAnimationGraph {
+        id: i32,
+        ptr: i32,
+    },
+    Steer {
+        ptr: i32,
+        len: i32,
+    },
+    ReadSteering {
+        ptr: i32,
+        capacity: i32,
+    },
+    AnimationLenV2,
+    ReadAnimationsV2 {
+        ptr: i32,
+        capacity: i32,
+    },
+    ControlAnimationV2 {
+        id: i32,
+        ptr: i32,
+    },
+    AnimationLen,
+    ReadAnimations {
+        ptr: i32,
+        capacity: i32,
+    },
+    ControlAnimation {
+        id: i32,
+        ptr: i32,
+    },
     Locale,
+    Format {
+        ptr: i32,
+        len: i32,
+    },
     Localize {
         ptr: i32,
         len: i32,
@@ -94,12 +190,32 @@ pub struct Capability {
     input_available: bool,
     flipbook_rows: Vec<FlipbookSnapshot>,
     flipbooks: Vec<u8>,
+    animation_rows: Vec<AnimationSnapshot>,
+    animations: Vec<u8>,
+    animations_v2: Vec<u8>,
+    animations_v3: Vec<u8>,
+    animation_scene: Option<StableId>,
+    animations_v4: Vec<u8>,
+    animations_v5: Vec<u8>,
+    animation_ik_v2: Vec<u8>,
+    animation_graphs_v2: Vec<u8>,
+    animation_graph_rows: Vec<incant_runtime::AnimationGraphSnapshot>,
+    animation_graphs: Vec<u8>,
+    animation_rejected: bool,
+    animation_ik_present: bool,
+    ik_rows: Vec<incant_runtime::IkSnapshot>,
+    animation_ik: Vec<u8>,
     transferred: usize,
     calls: usize,
     tick: u64,
     logs: crate::NativeLogs,
     tick_logs: crate::logging::TickLogs,
     localization: Option<crate::localization::State>,
+    steering: Option<crate::steering::State>,
+    query_units: usize,
+    navigation_queries: usize,
+    navigation: Option<crate::navigation_paths::State>,
+    physics: Option<crate::physics_queries::State>,
 }
 impl Capability {
     pub fn is_failed(&self) -> bool {
@@ -149,12 +265,51 @@ impl Capability {
             return Err(error);
         }
         self.commands.clear();
+        if let Err(error) = crate::animations::encode(
+            world,
+            &mut self.animation_rows,
+            &mut self.animations,
+            &mut self.animations_v2,
+        ) {
+            self.abort();
+            return Err(error);
+        }
+        self.animation_rejected = false;
+        if let Err(error) = world.snapshot_ik(&mut self.ik_rows) {
+            self.abort();
+            return Err(error.into());
+        }
+        self.animation_ik_present = !self.ik_rows.is_empty();
+        self.animation_ik.clear();
+        self.animation_scene = Some(world.scene_id());
+        self.animations_v3.clear();
+        self.animations_v4.clear();
+        self.animations_v5.clear();
+        self.animation_ik_v2.clear();
+        self.animation_graphs_v2.clear();
+        self.animation_graphs.clear();
+        if let Err(error) = world.snapshot_animation_graphs(&mut self.animation_graph_rows) {
+            self.abort();
+            return Err(error.into());
+        }
+        self.animation_graph_rows.sort_unstable_by_key(|r| r.entity);
         self.transferred = 0;
         self.calls = 0;
         self.tick_logs.clear();
         self.localization = Some(crate::localization::State::new(
             world.localization().clone(),
         ));
+        self.steering = Some(crate::steering::State::new(dt));
+        self.query_units = 0;
+        self.navigation_queries = 0;
+        self.physics = Some(crate::physics_queries::State::new(dt));
+        match world.navigation_snapshot() {
+            Ok(snapshot) => self.navigation = Some(crate::navigation_paths::State::new(snapshot)),
+            Err(error) => {
+                self.abort();
+                return Err(error.into());
+            }
+        }
         self.active = true;
         Ok(self.epoch)
     }
@@ -173,7 +328,56 @@ impl Capability {
         self.input_available = true;
         Ok(epoch)
     }
+    /// Bind the exact owning world's synchronous query loan once per callback.
+    /// A stale token cannot poison the current callback. Active misuse is sticky.
+    pub fn bind_physics(
+        &mut self,
+        epoch: i64,
+        queries: incant_runtime::NativeQueries,
+    ) -> Result<(), Error> {
+        if !self.active || self.epoch != epoch {
+            return Err(Error::Abi("expired physics epoch"));
+        }
+        let result = if Some(queries.identity()) != self.identity.as_ref() {
+            Err(Error::Abi("different physics world"))
+        } else {
+            self.physics
+                .as_mut()
+                .ok_or(Error::Abi("missing physics state"))?
+                .bind(queries)
+        };
+        if result.is_err()
+            && let Some(state) = &mut self.physics
+        {
+            state.reject();
+        }
+        result
+    }
+    /// Must run after the guest returns and before native commit. The owning
+    /// native loan independently revokes retained query capabilities on unwind.
+    pub fn revoke_physics(&mut self) {
+        if let Some(state) = &mut self.physics {
+            state.revoke();
+        }
+    }
+    fn physics_state(&mut self) -> Result<&mut crate::physics_queries::State, Error> {
+        self.physics
+            .as_mut()
+            .ok_or(Error::Abi("missing physics state"))
+    }
     pub fn abort(&mut self) {
+        self.animation_rows.clear();
+        self.ik_rows.clear();
+        self.animation_ik.clear();
+        self.animations.clear();
+        self.animations_v2.clear();
+        self.animations_v3.clear();
+        self.animations_v4.clear();
+        self.animations_v5.clear();
+        self.animation_ik_v2.clear();
+        self.animation_graphs_v2.clear();
+        self.animation_graph_rows.clear();
+        self.animation_graphs.clear();
         self.active = false;
         self.input_available = false;
         self.input.clear();
@@ -183,11 +387,44 @@ impl Capability {
         self.commands.clear();
         self.tick_logs.clear();
         self.localization = None;
+        self.steering = None;
+        self.navigation = None;
+        self.physics = None;
     }
     pub fn finish(&mut self, world: &mut NativeWorld) -> Result<(), Error> {
         if !self.active {
             return Err(Error::Abi("inactive ECS transaction"));
         }
+        if self
+            .physics
+            .as_ref()
+            .is_some_and(|s| s.rejected || s.bound())
+        {
+            self.abort();
+            return Err(Error::Abi("rejected or unrevoked physics loan"));
+        }
+        if self.steering.as_ref().is_some_and(|s| s.rejected)
+            || self.navigation.as_ref().is_some_and(|s| s.rejected)
+        {
+            self.abort();
+            return Err(Error::Abi("rejected navigation transaction"));
+        }
+        if self.animation_rejected {
+            self.abort();
+            return Err(Error::Abi("rejected animation transaction"));
+        }
+        self.animation_rows.clear();
+        self.ik_rows.clear();
+        self.animation_ik.clear();
+        self.animations.clear();
+        self.animations_v2.clear();
+        self.animations_v3.clear();
+        self.animations_v4.clear();
+        self.animations_v5.clear();
+        self.animation_ik_v2.clear();
+        self.animation_graphs_v2.clear();
+        self.animation_graph_rows.clear();
+        self.animation_graphs.clear();
         if self.tick_logs.rejected {
             self.abort();
             return Err(Error::Abi("rejected log transaction"));
@@ -197,6 +434,9 @@ impl Capability {
             return Err(Error::Abi("rejected localization transaction"));
         }
         self.localization = None;
+        self.steering = None;
+        self.navigation = None;
+        self.physics = None;
         self.active = false;
         self.input_available = false;
         self.input.clear();
@@ -282,6 +522,49 @@ impl Capability {
     /// Synchronous import; memory contains initialized guest bytes only and is
     /// borrowed for this call. No world observation/publication occurs here.
     pub fn invoke(&mut self, memory: &mut [u8], epoch: i64, call: Call) -> Result<i32, Error> {
+        let physics_authorized = self.active
+            && self.epoch == epoch
+            && matches!(
+                call,
+                Call::PhysicsQuery { .. } | Call::PhysicsEvents { .. } | Call::ReadPhysics { .. }
+            );
+        let steering_authorized = self.active
+            && self.epoch == epoch
+            && matches!(
+                call,
+                Call::Steer { .. }
+                    | Call::ReadSteering { .. }
+                    | Call::FindPath { .. }
+                    | Call::FindGridPath { .. }
+                    | Call::ReadPath { .. }
+            );
+        let animation_authorized = self.active
+            && self.epoch == epoch
+            && matches!(
+                call,
+                Call::AnimationLen
+                    | Call::ReadAnimations { .. }
+                    | Call::ControlAnimation { .. }
+                    | Call::AnimationIkLen
+                    | Call::ReadAnimationIk { .. }
+                    | Call::ControlAnimationIk { .. }
+                    | Call::AnimationLenV5
+                    | Call::ReadAnimationsV5 { .. }
+                    | Call::AnimationIkLenV2
+                    | Call::ReadAnimationIkV2 { .. }
+                    | Call::AnimationGraphLenV2
+                    | Call::ReadAnimationGraphsV2 { .. }
+                    | Call::AnimationLenV2
+                    | Call::ReadAnimationsV2 { .. }
+                    | Call::ControlAnimationV2 { .. }
+                    | Call::AnimationLenV4
+                    | Call::ReadAnimationsV4 { .. }
+                    | Call::AnimationLenV3
+                    | Call::ReadAnimationsV3 { .. }
+                    | Call::AnimationGraphLen
+                    | Call::ReadAnimationGraphs { .. }
+                    | Call::ControlAnimationGraph { .. }
+            );
         // Only an authorized localization call can poison its active epoch. This
         // wraps enter/memory/transfer checks as well as parsing/query dispatch;
         // stale tokens and unrelated operations retain their existing semantics.
@@ -290,11 +573,33 @@ impl Capability {
             && matches!(
                 call,
                 Call::Locale
+                    | Call::Format { .. }
                     | Call::Localize { .. }
                     | Call::ReadLocalized { .. }
                     | Call::SetLocale { .. }
             );
         let result = self.invoke_inner(memory, epoch, call);
+        if physics_authorized
+            && result.is_err()
+            && let Some(state) = &mut self.physics
+        {
+            state.reject();
+        }
+        if steering_authorized
+            && result.is_err()
+            && let Some(state) = &mut self.steering
+        {
+            state.reject();
+        }
+        if steering_authorized
+            && result.is_err()
+            && let Some(state) = &mut self.navigation
+        {
+            state.reject();
+        }
+        if animation_authorized && result.is_err() {
+            self.animation_rejected = true;
+        }
         if authorized
             && result.is_err()
             && let Some(state) = &mut self.localization
@@ -308,8 +613,393 @@ impl Capability {
         if memory.len() > limits::MEMORY {
             return Err(Error::Limit("linear memory"));
         }
+        if matches!(
+            call,
+            Call::AnimationGraphLen | Call::ReadAnimationGraphs { .. }
+        ) && self.animation_graph_rows.iter().any(|g| g.fade.is_some())
+        {
+            return Err(Error::Abi(
+                "animation graph v1 cannot represent compound fades",
+            ));
+        }
+        // These pose protocols have no post-sample IK payload. Refuse only
+        // pose observations; other module capabilities and native rendering
+        // remain usable. Every later pose ABI must preserve this admission.
+        if self.animation_ik_present
+            && matches!(
+                call,
+                Call::AnimationLen
+                    | Call::ReadAnimations { .. }
+                    | Call::AnimationLenV2
+                    | Call::ReadAnimationsV2 { .. }
+                    | Call::AnimationLenV3
+                    | Call::ReadAnimationsV3 { .. }
+                    | Call::AnimationLenV4
+                    | Call::ReadAnimationsV4 { .. }
+                    | Call::AnimationLenV5
+                    | Call::ReadAnimationsV5 { .. }
+            )
+        {
+            return Err(Error::Abi(
+                "animation snapshots cannot represent IK constraints",
+            ));
+        }
+        let units = match call {
+            Call::Locale | Call::Format { .. } | Call::Localize { .. } => {
+                incant_wasm_abi::LOCALIZATION_QUERY_UNITS
+            }
+            Call::Steer { .. }
+            | Call::FindPath { .. }
+            | Call::FindGridPath { .. }
+            | Call::PhysicsEvents { .. } => 1,
+            _ => 0,
+        };
+        self.query_units = self
+            .query_units
+            .checked_add(units)
+            .filter(|v| *v <= incant_wasm_abi::NATIVE_MAX_QUERY_UNITS)
+            .ok_or(Error::Limit("query units"))?;
+        if matches!(
+            call,
+            Call::Steer { .. } | Call::FindPath { .. } | Call::FindGridPath { .. }
+        ) {
+            self.navigation_queries = self
+                .navigation_queries
+                .checked_add(1)
+                .filter(|&n| n <= incant_wasm_abi::NAVIGATION_MAX_QUERIES)
+                .ok_or(Error::Limit("navigation query quota"))?;
+        }
         match call {
+            Call::PhysicsQuery { ptr, len } => {
+                let len = usize::try_from(len)
+                    .ok()
+                    .filter(|n| *n <= incant_wasm_abi::PHYSICS_MAX_REQUEST_BYTES)
+                    .ok_or(Error::Abi("physics request length"))?;
+                let region = range(ptr, len, memory.len())?;
+                self.transfer(len)?;
+                let batch = incant_wasm_abi::physics::decode_batch(&memory[region])
+                    .map_err(|_| Error::Abi("physics request"))?;
+                self.query_units = self
+                    .query_units
+                    .checked_add(batch.len())
+                    .filter(|n| *n <= incant_wasm_abi::NATIVE_MAX_QUERY_UNITS)
+                    .ok_or(Error::Limit("query units"))?;
+                return self.physics_state()?.query(batch);
+            }
+            Call::PhysicsEvents { dimension } => return self.physics_state()?.events(dimension),
+            Call::ReadPhysics { ptr, capacity } => {
+                let len = self.physics_state()?.reply()?.len();
+                let capacity = usize::try_from(capacity)
+                    .map_err(|_| Error::Abi("physics destination capacity"))?;
+                if capacity < len {
+                    return Err(Error::Abi("physics destination capacity"));
+                }
+                range(ptr, capacity, memory.len())?;
+                let region = range(ptr, len, memory.len())?;
+                self.transfer(len)?;
+                memory[region].copy_from_slice(self.physics_state()?.reply()?);
+                return Ok(len as i32);
+            }
+            Call::FindPath { ptr, len } | Call::FindGridPath { ptr, len } => {
+                let grid = matches!(call, Call::FindGridPath { .. });
+                let expected = if grid {
+                    incant_wasm_abi::navigation_paths::GRID_REQUEST_BYTES
+                } else {
+                    incant_wasm_abi::navigation_paths::PATH_REQUEST_BYTES
+                };
+                if usize::try_from(len).ok() != Some(expected) {
+                    return Err(Error::Abi("navigation request length"));
+                }
+                let region = range(ptr, expected, memory.len())?;
+                self.transfer(expected)?;
+                return self.navigation_state()?.query(&memory[region], grid);
+            }
+            Call::ReadPath { ptr, capacity } => {
+                let len = self.navigation_state()?.reply()?.len();
+                let capacity = usize::try_from(capacity)
+                    .map_err(|_| Error::Abi("navigation destination capacity"))?;
+                if capacity < len {
+                    return Err(Error::Abi("navigation destination capacity"));
+                }
+                range(ptr, capacity, memory.len())?;
+                let region = range(ptr, len, memory.len())?;
+                self.transfer(len)?;
+                memory[region].copy_from_slice(self.navigation_state()?.reply()?);
+                return Ok(len as i32);
+            }
+            Call::AnimationLenV5
+            | Call::ReadAnimationsV5 { .. }
+            | Call::AnimationIkLenV2
+            | Call::ReadAnimationIkV2 { .. }
+            | Call::AnimationGraphLenV2
+            | Call::ReadAnimationGraphsV2 { .. } => {
+                let graph = matches!(
+                    call,
+                    Call::AnimationGraphLenV2 | Call::ReadAnimationGraphsV2 { .. }
+                );
+                let ik = matches!(
+                    call,
+                    Call::AnimationIkLenV2 | Call::ReadAnimationIkV2 { .. }
+                );
+                if graph {
+                    if self.animation_graphs_v2.is_empty() {
+                        self.prepare_animation_snapshot(true);
+                        crate::animation_graphs_v2::encode(
+                            &self.animation_graph_rows,
+                            &self.animation_graphs,
+                            &mut self.animation_graphs_v2,
+                        );
+                    }
+                } else {
+                    if self.animations_v5.is_empty() {
+                        crate::animation_poses_v5::encode(
+                            self.animation_scene
+                                .ok_or(Error::Abi("animation scene absent"))?,
+                            &mut self.animation_rows,
+                            &mut self.animations_v5,
+                        )?;
+                    }
+                    if ik && self.animation_ik_v2.is_empty() {
+                        crate::animation_ik_v2::encode(
+                            &self.animation_rows,
+                            &self.animations_v5,
+                            &self.ik_rows,
+                            &mut self.animation_ik_v2,
+                        )?;
+                    }
+                }
+                let len = if graph {
+                    self.animation_graphs_v2.len()
+                } else if ik {
+                    self.animation_ik_v2.len()
+                } else {
+                    self.animations_v5.len()
+                };
+                if let Call::ReadAnimationsV5 { ptr, capacity }
+                | Call::ReadAnimationIkV2 { ptr, capacity }
+                | Call::ReadAnimationGraphsV2 { ptr, capacity } = call
+                {
+                    let capacity = usize::try_from(capacity)
+                        .map_err(|_| Error::Abi("animation destination capacity"))?;
+                    if capacity < len {
+                        return Err(Error::Abi("animation destination capacity"));
+                    }
+                    range(ptr, capacity, memory.len())?;
+                    let region = range(ptr, len, memory.len())?;
+                    self.transfer(len)?;
+                    let bytes = if graph {
+                        &self.animation_graphs_v2
+                    } else if ik {
+                        &self.animation_ik_v2
+                    } else {
+                        &self.animations_v5
+                    };
+                    memory[region].copy_from_slice(bytes);
+                }
+                return Ok(len as i32);
+            }
+            Call::AnimationIkLen | Call::ReadAnimationIk { .. } => {
+                if self.animation_ik.is_empty() {
+                    if self.animations_v4.is_empty() {
+                        crate::animation_poses::encode(
+                            self.animation_scene
+                                .ok_or(Error::Abi("animation scene absent"))?,
+                            &mut self.animation_rows,
+                            &mut self.animations_v4,
+                        )?;
+                    }
+                    crate::animation_ik::encode(
+                        &self.animation_rows,
+                        &self.animations_v4,
+                        &self.ik_rows,
+                        &mut self.animation_ik,
+                    )?;
+                }
+                let len = self.animation_ik.len();
+                if let Call::ReadAnimationIk { ptr, capacity } = call {
+                    let capacity = usize::try_from(capacity)
+                        .map_err(|_| Error::Abi("animation IK destination capacity"))?;
+                    if capacity < len {
+                        return Err(Error::Abi("animation IK destination capacity"));
+                    }
+                    range(ptr, capacity, memory.len())?;
+                    let region = range(ptr, len, memory.len())?;
+                    self.transfer(len)?;
+                    memory[region].copy_from_slice(&self.animation_ik);
+                }
+                return Ok(len as i32);
+            }
+            Call::ControlAnimationIk { ptr, len } => {
+                if usize::try_from(len).ok() != Some(incant_wasm_abi::AnimationIkCommand::SIZE) {
+                    return Err(Error::Abi("animation IK command length"));
+                }
+                let bytes =
+                    self.read::<{ incant_wasm_abi::AnimationIkCommand::SIZE }>(memory, ptr)?;
+                self.command(crate::animation_ik::command(&bytes)?)?;
+            }
+            Call::AnimationLenV4 | Call::ReadAnimationsV4 { .. } => {
+                if self.animations_v4.is_empty() {
+                    crate::animation_poses::encode(
+                        self.animation_scene
+                            .ok_or(Error::Abi("animation scene absent"))?,
+                        &mut self.animation_rows,
+                        &mut self.animations_v4,
+                    )?;
+                }
+                let len = self.animations_v4.len();
+                if let Call::ReadAnimationsV4 { ptr, capacity } = call {
+                    let capacity = usize::try_from(capacity)
+                        .map_err(|_| Error::Abi("animation pose destination capacity"))?;
+                    if capacity < len {
+                        return Err(Error::Abi("animation pose destination capacity"));
+                    }
+                    range(ptr, capacity, memory.len())?;
+                    let region = range(ptr, len, memory.len())?;
+                    self.transfer(len)?;
+                    memory[region].copy_from_slice(&self.animations_v4);
+                }
+                return Ok(len as i32);
+            }
+            Call::AnimationLenV3 | Call::AnimationGraphLen => {
+                let graph = matches!(call, Call::AnimationGraphLen);
+                self.prepare_animation_snapshot(graph);
+                if !graph && self.animations_v3.is_empty() {
+                    return Err(Error::Abi(
+                        "animation v3 cannot represent weighted tree poses",
+                    ));
+                }
+                return Ok(if graph {
+                    self.animation_graphs.len()
+                } else {
+                    self.animations_v3.len()
+                } as i32);
+            }
+            Call::ReadAnimationsV3 { ptr, capacity }
+            | Call::ReadAnimationGraphs { ptr, capacity } => {
+                let graph = matches!(call, Call::ReadAnimationGraphs { .. });
+                self.prepare_animation_snapshot(graph);
+                if !graph && self.animations_v3.is_empty() {
+                    return Err(Error::Abi(
+                        "animation v3 cannot represent weighted tree poses",
+                    ));
+                }
+                let len = if graph {
+                    self.animation_graphs.len()
+                } else {
+                    self.animations_v3.len()
+                };
+                let capacity = usize::try_from(capacity)
+                    .map_err(|_| Error::Abi("animation destination capacity"))?;
+                if capacity < len {
+                    return Err(Error::Abi("animation destination capacity"));
+                }
+                range(ptr, capacity, memory.len())?;
+                let region = range(ptr, len, memory.len())?;
+                self.transfer(len)?;
+                memory[region].copy_from_slice(if graph {
+                    &self.animation_graphs
+                } else {
+                    &self.animations_v3
+                });
+                return Ok(len as i32);
+            }
+            Call::ControlAnimationGraph { id, ptr } => {
+                let bytes =
+                    self.read::<{ incant_wasm_abi::AnimationGraphCommand::SIZE }>(memory, ptr)?;
+                let control = crate::animation_graphs::command(&bytes)?;
+                let entity = self.stable(memory, id)?;
+                self.command(StructuralCommand::ControlAnimationGraph { entity, control })?;
+            }
+            Call::Steer { ptr, len } => {
+                let len = usize::try_from(len).map_err(|_| Error::Abi("steering byte length"))?;
+                if len > incant_wasm_abi::STEERING_MAX_REQUEST_BYTES {
+                    return Err(Error::Limit("steering frame bounds"));
+                }
+                let region = range(ptr, len, memory.len())?;
+                self.transfer(len)?;
+                return self.steering_state()?.steer(&memory[region]);
+            }
+            Call::ReadSteering { ptr, capacity } => {
+                let len = self.steering_state()?.reply()?.len();
+                let capacity = usize::try_from(capacity)
+                    .map_err(|_| Error::Abi("steering destination capacity"))?;
+                if capacity < len {
+                    return Err(Error::Abi("steering destination capacity"));
+                }
+                range(ptr, capacity, memory.len())?;
+                let region = range(ptr, len, memory.len())?;
+                self.transfer(len)?;
+                memory[region].copy_from_slice(self.steering_state()?.reply()?);
+                return Ok(len as i32);
+            }
+            Call::AnimationLen | Call::AnimationLenV2 => {
+                let v2 = matches!(call, Call::AnimationLenV2);
+                if self.animations_v2.is_empty() {
+                    return Err(Error::Abi(
+                        "animation graph blend requires graph snapshot ABI",
+                    ));
+                }
+                if !v2 && self.animations.is_empty() {
+                    return Err(Error::Abi("active transitions require animation v2"));
+                }
+                return Ok(if v2 {
+                    self.animations_v2.len()
+                } else {
+                    self.animations.len()
+                } as i32);
+            }
+            Call::ReadAnimations { ptr, capacity } | Call::ReadAnimationsV2 { ptr, capacity } => {
+                let v2 = matches!(call, Call::ReadAnimationsV2 { .. });
+                if self.animations_v2.is_empty() {
+                    return Err(Error::Abi(
+                        "animation graph blend requires graph snapshot ABI",
+                    ));
+                }
+                if !v2 && self.animations.is_empty() {
+                    return Err(Error::Abi("active transitions require animation v2"));
+                }
+                let len = if v2 {
+                    self.animations_v2.len()
+                } else {
+                    self.animations.len()
+                };
+                let capacity = usize::try_from(capacity)
+                    .map_err(|_| Error::Abi("animation destination capacity"))?;
+                if capacity < len {
+                    return Err(Error::Abi("animation destination capacity"));
+                }
+                range(ptr, capacity, memory.len())?;
+                let region = range(ptr, len, memory.len())?;
+                self.transfer(len)?;
+                memory[region].copy_from_slice(if v2 {
+                    &self.animations_v2
+                } else {
+                    &self.animations
+                });
+                return Ok(len as i32);
+            }
+            Call::ControlAnimation { id, ptr } | Call::ControlAnimationV2 { id, ptr } => {
+                let bytes =
+                    self.read::<{ incant_wasm_abi::AnimationCommand::SIZE }>(memory, ptr)?;
+                let control = if matches!(call, Call::ControlAnimationV2 { .. }) {
+                    crate::animations::command_v2(&bytes)?
+                } else {
+                    crate::animations::command(&bytes)?
+                };
+                let entity = self.stable(memory, id)?;
+                self.command(StructuralCommand::ControlAnimation { entity, control })?;
+            }
             Call::Locale => return self.locale_state()?.locale(),
+            Call::Format { ptr, len } => {
+                let len =
+                    usize::try_from(len).map_err(|_| Error::Abi("localization byte length"))?;
+                if len != incant_wasm_abi::LOCALIZATION_FORMAT_BYTES {
+                    return Err(Error::Abi("localization format length"));
+                }
+                let region = range(ptr, len, memory.len())?;
+                self.transfer(len)?;
+                return self.locale_state()?.format(&memory[region]);
+            }
             Call::Localize { ptr, len } | Call::SetLocale { ptr, len } => {
                 let len =
                     usize::try_from(len).map_err(|_| Error::Abi("localization byte length"))?;
@@ -496,6 +1186,28 @@ impl Capability {
             }
         }
         Ok(0)
+    }
+    fn prepare_animation_snapshot(&mut self, graph: bool) {
+        if graph {
+            if self.animation_graphs.is_empty() {
+                crate::animation_graphs::encode(
+                    &self.animation_graph_rows,
+                    &mut self.animation_graphs,
+                );
+            }
+        } else if self.animations_v3.is_empty() {
+            crate::animations::encode_v3(&self.animation_rows, &mut self.animations_v3);
+        }
+    }
+    fn navigation_state(&mut self) -> Result<&mut crate::navigation_paths::State, Error> {
+        self.navigation
+            .as_mut()
+            .ok_or(Error::Abi("navigation capability absent"))
+    }
+    fn steering_state(&mut self) -> Result<&mut crate::steering::State, Error> {
+        self.steering
+            .as_mut()
+            .ok_or(Error::Abi("steering epoch unavailable"))
     }
     fn locale_state(&mut self) -> Result<&mut crate::localization::State, Error> {
         self.localization

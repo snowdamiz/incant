@@ -15,6 +15,7 @@ use std::{path::Path, sync::Arc};
 
 fn definition(fingerprint: [u8; 32]) -> Arc<NativeAnimation> {
     Arc::new(NativeAnimation {
+        graph: None,
         mesh_fingerprint: fingerprint,
         clip_durations: Arc::from([2.; 3]),
         initial: Animation {
@@ -262,3 +263,195 @@ fn complete_duration_table_checked_on_startup_and_atomic_rebinding() {
     assert_eq!(binding(&input, 1).animation, None); // Explicit rest-pose consumer.
     assert!(binding(&input, 3).animation.is_some());
 }
+
+#[path = "animation/crossfade.rs"]
+mod crossfade;
+
+#[test]
+fn source_deleted_graph_blend_drives_real_cpu_skin_pose_without_rebinding() {
+    let (dir, scene, definition) = prepare();
+    let graph = NativeAnimationGraph::new(
+        0,
+        vec![NativeAnimationParameter {
+            id: id(10),
+            initial: 0.25,
+            min: 0.0,
+            max: 1.0,
+        }],
+        vec![NativeAnimationGraphState {
+            id: id(20),
+            looping: true,
+            motion: NativeAnimationMotion::Blend1d {
+                parameter: 0,
+                cycle_seconds: 2.0,
+                points: Arc::from([
+                    NativeAnimationBlendPoint {
+                        threshold: 0.0,
+                        clip: 0,
+                    },
+                    NativeAnimationBlendPoint {
+                        threshold: 1.0,
+                        clip: 1,
+                    },
+                ]),
+            },
+        }],
+        vec![],
+        &definition.clip_durations,
+    )
+    .unwrap();
+    let mut definition = (*definition).clone();
+    definition.initial.clip = None;
+    definition.graph = Some(Arc::new(graph));
+    let assets = scene.visual_assets().to_vec();
+    let mut nodes = scene.spatial().to_vec();
+    nodes
+        .iter_mut()
+        .find(|n| n.entity == id(1))
+        .unwrap()
+        .animation = Some(Arc::new(definition));
+    let mut world = NativeWorld::new(scene.with_spatial(assets, nodes).unwrap());
+    let mut input = load(&dir, &world).unwrap();
+    let source = binding(&input, 1).source.clone();
+    let RuntimeAssetData::Model(model) = source.data() else {
+        panic!()
+    };
+    let mut left = AnimationPlayer::new(model).unwrap();
+    let mut right = AnimationPlayer::new(model).unwrap();
+    let mut blended = AnimationPlayer::new(model).unwrap();
+    dir.close().unwrap();
+    for _ in 0..30 {
+        world.step().unwrap();
+    }
+    let (result, allocations) = allocation_counter::record(|| {
+        input.try_sync(&world.spatial_view().unwrap(), |_, _, kind| {
+            assert_eq!(kind, UpdateKind::Motion);
+            Ok::<_, ()>(())
+        })
+    });
+    result.unwrap();
+    assert_eq!(allocations, 0);
+    let b = binding(&input, 1);
+    let target = b.animation.unwrap();
+    let blend = b.animation_blend.unwrap();
+    assert_eq!(blend.weight, 0.25);
+    assert_eq!(blend.sample.clip, Some(0));
+    assert_eq!(target.clip, Some(1));
+    assert!((target.seconds - 0.5).abs() < 1e-12);
+    use incant_assets_runtime::animation::ClipSample;
+    left.sample(Some(0), target.seconds).unwrap();
+    right.sample(Some(1), target.seconds).unwrap();
+    blended
+        .sample_blend(
+            ClipSample {
+                clip: blend.sample.clip.map(usize::from),
+                seconds: blend.sample.seconds,
+            },
+            ClipSample {
+                clip: target.clip.map(usize::from),
+                seconds: target.seconds,
+            },
+            blend.weight,
+        )
+        .unwrap();
+    // The fixture translates joint 1 and rotates joint 2. Independent TRS
+    // arithmetic checks shortest-arc quaternion blending, not matrix lerp.
+    let p = [2.0, 0.0, 0.0];
+    let a = left.skin_position(3, 0, 2, p).unwrap();
+    let b = right.skin_position(3, 0, 2, p).unwrap();
+    let actual = blended.skin_position(3, 0, 2, p).unwrap();
+    assert_ne!(a, b);
+    let angle = std::f64::consts::PI / 16.0;
+    let expected = [
+        11.375 + angle.cos() + angle.sin(),
+        1.0 + angle.sin() - angle.cos(),
+        0.0,
+    ];
+    for axis in 0..3 {
+        assert!(
+            (actual[axis] - expected[axis]).abs() < 1e-6,
+            "{actual:?} != {expected:?}"
+        );
+    }
+    assert!(Arc::ptr_eq(&source, &binding(&input, 1).source));
+}
+
+#[test]
+fn tree_pose_sync_retains_complete_weights_and_rolls_back_consumer_rejection() {
+    let (dir, scene, definition) = prepare();
+    let mut nodes = scene.spatial().to_vec();
+    let parameters: Arc<[_]> = vec![NativeAnimationParameter {
+        id: id(100),
+        initial: 0.25,
+        min: 0.0,
+        max: 1.0,
+    }]
+    .into();
+    let tree = NativeAnimationBlendTree::new(
+        vec![
+            NativeBlendTreeNode::Clip(Some(0)),
+            NativeBlendTreeNode::Clip(Some(1)),
+            NativeBlendTreeNode::Blend1d {
+                parameter: 0,
+                points: Arc::from([
+                    NativeBlendTreePoint {
+                        threshold: 0.0,
+                        child: 0,
+                    },
+                    NativeBlendTreePoint {
+                        threshold: 1.0,
+                        child: 1,
+                    },
+                ]),
+            },
+        ],
+        parameters.clone(),
+        definition.clip_durations.clone(),
+    )
+    .unwrap();
+    let graph = NativeAnimationGraph::new(
+        0,
+        parameters.to_vec(),
+        vec![NativeAnimationGraphState {
+            id: id(101),
+            motion: NativeAnimationMotion::Tree {
+                cycle_seconds: 2.0,
+                tree: Arc::new(tree),
+            },
+            looping: true,
+        }],
+        vec![],
+        &definition.clip_durations,
+    )
+    .unwrap();
+    let a = Arc::make_mut(nodes[0].animation.as_mut().unwrap());
+    a.initial.clip = None;
+    a.graph = Some(Arc::new(graph));
+    let scene = scene
+        .clone()
+        .with_spatial(scene.visual_assets().to_vec(), nodes)
+        .unwrap();
+    let mut world = NativeWorld::new(scene);
+    let mut input = load(&dir, &world).unwrap();
+    let before = binding(&input, 1).animation_pose.unwrap();
+    assert_eq!(before.samples().len(), 2);
+    world.step().unwrap();
+    let result = input.try_sync(&world.spatial_view().unwrap(), |_, _, _| {
+        Err::<(), _>("consumer refused")
+    });
+    assert!(result.is_err());
+    assert_eq!(binding(&input, 1).animation_pose, Some(before));
+    input
+        .try_sync(&world.spatial_view().unwrap(), |_, _, _| Ok::<_, ()>(()))
+        .unwrap();
+    let after = binding(&input, 1).animation_pose.unwrap();
+    assert_ne!(after, before);
+    assert_eq!(
+        after,
+        world.animation_graph_state(id(1)).unwrap().pose.unwrap()
+    );
+    assert!(binding(&input, 1).animation_blend.is_none());
+}
+
+#[path = "animation/ik.rs"]
+mod ik;

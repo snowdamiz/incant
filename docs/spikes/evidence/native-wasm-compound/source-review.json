@@ -1,0 +1,27 @@
+{
+  "at": "2026-10-12T18:01:37.304684+00:00",
+  "reviewer": "astra",
+  "result": "Source accepted for immutable ancestor, broad validation and ordinary shipping proof; no final integration/device claim",
+  "inventory": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-compound-source-freeze-004/inventory.json",
+  "inventory_sha256": "3a884074e77dfd80b1b90ccf349f91a4b3a317ccc5d35c8ab36d47520d230028",
+  "source_count": 40,
+  "reviewed": [
+    "Bounded v5 sparse pose descriptors retain separate inner interpolations and outer fade without flattening; all integer layout arithmetic bounded before slicing.",
+    "IK-v2 validates the complete nested v5 frame and sorted owner membership/constraint identities before borrowed views.",
+    "Graph-v2 binds sparse outgoing fade clocks to unique existing graph owners and rejects unsupported flags/nonfinite/invalid intervals.",
+    "Authorized epoch failures poison the atomic animation transaction; stale tokens do not. Read bounds and transfer limits precede memory copy. Caches clear with source epoch and controls do not mutate the pre-command snapshot.",
+    "Old operations0-46 and all prior enum/record/constant/magic/namespace definitions remain exact; six operations47-52 additive.",
+    "Public general standalone weighted pose capacity16 is intentional and covered; authored state/group capacity8 remains, and two groups total16 retain endpoints and semantics.",
+    "Inspected actual-host rollback/refusal regressions, SDK malformed-input tests and full compound/IK/graph observable guest. Final fresh shipping results remain pending."
+  ],
+  "resolved_questions": [
+    "Corrected v5 comment; clarified authored8 vs general16 capacity without reducing valid public API.",
+    "Private merge duplicate renderer blocks removed byte-for-byte to accepted21791; no renderer semantics introduced."
+  ],
+  "pending": [
+    "Final broad conformance",
+    "Fresh ordinary wasm2c export/full observations/refusals",
+    "Current-main integration and fast checks",
+    "Reference-device performance and appearance"
+  ]
+}

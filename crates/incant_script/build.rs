@@ -25,6 +25,7 @@ fn main() {
         Path::new("src/input.rs").into(),
         Path::new("src/flipbooks.rs").into(),
         Path::new("src/animations.rs").into(),
+        Path::new("src/animation_ik.rs").into(),
         Path::new("src/animation_commands.rs").into(),
         Path::new("src/commands.rs").into(),
         Path::new("src/audio_commands.rs").into(),
@@ -32,6 +33,7 @@ fn main() {
         Path::new("src/query_values.rs").into(),
         Path::new("src/query_values_2d.rs").into(),
         Path::new("src/navigation_values.rs").into(),
+        Path::new("src/steering_values.rs").into(),
         Path::new("src/localization_values.rs").into(),
         Path::new("src/schedule.rs").into(),
         Path::new("src/timers.rs").into(),
@@ -66,11 +68,17 @@ fn main() {
         "incant_2d",
         "incant_nav",
         "incant_localization",
+        "incant_ui",
+        "incant_text",
+        "incant_audio_runtime",
+        "incant_assets_runtime",
     ] {
         let dir = root.join("crates").join(name);
         hash_tree(&dir.join("src"), &mut runtime);
         hash_file(&dir.join("Cargo.toml"), &mut runtime);
     }
+    hash_tree(&root.join("third_party/kira/src"), &mut runtime);
+    hash_file(&root.join("third_party/kira/Cargo.toml"), &mut runtime);
     println!(
         "cargo:rustc-env=INCANT_CHECKPOINT_RUNTIME_ID={:x}",
         runtime.finalize()

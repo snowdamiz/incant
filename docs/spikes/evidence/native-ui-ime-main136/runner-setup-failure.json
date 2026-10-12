@@ -1,0 +1,12 @@
+{
+  "handle": 22170,
+  "exit": 1,
+  "stage": "protocol-build",
+  "error": "FileNotFoundError: rustc not on runner PATH; no compiler launched",
+  "passed_before_stop": [
+    "tests",
+    "clippy",
+    "editor-compile"
+  ],
+  "repair": "Use exact installed Rust1.99 compiler path; resume only unfinished commands; all source hashes unchanged."
+}

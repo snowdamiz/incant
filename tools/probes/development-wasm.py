@@ -32,6 +32,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
     parser.add_argument('--rustup', default='rustup')
+    parser.add_argument('--profile', choices=('dev', 'ci'), default='dev', help='Local conformance profile')
     parser.add_argument('--static-conformance', action='store_true', help='Reuse a prepared combined development/static test graph')
     args = parser.parse_args()
     feature = 'static-conformance' if args.static_conformance else 'wasmtime-host'
@@ -39,8 +40,10 @@ def main():
     rustc = Path(run([args.rustup, 'which', '--toolchain', '1.99.0', 'rustc']).strip())
     env = dict(os.environ, PATH=str(rustc.parent) + os.pathsep + os.environ.get('PATH', ''))
     cargo = ROOT / 'tools/cargo' if os.name != 'nt' else rustc.with_name('cargo.exe')
-    metadata = json.loads(run([cargo, 'metadata', '--locked', '--format-version=1',
-                               '--features', 'incant_wasm_dev/' + feature], cwd=ROOT, env=env))
+    # Audit shipping roots without selecting the optional development compiler.
+    # The real development example below explicitly enables its host feature.
+    metadata = json.loads(run([cargo, 'metadata', '--locked', '--format-version=1'],
+                              cwd=ROOT, env=env))
     names = {p['id']: p['name'] for p in metadata['packages']}
     nodes = {n['id']: n for n in metadata['resolve']['nodes']}
     shipping = ['incant_runtime', 'incant_script', 'incant_game_runtime',
@@ -59,7 +62,7 @@ def main():
                 raise SystemExit(f'Development compiler leaked into {root}: {names[ident]}')
             pending.extend(dep['pkg'] for dep in nodes[ident]['deps']
                            if any(kind['kind'] is None for kind in dep['dep_kinds']))
-    built = cargo_output([str(cargo), 'build', '-j2', '-p', 'incant_wasm_dev', '--features',
+    built = cargo_output([str(cargo), 'build', '--profile', args.profile, '-j2', '-p', 'incant_wasm_dev', '--features',
                           feature, '--example', 'development_module', '--locked',
                           '--message-format=json'], cwd=ROOT, env=env)
     if built.returncode:

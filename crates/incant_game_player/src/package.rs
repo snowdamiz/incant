@@ -60,7 +60,12 @@ pub fn expand(args: Vec<String>) -> Result<Vec<String>> {
         }
         if !matches!(
             key,
-            "--ticks" | "--output" | "--observe" | "--input-recording" | "--stop-after"
+            "--ticks"
+                | "--output"
+                | "--observe"
+                | "--input-recording"
+                | "--stop-after"
+                | "--ui-viewport"
         ) || options.contains_key(key)
         {
             return Err("unknown or duplicate native package option".into());
@@ -90,6 +95,8 @@ pub fn expand(args: Vec<String>) -> Result<Vec<String>> {
             path(root, "models")?,
             path(root, "textures")?,
             camera(&manifest)?,
+            "--font-cache".into(),
+            path(root, "fonts")?,
         ];
         if let Some(stop) = options.remove("--stop-after") {
             result.extend(["--stop-after".into(), stop]);
@@ -124,7 +131,15 @@ pub fn expand(args: Vec<String>) -> Result<Vec<String>> {
             path(root, "models")?,
             path(root, "textures")?,
             camera(&manifest)?,
+            "--font-cache".into(),
+            path(root, "fonts")?,
         ]);
+    }
+    if let Some(viewport) = options.remove("--ui-viewport") {
+        if manifest.camera.is_none() {
+            return Err("current composed UI package requires an explicit camera host".into());
+        }
+        result.extend(["--ui-viewport".into(), viewport]);
     }
     if let Some(plan) = options.remove("--observe") {
         result.extend(["--observe".into(), plan]);
@@ -197,10 +212,20 @@ mod tests {
             &offline[5..9],
             ["4", "48000", "audio.pcm", "--cpu-render-input"]
         );
-        assert_eq!(&offline[12..], ["--observe", "assertions.json"]);
+        assert_eq!(&offline[14..], ["--observe", "assertions.json"]);
+        let (settings, plan) = crate::observe::split_args(&offline);
+        assert_eq!(plan, Some("assertions.json"));
+        assert_eq!(settings.len(), 14);
+        #[cfg(feature = "render-input")]
+        assert!(matches!(
+            crate::session::settings(settings).unwrap(),
+            Some(crate::session::Settings::Cpu(_))
+        ));
         let window = expand(args(dir.path(), &["--window", "--stop-after", "3"])).unwrap();
         assert_eq!(window[0], "--window");
-        assert_eq!(&window[8..], ["--stop-after", "3"]);
+        assert_eq!(window[8], "--font-cache");
+        assert!(window[9].ends_with("fonts"));
+        assert_eq!(&window[10..], ["--stop-after", "3"]);
         assert!(expand(args(dir.path(), &["--window", "--output", "audio.pcm"])).is_err());
         assert!(
             expand(args(
@@ -216,6 +241,33 @@ mod tests {
             ))
             .is_err()
         );
+    }
+    #[cfg(feature = "render-input")]
+    #[test]
+    fn ui_font_and_observation_options_reach_the_same_composed_host() {
+        let dir = fixture();
+        let expanded = expand(args(
+            dir.path(),
+            &[
+                "--ticks",
+                "12",
+                "--output",
+                "out.pcm",
+                "--ui-viewport",
+                "320x200",
+                "--observe",
+                "plan.json",
+            ],
+        ))
+        .unwrap();
+        let (args, plan) = crate::observe::split_args(&expanded);
+        assert_eq!(plan, Some("plan.json"));
+        let Some(crate::session::Settings::Cpu(settings)) = crate::session::settings(args).unwrap()
+        else {
+            panic!("CPU host")
+        };
+        assert_eq!(settings.ui.unwrap().viewport, [320., 200.]);
+        assert!(settings.text.is_some());
     }
     #[test]
     fn tampered_or_indirected_startup_files_are_refused() {

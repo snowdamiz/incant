@@ -1,0 +1,47 @@
+{
+  "at": "2026-10-12T16:03:06.498142+00:00",
+  "reviewer": "astra root",
+  "decision": "accepted",
+  "review_scope": "Independent source and retained terminal proof audit; no fresh compilation or pixel/device review. Source review covered the public probe, Rust guest and direct native oracle.",
+  "producer_commit": "144be370e7ebae74ea225d96a75411f53703092a",
+  "packet_sha256": "9b319150e0ded85da39153963617cac211cc63fb3cc5db10e2eee897c84a58e6",
+  "source_hashes": {
+    "tools/probes/native-wasm-animation-pose-export.py": "7977df9c1cf49323349f8c0395a51e885af6845758f656ccc7ea850ed50401c4",
+    "tools/probes/native-wasm-animation-pose-export/behavior.rs": "9c42af82283c680ecb007786cca0d27dc040c7d7f9206daeadb90034a0317b8b",
+    "crates/incant_cook/examples/animation_pose_package_oracle.rs": "3900b876fd2ebd917d537fa35f041c2a8d79408743773040f386a9df19ae4b65",
+    "tools/probes/native-animation-graph-export.py": "6e116c6ab103a6e40c64da6586160cd49336530854390986aa3850052d6a9f49",
+    "tools/export_native.py": "a22f6431bb6db373982970e53a219f1f57633c538e08055bcafacefa887699a1"
+  },
+  "artifact_verification": {
+    "logs": 75,
+    "receipts": 43,
+    "all_original_and_compressed_hashes_match": true,
+    "commands": 30,
+    "command_streams": 60,
+    "exact_refusals": 11,
+    "package_files_including_symbols_and_build_receipts": 14,
+    "private_removed_files_absent": 17,
+    "source_deleted_shipping_processes": 3,
+    "native_oracle_scalar_comparisons_per_report": {
+      "development": 3420,
+      "run-0": 3420,
+      "run-1": 3420,
+      "run-2": 3420
+    },
+    "selected_vector_checks_per_report": 228,
+    "scene_sha256": "6e89faa4def736162ffb83ef34f9bca37199fec2fb026d10a2d1a5278ed5dc9c",
+    "pcm_bytes_per_process": 128000,
+    "player_sha256": "8e5a3ca16c0353dde682c28ea3083bb0b7530dcefe6a3dba712a119ad9456c0b"
+  },
+  "findings": [],
+  "limitations": [
+    "Actual local desktop CPU package; no GPU/rendered/device/performance or phase gate.",
+    "Eight active weighted samples; nonzero tree fades/composite operands remain unsupported.",
+    "Whole guest checkpoints explicitly unsupported; gameplay counter lives in native ECS, not module global state.",
+    "Only newly created proof source/cache/build/maps are removed; repository and shared engine build storage are retained.",
+    "Package failures prove exact diagnostics and absence of output publication; accepted host conformance separately proves staged prefix rollback.",
+    "Metadata observes destination playback flags and timed elapsed/duration, not outgoing playback flags.",
+    "One ordinary cold export, three new packaged processes; no cross-platform/current-main/release gate."
+  ],
+  "integration_requirement": "Revalidate accepted source union against actual main147/current lock before PR/merge; standalone proof is not current-main or release acceptance."
+}

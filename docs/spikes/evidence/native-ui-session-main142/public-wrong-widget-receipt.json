@@ -1,0 +1,6 @@
+{
+  "name": "wrong-widget",
+  "returncode": 1,
+  "stdout": "",
+  "stderr": "Error: Checkpoint(Ui(Invalid(\"widget order or duplicate\")))\n"
+}

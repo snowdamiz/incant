@@ -1,0 +1,14 @@
+{
+  "time": "2026-10-12T14:55:08.651135+00:00",
+  "root": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-preflight",
+  "removed": {
+    "behavior.wasm": "578632e8c2e1b7e58b555d9a51acc7ee2e50d258867b8fce927f11393d6f6295",
+    "schema-project.json": "1b76f4ef9e9a8351ac98dfbda8b7c05c11f97fe29ac2faaec04d75d2cb365070",
+    "schema.journal.jsonl": "29a510e96145f9c22a99ef2353cd90b71ddb4e9f25f3201693f8812f24fb5ee0",
+    "rust-sdk-libraries/incant_module.sha256": "863613bbde9e82aca151cd9de5171d5d57b91c047daf0c6940189053b1fe3618",
+    "rust-sdk-libraries/incant_wasm_abi.sha256": "3c920700e45e17c810d9b69a631b8ce449946519523433f559dd00d514835441",
+    "rust-sdk-libraries/libincant_module.rlib": "5362d36c421d401aa89f70d036532a07533b44713ecac13bba7dc5c618f0b9a9",
+    "rust-sdk-libraries/libincant_wasm_abi.rlib": "217803613653dbb4da374359f9fa8072afc9ef2922c8fbde1d297ec9ce5432e7"
+  },
+  "preserved": "Logs, compiler/schema receipts and independent native oracle executable remain. Only explicitly listed newly created private preflight inputs removed before final package002 processes."
+}

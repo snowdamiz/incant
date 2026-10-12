@@ -1,0 +1,69 @@
+{
+  "reviewer": "astra/native_wasm_export",
+  "scope": "Independent nonvisual source/CPU evidence review; no GPU/window execution or edits in owner worktree",
+  "base_commit": "2b5ebcd9e3443813226f19943f89e572fe436ef8",
+  "freeze": "/tmp/incant-native-ui-window-freeze-006.json",
+  "freeze_sha256": "1cc8ef738760837a91cdfaad97f53e4c32ac8181abfbbe7055a0ef0b680388ab",
+  "source_sha256": {
+    "crates/incant_ui/src/focus.rs": "ba7bdbee17b957eeba6e18aa80c2d4002ce0e84f05c427052ed893ebfdb55523",
+    "crates/incant_game_player/src/window/input.rs": "981d9a43f00540b02cc6805a1b0a717db17154eab1a735f38579429ca8e05803",
+    "crates/incant_game_player/src/window/mod.rs": "a119d60a5f5e8d4f5a1de9caac31f4fe8590af3f5f42455585f8b7db45052b18",
+    "crates/incant_game_player/src/window/ui_input.rs": "4e3351319edcb18340700fe590f83db1ed133afe1fa4d5d047fe10242d49bac4",
+    "crates/incant_game_player/src/window/ui_input/tests.rs": "096750a4c7d2b0f6198015716bb83e8e83c2b45d594441c1b73a2f05e6bc9a61"
+  },
+  "decision": "Scoped native-window input source and CPU evidence accepted at immutable88ad9d8892e81857deefb98929c32366c64d73c0; no remaining source findings in this first slice.",
+  "remaining_findings": [],
+  "resolved_findings": [
+    {
+      "priority": 2,
+      "issue": "Resize published a new hit-test layout before a frame displayed it when no simulation tick was due.",
+      "resolution": "Resize now reserves a surface before CPU layout publication, refreshes/consumes that reservation in the same callback, and fences pointer delivery until presented. Failed reservation leaves old layout accepted."
+    },
+    {
+      "priority": 2,
+      "issue": "A new click with unknown cursor position after resize could fall through to gameplay.",
+      "resolution": "Interactive layouts suppress unknown-position presses until a real cursor sample; HUD/no-UI path retains passthrough."
+    },
+    {
+      "priority": 2,
+      "issue": "Temporary surface timeout cleared queued typing and later fabricated blur/resume cleared text focus without OS blur.",
+      "resolution": "Separate retained surface_retry preserves physical and text queues and accepted focus/preedit; resume from this cause does not inject Focus(false,true). Real focus loss/suspend/nonpresentable transitions reset receipt ownership."
+    },
+    {
+      "priority": 2,
+      "issue": "Gamepad releases were still dropped while suspended for a preserved surface retry, leaving prior held controls latched.",
+      "resolution": "Shared accepts_delivery predicate admits native callbacks and gamepad poll through temporary waits, with an actual GamepadAdapter to InputRuntime held/release regression."
+    }
+  ],
+  "verified_contracts": [
+    "Bounded UI event count and aggregate text bytes before owned text copy",
+    "Arc owner/layout generation/delivery epoch fencing with canonical hit logic",
+    "CancelPointer never activates a released widget and preserves text/preedit",
+    "Owned candidate state and pending receipts remain separate from accepted publication",
+    "Physical key ingress never synthesizes characters; pinned Tao0.37.1 platform text stream split avoids ordinary duplicate text",
+    "No-UI event admission and tick path retain prior behavior",
+    "New layout publication and pointer readiness require a consumed frame",
+    "Queued text across surface deferral and actual blur controls",
+    "Gamepad held/released continuation through preserved surface deferral"
+  ],
+  "checks": [
+    {
+      "path": "/tmp/incant-native-ui-window-tests-006.log",
+      "sha256": "91bad10c4527e923495cf9e26653947e6319acdf4fbacb67d17da0fb2f5c006f",
+      "passed": 72,
+      "failed": 0
+    },
+    {
+      "path": "/tmp/incant-native-ui-window-clippy-006.log",
+      "sha256": "f0474aaf975b37f06fe294a8f429b76ff80ae8b4404cc09474437f27f3d438aa",
+      "passed": true
+    }
+  ],
+  "limits": [
+    "Native screen-space GPU consumer is still explicitly required before window UI can start.",
+    "Managed OS preedit/activation and composition-origin fencing remain a separate next slice.",
+    "This review does not execute an OS window, GPU draw, IME service or phone, and does not approve appearance/performance/phase gates."
+  ],
+  "implementation_commit": "88ad9d8892e81857deefb98929c32366c64d73c0",
+  "owner_check_process": "93337 confirmed terminal0/reaped by owner; final log identities independently verified"
+}

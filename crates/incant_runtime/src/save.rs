@@ -1,6 +1,8 @@
 //! Explicit bounded world checkpoints, never the tick path. Hashes detect
 //! corruption, not origin or authorization. VM/host state is a separate boundary.
 mod codec;
+mod graph_fade;
+mod ik;
 use crate::flipbook::Playback;
 use crate::world::{Local, Motion};
 use crate::{CookedEntity, CookedScene, CookedSpatial, NativeWorld, SceneError};
@@ -10,6 +12,10 @@ use thiserror::Error;
 pub use codec::MAX_SAVE_BYTES;
 #[derive(Debug, Error, PartialEq)]
 pub enum SaveError {
+    #[error("UI declarations require a bound v7 save and a separate hosted widget checkpoint")]
+    UiUnsupported,
+    #[error("text bindings are unsupported in an unbound legacy save")]
+    TextUnsupported,
     #[error("localization is unsupported in a legacy v1/v2 save")]
     LocalizationUnsupported,
     #[error("invalid native world save: {0}")]
@@ -40,11 +46,14 @@ impl NativeWorld {
     /// the fixed-step clock. Navigation geometry is
     /// saved; bounded query caches are rebuilt on load. No asset files are read.
     ///
+    /// V7 includes UI declarations, not mutable hosted widget state. Composed
+    /// sessions must separately include every widget buffer, selection and focus.
     /// This is NOT a game-session/VM checkpoint: input, timers, callbacks, script
     /// heap and external FrameCommands are not included. Hosts must discard old
     /// pending commands/path results and explicitly restore their own state.
-    /// Physics/audio-used worlds refuse, even after removing their declarations;
-    /// contacts, sleep, trigger history and audio cursors must never reset silently.
+    /// Physics-used worlds refuse, even after removing their declarations.
+    /// V8 audio declarations are data only: a composed session must additionally
+    /// save its exact retained mixer owner; world bytes never resume audio cursors.
     /// Dirty navigation refuses until committed apply/step. Numeric loans cannot
     /// overlap this shared borrow. Saving never mutates the running world.
     pub fn save_bytes(&self) -> Result<Vec<u8>, SaveError> {
@@ -77,6 +86,7 @@ impl NativeWorld {
             })
             .collect();
         let scene = CookedScene::new(self.scene_id(), self.tick_rate, entities)?
+            .with_audio(self.audio_nodes().map(|(node, _)| node.clone()).collect())?
             .with_localization(self.localization.clone())?
             .with_spatial(self.visual_assets.clone(), spatial)?
             .with_navigation(
@@ -84,6 +94,30 @@ impl NativeWorld {
                     .nodes
                     .iter()
                     .map(|n| (**n).clone())
+                    .collect(),
+            )?
+            .with_text(
+                self.font_assets.clone(),
+                self.text_ids
+                    .iter()
+                    .map(|&id| crate::CookedText {
+                        entity: id,
+                        text: self
+                            .world
+                            .get::<crate::text::TextComponent>(self.entities[&id])
+                            .expect("text index")
+                            .0
+                            .clone(),
+                    })
+                    .collect(),
+            )?
+            .with_ui(
+                self.ui
+                    .iter()
+                    .map(|(&entity, node)| crate::CookedUi {
+                        entity,
+                        node: std::sync::Arc::clone(node),
+                    })
                     .collect(),
             )?;
         // Stable-ID order is independent of ECS table/archetype insertion order.
@@ -105,21 +139,39 @@ impl NativeWorld {
                     .map(|p| (id, p.state))
             })
             .collect::<Vec<_>>();
+        let graphs = self
+            .entities
+            .iter()
+            .filter_map(|(&id, &handle)| {
+                self.world
+                    .get::<crate::animation::Playback>(handle)
+                    .and_then(|p| p.graph.map(|g| (id, g)))
+            })
+            .collect::<Vec<_>>();
+        self.validate_ik_catalog(&self.ik_catalog)?;
+        let mut ik = Vec::new();
+        self.snapshot_ik(&mut ik)
+            .map_err(|_| SaveError::Invalid("IK snapshot"))?;
         codec::encode(
             self.tick,
             self.source_scene_fingerprint,
             &scene.to_bytes(),
             &states,
             &animations,
+            &graphs,
+            self.ui_used,
+            self.audio_used,
+            &ik,
         )
     }
 
-    /// Load validated data without source/project/asset-cache access. V2–v4 retain
+    /// Load validated data without source/project/asset-cache access. V2–v7 retain
     /// the original cooked-scene fingerprint for later program pairing; it is not
     /// authentication and does not restore a VM. Legacy v1 has no original binding
     /// field: its fingerprint describes only the saved plain scene. V3 adds localized
-    /// scenes and v4 adds animation playback; older saves cannot silently clear
-    /// an existing locale/catalog.
+    /// scenes, v4 adds animation playback, v5 adds active crossfades, and v6 adds exact graph state; older saves cannot silently clear
+    /// an existing locale/catalog. V7 additionally retains committed UI
+    /// declarations and sticky UI history; widget buffers/focus are separate.
     pub fn from_save_bytes(bytes: &[u8]) -> Result<Self, SaveError> {
         let decoded = codec::decode(bytes)?;
         let scene = CookedScene::from_bytes(decoded.scene)?;
@@ -127,6 +179,9 @@ impl NativeWorld {
             return Err(SaveError::LocalizationUnsupported);
         }
         if decoded.origin.is_none() {
+            if scene.has_text() {
+                return Err(SaveError::TextUnsupported);
+            }
             if !scene.navigation().is_empty() {
                 return Err(SaveError::NavigationUnsupported);
             }
@@ -135,6 +190,12 @@ impl NativeWorld {
             }
         }
         check_scene_capabilities(&scene)?;
+        if decoded.version < 8 && !scene.audio().is_empty() {
+            return Err(SaveError::AudioUnsupported);
+        }
+        if decoded.version < 7 && scene.has_ui() {
+            return Err(SaveError::UiUnsupported);
+        }
         // Exact membership is required: no missing/extra/duplicate playback row
         // may silently install a default cursor after a valid nested scene load.
         let expected = scene
@@ -150,10 +211,22 @@ impl NativeWorld {
             .iter()
             .filter(|n| n.animation.is_some())
             .count();
-        if decoded.animations.len() != expected_animations * codec::ANIMATION_BYTES {
+        if decoded.animations.len()
+            != expected_animations * codec::animation_stride(decoded.version)
+        {
             return Err(SaveError::Invalid("animation membership"));
         }
+        let expected_graphs = scene
+            .spatial()
+            .iter()
+            .filter(|n| n.animation.as_ref().is_some_and(|a| a.graph.is_some()))
+            .count();
+        if decoded.graphs.len() != expected_graphs * codec::graph_stride(decoded.version) {
+            return Err(SaveError::Invalid("animation graph membership"));
+        }
+        let ik_states = ik::decode(&scene, decoded.ik)?;
         let mut world = Self::new(scene);
+        world.install_ik_states(ik_states);
         for row in decoded.states.as_chunks::<{ codec::STATE_BYTES }>().0 {
             let (id, checkpoint) = codec::state(row)?;
             let entity = *world
@@ -171,8 +244,7 @@ impl NativeWorld {
         }
         for row in decoded
             .animations
-            .as_chunks::<{ codec::ANIMATION_BYTES }>()
-            .0
+            .chunks_exact(codec::animation_stride(decoded.version))
         {
             let (id, state) = codec::animation(row)?;
             let entity = *world
@@ -189,7 +261,32 @@ impl NativeWorld {
                 .map_err(|_| SaveError::Invalid("animation checkpoint"))?;
             playback.state = state;
         }
+        for row in decoded
+            .graphs
+            .chunks_exact(codec::graph_stride(decoded.version))
+        {
+            let (id, graph) = codec::graph(row)?;
+            let entity = *world
+                .entities
+                .get(&id)
+                .ok_or(SaveError::Invalid("animation graph entity"))?;
+            let mut playback = world
+                .world
+                .get_mut::<crate::animation::Playback>(entity)
+                .ok_or(SaveError::Invalid("animation graph component"))?;
+            let definition = playback
+                .definition
+                .graph
+                .as_ref()
+                .ok_or(SaveError::Invalid("animation graph definition"))?;
+            definition
+                .validate_state(&graph, playback.state, &playback.definition)
+                .map_err(|_| SaveError::Invalid("animation graph checkpoint"))?;
+            playback.graph = Some(graph);
+        }
         world.tick = decoded.tick;
+        world.ui_used |= decoded.ui_used;
+        world.audio_used |= decoded.audio_used;
         if let Some(origin) = decoded.origin {
             world.source_scene_fingerprint = origin;
         }
@@ -205,7 +302,13 @@ impl NativeWorld {
         initial: &CookedScene,
     ) -> Result<Self, SaveError> {
         check_scene_capabilities(initial)?;
-        let candidate = Self::from_save_bytes(bytes)?;
+        let mut candidate = Self::from_save_bytes(bytes)?;
+        if !initial.audio().is_empty() && !candidate.audio_used {
+            return Err(SaveError::AudioUnsupported);
+        }
+        if initial.has_ui() && !candidate.ui_used {
+            return Err(SaveError::UiUnsupported);
+        }
         if !codec::is_bound(bytes) {
             return Err(SaveError::Invalid("original scene binding required"));
         }
@@ -214,7 +317,15 @@ impl NativeWorld {
             initial.id(),
             initial.tick_rate(),
             initial.localization(),
+            initial.font_assets(),
         )?;
+        let catalog: std::sync::Arc<[_]> = initial
+            .spatial()
+            .iter()
+            .filter_map(|n| n.ik.clone())
+            .collect();
+        candidate.validate_ik_catalog(&catalog)?;
+        candidate.ik_catalog = catalog;
         Ok(candidate)
     }
 
@@ -224,11 +335,19 @@ impl NativeWorld {
     pub fn validate_save_compatibility(&self, candidate: &Self) -> Result<(), SaveError> {
         self.check_save_capabilities()?;
         candidate.check_save_capabilities()?;
+        candidate.validate_ik_catalog(&self.ik_catalog)?;
+        if self.audio_used && !candidate.audio_used {
+            return Err(SaveError::AudioUnsupported);
+        }
+        if self.ui_used && !candidate.ui_used {
+            return Err(SaveError::UiUnsupported);
+        }
         candidate.check_save_binding(
             Some(self.source_scene_fingerprint),
             self.scene_id(),
             self.tick_rate,
             &self.localization,
+            &self.font_assets,
         )
     }
 
@@ -238,8 +357,10 @@ impl NativeWorld {
         scene: crate::StableId,
         rate: u32,
         localization: &crate::NativeLocalization,
+        font_assets: &[crate::FontAssetRef],
     ) -> Result<(), SaveError> {
-        if self.localization.tables() != localization.tables()
+        if self.font_assets != font_assets
+            || self.localization.tables() != localization.tables()
             || self.scene_id() != scene
             || self.tick_rate != rate
             || origin.is_some_and(|origin| self.source_scene_fingerprint != origin)
@@ -260,12 +381,21 @@ impl NativeWorld {
         // The complete candidate decode validated framing and the supported
         // version. Both v3 and v4 carry the localization contract.
         let version = u32::from_le_bytes(bytes[8..12].try_into().unwrap());
+        if self.audio_used && version < 8 {
+            return Err(SaveError::AudioUnsupported);
+        }
+        if self.ui_used && version < 7 {
+            return Err(SaveError::UiUnsupported);
+        }
         if version < 3 && !self.localization.is_default() {
             return Err(SaveError::LocalizationUnsupported);
         }
         // Legacy data has no extended-state/origin contract. Do not let a plain
         // v1 payload silently clear a world's spatial/navigation capability.
         if !codec::is_bound(bytes) {
+            if !self.font_assets.is_empty() || !self.text_ids.is_empty() {
+                return Err(SaveError::TextUnsupported);
+            }
             if self.navigation_used {
                 return Err(SaveError::NavigationUnsupported);
             }
@@ -278,7 +408,10 @@ impl NativeWorld {
             self.scene_id(),
             self.tick_rate,
             &self.localization,
+            &self.font_assets,
         )?;
+        candidate.validate_ik_catalog(&self.ik_catalog)?;
+        candidate.ik_catalog = self.ik_catalog.clone();
         // V1 never carried the origin fingerprint. A matching live destination
         // retains its own known origin; the restored data cannot replace it.
         candidate.source_scene_fingerprint = self.source_scene_fingerprint;
@@ -293,15 +426,31 @@ impl NativeWorld {
         candidate
             .navigation
             .invalidate_after_restore(&self.navigation)?;
+        candidate.text_generation = self
+            .text_generation
+            .checked_add(1)
+            .ok_or(SaveError::Invalid("text generation exhausted"))?;
+        candidate.ui_generation = self
+            .ui_generation
+            .checked_add(1)
+            .ok_or(SaveError::Invalid("UI generation exhausted"))?;
         candidate.identity = self.identity.clone();
         *self = candidate;
         Ok(())
     }
 
+    /// A composed save must also capture its retained UI widget owner, even
+    /// after the last UI declaration was removed. World bytes alone do not
+    /// represent text edits, selection, focus or any native input context.
+    pub fn requires_ui_checkpoint(&self) -> bool {
+        self.ui_used
+    }
+
+    /// Audio declarations/history require a separate retained mixer checkpoint.
+    pub fn requires_audio_checkpoint(&self) -> bool {
+        self.audio_used
+    }
     fn check_save_capabilities(&self) -> Result<(), SaveError> {
-        if self.audio_used {
-            return Err(SaveError::AudioUnsupported);
-        }
         if self.physics_failed || self.physics_used || self.physics_2d_used {
             return Err(SaveError::PhysicsUnsupported);
         }
@@ -310,9 +459,6 @@ impl NativeWorld {
 }
 
 fn check_scene_capabilities(scene: &CookedScene) -> Result<(), SaveError> {
-    if !scene.audio().is_empty() {
-        return Err(SaveError::AudioUnsupported);
-    }
     if !scene.physics().is_empty()
         || !scene.physics_2d().is_empty()
         || scene

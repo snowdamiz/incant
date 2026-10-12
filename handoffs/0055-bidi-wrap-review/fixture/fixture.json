@@ -1,0 +1,228 @@
+{
+  "binary_sha256": "a2970ed925e60c6e8b7f7ed2a30052a0f5ffe3fe6d4f3009a6c73fea172ce4e1",
+  "project_sha256": "d8724010ef3dfaf4c800bc357b4d489a4c1116c5ab841afbcdaee1c476d9b6bf",
+  "cases_sha256": "2acc31105f26a58773aa8ecad371bbc7da16b24443fe4435c769bb19889cbc02",
+  "layout_sha256": "10ee2efc3ea1f5b2a5c32a3084aa9e513c604662f9aae182ee5ea786f02afbbe",
+  "scene": "01M4Q43G3THK5MNGHKJ0GAA11Y",
+  "cameras": {
+    "wrap": "00000000000000000000000010",
+    "narrow": "00000000000000000000000011"
+  },
+  "fonts": [
+    "01M4Q43G55VXYQD9R0CQ4QADNP",
+    "01M4Q43G67W3JEVPJ85W4RHDN5",
+    "01M4Q43G718117BPCX4HVDHDHK"
+  ],
+  "font_files": {
+    "NotoSans-Regular.ttf": "2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9",
+    "NotoSansArabic.ttf": "ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56",
+    "IncantCJKFixture.ttf": "3299d6ab8033fb1d163f892dfcb1b8838cf1c46935c329d82da6f7b9e27dad82"
+  },
+  "mesh": "01M4Q43G7QP88HVCDE0X1SAR8K",
+  "nodes": {
+    "mixed300": {
+      "group": "00000000000000000000000100",
+      "text": "00000000000000000000000200",
+      "translation": [
+        -2.96,
+        2.16,
+        0.0
+      ],
+      "guides": [
+        "00000000000000000000000300",
+        "00000000000000000000000301"
+      ]
+    },
+    "mixed180": {
+      "group": "00000000000000000000000101",
+      "text": "00000000000000000000000201",
+      "translation": [
+        1.0,
+        2.16,
+        0.0
+      ],
+      "guides": [
+        "00000000000000000000000302",
+        "00000000000000000000000303"
+      ]
+    },
+    "rtl250": {
+      "group": "00000000000000000000000102",
+      "text": "00000000000000000000000202",
+      "translation": [
+        -2.96,
+        0.9,
+        0.0
+      ],
+      "guides": [
+        "00000000000000000000000304",
+        "00000000000000000000000305"
+      ]
+    },
+    "rtl180": {
+      "group": "00000000000000000000000103",
+      "text": "00000000000000000000000203",
+      "translation": [
+        1.0,
+        0.8,
+        0.0
+      ],
+      "guides": [
+        "00000000000000000000000306",
+        "00000000000000000000000307"
+      ]
+    },
+    "mixed300_turned": {
+      "group": "00000000000000000000000104",
+      "text": "00000000000000000000000204",
+      "translation": [
+        -2.8,
+        -0.9,
+        0.0
+      ],
+      "guides": [
+        "00000000000000000000000308",
+        "00000000000000000000000309"
+      ]
+    },
+    "narrow60_glyph": {
+      "group": "00000000000000000000000105",
+      "text": "00000000000000000000000205",
+      "translation": [
+        7.1,
+        2.34,
+        0.0
+      ],
+      "guides": [
+        "00000000000000000000000310",
+        "00000000000000000000000311"
+      ]
+    },
+    "narrow60_word": {
+      "group": "00000000000000000000000106",
+      "text": "00000000000000000000000206",
+      "translation": [
+        12.4,
+        2.16,
+        0.0
+      ],
+      "guides": [
+        "00000000000000000000000312",
+        "00000000000000000000000313"
+      ]
+    },
+    "glyph15": {
+      "group": "00000000000000000000000107",
+      "text": "00000000000000000000000207",
+      "translation": [
+        12.4,
+        0.4,
+        0.0
+      ],
+      "guides": [
+        "00000000000000000000000314",
+        "00000000000000000000000315"
+      ]
+    },
+    "latin": {
+      "group": "00000000000000000000000108",
+      "text": "00000000000000000000000208",
+      "translation": [
+        8.1,
+        0.4,
+        0.0
+      ]
+    },
+    "arabic": {
+      "group": "00000000000000000000000109",
+      "text": "00000000000000000000000209",
+      "translation": [
+        8.1,
+        -0.04,
+        0.0
+      ]
+    },
+    "cjk": {
+      "group": "00000000000000000000000110",
+      "text": "00000000000000000000000210",
+      "translation": [
+        8.1,
+        -0.48,
+        0.0
+      ]
+    },
+    "short300": {
+      "group": "00000000000000000000000111",
+      "text": "00000000000000000000000211",
+      "translation": [
+        8.1,
+        -1.32,
+        0.0
+      ],
+      "guides": [
+        "00000000000000000000000322",
+        "00000000000000000000000323"
+      ]
+    }
+  },
+  "revision": 1,
+  "transcript": [
+    {
+      "argv": [
+        "incant_headless",
+        "init",
+        "/private/tmp/incant0055/fixture/authoring/project.json",
+        "--entities",
+        "0"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "incant_headless",
+        "import",
+        "/private/tmp/incant0055/fixture/authoring/project.json",
+        "NotoSans-Regular.ttf"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "incant_headless",
+        "import",
+        "/private/tmp/incant0055/fixture/authoring/project.json",
+        "NotoSansArabic.ttf"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "incant_headless",
+        "import",
+        "/private/tmp/incant0055/fixture/authoring/project.json",
+        "IncantCJKFixture.ttf"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "incant_headless",
+        "import",
+        "/private/tmp/incant0055/fixture/authoring/project.json",
+        "cube.gltf"
+      ],
+      "exit_code": 0
+    },
+    {
+      "rpc": [
+        "project.read",
+        "command.execute",
+        "project.read",
+        "project.save"
+      ],
+      "commands": 45
+    }
+  ],
+  "command_bus_only": true,
+  "journal_reopened": true
+}

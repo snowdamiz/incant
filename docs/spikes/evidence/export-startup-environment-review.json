@@ -1,0 +1,10 @@
+{
+  "at": "2026-10-12T15:41:06.640022+00:00",
+  "reviewer": "astra-root",
+  "accepted": true,
+  "commit": "d9747284f7ddbaceba6c7498698e5a2a6b131332",
+  "production_delta": "Remove synthetic HOME assignment; retain restricted PATH/TMP and platform environment keys",
+  "source_review": "Observable subprocess environment test covers removal and parent unchanged; Windows skip explicit; no shell argument interpolation",
+  "evidence_sha256": "7000e83ee9469f633c20065aa95f05886ebd37b356f6fc739993766a0e6fc962",
+  "scope": "exporter startup environment only; no standalone shipping or device gate"
+}

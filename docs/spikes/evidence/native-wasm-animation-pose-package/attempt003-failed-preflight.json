@@ -1,0 +1,9 @@
+{
+  "status": "positive development and first4 exact refusals passed; late fixture refused at wrong boundary",
+  "reason": "Supposed missing entity123 is an observation marker. Changed late command to absent entity90.",
+  "source_hashes": {
+    "tools/probes/native-wasm-animation-pose-export.py": "2aee9a248cb8c2adf54819e27191533d0cb240e388d2cdefa98929120186f8a1",
+    "tools/probes/native-wasm-animation-pose-export/behavior.rs": "867aa426fc592b75b90c71062cf2469f026d73fee5bc25a12db425c1982fbf7c",
+    "crates/incant_cook/examples/animation_pose_package_oracle.rs": "3900b876fd2ebd917d537fa35f041c2a8d79408743773040f386a9df19ae4b65"
+  }
+}

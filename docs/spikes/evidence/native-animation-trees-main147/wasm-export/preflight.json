@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "sources": {
+    "tools/probes/native-wasm-animation-pose-export.py": "7977df9c1cf49323349f8c0395a51e885af6845758f656ccc7ea850ed50401c4",
+    "tools/probes/native-wasm-animation-pose-export/behavior.rs": "9c42af82283c680ecb007786cca0d27dc040c7d7f9206daeadb90034a0317b8b",
+    "crates/incant_cook/examples/animation_pose_package_oracle.rs": "3900b876fd2ebd917d537fa35f041c2a8d79408743773040f386a9df19ae4b65",
+    "tools/probes/native-animation-graph-export.py": "6e116c6ab103a6e40c64da6586160cd49336530854390986aa3850052d6a9f49",
+    "tools/export_native.py": "a22f6431bb6db373982970e53a219f1f57633c538e08055bcafacefa887699a1"
+  },
+  "headless_sha256": "912b6c62751c42b1404449477b3df1e514ed5bdf206fe2ffde01f084204de78c",
+  "oracle_binary_sha256": "1ac6ae092e7be3a39d4bc3c263e5741ec07f179d3b35792aac49fd990393eb22",
+  "oracle_scene_sha256": "8a5f4b84e4abff568a70e6d96c723d8d8403ec89ae778552ffd73ab0302200f9",
+  "project_sha256": "d8d197a52a442f384dc517677ecddb755fcbb3a607fb8cf62352b464400d52f6",
+  "ticks": 20,
+  "complete_records": 60,
+  "records_per_tick": 3,
+  "sample_vectors_per_record": 16,
+  "metadata_vectors_per_record": 3,
+  "sample_vectors_per_tick": 48,
+  "metadata_vectors_per_tick": 9,
+  "bounded_vector_checks": 228,
+  "source_deleted": true,
+  "journal": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/authoring/project.journal.jsonl"
+}

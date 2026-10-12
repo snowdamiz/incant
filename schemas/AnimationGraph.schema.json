@@ -1,0 +1,393 @@
+{
+  "$defs": {
+    "AnimationBlendPoint": {
+      "additionalProperties": false,
+      "properties": {
+        "clip": {
+          "format": "uint16",
+          "maximum": 65535,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "threshold": {
+          "format": "double",
+          "type": "number"
+        }
+      },
+      "required": [
+        "threshold",
+        "clip"
+      ],
+      "type": "object"
+    },
+    "AnimationComparison": {
+      "enum": [
+        "less",
+        "less_equal",
+        "equal",
+        "greater_equal",
+        "greater"
+      ],
+      "type": "string"
+    },
+    "AnimationCondition": {
+      "additionalProperties": false,
+      "properties": {
+        "comparison": {
+          "$ref": "#/$defs/AnimationComparison"
+        },
+        "parameter": {
+          "type": "string"
+        },
+        "value": {
+          "format": "double",
+          "type": "number"
+        }
+      },
+      "required": [
+        "parameter",
+        "comparison",
+        "value"
+      ],
+      "type": "object"
+    },
+    "AnimationGraphState": {
+      "additionalProperties": false,
+      "properties": {
+        "looping": {
+          "type": "boolean"
+        },
+        "motion": {
+          "$ref": "#/$defs/AnimationMotion"
+        }
+      },
+      "required": [
+        "motion",
+        "looping"
+      ],
+      "type": "object"
+    },
+    "AnimationGraphTransition": {
+      "additionalProperties": false,
+      "properties": {
+        "after_seconds": {
+          "description": "Minimum committed time in the current state. None has no time condition.",
+          "format": "double",
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "conditions": {
+          "items": {
+            "$ref": "#/$defs/AnimationCondition"
+          },
+          "maxItems": 8,
+          "type": "array"
+        },
+        "fade_seconds": {
+          "description": "Nonzero fades currently require single-clip source and destination states.",
+          "format": "double",
+          "type": "number"
+        },
+        "from": {
+          "type": "string"
+        },
+        "priority": {
+          "description": "Lower values win, with transition ULID as the stable tie breaker.",
+          "format": "int16",
+          "maximum": 32767,
+          "minimum": -32768,
+          "type": "integer"
+        },
+        "to": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "from",
+        "to",
+        "priority",
+        "fade_seconds",
+        "conditions"
+      ],
+      "type": "object"
+    },
+    "AnimationMotion": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "clip": {
+              "format": "uint16",
+              "maximum": 65535,
+              "minimum": 0,
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "kind": {
+              "const": "clip",
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "cycle_seconds": {
+              "format": "double",
+              "type": "number"
+            },
+            "kind": {
+              "const": "tree",
+              "type": "string"
+            },
+            "tree": {
+              "$ref": "#/$defs/AnimationTree"
+            }
+          },
+          "required": [
+            "kind",
+            "cycle_seconds",
+            "tree"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "Adjacent threshold clips share one normalized clock. Values outside the\npoint interval clamp to its endpoints; no extrapolation or hidden child.",
+          "properties": {
+            "cycle_seconds": {
+              "format": "double",
+              "type": "number"
+            },
+            "kind": {
+              "const": "blend1d",
+              "type": "string"
+            },
+            "parameter": {
+              "type": "string"
+            },
+            "points": {
+              "items": {
+                "$ref": "#/$defs/AnimationBlendPoint"
+              },
+              "maxItems": 8,
+              "minItems": 2,
+              "type": "array"
+            }
+          },
+          "required": [
+            "kind",
+            "parameter",
+            "cycle_seconds",
+            "points"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "AnimationParameter": {
+      "additionalProperties": false,
+      "properties": {
+        "initial": {
+          "format": "double",
+          "type": "number"
+        },
+        "max": {
+          "format": "double",
+          "type": "number"
+        },
+        "min": {
+          "format": "double",
+          "type": "number"
+        }
+      },
+      "required": [
+        "initial",
+        "min",
+        "max"
+      ],
+      "type": "object"
+    },
+    "AnimationTree": {
+      "additionalProperties": false,
+      "properties": {
+        "nodes": {
+          "additionalProperties": {
+            "$ref": "#/$defs/AnimationTreeNode"
+          },
+          "type": "object"
+        },
+        "root": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "root",
+        "nodes"
+      ],
+      "type": "object"
+    },
+    "AnimationTreeNode": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "clip": {
+              "format": "uint16",
+              "maximum": 65535,
+              "minimum": 0,
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "kind": {
+              "const": "clip",
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "blend1d",
+              "type": "string"
+            },
+            "parameter": {
+              "type": "string"
+            },
+            "points": {
+              "items": {
+                "$ref": "#/$defs/AnimationTreePoint"
+              },
+              "maxItems": 8,
+              "minItems": 2,
+              "type": "array"
+            }
+          },
+          "required": [
+            "kind",
+            "parameter",
+            "points"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "children": {
+              "description": "Row-major children: y * x.len() + x.",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 64,
+              "minItems": 4,
+              "type": "array"
+            },
+            "kind": {
+              "const": "blend2d",
+              "type": "string"
+            },
+            "parameters": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 2,
+              "minItems": 2,
+              "type": "array"
+            },
+            "x": {
+              "items": {
+                "format": "double",
+                "type": "number"
+              },
+              "maxItems": 8,
+              "minItems": 2,
+              "type": "array"
+            },
+            "y": {
+              "items": {
+                "format": "double",
+                "type": "number"
+              },
+              "maxItems": 8,
+              "minItems": 2,
+              "type": "array"
+            }
+          },
+          "required": [
+            "kind",
+            "parameters",
+            "x",
+            "y",
+            "children"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "AnimationTreePoint": {
+      "additionalProperties": false,
+      "properties": {
+        "node": {
+          "type": "string"
+        },
+        "threshold": {
+          "format": "double",
+          "type": "number"
+        }
+      },
+      "required": [
+        "threshold",
+        "node"
+      ],
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "initial": {
+      "type": "string"
+    },
+    "parameters": {
+      "additionalProperties": {
+        "$ref": "#/$defs/AnimationParameter"
+      },
+      "type": "object"
+    },
+    "states": {
+      "additionalProperties": {
+        "$ref": "#/$defs/AnimationGraphState"
+      },
+      "type": "object"
+    },
+    "transitions": {
+      "additionalProperties": {
+        "$ref": "#/$defs/AnimationGraphTransition"
+      },
+      "type": "object"
+    }
+  },
+  "required": [
+    "initial",
+    "parameters",
+    "states",
+    "transitions"
+  ],
+  "title": "AnimationGraph",
+  "type": "object"
+}

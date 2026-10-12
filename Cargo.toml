@@ -1,7 +1,7 @@
 [workspace]
 resolver = "3"
 members = ["crates/*", "editor/app", "sdk/rust"]
-exclude = ["third_party/rerecast"]
+exclude = ["third_party/rerecast", "third_party/cosmic-text", "third_party/tao", "third_party/kira"]
 default-members = ["crates/*"]
 
 [workspace.package]
@@ -28,6 +28,7 @@ rquickjs = "=0.14.0"
 cpu-time = "=1.0.0"
 incant_assets_runtime = { path = "crates/incant_assets_runtime" }
 incant_text = { path = "crates/incant_text" }
+incant_ui = { path = "crates/incant_ui" }
 incant_audio_runtime = { path = "crates/incant_audio_runtime" }
 incant_types = { path = "crates/incant_types" }
 incant_runtime = { path = "crates/incant_runtime" }
@@ -75,4 +76,7 @@ strip = "none"
 split-debuginfo = "off"
 
 [patch.crates-io]
+kira = { path = "third_party/kira" }
 rerecast = { path = "third_party/rerecast" }
+cosmic-text = { path = "third_party/cosmic-text" }
+tao = { path = "third_party/tao" }

@@ -1,0 +1,14 @@
+{
+  "patch_sha256": "fc780f5e1a9f92f2c496833908f61ede5a71cc331c34f579a58ba27db979966c",
+  "metadata_sha256": "679bee49f0c46ce6417a3c31e3fdba548a42af52f6af4ff36b267bde8ffb044d",
+  "normal_closures": {
+    "incant_runtime": 223,
+    "incant_script": 238,
+    "incant_game_runtime": 319,
+    "incant_script_player": 239,
+    "incant_game_player": 325
+  },
+  "prior_failure_log": "/tmp/incant-wasm-steering-main128-checks-002/conformance/conformance-2.log",
+  "prior_failure_sha256": "1e846ffc1923f218342161d3892f9a26ff73dea93eed076d5a940aade70861b9",
+  "change": "Remove development feature selection only from shipping graph audit. All five roots/normal edges/denylist and actual example host feature preserved."
+}

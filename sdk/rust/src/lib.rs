@@ -5,11 +5,39 @@
 //! after a successful callback. Returning an error, or ignoring an error from an
 //! active Tick operation, traps the callback and rejects all its staged writes.
 #![no_std]
+pub mod animation;
+pub mod animation_graph;
+pub mod animation_graph_v2;
+pub use animation_graph_v2::{AnimationGraphFade, AnimationGraphSnapshotV2};
+pub mod animation_ik;
+pub mod animation_ik_v2;
+pub use animation_ik_v2::AnimationIkSnapshotV2;
+pub mod animation_pose;
+pub mod animation_pose_v5;
+pub use animation_pose_v5::{
+    AnimationPoseGroup, AnimationPoseKindV5, AnimationPosePlaybackV5, AnimationPoseSnapshotV5,
+    PoseInterpolation,
+};
 pub mod flipbook;
 pub mod input;
 pub mod localization;
+pub mod navigation;
+pub mod physics;
 mod raw;
+pub mod steering;
 mod tick;
+pub use animation::{
+    AnimationBlendKind, AnimationControl, AnimationPlayback, AnimationPoseBlend, AnimationSnapshot,
+    AnimationTransition,
+};
+pub use animation_graph::{
+    AnimationGraphControl, AnimationGraphKey, AnimationGraphParameter, AnimationGraphPlayback,
+    AnimationGraphSnapshot,
+};
+pub use animation_ik::{AnimationIkConstraint, AnimationIkSnapshot};
+pub use animation_pose::{
+    AnimationPoseKind, AnimationPosePlayback, AnimationPoseSample, AnimationPoseSnapshot,
+};
 pub use flipbook::{FlipbookSnapshot, Playback};
 pub use incant_wasm_abi::{ActionKind, GamepadButton, Key, LogLevel, MouseButton, TouchPhase};
 pub use input::InputSnapshot;
@@ -38,7 +66,11 @@ impl EntityId {
 pub type Transform = [f64; incant_wasm_abi::TRANSFORM_STRIDE];
 pub type Velocity = [f64; incant_wasm_abi::VELOCITY_STRIDE];
 pub const IDENTITY: Transform = [0., 0., 0., 0., 0., 0., 1., 1., 1., 1.];
-pub use incant_wasm_abi::{FLIPBOOK_MAX_BYTES, INPUT_MAX_BYTES};
+pub use incant_wasm_abi::{
+    ANIMATION_GRAPH_MAX_BYTES, ANIMATION_GRAPH_V2_MAX_BYTES, ANIMATION_IK_MAX_BYTES,
+    ANIMATION_IK_V2_MAX_BYTES, ANIMATION_MAX_BYTES, ANIMATION_V2_MAX_BYTES, ANIMATION_V3_MAX_BYTES,
+    ANIMATION_V4_MAX_BYTES, ANIMATION_V5_MAX_BYTES, FLIPBOOK_MAX_BYTES, INPUT_MAX_BYTES,
+};
 
 /// Export the versioned entry points. The callback receives a non-escapable Tick
 /// lifetime; errors trap before the host can publish its queued transaction.

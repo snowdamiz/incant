@@ -1,0 +1,6 @@
+{
+  "name": "no-clobber",
+  "returncode": 1,
+  "stdout": "",
+  "stderr": "Error: Os { code: 17, kind: AlreadyExists, message: \"File exists\" }\n"
+}

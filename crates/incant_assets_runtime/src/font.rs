@@ -99,7 +99,7 @@ fn open_file(path: &Path, limit: usize) -> Result<File> {
     Ok(file)
 }
 
-pub fn load_font(cache: &Path, fingerprint: &str) -> Result<CookedFont> {
+pub(crate) fn load_metadata(cache: &Path, fingerprint: &str) -> Result<FontMetadata> {
     let manifest = font_path(cache, fingerprint, "json")?;
     let mut json = Vec::new();
     open_file(&manifest, MAX_FONT_MANIFEST_BYTES)?
@@ -118,6 +118,12 @@ pub fn load_font(cache: &Path, fingerprint: &str) -> Result<CookedFont> {
     {
         return Err(invalid("font manifest version, dimensions or key mismatch"));
     }
+    Ok(metadata)
+}
+pub fn load_font(cache: &Path, fingerprint: &str) -> Result<CookedFont> {
+    load_data(cache, load_metadata(cache, fingerprint)?)
+}
+pub(crate) fn load_data(cache: &Path, metadata: FontMetadata) -> Result<CookedFont> {
     let blob = font_path(cache, &metadata.content_sha256, "ifont")?;
     let mut file = open_file(&blob, MAX_FONT_BYTES + FONT_HEADER_BYTES)?;
     let length = metadata.bytes as usize;

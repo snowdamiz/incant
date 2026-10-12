@@ -14,6 +14,16 @@ pub const MAX_FRAME_COMMANDS: usize = 65_536;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum StructuralCommand {
+    /// Replace/remove UI configuration against the same final native hierarchy.
+    SetUi {
+        entity: StableId,
+        node: Option<std::sync::Arc<crate::NativeUi>>,
+    },
+    /// Replace/remove text against the immutable startup font catalog.
+    SetText {
+        entity: StableId,
+        text: Option<std::sync::Arc<crate::NativeText>>,
+    },
     /// Replace committed runtime settings atomically; the catalog stays immutable.
     SetLocale(crate::LocaleSettings),
     /// Replace/remove checked navigation configuration at a committed boundary.
@@ -47,6 +57,14 @@ pub enum StructuralCommand {
     ControlAnimation {
         entity: StableId,
         control: crate::AnimationControl,
+    },
+    ControlIk {
+        entity: StableId,
+        control: crate::IkControl,
+    },
+    ControlAnimationGraph {
+        entity: StableId,
+        control: crate::AnimationGraphControl,
     },
     /// Pause/resume preserves phase; restart/seek resets it.
     ControlFlipbook {
@@ -137,7 +155,8 @@ struct Staged {
     topology_generation: u64,
     binding_generation: u64,
     flipbook_states: BTreeMap<StableId, crate::FlipbookState>,
-    animation_states: BTreeMap<StableId, crate::AnimationState>,
+    animation_states: BTreeMap<StableId, crate::animation::PreparedAnimationState>,
+    ik_states: BTreeMap<StableId, std::sync::Arc<[crate::AnimationIkSample]>>,
 }
 
 impl NativeWorld {
@@ -146,6 +165,7 @@ impl NativeWorld {
     /// Validation reads native values only; it never constructs a Project.
     pub fn apply(&mut self, commands: &mut FrameCommands) -> Result<(), RuntimeError> {
         self.ensure_usable()?;
+        let ui = self.prepare_ui(commands)?;
         let localization = self.prepare_locale(commands)?;
         if commands
             .iter()
@@ -179,9 +199,14 @@ impl NativeWorld {
                 c,
                 StructuralCommand::ControlFlipbook { .. }
                     | StructuralCommand::ControlAnimation { .. }
+                    | StructuralCommand::ControlAnimationGraph { .. }
+                    | StructuralCommand::ControlIk { .. }
             )
         }) {
             let states = self.prepare_flipbook_controls(commands, &BTreeMap::new(), |id| {
+                self.entities.contains_key(&id)
+            })?;
+            let ik = self.prepare_ik_controls(commands, &BTreeMap::new(), |id| {
                 self.entities.contains_key(&id)
             })?;
             let animations = self.prepare_animation_controls(commands, &BTreeMap::new(), |id| {
@@ -190,6 +215,7 @@ impl NativeWorld {
             let navigation = self.navigation_motion()?;
             self.install_flipbook_states(states);
             self.install_animation_states(animations);
+            self.install_ik_states(ik);
             if let Some(next) = navigation {
                 self.navigation = next;
             }
@@ -229,16 +255,21 @@ impl NativeWorld {
             commands.clear();
             return Ok(());
         }
+        let text = self.prepare_text(commands)?;
         // Component-only batches don't copy hierarchy metadata or inspect every
         // entity. In particular, toggling one mover scales with this batch.
         if commands.iter().all(|c| {
             matches!(
                 c,
                 StructuralCommand::SetLocale(_)
+                    | StructuralCommand::SetText { .. }
+                    | StructuralCommand::SetUi { .. }
                     | StructuralCommand::SetVelocity { .. }
                     | StructuralCommand::SetAngularVelocity { .. }
                     | StructuralCommand::SetAngularVelocity2D { .. }
                     | StructuralCommand::ControlAnimation { .. }
+                    | StructuralCommand::ControlAnimationGraph { .. }
+                    | StructuralCommand::ControlIk { .. }
                     | StructuralCommand::ControlFlipbook { .. }
                     | StructuralCommand::ControlAudio { .. }
             )
@@ -271,7 +302,11 @@ impl NativeWorld {
                         *entity
                     }
                     StructuralCommand::SetLocale(_)
+                    | StructuralCommand::SetText { .. }
+                    | StructuralCommand::SetUi { .. }
                     | StructuralCommand::ControlAnimation { .. }
+                    | StructuralCommand::ControlAnimationGraph { .. }
+                    | StructuralCommand::ControlIk { .. }
                     | StructuralCommand::ControlFlipbook { .. }
                     | StructuralCommand::ControlAudio { .. } => continue,
                     _ => unreachable!(),
@@ -338,6 +373,9 @@ impl NativeWorld {
                     )?;
                 }
             }
+            let ik = self.prepare_ik_controls(commands, &BTreeMap::new(), |id| {
+                self.entities.contains_key(&id)
+            })?;
             let animations = self.prepare_animation_controls(commands, &BTreeMap::new(), |id| {
                 self.entities.contains_key(&id)
             })?;
@@ -367,6 +405,7 @@ impl NativeWorld {
             }
             self.install_flipbook_states(playback);
             self.install_animation_states(animations);
+            self.install_ik_states(ik);
             self.install_velocities(velocities);
             if let Some(next) = navigation {
                 self.navigation = next;
@@ -407,6 +446,7 @@ impl NativeWorld {
             }
             self.install_flipbook_states(staged.flipbook_states);
             self.install_animation_states(staged.animation_states);
+            self.install_ik_states(staged.ik_states);
             for (id, node) in staged.audio {
                 self.install_audio(id, node);
             }
@@ -461,6 +501,8 @@ impl NativeWorld {
             self.parents = staged.parents;
             self.world.insert_resource(hierarchy);
         }
+        self.publish_text(text);
+        self.publish_ui(ui);
         if let Some(localization) = localization {
             self.localization = localization;
         }
@@ -530,6 +572,10 @@ impl NativeWorld {
                 StructuralCommand::Spawn(data) => {
                     if data.id == self.scene_id()
                         || self
+                            .font_assets
+                            .binary_search_by_key(&data.id, |a| a.id)
+                            .is_ok()
+                        || self
                             .visual_assets
                             .binary_search_by_key(&data.id, |a| a.id)
                             .is_ok()
@@ -557,7 +603,11 @@ impl NativeWorld {
                     navigation_changes.remove(id);
                 }
                 StructuralCommand::SetLocale(_)
+                | StructuralCommand::SetText { .. }
+                | StructuralCommand::SetUi { .. }
                 | StructuralCommand::ControlAnimation { .. }
+                | StructuralCommand::ControlAnimationGraph { .. }
+                | StructuralCommand::ControlIk { .. }
                 | StructuralCommand::ControlFlipbook { .. }
                 | StructuralCommand::ControlAudio { .. } => {}
                 StructuralCommand::SetParent { entity, parent } => {
@@ -652,6 +702,8 @@ impl NativeWorld {
         let audio = self.prepare_audio_controls(commands, audio, |id| parents.contains_key(&id))?;
         self.validate_audio_changes(&audio, &parents)?;
         let binding_generation = self.validate_spatial_changes(&spatial, &parents)?;
+        let ik_states =
+            self.prepare_ik_controls(commands, &spatial, |id| parents.contains_key(&id))?;
         let animation_states =
             self.prepare_animation_controls(commands, &spatial, |id| parents.contains_key(&id))?;
         let flipbook_states =
@@ -933,6 +985,7 @@ impl NativeWorld {
             binding_generation,
             flipbook_states,
             animation_states,
+            ik_states,
         })
     }
 }

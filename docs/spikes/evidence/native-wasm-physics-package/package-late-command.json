@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package/player/incant_game_player",
+    "--package",
+    "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package/player/data",
+    "--ticks",
+    "20",
+    "--input-recording",
+    "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/late-command-input.json",
+    "--output",
+    "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package-late-command.pcm"
+  ],
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Error: Session(Module(Boundary(Runtime(MissingEntity(StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 123]))))))\n",
+  "output_absent": true,
+  "expected_stderr": "Error: Session(Module(Boundary(Runtime(MissingEntity(StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 123]))))))"
+}

@@ -1,0 +1,22 @@
+{
+  "at": "2026-10-12T16:44:48.401413+00:00",
+  "accepted": true,
+  "reviewer": "astra root",
+  "evidence_sha256": "450f22a1b0c239ff75cadda759dff89743d31ff16270253fc233939a0c640c30",
+  "independently_verified": [
+    "1698 frozen inputs unchanged",
+    "Five implementation/workflow inputs match reviewed producers",
+    "Ten retained artifacts match original raw bytes",
+    "Eight commands zero;127CPUtests20groups nofailure/ignored recounted",
+    "Actual main148 ancestor, only docs changes after frozen testhead"
+  ],
+  "limitations": [
+    "No GPU, native-window, input injection or provider execution in these integration checks. The AppKit example compiles as a test harness, not executed as its main.",
+    "Original actual hidden AppKit baseline/fixed lifetime proof remains source-bound producer evidence. Fresh visible typing/IME review remains the separate Claude0058 task.",
+    "No Windows/Linux runtime result or complete IME/appearance/device/phase gate claimed.",
+    "Checkpoint11 remains failed/frozen. The separate0057 numerical-reference correction must pass actual future Linux and all required release checks."
+  ],
+  "required_before_merge": [
+    "Exact-head fast check SUCCESS; full interactive0058 remains separate"
+  ]
+}

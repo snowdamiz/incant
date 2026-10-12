@@ -1,0 +1,13 @@
+{
+  "recorded_at": "2026-10-12T04:44:22.488333+00:00",
+  "reviewer": "astra/root",
+  "patch_sha256": "fc780f5e1a9f92f2c496833908f61ede5a71cc331c34f579a58ba27db979966c",
+  "receipt_sha256": "7c5605ca530dc54583aa99fc019608e896755a42a7d603e114bd8827bbff6b9f",
+  "decision": "Accepted analogous metadata-only shipping feature correction in development child; rerun final child using same prepared bundle after preserving already passing actual-host tests and Clippy.",
+  "checks": [
+    "Read full patch; only metadata selector changed, shipping roots/traversal/denylist retained.",
+    "Actual development example still enables selected development host.",
+    "Verified frozen patch and original failure log identities."
+  ],
+  "pending": "Exact child outcome and reproduced prepared-bundle identity."
+}

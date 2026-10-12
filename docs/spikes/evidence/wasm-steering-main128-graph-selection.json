@@ -1,0 +1,25 @@
+{
+  "scope": "Shipping-root metadata is resolved without optional development Wasmtime selection; all original roots/normal edges and compiler denylist retained. Actual JIT/static test+Clippy and development process commands unchanged.",
+  "source": "91f90629cc771f145bc2f83c320b25e3da96d401 plus reviewed pending helper patch",
+  "artifacts": {
+    "/tmp/incant-wasm-steering-graph-selection.patch": "604378ee260eb7af2c90c676098b077422ed7422eb435ae2f6c7b0bd4c60ea0b",
+    "/tmp/incant-steering-failed-metadata.json": "eef2178825bb03f7c7ee816961d56b8395db9a95fbb420f9bfec2fa85aa31b48",
+    "/tmp/incant-steering-static-metadata.json": "5198ec1891958fa213b7f4a33d1b1e319ee7d50c7d4861710c8869d84ffe96c9",
+    "/tmp/incant-wasm-steering-main128-checks/actual-hosts.log": "9dbf1ff73b65783be55f6993ca3cd086ccb0688d3f54f2d01d30274f9d0d5e8f",
+    "/tmp/incant-wasm-steering-graph-metadata-tests.log": "27ba741d5b61ba7e7fed643533616d4459d77a1e08c56c2369a595c5f00c4248"
+  },
+  "observation": "Combined-development metadata yields optional incant_script->incant_wasm_dev->wasmtime edge while script resolved features are compiler/default/static-module. Shipping-only metadata passes all six original root traversals.",
+  "tests": "Three existing real subprocess stdout/stderr metadata regressions passed. Full integrated conformance retry pending review.",
+  "review_and_retained_logs": {
+    "docs/spikes/evidence/wasm-steering-graph-selection-root-review.json": "ebfbc8401d28307250a1ab5fcd4fe6d0bc88e6f69d7b33f601b2a3c66948e50a",
+    "docs/spikes/evidence/wasm-steering-main128-first-hosts.log.gz": {
+      "sha256": "043d37ca1f29ea11de73819e013762cb8939c48e144087a83db6d99440794799",
+      "uncompressed_sha256": "9dbf1ff73b65783be55f6993ca3cd086ccb0688d3f54f2d01d30274f9d0d5e8f"
+    },
+    "docs/spikes/evidence/wasm-steering-graph-metadata-tests.log.gz": {
+      "sha256": "5344da2efca4777d1789e050796c36c8ea7da2dd34ba1b83be708b87c51e8a07",
+      "uncompressed_sha256": "27ba741d5b61ba7e7fed643533616d4459d77a1e08c56c2369a595c5f00c4248"
+    }
+  },
+  "status": "Source correction accepted; integrated full actual-host retry follows on a frozen commit."
+}

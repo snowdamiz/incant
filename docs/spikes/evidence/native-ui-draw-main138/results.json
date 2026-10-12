@@ -1,0 +1,161 @@
+[
+  {
+    "name": "cpu-tests",
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--offline",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_ui",
+      "-p",
+      "incant_render_data",
+      "-p",
+      "incant_render",
+      "-p",
+      "incant_render_game",
+      "-p",
+      "incant_render_gpu_host",
+      "-p",
+      "incant_render_native",
+      "-p",
+      "incant_play",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "incant_game_player/native-window"
+    ],
+    "exit": 0,
+    "seconds": 109.6671082500252,
+    "log": "/tmp/incant-ui-draw-main138-checks/cpu-tests.log",
+    "sha256": "dc125c836f204604a31c68d2ec6d65bf090372c837795d9b4517ad9ac83cde4c"
+  },
+  {
+    "name": "clippy",
+    "command": [
+      "./tools/cargo",
+      "clippy",
+      "--locked",
+      "--offline",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_ui",
+      "-p",
+      "incant_render_data",
+      "-p",
+      "incant_render",
+      "-p",
+      "incant_render_game",
+      "-p",
+      "incant_render_gpu_host",
+      "-p",
+      "incant_render_native",
+      "-p",
+      "incant_play",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "incant_game_player/native-window",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit": 0,
+    "seconds": 11.60564350002096,
+    "log": "/tmp/incant-ui-draw-main138-checks/clippy.log",
+    "sha256": "af907e5bc0bb66dd8b147fcdd2154fb7c00d2d61af189f059dc8872c3058798d"
+  },
+  {
+    "name": "downstream",
+    "command": [
+      "./tools/cargo",
+      "check",
+      "--locked",
+      "--offline",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_headless",
+      "-p",
+      "incant_editor",
+      "--all-targets"
+    ],
+    "exit": 0,
+    "seconds": 34.90677304199198,
+    "log": "/tmp/incant-ui-draw-main138-checks/downstream.log",
+    "sha256": "cd3755e3d855cb18fdce7fcf4354f14ff447e30fa349f3828c0b403ed1f5fd65"
+  },
+  {
+    "name": "wasm32",
+    "command": [
+      "./tools/cargo",
+      "check",
+      "--locked",
+      "--offline",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_render",
+      "--lib",
+      "--target",
+      "wasm32-unknown-unknown"
+    ],
+    "exit": 0,
+    "seconds": 2.0777396660123486,
+    "log": "/tmp/incant-ui-draw-main138-checks/wasm32.log",
+    "sha256": "9008e1a4f5eb456691e6662535c6769eb4b58a91d462077056498517c7eb461e"
+  },
+  {
+    "name": "graph",
+    "command": [
+      "python3",
+      "tools/check_runtime_dependencies.py",
+      "incant_ui",
+      "incant_render",
+      "incant_render_game",
+      "incant_render_gpu_host",
+      "incant_game_runtime",
+      "incant_game_player",
+      "--features",
+      "incant_game_player/native-window"
+    ],
+    "exit": 0,
+    "seconds": 0.35909870799514465,
+    "log": "/tmp/incant-ui-draw-main138-checks/graph.log",
+    "sha256": "28c5ea0344450292217c0873900762453cece8d887cd00d17402f3d254ffaa2f"
+  },
+  {
+    "name": "fmt",
+    "command": [
+      "./tools/cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.9924269579933025,
+    "log": "/tmp/incant-ui-draw-main138-checks/fmt.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "conventions",
+    "command": [
+      "python3",
+      "tools/generate_conventions.py",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.02859591698506847,
+    "log": "/tmp/incant-ui-draw-main138-checks/conventions.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

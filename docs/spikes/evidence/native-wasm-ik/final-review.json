@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-12T17:18:46.210686+00:00",
+  "reviewer": "astra root",
+  "result": "accepted scoped CPU conformance and ordinary public package evidence; no remaining finding",
+  "manifest": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/docs/spikes/evidence/native-wasm-ik.json",
+  "manifest_sha256": "f264fd0a9a9801e1b9a6871c788de93e01cfd274db957b3cddb0856a7f0e927a",
+  "sources_verified": 29,
+  "unchanged_build_inputs_verified": 12,
+  "raw_gzip_logs_verified": 92,
+  "durable_and_original_artifacts_verified": 50,
+  "live_package_files_verified": 14,
+  "broad_tests": 418,
+  "broad_groups": 74,
+  "final_formatted_tests_repeated_separately": 5,
+  "actual_fresh_runs": 3,
+  "checked_records_each": 100,
+  "checked_scalars_each": 4140,
+  "public_vector_assertions_each": 252,
+  "exact_refusals": 15,
+  "reviewed": "Production source equals prior accepted002; five changed entries are final formatted guests, reviewed public-helper count/diagnostic correction and preserved-prefix Python regression. Final formatted actual-host rerun retained separately. Rechecked complete logs against native oracle, report/PCM repetition and development equality, exact diagnostic/no-output controls, package identities and removed inputs.",
+  "limits": [
+    "Local CPU conformance/package only; no GPU, window, mobile, performance or Phase 1 gate claim.",
+    "Static-module checkpoints remain explicitly unsupported.",
+    "Compound poses are outside IK-v1; preserve private v4 encoder refusal when merging grouped-fade source.",
+    "No addition of repeated five-test count to the broad418 distinct-test result.",
+    "Original64row guest scratch and over-limit276 publicchecks failed preliminary attempts; corrected128rows/252checks preserve existing limits.",
+    "Rustfmt changed executable source-location bytes, so final17module actual-host rerun replaces any binary-equivalence assumption."
+  ]
+}

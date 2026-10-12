@@ -1,0 +1,37 @@
+[
+  {
+    "name": "tests",
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_types",
+      "-p",
+      "incant_assets_runtime",
+      "-p",
+      "incant_assets",
+      "-p",
+      "incant_doc",
+      "-p",
+      "incant_cmd",
+      "-p",
+      "incant_cook",
+      "-p",
+      "incant_runtime",
+      "-p",
+      "incant_script",
+      "-p",
+      "incant_wasm_runtime",
+      "-p",
+      "incant_render",
+      "--all-targets"
+    ],
+    "exit": 101,
+    "seconds": 262.88703858400004,
+    "sha256": "a973389c96650ac081b5be9668158028cb3e9832410ef6494eadf4350b4cccf8"
+  }
+]

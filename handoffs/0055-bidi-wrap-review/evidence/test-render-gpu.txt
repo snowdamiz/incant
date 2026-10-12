@@ -1,0 +1,160 @@
+   Compiling incant_2d v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/crates/incant_2d)
+   Compiling incant_nav v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/crates/incant_nav)
+   Compiling cosmic-text v0.14.2 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/third_party/cosmic-text)
+   Compiling incant_localization v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/crates/incant_localization)
+   Compiling incant_text v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/crates/incant_text)
+   Compiling incant_assets_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/crates/incant_assets_runtime)
+   Compiling incant_physics_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/crates/incant_physics_runtime)
+   Compiling incant_doc v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/crates/incant_doc)
+   Compiling incant_physics_2d_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/crates/incant_physics_2d_runtime)
+   Compiling incant_render_data v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/crates/incant_render_data)
+   Compiling incant_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/crates/incant_runtime)
+   Compiling incant_physics v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/crates/incant_physics)
+   Compiling incant_assets v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/crates/incant_assets)
+   Compiling incant_core v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/crates/incant_core)
+   Compiling incant_render_authoring v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/crates/incant_render_authoring)
+   Compiling incant_render_native v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/crates/incant_render_native)
+   Compiling incant_cook v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/crates/incant_cook)
+   Compiling incant_render v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0055-bidi-wrap-review/crates/incant_render)
+    Finished `ci` profile [optimized] target(s) in 34.66s
+     Running unittests src/lib.rs (/tmp/incant-agent-native-target/ci/deps/incant_render-02d81528da0006f3)
+
+running 72 tests
+test camera::tests::camera_world_basis_uses_inherited_pose_but_not_scale_for_clip_units ... ok
+test camera::tests::orthographic_extent_depth_and_view_direction_are_independent_of_distance ... ok
+test camera::tests::orthographic_size_rejects_unrepresentable_gpu_extents ... ok
+test camera::tests::pixel_grid_preserves_logical_framing_and_snaps_only_rendered_camera_motion ... ok
+test camera::tests::unrepresentable_cameras_fail_before_encoding_gpu_work ... ok
+test diagnostic_output::diagnostic_vertices_draw_reflected_geometry_and_preserve_display_formats ... ok
+test environment::tests::brdf_lookup_matches_independent_hemisphere_integrals ... ok
+test environment::tests::cubemap_axes_edges_and_constant_radiance_are_preserved ... ok
+test environment::tests::environment_sources_decode_linear_srgb_hdr_and_reject_invalid_radiance ... ok
+test environment::tests::large_environment_uses_cooked_low_pass_mips_before_cube_resampling ... ok
+test environment::tests::prefilter_broadens_a_bright_direction_without_negative_radiance ... ok
+test environment::tests::shared_color_asset_preserves_sprite_coverage_and_alpha_independent_environment_radiance ... ok
+test graph::ownership_tests::desktop_graph_and_renderer_preserve_send_sync_contract ... ok
+test graph::ownership_tests::non_send_passes_stay_on_owner_thread_and_release_each_frame ... ok
+test graph::tests::queued_graph_frames_outlive_scene_versions_and_failed_preparation ... ok
+test graph::tests::queued_pixel_frames_retain_logical_targets_and_physical_chrome_after_resizing ... ok
+test hdr_output::hdr_values_survive_until_tone_mapping_and_transfer_runs_once ... ok
+test hdr_output::output_composes_display_colors_and_reuses_bounded_resize_targets ... ok
+test lighting::gpu_tests::clustered_viewport_offsets_and_queued_resize_commands_keep_their_own_light_data ... ok
+test lighting::gpu_tests::every_depth_slice_selects_its_light_and_reused_clusters_clear_old_membership ... ok
+test lighting::gpu_tests::masks_represent_every_light_and_clear_tail_bits_across_word_count_changes ... ok
+test lighting::scene::tests::enabled_shadow_slots_remain_aligned_and_capacity_fails_explicitly ... ok
+test lighting::scene::tests::explicit_zero_lights_disable_preview_and_budgets_fail_without_dropping_lights ... ok
+test lighting::scene::tests::unrepresentable_light_transforms_and_cones_fail_explicitly ... ok
+test lighting::scene::tests::world_transform_affects_position_direction_but_not_light_range_or_intensity ... ok
+test models::animation::tests::aggregate_charge_refuses_before_pose_copy_or_geometry_expansion ... ok
+test models::animation::tests::clip_only_model_retains_rigid_node_hierarchy_and_static_models_reject_samples ... ok
+test models::animation::tests::invalid_samples_refuse_before_publication ... ok
+test models::animation::tests::retained_skin_matches_independent_static_oracle_and_preserves_rejected_frame ... ok
+test models::animation::tests::single_sided_reflected_skin_and_shadow_match_static_transform_oracle ... ok
+test models::animation::tests::source_deleted_independent_instances_deform_full_checked_vertices ... ok
+test models::animation::tests::uniform_skin_reflection_is_retained_and_mixed_vertex_orientation_refuses ... ok
+test models::retained::flipbook_tests::retained_flipbooks_match_static_frames_without_rebuilding_after_cache_deletion ... ok
+test models::retained::native_tests::binary_native_motion_and_structural_rebuilds_submit_without_source_or_document ... ok
+test models::retained::sprite_tests::source_free_native_atlas_sprites_match_fresh_frames_across_motion_reflection_and_rebuild ... ok
+test models::retained::tests::motion_staging_reuses_reserved_slots_and_rejects_unsupported_bindings ... ok
+test models::retained::tests::rejected_retained_frame_preserves_accepted_gpu_state_and_can_retry ... ok
+test models::retained::tests::retained_flipbook_selection_stages_without_allocation ... ok
+test models::retained::tests::retained_motion_matches_fresh_geometry_lights_camera_and_reflections_after_source_deletion ... ok
+test models::retained::tests::retained_sprite_cpu_staging_allocates_nothing_and_rejects_changed_bindings ... ok
+test models::retained::tests::retained_tile_cpu_staging_allocates_nothing_without_visiting_binding_cells ... ok
+test models::retained::text_native_tests::source_free_native_text_moves_rebuilds_and_changes_through_the_retained_consumer ... ok
+test models::retained::text_tests::foreign_or_reset_handles_refuse_preparation_before_any_text_upload ... ok
+test models::retained::text_tests::opaque_geometry_occludes_text_behind_it_and_text_in_front_draws_over_it ... ok
+test models::retained::text_tests::retained_motion_rebuild_and_changed_text_reuse_or_replace_exact_identities ... ok
+test models::retained::tilemap_tests::authoring_and_native_bind_the_same_cells_after_both_sources_are_gone ... ok
+test models::retained::tilemap_tests::cooked_source_free_tile_frames_match_raw_cell_sprite_oracle_and_survive_rejection ... ok
+test models::retained::tilemap_tests::source_free_v6_tile_bindings_share_atlas_and_retain_one_world_slot_per_map ... ok
+test models::retained::tilemap_tests::sprite_and_tile_counts_share_one_cap_before_expanded_vertex_allocation ... ok
+test pixel_grid::tests::logical_pixels_fit_wholly_inside_integer_and_fractional_viewports ... ok
+test scene::tests::camera_rig_frames_hide_diagnostic_cubes_but_preserve_explicit_meshes ... ok
+test scene::tests::model_nodes_use_default_scene_and_repeated_entities_share_one_draw ... ok
+test scene::tests::shadow_caster_flags_split_instances_without_dropping_geometry ... ok
+test scene::tests::unloaded_or_stale_models_fail_instead_of_falling_back_to_cubes ... ok
+test scene::typed_tests::canonical_scene_resolution_accepts_text_input_without_nodes_as_nothing_to_draw ... ok
+test scene::typed_tests::retained_typed_model_input_outlives_authoring_and_source_files ... ok
+test scene::typed_tests::typed_environment_rejects_normal_map_and_out_of_range_rotation_at_startup ... ok
+test scene::typed_tests::typed_input_checks_identity_projection_light_and_affine_transform_without_documents ... ok
+test shadows::cascade::tests::receiver_frustum_and_offscreen_caster_depth_are_covered ... ok
+test shadows::cascade::tests::subtexel_camera_motion_keeps_xy_projection_and_invalid_precision_fails ... ok
+test sprites::geometry::tests::bounded_spans_preserve_full_geometry_and_source_mapping_for_flips_and_slices ... ok
+test sprites::texture::tests::invisible_rgb_is_removed_before_linear_filtering_and_alpha_remains_linear ... ok
+test sprites::upload_span_tests::one_flipbook_preserves_coalesced_uploads_for_many_static_entities ... ok
+test text::draw_tests::drawn_text_matches_layout_baselines_bearings_bidi_order_and_missing_glyphs ... ok
+test text::draw_tests::rotated_scaled_minified_and_magnified_text_matches_the_affine_reference ... ok
+test text::tests::foreign_reset_mismatched_and_oversized_text_is_refused_before_expansion ... ok
+test text::tests::layout_pixels_map_to_entity_local_units_baselines_and_transforms ... ok
+test text::tests::plan_keeps_shaped_order_bidi_spaces_bearings_and_missing_glyphs ... ok
+test version_tests::live_gpu_versions_with_equal_recipe_keys_preserve_old_and_new_geometry ... ok
+test version_tests::same_recipe_different_payloads_never_alias_resolved_model_plans ... ok
+test web_error::tests::copied_error_preserves_category_display_and_source_chain_without_backend_owner ... ok
+test web_error::tests::native_preparation_error_keeps_original_typed_source ... ok
+
+test result: ok. 72 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.29s
+
+     Running tests/model_gpu.rs (/tmp/incant-agent-native-target/ci/deps/model_gpu-181f04c496704ec1)
+
+running 50 tests
+test alpha_modes_and_back_faces_follow_material_semantics ... ok
+test cameras::authored_camera_changes_projection_clips_geometry_and_retains_its_selected_pose ... ok
+test cameras::inherited_cameras_and_custom_light_clusters_match_the_all_light_reference ... ok
+test cameras::orthographic::orthographic_light_clusters_match_all_lights_at_multiple_sizes_poses_and_aspects ... ok
+test cameras::orthographic::orthographic_parallel_view_rays_preserve_specular_lighting_when_camera_moves_back ... ok
+test cameras::orthographic::orthographic_size_clipping_and_retained_projection_match_authored_world_units ... ok
+test cameras::pixel_perfect::fixed_logical_pixels_replicate_exactly_with_integer_scaling_and_letterboxing ... ok
+test cameras::pixel_perfect::followed_grid_geometry_is_stable_at_half_pixel_ties_and_odd_resolutions ... ok
+test cameras::pixel_perfect::subpixel_camera_motion_is_stable_and_crossing_the_grid_moves_by_one_logical_pixel ... ok
+test cameras::rotated_camera_under_uneven_parent_scale_matches_an_orthonormal_flat_pose ... ok
+test cameras::transparency_depth_order_follows_the_selected_camera ... ok
+test color_maps_use_srgb_and_texture_reimport_keeps_retained_materials ... ok
+test color_roles::color_environment_minification_matches_alpha_one_and_retains_prior_versions ... ok
+test color_roles::opaque_and_emissive_minification_ignore_alpha_without_recoloring_coverage_roles ... ok
+test dark_fill_lit_materials_remain_distinguishable ... ok
+test emissive_maps_and_samplers_retain_color_and_addressing ... ok
+test environments::authored_environments_preserve_color_space_versions_and_source_free_loading ... ok
+test environments::environment_intensity_rotation_and_roughness_change_real_reflections ... ok
+test environments::malformed_environment_cannot_replace_a_retained_scene ... ok
+test environments::studio_environment_renders_metal_and_dielectric_across_roughness ... ok
+test highlight_energy_survives_and_transparency_blends_before_tone_mapping ... ok
+test imported_geometry_survives_sources_and_retained_versions_survive_reimport ... ok
+test lights::clustered_masks_match_total_light_energy_and_retain_old_scenes ... ok
+test lights::coverage::distinct_colored_lights_preserve_energy_across_mask_words ... ok
+test lights::coverage::local_range_edges_and_hdr_specular_materials_render_repeatably ... ok
+test lights::coverage::visible_depth_boundary_patches_match_all_light_oracle ... ok
+test lights::directional_point_and_spot_lights_obey_authored_physical_parameters ... ok
+test lights::finite_range_light_eases_to_zero_without_a_linear_edge_crease ... ok
+test lights::masks::all_4096_local_bits_match_unculled_point_and_spot_lighting ... ok
+test lights::masks::last_mask_bit_alone_lights_visible_geometry_after_a_directional_prefix ... ok
+test lights::spatial_clusters_match_brute_force_lighting_across_tile_edges_and_resize ... ok
+test material_maps_preserve_numeric_channels_normal_scale_and_occlusion_strength ... ok
+test pipeline_warmup::all_current_variants_exist_before_first_draw_and_reimport_creates_no_pipelines ... ok
+test shadows::alpha_masked_and_reflected_casters_preserve_holes_and_blend_casters_fail_explicitly ... ok
+test shadows::coverage::cascade_transitions_preserve_occlusion_and_fade_at_the_declared_distance ... ok
+test shadows::coverage::orthographic_cascade_transitions_preserve_occlusion_and_fade_at_the_declared_distance ... ok
+test shadows::directional_shadow_occlusion_respects_flags_range_and_retained_scene_versions ... ok
+test shadows::lookdev::directional_shadow_lookdev_contact_slopes_and_curves ... ok
+test shadows::normal_offset::opposing_normal_maps_preserve_the_geometric_shadow_boundary ... ok
+test shadows::offscreen_casters_and_multiple_directional_shadow_slots_remain_visible ... ok
+test shadows::queued::queued_shadow_maps_retain_camera_light_data_and_resized_atlas_versions ... ok
+test sprites::atlas::atlas_frame_ids_survive_repacking_source_removal_and_failed_replacement ... ok
+test sprites::inherited_sprite_transforms_and_queued_reimports_survive_scene_drop ... ok
+test sprites::nine_slice_preserves_pixel_borders_and_linear_sampling_has_no_hidden_color_fringe ... ok
+test sprites::sprite_layers_order_and_alpha_follow_painter_semantics ... ok
+test sprites::sprite_subregions_flips_and_retained_reimports_preserve_exact_pixels ... ok
+test sprites::ties::magnified_nearest_texels_keep_uniform_widths_past_pixel_center_ties ... ok
+test sprites::ties::nearest_texel_ties_preserve_each_texel_through_orientation_and_sheet_resize ... ok
+test sprites::wide::wide_magnified_nearest_regions_preserve_their_leading_and_trailing_texels ... ok
+test tangents::generated_normal_map_basis_matches_explicit_frames_under_uv_and_instance_reflection ... ok
+
+test result: ok. 50 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 49.05s
+
+   Doc-tests incant_render
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+exit 0

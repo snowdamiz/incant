@@ -1,0 +1,718 @@
+{
+  "at": "2026-10-12T15:57:46.521500+00:00",
+  "base": "d9747284f7ddbaceba6c7498698e5a2a6b131332",
+  "branch": "codex/native-wasm-animation-pose-package",
+  "proof_root": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005",
+  "plan_sha256": "c60adc7457e6f5929b3430876f6b8ea02acffce5bf55fbaae9090933fe4aab6c",
+  "cargo_lock_sha256": "6d574acc59d671f8adc2f3ea40c749b5f0562526fb96e5b978c52fc856132016",
+  "source_hashes": {
+    "tools/probes/native-wasm-animation-pose-export.py": "7977df9c1cf49323349f8c0395a51e885af6845758f656ccc7ea850ed50401c4",
+    "tools/probes/native-wasm-animation-pose-export/behavior.rs": "9c42af82283c680ecb007786cca0d27dc040c7d7f9206daeadb90034a0317b8b",
+    "crates/incant_cook/examples/animation_pose_package_oracle.rs": "3900b876fd2ebd917d537fa35f041c2a8d79408743773040f386a9df19ae4b65",
+    "tools/probes/native-animation-graph-export.py": "6e116c6ab103a6e40c64da6586160cd49336530854390986aa3850052d6a9f49",
+    "tools/export_native.py": "a22f6431bb6db373982970e53a219f1f57633c538e08055bcafacefa887699a1"
+  },
+  "checks": {
+    "public_import_atomic_select_undo_redo_journal_reopen": true,
+    "captured_only_development": true,
+    "source_cache_build_tools_maps_removed": true,
+    "ordinary_wasm2c_processes": 3,
+    "ticks_per_process": 20,
+    "full_per_entity_records_per_process": 60,
+    "scalars_per_process": 3420,
+    "bounded_vector_checks_per_process": 228,
+    "exact_refusals": 11,
+    "positive_same_replay_routes": true,
+    "oracle_export_scene_exact": true,
+    "whole_pcm_and_log_parity": true,
+    "actual_weighted_samples_max": 8,
+    "wasm32_guest_compiled": true,
+    "oracle_clippy": true,
+    "python_tests": 235,
+    "python_skips": 4,
+    "format_registry_conventions_diff": true
+  },
+  "player": {
+    "target": "aarch64-apple-darwin",
+    "sha256": "8e5a3ca16c0353dde682c28ea3083bb0b7530dcefe6a3dba712a119ad9456c0b",
+    "bytes": 9653488,
+    "program": {
+      "fingerprint": "63b49d3c7d8d58cd5cece5d75423b2c4d07e398724704d8c58085a2cdc6b8dc5",
+      "input_sha256": "b6a855796d51d2e6e05c3f1c78ceb17fcdfcc72e14615c978f4af77c2c969ac4",
+      "kind": "wasm",
+      "module": "01M4RCWSE253G6NAYJF6YGMJNP",
+      "prepared_sha256": "6ae024cfb6007f8d4f1bbbce7a25ee1878907931a196d8bc3c0d03fc67bb0b41",
+      "registry_sha256": "3bc656e792ed9d84e934cd94eddacd91f275ec01e97cb0c74e33c28126874006",
+      "translator": "wasm2c-1.0.42"
+    }
+  },
+  "reports": {
+    "development": {
+      "json_sha256": "1298d8d9e3d8f9742f0e757cf0e3218500f4db1aab70d90b31a769e500119674",
+      "pcm_sha256": "eec19bc6af0b3b6dfb97a08782c65f4bb3c3203e789a015d2008b0d689ad08be",
+      "pcm_bytes": 128000,
+      "complete_records": 60,
+      "scalars_checked": 3420
+    },
+    "run-0": {
+      "json_sha256": "4b1a1fc5f71f80c48abb993f555711b7f517e336e7a2bda645c3b75c225908a7",
+      "pcm_sha256": "eec19bc6af0b3b6dfb97a08782c65f4bb3c3203e789a015d2008b0d689ad08be",
+      "pcm_bytes": 128000,
+      "complete_records": 60,
+      "scalars_checked": 3420
+    },
+    "run-1": {
+      "json_sha256": "4b1a1fc5f71f80c48abb993f555711b7f517e336e7a2bda645c3b75c225908a7",
+      "pcm_sha256": "eec19bc6af0b3b6dfb97a08782c65f4bb3c3203e789a015d2008b0d689ad08be",
+      "pcm_bytes": 128000,
+      "complete_records": 60,
+      "scalars_checked": 3420
+    },
+    "run-2": {
+      "json_sha256": "4b1a1fc5f71f80c48abb993f555711b7f517e336e7a2bda645c3b75c225908a7",
+      "pcm_sha256": "eec19bc6af0b3b6dfb97a08782c65f4bb3c3203e789a015d2008b0d689ad08be",
+      "pcm_bytes": 128000,
+      "complete_records": 60,
+      "scalars_checked": 3420
+    }
+  },
+  "package_files_directly_verified": 14,
+  "removed_private_files_absence_checked": 17,
+  "commands": {
+    "count": 30,
+    "environment": {
+      "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/Users/andreyyurlov/.local/share/fnm/node-versions/v22.23.3/installation/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+      "CARGO_TARGET_DIR": "/tmp/incant-agent-font-target"
+    },
+    "author": [
+      "python3",
+      "tools/probes/native-wasm-animation-pose-export.py",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005",
+      "--binary",
+      "/tmp/incant-agent-font-target/ci/incant_headless",
+      "--oracle",
+      "/tmp/incant-agent-font-target/ci/examples/animation_pose_package_oracle",
+      "--stage",
+      "author"
+    ],
+    "export": [
+      "python3",
+      "tools/probes/native-wasm-animation-pose-export.py",
+      "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005",
+      "--binary",
+      "/tmp/incant-agent-font-target/ci/incant_headless",
+      "--oracle",
+      "/tmp/incant-agent-font-target/ci/examples/animation_pose_package_oracle",
+      "--stage",
+      "export"
+    ],
+    "build": [
+      "./tools/cargo",
+      "build",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_headless",
+      "--features",
+      "wasmtime-host",
+      "-p",
+      "incant_cook",
+      "--example",
+      "animation_pose_package_oracle",
+      "--bin",
+      "incant_headless"
+    ],
+    "clippy": [
+      "./tools/cargo",
+      "clippy",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_cook",
+      "--example",
+      "animation_pose_package_oracle",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "tools": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools/tests",
+      "-v"
+    ]
+  },
+  "logs": {
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-000-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-000-stderr.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-000-stdout.txt.gz": {
+      "sha256": "41fb0b2e1527554291cf226f0d865e0d378858c7b5f16093914806413140db9a",
+      "uncompressed_sha256": "6aff69416ab8edddc68a7cba67e6a12437747810b6916302dc9a9bb7ca6abf4a",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-000-stdout.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-001-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-001-stderr.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-001-stdout.txt.gz": {
+      "sha256": "488ae5b719084e0765c90e34271b2e5787f2f2b4c3ca5b6bebeea2f37ec11fd6",
+      "uncompressed_sha256": "8e95b80dfb2ff622a7a92c3ec70fd34cbb8a73def84355c3359e3fe35cbad1ed",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-001-stdout.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-002-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-002-stderr.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-002-stdout.txt.gz": {
+      "sha256": "410e2cc46bbbf8ebe5980782a901aa1374b58899d29e658b005701ffc0282ce4",
+      "uncompressed_sha256": "832bbc7bbab8438fff3cf1d931bd0561b01c99b6b9af837318abecea11bb6fa0",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-002-stdout.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-003-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-003-stderr.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-003-stdout.txt.gz": {
+      "sha256": "f63d9c58057eafa599edf1512cda583656bcf5175cf8a3cfe4e5a9b1e23a374f",
+      "uncompressed_sha256": "56f8972cccd59e74fedd844e34d158cf19c8719896dfc6ed2bcccf761367bf16",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-003-stdout.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-004-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-004-stderr.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-004-stdout.txt.gz": {
+      "sha256": "0a38d16b1adfe3cd75d71e6daea2c987ffc88485f83ec93acb1d7f527f8951c8",
+      "uncompressed_sha256": "7d1fb76f481d7a449108341f91a4be8f146e6e51e3c5cd0db2fd6ef89a751176",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-004-stdout.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-005-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-005-stderr.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-005-stdout.txt.gz": {
+      "sha256": "ebdb23f8a127269df1d11ebd3ad1294a0628be07fbf4663f1e022bb06447c7e9",
+      "uncompressed_sha256": "9b181ecd1b832cc75917a24e8eee69510a17f5c1405bcb4145906cba135d3436",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-005-stdout.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-006-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-006-stderr.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-006-stdout.txt.gz": {
+      "sha256": "217242797103b39de1ecc2a11389773c2fcc3fba88c16a4fe769b0a836606115",
+      "uncompressed_sha256": "1298d8d9e3d8f9742f0e757cf0e3218500f4db1aab70d90b31a769e500119674",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-006-stdout.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-007-stderr.txt.gz": {
+      "sha256": "a3cdc826a5c9c597d791ddb9484c5fa3f2fb9b2a45f38272b7f275e11b5645b5",
+      "uncompressed_sha256": "c370a25877044f0dff0ac867421c32b8d4c868c2f25805660d7aeb9742061af5",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-007-stderr.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-007-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-007-stdout.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-008-stderr.txt.gz": {
+      "sha256": "a3cdc826a5c9c597d791ddb9484c5fa3f2fb9b2a45f38272b7f275e11b5645b5",
+      "uncompressed_sha256": "c370a25877044f0dff0ac867421c32b8d4c868c2f25805660d7aeb9742061af5",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-008-stderr.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-008-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-008-stdout.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-009-stderr.txt.gz": {
+      "sha256": "c874855165cc7c5992437367f67d3a3d569f1423dd43991bff52a4003bdaeb14",
+      "uncompressed_sha256": "8df86a61d26d3b44a6eb1a330dce6c1ec8c5653890ad5eb1236d4e3fc0d913b8",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-009-stderr.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-009-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-009-stdout.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-010-stderr.txt.gz": {
+      "sha256": "3796b933d0f77c9dbd012d224595a925500b04a690bb1a5b1bc683fea382e04a",
+      "uncompressed_sha256": "8438ab8be63ad4646f0bcbd24f4fb8bdfc3cf459bb8306b4f85fb7d59a32994c",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-010-stderr.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-010-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-010-stdout.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-011-stderr.txt.gz": {
+      "sha256": "f0b3c875fe4fd229455eaadcbfa008a4e7862221ce406766281c7280ff09c783",
+      "uncompressed_sha256": "278865c4ee58003d56c3fded05d4ff45064eb235f74852a3f391a1f8626db98c",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-011-stderr.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-011-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-011-stdout.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-012-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-012-stderr.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-012-stdout.txt.gz": {
+      "sha256": "26e3860aaf450c399882013e8cc9678d00b947966a9f5a5f959d0d2270dbbf77",
+      "uncompressed_sha256": "1dc5ff25a027f5c0a04ac183e96b6665181272c327130fb0663c5c1be8aad81d",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-012-stdout.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-013-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-013-stderr.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-013-stdout.txt.gz": {
+      "sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e",
+      "uncompressed_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-013-stdout.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-014-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-014-stderr.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-014-stdout.txt.gz": {
+      "sha256": "4fa3c5a9212d8409cafb854a9147e39ff7fbe781b19748df6de4f50c6582fe15",
+      "uncompressed_sha256": "b22adee5ac5a93ade5d52f11392360e1c1a95ef2add2bd03365e896e8f1688e1",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-014-stdout.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-015-stderr.txt.gz": {
+      "sha256": "7dda3a611eed9a9e0d35939f4b44abf00e78d4e9c4ae2cc1f2b1bdd9df9b9ae1",
+      "uncompressed_sha256": "525e0f5a01bd86dd4c55571f4153b08d367ea94898be2b89e42602827218b587",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-015-stderr.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-015-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-015-stdout.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-016-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-016-stderr.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-016-stdout.txt.gz": {
+      "sha256": "25ce36e82300dceee5eed373c389991ba80b93da9c71af51a9ca6fbf847c3814",
+      "uncompressed_sha256": "f51a3c26897915c9f728e9931b72146b3b73efae2a8fe65e3db9ecef98cb7bce",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-016-stdout.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-017-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-017-stderr.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-017-stdout.txt.gz": {
+      "sha256": "892a70f1dd11a367711eb44630902dd408dbc441e14441d17cc9943bd54d7a10",
+      "uncompressed_sha256": "da7ba81270d9765002350a5a52d38d34e84f477f0175f1ae405ad716dfda1371",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-017-stdout.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-018-stderr.txt.gz": {
+      "sha256": "4d01fab55862a796c06d6e20dacb4bf934a338c613951d5e5057b2a31379e252",
+      "uncompressed_sha256": "11b088f3ac60c0d2302ab54dbef6947f194ab2c1378d49a35c4ef3b16776ac9b",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-018-stderr.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-018-stdout.txt.gz": {
+      "sha256": "57186569973bdb4241617118fd0b13e85494af490a695a24ab0ac402c88a027b",
+      "uncompressed_sha256": "f9d9f5b4fcab146ac3b69c6e0a1c321f1ed7eada9967319d4a5b90442cf33afa",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-018-stdout.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-019-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-019-stderr.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-019-stdout.txt.gz": {
+      "sha256": "1d11783d2274ab0c22e2e3eb9852ae68b7d8593591b32f50d458dcfae02a25e2",
+      "uncompressed_sha256": "16b15635c204663d9710cfa01e14c6002cdfdea0a9c209764ff279fa7b3a789d",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-019-stdout.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-020-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-020-stderr.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-020-stdout.txt.gz": {
+      "sha256": "a48b9aaf8203e17d839f0c0815cc4e36167bbafa98cc2b3951dc1e24fb80948d",
+      "uncompressed_sha256": "0612654b62b849ffe63dab20c1c86cb521b88c8ff2821f66f70b91a0864c4eba",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-020-stdout.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-021-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-021-stderr.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-021-stdout.txt.gz": {
+      "sha256": "9e5b9939f4661243bc3c18205145c7a008776653895ddc9d124e4d22709976b4",
+      "uncompressed_sha256": "58ae8953a77d6a3487fe6f6b59b64daa1832b58567ff9dfab07d81832b00beef",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-021-stdout.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-022-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-022-stderr.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-022-stdout.txt.gz": {
+      "sha256": "9e5b9939f4661243bc3c18205145c7a008776653895ddc9d124e4d22709976b4",
+      "uncompressed_sha256": "58ae8953a77d6a3487fe6f6b59b64daa1832b58567ff9dfab07d81832b00beef",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-022-stdout.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-023-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-023-stderr.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-023-stdout.txt.gz": {
+      "sha256": "9e5b9939f4661243bc3c18205145c7a008776653895ddc9d124e4d22709976b4",
+      "uncompressed_sha256": "58ae8953a77d6a3487fe6f6b59b64daa1832b58567ff9dfab07d81832b00beef",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-023-stdout.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-024-stderr.txt.gz": {
+      "sha256": "075221b5038df119abfbec47f1c48440fb0354d1d72efb2e145ff94b24d45add",
+      "uncompressed_sha256": "e2d21e0e9fbada020e5bbd1486929a7eadfc6d6fa179799e8bb2eb985536dd7c",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-024-stderr.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-024-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-024-stdout.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-025-stderr.txt.gz": {
+      "sha256": "075221b5038df119abfbec47f1c48440fb0354d1d72efb2e145ff94b24d45add",
+      "uncompressed_sha256": "e2d21e0e9fbada020e5bbd1486929a7eadfc6d6fa179799e8bb2eb985536dd7c",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-025-stderr.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-025-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-025-stdout.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-026-stderr.txt.gz": {
+      "sha256": "45b62d3ef236025f6035db0eb467afb029f7dc0945321b220061ab4673fb17eb",
+      "uncompressed_sha256": "6b1831a4729b365d23e581958724f5f9c159053718f3c27e5a1231b6df9fee2b",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-026-stderr.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-026-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-026-stdout.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-027-stderr.txt.gz": {
+      "sha256": "134785d2d3c4538f38a635e39aab31d680fb1fb9c65ffc6ff8f6d43d18aef45c",
+      "uncompressed_sha256": "c503f6ae0ef932ea9309837945d0ff26605c3dbf9daf4bbec9192ad0506c34b3",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-027-stderr.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-027-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-027-stdout.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-028-stderr.txt.gz": {
+      "sha256": "76073c34bc49034c7c41f097a4c61851ff82ba5df417c4319d8781e667378a21",
+      "uncompressed_sha256": "c8c6ca15839ccad282f656a5a1277d4ca7dd2a15f6579a216c65b3788644216e",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-028-stderr.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-028-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-028-stdout.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-029-stderr.txt.gz": {
+      "sha256": "c9912b5e3d6bc4d5ddf47db615e04b5c5ecd93049df904917e7f7770a5fb1cf0",
+      "uncompressed_sha256": "8553d484ef61a5488bc165050a946d44ae606e41c8018ff857501df0ebb8122d",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-029-stderr.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/command-029-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/command-029-stdout.txt"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/shipping-build.log.gz": {
+      "sha256": "4d01fab55862a796c06d6e20dacb4bf934a338c613951d5e5057b2a31379e252",
+      "uncompressed_sha256": "11b088f3ac60c0d2302ab54dbef6947f194ab2c1378d49a35c4ef3b16776ac9b",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/package/build.log"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/animation-pose-package-001-author.log.gz": {
+      "sha256": "0bdc40a4044ad9be5f4821940aabe70738ff62ef2edb8a4ef18a3b79360e07b4",
+      "uncompressed_sha256": "bbeefec3a05c81b11d4ce4175c64d8b6a816c55c14f1588ddb05e003c5cc1d3b",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-001-author.log"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/animation-pose-package-002-author.log.gz": {
+      "sha256": "3f9f6b1d6fe3ae0536c077d8a1c39bf61572e39c37fe89508535ab3aa7288909",
+      "uncompressed_sha256": "6e8e7ff23fda6d888d8896b7482a61cd9a1001fee561ad51ef196831bd081f3c",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-002-author.log"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/animation-pose-package-003-author.log.gz": {
+      "sha256": "8eb278889962e926770ad1a3cabc7b34ec2d4f835e42c958422202ad83531625",
+      "uncompressed_sha256": "ac56bd97421b059f6c526949a5a55d79dd345a592c6f5d7b477da8018968891d",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-003-author.log"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/animation-pose-package-004-author.log.gz": {
+      "sha256": "aa89b54991e64e9cc7d8fcb418d05b5ad6bba31ec6cb7eb06c1dfc62450a9eb4",
+      "uncompressed_sha256": "d4f52bef4ec68bae85bfbf5870fe6a2d1ccb893828f4101363ebe3b72d2f4193",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-004-author.log"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/animation-pose-package-005-author.log.gz": {
+      "sha256": "aa89b54991e64e9cc7d8fcb418d05b5ad6bba31ec6cb7eb06c1dfc62450a9eb4",
+      "uncompressed_sha256": "d4f52bef4ec68bae85bfbf5870fe6a2d1ccb893828f4101363ebe3b72d2f4193",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005-author.log"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/animation-pose-package-005-export.log.gz": {
+      "sha256": "f049ca2466982f2d7b29df86bcdcd9e4acf5b6bec5f28c72dfa46aabcde076fa",
+      "uncompressed_sha256": "09f5fcdf851214242149f06aa0784fbf38385638c9801b2a2fc73129495a9b2d",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005-export.log"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/animation-pose-package-build-001.log.gz": {
+      "sha256": "f6683d6122fbf7289c5adac0086bfd5466ed73c8e201f48109e913aea552becc",
+      "uncompressed_sha256": "ec0b42b8bcc787f26f7db17e5220749e1786d610d1bf308970fead2a36d83e13",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-build-001.log"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/animation-pose-package-clippy-001.log.gz": {
+      "sha256": "5933c023713fc8d133a1e9a3189f1444770e107e4ce70c867089dd764cb32f86",
+      "uncompressed_sha256": "3e4ddd1f83e5e39e047329c18d8d66731fa0118a01753bbc2693828b471ada53",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-clippy-001.log"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/animation-pose-package-final-check-0.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-final-check-0.log"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/animation-pose-package-final-check-1.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-final-check-1.log"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/animation-pose-package-final-check-2.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-final-check-2.log"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/animation-pose-package-final-check-3.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-final-check-3.log"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/animation-pose-package-final-check-4.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-final-check-4.log"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/animation-pose-package-tools-001.log.gz": {
+      "sha256": "e28cbaff322a206c6d0dd7952e375cb62d0af753fe55f8740fec0684d5d32a5d",
+      "uncompressed_sha256": "9c815307c995c86583eccd3b9b1e3b82f17fa889c4700f6cc212da3cbde6848e",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-tools-001.log"
+    }
+  },
+  "receipts": {
+    "docs/spikes/evidence/native-wasm-animation-pose-package/checkpoint-refused.json": {
+      "sha256": "46e2d517bfb053b86290ac595f1f2c426693385f3785099172a1d4465dffb5e2",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/checkpoint-refused.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/commands.json": {
+      "sha256": "a8ae47cc126510c64e3933fb89599803d0036f6e8766cc500543ba9e54832bab",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/commands.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/dev-late-command.json": {
+      "sha256": "5ff1bf9c3ccf3b7062766721afdf4276374c9fbf9878466727714c06ff0e4168",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/dev-late-command.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/dev-old-v1.json": {
+      "sha256": "f7dc163632628a7f9c895b0c7aa20788a1d3de529b09c5c4c81d0762e1ce6cbe",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/dev-old-v1.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/dev-old-v2.json": {
+      "sha256": "7972bec79f811fc1931355302e130d71cd098ae1de9763f23bf61ea9296ff46e",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/dev-old-v2.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/dev-old-v3.json": {
+      "sha256": "395a1765bad1a0bba5fc507509e59d13bee59cca9d139156ed0c29630a5d7d93",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/dev-old-v3.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/dev-short-scratch.json": {
+      "sha256": "5e4ac8adf03f99d8525491da89f9752a8cfa0fe83158a37171e4be07c81173ad",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/dev-short-scratch.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/development.json": {
+      "sha256": "1298d8d9e3d8f9742f0e757cf0e3218500f4db1aab70d90b31a769e500119674",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/development.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/guest-compile.json": {
+      "sha256": "832bbc7bbab8438fff3cf1d931bd0561b01c99b6b9af837318abecea11bb6fa0",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/guest-compile.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/late-command-input.json": {
+      "sha256": "a72c80e59bd1da895b70c34e6f51ef93abd88654869327380bd7cf2dc2b1db34",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/late-command-input.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/model-import.json": {
+      "sha256": "8e95b80dfb2ff622a7a92c3ec70fd34cbb8a73def84355c3359e3fe35cbad1ed",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/model-import.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/module-import.json": {
+      "sha256": "56f8972cccd59e74fedd844e34d158cf19c8719896dfc6ed2bcccf761367bf16",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/module-import.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/observe.json": {
+      "sha256": "15cd505a9451259babfd292027580f6589e0e1061e0925ad23012c8c8618adfc",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/observe.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/old-v1-input.json": {
+      "sha256": "1ffba5e4203cc1c4ee564633312a59c1d9ec345f9f1699d9daa57698e6fe575b",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/old-v1-input.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/old-v2-input.json": {
+      "sha256": "81f79b61ebafc63256e5bf9468847cb013796850e6157061b5cb9569fbbf9892",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/old-v2-input.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/old-v3-input.json": {
+      "sha256": "83e7db1c62491976ae0c409150e94993944eeddb03cd6c0424e0e1b7b448eb64",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/old-v3-input.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/oracle.json": {
+      "sha256": "c4a6625543fc29b2075c25f0ecb8777ef5246d1736feb7caff93f4d2b2824f62",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/oracle.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/package-late-command.json": {
+      "sha256": "abaca75e25051ea051305a046de868c39c6e26b53014df9ad571aaf7fab8f088",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/package-late-command.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/package-old-v1.json": {
+      "sha256": "8cae6df7ee2da00b52b1052cbef8a937a5c1dd27cee68e22c251b30137d545b3",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/package-old-v1.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/package-old-v2.json": {
+      "sha256": "7ffc4b5db331214923e26a49cd2afd84b8bd14db226e52a081a81d952fbc8c15",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/package-old-v2.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/package-old-v3.json": {
+      "sha256": "8014b7e5453d2e3cba2eaec6e689a98e019161f5e9cfc2c99511d5c2c14fc296",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/package-old-v3.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/package-short-scratch.json": {
+      "sha256": "04b26f136dd047e076bce1facb7d55baca9aa690386e2d5535957d6f772ec89d",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/package-short-scratch.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/positive-input.json": {
+      "sha256": "aaf059115e6a8c06eed070f468774c675e2c177ab2f91e2f2de723b6bca8a2af",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/positive-input.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/preflight.json": {
+      "sha256": "359bc481808f86773d226b247d25d0e38d849fba4e164ec8f042d02636c565fb",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/preflight.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/public-commands.json": {
+      "sha256": "707bda94e195561454f96bdd74cd4bb4ba5b4737e404d41cd98dd362130df169",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/public-commands.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/removed.json": {
+      "sha256": "d7afb4b58317dfb3c26f9b1bee344372f2574f3aee25e93b8ce6053be0884e05",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/removed.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/result.json": {
+      "sha256": "76c60173534c1d3eb28f6587a32ab5be592bde3410577fa4a3fd259237bf9eb9",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/result.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/run-0.json": {
+      "sha256": "4b1a1fc5f71f80c48abb993f555711b7f517e336e7a2bda645c3b75c225908a7",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/run-0.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/run-1.json": {
+      "sha256": "4b1a1fc5f71f80c48abb993f555711b7f517e336e7a2bda645c3b75c225908a7",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/run-1.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/run-2.json": {
+      "sha256": "4b1a1fc5f71f80c48abb993f555711b7f517e336e7a2bda645c3b75c225908a7",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/run-2.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/short-scratch-input.json": {
+      "sha256": "7948ea99e25a29f28c586c8a97fba723e6240f92c837edd9e52e5d44803c5d1a",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/short-scratch-input.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/source-freeze.json": {
+      "sha256": "e6b3cfec2d565d8abed3ce70508dcbeef2b880cc8a09559ef623c555e1721e40",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/source-freeze.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/wabt.json": {
+      "sha256": "eb6e2576392cc1f9eb0bc5ed8522926d0838dd1718d7e1dc3eb791648f5c5682",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/wabt.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/export.json": {
+      "sha256": "ded7b5f52ec0961d03acf1fff73c61cf8a3ac687d82aeee0d72c6e048dfc3b09",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/package/export.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/project-build.json": {
+      "sha256": "c147398376305bf74f34a265a8abf0fdb1b2d2ea764ef27053ffa2071d939b23",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/package/project-build.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/package-manifest.json": {
+      "sha256": "ebcdd41d88ee4da50a33ccd1ea4eb86adf1d55d2bebee875a500b79ee8d85626",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-005/package/player/data/package.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/animation-pose-package-final-checks-001.json": {
+      "sha256": "dfb5640474bde259cf638242cf34cc413b5433a49c338120addad449490cf5fc",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-final-checks-001.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/attempt001-failed-preflight.json": {
+      "sha256": "beb1ab2ad77a2e4604998e2fec1a16203369103f3fbcb1cc94b11c3c842e89b7",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-001/failed-preflight.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/attempt002-failed-preflight.json": {
+      "sha256": "26c2d1858c435bcfa48846d66b162f4401a827d8fd91697c3a0e6ab45803eea9",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-002/failed-preflight.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/attempt003-failed-preflight.json": {
+      "sha256": "38f83e73bd0c005a9ee7da597b5163c497cd7fdf99ab65636550677e17cc3718",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-003/failed-preflight.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/attempt004-source-freeze.json": {
+      "sha256": "cf562d657ab0896bd0f60909374f380c7f27800b91c3d5f3e409026417acc4d6",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-004/source-freeze.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/attempt004-preflight.json": {
+      "sha256": "2d2ee2c8352db8ff60f862aa184fe90fb137144204cfc8b09c4dc9d65ac5f2d9",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-004/preflight.json"
+    },
+    "docs/spikes/evidence/native-wasm-animation-pose-package/producer-post-run-audit.json": {
+      "sha256": "ad60f0205f8cbf22a4116f5d4eb0bc17ae3e200ce024af489ab328384fb7b10d",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/animation-pose-package-audit-005.json"
+    }
+  },
+  "review": "Independent final source and retained package evidence review accepted144be370 with no findings. Current-main union validation remains publisher-owned and pending.",
+  "limitations": [
+    "Actual local desktop CPU package; no GPU/rendered/device/performance or phase gate.",
+    "Eight active weighted samples; nonzero tree fades/composite operands remain unsupported.",
+    "Whole guest checkpoints explicitly unsupported; gameplay counter lives in native ECS, not module global state.",
+    "Only newly created proof source/cache/build/maps are removed; repository and shared engine build storage are retained.",
+    "Package failures prove exact diagnostics and absence of output publication; accepted host conformance separately proves staged prefix rollback.",
+    "Metadata observes destination playback flags and timed elapsed/duration, not outgoing playback flags.",
+    "One ordinary cold export, three new packaged processes; no cross-platform/current-main/release gate."
+  ],
+  "independent_final_review": {
+    "path": "docs/spikes/evidence/native-wasm-animation-pose-package/independent-final-review.json",
+    "sha256": "9088eb973d2746f9b8948c96b5aaeabf2353e44bac824c3f34b5b30d9a83f91c",
+    "reviewed_evidence_sha256": "9b319150e0ded85da39153963617cac211cc63fb3cc5db10e2eee897c84a58e6"
+  }
+}

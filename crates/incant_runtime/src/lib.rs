@@ -3,10 +3,18 @@
 //! committed spatial extraction. Mixer/render hosts and authoring stay separate.
 mod animation;
 mod animation_binary;
+mod ik;
+mod ik_binary;
+pub use ik::{
+    AnimationIkSample, IkControl, IkSnapshot, MAX_ANIMATION_IK, MAX_SCENE_ANIMATION_IK, NativeIk,
+};
+mod animation_graph;
 pub use animation::{
-    AnimationControl, AnimationSample, AnimationSnapshot, AnimationState, MAX_ANIMATION_CLIPS,
+    AnimationBlendSample, AnimationControl, AnimationSample, AnimationSnapshot, AnimationState,
+    AnimationTransition, MAX_ANIMATION_CLIPS, MAX_ANIMATION_TRANSITION_SECONDS,
     MAX_SCENE_ANIMATION_CLIPS, NativeAnimation,
 };
+pub use animation_graph::*;
 mod audio;
 mod audio_binary;
 mod audio_controls;
@@ -36,6 +44,11 @@ pub use incant_nav::{
     GridPath, GridPathRequest, NavigationGeometry, NavigationGrid, NavigationPath,
     NavigationSettings, PathRequest, RebuildReport,
 };
+pub use navigation_runtime::NavigationSnapshot;
+pub type SteeringAgent = incant_nav::SteeringAgent<incant_types::StableId>;
+pub type SteeringObstacle = incant_nav::SteeringObstacle<incant_types::StableId>;
+pub type SteeringQuery = incant_nav::SteeringQuery<incant_types::StableId>;
+pub type SteeringVelocity = incant_nav::SteeringVelocity<incant_types::StableId>;
 pub use navigation::{
     CookedNavigation, MAX_NAVIGATION_DEPENDENCIES, MAX_NAVIGATION_GRIDS, MAX_NAVIGATION_LINKS,
     MAX_NAVIGATION_MESHES, MAX_NAVIGATION_SOURCES, NativeNavigationGeometry, NativeNavigationLink,
@@ -95,3 +108,14 @@ pub use spatial::{
     MAX_VISUAL_ASSETS, NativeEnvironmentLight, NativeMeshRenderer, VisualAssetKind, VisualAssetRef,
 };
 pub use spatial_view::{SpatialNode, SpatialView};
+
+mod text;
+mod text_binary;
+pub use text::{
+    CookedText, FontAssetRef, MAX_SCENE_TEXT_BYTES, MAX_TEXT_BYTES, MAX_TEXT_FONTS, MAX_TEXT_NODES,
+    NativeText, TextLayout, TextView, TextWrap,
+};
+
+mod ui;
+mod ui_binary;
+pub use ui::{CookedUi, NativeUi, UiView, UiViewNode};

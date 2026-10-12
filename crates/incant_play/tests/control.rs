@@ -37,7 +37,8 @@ fn prepared(body: &str) -> PreparedPlay {
         code: CompiledScript::compile(&format!(
             "exports.default={{update({{chunks}}){{{body}}}}};"
         ))
-        .unwrap(),
+        .unwrap()
+        .into(),
         actions: Default::default(),
         clips: vec![],
         sample_rate: 48000,
@@ -137,10 +138,24 @@ impl Drop for Consumer {
 impl RenderInputConsumer for Consumer {
     type Settings = Arc<Probe>;
     type Error = Failure;
-    fn prepare(_: &SceneInput, _: &str, settings: Arc<Probe>) -> Result<Self, Failure> {
+    fn prepare(
+        _: &SceneInput,
+        _: &str,
+        _: Option<&Arc<incant_render_data::UiInput>>,
+        settings: Arc<Probe>,
+    ) -> Result<Self, Failure> {
         Ok(Self(settings))
     }
-    fn accept(&mut self, _: &SceneInput, _: &str, _: UpdateKind) -> Result<(), Failure> {
+    fn admit_ui(&mut self, _: &Arc<incant_render_data::UiInput>) -> Result<(), Failure> {
+        unreachable!("this consumer has no UI support")
+    }
+    fn accept(
+        &mut self,
+        _: &SceneInput,
+        _: &str,
+        _: UpdateKind,
+        _: Option<&Arc<incant_render_data::UiInput>>,
+    ) -> Result<(), Failure> {
         self.0.accepts.fetch_add(1, Ordering::SeqCst);
         match self.0.outcome.load(Ordering::SeqCst) {
             1 => Err(Failure),
@@ -161,6 +176,8 @@ fn spatial(probe: Arc<Probe>) -> PlaySession<OfflineBackend, Consumer> {
     inputs.cooked = inputs.cooked.with_spatial(vec![], vec![spatial]).unwrap();
     let root = tempfile::tempdir().unwrap();
     inputs.render = Some(NativeRenderSettings {
+        ui: None,
+        text: None,
         model_cache: root.path().join("models"),
         texture_cache: root.path().join("textures"),
         camera: id(1),

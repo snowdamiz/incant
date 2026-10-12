@@ -1,0 +1,23 @@
+[package]
+name = "incant_ui"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+default = []
+native = ["dep:incant_runtime"]
+
+[dependencies]
+incant_runtime = { workspace = true, optional = true }
+incant_types.workspace = true
+incant_text.workspace = true
+incant_input.workspace = true
+ulid = { version = "=1.2.1", default-features = false }
+thiserror.workspace = true
+sha2.workspace = true
+taffy = { version = "=0.14.0", default-features = false, features = ["std", "taffy_tree", "flexbox", "content_size"] }
+
+[dev-dependencies]
+tempfile = "=3.27.0"

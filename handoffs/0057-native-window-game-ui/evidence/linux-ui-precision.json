@@ -1,0 +1,149 @@
+{
+  "format": "incant-0057-linux-ui-precision",
+  "failure_intake": {
+    "path": "~/.codex/incant-integration-evidence/checkpoint11/failure-intake.json (root, read only)",
+    "candidate": "82aa2bc3de3aa642fb90951d895c35ce9afb51e5",
+    "log_sha256": "b344c86d4797be9a7a45393f87c11ec5523bacf0aa3a293d92a1fb0a38f4ac61",
+    "raw_log_sha256": "52b5747bc7011c6a037a495182cd306aebd142edde46e853cf11a29062a27055",
+    "linux_failures": [
+      {
+        "test": "ui::draw_tests::logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales",
+        "line": 437,
+        "format": "Rgba8UnormSrgb",
+        "scale": 2,
+        "worst": 7,
+        "pixels_over1": 275
+      },
+      {
+        "test": "ui::draw_tests::nested_clips_cut_actual_glyph_bounds_including_negative_x_rtl_overflow",
+        "line": 545,
+        "worst": 2,
+        "pixels_over1": 1
+      }
+    ]
+  },
+  "ci_measurements_from_log": {
+    "scale 1 Rgba8UnormSrgb": {
+      "worst": 1,
+      "over_1": 0,
+      "changed": 4246
+    },
+    "scale 2 Rgba8UnormSrgb": {
+      "worst": 7,
+      "over_1": 275,
+      "changed": 17961
+    },
+    "nested clips": {
+      "worst": 2,
+      "over_1": 1
+    },
+    "editor region": {
+      "worst": 1,
+      "over_1": 0
+    },
+    "over world": {
+      "worst": 1,
+      "over_1": 0
+    },
+    "world text, same runner": {
+      "max_alpha_error_1to1": 0.00392,
+      "max_alpha_error_rotated_scaled": 0.00551
+    }
+  },
+  "llvmpipe_arithmetic_from_source": {
+    "sampler": "lp_bld_sample_aos.c lp_build_sample_image_linear: coords x256, lp_build_iround, -128, ipart >>8, fpart &255; lp_build_reduce_filter_2d on u8n with LP_BLD_LERP_PRESCALED_WEIGHTS",
+    "lerp": "lp_bld_arit.c lp_build_lerp_simple, SSSE3/AVX2: v0 + (pmulhrsw(w, delta<<7) & 0xff) = v0 + floor((w*delta+128)/256)",
+    "srgb": "lp_bld_format_srgb.c: decode s<=15 ? s/(12.6*255) : 0.0023+0.0030x+0.6935x^2+0.3012x^3 (documented within +-0.35); encode a*x^0.375+b*x^0.5+c, a=0.675*1.0622*255, b=0.325*1.0622*255, c=-0.062*255, x<=0.0031308 linear 12.92*255, iround (documented +-0.17 before rounding)",
+    "read_via": "android.googlesource.com/platform/external/mesa3d/+/refs/heads/main (gitlab.freedesktop.org refused automated access)"
+  },
+  "diagnosis": "Candidate reference limitation: the exact filtering/unquantized sRGB oracle cannot admit the documented llvmpipe arithmetic reproduced by CPU emulation. Near black, a 1/255 coverage step can become 4-8 stored codes. Local Metal and emulated geometry/clip/opacity controls pass, but actual failing Linux adapter identity and corrected Linux execution remain unverified. Zero-coverage fragments previously blended; a non-identity sRGB round trip can perturb uncovered pixels.",
+  "source_patch": {
+    "commit": "e2551dd273b9eaaf2b6097bd28102ae714d55eef",
+    "files": [
+      "crates/incant_render/src/ui/ui.wgsl",
+      "crates/incant_render/src/ui_draw_tests.rs",
+      "crates/incant_render/src/ui/mod.rs",
+      "docs/spikes/native-ui-draw.md"
+    ],
+    "shader": "discard fragments whose alpha is zero",
+    "reference": "Model::Portable admitted code intervals: TAP 1/255 (+1/255 off the 1/256 grid) for glyph taps between texel centres, exact on texel centres or equal texels; DECODE 0.5, ENCODE 0.67 per blend; UNORM read exactly",
+    "tests": "four GPU draw tests assert zero channels outside; new CPU test admits Exact and emulated llvmpipe candidates and rejects wrong geometry, opacity, clip"
+  },
+  "metal_before_fix": {
+    "log": "checks/baseline-ui-tests.txt",
+    "all_cases": "worst 1, 0 channels over 1"
+  },
+  "metal_after_fix": {
+    "log": "checks/fixed-ui-tests-1.txt",
+    "outside": 0,
+    "vs_exact_worst": 1,
+    "widest_admitted_span": {
+      "1x sRGB": 4,
+      "2x sRGB": 21,
+      "1.5x sRGB": 29,
+      "1x UNORM": 2,
+      "nested": 4,
+      "region": 5,
+      "over world": 3
+    },
+    "channels_wider_than_2": {
+      "1x sRGB": 44,
+      "2x sRGB": 6535,
+      "1.5x sRGB": 6114,
+      "1x UNORM": 0,
+      "nested": 16,
+      "region": 51,
+      "over world": 7
+    },
+    "changed_pixels_identical_to_baseline": true,
+    "text_under_selection_reference_rejects": {
+      "outside": 279,
+      "excess_codes": 47
+    }
+  },
+  "cpu_rejection_margins": {
+    "log": "checks/oracle-cpu-3.txt",
+    "text_1px_right_min_outside": 3053,
+    "text_half_px_right_2x_outside": 3460,
+    "opacity_90_min_outside": 2233,
+    "missing_ancestor_clip_outside": 146
+  },
+  "gpu_mutations": {
+    "file": "mutations.json",
+    "caught": 8,
+    "total": 8,
+    "unmutated_before_after": "pass"
+  },
+  "limits": [
+    "No Linux or lavapipe execution here: Docker Desktop is installed but not running and was not started; no CI run was made.",
+    "The llvmpipe emulation omits encoder rsqrt estimates. Its counts differ from CI (303 vs275 at2x;2 vs1 nested); similarity is not proof that the failed run used this backend.",
+    "The reference covers backends with at least 8 sub-texel bits; Vulkan permits 4.",
+    "Root owns tools/probes/render-check.py and the Windows geometry-receipt failure; untouched."
+  ],
+  "ci_environment": {
+    "runner": "GitHub ubuntu-latest x86_64",
+    "installed_package": "mesa-vulkan-drivers",
+    "adapter_identity": "Not established by retained failure log; package installation is not selected-adapter evidence",
+    "corrected_linux_execution": "pending"
+  },
+  "cpu_candidate_emulation": {
+    "note": "Model::Llvmpipe composed with the pre-fix shader semantics (zero-coverage fragments still blend), compared with exact arithmetic by the previous metric. rsqrt estimates in llvmpipe's encoder are not emulated. This is a candidate model, not verified execution of the failing CI adapter.",
+    "scale 1": {
+      "worst": 2,
+      "over_1": 1
+    },
+    "scale 2": {
+      "worst": 7,
+      "over_1": 303
+    },
+    "scale 1.5": {
+      "worst": 6,
+      "over_1": 179
+    },
+    "nested clips": {
+      "worst": 2,
+      "over_1": 2
+    },
+    "log": "checks/oracle-cpu-old-shader-emulation.txt"
+  }
+}

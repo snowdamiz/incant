@@ -6,6 +6,7 @@ rust-version.workspace = true
 publish.workspace = true
 
 [dependencies]
+incant_nav.workspace = true
 incant_wasm_abi = { path = "../incant_wasm_abi" }
 incant_input.workspace = true
 incant_localization.workspace = true

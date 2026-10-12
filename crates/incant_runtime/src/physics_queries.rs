@@ -16,6 +16,8 @@ pub enum QueryError {
     #[error(transparent)]
     Navigation(#[from] crate::SceneError),
     #[error(transparent)]
+    Avoidance(#[from] incant_nav::NavigationError),
+    #[error(transparent)]
     Physics(#[from] PhysicsError),
     #[error(transparent)]
     Physics2D(#[from] incant_physics_2d_runtime::PhysicsError),
@@ -32,9 +34,19 @@ pub struct NativeQueries {
     planar: Rc<RefCell<Option<incant_physics_2d_runtime::PhysicsWorld2D>>>,
     navigation: Rc<RefCell<Option<crate::navigation_runtime::NavigationRuntime>>>,
     scene: StableId,
+    identity: crate::WorldIdentity,
     used: bool,
 }
 impl NativeQueries {
+    /// Exact native owner identity; equal scene/entity IDs do not grant authority.
+    pub fn identity(&self) -> &crate::WorldIdentity {
+        &self.identity
+    }
+    /// Only true while the synchronous owning loan is alive.
+    pub fn is_active(&self) -> bool {
+        self.solver.borrow().is_some()
+    }
+
     pub fn localize(
         &self,
         request: &crate::LocalizeRequest,
@@ -110,6 +122,24 @@ impl NativeQueries {
             .as_ref()
             .ok_or(QueryError::Expired)?
             .grid_path(entity, request)?)
+    }
+
+    /// Stateless world-XZ avoidance proposals for a caller-supplied bulk sample.
+    /// IDs correlate input/output; they need not name entities in this world.
+    /// Geometry, movement and physical collision remain the caller's concern.
+    /// The capability still expires with its numeric loan, even for empty input.
+    pub fn steer_agents(
+        &self,
+        request: &crate::SteeringQuery,
+        dt: f64,
+    ) -> Result<Vec<crate::SteeringVelocity>, QueryError> {
+        if self.navigation.borrow().is_none() {
+            return Err(QueryError::Expired);
+        }
+        if !dt.is_finite() || !(1. / 240. ..=1.).contains(&dt) {
+            return Err(incant_nav::NavigationError::Invalid("steering time step".into()).into());
+        }
+        Ok(incant_nav::steer(request, dt as f32)?)
     }
 
     /// Raycast the committed planar solver; pending numeric/structural writes
@@ -212,6 +242,7 @@ impl NativeWorld {
             planar: Rc::new(RefCell::new(None)),
             navigation: Rc::new(RefCell::new(None)),
             scene: self.scene_id(),
+            identity: self.spatial_view()?.identity().clone(),
             used: self.physics_used,
         };
         let guard = Restore {

@@ -1,0 +1,10 @@
+{
+  "at": "2026-10-12T05:24:52.719208+00:00",
+  "reviewer": "astra-root",
+  "evidence_sha256": "e85ecacca3ac755a255340939e278f42d24cba151ecc4e6ac59f3446b100d50d",
+  "patch_sha256": "bf233a49b02b1189974ee929ca0126da6a7ab62fe40c9515c9a5169ec2143cb2",
+  "verified_logs": 6,
+  "tests": 108,
+  "groups": 9,
+  "assessment": "Accept test-only correction. Reviewed actual input reservation and provider failure path; nonzero admitted output, exact redacted failure, full allowance charge and unchanged authoring revision remain asserted. No production change or hosted-repair claim."
+}

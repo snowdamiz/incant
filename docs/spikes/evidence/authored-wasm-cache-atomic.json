@@ -1,0 +1,51 @@
+{
+  "recorded_utc": "2026-10-12T03:57:15.237666+00:00",
+  "base": "448ad76c50943f54549f3339f19fe297bab37547",
+  "author_role": "astra",
+  "branch": "codex/public-wasm-cache-atomic",
+  "finding": "Creating final fingerprint path before write/sync could poison reimport after interruption.",
+  "correction": "Stage private sibling, write and sync, persist_noclobber; concurrent destination accepted only after full captured load validation. Existing corrupt files and symlinks remain refused.",
+  "implementation_sha256": {
+    "Cargo.lock": "b8c57f8a14a4a7a445473176ff3334403c89518b9419d89868fe5e0a46b827a7",
+    "crates/incant_wasm_cook/Cargo.toml": "3dc14de47c0da7a4745069bbf5f13f49f0b938a621eaa899490bf09e3b0ffbeb",
+    "crates/incant_wasm_cook/src/captured.rs": "ccfbf80e587a767662fadaa5b064a5c14cfebc66b69119233d5fc1553a6b1e47"
+  },
+  "unchanged_original_implementation_files": 43,
+  "dependency_resolution": "Only adds existing pinned tempfile edge; no package resolution changes.",
+  "tests": {
+    "new_deterministic_publication_tests": 4,
+    "unchanged_public_import_tests": 3,
+    "existing_cooker_validation_tests": 6,
+    "clippy": "All targets incant_wasm_cook and incant_import, -D warnings passed",
+    "wasm_compile": "wasm32-unknown-unknown incant_wasm_cook and incant_import --no-default-features passed",
+    "fmt_and_diff_check": "passed"
+  },
+  "logs": {
+    "incant-wasm-cache-atomic-tests.log": {
+      "path": "/tmp/incant-wasm-cache-atomic-tests.log",
+      "sha256": "196edf912f5519f7012e54a8f38201fff817b8daa26b61b9b2c7014225ffd70b"
+    },
+    "incant-wasm-cache-atomic-final-tests.log": {
+      "path": "/tmp/incant-wasm-cache-atomic-final-tests.log",
+      "sha256": "da7a6836739dfb26d3018500978118024e819aeb0d9056b22f2776c137c9f522"
+    },
+    "incant-wasm-cache-atomic-clippy.log": {
+      "path": "/tmp/incant-wasm-cache-atomic-clippy.log",
+      "sha256": "df5f727625a37ed0f523ed6f249d101b6d91a065f5f93444e43eb3bc1f9ce3b0"
+    },
+    "incant-wasm-cache-atomic-wasm.log": {
+      "path": "/tmp/incant-wasm-cache-atomic-wasm.log",
+      "sha256": "64a7c29baf48430aa01abd8eda8c4e4d6b478a7f33d7805ab473169632196978"
+    }
+  },
+  "shipping_evidence": {
+    "original_proof": "/tmp/incant-public-wasm-export-proof-002/result.json",
+    "sha256": "c5882a8cc96bdefe9e7c9e3c7082359b2a71ede10c5ae4fd221d9713fb1eaab9",
+    "rerun": false,
+    "reason": "Publication-only correction. Captured bytes/policy/validation and Wasmtime/linked runtime implementations unchanged. Original three packaged process runs remain the measured proof."
+  },
+  "limitations": [
+    "No power-loss filesystem certification or Windows execution in this local follow-up.",
+    "Full guest checkpoint, SDK, device/performance and phase gates remain open."
+  ]
+}

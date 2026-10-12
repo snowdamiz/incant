@@ -1,0 +1,204 @@
+{
+  "recorded_at": "2026-10-12T02:38:25.072352+00:00",
+  "feature": "1a3f1f00e886d23b87d0eeabea71a52c12630f30",
+  "tested_source": "840d5018048128b0e6c7657b7c00656a94b47151",
+  "actual_main": "f53de49b54f939351f008b08f0af8a9d74b292c2",
+  "integrated_source": "354902c2c94bd96902d3a47d795046dc294cc91b",
+  "integration": "Original reviewed feature ancestry preserved. STATUS-only additive resolution; all23 original implementation inputs match. Actualmain119 merge changes no tested tree bytes.",
+  "source_hashes": {
+    "crates/incant_wasm_abi/tests/formatting.rs": "ef2e0776cd340e75a321ea188a272d5d33e522c6d067439016c309bba3ff458a",
+    "crates/incant_wasm_dev/tests/formatting_parity.rs": "de94e7b2f5b8f7dd69e758eb8a08a6d8e5e0af87b2f220b3cba27ef7ae2af30b",
+    "crates/incant_wasm_runtime/fixtures/formatting-start.wat": "b70f42162d4a4a0480358765da33956ee259252f770c72a0368be55059fdb251",
+    "crates/incant_wasm_runtime/fixtures/formatting.wat": "2396c758c541c976103fc600b954112413c9d022fdff53cd74af23121ea34698",
+    "crates/incant_wasm_runtime/tests/formatting.rs": "e50fbb583e97b1c509a1802b395a8f87619060f098959e27a184304df2caa9e8",
+    "sdk/rust/fixtures/formatting_failure.rs": "603c38df6e23e7aadc33ff2ed9fb09aaea8495f5f84623aa78a13693041f1ba6",
+    "sdk/rust/samples/formatting.rs": "10e360be33d47fe94d27e9f956e78c089bde6b1c105c68538a0ec97366cd9f06",
+    "sdk/rust/tests/formatting.rs": "6a9ff70b15a1aff10a6dfbf4d1928acf6249769b82d4b21fb53311f620577c4c",
+    "crates/incant_wasm_abi/src/lib.rs": "e715238c6bef7db5fc15315c4e64dff90536813721cf5c9b8e4d3028d40e1d24",
+    "crates/incant_wasm_abi/src/localization.rs": "8192b4afdbec79000c2fa52fb54425a7e30cffd5a20e44a8d9ea10edaef2eb62",
+    "crates/incant_wasm_dev/src/generated.rs": "2e96ce4e03ad1d9e3bec366bc0e7ebaf7969159954481378250e31874f7fd6ed",
+    "crates/incant_wasm_runtime/c/generated.inc": "a2965657e2abca37a46f12fb333c880a3c02566139f26ae98db1cea743454d75",
+    "crates/incant_wasm_runtime/src/capability.rs": "1f3110c159c1ed69d89be20a7e3b9b01416448210459fd31bd9e2e3f1282b3d8",
+    "crates/incant_wasm_runtime/src/generated.rs": "b89ac3343adb2abe04e843e1859f95768f0ae2550bdee4f49966e61d131bd404",
+    "crates/incant_wasm_runtime/src/input_tags.rs": "efcf24e9b9d204581962415f3999e0d26a9cf0a7e0f3d2a48a9be7246d8a1f17",
+    "crates/incant_wasm_runtime/src/localization.rs": "9451f7c8f0ec6ae3102f48d8143344c379bac61eca6ee16acae0d68dddea7f7d",
+    "sdk/abi/native-v1.json": "e7eb769c95cf145118b4e181ceb707086d4446608320c72562cab342565b38b3",
+    "sdk/rust/src/localization.rs": "ce245273fc4d5bfef18067ca32c839ef971a3cfa299d6d22674e26386ec7c6f9",
+    "sdk/rust/src/raw.rs": "34c50afe7140c5854019533d6ddc5282033d301b5ecd3925efcd563e1c5b5df2",
+    "sdk/rust/src/tick.rs": "fb69a121ef241876aec03a19ca4ef64f66cad59b4379808abf63ce180290731c",
+    "tools/probes/shipping-wasm2c.py": "4e3d30e4d966c4c8e44d55c2d0ba30efb30f6d5e2ad707dbef7edf09bb75c3b3",
+    "tools/tests/test_wasm_sdk.py": "65d5a9c03fb0e64c3f5d5bd0d2351f36b122113a8ca636c34f0467cc456df482",
+    "tools/wasm_abi.py": "65a94661cbc51d05777e5f879eee64d703942af0ca16fa267e5b41fb988fe2a0"
+  },
+  "checks": [
+    {
+      "name": "conformance",
+      "command": [
+        "python3",
+        "tools/probes/shipping-wasm2c.py",
+        "/tmp/incant-wasm-formatting-main119-conformance",
+        "--conformance-only",
+        "--profile",
+        "ci"
+      ],
+      "exit": 0,
+      "seconds": 109.0785767089983,
+      "log": "/tmp/incant-wasm-formatting-union-checks/conformance.log",
+      "sha256": "574af3621e3ea33f4f833844525fcf843cf3d6fd0f8b4c4cda3bea2cebb4805b"
+    },
+    {
+      "name": "wasm32",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "-p",
+        "incant_wasm_abi",
+        "-p",
+        "incant_wasm_runtime",
+        "-p",
+        "incant_wasm_dev",
+        "-p",
+        "incant-module",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--locked",
+        "-j2"
+      ],
+      "exit": 0,
+      "seconds": 1.7158514170150738,
+      "log": "/tmp/incant-wasm-formatting-union-checks/wasm32.log",
+      "sha256": "5dfee0c40ffe945191ea70a279841287fe0dcbc3a7abf49c7922f0eaf443ae15"
+    },
+    {
+      "name": "tools",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_wasm*.py"
+      ],
+      "exit": 0,
+      "seconds": 0.3768638329929672,
+      "log": "/tmp/incant-wasm-formatting-union-checks/tools.log",
+      "sha256": "a2401e90ebb1274cb21afcfd835a3483425d5a9b195d5415602802c71f45c5cb"
+    },
+    {
+      "name": "generated",
+      "command": [
+        "python3",
+        "tools/generate_wasm_sdk.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.12678724998841062,
+      "log": "/tmp/incant-wasm-formatting-union-checks/generated.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.9582548750040587,
+      "log": "/tmp/incant-wasm-formatting-union-checks/fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.03325675000087358,
+      "log": "/tmp/incant-wasm-formatting-union-checks/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "sdk-types",
+      "command": [
+        "node_modules/.bin/tsc",
+        "-p",
+        "sdk/ts/tsconfig.json"
+      ],
+      "exit": 0,
+      "log": "/tmp/incant-wasm-formatting-union-checks/sdk-types.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "graph",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_wasm_runtime",
+        "incant_runtime",
+        "incant_script",
+        "incant_game_runtime",
+        "incant_script_player",
+        "incant_game_player"
+      ],
+      "exit": 0,
+      "log": "/tmp/incant-wasm-formatting-union-checks/graph.log",
+      "sha256": "96003913b027bdaf0e990833a812402beb94d01f5b3a0b8ea0fc1997092ab29c"
+    }
+  ],
+  "conformance": {
+    "passed": 295,
+    "failed": 0,
+    "ignored": 0,
+    "groups": 53,
+    "actual_hosts": [
+      "Wasmtime",
+      "compiled wasm2c"
+    ],
+    "all_target_clippy": true,
+    "fresh_existing_bulk_processes": 3
+  },
+  "retained_artifacts": {
+    "/tmp/incant-wasm-formatting-main119-conformance/conformance-2.log": {
+      "sha256": "eb5ea74f686e49bc82cf45d60633829c723cd98604ec7faf77c3623f8df8a7e3",
+      "bytes": 2495
+    },
+    "/tmp/incant-wasm-formatting-main119-conformance/conformance-1.log": {
+      "sha256": "5e8c887fba63087fca40ee16f6cd93cc4cd2ecf8d52ff3bff2aa472ad648d2a8",
+      "bytes": 2027
+    },
+    "/tmp/incant-wasm-formatting-main119-conformance/conformance-0.log": {
+      "sha256": "33d47fa34771a7b476f27714eaad4a030f2ed35c0a40db215ecb53c421ae73c1",
+      "bytes": 39576
+    },
+    "/tmp/incant-wasm-formatting-main119-conformance/cook-build.log": {
+      "sha256": "293dd3e11d46a4ba34e59634dfc5761deb979d2378e616e8a5198db09f96f5b3",
+      "bytes": 15009
+    },
+    "/tmp/incant-wasm-formatting-main119-conformance/rust-sdk.json": {
+      "sha256": "f95354d42447272cc8ae4a6d86953fd0f8de83494335c13bbdb491e1b29b357a",
+      "bytes": 1317
+    },
+    "/tmp/incant-wasm-formatting-main119-conformance/prepared-manifest.json": {
+      "sha256": "29fdfd7d52c3d6daf737223a7bd59e04b612ee7771ddc9e57a5cc52b7d4bd5f7",
+      "bytes": 50159
+    },
+    "/tmp/incant-wasm-formatting-main119-conformance/development/result.json": {
+      "sha256": "eb5ea74f686e49bc82cf45d60633829c723cd98604ec7faf77c3623f8df8a7e3",
+      "bytes": 2495
+    }
+  },
+  "independent_review": "native-wasm-formatting-root-review.json",
+  "independent_review_sha256": "b76a99e4c9f17fae5fea4b561562de5bbbb44dde1d728e5535c7efa3c35c89e8",
+  "limitations": [
+    "The three fresh processes are the existing development JIT bulk smoke, not a new formatting shipping-export proof.",
+    "No GPU, rendered appearance, phone, device or performance gate.",
+    "Only standalone number/date formatting; catalog authoring/report paging and complete SDK remain open."
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "audio_clips": {
+    "01M4RATYN9WMQ3D7ASY1MKSBGQ": "b2a52d337c64cb12930b798bcc3908dde2fc7ae02420969dea25f7caf484a9da",
+    "01M4RATYP8FFT3NRP64BM15580": "e88a1ce7cf423200ce6f1d77f731ed94e61cdf24e7aedda25d34416d34c463cc"
+  },
+  "cameras": [
+    "00000000000000000000000003"
+  ],
+  "compiler": {
+    "bundleBytes": 1992,
+    "bundleSha256": "21418969f03863d278de555fb8565336763a8622588219662fe8ae5f9987e06f",
+    "compilers": {
+      "swc": "1.16.13",
+      "typescript": "5.9.3"
+    },
+    "format": "incant-native-typescript-project",
+    "limits": {
+      "bundleBytes": 1000000,
+      "fileBytes": 262144,
+      "mapBytes": 4194304,
+      "modules": 64,
+      "sourceBytes": 1048576
+    },
+    "mapBytes": 2832,
+    "mapSha256": "2df5bad65a80a06a9a8abd332b0241da54d332494bfade8a9b6249f7ded728c3",
+    "modules": [
+      {
+        "bytes": 1096,
+        "path": "move.ts",
+        "sha256": "f5d953a16d0b697a7f2537267a0648673fc5fd88cc8083a4f822389fedd8d53d"
+      }
+    ],
+    "sourceBytes": 1096,
+    "sources": [
+      {
+        "id": "00000000000000000000000001",
+        "path": "move.ts"
+      }
+    ],
+    "trust": "fresh local source transform; no project code or configuration executed",
+    "version": 1
+  },
+  "font_assets": [
+    {
+      "fingerprint": "9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2",
+      "id": "01M4RATYV2V23CWGRCQZ7Y38PN"
+    },
+    {
+      "fingerprint": "6864e1444bc7002790e682360d3f93bd45fe51b7045a64ecbf0e76e19e6b758e",
+      "id": "01M4RATYWEZWKFYG8P6GKEDWFM"
+    },
+    {
+      "fingerprint": "1087d4bb69160e3e5955407294226ca3da11166a3188ada3c1a166ba14e55ceb",
+      "id": "01M4RATYXJ75DA14YP7ETHE5MP"
+    }
+  ],
+  "format": "incant-native-project-build",
+  "has_spatial_content": true,
+  "program": null,
+  "project_id": "01M4RATYM5KGWVJA9RCSBQAYX5",
+  "project_sha256": "ede4ec37399ae5326f05864d112c063d928223f63880d6a5729d80fb295f0b04",
+  "scene_id": "01M4RATYM53WT4QK16EPZQE9H6",
+  "scene_sha256": "166cf6460556c671639c9a744d08ad72268e23b2740516b43c6f1d725e595955",
+  "startup_source_parsing": false,
+  "target": "aarch64-apple-darwin",
+  "tick_rate": 60,
+  "version": 1,
+  "visual_assets": [
+    {
+      "fingerprint": "71fbcae82debc0236bda7576327733a6943d93ce7adb913cbe1d95fe931d511f",
+      "id": "01M4RATYYA3D7F3W8TWDA4T7EN",
+      "kind": "model"
+    }
+  ]
+}

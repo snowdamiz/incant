@@ -13,6 +13,7 @@ fn initial() -> CookedScene {
         cast_shadows: false,
     });
     node.animation = Some(Arc::new(NativeAnimation {
+        graph: None,
         mesh_fingerprint: [4; 32],
         clip_durations: Arc::from([2., 0.]),
         initial: Animation {
@@ -106,6 +107,60 @@ fn v4_animation_locale_state_and_timers_resume_through_fresh_and_in_place_load()
 }
 
 #[test]
+fn active_crossfade_v5_resumes_through_ordinary_session_checkpoint() {
+    use incant_runtime::{AnimationControl, AnimationSample, FrameCommands, StructuralCommand};
+    let initial = initial();
+    let code = CompiledScript::compile("exports.default={persistence:{version:1},update(t){let s=t.state.get()||{ticks:0};t.state.set({ticks:s.ticks+1});}};").unwrap();
+    let mut baseline =
+        NativeSession::new(initial.clone(), code.clone(), Default::default()).unwrap();
+    let mut commands = FrameCommands::default();
+    commands
+        .push(StructuralCommand::ControlAnimation {
+            entity: id(1),
+            control: AnimationControl::Crossfade {
+                target: AnimationSample {
+                    clip: Some(0),
+                    seconds: 1.0,
+                },
+                duration: 0.5,
+            },
+        })
+        .unwrap();
+    baseline.world.apply(&mut commands).unwrap();
+    for _ in 0..7 {
+        baseline.tick(&[]).unwrap();
+    }
+    let saved = baseline.checkpoint_bytes().unwrap();
+    assert_eq!(
+        &codec::sections(&saved, identity(&code)).unwrap().world[8..12],
+        &5u32.to_le_bytes()
+    );
+    let mut fresh =
+        NativeSession::from_checkpoint_bytes(&saved, &initial, code.clone(), Default::default())
+            .unwrap();
+    let mut restored = NativeSession::new(initial, code.clone(), Default::default()).unwrap();
+    restored.restore_checkpoint_bytes(&saved).unwrap();
+    for _ in 0..50 {
+        baseline.tick(&[]).unwrap();
+        fresh.tick(&[]).unwrap();
+        restored.tick(&[]).unwrap();
+        assert_eq!(
+            fresh.checkpoint_bytes().unwrap(),
+            baseline.checkpoint_bytes().unwrap()
+        );
+        assert_eq!(
+            restored.checkpoint_bytes().unwrap(),
+            baseline.checkpoint_bytes().unwrap()
+        );
+    }
+    let completed = baseline.checkpoint_bytes().unwrap();
+    assert_eq!(
+        &codec::sections(&completed, identity(&code)).unwrap().world[8..12],
+        &4u32.to_le_bytes()
+    );
+}
+
+#[test]
 fn v4_load_refuses_legacy_and_wrong_bindings_without_replacing_live_session() {
     let initial = initial();
     let code = behavior();
@@ -128,19 +183,19 @@ fn v4_load_refuses_legacy_and_wrong_bindings_without_replacing_live_session() {
         assert!(matches!(
             live.restore_checkpoint_bytes(&bad),
             Err(CheckpointError::Invalid(
-                "session requires world save v3/v4"
+                "session requires world save v3-v10"
             ))
         ));
         assert!(matches!(
             NativeSession::from_checkpoint_bytes(&bad, &initial, code.clone(), Default::default()),
             Err(CheckpointError::Invalid(
-                "session requires world save v3/v4"
+                "session requires world save v3-v10"
             ))
         ));
         assert_eq!(live.checkpoint_bytes().unwrap(), saved);
         assert_eq!(live.world().unwrap().incarnation(), incarnation);
     }
-    for version in [0, 5, u32::MAX] {
+    for version in [0, 11, u32::MAX] {
         let sections = codec::sections(&saved, identity(&code)).unwrap();
         let mut world = sections.world.to_vec();
         world[8..12].copy_from_slice(&version.to_le_bytes());
@@ -149,7 +204,7 @@ fn v4_load_refuses_legacy_and_wrong_bindings_without_replacing_live_session() {
         assert!(matches!(
             live.restore_checkpoint_bytes(&bad),
             Err(CheckpointError::Invalid(
-                "session requires world save v3/v4"
+                "session requires world save v3-v10"
             ))
         ));
         assert_eq!(live.checkpoint_bytes().unwrap(), saved);
@@ -160,7 +215,7 @@ fn v4_load_refuses_legacy_and_wrong_bindings_without_replacing_live_session() {
         assert!(matches!(
             live.restore_checkpoint_bytes(&bad),
             Err(CheckpointError::Invalid(
-                "session requires world save v3/v4"
+                "session requires world save v3-v10"
             ))
         ));
         assert_eq!(live.checkpoint_bytes().unwrap(), saved);

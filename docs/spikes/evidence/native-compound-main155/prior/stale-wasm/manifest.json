@@ -1,0 +1,205 @@
+{
+  "reason": "Wasm renderer saw pre-compound dependent APIs while frozen source exports them unconditionally. Retain cache artifacts before isolated workspace rebuild.",
+  "artifacts": {
+    "deps/libincant_assets_runtime-c01ab10f7a9e4aa0.rmeta": {
+      "sha256": "d3ccb516869d9ffdf561154a36984362990230ae0e7958ff2c4d4adfdf61bb4f",
+      "bytes": 511607
+    },
+    "deps/libincant_types-ec6c050e19351684.rmeta": {
+      "sha256": "597a2c7b63db4cc0df6152d6117bab0f5d6787ee5fd8fd176a1b1d2e7d20c1ac",
+      "bytes": 1215759
+    },
+    "deps/libincant_assets_runtime-10a445557ad9ddc1.rmeta": {
+      "sha256": "879429146deb7c72fa8d5c456f38d3e0bd01255397b2e77242361f30f452e48f",
+      "bytes": 472677
+    },
+    "deps/libincant_assets_runtime-cf2c558332336919.rmeta": {
+      "sha256": "6a97cc5db4166b9c4f901cd347b3a3d0cb7a9b522943cc318ede1e379e05b541",
+      "bytes": 52676
+    },
+    "deps/incant_assets_runtime-9d110bd2a2f25760.d": {
+      "sha256": "02013dde8814f75c685223b60e9e9e0abe85c6386941ff9074f7e115e3d149fb",
+      "bytes": 3179
+    },
+    "deps/incant_render-b74e6a0b4a168375.d": {
+      "sha256": "1f695b1a6332970271fb57a78c08474195d4d7ad9bd0eaf05425a3b134c8e858",
+      "bytes": 6630
+    },
+    "deps/incant_types-ec6c050e19351684.d": {
+      "sha256": "932051a33fcc4ad5c97c7f927f7b9cb5e5a3afeea9b106b4e63866084f07181b",
+      "bytes": 2422
+    },
+    "deps/incant_assets_runtime-c01ab10f7a9e4aa0.d": {
+      "sha256": "95967036fcacb1ab2f7d31643a9820a72c0bf9123834ef8663d942e1565a38fd",
+      "bytes": 3451
+    },
+    "deps/libincant_assets_runtime-9d110bd2a2f25760.rmeta": {
+      "sha256": "0d6f0c52da42453b40b9dd49a4f677e2539d53b5cf0c7805a4a8113c81b113d4",
+      "bytes": 472557
+    },
+    "deps/incant_assets_runtime-10a445557ad9ddc1.d": {
+      "sha256": "a19cc1c96770cca8a9a58bd7230848135d4da31a654c082828b548c78816c409",
+      "bytes": 3179
+    },
+    "deps/incant_assets_runtime-7245caf60d5307fa.d": {
+      "sha256": "7ed4f80f26da44abc4ab7d0ec6175958467bbf7cd020fa040765c708cee88aa4",
+      "bytes": 3004
+    },
+    "deps/incant_types-b643cb26ac2232a4.d": {
+      "sha256": "3def5a9cc4b9af4a03a353e114d2c77b5f490322cd9a6a75949a69ae6cafcaf5",
+      "bytes": 2422
+    },
+    "deps/libincant_types-b643cb26ac2232a4.rmeta": {
+      "sha256": "86e74a3408853fbacbff35d04d13d7581466623d193a2cd73a06f7b2d484b29b",
+      "bytes": 1215645
+    },
+    "deps/incant_assets_runtime-cf2c558332336919.d": {
+      "sha256": "4de0c37f2d7223e72f4e0dd2f86ee85adc87bc0b6b4f9815491fe89894067b1b",
+      "bytes": 509
+    },
+    "deps/libincant_assets_runtime-7245caf60d5307fa.rmeta": {
+      "sha256": "80d2dd03e0777b61827f513e3a68a027840e1f0f5741e9acf0d9df3caff296d3",
+      "bytes": 442439
+    },
+    ".fingerprint/incant_types-ec6c050e19351684/lib-incant_types.json": {
+      "sha256": "0b8d8836503cace343f0ca0b4c149f1c9e61d05f2356dae2346db6478f77f65c",
+      "bytes": 515
+    },
+    ".fingerprint/incant_types-ec6c050e19351684/dep-lib-incant_types": {
+      "sha256": "f14417e484a43934009f97651e2db6e67f3d31234ac419f5329efab49979207e",
+      "bytes": 449
+    },
+    ".fingerprint/incant_types-ec6c050e19351684/invoked.timestamp": {
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "bytes": 48
+    },
+    ".fingerprint/incant_types-ec6c050e19351684/lib-incant_types": {
+      "sha256": "0c2bd5db0d6a019760c8fc86efacce262259fb626499f214fa1b3f9435fb6e85",
+      "bytes": 16
+    },
+    ".fingerprint/incant_assets_runtime-7245caf60d5307fa/dep-lib-incant_assets_runtime": {
+      "sha256": "ecd0c79f7114b94eb862b866d4ac2975f486f27d1b8980a2b82bc82c08493769",
+      "bytes": 466
+    },
+    ".fingerprint/incant_assets_runtime-7245caf60d5307fa/lib-incant_assets_runtime": {
+      "sha256": "1f20b46b901cfdeeba86042a59739d116d57f333ae409fa66aa9661be7b7c7c4",
+      "bytes": 16
+    },
+    ".fingerprint/incant_assets_runtime-7245caf60d5307fa/lib-incant_assets_runtime.json": {
+      "sha256": "bad8b0a83daabefb301e0a30a2f7540ed408c24950a9bd1e5357327415947f65",
+      "bytes": 988
+    },
+    ".fingerprint/incant_assets_runtime-7245caf60d5307fa/invoked.timestamp": {
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "bytes": 48
+    },
+    ".fingerprint/incant_render-72403ef636c9b36f/run-build-script-build-script-build.json": {
+      "sha256": "0bb64c1b0a748c3957734dbbd1457bf3898724d3ba2ffb3e1edcd5b380967785",
+      "bytes": 425
+    },
+    ".fingerprint/incant_render-72403ef636c9b36f/run-build-script-build-script-build": {
+      "sha256": "955ed34efb14fdab83d616bb724b3ad71be43d7e849f7ce6e543c3e104392d43",
+      "bytes": 16
+    },
+    ".fingerprint/incant_assets_runtime-c01ab10f7a9e4aa0/dep-lib-incant_assets_runtime": {
+      "sha256": "038b1296cba7a4b6799c679c66efd58b8eb496b2fd11727b09c16c4bda54c1dd",
+      "bytes": 542
+    },
+    ".fingerprint/incant_assets_runtime-c01ab10f7a9e4aa0/lib-incant_assets_runtime": {
+      "sha256": "ce4f72f274f30c5fd2070eb66b7bec952e9df09d6df855e5e53dcd8655ed36b4",
+      "bytes": 16
+    },
+    ".fingerprint/incant_assets_runtime-c01ab10f7a9e4aa0/lib-incant_assets_runtime.json": {
+      "sha256": "b34b0df2afa262837fdb0fa942668ecd6b4b378aaf22b6b06a898f2b3c7a75fb",
+      "bytes": 1129
+    },
+    ".fingerprint/incant_assets_runtime-c01ab10f7a9e4aa0/invoked.timestamp": {
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "bytes": 48
+    },
+    ".fingerprint/incant_types-b643cb26ac2232a4/lib-incant_types.json": {
+      "sha256": "9c6860fd19ebd5200f4562853f4536a72158e97a976feedfe2bc8c99c4b8e6ea",
+      "bytes": 515
+    },
+    ".fingerprint/incant_types-b643cb26ac2232a4/dep-lib-incant_types": {
+      "sha256": "f14417e484a43934009f97651e2db6e67f3d31234ac419f5329efab49979207e",
+      "bytes": 449
+    },
+    ".fingerprint/incant_types-b643cb26ac2232a4/invoked.timestamp": {
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "bytes": 48
+    },
+    ".fingerprint/incant_types-b643cb26ac2232a4/lib-incant_types": {
+      "sha256": "98fedd857c5391a58fa4c7604576eaaf4839022d5003aeff916eb4c2c0f46d73",
+      "bytes": 16
+    },
+    ".fingerprint/incant_render-b74e6a0b4a168375/lib-incant_render": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    ".fingerprint/incant_render-b74e6a0b4a168375/lib-incant_render.json": {
+      "sha256": "a4d7fd8948c9033a71832249868476c03319d71c8861b6635ac4ee33341b64ca",
+      "bytes": 1355
+    },
+    ".fingerprint/incant_render-b74e6a0b4a168375/dep-lib-incant_render": {
+      "sha256": "d48456bf1f136416bcfd9a7e0b8ec323150d3dde89e825ac6be0bc9408377666",
+      "bytes": 1293
+    },
+    ".fingerprint/incant_render-b74e6a0b4a168375/output-lib-incant_render": {
+      "sha256": "455819b3dea52325338b0e266e7924f6279da0d23b91105350d2ab54a93dbd36",
+      "bytes": 25024
+    },
+    ".fingerprint/incant_render-b74e6a0b4a168375/invoked.timestamp": {
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "bytes": 48
+    },
+    ".fingerprint/incant_assets_runtime-9d110bd2a2f25760/dep-lib-incant_assets_runtime": {
+      "sha256": "edb5ed25703a59a0ff23d8e9baa6f553d7c1364e2a11ad0662de4586187d7166",
+      "bytes": 500
+    },
+    ".fingerprint/incant_assets_runtime-9d110bd2a2f25760/lib-incant_assets_runtime": {
+      "sha256": "acc08c3a5bcdf3e2c8499dbb8c8f93bd5b80861583850ca91b59357777685a17",
+      "bytes": 16
+    },
+    ".fingerprint/incant_assets_runtime-9d110bd2a2f25760/lib-incant_assets_runtime.json": {
+      "sha256": "3d576e219c5f7cbc20990b7e43b089391621c0d00bc072e32ead41d12f09a2e0",
+      "bytes": 1001
+    },
+    ".fingerprint/incant_assets_runtime-9d110bd2a2f25760/invoked.timestamp": {
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "bytes": 48
+    },
+    ".fingerprint/incant_assets_runtime-10a445557ad9ddc1/dep-lib-incant_assets_runtime": {
+      "sha256": "edb5ed25703a59a0ff23d8e9baa6f553d7c1364e2a11ad0662de4586187d7166",
+      "bytes": 500
+    },
+    ".fingerprint/incant_assets_runtime-10a445557ad9ddc1/lib-incant_assets_runtime": {
+      "sha256": "10093dbb029711036f7182f07731a9f3da8441ca6ece07411605a0cd93fb14f0",
+      "bytes": 16
+    },
+    ".fingerprint/incant_assets_runtime-10a445557ad9ddc1/lib-incant_assets_runtime.json": {
+      "sha256": "5385e1a60bc631dadf8ece3008427a573a9f6ea158694364fa8e9adcc4574c53",
+      "bytes": 1001
+    },
+    ".fingerprint/incant_assets_runtime-10a445557ad9ddc1/invoked.timestamp": {
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "bytes": 48
+    },
+    ".fingerprint/incant_assets_runtime-cf2c558332336919/dep-lib-incant_assets_runtime": {
+      "sha256": "e7477a7bb07a06d08249829294fbb5ef3130172b1941d9a8eab44a77d287985d",
+      "bytes": 48
+    },
+    ".fingerprint/incant_assets_runtime-cf2c558332336919/lib-incant_assets_runtime": {
+      "sha256": "d4dd379ae79a3ec62149bd76711ac3643b2b0ff0bf5f28d6e165557241bc9ec3",
+      "bytes": 16
+    },
+    ".fingerprint/incant_assets_runtime-cf2c558332336919/lib-incant_assets_runtime.json": {
+      "sha256": "d33ba099810ff8410544b3178b7d6d0794ca02892adf3ff9653ae84625349b5a",
+      "bytes": 692
+    },
+    ".fingerprint/incant_assets_runtime-cf2c558332336919/invoked.timestamp": {
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "bytes": 48
+    }
+  }
+}

@@ -29,6 +29,19 @@ impl<H: Hook> OfflineCore<H> {
         usize::try_from(self.frames_at(end)? - self.frames_at(tick)?).map_err(|_| GameError::Clock)
     }
     pub fn tick(&mut self, events: &[InputEvent], output: &mut [f32]) -> Result<(), H::Error> {
+        self.tick_packet(
+            events,
+            #[cfg(feature = "ui")]
+            &[],
+            output,
+        )
+    }
+    pub fn tick_packet(
+        &mut self,
+        events: &[InputEvent],
+        #[cfg(feature = "ui")] receipts: &[incant_ui::UiEvent],
+        output: &mut [f32],
+    ) -> Result<(), H::Error> {
         let expected = self.next_output_frames()? * 2;
         if output.len() != expected {
             return Err(GameError::Buffer {
@@ -40,7 +53,12 @@ impl<H: Hook> OfflineCore<H> {
             output,
             keep: false,
         };
-        let result = self.core.tick(events, |audio| audio.render(guard.output));
+        let result = self.core.tick_packet(
+            events,
+            #[cfg(feature = "ui")]
+            receipts,
+            |audio| audio.render(guard.output),
+        );
         // Retryable input rejection restored the original live state. All other
         // errors and unwinds leave it absent and silence the entire tick buffer.
         guard.keep = result.is_ok() || self.core.live.is_some();
@@ -88,8 +106,9 @@ impl OfflineGameSession {
             },
         })
     }
-    /// Restore ordinary gameplay data, with a fresh silent mixer. Sample phase
-    /// derives from the restored world tick; no audio cursor is claimed saved.
+    /// Restore ordinary gameplay data and checked offline audio transports.
+    /// Static resampler history, streamed cursors and rational sample phase are
+    /// preserved; device output and arbitrary VM heap state are not restored.
     pub fn from_checkpoint_bytes(
         bytes: &[u8],
         initial: &CookedScene,
@@ -102,16 +121,17 @@ impl OfflineGameSession {
         crate::require_nonspatial(initial)?;
         Ok(Self {
             inner: OfflineCore {
-                core: Core::from_checkpoint(
+                core: Core::from_offline_checkpoint(
                     bytes,
                     initial,
                     program,
                     actions,
-                    |world| {
-                        crate::require_nonspatial_world(world)?;
+                    |pending| {
+                        crate::require_nonspatial_world(pending.world())?;
                         Ok(NoHost)
                     },
-                    |world| SceneAudio::offline(world, clips, sample_rate),
+                    clips,
+                    sample_rate,
                 )?,
                 sample_rate,
             },

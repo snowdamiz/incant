@@ -1,0 +1,10 @@
+{
+  "source_head": "ca08565e961700bb0b6884fad1dce927c36ac329",
+  "features": [
+    "wasmtime-host"
+  ],
+  "profile": "ci",
+  "sha256": "be93c40adab51f4553cf8298fc59f64d13793ebdb05c2fadc22faf53b59471e5",
+  "bytes": 71983184,
+  "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/incant_headless"
+}

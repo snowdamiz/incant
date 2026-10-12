@@ -1,0 +1,12 @@
+{
+  "recorded_at": "2026-10-12T04:38:53.941486+00:00",
+  "reviewer": "astra/root",
+  "patch_sha256": "604378ee260eb7af2c90c676098b077422ed7422eb435ae2f6c7b0bd4c60ea0b",
+  "receipt_sha256": "aee3abd78c1e24844d9ce83861f823b796c732501266132eb3471eed97d14e58",
+  "decision": "Accepted narrow shipping metadata feature selection repair; explicit dual-host conformance remains required.",
+  "checks": [
+    "Read full patch; same six shipping roots, normal-edge traversal and forbidden compiler denylist.",
+    "Independently verified all five receipt artifacts and traversed shipping metadata: six roots compiler-free.",
+    "Optional development Wasmtime feature remains explicitly enabled in actual host tests; shipping audit no longer includes unrelated development feature selection."
+  ]
+}

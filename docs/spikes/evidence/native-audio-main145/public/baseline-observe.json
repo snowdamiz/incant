@@ -1,0 +1,54 @@
+{
+  "format": "incant-native-observation",
+  "version": 1,
+  "entities": [
+    "00000000000000000000000002"
+  ],
+  "checks": [
+    {
+      "name": "state-timer-ui-0",
+      "tick": 0,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000002",
+        "property": "translation",
+        "value": [
+          0,
+          0,
+          0
+        ],
+        "tolerance": 0
+      }
+    },
+    {
+      "name": "state-timer-ui-13",
+      "tick": 13,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000002",
+        "property": "translation",
+        "value": [
+          31,
+          0,
+          0
+        ],
+        "tolerance": 0
+      }
+    },
+    {
+      "name": "state-timer-ui-40",
+      "tick": 40,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000002",
+        "property": "translation",
+        "value": [
+          94,
+          0,
+          0
+        ],
+        "tolerance": 0
+      }
+    }
+  ]
+}

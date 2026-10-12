@@ -403,6 +403,8 @@ fn maximum_scoped_timer_records_roundtrip_without_short_section_ceiling() {
     live.tick(&[]).unwrap();
     let timers = match &mut live.host {
         SessionVm::Bytecode(host) => &mut host.schedule.timers,
+        #[cfg(feature = "wasmtime-host")]
+        SessionVm::DevelopmentWasm(_) => unreachable!(),
         #[cfg(feature = "static-module")]
         SessionVm::Static(_) => unreachable!(),
     };

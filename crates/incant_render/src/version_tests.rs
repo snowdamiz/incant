@@ -39,6 +39,7 @@ fn versions(root: &Path) -> [Arc<RuntimeAsset>; 2] {
 }
 fn input(sources: &[Arc<RuntimeAsset>]) -> SceneInput {
     SceneInput {
+        text: None,
         nodes: sources
             .iter()
             .enumerate()
@@ -54,6 +55,9 @@ fn input(sources: &[Arc<RuntimeAsset>]) -> SceneInput {
                     source: Arc::clone(source),
                     cast_shadows: true,
                     animation: None,
+                    animation_blend: None,
+                    animation_pose: None,
+                    animation_ik: None,
                 }),
             })
             .collect(),

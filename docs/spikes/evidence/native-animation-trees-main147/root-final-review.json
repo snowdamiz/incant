@@ -1,0 +1,27 @@
+{
+  "at": "2026-10-12T16:34:29.795450+00:00",
+  "reviewer": "astra root",
+  "accepted": true,
+  "head": "fa89e99d6fffd57788f38bc8a5e56b079f853a77",
+  "evidence_sha256": "71c24dd78c5cf9e98e3cd1075344cb844c81ea199da9d8537c31990539bbce1a",
+  "independent_checks": [
+    "223 artifacts rehashed and compared to raw originals",
+    "81 accepted producer source files and1696 build inputs unchanged",
+    "Actual current main147 ancestor; only docs after frozen testhead",
+    "18 command exits zero;793CPU0failure82ignoredGPU in136groups independently counted",
+    "Actual QuickJS/Wasm package and all save/PCM outputs rehashed",
+    "QuickJS3full replays and6split continuations exactsave/PCM; Wasm3physicalPCMs exactlyequal development",
+    "Source/cache/build directories removed from both ordinary proof roots",
+    "Prior source and public-probe reviews remain bound by retained receipts"
+  ],
+  "limitations": [
+    "Local macOS CPU evidence only; all renderer GPU tests stayed ignored. No new native-window, appearance, device, performance or phase acceptance.",
+    "Full guest checkpoints and nonzero timed transitions involving weighted tree states remain unsupported.",
+    "Grouped-pose/fade work41539545 and0057 renderer/Tao corrections are separate; not included in this frozen source.",
+    "Original producer reports remain historical, source-bound evidence; the integrated proofs use newly cooked current-main/current-lock packages."
+  ],
+  "required_before_merge": [
+    "Fast development-checks SUCCESS on PR head",
+    "One feature PR at a time; no release or phase promotion"
+  ]
+}

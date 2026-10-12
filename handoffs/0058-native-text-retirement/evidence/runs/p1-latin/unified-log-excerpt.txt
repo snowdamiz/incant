@@ -1,0 +1,14 @@
+Timestamp               Ty Process[PID:TID]
+2026-10-12 12:28:21.752 I  incant_game_player[27789:1439d7] [com.apple.launchservices:cas] Removing cached information for app [ 0x0-0xec0ec]  "incant_game_player", as its seed is different from that in shared memory ( 531 vs 534)
+2026-10-12 12:28:26.618 I  incant_game_player[27789:1439c1] [com.apple.AppKit:Window] window <TaoWindow: 0x104c0f630> windowNumber=2a1 finishing close
+2026-10-12 12:28:26.619 E  incant_game_player[27789:143ae9] [com.apple.coreaudio:AMCP]          HALC_ProxyIOContext.cpp:1676  HALC_ProxyIOContext::IOWorkLoop: skipping cycle due to overload
+2026-10-12 12:28:26.622 I  incant_game_player[27789:1439c1] [com.apple.AppKit:Intelligence] stopping collection observation
+2026-10-12 12:28:26.622 Df incant_game_player[27789:143ae9] [com.apple.xpc:connection] [0x797540dcc0] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-10-12 12:28:26.622 Df incant_game_player[27789:143ae9] [com.apple.xpc:session] [0x7974853340] Session canceled.
+2026-10-12 12:28:26.622 Df incant_game_player[27789:1439da] [com.apple.UIIntelligenceSupport:xpc] agent connection cancelled (details: Session manually canceled)
+2026-10-12 12:28:26.622 Df incant_game_player[27789:1439da] [com.apple.xpc:session] [0x7974853340] Disposing of session
+2026-10-12 12:28:26.622 Df incant_game_player[27789:1439c1] [com.apple.CoreAnalytics:client] Entering exit handler.
+2026-10-12 12:28:26.622 Df incant_game_player[27789:1439c1] [com.apple.CoreAnalytics:client] Queueing exit procedure onto XPC queue. Any further messages sent will be discarded. activeSendTransactions=0
+2026-10-12 12:28:26.622 Df incant_game_player[27789:1439da] [com.apple.CoreAnalytics:client] Cancelling XPC connection. Any further reply handler invocations will not retry messages
+2026-10-12 12:28:26.622 Df incant_game_player[27789:1439da] [com.apple.xpc:connection] [0x797540c3c0] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-10-12 12:28:26.622 Df incant_game_player[27789:1439c1] [com.apple.CoreAnalytics:client] Exiting exit handler.

@@ -1,0 +1,2243 @@
+{
+  "at": "2026-10-12T16:31:28.573752+00:00",
+  "scope": "Reviewed authored nested animation trees and complete-pose Wasm v4 integrated with actual main147; local CPU and two fresh ordinary shipping-package proofs.",
+  "tested_head": "4487c5ae92369c2a69a08dc53a02f25143eefe34",
+  "tested_tree": "5343b55e855dc5fc4ae6d611a2348b66686f9e49",
+  "main": "bbe95b237e430d0657402c0bb9c83aa0516e2368",
+  "preserved_heads": [
+    "21e73c29e6ff97d0833b28ec1cedb66e7b56135f",
+    "3a3f7b12457f6ffb6ea77eff674e5237f1658ea5",
+    "144be370e7ebae74ea225d96a75411f53703092a"
+  ],
+  "integration_resolutions": [
+    "Retain exact main147 asset IK modules/tests/player and render_game UI checkpoint implementation/tests.",
+    "Use accepted root canonical AnimationPoseSamples type and tree evaluator; retains568 underflow tail fix.",
+    "Use accepted v4 registry, generated dispatch, new calls and tests; prior physics39-41 unchanged.",
+    "Use accepted v4 conformance source which still builds/tests physics guests but retains focused v4 artifacts.",
+    "Preserve current main STATUS, checkpoint11 failures and historical integration docs; add accepted tree/v4 status.",
+    "Take newer accepted exporter HOME-omission review metadata; production exporter and actual child regression same across root/v4."
+  ],
+  "source_comparison": [
+    {
+      "path": "crates/incant_cmd/tests/animation_tree.rs",
+      "sha256": "21ade0617d35e85c009590083bd74f372c10de1a7d6c2ee505219a5b4b5f58f7",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_cook/examples/animation_pose_package_oracle.rs",
+      "sha256": "3900b876fd2ebd917d537fa35f041c2a8d79408743773040f386a9df19ae4b65",
+      "exact_sources": [
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_cook/src/animation_graph.rs",
+      "sha256": "4aff302e410f331bc4c1e940fce4b84ed96ae6c770dee68437821b3dd062b593",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_cook/src/animation_graph/tree.rs",
+      "sha256": "24b373e1e63a4ceb5c9841bfff4b2217cea412f4b373ad1d654deace753edbd2",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_cook/tests/animation.rs",
+      "sha256": "efc753512edc2df6c45b42356b3fdb77c6ad40df0d31e40cc10d72f404656463",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_cook/tests/animation/tree.rs",
+      "sha256": "d0c71a6c8cda8a20af1d36d8fcea58b0ceab31c871912970694666d05995905e",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_doc/src/animation_graph.rs",
+      "sha256": "605937bab7f496d501ed5daa3b6d5546c23bf0884c4440653a5dac656124dbe0",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_render/src/animation_tests.rs",
+      "sha256": "0fcfc0b28721a9f9da6a6be960ec7b7f2b9039729672225d0e569bf9ad94fa6d",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_render/src/flipbook_tests.rs",
+      "sha256": "dc8b3f5eace8dca21302bb0c6bee5b550f19332c1e978b46caf710cda225fa26",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_render/src/models/animation.rs",
+      "sha256": "ba9994571e84c3295d1541d5bf7bf82df4ddfce30dcec65ca5a720c738345901",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_render/src/retained.rs",
+      "sha256": "d4aefbb6042e2f80e40881c83b871a8b09f346746c9433b1de6093a2420f0184",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_render/src/retained_tilemap_tests.rs",
+      "sha256": "d871985e3606b9bb3f966113ac066039ad37eb784e9bcdc73c33f4c8afc7be3a",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_render/src/scene.rs",
+      "sha256": "3d120b908cbf2690369884ffebadde3b5e09dd246a0c3299c525bbe30aeaf784",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_render/src/version_tests.rs",
+      "sha256": "52b1f7b5f277b8e2e1fa92096f929ca87a79e6e04487fc38a93e287bf36c999a",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_render_authoring/src/lib.rs",
+      "sha256": "a32f7f3333439eed83d30aa719dc6aa1a8d43e6520e787dac9cb42e1d18cc697",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_render_data/src/lib.rs",
+      "sha256": "847df932152659d2c60beed62da7a0a05d062c75811169d4b0721c5130facf43",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_render_native/src/binding.rs",
+      "sha256": "72093e0339f5742ab894619f0074f610c05bca577311c59443a981aa26844a45",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_render_native/src/lib.rs",
+      "sha256": "1127f81346f1281b653012422385bb0d7fa9b0be158509c56cb0587a5383e725",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_render_native/src/update.rs",
+      "sha256": "d5ff5a6f89b07fa0cb2532fc31e89b5b4e5df0298d83b9e09d825d515d0e0e0f",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_render_native/tests/animation.rs",
+      "sha256": "1dfc4b015c6291721ba81e10ff9e90b07591d36641be6f80fc8ab04cfec301f4",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_runtime/src/animation.rs",
+      "sha256": "26b9248795382021365b13bd0c1e1e7a0b765b767683e96b12eaf6bf82653346",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_runtime/src/animation_graph/binary.rs",
+      "sha256": "ca60cf9e53895c19732f2738fa5cb5cb5747728c710e5b0934c65f17ede399e9",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_runtime/src/animation_graph/definition.rs",
+      "sha256": "8c23554840d7dcdab4618093f3399bfe415eb25155394e51943dbc9d350203bf",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_runtime/src/animation_graph/playback.rs",
+      "sha256": "bc721b26cbd0611c1241fef32f0ec99dc096ebb45854ce6ceffedfcc7d5c6bd4",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_runtime/src/animation_graph/tree/binary.rs",
+      "sha256": "14f540cf7c7136d12f3fb1b7b7d09168dd9953ea29e64fb62338ada48ad24582",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_runtime/src/animation_graph/tree/evaluate.rs",
+      "sha256": "95b14c19dbf043bbdd23eba7685bebb6aadb95bc10665094866a730789c62ab4",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_runtime/src/animation_graph/tree/mod.rs",
+      "sha256": "5ee12bb83e07d9c461040d5b6416fe0768245b82be3faf5fb4f0efd426b86609",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_runtime/src/binary.rs",
+      "sha256": "f6aa8a39c8eded91b0dbfc17e7f3c9f92c50ccf266bb88390b903c83f755e91b",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_runtime/src/scene.rs",
+      "sha256": "0c0a374f525c7d37c1308675a3d1cc1bdc692960a3f7909c9558dd4a208d8b51",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_runtime/src/spatial_view.rs",
+      "sha256": "eec3799fa7f39d5be9a119b09ba51261e794f531821c61b60057379ea2c837a4",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_runtime/tests/animation_tree_playback.rs",
+      "sha256": "712ef30d2183f230aa8416afa0b8a840704ff2a862c08a29c30988837cab10fe",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_runtime/tests/physics.rs",
+      "sha256": "c234f0378e778f521f82d903f4f11fbee3ddee5fb5a964d886256c29ddd11dae",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_runtime/tests/physics_2d.rs",
+      "sha256": "8841f291bf8b6bdd9ae3def6871c30f03eef4e1e31e3d690c6ea022929bdac6e",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_runtime/tests/scenes.rs",
+      "sha256": "c2894f64340009ca41f4834e57c0ef2167550e1a54edd09f71964bf58c0d4994",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_script/src/animation_graphs.rs",
+      "sha256": "796f5232c83fadd78cd6dbcf2f38b87cf39b90c2b7f1165e46d10c1aad1a573a",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_script/src/animations.rs",
+      "sha256": "6e2b731384fa7949ee99b72356d3412742ca8ed5456b7aa396693a27698bf580",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_script/tests/animations/graph.rs",
+      "sha256": "e4a920ad076af1a23c882a64b2bd0f6ab0686d6a6e8089b87a051f68cb943f8e",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_types/src/animation_graph.rs",
+      "sha256": "a69d922d178632acadcfaba92c67f60acead90f608e5dca90898d082e32e84c1",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_types/src/animation_pose.rs",
+      "sha256": "cb56b5ec69667dc76432ea53c762b3c07e4308003e90094aa84c1881b87dfbc3",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_types/src/animation_tree.rs",
+      "sha256": "64fed424659b3979e5e7bd21a448550cb950e001790962f019b2c50c97f6164e",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_types/src/lib.rs",
+      "sha256": "974ad0edd11b701ad4dafd60e8ff05b37198b7bd52fcc0f6fcb7d320103afd82",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_wasm_abi/src/lib.rs",
+      "sha256": "3300e0e1e130ae30031eeadea78265221ff2381d4c6f83f72994a7c7d25926be",
+      "exact_sources": [
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_wasm_dev/src/generated.rs",
+      "sha256": "8511e5774c78c7e3a62afbfd51092c4b60185b9a69c43578fa59a7cae81862fd",
+      "exact_sources": [
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_wasm_dev/tests/animation_parity.rs",
+      "sha256": "dbd2e8c9dcbf3332e8e3c9d726a9a410b06fd2cd54cf663ca3101797ef7b7a5e",
+      "exact_sources": [
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_wasm_dev/tests/animation_poses_parity.rs",
+      "sha256": "3ef8199a7a58e65c0eee8b16ad9798525f615c188b2632457fae9ba31e17c897",
+      "exact_sources": [
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_wasm_dev/tests/crossfade_parity.rs",
+      "sha256": "99288a5a86cf167d8c3b81fe14f1c5819d57889c64832ed40b37808aadef422f",
+      "exact_sources": [
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_wasm_runtime/c/generated.h",
+      "sha256": "eb14d0b2c047ea652a12cc6a466f0d61cce102bb4aaa12924c9c8b8a8fa66f33",
+      "exact_sources": [
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_wasm_runtime/c/generated.inc",
+      "sha256": "743b3c7fb3add62923de939e4b14c3dcc7f6a8eb43bac833890e8cb2e38fef92",
+      "exact_sources": [
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_wasm_runtime/fixtures/animation-poses.wat",
+      "sha256": "b2eb5ca87b550aea8b78b8387e391bca8bcbda71a19f656283a1dc5c253a0ea4",
+      "exact_sources": [
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_wasm_runtime/src/animation_poses.rs",
+      "sha256": "1a73cb049efc08e7b61b79e75aff2044b4cda5142d6de2b9d08a7ee04a3b75e4",
+      "exact_sources": [
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_wasm_runtime/src/animations.rs",
+      "sha256": "977293e4def9d4db5a1f58019d1eb9d94e457eed4bee5438577e2776cba908f7",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_wasm_runtime/src/capability.rs",
+      "sha256": "0c90bc434e699a9a3e039f96fd3ad9eb00dd0f7097e3cc1c7f35a67b020ff5ba",
+      "exact_sources": [
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_wasm_runtime/src/generated.rs",
+      "sha256": "094577e8ea0cf3848dec9cf8011a2926456ecddb5e47d6338d224916fb90f59f",
+      "exact_sources": [
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_wasm_runtime/src/input_tags.rs",
+      "sha256": "1748f9c17bc308cdac23971401c911a699dddeebfaa5355e6bb21c6d2e96f2f6",
+      "exact_sources": [
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_wasm_runtime/src/lib.rs",
+      "sha256": "8100d25e0cd8e53090de35c2606e35b65ba8b0615c01886d552952baa51f517f",
+      "exact_sources": [
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_wasm_runtime/tests/animation_poses.rs",
+      "sha256": "9475d689f1aa921c3d608096818573cafc7d1902cef0ed17e57e0458d7a769bc",
+      "exact_sources": [
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_wasm_runtime/tests/animations/graph_sdk.rs",
+      "sha256": "ba627586f1202e0052a468ec77842e6a4f527dc228cb518cf3ff1a85ec45cfda",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "crates/incant_wasm_runtime/tests/support/animation_poses.rs",
+      "sha256": "191671894959cd1e01378367a548fafceac56d23c564902b8fa717bb7fe800b4",
+      "exact_sources": [
+        "v4"
+      ]
+    },
+    {
+      "path": "schemas/AnimationGraph.schema.json",
+      "sha256": "bcae725f851e243543eeff719a842d66dc1a4d20991fc502326d31dd789cdf85",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "sdk/abi/native-v1.json",
+      "sha256": "3bc656e792ed9d84e934cd94eddacd91f275ec01e97cb0c74e33c28126874006",
+      "exact_sources": [
+        "v4"
+      ]
+    },
+    {
+      "path": "sdk/rust/README.md",
+      "sha256": "242bea7239b474ccb64825793e0240a5321bc40c821004952cdf67b7d96f849f",
+      "exact_sources": [
+        "v4"
+      ]
+    },
+    {
+      "path": "sdk/rust/fixtures/animation_poses_failure.rs",
+      "sha256": "6fb74d598219ff665f1d1bde05133193ac7bf550204f03bd535d011e1e5dbf25",
+      "exact_sources": [
+        "v4"
+      ]
+    },
+    {
+      "path": "sdk/rust/samples/animation_poses.rs",
+      "sha256": "2ddc93843e7bb6cf5cc0053333b6b926667cc730c46ad5776c84c96516bc5286",
+      "exact_sources": [
+        "v4"
+      ]
+    },
+    {
+      "path": "sdk/rust/src/animation.rs",
+      "sha256": "289cae8d4665c2ab66ab0884622393fe594ce0d13116209acecd5e61e3ec5ad2",
+      "exact_sources": [
+        "v4"
+      ]
+    },
+    {
+      "path": "sdk/rust/src/animation_pose.rs",
+      "sha256": "f634be6ad26fc8e34f18b5424b66d95716929053f847653f032f8761c4c53206",
+      "exact_sources": [
+        "v4"
+      ]
+    },
+    {
+      "path": "sdk/rust/src/lib.rs",
+      "sha256": "4d156d2c9b18091082f850f623c8295e7b70a0359bc03ac8d34257ac8d35e7b6",
+      "exact_sources": [
+        "v4"
+      ]
+    },
+    {
+      "path": "sdk/rust/src/raw.rs",
+      "sha256": "e78dfee830db5fc8a41af651333cf72246865ec5244a5561762cdadbf0ebc3da",
+      "exact_sources": [
+        "v4"
+      ]
+    },
+    {
+      "path": "sdk/rust/src/tick.rs",
+      "sha256": "47297dfb684c4f0e83bd0f7933ceca2c0e5adcbdc8f3106e6310124d4573d004",
+      "exact_sources": [
+        "v4"
+      ]
+    },
+    {
+      "path": "sdk/rust/tests/animation_v4.rs",
+      "sha256": "e81778a0dde4e48adfdfcc7f9e5810a767f2a95173f00c1fd674467fef48ee4a",
+      "exact_sources": [
+        "v4"
+      ]
+    },
+    {
+      "path": "sdk/ts/src/generated.d.ts",
+      "sha256": "0b0c01ae0641f0cb20ff304ae9ecd9586fb32fe233be32283c1505b0bb433203",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "sdk/ts/src/native.d.ts",
+      "sha256": "3d5e6f262297aa670e66aa6b7d89504a7cd9c6ac90725dd93e34f1602460d5d7",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "tools/export_native.py",
+      "sha256": "a22f6431bb6db373982970e53a219f1f57633c538e08055bcafacefa887699a1",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "tools/generate_wasm_sdk.py",
+      "sha256": "d3490d9a7a3af3b10ac5414a22fbdd8c5a4657a86369d7d6164a723b21318fa0",
+      "exact_sources": [
+        "v4"
+      ]
+    },
+    {
+      "path": "tools/probes/native-animation-tree-export.py",
+      "sha256": "9d0f580ea681bfc2775ebf671b8c71b7fe640b43072639289404bdce5c7017a3",
+      "exact_sources": [
+        "root"
+      ]
+    },
+    {
+      "path": "tools/probes/native-animation-tree-export/behavior.ts",
+      "sha256": "5314c1fdb8aa2012a492e1fdf78f521b6da364d1a379413e120b13e1be88dba1",
+      "exact_sources": [
+        "root"
+      ]
+    },
+    {
+      "path": "tools/probes/native-wasm-animation-pose-export.py",
+      "sha256": "7977df9c1cf49323349f8c0395a51e885af6845758f656ccc7ea850ed50401c4",
+      "exact_sources": [
+        "v4"
+      ]
+    },
+    {
+      "path": "tools/probes/native-wasm-animation-pose-export/behavior.rs",
+      "sha256": "9c42af82283c680ecb007786cca0d27dc040c7d7f9206daeadb90034a0317b8b",
+      "exact_sources": [
+        "v4"
+      ]
+    },
+    {
+      "path": "tools/probes/shipping-wasm2c.py",
+      "sha256": "04faec965a20f23555efd80dc3ad11a9ee5b43b471a4836f734f309ad0b667ae",
+      "exact_sources": [
+        "v4"
+      ]
+    },
+    {
+      "path": "tools/tests/test_native_package.py",
+      "sha256": "334a00178d220960fa8a919290367b2d0301e1855d089ee9525480eaaa896728",
+      "exact_sources": [
+        "root",
+        "v4"
+      ]
+    },
+    {
+      "path": "tools/tests/test_wasm_sdk.py",
+      "sha256": "31de55ac3762dada9bf4896a2cca0da56db8a77b1a34e9faeeb56f3460c390be",
+      "exact_sources": [
+        "v4"
+      ]
+    },
+    {
+      "path": "tools/wasm_abi.py",
+      "sha256": "e59174e252c2b0177ef786f30045e3d50e6761534029791e10bf847d944d27bc",
+      "exact_sources": [
+        "v4"
+      ]
+    }
+  ],
+  "frozen_inputs": 1696,
+  "checks": [
+    {
+      "name": "conformance",
+      "command": [
+        "python3",
+        "tools/probes/shipping-wasm2c.py",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/conformance",
+        "--rustup",
+        "/opt/homebrew/bin/rustup",
+        "--profile",
+        "ci",
+        "--conformance-only"
+      ],
+      "exit": 0,
+      "seconds": 247.87459891700018,
+      "sha256": "574af3621e3ea33f4f833844525fcf843cf3d6fd0f8b4c4cda3bea2cebb4805b"
+    },
+    {
+      "name": "affected-tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_types",
+        "-p",
+        "incant_doc",
+        "-p",
+        "incant_cmd",
+        "-p",
+        "incant_cook",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_assets",
+        "-p",
+        "incant_assets_runtime",
+        "-p",
+        "incant_render_data",
+        "-p",
+        "incant_render_native",
+        "-p",
+        "incant_render_authoring",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_wasm_runtime",
+        "-p",
+        "incant_game_runtime",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "incant_script/ui,incant_script/audio,incant_game_runtime/ui,incant_assets_runtime/visual"
+      ],
+      "exit": 0,
+      "seconds": 429.3967936660001,
+      "sha256": "5c268335c69713c07abbaab03f55ee15fb422da28765a7cec6a691b512c4a899"
+    },
+    {
+      "name": "affected-clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_types",
+        "-p",
+        "incant_doc",
+        "-p",
+        "incant_cmd",
+        "-p",
+        "incant_cook",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_assets",
+        "-p",
+        "incant_assets_runtime",
+        "-p",
+        "incant_render_data",
+        "-p",
+        "incant_render_native",
+        "-p",
+        "incant_render_authoring",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_wasm_runtime",
+        "-p",
+        "incant_game_runtime",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "incant_script/ui,incant_script/audio,incant_game_runtime/ui,incant_assets_runtime/visual",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 59.34992975000023,
+      "sha256": "728f01a2997037f0d3251ba0da349fdaf96548f7156bb446ef6f72693f3c4bb4"
+    },
+    {
+      "name": "headless",
+      "command": [
+        "./tools/cargo",
+        "build",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_headless",
+        "--features",
+        "wasmtime-host"
+      ],
+      "exit": 0,
+      "seconds": 53.000779208000495,
+      "sha256": "b68df89efd04be4d2c3a751309b10b4ef95c4051f1323aecfde4d4997edc3d37"
+    },
+    {
+      "name": "oracle",
+      "command": [
+        "./tools/cargo",
+        "build",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_cook",
+        "--example",
+        "animation_pose_package_oracle"
+      ],
+      "exit": 0,
+      "seconds": 92.82933029200012,
+      "sha256": "8ddd08816809e9007a1f35329424505207b701605b1fa23b29806bc28d439603"
+    },
+    {
+      "name": "wasm",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "--lib",
+        "-p",
+        "incant_types",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_render_data",
+        "-p",
+        "incant_render_native",
+        "-p",
+        "incant_wasm_runtime",
+        "-p",
+        "incant-module",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "exit": 0,
+      "seconds": 1.9917897909999738,
+      "sha256": "b6acb55e7da8014dc3af857b44e52ef1d2d9efd44e0a2179d5e692ad0c97b4f8"
+    },
+    {
+      "name": "graph",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_runtime",
+        "incant_script",
+        "incant_assets_runtime",
+        "incant_render_data",
+        "incant_render_native",
+        "incant_render",
+        "incant_game_runtime",
+        "incant_wasm_runtime",
+        "incant_wasm_player",
+        "incant_game_player",
+        "--features",
+        "incant_game_player/static-module,incant_game_player/render-input"
+      ],
+      "exit": 0,
+      "seconds": 0.39477325000007113,
+      "sha256": "ee9ee3bac78124f0d702ddd2a88a0ab0a529600a649d5b8119e68a600f8b9c4a"
+    },
+    {
+      "name": "schema",
+      "command": [
+        "/Users/andreyyurlov/.codex/incant-integration-target/ci/incant_headless",
+        "schema",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/schemas"
+      ],
+      "exit": 0,
+      "seconds": 0.7193121670006803,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "schema-match",
+      "command": [
+        "python3",
+        "-c",
+        "from pathlib import Path; a=Path('schemas'); b=Path('/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/schemas'); assert {p.name:p.read_bytes() for p in a.glob('*.schema.json')}=={p.name:p.read_bytes() for p in b.glob('*.schema.json')}"
+      ],
+      "exit": 0,
+      "seconds": 0.021141500000339875,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "generated",
+      "command": [
+        "python3",
+        "tools/generate_wasm_sdk.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.1540802920007991,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "sdk",
+      "command": [
+        "node",
+        "tools/generate_sdk.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.0341353750000053,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "typescript",
+      "command": [
+        "node",
+        "node_modules/typescript/bin/tsc",
+        "-p",
+        "sdk/ts/tsconfig.json"
+      ],
+      "exit": 0,
+      "seconds": 0.2222216660002232,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.977352165999946,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.033509207999486534,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "tools",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_*.py"
+      ],
+      "exit": 0,
+      "seconds": 20.129722417000266,
+      "sha256": "dd9a1984647cb74a91d2b060655889f964fb360344a576ecf2c81b096a041da6"
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.018289791000825062,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "quickjs-export",
+      "command": [
+        "python3",
+        "tools/probes/native-animation-tree-export.py",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export",
+        "--binary",
+        "/Users/andreyyurlov/.codex/incant-integration-target/ci/incant_headless"
+      ],
+      "exit": 0,
+      "seconds": 351.34363683299944,
+      "sha256": "3995dac6e6786e0a4f9a50bdc08ab6626e75da377f918c12fd044d84ff461286"
+    },
+    {
+      "name": "wasm-export",
+      "command": [
+        "python3",
+        "tools/probes/native-wasm-animation-pose-export.py",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export",
+        "--binary",
+        "/Users/andreyyurlov/.codex/incant-integration-target/ci/incant_headless",
+        "--oracle",
+        "/Users/andreyyurlov/.codex/incant-integration-target/ci/examples/animation_pose_package_oracle"
+      ],
+      "exit": 0,
+      "seconds": 363.26633200000015,
+      "sha256": "6816cec47808d628463ad904b638ac54aa8ced1b2f11e4ed08303f9b7c63201c"
+    }
+  ],
+  "verified_results": {
+    "frozen_head": "4487c5ae92369c2a69a08dc53a02f25143eefe34",
+    "frozen_input_count": 1696,
+    "all_frozen_inputs_unchanged": true,
+    "zero_exit_commands": 18,
+    "tests": {
+      "actual-host": {
+        "groups": 71,
+        "passed": 401,
+        "failed": 0,
+        "ignored": 0
+      },
+      "affected": {
+        "groups": 136,
+        "passed": 793,
+        "failed": 0,
+        "ignored": 82
+      }
+    },
+    "conformance_passed": true,
+    "public_proofs": {
+      "quickjs": {
+        "actual_package_files": {
+          "data/clips.bin": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+          "data/empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+          "data/input-actions.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "data/models/3c2837b62f3091aff8acb89d90ea8f15bb1ec7787e603f34dcbfc7eac446c76d.incmodel": "b2a8e41a304e805aebdcb90cb35adbfd28ea9cb8dfca481bddc2b4e12d9a029f",
+          "data/package.json": "e81b0ea939e08478c50a00bdfea13bb2a7d94a8e9ab468c572cc843419f49cc8",
+          "data/world.scene": "d5f271c7bfee8d1c09529f5ba823be6c3ccac9d5ca9fa79b4567fa6ac043550e",
+          "incant_game_player": "2a262acdfa605f4107750ff77f42c2316b1345d906aceb8b52e134e6df4b8dfb"
+        },
+        "player_sha256": "2a262acdfa605f4107750ff77f42c2316b1345d906aceb8b52e134e6df4b8dfb",
+        "commands": 26,
+        "successes": 15,
+        "full_runs": 3,
+        "continuation_pairs": 6,
+        "exact_refusals": 2,
+        "independent_full_log_check": true,
+        "repeat_and_split_pcm_exact": true,
+        "final_saves_equal": true,
+        "actual_output_files": {
+          "rest-completed-paused-continued.save": {
+            "sha256": "c61cf4560314de018a14fbe28751c27bb4660f3ab1569b9def30e7bca0e6e26f",
+            "bytes": 3420
+          },
+          "paused.pcm": {
+            "sha256": "c72274a22cba2dcef62e0f62834446ee39b0cd95ad0faa27a89b3b49f48aa390",
+            "bytes": 57600
+          },
+          "eight-to-four.save": {
+            "sha256": "0ee17ac1d2572572650ab0279c48f1cfc394b30a22cc29bcc88019b09158ff29",
+            "bytes": 3420
+          },
+          "eight-to-four.pcm": {
+            "sha256": "c65206769723a13afe80c0d925531639ceef9c2eb97eee3b1b542739ec40597f",
+            "bytes": 25600
+          },
+          "second-state-continued.pcm": {
+            "sha256": "a515959304caf9651b7d2b8b22368d869e2a763eb6061b4ff4b2493711a06129",
+            "bytes": 198400
+          },
+          "reverse.pcm": {
+            "sha256": "ac8f5613c4b176d380009fa1306c49a027644dba38b9703ed102634c60f8d5ff",
+            "bytes": 134400
+          },
+          "paused-continued.save": {
+            "sha256": "c61cf4560314de018a14fbe28751c27bb4660f3ab1569b9def30e7bca0e6e26f",
+            "bytes": 3420
+          },
+          "rest-completed-paused.pcm": {
+            "sha256": "c4527252a0b06fcda9139288af35098246c319087447a40400a9cc6c200dbf10",
+            "bytes": 70400
+          },
+          "repeat-0.save": {
+            "sha256": "c61cf4560314de018a14fbe28751c27bb4660f3ab1569b9def30e7bca0e6e26f",
+            "bytes": 3420
+          },
+          "repeat-1.save": {
+            "sha256": "c61cf4560314de018a14fbe28751c27bb4660f3ab1569b9def30e7bca0e6e26f",
+            "bytes": 3420
+          },
+          "reverse-continued.pcm": {
+            "sha256": "ed9524f9e8318c1bf1be6ad5f519f95513194dc348d68bf08fb5f966fc565be3",
+            "bytes": 224000
+          },
+          "zero-speed-continued.pcm": {
+            "sha256": "bba4463319d17dafd261b99651ecef74f1041be91d6b6cc86bb61a938e0e1818",
+            "bytes": 140800
+          },
+          "zero-speed-continued.save": {
+            "sha256": "c61cf4560314de018a14fbe28751c27bb4660f3ab1569b9def30e7bca0e6e26f",
+            "bytes": 3420
+          },
+          "paused-continued.pcm": {
+            "sha256": "6fc524968f109b653a79e0aa6a05b8a35535cc5e074708c9d9ad9e5e1c2064d2",
+            "bytes": 300800
+          },
+          "baseline.pcm": {
+            "sha256": "11001dd97006a44b5bccaaafeb04f0a089ad1a7b3781f58362cb62cc814de4ce",
+            "bytes": 358400
+          },
+          "second-state-continued.save": {
+            "sha256": "c61cf4560314de018a14fbe28751c27bb4660f3ab1569b9def30e7bca0e6e26f",
+            "bytes": 3420
+          },
+          "reverse-continued.save": {
+            "sha256": "c61cf4560314de018a14fbe28751c27bb4660f3ab1569b9def30e7bca0e6e26f",
+            "bytes": 3420
+          },
+          "repeat-0.pcm": {
+            "sha256": "11001dd97006a44b5bccaaafeb04f0a089ad1a7b3781f58362cb62cc814de4ce",
+            "bytes": 358400
+          },
+          "corrupt-input.save": {
+            "sha256": "8321305da1b6c1badc6ec208ad0bea17cf8ba2063158540d2b47446a8a5913c1",
+            "bytes": 3420
+          },
+          "second-state.save": {
+            "sha256": "66d9f63a50a0100872e0976a0d47d981f99550349d525002a72068550189754f",
+            "bytes": 3420
+          },
+          "eight-to-four-continued.save": {
+            "sha256": "c61cf4560314de018a14fbe28751c27bb4660f3ab1569b9def30e7bca0e6e26f",
+            "bytes": 3420
+          },
+          "repeat-1.pcm": {
+            "sha256": "11001dd97006a44b5bccaaafeb04f0a089ad1a7b3781f58362cb62cc814de4ce",
+            "bytes": 358400
+          },
+          "zero-speed.pcm": {
+            "sha256": "0e69386c41c14833fe715639b72c8fcadf7cb07f5de679059499e1afb7a5c3d3",
+            "bytes": 217600
+          },
+          "rest-completed-paused.save": {
+            "sha256": "cb61b35977b3ccf937680f97d190d72fdcbd67316318e0c3cb62e46df2ae66b1",
+            "bytes": 3420
+          },
+          "baseline.save": {
+            "sha256": "c61cf4560314de018a14fbe28751c27bb4660f3ab1569b9def30e7bca0e6e26f",
+            "bytes": 3420
+          },
+          "reverse.save": {
+            "sha256": "41209a25fce8345c098f29028eb1f6724a083778f82676f244b9ed350db4f228",
+            "bytes": 3420
+          },
+          "rest-completed-paused-continued.pcm": {
+            "sha256": "0e89e5d755de20a0a96681c385ffcd1c64e8ae3b7d56d1c7c0c351a81cc46513",
+            "bytes": 288000
+          },
+          "eight-to-four-continued.pcm": {
+            "sha256": "1f79d4d2364862104109746e9fb76f452b53cb1e5852a05010f67adaca4fb80b",
+            "bytes": 332800
+          },
+          "zero-speed.save": {
+            "sha256": "a3cfeb8dd9e8c90b10069e60cb5b7acd2497739409ea86df943937824ead2ffb",
+            "bytes": 3420
+          },
+          "paused.save": {
+            "sha256": "22eca18eedaa181ed09730d2b149e22582e0138d0690e3e4e49740c0b5ffbcc9",
+            "bytes": 3420
+          },
+          "second-state.pcm": {
+            "sha256": "b9ce164d30e4101b009fe4be765a070593cfbdd48f897853de159a8c177fabe8",
+            "bytes": 160000
+          }
+        }
+      },
+      "wasm": {
+        "actual_package_files": {
+          "package/build.log": "7d8b475239b4c66adee8c8e0a2de9a321f9d46ea38c6fb174df850f1a1c99336",
+          "package/export.json": "ee18e828d23787e6b359c2640ae6dcf2d70d676c446faa03cf81ba350701194f",
+          "package/player/data/clips.bin": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+          "package/player/data/empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+          "package/player/data/input-actions.json": "704e030ba55e86160f9cb47a45870f9ab3f0374eaac35cff5053a7245ed5ac51",
+          "package/player/data/models/3e9024c680626b9afef73763d313a2677a224592091bdcd5e4b2b3521961c898.incmodel": "4277459c59603e45d8c05c20cebb1e70346bc30eb813b1b6e4d73ef85075bbba",
+          "package/player/data/package.json": "0da501e089fae0c2ac0a27b279b63f0e73b066de1a351524fab546d642958607",
+          "package/player/data/world.scene": "8a5f4b84e4abff568a70e6d96c723d8d8403ec89ae778552ffd73ab0302200f9",
+          "package/player/incant_game_player": "61a12f68e5e19e481207a86aaf41d31866a3a7b2e08e5278b4a3a629271c3c83",
+          "package/project-build.json": "a22e26bee0454ba35b9df7759f1ca56a61a19653fbb813494abf93d5b9144eaa",
+          "package/symbols/incant_game_player.dSYM/Contents/Info.plist": "c9105e700eab794c3fcb77d6855c8625420561dbe970effbc8313c53c972a2c7",
+          "package/symbols/incant_game_player.dSYM/Contents/Resources/DWARF/incant_game_player-5ba50c4543e0477c": "ae2648c44052475aba6ac4b5cad7bc1f91682642f851dea6e57247c19ae088f4",
+          "package/symbols/incant_game_player.dSYM/Contents/Resources/Relocations/aarch64/incant_game_player-5ba50c4543e0477c.yml": "c8525dde8bf3e7a4bda82bee3fb2464d19dd7d34b772d1cf94a744d7d60361d1",
+          "package/symbols/script-symbols.json": "d0de7a2f4a8e7a7a597bd986209d927d95651ecc54a6b2c44a60ec3c0d1f7954"
+        },
+        "player_sha256": "61a12f68e5e19e481207a86aaf41d31866a3a7b2e08e5278b4a3a629271c3c83",
+        "commands": 30,
+        "fresh_shipping_runs": 3,
+        "full_scalars_per_run": 3420,
+        "selected_vectors_per_run": 228,
+        "exact_refusals": 11,
+        "independent_native_oracle_and_full_log_check": true,
+        "actual_pcm_equals_development": true,
+        "removed_private_files": 17,
+        "actual_output_files": {
+          "development.pcm": {
+            "sha256": "eec19bc6af0b3b6dfb97a08782c65f4bb3c3203e789a015d2008b0d689ad08be",
+            "bytes": 128000
+          },
+          "run-0.pcm": {
+            "sha256": "eec19bc6af0b3b6dfb97a08782c65f4bb3c3203e789a015d2008b0d689ad08be",
+            "bytes": 128000
+          },
+          "run-1.pcm": {
+            "sha256": "eec19bc6af0b3b6dfb97a08782c65f4bb3c3203e789a015d2008b0d689ad08be",
+            "bytes": 128000
+          },
+          "run-2.pcm": {
+            "sha256": "eec19bc6af0b3b6dfb97a08782c65f4bb3c3203e789a015d2008b0d689ad08be",
+            "bytes": 128000
+          }
+        }
+      }
+    },
+    "limitations": [
+      "CPU-only local macOS integrated proof, no GPU/native-window/device/performance claim.",
+      "Original producer evidence remains separate; these are new current-main/current-lock builds.",
+      "Module checkpoint state and nonzero transitions involving tree states remain unsupported."
+    ]
+  },
+  "evidence_directory": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001",
+  "artifacts": {
+    "affected-clippy.log.gz": {
+      "sha256": "308f1e06b69baf5889a06be39072ec3b84431e1c6d805f21b4eab654694365b0",
+      "uncompressed_sha256": "728f01a2997037f0d3251ba0da349fdaf96548f7156bb446ef6f72693f3c4bb4",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/affected-clippy.log"
+    },
+    "affected-tests.log.gz": {
+      "sha256": "d1370a469ad9116bd43b7a430f1e0316280a0c59be45d5f47ffad7db7e93fd8c",
+      "uncompressed_sha256": "5c268335c69713c07abbaab03f55ee15fb422da28765a7cec6a691b512c4a899",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/affected-tests.log"
+    },
+    "audit-helper-before.log.gz": {
+      "sha256": "f7cc4f8b4bdeb1244f3a61652b72273a98727f50f6b43115518b28bc7bff7750",
+      "uncompressed_sha256": "96683d6a47a4e2dece2ecd1b2f9b14989483f5a2cafccc8a92c4ca45cd8c5ddf",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/audit-helper-before.log"
+    },
+    "audit-helper-correction.json": {
+      "sha256": "27d1a5fa84757204e6d12c53d73d07f44e33a4f1af1594c694dd9edddb3cf94e",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/audit-helper-correction.json"
+    },
+    "audit-helper-startup-count.log.gz": {
+      "sha256": "ff33806254528a082f6b7edba8cfdf858d97296ef3356ae53f178757552fe60e",
+      "uncompressed_sha256": "dc5632abf74311868fd7a6018511f43b0a350b284ed98f0aca1abf690d8dfb1a",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/audit-helper-startup-count.log"
+    },
+    "conformance.log.gz": {
+      "sha256": "1da3ae640d1d5b56e48252081c725236b9535bafb8259d62cba4a2f1bb27d33a",
+      "uncompressed_sha256": "574af3621e3ea33f4f833844525fcf843cf3d6fd0f8b4c4cda3bea2cebb4805b",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/conformance.log"
+    },
+    "conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/conventions.log"
+    },
+    "diff.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/diff.log"
+    },
+    "fmt.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/fmt.log"
+    },
+    "freeze.json": {
+      "sha256": "dd0d99d0470b88cac336a96a3c69facabc27c3609c4ab12bdca28b1dea4c5713",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/freeze.json"
+    },
+    "generated.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/generated.log"
+    },
+    "graph.log.gz": {
+      "sha256": "cdc8926dba4c13b20ad56413865e2f07e358b3663147a9a568c52a456e419c06",
+      "uncompressed_sha256": "ee9ee3bac78124f0d702ddd2a88a0ab0a529600a649d5b8119e68a600f8b9c4a",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/graph.log"
+    },
+    "headless.log.gz": {
+      "sha256": "db95f69996e26e0acd0a7dad4bd972cb48545460926375953da3dcbbd5afc37b",
+      "uncompressed_sha256": "b68df89efd04be4d2c3a751309b10b4ef95c4051f1323aecfde4d4997edc3d37",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/headless.log"
+    },
+    "integration-seams.patch": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/integration-seams.patch"
+    },
+    "integration.json": {
+      "sha256": "03ac53d2922ae6bcbc173a0bd0d5ff4349f4d157bbd36166d2e38977a8b11d69",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/integration.json"
+    },
+    "oracle.log.gz": {
+      "sha256": "b93b67e15107f94957b1fe256e17d6d86385a4b4d8db3e296aea8e7e0e063020",
+      "uncompressed_sha256": "8ddd08816809e9007a1f35329424505207b701605b1fa23b29806bc28d439603",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/oracle.log"
+    },
+    "proof-verification.json": {
+      "sha256": "b778df3a2fc5f441a8e44f3743832e91711076666a613ee2a1e6f2dbea3e3e20",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/proof-verification.json"
+    },
+    "quickjs-export.log.gz": {
+      "sha256": "2ea7ba2f868f81ce58306ed622b2ae7288c5dabe1fa823e4e59e42d34640f760",
+      "uncompressed_sha256": "3995dac6e6786e0a4f9a50bdc08ab6626e75da377f918c12fd044d84ff461286",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export.log"
+    },
+    "results.json": {
+      "sha256": "be18e0fda95e69cc98a8b6e463c3391422c0957c790ef093a4256b47530e7c8c",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/results.json"
+    },
+    "schema-match.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/schema-match.log"
+    },
+    "schema.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/schema.log"
+    },
+    "sdk.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/sdk.log"
+    },
+    "source-comparison.json": {
+      "sha256": "d243fc9f5038bce463123f5a7f802c1aaffd8332feb7044d9b329df9e77ff305",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/source-comparison.json"
+    },
+    "tools.log.gz": {
+      "sha256": "cea9f7fe8f35cad0289ad03f1284e44bb6aa04920274733800ff877b1b7b46b9",
+      "uncompressed_sha256": "dd9a1984647cb74a91d2b060655889f964fb360344a576ecf2c81b096a041da6",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/tools.log"
+    },
+    "typescript.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/typescript.log"
+    },
+    "wasm-export.log.gz": {
+      "sha256": "fb1558723bf913e8757b25ab5d4b51a5b61ea7db6ddb23d75dad0d30ed1f7668",
+      "uncompressed_sha256": "6816cec47808d628463ad904b638ac54aa8ced1b2f11e4ed08303f9b7c63201c",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export.log"
+    },
+    "wasm.log.gz": {
+      "sha256": "7916b354f24291d9fec997e909198b9a0ebcf85eb5fbffe485152a909d39bc8c",
+      "uncompressed_sha256": "b6acb55e7da8014dc3af857b44e52ef1d2d9efd44e0a2179d5e692ad0c97b4f8",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm.log"
+    },
+    "conformance/conformance-0.log.gz": {
+      "sha256": "c37b9e49bd5feb562586ccc7c31e6aa0d8a67fc7b8b825ad4fc176c56e507b20",
+      "uncompressed_sha256": "a0a4d598e4ea31971c27e56118549b183eee0e8524e98b29ec91f403b1d3a598",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/conformance/conformance-0.log"
+    },
+    "conformance/conformance-1.log.gz": {
+      "sha256": "e4cef6420a1d0b12a86e2eb3514742fc319a3698343c38d381b03d27ce564f62",
+      "uncompressed_sha256": "719844bf2b99e27233f9d1fa7d260131484b1dab1a80e0e5ca0e85bd4d23b386",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/conformance/conformance-1.log"
+    },
+    "conformance/conformance-2.log.gz": {
+      "sha256": "88fce49e3fd8cdc0afb82b7dc0ec9858542360a5cb0ce71bf6e8ef8f44a93d60",
+      "uncompressed_sha256": "1a81cc4f0b49a00f78c333fa93c1f427892b323844d074bb5d03f9182415de68",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/conformance/conformance-2.log"
+    },
+    "conformance/conformance-result.json": {
+      "sha256": "45f65d88a83db1afb0d1ec43c2ec088494b5459b597f0fb0be6ad6ef6d9850b4",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/conformance/conformance-result.json"
+    },
+    "conformance/cook-build.log.gz": {
+      "sha256": "9c82d4e096713e992ce4256d71fdcc36720d3b57a63e9a64c2bcd571919865de",
+      "uncompressed_sha256": "6e25bbc4773d1890de763b5c50c296d12b8dc67d4c99e611b910f6ff3e70e806",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/conformance/cook-build.log"
+    },
+    "conformance/independent-prepared-verification.json": {
+      "sha256": "df3bf5f22a18086a575665a5fe600a84c32bc1c35450fa7401df947f10cede72",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/conformance/independent-prepared-verification.json"
+    },
+    "conformance/prepared-manifest.json": {
+      "sha256": "df7df6f891056e0d9aedc41bf63b28da738513e9f4279aaff50297bbc5587c74",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/conformance/prepared-manifest.json"
+    },
+    "conformance/rust-sdk.json": {
+      "sha256": "c3b4cea7feb36365a0487caa2fa68600412bf279da3d9fca43bb4e5bad846e82",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/conformance/rust-sdk.json"
+    },
+    "conformance/development/result.json": {
+      "sha256": "1a81cc4f0b49a00f78c333fa93c1f427892b323844d074bb5d03f9182415de68",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/conformance/development/result.json"
+    },
+    "quickjs-export/authoring.json": {
+      "sha256": "d166433feff3bd166678bea8b7be1b2abce58d624a6782bf09ed03bee80e037f",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/authoring.json"
+    },
+    "quickjs-export/baseline-observe.json": {
+      "sha256": "da5ff7e847bec7c54fdb1dbab67fbdc681b0417d8cdba622a9fc9568b3a275d6",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/baseline-observe.json"
+    },
+    "quickjs-export/baseline.json": {
+      "sha256": "16ce9a7172dd6c199b363de7e8fe9d9e05f82488713d201a4e45d873aa1c9b3e",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/baseline.json"
+    },
+    "quickjs-export/command-000-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-000-stderr.txt"
+    },
+    "quickjs-export/command-000-stdout.txt.gz": {
+      "sha256": "c9b73546f40c526f1524ee9a5d176731bca2ff6217898eac6f65859fa83f5290",
+      "uncompressed_sha256": "1def09804097ca0164fabd44b6396fb9d05795c12969a7ddef25a789bdea6b3e",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-000-stdout.txt"
+    },
+    "quickjs-export/command-001-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-001-stderr.txt"
+    },
+    "quickjs-export/command-001-stdout.txt.gz": {
+      "sha256": "94f3ff23972d30df18b1cdb86104b3596095a026dafc1269a76879af63baa00f",
+      "uncompressed_sha256": "5a7f24bed21f8bfb0c586eb71a57a52566525ae45191e5b5be01a326c92ebca7",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-001-stdout.txt"
+    },
+    "quickjs-export/command-002-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-002-stderr.txt"
+    },
+    "quickjs-export/command-002-stdout.txt.gz": {
+      "sha256": "26e3860aaf450c399882013e8cc9678d00b947966a9f5a5f959d0d2270dbbf77",
+      "uncompressed_sha256": "1dc5ff25a027f5c0a04ac183e96b6665181272c327130fb0663c5c1be8aad81d",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-002-stdout.txt"
+    },
+    "quickjs-export/command-003-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-003-stderr.txt"
+    },
+    "quickjs-export/command-003-stdout.txt.gz": {
+      "sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e",
+      "uncompressed_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-003-stdout.txt"
+    },
+    "quickjs-export/command-004-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-004-stderr.txt"
+    },
+    "quickjs-export/command-004-stdout.txt.gz": {
+      "sha256": "4fa3c5a9212d8409cafb854a9147e39ff7fbe781b19748df6de4f50c6582fe15",
+      "uncompressed_sha256": "b22adee5ac5a93ade5d52f11392360e1c1a95ef2add2bd03365e896e8f1688e1",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-004-stdout.txt"
+    },
+    "quickjs-export/command-005-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-005-stderr.txt"
+    },
+    "quickjs-export/command-005-stdout.txt.gz": {
+      "sha256": "3127639a0f937bc55cf979060dc140378bb1c4a79d06f0c9e60c3851246578a1",
+      "uncompressed_sha256": "ff50adb1d69ea36787d2e86be7dd7af1814e37db2d2f8079706acb87068a097b",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-005-stdout.txt"
+    },
+    "quickjs-export/command-007-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-007-stderr.txt"
+    },
+    "quickjs-export/command-007-stdout.txt.gz": {
+      "sha256": "ad8941f9314d3b75a97bb6eba8ef2fea4f957b49ae20a27163193ed234df049f",
+      "uncompressed_sha256": "7d5441cfaedb6bdfc0b4a82a4a05ce0ff79d73d29a1f729764964b0c6dd23de1",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-007-stdout.txt"
+    },
+    "quickjs-export/command-008-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-008-stderr.txt"
+    },
+    "quickjs-export/command-008-stdout.txt.gz": {
+      "sha256": "2fb2d7bbe914d8070548dae88e74ae88a6f7638b58faafd993a18052a51cd0b3",
+      "uncompressed_sha256": "671ff5758061ea57262de6ff2b8994611da91f9b25f53bec54d692702543fb17",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-008-stdout.txt"
+    },
+    "quickjs-export/command-009-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-009-stderr.txt"
+    },
+    "quickjs-export/command-009-stdout.txt.gz": {
+      "sha256": "1dfc6fb449002ba6df70a096410d62f79480a36e1d4e71da5833a127486a1577",
+      "uncompressed_sha256": "7131032b0af8a8dcda678de546e8792b41e048a44053a2e8ba4163c73b0f98ad",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-009-stdout.txt"
+    },
+    "quickjs-export/command-010-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-010-stderr.txt"
+    },
+    "quickjs-export/command-010-stdout.txt.gz": {
+      "sha256": "1dfc6fb449002ba6df70a096410d62f79480a36e1d4e71da5833a127486a1577",
+      "uncompressed_sha256": "7131032b0af8a8dcda678de546e8792b41e048a44053a2e8ba4163c73b0f98ad",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-010-stdout.txt"
+    },
+    "quickjs-export/command-011-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-011-stderr.txt"
+    },
+    "quickjs-export/command-011-stdout.txt.gz": {
+      "sha256": "1dfc6fb449002ba6df70a096410d62f79480a36e1d4e71da5833a127486a1577",
+      "uncompressed_sha256": "7131032b0af8a8dcda678de546e8792b41e048a44053a2e8ba4163c73b0f98ad",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-011-stdout.txt"
+    },
+    "quickjs-export/command-012-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-012-stderr.txt"
+    },
+    "quickjs-export/command-012-stdout.txt.gz": {
+      "sha256": "cea492e78f0e3f8ebfa60fb87974f1fb56bd729c7c918b9dba65f1a435f4f85f",
+      "uncompressed_sha256": "f8ebdfbbf8da6d33ff607878f13afc92b70445a54a800cb827b7a7179a45e8c8",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-012-stdout.txt"
+    },
+    "quickjs-export/command-013-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-013-stderr.txt"
+    },
+    "quickjs-export/command-013-stdout.txt.gz": {
+      "sha256": "c17b194101c82504551227a5aef3cb781ded6454d9048d48ab6e981ec7ebdfb9",
+      "uncompressed_sha256": "0715e9f49a3ac477a6594e6c9639a5cbf41364e3b5ea90cbcff9042aaa453b35",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-013-stdout.txt"
+    },
+    "quickjs-export/command-014-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-014-stderr.txt"
+    },
+    "quickjs-export/command-014-stdout.txt.gz": {
+      "sha256": "522699331b359a403ee46a114eb5eef3b36a6e57c15641090f951c218c67fbd6",
+      "uncompressed_sha256": "1ee6c48d416de826672e904f5c87d91ecacff4fd26054dc03b5ffd97a5ede226",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-014-stdout.txt"
+    },
+    "quickjs-export/command-015-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-015-stderr.txt"
+    },
+    "quickjs-export/command-015-stdout.txt.gz": {
+      "sha256": "8155380cf28a1204387fe92568675263863d04cf2e608126c4f18ecbe85de627",
+      "uncompressed_sha256": "5f62ed5f52bd40fb251e6707fb400987b4f84a3697005c833bed1131ef7e8726",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-015-stdout.txt"
+    },
+    "quickjs-export/command-016-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-016-stderr.txt"
+    },
+    "quickjs-export/command-016-stdout.txt.gz": {
+      "sha256": "3f1510f1d2c410cfe4397e7309a43052ed18ecbeb5c7fee9d1d044b634e21996",
+      "uncompressed_sha256": "3fb5e4f0ae9b4da6224ce4dad56ca97a0e3bda2f9337920fb69120eda97ec7b0",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-016-stdout.txt"
+    },
+    "quickjs-export/command-017-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-017-stderr.txt"
+    },
+    "quickjs-export/command-017-stdout.txt.gz": {
+      "sha256": "93b1be4f2adcbbc7b2506f8ef3e0bf34202dffbbff984c0a3637997f69e37728",
+      "uncompressed_sha256": "98424649fe7482537353004d731254574b95459142b88f7721509489d8a16a10",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-017-stdout.txt"
+    },
+    "quickjs-export/command-018-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-018-stderr.txt"
+    },
+    "quickjs-export/command-018-stdout.txt.gz": {
+      "sha256": "bee249badd57c6caa6ce807c737bd38e41ea7bc547660ea66b1b2b8df56db200",
+      "uncompressed_sha256": "988df3f3b9ce98c670949a73f7d49a8c4e8b70d7b82946ffbb4f324f46519996",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-018-stdout.txt"
+    },
+    "quickjs-export/command-019-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-019-stderr.txt"
+    },
+    "quickjs-export/command-019-stdout.txt.gz": {
+      "sha256": "6531a74313592e6ce3107688b24fccdeaab9f538c383873dfca261e0dbac9697",
+      "uncompressed_sha256": "2744ced825ec53fd601afad97af4a2e391b97f1714bb4ff0b7409fdb894d6a21",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-019-stdout.txt"
+    },
+    "quickjs-export/command-020-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-020-stderr.txt"
+    },
+    "quickjs-export/command-020-stdout.txt.gz": {
+      "sha256": "63a7c869c359b56fbd303d0f406fbf0d8d7179adb862b467d0c70edd2dbf7520",
+      "uncompressed_sha256": "30ea90643d88e5cd818cbb53afa01356484a868d1699674d1fe877e13e6daa37",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-020-stdout.txt"
+    },
+    "quickjs-export/command-021-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-021-stderr.txt"
+    },
+    "quickjs-export/command-021-stdout.txt.gz": {
+      "sha256": "78f46e25b3e530e49fcbec617b7053d9e3586fbd89ae1c326700a1d16adcf839",
+      "uncompressed_sha256": "972f6b2864fba0b719df782daf0606ee6b47ae3860cc5c100d639cc91f7ba403",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-021-stdout.txt"
+    },
+    "quickjs-export/command-022-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-022-stderr.txt"
+    },
+    "quickjs-export/command-022-stdout.txt.gz": {
+      "sha256": "41aa87086bc103bd67033af09ae14d3f662d77f88c2cd15ae61123dcf156dda9",
+      "uncompressed_sha256": "1a1581f398a00dee97fb1172cc77e5f952261d4e952dde6cc640ae06cffcfed6",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-022-stdout.txt"
+    },
+    "quickjs-export/command-023-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-023-stderr.txt"
+    },
+    "quickjs-export/command-023-stdout.txt.gz": {
+      "sha256": "204776b064209d6a91452b2a50dcccef1026c7086a10ea765152338fc3c831a1",
+      "uncompressed_sha256": "dc1a2878c41ca2fd43c0f2415901720fce47fd2934166474a50702ec4347861f",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-023-stdout.txt"
+    },
+    "quickjs-export/command-024-stderr.txt.gz": {
+      "sha256": "08d7c2b257c0386a0aa8e61e5a974bc5ae7b1787fa9f1fe40a7fa4bf451a5738",
+      "uncompressed_sha256": "0f8649dba037ac2235d7b2e5e7d408388e0b5d58d9120a33dba0847cb18e8212",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-024-stderr.txt"
+    },
+    "quickjs-export/command-024-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-024-stdout.txt"
+    },
+    "quickjs-export/command-025-stderr.txt.gz": {
+      "sha256": "1735d5f6d6a8147101c2b6fd607cf4145d6f6d7b51aca7d34c7ff96b71596a57",
+      "uncompressed_sha256": "ce997e587c1fc5e235c094e21f03ccada4c19ab929e504f2b0263e3e5969e038",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-025-stderr.txt"
+    },
+    "quickjs-export/command-025-stdout.txt.gz": {
+      "sha256": "6a992727ad8da70f62e89aeee30478b57a54d941fbaa919bfd6313837561ab58",
+      "uncompressed_sha256": "9fbb178b1afca14b85e7fcf128717569df34b63a496d443a4261b350bd83b960",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/command-025-stdout.txt"
+    },
+    "quickjs-export/commands.json": {
+      "sha256": "448b0e96f6ac8022952fa845b0309d21b82ac78ba1958f840fe68a8659d6fe52",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/commands.json"
+    },
+    "quickjs-export/corrupt-observe.json": {
+      "sha256": "999e7d484341d8c8031f752f162fa732c08242ccd38905344b51063f34b8d09e",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/corrupt-observe.json"
+    },
+    "quickjs-export/eight-to-four-continued-observe.json": {
+      "sha256": "c1920f922ed7712079510f8fba537c97689ab403cd2501cdaf61485f0a6c21e1",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/eight-to-four-continued-observe.json"
+    },
+    "quickjs-export/eight-to-four-continued.json": {
+      "sha256": "6a2256b4f8c96336d9b5523f4875b0bb94a1f553c2071a6b34506ccee0efa55a",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/eight-to-four-continued.json"
+    },
+    "quickjs-export/eight-to-four-observe.json": {
+      "sha256": "6751ad6baf391b5d2bc463bcc73dd1b9b7b26952df90ae1967671556fa50f125",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/eight-to-four-observe.json"
+    },
+    "quickjs-export/eight-to-four.json": {
+      "sha256": "7f1ad0a6589bdf6956d05d79cdcaa50beffcc79ca24144b8918ac149b70812db",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/eight-to-four.json"
+    },
+    "quickjs-export/independent-oracle.json": {
+      "sha256": "19058cc40f36269bbbaecf7c56364b583192c101b4892c230b2d9ccb29fc262d",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/independent-oracle.json"
+    },
+    "quickjs-export/paused-continued-observe.json": {
+      "sha256": "3e2d8cbc3c320f1e253911618b6132c996d1d098dd6c0ea56c104bc2d6dc1fe9",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/paused-continued-observe.json"
+    },
+    "quickjs-export/paused-continued.json": {
+      "sha256": "af21cff84b5ea416071bf2c7212fbe4c0e06dc07ecaf0ddb15f3adb138764f3f",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/paused-continued.json"
+    },
+    "quickjs-export/paused-observe.json": {
+      "sha256": "3e216c0296c12d4ae7a8f3cd321c4ff5f0e5f7659c35a399330c86d214df907a",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/paused-observe.json"
+    },
+    "quickjs-export/paused.json": {
+      "sha256": "e2f08d24b9cf7c078673c31e0c8b639a1a64ffe18c5e201ed7fb85ef0112f0e2",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/paused.json"
+    },
+    "quickjs-export/public-commands.json": {
+      "sha256": "ce1f5445aef07ae348c9c590bc38afff5216b747c986c217130c4d26038b9a1b",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/public-commands.json"
+    },
+    "quickjs-export/repeat-0-observe.json": {
+      "sha256": "da5ff7e847bec7c54fdb1dbab67fbdc681b0417d8cdba622a9fc9568b3a275d6",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/repeat-0-observe.json"
+    },
+    "quickjs-export/repeat-0.json": {
+      "sha256": "16ce9a7172dd6c199b363de7e8fe9d9e05f82488713d201a4e45d873aa1c9b3e",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/repeat-0.json"
+    },
+    "quickjs-export/repeat-1-observe.json": {
+      "sha256": "da5ff7e847bec7c54fdb1dbab67fbdc681b0417d8cdba622a9fc9568b3a275d6",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/repeat-1-observe.json"
+    },
+    "quickjs-export/repeat-1.json": {
+      "sha256": "16ce9a7172dd6c199b363de7e8fe9d9e05f82488713d201a4e45d873aa1c9b3e",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/repeat-1.json"
+    },
+    "quickjs-export/rest-completed-paused-continued-observe.json": {
+      "sha256": "0a0c703728b03bcb96ad2a99b732501aa0b76ecd51051e3f548cb9c0ca543cf8",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/rest-completed-paused-continued-observe.json"
+    },
+    "quickjs-export/rest-completed-paused-continued.json": {
+      "sha256": "f3c205917e57f8051397e0933e9679955464d5a634d51c1f3e12eb59f1bfd4df",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/rest-completed-paused-continued.json"
+    },
+    "quickjs-export/rest-completed-paused-observe.json": {
+      "sha256": "9ddab8f19893605f3803a47205f439a5b7da4faf2007a2c9bcb4033c30bbe7b9",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/rest-completed-paused-observe.json"
+    },
+    "quickjs-export/rest-completed-paused.json": {
+      "sha256": "20d07728481bd0d2933a3aa379dba7e41b12a4c65ba16c2c4a9d5a6c75211818",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/rest-completed-paused.json"
+    },
+    "quickjs-export/result.json": {
+      "sha256": "2e62d223a7e03f836cc0fe3781bb4f96ead7b56c087f07c44b5d31c3dbfc3562",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/result.json"
+    },
+    "quickjs-export/reverse-continued-observe.json": {
+      "sha256": "22d035ea497aad974c93fd26f93395db4c835d52a7caca2ab9dd61cfc8922b3a",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/reverse-continued-observe.json"
+    },
+    "quickjs-export/reverse-continued.json": {
+      "sha256": "683e68d2ae28d75a8a422e5627e4d40a861e9c9efc3e40be9144e7dbede53c73",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/reverse-continued.json"
+    },
+    "quickjs-export/reverse-observe.json": {
+      "sha256": "f9c7f6b88ed61015ad3fda751d930d770595c41811437e78bd866f7efc6edd82",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/reverse-observe.json"
+    },
+    "quickjs-export/reverse.json": {
+      "sha256": "fcffe7fd793dff7e73ca892d6b69b8547f64bf974aa828e3eed9e6ca5aaa9550",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/reverse.json"
+    },
+    "quickjs-export/second-state-continued-observe.json": {
+      "sha256": "47cdbb974a84bcbd3689c3ad0ea7cf244e1b4c4ea74c6219db950c5810262092",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/second-state-continued-observe.json"
+    },
+    "quickjs-export/second-state-continued.json": {
+      "sha256": "7e36bd8d19b6e0972acc33e1cbf24524a0c8e082e1cbec1393a72c8e423c0029",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/second-state-continued.json"
+    },
+    "quickjs-export/second-state-observe.json": {
+      "sha256": "4dadb5289d1d339459f94a53836321483aad92d9abf8855ec8648343a5627707",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/second-state-observe.json"
+    },
+    "quickjs-export/second-state.json": {
+      "sha256": "5e9c230716b7e93617864b233745547a3d7f24a33b7e5bedce64bb0906a6801f",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/second-state.json"
+    },
+    "quickjs-export/wrong-observation-observe.json": {
+      "sha256": "5bf9c4d91085628bb55fce7486a2f0c823b011b5ac2a91eced03673b14b88010",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/wrong-observation-observe.json"
+    },
+    "quickjs-export/zero-speed-continued-observe.json": {
+      "sha256": "22de7c98ed375ca3dc235112bb66481a1399b777d749bc1afad93ffaba788db1",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/zero-speed-continued-observe.json"
+    },
+    "quickjs-export/zero-speed-continued.json": {
+      "sha256": "12957c019238f1982cd92c0aa3c9877fa192904c6a99eff73c452fde3add242e",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/zero-speed-continued.json"
+    },
+    "quickjs-export/zero-speed-observe.json": {
+      "sha256": "1e2f4f891d86616dfec35497b501dab84462aaa1d246541402ee32ed2d656079",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/zero-speed-observe.json"
+    },
+    "quickjs-export/zero-speed.json": {
+      "sha256": "f7cb96e6205fc03cf95b775be3c71614f2888d38d7d4c04f3c291b7c885d43ca",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/zero-speed.json"
+    },
+    "quickjs-export/package/export.json": {
+      "sha256": "981cabcc639b6bc4798518f0e667862983b28c2b5b549e6d0752ad0bdcfc6566",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/package/export.json"
+    },
+    "quickjs-export/package/project-build.json": {
+      "sha256": "eb4f69a5197975eec0398cc31084615a033008f8d2900e4580779af1f52a2c9b",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/package/project-build.json"
+    },
+    "quickjs-export/package/build.log.gz": {
+      "sha256": "77795307cc91d51aabb87331b52dc7bb360e4d8deda79707fabc422ae475781d",
+      "uncompressed_sha256": "580afeac0c112d1ed20b0f40259a5dad5a75ed4c7fbb979ad417528e59633d37",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/quickjs-export/package/build.log"
+    },
+    "wasm-export/checkpoint-refused.json": {
+      "sha256": "84c8ca8de3fa3e4c90ad27be42721a609779566ea8e99266d4ba1e6373eb63bd",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/checkpoint-refused.json"
+    },
+    "wasm-export/command-000-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-000-stderr.txt"
+    },
+    "wasm-export/command-000-stdout.txt.gz": {
+      "sha256": "05ac1e9f4b1fb71babf045cc92d4a4cf12165a4cf8a5f125e32a601483b7f468",
+      "uncompressed_sha256": "c15b9f8875c071f9827105b2ad6f4db2b6ab1d771d6c3554e009184a86b63615",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-000-stdout.txt"
+    },
+    "wasm-export/command-001-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-001-stderr.txt"
+    },
+    "wasm-export/command-001-stdout.txt.gz": {
+      "sha256": "4fa17e746621fa3a0d3a34625e72acc6522e3dde8ef847fafea22a927685995c",
+      "uncompressed_sha256": "b7adcdb899b08dde08def588fdd6224ae55d597047b3adbede9b79f138251ab1",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-001-stdout.txt"
+    },
+    "wasm-export/command-002-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-002-stderr.txt"
+    },
+    "wasm-export/command-002-stdout.txt.gz": {
+      "sha256": "dd3e98a25b0ce110cb34f3c80c456d0bab639151d24c47c216033c42d7bf2bd8",
+      "uncompressed_sha256": "7e46a77dbcaf6108abb69571d1ecd68aa84deb604a7eeb2955a55f4940448224",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-002-stdout.txt"
+    },
+    "wasm-export/command-003-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-003-stderr.txt"
+    },
+    "wasm-export/command-003-stdout.txt.gz": {
+      "sha256": "46a6f632d2e451708f98853704d1fddfe62db36fcf779e9a56bc092bf966b307",
+      "uncompressed_sha256": "041068759475034585319b7090105b6d14fe85bced4da61d95be4cc6be4e2806",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-003-stdout.txt"
+    },
+    "wasm-export/command-004-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-004-stderr.txt"
+    },
+    "wasm-export/command-004-stdout.txt.gz": {
+      "sha256": "8ac8f8af4877cffbba2d697078ffc6ecb8f5e295cb32376be4fc4fd73a0acdd1",
+      "uncompressed_sha256": "c61f6b63278d6c95e4e86b6037bfac70e0fe82244c50e1f8cea516f287675ce5",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-004-stdout.txt"
+    },
+    "wasm-export/command-005-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-005-stderr.txt"
+    },
+    "wasm-export/command-005-stdout.txt.gz": {
+      "sha256": "ebdb23f8a127269df1d11ebd3ad1294a0628be07fbf4663f1e022bb06447c7e9",
+      "uncompressed_sha256": "9b181ecd1b832cc75917a24e8eee69510a17f5c1405bcb4145906cba135d3436",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-005-stdout.txt"
+    },
+    "wasm-export/command-006-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-006-stderr.txt"
+    },
+    "wasm-export/command-006-stdout.txt.gz": {
+      "sha256": "db36fb019f677e7145973e5e158819ca8d79bd9f28bd1cd5c9cc805e951310cd",
+      "uncompressed_sha256": "70e569ee4ce9124d623a18aaf3886eb81f9c2d33d084dceae7ec8c114f1b4f26",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-006-stdout.txt"
+    },
+    "wasm-export/command-007-stderr.txt.gz": {
+      "sha256": "a3cdc826a5c9c597d791ddb9484c5fa3f2fb9b2a45f38272b7f275e11b5645b5",
+      "uncompressed_sha256": "c370a25877044f0dff0ac867421c32b8d4c868c2f25805660d7aeb9742061af5",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-007-stderr.txt"
+    },
+    "wasm-export/command-007-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-007-stdout.txt"
+    },
+    "wasm-export/command-008-stderr.txt.gz": {
+      "sha256": "a3cdc826a5c9c597d791ddb9484c5fa3f2fb9b2a45f38272b7f275e11b5645b5",
+      "uncompressed_sha256": "c370a25877044f0dff0ac867421c32b8d4c868c2f25805660d7aeb9742061af5",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-008-stderr.txt"
+    },
+    "wasm-export/command-008-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-008-stdout.txt"
+    },
+    "wasm-export/command-009-stderr.txt.gz": {
+      "sha256": "c874855165cc7c5992437367f67d3a3d569f1423dd43991bff52a4003bdaeb14",
+      "uncompressed_sha256": "8df86a61d26d3b44a6eb1a330dce6c1ec8c5653890ad5eb1236d4e3fc0d913b8",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-009-stderr.txt"
+    },
+    "wasm-export/command-009-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-009-stdout.txt"
+    },
+    "wasm-export/command-010-stderr.txt.gz": {
+      "sha256": "3796b933d0f77c9dbd012d224595a925500b04a690bb1a5b1bc683fea382e04a",
+      "uncompressed_sha256": "8438ab8be63ad4646f0bcbd24f4fb8bdfc3cf459bb8306b4f85fb7d59a32994c",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-010-stderr.txt"
+    },
+    "wasm-export/command-010-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-010-stdout.txt"
+    },
+    "wasm-export/command-011-stderr.txt.gz": {
+      "sha256": "f0b3c875fe4fd229455eaadcbfa008a4e7862221ce406766281c7280ff09c783",
+      "uncompressed_sha256": "278865c4ee58003d56c3fded05d4ff45064eb235f74852a3f391a1f8626db98c",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-011-stderr.txt"
+    },
+    "wasm-export/command-011-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-011-stdout.txt"
+    },
+    "wasm-export/command-012-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-012-stderr.txt"
+    },
+    "wasm-export/command-012-stdout.txt.gz": {
+      "sha256": "26e3860aaf450c399882013e8cc9678d00b947966a9f5a5f959d0d2270dbbf77",
+      "uncompressed_sha256": "1dc5ff25a027f5c0a04ac183e96b6665181272c327130fb0663c5c1be8aad81d",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-012-stdout.txt"
+    },
+    "wasm-export/command-013-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-013-stderr.txt"
+    },
+    "wasm-export/command-013-stdout.txt.gz": {
+      "sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e",
+      "uncompressed_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-013-stdout.txt"
+    },
+    "wasm-export/command-014-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-014-stderr.txt"
+    },
+    "wasm-export/command-014-stdout.txt.gz": {
+      "sha256": "4fa3c5a9212d8409cafb854a9147e39ff7fbe781b19748df6de4f50c6582fe15",
+      "uncompressed_sha256": "b22adee5ac5a93ade5d52f11392360e1c1a95ef2add2bd03365e896e8f1688e1",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-014-stdout.txt"
+    },
+    "wasm-export/command-015-stderr.txt.gz": {
+      "sha256": "4ab6ac29d8b7e8c52ccec72029b1bb1764e31f196c5fd962e58bc9e3e59ff1ab",
+      "uncompressed_sha256": "f392dd00d72999269eabedf48834381b036371b39df65e550555a888f3933184",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-015-stderr.txt"
+    },
+    "wasm-export/command-015-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-015-stdout.txt"
+    },
+    "wasm-export/command-016-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-016-stderr.txt"
+    },
+    "wasm-export/command-016-stdout.txt.gz": {
+      "sha256": "c667eab29387b4483eeb36f43e293025d9c7ed114d08acfd33e98317db1031dd",
+      "uncompressed_sha256": "5f04cd06eba87cce5a52a48661b4b3ba99154ec29f964087d1631bc398bae54e",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-016-stdout.txt"
+    },
+    "wasm-export/command-017-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-017-stderr.txt"
+    },
+    "wasm-export/command-017-stdout.txt.gz": {
+      "sha256": "4cd4e40f0f95b749cb96e9d441805db15654f38f1075bd0b151fce8f2762a180",
+      "uncompressed_sha256": "62975fb760157a1574a7ae08f0c92865927449034ea3e21c024d9b06c407980c",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-017-stdout.txt"
+    },
+    "wasm-export/command-018-stderr.txt.gz": {
+      "sha256": "224a2eb7cfe22bfc2a99e263df842ab04aed014f4d51d4d3561f533bc0e578a1",
+      "uncompressed_sha256": "7d8b475239b4c66adee8c8e0a2de9a321f9d46ea38c6fb174df850f1a1c99336",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-018-stderr.txt"
+    },
+    "wasm-export/command-018-stdout.txt.gz": {
+      "sha256": "75a26874a920bb66b40732813e65ebd2caf31bdd9d73096e2f5c0a428e3aa036",
+      "uncompressed_sha256": "912c3c74d1859b9f07c6b07288b2c3fe679db37632243ca74316f9ab7a251ed1",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-018-stdout.txt"
+    },
+    "wasm-export/command-019-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-019-stderr.txt"
+    },
+    "wasm-export/command-019-stdout.txt.gz": {
+      "sha256": "43ca685f3838134b3d777316f58e91bb9e60b3c8d146a8435081b1dd739f9712",
+      "uncompressed_sha256": "f291d54ed8f31eff4ebbf3e6cf2b54aae16268055bed53a3dc6c6b7d534228af",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-019-stdout.txt"
+    },
+    "wasm-export/command-020-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-020-stderr.txt"
+    },
+    "wasm-export/command-020-stdout.txt.gz": {
+      "sha256": "a48b9aaf8203e17d839f0c0815cc4e36167bbafa98cc2b3951dc1e24fb80948d",
+      "uncompressed_sha256": "0612654b62b849ffe63dab20c1c86cb521b88c8ff2821f66f70b91a0864c4eba",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-020-stdout.txt"
+    },
+    "wasm-export/command-021-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-021-stderr.txt"
+    },
+    "wasm-export/command-021-stdout.txt.gz": {
+      "sha256": "9e5b9939f4661243bc3c18205145c7a008776653895ddc9d124e4d22709976b4",
+      "uncompressed_sha256": "58ae8953a77d6a3487fe6f6b59b64daa1832b58567ff9dfab07d81832b00beef",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-021-stdout.txt"
+    },
+    "wasm-export/command-022-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-022-stderr.txt"
+    },
+    "wasm-export/command-022-stdout.txt.gz": {
+      "sha256": "9e5b9939f4661243bc3c18205145c7a008776653895ddc9d124e4d22709976b4",
+      "uncompressed_sha256": "58ae8953a77d6a3487fe6f6b59b64daa1832b58567ff9dfab07d81832b00beef",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-022-stdout.txt"
+    },
+    "wasm-export/command-023-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-023-stderr.txt"
+    },
+    "wasm-export/command-023-stdout.txt.gz": {
+      "sha256": "9e5b9939f4661243bc3c18205145c7a008776653895ddc9d124e4d22709976b4",
+      "uncompressed_sha256": "58ae8953a77d6a3487fe6f6b59b64daa1832b58567ff9dfab07d81832b00beef",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-023-stdout.txt"
+    },
+    "wasm-export/command-024-stderr.txt.gz": {
+      "sha256": "075221b5038df119abfbec47f1c48440fb0354d1d72efb2e145ff94b24d45add",
+      "uncompressed_sha256": "e2d21e0e9fbada020e5bbd1486929a7eadfc6d6fa179799e8bb2eb985536dd7c",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-024-stderr.txt"
+    },
+    "wasm-export/command-024-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-024-stdout.txt"
+    },
+    "wasm-export/command-025-stderr.txt.gz": {
+      "sha256": "075221b5038df119abfbec47f1c48440fb0354d1d72efb2e145ff94b24d45add",
+      "uncompressed_sha256": "e2d21e0e9fbada020e5bbd1486929a7eadfc6d6fa179799e8bb2eb985536dd7c",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-025-stderr.txt"
+    },
+    "wasm-export/command-025-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-025-stdout.txt"
+    },
+    "wasm-export/command-026-stderr.txt.gz": {
+      "sha256": "45b62d3ef236025f6035db0eb467afb029f7dc0945321b220061ab4673fb17eb",
+      "uncompressed_sha256": "6b1831a4729b365d23e581958724f5f9c159053718f3c27e5a1231b6df9fee2b",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-026-stderr.txt"
+    },
+    "wasm-export/command-026-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-026-stdout.txt"
+    },
+    "wasm-export/command-027-stderr.txt.gz": {
+      "sha256": "134785d2d3c4538f38a635e39aab31d680fb1fb9c65ffc6ff8f6d43d18aef45c",
+      "uncompressed_sha256": "c503f6ae0ef932ea9309837945d0ff26605c3dbf9daf4bbec9192ad0506c34b3",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-027-stderr.txt"
+    },
+    "wasm-export/command-027-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-027-stdout.txt"
+    },
+    "wasm-export/command-028-stderr.txt.gz": {
+      "sha256": "76073c34bc49034c7c41f097a4c61851ff82ba5df417c4319d8781e667378a21",
+      "uncompressed_sha256": "c8c6ca15839ccad282f656a5a1277d4ca7dd2a15f6579a216c65b3788644216e",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-028-stderr.txt"
+    },
+    "wasm-export/command-028-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-028-stdout.txt"
+    },
+    "wasm-export/command-029-stderr.txt.gz": {
+      "sha256": "c9912b5e3d6bc4d5ddf47db615e04b5c5ecd93049df904917e7f7770a5fb1cf0",
+      "uncompressed_sha256": "8553d484ef61a5488bc165050a946d44ae606e41c8018ff857501df0ebb8122d",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-029-stderr.txt"
+    },
+    "wasm-export/command-029-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/command-029-stdout.txt"
+    },
+    "wasm-export/commands.json": {
+      "sha256": "a79b6f076b4ecf8069eae6ce33b329a5044ba35872c40cc4b661455a0018cc88",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/commands.json"
+    },
+    "wasm-export/dev-late-command.json": {
+      "sha256": "fdd8488597fb1e7b4fdff4b36ef8178667eaa7618287d9796954c12eb63b9be0",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/dev-late-command.json"
+    },
+    "wasm-export/dev-old-v1.json": {
+      "sha256": "f9303e5369e9f6ff7fcb72d675c9985442b934c24511eb9aa43142453ab01d7f",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/dev-old-v1.json"
+    },
+    "wasm-export/dev-old-v2.json": {
+      "sha256": "5f0cb4f88e0dff789dc0111a02042b234d0a1fd5de4ba90f620b89b56ee45c91",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/dev-old-v2.json"
+    },
+    "wasm-export/dev-old-v3.json": {
+      "sha256": "6a1c01fb9b33e5eb0e32c213c1b41c02dd3ef4556d65a50131e546fd0565d70e",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/dev-old-v3.json"
+    },
+    "wasm-export/dev-short-scratch.json": {
+      "sha256": "d4af4737d941cf27afb349377ec938e6f3f726a2a7c3a63582b6deb8820f8a89",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/dev-short-scratch.json"
+    },
+    "wasm-export/development.json": {
+      "sha256": "70e569ee4ce9124d623a18aaf3886eb81f9c2d33d084dceae7ec8c114f1b4f26",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/development.json"
+    },
+    "wasm-export/guest-compile.json": {
+      "sha256": "7e46a77dbcaf6108abb69571d1ecd68aa84deb604a7eeb2955a55f4940448224",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/guest-compile.json"
+    },
+    "wasm-export/late-command-input.json": {
+      "sha256": "a72c80e59bd1da895b70c34e6f51ef93abd88654869327380bd7cf2dc2b1db34",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/late-command-input.json"
+    },
+    "wasm-export/model-import.json": {
+      "sha256": "b7adcdb899b08dde08def588fdd6224ae55d597047b3adbede9b79f138251ab1",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/model-import.json"
+    },
+    "wasm-export/module-import.json": {
+      "sha256": "041068759475034585319b7090105b6d14fe85bced4da61d95be4cc6be4e2806",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/module-import.json"
+    },
+    "wasm-export/observe.json": {
+      "sha256": "15cd505a9451259babfd292027580f6589e0e1061e0925ad23012c8c8618adfc",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/observe.json"
+    },
+    "wasm-export/old-v1-input.json": {
+      "sha256": "1ffba5e4203cc1c4ee564633312a59c1d9ec345f9f1699d9daa57698e6fe575b",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/old-v1-input.json"
+    },
+    "wasm-export/old-v2-input.json": {
+      "sha256": "81f79b61ebafc63256e5bf9468847cb013796850e6157061b5cb9569fbbf9892",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/old-v2-input.json"
+    },
+    "wasm-export/old-v3-input.json": {
+      "sha256": "83e7db1c62491976ae0c409150e94993944eeddb03cd6c0424e0e1b7b448eb64",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/old-v3-input.json"
+    },
+    "wasm-export/oracle.json": {
+      "sha256": "c4a6625543fc29b2075c25f0ecb8777ef5246d1736feb7caff93f4d2b2824f62",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/oracle.json"
+    },
+    "wasm-export/package-late-command.json": {
+      "sha256": "3ccad3b1ccb7bba3ef95d8ac00f8e13c144b79126bda7b3172d5a94212fc1bdd",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/package-late-command.json"
+    },
+    "wasm-export/package-old-v1.json": {
+      "sha256": "4359ef7eb91e6e89e6447db6a8d0928952a42672fcdcb87166ddf067104addb3",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/package-old-v1.json"
+    },
+    "wasm-export/package-old-v2.json": {
+      "sha256": "601c1344a77c97e2499902afa076672de69184f65563b25c883ac6a87bd70492",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/package-old-v2.json"
+    },
+    "wasm-export/package-old-v3.json": {
+      "sha256": "aef162f985e26d3696453cd21b45eb1fd6a07085e7485d33d36c28b2def5e929",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/package-old-v3.json"
+    },
+    "wasm-export/package-short-scratch.json": {
+      "sha256": "2222eb15d3dbd0387366a05c83111a19e8d9aa14dd9dec52b7d0f6d5a77f4777",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/package-short-scratch.json"
+    },
+    "wasm-export/positive-input.json": {
+      "sha256": "aaf059115e6a8c06eed070f468774c675e2c177ab2f91e2f2de723b6bca8a2af",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/positive-input.json"
+    },
+    "wasm-export/preflight.json": {
+      "sha256": "fb0be943af8e11d41800306383bb43ca260d4592b52f9eb939952f87364c28b2",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/preflight.json"
+    },
+    "wasm-export/public-commands.json": {
+      "sha256": "4a3e37e20b917d1cc6e0aa96164b4098272beca875e256a27daab5adb59f1d67",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/public-commands.json"
+    },
+    "wasm-export/removed.json": {
+      "sha256": "945bd4d38c80cfa6715a2fdbf96a726119b7956c37ab1f77ea1826ab882a1d7c",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/removed.json"
+    },
+    "wasm-export/result.json": {
+      "sha256": "2aa12315e0b32749015cc89f097f557cc5fc678d47fb9f3ef22b3d4125c5f0dc",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/result.json"
+    },
+    "wasm-export/run-0.json": {
+      "sha256": "4b1a1fc5f71f80c48abb993f555711b7f517e336e7a2bda645c3b75c225908a7",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/run-0.json"
+    },
+    "wasm-export/run-1.json": {
+      "sha256": "4b1a1fc5f71f80c48abb993f555711b7f517e336e7a2bda645c3b75c225908a7",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/run-1.json"
+    },
+    "wasm-export/run-2.json": {
+      "sha256": "4b1a1fc5f71f80c48abb993f555711b7f517e336e7a2bda645c3b75c225908a7",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/run-2.json"
+    },
+    "wasm-export/short-scratch-input.json": {
+      "sha256": "7948ea99e25a29f28c586c8a97fba723e6240f92c837edd9e52e5d44803c5d1a",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/short-scratch-input.json"
+    },
+    "wasm-export/wabt.json": {
+      "sha256": "eb6e2576392cc1f9eb0bc5ed8522926d0838dd1718d7e1dc3eb791648f5c5682",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/wabt.json"
+    },
+    "wasm-export/package/export.json": {
+      "sha256": "ee18e828d23787e6b359c2640ae6dcf2d70d676c446faa03cf81ba350701194f",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/package/export.json"
+    },
+    "wasm-export/package/project-build.json": {
+      "sha256": "a22e26bee0454ba35b9df7759f1ca56a61a19653fbb813494abf93d5b9144eaa",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/package/project-build.json"
+    },
+    "wasm-export/package/build.log.gz": {
+      "sha256": "224a2eb7cfe22bfc2a99e263df842ab04aed014f4d51d4d3561f533bc0e578a1",
+      "uncompressed_sha256": "7d8b475239b4c66adee8c8e0a2de9a321f9d46ea38c6fb174df850f1a1c99336",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/wasm-export/package/build.log"
+    },
+    "actual-main-ancestry.json": {
+      "sha256": "0fb6cca47f6e0d5ba9c1d897fb3c0c13310df09ccba4648e0d0f69c72fe52d25",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/animation-trees-main147-001/actual-main-ancestry.json"
+    },
+    "closure-verifier.py": {
+      "sha256": "0e8d0c25a60cca9e50af35445aa8c15cafedbda95a312a6db1c1dac0459b0be6",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/verify-animation-trees-main147.py"
+    }
+  },
+  "prior_review_paths": [
+    "docs/spikes/evidence/native-animation-tree-playback/final-review.json",
+    "docs/spikes/evidence/native-wasm-animation-pose-package/independent-final-review.json"
+  ],
+  "limitations": [
+    "Local macOS CPU evidence only; all renderer GPU tests stayed ignored. No new native-window, appearance, device, performance or phase acceptance.",
+    "Full guest checkpoints and nonzero timed transitions involving weighted tree states remain unsupported.",
+    "Grouped-pose/fade work41539545 and0057 renderer/Tao corrections are separate; not included in this frozen source.",
+    "Original producer reports remain historical, source-bound evidence; the integrated proofs use newly cooked current-main/current-lock packages."
+  ],
+  "actual_main_ancestry": {
+    "main": "bbe95b237e430d0657402c0bb9c83aa0516e2368",
+    "tested_head": "4487c5ae92369c2a69a08dc53a02f25143eefe34",
+    "tested_tree": "5343b55e855dc5fc4ae6d611a2348b66686f9e49",
+    "docs_followup_head": "fd5c99e5054cc11f858803f178b66790a01487f1",
+    "main_is_ancestor": true,
+    "compiled_inputs_changed": [],
+    "scope": "After all18commands and source/build/map-deleted proofs; only producer-acceptance and integration docs/evidence changed."
+  },
+  "prior_audit_helper_failures": "Two retained post-run verifier assumption failures only: Cargo streams were redirected to build.log, and exporter startup was initially included in copied-player process count. Corrected verifier passes; no engine/probe/package change."
+}

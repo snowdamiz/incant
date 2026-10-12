@@ -1,0 +1,9 @@
+{
+  "at": "2026-10-12T18:16:11.772861+00:00",
+  "module_count": 168,
+  "verified_prepared_files": 841,
+  "manifest_sha256": "7d28baa615b8454ca9bccede069d6b1eeaf84c09957a355c8fcdf26ab5e8255c",
+  "retained_files": 140,
+  "actual_root": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/static-wasm-inputs-avjdochk/bundle",
+  "state": "verified while immutable bundle exists and conformance runs"
+}

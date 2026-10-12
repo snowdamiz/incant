@@ -1,0 +1,68 @@
+{
+  "at": "2026-10-12T05:43:18.744280+00:00",
+  "status": "accepted scoped offscreen rendering implementation for integration",
+  "claude_head": "75e17c3f8b4653311c3cd23beb46e83f34e9fb5a",
+  "tested_source": "0fe9dff97358a04b6ab077e4dc09e173be69d465",
+  "base": "6d941d4178ccc1f46100ee5f756b7685259ad62e",
+  "source_files": {
+    "Cargo.lock": "e3494a906806a976bddd11620b83af14d800ff6eac94afd5f98004164af42577",
+    "crates/incant_play/tests/control.rs": "f0c6cd15a74b73b10dfee3a747d4333b67c850f29dc89ac359ed63832edb235f",
+    "crates/incant_render/src/lib.rs": "b7bab5bfcc46291aa091fdc03035fd2c09a5d3c1e7e93a4750148ba94309b847",
+    "crates/incant_render/src/ui/geometry.rs": "09ee21de05e5ba494f95adb0bc9996927facb3b9cb7db2232a8f6fdb853c6e6d",
+    "crates/incant_render/src/ui/mod.rs": "06cc8001e405646b5319f7d9522bf59393fc56ab0aa31921065de82cb798004e",
+    "crates/incant_render/src/ui/theme.rs": "d8b7e0c7861a6c6d77a867d7fc0127c26dfef2c76f901e0d2597011d08779858",
+    "crates/incant_render/src/ui/ui.wgsl": "5a69027155d75b52809d57b65cf4e11581ec2dec00473049f80de6b61879dcb4",
+    "crates/incant_render/src/ui_draw_tests.rs": "288bfc94d0ba1c59de0f918b9e1173a1661d85a42f7e95279cf59e9e71ff91be",
+    "crates/incant_render/src/ui_tests.rs": "84c4f4f420e57cf239746653fd74ccd63909efeadc7c8357b66a610f67408201",
+    "crates/incant_render_data/src/lib.rs": "4d3e351a04ec6083c6bcda903db7abec491561601c0c1ab671d2500e5b5b2386",
+    "crates/incant_render_data/src/ui.rs": "930fb593c2ce8271f00c5ca0a436471407ab77ed701f21692ae390b0ae849e26",
+    "crates/incant_render_game/src/lib.rs": "04c61311870440b602786ff04cbe060562089130a79383b3ce7cc8121cbb1dfb",
+    "crates/incant_render_game/src/ui.rs": "a70cf4845029789f4c1081b5c6333e84f85fe2bdbbdd3e18ee045ac023d0b996",
+    "crates/incant_render_game/tests/hosted.rs": "95feb58d04c3b5c4b224fffeebe3a4107bb5807ab3670dae20122ecb5275f91c",
+    "crates/incant_render_game/tests/ui.rs": "096c9a7b041682824e29e6a711e649594d374e6479ac54e80f48a053afae16b9",
+    "crates/incant_render_gpu_host/Cargo.toml": "7a8c8d4ddf7f94818cce53eb0eec01b9441944c0e2233be4240f65318c8f4bcf",
+    "crates/incant_render_gpu_host/examples/ui_review.rs": "592070b7410a9d2568f54cfb0266d06f8c1f619d0d76605f29612364a9d65b49",
+    "crates/incant_render_gpu_host/src/lib.rs": "d7ab8b9c4a90d6fdb2551de9925b0a4ed2eba006f4b3e6ff5f269d9a8d1af1b6",
+    "crates/incant_render_gpu_host/tests/ui.rs": "fe169d278f0b77f36794ec7fa8de480d72ebc55945342effb73ff0bb7b25c07e",
+    "crates/incant_ui/src/lib.rs": "e85e80c3e968386a23176e83730716fb02c752b3756ef9e67d9a4bbc5c938724",
+    "crates/incant_ui/src/visual.rs": "4d9ee8ade63790a175ecf47f05028152403e32e644a909becf9a4cba6a77fa9d",
+    "crates/incant_ui/tests/visual.rs": "3736000fb5f1fdedba1980192c413e75e978dd59ee125e662b7c2281dab4f209"
+  },
+  "raw_logs_and_normalized_retained_logs_verified": 14,
+  "test_counts": {
+    "test-gpu-host.txt": {
+      "passed": 7,
+      "groups": 4
+    },
+    "test-play.txt": {
+      "passed": 9,
+      "groups": 5
+    },
+    "test-player-window.txt": {
+      "passed": 33,
+      "groups": 2
+    },
+    "test-render-game.txt": {
+      "passed": 44,
+      "groups": 16
+    },
+    "test-render-gpu.txt": {
+      "passed": 138,
+      "groups": 3
+    },
+    "test-ui.txt": {
+      "passed": 30,
+      "groups": 8
+    }
+  },
+  "mutation_controls_caught": 16,
+  "binaries_verified": 3,
+  "package_data_files_verified": 14,
+  "curated_png_hashes_only_verified": 7,
+  "cpu_gpu_owner_parity": true,
+  "lease_released": true,
+  "root_process_reaped": 47937,
+  "nativewindow_untouched": true,
+  "lock_only_existing_dev_edges": true,
+  "scope": "Root reviewed source/candidate publication/resource boundaries and numerical evidence. Appearance and pixel review belong to Claude. No native window, phone performance, full game UI or phase acceptance. High-DPI glyphs/hover/alignment and native wiring remain open."
+}

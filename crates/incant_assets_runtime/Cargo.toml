@@ -8,7 +8,7 @@ publish.workspace = true
 [features]
 # Audio-only players keep their existing dependency graph.
 default = []
-font = ["dep:incant_text", "dep:ulid"]
+font = ["dep:incant_text", "dep:ulid", "dep:incant_types"]
 visual = ["dep:incant_2d", "dep:incant_types", "dep:meshopt", "dep:ktx2", "dep:glam"]
 
 [dependencies]

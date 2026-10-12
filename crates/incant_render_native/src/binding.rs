@@ -80,10 +80,14 @@ pub(crate) fn prepare(
                     return Err(NativeRenderError::MissingAsset(mesh.mesh));
                 }
                 super::animation::validate(node.id, source, decl.animation.as_deref())?;
+                super::animation::validate_ik(node.id, source, decl.ik.as_deref())?;
                 Ok::<_, NativeRenderError>(MeshInput {
                     source: Arc::clone(source),
                     cast_shadows: mesh.cast_shadows,
                     animation: node.animation,
+                    animation_blend: node.animation_blend,
+                    animation_pose: node.animation_pose,
+                    animation_ik: node.animation_ik.cloned(),
                 })
             })
             .transpose()?;
@@ -205,6 +209,9 @@ pub(crate) fn prepare(
             world: DMat4::IDENTITY,
             frame: 0,
             animation: None,
+            animation_blend: None,
+            animation_pose: None,
+            animation_ik: None,
         };
         input.nodes.len()
     ];

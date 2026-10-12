@@ -1,0 +1,33 @@
+{
+  "tested_head": "b3d29326533f88351a0147bf3f4d4b0207e0a7dd",
+  "accepted_test_sha256": "a819f3773a32f10948be2c4d80b41ff9247251ca4fc7cc85ba75db41c372f61c",
+  "graph_sdk_head": "16e91e3d912237b076feacf7b5e769b1185ecd70",
+  "conflicts": [],
+  "checks": {
+    "agent_tests": 108,
+    "groups": 9,
+    "failed": 0,
+    "ignored": 0,
+    "all_target_clippy": true
+  },
+  "logs": {
+    "docs/spikes/evidence/checkpoint9-agent-fixture/integrated-tests.log.gz": {
+      "sha256": "9a95df1b7189e64616b757ed8df928af85ea0533e773b74fa4f40a5d5199fd35",
+      "uncompressed_sha256": "a05283aad2f0699a2610e527d9a60256b55d89de4748c56c48cc16dc009782e5"
+    },
+    "docs/spikes/evidence/checkpoint9-agent-fixture/integrated-clippy.log.gz": {
+      "sha256": "f6bce7bc6868b59599c51e82035edaaa2502f1df984be1e5c2c7dd77a885f682",
+      "uncompressed_sha256": "cda9cb2c3dc7e7ddb4199d4e591c91cc8d751d5e6b4e702ec1adb21108e40a09"
+    }
+  },
+  "freeze": {
+    "path": "docs/spikes/evidence/checkpoint9-agent-fixture/integrated-freeze.json",
+    "sha256": "733e77bb8f93042707a40d33d79db3c2dac296693f7f664fc1f0aa229b54948e",
+    "inputs": 1328
+  },
+  "runtime_changes_in_repair": false,
+  "hosted_repair_validation": "Pending next frozen batch; failed checkpoint9 retained.",
+  "actual_main": "2cfa29a708ba7bf290c052c2bc354abd66f7cf9c",
+  "ancestry_merge": "65739ee190632b128bce3406b6c97a17c96acc66",
+  "same_tested_tree": true
+}

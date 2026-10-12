@@ -1,0 +1,4 @@
+{
+  "returncode": 1,
+  "stderr": "Error: Input { tick: 3, source: Ui }\n"
+}

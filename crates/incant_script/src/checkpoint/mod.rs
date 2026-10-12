@@ -35,6 +35,12 @@ pub enum CheckpointError {
     World(#[from] SaveError),
     #[error(transparent)]
     Input(#[from] InputError),
+    #[cfg(feature = "ui")]
+    #[error(transparent)]
+    Ui(#[from] incant_ui::UiCheckpointError),
+    #[cfg(feature = "audio")]
+    #[error(transparent)]
+    Audio(#[from] incant_audio_runtime::AudioError),
 }
 type Result<T> = std::result::Result<T, CheckpointError>;
 
@@ -66,6 +72,10 @@ fn identity(code: &CompiledScript) -> [u8; 32] {
 fn bytecode(program: SessionProgram) -> Result<CompiledScript> {
     match program {
         SessionProgram::Bytecode(code) => Ok(code),
+        #[cfg(feature = "wasmtime-host")]
+        SessionProgram::DevelopmentWasm(_) => {
+            Err(CheckpointError::Unsupported("development module state ABI"))
+        }
         #[cfg(feature = "static-module")]
         SessionProgram::Static(_) => Err(CheckpointError::Unsupported("static module state ABI")),
     }
@@ -77,6 +87,10 @@ fn host(session: &NativeSession) -> Result<&ScriptHost> {
     match &session.host {
         SessionVm::Bytecode(host) if !host.failed => Ok(host),
         SessionVm::Bytecode(_) => Err(CheckpointError::FailedSession),
+        #[cfg(feature = "wasmtime-host")]
+        SessionVm::DevelopmentWasm(_) => {
+            Err(CheckpointError::Unsupported("development module state ABI"))
+        }
         #[cfg(feature = "static-module")]
         SessionVm::Static(_) => Err(CheckpointError::Unsupported("static module state ABI")),
     }
@@ -160,6 +174,61 @@ impl NativeSession {
     /// device audio, solver continuation or physical input is serialized.
     /// Existing world capability refusals remain in force.
     pub fn checkpoint_bytes(&self) -> Result<Vec<u8>> {
+        if self.world.requires_ui_checkpoint() {
+            return Err(CheckpointError::Unsupported("hosted UI state is required"));
+        }
+        self.encode_checkpoint(None, None)
+    }
+    /// Capture the exact committed hosted owner together with world and script
+    /// state. UI declarations alone never substitute for mutable widget state.
+    #[cfg(feature = "ui")]
+    pub fn checkpoint_bytes_with_ui(&self, ui: &incant_ui::UiRuntime) -> Result<Vec<u8>> {
+        let state = ui.checkpoint_for_world(&self.world)?;
+        state.validate_world(&self.world)?;
+        if !self.world.requires_ui_checkpoint() {
+            // Never-used, empty UI owners have no mutable widget state.
+            return self.checkpoint_bytes();
+        }
+        self.encode_checkpoint(Some(state.bytes()), None)
+    }
+    #[cfg(feature = "audio")]
+    pub fn checkpoint_bytes_with_audio<B: incant_audio_runtime::AudioBackend>(
+        &self,
+        audio: &incant_audio_runtime::SceneAudio<B>,
+        #[cfg(feature = "ui")] ui: Option<&incant_ui::UiRuntime>,
+    ) -> Result<Vec<u8>>
+    where
+        B::Error: std::fmt::Debug,
+    {
+        let audio_state = audio.checkpoint_for_world(&self.world)?;
+        audio_state.validate_session(&self.world)?;
+        #[cfg(feature = "ui")]
+        let ui_state = ui
+            .map(|owner| owner.checkpoint_for_world(&self.world))
+            .transpose()?;
+        #[cfg(feature = "ui")]
+        let ui = ui_state
+            .as_ref()
+            .filter(|_| self.world.requires_ui_checkpoint())
+            .map(|state| state.bytes());
+        #[cfg(not(feature = "ui"))]
+        let ui = None;
+        self.encode_checkpoint(
+            ui,
+            self.world
+                .requires_audio_checkpoint()
+                .then_some(audio_state.bytes()),
+        )
+    }
+    fn encode_checkpoint(&self, ui: Option<&[u8]>, audio: Option<&[u8]>) -> Result<Vec<u8>> {
+        if self.world.requires_ui_checkpoint() != ui.is_some() {
+            return Err(CheckpointError::Unsupported("hosted UI state is required"));
+        }
+        if self.world.requires_audio_checkpoint() != audio.is_some() {
+            return Err(CheckpointError::Unsupported(
+                "retained audio owner is required",
+            ));
+        }
         let host = host(self)?;
         let active = host
             .project
@@ -189,6 +258,8 @@ impl NativeSession {
             &active,
             &store,
             &host.schedule,
+            ui,
+            audio,
         )
     }
 

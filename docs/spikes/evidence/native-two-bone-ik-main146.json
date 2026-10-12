@@ -1,0 +1,93 @@
+{
+  "accepted_head": "4a0ecc38a94070dd7a26ca30bfbe52a2e095f245",
+  "implementation": "a7415c7af551de6ac0ea28c0eb977657a790289d",
+  "actual_main": "51fe8e666db54c9e321e6456f3ae909bcde6ecd2",
+  "tested_head": "fa0a70d717c4066b5fd55064c2e14304e8b2db2e",
+  "tested_tree": "0a6de714fb88f524de633ca268b1d7e79d17e633",
+  "frozen_inputs": 1675,
+  "source_comparison": [
+    {
+      "path": "crates/incant_assets/tests/skeletal.rs",
+      "sha256": "500d4cb6f2a559813f4cc231024892f73bde1e6cc11f6399fd4cf2043251e534"
+    },
+    {
+      "path": "crates/incant_assets/tests/skeletal/ik.rs",
+      "sha256": "cf9066279ce5a84add4ff6c92f0b80c2e6740761e86a465dc31fff166fad8756"
+    },
+    {
+      "path": "crates/incant_assets_runtime/src/animation/ik.rs",
+      "sha256": "bff63b1a978f6bab5b5aa3c74660a18e60ceda8ccdb05c060e608d32e95790b9"
+    },
+    {
+      "path": "crates/incant_assets_runtime/src/animation/ik_math.rs",
+      "sha256": "75a2ae5cb770bad08dd81ccfb0a8802e7633a6a8ddb2d838f4e05b2a1d0e386f"
+    },
+    {
+      "path": "crates/incant_assets_runtime/src/animation/mod.rs",
+      "sha256": "f8ffea67017eb26572650d0bc0a9ad8424bf75841c399c86e3ae96dfeb78c12f"
+    },
+    {
+      "path": "crates/incant_assets_runtime/src/animation/player.rs",
+      "sha256": "cf5d7a751fc19d4d94f46f1b6b0c533f967c40a0b71cf0f7dd068be5ff59b375"
+    }
+  ],
+  "integration": "Only STATUS conflict, resolved additively. Six reviewed source/test files unchanged. Main146 Cargo inputs retain reviewed audio Kira patch and local dependency edges; no IK dependency changes.",
+  "checks": {
+    "tests": {
+      "passed": 118,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 18
+    },
+    "zero_exit_commands": 8
+  },
+  "artifacts": {
+    "clippy.log.gz": {
+      "sha256": "7b68d91b21bbba1142af42060b99bf9c09c93094260e0bac27b8c29a373ccec9",
+      "uncompressed_sha256": "8b79ee6fd1ffaa8152c95d6878518fe06c02d2d0fa2bb7d599ef4722952443d1"
+    },
+    "conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "default.log.gz": {
+      "sha256": "211ba9289f9edb3ffe63bd2b5ca981d5a3e00eb6e0d904e3cd6ccf060a5eba5f",
+      "uncompressed_sha256": "bd1d06f25719901089a0ffddb53f8330ca733d8bdbbd641f1926ad3049e5513a"
+    },
+    "diff.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "fmt.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "freeze.json": {
+      "sha256": "0778fa157f058c7182c405ff76eb69fb792c4b11515f60df3e3d459ebda9e5d6"
+    },
+    "graph.log.gz": {
+      "sha256": "c47f7c849e70472779f3b4dae6f07b5e01dd29c7207e905f4fa4e4dcff3ee951",
+      "uncompressed_sha256": "466c27957bec6177e21911180caffd16c9a78482761e9fad8fb9622eb2023499"
+    },
+    "results.json": {
+      "sha256": "71d33b2462c9fe977738bf450fe32be5ba9e83868ca664a48d977dbdcdcf77c5"
+    },
+    "tests.log.gz": {
+      "sha256": "79b59dab263770858c3ec0576109f2ca15cbf0a41c91dcd659e12921c6b0bb5e",
+      "uncompressed_sha256": "6547420c224e73081ec81bc2827cc902654354a66cf5bcd7d4891f46caf8fda0"
+    },
+    "wasm.log.gz": {
+      "sha256": "08502b63f2a745c8a3ad00fcfef3bede668d6b9af49e5423e9b9a3f8b02eefe0",
+      "uncompressed_sha256": "eb6b58fac5c9d6da8f405892d9d7aa8d154f24664daab775aefe495592a787ba"
+    }
+  },
+  "independent_source_review": {
+    "path": "docs/spikes/evidence/native-two-bone-ik-review.json",
+    "sha256": "801bb1f7f3a274bb883faa5eacc295d296e952ce7813cecb16994aeebc4e9a37"
+  },
+  "limits": [
+    "Retained CPU rotation-only immediate two-bone chains, at most32 ordered constraints.",
+    "No authored/cooked IK controls, runtime/SDK/checkpoint wiring, general affine chains, stretch or joint limits.",
+    "No shipping executable, GPU/pixel/animation-feel/device/RSS/performance or whole Phase1 gate claim."
+  ]
+}

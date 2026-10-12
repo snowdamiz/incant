@@ -1,5 +1,9 @@
 //! Typed renderer input shared by authoring and native extraction. No project,
 //! command bus, importer, GPU or agent dependency. Construct/replace at sync points.
+mod text;
+pub use text::{TextInput, TextNode};
+mod ui;
+pub use ui::{UiEdit, UiInput, UiRect, UiRole, UiWidget};
 mod flipbook;
 mod tilemap;
 pub use flipbook::SpriteFrames;
@@ -33,6 +37,10 @@ pub enum SceneError {
     TilemapBinding,
     #[error("tilemap frame {0:?} is absent from the checked atlas")]
     TilemapFrame(incant_types::StableId),
+    #[error("text node {0:?} has a glyph handle from another or reset atlas")]
+    TextGlyph(incant_types::StableId),
+    #[error("UI widget {0:?} has a glyph handle from another or reset atlas")]
+    UiGlyph(incant_types::StableId),
     #[error("authored material asset overrides are not supported by the imported preview")]
     MaterialOverrides,
     #[error("model {0} has no scene to instantiate")]
@@ -71,11 +79,22 @@ pub struct SceneStats {
     pub sprite_entities: usize,
     pub tilemap_entities: usize,
     pub tile_cells: usize,
+    pub text_entities: usize,
+    /// Drawn glyph quads; empty outlines such as spaces have none.
+    pub text_glyph_quads: usize,
+    /// Shaped `.notdef` glyphs; drawn with their own outline, never hidden.
+    pub text_missing_glyphs: usize,
+    /// Text atlas texels, glyph quads and node transforms on the GPU, counting
+    /// shared immutable resources once per scene; driver overhead excluded.
+    pub text_gpu_bytes: u64,
 }
 
 #[derive(Default)]
 pub struct SceneInput {
     pub nodes: Vec<SceneNode>,
+    /// Prepared CPU glyph coverage. A consumer must draw it or explicitly refuse
+    /// it; incant_render's world-space text route documents its contract.
+    pub text: Option<TextInput>,
     pub environment: Option<EnvironmentInput>,
 }
 pub struct SceneNode {
@@ -101,6 +120,12 @@ pub struct MeshInput {
     /// Committed native time; absent uses an animated model's authored rest pose.
     /// Supplying a sample for a static model is a binding error.
     pub animation: Option<incant_types::AnimationSample>,
+    /// Optional outgoing pose; its weight is the primary sample contribution.
+    /// Both samples and the weight are validated even at an endpoint.
+    pub animation_blend: Option<incant_types::AnimationBlendSample>,
+    pub animation_pose: Option<incant_types::AnimationPoseSamples>,
+    /// Ordered model-space IK after the complete animation pose. Immutable across consumers.
+    pub animation_ik: Option<Arc<[incant_types::AnimationIkSample]>>,
 }
 pub struct SpriteInput {
     pub source: Arc<RuntimeAsset>,

@@ -1,6 +1,8 @@
 //! Typed native-world audio host. Synchronize only after successful simulation
 //! and script publication. This host never rolls back the world or a device cursor.
 mod binding;
+mod checkpoint;
+pub use checkpoint::{MAX_AUDIO_CHECKPOINT_BYTES, PendingAudioCheckpoint};
 mod prepare;
 use crate::{
     AudioError, AudioManagerSettings, Bus, Mixer, OfflineBackend, PlaybackState, Result, VoiceId,
@@ -56,6 +58,8 @@ pub struct SceneAudio<B: Backend> {
     scene: StableId,
     tick: u64,
     streaming_supported: bool,
+    identity: incant_runtime::WorldIdentity,
+    incarnation: incant_runtime::WorldIncarnation,
 }
 
 impl<B: Backend> SceneAudio<B>
@@ -111,6 +115,12 @@ where
             scene: world.scene_id(),
             tick: world.tick(),
             streaming_supported,
+            identity: world
+                .spatial_view()
+                .map_err(|_| AudioError::Invalid("audio world unavailable"))?
+                .identity()
+                .clone(),
+            incarnation: world.incarnation(),
         };
         let listener = host.prepare(world)?;
         host.mixer = Some(make(&definitions)?);

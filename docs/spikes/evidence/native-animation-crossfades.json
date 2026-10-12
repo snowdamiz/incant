@@ -1,0 +1,97 @@
+{
+  "recorded_at": "2026-10-12T02:06:20.017451+00:00",
+  "base": "c4e94f8",
+  "scope": "Native two-input crossfade control, clocks and v5 world/session persistence; render and SDK integration pending",
+  "sources": [
+    {
+      "path": "crates/incant_types/src/animation.rs",
+      "sha256": "54b61c80f6dfd1dbf503472d5154081d0d78ff6b2bf232d95e2165af81d634fa"
+    },
+    {
+      "path": "crates/incant_types/src/lib.rs",
+      "sha256": "1853d3c28e9590de9132c7146b82753c1fde9e392e3afd84e3f8c5b4939385f5"
+    },
+    {
+      "path": "crates/incant_runtime/src/animation.rs",
+      "sha256": "f26eb59d372753bd62c93aab4792c41b7747c602a4ebc7e68c66195ebb85f25b"
+    },
+    {
+      "path": "crates/incant_runtime/src/lib.rs",
+      "sha256": "30f31f11dcb63598d4207ca9a869ca81b8257b293d775177beb7e70efad5be26"
+    },
+    {
+      "path": "crates/incant_runtime/src/save.rs",
+      "sha256": "fed97f3476dfbc4215512d0d330cd278937e108083a5b768d9dabcbe0890d4ec"
+    },
+    {
+      "path": "crates/incant_runtime/src/save/codec.rs",
+      "sha256": "cb96135b247f07abb3ce9facb28469005fb6566b64b3b6e67b74365da8f7ca68"
+    },
+    {
+      "path": "crates/incant_runtime/tests/animation.rs",
+      "sha256": "f0e8944745b3150f0c883ab3ab2c065040e1c1e9cd2dc288b06112be1afd7087"
+    },
+    {
+      "path": "crates/incant_runtime/tests/animation/crossfade.rs",
+      "sha256": "b064e248c1561628f9c83cd1d838db0901b38106e32bdeb17b9a1cc8c692e9c6"
+    },
+    {
+      "path": "crates/incant_script/src/animations.rs",
+      "sha256": "943a16c43d37a33c6ccbab759128bdbfa3a05c6e37952bafca71b2966a1a250b"
+    },
+    {
+      "path": "crates/incant_script/src/checkpoint/pending.rs",
+      "sha256": "9be45ce310e52a148e1da030360e1d1d239d8181f0c6adeed2b6db3a9103bccb"
+    },
+    {
+      "path": "crates/incant_script/src/checkpoint/tests/animation.rs",
+      "sha256": "92d14e42efb1ba89d991a55fea511c4e98dfefd0b6592a0c512dfa09c1516eb7"
+    }
+  ],
+  "validation": {
+    "cpu_tests_passed": 319,
+    "groups": 32,
+    "ignored": 0,
+    "final_test_only_strengthening": "19 animation tests passed; production code unchanged since319 suite",
+    "clippy": "incant_runtime and incant_script all-targets, ci, locked offline, warnings denied; passed",
+    "format_conventions_diff": "passed",
+    "runtime_graph": "incant_runtime, incant_script authoring-free"
+  },
+  "logs": [
+    {
+      "path": "/tmp/incant-native-crossfade-tests-002.log",
+      "sha256": "a4f14ac10fb56eda18c28f7cdec0ceb25d47441909fd07bdfdfac665f1766ff7"
+    },
+    {
+      "path": "/tmp/incant-native-crossfade-final-animation.log",
+      "sha256": "272342ab5df864823b9181438f5991498a7705a52ea6b9b02ec9356c8ce80c28"
+    },
+    {
+      "path": "/tmp/incant-native-crossfade-clippy-final.log",
+      "sha256": "6a4535f068b67db9b9fc09650e61c14df584ee57cd894c87fa7678cf6ae8ddbf"
+    },
+    {
+      "path": "/tmp/incant-native-crossfade-graph.log",
+      "sha256": "28e0d1a4ff4b89db6371de55095f61f5bb0ae669d7a094c26c0e80990e55b5eb"
+    },
+    {
+      "path": "/tmp/incant-native-crossfade-conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/tmp/incant-native-crossfade-diff.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "review": {
+    "path": "native-animation-crossfades-review.json",
+    "sha256": "53985f923576e321878711fb3fe26c1b01482a3108248696fd3d53daac4ed852"
+  },
+  "processes": "All owned handles76028,86131,21235,96680 terminal0 and reaped; private target idle",
+  "limits": [
+    "Local CPU only; no rendered appearance or reference-device performance claim.",
+    "Nonzero retarget during an active fade refuses; no graph interruption/pose capture.",
+    "General blend trees/state machines/IK/root motion and authoring graphs remain open.",
+    "TypeScript/Wasm and native render binding crossfade integrations are separate active work."
+  ]
+}

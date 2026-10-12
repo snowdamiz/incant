@@ -2,6 +2,8 @@
 //! command bus, JSON projection or filesystem/network capability is installed.
 //! The prior document-backed host lives temporarily in incant_play_legacy.
 mod animation_commands;
+mod animation_graphs;
+mod animation_ik;
 mod animations;
 pub mod artifact;
 mod audio_commands;
@@ -28,6 +30,7 @@ mod query_values;
 mod query_values_2d;
 mod schedule;
 mod session;
+mod steering_values;
 mod synchronous;
 mod timers;
 
@@ -540,6 +543,8 @@ mod navigation_tests;
 mod query_2d_tests;
 #[cfg(all(test, feature = "compiler"))]
 mod query_tests;
+#[cfg(all(test, feature = "compiler"))]
+mod steering_tests;
 
 #[cfg(all(test, feature = "compiler"))]
 mod character_tests;

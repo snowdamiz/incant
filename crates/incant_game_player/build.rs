@@ -1,5 +1,12 @@
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    for key in ["INCANT_NATIVE_PROJECT", "INCANT_NATIVE_PROJECT_SCENE"] {
+    for key in [
+        "INCANT_NATIVE_PROJECT",
+        "INCANT_NATIVE_PROJECT_SCENE",
+        "INCANT_NATIVE_WASM_FINGERPRINT",
+        "INCANT_NATIVE_WASM_INPUT",
+        "INCANT_NATIVE_WASM_PREPARED",
+        "INCANT_NATIVE_WASM_REGISTRY",
+    ] {
         println!("cargo:rerun-if-env-changed={key}");
     }
     if let Some(path) = std::env::var_os("INCANT_NATIVE_PROJECT") {
@@ -17,5 +24,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     if std::env::var_os("INCANT_NATIVE_PROJECT_SCENE").is_some() {
         return Err("project scene selection requires a project".into());
     }
+    println!("cargo:rustc-env=INCANT_AUTHORED_WASM=");
     incant_cook::embed_script("fixtures/game.js")
 }

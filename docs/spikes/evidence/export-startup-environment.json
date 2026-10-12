@@ -1,0 +1,25 @@
+{
+  "tests": 11,
+  "failed": 0,
+  "skipped": 0,
+  "command": [
+    "python3",
+    "-m",
+    "unittest",
+    "tools.tests.test_native_package",
+    "tools.tests.test_native_ui_export",
+    "-v"
+  ],
+  "source_hashes": {
+    "tools/export_native.py": "a22f6431bb6db373982970e53a219f1f57633c538e08055bcafacefa887699a1",
+    "tools/tests/test_native_package.py": "334a00178d220960fa8a919290367b2d0301e1855d089ee9525480eaaa896728"
+  },
+  "compressed_log_sha256": "fa5b6fdb63531dcd4b6dba3d8d213d6aa203887f83355b3f03c340ec99b2b252",
+  "raw_log_sha256": "85c149c08ae35c76b1e2eddb54d8de8b591896b29cd1d4eee67243cf7fb98023",
+  "scope": "Actual restricted child environment with fixed executable and stubbed build; no shipping/device proof.",
+  "review": {
+    "status": "accepted",
+    "receipt": "docs/spikes/evidence/export-startup-environment-review.json",
+    "sha256": "e734b4810edded71a3bfa280e676148ba37cf78cae6f2721fece807bd38d46b0"
+  }
+}

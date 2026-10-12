@@ -23,12 +23,52 @@ use std::{error::Error, fmt::Debug};
 /// Native Rust implementors are trusted, like audio Backend implementations; this
 /// contract does not sandbox arbitrary Rust. No unsafe marker or bypass bool exists.
 pub trait SceneHost: Sized {
+    /// Trusted compiled consumer admission, checked before host/VM/audio setup.
+    const SUPPORTS_UI: bool = false;
+    #[cfg(feature = "ui")]
+    fn ui(&self) -> Option<&incant_ui::UiRuntime> {
+        None
+    }
+    /// Stage only: returned input and private host candidate share the next
+    /// native tick. Err must preserve the accepted host.
+    #[cfg(feature = "ui")]
+    fn stage_ui(
+        &mut self,
+        _world: &NativeWorld,
+        _events: &[InputEvent],
+        _receipts: &[incant_ui::UiEvent],
+    ) -> std::result::Result<Option<crate::RoutedUiInput>, Self::Error> {
+        Ok(None)
+    }
+    #[cfg(feature = "ui")]
+    fn cancel_ui(&mut self) {}
+    #[cfg(feature = "ui")]
+    fn resize_ui(
+        &mut self,
+        _world: &NativeWorld,
+        _viewport: [f32; 2],
+    ) -> std::result::Result<(), Self::Error> {
+        Ok(())
+    }
     type Settings;
     type Error: Error;
     fn prepare(
         world: &NativeWorld,
         settings: Self::Settings,
     ) -> std::result::Result<Self, Self::Error>;
+    /// Restore the typed widget owner and its drawable before preparing external
+    /// consumers. Default hosts refuse UI data rather than silently resetting it.
+    #[cfg(feature = "ui")]
+    fn prepare_checkpoint(
+        world: &NativeWorld,
+        settings: Self::Settings,
+        ui: Option<&incant_ui::PendingUiCheckpoint>,
+    ) -> Result<Self, Self::Error> {
+        if ui.is_some() {
+            return Err(GameError::UiHost);
+        }
+        Self::prepare(world, settings).map_err(GameError::Host)
+    }
     fn sync(&mut self, world: &NativeWorld) -> std::result::Result<(), Self::Error>;
 }
 
@@ -82,10 +122,18 @@ where
                 initial,
                 program,
                 actions,
-                |world| {
-                    H::prepare(world, host_settings)
-                        .map(WithHost)
-                        .map_err(GameError::Host)
+                |pending| {
+                    #[cfg(feature = "ui")]
+                    {
+                        H::prepare_checkpoint(pending.world(), host_settings, pending.ui())
+                            .map(WithHost)
+                    }
+                    #[cfg(not(feature = "ui"))]
+                    {
+                        H::prepare(pending.world(), host_settings)
+                            .map(WithHost)
+                            .map_err(GameError::Host)
+                    }
                 },
                 |world| SceneAudio::new(world, clips, audio_settings),
             )?,
@@ -96,6 +144,18 @@ where
     }
     pub fn tick(&mut self, events: &[InputEvent]) -> Result<(), H::Error> {
         self.core.tick(events, |_| Ok(()))
+    }
+    #[cfg(feature = "ui")]
+    pub fn tick_with_ui(
+        &mut self,
+        events: &[InputEvent],
+        receipts: &[incant_ui::UiEvent],
+    ) -> Result<(), H::Error> {
+        self.core.tick_packet(events, receipts, |_| Ok(()))
+    }
+    #[cfg(feature = "ui")]
+    pub fn resize_ui(&mut self, viewport: [f32; 2]) -> Result<(), H::Error> {
+        self.core.resize_ui(viewport)
     }
     pub fn host(&self) -> Result<&H, H::Error> {
         Ok(&self.core.ready()?.host.0)
@@ -166,8 +226,9 @@ impl<H: SceneHost> HostedOfflineGameSession<H> {
             },
         })
     }
-    /// Ordinary load; a fresh retained host is prepared before VM/mixer setup.
-    /// Only data supported by NativeSession checkpoints can be loaded.
+    /// Ordinary load. Audio data and its trusted PCM are validated first; a fresh
+    /// retained host is then prepared on the exact restored world before guest
+    /// initialization. Offline mixer construction creates no physical device.
     pub fn from_checkpoint_bytes(
         bytes: &[u8],
         initial: &CookedScene,
@@ -180,17 +241,26 @@ impl<H: SceneHost> HostedOfflineGameSession<H> {
         validate_rate(sample_rate)?;
         Ok(Self {
             inner: OfflineCore {
-                core: Core::from_checkpoint(
+                core: Core::from_offline_checkpoint(
                     bytes,
                     initial,
                     program,
                     actions,
-                    |world| {
-                        H::prepare(world, host_settings)
-                            .map(WithHost)
-                            .map_err(GameError::Host)
+                    |pending| {
+                        #[cfg(feature = "ui")]
+                        {
+                            H::prepare_checkpoint(pending.world(), host_settings, pending.ui())
+                                .map(WithHost)
+                        }
+                        #[cfg(not(feature = "ui"))]
+                        {
+                            H::prepare(pending.world(), host_settings)
+                                .map(WithHost)
+                                .map_err(GameError::Host)
+                        }
                     },
-                    |world| SceneAudio::offline(world, clips, sample_rate),
+                    clips,
+                    sample_rate,
                 )?,
                 sample_rate,
             },
@@ -207,6 +277,19 @@ impl<H: SceneHost> HostedOfflineGameSession<H> {
     }
     pub fn tick(&mut self, events: &[InputEvent], output: &mut [f32]) -> Result<(), H::Error> {
         self.inner.tick(events, output)
+    }
+    #[cfg(feature = "ui")]
+    pub fn tick_with_ui(
+        &mut self,
+        events: &[InputEvent],
+        receipts: &[incant_ui::UiEvent],
+        output: &mut [f32],
+    ) -> Result<(), H::Error> {
+        self.inner.tick_packet(events, receipts, output)
+    }
+    #[cfg(feature = "ui")]
+    pub fn resize_ui(&mut self, viewport: [f32; 2]) -> Result<(), H::Error> {
+        self.inner.core.resize_ui(viewport)
     }
     pub fn host(&self) -> Result<&H, H::Error> {
         Ok(&self.inner.core.ready()?.host.0)

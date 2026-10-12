@@ -1,0 +1,102 @@
+[
+  {
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_types",
+      "-p",
+      "incant-module",
+      "-p",
+      "incant_wasm_runtime"
+    ],
+    "exit_code": 0,
+    "log": "boundary-tests.log",
+    "sha256": "fc7028ba8968e97d93dd710c26d73313b5aaa593249e31c418eb89db5bccd9ad"
+  },
+  {
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_runtime",
+      "--test",
+      "animation_tree_playback"
+    ],
+    "exit_code": 0,
+    "log": "tree-tests.log",
+    "sha256": "f7788b5694a20ab469a86597f1cd1f57adb5a6641bd7217a5b7febe93588f070"
+  },
+  {
+    "command": [
+      "./tools/cargo",
+      "clippy",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_types",
+      "-p",
+      "incant-module",
+      "-p",
+      "incant_wasm_runtime",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "log": "clippy.log",
+    "sha256": "35fa24e4eefab5a15c4a9f047db7989294c02866490c2149364ebed85056d566"
+  },
+  {
+    "command": [
+      "./tools/cargo",
+      "check",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_wasm_runtime",
+      "-p",
+      "incant-module",
+      "--target",
+      "wasm32-unknown-unknown"
+    ],
+    "exit_code": 0,
+    "log": "wasm32.log",
+    "sha256": "94beffde63abcdfac98ef0f760382c885ba057e1b6ebff9d6d876316c8555b85"
+  },
+  {
+    "command": [
+      "./tools/cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit_code": 0,
+    "log": "fmt.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit_code": 0,
+    "log": "diff.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

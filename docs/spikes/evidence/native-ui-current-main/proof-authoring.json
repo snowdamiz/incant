@@ -1,0 +1,15 @@
+{
+  "project_sha256": "059571491ed49dd49f07e24055e4a9008f3f30d09103866a9b2728a364d346b5",
+  "source_sha256": "c7f5019b17490ce016f1d75c9e36960b1d73be90ec971d13cb2ed2d093ab479c",
+  "scene": "01M4Q6T9VQDEZV51GN2Q9WW0WX",
+  "tick_rate": 60,
+  "fonts": [
+    "01M4Q6T9ZYXC0EDWDWEDTNJXF4",
+    "01M4Q6TA16KTG1DZ73CT2HGNQT",
+    "01M4Q6TA22D2HR52SN8E0WHPBR"
+  ],
+  "revision": 4,
+  "command_bus_only": true,
+  "journal_reopened": true,
+  "ui_undo_redo": true
+}

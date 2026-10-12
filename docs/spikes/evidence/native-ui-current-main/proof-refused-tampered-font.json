@@ -1,0 +1,4 @@
+{
+  "returncode": 1,
+  "stderr": "Error: Host(Input(Font(Invalid(\"font cache checksum mismatch\"))))\n"
+}

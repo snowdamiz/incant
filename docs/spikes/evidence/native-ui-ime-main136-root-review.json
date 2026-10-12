@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-12T05:45:25.157944+00:00",
+  "status": "accepted current-main integration closure",
+  "evidence_sha256": "83d2d67e43548147cbf43b02ff2419a79bab3d88c9e6088de64698310acf862b",
+  "tested_source": "cbfdc7acfeecc5007b17d995914dace10f9f54c4",
+  "main": "d418c6365c2c3ef8c8201a84c64f16359b53488a",
+  "frozen_files_verified": 1453,
+  "source_hashes_verified": 28,
+  "logs_verified": 9,
+  "receipts_verified": 4,
+  "commands_all_zero": 9,
+  "cpu_tests": 119,
+  "groups": 18,
+  "lock_only_tao_source_change": true,
+  "scope": "Root retained earlier source/vendor review and reverified frozen inputs/current-main logs/receipts. Linux evidence is accepted exact-source reuse, not a new run. No actual native IME/window/GPU/phone acceptance."
+}

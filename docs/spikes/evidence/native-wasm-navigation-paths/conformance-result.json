@@ -1,0 +1,280 @@
+{
+  "kind": "native-path-query-conformance",
+  "wabt": "1.0.42",
+  "module_count": 125,
+  "verified_prepared_files": 626,
+  "selected": [
+    {
+      "name": "navigation-paths",
+      "prefix": "m35",
+      "input_sha256": "6fbef447f2ad2507a2dace6068a927fc031e9cf2bbaa77bd5f9dfc0ef0b8e0a1",
+      "prepared_sha256": "804bcbb6703d8a6fb616f212df0ec50c4d979c50343ac19bf338e36d3e301465"
+    },
+    {
+      "name": "rust-navigation-paths",
+      "prefix": "m89",
+      "input_sha256": "bb693b6e2d1a64d9279a672697ebc3db7aad4fe66af337d309adacd7428c2997",
+      "prepared_sha256": "e7e60c51fe0c501286c38c839a8abbd73892bf13cc97cd317a83d375e5d4d951"
+    },
+    {
+      "name": "rust-navigation-paths-capacity",
+      "prefix": "m90",
+      "input_sha256": "c0df0ed1933c09727cc586a1a6ea6182581acff1efcc18d52c0c6ee635e79593",
+      "prepared_sha256": "45a5fda7848ba4c6d6f464f3ec7fefcfdc115405f55b88ea5f755e6e42ab43b7"
+    },
+    {
+      "name": "rust-navigation-paths-grid-capacity",
+      "prefix": "m91",
+      "input_sha256": "a196e85cedc69ebaaf16b74b228b8e24a56f48bb59a10b05eb082f968a145ca4",
+      "prepared_sha256": "24d7709a226c10fae0896fb7383c3a4ab13b9415a47c9a9874c066ba2512c24f"
+    },
+    {
+      "name": "rust-navigation-paths-number",
+      "prefix": "m92",
+      "input_sha256": "638019919a0b3349709b538f65d3428234b5d982117b134f7a6afa0f531c7ab1",
+      "prepared_sha256": "586a7b44dba50b2447e90844a4ae8603e2a1c0784816ccd5deec24b0a46c072a"
+    },
+    {
+      "name": "rust-navigation-paths-rounding",
+      "prefix": "m93",
+      "input_sha256": "8d3f9411e4e4440b105257b91df6ebe326e4ab36575ed8025d4c1d2da054a19e",
+      "prepared_sha256": "fe3c573f34f29c5d9debea58835970483a7d958a318f055678f5b93398a401da"
+    },
+    {
+      "name": "rust-navigation-paths-coordinate",
+      "prefix": "m94",
+      "input_sha256": "f2c81de6efcc7a93d3150069a7b3552a1f759ce8c30833b2afddd693b726546c",
+      "prepared_sha256": "2d0884ca92f315efc053440831faa2c2633bfafe6ecf746e7936c42c20b507e6"
+    },
+    {
+      "name": "rust-navigation-paths-owner",
+      "prefix": "m95",
+      "input_sha256": "9b6728f45814ef0e14d1e0984e6725776176a01710fbd920f2ed3151b5610c7f",
+      "prepared_sha256": "a46542306e04145af683ad49c86c9edf12f7ae05ebaa079b436237252e5c2b15"
+    },
+    {
+      "name": "rust-navigation-paths-grid-owner",
+      "prefix": "m96",
+      "input_sha256": "c9d01a1698f4af0f0f16fdc23a68d6cf945960461e8140f1ac3cc9fc7033f1dd",
+      "prepared_sha256": "a532fdabc029c33462d07a6ce44681d5701f70963f2bee8ef152766071baefdf"
+    },
+    {
+      "name": "rust-navigation-paths-endpoint",
+      "prefix": "m97",
+      "input_sha256": "4148939a1675c1488ea115acd67a55eab20a9111b0e276b9fcc0062de01fe712",
+      "prepared_sha256": "8249638dbcd9acfd13477c69e331a84db432827291b1f5636f61a4ce10b7a949"
+    },
+    {
+      "name": "rust-navigation-paths-exhaustion",
+      "prefix": "m98",
+      "input_sha256": "fb0aa0be2d3c6a87a7986457f5e94b7da12893e530d78d5b4fe8d153b6da7997",
+      "prepared_sha256": "bf572f0a2c9ad0425c3233a9f360339eb6ba16c37a073b2481151ea5e0c436f0"
+    },
+    {
+      "name": "rust-navigation-paths-work",
+      "prefix": "m99",
+      "input_sha256": "bfdf40a4b1b801269e1c64128d8a864fae504f749a018eddb55486f8e631206e",
+      "prepared_sha256": "743c9ab117d76565c401b60f71994b319e835e7104f034abc82eb3ab4e49e148"
+    },
+    {
+      "name": "rust-navigation-paths-quota",
+      "prefix": "m100",
+      "input_sha256": "d9b148742bcdb1cbcb3f3999666057036f51d63ae9d50cd9bdec7e233516088b",
+      "prepared_sha256": "615ad1cb00dc72069b0fa28a545873dd1b73147cc1dd4b306cbdcd6c520d0dbb"
+    },
+    {
+      "name": "rust-navigation-paths-late",
+      "prefix": "m101",
+      "input_sha256": "e3fad1f77eee66d6c2b51b8cf3cf5033bce4bb8ffd2471239050e0e8b8208ce1",
+      "prepared_sha256": "3c79a3df23065df4eeb19fcdcdbc140b249892cac40ae5cb3716c8ca83905c5a"
+    },
+    {
+      "name": "rust-navigation-paths-callback",
+      "prefix": "m102",
+      "input_sha256": "cd0e02db22cc5042a1dd2d086f3f1bd22420805a11414892273bd23eea02b8f9",
+      "prepared_sha256": "3acdbc17b2c7420183352307d55c8c08e29db14e375d42b9a134b1ee8b7df5b3"
+    },
+    {
+      "name": "rust-navigation-paths-trap",
+      "prefix": "m103",
+      "input_sha256": "7fb20fdd0a1aba0929c9b6b6fa547ad0bbd0b563815633e6ff7dba0c4b0cc2e8",
+      "prepared_sha256": "0c7f5a0a262eafeec319ff60d350ed008621b37e8e0b06e96e0ca0f95465b72a"
+    }
+  ],
+  "retained_hashes": {
+    "m100-facade.c": "6fc8e02802eb63857bbdfb2086e78135cef2b06e7c4aab26ddaef58a0ba8d7bc",
+    "m100.c": "4a7a51b1f1a52b03afd9d3f29680d3fb1fe8d5d784fb3ba6498b173fe4b63619",
+    "m100.h": "949171f8736f7703747db211b053276820104d631e52732e5eb956022f7be793",
+    "m100.original.wasm": "d9b148742bcdb1cbcb3f3999666057036f51d63ae9d50cd9bdec7e233516088b",
+    "m100.wasm": "615ad1cb00dc72069b0fa28a545873dd1b73147cc1dd4b306cbdcd6c520d0dbb",
+    "m101-facade.c": "13debc04c3da6a0cc09e98382e3a071f712f86e7c69c34b6420756dfff6af6f4",
+    "m101.c": "97c4c3206151d38f730d0ee8157a25bb552830f4cada83f080bbd8b067b14b91",
+    "m101.h": "d27c2cc5b525b817c83e176347de3758f8269dd4f1dbe07a41e49e92d7335b5a",
+    "m101.original.wasm": "e3fad1f77eee66d6c2b51b8cf3cf5033bce4bb8ffd2471239050e0e8b8208ce1",
+    "m101.wasm": "3c79a3df23065df4eeb19fcdcdbc140b249892cac40ae5cb3716c8ca83905c5a",
+    "m102-facade.c": "89c7aa1ba6d6843f5ff34e57fcc02c07dfa98ac4a47147d447803dad703d0d80",
+    "m102.c": "6dedd2c9b5256e3b64f70cf6c50b4fef2693f4af512a7b9ae5a0ac75a723e00a",
+    "m102.h": "3eb14566156d7af5a50961685566ccc3075424e68d2e2805ada50353bf657908",
+    "m102.original.wasm": "cd0e02db22cc5042a1dd2d086f3f1bd22420805a11414892273bd23eea02b8f9",
+    "m102.wasm": "3acdbc17b2c7420183352307d55c8c08e29db14e375d42b9a134b1ee8b7df5b3",
+    "m103-facade.c": "092a8bc60138a2a995642374a64be402a29e2d06b3a9aa5f93305787a292b6ed",
+    "m103.c": "f64f7ddd18fcda3fd6e57e3c6b159ae6e75f4faabe778b9660a4f5aa265363a0",
+    "m103.h": "0e9ca0eb93ba00b42f82fedf8c9a157fbc990946d7a00e6c9832e4065642bb0b",
+    "m103.original.wasm": "7fb20fdd0a1aba0929c9b6b6fa547ad0bbd0b563815633e6ff7dba0c4b0cc2e8",
+    "m103.wasm": "0c7f5a0a262eafeec319ff60d350ed008621b37e8e0b06e96e0ca0f95465b72a",
+    "m35-facade.c": "6b506b35110ee21597917bea179bdc22e7bd0f65e9a3472a9ccc10475066e079",
+    "m35.c": "6051a1490467943887125669d7a8d52bcc1b0f468662585d6f0e6b0f0dc6edb6",
+    "m35.h": "4c20be257efccbb56d0bb24bd488239d3b2d5120af6b37a935d7b9d959d8eeb1",
+    "m35.original.wasm": "6fbef447f2ad2507a2dace6068a927fc031e9cf2bbaa77bd5f9dfc0ef0b8e0a1",
+    "m35.wasm": "804bcbb6703d8a6fb616f212df0ec50c4d979c50343ac19bf338e36d3e301465",
+    "m89-facade.c": "147276b616899e28402dec792da7d8794ba1bf295e8a5c3df6cebaae6877573f",
+    "m89.c": "e43245646e423ea3ca505762e9aad8c24c784e44644da19d3fc922c0387f3d32",
+    "m89.h": "5f856ce9f048e4499547929fd4f65bcfd767a3ba8978e7f62400fcc6d91b2d00",
+    "m89.original.wasm": "bb693b6e2d1a64d9279a672697ebc3db7aad4fe66af337d309adacd7428c2997",
+    "m89.wasm": "e7e60c51fe0c501286c38c839a8abbd73892bf13cc97cd317a83d375e5d4d951",
+    "m90-facade.c": "373303066ba4687f3fc7d556e60b468e1f43ac8f3f7075174cd0b829b42e978f",
+    "m90.c": "6ee7c6830769d26d91a872c1232d095ae3c461ad1c8cd52347815c86224d5ad6",
+    "m90.h": "a9c0639119a758983102d16dbcbba5eff211681adccea06dca6b0a406717bf89",
+    "m90.original.wasm": "c0df0ed1933c09727cc586a1a6ea6182581acff1efcc18d52c0c6ee635e79593",
+    "m90.wasm": "45a5fda7848ba4c6d6f464f3ec7fefcfdc115405f55b88ea5f755e6e42ab43b7",
+    "m91-facade.c": "ee5c6905de2defa5178d50bd2d1d25ab8383f0053cb082336e0e5826ca90583f",
+    "m91.c": "d27330d8cd38c882e1bab737593013f7a3e4d97f911c94b0f0341d01b3d13c8a",
+    "m91.h": "8cd5bb849c532042e5380e9dab2a42f394f68f46a6fc0a734cad882b7c00bd38",
+    "m91.original.wasm": "a196e85cedc69ebaaf16b74b228b8e24a56f48bb59a10b05eb082f968a145ca4",
+    "m91.wasm": "24d7709a226c10fae0896fb7383c3a4ab13b9415a47c9a9874c066ba2512c24f",
+    "m92-facade.c": "af89b4c75ccf6b37dd6db03cc016a3db8fbaeeabafb8b35de0757d25cb57f76a",
+    "m92.c": "d1bd9c005d118793cf3c1621c08aa8cffe3c784dd6cab4cbdceaafa1b0b0bf7b",
+    "m92.h": "f1860ee529356464711850ad715e84c4d3675566288ffc0eef11289db00f5467",
+    "m92.original.wasm": "638019919a0b3349709b538f65d3428234b5d982117b134f7a6afa0f531c7ab1",
+    "m92.wasm": "586a7b44dba50b2447e90844a4ae8603e2a1c0784816ccd5deec24b0a46c072a",
+    "m93-facade.c": "95d2d9653b4f72ce33daac5b059b04617328fdb615b02127d2cc9834a451a88b",
+    "m93.c": "ae437660e7fe10e1ade66284624d95f79fb2fd874f28f17f6f9cab4d4fbace2f",
+    "m93.h": "bba0f14fc148e78ce66dbf7fff5906e85a5df9eaed36653981003187993309c8",
+    "m93.original.wasm": "8d3f9411e4e4440b105257b91df6ebe326e4ab36575ed8025d4c1d2da054a19e",
+    "m93.wasm": "fe3c573f34f29c5d9debea58835970483a7d958a318f055678f5b93398a401da",
+    "m94-facade.c": "19502ea4e5a803c8acad7b2c61194215c2bb214d6d9cb8febe7fad2b67bf28ae",
+    "m94.c": "2a6dd999935c560c82d16e1824b5c71294b11d04e585e868834f25e19c626395",
+    "m94.h": "585b72e9355454eac892673e5c1d63be365507386b3e1e90283f48fbcb733804",
+    "m94.original.wasm": "f2c81de6efcc7a93d3150069a7b3552a1f759ce8c30833b2afddd693b726546c",
+    "m94.wasm": "2d0884ca92f315efc053440831faa2c2633bfafe6ecf746e7936c42c20b507e6",
+    "m95-facade.c": "100cbdd245c17414d6794c8eb3fc55462191e84ec250ba9e37cde0a02560edb6",
+    "m95.c": "57738a923e39ff60187e3a83949c69a5a8e1cb5a3e0a8291931c81d5c9fdd229",
+    "m95.h": "9cf945e1ab1e8b6c731a11ba7d04f7102396ecc74e8bcc1504ad28c5b9264961",
+    "m95.original.wasm": "9b6728f45814ef0e14d1e0984e6725776176a01710fbd920f2ed3151b5610c7f",
+    "m95.wasm": "a46542306e04145af683ad49c86c9edf12f7ae05ebaa079b436237252e5c2b15",
+    "m96-facade.c": "5293d7c38a156e94f0103cbf895564a8e19c9310965ad86d7adaed6c08a2c66a",
+    "m96.c": "78ffccdd1ed9f13ea3f47d26785a93bbc16d27ba870bcf20fd48f59cb6d587ad",
+    "m96.h": "259ca9b3cd6f8b5261d9b935c25486effa51499eb6686b0c98b8c5fe48431c9e",
+    "m96.original.wasm": "c9d01a1698f4af0f0f16fdc23a68d6cf945960461e8140f1ac3cc9fc7033f1dd",
+    "m96.wasm": "a532fdabc029c33462d07a6ce44681d5701f70963f2bee8ef152766071baefdf",
+    "m97-facade.c": "47a83f22376718f514a0348965e09d25a85136ad22dbfccf8b57aca02b13cb8c",
+    "m97.c": "e32f528828791fb1b0b4709c01d75a9d7f25f06ba55874b17e557548222db9ba",
+    "m97.h": "e80aeee89c15deac519ea425c8cfef2a767f0cbdb1e7055be010e972a9ffc9e2",
+    "m97.original.wasm": "4148939a1675c1488ea115acd67a55eab20a9111b0e276b9fcc0062de01fe712",
+    "m97.wasm": "8249638dbcd9acfd13477c69e331a84db432827291b1f5636f61a4ce10b7a949",
+    "m98-facade.c": "c65806d22d1ec0e62ca4baad6beae5caa188852e34c59dcb161e3328ef3ce491",
+    "m98.c": "c090df1e3377f818343741a81b671b033a3de2a3e3ae05e237e78d94e395598c",
+    "m98.h": "a778422dc324d50163ec87bf636ef502634cc4f2b8d060b645cb6e0d84a833c9",
+    "m98.original.wasm": "fb0aa0be2d3c6a87a7986457f5e94b7da12893e530d78d5b4fe8d153b6da7997",
+    "m98.wasm": "bf572f0a2c9ad0425c3233a9f360339eb6ba16c37a073b2481151ea5e0c436f0",
+    "m99-facade.c": "0055542e8c6c8bed6f7bc5753d51c19bc655182efadae3b42ca6883332b247d9",
+    "m99.c": "f84da0fe07d472a2256cfbad90a0ce68eeb3df1114d952fff5b316b774aa44f8",
+    "m99.h": "d126adb67ce02c3bec537979058387973d31d80683f02dc6a1ed1321a4d20651",
+    "m99.original.wasm": "bfdf40a4b1b801269e1c64128d8a864fae504f749a018eddb55486f8e631206e",
+    "m99.wasm": "743c9ab117d76565c401b60f71994b319e835e7104f034abc82eb3ab4e49e148"
+  },
+  "guest_source_hashes": {
+    "navigation_paths.rs": "89b98d14984d644954dcb2a5728a324f15aae30d65019a0528267173c5a93c20",
+    "navigation_paths_failure.rs": "5a0d79ed28b1cd2b11739f9ee8ea26541447898e0603a751e2f7d0822547c980",
+    "navigation-paths.wat": "25bc169eb5d0bbae43c8f1487d493cb05d95b297bc31dd2c944d43a7b63a49d2"
+  },
+  "rust_sdk_sha256": "7dc305a90632013cba8f67854a2ad642c9fca9ac7f0fcfd4ec97d4876f964936",
+  "commands": [
+    {
+      "command": [
+        "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/tools/cargo",
+        "test",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant-module",
+        "-p",
+        "incant_wasm_abi",
+        "-p",
+        "incant_wasm_runtime",
+        "-p",
+        "incant_wasm_cook",
+        "-p",
+        "incant_wasm_dev",
+        "-p",
+        "incant_wasm_player",
+        "-p",
+        "incant_game_runtime",
+        "-p",
+        "incant_script",
+        "--features",
+        "incant_wasm_dev/static-conformance,incant_wasm_player/fixture,incant_script/compiler",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": "conformance-0.log",
+      "sha256": "a70ef3036a310613a376d98898667d2df7d462b92a296a6129c4ec08976c7777"
+    },
+    {
+      "command": [
+        "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/tools/cargo",
+        "clippy",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant-module",
+        "-p",
+        "incant_wasm_abi",
+        "-p",
+        "incant_wasm_runtime",
+        "-p",
+        "incant_wasm_cook",
+        "-p",
+        "incant_wasm_dev",
+        "-p",
+        "incant_wasm_player",
+        "-p",
+        "incant_game_runtime",
+        "-p",
+        "incant_script",
+        "--features",
+        "incant_wasm_dev/static-conformance,incant_wasm_player/fixture,incant_script/compiler",
+        "--all-targets",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": "conformance-1.log",
+      "sha256": "c4fefe783c28a4768ffba21fbe4554f6eee167e48aa945b46547f0ca11f7a58b"
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/tools/probes/development-wasm.py",
+        "/private/tmp/incant-wasm-navigation-paths-host-proof-003/development",
+        "--rustup",
+        "/opt/homebrew/bin/rustup",
+        "--static-conformance",
+        "--profile",
+        "ci"
+      ],
+      "exit_code": 0,
+      "log": "conformance-2.log",
+      "sha256": "4fd666a849e5a1e4d18166fffeb88edb06e38ffaf2254aa011228584343d1ba5"
+    }
+  ],
+  "passed": true,
+  "limitations": [
+    "local CPU conformance, not a shipping package or device gate",
+    "existing full guest checkpoints remain unsupported"
+  ]
+}

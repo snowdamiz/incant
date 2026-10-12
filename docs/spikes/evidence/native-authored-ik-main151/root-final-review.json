@@ -1,0 +1,41 @@
+{
+  "at": "2026-10-12T17:27:40.008919+00:00",
+  "decision": "accepted scoped current-main authored IK integration",
+  "reviewed_head": "f8f6fc727915aad1e05616588bcb708d734f1b8c",
+  "manifest_sha256": "0058484575f385ea55ff5d59648a3ccc6fef03ba24471847d1acb92f125cb5e6",
+  "artifacts_verified": 87,
+  "frozen_inputs_verified": 1716,
+  "commands_zero_exit": 17,
+  "cpu": {
+    "passed": 823,
+    "failed": 0,
+    "ignored_gpu": 82,
+    "groups": 138
+  },
+  "package_files_verified": 14,
+  "positive_processes": 4,
+  "negative_processes": 7,
+  "checks": [
+    "retained compressed/raw/source hashes",
+    "frozen integration source and post-test ancestry delta",
+    "actual command logs and test counts",
+    "live package and executable hashes",
+    "per-process stdout receipt equality",
+    "full checkpoint bytes and split PCM/log continuation",
+    "repeat tail equality and final render input",
+    "exact rejection diagnostics and checkpoint publication refusal"
+  ],
+  "source_review": "Prior root source audit accepted 57/59 producer inputs unchanged; capability.rs and tests/animations/ik.rs exactly equal accepted 7eb v4 guards. No save/session/codec conflict mutation.",
+  "qualification": "Initial external root audit incorrectly equated the full baseline report to a tail-only repeat; corrected comparison explicitly joins middle plus repeated tail. No production, probe, package or process rerun. Observation rejection intentionally emits failed diagnostic JSON; no-clobber PCM publication is separate from create-only checkpoint.",
+  "limits": [
+    "CPU canonical input/control/checkpoint proof; deformation is separately exercised by actual CPU solver tests",
+    "No GPU/window/appearance/device/performance acceptance",
+    "Ordinary load saves opt-in typed script state/timers, not arbitrary VM globals",
+    "IK Rust/Wasm command ABI remains a follow-up; existing unsupported solver/module saves remain explicit",
+    "PCM and create-only checkpoint publication are separate operations",
+    "Edit-mode IK preview and authored visual controls remain open.",
+    "Rust/Wasm IK controls are a separate future ABI; all legacy pose snapshots explicitly refuse committed IK.",
+    "Shipping proof covers canonical CPU input/control/checkpoint outputs; no GPU deformation or visual acceptance claimed."
+  ],
+  "blocking_findings": []
+}

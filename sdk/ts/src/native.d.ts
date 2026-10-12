@@ -1,5 +1,5 @@
 /** Native QuickJS migration API. Separate from the document-backed ScriptApi. */
-import type { LocaleSettings, LocalizeRequest, LocalizedText, CalendarDate, DateLength, LocalizationReportRequest, LocalizationReport, InputFrame, ScriptClock, TimerEvent, PhysicsRayQuery, PhysicsRayHit, PhysicsCharacterQuery, PhysicsCharacterMovement, PhysicsTriggerEvent, PhysicsRayQuery2D, PhysicsRayHit2D, PhysicsTriggerEvent2D, NavigationQuery, NavigationPath, GridNavigationQuery, GridPath } from './generated';
+import type { LocaleSettings, LocalizeRequest, LocalizedText, CalendarDate, DateLength, LocalizationReportRequest, LocalizationReport, InputFrame, ScriptClock, TimerEvent, PhysicsRayQuery, PhysicsRayHit, PhysicsCharacterQuery, PhysicsCharacterMovement, PhysicsTriggerEvent, PhysicsRayQuery2D, PhysicsRayHit2D, PhysicsTriggerEvent2D, NavigationQuery, NavigationPath, GridNavigationQuery, GridPath, SteeringAgent, SteeringObstacle, SteeringQuery, SteeringVelocity } from './generated';
 /** VM-owned bounded copy; no native pointers/handles or JSON conversion.
  * Retention cannot hold an ECS loan or alter the next input frame. */
 type InputReadonly<T> = T extends object ? { readonly [K in keyof T]: InputReadonly<T[K]> } : T;
@@ -69,10 +69,25 @@ export interface NativeCommands {
    * controls share the structural quota, tick lifetime and atomic rollback;
    * the committed snapshot does not reflect queued changes. */
   controlAnimation(id: NativeId, control: 'select', clip: number | null, seconds: number): void;
+  /** Duration is finite 0..60 seconds; zero selects immediately. A nonzero
+   * fade cannot interrupt an active fade. Select/Seek cancel it. */
+  controlAnimation(id: NativeId, control: 'crossfade', clip: number | null, seconds: number, duration: number): void;
   controlAnimation(id: NativeId, control: 'seek', seconds: number): void;
   controlAnimation(id: NativeId, control: 'playing' | 'looping', enabled: boolean): void;
   /** Finite [-16,16]; negative speed plays backward, zero holds the sample. */
   controlAnimation(id: NativeId, control: 'speed', speed: number): void;
+  /** Set a declared graph parameter within its authored range. */
+  setAnimationParameter(id: NativeId, parameter: NativeId, value: number): void;
+  /** Ordered two-bone constraints solve after the full animation pose. Coordinates
+   * are cooked MODEL space, before entity/world transforms; not world-space
+   * targets. Finite coordinates within +/-1e9 and weight 0..1. Chain topology
+   * and constraint IDs are immutable cooked data. Calls share the atomic tick
+   * queue; invalid caught calls still fail the tick. Affine/zero-length sampled
+   * chains refuse consumption explicitly; no stretching or silent skip. */
+  setAnimationIk(id: NativeId, constraint: NativeId, tx: number, ty: number, tz: number,
+    px: number, py: number, pz: number, weight: number): void;
+  /** Immediately select a declared graph state; preserves play/pause and speed. */
+  selectAnimationState(id: NativeId, state: NativeId): void;
   spawn(id: NativeId, transform: NativeTransform, parent: NativeId | null, velocity: NativeVector3 | null): void;
   /** No cascading deletion. Reparent/remove children in the same batch. */
   despawn(id: NativeId): void;
@@ -117,6 +132,19 @@ export type NativePathRequest = NavigationQuery['path'];
 export type NativeNavigationPath = NavigationPath;
 export type NativeGridPathRequest = GridNavigationQuery['path'];
 export type NativeGridPath = GridPath;
+export type NativeVector2 = readonly [number, number] | Float64Array;
+export type NativeSteeringAgent = Omit<InputReadonly<SteeringAgent>, 'position' | 'velocity' | 'preferred_velocity'> & {
+  readonly position: NativeVector3;
+  readonly velocity: NativeVector2;
+  readonly preferred_velocity: NativeVector2;
+};
+export type NativeSteeringObstacle = Omit<InputReadonly<SteeringObstacle>, 'vertices'> & {
+  readonly vertices: readonly NativeVector2[];
+};
+export type NativeSteeringQuery = Omit<InputReadonly<SteeringQuery>, 'agents' | 'obstacles'> & {
+  readonly agents: readonly NativeSteeringAgent[];
+  readonly obstacles?: readonly NativeSteeringObstacle[];
+};
 /** Read-only committed navigation in the active native scene. All results are
  * owned mutable values, safe to retain. Functions expire after this update and
  * never reactivate. Active-call errors, even caught, reject the whole update.
@@ -140,6 +168,15 @@ export interface NativeNavigation {
    * consumes the entire tick budget; set it explicitly to make multiple queries.
    * An absent mesh/grid, invalid endpoint, or exhausted search throws. */
   findGridPath(entity: NativeId, request: NativeGridPathRequest): NativeGridPath | null;
+  /** Bulk reciprocal avoidance proposals, sorted by stable ID. Input positions
+   * are world-space feet (+Y up); velocities use XZ. IDs correlate values and
+   * need not name scene entities. Apply proposals through ordinary gameplay
+   * motion/physics; separation is not guaranteed for infeasible constraints.
+   * Uses this update's dt. Maximum 128 agents and 128 obstacle edges total per
+   * update, shared across calls/authored scripts, within the 32 navigation-call
+   * quota. Up to 32 obstacles per call; margin defaults to 0.05 m. Fixed-field
+   * copies, no JSON or document access. Owned results survive the tick. */
+  steerAgents(request: NativeSteeringQuery): SteeringVelocity[];
 }
 export type NativeLogLevel = 'debug' | 'info' | 'warn' | 'error';
 /** Bulk committed state captured after simulation, before script commands.
@@ -157,12 +194,82 @@ export interface NativeFlipbooks {
  * bit 0 = playing, bit 1 = looping, bit 2 = completed; other bits zero.
  * VM-owned copies within its memory budget. Retention/mutation cannot change
  * native playback or a later snapshot; order is unspecified. */
+/** Committed graph rows, a subset of animations.ids. Parameters for row i occupy
+ * [parameterOffsets[i], parameterOffsets[i+1]) in both parameter columns.
+ * Source sample/weight represents the same two-input pose as the renderer.
+ * All arrays are owned snapshots; controls become visible after acceptance. */
+export interface NativeAnimationGraphs {
+  readonly ids: readonly NativeId[];
+  readonly states: readonly NativeId[];
+  /** Explicit master pause; completed poses may still evaluate transitions. */
+  readonly paused: Uint8Array;
+  readonly seconds: Float64Array;
+  readonly elapsed: Float64Array;
+  readonly parameterIds: readonly NativeId[];
+  readonly parameterOffsets: Uint32Array;
+  readonly parameterValues: Float64Array;
+  readonly blending: Uint8Array;
+  /** 1 for a weighted tree; full samples are in animations.pose* for the same ID.
+   * sourceClips/sourceSeconds/weights describe only the legacy two-pose path. */
+  readonly weighted: Uint8Array;
+  /** Compound-state transition: active bit0, outgoing playing bit1. Source
+   * state is null and numeric fields zero when absent. Both states read the
+   * same committed parameters; outgoing speed is captured on transition. */
+  readonly fadeStates: readonly (NativeId | null)[];
+  readonly fadeFlags: Uint8Array;
+  readonly fadeSeconds: Float64Array;
+  readonly fadeSpeeds: Float64Array;
+  readonly fadeElapsed: Float64Array;
+  readonly fadeDuration: Float64Array;
+  readonly sourceClips: Int32Array;
+  readonly sourceSeconds: Float64Array;
+  readonly weights: Float64Array;
+}
+/** Owned committed rows (<=4096 total, <=32/owner), ordered by entity then
+ * authored constraint order. Three lanes per row in chains/targets/poles;
+ * weights and both ID arrays have one lane per row. Guest mutations never
+ * affect native state. Model-node indices are not entity or skin-palette IDs. */
+export interface NativeAnimationIk {
+  readonly ids: readonly NativeId[];
+  readonly constraintIds: readonly NativeId[];
+  readonly chains: Uint16Array;
+  readonly targets: Float64Array;
+  readonly poles: Float64Array;
+  readonly weights: Float64Array;
+}
 export interface NativeAnimations {
+  readonly ik: NativeAnimationIk;
+  readonly graphs: NativeAnimationGraphs;
+  /** Packed complete poses. Empty span means legacy clip/two-pose playback.
+   * poseKinds[2*i..2*i+2] uses 0=clip, 1=ordered spherical pair, 2=weighted
+   * quaternion mean, 255=absent. poseSplits[i] is zero for one group, otherwise
+   * the number of samples in the outgoing group. Compound fades have at most
+   * eight samples per group; a single weighted pose has at most sixteen.
+   * Weights normalize within each group, never across an outer transition.
+   * poseOuterWeights[i] applies one final TRS crossfade between the two groups.
+   * clips/seconds remain the incoming state's representative scalar sample. */
+  readonly poseKinds: Uint8Array;
+  readonly poseSplits: Uint8Array;
+  readonly poseOuterWeights: Float64Array;
+  readonly poseOffsets: Uint32Array;
+  readonly poseClips: Int32Array;
+  readonly poseSeconds: Float64Array;
+  readonly poseWeights: Float64Array;
   readonly ids: readonly NativeId[];
   readonly clips: Int32Array;
   readonly seconds: Float64Array;
   readonly speeds: Float64Array;
   readonly flags: Uint32Array;
+  /** Active = bit 0, captured outgoing playing = bit 1, looping = bit 2.
+   * All source/time fields are zero when inactive; active sourceClips uses
+   * -1 for rest. Destination contribution is elapsed / duration. Master
+   * playing pauses both clocks; speed/loop controls affect only destination. */
+  readonly transitionFlags: Uint32Array;
+  readonly sourceClips: Int32Array;
+  readonly sourceSeconds: Float64Array;
+  readonly sourceSpeeds: Float64Array;
+  readonly transitionElapsed: Float64Array;
+  readonly transitionDuration: Float64Array;
 }
 /** Read-only committed locale/catalog. Each call costs four of the shared
  * 1,024 native query units, at most 64 localization calls per whole tick.
@@ -212,6 +319,12 @@ export interface NativeContext {
   readonly chunks: readonly NativeChunk[];
   readonly dt: number;
   readonly commands: NativeCommands;
+  /** Immutable post-routing input. input.ui contains accepted button/value/submit
+   * outcomes (<=256, <=64KiB of value bytes), current focus and a bounded stale
+   * receipt count. Keys/buttons captured by widgets are absent from gameplay
+   * edges/actions; controls held before capture are released and suppressed
+   * until their physical release. UI outcomes and script/world changes share
+   * one accepted tick. This does not expose OS IME, widget mutation or save APIs. */
   readonly input: NativeInput;
   readonly physics: NativePhysics;
   readonly navigation: NativeNavigation;

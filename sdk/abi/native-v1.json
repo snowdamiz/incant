@@ -437,6 +437,581 @@
       "result": null,
       "opcode": 21,
       "call": "Call::SetLocale { ptr, len }"
+    },
+    {
+      "namespace": "incant_animation_v1",
+      "name": "snapshot_len",
+      "opcode": 22,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::AnimationLen"
+    },
+    {
+      "namespace": "incant_animation_v1",
+      "name": "read_snapshot",
+      "opcode": 23,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "capacity",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::ReadAnimations { ptr, capacity }"
+    },
+    {
+      "namespace": "incant_animation_v1",
+      "name": "control",
+      "opcode": 24,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "id",
+          "i32"
+        ],
+        [
+          "ptr",
+          "i32"
+        ]
+      ],
+      "result": null,
+      "call": "Call::ControlAnimation { id, ptr }"
+    },
+    {
+      "namespace": "incant_localization_v1",
+      "name": "format",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "len",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "opcode": 25,
+      "call": "Call::Format { ptr, len }"
+    },
+    {
+      "namespace": "incant_animation_v2",
+      "name": "snapshot_len",
+      "opcode": 26,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::AnimationLenV2"
+    },
+    {
+      "namespace": "incant_animation_v2",
+      "name": "read_snapshot",
+      "opcode": 27,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "capacity",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::ReadAnimationsV2 { ptr, capacity }"
+    },
+    {
+      "namespace": "incant_animation_v2",
+      "name": "control",
+      "opcode": 28,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "id",
+          "i32"
+        ],
+        [
+          "ptr",
+          "i32"
+        ]
+      ],
+      "result": null,
+      "call": "Call::ControlAnimationV2 { id, ptr }"
+    },
+    {
+      "namespace": "incant_navigation_v1",
+      "name": "steer",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "len",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "opcode": 29,
+      "call": "Call::Steer { ptr, len }"
+    },
+    {
+      "namespace": "incant_navigation_v1",
+      "name": "read_steering",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "capacity",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "opcode": 30,
+      "call": "Call::ReadSteering { ptr, capacity }"
+    },
+    {
+      "namespace": "incant_animation_v3",
+      "name": "snapshot_len",
+      "opcode": 31,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::AnimationLenV3"
+    },
+    {
+      "namespace": "incant_animation_v3",
+      "name": "read_snapshot",
+      "opcode": 32,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "capacity",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::ReadAnimationsV3 { ptr, capacity }"
+    },
+    {
+      "namespace": "incant_animation_graph_v1",
+      "name": "snapshot_len",
+      "opcode": 33,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::AnimationGraphLen"
+    },
+    {
+      "namespace": "incant_animation_graph_v1",
+      "name": "read_snapshot",
+      "opcode": 34,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "capacity",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::ReadAnimationGraphs { ptr, capacity }"
+    },
+    {
+      "namespace": "incant_animation_graph_v1",
+      "name": "control",
+      "opcode": 35,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "id",
+          "i32"
+        ],
+        [
+          "ptr",
+          "i32"
+        ]
+      ],
+      "result": null,
+      "call": "Call::ControlAnimationGraph { id, ptr }"
+    },
+    {
+      "namespace": "incant_navigation_v1",
+      "name": "find_path",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "len",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "opcode": 36,
+      "call": "Call::FindPath { ptr, len }"
+    },
+    {
+      "namespace": "incant_navigation_v1",
+      "name": "find_grid_path",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "len",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "opcode": 37,
+      "call": "Call::FindGridPath { ptr, len }"
+    },
+    {
+      "namespace": "incant_navigation_v1",
+      "name": "read_path",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "capacity",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "opcode": 38,
+      "call": "Call::ReadPath { ptr, capacity }"
+    },
+    {
+      "namespace": "incant_physics_v1",
+      "name": "query_batch",
+      "opcode": 39,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "len",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::PhysicsQuery { ptr, len }"
+    },
+    {
+      "namespace": "incant_physics_v1",
+      "name": "trigger_events",
+      "opcode": 40,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "dimension",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::PhysicsEvents { dimension }"
+    },
+    {
+      "namespace": "incant_physics_v1",
+      "name": "read_result",
+      "opcode": 41,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "capacity",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::ReadPhysics { ptr, capacity }"
+    },
+    {
+      "namespace": "incant_animation_v4",
+      "name": "snapshot_len",
+      "opcode": 42,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::AnimationLenV4"
+    },
+    {
+      "namespace": "incant_animation_v4",
+      "name": "read_snapshot",
+      "opcode": 43,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "capacity",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::ReadAnimationsV4 { ptr, capacity }"
+    },
+    {
+      "namespace": "incant_animation_ik_v1",
+      "name": "snapshot_len",
+      "opcode": 44,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::AnimationIkLen"
+    },
+    {
+      "namespace": "incant_animation_ik_v1",
+      "name": "read_snapshot",
+      "opcode": 45,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "capacity",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::ReadAnimationIk { ptr, capacity }"
+    },
+    {
+      "namespace": "incant_animation_ik_v1",
+      "name": "control",
+      "opcode": 46,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "len",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::ControlAnimationIk { ptr, len }"
+    },
+    {
+      "namespace": "incant_animation_v5",
+      "name": "snapshot_len",
+      "opcode": 47,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::AnimationLenV5"
+    },
+    {
+      "namespace": "incant_animation_v5",
+      "name": "read_snapshot",
+      "opcode": 48,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "capacity",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::ReadAnimationsV5 { ptr, capacity }"
+    },
+    {
+      "namespace": "incant_animation_ik_v2",
+      "name": "snapshot_len",
+      "opcode": 49,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::AnimationIkLenV2"
+    },
+    {
+      "namespace": "incant_animation_ik_v2",
+      "name": "read_snapshot",
+      "opcode": 50,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "capacity",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::ReadAnimationIkV2 { ptr, capacity }"
+    },
+    {
+      "namespace": "incant_animation_graph_v2",
+      "name": "snapshot_len",
+      "opcode": 51,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::AnimationGraphLenV2"
+    },
+    {
+      "namespace": "incant_animation_graph_v2",
+      "name": "read_snapshot",
+      "opcode": 52,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "capacity",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::ReadAnimationGraphsV2 { ptr, capacity }"
     }
   ],
   "enums": {
@@ -1035,6 +1610,74 @@
         "Error",
         3
       ]
+    ],
+    "DateLength": [
+      [
+        "Short",
+        0
+      ],
+      [
+        "Medium",
+        1
+      ],
+      [
+        "Long",
+        2
+      ]
+    ],
+    "AnimationPoseKind": [
+      [
+        "Single",
+        0
+      ],
+      [
+        "SlerpTransition",
+        1
+      ],
+      [
+        "SlerpParameter",
+        2
+      ],
+      [
+        "WeightedQuaternionMean",
+        3
+      ]
+    ],
+    "AnimationPoseKindV5": [
+      [
+        "Single",
+        0
+      ],
+      [
+        "SlerpTransition",
+        1
+      ],
+      [
+        "SlerpParameter",
+        2
+      ],
+      [
+        "WeightedQuaternionMean",
+        3
+      ],
+      [
+        "Compound",
+        4
+      ]
+    ],
+    "PoseInterpolation": [
+      [
+        "Clip",
+        0
+      ],
+      [
+        "SphericalPair",
+        1
+      ],
+      [
+        "Weighted",
+        2
+      ]
     ]
   },
   "records": {
@@ -1307,6 +1950,978 @@
         "f64",
         3
       ]
+    ],
+    "AnimationHeader": [
+      [
+        "magic",
+        "u8",
+        8
+      ],
+      [
+        "count",
+        "u32"
+      ],
+      [
+        "stride",
+        "u32"
+      ]
+    ],
+    "AnimationRow": [
+      [
+        "id",
+        "u8",
+        16
+      ],
+      [
+        "clip",
+        "u32"
+      ],
+      [
+        "flags",
+        "u32"
+      ],
+      [
+        "seconds",
+        "f64"
+      ],
+      [
+        "speed",
+        "f64"
+      ]
+    ],
+    "AnimationCommand": [
+      [
+        "kind",
+        "u32"
+      ],
+      [
+        "clip",
+        "u32"
+      ],
+      [
+        "seconds",
+        "f64"
+      ],
+      [
+        "value",
+        "f64"
+      ]
+    ],
+    "AnimationRowV2": [
+      [
+        "id",
+        "u8",
+        16
+      ],
+      [
+        "clip",
+        "u32"
+      ],
+      [
+        "flags",
+        "u32"
+      ],
+      [
+        "seconds",
+        "f64"
+      ],
+      [
+        "speed",
+        "f64"
+      ],
+      [
+        "source_clip",
+        "u32"
+      ],
+      [
+        "transition_flags",
+        "u32"
+      ],
+      [
+        "source_seconds",
+        "f64"
+      ],
+      [
+        "source_speed",
+        "f64"
+      ],
+      [
+        "elapsed",
+        "f64"
+      ],
+      [
+        "duration",
+        "f64"
+      ]
+    ],
+    "SteeringHeader": [
+      [
+        "agents",
+        "u32"
+      ],
+      [
+        "obstacles",
+        "u32"
+      ],
+      [
+        "time_horizon",
+        "f64"
+      ],
+      [
+        "obstacle_time_horizon",
+        "f64"
+      ],
+      [
+        "margin",
+        "f64"
+      ]
+    ],
+    "SteeringAgent": [
+      [
+        "id",
+        "u8",
+        16
+      ],
+      [
+        "position",
+        "f64",
+        3
+      ],
+      [
+        "velocity",
+        "f64",
+        2
+      ],
+      [
+        "preferred_velocity",
+        "f64",
+        2
+      ],
+      [
+        "radius",
+        "f64"
+      ],
+      [
+        "height",
+        "f64"
+      ],
+      [
+        "max_speed",
+        "f64"
+      ],
+      [
+        "responsibility",
+        "f64"
+      ]
+    ],
+    "SteeringObstacleHeader": [
+      [
+        "id",
+        "u8",
+        16
+      ],
+      [
+        "min_y",
+        "f64"
+      ],
+      [
+        "max_y",
+        "f64"
+      ],
+      [
+        "vertices",
+        "u32"
+      ],
+      [
+        "closed",
+        "u8"
+      ],
+      [
+        "reserved",
+        "u8",
+        3
+      ]
+    ],
+    "SteeringResultHeader": [
+      [
+        "agents",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ]
+    ],
+    "SteeringVelocity": [
+      [
+        "id",
+        "u8",
+        16
+      ],
+      [
+        "velocity",
+        "f64",
+        2
+      ],
+      [
+        "neighbors",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ]
+    ],
+    "AnimationRowV3": [
+      [
+        "id",
+        "u8",
+        16
+      ],
+      [
+        "clip",
+        "u32"
+      ],
+      [
+        "flags",
+        "u32"
+      ],
+      [
+        "seconds",
+        "f64"
+      ],
+      [
+        "speed",
+        "f64"
+      ],
+      [
+        "source_clip",
+        "u32"
+      ],
+      [
+        "transition_flags",
+        "u32"
+      ],
+      [
+        "source_seconds",
+        "f64"
+      ],
+      [
+        "source_speed",
+        "f64"
+      ],
+      [
+        "elapsed",
+        "f64"
+      ],
+      [
+        "duration",
+        "f64"
+      ],
+      [
+        "blend_kind",
+        "u32"
+      ],
+      [
+        "blend_source_clip",
+        "u32"
+      ],
+      [
+        "blend_source_seconds",
+        "f64"
+      ],
+      [
+        "blend_weight",
+        "f64"
+      ]
+    ],
+    "AnimationGraphHeader": [
+      [
+        "magic",
+        "u8",
+        8
+      ],
+      [
+        "count",
+        "u32"
+      ],
+      [
+        "stride",
+        "u32"
+      ],
+      [
+        "parameter_count",
+        "u32"
+      ],
+      [
+        "parameter_stride",
+        "u32"
+      ]
+    ],
+    "AnimationGraphRow": [
+      [
+        "id",
+        "u8",
+        16
+      ],
+      [
+        "state",
+        "u8",
+        16
+      ],
+      [
+        "seconds",
+        "f64"
+      ],
+      [
+        "elapsed",
+        "f64"
+      ],
+      [
+        "flags",
+        "u32"
+      ],
+      [
+        "parameter_offset",
+        "u32"
+      ],
+      [
+        "parameter_count",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ]
+    ],
+    "AnimationGraphParameter": [
+      [
+        "id",
+        "u8",
+        16
+      ],
+      [
+        "value",
+        "f64"
+      ]
+    ],
+    "AnimationGraphCommand": [
+      [
+        "kind",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ],
+      [
+        "id",
+        "u8",
+        16
+      ],
+      [
+        "value",
+        "f64"
+      ]
+    ],
+    "PathRequest": [
+      [
+        "owner",
+        "u8",
+        16
+      ],
+      [
+        "start",
+        "f64",
+        3
+      ],
+      [
+        "end",
+        "f64",
+        3
+      ],
+      [
+        "snap_distance",
+        "f64"
+      ],
+      [
+        "max_visited",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ]
+    ],
+    "GridPathRequest": [
+      [
+        "owner",
+        "u8",
+        16
+      ],
+      [
+        "start",
+        "u32",
+        2
+      ],
+      [
+        "end",
+        "u32",
+        2
+      ],
+      [
+        "max_expansions",
+        "u32"
+      ],
+      [
+        "flags",
+        "u32"
+      ]
+    ],
+    "PathResultHeader": [
+      [
+        "found",
+        "u32"
+      ],
+      [
+        "visited",
+        "u32"
+      ],
+      [
+        "generation",
+        "u64"
+      ],
+      [
+        "points",
+        "u32"
+      ],
+      [
+        "corridor",
+        "u32"
+      ],
+      [
+        "traversals",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ]
+    ],
+    "PathPoint": [
+      [
+        "position",
+        "f64",
+        3
+      ]
+    ],
+    "PathTraversal": [
+      [
+        "link_id",
+        "u8",
+        16
+      ],
+      [
+        "from_index",
+        "u32"
+      ],
+      [
+        "to_index",
+        "u32"
+      ],
+      [
+        "reversed",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ]
+    ],
+    "GridPathResultHeader": [
+      [
+        "found",
+        "u32"
+      ],
+      [
+        "cells",
+        "u32"
+      ],
+      [
+        "generation",
+        "u64"
+      ],
+      [
+        "cost",
+        "u64"
+      ]
+    ],
+    "GridPathCell": [
+      [
+        "position",
+        "u32",
+        2
+      ]
+    ],
+    "PhysicsHeader": [
+      [
+        "tag",
+        "u8",
+        8
+      ],
+      [
+        "count",
+        "u32"
+      ],
+      [
+        "extra",
+        "u32"
+      ]
+    ],
+    "PhysicsQuery": [
+      [
+        "kind",
+        "u32"
+      ],
+      [
+        "flags",
+        "u32"
+      ],
+      [
+        "entity",
+        "u8",
+        16
+      ],
+      [
+        "a",
+        "f64",
+        3
+      ],
+      [
+        "b",
+        "f64",
+        3
+      ],
+      [
+        "c",
+        "f64"
+      ],
+      [
+        "d",
+        "f64"
+      ],
+      [
+        "e",
+        "f64"
+      ],
+      [
+        "memberships",
+        "u32"
+      ],
+      [
+        "filter",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u64"
+      ]
+    ],
+    "PhysicsRow": [
+      [
+        "kind",
+        "u32"
+      ],
+      [
+        "flags",
+        "u32"
+      ],
+      [
+        "entity",
+        "u8",
+        16
+      ],
+      [
+        "distance",
+        "f64"
+      ],
+      [
+        "point",
+        "f64",
+        3
+      ],
+      [
+        "normal",
+        "f64",
+        3
+      ],
+      [
+        "first",
+        "u32"
+      ],
+      [
+        "count",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u64"
+      ]
+    ],
+    "PhysicsEvent": [
+      [
+        "first",
+        "u8",
+        16
+      ],
+      [
+        "second",
+        "u8",
+        16
+      ],
+      [
+        "entered",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ]
+    ],
+    "PhysicsEventHeader": [
+      [
+        "tag",
+        "u8",
+        8
+      ],
+      [
+        "scene",
+        "u8",
+        16
+      ],
+      [
+        "count",
+        "u32"
+      ],
+      [
+        "dimension",
+        "u32"
+      ]
+    ],
+    "AnimationHeaderV4": [
+      [
+        "magic",
+        "u8",
+        8
+      ],
+      [
+        "scene",
+        "u8",
+        16
+      ],
+      [
+        "count",
+        "u32"
+      ],
+      [
+        "stride",
+        "u32"
+      ],
+      [
+        "sample_count",
+        "u32"
+      ],
+      [
+        "sample_stride",
+        "u32"
+      ]
+    ],
+    "AnimationRowV4": [
+      [
+        "id",
+        "u8",
+        16
+      ],
+      [
+        "clip",
+        "u32"
+      ],
+      [
+        "flags",
+        "u32"
+      ],
+      [
+        "seconds",
+        "f64"
+      ],
+      [
+        "speed",
+        "f64"
+      ],
+      [
+        "source_clip",
+        "u32"
+      ],
+      [
+        "transition_flags",
+        "u32"
+      ],
+      [
+        "source_seconds",
+        "f64"
+      ],
+      [
+        "source_speed",
+        "f64"
+      ],
+      [
+        "elapsed",
+        "f64"
+      ],
+      [
+        "duration",
+        "f64"
+      ],
+      [
+        "pose_kind",
+        "u32"
+      ],
+      [
+        "sample_offset",
+        "u32"
+      ],
+      [
+        "sample_count",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ]
+    ],
+    "AnimationPoseSample": [
+      [
+        "clip",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ],
+      [
+        "seconds",
+        "f64"
+      ],
+      [
+        "weight",
+        "f64"
+      ]
+    ],
+    "AnimationIkHeader": [
+      [
+        "magic",
+        "u8",
+        8
+      ],
+      [
+        "pose_bytes",
+        "u32"
+      ],
+      [
+        "count",
+        "u32"
+      ],
+      [
+        "stride",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ]
+    ],
+    "AnimationIkRow": [
+      [
+        "entity",
+        "u8",
+        16
+      ],
+      [
+        "constraint",
+        "u8",
+        16
+      ],
+      [
+        "chain",
+        "u32",
+        3
+      ],
+      [
+        "reserved",
+        "u32"
+      ],
+      [
+        "target",
+        "f64",
+        3
+      ],
+      [
+        "pole",
+        "f64",
+        3
+      ],
+      [
+        "weight",
+        "f64"
+      ]
+    ],
+    "AnimationIkCommand": [
+      [
+        "entity",
+        "u8",
+        16
+      ],
+      [
+        "constraint",
+        "u8",
+        16
+      ],
+      [
+        "target",
+        "f64",
+        3
+      ],
+      [
+        "pole",
+        "f64",
+        3
+      ],
+      [
+        "weight",
+        "f64"
+      ]
+    ],
+    "AnimationHeaderV5": [
+      [
+        "magic",
+        "u8",
+        8
+      ],
+      [
+        "scene",
+        "u8",
+        16
+      ],
+      [
+        "count",
+        "u32"
+      ],
+      [
+        "stride",
+        "u32"
+      ],
+      [
+        "sample_count",
+        "u32"
+      ],
+      [
+        "sample_stride",
+        "u32"
+      ],
+      [
+        "compound_count",
+        "u32"
+      ],
+      [
+        "compound_stride",
+        "u32"
+      ]
+    ],
+    "AnimationPoseGroups": [
+      [
+        "entity",
+        "u8",
+        16
+      ],
+      [
+        "split",
+        "u32"
+      ],
+      [
+        "source_kind",
+        "u32"
+      ],
+      [
+        "destination_kind",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ],
+      [
+        "weight",
+        "f64"
+      ]
+    ],
+    "AnimationGraphHeaderV2": [
+      [
+        "magic",
+        "u8",
+        8
+      ],
+      [
+        "graph_bytes",
+        "u32"
+      ],
+      [
+        "count",
+        "u32"
+      ],
+      [
+        "stride",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ]
+    ],
+    "AnimationGraphFade": [
+      [
+        "entity",
+        "u8",
+        16
+      ],
+      [
+        "state",
+        "u8",
+        16
+      ],
+      [
+        "seconds",
+        "f64"
+      ],
+      [
+        "speed",
+        "f64"
+      ],
+      [
+        "elapsed",
+        "f64"
+      ],
+      [
+        "duration",
+        "f64"
+      ],
+      [
+        "flags",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ]
     ]
   },
   "input_sections": [
@@ -1361,14 +2976,72 @@
     "LOCALIZATION_MAX_COMMANDS": 64,
     "LOCALIZATION_MAX_REQUEST_BYTES": 66560,
     "LOCALIZATION_MAX_RESULT_BYTES": 66560,
-    "LOCALIZATION_MAX_SETTINGS_BYTES": 2364
+    "LOCALIZATION_MAX_SETTINGS_BYTES": 2364,
+    "ANIMATION_MAX_ROWS": 100000,
+    "ANIMATION_MAX_CLIPS": 256,
+    "ANIMATION_MAX_SPEED": 16,
+    "LOCALIZATION_FORMAT_BYTES": 24,
+    "ANIMATION_MAX_TRANSITION_SECONDS": 60,
+    "NAVIGATION_MAX_QUERIES": 32,
+    "STEERING_MAX_AGENTS": 128,
+    "STEERING_MAX_OBSTACLES": 32,
+    "STEERING_MAX_VERTICES": 32,
+    "STEERING_MAX_EDGES": 128,
+    "STEERING_MAX_REQUEST_BYTES": 17192,
+    "STEERING_MAX_RESULT_BYTES": 5136,
+    "ANIMATION_GRAPH_MAX_ROWS": 1024,
+    "ANIMATION_GRAPH_MAX_PARAMETERS": 16,
+    "ANIMATION_GRAPH_MAX_PARAMETER_ROWS": 16384,
+    "ANIMATION_GRAPH_MAX_SECONDS": 3600,
+    "ANIMATION_GRAPH_MAX_VALUE": 1000000,
+    "NAVIGATION_MAX_EXPANSIONS": 65536,
+    "PATH_MAX_VISITED": 32768,
+    "PATH_MAX_POINTS": 4096,
+    "PATH_MAX_CORRIDOR": 4096,
+    "PATH_MAX_TRAVERSALS": 4096,
+    "GRID_PATH_MAX_CELLS": 4096,
+    "PATH_MAX_RESULT_BYTES": 245800,
+    "GRID_PATH_MAX_RESULT_BYTES": 32800,
+    "PHYSICS_MAX_BATCH": 64,
+    "PHYSICS_MAX_CHARACTER_QUERIES": 128,
+    "PHYSICS_MAX_COLLISIONS": 4096,
+    "PHYSICS_MAX_EVENTS": 131072,
+    "PHYSICS_MAX_REQUEST_BYTES": 7184,
+    "PHYSICS_MAX_RESULT_BYTES": 71696,
+    "PHYSICS_MAX_EVENT_BYTES": 5242912,
+    "ANIMATION_POSE_MAX_SAMPLES": 16,
+    "ANIMATION_POSE_MAX_SAMPLE_ROWS": 214336,
+    "ANIMATION_IK_MAX_ROWS": 4096,
+    "ANIMATION_IK_MAX_PER_OWNER": 32,
+    "ANIMATION_IK_MAX_MODEL_NODES": 4096,
+    "ANIMATION_IK_MAX_COORDINATE": 1000000000,
+    "ANIMATION_COMPOUND_MAX_ROWS": 1024
   },
   "magic": {
     "INPUT_MAGIC": "INPINP01",
     "FLIPBOOK_MAGIC": "INCFB001",
     "LOCALIZATION_REQUEST_MAGIC": "INCLQR01",
     "LOCALIZATION_SETTINGS_MAGIC": "INCLST01",
-    "LOCALIZATION_RESULT_MAGIC": "INCLRS01"
+    "LOCALIZATION_RESULT_MAGIC": "INCLRS01",
+    "ANIMATION_MAGIC": "INCAN001",
+    "LOCALIZATION_FORMAT_MAGIC": "INCLFM01",
+    "ANIMATION_V2_MAGIC": "INCAN002",
+    "STEERING_REQUEST_MAGIC": "INCSTR01",
+    "STEERING_RESULT_MAGIC": "INCSTV01",
+    "ANIMATION_V3_MAGIC": "INCAN003",
+    "ANIMATION_GRAPH_MAGIC": "INCAGR01",
+    "PATH_REQUEST_MAGIC": "INCPTHQ1",
+    "GRID_PATH_REQUEST_MAGIC": "INCGRDQ1",
+    "PATH_RESULT_MAGIC": "INCPTHR1",
+    "GRID_PATH_RESULT_MAGIC": "INCGRDR1",
+    "PHYSICS_REQUEST_MAGIC": "INCPHYQ1",
+    "PHYSICS_RESULT_MAGIC": "INCPHYR1",
+    "PHYSICS_EVENTS_MAGIC": "INCPHYE1",
+    "ANIMATION_V4_MAGIC": "INCAN004",
+    "ANIMATION_IK_MAGIC": "INCIK001",
+    "ANIMATION_V5_MAGIC": "INCANI05",
+    "ANIMATION_IK_V2_MAGIC": "INCIK002",
+    "ANIMATION_GRAPH_V2_MAGIC": "INCAGR02"
   },
   "optional_none": -1,
   "namespaces": {
@@ -1376,6 +3049,17 @@
     "incant_input_v1": "input",
     "incant_flipbook_v1": "flipbook",
     "incant_log_v1": "log",
-    "incant_localization_v1": "localization"
+    "incant_localization_v1": "localization",
+    "incant_animation_v1": "animation",
+    "incant_animation_v2": "animationv2",
+    "incant_navigation_v1": "navigation",
+    "incant_animation_v3": "animationv3",
+    "incant_animation_graph_v1": "animationgraph",
+    "incant_physics_v1": "physics",
+    "incant_animation_v4": "animationv4",
+    "incant_animation_ik_v1": "animationik",
+    "incant_animation_v5": "animation5",
+    "incant_animation_ik_v2": "animationik2",
+    "incant_animation_graph_v2": "animationgraph2"
   }
 }

@@ -1,0 +1,6 @@
+{
+  "name": "oversized",
+  "returncode": 1,
+  "stdout": "",
+  "stderr": "Error: \"runtime input size limit\"\n"
+}

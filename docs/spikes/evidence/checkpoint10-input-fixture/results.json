@@ -1,0 +1,45 @@
+[
+  {
+    "name": "tests",
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--offline",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_headless",
+      "--test",
+      "play_input",
+      "-p",
+      "incant_input"
+    ],
+    "exit": 0,
+    "sha256": "3d177b6e163d8e35319369c8bbaee8086d025b6d51517154397b7e6def7df52b",
+    "seconds": 1.7580715829972178
+  },
+  {
+    "name": "clippy",
+    "command": [
+      "./tools/cargo",
+      "clippy",
+      "--locked",
+      "--offline",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_headless",
+      "--test",
+      "play_input",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit": 0,
+    "sha256": "bd20031ecee36e9c7595509266827d82d1ce21716f2426a7cd19a8c760f95a5f",
+    "seconds": 5.719700333022047
+  }
+]

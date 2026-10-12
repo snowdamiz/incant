@@ -64,6 +64,12 @@ pub enum RuntimeError {
 /// A disposable Bevy world; no project, command bus, authoring validator or
 /// serialization in the tick path. Snapshot conversion is explicitly requested.
 pub struct NativeWorld {
+    pub(crate) font_assets: Vec<crate::FontAssetRef>,
+    pub(crate) text_ids: BTreeSet<StableId>,
+    pub(crate) text_generation: u64,
+    pub(crate) ui: BTreeMap<StableId, std::sync::Arc<crate::NativeUi>>,
+    pub(crate) ui_generation: u64,
+    pub(crate) ui_used: bool,
     pub(crate) localization: crate::NativeLocalization,
     pub(crate) navigation: crate::navigation_runtime::NavigationRuntime,
     pub(crate) navigation_used: bool,
@@ -73,6 +79,7 @@ pub struct NativeWorld {
     schedule: Schedule,
     pub(crate) flipbook_query: crate::flipbook::PlaybackQuery,
     pub(crate) animation_query: crate::animation::PlaybackQuery,
+    pub(crate) ik_catalog: std::sync::Arc<[std::sync::Arc<crate::NativeIk>]>,
     pub(crate) physics: incant_physics_runtime::PhysicsRuntime<StableId>,
     pub(crate) physics_2d: incant_physics_2d_runtime::PhysicsWorld2D,
     pub(crate) physics_2d_used: bool,
@@ -102,10 +109,15 @@ impl NativeWorld {
         // Startup pairing only. No document, scene serialization or hashing is
         // performed during simulation or native structural operations.
         let source_scene_fingerprint = Sha256::digest(scene.to_bytes()).into();
+        let ui_used = scene.has_ui();
+        let ui = scene.ui.into_iter().map(|n| (n.entity, n.node)).collect();
+        let texts = scene.texts;
+        let font_assets = scene.font_assets;
         let navigation = scene.prepared_navigation;
         let physics = scene.physics.clone();
         let physics_2d = scene.physics_2d.clone();
         let audio = scene.audio.clone();
+        let ik_catalog = scene.spatial.iter().filter_map(|n| n.ik.clone()).collect();
         let spatial = scene.spatial;
         let visual_assets = scene.visual_assets;
         let mut solver = incant_physics_runtime::PhysicsRuntime::default();
@@ -162,6 +174,12 @@ impl NativeWorld {
         let animation_query = world.query::<(&Identity, &crate::animation::Playback)>();
         let mut result = Self {
             localization: scene.localization,
+            font_assets,
+            text_ids: BTreeSet::new(),
+            text_generation: 0,
+            ui,
+            ui_generation: 0,
+            ui_used,
             navigation_used: !navigation.nodes.is_empty(),
             navigation,
             identity: crate::WorldIdentity::new(),
@@ -183,12 +201,16 @@ impl NativeWorld {
             schedule,
             flipbook_query,
             animation_query,
+            ik_catalog,
             entities,
             parents,
             scene_id: scene.id,
             tick: 0,
             tick_rate: scene.tick_rate,
         };
+        for node in texts {
+            result.install_text(node.entity, Some(node.text));
+        }
         for node in spatial {
             result.install_spatial(node.entity, Some(node));
         }
@@ -259,7 +281,18 @@ impl NativeWorld {
         let next_animation_playback = next_animation.map(|definition| crate::animation::Playback {
             definition: definition.clone(),
             state: definition.initial_state(),
+            graph: definition
+                .graph
+                .as_ref()
+                .map(|graph| graph.initial_state(definition.initial.playing)),
         });
+        let previous_ik = self
+            .world
+            .get::<crate::CookedSpatial>(self.entities[&id])
+            .and_then(|n| n.ik.as_ref());
+        let next_ik = node.as_ref().and_then(|n| n.ik.as_ref());
+        let ik_changed = previous_ik != next_ik;
+        let next_ik_state = next_ik.map(|n| crate::ik::IkState(n.initial.clone()));
         let previous_flipbook = self
             .world
             .get::<crate::CookedSpatial>(self.entities[&id])
@@ -283,6 +316,13 @@ impl NativeWorld {
             self.tilemap_collision_ids.remove(&id);
         }
         let mut entity = self.world.entity_mut(self.entities[&id]);
+        if ik_changed {
+            if let Some(state) = next_ik_state {
+                entity.insert(state);
+            } else {
+                entity.remove::<crate::ik::IkState>();
+            }
+        }
         if animation_changed {
             if let Some(playback) = next_animation_playback {
                 entity.insert(playback);
@@ -497,6 +537,7 @@ impl NativeWorld {
         step: Option<f64>,
         solved: bool,
     ) -> Result<(), SceneError> {
+        let ui = &self.ui;
         let physics = &self.physics;
         let physics_2d = &self.physics_2d;
         let scene_id = self.scene_id;
@@ -517,6 +558,11 @@ impl NativeWorld {
                         query.get(world, entity).expect("fixed topology");
                     let velocity = motion.map(|v| &v.0);
                     validate_components(id.0, &local.0, velocity)?;
+                    if ui.contains_key(&id.0)
+                        && (local.0 != Default::default() || velocity.is_some())
+                    {
+                        return Err(SceneError::Invalid("UI numeric transform or velocity"));
+                    }
                     if let Some(binding) = binding {
                         crate::physics::validate_motion(
                             id.0,

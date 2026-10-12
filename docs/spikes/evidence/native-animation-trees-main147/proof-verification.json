@@ -1,0 +1,219 @@
+{
+  "frozen_head": "4487c5ae92369c2a69a08dc53a02f25143eefe34",
+  "frozen_input_count": 1696,
+  "all_frozen_inputs_unchanged": true,
+  "zero_exit_commands": 18,
+  "tests": {
+    "actual-host": {
+      "groups": 71,
+      "passed": 401,
+      "failed": 0,
+      "ignored": 0
+    },
+    "affected": {
+      "groups": 136,
+      "passed": 793,
+      "failed": 0,
+      "ignored": 82
+    }
+  },
+  "conformance_passed": true,
+  "public_proofs": {
+    "quickjs": {
+      "actual_package_files": {
+        "data/clips.bin": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+        "data/empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+        "data/input-actions.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "data/models/3c2837b62f3091aff8acb89d90ea8f15bb1ec7787e603f34dcbfc7eac446c76d.incmodel": "b2a8e41a304e805aebdcb90cb35adbfd28ea9cb8dfca481bddc2b4e12d9a029f",
+        "data/package.json": "e81b0ea939e08478c50a00bdfea13bb2a7d94a8e9ab468c572cc843419f49cc8",
+        "data/world.scene": "d5f271c7bfee8d1c09529f5ba823be6c3ccac9d5ca9fa79b4567fa6ac043550e",
+        "incant_game_player": "2a262acdfa605f4107750ff77f42c2316b1345d906aceb8b52e134e6df4b8dfb"
+      },
+      "player_sha256": "2a262acdfa605f4107750ff77f42c2316b1345d906aceb8b52e134e6df4b8dfb",
+      "commands": 26,
+      "successes": 15,
+      "full_runs": 3,
+      "continuation_pairs": 6,
+      "exact_refusals": 2,
+      "independent_full_log_check": true,
+      "repeat_and_split_pcm_exact": true,
+      "final_saves_equal": true,
+      "actual_output_files": {
+        "rest-completed-paused-continued.save": {
+          "sha256": "c61cf4560314de018a14fbe28751c27bb4660f3ab1569b9def30e7bca0e6e26f",
+          "bytes": 3420
+        },
+        "paused.pcm": {
+          "sha256": "c72274a22cba2dcef62e0f62834446ee39b0cd95ad0faa27a89b3b49f48aa390",
+          "bytes": 57600
+        },
+        "eight-to-four.save": {
+          "sha256": "0ee17ac1d2572572650ab0279c48f1cfc394b30a22cc29bcc88019b09158ff29",
+          "bytes": 3420
+        },
+        "eight-to-four.pcm": {
+          "sha256": "c65206769723a13afe80c0d925531639ceef9c2eb97eee3b1b542739ec40597f",
+          "bytes": 25600
+        },
+        "second-state-continued.pcm": {
+          "sha256": "a515959304caf9651b7d2b8b22368d869e2a763eb6061b4ff4b2493711a06129",
+          "bytes": 198400
+        },
+        "reverse.pcm": {
+          "sha256": "ac8f5613c4b176d380009fa1306c49a027644dba38b9703ed102634c60f8d5ff",
+          "bytes": 134400
+        },
+        "paused-continued.save": {
+          "sha256": "c61cf4560314de018a14fbe28751c27bb4660f3ab1569b9def30e7bca0e6e26f",
+          "bytes": 3420
+        },
+        "rest-completed-paused.pcm": {
+          "sha256": "c4527252a0b06fcda9139288af35098246c319087447a40400a9cc6c200dbf10",
+          "bytes": 70400
+        },
+        "repeat-0.save": {
+          "sha256": "c61cf4560314de018a14fbe28751c27bb4660f3ab1569b9def30e7bca0e6e26f",
+          "bytes": 3420
+        },
+        "repeat-1.save": {
+          "sha256": "c61cf4560314de018a14fbe28751c27bb4660f3ab1569b9def30e7bca0e6e26f",
+          "bytes": 3420
+        },
+        "reverse-continued.pcm": {
+          "sha256": "ed9524f9e8318c1bf1be6ad5f519f95513194dc348d68bf08fb5f966fc565be3",
+          "bytes": 224000
+        },
+        "zero-speed-continued.pcm": {
+          "sha256": "bba4463319d17dafd261b99651ecef74f1041be91d6b6cc86bb61a938e0e1818",
+          "bytes": 140800
+        },
+        "zero-speed-continued.save": {
+          "sha256": "c61cf4560314de018a14fbe28751c27bb4660f3ab1569b9def30e7bca0e6e26f",
+          "bytes": 3420
+        },
+        "paused-continued.pcm": {
+          "sha256": "6fc524968f109b653a79e0aa6a05b8a35535cc5e074708c9d9ad9e5e1c2064d2",
+          "bytes": 300800
+        },
+        "baseline.pcm": {
+          "sha256": "11001dd97006a44b5bccaaafeb04f0a089ad1a7b3781f58362cb62cc814de4ce",
+          "bytes": 358400
+        },
+        "second-state-continued.save": {
+          "sha256": "c61cf4560314de018a14fbe28751c27bb4660f3ab1569b9def30e7bca0e6e26f",
+          "bytes": 3420
+        },
+        "reverse-continued.save": {
+          "sha256": "c61cf4560314de018a14fbe28751c27bb4660f3ab1569b9def30e7bca0e6e26f",
+          "bytes": 3420
+        },
+        "repeat-0.pcm": {
+          "sha256": "11001dd97006a44b5bccaaafeb04f0a089ad1a7b3781f58362cb62cc814de4ce",
+          "bytes": 358400
+        },
+        "corrupt-input.save": {
+          "sha256": "8321305da1b6c1badc6ec208ad0bea17cf8ba2063158540d2b47446a8a5913c1",
+          "bytes": 3420
+        },
+        "second-state.save": {
+          "sha256": "66d9f63a50a0100872e0976a0d47d981f99550349d525002a72068550189754f",
+          "bytes": 3420
+        },
+        "eight-to-four-continued.save": {
+          "sha256": "c61cf4560314de018a14fbe28751c27bb4660f3ab1569b9def30e7bca0e6e26f",
+          "bytes": 3420
+        },
+        "repeat-1.pcm": {
+          "sha256": "11001dd97006a44b5bccaaafeb04f0a089ad1a7b3781f58362cb62cc814de4ce",
+          "bytes": 358400
+        },
+        "zero-speed.pcm": {
+          "sha256": "0e69386c41c14833fe715639b72c8fcadf7cb07f5de679059499e1afb7a5c3d3",
+          "bytes": 217600
+        },
+        "rest-completed-paused.save": {
+          "sha256": "cb61b35977b3ccf937680f97d190d72fdcbd67316318e0c3cb62e46df2ae66b1",
+          "bytes": 3420
+        },
+        "baseline.save": {
+          "sha256": "c61cf4560314de018a14fbe28751c27bb4660f3ab1569b9def30e7bca0e6e26f",
+          "bytes": 3420
+        },
+        "reverse.save": {
+          "sha256": "41209a25fce8345c098f29028eb1f6724a083778f82676f244b9ed350db4f228",
+          "bytes": 3420
+        },
+        "rest-completed-paused-continued.pcm": {
+          "sha256": "0e89e5d755de20a0a96681c385ffcd1c64e8ae3b7d56d1c7c0c351a81cc46513",
+          "bytes": 288000
+        },
+        "eight-to-four-continued.pcm": {
+          "sha256": "1f79d4d2364862104109746e9fb76f452b53cb1e5852a05010f67adaca4fb80b",
+          "bytes": 332800
+        },
+        "zero-speed.save": {
+          "sha256": "a3cfeb8dd9e8c90b10069e60cb5b7acd2497739409ea86df943937824ead2ffb",
+          "bytes": 3420
+        },
+        "paused.save": {
+          "sha256": "22eca18eedaa181ed09730d2b149e22582e0138d0690e3e4e49740c0b5ffbcc9",
+          "bytes": 3420
+        },
+        "second-state.pcm": {
+          "sha256": "b9ce164d30e4101b009fe4be765a070593cfbdd48f897853de159a8c177fabe8",
+          "bytes": 160000
+        }
+      }
+    },
+    "wasm": {
+      "actual_package_files": {
+        "package/build.log": "7d8b475239b4c66adee8c8e0a2de9a321f9d46ea38c6fb174df850f1a1c99336",
+        "package/export.json": "ee18e828d23787e6b359c2640ae6dcf2d70d676c446faa03cf81ba350701194f",
+        "package/player/data/clips.bin": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+        "package/player/data/empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+        "package/player/data/input-actions.json": "704e030ba55e86160f9cb47a45870f9ab3f0374eaac35cff5053a7245ed5ac51",
+        "package/player/data/models/3e9024c680626b9afef73763d313a2677a224592091bdcd5e4b2b3521961c898.incmodel": "4277459c59603e45d8c05c20cebb1e70346bc30eb813b1b6e4d73ef85075bbba",
+        "package/player/data/package.json": "0da501e089fae0c2ac0a27b279b63f0e73b066de1a351524fab546d642958607",
+        "package/player/data/world.scene": "8a5f4b84e4abff568a70e6d96c723d8d8403ec89ae778552ffd73ab0302200f9",
+        "package/player/incant_game_player": "61a12f68e5e19e481207a86aaf41d31866a3a7b2e08e5278b4a3a629271c3c83",
+        "package/project-build.json": "a22e26bee0454ba35b9df7759f1ca56a61a19653fbb813494abf93d5b9144eaa",
+        "package/symbols/incant_game_player.dSYM/Contents/Info.plist": "c9105e700eab794c3fcb77d6855c8625420561dbe970effbc8313c53c972a2c7",
+        "package/symbols/incant_game_player.dSYM/Contents/Resources/DWARF/incant_game_player-5ba50c4543e0477c": "ae2648c44052475aba6ac4b5cad7bc1f91682642f851dea6e57247c19ae088f4",
+        "package/symbols/incant_game_player.dSYM/Contents/Resources/Relocations/aarch64/incant_game_player-5ba50c4543e0477c.yml": "c8525dde8bf3e7a4bda82bee3fb2464d19dd7d34b772d1cf94a744d7d60361d1",
+        "package/symbols/script-symbols.json": "d0de7a2f4a8e7a7a597bd986209d927d95651ecc54a6b2c44a60ec3c0d1f7954"
+      },
+      "player_sha256": "61a12f68e5e19e481207a86aaf41d31866a3a7b2e08e5278b4a3a629271c3c83",
+      "commands": 30,
+      "fresh_shipping_runs": 3,
+      "full_scalars_per_run": 3420,
+      "selected_vectors_per_run": 228,
+      "exact_refusals": 11,
+      "independent_native_oracle_and_full_log_check": true,
+      "actual_pcm_equals_development": true,
+      "removed_private_files": 17,
+      "actual_output_files": {
+        "development.pcm": {
+          "sha256": "eec19bc6af0b3b6dfb97a08782c65f4bb3c3203e789a015d2008b0d689ad08be",
+          "bytes": 128000
+        },
+        "run-0.pcm": {
+          "sha256": "eec19bc6af0b3b6dfb97a08782c65f4bb3c3203e789a015d2008b0d689ad08be",
+          "bytes": 128000
+        },
+        "run-1.pcm": {
+          "sha256": "eec19bc6af0b3b6dfb97a08782c65f4bb3c3203e789a015d2008b0d689ad08be",
+          "bytes": 128000
+        },
+        "run-2.pcm": {
+          "sha256": "eec19bc6af0b3b6dfb97a08782c65f4bb3c3203e789a015d2008b0d689ad08be",
+          "bytes": 128000
+        }
+      }
+    }
+  },
+  "limitations": [
+    "CPU-only local macOS integrated proof, no GPU/native-window/device/performance claim.",
+    "Original producer evidence remains separate; these are new current-main/current-lock builds.",
+    "Module checkpoint state and nonzero transitions involving tree states remain unsupported."
+  ]
+}

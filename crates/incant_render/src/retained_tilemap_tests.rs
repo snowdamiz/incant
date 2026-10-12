@@ -90,6 +90,9 @@ fn ordinary_sprite_reference(world: &NativeWorld, input: &NativeRenderInput) -> 
                     source: Arc::clone(&m.source),
                     cast_shadows: m.cast_shadows,
                     animation: m.animation,
+                    animation_blend: m.animation_blend,
+                    animation_pose: m.animation_pose,
+                    animation_ik: m.animation_ik.clone(),
                 }),
                 sprite: node.sprite.as_ref().map(|s| SpriteInput {
                     frames: None,

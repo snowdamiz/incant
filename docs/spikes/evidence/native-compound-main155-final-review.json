@@ -1,0 +1,32 @@
+{
+  "at": "2026-10-12T18:36:28.912610+00:00",
+  "reviewer": "astra root",
+  "scope": "Native compound main155 integration final source, artifacts and ordinary package evidence",
+  "decision": "accepted",
+  "tested_head": "ca08565e961700bb0b6884fad1dce927c36ac329",
+  "reviewed_head": "37b73347588adf9d5782565c2036d601c79855d3",
+  "manifest_sha256": "7c99385beaee4a05813131b9186c4424a94add47f1a40d69241f746b2c9d760c",
+  "verified": {
+    "frozen_inputs": 1754,
+    "raw_retained_artifacts": 367,
+    "zero_exit_commands": 15,
+    "source_comparison_rows": 88,
+    "prior_reviewed_seams": 6,
+    "cpu_tests": 766,
+    "cpu_gpu_ignored": 82,
+    "actual_host_tests": 420,
+    "fresh_full_processes": 3,
+    "continuation_pairs": 10,
+    "process_report_pcm_save_hashes": 23,
+    "pose_rows_per_full_run": 112,
+    "public_vector_checks_per_full_run": 224,
+    "runtime_files": 7
+  },
+  "source_seam_review_sha256": "d72fffc168404e578f005aa238ea3aa415b18a1f8fef5ee6531b4fbf16bd66ad",
+  "limitations": [
+    "CPU/render-input evidence only; no GPU pixel/device or phase acceptance",
+    "Compound Rust/Wasm ABI remains separately queued",
+    "Root-motion connected route remains separate"
+  ],
+  "findings": []
+}

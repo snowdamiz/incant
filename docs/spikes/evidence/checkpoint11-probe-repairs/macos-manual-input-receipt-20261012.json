@@ -1,0 +1,15 @@
+{
+  "at": "2026-10-12T14:45:14.714533+00:00",
+  "verdict": "Accepted helper-only manual-input rejection diagnostic correction",
+  "reviewer": "astra /root",
+  "patch_sha256": "93fd182201a425b26ae92969826c7801c2db7741e85d873590cd0f0cd4547212",
+  "binary_sha256": "3f0aa604ae3c60f8e9271b897a1926cbb4a753c763bf8a7a20e76555914813ad",
+  "notes": [
+    "Public CLI parser still rejects --input and unknown options; helper expectations updated for actual spatial/plain parser diagnostics.",
+    "Six actual subprocess refusal cases require nonzero status, empty stdout and no output file, with all input paths missing so failures must precede setup.",
+    "Source patch leaves production parser and all previous refusal assertions intact."
+  ],
+  "limits": [
+    "Actual non-GPU CLI invocation; does not count as renderer or device acceptance."
+  ]
+}

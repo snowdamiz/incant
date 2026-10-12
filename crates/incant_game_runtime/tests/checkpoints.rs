@@ -344,7 +344,7 @@ fn plain_and_hosted_factories_preserve_explicit_unsupported_world_guards() {
 }
 
 #[test]
-fn audio_and_newly_added_spatial_capabilities_are_not_silently_dropped() {
+fn audio_owner_is_preserved_and_newly_added_spatial_capabilities_are_not_dropped() {
     use incant_runtime::{CookedAudio, CookedSpatial, StructuralCommand};
     let initial = scene();
     let code = code();
@@ -357,12 +357,26 @@ fn audio_and_newly_added_spatial_capabilities_are_not_silently_dropped() {
             source: None,
         }])
         .unwrap();
-    let audio =
-        OfflineGameSession::new(audible, code.clone(), Default::default(), vec![], 44100).unwrap();
-    assert!(matches!(
-        audio.checkpoint_bytes(),
-        Err(GameError::Checkpoint(_))
-    ));
+    let audio = OfflineGameSession::new(
+        audible.clone(),
+        code.clone(),
+        Default::default(),
+        vec![],
+        44100,
+    )
+    .unwrap();
+    let audio_save = audio.checkpoint_bytes().unwrap();
+    assert_eq!(&audio_save[8..12], &3u32.to_le_bytes());
+    let restored_audio = OfflineGameSession::from_checkpoint_bytes(
+        &audio_save,
+        &audible,
+        code.clone(),
+        Default::default(),
+        vec![],
+        44100,
+    )
+    .unwrap();
+    assert_eq!(restored_audio.checkpoint_bytes().unwrap(), audio_save);
     // Origin stays the trusted initial scene, while a committed command adds a
     // spatial capability. Plain restore must inspect the restored declarations.
     let native =

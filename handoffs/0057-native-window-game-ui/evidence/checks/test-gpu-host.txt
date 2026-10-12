@@ -1,0 +1,97 @@
+   Compiling libc v0.2.190
+   Compiling hashbrown v0.17.1
+   Compiling indexmap v2.14.2
+   Compiling getrandom v0.3.4
+   Compiling cpufeatures v0.2.17
+   Compiling rand_core v0.9.5
+   Compiling mint v0.5.9
+   Compiling rand_chacha v0.9.0
+   Compiling glam v0.33.12
+   Compiling rand v0.9.5
+   Compiling ulid v1.2.1
+   Compiling sha2 v0.10.9
+   Compiling incant_2d v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_2d)
+   Compiling nalgebra v0.35.0
+   Compiling memmap2 v0.9.11
+   Compiling downcast-rs v2.0.2
+   Compiling fontdb v0.16.2
+   Compiling cosmic-text v0.14.2 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/third_party/cosmic-text)
+   Compiling glamx v0.3.1
+   Compiling dodgy_2d v0.5.5
+   Compiling incant_text v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_text)
+   Compiling incant_nav v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_nav)
+   Compiling bevy_utils v0.19.1
+   Compiling incant_localization v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_localization)
+   Compiling parry3d v0.31.1
+   Compiling parry2d v0.31.1
+   Compiling variadics_please v1.1.0
+   Compiling bevy_ecs v0.19.1
+   Compiling incant_assets_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_assets_runtime)
+   Compiling rapier2d v0.36.0
+   Compiling rapier3d v0.36.0
+   Compiling naga v29.0.4
+   Compiling incant_physics_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_physics_runtime)
+   Compiling incant_physics_2d_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_physics_2d_runtime)
+   Compiling parking_lot_core v0.9.12
+   Compiling parking_lot v0.12.5
+   Compiling incant_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_runtime)
+   Compiling rquickjs-sys v0.14.0
+   Compiling wgpu-naga-bridge v29.0.4
+   Compiling wgpu-hal v29.0.4
+   Compiling rquickjs-core v0.14.0
+   Compiling incant_script v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_script)
+   Compiling triple_buffer v9.0.0
+   Compiling atomic-arena v0.1.2
+   Compiling rtrb v0.4.0
+   Compiling kira v0.12.5
+   Compiling rquickjs v0.14.0
+   Compiling wgpu-core-deps-apple v29.0.4
+   Compiling incant_render_data v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_render_data)
+   Compiling taffy v0.14.0
+   Compiling cpu-time v1.0.0
+   Compiling incant_ui v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_ui)
+   Compiling wgpu-core v29.0.4
+   Compiling incant_audio_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_audio_runtime)
+   Compiling errno v0.3.14
+   Compiling rustix v1.1.5
+   Compiling wgpu v29.0.4
+   Compiling incant_game_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_game_runtime)
+   Compiling getrandom v0.4.3
+   Compiling incant_render_native v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_render_native)
+   Compiling incant_render v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_render)
+   Compiling incant_render_game v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_render_game)
+   Compiling tempfile v3.27.0
+   Compiling incant_doc v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_doc)
+   Compiling incant_render_gpu_host v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_render_gpu_host)
+   Compiling incant_assets v0.0.1 (/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/.worktrees/0057-native-window-game-ui/crates/incant_assets)
+    Finished `ci` profile [optimized] target(s) in 1m 41s
+     Running unittests src/lib.rs (/Users/andreyyurlov/.codex/incant-native-target/ci/deps/incant_render_gpu_host-4f01972618a8c226)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/game.rs (/Users/andreyyurlov/.codex/incant-native-target/ci/deps/game-23e133c2ea6b55e2)
+
+running 5 tests
+test hosted_text_child_draws_with_models_script_and_audio_without_motion_uploads ... ok
+test observed_device_loss_stops_the_host_before_another_target_is_acquired ... ok
+test paused_committed_refresh_submits_without_advancing_game_or_audio ... ok
+test script_physics_audio_and_submitted_frames_share_the_source_free_native_tick ... ok
+test target_errors_and_presentation_unwind_terminalize_game_and_silence_offline_pcm ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.64s
+
+     Running tests/ui.rs (/Users/andreyyurlov/.codex/incant-native-target/ci/deps/ui-3428d53e73967481)
+
+running 2 tests
+test composed_ui_draws_over_the_moving_world_and_reuses_unchanged_resources ... ok
+test refresh_and_viewport_relayout_use_the_same_ui_without_advancing_the_game ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.61s
+
+   Doc-tests incant_render_gpu_host
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s

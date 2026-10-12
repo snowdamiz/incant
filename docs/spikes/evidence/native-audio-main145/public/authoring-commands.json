@@ -1,0 +1,3702 @@
+[
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-target/ci/incant_headless",
+      "init",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-main145-001/public-export/authoring/project.json",
+      "--entities",
+      "0"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"created\": \"01M4RBXFFBY6TQJJ7TDEAR7FS2\",\n  \"entities\": 0\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-target/ci/incant_headless",
+      "import",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-main145-001/public-export/authoring/project.json",
+      "static.wav"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"asset\": {\n    \"id\": \"01M4RBXFGJB7WD9ZWSQ6QCJ1MB\",\n    \"kind\": \"audio\",\n    \"name\": \"static\",\n    \"path\": \"static.wav\",\n    \"sha256\": \"b2a52d337c64cb12930b798bcc3908dde2fc7ae02420969dea25f7caf484a9da\"\n  },\n  \"cache_hit\": false,\n  \"changed\": true,\n  \"details\": {\n    \"channels\": 2,\n    \"dependencies\": [\n      {\n        \"path\": \"static.wav\",\n        \"sha256\": \"843e1f32457dcde88b9f83900e0ab8f4f6a5f4dd735c124583c2f3a0035eb05a\"\n      }\n    ],\n    \"duration_seconds\": 0.10471655328798186,\n    \"frames\": 2309,\n    \"sample_rate\": 22050\n  },\n  \"revision\": 1\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-target/ci/incant_headless",
+      "import",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-main145-001/public-export/authoring/project.json",
+      "stream.wav"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"asset\": {\n    \"id\": \"01M4RBXFHFAC5Q4XBS624NQG87\",\n    \"kind\": \"audio\",\n    \"name\": \"stream\",\n    \"path\": \"stream.wav\",\n    \"sha256\": \"e88a1ce7cf423200ce6f1d77f731ed94e61cdf24e7aedda25d34416d34c463cc\"\n  },\n  \"cache_hit\": false,\n  \"changed\": true,\n  \"details\": {\n    \"channels\": 2,\n    \"dependencies\": [\n      {\n        \"path\": \"stream.wav\",\n        \"sha256\": \"a984cc077eb4d24b2e115a0cda7beecafa0aa95c6c60a49910f13e123a4ab95c\"\n      }\n    ],\n    \"duration_seconds\": 0.07215625,\n    \"frames\": 2309,\n    \"sample_rate\": 32000\n  },\n  \"revision\": 2\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/tools/probes/native-ui-export.py",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-main145-001/public-export",
+      "--binary",
+      "/Users/andreyyurlov/.codex/incant-integration-target/ci/incant_headless",
+      "--author"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-target/ci/incant_headless",
+      "rpc",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-main145-001/public-export/authoring/project.json",
+      "--journal",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-main145-001/public-export/authoring/journal.jsonl"
+    ],
+    "calls": [
+      {
+        "method": "project.read",
+        "params": null,
+        "result": {
+          "project": {
+            "assets": {
+              "01M4RBXFGJB7WD9ZWSQ6QCJ1MB": {
+                "id": "01M4RBXFGJB7WD9ZWSQ6QCJ1MB",
+                "kind": "audio",
+                "name": "static",
+                "path": "static.wav",
+                "sha256": "b2a52d337c64cb12930b798bcc3908dde2fc7ae02420969dea25f7caf484a9da"
+              },
+              "01M4RBXFHFAC5Q4XBS624NQG87": {
+                "id": "01M4RBXFHFAC5Q4XBS624NQG87",
+                "kind": "audio",
+                "name": "stream",
+                "path": "stream.wav",
+                "sha256": "e88a1ce7cf423200ce6f1d77f731ed94e61cdf24e7aedda25d34416d34c463cc"
+              },
+              "01M4RBXFN5SK7P115XJA9E6TZE": {
+                "id": "01M4RBXFN5SK7P115XJA9E6TZE",
+                "kind": "font",
+                "name": "NotoSans-Regular",
+                "path": "NotoSans-Regular.ttf",
+                "sha256": "9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2"
+              },
+              "01M4RBXFPFHQM6MH8C67G96G4A": {
+                "id": "01M4RBXFPFHQM6MH8C67G96G4A",
+                "kind": "font",
+                "name": "NotoSansArabic",
+                "path": "NotoSansArabic.ttf",
+                "sha256": "6864e1444bc7002790e682360d3f93bd45fe51b7045a64ecbf0e76e19e6b758e"
+              },
+              "01M4RBXFQKQ4SWP7EC85WC7HS9": {
+                "id": "01M4RBXFQKQ4SWP7EC85WC7HS9",
+                "kind": "font",
+                "name": "IncantCJKFixture",
+                "path": "IncantCJKFixture.ttf",
+                "sha256": "1087d4bb69160e3e5955407294226ca3da11166a3188ada3c1a166ba14e55ceb"
+              },
+              "01M4RBXFRD739WFBKBVE7NPA9R": {
+                "id": "01M4RBXFRD739WFBKBVE7NPA9R",
+                "kind": "model",
+                "name": "triangle",
+                "path": "triangle.gltf",
+                "sha256": "71fbcae82debc0236bda7576327733a6943d93ce7adb913cbe1d95fe931d511f"
+              },
+              "01M4RBXFSHZBRA7XW2MSZDM6VX": {
+                "id": "01M4RBXFSHZBRA7XW2MSZDM6VX",
+                "kind": "audio",
+                "name": "tone",
+                "path": "tone.wav",
+                "sha256": "bb391cc186bb741011a9d500103383ccd8cdaf0164c06b379c91d77e94de9b35"
+              }
+            },
+            "id": "01M4RBXFFBY6TQJJ7TDEAR7FS2",
+            "memory": {},
+            "name": "Untitled",
+            "scenes": {
+              "01M4RBXFFB43CJSR6FY4WPKKMX": {
+                "entities": {
+                  "00000000000000000000000002": {
+                    "components": {
+                      "AudioSource": {
+                        "clip": "01M4RBXFSHZBRA7XW2MSZDM6VX",
+                        "gain_db": 0,
+                        "looping": true,
+                        "pan": 0,
+                        "playing": true,
+                        "rate": 1,
+                        "start_seconds": 0,
+                        "streaming": false
+                      },
+                      "MeshRenderer": {
+                        "cast_shadows": true,
+                        "materials": [],
+                        "mesh": "01M4RBXFRD739WFBKBVE7NPA9R"
+                      },
+                      "Script": {
+                        "props": {},
+                        "source": "00000000000000000000000001"
+                      },
+                      "Text": {
+                        "content": "ffi سلام 中文",
+                        "font_size": 20,
+                        "fonts": [
+                          "01M4RBXFN5SK7P115XJA9E6TZE",
+                          "01M4RBXFPFHQM6MH8C67G96G4A",
+                          "01M4RBXFQKQ4SWP7EC85WC7HS9"
+                        ],
+                        "line_height": 28,
+                        "width": 500,
+                        "wrap": "word_or_glyph"
+                      },
+                      "Transform": {
+                        "rotation": [
+                          0,
+                          0,
+                          0,
+                          1
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "translation": [
+                          0,
+                          0,
+                          0
+                        ]
+                      }
+                    },
+                    "id": "00000000000000000000000002",
+                    "name": "Mixed",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXFTHC83613YK22EBER9T"
+                    }
+                  },
+                  "00000000000000000000000003": {
+                    "components": {
+                      "Camera": {
+                        "far": 100,
+                        "fov_degrees": 60,
+                        "near": 0.1,
+                        "projection": {
+                          "kind": "perspective"
+                        }
+                      },
+                      "Transform": {
+                        "rotation": [
+                          0,
+                          0,
+                          0,
+                          1
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "translation": [
+                          0,
+                          0,
+                          8
+                        ]
+                      }
+                    },
+                    "id": "00000000000000000000000003",
+                    "name": "Camera",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXFTHC83613YK22EBER9T"
+                    }
+                  },
+                  "00000000000000000000000010": {
+                    "components": {
+                      "UiNode": {
+                        "disabled": false,
+                        "kind": {
+                          "role": "root"
+                        },
+                        "order": 0,
+                        "style": {
+                          "align": "stretch",
+                          "basis": "auto",
+                          "direction": "column",
+                          "gap": [
+                            0,
+                            0
+                          ],
+                          "grow": 0,
+                          "justify": "start",
+                          "max_size": [
+                            null,
+                            null
+                          ],
+                          "min_size": [
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "shrink": 1,
+                          "size": [
+                            "auto",
+                            "auto"
+                          ],
+                          "wrap": false
+                        }
+                      }
+                    },
+                    "id": "00000000000000000000000010",
+                    "name": "root",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXFX1M5T8C8PR6H53YKDM"
+                    }
+                  },
+                  "00000000000000000000000011": {
+                    "components": {
+                      "UiNode": {
+                        "disabled": false,
+                        "kind": {
+                          "role": "button",
+                          "text": {
+                            "content": "Run",
+                            "font_size": 20,
+                            "fonts": [
+                              "01M4RBXFN5SK7P115XJA9E6TZE",
+                              "01M4RBXFPFHQM6MH8C67G96G4A",
+                              "01M4RBXFQKQ4SWP7EC85WC7HS9"
+                            ],
+                            "line_height": 24,
+                            "wrap": "word_or_glyph"
+                          }
+                        },
+                        "order": 0,
+                        "style": {
+                          "align": "stretch",
+                          "basis": "auto",
+                          "direction": "column",
+                          "gap": [
+                            0,
+                            0
+                          ],
+                          "grow": 0,
+                          "justify": "start",
+                          "max_size": [
+                            null,
+                            null
+                          ],
+                          "min_size": [
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "shrink": 0,
+                          "size": [
+                            {
+                              "pixels": 160
+                            },
+                            {
+                              "pixels": 32
+                            }
+                          ],
+                          "wrap": false
+                        }
+                      }
+                    },
+                    "id": "00000000000000000000000011",
+                    "name": "button",
+                    "parent": "00000000000000000000000010",
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXFX1M5T8C8PR6H53YKDM"
+                    }
+                  },
+                  "00000000000000000000000012": {
+                    "components": {
+                      "UiNode": {
+                        "disabled": false,
+                        "kind": {
+                          "role": "text_input",
+                          "text": {
+                            "content": "Name",
+                            "font_size": 20,
+                            "fonts": [
+                              "01M4RBXFN5SK7P115XJA9E6TZE",
+                              "01M4RBXFPFHQM6MH8C67G96G4A",
+                              "01M4RBXFQKQ4SWP7EC85WC7HS9"
+                            ],
+                            "line_height": 24,
+                            "wrap": "word_or_glyph"
+                          }
+                        },
+                        "order": 0,
+                        "style": {
+                          "align": "stretch",
+                          "basis": "auto",
+                          "direction": "column",
+                          "gap": [
+                            0,
+                            0
+                          ],
+                          "grow": 0,
+                          "justify": "start",
+                          "max_size": [
+                            null,
+                            null
+                          ],
+                          "min_size": [
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "shrink": 0,
+                          "size": [
+                            {
+                              "pixels": 160
+                            },
+                            {
+                              "pixels": 32
+                            }
+                          ],
+                          "wrap": false
+                        }
+                      }
+                    },
+                    "id": "00000000000000000000000012",
+                    "name": "text_input",
+                    "parent": "00000000000000000000000010",
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXFX1M5T8C8PR6H53YKDM"
+                    }
+                  }
+                },
+                "id": "01M4RBXFFB43CJSR6FY4WPKKMX",
+                "name": "Main"
+              }
+            },
+            "schema_version": 1,
+            "scripts": {
+              "00000000000000000000000001": {
+                "id": "00000000000000000000000001",
+                "name": "Mover",
+                "path": "move.ts"
+              }
+            },
+            "settings": {
+              "tick_rate": 60
+            }
+          },
+          "revision": 4
+        }
+      },
+      {
+        "method": "script.read",
+        "params": {
+          "script_id": "00000000000000000000000001"
+        },
+        "result": {
+          "untrusted_source_data": {
+            "matches_history": true,
+            "path": "move.ts",
+            "revision": 4,
+            "script_id": "00000000000000000000000001",
+            "source": "import type { NativeBehavior } from '@incant/runtime/native';\nexport default { persistence: { version: 1 }, update({ chunks, dt, input, log }) {\n  let readonly = false;\n  try { (input.ui.events as unknown as unknown[]).push(null); } catch (_) { readonly = true; }\n  if (!readonly) throw Error('mutable UI notification sequence');\n  for (const c of chunks) for (let i=0; i<c.ids.length; i++)\n    if (c.ids[i] === '00000000000000000000000002') c.transforms[i*c.transformStride] += 6*dt;\n  if (input.ui.focused !== null && (input.keyboard.held.includes('Enter') ||\n      input.keyboard.held.includes('Tab') || input.keyboard.held.includes('Space')))\n    throw Error('UI control leaked into gameplay');\n  for (const event of input.ui.events)\n    log(event.kind + ('value' in event ? ':' + event.value : ''));\n} } satisfies NativeBehavior;\n",
+            "version": {
+              "sha256": "c7f5019b17490ce016f1d75c9e36960b1d73be90ec971d13cb2ed2d093ab479c",
+              "state": "present"
+            }
+          }
+        }
+      },
+      {
+        "method": "command.execute",
+        "params": {
+          "expected_revision": 4,
+          "description": "Author mixed audio checkpoint game",
+          "commands": [
+            {
+              "op": "set_component",
+              "scene_id": "01M4RBXFFB43CJSR6FY4WPKKMX",
+              "entity_id": "00000000000000000000000002",
+              "component": "AudioSource",
+              "value": {
+                "clip": "01M4RBXFGJB7WD9ZWSQ6QCJ1MB",
+                "bus": "00000000000000000000000005",
+                "gain_db": -4,
+                "pan": 0.2,
+                "rate": 1.13,
+                "start_seconds": 0.00037,
+                "playing": true,
+                "looping": true,
+                "streaming": false,
+                "spatial": null
+              }
+            },
+            {
+              "op": "create_entity",
+              "scene_id": "01M4RBXFFB43CJSR6FY4WPKKMX",
+              "entity": {
+                "id": "00000000000000000000000005",
+                "name": "Mix",
+                "parent": null,
+                "provenance": null,
+                "components": {
+                  "AudioBus": {
+                    "parent": "00000000000000000000000006",
+                    "gain_db": -3
+                  }
+                }
+              }
+            },
+            {
+              "op": "create_entity",
+              "scene_id": "01M4RBXFFB43CJSR6FY4WPKKMX",
+              "entity": {
+                "id": "00000000000000000000000006",
+                "name": "Parent bus",
+                "parent": null,
+                "provenance": null,
+                "components": {
+                  "AudioBus": {
+                    "parent": null,
+                    "gain_db": -1
+                  }
+                }
+              }
+            },
+            {
+              "op": "set_component",
+              "scene_id": "01M4RBXFFB43CJSR6FY4WPKKMX",
+              "entity_id": "00000000000000000000000003",
+              "component": "AudioListener",
+              "value": {}
+            },
+            {
+              "op": "create_entity",
+              "scene_id": "01M4RBXFFB43CJSR6FY4WPKKMX",
+              "entity": {
+                "id": "00000000000000000000000004",
+                "name": "Stream",
+                "parent": null,
+                "provenance": null,
+                "components": {
+                  "AudioSource": {
+                    "clip": "01M4RBXFHFAC5Q4XBS624NQG87",
+                    "bus": "00000000000000000000000005",
+                    "gain_db": -4,
+                    "pan": 0,
+                    "rate": 0.87,
+                    "start_seconds": 0.00037,
+                    "playing": true,
+                    "looping": true,
+                    "streaming": true,
+                    "spatial": {
+                      "min_distance": 1,
+                      "max_distance": 30
+                    }
+                  },
+                  "Transform": {
+                    "translation": [
+                      -1,
+                      0,
+                      0
+                    ],
+                    "rotation": [
+                      0,
+                      0,
+                      0,
+                      1
+                    ],
+                    "scale": [
+                      1,
+                      1,
+                      1
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "op": "write_script",
+              "script_id": "00000000000000000000000001",
+              "expected_source": {
+                "sha256": "c7f5019b17490ce016f1d75c9e36960b1d73be90ec971d13cb2ed2d093ab479c",
+                "state": "present"
+              },
+              "source": "import type { NativeBehavior } from '@incant/runtime/native';\nexport default { persistence: {version:1}, update(t) {\n let state=Number(t.state.get()??0);\n state += t.timers.events.length + t.input.ui.events.filter(e=>e.kind==='value_changed').length;\n t.state.set(state);\n if(t.clock.tick===1)t.timers.set('beat',3,3);\n if(t.clock.tick===14)t.commands.setAudioPlaying('00000000000000000000000002',false);\n if(t.clock.tick===18)t.commands.setAudioPlaying('00000000000000000000000002',true);\n if(t.clock.tick===21){t.commands.setAudioGain('00000000000000000000000004',-8);t.commands.setAudioBusGain('00000000000000000000000005',-6);}\n for(const instance of t.instances) {\n  const count=Number(t.state.get(instance.entity)??0)+2;t.state.set(count,instance.entity);\n  for(const c of t.chunks)for(let i=0;i<c.ids.length;i++)if(c.ids[i]===instance.entity)c.transforms[i*c.transformStride]=count+state;\n }\n if(t.clock.tick===14 && (t.input.keyboard.held.includes('KeyA') || t.input.keyboard.released.includes('KeyA')))\n  throw Error('ordinary-load input was not neutral');\n} } satisfies NativeBehavior;\n"
+            }
+          ]
+        },
+        "result": {
+          "project": {
+            "assets": {
+              "01M4RBXFGJB7WD9ZWSQ6QCJ1MB": {
+                "id": "01M4RBXFGJB7WD9ZWSQ6QCJ1MB",
+                "kind": "audio",
+                "name": "static",
+                "path": "static.wav",
+                "sha256": "b2a52d337c64cb12930b798bcc3908dde2fc7ae02420969dea25f7caf484a9da"
+              },
+              "01M4RBXFHFAC5Q4XBS624NQG87": {
+                "id": "01M4RBXFHFAC5Q4XBS624NQG87",
+                "kind": "audio",
+                "name": "stream",
+                "path": "stream.wav",
+                "sha256": "e88a1ce7cf423200ce6f1d77f731ed94e61cdf24e7aedda25d34416d34c463cc"
+              },
+              "01M4RBXFN5SK7P115XJA9E6TZE": {
+                "id": "01M4RBXFN5SK7P115XJA9E6TZE",
+                "kind": "font",
+                "name": "NotoSans-Regular",
+                "path": "NotoSans-Regular.ttf",
+                "sha256": "9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2"
+              },
+              "01M4RBXFPFHQM6MH8C67G96G4A": {
+                "id": "01M4RBXFPFHQM6MH8C67G96G4A",
+                "kind": "font",
+                "name": "NotoSansArabic",
+                "path": "NotoSansArabic.ttf",
+                "sha256": "6864e1444bc7002790e682360d3f93bd45fe51b7045a64ecbf0e76e19e6b758e"
+              },
+              "01M4RBXFQKQ4SWP7EC85WC7HS9": {
+                "id": "01M4RBXFQKQ4SWP7EC85WC7HS9",
+                "kind": "font",
+                "name": "IncantCJKFixture",
+                "path": "IncantCJKFixture.ttf",
+                "sha256": "1087d4bb69160e3e5955407294226ca3da11166a3188ada3c1a166ba14e55ceb"
+              },
+              "01M4RBXFRD739WFBKBVE7NPA9R": {
+                "id": "01M4RBXFRD739WFBKBVE7NPA9R",
+                "kind": "model",
+                "name": "triangle",
+                "path": "triangle.gltf",
+                "sha256": "71fbcae82debc0236bda7576327733a6943d93ce7adb913cbe1d95fe931d511f"
+              },
+              "01M4RBXFSHZBRA7XW2MSZDM6VX": {
+                "id": "01M4RBXFSHZBRA7XW2MSZDM6VX",
+                "kind": "audio",
+                "name": "tone",
+                "path": "tone.wav",
+                "sha256": "bb391cc186bb741011a9d500103383ccd8cdaf0164c06b379c91d77e94de9b35"
+              }
+            },
+            "id": "01M4RBXFFBY6TQJJ7TDEAR7FS2",
+            "memory": {},
+            "name": "Untitled",
+            "scenes": {
+              "01M4RBXFFB43CJSR6FY4WPKKMX": {
+                "entities": {
+                  "00000000000000000000000002": {
+                    "components": {
+                      "AudioSource": {
+                        "bus": "00000000000000000000000005",
+                        "clip": "01M4RBXFGJB7WD9ZWSQ6QCJ1MB",
+                        "gain_db": -4,
+                        "looping": true,
+                        "pan": 0.2,
+                        "playing": true,
+                        "rate": 1.13,
+                        "spatial": null,
+                        "start_seconds": 0.00037,
+                        "streaming": false
+                      },
+                      "MeshRenderer": {
+                        "cast_shadows": true,
+                        "materials": [],
+                        "mesh": "01M4RBXFRD739WFBKBVE7NPA9R"
+                      },
+                      "Script": {
+                        "props": {},
+                        "source": "00000000000000000000000001"
+                      },
+                      "Text": {
+                        "content": "ffi سلام 中文",
+                        "font_size": 20,
+                        "fonts": [
+                          "01M4RBXFN5SK7P115XJA9E6TZE",
+                          "01M4RBXFPFHQM6MH8C67G96G4A",
+                          "01M4RBXFQKQ4SWP7EC85WC7HS9"
+                        ],
+                        "line_height": 28,
+                        "width": 500,
+                        "wrap": "word_or_glyph"
+                      },
+                      "Transform": {
+                        "rotation": [
+                          0,
+                          0,
+                          0,
+                          1
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "translation": [
+                          0,
+                          0,
+                          0
+                        ]
+                      }
+                    },
+                    "id": "00000000000000000000000002",
+                    "name": "Mixed",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXG4VGV4478W83AD0V376"
+                    }
+                  },
+                  "00000000000000000000000003": {
+                    "components": {
+                      "AudioListener": {},
+                      "Camera": {
+                        "far": 100,
+                        "fov_degrees": 60,
+                        "near": 0.1,
+                        "projection": {
+                          "kind": "perspective"
+                        }
+                      },
+                      "Transform": {
+                        "rotation": [
+                          0,
+                          0,
+                          0,
+                          1
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "translation": [
+                          0,
+                          0,
+                          8
+                        ]
+                      }
+                    },
+                    "id": "00000000000000000000000003",
+                    "name": "Camera",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXG4VGV4478W83AD0V376"
+                    }
+                  },
+                  "00000000000000000000000004": {
+                    "components": {
+                      "AudioSource": {
+                        "bus": "00000000000000000000000005",
+                        "clip": "01M4RBXFHFAC5Q4XBS624NQG87",
+                        "gain_db": -4,
+                        "looping": true,
+                        "pan": 0,
+                        "playing": true,
+                        "rate": 0.87,
+                        "spatial": {
+                          "max_distance": 30,
+                          "min_distance": 1
+                        },
+                        "start_seconds": 0.00037,
+                        "streaming": true
+                      },
+                      "Transform": {
+                        "rotation": [
+                          0,
+                          0,
+                          0,
+                          1
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "translation": [
+                          -1,
+                          0,
+                          0
+                        ]
+                      }
+                    },
+                    "id": "00000000000000000000000004",
+                    "name": "Stream",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXG4VGV4478W83AD0V376"
+                    }
+                  },
+                  "00000000000000000000000005": {
+                    "components": {
+                      "AudioBus": {
+                        "gain_db": -3,
+                        "parent": "00000000000000000000000006"
+                      }
+                    },
+                    "id": "00000000000000000000000005",
+                    "name": "Mix",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXG4VGV4478W83AD0V376"
+                    }
+                  },
+                  "00000000000000000000000006": {
+                    "components": {
+                      "AudioBus": {
+                        "gain_db": -1,
+                        "parent": null
+                      }
+                    },
+                    "id": "00000000000000000000000006",
+                    "name": "Parent bus",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXG4VGV4478W83AD0V376"
+                    }
+                  },
+                  "00000000000000000000000010": {
+                    "components": {
+                      "UiNode": {
+                        "disabled": false,
+                        "kind": {
+                          "role": "root"
+                        },
+                        "order": 0,
+                        "style": {
+                          "align": "stretch",
+                          "basis": "auto",
+                          "direction": "column",
+                          "gap": [
+                            0,
+                            0
+                          ],
+                          "grow": 0,
+                          "justify": "start",
+                          "max_size": [
+                            null,
+                            null
+                          ],
+                          "min_size": [
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "shrink": 1,
+                          "size": [
+                            "auto",
+                            "auto"
+                          ],
+                          "wrap": false
+                        }
+                      }
+                    },
+                    "id": "00000000000000000000000010",
+                    "name": "root",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXFX1M5T8C8PR6H53YKDM"
+                    }
+                  },
+                  "00000000000000000000000011": {
+                    "components": {
+                      "UiNode": {
+                        "disabled": false,
+                        "kind": {
+                          "role": "button",
+                          "text": {
+                            "content": "Run",
+                            "font_size": 20,
+                            "fonts": [
+                              "01M4RBXFN5SK7P115XJA9E6TZE",
+                              "01M4RBXFPFHQM6MH8C67G96G4A",
+                              "01M4RBXFQKQ4SWP7EC85WC7HS9"
+                            ],
+                            "line_height": 24,
+                            "wrap": "word_or_glyph"
+                          }
+                        },
+                        "order": 0,
+                        "style": {
+                          "align": "stretch",
+                          "basis": "auto",
+                          "direction": "column",
+                          "gap": [
+                            0,
+                            0
+                          ],
+                          "grow": 0,
+                          "justify": "start",
+                          "max_size": [
+                            null,
+                            null
+                          ],
+                          "min_size": [
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "shrink": 0,
+                          "size": [
+                            {
+                              "pixels": 160
+                            },
+                            {
+                              "pixels": 32
+                            }
+                          ],
+                          "wrap": false
+                        }
+                      }
+                    },
+                    "id": "00000000000000000000000011",
+                    "name": "button",
+                    "parent": "00000000000000000000000010",
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXFX1M5T8C8PR6H53YKDM"
+                    }
+                  },
+                  "00000000000000000000000012": {
+                    "components": {
+                      "UiNode": {
+                        "disabled": false,
+                        "kind": {
+                          "role": "text_input",
+                          "text": {
+                            "content": "Name",
+                            "font_size": 20,
+                            "fonts": [
+                              "01M4RBXFN5SK7P115XJA9E6TZE",
+                              "01M4RBXFPFHQM6MH8C67G96G4A",
+                              "01M4RBXFQKQ4SWP7EC85WC7HS9"
+                            ],
+                            "line_height": 24,
+                            "wrap": "word_or_glyph"
+                          }
+                        },
+                        "order": 0,
+                        "style": {
+                          "align": "stretch",
+                          "basis": "auto",
+                          "direction": "column",
+                          "gap": [
+                            0,
+                            0
+                          ],
+                          "grow": 0,
+                          "justify": "start",
+                          "max_size": [
+                            null,
+                            null
+                          ],
+                          "min_size": [
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "shrink": 0,
+                          "size": [
+                            {
+                              "pixels": 160
+                            },
+                            {
+                              "pixels": 32
+                            }
+                          ],
+                          "wrap": false
+                        }
+                      }
+                    },
+                    "id": "00000000000000000000000012",
+                    "name": "text_input",
+                    "parent": "00000000000000000000000010",
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXFX1M5T8C8PR6H53YKDM"
+                    }
+                  }
+                },
+                "id": "01M4RBXFFB43CJSR6FY4WPKKMX",
+                "name": "Main"
+              }
+            },
+            "schema_version": 1,
+            "scripts": {
+              "00000000000000000000000001": {
+                "id": "00000000000000000000000001",
+                "name": "Mover",
+                "path": "move.ts"
+              }
+            },
+            "settings": {
+              "tick_rate": 60
+            }
+          },
+          "revision": 5,
+          "transaction_id": "01M4RBXG4VGV4478W83AD0V376"
+        }
+      },
+      {
+        "method": "project.read",
+        "params": null,
+        "result": {
+          "project": {
+            "assets": {
+              "01M4RBXFGJB7WD9ZWSQ6QCJ1MB": {
+                "id": "01M4RBXFGJB7WD9ZWSQ6QCJ1MB",
+                "kind": "audio",
+                "name": "static",
+                "path": "static.wav",
+                "sha256": "b2a52d337c64cb12930b798bcc3908dde2fc7ae02420969dea25f7caf484a9da"
+              },
+              "01M4RBXFHFAC5Q4XBS624NQG87": {
+                "id": "01M4RBXFHFAC5Q4XBS624NQG87",
+                "kind": "audio",
+                "name": "stream",
+                "path": "stream.wav",
+                "sha256": "e88a1ce7cf423200ce6f1d77f731ed94e61cdf24e7aedda25d34416d34c463cc"
+              },
+              "01M4RBXFN5SK7P115XJA9E6TZE": {
+                "id": "01M4RBXFN5SK7P115XJA9E6TZE",
+                "kind": "font",
+                "name": "NotoSans-Regular",
+                "path": "NotoSans-Regular.ttf",
+                "sha256": "9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2"
+              },
+              "01M4RBXFPFHQM6MH8C67G96G4A": {
+                "id": "01M4RBXFPFHQM6MH8C67G96G4A",
+                "kind": "font",
+                "name": "NotoSansArabic",
+                "path": "NotoSansArabic.ttf",
+                "sha256": "6864e1444bc7002790e682360d3f93bd45fe51b7045a64ecbf0e76e19e6b758e"
+              },
+              "01M4RBXFQKQ4SWP7EC85WC7HS9": {
+                "id": "01M4RBXFQKQ4SWP7EC85WC7HS9",
+                "kind": "font",
+                "name": "IncantCJKFixture",
+                "path": "IncantCJKFixture.ttf",
+                "sha256": "1087d4bb69160e3e5955407294226ca3da11166a3188ada3c1a166ba14e55ceb"
+              },
+              "01M4RBXFRD739WFBKBVE7NPA9R": {
+                "id": "01M4RBXFRD739WFBKBVE7NPA9R",
+                "kind": "model",
+                "name": "triangle",
+                "path": "triangle.gltf",
+                "sha256": "71fbcae82debc0236bda7576327733a6943d93ce7adb913cbe1d95fe931d511f"
+              },
+              "01M4RBXFSHZBRA7XW2MSZDM6VX": {
+                "id": "01M4RBXFSHZBRA7XW2MSZDM6VX",
+                "kind": "audio",
+                "name": "tone",
+                "path": "tone.wav",
+                "sha256": "bb391cc186bb741011a9d500103383ccd8cdaf0164c06b379c91d77e94de9b35"
+              }
+            },
+            "id": "01M4RBXFFBY6TQJJ7TDEAR7FS2",
+            "memory": {},
+            "name": "Untitled",
+            "scenes": {
+              "01M4RBXFFB43CJSR6FY4WPKKMX": {
+                "entities": {
+                  "00000000000000000000000002": {
+                    "components": {
+                      "AudioSource": {
+                        "bus": "00000000000000000000000005",
+                        "clip": "01M4RBXFGJB7WD9ZWSQ6QCJ1MB",
+                        "gain_db": -4,
+                        "looping": true,
+                        "pan": 0.2,
+                        "playing": true,
+                        "rate": 1.13,
+                        "spatial": null,
+                        "start_seconds": 0.00037,
+                        "streaming": false
+                      },
+                      "MeshRenderer": {
+                        "cast_shadows": true,
+                        "materials": [],
+                        "mesh": "01M4RBXFRD739WFBKBVE7NPA9R"
+                      },
+                      "Script": {
+                        "props": {},
+                        "source": "00000000000000000000000001"
+                      },
+                      "Text": {
+                        "content": "ffi سلام 中文",
+                        "font_size": 20,
+                        "fonts": [
+                          "01M4RBXFN5SK7P115XJA9E6TZE",
+                          "01M4RBXFPFHQM6MH8C67G96G4A",
+                          "01M4RBXFQKQ4SWP7EC85WC7HS9"
+                        ],
+                        "line_height": 28,
+                        "width": 500,
+                        "wrap": "word_or_glyph"
+                      },
+                      "Transform": {
+                        "rotation": [
+                          0,
+                          0,
+                          0,
+                          1
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "translation": [
+                          0,
+                          0,
+                          0
+                        ]
+                      }
+                    },
+                    "id": "00000000000000000000000002",
+                    "name": "Mixed",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXG4VGV4478W83AD0V376"
+                    }
+                  },
+                  "00000000000000000000000003": {
+                    "components": {
+                      "AudioListener": {},
+                      "Camera": {
+                        "far": 100,
+                        "fov_degrees": 60,
+                        "near": 0.1,
+                        "projection": {
+                          "kind": "perspective"
+                        }
+                      },
+                      "Transform": {
+                        "rotation": [
+                          0,
+                          0,
+                          0,
+                          1
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "translation": [
+                          0,
+                          0,
+                          8
+                        ]
+                      }
+                    },
+                    "id": "00000000000000000000000003",
+                    "name": "Camera",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXG4VGV4478W83AD0V376"
+                    }
+                  },
+                  "00000000000000000000000004": {
+                    "components": {
+                      "AudioSource": {
+                        "bus": "00000000000000000000000005",
+                        "clip": "01M4RBXFHFAC5Q4XBS624NQG87",
+                        "gain_db": -4,
+                        "looping": true,
+                        "pan": 0,
+                        "playing": true,
+                        "rate": 0.87,
+                        "spatial": {
+                          "max_distance": 30,
+                          "min_distance": 1
+                        },
+                        "start_seconds": 0.00037,
+                        "streaming": true
+                      },
+                      "Transform": {
+                        "rotation": [
+                          0,
+                          0,
+                          0,
+                          1
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "translation": [
+                          -1,
+                          0,
+                          0
+                        ]
+                      }
+                    },
+                    "id": "00000000000000000000000004",
+                    "name": "Stream",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXG4VGV4478W83AD0V376"
+                    }
+                  },
+                  "00000000000000000000000005": {
+                    "components": {
+                      "AudioBus": {
+                        "gain_db": -3,
+                        "parent": "00000000000000000000000006"
+                      }
+                    },
+                    "id": "00000000000000000000000005",
+                    "name": "Mix",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXG4VGV4478W83AD0V376"
+                    }
+                  },
+                  "00000000000000000000000006": {
+                    "components": {
+                      "AudioBus": {
+                        "gain_db": -1,
+                        "parent": null
+                      }
+                    },
+                    "id": "00000000000000000000000006",
+                    "name": "Parent bus",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXG4VGV4478W83AD0V376"
+                    }
+                  },
+                  "00000000000000000000000010": {
+                    "components": {
+                      "UiNode": {
+                        "disabled": false,
+                        "kind": {
+                          "role": "root"
+                        },
+                        "order": 0,
+                        "style": {
+                          "align": "stretch",
+                          "basis": "auto",
+                          "direction": "column",
+                          "gap": [
+                            0,
+                            0
+                          ],
+                          "grow": 0,
+                          "justify": "start",
+                          "max_size": [
+                            null,
+                            null
+                          ],
+                          "min_size": [
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "shrink": 1,
+                          "size": [
+                            "auto",
+                            "auto"
+                          ],
+                          "wrap": false
+                        }
+                      }
+                    },
+                    "id": "00000000000000000000000010",
+                    "name": "root",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXFX1M5T8C8PR6H53YKDM"
+                    }
+                  },
+                  "00000000000000000000000011": {
+                    "components": {
+                      "UiNode": {
+                        "disabled": false,
+                        "kind": {
+                          "role": "button",
+                          "text": {
+                            "content": "Run",
+                            "font_size": 20,
+                            "fonts": [
+                              "01M4RBXFN5SK7P115XJA9E6TZE",
+                              "01M4RBXFPFHQM6MH8C67G96G4A",
+                              "01M4RBXFQKQ4SWP7EC85WC7HS9"
+                            ],
+                            "line_height": 24,
+                            "wrap": "word_or_glyph"
+                          }
+                        },
+                        "order": 0,
+                        "style": {
+                          "align": "stretch",
+                          "basis": "auto",
+                          "direction": "column",
+                          "gap": [
+                            0,
+                            0
+                          ],
+                          "grow": 0,
+                          "justify": "start",
+                          "max_size": [
+                            null,
+                            null
+                          ],
+                          "min_size": [
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "shrink": 0,
+                          "size": [
+                            {
+                              "pixels": 160
+                            },
+                            {
+                              "pixels": 32
+                            }
+                          ],
+                          "wrap": false
+                        }
+                      }
+                    },
+                    "id": "00000000000000000000000011",
+                    "name": "button",
+                    "parent": "00000000000000000000000010",
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXFX1M5T8C8PR6H53YKDM"
+                    }
+                  },
+                  "00000000000000000000000012": {
+                    "components": {
+                      "UiNode": {
+                        "disabled": false,
+                        "kind": {
+                          "role": "text_input",
+                          "text": {
+                            "content": "Name",
+                            "font_size": 20,
+                            "fonts": [
+                              "01M4RBXFN5SK7P115XJA9E6TZE",
+                              "01M4RBXFPFHQM6MH8C67G96G4A",
+                              "01M4RBXFQKQ4SWP7EC85WC7HS9"
+                            ],
+                            "line_height": 24,
+                            "wrap": "word_or_glyph"
+                          }
+                        },
+                        "order": 0,
+                        "style": {
+                          "align": "stretch",
+                          "basis": "auto",
+                          "direction": "column",
+                          "gap": [
+                            0,
+                            0
+                          ],
+                          "grow": 0,
+                          "justify": "start",
+                          "max_size": [
+                            null,
+                            null
+                          ],
+                          "min_size": [
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "shrink": 0,
+                          "size": [
+                            {
+                              "pixels": 160
+                            },
+                            {
+                              "pixels": 32
+                            }
+                          ],
+                          "wrap": false
+                        }
+                      }
+                    },
+                    "id": "00000000000000000000000012",
+                    "name": "text_input",
+                    "parent": "00000000000000000000000010",
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXFX1M5T8C8PR6H53YKDM"
+                    }
+                  }
+                },
+                "id": "01M4RBXFFB43CJSR6FY4WPKKMX",
+                "name": "Main"
+              }
+            },
+            "schema_version": 1,
+            "scripts": {
+              "00000000000000000000000001": {
+                "id": "00000000000000000000000001",
+                "name": "Mover",
+                "path": "move.ts"
+              }
+            },
+            "settings": {
+              "tick_rate": 60
+            }
+          },
+          "revision": 5
+        }
+      },
+      {
+        "method": "history.undo",
+        "params": null,
+        "result": {
+          "project": {
+            "assets": {
+              "01M4RBXFGJB7WD9ZWSQ6QCJ1MB": {
+                "id": "01M4RBXFGJB7WD9ZWSQ6QCJ1MB",
+                "kind": "audio",
+                "name": "static",
+                "path": "static.wav",
+                "sha256": "b2a52d337c64cb12930b798bcc3908dde2fc7ae02420969dea25f7caf484a9da"
+              },
+              "01M4RBXFHFAC5Q4XBS624NQG87": {
+                "id": "01M4RBXFHFAC5Q4XBS624NQG87",
+                "kind": "audio",
+                "name": "stream",
+                "path": "stream.wav",
+                "sha256": "e88a1ce7cf423200ce6f1d77f731ed94e61cdf24e7aedda25d34416d34c463cc"
+              },
+              "01M4RBXFN5SK7P115XJA9E6TZE": {
+                "id": "01M4RBXFN5SK7P115XJA9E6TZE",
+                "kind": "font",
+                "name": "NotoSans-Regular",
+                "path": "NotoSans-Regular.ttf",
+                "sha256": "9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2"
+              },
+              "01M4RBXFPFHQM6MH8C67G96G4A": {
+                "id": "01M4RBXFPFHQM6MH8C67G96G4A",
+                "kind": "font",
+                "name": "NotoSansArabic",
+                "path": "NotoSansArabic.ttf",
+                "sha256": "6864e1444bc7002790e682360d3f93bd45fe51b7045a64ecbf0e76e19e6b758e"
+              },
+              "01M4RBXFQKQ4SWP7EC85WC7HS9": {
+                "id": "01M4RBXFQKQ4SWP7EC85WC7HS9",
+                "kind": "font",
+                "name": "IncantCJKFixture",
+                "path": "IncantCJKFixture.ttf",
+                "sha256": "1087d4bb69160e3e5955407294226ca3da11166a3188ada3c1a166ba14e55ceb"
+              },
+              "01M4RBXFRD739WFBKBVE7NPA9R": {
+                "id": "01M4RBXFRD739WFBKBVE7NPA9R",
+                "kind": "model",
+                "name": "triangle",
+                "path": "triangle.gltf",
+                "sha256": "71fbcae82debc0236bda7576327733a6943d93ce7adb913cbe1d95fe931d511f"
+              },
+              "01M4RBXFSHZBRA7XW2MSZDM6VX": {
+                "id": "01M4RBXFSHZBRA7XW2MSZDM6VX",
+                "kind": "audio",
+                "name": "tone",
+                "path": "tone.wav",
+                "sha256": "bb391cc186bb741011a9d500103383ccd8cdaf0164c06b379c91d77e94de9b35"
+              }
+            },
+            "id": "01M4RBXFFBY6TQJJ7TDEAR7FS2",
+            "memory": {},
+            "name": "Untitled",
+            "scenes": {
+              "01M4RBXFFB43CJSR6FY4WPKKMX": {
+                "entities": {
+                  "00000000000000000000000002": {
+                    "components": {
+                      "AudioSource": {
+                        "clip": "01M4RBXFSHZBRA7XW2MSZDM6VX",
+                        "gain_db": 0,
+                        "looping": true,
+                        "pan": 0,
+                        "playing": true,
+                        "rate": 1,
+                        "start_seconds": 0,
+                        "streaming": false
+                      },
+                      "MeshRenderer": {
+                        "cast_shadows": true,
+                        "materials": [],
+                        "mesh": "01M4RBXFRD739WFBKBVE7NPA9R"
+                      },
+                      "Script": {
+                        "props": {},
+                        "source": "00000000000000000000000001"
+                      },
+                      "Text": {
+                        "content": "ffi سلام 中文",
+                        "font_size": 20,
+                        "fonts": [
+                          "01M4RBXFN5SK7P115XJA9E6TZE",
+                          "01M4RBXFPFHQM6MH8C67G96G4A",
+                          "01M4RBXFQKQ4SWP7EC85WC7HS9"
+                        ],
+                        "line_height": 28,
+                        "width": 500,
+                        "wrap": "word_or_glyph"
+                      },
+                      "Transform": {
+                        "rotation": [
+                          0,
+                          0,
+                          0,
+                          1
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "translation": [
+                          0,
+                          0,
+                          0
+                        ]
+                      }
+                    },
+                    "id": "00000000000000000000000002",
+                    "name": "Mixed",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXFTHC83613YK22EBER9T"
+                    }
+                  },
+                  "00000000000000000000000003": {
+                    "components": {
+                      "Camera": {
+                        "far": 100,
+                        "fov_degrees": 60,
+                        "near": 0.1,
+                        "projection": {
+                          "kind": "perspective"
+                        }
+                      },
+                      "Transform": {
+                        "rotation": [
+                          0,
+                          0,
+                          0,
+                          1
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "translation": [
+                          0,
+                          0,
+                          8
+                        ]
+                      }
+                    },
+                    "id": "00000000000000000000000003",
+                    "name": "Camera",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXFTHC83613YK22EBER9T"
+                    }
+                  },
+                  "00000000000000000000000010": {
+                    "components": {
+                      "UiNode": {
+                        "disabled": false,
+                        "kind": {
+                          "role": "root"
+                        },
+                        "order": 0,
+                        "style": {
+                          "align": "stretch",
+                          "basis": "auto",
+                          "direction": "column",
+                          "gap": [
+                            0,
+                            0
+                          ],
+                          "grow": 0,
+                          "justify": "start",
+                          "max_size": [
+                            null,
+                            null
+                          ],
+                          "min_size": [
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "shrink": 1,
+                          "size": [
+                            "auto",
+                            "auto"
+                          ],
+                          "wrap": false
+                        }
+                      }
+                    },
+                    "id": "00000000000000000000000010",
+                    "name": "root",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXFX1M5T8C8PR6H53YKDM"
+                    }
+                  },
+                  "00000000000000000000000011": {
+                    "components": {
+                      "UiNode": {
+                        "disabled": false,
+                        "kind": {
+                          "role": "button",
+                          "text": {
+                            "content": "Run",
+                            "font_size": 20,
+                            "fonts": [
+                              "01M4RBXFN5SK7P115XJA9E6TZE",
+                              "01M4RBXFPFHQM6MH8C67G96G4A",
+                              "01M4RBXFQKQ4SWP7EC85WC7HS9"
+                            ],
+                            "line_height": 24,
+                            "wrap": "word_or_glyph"
+                          }
+                        },
+                        "order": 0,
+                        "style": {
+                          "align": "stretch",
+                          "basis": "auto",
+                          "direction": "column",
+                          "gap": [
+                            0,
+                            0
+                          ],
+                          "grow": 0,
+                          "justify": "start",
+                          "max_size": [
+                            null,
+                            null
+                          ],
+                          "min_size": [
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "shrink": 0,
+                          "size": [
+                            {
+                              "pixels": 160
+                            },
+                            {
+                              "pixels": 32
+                            }
+                          ],
+                          "wrap": false
+                        }
+                      }
+                    },
+                    "id": "00000000000000000000000011",
+                    "name": "button",
+                    "parent": "00000000000000000000000010",
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXFX1M5T8C8PR6H53YKDM"
+                    }
+                  },
+                  "00000000000000000000000012": {
+                    "components": {
+                      "UiNode": {
+                        "disabled": false,
+                        "kind": {
+                          "role": "text_input",
+                          "text": {
+                            "content": "Name",
+                            "font_size": 20,
+                            "fonts": [
+                              "01M4RBXFN5SK7P115XJA9E6TZE",
+                              "01M4RBXFPFHQM6MH8C67G96G4A",
+                              "01M4RBXFQKQ4SWP7EC85WC7HS9"
+                            ],
+                            "line_height": 24,
+                            "wrap": "word_or_glyph"
+                          }
+                        },
+                        "order": 0,
+                        "style": {
+                          "align": "stretch",
+                          "basis": "auto",
+                          "direction": "column",
+                          "gap": [
+                            0,
+                            0
+                          ],
+                          "grow": 0,
+                          "justify": "start",
+                          "max_size": [
+                            null,
+                            null
+                          ],
+                          "min_size": [
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "shrink": 0,
+                          "size": [
+                            {
+                              "pixels": 160
+                            },
+                            {
+                              "pixels": 32
+                            }
+                          ],
+                          "wrap": false
+                        }
+                      }
+                    },
+                    "id": "00000000000000000000000012",
+                    "name": "text_input",
+                    "parent": "00000000000000000000000010",
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXFX1M5T8C8PR6H53YKDM"
+                    }
+                  }
+                },
+                "id": "01M4RBXFFB43CJSR6FY4WPKKMX",
+                "name": "Main"
+              }
+            },
+            "schema_version": 1,
+            "scripts": {
+              "00000000000000000000000001": {
+                "id": "00000000000000000000000001",
+                "name": "Mover",
+                "path": "move.ts"
+              }
+            },
+            "settings": {
+              "tick_rate": 60
+            }
+          },
+          "revision": 6,
+          "transaction_id": "01M4RBXG4VGV4478W83AD0V376"
+        }
+      },
+      {
+        "method": "history.redo",
+        "params": null,
+        "result": {
+          "project": {
+            "assets": {
+              "01M4RBXFGJB7WD9ZWSQ6QCJ1MB": {
+                "id": "01M4RBXFGJB7WD9ZWSQ6QCJ1MB",
+                "kind": "audio",
+                "name": "static",
+                "path": "static.wav",
+                "sha256": "b2a52d337c64cb12930b798bcc3908dde2fc7ae02420969dea25f7caf484a9da"
+              },
+              "01M4RBXFHFAC5Q4XBS624NQG87": {
+                "id": "01M4RBXFHFAC5Q4XBS624NQG87",
+                "kind": "audio",
+                "name": "stream",
+                "path": "stream.wav",
+                "sha256": "e88a1ce7cf423200ce6f1d77f731ed94e61cdf24e7aedda25d34416d34c463cc"
+              },
+              "01M4RBXFN5SK7P115XJA9E6TZE": {
+                "id": "01M4RBXFN5SK7P115XJA9E6TZE",
+                "kind": "font",
+                "name": "NotoSans-Regular",
+                "path": "NotoSans-Regular.ttf",
+                "sha256": "9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2"
+              },
+              "01M4RBXFPFHQM6MH8C67G96G4A": {
+                "id": "01M4RBXFPFHQM6MH8C67G96G4A",
+                "kind": "font",
+                "name": "NotoSansArabic",
+                "path": "NotoSansArabic.ttf",
+                "sha256": "6864e1444bc7002790e682360d3f93bd45fe51b7045a64ecbf0e76e19e6b758e"
+              },
+              "01M4RBXFQKQ4SWP7EC85WC7HS9": {
+                "id": "01M4RBXFQKQ4SWP7EC85WC7HS9",
+                "kind": "font",
+                "name": "IncantCJKFixture",
+                "path": "IncantCJKFixture.ttf",
+                "sha256": "1087d4bb69160e3e5955407294226ca3da11166a3188ada3c1a166ba14e55ceb"
+              },
+              "01M4RBXFRD739WFBKBVE7NPA9R": {
+                "id": "01M4RBXFRD739WFBKBVE7NPA9R",
+                "kind": "model",
+                "name": "triangle",
+                "path": "triangle.gltf",
+                "sha256": "71fbcae82debc0236bda7576327733a6943d93ce7adb913cbe1d95fe931d511f"
+              },
+              "01M4RBXFSHZBRA7XW2MSZDM6VX": {
+                "id": "01M4RBXFSHZBRA7XW2MSZDM6VX",
+                "kind": "audio",
+                "name": "tone",
+                "path": "tone.wav",
+                "sha256": "bb391cc186bb741011a9d500103383ccd8cdaf0164c06b379c91d77e94de9b35"
+              }
+            },
+            "id": "01M4RBXFFBY6TQJJ7TDEAR7FS2",
+            "memory": {},
+            "name": "Untitled",
+            "scenes": {
+              "01M4RBXFFB43CJSR6FY4WPKKMX": {
+                "entities": {
+                  "00000000000000000000000002": {
+                    "components": {
+                      "AudioSource": {
+                        "bus": "00000000000000000000000005",
+                        "clip": "01M4RBXFGJB7WD9ZWSQ6QCJ1MB",
+                        "gain_db": -4,
+                        "looping": true,
+                        "pan": 0.2,
+                        "playing": true,
+                        "rate": 1.13,
+                        "spatial": null,
+                        "start_seconds": 0.00037,
+                        "streaming": false
+                      },
+                      "MeshRenderer": {
+                        "cast_shadows": true,
+                        "materials": [],
+                        "mesh": "01M4RBXFRD739WFBKBVE7NPA9R"
+                      },
+                      "Script": {
+                        "props": {},
+                        "source": "00000000000000000000000001"
+                      },
+                      "Text": {
+                        "content": "ffi سلام 中文",
+                        "font_size": 20,
+                        "fonts": [
+                          "01M4RBXFN5SK7P115XJA9E6TZE",
+                          "01M4RBXFPFHQM6MH8C67G96G4A",
+                          "01M4RBXFQKQ4SWP7EC85WC7HS9"
+                        ],
+                        "line_height": 28,
+                        "width": 500,
+                        "wrap": "word_or_glyph"
+                      },
+                      "Transform": {
+                        "rotation": [
+                          0,
+                          0,
+                          0,
+                          1
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "translation": [
+                          0,
+                          0,
+                          0
+                        ]
+                      }
+                    },
+                    "id": "00000000000000000000000002",
+                    "name": "Mixed",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXG4VGV4478W83AD0V376"
+                    }
+                  },
+                  "00000000000000000000000003": {
+                    "components": {
+                      "AudioListener": {},
+                      "Camera": {
+                        "far": 100,
+                        "fov_degrees": 60,
+                        "near": 0.1,
+                        "projection": {
+                          "kind": "perspective"
+                        }
+                      },
+                      "Transform": {
+                        "rotation": [
+                          0,
+                          0,
+                          0,
+                          1
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "translation": [
+                          0,
+                          0,
+                          8
+                        ]
+                      }
+                    },
+                    "id": "00000000000000000000000003",
+                    "name": "Camera",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXG4VGV4478W83AD0V376"
+                    }
+                  },
+                  "00000000000000000000000004": {
+                    "components": {
+                      "AudioSource": {
+                        "bus": "00000000000000000000000005",
+                        "clip": "01M4RBXFHFAC5Q4XBS624NQG87",
+                        "gain_db": -4,
+                        "looping": true,
+                        "pan": 0,
+                        "playing": true,
+                        "rate": 0.87,
+                        "spatial": {
+                          "max_distance": 30,
+                          "min_distance": 1
+                        },
+                        "start_seconds": 0.00037,
+                        "streaming": true
+                      },
+                      "Transform": {
+                        "rotation": [
+                          0,
+                          0,
+                          0,
+                          1
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "translation": [
+                          -1,
+                          0,
+                          0
+                        ]
+                      }
+                    },
+                    "id": "00000000000000000000000004",
+                    "name": "Stream",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXG4VGV4478W83AD0V376"
+                    }
+                  },
+                  "00000000000000000000000005": {
+                    "components": {
+                      "AudioBus": {
+                        "gain_db": -3,
+                        "parent": "00000000000000000000000006"
+                      }
+                    },
+                    "id": "00000000000000000000000005",
+                    "name": "Mix",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXG4VGV4478W83AD0V376"
+                    }
+                  },
+                  "00000000000000000000000006": {
+                    "components": {
+                      "AudioBus": {
+                        "gain_db": -1,
+                        "parent": null
+                      }
+                    },
+                    "id": "00000000000000000000000006",
+                    "name": "Parent bus",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXG4VGV4478W83AD0V376"
+                    }
+                  },
+                  "00000000000000000000000010": {
+                    "components": {
+                      "UiNode": {
+                        "disabled": false,
+                        "kind": {
+                          "role": "root"
+                        },
+                        "order": 0,
+                        "style": {
+                          "align": "stretch",
+                          "basis": "auto",
+                          "direction": "column",
+                          "gap": [
+                            0,
+                            0
+                          ],
+                          "grow": 0,
+                          "justify": "start",
+                          "max_size": [
+                            null,
+                            null
+                          ],
+                          "min_size": [
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "shrink": 1,
+                          "size": [
+                            "auto",
+                            "auto"
+                          ],
+                          "wrap": false
+                        }
+                      }
+                    },
+                    "id": "00000000000000000000000010",
+                    "name": "root",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXFX1M5T8C8PR6H53YKDM"
+                    }
+                  },
+                  "00000000000000000000000011": {
+                    "components": {
+                      "UiNode": {
+                        "disabled": false,
+                        "kind": {
+                          "role": "button",
+                          "text": {
+                            "content": "Run",
+                            "font_size": 20,
+                            "fonts": [
+                              "01M4RBXFN5SK7P115XJA9E6TZE",
+                              "01M4RBXFPFHQM6MH8C67G96G4A",
+                              "01M4RBXFQKQ4SWP7EC85WC7HS9"
+                            ],
+                            "line_height": 24,
+                            "wrap": "word_or_glyph"
+                          }
+                        },
+                        "order": 0,
+                        "style": {
+                          "align": "stretch",
+                          "basis": "auto",
+                          "direction": "column",
+                          "gap": [
+                            0,
+                            0
+                          ],
+                          "grow": 0,
+                          "justify": "start",
+                          "max_size": [
+                            null,
+                            null
+                          ],
+                          "min_size": [
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "shrink": 0,
+                          "size": [
+                            {
+                              "pixels": 160
+                            },
+                            {
+                              "pixels": 32
+                            }
+                          ],
+                          "wrap": false
+                        }
+                      }
+                    },
+                    "id": "00000000000000000000000011",
+                    "name": "button",
+                    "parent": "00000000000000000000000010",
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXFX1M5T8C8PR6H53YKDM"
+                    }
+                  },
+                  "00000000000000000000000012": {
+                    "components": {
+                      "UiNode": {
+                        "disabled": false,
+                        "kind": {
+                          "role": "text_input",
+                          "text": {
+                            "content": "Name",
+                            "font_size": 20,
+                            "fonts": [
+                              "01M4RBXFN5SK7P115XJA9E6TZE",
+                              "01M4RBXFPFHQM6MH8C67G96G4A",
+                              "01M4RBXFQKQ4SWP7EC85WC7HS9"
+                            ],
+                            "line_height": 24,
+                            "wrap": "word_or_glyph"
+                          }
+                        },
+                        "order": 0,
+                        "style": {
+                          "align": "stretch",
+                          "basis": "auto",
+                          "direction": "column",
+                          "gap": [
+                            0,
+                            0
+                          ],
+                          "grow": 0,
+                          "justify": "start",
+                          "max_size": [
+                            null,
+                            null
+                          ],
+                          "min_size": [
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "shrink": 0,
+                          "size": [
+                            {
+                              "pixels": 160
+                            },
+                            {
+                              "pixels": 32
+                            }
+                          ],
+                          "wrap": false
+                        }
+                      }
+                    },
+                    "id": "00000000000000000000000012",
+                    "name": "text_input",
+                    "parent": "00000000000000000000000010",
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXFX1M5T8C8PR6H53YKDM"
+                    }
+                  }
+                },
+                "id": "01M4RBXFFB43CJSR6FY4WPKKMX",
+                "name": "Main"
+              }
+            },
+            "schema_version": 1,
+            "scripts": {
+              "00000000000000000000000001": {
+                "id": "00000000000000000000000001",
+                "name": "Mover",
+                "path": "move.ts"
+              }
+            },
+            "settings": {
+              "tick_rate": 60
+            }
+          },
+          "revision": 7,
+          "transaction_id": "01M4RBXG4VGV4478W83AD0V376"
+        }
+      },
+      {
+        "method": "project.read",
+        "params": null,
+        "result": {
+          "project": {
+            "assets": {
+              "01M4RBXFGJB7WD9ZWSQ6QCJ1MB": {
+                "id": "01M4RBXFGJB7WD9ZWSQ6QCJ1MB",
+                "kind": "audio",
+                "name": "static",
+                "path": "static.wav",
+                "sha256": "b2a52d337c64cb12930b798bcc3908dde2fc7ae02420969dea25f7caf484a9da"
+              },
+              "01M4RBXFHFAC5Q4XBS624NQG87": {
+                "id": "01M4RBXFHFAC5Q4XBS624NQG87",
+                "kind": "audio",
+                "name": "stream",
+                "path": "stream.wav",
+                "sha256": "e88a1ce7cf423200ce6f1d77f731ed94e61cdf24e7aedda25d34416d34c463cc"
+              },
+              "01M4RBXFN5SK7P115XJA9E6TZE": {
+                "id": "01M4RBXFN5SK7P115XJA9E6TZE",
+                "kind": "font",
+                "name": "NotoSans-Regular",
+                "path": "NotoSans-Regular.ttf",
+                "sha256": "9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2"
+              },
+              "01M4RBXFPFHQM6MH8C67G96G4A": {
+                "id": "01M4RBXFPFHQM6MH8C67G96G4A",
+                "kind": "font",
+                "name": "NotoSansArabic",
+                "path": "NotoSansArabic.ttf",
+                "sha256": "6864e1444bc7002790e682360d3f93bd45fe51b7045a64ecbf0e76e19e6b758e"
+              },
+              "01M4RBXFQKQ4SWP7EC85WC7HS9": {
+                "id": "01M4RBXFQKQ4SWP7EC85WC7HS9",
+                "kind": "font",
+                "name": "IncantCJKFixture",
+                "path": "IncantCJKFixture.ttf",
+                "sha256": "1087d4bb69160e3e5955407294226ca3da11166a3188ada3c1a166ba14e55ceb"
+              },
+              "01M4RBXFRD739WFBKBVE7NPA9R": {
+                "id": "01M4RBXFRD739WFBKBVE7NPA9R",
+                "kind": "model",
+                "name": "triangle",
+                "path": "triangle.gltf",
+                "sha256": "71fbcae82debc0236bda7576327733a6943d93ce7adb913cbe1d95fe931d511f"
+              },
+              "01M4RBXFSHZBRA7XW2MSZDM6VX": {
+                "id": "01M4RBXFSHZBRA7XW2MSZDM6VX",
+                "kind": "audio",
+                "name": "tone",
+                "path": "tone.wav",
+                "sha256": "bb391cc186bb741011a9d500103383ccd8cdaf0164c06b379c91d77e94de9b35"
+              }
+            },
+            "id": "01M4RBXFFBY6TQJJ7TDEAR7FS2",
+            "memory": {},
+            "name": "Untitled",
+            "scenes": {
+              "01M4RBXFFB43CJSR6FY4WPKKMX": {
+                "entities": {
+                  "00000000000000000000000002": {
+                    "components": {
+                      "AudioSource": {
+                        "bus": "00000000000000000000000005",
+                        "clip": "01M4RBXFGJB7WD9ZWSQ6QCJ1MB",
+                        "gain_db": -4,
+                        "looping": true,
+                        "pan": 0.2,
+                        "playing": true,
+                        "rate": 1.13,
+                        "spatial": null,
+                        "start_seconds": 0.00037,
+                        "streaming": false
+                      },
+                      "MeshRenderer": {
+                        "cast_shadows": true,
+                        "materials": [],
+                        "mesh": "01M4RBXFRD739WFBKBVE7NPA9R"
+                      },
+                      "Script": {
+                        "props": {},
+                        "source": "00000000000000000000000001"
+                      },
+                      "Text": {
+                        "content": "ffi سلام 中文",
+                        "font_size": 20,
+                        "fonts": [
+                          "01M4RBXFN5SK7P115XJA9E6TZE",
+                          "01M4RBXFPFHQM6MH8C67G96G4A",
+                          "01M4RBXFQKQ4SWP7EC85WC7HS9"
+                        ],
+                        "line_height": 28,
+                        "width": 500,
+                        "wrap": "word_or_glyph"
+                      },
+                      "Transform": {
+                        "rotation": [
+                          0,
+                          0,
+                          0,
+                          1
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "translation": [
+                          0,
+                          0,
+                          0
+                        ]
+                      }
+                    },
+                    "id": "00000000000000000000000002",
+                    "name": "Mixed",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXG4VGV4478W83AD0V376"
+                    }
+                  },
+                  "00000000000000000000000003": {
+                    "components": {
+                      "AudioListener": {},
+                      "Camera": {
+                        "far": 100,
+                        "fov_degrees": 60,
+                        "near": 0.1,
+                        "projection": {
+                          "kind": "perspective"
+                        }
+                      },
+                      "Transform": {
+                        "rotation": [
+                          0,
+                          0,
+                          0,
+                          1
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "translation": [
+                          0,
+                          0,
+                          8
+                        ]
+                      }
+                    },
+                    "id": "00000000000000000000000003",
+                    "name": "Camera",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXG4VGV4478W83AD0V376"
+                    }
+                  },
+                  "00000000000000000000000004": {
+                    "components": {
+                      "AudioSource": {
+                        "bus": "00000000000000000000000005",
+                        "clip": "01M4RBXFHFAC5Q4XBS624NQG87",
+                        "gain_db": -4,
+                        "looping": true,
+                        "pan": 0,
+                        "playing": true,
+                        "rate": 0.87,
+                        "spatial": {
+                          "max_distance": 30,
+                          "min_distance": 1
+                        },
+                        "start_seconds": 0.00037,
+                        "streaming": true
+                      },
+                      "Transform": {
+                        "rotation": [
+                          0,
+                          0,
+                          0,
+                          1
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "translation": [
+                          -1,
+                          0,
+                          0
+                        ]
+                      }
+                    },
+                    "id": "00000000000000000000000004",
+                    "name": "Stream",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXG4VGV4478W83AD0V376"
+                    }
+                  },
+                  "00000000000000000000000005": {
+                    "components": {
+                      "AudioBus": {
+                        "gain_db": -3,
+                        "parent": "00000000000000000000000006"
+                      }
+                    },
+                    "id": "00000000000000000000000005",
+                    "name": "Mix",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXG4VGV4478W83AD0V376"
+                    }
+                  },
+                  "00000000000000000000000006": {
+                    "components": {
+                      "AudioBus": {
+                        "gain_db": -1,
+                        "parent": null
+                      }
+                    },
+                    "id": "00000000000000000000000006",
+                    "name": "Parent bus",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXG4VGV4478W83AD0V376"
+                    }
+                  },
+                  "00000000000000000000000010": {
+                    "components": {
+                      "UiNode": {
+                        "disabled": false,
+                        "kind": {
+                          "role": "root"
+                        },
+                        "order": 0,
+                        "style": {
+                          "align": "stretch",
+                          "basis": "auto",
+                          "direction": "column",
+                          "gap": [
+                            0,
+                            0
+                          ],
+                          "grow": 0,
+                          "justify": "start",
+                          "max_size": [
+                            null,
+                            null
+                          ],
+                          "min_size": [
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "shrink": 1,
+                          "size": [
+                            "auto",
+                            "auto"
+                          ],
+                          "wrap": false
+                        }
+                      }
+                    },
+                    "id": "00000000000000000000000010",
+                    "name": "root",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXFX1M5T8C8PR6H53YKDM"
+                    }
+                  },
+                  "00000000000000000000000011": {
+                    "components": {
+                      "UiNode": {
+                        "disabled": false,
+                        "kind": {
+                          "role": "button",
+                          "text": {
+                            "content": "Run",
+                            "font_size": 20,
+                            "fonts": [
+                              "01M4RBXFN5SK7P115XJA9E6TZE",
+                              "01M4RBXFPFHQM6MH8C67G96G4A",
+                              "01M4RBXFQKQ4SWP7EC85WC7HS9"
+                            ],
+                            "line_height": 24,
+                            "wrap": "word_or_glyph"
+                          }
+                        },
+                        "order": 0,
+                        "style": {
+                          "align": "stretch",
+                          "basis": "auto",
+                          "direction": "column",
+                          "gap": [
+                            0,
+                            0
+                          ],
+                          "grow": 0,
+                          "justify": "start",
+                          "max_size": [
+                            null,
+                            null
+                          ],
+                          "min_size": [
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "shrink": 0,
+                          "size": [
+                            {
+                              "pixels": 160
+                            },
+                            {
+                              "pixels": 32
+                            }
+                          ],
+                          "wrap": false
+                        }
+                      }
+                    },
+                    "id": "00000000000000000000000011",
+                    "name": "button",
+                    "parent": "00000000000000000000000010",
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXFX1M5T8C8PR6H53YKDM"
+                    }
+                  },
+                  "00000000000000000000000012": {
+                    "components": {
+                      "UiNode": {
+                        "disabled": false,
+                        "kind": {
+                          "role": "text_input",
+                          "text": {
+                            "content": "Name",
+                            "font_size": 20,
+                            "fonts": [
+                              "01M4RBXFN5SK7P115XJA9E6TZE",
+                              "01M4RBXFPFHQM6MH8C67G96G4A",
+                              "01M4RBXFQKQ4SWP7EC85WC7HS9"
+                            ],
+                            "line_height": 24,
+                            "wrap": "word_or_glyph"
+                          }
+                        },
+                        "order": 0,
+                        "style": {
+                          "align": "stretch",
+                          "basis": "auto",
+                          "direction": "column",
+                          "gap": [
+                            0,
+                            0
+                          ],
+                          "grow": 0,
+                          "justify": "start",
+                          "max_size": [
+                            null,
+                            null
+                          ],
+                          "min_size": [
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "shrink": 0,
+                          "size": [
+                            {
+                              "pixels": 160
+                            },
+                            {
+                              "pixels": 32
+                            }
+                          ],
+                          "wrap": false
+                        }
+                      }
+                    },
+                    "id": "00000000000000000000000012",
+                    "name": "text_input",
+                    "parent": "00000000000000000000000010",
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXFX1M5T8C8PR6H53YKDM"
+                    }
+                  }
+                },
+                "id": "01M4RBXFFB43CJSR6FY4WPKKMX",
+                "name": "Main"
+              }
+            },
+            "schema_version": 1,
+            "scripts": {
+              "00000000000000000000000001": {
+                "id": "00000000000000000000000001",
+                "name": "Mover",
+                "path": "move.ts"
+              }
+            },
+            "settings": {
+              "tick_rate": 60
+            }
+          },
+          "revision": 7
+        }
+      },
+      {
+        "method": "project.save",
+        "params": null,
+        "result": {
+          "saved": true
+        }
+      },
+      {
+        "method": "project.read",
+        "params": null,
+        "result": {
+          "project": {
+            "assets": {
+              "01M4RBXFGJB7WD9ZWSQ6QCJ1MB": {
+                "id": "01M4RBXFGJB7WD9ZWSQ6QCJ1MB",
+                "kind": "audio",
+                "name": "static",
+                "path": "static.wav",
+                "sha256": "b2a52d337c64cb12930b798bcc3908dde2fc7ae02420969dea25f7caf484a9da"
+              },
+              "01M4RBXFHFAC5Q4XBS624NQG87": {
+                "id": "01M4RBXFHFAC5Q4XBS624NQG87",
+                "kind": "audio",
+                "name": "stream",
+                "path": "stream.wav",
+                "sha256": "e88a1ce7cf423200ce6f1d77f731ed94e61cdf24e7aedda25d34416d34c463cc"
+              },
+              "01M4RBXFN5SK7P115XJA9E6TZE": {
+                "id": "01M4RBXFN5SK7P115XJA9E6TZE",
+                "kind": "font",
+                "name": "NotoSans-Regular",
+                "path": "NotoSans-Regular.ttf",
+                "sha256": "9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2"
+              },
+              "01M4RBXFPFHQM6MH8C67G96G4A": {
+                "id": "01M4RBXFPFHQM6MH8C67G96G4A",
+                "kind": "font",
+                "name": "NotoSansArabic",
+                "path": "NotoSansArabic.ttf",
+                "sha256": "6864e1444bc7002790e682360d3f93bd45fe51b7045a64ecbf0e76e19e6b758e"
+              },
+              "01M4RBXFQKQ4SWP7EC85WC7HS9": {
+                "id": "01M4RBXFQKQ4SWP7EC85WC7HS9",
+                "kind": "font",
+                "name": "IncantCJKFixture",
+                "path": "IncantCJKFixture.ttf",
+                "sha256": "1087d4bb69160e3e5955407294226ca3da11166a3188ada3c1a166ba14e55ceb"
+              },
+              "01M4RBXFRD739WFBKBVE7NPA9R": {
+                "id": "01M4RBXFRD739WFBKBVE7NPA9R",
+                "kind": "model",
+                "name": "triangle",
+                "path": "triangle.gltf",
+                "sha256": "71fbcae82debc0236bda7576327733a6943d93ce7adb913cbe1d95fe931d511f"
+              },
+              "01M4RBXFSHZBRA7XW2MSZDM6VX": {
+                "id": "01M4RBXFSHZBRA7XW2MSZDM6VX",
+                "kind": "audio",
+                "name": "tone",
+                "path": "tone.wav",
+                "sha256": "bb391cc186bb741011a9d500103383ccd8cdaf0164c06b379c91d77e94de9b35"
+              }
+            },
+            "id": "01M4RBXFFBY6TQJJ7TDEAR7FS2",
+            "memory": {},
+            "name": "Untitled",
+            "scenes": {
+              "01M4RBXFFB43CJSR6FY4WPKKMX": {
+                "entities": {
+                  "00000000000000000000000002": {
+                    "components": {
+                      "AudioSource": {
+                        "bus": "00000000000000000000000005",
+                        "clip": "01M4RBXFGJB7WD9ZWSQ6QCJ1MB",
+                        "gain_db": -4,
+                        "looping": true,
+                        "pan": 0.2,
+                        "playing": true,
+                        "rate": 1.13,
+                        "spatial": null,
+                        "start_seconds": 0.00037,
+                        "streaming": false
+                      },
+                      "MeshRenderer": {
+                        "cast_shadows": true,
+                        "materials": [],
+                        "mesh": "01M4RBXFRD739WFBKBVE7NPA9R"
+                      },
+                      "Script": {
+                        "props": {},
+                        "source": "00000000000000000000000001"
+                      },
+                      "Text": {
+                        "content": "ffi سلام 中文",
+                        "font_size": 20,
+                        "fonts": [
+                          "01M4RBXFN5SK7P115XJA9E6TZE",
+                          "01M4RBXFPFHQM6MH8C67G96G4A",
+                          "01M4RBXFQKQ4SWP7EC85WC7HS9"
+                        ],
+                        "line_height": 28,
+                        "width": 500,
+                        "wrap": "word_or_glyph"
+                      },
+                      "Transform": {
+                        "rotation": [
+                          0,
+                          0,
+                          0,
+                          1
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "translation": [
+                          0,
+                          0,
+                          0
+                        ]
+                      }
+                    },
+                    "id": "00000000000000000000000002",
+                    "name": "Mixed",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXG4VGV4478W83AD0V376"
+                    }
+                  },
+                  "00000000000000000000000003": {
+                    "components": {
+                      "AudioListener": {},
+                      "Camera": {
+                        "far": 100,
+                        "fov_degrees": 60,
+                        "near": 0.1,
+                        "projection": {
+                          "kind": "perspective"
+                        }
+                      },
+                      "Transform": {
+                        "rotation": [
+                          0,
+                          0,
+                          0,
+                          1
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "translation": [
+                          0,
+                          0,
+                          8
+                        ]
+                      }
+                    },
+                    "id": "00000000000000000000000003",
+                    "name": "Camera",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXG4VGV4478W83AD0V376"
+                    }
+                  },
+                  "00000000000000000000000004": {
+                    "components": {
+                      "AudioSource": {
+                        "bus": "00000000000000000000000005",
+                        "clip": "01M4RBXFHFAC5Q4XBS624NQG87",
+                        "gain_db": -4,
+                        "looping": true,
+                        "pan": 0,
+                        "playing": true,
+                        "rate": 0.87,
+                        "spatial": {
+                          "max_distance": 30,
+                          "min_distance": 1
+                        },
+                        "start_seconds": 0.00037,
+                        "streaming": true
+                      },
+                      "Transform": {
+                        "rotation": [
+                          0,
+                          0,
+                          0,
+                          1
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "translation": [
+                          -1,
+                          0,
+                          0
+                        ]
+                      }
+                    },
+                    "id": "00000000000000000000000004",
+                    "name": "Stream",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXG4VGV4478W83AD0V376"
+                    }
+                  },
+                  "00000000000000000000000005": {
+                    "components": {
+                      "AudioBus": {
+                        "gain_db": -3,
+                        "parent": "00000000000000000000000006"
+                      }
+                    },
+                    "id": "00000000000000000000000005",
+                    "name": "Mix",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXG4VGV4478W83AD0V376"
+                    }
+                  },
+                  "00000000000000000000000006": {
+                    "components": {
+                      "AudioBus": {
+                        "gain_db": -1,
+                        "parent": null
+                      }
+                    },
+                    "id": "00000000000000000000000006",
+                    "name": "Parent bus",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXG4VGV4478W83AD0V376"
+                    }
+                  },
+                  "00000000000000000000000010": {
+                    "components": {
+                      "UiNode": {
+                        "disabled": false,
+                        "kind": {
+                          "role": "root"
+                        },
+                        "order": 0,
+                        "style": {
+                          "align": "stretch",
+                          "basis": "auto",
+                          "direction": "column",
+                          "gap": [
+                            0,
+                            0
+                          ],
+                          "grow": 0,
+                          "justify": "start",
+                          "max_size": [
+                            null,
+                            null
+                          ],
+                          "min_size": [
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "shrink": 1,
+                          "size": [
+                            "auto",
+                            "auto"
+                          ],
+                          "wrap": false
+                        }
+                      }
+                    },
+                    "id": "00000000000000000000000010",
+                    "name": "root",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXFX1M5T8C8PR6H53YKDM"
+                    }
+                  },
+                  "00000000000000000000000011": {
+                    "components": {
+                      "UiNode": {
+                        "disabled": false,
+                        "kind": {
+                          "role": "button",
+                          "text": {
+                            "content": "Run",
+                            "font_size": 20,
+                            "fonts": [
+                              "01M4RBXFN5SK7P115XJA9E6TZE",
+                              "01M4RBXFPFHQM6MH8C67G96G4A",
+                              "01M4RBXFQKQ4SWP7EC85WC7HS9"
+                            ],
+                            "line_height": 24,
+                            "wrap": "word_or_glyph"
+                          }
+                        },
+                        "order": 0,
+                        "style": {
+                          "align": "stretch",
+                          "basis": "auto",
+                          "direction": "column",
+                          "gap": [
+                            0,
+                            0
+                          ],
+                          "grow": 0,
+                          "justify": "start",
+                          "max_size": [
+                            null,
+                            null
+                          ],
+                          "min_size": [
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "shrink": 0,
+                          "size": [
+                            {
+                              "pixels": 160
+                            },
+                            {
+                              "pixels": 32
+                            }
+                          ],
+                          "wrap": false
+                        }
+                      }
+                    },
+                    "id": "00000000000000000000000011",
+                    "name": "button",
+                    "parent": "00000000000000000000000010",
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXFX1M5T8C8PR6H53YKDM"
+                    }
+                  },
+                  "00000000000000000000000012": {
+                    "components": {
+                      "UiNode": {
+                        "disabled": false,
+                        "kind": {
+                          "role": "text_input",
+                          "text": {
+                            "content": "Name",
+                            "font_size": 20,
+                            "fonts": [
+                              "01M4RBXFN5SK7P115XJA9E6TZE",
+                              "01M4RBXFPFHQM6MH8C67G96G4A",
+                              "01M4RBXFQKQ4SWP7EC85WC7HS9"
+                            ],
+                            "line_height": 24,
+                            "wrap": "word_or_glyph"
+                          }
+                        },
+                        "order": 0,
+                        "style": {
+                          "align": "stretch",
+                          "basis": "auto",
+                          "direction": "column",
+                          "gap": [
+                            0,
+                            0
+                          ],
+                          "grow": 0,
+                          "justify": "start",
+                          "max_size": [
+                            null,
+                            null
+                          ],
+                          "min_size": [
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "shrink": 0,
+                          "size": [
+                            {
+                              "pixels": 160
+                            },
+                            {
+                              "pixels": 32
+                            }
+                          ],
+                          "wrap": false
+                        }
+                      }
+                    },
+                    "id": "00000000000000000000000012",
+                    "name": "text_input",
+                    "parent": "00000000000000000000000010",
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXFX1M5T8C8PR6H53YKDM"
+                    }
+                  }
+                },
+                "id": "01M4RBXFFB43CJSR6FY4WPKKMX",
+                "name": "Main"
+              }
+            },
+            "schema_version": 1,
+            "scripts": {
+              "00000000000000000000000001": {
+                "id": "00000000000000000000000001",
+                "name": "Mover",
+                "path": "move.ts"
+              }
+            },
+            "settings": {
+              "tick_rate": 60
+            }
+          },
+          "revision": 7
+        }
+      }
+    ],
+    "returncode": 0
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-target/ci/incant_headless",
+      "rpc",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-main145-001/public-export/authoring/project.json",
+      "--journal",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-main145-001/public-export/authoring/journal.jsonl"
+    ],
+    "calls": [
+      {
+        "method": "project.read",
+        "params": null,
+        "result": {
+          "project": {
+            "assets": {
+              "01M4RBXFGJB7WD9ZWSQ6QCJ1MB": {
+                "id": "01M4RBXFGJB7WD9ZWSQ6QCJ1MB",
+                "kind": "audio",
+                "name": "static",
+                "path": "static.wav",
+                "sha256": "b2a52d337c64cb12930b798bcc3908dde2fc7ae02420969dea25f7caf484a9da"
+              },
+              "01M4RBXFHFAC5Q4XBS624NQG87": {
+                "id": "01M4RBXFHFAC5Q4XBS624NQG87",
+                "kind": "audio",
+                "name": "stream",
+                "path": "stream.wav",
+                "sha256": "e88a1ce7cf423200ce6f1d77f731ed94e61cdf24e7aedda25d34416d34c463cc"
+              },
+              "01M4RBXFN5SK7P115XJA9E6TZE": {
+                "id": "01M4RBXFN5SK7P115XJA9E6TZE",
+                "kind": "font",
+                "name": "NotoSans-Regular",
+                "path": "NotoSans-Regular.ttf",
+                "sha256": "9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2"
+              },
+              "01M4RBXFPFHQM6MH8C67G96G4A": {
+                "id": "01M4RBXFPFHQM6MH8C67G96G4A",
+                "kind": "font",
+                "name": "NotoSansArabic",
+                "path": "NotoSansArabic.ttf",
+                "sha256": "6864e1444bc7002790e682360d3f93bd45fe51b7045a64ecbf0e76e19e6b758e"
+              },
+              "01M4RBXFQKQ4SWP7EC85WC7HS9": {
+                "id": "01M4RBXFQKQ4SWP7EC85WC7HS9",
+                "kind": "font",
+                "name": "IncantCJKFixture",
+                "path": "IncantCJKFixture.ttf",
+                "sha256": "1087d4bb69160e3e5955407294226ca3da11166a3188ada3c1a166ba14e55ceb"
+              },
+              "01M4RBXFRD739WFBKBVE7NPA9R": {
+                "id": "01M4RBXFRD739WFBKBVE7NPA9R",
+                "kind": "model",
+                "name": "triangle",
+                "path": "triangle.gltf",
+                "sha256": "71fbcae82debc0236bda7576327733a6943d93ce7adb913cbe1d95fe931d511f"
+              },
+              "01M4RBXFSHZBRA7XW2MSZDM6VX": {
+                "id": "01M4RBXFSHZBRA7XW2MSZDM6VX",
+                "kind": "audio",
+                "name": "tone",
+                "path": "tone.wav",
+                "sha256": "bb391cc186bb741011a9d500103383ccd8cdaf0164c06b379c91d77e94de9b35"
+              }
+            },
+            "id": "01M4RBXFFBY6TQJJ7TDEAR7FS2",
+            "memory": {},
+            "name": "Untitled",
+            "scenes": {
+              "01M4RBXFFB43CJSR6FY4WPKKMX": {
+                "entities": {
+                  "00000000000000000000000002": {
+                    "components": {
+                      "AudioSource": {
+                        "bus": "00000000000000000000000005",
+                        "clip": "01M4RBXFGJB7WD9ZWSQ6QCJ1MB",
+                        "gain_db": -4,
+                        "looping": true,
+                        "pan": 0.2,
+                        "playing": true,
+                        "rate": 1.13,
+                        "spatial": null,
+                        "start_seconds": 0.00037,
+                        "streaming": false
+                      },
+                      "MeshRenderer": {
+                        "cast_shadows": true,
+                        "materials": [],
+                        "mesh": "01M4RBXFRD739WFBKBVE7NPA9R"
+                      },
+                      "Script": {
+                        "props": {},
+                        "source": "00000000000000000000000001"
+                      },
+                      "Text": {
+                        "content": "ffi سلام 中文",
+                        "font_size": 20,
+                        "fonts": [
+                          "01M4RBXFN5SK7P115XJA9E6TZE",
+                          "01M4RBXFPFHQM6MH8C67G96G4A",
+                          "01M4RBXFQKQ4SWP7EC85WC7HS9"
+                        ],
+                        "line_height": 28,
+                        "width": 500,
+                        "wrap": "word_or_glyph"
+                      },
+                      "Transform": {
+                        "rotation": [
+                          0,
+                          0,
+                          0,
+                          1
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "translation": [
+                          0,
+                          0,
+                          0
+                        ]
+                      }
+                    },
+                    "id": "00000000000000000000000002",
+                    "name": "Mixed",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXG4VGV4478W83AD0V376"
+                    }
+                  },
+                  "00000000000000000000000003": {
+                    "components": {
+                      "AudioListener": {},
+                      "Camera": {
+                        "far": 100,
+                        "fov_degrees": 60,
+                        "near": 0.1,
+                        "projection": {
+                          "kind": "perspective"
+                        }
+                      },
+                      "Transform": {
+                        "rotation": [
+                          0,
+                          0,
+                          0,
+                          1
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "translation": [
+                          0,
+                          0,
+                          8
+                        ]
+                      }
+                    },
+                    "id": "00000000000000000000000003",
+                    "name": "Camera",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXG4VGV4478W83AD0V376"
+                    }
+                  },
+                  "00000000000000000000000004": {
+                    "components": {
+                      "AudioSource": {
+                        "bus": "00000000000000000000000005",
+                        "clip": "01M4RBXFHFAC5Q4XBS624NQG87",
+                        "gain_db": -4,
+                        "looping": true,
+                        "pan": 0,
+                        "playing": true,
+                        "rate": 0.87,
+                        "spatial": {
+                          "max_distance": 30,
+                          "min_distance": 1
+                        },
+                        "start_seconds": 0.00037,
+                        "streaming": true
+                      },
+                      "Transform": {
+                        "rotation": [
+                          0,
+                          0,
+                          0,
+                          1
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "translation": [
+                          -1,
+                          0,
+                          0
+                        ]
+                      }
+                    },
+                    "id": "00000000000000000000000004",
+                    "name": "Stream",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXG4VGV4478W83AD0V376"
+                    }
+                  },
+                  "00000000000000000000000005": {
+                    "components": {
+                      "AudioBus": {
+                        "gain_db": -3,
+                        "parent": "00000000000000000000000006"
+                      }
+                    },
+                    "id": "00000000000000000000000005",
+                    "name": "Mix",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXG4VGV4478W83AD0V376"
+                    }
+                  },
+                  "00000000000000000000000006": {
+                    "components": {
+                      "AudioBus": {
+                        "gain_db": -1,
+                        "parent": null
+                      }
+                    },
+                    "id": "00000000000000000000000006",
+                    "name": "Parent bus",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXG4VGV4478W83AD0V376"
+                    }
+                  },
+                  "00000000000000000000000010": {
+                    "components": {
+                      "UiNode": {
+                        "disabled": false,
+                        "kind": {
+                          "role": "root"
+                        },
+                        "order": 0,
+                        "style": {
+                          "align": "stretch",
+                          "basis": "auto",
+                          "direction": "column",
+                          "gap": [
+                            0,
+                            0
+                          ],
+                          "grow": 0,
+                          "justify": "start",
+                          "max_size": [
+                            null,
+                            null
+                          ],
+                          "min_size": [
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "shrink": 1,
+                          "size": [
+                            "auto",
+                            "auto"
+                          ],
+                          "wrap": false
+                        }
+                      }
+                    },
+                    "id": "00000000000000000000000010",
+                    "name": "root",
+                    "parent": null,
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXFX1M5T8C8PR6H53YKDM"
+                    }
+                  },
+                  "00000000000000000000000011": {
+                    "components": {
+                      "UiNode": {
+                        "disabled": false,
+                        "kind": {
+                          "role": "button",
+                          "text": {
+                            "content": "Run",
+                            "font_size": 20,
+                            "fonts": [
+                              "01M4RBXFN5SK7P115XJA9E6TZE",
+                              "01M4RBXFPFHQM6MH8C67G96G4A",
+                              "01M4RBXFQKQ4SWP7EC85WC7HS9"
+                            ],
+                            "line_height": 24,
+                            "wrap": "word_or_glyph"
+                          }
+                        },
+                        "order": 0,
+                        "style": {
+                          "align": "stretch",
+                          "basis": "auto",
+                          "direction": "column",
+                          "gap": [
+                            0,
+                            0
+                          ],
+                          "grow": 0,
+                          "justify": "start",
+                          "max_size": [
+                            null,
+                            null
+                          ],
+                          "min_size": [
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "shrink": 0,
+                          "size": [
+                            {
+                              "pixels": 160
+                            },
+                            {
+                              "pixels": 32
+                            }
+                          ],
+                          "wrap": false
+                        }
+                      }
+                    },
+                    "id": "00000000000000000000000011",
+                    "name": "button",
+                    "parent": "00000000000000000000000010",
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXFX1M5T8C8PR6H53YKDM"
+                    }
+                  },
+                  "00000000000000000000000012": {
+                    "components": {
+                      "UiNode": {
+                        "disabled": false,
+                        "kind": {
+                          "role": "text_input",
+                          "text": {
+                            "content": "Name",
+                            "font_size": 20,
+                            "fonts": [
+                              "01M4RBXFN5SK7P115XJA9E6TZE",
+                              "01M4RBXFPFHQM6MH8C67G96G4A",
+                              "01M4RBXFQKQ4SWP7EC85WC7HS9"
+                            ],
+                            "line_height": 24,
+                            "wrap": "word_or_glyph"
+                          }
+                        },
+                        "order": 0,
+                        "style": {
+                          "align": "stretch",
+                          "basis": "auto",
+                          "direction": "column",
+                          "gap": [
+                            0,
+                            0
+                          ],
+                          "grow": 0,
+                          "justify": "start",
+                          "max_size": [
+                            null,
+                            null
+                          ],
+                          "min_size": [
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "shrink": 0,
+                          "size": [
+                            {
+                              "pixels": 160
+                            },
+                            {
+                              "pixels": 32
+                            }
+                          ],
+                          "wrap": false
+                        }
+                      }
+                    },
+                    "id": "00000000000000000000000012",
+                    "name": "text_input",
+                    "parent": "00000000000000000000000010",
+                    "provenance": {
+                      "actor": "editor",
+                      "conversation_id": null,
+                      "model": null,
+                      "origin": "user",
+                      "transaction": "01M4RBXFX1M5T8C8PR6H53YKDM"
+                    }
+                  }
+                },
+                "id": "01M4RBXFFB43CJSR6FY4WPKKMX",
+                "name": "Main"
+              }
+            },
+            "schema_version": 1,
+            "scripts": {
+              "00000000000000000000000001": {
+                "id": "00000000000000000000000001",
+                "name": "Mover",
+                "path": "move.ts"
+              }
+            },
+            "settings": {
+              "tick_rate": 60
+            }
+          },
+          "revision": 7
+        }
+      }
+    ],
+    "returncode": 0
+  }
+]

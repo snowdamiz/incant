@@ -1,0 +1,197 @@
+[
+  {
+    "name": "conformance",
+    "command": [
+      "python3",
+      "tools/probes/shipping-wasm2c.py",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/conformance",
+      "--rustup",
+      "/opt/homebrew/bin/rustup",
+      "--profile",
+      "ci",
+      "--conformance-only"
+    ],
+    "exit": 0,
+    "seconds": 279.65443462500116,
+    "sha256": "574af3621e3ea33f4f833844525fcf843cf3d6fd0f8b4c4cda3bea2cebb4805b"
+  },
+  {
+    "name": "wasm",
+    "command": [
+      "./tools/cargo",
+      "check",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_wasm_abi",
+      "-p",
+      "incant_wasm_runtime",
+      "-p",
+      "incant-module",
+      "--lib",
+      "--target",
+      "wasm32-unknown-unknown"
+    ],
+    "exit": 0,
+    "seconds": 2.460850000001301,
+    "sha256": "4d4b151ce11b462ef6a02e650f30cf702828a10e15784c0b1a59319b56084a7e"
+  },
+  {
+    "name": "graph",
+    "command": [
+      "python3",
+      "tools/check_runtime_dependencies.py",
+      "incant_runtime",
+      "incant_script",
+      "incant_assets_runtime",
+      "incant_wasm_abi",
+      "incant_wasm_runtime",
+      "incant_wasm_player",
+      "incant_game_runtime",
+      "incant_game_player",
+      "--features",
+      "incant_game_player/static-module,incant_game_player/render-input"
+    ],
+    "exit": 0,
+    "seconds": 0.3608970000004774,
+    "sha256": "417393acccae9e78ff908995398f3f5a659fa16f114a8e05495b5fb88d3c04f5"
+  },
+  {
+    "name": "generated",
+    "command": [
+      "python3",
+      "tools/generate_wasm_sdk.py",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.18537545899926045,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "sdk",
+    "command": [
+      "node",
+      "tools/generate_sdk.mjs",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.0538133750014822,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "bridge",
+    "command": [
+      "node",
+      "tools/build_bridge.mjs",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.08412300000054529,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "fmt",
+    "command": [
+      "./tools/cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 1.1853947910003626,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "conventions",
+    "command": [
+      "python3",
+      "tools/generate_conventions.py",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.039644500000576954,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "tools",
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools/tests",
+      "-p",
+      "test_*.py"
+    ],
+    "exit": 0,
+    "seconds": 20.674450041000455,
+    "sha256": "0b1fe306c57d267b945b57a8eb122a6a4729ce5034138bbe1987e2f3257f5a56"
+  },
+  {
+    "name": "headless",
+    "command": [
+      "./tools/cargo",
+      "build",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_headless",
+      "--features",
+      "wasmtime-host"
+    ],
+    "exit": 0,
+    "seconds": 52.95066083399979,
+    "sha256": "01c94cd44af4faaaf59f9c11c2be76355baff86408462eca4b28144e3e9cd695"
+  },
+  {
+    "name": "oracle",
+    "command": [
+      "./tools/cargo",
+      "build",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_cook",
+      "--example",
+      "animation_pose_package_oracle"
+    ],
+    "exit": 0,
+    "seconds": 33.92644737500086,
+    "sha256": "797f372d6289e883a29b3c1b4dcb6a426f064ea53e451d93539bb6099914c5c2"
+  },
+  {
+    "name": "diff",
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.012648916999751236,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "public-export",
+    "command": [
+      "python3",
+      "tools/probes/native-wasm-animation-pose-export.py",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/public-export",
+      "--binary",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/incant_headless",
+      "--oracle",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/wasm-ik-main152-001/animation_pose_package_oracle",
+      "--ik"
+    ],
+    "exit": 0,
+    "seconds": 330.60679354199965,
+    "sha256": "10ddb6fe6107226dd01dde6638a80afe857f323208ae44bc8238c1e11a37012a"
+  }
+]

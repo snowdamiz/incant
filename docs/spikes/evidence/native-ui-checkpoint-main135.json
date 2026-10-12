@@ -1,0 +1,65 @@
+{
+  "accepted_source": "4ee1c21ec4c470f730ebd7f151efd49e3a540da3",
+  "tested_source": "8b464e66482cc7d91ccf7d0f54b2bc902de70630",
+  "base_feature_head": "0975515af897c990c669ac44b95dd0ec9da78fcf",
+  "same_accepted_source": {
+    "Cargo.lock": "a9d9fb195718e559ac3aa0984df100536609f1c842470245220ec5546076ea9b",
+    "crates/incant_ui/Cargo.toml": "ce9a547441f89385e2af82a68442d0baa0ae6cdb4832c348ce425f7c21c39d2d",
+    "crates/incant_ui/src/lib.rs": "846450fa9cb687fa59ae9da1875e63b717deac6d73bdc4a310a06fb9d0655c29",
+    "crates/incant_ui/src/checkpoint.rs": "ac3f641507581558e3086fbc5eddfd759d4e3b2af62976fa0af06e8d76a571b7",
+    "crates/incant_ui/tests/checkpoint.rs": "6338cdaa5b9f29e8fc487de8816db8fc2f4697a6368d22e8d4106fc45dd80a78"
+  },
+  "frozen_inputs": 1330,
+  "integration": "Only STATUS conflict; retained current SDK/release/fixture text plus additive widget-state section. All5 accepted source bytes exact, with no behavior or build input resolution required.",
+  "review": "Read complete codec and original independent review: bounded framing/digest/rows, exact identity and kind, borrowed decode, fresh owner, committed-layout/focus validation, explicit composition refusal. Existing world/session UI-save refusals unchanged.",
+  "checks": {
+    "ui_tests": 41,
+    "groups": 8,
+    "failed": 0,
+    "ignored": 0,
+    "all_target_clippy": true,
+    "wasm32": true,
+    "normal_runtime_graph": true,
+    "fmt_conventions": true
+  },
+  "logs": {
+    "docs/spikes/evidence/native-ui-checkpoint-main135/fmt.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/native-ui-checkpoint-main135/conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/native-ui-checkpoint-main135/wasm32.log.gz": {
+      "sha256": "518559ab80e087757f96aafe2a2c3caa7c6ab9cac320e89cc849ceef44c301b3",
+      "uncompressed_sha256": "79a2a59b1bb5e425228943ef791d824e531a9884253a90e3433065d85b339c65"
+    },
+    "docs/spikes/evidence/native-ui-checkpoint-main135/graph.log.gz": {
+      "sha256": "24175e2f3fb38da8aeb20795560d613e78369ba0feae2febf176610547172767",
+      "uncompressed_sha256": "ca7a3912a214f9427157d4b28fa756d204b5acfdaaad3b0776e58dddfb622993"
+    },
+    "docs/spikes/evidence/native-ui-checkpoint-main135/clippy.log.gz": {
+      "sha256": "b6b00204176d5350678271b3f35598461f23adda7272b34384a9f652ef69ab8b",
+      "uncompressed_sha256": "9b3c2a54680af45d8a3a1358ef1fae3f549475149370a55fa80a20f14132e98f"
+    },
+    "docs/spikes/evidence/native-ui-checkpoint-main135/tests.log.gz": {
+      "sha256": "0e22bbc4d74ba4c9b3354ac0b1745d44c4f8daf86728caadfa4370213bce1244",
+      "uncompressed_sha256": "a33e4f463fe955ad96338f4a895eaf8b32834e91eedf310a32ce75af6a04a207"
+    }
+  },
+  "receipts": {
+    "docs/spikes/evidence/native-ui-checkpoint-main135/freeze.json": "53078593af991dc9f0d580482a33806fc0ad7e800cb0ce2d27575386af4549c2",
+    "docs/spikes/evidence/native-ui-checkpoint-main135/results.json": "a0902a76c2d4a85192c2b739316be8632f751fd03f93a63d240a76a4cb615149"
+  },
+  "limitations": [
+    "No complete world/session/render-host checkpoint integration yet",
+    "No native IME, GPU or exported player execution in this slice",
+    "No shipping/device/performance or phase gate"
+  ],
+  "owned_handle": "36996 terminal0/reaped; CPU-only, no native/window/GPU.",
+  "actual_main": "c82dda4f18992868791adc51be3d0b5894b9bee1",
+  "ancestry_merge": "f4e758e79891984801fb74ae61b8f7c60f246c8c",
+  "tested_tree": "19cff8db9d604b41339fca3bd1e73dea2ae31b8f",
+  "same_tested_tree": true
+}
