@@ -72,6 +72,26 @@ fn vertex_mappings(kind: Kind) -> Vec<msl::VertexBufferMapping> {
                     .collect(),
             },
         ],
+        Kind::Sprite => vec![
+            B {
+                id: 15,
+                stride: 12,
+                step_mode: S::ByVertex,
+                attributes: vec![attribute(0, 0, F::Float32x3)],
+            },
+            B {
+                id: 14,
+                stride: 52,
+                step_mode: S::ByVertex,
+                attributes: vec![
+                    attribute(1, 0, F::Float32x2),
+                    attribute(2, 8, F::Float32x4),
+                    attribute(3, 24, F::Float32x4),
+                    attribute(4, 40, F::Float32x2),
+                    attribute(5, 48, F::Uint32),
+                ],
+            },
+        ],
     }
 }
 
@@ -85,13 +105,14 @@ pub(super) fn emit(
     backend: Backend,
 ) -> Result<(Vec<u8>, String)> {
     let shadow = kind == Kind::Shadow;
+    let textured = kind != Kind::Diagnostic;
     match backend {
         Backend::Metal => {
             let mut resources = msl::EntryPointResources::default();
             if stage == ShaderStage::Vertex {
                 // hal29 reserves one vertex lengths buffer after ordinary buffers.
-                resources.sizes_buffer = Some(u8::from(shadow));
-                if shadow {
+                resources.sizes_buffer = Some(u8::from(textured));
+                if textured {
                     resources.resources.insert(
                         resource(0, 0),
                         msl::BindTarget {
@@ -100,23 +121,25 @@ pub(super) fn emit(
                         },
                     );
                 }
-            } else if shadow {
+            } else if textured {
+                if shadow {
+                    resources.resources.insert(
+                        resource(1, 0),
+                        msl::BindTarget {
+                            buffer: Some(0),
+                            ..Default::default()
+                        },
+                    );
+                }
                 resources.resources.insert(
-                    resource(1, 0),
-                    msl::BindTarget {
-                        buffer: Some(0),
-                        ..Default::default()
-                    },
-                );
-                resources.resources.insert(
-                    resource(1, 1),
+                    resource(1, u32::from(shadow)),
                     msl::BindTarget {
                         texture: Some(0),
                         ..Default::default()
                     },
                 );
                 resources.resources.insert(
-                    resource(1, 2),
+                    resource(1, 1 + u32::from(shadow)),
                     msl::BindTarget {
                         sampler: Some(msl::BindSamplerTarget::Resource(0)),
                         ..Default::default()
@@ -156,9 +179,10 @@ pub(super) fn emit(
                 lang_version: (1, 0),
                 flags: spv::WriterFlags::FORCE_POINT_SIZE,
                 fake_missing_bindings: false,
-                binding_map: if shadow {
+                binding_map: if textured {
                     [(0, 0), (1, 0), (1, 1), (1, 2)]
                         .into_iter()
+                        .filter(|pair| shadow || *pair != (1, 2))
                         .map(|(group, binding)| {
                             (
                                 resource(group, binding),
@@ -173,7 +197,14 @@ pub(super) fn emit(
                 } else {
                     Default::default()
                 },
-                capabilities: Some([spv::Capability::Shader].into_iter().collect()),
+                // Nearest sprites use textureLoad; restricting its coordinates
+                // needs image extent queries, a core Vulkan shader capability.
+                capabilities: Some(
+                    [spv::Capability::Shader, spv::Capability::ImageQuery]
+                        .into_iter()
+                        .filter(|c| kind == Kind::Sprite || *c == spv::Capability::Shader)
+                        .collect(),
+                ),
                 bounds_check_policies: bounds(),
                 force_loop_bounding: true,
                 ..Default::default()
@@ -203,7 +234,11 @@ pub(super) fn emit(
             let mut options = hlsl::Options {
                 shader_model: hlsl::ShaderModel::V6_0,
                 fake_missing_bindings: false,
-                special_constants_binding: Some(binding(if shadow { 2 } else { 0 })),
+                special_constants_binding: Some(binding(match kind {
+                    Kind::Shadow => 2,
+                    Kind::Sprite => 1,
+                    Kind::Diagnostic => 0,
+                })),
                 restrict_indexing: true,
                 force_loop_bounding: true,
                 ..Default::default()
@@ -228,6 +263,27 @@ pub(super) fn emit(
                 options
                     .sampler_buffer_binding_map
                     .insert(hlsl::SamplerIndexBufferKey { group: 1 }, binding(5));
+                options.sampler_heap_target = hlsl::SamplerHeapBindTargets {
+                    standard_samplers: binding(0),
+                    comparison_samplers: binding(2048),
+                };
+            } else if kind == Kind::Sprite {
+                options.binding_map = [
+                    (resource(0, 0), binding(0)),
+                    (resource(1, 0), binding(0)),
+                    (
+                        resource(1, 1),
+                        hlsl::BindTarget {
+                            space: 255,
+                            register: 0,
+                            ..Default::default()
+                        },
+                    ),
+                ]
+                .into();
+                options
+                    .sampler_buffer_binding_map
+                    .insert(hlsl::SamplerIndexBufferKey { group: 1 }, binding(1));
                 options.sampler_heap_target = hlsl::SamplerHeapBindTargets {
                     standard_samplers: binding(0),
                     comparison_samplers: binding(2048),

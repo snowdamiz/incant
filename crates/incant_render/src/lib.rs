@@ -130,7 +130,7 @@ impl Renderer {
         let diagnostic_pipeline =
             Self::pipeline(&device, frame::HDR_FORMAT, adapter.get_info().backend)?;
         let output = output::OutputPass::new(&device, adapter.get_info().backend)?;
-        let sprites = sprites::SpriteSystem::new(&device);
+        let sprites = sprites::SpriteSystem::new(&device, adapter.get_info().backend)?;
         let text = text::TextSystem::new(&device);
         let ui = ui::UiSystem::new(&device, &queue);
         if let Some(error) = validation.pop().await {

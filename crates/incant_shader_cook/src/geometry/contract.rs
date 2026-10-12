@@ -62,6 +62,9 @@ fn io(
 }
 
 pub(super) fn validate(kind: Kind, m: &naga::Module, info: &naga::valid::ModuleInfo) -> Result<()> {
+    if kind == Kind::Sprite {
+        return super::sprite::validate(m, info);
+    }
     require(m.overrides.is_empty(), "geometry overrides")?;
     require(m.entry_points.len() == 2, "geometry entry count")?;
     let varying = if kind == Kind::Diagnostic { 1 } else { 2 };
@@ -90,6 +93,7 @@ pub(super) fn validate(kind: Kind, m: &naga::Module, info: &naga::valid::ModuleI
                     (Some(5), 4),
                     (Some(9), 2),
                 ],
+                Kind::Sprite => unreachable!("sprite contract validated separately"),
             }
         } else {
             vec![(None, 4), (Some(0), varying)]

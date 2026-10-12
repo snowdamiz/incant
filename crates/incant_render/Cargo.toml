@@ -12,6 +12,8 @@ default = ["physics-deterministic"]
 cooked-output = ["dep:incant_shader_cook", "dep:sha2"]
 # Adds diagnostic geometry and all shadow variants; backend acceptance pending.
 cooked-geometry = ["cooked-output"]
+# Fixed sprite family; native backend acceptance tracked separately.
+cooked-sprites = ["cooked-output"]
 
 # Select one physics kernel for the entire process, including build/test hosts.
 physics-deterministic = [
