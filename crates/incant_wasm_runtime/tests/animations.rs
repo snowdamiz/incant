@@ -8,6 +8,8 @@ use incant_wasm_runtime::{BoundaryError, Call, Capability, limits};
 
 #[path = "animations/crossfade.rs"]
 mod crossfade;
+#[path = "animations/graph.rs"]
+mod graph;
 
 const DT: f64 = 1. / 60.;
 const ID: usize = 513;

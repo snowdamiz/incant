@@ -58,6 +58,10 @@ pub enum StructuralCommand {
         entity: StableId,
         control: crate::AnimationControl,
     },
+    ControlAnimationGraph {
+        entity: StableId,
+        control: crate::AnimationGraphControl,
+    },
     /// Pause/resume preserves phase; restart/seek resets it.
     ControlFlipbook {
         entity: StableId,
@@ -147,7 +151,7 @@ struct Staged {
     topology_generation: u64,
     binding_generation: u64,
     flipbook_states: BTreeMap<StableId, crate::FlipbookState>,
-    animation_states: BTreeMap<StableId, crate::AnimationState>,
+    animation_states: BTreeMap<StableId, crate::animation::PreparedAnimationState>,
 }
 
 impl NativeWorld {
@@ -190,6 +194,7 @@ impl NativeWorld {
                 c,
                 StructuralCommand::ControlFlipbook { .. }
                     | StructuralCommand::ControlAnimation { .. }
+                    | StructuralCommand::ControlAnimationGraph { .. }
             )
         }) {
             let states = self.prepare_flipbook_controls(commands, &BTreeMap::new(), |id| {
@@ -253,6 +258,7 @@ impl NativeWorld {
                     | StructuralCommand::SetAngularVelocity { .. }
                     | StructuralCommand::SetAngularVelocity2D { .. }
                     | StructuralCommand::ControlAnimation { .. }
+                    | StructuralCommand::ControlAnimationGraph { .. }
                     | StructuralCommand::ControlFlipbook { .. }
                     | StructuralCommand::ControlAudio { .. }
             )
@@ -288,6 +294,7 @@ impl NativeWorld {
                     | StructuralCommand::SetText { .. }
                     | StructuralCommand::SetUi { .. }
                     | StructuralCommand::ControlAnimation { .. }
+                    | StructuralCommand::ControlAnimationGraph { .. }
                     | StructuralCommand::ControlFlipbook { .. }
                     | StructuralCommand::ControlAudio { .. } => continue,
                     _ => unreachable!(),
@@ -582,6 +589,7 @@ impl NativeWorld {
                 | StructuralCommand::SetText { .. }
                 | StructuralCommand::SetUi { .. }
                 | StructuralCommand::ControlAnimation { .. }
+                | StructuralCommand::ControlAnimationGraph { .. }
                 | StructuralCommand::ControlFlipbook { .. }
                 | StructuralCommand::ControlAudio { .. } => {}
                 StructuralCommand::SetParent { entity, parent } => {

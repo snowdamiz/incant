@@ -28,6 +28,7 @@ impl AnimationResources {
         &self,
         asset: &VisualAssetRef,
         initial: Animation,
+        graph: Option<&incant_doc::AnimationGraph>,
     ) -> Result<Arc<NativeAnimation>, CookError> {
         let missing =
             || CookError::AnimationResource(ulid::Ulid::from_bytes(asset.id.0).to_string());
@@ -36,6 +37,9 @@ impl AnimationResources {
             return Err(missing());
         }
         let animation = NativeAnimation {
+            graph: graph
+                .map(|g| crate::animation_graph::compile(g, &resource.durations))
+                .transpose()?,
             mesh_fingerprint: asset.fingerprint,
             clip_durations: resource.durations.clone(),
             initial,

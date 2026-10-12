@@ -195,10 +195,15 @@ impl CookedScene {
     pub fn has_text(&self) -> bool {
         !self.font_assets.is_empty() || !self.texts.is_empty()
     }
+    pub fn has_animation_graphs(&self) -> bool {
+        self.spatial
+            .iter()
+            .any(|n| n.animation.as_ref().is_some_and(|a| a.graph.is_some()))
+    }
     fn text_bytes(&self) -> usize {
-        if self.has_text() || self.has_ui() {
+        if self.has_text() || self.has_ui() || self.has_animation_graphs() {
             crate::text_binary::size(&self.font_assets, &self.texts)
-                + if self.has_ui() {
+                + if self.has_ui() || self.has_animation_graphs() {
                     crate::ui_binary::size(&self.ui)
                 } else {
                     0
@@ -262,14 +267,15 @@ impl CookedScene {
         &self.visual_assets
     }
     fn spatial_bytes(&self) -> usize {
-        usize::from(
-            self.has_text()
-                || !self.navigation.is_empty()
-                || self
-                    .spatial
-                    .iter()
-                    .any(|n| n.flipbook.is_some() || n.animation.is_some()),
-        ) * 4
+        usize::from(self.has_animation_graphs()) * 4
+            + usize::from(
+                self.has_text()
+                    || !self.navigation.is_empty()
+                    || self
+                        .spatial
+                        .iter()
+                        .any(|n| n.flipbook.is_some() || n.animation.is_some()),
+            ) * 4
             + usize::from(self.has_text() || self.spatial.iter().any(|n| n.animation.is_some())) * 4
             + self.visual_assets.len() * crate::spatial_binary::ASSET_BYTES
             + self

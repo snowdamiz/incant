@@ -8,6 +8,7 @@ pub fn id(n: u8) -> StableId {
 
 pub fn scene() -> CookedScene {
     let animation = Arc::new(NativeAnimation {
+        graph: None,
         mesh_fingerprint: [4; 32],
         clip_durations: Arc::from([1.0, 0.0]),
         initial: Animation {

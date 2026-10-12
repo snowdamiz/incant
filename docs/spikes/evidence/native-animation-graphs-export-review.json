@@ -1,0 +1,22 @@
+{
+  "recorded_at": "2026-10-12T04:45:01.127795+00:00",
+  "reviewer": "astra/root",
+  "implementation_commit": "915199f7",
+  "proof": "/tmp/incant-native-animation-graph-proof-003/result.json",
+  "proof_sha256": "6501fa3469acf1e7a7f6d8ac993c2b1f14deabbc5a9220dbed6a8479e229f89b",
+  "player_sha256": "33371c5f82e2d9db402f35fea8a137538be2dff90c68792f69c331e01a312248",
+  "player_bytes": 9053488,
+  "decision": "Accepted local QuickJS graph shipping evidence for frozen003 source; separate Wasm representability follow-up and integrated recook remain required.",
+  "verified_runs": 11,
+  "verified_package_files": 7,
+  "checks": [
+    "Three identical90tick fresh-process reports/PCM/final saves with60 independent graph observations.",
+    "Four split checkpoint continuation pairs: active fade, paused fade, completed-paused, blend state.",
+    "Actual output/save absence for corrupt checkpoint and wrong-observation refusals.",
+    "Actual authoring and source-map absence, package/receipt hashes, shipping codegen and authoring/compiler-free normal dependencies."
+  ],
+  "limits": [
+    "CPU-only retained render input; no GPU/window/deformed-vertex or phone measurements.",
+    "Does not cover subsequent native snapshot blend signal or Wasm refusal guard until that follow-up is checked."
+  ]
+}

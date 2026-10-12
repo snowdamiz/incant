@@ -2,6 +2,8 @@
 //! command, CRDT, filesystem or agent dependency. Authoring validation remains
 //! in incant_doc until the checked cook/runtime boundaries migrate separately.
 mod animation;
+mod animation_graph;
+pub use animation_graph::*;
 mod audio;
 mod camera;
 mod collider_shapes;

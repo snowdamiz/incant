@@ -278,6 +278,10 @@ impl NativeWorld {
         let next_animation_playback = next_animation.map(|definition| crate::animation::Playback {
             definition: definition.clone(),
             state: definition.initial_state(),
+            graph: definition
+                .graph
+                .as_ref()
+                .map(|graph| graph.initial_state(definition.initial.playing)),
         });
         let previous_flipbook = self
             .world

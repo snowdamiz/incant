@@ -1,0 +1,275 @@
+{
+  "phase": "1; bounded animation graph foundation, no phase gate",
+  "plan_sha256": "c60adc7457e6f5929b3430876f6b8ea02acffce5bf55fbaae9090933fe4aab6c",
+  "implementation_commit": "915199f744f5761e9e5239c29b1a99408ed6b127",
+  "legacy_wasm_refusal_commit": "cc302120baa6130bc83e79c5dec00b8266b91fac",
+  "base_commit": "068dc974799cce34b3689ffe510690b46dd285b3",
+  "ui_ancestor": "15aeb891d8f3c8125afc5fea3615079953499d64",
+  "environment": {
+    "toolchain": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+    "CARGO_TARGET_DIR": "/tmp/incant-agent-font-target",
+    "target": "aarch64-apple-darwin",
+    "cpu_only": true
+  },
+  "frozen_implementation_source_sha256": {
+    "crates/incant_cmd/tests/animation.rs": "b25fc5feda5f97c32ac4fc3991004c5bc03bea377176935c17c9b99978d4dcca",
+    "crates/incant_cook/src/animation.rs": "6132416e8245e69bc646d75b82b7a876bf999a348e9d5525bea46ab2d51bd626",
+    "crates/incant_cook/src/animation_graph.rs": "3c140a83f385a41cd98faebd89b2e50f1eb29e7a7c305d48e816d4e8f469d1bc",
+    "crates/incant_cook/src/lib.rs": "fd81bcca525ee67b7e1ebc460a22b05f9f81f79ddf8b31a23225ae2f5e7a70a3",
+    "crates/incant_cook/src/scene.rs": "5ece3771c3d063e40e7e9cd1db7a41bf880a591604fd8e9c537a42d831d2b1b8",
+    "crates/incant_cook/src/spatial.rs": "bf00c834e6ebd3f27e64d5424b283a53d50c676d7393d01d468a422bd673d292",
+    "crates/incant_cook/tests/animation.rs": "37894107e1a06f3842396e98409f4bf50a36339bbb8ea2461ff1b483fa1e9a7b",
+    "crates/incant_cook/tests/animation/graph.rs": "6f4f7210f5227bf7467c550875cd3b846e08d662f7b5f063c5bb9b6028ec7a35",
+    "crates/incant_doc/src/animation_graph.rs": "be099b2d1e0bc9a88b2cbe48caccb1881aeb8c097e2e4d6be10f5956b1f40691",
+    "crates/incant_doc/src/lib.rs": "e51435337315104708c9834ceb8cc47e99b14c4c17d482306b374166a55f3cb5",
+    "crates/incant_render_native/tests/animation.rs": "dc3945fbc98aa4fa926e9cd7f88795334792eee9bb96e79f389418dcd38dc5fa",
+    "crates/incant_runtime/src/animation.rs": "bc8df66891b1461ab7c0b3bfccc7a5dd581447c017cf64286ea2143edf8f3c4b",
+    "crates/incant_runtime/src/animation_binary.rs": "f1d584c41fd79a581c2efe6d7ea7f1312365ca86265b4a0738e53c76e6eefa09",
+    "crates/incant_runtime/src/animation_graph/binary.rs": "708d8d83dc7f96b386de54fe36fb8b00e930b56f8a02e62826fad32b501f176b",
+    "crates/incant_runtime/src/animation_graph/definition.rs": "21fbefa8dd4d9b364e92740562d290f80cc9450966096bf2e8434d796a09fb6f",
+    "crates/incant_runtime/src/animation_graph/mod.rs": "df449d2258089e9ecc19c63adff128d00d948110a0a96f24609108750673cd66",
+    "crates/incant_runtime/src/animation_graph/playback.rs": "1afa06c6d47cefe626ee94dbe83e353e9df7de0751f1829dafc2cf4d9122d030",
+    "crates/incant_runtime/src/binary.rs": "02e74e1db505a1ed11f0004fa7f037cd5db5e89ab0cf66002448e57ac4efe2c5",
+    "crates/incant_runtime/src/commands.rs": "99c805cc289f77f4ef2865af59c0c11b98d6993dce3d913b939e4de732bdd41d",
+    "crates/incant_runtime/src/lib.rs": "55c43a9c23acae36ea961f34841f6e0b85ce20fccf47666f9c1d94c2b5e1f86e",
+    "crates/incant_runtime/src/save.rs": "1a9f0eb299bd69c35ae7ddb597ff74882c0ef5983dc3c40b62d2571ec31e7e7a",
+    "crates/incant_runtime/src/save/codec.rs": "3738ab83c4805907b61d2a51b4051749fd57d1a283f5d8759ac321ea09c0f5e6",
+    "crates/incant_runtime/src/scene.rs": "2718c4113dd5dcab050cdfad092bbc2d063ad8736ae9ec8682712d7e0d0500e0",
+    "crates/incant_runtime/src/spatial.rs": "fad32932ed6b249d4fc33b7061579f4230164a9d34bab65a37171d223c9d4261",
+    "crates/incant_runtime/src/spatial_binary.rs": "e1aad82cbb16bf436dc3e901e3fcde85f389fcb6da14cc31a6285551c13b620a",
+    "crates/incant_runtime/src/spatial_view.rs": "8eab3830985b512bc82a76f52a2bd2437498eadf8683bfcbe53564b725c9f211",
+    "crates/incant_runtime/src/ui_binary.rs": "91e9838c427f6539f89c07ec31db8912c0403f94a799d3f09d6bf08b947a1f7b",
+    "crates/incant_runtime/src/world.rs": "c3095dca86c4e3dbeebc922bf9cac55215d7ca4ce08b4860cda3b48add4c02ee",
+    "crates/incant_runtime/tests/animation.rs": "2319fb62b34ec706f97f0bbf768b733531cdef2ebc488584bd40d0f3736f42e3",
+    "crates/incant_runtime/tests/animation_graph.rs": "cfbef3ac1b6eb8ba09fae8a4e54a5426cf96125450cf46088fa1c1ebf4bba3bf",
+    "crates/incant_runtime/tests/physics.rs": "b445b812db83fa59c01ead2b7577f403fd7863531a11480f401071770a41871e",
+    "crates/incant_runtime/tests/physics_2d.rs": "0fcaecca0ab84398ef82e3791891bad76987dc2dd5d12ec0f0a409a2b4fe4ff6",
+    "crates/incant_runtime/tests/scenes.rs": "e7935ad0d6965685f716efdc0daeea81742e8cc30c754fb291360914415b99c4",
+    "crates/incant_script/src/animation_graphs.rs": "459fe7549796d380f5cad3132a097a4a1c7071539ca83270e011f86f1691e450",
+    "crates/incant_script/src/animations.rs": "9da0a9b34f03e1b634bc1c490fb415494b1669fe906dff686bde8e1e9aca285b",
+    "crates/incant_script/src/checkpoint/pending.rs": "bde5f288cdab35420d0c0f3addbb651d7ea48ddfbb9ae971d27c1f3e80a19bc5",
+    "crates/incant_script/src/checkpoint/tests/animation.rs": "6eb7312ab7100d63d7bd75888c07fd20da5e0b4f5dec0cc58535e2421be8d40a",
+    "crates/incant_script/src/commands.rs": "3acfd61ccc3c1801342651de0939fd5987b5e0fc28bcf0c3ef952ccde620bc36",
+    "crates/incant_script/src/lib.rs": "bd079b72cb5b4ce716ffbc382bc82256c8ed961bf24b981a8160fdcf420bc55f",
+    "crates/incant_script/tests/animations.rs": "b843e01aa85834e508b84a4ad5cae7b338100f828194a6401b0ff5e854df9b8c",
+    "crates/incant_script/tests/animations/graph.rs": "2b0c7e0800d8cb0349c06e4bba09b294166b153a67e2f900928b82292fb46bb3",
+    "crates/incant_types/src/animation_graph.rs": "128da018fbde7283f8395a42886d5447edadb61b7ff84e856dbe5774b130a4a9",
+    "crates/incant_types/src/lib.rs": "3683b744e0e1f4ae86a75042e3c05c588af4381365bf7798e049edead7c72377",
+    "crates/incant_wasm_runtime/tests/support/animations.rs": "1c9ebe15f58b2627f0876deddca1c63643263bc8bb16b652aa6c4c6043b6eb28",
+    "schemas/AnimationGraph.schema.json": "144d21c95d78c4a8f6b3240dcb3e2e39d9d691c53bf10ebaf1c42261195c9f8a",
+    "sdk/ts/src/generated.d.ts": "ce4e9d01d8d347ac0933821216ba60c5a9dc71854a32588a8bb2bc1bf2e1988d",
+    "sdk/ts/src/native.d.ts": "beadbd275e7ded28faec7ef8258d9960af5cc6beaee87539215c4fee21a5266a",
+    "tools/probes/native-animation-graph-export.py": "6e116c6ab103a6e40c64da6586160cd49336530854390986aa3850052d6a9f49",
+    "tools/probes/native-animation-graph-export/behavior.ts": "7e45926ced165a3f85059e70b8a1164149f0d693e37d66711fb07c7b13895360"
+  },
+  "frozen_followup_source_sha256": {
+    "crates/incant_runtime/src/animation.rs": "cd021f8b7e6994a479d9262e33d004217240b9ad1f8f3302f0da0f6a6e313f98",
+    "crates/incant_script/src/animations.rs": "a9f60ac2c02cbc43816a5f96867a1eae7e8630a66135571399c842b4c42f8213",
+    "crates/incant_wasm_runtime/src/animations.rs": "74c0ac1776b2fed86ac3d20075df968a1aaf9d679c2a7399546694895538fd63",
+    "crates/incant_wasm_runtime/src/capability.rs": "99bcf1e9f3b4ccf7772de3d86ff8c1f7d1f748a5f131e3ca74eae0dc1dcd47a8",
+    "crates/incant_wasm_runtime/tests/animations.rs": "4461f1cd4f313e94b32bb90f51f59ac0caa841848329db03437da5e30ff189be",
+    "crates/incant_wasm_dev/tests/animation_graph_legacy.rs": "af52e90fef11fc717916d000a88589df526a3532888cf62d8a693f16763abeeb",
+    "crates/incant_wasm_runtime/fixtures/animation-graph-legacy.wat": "3ea71f95327bf8394a5d80cba72e07368fffdf35ff49f1802f564e022d05794c",
+    "crates/incant_wasm_runtime/tests/animations/graph.rs": "5a2ef6cdcaa155411057fcbb4d8578e643b312ee7f773418918fe5685f39d3fa",
+    "crates/incant_wasm_runtime/tests/support/animation_graph.rs": "3cd6285ae5f5c1568a9a2e674b3dd25f8fbb8d1bab48a5829c07ff74c9d024b3"
+  },
+  "checks": [
+    {
+      "name": "Frozen implementation final scoped suite",
+      "command": "./tools/cargo test --locked -j2 -p incant_types -p incant_doc -p incant_cmd -p incant_runtime -p incant_script -p incant_cook -p incant_render_native --features incant_cook/typescript -- --skip ten_thousand_random_undo_sequences",
+      "log": "/tmp/incant-animation-graph-final-all-tests.log",
+      "log_sha256": "9cfb0602b19b949c2f889c3ab134d9e6608d2e6e95d9fab04cb25e568442821b",
+      "passed": 481,
+      "scope_commit": "915199f7",
+      "failed": 0,
+      "filtered": 1
+    },
+    {
+      "name": "Unchanged long Undo sequence test",
+      "command": "./tools/cargo test --locked -j2 -p incant_types -p incant_doc -p incant_cmd -p incant_runtime -p incant_script -p incant_cook -p incant_render_native --features incant_cook/typescript",
+      "log": "/tmp/incant-animation-graph-scoped-tests.log",
+      "log_sha256": "aa8623cf8a21738d638beb97ec231f4a7cf97eba702163d7c5229eb1918e8b5f",
+      "passed_test": "test ten_thousand_random_undo_sequences ... ok",
+      "limitation": "Earlier broad run passed this unchanged long test; that run later failed a stale expected version string, repaired in915199f7. Not presented as a passing whole suite."
+    },
+    {
+      "name": "Scoped all-target Clippy",
+      "command": "./tools/cargo clippy --locked -j2 -p incant_types -p incant_doc -p incant_cmd -p incant_runtime -p incant_script -p incant_cook -p incant_render_native --all-targets --features incant_cook/typescript -- -D warnings",
+      "log": "/tmp/incant-animation-graph-clippy-final3.log",
+      "log_sha256": "eddfc23042475baf952cb9a0b96bcf7e36831a7289efaea99042656ccc2442e4",
+      "passed": true
+    },
+    {
+      "name": "Wasm types/runtime",
+      "command": "./tools/cargo check --locked -j2 -p incant_types -p incant_runtime --target wasm32-unknown-unknown",
+      "log": "/tmp/incant-animation-graph-wasm-final.log",
+      "log_sha256": "41623a1cb9177a72047ae0effa31cfa23cc152ba9baa6fea79926f1cc08d806b",
+      "passed": true
+    },
+    {
+      "name": "Headless authoring build",
+      "command": "./tools/cargo build --locked -j2 -p incant_headless",
+      "log": "/tmp/incant-animation-graph-headless-final3.log",
+      "log_sha256": "05c42bf3408412efa379b798ea515e8780e6a54da0aec9b430c97403492fb05f",
+      "passed": true
+    },
+    {
+      "name": "Python tooling",
+      "command": "python3 -m unittest discover -s tools/tests -p \"test_*.py\" -v",
+      "log": "/tmp/incant-animation-graph-python-tests.log",
+      "log_sha256": "40b632c5b4fab6cd7ea4ee947e0c833274e4327059eeaa50396714ec6adf4604",
+      "passed": 224,
+      "skipped": 4,
+      "total": 228
+    },
+    {
+      "name": "Native script Node tests",
+      "command": "node --test tools/tests/native_script.test.mjs",
+      "log": "/tmp/incant-animation-graph-node-tests.log",
+      "log_sha256": "7adc0a49432241aded1e985d42aaa29525effec1331f028baf116da51f7603ec",
+      "passed": 22
+    },
+    {
+      "name": "Lean shipping dependencies",
+      "command": "python3 tools/check_runtime_dependencies.py incant_runtime incant_script incant_render_native incant_game_runtime incant_game_player --features incant_game_player/project,incant_game_player/render-input",
+      "log": "/tmp/incant-animation-graph-dependencies.log",
+      "log_sha256": "6cfac1b3e0431752566f5ab64fca4662798d8e50eb526c4077f868f3fc142f2b",
+      "passed": true
+    },
+    {
+      "name": "Follow-up native graph regressions",
+      "command": "./tools/cargo test --locked -j2 -p incant_runtime --test animation_graph",
+      "log": "/tmp/incant-animation-graph-followup-runtime.log",
+      "log_sha256": "026668521b0dbdb47259acf58a6520f151b9160fab7d40b5ffc92de2443ffde9",
+      "passed": 12
+    },
+    {
+      "name": "Follow-up owned snapshot unit",
+      "command": "./tools/cargo test --locked -j2 -p incant_script --features compiler animations",
+      "log": "/tmp/incant-animation-graph-followup-script.log",
+      "log_sha256": "3d0d7ff438b0bcc00ac18be47f4398cdeed72c6ef9f6ecee32ca1e7b08cc1b4e",
+      "passed": 1
+    },
+    {
+      "name": "Follow-up script animation regressions",
+      "command": "./tools/cargo test --locked -j2 -p incant_script --features compiler --test animations",
+      "log": "/tmp/incant-animation-graph-followup-script-integration.log",
+      "log_sha256": "4ff979275accef2171f7a6c8e95c65db59088fd4946151a1be38dec01b77086e",
+      "passed": 18
+    },
+    {
+      "name": "Follow-up boundary regressions",
+      "command": "./tools/cargo test --locked -j2 -p incant_wasm_runtime --test animations",
+      "log": "/tmp/incant-animation-graph-legacy-capability-tests.log",
+      "log_sha256": "ab10c17911be2a097c938072cbb746f3ee0a4942c7a31ea22d0db29ba282e54f",
+      "passed": 18
+    },
+    {
+      "name": "Follow-up all-target Clippy",
+      "command": "./tools/cargo clippy --locked -j2 -p incant_runtime -p incant_script -p incant_wasm_runtime --all-targets --features incant_script/compiler -- -D warnings",
+      "log": "/tmp/incant-animation-graph-followup-clippy.log",
+      "log_sha256": "b1db25a0ef27ef0a0c199e99bbef612915d8986f7aa4a8dc25bb1f9fb693b9d3",
+      "passed": true
+    },
+    {
+      "name": "Follow-up Wasm types/runtime",
+      "command": "./tools/cargo check --locked -j2 -p incant_types -p incant_runtime --target wasm32-unknown-unknown",
+      "log": "/tmp/incant-animation-graph-followup-wasm.log",
+      "log_sha256": "f752313d6e9842797b2aba3dede7f1d93db938fbae039c289ead4c9bcaa0796e",
+      "passed": true
+    },
+    {
+      "name": "Final formatting",
+      "command": "./tools/cargo fmt --all -- --check",
+      "log": "/tmp/incant-animation-graph-followup-fmt.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "passed": true
+    },
+    {
+      "name": "Strict TypeScript",
+      "command": "npm --prefix sdk/ts run typecheck; npm --prefix editor/ui run typecheck",
+      "log": "/tmp/incant-animation-graph-final-typescript.log",
+      "log_sha256": "830cebda8ca04f5ce4188883ef15c58828d03be0acf76a388a9ef658aca3647a",
+      "passed": true
+    },
+    {
+      "name": "Generated SDK/bridge/conventions",
+      "command": "node tools/generate_sdk.mjs --check; node tools/build_bridge.mjs --check; python3 tools/generate_conventions.py",
+      "log": "/tmp/incant-animation-graph-final-generated.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "passed": true
+    },
+    {
+      "name": "Generated schemas",
+      "command": "/tmp/incant-agent-font-target/debug/incant_headless schema /tmp/incant-animation-graph-final-schemas; byte-compare each file to schemas/",
+      "log": "/tmp/incant-animation-graph-final-schemas.log",
+      "log_sha256": "903a7e3d49e5a7b0f3ed47b3a02d87cb6cf94edbc5f4b409fd4b0a9abf6b0dd4",
+      "passed": true
+    }
+  ],
+  "public_export": {
+    "command": "python3 tools/probes/native-animation-graph-export.py /tmp/incant-native-animation-graph-proof-003 --binary /tmp/incant-agent-font-target/debug/incant_headless",
+    "result": "/tmp/incant-native-animation-graph-proof-003/result.json",
+    "result_sha256": "6501fa3469acf1e7a7f6d8ac993c2b1f14deabbc5a9220dbed6a8479e229f89b",
+    "durable_result": "native-animation-graphs-export.json",
+    "commands": "native-animation-graphs-public-commands.json",
+    "processes": "native-animation-graphs-processes.json",
+    "journal_semantics": "Editor-default project.journal.jsonl path reopened through public RPC with --journal; no-flag RPC remains ephemeral.",
+    "three_fresh_processes": true,
+    "ticks_each": 90,
+    "logs_each": 270,
+    "independent_graph_observations": 60,
+    "checkpoint_cases": [
+      "active fade",
+      "paused fade",
+      "completed paused",
+      "blend state"
+    ],
+    "implementation_source": "915199f7; excludes later readonly native blend signal and legacy Wasm guard"
+  },
+  "legacy_wasm_followup": {
+    "result_sha256": "006ba0f9f2622332db1006935382da403cd277cc32c71c950f5922613361b9a3",
+    "durable_result": "native-animation-graphs-legacy-wasm.json",
+    "cases_per_host": 15,
+    "hosts": [
+      "Wasmtime49.0.2",
+      "pinnedWABT1.0.42 wasm2c"
+    ],
+    "assertions": [
+      "All four v1/v2 length/read imports refuse unrepresentable blends",
+      "Unchanged world after refused import",
+      "Terminal failure and unpublished logs",
+      "Endpoint graph snapshot success",
+      "Other capabilities remain usable while blending",
+      "Shared boundary catches errors and refuses mixed publication without partial guest copy"
+    ]
+  },
+  "reviews": [
+    {
+      "receipt": "native-animation-graphs-source-review.json",
+      "sha256": "d3abb9bae4bceae18a7dd5acbf07ee7bfea181f8a6b21c7f6d429f3fc3b21094"
+    },
+    {
+      "receipt": "native-animation-graphs-export-review.json",
+      "sha256": "e16997d041fd3548217be06734a7f6a60e025f9f5bd1ffa993fe4266f8d84cfd"
+    }
+  ],
+  "preserved_attempts": [
+    {
+      "path": "/tmp/incant-native-animation-graph-proof-001",
+      "result": "Owned process interrupted and reaped to fix naturally completed outgoing capture; no acceptance claim."
+    },
+    {
+      "path": "/tmp/incant-native-animation-graph-proof-002",
+      "result": "Owned process interrupted and reaped for reviewed master-pause separation; original freeze002 remains preserved."
+    }
+  ],
+  "remaining": [
+    "Publisher must recook/test the eventual main/UI/Wasm union; frozen915 proof does not claim that later integrated artifact.",
+    "Rust/Wasm guest graph controls/snapshot ABI remains a separate additive lane.",
+    "Four-pose blended-state fades, nested/2D blend trees, layers and interruptible transitions remain unsupported.",
+    "IK and root motion remain outstanding.",
+    "Full static module-state checkpoints remain explicitly Unsupported.",
+    "No rendered appearance, GPU/window, phone, performance or phase gate claim."
+  ]
+}
