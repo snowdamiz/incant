@@ -1,0 +1,165 @@
+{
+  "recorded_at_utc": "2026-10-12T03:16:07.227254+00:00",
+  "reviewer": {
+    "role": "astra",
+    "task": "/root/agent_bridge",
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "xhigh"
+  },
+  "result": "accepted bounded supplement; no actionable finding",
+  "prior_review": {
+    "path": "/tmp/incant-native-steering-independent-review.json",
+    "sha256": "cdada053427377f14992acbfbf360c23090727c67ebfe68b8469c0df73d43bff"
+  },
+  "source_freeze": {
+    "path": "/tmp/incant-native-steering-source-freeze-004.json",
+    "sha256": "604e8f5f5659d35b01f20ad05dea2cccb35000602028ede7f2189035aea68805",
+    "base": "37f61419d707cacb844a38abe2e048d3ffd1cd19",
+    "root": "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant",
+    "files": {
+      "Cargo.lock": "d80656cda94229032e820408a3086ed501c98f78e6159695b3939a9dcc5ba888",
+      "crates/incant_cook/tests/steering.rs": "8e0d4ab181841d1582ad06fcab67947b8c5453c39416e4f5ef3355332438d8bc",
+      "crates/incant_nav/Cargo.toml": "7a5d3142db098c458d11c993c03742d2393be44b7519edcb1d0107d84b6e1234",
+      "crates/incant_nav/src/lib.rs": "bcae807cd23466cec608efba9f98e91b8706b8401aad43a918eba7639b40b831",
+      "crates/incant_nav/src/steering.rs": "38aed7e91a93c9daaa81458ee3f0937a4b75c06a96a9fdb2e4c3d1469d9e5fe2",
+      "crates/incant_nav/tests/native_steering.rs": "6a52f81e70f523b81dc0611b17d09c38e5fbf6ace3ea735c29286a791b16a39a",
+      "crates/incant_runtime/src/lib.rs": "ce2ab60e8981597ece2fbd76f6bd352174573a0a0e2ceff7b6e3c0c4dad6decb",
+      "crates/incant_runtime/src/physics_queries.rs": "bd81211907e74672c6679eab1b7c36c1e46c05f544d329f9ae02f479bb6ad971",
+      "crates/incant_runtime/tests/steering_queries.rs": "1d3bc195f7168d716803923ff247856e4d8519d3124ae7bd8329f1f1678f1487",
+      "crates/incant_script/src/lib.rs": "c5573147658032807b5f3b1ff69dbc5573a4f66fd5e01df98625a9ae5c7867fc",
+      "crates/incant_script/src/navigation_tests.rs": "80bffc63e4e8fe059302ebaa6562dbb3ba2d9d982e80ab8da1406bcd3d004325",
+      "crates/incant_script/src/queries.rs": "52fd7696239249efbd2c088b7ef5481e7481420d7590616ea7dfcaba6a6713c3",
+      "crates/incant_script/src/query_values.rs": "6e9fa5b66919c866191888532bf54a808f3558e08bbd3ba3294b25dc29edebee",
+      "crates/incant_script/src/steering_tests.rs": "edca53ad4d554b4cd2cc83f96752d621e68a62c80e118575ea1bb0dfe0a31d18",
+      "crates/incant_script/src/steering_values.rs": "fd8187fa6529bf85d4e97cd2c8aa605affc43fe5a600bccbe7a5bc81487517ac",
+      "sdk/templates/native-navigation/steering.ts": "220c0f8b454b731cad1a790c4164fc762d0d07d2e58de02228f0b28f67cc9438",
+      "sdk/ts/src/native.d.ts": "615d07c35962f40d5719acf75723e32851148fd6224c6f06e558ce03c927c44c",
+      "crates/incant_script/build.rs": "c9a06880018326c69abcdd01f024173a10907b49cd9da6e91a5276377d5e74f0"
+    }
+  },
+  "scope": "One path addition to existing conservative build.rs host-source hash and Cargo invalidation list; original17 reviewed inputs unchanged",
+  "actual_mutation_receipt": {
+    "path": "/tmp/incant-native-steering-build-identity-002/result.json",
+    "sha256": "c02e82a0b877babec653f6074dd1cd8c52f9c8f895c38d0643629c52473f4afe",
+    "result": {
+      "passed": true,
+      "only_mutated_file": "crates/incant_script/src/steering_values.rs",
+      "records": [
+        {
+          "name": "baseline",
+          "identity": "0bcae5210572a079fe185dba5cbd400c588bc274e18c5a36a2b52f315fe493c8",
+          "exit": 0,
+          "command": [
+            "./tools/cargo",
+            "check",
+            "--locked",
+            "--offline",
+            "--profile",
+            "ci",
+            "-j2",
+            "-p",
+            "incant_script",
+            "--features",
+            "compiler",
+            "--message-format=json"
+          ],
+          "source_sha256": "fd8187fa6529bf85d4e97cd2c8aa605affc43fe5a600bccbe7a5bc81487517ac"
+        },
+        {
+          "name": "changed",
+          "identity": "34df1f6ebb805982592d31922d6473e35d73bdfd56c3c0cadc79266824ca70ac",
+          "exit": 0,
+          "command": [
+            "./tools/cargo",
+            "check",
+            "--locked",
+            "--offline",
+            "--profile",
+            "ci",
+            "-j2",
+            "-p",
+            "incant_script",
+            "--features",
+            "compiler",
+            "--message-format=json"
+          ],
+          "source_sha256": "25e6f54623754e510dc225618c0b14091787b5d4d998729ad9426e1e00e06b6e"
+        },
+        {
+          "name": "restored",
+          "identity": "0bcae5210572a079fe185dba5cbd400c588bc274e18c5a36a2b52f315fe493c8",
+          "exit": 0,
+          "command": [
+            "./tools/cargo",
+            "check",
+            "--locked",
+            "--offline",
+            "--profile",
+            "ci",
+            "-j2",
+            "-p",
+            "incant_script",
+            "--features",
+            "compiler",
+            "--message-format=json"
+          ],
+          "source_sha256": "fd8187fa6529bf85d4e97cd2c8aa605affc43fe5a600bccbe7a5bc81487517ac"
+        }
+      ],
+      "restored_byte_for_byte": true
+    }
+  },
+  "verification": [
+    "All18 frozen source hashes match, original17 unchanged",
+    "Exact one-line source delta adds steering_values.rs into shared hash/rerun-if-changed loop",
+    "All six build log/JSONL hashes and final cook003/Clippy003 log hashes match supplied durable evidence",
+    "Each actual Cargo build-script-executed JSON env carries the reported identity; baseline==restored!=comment-mutated build",
+    "Restored current steering_values bytes match original source; no production semantic mutation",
+    "Strict source-deleted authored cook1 and all-target Clippy003 passed after identity addition"
+  ],
+  "checked_receipts": [
+    {
+      "log": "/tmp/incant-native-steering-cook-003.log",
+      "sha256": "155dc6355906574a14098deabea0ed7eee4b8431ac2142fddd82a89b28f63b6d",
+      "exit": 0
+    },
+    {
+      "log": "/tmp/incant-native-steering-clippy-003.log",
+      "sha256": "fffd9819c8726c19c48fd0edecd14b7c94b34bc248a713a6313e7985e3cac8e2",
+      "exit": 0
+    },
+    {
+      "path": "/tmp/incant-native-steering-build-identity-002/baseline.log",
+      "sha256": "30d4da412dde0896356079844a391bb2b10a12a1e2870a2f12bd59d470e7b01b"
+    },
+    {
+      "path": "/tmp/incant-native-steering-build-identity-002/changed.log",
+      "sha256": "586033980d7669747e9e47788498dae51d21caebb4247db8a7e400e4fa12aa22"
+    },
+    {
+      "path": "/tmp/incant-native-steering-build-identity-002/restored.log",
+      "sha256": "586033980d7669747e9e47788498dae51d21caebb4247db8a7e400e4fa12aa22"
+    },
+    {
+      "path": "/tmp/incant-native-steering-build-identity-002/baseline.jsonl",
+      "sha256": "2f4fd6af9780f5fe5a37caa3d4cbc45e72e441ea90dc379378df7e1c182fc627"
+    },
+    {
+      "path": "/tmp/incant-native-steering-build-identity-002/changed.jsonl",
+      "sha256": "bdeb6c5f6713fa9fb93fd59212f50d411ea87f5b13e9a95ffd7382d63ae1b664"
+    },
+    {
+      "path": "/tmp/incant-native-steering-build-identity-002/restored.jsonl",
+      "sha256": "a4bec484ecfa33064c7c5451a4a3da283135308b39a9660fbdda05c4539bbd3f"
+    }
+  ],
+  "durable_evidence": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/docs/spikes/evidence/native-steering.json",
+    "sha256": "f5871132870a71985b59dbd037ace8cb87ae4c9756416cc5d3b7f285d0db513d"
+  },
+  "limits": [
+    "No independent builds or source edits",
+    "Conservative compatibility identity only; not authentication, complete toolchain/numerical identity, GPU/device or Wasm steering acceptance"
+  ],
+  "findings": []
+}

@@ -130,5 +130,59 @@
     "sha256": "cdada053427377f14992acbfbf360c23090727c67ebfe68b8469c0df73d43bff",
     "accepted": true,
     "scope": "17 frozen inputs and completed checks; no extra builds or GPU review"
+  },
+  "compatibility_followup": {
+    "source_freeze": "/tmp/incant-native-steering-source-freeze-004.json",
+    "source_freeze_sha256": "604e8f5f5659d35b01f20ad05dea2cccb35000602028ede7f2189035aea68805",
+    "changed_source": "crates/incant_script/build.rs",
+    "changed_source_sha256": "c9a06880018326c69abcdd01f024173a10907b49cd9da6e91a5276377d5e74f0",
+    "change": "Add new steering_values.rs to conservative script build identity and Cargo invalidation inputs",
+    "mutation_result": "native-steering-build-identity.json",
+    "mutation_result_sha256": "c02e82a0b877babec653f6074dd1cd8c52f9c8f895c38d0643629c52473f4afe",
+    "probe_harness_correction": "Initial local harness matched an incorrect Cargo package_id spelling and stopped before mutation; second run matched /incant_script# and completed baseline/change/restored builds",
+    "checks": [
+      {
+        "log": "/tmp/incant-native-steering-cook-003.log",
+        "sha256": "155dc6355906574a14098deabea0ed7eee4b8431ac2142fddd82a89b28f63b6d",
+        "exit": 0
+      },
+      {
+        "log": "/tmp/incant-native-steering-clippy-003.log",
+        "sha256": "fffd9819c8726c19c48fd0edecd14b7c94b34bc248a713a6313e7985e3cac8e2",
+        "exit": 0
+      }
+    ],
+    "build_logs": [
+      {
+        "path": "/tmp/incant-native-steering-build-identity-002/baseline.log",
+        "sha256": "30d4da412dde0896356079844a391bb2b10a12a1e2870a2f12bd59d470e7b01b"
+      },
+      {
+        "path": "/tmp/incant-native-steering-build-identity-002/changed.log",
+        "sha256": "586033980d7669747e9e47788498dae51d21caebb4247db8a7e400e4fa12aa22"
+      },
+      {
+        "path": "/tmp/incant-native-steering-build-identity-002/restored.log",
+        "sha256": "586033980d7669747e9e47788498dae51d21caebb4247db8a7e400e4fa12aa22"
+      },
+      {
+        "path": "/tmp/incant-native-steering-build-identity-002/baseline.jsonl",
+        "sha256": "2f4fd6af9780f5fe5a37caa3d4cbc45e72e441ea90dc379378df7e1c182fc627"
+      },
+      {
+        "path": "/tmp/incant-native-steering-build-identity-002/changed.jsonl",
+        "sha256": "bdeb6c5f6713fa9fb93fd59212f50d411ea87f5b13e9a95ffd7382d63ae1b664"
+      },
+      {
+        "path": "/tmp/incant-native-steering-build-identity-002/restored.jsonl",
+        "sha256": "a4bec484ecfa33064c7c5451a4a3da283135308b39a9660fbdda05c4539bbd3f"
+      }
+    ],
+    "independent_review": {
+      "path": "native-steering-review-supplement.json",
+      "sha256": "62e7161961ffb0bfd0f2da8f43f47b63f396dd7a0094dc439d9968a0296d7416",
+      "accepted": true,
+      "scope": "18 frozen source inputs; one-line build identity registration and real mutation/restoration proof"
+    }
   }
 }

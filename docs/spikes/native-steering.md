@@ -57,6 +57,12 @@ accessors, owned results, shared source budgets and atomic failures. The cook te
 uses strict authored TypeScript and the shipped SDK template, then removes the
 source directory before executing the compiled behavior.
 
+The new guest-conversion file participates in the conservative script build
+identity. A real Cargo rebuild after changing only that file changes the identity;
+restoring its exact bytes restores the identity. The strict cook and all-target
+script Clippy checks also pass with that input registered. This is compatibility
+invalidation, not authentication of executable bytecode.
+
 This scope does not add the Wasm steering ABI, automatic collider-to-obstacle
 collection, navigation debug drawing, a Core Sample, or phone performance
 evidence. Source deletion in an in-process cooked-session test is not a fresh

@@ -1,0 +1,67 @@
+{
+  "passed": true,
+  "only_mutated_file": "crates/incant_script/src/steering_values.rs",
+  "records": [
+    {
+      "name": "baseline",
+      "identity": "0bcae5210572a079fe185dba5cbd400c588bc274e18c5a36a2b52f315fe493c8",
+      "exit": 0,
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_script",
+        "--features",
+        "compiler",
+        "--message-format=json"
+      ],
+      "source_sha256": "fd8187fa6529bf85d4e97cd2c8aa605affc43fe5a600bccbe7a5bc81487517ac"
+    },
+    {
+      "name": "changed",
+      "identity": "34df1f6ebb805982592d31922d6473e35d73bdfd56c3c0cadc79266824ca70ac",
+      "exit": 0,
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_script",
+        "--features",
+        "compiler",
+        "--message-format=json"
+      ],
+      "source_sha256": "25e6f54623754e510dc225618c0b14091787b5d4d998729ad9426e1e00e06b6e"
+    },
+    {
+      "name": "restored",
+      "identity": "0bcae5210572a079fe185dba5cbd400c588bc274e18c5a36a2b52f315fe493c8",
+      "exit": 0,
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_script",
+        "--features",
+        "compiler",
+        "--message-format=json"
+      ],
+      "source_sha256": "fd8187fa6529bf85d4e97cd2c8aa605affc43fe5a600bccbe7a5bc81487517ac"
+    }
+  ],
+  "restored_byte_for_byte": true
+}
