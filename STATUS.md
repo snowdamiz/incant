@@ -16,6 +16,22 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Ordinary offline audio session checkpoints — current-main verified
+
+World v8/session v3 resume real static and streamed Kira voices alongside existing
+script state/timers and hosted UI. Fractional/resampler history, birth order,
+queued/retired voices, nested buses/listener state, tick-zero startup and master
+suspension are preserved. Integration with main #145 passes 422 affected CPU
+cases, 99 Kira cases, scoped Clippy and feature/platform/dependency checks.
+A fresh public shipping export passes four source/build/map-deleted processes
+with exact final saves and split/repeated PCM, plus nine precise refusals.
+All 1672 frozen inputs remain unchanged after main ancestry integration.
+
+Physics/module/device-native audio and native-window/GPU checkpoint routes remain
+unsupported; arbitrary VM heap/effects and full save/device gates are not claimed.
+[Contract and evidence](docs/spikes/native-audio-session-checkpoints.md) and
+[current integration](docs/spikes/evidence/native-audio-main145.json).
+
 ## Public Wasm physics queries — current-main verified
 
 The Rust SDK now batches native 3D/2D rays and character movement queries and
@@ -77,8 +93,9 @@ The current-main suite passes 450 CPU tests plus nine player tests, scoped Clipp
 feature-disabled/static/development-module builds, wasm32 and lean runtime checks.
 A fresh ordinary public export passes four map/source/build-deleted player runs
 and seven typed refusals; uninterrupted and resumed final saves match exactly.
-Active preedit, physics/audio state, static/development modules and window/GPU
-checkpoint routes remain unsupported. This is not a full-session, native IME,
+Active preedit, physics state, static/development modules and window/GPU
+checkpoint routes remain unsupported. Offline audio continuation is covered by
+the reviewed local slice above. This is not a full-session, native IME,
 Game UI or device gate. The fresh current-lock public proof passes again; source and evidence review
 remain scoped to this CPU ordinary-load route. [Contract and evidence](docs/spikes/native-ui-session-checkpoints.md).
 
@@ -255,7 +272,7 @@ Main #144 includes the multi-pose sampler and bounded nested/2D animation numeri
 core; authored tree playback and its complete SDK/render route remain separate
 local work. The current public Wasm physics integration adds real query/event
 capabilities and an ordinary source-deleted package proof, as recorded above.
-Offline audio checkpoint continuation is reviewed locally and queued separately.
+Offline audio checkpoint continuation is now current-main verified above.
 Checkpoint 11 remains failed and frozen; its Linux rendering repair is with
 Claude. No release or phase gate advances on these local feature results.
 

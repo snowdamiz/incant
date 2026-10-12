@@ -106,8 +106,9 @@ impl OfflineGameSession {
             },
         })
     }
-    /// Restore ordinary gameplay data, with a fresh silent mixer. Sample phase
-    /// derives from the restored world tick; no audio cursor is claimed saved.
+    /// Restore ordinary gameplay data and checked offline audio transports.
+    /// Static resampler history, streamed cursors and rational sample phase are
+    /// preserved; device output and arbitrary VM heap state are not restored.
     pub fn from_checkpoint_bytes(
         bytes: &[u8],
         initial: &CookedScene,
@@ -120,7 +121,7 @@ impl OfflineGameSession {
         crate::require_nonspatial(initial)?;
         Ok(Self {
             inner: OfflineCore {
-                core: Core::from_checkpoint(
+                core: Core::from_offline_checkpoint(
                     bytes,
                     initial,
                     program,
@@ -129,7 +130,8 @@ impl OfflineGameSession {
                         crate::require_nonspatial_world(pending.world())?;
                         Ok(NoHost)
                     },
-                    |world| SceneAudio::offline(world, clips, sample_rate),
+                    clips,
+                    sample_rate,
                 )?,
                 sample_rate,
             },

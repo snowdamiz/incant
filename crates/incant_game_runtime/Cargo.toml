@@ -13,7 +13,7 @@ device = ["incant_audio_runtime/device"]
 
 [dependencies]
 incant_ui = { workspace = true, optional = true }
-incant_script.workspace = true
+incant_script = { workspace = true, features = ["audio"] }
 incant_runtime.workspace = true
 incant_input.workspace = true
 incant_audio_runtime = { workspace = true, features = ["scene"] }

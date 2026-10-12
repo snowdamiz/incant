@@ -1,6 +1,6 @@
 use incant_runtime::{
     CookedAudio, CookedEntity, CookedScene, FrameCommands, NativeAudioBus, NativeAudioSource,
-    NativeWorld, SaveError, StableId, StructuralCommand,
+    NativeWorld, StableId, StructuralCommand,
 };
 use incant_types::{AudioSpatial, Transform};
 
@@ -86,7 +86,21 @@ fn canonical_audio_roundtrip_retains_typed_values_and_world_pose() {
             .1[3][0],
         3.
     );
-    assert_eq!(world.save_bytes().unwrap_err(), SaveError::AudioUnsupported);
+    let saved = world.save_bytes().unwrap();
+    assert_eq!(&saved[8..12], &8u32.to_le_bytes());
+    let restored = NativeWorld::from_save_bytes(&saved).unwrap();
+    assert!(restored.requires_audio_checkpoint());
+    assert_eq!(
+        restored
+            .audio_nodes()
+            .map(|(n, _)| n.clone())
+            .collect::<Vec<_>>(),
+        world
+            .audio_nodes()
+            .map(|(n, _)| n.clone())
+            .collect::<Vec<_>>()
+    );
+    assert_eq!(restored.save_bytes().unwrap(), saved);
 }
 #[test]
 fn invalid_audio_references_and_numbers_fail_before_world_creation() {
@@ -168,7 +182,21 @@ fn structural_audio_validates_final_graph_and_preserves_all_state_on_failure() {
         .unwrap();
     world.apply(&mut queue).unwrap();
     assert_eq!(world.audio_nodes().len(), 0);
-    assert_eq!(world.save_bytes().unwrap_err(), SaveError::AudioUnsupported);
+    let saved = world.save_bytes().unwrap();
+    assert_eq!(&saved[8..12], &8u32.to_le_bytes());
+    let restored = NativeWorld::from_save_bytes(&saved).unwrap();
+    assert!(restored.requires_audio_checkpoint());
+    assert_eq!(
+        restored
+            .audio_nodes()
+            .map(|(n, _)| n.clone())
+            .collect::<Vec<_>>(),
+        world
+            .audio_nodes()
+            .map(|(n, _)| n.clone())
+            .collect::<Vec<_>>()
+    );
+    assert_eq!(restored.save_bytes().unwrap(), saved);
 }
 #[test]
 fn truncated_or_noncanonical_audio_cannot_load() {

@@ -226,8 +226,9 @@ impl<H: SceneHost> HostedOfflineGameSession<H> {
             },
         })
     }
-    /// Ordinary load; a fresh retained host is prepared before VM/mixer setup.
-    /// Only data supported by NativeSession checkpoints can be loaded.
+    /// Ordinary load. Audio data and its trusted PCM are validated first; a fresh
+    /// retained host is then prepared on the exact restored world before guest
+    /// initialization. Offline mixer construction creates no physical device.
     pub fn from_checkpoint_bytes(
         bytes: &[u8],
         initial: &CookedScene,
@@ -240,7 +241,7 @@ impl<H: SceneHost> HostedOfflineGameSession<H> {
         validate_rate(sample_rate)?;
         Ok(Self {
             inner: OfflineCore {
-                core: Core::from_checkpoint(
+                core: Core::from_offline_checkpoint(
                     bytes,
                     initial,
                     program,
@@ -258,7 +259,8 @@ impl<H: SceneHost> HostedOfflineGameSession<H> {
                                 .map_err(GameError::Host)
                         }
                     },
-                    |world| SceneAudio::offline(world, clips, sample_rate),
+                    clips,
+                    sample_rate,
                 )?,
                 sample_rate,
             },

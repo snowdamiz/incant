@@ -1,0 +1,379 @@
+[
+  {
+    "name": "assertion",
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player/data",
+      "--ticks",
+      "1",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/assertion.pcm",
+      "--ui-viewport",
+      "600x300",
+      "--load-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/middle.save",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/assertion.save",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/assertion-observe.json"
+    ],
+    "cwd": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player",
+    "environment_keys": [
+      "PATH",
+      "TEMP",
+      "TMP",
+      "TMPDIR"
+    ],
+    "returncode": 1,
+    "stdout": "{\"flipbooks\":[],\"frames\":800,\"logs\":{\"dropped\":0,\"entries\":[]},\"observations\":{\"checks\":[{\"actual\":[33.0,0.0,0.0],\"expect\":{\"entity\":\"00000000000000000000000002\",\"property\":\"translation\",\"tolerance\":0.0,\"type\":\"vector\",\"value\":[34.0,0.0,0.0]},\"name\":\"state-timer-ui-14\",\"passed\":false,\"tick\":14}],\"entities\":{\"00000000000000000000000002\":{\"parent\":null,\"rotation\":[0.0,0.0,0.0,1.0],\"scale\":[1.0,1.0,1.0],\"translation\":[33.0,0.0,0.0],\"velocity\":null,\"world_transform\":[[1.0,0.0,0.0,0.0],[0.0,1.0,0.0,0.0],[0.0,0.0,1.0,0.0],[33.0,0.0,0.0,1.0]]}},\"passed\":false,\"tick\":14,\"tick_rate\":60},\"pcm_sha256\":\"58ddf95dfdf97c75d3322d8e3ae4c571f0492e4fc2b93a0cc0a592d8253e56f3\",\"render_input\":{\"binding_generation\":0,\"camera\":\"00000000000000000000000000000003\",\"camera_position\":[0.0,0.0,8.0],\"decoded_payload_bytes\":1324488,\"first_model_position\":[33.0,0.0,0.0],\"first_sprite_position\":null,\"first_text_position\":[33.0,0.0,0.0],\"gpu_submitted\":false,\"mode\":\"cpu-only\",\"model_count\":1,\"sprite_count\":0,\"text_atlas_bytes\":4194304,\"text_atlas_nonzero\":723,\"text_atlas_sha256\":\"6e87f09e32e6b19e258a160943bdbad889fabdba3f165aebb1f6641c835f3881\",\"text_count\":1,\"text_font_count\":3,\"text_generation\":0,\"text_glyph_count\":8,\"text_missing_clusters\":0,\"text_rtl_glyphs\":3,\"tick\":14,\"topology_generation\":0,\"ui\":{\"atlas_sha256\":\"e2092c1f9f51444d8b74148e3e19687d6b4a84123ee9b3e838d250332df582e4\",\"focus\":\"00000000000000000000000012\",\"glyphs\":10,\"values\":{\"00000000000000000000000012\":\"Namee\u0301\u65e5\u672c\"},\"viewport\":[600.0,300.0],\"widgets\":3}},\"sources\":[{\"id\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2],\"physics\":null,\"position\":[33.0,0.0,0.0]},{\"id\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],\"physics\":null,\"position\":[-1.0,0.0,0.0]}],\"tick\":14}\n",
+    "stderr": "Error: \"checkpoint withheld: native observation assertions failed\"\n",
+    "matched_diagnostic": "Error: \"checkpoint withheld: native observation assertions failed\""
+  },
+  {
+    "name": "baseline",
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player/data",
+      "--ticks",
+      "40",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/baseline.pcm",
+      "--ui-viewport",
+      "320x200",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/baseline.save",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/initial-input.json",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/baseline-observe.json"
+    ],
+    "cwd": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player",
+    "environment_keys": [
+      "PATH",
+      "TEMP",
+      "TMP",
+      "TMPDIR"
+    ],
+    "returncode": 0,
+    "stdout": "{\"flipbooks\":[],\"frames\":32000,\"logs\":{\"dropped\":0,\"entries\":[]},\"observations\":{\"checks\":[{\"actual\":[0.0,0.0,0.0],\"expect\":{\"entity\":\"00000000000000000000000002\",\"property\":\"translation\",\"tolerance\":0.0,\"type\":\"vector\",\"value\":[0.0,0.0,0.0]},\"name\":\"state-timer-ui-0\",\"passed\":true,\"tick\":0},{\"actual\":[31.0,0.0,0.0],\"expect\":{\"entity\":\"00000000000000000000000002\",\"property\":\"translation\",\"tolerance\":0.0,\"type\":\"vector\",\"value\":[31.0,0.0,0.0]},\"name\":\"state-timer-ui-13\",\"passed\":true,\"tick\":13},{\"actual\":[94.0,0.0,0.0],\"expect\":{\"entity\":\"00000000000000000000000002\",\"property\":\"translation\",\"tolerance\":0.0,\"type\":\"vector\",\"value\":[94.0,0.0,0.0]},\"name\":\"state-timer-ui-40\",\"passed\":true,\"tick\":40}],\"entities\":{\"00000000000000000000000002\":{\"parent\":null,\"rotation\":[0.0,0.0,0.0,1.0],\"scale\":[1.0,1.0,1.0],\"translation\":[94.0,0.0,0.0],\"velocity\":null,\"world_transform\":[[1.0,0.0,0.0,0.0],[0.0,1.0,0.0,0.0],[0.0,0.0,1.0,0.0],[94.0,0.0,0.0,1.0]]}},\"passed\":true,\"tick\":40,\"tick_rate\":60},\"pcm_sha256\":\"5407c6485867c1846e39f9b2d945fa4e6f3821d0e9eafe370bfbf1ece1306c51\",\"render_input\":{\"binding_generation\":0,\"camera\":\"00000000000000000000000000000003\",\"camera_position\":[0.0,0.0,8.0],\"decoded_payload_bytes\":1324488,\"first_model_position\":[94.0,0.0,0.0],\"first_sprite_position\":null,\"first_text_position\":[94.0,0.0,0.0],\"gpu_submitted\":false,\"mode\":\"cpu-only\",\"model_count\":1,\"sprite_count\":0,\"text_atlas_bytes\":4194304,\"text_atlas_nonzero\":723,\"text_atlas_sha256\":\"6e87f09e32e6b19e258a160943bdbad889fabdba3f165aebb1f6641c835f3881\",\"text_count\":1,\"text_font_count\":3,\"text_generation\":0,\"text_glyph_count\":8,\"text_missing_clusters\":0,\"text_rtl_glyphs\":3,\"tick\":40,\"topology_generation\":0,\"ui\":{\"atlas_sha256\":\"e2092c1f9f51444d8b74148e3e19687d6b4a84123ee9b3e838d250332df582e4\",\"focus\":\"00000000000000000000000012\",\"glyphs\":10,\"values\":{\"00000000000000000000000012\":\"Namee\u0301\u65e5\u672c\"},\"viewport\":[320.0,200.0],\"widgets\":3}},\"sources\":[{\"id\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2],\"physics\":null,\"position\":[94.0,0.0,0.0]},{\"id\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],\"physics\":null,\"position\":[-1.0,0.0,0.0]}],\"tick\":40}\n",
+    "stderr": ""
+  },
+  {
+    "name": "corrupt",
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player/data",
+      "--ticks",
+      "1",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/corrupt.pcm",
+      "--ui-viewport",
+      "600x300",
+      "--load-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/corrupt.save"
+    ],
+    "cwd": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player",
+    "environment_keys": [
+      "PATH",
+      "TEMP",
+      "TMP",
+      "TMPDIR"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Error: Checkpoint(Integrity)\n",
+    "matched_diagnostic": "Error: Checkpoint(Integrity)"
+  },
+  {
+    "name": "middle",
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player/data",
+      "--ticks",
+      "13",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/middle.pcm",
+      "--ui-viewport",
+      "320x200",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/middle.save",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/initial-input.json",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/middle-observe.json"
+    ],
+    "cwd": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player",
+    "environment_keys": [
+      "PATH",
+      "TEMP",
+      "TMP",
+      "TMPDIR"
+    ],
+    "returncode": 0,
+    "stdout": "{\"flipbooks\":[],\"frames\":10400,\"logs\":{\"dropped\":0,\"entries\":[]},\"observations\":{\"checks\":[{\"actual\":[31.0,0.0,0.0],\"expect\":{\"entity\":\"00000000000000000000000002\",\"property\":\"translation\",\"tolerance\":0.0,\"type\":\"vector\",\"value\":[31.0,0.0,0.0]},\"name\":\"state-timer-ui-13\",\"passed\":true,\"tick\":13}],\"entities\":{\"00000000000000000000000002\":{\"parent\":null,\"rotation\":[0.0,0.0,0.0,1.0],\"scale\":[1.0,1.0,1.0],\"translation\":[31.0,0.0,0.0],\"velocity\":null,\"world_transform\":[[1.0,0.0,0.0,0.0],[0.0,1.0,0.0,0.0],[0.0,0.0,1.0,0.0],[31.0,0.0,0.0,1.0]]}},\"passed\":true,\"tick\":13,\"tick_rate\":60},\"pcm_sha256\":\"af26c9c6e99ec7baefd3ab44337de7fca6843f00ba57641ff252533380fc700a\",\"render_input\":{\"binding_generation\":0,\"camera\":\"00000000000000000000000000000003\",\"camera_position\":[0.0,0.0,8.0],\"decoded_payload_bytes\":1324488,\"first_model_position\":[31.0,0.0,0.0],\"first_sprite_position\":null,\"first_text_position\":[31.0,0.0,0.0],\"gpu_submitted\":false,\"mode\":\"cpu-only\",\"model_count\":1,\"sprite_count\":0,\"text_atlas_bytes\":4194304,\"text_atlas_nonzero\":723,\"text_atlas_sha256\":\"6e87f09e32e6b19e258a160943bdbad889fabdba3f165aebb1f6641c835f3881\",\"text_count\":1,\"text_font_count\":3,\"text_generation\":0,\"text_glyph_count\":8,\"text_missing_clusters\":0,\"text_rtl_glyphs\":3,\"tick\":13,\"topology_generation\":0,\"ui\":{\"atlas_sha256\":\"e2092c1f9f51444d8b74148e3e19687d6b4a84123ee9b3e838d250332df582e4\",\"focus\":\"00000000000000000000000012\",\"glyphs\":10,\"values\":{\"00000000000000000000000012\":\"Namee\u0301\u65e5\u672c\"},\"viewport\":[320.0,200.0],\"widgets\":3}},\"sources\":[{\"id\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2],\"physics\":null,\"position\":[31.0,0.0,0.0]},{\"id\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],\"physics\":null,\"position\":[-1.0,0.0,0.0]}],\"tick\":13}\n",
+    "stderr": ""
+  },
+  {
+    "name": "no-clobber",
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player/data",
+      "--ticks",
+      "1",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/no-clobber.pcm",
+      "--ui-viewport",
+      "600x300",
+      "--load-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/middle.save",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/existing.save"
+    ],
+    "cwd": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player",
+    "environment_keys": [
+      "PATH",
+      "TEMP",
+      "TMP",
+      "TMPDIR"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Error: Os { code: 17, kind: AlreadyExists, message: \"File exists\" }\n",
+    "matched_diagnostic": "Error: Os { code: 17, kind: AlreadyExists, message: \"File exists\" }"
+  },
+  {
+    "name": "oversized",
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player/data",
+      "--ticks",
+      "1",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/oversized.pcm",
+      "--ui-viewport",
+      "600x300",
+      "--load-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/oversized.save"
+    ],
+    "cwd": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player",
+    "environment_keys": [
+      "PATH",
+      "TEMP",
+      "TMP",
+      "TMPDIR"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Error: \"runtime input size limit\"\n",
+    "matched_diagnostic": "Error: \"runtime input size limit\""
+  },
+  {
+    "name": "preedit",
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player/data",
+      "--ticks",
+      "1",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/preedit.pcm",
+      "--ui-viewport",
+      "600x300",
+      "--load-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/middle.save",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/preedit.save",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/preedit-input.json"
+    ],
+    "cwd": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player",
+    "environment_keys": [
+      "PATH",
+      "TEMP",
+      "TMP",
+      "TMPDIR"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Error: Checkpoint(Ui(CompositionActive))\n",
+    "matched_diagnostic": "Error: Checkpoint(Ui(CompositionActive))"
+  },
+  {
+    "name": "repeated",
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player/data",
+      "--ticks",
+      "27",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/repeated.pcm",
+      "--ui-viewport",
+      "600x300",
+      "--load-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/middle.save",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/repeated.save",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/neutral-input.json",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/repeated-observe.json"
+    ],
+    "cwd": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player",
+    "environment_keys": [
+      "PATH",
+      "TEMP",
+      "TMP",
+      "TMPDIR"
+    ],
+    "returncode": 0,
+    "stdout": "{\"flipbooks\":[],\"frames\":21600,\"logs\":{\"dropped\":0,\"entries\":[]},\"observations\":{\"checks\":[{\"actual\":[31.0,0.0,0.0],\"expect\":{\"entity\":\"00000000000000000000000002\",\"property\":\"translation\",\"tolerance\":0.0,\"type\":\"vector\",\"value\":[31.0,0.0,0.0]},\"name\":\"state-timer-ui-13\",\"passed\":true,\"tick\":13},{\"actual\":[94.0,0.0,0.0],\"expect\":{\"entity\":\"00000000000000000000000002\",\"property\":\"translation\",\"tolerance\":0.0,\"type\":\"vector\",\"value\":[94.0,0.0,0.0]},\"name\":\"state-timer-ui-40\",\"passed\":true,\"tick\":40}],\"entities\":{\"00000000000000000000000002\":{\"parent\":null,\"rotation\":[0.0,0.0,0.0,1.0],\"scale\":[1.0,1.0,1.0],\"translation\":[94.0,0.0,0.0],\"velocity\":null,\"world_transform\":[[1.0,0.0,0.0,0.0],[0.0,1.0,0.0,0.0],[0.0,0.0,1.0,0.0],[94.0,0.0,0.0,1.0]]}},\"passed\":true,\"tick\":40,\"tick_rate\":60},\"pcm_sha256\":\"49f301925ed11aeebf6ff74d940520dc98fe36a0ff7405ccbb30993b9d5222fd\",\"render_input\":{\"binding_generation\":0,\"camera\":\"00000000000000000000000000000003\",\"camera_position\":[0.0,0.0,8.0],\"decoded_payload_bytes\":1324488,\"first_model_position\":[94.0,0.0,0.0],\"first_sprite_position\":null,\"first_text_position\":[94.0,0.0,0.0],\"gpu_submitted\":false,\"mode\":\"cpu-only\",\"model_count\":1,\"sprite_count\":0,\"text_atlas_bytes\":4194304,\"text_atlas_nonzero\":723,\"text_atlas_sha256\":\"6e87f09e32e6b19e258a160943bdbad889fabdba3f165aebb1f6641c835f3881\",\"text_count\":1,\"text_font_count\":3,\"text_generation\":0,\"text_glyph_count\":8,\"text_missing_clusters\":0,\"text_rtl_glyphs\":3,\"tick\":40,\"topology_generation\":0,\"ui\":{\"atlas_sha256\":\"e2092c1f9f51444d8b74148e3e19687d6b4a84123ee9b3e838d250332df582e4\",\"focus\":\"00000000000000000000000012\",\"glyphs\":10,\"values\":{\"00000000000000000000000012\":\"Namee\u0301\u65e5\u672c\"},\"viewport\":[600.0,300.0],\"widgets\":3}},\"sources\":[{\"id\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2],\"physics\":null,\"position\":[94.0,0.0,0.0]},{\"id\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],\"physics\":null,\"position\":[-1.0,0.0,0.0]}],\"tick\":40}\n",
+    "stderr": ""
+  },
+  {
+    "name": "resumed",
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player/data",
+      "--ticks",
+      "27",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/resumed.pcm",
+      "--ui-viewport",
+      "600x300",
+      "--load-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/middle.save",
+      "--save-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/resumed.save",
+      "--input-recording",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/neutral-input.json",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/resumed-observe.json"
+    ],
+    "cwd": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player",
+    "environment_keys": [
+      "PATH",
+      "TEMP",
+      "TMP",
+      "TMPDIR"
+    ],
+    "returncode": 0,
+    "stdout": "{\"flipbooks\":[],\"frames\":21600,\"logs\":{\"dropped\":0,\"entries\":[]},\"observations\":{\"checks\":[{\"actual\":[31.0,0.0,0.0],\"expect\":{\"entity\":\"00000000000000000000000002\",\"property\":\"translation\",\"tolerance\":0.0,\"type\":\"vector\",\"value\":[31.0,0.0,0.0]},\"name\":\"state-timer-ui-13\",\"passed\":true,\"tick\":13},{\"actual\":[94.0,0.0,0.0],\"expect\":{\"entity\":\"00000000000000000000000002\",\"property\":\"translation\",\"tolerance\":0.0,\"type\":\"vector\",\"value\":[94.0,0.0,0.0]},\"name\":\"state-timer-ui-40\",\"passed\":true,\"tick\":40}],\"entities\":{\"00000000000000000000000002\":{\"parent\":null,\"rotation\":[0.0,0.0,0.0,1.0],\"scale\":[1.0,1.0,1.0],\"translation\":[94.0,0.0,0.0],\"velocity\":null,\"world_transform\":[[1.0,0.0,0.0,0.0],[0.0,1.0,0.0,0.0],[0.0,0.0,1.0,0.0],[94.0,0.0,0.0,1.0]]}},\"passed\":true,\"tick\":40,\"tick_rate\":60},\"pcm_sha256\":\"49f301925ed11aeebf6ff74d940520dc98fe36a0ff7405ccbb30993b9d5222fd\",\"render_input\":{\"binding_generation\":0,\"camera\":\"00000000000000000000000000000003\",\"camera_position\":[0.0,0.0,8.0],\"decoded_payload_bytes\":1324488,\"first_model_position\":[94.0,0.0,0.0],\"first_sprite_position\":null,\"first_text_position\":[94.0,0.0,0.0],\"gpu_submitted\":false,\"mode\":\"cpu-only\",\"model_count\":1,\"sprite_count\":0,\"text_atlas_bytes\":4194304,\"text_atlas_nonzero\":723,\"text_atlas_sha256\":\"6e87f09e32e6b19e258a160943bdbad889fabdba3f165aebb1f6641c835f3881\",\"text_count\":1,\"text_font_count\":3,\"text_generation\":0,\"text_glyph_count\":8,\"text_missing_clusters\":0,\"text_rtl_glyphs\":3,\"tick\":40,\"topology_generation\":0,\"ui\":{\"atlas_sha256\":\"e2092c1f9f51444d8b74148e3e19687d6b4a84123ee9b3e838d250332df582e4\",\"focus\":\"00000000000000000000000012\",\"glyphs\":10,\"values\":{\"00000000000000000000000012\":\"Namee\u0301\u65e5\u672c\"},\"viewport\":[600.0,300.0],\"widgets\":3}},\"sources\":[{\"id\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2],\"physics\":null,\"position\":[94.0,0.0,0.0]},{\"id\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],\"physics\":null,\"position\":[-1.0,0.0,0.0]}],\"tick\":40}\n",
+    "stderr": ""
+  },
+  {
+    "name": "wrong-audio-catalog",
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player/data",
+      "--ticks",
+      "1",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/wrong-audio-catalog.pcm",
+      "--ui-viewport",
+      "600x300",
+      "--load-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/wrong-audio-catalog.save"
+    ],
+    "cwd": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player",
+    "environment_keys": [
+      "PATH",
+      "TEMP",
+      "TMP",
+      "TMPDIR"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Error: Audio(Invalid(\"audio package catalog\"))\n",
+    "matched_diagnostic": "Error: Audio(Invalid(\"audio package catalog\"))"
+  },
+  {
+    "name": "wrong-audio-clock",
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player/data",
+      "--ticks",
+      "1",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/wrong-audio-clock.pcm",
+      "--ui-viewport",
+      "600x300",
+      "--load-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/wrong-audio-clock.save"
+    ],
+    "cwd": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player",
+    "environment_keys": [
+      "PATH",
+      "TEMP",
+      "TMP",
+      "TMPDIR"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Error: Checkpoint(Audio(Invalid(\"audio/world sample clock\")))\n",
+    "matched_diagnostic": "Error: Checkpoint(Audio(Invalid(\"audio/world sample clock\")))"
+  },
+  {
+    "name": "wrong-program",
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player/data",
+      "--ticks",
+      "1",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/wrong-program.pcm",
+      "--ui-viewport",
+      "600x300",
+      "--load-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/wrong-program.save"
+    ],
+    "cwd": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player",
+    "environment_keys": [
+      "PATH",
+      "TEMP",
+      "TMP",
+      "TMPDIR"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Error: Checkpoint(ProgramMismatch)\n",
+    "matched_diagnostic": "Error: Checkpoint(ProgramMismatch)"
+  },
+  {
+    "name": "wrong-widget",
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player/incant_game_player",
+      "--package",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player/data",
+      "--ticks",
+      "1",
+      "--output",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/wrong-widget.pcm",
+      "--ui-viewport",
+      "600x300",
+      "--load-checkpoint",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-reverify-001/wrong-widget.save"
+    ],
+    "cwd": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-package-001/package/player",
+    "environment_keys": [
+      "PATH",
+      "TEMP",
+      "TMP",
+      "TMPDIR"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Error: Checkpoint(Ui(Invalid(\"widget order or duplicate\")))\n",
+    "matched_diagnostic": "Error: Checkpoint(Ui(Invalid(\"widget order or duplicate\")))"
+  }
+]

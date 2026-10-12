@@ -1,0 +1,80 @@
+{
+  "format": "incant-input",
+  "version": 2,
+  "tick_rate": 60,
+  "start_tick": 0,
+  "ticks": 40,
+  "frames": [
+    {
+      "tick": 1,
+      "events": [],
+      "ui": [
+        {
+          "type": "focus",
+          "entity_id": "00000000000000000000000012"
+        }
+      ]
+    },
+    {
+      "tick": 2,
+      "events": [],
+      "ui": [
+        {
+          "type": "commit",
+          "entity_id": "00000000000000000000000012",
+          "text": "é日本"
+        }
+      ]
+    },
+    {
+      "tick": 3,
+      "events": [
+        {
+          "type": "key",
+          "code": "KeyA",
+          "down": true
+        }
+      ]
+    },
+    {
+      "tick": 4,
+      "events": [
+        {
+          "type": "key",
+          "code": "KeyA",
+          "down": false
+        }
+      ]
+    },
+    {
+      "tick": 5,
+      "events": [
+        {
+          "type": "key",
+          "code": "ShiftLeft",
+          "down": true
+        },
+        {
+          "type": "key",
+          "code": "ArrowLeft",
+          "down": true
+        }
+      ]
+    },
+    {
+      "tick": 6,
+      "events": [
+        {
+          "type": "key",
+          "code": "ShiftLeft",
+          "down": false
+        },
+        {
+          "type": "key",
+          "code": "ArrowLeft",
+          "down": false
+        }
+      ]
+    }
+  ]
+}
