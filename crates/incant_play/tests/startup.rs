@@ -8,6 +8,7 @@ use std::cell::Cell;
 
 fn fixture() -> (Project, String, String) {
     let mut project = Project::empty("Native startup");
+    project.settings.physics_mode = incant_runtime::PHYSICS_VARIANT.mode();
     let mut scene = Scene::new("Main");
     let entity = Entity::new("Mover");
     let entity_id = entity.id.clone();
@@ -178,4 +179,33 @@ fn selected_wasm_requires_explicit_development_host_instead_of_fallback() {
     .err()
     .expect("host is disabled");
     assert!(error.to_string().contains("wasmtime-host"));
+}
+
+#[test]
+fn foreign_physics_mode_refuses_before_assets_or_fallback_are_touched() {
+    let (mut project, _, _) = fixture();
+    let requested = match incant_runtime::PHYSICS_VARIANT.mode() {
+        incant_doc::PhysicsMode::Fast => incant_doc::PhysicsMode::Deterministic,
+        incant_doc::PhysicsMode::Deterministic => incant_doc::PhysicsMode::Fast,
+    };
+    project.settings.physics_mode = requested;
+    let before = project.canonical_text().unwrap();
+    let root = tempfile::tempdir().unwrap();
+    let error = PreparedPlay::load(
+        &project,
+        root.path(),
+        &StartOptions::default(),
+        48000,
+        || panic!("must reject kernel mismatch before source compilation"),
+    )
+    .err()
+    .unwrap();
+    let incant_play::StartupError::Native(error) = error else {
+        panic!("typed kernel error required")
+    };
+    assert!(matches!(error.downcast_ref::<incant_runtime::SceneError>(),
+        Some(incant_runtime::SceneError::PhysicsMode { requested: mode, compiled })
+        if *mode == requested && *compiled == incant_runtime::PHYSICS_VARIANT));
+    assert_eq!(project.canonical_text().unwrap(), before);
+    assert_eq!(std::fs::read_dir(root.path()).unwrap().count(), 0);
 }

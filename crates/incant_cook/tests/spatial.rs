@@ -8,6 +8,7 @@ use incant_runtime::{CookedScene, NativeWorld, VisualAssetKind};
 use serde_json::json;
 fn fixture() -> (Project, String, String, String, String) {
     let mut project = Project::empty("Typed spatial");
+    project.settings.physics_mode = incant_runtime::PHYSICS_VARIANT.mode();
     let mut scene = Scene::new("Main");
     let model = new_id();
     let texture = new_id();

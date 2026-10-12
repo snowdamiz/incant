@@ -21,8 +21,8 @@ pub use incant_2d::{
 pub use incant_input::InputActions;
 pub use incant_localization::{LocaleSettings, StringTable};
 pub use incant_nav::NavigationGrid;
-pub use incant_types::UiNode;
 pub use incant_types::{AnimationRootMotion, RootMotionApplication};
+pub use incant_types::{PhysicsMode, UiNode};
 pub use navigation::{NavigationMesh, NavigationSource, NavigationSourceKind};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
@@ -60,6 +60,9 @@ pub struct Project {
 #[serde(deny_unknown_fields)]
 pub struct ProjectSettings {
     pub tick_rate: u32,
+    #[serde(default, skip_serializing_if = "PhysicsMode::is_deterministic")]
+    #[schemars(extend("default" = PhysicsMode::default()))]
+    pub physics_mode: PhysicsMode,
     #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
     #[schemars(length(max = 64))]
     pub input_actions: InputActions,
@@ -181,6 +184,7 @@ impl Project {
             string_tables: BTreeMap::new(),
             settings: ProjectSettings {
                 tick_rate: 60,
+                physics_mode: PhysicsMode::default(),
                 input_actions: InputActions::new(),
                 localization: LocaleSettings::default(),
                 agent_budget: AgentBudgetSettings::default(),
