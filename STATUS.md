@@ -24,8 +24,8 @@ C/Swift callers pass six source/cache/build/map-deleted simulator runs with full
 logs, 432 observations and exact nonzero PCM, plus fourteen exact failure controls.
 Unsigned device archives and both caller links pass; no device execution is claimed.
 Source reviews, 192 affected Rust cases, nine exporter cases, strict TS, Clippy and
-lean checks pass. Final independent execution review and current-main integration
-are pending. Desktop cross-target export, Android and mobile static Wasm stay denied;
+lean checks pass. Final independent execution review is accepted; current-main
+integration remains pending. Desktop cross-target export, Android and mobile static Wasm stay denied;
 no signing, mobile window/audio host, phone performance or phase gate is claimed.
 [Contract and complete evidence](docs/spikes/authored-ios-project-export.md).
 

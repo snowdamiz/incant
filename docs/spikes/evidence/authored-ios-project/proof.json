@@ -1,5 +1,5 @@
 {
-  "status": "actual shipping archive and simulator caller proof passed; final independent execution review pending",
+  "status": "independent final source and execution review accepted",
   "base": "b46d351a81613a18dd0fec7af3a1b78b3678309a",
   "source_freeze": {
     "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-shipping-001/source-freeze.json",
@@ -538,5 +538,11 @@
     "fixed enhanced-determinism+parallel kernels from frozen base; per-project variant integration separate",
     "final linked caller parser absence audited separately from unused definitions in static archive",
     "package late failure establishes exact no-success-game/no-PCM publication; whole-prefix atomicity belongs to native host tests"
-  ]
+  ],
+  "final_review": {
+    "path": "final-review.json",
+    "sha256": "4aa861229e99aa0383c91615c178b7a37d6addb3a89bed196b72850b153a99ee",
+    "reviewed_commit": "3aa28ec2bfa4284d7ea77b072a992f652dc191d8",
+    "reviewed_packet_sha256": "bf6395e9c624a844f4a005ac00316341c28b6d7c457745463b66d45dd18e0af4"
+  }
 }

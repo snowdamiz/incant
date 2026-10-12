@@ -98,7 +98,8 @@ inputs remained unchanged through both completed builds and caller runs.
 The [durable packet](evidence/authored-ios-project/proof.json) retains 479 artifacts
 in a deduplicated lossless archive and hash-binds ten larger external binary files,
 including earlier audit/interrupted-attempt archives. Its three independent source
-reviews are accepted; final independent execution review is pending. Eleven cooker
+reviews and [final independent execution review](evidence/authored-ios-project/final-review.json)
+are accepted. Eleven cooker
 cases and 181 compiler/runtime cases pass, as do three-package all-target Clippy,
 nine exporter Python cases, strict TypeScript, normal-dependency guard, conventions,
 formatting and diff checks. Earlier fixture mistakes are retained: an absent
