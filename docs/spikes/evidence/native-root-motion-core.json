@@ -115,7 +115,7 @@
     }
   },
   "historical_failure": "tests001 exited101 at test compilation because fixture callback used &mut Vec<u8> where the function accepted &mut [u8]. Production compiled. Corrected only the test helper signature and added the independent previous-root-basis control before focused002/broad003 passed.",
-  "review": "Independent source review pending; producer source and terminal logs frozen.",
+  "review": "Independent source and retained evidence review accepted3794336f without findings. Publisher current-main integration remains pending.",
   "limitations": [
     "CPU numerical primitive, not complete root motion or Phase1.",
     "No authoring/root selection, native graph/clock, pose extraction, body movement, save or TypeScript/Wasm controls added.",
@@ -123,5 +123,10 @@
     "No grouped blend/fade integration; the caller chooses one cooked clip and node.",
     "No renderer/GPU/pixel/device/performance acceptance.",
     "No scene/save format or mutable gameplay state change."
-  ]
+  ],
+  "independent_final_review": {
+    "path": "docs/spikes/evidence/native-root-motion-core/independent-final-review.json",
+    "sha256": "788be798df117f5f69e642ffb76a2c4153f13a9dabec051701602b70e7a976b3",
+    "reviewed_evidence_sha256": "48f072deb8241f07ca6f2eb49fd47854cf3480ef084fb190e4778a75df115908"
+  }
 }

@@ -31,9 +31,10 @@ The next cycle's displacement turns with the previous cycle; adding wrapped
 translations would give the wrong path.
 
 The sampler owns only fixed-size state and references to the admitted channels.
-No scratch vectors, source IO, project documents or validation enter a query.
+No scratch vectors, source IO, project documents or model validation enter a query.
 Startup uses the existing cooked-model validator, which may allocate. The query
-error variants carry no allocated diagnostic. All ten focused tests and 128 assets/runtime tests across 19 groups pass,
+error variants carry no allocated diagnostic. All ten focused tests and 128
+assets/runtime tests across 19 groups pass,
 with no failed or ignored cases. All-target/all-feature Clippy, wasm32 visual
 compilation, the authoring-free dependency guard and formatting checks pass.
 The allocation counter measures zero allocations across 4096 iterations containing
@@ -47,7 +48,8 @@ basis, missing tracks, duration/cycle bounds and invalid cooked values.
 commands, frozen source hashes and logs. The first test build failed on a fixture
 callback signature before executing tests; that failed log is preserved. The
 corrected fixture and added basis control pass focused and broad runs. Independent
-source review remains pending.
+source and retained evidence review accepts the frozen implementation without
+findings. Current-main integration remains publisher-owned and pending.
 
 This is a CPU numerical foundation. Authored root selection, native graph and
 clock integration, full pose motion extraction, physics/body movement, blending,

@@ -23,7 +23,8 @@ immutable cooked tracks. Exact signed cycle cursors support forward/reverse, wra
 and multiple-cycle motion, with ordered rotation/translation composition. Selected
 scale or matrix-only tracks refuse explicitly. All 128 assets/runtime cases,
 all-target Clippy, wasm32 visual and dependency checks pass; 4096 query iterations
-allocate nothing after admission. Independent source review is pending.
+allocate nothing after admission. Independent source and retained evidence review
+accepts the implementation without findings; publisher integration remains pending.
 Authored root selection, graph/clock integration, pose extraction, body movement,
 save/SDK controls and rendered/device gates remain open; this is not complete
 root motion or Phase 1. [Contract and evidence](docs/spikes/native-root-motion-core.md).
