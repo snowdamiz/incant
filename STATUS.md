@@ -58,6 +58,18 @@ fast PR gates until the next frozen checkpoint; release does not track moving ma
 
 ## Current milestone
 
+Native animation graphs now connect ordinary typed authoring, captured models,
+v14 cooking, deterministic native clip states and flat adjacent-pair 1D blends.
+TypeScript controls and v6 checkpoints retain parameters, phase, fades and a
+separate master pause, allowing transitions after natural completion. The final
+481-test scoped suite, Clippy and Wasm checks pass. Three fresh source/cache/build-
+deleted ordinary packages match 90-tick DevPlay observations and exact active,
+paused, completed-paused and blended checkpoint continuations. Legacy Wasm v1/v2
+snapshots explicitly refuse unrepresentable graph blends; the additive guest
+graph SDK remains outstanding. Four-pose blended-state fades, nested/2D trees,
+layering, IK, root motion, rendered acceptance and device gates remain open.
+[Scope and evidence](docs/spikes/native-animation-graphs.md).
+
 Connected native UI is locally implemented from typed UiNode authoring through
 v13 cooking, bounded Taffy layout/focus, retained packaged-font text and ordinary
 composed CPU gameplay. The 226-test composed suite and 279-test affected suite

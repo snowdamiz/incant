@@ -1,0 +1,259 @@
+{
+  "active-continued-receipt.json": {
+    "argv": [
+      "/private/tmp/incant-native-animation-graph-proof-003/package/player/incant_game_player",
+      "--package",
+      "/private/tmp/incant-native-animation-graph-proof-003/package/player/data",
+      "--ticks",
+      "80",
+      "--output",
+      "/private/tmp/incant-native-animation-graph-proof-003/active-continued.pcm",
+      "--observe",
+      "/private/tmp/incant-native-animation-graph-proof-003/active-continued-observe.json",
+      "--load-checkpoint",
+      "/private/tmp/incant-native-animation-graph-proof-003/active.save",
+      "--save-checkpoint",
+      "/private/tmp/incant-native-animation-graph-proof-003/active-continued.save"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout_sha256": "6c37a3396760ce489aee3a13a7b73b5d0b7c639fbff6617a5c08cdb40b2a3ba8",
+    "receipt_sha256": "bdd178f3defb338d4bcb66ab56d6115689eb69e903836d7789d537c2772719da"
+  },
+  "active-first-receipt.json": {
+    "argv": [
+      "/private/tmp/incant-native-animation-graph-proof-003/package/player/incant_game_player",
+      "--package",
+      "/private/tmp/incant-native-animation-graph-proof-003/package/player/data",
+      "--ticks",
+      "10",
+      "--output",
+      "/private/tmp/incant-native-animation-graph-proof-003/active-first.pcm",
+      "--observe",
+      "/private/tmp/incant-native-animation-graph-proof-003/active-first-observe.json",
+      "--save-checkpoint",
+      "/private/tmp/incant-native-animation-graph-proof-003/active.save"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout_sha256": "2809a52987a0829ea37f934d383639d60b373ad8c9f8fd8ff3f4c959e395f7ac",
+    "receipt_sha256": "545c3371f41a0c0813e54308e3fa3a2f6ca9e8d33f5a0568101c5fd276d5e14f"
+  },
+  "baseline-receipt.json": {
+    "argv": [
+      "/private/tmp/incant-native-animation-graph-proof-003/package/player/incant_game_player",
+      "--package",
+      "/private/tmp/incant-native-animation-graph-proof-003/package/player/data",
+      "--ticks",
+      "90",
+      "--output",
+      "/private/tmp/incant-native-animation-graph-proof-003/baseline.pcm",
+      "--observe",
+      "/private/tmp/incant-native-animation-graph-proof-003/baseline-observe.json",
+      "--save-checkpoint",
+      "/private/tmp/incant-native-animation-graph-proof-003/baseline.save"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout_sha256": "735280d0bf96e313d95c5e4e5e3c9fc0d4fedad3087da4bd9f8e3d63dad461b6",
+    "receipt_sha256": "2513ac8ff3448b526c69f0d4066ac13261fd0c44d1804442424f0cdf32f852e2"
+  },
+  "blended-continued-receipt.json": {
+    "argv": [
+      "/private/tmp/incant-native-animation-graph-proof-003/package/player/incant_game_player",
+      "--package",
+      "/private/tmp/incant-native-animation-graph-proof-003/package/player/data",
+      "--ticks",
+      "44",
+      "--output",
+      "/private/tmp/incant-native-animation-graph-proof-003/blended-continued.pcm",
+      "--observe",
+      "/private/tmp/incant-native-animation-graph-proof-003/blended-continued-observe.json",
+      "--load-checkpoint",
+      "/private/tmp/incant-native-animation-graph-proof-003/blended.save",
+      "--save-checkpoint",
+      "/private/tmp/incant-native-animation-graph-proof-003/blended-continued.save"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout_sha256": "6ecf1fb19e14e15e11c753bf47bb6b3fb0d4227a79f716fe8b5f46e2b79432a4",
+    "receipt_sha256": "46d98b56b0a1d97dcc87f54483dadc59158ea5b147c3c7d767eee53955f2a7a4"
+  },
+  "blended-first-receipt.json": {
+    "argv": [
+      "/private/tmp/incant-native-animation-graph-proof-003/package/player/incant_game_player",
+      "--package",
+      "/private/tmp/incant-native-animation-graph-proof-003/package/player/data",
+      "--ticks",
+      "46",
+      "--output",
+      "/private/tmp/incant-native-animation-graph-proof-003/blended-first.pcm",
+      "--observe",
+      "/private/tmp/incant-native-animation-graph-proof-003/blended-first-observe.json",
+      "--save-checkpoint",
+      "/private/tmp/incant-native-animation-graph-proof-003/blended.save"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout_sha256": "7e54104ad6c6d507d264184d9500f9181a2647f7bfb81249104d0b6b3031103d",
+    "receipt_sha256": "b1fb7618438b3eed6f58826c8dc4c3e276c07fc0a90a1badd7d9d9ee0fcbd463"
+  },
+  "completed-paused-continued-receipt.json": {
+    "argv": [
+      "/private/tmp/incant-native-animation-graph-proof-003/package/player/incant_game_player",
+      "--package",
+      "/private/tmp/incant-native-animation-graph-proof-003/package/player/data",
+      "--ticks",
+      "79",
+      "--output",
+      "/private/tmp/incant-native-animation-graph-proof-003/completed-paused-continued.pcm",
+      "--observe",
+      "/private/tmp/incant-native-animation-graph-proof-003/completed-paused-continued-observe.json",
+      "--load-checkpoint",
+      "/private/tmp/incant-native-animation-graph-proof-003/completed-paused.save",
+      "--save-checkpoint",
+      "/private/tmp/incant-native-animation-graph-proof-003/completed-paused-continued.save"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout_sha256": "c6ec5b2e6374116e2acc8cb706d8fd1b29df83a0772ef0591f01f256f723264c",
+    "receipt_sha256": "b33d92f01cce444d228ed8c2d26b24d852cd0de3b2fc9541770c08325542867a"
+  },
+  "completed-paused-first-receipt.json": {
+    "argv": [
+      "/private/tmp/incant-native-animation-graph-proof-003/package/player/incant_game_player",
+      "--package",
+      "/private/tmp/incant-native-animation-graph-proof-003/package/player/data",
+      "--ticks",
+      "11",
+      "--output",
+      "/private/tmp/incant-native-animation-graph-proof-003/completed-paused-first.pcm",
+      "--observe",
+      "/private/tmp/incant-native-animation-graph-proof-003/completed-paused-first-observe.json",
+      "--save-checkpoint",
+      "/private/tmp/incant-native-animation-graph-proof-003/completed-paused.save"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout_sha256": "dc8399860c166401e50709176c41e9d92a92f405529afe36fb1eb5e68701fb68",
+    "receipt_sha256": "5f4f14cf3c2c234126c4d9ae174955ab6086b2ed4e02765c648256706f1c610c"
+  },
+  "corrupt-receipt.json": {
+    "argv": [
+      "/private/tmp/incant-native-animation-graph-proof-003/package/player/incant_game_player",
+      "--package",
+      "/private/tmp/incant-native-animation-graph-proof-003/package/player/data",
+      "--ticks",
+      "1",
+      "--output",
+      "/private/tmp/incant-native-animation-graph-proof-003/corrupt.pcm",
+      "--observe",
+      "/private/tmp/incant-native-animation-graph-proof-003/corrupt-observe.json",
+      "--load-checkpoint",
+      "/private/tmp/incant-native-animation-graph-proof-003/corrupt.save",
+      "--save-checkpoint",
+      "/private/tmp/incant-native-animation-graph-proof-003/corrupt-output.save"
+    ],
+    "returncode": 1,
+    "stderr": "Error: Checkpoint(Integrity)\n",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "receipt_sha256": "aa2474a3276a17e65a5cb2270598b181e7f650cb5136d4313b8db663acbde861"
+  },
+  "paused-continued-receipt.json": {
+    "argv": [
+      "/private/tmp/incant-native-animation-graph-proof-003/package/player/incant_game_player",
+      "--package",
+      "/private/tmp/incant-native-animation-graph-proof-003/package/player/data",
+      "--ticks",
+      "83",
+      "--output",
+      "/private/tmp/incant-native-animation-graph-proof-003/paused-continued.pcm",
+      "--observe",
+      "/private/tmp/incant-native-animation-graph-proof-003/paused-continued-observe.json",
+      "--load-checkpoint",
+      "/private/tmp/incant-native-animation-graph-proof-003/paused.save",
+      "--save-checkpoint",
+      "/private/tmp/incant-native-animation-graph-proof-003/paused-continued.save"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout_sha256": "6d9d888e3f65584e30bb88b5a10d81899787fff062192ea6660587ed1e85b185",
+    "receipt_sha256": "959db9dd09bc91f43bcc3b758959cc64a8f21d2ab63117e92d7fef48315d9010"
+  },
+  "paused-first-receipt.json": {
+    "argv": [
+      "/private/tmp/incant-native-animation-graph-proof-003/package/player/incant_game_player",
+      "--package",
+      "/private/tmp/incant-native-animation-graph-proof-003/package/player/data",
+      "--ticks",
+      "7",
+      "--output",
+      "/private/tmp/incant-native-animation-graph-proof-003/paused-first.pcm",
+      "--observe",
+      "/private/tmp/incant-native-animation-graph-proof-003/paused-first-observe.json",
+      "--save-checkpoint",
+      "/private/tmp/incant-native-animation-graph-proof-003/paused.save"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout_sha256": "6c7da4068b65d70616b60767459cd3ec15d9c44228052ff94874359ecc5a710b",
+    "receipt_sha256": "bf58045c78a25a80737c9ed0094d4d24f96d845d91bdfd512e6021f33c2062d3"
+  },
+  "repeat-0-receipt.json": {
+    "argv": [
+      "/private/tmp/incant-native-animation-graph-proof-003/package/player/incant_game_player",
+      "--package",
+      "/private/tmp/incant-native-animation-graph-proof-003/package/player/data",
+      "--ticks",
+      "90",
+      "--output",
+      "/private/tmp/incant-native-animation-graph-proof-003/repeat-0.pcm",
+      "--observe",
+      "/private/tmp/incant-native-animation-graph-proof-003/repeat-0-observe.json",
+      "--save-checkpoint",
+      "/private/tmp/incant-native-animation-graph-proof-003/repeat-0.save"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout_sha256": "735280d0bf96e313d95c5e4e5e3c9fc0d4fedad3087da4bd9f8e3d63dad461b6",
+    "receipt_sha256": "2fa3bbc92ee6c55a30c18cd3973da0e46a6c0404ce345e5bcee2e32747e3ba0c"
+  },
+  "repeat-1-receipt.json": {
+    "argv": [
+      "/private/tmp/incant-native-animation-graph-proof-003/package/player/incant_game_player",
+      "--package",
+      "/private/tmp/incant-native-animation-graph-proof-003/package/player/data",
+      "--ticks",
+      "90",
+      "--output",
+      "/private/tmp/incant-native-animation-graph-proof-003/repeat-1.pcm",
+      "--observe",
+      "/private/tmp/incant-native-animation-graph-proof-003/repeat-1-observe.json",
+      "--save-checkpoint",
+      "/private/tmp/incant-native-animation-graph-proof-003/repeat-1.save"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout_sha256": "735280d0bf96e313d95c5e4e5e3c9fc0d4fedad3087da4bd9f8e3d63dad461b6",
+    "receipt_sha256": "56e8d7f0e17891ec9cd27d097b6372683b3ef8520671f313e1771955fa350e89"
+  },
+  "wrong-observation-receipt.json": {
+    "argv": [
+      "/private/tmp/incant-native-animation-graph-proof-003/package/player/incant_game_player",
+      "--package",
+      "/private/tmp/incant-native-animation-graph-proof-003/package/player/data",
+      "--ticks",
+      "1",
+      "--output",
+      "/private/tmp/incant-native-animation-graph-proof-003/wrong-observation.pcm",
+      "--observe",
+      "/private/tmp/incant-native-animation-graph-proof-003/wrong-observation-observe.json",
+      "--save-checkpoint",
+      "/private/tmp/incant-native-animation-graph-proof-003/wrong-output.save"
+    ],
+    "returncode": 1,
+    "stderr": "Error: \"checkpoint withheld: native observation assertions failed\"\n",
+    "stdout_sha256": "3d7df2f0b1ab5f6f90e85078916ac6bcfed2070a3988b77a5f1e59c74f85ccd4",
+    "receipt_sha256": "7d61db23082486c9b78e9f9cd2ded4da7c2712957e1a0c188a22bbd849b275ae"
+  }
+}

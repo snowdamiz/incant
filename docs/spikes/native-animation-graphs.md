@@ -47,26 +47,58 @@ selection starts its new motion whenever the graph master is not paused.
 TypeScript uses `commands.setAnimationParameter(entity, parameter, value)` and
 `commands.selectAnimationState(entity, state)`. The owned typed columns in
 `animations.graphs` report stable IDs, parameter offsets/values, state time,
-elapsed time, explicit master pause and the second pose/weight. Queued commands cannot alter that tick's
-snapshot. Master `controlAnimation` play/pause and speed remain usable. Its
+elapsed time, explicit master pause and the second pose/weight. Queued commands
+cannot alter that tick's snapshot. Master `controlAnimation` play/pause and speed remain usable. Its
 clip/select/seek/loop/crossfade controls refuse graph instances to avoid competing
 clock ownership. Errors poison the existing atomic script batch, rolling back
 numeric edits, structural controls and unpublished logs. These graph controls
-are not yet part of the Rust/Wasm guest ABI.
+are not yet part of the Rust/Wasm guest ABI. The existing v1/v2 Wasm animation
+snapshots cannot represent parameter-driven blends: both length and read imports
+explicitly refuse those snapshots without copying bytes or publishing the atomic
+transaction. Graph endpoint poses remain representable, and modules which do not
+request those snapshots can continue using the scene. The native snapshot carries
+the actual second pose separately from the timed transition record.
 
 Scene v14 appends the graph table after the mandatory v12 text and v13 UI
 sections. Scenes without graphs retain their previous version and bytes; an
 empty UI table is allowed only as a lower-version suffix of v14. World-save v6
 stores each graph's current index, explicit master pause, state time, elapsed time
-and all 16 parameter
-slots, together with the existing animation/fade state. Load checks exact graph
+and all 16 parameter slots, together with the existing animation/fade state. Load checks exact graph
 membership, parameter ranges, unused slots, selected sample, and fade identity
 before replacing a world. Ordinary session checkpoints admit v6 and retain the
 existing explicit script persistence contract. UI-bearing worlds still refuse
 checkpoints until UI's own adapter exists. Full static-module state remains
 Unsupported.
 
-Verification and public process receipts will be recorded in the companion
-JSON after final source checks. Local CPU tests do not establish phone or visual
-acceptance. Nested/2D blend trees, layered animation, blended-state fades,
+The final seven-package source suite passed 481 tests, with the unchanged long
+10,000-sequence Undo test separately passed before the final rerun. Scoped
+all-target Clippy, runtime/types Wasm compilation, strict SDK/editor TypeScript,
+generated schemas/bridge checks, 228 Python checks (four skips), 22 native-script
+Node checks and the lean dependency audit passed. Tests exercise actual skin TRS
+interpolation, atomic authoring and script batches, malformed cold binary/save
+inputs, deterministic edge order, master pause versus natural completion,
+source/cache deletion and exact active/paused/blended continuation.
+
+The ordinary public exporter produced a fresh shipping player from frozen
+`915199f7` source. Three fresh `--package` processes each ran 90 ticks with three
+authored actors, 270 logs and 60 independently calculated graph observations.
+DevPlay and export observations agree. Active fade, paused fade, completed-and-
+paused, and blended-state v6 checkpoints resume to the identical final save, PCM
+and log sequence. This includes a nonlooping clip completing before a later
+parameter starts its outgoing transition. The driver deleted its private
+project/source/cache and export-build storage before execution; the sole removed
+debug source map has a recorded hash. Corrupt saves and deliberately wrong
+observations produced no PCM/save output. The receipt records compiler/codegen,
+package hashes, literal public authoring/export/player commands and limitations.
+The later legacy Wasm snapshot refusal (`cc302120`) passes 18 boundary tests,
+15 cases on each actual Wasmtime/wasm2c host, 12 native graph tests, 18 script
+animation tests and the owned snapshot unit test, plus scoped Clippy and Wasm
+checks. Its pinned translator and input identities are recorded separately; the
+preserved QuickJS export receipt does not claim a combined later source build.
+
+[Verification receipt](evidence/native-animation-graphs.json),
+[public export receipt](evidence/native-animation-graphs-export.json),
+[independent source review](evidence/native-animation-graphs-source-review.json),
+and [independent export review](evidence/native-animation-graphs-export-review.json).
+Local CPU tests do not establish phone or visual acceptance. Nested/2D blend trees, layered animation, blended-state fades,
 interruptible transitions, IK and root-motion integration remain outstanding.
