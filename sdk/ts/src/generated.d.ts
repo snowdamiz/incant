@@ -177,7 +177,9 @@ export namespace InputFrameSchema {
   export type TouchChange = { "id": number; "phase": TouchPhase; "position": [number, number] };
   export type TouchPhase = "down" | "move" | "up" | "cancel";
   export type TouchPoint = { "delta": [number, number]; "position": [number, number] };
-  export type Root = { "actions": { [key: string]: ActionState }; "connected": Array<number>; "disconnected": Array<number>; "focused": boolean; "gamepads": { [key: number]: GamepadFrame | undefined }; "gestures": Array<Gesture>; "keyboard": Buttons; "mouse": MouseFrame; "touch_changes": Array<TouchChange>; "touches": { [key: number]: TouchPoint | undefined } };
+  export type UiNotification = ({ "entity_id": string; "kind": "activated" }) | ({ "entity_id": string; "kind": "value_changed"; "value": string }) | ({ "entity_id": string; "kind": "submitted"; "value": string });
+  export type UiSnapshot = { "discarded_events": number; "events": Array<UiNotification>; "focused"?: string | null; "text_input": boolean };
+  export type Root = { "actions": { [key: string]: ActionState }; "connected": Array<number>; "disconnected": Array<number>; "focused": boolean; "gamepads": { [key: number]: GamepadFrame | undefined }; "gestures": Array<Gesture>; "keyboard": Buttons; "mouse": MouseFrame; "touch_changes": Array<TouchChange>; "touches": { [key: number]: TouchPoint | undefined }; "ui": UiSnapshot };
 }
 export type InputFrame = InputFrameSchema.Root;
 
@@ -187,7 +189,8 @@ export namespace InputRecordingSchema {
   export type InputEvent = ({ "focused": boolean; "type": "focus" }) | ({ "code": KeyCode; "down": boolean; "type": "key" }) | ({ "button": MouseButton; "down": boolean; "type": "mouse_button" }) | ({ "position": [number, number]; "type": "pointer_position" }) | ({ "delta": [number, number]; "type": "pointer_motion" }) | ({ "delta": [number, number]; "type": "wheel"; "unit": WheelUnit }) | ({ "id": number; "type": "gamepad_connected" }) | ({ "id": number; "type": "gamepad_disconnected" }) | ({ "button": GamepadButton; "id": number; "type": "gamepad_button"; "value": number }) | ({ "axis": GamepadAxis; "id": number; "type": "gamepad_axis"; "value": number }) | ({ "id": number; "phase": TouchPhase; "position": [number, number]; "type": "touch" });
   export type KeyCode = "KeyA" | "KeyB" | "KeyC" | "KeyD" | "KeyE" | "KeyF" | "KeyG" | "KeyH" | "KeyI" | "KeyJ" | "KeyK" | "KeyL" | "KeyM" | "KeyN" | "KeyO" | "KeyP" | "KeyQ" | "KeyR" | "KeyS" | "KeyT" | "KeyU" | "KeyV" | "KeyW" | "KeyX" | "KeyY" | "KeyZ" | "Digit0" | "Digit1" | "Digit2" | "Digit3" | "Digit4" | "Digit5" | "Digit6" | "Digit7" | "Digit8" | "Digit9" | "ArrowUp" | "ArrowDown" | "ArrowLeft" | "ArrowRight" | "Space" | "Enter" | "Escape" | "Tab" | "Backspace" | "Delete" | "Insert" | "Home" | "End" | "PageUp" | "PageDown" | "ShiftLeft" | "ShiftRight" | "ControlLeft" | "ControlRight" | "AltLeft" | "AltRight" | "MetaLeft" | "MetaRight" | "CapsLock" | "NumLock" | "ScrollLock" | "Pause" | "PrintScreen" | "ContextMenu" | "Backquote" | "Minus" | "Equal" | "BracketLeft" | "BracketRight" | "Backslash" | "Semicolon" | "Quote" | "Comma" | "Period" | "Slash" | "Numpad0" | "Numpad1" | "Numpad2" | "Numpad3" | "Numpad4" | "Numpad5" | "Numpad6" | "Numpad7" | "Numpad8" | "Numpad9" | "NumpadAdd" | "NumpadSubtract" | "NumpadMultiply" | "NumpadDivide" | "NumpadDecimal" | "NumpadEnter" | "F1" | "F2" | "F3" | "F4" | "F5" | "F6" | "F7" | "F8" | "F9" | "F10" | "F11" | "F12";
   export type MouseButton = "left" | "right" | "middle" | "back" | "forward";
-  export type RecordedTick = { "events": Array<InputEvent>; "tick": number };
+  export type RecordedTick = { "events": Array<InputEvent>; "tick": number; "ui"?: Array<RecordedUiEvent>; "viewport"?: [number, number] | null };
+  export type RecordedUiEvent = ({ "entity_id": string; "type": "focus" }) | ({ "type": "activate" }) | ({ "reverse": boolean; "type": "traverse" }) | ({ "entity_id": string; "text": string; "type": "commit" }) | ({ "cursor"?: [number, number] | null; "entity_id": string; "text": string; "type": "preedit" }) | ({ "entity_id": string; "type": "cancel" }) | ({ "position": [number, number]; "pressed": boolean; "type": "pointer" });
   export type TouchPhase = "down" | "move" | "up" | "cancel";
   export type WheelUnit = "pixels" | "lines";
   export type Root = { "format": string; "frames": Array<RecordedTick>; "start_tick": number; "tick_rate": number; "ticks": number; "version": number };
@@ -459,6 +462,19 @@ export namespace TransformSchema {
   export type Root = { "rotation": [number, number, number, number]; "scale": [number, number, number]; "translation": [number, number, number] };
 }
 export type Transform = TransformSchema.Root;
+
+export namespace UiNodeSchema {
+  export type TextWrap = "none" | "word" | "word_or_glyph";
+  export type UiAlign = "start" | "end" | "center" | "stretch";
+  export type UiDirection = "row" | "row_reverse" | "column" | "column_reverse";
+  export type UiJustify = "start" | "end" | "center" | "space_between" | "space_around" | "space_evenly";
+  export type UiKind = ({ "role": "root" }) | ({ "role": "container" }) | ({ "role": "label"; "text": UiText }) | ({ "role": "button"; "text": UiText }) | ({ "role": "text_input"; "text": UiText });
+  export type UiLength = ("auto") | ({ "pixels": number }) | ({ "fraction": number });
+  export type UiStyle = { "align": UiAlign; "basis": UiLength; "direction": UiDirection; "gap": [number, number]; "grow": number; "justify": UiJustify; "max_size": [number | null, number | null]; "min_size": [number, number]; "padding": [number, number, number, number]; "shrink": number; "size": [UiLength, UiLength]; "wrap": boolean };
+  export type UiText = { "content": string; "font_size": number; "fonts": Array<string>; "line_height": number; "wrap": TextWrap };
+  export type Root = { "disabled": boolean; "kind": UiKind; "order": number; "style": UiStyle };
+}
+export type UiNode = UiNodeSchema.Root;
 
 export namespace VelocitySchema {
   export type Root = { "linear": [number, number, number] };

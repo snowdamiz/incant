@@ -181,6 +181,7 @@ impl PreparedPlay {
                     }
                 };
                 Ok::<_, StartupError>(NativeRenderSettings {
+                    ui: None,
                     text: if cooked.font_assets().is_empty() {
                         None
                     } else {

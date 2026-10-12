@@ -194,6 +194,11 @@ impl NativeRenderInput {
             text_undo,
         })
     }
+    /// Immutable content-checked packaged font bytes, shared with screen UI.
+    /// No path lookup or mutable atlas/engine capability escapes this accessor.
+    pub fn font_sources(&self) -> impl Iterator<Item = &incant_text::SharedFontSource> {
+        self.text.iter().flat_map(|binding| binding.sources())
+    }
     pub fn has_text_binding(&self) -> bool {
         self.text.is_some()
     }

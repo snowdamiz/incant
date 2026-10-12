@@ -67,6 +67,9 @@ pub struct NativeWorld {
     pub(crate) font_assets: Vec<crate::FontAssetRef>,
     pub(crate) text_ids: BTreeSet<StableId>,
     pub(crate) text_generation: u64,
+    pub(crate) ui: BTreeMap<StableId, std::sync::Arc<crate::NativeUi>>,
+    pub(crate) ui_generation: u64,
+    pub(crate) ui_used: bool,
     pub(crate) localization: crate::NativeLocalization,
     pub(crate) navigation: crate::navigation_runtime::NavigationRuntime,
     pub(crate) navigation_used: bool,
@@ -105,6 +108,8 @@ impl NativeWorld {
         // Startup pairing only. No document, scene serialization or hashing is
         // performed during simulation or native structural operations.
         let source_scene_fingerprint = Sha256::digest(scene.to_bytes()).into();
+        let ui_used = scene.has_ui();
+        let ui = scene.ui.into_iter().map(|n| (n.entity, n.node)).collect();
         let texts = scene.texts;
         let font_assets = scene.font_assets;
         let navigation = scene.prepared_navigation;
@@ -170,6 +175,9 @@ impl NativeWorld {
             font_assets,
             text_ids: BTreeSet::new(),
             text_generation: 0,
+            ui,
+            ui_generation: 0,
+            ui_used,
             navigation_used: !navigation.nodes.is_empty(),
             navigation,
             identity: crate::WorldIdentity::new(),
@@ -508,6 +516,7 @@ impl NativeWorld {
         step: Option<f64>,
         solved: bool,
     ) -> Result<(), SceneError> {
+        let ui = &self.ui;
         let physics = &self.physics;
         let physics_2d = &self.physics_2d;
         let scene_id = self.scene_id;
@@ -528,6 +537,11 @@ impl NativeWorld {
                         query.get(world, entity).expect("fixed topology");
                     let velocity = motion.map(|v| &v.0);
                     validate_components(id.0, &local.0, velocity)?;
+                    if ui.contains_key(&id.0)
+                        && (local.0 != Default::default() || velocity.is_some())
+                    {
+                        return Err(SceneError::Invalid("UI numeric transform or velocity"));
+                    }
                     if let Some(binding) = binding {
                         crate::physics::validate_motion(
                             id.0,

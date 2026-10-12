@@ -8,11 +8,15 @@ pub use actions::{
 pub mod gamepad;
 mod gestures;
 mod recording;
+mod recording_ui;
+pub use recording_ui::RecordedUiEvent;
 mod types;
+mod ui;
 pub use recording::{InputRecording, InputReplay, MAX_RECORDING_BYTES, RecordingError};
 use std::collections::BTreeMap;
 use thiserror::Error;
 pub use types::*;
+pub use ui::{MAX_UI_NOTIFICATION_BYTES, MAX_UI_NOTIFICATIONS, UiNotification, UiSnapshot};
 
 pub const MAX_EVENTS_PER_TICK: usize = 1024;
 pub const MAX_GAMEPADS: usize = 16;
@@ -20,6 +24,8 @@ pub const MAX_TOUCHES: usize = 16;
 
 #[derive(Debug, Error, PartialEq)]
 pub enum InputError {
+    #[error("invalid or excessive routed UI snapshot")]
+    Ui,
     #[error(transparent)]
     Actions(#[from] ActionError),
     #[error("input tick must be finite and between 1/240 and 1 seconds")]
@@ -80,7 +86,7 @@ impl InputRuntime {
         actions: &InputActions,
     ) -> Result<&InputFrame, InputError> {
         validate_actions(actions)?;
-        self.advance_inner(events, dt, actions)
+        self.advance_inner(events, dt, actions, UiSnapshot::default())
     }
 
     /// Native fixed-tick path. Bindings were checked at the session boundary;
@@ -91,7 +97,20 @@ impl InputRuntime {
         dt: f64,
         actions: &ValidatedActions,
     ) -> Result<&InputFrame, InputError> {
-        self.advance_inner(events, dt, actions.definitions())
+        self.advance_inner(events, dt, actions.definitions(), UiSnapshot::default())
+    }
+
+    /// Trusted composed-host route. Notification admission precedes all physical
+    /// input/clock changes and shares the same accepted frame as gameplay input.
+    pub fn advance_validated_with_ui(
+        &mut self,
+        events: &[InputEvent],
+        dt: f64,
+        actions: &ValidatedActions,
+        ui: UiSnapshot,
+    ) -> Result<&InputFrame, InputError> {
+        ui.validate()?;
+        self.advance_inner(events, dt, actions.definitions(), ui)
     }
 
     fn advance_inner(
@@ -99,6 +118,7 @@ impl InputRuntime {
         events: &[InputEvent],
         dt: f64,
         actions: &InputActions,
+        ui: UiSnapshot,
     ) -> Result<&InputFrame, InputError> {
         if !dt.is_finite() || !(1. / 240. ..=1.).contains(&dt) || self.time + dt <= self.time {
             return Err(InputError::Step);
@@ -119,6 +139,7 @@ impl InputRuntime {
         next.finish_gestures(previous_pair);
         actions::observe(actions, &next.frame, &mut mapped);
         next.frame.actions = mapped;
+        next.frame.ui = ui;
         *self = next;
         Ok(&self.frame)
     }
