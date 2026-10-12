@@ -1,0 +1,205 @@
+{
+  "passed": true,
+  "binary_sha256": "614fe208a1365f10dd3f68bdaa2c9ddcefd09850b74acfe13d4689c91707e7a0",
+  "project": "/Users/andreyyurlov/.codex/incant-evidence/0061-hud/review-2/build/project/planar.json",
+  "scene": "01M4S1CXR011CR0TP9K32C5HAS",
+  "camera": "01PSEN00000000000000000003",
+  "atlas": "01M4S1CXVABARY19P2RJQDHY4D",
+  "font": "01M4S1CXWBA8HSTK8D5EH3Z66E",
+  "hud": {
+    "root": "01PSHD00000000000000000001",
+    "status": "01PSHD00000000000000000002",
+    "prompt": "01PSHD00000000000000000003",
+    "table": "01PSST00000000000000000001"
+  },
+  "gameplay_sha256": "7dd5d9965fe25f9f373420b22734755cd79dc3a84c689288f871b9fa2fa81d90",
+  "art_files": {
+    "cove-tiles.png": "f27c019367042dd278a80853c96c3de47dd048454d16f75b7a291d9594d9af74",
+    "cove-sprites.png": "44e37849f354e0b98df429395892d3c3a882fa2026b92b7a8b8c9c160009e3bd",
+    "cove.atlas.json": "b07d9d2cfed7e54d6b4e471463e882479a0c5617ded7b2986a06c4c0f5afb631"
+  },
+  "tile_frames": 78,
+  "sprite_frames": 15,
+  "transactions": [
+    {
+      "description": "Add Planar Sample controller and input",
+      "id": "01M4S1CXX7TRFQN59M4ECBAT0B",
+      "commands": 3
+    },
+    {
+      "description": "Lay out Pearl Cove terrain and camera",
+      "id": "01M4S1CXYDMMD69P704JQRZMAP",
+      "commands": 2
+    },
+    {
+      "description": "Place Pearl Cove actors and controller",
+      "id": "01M4S1CXYNSEMDM0GEQ81X34CS",
+      "commands": 13
+    },
+    {
+      "description": "Add Pearl Cove HUD and localized strings",
+      "id": "01M4S1CXZ29W6HDDTSXYDT2GXD",
+      "commands": 6
+    }
+  ],
+  "history": [
+    {
+      "actor": {
+        "actor": "texture",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+      },
+      "commands": 1,
+      "description": "Import cove.atlas",
+      "id": "01M4S1CXVA9Q5BY9JX1TX1G79Z"
+    },
+    {
+      "actor": {
+        "actor": "font",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+      },
+      "commands": 1,
+      "description": "Import Inter-Regular",
+      "id": "01M4S1CXWBMZ6A9F22A12C96BX"
+    },
+    {
+      "actor": {
+        "actor": "editor",
+        "conversation_id": null,
+        "model": null,
+        "origin": "user"
+      },
+      "commands": 3,
+      "description": "Add Planar Sample controller and input",
+      "id": "01M4S1CXX7TRFQN59M4ECBAT0B"
+    },
+    {
+      "actor": {
+        "actor": "editor",
+        "conversation_id": null,
+        "model": null,
+        "origin": "user"
+      },
+      "commands": 2,
+      "description": "Lay out Pearl Cove terrain and camera",
+      "id": "01M4S1CXYDMMD69P704JQRZMAP"
+    },
+    {
+      "actor": {
+        "actor": "editor",
+        "conversation_id": null,
+        "model": null,
+        "origin": "user"
+      },
+      "commands": 13,
+      "description": "Place Pearl Cove actors and controller",
+      "id": "01M4S1CXYNSEMDM0GEQ81X34CS"
+    },
+    {
+      "actor": {
+        "actor": "editor",
+        "conversation_id": null,
+        "model": null,
+        "origin": "user"
+      },
+      "commands": 6,
+      "description": "Add Pearl Cove HUD and localized strings",
+      "id": "01M4S1CXZ29W6HDDTSXYDT2GXD"
+    }
+  ],
+  "undo_redo_reopen": true,
+  "authored_files": {
+    ".incant-source-transactions/01M4S1CY08P1VV8ENGV5H0CAW4.old-receipt": "67582f2a27cc670afa19c4c0289c2fea62d78fdb9cc3c3b4c43626d47a9fd04c",
+    ".incant-source-transactions/01M4S1CY08P1VV8ENGV5H0CAW4.previous": "7dd5d9965fe25f9f373420b22734755cd79dc3a84c689288f871b9fa2fa81d90",
+    ".incant-source-transactions/01M4S1CY1M19H4JNAMHVKZH9PE.old-receipt": "3608cf06937a634aeaad9ff98984b78846f29cb5e3f3406d97f16ff88814e3ef",
+    ".incant-source-transactions/lock": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".incant-source-transactions/receipt": "03058d1c3e1a89aa0da6f4de3afa00bc8583aed89f0ee82e610d392abccdea5a",
+    "art/art.json": "fde90e354a1c7bece34ecf4522910aaca1515bd2eb5e7d724e17258cc9e9abaa",
+    "art/cove-sprites.png": "44e37849f354e0b98df429395892d3c3a882fa2026b92b7a8b8c9c160009e3bd",
+    "art/cove-tiles.png": "f27c019367042dd278a80853c96c3de47dd048454d16f75b7a291d9594d9af74",
+    "art/cove.atlas.json": "b07d9d2cfed7e54d6b4e471463e882479a0c5617ded7b2986a06c4c0f5afb631",
+    "fonts/Inter-LICENSE": "3c8d13d97ea5eb62868833a377034c6be6a9833e768d32abec2a767a8101e4bc",
+    "fonts/Inter-Regular.ttf": "3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384",
+    "gameplay.ts": "7dd5d9965fe25f9f373420b22734755cd79dc3a84c689288f871b9fa2fa81d90",
+    "planar.journal.jsonl": "b394888a253b93a9ebdef0199716c5f67e1a1fb3474e81346d6a2173ea93b767",
+    "planar.json": "5726c159d42a7b37e059b22c4b05e781a4b34f8e68156b6e4b72fc382c8d87d6"
+  },
+  "scenarios": {
+    "keyboard-win": {
+      "tick": 781,
+      "pickups": 3,
+      "won": 1,
+      "lost": 0,
+      "final_translation": [
+        10.499939918518066,
+        2.6000022888183594
+      ]
+    },
+    "arrows-win": {
+      "tick": 781,
+      "pickups": 3,
+      "won": 1,
+      "lost": 0,
+      "final_translation": [
+        10.499939918518066,
+        2.6000022888183594
+      ]
+    },
+    "gamepad-win": {
+      "tick": 781,
+      "pickups": 3,
+      "won": 1,
+      "lost": 0,
+      "final_translation": [
+        10.499939918518066,
+        2.6000022888183594
+      ]
+    },
+    "dpad-win": {
+      "tick": 781,
+      "pickups": 3,
+      "won": 1,
+      "lost": 0,
+      "final_translation": [
+        10.499939918518066,
+        2.6000022888183594
+      ]
+    },
+    "urchin-loss": {
+      "tick": 201,
+      "pickups": 0,
+      "won": 0,
+      "lost": 1,
+      "final_translation": [
+        13.499893188476562,
+        4.100006103515625
+      ]
+    },
+    "locked-boat": {
+      "tick": 181,
+      "pickups": 0,
+      "won": 0,
+      "lost": 0,
+      "final_translation": [
+        10.49993896484375,
+        2.2999982833862305
+      ]
+    },
+    "shore-and-cliff": {
+      "tick": 221,
+      "pickups": 0,
+      "won": 0,
+      "lost": 0,
+      "final_translation": [
+        6.5,
+        9.700006484985352
+      ]
+    },
+    "route_metres": 37,
+    "route_seconds_at_speed": 13
+  },
+  "play_left_project_unchanged": true
+}

@@ -27,6 +27,18 @@ MUTATIONS = [
     ('pickup rendered as a solid', 'samples/planar/scene.py',
      "'Transform': transform(*at), 'Collider2D': collider(PEARL_RADIUS, True),",
      "'Transform': transform(*at), 'Collider2D': collider(PEARL_RADIUS, False),"),
+    # HUD revision: each of these would ship a wrong or unlocalizable HUD.
+    ('static result labels bound', 'samples/planar/hud.py',
+     "'hud': {'table': TABLE, 'status': STATUS, 'prompt': PROMPT}})",
+     "'hud': {'table': TABLE, 'status': STATUS, 'prompt': PROMPT}, 'results': {}})"),
+    ('a translation missing', 'samples/planar/hud.py',
+     "        'de': 'Von einem Seeigel gestochen',\n", ''),
+    ('non-canonical HUD identity', 'samples/planar/hud.py',
+     "cove.ulid('HD', n)", "cove.ulid('UI', n)"),
+    ('static text in a live label', 'samples/planar/hud.py',
+     "{'content': '', 'fonts'", "{'content': 'Pearls 0 of 3', 'fonts'"),
+    ('unknown message argument', 'samples/planar/hud.py',
+     "'en': 'Pearls {collected} of {total}',", "'en': 'Pearls {count} of {total}',"),
 ]
 
 

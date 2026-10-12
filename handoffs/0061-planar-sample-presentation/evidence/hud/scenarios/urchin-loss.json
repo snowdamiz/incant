@@ -1,0 +1,138 @@
+{
+  "passed": true,
+  "runtime": "native",
+  "script_source_sha256": "70c831383b4271cadb1535397112abc18602b8f973f35918c1688daa5512b281",
+  "script_source_parsing": true,
+  "scene": "01M4S1CXR011CR0TP9K32C5HAS",
+  "tick": 201,
+  "tick_rate": 60,
+  "entity_count": 18,
+  "frames": 160800,
+  "pcm_sha256": "8fd7fe4a0a5691ab3e4eacb1cfeb66428c1914a3cb084c8a0d53dd21846bdb4d",
+  "logs": {
+    "dropped": 0,
+    "entries": [
+      {
+        "level": "info",
+        "message": "planar.lost tick=149 pickups=0",
+        "tick": 149
+      }
+    ]
+  },
+  "observations": {
+    "passed": true,
+    "tick": 201,
+    "tick_rate": 60,
+    "checks": [
+      {
+        "name": "pickup-01PSEN0000000000000000000B",
+        "tick": 201,
+        "expect": {
+          "type": "exists",
+          "entity": "01PSEN0000000000000000000B",
+          "value": true
+        },
+        "passed": true,
+        "actual": true
+      },
+      {
+        "name": "pickup-01PSEN0000000000000000000C",
+        "tick": 201,
+        "expect": {
+          "type": "exists",
+          "entity": "01PSEN0000000000000000000C",
+          "value": true
+        },
+        "passed": true,
+        "actual": true
+      },
+      {
+        "name": "pickup-01PSEN0000000000000000000D",
+        "tick": 201,
+        "expect": {
+          "type": "exists",
+          "entity": "01PSEN0000000000000000000D",
+          "value": true
+        },
+        "passed": true,
+        "actual": true
+      },
+      {
+        "name": "stopped",
+        "tick": 201,
+        "expect": {
+          "type": "vector",
+          "entity": "01PSEN00000000000000000001",
+          "property": "velocity",
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "tolerance": 0.0
+        },
+        "passed": true,
+        "actual": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    ],
+    "entities": {
+      "01PSEN00000000000000000001": {
+        "parent": null,
+        "translation": [
+          13.499893188476562,
+          4.100006103515625,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            13.499893188476562,
+            4.100006103515625,
+            0.0,
+            1.0
+          ]
+        ]
+      }
+    }
+  },
+  "cpu_render_input": true,
+  "gpu_submitted": false,
+  "project_sha256": "5726c159d42a7b37e059b22c4b05e781a4b34f8e68156b6e4b72fc382c8d87d6"
+}

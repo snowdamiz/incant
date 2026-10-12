@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0061-hud/review-2/player/incant_game_player",
+    "--package",
+    "/Users/andreyyurlov/.codex/incant-evidence/0061-hud/review-2/player/data",
+    "--ui-viewport",
+    "640x360",
+    "--ticks",
+    "781",
+    "--input-recording",
+    "/Users/andreyyurlov/.codex/incant-evidence/0061-hud/review-2/build/gamepad-win-input.json",
+    "--output",
+    "/Users/andreyyurlov/.codex/incant-evidence/0061-hud/review-2/player/gamepad-win.pcm"
+  ],
+  "exit": 0,
+  "stdout": "{\"flipbooks\":[{\"completed\":false,\"frame\":2,\"id\":[1,182,93,80,0,0,0,0,0,0,0,0,0,0,0,1],\"playing\":false},{\"completed\":false,\"frame\":1,\"id\":[1,182,93,80,0,0,0,0,0,0,0,0,0,0,0,5],\"playing\":false},{\"completed\":false,\"frame\":0,\"id\":[1,182,93,80,0,0,0,0,0,0,0,0,0,0,0,21],\"playing\":true},{\"completed\":false,\"frame\":0,\"id\":[1,182,93,80,0,0,0,0,0,0,0,0,0,0,0,22],\"playing\":true},{\"completed\":false,\"frame\":0,\"id\":[1,182,93,80,0,0,0,0,0,0,0,0,0,0,0,23],\"playing\":true},{\"completed\":false,\"frame\":1,\"id\":[1,182,93,80,0,0,0,0,0,0,0,0,0,0,0,31],\"playing\":true},{\"completed\":false,\"frame\":3,\"id\":[1,182,93,80,0,0,0,0,0,0,0,0,0,0,0,32],\"playing\":true},{\"completed\":false,\"frame\":1,\"id\":[1,182,93,80,0,0,0,0,0,0,0,0,0,0,0,33],\"playing\":true},{\"completed\":false,\"frame\":3,\"id\":[1,182,93,80,0,0,0,0,0,0,0,0,0,0,0,34],\"playing\":true}],\"frames\":624800,\"logs\":{\"dropped\":0,\"entries\":[{\"level\":\"info\",\"message\":\"planar.pickup 01PSEN0000000000000000000B 1/3\",\"tick\":130},{\"level\":\"info\",\"message\":\"planar.pickup 01PSEN0000000000000000000C 2/3\",\"tick\":430},{\"level\":\"info\",\"message\":\"planar.pickup 01PSEN0000000000000000000D 3/3\",\"tick\":529},{\"level\":\"info\",\"message\":\"planar.won tick=719 pickups=3\",\"tick\":719}]},\"pcm_sha256\":\"e4e5fd98e48750169a99f60cd7a2be2fdd5a3a46bf347efdfbb87133311678ae\",\"render_input\":{\"binding_generation\":3,\"camera\":\"01b65d50000000000000000000000003\",\"camera_position\":[10.0,6.0,20.0],\"decoded_payload_bytes\":637460,\"first_model_position\":null,\"first_sprite_position\":[10.499939918518066,2.6000022888183594,0.0],\"first_text_position\":null,\"gpu_submitted\":false,\"mode\":\"cpu-only\",\"model_count\":0,\"sprite_count\":9,\"text_atlas_bytes\":0,\"text_atlas_nonzero\":0,\"text_atlas_sha256\":null,\"text_count\":0,\"text_font_count\":0,\"text_generation\":0,\"text_glyph_count\":0,\"text_missing_clusters\":0,\"text_rtl_glyphs\":0,\"text_sources\":{},\"tick\":781,\"topology_generation\":3,\"ui\":{\"atlas_sha256\":\"bfe45a573a5dde380119ecb0e63fe3e6cc5a77dcf6ee4ccbb9198cab2b4962a1\",\"focus\":null,\"glyphs\":26,\"sources\":{\"01PSHD00000000000000000002\":\"Sailing home with 3 pearls\",\"01PSHD00000000000000000003\":\"\"},\"values\":{},\"viewport\":[640.0,360.0],\"widgets\":3}},\"sources\":[],\"tick\":781}\n",
+  "stderr": ""
+}

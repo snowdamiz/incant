@@ -1,0 +1,217 @@
+{
+  "format": "incant-input",
+  "version": 1,
+  "tick_rate": 60,
+  "start_tick": 0,
+  "ticks": 781,
+  "frames": [
+    {
+      "tick": 1,
+      "events": [
+        {
+          "type": "gamepad_connected",
+          "id": 0
+        },
+        {
+          "type": "gamepad_axis",
+          "id": 0,
+          "axis": "left_x",
+          "value": 0
+        },
+        {
+          "type": "gamepad_axis",
+          "id": 0,
+          "axis": "left_y",
+          "value": -1
+        }
+      ]
+    },
+    {
+      "tick": 61,
+      "events": [
+        {
+          "type": "gamepad_axis",
+          "id": 0,
+          "axis": "left_x",
+          "value": -1
+        },
+        {
+          "type": "gamepad_axis",
+          "id": 0,
+          "axis": "left_y",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "tick": 121,
+      "events": [
+        {
+          "type": "gamepad_axis",
+          "id": 0,
+          "axis": "left_x",
+          "value": 0
+        },
+        {
+          "type": "gamepad_axis",
+          "id": 0,
+          "axis": "left_y",
+          "value": -1
+        }
+      ]
+    },
+    {
+      "tick": 141,
+      "events": [
+        {
+          "type": "gamepad_axis",
+          "id": 0,
+          "axis": "left_x",
+          "value": 0
+        },
+        {
+          "type": "gamepad_axis",
+          "id": 0,
+          "axis": "left_y",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "tick": 161,
+      "events": [
+        {
+          "type": "gamepad_axis",
+          "id": 0,
+          "axis": "left_x",
+          "value": 1
+        },
+        {
+          "type": "gamepad_axis",
+          "id": 0,
+          "axis": "left_y",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "tick": 361,
+      "events": [
+        {
+          "type": "gamepad_axis",
+          "id": 0,
+          "axis": "left_x",
+          "value": 0
+        },
+        {
+          "type": "gamepad_axis",
+          "id": 0,
+          "axis": "left_y",
+          "value": -1
+        }
+      ]
+    },
+    {
+      "tick": 381,
+      "events": [
+        {
+          "type": "gamepad_axis",
+          "id": 0,
+          "axis": "left_x",
+          "value": 1
+        },
+        {
+          "type": "gamepad_axis",
+          "id": 0,
+          "axis": "left_y",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "tick": 441,
+      "events": [
+        {
+          "type": "gamepad_axis",
+          "id": 0,
+          "axis": "left_x",
+          "value": 1
+        },
+        {
+          "type": "gamepad_axis",
+          "id": 0,
+          "axis": "left_y",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "tick": 461,
+      "events": [
+        {
+          "type": "gamepad_axis",
+          "id": 0,
+          "axis": "left_x",
+          "value": 0
+        },
+        {
+          "type": "gamepad_axis",
+          "id": 0,
+          "axis": "left_y",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "tick": 541,
+      "events": [
+        {
+          "type": "gamepad_axis",
+          "id": 0,
+          "axis": "left_x",
+          "value": -1
+        },
+        {
+          "type": "gamepad_axis",
+          "id": 0,
+          "axis": "left_y",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "tick": 681,
+      "events": [
+        {
+          "type": "gamepad_axis",
+          "id": 0,
+          "axis": "left_x",
+          "value": 0
+        },
+        {
+          "type": "gamepad_axis",
+          "id": 0,
+          "axis": "left_y",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "tick": 741,
+      "events": [
+        {
+          "type": "gamepad_axis",
+          "id": 0,
+          "axis": "left_x",
+          "value": 0
+        },
+        {
+          "type": "gamepad_axis",
+          "id": 0,
+          "axis": "left_y",
+          "value": 0
+        }
+      ]
+    }
+  ]
+}

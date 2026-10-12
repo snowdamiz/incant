@@ -1,251 +1,226 @@
-# 0061 result: Pearl Cove, the playable 2D sample presentation
+# 0061 result: Pearl Cove with a live, localized engine HUD
 
-## Status
+## Status (priority revision, 2026-10-12)
 
-- **Offscreen scope: complete.** Original art, the builder, the presentation
-  guide and offscreen review through Incant's actual renderer are done. The
-  review covered the authoring renderer and the native retained runtime renderer.
-- **Native-window review: pending.** 0060 still held the desktop when this work
-  was ready (`~/.codex/incant-evidence/0060/released` was absent at 20:45Z and
-  0060 was logging bursts). I opened no window and captured no screen. The
-  precise pending item is below.
-- No feature, device or phase gate is approved by this handoff.
+- **HUD revision: complete for offscreen scope.** Pearl Cove now has an actual
+  engine HUD: an imported font, UI nodes, a localized string table and the
+  controller's presentation bindings. It was verified by:
+  - seven native-play scenarios;
+  - offscreen GPU renders of live states from the embedded program, in five
+    locale variants and three window shapes;
+  - the ordinary player's CPU UI host.
+- **Native-window review: still pending.**
+  `~/.codex/incant-evidence/0060/released` was absent at 21:49Z. I opened no
+  window and captured nothing. The pending item is below.
+- **Restart: open.** The prompt is deliberately blank.
+- No feature, device or phase gate is approved.
 
-Model: **Claude Opus 5.5 (`claude-opus-5-5`)**. Thinking effort: **max**. This
-was one ACP handoff session; the root holds the ACP-side verification record.
-Brief applied: `handoffs/0061-planar-sample-presentation/brief.md`, SHA-256
-`e30ae96ddd1cec17dea4b5c6fb7be97abafc60db23940ce9cdceb4474fdadeed`. It had no
-appended revisions during the session, and it remains unchanged and uncommitted
+Model: **Claude Opus 5.5 (`claude-opus-5-5`)**. Thinking effort: **max**. The
+root holds the ACP-side verification record.
+
+Brief applied: SHA-256
+`95797d9e7f20481487dc1c3ec9382f86452a4f08cc8e5856a2d992ea4f67f274`, including
+the "Priority revision — actual HUD and current runtime". The brief is unchanged
 by me.
 
-## What was built
+The first pass is preserved verbatim in `result-first-pass.md`, with its
+evidence in `evidence/` and `screenshots/`. This revision's outputs are in
+`evidence/hud/` and `screenshots/hud/`.
 
-A small low-tide cove in 16 px pixel art. A beachcomber in a red raincoat
-collects three pearls and reaches the moored rowboat. Sea urchins sting. The
-visual rules are:
+## Revision feedback applied
 
-- Walkable sand has the highest values. Solid moss-topped basalt, stone
-  boulders, sea and the tide pool are darker and outlined.
-- Only pearls are white, only urchins are dark purple and spiky, and only the
-  player is saturated red. The boat shares that red as the goal.
-- Every color stays in the tone map's identity range (≤ 231 per channel), so
-  rendered pixels equal the palette.
-- The camera is a fixed `pixel_perfect` 320 × 180 at 16 px/m, integer-scaled
-  and letterboxed.
-
-Iteration was driven by actual renders: `screenshots/14-…` is the first engine
-render and `15-…` a mid-point. I fixed these defects:
-
-- a bright lawn that out-valued the beach;
-- cliff faces that read as masonry, then as glyphs;
-- boulders that looked like concrete blocks;
-- a square "swimming pool";
-- a pier that read as a ladder;
-- a clam that read as a jar;
-- the editor placeholder cube on the controller;
-- a moss motif repeating on the 16 px grid;
-- a pearl twinkle hidden on white.
-
-| Path | Purpose |
+| Revision item | Done |
 |---|---|
-| `samples/planar/art/` | `palette`, `image` (canvas, PNG writer, seamless noise), `terrain` (neighbour-aware autotiles), `sprites`, `cove` (map, IDs, cell assignment), `build` (sheets and atlas descriptor) |
-| `samples/planar/scene.py` | Public import plus three RPC command transactions; Undo/Redo, save, journal reopen, validate; `--play` |
-| `samples/planar/playtest.py` | Seven native-play scenarios on this layout |
-| `samples/planar/PRESENTATION.md` | Direction, layers, sprites, IDs, controls, integration contract, budget |
-| `samples/planar/README.md` | One paragraph pointing at the presentation; open items stay listed |
-| `tools/tests/test_planar_presentation.py` | Identities, art bounds and tone-map range, layout and route clearance, controller contract |
-| `handoffs/0061-…/tools/` | `guard.py` (lease), `package.py`, `review.py`, `collect.py`, `mutate.py`, `pngtool.py` |
-| `handoffs/0061-…/screenshots/`, `evidence/` | Outputs below |
+| Build on the original art and level with a restrained, polished HUD | One centred status line. The top two cliff rows became a quiet moss variant as its ground. Art and level are otherwise unchanged. |
+| Live progress and clear terminal states | Live: Pearls k of 3, then the ready line. Outcome sentence, plus the bound pose (cheering or stung) and boat-lantern frames. |
+| No static labels as live state; no baked text | Both labels are authored blank. All text comes from `setUiText` with engine shaping and Inter. |
+| Imported fonts, UI documents, atomic public commands | Inter (SIL OFL 1.1) is copied with its license and imported with `incant_headless import`. Transaction 4 adds the string table, locale, UI nodes and controller bindings atomically. |
+| Optional props, distinct canonical ULIDs | `flipbooks {player, boat}` and `hud {table, status, prompt}`. `results` is deliberately unbound (see below). |
+| Localized StringTable entries | en, es, fr, de with ICU plurals. Pseudo-localization verified. |
+| Blank prompt; report restart as open | Prompt is blank in every capture; restart is listed as open. |
+| Fresh headless; fresh lease; at most two jobs | Headless rebuilt from `44060bc3`. New lease in `~/.codex/incant-evidence/0061-hud`; the old guard still refuses. |
+| Exercise keyboard/gamepad win, loss, locked exit with the HUD; offscreen renders | All exercised, with live HUD text asserted at every capture (below). |
+| Do not edit `gameplay.ts`, `verify.py`, `export_verify.py`, `tsconfig.json`, `presentation.py` | Untouched. `presentation.py` does not exist in this branch. |
 
-`gameplay.ts`, `verify.py`, `export_verify.py`, `tsconfig.json`, CI, engine,
-ABI, save, solver and compiler code are untouched.
+**Why `results` is unbound.** That binding only reparents the result labels;
+the controller never writes their text. Any authored headline would stay
+English in es, fr and de and in pseudo mode, and it would repeat the localized
+status sentence. The status line carries the outcome. To add a terminal
+headline, have the controller localize the result labels on each locale
+refresh, as `samples/core/gameplay.ts` does, then bind `results`.
 
-## Implementation contract for Astra
+## Changed paths
 
-- **Authoring.** `scene.py` creates everything through `incant_headless import`
-  and RPC `command.execute`. The history is `Import cove.atlas` (import origin),
-  then three `editor` transactions: controller and input (3 commands), terrain
-  and camera (2), actors and controller (13).
-- **IDs.** IDs are readable canonical ULIDs (`01PSEN…` entities, `01PSTM…`
-  layers, `01PSSC…` script). Atlas frames are `01PSFR` plus a hash of the frame
-  name, so they stay stable. The importer assigns the texture asset ID; each
-  build records it.
-- **Controller props.** Only the source's props are used: `player`, `exit`,
-  `pickups` (3), `hazards` (3) and `speed: 3`. There is no camera prop, by design.
-- **Roles.** The player is a dynamic, zero-gravity body with `Collider2D` r 0.30
-  and `Velocity`. Pearl sensors are r 0.35, urchin sensors r 0.40, and the boat
-  exit sensor r 0.40, placed on the pier's seaward edge. All roles are root,
-  unit scale, and pearls have no children. The water and rock tile layers are
-  solid; the pier layer is not.
-- **Input.** `move` is axis2: WASD, the arrow keys, the left stick with
-  `invert_y` (up is positive) and the d-pad.
-- **State frames.** These are ready now, with no engine change. The player has
-  a paused flipbook: 0 default, 1 stung, 2 cheering. The boat has one: 0
-  lantern dark, 1 lit. Seek them with `context.commands.controlFlipbook(id,
-  'seek', n)` on these transitions: all pearls collected → boat 1; won → player
-  2; lost → player 1. Frame 0 is exactly what the current controller shows.
-- **HUD.** It is not authored. A scene with UI nodes cannot run in headless
-  native-play, and no script API mutates widgets. PRESENTATION.md specifies
-  widget IDs `01PSUI…01`–`04`, string table `01PSST…01`, five `en` strings and
-  the exact transition table, for binding once a bounded text-binding command
-  exists.
-- **Restart.** Add a `restart` button action (KeyR, Enter, gamepad Start and
-  South), accepted only when won or lost. It needs a session reset that
-  rebuilds the world from the cooked scene at the next sync point. The reset
-  clears `context.state`, respawns pearls and resets the flipbooks.
+| Path | Change |
+|---|---|
+| `samples/planar/hud.py` | New. UI document (root, status, blank prompt) and the four-locale string table. |
+| `samples/planar/scene.py` | Font copy and import, and transaction 4 (HUD). Undo/Redo across all four transactions. |
+| `samples/planar/playtest.py` | Native-play now passes `--ui-viewport 640x360`. |
+| `samples/planar/art/terrain.py`, `art/cove.py` | Quiet moss variant for the top two rows. |
+| `samples/planar/PRESENTATION.md`, `README.md` | HUD design, IDs, strings, results and restart decisions, final budget. |
+| `tools/tests/test_planar_presentation.py` | HUD test added. HUD IDs are covered by the canonical-ID test, which would have caught the invalid `UI` kind code. |
+| `crates/incant_game_player/examples/hud_frames.rs` | New review example. It runs the package's build-embedded program with the GPU UI consumer offscreen and writes frames plus engine HUD text. It is feature-gated like `macos_text_retirement.rs`, with no manifest or engine change. |
+| `handoffs/0061-…/tools/` | `lease.py`, `hud_review.py`, `collect_hud.py` added; `mutate.py` extended. `guard.py`, `review.py` and `collect.py` stay as first-pass history. |
+| `handoffs/0061-…/result-first-pass.md` | The first pass's `result.md`, renamed unchanged. |
 
 ## Commands and results
 
-Every build and run went through `handoffs/0061-…/tools/guard.py`. The guard
-used a packet lease (`evidence/lease.json`), `./tools/cargo --locked --profile
-ci -j 2`, Rust 1.99.0 and `CARGO_TARGET_DIR=/Users/andreyyurlov/.codex/incant-core-presentation-target`.
-`evidence/ledger.jsonl` holds 105 entries with each argv, exit status and input
-hashes.
+Lease: `~/.codex/incant-evidence/0061-hud/lease.json`, started
+2026-10-12T21:29:49Z with a 12-hour expiry, released **21:50:00Z**. After
+release `check`, `cargo` and `run` refused (exit 3). The ledger holds 89
+entries (`evidence/hud/ledger.jsonl`). Every cargo call used `./tools/cargo …
+--locked --profile ci -j 2`, Rust 1.99.0 and the assigned target.
 
-| Step | Command | Result |
-|---|---|---|
-| Headless build | `guard.py cargo build -p incant_headless --bin incant_headless` | exit 0, 1m26s; `incant_headless` `e60b5132…0f909bba` |
-| Frames tool | `guard.py cargo build -p incant_render --example native_frames` | exit 0, 2m41s; `8786a91d…3b2dbc16` |
-| Review player | `handoffs/0061-…/tools/package.py` (`-p incant_game_player`, features `project,native-window`, `INCANT_NATIVE_PROJECT`) | exit 0, first build 3m12s; startup check passed; final player `569c6973…b96926d9` |
-| Full review | `python3 -B handoffs/0061-…/tools/review.py artifacts/0061/review-5` | exit 0; collected by `collect.py` |
-| Unit tests | `python3 -B -m unittest tools/tests/test_planar_presentation.py` | 4 tests OK (also on Python 3.13; syntax parses for 3.9) |
-| Mutations | `python3 -B handoffs/0061-…/tools/mutate.py` | 5 of 5 detected (urchin on the route, pearl in a boulder, a color above 231, player gravity, solid pickup); unmutated suite passes; every file restored byte-exact |
-| Tool suite | `python3 -B -m unittest discover -s tools/tests` | 249 tests OK, 4 skipped |
+| Step | Result |
+|---|---|
+| `lease.py cargo build -p incant_headless --bin incant_headless` | Exit 0 in 1m48s. `incant_headless` `614fe208…1707e7a0`, from HEAD `44060bc3`. |
+| `lease.py cargo build -p incant_game_player --example hud_frames --features render-gpu` | Compile check exit 0, 3m56s. |
+| `rustfmt --edition 2024 --check` on the example | Initial run found formatting diffs; formatted; final check exit 0. |
+| `lease.py cargo clippy … --example hud_frames --features render-gpu -- -D warnings`, and without features | Both exit 0. |
+| `python3 -B handoffs/0061-…/tools/hud_review.py ~/.codex/incant-evidence/0061-hud/review-2` | Exit 0. Details below. |
+| `python3 -B -m unittest tools/tests/test_planar_presentation.py` | 5 tests OK, also on Python 3.13. Syntax parses for 3.9. |
+| `python3 -B handoffs/0061-…/tools/mutate.py` | 10 of 10 detected. New HUD mutations: static `results` bound, a translation missing, non-canonical HUD ID, static text in a live label, unknown message argument. Unmutated suite passes; files restored byte-exact. |
+| `python3 -B -m unittest discover -s tools/tests` | 253 tests OK, 4 skipped. |
 
-Inside `review.py`, run on HEAD `2b6eabc4`:
+Inside `review-2`, every child was lease-checked:
 
-- **`scene.py --play`.** The import, three transactions, three undos (back to
-  the initial project, with no `gameplay.ts` on disk) and three redos all match.
-  Save, journal reopen (identical `project.read`) and `validate` (valid) pass.
-  Seven scenarios pass:
+- **`scene.py --play`.** History: two imports (atlas, Inter), then four editor
+  transactions with 3, 2, 13 and 6 commands. Undo×4, redo×4, save, journal
+  reopen and `validate` pass. Seven scenarios run with the HUD bound and
+  `--ui-viewport`:
 
   | Scenario | Ticks | Result |
   |---|---|---|
-  | keyboard, arrows, left stick and d-pad wins | 781 each | pearls A, B, C in order; one win; stopped at (10.5, 2.6); logs, observations, PCM and entity count identical |
-  | urchin loss | 201 | lost at (13.5, 4.1) |
-  | locked boat | 181 | no win at (10.5, 2.3) |
-  | shore then cliff | 221 | stopped at (6.5, 9.7) |
+  | keyboard, arrows, left stick and d-pad wins | 781 each | identical logs, observations and PCM |
+  | urchin loss | 201 | lost |
+  | locked boat | 181 | no win |
+  | shore then cliff | 221 | stopped |
 
-  Authored file hashes are identical before and after Play
-  (`play_left_project_unchanged: true`).
-- **Renders.** `incant_headless screenshot` at 320×180, 1280×720, 1920×1080,
-  1280×960 and 1920×887 on adapter `Apple M5 Pro`. Geometry: 1 tilemap, 455
-  tile cells, 12 sprite entities, 0 diagnostic entities.
-- **Parity.** Authoring 960×540 against the native retained frame at tick 0:
-  **0 of 518,400 pixels differ**.
-- **Native sequence.** `native_frames` captured 32 ticks of flipbook motion and
-  hook seeks at ticks 1–2, which selected player frame 1, then player 2 and
-  boat 1 (`evidence/native/hooks-report.json`).
-- **Observed state.** A truncated keyboard-win run asserted pearls A and B
-  collected and C present at tick 450. The player was at (16.95, 8.5).
+  Play left the authored files unchanged.
+- **Locale variants.** es, fr, de and pseudo are scratch copies changed by one
+  public `set_locale` transaction each. For each variant:
+  - `hud_frames` was built with `INCANT_NATIVE_PROJECT=<variant>`;
+  - cooked data was packaged by `tools/native_package.data_package` (663,958 B);
+  - real replays were rendered on Metal, Apple M5 Pro.
+- **Assertions at every capture (28 in total).** The engine UI owner's status
+  text equalled the expected text. The expectation is computed independently
+  from the message patterns and the engine's pseudo mapping. The prompt was
+  blank. Beachcomber and boat flipbook frames matched the state table. There
+  were 0 missing glyphs.
+- **Gamepad.** The gamepad win's final frame is byte-identical to the keyboard
+  win's (RGBA SHA-256).
+- **Determinism.** All 28 captures are bit-identical to the earlier full run
+  `review-1`. That run was an independent build with different
+  importer-assigned asset IDs and a pre-format example binary.
+- **Ordinary player, CPU UI host.** The ci project player (`6056511b…`,
+  features `project,native-window`) ran with `--package … --ui-viewport 640x360`.
+  Its `render_input.ui.sources` status was:
+  - keyboard and gamepad win: "Sailing home with 3 pearls";
+  - loss: "Stung by a sea urchin";
+  - locked boat: "Pearls 0 of 3".
 
-Two development runs failed and were fixed, both recorded in the ledger. The
-first `scene.py` assumed the importer keeps the descriptor's atlas ID; it
-assigns its own. `review-1` requested a 2532 px screenshot; the tool's limit is
-1920 × 1080.
+Two development runs failed and were fixed; both are in the ledger. The first
+HUD authoring used kind code `UI` in the IDs; Crockford base32 excludes I and
+U, so validation refused it. The first-pass guide had published the same
+invalid IDs; it is now corrected. The other failure was the initial rustfmt
+check.
 
-Not run: `tsc` (`gameplay.ts` is unchanged) and `cargo fmt`/`clippy` (no Rust
-changes). No device, window, capture or performance measurement was made.
+## Screenshots (`screenshots/hud/`)
 
-## Screenshots
+All are actual Incant output: the composed game, NativeRenderHost and
+GpuRenderConsumer with its UI layer, offscreen on Metal (Apple M5 Pro), running
+the package's embedded program on real replays.
 
-All are actual Incant renderer output on adapter Apple M5 Pro, offscreen.
-"Authoring" means `incant_headless screenshot`; "native" means the retained
-native runtime path (`native_frames`, cooked package data).
-
-| File | Content | SHA-256 |
+| File | State | SHA-256 |
 |---|---|---|
-| `screenshots/01-cove-1280x720.png` | Authoring, 4×, initial state | `8e92b4e9…32b4db` |
-| `screenshots/02-cove-logical-320x180.png` | Authoring, 1× logical frame | `377f7d97…5cda96` |
-| `screenshots/03-window-4x3-1280x960.png` | 640×480 pt window shape: 4× with backdrop bars | `350ab4ca…fa5ed8` |
-| `screenshots/04-phone-landscape-aspect-1920x887.png` | iPhone 13 landscape aspect at the tool's cap (the device itself computes 6×) | `4777408a…229909` |
-| `screenshots/05-native-runtime-tick0-960x540.png` | Native runtime frame, identical to authoring | `dbccedc6…aa631a` |
-| `screenshots/06-native-hook-stung-960x540.png` | Native: player flipbook sought to "stung" | `507cd015…9b0f8d` |
-| `screenshots/07-native-hook-cheer-lantern-960x540.png` | Native: "cheering" plus the boat lantern lit | `c8cc89cd…c60d33` |
-| `screenshots/08-state-two-pearls-1280x720.png` | Observed tick-450 state | `b31e5080…5e3811` |
-| `screenshots/09-state-won-with-hook-frames-1280x720.png` | Observed win position with hook frames | `bf2924fb…858d0a` |
-| `screenshots/10-state-lost-with-hook-frame-1280x720.png` | Observed loss position with the hook frame | `2d6f877e…ee412a` |
-| `screenshots/11-native-motion-pearl-urchin-ticks.png` | Native ticks 0–62: pearl twinkle and urchin sway | `2cdb9f76…c25b70` |
-| `screenshots/12-art-sprites-x6.png`, `13-art-tiles-x3.png` | Source sheets (checkerboard means transparent) | `fdd23638…ecb3fe`, `38698ee5…112dd8` |
-| `screenshots/14-iteration-v1-first-engine-render.png`, `15-iteration-v4-before-moss-and-sparkle-fixes.png` | Earlier iterations, for comparison | `01d800e9…c98bf5`, `69248ba5…9dd082` |
+| `01-en-start-1280x720.png` | tick 2, "Pearls 0 of 3" | `d725aae2…cb6adb` |
+| `02-en-one-pearl-1280x720.png` | tick 150, first pearl gone | `16c07b1a…000ad0` |
+| `03-en-two-pearls-1280x720.png` | tick 450 | `e9733e97…e92284` |
+| `04-en-ready-1280x720.png` | tick 560, ready line, lantern lit | `95b04e58…679bf4` |
+| `05-en-won-1280x720.png` | tick 781, cheering on the pier | `21c1400e…dfeec6` |
+| `06-en-lost-1280x720.png` | tick 201, stung | `fcafdb25…329a7a` |
+| `07-en-locked-boat-1280x720.png` | tick 181, at the boat with no pearls | `130faf3f…5e9bac` |
+| `08`, `09-en-window-4x3-…-1280x960.png` | 640×480 pt window shape; status in the letterbox bar | `7c74bdbe…0422c8`, `e21a8b1a…fafc84` |
+| `10-en-phone-landscape-won-2532x1170.png` | iPhone 13 landscape pixel size; scene 6× | `5d87e3a5…f6e9d6` |
+| `11-es-won`, `12-fr-ready`, `13-de-lost`, `14-pseudo-ready` | localized terminal and ready lines | `5fdabe2f…341b36`, `0703ea00…189275`, `55376eca…cd93b9`, `b762be36…1604a8` |
+| `15-status-line-all-locales-and-states.png` | top 64 rows of 20 real captures (5 locales × 4 states) | `7525197e…4f35a9` |
+| `16-iteration-18pt-line-over-cliff-faces.png`, `17-iteration-before-quiet-moss.png` | rejected iterations | `33964b2b…4a6851`, `45cdaee0…73ff8c` |
 
-Screenshots 08–10 are authoring stills of observed states, reconstructed on
-scratch copies through public RPC commands. A flipbook's first frame overrides
-the sprite region, so those copies drop the flipbook to select a frame. They
-are not live frames, and the hooks are not implemented in the controller.
+## Rendered critique
 
-## Measured budget (desktop, not reference-phone)
+Fixed during the revision:
+- An 18 pt status at a 14 pt inset dipped onto the cliff faces at both ends
+  for long strings (screenshot 16). Now it is 16 pt on a 20 pt line at a 6 pt
+  inset, inside the 28 pt band above the faces at 16:9.
+- Light moss tufts behind thin strokes added noise (screenshot 17). The top two
+  rows now use quiet moss.
 
-- One 200 × 144 RGBA8 sRGB atlas page with 8 mips and 88 frames (73 tile, 15
-  sprite), 153,972 B KTX2 per color role.
-- Source sheets: 3,317 B and 997 B PNG.
-- 455 tile cells in 5 layers, 12 sprite entities, 79 flipbook frames.
-- `world.scene` 14,136 B; 331,063 B of package data in total.
+Accepted:
+- **Landscape phones.** The line straddles the 15 pt letterbox bar and the
+  moss. Both are dark, so it stays legible. UI layout cannot see the camera's
+  letterbox rect, and no single inset fits both full-bleed 16:9 and phone bars.
+- **Font.** The whole Inter face, 310 KB cooked, is the largest asset; the
+  engine has no subsetting step.
+
+## Budget (desktop, not reference-phone)
+
+- One 126 × 244 RGBA8 sRGB atlas page with 8 mips and 93 frames (78 tile, 15
+  sprite), 164,020 B KTX2 per color role.
+- Inter cooked to 310,300 B.
+- 455 tile cells, 12 sprite entities, 79 flipbook frames and 3 UI nodes.
+- 10 to 28 glyph quads and 2.6 to 6.0 KB of UI GPU data per frame.
+- `world.scene` 15,854 B; 663,958 B of package data in total.
 
 ## Leases, processes and cleanup
 
-- **Lease.** `artifacts/0061/lease.json` (copy in `evidence/lease.json`) ran
-  from 2026-10-12T20:05:13Z with a 12-hour expiry. It was released at
-  **20:47:05Z** (`evidence/release.json`). After release the guard refused
-  `check`, `cargo` and `run` (exit 3).
-- **Target.** The warm target remains as cache; nothing was deleted from it. My
-  build replaced its `ci/incant_headless`. The previous binary's hash,
-  `d1855c6a…82fa5e`, was built from the parent checkout and is in
-  `evidence/warm-binary-before.txt`.
+- **Lease.** Released as above. The first-pass lease stays released, and its
+  guard still refuses.
+- **Processes.** No owned process remained. Every child ran to completion, and
+  `pgrep` showed the target idle before release.
+- **Target.** Its `ci/incant_headless`, examples and player were replaced by
+  this branch's builds. The earlier headless binary was `e60b5132…0f909bba`
+  (`evidence/hud/headless-before.txt`). Nothing else in the target was
+  deleted.
+- **Scratch.** Iteration builds under `~/.codex/incant-evidence/0061-hud`
+  were pruned. `review-1` (determinism comparison) and `review-2` (final,
+  including its packages) remain.
 - **No capture lease.** No window was opened and nothing was captured.
-- **Processes.** No owned process remained. Every child ran to completion
-  under `subprocess.run`, and `pgrep` showed the target idle before release.
-- **Scratch.** The worktree-root `node_modules` link I created for the
-  TypeScript cook (lock hashes verified identical first) is removed. Scratch
-  stays in the ignored `artifacts/0061/`, including the `review-5` window
-  package for the pending item.
+- **`node_modules`.** The worktree-root `node_modules` directory was created
+  by the integration step at 17:11 local, not by me. I used it read-only and
+  left it in place.
+- **`__pycache__`.** Directories created by my test runs were removed.
 
 ## Pending native-review item
 
 When `~/.codex/incant-evidence/0060/released` exists:
 
-1. Acquire a fresh packet lease and capture lease; the old guard refuses by design.
-2. Check that the session is unlocked and has had at least 20 s of HID idle.
-   Record the frontmost app.
-3. Rebuild the package with `python3 -B handoffs/0061-…/tools/package.py
-   <scene-output>/project/planar.json <new> --camera 01PSEN00000000000000000003`.
-4. Launch `incant_game_player --package <new>/player/data --window` as a
-   supervised child.
-5. In short focused bursts, drive the `playtest.WIN` route with key events.
-   Take window-only captures (`screencapture -l <window>`) at:
-   - startup;
-   - after the west pearl;
-   - the east alcove (two pearls gone);
-   - the boat.
-6. Resize to a 16:9 and a 4:3 frame to confirm integer scaling and letterbox
-   bars.
-7. Close through the AX close button to get the run report. Restore focus,
-   reap, and release both leases.
+1. Take a fresh lease and capture lease.
+2. Check the session is unlocked and has had at least 20 s of HID idle.
+3. Build `--bin incant_game_player --features project,native-window` with
+   `INCANT_NATIVE_PROJECT` set to the authored project; `hud_review.py`'s
+   `player_cpu` step does this already.
+4. Launch `incant_game_player --package data --window` as a supervised child.
+5. Drive the `playtest.WIN` route in short focused bursts. Take window-only
+   captures at start, one pearl, ready, won and loss, then at a 4:3 size.
+6. Close through the AX close button, restore focus, and reap everything.
 
-Acceptance means:
-- pixels match screenshots 01, 03 and 08 at equal scale, allowing for Display
-  P3 capture tagging;
-- flipbooks animate;
-- the player stops at rock and shore;
-- the win stops the player at the pier end.
+Acceptance means the window's HUD and scene match screenshots 01–09 at equal
+scale, allowing for Display P3 capture tagging and the window's own UI
+viewport.
 
 ## Remaining gates and limitations
 
 - Native-window acceptance, above, is pending.
-- The HUD, state-frame seeks and restart need Astra's controller and engine
-  hooks. Until then the game has no on-screen text, and a win or loss is shown
-  only by the player stopping.
-- Results are offscreen on a local Mac. Device and performance gates (iPhone 13,
-  Pixel 6, M1 Air, Windows laptop) are untouched. The review player is
-  ci-profile, not the audited shipping export, which Astra runs separately.
-- Phone scales are computed from `PixelGrid::fit`, not rendered at device size.
-  Portrait phones letterbox to 3×.
-- There is no audio. The follow camera is unused by design. Physics save/load
-  is not claimed.
-
-## Open questions
-
-1. Should the HUD bind through a native `setUiText`-style command, or through
-   declarative UiText-to-string-table bindings?
-2. Should restart be a scene-level host reset (my preference) or a
-   script-level respawn API?
+- **Restart** is not implemented: the prompt stays blank and no control is
+  advertised. It needs a `restart` action (KeyR, Enter, gamepad Start and
+  South), accepted only when won or lost, plus a session reset that rebuilds
+  the world from the cooked scene, clears `context.state`, respawns pearls and
+  resets the flipbooks.
+- The `results` terminal headline needs controller-side localization before it
+  can be bound.
+- Everything here is local macOS offscreen evidence. There is no
+  reference-device, performance or phone claim. The review builds are
+  ci-profile, not the audited shipping export, which is Astra's.
+- The `hud_frames` example is a review helper, not a shipped surface; Wasm HUD
+  parity is the engine's open item.
+- There is no audio. Physics save/load is not claimed.

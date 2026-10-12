@@ -1,0 +1,3 @@
+    Checking wgpu v29.0.4
+    Checking incant_render_gpu_host v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-rust-sdk/incant/.worktrees/0061-planar-sample-presentation/crates/incant_render_gpu_host)
+    Finished `ci` profile [optimized] target(s) in 32.66s

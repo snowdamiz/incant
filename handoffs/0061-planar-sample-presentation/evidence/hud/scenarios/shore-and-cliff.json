@@ -1,0 +1,111 @@
+{
+  "passed": true,
+  "runtime": "native",
+  "script_source_sha256": "70c831383b4271cadb1535397112abc18602b8f973f35918c1688daa5512b281",
+  "script_source_parsing": true,
+  "scene": "01M4S1CXR011CR0TP9K32C5HAS",
+  "tick": 221,
+  "tick_rate": 60,
+  "entity_count": 18,
+  "frames": 176800,
+  "pcm_sha256": "8bfbb9fc38065ae388c978b226588588899e20a3c0c5f636a6a6afdac72e4ebb",
+  "logs": {
+    "dropped": 0,
+    "entries": []
+  },
+  "observations": {
+    "passed": true,
+    "tick": 221,
+    "tick_rate": 60,
+    "checks": [
+      {
+        "name": "pickup-01PSEN0000000000000000000B",
+        "tick": 221,
+        "expect": {
+          "type": "exists",
+          "entity": "01PSEN0000000000000000000B",
+          "value": true
+        },
+        "passed": true,
+        "actual": true
+      },
+      {
+        "name": "pickup-01PSEN0000000000000000000C",
+        "tick": 221,
+        "expect": {
+          "type": "exists",
+          "entity": "01PSEN0000000000000000000C",
+          "value": true
+        },
+        "passed": true,
+        "actual": true
+      },
+      {
+        "name": "pickup-01PSEN0000000000000000000D",
+        "tick": 221,
+        "expect": {
+          "type": "exists",
+          "entity": "01PSEN0000000000000000000D",
+          "value": true
+        },
+        "passed": true,
+        "actual": true
+      }
+    ],
+    "entities": {
+      "01PSEN00000000000000000001": {
+        "parent": null,
+        "translation": [
+          6.5,
+          9.700006484985352,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            6.5,
+            9.700006484985352,
+            0.0,
+            1.0
+          ]
+        ]
+      }
+    }
+  },
+  "cpu_render_input": true,
+  "gpu_submitted": false,
+  "project_sha256": "5726c159d42a7b37e059b22c4b05e781a4b34f8e68156b6e4b72fc382c8d87d6"
+}

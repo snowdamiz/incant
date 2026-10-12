@@ -1,0 +1,51 @@
+Diff in /Users/andreyyurlov/.codex/worktrees/native-rust-sdk/incant/.worktrees/0061-planar-sample-presentation/crates/incant_game_player/examples/hud_frames.rs:14:
+     use incant_input::{InputActions, InputReplay};
+     use incant_render::{Renderer, RetainedTarget, wgpu};
+     use incant_render_game::{NativeRenderHost, NativeRenderSettings, UiSettings};
+-    use incant_render_gpu_host::{GpuRenderConsumer, GpuRenderSettings, RenderFrame, TargetProvider};
++    use incant_render_gpu_host::{
++        GpuRenderConsumer, GpuRenderSettings, RenderFrame, TargetProvider,
++    };
+     use incant_runtime::{CookedScene, StableId};
+     use serde_json::json;
+     use std::{io::Read, path::Path, sync::Arc, time::Duration};
+Diff in /Users/andreyyurlov/.codex/worktrees/native-rust-sdk/incant/.worktrees/0061-planar-sample-presentation/crates/incant_game_player/examples/hud_frames.rs:121:
+             .widgets()
+             .iter()
+             .filter_map(|w| {
+-                w.node
+-                    .kind
+-                    .text()
+-                    .map(|t| (hex(w.id), json!({"text": t.content.as_str(), "parent": w.parent.map(hex)})))
++                w.node.kind.text().map(|t| {
++                    (
++                        hex(w.id),
++                        json!({"text": t.content.as_str(), "parent": w.parent.map(hex)}),
++                    )
++                })
+             })
+             .collect();
+         let stats = host.consumer().ui_stats().ok_or("UI stats")?;
+Diff in /Users/andreyyurlov/.codex/worktrees/native-rust-sdk/incant/.worktrees/0061-planar-sample-presentation/crates/incant_game_player/examples/hud_frames.rs:131:
+-        Ok(json!({"labels": texts, "widgets": stats.widgets, "glyph_quads": stats.glyph_quads,
+-            "missing_glyphs": stats.missing_glyphs, "gpu_bytes": stats.gpu_bytes}))
++        Ok(
++            json!({"labels": texts, "widgets": stats.widgets, "glyph_quads": stats.glyph_quads,
++            "missing_glyphs": stats.missing_glyphs, "gpu_bytes": stats.gpu_bytes}),
++        )
+     }
+
+     pub fn main() -> Result<()> {
+Diff in /Users/andreyyurlov/.codex/worktrees/native-rust-sdk/incant/.worktrees/0061-planar-sample-presentation/crates/incant_game_player/examples/hud_frames.rs:230:
+                 .spatial_view()?
+                 .nodes()
+                 .filter_map(|n| {
+-                    n.flipbook
+-                        .map(|s| json!({"id": hex(n.id), "frame": s.frame(), "playing": s.playing()}))
++                    n.flipbook.map(
++                        |s| json!({"id": hex(n.id), "frame": s.frame(), "playing": s.playing()}),
++                    )
+                 })
+                 .collect();
+             captures.push(json!({"tick": world.tick(), "rgba": name, "size": size,
+# trailing whitespace stripped for git; raw log sha256 a3fa7a73eda6dbf3ded46e4f82ca298de49c299f4fbcf69ccd7a6761c09a5718

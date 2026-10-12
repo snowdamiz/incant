@@ -3,17 +3,20 @@
 
     python3 -B samples/planar/scene.py <new-output> --binary <incant_headless> [--play]
 
-Generates the original art (samples/planar/art), imports the atlas with the
-public importer, then authors the project only through RPC command transactions:
-controller and input, terrain and camera, actors. It checks Undo/Redo, save and
-journal reopening. --play also runs native-play scenarios on this layout and
-checks that Play leaves the authored files unchanged. No GPU or device claim.
+Generates the original art (samples/planar/art), imports the atlas and the HUD
+font with the public importer, then authors the project only through RPC command
+transactions: controller and input, terrain and camera, actors, then the HUD
+(string table, UI nodes and the controller's presentation bindings). It checks
+Undo/Redo, save and journal reopening. --play also runs native-play scenarios on
+this layout with a UI viewport and checks that Play leaves the authored files
+unchanged. No GPU or device claim.
 """
 import argparse
 import hashlib
 import json
 from pathlib import Path
 import runpy
+import shutil
 import subprocess
 import sys
 
@@ -21,6 +24,7 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 sys.path.insert(0, str(HERE))
 from art import build as art_build, cove  # noqa: E402
+import hud  # noqa: E402
 
 SPEED = 3.0
 PLAYER_RADIUS, PEARL_RADIUS, URCHIN_RADIUS, EXIT_RADIUS = 0.3, 0.35, 0.4, 0.4
@@ -125,11 +129,15 @@ def actor_commands(scene, texture):
             'SpriteFlipbook': flipbook(phase, 6 + index % 2)}))
     # The controller has no Transform: it is not spatial, so authoring previews
     # draw no placeholder cube for it.
-    commands.append(entity(scene, cove.CONTROLLER, 'Planar gameplay', {
-        'Script': {'source': cove.SCRIPT, 'props': {
-            'player': cove.PLAYER, 'exit': cove.BOAT, 'pickups': cove.PEARLS,
-            'hazards': cove.URCHINS, 'speed': SPEED}}}))
+    commands.append(entity(scene, cove.CONTROLLER, 'Planar gameplay', {'Script': controller()}))
     return commands
+
+
+def controller():
+    """Gameplay roles only; the HUD transaction adds presentation bindings."""
+    return {'source': cove.SCRIPT, 'props': {
+        'player': cove.PLAYER, 'exit': cove.BOAT, 'pickups': cove.PEARLS,
+        'hazards': cove.URCHINS, 'speed': SPEED}}
 
 
 class Runner:
@@ -156,8 +164,13 @@ def author(out, runner):
     project, journal = project_dir / 'planar.json', project_dir / 'planar.journal.jsonl'
     runner.run('init', project, '--entities', 0, '--name', 'Pearl Cove')
     art = art_build.build(project_dir / 'art')
-    # The importer assigns the texture asset ID; frame IDs come from the descriptor.
+    # The importer assigns asset IDs; frame IDs come from the atlas descriptor.
     texture = runner.run('import', project, 'art/cove.atlas.json')['asset']['id']
+    fonts = project_dir / 'fonts'
+    fonts.mkdir()
+    shutil.copyfile(ROOT / hud.FONT_SOURCE, fonts / Path(hud.FONT_SOURCE).name)
+    shutil.copyfile(ROOT / hud.FONT_LICENSE, fonts / Path(hud.FONT_LICENSE).name)
+    font = runner.run('import', project, 'fonts/' + Path(hud.FONT_SOURCE).name)['asset']['id']
     Rpc = runpy.run_path(str(ROOT / 'tools/probes/script-source-transactions.py'))['Rpc']
     calls = []
     rpc = Rpc(runner.binary, project, journal)
@@ -180,6 +193,7 @@ def author(out, runner):
                 {'op': 'set_input_actions', 'actions': input_actions()}]),
             ('Lay out Pearl Cove terrain and camera', terrain_commands(scene, texture)),
             ('Place Pearl Cove actors and controller', actor_commands(scene, texture)),
+            ('Add Pearl Cove HUD and localized strings', hud.commands(scene, font, controller())),
         ]
         transactions = []
         for description, commands in steps:
@@ -210,7 +224,7 @@ def author(out, runner):
         rpc.close()
     validation = runner.run('validate', project)
     write(out / 'authoring-calls.json', calls)
-    return {'project': project, 'scene': scene, 'texture': texture, 'art': art,
+    return {'project': project, 'scene': scene, 'texture': texture, 'font': font, 'art': art,
             'transactions': transactions, 'history': history, 'validation': validation}
 
 
@@ -230,6 +244,8 @@ def main():
              for p in sorted(project_dir.rglob('*')) if p.is_file() and '.incant' not in p.parts}
     result = {'passed': True, 'binary_sha256': binary_sha, 'project': str(authored['project']),
               'scene': authored['scene'], 'camera': cove.CAMERA, 'atlas': authored['texture'],
+              'font': authored['font'], 'hud': {'root': hud.ROOT, 'status': hud.STATUS,
+                                                'prompt': hud.PROMPT, 'table': hud.TABLE},
               'gameplay_sha256': digest(HERE / 'gameplay.ts'), 'art_files': authored['art']['files'],
               'tile_frames': authored['art']['tile_frames'],
               'sprite_frames': authored['art']['sprite_frames'],

@@ -1,0 +1,108 @@
+{
+  "adapter": "Apple M5 Pro",
+  "backend": "Metal",
+  "captures": [
+    {
+      "flipbooks": [
+        {
+          "frame": 2,
+          "id": "01b65d50000000000000000000000001",
+          "playing": false
+        },
+        {
+          "frame": 1,
+          "id": "01b65d50000000000000000000000005",
+          "playing": false
+        },
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000015",
+          "playing": true
+        },
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000016",
+          "playing": true
+        },
+        {
+          "frame": 0,
+          "id": "01b65d50000000000000000000000017",
+          "playing": true
+        },
+        {
+          "frame": 1,
+          "id": "01b65d5000000000000000000000001f",
+          "playing": true
+        },
+        {
+          "frame": 3,
+          "id": "01b65d50000000000000000000000020",
+          "playing": true
+        },
+        {
+          "frame": 1,
+          "id": "01b65d50000000000000000000000021",
+          "playing": true
+        },
+        {
+          "frame": 3,
+          "id": "01b65d50000000000000000000000022",
+          "playing": true
+        }
+      ],
+      "hud": {
+        "glyph_quads": 22,
+        "gpu_bytes": 5201,
+        "labels": {
+          "01b662d0000000000000000000000002": {
+            "parent": "01b662d0000000000000000000000001",
+            "text": "Sailing home with 3 pearls"
+          },
+          "01b662d0000000000000000000000003": {
+            "parent": "01b662d0000000000000000000000001",
+            "text": ""
+          }
+        },
+        "missing_glyphs": 0,
+        "widgets": 2
+      },
+      "rgba": "tick-00781.rgba",
+      "rgba_sha256": "276e21d1a657fcd2e3518ac1c10c57451b1a1ea6bcaa6d0394eb17f0159da709",
+      "size": [
+        1280,
+        720
+      ],
+      "tick": 781
+    }
+  ],
+  "format": "incant-0061-hud-frames",
+  "logs": [
+    {
+      "message": "planar.pickup 01PSEN0000000000000000000B 1/3",
+      "tick": 130
+    },
+    {
+      "message": "planar.pickup 01PSEN0000000000000000000C 2/3",
+      "tick": 430
+    },
+    {
+      "message": "planar.pickup 01PSEN0000000000000000000D 3/3",
+      "tick": 529
+    },
+    {
+      "message": "planar.won tick=719 pickups=3",
+      "tick": 719
+    }
+  ],
+  "scale": 2.0,
+  "scope": "offscreen GPU frames of the embedded program; no window or presentation",
+  "size": [
+    1280,
+    720
+  ],
+  "target_format": "Rgba8UnormSrgb",
+  "viewport": [
+    640.0,
+    360.0
+  ]
+}

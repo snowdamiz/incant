@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0061-hud/review-2/player/incant_game_player",
+    "--package",
+    "/Users/andreyyurlov/.codex/incant-evidence/0061-hud/review-2/player/data",
+    "--ui-viewport",
+    "640x360",
+    "--ticks",
+    "201",
+    "--input-recording",
+    "/Users/andreyyurlov/.codex/incant-evidence/0061-hud/review-2/build/urchin-loss-input.json",
+    "--output",
+    "/Users/andreyyurlov/.codex/incant-evidence/0061-hud/review-2/player/urchin-loss.pcm"
+  ],
+  "exit": 0,
+  "stdout": "{\"flipbooks\":[{\"completed\":false,\"frame\":1,\"id\":[1,182,93,80,0,0,0,0,0,0,0,0,0,0,0,1],\"playing\":false},{\"completed\":false,\"frame\":0,\"id\":[1,182,93,80,0,0,0,0,0,0,0,0,0,0,0,5],\"playing\":false},{\"completed\":false,\"frame\":2,\"id\":[1,182,93,80,0,0,0,0,0,0,0,0,0,0,0,11],\"playing\":true},{\"completed\":false,\"frame\":2,\"id\":[1,182,93,80,0,0,0,0,0,0,0,0,0,0,0,12],\"playing\":true},{\"completed\":false,\"frame\":2,\"id\":[1,182,93,80,0,0,0,0,0,0,0,0,0,0,0,13],\"playing\":true},{\"completed\":false,\"frame\":0,\"id\":[1,182,93,80,0,0,0,0,0,0,0,0,0,0,0,21],\"playing\":true},{\"completed\":false,\"frame\":0,\"id\":[1,182,93,80,0,0,0,0,0,0,0,0,0,0,0,22],\"playing\":true},{\"completed\":false,\"frame\":0,\"id\":[1,182,93,80,0,0,0,0,0,0,0,0,0,0,0,23],\"playing\":true},{\"completed\":false,\"frame\":9,\"id\":[1,182,93,80,0,0,0,0,0,0,0,0,0,0,0,31],\"playing\":true},{\"completed\":false,\"frame\":1,\"id\":[1,182,93,80,0,0,0,0,0,0,0,0,0,0,0,32],\"playing\":true},{\"completed\":false,\"frame\":9,\"id\":[1,182,93,80,0,0,0,0,0,0,0,0,0,0,0,33],\"playing\":true},{\"completed\":false,\"frame\":1,\"id\":[1,182,93,80,0,0,0,0,0,0,0,0,0,0,0,34],\"playing\":true}],\"frames\":160800,\"logs\":{\"dropped\":0,\"entries\":[{\"level\":\"info\",\"message\":\"planar.lost tick=149 pickups=0\",\"tick\":149}]},\"pcm_sha256\":\"8fd7fe4a0a5691ab3e4eacb1cfeb66428c1914a3cb084c8a0d53dd21846bdb4d\",\"render_input\":{\"binding_generation\":0,\"camera\":\"01b65d50000000000000000000000003\",\"camera_position\":[10.0,6.0,20.0],\"decoded_payload_bytes\":637460,\"first_model_position\":null,\"first_sprite_position\":[13.499893188476562,4.100006103515625,0.0],\"first_text_position\":null,\"gpu_submitted\":false,\"mode\":\"cpu-only\",\"model_count\":0,\"sprite_count\":12,\"text_atlas_bytes\":0,\"text_atlas_nonzero\":0,\"text_atlas_sha256\":null,\"text_count\":0,\"text_font_count\":0,\"text_generation\":0,\"text_glyph_count\":0,\"text_missing_clusters\":0,\"text_rtl_glyphs\":0,\"text_sources\":{},\"tick\":201,\"topology_generation\":0,\"ui\":{\"atlas_sha256\":\"d000b192d21a544f6dda32b5733c88d3f1529db88f6e1f7832f666a0be486a97\",\"focus\":null,\"glyphs\":21,\"sources\":{\"01PSHD00000000000000000002\":\"Stung by a sea urchin\",\"01PSHD00000000000000000003\":\"\"},\"values\":{},\"viewport\":[640.0,360.0],\"widgets\":3}},\"sources\":[],\"tick\":201}\n",
+  "stderr": ""
+}
