@@ -34,6 +34,16 @@ repeat PCM and terminal silence are verified. Independent integration audit and 
 Authored appearance/device gates remain separate.
 [Current integration evidence](docs/spikes/core-presentation-integration.md).
 
+## Physics build variants — kernels locally verified
+
+The 2D/3D physics crates build separately with deterministic math, hardware math,
+or the opt-in eight-lane candidate; native parallel stepping stays enabled.
+Ten behavior tests and Clippy pass in each variant, and actual compiler records
+confirm the intended features. Both base variants compile for wasm32 without
+parallel features. Existing callers retain deterministic defaults; per-project
+selection, matching play/export processes, device measurements and exact-replay
+gates remain open. [Evidence](docs/spikes/physics-runtime-variants.md).
+
 ## Core Sample presentation bindings — locally verified
 
 Optional authored role maps connect gameplay to localized health, collection and

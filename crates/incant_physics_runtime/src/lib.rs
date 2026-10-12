@@ -1,5 +1,10 @@
 //! Document-free fixed-step physics. Ordered IDs are selected by the owning
 //! runtime; solver handles, contacts and sleeping state never cross this boundary.
+// A solver variant is a build choice, never a runtime toggle. Rapier itself also
+// rejects this combination; keep the local diagnostic at our public boundary.
+#[cfg(all(feature = "deterministic", feature = "fast-simd8"))]
+compile_error!("deterministic and fast-simd8 physics variants are mutually exclusive");
+
 mod navigation;
 pub use navigation::navigation_geometry;
 mod character;
