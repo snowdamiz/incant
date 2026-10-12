@@ -16,6 +16,18 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Native UI checkpoint state — CPU section locally verified
+
+Committed widget text, grapheme selection and logical focus now have a bounded
+binary save/load section with fresh-owner receipt invalidation. Active preedit
+refuses saving; pointer capture, physical input and notifications remain
+transient. All 41 UI tests, Clippy, wasm32 and dependency checks pass again on
+the actual main135 integration, with all five reviewed source inputs unchanged.
+Independent source review accepts this section. Complete world/session/renderer
+integration remains open and existing UI-save refusals are unchanged. This is
+not a full save, native IME or Game UI gate.
+[Contract and evidence](docs/spikes/native-ui-checkpoint-state.md).
+
 ## Public Wasm animation graphs — current-main integration verified
 
 The Rust SDK and native Wasmtime/wasm2c hosts now expose copied graph state,
@@ -100,7 +112,8 @@ now derives its allowance from the current catalog, retaining exact redaction,
 conservative full charging and no-mutation assertions. The unchanged baseline
 fails locally; all 108 agent tests and Clippy pass after the correction, with
 independent source/evidence review. Checkpoint9 remains failed and unpromoted;
-actual cross-platform repair validation needs a later frozen batch.
+actual cross-platform repair validation needs a later frozen batch. The reviewed
+fixture correction merged through its fast gate in PR #135.
 [Evidence](docs/spikes/checkpoint9-agent-fixture.md).
 
 ## Latest comprehensive release baseline
