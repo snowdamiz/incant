@@ -2,7 +2,10 @@
 use crate::ScriptError;
 use sha2::{Digest, Sha256};
 
-pub const ARTIFACT_FORMAT: u32 = 2;
+pub mod compatibility;
+pub use compatibility::BytecodeAbi;
+
+pub const ARTIFACT_FORMAT: u32 = 3;
 pub const ENGINE_VERSION: &str = "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28";
 pub const BUILD_ID: &str = env!("INCANT_SCRIPT_BUILD_ID");
 pub const TARGET: &str = env!("INCANT_SCRIPT_TARGET");
@@ -18,6 +21,8 @@ pub struct ScriptMetadata {
     pub engine: String,
     pub build_id: String,
     pub target: String,
+    pub producer_target: String,
+    pub bytecode_abi: BytecodeAbi,
     pub source_name: String,
     pub source_sha256: [u8; 32],
     pub wrapper_prefix_lines: u32,
@@ -52,6 +57,13 @@ pub(crate) fn validate(
         || metadata.engine != ENGINE_VERSION
         || metadata.build_id != BUILD_ID
         || metadata.target != TARGET
+        || metadata.bytecode_abi != BytecodeAbi::current()
+        || !compatibility::admits(
+            &metadata.producer_target,
+            &metadata.target,
+            metadata.bytecode_abi,
+        )
+        || !compatibility::linked_engine_matches()
         || metadata.wrapper_prefix_lines != WRAPPER_PREFIX_LINES
     {
         return Err(ScriptError::ArtifactCompatibility);
@@ -81,7 +93,7 @@ mod tests {
         CompiledScript::compile_named("fixture.js", source).unwrap()
     }
 
-    fn embedded(code: CompiledScript) -> CompiledScript {
+    pub(super) fn embedded(code: CompiledScript) -> CompiledScript {
         let artifact = EmbeddedScript {
             metadata: code.metadata.clone(),
             bytecode: Box::leak(code.bytes.to_vec().into_boxed_slice()),
@@ -96,14 +108,17 @@ mod tests {
     #[test]
     fn compatibility_and_corruption_fail_without_reading_quickjs_bytecode() {
         let code = compiled("exports.default = {update() {}};");
-        for change in 0..5 {
+        for change in 0..8 {
             let mut m = code.metadata.clone();
             match change {
                 0 => m.format += 1,
                 1 => m.engine.push_str("-wrong"),
                 2 => m.target.push_str("-wrong"),
                 3 => m.build_id.push_str("-wrong"),
-                _ => m.wrapper_prefix_lines += 1,
+                4 => m.wrapper_prefix_lines += 1,
+                5 => m.producer_target.push_str("-wrong"),
+                6 => m.bytecode_abi.value_bytes += 1,
+                _ => m.bytecode_abi.write_flags ^= rquickjs::qjs::JS_WRITE_OBJ_SAB,
             }
             assert!(matches!(
                 validate(&m, &code.bytes, &code.hardening),
@@ -236,3 +251,7 @@ mod tests {
         assert_eq!(code.metadata.wrapper_prefix_lines, 3);
     }
 }
+
+#[cfg(all(test, feature = "compiler"))]
+#[path = "artifact/mobile_tests.rs"]
+mod mobile_tests;

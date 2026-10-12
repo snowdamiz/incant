@@ -1,0 +1,187 @@
+{
+  "status": "source review correction applied; actual iOS execution pending",
+  "scope": "Mac ARM trusted fresh cook to iOS device/simulator; Android cross-target and authored-project cross-export denied",
+  "source_freeze": "source-freeze-001.json",
+  "source_freeze_sha256": "f4a5d88cea10e836eaa20980547d506cb512ceb482a31e1019519d5ae9d56320",
+  "native_archive": {
+    "path": "native-initial.json.gz",
+    "sha256": "52af6045612e99bdd1b552eed4545f75e930544cb1b50d65b7b7fa6fb29fbb92",
+    "records": 13
+  },
+  "checks": [
+    {
+      "name": "script-all",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_script"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+      "exit_code": 0,
+      "elapsed_seconds": 12.947059154510498,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/mobile-bytecode-local-001/script-all.log",
+      "sha256": "3e5dec7391b633e0e75d718923822a3aaaff57b26fb671783c0720ce53d17dca"
+    },
+    {
+      "name": "cook-script-typescript",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_cook",
+        "--features",
+        "typescript",
+        "--test",
+        "scripts",
+        "--test",
+        "typescript",
+        "--test",
+        "project_scripts"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+      "exit_code": 0,
+      "elapsed_seconds": 11.93478798866272,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/mobile-bytecode-local-001/cook-script-typescript.log",
+      "sha256": "a16457ab6b3c3ee80eadd431b5270cedd1e378e946c0fc9000ed694532a16cba"
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_cook",
+        "--features",
+        "incant_cook/typescript",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+      "exit_code": 0,
+      "elapsed_seconds": 6.259078025817871,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/mobile-bytecode-local-001/clippy.log",
+      "sha256": "d500e3607d684227cfd9bdc649be9722bad0df13043212000ad9c01e2f82e405"
+    },
+    {
+      "name": "native-player",
+      "command": [
+        "./tools/cargo",
+        "build",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_game_player"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+      "exit_code": 0,
+      "elapsed_seconds": 121.64844393730164,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/mobile-bytecode-local-001/native-player.log",
+      "sha256": "d43b95ba39bad5f7ada114e32910e85e5dbb3c773f8fde802ab3cbf06e0d653a"
+    },
+    {
+      "name": "lean",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_script",
+        "incant_game_player"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+      "exit_code": 0,
+      "elapsed_seconds": 0.8229351043701172,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/mobile-bytecode-local-001/lean.log",
+      "sha256": "c2f643debf623724fe70e2d7367c2b066979b2fabf54bee8297aa3bbbd35ba4b"
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+      "exit_code": 0,
+      "elapsed_seconds": 2.6667981147766113,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/mobile-bytecode-local-001/fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+      "exit_code": 0,
+      "elapsed_seconds": 0.03966116905212402,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/mobile-bytecode-local-001/diff.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "tests": {
+    "script_all": {
+      "passed": 181,
+      "groups": 8,
+      "failed": 0,
+      "ignored": 0
+    },
+    "selected_cook": {
+      "passed": 8,
+      "groups": 3,
+      "failed": 0,
+      "ignored": 0
+    }
+  },
+  "initial_failures": [
+    "artifact-initial.log: test-only use of private NativeLogs.entries field; corrected to entries() before passing artifact-002 and full suite"
+  ],
+  "pending": [
+    "immutable target archives and actual C/Swift iOS simulator execution",
+    "device compile-only evidence",
+    "independent final acceptance"
+  ],
+  "source_freeze_final": "source-freeze-002.json",
+  "source_freeze_final_sha256": "f702b341d55170a13196a85f835b4489123892bd38c6171d1a12991a089b9a84",
+  "portability_correction": {
+    "source": "crates/incant_script/src/artifact/mobile_tests.rs",
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_script",
+      "--lib",
+      "artifact::"
+    ],
+    "exit_code": 0,
+    "passed": 6,
+    "log": "artifact-portability-003.log.gz",
+    "raw_sha256": "96c131cc9b86b91d5848b5b4792d3cfb9339ea5e93d2aa4cb44b5aa3166439fd",
+    "gzip_sha256": "7d5e9e4a5f3693ea8daf9d214bd0d5196f5a4edd7feffce01b4d33130c74e81a"
+  }
+}
