@@ -1,0 +1,9 @@
+{
+  "guest-build/hud.wasm": "99a79dea3853b97e505e8d7fcb48380f94390cf86a6a507354496e4384a84327",
+  "guest-build/rust-sdk-libraries/incant_module.sha256": "ce0dbc1620812bb30e177d0080c81cfb9952f508da70ccfffdfd5663cf170a7f",
+  "guest-build/rust-sdk-libraries/incant_wasm_abi.sha256": "131b9a17961709d6046ba13816fa74a0f47506d1c5469c13273cb436e6c2d553",
+  "guest-build/rust-sdk-libraries/libincant_module.rlib": "83fb1acb0976d98b4247c318bdb3c1ad8df423f743967547812c0a7505416ff8",
+  "guest-build/rust-sdk-libraries/libincant_wasm_abi.rlib": "93128435ea36691355dfa2e3f647f9f61f79cdc4b612b93eae00629eb2bee91d",
+  "authoring/move.ts": "3788911e9d70555bc653fc3b97737e73eb6ca0bfcca78ce29d49b222a2e9ce31",
+  "authoring/hud.wasm": "99a79dea3853b97e505e8d7fcb48380f94390cf86a6a507354496e4384a84327"
+}

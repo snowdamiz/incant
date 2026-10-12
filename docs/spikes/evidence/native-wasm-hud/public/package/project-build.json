@@ -1,0 +1,49 @@
+{
+  "audio_clips": {
+    "01M4RSFSGMPBN3M84E4VCCGSRF": "bb391cc186bb741011a9d500103383ccd8cdaf0164c06b379c91d77e94de9b35"
+  },
+  "cameras": [
+    "00000000000000000000000003"
+  ],
+  "compiler": null,
+  "font_assets": [
+    {
+      "fingerprint": "9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2",
+      "id": "01M4RSFSBA4YVM6BKF1B7Y1K7N"
+    },
+    {
+      "fingerprint": "6864e1444bc7002790e682360d3f93bd45fe51b7045a64ecbf0e76e19e6b758e",
+      "id": "01M4RSFSCPG8DT5ATZ6P5W478C"
+    },
+    {
+      "fingerprint": "1087d4bb69160e3e5955407294226ca3da11166a3188ada3c1a166ba14e55ceb",
+      "id": "01M4RSFSE13XD8ANSVH3W5QWJJ"
+    }
+  ],
+  "format": "incant-native-project-build",
+  "has_spatial_content": true,
+  "program": {
+    "fingerprint": "fac4d89c9139244b33083f5a92a1fd3b70c53e9ae9e683e2509230e6fc6c557e",
+    "input_sha256": "99a79dea3853b97e505e8d7fcb48380f94390cf86a6a507354496e4384a84327",
+    "kind": "wasm",
+    "module": "01M4RSFW7WGECM3V396SZKQM3D",
+    "prepared_sha256": "378ba0e36af0b6b508a7d458bb4288dc76e630bc6a7341785eec7be03a414d27",
+    "registry_sha256": "215f64819445d3fb969c15237f18bdabf85213fc0ceabd3f563b31a6d05d3926",
+    "translator": "wasm2c-1.0.42"
+  },
+  "project_id": "01M4RSFS4YT8QWCSNHJFX9RZ0S",
+  "project_sha256": "62e385dc261b7ae1d49112b48d0cda853584634f2bcf30a58efe99776713afd5",
+  "scene_id": "01M4RSFS4YVQATN9G0ZECP8N4E",
+  "scene_sha256": "a961a01af9bb9d35a1046ed7cdc6f14771afa3de945a77d3663c806a5b0e83ce",
+  "startup_source_parsing": false,
+  "target": "aarch64-apple-darwin",
+  "tick_rate": 60,
+  "version": 1,
+  "visual_assets": [
+    {
+      "fingerprint": "71fbcae82debc0236bda7576327733a6943d93ce7adb913cbe1d95fe931d511f",
+      "id": "01M4RSFSF7S2RZPK3J9ETZZY86",
+      "kind": "model"
+    }
+  ]
+}

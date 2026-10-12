@@ -19,7 +19,9 @@ pub use animation_pose_v5::{
     PoseInterpolation,
 };
 pub mod flipbook;
+pub mod hud;
 pub mod input;
+pub use hud::{HudControl, HudEvent, HudEventKind, HudRole, HudSnapshot, HudText, HudWidget};
 pub mod localization;
 pub mod navigation;
 pub mod physics;
@@ -74,8 +76,8 @@ pub const IDENTITY: Transform = [0., 0., 0., 0., 0., 0., 1., 1., 1., 1.];
 pub use incant_wasm_abi::{
     ANIMATION_GRAPH_MAX_BYTES, ANIMATION_GRAPH_V2_MAX_BYTES, ANIMATION_IK_MAX_BYTES,
     ANIMATION_IK_V2_MAX_BYTES, ANIMATION_MAX_BYTES, ANIMATION_V2_MAX_BYTES, ANIMATION_V3_MAX_BYTES,
-    ANIMATION_V4_MAX_BYTES, ANIMATION_V5_MAX_BYTES, FLIPBOOK_MAX_BYTES, INPUT_MAX_BYTES,
-    ROOT_MOTION_MAX_BYTES,
+    ANIMATION_V4_MAX_BYTES, ANIMATION_V5_MAX_BYTES, FLIPBOOK_MAX_BYTES, HUD_MAX_BYTES,
+    INPUT_MAX_BYTES, ROOT_MOTION_MAX_BYTES,
 };
 
 /// Export the versioned entry points. The callback receives a non-escapable Tick

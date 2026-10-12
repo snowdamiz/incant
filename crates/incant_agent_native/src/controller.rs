@@ -35,6 +35,7 @@ const MAX_SELECTED_ENTITIES: usize = 256;
 struct Start {
     scene: Option<String>,
     camera: Option<String>,
+    ui_viewport: Option<[f32; 2]>,
     script_sha256: Option<String>,
     #[serde(default = "default_sample_rate")]
     sample_rate: u32,
@@ -77,6 +78,8 @@ impl Observation {
 #[serde(default, deny_unknown_fields)]
 struct Step {
     events: Vec<InputEvent>,
+    ui: Vec<incant_input::RecordedUiEvent>,
+    viewport: Option<[f32; 2]>,
     observe: Observation,
 }
 #[derive(Deserialize)]
@@ -186,6 +189,7 @@ impl Controller {
             &StartOptions {
                 scene: request.scene,
                 camera: request.camera,
+                ui_viewport: request.ui_viewport,
                 script_sha256: request.script_sha256,
             },
             request.sample_rate,
@@ -211,8 +215,12 @@ impl Controller {
             .as_mut()
             .ok_or(Error::Invalid("no play session"))?;
         let frames = live.session.next_frames()?;
-        live.session
-            .tick(&request.events, &mut live.samples[..frames * 2])?;
+        live.session.tick_recorded(
+            &request.events,
+            &request.ui,
+            request.viewport,
+            &mut live.samples[..frames * 2],
+        )?;
         live.state(&request.observe, selected)
     }
     pub fn state(&self, params: Value) -> Result<Value> {

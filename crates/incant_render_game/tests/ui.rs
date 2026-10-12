@@ -493,3 +493,6 @@ mod checkpoints;
 
 #[path = "ui/hud.rs"]
 mod hud;
+
+#[path = "ui/recorded.rs"]
+mod recorded;

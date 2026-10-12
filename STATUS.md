@@ -25,12 +25,30 @@ simulator execution remain pending. Android cross-target admission and authored
 project cross-export remain denied. This does not establish a phone gate.
 [Contract and evidence](docs/spikes/mobile-bytecode-compatibility.md).
 
-## Planar gameplay — current-main integration reviewed
+## Shared cooked-player library
+
+The ordinary packaged player now has a reusable Rust entry and optional bounded C
+ABI. Local macOS CPU/CLI tests and native-window/static-module compatibility pass;
+C/Swift caller verification is underway. The first iOS simulator archive attempt
+hit the existing cross-target script-cook refusal. That guard remains intact while
+a separate compatibility route is developed; no mobile runtime/device/performance
+gate passes from this work. [Contract and evidence](docs/spikes/mobile-runtime-library.md).
+
+## Wasm HUD controls — merged main166
+
+The unchanged accepted ABI passes 469 actual-host cases, Clippy and target/tooling
+checks. A fresh ordinary shipping player passes three source/map/build-deleted
+12-tick runs with exact report/PCM equality and six precise no-output refusals.
+Independent integration review and exact-head fast CI passed before PR166 merged. Module checkpoints,
+GPU/window/appearance, device and full SDK gates remain open.
+[Current integration evidence](docs/spikes/native-wasm-hud-integration.md).
+
+## Planar gameplay — merged main165
 
 All five reviewed sample/workflow inputs remain exact. Seven native gameplay
 scenarios, strict types, 28 policy cases and actionlint pass with a matching engine
 binary. Independent review accepts the source/receipts. Original shipping proof
-remains explicitly based on main160; fast CI/publication are pending. The
+remains explicitly based on main160; exact-head fast CI passed before PR165 merged. The
 numerical room does not establish authored visuals, device or physics-save gates.
 [Current integration evidence](docs/spikes/planar-sample-main163.md).
 
@@ -1583,3 +1601,7 @@ checks; the three fresh bulk processes remain a separate development-only smoke.
 Retained CPU pose blending integration against actual main120 preserves all five
 reviewed source hashes and passes 166 CPU tests plus Clippy/graph checks; 71 GPU
 tests remain ignored. [Receipt](docs/spikes/evidence/runtime-pose-blending-main120.json).
+
+- Native Rust/Wasm HUD: additive ops56–58 preserve ops0–55/input-v1. 365 ordinary tests, three actual Wasmtime/wasm2c tests, all-target Clippy and scoped generation/wasm/runtime guards pass. Public source/cache/build/map-deleted package passes three fresh shaped-HUD/movement/PCM runs and six exact refusals; source and final evidence reviews accepted, publisher intake pending. Module checkpoints, headless native-play UI routing and native/GPU/device gates remain open. See `docs/spikes/native-wasm-hud.md`.
+
+- Native headless UI routing: explicit bounded viewport now reaches the retained host; CLI and native Play RPC replay the existing UI/resize format through the ordinary player's shared resolver. All 100 affected tests, scoped Clippy, input wasm32 and runtime/generation checks pass, including actual CLI/RPC parity and failure preservation. Independent source and final execution reviews accepted; publisher intake pending. No native-window/GPU/IME/device claim. See `docs/spikes/native-headless-ui.md`.

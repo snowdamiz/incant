@@ -1,0 +1,40 @@
+{
+  "wabt": "1.0.42",
+  "modules": [
+    {
+      "name": "rust-hud",
+      "prefix": "m0",
+      "input_sha256": "99a79dea3853b97e505e8d7fcb48380f94390cf86a6a507354496e4384a84327",
+      "prepared_sha256": "378ba0e36af0b6b508a7d458bb4288dc76e630bc6a7341785eec7be03a414d27"
+    },
+    {
+      "name": "hud",
+      "prefix": "m1",
+      "input_sha256": "22a80123b67c22ec5e27705f61c3cdaa8b23ee290d3d09f19ef9e26106317134",
+      "prepared_sha256": "85c7e18a75e70dda04337a5112941aad9f4ce5ec27abd6d7d1cb5f75203d2069"
+    }
+  ],
+  "files": {
+    "linked.rs": "4c748f199de5c8ef766cc0063d4eef459e55d0fb19e33e268c8fddd185cbdcfe",
+    "m0-facade.c": "8444facf73c4951689c89d5e6c3d2b38022e22ead1e4a20f4f6b3116743173f6",
+    "m0.c": "e28273cf3adda453cf26d6dab4a6936f56bce6f4dc2653fb63b62764525a6d07",
+    "m0.h": "ad31a85bfc00032993a1d66ecd1425a5167e98d7a49fbca92f8458b37877b8e2",
+    "m0.original.wasm": "99a79dea3853b97e505e8d7fcb48380f94390cf86a6a507354496e4384a84327",
+    "m0.wasm": "378ba0e36af0b6b508a7d458bb4288dc76e630bc6a7341785eec7be03a414d27",
+    "m1-facade.c": "779d2baa0745913777dc5e2db9eafa455234c62716e6a9bc85622d6d4840ca64",
+    "m1.c": "805cd58467802d7296366ba0bded8f53639fbb39950faf4a4744ed15c8f51160",
+    "m1.h": "5f9e12d88046e9c6afcb3463a90aed6e81df665eba1f8c39a858907dd69ccb37",
+    "m1.original.wasm": "22a80123b67c22ec5e27705f61c3cdaa8b23ee290d3d09f19ef9e26106317134",
+    "m1.wasm": "85c7e18a75e70dda04337a5112941aad9f4ce5ec27abd6d7d1cb5f75203d2069"
+  },
+  "rust_guest_equals_public_export": "99a79dea3853b97e505e8d7fcb48380f94390cf86a6a507354496e4384a84327",
+  "exact_original_argv_reproduction": true,
+  "recreated_then_removed": {
+    "guest-build/hud.wasm": "99a79dea3853b97e505e8d7fcb48380f94390cf86a6a507354496e4384a84327",
+    "guest-build/rust-sdk-libraries/incant_module.sha256": "ce0dbc1620812bb30e177d0080c81cfb9952f508da70ccfffdfd5663cf170a7f",
+    "guest-build/rust-sdk-libraries/libincant_module.rlib": "83fb1acb0976d98b4247c318bdb3c1ad8df423f743967547812c0a7505416ff8",
+    "guest-build/rust-sdk-libraries/libincant_wasm_abi.rlib": "93128435ea36691355dfa2e3f647f9f61f79cdc4b612b93eae00629eb2bee91d",
+    "guest-build/rust-sdk-libraries/incant_wasm_abi.sha256": "131b9a17961709d6046ba13816fa74a0f47506d1c5469c13273cb436e6c2d553"
+  },
+  "history": "Earlier host006 used different compile source/output paths; host007 failed identity assertion before execution. Original public runs were after deletion; a later trusted exact-argv reconstruction reproduced every deleted build hash and was removed again before host008."
+}

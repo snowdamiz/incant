@@ -17,6 +17,8 @@ pub struct StartOptions {
     pub scene: Option<String>,
     pub script_sha256: Option<String>,
     pub camera: Option<String>,
+    /// Explicit logical screen pixels; requires an authored camera.
+    pub ui_viewport: Option<[f32; 2]>,
 }
 
 #[derive(Debug, thiserror::Error)]
@@ -66,6 +68,19 @@ impl PreparedPlay {
         sample_rate: u32,
         fallback: impl FnOnce() -> Result<CompiledScript, ScriptError>,
     ) -> Result<Self, StartupError> {
+        if let Some(viewport) = options.ui_viewport {
+            if viewport
+                .iter()
+                .any(|n| !n.is_finite() || !(1.0..=65_536.0).contains(n))
+            {
+                return Err(invalid(
+                    "UI viewport must be finite and within 1..=65536 logical pixels",
+                ));
+            }
+            if options.camera.is_none() {
+                return Err(invalid("UI viewport requires an explicit camera"));
+            }
+        }
         if !(8000..=192000).contains(&sample_rate) {
             return Err(invalid("invalid sample rate"));
         }
@@ -181,7 +196,7 @@ impl PreparedPlay {
                     }
                 };
                 Ok::<_, StartupError>(NativeRenderSettings {
-                    ui: None,
+                    ui: options.ui_viewport.map(incant_render_game::UiSettings::new),
                     text: if cooked.font_assets().is_empty() {
                         None
                     } else {
