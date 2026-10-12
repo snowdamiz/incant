@@ -1,0 +1,38 @@
+{
+  "at": "2026-10-12T18:33:17.138028+00:00",
+  "base": "fca5d5fe714748215fc285d24b998d33f6655fc1",
+  "source_hashes": {
+    "tools/local_cargo_target.py": "4d079347d0f5b49c62d5cfd58ed3b000b0449d7cabfe381c7456c281fa419795",
+    "tools/tests/test_local_cargo_target.py": "79f99a062ba752931c210f2faf477117e8006fa70d2ea540047552914198ac79"
+  },
+  "tests": {
+    "passed": 6,
+    "failed": 0,
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools/tests",
+      "-p",
+      "test_local_cargo_target.py"
+    ],
+    "raw_log": "/Users/andreyyurlov/.codex/incant-integration-evidence/local-cargo-target-001/tests.log",
+    "sha256": "6e8c7fa54f7a343cc8e8aa0e0a860009cf92b59fc2afd0163392338176a05bee"
+  },
+  "scope": "Explicit developer-selected per-checkout Cargo directory; no default Cargo or CI changes, no artifact migration/deletion and no engine-agent interface",
+  "limits": [
+    "Does not prove Cargo freshness or serialize builds/checkout changes.",
+    "Existing targets are not adopted. Use a new target root; retain original cache evidence separately."
+  ],
+  "retained_log": {
+    "path": "docs/spikes/evidence/local-cargo-target-tests.log.gz",
+    "sha256": "dc33fa950ca91a2a57063957c21a6707d64dd2c7fb6737f3ba03da1ee343c4ed"
+  },
+  "review": {
+    "receipt": "docs/spikes/evidence/local-cargo-target-review.json",
+    "sha256": "82ce566f747b9553648b5f0fbf9b8ea720c9b97ef79d3143233b9df76b52a8fa",
+    "decision": "accepted"
+  }
+}
