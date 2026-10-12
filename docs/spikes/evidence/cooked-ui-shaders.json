@@ -1,0 +1,316 @@
+{
+  "source": {
+    "root": "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant",
+    "base": "ca7f4521b141d112530a2f2811cc995d52d6cd67",
+    "sources": [
+      {
+        "path": "crates/incant_render/Cargo.toml",
+        "sha256": "5d2cd162cc39007a5db38376ecb26c808cd261661978246fb0a1388b9a0d1116"
+      },
+      {
+        "path": "crates/incant_render/build.rs",
+        "sha256": "52ee4fdd02cde2f5e51c769d1e004484044d846f699e65c2086b8bd64e18ac70"
+      },
+      {
+        "path": "crates/incant_render/src/lib.rs",
+        "sha256": "b64d3e202c6411428d66d62f2ff13341c1023afc1501d613e4ade5b09fe532bc"
+      },
+      {
+        "path": "crates/incant_render/src/resource_error.rs",
+        "sha256": "ef370d932b681db882a92e68c3e68e8c94775274b2427fa5e3f426d5d28d6c33"
+      },
+      {
+        "path": "crates/incant_render/src/shader/native.rs",
+        "sha256": "6fb9c9c23991f0c60b784ee03663dcb3daa098eb48a194c58455c9f7dd54972a"
+      },
+      {
+        "path": "crates/incant_render/src/ui/mod.rs",
+        "sha256": "d139c277697f76aa251a47d4b27cb084864240d197467b54763dc2ec143df866"
+      },
+      {
+        "path": "crates/incant_render/src/ui/shader.rs",
+        "sha256": "b5126f0be567125744898352c772e2e6842bb78d4749cc46372f90e566cca4ce"
+      },
+      {
+        "path": "crates/incant_render/src/ui/shader/cooked.rs",
+        "sha256": "d91ae311cacbee6662e3357da94f4c994b411173b5673b4f3d8fa3c87c6379d1"
+      },
+      {
+        "path": "crates/incant_shader_cook/src/geometry/contract.rs",
+        "sha256": "43eaab1824a337b0da21a58ffe88849d531d38fc56fec47ac3c2dc805512f8c3"
+      },
+      {
+        "path": "crates/incant_shader_cook/src/geometry/emit.rs",
+        "sha256": "b474a91e34d5b0444f41c532f28479e272bf5dfc95f2bc54e296083e4a9e1904"
+      },
+      {
+        "path": "crates/incant_shader_cook/src/geometry/mod.rs",
+        "sha256": "b3e9a40276cb6d06cf5d9772b43bfee56ccb777d8faf25aec72bf6b2d52aca4e"
+      },
+      {
+        "path": "crates/incant_shader_cook/src/geometry/sprite.rs",
+        "sha256": "5061d2d170a76b384763474ffefcec65b934d2a28ad086e58981373992d4dcb2"
+      },
+      {
+        "path": "crates/incant_shader_cook/src/geometry/ui.rs",
+        "sha256": "7a5c0786befbc4a78f3b3d70f56ed552898e9c723315925b52d1e37526bcc933"
+      },
+      {
+        "path": "crates/incant_shader_cook/tests/geometry.rs",
+        "sha256": "89f8a2c886ba7a1952f5866e54628adaa4b87d4e66a164a8114043533ce919d9"
+      },
+      {
+        "path": "crates/incant_shader_cook/tests/ui.rs",
+        "sha256": "2deb4c141220b03b90ba8946499ba78eaed00d211121737fe85c202773febb73"
+      }
+    ]
+  },
+  "source_review": {
+    "path": "docs/spikes/evidence/cooked-ui-shaders/cooked-ui-source-20261012.json",
+    "sha256": "8716abe20064278b566909b4c2b34a13c51c893dbbf4e06ba43053ce40c675d3"
+  },
+  "checks": [
+    {
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_shader_cook",
+        "-p",
+        "incant_render",
+        "--all-targets",
+        "--features",
+        "incant_render/cooked-output,incant_render/cooked-geometry,incant_render/cooked-sprites,incant_render/cooked-ui"
+      ],
+      "exit": 0,
+      "seconds": 18.30595600000379,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-00.log",
+      "sha256": "6d8f3155c719b4afe462e8cc10cfa844463db446cef32e4c1129b1e13a45ac01"
+    },
+    {
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_shader_cook",
+        "-p",
+        "incant_render",
+        "--all-targets",
+        "--features",
+        "incant_render/cooked-output,incant_render/cooked-geometry,incant_render/cooked-sprites,incant_render/cooked-ui",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 2.9300821669967263,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-01.log",
+      "sha256": "27b3e4c7034411eb534ad7be2673813151e528929e2a9a195771a376470af8aa"
+    },
+    {
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "--target",
+        "wasm32-unknown-unknown",
+        "-p",
+        "incant_render",
+        "--features",
+        "cooked-output,cooked-geometry,cooked-sprites,cooked-ui"
+      ],
+      "exit": 0,
+      "seconds": 1.8442183749939431,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-02.log",
+      "sha256": "c7d8ede83213e2816aaf5fce44bd2f22b05b2fa5deedac472596f891b150db60"
+    },
+    {
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib"
+      ],
+      "exit": 0,
+      "seconds": 8.957515292000608,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-03.log",
+      "sha256": "3fc60114f5700958e16a667448719caa18420bd81a4643d8bb70461af58ad789"
+    },
+    {
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 1.3369082919962239,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-04.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.036797917004150804,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-05.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.020385499999974854,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-06.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "cpu_counts": {
+    "enabled": 87,
+    "enabled_groups": 9,
+    "enabled_ignored_gpu": 82,
+    "default_library": 63,
+    "default_library_ignored_gpu": 32
+  },
+  "artifacts": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-001/check-00.log",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/cooked-ui-source-001/check-00.log.gz",
+      "raw_sha256": "d7d6716b30fafc952381a98cd572baf892e3846fe198a87993080f744dac0df5",
+      "raw_bytes": 1091,
+      "sha256": "ead3fcffa4e5ff49c536738dfcd5ac08ef217d06d30bfebc53642c6d2d6a252a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-001/freeze.json",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/cooked-ui-source-001/freeze.json",
+      "raw_sha256": "faaaaf7d0979419d09950c0d1f0f57b836fa82340fbefaeb329ef0df0387eae7",
+      "raw_bytes": 2463,
+      "sha256": "faaaaf7d0979419d09950c0d1f0f57b836fa82340fbefaeb329ef0df0387eae7"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-001/results.json",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/cooked-ui-source-001/results.json",
+      "raw_sha256": "971c5a2cdc0bafabbe7eb89aee3c7c6f79b43cf501b1a0dc34dc4b1d68eea390",
+      "raw_bytes": 596,
+      "sha256": "971c5a2cdc0bafabbe7eb89aee3c7c6f79b43cf501b1a0dc34dc4b1d68eea390"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-001/run.py",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/cooked-ui-source-001/run.py",
+      "raw_sha256": "568c68f7462abc0ecfde43763f3314230ad8d51360cc1c52dbf5383c14c064d6",
+      "raw_bytes": 1995,
+      "sha256": "568c68f7462abc0ecfde43763f3314230ad8d51360cc1c52dbf5383c14c064d6"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-00.log",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/cooked-ui-source-002/check-00.log.gz",
+      "raw_sha256": "6d8f3155c719b4afe462e8cc10cfa844463db446cef32e4c1129b1e13a45ac01",
+      "raw_bytes": 23647,
+      "sha256": "a6f73e0288e04b2ddeff83c2161ea2f65c986c8ff47d80404b54ac3fe1ee1c3d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-01.log",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/cooked-ui-source-002/check-01.log.gz",
+      "raw_sha256": "27b3e4c7034411eb534ad7be2673813151e528929e2a9a195771a376470af8aa",
+      "raw_bytes": 305,
+      "sha256": "7efa17d3b6eb862f0e385147a0e79c6eb5f2927241988873a3ce40535085121a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-02.log",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/cooked-ui-source-002/check-02.log.gz",
+      "raw_sha256": "c7d8ede83213e2816aaf5fce44bd2f22b05b2fa5deedac472596f891b150db60",
+      "raw_bytes": 305,
+      "sha256": "410f237248320ccc2429d3a1b46ad4f90101dc1bbb1ffec2c64101ca6d8948db"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-03.log",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/cooked-ui-source-002/check-03.log.gz",
+      "raw_sha256": "3fc60114f5700958e16a667448719caa18420bd81a4643d8bb70461af58ad789",
+      "raw_bytes": 12037,
+      "sha256": "14a16c0b3aba03bdafcf73f79b4b4b700c39b75e1eaa88c2f5e6aa47d12f59e4"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-04.log",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/cooked-ui-source-002/check-04.log.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-05.log",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/cooked-ui-source-002/check-05.log.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-06.log",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/cooked-ui-source-002/check-06.log.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/freeze.json",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/cooked-ui-source-002/freeze.json",
+      "raw_sha256": "11b5f0bf294f17844ba9892c9a4e8ec64176ff09a1a933c95ef5be37b886407c",
+      "raw_bytes": 2463,
+      "sha256": "11b5f0bf294f17844ba9892c9a4e8ec64176ff09a1a933c95ef5be37b886407c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/results.json",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/cooked-ui-source-002/results.json",
+      "raw_sha256": "2a0442323a8f88119255e26d0ee0f59341a99dbd8f3fd74e63135ec7c05a0369",
+      "raw_bytes": 3116,
+      "sha256": "2a0442323a8f88119255e26d0ee0f59341a99dbd8f3fd74e63135ec7c05a0369"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/run.py",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/cooked-ui-source-002/run.py",
+      "raw_sha256": "568c68f7462abc0ecfde43763f3314230ad8d51360cc1c52dbf5383c14c064d6",
+      "raw_bytes": 1995,
+      "sha256": "568c68f7462abc0ecfde43763f3314230ad8d51360cc1c52dbf5383c14c064d6"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/terminal.json",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/cooked-ui-source-002/terminal.json",
+      "raw_sha256": "68cf698eb675a6552bed8b3d9e2e661dec3fc85b01e9b1d42571ccc5fcf365c6",
+      "raw_bytes": 38,
+      "sha256": "68cf698eb675a6552bed8b3d9e2e661dec3fc85b01e9b1d42571ccc5fcf365c6"
+    }
+  ],
+  "pause_state": "Source reviewed; CPU/Clippy/default/web passed. Saved before native Metal UI compilation and Claude GPU/appearance checks. No integration or phase gate claim.",
+  "limits": [
+    "No actual UI Metal compiler invocation or GPU submission for this source yet",
+    "SPIR-V round-trip validation and HLSL translation are not Vulkan/DX12 driver execution",
+    "Default and wasm retain WGSL; no shader math, UI theme or input geometry changed",
+    "Other shader families, pipeline caches, asynchronous fallback and performance gates remain open"
+  ],
+  "corrections": [
+    "Development rejection test initially changed explicit alignment without changing the actual frame ABI; corrected to a member-size change that shifts the ABI",
+    "Source001 E0515 from returning temporary vertex attributes; source002 hoists identical attributes into a static const"
+  ]
+}

@@ -1,0 +1,23 @@
+[
+  {
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_shader_cook",
+      "-p",
+      "incant_render",
+      "--all-targets",
+      "--features",
+      "incant_render/cooked-output,incant_render/cooked-geometry,incant_render/cooked-sprites,incant_render/cooked-ui"
+    ],
+    "exit": 101,
+    "seconds": 3.3590755829936825,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-001/check-00.log",
+    "sha256": "d7d6716b30fafc952381a98cd572baf892e3846fe198a87993080f744dac0df5"
+  }
+]

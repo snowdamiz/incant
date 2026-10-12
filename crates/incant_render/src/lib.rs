@@ -132,7 +132,7 @@ impl Renderer {
         let output = output::OutputPass::new(&device, adapter.get_info().backend)?;
         let sprites = sprites::SpriteSystem::new(&device, adapter.get_info().backend)?;
         let text = text::TextSystem::new(&device);
-        let ui = ui::UiSystem::new(&device, &queue);
+        let ui = ui::UiSystem::new(&device, &queue, adapter.get_info().backend)?;
         if let Some(error) = validation.pop().await {
             #[cfg(target_arch = "wasm32")]
             let error = error.into();
