@@ -16,6 +16,7 @@ import time
 
 import ios_archive
 import native_process
+import physics_export
 from physics_features import selected_graph_errors, validate_artifacts
 from native_package import data_package, publish, read, require, select_camera, sha256, write_json
 
@@ -68,14 +69,17 @@ def build(project, staging, storage, target, scene, camera):
     # The destination SDK is selected by this fixed engine tool, never project data.
     env['SDKROOT'] = execute(['xcrun', '--sdk', sdk, '--show-sdk-path']).stdout.strip()
     cargo = ROOT / 'tools/cargo'
-    features = ','.join(ios_archive.FEATURES)
-    project_hash = sha256(read(project, 64 * 1024**2))
+    project_bytes = read(project, 64 * 1024**2)
+    mode = physics_export.project_mode(project_bytes)
+    selected_features = physics_export.cargo_features(mode, ios_archive.CAPABILITIES)
+    features = ','.join(selected_features)
+    project_hash = sha256(project_bytes)
     selected_graph = execute([cargo, 'tree', '--locked', '--no-default-features', '-p', ios_archive.NAME,
                               '--features', features, '--target', target, '-e', 'normal',
                               '--prefix', 'none', '--format', '{p}|{f}'], env=env).stdout
     graph = ios_archive.normal_dependencies(selected_graph)
-    errors = selected_graph_errors(selected_graph, 'deterministic', target)
-    require(not errors, 'Selected iOS physics graph differs from the fixed kernel: ' + '; '.join(errors))
+    errors = selected_graph_errors(selected_graph, mode, target)
+    require(not errors, 'Selected iOS physics graph differs from the selected project mode: ' + '; '.join(errors))
     (staging / 'normal-dependencies.txt').write_text(selected_graph, encoding='utf-8')
     command = [cargo, 'rustc', '--locked', '--profile', 'shipping', '-j2', '-p', ios_archive.NAME,
                '--lib', '--no-default-features', '--features', features, '--crate-type', 'staticlib', '--target', target,
@@ -97,9 +101,9 @@ def build(project, staging, storage, target, scene, camera):
     log = (staging / 'build.log').read_text()
     require(result.returncode == 0, 'Authored iOS build failed; no archive was published:\n' + log[-8000:])
     flags = ios_archive.verify_codegen(log, target)
-    physics = ios_archive.kernel_provenance(log, target)
+    physics = ios_archive.kernel_provenance(log, target, mode)
     messages = [json.loads(line) for line in (staging / 'cargo.jsonl').read_text().splitlines() if line.startswith('{')]
-    physics['compiled_target'] = validate_artifacts(messages, 'deterministic', target_dir=storage / 'target',
+    physics['compiled_target'] = validate_artifacts(messages, mode, target_dir=storage / 'target',
                                                     target=target, profile='shipping')
     artifacts = [m for m in messages if m.get('reason') == 'compiler-artifact'
                  and m['target']['name'] == ios_archive.NAME and 'staticlib' in m['target']['crate_types']]
@@ -112,7 +116,7 @@ def build(project, staging, storage, target, scene, camera):
     require(len(outputs) == 1, 'Missing unique authored project producer')
     producer = outputs[0]
     receipt = json.loads(read(producer / 'project-export.json', 4 * 1024**2))
-    ios_archive.producer_receipt(receipt, target, project_hash)
+    ios_archive.producer_receipt(receipt, target, project_hash, mode)
     require(sha256(read(project, 64 * 1024**2)) == project_hash, 'Project changed during archive build')
     camera = select_camera(receipt, camera, False)
     llvm = Path(execute([rustc, '--print', 'sysroot']).stdout.strip()) / 'lib/rustlib' / host / 'bin'
@@ -127,9 +131,9 @@ def build(project, staging, storage, target, scene, camera):
             shutil.copy2(source, staging / 'symbols' / name)
     write_json(staging / 'project-build.json', receipt)
     return {'format': 'incant-ios-project-archive', 'version': 1, 'target': target, 'producer_target': host,
-            'profile': 'shipping', 'features': ios_archive.FEATURES, 'command': command_receipt,
+            'profile': 'shipping', 'features': selected_features, 'command': command_receipt,
             'compiler': compiler, 'sdk': {'name': sdk, 'version': sdk_version}, 'codegen': flags,
-            'physics': physics,
+            'physics': physics, 'physics_mode': mode, 'physics_variant': mode,
             'normal_dependencies': graph, 'project_sha256': project_hash, 'scene_id': receipt['scene_id'],
             'script': receipt['script'], 'camera': camera, 'data': data, 'symbols': symbols,
             'archive': {'path': 'runtime/libincant_game_player.a', 'sha256': symbols['runtime_sha256'],

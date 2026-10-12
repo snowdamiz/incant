@@ -3,11 +3,16 @@ import os
 from pathlib import Path
 import re
 
+import physics_export
+from physics_features import SOLVERS, feature_errors
+
 from native_package import read, require, sha256
 from shipping import codegen
 
 TARGETS = {'aarch64-apple-ios-sim': 'iphonesimulator', 'aarch64-apple-ios': 'iphoneos'}
-FEATURES = ['mobile-ffi', 'project', 'render-input', 'physics-deterministic']
+CAPABILITIES = ['mobile-ffi', 'project', 'render-input']
+# Preserve the historical deterministic caller probe's explicit admission.
+FEATURES = physics_export.cargo_features('deterministic', CAPABILITIES)
 NAME = 'incant_game_player'
 FORBIDDEN = {'incant_doc', 'incant_cmd', 'incant_agent', 'incant_core', 'incant_cook',
              'incant_source', 'incant_play', 'incant_play_legacy', 'incant_wasm_cook',
@@ -24,11 +29,10 @@ def admit(host, target):
 def preflight_project(project, scene):
     """Early bounded refusal only; the Rust producer owns schema admission."""
     import json
-    document = json.loads(read(project, 64 * 1024**2))
+    payload = read(project, 64 * 1024**2)
+    mode = physics_export.project_mode(payload)
+    document = json.loads(payload)
     require(isinstance(document, dict) and isinstance(document.get('scenes'), dict), 'Missing project scenes')
-    settings = document.get('settings', {})
-    require(isinstance(settings, dict) and settings.get('physics_mode', 'deterministic') == 'deterministic',
-            'Authored iOS archive currently requires deterministic project physics')
     scenes = document['scenes']
     if scene is None:
         require(len(scenes) == 1, 'Choose --scene when the project does not contain exactly one scene')
@@ -36,6 +40,7 @@ def preflight_project(project, scene):
     require(scene in scenes and isinstance(scenes[scene], dict), 'Selected project scene is missing')
     require(scenes[scene].get('program') is None,
             'Authored iOS archive currently requires TypeScript; static Wasm mobile export is unsupported')
+    return mode
 
 
 def environment(source, rustc, project, scene):
@@ -66,8 +71,14 @@ def normal_dependencies(graph):
     return sorted(set(names))
 
 
+def target_invocations(stderr, target):
+    # Device triples are prefixes of simulator triples; compare the complete token.
+    pattern = re.compile(r'--target ' + re.escape(target) + r'(?=\s|`)')
+    return [line for line in stderr.splitlines() if 'Running `' in line and pattern.search(line)]
+
+
 def verify_codegen(stderr, target):
-    target_lines = [line for line in stderr.splitlines() if 'Running `' in line and f'--target {target}' in line]
+    target_lines = target_invocations(stderr, target)
     flags = {}
     for name in ('incant_runtime', 'incant_script', NAME):
         commands = [line for line in target_lines if re.search(r'--crate-name ' + name + r'\b', line)]
@@ -91,30 +102,25 @@ def verify_codegen(stderr, target):
     return flags
 
 
-def kernel_provenance(stderr, target):
-    """Current immutable base has one deterministic parallel native kernel.
-
-    Future selectable kernels must wire both host cook and target runtime here;
-    the archive exporter must not infer a match from a host-only compilation.
-    """
+def kernel_provenance(stderr, target, mode='deterministic'):
+    """Audit all five fresh target solver invocations for the requested family."""
+    require(mode in physics_export.MODES, 'Unsupported project physics mode')
     result = {}
-    for name in ('rapier2d', 'rapier3d'):
-        lines = [line for line in stderr.splitlines() if 'Running `' in line and f'--target {target}' in line
-                 and re.search(r'--crate-name ' + name + r'\b', line)]
+    for name in SOLVERS:
+        lines = [line for line in target_invocations(stderr, target)
+                 if re.search(r'--crate-name ' + name + r'\b', line)]
         require(len(lines) == 1, f'Missing fresh target physics invocation for {name}')
         features = sorted(set(re.findall(r'--cfg \'feature="([^"\']+)"\'', lines[0])))
-        require('enhanced-determinism' in features and 'parallel' in features
-                and not any(f.startswith('simd-') for f in features),
-                f'Unexpected target physics kernel for {name}: {features}')
         result[name] = {'features': features, 'command_sha256': sha256(lines[0].encode())}
-    return {'mode': 'fixed deterministic parallel kernel', 'target': target, 'crates': result}
+    errors = feature_errors({name: row['features'] for name, row in result.items()}, mode, target)
+    require(not errors, 'Target physics invocation differs from selected mode: ' + '; '.join(errors))
+    return {'mode': mode, 'target': target, 'crates': result}
 
 
-def producer_receipt(receipt, target, project_hash):
+def producer_receipt(receipt, target, project_hash, mode='deterministic'):
     require(receipt.get('format') == 'incant-native-project-build' and receipt.get('version') == 1,
             'Unsupported authored project producer receipt')
-    require(receipt.get('physics_mode') == 'deterministic' and receipt.get('physics_variant') == 'deterministic',
-            'Authored iOS cook physics differs from the fixed target kernel')
+    physics_export.verify_producer(receipt, mode)
     require(receipt['target'] == target and receipt['producer_target'] == 'aarch64-apple-darwin'
             and receipt['producer_kind'] == 'ios-archive' and receipt['project_sha256'] == project_hash
             and receipt['startup_source_parsing'] is False and receipt['program'] is None,
