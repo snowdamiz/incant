@@ -92,3 +92,21 @@ supported browser crate scope passed without changing dependencies to mask it.
 No native window, GPU, screenshot or physical device was exercised.
 
 [Machine-readable receipt and input/log hashes](evidence/authored-wasm-export.json).
+
+## Cache publication review correction
+
+Independent review of commit `448ad76c` found that interruption between creating
+an immutable fingerprint entry and completing its write could leave a partial
+entry that identical reimport would continue to refuse. Cache writes now stage
+and sync a private sibling, then publish with `persist_noclobber`. Concurrent
+identical publishers yield one creation and validated cache hits. A preexisting
+or racing corrupt entry or symbolic link still refuses and is never replaced.
+Unreferenced incomplete staging files do not block reimport.
+
+Four deterministic cache controls cover partial staging, eight simultaneous
+publishers, a corrupt racing destination and a racing symbolic link. The public
+import/select/reimport/Undo/reopen and cache-tampering controls pass unchanged.
+This changes publication only; the captured bytes, policy, validator, Wasmtime
+and linked-player implementations are unchanged, so the original shipping proof
+remains identified above rather than being relabeled as a new run.
+[Correction receipt](evidence/authored-wasm-cache-atomic.json).

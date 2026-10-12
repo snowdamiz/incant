@@ -70,15 +70,25 @@ impl CapturedModule {
         if bytes.len() > MAX_CAPTURE_BYTES {
             return Err(error("captured module exceeds size limit"));
         }
-        // Cache writes never overwrite existing content, including symlinks.
-        let mut file = fs::OpenOptions::new()
-            .write(true)
-            .create_new(true)
-            .open(path)
-            .map_err(error)?;
+        // Interrupted writes can leave only an unreferenced private sibling,
+        // never a partial immutable fingerprint entry. Publication cannot replace
+        // an existing file or symlink, including a concurrently published entry.
+        let mut file = stage(cache)?;
         file.write_all(&bytes).map_err(error)?;
-        file.sync_all().map_err(error)?;
-        Ok(false)
+        file.as_file().sync_all().map_err(error)?;
+        Self::publish(cache, &key, file)
+    }
+    fn publish(cache: &Path, key: &str, file: tempfile::NamedTempFile) -> Result<bool, CookError> {
+        match file.persist_noclobber(cache.join(format!("{key}.wasm.json"))) {
+            Ok(_) => Ok(false),
+            Err(e) if e.error.kind() == std::io::ErrorKind::AlreadyExists => {
+                // A winning concurrent writer is a hit only after the ordinary
+                // bounded identity/metering checks. Corrupt entries stay refused.
+                Self::load(cache, key)?;
+                Ok(true)
+            }
+            Err(e) => Err(error(e.error)),
+        }
     }
     pub fn load(cache: &Path, fingerprint: &str) -> Result<Self, CookError> {
         if fingerprint.len() != 64
@@ -143,4 +153,125 @@ pub fn project_cache(root: &Path, create: bool) -> Result<PathBuf, CookError> {
         }
     }
     Ok(path)
+}
+
+fn stage(cache: &Path) -> Result<tempfile::NamedTempFile, CookError> {
+    tempfile::Builder::new()
+        .prefix(".incant-wasm-")
+        .tempfile_in(cache)
+        .map_err(error)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::sync::{Arc, Barrier};
+
+    fn module() -> CapturedModule {
+        CapturedModule::capture(
+            &wat::parse_str(
+                r#"(module
+          (memory (export "memory") 1)
+          (func (export "incant_abi") (result i32) i32.const 1)
+          (func (export "update") (param i64 f64)))"#,
+            )
+            .unwrap(),
+        )
+        .unwrap()
+    }
+
+    #[test]
+    fn interrupted_partial_staging_cannot_poison_the_fingerprint() {
+        let root = tempfile::tempdir().unwrap();
+        let cache = project_cache(root.path(), true).unwrap();
+        let captured = module();
+        let key = captured.fingerprint();
+        let mut partial = stage(&cache).unwrap();
+        partial.write_all(b"{\"policy\":").unwrap();
+        partial.as_file().sync_all().unwrap();
+        // Keep exactly the incomplete sibling a terminated process might leave.
+        let abandoned = partial.into_temp_path().keep().unwrap();
+        assert!(CapturedModule::load(&cache, &key).is_err());
+        assert!(!cache.join(format!("{key}.wasm.json")).exists());
+        assert!(!captured.store(&cache).unwrap());
+        assert_eq!(
+            CapturedModule::load(&cache, &key).unwrap().original(),
+            captured.original()
+        );
+        assert!(captured.store(&cache).unwrap());
+        assert_eq!(fs::read(abandoned).unwrap(), b"{\"policy\":");
+    }
+
+    #[test]
+    fn concurrent_identical_publication_is_one_creation_then_validated_hits() {
+        let root = tempfile::tempdir().unwrap();
+        let cache = project_cache(root.path(), true).unwrap();
+        let captured = module();
+        let key = captured.fingerprint();
+        let bytes = serde_json::to_vec(&captured).unwrap();
+        let barrier = Arc::new(Barrier::new(8));
+        let mut writers = Vec::new();
+        // All writers finish their private file before any can publish. This
+        // deterministically exercises the racing destination path, not just the
+        // existing-file shortcut at the beginning of store().
+        for _ in 0..8 {
+            let (cache, key, bytes, barrier) =
+                (cache.clone(), key.clone(), bytes.clone(), barrier.clone());
+            writers.push(std::thread::spawn(move || {
+                let mut staged = stage(&cache).unwrap();
+                staged.write_all(&bytes).unwrap();
+                staged.as_file().sync_all().unwrap();
+                barrier.wait();
+                CapturedModule::publish(&cache, &key, staged).unwrap()
+            }));
+        }
+        let hits: Vec<_> = writers.into_iter().map(|w| w.join().unwrap()).collect();
+        assert_eq!(hits.iter().filter(|hit| !**hit).count(), 1);
+        assert_eq!(hits.iter().filter(|hit| **hit).count(), 7);
+        assert_eq!(fs::read_dir(&cache).unwrap().count(), 1);
+        assert_eq!(
+            CapturedModule::load(&cache, &key).unwrap().prepared(),
+            captured.prepared()
+        );
+    }
+
+    #[test]
+    fn racing_corrupt_destination_is_refused_without_overwrite_or_temp_leak() {
+        let root = tempfile::tempdir().unwrap();
+        let cache = project_cache(root.path(), true).unwrap();
+        let captured = module();
+        let key = captured.fingerprint();
+        let mut staged = stage(&cache).unwrap();
+        staged
+            .write_all(&serde_json::to_vec(&captured).unwrap())
+            .unwrap();
+        staged.as_file().sync_all().unwrap();
+        let path = cache.join(format!("{key}.wasm.json"));
+        fs::write(&path, b"incomplete existing entry").unwrap();
+        assert!(CapturedModule::publish(&cache, &key, staged).is_err());
+        assert_eq!(fs::read(path).unwrap(), b"incomplete existing entry");
+        assert_eq!(fs::read_dir(cache).unwrap().count(), 1);
+    }
+
+    #[test]
+    #[cfg(unix)]
+    fn racing_symlink_is_refused_without_touching_its_target() {
+        let root = tempfile::tempdir().unwrap();
+        let cache = project_cache(root.path(), true).unwrap();
+        let captured = module();
+        let key = captured.fingerprint();
+        let bytes = serde_json::to_vec(&captured).unwrap();
+        let mut staged = stage(&cache).unwrap();
+        staged.write_all(&bytes).unwrap();
+        staged.as_file().sync_all().unwrap();
+        let outside = root.path().join("outside");
+        fs::write(&outside, &bytes).unwrap();
+        let path = cache.join(format!("{key}.wasm.json"));
+        std::os::unix::fs::symlink(&outside, &path).unwrap();
+        assert!(CapturedModule::publish(&cache, &key, staged).is_err());
+        assert!(captured.store(&cache).is_err());
+        assert!(path.symlink_metadata().unwrap().file_type().is_symlink());
+        assert_eq!(fs::read(outside).unwrap(), bytes);
+        assert_eq!(fs::read_dir(cache).unwrap().count(), 1);
+    }
 }

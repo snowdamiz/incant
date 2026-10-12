@@ -32,6 +32,9 @@ guest checkpoints remain explicitly Unsupported, including active/paused
 crossfade sessions. Full SDK, routed UI ABI, other shipping platforms, device
 performance and phase gates remain open; this scoped work awaits integration.
 [Contract and measured evidence](docs/spikes/authored-wasm-export.md).
+Independent review also corrected interrupted cache publication: private staged
+files now publish without clobber, with partial-write/concurrent/corrupt/symlink
+controls; the original source-free shipping proof remains separately recorded.
 
 ## Durable budget lock release — correction validated locally
 
