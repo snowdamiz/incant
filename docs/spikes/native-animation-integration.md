@@ -2,7 +2,7 @@
 
 The local integration combines authored Animation components, checked cached
 model metadata, native clocks and atomic TypeScript controls with retained
-render deformation. Actual main113, including the optional cooked shader paths and checkpoint6
+render deformation. Actual main114, including the optional cooked shader paths and checkpoint6
 repairs, is included in the current local union. It is not
 published yet and does not complete animation or the Phase 1 exit gate.
 
@@ -33,8 +33,8 @@ output identities are in the immutable manifest, not inferred from a branch name
 The source-free exported player is verified below. Claude0052 has completed the
 native animation review, with a nullable Inspector defect requiring0053 follow-up. Handoff0052 covers actual visible playback, pause/step/restart, resize,
 and unchanged authoring. Its v2 fixture and binary identities are now complete;
-the earlier shader GPU interval is released and the exclusive native interval is
-granted to0052. The initial retained fixture used a journal filename different
+the earlier shader and0052 GPU intervals are released; the focused0053 interval
+is separately owned by Claude. The initial retained fixture used a journal filename different
 from the editor default. A separate v2 was reauthored through public routes and
 verified with the rebuilt headless executable and the editor-default journal,
 including 180 CPU native ticks. The superseded v1 remains historical. This is a
@@ -110,3 +110,20 @@ transport task. No integrator GPU/window/provider work or broader gate claim is
 made by this source/CPU integration.
 
 [Current source, tests and preserved native evidence](evidence/native-animation-main113-integration.json).
+
+## Main114 lock identity and repeated fresh export
+
+Main114's reviewed atlas merges cleanly into frozen `5d98ee2`. Its root lock
+change invalidates the conservative script compatibility digest, so the public
+producer was rebuilt and the unchanged export probe rerun on this exact source.
+The fresh shipping player passes all 23 numerical animation cases over 160 ticks
+after authoring inputs and private build storage are deleted. Three replays have
+identical reports/checkpoints; the split continuation preserves save, logs, CPU
+model input and PCM, and both corrupt-save/failed-observation controls withhold
+save/PCM. All seven player processes are reaped.
+
+[Current export receipt](evidence/native-animation-main114-export.json) binds
+source, logs and retained outputs; the player SHA256 is
+`ad79a8149a13c7a74759cddcd92d57268ad084c4f76237bcb2750bdfe535ca21`. This is CPU functional
+evidence. Earlier native appearance evidence remains on its exact granted build,
+and the focused0053 acceptance is still pending.
