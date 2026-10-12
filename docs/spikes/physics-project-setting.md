@@ -25,6 +25,15 @@ explicitly select the tested build mode; they do not rely on the host default.
 The [retained execution manifest](evidence/physics-project-setting.json) binds the
 25 changed Rust files and the unchanged 1,378-file compilation freeze.
 
+After integrating main171's UI/mobile changes, all 65 cook/Play tests in 25
+groups and Clippy pass in each of the three variants. The fresh deterministic
+headless binary publishes all 70 schema files identically to the committed
+registry. Command, Project, legacy GameSave and agent-tool schemas include the
+new setting; generated TypeScript consumers accept both modes and old omitted
+settings, and reject unsupported modes and incomplete commands. SDK strict
+checking, generation/bridge checks and the editor build pass.
+[Integrated and generated-contract evidence](evidence/physics-project-contract.json).
+
 Mode-aware development launcher and shipping export execution are separate
 follow-on work. The editor still runs its existing in-process worker and cannot
 switch its compiled kernel dynamically. No complete process-selection, physics

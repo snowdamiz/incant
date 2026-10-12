@@ -1706,3 +1706,12 @@ launcher/export execution and editor process switching remain in progress.
   retained evidence; publisher integration remains pending. No actual-cursor,
   arbitrary guest checkpoint, physical-device or phase-gate claim. See
   [contract and evidence](docs/spikes/native-wasm-audio.md).
+
+## Physics setting generated contract — locally verified
+
+The public schema registry, agent-tool command schema and generated TypeScript
+API now include the undoable physics mode. All 70 schemas match a fresh matching
+Rust binary; strict consumer checks and the editor build pass. The integrated
+cook/Play suite passes 65 tests and Clippy in each of three compiled variants.
+Mode-aware launch/export and editor process switching remain separate follow-on
+work. [Evidence](docs/spikes/physics-project-setting.md).
