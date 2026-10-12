@@ -1050,6 +1050,7 @@ dependencies = [
  "incant_physics_runtime",
  "incant_types",
  "libm",
+ "serde",
  "sha2",
  "thiserror",
 ]
