@@ -16,13 +16,13 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Pinned mobile bytecode compatibility — actual simulator proof passed
+## Pinned mobile bytecode compatibility — independently accepted
 
 Fresh source cooks bind exact producer/destination and the pinned QuickJS ABI.
 Actual C and Swift callers each pass the same complete numeric/input/failure
 records on macOS and an iOS 27.0 ARM simulator (32 controls per platform). iOS
 device archives compile and link only. Native script/cooker tests, union Clippy
-and lean dependency checks pass; final execution review is pending. Android
+and lean dependency checks pass; independent final source/execution review is accepted. Android
 cross-target admission and authored-project cross-export remain denied. No
 physical-phone or performance gate is claimed.
 [Contract and evidence](docs/spikes/mobile-bytecode-compatibility.md).

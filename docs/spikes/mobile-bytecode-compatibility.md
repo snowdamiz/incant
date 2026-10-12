@@ -5,7 +5,7 @@ This slice adds a closed trusted-source cook from `aarch64-apple-darwin` to
 retargeting, project-supplied executable caches, Android cross-target execution, or authored
 project cross-target export. Local native checks and actual iOS simulator execution pass on the retained
 immutable source. iOS device archives also compile and link to both callers, but
-were not executed on a device. Final independent execution review is pending.
+were not executed on a device. Independent final execution review is accepted.
 These results do not establish physical-device performance or a phone gate.
 
 ## Producer and destination contract
@@ -64,7 +64,7 @@ per-tick records, not an aggregate checksum. Three held/released ticks cover:
   velocity writes that makes the session unavailable.
 
 The common native test runs freshly embedded trusted bytecode against these
-records. The separate mobile caller harness will use one immutable target archive
+records. The separate mobile caller harness uses one immutable target archive
 for its C and Swift callers, retaining archive/build/source identities and comparing
 all fixture messages. Its trusted build uses `INCANT_NATIVE_SCRIPT_SOURCE` with
 this fixture's absolute path and `INCANT_NATIVE_SCRIPT_NAME=mobile-compat.js`.
@@ -125,5 +125,5 @@ Union all-target Clippy for script/cook/player, the mobile runtime dependency gu
 formatting and diff checks also pass. Nine larger archives/caller executables remain
 hash-bound at durable paths outside `/tmp`; their bytes are not duplicated into the
 repository packet. Independent source review accepted the compiler and fixture;
-final target-evidence review remains pending. The original failed native fixture
+[Final independent target-evidence review](evidence/mobile-bytecode-compatibility/final-review.json) is accepted. The original failed native fixture
 compilation and the pre-correction ABI test freeze remain preserved.

@@ -1,5 +1,5 @@
 {
-  "status": "actual simulator route passed; final independent execution review pending",
+  "status": "independent final source and execution review accepted",
   "source_commit": "a54a9da5bc620e0dc9e489cc531ddf6c350109be",
   "tested_union": "24363a100143b938599d8567753b36a8d2564b63",
   "caller_commit": "270294e51cc194bf8e3bd9ee30f35ef72f7da5fe",
@@ -327,5 +327,11 @@
     "No authored-project mobile export, signing, runtime window/rendering or device-performance gate",
     "Trusted embedded bytes only; metadata hashes do not authenticate project-provided executable caches",
     "Proof uses ci profile, not shipping-profile device measurements"
-  ]
+  ],
+  "final_review": {
+    "path": "final-review.json",
+    "sha256": "0a84d45e90a9f51e22080866876e247fa9746253b56fde71b4745e35ab7ffd96",
+    "reviewed_packet_commit": "e2a9bbd45efed5c6e929b9b33561f945e453f082",
+    "reviewed_packet_sha256": "dfafd71aaa34fca7165111726c71384c439f0e1ec8a6b1983004559cad9f9375"
+  }
 }
