@@ -38,6 +38,17 @@ and reruns schema/generation/guard checks; final independent review is accepted.
 process switching and mode-aware export remain separate follow-on work.
 [Integrated contract and evidence](docs/spikes/physics-project-main173.md).
 
+## Pearl Cove presentation — current main173 verified
+
+Accepted gameplay hooks, original Claude art and localized HUD are composed.
+Current matching-headless verification passes seven original, seven presentation
+and seven authored Cove scenarios, public Undo/Redo/reopen and four precise binding
+refusals. Source, art and test bytes stay unchanged; Claude's offscreen appearance
+approval remains scoped to its frozen packet. Original two shipping exports remain
+separately accepted producer evidence. Final independent integration review is accepted; native
+window, restart, audio and physical-device/performance/physics-save gates stay open.
+[Integrated source and evidence](docs/spikes/planar-presentation-main173.md).
+
 ## Physics-mode foundation — current main172 verified
 
 The full process graph forwards deterministic, fast and explicit eight-lane
@@ -71,8 +82,8 @@ The player library and thin executable share a crate name. The shipping audit
 now checks both target units independently, preserving required optimization,
 source-compiler exclusion and final executable fat LTO. Six parser regressions
 and 63 scoped tools tests pass; root source review is accepted. The original
-failed export remains retained and corrected fresh packaging is pending in the
-Planar proof. [Evidence](docs/spikes/native-export-player-units.md).
+failed export remains retained; two corrected fresh Planar packages now pass
+the four-unit codegen audit. [Evidence](docs/spikes/native-export-player-units.md).
 
 ## Headless UI and reusable player — merged main169
 
