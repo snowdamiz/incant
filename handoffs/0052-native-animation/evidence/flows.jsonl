@@ -1,0 +1,102 @@
+{"burst": "bc", "at": "2026-10-12T00:59:03.251+00:00", "event": "key", "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000002", "box": [8.0, 146.0, 229.0, 28.0]}, "key": "35:cmd"}
+{"burst": "bc", "at": "2026-10-12T00:59:03.997+00:00", "event": "shown", "word": "Playing", "after_s": 0.64}
+{"burst": "bc", "at": "2026-10-12T00:59:04.474+00:00", "event": "held", "seconds": 0.4}
+{"burst": "bc", "at": "2026-10-12T00:59:04.825+00:00", "event": "key", "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000002", "box": [8.0, 146.0, 229.0, 28.0]}, "key": "35:cmd,shift"}
+{"burst": "bc", "at": "2026-10-12T00:59:05.188+00:00", "event": "shown", "word": "Paused", "after_s": 0.27}
+{"burst": "bc", "text": "02-paused.png (2880, 1750)"}
+{"burst": "bc", "text": "another app came forward; stopping the hold"}
+{"burst": "bc", "text": "step exit 1 (waited 0s)"}
+{"burst": "d", "at": "2026-10-12T01:00:52.403+00:00", "event": "step", "key": "35:cmd,alt", "index": 1, "before": [39], "after": [40], "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000002", "box": [8.0, 146.0, 229.0, 28.0]}}
+{"burst": "d", "at": "2026-10-12T01:00:52.836+00:00", "event": "step", "key": "35:cmd,alt", "index": 2, "before": [40], "after": [41], "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000002", "box": [8.0, 146.0, 229.0, 28.0]}}
+{"burst": "d", "at": "2026-10-12T01:00:53.254+00:00", "event": "step", "key": "35:cmd,alt", "index": 3, "before": [41], "after": [42], "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000002", "box": [8.0, 146.0, 229.0, 28.0]}}
+{"burst": "d", "at": "2026-10-12T01:00:53.656+00:00", "event": "step", "key": "35:cmd,alt", "index": 4, "before": [42], "after": [43], "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000002", "box": [8.0, 146.0, 229.0, 28.0]}}
+{"burst": "d", "at": "2026-10-12T01:00:54.067+00:00", "event": "step", "key": "35:cmd,alt", "index": 5, "before": [43], "after": [44], "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000002", "box": [8.0, 146.0, 229.0, 28.0]}}
+{"burst": "d", "at": "2026-10-12T01:00:54.467+00:00", "event": "step", "key": "35:cmd,alt", "index": 6, "before": [44], "after": [45], "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000002", "box": [8.0, 146.0, 229.0, 28.0]}}
+{"burst": "d", "at": "2026-10-12T01:00:54.873+00:00", "event": "step", "key": "35:cmd,alt", "index": 7, "before": [45], "after": [46], "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000002", "box": [8.0, 146.0, 229.0, 28.0]}}
+{"burst": "d", "at": "2026-10-12T01:00:55.274+00:00", "event": "step", "key": "35:cmd,alt", "index": 8, "before": [46], "after": [47], "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000002", "box": [8.0, 146.0, 229.0, 28.0]}}
+{"burst": "d", "at": "2026-10-12T01:00:55.696+00:00", "event": "step", "key": "35:cmd,alt", "index": 9, "before": [47], "after": [48], "focus": {"role": "AXGroup", "name": null, "dom": "tree-row-00000000000000000000000002", "box": [8.0, 146.0, 229.0, 28.0]}}
+{"burst": "d", "at": "2026-10-12T01:00:56.067+00:00", "event": "tab", "focus": {"role": "AXSplitter", "name": "Resize hierarchy", "dom": null, "box": [245.0, 40.0, 1.0, 807.0]}}
+{"burst": "d", "at": "2026-10-12T01:00:56.489+00:00", "event": "tab", "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "d", "at": "2026-10-12T01:00:56.904+00:00", "event": "tab", "focus": {"role": "AXButton", "name": "Step", "dom": null, "box": [1013.0, 43.0, 28.0, 29.0]}}
+{"burst": "d", "at": "2026-10-12T01:00:57.455+00:00", "event": "step", "key": "49", "index": 1, "before": [48], "after": [49], "focus": {"role": "AXButton", "name": "Step", "dom": null, "box": [1013.0, 43.0, 28.0, 29.0]}}
+{"burst": "d", "text": "04-stepped.png (2880, 1750)"}
+{"burst": "d", "text": "step exit 0 (waited 0s)"}
+{"burst": "h1", "at": "2026-10-12T01:01:47.078+00:00", "event": "key", "focus": {"role": "AXButton", "name": "Step", "dom": null, "box": [1013.0, 43.0, 28.0, 29.0]}, "key": "35:cmd,shift"}
+{"burst": "h1", "at": "2026-10-12T01:01:47.474+00:00", "event": "shown", "word": "Playing", "after_s": 0.3}
+{"burst": "h1", "x": 256.0, "y": 145.0, "w": 1000.0, "h": 650.0}
+{"burst": "h1", "at": "2026-10-12T01:01:48.571+00:00", "event": "key", "focus": {"role": "AXButton", "name": "Step", "dom": null, "box": [573.0, 43.0, 28.0, 29.0]}, "key": "35:cmd,shift"}
+{"burst": "h1", "at": "2026-10-12T01:01:48.969+00:00", "event": "shown", "word": "Paused", "after_s": 0.3}
+{"burst": "h1", "text": "step exit 0 (waited 0s)"}
+{"burst": "h2", "at": "2026-10-12T01:02:52.920+00:00", "event": "step", "key": "35:cmd,alt", "index": 1, "before": [138], "after": [139], "focus": {"role": "AXGroup", "name": "Agent", "dom": null, "box": [640.0, 585.0, 360.0, 37.0]}}
+{"burst": "h2", "text": "05-1000x650-paused.png (2000, 1300)"}
+{"burst": "h2", "text": "step exit 0 (waited 0s)"}
+{"burst": "e", "at": "2026-10-12T01:04:10.792+00:00", "event": "key", "focus": {"role": "AXGroup", "name": "Agent", "dom": null, "box": [640.0, 333.0, 360.0, 289.0]}, "key": "35:cmd,shift"}
+{"burst": "e", "at": "2026-10-12T01:04:11.242+00:00", "event": "shown", "word": "Playing", "after_s": 0.32}
+{"burst": "e", "x": 36.0, "y": 33.0, "w": 1440.0, "h": 874.0}
+{"burst": "e", "at": "2026-10-12T01:04:11.977+00:00", "event": "key", "focus": {"role": "AXGroup", "name": "Agent", "dom": null, "box": [1080.0, 557.0, 360.0, 289.0]}, "key": "35:cmd,shift"}
+{"burst": "e", "at": "2026-10-12T01:04:12.384+00:00", "event": "shown", "word": "Paused", "after_s": 0.3}
+{"burst": "e", "text": "06-rotate-1440.png (2880, 1748)"}
+{"burst": "e", "text": "step exit 0 (waited 36s)"}
+{"burst": "f", "x": 36.0, "y": 33.0, "w": 1440.0, "h": 874.0}
+{"burst": "f", "at": "2026-10-12T01:05:11.130+00:00", "event": "key", "focus": {"role": "AXGroup", "name": "Agent", "dom": null, "box": [1080.0, 557.0, 360.0, 289.0]}, "key": "35:cmd"}
+{"burst": "f", "at": "2026-10-12T01:05:11.586+00:00", "event": "shown", "word": "Live", "after_s": 0.34}
+{"burst": "f", "text": "07-stopped.png (2880, 1748)"}
+{"burst": "f", "text": "step exit 0 (waited 14s)"}
+{"burst": "g", "window_h": 874, "target": 209, "hold": 2.3}
+{"burst": "g", "at": "2026-10-12T01:08:02.616+00:00", "event": "tab", "focus": {"role": "AXSplitter", "name": "Resize hierarchy", "dom": null, "box": [245.0, 40.0, 1.0, 806.0]}}
+{"burst": "g", "at": "2026-10-12T01:08:03.012+00:00", "event": "tab", "focus": {"role": "AXButton", "name": "Play", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g", "at": "2026-10-12T01:08:03.506+00:00", "event": "key", "focus": {"role": "AXButton", "name": "Play", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}, "key": "49"}
+{"burst": "g", "at": "2026-10-12T01:08:04.342+00:00", "event": "shown", "word": "Playing", "after_s": 0.74}
+{"burst": "g", "at": "2026-10-12T01:08:06.753+00:00", "event": "held", "seconds": 2.3}
+{"burst": "g", "at": "2026-10-12T01:08:07.169+00:00", "event": "key", "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}, "key": "49"}
+{"burst": "g", "at": "2026-10-12T01:08:07.574+00:00", "event": "shown", "word": "Paused", "after_s": 0.3}
+{"burst": "g", "paused_at": 166}
+{"burst": "g", "text": "{\"at\": \"2026-10-12T01:08:26.014+00:00\", \"event\": \"step\", \"key\": \"35:cmd,alt\", \"index\": 43, \"before\": [208], \"after\": [209], \"focus\": {\"role\": \"AXButton\", \"name\": \"Resume\", \"dom\": null, \"box\": [983.0,", "note": "display echo cut to 200 characters"}
+{"burst": "g", "text": "08-fresh-run.png (2880, 1748)"}
+{"burst": "g", "text": "step exit 0 (waited 40s)"}
+{"burst": "g-steps", "at": "2026-10-12T01:08:08.468+00:00", "event": "step", "key": "35:cmd,alt", "index": 1, "before": [166], "after": [167], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:08.943+00:00", "event": "step", "key": "35:cmd,alt", "index": 2, "before": [167], "after": [168], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:09.379+00:00", "event": "step", "key": "35:cmd,alt", "index": 3, "before": [168], "after": [169], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:09.798+00:00", "event": "step", "key": "35:cmd,alt", "index": 4, "before": [169], "after": [170], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:10.222+00:00", "event": "step", "key": "35:cmd,alt", "index": 5, "before": [170], "after": [171], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:10.731+00:00", "event": "step", "key": "35:cmd,alt", "index": 6, "before": [171], "after": [172], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:11.186+00:00", "event": "step", "key": "35:cmd,alt", "index": 7, "before": [172], "after": [173], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:11.626+00:00", "event": "step", "key": "35:cmd,alt", "index": 8, "before": [173], "after": [174], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:12.049+00:00", "event": "step", "key": "35:cmd,alt", "index": 9, "before": [174], "after": [175], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:12.480+00:00", "event": "step", "key": "35:cmd,alt", "index": 10, "before": [175], "after": [176], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:12.941+00:00", "event": "step", "key": "35:cmd,alt", "index": 11, "before": [176], "after": [177], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:13.403+00:00", "event": "step", "key": "35:cmd,alt", "index": 12, "before": [177], "after": [178], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:13.814+00:00", "event": "step", "key": "35:cmd,alt", "index": 13, "before": [178], "after": [179], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:14.242+00:00", "event": "step", "key": "35:cmd,alt", "index": 14, "before": [179], "after": [180], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:14.644+00:00", "event": "step", "key": "35:cmd,alt", "index": 15, "before": [180], "after": [181], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:15.047+00:00", "event": "step", "key": "35:cmd,alt", "index": 16, "before": [181], "after": [182], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:15.489+00:00", "event": "step", "key": "35:cmd,alt", "index": 17, "before": [182], "after": [183], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:15.889+00:00", "event": "step", "key": "35:cmd,alt", "index": 18, "before": [183], "after": [184], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:16.299+00:00", "event": "step", "key": "35:cmd,alt", "index": 19, "before": [184], "after": [185], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:16.701+00:00", "event": "step", "key": "35:cmd,alt", "index": 20, "before": [185], "after": [186], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:17.103+00:00", "event": "step", "key": "35:cmd,alt", "index": 21, "before": [186], "after": [187], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:17.500+00:00", "event": "step", "key": "35:cmd,alt", "index": 22, "before": [187], "after": [188], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:17.907+00:00", "event": "step", "key": "35:cmd,alt", "index": 23, "before": [188], "after": [189], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:18.287+00:00", "event": "step", "key": "35:cmd,alt", "index": 24, "before": [189], "after": [190], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:18.692+00:00", "event": "step", "key": "35:cmd,alt", "index": 25, "before": [190], "after": [191], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:19.104+00:00", "event": "step", "key": "35:cmd,alt", "index": 26, "before": [191], "after": [192], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:19.503+00:00", "event": "step", "key": "35:cmd,alt", "index": 27, "before": [192], "after": [193], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:19.902+00:00", "event": "step", "key": "35:cmd,alt", "index": 28, "before": [193], "after": [194], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:20.295+00:00", "event": "step", "key": "35:cmd,alt", "index": 29, "before": [194], "after": [195], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:20.698+00:00", "event": "step", "key": "35:cmd,alt", "index": 30, "before": [195], "after": [196], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:21.093+00:00", "event": "step", "key": "35:cmd,alt", "index": 31, "before": [196], "after": [197], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:21.509+00:00", "event": "step", "key": "35:cmd,alt", "index": 32, "before": [197], "after": [198], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:21.903+00:00", "event": "step", "key": "35:cmd,alt", "index": 33, "before": [198], "after": [199], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:22.290+00:00", "event": "step", "key": "35:cmd,alt", "index": 34, "before": [199], "after": [200], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:22.752+00:00", "event": "step", "key": "35:cmd,alt", "index": 35, "before": [200], "after": [201], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:23.186+00:00", "event": "step", "key": "35:cmd,alt", "index": 36, "before": [201], "after": [202], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:23.589+00:00", "event": "step", "key": "35:cmd,alt", "index": 37, "before": [202], "after": [203], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:24.007+00:00", "event": "step", "key": "35:cmd,alt", "index": 38, "before": [203], "after": [204], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:24.409+00:00", "event": "step", "key": "35:cmd,alt", "index": 39, "before": [204], "after": [205], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:24.806+00:00", "event": "step", "key": "35:cmd,alt", "index": 40, "before": [205], "after": [206], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:25.200+00:00", "event": "step", "key": "35:cmd,alt", "index": 41, "before": [206], "after": [207], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:25.599+00:00", "event": "step", "key": "35:cmd,alt", "index": 42, "before": [207], "after": [208], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "g-steps", "at": "2026-10-12T01:08:26.014+00:00", "event": "step", "key": "35:cmd,alt", "index": 43, "before": [208], "after": [209], "focus": {"role": "AXButton", "name": "Resume", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}}
+{"burst": "quit", "at": "2026-10-12T01:09:03.978+00:00", "event": "key", "focus": {"role": "AXButton", "name": "Play", "dom": null, "box": [983.0, 43.0, 28.0, 29.0]}, "key": "35:cmd"}
+{"burst": "quit", "at": "2026-10-12T01:09:04.377+00:00", "event": "shown", "word": "Live", "after_s": 0.28}
+{"burst": "quit", "text": "step exit 0 (waited 2s)"}

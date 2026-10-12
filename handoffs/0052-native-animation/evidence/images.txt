@@ -1,0 +1,8 @@
+2026-10-12T00:57:20Z capture <worktree>/artifacts/0052/raw/01-authoring.png window 41202 {"id":41202,"x":36.0,"y":33.0,"w":1440.0,"h":875.0}
+2026-10-12T00:59:06Z capture <worktree>/artifacts/0052/raw/02-paused.png window 41202 {"id":41202,"x":36.0,"y":33.0,"w":1440.0,"h":875.0}
+2026-10-12T01:00:16Z capture <worktree>/artifacts/0052/raw/03-paused-later.png window 41202 {"id":41202,"x":36.0,"y":33.0,"w":1440.0,"h":875.0}
+2026-10-12T01:00:58Z capture <worktree>/artifacts/0052/raw/04-stepped.png window 41202 {"id":41202,"x":36.0,"y":33.0,"w":1440.0,"h":875.0}
+2026-10-12T01:02:54Z capture <worktree>/artifacts/0052/raw/05-1000x650-paused.png window 41202 {"id":41202,"x":256.0,"y":145.0,"w":1000.0,"h":650.0}
+2026-10-12T01:04:13Z capture <worktree>/artifacts/0052/raw/06-rotate-1440.png window 41202 {"id":41202,"x":36.0,"y":33.0,"w":1440.0,"h":874.0}
+2026-10-12T01:05:12Z capture <worktree>/artifacts/0052/raw/07-stopped.png window 41202 {"id":41202,"x":36.0,"y":33.0,"w":1440.0,"h":874.0}
+2026-10-12T01:08:27Z capture <worktree>/artifacts/0052/raw/08-fresh-run.png window 41202 {"id":41202,"x":36.0,"y":33.0,"w":1440.0,"h":874.0}

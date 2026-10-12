@@ -1,0 +1,1213 @@
+{
+ "method": "imgtool blob over the native viewport rectangle (per-row median background, tolerance 6), compared with predict.py / preview.py analytic projections of the fixture pose",
+ "captures": [
+  {
+   "capture": "A",
+   "file": "01-authoring-1440x875-rig-selected.png",
+   "raw_sha256": "3e7ed40bd66905091ad542a426f56c4de0b5ae85b7cf8994d2267c0f9587aa75",
+   "committed_sha256": "cf79269df03b2b94b3157b821649d31076c85400332005786fad1f4cea8921e5",
+   "state_label": "a-authoring",
+   "state_at": "2026-10-12T00:57:20.334+00:00",
+   "window_pt": [
+    1440.0,
+    875.0
+   ],
+   "viewport_px": [
+    492,
+    152,
+    1666,
+    1068
+   ],
+   "header_words": [
+    "Live"
+   ],
+   "header_tick": [],
+   "focus": [
+    {
+     "role": "AXGroup",
+     "name": null,
+     "box": [
+      8.0,
+      146.0,
+      229.0,
+      28.0
+     ]
+    }
+   ],
+   "blob": {
+    "count": 3773,
+    "centroid": [
+     1352.338,
+     663.151
+    ],
+    "box": [
+     1325,
+     596,
+     83,
+     113
+    ],
+    "moments": [
+     387.48,
+     601.665,
+     318.279
+    ],
+    "vertices": [
+     [
+      1325,
+      596
+     ],
+     [
+      1407,
+      708
+     ],
+     [
+      1325,
+      685
+     ]
+    ],
+    "mean": "8b8b8b",
+    "backgrounds": [
+     [
+      "141519",
+      1068
+     ]
+    ]
+   },
+   "model": {
+    "predicted": [
+     [
+      1325.0,
+      686.0
+     ],
+     [
+      1408.49,
+      709.35
+     ],
+     [
+      1325.0,
+      595.58
+     ]
+    ],
+    "measured": [
+     [
+      1325,
+      596
+     ],
+     [
+      1407,
+      708
+     ],
+     [
+      1325,
+      685
+     ]
+    ],
+    "count": 3773,
+    "mean": "8b8b8b",
+    "vertex_errors_px": [
+     0.42,
+     2.01,
+     1.0
+    ],
+    "centroid_measured": [
+     1352.338,
+     663.151
+    ],
+    "centroid_of_vertices_predicted": [
+     1352.83,
+     663.65
+    ],
+    "camera": "authoring preview eye (6,5,9) -> origin, vertical FOV 50 deg"
+   }
+  },
+  {
+   "capture": "B",
+   "file": "02-play-paused-tick39-1440x875.png",
+   "raw_sha256": "600840f588289a8966deaa91043af969038e0caa9d39e1665e5a40c86f576070",
+   "committed_sha256": "1aababdc7f944c2194cf624fb06eb06738f5157a1e4e112fbf64c0e177bb54b7",
+   "state_label": "b-paused",
+   "state_at": "2026-10-12T00:59:05.823+00:00",
+   "window_pt": [
+    1440.0,
+    875.0
+   ],
+   "viewport_px": [
+    492,
+    152,
+    1666,
+    1068
+   ],
+   "header_words": [
+    "Paused"
+   ],
+   "header_tick": [
+    "tick 39"
+   ],
+   "focus": [
+    {
+     "role": "AXGroup",
+     "name": null,
+     "box": [
+      8.0,
+      146.0,
+      229.0,
+      28.0
+     ]
+    }
+   ],
+   "blob": {
+    "count": 6786,
+    "centroid": [
+     1378.333,
+     704.667
+    ],
+    "box": [
+     1340,
+     628,
+     116,
+     116
+    ],
+    "moments": [
+     753.889,
+     753.889,
+     376.944
+    ],
+    "vertices": [
+     [
+      1455,
+      743
+     ],
+     [
+      1340,
+      628
+     ],
+     [
+      1340,
+      743
+     ]
+    ],
+    "mean": "868686",
+    "backgrounds": [
+     [
+      "141519",
+      1068
+     ]
+    ]
+   },
+   "model": {
+    "tick": "39",
+    "pose": "move at 0.633333 s",
+    "theta_deg": 0.0,
+    "unit_px": 115.614,
+    "predicted": {
+     "corner": [
+      1340.42,
+      743.81
+     ],
+     "x_end": [
+      1456.03,
+      743.81
+     ],
+     "y_end": [
+      1340.42,
+      628.19
+     ],
+     "centroid": [
+      1378.95,
+      705.27
+     ],
+     "area_px": 6683.3
+    },
+    "measured": {
+     "centroid": [
+      1378.333,
+      704.667
+     ],
+     "count": 6786,
+     "vertices": [
+      [
+       1455,
+       743
+      ],
+      [
+       1340,
+       628
+      ],
+      [
+       1340,
+       743
+      ]
+     ],
+     "mean": "868686"
+    },
+    "centroid_error_px": 0.86,
+    "area_ratio": 1.0154,
+    "vertex_errors_px": [
+     1.31,
+     0.46,
+     0.91
+    ],
+    "measured_theta_deg_about_predicted_corner": 0.91,
+    "measured_radius_units": 0.4714,
+    "camera": "Stationary camera (0.5,0.5,8) looking -Z, vertical FOV 60 deg",
+    "neighbours": {
+     "38": 1.44,
+     "40": 2.62
+    }
+   }
+  },
+  {
+   "capture": "C",
+   "file": "03-paused-tick39-70s-later-1440x875.png",
+   "raw_sha256": "51272e143ecbb1b4b966400ac01c39733ff213768c695cec0884161dc281afb1",
+   "committed_sha256": "c07a2b5ac6f184de35a8d2ad5431bd2c5df8c8459f5d2cee8ecaca8b2bb14598",
+   "state_label": "c-paused-later",
+   "state_at": "2026-10-12T01:00:15.952+00:00",
+   "window_pt": [
+    1440.0,
+    875.0
+   ],
+   "viewport_px": [
+    492,
+    152,
+    1666,
+    1068
+   ],
+   "header_words": [
+    "Paused"
+   ],
+   "header_tick": [
+    "tick 39"
+   ],
+   "focus": [
+    {
+     "role": "AXGroup",
+     "name": null,
+     "box": [
+      8.0,
+      146.0,
+      229.0,
+      28.0
+     ]
+    }
+   ],
+   "blob": {
+    "count": 6786,
+    "centroid": [
+     1378.333,
+     704.667
+    ],
+    "box": [
+     1340,
+     628,
+     116,
+     116
+    ],
+    "moments": [
+     753.889,
+     753.889,
+     376.944
+    ],
+    "vertices": [
+     [
+      1455,
+      743
+     ],
+     [
+      1340,
+      628
+     ],
+     [
+      1340,
+      743
+     ]
+    ],
+    "mean": "868686",
+    "backgrounds": [
+     [
+      "141519",
+      1068
+     ]
+    ]
+   },
+   "model": {
+    "tick": "39",
+    "pose": "move at 0.633333 s",
+    "theta_deg": 0.0,
+    "unit_px": 115.614,
+    "predicted": {
+     "corner": [
+      1340.42,
+      743.81
+     ],
+     "x_end": [
+      1456.03,
+      743.81
+     ],
+     "y_end": [
+      1340.42,
+      628.19
+     ],
+     "centroid": [
+      1378.95,
+      705.27
+     ],
+     "area_px": 6683.3
+    },
+    "measured": {
+     "centroid": [
+      1378.333,
+      704.667
+     ],
+     "count": 6786,
+     "vertices": [
+      [
+       1455,
+       743
+      ],
+      [
+       1340,
+       628
+      ],
+      [
+       1340,
+       743
+      ]
+     ],
+     "mean": "868686"
+    },
+    "centroid_error_px": 0.86,
+    "area_ratio": 1.0154,
+    "vertex_errors_px": [
+     1.31,
+     0.46,
+     0.91
+    ],
+    "measured_theta_deg_about_predicted_corner": 0.91,
+    "measured_radius_units": 0.4714,
+    "camera": "Stationary camera (0.5,0.5,8) looking -Z, vertical FOV 60 deg",
+    "neighbours": {
+     "38": 1.44,
+     "40": 2.62
+    }
+   }
+  },
+  {
+   "capture": "D",
+   "file": "04-stepped-tick49-1440x875-step-focused.png",
+   "raw_sha256": "f37837db1ef096e96572d336a1ebcb3b73303ede785e67716ed1147b4c7ffd72",
+   "committed_sha256": "ef850aa8c8d0aa110a95f172ee91b6ccde8d6c091bc6ca5aec7224041705df95",
+   "state_label": "d-stepped",
+   "state_at": "2026-10-12T01:00:57.971+00:00",
+   "window_pt": [
+    1440.0,
+    875.0
+   ],
+   "viewport_px": [
+    492,
+    152,
+    1666,
+    1068
+   ],
+   "header_words": [
+    "Paused"
+   ],
+   "header_tick": [
+    "tick 49"
+   ],
+   "focus": [
+    {
+     "role": "AXButton",
+     "name": "Step",
+     "box": [
+      1013.0,
+      43.0,
+      28.0,
+      29.0
+     ]
+    }
+   ],
+   "blob": {
+    "count": 6670,
+    "centroid": [
+     1398.0,
+     705.0
+    ],
+    "box": [
+     1360,
+     629,
+     115,
+     115
+    ],
+    "moments": [
+     741.0,
+     741.0,
+     370.5
+    ],
+    "vertices": [
+     [
+      1360,
+      629
+     ],
+     [
+      1474,
+      743
+     ],
+     [
+      1360,
+      743
+     ]
+    ],
+    "mean": "868686",
+    "backgrounds": [
+     [
+      "141519",
+      1068
+     ]
+    ]
+   },
+   "model": {
+    "tick": "49",
+    "pose": "move at 0.800000 s",
+    "theta_deg": 0.0,
+    "unit_px": 115.614,
+    "predicted": {
+     "corner": [
+      1359.68,
+      743.81
+     ],
+     "x_end": [
+      1475.3,
+      743.81
+     ],
+     "y_end": [
+      1359.68,
+      628.19
+     ],
+     "centroid": [
+      1398.22,
+      705.27
+     ],
+     "area_px": 6683.3
+    },
+    "measured": {
+     "centroid": [
+      1398.0,
+      705.0
+     ],
+     "count": 6670,
+     "vertices": [
+      [
+       1360,
+       629
+      ],
+      [
+       1474,
+       743
+      ],
+      [
+       1360,
+       743
+      ]
+     ],
+     "mean": "868686"
+    },
+    "centroid_error_px": 0.35,
+    "area_ratio": 0.998,
+    "vertex_errors_px": [
+     0.87,
+     1.53,
+     0.87
+    ],
+    "measured_theta_deg_about_predicted_corner": 0.37,
+    "measured_radius_units": 0.4717,
+    "camera": "Stationary camera (0.5,0.5,8) looking -Z, vertical FOV 60 deg",
+    "neighbours": {
+     "48": 1.73,
+     "50": 2.17
+    }
+   }
+  },
+  {
+   "capture": "H",
+   "file": "05-resized-1000x650-paused-tick139.png",
+   "raw_sha256": "d56378e24c9f9d85aebfc497fe16f23768c4b2c6b1fa7e8caea489c71b45af59",
+   "committed_sha256": "617c85c0ae97f6eccb73322449aed112e24db278703c729d8a52cb75501661d2",
+   "state_label": "h-paused-1000-step",
+   "state_at": "2026-10-12T01:02:53.661+00:00",
+   "window_pt": [
+    1000.0,
+    650.0
+   ],
+   "viewport_px": [
+    492,
+    152,
+    786,
+    618
+   ],
+   "header_words": [
+    "Paused"
+   ],
+   "header_tick": [
+    "tick 139"
+   ],
+   "focus": [
+    {
+     "role": "AXGroup",
+     "name": "Agent",
+     "box": [
+      640.0,
+      585.0,
+      360.0,
+      37.0
+     ]
+    }
+   ],
+   "blob": {
+    "count": 2234,
+    "centroid": [
+     860.825,
+     463.965
+    ],
+    "box": [
+     822,
+     435,
+     88,
+     59
+    ],
+    "moments": [
+     346.866,
+     146.686,
+     72.275
+    ],
+    "vertices": [
+     [
+      822,
+      435
+     ],
+     [
+      909,
+      464
+     ],
+     [
+      851,
+      493
+     ]
+    ],
+    "mean": "868686",
+    "backgrounds": [
+     [
+      "141519",
+      618
+     ]
+    ]
+   },
+   "model": {
+    "tick": "139",
+    "pose": "rotate at 0.300000 s",
+    "theta_deg": 27.0,
+    "unit_px": 66.9,
+    "predicted": {
+     "corner": [
+      851.55,
+      494.45
+     ],
+     "x_end": [
+      911.16,
+      464.08
+     ],
+     "y_end": [
+      821.18,
+      434.84
+     ],
+     "centroid": [
+      861.3,
+      464.46
+     ],
+     "area_px": 2237.8
+    },
+    "measured": {
+     "centroid": [
+      860.825,
+      463.965
+     ],
+     "count": 2234,
+     "vertices": [
+      [
+       822,
+       435
+      ],
+      [
+       909,
+       464
+      ],
+      [
+       851,
+       493
+      ]
+     ],
+     "mean": "868686"
+    },
+    "centroid_error_px": 0.68,
+    "area_ratio": 0.9983,
+    "vertex_errors_px": [
+     0.84,
+     2.16,
+     1.55
+    ],
+    "measured_theta_deg_about_predicted_corner": 28.08,
+    "measured_radius_units": 0.4763,
+    "camera": "Stationary camera (0.5,0.5,8) looking -Z, vertical FOV 60 deg",
+    "neighbours": {
+     "138": 1.46,
+     "140": 0.4
+    }
+   }
+  },
+  {
+   "capture": "E",
+   "file": "06-rotate-tick209-1440x874-after-resize.png",
+   "raw_sha256": "9a1fb810a6a529b59abfa6e28c82323782f39b8b7247089177ef9b97eb454f07",
+   "committed_sha256": "8dab02f9769bc275d20f57b93623d741511a8b06ead6d2279e38fb57a65ba624",
+   "state_label": "e-rotate-1440",
+   "state_at": "2026-10-12T01:04:13.048+00:00",
+   "window_pt": [
+    1440.0,
+    874.0
+   ],
+   "viewport_px": [
+    492,
+    152,
+    1666,
+    1066
+   ],
+   "header_words": [
+    "Paused"
+   ],
+   "header_tick": [
+    "tick 209"
+   ],
+   "focus": [
+    {
+     "role": "AXGroup",
+     "name": "Agent",
+     "box": [
+      1080.0,
+      557.0,
+      360.0,
+      289.0
+     ]
+    }
+   ],
+   "blob": {
+    "count": 6657,
+    "centroid": [
+     1212.495,
+     739.339
+    ],
+    "box": [
+     1182,
+     657,
+     85,
+     162
+    ],
+    "moments": [
+     371.649,
+     1104.914,
+     -38.3
+    ],
+    "vertices": [
+     [
+      1190,
+      657
+     ],
+     [
+      1182,
+      818
+     ],
+     [
+      1266,
+      742
+     ]
+    ],
+    "mean": "868686",
+    "backgrounds": [
+     [
+      "141519",
+      1066
+     ]
+    ]
+   },
+   "model": {
+    "tick": "209",
+    "pose": "rotate at 1.466667 s",
+    "theta_deg": 132.0,
+    "unit_px": 115.398,
+    "predicted": {
+     "corner": [
+      1267.3,
+      742.7
+     ],
+     "x_end": [
+      1190.08,
+      656.94
+     ],
+     "y_end": [
+      1181.54,
+      819.92
+     ],
+     "centroid": [
+      1212.98,
+      739.85
+     ],
+     "area_px": 6658.3
+    },
+    "measured": {
+     "centroid": [
+      1212.495,
+      739.339
+     ],
+     "count": 6657,
+     "vertices": [
+      [
+       1190,
+       657
+      ],
+      [
+       1182,
+       818
+      ],
+      [
+       1266,
+       742
+      ]
+     ],
+     "mean": "868686"
+    },
+    "centroid_error_px": 0.7,
+    "area_ratio": 0.9998,
+    "vertex_errors_px": [
+     0.1,
+     1.97,
+     1.48
+    ],
+    "measured_theta_deg_about_predicted_corner": 131.49,
+    "measured_radius_units": 0.4758,
+    "camera": "Stationary camera (0.5,0.5,8) looking -Z, vertical FOV 60 deg",
+    "neighbours": {
+     "208": 1.07,
+     "210": 1.98
+    }
+   }
+  },
+  {
+   "capture": "F",
+   "file": "07-stopped-authored-pose-1440x874.png",
+   "raw_sha256": "9fa412f8e3fe3a1414d02e6d1f06896bf1467ef2713fcbeca52581872a859249",
+   "committed_sha256": "7b7342931c8a63734c05f32e476c8016d25a590a8a7737d90158e3455d73be69",
+   "state_label": "f-stopped",
+   "state_at": "2026-10-12T01:05:12.482+00:00",
+   "window_pt": [
+    1440.0,
+    874.0
+   ],
+   "viewport_px": [
+    492,
+    152,
+    1666,
+    1066
+   ],
+   "header_words": [
+    "Live"
+   ],
+   "header_tick": [],
+   "focus": [
+    {
+     "role": "AXGroup",
+     "name": "Agent",
+     "box": [
+      1080.0,
+      557.0,
+      360.0,
+      289.0
+     ]
+    }
+   ],
+   "blob": {
+    "count": 3760,
+    "centroid": [
+     1352.298,
+     662.2
+    ],
+    "box": [
+     1325,
+     595,
+     83,
+     113
+    ],
+    "moments": [
+     386.321,
+     599.291,
+     317.192
+    ],
+    "vertices": [
+     [
+      1325,
+      595
+     ],
+     [
+      1407,
+      707
+     ],
+     [
+      1325,
+      684
+     ]
+    ],
+    "mean": "8b8b8b",
+    "backgrounds": [
+     [
+      "141519",
+      1066
+     ]
+    ]
+   },
+   "model": {
+    "predicted": [
+     [
+      1325.0,
+      685.0
+     ],
+     [
+      1408.33,
+      708.31
+     ],
+     [
+      1325.0,
+      594.75
+     ]
+    ],
+    "measured": [
+     [
+      1325,
+      595
+     ],
+     [
+      1407,
+      707
+     ],
+     [
+      1325,
+      684
+     ]
+    ],
+    "count": 3760,
+    "mean": "8b8b8b",
+    "vertex_errors_px": [
+     0.25,
+     1.87,
+     1.0
+    ],
+    "centroid_measured": [
+     1352.298,
+     662.2
+    ],
+    "centroid_of_vertices_predicted": [
+     1352.78,
+     662.69
+    ],
+    "camera": "authoring preview eye (6,5,9) -> origin, vertical FOV 50 deg"
+   }
+  },
+  {
+   "capture": "G",
+   "file": "08-fresh-run-tick209-1440x874.png",
+   "raw_sha256": "f6913355bb45d29ad8783b006835fc4a5a6208713c6c930515c3e4b05580d552",
+   "committed_sha256": "b43a72db927028bd1815a86d6ab05c2d9bfdbb991300926007f1dcbd32985b0e",
+   "state_label": "g-fresh-run",
+   "state_at": "2026-10-12T01:08:26.821+00:00",
+   "window_pt": [
+    1440.0,
+    874.0
+   ],
+   "viewport_px": [
+    492,
+    152,
+    1666,
+    1066
+   ],
+   "header_words": [
+    "Paused"
+   ],
+   "header_tick": [
+    "tick 209"
+   ],
+   "focus": [
+    {
+     "role": "AXButton",
+     "name": "Resume",
+     "box": [
+      983.0,
+      43.0,
+      28.0,
+      29.0
+     ]
+    }
+   ],
+   "blob": {
+    "count": 6657,
+    "centroid": [
+     1212.495,
+     739.339
+    ],
+    "box": [
+     1182,
+     657,
+     85,
+     162
+    ],
+    "moments": [
+     371.649,
+     1104.914,
+     -38.3
+    ],
+    "vertices": [
+     [
+      1190,
+      657
+     ],
+     [
+      1182,
+      818
+     ],
+     [
+      1266,
+      742
+     ]
+    ],
+    "mean": "868686",
+    "backgrounds": [
+     [
+      "141519",
+      1066
+     ]
+    ]
+   },
+   "model": {
+    "tick": "209",
+    "pose": "rotate at 1.466667 s",
+    "theta_deg": 132.0,
+    "unit_px": 115.398,
+    "predicted": {
+     "corner": [
+      1267.3,
+      742.7
+     ],
+     "x_end": [
+      1190.08,
+      656.94
+     ],
+     "y_end": [
+      1181.54,
+      819.92
+     ],
+     "centroid": [
+      1212.98,
+      739.85
+     ],
+     "area_px": 6658.3
+    },
+    "measured": {
+     "centroid": [
+      1212.495,
+      739.339
+     ],
+     "count": 6657,
+     "vertices": [
+      [
+       1190,
+       657
+      ],
+      [
+       1182,
+       818
+      ],
+      [
+       1266,
+       742
+      ]
+     ],
+     "mean": "868686"
+    },
+    "centroid_error_px": 0.7,
+    "area_ratio": 0.9998,
+    "vertex_errors_px": [
+     0.1,
+     1.97,
+     1.48
+    ],
+    "measured_theta_deg_about_predicted_corner": 131.49,
+    "measured_radius_units": 0.4758,
+    "camera": "Stationary camera (0.5,0.5,8) looking -Z, vertical FOV 60 deg",
+    "neighbours": {
+     "208": 1.07,
+     "210": 1.98
+    }
+   }
+  }
+ ],
+ "pairs": {
+  "B_vs_C_viewport": {
+   "differing": 0,
+   "largest": 0,
+   "tolerance": 0,
+   "pixels": 1779288
+  },
+  "B_vs_C_window": {
+   "differing": 1579,
+   "box": [
+    457,
+    1712,
+    200,
+    20
+   ],
+   "spaces": [
+    "kCGColorSpaceDisplayP3",
+    "kCGColorSpaceDisplayP3"
+   ]
+  },
+  "E_vs_G_viewport": {
+   "differing": 0,
+   "largest": 0,
+   "tolerance": 0,
+   "pixels": 1775956
+  },
+  "E_vs_G_window": {
+   "differing": 14103,
+   "box": [
+    456,
+    80,
+    2424,
+    1654
+   ],
+   "spaces": [
+    "kCGColorSpaceDisplayP3",
+    "kCGColorSpaceDisplayP3"
+   ]
+  }
+ },
+ "redactions": {
+  "01-authoring-1440x875-rig-selected.png": {
+   "differing": 2040,
+   "box": [
+    2733,
+    15,
+    50,
+    50
+   ],
+   "spaces": [
+    "kCGColorSpaceDisplayP3",
+    "kCGColorSpaceDisplayP3"
+   ]
+  },
+  "02-play-paused-tick39-1440x875.png": {
+   "differing": 2040,
+   "box": [
+    2733,
+    15,
+    50,
+    50
+   ],
+   "spaces": [
+    "kCGColorSpaceDisplayP3",
+    "kCGColorSpaceDisplayP3"
+   ]
+  },
+  "03-paused-tick39-70s-later-1440x875.png": {
+   "differing": 2040,
+   "box": [
+    2733,
+    15,
+    50,
+    50
+   ],
+   "spaces": [
+    "kCGColorSpaceDisplayP3",
+    "kCGColorSpaceDisplayP3"
+   ]
+  },
+  "04-stepped-tick49-1440x875-step-focused.png": {
+   "differing": 2040,
+   "box": [
+    2733,
+    15,
+    50,
+    50
+   ],
+   "spaces": [
+    "kCGColorSpaceDisplayP3",
+    "kCGColorSpaceDisplayP3"
+   ]
+  },
+  "05-resized-1000x650-paused-tick139.png": {
+   "differing": 2040,
+   "box": [
+    1853,
+    15,
+    50,
+    50
+   ],
+   "spaces": [
+    "kCGColorSpaceDisplayP3",
+    "kCGColorSpaceDisplayP3"
+   ]
+  },
+  "06-rotate-tick209-1440x874-after-resize.png": {
+   "differing": 2040,
+   "box": [
+    2733,
+    15,
+    50,
+    50
+   ],
+   "spaces": [
+    "kCGColorSpaceDisplayP3",
+    "kCGColorSpaceDisplayP3"
+   ]
+  },
+  "07-stopped-authored-pose-1440x874.png": {
+   "differing": 2040,
+   "box": [
+    2733,
+    15,
+    50,
+    50
+   ],
+   "spaces": [
+    "kCGColorSpaceDisplayP3",
+    "kCGColorSpaceDisplayP3"
+   ]
+  },
+  "08-fresh-run-tick209-1440x874.png": {
+   "differing": 2040,
+   "box": [
+    2733,
+    15,
+    50,
+    50
+   ],
+   "spaces": [
+    "kCGColorSpaceDisplayP3",
+    "kCGColorSpaceDisplayP3"
+   ]
+  }
+ },
+ "step_shift_B_to_D": {
+  "centroid_shift_px": [
+   19.667,
+   0.333
+  ],
+  "units": 0.1701,
+  "expected_units_for_10_ticks": 0.1667
+ }
+}
