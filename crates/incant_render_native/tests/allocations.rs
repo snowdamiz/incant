@@ -1,6 +1,8 @@
 //! Isolated allocator instrumentation: only the adapter call is measured, not ECS
 //! stepping, initialization, test harness threads or the caller's work.
 mod common;
+#[path = "common/text.rs"]
+mod text_fixture;
 use common::*;
 use std::{
     alloc::{GlobalAlloc, Layout, System},
@@ -52,6 +54,26 @@ fn ordinary_committed_motion_and_callback_rejection_allocate_nothing() {
         let recording = Recording;
         let rejected = input.try_sync(&view, |_, _, _| Err::<(), _>(()));
         let accepted = input.try_sync(&view, |_, _, _| Ok::<_, ()>(()));
+        drop(recording);
+        assert!(rejected.is_err());
+        assert!(accepted.is_ok());
+        assert_eq!(ALLOCS.get(), 0);
+    }
+}
+
+#[test]
+fn composed_text_motion_and_callback_rejection_allocate_nothing() {
+    let (temp, mut world, mut input) = text_fixture::fixture();
+    temp.close().unwrap();
+    for _ in 0..64 {
+        world.step().unwrap();
+        let spatial = world.spatial_view().unwrap();
+        let text = world.text_view().unwrap();
+        ALLOCS.set(0);
+        ENABLED.set(true);
+        let recording = Recording;
+        let rejected = input.try_sync_with_text(&spatial, &text, |_, _, _| Err::<(), _>(()));
+        let accepted = input.try_sync_with_text(&spatial, &text, |_, _, _| Ok::<_, ()>(()));
         drop(recording);
         assert!(rejected.is_err());
         assert!(accepted.is_ok());

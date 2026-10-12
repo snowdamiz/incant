@@ -1,5 +1,7 @@
 //! Typed renderer input shared by authoring and native extraction. No project,
 //! command bus, importer, GPU or agent dependency. Construct/replace at sync points.
+mod text;
+pub use text::{TextInput, TextNode};
 mod flipbook;
 mod tilemap;
 pub use flipbook::SpriteFrames;
@@ -76,6 +78,8 @@ pub struct SceneStats {
 #[derive(Default)]
 pub struct SceneInput {
     pub nodes: Vec<SceneNode>,
+    /// Prepared CPU glyph coverage. A consumer must handle or explicitly refuse it.
+    pub text: Option<TextInput>,
     pub environment: Option<EnvironmentInput>,
 }
 pub struct SceneNode {

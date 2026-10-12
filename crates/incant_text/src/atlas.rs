@@ -12,6 +12,25 @@ pub struct AtlasConfig {
     pub height: u32,
     pub max_glyphs: usize,
 }
+impl AtlasConfig {
+    /// Validate byte/key limits before any pixel allocation or raster work.
+    pub fn validate(self) -> Result<usize, TextError> {
+        let config = self;
+        let bytes = (config.width as usize)
+            .checked_mul(config.height as usize)
+            .ok_or(TextError::Limit("atlas dimensions"))?;
+        if config.width == 0
+            || config.height == 0
+            || config.width > 2048
+            || config.height > 2048
+            || bytes > MAX_ATLAS_BYTES
+            || !(1..=MAX_ATLAS_GLYPHS).contains(&config.max_glyphs)
+        {
+            return Err(TextError::Limit("atlas configuration"));
+        }
+        Ok(bytes)
+    }
+}
 /// Exact raster identity: packaged asset + content hash, glyph, and unquantized
 /// positive size bits. Integer-origin coverage only; placement stays with layout.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
@@ -57,18 +76,7 @@ pub struct GlyphAtlas {
 }
 impl GlyphAtlas {
     pub fn new(config: AtlasConfig) -> Result<Self, TextError> {
-        let bytes = (config.width as usize)
-            .checked_mul(config.height as usize)
-            .ok_or(TextError::Limit("atlas dimensions"))?;
-        if config.width == 0
-            || config.height == 0
-            || config.width > 2048
-            || config.height > 2048
-            || bytes > MAX_ATLAS_BYTES
-            || !(1..=MAX_ATLAS_GLYPHS).contains(&config.max_glyphs)
-        {
-            return Err(TextError::Limit("atlas configuration"));
-        }
+        let bytes = config.validate()?;
         Ok(Self {
             config,
             pixels: vec![0; bytes],

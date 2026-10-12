@@ -47,6 +47,9 @@ fn environment(input: &SceneInput) -> Option<(AssetVersionId, f64, f64)> {
 }
 impl Renderer {
     pub fn prepare_retained(&self, input: &SceneInput, camera: &str) -> Result<RetainedScene> {
+        if input.text.is_some() {
+            return Err(SceneError::Input("text drawing is not implemented").into());
+        }
         self.check_device()?;
         if input.nodes.iter().any(|n| n.diagnostic) {
             return Err(
@@ -120,6 +123,9 @@ impl RetainedScene {
     }
 
     pub(super) fn stage(&mut self, input: &SceneInput) -> Result<()> {
+        if input.text.is_some() {
+            return Err(SceneError::Input("text drawing is not implemented").into());
+        }
         if input.nodes.len() != self.bindings.len() || environment(input) != self.environment {
             return Err(SceneError::Input(
                 "retained scene bindings changed; prepare a replacement",
