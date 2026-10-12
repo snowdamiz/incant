@@ -1,0 +1,15 @@
+{
+  "reviewer": "astra",
+  "reviewed_at": "2026-10-12T01:53:59.600712+00:00",
+  "source": "/tmp/incant-ledger-lock-release-review.patch",
+  "sha256": "56743d2a2faccf13bed9c6199456599eca649c335422cd0483379fd1f4cb901b",
+  "decision": "accepted scoped implementation; no phase gate approval",
+  "findings": [
+    "Explicit unlock is confined to a private RAII owner created only after successful acquisition.",
+    "Guard covers early record-load failures and Lease completion/drop; no locking retry or exclusion weakening.",
+    "Deterministic alias regressions preserve live exclusion and conservative reservation accounting."
+  ],
+  "limits": [
+    "Fork model diagnoses plausible descriptor lifetime; exact hosted scheduler interleaving is not claimed."
+  ]
+}
