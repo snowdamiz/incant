@@ -16,6 +16,15 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Shared cooked-player library
+
+The ordinary packaged player now has a reusable Rust entry and optional bounded C
+ABI. Local macOS CPU/CLI tests and native-window/static-module compatibility pass;
+C/Swift caller verification is underway. The first iOS simulator archive attempt
+hit the existing cross-target script-cook refusal. That guard remains intact while
+a separate compatibility route is developed; no mobile runtime/device/performance
+gate passes from this work. [Contract and evidence](docs/spikes/mobile-runtime-library.md).
+
 ## Native audio transport — main162 review accepted; fast check pending
 
 541 affected CPU cases, Clippy and target/contracts checks pass. A fresh ordinary

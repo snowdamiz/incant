@@ -7,6 +7,8 @@ publish.workspace = true
 
 [features]
 default = []
+# Thin platform ABI for bounded offline CPU package execution, not a UI host.
+mobile-ffi = ["dep:thiserror"]
 # Project source is compiled exclusively by the trusted build-time producer.
 project = ["incant_cook/typescript"]
 # Trusted build-linked descriptors only; does not enable a compiler or loader.
