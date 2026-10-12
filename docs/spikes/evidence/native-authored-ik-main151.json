@@ -399,13 +399,6 @@
       "uncompressed_sha256": "61db9a59daf5d27b71abe6e2d95224f2f7baddd558e9ac477f1f907d6b3206e5",
       "uncompressed_bytes": 13023
     },
-    "docs/spikes/evidence/native-authored-ik-main151/integration-seams.patch": {
-      "sha256": "652255677c36e26457325c47c17547f957ccf6c4d773233fdd3b2bf87de118e4",
-      "bytes": 5125,
-      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ik-main151-001/integration-seams.patch",
-      "uncompressed_sha256": "652255677c36e26457325c47c17547f957ccf6c4d773233fdd3b2bf87de118e4",
-      "uncompressed_bytes": 5125
-    },
     "docs/spikes/evidence/native-authored-ik-main151/headless.json": {
       "sha256": "358091ffbfe35448fe2f0f9207a1d88540b0e4080e377b34dbebac03846343a3",
       "bytes": 333,
@@ -986,9 +979,16 @@
       "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ik-main151-001/verification-002.log",
       "uncompressed_sha256": "694bf24be40c7648d0bb2280c0e2e4c2387ac1cdd9a6e433d971a42133b5e492",
       "uncompressed_bytes": 1109
+    },
+    "docs/spikes/evidence/native-authored-ik-main151/integration-seams.patch.gz": {
+      "sha256": "2856eaee747953b885f7fc5e735e926360cd45ba96c04257d4b6dcfbc001c1ea",
+      "bytes": 1295,
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ik-main151-001/integration-seams.patch",
+      "uncompressed_sha256": "652255677c36e26457325c47c17547f957ccf6c4d773233fdd3b2bf87de118e4",
+      "uncompressed_bytes": 5125
     }
   },
-  "integration_review": "Only STATUS and additive capability capture/refusal seams resolved. The exact two accepted v4 guard/test files preserve main v4 captures and reject eight legacy pose calls atomically when IK is present. All other producer implementation and build inputs are unchanged. Independent final current-main closure pending.",
+  "integration_review": "Only STATUS and additive capability capture/refusal seams resolved. The exact two accepted v4 guard/test files preserve main v4 captures and reject eight legacy pose calls atomically when IK is present. All other producer implementation and build inputs are unchanged. Independent final current-main closure accepted; exact root receipt retained.",
   "prior_verification_failure": {
     "scope": "External receipt audit, not engine or probe execution",
     "old": "verification-001.log.gz",
@@ -1005,5 +1005,9 @@
     "Edit-mode IK preview and authored visual controls remain open.",
     "Rust/Wasm IK controls are a separate future ABI; all legacy pose snapshots explicitly refuse committed IK.",
     "Shipping proof covers canonical CPU input/control/checkpoint outputs; no GPU deformation or visual acceptance claimed."
-  ]
+  ],
+  "final_review": {
+    "path": "docs/spikes/evidence/native-authored-ik-main151/root-final-review.json",
+    "sha256": "7f96ec7a93dc6070560f08310823d0198ead483b36a191d773b4163e7f7526c3"
+  }
 }

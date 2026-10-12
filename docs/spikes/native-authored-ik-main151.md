@@ -14,7 +14,9 @@ ignored. All 17 commands pass, including all-target Clippy, wasm32/static-module
 checks, runtime dependency guards, 68-schema equality, generated contracts,
 strict SDK types, formatting, conventions and 237 Python tests (four skips).
 The [inventory](evidence/native-authored-ik-main151.json) retains raw/compressed log
-identities, sources, receipts and the exact command results.
+identities, sources, receipts and the exact command results. The independent
+[final root review](evidence/native-authored-ik-main151/root-final-review.json)
+accepts this integrated scope.
 
 A fresh ordinary public export produced player SHA256
 `7b8921ea3ad2535c03aaa4c63907d9302651b42a565c4fc3f905cfba0281ab93`
