@@ -1,0 +1,254 @@
+{
+  "kind": "native-path-query-conformance",
+  "wabt": "1.0.42",
+  "module_count": 124,
+  "verified_prepared_files": 621,
+  "selected": [
+    {
+      "name": "navigation-paths",
+      "prefix": "m35",
+      "input_sha256": "2eb742e2b4d34f4547e209333e400f8afaab6d960a1501a356d4b99dc2a23998",
+      "prepared_sha256": "55bba8e7e76b25ced466f84f73636bb08403915ae6f5558c77c36b87205def9d"
+    },
+    {
+      "name": "rust-navigation-paths",
+      "prefix": "m89",
+      "input_sha256": "bb693b6e2d1a64d9279a672697ebc3db7aad4fe66af337d309adacd7428c2997",
+      "prepared_sha256": "e7e60c51fe0c501286c38c839a8abbd73892bf13cc97cd317a83d375e5d4d951"
+    },
+    {
+      "name": "rust-navigation-paths-capacity",
+      "prefix": "m90",
+      "input_sha256": "48ac09beb3a067216b671986c68d000f566abbd310817d6854b88717c97b8914",
+      "prepared_sha256": "af017dda436af6c160e5680c74d4503e99bd4753d0f56397476def206fab9d64"
+    },
+    {
+      "name": "rust-navigation-paths-grid-capacity",
+      "prefix": "m91",
+      "input_sha256": "e6706729790b2c82101acc343e00afb6f25ec97870f16eeb6bffbd4a2031807b",
+      "prepared_sha256": "de7d6e71db6606b714969713bab10b600c255a0506a617e3fa9432a3f377d9b0"
+    },
+    {
+      "name": "rust-navigation-paths-number",
+      "prefix": "m92",
+      "input_sha256": "a7544e27ad7a165119dced140a0aaff7b21e167b45d152ed2af58d7ff7f5c90f",
+      "prepared_sha256": "bbcbc533f75d0615a2f9f9a06a201cae7dfad53cfe3c136a16a2d39a7bee0738"
+    },
+    {
+      "name": "rust-navigation-paths-rounding",
+      "prefix": "m93",
+      "input_sha256": "40819dce4bf3e3c2b7adbbd8dcbccc106b0a999624c7479f51e2b879963fb43a",
+      "prepared_sha256": "e91c5e0ab348005eb5315f13ab70efe36d15e21fedd0ad275d6cd09972dde8e2"
+    },
+    {
+      "name": "rust-navigation-paths-owner",
+      "prefix": "m94",
+      "input_sha256": "9abbcc81b15bb8f25d72f1adbcab64528ff0d9a4abfe53c5581ad112c9b9988b",
+      "prepared_sha256": "b77cdae013108c92607d5c0e781e347cdeb11b8ef447fd74a642a90d64cbf632"
+    },
+    {
+      "name": "rust-navigation-paths-grid-owner",
+      "prefix": "m95",
+      "input_sha256": "0d020e608c5768192c882c0fd94259546193f9b0a918071d7c803bf0bb9b8f8d",
+      "prepared_sha256": "410581983bc3026543d2c8cedb973c8c429c362b24890aa34324ab9bcfb7e507"
+    },
+    {
+      "name": "rust-navigation-paths-endpoint",
+      "prefix": "m96",
+      "input_sha256": "6797bdd40327abee2a653418f58518f95bfb371d3ac4ef6b6130e4b282897676",
+      "prepared_sha256": "8cc5f8b0f92ebd521c6073d126c72320d4076a5775cb068acf435ec2c9369bf8"
+    },
+    {
+      "name": "rust-navigation-paths-exhaustion",
+      "prefix": "m97",
+      "input_sha256": "ba200d7a0dd8e0c36c86463e4274f58fd2927d6af110d6d770b44fdcad564c3c",
+      "prepared_sha256": "c152b114aa90b5ea52bdcad2f8804cf3f5f4d1adc5f9f0eeb36805023ef4396c"
+    },
+    {
+      "name": "rust-navigation-paths-work",
+      "prefix": "m98",
+      "input_sha256": "5f98f3d25463033db4a01ee987581053cc61e6f2d43dd03561ad27562a6c3709",
+      "prepared_sha256": "fe2dcc4ce90643b1bb610bce35a24c4956d720678680fc13ca751432848cabce"
+    },
+    {
+      "name": "rust-navigation-paths-quota",
+      "prefix": "m99",
+      "input_sha256": "bca13c3407d1c526606f903d573fcdb2268dcda3d170a38f91eeaee327a8449b",
+      "prepared_sha256": "eec223f23fba5eda079dc9775fd3bb2399dd0da7623971c4247dde11ddeed223"
+    },
+    {
+      "name": "rust-navigation-paths-late",
+      "prefix": "m100",
+      "input_sha256": "2d4380501a47045ad438130b51c63e85cad69576d4dc5b9322033f296fff0162",
+      "prepared_sha256": "5a7605bb363dc91b742b5b685ef46f8e40402189ecd820e0719c6c0f01ea99be"
+    },
+    {
+      "name": "rust-navigation-paths-callback",
+      "prefix": "m101",
+      "input_sha256": "08d2a9afd48cc28997d5ebf48adc68f9ae1dff8b7eed91055697d6a5fb87a284",
+      "prepared_sha256": "f7c290714933ddc3b9eb5b7b06f5e0c4b65be87ec0212d7694fa914ebad0c26c"
+    },
+    {
+      "name": "rust-navigation-paths-trap",
+      "prefix": "m102",
+      "input_sha256": "60c28618d274af1c5c951d1174e309e582e577a91a7729aa95de84e955fa3000",
+      "prepared_sha256": "05e4cbc6e2b931753b74012de3e7770da9ba159947d3bbe6a2edf0d8dc54c2e6"
+    }
+  ],
+  "retained_hashes": {
+    "m100-facade.c": "6fc8e02802eb63857bbdfb2086e78135cef2b06e7c4aab26ddaef58a0ba8d7bc",
+    "m100.c": "c0d1421c1c58e43f36f56ba0678e604b3439a90eb7d00ca89decdedaa1c56c7c",
+    "m100.h": "7f16988f13de44e6d3010c1f0adcafdca8b8475fe1a7570f372e247ef85905eb",
+    "m100.original.wasm": "2d4380501a47045ad438130b51c63e85cad69576d4dc5b9322033f296fff0162",
+    "m100.wasm": "5a7605bb363dc91b742b5b685ef46f8e40402189ecd820e0719c6c0f01ea99be",
+    "m101-facade.c": "13debc04c3da6a0cc09e98382e3a071f712f86e7c69c34b6420756dfff6af6f4",
+    "m101.c": "40aa9eb1dc065028e85cd1b31e467f0f8dbe3a99f360a8ebe0208b6f7ba09387",
+    "m101.h": "0aa681565149aaa24e7a6967e968054337ee37db5b4d7790f9d30449668217c3",
+    "m101.original.wasm": "08d2a9afd48cc28997d5ebf48adc68f9ae1dff8b7eed91055697d6a5fb87a284",
+    "m101.wasm": "f7c290714933ddc3b9eb5b7b06f5e0c4b65be87ec0212d7694fa914ebad0c26c",
+    "m102-facade.c": "89c7aa1ba6d6843f5ff34e57fcc02c07dfa98ac4a47147d447803dad703d0d80",
+    "m102.c": "3986228e4319d6e8f84e2c6a90a5e579720bdd55c6c9cbb6af776cbc6c809739",
+    "m102.h": "3eb14566156d7af5a50961685566ccc3075424e68d2e2805ada50353bf657908",
+    "m102.original.wasm": "60c28618d274af1c5c951d1174e309e582e577a91a7729aa95de84e955fa3000",
+    "m102.wasm": "05e4cbc6e2b931753b74012de3e7770da9ba159947d3bbe6a2edf0d8dc54c2e6",
+    "m35-facade.c": "6b506b35110ee21597917bea179bdc22e7bd0f65e9a3472a9ccc10475066e079",
+    "m35.c": "460726f2224dc71f1f2ed3faa99dc50b880d3725cba6bd2fc784397986338668",
+    "m35.h": "501d5bc509b2a211e72901176835b113dbc29d5f25d2f7e19c7c0f599c6ec793",
+    "m35.original.wasm": "2eb742e2b4d34f4547e209333e400f8afaab6d960a1501a356d4b99dc2a23998",
+    "m35.wasm": "55bba8e7e76b25ced466f84f73636bb08403915ae6f5558c77c36b87205def9d",
+    "m89-facade.c": "147276b616899e28402dec792da7d8794ba1bf295e8a5c3df6cebaae6877573f",
+    "m89.c": "e43245646e423ea3ca505762e9aad8c24c784e44644da19d3fc922c0387f3d32",
+    "m89.h": "5f856ce9f048e4499547929fd4f65bcfd767a3ba8978e7f62400fcc6d91b2d00",
+    "m89.original.wasm": "bb693b6e2d1a64d9279a672697ebc3db7aad4fe66af337d309adacd7428c2997",
+    "m89.wasm": "e7e60c51fe0c501286c38c839a8abbd73892bf13cc97cd317a83d375e5d4d951",
+    "m90-facade.c": "373303066ba4687f3fc7d556e60b468e1f43ac8f3f7075174cd0b829b42e978f",
+    "m90.c": "0255ae7a1c24209e3b7bfb0e71eda781c4171a1f0ed6400fac84f0f3d3bf1ec1",
+    "m90.h": "a9c0639119a758983102d16dbcbba5eff211681adccea06dca6b0a406717bf89",
+    "m90.original.wasm": "48ac09beb3a067216b671986c68d000f566abbd310817d6854b88717c97b8914",
+    "m90.wasm": "af017dda436af6c160e5680c74d4503e99bd4753d0f56397476def206fab9d64",
+    "m91-facade.c": "ee5c6905de2defa5178d50bd2d1d25ab8383f0053cb082336e0e5826ca90583f",
+    "m91.c": "5da0f6f9af0d7f26bf1189e01a4feebfd5c9c869d3c820183119ad9a3384dacb",
+    "m91.h": "8cd5bb849c532042e5380e9dab2a42f394f68f46a6fc0a734cad882b7c00bd38",
+    "m91.original.wasm": "e6706729790b2c82101acc343e00afb6f25ec97870f16eeb6bffbd4a2031807b",
+    "m91.wasm": "de7d6e71db6606b714969713bab10b600c255a0506a617e3fa9432a3f377d9b0",
+    "m92-facade.c": "af89b4c75ccf6b37dd6db03cc016a3db8fbaeeabafb8b35de0757d25cb57f76a",
+    "m92.c": "e611e666868f08bea42992c177a3a23302076ffe457b4bcacfd1f24f18a6eaf4",
+    "m92.h": "f1860ee529356464711850ad715e84c4d3675566288ffc0eef11289db00f5467",
+    "m92.original.wasm": "a7544e27ad7a165119dced140a0aaff7b21e167b45d152ed2af58d7ff7f5c90f",
+    "m92.wasm": "bbcbc533f75d0615a2f9f9a06a201cae7dfad53cfe3c136a16a2d39a7bee0738",
+    "m93-facade.c": "95d2d9653b4f72ce33daac5b059b04617328fdb615b02127d2cc9834a451a88b",
+    "m93.c": "ed90dbffbd687ec7f66fdab4f290bbbe474711adc980e3769c5e88d47ed26fdb",
+    "m93.h": "bba0f14fc148e78ce66dbf7fff5906e85a5df9eaed36653981003187993309c8",
+    "m93.original.wasm": "40819dce4bf3e3c2b7adbbd8dcbccc106b0a999624c7479f51e2b879963fb43a",
+    "m93.wasm": "e91c5e0ab348005eb5315f13ab70efe36d15e21fedd0ad275d6cd09972dde8e2",
+    "m94-facade.c": "19502ea4e5a803c8acad7b2c61194215c2bb214d6d9cb8febe7fad2b67bf28ae",
+    "m94.c": "f0b687f8554be1b477f96af3ccfcd620e0093a9e8ebf04a19a52d3400e948f36",
+    "m94.h": "585b72e9355454eac892673e5c1d63be365507386b3e1e90283f48fbcb733804",
+    "m94.original.wasm": "9abbcc81b15bb8f25d72f1adbcab64528ff0d9a4abfe53c5581ad112c9b9988b",
+    "m94.wasm": "b77cdae013108c92607d5c0e781e347cdeb11b8ef447fd74a642a90d64cbf632",
+    "m95-facade.c": "100cbdd245c17414d6794c8eb3fc55462191e84ec250ba9e37cde0a02560edb6",
+    "m95.c": "4a144c5379909dce64682f10931a1d379f603010c5c7543fd00b69add86f73cb",
+    "m95.h": "8ef0c16a7d9de27012040bb985eb84720d552543904f116aeaf5baeb72dbd293",
+    "m95.original.wasm": "0d020e608c5768192c882c0fd94259546193f9b0a918071d7c803bf0bb9b8f8d",
+    "m95.wasm": "410581983bc3026543d2c8cedb973c8c429c362b24890aa34324ab9bcfb7e507",
+    "m96-facade.c": "5293d7c38a156e94f0103cbf895564a8e19c9310965ad86d7adaed6c08a2c66a",
+    "m96.c": "6e729174771dbf4946aa28e435efbfb59f2e3bddb9d768348bb8142e40caa224",
+    "m96.h": "259ca9b3cd6f8b5261d9b935c25486effa51499eb6686b0c98b8c5fe48431c9e",
+    "m96.original.wasm": "6797bdd40327abee2a653418f58518f95bfb371d3ac4ef6b6130e4b282897676",
+    "m96.wasm": "8cc5f8b0f92ebd521c6073d126c72320d4076a5775cb068acf435ec2c9369bf8",
+    "m97-facade.c": "47a83f22376718f514a0348965e09d25a85136ad22dbfccf8b57aca02b13cb8c",
+    "m97.c": "2ca639b5d7b173e8e588cb8b963425e979c940b807ced666b9924fa009875e91",
+    "m97.h": "e80aeee89c15deac519ea425c8cfef2a767f0cbdb1e7055be010e972a9ffc9e2",
+    "m97.original.wasm": "ba200d7a0dd8e0c36c86463e4274f58fd2927d6af110d6d770b44fdcad564c3c",
+    "m97.wasm": "c152b114aa90b5ea52bdcad2f8804cf3f5f4d1adc5f9f0eeb36805023ef4396c",
+    "m98-facade.c": "c65806d22d1ec0e62ca4baad6beae5caa188852e34c59dcb161e3328ef3ce491",
+    "m98.c": "3c8fd757a06f80dbafc25b40827b3716b92972cdc3c96ceff85885fe93eb4990",
+    "m98.h": "a778422dc324d50163ec87bf636ef502634cc4f2b8d060b645cb6e0d84a833c9",
+    "m98.original.wasm": "5f98f3d25463033db4a01ee987581053cc61e6f2d43dd03561ad27562a6c3709",
+    "m98.wasm": "fe2dcc4ce90643b1bb610bce35a24c4956d720678680fc13ca751432848cabce",
+    "m99-facade.c": "0055542e8c6c8bed6f7bc5753d51c19bc655182efadae3b42ca6883332b247d9",
+    "m99.c": "01aec7f483749ee3661c97739a25476e04e6da2932f99ebb1b95facedaebbe34",
+    "m99.h": "d126adb67ce02c3bec537979058387973d31d80683f02dc6a1ed1321a4d20651",
+    "m99.original.wasm": "bca13c3407d1c526606f903d573fcdb2268dcda3d170a38f91eeaee327a8449b",
+    "m99.wasm": "eec223f23fba5eda079dc9775fd3bb2399dd0da7623971c4247dde11ddeed223"
+  },
+  "guest_source_hashes": {
+    "navigation_paths.rs": "89b98d14984d644954dcb2a5728a324f15aae30d65019a0528267173c5a93c20",
+    "navigation_paths_failure.rs": "435e6d9ecb1d162321e5129d031b8037e7ea292c49290c32a7b0781143ff8d97",
+    "navigation-paths.wat": "9988c624c988865c90e81c5312d083cd51d4f1160626cedf4ee70e1b427a43be"
+  },
+  "rust_sdk_sha256": "7dc305a90632013cba8f67854a2ad642c9fca9ac7f0fcfd4ec97d4876f964936",
+  "commands": [
+    {
+      "command": [
+        "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/tools/cargo",
+        "test",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant-module",
+        "-p",
+        "incant_wasm_abi",
+        "-p",
+        "incant_wasm_runtime",
+        "-p",
+        "incant_wasm_cook",
+        "-p",
+        "incant_wasm_dev",
+        "-p",
+        "incant_wasm_player",
+        "-p",
+        "incant_game_runtime",
+        "-p",
+        "incant_script",
+        "--features",
+        "incant_wasm_dev/static-conformance,incant_wasm_player/fixture,incant_script/compiler",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": "conformance-0.log",
+      "sha256": "1175a584ddc09133881c95f1b74105f58843192a7fe2e9e564385aae228f5489"
+    },
+    {
+      "command": [
+        "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/tools/cargo",
+        "clippy",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant-module",
+        "-p",
+        "incant_wasm_abi",
+        "-p",
+        "incant_wasm_runtime",
+        "-p",
+        "incant_wasm_cook",
+        "-p",
+        "incant_wasm_dev",
+        "-p",
+        "incant_wasm_player",
+        "-p",
+        "incant_game_runtime",
+        "-p",
+        "incant_script",
+        "--features",
+        "incant_wasm_dev/static-conformance,incant_wasm_player/fixture,incant_script/compiler",
+        "--all-targets",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 101,
+      "log": "conformance-1.log",
+      "sha256": "f4567249c665f602a80ef97a3e65cdb5ecfcbc12d5aad79d913435b0ba9196a4"
+    }
+  ],
+  "passed": false,
+  "limitations": [
+    "local CPU conformance, not a shipping package or device gate",
+    "existing full guest checkpoints remain unsupported"
+  ]
+}

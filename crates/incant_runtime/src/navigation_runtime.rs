@@ -35,6 +35,29 @@ pub(crate) struct NavigationRuntime {
     dependencies: BTreeSet<StableId>,
     generation: u64,
 }
+/// Immutable committed path-query data. At most eight mesh and eight grid
+/// handles are copied; geometry, grids and solvers remain shared native values.
+/// Retained snapshots intentionally observe their captured generation.
+pub struct NavigationSnapshot {
+    meshes: BTreeMap<StableId, Arc<MeshEntry>>,
+    grids: BTreeMap<StableId, (Arc<PreparedGrid>, u64)>,
+}
+impl NavigationSnapshot {
+    pub fn navigation_path(
+        &self,
+        entity: StableId,
+        request: &PathRequest,
+    ) -> Result<Option<NavigationPath>, SceneError> {
+        mesh_path(&self.meshes, entity, request)
+    }
+    pub fn grid_path(
+        &self,
+        entity: StableId,
+        request: &GridPathRequest,
+    ) -> Result<Option<GridPath>, SceneError> {
+        grid_path(&self.grids, entity, request)
+    }
+}
 impl std::fmt::Debug for NavigationRuntime {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.debug_struct("NavigationRuntime")
@@ -347,6 +370,14 @@ impl NativeWorld {
         self.ensure_navigation_current()?;
         self.navigation.path(entity, request).map_err(Into::into)
     }
+    /// Capture only committed read-only cache handles for copied foreign queries.
+    pub fn navigation_snapshot(&self) -> Result<NavigationSnapshot, RuntimeError> {
+        self.ensure_navigation_current()?;
+        Ok(NavigationSnapshot {
+            meshes: self.navigation.meshes.clone(),
+            grids: self.navigation.grids.clone(),
+        })
+    }
     pub fn grid_path(
         &self,
         entity: StableId,
@@ -391,31 +422,43 @@ impl NavigationRuntime {
         entity: StableId,
         request: &PathRequest,
     ) -> Result<Option<NavigationPath>, SceneError> {
-        let entry = self
-            .meshes
-            .get(&entity)
-            .ok_or(SceneError::Invalid("navigation mesh is absent"))?;
-        Ok(entry
-            .mesh
-            .find_path(request)
-            .map_err(failure)?
-            .map(|mut path| {
-                path.generation = entry.report.generation;
-                path
-            }))
+        mesh_path(&self.meshes, entity, request)
     }
     pub(crate) fn grid_path(
         &self,
         entity: StableId,
         request: &GridPathRequest,
     ) -> Result<Option<GridPath>, SceneError> {
-        let (entry, generation) = self
-            .grids
-            .get(&entity)
-            .ok_or(SceneError::Invalid("navigation grid is absent"))?;
-        Ok(entry.find_path(request).map_err(failure)?.map(|mut path| {
-            path.generation = *generation;
+        grid_path(&self.grids, entity, request)
+    }
+}
+fn mesh_path(
+    meshes: &BTreeMap<StableId, Arc<MeshEntry>>,
+    entity: StableId,
+    request: &PathRequest,
+) -> Result<Option<NavigationPath>, SceneError> {
+    let entry = meshes
+        .get(&entity)
+        .ok_or(SceneError::Invalid("navigation mesh is absent"))?;
+    Ok(entry
+        .mesh
+        .find_path(request)
+        .map_err(failure)?
+        .map(|mut path| {
+            path.generation = entry.report.generation;
             path
         }))
-    }
+}
+fn grid_path(
+    grids: &BTreeMap<StableId, (Arc<PreparedGrid>, u64)>,
+    entity: StableId,
+    request: &GridPathRequest,
+) -> Result<Option<GridPath>, SceneError> {
+    let (entry, generation) = grids
+        .get(&entity)
+        .ok_or(SceneError::Invalid("navigation grid is absent"))?;
+    Ok(entry.find_path(request).map_err(failure)?.map(|mut path| {
+        path.generation = *generation;
+        path
+    }))
 }

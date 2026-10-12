@@ -16,6 +16,21 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Public Wasm navigation paths — locally verified
+
+The Rust SDK now queries the committed native navmesh and prepared-grid solvers
+through bounded copied request/results. Existing opcodes 0–35 remain unchanged;
+new calls preserve stable IDs, exact generations/costs and off-mesh metadata.
+Navigation and steering share the same callback quota, with a separate bounded
+requested-search budget; authorized failures reject the complete staged native
+transaction. Actual Wasmtime/wasm2c conformance passes 369 tests/doctests, Clippy
+and three development processes. A separate 190 native runtime tests, supported
+wasm32/tooling checks and the authoring-free dependency check pass. Independent
+source review accepted the frozen implementation; main integration remains
+pending. An ordinary source-deleted navigation guest shipping proof, full SDK,
+guest checkpoints, devices and phase gates remain open.
+[Contract and evidence](docs/spikes/native-wasm-navigation-paths.md).
+
 ## Native UI checkpoint state — CPU section merged
 
 Committed widget text, grapheme selection and logical focus now have a bounded

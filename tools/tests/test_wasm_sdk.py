@@ -68,7 +68,7 @@ class RegistryTests(unittest.TestCase):
     def test_graph_and_actual_pose_snapshots_preserve_all_prior_imports(self):
         import hashlib
         self.assertEqual(hashlib.sha256(json.dumps(self.data['functions'][:31],sort_keys=True).encode()).hexdigest(), '488d58e397c8f8bc65ce4c81370cdfb42ad7a0d81d3cf5f94f5c83fa075b6811')
-        self.assertEqual([(f['namespace'],f['name'],f['opcode']) for f in self.data['functions'][31:]], [
+        self.assertEqual([(f['namespace'],f['name'],f['opcode']) for f in self.data['functions'][31:36]], [
             ('incant_animation_v3','snapshot_len',31), ('incant_animation_v3','read_snapshot',32),
             ('incant_animation_graph_v1','snapshot_len',33), ('incant_animation_graph_v1','read_snapshot',34),
             ('incant_animation_graph_v1','control',35)])
@@ -77,3 +77,10 @@ class RegistryTests(unittest.TestCase):
         self.assertEqual(self.data['records']['AnimationRowV3'][:-4], self.data['records']['AnimationRowV2'])
         self.assertEqual((self.data['magic']['ANIMATION_V3_MAGIC'],self.data['magic']['ANIMATION_GRAPH_MAGIC']), ('INCAN003','INCAGR01'))
         self.assertEqual([self.data['constants'][n] for n in ('ANIMATION_GRAPH_MAX_ROWS','ANIMATION_GRAPH_MAX_PARAMETERS','ANIMATION_GRAPH_MAX_PARAMETER_ROWS')], [1024,16,16384])
+
+    def test_navigation_path_imports_append_without_changing_prior_contract(self):
+        import hashlib
+        self.assertEqual(hashlib.sha256(json.dumps(self.data['functions'][:36],sort_keys=True).encode()).hexdigest(), 'fa2e3ec7dde134d5458c49a49fbbd98ad9e2964690a9e7f69e343bd12676e5b1')
+        self.assertEqual([(f['name'],f['opcode']) for f in self.data['functions'][36:]], [('find_path',36),('find_grid_path',37),('read_path',38)])
+        size=lambda name: sum(generator.SIZES[t]*(n[0] if n else 1) for _,t,*n in self.data['records'][name])
+        self.assertEqual([size(n) for n in ('PathRequest','GridPathRequest','PathResultHeader','PathPoint','PathTraversal','GridPathResultHeader','GridPathCell')], [80,40,32,24,32,24,8])

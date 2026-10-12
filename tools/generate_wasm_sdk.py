@@ -46,7 +46,7 @@ def generate(data, digest):
     if 'incant_localization_v1' in data['namespaces']:
         shared.append('pub mod localization;\n')
     if 'incant_navigation_v1' in data['namespaces']:
-        shared.append('pub mod steering;\n')
+        shared.append('pub mod steering;\npub mod navigation_paths;\n')
     shared += [f'pub const {name}: usize = {value};\n' for name,value in data['constants'].items()]
     shared += [f'pub const {name}: &[u8; 8] = b"{value}";\n' for name,value in data['magic'].items()]
     shared += ['pub const ANIMATION_V3_MAX_BYTES: usize = AnimationHeader::SIZE + ANIMATION_MAX_ROWS * AnimationRowV3::SIZE;\n',

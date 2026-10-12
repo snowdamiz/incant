@@ -103,6 +103,18 @@ source, raw Wasm or cached native modules at runtime.
   `incant_module::localization`; smaller initialized scratch works when the whole
   frame fits. [samples/localization.rs](samples/localization.rs) is runnable with
   the same trusted compile helper and actual two-host conformance command.
+- `find_path(owner, request, result_scratch)` queries the active scene's committed
+  navmesh; `find_grid_path` queries its prepared grid. Both return `None` for a
+  valid miss and a borrowed view of the complete copied route on success. Mesh
+  paths retain points, corridor, visited count, generation and explicit off-mesh
+  link IDs/point pairs/direction. Grid paths retain adjacent indices, generation
+  and exact integer cost. All u64 metadata stays exact. Pending numeric/structural
+  writes remain invisible until native commit. Queries do not move entities;
+  gameplay must handle off-mesh traversal and grid-to-world conversion explicitly.
+  Types and scratch maxima are in `incant_module::navigation`; the complete
+  [navigation sample](samples/navigation_paths.rs) observes a rebuild after
+  committed obstacle movement. Unknown owners, invalid inputs and exhausted
+  budgets reject the callback, including when the guest ignores an SDK error.
 - `steer_agents(request, request_scratch, result_scratch)` computes local-avoidance
   velocities over explicit world-space agent samples and obstacle polygons or
   segments. It never gathers collision geometry or moves entities implicitly.
@@ -146,7 +158,9 @@ Additive `incant_animation_v1` supplies legacy skeletal playback snapshots/contr
 `incant_animation_graph_v1` adds copied graph state/parameters and atomic controls.
 `incant_log_v1` supplies logging and `incant_localization_v1` supplies
 copied locale/message queries and atomic settings. `incant_navigation_v1` adds
-local-avoidance requests/results; older hosts reject these imports explicitly.
+local-avoidance requests/results and committed navmesh/grid path queries. The
+path imports append at opcodes 36–38; all previous operations remain unchanged.
+Older hosts reject unsupported imports explicitly.
 Existing `incant_v1`, `incant_input_v1`, and `incant_flipbook_v1` layouts remain
 unchanged. Unknown namespaces, signatures and magic/layout versions fail closed.
 The host's native numeric layout is checked against generated sizes and offsets
@@ -187,7 +201,15 @@ charges its fixed 24-byte request and result copies to transfer limits. See
 [samples/formatting.rs](samples/formatting.rs). Catalog edits and report
 enumeration remain unsupported.
 
-Local avoidance is bounded per callback to 32 requests, 128 aggregate agent
+Navmesh, grid and local avoidance share 32 requests per callback. Path searches
+also share 65,536 requested expansions, charged even for misses. Mesh requests
+permit finite coordinates within ±100,000, snap distance 0.001–10 and 1–32,768
+visits; grid cells are u16 indices with 1–65,536 expansions. Native owner/grid
+bounds remain authoritative. There are at most 4,096 points, corridor entries,
+traversal records or grid cells. Maximum copied results are 245,800 mesh bytes
+and 32,800 grid bytes. A short destination never receives a partial frame.
+
+Local avoidance is additionally bounded per callback to 128 aggregate agent
 samples and 128 aggregate obstacle edges. Each request has at most 32 obstacles;
 closed polygons have 3..32 vertices and segments exactly two. The copied request
 and result maxima are 17,192 and 5,136 bytes. Scalar domains, duplicate IDs and
