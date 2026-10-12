@@ -49,5 +49,84 @@
     "new_regressions": 6,
     "scope": "Synthetic rustc log parser and native tooling tests, not shipping or cross-platform execution evidence"
   },
-  "shipping": "Original current-main169 export built then failed audit before publication. Corrected fresh export execution is pending."
+  "shipping": "Original current-main169 export built then failed audit before publication. Corrected fresh export execution is pending.",
+  "current_main_integration": {
+    "head": "c0314e265ecd7b221c703fb9e37b12300f856170",
+    "main": "4fc128f9aba4d5992b9dfd5476d998db7a9a4b7a",
+    "source_unchanged": true,
+    "checks": [
+      {
+        "name": "native-tools",
+        "command": [
+          "python3",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tools/tests",
+          "-p",
+          "test_native*.py",
+          "-v"
+        ],
+        "cwd": "/Users/andreyyurlov/.codex/worktrees/local-service-stack/incant",
+        "at": "2026-10-12T21:34:45.315632+00:00",
+        "exit": 0,
+        "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/player-export-audit-main169/native-tools.log",
+        "sha256": "15e51f738526da5a78693698625debd70755eb48773fe7a0696e82a324d84e00"
+      },
+      {
+        "name": "conventions",
+        "command": [
+          "python3",
+          "tools/generate_conventions.py",
+          "--check"
+        ],
+        "cwd": "/Users/andreyyurlov/.codex/worktrees/local-service-stack/incant",
+        "at": "2026-10-12T21:34:59.795198+00:00",
+        "exit": 0,
+        "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/player-export-audit-main169/conventions.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "diff",
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "cwd": "/Users/andreyyurlov/.codex/worktrees/local-service-stack/incant",
+        "at": "2026-10-12T21:34:59.853357+00:00",
+        "exit": 0,
+        "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/player-export-audit-main169/diff.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "artifacts": [
+      {
+        "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/player-export-audit-main169/checks.json",
+        "path": "docs/spikes/evidence/native-export-player-units/main169/checks.json.gz",
+        "raw_sha256": "293ec7a5c387d838d97cdf3f0a13ec75b198fd764214a5edd8cc522c42ef6d41",
+        "sha256": "1a09e88d76bf1b9d0acb27e40412d70f9a16034758c680653404dff9561cda17"
+      },
+      {
+        "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/player-export-audit-main169/conventions.log",
+        "path": "docs/spikes/evidence/native-export-player-units/main169/conventions.log.gz",
+        "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      },
+      {
+        "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/player-export-audit-main169/diff.log",
+        "path": "docs/spikes/evidence/native-export-player-units/main169/diff.log.gz",
+        "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      },
+      {
+        "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/player-export-audit-main169/native-tools.log",
+        "path": "docs/spikes/evidence/native-export-player-units/main169/native-tools.log.gz",
+        "raw_sha256": "15e51f738526da5a78693698625debd70755eb48773fe7a0696e82a324d84e00",
+        "sha256": "5e32fee2967c8599d0bb78190e12a4862e3909382935fb7a91b84c4d06903542"
+      }
+    ],
+    "independent_review": "pending root final producer review"
+  }
 }

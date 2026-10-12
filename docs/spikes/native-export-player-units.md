@@ -23,3 +23,8 @@ failed export receipt is retained. Corrected fresh public export execution is
 still pending and will be recorded by the consuming Planar proof.
 
 [Commands, hashes and red/green receipts](evidence/native-export-player-units.json).
+
+The private main169 integration repeats the scoped tooling suite: 63 pass / four
+Windows-specific skips, with conventions and diff checks passing. Both changed
+source files remain byte-identical to the producer. Root final review and exact
+fast CI are still required before publication.
