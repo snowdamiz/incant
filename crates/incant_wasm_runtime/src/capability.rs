@@ -25,6 +25,20 @@ const _: () = {
 /// Trusted host adapter operation; all integer arguments are guest offsets/indices.
 #[derive(Clone, Copy)]
 pub enum Call {
+    AnimationLenV3,
+    ReadAnimationsV3 {
+        ptr: i32,
+        capacity: i32,
+    },
+    AnimationGraphLen,
+    ReadAnimationGraphs {
+        ptr: i32,
+        capacity: i32,
+    },
+    ControlAnimationGraph {
+        id: i32,
+        ptr: i32,
+    },
     Steer {
         ptr: i32,
         len: i32,
@@ -127,6 +141,9 @@ pub struct Capability {
     animation_rows: Vec<AnimationSnapshot>,
     animations: Vec<u8>,
     animations_v2: Vec<u8>,
+    animations_v3: Vec<u8>,
+    animation_graph_rows: Vec<incant_runtime::AnimationGraphSnapshot>,
+    animation_graphs: Vec<u8>,
     animation_rejected: bool,
     transferred: usize,
     calls: usize,
@@ -195,6 +212,13 @@ impl Capability {
             return Err(error);
         }
         self.animation_rejected = false;
+        self.animations_v3.clear();
+        self.animation_graphs.clear();
+        if let Err(error) = world.snapshot_animation_graphs(&mut self.animation_graph_rows) {
+            self.abort();
+            return Err(error.into());
+        }
+        self.animation_graph_rows.sort_unstable_by_key(|r| r.entity);
         self.transferred = 0;
         self.calls = 0;
         self.tick_logs.clear();
@@ -225,6 +249,9 @@ impl Capability {
         self.animation_rows.clear();
         self.animations.clear();
         self.animations_v2.clear();
+        self.animations_v3.clear();
+        self.animation_graph_rows.clear();
+        self.animation_graphs.clear();
         self.active = false;
         self.input_available = false;
         self.input.clear();
@@ -251,6 +278,9 @@ impl Capability {
         self.animation_rows.clear();
         self.animations.clear();
         self.animations_v2.clear();
+        self.animations_v3.clear();
+        self.animation_graph_rows.clear();
+        self.animation_graphs.clear();
         if self.tick_logs.rejected {
             self.abort();
             return Err(Error::Abi("rejected log transaction"));
@@ -359,6 +389,11 @@ impl Capability {
                     | Call::AnimationLenV2
                     | Call::ReadAnimationsV2 { .. }
                     | Call::ControlAnimationV2 { .. }
+                    | Call::AnimationLenV3
+                    | Call::ReadAnimationsV3 { .. }
+                    | Call::AnimationGraphLen
+                    | Call::ReadAnimationGraphs { .. }
+                    | Call::ControlAnimationGraph { .. }
             );
         // Only an authorized localization call can poison its active epoch. This
         // wraps enter/memory/transfer checks as well as parsing/query dispatch;
@@ -409,6 +444,46 @@ impl Capability {
             .filter(|v| *v <= incant_wasm_abi::NATIVE_MAX_QUERY_UNITS)
             .ok_or(Error::Limit("query units"))?;
         match call {
+            Call::AnimationLenV3 | Call::AnimationGraphLen => {
+                let graph = matches!(call, Call::AnimationGraphLen);
+                self.prepare_animation_snapshot(graph);
+                return Ok(if graph {
+                    self.animation_graphs.len()
+                } else {
+                    self.animations_v3.len()
+                } as i32);
+            }
+            Call::ReadAnimationsV3 { ptr, capacity }
+            | Call::ReadAnimationGraphs { ptr, capacity } => {
+                let graph = matches!(call, Call::ReadAnimationGraphs { .. });
+                self.prepare_animation_snapshot(graph);
+                let len = if graph {
+                    self.animation_graphs.len()
+                } else {
+                    self.animations_v3.len()
+                };
+                let capacity = usize::try_from(capacity)
+                    .map_err(|_| Error::Abi("animation destination capacity"))?;
+                if capacity < len {
+                    return Err(Error::Abi("animation destination capacity"));
+                }
+                range(ptr, capacity, memory.len())?;
+                let region = range(ptr, len, memory.len())?;
+                self.transfer(len)?;
+                memory[region].copy_from_slice(if graph {
+                    &self.animation_graphs
+                } else {
+                    &self.animations_v3
+                });
+                return Ok(len as i32);
+            }
+            Call::ControlAnimationGraph { id, ptr } => {
+                let bytes =
+                    self.read::<{ incant_wasm_abi::AnimationGraphCommand::SIZE }>(memory, ptr)?;
+                let control = crate::animation_graphs::command(&bytes)?;
+                let entity = self.stable(memory, id)?;
+                self.command(StructuralCommand::ControlAnimationGraph { entity, control })?;
+            }
             Call::Steer { ptr, len } => {
                 let len = usize::try_from(len).map_err(|_| Error::Abi("steering byte length"))?;
                 if len > incant_wasm_abi::STEERING_MAX_REQUEST_BYTES {
@@ -685,6 +760,18 @@ impl Capability {
             }
         }
         Ok(0)
+    }
+    fn prepare_animation_snapshot(&mut self, graph: bool) {
+        if graph {
+            if self.animation_graphs.is_empty() {
+                crate::animation_graphs::encode(
+                    &self.animation_graph_rows,
+                    &mut self.animation_graphs,
+                );
+            }
+        } else if self.animations_v3.is_empty() {
+            crate::animations::encode_v3(&self.animation_rows, &mut self.animations_v3);
+        }
     }
     fn steering_state(&mut self) -> Result<&mut crate::steering::State, Error> {
         self.steering

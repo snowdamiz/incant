@@ -16,6 +16,19 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Public Wasm animation graphs — current-main integration verified
+
+The Rust SDK and native Wasmtime/wasm2c hosts now expose copied graph state,
+parameters and atomic controls, with an additive v3 snapshot for actual timed
+and parameter-driven pose blends. Published opcodes 0–30 and old layouts remain
+unchanged; old snapshots explicitly refuse blends they cannot represent. The
+corrected implementation passes 355 actual-host tests/doctests, Clippy and three
+development processes, plus supported wasm32/tooling checks. Independent source
+review closed a forged-rest-destination parser case. The actual main132 union
+repeats all 355 cases and three development processes with the 31 reviewed source
+inputs unchanged; its fast publication gate remains pending. Complete animation/SDK, guest checkpoints, device and
+phase requirements remain open. [Contract/evidence](docs/spikes/native-animation-graph-sdk.md).
+
 ## Public authored Wasm route — current-main integration verified
 
 One typed scene module now connects public bounded `.wasm` import/reimport,
@@ -85,7 +98,12 @@ Checkpoint8 promoted frozen main117 into release at
 exact-candidate push workflows succeeded. Its tree is exactly the selected main117
 tree; parents and Built-by trailer are verified. Checkpoints6–7 remain historical
 failed attempts. Later main118+ work continues through reviewed local checks and
-fast PR gates until the next frozen checkpoint; release does not track moving main.
+fast PR gates. Checkpoint9 now freezes main132 at candidate
+`7b908b38a9f2b984285b7de310dc1d2c6aa702b9` in PR #133; its comprehensive
+checks are active, with a Linux agent test failing before its intended provider
+fixture because the fixed allowance is smaller than the current tool input. The
+failure is preserved for a reviewed correction; checkpoint9 is not promoted.
+Release does not track moving main.
 [Promotion evidence](docs/spikes/evidence/release-checkpoint-8.json).
 
 ## Mixed-direction text wrapping — current-main CPU correction
@@ -111,8 +129,9 @@ removes source/cache/build inputs and external debug maps before three 90-tick
 replays, eight checkpoint split/continuation processes and two precise refusals.
 Active, paused, completed-paused and blended v6 continuations preserve exact final
 save bytes, PCM and logs. Legacy Wasm v1/v2
-snapshots explicitly refuse unrepresentable graph blends; the additive guest
-graph SDK remains outstanding. Four-pose blended-state fades, nested/2D trees,
+snapshots explicitly refuse unrepresentable graph blends. The additive guest
+graph SDK now carries bounded snapshots and atomic controls through both native
+Wasm hosts, with its current-main checks recorded above. Four-pose blended-state fades, nested/2D trees,
 layering, IK, root motion, rendered acceptance and device gates remain open.
 [Scope and evidence](docs/spikes/native-animation-graphs.md).
 

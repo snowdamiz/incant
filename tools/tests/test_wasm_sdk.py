@@ -64,3 +64,16 @@ class RegistryTests(unittest.TestCase):
         size=lambda name: sum(generator.SIZES[t]*(n[0] if n else 1) for _,t,*n in self.data['records'][name])
         self.assertEqual([size(n) for n in ('SteeringHeader','SteeringAgent','SteeringObstacleHeader','SteeringResultHeader','SteeringVelocity')],[32,104,40,8,40])
         self.assertEqual([self.data['constants'][n] for n in ('STEERING_MAX_AGENTS','STEERING_MAX_OBSTACLES','STEERING_MAX_EDGES','NAVIGATION_MAX_QUERIES')],[128,32,128,32])
+
+    def test_graph_and_actual_pose_snapshots_preserve_all_prior_imports(self):
+        import hashlib
+        self.assertEqual(hashlib.sha256(json.dumps(self.data['functions'][:31],sort_keys=True).encode()).hexdigest(), '488d58e397c8f8bc65ce4c81370cdfb42ad7a0d81d3cf5f94f5c83fa075b6811')
+        self.assertEqual([(f['namespace'],f['name'],f['opcode']) for f in self.data['functions'][31:]], [
+            ('incant_animation_v3','snapshot_len',31), ('incant_animation_v3','read_snapshot',32),
+            ('incant_animation_graph_v1','snapshot_len',33), ('incant_animation_graph_v1','read_snapshot',34),
+            ('incant_animation_graph_v1','control',35)])
+        size=lambda name: sum(generator.SIZES[t]*(n[0] if n else 1) for _,t,*n in self.data['records'][name])
+        self.assertEqual([size(n) for n in ('AnimationRowV3','AnimationGraphHeader','AnimationGraphRow','AnimationGraphParameter','AnimationGraphCommand')], [104,24,64,24,32])
+        self.assertEqual(self.data['records']['AnimationRowV3'][:-4], self.data['records']['AnimationRowV2'])
+        self.assertEqual((self.data['magic']['ANIMATION_V3_MAGIC'],self.data['magic']['ANIMATION_GRAPH_MAGIC']), ('INCAN003','INCAGR01'))
+        self.assertEqual([self.data['constants'][n] for n in ('ANIMATION_GRAPH_MAX_ROWS','ANIMATION_GRAPH_MAX_PARAMETERS','ANIMATION_GRAPH_MAX_PARAMETER_ROWS')], [1024,16,16384])
