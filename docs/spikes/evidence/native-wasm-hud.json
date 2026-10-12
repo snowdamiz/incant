@@ -1,5 +1,5 @@
 {
-  "scope": "Additive complete native HUD declarations, routed outcomes and commands, ordinary CPU exported Wasm game; final independent execution audit pending",
+  "scope": "Additive complete native HUD declarations, routed outcomes and commands, ordinary CPU exported Wasm game; independent source and final execution audit accepted",
   "implementation_commits": [
     "622c3a7b43b61661e88321162483d9ba2764f44d",
     "1c513bf933e60b80194f53da8a34e85d479e0bca"
@@ -1117,5 +1117,10 @@
     "Headless native-play UI viewport/recorded UI routing is a separate next slice.",
     "All earlier actual module conformance suites were not rerun: full ordinary affected tests plus actual HUD both-host cases and all-target Clippy are the stated scope."
   ],
-  "independent_review": "Source accepted in retained source receipts; final execution/durable manifest review pending."
+  "independent_review": {
+    "status": "accepted",
+    "receipt": "docs/spikes/evidence/native-wasm-hud/final-review.json",
+    "sha256": "8800e8e8441ea65d8828333395f396529f9cb695c959d75a5b8448d156570f1d",
+    "reviewed_manifest_sha256": "9dd8bbb40870d906342aa81abd838d0bcf268d99f189d4e6c8fc1e9051167ee7"
+  }
 }
