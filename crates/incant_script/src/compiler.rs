@@ -104,6 +104,8 @@ impl CompiledScript {
             engine: ENGINE_VERSION.into(),
             build_id: BUILD_ID.into(),
             target: TARGET.into(),
+            producer_target: TARGET.into(),
+            bytecode_abi: BytecodeAbi::current(),
             source_name: name.into(),
             source_sha256: digest(source.as_bytes()),
             wrapper_prefix_lines: WRAPPER_PREFIX_LINES,
@@ -127,13 +129,17 @@ impl CompiledScript {
     /// bytecode cache. All project-controlled data is escaped as Rust literals.
     /// Only a trusted native build may include the returned module.
     pub fn embedded_rust(&self) -> String {
-        let m = &self.metadata;
+        self.embedded_rust_with(&self.metadata)
+    }
+
+    fn embedded_rust_with(&self, m: &ScriptMetadata) -> String {
         format!(
             "// Generated from trusted cook output. Do not replace with project caches.\n\
              pub fn load() -> Result<incant_script::CompiledScript, incant_script::ScriptError> {{\n\
              let artifact = incant_script::EmbeddedScript {{\n\
              metadata: incant_script::ScriptMetadata {{\n\
              format: {}, engine: {:?}.into(), build_id: {:?}.into(), target: {:?}.into(),\n\
+             producer_target: {:?}.into(), bytecode_abi: incant_script::artifact::BytecodeAbi {{ version: {}, pointer_bits: {}, little_endian: {}, value_bytes: {}, value_alignment: {}, atom_bytes: {}, float_mantissa: {}, float_max_exponent: {}, write_flags: {}, default_c_flags: {} }},\n\
              source_name: {:?}.into(), source_sha256: {:?}, wrapper_prefix_lines: {},\n\
              bytecode_sha256: {:?}, hardening_sha256: {:?}, bindings_sha256: {:?},\n\
              }}, bytecode: &{:?}, hardening: &{:?}, bindings: {},\n\
@@ -146,6 +152,17 @@ impl CompiledScript {
             m.engine,
             m.build_id,
             m.target,
+            m.producer_target,
+            m.bytecode_abi.version,
+            m.bytecode_abi.pointer_bits,
+            m.bytecode_abi.little_endian,
+            m.bytecode_abi.value_bytes,
+            m.bytecode_abi.value_alignment,
+            m.bytecode_abi.atom_bytes,
+            m.bytecode_abi.float_mantissa,
+            m.bytecode_abi.float_max_exponent,
+            m.bytecode_abi.write_flags,
+            m.bytecode_abi.default_c_flags,
             m.source_name,
             m.source_sha256,
             m.wrapper_prefix_lines,
@@ -159,5 +176,38 @@ impl CompiledScript {
                 |bindings| format!("Some({})", crate::bindings_embed::rust(bindings))
             ),
         )
+    }
+}
+
+/// A fresh trusted build product for an explicitly admitted destination. Unlike
+/// CompiledScript, it cannot be executed by the producer's runtime or retargeted.
+/// The sole constructor recompiles source; it never accepts executable caches.
+pub struct ScriptBuild {
+    compiled: CompiledScript,
+    metadata: ScriptMetadata,
+}
+impl ScriptBuild {
+    pub fn compile(name: &str, source: &str, target: &str) -> Result<Self, ScriptError> {
+        if !compatibility::admits(TARGET, target, BytecodeAbi::current()) {
+            return Err(ScriptError::ArtifactCompatibility);
+        }
+        let compiled = CompiledScript::compile_named(name, source)?;
+        if compiled.bytes.first() != Some(&28) || compiled.hardening.first() != Some(&28) {
+            return Err(ScriptError::ArtifactCompatibility);
+        }
+        let metadata = ScriptMetadata {
+            target: target.into(),
+            ..compiled.metadata.clone()
+        };
+        Ok(Self { compiled, metadata })
+    }
+    pub fn metadata(&self) -> &ScriptMetadata {
+        &self.metadata
+    }
+    pub fn byte_len(&self) -> usize {
+        self.compiled.byte_len()
+    }
+    pub fn embedded_rust(&self) -> String {
+        self.compiled.embedded_rust_with(&self.metadata)
     }
 }
