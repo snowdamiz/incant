@@ -25,9 +25,12 @@ reverse fades; owned TypeScript cycles/ticks remain exact BigInt arrays. The
 600-case CPU suite, scoped Clippy, wasm32, dependency and SDK checks pass.
 Independent production source and retained evidence reviews accept the native
 connection. The composed Wasm53–55 boundary now passes 453 actual-host cases,
-Clippy, wasm32 and 240 Python checks; source review is accepted and final evidence
-review is pending. The ordinary source-deleted public root gameplay export is
-building after its complete native-oracle development preflight passed.
+Clippy, wasm32 and 240 Python checks; independent source and actual-host final
+evidence reviews are accepted. Three fresh ordinary wasm2c package processes
+now each match 22,464 native-oracle scalars plus 256 public vector checks after
+private source/cache/build/map deletion. All eleven exact runtime refusals pass.
+The [public package packet](docs/spikes/native-root-motion-package.md) awaits
+independent final review.
 [Wasm contract and evidence](docs/spikes/native-root-motion-wasm.md). Physics saves,
 general affine/CUBICSPLINE roots, rendered/device and full Phase1 gates remain
 open. [Contract and measured limits](docs/spikes/native-root-motion-connected.md).

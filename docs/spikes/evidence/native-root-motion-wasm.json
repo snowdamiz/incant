@@ -2,7 +2,12 @@
   "at": "2026-10-12T18:44:43.499594+00:00",
   "scope": "Complete copied root_motion_v1 operations53-55; exact unchanged old0-52 registry; native/Wasmtime/wasm2c transaction parity. Ordinary public source-deleted shipping proof is separate and pending.",
   "source_review": "accepted; retained source-review.json",
-  "final_evidence_review": "pending independent review",
+  "final_evidence_review": {
+    "decision": "accepted for actual-host slice",
+    "path": "docs/spikes/evidence/native-root-motion-wasm/final-review.json",
+    "sha256": "cfc365da7356efe8795692365a5ba228edef9481d1959b126232808838844db8",
+    "ordinary_package": "separate public package packet"
+  },
   "production": [
     {
       "path": "Cargo.lock",

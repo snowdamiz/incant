@@ -42,11 +42,13 @@ Wasm, generated C/header and facade artifacts plus three root guest sources are
 retained outside temporary storage. The durable packet also binds the complete
 330-artifact/12-source selected conformance set and preserves failed preliminary
 runs, including tool-path, test-lint, stale isolated lock and command-usage errors.
-Production source review is accepted; final evidence review is pending.
+Production source and actual-host final evidence reviews are accepted; the
+[retained final receipt](evidence/native-root-motion-wasm/final-review.json)
+qualifies removed prepared inputs separately from directly reviewed artifacts.
 
 [Exact source, raw/compressed logs and receipts](evidence/native-root-motion-wasm.json)
-record what ran. The ordinary public source-deleted root-motion game proof is a
-separate ongoing task. Physics and arbitrary guest/module checkpoints remain
+record what ran. The [ordinary public source-deleted game proof](native-root-motion-package.md)
+also passed and has a separate review packet. Physics and arbitrary guest/module checkpoints remain
 explicitly unsupported. CUBICSPLINE, general affine roots, rendered evidence,
 reference-device performance and full Phase1 acceptance remain outside this
 CPU boundary result.
