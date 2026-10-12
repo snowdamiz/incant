@@ -16,7 +16,7 @@ samples. Ten precise refusal controls preserve their documented output boundarie
 including the existing-save sentinel. PCM and save publication are separate files.
 
 [Exact sources, commands, reports, package identities and retained logs](evidence/native-audio-transport-main162.json)
-await independent final integration audit. Main162 adds reviewed HUD evidence and
+have independent final integration acceptance. Publication requires exact-head fast CI. Main162 adds reviewed HUD evidence and
 ancestry only to the tested union; implementation/build bytes remain unchanged.
 This is CPU offline audio evidence, not physical playback, native-window/IME,
 Wasm transport ABI, Core presentation, phone performance or phase acceptance.

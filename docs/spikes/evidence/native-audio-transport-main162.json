@@ -970,7 +970,11 @@
     }
   },
   "evidence_directory": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001",
-  "integration_review": "pending independent final current-main audit",
+  "integration_review": {
+    "status": "accepted",
+    "path": "docs/spikes/evidence/native-audio-transport-main162-review.json",
+    "sha256": "7228a3ed23ad0d1d0d9af50c6bc612bc78f234cc8ace53633339ce41f983a8de"
+  },
   "limitations": [
     "CPU hosted ordinary-load mixed static/streamed audio and UI; fresh owners and neutral input",
     "Active preedit refuses; pointer capture is discarded",

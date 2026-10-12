@@ -16,12 +16,12 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Native audio transport — current-main162 verification complete
+## Native audio transport — main162 review accepted; fast check pending
 
 541 affected CPU cases, Clippy and target/contracts checks pass. A fresh ordinary
 package passes four source/map/build-deleted playback/continuation processes with
 exact save and PCM equality plus ten precise refusal controls. Integration source
-seams are reviewed; final evidence audit and publication remain pending. Wasm
+seams and final evidence are independently accepted; exact-head fast CI/publication remain pending. Wasm
 transport, Core presentation and physical audio/device gates remain separate.
 [Current-main evidence](docs/spikes/native-audio-transport-main162.md).
 
