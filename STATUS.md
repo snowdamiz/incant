@@ -61,7 +61,10 @@ fast PR gates until the next frozen checkpoint; release does not track moving ma
 The native text review's dropped-space/overflow defect is corrected in pinned
 cosmic-text, with separate regressions for direction changes and narrow glyph
 wrapping. The 77 integrated CPU cases, Clippy, wasm32 and dependency checks pass;
-independent source review accepted. Claude's focused rendered recheck is pending.
+independent source review accepted. Claude0055 also accepted the corrected
+180/300-pixel native cases on its frozen macOS/Metal ci-profile build, retaining
+all 250 non-whitespace glyphs with no new defect. Shipping/device/full Unicode
+and complete Game UI/IME gates remain open.
 [Evidence](docs/spikes/text-bidi-wrap.md).
 
 ## Current milestone
@@ -129,8 +132,8 @@ text consumer (#122) and crossfades (#123). Canonical world-space text drawing
 now has scoped Claude appearance/Metal numerical acceptance and current-main CPU
 integration checks (#124). Bounded text-editing state merged in #125; steering now
 merged in #126 after its corrected fast check passed. The reported mixed-bidi
-wrapping defect now has reviewed current-main CPU checks; its focused native
-rendered recheck remains separate.
+wrapping defect merged in #127 with reviewed current-main CPU checks;
+Claude0055 separately accepted the scoped frozen-build native rendered recheck.
 Connected Game UI and remaining public Wasm work continue separately.
 No complete Game UI or phase gate is claimed.
 
