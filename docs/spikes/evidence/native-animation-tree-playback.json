@@ -1,0 +1,1076 @@
+{
+  "state": "local checks and ordinary source-deleted shipping proof passed; current-main integration pending",
+  "production_head": "568ee1156f27f7858c139182563e4292a66f12c9",
+  "export_head": "3dad39b3701253bd6fd2cbe98481276f484f3064",
+  "checks": [
+    {
+      "name": "renderer-pose",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "weighted_tree_consumer_uses_full_local_pose_and_refuses_inconsistent_bindings"
+      ],
+      "code": 0,
+      "seconds": 29.82908920800037,
+      "log_sha256": "0be976e6156c327a2c9d56692f2460f5be6efbb3ed46d06ec1711484bd32b0b9"
+    },
+    {
+      "name": "affected-tests",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_types",
+        "-p",
+        "incant_doc",
+        "-p",
+        "incant_cmd",
+        "-p",
+        "incant_cook",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_assets_runtime",
+        "-p",
+        "incant_render_data",
+        "-p",
+        "incant_render_native",
+        "-p",
+        "incant_render_authoring",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_wasm_runtime",
+        "-p",
+        "incant_game_runtime",
+        "-p",
+        "incant_game_player"
+      ],
+      "code": 0,
+      "seconds": 159.00479712499964,
+      "log_sha256": "7782731cb7187a079be7d8713a2c10acee804b9b832a292d48fde8665b9a433f"
+    },
+    {
+      "name": "clippy",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_types",
+        "-p",
+        "incant_doc",
+        "-p",
+        "incant_cmd",
+        "-p",
+        "incant_cook",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_assets_runtime",
+        "-p",
+        "incant_render_data",
+        "-p",
+        "incant_render_native",
+        "-p",
+        "incant_render_authoring",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_wasm_runtime",
+        "-p",
+        "incant_game_runtime",
+        "-p",
+        "incant_game_player",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "code": 0,
+      "seconds": 21.000916583999242,
+      "log_sha256": "1e0335c3995a9a17b4b712dafb0ee29eca561b3f7cd571ad31373b4b16d9f8e9"
+    },
+    {
+      "name": "wasm32",
+      "argv": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--lib",
+        "-p",
+        "incant_types",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_render_data",
+        "-p",
+        "incant_render_native"
+      ],
+      "code": 0,
+      "seconds": 2.6511009160003596,
+      "log_sha256": "63aff78cd47cb05727760686970374ab7ea797132195d97ad984866276029202"
+    },
+    {
+      "name": "dependencies",
+      "argv": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_types",
+        "incant_runtime",
+        "incant_script",
+        "incant_assets_runtime",
+        "incant_render_data",
+        "incant_render_native",
+        "incant_render",
+        "incant_game_runtime",
+        "incant_game_player"
+      ],
+      "code": 0,
+      "seconds": 0.5229742909996276,
+      "log_sha256": "7dbf2191201d7f6968c0cb3c912a660ec2aea2615932609ab080415344ffa9be"
+    },
+    {
+      "name": "headless",
+      "argv": [
+        "./tools/cargo",
+        "build",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_headless"
+      ],
+      "code": 0,
+      "seconds": 360.0728428749999,
+      "log_sha256": "743ad83509668b082931d1aa6e6256658de8e8e6c904f0df0e1bc25e7cbfd395"
+    },
+    {
+      "name": "schema",
+      "argv": [
+        "/Users/andreyyurlov/.codex/incant-animation-target/ci/incant_headless",
+        "schema",
+        "/Users/andreyyurlov/.codex/incant-evidence/animation-tree-wiring-003/schemas"
+      ],
+      "code": 0,
+      "seconds": 0.790927749999355,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "schema-match",
+      "argv": [
+        "python3",
+        "-c",
+        "from pathlib import Path; a=Path('schemas'); b=Path('/Users/andreyyurlov/.codex/incant-evidence/animation-tree-wiring-003/schemas'); assert {p.name:p.read_bytes() for p in a.glob('*.schema.json')}=={p.name:p.read_bytes() for p in b.glob('*.schema.json')}"
+      ],
+      "code": 0,
+      "seconds": 0.05925391699929605,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "sdk-check",
+      "argv": [
+        "/Users/andreyyurlov/.local/share/fnm/node-versions/v22.23.3/installation/bin/node",
+        "tools/generate_sdk.mjs",
+        "--check"
+      ],
+      "code": 0,
+      "seconds": 0.0718770419998691,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "typescript",
+      "argv": [
+        "/Users/andreyyurlov/.local/share/fnm/node-versions/v22.23.3/installation/bin/node",
+        "node_modules/typescript/bin/tsc",
+        "-p",
+        "sdk/ts/tsconfig.json"
+      ],
+      "code": 0,
+      "seconds": 0.7331945409996479,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "fmt",
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "code": 0,
+      "seconds": 3.9478424589997303,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "code": 0,
+      "seconds": 0.044786375000512635,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "passed": 665,
+  "failed": 0,
+  "ignored_gpu_tests": 82,
+  "groups": 117,
+  "artifacts": [
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/commands.json.gz",
+      "sha256": "9b14209eead45f44cff8cd797c871a83a7e39d69aac7ebbdf17cc5b36865f18a",
+      "uncompressed_sha256": "c6b323d7e39470b4e8fe23b1c40d10af8c7799ad8d1287b5cbb13962b95e274e"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/source-freeze.json.gz",
+      "sha256": "8d12a386c457202260c4de7288faa283d7817e39956e0c93c5884148073a8bf4",
+      "uncompressed_sha256": "d636d7d4dd704717259c1f691be9f1eee003bf50396b1de91fa66a2231d4fc28"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/source-audit.json.gz",
+      "sha256": "aa8a8b864c477c930aa03f6b86c387992a0d4cb193b122a27f1d154244c261d3",
+      "uncompressed_sha256": "3aa775c7c090c3d2e5653caa1472f7b2e2319efa9605f92828a1abddcb51eeaa"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/renderer-pose.log.gz",
+      "sha256": "3b15fa092d27b14b4557e5b47fcc6cd45341d0ae16fbd87f6dc2dce8657a7ff0",
+      "uncompressed_sha256": "0be976e6156c327a2c9d56692f2460f5be6efbb3ed46d06ec1711484bd32b0b9"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/affected-tests.log.gz",
+      "sha256": "9682a8311cdb923f982daab1c44cacee807ad2e393d7fdd590ab73306d17e7ad",
+      "uncompressed_sha256": "7782731cb7187a079be7d8713a2c10acee804b9b832a292d48fde8665b9a433f"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/clippy.log.gz",
+      "sha256": "e415e5d71c15a7bf22af6153035e27783b67ba7929ad120d4bd43e690cf71a0f",
+      "uncompressed_sha256": "1e0335c3995a9a17b4b712dafb0ee29eca561b3f7cd571ad31373b4b16d9f8e9"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/wasm32.log.gz",
+      "sha256": "9a035810737f4e5eae33bbe609474d6ecf6f8888be470441cae90bc60e92574d",
+      "uncompressed_sha256": "63aff78cd47cb05727760686970374ab7ea797132195d97ad984866276029202"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/dependencies.log.gz",
+      "sha256": "5caafb4a19f2e505da53f890dcdf92c95d1d878b78a6b046f741a6b085917af4",
+      "uncompressed_sha256": "7dbf2191201d7f6968c0cb3c912a660ec2aea2615932609ab080415344ffa9be"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/headless.log.gz",
+      "sha256": "b97f9e49742abdbd3cb5df7eb42a7905ad481f84b825c1fb544cf80b1d8af098",
+      "uncompressed_sha256": "743ad83509668b082931d1aa6e6256658de8e8e6c904f0df0e1bc25e7cbfd395"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/schema.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/schema-match.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/sdk-check.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/typescript.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/fmt.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/diff.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/animation-tree-wiring-source-20261012.json",
+      "sha256": "64d64ec0339b691ef5b6852f1d05cd0fe25ceacbf9f4df51e70936699f835bda",
+      "uncompressed_sha256": "64d64ec0339b691ef5b6852f1d05cd0fe25ceacbf9f4df51e70936699f835bda"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/animation-normalize-215c7afd-review.json",
+      "sha256": "102b802418b050a0fdcd71264a84d8c5ca69d5e8ed5553ac92caa91130d581d6",
+      "uncompressed_sha256": "102b802418b050a0fdcd71264a84d8c5ca69d5e8ed5553ac92caa91130d581d6"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/animation-normalize-568ee115-review.json",
+      "sha256": "74f394a589b7cb7fc187b9288f8b9dcae4d89104509a0206040292478403e453",
+      "uncompressed_sha256": "74f394a589b7cb7fc187b9288f8b9dcae4d89104509a0206040292478403e453"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/animation-tree-public-probe-source-20261012.json",
+      "sha256": "d187e3e9511a48ade55c1b1463ac44a32abbbae712525465ae01a7f47e22d28d",
+      "uncompressed_sha256": "d187e3e9511a48ade55c1b1463ac44a32abbbae712525465ae01a7f47e22d28d"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public-preflight-001.json.gz",
+      "sha256": "0c1bc6925520a84aae504ed393c93ab584088fcd387d47b5c684e4fb92e9edec",
+      "uncompressed_sha256": "c66df43b5e34ef80f7166220afe7bbafae69342304c9c279739cb0960f0d8303"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public-preflight-002.json.gz",
+      "sha256": "14427c5bafa33d38e624a787febafda9b150a1e4cfc1d2e393a4233ea315e611",
+      "uncompressed_sha256": "61968588c985496ded6141733294aabbeafeb88bae0d1eb5b436d8742f7d4e50"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/authoring.json.gz",
+      "sha256": "2f8db99c8d7909c996108e1ef00fae574c2aa5ae20c0152dedcb0a14e74f0d6d",
+      "uncompressed_sha256": "0869a59b0961bd4bce10a953034e79f06d5f1e218bcf4369176285a34814a963"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/baseline-observe.json.gz",
+      "sha256": "d8e191e07352a2fc38dffa358c35c78a41656e3955a1b5bf59e1c8cece1afaff",
+      "uncompressed_sha256": "da5ff7e847bec7c54fdb1dbab67fbdc681b0417d8cdba622a9fc9568b3a275d6"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/baseline.json.gz",
+      "sha256": "ebecf43412607a29c7c6cddbaed38046185ccf9fc6ee878af04673c1529c7877",
+      "uncompressed_sha256": "16ce9a7172dd6c199b363de7e8fe9d9e05f82488713d201a4e45d873aa1c9b3e"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/baseline.pcm.gz",
+      "sha256": "25e5db378f4bd6634a1f78305e4f8e38d3a7d56a98ba3299ba04ac91a6738423",
+      "uncompressed_sha256": "11001dd97006a44b5bccaaafeb04f0a089ad1a7b3781f58362cb62cc814de4ce"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/baseline.save.gz",
+      "sha256": "2b5b7e2dfbecffb3be40145e154f9cbe718a4a9ea40b01b531da8a52bae19ece",
+      "uncompressed_sha256": "7f8d900a4ec5ec82a844c396889caf7f7623536caa1037bf412454ae37a007eb"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-000-stderr.txt.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-000-stdout.txt.gz",
+      "sha256": "f549dc0599b0f9f9bbf2b34e713f8646d14df63d4620d1a7ba1fd614f0c7e361",
+      "uncompressed_sha256": "6a872d0171effbef78a2309f158a46458a9ec28ee2988775ca73a86c0f8c95b9"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-001-stderr.txt.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-001-stdout.txt.gz",
+      "sha256": "f3c79fd06084f618c3313519b22f5c999be429183bccb2d9da59143d39fd3cb1",
+      "uncompressed_sha256": "57d6eb9781355d4eed36eafe12fdb400c008304aa9f3e667b0104bada8de65be"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-002-stderr.txt.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-002-stdout.txt.gz",
+      "sha256": "26e3860aaf450c399882013e8cc9678d00b947966a9f5a5f959d0d2270dbbf77",
+      "uncompressed_sha256": "1dc5ff25a027f5c0a04ac183e96b6665181272c327130fb0663c5c1be8aad81d"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-003-stderr.txt.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-003-stdout.txt.gz",
+      "sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e",
+      "uncompressed_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-004-stderr.txt.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-004-stdout.txt.gz",
+      "sha256": "4fa3c5a9212d8409cafb854a9147e39ff7fbe781b19748df6de4f50c6582fe15",
+      "uncompressed_sha256": "b22adee5ac5a93ade5d52f11392360e1c1a95ef2add2bd03365e896e8f1688e1"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-005-stderr.txt.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-005-stdout.txt.gz",
+      "sha256": "37df61dc107423b1464c56700e11798bc6f19c7dbe4eee0243dfea2c07cd94ff",
+      "uncompressed_sha256": "101464196a936c6fec7f0213a1ffddc4f4e4c6f3267e6a85115de71162819370"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-007-stderr.txt.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-007-stdout.txt.gz",
+      "sha256": "b129e5853f8278c8cc092907ef6469b7168be9ab87c59525a97e7713654cdd51",
+      "uncompressed_sha256": "01d330d0a4d0cb19261847258a54cb7b7bc543c09079b261e1e2f765e3c66416"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-008-stderr.txt.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-008-stdout.txt.gz",
+      "sha256": "2fb2d7bbe914d8070548dae88e74ae88a6f7638b58faafd993a18052a51cd0b3",
+      "uncompressed_sha256": "671ff5758061ea57262de6ff2b8994611da91f9b25f53bec54d692702543fb17"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-009-stderr.txt.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-009-stdout.txt.gz",
+      "sha256": "1dfc6fb449002ba6df70a096410d62f79480a36e1d4e71da5833a127486a1577",
+      "uncompressed_sha256": "7131032b0af8a8dcda678de546e8792b41e048a44053a2e8ba4163c73b0f98ad"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-010-stderr.txt.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-010-stdout.txt.gz",
+      "sha256": "1dfc6fb449002ba6df70a096410d62f79480a36e1d4e71da5833a127486a1577",
+      "uncompressed_sha256": "7131032b0af8a8dcda678de546e8792b41e048a44053a2e8ba4163c73b0f98ad"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-011-stderr.txt.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-011-stdout.txt.gz",
+      "sha256": "1dfc6fb449002ba6df70a096410d62f79480a36e1d4e71da5833a127486a1577",
+      "uncompressed_sha256": "7131032b0af8a8dcda678de546e8792b41e048a44053a2e8ba4163c73b0f98ad"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-012-stderr.txt.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-012-stdout.txt.gz",
+      "sha256": "cea492e78f0e3f8ebfa60fb87974f1fb56bd729c7c918b9dba65f1a435f4f85f",
+      "uncompressed_sha256": "f8ebdfbbf8da6d33ff607878f13afc92b70445a54a800cb827b7a7179a45e8c8"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-013-stderr.txt.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-013-stdout.txt.gz",
+      "sha256": "c17b194101c82504551227a5aef3cb781ded6454d9048d48ab6e981ec7ebdfb9",
+      "uncompressed_sha256": "0715e9f49a3ac477a6594e6c9639a5cbf41364e3b5ea90cbcff9042aaa453b35"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-014-stderr.txt.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-014-stdout.txt.gz",
+      "sha256": "522699331b359a403ee46a114eb5eef3b36a6e57c15641090f951c218c67fbd6",
+      "uncompressed_sha256": "1ee6c48d416de826672e904f5c87d91ecacff4fd26054dc03b5ffd97a5ede226"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-015-stderr.txt.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-015-stdout.txt.gz",
+      "sha256": "8155380cf28a1204387fe92568675263863d04cf2e608126c4f18ecbe85de627",
+      "uncompressed_sha256": "5f62ed5f52bd40fb251e6707fb400987b4f84a3697005c833bed1131ef7e8726"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-016-stderr.txt.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-016-stdout.txt.gz",
+      "sha256": "3f1510f1d2c410cfe4397e7309a43052ed18ecbeb5c7fee9d1d044b634e21996",
+      "uncompressed_sha256": "3fb5e4f0ae9b4da6224ce4dad56ca97a0e3bda2f9337920fb69120eda97ec7b0"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-017-stderr.txt.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-017-stdout.txt.gz",
+      "sha256": "93b1be4f2adcbbc7b2506f8ef3e0bf34202dffbbff984c0a3637997f69e37728",
+      "uncompressed_sha256": "98424649fe7482537353004d731254574b95459142b88f7721509489d8a16a10"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-018-stderr.txt.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-018-stdout.txt.gz",
+      "sha256": "bee249badd57c6caa6ce807c737bd38e41ea7bc547660ea66b1b2b8df56db200",
+      "uncompressed_sha256": "988df3f3b9ce98c670949a73f7d49a8c4e8b70d7b82946ffbb4f324f46519996"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-019-stderr.txt.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-019-stdout.txt.gz",
+      "sha256": "6531a74313592e6ce3107688b24fccdeaab9f538c383873dfca261e0dbac9697",
+      "uncompressed_sha256": "2744ced825ec53fd601afad97af4a2e391b97f1714bb4ff0b7409fdb894d6a21"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-020-stderr.txt.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-020-stdout.txt.gz",
+      "sha256": "63a7c869c359b56fbd303d0f406fbf0d8d7179adb862b467d0c70edd2dbf7520",
+      "uncompressed_sha256": "30ea90643d88e5cd818cbb53afa01356484a868d1699674d1fe877e13e6daa37"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-021-stderr.txt.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-021-stdout.txt.gz",
+      "sha256": "78f46e25b3e530e49fcbec617b7053d9e3586fbd89ae1c326700a1d16adcf839",
+      "uncompressed_sha256": "972f6b2864fba0b719df782daf0606ee6b47ae3860cc5c100d639cc91f7ba403"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-022-stderr.txt.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-022-stdout.txt.gz",
+      "sha256": "41aa87086bc103bd67033af09ae14d3f662d77f88c2cd15ae61123dcf156dda9",
+      "uncompressed_sha256": "1a1581f398a00dee97fb1172cc77e5f952261d4e952dde6cc640ae06cffcfed6"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-023-stderr.txt.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-023-stdout.txt.gz",
+      "sha256": "204776b064209d6a91452b2a50dcccef1026c7086a10ea765152338fc3c831a1",
+      "uncompressed_sha256": "dc1a2878c41ca2fd43c0f2415901720fce47fd2934166474a50702ec4347861f"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-024-stderr.txt.gz",
+      "sha256": "08d7c2b257c0386a0aa8e61e5a974bc5ae7b1787fa9f1fe40a7fa4bf451a5738",
+      "uncompressed_sha256": "0f8649dba037ac2235d7b2e5e7d408388e0b5d58d9120a33dba0847cb18e8212"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-024-stdout.txt.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-025-stderr.txt.gz",
+      "sha256": "1735d5f6d6a8147101c2b6fd607cf4145d6f6d7b51aca7d34c7ff96b71596a57",
+      "uncompressed_sha256": "ce997e587c1fc5e235c094e21f03ccada4c19ab929e504f2b0263e3e5969e038"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/command-025-stdout.txt.gz",
+      "sha256": "6a992727ad8da70f62e89aeee30478b57a54d941fbaa919bfd6313837561ab58",
+      "uncompressed_sha256": "9fbb178b1afca14b85e7fcf128717569df34b63a496d443a4261b350bd83b960"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/commands.json.gz",
+      "sha256": "b7b7f48a1e71f3e53dfb535e996041c150c9bae22d5c2ae9f7a87f427b6d27ae",
+      "uncompressed_sha256": "37e66da1546b78db063b74e77ba04199d0be7dbb37cee494b04f1b03354afca1"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/corrupt-input.save.gz",
+      "sha256": "bd42fe8a12854a962d91295b20e1078b37ee2a4728005921f5043a55efd8a840",
+      "uncompressed_sha256": "89cf0f9977342f008058fddf3812b5c791293381327078dacf6b4967035bec92"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/corrupt-observe.json.gz",
+      "sha256": "7b016c22357f5fe90a37662c0a36eec5b4845be6c600eb33ef38096f91c087a4",
+      "uncompressed_sha256": "999e7d484341d8c8031f752f162fa732c08242ccd38905344b51063f34b8d09e"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/eight-to-four-continued-observe.json.gz",
+      "sha256": "01fc91fcc3938f4dc2134a6d3af56385aee4176b5c95eb650844f0afd4cfb642",
+      "uncompressed_sha256": "c1920f922ed7712079510f8fba537c97689ab403cd2501cdaf61485f0a6c21e1"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/eight-to-four-continued.json.gz",
+      "sha256": "46f1b4d206b30a88ed8337d1940cda2f3fa2ca6f9af52701e9a1100a821f344b",
+      "uncompressed_sha256": "6a2256b4f8c96336d9b5523f4875b0bb94a1f553c2071a6b34506ccee0efa55a"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/eight-to-four-continued.pcm.gz",
+      "sha256": "54d49d8dc53586b3525c27795ef3c1fd20fb8dd9a09b7c9d1d14a8ca0d4159d7",
+      "uncompressed_sha256": "1f79d4d2364862104109746e9fb76f452b53cb1e5852a05010f67adaca4fb80b"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/eight-to-four-continued.save.gz",
+      "sha256": "2b5b7e2dfbecffb3be40145e154f9cbe718a4a9ea40b01b531da8a52bae19ece",
+      "uncompressed_sha256": "7f8d900a4ec5ec82a844c396889caf7f7623536caa1037bf412454ae37a007eb"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/eight-to-four-observe.json.gz",
+      "sha256": "0469da0aec58310873c98206ae4497750ee0ec12fe675befc2bdf754ba0ae647",
+      "uncompressed_sha256": "6751ad6baf391b5d2bc463bcc73dd1b9b7b26952df90ae1967671556fa50f125"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/eight-to-four.json.gz",
+      "sha256": "4621c8efba50e7f887158e6dff3b9c908732f4875dc2ce1ef2127572c745d2a0",
+      "uncompressed_sha256": "7f1ad0a6589bdf6956d05d79cdcaa50beffcc79ca24144b8918ac149b70812db"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/eight-to-four.pcm.gz",
+      "sha256": "0bd5c35d1b9e8ffb42714f3e4fe4a0f6f8c7b8ec022da3d542efda12fe8eaf40",
+      "uncompressed_sha256": "c65206769723a13afe80c0d925531639ceef9c2eb97eee3b1b542739ec40597f"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/eight-to-four.save.gz",
+      "sha256": "a378f14cb813d93ce938f7235e9c91acb18e0da8047e398fad321b0e3e697d8b",
+      "uncompressed_sha256": "16af433eab89626d6e27268b2f940e0fd968b2a0a7d7b00089d97919f50b2cc1"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/independent-oracle.json.gz",
+      "sha256": "3a9c23373d8b73ff413b16c00fcb4f7e7a7b9f62dd45f5579d236bf6854eb833",
+      "uncompressed_sha256": "19058cc40f36269bbbaecf7c56364b583192c101b4892c230b2d9ccb29fc262d"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/paused-continued-observe.json.gz",
+      "sha256": "e6f692c3289ac474c1afb8f3b18dfcbbfd590926875d2731d6a4365b8b82e8df",
+      "uncompressed_sha256": "3e2d8cbc3c320f1e253911618b6132c996d1d098dd6c0ea56c104bc2d6dc1fe9"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/paused-continued.json.gz",
+      "sha256": "666c16d05e8ea17606a259b9247ba9b6bf29e9fdcecfe82d55870dc34135de94",
+      "uncompressed_sha256": "af21cff84b5ea416071bf2c7212fbe4c0e06dc07ecaf0ddb15f3adb138764f3f"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/paused-continued.pcm.gz",
+      "sha256": "f45d39eafee95323525527aa428c50f312ddbf4e081859041327deb3d8660ca7",
+      "uncompressed_sha256": "6fc524968f109b653a79e0aa6a05b8a35535cc5e074708c9d9ad9e5e1c2064d2"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/paused-continued.save.gz",
+      "sha256": "2b5b7e2dfbecffb3be40145e154f9cbe718a4a9ea40b01b531da8a52bae19ece",
+      "uncompressed_sha256": "7f8d900a4ec5ec82a844c396889caf7f7623536caa1037bf412454ae37a007eb"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/paused-observe.json.gz",
+      "sha256": "bb131f24fe3d7d8952139dc8cbede3c9a8be27058f2188c2ea65fd11a75c72ed",
+      "uncompressed_sha256": "3e216c0296c12d4ae7a8f3cd321c4ff5f0e5f7659c35a399330c86d214df907a"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/paused.json.gz",
+      "sha256": "53e2ac35d9ba2f72486edc4fd82058e8c8a613edcc7e0926a1ee2ff5736a1b39",
+      "uncompressed_sha256": "e2f08d24b9cf7c078673c31e0c8b639a1a64ffe18c5e201ed7fb85ef0112f0e2"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/paused.pcm.gz",
+      "sha256": "bd3004837711db54c41278676b20d71839917dc3b0fea567ab4e49916d6f0b38",
+      "uncompressed_sha256": "c72274a22cba2dcef62e0f62834446ee39b0cd95ad0faa27a89b3b49f48aa390"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/paused.save.gz",
+      "sha256": "41ab7f9cb70757aefdfd59fd973d68fdcbd82a6d261111e09c45749dbeefc8db",
+      "uncompressed_sha256": "2c6c9f763b5d32eeaccd380b14bd99f8bb8393ce07455fdd6be538982adfc31f"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/public-commands.json.gz",
+      "sha256": "14427c5bafa33d38e624a787febafda9b150a1e4cfc1d2e393a4233ea315e611",
+      "uncompressed_sha256": "61968588c985496ded6141733294aabbeafeb88bae0d1eb5b436d8742f7d4e50"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/repeat-0-observe.json.gz",
+      "sha256": "d8e191e07352a2fc38dffa358c35c78a41656e3955a1b5bf59e1c8cece1afaff",
+      "uncompressed_sha256": "da5ff7e847bec7c54fdb1dbab67fbdc681b0417d8cdba622a9fc9568b3a275d6"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/repeat-0.json.gz",
+      "sha256": "ebecf43412607a29c7c6cddbaed38046185ccf9fc6ee878af04673c1529c7877",
+      "uncompressed_sha256": "16ce9a7172dd6c199b363de7e8fe9d9e05f82488713d201a4e45d873aa1c9b3e"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/repeat-0.pcm.gz",
+      "sha256": "25e5db378f4bd6634a1f78305e4f8e38d3a7d56a98ba3299ba04ac91a6738423",
+      "uncompressed_sha256": "11001dd97006a44b5bccaaafeb04f0a089ad1a7b3781f58362cb62cc814de4ce"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/repeat-0.save.gz",
+      "sha256": "2b5b7e2dfbecffb3be40145e154f9cbe718a4a9ea40b01b531da8a52bae19ece",
+      "uncompressed_sha256": "7f8d900a4ec5ec82a844c396889caf7f7623536caa1037bf412454ae37a007eb"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/repeat-1-observe.json.gz",
+      "sha256": "d8e191e07352a2fc38dffa358c35c78a41656e3955a1b5bf59e1c8cece1afaff",
+      "uncompressed_sha256": "da5ff7e847bec7c54fdb1dbab67fbdc681b0417d8cdba622a9fc9568b3a275d6"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/repeat-1.json.gz",
+      "sha256": "ebecf43412607a29c7c6cddbaed38046185ccf9fc6ee878af04673c1529c7877",
+      "uncompressed_sha256": "16ce9a7172dd6c199b363de7e8fe9d9e05f82488713d201a4e45d873aa1c9b3e"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/repeat-1.pcm.gz",
+      "sha256": "25e5db378f4bd6634a1f78305e4f8e38d3a7d56a98ba3299ba04ac91a6738423",
+      "uncompressed_sha256": "11001dd97006a44b5bccaaafeb04f0a089ad1a7b3781f58362cb62cc814de4ce"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/repeat-1.save.gz",
+      "sha256": "2b5b7e2dfbecffb3be40145e154f9cbe718a4a9ea40b01b531da8a52bae19ece",
+      "uncompressed_sha256": "7f8d900a4ec5ec82a844c396889caf7f7623536caa1037bf412454ae37a007eb"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/rest-completed-paused-continued-observe.json.gz",
+      "sha256": "98b0eed2a74fb5e74d76abefc0941832f25df9656baea9e76f82b864d3c28319",
+      "uncompressed_sha256": "0a0c703728b03bcb96ad2a99b732501aa0b76ecd51051e3f548cb9c0ca543cf8"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/rest-completed-paused-continued.json.gz",
+      "sha256": "02f056e9a0ad80d46c804ae74aa20ee1c276625a9a1f298f1f8494ece47f2f5e",
+      "uncompressed_sha256": "f3c205917e57f8051397e0933e9679955464d5a634d51c1f3e12eb59f1bfd4df"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/rest-completed-paused-continued.pcm.gz",
+      "sha256": "4e08b54069ff1ca7b3e3327abc11389e640d841cfbcfd7d704e377afe569bb32",
+      "uncompressed_sha256": "0e89e5d755de20a0a96681c385ffcd1c64e8ae3b7d56d1c7c0c351a81cc46513"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/rest-completed-paused-continued.save.gz",
+      "sha256": "2b5b7e2dfbecffb3be40145e154f9cbe718a4a9ea40b01b531da8a52bae19ece",
+      "uncompressed_sha256": "7f8d900a4ec5ec82a844c396889caf7f7623536caa1037bf412454ae37a007eb"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/rest-completed-paused-observe.json.gz",
+      "sha256": "f42975b2459286b5d9d97766add9fb0c333ad9653d1674f9c02a7ac80f16e8b1",
+      "uncompressed_sha256": "9ddab8f19893605f3803a47205f439a5b7da4faf2007a2c9bcb4033c30bbe7b9"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/rest-completed-paused.json.gz",
+      "sha256": "c62ee5673c87575d705a12316dedc58fbf16cf6a060d9467f653fdbcfc2f6fbe",
+      "uncompressed_sha256": "20d07728481bd0d2933a3aa379dba7e41b12a4c65ba16c2c4a9d5a6c75211818"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/rest-completed-paused.pcm.gz",
+      "sha256": "ab8061bca3b4fcbc7819db2b0c1568a5cb2d88d3e02e124b8d5c44f0103c8990",
+      "uncompressed_sha256": "c4527252a0b06fcda9139288af35098246c319087447a40400a9cc6c200dbf10"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/rest-completed-paused.save.gz",
+      "sha256": "e4437f958d15271e85c8b91a142521eb39579bfff5cd1e547242d4f30e042386",
+      "uncompressed_sha256": "dbbff9710899f4b95b5e98d4ca6a99c588742795ae8e5cb7a9b879e318c65796"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/result.json.gz",
+      "sha256": "57f8dc10c8255a1ad622ac345c91d04f9bcbf00da78929e9ccf005098ecdd231",
+      "uncompressed_sha256": "76ac3c7fc2f8ccbcc3beea34ba8b7a21789d424f8918f45f66c93fac2d453291"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/reverse-continued-observe.json.gz",
+      "sha256": "b048b7ee8e0dc57a214f397c750f68db89e9228dcd21923f0f2b559fd138cd0a",
+      "uncompressed_sha256": "22d035ea497aad974c93fd26f93395db4c835d52a7caca2ab9dd61cfc8922b3a"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/reverse-continued.json.gz",
+      "sha256": "2c94ddbc03cb9d4da4ff5da6978e821fe042542824e4592920e2375c11652f5a",
+      "uncompressed_sha256": "683e68d2ae28d75a8a422e5627e4d40a861e9c9efc3e40be9144e7dbede53c73"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/reverse-continued.pcm.gz",
+      "sha256": "97cadd34ddb566fb0bd6306f4f203b22d119a74f27d505eb8331bd05c677f7c3",
+      "uncompressed_sha256": "ed9524f9e8318c1bf1be6ad5f519f95513194dc348d68bf08fb5f966fc565be3"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/reverse-continued.save.gz",
+      "sha256": "2b5b7e2dfbecffb3be40145e154f9cbe718a4a9ea40b01b531da8a52bae19ece",
+      "uncompressed_sha256": "7f8d900a4ec5ec82a844c396889caf7f7623536caa1037bf412454ae37a007eb"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/reverse-observe.json.gz",
+      "sha256": "125597bdb4925ed52ed352335771b340f4442784db819ca61b766b72e34dca13",
+      "uncompressed_sha256": "f9c7f6b88ed61015ad3fda751d930d770595c41811437e78bd866f7efc6edd82"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/reverse.json.gz",
+      "sha256": "716c9d9eb7c7d29986fcd779b00437cdfdcd846d5c15b32f75e0497a0391ee88",
+      "uncompressed_sha256": "fcffe7fd793dff7e73ca892d6b69b8547f64bf974aa828e3eed9e6ca5aaa9550"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/reverse.pcm.gz",
+      "sha256": "b39a750b7ecc3569903ffe4bd5937416945c5a004967be81d7be75abe19e0797",
+      "uncompressed_sha256": "ac8f5613c4b176d380009fa1306c49a027644dba38b9703ed102634c60f8d5ff"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/reverse.save.gz",
+      "sha256": "85d9b08f286bc92998db6252803f3c1dff2ca2219cacdce53edba3e552b7e6f3",
+      "uncompressed_sha256": "42ed8e597ad9ba4e693cf1353a62661d8c417a0a467982d05c41d6cb2585ec6a"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/second-state-continued-observe.json.gz",
+      "sha256": "3e471da126bab355ebb39fccca3a7b648a3c3c196850d9777b4d64fdc0cfe743",
+      "uncompressed_sha256": "47cdbb974a84bcbd3689c3ad0ea7cf244e1b4c4ea74c6219db950c5810262092"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/second-state-continued.json.gz",
+      "sha256": "a2f927ad706d70e68a760bad826438dc274f634b3c0b8ab3b98a6f843d3aa757",
+      "uncompressed_sha256": "7e36bd8d19b6e0972acc33e1cbf24524a0c8e082e1cbec1393a72c8e423c0029"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/second-state-continued.pcm.gz",
+      "sha256": "544ef06946dc708fd4f219130b5f2582b878644cb7f289caaf890587d4aaa4fa",
+      "uncompressed_sha256": "a515959304caf9651b7d2b8b22368d869e2a763eb6061b4ff4b2493711a06129"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/second-state-continued.save.gz",
+      "sha256": "2b5b7e2dfbecffb3be40145e154f9cbe718a4a9ea40b01b531da8a52bae19ece",
+      "uncompressed_sha256": "7f8d900a4ec5ec82a844c396889caf7f7623536caa1037bf412454ae37a007eb"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/second-state-observe.json.gz",
+      "sha256": "e57fb43aa8cafddab4c4b28a6b5a6a8e114a0446025ede39a236dcb73d6281c6",
+      "uncompressed_sha256": "4dadb5289d1d339459f94a53836321483aad92d9abf8855ec8648343a5627707"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/second-state.json.gz",
+      "sha256": "efc6bc386f8fadb5250a1c68e1ed77b3cb17c67c9d4aac8b2c255a80fe42da12",
+      "uncompressed_sha256": "5e9c230716b7e93617864b233745547a3d7f24a33b7e5bedce64bb0906a6801f"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/second-state.pcm.gz",
+      "sha256": "89e852882cc29b7c037ba521dca5b44608c3506cd90887fb69a44e30e3afeb7f",
+      "uncompressed_sha256": "b9ce164d30e4101b009fe4be765a070593cfbdd48f897853de159a8c177fabe8"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/second-state.save.gz",
+      "sha256": "4347c728d793b2a2580bd69da243a54fcd30f18e076fdbfdb6bc12e498db55ea",
+      "uncompressed_sha256": "8912fb3f4cce0e6153e755d0bb2d56ac6c1c135c79150725eb7731affbc81c5d"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/source-freeze.json.gz",
+      "sha256": "09ef82f3e2291497e81bd7d12e57f72b03dbec262416b86f4a91c7ea29d73f4c",
+      "uncompressed_sha256": "b511379500ff7eb7048eed13b998ca4e149e684bf19c768167d7973348712e7a"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/wrong-observation-observe.json.gz",
+      "sha256": "3d7a2c8c97ce670d6e7f652149b04c0f0268f1c1726c0d7a5ea04069926b8efc",
+      "uncompressed_sha256": "5bf9c4d91085628bb55fce7486a2f0c823b011b5ac2a91eced03673b14b88010"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/zero-speed-continued-observe.json.gz",
+      "sha256": "b32506355b248ef1d742cefa81adc5aa9952fe7ae9dc9cd010d9e6f6313e24d9",
+      "uncompressed_sha256": "22de7c98ed375ca3dc235112bb66481a1399b777d749bc1afad93ffaba788db1"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/zero-speed-continued.json.gz",
+      "sha256": "950a4a43ae00528a5af039352512ec447f924942f3328d0999bfc1f396e6ba87",
+      "uncompressed_sha256": "12957c019238f1982cd92c0aa3c9877fa192904c6a99eff73c452fde3add242e"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/zero-speed-continued.pcm.gz",
+      "sha256": "03c82e9a1e9d5e4d368a7818c71cbbe569539e0996da66f5f0d9a94e730fc34e",
+      "uncompressed_sha256": "bba4463319d17dafd261b99651ecef74f1041be91d6b6cc86bb61a938e0e1818"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/zero-speed-continued.save.gz",
+      "sha256": "2b5b7e2dfbecffb3be40145e154f9cbe718a4a9ea40b01b531da8a52bae19ece",
+      "uncompressed_sha256": "7f8d900a4ec5ec82a844c396889caf7f7623536caa1037bf412454ae37a007eb"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/zero-speed-observe.json.gz",
+      "sha256": "b07581e58ab0fbebc525217c050e1f5d3f2f345f2bc873969abb14cbd57ea26f",
+      "uncompressed_sha256": "1e2f4f891d86616dfec35497b501dab84462aaa1d246541402ee32ed2d656079"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/zero-speed.json.gz",
+      "sha256": "6aa0882ca9fb43ee982b0d960716a2a66096ecbd71bb64ccdb7372ce2df9fdf8",
+      "uncompressed_sha256": "f7cb96e6205fc03cf95b775be3c71614f2888d38d7d4c04f3c291b7c885d43ca"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/zero-speed.pcm.gz",
+      "sha256": "3e88f8894fe0e1e149080018380fc7ed4c2da5a20f4e625210f1ba04c1c069d1",
+      "uncompressed_sha256": "0e69386c41c14833fe715639b72c8fcadf7cb07f5de679059499e1afb7a5c3d3"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/zero-speed.save.gz",
+      "sha256": "529227f6f72569870d88f841fc0742c2d05fc20ae156d8d7f1553bbb94850c8d",
+      "uncompressed_sha256": "85fa54f6ce0033b27ab7183d2545abdd6c8b6187af92ce8831c92dffa34ac227"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/package-build.log.gz",
+      "sha256": "42679d49a262f93b10478b4237622ae4b55a9cbbe9626758c2f560211be4728c",
+      "uncompressed_sha256": "ac5bd60e7d066d3b42eaa0e6e061e18a040bdcd70c5426d92bf66d1c50193944"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/package-export.json.gz",
+      "sha256": "038f4f7f4af03189554745f8c31a298558feb653a14c789377b513889bb8bff3",
+      "uncompressed_sha256": "2914b6c2f14589444dd5b3194528e59b7ff70d7dee67a5a5f8953bc13664feee"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/package-project-build.json.gz",
+      "sha256": "c8a5d1fc601c497e958fd11d847391a49eccdb98820c861df6f6a882c5808561",
+      "uncompressed_sha256": "c50bdca3edb73f7f1da5387bf6faceabf3ece8989cdb49a1eec65949012c3714"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/package-data/empty-input.json.gz",
+      "sha256": "438100c9c52fd35517bc237cb9289ac1088282ab6f2b851a4878fd0ecc79abcc",
+      "uncompressed_sha256": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/package-data/clips.bin.gz",
+      "sha256": "a568799ca294ca001efc2c864c9c7b660e1fb03c4811c7160b752a87361d378d",
+      "uncompressed_sha256": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/package-data/package.json.gz",
+      "sha256": "ba3deeaa9ae07865dfdabe4f03ec5234a518ebec83950328c3160594ef236a09",
+      "uncompressed_sha256": "ca657a5dac19c9e5920235ec39e090b3e99c2004dfdcdea8cebf769d410a979d"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/package-data/world.scene.gz",
+      "sha256": "3e9267d590ea4988863acda7a3f9a1de2bc708c9c4742088ec78f81acca98807",
+      "uncompressed_sha256": "6f3acfbd8a8255f14a0bea8e1af39e2071f9df7024eaca20ddcabad9e339e8f8"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/package-data/input-actions.json.gz",
+      "sha256": "c14bfcf1832a180081ce0abd2061eeb1dc780074f0c2cdfd923be805f2407368",
+      "uncompressed_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/public/package-data/models/3c2837b62f3091aff8acb89d90ea8f15bb1ec7787e603f34dcbfc7eac446c76d.incmodel.gz",
+      "sha256": "319405b1d5d4c57ed27377d6430217b9dd95d4194caf740ab7bf0213fda4c47e",
+      "uncompressed_sha256": "b2a8e41a304e805aebdcb90cb35adbfd28ea9cb8dfca481bddc2b4e12d9a029f"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/history/animation-tree-wiring-001/commands.json.gz",
+      "sha256": "511913fe335840f45bf972a44c86540eebac26bba97f1d1ebdffe0c18030019f",
+      "uncompressed_sha256": "1d6242dd83ee224fca5a69fb09b8804eea7a562105f77dbe5df4dc7fa84e05e5"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/history/animation-tree-wiring-001/source-freeze.json.gz",
+      "sha256": "6dca673e36165554436ef9c633b55f94060cef52ec2412419bec39abda8ac98f",
+      "uncompressed_sha256": "c0a9f5396c22e9e1b8f28fcd4b05ae2a20c7cb580fdebc1f2da6c3a8abbfc279"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/history/animation-tree-wiring-001/source-audit.json.gz",
+      "sha256": "61322a4b68c46b721a8c36be536bd03229eb285d5aa579620e30227be7c0bac8",
+      "uncompressed_sha256": "494cbaf56ebbcc32588925eaa6bca5a0a2c03e7ee1d25df0474d6875717ce6cc"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/history/animation-tree-wiring-001/affected-tests.log.gz",
+      "sha256": "87a1654efb7af1e2680b1c9974b84d7e8936aae6d7216d1c52d0926b968f1ae0",
+      "uncompressed_sha256": "8032b9f63b474e998f4b6239100bdc9e06037149cf1459406c3c6eff76a3a858"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/history/animation-tree-wiring-002/commands.json.gz",
+      "sha256": "d9cc03253218855bc2f880f0aea8d53b28c3986b978a5f9ec5e51184cf516550",
+      "uncompressed_sha256": "5a2862ba5374c212bda7ab4294c3380607e60ac77d03d58148dcd85a1a083ca4"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/history/animation-tree-wiring-002/source-freeze.json.gz",
+      "sha256": "c25ceb0461a7f2def5419ba4c342d6edb148b6ba00e634ad9466a851987eb18a",
+      "uncompressed_sha256": "6128f1dac1dcf7a4d43e8419243627393df2d1d6e580e42e201d220f6bcd1fbc"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/history/animation-tree-wiring-002/source-audit.json.gz",
+      "sha256": "61322a4b68c46b721a8c36be536bd03229eb285d5aa579620e30227be7c0bac8",
+      "uncompressed_sha256": "494cbaf56ebbcc32588925eaa6bca5a0a2c03e7ee1d25df0474d6875717ce6cc"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/history/animation-tree-wiring-002/affected-tests.log.gz",
+      "sha256": "c22b14412566cbc715679cff06e97a8ae1c997f9f3bdb32554e259f7b102b5e7",
+      "uncompressed_sha256": "131cbc6a983f294c1342855eae0da605fdb0ce20c21892bb2079a07f0e9017fe"
+    },
+    {
+      "path": "docs/spikes/evidence/native-animation-tree-playback/history/animation-tree-wiring-002/schema-match.log.gz",
+      "sha256": "7538358e8a6e10ea813869d14d83e4f86597bd2e0b568a9774a255787e042dae",
+      "uncompressed_sha256": "6545081a4d64882eb8d1a00420cd5f1323f05d6fd756bcf904f2d04a742b4132"
+    }
+  ],
+  "limits": [
+    "CPU render-input and complete sample observations, not GPU pixels or device/performance gate",
+    "Tree-to-tree timed fades, IK, root motion and module checkpoint state remain separate unfinished work",
+    "Current-main integration pending; accepted Wasm v4 SDK remains a separate proof"
+  ],
+  "shipping": {
+    "target": "aarch64-apple-darwin",
+    "player_sha256": "55cd376ce6212b2ba8bb5562cd031765ff58608993108f179bcc747f61b833a9",
+    "proof": "/Users/andreyyurlov/.codex/incant-evidence/animation-tree-public-002",
+    "source_inputs_verified": 1170,
+    "package_files_verified": 7,
+    "fresh_full_processes": 3,
+    "continuation_pairs": 6,
+    "exact_refusals": 2,
+    "selected_vectors_per_full_run": 228,
+    "full_pose_log_ticks": 56,
+    "world_save_version": 6,
+    "authoring_deleted": true,
+    "private_build_storage_deleted": true,
+    "source_maps_removed": {
+      "symbols/behavior.js.map": "c076a264fc98644545d863e6f2cada3c3fc16f39b0e4274287a3a97031c0af6b"
+    },
+    "full_repeated_pcm_byte_equal": true,
+    "refusal_diagnostics": [
+      "Error: Checkpoint(Integrity)",
+      "Error: \"checkpoint withheld: native observation assertions failed\""
+    ]
+  },
+  "historical_failures": [
+    "001 broadchecks stale unknown-version sentinel15 became supported; corrected to u32::MAX",
+    "002 broadchecks used document-only schema generator against full host registry; corrected to fresh headless full registry; common schema bytes already matched",
+    "public001 forward-order expected samples differed from canonical reversepostorder; all weights/time/metadata matched independent oracle, corrected helper and fresh002 passed",
+    "Earlier215 canonical underflow compaction left discarded tail nonempty; independent review found complete-value equality mismatch;568 clears discarded slots with regression"
+  ],
+  "independent_final_review": {
+    "path": "docs/spikes/evidence/native-animation-tree-playback/final-review.json",
+    "sha256": "76632460d2686178a42367b3ad0f75e979bfd7a9825e7bf359d7d6b30b862adc"
+  }
+}

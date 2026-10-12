@@ -1,0 +1,50 @@
+{
+  "reviewer": "Astra /root/runtime_review",
+  "commit": "215c7afdb1f28964b0b8e3eea0ab612040bb56e4",
+  "verdict": "changes requested",
+  "scope": "Exact followup diff only: compact normalized weights, malformed tree controls and version sentinels; no broad animation acceptance",
+  "sources": [
+    {
+      "path": "crates/incant_runtime/tests/animation_tree_playback.rs",
+      "sha256": "712ef30d2183f230aa8416afa0b8a840704ff2a862c08a29c30988837cab10fe"
+    },
+    {
+      "path": "crates/incant_runtime/tests/physics.rs",
+      "sha256": "c234f0378e778f521f82d903f4f11fbee3ddee5fb5a964d886256c29ddd11dae"
+    },
+    {
+      "path": "crates/incant_runtime/tests/physics_2d.rs",
+      "sha256": "8841f291bf8b6bdd9ae3def6871c30f03eef4e1e31e3d690c6ea022929bdac6e"
+    },
+    {
+      "path": "crates/incant_runtime/tests/scenes.rs",
+      "sha256": "c2894f64340009ca41f4834e57c0ef2167550e1a54edd09f71964bf58c0d4994"
+    },
+    {
+      "path": "crates/incant_types/src/animation_pose.rs",
+      "sha256": "26d162270806e0f256c6955d4a2cf4929f7c844b7dcc77315ba26048095c5a4a"
+    }
+  ],
+  "findings": [
+    {
+      "priority": "P2",
+      "path": "crates/incant_types/src/animation_pose.rs",
+      "lines": "111-127",
+      "issue": "Compaction leaves inactive slots noncanonical while derived PartialEq compares every slot. Equal public samples can compare unequal after minimum-subnormal weight underflows.",
+      "correction": "Clear discarded tail to EMPTY and test full equality against both a pose without the tiny contribution and a pose reconstructed from samples()."
+    }
+  ],
+  "reproduction": {
+    "source": "/Users/andreyyurlov/.codex/incant-reviews/animation-normalize-215c7afd/repro.rs",
+    "source_sha256": "96d51428256482eb4c7c3553882bda76e4299b74cf672efe64547f876efc103b",
+    "log": "/Users/andreyyurlov/.codex/incant-reviews/animation-normalize-215c7afd/repro.log",
+    "log_sha256": "0af3d8db74f380e6ce41b5a6f27990543e70fafd6fbf5635f8908fd10c99c66e",
+    "result": "Exit0 confirms equal samples slices but unequal AnimationPoseSamples using exact reviewed implementation; standalone trusted rustc wrapper, no repository edits/builds."
+  },
+  "other_review": "Normalization sum stays finite and positive under validated bounded construction/blend premises. In-place compaction preserves active order and retains at least one positive contribution. Version sentinels now avoid colliding with v15; malformed tests recompute checksum and require semantic errors. No other actionable finding in this bounded diff.",
+  "limitations": [
+    "No full suite rerun by reviewer",
+    "No GPU/native/visual execution",
+    "Parent broad tests remain separately owned"
+  ]
+}

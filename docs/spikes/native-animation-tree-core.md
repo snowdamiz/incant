@@ -1,9 +1,10 @@
 # Native nested animation tree evaluator
 
-This is the numeric evaluator needed by PLAN.md Phase 1 blend trees. It is not
-yet connected to authored graphs, cooked scene records, native graph clocks,
-render bindings, gameplay SDK observations or checkpoint continuation. Those
-paths remain required. Existing clip/flat1D graph behavior is unchanged.
+This is the numeric evaluator needed by PLAN.md Phase 1 blend trees. Its original
+isolated-core checks are recorded here. The later [authored playback connection](native-animation-tree-playback.md)
+adds cooked scenes, native clocks, render bindings, TypeScript observations and
+checkpoint continuation with separate end-to-end evidence. Existing clip/flat1D
+graph behavior is unchanged.
 
 ## Admitted numeric contract
 
@@ -47,15 +48,16 @@ checks and formatting pass. Independent source review accepts this numeric scope
 [Exact sources, commands and retained logs](evidence/native-animation-tree-core.json).
 These are local CPU results, not a frame-time benchmark or a reference-phone gate.
 
-## Remaining connection work
+## Connection status
 
-- Add stable-ULID authored tree nodes and resolve their references during cooking.
-- Admit bounded binary tables and use them for committed graph sampling, including
-  independently advancing outgoing blended states during transitions.
-- Carry complete weighted poses through native renderer bindings and copied TS/
-  Rust observations. Older observation APIs must refuse unrepresentable states.
-- Save all phase/parameter/fade clocks and prove exact full/split continuation in
-  an ordinary exported game after authoring/build inputs are removed. Audio owns
-  world v8/session v3; additional graph state must coordinate a later format version.
+- Stable-ULID authoring, checked binary tables, committed sampling, complete
+  renderer/TS observations and ordinary source-deleted continuation are now
+  verified locally in the linked playback scope; its current-main integration
+  remains pending. Older observation APIs explicitly refuse weighted trees.
+- Independently advancing outgoing blended states and nonzero fades still need
+  connection; the numeric sixteen-contribution helper is not that implementation.
+- The Rust version-4 SDK has separate host and public shipping evidence; it is
+  not certified by this numeric core's tests. Additional graph save state must
+  coordinate with the audio and IK format owners.
 - Obtain Claude rendered acceptance and actual required device measurements; IK,
   root motion and the complete animation/Phase 1 requirements remain open.
