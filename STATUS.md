@@ -1368,3 +1368,5 @@ the final durable evidence packet are independently accepted; publisher intake
 remains pending. Root-motion may append reserved 53–55 from the immutable source
 ancestor. Whole-module checkpoints and visual/device gates remain open.
 See [scope and evidence](docs/spikes/native-wasm-compound.md).
+
+- Native Rust/Wasm HUD source checkpoint: additive ops56–58 preserve ops0–55/input-v1, expose routed outcomes and atomically control UI/world text through both actual module hosts. Focused parser/native/composed/generated checks pass; broad validation and ordinary source-deleted package proof remain pending. Module checkpoints, headless native-play UI viewport, native/GPU/device gates remain open. See `docs/spikes/native-wasm-hud.md`.

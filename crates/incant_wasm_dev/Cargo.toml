@@ -7,7 +7,7 @@ publish.workspace = true
 
 [features]
 default = []
-static-conformance = ["wasmtime-host", "incant_wasm_runtime/embedded-fixture", "incant_script/static-module"]
+static-conformance = ["wasmtime-host", "incant_wasm_runtime/embedded-fixture", "incant_script/static-module", "incant_script/wasmtime-host"]
 # Explicit desktop development dependency; never enabled by shipped players.
 wasmtime-host = ["dep:incant_input", "dep:wasmtime", "dep:incant_runtime", "dep:incant_types", "dep:thiserror", "dep:wasmparser", "dep:incant_wasm_runtime"]
 
@@ -25,6 +25,12 @@ incant_wasm_runtime = { path = "../incant_wasm_runtime", optional = true }
 incant_wasm_abi = { path = "../incant_wasm_abi" }
 
 [dev-dependencies]
+incant_game_runtime = { path = "../incant_game_runtime", features = ["ui"] }
+incant_render_game = { path = "../incant_render_game" }
+incant_render_native = { path = "../incant_render_native" }
+incant_ui = { workspace = true, features = ["native"] }
+incant_assets = { path = "../incant_assets" }
+tempfile = "3"
 incant_anim.workspace = true
 incant_wasm_cook = { path = "../incant_wasm_cook" }
 wat = "=1.258.3"
