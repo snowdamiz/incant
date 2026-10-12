@@ -267,6 +267,23 @@ def steering_guests(rustc, inputs, sdk_guests, environment):
     return modules
 
 
+def compound_guests(rustc, inputs, guests, environment):
+    source=inputs/'sdk-animation-compound.rs'
+    shutil.copy2(ROOT/'sdk/rust/samples/animation_compound.rs',source)
+    failure=inputs/'animation_compound_failure.rs'
+    shutil.copy2(ROOT/'sdk/rust/fixtures/animation_compound_failure.rs',failure)
+    modules=[]
+    for kind in (None,'prefix','capacity','graph_capacity','legacy','v2','v3','v4','v5','ik_v1','graph_v1','number','coordinate','weight','constraint','owner','quota','late','callback','trap'):
+        name='rust-animation-compound'+('-'+kind.replace('_','-') if kind else '')
+        module=guests/(name+'.wasm')
+        rust_guest.compile(rustc,failure if kind else source,module,env=environment,cfg=['compound_'+kind] if kind else ())
+        modules.append((name,module))
+    module=guests/'rust-animation-compound-standalone.wasm'
+    rust_guest.compile(rustc,source,module,env=environment,cfg=['compound_standalone'])
+    modules.append(('rust-animation-compound-standalone',module))
+    return modules
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
@@ -335,6 +352,7 @@ def main():
             modules.extend(animation_graph_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(animation_pose_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(animation_ik_guests(rustc, inputs, sdk_guests, environment))
+            modules.extend(compound_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(navigation_path_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(physics_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(formatting_guests(rustc, inputs, sdk_guests, environment))
@@ -363,7 +381,7 @@ def main():
                 [sys.executable, ROOT/'tools/probes/development-wasm.py', out/'development', '--rustup', args.rustup, '--static-conformance', '--profile', args.profile],
             ]
             retained = out/'animation-pose-guests';retained.mkdir()
-            selected = [m for m in manifest['modules'] if m['name'].startswith(('rust-animation-poses','animation-poses','rust-animation-ik','animation-ik'))]
+            selected = [m for m in manifest['modules'] if m['name'].startswith(('rust-animation-poses','animation-poses','rust-animation-ik','animation-ik','rust-animation-compound','animation-compound'))]
             prefixes = tuple(m['prefix']+'.' for m in selected)+tuple(m['prefix']+'-' for m in selected)
             retained_hashes = {}
             for name,digest in manifest['files'].items():
@@ -371,7 +389,7 @@ def main():
                 if name.startswith(prefixes):
                     shutil.copy2(bundle/name,retained/name);retained_hashes[name]=digest
             source_hashes = {}
-            for name in ('animation_poses.rs','animation_poses_failure.rs','animation-poses.wat','animation_ik.rs','animation_ik_failure.rs','animation-ik.wat'):
+            for name in ('animation_poses.rs','animation_poses_failure.rs','animation-poses.wat','animation_ik.rs','animation_ik_failure.rs','animation-ik.wat','sdk-animation-compound.rs','animation_compound_failure.rs','animation-compound.wat'):
                 shutil.copy2(inputs/name,retained/name);source_hashes[name]=sha(retained/name)
             record = {'kind':'native-animation-pose-conformance','wabt':manifest['wabt'],
                       'module_count':len(manifest['modules']),'verified_prepared_files':len(manifest['files']),
