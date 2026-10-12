@@ -1,0 +1,585 @@
+{
+  "base": "b79460343bd25872ee9b6ca88bda9f3301b91a52",
+  "platform": "Darwin arm64",
+  "profile": "ci",
+  "sources": {
+    "crates/incant_physics_runtime/Cargo.toml": "9578d60e44a752a404eaa01c2c05a5b5dec4a01d3e9a6d3c445457d24a5426e4",
+    "crates/incant_physics_runtime/src/lib.rs": "5bd035a5e0a1723800deee56d51393bfe96b1242d025db6d1c57de52ab7d5b15",
+    "crates/incant_physics_2d_runtime/Cargo.toml": "55374eaa95580308e01e63fbe35014f9d2e4d0507dab06152db0aefae635282d",
+    "crates/incant_physics_2d_runtime/src/lib.rs": "6e8a98b14b80c3cd8a0254d34db7fb3b223f1e6e975ba6be3ce6637a6b69db5b"
+  },
+  "lock_sha256": "bb9f6bc5183813d1be0124986e00515864d4a45f45290a537d5b9e91c995a6f3",
+  "source_freeze_files": 1435,
+  "source_unchanged": true,
+  "runs": [
+    {
+      "handle": 45792,
+      "terminal_exit": 0,
+      "reaped": true
+    },
+    {
+      "handle": 80298,
+      "terminal_exit": 0,
+      "reaped": true,
+      "expected_conflicting_build_exit": 101
+    }
+  ],
+  "actual_compiler_features": {
+    "deterministic-test": {
+      "simba": [
+        "libm",
+        "libm_force",
+        "std",
+        "wide"
+      ],
+      "parry2d": [
+        "alloc",
+        "dim2",
+        "downcast-rs",
+        "ena",
+        "enhanced-determinism",
+        "f32",
+        "hashbrown",
+        "indexmap",
+        "parallel",
+        "rayon",
+        "required-features",
+        "slab",
+        "smallvec",
+        "spade",
+        "std"
+      ],
+      "parry3d": [
+        "alloc",
+        "dim3",
+        "downcast-rs",
+        "ena",
+        "enhanced-determinism",
+        "f32",
+        "hashbrown",
+        "indexmap",
+        "parallel",
+        "rayon",
+        "required-features",
+        "rstar",
+        "slab",
+        "smallvec",
+        "std"
+      ],
+      "rapier2d": [
+        "alloc",
+        "block-solver",
+        "default",
+        "dim2",
+        "enhanced-determinism",
+        "f32",
+        "parallel",
+        "std"
+      ],
+      "rapier3d": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "parallel",
+        "std"
+      ]
+    },
+    "fast-test": {
+      "simba": [
+        "libm",
+        "std",
+        "wide"
+      ],
+      "parry2d": [
+        "alloc",
+        "dim2",
+        "downcast-rs",
+        "ena",
+        "f32",
+        "hashbrown",
+        "parallel",
+        "rayon",
+        "required-features",
+        "slab",
+        "smallvec",
+        "spade",
+        "std"
+      ],
+      "parry3d": [
+        "alloc",
+        "dim3",
+        "downcast-rs",
+        "ena",
+        "f32",
+        "hashbrown",
+        "parallel",
+        "rayon",
+        "required-features",
+        "rstar",
+        "slab",
+        "smallvec",
+        "std"
+      ],
+      "rapier2d": [
+        "alloc",
+        "block-solver",
+        "default",
+        "dim2",
+        "f32",
+        "parallel",
+        "std"
+      ],
+      "rapier3d": [
+        "alloc",
+        "default",
+        "dim3",
+        "f32",
+        "parallel",
+        "std"
+      ]
+    },
+    "fast-simd8-test": {
+      "simba": [
+        "libm",
+        "std",
+        "wide"
+      ],
+      "parry2d": [
+        "alloc",
+        "dim2",
+        "downcast-rs",
+        "ena",
+        "f32",
+        "hashbrown",
+        "parallel",
+        "rayon",
+        "required-features",
+        "simd8",
+        "slab",
+        "smallvec",
+        "spade",
+        "std"
+      ],
+      "parry3d": [
+        "alloc",
+        "dim3",
+        "downcast-rs",
+        "ena",
+        "f32",
+        "hashbrown",
+        "parallel",
+        "rayon",
+        "required-features",
+        "rstar",
+        "simd8",
+        "slab",
+        "smallvec",
+        "std"
+      ],
+      "rapier3d": [
+        "alloc",
+        "default",
+        "dim3",
+        "f32",
+        "parallel",
+        "simd8",
+        "std"
+      ],
+      "rapier2d": [
+        "alloc",
+        "block-solver",
+        "default",
+        "dim2",
+        "f32",
+        "parallel",
+        "simd8",
+        "std"
+      ]
+    },
+    "wasm-deterministic": {
+      "simba": [
+        "libm",
+        "libm_force",
+        "std",
+        "wide"
+      ],
+      "parry2d": [
+        "alloc",
+        "dim2",
+        "downcast-rs",
+        "ena",
+        "enhanced-determinism",
+        "f32",
+        "hashbrown",
+        "indexmap",
+        "required-features",
+        "slab",
+        "smallvec",
+        "spade",
+        "std"
+      ],
+      "parry3d": [
+        "alloc",
+        "dim3",
+        "downcast-rs",
+        "ena",
+        "enhanced-determinism",
+        "f32",
+        "hashbrown",
+        "indexmap",
+        "required-features",
+        "rstar",
+        "slab",
+        "smallvec",
+        "std"
+      ],
+      "rapier2d": [
+        "alloc",
+        "block-solver",
+        "default",
+        "dim2",
+        "enhanced-determinism",
+        "f32",
+        "std"
+      ],
+      "rapier3d": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "std"
+      ]
+    },
+    "wasm-fast": {
+      "simba": [
+        "libm",
+        "std",
+        "wide"
+      ],
+      "parry2d": [
+        "alloc",
+        "dim2",
+        "downcast-rs",
+        "ena",
+        "f32",
+        "hashbrown",
+        "required-features",
+        "slab",
+        "smallvec",
+        "spade",
+        "std"
+      ],
+      "parry3d": [
+        "alloc",
+        "dim3",
+        "downcast-rs",
+        "ena",
+        "f32",
+        "hashbrown",
+        "required-features",
+        "rstar",
+        "slab",
+        "smallvec",
+        "std"
+      ],
+      "rapier2d": [
+        "alloc",
+        "block-solver",
+        "default",
+        "dim2",
+        "f32",
+        "std"
+      ],
+      "rapier3d": [
+        "alloc",
+        "default",
+        "dim3",
+        "f32",
+        "std"
+      ]
+    }
+  },
+  "actual_test_outcomes": {
+    "deterministic-test": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        9,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    "fast-test": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        9,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    "fast-simd8-test": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        9,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "docs/spikes/evidence/physics-runtime-variants/commands.json.gz",
+      "sha256": "1c6dee1a33b2f98cc868a5e402f5675567267d9439806d7450999c630966244b",
+      "raw_sha256": "b8817cdf207c24d5d6b7b3e8cb650f7303e59506e678ecc9ace550346b41810d",
+      "raw_bytes": 5610,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-runtime-variants-001/commands.json"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-runtime-variants/conflicting-modes.stderr.gz",
+      "sha256": "eec543512b816610a5628e33d175eae2c307cc91ea4a28d6fc41aa3602067060",
+      "raw_sha256": "9826aea6feba37c4fefe275f1cf9a09efac3b765302f19107b5e4deb91452928",
+      "raw_bytes": 520,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-runtime-variants-001/conflicting-modes.stderr"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-runtime-variants/conflicting-modes.stdout.gz",
+      "sha256": "08cf88b3b40d3de92e8f4371e02b3d4a52a54b6e3281446897b68118be1dbaa7",
+      "raw_sha256": "575ac1af570416bb4a9f405ec3fbb68123bc02a60d9649e4c9cdb2d79078a1b6",
+      "raw_bytes": 96109,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-runtime-variants-001/conflicting-modes.stdout"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-runtime-variants/deterministic-clippy.stderr.gz",
+      "sha256": "e2a0bfdf40c876f848b90bc243c8559e791791e63033036acc9d141b6d641ee7",
+      "raw_sha256": "6e0cbaf98e08073f12c2936b9bbc9e94d7d578902a4f0a14c8a3662eb96c29fb",
+      "raw_bytes": 1514,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-runtime-variants-001/deterministic-clippy.stderr"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-runtime-variants/deterministic-clippy.stdout.gz",
+      "sha256": "3585370b2e063229d76bac2343030defa7e36c247f050b801618af5cc07dab14",
+      "raw_sha256": "fbfdab59a85479a43720aa0a75f6459eca0b4599ab6a0499f3ee8264f7d894aa",
+      "raw_bytes": 103085,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-runtime-variants-001/deterministic-clippy.stdout"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-runtime-variants/deterministic-test.stderr.gz",
+      "sha256": "7037c0ba42fa6e954c9d8a418dae52a72f1724484444159ce8ffd77874696430",
+      "raw_sha256": "30a5283d1c1c70b15a33db7830e3bd0c829a4aa6bef1e5be0126d23b45c2cfad",
+      "raw_bytes": 2205,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-runtime-variants-001/deterministic-test.stderr"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-runtime-variants/deterministic-test.stdout.gz",
+      "sha256": "6420afed0c6edbdc87935b392748ded479a16cfc6ff0c22548b439e6dc4d8d90",
+      "raw_sha256": "056fd69e4927b22bb0826de7f2c7129870bd2d00cca06f79d7bd819752dc9925",
+      "raw_bytes": 113426,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-runtime-variants-001/deterministic-test.stdout"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-runtime-variants/fast-clippy.stderr.gz",
+      "sha256": "f801ff8e69020a818de901f5bbc0a1f7206787fd58e698d8dfcc984d0bee7eff",
+      "raw_sha256": "a82c01f349893b4acd167a389c880be84391f72c1d1c74ff6ff9ad8103b99a80",
+      "raw_bytes": 566,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-runtime-variants-001/fast-clippy.stderr"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-runtime-variants/fast-clippy.stdout.gz",
+      "sha256": "fbeae89defdf7b4fbd849978e1cdadb11775788925e1a6023d4b4cac5a5dcaf1",
+      "raw_sha256": "747493f09c25ce884f62bf6a1b50511f30f32e22f2af913db66e7540f65cef64",
+      "raw_bytes": 101993,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-runtime-variants-001/fast-clippy.stdout"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-runtime-variants/fast-simd8-clippy.stderr.gz",
+      "sha256": "fa8215116ae234922136ad9ac7a469579635b6cd11bb3e02861a1b73a21c63d4",
+      "raw_sha256": "63ad490b1356d9733797905b0c57431d182a101bbc634af788e46ca430c01e7c",
+      "raw_bytes": 455,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-runtime-variants-001/fast-simd8-clippy.stderr"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-runtime-variants/fast-simd8-clippy.stdout.gz",
+      "sha256": "7fda4d2501e134cdaf9c7b431369804723e54fdcf7dd590cb3612edce4a4182c",
+      "raw_sha256": "fb974400cf480d5eb5d4a7813721b75bb51535a8cb25de73d839b00c92d857e8",
+      "raw_bytes": 102093,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-runtime-variants-001/fast-simd8-clippy.stdout"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-runtime-variants/fast-simd8-test.stderr.gz",
+      "sha256": "a117d186a04877ad820a0376cc7c880225f81850d13ee06bfe8526befa992bac",
+      "raw_sha256": "73de9076f6c6732a93b32772afe8f1ed37b57c84ffe3756943cd6e7985fe9b5c",
+      "raw_bytes": 1058,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-runtime-variants-001/fast-simd8-test.stderr"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-runtime-variants/fast-simd8-test.stdout.gz",
+      "sha256": "618deb5a3439d8a12a420abf370c866efbf79c27b5b7a7ec5f9bac0460dedfab",
+      "raw_sha256": "f0f8fdaf8f6fb813cd7cd90d38b47ca2002ac26bde99e7d8874e3529e843e73a",
+      "raw_bytes": 112326,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-runtime-variants-001/fast-simd8-test.stdout"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-runtime-variants/fast-test.stderr.gz",
+      "sha256": "05abae8627daecaedccc7f038c2931144cf1b1865fdea7b00f9eca42758125bd",
+      "raw_sha256": "c049f6dbe93b3747f8b3db8883b420785a44066a7ca82bedc2509022d5e75b0d",
+      "raw_bytes": 1168,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-runtime-variants-001/fast-test.stderr"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-runtime-variants/fast-test.stdout.gz",
+      "sha256": "141808c5e7db8492e08721eec1d0950c15e1bf5442d112e7e28bb98a54e1a966",
+      "raw_sha256": "32e160c07b83e5418e640d148ddad963515479ee1ab502e5f3694326af25c8b3",
+      "raw_bytes": 112226,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-runtime-variants-001/fast-test.stdout"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-runtime-variants/freeze.json.gz",
+      "sha256": "821836adf1b7db46a02e8c05d24815b48a845ed9bb48978320ebcd077d9b7ae7",
+      "raw_sha256": "28750a50761089e1c6bae7a4715f225a67e2cedd5fbc50955d07c811983e9f02",
+      "raw_bytes": 166439,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-runtime-variants-001/freeze.json"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-runtime-variants/portability-commands.json.gz",
+      "sha256": "71d8e3331792b8aad07cecff3107864507e6ff01d428ba87c105709ac4866187",
+      "raw_sha256": "698032126a0b9ce390567db474a8ccbb829246967161da637bd80bee45238047",
+      "raw_bytes": 2801,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-runtime-variants-001/portability-commands.json"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-runtime-variants/portability-terminal.json.gz",
+      "sha256": "cda80dfefa6165fc6cd275f9d2011cb0d467145ebf799376c5cdb7d53c3761d3",
+      "raw_sha256": "b3fa9c64499fb4587dc0b7a8ea8c373801bff566a5f61922d8cc9612fd46370f",
+      "raw_bytes": 38,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-runtime-variants-001/portability-terminal.json"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-runtime-variants/portability.py.gz",
+      "sha256": "ae93ff27a2aa83de79181ea7d0b9d628f36a3b64213838a5d83841bf7df48876",
+      "raw_sha256": "811beb413828894618974084d3f24eba7eb1077d632596fc97f5a76eb9c5f4b4",
+      "raw_bytes": 1781,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-runtime-variants-001/portability.py"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-runtime-variants/run.py.gz",
+      "sha256": "29bbe45426154654697fec5bd919588178a3ad5f9d20866a164ac2c59cb49aec",
+      "raw_sha256": "335020fadce767425ee6cf944960c66e9bd8ede1cc707b09b9dbd3536ca9a0f0",
+      "raw_bytes": 1927,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-runtime-variants-001/run.py"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-runtime-variants/terminal.json.gz",
+      "sha256": "a2c6fdc3dad231867c4b7aada58552f35faa60b66e3b9852f9737167d7642d2f",
+      "raw_sha256": "d346b2634f785732c48b5b7cb12804ff57b5317ba8ed2e6ab2469d32f820b29d",
+      "raw_bytes": 62,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-runtime-variants-001/terminal.json"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-runtime-variants/wasm-deterministic.stderr.gz",
+      "sha256": "9db642c54a671a1a22a172e2a8d2a5a5141b22e5e99170f8c7e7de40cf1ec00a",
+      "raw_sha256": "415c20e7d6937c98a0160347732bad2bd95b18a0879beff53929d6c1e5838a84",
+      "raw_bytes": 1347,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-runtime-variants-001/wasm-deterministic.stderr"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-runtime-variants/wasm-deterministic.stdout.gz",
+      "sha256": "c045dd16467a91908c4376613e0822a0e5795d06cfe6d77db2f0fde03a859e1b",
+      "raw_sha256": "32404b7ab080d722a895ff0f98a5db3d52725aa9f4950d14c9e73e95697a0043",
+      "raw_bytes": 106897,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-runtime-variants-001/wasm-deterministic.stdout"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-runtime-variants/wasm-fast.stderr.gz",
+      "sha256": "6a77aa661b6223ca613c7f7ebfee40eb4101783c4431bf8ca437d2471d4b9a38",
+      "raw_sha256": "2b10609ec8fa93bda1e58e9a2dcdebe34212b57a3e079beeb729728c99a4ce5a",
+      "raw_bytes": 566,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-runtime-variants-001/wasm-fast.stderr"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-runtime-variants/wasm-fast.stdout.gz",
+      "sha256": "38cfb3f7b61707580cec03404906f11dcc47fdaf2e8c9c8736e81616fefd57ed",
+      "raw_sha256": "b7ab169edcc5550e4234197406f3de824712639219ee586165837adbd4b34944",
+      "raw_bytes": 105884,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-runtime-variants-001/wasm-fast.stdout"
+    }
+  ],
+  "limits": [
+    "kernel variants only; project and process selection remains pending",
+    "wasm compile only",
+    "no timing, cross-platform checksum, physical device or rollback claim"
+  ]
+}
