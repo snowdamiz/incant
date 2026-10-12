@@ -1,0 +1,246 @@
+{
+ "head": "9ca63624aa764c29e3580fa85f28e10a7b6f2cd3",
+ "files": {
+  "handoffs/0060-core-sample-presentation/tools/burst.sh": {
+   "status": "??",
+   "sha256": "d4a18163b907cc5e93bd2d429866773b3ab9b31d7c2f6792b1671495c87763a5"
+  },
+  "handoffs/0060-core-sample-presentation/tools/cap.sh": {
+   "status": "??",
+   "sha256": "fd718a3bbcec30eec0617d07f2a856f59bc5367b9d2e0bfdf09768e2a327664a"
+  },
+  "handoffs/0060-core-sample-presentation/tools/cargo.sh": {
+   "status": "??",
+   "sha256": "2fb8314c4482808a8cebf790805e18e289f35c3ec76dcade987aedef0126bb7e"
+  },
+  "handoffs/0060-core-sample-presentation/tools/collect_evidence.py": {
+   "status": "??",
+   "sha256": "ea36268bb0ab85eee9bd08b350ee05c901ebffcdc334d45a8124b11f1e7e9f39"
+  },
+  "handoffs/0060-core-sample-presentation/tools/guard.sh": {
+   "status": "??",
+   "sha256": "01cd9ce9aad491bdd790649c59844cad6a734a8d23dce15140afd25ca1d6a8dc"
+  },
+  "handoffs/0060-core-sample-presentation/tools/guests/reparent_probe.js": {
+   "status": "??",
+   "sha256": "eca26b64989544c1c1d7052990ebbaf71824bd0e5541ba98102544f5c0d4262a"
+  },
+  "handoffs/0060-core-sample-presentation/tools/launch.sh": {
+   "status": "??",
+   "sha256": "9c7ab5e1304a4506be679b84bbc792911d66959733f2aa1cb9f085fc09ad1f50"
+  },
+  "handoffs/0060-core-sample-presentation/tools/lookdev.py": {
+   "status": "??",
+   "sha256": "c22d78ca5696d284bfd138df4d1064c43df3a96f249d81e32aea500d76c600c3"
+  },
+  "handoffs/0060-core-sample-presentation/tools/nav_repro.py": {
+   "status": "??",
+   "sha256": "744a928c411adffd4bb534f55d7f11e3d7a804bd663ca01f5a65fea570a1bb69"
+  },
+  "handoffs/0060-core-sample-presentation/tools/nav_repro.sh": {
+   "status": "??",
+   "sha256": "8e92d907d0153e9365b31a967374239fc3d378250004a4a3d44ac1652e9b8463"
+  },
+  "handoffs/0060-core-sample-presentation/tools/navprobe.py": {
+   "status": "??",
+   "sha256": "83711cd426a5881fa254dc84110b9731905806e3b6f9034d2d00ce6077c2f140"
+  },
+  "handoffs/0060-core-sample-presentation/tools/offscreen.sh": {
+   "status": "??",
+   "sha256": "ac00ec96e754a3d3079f534b604ecb4bd46a7ffcf1784fc1ce1166ce68b9ae70"
+  },
+  "handoffs/0060-core-sample-presentation/tools/package.py": {
+   "status": "??",
+   "sha256": "6b789d4a9c1f49efa26a475ab99a238c18e3f62a1e5b937259b60f56fb262c9f"
+  },
+  "handoffs/0060-core-sample-presentation/tools/pcm_check.py": {
+   "status": "??",
+   "sha256": "0a53b27deddadabfc1e6d06d7a9e81eeb9c3d76eab4cfa8cfc8736b0f571e899"
+  },
+  "handoffs/0060-core-sample-presentation/tools/plan_route.py": {
+   "status": "??",
+   "sha256": "20921751f4c74133b874776c49df853c015481347486b2134361b5ee9b82d30d"
+  },
+  "handoffs/0060-core-sample-presentation/tools/plans/hud-one.json": {
+   "status": "??",
+   "sha256": "8db96bc685da992bf3c8b2f8978d1bb5300a5c22acf690bac5517de8960ab82e"
+  },
+  "handoffs/0060-core-sample-presentation/tools/plans/hud-static.json": {
+   "status": "??",
+   "sha256": "69209d6b03ede06d1af49e701e8bd6784d7d6403a804e11c8d2e7b9d849e1703"
+  },
+  "handoffs/0060-core-sample-presentation/tools/plans/idle-lost.json": {
+   "status": "??",
+   "sha256": "54b59bc71a03e8debe53535ac7abfb91fb3164eb06a4bdfa7f6bce0e43aaf2fb"
+  },
+  "handoffs/0060-core-sample-presentation/tools/plans/reparent.json": {
+   "status": "??",
+   "sha256": "f9ba3036a57c3e160ccfbd024fba877f3042ded70dbf3e90faa3ab9be977cbb4"
+  },
+  "handoffs/0060-core-sample-presentation/tools/plans/route-collected.json": {
+   "status": "??",
+   "sha256": "9d4e25149b23fb7894131a2d6bab50038c29ce089c1e0dc5dcb2038ed6d261fa"
+  },
+  "handoffs/0060-core-sample-presentation/tools/plans/route-playing.json": {
+   "status": "??",
+   "sha256": "f8af869a28858174e8fbb5c4c446b13186e79d4d6ebd5c48cf4fb412bbb55da9"
+  },
+  "handoffs/0060-core-sample-presentation/tools/plans/route-won.json": {
+   "status": "??",
+   "sha256": "43cddadc71e892d290cc54fa40ac73b26076858c26f5f1940bd5f7b10e5040ad"
+  },
+  "handoffs/0060-core-sample-presentation/tools/replay_plan.py": {
+   "status": "??",
+   "sha256": "eea55febc3b986c430f3d406285a56ac3b67a36344ca2a8f362bd45fe993bc72"
+  },
+  "handoffs/0060-core-sample-presentation/tools/review_offscreen.rs": {
+   "status": "??",
+   "sha256": "d0863272015bc91d6665f3954308d33e1a8678f04e7b967093df5b25b6540f66"
+  },
+  "handoffs/0060-core-sample-presentation/tools/review_run.sh": {
+   "status": "??",
+   "sha256": "420ac84c8625a6840b1328722d88f83b77fea1b76fdd4ccb3a639f7bbc33ce49"
+  },
+  "handoffs/0060-core-sample-presentation/tools/setup.sh": {
+   "status": "??",
+   "sha256": "1c29ede3cd6fce9ab0a83c516feb6dc42eb2be6e1fa4ebb2f90694837d473a74"
+  },
+  "handoffs/0060-core-sample-presentation/tools/transpile.mjs": {
+   "status": "??",
+   "sha256": "105ca872990368f423101b3e189c7b1e345e0a3bc1d8c2634401adfe13a84673"
+  },
+  "handoffs/0060-core-sample-presentation/tools/variants.sh": {
+   "status": "??",
+   "sha256": "fa65614a2743235b6a6da602c865ba1c10bd915a21999dad1233de196b7b21f2"
+  },
+  "handoffs/0060-core-sample-presentation/tools/winctl.swift": {
+   "status": "??",
+   "sha256": "1cc6e001b2423378023a6fab6b3453f84196ccc0fbdb1b72783a6bb1654c5f0c"
+  },
+  "samples/core/PRESENTATION.md": {
+   "status": "??",
+   "sha256": "5ac2539054026316127ca5134caec0fca84e219c7e4e3b86ad03ee84106627c0"
+  },
+  "samples/core/README.md": {
+   "status": "M",
+   "sha256": "82f464b1b1ceae6b24d0d6665cea0a2d0260df5b525ad02ebba456d2132f8a2a"
+  },
+  "samples/core/art/__init__.py": {
+   "status": "??",
+   "sha256": "187a17f4f9352cb5761441b65b5f9d8d5a82f08b5b0168abc4d99537230b888a"
+  },
+  "samples/core/art/actors.py": {
+   "status": "??",
+   "sha256": "54d46aefd9b526b6d7aff7813f082a5f733964cb1b35971a5b4ca215eca97611"
+  },
+  "samples/core/art/fontcheck.py": {
+   "status": "??",
+   "sha256": "04069f64b17fe6a75ac2cdcf5fa44f778ae53473ca105cdbce7ebb5e27737916"
+  },
+  "samples/core/art/fonts/CoreSampleSC-Regular.ttf": {
+   "status": "??",
+   "sha256": "7aeb899a891af8c8c5174934f72ad1d45fdf46258abc419aaeda1d026a24a0a5"
+  },
+  "samples/core/art/fonts/OFL-NotoSansSC.txt": {
+   "status": "??",
+   "sha256": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9"
+  },
+  "samples/core/art/fonts/provenance.json": {
+   "status": "??",
+   "sha256": "aa7f05977e67f22f1214d7b2ad57bd72ae924877f04b94008bcc718177d501eb"
+  },
+  "samples/core/art/fonts/subset_sc.py": {
+   "status": "??",
+   "sha256": "04ad8578a6544a424fed7a35c33523ac6aa47807256b993458ea10f257637cee"
+  },
+  "samples/core/art/gltf.py": {
+   "status": "??",
+   "sha256": "6adcad31460ecb68e91f76178ff659a8de1862d82794d56073a60a74822edf84"
+  },
+  "samples/core/art/ids.py": {
+   "status": "??",
+   "sha256": "394237e6d2a462c883551ad5f1db5159af6fb20d0ca7ae4791680d9ee1b5d316"
+  },
+  "samples/core/art/level.py": {
+   "status": "??",
+   "sha256": "779cccc629ea5da9738f9ddcae8d85332e2eb0d8aaa330db68b17c80eca2635f"
+  },
+  "samples/core/art/mesh.py": {
+   "status": "??",
+   "sha256": "535f758886542166909b83fd9fd8df4fa946d9f0b169fbc70414b71789690709"
+  },
+  "samples/core/art/music.py": {
+   "status": "??",
+   "sha256": "51a1844d26959bdb7591b993eff8fd19158fa38318180f40c134ee285d4a06e3"
+  },
+  "samples/core/art/noise.py": {
+   "status": "??",
+   "sha256": "702eb6bab2b6025f350f981f79557b904cc5695727b9a3314cc497495fc20524"
+  },
+  "samples/core/art/pngio.py": {
+   "status": "??",
+   "sha256": "9ffd0ec2dfb7bb49696c4930b347fa586997344898768f0f986bb61d2368147c"
+  },
+  "samples/core/art/props.py": {
+   "status": "??",
+   "sha256": "777e5af8f70522155ea5336304514783547a657983f795d0d5a4f844a7f62709"
+  },
+  "samples/core/art/raster.py": {
+   "status": "??",
+   "sha256": "a2604e6e6eff2d8da6c716e428d377df59ecc44974ddba34694c276bfcc948b4"
+  },
+  "samples/core/art/sky.py": {
+   "status": "??",
+   "sha256": "74bb139d92da8844880e162761946c1b99c68ec989619b70c4489e20e4f9c8b9"
+  },
+  "samples/core/art/terrain.py": {
+   "status": "??",
+   "sha256": "8cfb208de514f482ff47720c4d63ccb8d5ccc40fdd3e287c3787675600c75521"
+  },
+  "samples/core/art/world.py": {
+   "status": "??",
+   "sha256": "b286bf0f5c245959c2361cb0ae346f64dcd95c45ba215bc145711268d760f213"
+  },
+  "samples/core/hud.py": {
+   "status": "??",
+   "sha256": "903278fcfc0f4d7ef474192187a6158ff0066183c10d44570f727f575eb9663e"
+  },
+  "samples/core/playtest.py": {
+   "status": "??",
+   "sha256": "5286df1d7b2eaeb17c5ba4f8bed18902b9e6814dbdb7933713dd9f261dfcb357"
+  },
+  "samples/core/routes/win-input.json": {
+   "status": "??",
+   "sha256": "5c23f6f64bf59a8c40634f8e34f4469ab0a17f40750f02bcbee630f721729a63"
+  },
+  "samples/core/scene.py": {
+   "status": "??",
+   "sha256": "185f5168ccd76648550e4f0a843e77cae91ca5f305a3083f904f46c23b7b0093"
+  },
+  "samples/core/ui/hud.json": {
+   "status": "??",
+   "sha256": "2ae3136757a767b3c21d8d8b8aabf5cf720ccf4e2eb32ab68c87a5036a954dae"
+  },
+  "samples/core/ui/strings.json": {
+   "status": "??",
+   "sha256": "8bc4cb760ac832b9133d8699e47448e909f5e0b3827c5b5c711b9b06af500526"
+  }
+ },
+ "protected_unchanged": {
+  "samples/core/gameplay.ts": {
+   "sha256": "58d7007de2cb942de4bf4c254b4d514deb07df15a88cb1b057cac30fbca393a5",
+   "git_blob": "4414039a12a0f37c9a888c73864fea6009ce907b",
+   "matches_head": true
+  },
+  "samples/core/verify.py": {
+   "sha256": "a2351e2ce97667b59449ec2e28b1633562c006559e1305b2c4d1305fe3a04788",
+   "git_blob": "b3a7350c3d6c7794c8b99a8a0ed388d2937c9b09",
+   "matches_head": true
+  },
+  "samples/core/tsconfig.json": {
+   "sha256": "869922e94ccde7a4c5d023dcc15dc661034031b34d42cbfaa41a4a354abc625b",
+   "git_blob": "7f366814828605212c865f5bb2d7d1c4043c3303",
+   "matches_head": true
+  }
+ }
+}

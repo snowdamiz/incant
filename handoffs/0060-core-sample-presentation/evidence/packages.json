@@ -1,0 +1,104 @@
+{
+ "command": [
+  "cargo",
+  "build",
+  "--locked",
+  "--offline",
+  "-j2",
+  "-p",
+  "incant_game_player",
+  "--bin",
+  "incant_game_player",
+  "--features",
+  "project,native-window",
+  "--profile",
+  "ci",
+  "--message-format=json"
+ ],
+ "profile": "ci",
+ "features": "project,native-window",
+ "limits": [
+  "ci profile, not shipping",
+  "unsigned host==target desktop",
+  "no phone, performance or phase gate"
+ ],
+ "packages": {
+  "f5-ar-playing": {
+   "project_sha256": "04e8ca651d4ecb40fe0cecf7bc15da37a1deb277417272bd24189c7487a86c6e",
+   "player_sha256": "e17a2163a98ff4f55d1123027f522041cb96660732b041962eabc0480934826b",
+   "player_bytes": 31468288,
+   "data_bytes": 34323655,
+   "data_files": 28,
+   "startup_frames": 800,
+   "startup_logs": [
+    "core.route 01CSEN00000000000000000020 corners=5"
+   ]
+  },
+  "f5-en-XA-playing": {
+   "project_sha256": "80e964fccf1b5960c8a079fae982b46b4a315c11910131a8ac897f693f53d81d",
+   "player_sha256": "09983851062bdbceef13185f426335d4d3d3d99b82d603a75afaf76534fb3535",
+   "player_bytes": 31468288,
+   "data_bytes": 34323764,
+   "data_files": 28,
+   "startup_frames": 800,
+   "startup_logs": [
+    "core.route 01CSEN00000000000000000020 corners=5"
+   ]
+  },
+  "f5-en-collected": {
+   "project_sha256": "b5a23c23ac29d294f5870baf85be85840f0caf72655cb3cbf7172a6e84ef3d49",
+   "player_sha256": "57900ca122c7570433285a1562a57950e886a55069997f231db7f4f540fb1f6b",
+   "player_bytes": 31468288,
+   "data_bytes": 34323589,
+   "data_files": 28,
+   "startup_frames": 800,
+   "startup_logs": [
+    "core.route 01CSEN00000000000000000020 corners=5"
+   ]
+  },
+  "f5-en-lost": {
+   "project_sha256": "86e18bb2e971bfbae4f0c8effa1c59621b53b7612dafc31acfaae867aa78c150",
+   "player_sha256": "9f33e7d9d99759b4e454fcc7aa98d0203a16f70bf89ec385042beeda41084bad",
+   "player_bytes": 31468288,
+   "data_bytes": 34323595,
+   "data_files": 28,
+   "startup_frames": 800,
+   "startup_logs": [
+    "core.route 01CSEN00000000000000000020 corners=5"
+   ]
+  },
+  "f5-en-playing": {
+   "project_sha256": "443f32437090cb510278f11f4ae5da142d3028f074ad2ec91ce30b5c719fcb01",
+   "player_sha256": "565f1592aaeafcf05c32bf2d094334124de52c90bdd6fe3ca75eb56a6cc5fd28",
+   "player_bytes": 31468288,
+   "data_bytes": 34323595,
+   "data_files": 28,
+   "startup_frames": 800,
+   "startup_logs": [
+    "core.route 01CSEN00000000000000000020 corners=5"
+   ]
+  },
+  "f5-en-won": {
+   "project_sha256": "d5ab21e0a936c776216d962ac04fe8e33ba89bd5d71a1ed9a2c510472108291c",
+   "player_sha256": "56eedd29493c5e5fbb73cd95eaae92ddb3e6311086e93f9abe089404da22b4be",
+   "player_bytes": 31468288,
+   "data_bytes": 34323589,
+   "data_files": 28,
+   "startup_frames": 800,
+   "startup_logs": [
+    "core.route 01CSEN00000000000000000020 corners=5"
+   ]
+  },
+  "f5-zh-Hans-playing": {
+   "project_sha256": "72fe5cdd02fd64a17c86a297d7598013f1dfcfbcf470d5b7c3f2b227cbc22ff8",
+   "player_sha256": "73c97d298f760347e7e653ddfcc9cc31b2dec67011a62769d612b18e5793fca8",
+   "player_bytes": 31468288,
+   "data_bytes": 34323615,
+   "data_files": 28,
+   "startup_frames": 800,
+   "startup_logs": [
+    "core.route 01CSEN00000000000000000020 corners=5"
+   ]
+  }
+ }
+}

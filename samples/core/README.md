@@ -27,3 +27,6 @@ source at startup; the separate shipping proof must use cooked bytecode.
 
 The room is a test fixture, not the finished level or a performance benchmark.
 No device, full-save or Phase 1 gate is claimed by these checks.
+
+The presentation level, original art, localized HUD and music are authored
+separately by `scene.py`; see [PRESENTATION.md](PRESENTATION.md).
