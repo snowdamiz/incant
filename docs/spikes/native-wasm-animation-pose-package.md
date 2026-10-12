@@ -82,3 +82,10 @@ authoring/development controls before spending a fresh shipping build, followed
 by `--stage export` against the same frozen output. The script verifies source,
 binary and document identities before export. The evidence inventory records
 the exact pinned command/environment used here.
+
+## Current-main integration
+
+The combined source now passes a fresh main #147 integration and ordinary
+shipping rebuild, documented in [the integrated result](native-animation-trees-main147.md).
+The original producer counts, artifacts and limitations above remain historical
+evidence for their exact source/build identities. No new rendered/device gate is implied.
