@@ -1,0 +1,97 @@
+[
+  {
+    "name": "runtime",
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_runtime"
+    ],
+    "exit_code": 0,
+    "elapsed": 19.797825791999912,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/animation-trees-001/runtime.log",
+    "sha256": "23199be8a41178ab8e99804f26843dc9999607d47439a77702ca98a8f0a6cdd1"
+  },
+  {
+    "name": "clippy",
+    "command": [
+      "./tools/cargo",
+      "clippy",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_runtime",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "elapsed": 20.640684666000197,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/animation-trees-001/clippy.log",
+    "sha256": "1344928bc253f0f18d61fcbc4cbeca35c87bd4385f7980c46838a8b1ac360b39"
+  },
+  {
+    "name": "wasm32",
+    "command": [
+      "./tools/cargo",
+      "check",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_runtime",
+      "--target",
+      "wasm32-unknown-unknown"
+    ],
+    "exit_code": 0,
+    "elapsed": 23.751069333000032,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/animation-trees-001/wasm32.log",
+    "sha256": "4503370aee9c6b9cc69951b09c6209e447eea962052b51abd0efe7cf13d53ec1"
+  },
+  {
+    "name": "graph",
+    "command": [
+      "python3",
+      "tools/check_runtime_dependencies.py",
+      "incant_runtime"
+    ],
+    "exit_code": 0,
+    "elapsed": 0.49267695800017464,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/animation-trees-001/graph.log",
+    "sha256": "8f77a37ec4738c7752086111a5ed5a7dfc5454816ab0b7123c6dbdbac4cfb5a1"
+  },
+  {
+    "name": "fmt",
+    "command": [
+      "./tools/cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit_code": 0,
+    "elapsed": 1.1585257080000702,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/animation-trees-001/fmt.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "diff",
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit_code": 0,
+    "elapsed": 0.012010542000098212,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/animation-trees-001/diff.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

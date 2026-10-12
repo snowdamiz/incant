@@ -4,3 +4,5 @@ mod definition;
 pub use definition::*;
 mod playback;
 pub use playback::{AnimationGraphControl, AnimationGraphSnapshot, AnimationGraphState};
+mod tree;
+pub use tree::*;
