@@ -38,6 +38,9 @@ impl TickCommands {
             "setAnimationParameter",
             "selectAnimationState",
             "setAudioPlaying",
+            "stopAudio",
+            "restartAudio",
+            "seekAudio",
             "setAudioGain",
             "setAudioBusGain",
         ] {
@@ -135,7 +138,15 @@ fn parse<'js>(
     if matches!(name, "setUiText" | "setUiDisabled" | "setText") {
         return crate::hud::parse(ctx, name, args);
     }
-    if matches!(name, "setAudioPlaying" | "setAudioGain" | "setAudioBusGain") {
+    if matches!(
+        name,
+        "setAudioPlaying"
+            | "setAudioGain"
+            | "setAudioBusGain"
+            | "stopAudio"
+            | "restartAudio"
+            | "seekAudio"
+    ) {
         return crate::audio_commands::parse(ctx, name, args);
     }
     if matches!(name, "setAnimationParameter" | "selectAnimationState") {

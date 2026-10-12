@@ -16,13 +16,22 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Native HUD controls — main161 integration reviewed; fast check pending
+## Native audio transport — main162 review accepted; fast check pending
+
+541 affected CPU cases, Clippy and target/contracts checks pass. A fresh ordinary
+package passes four source/map/build-deleted playback/continuation processes with
+exact save and PCM equality plus ten precise refusal controls. Integration source
+seams and final evidence are independently accepted; exact-head fast CI/publication remain pending. Wasm
+transport, Core presentation and physical audio/device gates remain separate.
+[Current-main evidence](docs/spikes/native-audio-transport-main162.md).
+
+## Native HUD controls — merged main162
 
 All 20 accepted inputs remain exact. Current-main CPU checks pass 444 affected
 and 10 player cases plus Clippy/target/contracts/dependency checks. A fresh
 ordinary package passes five source/map/build-deleted processes with canonical
 shaped text/focus and exact save/PCM continuation, plus three precise refusals.
-Independent integration review is accepted; exact-head fast CI/publication remain pending. Wasm parity,
+Independent integration review and exact-head fast CI passed before PR162 merged. Wasm parity,
 window/IME/appearance and device gates remain separate.
 [Current-main evidence](docs/spikes/native-hud-main161.md).
 
@@ -40,6 +49,16 @@ pre-command reads, exact save/PCM continuation; three exact refusals publish no
 outputs. Final independent execution audit is accepted.
 Wasm HUD parity, native/GPU appearance and complete Game UI remain open.
 [Contract and limits](docs/spikes/native-hud-controls.md).
+
+## Native audio transport — fresh shipping playback verified
+
+Stop, restart and seek now pass the typed native transaction and retained mixer
+checks. The six-package suite passes 530 tests and scoped Clippy. A fresh ordinary
+export passes four separate player processes with byte-exact audio/save
+continuation and ten specific refusals after private inputs are removed. Independent
+execution review accepts the evidence; main integration remains pending. Physical audio,
+Wasm SDK parity, Core Sample integration and phone gates remain open.
+[Evidence and limits](docs/spikes/native-audio-transport.md).
 
 ## Complete root motion — merged main161
 
