@@ -185,6 +185,20 @@ def main(path):
     print(f"trace: {len(blends)} blends over {size[0]}x{size[1]}; Rust corrected reference reproduced exactly")
     print(f"float-only reference (checkpoint 12): widest {width(old):g} ({wide(old)} channels > 2)")
     print(f"corrected reference: widest {width(new):g} ({wide(new)} channels > 2); {changed} of {3 * len(bg)} channels gain codes")
+    # Exactness: only partial-alpha blends widen a channel; pixels that only
+    # opaque fragments reach, and pixels no fragment reaches, keep one code.
+    partial, reached = set(), set()
+    for x, y, color, cov in blends:
+        alpha = color[3] / 255.0 * cov[0]
+        reached.add(y * size[0] + x)
+        if 0.0 < alpha < 1.0:
+            partial.add(y * size[0] + x)
+    gained = {i for i, (a, b) in enumerate(zip(old, new)) if a != b}
+    assert gained <= partial, "a channel without a partial blend gained codes"
+    exact_pixels = [i for i in range(len(bg)) if i not in partial]
+    assert all(l == h for i in exact_pixels for l, h in new[i]), "an opaque-only or untouched pixel admits two codes"
+    print(f"exactness: {len(gained)} pixels gain codes, all with a partial-alpha blend; "
+          f"{len(reached - partial)} opaque-only and {len(bg) - len(reached)} untouched pixels admit exactly one code")
     print(f"CI llvmpipe and WARP printed: {CI}")
     for name, blend in CANDIDATES:
         image = render(size, bg, blends, blend)

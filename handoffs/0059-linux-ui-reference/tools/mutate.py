@@ -42,13 +42,21 @@ ARGS = ['test', '-p', 'incant_render', '--profile', 'ci', '--locked', '-j2', '--
         '--', '--include-ignored', '--test-threads=1', '--nocapture']
 
 
+def parse(label):
+    """Failed tests from libtest's closing `failures:` list (with --nocapture
+    the per-test FAILED status is not on the `test` line), plus the lines
+    that show what was refused."""
+    text = (LOGS / f'{label}.log').read_text(encoding='utf-8')
+    tail = text.rsplit('\nfailures:\n', 1)
+    failed = sorted(set(re.findall(r'^    (\S+::\S+)$', tail[1], re.M))) if len(tail) == 2 else []
+    lines = [line.strip() for line in text.splitlines()
+             if re.match(r'\s*assertion|^scale 1 Rgba8Unorm: (outside|emulated)', line)]
+    return failed, lines
+
+
 def run(label):
     code = subprocess.run([str(RUNNER), label, *ARGS], cwd=ROOT).returncode
-    text = (LOGS / f'{label}.log').read_text(encoding='utf-8')
-    failed = sorted({line.split()[1] for line in text.splitlines()
-                     if line.startswith('test ') and line.rstrip().endswith('FAILED')})
-    panics = [line.strip() for line in text.splitlines() if re.match(r'\s*assertion|.*rejected by|^scale 1 Rgba8Unorm', line)]
-    return code, failed, panics[:12]
+    return (code, *parse(label))
 
 
 def main():
