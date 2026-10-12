@@ -101,8 +101,8 @@ Two adjacent Runtime focus/transient-layout observations remain scoped followups
 Opt-in cooked output/diagnostic/shadow shaders merged in PR #110 after scoped
 Metal numerical and Claude appearance acceptance; both features stay off.
 Runtime glyph atlases proceed independently. Advanced
-rendering, animation blending/state machines/IK/root motion, complete game UI/text
-input, remaining SDK capabilities, and the Core Sample/2D sample with specified
+rendering, full blend trees/state machines/IK/root motion, complete game UI/text
+input, remaining public Wasm capabilities, and the Core Sample/2D sample with specified
 device performance checks still prevent a Phase 1 completion claim. Main now includes
 native animation (#116), Console logs (#117), Wasm animation (#118), typed text
 packaging (#119), Wasm formatting (#120), pose blending (#121) and the composed CPU
@@ -110,6 +110,7 @@ text consumer (#122) and crossfades (#123). Canonical world-space text drawing
 now has scoped Claude appearance/Metal numerical acceptance and current-main CPU
 integration checks. Reviewed text-editing and steering remain separate next scopes;
 the reported mixed-bidi wrapping defect has a separately reviewed local repair.
+Connected Game UI and remaining public Wasm work continue separately.
 No complete Game UI or phase gate is claimed.
 
 Progress reports are scheduled approximately every 30 minutes while the goal is
