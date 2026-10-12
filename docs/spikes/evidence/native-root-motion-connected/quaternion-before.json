@@ -1,0 +1,12 @@
+[
+  {
+    "path": "crates/incant_assets_runtime/src/animation/weighted.rs",
+    "sha256": "2cd759c1430bbe5c5e2e2cc24aaee8eddf6e7b27e82fd02ab1042667ba7cf324",
+    "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-shared-quaternion-extraction-001/before/crates/incant_assets_runtime/src/animation/weighted.rs"
+  },
+  {
+    "path": "crates/incant_anim/src/track.rs",
+    "sha256": "f43c16ea72898bccb55c5d05b36b9968f0b23a8534fbc1538d3d909121a52960",
+    "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-shared-quaternion-extraction-001/before/crates/incant_anim/src/track.rs"
+  }
+]

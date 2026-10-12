@@ -1,0 +1,33 @@
+{
+  "at": "2026-10-12T19:47:31.330642+00:00",
+  "accepted": true,
+  "manifest_sha256": "f9cdd9b3a115bcde191c363100b1e4a4dda777a4ea1e26b5be59014703b4fd0f",
+  "head": "8eb857ca8ffc2a039fffa9357c3abefbdfd85883",
+  "retained_artifacts": 96,
+  "frozen_inputs": 1825,
+  "accepted_producer_inputs": 20,
+  "zero_exit_checks": 14,
+  "actual_test_counts": [
+    {
+      "groups": 45,
+      "passed": 444,
+      "failed": 0,
+      "ignored": 0
+    },
+    {
+      "groups": 3,
+      "passed": 10,
+      "failed": 0,
+      "ignored": 0
+    }
+  ],
+  "fresh_processes": 3,
+  "continuation_processes": 2,
+  "exact_final_save_pcm": true,
+  "canonical_hud_world_text_focus": true,
+  "precise_refusals": 3,
+  "package_files": 22,
+  "scope": "Independent retained integration source/execution audit across read-only verification calls; no GPU/device/phase gate",
+  "verification_note": "Artifact/source/log/codegen binding and playback/save/refusals checked before correcting reviewer iteration of deleted-map records from string paths to typed path objects. No production or evidence change.",
+  "findings": []
+}

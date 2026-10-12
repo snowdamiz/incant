@@ -1,0 +1,192 @@
+{
+  "scope": "Supplemental actual binaries, native-oracle Clippy, SDK wasm32, fmt/diff and public authoring/development preflight. Ordinary shipping proof pending.",
+  "command_count": 6,
+  "commands": [
+    {
+      "name": "headless",
+      "argv": [
+        "./tools/cargo",
+        "build",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_headless",
+        "--features",
+        "wasmtime-host"
+      ],
+      "exit_code": 0,
+      "seconds": 63.03458283299915,
+      "log": "headless.log",
+      "sha256": "db317db2fa500ded2e8b0a5849a8010abe9cfffceb4d125a6a6e7f21d1e363ff"
+    },
+    {
+      "name": "oracle",
+      "argv": [
+        "./tools/cargo",
+        "build",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_cook",
+        "--example",
+        "audio_package_oracle"
+      ],
+      "exit_code": 0,
+      "seconds": 92.7206496660001,
+      "log": "oracle.log",
+      "sha256": "30c5105dd4c1f1199b29b671bd6cb89f42b11c6c56bae300172c75995aac2e2e"
+    },
+    {
+      "name": "oracle-clippy",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_cook",
+        "--example",
+        "audio_package_oracle",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "seconds": 5.174697584003297,
+      "log": "oracle-clippy.log",
+      "sha256": "a84f9a78e208e16fda39cd925af8b09caef67898171175fd815d27189df6f371"
+    },
+    {
+      "name": "sdk-wasm32",
+      "argv": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant-module",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "exit_code": 0,
+      "seconds": 1.6729334580013528,
+      "log": "sdk-wasm32.log",
+      "sha256": "905737da029c5b52c48f9ab8d2e582e286a494fa0ee4399bc7c25831574b88dc"
+    },
+    {
+      "name": "fmt",
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 1.9221396659995662,
+      "log": "fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.049010334001650335,
+      "log": "diff.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "files": [
+    {
+      "path": "docs/spikes/evidence/native-wasm-audio-build/commands.json",
+      "sha256": "e8e38eb30e5452f38319afa5ca3a7f35f7e7b9d3dfb10b6ca68c58602f233e82",
+      "raw_sha256": "e8e38eb30e5452f38319afa5ca3a7f35f7e7b9d3dfb10b6ca68c58602f233e82",
+      "raw_bytes": 2173,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/wasm-audio-package-build-001/commands.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-wasm-audio-build/diff.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/wasm-audio-package-build-001/diff.log"
+    },
+    {
+      "path": "docs/spikes/evidence/native-wasm-audio-build/engine-freeze.json",
+      "sha256": "abc90877d7d1c9f3048f7d183f6cffdfeaf0b8a5b8358efd91020f1e43b2a080",
+      "raw_sha256": "abc90877d7d1c9f3048f7d183f6cffdfeaf0b8a5b8358efd91020f1e43b2a080",
+      "raw_bytes": 189424,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/wasm-audio-package-build-001/engine-freeze.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-wasm-audio-build/fmt.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/wasm-audio-package-build-001/fmt.log"
+    },
+    {
+      "path": "docs/spikes/evidence/native-wasm-audio-build/headless.log.gz",
+      "sha256": "cbcabbaf23333f8e74935007c9b4232693f6eabda488d6cc95b4f55949201b18",
+      "raw_sha256": "db317db2fa500ded2e8b0a5849a8010abe9cfffceb4d125a6a6e7f21d1e363ff",
+      "raw_bytes": 3388,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/wasm-audio-package-build-001/headless.log"
+    },
+    {
+      "path": "docs/spikes/evidence/native-wasm-audio-build/oracle-clippy.log.gz",
+      "sha256": "035fe5b7ea55251f308c825ad572e447381769c5e936ec13ec722e5632b96739",
+      "raw_sha256": "a84f9a78e208e16fda39cd925af8b09caef67898171175fd815d27189df6f371",
+      "raw_bytes": 1516,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/wasm-audio-package-build-001/oracle-clippy.log"
+    },
+    {
+      "path": "docs/spikes/evidence/native-wasm-audio-build/oracle.log.gz",
+      "sha256": "a7de3a51975e2fa8b0d95fc1c7efc56d31cffd7496efdf6e4154a71a0e74dfa1",
+      "raw_sha256": "30c5105dd4c1f1199b29b671bd6cb89f42b11c6c56bae300172c75995aac2e2e",
+      "raw_bytes": 1691,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/wasm-audio-package-build-001/oracle.log"
+    },
+    {
+      "path": "docs/spikes/evidence/native-wasm-audio-build/run.py",
+      "sha256": "bf731171ac867321abceaeb3bddd72653e6633e2df101e40b5f8acf9224b2566",
+      "raw_sha256": "bf731171ac867321abceaeb3bddd72653e6633e2df101e40b5f8acf9224b2566",
+      "raw_bytes": 1854,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/wasm-audio-package-build-001/run.py"
+    },
+    {
+      "path": "docs/spikes/evidence/native-wasm-audio-build/runner.log.gz",
+      "sha256": "3a19b2afa8f3048487c05e642744751cd966a7b759753eb7b8c362400b6bd95f",
+      "raw_sha256": "471a2cdce97bcb106e32b1cd3446b46e2b17cb4c1ad5988bb8f81d858b29408b",
+      "raw_bytes": 82,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/wasm-audio-package-build-001/runner.log"
+    },
+    {
+      "path": "docs/spikes/evidence/native-wasm-audio-build/sdk-wasm32.log.gz",
+      "sha256": "e4c1ddc068ed92625caf4ff806a20be702761ea8becaae7f9aef5861ef33c619",
+      "raw_sha256": "905737da029c5b52c48f9ab8d2e582e286a494fa0ee4399bc7c25831574b88dc",
+      "raw_bytes": 295,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/wasm-audio-package-build-001/sdk-wasm32.log"
+    },
+    {
+      "path": "docs/spikes/evidence/native-wasm-audio-build/retained-host-artifact-verification.json",
+      "sha256": "21e2be5721aa7d81fd5112d3b4142e920d7096bb8df0e2c257f1492e92812eb9",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/wasm-audio-host-proof-002/retained-verification.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-wasm-audio-build/public-author-preflight.json",
+      "sha256": "74052f62e9f2312783a4dc2b4e2542151d675bbd16ffd9d63a5adda4f8d0d2e7",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/wasm-audio-package-001/preflight.json"
+    }
+  ]
+}

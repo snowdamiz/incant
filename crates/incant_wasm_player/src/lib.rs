@@ -56,6 +56,7 @@ pub fn scene(streaming: bool) -> CookedScene {
             bus: None,
             listener: false,
             source: Some(NativeAudioSource {
+                transport_epoch: 0,
                 clip: id(90),
                 bus: None,
                 gain_db: 0.,

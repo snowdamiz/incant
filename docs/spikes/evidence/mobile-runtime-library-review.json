@@ -1,0 +1,41 @@
+{
+  "kind": "independent-mobile-runtime-source-review",
+  "at": "2026-10-12T20:26:02.082544+00:00",
+  "reviewer": "astra /root/native_wasm_export",
+  "accepted": true,
+  "findings": [],
+  "base": "4347bf0faa7e3b305f425ed4bb8bbf02b7c2a07f",
+  "source_hashes": {
+    "crates/incant_game_player/Cargo.toml": "38fd564984a89b1ceba7e46cc9ab9e7147e6d7c6027c94efdd82feb9502b2abb",
+    "crates/incant_game_player/src/main.rs": "b389f69564c9e0c1ef6bdfd9786e4b57a32fb169febaba8f2b82adb9f3a06e7c",
+    "crates/incant_game_player/src/lib.rs": "097912eb497a659b7951cf10a6d94199e2b81c422daa3d8423e83d61a9c72fc8",
+    "crates/incant_game_player/src/mobile.rs": "2fefdd46d524a1bd20fad3b5ed65587c4838bcd2e662d5508443260d21382b0b",
+    "crates/incant_game_player/src/mobile/tests.rs": "e6a859221cba5d681f61dccf57649d2fe8f7f45f4d268bd9233643d60f17fc74",
+    "crates/incant_game_player/include/incant_game.h": "101c0a974c7b629f66f7d9e9e2d9c038d71a45ccb2a8fdc91739c2ae7fe649c5"
+  },
+  "build_freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-build-002/freeze.json",
+    "sha256": "9409a0346a710339648e548a6c354f6fce9e9bd3c63afaa5d81278f9ef70ddfb",
+    "matched_reviewed_inputs": 6
+  },
+  "resolved_finding": {
+    "priority": "P3",
+    "issue": "Status3 originally promised all output I/O failures although PCM publication errors are returned in a player-failure report/status1",
+    "resolution": "C header and Rust docs now specify status1 for any player-run error including input/PCM I/O; status3 only directory/result publication failure; source behavior unchanged"
+  },
+  "reviewed": [
+    "Compared lib.rs mechanically with prior main.rs: argument source/report callback extraction only; all parser/simulation/publication and feature-gated paths preserved",
+    "Bounded byte/path/tick/viewport admission and deny_unknown_fields; absolute paths cannot inject CLI flags; ordinary package route remains fixed and no module/window override is exposed",
+    "C pointer preflight avoids slice construction for null/zero/oversize; unsafe readable immutable caller allocation contract is explicit",
+    "Fresh-directory reservation; create-only PCM and synced staged no-clobber result; no multi-file rollback/durability claim",
+    "Tests exercise cooked native movement/input/observations/silent PCM/repeat and create-only reuse refusal, malformed requests/checksum refusal, and late guest failure with report/no PCM",
+    "Reviewed optional CPU/GPU/window gates and build-linked program selector; no new source compiler, arbitrary loader, per-tick JSON or authoring dependencies"
+  ],
+  "limits": [
+    "Source-only independent review; no local test/build rerun",
+    "Feature compatibility, C/Swift calls, iOS/Android compile and final execution evidence remain root-owned pending checks",
+    "No device/frame-time/rendered/audio-device/performance or full mobile host acceptance",
+    "C ABI requires valid caller memory; it does not promise recovery from Rust panics or allocation aborts",
+    "Player assertion failure may publish completed PCM under unchanged CLI semantics; failure reports distinguish it from a simulation abort"
+  ]
+}

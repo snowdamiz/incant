@@ -109,6 +109,7 @@ fn audio_scene(rate: u32, streaming: bool, physics: bool) -> CookedScene {
                 bus: None,
                 listener: false,
                 source: Some(NativeAudioSource {
+                    transport_epoch: 0,
                     clip: id(90),
                     bus: None,
                     gain_db: 0.,

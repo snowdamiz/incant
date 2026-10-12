@@ -119,6 +119,14 @@ pub(crate) fn cook(
         if let Some(ik) = decode!("AnimationIk", incant_doc::AnimationIk) {
             node.ik = Some(animations.bind_ik(&assets[&mesh.mesh], node.entity, &ik)?);
         }
+        if let Some(root) = decode!("AnimationRootMotion", incant_doc::AnimationRootMotion) {
+            node.root_motion = Some(animations.bind_root_motion(
+                &assets[&mesh.mesh],
+                node.entity,
+                &root,
+                node.animation.as_deref().expect("cooked animation"),
+            )?);
+        }
     }
     if let Some(env) = decode!("EnvironmentLight", incant_doc::EnvironmentLight) {
         let texture = bind(project, &env.texture, VisualAssetKind::Texture, assets)?;

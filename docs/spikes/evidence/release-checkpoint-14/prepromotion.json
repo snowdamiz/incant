@@ -1,0 +1,40 @@
+{
+  "at": "2026-10-12T20:48:06.646049+00:00",
+  "checkpoint": 14,
+  "candidate": "e9c0b288489217500fed8b17ba22fbc0e677fedd",
+  "selected_main": "d1ef35ee32b92e6756b528463ab092fdc79c7ef4",
+  "tree": "c0137be6889607ea302d6cd3312a5a9f78f2c938",
+  "release_before": "b614679a1d48aba6e4ff5387974351602de5c026",
+  "main_now": "5bdb77ac11a73c4110e45d8dbb82bfe6ce3aacbe",
+  "pr": "https://github.com/snowdamiz/incant/pull/133",
+  "required_contexts": 23,
+  "all_required_success": true,
+  "push_workflows": 8,
+  "all_push_workflows_success": true,
+  "candidate_exact_selected_tree": true,
+  "candidate_contains_release_and_selected": true,
+  "protection_unchanged": true,
+  "prior_failed_checkpoints_preserved": true,
+  "candidate_commit": "commit e9c0b288489217500fed8b17ba22fbc0e677fedd\nMerge: 5a033ace d1ef35ee\nAuthor:     snowdamiz <43323844+snowdamiz@users.noreply.github.com>\nAuthorDate: Mon Oct 12 15:29:03 2026 -0400\nCommit:     snowdamiz <43323844+snowdamiz@users.noreply.github.com>\nCommitDate: Mon Oct 12 15:29:03 2026 -0400\n\n    Freeze repaired main160 for release checkpoint14\n    \n    Built-by: astra",
+  "artifacts": {
+    "terminal-state.json": "405f2b0812399cf5cf3bfa25ac9d52413e005f144f17939822d6176c921bae7f",
+    "runs-final.json": "9b483d7d4f6db0a64afda6cab1fb39ad10a4e7bd42c8adf4ea7fb68837368505",
+    "pr-final.json": "66b29d1b92ffe92f1afd25124af4f2410faa9b106e5753313b62b2c926d14a1a",
+    "observations.jsonl": "c1f66e6d8d95f7feae16145076e38386e3b3a66c24566219a948d265bbf63ca0",
+    "pr-body.md": "859ed66052e313f6fdf516bda925ea8b2919233349477859073201d1cc2c954f",
+    "initial-runs.json": "9b6b8188d85e24193405558b0c4383c59e8907fae5b628c0771a6b2c28f96b5d",
+    "protection-final.json": "09fa0f6fed923b02c858824b316c8f29f45a20cb001a634685b60a1332218058",
+    "protection.json": "5c904412bdd5bb66a2b99566fb8ee8737be1207963224c1a7b33a8ef08d74057",
+    "previous-terminal.json": "62626e0ed63e8ea5849fe701253ecb181913b6da1117c2f3399fbf05bdcde932",
+    "release-to-selected.paths": "c3b5497ec117b897c8a31d743ff6fae3a929fa88a5cf40968833637051713d38",
+    "release-to-selected.stat": "2c97ab12a5feb033869833681bd15706f5e18f7363faaaa896f5f8b289b6aa5b",
+    "manifest.json": "81cdcee0608051d1cefab63394e89d848dc92f7ccbfb727dd05dea68d66329f9",
+    "latest-state.json": "405f2b0812399cf5cf3bfa25ac9d52413e005f144f17939822d6176c921bae7f",
+    "watch.log": "255a25fc6800f0c2cb57cbcbcbe3e28258ed014767fcefb0f243e994db25a57f",
+    "required-final.json": "c2d8790fc7de33c986f5445c50578937448f2d9f818decb3f915f269ce9ac871"
+  },
+  "limitations": [
+    "Selected main160 only; later main161+ feature integrations remain outside this tested release tree.",
+    "Promotion is a tested integration baseline, not a Phase1 or device/performance gate approval."
+  ]
+}

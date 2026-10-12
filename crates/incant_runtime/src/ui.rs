@@ -130,13 +130,18 @@ impl NativeWorld {
     ) -> Result<Option<PendingUi>, RuntimeError> {
         use crate::StructuralCommand as C;
         if commands.is_empty()
-            || (self.ui.is_empty() && !commands.iter().any(|c| matches!(c, C::SetUi { .. })))
+            || (self.ui.is_empty()
+                && !commands
+                    .iter()
+                    .any(|c| matches!(c, C::SetUi { .. } | C::ControlUi { .. })))
         {
             return Ok(None);
         }
         // Numeric/control-only ticks cannot change membership or hierarchy.
         if !commands.iter().any(|c| match c {
-            C::SetUi { .. } | C::SetText { .. } => true,
+            C::SetUi { .. } | C::SetText { .. } | C::ControlUi { .. } | C::ControlText { .. } => {
+                true
+            }
             C::Spawn(e) => e.parent.is_some_and(|p| self.ui.contains_key(&p)),
             C::Despawn(id) => self.ui.contains_key(id),
             C::SetParent { entity, parent } => {
@@ -168,6 +173,36 @@ impl NativeWorld {
                 }
                 C::SetParent { entity, parent } => {
                     parents.insert(*entity, *parent);
+                }
+                C::ControlUi { entity, control } => {
+                    if removed.contains(entity) {
+                        return Err(RuntimeError::MissingEntity(*entity));
+                    }
+                    let node = nodes.get_mut(entity).ok_or(SceneError::Invalid(
+                        "HUD control requires an existing widget",
+                    ))?;
+                    match control {
+                        crate::UiControl::Disabled(value) => {
+                            if node.disabled != *value {
+                                Arc::make_mut(node).disabled = *value;
+                            }
+                        }
+                        crate::UiControl::Text(value) => {
+                            let old = node
+                                .kind
+                                .text()
+                                .ok_or(SceneError::Invalid("HUD text requires a text widget"))?;
+                            if old.content.as_str() != value.as_ref() {
+                                let text = match &mut Arc::make_mut(node).kind {
+                                    incant_types::UiKind::Label { text }
+                                    | incant_types::UiKind::Button { text }
+                                    | incant_types::UiKind::TextInput { text } => text,
+                                    _ => unreachable!(),
+                                };
+                                text.content = value.to_string();
+                            }
+                        }
+                    }
                 }
                 C::SetUi { entity, node } => {
                     if removed.contains(entity)
@@ -288,6 +323,13 @@ impl NativeWorld {
             match c {
                 C::Despawn(id) => {
                     text_bytes.remove(id);
+                }
+                C::ControlText {
+                    entity,
+                    control: crate::TextControl::Content(text),
+                } => {
+                    // prepare_text separately checks the ordered component lifetime.
+                    text_bytes.insert(*entity, text.len());
                 }
                 C::SetText { entity, text } => {
                     if let Some(t) = text {

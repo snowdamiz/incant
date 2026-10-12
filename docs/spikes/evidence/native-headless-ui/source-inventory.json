@@ -1,0 +1,24 @@
+{
+  "base": "67174c3a8a6e05b4966ce8570921fe20f4675dfe",
+  "sources": {
+    "Cargo.lock": "3fa73f59e4c341e6841e9fb1c3d2283035333165d68df72c405fac441f0f42f6",
+    "crates/incant_agent/src/play.rs": "337f4f9303733a378513744ff41d2288692f31ccde5161710a558919759b625d",
+    "crates/incant_agent_native/src/controller.rs": "db5fa1b09c51f467ff25b3b6a696c192b410b26ba46a64af4379a3e074560cdb",
+    "crates/incant_agent_native/src/controller/run.rs": "0aac10b089f38d1e66de4a01386af85709f55967107534437bcf5732864136eb",
+    "crates/incant_agent_native/src/session.rs": "145d3b9b7e9d6b22b984f1e33532d31c17fea95c4669e6e0e00dc21ca8845485",
+    "crates/incant_game_player/src/ui.rs": "54b7332c91cf2bb9d2fc97c71f8ddff33c12215eb13188ed796bef2c3bb55bfd",
+    "crates/incant_headless/Cargo.toml": "5b7f34843b150bf3d99a2e076b68ec15d7060eb4605f2af747dbade55812d2c9",
+    "crates/incant_headless/src/native_play.rs": "a59f08bb32a489e9267ad079bb2d68dd50474859c99e86873030d3ded782daac",
+    "crates/incant_headless/tests/native_ui.rs": "2b07cff2c6fc62586b3e9dcbf44d3d875152b2e18378c88858a0455959f0cfde",
+    "crates/incant_input/src/recording_ui.rs": "edba69d605a80076a9c0b2bfc74bde1bbff7686eb414481b8934b591272a72ee",
+    "crates/incant_play/src/control.rs": "18b8825bdb25a2a9f24b4a2081657a2643b262af5f6eebf9cb29626db8e0bd8c",
+    "crates/incant_play/src/lib.rs": "ad150c6235a565f3b5e36bf3f32afed7684836b1184a500d3da420263eafe349",
+    "crates/incant_play/tests/startup.rs": "8d79f3f7036c26dcd0d066b441ac610eed3ad7c87d6c5e2977e00bd4c944c9f7",
+    "crates/incant_render_game/Cargo.toml": "33b0364f645c22d1752e4d464760920ac23fcc6683592aedd39d344921f75a31",
+    "crates/incant_render_game/src/lib.rs": "d187fd6678691b0a23267120970154f5734a76761438923b171b3b0031532005",
+    "crates/incant_render_game/src/recorded_ui.rs": "b84ed52bdf728025541cc59ba01e9248af81f0718eea7eaf498f2808a2f91d57",
+    "crates/incant_render_game/tests/ui.rs": "02c37b023a03dc1ce8bda328204ec7b8d05f435f3f0507924d5ddf2a1a249f5f",
+    "crates/incant_render_game/tests/ui/recorded.rs": "65f34a8c1841cc0ac14a78594eea9aa3eaafc0e466764ed1c6c556ed36738615",
+    "schemas/agent-tools.json": "0f93d5c21097c223fc5bb3700c1d65efd03cf371ddd55ca03aaadc8f5fa2c690"
+  }
+}

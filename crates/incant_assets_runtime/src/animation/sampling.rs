@@ -50,34 +50,27 @@ pub(super) fn sample(data: &AnimationData, sample: ClipSample, out: &mut [Option
 /// The same checked cooked channel arithmetic used by full-pose and root-track
 /// sampling. Callers validate the retained data and finite time before entry.
 pub(super) fn channel(ch: &Channel, seconds: f64) -> [f32; 4] {
-    let upper = ch.times.partition_point(|&t| f64::from(t) <= seconds);
-    let a = upper.saturating_sub(1).min(ch.times.len() - 1);
-    let b = upper.min(ch.times.len() - 1);
-    let alpha = if a == b || ch.interpolation == Interpolation::Step {
-        0.
-    } else {
-        ((seconds - f64::from(ch.times[a])) / f64::from(ch.times[b] - ch.times[a])).clamp(0., 1.)
-    };
-    let first = ch.values[a];
-    let next = ch.values[b];
-    if ch.property == Property::Rotation {
-        rotation(first, next, alpha)
-    } else {
-        [
-            linear(first[0], next[0], alpha),
-            linear(first[1], next[1], alpha),
-            linear(first[2], next[2], alpha),
-            0.,
-        ]
-    }
+    use incant_anim::track::{Interpolation as I, Kind};
+    incant_anim::track::sample_channel(
+        &ch.times,
+        &ch.values,
+        match ch.interpolation {
+            Interpolation::Linear => I::Linear,
+            Interpolation::Step => I::Step,
+        },
+        if ch.property == Property::Rotation {
+            Kind::Rotation
+        } else {
+            Kind::Vector
+        },
+        seconds,
+    )
 }
 fn linear(a: f32, b: f32, alpha: f64) -> f32 {
-    (f64::from(a) * (1. - alpha) + f64::from(b) * alpha) as f32
+    incant_anim::track::linear(a, b, alpha)
 }
 fn rotation(a: [f32; 4], b: [f32; 4], alpha: f64) -> [f32; 4] {
-    let a = DQuat::from_array(a.map(f64::from)).normalize();
-    let b = DQuat::from_array(b.map(f64::from)).normalize();
-    a.slerp(b, alpha).normalize().to_array().map(|v| v as f32)
+    incant_anim::track::rotation(a, b, alpha)
 }
 pub(super) fn blend(from: &mut [Option<NodeTrs>], to: &[Option<NodeTrs>], alpha: f64) {
     for (from, to) in from.iter_mut().zip(to) {

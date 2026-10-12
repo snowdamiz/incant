@@ -195,6 +195,9 @@ impl CookedScene {
     pub fn has_text(&self) -> bool {
         !self.font_assets.is_empty() || !self.texts.is_empty()
     }
+    pub fn has_root_motion(&self) -> bool {
+        self.spatial.iter().any(|n| n.root_motion.is_some())
+    }
     pub fn has_ik(&self) -> bool {
         self.spatial.iter().any(|n| n.ik.is_some())
     }
@@ -221,9 +224,18 @@ impl CookedScene {
             })
     }
     fn text_bytes(&self) -> usize {
-        if self.has_text() || self.has_ui() || self.has_animation_graphs() || self.has_ik() {
+        if self.has_text()
+            || self.has_ui()
+            || self.has_animation_graphs()
+            || self.has_ik()
+            || self.has_root_motion()
+        {
             crate::text_binary::size(&self.font_assets, &self.texts)
-                + if self.has_ui() || self.has_animation_graphs() || self.has_ik() {
+                + if self.has_ui()
+                    || self.has_animation_graphs()
+                    || self.has_ik()
+                    || self.has_root_motion()
+                {
                     crate::ui_binary::size(&self.ui)
                 } else {
                     0
@@ -287,9 +299,15 @@ impl CookedScene {
         &self.visual_assets
     }
     fn spatial_bytes(&self) -> usize {
-        usize::from(self.has_compound_animation_fades()) * 8
-            + usize::from(self.has_ik() || self.has_compound_animation_fades()) * 4
-            + usize::from(self.has_animation_graphs() || self.has_ik()) * 4
+        (if self.has_compound_animation_fades() || self.has_root_motion() {
+            crate::root_motion::binary::encoded_size(&self.spatial)
+        } else {
+            0
+        }) + usize::from(
+            self.has_ik() || self.has_compound_animation_fades() || self.has_root_motion(),
+        ) * 4
+            + usize::from(self.has_animation_graphs() || self.has_ik() || self.has_root_motion())
+                * 4
             + usize::from(
                 self.has_text()
                     || !self.navigation.is_empty()
@@ -329,6 +347,7 @@ impl CookedScene {
     pub(crate) fn validate_physics_2d(&self) -> Result<(), SceneError> {
         let entities: BTreeMap<_, _> = self.entities.iter().map(|e| (e.id, e)).collect();
         self.validate_ui(&entities)?;
+        crate::root_motion::policy::validate_scene(self, &entities)?;
         crate::text::validate(
             &self.font_assets,
             self.texts.iter().map(|n| (n.entity, n.text.as_ref())),

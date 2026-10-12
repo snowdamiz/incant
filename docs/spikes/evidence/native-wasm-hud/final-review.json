@@ -1,0 +1,37 @@
+{
+  "at": "2026-10-12T19:49:44.430025+00:00",
+  "accepted": true,
+  "reviewed_commit": "b897acabc035247635f4a9b70a75a7edea154b79",
+  "manifest_sha256": "9dd8bbb40870d906342aa81abd838d0bcf268d99f189d4e6c8fc1e9051167ee7",
+  "source_counts": {
+    "sources": 30,
+    "build_inputs": 10,
+    "engine_inputs": 1710
+  },
+  "later_checkout_changes_verified_from_immutable_commit": [],
+  "retained_logs": 29,
+  "retained_artifacts": 88,
+  "ordinary": {
+    "passed": 365,
+    "groups": 75
+  },
+  "actual_hosts": {
+    "passed": 3,
+    "public_guest_identity_matches": true
+  },
+  "fresh_processes": 3,
+  "package_files": 22,
+  "command_receipts": 15,
+  "precise_refusals": 6,
+  "actual_shaped_text_focus_notifications": true,
+  "finite_nonzero_repeat_pcm": true,
+  "source_build_cache_maps_removed": true,
+  "source_followup": "Reviewed complete public helper; expected_logs uses supported CJK fixture, exported project/player/input Wasm identities verified, immutable source003 matches. Existing source reviews992e0d6d and4cec8dbd remain applicable.",
+  "limits": [
+    "No module checkpoint continuation: exact static-module state ABI refusal remains.",
+    "No native window, GPU, rendered appearance, live IME or phone/device performance evidence.",
+    "Headless native-play UI viewport/recorded UI routing is a separate next slice.",
+    "All earlier actual module conformance suites were not rerun: full ordinary affected tests plus actual HUD both-host cases and all-target Clippy are the stated scope."
+  ],
+  "findings": []
+}

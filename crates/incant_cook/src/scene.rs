@@ -27,6 +27,11 @@ pub enum CookError {
     NavigationResource(String),
     #[error("missing, invalid or stale cooked animation resource for model {0}")]
     AnimationResource(String),
+    #[error("invalid root-motion resource on {entity}: {reason}")]
+    RootMotionResource {
+        entity: String,
+        reason: &'static str,
+    },
     #[error("invalid stable ID {0}")]
     InvalidId(String),
     #[error("component decoding failed: {0}")]
@@ -143,6 +148,7 @@ pub(crate) fn cook_validated_scene_with_resources(
                 "Animation",
                 "AnimationGraph",
                 "AnimationIk",
+                "AnimationRootMotion",
                 "SpriteRenderer",
                 "SpriteFlipbook",
                 "Tilemap",
@@ -237,6 +243,7 @@ pub(crate) fn cook_validated_scene_with_resources(
             let source = source
                 .map(|s| {
                     Ok::<_, CookError>(NativeAudioSource {
+                        transport_epoch: 0,
                         clip: stable_id(&s.clip)?,
                         bus: s.bus.as_deref().map(stable_id).transpose()?,
                         gain_db: s.gain_db,

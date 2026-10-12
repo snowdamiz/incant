@@ -1,0 +1,19 @@
+{
+  "wabt": "1.0.42",
+  "modules": [
+    {
+      "name": "rust-hud",
+      "prefix": "m0",
+      "input_sha256": "354810fda6efcbf3c457d964c9661fa59ea3d47c4a2ba7eca2a0d1e636b6248b",
+      "prepared_sha256": "20015a06a9d17da7f5b45d37f7b5ee51e8c7e12017d9105c27d8cf8978b55e93"
+    }
+  ],
+  "files": {
+    "linked.rs": "6a61e47eb9b5944058f6d9080c4efc0c989c882d434cb2e82889c454809eec14",
+    "m0-facade.c": "8444facf73c4951689c89d5e6c3d2b38022e22ead1e4a20f4f6b3116743173f6",
+    "m0.c": "ce7947c68726b303a3a6d0da31490f23affa91d01727cb15166c472e72df1736",
+    "m0.h": "ad31a85bfc00032993a1d66ecd1425a5167e98d7a49fbca92f8458b37877b8e2",
+    "m0.original.wasm": "354810fda6efcbf3c457d964c9661fa59ea3d47c4a2ba7eca2a0d1e636b6248b",
+    "m0.wasm": "20015a06a9d17da7f5b45d37f7b5ee51e8c7e12017d9105c27d8cf8978b55e93"
+  }
+}

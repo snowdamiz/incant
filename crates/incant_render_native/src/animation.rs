@@ -85,3 +85,32 @@ pub(crate) fn validate_ik(
     // the canonical consumer, before private staging is published or uploaded.
     Ok(())
 }
+
+pub(crate) fn validate_root(
+    entity: StableId,
+    source: &RuntimeAsset,
+    definition: Option<&incant_runtime::NativeRootMotion>,
+) -> Result<(), NativeRenderError> {
+    let Some(definition) = definition else {
+        return Ok(());
+    };
+    let invalid = || NativeRenderError::Animation {
+        entity,
+        reason: "root catalog differs from cooked model",
+    };
+    let RuntimeAssetData::Model(model) = source.data() else {
+        return Err(invalid());
+    };
+    // Binding/structural boundary only. Compare the complete retained root-only
+    // payload against the same canonical compiler used by ordinary cooking.
+    let actual = incant_assets_runtime::animation::compile_root_motion_catalog(
+        model,
+        definition.catalog.fingerprint(),
+        definition.catalog.root(),
+    )
+    .map_err(|_| invalid())?;
+    if actual != *definition.catalog {
+        return Err(invalid());
+    }
+    Ok(())
+}

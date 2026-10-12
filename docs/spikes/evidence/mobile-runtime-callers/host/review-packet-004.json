@@ -1,0 +1,170 @@
+{
+  "sources": {
+    "tools/probes/mobile-runtime-library/README.md": "04ad28d30beb8537c8b4d09a01bc8562ef6a32b056ef46d46cbf9760bf27e98e",
+    "tools/probes/mobile-runtime-library/android.py": "0711f68313ed6ad618330fee3ed9759a9671006e90f8e34b4956f4b37295225c",
+    "tools/probes/mobile-runtime-library/caller.c": "e845661a38a2a7aae01e1cbcb383ded6d96711f0fa14b30a157f11402b6742da",
+    "tools/probes/mobile-runtime-library/caller.swift": "2fcf641ff056509d6ca8f52d8d6fbe289cf26781e29ac89c42639aa8a5f9e14a",
+    "tools/probes/mobile-runtime-library/fixture/Cargo.lock": "d14089719d65247a5356de15ff6df1aa3c14f7c7ba93c7796599e3b3bad75725",
+    "tools/probes/mobile-runtime-library/fixture/Cargo.toml": "904307ecbb2ac80a2abd3c8e223304c44c8181c67b69ef5741d21cb47df77d9e",
+    "tools/probes/mobile-runtime-library/fixture/src/main.rs": "a02f85f8734420924d99e26fa213b02ab60961af3e8cf71a43f2c91d15efdbe8",
+    "tools/probes/mobile-runtime-library/test_verify.py": "f401855a09054862141b144b8e4f33cf45f22e59c4f5be3b7042df6b08c87d59",
+    "tools/probes/mobile-runtime-library/verify.py": "7f870ab995e14de1336f277dbbd6eb4042d600ab41a0866b23fc75022ace7c84"
+  },
+  "base": "08185b2705094e7308880e5fb132bb9c7860575e",
+  "archive_receipt": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-library-001/receipt.json",
+    "sha256": "54699cfb8130201403af5d1756cb2b6471ca76bb4eb5bbb9357c1c5c24d4c2d5"
+  },
+  "source_and_header_owner": "root mobile library bd6dada2; compiler compatibility separate native_wasm_export lane",
+  "fixture_binary": {
+    "path": "/tmp/incant-font-atlas-target/release/incant-mobile-runtime-fixture",
+    "sha256": "d23bd37a07a1e60d57ad577deb44e2e068d3ff2c5df26336f2adb5b001419774"
+  },
+  "fixture_build": {
+    "first_handle": 17161,
+    "first_exit": 143,
+    "reason": "Controlled cancellation before checking standalone rerecast patch; no execution claim.",
+    "final_handle": 68411,
+    "final_exit": 0,
+    "clippy_handle": 12644,
+    "clippy_exit": 0
+  },
+  "actual_mac_proof": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/result.json",
+    "sha256": "948c3ce2f915f7049c926111522c8011edb9014f956e3fad21f5b0ae0410d56b",
+    "commands": 39,
+    "controls": 32,
+    "handle": 57513,
+    "exit_code": 0
+  },
+  "prior_failed_oracle": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-001/result.json",
+    "handle": 34020,
+    "exit_code": 1,
+    "correction": "Exact diagnostic includes script tick failed; runtime/library unchanged."
+  },
+  "checks": [
+    {
+      "argv": [
+        "python3",
+        "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/tools/probes/mobile-runtime-library/test_verify.py"
+      ],
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/unit.log",
+      "sha256": "5279d1fc9a1ced44f9c96da1414ef59e4676f963fbad52e7a1a2903538819b0d"
+    },
+    {
+      "argv": [
+        "cargo",
+        "fmt",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/tools/probes/mobile-runtime-library/fixture/Cargo.toml",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "py_compile",
+        "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/tools/probes/mobile-runtime-library/verify.py",
+        "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/tools/probes/mobile-runtime-library/android.py"
+      ],
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/python.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/diff.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "logs": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/verify-001.log",
+      "sha256": "dd59b518f9e2418af251bbe9ce7b0143bac7edf73bb6b4239e5e54da6ca28b19",
+      "bytes": 1420
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/verify-002.log",
+      "sha256": "bb67ea16ccae9b2d6a5d15cb98536dfd6a656d51c5df7014f49e86770580b8a5",
+      "bytes": 88
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/fixture-build-001-cancelled.log",
+      "sha256": "099b51279c1fde1b51fcbb4efbaac76a178654ecb66b053f38ffaa9c572d15ca",
+      "bytes": 1861
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/unit.log",
+      "sha256": "5279d1fc9a1ced44f9c96da1414ef59e4676f963fbad52e7a1a2903538819b0d",
+      "bytes": 101
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/fixture-clippy-001.log",
+      "sha256": "a0cc9e0b5a30eed90a52a4a743bcdcbb111ccf3531c373869cb31b2b55269229",
+      "bytes": 4789
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/python.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/diff.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/fixture-build-002.log",
+      "sha256": "8b4bb27054662ffaf1cb4d40345b1c5307dca298c147298f03c9ad75985d0b32",
+      "bytes": 4084
+    }
+  ],
+  "scope": "macOS actual C/Swift default fixture proof; numeric guest receipt and iOS/Android harness paths not yet executed.",
+  "pending": [
+    "iOS same-bytecode accepted producer/archive and headless simulator execution",
+    "iOS device archive and link-only evidence",
+    "Android target producer/consumer contract before candidate CI step",
+    "independent source/proof review"
+  ],
+  "prior_source_packet": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/review-packet.json",
+    "sha256": "8bf71dd7f5861d831826147b23958de7ffd89afa2d0e160e9358e687c0e68672"
+  },
+  "post_proof_source_delta": "Only added missing/wrong-tick log rejection unit test and README wording; actual verify.py/C/Swift/typed fixture exact.",
+  "proof_readme": {
+    "retained": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/source-freeze-003/tools/probes/mobile-runtime-library/README.md",
+    "sha256": "b4bdc21101475d1434e3457cc3add1921a5a78fa23a0372ac3e988cf0cbcb806",
+    "qualification": "Exact prose captured by actual run003. Current README has a docs-only post-run update from 30 to 32 controls and describes linked_guest validation; no rerun for prose."
+  }
+}

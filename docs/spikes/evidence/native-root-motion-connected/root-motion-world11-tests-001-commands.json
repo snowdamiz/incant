@@ -1,0 +1,27 @@
+[
+  {
+    "command": [
+      "./tools/cargo",
+      "fmt",
+      "--all"
+    ],
+    "status": 0,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-world11-tests-001/00.log"
+  },
+  {
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_runtime",
+      "--lib",
+      "root_motion"
+    ],
+    "status": 0,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-world11-tests-001/01.log"
+  }
+]

@@ -22,9 +22,12 @@ pub struct RunRequest {
     /// Authored camera for retained CPU render validation of spatial scenes.
     /// This host does not capture gameplay frames.
     pub camera: Option<String>,
+    /// Explicit UI viewport in logical pixels, each finite and within 1..=65536.
+    /// Requires a camera; omission preserves the non-UI host.
+    pub ui_viewport: Option<[f32; 2]>,
     /// Optional expected identity of the behavior embedded by the trusted cook.
     pub script_sha256: Option<String>,
-    /// Data-only incant-input v1 recording, starting at tick zero. No code runs.
+    /// Data-only incant-input v1/v2 recording, starting at tick zero. No code runs.
     pub inputs_script: Option<incant_input::InputRecording>,
     /// Typed native checks and selected final entities; no full-world snapshot.
     pub observe: Option<incant_observe::Request>,

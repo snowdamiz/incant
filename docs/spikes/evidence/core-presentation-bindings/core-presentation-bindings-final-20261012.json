@@ -1,0 +1,150 @@
+{
+  "accepted": true,
+  "scope": "Independent read-only source and retained actual CPU public-player execution audit; no rebuild or new execution",
+  "reviewed_source": {
+    "samples/core/gameplay.ts": "6901e09d862745a9408bdcbf725ee6bc58da6315f05a52edbec991021210c00b",
+    "samples/core/verify_presentation.py": "42ff52aae1c2ca0f923a4677f87f72e4bffe31193d19d6ba8249cadfbad477bc",
+    "samples/core/verify.py": "63830ec6225ddf9bc82dceed2c1791912fd30c6fd2db5426f07095ab329974ca",
+    "tools/export_native.py": "a22f6431bb6db373982970e53a219f1f57633c538e08055bcafacefa887699a1"
+  },
+  "prior_frozen_inputs": {
+    "samples/core/gameplay.ts": "6901e09d862745a9408bdcbf725ee6bc58da6315f05a52edbec991021210c00b",
+    "samples/core/verify_presentation.py": "fc374493d485f224c0112f218c6926b04f75fc867a2e16b42720cb69b5e6a179",
+    "tools/export_native.py": "a22f6431bb6db373982970e53a219f1f57633c538e08055bcafacefa887699a1"
+  },
+  "original_run": "003 completed shipping and first actual win then failed wrong helper health3 assertion; unchanged controller takes damage126 then wins165 at health2",
+  "correction": "Final helper health2 oracle and existing-proof source/export/player binding read; no game/engine change",
+  "proof_root": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-003",
+  "verified_root": "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004",
+  "player_sha256": "b38b808047247912cdd80024560e831bb605ee2deb1f82957ca54224bddc66d0",
+  "player_bytes": 9417408,
+  "package_files": {
+    "build.log": "18cb0f8a52fdcebdadf890bc50ecde0b73faafee6eae84beec26e871e5f6f2c4",
+    "export.json": "c341c465695afad5c31ee33245565d9e0b4212d8619e0dab5b785f23a76bc4fd",
+    "player/data/audio/0d703edf8fc9341848b5c265fd4ece9171d98693d0d64f74148641ef1ae6df4e.ipcm": "0d703edf8fc9341848b5c265fd4ece9171d98693d0d64f74148641ef1ae6df4e",
+    "player/data/audio/2398da29e2def0b16fccdcacba29b8a83e3aa0c7f1132ac7b83f30968b5cf102.json": "15f5ddadde2cb5f7352de105d2d7fdc87fbb0084b042e59bf4b9ed61346f4849",
+    "player/data/audio/395329b5981927a184aa612c4709fbdaae717a7fb1ef7df8c81b535721e2a9fa.json": "de730c367d68e88d68db1cbb8d7b23d26d6a31f86adc22de71735865f70a2cfe",
+    "player/data/audio/3b9d7408f9e8467a46f26b7d43bc4b3230faf7ce549445ed1756fc7838752f84.json": "2df70e6b78b69baf75da3020b37e52a34a2a821726987bb6eeca68d51545c402",
+    "player/data/audio/3c1296a9c03eda2e90ade53650776166ac3126345dfa13690052feaf390506a0.json": "df160fecacfa564c74bf33af9351faa138dadeafa89434ab23debc02187ff0ed",
+    "player/data/audio/459081754b942c81495b0e5cd4ac8773100ff7fabd52a54fa8c6a2daeaf53d71.ipcm": "459081754b942c81495b0e5cd4ac8773100ff7fabd52a54fa8c6a2daeaf53d71",
+    "player/data/audio/76d1d2b6b7ec18a99448e0d3651057014a3952a2a3df4d307c998e07a303d8fe.ipcm": "76d1d2b6b7ec18a99448e0d3651057014a3952a2a3df4d307c998e07a303d8fe",
+    "player/data/audio/a32b666415328455ef62426b3b10bba357c757246d4209dbaa2f58ce6ccbe852.json": "298895127a2e1013ed8cab96d941c7cfcfce24602299580d51807ee7a1c4dfb0",
+    "player/data/audio/c85ced8e077bc39729e9f18405bc8218eb0e4ee91840428fd07237b2336871a5.ipcm": "c85ced8e077bc39729e9f18405bc8218eb0e4ee91840428fd07237b2336871a5",
+    "player/data/audio/f01894a8ef6dd549b16b0130e4404b0ec83df571bc821f76100648e100f4306a.ipcm": "f01894a8ef6dd549b16b0130e4404b0ec83df571bc821f76100648e100f4306a",
+    "player/data/clips.bin": "82f456cb76c8e5aad6ef66fa1ebc6f04c819ac5fa3075ccd970bd237e0616a62",
+    "player/data/empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+    "player/data/fonts/2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9.ifont": "92960e6b23eff12e1bf13361b2b94b490d723f8d93e6945ba34b9f9b3acd2081",
+    "player/data/fonts/9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2.json": "e43c79c54c311c5759bdf686b43b9b112b0177bafd6938782ebb782d75018812",
+    "player/data/input-actions.json": "3abebf19161a74551e30b7d541d57c3ac90b3df43b35396a39baa4e305985c4c",
+    "player/data/package.json": "cd1b99e66d6821467256d7712c17aca07e01a0fe2209c46b01ec0b1cb31d2de5",
+    "player/data/world.scene": "3bc8ddd05385d0c23fd0eed7856efd7abcb933710743bb20a4dd87d14f8fb3d4",
+    "player/incant_game_player": "b38b808047247912cdd80024560e831bb605ee2deb1f82957ca54224bddc66d0",
+    "project-build.json": "31da313ff6974e8093c50254dbb255eb1f647ce6fe307502c342b08ebfb04631",
+    "symbols/incant_game_player.dSYM/Contents/Info.plist": "a8d3a618bb73a8acdd7f8c77e4e31fb4dfb4ff2b91f5992469a6b14e4cdc95c6",
+    "symbols/incant_game_player.dSYM/Contents/Resources/DWARF/incant_game_player-f2e027ae213e9d9f": "ad5f0de999d8e455861b61e43f6542d406db713b3968b8ff24cdf914cf56ca7c",
+    "symbols/incant_game_player.dSYM/Contents/Resources/Relocations/aarch64/incant_game_player-f2e027ae213e9d9f.yml": "3db5ec738af1a80ec4edd2a39fa75899f1eceb6cb6df20e2cd157463ff1e5ae2",
+    "symbols/script-symbols.json": "c01b78f2daa6696c1fc75f7538f0f25635876e8003e9ae81dcfef39e8c12d678"
+  },
+  "checks": [
+    {
+      "name": "win",
+      "tick": 300,
+      "pcm_bytes": 1920000,
+      "pcm_sha256": "5cc3227745f064c559e7f17dbe260006981b6b82d47dd0d92e2f13c5884de996",
+      "hud_publications": 6,
+      "core_events": [
+        [
+          50,
+          "core.pickup 00000000000000000000000012 1/2"
+        ],
+        [
+          126,
+          "core.damage health=2"
+        ],
+        [
+          130,
+          "core.pickup 00000000000000000000000013 2/2"
+        ],
+        [
+          165,
+          "core.won tick=165 health=2 pickups=2"
+        ]
+      ]
+    },
+    {
+      "name": "lose",
+      "tick": 900,
+      "pcm_bytes": 5760000,
+      "pcm_sha256": "c4baa82e7504eb240b6d4fa8108ff53530c4b4fa13176cac7bb2b4e9b13bc625",
+      "hud_publications": 6,
+      "core_events": [
+        [
+          322,
+          "core.damage health=2"
+        ],
+        [
+          367,
+          "core.damage health=1"
+        ],
+        [
+          412,
+          "core.damage health=0"
+        ],
+        [
+          412,
+          "core.lost tick=412"
+        ]
+      ]
+    },
+    {
+      "name": "repeat-win",
+      "tick": 300,
+      "pcm_bytes": 1920000,
+      "pcm_sha256": "5cc3227745f064c559e7f17dbe260006981b6b82d47dd0d92e2f13c5884de996",
+      "hud_publications": 6,
+      "core_events": [
+        [
+          50,
+          "core.pickup 00000000000000000000000012 1/2"
+        ],
+        [
+          126,
+          "core.damage health=2"
+        ],
+        [
+          130,
+          "core.pickup 00000000000000000000000013 2/2"
+        ],
+        [
+          165,
+          "core.won tick=165 health=2 pickups=2"
+        ]
+      ]
+    }
+  ],
+  "artifacts": {
+    "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004/lose-input.json": "e4707335c2d5116ef604c1976dbd864eeafab305cecd583a20795dd0d2976227",
+    "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004/lose-observe.json": "11c62726be7f32a1fca5d7224420afaa34febb43e76e26dc4db55d3de277fa5c",
+    "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004/lose.json": "451c4b93fac661f63d7d22e0a080b003c8f6ab42d4ca954ca06d4460ef5d4e22",
+    "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004/lose.pcm": "c4baa82e7504eb240b6d4fa8108ff53530c4b4fa13176cac7bb2b4e9b13bc625",
+    "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004/package-before.json": "a26d875329c8a0bb79b8c41b3587c142e3d582c233f15e6d27e9cf9c839ad7ed",
+    "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004/process-00.json": "c89d5c01ec95791a45db827cec13d1c1ab8a0862cbd48d31d1f5b6e291e5f934",
+    "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004/process-01.json": "6ab998f426da1b37b6b907e38730b89c543e38abedb38b9900cd929e707a51cf",
+    "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004/process-02.json": "bd4f8456bc71e51521cb1d3d47356c46c2ae8cc5a97c8d9b98fba678010d2597",
+    "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004/repeat-win-input.json": "aedbc57164dcdd45652c98f5c67e5f3987472eed5625f56ac0af0f9fea0cc731",
+    "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004/repeat-win-observe.json": "f477a3badfb468fd72e04780898dd88a50cd16ac3875795807466d83f53165d2",
+    "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004/repeat-win.json": "64db8a7b02cedda6829834417ff8df106b72cd1eb446ad566cdccb206d445432",
+    "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004/repeat-win.pcm": "5cc3227745f064c559e7f17dbe260006981b6b82d47dd0d92e2f13c5884de996",
+    "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004/result.json": "46e26f99ba1f06e68559a56340154c15896c4d0f055807c2e35a8fc0f7b545aa",
+    "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004/win-input.json": "aedbc57164dcdd45652c98f5c67e5f3987472eed5625f56ac0af0f9fea0cc731",
+    "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004/win-observe.json": "f477a3badfb468fd72e04780898dd88a50cd16ac3875795807466d83f53165d2",
+    "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004/win.json": "64db8a7b02cedda6829834417ff8df106b72cd1eb446ad566cdccb206d445432",
+    "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-004/win.pcm": "5cc3227745f064c559e7f17dbe260006981b6b82d47dd0d92e2f13c5884de996"
+  },
+  "limits": [
+    "Numerical UI fixture and observed wrapper, not authored visual-level/pixel acceptance",
+    "No new provider/native-window/GPU/device or physics/session-save evidence",
+    "Initial source review belongs to native_wasm_export; this closes final source/helper and retained execution scope"
+  ],
+  "findings": []
+}

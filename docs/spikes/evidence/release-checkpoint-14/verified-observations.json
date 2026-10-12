@@ -1,0 +1,40 @@
+{
+  "macos-general": {
+    "job": 114973645171,
+    "adapter_lines": [
+      "checks\tVerify geometry, editor recovery and simulated frame capture\t2026-10-12T19:52:59.2235010Z UI draw selected adapter: AdapterInfo { name: \"Apple Paravirtual device\", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: \"\", driver: \"\", driver_info: \"\", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }",
+      "checks\tVerify geometry, editor recovery and simulated frame capture\t2026-10-12T19:52:59.3270960Z UI draw selected adapter: AdapterInfo { name: \"Apple Paravirtual device\", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: \"\", driver: \"\", driver_info: \"\", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }",
+      "checks\tVerify geometry, editor recovery and simulated frame capture\t2026-10-12T19:52:59.5154170Z UI draw selected adapter: AdapterInfo { name: \"Apple Paravirtual device\", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: \"\", driver: \"\", driver_info: \"\", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }",
+      "checks\tVerify geometry, editor recovery and simulated frame capture\t2026-10-12T19:52:59.6243560Z UI draw selected adapter: AdapterInfo { name: \"Apple Paravirtual device\", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: \"\", driver: \"\", driver_info: \"\", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }",
+      "checks\tVerify geometry, editor recovery and simulated frame capture\t2026-10-12T19:52:59.7693950Z UI draw selected adapter: AdapterInfo { name: \"Apple Paravirtual device\", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: \"\", driver: \"\", driver_info: \"\", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }",
+      "checks\tVerify geometry, editor recovery and simulated frame capture\t2026-10-12T19:52:59.8434310Z UI draw selected adapter: AdapterInfo { name: \"Apple Paravirtual device\", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: \"\", driver: \"\", driver_info: \"\", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }"
+    ],
+    "retirement_lines": [
+      "checks\tRetire actual macOS text contexts without a visible window\t2026-10-12T19:43:38.7300110Z {\"active_owner_destroyed\":true,\"cycles\":256,\"gpu_submitted\":false,\"input_injected\":false,\"native_contexts\":768,\"passed\":true,\"stale_sessions_refused\":256,\"visible_window\":false}"
+    ]
+  },
+  "windows-desktop": {
+    "job": 114973528654,
+    "adapter_lines": [
+      "2026-10-12T20:14:18.8199820Z UI draw selected adapter: AdapterInfo { name: \"Microsoft Basic Render Driver\", vendor: 5140, device: 140, device_type: Cpu, device_pci_bus_id: \"\", driver: \"10.0.26100.33438\", driver_info: \"\", backend: Dx12, subgroup_min_size: 4, subgroup_max_size: 4, transient_saves_memory: false }",
+      "2026-10-12T20:14:19.7800924Z UI draw selected adapter: AdapterInfo { name: \"Microsoft Basic Render Driver\", vendor: 5140, device: 140, device_type: Cpu, device_pci_bus_id: \"\", driver: \"10.0.26100.33438\", driver_info: \"\", backend: Dx12, subgroup_min_size: 4, subgroup_max_size: 4, transient_saves_memory: false }",
+      "2026-10-12T20:14:20.7998276Z UI draw selected adapter: AdapterInfo { name: \"Microsoft Basic Render Driver\", vendor: 5140, device: 140, device_type: Cpu, device_pci_bus_id: \"\", driver: \"10.0.26100.33438\", driver_info: \"\", backend: Dx12, subgroup_min_size: 4, subgroup_max_size: 4, transient_saves_memory: false }",
+      "2026-10-12T20:14:21.7435145Z UI draw selected adapter: AdapterInfo { name: \"Microsoft Basic Render Driver\", vendor: 5140, device: 140, device_type: Cpu, device_pci_bus_id: \"\", driver: \"10.0.26100.33438\", driver_info: \"\", backend: Dx12, subgroup_min_size: 4, subgroup_max_size: 4, transient_saves_memory: false }",
+      "2026-10-12T20:14:22.6725530Z UI draw selected adapter: AdapterInfo { name: \"Microsoft Basic Render Driver\", vendor: 5140, device: 140, device_type: Cpu, device_pci_bus_id: \"\", driver: \"10.0.26100.33438\", driver_info: \"\", backend: Dx12, subgroup_min_size: 4, subgroup_max_size: 4, transient_saves_memory: false }",
+      "2026-10-12T20:14:23.6020533Z UI draw selected adapter: AdapterInfo { name: \"Microsoft Basic Render Driver\", vendor: 5140, device: 140, device_type: Cpu, device_pci_bus_id: \"\", driver: \"10.0.26100.33438\", driver_info: \"\", backend: Dx12, subgroup_min_size: 4, subgroup_max_size: 4, transient_saves_memory: false }"
+    ],
+    "retirement_lines": []
+  },
+  "linux-desktop": {
+    "job": 114973528158,
+    "adapter_lines": [
+      "desktop (ubuntu-latest, Linux)\tVerify geometry, editor recovery and simulated frame capture\t2026-10-12T19:41:06.9542099Z UI draw selected adapter: AdapterInfo { name: \"llvmpipe (LLVM 20.1.2, 256 bits)\", vendor: 65541, device: 0, device_type: Cpu, device_pci_bus_id: \"\", driver: \"llvmpipe\", driver_info: \"Mesa 25.2.8-0ubuntu0.24.04.4 (LLVM 20.1.2)\", backend: Vulkan, subgroup_min_size: 8, subgroup_max_size: 8, transient_saves_memory: false }",
+      "desktop (ubuntu-latest, Linux)\tVerify geometry, editor recovery and simulated frame capture\t2026-10-12T19:41:07.3493621Z UI draw selected adapter: AdapterInfo { name: \"llvmpipe (LLVM 20.1.2, 256 bits)\", vendor: 65541, device: 0, device_type: Cpu, device_pci_bus_id: \"\", driver: \"llvmpipe\", driver_info: \"Mesa 25.2.8-0ubuntu0.24.04.4 (LLVM 20.1.2)\", backend: Vulkan, subgroup_min_size: 8, subgroup_max_size: 8, transient_saves_memory: false }",
+      "desktop (ubuntu-latest, Linux)\tVerify geometry, editor recovery and simulated frame capture\t2026-10-12T19:41:07.7393681Z UI draw selected adapter: AdapterInfo { name: \"llvmpipe (LLVM 20.1.2, 256 bits)\", vendor: 65541, device: 0, device_type: Cpu, device_pci_bus_id: \"\", driver: \"llvmpipe\", driver_info: \"Mesa 25.2.8-0ubuntu0.24.04.4 (LLVM 20.1.2)\", backend: Vulkan, subgroup_min_size: 8, subgroup_max_size: 8, transient_saves_memory: false }",
+      "desktop (ubuntu-latest, Linux)\tVerify geometry, editor recovery and simulated frame capture\t2026-10-12T19:41:08.0732732Z UI draw selected adapter: AdapterInfo { name: \"llvmpipe (LLVM 20.1.2, 256 bits)\", vendor: 65541, device: 0, device_type: Cpu, device_pci_bus_id: \"\", driver: \"llvmpipe\", driver_info: \"Mesa 25.2.8-0ubuntu0.24.04.4 (LLVM 20.1.2)\", backend: Vulkan, subgroup_min_size: 8, subgroup_max_size: 8, transient_saves_memory: false }",
+      "desktop (ubuntu-latest, Linux)\tVerify geometry, editor recovery and simulated frame capture\t2026-10-12T19:41:08.3824927Z UI draw selected adapter: AdapterInfo { name: \"llvmpipe (LLVM 20.1.2, 256 bits)\", vendor: 65541, device: 0, device_type: Cpu, device_pci_bus_id: \"\", driver: \"llvmpipe\", driver_info: \"Mesa 25.2.8-0ubuntu0.24.04.4 (LLVM 20.1.2)\", backend: Vulkan, subgroup_min_size: 8, subgroup_max_size: 8, transient_saves_memory: false }",
+      "desktop (ubuntu-latest, Linux)\tVerify geometry, editor recovery and simulated frame capture\t2026-10-12T19:41:08.6855534Z UI draw selected adapter: AdapterInfo { name: \"llvmpipe (LLVM 20.1.2, 256 bits)\", vendor: 65541, device: 0, device_type: Cpu, device_pci_bus_id: \"\", driver: \"llvmpipe\", driver_info: \"Mesa 25.2.8-0ubuntu0.24.04.4 (LLVM 20.1.2)\", backend: Vulkan, subgroup_min_size: 8, subgroup_max_size: 8, transient_saves_memory: false }"
+    ],
+    "retirement_lines": []
+  }
+}

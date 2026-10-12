@@ -17,6 +17,8 @@ pub struct SpatialNode<'a> {
     pub flipbook: Option<crate::FlipbookState>,
     pub animation: Option<crate::AnimationSample>,
     pub animation_ik: Option<&'a std::sync::Arc<[crate::AnimationIkSample]>>,
+    /// Selected root is stripped before IK independently of body application.
+    pub animation_root: Option<u16>,
     /// Outgoing sample and destination weight from the same committed state.
     pub animation_blend: Option<incant_types::AnimationBlendSample>,
     pub animation_pose: Option<incant_types::AnimationPoseSamples>,
@@ -86,6 +88,10 @@ impl<'a> SpatialView<'a> {
                     .0,
                 declaration: world.get::<CookedSpatial>(entity),
                 animation_ik: world.get::<crate::ik::IkState>(entity).map(|s| &s.0),
+                animation_root: world
+                    .get::<CookedSpatial>(entity)
+                    .and_then(|n| n.root_motion.as_ref())
+                    .map(|n| n.catalog.root()),
                 animation: world
                     .get::<crate::animation::Playback>(entity)
                     .map(|p| p.state.sample),

@@ -1,0 +1,447 @@
+{
+  "at": "2026-10-12T20:49:54.186602+00:00",
+  "checkpoint": 14,
+  "selected_main": "d1ef35ee32b92e6756b528463ab092fdc79c7ef4",
+  "candidate": "e9c0b288489217500fed8b17ba22fbc0e677fedd",
+  "release_before": "b614679a1d48aba6e4ff5387974351602de5c026",
+  "release": "2444d81f2dbc72a0e487f361d4614d4476bdddb1",
+  "tree": "c0137be6889607ea302d6cd3312a5a9f78f2c938",
+  "main_unchanged": "5bdb77ac11a73c4110e45d8dbb82bfe6ce3aacbe",
+  "all23_exact_success": true,
+  "exact_tree": true,
+  "parents_and_trailer": true,
+  "merged": {
+    "mergeCommit": {
+      "oid": "2444d81f2dbc72a0e487f361d4614d4476bdddb1"
+    },
+    "mergedAt": "2026-10-12T20:49:50Z",
+    "state": "MERGED",
+    "url": "https://github.com/snowdamiz/incant/pull/133"
+  },
+  "root_review_sha256": "cf5e8451493a809fd1988f20d45849eea3ef36ce00fcb1f8fbfd4b0711c365bf",
+  "prepromotion_sha256": "d7166a3452cce58bd6cf05a14ca37b7081807ea4795242d2d396e9d519996a18",
+  "required_checks": [
+    {
+      "bucket": "pass",
+      "link": "https://github.com/snowdamiz/incant/actions/runs/38297953638/job/114981190814",
+      "name": "compare",
+      "state": "SUCCESS",
+      "workflow": "Physics candidate feasibility"
+    },
+    {
+      "bucket": "pass",
+      "link": "https://github.com/snowdamiz/incant/actions/runs/38297953543/job/114973645171",
+      "name": "checks",
+      "state": "SUCCESS",
+      "workflow": "Incant checks"
+    },
+    {
+      "bucket": "pass",
+      "link": "https://github.com/snowdamiz/incant/actions/runs/38297953660/job/114973529240",
+      "name": "desktop (macos, macos-latest, incant_platform_smoke)",
+      "state": "SUCCESS",
+      "workflow": "Six platform probes"
+    },
+    {
+      "bucket": "pass",
+      "link": "https://github.com/snowdamiz/incant/actions/runs/38297953660/job/114973529314",
+      "name": "desktop (linux, ubuntu-latest, incant_platform_smoke)",
+      "state": "SUCCESS",
+      "workflow": "Six platform probes"
+    },
+    {
+      "bucket": "pass",
+      "link": "https://github.com/snowdamiz/incant/actions/runs/38297953638/job/114973528601",
+      "name": "native (macos-latest)",
+      "state": "SUCCESS",
+      "workflow": "Physics candidate feasibility"
+    },
+    {
+      "bucket": "pass",
+      "link": "https://github.com/snowdamiz/incant/actions/runs/38297953638/job/114973528269",
+      "name": "portability",
+      "state": "SUCCESS",
+      "workflow": "Physics candidate feasibility"
+    },
+    {
+      "bucket": "pass",
+      "link": "https://github.com/snowdamiz/incant/actions/runs/38297953613/job/114973528812",
+      "name": "storage (macos-latest)",
+      "state": "SUCCESS",
+      "workflow": "Desktop credential persistence"
+    },
+    {
+      "bucket": "pass",
+      "link": "https://github.com/snowdamiz/incant/actions/runs/38297953554/job/114973528029",
+      "name": "conformance (macos-latest)",
+      "state": "SUCCESS",
+      "workflow": "Development Wasm conformance"
+    },
+    {
+      "bucket": "pass",
+      "link": "https://github.com/snowdamiz/incant/actions/runs/38297953660/job/114973529157",
+      "name": "ios",
+      "state": "SUCCESS",
+      "workflow": "Six platform probes"
+    },
+    {
+      "bucket": "pass",
+      "link": "https://github.com/snowdamiz/incant/actions/runs/38297953613/job/114973529042",
+      "name": "storage (ubuntu-latest)",
+      "state": "SUCCESS",
+      "workflow": "Desktop credential persistence"
+    },
+    {
+      "bucket": "pass",
+      "link": "https://github.com/snowdamiz/incant/actions/runs/38297953660/job/114973528783",
+      "name": "web",
+      "state": "SUCCESS",
+      "workflow": "Six platform probes"
+    },
+    {
+      "bucket": "pass",
+      "link": "https://github.com/snowdamiz/incant/actions/runs/38297953543/job/114973528336",
+      "name": "classify",
+      "state": "SUCCESS",
+      "workflow": "Incant checks"
+    },
+    {
+      "bucket": "pass",
+      "link": "https://github.com/snowdamiz/incant/actions/runs/38297953660/job/114973529324",
+      "name": "android",
+      "state": "SUCCESS",
+      "workflow": "Six platform probes"
+    },
+    {
+      "bucket": "pass",
+      "link": "https://github.com/snowdamiz/incant/actions/runs/38297953664/job/114973528654",
+      "name": "desktop (windows-latest, Windows, .exe)",
+      "state": "SUCCESS",
+      "workflow": "Desktop editor and engine"
+    },
+    {
+      "bucket": "pass",
+      "link": "https://github.com/snowdamiz/incant/actions/runs/38297953638/job/114973528824",
+      "name": "native (windows-latest)",
+      "state": "SUCCESS",
+      "workflow": "Physics candidate feasibility"
+    },
+    {
+      "bucket": "pass",
+      "link": "https://github.com/snowdamiz/incant/actions/runs/38297953638/job/114973528676",
+      "name": "native (ubuntu-latest)",
+      "state": "SUCCESS",
+      "workflow": "Physics candidate feasibility"
+    },
+    {
+      "bucket": "pass",
+      "link": "https://github.com/snowdamiz/incant/actions/runs/38297953664/job/114973528158",
+      "name": "desktop (ubuntu-latest, Linux)",
+      "state": "SUCCESS",
+      "workflow": "Desktop editor and engine"
+    },
+    {
+      "bucket": "pass",
+      "link": "https://github.com/snowdamiz/incant/actions/runs/38297953613/job/114973528963",
+      "name": "storage (windows-latest)",
+      "state": "SUCCESS",
+      "workflow": "Desktop credential persistence"
+    },
+    {
+      "bucket": "pass",
+      "link": "https://github.com/snowdamiz/incant/actions/runs/38297953772/job/114973528881",
+      "name": "build",
+      "state": "SUCCESS",
+      "workflow": "Website \u00b7 check and deploy"
+    },
+    {
+      "bucket": "pass",
+      "link": "https://github.com/snowdamiz/incant/actions/runs/38297953554/job/114973528087",
+      "name": "conformance (ubuntu-latest)",
+      "state": "SUCCESS",
+      "workflow": "Development Wasm conformance"
+    },
+    {
+      "bucket": "pass",
+      "link": "https://github.com/snowdamiz/incant/actions/runs/38297953554/job/114973527841",
+      "name": "conformance (windows-latest)",
+      "state": "SUCCESS",
+      "workflow": "Development Wasm conformance"
+    },
+    {
+      "bucket": "pass",
+      "link": "https://github.com/snowdamiz/incant/actions/runs/38297953687/job/114973528315",
+      "name": "local-service-protocols",
+      "state": "SUCCESS",
+      "workflow": "Local service protocols"
+    },
+    {
+      "bucket": "pass",
+      "link": "https://github.com/snowdamiz/incant/actions/runs/38297953660/job/114973529112",
+      "name": "desktop (windows, windows-latest, incant_platform_smoke.exe)",
+      "state": "SUCCESS",
+      "workflow": "Six platform probes"
+    }
+  ],
+  "push_workflows": [
+    {
+      "conclusion": "success",
+      "createdAt": "2026-10-12T19:29:08Z",
+      "databaseId": 38297953613,
+      "event": "push",
+      "headSha": "e9c0b288489217500fed8b17ba22fbc0e677fedd",
+      "startedAt": "2026-10-12T19:29:08Z",
+      "status": "completed",
+      "updatedAt": "2026-10-12T19:35:15Z",
+      "url": "https://github.com/snowdamiz/incant/actions/runs/38297953613",
+      "workflowName": "Desktop credential persistence"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-10-12T19:29:08Z",
+      "databaseId": 38297953660,
+      "event": "push",
+      "headSha": "e9c0b288489217500fed8b17ba22fbc0e677fedd",
+      "startedAt": "2026-10-12T19:29:08Z",
+      "status": "completed",
+      "updatedAt": "2026-10-12T19:45:20Z",
+      "url": "https://github.com/snowdamiz/incant/actions/runs/38297953660",
+      "workflowName": "Six platform probes"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-10-12T19:29:08Z",
+      "databaseId": 38297953638,
+      "event": "push",
+      "headSha": "e9c0b288489217500fed8b17ba22fbc0e677fedd",
+      "startedAt": "2026-10-12T19:29:08Z",
+      "status": "completed",
+      "updatedAt": "2026-10-12T19:50:33Z",
+      "url": "https://github.com/snowdamiz/incant/actions/runs/38297953638",
+      "workflowName": "Physics candidate feasibility"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-10-12T19:29:08Z",
+      "databaseId": 38297953772,
+      "event": "push",
+      "headSha": "e9c0b288489217500fed8b17ba22fbc0e677fedd",
+      "startedAt": "2026-10-12T19:29:08Z",
+      "status": "completed",
+      "updatedAt": "2026-10-12T19:30:08Z",
+      "url": "https://github.com/snowdamiz/incant/actions/runs/38297953772",
+      "workflowName": "Website \u00b7 check and deploy"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-10-12T19:29:08Z",
+      "databaseId": 38297953687,
+      "event": "push",
+      "headSha": "e9c0b288489217500fed8b17ba22fbc0e677fedd",
+      "startedAt": "2026-10-12T19:29:08Z",
+      "status": "completed",
+      "updatedAt": "2026-10-12T19:30:44Z",
+      "url": "https://github.com/snowdamiz/incant/actions/runs/38297953687",
+      "workflowName": "Local service protocols"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-10-12T19:29:08Z",
+      "databaseId": 38297953664,
+      "event": "push",
+      "headSha": "e9c0b288489217500fed8b17ba22fbc0e677fedd",
+      "startedAt": "2026-10-12T19:29:08Z",
+      "status": "completed",
+      "updatedAt": "2026-10-12T20:44:19Z",
+      "url": "https://github.com/snowdamiz/incant/actions/runs/38297953664",
+      "workflowName": "Desktop editor and engine"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-10-12T19:29:08Z",
+      "databaseId": 38297953543,
+      "event": "push",
+      "headSha": "e9c0b288489217500fed8b17ba22fbc0e677fedd",
+      "startedAt": "2026-10-12T19:29:08Z",
+      "status": "completed",
+      "updatedAt": "2026-10-12T20:44:29Z",
+      "url": "https://github.com/snowdamiz/incant/actions/runs/38297953543",
+      "workflowName": "Incant checks"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-10-12T19:29:08Z",
+      "databaseId": 38297953554,
+      "event": "push",
+      "headSha": "e9c0b288489217500fed8b17ba22fbc0e677fedd",
+      "startedAt": "2026-10-12T19:29:08Z",
+      "status": "completed",
+      "updatedAt": "2026-10-12T20:45:32Z",
+      "url": "https://github.com/snowdamiz/incant/actions/runs/38297953554",
+      "workflowName": "Development Wasm conformance"
+    }
+  ],
+  "observed_job_durations": [
+    {
+      "name": "desktop (windows-latest, Windows, .exe)",
+      "started_at": "2026-10-12T19:29:11Z",
+      "completed_at": "2026-10-12T20:44:18Z",
+      "execution_seconds": 4507,
+      "url": "https://github.com/snowdamiz/incant/actions/runs/38297953664/job/114973528654"
+    },
+    {
+      "name": "desktop (ubuntu-latest, Linux)",
+      "started_at": "2026-10-12T19:29:10Z",
+      "completed_at": "2026-10-12T19:55:55Z",
+      "execution_seconds": 1605,
+      "url": "https://github.com/snowdamiz/incant/actions/runs/38297953664/job/114973528158"
+    },
+    {
+      "name": "checks",
+      "started_at": "2026-10-12T19:34:25Z",
+      "completed_at": "2026-10-12T20:44:28Z",
+      "execution_seconds": 4203,
+      "url": "https://github.com/snowdamiz/incant/actions/runs/38297953543/job/114973645171"
+    }
+  ],
+  "retained_artifacts": {
+    "completed-job-logs.json": {
+      "sha256": "bce4c599cdc95b51a55b9d8406d58b585979379fddd28443183c311d6ec29f84",
+      "bytes": 1040
+    },
+    "initial-runs.json": {
+      "sha256": "9b6b8188d85e24193405558b0c4383c59e8907fae5b628c0771a6b2c28f96b5d",
+      "bytes": 1743
+    },
+    "latest-state.json": {
+      "sha256": "405f2b0812399cf5cf3bfa25ac9d52413e005f144f17939822d6176c921bae7f",
+      "bytes": 10041
+    },
+    "linux-desktop.log.gz": {
+      "sha256": "c314b4eaa38438ac22d328dd0b10943b06692a2cb3432c9a5f9585f855833628",
+      "bytes": 170258
+    },
+    "macos-general.log.gz": {
+      "sha256": "13d6dc7b099a4a88b83ebea59bced8c77360a151b5699ed45e1922647458f8e4",
+      "bytes": 173163
+    },
+    "manifest.json": {
+      "sha256": "81cdcee0608051d1cefab63394e89d848dc92f7ccbfb727dd05dea68d66329f9",
+      "bytes": 1661
+    },
+    "observations.jsonl": {
+      "sha256": "c1f66e6d8d95f7feae16145076e38386e3b3a66c24566219a948d265bbf63ca0",
+      "bytes": 141487
+    },
+    "pr-body.md": {
+      "sha256": "859ed66052e313f6fdf516bda925ea8b2919233349477859073201d1cc2c954f",
+      "bytes": 1446
+    },
+    "pr-final.json": {
+      "sha256": "66b29d1b92ffe92f1afd25124af4f2410faa9b106e5753313b62b2c926d14a1a",
+      "bytes": 7739
+    },
+    "prepromotion.json": {
+      "sha256": "d7166a3452cce58bd6cf05a14ca37b7081807ea4795242d2d396e9d519996a18",
+      "bytes": 2768
+    },
+    "previous-terminal.json": {
+      "sha256": "62626e0ed63e8ea5849fe701253ecb181913b6da1117c2f3399fbf05bdcde932",
+      "bytes": 11904
+    },
+    "promotion-body.txt": {
+      "sha256": "edbaff74b44710e9ffb2dbe1bab6bb97f24ab27d5a785d6c37285c2a01bffc6e",
+      "bytes": 376
+    },
+    "promotion.json": {
+      "sha256": "ca43f5d1c105701f78977ff5cbf75e5e7b794dada50e31ee5ce821dd3fc02b02",
+      "bytes": 921
+    },
+    "protection-final.json": {
+      "sha256": "09fa0f6fed923b02c858824b316c8f29f45a20cb001a634685b60a1332218058",
+      "bytes": 3015
+    },
+    "protection.json": {
+      "sha256": "5c904412bdd5bb66a2b99566fb8ee8737be1207963224c1a7b33a8ef08d74057",
+      "bytes": 4177
+    },
+    "release-to-selected.paths": {
+      "stored": "release-to-selected.paths.gz",
+      "sha256": "c3b5497ec117b897c8a31d743ff6fae3a929fa88a5cf40968833637051713d38",
+      "bytes": 332781,
+      "stored_sha256": "7f5ac59df1a0783c04dac7214872064e25b7d86d717b06d48cb1a7310c9ac982"
+    },
+    "release-to-selected.stat": {
+      "stored": "release-to-selected.stat.gz",
+      "sha256": "2c97ab12a5feb033869833681bd15706f5e18f7363faaaa896f5f8b289b6aa5b",
+      "bytes": 321171,
+      "stored_sha256": "dc49f13637522787d2238e879f3455077a13d9c7a296e2100e823746b3236f91"
+    },
+    "required-final.json": {
+      "sha256": "c2d8790fc7de33c986f5445c50578937448f2d9f818decb3f915f269ce9ac871",
+      "bytes": 4465
+    },
+    "root-promotion-review.json": {
+      "sha256": "cf5e8451493a809fd1988f20d45849eea3ef36ce00fcb1f8fbfd4b0711c365bf",
+      "bytes": 10612
+    },
+    "runs-final.json": {
+      "sha256": "9b483d7d4f6db0a64afda6cab1fb39ad10a4e7bd42c8adf4ea7fb68837368505",
+      "bytes": 2844
+    },
+    "terminal-state.json": {
+      "sha256": "405f2b0812399cf5cf3bfa25ac9d52413e005f144f17939822d6176c921bae7f",
+      "bytes": 10041
+    },
+    "windows-desktop.log.gz": {
+      "sha256": "1f83f5e02a02f2f3a7db01bb3e3b99ed84912f810961812b2ee3b98b959883ef",
+      "bytes": 165011
+    },
+    "verified-observations.json": {
+      "sha256": "6a9791d3cea1f7c274658f8f87e06b9a2780c279bd53f8d75385cbdefeeb04f6",
+      "bytes": 7674
+    },
+    "watch.log": {
+      "stored": "watch.log.gz",
+      "sha256": "255a25fc6800f0c2cb57cbcbcbe3e28258ed014767fcefb0f243e994db25a57f",
+      "bytes": 1872,
+      "stored_sha256": "8c8b7eb48ba42ac814addfffcd3409f15edd6a33c5f5ab4e150a51b4a0deb976"
+    }
+  },
+  "hosted_logs": {
+    "logs": {
+      "macos-general": {
+        "job": 114973645171,
+        "raw_sha256": "1b264adde8cba3c48395f64fae5fba44bad99348c248c5a3a403479b59199ed8",
+        "gzip_sha256": "13d6dc7b099a4a88b83ebea59bced8c77360a151b5699ed45e1922647458f8e4",
+        "bytes": 1648766
+      },
+      "windows-desktop": {
+        "job": 114973528654,
+        "raw_sha256": "3d5e30cf30f613fb122d2fb9d62e68c162363b8117874d53b20dc9661da7b17a",
+        "gzip_sha256": "1f83f5e02a02f2f3a7db01bb3e3b99ed84912f810961812b2ee3b98b959883ef",
+        "bytes": 763528
+      },
+      "linux-desktop": {
+        "job": 114973528158,
+        "raw_sha256": "09253a72100203b6bd62bd8b092fe452a008461f7ffc62b506d255dfd9c7d8eb",
+        "gzip_sha256": "c314b4eaa38438ac22d328dd0b10943b06692a2cb3432c9a5f9585f855833628",
+        "bytes": 1693046
+      }
+    },
+    "capture_note": "Concurrent gh run view returned a local invalid-zip cache error for Windows; direct job API initially refused ANSI output, then succeeded with explicit allow-escape-sequences into a raw file. Hosted job succeeded; no job rerun."
+  },
+  "observations": "release-checkpoint-14/verified-observations.json",
+  "qualifications": [
+    "Selected main160 only; main161 and later integrations are excluded.",
+    "Failed earlier checkpoints remain historical and were not promoted.",
+    "Logged software/paravirtual adapters establish this hosted run only, not phone, GPU hardware, appearance or performance gates.",
+    "Observed job durations are not matched speedup measurements.",
+    "The original manifest retains its pending-at-freeze wording; promotion.json is the final state."
+  ],
+  "docs_review": {
+    "path": "release-checkpoint-14/docs-review.json",
+    "sha256": "f02a62bc4a7bff81b86cc41a42fe7fe4dc44b6aef1c02a057bd81f40b980ee07",
+    "reviewed_patch_sha256": "56c9001a838907bd9855817f0450a827ed659453b744bd4c694767c4ea5e9df1"
+  }
+}

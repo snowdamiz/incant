@@ -1,0 +1,15 @@
+{
+  "base": "a6d4edfe30dbcf8e14da66b257a10704273df463",
+  "files": {
+    "sdk/rust/samples/audio_transport.rs": "514745639d9aaa2aced1fe30659898615064ed56f91ec9a097a7fb41ea99fe38",
+    "sdk/rust/fixtures/audio_failure.rs": "bd40935c02a62cb83be56528906753ccef1edec9b2dbc81da15bc712167f4698",
+    "sdk/rust/tests/audio.rs": "7d3768313225de62dfff0559d8e1513aaa05064740885ef010a4207083c6a434",
+    "crates/incant_wasm_dev/tests/audio_parity.rs": "921a6d5fc53076a49803a3eed5839f2c5b1bc9e5b4e60d0dac69e5aff266b8db",
+    "crates/incant_wasm_dev/tests/support/audio_pcm.rs": "6d468992870a1e07089f827da0575bdef5f20d496ab69034597b609b7d2fb684",
+    "crates/incant_wasm_runtime/tests/audio.rs": "bd3d700faaee8f79ec92a1c2f3b9567af2d4ad9fabf67db85783928993cc4b2d",
+    "crates/incant_wasm_runtime/tests/support/audio_transport.rs": "161e84e979dcb8f3be0dcbc6d67fa3c7e99048dce58e9a49169f0f94ddbdb391",
+    "crates/incant_wasm_runtime/fixtures/audio-transport.wat": "9e3c2ba4f2d2113708d2c4d51aba4908f6f7154bee47c8a219216c58dcb3f106",
+    "tools/probes/shipping-wasm2c.py": "8599375d2064bc6658584bb67a92c0bc4133f1b93f5d13d541c31faa98a60ac9",
+    "tools/tests/test_wasm_sdk.py": "ed3230665dc3f83061ff73d3e6e1163269ad925e833afcb70c4b84a7922d9b49"
+  }
+}

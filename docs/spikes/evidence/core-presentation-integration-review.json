@@ -1,0 +1,53 @@
+{
+  "kind": "independent-core-current-main-integration-review",
+  "reviewer": "astra /root/native_wasm_export",
+  "accepted": true,
+  "findings": [],
+  "reviewed_head": "3f938222f2269af15fd1237560e914a35bdec023",
+  "manifest": "/Users/andreyyurlov/.codex/worktrees/local-service-stack/incant/docs/spikes/evidence/core-presentation-integration.json",
+  "manifest_sha256": "7483d18d6651c2a2ffeef2e01d227431bb85e0a33b062bad86035a6a649e054e",
+  "frozen_current_inputs_rehashed": 1785,
+  "artifacts_gzip_and_raw_verified": 91,
+  "surviving_original_artifacts_rehashed": 91,
+  "unchanged_producer_sources": {
+    "samples/core/gameplay.ts": "6901e09d862745a9408bdcbf725ee6bc58da6315f05a52edbec991021210c00b",
+    "samples/core/verify_presentation.py": "42ff52aae1c2ca0f923a4677f87f72e4bffe31193d19d6ba8249cadfbad477bc"
+  },
+  "actual_package_files_rehashed": 25,
+  "headless_sha256": "c6adb728ebd40936a09f93223d0a8e65394d218c79eb506958a5ea789ea6ae8b",
+  "player_sha256": "b49c2251d8382bd16c4dc70eae5595a633d71c9a11179118ecbb464b68ed878a",
+  "native_cases": 7,
+  "shipping_runs": {
+    "win": {
+      "tick": 300,
+      "report_sha256": "64db8a7b02cedda6829834417ff8df106b72cd1eb446ad566cdccb206d445432",
+      "pcm_sha256": "5cc3227745f064c559e7f17dbe260006981b6b82d47dd0d92e2f13c5884de996",
+      "hud_records": 6
+    },
+    "lose": {
+      "tick": 900,
+      "report_sha256": "451c4b93fac661f63d7d22e0a080b003c8f6ab42d4ca954ca06d4460ef5d4e22",
+      "pcm_sha256": "c4baa82e7504eb240b6d4fa8108ff53530c4b4fa13176cac7bb2b4e9b13bc625",
+      "hud_records": 6
+    },
+    "repeat-win": {
+      "tick": 300,
+      "report_sha256": "64db8a7b02cedda6829834417ff8df106b72cd1eb446ad566cdccb206d445432",
+      "pcm_sha256": "5cc3227745f064c559e7f17dbe260006981b6b82d47dd0d92e2f13c5884de996",
+      "hud_records": 6
+    }
+  },
+  "shipping_observation_checks": 27,
+  "actual_hud_records": 18,
+  "exact_repeat_pcm_and_report": true,
+  "finite_nonzero_initial_pcm_and_last60ticks_silence": true,
+  "source_relevance": "Exact accepted e351 gameplay; observer only reads precommand HUD, calls real behavior and queues locale at50. Deleted wrapper hash reconstructed exactly. Current engine frozen hashes unchanged after main163 ancestry.",
+  "qualifications": [
+    "Read-only audit of retained actual execution, not a fresh build/run or visual/GPU/device approval",
+    "Core physics checkpoint continuation is not tested or claimed. Separate native audio save evidence in ancestry does not establish Core save support",
+    "Public helper successfully asserts journal reopen after its finally-written call receipt; reopen call itself is not retained in that authoring-calls file. Undo/Redo/project source correspondence verified directly",
+    "PCM repeat and terminal silence are observable; individual cue epoch counts are source-reviewed, not separately measured by this fixture",
+    "Historical private build removal is supported by reviewed helper and exporter receipt, not reconstructed private files"
+  ],
+  "source_and_cache_removed_now": true
+}

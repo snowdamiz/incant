@@ -1,0 +1,18 @@
+[package]
+name = "incant-mobile-runtime-fixture"
+version = "0.0.0"
+edition = "2024"
+publish = false
+
+[workspace]
+
+[dependencies]
+incant_runtime = { path = "../../../../crates/incant_runtime" }
+incant_types = { path = "../../../../crates/incant_types" }
+incant_assets_runtime = { path = "../../../../crates/incant_assets_runtime" }
+serde_json = "=1.0.151"
+
+[patch.crates-io]
+# Match the engine's checked navigation dependency even though this fixture has
+# no navigation; a standalone workspace does not inherit its parent's patches.
+rerecast = { path = "../../../../third_party/rerecast" }

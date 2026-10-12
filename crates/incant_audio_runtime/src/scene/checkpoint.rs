@@ -35,6 +35,7 @@ struct SavedVoice {
 #[derive(Clone)]
 struct SavedSource {
     id: StableId,
+    transport_epoch: u64,
     voice: Option<VoiceId>,
     pending: bool,
 }
@@ -358,6 +359,7 @@ where
                 .iter()
                 .map(|(&id, s)| SavedSource {
                     id,
+                    transport_epoch: s.desired.transport_epoch,
                     voice: s.voice,
                     pending: s.pending,
                 })
@@ -491,7 +493,10 @@ fn validate_world(state: &State, world: &NativeWorld) -> Result<()> {
     }
     let mut referenced = BTreeSet::new();
     for (saved, (id, source)) in state.sources.iter().zip(sources) {
-        if saved.id != id || (saved.pending && (saved.voice.is_some() || !source.playing)) {
+        if saved.id != id
+            || saved.transport_epoch != source.transport_epoch
+            || (saved.pending && (saved.voice.is_some() || !source.playing))
+        {
             return Err(AudioError::Invalid("audio source state"));
         }
         if !state.catalog.iter().any(|c| c.id == source.clip) {

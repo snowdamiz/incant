@@ -3,6 +3,7 @@
 mod codec;
 mod graph_fade;
 mod ik;
+mod root_motion;
 use crate::flipbook::Playback;
 use crate::world::{Local, Motion};
 use crate::{CookedEntity, CookedScene, CookedSpatial, NativeWorld, SceneError};
@@ -149,6 +150,25 @@ impl NativeWorld {
             })
             .collect::<Vec<_>>();
         self.validate_ik_catalog(&self.ik_catalog)?;
+        self.validate_root_catalog(&self.root_catalog)?;
+        let roots = self
+            .root_ids
+            .iter()
+            .map(|&id| {
+                let handle = self.entities[&id];
+                let state = *self
+                    .world
+                    .get::<crate::root_motion::RootMotionState>(handle)
+                    .expect("root state");
+                state.validate(
+                    self.world
+                        .get::<crate::animation::Playback>(handle)
+                        .expect("root animation"),
+                    self.tick,
+                )?;
+                Ok((id, state))
+            })
+            .collect::<Result<Vec<_>, SceneError>>()?;
         let mut ik = Vec::new();
         self.snapshot_ik(&mut ik)
             .map_err(|_| SaveError::Invalid("IK snapshot"))?;
@@ -162,6 +182,7 @@ impl NativeWorld {
             self.ui_used,
             self.audio_used,
             &ik,
+            &roots,
         )
     }
 
@@ -284,6 +305,7 @@ impl NativeWorld {
                 .map_err(|_| SaveError::Invalid("animation graph checkpoint"))?;
             playback.graph = Some(graph);
         }
+        root_motion::install(&mut world, decoded.roots, decoded.tick)?;
         world.tick = decoded.tick;
         world.ui_used |= decoded.ui_used;
         world.audio_used |= decoded.audio_used;
@@ -326,6 +348,13 @@ impl NativeWorld {
             .collect();
         candidate.validate_ik_catalog(&catalog)?;
         candidate.ik_catalog = catalog;
+        let roots: std::sync::Arc<[_]> = initial
+            .spatial()
+            .iter()
+            .filter_map(|n| n.root_motion.as_ref().map(|r| r.catalog.clone()))
+            .collect();
+        candidate.validate_root_catalog(&roots)?;
+        candidate.root_catalog = roots;
         Ok(candidate)
     }
 
@@ -336,6 +365,7 @@ impl NativeWorld {
         self.check_save_capabilities()?;
         candidate.check_save_capabilities()?;
         candidate.validate_ik_catalog(&self.ik_catalog)?;
+        candidate.validate_root_catalog(&self.root_catalog)?;
         if self.audio_used && !candidate.audio_used {
             return Err(SaveError::AudioUnsupported);
         }
@@ -411,7 +441,9 @@ impl NativeWorld {
             &self.font_assets,
         )?;
         candidate.validate_ik_catalog(&self.ik_catalog)?;
+        candidate.validate_root_catalog(&self.root_catalog)?;
         candidate.ik_catalog = self.ik_catalog.clone();
+        candidate.root_catalog = self.root_catalog.clone();
         // V1 never carried the origin fingerprint. A matching live destination
         // retains its own known origin; the restored data cannot replace it.
         candidate.source_scene_fingerprint = self.source_scene_fingerprint;

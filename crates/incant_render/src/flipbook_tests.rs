@@ -27,6 +27,7 @@ fn static_selection(input: &SceneInput) -> SceneInput {
                     animation_blend: m.animation_blend,
                     animation_pose: m.animation_pose,
                     animation_ik: m.animation_ik.clone(),
+                    animation_root: m.animation_root,
                 }),
                 sprite: node.sprite.as_ref().map(|s| {
                     let mut sprite = s.sprite.clone();

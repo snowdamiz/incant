@@ -75,12 +75,50 @@ pub struct CharacterMovement<I = String> {
     pub collisions: Vec<I>,
 }
 
+/// Copied result from a retained scene query frame; no owned contact buffer.
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub struct PreparedCharacterMovement {
+    pub translation: [f64; 3],
+    pub grounded: bool,
+    pub sliding_down_slope: bool,
+}
+
 impl<I: Ord + Clone> PhysicsRuntime<I> {
     pub fn compute_character_motion(
         &self,
         request: &CharacterQuery<I>,
         dt: f64,
     ) -> Result<CharacterMovement<I>, PhysicsError> {
+        let mut collisions = BTreeSet::new();
+        let movement = self.character_motion(request, dt, false, |id| {
+            collisions.insert(id.clone());
+        })?;
+        Ok(CharacterMovement {
+            translation: movement.translation,
+            grounded: movement.grounded,
+            sliding_down_slope: movement.sliding_down_slope,
+            collisions: collisions.into_iter().collect(),
+        })
+    }
+
+    /// Shared canonical sweep against an explicitly refreshed, retained query
+    /// frame. Root movement needs displacement/support only, so this path never
+    /// allocates a collision-ID result. Only upright symmetric movers admit yaw.
+    pub fn compute_prepared_character_motion(
+        &self,
+        request: &CharacterQuery<I>,
+        dt: f64,
+    ) -> Result<PreparedCharacterMovement, PhysicsError> {
+        self.character_motion(request, dt, true, |_| {})
+    }
+
+    fn character_motion(
+        &self,
+        request: &CharacterQuery<I>,
+        dt: f64,
+        prepared: bool,
+        mut hit: impl FnMut(&I),
+    ) -> Result<PreparedCharacterMovement, PhysicsError> {
         if self.failed {
             return Err(PhysicsError::NumericRange);
         }
@@ -128,7 +166,7 @@ impl<I: Ord + Clone> PhysicsRuntime<I> {
                 .body
                 .as_ref()
                 .is_some_and(|b| b.motion == BodyMotion::Kinematic)
-            || entry.config.state.angular_velocity != [0.; 3]
+            || (!prepared && entry.config.state.angular_velocity != [0.; 3])
         {
             return Err(PhysicsError::Query(
                 "character requires a nonsensor kinematic body with zero angular velocity".into(),
@@ -137,6 +175,34 @@ impl<I: Ord + Clone> PhysicsRuntime<I> {
         let handle = entry.body.expect("validated kinematic body");
         let body = &scene.world.bodies[handle];
         let collider = &scene.world.colliders[entry.collider];
+        let retained = if prepared {
+            Some(
+                scene
+                    .character
+                    .as_ref()
+                    .filter(|cache| cache.ready)
+                    .ok_or_else(|| {
+                        PhysicsError::Query("character query frame is not prepared".into())
+                    })?,
+            )
+        } else {
+            None
+        };
+        let character_pose = retained.map_or(body.position(), |cache| {
+            cache.colliders[entry.collider].position()
+        });
+        if prepared
+            && (!matches!(
+                entry.config.collider.shape,
+                incant_types::ColliderShape::Sphere { .. }
+                    | incant_types::ColliderShape::Capsule { .. }
+            ) || character_pose.rotation.x.abs() > 1e-6
+                || character_pose.rotation.z.abs() > 1e-6)
+        {
+            return Err(PhysicsError::Query(
+                "prepared character requires upright symmetric collider".into(),
+            ));
+        }
         let filter = QueryFilter {
             flags: QueryFilterFlags::EXCLUDE_SENSORS,
             groups: Some(groups(
@@ -151,7 +217,14 @@ impl<I: Ord + Clone> PhysicsRuntime<I> {
         // The normal stepped path borrows the existing world and BVH directly.
         let mut fresh_bvh = BroadPhaseBvh::new();
         let mut fresh_colliders;
-        let queries = if scene.query_dirty {
+        let queries = if let Some(cache) = retained {
+            cache.bvh.as_query_pipeline(
+                scene.world.narrow_phase.query_dispatcher(),
+                &scene.world.bodies,
+                &cache.colliders,
+                filter,
+            )
+        } else if scene.query_dirty {
             fresh_colliders = scene.world.colliders.clone();
             for e in scene.entries.values() {
                 let c = &mut fresh_colliders[e.collider];
@@ -194,16 +267,13 @@ impl<I: Ord + Clone> PhysicsRuntime<I> {
                 .map(|v| CharacterLength::Absolute(v as f32)),
             ..Default::default()
         };
-        let mut collisions = BTreeSet::new();
         let movement = controller.move_shape(
             dt as f32,
             &queries,
             collider.shape(),
-            body.position(),
+            character_pose,
             vector(request.translation),
-            |hit| {
-                collisions.insert(scene.ids[&hit.handle].clone());
-            },
+            |collision| hit(&scene.ids[&collision.handle]),
         );
         let translation = movement.translation.to_array().map(f64::from);
         // Inspect final support, including ground snapping which may not produce
@@ -212,7 +282,7 @@ impl<I: Ord + Clone> PhysicsRuntime<I> {
         // contact projection as "sliding down".
         let mut steep_support = false;
         if translation[1] < -1.0e-5 && movement.grounded {
-            let final_pose = Pose::from_translation(movement.translation) * *body.position();
+            let final_pose = Pose::from_translation(movement.translation) * *character_pose;
             if let Some((_, support)) = queries.cast_shape(
                 &final_pose,
                 -Vector::Y,
@@ -229,7 +299,11 @@ impl<I: Ord + Clone> PhysicsRuntime<I> {
         }
         if !translation
             .iter()
-            .zip(entry.config.state.translation)
+            .zip(if prepared {
+                character_pose.translation.to_array().map(f64::from)
+            } else {
+                entry.config.state.translation
+            })
             .all(|(delta, position)| {
                 delta.is_finite()
                     && delta.abs() / dt <= 10000.
@@ -240,11 +314,10 @@ impl<I: Ord + Clone> PhysicsRuntime<I> {
                 "character movement exceeds supported position or velocity range".into(),
             ));
         }
-        Ok(CharacterMovement {
+        Ok(PreparedCharacterMovement {
             translation,
             grounded: movement.grounded,
             sliding_down_slope: steep_support,
-            collisions: collisions.into_iter().collect(),
         })
     }
 }

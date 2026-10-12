@@ -1,0 +1,20 @@
+{
+  "project_sha256": "62e385dc261b7ae1d49112b48d0cda853584634f2bcf30a58efe99776713afd5",
+  "source_sha256": "3788911e9d70555bc653fc3b97737e73eb6ca0bfcca78ce29d49b222a2e9ce31",
+  "scene": "01M4RSFS4YVQATN9G0ZECP8N4E",
+  "tick_rate": 60,
+  "fonts": [
+    "01M4RSFSBA4YVM6BKF1B7Y1K7N",
+    "01M4RSFSCPG8DT5ATZ6P5W478C",
+    "01M4RSFSE13XD8ANSVH3W5QWJJ"
+  ],
+  "revision": 7,
+  "command_bus_only": true,
+  "journal_reopened": true,
+  "ui_undo_redo": true,
+  "headless_sha256": "0e68e478561f48218fe19b6b77909ef945ec2303bb633357fcebcc4d04513e21",
+  "hud_undo_redo_reopen": true,
+  "wasm_sha256": "99a79dea3853b97e505e8d7fcb48380f94390cf86a6a507354496e4384a84327",
+  "guest_source_sha256": "ddefce840470a27a7996b899482a634096af4516c5bf4f25e64af9079a39043b",
+  "module": "01M4RSFW7WGECM3V396SZKQM3D"
+}

@@ -1,0 +1,42 @@
+{
+  "at": "2026-10-12T20:41:40.556701+00:00",
+  "reviewer": "astra root",
+  "source_freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/source-freeze-004.json",
+    "sha256": "5703b54e03ae1885f7c6b8242b04abfff52f4b88f4be305a14ca07b0bfb2940e",
+    "files": 9
+  },
+  "macos_actual_proof": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/result.json",
+    "sha256": "948c3ce2f915f7049c926111522c8011edb9014f956e3fad21f5b0ae0410d56b",
+    "commands": 39,
+    "controls": 32,
+    "terminal_handle": 57513,
+    "exit_code": 0
+  },
+  "post_run_docs_and_unit_test_delta": {
+    "README.md": {
+      "at_execution": "b4bdc21101475d1434e3457cc3add1921a5a78fa23a0372ac3e988cf0cbcb806",
+      "reviewed_current": "04ad28d30beb8537c8b4d09a01bc8562ef6a32b056ef46d46cbf9760bf27e98e"
+    },
+    "test_verify.py": {
+      "at_execution": "13396ffccce5932cc65ea1c984bd4515431742a19e7b1775bd569d9b4bd63c49",
+      "reviewed_current": "f401855a09054862141b144b8e4f33cf45f22e59c4f5be3b7042df6b08c87d59"
+    }
+  },
+  "independently_checked": [
+    "C immutable request buffer and Swift imported header ABI",
+    "exact archive/header/caller/fixture hashes",
+    "actual command output hashes",
+    "result reports, held/released cooked movement and PCM bytes",
+    "diagnostic-specific refusal controls and missing-input status1",
+    "simulator cleanup touches only newly created UDID"
+  ],
+  "accepted_scope": "macOS C/Swift caller execution only; numeric linked_guest harness source reviewed but numeric archive execution not yet present",
+  "pending": [
+    "iOS simulator real execution",
+    "iOS device build/link",
+    "Android bytecode contract and execution",
+    "phone performance and native surface/audio host"
+  ]
+}

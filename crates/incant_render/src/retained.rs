@@ -136,7 +136,7 @@ impl RetainedScene {
         }
         self.light_plan.clear();
         for (node, binding) in input.nodes.iter().zip(&self.bindings) {
-            if node.mesh.as_ref().is_some_and(|mesh| (mesh.animation.is_some() || mesh.animation_blend.is_some() || mesh.animation_pose.is_some() || mesh.animation_ik.is_some())
+            if node.mesh.as_ref().is_some_and(|mesh| (mesh.animation.is_some() || mesh.animation_blend.is_some() || mesh.animation_pose.is_some() || mesh.animation_ik.is_some() || mesh.animation_root.is_some())
                 && matches!(mesh.source.data(), incant_assets_runtime::RuntimeAssetData::Model(model) if model.animation.is_none())) {
                 return Err(SceneError::Input("animation sample requires animated model").into());
             }

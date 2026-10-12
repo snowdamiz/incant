@@ -1,0 +1,30 @@
+{
+  "at": "2026-10-12T17:09:46.979818+00:00",
+  "reviewer": "astra root",
+  "scope": "Isolated immutable PreparedAnimationStep candidate and exact bounded clock spans; native schedule/root installation not reviewed here",
+  "freeze": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-span-freeze-001/inventory.json",
+  "freeze_sha256": "87a3de38576d95101ef23ea264df8ade712ea293bb45e355f46a4650c8f52079",
+  "files_verified": 7,
+  "source_review": "Accepted without correctness blocker in this isolated scope",
+  "reviewed_invariants": [
+    "Current and outgoing ownership captured before graph edge selection",
+    "Candidate advance uses copies and reuses accepted graph ordering without changing live playback",
+    "Independent outgoing speed, master pause, completion and legacy transition behavior retained",
+    "Exact binary-significand quotient comparison uses bounded 33-step search; equal-exponent shifts remain within u128 width",
+    "Wrap bounds and rem_euclid tiny-negative normalization checked before signed cursor output",
+    "Fade mean integrates constant-one saturated interval after its linear portion"
+  ],
+  "tests_verified": {
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-animation-step-tests-002.log",
+    "sha256": "1f3819493d291e0f030a0d16e87bcb1f884abcb33af810d0d9af1266b0e364e4",
+    "passed": 4,
+    "failed": 0,
+    "ignored": 0,
+    "exit_code": 0
+  },
+  "limits": [
+    "No native schedule installation, root catalog/body mutation, save or SDK proof yet",
+    "No GPU, appearance, device or phase gate"
+  ],
+  "historical_failure": "tests001 test-only ambiguous float annotation prevented compilation; test corrected to explicit f64 before002"
+}

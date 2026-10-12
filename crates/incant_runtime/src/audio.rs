@@ -16,6 +16,9 @@ pub struct NativeAudioBus {
 }
 #[derive(Debug, Clone, PartialEq)]
 pub struct NativeAudioSource {
+    /// Monotonic transport request identity. Zero is an untouched authored source.
+    /// Restart/stop/seek advance it even when all other fields remain equal.
+    pub transport_epoch: u64,
     pub clip: StableId,
     pub bus: Option<StableId>,
     pub gain_db: f32,

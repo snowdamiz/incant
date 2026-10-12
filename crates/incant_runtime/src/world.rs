@@ -79,6 +79,9 @@ pub struct NativeWorld {
     schedule: Schedule,
     pub(crate) flipbook_query: crate::flipbook::PlaybackQuery,
     pub(crate) animation_query: crate::animation::PlaybackQuery,
+    pub(crate) root_ids: BTreeSet<StableId>,
+    pub(crate) root_catalog: std::sync::Arc<[std::sync::Arc<incant_anim::RootMotionCatalog>]>,
+    pub(crate) root_steps: Vec<crate::root_motion::step::PreparedRootStep>,
     pub(crate) ik_catalog: std::sync::Arc<[std::sync::Arc<crate::NativeIk>]>,
     pub(crate) physics: incant_physics_runtime::PhysicsRuntime<StableId>,
     pub(crate) physics_2d: incant_physics_2d_runtime::PhysicsWorld2D,
@@ -118,6 +121,11 @@ impl NativeWorld {
         let physics_2d = scene.physics_2d.clone();
         let audio = scene.audio.clone();
         let ik_catalog = scene.spatial.iter().filter_map(|n| n.ik.clone()).collect();
+        let root_catalog = scene
+            .spatial
+            .iter()
+            .filter_map(|n| n.root_motion.as_ref().map(|r| r.catalog.clone()))
+            .collect();
         let spatial = scene.spatial;
         let visual_assets = scene.visual_assets;
         let mut solver = incant_physics_runtime::PhysicsRuntime::default();
@@ -201,6 +209,9 @@ impl NativeWorld {
             schedule,
             flipbook_query,
             animation_query,
+            root_ids: BTreeSet::new(),
+            root_catalog,
+            root_steps: Vec::new(),
             ik_catalog,
             entities,
             parents,
@@ -245,6 +256,7 @@ impl NativeWorld {
             .physics_2d
             .apply(planar_changes)
             .expect("validated planar scene");
+        result.prepare_root_query_storage();
         result
     }
 
@@ -286,6 +298,30 @@ impl NativeWorld {
                 .as_ref()
                 .map(|graph| graph.initial_state(definition.initial.playing)),
         });
+        let previous_root = self
+            .world
+            .get::<crate::CookedSpatial>(self.entities[&id])
+            .and_then(|n| n.root_motion.as_ref());
+        let next_root = node.as_ref().and_then(|n| n.root_motion.as_ref());
+        let root_changed = animation_changed || previous_root != next_root;
+        let next_root_state = next_root.map(|definition| {
+            let playback = if animation_changed {
+                next_animation_playback.as_ref().expect("root animation")
+            } else {
+                self.world
+                    .get::<crate::animation::Playback>(self.entities[&id])
+                    .expect("root animation")
+            };
+            crate::root_motion::RootMotionState::new(definition, playback, self.tick)
+        });
+        if next_root.is_some() {
+            self.root_ids.insert(id);
+            if self.root_steps.capacity() < self.root_ids.len() {
+                self.root_steps.reserve(self.root_ids.len());
+            }
+        } else {
+            self.root_ids.remove(&id);
+        }
         let previous_ik = self
             .world
             .get::<crate::CookedSpatial>(self.entities[&id])
@@ -316,6 +352,13 @@ impl NativeWorld {
             self.tilemap_collision_ids.remove(&id);
         }
         let mut entity = self.world.entity_mut(self.entities[&id]);
+        if root_changed {
+            if let Some(state) = next_root_state {
+                entity.insert(state);
+            } else {
+                entity.remove::<crate::root_motion::RootMotionState>();
+            }
+        }
         if ik_changed {
             if let Some(state) = next_ik_state {
                 entity.insert(state);
@@ -418,6 +461,9 @@ impl NativeWorld {
         let dt = self.world.resource::<Step>().0;
         // Validate the whole numeric input set and ordinary integration before
         // the first solver write. No cloned configuration or document exists.
+        // Root/character candidates remain private; the complete candidate
+        // validation below still precedes every solver or ECS publication.
+        self.prepare_root_motion(dt, next)?;
         self.prepare_globals(Some(dt))?;
         let navigation = self.navigation_motion()?;
         if self.physics_used || self.physics_2d_used {
@@ -426,8 +472,14 @@ impl NativeWorld {
                 .world
                 .query::<(&Identity, &Local, Option<&Motion>, Option<&Spin>, &Binding)>();
             for (id, local, velocity, spin, _) in query.iter(&self.world) {
-                let state =
-                    crate::physics::state(&local.0, velocity.map(|v| &v.0), spin.map(|s| &s.0));
+                let state = self
+                    .root_steps
+                    .binary_search_by_key(&id.0, |r| r.id)
+                    .ok()
+                    .and_then(|i| self.root_steps[i].body.clone())
+                    .unwrap_or_else(|| {
+                        crate::physics::state(&local.0, velocity.map(|v| &v.0), spin.map(|s| &s.0))
+                    });
                 // The full set was validated above; this repeats only bounded
                 // numeric checks in the standalone solver API, never authoring.
                 if let Err(error) = self.physics.sync_motion(&self.scene_id, &id.0, &state) {
@@ -451,6 +503,7 @@ impl NativeWorld {
                 self.physics_failed = true;
                 return Err(error.into());
             }
+            self.finish_root_motion()?;
             for (id, state) in self.physics_2d.states() {
                 let mut entity = self.world.entity_mut(self.entities[&id]);
                 let rotation = crate::physics_2d::rotation(state.rotation);
@@ -478,6 +531,7 @@ impl NativeWorld {
                 }
             }
         }
+        self.publish_root_motion();
         self.schedule.run(&mut self.world);
         self.tick = next;
         if let Some(navigation) = navigation {
@@ -541,6 +595,7 @@ impl NativeWorld {
         let physics = &self.physics;
         let physics_2d = &self.physics_2d;
         let scene_id = self.scene_id;
+        let roots = &self.root_steps;
         self.world
             .resource_scope(|world, mut hierarchy: Mut<Hierarchy>| {
                 let mut query = world.query::<(
@@ -597,6 +652,11 @@ impl NativeWorld {
                         candidate.rotation = state.rotation;
                         validate_components(id.0, &candidate, None)?;
                         matrix(&candidate)
+                    } else if let Some(root_local) = step
+                        .and_then(|_| roots.binary_search_by_key(&id.0, |r| r.id).ok())
+                        .and_then(|i| roots[i].local.as_ref())
+                    {
+                        matrix(root_local)
                     } else if let (Some(step), Some(velocity), None, None) =
                         (step, velocity, binding, binding2d)
                     {

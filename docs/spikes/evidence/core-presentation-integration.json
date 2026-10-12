@@ -1,0 +1,696 @@
+{
+  "scope": "Unchanged accepted Core gameplay HUD/audio role bindings on current native audio/HUD/root-motion union, numerical CPU verification only.",
+  "tested_head": "f23679d07b3c0ac61c8899c665bacd4361bee251",
+  "integrated_head": "57af899e1085c2fc087ed87a90af85049ff117f8",
+  "main": "4347bf0faa7e3b305f425ed4bb8bbf02b7c2a07f",
+  "producer": "e3513c7d378f7d5eaa595296bf050fcef1eaaebb",
+  "sources": {
+    "samples/core/gameplay.ts": "6901e09d862745a9408bdcbf725ee6bc58da6315f05a52edbec991021210c00b",
+    "samples/core/verify_presentation.py": "42ff52aae1c2ca0f923a4677f87f72e4bffe31193d19d6ba8249cadfbad477bc"
+  },
+  "checks": [
+    {
+      "name": "types",
+      "command": [
+        "node_modules/.bin/tsc",
+        "-p",
+        "samples/core/tsconfig.json"
+      ],
+      "exit": 0,
+      "seconds": 0.5725946669990662,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "gameplay",
+      "command": [
+        "python3",
+        "samples/core/verify.py",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/gameplay",
+        "--binary",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/incant_headless"
+      ],
+      "exit": 0,
+      "seconds": 8.485863833000622,
+      "sha256": "620970dbc2197c94328449052adeafc4cb7f93c1b4b7f6f98c895d33278ad8a7"
+    },
+    {
+      "name": "syntax",
+      "command": [
+        "python3",
+        "-c",
+        "import ast;from pathlib import Path;ast.parse(Path('samples/core/verify_presentation.py').read_text())"
+      ],
+      "exit": 0,
+      "seconds": 0.05225866699765902,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.05933920799725456,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.026468125000974396,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "shipping_command": {
+    "command": [
+      "python3",
+      "samples/core/verify_presentation.py",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export",
+      "--binary",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/incant_headless",
+      "--base-fixture",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/gameplay"
+    ],
+    "exit": 0,
+    "seconds": 456.4795265419998,
+    "log_sha256": "adc922072f8dd6546ec04e62f3212dfe36b5471935a6dcaeda803f151544e80b",
+    "sources_unchanged": true
+  },
+  "source_comparison": {
+    "head": "57af899e1085c2fc087ed87a90af85049ff117f8",
+    "tree": "66d704b520ca7e88e973b8219bfb70a0bf60a24c",
+    "main": "4347bf0faa7e3b305f425ed4bb8bbf02b7c2a07f",
+    "tested_head": "f23679d07b3c0ac61c8899c665bacd4361bee251",
+    "frozen_inputs": 1785,
+    "changed_inputs": [],
+    "post_test_paths": [
+      "STATUS.md",
+      "docs/spikes/evidence/native-audio-transport-main162-review.json",
+      "docs/spikes/evidence/native-audio-transport-main162.json",
+      "docs/spikes/evidence/native-audio-transport-main162/accepted-sources.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/bridge.log.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/clippy.log.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/closeout/conventions.log.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/closeout/diff.log.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/closeout/results.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/closeout/source-comparison.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/conventions.log.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/dependency-guard.log.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/diff.log.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/fmt.log.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/freeze.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/headless-binary.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/headless.log.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/integration-seam-review.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/integration-seams.patch.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/lean-script.log.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export.log.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/assertion-observe.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/assertion-receipt.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/authoring-commands.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/authoring.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/baseline-observe.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/baseline-receipt.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/baseline.pcm.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/baseline.save.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/corrupt-receipt.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/corrupt.save.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/existing.save.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/export-call.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/initial-input.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/middle-observe.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/middle-receipt.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/middle.pcm.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/middle.save.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/neutral-input.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/no-clobber-receipt.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/no-clobber.pcm.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/oversized-receipt.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/package/build.log.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/package/export.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/package/player/data/audio/b2a52d337c64cb12930b798bcc3908dde2fc7ae02420969dea25f7caf484a9da.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/package/player/data/audio/e88a1ce7cf423200ce6f1d77f731ed94e61cdf24e7aedda25d34416d34c463cc.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/package/player/data/clips.bin.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/package/player/data/empty-input.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/package/player/data/fonts/1087d4bb69160e3e5955407294226ca3da11166a3188ada3c1a166ba14e55ceb.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/package/player/data/fonts/6864e1444bc7002790e682360d3f93bd45fe51b7045a64ecbf0e76e19e6b758e.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/package/player/data/fonts/9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/package/player/data/input-actions.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/package/player/data/models/71fbcae82debc0236bda7576327733a6943d93ce7adb913cbe1d95fe931d511f.incmodel.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/package/player/data/package.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/package/player/data/world.scene.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/package/project-build.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/package/symbols/script-symbols.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/preedit-input.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/preedit-receipt.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/repeated-observe.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/repeated-receipt.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/repeated.pcm.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/repeated.save.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/result.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/resumed-observe.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/resumed-receipt.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/resumed.pcm.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/resumed.save.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/wrong-audio-catalog-receipt.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/wrong-audio-catalog.save.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/wrong-audio-clock-receipt.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/wrong-audio-clock.save.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/wrong-audio-transport-receipt.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/wrong-audio-transport.save.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/wrong-program-receipt.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/wrong-program.save.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/wrong-widget-receipt.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/public-export/wrong-widget.save.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/remaining-adapters.log.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/results.json.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/sdk-generated.log.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/sdk-types.log.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/tests.log.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/validation-runner.py.gz",
+      "docs/spikes/evidence/native-audio-transport-main162/wasm-audio.log.gz",
+      "docs/spikes/native-audio-transport-main162.md"
+    ],
+    "only_status_and_evidence": true
+  },
+  "headless_identity": {
+    "manifest": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/headless-binary.json",
+    "source_head": "ae013e20eb2b60a1440fe20cf7b92d1e481ab44e",
+    "profile": "ci",
+    "features": [],
+    "sha256": "c6adb728ebd40936a09f93223d0a8e65394d218c79eb506958a5ea789ea6ae8b",
+    "bytes": 60143808
+  },
+  "headless_engine_matches": true,
+  "public_verified": {
+    "gameplay_cases": 7,
+    "shipping_runs": [
+      {
+        "name": "win",
+        "tick": 300,
+        "report": "64db8a7b02cedda6829834417ff8df106b72cd1eb446ad566cdccb206d445432",
+        "pcm": "5cc3227745f064c559e7f17dbe260006981b6b82d47dd0d92e2f13c5884de996"
+      },
+      {
+        "name": "lose",
+        "tick": 900,
+        "report": "451c4b93fac661f63d7d22e0a080b003c8f6ab42d4ca954ca06d4460ef5d4e22",
+        "pcm": "c4baa82e7504eb240b6d4fa8108ff53530c4b4fa13176cac7bb2b4e9b13bc625"
+      },
+      {
+        "name": "repeat-win",
+        "tick": 300,
+        "report": "64db8a7b02cedda6829834417ff8df106b72cd1eb446ad566cdccb206d445432",
+        "pcm": "5cc3227745f064c559e7f17dbe260006981b6b82d47dd0d92e2f13c5884de996"
+      }
+    ],
+    "package_files": 25,
+    "player_sha256": "b49c2251d8382bd16c4dc70eae5595a633d71c9a11179118ecbb464b68ed878a",
+    "authoring_maps_build_deleted": true,
+    "exact_repeat_pcm": true,
+    "terminal_music_silent": true
+  },
+  "artifacts": {
+    "conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/conventions.log"
+    },
+    "diff.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/diff.log"
+    },
+    "freeze.json.gz": {
+      "sha256": "c684011b93e6baa28d1aa404c47d86b202d7aaaecaa9a9eade5dc8ad39bb55a3",
+      "uncompressed_sha256": "bffb21d5843cb260e91ae2602654aee33bb6d7b262160823004b48fac791c01f",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/freeze.json"
+    },
+    "gameplay/authoring-calls.json.gz": {
+      "sha256": "0085d7689acf84a06aa3df5b3910df4cd0ae7984f44074493bdb47cae4176b10",
+      "uncompressed_sha256": "f86c813d8b3a6f50958e2352ec71e1d6ac425fbe30f74fafd5ecebca8e99f8c6",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/gameplay/authoring-calls.json"
+    },
+    "gameplay/gamepad-input.json.gz": {
+      "sha256": "6c756bce334389eec29985ae7e73bc8200e3c91f3087da34e2df71d7ed4b88fc",
+      "uncompressed_sha256": "2cacb813c6bd3521150dca137d8adc649e6039c12ad0fb349f27a309e78a3b1c",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/gameplay/gamepad-input.json"
+    },
+    "gameplay/gamepad-observe.json.gz": {
+      "sha256": "9ac5d87aa95a97caa3383abb52cabb7fdde96579dfce6f0eff8afe23c53a6323",
+      "uncompressed_sha256": "6c73c23f0de6297b049a189cb34697364590bc51cb3db671275b1bf6f19806d5",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/gameplay/gamepad-observe.json"
+    },
+    "gameplay/gamepad.json.gz": {
+      "sha256": "fa7d2d4e538deb9ca62eae2dcefc99c4bf60ac8f4d4011a9bccbabb0b814a8cc",
+      "uncompressed_sha256": "671cbdf02c7fc254f504c9da3931ee6e9dbfcc098be3ded011f4d2bc302eb4b0",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/gameplay/gamepad.json"
+    },
+    "gameplay/jump-input.json.gz": {
+      "sha256": "f5ef8d8bc00fa972dc2d4632d0fb76cf14daf846c22b908336cfafc488b30f85",
+      "uncompressed_sha256": "aea85027dc03cc63b99bf611716ad775ced10cdef0a7b8c6e1c7abe5c1e37cbb",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/gameplay/jump-input.json"
+    },
+    "gameplay/jump-observe.json.gz": {
+      "sha256": "76922546fc99ee7402f16061b496f44f6a48a4cedd7878583337d5fa6ecf88b3",
+      "uncompressed_sha256": "2c4fa46a4369c9ad5e9b66ed301a44821dccfce46531628586fc481b2eba6315",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/gameplay/jump-observe.json"
+    },
+    "gameplay/jump.json.gz": {
+      "sha256": "5cace9cb12e3737b4bac21f1a55b273f3d5f85e0cb6d85ce42767a01c5109695",
+      "uncompressed_sha256": "2a784e03a4705c3ffd977a84f903b9c6b04ca3553c432a554d5b5060135a8a4c",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/gameplay/jump.json"
+    },
+    "gameplay/lose-input.json.gz": {
+      "sha256": "cb81adeb43532701eedf372d1d963e33ade64d8b5fe24f46b6ad175e2d7ca8a1",
+      "uncompressed_sha256": "e4707335c2d5116ef604c1976dbd864eeafab305cecd583a20795dd0d2976227",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/gameplay/lose-input.json"
+    },
+    "gameplay/lose-observe.json.gz": {
+      "sha256": "89e8988f10098585f07776083566792e302a0db662dff96b2a88f3c10b2ad287",
+      "uncompressed_sha256": "5efea284d7ae848427f533b38fcf503109298be762ea9aefd5f8148903385689",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/gameplay/lose-observe.json"
+    },
+    "gameplay/lose.json.gz": {
+      "sha256": "fa115e5041a71f3e3de62816e5a9cc4236492a5bfa09d9a7928672c1e830e7d2",
+      "uncompressed_sha256": "3a315924f45a408c18049551e4a9d4de04218a424718e50deeceb958b659d836",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/gameplay/lose.json"
+    },
+    "gameplay/process-00.json.gz": {
+      "sha256": "c54a830c982b9fa88e1c4c9850b3f3c788ec96525f95f6e1ec816dc2d748e20d",
+      "uncompressed_sha256": "b87f5919b5a4b750f24b287598155adf50e4c5ef3b73475aef298aa04e46f3d9",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/gameplay/process-00.json"
+    },
+    "gameplay/process-01.json.gz": {
+      "sha256": "1df511f842093a28d1bb4ba259b9269add3f3a3d9d5d18cb6dafa7e70a61dde4",
+      "uncompressed_sha256": "bd42d586633573280d9bc7be261c1d48bc51fb0714483f68460429d18eac9587",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/gameplay/process-01.json"
+    },
+    "gameplay/process-02.json.gz": {
+      "sha256": "052c91c56dbe76ebdb9145623bebf9e6b1b555ea40e76237a710dc4ffb79ea1e",
+      "uncompressed_sha256": "962e8293f14b62c426e5493bc24b8fa4b37fe59b4d32e57bcc20754670e21b6a",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/gameplay/process-02.json"
+    },
+    "gameplay/process-03.json.gz": {
+      "sha256": "00e8120d6c2cda151ed641e595e797dccc1495e60f88ae36d015fa22a3b933ab",
+      "uncompressed_sha256": "76075a8a850ec8cff7de5576c6748a786ff289a21e2467eeb3da5fcdd02c61ac",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/gameplay/process-03.json"
+    },
+    "gameplay/process-04.json.gz": {
+      "sha256": "8be2f7226dbe9313f11bdc5bcb8aacb89cb09a08f8a3ce660a0e0aa53cc063ab",
+      "uncompressed_sha256": "8a93fd0ee3843b2fe558d7fd53773fc6072f23145cc3f5e6fcf528c4ab4e5f95",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/gameplay/process-04.json"
+    },
+    "gameplay/process-05.json.gz": {
+      "sha256": "78023f61143ad0ebef48bb64e4a6922576497565bf0f72c11afed4d9d65218b8",
+      "uncompressed_sha256": "a6e03624bfaa6fe7af4e7176f595b068dbb44cc3527b0a608721924e31920927",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/gameplay/process-05.json"
+    },
+    "gameplay/process-06.json.gz": {
+      "sha256": "0658be990e7121125cd489ed17799477cb9029d7e3bd4579e4fbc1b1cf328a0d",
+      "uncompressed_sha256": "dd99a5a9cd2c2ba9530cdf0613a678e99f2d7e8ca4e679a79b6dd02eb12bc743",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/gameplay/process-06.json"
+    },
+    "gameplay/process-07.json.gz": {
+      "sha256": "488c5d3a991431af6702657d3b5ee897a6c8d3e6409b051337466bcf002430ec",
+      "uncompressed_sha256": "b30a684ee311c37ad82c04bf864a17456fa79e7d7c4c210e571cd31bb355caf6",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/gameplay/process-07.json"
+    },
+    "gameplay/repeat-win-input.json.gz": {
+      "sha256": "1fd02f62fe580dd92dd698b4bfbe94f1f6a0d5d2217dce6f5f66c904ae1cd3c6",
+      "uncompressed_sha256": "aedbc57164dcdd45652c98f5c67e5f3987472eed5625f56ac0af0f9fea0cc731",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/gameplay/repeat-win-input.json"
+    },
+    "gameplay/repeat-win-observe.json.gz": {
+      "sha256": "9ac5d87aa95a97caa3383abb52cabb7fdde96579dfce6f0eff8afe23c53a6323",
+      "uncompressed_sha256": "6c73c23f0de6297b049a189cb34697364590bc51cb3db671275b1bf6f19806d5",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/gameplay/repeat-win-observe.json"
+    },
+    "gameplay/repeat-win.json.gz": {
+      "sha256": "fa7d2d4e538deb9ca62eae2dcefc99c4bf60ac8f4d4011a9bccbabb0b814a8cc",
+      "uncompressed_sha256": "671cbdf02c7fc254f504c9da3931ee6e9dbfcc098be3ded011f4d2bc302eb4b0",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/gameplay/repeat-win.json"
+    },
+    "gameplay/runs.json.gz": {
+      "sha256": "0b1f9f211adccdee9b337edd65704103958c1b3ba64a6bfdca4ff4894b758af2",
+      "uncompressed_sha256": "a35865bcd1c4f07074ee8d77a791a59172c9f3c2d22081615e961822141489ce",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/gameplay/runs.json"
+    },
+    "gameplay/skip-pickup-input.json.gz": {
+      "sha256": "8b60e456536167676774dbbcb02e32a1a69bbc25877a84741f274a05daa49cbf",
+      "uncompressed_sha256": "10bf77b346b66beacea785e2f2ac095f57512b8784397bec4756b77d1c491110",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/gameplay/skip-pickup-input.json"
+    },
+    "gameplay/skip-pickup-observe.json.gz": {
+      "sha256": "1e338b08b200cd52ffc7607cd5c3a6378a89b9b317398042dadd290e7bbb8f78",
+      "uncompressed_sha256": "ae8aee17d141bcf67aafdeb7c49b1b6410d08412befc578900777302aa6356d4",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/gameplay/skip-pickup-observe.json"
+    },
+    "gameplay/skip-pickup.json.gz": {
+      "sha256": "6340ef1bd8d4b685753b7cad30e7146e9a3a37cddd3159d186f38da510bad551",
+      "uncompressed_sha256": "c6a13d72f1a487c65ea6286fdf5b81ff5901a8ce21f69d4661383cd56d5f094e",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/gameplay/skip-pickup.json"
+    },
+    "gameplay/wall-input.json.gz": {
+      "sha256": "99bfbc7d5e8df6c57e1fb9f4b8a7efbbf010b0e74db57b4455a975ebeb927bb6",
+      "uncompressed_sha256": "4ac0e3cdb046ee14ea7fa9fe234f123bcc32b5e0b95f3e592aa97ddbd7a63f68",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/gameplay/wall-input.json"
+    },
+    "gameplay/wall-observe.json.gz": {
+      "sha256": "bc56a62ee5c0309e840c75ecb99ada1dabd62fd17e0b237a31967d97474fef0e",
+      "uncompressed_sha256": "1a41c16c67de45d54f75522338b59b9a722bb6dfe902078dc2dda1fd15e16a1e",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/gameplay/wall-observe.json"
+    },
+    "gameplay/wall.json.gz": {
+      "sha256": "fe6ee74139e25a14e0483b00e268758984c2fda4e23020c2e44e696c6d8b4469",
+      "uncompressed_sha256": "01cb7540bca5c9204da47bf654c1a74bd4efd865bf6f2a0220f48f2dbaf17985",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/gameplay/wall.json"
+    },
+    "gameplay/win-input.json.gz": {
+      "sha256": "1fd02f62fe580dd92dd698b4bfbe94f1f6a0d5d2217dce6f5f66c904ae1cd3c6",
+      "uncompressed_sha256": "aedbc57164dcdd45652c98f5c67e5f3987472eed5625f56ac0af0f9fea0cc731",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/gameplay/win-input.json"
+    },
+    "gameplay/win-observe.json.gz": {
+      "sha256": "9ac5d87aa95a97caa3383abb52cabb7fdde96579dfce6f0eff8afe23c53a6323",
+      "uncompressed_sha256": "6c73c23f0de6297b049a189cb34697364590bc51cb3db671275b1bf6f19806d5",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/gameplay/win-observe.json"
+    },
+    "gameplay/win.json.gz": {
+      "sha256": "fa7d2d4e538deb9ca62eae2dcefc99c4bf60ac8f4d4011a9bccbabb0b814a8cc",
+      "uncompressed_sha256": "671cbdf02c7fc254f504c9da3931ee6e9dbfcc098be3ded011f4d2bc302eb4b0",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/gameplay/win.json"
+    },
+    "gameplay.log.gz": {
+      "sha256": "a63aaf467e9a5073920fe924c17476580266764678fca74d831d91cb85cb5638",
+      "uncompressed_sha256": "620970dbc2197c94328449052adeafc4cb7f93c1b4b7f6f98c895d33278ad8a7",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/gameplay.log"
+    },
+    "public-export/authoring-calls.json.gz": {
+      "sha256": "3898b1c78127e099fbbf8ef45e584a81c806759d622771daa6dc9f211ca22305",
+      "uncompressed_sha256": "e2258e55eeef3098b25375e9ca5fda25ff3dd329ff39b88abe0186e01ca336a3",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/authoring-calls.json"
+    },
+    "public-export/deleted-authoring.json.gz": {
+      "sha256": "3bbba10f6ef7f472af8935ec7868d7eeff1994aa6da435815c52a3baf7c317f3",
+      "uncompressed_sha256": "b90ac878a1656a3840bedefe0515a7c3be5d3e6067eee4b1597273a81b0b6cb1",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/deleted-authoring.json"
+    },
+    "public-export/deleted-maps.json.gz": {
+      "sha256": "669a4b8812138f2b52b83c24593c756206f70050dc4987153f6db5e80993e0a7",
+      "uncompressed_sha256": "34d1bfd1ba0cb0fbe4099b7b2d6efe0f913de840b6c38b8a8c17701ae7cbf6cd",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/deleted-maps.json"
+    },
+    "public-export/lose-input.json.gz": {
+      "sha256": "cb81adeb43532701eedf372d1d963e33ade64d8b5fe24f46b6ad175e2d7ca8a1",
+      "uncompressed_sha256": "e4707335c2d5116ef604c1976dbd864eeafab305cecd583a20795dd0d2976227",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/lose-input.json"
+    },
+    "public-export/lose-observe.json.gz": {
+      "sha256": "9f3982db857ece5d92a1930f7c2d4a1390b932c03aeb0db1186ecda0b123c207",
+      "uncompressed_sha256": "11c62726be7f32a1fca5d7224420afaa34febb43e76e26dc4db55d3de277fa5c",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/lose-observe.json"
+    },
+    "public-export/lose.json.gz": {
+      "sha256": "003ac17d8494f7bb8e539b12764d66dd818c1e3b87674c1f39478ccaec4ac5cb",
+      "uncompressed_sha256": "451c4b93fac661f63d7d22e0a080b003c8f6ab42d4ca954ca06d4460ef5d4e22",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/lose.json"
+    },
+    "public-export/lose.pcm.gz": {
+      "sha256": "65bb543fe85450e7b8f97666866a3028f068de7daa073078db3d27c4e1fb2f89",
+      "uncompressed_sha256": "c4baa82e7504eb240b6d4fa8108ff53530c4b4fa13176cac7bb2b4e9b13bc625",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/lose.pcm"
+    },
+    "public-export/package/build.log.gz": {
+      "sha256": "d27361350e9e2a7cebdae36047890d975805a4ee83ba203ffbeba6aeebbd59ab",
+      "uncompressed_sha256": "4f19d6f918e0ba477191dc51b0fb403374a0a8eb0b58abdad64702e0248bf430",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/package/build.log"
+    },
+    "public-export/package/export.json.gz": {
+      "sha256": "16065f62199762dfdc1f024030aad6b2db980c8511cf12592f5d7e9a0b4503f9",
+      "uncompressed_sha256": "86e837e92d2c3ca63f51ec0fb1393d0bec7cd90c14240f63b94363672bd9c1b5",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/package/export.json"
+    },
+    "public-export/package/player/data/audio/2398da29e2def0b16fccdcacba29b8a83e3aa0c7f1132ac7b83f30968b5cf102.json.gz": {
+      "sha256": "b95ba2631d8b899cf183a7a899ae77c46d3861ed22a1f1764cf4e74e3e4a519a",
+      "uncompressed_sha256": "15f5ddadde2cb5f7352de105d2d7fdc87fbb0084b042e59bf4b9ed61346f4849",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/package/player/data/audio/2398da29e2def0b16fccdcacba29b8a83e3aa0c7f1132ac7b83f30968b5cf102.json"
+    },
+    "public-export/package/player/data/audio/395329b5981927a184aa612c4709fbdaae717a7fb1ef7df8c81b535721e2a9fa.json.gz": {
+      "sha256": "0ea1aca4c953cf2233a3f2a8752597df0d87ee3bb468d6816bfa53dbae7be077",
+      "uncompressed_sha256": "de730c367d68e88d68db1cbb8d7b23d26d6a31f86adc22de71735865f70a2cfe",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/package/player/data/audio/395329b5981927a184aa612c4709fbdaae717a7fb1ef7df8c81b535721e2a9fa.json"
+    },
+    "public-export/package/player/data/audio/3b9d7408f9e8467a46f26b7d43bc4b3230faf7ce549445ed1756fc7838752f84.json.gz": {
+      "sha256": "2f4691cd70f8e69152db145ef3d1c3879f0fa928593cdb33609357d3937077bc",
+      "uncompressed_sha256": "2df70e6b78b69baf75da3020b37e52a34a2a821726987bb6eeca68d51545c402",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/package/player/data/audio/3b9d7408f9e8467a46f26b7d43bc4b3230faf7ce549445ed1756fc7838752f84.json"
+    },
+    "public-export/package/player/data/audio/3c1296a9c03eda2e90ade53650776166ac3126345dfa13690052feaf390506a0.json.gz": {
+      "sha256": "df8c10634ed41f534702cba0496b0ee05b5d061995c8f714f1769a0273d1bf17",
+      "uncompressed_sha256": "df160fecacfa564c74bf33af9351faa138dadeafa89434ab23debc02187ff0ed",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/package/player/data/audio/3c1296a9c03eda2e90ade53650776166ac3126345dfa13690052feaf390506a0.json"
+    },
+    "public-export/package/player/data/audio/a32b666415328455ef62426b3b10bba357c757246d4209dbaa2f58ce6ccbe852.json.gz": {
+      "sha256": "71845ddf17eb108459aa1b395b8801dd746265adbab1c1c419bfdcb56bbf1abc",
+      "uncompressed_sha256": "298895127a2e1013ed8cab96d941c7cfcfce24602299580d51807ee7a1c4dfb0",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/package/player/data/audio/a32b666415328455ef62426b3b10bba357c757246d4209dbaa2f58ce6ccbe852.json"
+    },
+    "public-export/package/player/data/clips.bin.gz": {
+      "sha256": "f34d3c1fcfb66284abaa5fd6969bd8d549f0538b9e2fc59a68c30afe108a6a72",
+      "uncompressed_sha256": "c9f70c2e725aaf88239dc66c7cfa0b827870d19184bb8e47519d3f58c782dec2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/package/player/data/clips.bin"
+    },
+    "public-export/package/player/data/empty-input.json.gz": {
+      "sha256": "438100c9c52fd35517bc237cb9289ac1088282ab6f2b851a4878fd0ecc79abcc",
+      "uncompressed_sha256": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/package/player/data/empty-input.json"
+    },
+    "public-export/package/player/data/fonts/9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2.json.gz": {
+      "sha256": "48d551dc911877a7bfaa0caeeb8187d8b67c15e3271edb0fc58c61d62a3c95c4",
+      "uncompressed_sha256": "e43c79c54c311c5759bdf686b43b9b112b0177bafd6938782ebb782d75018812",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/package/player/data/fonts/9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2.json"
+    },
+    "public-export/package/player/data/input-actions.json.gz": {
+      "sha256": "79353a6bb6bf24f267e59e0a42bf570a96a066c212c5145fe31e72731243908e",
+      "uncompressed_sha256": "3abebf19161a74551e30b7d541d57c3ac90b3df43b35396a39baa4e305985c4c",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/package/player/data/input-actions.json"
+    },
+    "public-export/package/player/data/package.json.gz": {
+      "sha256": "c2d128fea3c9ca302ef6a9fd0876d85a14a05c78d7ad01a694fa83078ce94290",
+      "uncompressed_sha256": "5f907f0a05dc10b3b5a21a612b65cadc425fd43b411a6a467995e2787b8ce3d1",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/package/player/data/package.json"
+    },
+    "public-export/package/player/data/world.scene.gz": {
+      "sha256": "b11b00ba482973ba9dbd3d4c8ffdc84a6bdf12ba10398915156e765c4da6abe7",
+      "uncompressed_sha256": "74bfca44c019eab8990e43e7a268a341d35412a6e70351280d4d824797bce9c3",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/package/player/data/world.scene"
+    },
+    "public-export/package/project-build.json.gz": {
+      "sha256": "148e5be80374d48042a8293e587382cffc7a84f4692aa1785aadd7134e12af70",
+      "uncompressed_sha256": "d87df5b0b8147f969d3f2e8c3c5f87372ff6258b0cde98bacf3bb4dfc5c1d7bf",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/package/project-build.json"
+    },
+    "public-export/package/symbols/script-symbols.json.gz": {
+      "sha256": "cf5024388142c08e08adc57660ab940755443bf87d9f0aa201e9650a4374dc63",
+      "uncompressed_sha256": "944bc630d90a762dd23af0c0b4958df5cabd796902a14e7274b9a46896cfcddf",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/package/symbols/script-symbols.json"
+    },
+    "public-export/package-before.json.gz": {
+      "sha256": "a385292f66c02baf3a443509ec182de5dbed8f70067172182b76b14245a3c2bd",
+      "uncompressed_sha256": "d4485b4ee5e87795c5d51c94e6d0be4fbb22a3782eaa2c1b06c146918bbf469f",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/package-before.json"
+    },
+    "public-export/process-00.json.gz": {
+      "sha256": "5f92b764b71c2315d3b52f8bd29ab21966f2326f0ddc80308b349ff3883b2d58",
+      "uncompressed_sha256": "592b91f993e931056393088138638723e20490196fe7767c6d4d03693e75037a",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/process-00.json"
+    },
+    "public-export/process-01.json.gz": {
+      "sha256": "09fe003e0c7ea08f6e76423b36a5f4eab702b936160790dd8723567e8133626e",
+      "uncompressed_sha256": "797880e57d8d24b6aad10732d5e46e678d0bd712c3c8307cd2264f231876726b",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/process-01.json"
+    },
+    "public-export/process-02.json.gz": {
+      "sha256": "b89d06be6db19cb3e0d0f85e0c8679cdf984dabc64dd5d9e2d060d56ae8c4186",
+      "uncompressed_sha256": "1dcaad0952b376a38d6a40faa6ce49f3754f3b9a4d7b2320263a21606d3db331",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/process-02.json"
+    },
+    "public-export/process-03.json.gz": {
+      "sha256": "ddd1feee7892680e5681f3d760029e95640f7b29c5d6189a4df05235b53e6c9e",
+      "uncompressed_sha256": "94722d85172758295b2aa4f32fb4b6f9d2a3d9ac663ec53cc0990f58dae53930",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/process-03.json"
+    },
+    "public-export/process-04.json.gz": {
+      "sha256": "2da5666aab5950d3c1d7316525fb08696657dca8931ad26efc7cc01b64d581ff",
+      "uncompressed_sha256": "54722c901f82035468e0b774e75173d2e154439d08ad431701547f86ade99e3f",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/process-04.json"
+    },
+    "public-export/process-05.json.gz": {
+      "sha256": "a9c8293a878899b8f2acd9d03247a7711e46857a5d6d548ce91876bbc9038705",
+      "uncompressed_sha256": "f29ae13df6dd9251adfcaf3ccef34a1c40f5fce6c6d5bddb89a99df75e449012",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/process-05.json"
+    },
+    "public-export/process-06.json.gz": {
+      "sha256": "8d3c27c66e4164e99c8b0aa48929fb5267fd95f73156511ec97bead9cd60ff7e",
+      "uncompressed_sha256": "06c10fb9e6dec1dc1ac1fe8a91bf662ea5b43a2064cd3d47453ebd0b454fa264",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/process-06.json"
+    },
+    "public-export/process-07.json.gz": {
+      "sha256": "791fb2e8d9cdbf724235c7af2314f6a48a231f8898b319bd85640ae2df8ee368",
+      "uncompressed_sha256": "ba0d1b9a720c9049e6e96daf91ee9dc076093572f71a28f4d0e5243532d79226",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/process-07.json"
+    },
+    "public-export/process-08.json.gz": {
+      "sha256": "1f710c1a29c3f5430baff6bcb7c60e21e488392a44a32090a7cbaf2f088fba99",
+      "uncompressed_sha256": "d3ebe82969467f0d385ff263d0e0c11c64d5fda1d1f95cfa1b90268ea98b9059",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/process-08.json"
+    },
+    "public-export/repeat-win-input.json.gz": {
+      "sha256": "1fd02f62fe580dd92dd698b4bfbe94f1f6a0d5d2217dce6f5f66c904ae1cd3c6",
+      "uncompressed_sha256": "aedbc57164dcdd45652c98f5c67e5f3987472eed5625f56ac0af0f9fea0cc731",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/repeat-win-input.json"
+    },
+    "public-export/repeat-win-observe.json.gz": {
+      "sha256": "f46447f56dc534cd35fdfa778fa3eaf84cf0200b766b64922e43d71c7948edc5",
+      "uncompressed_sha256": "f477a3badfb468fd72e04780898dd88a50cd16ac3875795807466d83f53165d2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/repeat-win-observe.json"
+    },
+    "public-export/repeat-win.json.gz": {
+      "sha256": "2454a5139af65315abd47d2166a14e280c58ce9bcedd4f146b4c081263551692",
+      "uncompressed_sha256": "64db8a7b02cedda6829834417ff8df106b72cd1eb446ad566cdccb206d445432",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/repeat-win.json"
+    },
+    "public-export/repeat-win.pcm.gz": {
+      "sha256": "ac854987a04401e404bc68b4d56e83fe952901d1cbc679235ff7b82d43b81a1a",
+      "uncompressed_sha256": "5cc3227745f064c559e7f17dbe260006981b6b82d47dd0d92e2f13c5884de996",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/repeat-win.pcm"
+    },
+    "public-export/result.json.gz": {
+      "sha256": "0757e0844cb91584105c291944386ae8393851960138719654ddf692dc8943bb",
+      "uncompressed_sha256": "13b88df2863bf7bd9d2c37e0b2a35814dbdcec8618bc3f21c41a2982d8411693",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/result.json"
+    },
+    "public-export/win-input.json.gz": {
+      "sha256": "1fd02f62fe580dd92dd698b4bfbe94f1f6a0d5d2217dce6f5f66c904ae1cd3c6",
+      "uncompressed_sha256": "aedbc57164dcdd45652c98f5c67e5f3987472eed5625f56ac0af0f9fea0cc731",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/win-input.json"
+    },
+    "public-export/win-observe.json.gz": {
+      "sha256": "f46447f56dc534cd35fdfa778fa3eaf84cf0200b766b64922e43d71c7948edc5",
+      "uncompressed_sha256": "f477a3badfb468fd72e04780898dd88a50cd16ac3875795807466d83f53165d2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/win-observe.json"
+    },
+    "public-export/win.json.gz": {
+      "sha256": "2454a5139af65315abd47d2166a14e280c58ce9bcedd4f146b4c081263551692",
+      "uncompressed_sha256": "64db8a7b02cedda6829834417ff8df106b72cd1eb446ad566cdccb206d445432",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/win.json"
+    },
+    "public-export/win.pcm.gz": {
+      "sha256": "ac854987a04401e404bc68b4d56e83fe952901d1cbc679235ff7b82d43b81a1a",
+      "uncompressed_sha256": "5cc3227745f064c559e7f17dbe260006981b6b82d47dd0d92e2f13c5884de996",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export/win.pcm"
+    },
+    "public-export-terminal.json.gz": {
+      "sha256": "bd0a78126565c13668cfe16a32c7a4c72bb914fdcb134c8ceafedc5db7c37a84",
+      "uncompressed_sha256": "89defebf2cf87154def7e09233285e7166b25234a202c9e1cf18d7f52dc9d1bc",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export-terminal.json"
+    },
+    "public-export.log.gz": {
+      "sha256": "05c5fe0f9b75ed4ec57443cacd19a958dee00b401c87a0b6cef486e593e99713",
+      "uncompressed_sha256": "adc922072f8dd6546ec04e62f3212dfe36b5471935a6dcaeda803f151544e80b",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/public-export.log"
+    },
+    "results.json.gz": {
+      "sha256": "1bc9de6e61984615450b22f1089c92211d8544c88779d95bb111320b18735784",
+      "uncompressed_sha256": "71c2fe13913401a40f6e526a6849b562fa7112742918f871ca2effb61d8442b8",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/results.json"
+    },
+    "syntax.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/syntax.log"
+    },
+    "types.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-002/types.log"
+    },
+    "closeout/conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-integration-closeout/conventions.log"
+    },
+    "closeout/diff.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-integration-closeout/diff.log"
+    },
+    "closeout/results.json.gz": {
+      "sha256": "43d61f0460c4e016fba258d94e2129a9eeb2efda38a445a95230954398273e34",
+      "uncompressed_sha256": "f0028c071f31211abf1ede05f55edaf224001c62d508a2c56da5ee87446c2ecf",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-integration-closeout/results.json"
+    },
+    "closeout/source-comparison.json.gz": {
+      "sha256": "5a0104aacc3605d1638e0e5800c75224a427076abe6111bd074176de2af39427",
+      "uncompressed_sha256": "bc69fc7bc36711acbf66c5b60caa11aca2b1c8524d747ad5e694c30f28b3e6d0",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-integration-closeout/source-comparison.json"
+    },
+    "core-presentation-preparation-main162.json.gz": {
+      "sha256": "397e1905a4f6473a2198ad579fc01fff795aeda6d7d12ae28bdabe4cefbe64c4",
+      "uncompressed_sha256": "7c1a37cbe650a6cd0361d03e4c4a392d1e3be877ed4e3967c3cb0a8601b6a1e5",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-preparation-main162.json"
+    },
+    "core-presentation-checks.py.gz": {
+      "sha256": "7a57b7d061022c10e7fc443775f027ed565f4a6e26bf2ac7daed8f22ce910175",
+      "uncompressed_sha256": "24a834f60d9f2432ef79520da427e338ab19943bb350d34334818eba7cb9e5ac",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-checks.py"
+    },
+    "core-presentation-export-main162.py.gz": {
+      "sha256": "f4b16d4a43195b7771ace9a442f0f987a7fa64a940c53106ad259472158d6ee3",
+      "uncompressed_sha256": "d374903ce453ec8fcc600fde8293864ec9bba9623b91ce4bcc5af701e9082a1b",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-export-main162.py"
+    },
+    "prior-path-failure/freeze.json.gz": {
+      "sha256": "c684011b93e6baa28d1aa404c47d86b202d7aaaecaa9a9eade5dc8ad39bb55a3",
+      "uncompressed_sha256": "bffb21d5843cb260e91ae2602654aee33bb6d7b262160823004b48fac791c01f",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-001/freeze.json"
+    },
+    "prior-path-failure/results.json.gz": {
+      "sha256": "e2ead187db64c80da9f304e3161bea1386b196d2cab3ca772882a4d58d6c9320",
+      "uncompressed_sha256": "754fd0c0327720b6b7583884d33b457598796577ac2c289039dbeba0248f831e",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-001/results.json"
+    },
+    "prior-path-failure/types.log.gz": {
+      "sha256": "fa1bf21870414b0d4d97b094563a1f791b427865d1b28bf24e35fafa82abb9b8",
+      "uncompressed_sha256": "150b8e3bf9079b0de0c3a9650a20cc3564b20aa263cb9f1427fcf514d83a7518",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-presentation-main162-001/types.log"
+    }
+  },
+  "producer_review": {
+    "path": "docs/spikes/evidence/core-presentation-bindings/core-presentation-bindings-final-20261012.json",
+    "sha256": "927907c779d8ecf956aa1d2d62aed1553ebafa3705c5f9afdd4ef539506695a8",
+    "accepted": true,
+    "findings": []
+  },
+  "prior_failure": "First integration typecheck launcher used nonexistent tools/node_modules path; changed only launcher to root node_modules, no source edits.",
+  "integration_review": {
+    "accepted": true,
+    "path": "docs/spikes/evidence/core-presentation-integration-review.json",
+    "sha256": "62f2ac060197dc602c23c3b4c519f9f01a11c9e2fa18faa3d3744371809e215f",
+    "reviewed_manifest_sha256": "7483d18d6651c2a2ffeef2e01d227431bb85e0a33b062bad86035a6a649e054e"
+  },
+  "limitations": [
+    "Numerical UI fixture, no visual approval",
+    "Observed test wrapper; production gameplay preserved",
+    "Ordinary CPU exported numerical fixture; authored visual level and physics saves remain separate",
+    "No new renderer/layout/art, native-window/device or physics checkpoint gate evidence.",
+    "Public helper asserts journal reopening after writing its call receipt; that final reopen call is not directly retained in the call-list file."
+  ]
+}

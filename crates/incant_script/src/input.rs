@@ -6,7 +6,7 @@ use rquickjs::{Array, Ctx, IntoJs, Object, Value, object::Property};
 
 // Property::from omits HAS_WRITABLE, which preserves an existing Array.length
 // descriptor. Explicitly clear writable through the safe descriptor trait.
-struct ReadonlyLength(u32);
+pub(crate) struct ReadonlyLength(pub u32);
 impl<'js> rquickjs::object::AsProperty<'js, u32> for ReadonlyLength {
     fn config(
         self,

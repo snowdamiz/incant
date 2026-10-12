@@ -32,7 +32,9 @@ pub enum RecordedUiEvent {
     },
 }
 impl RecordedUiEvent {
-    pub(crate) fn validate(&self) -> Result<usize, InputError> {
+    /// Validate one timeline record and return its bounded text byte charge.
+    /// Callers must additionally enforce the shared packet count/byte limits.
+    pub fn validate(&self) -> Result<usize, InputError> {
         let (id, text) = match self {
             Self::Focus { entity_id } | Self::Cancel { entity_id } => (Some(entity_id), ""),
             Self::Commit { entity_id, text }

@@ -1,0 +1,19 @@
+{
+  "format": "incant-input",
+  "version": 2,
+  "tick_rate": 60,
+  "start_tick": 0,
+  "ticks": 12,
+  "frames": [
+    {
+      "tick": 1,
+      "events": [
+        {
+          "type": "key",
+          "code": "F3",
+          "down": true
+        }
+      ]
+    }
+  ]
+}

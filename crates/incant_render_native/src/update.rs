@@ -111,6 +111,7 @@ impl NativeRenderInput {
                 animation_blend: node.mesh.as_ref().and_then(|m| m.animation_blend),
                 animation_pose: node.mesh.as_ref().and_then(|m| m.animation_pose),
                 animation_ik: node.mesh.as_ref().and_then(|m| m.animation_ik.clone()),
+                animation_root: node.mesh.as_ref().and_then(|m| m.animation_root),
             };
         }
         let mut guard = MotionGuard {
@@ -132,6 +133,7 @@ impl NativeRenderInput {
                     mesh.animation_blend = node.animation_blend;
                     mesh.animation_pose = node.animation_pose;
                     mesh.animation_ik = node.animation_ik.cloned();
+                    mesh.animation_root = node.animation_root;
                 }
                 if let Some(sprite) = &mut guard.input.nodes[slot].sprite {
                     sprite.frame = node.flipbook.map_or(0, |p| p.frame());
@@ -170,6 +172,7 @@ impl Drop for MotionGuard<'_> {
                     mesh.animation_blend = old.animation_blend;
                     mesh.animation_pose = old.animation_pose;
                     mesh.animation_ik.clone_from(&old.animation_ik);
+                    mesh.animation_root = old.animation_root;
                 }
                 if let Some(sprite) = &mut node.sprite {
                     sprite.frame = old.frame;

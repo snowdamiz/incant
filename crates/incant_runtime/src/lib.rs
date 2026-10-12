@@ -3,6 +3,11 @@
 //! committed spatial extraction. Mixer/render hosts and authoring stay separate.
 mod animation;
 mod animation_binary;
+mod animation_step;
+mod root_motion;
+pub use root_motion::{
+    NativeRootMotion, RootMotionClockSnapshot, RootMotionControl, RootMotionSnapshot,
+};
 mod ik;
 mod ik_binary;
 pub use ik::{
@@ -109,7 +114,9 @@ pub use spatial::{
 };
 pub use spatial_view::{SpatialNode, SpatialView};
 
+mod hud;
 mod text;
+pub use hud::{MAX_HUD_COMMAND_BYTES, MAX_HUD_COMMANDS, TextControl, UiControl};
 mod text_binary;
 pub use text::{
     CookedText, FontAssetRef, MAX_SCENE_TEXT_BYTES, MAX_TEXT_BYTES, MAX_TEXT_FONTS, MAX_TEXT_NODES,

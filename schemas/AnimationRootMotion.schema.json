@@ -1,0 +1,49 @@
+{
+  "$defs": {
+    "RootMotionApplication": {
+      "enum": [
+        "extract_only",
+        "transform",
+        "kinematic3d",
+        "character3d"
+      ],
+      "type": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "application": {
+      "$ref": "#/$defs/RootMotionApplication"
+    },
+    "applying": {
+      "description": "Automatic movement can be stopped without changing animation clocks or\nstripping. ExtractOnly always leaves body movement to gameplay.",
+      "type": "boolean"
+    },
+    "fingerprint": {
+      "description": "Captured recipe identity, not a source path or an authentication token.\nA changed model revision requires an explicit root binding transaction.",
+      "maxLength": 64,
+      "minLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "model": {
+      "type": "string"
+    },
+    "root": {
+      "format": "uint16",
+      "maximum": 4095,
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "model",
+    "fingerprint",
+    "root",
+    "application",
+    "applying"
+  ],
+  "title": "AnimationRootMotion",
+  "type": "object"
+}

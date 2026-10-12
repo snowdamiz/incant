@@ -1,0 +1,38 @@
+[
+  {
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_runtime",
+      "--lib",
+      "root_motion::tests"
+    ],
+    "status": 0,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-native-tests-002/00.log"
+  },
+  {
+    "command": [
+      "./tools/cargo",
+      "check",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_render_native",
+      "-p",
+      "incant_render_authoring",
+      "-p",
+      "incant_render",
+      "-p",
+      "incant_cook"
+    ],
+    "status": 0,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-native-tests-002/01.log"
+  }
+]

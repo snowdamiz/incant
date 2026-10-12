@@ -1,0 +1,45 @@
+[
+  {
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_cook",
+      "--no-default-features",
+      "--features",
+      "scene",
+      "--test",
+      "root_motion"
+    ],
+    "cwd": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-cold-checks-002/00.log",
+    "status": "finished",
+    "exit_code": 0,
+    "elapsed_seconds": 19.03634025000065,
+    "sha256": "63bb083048698901ef6deebe8b10e6de5f327e4bdcc5a4b6bfc3481449fc0fa9"
+  },
+  {
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_assets",
+      "--test",
+      "skeletal"
+    ],
+    "cwd": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-cold-checks-002/01.log",
+    "status": "finished",
+    "exit_code": 0,
+    "elapsed_seconds": 16.756404292000298,
+    "sha256": "e94661afbf260745ada503c9e4e7557030265a5ad85b1c99d6e49660678229d9"
+  }
+]

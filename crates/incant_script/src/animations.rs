@@ -7,6 +7,7 @@ use rquickjs::{Array, Ctx, Object, TypedArray, object::Property};
 pub(crate) struct Scratch {
     graphs: crate::animation_graphs::Scratch,
     ik: crate::animation_ik::Scratch,
+    root: crate::root_motion::Scratch,
     rows: Vec<AnimationSnapshot>,
     clips: Vec<i32>,
     seconds: Vec<f64>,
@@ -33,6 +34,7 @@ impl Scratch {
         world.snapshot_animations(&mut self.rows)?;
         self.graphs.capture(world)?;
         self.ik.capture(world)?;
+        self.root.capture(world)?;
         self.clips.clear();
         self.seconds.clear();
         self.speeds.clear();
@@ -102,6 +104,10 @@ impl Scratch {
     }
     pub fn expose<'js>(&self, ctx: &Ctx<'js>) -> rquickjs::Result<Object<'js>> {
         let result = Object::new_proto(ctx.clone(), None)?;
+        result.prop(
+            "rootMotion",
+            Property::from(self.root.expose(ctx)?).enumerable(),
+        )?;
         result.prop("ik", Property::from(self.ik.expose(ctx)?).enumerable())?;
         result.prop(
             "graphs",
@@ -206,6 +212,7 @@ mod tests {
         let scratch = Scratch {
             graphs: Default::default(),
             ik: Default::default(),
+            root: Default::default(),
             rows: vec![AnimationSnapshot {
                 id: StableId([0; 16]),
                 blend: None,

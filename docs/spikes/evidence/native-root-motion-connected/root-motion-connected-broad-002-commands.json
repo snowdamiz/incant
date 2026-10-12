@@ -1,0 +1,122 @@
+[
+  {
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_runtime",
+      "-p",
+      "incant_script",
+      "-p",
+      "incant_physics_runtime",
+      "-p",
+      "incant_render_native",
+      "-p",
+      "incant_cook",
+      "-p",
+      "incant_assets",
+      "--all-targets"
+    ],
+    "status": 0,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-broad-002/00.log"
+  },
+  {
+    "command": [
+      "./tools/cargo",
+      "clippy",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_anim",
+      "-p",
+      "incant_runtime",
+      "-p",
+      "incant_script",
+      "-p",
+      "incant_physics_runtime",
+      "-p",
+      "incant_assets_runtime",
+      "-p",
+      "incant_cook",
+      "-p",
+      "incant_render_native",
+      "-p",
+      "incant_render",
+      "-p",
+      "incant_render_authoring",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "status": 0,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-broad-002/01.log"
+  },
+  {
+    "command": [
+      "./tools/cargo",
+      "check",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_anim",
+      "-p",
+      "incant_runtime",
+      "--target",
+      "wasm32-unknown-unknown"
+    ],
+    "status": 0,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-broad-002/02.log"
+  },
+  {
+    "command": [
+      "python3",
+      "tools/check_runtime_dependencies.py",
+      "incant_anim",
+      "incant_runtime",
+      "incant_script",
+      "incant_render_native"
+    ],
+    "status": 0,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-broad-002/03.log"
+  },
+  {
+    "command": [
+      "node",
+      "node_modules/typescript/bin/tsc",
+      "--noEmit",
+      "-p",
+      "sdk/ts/tsconfig.json"
+    ],
+    "status": 0,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-broad-002/04.log"
+  },
+  {
+    "command": [
+      "./tools/cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "status": 0,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-broad-002/05.log"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "status": 0,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-broad-002/06.log"
+  }
+]

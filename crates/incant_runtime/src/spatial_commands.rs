@@ -24,10 +24,50 @@ impl NativeWorld {
             changes.insert(*entity, spatial.clone());
         }
         let generation = self.validate_spatial_changes(&changes, &self.parents)?;
+        for (&id, node) in &changes {
+            if let Some(root) = node.as_ref().and_then(|n| n.root_motion.as_ref()) {
+                if root.application == incant_types::RootMotionApplication::Character3d
+                    && self.physics.state_iter().count()
+                        > incant_physics_runtime::MAX_CHARACTER_QUERY_COLLIDERS
+                {
+                    return Err(SceneError::Invalid("character query collider capacity").into());
+                }
+                let entity = self.world.entity(self.entities[&id]);
+                let binding = entity.get::<crate::physics::Binding>();
+                crate::root_motion::policy::validate(
+                    root.application,
+                    self.parents[&id].is_some(),
+                    &entity.get::<crate::world::Local>().unwrap().0,
+                    entity.get::<crate::world::Motion>().map(|v| &v.0),
+                    binding.and_then(|b| b.body.as_ref()),
+                    binding.map(|b| &b.collider),
+                    entity.get::<crate::physics_2d::Binding2D>().is_some(),
+                )?;
+                if root.application == incant_types::RootMotionApplication::Transform {
+                    let mut parent = self.parents[&id];
+                    while let Some(a) = parent {
+                        if !crate::root_motion::policy::uniform(
+                            self.world
+                                .get::<crate::world::Local>(self.entities[&a])
+                                .unwrap()
+                                .0
+                                .scale,
+                        ) {
+                            return Err(SceneError::Invalid(
+                                "root-motion ancestors require positive uniform scale",
+                            )
+                            .into());
+                        }
+                        parent = self.parents[&a];
+                    }
+                }
+            }
+        }
         for (id, node) in changes {
             self.install_spatial(id, node);
         }
         self.binding_generation = generation;
+        self.prepare_root_query_storage();
         commands.clear();
         Ok(())
     }
@@ -50,6 +90,32 @@ impl NativeWorld {
             &self.visual_assets,
             |id| parents.contains_key(&id),
         )?;
+        for (&id, node) in changes {
+            let Some(root) = node.as_ref().and_then(|n| n.root_motion.as_ref()) else {
+                continue;
+            };
+            crate::root_motion::policy::validate_character_catalog(root)?;
+            if let Some(&handle) = self.entities.get(&id) {
+                let entity = self.world.entity(handle);
+                if node.as_ref().and_then(|n| n.animation.as_ref())
+                    == entity
+                        .get::<CookedSpatial>()
+                        .and_then(|n| n.animation.as_ref())
+                    && entity
+                        .get::<CookedSpatial>()
+                        .and_then(|n| n.root_motion.as_ref())
+                        != Some(root)
+                    && entity
+                        .get::<crate::animation::Playback>()
+                        .is_some_and(|p| p.graph.is_some() && p.state.transition.is_some())
+                {
+                    return Err(SceneError::Invalid(
+                        "changing root binding during legacy graph fade is unsupported",
+                    )
+                    .into());
+                }
+            }
+        }
         let changed = self.spatial_ids.iter().any(|id| !parents.contains_key(id))
             || changes
                 .iter()

@@ -1,0 +1,353 @@
+{
+  "at": "2026-10-12T20:30:30.893512+00:00",
+  "scope": "Shared ordinary player library and bounded C ABI. Actual macOS CPU tests/build only; target mobile execution is pending.",
+  "base": "4347bf0faa7e3b305f425ed4bb8bbf02b7c2a07f",
+  "sources": {
+    "crates/incant_game_player/Cargo.toml": "38fd564984a89b1ceba7e46cc9ab9e7147e6d7c6027c94efdd82feb9502b2abb",
+    "crates/incant_game_player/src/main.rs": "b389f69564c9e0c1ef6bdfd9786e4b57a32fb169febaba8f2b82adb9f3a06e7c",
+    "crates/incant_game_player/src/lib.rs": "097912eb497a659b7951cf10a6d94199e2b81c422daa3d8423e83d61a9c72fc8",
+    "crates/incant_game_player/src/mobile.rs": "2fefdd46d524a1bd20fad3b5ed65587c4838bcd2e662d5508443260d21382b0b",
+    "crates/incant_game_player/src/mobile/tests.rs": "e6a859221cba5d681f61dccf57649d2fe8f7f45f4d268bd9233643d60f17fc74",
+    "crates/incant_game_player/include/incant_game.h": "101c0a974c7b629f66f7d9e9e2d9c038d71a45ccb2a8fdc91739c2ae7fe649c5"
+  },
+  "review_sha256": "c7a4f9ece3fde1e05889590fc1769fd3608247c442ca3082c30024c204939b4b",
+  "validation": {
+    "mobile_ffi_tests": 11,
+    "native_window_tests": 60,
+    "native_window_static_module_tests": 60,
+    "counts_overlap": true,
+    "test_groups_each": 5,
+    "failed_or_ignored_final": 0,
+    "all_target_clippy": "Passed all three feature configurations",
+    "runtime_dependency_graph": "Authoring-free resolved graph with mobile-ffi+native-window",
+    "macos_archive_receipt": {
+      "at": "2026-10-12T20:26:06.108180+00:00",
+      "checkout": "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant",
+      "base": "4347bf0faa7e3b305f425ed4bb8bbf02b7c2a07f",
+      "target": "aarch64-apple-darwin",
+      "profile": "ci",
+      "features": [
+        "mobile-ffi"
+      ],
+      "fixture": "default trusted fixtures/game.js, no authored-game/mobile/device claim",
+      "archive": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-library-001/libincant_game_player.a",
+        "sha256": "1125911b72fc063d759f8db98f66e705296a65b9ec235dfd99092e0cae15122a",
+        "bytes": 86391472
+      },
+      "header": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-library-001/incant_game.h",
+        "sha256": "101c0a974c7b629f66f7d9e9e2d9c038d71a45ccb2a8fdc91739c2ae7fe649c5"
+      },
+      "sources": {
+        "Cargo.toml": "dd9a6d6ff626086e7e1bf2f6845dac09d94c60651d0f43efc1be0cc3b5d83b7c",
+        "Cargo.lock": "bb9f6bc5183813d1be0124986e00515864d4a45f45290a537d5b9e91c995a6f3",
+        ".cargo/config.toml": "0d3b42ee7bc4ef237cb8af440c47e506dcc9cc8b24d49d3cd3d3fea76ae5caa1",
+        "rust-toolchain.toml": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124",
+        "crates/incant_game_player/Cargo.toml": "38fd564984a89b1ceba7e46cc9ab9e7147e6d7c6027c94efdd82feb9502b2abb",
+        "crates/incant_game_player/build.rs": "9c2503ff557cbc15a17a42e3a8ace8759709013fb6cbe3b7f22974eb8224b058",
+        "crates/incant_game_player/include/incant_game.h": "101c0a974c7b629f66f7d9e9e2d9c038d71a45ccb2a8fdc91739c2ae7fe649c5",
+        "crates/incant_game_player/tests/arguments.rs": "16aa748b0fce58ae1b1bac4d83992ac3f02a6b1134996f9939e5fe1debb8b32c",
+        "crates/incant_game_player/tests/routing.rs": "45bef3a51c50ac8d03236461ab4ce8cde92dbbccab0687fe99146a0906d9a50a",
+        "crates/incant_game_player/examples/macos_text_retirement.rs": "56aa6b954c9f6e9f0e7e6e9eb11483d6729dc1fe950f895eb013948fd7941662",
+        "crates/incant_game_player/fixtures/game.js": "466a31676cda2862a9693ab76bc659be5ac3a3f7bece0c740d2024b7820dd90e",
+        "crates/incant_game_player/fixtures/flipbook.rs": "8986dd2c4e9e3d28fa65b1fd205a3df3ce8e3d910d6da9b6de023f2c7cb22081",
+        "crates/incant_game_player/src/session.rs": "b0912738c4c047c06bbb974efb46978e51de263e38ef8a216887f8bf752930dd",
+        "crates/incant_game_player/src/ui.rs": "eb11d2aebd174b5b3ae9d2c40fa94b57e44c5b6e89d9ca7520a5c4de41441ae9",
+        "crates/incant_game_player/src/mobile.rs": "2fefdd46d524a1bd20fad3b5ed65587c4838bcd2e662d5508443260d21382b0b",
+        "crates/incant_game_player/src/checkpoint.rs": "b320651e522fcedb42cec72cb92e162f25733826421669f4f0d3335100554b71",
+        "crates/incant_game_player/src/lib.rs": "097912eb497a659b7951cf10a6d94199e2b81c422daa3d8423e83d61a9c72fc8",
+        "crates/incant_game_player/src/package.rs": "c7d70da9643fee2ee134519ab87f4dfd3792f5386b0b3bd4109bc95820a91366",
+        "crates/incant_game_player/src/startup.rs": "d4723bbc4d1b07df9aa20b3935849e9800d507e94454eeae5da8b9f7fad65595",
+        "crates/incant_game_player/src/gpu.rs": "733fa6e7b825a37ed5b00e7c59e5689778a46a19e815534cc1f1ef0f862434e7",
+        "crates/incant_game_player/src/main.rs": "b389f69564c9e0c1ef6bdfd9786e4b57a32fb169febaba8f2b82adb9f3a06e7c",
+        "crates/incant_game_player/src/program.rs": "8f86e0fa443a36270839d956c06e9c85e9effbe11877d507c5de43978d3e4bc2",
+        "crates/incant_game_player/src/observe.rs": "5651029c68fe79bf7716b1c7ad794045ef219e7dab8093d627569a889c3c3ef9",
+        "crates/incant_game_player/src/mobile/tests.rs": "e6a859221cba5d681f61dccf57649d2fe8f7f45f4d268bd9233643d60f17fc74",
+        "crates/incant_game_player/src/window/termination.rs": "af723978fc8dcb560cf9f3a922f087fb5b3644632275001b16d8af0ca2a86812",
+        "crates/incant_game_player/src/window/ui_input.rs": "3fede07cd57508339182cdc9708f033d86f6e8782b1e3ec707c78f14aabd0470",
+        "crates/incant_game_player/src/window/clock.rs": "f19acd30cfb0a599f487a6f5811f7fc400a7df5d9b8b647f919a38df359f3461",
+        "crates/incant_game_player/src/window/ime.rs": "90990c7e68de5ad287830a82b35f060d3535a1dcee15dec78f3c75237a56ab84",
+        "crates/incant_game_player/src/window/surface.rs": "42eba11f0c95ea913ec6aac57e13b130a4d9f7a13ca898a9456c67c50eb4b8e6",
+        "crates/incant_game_player/src/window/mod.rs": "92e28ae8184dcdc337f81da9ab7c6ec12e6280dca25d977574379f071c172b6c",
+        "crates/incant_game_player/src/window/gamepad.rs": "c08863f2e1247989bd53b6c811baa4e6a00547c50bb5a503dda5209928796b8f",
+        "crates/incant_game_player/src/window/probe.rs": "cb20fa208a0eaad956c94a64f9d7a2715e018604d1c2621b1e58745a205816c7",
+        "crates/incant_game_player/src/window/input.rs": "981d9a43f00540b02cc6805a1b0a717db17154eab1a735f38579429ca8e05803",
+        "crates/incant_game_player/src/window/input/coordinate_tests.rs": "682bed941e66aef61bb057fabe1e08111a0f9a065a2abff06dcc2b0e1b8b7aa3",
+        "crates/incant_game_player/src/window/gamepad/tests.rs": "828113daf0fef2ec4db467055db976fb5736ad2fec61ef84f01a3660f315bd62",
+        "crates/incant_game_player/src/window/ui_input/tests.rs": "2bc776403b2cc7b1147e1f81337030cae1616034b6b0da0990e326218d94b13f",
+        "crates/incant_game_player/tests/fixtures/unsupported-observation.json": "b796450da6ae24ec5d32682af86267272f9fbb9d508e1b6f4fbced8b36069688"
+      },
+      "command": {
+        "argv": [
+          "./tools/cargo",
+          "rustc",
+          "--locked",
+          "--profile",
+          "ci",
+          "-p",
+          "incant_game_player",
+          "--lib",
+          "--features",
+          "mobile-ffi",
+          "--crate-type",
+          "staticlib"
+        ],
+        "exit_code": 0,
+        "seconds": 2.6407333339993784,
+        "log": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-build-002/command-3.log",
+        "sha256": "3d30abe059d6bc27b029015e8b816cec7cfe3a2303883f33be18f6d9fd4ff759"
+      },
+      "parent_freeze": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-build-002/freeze.json",
+        "sha256": "9409a0346a710339648e548a6c354f6fce9e9bd3c63afaa5d81278f9ef70ddfb"
+      },
+      "runtime_graph_log": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-build-002/command-2.log",
+        "sha256": "846fef05f5fa37d05846b276942eee7310669af5904018e5870dcf7c385f7816"
+      }
+    },
+    "final_static_freeze_inputs": 1636,
+    "static_fixture_qualification": "Read-only accepted root-motion subset preserves bytes; tests exercise ordinary QuickJS default fixture and feature compatibility, not complete Wasm conformance."
+  },
+  "failed_attempts": {
+    "001": "Test source called unwrap on already encoded Vec; compilation failed.",
+    "002": "Observation fixture omitted required format/version; success assertion failed.",
+    "003": "Observation expectation incorrectly counted one extra integration tick; actual contract integrates before script writes. Corrected expected0.1 at tick3, retaining1e-12 tolerance. Separate diagnostic run retained only for diagnosis.",
+    "build-001": "static-module feature requires a trusted compile-time bundle; missing bundle explicitly refused.",
+    "build-002": "macOS tests,Clippy,dependency graph and static archive passed. iOS-simulator shipping attempt failed existing host!=target guard. iOS-device command was never reached."
+  },
+  "artifacts": {
+    "mobile-runtime-001/clean-local-packages-retry.log.gz": {
+      "sha256": "184b70f76b8ead77a3a885d7c133db9925d5a3f966cc6b946ac8e606ab2e4375",
+      "raw_sha256": "81a376b37c48828e1288a009121a810462f50fd763877672e31aba72073656ef",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-001/clean-local-packages-retry.log"
+    },
+    "mobile-runtime-001/clean-local-packages.log.gz": {
+      "sha256": "95abc85e937964d1105bf94dd898b6d5d35ab609099395c2272c21048653dd09",
+      "raw_sha256": "ba45e83c70965cb6e6b9796b192b630bec48a287e05510fbb16d100a4866adcc",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-001/clean-local-packages.log"
+    },
+    "mobile-runtime-001/command-0.log.gz": {
+      "sha256": "47c7d646f9db3caa7cd5f394083b14c9170b386f9333447701a3758af8545ab0",
+      "raw_sha256": "81d32e4c741580c45f7bb93b2c56ffdc6f00f67a3f212fc6bac2f4b2ad73ea87",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-001/command-0.log"
+    },
+    "mobile-runtime-001/commands.json.gz": {
+      "sha256": "782e08626133f674022bab44d7cda8c124c6be2c29ef3f595dbec6268f55c89c",
+      "raw_sha256": "4aa23fc265bb56dbff0612a07aa5af5e10170710abbc7f018fce7c1ce0bc760b",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-001/commands.json"
+    },
+    "mobile-runtime-001/freeze.json.gz": {
+      "sha256": "b010e310e8813a96baf8ae3110ffb1706e715622b7d0953e7a2dffc118d0ce92",
+      "raw_sha256": "bfe35a2b26cb090cb6b910d8fa364bff2f1bfe990a6b3e4d38dddd0d18352ac8",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-001/freeze.json"
+    },
+    "mobile-runtime-001/run.py.gz": {
+      "sha256": "c27609ff650544261319d28dd9b15094a16f76e06c3560f3fbe442cd5513d6bc",
+      "raw_sha256": "a0b8baae6b35009efe23c056d78697e92b089481f56a30f37f176773b6f46584",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-001/run.py"
+    },
+    "mobile-runtime-001/target.json.gz": {
+      "sha256": "3ccc7d95003689972c656db928032b821fa71375843f46706d66f0e82acf45dc",
+      "raw_sha256": "c4a93043f70ae1172be9b47f5945dd16166bde4a23a5796f3da8362b1adb058b",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-001/target.json"
+    },
+    "mobile-runtime-001/terminal.json.gz": {
+      "sha256": "22e0264062c9c6f21cefb83ee4c932dda0d3ac97dd7c5b4f43f6905e6390960d",
+      "raw_sha256": "8e5a2be8770359028322161adda22759ec926fed30d50b7e6ad6797cbcea78e7",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-001/terminal.json"
+    },
+    "mobile-runtime-002/command-0.log.gz": {
+      "sha256": "5272a158523314b7cb4894d922d32733c4c5541b65d445d2f403c2bfc1a4e2d6",
+      "raw_sha256": "485050e5e77ebb3ddabfbdd26e2b5a78cb71919d2f52aee970d80c0995e3b727",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-002/command-0.log"
+    },
+    "mobile-runtime-002/commands.json.gz": {
+      "sha256": "674e58a77c0dc00dd5db65c3f32967ade352ee91222b6b8866da1f5e3b83c3d2",
+      "raw_sha256": "107a9be7e2f8223a838383a133609e48bf93e86715857a0f120c9fe1dafb1888",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-002/commands.json"
+    },
+    "mobile-runtime-002/freeze.json.gz": {
+      "sha256": "9956e5c815237de2c196c593a38b99ade7cf7a434e29967818a66b5605b497e9",
+      "raw_sha256": "07027c3cfe52c2116a9fcae874dda46b5fadcd72342dc345f3efee970a161aea",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-002/freeze.json"
+    },
+    "mobile-runtime-002/run.py.gz": {
+      "sha256": "c27609ff650544261319d28dd9b15094a16f76e06c3560f3fbe442cd5513d6bc",
+      "raw_sha256": "a0b8baae6b35009efe23c056d78697e92b089481f56a30f37f176773b6f46584",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-002/run.py"
+    },
+    "mobile-runtime-002/terminal.json.gz": {
+      "sha256": "2af720eb8382dfc5d6fbf861b3e994682ab9f2df004ab39d027fe7985e9f1014",
+      "raw_sha256": "f53b07d7d8aab03b3c650404dec953406cac8d56c7522b0390780dd520c88761",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-002/terminal.json"
+    },
+    "mobile-runtime-003/command-0.log.gz": {
+      "sha256": "aa9a2eb5c6453f393bb699607232ebdd949f1fd7bb2fbf67ac6c8d66e18e2d3a",
+      "raw_sha256": "5dbcab8e9c1dacc7b836a3f957638510c50ef5049a6312a32fea09448b2353e8",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-003/command-0.log"
+    },
+    "mobile-runtime-003/commands.json.gz": {
+      "sha256": "cbcf856698e18dd04ca0247384229fd82b518992dcd05b0d8ecc44352ae0306e",
+      "raw_sha256": "fbdcac5ec142df6b0088853f8aa3d6cb526d7575d754dd877690be34266fd91f",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-003/commands.json"
+    },
+    "mobile-runtime-003/diagnostic.log.gz": {
+      "sha256": "8b7c77e015e39638d2f7752400a4cdbb6480219257261c887aff8d9ac500173d",
+      "raw_sha256": "b6de431696c7d71064db08d1091c85349c78ad767c31a88c10d43ff7d2af7d0b",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-003/diagnostic.log"
+    },
+    "mobile-runtime-003/freeze.json.gz": {
+      "sha256": "cfc5ee42ea8c8f7e972218648672b706bf15fd7eb92c339c47be0480682309ab",
+      "raw_sha256": "71a4d2cb21a0aaec69b320e6166df3991ccd5efc36ef60e26e290a8d794131a4",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-003/freeze.json"
+    },
+    "mobile-runtime-003/run.py.gz": {
+      "sha256": "c27609ff650544261319d28dd9b15094a16f76e06c3560f3fbe442cd5513d6bc",
+      "raw_sha256": "a0b8baae6b35009efe23c056d78697e92b089481f56a30f37f176773b6f46584",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-003/run.py"
+    },
+    "mobile-runtime-003/terminal.json.gz": {
+      "sha256": "71686828f424faf25cf7ae8994fe4fbcbdffea1516fa6ea8809ef3613808d543",
+      "raw_sha256": "1f9d801ccfcbe53d61df45d60e20420194324a6761c4cc2abe0af525bdeaa2f9",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-003/terminal.json"
+    },
+    "mobile-runtime-004/command-0.log.gz": {
+      "sha256": "b44fe839c76e520301702c2d7042bc33d15ad9fec79c27e34e7f3bc3e03d971d",
+      "raw_sha256": "c09e7c88d3476f3008691a7dee14f45602de0051c1e492428b91442ca6133269",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-004/command-0.log"
+    },
+    "mobile-runtime-004/command-1.log.gz": {
+      "sha256": "83b073eedb5b4731e1f75d3d588af73f0a0c0c36623709a22aea36bacaf8690e",
+      "raw_sha256": "39768ad17d4ba1c96e75eadc63f8d0404d8427504b908923254c525a9cdd2c7f",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-004/command-1.log"
+    },
+    "mobile-runtime-004/commands.json.gz": {
+      "sha256": "072fd33e388db8c1d2fbb570af1704299e36af68f77c8e18d28c9c531de2ab01",
+      "raw_sha256": "eae0ac546bc6ce1013d955ede555bb7a5370e66a80911568d0cf4c449b6cf20d",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-004/commands.json"
+    },
+    "mobile-runtime-004/freeze.json.gz": {
+      "sha256": "fbddc67064ce5420cd58668cff06e1fa0d5fb17aae495985364a818f83cf7c7a",
+      "raw_sha256": "3aacadb2b211096697939380ca6f8328f96aadc554662b3b068da399bb0eefd6",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-004/freeze.json"
+    },
+    "mobile-runtime-004/run.py.gz": {
+      "sha256": "c27609ff650544261319d28dd9b15094a16f76e06c3560f3fbe442cd5513d6bc",
+      "raw_sha256": "a0b8baae6b35009efe23c056d78697e92b089481f56a30f37f176773b6f46584",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-004/run.py"
+    },
+    "mobile-runtime-004/terminal.json.gz": {
+      "sha256": "e243607a064386f83ec6e6df11e2e7ad99bf7ce4d03c00aa21b7888bf6c87d95",
+      "raw_sha256": "b2855462664d92f338cd5f01081318725ec755a3c4024a66e7aa0fcaa8a47667",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-004/terminal.json"
+    },
+    "mobile-runtime-build-001/command-0.log.gz": {
+      "sha256": "ef9eae7faafe7770c24ba13e7315b86f3bf15882edaa39a100f5ba8d7ea63239",
+      "raw_sha256": "0a646fb8c65730117be38f72c63380f218916b45f6f04d0f399fcbdd4f33a624",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-build-001/command-0.log"
+    },
+    "mobile-runtime-build-001/commands.json.gz": {
+      "sha256": "dc465fe6193e9e759f8741dc8d1af1b563e63da7f8eed2d9369fe408a98c6428",
+      "raw_sha256": "5afc0f0f7d909cce510c6fffa292b8416a6c56258bd655fc2f1d35a97788f0aa",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-build-001/commands.json"
+    },
+    "mobile-runtime-build-001/freeze.json.gz": {
+      "sha256": "fbddc67064ce5420cd58668cff06e1fa0d5fb17aae495985364a818f83cf7c7a",
+      "raw_sha256": "3aacadb2b211096697939380ca6f8328f96aadc554662b3b068da399bb0eefd6",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-build-001/freeze.json"
+    },
+    "mobile-runtime-build-001/run.py.gz": {
+      "sha256": "4b09c58ba2d0f27684e90dafa8849a9758923ab2b5a50e0584aa9235b60411bb",
+      "raw_sha256": "ee69c0d9a7be230a2b4c0e7ccfce59eab88dd8c177ada70749008348992bce5c",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-build-001/run.py"
+    },
+    "mobile-runtime-build-001/terminal.json.gz": {
+      "sha256": "6644807ad5d352be8e238c79947fadc409f2025201d5a954ba91191044638e5a",
+      "raw_sha256": "7d128d46ec77fac30b04d1ebd9b7ba44d321d07fb214d0110d533220d9f01781",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-build-001/terminal.json"
+    },
+    "mobile-runtime-build-002/command-0.log.gz": {
+      "sha256": "1938be9070bdc88564c8997041043e39bb91e4ae15fc39898d627dc7e773cf10",
+      "raw_sha256": "f62b096378b5923af7975538006b4010a50998e880ca6116c515030f4951c199",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-build-002/command-0.log"
+    },
+    "mobile-runtime-build-002/command-1.log.gz": {
+      "sha256": "9a333ffd29e59bd032b81ce765f12487a62b94ce7045fe9e295c6f4b9e4b381e",
+      "raw_sha256": "f9a0de06cc5ddc116c375b7d78d75499acf8ff467b3e4324095b54876e35f053",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-build-002/command-1.log"
+    },
+    "mobile-runtime-build-002/command-2.log.gz": {
+      "sha256": "b4e35141b06c6b2db8c0bd0b021815c6082a1fddc6de1916e2ad5117d224602d",
+      "raw_sha256": "846fef05f5fa37d05846b276942eee7310669af5904018e5870dcf7c385f7816",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-build-002/command-2.log"
+    },
+    "mobile-runtime-build-002/command-3.log.gz": {
+      "sha256": "4d47c6c506c34c7fa2783ceb7ca938cc65a316c312818293af0807ed6158ce94",
+      "raw_sha256": "3d30abe059d6bc27b029015e8b816cec7cfe3a2303883f33be18f6d9fd4ff759",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-build-002/command-3.log"
+    },
+    "mobile-runtime-build-002/command-4.log.gz": {
+      "sha256": "c3627b153e35fdfff2361409cfd26e6ed144a114a4cb414dfb2280b0bbe27f9b",
+      "raw_sha256": "3042ebf8c61c860c6a8fbb9ad0a842ea29f7468eeec5eb98fbe33ec15f0225a1",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-build-002/command-4.log"
+    },
+    "mobile-runtime-build-002/commands.json.gz": {
+      "sha256": "cd109d422196b3448ee43317ed8004c80e7f457bc43bfe52f117a02b6c1fe4c5",
+      "raw_sha256": "f11e3317372a9b984779dc1328239882885c17422f266396fb9d022325ae21af",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-build-002/commands.json"
+    },
+    "mobile-runtime-build-002/freeze.json.gz": {
+      "sha256": "c40db1ee0c1b73733a226c487d2b12ca140fa7679230636613627afa81b4d1bc",
+      "raw_sha256": "9409a0346a710339648e548a6c354f6fce9e9bd3c63afaa5d81278f9ef70ddfb",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-build-002/freeze.json"
+    },
+    "mobile-runtime-build-002/run.py.gz": {
+      "sha256": "0883a311c41b2588737664092b26d591a196b98b71c822722747e61fdfc1f91c",
+      "raw_sha256": "cef1b7845a145334d259ee79dadad7c2c38c659f2b4d251c1c2c4249446d5e16",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-build-002/run.py"
+    },
+    "mobile-runtime-build-002/terminal.json.gz": {
+      "sha256": "91a8eca6789e282028ad54bf4fa5db754a86b4bcfcda3d6a19333dabfe4e0c6b",
+      "raw_sha256": "c6b84b6a0e7c44f55c2203cc7367f6a4a69040ce32b4767b4fe3684581046375",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-build-002/terminal.json"
+    },
+    "mobile-runtime-static-001/command-0.log.gz": {
+      "sha256": "eb8a7d82ec3fd10b96c331aae339a9c7dfe0300615ffddfbbe200cc0265c5b93",
+      "raw_sha256": "d08224d50f6c98e60a25fff26631985e847e6b2c9ede675f072143497552b074",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-static-001/command-0.log"
+    },
+    "mobile-runtime-static-001/command-1.log.gz": {
+      "sha256": "b1f7a7bfcff13d49d6c2a82d7aa2d9c738e7d003938e0b51a450d9b45403854a",
+      "raw_sha256": "1761b86e23ad17d6e3badaf32e54a3b3c014ccdaf3e805fd56fc816eac6f4c0e",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-static-001/command-1.log"
+    },
+    "mobile-runtime-static-001/commands.json.gz": {
+      "sha256": "28b7aaab73afcbe970bf15ee4856d27dccd20f9b467b8d137341799e55d23d44",
+      "raw_sha256": "c83c9520282c917b1e6ce1ca33b4a3d5850239f4d8c72ae1e479263ef64b7edb",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-static-001/commands.json"
+    },
+    "mobile-runtime-static-001/freeze.json.gz": {
+      "sha256": "707bdd9c53ac867cefd7ff237e24bf6213257678f9a98ae05e989c8c5c0337f6",
+      "raw_sha256": "1a698db7681ae2eb94b971a0a14e2fc7bbb848b1c95bdef58198623f6abd55f3",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-static-001/freeze.json"
+    },
+    "mobile-runtime-static-001/run.py.gz": {
+      "sha256": "a09b2a12f05c8acbc2b519ddba04fef08e750f2b6e5c2b4c63069754e90e49dd",
+      "raw_sha256": "85fe44b23a3faf417144e552b8cebbbc9432cbf90b8352d48d5dca33f221fbc5",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-static-001/run.py"
+    },
+    "mobile-runtime-static-001/terminal.json.gz": {
+      "sha256": "644b522ea8980a752381f66dcf55069ac2271d26cb6547357697a0c367b122c8",
+      "raw_sha256": "0ec22444278803add3ad5688b88708f11e39d0093a68def361406464519dba41",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-static-001/terminal.json"
+    }
+  },
+  "limitations": [
+    "No iOS/Android archive success or mobile execution yet. Existing cooker cross-target guard remains intact.",
+    "No authored-game export, GPU/window render, physical audio, hosted phone, performance or phase-gate acceptance.",
+    "Ordinary player still caps total PCM frames; failed observations may retain completed PCM. Output directory/result errors are C status3; player errors including its I/O are status1 with failed report.",
+    "Separate PCM/result publications are not a multifile atomic or universal power-loss durability guarantee."
+  ]
+}

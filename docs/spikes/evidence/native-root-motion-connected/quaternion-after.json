@@ -1,0 +1,34 @@
+{
+  "files": [
+    {
+      "path": "crates/incant_assets_runtime/src/animation/weighted.rs",
+      "sha256": "d6b88839ce05293c7dfd8bbf648411b8b13964b09bdee44b80c88829bd295f99",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-shared-quaternion-extraction-001/after/crates/incant_assets_runtime/src/animation/weighted.rs"
+    },
+    {
+      "path": "crates/incant_anim/src/track.rs",
+      "sha256": "d3743aa5c3ae29fefc1dcbf93894a1f57c34d8f1bb9753f0f3775c2c49eba2e9",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-shared-quaternion-extraction-001/after/crates/incant_anim/src/track.rs"
+    }
+  ],
+  "checks": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-cold-checks-002/00.log",
+      "sha256": "63bb083048698901ef6deebe8b10e6de5f327e4bdcc5a4b6bfc3481449fc0fa9"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-cold-checks-002/01.log",
+      "sha256": "e94661afbf260745ada503c9e4e7557030265a5ad85b1c99d6e49660678229d9"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-cold-checks-002/commands.json",
+      "sha256": "d9cde78a6113d0f1251c1125848222cd85e152deb683d793a402272e51d9b6d4"
+    }
+  ],
+  "results": {
+    "cook_root_motion": 5,
+    "asset_skeletal": 43,
+    "failed": 0,
+    "ignored": 0
+  }
+}

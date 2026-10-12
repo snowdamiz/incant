@@ -2,10 +2,10 @@
 use super::*;
 use sha2::{Digest, Sha256};
 const HEADER: usize = 48;
-// Header/body scalars <=176, catalog rows92, owner rows25, retired IDs8,
+// Header/body scalars <=176, catalog rows92, owner rows33, retired IDs8,
 // voice rows <=240 (including the complete 144-byte static history).
 pub const MAX_AUDIO_CHECKPOINT_BYTES: usize =
-    176 + MAX_SCENE_CLIPS * 92 + crate::MAX_VOICES * (25 + 8 + 240);
+    176 + MAX_SCENE_CLIPS * 92 + crate::MAX_VOICES * (33 + 8 + 240);
 const MAGIC: &[u8; 8] = b"INCAUD01";
 fn invalid() -> AudioError {
     AudioError::Invalid("audio checkpoint encoding")
@@ -34,7 +34,14 @@ fn f64w(out: &mut Vec<u8>, v: f64) {
 pub(super) fn encode(state: &State) -> Result<Vec<u8>> {
     let mut out = vec![0; HEADER];
     out[..8].copy_from_slice(MAGIC);
-    out[8..12].copy_from_slice(&1u32.to_le_bytes());
+    // Preserve v1 bytes for sources that have never received a transport
+    // request. Version 2 binds each saved cursor to its consumed request.
+    let version = if state.sources.iter().any(|s| s.transport_epoch != 0) {
+        2u32
+    } else {
+        1u32
+    };
+    out[8..12].copy_from_slice(&version.to_le_bytes());
     out.extend(state.origin);
     id(&mut out, state.scene);
     out.extend(state.tick.to_le_bytes());
@@ -69,6 +76,9 @@ pub(super) fn encode(state: &State) -> Result<Vec<u8>> {
     }
     for s in &state.sources {
         id(&mut out, s.id);
+        if version >= 2 {
+            out.extend(s.transport_epoch.to_le_bytes());
+        }
         out.extend(s.voice.unwrap_or(0).to_le_bytes());
         out.push(u8::from(s.pending));
     }
@@ -172,12 +182,14 @@ impl<'a> Reader<'a> {
 pub(super) fn decode(bytes: &[u8]) -> Result<State> {
     if !(HEADER..=MAX_AUDIO_CHECKPOINT_BYTES).contains(&bytes.len())
         || &bytes[..8] != MAGIC
-        || bytes[8..12] != 1u32.to_le_bytes()
+        || !(1..=2).contains(&u32::from_le_bytes(bytes[8..12].try_into().unwrap()))
         || u32::from_le_bytes(bytes[12..16].try_into().unwrap()) as usize != bytes.len()
         || bytes[16..48] != hash(bytes)
     {
         return Err(invalid());
     }
+    let version = u32::from_le_bytes(bytes[8..12].try_into().unwrap());
+    let owner_bytes = if version >= 2 { 33 } else { 25 };
     let mut r = Reader(&bytes[HEADER..]);
     let origin = r.take(32)?.try_into().unwrap();
     let scene = r.id()?;
@@ -205,7 +217,7 @@ pub(super) fn decode(bytes: &[u8]) -> Result<State> {
     }
     if counts[0] > MAX_SCENE_CLIPS
         || counts[1..].iter().any(|&v| v > crate::MAX_VOICES)
-        || counts[0] * 92 + counts[1] * 25 + counts[2] * 8 + counts[3] * 80 > r.0.len()
+        || counts[0] * 92 + counts[1] * owner_bytes + counts[2] * 8 + counts[3] * 80 > r.0.len()
     {
         return Err(invalid());
     }
@@ -230,6 +242,7 @@ pub(super) fn decode(bytes: &[u8]) -> Result<State> {
     let mut sources = Vec::with_capacity(counts[1]);
     for _ in 0..counts[1] {
         let id = r.id()?;
+        let transport_epoch = if version >= 2 { r.u64()? } else { 0 };
         let voice = r.u64()?;
         let pending = r.bool()?;
         if voice >= next || sources.last().is_some_and(|old: &SavedSource| old.id >= id) {
@@ -237,9 +250,13 @@ pub(super) fn decode(bytes: &[u8]) -> Result<State> {
         }
         sources.push(SavedSource {
             id,
+            transport_epoch,
             voice: (voice != 0).then_some(voice),
             pending,
         });
+    }
+    if version >= 2 && !sources.iter().any(|s| s.transport_epoch != 0) {
+        return Err(invalid());
     }
     let mut retired = Vec::with_capacity(counts[2]);
     for _ in 0..counts[2] {

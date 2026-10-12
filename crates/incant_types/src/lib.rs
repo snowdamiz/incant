@@ -8,6 +8,8 @@ mod animation_graph;
 pub use animation_graph::*;
 mod animation_pose;
 pub use animation_pose::*;
+mod animation_root_motion;
+pub use animation_root_motion::*;
 mod animation_tree;
 pub use animation_tree::*;
 mod audio;

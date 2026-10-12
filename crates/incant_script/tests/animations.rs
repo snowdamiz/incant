@@ -13,6 +13,8 @@ mod crossfade;
 mod graph;
 #[path = "animations/ik.rs"]
 mod ik;
+#[path = "animations/root_motion.rs"]
+mod root_motion;
 
 const ONE: &str = "00000000000000000000000001";
 fn id(n: u128) -> StableId {

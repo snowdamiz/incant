@@ -1,0 +1,47 @@
+{
+  "at": "2026-10-12T19:32:05.307775+00:00",
+  "reviewer": "root astra",
+  "accepted": true,
+  "inventory_sha256": "4299d36c0488f30394773d92588548b8fc4ae120de1807966a00335cdce349ef",
+  "source_hashes": {
+    "Cargo.lock": "5579ed429cd990b12acb75aa3d9cb0854a895313dd81a936fa6d04d61d48e38c",
+    "crates/incant_wasm_abi/src/audio.rs": "a8710c0f2ffec0901694533a68aef33210b13533af7561d7a298e3f9aebbabef",
+    "crates/incant_wasm_abi/src/lib.rs": "1045438749b63091ac5330d45c31a208742f0ae68d979146900d1cba4a03b573",
+    "crates/incant_wasm_dev/Cargo.toml": "4efb69ec08bb7f61c91ef599b1fd3fdaf459eb3502bb93b9f3faae6fb62ecadf",
+    "crates/incant_wasm_dev/src/generated.rs": "0bde75d31ab09c38649b5b8767fb9d9aeb0faa2a95ce33061f705b8ac2b56ef3",
+    "crates/incant_wasm_runtime/c/generated.h": "1799cf9a9d1641e7c7ebb85862cf7b6a1aaa588f5077fbcba887a27452df4871",
+    "crates/incant_wasm_runtime/c/generated.inc": "bd6d30dc80bd0f01189484becc6fc6d5616d5582f39192eb41de624e674e7284",
+    "crates/incant_wasm_runtime/src/audio.rs": "23cebbaf18f573892eb92e1e61aac70c4f4811ba1f8d0c32844ea80c735e3564",
+    "crates/incant_wasm_runtime/src/capability.rs": "31b87b319b7e8d6476e1f2e423c049351f75ff899964aae7a143b630dd6ccdd8",
+    "crates/incant_wasm_runtime/src/generated.rs": "141be675518d651930ca705dd8be61cf7c0357500d48d32c90c6533b228e6410",
+    "crates/incant_wasm_runtime/src/input_tags.rs": "e916b5c5358eeb883ccc17d95ce49095221cebab75ef1341eee583dc67f26ffc",
+    "crates/incant_wasm_runtime/src/lib.rs": "dff9e5e6194b6d76e2dc5cf89f9a42d630cc0943f4b1467b1c5feb1a403790f5",
+    "sdk/abi/native-v1.json": "7a1d89e8b3f0e777fa713721376e36ae82ea9bae6311d588055b7a18740fd74d",
+    "sdk/rust/src/audio.rs": "2dd79da0f7e468a64bd7acdb9763c1a1226abc49693f9c9b52ba5019c7118ef2",
+    "sdk/rust/src/lib.rs": "b6d4d24e206dec76ecf2e275cd6c970b765114bec9919cf956ec734f94053aa7",
+    "sdk/rust/src/raw.rs": "871a14a278b66638a7fe531db72c66c6401a1ec30a4bd682c457aa5eb7c18a36",
+    "sdk/rust/src/tick.rs": "6291676a26f1caad59aca187e043632f0e09582ebc28d988fbddb99a4fe3c762",
+    "sdk/rust/src/tick/audio.rs": "1b73c7de28ba59cab7dc75c9971540e06f694319e60d15113e1d9b2aa3190506",
+    "tools/generate_wasm_sdk.py": "e98c5dbf7b569e3eb158260a8903c4d2f26002613567410172bedf5af6880761",
+    "tools/wasm_abi.py": "2ff5f456d53e3a1ea240a13b0ae7ab0b0c4b5b6e5b7d53d3101c75e4c6db2f0b"
+  },
+  "base": "a6d4edfe30dbcf8e14da66b257a10704273df463",
+  "scope": "Additive59-61 copieddesired audio declarations and typedordered transport batch; no mixer/device handles or cursor claim",
+  "verified": [
+    "All old0-58 registry and input definitions unchanged",
+    "20production source identities match freeze; generated SDK --check passes",
+    "Bounded canonical counts/roles/optionfields/bus topology/finitevalues/exactu64 epochs before borrowed SDK views",
+    "Originalf64 commandvalidation beforef32 conversion; wholebatch validation beforequeuing; epoch/transfer/sharedquota/stickyfailure and finalnative rollback retained",
+    "Only newCargo deps are dev-dependencies"
+  ],
+  "pending": [
+    "Actual static+development host transport and mixedPCM conformance",
+    "Fresh ordinary exportedpackage proof and finalexecution review"
+  ],
+  "notes": [
+    "Consider compile-time equality assertions for native audio node/bus/source bounds to guardfuture registry drift; currentvalues align."
+  ],
+  "limitations": [
+    "Source review only; no native device/phone/performance/phase gate or modulecheckpoint support"
+  ]
+}

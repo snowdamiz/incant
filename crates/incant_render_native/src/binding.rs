@@ -81,6 +81,7 @@ pub(crate) fn prepare(
                 }
                 super::animation::validate(node.id, source, decl.animation.as_deref())?;
                 super::animation::validate_ik(node.id, source, decl.ik.as_deref())?;
+                super::animation::validate_root(node.id, source, decl.root_motion.as_deref())?;
                 Ok::<_, NativeRenderError>(MeshInput {
                     source: Arc::clone(source),
                     cast_shadows: mesh.cast_shadows,
@@ -88,6 +89,7 @@ pub(crate) fn prepare(
                     animation_blend: node.animation_blend,
                     animation_pose: node.animation_pose,
                     animation_ik: node.animation_ik.cloned(),
+                    animation_root: node.animation_root,
                 })
             })
             .transpose()?;
@@ -212,6 +214,7 @@ pub(crate) fn prepare(
             animation_blend: None,
             animation_pose: None,
             animation_ik: None,
+            animation_root: None,
         };
         input.nodes.len()
     ];

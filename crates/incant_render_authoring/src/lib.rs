@@ -151,6 +151,7 @@ pub fn project_input(project: &Project, assets: Option<&AssetStore>) -> Result<S
                 animation_blend: None,
                 animation_pose: None,
                 animation_ik: None,
+                animation_root: None,
             })
         } else {
             None

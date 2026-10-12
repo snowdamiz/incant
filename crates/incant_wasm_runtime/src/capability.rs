@@ -25,6 +25,33 @@ const _: () = {
 /// Trusted host adapter operation; all integer arguments are guest offsets/indices.
 #[derive(Clone, Copy)]
 pub enum Call {
+    AudioLen,
+    ReadAudio {
+        ptr: i32,
+        capacity: i32,
+    },
+    CommandAudio {
+        ptr: i32,
+        len: i32,
+    },
+    HudLen,
+    ReadHud {
+        ptr: i32,
+        capacity: i32,
+    },
+    ControlHud {
+        ptr: i32,
+        len: i32,
+    },
+    RootMotionLen,
+    ReadRootMotion {
+        ptr: i32,
+        capacity: i32,
+    },
+    ControlRootMotion {
+        ptr: i32,
+        len: i32,
+    },
     AnimationLenV5,
     ReadAnimationsV5 {
         ptr: i32,
@@ -180,6 +207,8 @@ pub enum Call {
 /// this state. No guest access or native pointer is retained by this type.
 #[derive(Default)]
 pub struct Capability {
+    audio: Vec<u8>,
+    audio_rejected: bool,
     identity: Option<WorldIdentity>,
     failed: bool,
     active: bool,
@@ -188,6 +217,8 @@ pub struct Capability {
     commands: FrameCommands,
     input: Vec<u8>,
     input_available: bool,
+    hud: Vec<u8>,
+    hud_rejected: bool,
     flipbook_rows: Vec<FlipbookSnapshot>,
     flipbooks: Vec<u8>,
     animation_rows: Vec<AnimationSnapshot>,
@@ -203,6 +234,8 @@ pub struct Capability {
     animation_graphs: Vec<u8>,
     animation_rejected: bool,
     animation_ik_present: bool,
+    root_motion_rows: Vec<incant_runtime::RootMotionSnapshot>,
+    root_motion: Vec<u8>,
     ik_rows: Vec<incant_runtime::IkSnapshot>,
     animation_ik: Vec<u8>,
     transferred: usize,
@@ -238,6 +271,14 @@ impl Capability {
         }
     }
     pub fn begin(&mut self, world: &mut NativeWorld, dt: f64) -> Result<i64, Error> {
+        self.begin_hud(world, dt, &incant_input::UiSnapshot::default())
+    }
+    fn begin_hud(
+        &mut self,
+        world: &mut NativeWorld,
+        dt: f64,
+        ui: &incant_input::UiSnapshot,
+    ) -> Result<i64, Error> {
         if self.failed {
             return Err(Error::Failed);
         }
@@ -265,6 +306,16 @@ impl Capability {
             return Err(error);
         }
         self.commands.clear();
+        self.audio_rejected = false;
+        if let Err(error) = crate::audio::encode(world, &mut self.audio) {
+            self.abort();
+            return Err(error);
+        }
+        self.hud_rejected = false;
+        if let Err(error) = crate::hud::encode(world, ui, &mut self.hud) {
+            self.abort();
+            return Err(error);
+        }
         if let Err(error) = crate::animations::encode(
             world,
             &mut self.animation_rows,
@@ -279,6 +330,11 @@ impl Capability {
             self.abort();
             return Err(error.into());
         }
+        if let Err(error) = world.snapshot_root_motion(&mut self.root_motion_rows) {
+            self.abort();
+            return Err(error.into());
+        }
+        self.root_motion.clear();
         self.animation_ik_present = !self.ik_rows.is_empty();
         self.animation_ik.clear();
         self.animation_scene = Some(world.scene_id());
@@ -320,7 +376,7 @@ impl Capability {
         dt: f64,
         input: &incant_input::InputRuntime,
     ) -> Result<i64, Error> {
-        let epoch = self.begin(world, dt)?;
+        let epoch = self.begin_hud(world, dt, &input.frame().ui)?;
         if let Err(error) = crate::input::encode(input, world.tick(), &mut self.input) {
             self.abort();
             return Err(error);
@@ -366,6 +422,10 @@ impl Capability {
             .ok_or(Error::Abi("missing physics state"))
     }
     pub fn abort(&mut self) {
+        self.audio.clear();
+        self.hud.clear();
+        self.root_motion_rows.clear();
+        self.root_motion.clear();
         self.animation_rows.clear();
         self.ik_rows.clear();
         self.animation_ik.clear();
@@ -409,10 +469,22 @@ impl Capability {
             self.abort();
             return Err(Error::Abi("rejected navigation transaction"));
         }
+        if self.hud_rejected {
+            self.abort();
+            return Err(Error::Abi("rejected HUD transaction"));
+        }
+        self.hud.clear();
+        if self.audio_rejected {
+            self.abort();
+            return Err(Error::Abi("rejected audio transaction"));
+        }
+        self.audio.clear();
         if self.animation_rejected {
             self.abort();
             return Err(Error::Abi("rejected animation transaction"));
         }
+        self.root_motion_rows.clear();
+        self.root_motion.clear();
         self.animation_rows.clear();
         self.ik_rows.clear();
         self.animation_ik.clear();
@@ -522,6 +594,18 @@ impl Capability {
     /// Synchronous import; memory contains initialized guest bytes only and is
     /// borrowed for this call. No world observation/publication occurs here.
     pub fn invoke(&mut self, memory: &mut [u8], epoch: i64, call: Call) -> Result<i32, Error> {
+        let hud_authorized = self.active
+            && self.epoch == epoch
+            && matches!(
+                call,
+                Call::HudLen | Call::ReadHud { .. } | Call::ControlHud { .. }
+            );
+        let audio_authorized = self.active
+            && self.epoch == epoch
+            && matches!(
+                call,
+                Call::AudioLen | Call::ReadAudio { .. } | Call::CommandAudio { .. }
+            );
         let physics_authorized = self.active
             && self.epoch == epoch
             && matches!(
@@ -542,7 +626,10 @@ impl Capability {
             && self.epoch == epoch
             && matches!(
                 call,
-                Call::AnimationLen
+                Call::RootMotionLen
+                    | Call::ReadRootMotion { .. }
+                    | Call::ControlRootMotion { .. }
+                    | Call::AnimationLen
                     | Call::ReadAnimations { .. }
                     | Call::ControlAnimation { .. }
                     | Call::AnimationIkLen
@@ -597,6 +684,12 @@ impl Capability {
         {
             state.reject();
         }
+        if hud_authorized && result.is_err() {
+            self.hud_rejected = true;
+        }
+        if audio_authorized && result.is_err() {
+            self.audio_rejected = true;
+        }
         if animation_authorized && result.is_err() {
             self.animation_rejected = true;
         }
@@ -620,6 +713,31 @@ impl Capability {
         {
             return Err(Error::Abi(
                 "animation graph v1 cannot represent compound fades",
+            ));
+        }
+        // Root stripping is active even when movement is disabled or extract-only.
+        // Guard before any shared-cache read: older complete frames cannot carry it.
+        if !self.root_motion_rows.is_empty()
+            && matches!(
+                call,
+                Call::AnimationLen
+                    | Call::ReadAnimations { .. }
+                    | Call::AnimationLenV2
+                    | Call::ReadAnimationsV2 { .. }
+                    | Call::AnimationLenV3
+                    | Call::ReadAnimationsV3 { .. }
+                    | Call::AnimationLenV4
+                    | Call::ReadAnimationsV4 { .. }
+                    | Call::AnimationLenV5
+                    | Call::ReadAnimationsV5 { .. }
+                    | Call::AnimationIkLen
+                    | Call::ReadAnimationIk { .. }
+                    | Call::AnimationIkLenV2
+                    | Call::ReadAnimationIkV2 { .. }
+            )
+        {
+            return Err(Error::Abi(
+                "animation snapshots cannot represent root stripping",
             ));
         }
         // These pose protocols have no post-sample IK payload. Refuse only
@@ -670,6 +788,120 @@ impl Capability {
                 .ok_or(Error::Limit("navigation query quota"))?;
         }
         match call {
+            Call::AudioLen | Call::ReadAudio { .. } => {
+                let len = self.audio.len();
+                if let Call::ReadAudio { ptr, capacity } = call {
+                    let capacity = usize::try_from(capacity)
+                        .ok()
+                        .filter(|&n| n >= len)
+                        .ok_or(Error::Abi("audio destination capacity"))?;
+                    // Validate the complete declared destination before any copy.
+                    range(ptr, capacity, memory.len())?;
+                    let region = range(ptr, len, memory.len())?;
+                    self.transfer(len)?;
+                    memory[region].copy_from_slice(&self.audio);
+                }
+                return Ok(len as i32);
+            }
+            Call::CommandAudio { ptr, len } => {
+                let len = usize::try_from(len)
+                    .ok()
+                    .filter(|&n| {
+                        (incant_wasm_abi::AudioCommandHeader::SIZE
+                            ..=incant_wasm_abi::AUDIO_MAX_COMMAND_BYTES)
+                            .contains(&n)
+                    })
+                    .ok_or(Error::Abi("audio command length"))?;
+                let region = range(ptr, len, memory.len())?;
+                self.transfer(len)?;
+                let commands = incant_wasm_abi::audio::Commands::parse(&memory[region])
+                    .map_err(|_| Error::Abi("audio command values"))?;
+                if commands.iter().len() > limits::COMMANDS - self.commands.len() {
+                    return Err(Error::Limit("structural command quota"));
+                }
+                for row in commands.iter() {
+                    self.command(crate::audio::command(row))?;
+                }
+                return Ok(0);
+            }
+            Call::HudLen | Call::ReadHud { .. } => {
+                let len = self.hud.len();
+                if let Call::ReadHud { ptr, capacity } = call {
+                    if usize::try_from(capacity).ok().is_none_or(|n| n < len) {
+                        return Err(Error::Abi("HUD destination capacity"));
+                    }
+                    let region = range(ptr, len, memory.len())?;
+                    self.transfer(len)?;
+                    memory[region].copy_from_slice(&self.hud);
+                }
+                return Ok(len as i32);
+            }
+            Call::ControlHud { ptr, len } => {
+                let len = usize::try_from(len)
+                    .ok()
+                    .filter(|&n| {
+                        (incant_wasm_abi::HudCommand::SIZE
+                            ..=incant_wasm_abi::HudCommand::SIZE
+                                + incant_wasm_abi::HUD_MAX_TEXT_BYTES)
+                            .contains(&n)
+                    })
+                    .ok_or(Error::Abi("HUD command size"))?;
+                let region = range(ptr, len, memory.len())?;
+                self.transfer(len)?;
+                let command = crate::hud::command(&memory[region])?;
+                self.command(command)?;
+                return Ok(0);
+            }
+            Call::RootMotionLen | Call::ReadRootMotion { .. } => {
+                if self.root_motion.is_empty() {
+                    let scene = self
+                        .animation_scene
+                        .ok_or(Error::Abi("animation scene absent"))?;
+                    if self.animations_v5.is_empty() {
+                        crate::animation_poses_v5::encode(
+                            scene,
+                            &mut self.animation_rows,
+                            &mut self.animations_v5,
+                        )?;
+                    }
+                    if self.animation_ik_v2.is_empty() {
+                        crate::animation_ik_v2::encode(
+                            &self.animation_rows,
+                            &self.animations_v5,
+                            &self.ik_rows,
+                            &mut self.animation_ik_v2,
+                        )?;
+                    }
+                    crate::root_motion::encode(
+                        scene,
+                        &self.animation_rows,
+                        &self.animation_ik_v2,
+                        &self.root_motion_rows,
+                        &mut self.root_motion,
+                    )?;
+                }
+                let len = self.root_motion.len();
+                if let Call::ReadRootMotion { ptr, capacity } = call {
+                    let capacity = usize::try_from(capacity)
+                        .map_err(|_| Error::Abi("root-motion destination capacity"))?;
+                    if capacity < len {
+                        return Err(Error::Abi("root-motion destination capacity"));
+                    }
+                    range(ptr, capacity, memory.len())?;
+                    let region = range(ptr, len, memory.len())?;
+                    self.transfer(len)?;
+                    memory[region].copy_from_slice(&self.root_motion);
+                }
+                return Ok(len as i32);
+            }
+            Call::ControlRootMotion { ptr, len } => {
+                if usize::try_from(len).ok() != Some(incant_wasm_abi::RootMotionCommand::SIZE) {
+                    return Err(Error::Abi("root-motion command length"));
+                }
+                let bytes =
+                    self.read::<{ incant_wasm_abi::RootMotionCommand::SIZE }>(memory, ptr)?;
+                self.command(crate::root_motion::command(&bytes)?)?;
+            }
             Call::PhysicsQuery { ptr, len } => {
                 let len = usize::try_from(len)
                     .ok()

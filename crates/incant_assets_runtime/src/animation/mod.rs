@@ -2,7 +2,9 @@
 //! static render and navigation consumers do not yet implement animated models.
 mod binary;
 mod player;
+mod root_catalog;
 mod root_motion;
+pub use root_catalog::compile_root_motion_catalog;
 mod sampling;
 use crate::{AssetError, Mesh, ModelNode, Result, invalid};
 pub use binary::decode_animation;

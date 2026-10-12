@@ -1,0 +1,170 @@
+{
+  "stage": "Root-motion shared sampler, typed authoring and sealed captured catalogs; connected native step/strip/body/save/SDK/export still pending.",
+  "base_commit": "df64fcda7a0da760e95c6127b7d421def8c0f6bb",
+  "checkout": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+  "branch": "codex/native-root-motion-connected",
+  "files": [
+    {
+      "path": "Cargo.lock",
+      "sha256": "bf370b9a7008b0fd60dc621e13962303adc86435f2b17a9211bc49e02e8f1c51",
+      "bytes": 251680,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-catalog-freeze-001/files/Cargo.lock"
+    },
+    {
+      "path": "Cargo.toml",
+      "sha256": "dd9a6d6ff626086e7e1bf2f6845dac09d94c60651d0f43efc1be0cc3b5d83b7c",
+      "bytes": 3088,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-catalog-freeze-001/files/Cargo.toml"
+    },
+    {
+      "path": "crates/incant_anim/Cargo.toml",
+      "sha256": "50541fad032635738e705c8c946ce3c7fcdd2ab9f624ce47662943d429fcd58f",
+      "bytes": 193,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-catalog-freeze-001/files/crates/incant_anim/Cargo.toml"
+    },
+    {
+      "path": "crates/incant_anim/src/binary.rs",
+      "sha256": "e78b743e97021b946696864a4b2848906be0ad1a10cfa87f7c366cdbede56cf4",
+      "bytes": 7219,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-catalog-freeze-001/files/crates/incant_anim/src/binary.rs"
+    },
+    {
+      "path": "crates/incant_anim/src/catalog.rs",
+      "sha256": "e89b01460a2b3a80664eea48d7340b1f62017b6d04c2d4e408cdddfacdbb08e3",
+      "bytes": 7195,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-catalog-freeze-001/files/crates/incant_anim/src/catalog.rs"
+    },
+    {
+      "path": "crates/incant_anim/src/lib.rs",
+      "sha256": "ae7e7ec8a256489f8d613dc78bab3798d022f16cc53564f655cfc5ad07dde351",
+      "bytes": 622,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-catalog-freeze-001/files/crates/incant_anim/src/lib.rs"
+    },
+    {
+      "path": "crates/incant_anim/src/root_motion.rs",
+      "sha256": "977d725fe11a9c19ecfb4240a7fdaa4e2fcb6bdbc19827711d59ea69b9abf5ef",
+      "bytes": 9813,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-catalog-freeze-001/files/crates/incant_anim/src/root_motion.rs"
+    },
+    {
+      "path": "crates/incant_anim/src/track.rs",
+      "sha256": "f43c16ea72898bccb55c5d05b36b9968f0b23a8534fbc1538d3d909121a52960",
+      "bytes": 3764,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-catalog-freeze-001/files/crates/incant_anim/src/track.rs"
+    },
+    {
+      "path": "crates/incant_anim/tests/root_motion_catalog.rs",
+      "sha256": "d4ed870080e4cefa5acc812baa0e3ee7b968477e0216442dcb4dba5a2e304817",
+      "bytes": 9416,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-catalog-freeze-001/files/crates/incant_anim/tests/root_motion_catalog.rs"
+    },
+    {
+      "path": "crates/incant_assets/tests/root_motion.rs",
+      "sha256": "cf0c26f94170f29763e78b1df71d076a6636578f69bd0edd878c6e20957f9907",
+      "bytes": 11221,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-catalog-freeze-001/files/crates/incant_assets/tests/root_motion.rs"
+    },
+    {
+      "path": "crates/incant_assets/tests/root_motion/fixture.rs",
+      "sha256": "28e5e4d86360cf3b63da5102e95f648d8905107a24341f0ca11fa331f0176dc7",
+      "bytes": 2625,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-catalog-freeze-001/files/crates/incant_assets/tests/root_motion/fixture.rs"
+    },
+    {
+      "path": "crates/incant_assets/tests/skeletal/alloc.rs",
+      "sha256": "f58df95c57c6f884684b9a20427701e16e9049e24f287b0a9ea1e3031cb927fb",
+      "bytes": 1544,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-catalog-freeze-001/files/crates/incant_assets/tests/skeletal/alloc.rs"
+    },
+    {
+      "path": "crates/incant_assets/tests/skeletal/fixture.rs",
+      "sha256": "2197fec00fe41cffd023b9865702adc42dfd1d38cf93b14c5f6d37daee05995c",
+      "bytes": 3351,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-catalog-freeze-001/files/crates/incant_assets/tests/skeletal/fixture.rs"
+    },
+    {
+      "path": "crates/incant_assets_runtime/Cargo.toml",
+      "sha256": "0e5dea47b7437deacda86f692cf51b97b95b438a274253bd54dfe1b6fab3e898",
+      "bytes": 1039,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-catalog-freeze-001/files/crates/incant_assets_runtime/Cargo.toml"
+    },
+    {
+      "path": "crates/incant_assets_runtime/src/animation/root_motion.rs",
+      "sha256": "ffb192bf1fa8486b93b6f1acf7e231e92f50a0ae1c5a03083277c6de70ff96bf",
+      "bytes": 4631,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-catalog-freeze-001/files/crates/incant_assets_runtime/src/animation/root_motion.rs"
+    },
+    {
+      "path": "crates/incant_assets_runtime/src/animation/sampling.rs",
+      "sha256": "ef29d103a9c877eab237c539c8dbdf286f612c3430fce91b1e9f55e20e541c23",
+      "bytes": 3161,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-catalog-freeze-001/files/crates/incant_assets_runtime/src/animation/sampling.rs"
+    },
+    {
+      "path": "crates/incant_cook/Cargo.toml",
+      "sha256": "47a7a39e3c19e1f7a568cb20aed6b35f11e00d765683420545b2e1c9fea4f665",
+      "bytes": 1631,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-catalog-freeze-001/files/crates/incant_cook/Cargo.toml"
+    },
+    {
+      "path": "crates/incant_cook/src/animation.rs",
+      "sha256": "467cf7ba3c8a8cb42c80f4231cfd22524a081e1e93fdbccaabeb60596c0072be",
+      "bytes": 5673,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-catalog-freeze-001/files/crates/incant_cook/src/animation.rs"
+    },
+    {
+      "path": "crates/incant_cook/src/lib.rs",
+      "sha256": "77b582b4e90a8ecb1f49c962ff0a388f4246d927e2cac0201226256ad0650c4b",
+      "bytes": 1696,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-catalog-freeze-001/files/crates/incant_cook/src/lib.rs"
+    },
+    {
+      "path": "crates/incant_cook/src/root_motion.rs",
+      "sha256": "3bff1eb6c7c735fbf68a456196ea2fe26fb2da5ac2efafccca95f0ce84814721",
+      "bytes": 3896,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-catalog-freeze-001/files/crates/incant_cook/src/root_motion.rs"
+    },
+    {
+      "path": "crates/incant_cook/src/root_motion/compile.rs",
+      "sha256": "6eb540df1cd78078e190795f5a107482c61b3770f2c07db6f2329dad9d981c92",
+      "bytes": 4684,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-catalog-freeze-001/files/crates/incant_cook/src/root_motion/compile.rs"
+    },
+    {
+      "path": "crates/incant_cook/src/scene.rs",
+      "sha256": "3dd3ecb2bb4b8720c3733b0a3544bdb4a483b83707400fd786b8f68e79287934",
+      "bytes": 11005,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-catalog-freeze-001/files/crates/incant_cook/src/scene.rs"
+    },
+    {
+      "path": "crates/incant_cook/tests/root_motion.rs",
+      "sha256": "6abaa83dbcd7745cdc63b73a105a7ef4410a4a14753f3b964dd73f34590f70bf",
+      "bytes": 8316,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-catalog-freeze-001/files/crates/incant_cook/tests/root_motion.rs"
+    },
+    {
+      "path": "crates/incant_doc/src/animation_root_motion.rs",
+      "sha256": "0632311d49b49f066b4cd0fa622deadf9a736328c8490209cb81998688cc4abc",
+      "bytes": 1171,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-catalog-freeze-001/files/crates/incant_doc/src/animation_root_motion.rs"
+    },
+    {
+      "path": "crates/incant_doc/src/lib.rs",
+      "sha256": "6ff1840ee308b95514e34e92081a565f926d5fe9d206777ef0ca92cd049d39e2",
+      "bytes": 32027,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-catalog-freeze-001/files/crates/incant_doc/src/lib.rs"
+    },
+    {
+      "path": "crates/incant_types/src/animation_root_motion.rs",
+      "sha256": "c6c2269da3daba754b6fa9fe9f0e88436dbe111033ad9b935517d8024676e298",
+      "bytes": 1659,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-catalog-freeze-001/files/crates/incant_types/src/animation_root_motion.rs"
+    },
+    {
+      "path": "crates/incant_types/src/lib.rs",
+      "sha256": "c55f3178da26de7dd0a934a9156007068ca353f2f646728eec5653cee9fa2019",
+      "bytes": 2133,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-catalog-freeze-001/files/crates/incant_types/src/lib.rs"
+    }
+  ]
+}

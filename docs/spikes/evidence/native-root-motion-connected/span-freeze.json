@@ -1,0 +1,58 @@
+{
+  "stage": "isolated copied candidate/span preflight, not yet installed in native schedule",
+  "checkout": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+  "base_commit": "c964deb8694d563cc1fdd73caaa288dc31bb32e8",
+  "files": [
+    {
+      "path": "crates/incant_runtime/src/animation_step.rs",
+      "sha256": "8bb6503501f5ac8c1476a468f1c2103339795f9bd29311d45f042f11fcc9da80",
+      "bytes": 8160,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-span-freeze-001/files/crates/incant_runtime/src/animation_step.rs"
+    },
+    {
+      "path": "crates/incant_runtime/src/animation_step/clock.rs",
+      "sha256": "bc70c7e06989724d74e638312648f6fc7d9f97ac40537279114d2cd4299f333b",
+      "bytes": 3578,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-span-freeze-001/files/crates/incant_runtime/src/animation_step/clock.rs"
+    },
+    {
+      "path": "crates/incant_runtime/src/animation_step/tests.rs",
+      "sha256": "ea085e7949b6bf45299480adfe2a16ed2a8fcdae561956cd9cf1357df99df475",
+      "bytes": 7162,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-span-freeze-001/files/crates/incant_runtime/src/animation_step/tests.rs"
+    },
+    {
+      "path": "crates/incant_runtime/src/animation.rs",
+      "sha256": "fccbd5c1d0448b2ac0c323269bc8a96f5f0b14bbbec85da3d5f7ffaea89b2e46",
+      "bytes": 18373,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-span-freeze-001/files/crates/incant_runtime/src/animation.rs"
+    },
+    {
+      "path": "crates/incant_runtime/src/animation_graph/motion.rs",
+      "sha256": "724e294490628dcb7c838dfbc20b71f9102654eca36b3e687ecd52e6941f6d7d",
+      "bytes": 4661,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-span-freeze-001/files/crates/incant_runtime/src/animation_graph/motion.rs"
+    },
+    {
+      "path": "crates/incant_runtime/src/animation_graph/fade.rs",
+      "sha256": "909ef41eb31f864c1074cc167bc3cbe7bdbc0acb4b82d2a2af4796f0a52c03f0",
+      "bytes": 3343,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-span-freeze-001/files/crates/incant_runtime/src/animation_graph/fade.rs"
+    },
+    {
+      "path": "crates/incant_runtime/src/animation_graph/playback.rs",
+      "sha256": "4524447b229d41171551c2b5b609f90ee1aef567f8094804d2e379686f076dbc",
+      "bytes": 12616,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-span-freeze-001/files/crates/incant_runtime/src/animation_graph/playback.rs"
+    }
+  ],
+  "tests": {
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-animation-step-tests-002.log",
+    "sha256": "1f3819493d291e0f030a0d16e87bcb1f884abcb33af810d0d9af1266b0e364e4",
+    "passed": 4,
+    "failed": 0,
+    "ignored": 0,
+    "exit_code": 0
+  },
+  "historical_failure": "tests001 test-only ambiguous float annotation prevented compilation; test corrected to explicit f64 before002"
+}

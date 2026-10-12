@@ -1,0 +1,62 @@
+[
+  {
+    "command": [
+      "python3",
+      "tools/check_runtime_dependencies.py",
+      "incant_anim",
+      "incant_runtime",
+      "incant_wasm_runtime",
+      "incant_game_runtime",
+      "incant_game_player"
+    ],
+    "exit": 0,
+    "seconds": 0.8797431670009246,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-final-checks-003/0.log",
+    "sha256": "35feca5b1f41760cb01ac7d16c96989010707769b09b667ecf6ad314b1a9fd55"
+  },
+  {
+    "command": [
+      "./tools/cargo",
+      "fmt",
+      "--all",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 2.414054250000845,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-final-checks-003/1.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "command": [
+      "python3",
+      "tools/generate_wasm_sdk.py",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.3057175419999112,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-final-checks-003/2.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "command": [
+      "python3",
+      "tools/generate_conventions.py",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.05142570899988641,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-final-checks-003/3.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.04619033299968578,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-wasm-final-checks-003/4.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]
