@@ -19,6 +19,8 @@ import subprocess
 import tempfile
 
 import native_process
+import physics_export
+from physics_features import selected_graph_errors, validate_artifacts
 
 from native_package import data_package, publish, read, require, select_camera, sha256, write_json
 from shipping import codegen
@@ -35,23 +37,20 @@ def execute(command, *, cwd=ROOT, env=None, timeout=120):
     return result
 
 
-def normal_dependencies(metadata):
-    names = {p['id']: p['name'] for p in metadata['packages']}
-    nodes = {n['id']: n for n in metadata['resolve']['nodes']}
-    pending = [ident for ident, name in names.items() if name == NAME]
-    require(len(pending) == 1, 'Missing unique native player')
-    seen = set()
+def normal_dependencies(graph):
+    """Audit the selected player's normal graph, not workspace feature unification."""
+    names = []
     forbidden = {'incant_doc', 'incant_cmd', 'incant_agent', 'incant_core', 'incant_cook',
                  'incant_source', 'incant_play', 'incant_play_legacy', 'incant_wasm_cook', 'incant_wasm_dev', 'loro', 'automerge'}
-    while pending:
-        ident = pending.pop()
-        if ident in seen:
-            continue
-        seen.add(ident)
-        require(names[ident] not in forbidden and not names[ident].startswith(('wasmtime', 'cranelift')),
-                f'Authoring/JIT normal dependency: {names[ident]}')
-        pending.extend(d['pkg'] for d in nodes[ident]['deps'] if any(k['kind'] is None for k in d['dep_kinds']))
-    return sorted(names[ident] for ident in seen)
+    for line in graph.splitlines():
+        match = re.fullmatch(r'([A-Za-z0-9_-]+) v[^|]+\|([^|]*)', line.removesuffix(' (*)'))
+        require(match is not None, 'Malformed selected native dependency graph')
+        name = match.group(1)
+        require(name not in forbidden and not name.startswith(('wasmtime', 'cranelift')),
+                f'Authoring/JIT normal dependency: {name}')
+        names.append(name)
+    require(names and names[0] == NAME, 'Missing selected native player root')
+    return sorted(set(names))
 
 
 def verify_codegen(stderr, host, split):
@@ -120,24 +119,31 @@ def build(project, staging, storage, scene, camera, mode, wabt=None):
         if (name in ('RUSTFLAGS', 'CARGO_ENCODED_RUSTFLAGS', 'RUSTC', 'RUSTC_WRAPPER', 'RUSTC_WORKSPACE_WRAPPER')
                 or name.startswith('CARGO_PROFILE_') or name.endswith('_RUSTFLAGS')):
             require(not value, f'Unset {name} for the audited shipping exporter')
-    env = {k: v for k, v in os.environ.items() if not k.startswith(('INCANT_NATIVE_SCRIPT_', 'INCANT_NATIVE_PROJECT', 'INCANT_NATIVE_WASM_', 'INCANT_WASM_BUNDLE', 'INCANT_AUTHORED_WASM'))}
+    env = {k: v for k, v in os.environ.items() if not k.startswith(('INCANT_NATIVE_SCRIPT_', 'INCANT_NATIVE_PROJECT', 'INCANT_NATIVE_WASM_', 'INCANT_MOBILE_', 'INCANT_WASM_BUNDLE', 'INCANT_AUTHORED_WASM'))}
     env.update(PATH=str(rustc.parent) + os.pathsep + env.get('PATH', ''), INCANT_NATIVE_PROJECT=str(project))
     if scene is not None:
         env['INCANT_NATIVE_PROJECT_SCENE'] = scene
     cargo = ROOT / 'tools/cargo' if os.name != 'nt' else rustc.with_name('cargo.exe')
-    features = 'project,' + ('native-window' if mode == 'window' else 'render-input')
-    project_hash = sha256(read(project, 64 * 1024**2))
+    project_bytes = read(project, 64 * 1024**2)
+    project_hash = sha256(project_bytes)
+    physics_mode = physics_export.project_mode(project_bytes)
+    features = ','.join(physics_export.cargo_features(physics_mode,
+                       ['project', 'native-window' if mode == 'window' else 'render-input']))
     from native_wasm import capture
     module = capture(project, scene, storage, cargo, env, execute, wabt)
     if module is not None:
         features += ',static-module'
-    metadata = json.loads(execute([cargo, 'metadata', '--locked', '--format-version=1', '--filter-platform', host,
-                                   '--features', ','.join(NAME + '/' + f for f in features.split(','))], env=env).stdout)
-    graph = normal_dependencies(metadata)
+    selected_graph = execute([cargo, 'tree', '--locked', '--no-default-features', '-p', NAME,
+                              '--features', features, '--target', host, '-e', 'normal',
+                              '--prefix', 'none', '--format', '{p}|{f}'], env=env).stdout
+    graph = normal_dependencies(selected_graph)
+    errors = selected_graph_errors(selected_graph, physics_mode, host)
+    require(not errors, 'Selected physics graph differs from project mode: ' + '; '.join(errors))
+    (staging / 'normal-dependencies.txt').write_text(selected_graph, encoding='utf-8')
     link_map = staging / 'player-link.map'
     require(not link_map.exists(), 'Linker map must not preexist')
     command = [cargo, 'rustc' if kind == 'pdb' else 'build', '-j2', '-p', NAME, '--bin', NAME,
-               '--features', features, '--profile', 'shipping', '--locked',
+               '--no-default-features', '--features', features, '--profile', 'shipping', '--locked',
                '--target', host, '--target-dir', storage / 'target', '--config', f'profile.shipping.split-debuginfo="{split}"',
                '--message-format=json', '-vv']
     if kind == 'pdb':
@@ -149,6 +155,8 @@ def build(project, staging, storage, scene, camera, mode, wabt=None):
     require(result.returncode == 0, 'Native player build failed; no package was published:\n' + log[-8000:])
     flags = verify_codegen(log, host, split)
     messages = cargo_messages(storage / 'cargo.jsonl')
+    physics = validate_artifacts(messages, physics_mode, target_dir=storage / 'target',
+                                 target=host, profile='shipping')
     artifacts = [a for a in messages if a.get('reason') == 'compiler-artifact' and a['target']['name'] == NAME and a.get('executable')]
     require(len(artifacts) == 1, 'Missing unique actual player artifact')
     artifact = artifacts[0]
@@ -162,6 +170,7 @@ def build(project, staging, storage, scene, camera, mode, wabt=None):
     require(receipt['target'] == host and receipt['startup_source_parsing'] is False, 'Project producer target/mode mismatch')
     if module is not None:
         require(all(receipt['program'].get(k) == v for k, v in module.items()), 'Wasm program changed during export')
+    physics_export.verify_producer(receipt, physics_mode)
     chosen_camera = select_camera(receipt, camera, mode == 'window')
     symbol_audit = runtime_symbol_audit(executable, kind, llvm_bin, link_map)
     player, identity = package(executable, staging, kind, llvm_bin)
@@ -174,6 +183,7 @@ def build(project, staging, storage, scene, camera, mode, wabt=None):
     write_json(staging / 'project-build.json', receipt)
     return player, {'format': 'incant-native-export', 'version': 1, 'target': host, 'mode': mode,
                     'project_sha256': project_hash, 'scene_id': receipt['scene_id'], 'camera': chosen_camera,
+                    'physics_mode': physics_mode, 'physics_variant': physics_mode, 'physics': physics,
                     'program': receipt.get('program'), 'compiler': compiler, 'codegen': flags, 'normal_dependencies': graph, 'symbols': identity,
                     'symbol_audit': symbol_audit,
                     'player_sha256': sha256(read(player, 256 * 1024**2)), 'data': data,

@@ -34,7 +34,8 @@ settings, and reject unsupported modes and incomplete commands. SDK strict
 checking, generation/bridge checks and the editor build pass.
 [Integrated and generated-contract evidence](evidence/physics-project-contract.json).
 
-Mode-aware development launcher and shipping export execution are separate
-follow-on work. The editor still runs its existing in-process worker and cannot
-switch its compiled kernel dynamically. No complete process-selection, physics
-save, speedup, device or phase gate is claimed by this setting/admission change.
+The [development launcher and ordinary desktop export](physics-process-selection.md)
+now have separate local execution evidence for both authored modes. The editor
+still runs its existing in-process worker and cannot switch its compiled kernel
+dynamically. No complete editor process-selection, physics save, speedup, device
+or phase gate is claimed by this setting/admission change.
