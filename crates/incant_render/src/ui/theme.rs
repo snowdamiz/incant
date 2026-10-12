@@ -20,7 +20,8 @@ pub const BUTTON_PRESSED: [u8; 4] = [31, 34, 40, 255];
 pub const BUTTON_DISABLED: [u8; 4] = [35, 38, 44, 255];
 /// Field surface sits below buttons so editable regions read as inset.
 pub const FIELD: [u8; 4] = [21, 23, 28, 255];
-pub const FIELD_BORDER: [u8; 4] = [88, 94, 106, 255];
+/// At least 3:1 against both the field and a dark backdrop (WCAG non-text).
+pub const FIELD_BORDER: [u8; 4] = [100, 106, 119, 255];
 pub const FIELD_BORDER_DISABLED: [u8; 4] = [54, 58, 66, 255];
 /// Focus ring, selection tint and nothing else.
 pub const ACCENT: [u8; 4] = [76, 146, 255, 255];
