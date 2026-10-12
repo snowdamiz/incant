@@ -23,6 +23,7 @@ fn main() {
         Path::new("src/bindings_embed.rs").into(),
         Path::new("src/lib.rs").into(),
         Path::new("src/input.rs").into(),
+        Path::new("src/hud.rs").into(),
         Path::new("src/flipbooks.rs").into(),
         Path::new("src/animations.rs").into(),
         Path::new("src/animation_ik.rs").into(),

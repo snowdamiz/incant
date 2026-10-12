@@ -114,7 +114,9 @@ pub use spatial::{
 };
 pub use spatial_view::{SpatialNode, SpatialView};
 
+mod hud;
 mod text;
+pub use hud::{MAX_HUD_COMMAND_BYTES, MAX_HUD_COMMANDS, TextControl, UiControl};
 mod text_binary;
 pub use text::{
     CookedText, FontAssetRef, MAX_SCENE_TEXT_BYTES, MAX_TEXT_BYTES, MAX_TEXT_FONTS, MAX_TEXT_NODES,

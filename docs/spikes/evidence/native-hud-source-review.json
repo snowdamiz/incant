@@ -1,0 +1,42 @@
+{
+  "at": "2026-10-12T18:40:25.600193+00:00",
+  "reviewer": "astra root",
+  "decision": "accepted source only",
+  "scope": "Typed HUD controls, bounded immutable pre-command declarations and final-report shape-source observations",
+  "inventory_sha256": "7297fd5032a2959b30325b422820b1a7442cf718a4acfb34a5bd23af66157e0c",
+  "reviewed_sources": {
+    "crates/incant_game_player/src/session.rs": "b0912738c4c047c06bbb974efb46978e51de263e38ef8a216887f8bf752930dd",
+    "crates/incant_render_game/tests/ui.rs": "848be3005b7084d0ec2ecf023b221c0d54161d7f0f240d22fb74260497a5c86f",
+    "crates/incant_render_game/tests/ui/hud.rs": "51a1d6e6af40871b1a27847fc539348b052f1149ebdc0b5a259a39c4c51e4aad",
+    "crates/incant_runtime/src/commands.rs": "c85cef7899206542eac66b00e5f3bdfc478e93e3ec7102c86b19addc3f9f64fb",
+    "crates/incant_runtime/src/hud.rs": "a8f69f7ee4793cbe74a9b1bdc4e5667fd73539037711a23ff411f795af2ed545",
+    "crates/incant_runtime/src/lib.rs": "0edc132f9fc26ed18563bde5d540c93065ca61060bf6a7526a897f2e33d595d0",
+    "crates/incant_runtime/src/text.rs": "9ef656f41702d7feee41f00e3888d283b562268acbc32639368743c989425198",
+    "crates/incant_runtime/src/ui.rs": "872140176a400d1a81f33f443b713b32126be3c6cb4693579d45bbbbfb5eba96",
+    "crates/incant_runtime/tests/hud.rs": "c68b19e4cd88f9f83cbf06a2627ee9d82de241594a29af616dc816de6b090436",
+    "crates/incant_runtime/tests/support/hud.rs": "d616f47fa36feab4213402f2a0563a87e34cf53a95e531e882aaefdd390cfa3e",
+    "crates/incant_script/build.rs": "2ca24f5a310d6ff935423689d477a58f7d9f0b1cdad7ade0c170b31a25c6ba16",
+    "crates/incant_script/src/commands.rs": "d53cc6ccf5e6bb423eca00d97492277485df92363fc7dfaab0dfa6aa7ac5c4dd",
+    "crates/incant_script/src/compiler.rs": "71a3ea29026428f387966d600e2afabb117748091fbaadc08b2688a1ad4273a5",
+    "crates/incant_script/src/hud.rs": "1c7a3f885b766022e6562ea48e85a6aaae8810fed1361da3583807fe25d47a3c",
+    "crates/incant_script/src/hud_tests.rs": "5309adcf386220fa37f17294c6d2ab18d88a43cd8feee8eaa72a3364ab49d8c6",
+    "crates/incant_script/src/input.rs": "050cc183c80f2f23caa31c08126ef6aa8c7a7bb0991719820908cd02ad476d69",
+    "crates/incant_script/src/lib.rs": "babbd7a64d089a9e5cf3ea3e83993c0593f607e8ee70964d905d4b5b8b209745",
+    "crates/incant_script/tests/hud.rs": "d7ab32b509d39a1ca9e92cb69ebd1c316709f00f2eb6882b6534fee604ab15a6",
+    "sdk/ts/src/native.d.ts": "cb680f4c5c77c30124da7401f9332d39de8d93eada3f22f47d032fda4685a474"
+  },
+  "reviewed_contracts": [
+    "Ordered per-component lifetime checks and staged copy-on-write publication",
+    "256-control,1MiB cumulative byte and16KiB per-string bounds in native FrameCommands",
+    "Primitive argument parsing, sticky caught-call refusal and expired capabilities",
+    "Owned readonly HUD properties captured before native loans without guest setters",
+    "Preservation of roles, font assets and layout; changed declaration reconciles input and retires stale focus receipts",
+    "Final report reads canonical shaped source only; no per-tick JSON observations"
+  ],
+  "findings": [],
+  "limits": [
+    "Execution logs and ordinary source-free package proof require final review",
+    "Public export helper is not certified by this source receipt",
+    "Wasm HUD parity, rendered pixels and device budgets remain open"
+  ]
+}

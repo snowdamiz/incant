@@ -16,6 +16,21 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Native HUD controls — CPU and public shipping proof verified
+
+Typed native/TypeScript controls now update existing widget text/disabled state
+and world Text content through the atomic gameplay transaction. Readonly
+pre-command declarations, role/lifetime validation, aggregate quotas, localized
+literal results and composed input/shaping reconciliation are tested. The 444
+affected cases plus 10 player tests, all-target Clippy, strict typing, wasm32 and
+normal-runtime dependency guards pass. Independent source and final execution
+reviews are accepted.
+Five fresh source/map/build-deleted player processes verify changed shaped text,
+pre-command reads, exact save/PCM continuation; three exact refusals publish no
+outputs. Final independent execution audit is accepted.
+Wasm HUD parity, native/GPU appearance and complete Game UI remain open.
+[Contract and limits](docs/spikes/native-hud-controls.md).
+
 ## Connected root motion — native/TypeScript CPU checks passed
 
 Cooked17/18 root catalogs now drive independent exact graph/clip clocks,
