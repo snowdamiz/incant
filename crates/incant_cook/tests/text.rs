@@ -13,7 +13,9 @@ const LATIN: &[u8] = include_bytes!("../../incant_text/tests/fonts/NotoSans-Regu
 const ARABIC: &[u8] = include_bytes!("../../incant_text/tests/fonts/NotoSansArabic.ttf");
 const CJK: &[u8] = include_bytes!("../../incant_text/tests/fonts/IncantCJKFixture.ttf");
 fn fixture(root: &std::path::Path) -> (CommandBus, String, String) {
-    let mut bus = CommandBus::new(Project::empty("Text")).unwrap();
+    let mut project = Project::empty("Text");
+    project.settings.physics_mode = incant_runtime::PHYSICS_VARIANT.mode();
+    let mut bus = CommandBus::new(project).unwrap();
     let sources = [
         ("latin.ttf", LATIN),
         ("arabic.ttf", ARABIC),

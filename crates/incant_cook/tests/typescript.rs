@@ -7,6 +7,7 @@ use serde_json::json;
 fn interrupted_source_transaction_refuses_before_opening_the_source_graph() {
     let root = tempfile::tempdir().unwrap();
     let mut project = Project::empty("Recovery refusal");
+    project.settings.physics_mode = incant_runtime::PHYSICS_VARIANT.mode();
     let mut scene = Scene::new("Main");
     let mut entity = Entity::new("Actor");
     let source = new_id();
@@ -76,6 +77,7 @@ fn canonical_project_root_with_spaces_and_unicode_cooks_local_imports_into_real_
         assert!(prefix.kind().is_verbatim());
     }
     let mut project = Project::empty("Canonical compiler startup");
+    project.settings.physics_mode = incant_runtime::PHYSICS_VARIANT.mode();
     let mut scene = Scene::new("Main");
     let mut entity = Entity::new("Mover");
     let source = new_id();

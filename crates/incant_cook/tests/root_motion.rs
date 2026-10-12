@@ -23,6 +23,7 @@ fn project(root: &Path, edit: impl FnOnce(&mut Value)) -> (Project, String, Stri
     .unwrap();
     let aid = new_id();
     let mut p = Project::empty("Root catalogs");
+    p.settings.physics_mode = incant_runtime::PHYSICS_VARIANT.mode();
     p.assets.insert(
         aid.clone(),
         Asset {

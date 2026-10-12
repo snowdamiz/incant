@@ -16,6 +16,16 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Project physics selection — current main173 verified
+
+The public command bus atomically selects deterministic or fast physics, with
+legacy deterministic defaults preserved. Cook/Play explicitly refuse a mismatched
+process before assets or source fallback. All 70 schemas and strict TypeScript
+contracts match. Current integration reuses byte-identical three-mode Rust checks
+and reruns schema/generation/guard checks; final independent review is accepted. Automatic editor
+process switching and mode-aware export remain separate follow-on work.
+[Integrated contract and evidence](docs/spikes/physics-project-main173.md).
+
 ## Pearl Cove presentation — current main173 verified
 
 Accepted gameplay hooks, original Claude art and localized HUD are composed.
@@ -1735,3 +1745,22 @@ complete; current-main integration remains separate. Per-project settings,
 automatic matching Play processes and export selection are the next work, and
 physics-world saves, performance/device measurements and eight-lane adoption
 remain open. [Scope and retained evidence](docs/spikes/physics-mode-admission.md).
+
+## Authored physics mode — locally verified
+
+The document now has a strict fast/deterministic setting with preserved legacy
+canonical bytes and a public, undoable `set_physics_mode` command. Cook and Play
+startup refuse a mismatched process before assets or scripts; export producer
+receipts identify the selected family and exact kernel. All three builds passed
+134 document/command/cook/Play tests and Clippy with frozen inputs. Actual matching
+launcher/export execution and editor process switching remain in progress.
+[Contract and evidence](docs/spikes/physics-project-setting.md).
+
+## Physics setting generated contract — locally verified
+
+The public schema registry, agent-tool command schema and generated TypeScript
+API now include the undoable physics mode. All 70 schemas match a fresh matching
+Rust binary; strict consumer checks and the editor build pass. The integrated
+cook/Play suite passes 65 tests and Clippy in each of three compiled variants.
+Mode-aware launch/export and editor process switching remain separate follow-on
+work. [Evidence](docs/spikes/physics-project-setting.md).

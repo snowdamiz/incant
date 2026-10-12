@@ -1,0 +1,573 @@
+{
+  "at": "2026-10-12T22:31:59.058963+00:00",
+  "tested_head": "38dcd215b6165cebbeaadfa5f876113a3fdbb604",
+  "main_baseline": "6474040b411c32caf8d72f0c5fd02d0d45b57852",
+  "producer_setting": "624ab9562ee98383c23673a9072b555d8468043c",
+  "producer_contract": "530f322f477ec643b3b6907d4799e94cd8fd7d0b",
+  "frozen_files": 1875,
+  "sources": {
+    "crates/incant_cmd/src/lib.rs": {
+      "producer": "624ab956",
+      "producer_sha256": "ad9b4304900422608202d39337161a4f3039ac28b60d494d0139e31ad4d3d289",
+      "current_sha256": "ad9b4304900422608202d39337161a4f3039ac28b60d494d0139e31ad4d3d289"
+    },
+    "crates/incant_cmd/tests/physics_mode.rs": {
+      "producer": "624ab956",
+      "producer_sha256": "87b3824de47b1ff6e1fadf616c1e1b78db0046a91204918d6f270cdb0b4981e6",
+      "current_sha256": "87b3824de47b1ff6e1fadf616c1e1b78db0046a91204918d6f270cdb0b4981e6"
+    },
+    "crates/incant_cook/src/project_build.rs": {
+      "producer": "624ab956",
+      "producer_sha256": "1462f61c4c4688ab877e5ba81f2613eaa5bccb954a3c2746c3972f0390615188",
+      "current_sha256": "1462f61c4c4688ab877e5ba81f2613eaa5bccb954a3c2746c3972f0390615188"
+    },
+    "crates/incant_cook/src/project_script.rs": {
+      "producer": "624ab956",
+      "producer_sha256": "dd20d2a2ba14cbcefa8662680939372f19f4e3b1280828f7fd5fc0222ecac9cc",
+      "current_sha256": "dd20d2a2ba14cbcefa8662680939372f19f4e3b1280828f7fd5fc0222ecac9cc"
+    },
+    "crates/incant_cook/src/scene.rs": {
+      "producer": "624ab956",
+      "producer_sha256": "245a48b82ba8258945cf728d9345192a7526fd8222ef370744d8f979b88f65ec",
+      "current_sha256": "245a48b82ba8258945cf728d9345192a7526fd8222ef370744d8f979b88f65ec"
+    },
+    "crates/incant_cook/tests/animation.rs": {
+      "producer": "624ab956",
+      "producer_sha256": "95e07a9fa6a229a306355c07eae2fe2f73fea6c8efb4a06e8adeffb656a27632",
+      "current_sha256": "95e07a9fa6a229a306355c07eae2fe2f73fea6c8efb4a06e8adeffb656a27632"
+    },
+    "crates/incant_cook/tests/localization.rs": {
+      "producer": "624ab956",
+      "producer_sha256": "06c8fcfdd7fc93a066ffe1008b0e5dde84b49a834518c9131008e57642fee0ab",
+      "current_sha256": "06c8fcfdd7fc93a066ffe1008b0e5dde84b49a834518c9131008e57642fee0ab"
+    },
+    "crates/incant_cook/tests/navigation.rs": {
+      "producer": "624ab956",
+      "producer_sha256": "2f5dff661b59360746009ab5ea2d7b068e65641fcee98f81c36f1317a07f84aa",
+      "current_sha256": "2f5dff661b59360746009ab5ea2d7b068e65641fcee98f81c36f1317a07f84aa"
+    },
+    "crates/incant_cook/tests/physics_2d.rs": {
+      "producer": "624ab956",
+      "producer_sha256": "7a010b0565b9f879697c681ab83af60beeb5311e6ec065f2484d4cb0786d86cd",
+      "current_sha256": "7a010b0565b9f879697c681ab83af60beeb5311e6ec065f2484d4cb0786d86cd"
+    },
+    "crates/incant_cook/tests/physics_mode.rs": {
+      "producer": "624ab956",
+      "producer_sha256": "6aa0e2588a9f20060007c3fa309cd897b3b3559b695b07f778e7b8cc79bd5522",
+      "current_sha256": "6aa0e2588a9f20060007c3fa309cd897b3b3559b695b07f778e7b8cc79bd5522"
+    },
+    "crates/incant_cook/tests/project_scripts.rs": {
+      "producer": "624ab956",
+      "producer_sha256": "e7a34cb49173252f31e61874acfd32657f67ab856f4894532f1e282d125e4a67",
+      "current_sha256": "e7a34cb49173252f31e61874acfd32657f67ab856f4894532f1e282d125e4a67"
+    },
+    "crates/incant_cook/tests/root_motion.rs": {
+      "producer": "624ab956",
+      "producer_sha256": "cff5848430b959d55e1a18fb6ebf0d383c6765733b217a429ef526f378c97271",
+      "current_sha256": "cff5848430b959d55e1a18fb6ebf0d383c6765733b217a429ef526f378c97271"
+    },
+    "crates/incant_cook/tests/runtime.rs": {
+      "producer": "624ab956",
+      "producer_sha256": "16c1592384d62c90269eded09b1dc6f595ef1c47a40a856ce56b9e882de20415",
+      "current_sha256": "16c1592384d62c90269eded09b1dc6f595ef1c47a40a856ce56b9e882de20415"
+    },
+    "crates/incant_cook/tests/spatial.rs": {
+      "producer": "624ab956",
+      "producer_sha256": "3e163fdec847874e634135cd47a82d4869bf27324dd4bc72932e489813fdc4d4",
+      "current_sha256": "3e163fdec847874e634135cd47a82d4869bf27324dd4bc72932e489813fdc4d4"
+    },
+    "crates/incant_cook/tests/steering.rs": {
+      "producer": "624ab956",
+      "producer_sha256": "d04ad38bf1ed621589ead1143a10eb33ed70917fac92909954fdb24073257943",
+      "current_sha256": "d04ad38bf1ed621589ead1143a10eb33ed70917fac92909954fdb24073257943"
+    },
+    "crates/incant_cook/tests/text.rs": {
+      "producer": "624ab956",
+      "producer_sha256": "4e2131c608a25fc556a1718acfcf843bd5d7941591c880d37f99d37e627bb337",
+      "current_sha256": "4e2131c608a25fc556a1718acfcf843bd5d7941591c880d37f99d37e627bb337"
+    },
+    "crates/incant_cook/tests/typescript.rs": {
+      "producer": "624ab956",
+      "producer_sha256": "cbd8108e0dd5b1e0a6f21d4997b65b490609b6c725f1fc0f403df1e72268a5bc",
+      "current_sha256": "cbd8108e0dd5b1e0a6f21d4997b65b490609b6c725f1fc0f403df1e72268a5bc"
+    },
+    "crates/incant_cook/tests/ui.rs": {
+      "producer": "624ab956",
+      "producer_sha256": "60350e57ef6eb41e0972a13b8991e48ae28df671b2e767d9f7d6086dabd3c102",
+      "current_sha256": "60350e57ef6eb41e0972a13b8991e48ae28df671b2e767d9f7d6086dabd3c102"
+    },
+    "crates/incant_doc/src/lib.rs": {
+      "producer": "624ab956",
+      "producer_sha256": "dc888c5a1ed238f2351bbd0c77f686f715b20d2a706b1bb59d51b37d16e286c1",
+      "current_sha256": "dc888c5a1ed238f2351bbd0c77f686f715b20d2a706b1bb59d51b37d16e286c1"
+    },
+    "crates/incant_doc/tests/physics_mode.rs": {
+      "producer": "624ab956",
+      "producer_sha256": "424f639d92179754525519d5fa2d332921c0f0fa5a08a4b9e95f9f736de5dc8c",
+      "current_sha256": "424f639d92179754525519d5fa2d332921c0f0fa5a08a4b9e95f9f736de5dc8c"
+    },
+    "crates/incant_play/src/lib.rs": {
+      "producer": "530f322f",
+      "producer_sha256": "17528db9fbf4e4a7856a2f20d6d0b255d04f1fbe8aaef31df2cd29417880b3bf",
+      "current_sha256": "17528db9fbf4e4a7856a2f20d6d0b255d04f1fbe8aaef31df2cd29417880b3bf",
+      "original624_sha256": "1e0df4f8ad771d72dd954d2ad829a11078b5392800e5e25588d20683254e6744"
+    },
+    "crates/incant_play/tests/animation.rs": {
+      "producer": "624ab956",
+      "producer_sha256": "1d39149750130d47c88d30a28ba5381c27fd323530512d187206b065af350611",
+      "current_sha256": "1d39149750130d47c88d30a28ba5381c27fd323530512d187206b065af350611"
+    },
+    "crates/incant_play/tests/startup.rs": {
+      "producer": "530f322f",
+      "producer_sha256": "1f59b8ae54dff9e9d18c2f01d9640a7f994ca3cef495b8b1b6773fa40a58495e",
+      "current_sha256": "1f59b8ae54dff9e9d18c2f01d9640a7f994ca3cef495b8b1b6773fa40a58495e",
+      "original624_sha256": "de3ce75ef8d443c077cd0c9e288d177e57ebe1827c2360bb7b5729f030e61e27"
+    },
+    "crates/incant_play/tests/wasm.rs": {
+      "producer": "624ab956",
+      "producer_sha256": "2f0570271515f967fc1aacd01033abc42352ad64aab46a3345788793d9fc5320",
+      "current_sha256": "2f0570271515f967fc1aacd01033abc42352ad64aab46a3345788793d9fc5320"
+    },
+    "crates/incant_types/src/physics_mode.rs": {
+      "producer": "624ab956",
+      "producer_sha256": "dbab1d4439fd5c171d18b241cb7132c21cc213bdcee76a5fe699382cba60504c",
+      "current_sha256": "dbab1d4439fd5c171d18b241cb7132c21cc213bdcee76a5fe699382cba60504c"
+    },
+    "schemas/Command.schema.json": {
+      "producer": "530f322f",
+      "producer_sha256": "d9de616afc0305c72fbfd68015cf83b0821496d0e89098b24f0e37a0efd6c736",
+      "current_sha256": "d9de616afc0305c72fbfd68015cf83b0821496d0e89098b24f0e37a0efd6c736"
+    },
+    "schemas/GameSave.schema.json": {
+      "producer": "530f322f",
+      "producer_sha256": "99e0c0e9594b595e62d1ab89cf981bbcd2a66bf951cd43d32648c2db089f6ac7",
+      "current_sha256": "99e0c0e9594b595e62d1ab89cf981bbcd2a66bf951cd43d32648c2db089f6ac7"
+    },
+    "schemas/Project.schema.json": {
+      "producer": "530f322f",
+      "producer_sha256": "b90f50ee3d040718b3b1ef48d9860fb1bed7abcad01f61b61ab2b3657ab3d816",
+      "current_sha256": "b90f50ee3d040718b3b1ef48d9860fb1bed7abcad01f61b61ab2b3657ab3d816"
+    },
+    "schemas/agent-tools.json": {
+      "producer": "530f322f",
+      "producer_sha256": "9fa3434ae11c40600ce77fcd60e8d036d2bba41ccfaca9ec6369c843f93af3e2",
+      "current_sha256": "9fa3434ae11c40600ce77fcd60e8d036d2bba41ccfaca9ec6369c843f93af3e2"
+    },
+    "sdk/ts/src/generated.d.ts": {
+      "producer": "530f322f",
+      "producer_sha256": "5cdbd8bd50ff57692f438ea0d592cd1b149ccbb4f692a7b85117f8a486847431",
+      "current_sha256": "5cdbd8bd50ff57692f438ea0d592cd1b149ccbb4f692a7b85117f8a486847431"
+    },
+    "sdk/ts/tsconfig.json": {
+      "producer": "530f322f",
+      "producer_sha256": "6dbb7aa4e8b02c14777410e51d06cab20f713fd7fcce9cccbcc8fccc92ba609a",
+      "current_sha256": "6dbb7aa4e8b02c14777410e51d06cab20f713fd7fcce9cccbcc8fccc92ba609a"
+    },
+    "sdk/ts/type-tests/physics-mode.ts": {
+      "producer": "530f322f",
+      "producer_sha256": "9be1ca2f9bb1b4edfddb5e102172dd8035260f4b1664aed47c6b5fb3df6b19b8",
+      "current_sha256": "9be1ca2f9bb1b4edfddb5e102172dd8035260f4b1664aed47c6b5fb3df6b19b8"
+    }
+  },
+  "results": [
+    {
+      "name": "schema",
+      "command": [
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/incant_headless",
+        "schema",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/schemas"
+      ],
+      "exit": 0,
+      "seconds": 0.6443565410008887,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/schema.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/schema.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "sdk",
+      "command": [
+        "node",
+        "tools/generate_sdk.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.039708875003270805,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/sdk.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/sdk.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "strict-sdk",
+      "command": [
+        "node",
+        "node_modules/typescript/bin/tsc",
+        "-p",
+        "sdk/ts/tsconfig.json"
+      ],
+      "exit": 0,
+      "seconds": 0.24831179199827602,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/strict-sdk.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/strict-sdk.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "bridge",
+      "command": [
+        "node",
+        "tools/build_bridge.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.07538854100130266,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/bridge.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/bridge.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "feature-manifests",
+      "command": [
+        "python3",
+        "tools/physics_features.py",
+        "manifest"
+      ],
+      "exit": 0,
+      "seconds": 0.048601458001940046,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/feature-manifests.stdout",
+        "sha256": "0d556e78cedbd66c0bc03fb2348db5b76642a7f33dc023342d5a00e4be691888"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/feature-manifests.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "feature-tests",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_physics_features.py"
+      ],
+      "exit": 0,
+      "seconds": 0.08437224999943282,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/feature-tests.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/feature-tests.stderr",
+        "sha256": "27ea101839400a591239a96f4b99cf545a140382ec0eb0148f23ff25e89fefa5"
+      }
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 1.2615868330030935,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/fmt.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/fmt.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.036164041001029545,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/conventions.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/conventions.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.015531290999206249,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/diff.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/diff.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "docs/spikes/evidence/physics-project-main173/bridge.stderr.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/bridge.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 0
+    },
+    {
+      "path": "docs/spikes/evidence/physics-project-main173/bridge.stdout.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/bridge.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 0
+    },
+    {
+      "path": "docs/spikes/evidence/physics-project-main173/conventions.stderr.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/conventions.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 0
+    },
+    {
+      "path": "docs/spikes/evidence/physics-project-main173/conventions.stdout.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/conventions.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 0
+    },
+    {
+      "path": "docs/spikes/evidence/physics-project-main173/diff.stderr.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/diff.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 0
+    },
+    {
+      "path": "docs/spikes/evidence/physics-project-main173/diff.stdout.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/diff.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 0
+    },
+    {
+      "path": "docs/spikes/evidence/physics-project-main173/feature-manifests.stderr.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/feature-manifests.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 0
+    },
+    {
+      "path": "docs/spikes/evidence/physics-project-main173/feature-manifests.stdout.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/feature-manifests.stdout",
+      "sha256": "0d556e78cedbd66c0bc03fb2348db5b76642a7f33dc023342d5a00e4be691888",
+      "compressed_sha256": "390c0b44d0bc2cf8838a1d9c5e4c8ad98bf35f90b21f104d1f91b4d119c57e0c",
+      "bytes": 29
+    },
+    {
+      "path": "docs/spikes/evidence/physics-project-main173/feature-tests.stderr.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/feature-tests.stderr",
+      "sha256": "27ea101839400a591239a96f4b99cf545a140382ec0eb0148f23ff25e89fefa5",
+      "compressed_sha256": "1f44b024923779c0c4dbcd4043efdc9641dc0198d72acccb3623fbebc8e44fa6",
+      "bytes": 118
+    },
+    {
+      "path": "docs/spikes/evidence/physics-project-main173/feature-tests.stdout.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/feature-tests.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 0
+    },
+    {
+      "path": "docs/spikes/evidence/physics-project-main173/fmt.stderr.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/fmt.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 0
+    },
+    {
+      "path": "docs/spikes/evidence/physics-project-main173/fmt.stdout.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/fmt.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 0
+    },
+    {
+      "path": "docs/spikes/evidence/physics-project-main173/freeze.json.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/freeze.json",
+      "sha256": "247f6d1a025697e65a3e7954d14d7aa48228ea935726ba4f65d00ff43409c05a",
+      "compressed_sha256": "35ca536e196c7e838c0d8d280a5d0b2f0b5aa5c6445e56832bac5193bf1842ec",
+      "bytes": 217845
+    },
+    {
+      "path": "docs/spikes/evidence/physics-project-main173/results.json.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/results.json",
+      "sha256": "9bed045b8635305fd3f86b5bec45531e44355cb5e08f67b602deba52dacda0ec",
+      "compressed_sha256": "cddeb6060083bc75af3d67277f3a40204503f01b496be4da7c03ead9b9374d8a",
+      "bytes": 5816
+    },
+    {
+      "path": "docs/spikes/evidence/physics-project-main173/reused-evidence.json.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/reused-evidence.json",
+      "sha256": "6274a89f93885075f8d1175285fb42733792372bc691edd529d97c94bbcefdb6",
+      "compressed_sha256": "d7bf68f2b6430e5cb80f3b3330bd5addcf3463cd2739e85500f25f4aa191bbe8",
+      "bytes": 1654
+    },
+    {
+      "path": "docs/spikes/evidence/physics-project-main173/schema.stderr.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/schema.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 0
+    },
+    {
+      "path": "docs/spikes/evidence/physics-project-main173/schema.stdout.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/schema.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 0
+    },
+    {
+      "path": "docs/spikes/evidence/physics-project-main173/schemas.json.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/schemas.json",
+      "sha256": "21496e121f2cad47c1e75ab64b1ea38ecef8f88facc130e0c56c80675dc41c3c",
+      "compressed_sha256": "89c2f58815f56f8cda1d3226d238b5f4e232bd2307a7f9978c3cec7f16e96e8c",
+      "bytes": 6900
+    },
+    {
+      "path": "docs/spikes/evidence/physics-project-main173/sdk.stderr.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/sdk.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 0
+    },
+    {
+      "path": "docs/spikes/evidence/physics-project-main173/sdk.stdout.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/sdk.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 0
+    },
+    {
+      "path": "docs/spikes/evidence/physics-project-main173/strict-sdk.stderr.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/strict-sdk.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 0
+    },
+    {
+      "path": "docs/spikes/evidence/physics-project-main173/strict-sdk.stdout.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/strict-sdk.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 0
+    },
+    {
+      "path": "docs/spikes/evidence/physics-project-main173/terminal.json.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/terminal.json",
+      "sha256": "5f3a93fa4407b980cdfc0b89e19e9da069cfd628d1193f06877472a952ae0f08",
+      "compressed_sha256": "3429152cdf0f34f23a5f8439c8648e7454e9401a41c3955dc200f8ec3866a275",
+      "bytes": 180
+    },
+    {
+      "path": "docs/spikes/evidence/physics-project-main173/physics-project-main173-run.py.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-run.py",
+      "sha256": "cc63e8eed126ad10302dfd2b4a38a87eef4b5f9f8a0574e7472098401a790aff",
+      "compressed_sha256": "442305883494803a0dbced9943ead4a16d22c6b248f7b85c18b233f25d642a4d",
+      "bytes": 4257
+    }
+  ],
+  "reviews": [
+    {
+      "path": "docs/spikes/evidence/physics-project-main173/physics-project-setting-source-20261012.json",
+      "sha256": "aae6708c9240e737344e982e7bfda2447beb95d14c7aebcd3bb747e3d5b42e5f"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-project-main173/physics-project-contract-final-20261012.json",
+      "sha256": "26677cb7972c081e94048e0d1f4b612da1080070d8741486ea137a37a0b5ab0f"
+    }
+  ],
+  "reused_evidence": {
+    "producer": "530f322f477ec643b3b6907d4799e94cd8fd7d0b",
+    "head": "38dcd215b6165cebbeaadfa5f876113a3fdbb604",
+    "compiled_path_differences": [
+      "tools/probes/physics-snapshot-boundary/Cargo.lock",
+      "tools/probes/physics-snapshot-boundary/Cargo.toml",
+      "tools/probes/physics-snapshot-boundary/README.md",
+      "tools/probes/physics-snapshot-boundary/src/main.rs",
+      "tools/probes/physics-snapshot-boundary/src/probe.rs"
+    ],
+    "difference_scope": "Separate excluded trusted physics diagnostic only; no linked engine/host/compiler input differences.",
+    "freezes": {
+      "integrated-freeze": {
+        "retained_path": "docs/spikes/evidence/physics-project-contract/integrated-freeze.json.gz",
+        "sha256": "941eb51b928f8d4bb8a6139edbf2b4ffbddcd1ffb5c2b5efc18b8173611c0274",
+        "count": 1411,
+        "all_exact": true
+      },
+      "headless-freeze": {
+        "retained_path": "docs/spikes/evidence/physics-project-contract/headless-freeze.json.gz",
+        "sha256": "941eb51b928f8d4bb8a6139edbf2b4ffbddcd1ffb5c2b5efc18b8173611c0274",
+        "count": 1411,
+        "all_exact": true
+      }
+    },
+    "binary": {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-headless-001/incant_headless",
+      "copy": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-main173-001/incant_headless",
+      "sha256": "bfc30895d90cb04122904f347e891beb63258d2b94cfdcb8377ae6e1ee0cc04b"
+    },
+    "qualification": "No Rust recompilation or Rust test rerun in this integration. Reuse source-identical producer 134 tests and Clippy per three variants plus integrated65 cook/Play tests per variant; totals overlap, not additive."
+  },
+  "integration": "Exact root d830 startup test resolution; all engine/manifests/sdk/schema source identical to530f. Only separate excluded snapshot diagnostic differs, alongside docs/status. No production correction.",
+  "limits": [
+    "Nine current schema/generator/type/feature/fmt checks do not constitute a fresh Rust test or build.",
+    "Source-identical producer tests/Clippy are reused:134 document/command/cook/Play cases in each mode, plus later integrated65 cook/Play cases per mode, with overlap.",
+    "Settings atomically select requested family; mismatched processes explicitly refuse. Automatic editor/mode-aware process/export execution remains separately pending.",
+    "No GPU/device/performance/physics save claim."
+  ],
+  "review_status": "current-main final independently accepted",
+  "final_review": {
+    "path": "docs/spikes/evidence/physics-project-main173/final-review.json",
+    "sha256": "444c785440ae512785f5ca8270fa74dbd1f4961341925354b04105d07b36ccac"
+  },
+  "current_main_ancestry": {
+    "path": "docs/spikes/evidence/physics-project-main173/main175-ancestry.json",
+    "sha256": "70e7e89280d9872e492770a6a31cabb6daa750cacb411b88589f07ab6e503793",
+    "main": "0fdec335a062270f9454add4d320d2be6c3f0852"
+  }
+}

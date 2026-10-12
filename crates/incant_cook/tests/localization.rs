@@ -18,6 +18,7 @@ export default {update({chunks,instances,localization,commands,clock}) {
 "#;
 fn project(exhaust: bool) -> (Project, String, Vec<String>) {
     let mut p = Project::empty("Native localization");
+    p.settings.physics_mode = incant_runtime::PHYSICS_VARIANT.mode();
     let mut s = Scene::new("Main");
     let mut ids = vec![];
     p.string_tables.insert(TABLE.into(),serde_json::from_value(json!({"id":TABLE,"name":"Game","source_locale":"en","messages":{"hello":{"en":"Hello {name}","fr":"Bonjour {name}"}}})).unwrap());
