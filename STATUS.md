@@ -16,6 +16,16 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Grouped animation pose sampling — local CPU checks passed
+
+The retained model player crossfades finished single, spherical-pair or weighted
+poses without flattening their rotation rules. Exact endpoints and one atomic
+publication are preserved. All 113 affected tests, Clippy, supported wasm32,
+dependency checks and independent source review pass. Accepted updates allocate
+nothing; existing refusal diagnostics may allocate. This is a numeric foundation
+only: authored graph fades, clocks, cooked/save and SDK/render integration remain
+in progress. [Contract and evidence](docs/spikes/grouped-animation-pose.md).
+
 ## Authored nested animation trees — connected implementation under verification
 
 Stable-ID nested 1D and rectangular 2D motions now cook into a bounded v15 node
