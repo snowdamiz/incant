@@ -1,0 +1,981 @@
+{
+  "scope": "Native/TypeScript stop, restart and seek on current main162 HUD/root-motion union; CPU and fresh ordinary shipping continuation.",
+  "tested_head": "ae013e20eb2b60a1440fe20cf7b92d1e481ab44e",
+  "integrated_head": "8a6d2eb7f2531ca854f8085f410e0a44641def94",
+  "main": "d4ba0a1e323d8f897a40dcb5ff7e91728f9d756e",
+  "producer": "ad669a3d6d83c7070c7907956146ec061abed321",
+  "source_comparison": {
+    "head": "8a6d2eb7f2531ca854f8085f410e0a44641def94",
+    "main": "d4ba0a1e323d8f897a40dcb5ff7e91728f9d756e",
+    "tested_head": "ae013e20eb2b60a1440fe20cf7b92d1e481ab44e",
+    "frozen_files": 1827,
+    "all_frozen_inputs_equal": true,
+    "post_test_changes": [
+      "STATUS.md",
+      "docs/spikes/evidence/native-hud-main161-review.json",
+      "docs/spikes/evidence/native-hud-main161.json",
+      "docs/spikes/evidence/native-hud-main161/accepted-sources.json.gz",
+      "docs/spikes/evidence/native-hud-main161/affected-tests.log.gz",
+      "docs/spikes/evidence/native-hud-main161/bridge.log.gz",
+      "docs/spikes/evidence/native-hud-main161/clippy.log.gz",
+      "docs/spikes/evidence/native-hud-main161/closeout/conventions.log.gz",
+      "docs/spikes/evidence/native-hud-main161/closeout/diff.log.gz",
+      "docs/spikes/evidence/native-hud-main161/closeout/results.json.gz",
+      "docs/spikes/evidence/native-hud-main161/closeout/source-comparison.json.gz",
+      "docs/spikes/evidence/native-hud-main161/conventions.log.gz",
+      "docs/spikes/evidence/native-hud-main161/diff.log.gz",
+      "docs/spikes/evidence/native-hud-main161/fmt.log.gz",
+      "docs/spikes/evidence/native-hud-main161/freeze.json.gz",
+      "docs/spikes/evidence/native-hud-main161/generated-sdk.log.gz",
+      "docs/spikes/evidence/native-hud-main161/graph.log.gz",
+      "docs/spikes/evidence/native-hud-main161/headless-binary.json.gz",
+      "docs/spikes/evidence/native-hud-main161/headless.log.gz",
+      "docs/spikes/evidence/native-hud-main161/no-compiler.log.gz",
+      "docs/spikes/evidence/native-hud-main161/player-tests.log.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export.log.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/authoring-rpc.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/authoring.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/bad-role-input.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/commands/bad-role.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/commands/bad-role.stderr.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/commands/bad-role.stdout.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/commands/export.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/commands/export.stderr.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/commands/export.stdout.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/commands/first.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/commands/first.stderr.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/commands/first.stdout.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/commands/init.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/commands/init.stderr.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/commands/init.stdout.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/commands/mixed-fixture.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/commands/mixed-fixture.stderr.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/commands/mixed-fixture.stdout.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/commands/quota.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/commands/quota.stderr.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/commands/quota.stdout.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/commands/run-0.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/commands/run-0.stderr.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/commands/run-0.stdout.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/commands/run-1.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/commands/run-1.stderr.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/commands/run-1.stdout.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/commands/run-2.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/commands/run-2.stderr.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/commands/run-2.stdout.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/commands/second.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/commands/second.stderr.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/commands/second.stdout.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/commands/trap.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/commands/trap.stderr.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/commands/trap.stdout.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/deleted-authoring.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/deleted-maps.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/first.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/first.pcm.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/first.save.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/input-first.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/input.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/observe.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/package/build.log.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/package/export.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/package/player/data/audio/bb391cc186bb741011a9d500103383ccd8cdaf0164c06b379c91d77e94de9b35.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/package/player/data/clips.bin.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/package/player/data/empty-input.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/package/player/data/fonts/1087d4bb69160e3e5955407294226ca3da11166a3188ada3c1a166ba14e55ceb.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/package/player/data/fonts/6864e1444bc7002790e682360d3f93bd45fe51b7045a64ecbf0e76e19e6b758e.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/package/player/data/fonts/9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/package/player/data/input-actions.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/package/player/data/models/71fbcae82debc0236bda7576327733a6943d93ce7adb913cbe1d95fe931d511f.incmodel.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/package/player/data/package.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/package/player/data/world.scene.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/package/project-build.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/package/symbols/script-symbols.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/quota-input.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/result.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/run-0.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/run-0.pcm.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/run-0.save.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/run-1.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/run-1.pcm.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/run-1.save.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/run-2.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/run-2.pcm.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/run-2.save.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/second.json.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/second.pcm.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/second.save.gz",
+      "docs/spikes/evidence/native-hud-main161/public-export/trap-input.json.gz",
+      "docs/spikes/evidence/native-hud-main161/results.json.gz",
+      "docs/spikes/evidence/native-hud-main161/strict-sdk.log.gz",
+      "docs/spikes/evidence/native-hud-main161/validation-runner.py.gz",
+      "docs/spikes/evidence/native-hud-main161/wasm32.log.gz",
+      "docs/spikes/native-hud-main161.md"
+    ]
+  },
+  "accepted_inputs": {
+    "crates/incant_audio_runtime/src/scene.rs": {
+      "integrated": "82eb26a05c30c9a3c16ee43c22e4674d7f0e6818d7b3692df01a70de7844c59c",
+      "producer": "82eb26a05c30c9a3c16ee43c22e4674d7f0e6818d7b3692df01a70de7844c59c"
+    },
+    "crates/incant_audio_runtime/src/scene/checkpoint.rs": {
+      "integrated": "882b68ee8140452588ec1356265c6bd15ba09c4229ae90613ddff70a4219b6f9",
+      "producer": "882b68ee8140452588ec1356265c6bd15ba09c4229ae90613ddff70a4219b6f9"
+    },
+    "crates/incant_audio_runtime/src/scene/checkpoint/codec.rs": {
+      "integrated": "f62ddeb443cfc3ed616d3d6d6bd2c1d7e7543d6a9633686661eec58544f6153e",
+      "producer": "f62ddeb443cfc3ed616d3d6d6bd2c1d7e7543d6a9633686661eec58544f6153e"
+    },
+    "crates/incant_audio_runtime/tests/checkpoints.rs": {
+      "integrated": "191110ca99f9f4ab92bcdd59695f26b9399050bac29625d9968c88e7c6d31371",
+      "producer": "191110ca99f9f4ab92bcdd59695f26b9399050bac29625d9968c88e7c6d31371"
+    },
+    "crates/incant_audio_runtime/tests/checkpoints/transport.rs": {
+      "integrated": "3f1d5534b519f25806cc25208c5d47dc124b07e2b02a0c0f20614ce3d52e8197",
+      "producer": "3f1d5534b519f25806cc25208c5d47dc124b07e2b02a0c0f20614ce3d52e8197"
+    },
+    "crates/incant_audio_runtime/tests/scene.rs": {
+      "integrated": "0f9d3b3f0509095219e2a1b1e58156f1d35427228083df930790c9bf58b3a24b",
+      "producer": "0f9d3b3f0509095219e2a1b1e58156f1d35427228083df930790c9bf58b3a24b"
+    },
+    "crates/incant_audio_runtime/tests/scene/transport.rs": {
+      "integrated": "dd3eccf8aa0023625f264651dca9646b09456ce17cd1c154c6ec212694459bc7",
+      "producer": "dd3eccf8aa0023625f264651dca9646b09456ce17cd1c154c6ec212694459bc7"
+    },
+    "crates/incant_cook/src/scene.rs": {
+      "integrated": "2d946d3d8d5e1f98f7007323ed58d90a4571fa8863ab6ffd70945b8ebef7f4f5",
+      "producer": "2d946d3d8d5e1f98f7007323ed58d90a4571fa8863ab6ffd70945b8ebef7f4f5"
+    },
+    "crates/incant_game_runtime/tests/audio_checkpoints.rs": {
+      "integrated": "aea4f71ec27d2e3a6891a783a87ef747783fc7b3f316be5aeb11290b64ab854b",
+      "producer": "aea4f71ec27d2e3a6891a783a87ef747783fc7b3f316be5aeb11290b64ab854b"
+    },
+    "crates/incant_game_runtime/tests/hosting.rs": {
+      "integrated": "797f24284e4a99deaf4db1eb22814621d319dee801abf7c7b3f592ff8b030e62",
+      "producer": "797f24284e4a99deaf4db1eb22814621d319dee801abf7c7b3f592ff8b030e62"
+    },
+    "crates/incant_game_runtime/tests/session.rs": {
+      "integrated": "fc4fa30922e8addf9e1a7bb250524e8208cb07517e7a48969f46a8aa7566942b",
+      "producer": "fc4fa30922e8addf9e1a7bb250524e8208cb07517e7a48969f46a8aa7566942b"
+    },
+    "crates/incant_render_game/tests/hosted.rs": {
+      "integrated": "6f0b61ac4e83d804f6687e6c524ae3ea529d0c57e439a04f6c2fb61d97063310",
+      "producer": "6f0b61ac4e83d804f6687e6c524ae3ea529d0c57e439a04f6c2fb61d97063310"
+    },
+    "crates/incant_render_gpu_host/tests/game.rs": {
+      "integrated": "82ccd9ff8ffb6fae0a3fdacaa31b8b9ac23cf475c9d99b21985bbad03a82b91a",
+      "producer": "82ccd9ff8ffb6fae0a3fdacaa31b8b9ac23cf475c9d99b21985bbad03a82b91a"
+    },
+    "crates/incant_runtime/src/audio.rs": {
+      "integrated": "554c2cd9c511c4c7a175852a192c65071105d0ab33720f69fa5c361619312eae",
+      "producer": "554c2cd9c511c4c7a175852a192c65071105d0ab33720f69fa5c361619312eae"
+    },
+    "crates/incant_runtime/src/audio_binary.rs": {
+      "integrated": "977fb2e4ce4b8d1824b77cce40e4a176438529ce845fb2bc0729799a45f0ef73",
+      "producer": "977fb2e4ce4b8d1824b77cce40e4a176438529ce845fb2bc0729799a45f0ef73"
+    },
+    "crates/incant_runtime/src/audio_controls.rs": {
+      "integrated": "1480ca1a9c7722f71012098b9437164edf84d7573d48f17949d7f82314882ea3",
+      "producer": "1480ca1a9c7722f71012098b9437164edf84d7573d48f17949d7f82314882ea3"
+    },
+    "crates/incant_runtime/src/binary.rs": {
+      "integrated": "de05c4f9123cd8425f39b6c33a99098e3dd50984e5bef73db34f7ab8f799f19f",
+      "producer": "de05c4f9123cd8425f39b6c33a99098e3dd50984e5bef73db34f7ab8f799f19f"
+    },
+    "crates/incant_runtime/tests/audio.rs": {
+      "integrated": "31cfa487165beb2376f4b712dc59341602128ce857ac6e179c57e11e70b534d2",
+      "producer": "31cfa487165beb2376f4b712dc59341602128ce857ac6e179c57e11e70b534d2"
+    },
+    "crates/incant_runtime/tests/audio_controls.rs": {
+      "integrated": "3a2f642c812b500df9ae047f7241c3e4bae34eccb617c1e904789ad6f598a8b9",
+      "producer": "3a2f642c812b500df9ae047f7241c3e4bae34eccb617c1e904789ad6f598a8b9"
+    },
+    "crates/incant_runtime/tests/support/audio_controls.rs": {
+      "integrated": "b9d90dce3effd2a7cbe64e5b2a7050fc88d5412836da6e7c68221f791f00f145",
+      "producer": "b9d90dce3effd2a7cbe64e5b2a7050fc88d5412836da6e7c68221f791f00f145"
+    },
+    "crates/incant_script/src/audio_commands.rs": {
+      "integrated": "b3fe9dc24e81da453ebd3e80d8b82196deb424512c5a351a1aeaba2e37f5610e",
+      "producer": "b3fe9dc24e81da453ebd3e80d8b82196deb424512c5a351a1aeaba2e37f5610e"
+    },
+    "crates/incant_script/src/commands.rs": {
+      "integrated": "707687a1e0eb3a5e7388488fa99d8b680fb98eb36e01b240f652bd8b73e005c2",
+      "producer": "46c95361c5b6c087bc0faf4e699000bbbb15d810af0dc8fa07cbf5328011b1a3"
+    },
+    "crates/incant_script/tests/audio_controls.rs": {
+      "integrated": "674a23ec8f5ef9ce69a5009842be708c69d453813ff841c4e7066290d6d8280d",
+      "producer": "674a23ec8f5ef9ce69a5009842be708c69d453813ff841c4e7066290d6d8280d"
+    },
+    "crates/incant_wasm_player/src/lib.rs": {
+      "integrated": "6a17d84ae2505f0141b7bc162cfad490fb68825120563ec6887b9dda1a987466",
+      "producer": "6a17d84ae2505f0141b7bc162cfad490fb68825120563ec6887b9dda1a987466"
+    },
+    "sdk/ts/src/native.d.ts": {
+      "integrated": "a9b9ae7d39e63f712391aadc75bb0d9d8f89c866e0d738afdfe218315da76b0d",
+      "producer": "4bc4a3dd7350e94bee2614cb05a7af315811a7eecd163fc221af81b01e834838"
+    },
+    "tools/probes/native-audio-checkpoint-export.py": {
+      "integrated": "11821aedcf0298cc5ee0cf0d168888311bfc1a37e00c93835e6922b94fcdc044",
+      "producer": "11821aedcf0298cc5ee0cf0d168888311bfc1a37e00c93835e6922b94fcdc044"
+    }
+  },
+  "checks": [
+    {
+      "name": "tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_audio_runtime",
+        "-p",
+        "incant_game_runtime",
+        "-p",
+        "incant_cook",
+        "-p",
+        "incant_render_game",
+        "--all-targets"
+      ],
+      "exit": 0,
+      "seconds": 187.89379087499765,
+      "sha256": "745e59c42f57971968617e314d176b06459fe86f7b900c55b024920069d8c505"
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_audio_runtime",
+        "-p",
+        "incant_game_runtime",
+        "-p",
+        "incant_cook",
+        "-p",
+        "incant_render_game",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 40.899432542002614,
+      "sha256": "f3e618a24505d0a3ce555503d2fb02f28a6e7715febed21046d00ae3d7b027e8"
+    },
+    {
+      "name": "headless",
+      "command": [
+        "./tools/cargo",
+        "build",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_headless"
+      ],
+      "exit": 0,
+      "seconds": 103.20127058300204,
+      "sha256": "9e4f6b0bcbf65fa3b2c60535d6ae77e3faa3df83f03e60b06678631f5f6d451b"
+    },
+    {
+      "name": "remaining-adapters",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render_gpu_host",
+        "--all-targets",
+        "-p",
+        "incant_wasm_player",
+        "--lib"
+      ],
+      "exit": 0,
+      "seconds": 21.872948583000834,
+      "sha256": "87a691688dc01ad2d07ea3ee83d9b7265766481cfe347110b371846bcfe601fb"
+    },
+    {
+      "name": "lean-script",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_script",
+        "--no-default-features",
+        "--features",
+        "static-module,ui,audio"
+      ],
+      "exit": 0,
+      "seconds": 4.5003593749970605,
+      "sha256": "10c98561568bc0f70b78cddcfbba5f635ce20670448992af6142a1c1fbccb7b7"
+    },
+    {
+      "name": "wasm-audio",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_audio_runtime",
+        "--features",
+        "scene",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "exit": 0,
+      "seconds": 2.5375486250013637,
+      "sha256": "73008fd7a141f2e5dafc1a374d72d4dda11b73daab5b86a3103f138cb8d2e416"
+    },
+    {
+      "name": "sdk-types",
+      "command": [
+        "node_modules/.bin/tsc",
+        "-p",
+        "sdk/ts/tsconfig.json"
+      ],
+      "exit": 0,
+      "seconds": 0.3986676249987795,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "sdk-generated",
+      "command": [
+        "node",
+        "tools/generate_sdk.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.0654677909988095,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "bridge",
+      "command": [
+        "node",
+        "tools/build_bridge.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.10823758300102782,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 1.8683730839984491,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.058843790997343604,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dependency-guard",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_runtime",
+        "incant_script",
+        "incant_audio_runtime",
+        "incant_game_runtime",
+        "incant_wasm_player",
+        "--features",
+        "incant_audio_runtime/scene"
+      ],
+      "exit": 0,
+      "seconds": 0.7559828330013261,
+      "sha256": "750e0f224cb6fa670f98b002fd4a19fdfebe0756d9411fe6c40bbe873740a81a"
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.050152625000919215,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "public-export",
+      "command": [
+        "python3",
+        "tools/probes/native-audio-checkpoint-export.py",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export",
+        "--binary",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/incant_headless",
+        "--transport"
+      ],
+      "exit": 0,
+      "seconds": 424.69112879199747,
+      "sha256": "62d1fc1be64f4211f60e565c4094b553578c9230b043effe2ab636f382385c89"
+    }
+  ],
+  "tests": {
+    "groups": 78,
+    "passed": 541,
+    "failed": 0,
+    "ignored": 0
+  },
+  "public_verified": {
+    "runs": [
+      {
+        "name": "baseline",
+        "tick": 40,
+        "receipt": "9cda33ee4bc9af930d1489d3dbb5c15f59722c767abf8f38dfe5f1a2e0164486",
+        "pcm": "b5140b3e527d8a767c72332eb5e42ba690c23e59bc247d2c3541be18aeb6e87e",
+        "save": "de880390cdeb595627e9c5e32d80c239adf8acec2b0e9ed329809780c9450ee4"
+      },
+      {
+        "name": "middle",
+        "tick": 13,
+        "receipt": "34702c77e596b3b62497db70b6412d1a9cd1776d4edb4caa7ee3575277dfd9d3",
+        "pcm": "8a3ed463520a9c8af330b948971c10034ef5e6944f06dcae21426a29349648c5",
+        "save": "08d72e85e338e0c0e11baf5da685804d35dcf75ee3ad87c9dd49fc394661a72b"
+      },
+      {
+        "name": "resumed",
+        "tick": 40,
+        "receipt": "0c5b8533fc1c117762e210fae33f781b014c259478ab48108efdbd029b73122a",
+        "pcm": "fb5a4cc0da6d9efe7da2a500d9565e330a401ce192cb80dea873e6d0f1a94c23",
+        "save": "de880390cdeb595627e9c5e32d80c239adf8acec2b0e9ed329809780c9450ee4"
+      },
+      {
+        "name": "repeated",
+        "tick": 40,
+        "receipt": "e2198cbafcdcf3c3e2b534e7c62386c591571074c1ce9f21a083b5311a67eb20",
+        "pcm": "fb5a4cc0da6d9efe7da2a500d9565e330a401ce192cb80dea873e6d0f1a94c23",
+        "save": "de880390cdeb595627e9c5e32d80c239adf8acec2b0e9ed329809780c9450ee4"
+      }
+    ],
+    "refusals": [
+      {
+        "name": "wrong-audio-transport",
+        "diagnostic": "Error: Checkpoint(Audio(Invalid(\"audio source state\")))",
+        "stdout_bytes": 0,
+        "pcm_exists": false
+      },
+      {
+        "name": "corrupt",
+        "diagnostic": "Error: Checkpoint(Integrity)",
+        "stdout_bytes": 0,
+        "pcm_exists": false
+      },
+      {
+        "name": "wrong-program",
+        "diagnostic": "Error: Checkpoint(ProgramMismatch)",
+        "stdout_bytes": 0,
+        "pcm_exists": false
+      },
+      {
+        "name": "wrong-widget",
+        "diagnostic": "Error: Checkpoint(Ui(Invalid(\"widget order or duplicate\")))",
+        "stdout_bytes": 0,
+        "pcm_exists": false
+      },
+      {
+        "name": "wrong-audio-catalog",
+        "diagnostic": "Error: Audio(Invalid(\"audio package catalog\"))",
+        "stdout_bytes": 0,
+        "pcm_exists": false
+      },
+      {
+        "name": "wrong-audio-clock",
+        "diagnostic": "Error: Checkpoint(Audio(Invalid(\"audio/world sample clock\")))",
+        "stdout_bytes": 0,
+        "pcm_exists": false
+      },
+      {
+        "name": "oversized",
+        "diagnostic": "Error: \"runtime input size limit\"",
+        "stdout_bytes": 0,
+        "pcm_exists": false
+      },
+      {
+        "name": "assertion",
+        "diagnostic": "Error: \"checkpoint withheld: native observation assertions failed\"",
+        "stdout_bytes": 1863,
+        "pcm_exists": false
+      },
+      {
+        "name": "preedit",
+        "diagnostic": "Error: Checkpoint(Ui(CompositionActive))",
+        "stdout_bytes": 0,
+        "pcm_exists": false
+      },
+      {
+        "name": "no-clobber",
+        "diagnostic": "Error: Os { code: 17, kind: AlreadyExists, message: \"File exists\" }",
+        "stdout_bytes": 0,
+        "pcm_exists": true
+      }
+    ],
+    "package_files": 16,
+    "player_sha256": "b99ee696c2bce7c299a89061a8f4823a6252746fd1962fae7ab02ac74505f95f",
+    "exact_save_and_pcm_continuation": true,
+    "authoring_maps_build_deleted": true,
+    "oversized_control_bytes": 268435457
+  },
+  "artifacts": {
+    "accepted-sources.json.gz": {
+      "sha256": "9737f3c82150c41ad71cf17508bfd6bcab1d4fd243ef0e89abcc08db414c08ad",
+      "uncompressed_sha256": "4d1cda774fd361ed520bd8d1fbd63df9b5e3895417f10366aaa39a81cbfa6a74",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/accepted-sources.json"
+    },
+    "bridge.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/bridge.log"
+    },
+    "clippy.log.gz": {
+      "sha256": "2e534bec91484d5c3f0aac994625660855ca03770954361d14225c3fffa9b599",
+      "uncompressed_sha256": "f3e618a24505d0a3ce555503d2fb02f28a6e7715febed21046d00ae3d7b027e8",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/clippy.log"
+    },
+    "conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/conventions.log"
+    },
+    "dependency-guard.log.gz": {
+      "sha256": "eb2a99a07961043f4ef3103030df5725b8e6c80aae2191239be60f2e471386fd",
+      "uncompressed_sha256": "750e0f224cb6fa670f98b002fd4a19fdfebe0756d9411fe6c40bbe873740a81a",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/dependency-guard.log"
+    },
+    "diff.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/diff.log"
+    },
+    "fmt.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/fmt.log"
+    },
+    "freeze.json.gz": {
+      "sha256": "fc0d73c2e5feef3fc40378866d2b3fa8a5c6035e5157c49db356e6ea61a5c521",
+      "uncompressed_sha256": "f428814babf6462f9aec78af2d799ea4db84a526b85c430a2b3789b973646218",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/freeze.json"
+    },
+    "headless-binary.json.gz": {
+      "sha256": "7ce3c177be363c1e4507806b80bc7bff3c876039b3bfb73bbe14c066a96027fa",
+      "uncompressed_sha256": "401e54d5fd32bae4c0fc3a99723b8c16a7b0a07b0a28540cc471feb6e3e3ffd2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/headless-binary.json"
+    },
+    "headless.log.gz": {
+      "sha256": "b7b7bdddf0061bc638a839c2c8a12263f04bb04e3b9d4cd253db1f90f47c103c",
+      "uncompressed_sha256": "9e4f6b0bcbf65fa3b2c60535d6ae77e3faa3df83f03e60b06678631f5f6d451b",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/headless.log"
+    },
+    "lean-script.log.gz": {
+      "sha256": "6b6a5e14903adc0a33d058c5df630088ac60149f0d4815aec1f9230b3d473270",
+      "uncompressed_sha256": "10c98561568bc0f70b78cddcfbba5f635ce20670448992af6142a1c1fbccb7b7",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/lean-script.log"
+    },
+    "public-export.log.gz": {
+      "sha256": "f9cfc7dc87f7b85b1f6d1e3c33a096ecef0d2bfc197bf12cd742bdc13a66847e",
+      "uncompressed_sha256": "62d1fc1be64f4211f60e565c4094b553578c9230b043effe2ab636f382385c89",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export.log"
+    },
+    "remaining-adapters.log.gz": {
+      "sha256": "7be8e32480ecd1399b9c179ce1056c54843e9a25a866f98926d3ca076422895d",
+      "uncompressed_sha256": "87a691688dc01ad2d07ea3ee83d9b7265766481cfe347110b371846bcfe601fb",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/remaining-adapters.log"
+    },
+    "results.json.gz": {
+      "sha256": "5c58eec7dbdfe13c8ac2d656ae84c370aa60dd2c4535923e91144ab8bfa842b5",
+      "uncompressed_sha256": "5802a54bd9f36ae59b85711975df03785129485eef62427b52e1d8e28c3f4afe",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/results.json"
+    },
+    "sdk-generated.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/sdk-generated.log"
+    },
+    "sdk-types.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/sdk-types.log"
+    },
+    "tests.log.gz": {
+      "sha256": "847c0230b4357db161f1872cdeb4cd3604a52cd1ce607498b2d63ef4ae39600e",
+      "uncompressed_sha256": "745e59c42f57971968617e314d176b06459fe86f7b900c55b024920069d8c505",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/tests.log"
+    },
+    "wasm-audio.log.gz": {
+      "sha256": "a2b2932ea515fc14c869e0aa06d0ea09f7d7e43409e67498c8a1ed6c868e7fa6",
+      "uncompressed_sha256": "73008fd7a141f2e5dafc1a374d72d4dda11b73daab5b86a3103f138cb8d2e416",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/wasm-audio.log"
+    },
+    "public-export/assertion-observe.json.gz": {
+      "sha256": "9a25fdfddf6a808a7220c2c51cf140435bf0c551c53576e67b59c5843aef340c",
+      "uncompressed_sha256": "ef9a11353955d39b16a1a815c55b145447cc5e0b1473698bf5f27c4e465e3b79",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/assertion-observe.json"
+    },
+    "public-export/assertion-receipt.json.gz": {
+      "sha256": "72194505a98ed14911c58b8a159413201eba222af8d7cd6d9813e897d39ca3b4",
+      "uncompressed_sha256": "2584bcdb40bfd39967270d42dd3b31e0e9c8657ee6642bd31615e952715d0c98",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/assertion-receipt.json"
+    },
+    "public-export/authoring-commands.json.gz": {
+      "sha256": "ffdc4ef41ea657b95e33a2d714ea37f6181969238ad94142ceb2f8472f31e8c5",
+      "uncompressed_sha256": "fa986a33133737305f3136515164de4a5f6fbbf10de03ab44ec5b64fad209f7a",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/authoring-commands.json"
+    },
+    "public-export/authoring.json.gz": {
+      "sha256": "41841682c65e7964e3174e2a4f56139008ab5023b205d50e1436bdb8050a9919",
+      "uncompressed_sha256": "449160902631da303637b1b81bd140119706b58156e17efbd6417c29bc377c05",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/authoring.json"
+    },
+    "public-export/baseline-observe.json.gz": {
+      "sha256": "0e6b4e6dbc68ecd22d6839ee0d60e7ff7e9af01eeee0e3203abee4cea7419bd9",
+      "uncompressed_sha256": "286b985d6d242f68e3bd95073a834cee08b5857f384cada047bb4206035ce47a",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/baseline-observe.json"
+    },
+    "public-export/baseline-receipt.json.gz": {
+      "sha256": "963ba59fa4c85e521f2b20b72fbc44120f5a2a24faf5bf00066f595e71977ccb",
+      "uncompressed_sha256": "9cda33ee4bc9af930d1489d3dbb5c15f59722c767abf8f38dfe5f1a2e0164486",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/baseline-receipt.json"
+    },
+    "public-export/baseline.pcm.gz": {
+      "sha256": "eae7fde01f0f6ea7d0cc48e894bfd3203327c2490cb418bab055d994739e7f4b",
+      "uncompressed_sha256": "b5140b3e527d8a767c72332eb5e42ba690c23e59bc247d2c3541be18aeb6e87e",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/baseline.pcm"
+    },
+    "public-export/baseline.save.gz": {
+      "sha256": "0fb7367bbe57a61acb2945b80a49eddcbe10442d996e22c12d44290bdedf47d5",
+      "uncompressed_sha256": "de880390cdeb595627e9c5e32d80c239adf8acec2b0e9ed329809780c9450ee4",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/baseline.save"
+    },
+    "public-export/corrupt-receipt.json.gz": {
+      "sha256": "cfa616e0f857e831c7b3c6a5b18cbe5e10a6cea6bfa88549952672a9f91e6029",
+      "uncompressed_sha256": "06b406cfb9d07377e5b8b358d61101f2ed2bd3fe088f56128a74e3c38a8d9ead",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/corrupt-receipt.json"
+    },
+    "public-export/corrupt.save.gz": {
+      "sha256": "c43fe9ea91552e8ba2f5572fa41c157a26b3c7f36b3fcd43b7d28dc90ccaeee0",
+      "uncompressed_sha256": "c3ad0c58fdd0351c4166d27935bb930eb1ef0f1b2267249cca5c40763a6c72c9",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/corrupt.save"
+    },
+    "public-export/existing.save.gz": {
+      "sha256": "a7ebbb1d437b76b763b1d4b884ff4b0fedc28d6621464cb607f9b25b476175c0",
+      "uncompressed_sha256": "9f4b01e2b7cf3a6e44f68e58eca665d9ddd6b1e5ef76ed7ea6d528aa7391fed9",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/existing.save"
+    },
+    "public-export/export-call.json.gz": {
+      "sha256": "5e35c99a34b76d234f606e0934e4a5426ef540d7a4513c6addd4e9f4a33ef62a",
+      "uncompressed_sha256": "690156d2bd8d7e590cf6d27c8c69fbc01e80829fd2373f1699d72c2c47422577",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/export-call.json"
+    },
+    "public-export/initial-input.json.gz": {
+      "sha256": "13c8b7b081e629c5b776adb0e435b7c07583561f7be618900a26eeec8a8b1a4a",
+      "uncompressed_sha256": "3492b1779aa9edbff2f16264665afd5eff01fe142bbb0a3d8770e7797036648f",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/initial-input.json"
+    },
+    "public-export/middle-observe.json.gz": {
+      "sha256": "156611489bf2b801cc56b88c128de5ab1d0f72cf0fbdff684b6caa0bc1e9dd3e",
+      "uncompressed_sha256": "3c3e2bd81bb4bc70be705f886e8ed48506e0ba2b5927e6258a1c11a327fed82b",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/middle-observe.json"
+    },
+    "public-export/middle-receipt.json.gz": {
+      "sha256": "ab2cc285ef5c052231119d35002c5a34520295929c5f67aea2faa63e9a10cf2a",
+      "uncompressed_sha256": "34702c77e596b3b62497db70b6412d1a9cd1776d4edb4caa7ee3575277dfd9d3",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/middle-receipt.json"
+    },
+    "public-export/middle.pcm.gz": {
+      "sha256": "943f50a32e5e17432f7122b872aadeb7e7966873ee5b12eb2c04d7a98f169a5b",
+      "uncompressed_sha256": "8a3ed463520a9c8af330b948971c10034ef5e6944f06dcae21426a29349648c5",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/middle.pcm"
+    },
+    "public-export/middle.save.gz": {
+      "sha256": "7a72a800ee2ede2aabc9891ecf3877311f850ac0d71829b65016488c8589a1a6",
+      "uncompressed_sha256": "08d72e85e338e0c0e11baf5da685804d35dcf75ee3ad87c9dd49fc394661a72b",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/middle.save"
+    },
+    "public-export/neutral-input.json.gz": {
+      "sha256": "bdcfdcd759253370e9beead87ba12137e5ff5a01b4b2e71496e9868f8d078f15",
+      "uncompressed_sha256": "f45b1d87d06f2b419d978050acb868c0d60701587de8a10d8b01ef9a007e61de",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/neutral-input.json"
+    },
+    "public-export/no-clobber-receipt.json.gz": {
+      "sha256": "686c5b4b87fc49dde3c513ee9fa11e7df43eb3f9a9e5b5cc7ec9a040cb6d11d4",
+      "uncompressed_sha256": "4050139b7a7e39be99bcc1b33596e5902d0187154cc460d483ea9df82f135291",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/no-clobber-receipt.json"
+    },
+    "public-export/no-clobber.pcm.gz": {
+      "sha256": "6f7fa7b3a433eb7f3aae38a887443ed317fed59cedd87047756a7f3a6ec8599e",
+      "uncompressed_sha256": "c857126e4e397b9b85feb90d9c073100b1eba8e98154a9c6b8e6c53a1b2aac87",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/no-clobber.pcm"
+    },
+    "public-export/oversized-receipt.json.gz": {
+      "sha256": "1b9c5d1bed44a51bf081c3653ce862c1445f830cf72100d932ff54eb4ddc5f52",
+      "uncompressed_sha256": "f4e8bc150f19700feefda79b0790390721f43b6795f9f577a6f5317ea5122155",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/oversized-receipt.json"
+    },
+    "public-export/package/build.log.gz": {
+      "sha256": "a291f713bff19d9a873de3724e1531d1e613cfb5f9bc5d322ef9a8c2965ada5e",
+      "uncompressed_sha256": "6a6661c25a8a29839185be68d49a1ecce235114ff26ec96f8affaa298413d6ec",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/package/build.log"
+    },
+    "public-export/package/export.json.gz": {
+      "sha256": "10ae0b98a089503bab733d92b49718048e04e91ec66114a16bcfefaa57921ed1",
+      "uncompressed_sha256": "5cd50684a3f2075f1b893d744a0aca717e39f9ad120d65257d827529b95e2706",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/package/export.json"
+    },
+    "public-export/package/player/data/audio/b2a52d337c64cb12930b798bcc3908dde2fc7ae02420969dea25f7caf484a9da.json.gz": {
+      "sha256": "a3c415ab8281864b28ac3e8fc8b8e659cdc8e2556d2b8c1ac7df2ab7a86df511",
+      "uncompressed_sha256": "d20baf3b70e8edcb7c23edf169b5b1a06a478e59a7ba14ba622dcf6a10662d61",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/package/player/data/audio/b2a52d337c64cb12930b798bcc3908dde2fc7ae02420969dea25f7caf484a9da.json"
+    },
+    "public-export/package/player/data/audio/e88a1ce7cf423200ce6f1d77f731ed94e61cdf24e7aedda25d34416d34c463cc.json.gz": {
+      "sha256": "8f1ad0ee79f68767dffc7495e559db4234713c3773a8d8ab3d3f9fe65bbe1c4b",
+      "uncompressed_sha256": "8cbec2dfb3dd1536b03408901bc1f451cf4ffb4d1ca1494cfd14ad28b0403974",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/package/player/data/audio/e88a1ce7cf423200ce6f1d77f731ed94e61cdf24e7aedda25d34416d34c463cc.json"
+    },
+    "public-export/package/player/data/clips.bin.gz": {
+      "sha256": "fad41291b2d2a0240653e71f76b5694d336330893e1b036dee77e5a5983a2d28",
+      "uncompressed_sha256": "aa678ec1198130269fed953a9363ee0a38f25f5e1783b505bbf6ef8b3a6d74c3",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/package/player/data/clips.bin"
+    },
+    "public-export/package/player/data/empty-input.json.gz": {
+      "sha256": "438100c9c52fd35517bc237cb9289ac1088282ab6f2b851a4878fd0ecc79abcc",
+      "uncompressed_sha256": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/package/player/data/empty-input.json"
+    },
+    "public-export/package/player/data/fonts/1087d4bb69160e3e5955407294226ca3da11166a3188ada3c1a166ba14e55ceb.json.gz": {
+      "sha256": "b96ba7a4d72d1083036c6b7aa2c829ad77ed895ca374c21a280fa1a99c0598bf",
+      "uncompressed_sha256": "c3fd206832637ec3ad354dee08b4c67012da904d34a3ce9ec9c97e30f70e07f0",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/package/player/data/fonts/1087d4bb69160e3e5955407294226ca3da11166a3188ada3c1a166ba14e55ceb.json"
+    },
+    "public-export/package/player/data/fonts/6864e1444bc7002790e682360d3f93bd45fe51b7045a64ecbf0e76e19e6b758e.json.gz": {
+      "sha256": "9b9332407c7cf3c8962cb04c5e9babae373bddcbb6cd9069bc624adb52467b47",
+      "uncompressed_sha256": "167d0dc13b807552b06d0195e3a90ee24f5074206dd6d6f2106ad59e65b35fde",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/package/player/data/fonts/6864e1444bc7002790e682360d3f93bd45fe51b7045a64ecbf0e76e19e6b758e.json"
+    },
+    "public-export/package/player/data/fonts/9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2.json.gz": {
+      "sha256": "48d551dc911877a7bfaa0caeeb8187d8b67c15e3271edb0fc58c61d62a3c95c4",
+      "uncompressed_sha256": "e43c79c54c311c5759bdf686b43b9b112b0177bafd6938782ebb782d75018812",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/package/player/data/fonts/9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2.json"
+    },
+    "public-export/package/player/data/input-actions.json.gz": {
+      "sha256": "c14bfcf1832a180081ce0abd2061eeb1dc780074f0c2cdfd923be805f2407368",
+      "uncompressed_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/package/player/data/input-actions.json"
+    },
+    "public-export/package/player/data/models/71fbcae82debc0236bda7576327733a6943d93ce7adb913cbe1d95fe931d511f.incmodel.gz": {
+      "sha256": "6185fd3dddae981f2095b710c67187410ad5899632fe042b83ccc834ac5fa603",
+      "uncompressed_sha256": "9be97471434742eb82eb6fe2de0287d618bce848a52fb6eb1cf7e428c6a908de",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/package/player/data/models/71fbcae82debc0236bda7576327733a6943d93ce7adb913cbe1d95fe931d511f.incmodel"
+    },
+    "public-export/package/player/data/package.json.gz": {
+      "sha256": "ebb385516cf0b4c98f68247a0c8223e69acc64a6a94940f7d7d2637f092b5cf0",
+      "uncompressed_sha256": "f9b2e405398787eb286dd4efbf60d1579ff4cc9373d8307699fadcf2b265b808",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/package/player/data/package.json"
+    },
+    "public-export/package/player/data/world.scene.gz": {
+      "sha256": "e6110c7dd53b2a6b9bf9fdd44cc91bf228d9d508b305e706346e388393f02e2b",
+      "uncompressed_sha256": "a8c921803c464f2d99102040e51c3589117c424b1aef24f69d28f1ef42ed6b10",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/package/player/data/world.scene"
+    },
+    "public-export/package/project-build.json.gz": {
+      "sha256": "ea5d5dce57f549a2b7f07cc8faadc64f07ad3dac64ce77f7ae44f89bc2507894",
+      "uncompressed_sha256": "70829cd7e05e5abe1247981cd1ac1554b801eda99be39020fbb9d7feeb648a56",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/package/project-build.json"
+    },
+    "public-export/package/symbols/script-symbols.json.gz": {
+      "sha256": "86b4e5bcf362c3326ab3079de68c4e8f9b2f5d947d7e31e91a2dc23374f6f9fa",
+      "uncompressed_sha256": "38d2fded6b96bb404e740475fe0ad7474d93275cdd45ea2da3012e2e3e9cfc67",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/package/symbols/script-symbols.json"
+    },
+    "public-export/preedit-input.json.gz": {
+      "sha256": "4b381f1db0e8e8fe6e1df6e3cf846f64a10a93ee19b281bddff74681d74a8a45",
+      "uncompressed_sha256": "997c58b52d50b235ad5f447e722428052de49023f9e271d52ccf01e0e885a5b4",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/preedit-input.json"
+    },
+    "public-export/preedit-receipt.json.gz": {
+      "sha256": "60dc7c82c0eb00bf84b1d8e7d7eb67a48ddf584b265d03abcb4a7ffc93d91593",
+      "uncompressed_sha256": "6930bd7bb6602c0e366e1ed7800776a9bc8ed98f7eeebd0b6c2839db2b62db8a",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/preedit-receipt.json"
+    },
+    "public-export/repeated-observe.json.gz": {
+      "sha256": "ce42b31706593a72c13f2b646f657f8e081c3459187584222760b8c7ef24fcfb",
+      "uncompressed_sha256": "ae0e6529e4cf37eb01ba42caab946f07c365bf727623c0a7856a5c3ec4abf0d2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/repeated-observe.json"
+    },
+    "public-export/repeated-receipt.json.gz": {
+      "sha256": "322613eceec631b0b76f22ea9430d6b043438eeddd50dc23c5d3b7395f28652c",
+      "uncompressed_sha256": "e2198cbafcdcf3c3e2b534e7c62386c591571074c1ce9f21a083b5311a67eb20",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/repeated-receipt.json"
+    },
+    "public-export/repeated.pcm.gz": {
+      "sha256": "073ce947e99580ddfa79907e6847369f86e4b98df0b42cd8afd199754252fad7",
+      "uncompressed_sha256": "fb5a4cc0da6d9efe7da2a500d9565e330a401ce192cb80dea873e6d0f1a94c23",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/repeated.pcm"
+    },
+    "public-export/repeated.save.gz": {
+      "sha256": "0fb7367bbe57a61acb2945b80a49eddcbe10442d996e22c12d44290bdedf47d5",
+      "uncompressed_sha256": "de880390cdeb595627e9c5e32d80c239adf8acec2b0e9ed329809780c9450ee4",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/repeated.save"
+    },
+    "public-export/result.json.gz": {
+      "sha256": "39062caad0fa5ea582d01536e40453323c753b9f29e83fd1413bae8c0dd9a8f4",
+      "uncompressed_sha256": "bd684ca84052676b0a3219341c28f0044abc20ce6a9b59e6aa546c821886379c",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/result.json"
+    },
+    "public-export/resumed-observe.json.gz": {
+      "sha256": "ce42b31706593a72c13f2b646f657f8e081c3459187584222760b8c7ef24fcfb",
+      "uncompressed_sha256": "ae0e6529e4cf37eb01ba42caab946f07c365bf727623c0a7856a5c3ec4abf0d2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/resumed-observe.json"
+    },
+    "public-export/resumed-receipt.json.gz": {
+      "sha256": "12eda8fbc91ebb587532da49d8b2c55be9cac6271061d2f9e006d45d8fa151ab",
+      "uncompressed_sha256": "0c5b8533fc1c117762e210fae33f781b014c259478ab48108efdbd029b73122a",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/resumed-receipt.json"
+    },
+    "public-export/resumed.pcm.gz": {
+      "sha256": "073ce947e99580ddfa79907e6847369f86e4b98df0b42cd8afd199754252fad7",
+      "uncompressed_sha256": "fb5a4cc0da6d9efe7da2a500d9565e330a401ce192cb80dea873e6d0f1a94c23",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/resumed.pcm"
+    },
+    "public-export/resumed.save.gz": {
+      "sha256": "0fb7367bbe57a61acb2945b80a49eddcbe10442d996e22c12d44290bdedf47d5",
+      "uncompressed_sha256": "de880390cdeb595627e9c5e32d80c239adf8acec2b0e9ed329809780c9450ee4",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/resumed.save"
+    },
+    "public-export/wrong-audio-catalog-receipt.json.gz": {
+      "sha256": "b8c9567e9a240f4ba9084e52601e3e0e04d0265c8794d6c243de8414b154bcee",
+      "uncompressed_sha256": "e25def0c047aeff7cb308e201c6459adf013239736a1f2a3ada917ea185b7bad",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/wrong-audio-catalog-receipt.json"
+    },
+    "public-export/wrong-audio-catalog.save.gz": {
+      "sha256": "66bb8a250b4b463a15b97e4a7d5283bec49aa7e47d47ede3dc794a73cefccf43",
+      "uncompressed_sha256": "182665636f2b5c16282fa8eea843635ca33ac2e1b0528315113f312f4c054d48",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/wrong-audio-catalog.save"
+    },
+    "public-export/wrong-audio-clock-receipt.json.gz": {
+      "sha256": "6e36e5430124ba09038043f7ca9461370b639923c38534ed7c16c206b6ee2f82",
+      "uncompressed_sha256": "89fef66d47cd3197093e8807dbf71ae4c45d2b64d3c8f5123200098aa14fb601",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/wrong-audio-clock-receipt.json"
+    },
+    "public-export/wrong-audio-clock.save.gz": {
+      "sha256": "e0abb52fe600a63f2e4615d24d7dc62ad8f8cfd13150d5a87c585d8d3bcbb0c5",
+      "uncompressed_sha256": "e808fca2431bdb0e20f4b517bca59fefea66d508b83dfb9f7fc9a130c2bacff9",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/wrong-audio-clock.save"
+    },
+    "public-export/wrong-audio-transport-receipt.json.gz": {
+      "sha256": "043d68d52a48419c55fc12ec75b13365f10eac693f0d47f297733235b277e8be",
+      "uncompressed_sha256": "90524bfdf5fe5d2ca4766343066055ea4587f1bd3350f45d1a28c3c1cded2f5f",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/wrong-audio-transport-receipt.json"
+    },
+    "public-export/wrong-audio-transport.save.gz": {
+      "sha256": "38fed20e1273ac65fbced278d73c83b9564652cfda63a0477dbe45c15e49fea6",
+      "uncompressed_sha256": "d7745f69b93e2e9885a96fd187b5cf470955202b3cacfef5e6f2a74d6df45fe5",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/wrong-audio-transport.save"
+    },
+    "public-export/wrong-program-receipt.json.gz": {
+      "sha256": "babf66dd211dfd216f5c7ed2b3ebe674e0469d9799c15e58eb8ea2e94ea7bad5",
+      "uncompressed_sha256": "d1bbb9b9bb53b79d971e5572c615eb22d0524ca2cc9710e5622c0ae69022eb71",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/wrong-program-receipt.json"
+    },
+    "public-export/wrong-program.save.gz": {
+      "sha256": "0380a8cc1babf13892d8fadeb7390bc2f6f2aef550ed393f232526631068e6af",
+      "uncompressed_sha256": "4ef1eb5d427e5338197f1e11ce5e8189a4500eb02681eb0d3bf30baca76a8476",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/wrong-program.save"
+    },
+    "public-export/wrong-widget-receipt.json.gz": {
+      "sha256": "a0dc03d58ca85cc1b594ddd5bc9d230d9a40ddf44c125a7d0d2326b720dbe50a",
+      "uncompressed_sha256": "6f274406bd1f4f153af1848c60623086afef74f88c8f0196f573bd873ff5b0a4",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/wrong-widget-receipt.json"
+    },
+    "public-export/wrong-widget.save.gz": {
+      "sha256": "3ff28adbca1f45c4f0634c156618dd1f3091399726e2d63d570568ea05ff65ee",
+      "uncompressed_sha256": "c05a18ce4c1aad4a8c06fa9917be7dba096e0f6356a18ddd85a714c0e487a58d",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001/public-export/wrong-widget.save"
+    },
+    "closeout/conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main162-closeout/conventions.log"
+    },
+    "closeout/diff.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main162-closeout/diff.log"
+    },
+    "closeout/results.json.gz": {
+      "sha256": "a1bbafce1e70eb8f735d5868e20ebd73fc6e79de09bd73a029c73d8de9848e12",
+      "uncompressed_sha256": "9cbc76490ee1e2229c1ee64d74d1b5d89770318fa94ce39fdbfbe9dfc0633018",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main162-closeout/results.json"
+    },
+    "closeout/source-comparison.json.gz": {
+      "sha256": "709ac850823f936420f85aee28ec14d42a112e75b4896a882edb1e9d6d550d1b",
+      "uncompressed_sha256": "c1bf5e92c69416fe9412d6a3f78e9674f28022fd7c0ef524f2af3ca76065ee24",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main162-closeout/source-comparison.json"
+    },
+    "validation-runner.py.gz": {
+      "sha256": "06a08f1e858ff5ae0273204659f3b1bd1159bdd83071940742eca12a6ba11326",
+      "uncompressed_sha256": "166edc784202c8e4e310d43ecb8949af48bdd7673702a48582cb39b1993d616e",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-run.py"
+    },
+    "integration-seam-review.json.gz": {
+      "sha256": "b068f84295cc83b7636d0d06b9b40a4c5920a8e4caf6361208eb6f1f82067d8c",
+      "uncompressed_sha256": "2169a8f91b80e019aaf9dbccfdd82d0dd259ee927e8521d38ff148e7dc42b571",
+      "source": "/Users/andreyyurlov/.codex/incant-reviews/audio-transport-hud-seams-20261012.json"
+    },
+    "integration-seams.patch.gz": {
+      "sha256": "1cc1e6df77e10185f1454df3f5cb08c8eef77f2cc9b300b02c908ec3459d1777",
+      "uncompressed_sha256": "039ecda907f810311162cc43122771e1a87180b2d931b975245c29c6b35710bd",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-integration-seams.patch"
+    }
+  },
+  "evidence_directory": "/Users/andreyyurlov/.codex/incant-integration-evidence/audio-transport-main161-001",
+  "integration_review": "pending independent final current-main audit",
+  "limitations": [
+    "CPU hosted ordinary-load mixed static/streamed audio and UI; fresh owners and neutral input",
+    "Active preedit refuses; pointer capture is discarded",
+    "Physics/static/development-module and device-native audio saves still refuse",
+    "No GPU/window/native-IME or full-save gate claim; PCM and save are not a multi-file transaction",
+    "Wasm transport ABI, Core presentation integration, physical playback and phone/phase gates are separate."
+  ]
+}
