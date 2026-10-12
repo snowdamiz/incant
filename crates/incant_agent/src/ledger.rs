@@ -63,8 +63,18 @@ pub struct LedgerSnapshot {
 pub struct Ledger {
     path: PathBuf,
     record: Record,
-    _lock: File,
+    _lock: OwnedLock,
 }
+// A fork may transiently inherit the open file description before exec closes
+// its descriptor. Closing only our File would leave the flock held by that
+// unrelated alias. Release ownership explicitly while this descriptor is valid.
+struct OwnedLock(File);
+impl Drop for OwnedLock {
+    fn drop(&mut self) {
+        let _ = self.0.unlock();
+    }
+}
+
 pub struct Lease {
     ledger: Ledger,
     pending: Pending,
@@ -146,6 +156,8 @@ impl Ledger {
             fs::TryLockError::WouldBlock => LedgerError::Busy,
             _ => LedgerError::Storage,
         })?;
+        // Guard every subsequent refusal too, before constructing a Ledger.
+        let lock = OwnedLock(lock);
         regular_or_absent(&path)?;
         let record = match File::open(&path) {
             Ok(file) => {

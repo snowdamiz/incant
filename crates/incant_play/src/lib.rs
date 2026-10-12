@@ -88,14 +88,28 @@ impl PreparedPlay {
                 .values()
                 .any(|entity| entity.components.contains_key("Script"))
         });
+        let animations = incant_cook::load_project_animation_resources(document, &scene, root)
+            .map_err(native)?;
         let (cooked, code) = if authored_scripts {
-            let prepared = incant_cook::prepare_script_scene(document, &scene).map_err(native)?;
+            let prepared = incant_cook::prepare_script_scene_with_resources(
+                document,
+                &scene,
+                &Default::default(),
+                &animations,
+            )
+            .map_err(native)?;
             incant_cook::compile_project_sources(prepared, root)
                 .map_err(native)?
                 .program
                 .into_parts()
         } else {
-            let bytes = incant_cook::cook_scene(document, &scene).map_err(native)?;
+            let bytes = incant_cook::cook_scene_with_resources(
+                document,
+                &scene,
+                &Default::default(),
+                &animations,
+            )
+            .map_err(native)?;
             (
                 CookedScene::from_bytes(&bytes).map_err(native)?,
                 fallback().map_err(native)?,

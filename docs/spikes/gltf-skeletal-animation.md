@@ -98,10 +98,15 @@ overflow preserves the entire last published pose. Invalid palette conversion
 preserves the caller's output. This is repeatable same-build numerical evaluation,
 not a cross-device bit-exact or shipping performance claim.
 
-## Deliberate consumer boundary
+## Foundation consumer boundary
 
-`RuntimeAsset::load_model` explicitly refuses animated models because current
-renderer consumers implement only static geometry. Direct cooked loading and
+The following boundary describes the original foundation checkpoint. The later
+[canonical native consumer](native-animation-rendering.md) removes the model
+loader refusal with retained deformation; its GPU/appearance checks are recorded
+separately and remain pending at its initial CPU checkpoint.
+
+At the foundation checkpoint, `RuntimeAsset::load_model` explicitly refused animated models because its
+renderer consumers implemented only static geometry. Direct cooked loading and
 CPU sampling are available. `model_navigation_geometry` likewise refuses to
 flatten animated geometry. Consequently an animated asset may be cooked and
 registered by authoring, but current AssetStore/static preview/native render

@@ -1,0 +1,191 @@
+{
+  "scope": "native TypeScript animation access; CPU-only local correctness",
+  "implementing_model": "gpt-6.1-sol",
+  "reasoning_effort": "xhigh (Extra High)",
+  "author_role": "astra",
+  "base_main": "1d7fc5b0920e291057b1a2ddd1002efcfdc64bbf",
+  "native_core": "dc383d8bf2260c81221a572f17408f92ec87fd16",
+  "integration_parent": "20e3a57f3a263697e949659f1683e10aa0933eb8",
+  "target": "/tmp/incant-agent-font-target",
+  "source_manifest": {
+    "path": "/tmp/incant-animation-script-source-manifest.json",
+    "sha256": "8b45def3ac96634ba0bb39b45c1cdf1e91268b1589ab8b7686dc0390b3343dd4",
+    "count": 13
+  },
+  "sources": [
+    {
+      "path": "crates/incant_script/build.rs",
+      "sha256": "854e92d50dfdb0cb571004b7042dd8386d8ec21c9165476192474bbe1d416cc7",
+      "bytes": 4054
+    },
+    {
+      "path": "crates/incant_script/src/animation_commands.rs",
+      "sha256": "7c48f470958236341f9e5633008be3830e1a2791a3ed2d1a28da1233f46bbeeb",
+      "bytes": 2813
+    },
+    {
+      "path": "crates/incant_script/src/animations.rs",
+      "sha256": "47aef2c9ef635252039d7bb3de376b76ac44daa5418074072aca70e62cc48284",
+      "bytes": 4120
+    },
+    {
+      "path": "crates/incant_script/src/commands.rs",
+      "sha256": "33deede4e8d30a4c36d9af18cbf06c030f2c489f531bc56499cc3d03a79f16e1",
+      "bytes": 10146
+    },
+    {
+      "path": "crates/incant_script/src/compiler.rs",
+      "sha256": "02801aed60f414e04cc5acfad06c9a285c29f22776c3cf5cfed8479763bf4ba7",
+      "bytes": 8089
+    },
+    {
+      "path": "crates/incant_script/src/lib.rs",
+      "sha256": "fb64dc986364d676fdd58b8d1e60270b5f26d60ff10ec888804c04dc31524373",
+      "bytes": 23320
+    },
+    {
+      "path": "crates/incant_script/tests/animations.rs",
+      "sha256": "9307e400e508eba79bbff0fad206f2ebbf3c968cf90c35ea9a0f0b87ad4b7201",
+      "bytes": 17033
+    },
+    {
+      "path": "crates/incant_script/tests/fixtures/animation.cjs",
+      "sha256": "25a5eac29b9815df82dc7fd3b5f01d4810a319aeee0233dfa3966b616d1dda25",
+      "bytes": 2736
+    },
+    {
+      "path": "crates/incant_script/tests/fixtures/animation.ts",
+      "sha256": "1ff6949a56adce06c13f76a01fe46655adc26665831aa2244558c562e6b7600e",
+      "bytes": 1811
+    },
+    {
+      "path": "sdk/templates/native-animation/playback.ts",
+      "sha256": "422bb8917276055aa22fd5c9dd277c41e9d35e5ce1588dd72caafd37549a94e5",
+      "bytes": 1274
+    },
+    {
+      "path": "sdk/ts/src/index.d.ts",
+      "sha256": "02ecc62f0b68267a5ad85a42259e3c8e2001d1f3efaaaf17b12895ecef2f3bb1",
+      "bytes": 8296
+    },
+    {
+      "path": "sdk/ts/src/native.d.ts",
+      "sha256": "9ad8e3b2518ec66a1a332a34fb147dd3e20b8c3798f6d2cfbe0e0775b26a76e8",
+      "bytes": 15695
+    },
+    {
+      "path": "tools/tests/native_script.test.mjs",
+      "sha256": "5333f2da9b4c0f56eddfb128240b03dca6742ffe62e2d837a86452759f26160c",
+      "bytes": 23252
+    }
+  ],
+  "toolchain": {
+    "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)",
+    "node": "v22.23.3",
+    "typescript": "5.9.3",
+    "swc": "1.16.13",
+    "Cargo.lock_sha256": "bb2c9c0ee92a647941b1a03147d240c763cc2f56beacae87e1418caeca606bd1"
+  },
+  "results": {
+    "rust_passed": 145,
+    "rust_failed": 0,
+    "rust_ignored": 0,
+    "rust_groups": 7,
+    "new_rust_cases": 12,
+    "new_animation_integration_cases": 11,
+    "cook_passed": 21,
+    "cook_failed": 0
+  },
+  "checks": [
+    {
+      "name": "rust tests",
+      "command": "PATH=/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:$PATH CARGO_TARGET_DIR=/tmp/incant-agent-font-target cargo test -p incant_script --all-features --profile ci --locked --offline -j2",
+      "exit_code": 0,
+      "log": "/tmp/incant-animation-script-tests-frozen.log",
+      "log_sha256": "5c31a8b42d531a6cd098c8c600df76a4384cce9692815981d95267a9865dd979"
+    },
+    {
+      "name": "clippy",
+      "command": "PATH=/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:$PATH CARGO_TARGET_DIR=/tmp/incant-agent-font-target cargo clippy -p incant_script --all-targets --all-features --profile ci --locked --offline -j2 -- -D warnings",
+      "exit_code": 0,
+      "log": "/tmp/incant-animation-script-clippy-frozen.log",
+      "log_sha256": "c5e7cc0246dbb4da37d623a4538d8f32012e7b41e4cdc3b2529031886a65326e"
+    },
+    {
+      "name": "no compiler",
+      "command": "PATH=/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:$PATH CARGO_TARGET_DIR=/tmp/incant-agent-font-target cargo check -p incant_script --no-default-features --features static-module --profile ci --locked --offline -j2",
+      "exit_code": 0,
+      "log": "/tmp/incant-animation-script-no-compiler-frozen.log",
+      "log_sha256": "fcd27cdee2d047d023ba23fafaf3a397de3ef496731ad68f16c1f148e30c157c"
+    },
+    {
+      "name": "typescript",
+      "command": "node_modules/.bin/tsc --noEmit -p sdk/ts/tsconfig.json",
+      "exit_code": 0,
+      "log": "/tmp/incant-animation-script-types-frozen.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cook",
+      "command": "node --test tools/tests/native_script.test.mjs",
+      "exit_code": 0,
+      "log": "/tmp/incant-animation-script-cook-tests-frozen.log",
+      "log_sha256": "f5c785dec11d71d2cc97ed10c7af62104b831d6fd0c95a5fa14a555db5eea9f8"
+    },
+    {
+      "name": "fmt",
+      "command": "PATH=/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:$PATH cargo fmt --all --check",
+      "exit_code": 0,
+      "log": "/tmp/incant-animation-script-fmt-frozen.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dependency guard",
+      "command": "PATH=/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:$PATH python3 tools/check_runtime_dependencies.py incant_script incant_runtime --features incant_script/static-module",
+      "exit_code": 0,
+      "log": "/tmp/incant-animation-script-runtime-graph.log",
+      "log_sha256": "452286d0026a385d61cbd4334f838de1e79c6ea33ce77928f42301fff99b6b17"
+    },
+    {
+      "name": "conventions",
+      "command": "python3 tools/generate_conventions.py --check",
+      "exit_code": 0,
+      "log": "/tmp/incant-animation-script-conventions.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "command": "git diff --check",
+      "exit_code": 0,
+      "log": "/tmp/incant-animation-script-diff-check.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "guest_cook_manifest": {
+    "path": "/tmp/incant-animation-script-guest-manifest.json",
+    "sha256": "dddc8f2db00247fab9392ce18c3e1cd128b32d249764ea42b384b98b43a98567"
+  },
+  "initial_failures": [
+    {
+      "log": "/tmp/incant-animation-script-integration-001.log",
+      "sha256": "1cd65908db902a6ce4e819ffb6c52a044f5413e776d737da94db0ae1b93f7f83",
+      "reason": "QuickJS IntoArgs only implements outer tuples up to arity seven; fixed using Flat without changing JS argument order."
+    },
+    {
+      "log": "/tmp/incant-animation-script-integration-003.log",
+      "sha256": "2c1c94907953f4828b54454db323cca95b5caddddea2c7b0095162db7704d5c5",
+      "reason": "Test used private NativeLogs.entries field; corrected to public entries() method."
+    },
+    {
+      "log": "/tmp/incant-animation-script-runtime-graph-usage.log",
+      "sha256": "35292a5f5492e2ab73a3e68192c2936675664dc340eb5f1e74a33f853e13946f",
+      "reason": "Guard invocation omitted required root arguments; corrected explicit roots and static feature."
+    }
+  ],
+  "limitations": [
+    "No Wasm animation namespace/import/control parity claimed.",
+    "No GPU/window/renderer acceptance, editor controls, blend/state/IK/root-motion work or device performance claim.",
+    "Runtime/core/schema/authoring/cook/generated component definitions remain parent-owned.",
+    "Owned process handles are terminal/reaped; frozen font branch 927b86f remains unchanged."
+  ]
+}

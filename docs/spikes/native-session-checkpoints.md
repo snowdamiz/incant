@@ -54,8 +54,9 @@ anti-cheat protection.
 
 The runtime supplies a shared read-only immutable-binding guard. Factory loading
 does not construct a second baseline ECS world, clone the live world, or share its
-host identity. Existing world-only v1/v2/v3 restore behavior remains compatible;
-session checkpoint v1 specifically requires a nested bound world-save v3.
+host identity. Existing world-only v1/v2/v3/v4 restore behavior remains compatible;
+session checkpoint v1 requires a nested bound world-save v3 or v4. V4 carries
+animation playback as well as the v3 localization contract.
 
 Replacement publishes only after the entire candidate validates. Failure leaves
 the current world, VM, persistent state, timers and input untouched. Success gets
@@ -72,7 +73,7 @@ and explicitly reconnect devices. This is not exact physical-input replay.
 
 `INCSES01` version 1 has a 128-byte header with program and original-scene
 fingerprints, four checked section lengths, input-policy tag and a SHA-256 checksum.
-The sections contain world-save v3, canonical live attachment IDs, typed persistent
+The sections contain world-save v3/v4, canonical live attachment IDs, typed persistent
 data and the native schedule. Integers and finite numeric data have explicit
 little-endian encodings; no Rust-layout or executable deserialization is used.
 
@@ -95,6 +96,17 @@ peak heap/RSS guarantee. Explicit save creation can copy bounded state; the tick
 path only stages changed keys and already-existing native schedule work.
 
 ## Verification and corrected failures
+
+The animation compatibility correction removes two stale exact-v3 guards:
+world-only in-place restoration now accepts v4 with an existing nondefault
+locale, and session loading accepts its own animation-bearing v4 world section.
+Actual native tests compare fresh and in-place loading with uninterrupted
+animation, current locale, persistent state and timer continuation. Valid legacy
+v1/v2, unknown and short sections still refuse; wrong original bindings, immutable
+catalogs and programs preserve the live session. Game/player checkpoint callers
+delegate to the same checked loader and have no separate world-version guard.
+These remain compatibility checks, not authentication of mutable save contents.
+[Exact correction evidence](evidence/native-animation-checkpoint-compatibility.json).
 
 Final affected runtime/input/script/cook tests pass: **319 tests/doctests in 45
 result groups, zero ignored or failed**. This includes eleven checkpoint cases

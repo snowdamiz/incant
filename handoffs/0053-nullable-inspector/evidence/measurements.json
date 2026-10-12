@@ -1,0 +1,236 @@
+{
+ "units": "pixels at 2x unless stated; window-relative points = pixels / 2",
+ "colour_space": "Display P3, as captured",
+ "clip_box_vs_seconds_box_01": {
+  "what": "x 1200-1440 pt of the Clip row (y 108-142 pt) against the same band of the Seconds row (y 210-244 pt); both values are 0",
+  "cmd": "imgtool diff <worktree>/artifacts/0053/crops/clip-value.png <worktree>/artifacts/0053/crops/seconds-value.png",
+  "result": {
+   "differing": 0,
+   "spaces": [
+    "kCGColorSpaceDisplayP3",
+    "kCGColorSpaceDisplayP3"
+   ]
+  }
+ },
+ "clip_box_vs_speed_box_01": {
+  "what": "the same Clip band against the Speed row (y 244-278 pt), whose value is 1: only the glyph should differ",
+  "cmd": "imgtool diff <worktree>/artifacts/0053/crops/clip-value.png <worktree>/artifacts/0053/crops/speed-value.png",
+  "result": {
+   "differing": 183,
+   "box": [
+    32,
+    26,
+    12,
+    19
+   ],
+   "spaces": [
+    "kCGColorSpaceDisplayP3",
+    "kCGColorSpaceDisplayP3"
+   ]
+  }
+ },
+ "value_box_fill_01": {
+  "what": "value-box interior at x 1350 pt in the Clip, Seconds and Speed rows; Inspector background for reference",
+  "clip": "1e2025",
+  "seconds": "1e2025",
+  "speed": "1e2025",
+  "inspector_background": "17181c"
+ },
+ "rows_below_clip_vs_0052_01": {
+  "what": "Inspector column (360 pt) from the Looping row through the Script component: 0052 capture 01 y 187-555 pt against 0053 capture 01 y 146-514 pt",
+  "any_difference": {
+   "cmd": "imgtool rdiff <worktree>/artifacts/0053/crops/o-below.png <worktree>/artifacts/0053/crops/n-below.png 0 0 720 736 0",
+   "result": {
+    "differing": 3924,
+    "largest": 1,
+    "tolerance": 0,
+    "pixels": 529920,
+    "box": [
+     16,
+     14,
+     680,
+     722
+    ]
+   }
+  },
+  "above_tolerance_8": {
+   "cmd": "imgtool rdiff <worktree>/artifacts/0053/crops/o-below.png <worktree>/artifacts/0053/crops/n-below.png 0 0 720 736 8",
+   "result": {
+    "differing": 0,
+    "largest": 1,
+    "tolerance": 8,
+    "pixels": 529920
+   }
+  }
+ },
+ "heading_vs_0052_01": {
+  "what": "label column x 1080-1200 pt, Animation heading band y 76-110 pt, same position in both captures",
+  "cmd": "imgtool rdiff <worktree>/artifacts/0053/crops/o-head.png <worktree>/artifacts/0053/crops/n-head.png 0 0 240 68 0",
+  "result": {
+   "differing": 8,
+   "largest": 1,
+   "tolerance": 0,
+   "pixels": 16320,
+   "box": [
+    16,
+    29,
+    59,
+    7
+   ]
+  }
+ },
+ "clip_label_vs_0052_01": {
+  "what": "label column x 1080-1200 pt, Clip row y 110-142 pt: the label moved within its row (see label_ink)",
+  "cmd": "imgtool rdiff <worktree>/artifacts/0053/crops/o-head.png <worktree>/artifacts/0053/crops/n-head.png 0 68 240 64 0",
+  "result": {
+   "differing": 317,
+   "largest": 156,
+   "tolerance": 0,
+   "pixels": 15360,
+   "box": [
+    25,
+    89,
+    42,
+    25
+   ]
+  }
+ },
+ "label_ink": {
+  "what": "imgtool ink <image> 2176 <2*row_top> 224 68 17181c 40 over each label (x 1088-1200 pt, one 34 pt row)",
+  "0053_01": {
+   "Clip": {
+    "row_top_pt": 112,
+    "first_ink_x_px": 2185,
+    "ink_top_px_in_row": 19,
+    "ink_bottom_px_in_row": 41,
+    "runs": 4
+   },
+   "Looping": {
+    "row_top_pt": 146,
+    "first_ink_x_px": 2186,
+    "ink_top_px_in_row": 19,
+    "ink_bottom_px_in_row": 41,
+    "runs": 7
+   },
+   "Playing": {
+    "row_top_pt": 180,
+    "first_ink_x_px": 2186,
+    "ink_top_px_in_row": 19,
+    "ink_bottom_px_in_row": 41,
+    "runs": 7
+   },
+   "Seconds": {
+    "row_top_pt": 214,
+    "first_ink_x_px": 2185,
+    "ink_top_px_in_row": 19,
+    "ink_bottom_px_in_row": 36,
+    "runs": 7
+   },
+   "Speed": {
+    "row_top_pt": 248,
+    "first_ink_x_px": 2185,
+    "ink_top_px_in_row": 19,
+    "ink_bottom_px_in_row": 41,
+    "runs": 5
+   }
+  },
+  "0052_01": {
+   "Clip": {
+    "row_top_pt": 112,
+    "first_ink_x_px": 2185,
+    "ink_top_px_in_row": 18,
+    "ink_bottom_px_in_row": 40,
+    "runs": 4
+   },
+   "Looping": {
+    "row_top_pt": 187,
+    "first_ink_x_px": 2186,
+    "ink_top_px_in_row": 19,
+    "ink_bottom_px_in_row": 41,
+    "runs": 7
+   }
+  }
+ },
+ "animation_02_vs_03": {
+  "what": "Inspector column y 240-460 pt (the Animation component under the Runtime block): capture 02 at 1440 x 875 (x from 1080 pt) against capture 03 at 1000 x 650 (x from 640 pt)",
+  "cmd": "imgtool rdiff <worktree>/artifacts/0053/crops/02-anim.png <worktree>/artifacts/0053/crops/03-anim.png 0 0 720 440 0",
+  "result": {
+   "differing": 0,
+   "largest": 0,
+   "tolerance": 0,
+   "pixels": 316800
+  }
+ },
+ "runtime_02_vs_03": {
+  "what": "the Runtime block above it, y 76-240 pt: differs only where the tick number reads 10 or 195",
+  "cmd": "imgtool rdiff <worktree>/artifacts/0053/crops/02-rt.png <worktree>/artifacts/0053/crops/03-rt.png 0 0 720 328 0",
+  "result": {
+   "differing": 278,
+   "largest": 146,
+   "tolerance": 0,
+   "pixels": 236160,
+   "box": [
+    200,
+    24,
+    27,
+    19
+   ]
+  }
+ },
+ "redactions": {
+  "01-authoring-1440x875-clip-0.png": {
+   "filled_rect_px": "2728 12 60 56",
+   "fill": "0b0c0f",
+   "cmd": "imgtool diff <worktree>/artifacts/0053/raw/01-authoring-1440.png <worktree>/handoffs/0053-nullable-inspector/screenshots/native/01-authoring-1440x875-clip-0.png",
+   "result": {
+    "differing": 2040,
+    "box": [
+     2733,
+     15,
+     50,
+     50
+    ],
+    "spaces": [
+     "kCGColorSpaceDisplayP3",
+     "kCGColorSpaceDisplayP3"
+    ]
+   }
+  },
+  "02-paused-tick10-1440x875-runtime-and-animation.png": {
+   "filled_rect_px": "2728 12 60 56",
+   "fill": "0b0c0f",
+   "cmd": "imgtool diff <worktree>/artifacts/0053/raw/02-paused-1440.png <worktree>/handoffs/0053-nullable-inspector/screenshots/native/02-paused-tick10-1440x875-runtime-and-animation.png",
+   "result": {
+    "differing": 2040,
+    "box": [
+     2733,
+     15,
+     50,
+     50
+    ],
+    "spaces": [
+     "kCGColorSpaceDisplayP3",
+     "kCGColorSpaceDisplayP3"
+    ]
+   }
+  },
+  "03-paused-tick195-1000x650.png": {
+   "filled_rect_px": "1848 12 60 56",
+   "fill": "0b0c0f",
+   "cmd": "imgtool diff <worktree>/artifacts/0053/raw/03-paused-1000x650.png <worktree>/handoffs/0053-nullable-inspector/screenshots/native/03-paused-tick195-1000x650.png",
+   "result": {
+    "differing": 2040,
+    "box": [
+     1853,
+     15,
+     50,
+     50
+    ],
+    "spaces": [
+     "kCGColorSpaceDisplayP3",
+     "kCGColorSpaceDisplayP3"
+    ]
+   }
+  }
+ }
+}

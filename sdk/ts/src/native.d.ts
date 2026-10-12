@@ -64,6 +64,15 @@ export interface NativeCommands {
    * whole callback, including numeric writes and earlier queued commands. */
   controlFlipbook(id: NativeId, control: 'play' | 'pause' | 'restart'): void;
   controlFlipbook(id: NativeId, control: 'seek', frame: number): void;
+  /** Select a concrete clip (integer 0..255) or null for the rest pose. Seconds
+   * must be finite/nonnegative and within the selected asset's duration. These
+   * controls share the structural quota, tick lifetime and atomic rollback;
+   * the committed snapshot does not reflect queued changes. */
+  controlAnimation(id: NativeId, control: 'select', clip: number | null, seconds: number): void;
+  controlAnimation(id: NativeId, control: 'seek', seconds: number): void;
+  controlAnimation(id: NativeId, control: 'playing' | 'looping', enabled: boolean): void;
+  /** Finite [-16,16]; negative speed plays backward, zero holds the sample. */
+  controlAnimation(id: NativeId, control: 'speed', speed: number): void;
   spawn(id: NativeId, transform: NativeTransform, parent: NativeId | null, velocity: NativeVector3 | null): void;
   /** No cascading deletion. Reparent/remove children in the same batch. */
   despawn(id: NativeId): void;
@@ -143,6 +152,18 @@ export interface NativeFlipbooks {
   readonly frames: Uint32Array;
   readonly flags: Uint32Array;
 }
+/** Aligned committed animation playback, captured before script commands.
+ * clips: -1 for the rest pose, otherwise an asset-local index 0..255. Flags:
+ * bit 0 = playing, bit 1 = looping, bit 2 = completed; other bits zero.
+ * VM-owned copies within its memory budget. Retention/mutation cannot change
+ * native playback or a later snapshot; order is unspecified. */
+export interface NativeAnimations {
+  readonly ids: readonly NativeId[];
+  readonly clips: Int32Array;
+  readonly seconds: Float64Array;
+  readonly speeds: Float64Array;
+  readonly flags: Uint32Array;
+}
 /** Read-only committed locale/catalog. Each call costs four of the shared
  * 1,024 native query units, at most 64 localization calls per whole tick.
  * Arguments together are bounded to 64 KiB and returned text/metadata to 256 KiB.
@@ -187,6 +208,7 @@ export interface NativeContext {
   /** Available only to behaviors explicitly declaring persistence version 1. */
   readonly state: NativePersistentState;
   readonly flipbooks: NativeFlipbooks;
+  readonly animations: NativeAnimations;
   readonly chunks: readonly NativeChunk[];
   readonly dt: number;
   readonly commands: NativeCommands;

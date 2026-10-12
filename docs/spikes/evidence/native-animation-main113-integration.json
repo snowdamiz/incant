@@ -1,0 +1,211 @@
+{
+  "recorded_at": "2026-10-12T01:36:58.790728+00:00",
+  "head": "38d144628145019b4e1a4921b2eb09043a4cc1bb",
+  "main": "b9969a9bccad8af6f95220a26b8640e97e07736b",
+  "ancestry": {
+    "animation": "f74379ef70a037a6705636d058d3eb876907815f",
+    "export_probe": "43400d475be5e8335281df27c6598f7005065263",
+    "original_claude_0052": "9b70ce747020a22e06801670436153ca0d690439"
+  },
+  "nullable_fix": {
+    "original": "30eacbcae0efc3a5d7093f0977149ef542c2f2f0",
+    "applied": "38d144628145019b4e1a4921b2eb09043a4cc1bb",
+    "source_hashes": {
+      "editor/bridge/native.ts": "1262bb103221184656f8872a5feca340867b96fb298ddd1676e62eec510e8cc6",
+      "editor/bridge/native.test.ts": "11cecf90c36995f47580e6d98837c868d90faa65d0e7d1223d319a51996577b6",
+      "editor/bridge/native.generated.js": "f03e9efd9c3333ec222647259e2243e842c2aa8329dd689154f7ab8bacaa8010"
+    },
+    "note": "Only this reviewed three-file fix was cherry-picked. Its original parent Wasm-animation619e850 remains queued separately."
+  },
+  "core_runtime_cook_render_script_lock_unchanged_from": "990ccef2e69bf7c4dea427379b70856c2af6f566",
+  "checks": [
+    {
+      "head": "38d144628145019b4e1a4921b2eb09043a4cc1bb",
+      "target": "/tmp/incant-animation-integration-target",
+      "runs": [
+        {
+          "name": "player-observe",
+          "command": [
+            "./tools/cargo",
+            "test",
+            "--profile",
+            "ci",
+            "--locked",
+            "-j2",
+            "-p",
+            "incant_game_player",
+            "-p",
+            "incant_observe",
+            "--features",
+            "incant_game_player/native-window"
+          ],
+          "exit_code": 0,
+          "seconds": 41.29658794403076,
+          "log": "/tmp/incant-animation-main113-checks/player-observe.log",
+          "sha256": "90ad3974f06610750f1cf84b8d6f1cdf70457020815e49b684a38a592f26c1be"
+        },
+        {
+          "name": "budget",
+          "command": [
+            "./tools/cargo",
+            "test",
+            "--profile",
+            "ci",
+            "--locked",
+            "-j2",
+            "-p",
+            "incant_cmd",
+            "--test",
+            "agent_budget"
+          ],
+          "exit_code": 0,
+          "seconds": 20.208099126815796,
+          "log": "/tmp/incant-animation-main113-checks/budget.log",
+          "sha256": "4c5b2492deb3083af23a94c53acdec15c19ad8711b19c0f2a9490961c3330f5d"
+        },
+        {
+          "name": "clippy",
+          "command": [
+            "./tools/cargo",
+            "clippy",
+            "--profile",
+            "ci",
+            "--locked",
+            "-j2",
+            "-p",
+            "incant_game_player",
+            "-p",
+            "incant_observe",
+            "-p",
+            "incant_cmd",
+            "--features",
+            "incant_game_player/native-window",
+            "--all-targets",
+            "--",
+            "-D",
+            "warnings"
+          ],
+          "exit_code": 0,
+          "seconds": 26.636194944381714,
+          "log": "/tmp/incant-animation-main113-checks/clippy.log",
+          "sha256": "2621865584cc34986a3d5ab33a88eee85e26fbf0c4cddccd6a498c2741312f82"
+        }
+      ]
+    },
+    {
+      "head": "38d144628145019b4e1a4921b2eb09043a4cc1bb",
+      "target": "/tmp/incant-animation-integration-target",
+      "runs": [
+        {
+          "name": "bridge",
+          "command": [
+            "npm",
+            "run",
+            "test",
+            "--workspace",
+            "editor/ui",
+            "--",
+            "../bridge/native.test.ts",
+            "--maxWorkers=4"
+          ],
+          "exit_code": 0,
+          "seconds": 1.801175832748413,
+          "log": "/tmp/incant-animation-main113-checks/bridge.log",
+          "sha256": "c76d1ee7575aa1aca4434b6e825d45a435d53c5c65609d0c0ad504692e632a26"
+        },
+        {
+          "name": "ui-types",
+          "command": [
+            "node_modules/.bin/tsc",
+            "-p",
+            "editor/ui/tsconfig.test.json",
+            "--noEmit"
+          ],
+          "exit_code": 0,
+          "seconds": 3.9638757705688477,
+          "log": "/tmp/incant-animation-main113-checks/ui-types.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "name": "ui-build",
+          "command": [
+            "npm",
+            "run",
+            "build",
+            "--workspace",
+            "editor/ui"
+          ],
+          "exit_code": 0,
+          "seconds": 6.384913921356201,
+          "log": "/tmp/incant-animation-main113-checks/ui-build.log",
+          "sha256": "70ecdb5f6c8984c61f53799dc3f0eb1f310b95b78ba32459fb16f84b0459b7c8"
+        },
+        {
+          "name": "bridge-generated",
+          "command": [
+            "node",
+            "tools/build_bridge.mjs",
+            "--check"
+          ],
+          "exit_code": 0,
+          "seconds": 0.08835887908935547,
+          "log": "/tmp/incant-animation-main113-checks/bridge-generated.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "name": "conventions",
+          "command": [
+            "python3",
+            "tools/generate_conventions.py",
+            "--check"
+          ],
+          "exit_code": 0,
+          "seconds": 0.06496310234069824,
+          "log": "/tmp/incant-animation-main113-checks/conventions.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "name": "fmt",
+          "command": [
+            "./tools/cargo",
+            "fmt",
+            "--check"
+          ],
+          "exit_code": 0,
+          "seconds": 1.3187389373779297,
+          "log": "/tmp/incant-animation-main113-checks/fmt.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "test_counts": {
+    "player_observe": 36,
+    "budget": 7,
+    "bridge": 52
+  },
+  "claude_0052": {
+    "source_commit": "edfc443763a6850fda58607b317c4638608e1f1d",
+    "report_sha256": "dd7f0f441f806fd99a3b45bdbe0ec9a99910d972286aa7a241e38a3852b49351",
+    "verified_committed_images": {
+      "handoffs/0052-native-animation/screenshots/native/01-authoring-1440x875-rig-selected.png": "cf79269df03b2b94b3157b821649d31076c85400332005786fad1f4cea8921e5",
+      "handoffs/0052-native-animation/screenshots/native/02-play-paused-tick39-1440x875.png": "1aababdc7f944c2194cf624fb06eb06738f5157a1e4e112fbf64c0e177bb54b7",
+      "handoffs/0052-native-animation/screenshots/native/03-paused-tick39-70s-later-1440x875.png": "c07a2b5ac6f184de35a8d2ad5431bd2c5df8c8459f5d2cee8ecaca8b2bb14598",
+      "handoffs/0052-native-animation/screenshots/native/04-stepped-tick49-1440x875-step-focused.png": "ef850aa8c8d0aa110a95f172ee91b6ccde8d6c091bc6ca5aec7224041705df95",
+      "handoffs/0052-native-animation/screenshots/native/05-resized-1000x650-paused-tick139.png": "617c85c0ae97f6eccb73322449aed112e24db278703c729d8a52cb75501661d2",
+      "handoffs/0052-native-animation/screenshots/native/06-rotate-tick209-1440x874-after-resize.png": "8dab02f9769bc275d20f57b93623d741511a8b06ead6d2279e38fb57a65ba624",
+      "handoffs/0052-native-animation/screenshots/native/07-stopped-authored-pose-1440x874.png": "7b7342931c8a63734c05f32e476c8016d25a590a8a7737d90158e3455d73be69",
+      "handoffs/0052-native-animation/screenshots/native/08-fresh-run-tick209-1440x874.png": "b43a72db927028bd1815a86d6ab05c2d9bfdbb991300926007f1dcbd32985b0e",
+      "handoffs/0052-native-animation/screenshots/native/09-crop-viewport-timeline.png": "517cb977134d42f725022be75c85d2e55c83e333e3b5262c4b223cd893a01738",
+      "handoffs/0052-native-animation/screenshots/native/10-crop-animation-component-1440-and-1000.png": "1692a3cb748d81a693455fb73969d0725a4005624db43e13a090c6465b017f65"
+    },
+    "scope": "Claude reports native playback/transport/resize/authoring preservation passes, one nullable clip Inspector defect; no source edits or provider turn. Native/GPU ownership released. Astra only verifies source/evidence hashes, not pixels."
+  },
+  "remaining": [
+    "Focused Claude0053 acceptance of nullable Inspector correction remains pending.",
+    "Script Play logs are not surfaced in editor Console; separate transport work, not a completion claim.",
+    "No new GPU/native-window execution by the integrator.",
+    "Fresh export shipping proof remains bound to990ccef; current player startup validation changes only reviewed fresh-plan refusal ordering.",
+    "Reference-device/performance, full animation system and all Phase1 gates remain open."
+  ]
+}

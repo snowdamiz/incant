@@ -1,0 +1,2295 @@
+{
+  "source": "990ccef2e69bf7c4dea427379b70856c2af6f566",
+  "tree": "ff9964f6c973af227bdda32c06ee14791fd593b8",
+  "actual_main_base": "e716f216f9daa5f69362f4e501ed0d10e9408bbc",
+  "preserved_ancestors": [
+    "f74379ef70a037a6705636d058d3eb876907815f",
+    "43400d475be5e8335281df27c6598f7005065263"
+  ],
+  "created_at": "2026-10-12T01:09:36.533356+00:00",
+  "conflict_resolution": "Only STATUS manual; main110 optional shader constructors/modules and runtime animation consumer code merged additively. No production edit during verification.",
+  "source_hashes": {
+    "Cargo.lock": "69b224ace514415d5e335b6738e467c2dd892ca6d453f8be7a8d5459cdd95a0c",
+    "crates/incant_assets/tests/skeletal.rs": "65cb6afc00f6d4cc909d3298d2cfd541f710182879e69e3461fa90dda92d8381",
+    "crates/incant_assets_runtime/src/animation/deform.rs": "4d2a64e7a99de6c9f9e1bce6a391308ca4da639333e9f6438480346700793b97",
+    "crates/incant_assets_runtime/src/animation/mod.rs": "8579e03da792727beda53752e96ca26a3b38d96b66042132424ec55ac6b041f6",
+    "crates/incant_assets_runtime/src/animation/player.rs": "613328d658dc3ef89acde2c441e78700bec2c25637b6b378874b7d0463f2c9ce",
+    "crates/incant_assets_runtime/src/version.rs": "1c8882c8f285910d95ad3b7c1d4c3e3ee67dbd3db4cf77f5120692eeab2ddbed",
+    "crates/incant_cmd/tests/animation.rs": "859d0a27ec68b2f755e36a35ee8dc7916fa9147d4882d6608f99fc027d77d653",
+    "crates/incant_cook/Cargo.toml": "8f839f2e34696ddc05c4f44028c2965ac66a7266708e8e07ee6b549deda8de1d",
+    "crates/incant_cook/src/animation.rs": "293835fb3a3c8b694e36052949167cea9bfbc7ccf1e1647efd05eed63de0ae34",
+    "crates/incant_cook/src/lib.rs": "85114f3b730df1daede63ec83cc4048edf39e930ddfaaeaad811d5a82f0ef796",
+    "crates/incant_cook/src/project_build.rs": "afa51ad974ba5465e6526fd7dbe95c03e485fa77359393aef072b59a0f3d60e7",
+    "crates/incant_cook/src/project_script.rs": "b9d104988fe47cf9a36f528d4ffc987307c178b7070ba85beb09de7d7bfc5e8a",
+    "crates/incant_cook/src/scene.rs": "dc44b1ab00334f1deba30b2b5bac5b3430696f8b78afda50fdd3cfed33d74e8f",
+    "crates/incant_cook/src/spatial.rs": "ad78245036e071658f5a0f688520d2b7988cdf0f82a5c178ef82c79c01979667",
+    "crates/incant_cook/tests/animation.rs": "4c7e0fc0ffd979706cfbdd8ff13cc92f4a1e1016349447005bcde55af44612dd",
+    "crates/incant_doc/examples/schema.rs": "cfb41703ade8fb52eb48677f6d2356359d4c38d40385d883094642a05c6f4047",
+    "crates/incant_doc/src/lib.rs": "48509a0f9278c5b4cbc0b21b49e8cfc1c080516ad3e17263e8cb64c9be724b13",
+    "crates/incant_doc/tests/document.rs": "2e087d51524e66e41559acaaed605d4e1577f220830563fbda0956f298c8f02e",
+    "crates/incant_play/src/lib.rs": "a8ecf5056359281ec188b5a06fb4b580858ffdf29f6ec3ce2b76c5149f753180",
+    "crates/incant_play/tests/animation.rs": "ea84b364bdec739f8d26078443874044a034fccdf1ed91399550856d54cb476a",
+    "crates/incant_render/src/animation_tests.rs": "bcea4e2b3995829123f257ba01189c07456ccd643edb0b3cba9639c1caeb279e",
+    "crates/incant_render/src/flipbook_tests.rs": "fbe98b1e505916914446e1156d2590a88291e1a32876afcb705cf21826c02204",
+    "crates/incant_render/src/lib.rs": "c19f0f487ef01c702c4ad4156b2e2062a5e6a2cd25ecc28e970995ec8333bdef",
+    "crates/incant_render/src/model_draw.rs": "cc09f0ee9c089673264e727f79eeffd2aabfd59da2eda53283837053e352c6a7",
+    "crates/incant_render/src/models.rs": "7f8be7bc023e3624678c375bf3a0eb3f26183f1983f5ee42ef357157671c508a",
+    "crates/incant_render/src/models/animation.rs": "154e121f4a892d97c27271322ac5919a08349720ac38381823a0357b96c8e476",
+    "crates/incant_render/src/retained.rs": "7bf981f9a55fd9219beeca2331b6e111c45d4da6c4772ae1abb54730df8013c8",
+    "crates/incant_render/src/retained_tests.rs": "9d387644ea59ea428f8922548e03adf558f476d693a206b21b968aa2eae809c1",
+    "crates/incant_render/src/retained_tilemap_tests.rs": "c8f44076d737119111c5ce72a458c46b4c12e679edbe1ad926cbac5d03f8de3d",
+    "crates/incant_render/src/scene.rs": "78b40d2709c0d6d244e43220d05a83ea0e9108c72167de70b3fd568c083c5672",
+    "crates/incant_render/src/shadow_draw.rs": "894acd54e6addca23b563d033cb6b794cee65c5b80890029c9beeee80a689cc3",
+    "crates/incant_render/src/version_tests.rs": "bbef4d81d22e01dee04cbf5a427027672c61d06fab6f9b21bdb18fbbc8009da1",
+    "crates/incant_render_authoring/Cargo.toml": "776e6e9d54c34e9ee36c6474e68c15061bb59fe50bb7facc0216bf18c1e3658d",
+    "crates/incant_render_authoring/src/lib.rs": "8b0aa5f3807ac6894d4294c1f7fd2cb85618cb5e98272ce05368b5e6cf74042c",
+    "crates/incant_render_data/src/lib.rs": "8cf98a31524586c434f6e363132e792830d8732e1d0da89493a3e1447e714d3c",
+    "crates/incant_render_native/src/animation.rs": "27e28c337e5a02dafdc84fdcde1645e0833ae3d2e9388f9c274bd6db19b21d9a",
+    "crates/incant_render_native/src/binding.rs": "384c8394edef09e9b1de5d2eae86a6ee019c19541adb218737d7638f4d43298f",
+    "crates/incant_render_native/src/lib.rs": "4e763e23de99f8ea28091ec70f6da56b0b139ae90c9fb9676c94ee81bb5ec860",
+    "crates/incant_render_native/src/update.rs": "eac3ab0a54b9ccdea872c8164338b6fb29340880cf3baae21515a45bf39ccc44",
+    "crates/incant_render_native/tests/animation.rs": "3e10dfced3ab31bc1110661492860bc61d240772846fc154c7103f0c39d2bb71",
+    "crates/incant_runtime/src/animation.rs": "5ad665f1c7f58bdeb4fc42cc21fb4691c8d3e26735352814bd0d216692317aae",
+    "crates/incant_runtime/src/animation_binary.rs": "577ac43458cd28e36ef3c7244415b99127e59a80ded968444eb9acf6a964edea",
+    "crates/incant_runtime/src/binary.rs": "e03efa259039b123c00c66f05cfbcf2972b13b89c5a81cd28efdff65ad0d8420",
+    "crates/incant_runtime/src/commands.rs": "1213194f4e605a4fb519e80cf3bdb09ae664a171851f0cf3ca43b9fea87bd28b",
+    "crates/incant_runtime/src/lib.rs": "91d96f68d0481c73c3e35e70d2d278e86e6e607d05b25db5a57fb0c84a8cd631",
+    "crates/incant_runtime/src/save.rs": "c90cc58b805a245f0142dafc1600fe5ece95aeb5d206d4e9ad56e7171b7c0fd4",
+    "crates/incant_runtime/src/save/codec.rs": "90f87e85d59ceebd6fd6724a361dd8256bf73025781aee556aa4a0f375f91fb3",
+    "crates/incant_runtime/src/scene.rs": "40e68401bf803b58e9ef549d1174cc8297f8b7e16503a307d3fd69be99f2e998",
+    "crates/incant_runtime/src/spatial.rs": "75d25aee4e4f63c01bcfa667631c3e11ff37502e4f1749404e0476b9fd8784eb",
+    "crates/incant_runtime/src/spatial_binary.rs": "38c28299f46b2cbe0c0f9d9fd879c5e9cde579e0f0211755b7b7e162c740874f",
+    "crates/incant_runtime/src/spatial_view.rs": "5372a987c98530f3c9a3c39d465ac28903c599c09243b1e2f662e5d17893dcfa",
+    "crates/incant_runtime/src/world.rs": "86c7e32959bc05b0f3f7065e02f4fe296378f8f0f3befceaa9f5874b85230828",
+    "crates/incant_runtime/tests/animation.rs": "67cf87ba41b7b21d64ef1e3d9794505e0b23f6281ed96acdd886aff910bcec06",
+    "crates/incant_runtime/tests/physics.rs": "42a2bf32c0b68df22cd3355439db5b2536bdfdd86c30c015dc3a951505527c4a",
+    "crates/incant_runtime/tests/physics_2d.rs": "5dfcfb61b246067134d596745f22bfc00acb59c5752779c0e1f9facd7774935c",
+    "crates/incant_runtime/tests/scenes.rs": "3067950b0d483ff697353135b4d8a339c58626b6a283863067247a26d9af5152",
+    "crates/incant_script/build.rs": "854e92d50dfdb0cb571004b7042dd8386d8ec21c9165476192474bbe1d416cc7",
+    "crates/incant_script/src/animation_commands.rs": "7c48f470958236341f9e5633008be3830e1a2791a3ed2d1a28da1233f46bbeeb",
+    "crates/incant_script/src/animations.rs": "47aef2c9ef635252039d7bb3de376b76ac44daa5418074072aca70e62cc48284",
+    "crates/incant_script/src/checkpoint/pending.rs": "d986c2ba3c4c035f8d1e103300f3741d1f6cb2a95a439ef1386e2fdbd05b41d0",
+    "crates/incant_script/src/checkpoint/tests.rs": "625dd65b5b06c6ea3aa2fd2a475eca085ba336bf77c7b3db0f7363bc120915ee",
+    "crates/incant_script/src/checkpoint/tests/animation.rs": "6d6ebeed6330a712e12b826f069a9564bda38c2d3ab06c52c1dc33a02814cf38",
+    "crates/incant_script/src/commands.rs": "33deede4e8d30a4c36d9af18cbf06c030f2c489f531bc56499cc3d03a79f16e1",
+    "crates/incant_script/src/compiler.rs": "02801aed60f414e04cc5acfad06c9a285c29f22776c3cf5cfed8479763bf4ba7",
+    "crates/incant_script/src/lib.rs": "fb64dc986364d676fdd58b8d1e60270b5f26d60ff10ec888804c04dc31524373",
+    "crates/incant_script/tests/animations.rs": "9307e400e508eba79bbff0fad206f2ebbf3c968cf90c35ea9a0f0b87ad4b7201",
+    "crates/incant_script/tests/fixtures/animation.cjs": "25a5eac29b9815df82dc7fd3b5f01d4810a319aeee0233dfa3966b616d1dda25",
+    "crates/incant_script/tests/fixtures/animation.ts": "1ff6949a56adce06c13f76a01fe46655adc26665831aa2244558c562e6b7600e",
+    "crates/incant_types/src/animation.rs": "f138746f557d3c4bd08a7d255bb6a0471b801df13a1363fcf7948c776fed0070",
+    "crates/incant_types/src/lib.rs": "5d8945b502b46b21b9392f4391ffb2b4ea008dd63f9147939c73dfe6f15e6e6d",
+    "schemas/Animation.schema.json": "a16e38ba70ab375434e29fd22331b65cc2e09dc8e8dc6705715022e54fbb897a",
+    "sdk/templates/native-animation/playback.ts": "422bb8917276055aa22fd5c9dd277c41e9d35e5ce1588dd72caafd37549a94e5",
+    "sdk/ts/src/generated.d.ts": "d10fbf01a11fc663092285c97ad81996a0dc6f94c746458c11559304a5085b04",
+    "sdk/ts/src/index.d.ts": "02ecc62f0b68267a5ad85a42259e3c8e2001d1f3efaaaf17b12895ecef2f3bb1",
+    "sdk/ts/src/native.d.ts": "9ad8e3b2518ec66a1a332a34fb147dd3e20b8c3798f6d2cfbe0e0775b26a76e8",
+    "tools/probes/native-animation.py": "4cbb1d4b0336e5ca5ba898c4bf4c53b22bb1eb1861fb6f039fc8f922569f0dce",
+    "tools/probes/native-animation/behavior.ts": "3ccd28212d689c51df07a19e95043cb2cd005aa5522fa9c44a0643f2bb15c508",
+    "tools/probes/native-animation/review.ts": "f16ead4a7fe2251d4c804d0598b8ac0ecab1f4977c29467c96115c16a77049a5",
+    "tools/tests/native_script.test.mjs": "5333f2da9b4c0f56eddfb128240b03dca6742ffe62e2d837a86452759f26160c"
+  },
+  "counts": {
+    "ordinary": {
+      "groups": 92,
+      "passed": 519,
+      "failed": 0,
+      "ignored": 71
+    },
+    "cooked-geometry": {
+      "groups": 7,
+      "passed": 57,
+      "failed": 0,
+      "ignored": 71
+    }
+  },
+  "scope": "Counts overlap; GPU/optional ignored tests were not run in this integration.",
+  "cargo_runs": {
+    "head": "990ccef2e69bf7c4dea427379b70856c2af6f566",
+    "target": "/tmp/incant-animation-integration-target",
+    "runs": [
+      {
+        "name": "ordinary",
+        "command": [
+          "./tools/cargo",
+          "test",
+          "--profile",
+          "ci",
+          "--locked",
+          "-j",
+          "2",
+          "-p",
+          "incant_assets_runtime",
+          "-p",
+          "incant_runtime",
+          "-p",
+          "incant_script",
+          "-p",
+          "incant_cook",
+          "-p",
+          "incant_render_native",
+          "-p",
+          "incant_render",
+          "-p",
+          "incant_play",
+          "-p",
+          "incant_cmd",
+          "-p",
+          "incant_doc",
+          "-p",
+          "incant_game_runtime",
+          "-p",
+          "incant_game_player"
+        ],
+        "exit_code": 0,
+        "seconds": 279.0866451263428,
+        "log": "/tmp/incant-animation-main110-checks/ordinary.log",
+        "sha256": "3bb57f3bf96e984be9655d28dd44115f06ab135ddeeeef8a969a43af657ca46d"
+      },
+      {
+        "name": "cooked-geometry",
+        "command": [
+          "./tools/cargo",
+          "test",
+          "--profile",
+          "ci",
+          "--locked",
+          "-j",
+          "2",
+          "-p",
+          "incant_shader_cook",
+          "-p",
+          "incant_render",
+          "--features",
+          "incant_render/cooked-geometry"
+        ],
+        "exit_code": 0,
+        "seconds": 34.521912813186646,
+        "log": "/tmp/incant-animation-main110-checks/cooked-geometry.log",
+        "sha256": "639df7d894eb954507cbd4ea6dcdc0983367c22d940a87fc385f69a138b78d0d"
+      },
+      {
+        "name": "clippy",
+        "command": [
+          "./tools/cargo",
+          "clippy",
+          "--profile",
+          "ci",
+          "--locked",
+          "-j",
+          "2",
+          "-p",
+          "incant_assets_runtime",
+          "-p",
+          "incant_runtime",
+          "-p",
+          "incant_script",
+          "-p",
+          "incant_cook",
+          "-p",
+          "incant_render_native",
+          "-p",
+          "incant_render",
+          "-p",
+          "incant_play",
+          "-p",
+          "incant_cmd",
+          "-p",
+          "incant_doc",
+          "-p",
+          "incant_game_runtime",
+          "-p",
+          "incant_game_player",
+          "-p",
+          "incant_shader_cook",
+          "--features",
+          "incant_render/cooked-geometry",
+          "--all-targets",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "exit_code": 0,
+        "seconds": 30.946765184402466,
+        "log": "/tmp/incant-animation-main110-checks/clippy.log",
+        "sha256": "a695892ee3386ac1e4534b94661ad04867ebb7ee862692fa46428d6a052daf91"
+      }
+    ],
+    "source_unchanged": true
+  },
+  "other_runs": [
+    {
+      "name": "tools",
+      "command": [
+        "npm",
+        "run",
+        "test:tools"
+      ],
+      "exit_code": 0,
+      "seconds": 28.52531599998474,
+      "log": "/tmp/incant-animation-main110-checks/tools.log",
+      "sha256": "93cf5d74dbf5b6fab9694acf7149f16ca43e2aeb004ed97efe038a2246f6a591"
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 1.2370717525482178,
+      "log": "/tmp/incant-animation-main110-checks/fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.05921673774719238,
+      "log": "/tmp/incant-animation-main110-checks/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "bridge",
+      "command": [
+        "node",
+        "tools/build_bridge.mjs",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.05992603302001953,
+      "log": "/tmp/incant-animation-main110-checks/bridge.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "sdk",
+      "command": [
+        "node",
+        "tools/generate_sdk.mjs",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.06699299812316895,
+      "log": "/tmp/incant-animation-main110-checks/sdk.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "sdk-types",
+      "command": [
+        "node_modules/.bin/tsc",
+        "-p",
+        "sdk/ts/tsconfig.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.39521098136901855,
+      "log": "/tmp/incant-animation-main110-checks/sdk-types.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runtime-graph",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_game_player",
+        "incant_game_runtime",
+        "incant_runtime",
+        "incant_render_native",
+        "--features",
+        "incant_game_player/project,incant_game_player/render-input"
+      ],
+      "exit_code": 0,
+      "seconds": 0.7101869583129883,
+      "log": "/tmp/incant-animation-main110-checks/runtime-graph.log",
+      "sha256": "7fdbe72ee617a88f156cf3acdbe844ab59e1787ef16b5d6be1d8f0e0f7e3740b"
+    }
+  ],
+  "python": {
+    "passed": 214,
+    "skipped": 4
+  },
+  "node_passed": 21,
+  "logs": {
+    "fmt.log": {
+      "path": "/tmp/incant-animation-main110-checks/fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "fresh-export-proof.log": {
+      "path": "/tmp/incant-animation-main110-checks/fresh-export-proof.log",
+      "sha256": "9a5c443b669d9d61928a38a69326b7376824b0bec965b07e13ac15845f882796"
+    },
+    "conventions.log": {
+      "path": "/tmp/incant-animation-main110-checks/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "runtime-graph.log": {
+      "path": "/tmp/incant-animation-main110-checks/runtime-graph.log",
+      "sha256": "7fdbe72ee617a88f156cf3acdbe844ab59e1787ef16b5d6be1d8f0e0f7e3740b"
+    },
+    "clippy.log": {
+      "path": "/tmp/incant-animation-main110-checks/clippy.log",
+      "sha256": "a695892ee3386ac1e4534b94661ad04867ebb7ee862692fa46428d6a052daf91"
+    },
+    "ordinary.log": {
+      "path": "/tmp/incant-animation-main110-checks/ordinary.log",
+      "sha256": "3bb57f3bf96e984be9655d28dd44115f06ab135ddeeeef8a969a43af657ca46d"
+    },
+    "headless-build.log": {
+      "path": "/tmp/incant-animation-main110-checks/headless-build.log",
+      "sha256": "de6b63e2b4b29e11f5ef0a4925f416dc452d92aa926c5668393fdb7c848c781f"
+    },
+    "bridge.log": {
+      "path": "/tmp/incant-animation-main110-checks/bridge.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "sdk.log": {
+      "path": "/tmp/incant-animation-main110-checks/sdk.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tools.log": {
+      "path": "/tmp/incant-animation-main110-checks/tools.log",
+      "sha256": "93cf5d74dbf5b6fab9694acf7149f16ca43e2aeb004ed97efe038a2246f6a591"
+    },
+    "sdk-types.log": {
+      "path": "/tmp/incant-animation-main110-checks/sdk-types.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cooked-geometry.log": {
+      "path": "/tmp/incant-animation-main110-checks/cooked-geometry.log",
+      "sha256": "639df7d894eb954507cbd4ea6dcdc0983367c22d940a87fc385f69a138b78d0d"
+    }
+  },
+  "closure_audit": {
+    "base_proof_source": "d3c31888831988e7ee51c8ace921384e8e527394",
+    "integrated_source": "990ccef2e69bf7c4dea427379b70856c2af6f566",
+    "host": "aarch64-apple-darwin",
+    "player_features": "project,render-input",
+    "normal_and_build_package_count": 210,
+    "local_packages": [
+      "incant_2d",
+      "incant_assets_runtime",
+      "incant_audio_runtime",
+      "incant_cook",
+      "incant_doc",
+      "incant_game_player",
+      "incant_game_runtime",
+      "incant_input",
+      "incant_localization",
+      "incant_nav",
+      "incant_observe",
+      "incant_physics_2d_runtime",
+      "incant_physics_runtime",
+      "incant_render_data",
+      "incant_render_game",
+      "incant_render_native",
+      "incant_runtime",
+      "incant_script",
+      "incant_source",
+      "incant_types"
+    ],
+    "local_input_count": 356,
+    "local_inputs_sha256": {
+      "crates/incant_2d/Cargo.toml": "57378df7552b4ea8a12dbc876467d06bc067592b7c37a8a875bc670e84540a0f",
+      "crates/incant_2d/src/atlas/mod.rs": "45c26f8118767244d125c01baf098fd5630ce1de3d42dced26067aed6c7361ab",
+      "crates/incant_2d/src/atlas/packing.rs": "2020fc61b1724b32a0c1a1731f76ccddc7a5f0f5db8f3acd4aa175212723fe62",
+      "crates/incant_2d/src/flipbook.rs": "83c415e9758be08298ae5aecc6a019123f3900070d7a7dfdc6ec298dcaf4aa84",
+      "crates/incant_2d/src/lib.rs": "56417c23be9e9c059b5ef1a7bb709aa95b0137cd3fd5a0ac9f6a8262ca3ef1e6",
+      "crates/incant_2d/src/tilemap.rs": "a065ef79daf1d7939ac159e803a81a8a03fbd89fcfea6a6ee3e45360b14e147f",
+      "crates/incant_2d/src/tilemap/prepare.rs": "87ef5e0c791d3a5cd1bde894a491ed2a6aadfd7810edd56b39633379125f7a69",
+      "crates/incant_2d/tests/atlas_packing.rs": "89a95487ea6fa96657efdcebead0eee2f6c2a02930f3d0a56453e62d8d5a9990",
+      "crates/incant_2d/tests/tilemaps.rs": "9041b0efa33685b657671db6f03809ca13898a170e30e5c6c030e33eb61cd711",
+      "crates/incant_assets_runtime/Cargo.toml": "9091d131c3435c1a294601a2b75a9d36672ca25c9db63739f8a6e06b9205c1d2",
+      "crates/incant_assets_runtime/src/animation/binary.rs": "2d4cdf6389116ceeac3dd77f2870deed82cec5d85c357b2ac678164e006b9727",
+      "crates/incant_assets_runtime/src/animation/deform.rs": "4d2a64e7a99de6c9f9e1bce6a391308ca4da639333e9f6438480346700793b97",
+      "crates/incant_assets_runtime/src/animation/mod.rs": "8579e03da792727beda53752e96ca26a3b38d96b66042132424ec55ac6b041f6",
+      "crates/incant_assets_runtime/src/animation/player.rs": "613328d658dc3ef89acde2c441e78700bec2c25637b6b378874b7d0463f2c9ce",
+      "crates/incant_assets_runtime/src/audio.rs": "fb5c8532178fc959e122457aa9c29c9c7e6dce7f1c36a789606d15738d0c46ac",
+      "crates/incant_assets_runtime/src/font.rs": "9b7a9a0f6bb0c8cf25faca821b1cd90dd85b19b89d8566a4a203a06942ac32d9",
+      "crates/incant_assets_runtime/src/ktx.rs": "87d124d509dc9cd98cc49d0f5bcd7f5aca78c30ab89dcb954afec8407039ed35",
+      "crates/incant_assets_runtime/src/lib.rs": "2884b5c82d8f7c49b711a900c33320bba5e95d22fe13d12c86b3aebec6fc766b",
+      "crates/incant_assets_runtime/src/material.rs": "bc5bb33dbafbf4d9f509d63ca0ff1fe8e9a2d2648e1b22f7d38074ed29e21fc5",
+      "crates/incant_assets_runtime/src/mesh.rs": "e0bb90ac0624d09d4446d0f7c2cfaa9775d9283849273f31a5d6d8444f33bc52",
+      "crates/incant_assets_runtime/src/model.rs": "846a1943f44ee7b491f8cf1346f52d05b5ea5c338d0b85e49252910fd933db0e",
+      "crates/incant_assets_runtime/src/model_node.rs": "b88bc3c45e3a1a1da61273fba6990d95d90e7254fc160e2baf183f0bb37f1118",
+      "crates/incant_assets_runtime/src/model_textures.rs": "53d7de663fdc7865dfdd100ca3c9fde3d3230eb7b439984fb4bfb36b72f1644a",
+      "crates/incant_assets_runtime/src/texture.rs": "b911fb28b4c4c897276dd78a551f1a01b7695d971431aa71c05e36b6129ddb97",
+      "crates/incant_assets_runtime/src/texture_cache.rs": "b902d63df8924088b89fa9281025a5c7476535cb384419adb95f13167fbdf2be",
+      "crates/incant_assets_runtime/src/version.rs": "1c8882c8f285910d95ad3b7c1d4c3e3ee67dbd3db4cf77f5120692eeab2ddbed",
+      "crates/incant_assets_runtime/tests/cooked.rs": "d1ede06786a210fb4a5330e791151f52290040cab2af5b7adc61649f0d70aa00",
+      "crates/incant_assets_runtime/tests/fonts.rs": "7cdd379f660c3f73a0bd9ec405c8244d3af12395b617d09e90a0e9e808bc7d07",
+      "crates/incant_assets_runtime/tests/support/mod.rs": "12b146bd25a41549fe66820f647e4d810f7ae82a6964fe0d2e94a69ec9fa1e2a",
+      "crates/incant_assets_runtime/tests/visual_readers.rs": "e29324314e8bf5128dfedb8644cb4c6e3d2588734cbbec997929c595acdac2c2",
+      "crates/incant_audio_runtime/Cargo.toml": "c0f5643a950aa754e2da13cb6ec6cb840ece82579529dc3abc844123045d92c3",
+      "crates/incant_audio_runtime/examples/cooked_audio.rs": "60428c8da63065d10df26dd805a86665fa42a70f83e87d5f591e1ce15dbdddd8",
+      "crates/incant_audio_runtime/examples/native_scene_audio.rs": "3d8efe7c030f95a8ff0f884be069f7799f99e4ae127bdb7e892e704c6db3efa9",
+      "crates/incant_audio_runtime/src/config.rs": "eb22b9ca8803ef14534c4bd68dfb17d0f96c10ad386cd8f4a9d89dd3c6723f7e",
+      "crates/incant_audio_runtime/src/lib.rs": "754e8deb9221a5bde44900a9d8b799fcedcc71d35e88e9328e0471b030240d93",
+      "crates/incant_audio_runtime/src/mixer.rs": "2e2d6807626c873aec1f204b56e1571ad4491090f20a5101fcea1f0f42968245",
+      "crates/incant_audio_runtime/src/offline.rs": "df823c9040b925d2d97648abc0c22ea2944b171d43ede70cd6449eb99b874857",
+      "crates/incant_audio_runtime/src/offline_stream.rs": "bcb5d073288778d694857394fdb11ff350cd2e8b79f3d7acd6fd231d0d30ecc5",
+      "crates/incant_audio_runtime/src/scene.rs": "0fd32808c7b5735daaa4f95d2386b867383f32e9fe3f88d4cf7114edb7a23ae7",
+      "crates/incant_audio_runtime/src/scene/binding.rs": "9c88b5ff075ed110838bb553705332e1ea745fff64b9f079f0f1b3444ea403c7",
+      "crates/incant_audio_runtime/src/scene/prepare.rs": "3facf2fe479af79cf7ac80ea858cadbd2fd62d0cb879926c9adffdd54a332867",
+      "crates/incant_audio_runtime/src/stream.rs": "5c95e5df733637bb7c5f41f807bdbe0977435305b8bbb5977b72e4484c6d16f4",
+      "crates/incant_audio_runtime/tests/cooked.rs": "075a2735389e78eaa5784d16e6858fa6b0be64964046f716113393645fd76a7e",
+      "crates/incant_audio_runtime/tests/scene.rs": "89dc1bc571cd20b43bf9fa5f3f17ece771ae2a9bd71e9e31e69369b0f70c3bc2",
+      "crates/incant_cook/Cargo.toml": "8f839f2e34696ddc05c4f44028c2965ac66a7266708e8e07ee6b549deda8de1d",
+      "crates/incant_cook/examples/cook_scene.rs": "e9edb5d97088a266593e5a1cc3a7ed89596ff87b5b221a89adf46210c710ca16",
+      "crates/incant_cook/src/animation.rs": "293835fb3a3c8b694e36052949167cea9bfbc7ccf1e1647efd05eed63de0ae34",
+      "crates/incant_cook/src/build_script.rs": "8a41075b7ada230a7bba3f27ca454203b80a390d425107af89d0d4b11b885d87",
+      "crates/incant_cook/src/lib.rs": "85114f3b730df1daede63ec83cc4048edf39e930ddfaaeaad811d5a82f0ef796",
+      "crates/incant_cook/src/navigation.rs": "e0622989f1e8b79121b252940d285af176f5c6b7972dbee8947424a8a11a451b",
+      "crates/incant_cook/src/project_build.rs": "afa51ad974ba5465e6526fd7dbe95c03e485fa77359393aef072b59a0f3d60e7",
+      "crates/incant_cook/src/project_script.rs": "b9d104988fe47cf9a36f528d4ffc987307c178b7070ba85beb09de7d7bfc5e8a",
+      "crates/incant_cook/src/scene.rs": "dc44b1ab00334f1deba30b2b5bac5b3430696f8b78afda50fdd3cfed33d74e8f",
+      "crates/incant_cook/src/script.rs": "cee7491beb859a1b5816c200ca8672df5b658833f412676a97d203adff6abdc0",
+      "crates/incant_cook/src/spatial.rs": "ad78245036e071658f5a0f688520d2b7988cdf0f82a5c178ef82c79c01979667",
+      "crates/incant_cook/src/typescript.rs": "367b191390c936c3381748d6fbdab49028fa3cfeaf120f2f208ac49b90ebb30f",
+      "crates/incant_cook/src/typescript/windows.rs": "1cd3e9b8caed54b4a6e5680656e6564cfb4d34a005905cbb5320a73cc5156376",
+      "crates/incant_cook/tests/animation.rs": "4c7e0fc0ffd979706cfbdd8ff13cc92f4a1e1016349447005bcde55af44612dd",
+      "crates/incant_cook/tests/localization.rs": "903587d93e88ad99b68165fc57d43188d6a1dd7a8a4e98284013af272e5d48e6",
+      "crates/incant_cook/tests/navigation.rs": "c9cfb55c8840b820bfdd9fa1513f4a547042b1c81861564980bc898e4966219a",
+      "crates/incant_cook/tests/physics_2d.rs": "73bbecebbc2a60f348a9a5fdd86deb5bdefb69f0975987fb0157364cd302a9b5",
+      "crates/incant_cook/tests/project_scripts.rs": "081fd68be88c95265f41aec1de82944b4fd380ab8ed31553514a73fd5347e7a3",
+      "crates/incant_cook/tests/runtime.rs": "2dfc47ad11cb775799ab6786e393f8c43d7c5ea75518f955b5eefc5f0a576d9c",
+      "crates/incant_cook/tests/scripts.rs": "1cf01a02707c9617f9d2b07ede894ee5ca4065eb35fa67e499df818c46697dc8",
+      "crates/incant_cook/tests/spatial.rs": "9f3018c024811b29a31dd8b21d7bd3e1a7d231c01d9eaac9ca2d3fcbecb4da02",
+      "crates/incant_cook/tests/typescript.rs": "e34a6722808dda31534819aa08e0338fcf6a3968eeb73e8dbd5e934049c5e01c",
+      "crates/incant_doc/Cargo.toml": "cde6826774ba803196e281988f55f9825da56edafbf711b2eabacb8a69a584bd",
+      "crates/incant_doc/examples/crdt_bench.rs": "9f2cd17ef0e3a147c43e5d11005f6c72db77e076c7063dac246d55b54190aacd",
+      "crates/incant_doc/examples/schema.rs": "cfb41703ade8fb52eb48677f6d2356359d4c38d40385d883094642a05c6f4047",
+      "crates/incant_doc/src/agent_budget.rs": "d4400624c278dcd2d1d3d31a94c2113dd6bbfa9f6d4b944780dd0a1f82793536",
+      "crates/incant_doc/src/audio.rs": "53b1544a8b77e76907a3175bf93f4209a0f401c19609f22bb2ecf68ec495a6ac",
+      "crates/incant_doc/src/camera.rs": "f0d61c74caf9fc105d94d1b1ee6ed2648b86dda160de7b80bbc7e1384f3fbca6",
+      "crates/incant_doc/src/crdt.rs": "fe2b42400391e90536eee32b2705dd7f972b39a7f53fbfd98ea8f406712ba5f4",
+      "crates/incant_doc/src/lib.rs": "48509a0f9278c5b4cbc0b21b49e8cfc1c080516ad3e17263e8cb64c9be724b13",
+      "crates/incant_doc/src/lights.rs": "297d98e56007d34c9cf005f61dd3b583eb940d52c0ca230e9b6ab818fc4d8e5a",
+      "crates/incant_doc/src/navigation.rs": "af04c929fd3875b6edcca1d02e90490679386a75981c913a7289abe734b18917",
+      "crates/incant_doc/src/physics.rs": "ae79bb8777f4e03abc441bbe4fd27760a0a000492146a62a82ced08b2bcfc4c5",
+      "crates/incant_doc/src/physics_2d.rs": "65bf3ee4df813498fcf7370e47495a91a11431be09b01e9ac2f779e3ccf9cb7f",
+      "crates/incant_doc/tests/agent_budget.rs": "b570ffdda8a5619ca0698d5dfbc38a3ae399c7f249d3cbbbf5c8f605caa6cc91",
+      "crates/incant_doc/tests/document.rs": "2e087d51524e66e41559acaaed605d4e1577f220830563fbda0956f298c8f02e",
+      "crates/incant_doc/tests/lights.rs": "d074bb6863b83d50e44a1463354af6bf7fbd5744c5031f523310a339dfe0be12",
+      "crates/incant_game_player/Cargo.toml": "ca0b83f48edc0735fec75481d56a2ab3cd4ab644e5dcac42b02efeb45a519522",
+      "crates/incant_game_player/build.rs": "394e98899e701b8d00405111b78534276cf37abf5df9a962539d1206efbd4653",
+      "crates/incant_game_player/fixtures/flipbook.rs": "8986dd2c4e9e3d28fa65b1fd205a3df3ce8e3d910d6da9b6de023f2c7cb22081",
+      "crates/incant_game_player/fixtures/game.js": "466a31676cda2862a9693ab76bc659be5ac3a3f7bece0c740d2024b7820dd90e",
+      "crates/incant_game_player/src/checkpoint.rs": "b320651e522fcedb42cec72cb92e162f25733826421669f4f0d3335100554b71",
+      "crates/incant_game_player/src/gpu.rs": "b1b2a508442f2d777abd71635766cdb72aa437f9b3be0f02eb5316f00c3168c8",
+      "crates/incant_game_player/src/main.rs": "fb91810f935f49ccc23b04a91cbed7f71e01a0166f5567875d903f294c8207bb",
+      "crates/incant_game_player/src/observe.rs": "af01a29d072543e07025b14b8a0425b8af9e23a2f2dea5d30eb2ba2847145489",
+      "crates/incant_game_player/src/package.rs": "8bc986118821727285e7218cd53a12bdf243a59466312ae7edc5d865d7205d1a",
+      "crates/incant_game_player/src/program.rs": "da6167885361b5e6efc51bd5da67610314a40b69b3c5d64faec7b5e028ae73c6",
+      "crates/incant_game_player/src/session.rs": "16a56e61f2fed54c28266e872c7915b4147687addb8fd536e49a6284973f1318",
+      "crates/incant_game_player/src/startup.rs": "d4723bbc4d1b07df9aa20b3935849e9800d507e94454eeae5da8b9f7fad65595",
+      "crates/incant_game_player/src/window/clock.rs": "f19acd30cfb0a599f487a6f5811f7fc400a7df5d9b8b647f919a38df359f3461",
+      "crates/incant_game_player/src/window/gamepad.rs": "c08863f2e1247989bd53b6c811baa4e6a00547c50bb5a503dda5209928796b8f",
+      "crates/incant_game_player/src/window/gamepad/tests.rs": "828113daf0fef2ec4db467055db976fb5736ad2fec61ef84f01a3660f315bd62",
+      "crates/incant_game_player/src/window/input.rs": "b897779e63c90bd6402c26101468c727a471aa39f049b205155b1aa352c7ad28",
+      "crates/incant_game_player/src/window/input/coordinate_tests.rs": "682bed941e66aef61bb057fabe1e08111a0f9a065a2abff06dcc2b0e1b8b7aa3",
+      "crates/incant_game_player/src/window/mod.rs": "3ffc566d819c5523f6f86544712ee8a53cf70d5f0f9981319859370b86561f53",
+      "crates/incant_game_player/src/window/probe.rs": "cb20fa208a0eaad956c94a64f9d7a2715e018604d1c2621b1e58745a205816c7",
+      "crates/incant_game_player/src/window/surface.rs": "334e5622619418ddc698161b92b6930075e534de771e7d44184192c2367b4505",
+      "crates/incant_game_player/tests/fixtures/unsupported-observation.json": "b796450da6ae24ec5d32682af86267272f9fbb9d508e1b6f4fbced8b36069688",
+      "crates/incant_game_player/tests/routing.rs": "45bef3a51c50ac8d03236461ab4ce8cde92dbbccab0687fe99146a0906d9a50a",
+      "crates/incant_game_runtime/Cargo.toml": "e678e45838d6475808aebf98307265fe6dd251316edd58b08535935745796e2d",
+      "crates/incant_game_runtime/examples/no_renderer_fixtures.rs": "a47c6d9b1d53b5fc66b7e533511a9f37b8e1db6485992da08c7b16ccfe42a9e9",
+      "crates/incant_game_runtime/src/core.rs": "0aad2fefc868473503e009ad215a997106c36aac6de95d71e431acda9fbecde4",
+      "crates/incant_game_runtime/src/hosted.rs": "1bda9ead25e6afc482d4a2b0d2eb24f7b98f3ed341e4cf411aa0e8bbf6b3dae7",
+      "crates/incant_game_runtime/src/lib.rs": "5722984028e6f8e7cfced44e07994403cd16970e46163e57a0648da0ab84cd11",
+      "crates/incant_game_runtime/src/offline.rs": "af67d4540ef05a770b2a8d7f4b5bdfa81607ad35e996b3281f1b4447c77094f3",
+      "crates/incant_game_runtime/tests/checkpoints.rs": "b0f77daf3577d4e9b6a07e4f432bcd6c6881cb092bde85e4ca49e09ff4656f48",
+      "crates/incant_game_runtime/tests/hosting.rs": "e88f76229841349415abbeb2c81c02db881a7626a1dc04e5c218962a079d6e96",
+      "crates/incant_game_runtime/tests/script_audio_controls.rs": "cdbb1c033af86c41f49283c9b8d3154c489646c2e7a3c7e54f68a6f24c5e16b9",
+      "crates/incant_game_runtime/tests/session.rs": "0a7039d9d4935a78edc234f405e774e29b07164b8f5c7a975640c2ceedd61737",
+      "crates/incant_game_runtime/tests/support/spatial.rs": "84674da6e34403873f9410c579f1602752e6d42ab172912744e22d5bf167b1f5",
+      "crates/incant_input/Cargo.toml": "e642b20236fceb732e03a59fdf95cfb14f68529a3e0b83b240b028ee87e9430f",
+      "crates/incant_input/examples/actions_bench.rs": "0754786e1c6de87b982afd232f8d7e59a3ec5e2054a0890f2c02916c71f129f4",
+      "crates/incant_input/src/actions.rs": "37105276f6143e0fd57124465440fb3c95f4fc25c7328e0deac29939e5013648",
+      "crates/incant_input/src/gamepad.rs": "d135f29279e20bb44c988b24418d867a3e95442b0e6c45c3c29e341b9c81014c",
+      "crates/incant_input/src/gestures.rs": "0542f895ca70ef7a66ad5d2b4d00fcec6788f0177d6a572f64ce82f8f6b2d572",
+      "crates/incant_input/src/lib.rs": "f1bef2d574a02d5d6a9ac1d0da4f649943fb3e4034cf310d0f974b8dad494e16",
+      "crates/incant_input/src/recording.rs": "6450d1313e42ea59df3e348056f484724c82148f921279e6710df411a3f9a22a",
+      "crates/incant_input/src/types.rs": "8b25d8b9b347ed601934683fc9b2abbd069295d0b3676d000eadd53e7d349cd1",
+      "crates/incant_input/tests/actions.rs": "f2bfe3e68198eac15807f413b4f4f45d94a443df06db81ce232e995d623efcf0",
+      "crates/incant_input/tests/devices.rs": "b59241fb2236e82b614cdc237bd2b2ec9bc34bde63b6fe9831f7a026399c9ef6",
+      "crates/incant_input/tests/gamepad_adapter.rs": "d99598b0bbe9ae2dbe1651416e53a9b600457db53d19a8b343d933e615dde4b8",
+      "crates/incant_input/tests/gestures.rs": "ee9e38d3fe6ee8b2fb1bbab17023d352e11662216ab30839a0277fe93618d305",
+      "crates/incant_input/tests/recording.rs": "6c8815039d947cfc46ab33b12cc2d86fb3740e151024daa42344fa4c0c22a854",
+      "crates/incant_localization/Cargo.toml": "4889f4620e0135701e5821ef1f938fda0cc34879b839d72e7ed1eeb856b18ca2",
+      "crates/incant_localization/examples/measure.rs": "94fe62e40368aa7f7ed5568a4cfa36fe5595591c926bd8781f05e35530883e3d",
+      "crates/incant_localization/src/catalog.rs": "87215bb1360e0dd506a83a3e3dcb47174863ca3ffe4c333d69de8c5a361a62fc",
+      "crates/incant_localization/src/contracts.rs": "6af8db6f9743d16198fcd10a260cbdbafc3666671e6845d3245848443a7a25ac",
+      "crates/incant_localization/src/exchange/mod.rs": "1ddac5389e6ccb066ff0c559db564229dd94fc7c775cb517f15f1cee2a9b2faf",
+      "crates/incant_localization/src/exchange/reader.rs": "733af9738e501e0b257589ea939960231e1143899612ee3beaf41b875a98c485",
+      "crates/incant_localization/src/format.rs": "a7caed0e2e003a4fb659f8f390b39b02eba8b8cc7499e477614581043b4f26de",
+      "crates/incant_localization/src/lib.rs": "b833b0d157939af6beed04ae650d58a51e1b0641a77333853b36e38ff0ad1767",
+      "crates/incant_localization/src/message.rs": "769bc8a971a06de023cb969a96749bcf916fb43690dbf324bdec83dfe8f9d983",
+      "crates/incant_localization/src/types.rs": "06d1eb78a69bb739bd8183bc7380b74bce2edcbf5e99a080bfcb729d6367a233",
+      "crates/incant_localization/tests/exchange.rs": "62dd76de48bf9118c4169c43e3ede8791b065b4424af0bdb1cd55d27cefb69c8",
+      "crates/incant_localization/tests/runtime.rs": "1f0ad48f638eb12492ca35804a1b5e2bf1b58fda8f31201867fd89050cfa98d1",
+      "crates/incant_nav/Cargo.toml": "14bc6900a1a881b287f3689a9ecf7fdcf3eb16d230fd67a5899403ef1bc4213f",
+      "crates/incant_nav/examples/budget.rs": "546fcb3e482632158e168743b7612ee50ca4449cf577ed7014ffdb25381d0a6e",
+      "crates/incant_nav/examples/steering_budget.rs": "9db5f2b5cb635b9b271c458aed56e0bd3398a93b884273fdea5cf898c8a9d5e1",
+      "crates/incant_nav/src/build.rs": "c16bd14b2691fbda111543f0b3b9ee43475dd34e0363c168c823bf504c28f4a3",
+      "crates/incant_nav/src/grid.rs": "39951ecb55b64890cb83958041c2557c12de1a56f377bd199875eac4f47d3b83",
+      "crates/incant_nav/src/lib.rs": "26ce1c22326c86d4b1c80c6daf951f97e06e1d0be64861051bf570ea83dc5f15",
+      "crates/incant_nav/src/linked_path.rs": "b947ef92cc476235f38db82be2184d9bc553d1cfeed095193e3851b6bcb6cecc",
+      "crates/incant_nav/src/links.rs": "9bb526d52d5506e55eea66951850c420101fbce0ac49a764807c62f29edcc282",
+      "crates/incant_nav/src/path.rs": "d7b20b13b97c2cd55ee870033bf0e8ab6ff04fa22c3bccbf06e14fb9fc820f9e",
+      "crates/incant_nav/src/resources.rs": "b08517d50e1d117c6a388d7b4654f36f80286194d7de69b96b62330d332f6b95",
+      "crates/incant_nav/src/search.rs": "69442fde72babf976a43930df4ef7fa75933b0c519e4254e37b46c08db388901",
+      "crates/incant_nav/src/shortcut.rs": "133bce59e9432f673bbc404784089d3643e189d79d8f6e1cf0248c4e39533c55",
+      "crates/incant_nav/src/steering.rs": "a0ee0bb268f09adea5d1108f5c5580b55ba25f604f1f19b62c3a43c48d45a5ef",
+      "crates/incant_nav/src/surface.rs": "5b973a6e4801a9f579d8eb7b39c7aa87d08a264eea698a3c1c519aa39500d4b2",
+      "crates/incant_nav/src/types.rs": "9649267706da15bf19f24e41c2c5b0db147b919cb2bbff23bef2b595283cca53",
+      "crates/incant_nav/tests/fixtures/plaza-walkers.json": "59d97b28d97c494d8ee0d2586187ef3e5dd0021502fe7dd2821b0d5f986f10c8",
+      "crates/incant_nav/tests/fixtures/precision-polygons.json": "ee4dee5a1c71ea5ab9f00f08c160321b06b497b332595d3e45ff4a50f9b75c7b",
+      "crates/incant_nav/tests/grid.rs": "9a47095fea39897269450a39ca866e6d7d8135cfc115689247348fa57883d03d",
+      "crates/incant_nav/tests/links.rs": "086d46e9771595bf8638d76860f3830e3e35ec497f7a9889f9349d06b80d99ef",
+      "crates/incant_nav/tests/navigation.rs": "049672d3eeab40ba73e79ba06c1e9029491d40c2e951342faa3a567f36cba090",
+      "crates/incant_nav/tests/rasterization.rs": "130c9c6aa8566b4c293f0e67e7badcddb356564a28d89ff73b531d4aced9d640",
+      "crates/incant_nav/tests/steering.rs": "ba523289b3fdb71581db9aae6abb87098981998e66ad482a082ae29799e11452",
+      "crates/incant_nav/tests/steering_plaza.rs": "73c3d5411f1df66e4de97c97091a32f96c73ef20bfe97126f7ff8b30454319a0",
+      "crates/incant_observe/Cargo.toml": "02f8f970a8f016148df8f32e60d7542a65112f51b507af359218e8526d5f37c2",
+      "crates/incant_observe/src/lib.rs": "3d87b82c98920b227cfc385cc23ecf0ddf9c1f6a2203dbc0f9c858a123cb2488",
+      "crates/incant_observe/src/tests.rs": "a3c05ea954a2f5576fb861aa47b69b6d2e9505b0be6e028412d53a52aa05cb81",
+      "crates/incant_physics_2d_runtime/Cargo.toml": "19f80020558bccfa3a890ffb97d0479a82f55a504af6fca689a848a5012b8c0b",
+      "crates/incant_physics_2d_runtime/src/config.rs": "7872f6c540dec7af30b703daa442c0940e6340e31edd28fc708ec02f7a277494",
+      "crates/incant_physics_2d_runtime/src/lib.rs": "2f0948f7cc93007327a07e4ffc0debd6ffd9f36052fcf70ca6e5d22d64114b13",
+      "crates/incant_physics_2d_runtime/src/query.rs": "3d0026bca040b22aacec283af9fa923c28ded1c0fdabf40652b5db0540d2a491",
+      "crates/incant_physics_2d_runtime/tests/behavior.rs": "b9bc3c1672bd670b9674a76cd3d0ededfd6a3de09e6a79216b2ae9fe4ac5b0d8",
+      "crates/incant_physics_runtime/Cargo.toml": "b46d383c71229ebfc5e5293cec8f710865a52bff011da621762ee34c45ca6c97",
+      "crates/incant_physics_runtime/src/character.rs": "a46c7ece3103ce7c8ddbd80d60b1668782028e93c626b655d6f4bab175672a92",
+      "crates/incant_physics_runtime/src/character_queries.rs": "c7548822eede48b93ab6e822e1da563f2c319a606a491f06159c61a95dd7e3bd",
+      "crates/incant_physics_runtime/src/lib.rs": "5c5a026f999e808a7902895172d083f1a6ffeffcc25c18edf3d8af7cd9611cad",
+      "crates/incant_physics_runtime/src/navigation.rs": "57157ad54bc96f51cd0965c78862f1119dd12ca04bb92d04ada21bc7a7e7b378",
+      "crates/incant_physics_runtime/src/queries.rs": "675914573c124551692b043dca98902c4efef98eda602b1023c1da3d032eafe6",
+      "crates/incant_physics_runtime/src/shapes.rs": "17fc238d7cbc9ab5ffc6eba0e6a59e55d8d29f1f1e29d587927a7f1ce2a3eb87",
+      "crates/incant_physics_runtime/tests/typed.rs": "99ccbb278d09d655e65c3123efd2c13e12cb112f77a10d666837aa2e9a71e2bb",
+      "crates/incant_render_data/Cargo.toml": "839b82b9dbf5d6694019998189dd9e546e932a44e53c7dead6c5c637ba28d3f9",
+      "crates/incant_render_data/src/flipbook.rs": "707365290f35db4245d9fb6d457370a1af7f117429a3c48130d4d3d2b1cbacf6",
+      "crates/incant_render_data/src/lib.rs": "8cf98a31524586c434f6e363132e792830d8732e1d0da89493a3e1447e714d3c",
+      "crates/incant_render_data/src/tilemap.rs": "023c5626764a046da7f071cc2f6b9250436c37d8a34a5dde02c6aa57c9a22b66",
+      "crates/incant_render_game/Cargo.toml": "7bf766846513af68f4530c8a59f6c48f6fd58fb92d1fc839a9ca845b14b58f9b",
+      "crates/incant_render_game/src/lib.rs": "1662d845c57cb560a3689faf11996c8993106a2dd13f8fa196a6058f96cd9c6e",
+      "crates/incant_render_game/tests/hosted.rs": "a35e387d451fd93d9cc88a4f1185920886ed91d346fca7bc13e66c7b8d69ae6c",
+      "crates/incant_render_native/Cargo.toml": "5567bed66d5ceddb99b6c7267baebad4dae741c77f3b1dac86757769a3094da7",
+      "crates/incant_render_native/src/animation.rs": "27e28c337e5a02dafdc84fdcde1645e0833ae3d2e9388f9c274bd6db19b21d9a",
+      "crates/incant_render_native/src/binding.rs": "384c8394edef09e9b1de5d2eae86a6ee019c19541adb218737d7638f4d43298f",
+      "crates/incant_render_native/src/lib.rs": "4e763e23de99f8ea28091ec70f6da56b0b139ae90c9fb9676c94ee81bb5ec860",
+      "crates/incant_render_native/src/tilemap.rs": "cb85ca7a988c2cd20ae6a594934a34d741cc23079b18c5970658d8fdf956c683",
+      "crates/incant_render_native/src/update.rs": "eac3ab0a54b9ccdea872c8164338b6fb29340880cf3baae21515a45bf39ccc44",
+      "crates/incant_render_native/tests/allocations.rs": "bca00f260a821d395cd63826f530c25cc767a8ce1fadcf82125609afcac06b41",
+      "crates/incant_render_native/tests/animation.rs": "3e10dfced3ab31bc1110661492860bc61d240772846fc154c7103f0c39d2bb71",
+      "crates/incant_render_native/tests/bindings.rs": "2382d85e6ce410323b276f071c66a1ddbf081cc535084596bfcf447c4640d23e",
+      "crates/incant_render_native/tests/common/allocations.rs": "fbc13b7916cd9165acb77eea2b9ba82ff3571204328976c7776b2da4958707ca",
+      "crates/incant_render_native/tests/common/mod.rs": "0b7176c461243572703e61c6b8024fbb0f009e058a89345c4adfc72317bb3f3f",
+      "crates/incant_render_native/tests/flipbook.rs": "c3168201cf7acae2d6037557b49f80c60ef1440808dd63f9388c46bcaa81c414",
+      "crates/incant_render_native/tests/retained.rs": "8c72d139ecd57f17dbf5fafc9bb3d4cbcdc10e300cf5dfcec2e069386e881948",
+      "crates/incant_render_native/tests/tilemaps.rs": "6a6dc966b9166adc2737117ec30ec74c2d3c08244aa1f49f540f03b07f50e629",
+      "crates/incant_runtime/Cargo.toml": "b21f3bd60eeb1046b969f3d85e6d606793521784d23c7a3ab507133af7456f50",
+      "crates/incant_runtime/examples/native_physics_2d.rs": "de5585f855c352b17b416ab52be21be11b7366d35c014a668af207848acdd469",
+      "crates/incant_runtime/examples/run_scene.rs": "ba5d462927f1b14d3e7dee114cf3f2b1a105e0cd33168369d3a16bce87843e5b",
+      "crates/incant_runtime/examples/save_world.rs": "7ffcbae5f2f92d9405d0f14512dbb42dd8dccb69f77820045c66726474a07ef3",
+      "crates/incant_runtime/src/animation.rs": "5ad665f1c7f58bdeb4fc42cc21fb4691c8d3e26735352814bd0d216692317aae",
+      "crates/incant_runtime/src/animation_binary.rs": "577ac43458cd28e36ef3c7244415b99127e59a80ded968444eb9acf6a964edea",
+      "crates/incant_runtime/src/audio.rs": "f0e4b40768a3b3aa4bef5e50d8e4dcb531225ff7937b0d9bc7b358a4ead9dc96",
+      "crates/incant_runtime/src/audio_binary.rs": "1121b4cc9151d929bb112f40625bb7620ac12fd9dda52eabe529ac5ca80d36ce",
+      "crates/incant_runtime/src/audio_controls.rs": "e166e61357bf60044728155041995400b18c3078fe794002ff8508ce03ca2eeb",
+      "crates/incant_runtime/src/binary.rs": "e03efa259039b123c00c66f05cfbcf2972b13b89c5a81cd28efdff65ad0d8420",
+      "crates/incant_runtime/src/columns.rs": "80a615d853fea52e86cc58e634dfad7b2e371d944f840b91ebc888fa23718c66",
+      "crates/incant_runtime/src/columns/tests.rs": "96e0caa0aace60e87095d3d22651aba5345db828d220b2dfc0bfb15f68405ad8",
+      "crates/incant_runtime/src/commands.rs": "1213194f4e605a4fb519e80cf3bdb09ae664a171851f0cf3ca43b9fea87bd28b",
+      "crates/incant_runtime/src/entity_identity.rs": "d6e19121b1fbe2b43f98a628a4b33af92b695c6d5cd74e897e342d351aa5badf",
+      "crates/incant_runtime/src/flipbook.rs": "f2e35fac0cbf51b5b06fabcf9e54643dbf4a51632a6bf607fdaddc144a3ea69c",
+      "crates/incant_runtime/src/flipbook_binary.rs": "9a85728fb0e86225a8c353e11423019bad78794c338606e23b924f4972eb8e6b",
+      "crates/incant_runtime/src/hierarchy.rs": "242b534ad778bf4a2bb3aa67db0a0e1f620566a6a15650abbfda9e61a24224bc",
+      "crates/incant_runtime/src/lib.rs": "91d96f68d0481c73c3e35e70d2d278e86e6e607d05b25db5a57fb0c84a8cd631",
+      "crates/incant_runtime/src/localization.rs": "fdbd95baaed96079a51966214fab6b3065b6de21155258f2423217674b6377da",
+      "crates/incant_runtime/src/localization_binary.rs": "993d3346ef394311fc9867ce26b23ccb4cdb64c34185a10b4776e050effaff5a",
+      "crates/incant_runtime/src/logging.rs": "cf79e3315433aa790fd7d7017f88c01839ce11c856d149f72a36f6e880436a73",
+      "crates/incant_runtime/src/navigation.rs": "b35cd40cc5992706c9326b0ab5bbc59f9b8e2364cbd6ce4b700c68ea458aca2f",
+      "crates/incant_runtime/src/navigation_binary.rs": "60e08eac361e4ce38e98216ceb41ec497cf8f16dc7eaf9eec2b67ace7407a887",
+      "crates/incant_runtime/src/navigation_runtime.rs": "b7cfced7c8bf91adabed5a02e6fe4c960849574bea2779c583e89fec60b00951",
+      "crates/incant_runtime/src/physics.rs": "ba1f98eddeef3becebe82831ea45cf6de4f7462e8e24ca422e4e68f7152a397f",
+      "crates/incant_runtime/src/physics_2d.rs": "3f3563e72e81d05a70d104291dddcc0d9e1355070ea8eb01f67581d319d8c3ac",
+      "crates/incant_runtime/src/physics_2d_binary.rs": "481bb0071e06690491d512c76cffde7efe85cc6bc4a87699fd0c4a155f865e2b",
+      "crates/incant_runtime/src/physics_binary.rs": "39b766313db1d0d0487e90e419cc777e18d7062a556b237608ed03c93c65e822",
+      "crates/incant_runtime/src/physics_queries.rs": "9785c4dd385a7dcf5fe3bf6b18837c5c692e96fc7135a655b40fbcf7786e38ea",
+      "crates/incant_runtime/src/save.rs": "c90cc58b805a245f0142dafc1600fe5ece95aeb5d206d4e9ad56e7171b7c0fd4",
+      "crates/incant_runtime/src/save/codec.rs": "90f87e85d59ceebd6fd6724a361dd8256bf73025781aee556aa4a0f375f91fb3",
+      "crates/incant_runtime/src/scene.rs": "40e68401bf803b58e9ef549d1174cc8297f8b7e16503a307d3fd69be99f2e998",
+      "crates/incant_runtime/src/spatial.rs": "75d25aee4e4f63c01bcfa667631c3e11ff37502e4f1749404e0476b9fd8784eb",
+      "crates/incant_runtime/src/spatial_binary.rs": "38c28299f46b2cbe0c0f9d9fd879c5e9cde579e0f0211755b7b7e162c740874f",
+      "crates/incant_runtime/src/spatial_commands.rs": "c1a003b8460d3667cdfcad95a639bc7a5bea8887b11ceffee2b9ff4e0cafe087",
+      "crates/incant_runtime/src/spatial_view.rs": "5372a987c98530f3c9a3c39d465ac28903c599c09243b1e2f662e5d17893dcfa",
+      "crates/incant_runtime/src/sprite.rs": "f00cd559c6b538d904eae5d3551102da27711556b51f3b59b6e9b9b9169ac249",
+      "crates/incant_runtime/src/sprite_binary.rs": "e211217db25b5f07223782cf722646bf474f23ac93b39809817d73af01bc5c65",
+      "crates/incant_runtime/src/tilemap.rs": "7768b07a216dfa7cd3bb7da8f028152361341d87f81e2579af9e208c3922f2bc",
+      "crates/incant_runtime/src/tilemap_binary.rs": "aa5dba50e3b7d34d58eab0726039162f15670e44a9c7ace8b05c3e1fad696f0b",
+      "crates/incant_runtime/src/world.rs": "86c7e32959bc05b0f3f7065e02f4fe296378f8f0f3befceaa9f5874b85230828",
+      "crates/incant_runtime/src/world_identity.rs": "7ffc1f183c00110cc06f48f678b07f220d6bad73ed3e62690db142c0df23a809",
+      "crates/incant_runtime/tests/animation.rs": "67cf87ba41b7b21d64ef1e3d9794505e0b23f6281ed96acdd886aff910bcec06",
+      "crates/incant_runtime/tests/audio.rs": "0de8804b3dab49a345b4dc20d9d7390dd4d9ce3e15072fe6baed600c0bc0f3be",
+      "crates/incant_runtime/tests/audio_controls.rs": "7943b7f0bb9732950bceb2e2ecdf8e5f6b43a898f0150ebc64f96bf054d78e66",
+      "crates/incant_runtime/tests/columns.rs": "8c86e7033b7b5c7ca9171a5a2587dfbff088d5b6bbd151d49bb03da7a3fc82c3",
+      "crates/incant_runtime/tests/fixtures/tilemap-compat/provenance.json": "8f3a1d2eaa59278a6894dd36bf3769ff4634699fb9440cd1dc0e0a020c7a7972",
+      "crates/incant_runtime/tests/fixtures/tilemap-compat/v1.scene": "a7049be6f2504e41ef032c58c0a38c78a6af2495743a108b907c05618a6f9738",
+      "crates/incant_runtime/tests/fixtures/tilemap-compat/v2.scene": "9d19069851a7dcd53e7aef07d1c526f20b04a5e7ad87789f3d5c9fbe46e74c52",
+      "crates/incant_runtime/tests/fixtures/tilemap-compat/v3.scene": "9e9ebff3b967224910102f46be35125ecd03076e70069a2c9f8c92a803e39be8",
+      "crates/incant_runtime/tests/fixtures/tilemap-compat/v4.scene": "39e14dce85d6985aca7ab3b0cd32388cb085192cddc6763d71a0b114e80ecda6",
+      "crates/incant_runtime/tests/fixtures/tilemap-compat/v5.scene": "2e627d640c7df026c162a2b2bbfbf831c6a2abb9e3c81b2ffd1b6ccfd7105772",
+      "crates/incant_runtime/tests/flipbook.rs": "e7439bb21b27554cfb607b793548751738448e7e10c5c0b348577114718b7665",
+      "crates/incant_runtime/tests/flipbook_snapshot.rs": "b9d91d714934bbd64cad546b11c6649404c76f8a226f76339761fdc3e7454945",
+      "crates/incant_runtime/tests/localization.rs": "56c54ef5dc97f6bcd39f477ce85ff8afee6f072106592970fbf6051c9149e6ac",
+      "crates/incant_runtime/tests/navigation.rs": "739e5958c4d0ecd2d36e5dded065280d8189d4be63cb37d40d6048d74e8c63df",
+      "crates/incant_runtime/tests/navigation_queries.rs": "2aeb7fc5935112eb931f54eb92f907a69d51dd9e98f051cfc55bcfe92b5cf621",
+      "crates/incant_runtime/tests/numeric_boundaries.rs": "2d246f6b4bc3a0bb28e0dbeae072b2ad892235aa5f0a30ebb8b462c48d13741f",
+      "crates/incant_runtime/tests/physics.rs": "42a2bf32c0b68df22cd3355439db5b2536bdfdd86c30c015dc3a951505527c4a",
+      "crates/incant_runtime/tests/physics_2d.rs": "5dfcfb61b246067134d596745f22bfc00acb59c5752779c0e1f9facd7774935c",
+      "crates/incant_runtime/tests/physics_queries_2d.rs": "485103902b8c6c07646707c748e937ae5d4e18b60a5895a1cfc4e4b72d23ba8f",
+      "crates/incant_runtime/tests/queries.rs": "eff4d711acf31e5e30560c4821dbf21354c0ce4a7d47e1fa9f01fb1ab72b1b0e",
+      "crates/incant_runtime/tests/retained_saves.rs": "2021c62b492b433f19afbfaf31456ff66fc7d88d6a9360668c93f3f2e8f8f127",
+      "crates/incant_runtime/tests/saves.rs": "619d27c8b9cdca1f20d3a4167ec154248478be79365420852bb8de9f400eb615",
+      "crates/incant_runtime/tests/scenes.rs": "3067950b0d483ff697353135b4d8a339c58626b6a283863067247a26d9af5152",
+      "crates/incant_runtime/tests/spatial.rs": "29dfc872e41f690acd955f3e0ef3557efe35b750ab878ebfcb6ad4428977e193",
+      "crates/incant_runtime/tests/sprites.rs": "c98212457bd9be306161b6b2b9c71cb04d044ab1573675579973f573f777f066",
+      "crates/incant_runtime/tests/structural.rs": "ac002e67cbee6ea7523b30ec94959d5dc2a4e168853bbbe66aa697afcc03cd9b",
+      "crates/incant_runtime/tests/support/audio_controls.rs": "50d8c367463a8a200c4dceafb9583d1dcf393549397e08c07ef9281b36ec77b7",
+      "crates/incant_runtime/tests/support/flipbooks.rs": "ae25e2df26e6ea5f0364012aa052d0f8a2693abace1bc495a9575d8c564ca25f",
+      "crates/incant_runtime/tests/support/localization.rs": "d3de0223b6a6149d0e684b055a89138b8ce3fa081ca9a12269e4da6afa2ec6f7",
+      "crates/incant_runtime/tests/support/navigation_queries.rs": "356343d04043ba422d5be5849e6ba8e2ed3aa0323ed083444a14d52a7011dfb9",
+      "crates/incant_runtime/tests/support/physics_queries_2d.rs": "8fd47a88c8c0b8b114afe11adfb9ff2490fdf3c226bd08cde2c3ab08a5352f77",
+      "crates/incant_runtime/tests/tilemaps.rs": "5f74ab8ec57d6adca352785a55f887c104192d3a126f47df5f6834e5e21dc805",
+      "crates/incant_script/Cargo.toml": "e0b50cf5a2f29d9deb2054b50bc239d80aa237890c2a913bb0ba0d86ca7b49d6",
+      "crates/incant_script/build.rs": "854e92d50dfdb0cb571004b7042dd8386d8ec21c9165476192474bbe1d416cc7",
+      "crates/incant_script/examples/native_bulk.rs": "96ab4c5a1679c7849c81b74241d4c8b6c5fed180f0ddb4282b119c9ea00218b3",
+      "crates/incant_script/src/animation_commands.rs": "7c48f470958236341f9e5633008be3830e1a2791a3ed2d1a28da1233f46bbeeb",
+      "crates/incant_script/src/animations.rs": "47aef2c9ef635252039d7bb3de376b76ac44daa5418074072aca70e62cc48284",
+      "crates/incant_script/src/artifact.rs": "1ebcd08372283253ef643cb65ef26ea8a5a6d57f7e4a612323efa449626c014b",
+      "crates/incant_script/src/audio_commands.rs": "195c9168520c83db7488ae082791c839177530629d5c05a9d082062b4955c63d",
+      "crates/incant_script/src/bindings.rs": "590769b2bd154f1bc0edc4e93fbb27a812b9446d3a1c3878ad77cf2549a418e7",
+      "crates/incant_script/src/bindings_embed.rs": "d3d3e1f52fb8422eb48ea1f4981ffcf82689d5723cc2f971f867bc6a11f1dd1e",
+      "crates/incant_script/src/budget.rs": "53619776fa5bfd2367b9aa2eac7fb9d028f17bb1bd9463a2e475cbe7ac4311e8",
+      "crates/incant_script/src/character_tests.rs": "80109972579d5299be80a794c055d2ba67a4a8cbfcb14675f6772373e3ea8a51",
+      "crates/incant_script/src/checkpoint/codec.rs": "ddc1322207964e9dedaed0b541f689c2022c16c32c24650452823d116c6a78ca",
+      "crates/incant_script/src/checkpoint/mod.rs": "c24d42025a75c1596190275650e420354594f72b0c2805fddfa3eac5d9ab3609",
+      "crates/incant_script/src/checkpoint/pending.rs": "d986c2ba3c4c035f8d1e103300f3741d1f6cb2a95a439ef1386e2fdbd05b41d0",
+      "crates/incant_script/src/checkpoint/tests.rs": "625dd65b5b06c6ea3aa2fd2a475eca085ba336bf77c7b3db0f7363bc120915ee",
+      "crates/incant_script/src/checkpoint/tests/animation.rs": "6d6ebeed6330a712e12b826f069a9564bda38c2d3ab06c52c1dc33a02814cf38",
+      "crates/incant_script/src/commands.rs": "33deede4e8d30a4c36d9af18cbf06c030f2c489f531bc56499cc3d03a79f16e1",
+      "crates/incant_script/src/compiled.rs": "9357e2c8ad48ea609a81328d04d358285d8d643095b00490c039c35e39def853",
+      "crates/incant_script/src/compiler.rs": "02801aed60f414e04cc5acfad06c9a285c29f22776c3cf5cfed8479763bf4ba7",
+      "crates/incant_script/src/diagnostics.rs": "48264dd946e35b1fda082a892fd890bf05f7060b4b85c85dc703cf693d3b791e",
+      "crates/incant_script/src/flipbooks.rs": "f1a94d552fd70efea0b4fa1447d4800f795b9a17233f046ef555d9dd6607818b",
+      "crates/incant_script/src/harden.js": "7924408ee14592d4ec675b3e3aba9ec488778e9f7abddae2774135c0f3f98aa1",
+      "crates/incant_script/src/input.rs": "8fe6884e365b41f930073d2efa28badcaf9e975b7743585389437b6fff5c32f8",
+      "crates/incant_script/src/input_tests.rs": "5ae6cf7c5d4c0841ede5245c57fa5aa17ae5a1a9888ab1703813abfb80d591b6",
+      "crates/incant_script/src/lib.rs": "fb64dc986364d676fdd58b8d1e60270b5f26d60ff10ec888804c04dc31524373",
+      "crates/incant_script/src/loan.rs": "2ae499a4215bda9bd3192d4bad0bbcf1de292163558e9c8d7c6dc7068716a2ae",
+      "crates/incant_script/src/localization_tests.rs": "f02b8a25369e238f070e5f2efdc5f5b9fc74bab2dd3b11e4e113b25ebf991a33",
+      "crates/incant_script/src/localization_values.rs": "0984422caf51f87967ee17b4c34e936e303db924c13bcca239c896b65d5e7768",
+      "crates/incant_script/src/log_tests.rs": "0d2cc53188097a722396ef6c38602b3979c2641694b078a6d7d24ef8ab13ff60",
+      "crates/incant_script/src/logging.rs": "0f6f407e68d61776e1d9d7204ba7352c48ca3dbf1ff46a33af6b9d64ab623608",
+      "crates/incant_script/src/navigation_tests.rs": "e83ac8dced60545c0dd0d1cb3d1f15fe1cc24e0f12459e96bbcfc8b7903e5001",
+      "crates/incant_script/src/navigation_values.rs": "b394e97a7b08aaf473ae76f2546eddfcc4d60aec30b36898dff264fa983004e7",
+      "crates/incant_script/src/persistence.rs": "03f2e613f28538bf89e42bee7349fcb46475a9c8cb0a2dc934b4eba0aa6c5252",
+      "crates/incant_script/src/persistence/tests.rs": "6117d0cae13807aa7a3d28ee1b7c6ed8f672bca16b8385dbbf6766a59a966ec4",
+      "crates/incant_script/src/persistence/value.rs": "cb3eed3acbaa2b28962fdc9800d120a51125218c49246edc77c5274cfc413b2a",
+      "crates/incant_script/src/program.rs": "e2c8ba901a59605fe8bec25a3b86a48f6942468fec55cbcae37a392f95fd28b5",
+      "crates/incant_script/src/queries.rs": "27e076082c6d13fe7f36813157afebbd25d982a60a333316711afb632141a4fa",
+      "crates/incant_script/src/query_2d_tests.rs": "8b1987afa22dd765b177bbe5886bfdf1720907d351b96748955550d15c6d570c",
+      "crates/incant_script/src/query_tests.rs": "3443b8e7cc8e41a977a7ad9454070162afadf1f1cb341ece182c9760fea7472b",
+      "crates/incant_script/src/query_values.rs": "83c5c9e08b92772d38ae8b19d604141618c4d294d90448a3c8697dd1cfb47e48",
+      "crates/incant_script/src/query_values_2d.rs": "5251ed6014200eafaa9216088af50338efb78dbc37f01bba08a9723428e888a5",
+      "crates/incant_script/src/schedule.rs": "f74707a71f120d7e1c4ab8aaebc7d86bd91af1e4c3ae07ae9d56be65b0d1621f",
+      "crates/incant_script/src/session.rs": "33d524e17071c151d53b251c744bc16aa14cb47feb7f1fce103624161a46819c",
+      "crates/incant_script/src/session_tests.rs": "eda572588a775cf0894c4b259e48b8c0cd5e80e8877d3b20b73f49b26c5df1cb",
+      "crates/incant_script/src/structural_tests.rs": "4674fea64ac14ced822aa210e08f80ad928b915d7ba3a070595fa0b0691ffff5",
+      "crates/incant_script/src/synchronous.rs": "d95cbe3a1ab2ff75731f85d4c4be74c7456bb32315f244ee314f06019c3a6c69",
+      "crates/incant_script/src/tests.rs": "e298f443a29a59dd30c3bc8ecc9ec8e9497ceba8f1c413873901463656948b50",
+      "crates/incant_script/src/timer_tests.rs": "ea0723a703ed129848ae4d4d11e9aa5ecf0ecbc77e1afbc3b13d05c719bfce76",
+      "crates/incant_script/src/timers.rs": "f89600ff440aea682795dff941c9be43473931ca42c708e70634dd7705ed6e29",
+      "crates/incant_script/tests/animations.rs": "9307e400e508eba79bbff0fad206f2ebbf3c968cf90c35ea9a0f0b87ad4b7201",
+      "crates/incant_script/tests/audio_controls.rs": "ffc1a8cd2c64cc7964cd31ee26348ed9b3bb86a69fe1fec6ce613aa78df2d94c",
+      "crates/incant_script/tests/fixtures/animation.cjs": "25a5eac29b9815df82dc7fd3b5f01d4810a319aeee0233dfa3966b616d1dda25",
+      "crates/incant_script/tests/fixtures/animation.ts": "1ff6949a56adce06c13f76a01fe46655adc26665831aa2244558c562e6b7600e",
+      "crates/incant_script/tests/flipbooks.rs": "6362581f8e0ec77e5956c92bbabd70c47c242ef49724389b8244ec14cda34ac4",
+      "crates/incant_script/tests/project_bindings.rs": "01df6e09858c36ab27c0693051d20914cc6263d6d500e76cabc47b007e4824b0",
+      "crates/incant_script/tests/spatial.rs": "fd4f31f03d78587f4667cc6c65168b2f030a98a225292d44f69d4cca79e21b21",
+      "crates/incant_source/Cargo.toml": "57c99f7fc98c55774d99a445fa682b7247227faaa4cf1b0234dc3d571e850091",
+      "crates/incant_source/src/lib.rs": "bd2833a16587ecd7bd2d4fe8a85f96d2893debd802b7eb48259c0ca7ecff4d79",
+      "crates/incant_source/src/tests.rs": "2574209856ed37af7506623f0a62702ac971248901a9fcadab28affe4043c3a3",
+      "crates/incant_source/src/unix.rs": "7570590d16586b8ddfd77d1064427583e0c8b40fa043fc41708794418d5bcd9c",
+      "crates/incant_source/src/unsupported.rs": "c0321a36b1b76778d9520c2a6dd6c8a926a1255f074f80a86e4cbd342da1a134",
+      "crates/incant_source/src/windows.rs": "02f9e67c1f52ed0f8998f88ddcdbbc0733b61233057a114ad1afa1b44cd482d7",
+      "crates/incant_types/Cargo.toml": "ae094bd227e3e585de808ad18da99b02cc7bc8282720cffeb6d3a8b3275c5e9c",
+      "crates/incant_types/src/animation.rs": "f138746f557d3c4bd08a7d255bb6a0471b801df13a1363fcf7948c776fed0070",
+      "crates/incant_types/src/audio.rs": "31a41005ed056423ce3c7d3882429550d6383a58a1ea5799e698c25d150a3feb",
+      "crates/incant_types/src/camera.rs": "28eaace0a774685b9bc72962480520a8646fca4310b5eb1d3ac995444dfb0de2",
+      "crates/incant_types/src/collider_shapes.rs": "dc2efc4d76e8671b03bc38eb92e8db0161f4613417772644028e0b4ecb958979",
+      "crates/incant_types/src/lib.rs": "5d8945b502b46b21b9392f4391ffb2b4ea008dd63f9147939c73dfe6f15e6e6d",
+      "crates/incant_types/src/lights.rs": "c69e1a4f9b682f1f5bf267d57502387b9f8e6b4a42c32c752c0176f43c9ac935",
+      "crates/incant_types/src/physics.rs": "ec1dd966a85676197f7283133be1b274666135a8cfe6403a477a130a6a43769d",
+      "crates/incant_types/src/physics_2d.rs": "d96a77c53ca3cf06d2082034fcdcf39ec81f51286c31564d0254e6f2becc3ef4",
+      "crates/incant_types/src/physics_2d_validation.rs": "122b6ae481c8defdc188ac649f88ece4b047a8dc8a4b301931559cfc21c24881",
+      "crates/incant_types/src/physics_validation.rs": "c8a2e2e8b77020ea2ae39d047a9be13081003ef6cf236ca292a52aed4f4a3a98",
+      "crates/incant_types/src/render.rs": "e02d42ddcdbcdeb607c4ae307f30b02805adae2b68cd1fadee2eaed603f3d881",
+      "crates/incant_types/src/transform.rs": "b22948c2013800b8b76d1d18693e7a406358e2d554aad01a1e6d1f87adccf08c",
+      "crates/incant_types/src/visual_asset.rs": "6dae6f3e5a2f98dd208616f01b1a84dfcc5588cebda819b07c52421e24341791",
+      "Cargo.toml": "7599f2f1c4bbfad1ebc8e0a10a467d1a7df0930bdade7962321b065f98911c3c",
+      "rust-toolchain.toml": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124",
+      "tools/export_native.py": "834fba307d79efe44fb4d87ff7a12fa1a556784c223d6250b465c80d0fa3d42b",
+      "tools/native_package.py": "a6ce11f1eeb62edc39b74846aa0341ec7f17689018f31114075d720e693f24a5",
+      "tools/native_process.py": "493c6e70e9045bf3b6e128b4392f47b7cac8a475969d715f26cd1eb7d9777ec3",
+      "tools/shipping_symbols.py": "de7d4b0c5523a7b2d281ce8713acb899997726c1144199e7ea8d7bd8ea3dc856",
+      "tools/build_native_script.mjs": "543e3b8f9a20ac0d84f3466c9176dbd638a2f9c3dced367f48d6cb75a8f5849b"
+    },
+    "resolved_package_records_unchanged": true,
+    "renderer_and_shader_cooker_absent": true,
+    "script_compatibility_id": {
+      "d3c31888831988e7ee51c8ace921384e8e527394": "c9b625cbf7c6813366257dcefd8c1109d7397c5df1439e8444a188d8f68f60c6",
+      "990ccef2e69bf7c4dea427379b70856c2af6f566": "b556b5e55e75c3643580277305c056f45f0473821e0d9f9f2f80a4eda57d60e2"
+    },
+    "changed_script_identity_inputs": [
+      "Cargo.lock"
+    ],
+    "decision": "Repeat fresh public animation export/recook on this union: whole Cargo.lock affects conservative bytecode identity despite unchanged player compile dependency closure. Earlier proof remains valid historical evidence only.",
+    "tree_receipt_sha256": "c6b11c57d4016721d0126eeb78877d3b68651dc7054e4f286b238ef0fc384353"
+  },
+  "fresh_export_runs": [
+    {
+      "name": "headless-build",
+      "command": [
+        "./tools/cargo",
+        "build",
+        "--profile",
+        "ci",
+        "--locked",
+        "-j",
+        "2",
+        "-p",
+        "incant_headless"
+      ],
+      "exit_code": 0,
+      "seconds": 61.047834157943726,
+      "log": "/tmp/incant-animation-main110-checks/headless-build.log",
+      "sha256": "de6b63e2b4b29e11f5ef0a4925f416dc452d92aa926c5668393fdb7c848c781f"
+    },
+    {
+      "name": "fresh-export-proof",
+      "command": [
+        "python3",
+        "tools/probes/native-animation.py",
+        "/tmp/incant-native-animation-main110-proof",
+        "--binary",
+        "/tmp/incant-animation-integration-target/ci/incant_headless"
+      ],
+      "exit_code": 0,
+      "seconds": 292.7953248023987,
+      "log": "/tmp/incant-animation-main110-checks/fresh-export-proof.log",
+      "sha256": "9a5c443b669d9d61928a38a69326b7376824b0bec965b07e13ac15845f882796"
+    }
+  ],
+  "fresh_export": {
+    "source": "990ccef2e69bf7c4dea427379b70856c2af6f566",
+    "source_unchanged": true,
+    "headless_sha256": "60f49f09dcf88e7d96e2858e6bbc39c9ce416e004e9de523db2472b43299964a",
+    "result_path": "/tmp/incant-native-animation-main110-proof/result.json",
+    "result_sha256": "2c11f4534db48eefceb179cf40e7410f4fc18108e520c9cb950673a7fd23f2c5",
+    "result": {
+      "passed": true,
+      "public_authoring": {
+        "command_bus_only": true,
+        "undo_redo_and_reopen": true,
+        "authoring_unchanged_by_play": true,
+        "review_fixture_retained": false,
+        "ids": {
+          "script": "00000000000000000000000001",
+          "entity": "00000000000000000000000002",
+          "camera": "00000000000000000000000003",
+          "table": "00000000000000000000000005",
+          "scene": "01M4PT3370QBKKQ5CWY1W6062T",
+          "asset": "01M4PT33A4VGPC2BHAJAHFJK74"
+        },
+        "tick_rate": 60,
+        "project_sha256": "93c6032b86df073d9550dd1a6ef06c7e16f0cf1a106fcd0badfb5abbd6db0c9e",
+        "journal_sha256": "f2ffc559eff8134c910ecf8fb1dd0472088d5b7f6aac3b8ac2ebd68caad2b071",
+        "source_sha256": "3ccd28212d689c51df07a19e95043cb2cd005aa5522fa9c44a0643f2bb15c508",
+        "gltf_sha256": "7d86c22ec2b7efb9a6302eb5e39384fb02384cecc1c72989cdc442b3a00ce1b7",
+        "buffer_sha256": "2f712c8c77c452501530084781af183c7e176f46281ca7f1e8273a2b01c8c236",
+        "binary_sha256": "60f49f09dcf88e7d96e2858e6bbc39c9ce416e004e9de523db2472b43299964a",
+        "native_play": {
+          "gameplay_images_available": false,
+          "observations": {
+            "checks": [
+              {
+                "actual": [
+                  0.016666666666666666,
+                  1.0,
+                  1.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000002",
+                  "property": "translation",
+                  "tolerance": 1e-08,
+                  "type": "vector",
+                  "value": [
+                    0.016666666666666666,
+                    1.0,
+                    1.0
+                  ]
+                },
+                "name": "animation-1",
+                "passed": true,
+                "tick": 1
+              },
+              {
+                "actual": [
+                  0.016666666666666666,
+                  0.0,
+                  2.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000002",
+                  "property": "translation",
+                  "tolerance": 1e-08,
+                  "type": "vector",
+                  "value": [
+                    0.016666666666666666,
+                    0.0,
+                    2.0
+                  ]
+                },
+                "name": "animation-2",
+                "passed": true,
+                "tick": 2
+              },
+              {
+                "actual": [
+                  0.5,
+                  2.0,
+                  3.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000002",
+                  "property": "translation",
+                  "tolerance": 1e-08,
+                  "type": "vector",
+                  "value": [
+                    0.5,
+                    2.0,
+                    3.0
+                  ]
+                },
+                "name": "animation-3",
+                "passed": true,
+                "tick": 3
+              },
+              {
+                "actual": [
+                  0.5333333333333333,
+                  3.0,
+                  5.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000002",
+                  "property": "translation",
+                  "tolerance": 1e-08,
+                  "type": "vector",
+                  "value": [
+                    0.5333333333333333,
+                    3.0,
+                    5.0
+                  ]
+                },
+                "name": "animation-4",
+                "passed": true,
+                "tick": 4
+              },
+              {
+                "actual": [
+                  1.7833333333333334,
+                  3.0,
+                  9.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000002",
+                  "property": "translation",
+                  "tolerance": 1e-08,
+                  "type": "vector",
+                  "value": [
+                    1.7833333333333334,
+                    3.0,
+                    9.0
+                  ]
+                },
+                "name": "animation-7",
+                "passed": true,
+                "tick": 7
+              },
+              {
+                "actual": [
+                  1.933333333333334,
+                  3.0,
+                  17.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000002",
+                  "property": "translation",
+                  "tolerance": 1e-08,
+                  "type": "vector",
+                  "value": [
+                    1.9333333333333333,
+                    3.0,
+                    17.0
+                  ]
+                },
+                "name": "animation-13",
+                "passed": true,
+                "tick": 13
+              },
+              {
+                "actual": [
+                  0.003333333333333334,
+                  1.0,
+                  25.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000002",
+                  "property": "translation",
+                  "tolerance": 1e-08,
+                  "type": "vector",
+                  "value": [
+                    0.003333333333333334,
+                    1.0,
+                    25.0
+                  ]
+                },
+                "name": "animation-19",
+                "passed": true,
+                "tick": 19
+              },
+              {
+                "actual": [
+                  0.0,
+                  4.0,
+                  26.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000002",
+                  "property": "translation",
+                  "tolerance": 1e-08,
+                  "type": "vector",
+                  "value": [
+                    0.0,
+                    4.0,
+                    26.0
+                  ]
+                },
+                "name": "animation-20",
+                "passed": true,
+                "tick": 20
+              },
+              {
+                "actual": [
+                  0.0,
+                  0.0,
+                  30.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000002",
+                  "property": "translation",
+                  "tolerance": 1e-08,
+                  "type": "vector",
+                  "value": [
+                    0.0,
+                    0.0,
+                    30.0
+                  ]
+                },
+                "name": "animation-23",
+                "passed": true,
+                "tick": 23
+              },
+              {
+                "actual": [
+                  0.0,
+                  1.0,
+                  33.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000002",
+                  "property": "translation",
+                  "tolerance": 1e-08,
+                  "type": "vector",
+                  "value": [
+                    0.0,
+                    1.0,
+                    33.0
+                  ]
+                },
+                "name": "animation-25",
+                "passed": true,
+                "tick": 25
+              },
+              {
+                "actual": [
+                  0.06666666666666667,
+                  1.0,
+                  35.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000002",
+                  "property": "translation",
+                  "tolerance": 1e-08,
+                  "type": "vector",
+                  "value": [
+                    0.06666666666666667,
+                    1.0,
+                    35.0
+                  ]
+                },
+                "name": "animation-27",
+                "passed": true,
+                "tick": 27
+              },
+              {
+                "actual": [
+                  2.0,
+                  4.0,
+                  42.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000002",
+                  "property": "translation",
+                  "tolerance": 1e-08,
+                  "type": "vector",
+                  "value": [
+                    2.0,
+                    4.0,
+                    42.0
+                  ]
+                },
+                "name": "animation-32",
+                "passed": true,
+                "tick": 32
+              },
+              {
+                "actual": [
+                  0.016666666666666607,
+                  3.0,
+                  47.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000002",
+                  "property": "translation",
+                  "tolerance": 1e-08,
+                  "type": "vector",
+                  "value": [
+                    0.016666666666666666,
+                    3.0,
+                    47.0
+                  ]
+                },
+                "name": "animation-36",
+                "passed": true,
+                "tick": 36
+              },
+              {
+                "actual": [
+                  0.2375,
+                  3.0,
+                  54.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000002",
+                  "property": "translation",
+                  "tolerance": 1e-08,
+                  "type": "vector",
+                  "value": [
+                    0.2375,
+                    3.0,
+                    54.0
+                  ]
+                },
+                "name": "animation-41",
+                "passed": true,
+                "tick": 41
+              },
+              {
+                "actual": [
+                  1.0,
+                  2.0,
+                  87.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000002",
+                  "property": "translation",
+                  "tolerance": 1e-08,
+                  "type": "vector",
+                  "value": [
+                    1.0,
+                    2.0,
+                    87.0
+                  ]
+                },
+                "name": "animation-66",
+                "passed": true,
+                "tick": 66
+              },
+              {
+                "actual": [
+                  1.0166666666666666,
+                  1.0,
+                  94.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000002",
+                  "property": "translation",
+                  "tolerance": 1e-08,
+                  "type": "vector",
+                  "value": [
+                    1.0166666666666666,
+                    1.0,
+                    94.0
+                  ]
+                },
+                "name": "animation-71",
+                "passed": true,
+                "tick": 71
+              },
+              {
+                "actual": [
+                  2.0,
+                  4.0,
+                  177.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000002",
+                  "property": "translation",
+                  "tolerance": 1e-08,
+                  "type": "vector",
+                  "value": [
+                    2.0,
+                    4.0,
+                    177.0
+                  ]
+                },
+                "name": "animation-133",
+                "passed": true,
+                "tick": 133
+              },
+              {
+                "actual": [
+                  0.0,
+                  0.0,
+                  181.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000002",
+                  "property": "translation",
+                  "tolerance": 1e-08,
+                  "type": "vector",
+                  "value": [
+                    0.0,
+                    0.0,
+                    181.0
+                  ]
+                },
+                "name": "animation-136",
+                "passed": true,
+                "tick": 136
+              },
+              {
+                "actual": [
+                  1.9166666666666665,
+                  1.0,
+                  183.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000002",
+                  "property": "translation",
+                  "tolerance": 1e-08,
+                  "type": "vector",
+                  "value": [
+                    1.9166666666666665,
+                    1.0,
+                    183.0
+                  ]
+                },
+                "name": "animation-138",
+                "passed": true,
+                "tick": 138
+              },
+              {
+                "actual": [
+                  2.0,
+                  4.0,
+                  193.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000002",
+                  "property": "translation",
+                  "tolerance": 1e-08,
+                  "type": "vector",
+                  "value": [
+                    2.0,
+                    4.0,
+                    193.0
+                  ]
+                },
+                "name": "animation-145",
+                "passed": true,
+                "tick": 145
+              },
+              {
+                "actual": [
+                  0.49166666666666664,
+                  3.0,
+                  199.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000002",
+                  "property": "translation",
+                  "tolerance": 1e-08,
+                  "type": "vector",
+                  "value": [
+                    0.49166666666666664,
+                    3.0,
+                    199.0
+                  ]
+                },
+                "name": "animation-150",
+                "passed": true,
+                "tick": 150
+              },
+              {
+                "actual": [
+                  0.4333333333333331,
+                  2.0,
+                  210.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000002",
+                  "property": "translation",
+                  "tolerance": 1e-08,
+                  "type": "vector",
+                  "value": [
+                    0.43333333333333335,
+                    2.0,
+                    210.0
+                  ]
+                },
+                "name": "animation-158",
+                "passed": true,
+                "tick": 158
+              },
+              {
+                "actual": [
+                  0.4333333333333331,
+                  2.0,
+                  213.0
+                ],
+                "expect": {
+                  "entity": "00000000000000000000000002",
+                  "property": "translation",
+                  "tolerance": 1e-08,
+                  "type": "vector",
+                  "value": [
+                    0.43333333333333335,
+                    2.0,
+                    213.0
+                  ]
+                },
+                "name": "animation-160",
+                "passed": true,
+                "tick": 160
+              }
+            ],
+            "entities": {
+              "00000000000000000000000002": {
+                "parent": null,
+                "rotation": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ],
+                "translation": [
+                  0.4333333333333331,
+                  2.0,
+                  213.0
+                ],
+                "velocity": null,
+                "world_transform": [
+                  [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                  ],
+                  [
+                    0.4333333333333331,
+                    2.0,
+                    213.0,
+                    1.0
+                  ]
+                ]
+              }
+            },
+            "passed": true,
+            "tick": 160,
+            "tick_rate": 60
+          },
+          "passed": true,
+          "runtime": "native",
+          "state": {
+            "cpu_render_input": true,
+            "entities": {},
+            "entity_count": 2,
+            "frames": 128000,
+            "gpu_submitted": false,
+            "input": {
+              "actions": {},
+              "connected": [],
+              "disconnected": [],
+              "focused": true,
+              "gamepads": {},
+              "gestures": [],
+              "keyboard": {
+                "held": [],
+                "pressed": [],
+                "released": []
+              },
+              "mouse": {
+                "buttons": {
+                  "held": [],
+                  "pressed": [],
+                  "released": []
+                },
+                "motion": [
+                  0.0,
+                  0.0
+                ],
+                "position": null,
+                "wheel_lines": [
+                  0.0,
+                  0.0
+                ],
+                "wheel_pixels": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "touch_changes": [],
+              "touches": {}
+            },
+            "logs": {
+              "dropped": 0,
+              "entries": [
+                {
+                  "level": "info",
+                  "message": "1:0:0.016666667:1:1",
+                  "tick": 1
+                },
+                {
+                  "level": "info",
+                  "message": "2:0:0.016666667:1:0",
+                  "tick": 2
+                },
+                {
+                  "level": "info",
+                  "message": "3:1:0.500000000:2:2",
+                  "tick": 3
+                },
+                {
+                  "level": "info",
+                  "message": "4:1:0.533333333:2:3",
+                  "tick": 4
+                },
+                {
+                  "level": "info",
+                  "message": "5:1:0.566666667:2:3",
+                  "tick": 5
+                },
+                {
+                  "level": "info",
+                  "message": "6:1:0.600000000:2:3",
+                  "tick": 6
+                },
+                {
+                  "level": "info",
+                  "message": "7:1:1.783333333:2:3",
+                  "tick": 7
+                },
+                {
+                  "level": "info",
+                  "message": "8:1:1.816666667:2:3",
+                  "tick": 8
+                },
+                {
+                  "level": "info",
+                  "message": "9:1:1.850000000:2:3",
+                  "tick": 9
+                },
+                {
+                  "level": "info",
+                  "message": "10:1:1.883333333:2:3",
+                  "tick": 10
+                },
+                {
+                  "level": "info",
+                  "message": "11:1:1.916666667:2:3",
+                  "tick": 11
+                },
+                {
+                  "level": "info",
+                  "message": "12:1:1.950000000:2:3",
+                  "tick": 12
+                },
+                {
+                  "level": "info",
+                  "message": "13:1:1.933333333:-1:3",
+                  "tick": 13
+                },
+                {
+                  "level": "info",
+                  "message": "14:1:1.916666667:-1:3",
+                  "tick": 14
+                },
+                {
+                  "level": "info",
+                  "message": "15:1:1.900000000:-1:3",
+                  "tick": 15
+                },
+                {
+                  "level": "info",
+                  "message": "16:1:1.883333333:-1:3",
+                  "tick": 16
+                },
+                {
+                  "level": "info",
+                  "message": "17:1:1.866666667:-1:3",
+                  "tick": 17
+                },
+                {
+                  "level": "info",
+                  "message": "18:1:1.850000000:-1:3",
+                  "tick": 18
+                },
+                {
+                  "level": "info",
+                  "message": "19:1:0.003333333:-1:1",
+                  "tick": 19
+                },
+                {
+                  "level": "info",
+                  "message": "20:1:0.000000000:-1:4",
+                  "tick": 20
+                },
+                {
+                  "level": "info",
+                  "message": "21:1:0.000000000:-1:4",
+                  "tick": 21
+                },
+                {
+                  "level": "info",
+                  "message": "22:1:0.000000000:-1:4",
+                  "tick": 22
+                },
+                {
+                  "level": "info",
+                  "message": "23:-1:0.000000000:-1:0",
+                  "tick": 23
+                },
+                {
+                  "level": "info",
+                  "message": "24:-1:0.000000000:-1:0",
+                  "tick": 24
+                },
+                {
+                  "level": "info",
+                  "message": "25:-1:0.000000000:-1:1",
+                  "tick": 25
+                },
+                {
+                  "level": "info",
+                  "message": "26:-1:0.000000000:-1:1",
+                  "tick": 26
+                },
+                {
+                  "level": "info",
+                  "message": "27:0:0.066666667:1:1",
+                  "tick": 27
+                },
+                {
+                  "level": "info",
+                  "message": "28:0:0.083333333:1:1",
+                  "tick": 28
+                },
+                {
+                  "level": "info",
+                  "message": "29:0:0.100000000:1:1",
+                  "tick": 29
+                },
+                {
+                  "level": "info",
+                  "message": "30:0:0.116666667:1:1",
+                  "tick": 30
+                },
+                {
+                  "level": "info",
+                  "message": "31:0:1.996666667:1:1",
+                  "tick": 31
+                },
+                {
+                  "level": "info",
+                  "message": "32:0:2.000000000:1:4",
+                  "tick": 32
+                },
+                {
+                  "level": "info",
+                  "message": "33:0:2.000000000:1:4",
+                  "tick": 33
+                },
+                {
+                  "level": "info",
+                  "message": "34:0:2.000000000:1:4",
+                  "tick": 34
+                },
+                {
+                  "level": "info",
+                  "message": "35:0:2.000000000:1:4",
+                  "tick": 35
+                },
+                {
+                  "level": "info",
+                  "message": "36:0:0.016666667:1:3",
+                  "tick": 36
+                },
+                {
+                  "level": "info",
+                  "message": "37:0:0.033333333:1:3",
+                  "tick": 37
+                },
+                {
+                  "level": "info",
+                  "message": "38:0:0.050000000:1:3",
+                  "tick": 38
+                },
+                {
+                  "level": "info",
+                  "message": "39:0:0.066666667:1:3",
+                  "tick": 39
+                },
+                {
+                  "level": "info",
+                  "message": "40:0:0.083333333:1:3",
+                  "tick": 40
+                },
+                {
+                  "level": "info",
+                  "message": "41:0:0.237500000:-0.75:3",
+                  "tick": 41
+                },
+                {
+                  "level": "info",
+                  "message": "42:0:0.225000000:-0.75:3",
+                  "tick": 42
+                },
+                {
+                  "level": "info",
+                  "message": "43:0:0.212500000:-0.75:3",
+                  "tick": 43
+                },
+                {
+                  "level": "info",
+                  "message": "44:0:0.200000000:-0.75:3",
+                  "tick": 44
+                },
+                {
+                  "level": "info",
+                  "message": "45:0:0.187500000:-0.75:3",
+                  "tick": 45
+                },
+                {
+                  "level": "info",
+                  "message": "46:0:0.175000000:-0.75:3",
+                  "tick": 46
+                },
+                {
+                  "level": "info",
+                  "message": "47:0:0.162500000:-0.75:3",
+                  "tick": 47
+                },
+                {
+                  "level": "info",
+                  "message": "48:0:0.150000000:-0.75:3",
+                  "tick": 48
+                },
+                {
+                  "level": "info",
+                  "message": "49:0:0.137500000:-0.75:3",
+                  "tick": 49
+                },
+                {
+                  "level": "info",
+                  "message": "50:0:0.125000000:-0.75:3",
+                  "tick": 50
+                },
+                {
+                  "level": "info",
+                  "message": "51:0:0.112500000:-0.75:3",
+                  "tick": 51
+                },
+                {
+                  "level": "info",
+                  "message": "52:0:0.100000000:-0.75:3",
+                  "tick": 52
+                },
+                {
+                  "level": "info",
+                  "message": "53:0:0.087500000:-0.75:3",
+                  "tick": 53
+                },
+                {
+                  "level": "info",
+                  "message": "54:0:0.075000000:-0.75:3",
+                  "tick": 54
+                },
+                {
+                  "level": "info",
+                  "message": "55:0:0.062500000:-0.75:3",
+                  "tick": 55
+                },
+                {
+                  "level": "info",
+                  "message": "56:0:0.050000000:-0.75:3",
+                  "tick": 56
+                },
+                {
+                  "level": "info",
+                  "message": "57:0:0.037500000:-0.75:3",
+                  "tick": 57
+                },
+                {
+                  "level": "info",
+                  "message": "58:0:0.025000000:-0.75:3",
+                  "tick": 58
+                },
+                {
+                  "level": "info",
+                  "message": "59:0:0.012500000:-0.75:3",
+                  "tick": 59
+                },
+                {
+                  "level": "info",
+                  "message": "60:0:0.000000000:-0.75:3",
+                  "tick": 60
+                },
+                {
+                  "level": "info",
+                  "message": "61:0:1.987500000:-0.75:3",
+                  "tick": 61
+                },
+                {
+                  "level": "info",
+                  "message": "62:0:1.975000000:-0.75:3",
+                  "tick": 62
+                },
+                {
+                  "level": "info",
+                  "message": "63:0:1.962500000:-0.75:3",
+                  "tick": 63
+                },
+                {
+                  "level": "info",
+                  "message": "64:0:1.950000000:-0.75:3",
+                  "tick": 64
+                },
+                {
+                  "level": "info",
+                  "message": "65:0:1.937500000:-0.75:3",
+                  "tick": 65
+                },
+                {
+                  "level": "info",
+                  "message": "66:1:1.000000000:-0.75:2",
+                  "tick": 66
+                },
+                {
+                  "level": "info",
+                  "message": "67:1:1.000000000:-0.75:2",
+                  "tick": 67
+                },
+                {
+                  "level": "info",
+                  "message": "68:1:1.000000000:-0.75:2",
+                  "tick": 68
+                },
+                {
+                  "level": "info",
+                  "message": "69:1:1.000000000:-0.75:2",
+                  "tick": 69
+                },
+                {
+                  "level": "info",
+                  "message": "70:1:1.000000000:-0.75:2",
+                  "tick": 70
+                },
+                {
+                  "level": "info",
+                  "message": "71:1:1.016666667:1:1",
+                  "tick": 71
+                },
+                {
+                  "level": "info",
+                  "message": "72:1:1.033333333:1:1",
+                  "tick": 72
+                },
+                {
+                  "level": "info",
+                  "message": "73:1:1.050000000:1:1",
+                  "tick": 73
+                },
+                {
+                  "level": "info",
+                  "message": "74:1:1.066666667:1:1",
+                  "tick": 74
+                },
+                {
+                  "level": "info",
+                  "message": "75:1:1.083333333:1:1",
+                  "tick": 75
+                },
+                {
+                  "level": "info",
+                  "message": "76:1:1.100000000:1:1",
+                  "tick": 76
+                },
+                {
+                  "level": "info",
+                  "message": "77:1:1.116666667:1:1",
+                  "tick": 77
+                },
+                {
+                  "level": "info",
+                  "message": "78:1:1.133333333:1:1",
+                  "tick": 78
+                },
+                {
+                  "level": "info",
+                  "message": "79:1:1.150000000:1:1",
+                  "tick": 79
+                },
+                {
+                  "level": "info",
+                  "message": "80:1:1.166666667:1:1",
+                  "tick": 80
+                },
+                {
+                  "level": "info",
+                  "message": "81:1:1.183333333:1:1",
+                  "tick": 81
+                },
+                {
+                  "level": "info",
+                  "message": "82:1:1.200000000:1:1",
+                  "tick": 82
+                },
+                {
+                  "level": "info",
+                  "message": "83:1:1.216666667:1:1",
+                  "tick": 83
+                },
+                {
+                  "level": "info",
+                  "message": "84:1:1.233333333:1:1",
+                  "tick": 84
+                },
+                {
+                  "level": "info",
+                  "message": "85:1:1.250000000:1:1",
+                  "tick": 85
+                },
+                {
+                  "level": "info",
+                  "message": "86:1:1.266666667:1:1",
+                  "tick": 86
+                },
+                {
+                  "level": "info",
+                  "message": "87:1:1.283333333:1:1",
+                  "tick": 87
+                },
+                {
+                  "level": "info",
+                  "message": "88:1:1.300000000:1:1",
+                  "tick": 88
+                },
+                {
+                  "level": "info",
+                  "message": "89:1:1.316666667:1:1",
+                  "tick": 89
+                },
+                {
+                  "level": "info",
+                  "message": "90:1:1.333333333:1:1",
+                  "tick": 90
+                },
+                {
+                  "level": "info",
+                  "message": "91:1:1.350000000:1:1",
+                  "tick": 91
+                },
+                {
+                  "level": "info",
+                  "message": "92:1:1.366666667:1:1",
+                  "tick": 92
+                },
+                {
+                  "level": "info",
+                  "message": "93:1:1.383333333:1:1",
+                  "tick": 93
+                },
+                {
+                  "level": "info",
+                  "message": "94:1:1.400000000:1:1",
+                  "tick": 94
+                },
+                {
+                  "level": "info",
+                  "message": "95:1:1.416666667:1:1",
+                  "tick": 95
+                },
+                {
+                  "level": "info",
+                  "message": "96:1:1.433333333:1:1",
+                  "tick": 96
+                },
+                {
+                  "level": "info",
+                  "message": "97:1:1.450000000:1:1",
+                  "tick": 97
+                },
+                {
+                  "level": "info",
+                  "message": "98:1:1.466666667:1:1",
+                  "tick": 98
+                },
+                {
+                  "level": "info",
+                  "message": "99:1:1.483333333:1:1",
+                  "tick": 99
+                },
+                {
+                  "level": "info",
+                  "message": "100:1:1.500000000:1:1",
+                  "tick": 100
+                },
+                {
+                  "level": "info",
+                  "message": "101:1:1.516666667:1:1",
+                  "tick": 101
+                },
+                {
+                  "level": "info",
+                  "message": "102:1:1.533333333:1:1",
+                  "tick": 102
+                },
+                {
+                  "level": "info",
+                  "message": "103:1:1.550000000:1:1",
+                  "tick": 103
+                },
+                {
+                  "level": "info",
+                  "message": "104:1:1.566666667:1:1",
+                  "tick": 104
+                },
+                {
+                  "level": "info",
+                  "message": "105:1:1.583333333:1:1",
+                  "tick": 105
+                },
+                {
+                  "level": "info",
+                  "message": "106:1:1.600000000:1:1",
+                  "tick": 106
+                },
+                {
+                  "level": "info",
+                  "message": "107:1:1.616666667:1:1",
+                  "tick": 107
+                },
+                {
+                  "level": "info",
+                  "message": "108:1:1.633333333:1:1",
+                  "tick": 108
+                },
+                {
+                  "level": "info",
+                  "message": "109:1:1.650000000:1:1",
+                  "tick": 109
+                },
+                {
+                  "level": "info",
+                  "message": "110:1:1.666666667:1:1",
+                  "tick": 110
+                },
+                {
+                  "level": "info",
+                  "message": "111:1:1.683333333:1:1",
+                  "tick": 111
+                },
+                {
+                  "level": "info",
+                  "message": "112:1:1.700000000:1:1",
+                  "tick": 112
+                },
+                {
+                  "level": "info",
+                  "message": "113:1:1.716666667:1:1",
+                  "tick": 113
+                },
+                {
+                  "level": "info",
+                  "message": "114:1:1.733333333:1:1",
+                  "tick": 114
+                },
+                {
+                  "level": "info",
+                  "message": "115:1:1.750000000:1:1",
+                  "tick": 115
+                },
+                {
+                  "level": "info",
+                  "message": "116:1:1.766666667:1:1",
+                  "tick": 116
+                },
+                {
+                  "level": "info",
+                  "message": "117:1:1.783333333:1:1",
+                  "tick": 117
+                },
+                {
+                  "level": "info",
+                  "message": "118:1:1.800000000:1:1",
+                  "tick": 118
+                },
+                {
+                  "level": "info",
+                  "message": "119:1:1.816666667:1:1",
+                  "tick": 119
+                },
+                {
+                  "level": "info",
+                  "message": "120:1:1.833333333:1:1",
+                  "tick": 120
+                },
+                {
+                  "level": "info",
+                  "message": "121:1:1.850000000:1:1",
+                  "tick": 121
+                },
+                {
+                  "level": "info",
+                  "message": "122:1:1.866666667:1:1",
+                  "tick": 122
+                },
+                {
+                  "level": "info",
+                  "message": "123:1:1.883333333:1:1",
+                  "tick": 123
+                },
+                {
+                  "level": "info",
+                  "message": "124:1:1.900000000:1:1",
+                  "tick": 124
+                },
+                {
+                  "level": "info",
+                  "message": "125:1:1.916666667:1:1",
+                  "tick": 125
+                },
+                {
+                  "level": "info",
+                  "message": "126:1:1.933333333:1:1",
+                  "tick": 126
+                },
+                {
+                  "level": "info",
+                  "message": "127:1:1.950000000:1:1",
+                  "tick": 127
+                },
+                {
+                  "level": "info",
+                  "message": "128:1:1.966666667:1:1",
+                  "tick": 128
+                },
+                {
+                  "level": "info",
+                  "message": "129:1:1.983333333:1:1",
+                  "tick": 129
+                },
+                {
+                  "level": "info",
+                  "message": "130:1:2.000000000:1:1",
+                  "tick": 130
+                },
+                {
+                  "level": "info",
+                  "message": "131:1:2.000000000:1:4",
+                  "tick": 131
+                },
+                {
+                  "level": "info",
+                  "message": "132:1:2.000000000:1:4",
+                  "tick": 132
+                },
+                {
+                  "level": "info",
+                  "message": "133:1:2.000000000:1:4",
+                  "tick": 133
+                },
+                {
+                  "level": "info",
+                  "message": "134:1:2.000000000:1:4",
+                  "tick": 134
+                },
+                {
+                  "level": "info",
+                  "message": "135:1:2.000000000:1:4",
+                  "tick": 135
+                },
+                {
+                  "level": "info",
+                  "message": "136:-1:0.000000000:1:0",
+                  "tick": 136
+                },
+                {
+                  "level": "info",
+                  "message": "137:-1:0.000000000:1:0",
+                  "tick": 137
+                },
+                {
+                  "level": "info",
+                  "message": "138:0:1.916666667:1:1",
+                  "tick": 138
+                },
+                {
+                  "level": "info",
+                  "message": "139:0:1.933333333:1:1",
+                  "tick": 139
+                },
+                {
+                  "level": "info",
+                  "message": "140:0:1.950000000:1:1",
+                  "tick": 140
+                },
+                {
+                  "level": "info",
+                  "message": "141:0:1.966666667:1:1",
+                  "tick": 141
+                },
+                {
+                  "level": "info",
+                  "message": "142:0:1.983333333:1:1",
+                  "tick": 142
+                },
+                {
+                  "level": "info",
+                  "message": "143:0:2.000000000:1:1",
+                  "tick": 143
+                },
+                {
+                  "level": "info",
+                  "message": "144:0:2.000000000:1:4",
+                  "tick": 144
+                },
+                {
+                  "level": "info",
+                  "message": "145:0:2.000000000:1:4",
+                  "tick": 145
+                },
+                {
+                  "level": "info",
+                  "message": "146:0:2.000000000:1:4",
+                  "tick": 146
+                },
+                {
+                  "level": "info",
+                  "message": "147:0:2.000000000:1:4",
+                  "tick": 147
+                },
+                {
+                  "level": "info",
+                  "message": "148:0:2.000000000:1:4",
+                  "tick": 148
+                },
+                {
+                  "level": "info",
+                  "message": "149:0:2.000000000:1:4",
+                  "tick": 149
+                },
+                {
+                  "level": "info",
+                  "message": "150:0:0.491666667:-0.5:3",
+                  "tick": 150
+                },
+                {
+                  "level": "info",
+                  "message": "151:0:0.483333333:-0.5:3",
+                  "tick": 151
+                },
+                {
+                  "level": "info",
+                  "message": "152:0:0.475000000:-0.5:3",
+                  "tick": 152
+                },
+                {
+                  "level": "info",
+                  "message": "153:0:0.466666667:-0.5:3",
+                  "tick": 153
+                },
+                {
+                  "level": "info",
+                  "message": "154:0:0.458333333:-0.5:3",
+                  "tick": 154
+                },
+                {
+                  "level": "info",
+                  "message": "155:0:0.450000000:-0.5:3",
+                  "tick": 155
+                },
+                {
+                  "level": "info",
+                  "message": "156:0:0.441666667:-0.5:3",
+                  "tick": 156
+                },
+                {
+                  "level": "info",
+                  "message": "157:0:0.433333333:-0.5:3",
+                  "tick": 157
+                },
+                {
+                  "level": "info",
+                  "message": "158:0:0.433333333:-0.5:2",
+                  "tick": 158
+                },
+                {
+                  "level": "info",
+                  "message": "159:0:0.433333333:-0.5:2",
+                  "tick": 159
+                },
+                {
+                  "level": "info",
+                  "message": "160:0:0.433333333:-0.5:2",
+                  "tick": 160
+                }
+              ]
+            },
+            "playing": true,
+            "runtime": "native",
+            "scene": "01M4PT3370QBKKQ5CWY1W6062T",
+            "script_source_parsing": true,
+            "script_source_sha256": "d4300bca06a854f49765678d9f266f9a699a8259f8f8f4cdbc16118be97aa786",
+            "started_revision": 4,
+            "tick": 160,
+            "tick_rate": 60
+          }
+        },
+        "queried_translation": [
+          0.4333333333333331,
+          2.0,
+          213.0
+        ]
+      },
+      "fresh_source_free_runs": 3,
+      "ticks": 160,
+      "numeric_cases": 23,
+      "checkpoint_continuation": true,
+      "checkpoint_sha256": "64a76fddc5de6d5d43cc86c3ab6e6e0e2d5416e06ee51fe314d1619bedbceb98",
+      "pcm_sha256": "7b331c02e313c7599d5a90212e17e6d3cb729bd2e1c9b873c302a63c95a2f9bf",
+      "source_deleted": true,
+      "private_build_deleted": true,
+      "player_sha256": "07bf8028643e34be20c5164ba10e31b888a22078785c7d89d2a3c744a04575f1",
+      "target": "aarch64-apple-darwin",
+      "refusal_controls": [
+        "corrupt checkpoint",
+        "wrong observation with withheld save/PCM"
+      ],
+      "limitations": [
+        "Local CPU functional proof; no GPU/window/device/performance/visual or phase gate claim"
+      ]
+    }
+  },
+  "process_receipts": {
+    "baseline": {
+      "returncode": 0,
+      "path": "/tmp/incant-native-animation-main110-proof/baseline-receipt.json",
+      "sha256": "73ef4c178bb4a532b920077826c0a8d2fd2755098e1982e21a923fcef9125e88"
+    },
+    "repeat-0": {
+      "returncode": 0,
+      "path": "/tmp/incant-native-animation-main110-proof/repeat-0-receipt.json",
+      "sha256": "73ef4c178bb4a532b920077826c0a8d2fd2755098e1982e21a923fcef9125e88"
+    },
+    "repeat-1": {
+      "returncode": 0,
+      "path": "/tmp/incant-native-animation-main110-proof/repeat-1-receipt.json",
+      "sha256": "73ef4c178bb4a532b920077826c0a8d2fd2755098e1982e21a923fcef9125e88"
+    },
+    "first": {
+      "returncode": 0,
+      "path": "/tmp/incant-native-animation-main110-proof/first-receipt.json",
+      "sha256": "8af5aa632032f974ef5da155b5a520f0acc336122dfdfef08ca6e83557923068"
+    },
+    "continued": {
+      "returncode": 0,
+      "path": "/tmp/incant-native-animation-main110-proof/continued-receipt.json",
+      "sha256": "1de23d89c0a10a00e3c0c6e68f855104791ce08035388023dd9073ea143b3d9c"
+    },
+    "corrupt": {
+      "returncode": 1,
+      "path": "/tmp/incant-native-animation-main110-proof/corrupt-receipt.json",
+      "sha256": "09ab4fd0ebbb0e11fdd554291513357a0187d3c36876c175019e89011573b7f8"
+    },
+    "wrong-observation": {
+      "returncode": 1,
+      "path": "/tmp/incant-native-animation-main110-proof/wrong-observation-receipt.json",
+      "sha256": "516b09b622389bb9a3089af70e0c4d3456f23befc29784f2cd53232b507769de"
+    }
+  },
+  "native_appearance": "0052 pending; no new native/GPU appearance claim on this integration source. Existing component numerical receipts remain scoped to their frozen sources.",
+  "limitations": [
+    "Cooked shader flags stay default-off.",
+    "Wasm animation controls/dispatch, blend trees, state machines, IK and root motion are not in this slice.",
+    "No phone, performance, complete-save or phase-gate approval.",
+    "Prior d3c shipping proof retained historically; this new cook binds the changed Cargo.lock script compatibility identity."
+  ]
+}

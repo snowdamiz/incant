@@ -16,12 +16,24 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Durable budget lock release — correction validated locally
+
+Checkpoint7 exposed Busy when reopening a completed ledger. A private lock guard
+now explicitly releases ownership before descriptor close; two deterministic
+shared-description regressions fail old source and pass fixed. All 64 agent
+tests and Clippy pass, retaining live exclusion and conservative reservations.
+Exact hosted scheduling cause and the next full candidate remain unverified.
+[Evidence](docs/spikes/ledger-explicit-release.md).
+
 ## Release checkpoint6 correction
 
-Frozen PR #111 selects main110 and remains unpromoted. Three native physics jobs
+Failed checkpoint6 selected main110 and was never promoted. Three native physics jobs
 exposed a stale isolated probe lock edge; the reviewed one-edge correction and
 required-dependency guard pass local locked Cargo/Clippy and tooling checks.
-Actual hosted confirmation is pending the next deliberate candidate refresh.
+The fixes are merged in PR #112; checkpoint7 now verifies frozen repaired
+main113 through the same 23 required contexts in PR #111. Checkpoint7 finished
+with 22 successful contexts and one macOS ledger failure; it is not promoted.
+PR #115 repairs that failure locally, pending the next full candidate.
 The independent fresh observation-routing correction restores the precise
 pre-startup refusal while preserving absolute checkpoint-resume bounds; its
 unchanged process regression, 36 scoped tests and Clippy pass.
@@ -29,7 +41,8 @@ unchanged process regression, 36 scoped tests and Clippy pass.
 [routing evidence](docs/spikes/checkpoint6-player-routing.md).
 The separate Windows budget-test correction closes the journal owner before
 independent reads, then verifies recovered state. Seven local tests and Clippy
-pass; actual Windows confirmation remains pending.
+pass; PR #113 merged the fixture correction. Checkpoint7 Windows desktop and
+Wasm conformance both pass.
 [Journal test evidence](docs/spikes/checkpoint6-budget-journal-tests.md).
 
 ## Current milestone
@@ -44,18 +57,50 @@ exported-player checkpoints, packaged-font text shaping, and the browser rendere
 compile repair are merged into main, with skeletal asset foundations and font
 import/cooking added in PRs #107–108. The actual native editor Play/chat/budget
 review completed one real account-backed turn, Undo and reopen with retained
-login and usage. Both follow-up UI fixes passed focused native rechecking.
-Parallel work connects native animation clocks, scripting and rendering, and
-checks cooked shaders. Complete game UI/text input, remaining SDK/render features,
-the Core Sample and reference-device measurements still prevent a Phase 1
-completion claim. The native editor integration is merged in PR #109 and opt-in cooked shaders in
-PR #110. Native animation integration remains local pending its focused native
-review correction; full release checkpoint6 failures are being repaired.
+login and usage. Both follow-up UI fixes passed focused native rechecking; PR #109
+merged this editor/agent/budget integration into main.
+
+Skeletal animation merged in PR #116: authored clip metadata, native
+clocks, atomic TypeScript controls, retained deformation and save continuation
+are implemented locally. The combined runtime/cook/render suite passes 397 CPU
+tests; a separate frozen renderer passes all 70 numerical Metal tests. Independent
+review found two save-version admission defects, now corrected with actual world
+and script-session continuation regressions. The integrated editor/runtime/script
+suite passes 357 CPU tests, Clippy and a fresh native build with the current
+production UI. The final main110 union passes 519 ordinary tests, 57 cooker/cooked-geometry CPU
+tests (overlapping scope), Clippy and a fresh source-free export proof with exact
+replay/checkpoint continuation and refusal controls. Claude0052 passed native playback/transport/resize/authoring checks, then found
+the nullable clip field was unsupported in the Inspector. A bounded bridge
+correction and focused Claude0053 native recheck now pass. The main114 fresh
+export repeats exact source-free continuation after the atlas lockfile change;
+main115 adds only the reviewed authoring ledger repair with 64 agent tests/Clippy.
+Two adjacent Runtime focus/transient-layout observations remain scoped followups. [Integration evidence](docs/spikes/native-animation-integration.md).
+
+Opt-in cooked output/diagnostic/shadow shaders merged in PR #110 after scoped
+Metal numerical and Claude appearance acceptance; both features stay off.
+Runtime glyph atlases proceed independently. Advanced
+rendering, animation blending/state machines/IK/root motion, complete game UI/text
+input, remaining SDK capabilities, and the Core Sample/2D sample with specified
+device performance checks still prevent a Phase 1 completion claim. The feature queue is clear after repairs #112–113; animation is next, with
+reviewed font atlas and Wasm animation parity queued separately.
 
 Progress reports are scheduled approximately every 30 minutes while the goal is
 active. Report merged work separately from local checks and unmet exit gates.
 The project is still early relative to the complete Engine 1.0 and Driftwake
 scope; no defensible percentage or completion date follows from the PR count.
+
+## Runtime font atlas — integrated CPU foundation
+
+A retained CPU alpha atlas now rasterizes actual packaged TrueType glyphs with
+content-bound keys, stable placements, explicit reset/invalidation and bounded
+outline/mask admission. Latin, Arabic, Hebrew and a real CJK subset pass numerical
+coverage tests, including a cache-deleted cooked-font reader route. Scoped 31
+tests, Clippy, wasm32 compilation and lean runtime graph checks pass on the
+main113 integration. Renderer
+upload/draw consumption, widgets/input/IME, color/CFF support, Claude appearance
+acceptance and device evidence remain; this does not complete Game UI.
+[Scope and evidence](docs/spikes/native-font-atlas.md).
+
 
 ## Opt-in cooked output, diagnostic and shadow shaders — scoped Metal acceptance
 
@@ -201,6 +246,10 @@ source/build-deleted processes plus a corruption refusal pass. Whole checkpoint
 bytes match uninterrupted execution. Module globals/closures remain explicitly
 ephemeral and physical input restarts neutral. Physics/audio/static continuation
 and platform durability remain unsupported; this does not complete Phase1 saves. [Contract and evidence](docs/spikes/native-session-checkpoints.md).
+Animation-bearing world-save v4 now passes the same ordinary-load boundary,
+including nondefault locale restoration and exact script-state/timer continuation;
+legacy and wrong-binding refusals stay atomic.
+[Correction evidence](docs/spikes/evidence/native-animation-checkpoint-compatibility.json).
 
 ## Native game and exported-player checkpoints — locally verified
 
@@ -658,6 +707,20 @@ changing its tested runtime/compiler/ABI inputs. Integrated verification include
 536 UI tests and 17 Node tests. The fresh bound-script embedding proof passed all16 copied-player processes after removing source/build storage. [Integrated evidence](docs/spikes/native-authored-sdk-integration.md).
 Actual main83 is now integrated without a tree change; the authored candidate is ready for direct-main publication.
 
+## Native skeletal model consumer — numerical GPU verified, appearance pending
+
+The corrected glTF skeletal foundation is preserved in actual main107. Native
+clock samples now bind to exact sealed clip-duration tables; retained CPU skinning
+feeds the canonical material/shadow vertex path with independent live/staging
+buffers. Source/cache-deleted clocks/extraction, rollback, normal/tangent basis,
+uniform reflection and mixed-sign refusal have CPU controls. The affected suite
+passes 155 tests, all-target Clippy and runtime dependency checks. All 70 affected
+GPU tests pass on Apple M5 Pro/Metal, including independent pose, single-sided
+reflection and shadow oracles. Claude appearance acceptance and the complete
+authoring/export/native-Play union remain pending.
+Blend/state/IK/root motion, GPU skinning and device budgets remain.
+[Scope/evidence](docs/spikes/native-animation-rendering.md).
+
 GameSession/exported-player checkpoint integration: reviewed source `0d841fcd` is preserved unchanged in main103 union `4661e254`; 34 integrated CPU tests and optional-GPU all-target Clippy pass. Original311-test/five-success/nine-refusal shipping evidence remains applicable; full-save limits are unchanged. See [integration evidence](docs/spikes/evidence/native-game-checkpoints-main103.json).
 
 ## Native Wasm localization integration
@@ -675,10 +738,30 @@ tests, Clippy, standalone wasm32 and runtime dependency checks, preserving all
 The bounded glTF skin/TRS import, INCMOD04 cooked reader and retained CPU sampler
 are implemented with reviewed clip-only root validation; see
 [scope and evidence](docs/spikes/gltf-skeletal-animation.md). Static03 compatibility
-is preserved. Current static asset/render/navigation consumers explicitly refuse
-animated models. Native scene/GPU/SDK playback, blend/state/IK/root-motion and
+is preserved. At that foundation merge, static consumers explicitly refused
+animated models; the local native consumer integration is described above.
+Navigation still refuses deformed geometry. Blend/state/IK/root-motion and
 rendered acceptance remain outstanding; this does not complete Phase 1 animation.
 
 Skeletal foundation main106 union passes 90 integrated CPU tests, Clippy, audio-only/wasm32 compilation and dependency checks, with reviewed source unchanged. [Integration evidence](docs/spikes/evidence/gltf-skeletal-main106.json).
 
 Packaged-font backend/CLI import main107 integration passes affected CPU tests, Clippy, font/default-reader, wasm32 and consumer checks while preserving skeletal registration. Editor font import form and rendering remain unfinished. [Evidence](docs/spikes/evidence/packaged-font-assets-main107.json).
+Native TypeScript animation snapshots and atomic playback controls are implemented
+against the retained native clock. Actual QuickJS/NativeSession, multi-instance
+TypeScript cook, rollback and memory-bound tests pass; see
+[scope and evidence](docs/spikes/native-animation-script.md). Wasm control parity,
+rendered acceptance and the remaining animation systems are still outstanding.
+
+The public authored animation/source-free CPU export proof passes 23 numerical
+checks over 160 ticks, three identical fresh shipping replays and byte-identical
+41+119 checkpoint continuation including state/timers/locale/logs/PCM. Private
+source/build storage is removed; refusal controls withhold save and PCM. The
+separate retained fixture uses the editor-default journal and recovered Undo/Redo.
+No window/GPU/device or appearance acceptance is claimed.
+[Scope and evidence](docs/spikes/native-animation-export.md).
+
+Native Play committed script logs now reach the existing Console through bounded
+incremental copied tails, with generation/project fences, stable row IDs and an
+explicit truncation warning across restarts. Local CPU host, bridge race/bounds,
+strict types and Clippy checks pass; native window/rendered Console acceptance
+remains separate. [Scope and evidence](docs/spikes/native-editor-play.md#committed-script-logs-in-console).

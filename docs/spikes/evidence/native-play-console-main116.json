@@ -1,0 +1,155 @@
+{
+  "source": "641f88792c76b2044c04167ffc9befe940fe7d4e",
+  "cherry_pick": "29b114e",
+  "original": "34dc2af497114f0dd5f19da8327616eaa5dc0cfc",
+  "actual_main": "74b6887a22967d485391d8c0c5067a1a1f247fca",
+  "source_hashes": {
+    "editor/app/src/main.rs": "be4238abaf4483fec42cee29106c615ca8cc7de8739c7344cfcf4775b64a6bbe",
+    "editor/app/src/play/logs.rs": "38c5346df022bafcaae38f57f936cb54fb54933e42bfda15f51ef19d3bb6bca9",
+    "editor/app/src/play/mod.rs": "fcb67d3d8abeb2491d922c8645faddd65c2dffa936a6891f90b7f9d305c49c6c",
+    "editor/app/src/play/tests.rs": "4121c057cc7aa4ce669b4c3d5443e5202e8a8953c8990220d687bca1f4791271",
+    "editor/app/src/play/worker.rs": "d9c45395615c2a0351e076890801d0e44d62714f29d838c779d6b54d4869529c",
+    "editor/bridge/contract.ts": "2a8a14afe93b295e5ab777e502266b33732895373069c03a817f9835967df635",
+    "editor/bridge/native.generated.js": "e452a26b24435471b8933dd82fcc537ead62b28a36ed664211af0607327fa74b",
+    "editor/bridge/native.ts": "2378b6307880209e5e162b2f5e8db8d497ab3e194eb097398d2e3c44a2e44b93",
+    "editor/bridge/play-logs.test.ts": "ce4910f92aacc40448349f9feef63952e87fe174c0a913dc5bf72b96f8bc7b6d"
+  },
+  "results": [
+    {
+      "name": "rust",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "-p",
+        "incant_editor",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j2"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 206.32,
+      "log": "/tmp/incant-console-union-checks/rust.log",
+      "sha256": "c2e2437b3462bc96fe811b0618f47c6f444a83c522b65066bb153689fe1b63d2"
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "-p",
+        "incant_editor",
+        "--all-targets",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j2",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 30.86,
+      "log": "/tmp/incant-console-union-checks/clippy.log",
+      "sha256": "6f70e93f906caa4a7bfe86c447627e547b27af1a68fd43a85d0e3abf66bc55b2"
+    },
+    {
+      "name": "bridge",
+      "command": [
+        "npm",
+        "exec",
+        "--workspace",
+        "editor/ui",
+        "--",
+        "vitest",
+        "run",
+        "../bridge",
+        "--maxWorkers=4"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 1.68,
+      "log": "/tmp/incant-console-union-checks/bridge.log",
+      "sha256": "ebee88919b2bdd47fe9a24b5bc7c91c96da278a2daadd6d2559c057d40e8160b"
+    },
+    {
+      "name": "test-types",
+      "command": [
+        "npm",
+        "exec",
+        "--workspace",
+        "editor/ui",
+        "--",
+        "tsc",
+        "-p",
+        "tsconfig.test.json",
+        "--noEmit"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 2.55,
+      "log": "/tmp/incant-console-union-checks/test-types.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "app-types",
+      "command": [
+        "npm",
+        "exec",
+        "--workspace",
+        "editor/ui",
+        "--",
+        "tsc",
+        "-b",
+        "--noEmit"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 3.45,
+      "log": "/tmp/incant-console-union-checks/app-types.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "generated",
+      "command": [
+        "node",
+        "tools/build_bridge.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.08,
+      "log": "/tmp/incant-console-union-checks/generated.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.94,
+      "log": "/tmp/incant-console-union-checks/fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.03,
+      "log": "/tmp/incant-console-union-checks/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "source_unchanged_after_actual_main_merge": true,
+  "limits": [
+    "No GPU/native window/provider or Console pixel acceptance.",
+    "Two runner invocations failed to locate bare cargo before any compilation; corrected runner uses repository tools/cargo. No source correction or failed test result was suppressed."
+  ]
+}

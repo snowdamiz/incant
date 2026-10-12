@@ -70,6 +70,7 @@ pub struct Line {
 /// Immutable shaping result; borrowed observations do not clone text or glyphs.
 #[derive(Debug)]
 pub struct ShapedText {
+    pub(crate) font_identity: Arc<()>,
     source: Arc<str>,
     glyphs: Vec<Glyph>,
     lines: Vec<Line>,
@@ -100,7 +101,7 @@ impl ShapedText {
 /// Unchanged text/metrics returns the same Arc; shaping only happens on updates.
 /// No runtime world, project document, renderer, filesystem or provider dependency.
 pub struct TextEngine {
-    fonts: Fonts,
+    pub(crate) fonts: Fonts,
     buffer: Buffer,
     cached: Option<(TextStyle, Arc<ShapedText>)>,
 }
@@ -164,6 +165,7 @@ impl TextEngine {
         self.buffer
             .shape_until_scroll(&mut self.fonts.system, false);
         let mut out = ShapedText {
+            font_identity: Arc::clone(&self.fonts.identity),
             source: Arc::from(text),
             glyphs: Vec::new(),
             lines: Vec::new(),

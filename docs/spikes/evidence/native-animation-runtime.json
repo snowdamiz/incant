@@ -1,0 +1,48 @@
+{
+  "scope": "Native animation clock, structural controls, scene-v11 and save-v4; authoring, SDK and renderer integration pending",
+  "base": "21d669c26c78c4b925ed849c8a4096d9d4db8c0d",
+  "sources": {
+    "crates/incant_runtime/src/binary.rs": "e03efa259039b123c00c66f05cfbcf2972b13b89c5a81cd28efdff65ad0d8420",
+    "crates/incant_runtime/src/commands.rs": "1213194f4e605a4fb519e80cf3bdb09ae664a171851f0cf3ca43b9fea87bd28b",
+    "crates/incant_runtime/src/lib.rs": "91d96f68d0481c73c3e35e70d2d278e86e6e607d05b25db5a57fb0c84a8cd631",
+    "crates/incant_runtime/src/save.rs": "003a5e2ddca7e990a56e10a28b5cd2336f2a3531e1f5b4ac3101ea7697c2a9fc",
+    "crates/incant_runtime/src/save/codec.rs": "90f87e85d59ceebd6fd6724a361dd8256bf73025781aee556aa4a0f375f91fb3",
+    "crates/incant_runtime/src/scene.rs": "40e68401bf803b58e9ef549d1174cc8297f8b7e16503a307d3fd69be99f2e998",
+    "crates/incant_runtime/src/spatial.rs": "75d25aee4e4f63c01bcfa667631c3e11ff37502e4f1749404e0476b9fd8784eb",
+    "crates/incant_runtime/src/spatial_binary.rs": "38c28299f46b2cbe0c0f9d9fd879c5e9cde579e0f0211755b7b7e162c740874f",
+    "crates/incant_runtime/src/spatial_view.rs": "5372a987c98530f3c9a3c39d465ac28903c599c09243b1e2f662e5d17893dcfa",
+    "crates/incant_runtime/src/world.rs": "86c7e32959bc05b0f3f7065e02f4fe296378f8f0f3befceaa9f5874b85230828",
+    "crates/incant_runtime/tests/physics.rs": "42a2bf32c0b68df22cd3355439db5b2536bdfdd86c30c015dc3a951505527c4a",
+    "crates/incant_runtime/tests/physics_2d.rs": "5dfcfb61b246067134d596745f22bfc00acb59c5752779c0e1f9facd7774935c",
+    "crates/incant_runtime/tests/scenes.rs": "3067950b0d483ff697353135b4d8a339c58626b6a283863067247a26d9af5152",
+    "crates/incant_types/src/animation.rs": "f138746f557d3c4bd08a7d255bb6a0471b801df13a1363fcf7948c776fed0070",
+    "crates/incant_types/src/lib.rs": "5d8945b502b46b21b9392f4391ffb2b4ea008dd63f9147939c73dfe6f15e6e6d",
+    "crates/incant_runtime/src/animation.rs": "5ad665f1c7f58bdeb4fc42cc21fb4691c8d3e26735352814bd0d216692317aae",
+    "crates/incant_runtime/src/animation_binary.rs": "577ac43458cd28e36ef3c7244415b99127e59a80ded968444eb9acf6a964edea",
+    "crates/incant_runtime/tests/animation.rs": "32b8898ca699f63639a3e4e421b5015abf3e17e9ae8f94e230a1caa03903d209"
+  },
+  "checks": {
+    "tests": {
+      "path": "/tmp/incant-animation-runtime-tests-004.log",
+      "sha256": "cf1a96014695816ea877810a8d00df4c6faa586d74b17b507e53467e250c57f4",
+      "groups": 24,
+      "passed": 152,
+      "failed": 0,
+      "ignored": 0
+    },
+    "clippy": {
+      "path": "/tmp/incant-animation-runtime-clippy-004.log",
+      "sha256": "066d740ef74d2e6012d24593529e1160f4f43f77367b24e5a7b5e7b678ccb056"
+    }
+  },
+  "limitations": [
+    "CPU behavior evidence, no device/performance gate claim",
+    "Animations need cooked asset duration/fingerprint validation by consumers",
+    "Scripting, authoring and render consumers integrate in subsequent commits"
+  ],
+  "prior_attempts": [
+    "tests-001 wrong shared-Arc test assumption corrected",
+    "tests-002 old future-version test updated for new v11 scene",
+    "clippy-003 range style corrected; tests003 passed"
+  ]
+}

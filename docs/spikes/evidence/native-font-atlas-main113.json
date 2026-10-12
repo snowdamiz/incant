@@ -1,0 +1,149 @@
+{
+  "recorded_at": "2026-10-12T01:44:32.120041+00:00",
+  "main_base": "b9969a9bccad8af6f95220a26b8640e97e07736b",
+  "preserved_source": "579e9e66b3330cbb155ef40e7d7cfa898e19b00b",
+  "tested_merge": "43a06af15038b5edd740075491091c349df652e5",
+  "conflict_resolution": "STATUS only, preserve current main plus reviewed atlas section",
+  "review_sha256": "26f09dfba70306f70201eb727f0d45c609b9b000541f673c1911c72bb70dde7d",
+  "source_lock_audit": {
+    "head": "43a06af15038b5edd740075491091c349df652e5",
+    "sources": {
+      "Cargo.lock": "7632eadb810059efc9fc1b078af2ea1f28e90623887229b342bfa9de5a1d707a",
+      "crates/incant_text/Cargo.toml": "0720e2ff184cc0297f1c5d73a899be90fe85303332bcabbb2666726dc2070afa",
+      "crates/incant_text/src/atlas.rs": "5cff1e27cd19349d225b831559d809446295bec5c94ab6fec587664a9b8beb28",
+      "crates/incant_text/src/fonts.rs": "a8275a6548ecbcbd66970194320262e6ffcf09838c6dd77f4f1d20376c05c2fb",
+      "crates/incant_text/src/layout.rs": "b4b0b152cf1f4a3b49bc7260655f640aaf32466536f2c1c7c7757de8912b27b7",
+      "crates/incant_text/src/lib.rs": "9780ff676ea5df4ef5d3068018b1add6cfd94be1f44f2a305e87f53f486a75b2",
+      "crates/incant_text/src/raster.rs": "ad1c74af12beb67b47d5261344faf61c3d30bf50afd2e8e5fc3496fbaa14966e",
+      "crates/incant_text/src/raster/glyf.rs": "1ec0238d99988560090e500e2a34260681f2459f1951ea84562d92517a394026",
+      "crates/incant_text/tests/atlas.rs": "d82d69a5f5fc845237ed0cc8a0a1e7f3c567204f59589c23df0daec549e321fd",
+      "crates/incant_text/tests/fonts/CJK-OFL.txt": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9",
+      "crates/incant_text/tests/fonts/IncantCJKFixture.ttf": "3299d6ab8033fb1d163f892dfcb1b8838cf1c46935c329d82da6f7b9e27dad82",
+      "crates/incant_text/tests/fonts/cjk-provenance.json": "b9e2b7af5dccd297a38fdd14d8e9e9bc0c6106c35ca0f45f20d60e239b5d0763",
+      "crates/incant_text/tests/fonts/subset_cjk.py": "299ea70f7fd7fb1dbb7a4fe9a9de3e4cefbf6cc7d6b9e76adf9052a63b9caf76",
+      "crates/incant_text/tests/packaged_atlas.rs": "2ec17dfab8894c96f9ad8a104cf98662a30404fe3c36aec401f7b18d5ebbc7fe"
+    },
+    "lock_package_count": 960,
+    "only_changed_package": "incant_text",
+    "external_records_unchanged": true,
+    "copied_license_whitespace_preserved": true
+  },
+  "checks": [
+    {
+      "name": "tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-j2",
+        "--profile",
+        "ci",
+        "-p",
+        "incant_text",
+        "-p",
+        "incant_assets_runtime",
+        "--features",
+        "incant_assets_runtime/font"
+      ],
+      "exit_code": 0,
+      "seconds": 6.5419580936431885,
+      "log": "/tmp/incant-font-atlas-main113-checks/tests.log",
+      "sha256": "50c720133597d5282fcd65442ce32cf436a75bafa80edce17b1d87d0e9a1e9ae"
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "-j2",
+        "--profile",
+        "ci",
+        "-p",
+        "incant_text",
+        "-p",
+        "incant_assets_runtime",
+        "--features",
+        "incant_assets_runtime/font",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "seconds": 1.7650320529937744,
+      "log": "/tmp/incant-font-atlas-main113-checks/clippy.log",
+      "sha256": "2dcbad3c5f0698846f45cef76f7a0b33ca9a0b1f7a4af782ddb11f6c4ed905d7"
+    },
+    {
+      "name": "wasm32",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "-j2",
+        "--target",
+        "wasm32-unknown-unknown",
+        "-p",
+        "incant_text",
+        "-p",
+        "incant_assets_runtime",
+        "--features",
+        "incant_assets_runtime/font"
+      ],
+      "exit_code": 0,
+      "seconds": 8.22538685798645,
+      "log": "/tmp/incant-font-atlas-main113-checks/wasm32.log",
+      "sha256": "e518eceff6b1c6c86c0bc88374ae5e118f50a58eea32325f0ad83349480d9ff2"
+    },
+    {
+      "name": "runtime-graph",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_text",
+        "incant_assets_runtime",
+        "--features",
+        "incant_assets_runtime/font"
+      ],
+      "exit_code": 0,
+      "seconds": 0.6737580299377441,
+      "log": "/tmp/incant-font-atlas-main113-checks/runtime-graph.log",
+      "sha256": "95899910726884b4242a1471151a72b2bcca313e1e6f73ea8e23a5442a5debc4"
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 1.1081900596618652,
+      "log": "/tmp/incant-font-atlas-main113-checks/fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.039527177810668945,
+      "log": "/tmp/incant-font-atlas-main113-checks/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "test_result": {
+    "passed": 31,
+    "failed": 0,
+    "ignored": 0,
+    "groups": 10
+  },
+  "scope": "CPU monochrome retained atlas only; no GPU/native/appearance or exported-game acceptance. Original root receipt remains valid for all implementation and test inputs; Cargo.lock only merges the reviewed additive internal edges."
+}

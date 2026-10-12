@@ -1,8 +1,7 @@
 //! Numerical behavior and resource-retention checks, not appearance approval.
-#[path = "retained_alloc.rs"]
-mod allocation;
 use super::*;
 use crate::hdr_output::{read, texture};
+use crate::retained_alloc as allocation;
 use glam::{DMat4, DVec3};
 use incant_render_data::SceneNode;
 const FORMAT: wgpu::TextureFormat = wgpu::TextureFormat::Rgba8UnormSrgb;

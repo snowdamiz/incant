@@ -116,3 +116,20 @@ Only obsolete main cache `8800194134` was retired after confirming replacement
 entries were preserved: 12 entries total 8,701,264,445 bytes afterward. Future
 consumption of that exact Windows cache is still unmeasured. No failed earlier
 batch was promoted, and no test context, shipping assertion or gate was removed.
+
+## Checkpoint 7 — failed, repaired on main
+
+Frozen main113 candidate `7b376924` completed all eight workflows with 22 of 23
+required contexts successful. Windows desktop passed in 33m06s and Windows Wasm
+conformance in 34m12s, confirming the earlier journal fixture repair. General
+macOS failed reopening a ledger with Busy. PR115 repairs explicit acquired-lock
+release, preserving exclusive ownership and conservative usage accounting; 64
+local agent tests and Clippy pass. The precise hosted descriptor interleaving
+was not observed. This failed candidate was never promoted, and its historical
+failure remains recorded in the [terminal receipt](evidence/release-checkpoint-7.json).
+
+PR116 subsequently merged reviewed native animation after its 114-second fast
+check and scoped native acceptance. The next deliberately frozen repair-validation
+checkpoint will select actual main after Console integration; later development
+merges will not move that candidate. Full hosted confirmation of the lock repair
+remains pending, without waiving any of the 23 contexts.
