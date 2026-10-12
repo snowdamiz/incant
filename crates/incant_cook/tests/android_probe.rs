@@ -16,11 +16,10 @@ fn android_probe_child() {
 }
 
 #[test]
-fn candidate_fixture_is_explicit_and_never_accepts_an_alternative_source_or_map() {
+fn fresh_android_source_cook_retains_optional_exact_candidate_restriction() {
     let root = tempfile::tempdir().unwrap();
     let fixture = include_str!("../../incant_script/tests/fixtures/mobile_compat.js");
     let accepted = artifact::TARGET == "aarch64-apple-darwin"
-        && cfg!(feature = "probe-android-bytecode")
         && artifact::compatibility::admits(
             artifact::TARGET,
             "aarch64-linux-android",
@@ -43,7 +42,7 @@ fn candidate_fixture_is_explicit_and_never_accepts_an_alternative_source_or_map(
         std::fs::create_dir(&output).unwrap();
         let expected = if !accepted {
             admission
-        } else if index == 0 {
+        } else if index == 0 || !cfg!(feature = "probe-android-bytecode") {
             ""
         } else {
             fixture_error
@@ -60,7 +59,11 @@ fn candidate_fixture_is_explicit_and_never_accepts_an_alternative_source_or_map(
             .env("OUT_DIR", &output);
         if map {
             let map = root.path().join("map.json");
-            std::fs::write(&map, "{}").unwrap();
+            std::fs::write(
+                &map,
+                r#"{"version":3,"sources":["mobile-compat.js"],"names":[],"mappings":"AAAA"}"#,
+            )
+            .unwrap();
             command.env("INCANT_NATIVE_SCRIPT_MAP", map);
         }
         let result = command.output().unwrap();
@@ -76,7 +79,7 @@ fn candidate_fixture_is_explicit_and_never_accepts_an_alternative_source_or_map(
                     .unwrap();
             assert_eq!(metadata["target"], "aarch64-linux-android");
             assert_eq!(metadata["producer_target"], artifact::TARGET);
-            assert_eq!(metadata["source_name"], "mobile-compat.js");
+            assert_eq!(metadata["source_name"], name);
             assert_eq!(metadata["bytecode_abi"]["version"], 28);
             assert!(output.join("behavior.rs").is_file());
         } else {

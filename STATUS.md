@@ -1788,3 +1788,5 @@ Rust binary; strict consumer checks and the editor build pass. The integrated
 cook/Play suite passes 65 tests and Clippy in each of three compiled variants.
 Mode-aware launch/export and editor process switching remain separate follow-on
 work. [Evidence](docs/spikes/physics-project-setting.md).
+
+- Authored Android CPU archive route: exact reviewed fresh-source admission and separate physics-aware exporter pass independent source review and focused Rust/Python/Clippy checks. Ordinary authored shipping and source-deleted emulator proof are pending; no API24/device/performance claim. See `docs/spikes/authored-android-project.md`.
