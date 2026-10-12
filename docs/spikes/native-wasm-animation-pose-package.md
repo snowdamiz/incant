@@ -62,11 +62,12 @@ The oracle's scoped Clippy check, actual wasm32 guest compilation, all 235 Pytho
 tooling tests (four existing skips), formatting and generated registry/convention
 checks pass. The producer's post-run audit rehashed five frozen sources, all 14
 retained package files and 60 command streams, and checked absence of 17 removed
-private files. Independent final source/evidence review and current-main
-integration remain pending.
+private files. Independent final source/evidence review accepts the immutable proof without
+findings. Current-main union validation and integration remain publisher-owned
+and pending.
 
 [Evidence inventory](evidence/native-wasm-animation-pose-package.json) binds 75
-compressed logs and 43 receipts, including literal command history, authoring
+compressed logs and 43 original receipts plus the independent final review, including literal command history, authoring
 transactions, full oracle/process records, refusal diagnostics and all earlier
 attempts. The actual package and raw evidence remain at
 `~/.codex/incant-evidence/animation-pose-package-005`; they are not transient

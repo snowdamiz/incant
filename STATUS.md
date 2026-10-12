@@ -30,8 +30,9 @@ remains pending. The ordinary public Rust tree-game package proof now passes
 three fresh source/cache/build/map-deleted wasm2c processes. Each matches 60
 complete records (3420 scalars), 228 bounded checks, native clocks and PCM against
 captured Wasmtime play and a direct native oracle. All eleven exact refusals pass,
-including old snapshots and unsupported guest checkpoints; independent package
-review is pending. [Package evidence](docs/spikes/native-wasm-animation-pose-package.md).
+including old snapshots and unsupported guest checkpoints. Independent package
+source and final evidence review accepts the proof without findings; current-main
+union validation remains pending. [Package evidence](docs/spikes/native-wasm-animation-pose-package.md).
 Synthetic sixteen-sample coverage establishes wire capacity only; tree-state
 fades/composite operands, rendered/device gates and complete SDK remain open.
 [Contract and evidence](docs/spikes/native-animation-pose-sdk.md).
