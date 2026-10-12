@@ -1,6 +1,8 @@
 #![cfg(feature = "scene")]
 #[path = "../../incant_assets_runtime/tests/support/mod.rs"]
 mod support;
+#[path = "scene/transport.rs"]
+mod transport;
 use incant_audio_runtime::{AudioError, ClipBinding, Mixer, PlayOptions, SceneAudio, SourceState};
 use incant_runtime::{
     CookedAudio, CookedEntity, CookedScene, FrameCommands, NativeAudioBus, NativeAudioSource,
@@ -25,6 +27,7 @@ fn source(streaming: bool) -> CookedAudio {
         bus: None,
         listener: false,
         source: Some(NativeAudioSource {
+            transport_epoch: 0,
             clip: id(90),
             bus: Some(id(1)),
             gain_db: 0.,

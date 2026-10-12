@@ -9,6 +9,7 @@ pub fn source(streaming: bool, playing: bool, looping: bool) -> CookedAudio {
         bus: None,
         listener: false,
         source: Some(NativeAudioSource {
+            transport_epoch: 0,
             clip: id(90),
             bus: Some(id(1)),
             gain_db: 0.,

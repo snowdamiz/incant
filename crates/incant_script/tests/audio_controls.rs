@@ -25,6 +25,15 @@ fn script_controls_preserve_other_audio_fields_and_expired_functions_never_react
 #[test]
 fn caught_bad_arguments_and_bad_final_roles_roll_back_all_script_commands_and_numeric_writes() {
     for bad in [
+        "commands.stopAudio(source,0)",
+        "commands.restartAudio()",
+        "commands.restartAudio(bus)",
+        "commands.stopAudio(plain)",
+        "commands.seekAudio(source,'0')",
+        "commands.seekAudio(source,NaN)",
+        "commands.seekAudio(source,Infinity)",
+        "commands.seekAudio(source,-0.000001)",
+        "commands.seekAudio(source,3600.0000001)",
         "commands.setAudioPlaying(source,0)",
         "commands.setAudioPlaying(source,true,0)",
         "commands.setAudioGain(source,'0')",
@@ -50,6 +59,23 @@ fn caught_bad_arguments_and_bad_final_roles_roll_back_all_script_commands_and_nu
             host.tick(&mut world, 1. / 60.),
             Err(ScriptError::FailedSession)
         ));
+    }
+}
+
+#[test]
+fn script_transport_restarts_in_one_tick_and_expired_capabilities_never_reactivate() {
+    let mut world = NativeWorld::new(scene(false, true, true));
+    let mut host = host(
+        "if(globalThis.old){for(let i=0;i<old.length;i++){let refused=false;try{if(i===2)old[i](source,0);else old[i](source)}catch{refused=true}if(!refused)throw Error('old transport capability')}}globalThis.old=[commands.stopAudio,commands.restartAudio,commands.seekAudio];commands.stopAudio(source);commands.restartAudio(source);commands.seekAudio(source,0.125);",
+    );
+    for tick in 1..=3 {
+        host.tick(&mut world, 1. / 60.).unwrap();
+        let nodes = audio(&world);
+        let s = nodes[1].source.as_ref().unwrap();
+        assert_eq!(
+            (s.transport_epoch, s.start_seconds, s.playing),
+            (tick * 3, 0.125, true)
+        );
     }
 }
 #[test]

@@ -243,6 +243,7 @@ pub(crate) fn cook_validated_scene_with_resources(
             let source = source
                 .map(|s| {
                     Ok::<_, CookError>(NativeAudioSource {
+                        transport_epoch: 0,
                         clip: stable_id(&s.clip)?,
                         bus: s.bus.as_deref().map(stable_id).transpose()?,
                         gain_db: s.gain_db,
