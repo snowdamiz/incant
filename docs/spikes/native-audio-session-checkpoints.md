@@ -146,3 +146,38 @@ physical device is used.
 
 The independent final source/process audit is retained in
 [evidence/native-audio-session-checkpoints-final-review.json](evidence/native-audio-session-checkpoints-final-review.json).
+
+## Integration with main #145
+
+The accepted audio sources compose with current public Wasm physics, managed IME
+and numeric animation additions. The Cargo merge preserves both the existing Tao
+vendor and this pinned Kira adapter. All 160 other accepted source/build inputs
+match exactly; only those two Cargo files differ from the original accepted
+packet. After merging actual main #145, all 1672 frozen inputs remain identical
+to the tested tree; subsequent differences are documentation and status only.
+
+The integrated suite passes 422 affected CPU cases in 50 groups and all 99 Kira
+cases, with no failures or ignored tests. Scoped all-target Clippy, static-module
+UI/audio and compiler-disabled checks, device compilation, wasm32, normal runtime
+dependency checks and formatting/conventions pass. The original named upstream
+`clippy::derivable_impls` allowance remains limited to the Kira check.
+
+The fresh ordinary public exporter builds a shipping player with SHA-256
+`8650d5fc031c8810520660f68b12894feb05c1942c768a543d49d45c6c22165b`. Four source/build/map-deleted
+processes preserve widget/script/timer state, real static/streamed audio and exact
+final checkpoint bytes. Uninterrupted PCM equals the concatenated pre-save and
+resumed PCM, and both resumed processes emit identical PCM. Nine controls match
+precise expected refusals; no-clobber preserves the existing save. PCM can already
+be published before that save refusal, so this is not a multi-file transaction.
+Sixteen retained runtime package files remain unchanged across the controls.
+
+[Current integration evidence](evidence/native-audio-main145.json) binds all
+literal commands, source inventories, compressed logs, actual package identities,
+save/PCM hashes and process receipts. The actual package remains under
+`~/.codex/incant-integration-evidence/audio-main145-001/public-export`.
+This is CPU ordinary-load evidence; the unsupported routes and gates above remain
+unchanged.
+
+The [independent current-main review](evidence/native-audio-main145/root-final-review.json)
+reverified every frozen input, retained log and actual package/output identity,
+including exact saves, PCM continuation and refusal diagnostics.

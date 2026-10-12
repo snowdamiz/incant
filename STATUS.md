@@ -16,20 +16,21 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Ordinary offline audio session checkpoints — local CPU proof passed
+## Ordinary offline audio session checkpoints — current-main verified
 
 World v8/session v3 resume real static and streamed Kira voices alongside existing
-script state/timers and hosted UI. Exact fractional/resampler history, birth order,
+script state/timers and hosted UI. Fractional/resampler history, birth order,
 queued/retired voices, nested buses/listener state, tick-zero startup and master
-suspension are covered. The ordinary public exporter/player passed source/build/
-map-deleted continuation with identical saves and PCM; precise negative controls
-were rerun against the same frozen binary. Affected 410 tests, 99 Kira tests,
-scoped Clippy and lean/runtime target checks pass. Independent final source/process review is accepted;
-coordinator intake remains pending.
+suspension are preserved. Integration with main #145 passes 422 affected CPU
+cases, 99 Kira cases, scoped Clippy and feature/platform/dependency checks.
+A fresh public shipping export passes four source/build/map-deleted processes
+with exact final saves and split/repeated PCM, plus nine precise refusals.
+All 1672 frozen inputs remain unchanged after main ancestry integration.
 
 Physics/module/device-native audio and native-window/GPU checkpoint routes remain
 unsupported; arbitrary VM heap/effects and full save/device gates are not claimed.
-[Contract and evidence](docs/spikes/native-audio-session-checkpoints.md).
+[Contract and evidence](docs/spikes/native-audio-session-checkpoints.md) and
+[current integration](docs/spikes/evidence/native-audio-main145.json).
 
 ## Public Wasm physics queries — current-main verified
 
@@ -271,7 +272,7 @@ Main #144 includes the multi-pose sampler and bounded nested/2D animation numeri
 core; authored tree playback and its complete SDK/render route remain separate
 local work. The current public Wasm physics integration adds real query/event
 capabilities and an ordinary source-deleted package proof, as recorded above.
-Offline audio checkpoint continuation is reviewed locally and queued separately.
+Offline audio checkpoint continuation is now current-main verified above.
 Checkpoint 11 remains failed and frozen; its Linux rendering repair is with
 Claude. No release or phase gate advances on these local feature results.
 
