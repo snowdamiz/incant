@@ -167,3 +167,16 @@ and the prepared-byte receipt are in
 [independent review](evidence/native-wasm-formatting-root-review.json) found no
 actionable issue. Runtime compilation,
 source loading, dependencies and lock resolutions are unchanged.
+
+## Formatting integration on actual main119
+
+The original standalone-formatting commit is preserved with all 23 reviewed
+implementation hashes unchanged. The integrated current-source suite passes
+295 tests in 53 groups across actual Wasmtime and compiled wasm2c, all-target
+Clippy, default wasm32 compilation, 19 Wasm tooling tests, generated contracts,
+strict SDK/template types and normal runtime dependency guards. Three existing
+fresh development bulk processes pass separately; these are not a new formatting
+shipping-export proof. The actual main119 merge changes no tested tree bytes.
+[Exact integration evidence](evidence/native-wasm-formatting-main119.json) records
+commands, retained outputs and source hashes. No graphical, device or performance
+acceptance is claimed.

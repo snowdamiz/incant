@@ -813,3 +813,9 @@ all-target Clippy and default wasm32 compilation. See
 [formatting evidence](docs/spikes/evidence/native-wasm-formatting.json).
 Catalog editing/report paging, complete SDK and device/performance gates remain
 open; existing bulk fresh-process smoke is not a formatting shipping export.
+
+Wasm standalone formatting is integrated on actual main119 with all 23 reviewed
+implementation hashes preserved. Current-source actual Wasmtime/wasm2c validation
+passes 295 tests, all-target Clippy, default wasm32, 19 tooling tests and SDK/graph
+checks; the three fresh bulk processes remain a separate development-only smoke.
+[Receipt](docs/spikes/evidence/native-wasm-formatting-main119.json).
