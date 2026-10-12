@@ -28,7 +28,8 @@ a missing pickup prevents winning. Public authoring, Undo/Redo and reopening
 pass, and Play leaves the project unchanged. Existing desktop checkpoint jobs
 now include the seven cheap headless scenarios; their hosted results are pending.
 Current-main integration also passes seven native-play scenarios with 53 checks,
-strict sample types, workflow lint and 25 CI policy tests; final publication is pending.
+strict sample types, workflow lint and 25 CI policy tests. Independent integration
+review is accepted; final publication awaits its exact fast check.
 The numerical room is a test fixture. Claude is assembling the finished level
 and presentation; dynamic HUD bindings, music and reference-device performance
 remain open. [Scope and evidence](docs/spikes/core-sample-gameplay.md).

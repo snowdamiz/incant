@@ -6,4 +6,4 @@ Current-main validation passes strict sample TypeScript, workflow lint, 25 CI po
 
 These runs use the copied immutable main156 headless binary, with every frozen non-workflow engine/helper input verified equal. They do not rebuild or relabel the producer's seven accepted ordinary source-deleted shipping runs. No presentation, device-performance or phase gate is claimed; Claude's presentation remains separate.
 
-[Current-main identities, commands and reports](evidence/core-sample-main156.json). Independent closure review is pending.
+[Current-main identities, commands and reports](evidence/core-sample-main156.json). [Independent closure review](evidence/core-sample-main156-review.json) is accepted; publication awaits its exact fast check.

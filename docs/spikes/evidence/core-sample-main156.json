@@ -346,5 +346,10 @@
     "The seven source-deleted ordinary shipping runs remain the accepted producer evidence, not relabeled current-main runs.",
     "Gameplay in a numerical fixture only; Claude presentation, dynamic HUD, device and phase gates remain open."
   ],
-  "review": "Current-main closure pending independent review."
+  "review": {
+    "decision": "accepted",
+    "receipt": "docs/spikes/evidence/core-sample-main156-review.json",
+    "sha256": "7b0d143b70b4c39f7e6a965c71ab8c2c021fa2176a1e7beba9644ce0f09d4dca",
+    "reviewed_manifest_sha256": "6509e7c176bedfc82c97a9cad839d35ef7a6ef6dc595717655e3f667c8c243dd"
+  }
 }
