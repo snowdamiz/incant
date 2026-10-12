@@ -41,7 +41,7 @@
 mod geometry;
 pub mod theme;
 use crate::{Renderer, ResourceError, Result, RetainedTarget, SceneError};
-pub use geometry::{MAX_UI_GLYPHS, MAX_UI_QUADS, MAX_UI_WIDGETS};
+pub use geometry::{MAX_UI_GLYPHS, MAX_UI_QUADS, MAX_UI_WIDGETS, UiCaret, ui_caret};
 use geometry::{QUAD_BYTES, UiPlan, plan};
 #[cfg(test)]
 use geometry::{caret, spans_for};
