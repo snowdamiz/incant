@@ -1,6 +1,7 @@
 //! Native Play transport. Cooking runs on a blocking authoring worker; all live
 //! VM, audio and GPU state stays on the render thread. No per-tick document read.
 mod clock;
+mod logs;
 #[cfg(feature = "play-probe")]
 pub mod probe;
 #[cfg(test)]
@@ -43,6 +44,7 @@ pub struct Status {
     pub suspended: bool,
     pub error: Option<String>,
     pub preparing: bool,
+    pub logs: logs::Summary,
 }
 #[derive(Deserialize)]
 #[serde(tag = "op", rename_all = "snake_case", deny_unknown_fields)]
@@ -89,8 +91,12 @@ impl Action {
 }
 pub struct Service {
     tx: mpsc::SyncSender<Message>,
-    status: Mutex<Status>,
+    status: Mutex<State>,
     loading: AtomicBool,
+}
+struct State {
+    status: Status,
+    logs: logs::Store,
 }
 pub struct Message {
     request: Request,
@@ -111,19 +117,23 @@ impl Service {
             Arc::new(Self {
                 tx,
                 loading: AtomicBool::new(false),
-                status: Mutex::new(Status {
-                    generation: 0,
-                    sequence: 0,
-                    phase: "stopped",
-                    tick: 0,
-                    discarded_ticks: 0,
-                    presented_frames: 0,
-                    scene: None,
-                    source_revision: None,
-                    spatial: false,
-                    suspended: false,
-                    error: None,
-                    preparing: false,
+                status: Mutex::new(State {
+                    status: Status {
+                        generation: 0,
+                        sequence: 0,
+                        phase: "stopped",
+                        tick: 0,
+                        discarded_ticks: 0,
+                        presented_frames: 0,
+                        scene: None,
+                        source_revision: None,
+                        spatial: false,
+                        suspended: false,
+                        error: None,
+                        preparing: false,
+                        logs: logs::Summary::default(),
+                    },
+                    logs: logs::Store::default(),
                 }),
             }),
             rx,
@@ -132,24 +142,73 @@ impl Service {
     pub fn snapshot(&self) -> Result<Status, String> {
         self.status
             .lock()
-            .map(|s| s.clone())
+            .map(|s| s.status.clone())
             .map_err(|_| "Play state is unavailable".into())
     }
     fn edit<T>(
         &self,
         operation: impl FnOnce(&mut Status) -> Result<T, String>,
     ) -> Result<T, String> {
-        let mut status = self
+        let mut state = self
             .status
             .lock()
             .map_err(|_| "Play state is unavailable")?;
-        let next = status
+        let next = state
+            .status
             .sequence
             .checked_add(1)
             .ok_or("Play status counter exhausted")?;
-        let result = operation(&mut status)?;
-        status.sequence = next;
+        let generation = state.status.generation;
+        let result = operation(&mut state.status)?;
+        if generation != state.status.generation {
+            state.logs.reset();
+            state.status.logs = logs::Summary::default();
+        }
+        state.status.sequence = next;
         Ok(result)
+    }
+    // Called only after the actual game operation has accepted its script update.
+    // One mutex makes the prefix/count and status publication indivisible.
+    fn publish_logs(
+        &self,
+        generation: u32,
+        logs: &incant_runtime::logging::NativeLogs,
+        operation: impl FnOnce(&mut Status),
+    ) -> Result<(), String> {
+        let mut state = self
+            .status
+            .lock()
+            .map_err(|_| "Play state is unavailable")?;
+        if state.status.generation != generation
+            || !matches!(state.status.phase, "running" | "paused")
+        {
+            return Err("Play session changed".into());
+        }
+        let next = state
+            .status
+            .sequence
+            .checked_add(1)
+            .ok_or("Play status counter exhausted")?;
+        state.logs.append(logs).map_err(|e| e.to_string())?;
+        state.status.logs = state.logs.summary();
+        operation(&mut state.status);
+        state.status.sequence = next;
+        Ok(())
+    }
+    fn read_logs(&self, generation: u32, after_index: usize) -> Result<logs::Batch, String> {
+        let state = self
+            .status
+            .lock()
+            .map_err(|_| "Play state is unavailable")?;
+        if state.status.generation != generation
+            || !matches!(state.status.phase, "running" | "paused")
+        {
+            return Err("Play logs are unavailable for this session".into());
+        }
+        state
+            .logs
+            .read(generation, after_index)
+            .map_err(|e| e.to_string())
     }
     fn call(&self, request: Request) -> Result<Value, String> {
         let (tx, rx) = mpsc::channel();
@@ -185,6 +244,15 @@ impl Drop for Loading<'_> {
 #[tauri::command]
 pub fn play_read(state: tauri::State<'_, Arc<Editor>>) -> Result<Status, String> {
     state.play.snapshot()
+}
+
+#[tauri::command]
+pub fn play_logs_read(
+    state: tauri::State<'_, Arc<Editor>>,
+    generation: u32,
+    after_index: usize,
+) -> Result<logs::Batch, String> {
+    state.play.read_logs(generation, after_index)
 }
 
 #[tauri::command]

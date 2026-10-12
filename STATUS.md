@@ -60,7 +60,7 @@ review completed one real account-backed turn, Undo and reopen with retained
 login and usage. Both follow-up UI fixes passed focused native rechecking; PR #109
 merged this editor/agent/budget integration into main.
 
-Skeletal animation is the current integration: authored clip metadata, native
+Skeletal animation merged in PR #116: authored clip metadata, native
 clocks, atomic TypeScript controls, retained deformation and save continuation
 are implemented locally. The combined runtime/cook/render suite passes 397 CPU
 tests; a separate frozen renderer passes all 70 numerical Metal tests. Independent
@@ -759,6 +759,12 @@ source/build storage is removed; refusal controls withhold save and PCM. The
 separate retained fixture uses the editor-default journal and recovered Undo/Redo.
 No window/GPU/device or appearance acceptance is claimed.
 [Scope and evidence](docs/spikes/native-animation-export.md).
+
+Native Play committed script logs now reach the existing Console through bounded
+incremental copied tails, with generation/project fences, stable row IDs and an
+explicit truncation warning across restarts. Local CPU host, bridge race/bounds,
+strict types and Clippy checks pass; native window/rendered Console acceptance
+remains separate. [Scope and evidence](docs/spikes/native-editor-play.md#committed-script-logs-in-console).
 
 ## Native Wasm skeletal playback — locally verified
 
