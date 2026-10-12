@@ -1,0 +1,308 @@
+{
+  "recorded_utc": "2026-10-12T00:59:33.867978+00:00",
+  "base": "f74379ef70a037a6705636d058d3eb876907815f",
+  "branch": "codex/native-wasm-animation",
+  "scope": "Additive copied skeletal-animation observations and atomic controls in actual Wasmtime and compiledwasm2c hosts; no rendered/device/shipping-export gate",
+  "frozen_implementation_inputs": {
+    "crates/incant_wasm_abi/src/lib.rs": "0266fdb599b4725a3279b13f96bf31eba8aabcbf9748ebf3928d167c3c17e332",
+    "crates/incant_wasm_dev/src/generated.rs": "bc57cb0d7d3afe06ad33e67413a888356567d57b9a07da0e91806a1139b30037",
+    "crates/incant_wasm_dev/tests/animation_parity.rs": "af783476e3e7cf2391ea0e90dfb41364e3730a68cd3c2670ecc85e7cc3fd5858",
+    "crates/incant_wasm_runtime/c/generated.h": "05fce5fa6ea8dc7d6179c81b5a5ca39ef2b6e7c8f27f63dadc307e70956b6742",
+    "crates/incant_wasm_runtime/c/generated.inc": "2a621e0a80a27ae2b5d201f540d077489109f9fe77181eaa3f866eb6a567efe5",
+    "crates/incant_wasm_runtime/fixtures/animations-start.wat": "214bab7f2b27bd1260ee8734f959f7aaff672e484a971a9c51671c78586fb727",
+    "crates/incant_wasm_runtime/fixtures/animations.wat": "4186a06c02e10a26394b6f71170012fe161d3e7c4bb16835ab1317f6458eb9d3",
+    "crates/incant_wasm_runtime/src/animations.rs": "d1be1280c899cb2021b65cebcd265e9dce1749179c46a021ee4f5e7d4d6c8d0f",
+    "crates/incant_wasm_runtime/src/capability.rs": "ffe3a3ee30d0789ef94c5374e50b837b82a4f9232f8641e79cf5602166a6943b",
+    "crates/incant_wasm_runtime/src/generated.rs": "6a1eb762749fba18098c48dbfc7a39a98352c8c7d398b0b9910cfaa4cccfbca3",
+    "crates/incant_wasm_runtime/src/input_tags.rs": "84a954c3e7a6d8a790282747170d8f4dfb017ffe723dd1a079ef20dae36d4897",
+    "crates/incant_wasm_runtime/src/lib.rs": "52fdf1c78fbd8bb1456bd1c4a68093261f9eb77430d83b4f465b6cb0000dea7b",
+    "crates/incant_wasm_runtime/tests/animations.rs": "e8af4ec4e1dd9afe454f19f9f67ab80abc42c14897569ef94120405bd8ba23a9",
+    "crates/incant_wasm_runtime/tests/support/animations.rs": "d4286d6282c11ed94828dd1860dfce04725aedc547d37b88f825f6b244d37939",
+    "sdk/abi/native-v1.json": "9dd95c6c3730ad9749c65d6feb5a4d973c513f1cecb126a998d54079cc10e3e6",
+    "sdk/rust/fixtures/animation_failure.rs": "d17a2f502126d61cdf05b03e2928f5b101bee5d0a7c9569989d04932136a6ad3",
+    "sdk/rust/samples/animation.rs": "ca004b7024635da0ad67e782e2145a60d0dbe1df04dcedc5343d787524dd1a49",
+    "sdk/rust/src/animation.rs": "9ac7ab2ba5e4716b47bd46adad3d1f4a3531eaf14d64f487182fa4f9b7aea34f",
+    "sdk/rust/src/lib.rs": "1fb76c2fc3345b57356d875c66ee3db455407d00e048d28ca7b3446c95cd4cbd",
+    "sdk/rust/src/raw.rs": "9ad9edccecb621a6eeb36f32eeefedc124a1a477be76936a34e357bd23915aca",
+    "sdk/rust/src/tick.rs": "e68674bc3e79073410564ab45918a9659cd367a2734ef044d3aeabdbb47d6225",
+    "sdk/rust/tests/animation.rs": "c77038c4f02f6e2994c3a83b85f596c9b348e877a079cd26d077318bfcd1cd7e",
+    "tools/generate_wasm_sdk.py": "a71d8fdf6f9576ceea8b9125f370a397a06836767d59390bc488f99b288638ea",
+    "tools/probes/development-wasm.py": "1d28308f5931232bb8ae3270037d6893ea1204d022a3c25f9fd099b24d91ca7f",
+    "tools/probes/shipping-wasm2c.py": "f6d501120cb0d61ede3aadfa7be31eca0c5771c91318e6b7b03ab85763ecd4c2",
+    "tools/tests/test_wasm_sdk.py": "a229bcb308ff09e31597033689f045dbfbf043af2901b8bfa904fafca0d5478b",
+    "tools/wasm_abi.py": "2dd603506fe842dadb81bc91aa9d73107d2585c8386fcc5a2e10412c8a344405"
+  },
+  "implementation_freeze": {
+    "path": "/tmp/incant-wasm-animation-source-freeze-002.json",
+    "sha256": "b521d36d89a7dfd4456fc0140a1a7a69bee43db95d11894f522474cfed8bf52c",
+    "bytes": 3330
+  },
+  "host": "aarch64-apple-darwin",
+  "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+  "conformance_command": "CARGO_TARGET_DIR=/tmp/incant-agent-native-target python3 tools/probes/shipping-wasm2c.py /tmp/incant-wasm-animation-conformance-002 --conformance-only --profile ci",
+  "conformance_tests": {
+    "passed": 281,
+    "failed": 0,
+    "ignored": 0,
+    "groups": 48,
+    "new_tests": 16
+  },
+  "checks": [
+    {
+      "name": "combinedtests",
+      "status": "passed",
+      "log": {
+        "path": "/tmp/incant-wasm-animation-conformance-002/conformance-0.log",
+        "sha256": "8823314d85ddcaf4db74dfc280dd9528b1ce6d5b7d117501c6dbf15f15197c8c",
+        "bytes": 35799
+      }
+    },
+    {
+      "name": "alltargetclippy",
+      "status": "passed",
+      "log": {
+        "path": "/tmp/incant-wasm-animation-conformance-002/conformance-1.log",
+        "sha256": "dda977392b7b11322d79ba7194a3ca3e9f7d2cdc0ded390d2e655170b1946d4a",
+        "bytes": 2571
+      }
+    },
+    {
+      "name": "freshdevelopmentprocesses",
+      "status": "passed",
+      "log": {
+        "path": "/tmp/incant-wasm-animation-conformance-002/conformance-2.log",
+        "sha256": "7e7a80dadcd062a8fd1bf61591a6e2cb50e7e1486a4431a5efcc36ec7a14e331",
+        "bytes": 2495
+      }
+    },
+    {
+      "name": "defaultwasm32",
+      "status": "passed",
+      "log": {
+        "path": "/tmp/incant-wasm-animation-wasm32-002.log",
+        "sha256": "96436d357b8b86355e5c7b8f3ea0017df8b454010f60c1b79f9edde534bd90b5",
+        "bytes": 7054
+      }
+    },
+    {
+      "name": "normalgraph",
+      "status": "passed",
+      "log": {
+        "path": "/tmp/incant-wasm-animation-graph-003.log",
+        "sha256": "a146cbb0a2bcff9a7ad81a317f35186ffaec0215147581c9841ebefd6f1a082c",
+        "bytes": 90
+      }
+    },
+    {
+      "name": "toolstests",
+      "status": "passed",
+      "log": {
+        "path": "/tmp/incant-wasm-animation-tools-002.log",
+        "sha256": "c9ccad3543fbfefb230539b2833938f9814da3f9f88ce82a0bc29ac35c7b8850",
+        "bytes": 119
+      }
+    },
+    {
+      "name": "generated",
+      "status": "passed",
+      "log": {
+        "path": "/tmp/incant-wasm-animation-generated-002.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "name": "conventions",
+      "status": "passed",
+      "log": {
+        "path": "/tmp/incant-wasm-animation-conventions-002.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "name": "format",
+      "status": "passed",
+      "log": {
+        "path": "/tmp/incant-wasm-animation-fmt-002.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "name": "whitespace",
+      "status": "passed",
+      "log": {
+        "path": "/tmp/incant-wasm-animation-diff-002.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    }
+  ],
+  "prepared_manifest": {
+    "path": "/tmp/incant-wasm-animation-conformance-002/prepared-manifest.json",
+    "sha256": "9b3e147fd73d952403f26559b8e755bf8bccfc2b78848fbe023ef85bd0cfe58d",
+    "bytes": 43336
+  },
+  "animation_guests": [
+    {
+      "name": "animations-start",
+      "prefix": "m1",
+      "input_sha256": "e76f579301f16787093d54a7a2e20b3580c3d613798405ce34703d896bb1690c",
+      "prepared_sha256": "1df3b8429c1fdb59194c0c670ebba8a5e502027cf8a8e587de0595f22ab36019"
+    },
+    {
+      "name": "animations",
+      "prefix": "m2",
+      "input_sha256": "3b2b30813ce4564f76631d49a5d6d41837aafd4a858e38590aecb35cd22caab9",
+      "prepared_sha256": "11d667f2529e4e3286174e655529def79209976eaf377a1be67fb77a9a66d3fd"
+    },
+    {
+      "name": "rust-animation",
+      "prefix": "m53",
+      "input_sha256": "4d7a66fc9a1967181fc8a134db79be72323d4ea483ae264ea938dd04ac55f984",
+      "prepared_sha256": "e4709c7162d315be46a67673f13d0fa08d9c854c9b8a17ed541ebe874e9ca0c8"
+    },
+    {
+      "name": "rust-animation-capacity",
+      "prefix": "m54",
+      "input_sha256": "dfe95a0d85013b3b555d51b2d88f0f23a270c4cc9507786d03718cdd10f66e59",
+      "prepared_sha256": "01ae70f450de829b32ed0d09efed266a54baf1e648ea49da16f2497d4420e266"
+    },
+    {
+      "name": "rust-animation-number",
+      "prefix": "m55",
+      "input_sha256": "9689c4a346f4e5d07f9cb3b100f1ed3242412afe02324fb47403838dd2287237",
+      "prepared_sha256": "9a9756b1799d0de010e4441ef9f1d6501b818e84a8246ea61dd41e28b3b85b66"
+    },
+    {
+      "name": "rust-animation-rest",
+      "prefix": "m56",
+      "input_sha256": "d102ad6599f2596f033b98480a21b4aa104c3d9b1869df5d6441389f98c9958c",
+      "prepared_sha256": "11353364545dd7e0a60f78944d66bbc5b9d0b1d74ac9499a2e4f4d268edda0f7"
+    },
+    {
+      "name": "rust-animation-clip",
+      "prefix": "m57",
+      "input_sha256": "6b61b48ba74a9e47e27b0ebbac5655e543b6be5f6692773c8d1962c06aecdc69",
+      "prepared_sha256": "4463b23d653fea1104a133d8341140a24ede7bd467cae33e1464f93ca831603f"
+    },
+    {
+      "name": "rust-animation-entity",
+      "prefix": "m58",
+      "input_sha256": "75b0a325471fb059850aec636bed5c877ff31c1d7a2550862f65f88da2499dcc",
+      "prepared_sha256": "c257bf5bb5bb8d998558d4e3220e51178fda377b81eb663632e6b41923b1aab1"
+    },
+    {
+      "name": "rust-animation-callback",
+      "prefix": "m59",
+      "input_sha256": "dd3ae18c38fd39e121c02be083e36a9882037128c46d597c6541b41eb9f580cf",
+      "prepared_sha256": "dc6f85e5da08ded8ab094ac8b631a9d52b340147389b32b16032eb5ebc050913"
+    }
+  ],
+  "rust_sdk": {
+    "target": "wasm32-unknown-unknown",
+    "edition": "2024",
+    "panic": "abort",
+    "opt_level": 2,
+    "source_sha256": {
+      "sdk/abi/native-v1.json": "9dd95c6c3730ad9749c65d6feb5a4d973c513f1cecb126a998d54079cc10e3e6",
+      "tools/rust_guest.py": "a01641b59eb8d39e9cd4de58d1a59e3aec97b19179ba52793623a42a725dd5cc",
+      "crates/incant_wasm_abi/src/lib.rs": "0266fdb599b4725a3279b13f96bf31eba8aabcbf9748ebf3928d167c3c17e332",
+      "crates/incant_wasm_abi/src/localization.rs": "fca1e7f1f409e1a5cdabb321a071aaa38a2fecda13d3a312f2cd5cf878698af6",
+      "sdk/rust/src/animation.rs": "9ac7ab2ba5e4716b47bd46adad3d1f4a3531eaf14d64f487182fa4f9b7aea34f",
+      "sdk/rust/src/flipbook.rs": "4432747e8707e044aa63f6d22d679d1b88aec720805219d8d1f891c0e9969e65",
+      "sdk/rust/src/input.rs": "b088d9f4fe099abcf0247167e026193531bac854551103fff41b628be8bdbb63",
+      "sdk/rust/src/lib.rs": "1fb76c2fc3345b57356d875c66ee3db455407d00e048d28ca7b3446c95cd4cbd",
+      "sdk/rust/src/localization.rs": "e5b835e4611b1b696b2940dd493295fb2c171603b5da40caabe176b78a7fc22a",
+      "sdk/rust/src/raw.rs": "9ad9edccecb621a6eeb36f32eeefedc124a1a477be76936a34e357bd23915aca",
+      "sdk/rust/src/tick.rs": "e68674bc3e79073410564ab45918a9659cd367a2734ef044d3aeabdbb47d6225"
+    },
+    "repository_sdk_sources_retained": true,
+    "build_scripts_or_proc_macros": false
+  },
+  "fresh_process_proof": {
+    "receipt": {
+      "path": "/tmp/incant-wasm-animation-conformance-002/development/result.json",
+      "sha256": "7e7a80dadcd062a8fd1bf61591a6e2cb50e7e1486a4431a5efcc36ec7a14e331",
+      "bytes": 2495
+    },
+    "guest": "existing bulk.rs (not animation)",
+    "processes": 3,
+    "stdout": [
+      "1 0.25\n2 0.125\n3 0.25\n4 0.125\n",
+      "1 0.25\n2 0.125\n3 0.25\n4 0.125\n",
+      "1 0.25\n2 0.125\n3 0.25\n4 0.125\n"
+    ],
+    "runner": {
+      "path": "/tmp/incant-wasm-animation-conformance-002/development/development_module",
+      "sha256": "e485bdd5226b4bbcf7501b71b2e0ce6294719bd93f88bc20ed6977f8b3a42cd1",
+      "bytes": 27518288
+    }
+  },
+  "review": {
+    "boundary": {
+      "path": "docs/spikes/evidence/native-wasm-animation-boundary-review.json",
+      "sha256": "e3db99c6ef2958946b9f5186aaed3425002c610ed679890f60c1f4ac5806b1f9",
+      "bytes": 9293
+    },
+    "conformance": {
+      "path": "docs/spikes/evidence/native-wasm-animation-conformance-review.json",
+      "sha256": "5dfc1966504f644c07a486940c58d35cc0eedbda8e9a64d00119cd6909969d9d",
+      "bytes": 12209,
+      "status": "accepted bounded independent review, no actionable findings"
+    }
+  },
+  "no_lock_change": true,
+  "quotas": {
+    "rows": 100000,
+    "snapshot_bytes": 4000016,
+    "clips": 256,
+    "speed_abs": 16,
+    "guest_memory": 33554432,
+    "transfers": 134217728,
+    "calls": 65536,
+    "structural_commands": 1024
+  },
+  "earlier_attempts": [
+    {
+      "log": {
+        "path": "/tmp/incant-wasm-animation-conformance-001/conformance-0.log",
+        "sha256": "ac21a86b69a222a3a63c860e15795080a35cd9ab420138d99bc53800ad3635f5",
+        "bytes": 32897
+      },
+      "disposition": "Old independent boundary-test literal0.2 comparison failed; productionunchanged. All four real animationparitycases passed here; final002 supersedes. SDKparserflags6 tightening and guestformatting includedbefore002."
+    },
+    {
+      "log": {
+        "path": "/tmp/incant-wasm-animation-graph-002.log",
+        "sha256": "1c2d92b7631805c56e5091de37de5aee769850185e9ae7715d5a3432942f0b45",
+        "bytes": 87
+      },
+      "disposition": "Misspelled SDK package incant_module; corrected command003passes with incant-module."
+    },
+    {
+      "log": {
+        "path": "/tmp/incant-wasm-animation-check-001.log",
+        "sha256": "f7817e1cd09be98ecf8884781333723d851d5eba14fa72813bc41f458aa3b691",
+        "bytes": 129
+      },
+      "disposition": "Mistyped package incant_sdk; no compilation result."
+    },
+    {
+      "log": {
+        "path": "/tmp/incant-wasm-animation-check-002.log",
+        "sha256": "8fbb8a5bb26037bd6f970f8ff689eb3041c8da24ffaa5999e7185a8a472ba13b",
+        "bytes": 136
+      },
+      "disposition": "Mistyped package incant_module; check003passed aftercorrectincant-module."
+    }
+  ],
+  "limitations": [
+    "Mac local conformance only; Windows/Linux actual execution awaits hosted checkpoint.",
+    "Default wasm32 compile is not browser or device execution.",
+    "Actual wasm2c animation runs in compiled native tests; this slice does not claim new source-deleted shipping animation export.",
+    "No complete gameplay SDK, blending/state/IK/rootmotion, GPU/visual or reference-phone/performance/phasegate claim.",
+    "Callback rollback does not undo already advanced simulation/deviceaudio or guest private memory."
+  ]
+}

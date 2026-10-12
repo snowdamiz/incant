@@ -765,3 +765,15 @@ incremental copied tails, with generation/project fences, stable row IDs and an
 explicit truncation warning across restarts. Local CPU host, bridge race/bounds,
 strict types and Clippy checks pass; native window/rendered Console acceptance
 remains separate. [Scope and evidence](docs/spikes/native-editor-play.md#committed-script-logs-in-console).
+
+## Native Wasm skeletal playback — locally verified
+
+`incant_animation_v1` and the public no_std Rust SDK now copy native animation
+snapshots and queue select/seek/play/loop/speed controls in the ordinary atomic
+runtime transaction. Actual Wasmtime and compiled wasm2c guests agree on playback
+and reject mixed numeric/entity/animation/log prefixes on failure. The combined
+281-test suite, scoped Clippy, default wasm32 compile, generated contracts and
+20 tooling tests pass; independent boundary review accepted the frozen code.
+[Evidence and limits](docs/spikes/native-wasm-animation.md). Publication/integration
+against actual main117 now repeats all 281 actual-host tests and affected checks. This does not add
+blending/state machines/IK/root motion or satisfy device/complete SDK/Phase1 gates.

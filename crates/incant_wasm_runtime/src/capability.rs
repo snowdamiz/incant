@@ -3,8 +3,8 @@ use crate::{
     transaction::{self, Chunk},
 };
 use incant_runtime::{
-    CookedEntity, FlipbookControl, FlipbookSnapshot, FrameCommands, NativeWorld, StableId,
-    StructuralCommand, WorldIdentity,
+    AnimationSnapshot, CookedEntity, FlipbookControl, FlipbookSnapshot, FrameCommands, NativeWorld,
+    StableId, StructuralCommand, WorldIdentity,
 };
 use incant_types::{Transform, Velocity};
 
@@ -25,6 +25,15 @@ const _: () = {
 /// Trusted host adapter operation; all integer arguments are guest offsets/indices.
 #[derive(Clone, Copy)]
 pub enum Call {
+    AnimationLen,
+    ReadAnimations {
+        ptr: i32,
+        capacity: i32,
+    },
+    ControlAnimation {
+        id: i32,
+        ptr: i32,
+    },
     Locale,
     Localize {
         ptr: i32,
@@ -94,6 +103,9 @@ pub struct Capability {
     input_available: bool,
     flipbook_rows: Vec<FlipbookSnapshot>,
     flipbooks: Vec<u8>,
+    animation_rows: Vec<AnimationSnapshot>,
+    animations: Vec<u8>,
+    animation_rejected: bool,
     transferred: usize,
     calls: usize,
     tick: u64,
@@ -149,6 +161,13 @@ impl Capability {
             return Err(error);
         }
         self.commands.clear();
+        if let Err(error) =
+            crate::animations::encode(world, &mut self.animation_rows, &mut self.animations)
+        {
+            self.abort();
+            return Err(error);
+        }
+        self.animation_rejected = false;
         self.transferred = 0;
         self.calls = 0;
         self.tick_logs.clear();
@@ -174,6 +193,8 @@ impl Capability {
         Ok(epoch)
     }
     pub fn abort(&mut self) {
+        self.animation_rows.clear();
+        self.animations.clear();
         self.active = false;
         self.input_available = false;
         self.input.clear();
@@ -188,6 +209,12 @@ impl Capability {
         if !self.active {
             return Err(Error::Abi("inactive ECS transaction"));
         }
+        if self.animation_rejected {
+            self.abort();
+            return Err(Error::Abi("rejected animation transaction"));
+        }
+        self.animation_rows.clear();
+        self.animations.clear();
         if self.tick_logs.rejected {
             self.abort();
             return Err(Error::Abi("rejected log transaction"));
@@ -282,6 +309,12 @@ impl Capability {
     /// Synchronous import; memory contains initialized guest bytes only and is
     /// borrowed for this call. No world observation/publication occurs here.
     pub fn invoke(&mut self, memory: &mut [u8], epoch: i64, call: Call) -> Result<i32, Error> {
+        let animation_authorized = self.active
+            && self.epoch == epoch
+            && matches!(
+                call,
+                Call::AnimationLen | Call::ReadAnimations { .. } | Call::ControlAnimation { .. }
+            );
         // Only an authorized localization call can poison its active epoch. This
         // wraps enter/memory/transfer checks as well as parsing/query dispatch;
         // stale tokens and unrelated operations retain their existing semantics.
@@ -295,6 +328,9 @@ impl Capability {
                     | Call::SetLocale { .. }
             );
         let result = self.invoke_inner(memory, epoch, call);
+        if animation_authorized && result.is_err() {
+            self.animation_rejected = true;
+        }
         if authorized
             && result.is_err()
             && let Some(state) = &mut self.localization
@@ -309,6 +345,27 @@ impl Capability {
             return Err(Error::Limit("linear memory"));
         }
         match call {
+            Call::AnimationLen => return Ok(self.animations.len() as i32),
+            Call::ReadAnimations { ptr, capacity } => {
+                let len = self.animations.len();
+                let capacity = usize::try_from(capacity)
+                    .map_err(|_| Error::Abi("animation destination capacity"))?;
+                if capacity < len {
+                    return Err(Error::Abi("animation destination capacity"));
+                }
+                range(ptr, capacity, memory.len())?;
+                let region = range(ptr, len, memory.len())?;
+                self.transfer(len)?;
+                memory[region].copy_from_slice(&self.animations);
+                return Ok(len as i32);
+            }
+            Call::ControlAnimation { id, ptr } => {
+                let bytes =
+                    self.read::<{ incant_wasm_abi::AnimationCommand::SIZE }>(memory, ptr)?;
+                let control = crate::animations::command(&bytes)?;
+                let entity = self.stable(memory, id)?;
+                self.command(StructuralCommand::ControlAnimation { entity, control })?;
+            }
             Call::Locale => return self.locale_state()?.locale(),
             Call::Localize { ptr, len } | Call::SetLocale { ptr, len } => {
                 let len =
